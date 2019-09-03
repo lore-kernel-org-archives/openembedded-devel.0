@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
-	[209.85.222.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B4087F25D
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com
+	[209.85.160.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 1150F7F301
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 03:26:29 +0000 (UTC)
-Received: by mail-qk1-f174.google.com with SMTP id s18so3317892qkj.3
+	Tue,  3 Sep 2019 03:26:37 +0000 (UTC)
+Received: by mail-qt1-f171.google.com with SMTP id a13so17942919qtj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2019 20:26:31 -0700 (PDT)
+	Mon, 02 Sep 2019 20:26:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=WCwknw9ez3sg2TsvRyJtEj0yaA5/2NNJN/or1mwgaa4=;
-	b=VbVkexZkwfSWoCtOKIEl6Pgaoye8ropP830CONutft1JURjBdFUrNxBf/nslhalxYM
-	tmHEVr+PCzcX3QaOXyVhvgDOaLBwsAzwhjMEj0DFzrnE3UQOvK1LppZVX9vzb3cgF2J4
-	p5ld6P2POOPqPZ6L048tHHAmErBMQpKE5La9VJUyr0RTcEsWLv4JvcWcovT8RWv4Gv87
-	UFsb1EdUwC87/s8NP6Vk3mbkjni0+/I/vBo8HJG/pOOMV5HrVsK5O5qdRTusc9Hnf1cC
-	tpvHnCwiyKYZrIAHBc+OueuaOK3gAl+kwwv9oDdGWg1UWqZSGCX1Qqk94R6VvGU4Y7Ij
-	84Wg==
+	:cc; bh=OCt83uzJtG4E4ujFetusz8L8Zdggoh0+Aj0MXJtMSEQ=;
+	b=O5cZ8THmMGf+hNay/VI6lKTxeWXrrAfras8D67xw9FFVMtt6xLs9hIms5E2DJxRlrt
+	uT2OypwpqPB1BKSRC1E+Py0ssHvQus3nxBE4LMApfPjjtUsLs/KWEtYDvcwGnzIi+Kmt
+	O4qdE9SR3x7lajKMLgnBbuBIaEz8+B/Jz3RtSm+AlueC9m/z+NUzp9IrS3vpmqDtqTH6
+	SN4ernQYHLz0wDZTptYcRMeRaBlJ+Y95FLjO7sAmGbP7Dki/uIZskbPqSiipjrcbBwyw
+	vKvmOpZtTz+FjPICmVwfWDcxL9+9yl4RQFAIYTEVy5EPXKPZCaIwuImcY3CUqzSpBoud
+	ffrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=WCwknw9ez3sg2TsvRyJtEj0yaA5/2NNJN/or1mwgaa4=;
-	b=LG0kjnWGp6Xe3AeRpBdTFV7pNxlW38UU4Ft0dMT2bmxm16zHJRO2wmCnjO1Axb8+FM
-	36ZO030xL14nyScty4JkWnzOL/jBVK0lZstR6hEUN7KMozZqJyQeNLcz+0kU7bTBt/OL
-	SH6fF5t74uI6G5l+l0mLvFThrV3WY2KNUzEfN+gBR/9ne1IVpBWBgOYYioHx6O5Iyl0K
-	CmMLle8MGXbghPnNRMDait3EkvlZekd5Kl95iQluCfvepxMLPfS91hd4nHTgALrd1OG0
-	qPaKLi/eDcEnvOrpHIYXTV/MCiHtbuDQUi5NXo6p1Pv26mxwWeNM0D5zpgZlfdot9MJq
-	541w==
-X-Gm-Message-State: APjAAAVU4U5KkUzS/2wwmSAnjkLPpDd8ZfNradsl0auOrMoWgD84ceZx
-	DAAQx7v8BsvU15PKDA8GAKcj8Ak65PQDfiD680Q=
-X-Google-Smtp-Source: APXvYqxJE8S3ITi05W7bJcA2ijX3Ht4TM+Va0bHGj9C0DNC78LfXu1KALeT1kYv/OcEqrK2gngNNenzZ0f+u6f+cD34=
-X-Received: by 2002:a37:b002:: with SMTP id z2mr12758043qke.71.1567481190308; 
-	Mon, 02 Sep 2019 20:26:30 -0700 (PDT)
+	bh=OCt83uzJtG4E4ujFetusz8L8Zdggoh0+Aj0MXJtMSEQ=;
+	b=ifwoFFyy0TsnROGWLhZUx0maW1xSYwWwqjMTWk32mWQevKr1SnjEtLhrwVIu9BGcv2
+	r+sBB6H6xeaYxFfhkVXLhazBq9e8RKy3669BA5N5d//XqtmD51mg8oQ1KgP915vdYPfk
+	gqTr4haGfInugjqMiq+2WSWuzGwEjQ7FokmBeYHEHeMN3/TlJ24MbIkZYGoBS5t3apd6
+	2//LFcM53kPmJ0iD7+yTW+zwODqpYRWVZdVUqAbPGuYldnqW2EEHlxq0v24p6kpi/bku
+	1lobY3zNsQGHr36TMaey2E1/vuuGdrdcFdUQYk2a7b1HaDvEBlagJ19vnW2QnHeg2vZP
+	mSUA==
+X-Gm-Message-State: APjAAAU6FghGQHi2wfHVrNzZNY2j8nQ9M1xOzIa0cCCh20QLedP7Gx5B
+	w8pfNBADnJDS9h62WwARBzUndDinf3bDlhJzxYE=
+X-Google-Smtp-Source: APXvYqyyyOKfQ8N4B1NCwvObCzz0qCXG9Nx0WKxMsUZRDg8WsHLlFEUWZUcudWCSETROX8fHOq2ozSsIkaE6/L9p6MM=
+X-Received: by 2002:ac8:460d:: with SMTP id p13mr23092547qtn.378.1567481198702;
+	Mon, 02 Sep 2019 20:26:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <fe511106-68be-88ad-8cfd-572a1858f440@gmail.com>
-In-Reply-To: <fe511106-68be-88ad-8cfd-572a1858f440@gmail.com>
+References: <f8250bb8-db71-1946-45c5-94722c6c81f6@gmail.com>
+In-Reply-To: <f8250bb8-db71-1946-45c5-94722c6c81f6@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 2 Sep 2019 20:26:04 -0700
-Message-ID: <CAMKF1soRK9CDPJHmN=siKz1-odY4gzWukzK98s8a3EhaMJDiYQ@mail.gmail.com>
+Date: Mon, 2 Sep 2019 20:26:12 -0700
+Message-ID: <CAMKF1sozaDZaikAUQMqXBxtE3WDyu2JkBpkYf18wwYucyfwEOg@mail.gmail.com>
 To: akuster808 <akuster808@gmail.com>
 Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: pull request for warrior
+Subject: Re: Merge request for thud
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,108 +53,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 03:26:30 -0000
+X-List-Received-Date: Tue, 03 Sep 2019 03:26:38 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 merged thanks
 
-On Mon, Sep 2, 2019 at 7:48 PM akuster808 <akuster808@gmail.com> wrote:
+On Mon, Sep 2, 2019 at 8:02 PM akuster808 <akuster808@gmail.com> wrote:
 >
-> he following changes since commit 222cafdcd97549f67c98833721b4f8f33607555e:
+> The following changes since commit 9b3b907f30b0d5b92d58c7e68289184fda733d3e:
 >
->   wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03 (2019-07-13 12:43:43
-> -0700)
+>   netkit-rsh: add tag to CVE patch (2019-05-27 22:22:25 -0700)
 >
 > are available in the git repository at:
 >
 >   https://git.openembedded.org/meta-openembedded
-> 0afee3eacfd18a9962013830028f9e54b4973657
+> aaa6eb0bb5da516373aa9e8c1dde8fdf85a54e95
 >
-> for you to fetch changes up to 0afee3eacfd18a9962013830028f9e54b4973657:
+> for you to fetch changes up to aaa6eb0bb5da516373aa9e8c1dde8fdf85a54e95:
 >
->   apache2: upgrade 2.4.39 -> 2.4.41 (2019-09-02 19:39:53 -0700)
+>   lua: Security fix for CVE-2019-6706 (2019-09-02 19:54:39 -0700)
 >
 > ----------------------------------------------------------------
-> Adrian Bunk (5):
->       zeromq: Upgrade 4.3.1 -> 4.3.2
->       gnome-desktop3: Fix REQUIRED_DISTRO_FEATURES
->       wireshark: Use an upstream URL that stays valid longer
->       libgit2: Upgrade 0.27.8 -> 0.27.9
->       vlc: notify switched to GTK+3 some time ago
+> Armin Kuster (1):
+>       lua: Security fix for CVE-2019-6706
 >
-> Carlos Rafael Giani (1):
->       openh264: Fix armv7ve build
+> Peter Kjellerstedt (1):
+>       apache2: Correct appending to SYSROOT_PREPROCESS_FUNCS
 >
-> Changqing Li (3):
->       volume-key: fix "Nothing RPROVIDES" when multilib enabled
->       isomd5sum: fix "Nothing RPROVIDES" when multilib enabled
->       satyr: fix "Nothing RPROVIDES" when multilib enabled
->
-> Fabian Klemp (1):
->       openvpn: respect pid file in init.d service start
->
-> Kai Kang (1):
->       net-snmp: update SRC_URI
->
-> Luca Ceresoli (2):
->       fuse-exfat: moved to github
->       exfat-utils: moved to github
->
-> Martin Jansa (5):
->       redis: backport a fix for stack trace generation on aarch64
->       ntop: fix missing return from non-void function
->       freeradius: add runtime dependency on perl
->       scsirastools: add runtime dependency on bash
->       scsirastools: add runtime dependency on bash II
->
-> Mingli Yu (1):
->       mariadb: Upgrade to 10.3.16
+> Qi.Chen@windriver.com (1):
+>       apache2: set CVE_PRODUCT
 >
 > Yi Zhao (2):
->       fuse: upgrade 2.9.8 -> 2.9.9
+>       apache2: upgrade 2.4.34 -> 2.4.39
 >       apache2: upgrade 2.4.39 -> 2.4.41
 >
->  .../fuse-exfat/fuse-exfat_1.2.3.bb                 |  6 +--
->  .../fuse/{fuse_2.9.8.bb => fuse_2.9.9.bb}          |  4 +-
->  .../recipes-utils/exfat-utils/exfat-utils_1.2.3.bb |  2 +-
->  .../gnome-desktop/gnome-desktop3_3.32.0.bb         |  2 +-
->  .../recipes-multimedia/openh264/openh264_1.7.0.bb  |  1 +
->  meta-multimedia/recipes-multimedia/vlc/vlc.inc     |  2 +-
->  .../freeradius/freeradius_3.0.17.bb                |  2 +-
->  .../recipes-protocols/net-snmp/net-snmp_5.8.bb     |  6 +--
->  ...fix-missing-return-from-non-void-function.patch | 19 +++++++++
->  meta-networking/recipes-support/ntop/ntop_5.0.1.bb |  1 +
->  .../recipes-support/openvpn/openvpn/openvpn        | 12 +++++-
->  .../recipes-support/wireshark/wireshark_3.0.1.bb   |  2 +-
->  .../zeromq/{zeromq_4.3.1.bb => zeromq_4.3.2.bb}    |  4 +-
->  ...native_10.3.15.bb => mariadb-native_10.3.16.bb} |  0
->  meta-oe/recipes-dbs/mysql/mariadb.inc              |  8 ++--
->  .../{mariadb_10.3.15.bb => mariadb_10.3.16.bb}     |  0
->  .../recipes-extended/isomd5sum/isomd5sum_1.2.3.bb  |  8 ++--
->  .../Fixed-stack-trace-generation-on-aarch64.patch  | 45
-> ++++++++++++++++++++++
->  meta-oe/recipes-extended/redis/redis_4.0.14.bb     |  1 +
->  .../scsirastools/scsirastools_1.6.6.bb             |  4 +-
->  .../volume_key/volume-key_0.3.12.bb                |  7 ++--
->  .../{libgit2_0.27.8.bb => libgit2_0.27.9.bb}       |  3 +-
->  meta-oe/recipes-support/satyr/satyr_0.27.bb        |  4 +-
->  .../{apache2_2.4.39.bb => apache2_2.4.41.bb}       |  4 +-
->  24 files changed, 110 insertions(+), 37 deletions(-)
->  rename meta-filesystems/recipes-support/fuse/{fuse_2.9.8.bb =>
-> fuse_2.9.9.bb} (94%)
->  create mode 100644
-> meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch
->  rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.3.1.bb =>
-> zeromq_4.3.2.bb} (85%)
->  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.15.bb =>
-> mariadb-native_10.3.16.bb} (100%)
->  rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.15.bb =>
-> mariadb_10.3.16.bb} (100%)
->  create mode 100644
-> meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch
->  rename meta-oe/recipes-support/libgit2/{libgit2_0.27.8.bb =>
-> libgit2_0.27.9.bb} (90%)
->  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.39.bb =>
-> apache2_2.4.41.bb} (98%)
+>  .../recipes-devtools/lua/lua/CVE-2019-6706.patch   |  32 ++
+>  meta-oe/recipes-devtools/lua/lua_5.3.4.bb          |   1 +
+>  .../recipes-httpd/apache2/apache2-native_2.4.34.bb |  46 --
+>  ...nfigure-use-pkg-config-for-PCRE-detection.patch |   8 +-
+>  ...-up-the-core-size-limit-if-CoreDumpDirec.patch} |  12 +-
+>  ...ot-export-apr-apr-util-symbols-when-usin.patch} |  10 +-
+>  ...ache2-log-the-SELinux-context-at-startup.patch} |  23 +-
+>  ...replace-lynx-to-curl-in-apachectl-script.patch} |   6 +-
+>  ...-the-race-issue-of-parallel-installation.patch} |   6 +-
+>  ...apache2-allow-to-disable-selinux-support.patch} |   8 +-
+>  ...-not-use-relative-path-for-gen_test_char.patch} |   8 +-
+>  .../apache2/apache2/CVE-2018-11763.patch           | 512
+> ---------------------
+>  .../apache2/apache2/apache-configure_perlbin.patch |  27 --
+>  .../{apache2_2.4.34.bb => apache2_2.4.41.bb}       | 202 ++++----
+>  meta-webserver/recipes-httpd/apache2/files/init    |   0
+>  15 files changed, 190 insertions(+), 711 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch
+>  delete mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
+>  rename
+> meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.1-corelimit.patch
+> => 0002-apache2-bump-up-the-core-size-limit-if-CoreDumpDirec.patch} (83%)
+>  rename
+> meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.4-export.patch
+> => 0003-apache2-do-not-export-apr-apr-util-symbols-when-usin.patch} (80%)
+>  rename
+> meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.1-selinux.patch
+> => 0004-apache2-log-the-SELinux-context-at-startup.patch} (85%)
+>  rename
+> meta-webserver/recipes-httpd/apache2/apache2/{replace-lynx-to-curl-in-apachectl-script.patch
+> => 0005-replace-lynx-to-curl-in-apachectl-script.patch} (95%)
+>  rename
+> meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.3-fix-race-issue-of-dir-install.patch
+> => 0006-apache2-fix-the-race-issue-of-parallel-installation.patch} (94%)
+>  rename
+> meta-webserver/recipes-httpd/apache2/apache2/{configure-allow-to-disable-selinux-support.patch
+> => 0007-apache2-allow-to-disable-selinux-support.patch} (91%)
+>  rename
+> meta-webserver/recipes-httpd/apache2/apache2/{server-makefile.patch =>
+> 0008-apache2-do-not-use-relative-path-for-gen_test_char.patch} (76%)
+>  delete mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/CVE-2018-11763.patch
+>  delete mode 100644
+> meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
+>  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.34.bb =>
+> apache2_2.4.41.bb} (61%)
+>  mode change 100755 => 100644
+> meta-webserver/recipes-httpd/apache2/files/init
 >
 
