@@ -1,99 +1,46 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
-	[209.85.214.174])
-	by mail.openembedded.org (Postfix) with ESMTP id CBAB67F2F8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
+	[209.85.222.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B4087F25D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Sep 2019 03:02:15 +0000 (UTC)
-Received: by mail-pl1-f174.google.com with SMTP id y1so7212059plp.9
+	Tue,  3 Sep 2019 03:26:29 +0000 (UTC)
+Received: by mail-qk1-f174.google.com with SMTP id s18so3317892qkj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Sep 2019 20:02:17 -0700 (PDT)
+	Mon, 02 Sep 2019 20:26:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=to:from:subject:openpgp:autocrypt:message-id:date:user-agent
-	:mime-version:content-transfer-encoding:content-language;
-	bh=UA2lak9e9/noLvjPLugNcL2NHJYRStJpToHTWBR4bHI=;
-	b=N3hcrANSSGQi3fD0rHh6vMGGr5cy+KrHW7B0k91KD0UkQHwvpqtm7HbROF3/8GaFrr
-	Mw9M/fpzKGBo3PKOzE8RM6Qsm3emFuIXnZKIx8nytwNMxlxnOs2jmUL/mIDnVxU5zM/Z
-	oCiyO2cE2gHxVuAytz1JDCnR7i2kuu002bsH2H+2l5LH1dfTywtAjXLAy28P1+KB2XzK
-	1NHwTKdtXa2QDoSarwMEhXnXbFMOoOuEKDicVnPcVF0UDpDtfSo7sJBnW4UMkp8P5DJG
-	Jbddwfycnzb826COhLjKjhtS9fEcJBDLTdWxMZCDu2xqYZl0mG3Y64mWiIyacDpLo2Cs
-	6a0g==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=WCwknw9ez3sg2TsvRyJtEj0yaA5/2NNJN/or1mwgaa4=;
+	b=VbVkexZkwfSWoCtOKIEl6Pgaoye8ropP830CONutft1JURjBdFUrNxBf/nslhalxYM
+	tmHEVr+PCzcX3QaOXyVhvgDOaLBwsAzwhjMEj0DFzrnE3UQOvK1LppZVX9vzb3cgF2J4
+	p5ld6P2POOPqPZ6L048tHHAmErBMQpKE5La9VJUyr0RTcEsWLv4JvcWcovT8RWv4Gv87
+	UFsb1EdUwC87/s8NP6Vk3mbkjni0+/I/vBo8HJG/pOOMV5HrVsK5O5qdRTusc9Hnf1cC
+	tpvHnCwiyKYZrIAHBc+OueuaOK3gAl+kwwv9oDdGWg1UWqZSGCX1Qqk94R6VvGU4Y7Ij
+	84Wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:from:subject:openpgp:autocrypt:message-id
-	:date:user-agent:mime-version:content-transfer-encoding
-	:content-language;
-	bh=UA2lak9e9/noLvjPLugNcL2NHJYRStJpToHTWBR4bHI=;
-	b=ndPS4uhgXbA3T4SJt4WtrrSFCMiKCNFZZ/SBXAMbFFrrU4GmhapnULZWbbDEkKF6CZ
-	iwtdOyYxGEg16G/GdfimeQocibP282vmfw4AH2rYzlD51cqB3TnZMTUoGaV07pV00hVL
-	uda80MtQejpyQl3gmyIrPghtTed2xoskD1qqIkB+CcZTHjZY9rlMDP0RlCqlmnnFpalp
-	TcEOayvRfe3RkJGAQJfmc3HCqFncG2T5kMQz/WD6sedoxb2MWNC5KPkRWnwozFyuXW6G
-	l9TCyGAiWBCToOqFn/aiu1qPrY4QfsFHkV+sFooSFh+gNraBY1QmaXZMfknM8ypuL72o
-	lwlg==
-X-Gm-Message-State: APjAAAXbh7FsRnFLc6UthRR1UI+Xh4NINGh0doj8jQueQ2s66SbScSYf
-	mVRKUyrWdwu77EH5QWMBn370ALMP
-X-Google-Smtp-Source: APXvYqxVUqTjartVyDJ8sA1Yq9Hc+aV9IDMkqz8ndjXwK7y5vc+6ZrjQ5m+URrDQaAEdaDvTBEuSaA==
-X-Received: by 2002:a17:902:b40c:: with SMTP id
-	x12mr2757534plr.145.1567479736785; 
-	Mon, 02 Sep 2019 20:02:16 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:c33:8d1e:9a6d:fc3a:2e51?
-	([2601:202:4180:c33:8d1e:9a6d:fc3a:2e51])
-	by smtp.gmail.com with ESMTPSA id
-	j10sm14946694pjn.3.2019.09.02.20.02.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Sep 2019 20:02:16 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <f8250bb8-db71-1946-45c5-94722c6c81f6@gmail.com>
-Date: Mon, 2 Sep 2019 20:02:15 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=WCwknw9ez3sg2TsvRyJtEj0yaA5/2NNJN/or1mwgaa4=;
+	b=LG0kjnWGp6Xe3AeRpBdTFV7pNxlW38UU4Ft0dMT2bmxm16zHJRO2wmCnjO1Axb8+FM
+	36ZO030xL14nyScty4JkWnzOL/jBVK0lZstR6hEUN7KMozZqJyQeNLcz+0kU7bTBt/OL
+	SH6fF5t74uI6G5l+l0mLvFThrV3WY2KNUzEfN+gBR/9ne1IVpBWBgOYYioHx6O5Iyl0K
+	CmMLle8MGXbghPnNRMDait3EkvlZekd5Kl95iQluCfvepxMLPfS91hd4nHTgALrd1OG0
+	qPaKLi/eDcEnvOrpHIYXTV/MCiHtbuDQUi5NXo6p1Pv26mxwWeNM0D5zpgZlfdot9MJq
+	541w==
+X-Gm-Message-State: APjAAAVU4U5KkUzS/2wwmSAnjkLPpDd8ZfNradsl0auOrMoWgD84ceZx
+	DAAQx7v8BsvU15PKDA8GAKcj8Ak65PQDfiD680Q=
+X-Google-Smtp-Source: APXvYqxJE8S3ITi05W7bJcA2ijX3Ht4TM+Va0bHGj9C0DNC78LfXu1KALeT1kYv/OcEqrK2gngNNenzZ0f+u6f+cD34=
+X-Received: by 2002:a37:b002:: with SMTP id z2mr12758043qke.71.1567481190308; 
+	Mon, 02 Sep 2019 20:26:30 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Merge request for thud
+References: <fe511106-68be-88ad-8cfd-572a1858f440@gmail.com>
+In-Reply-To: <fe511106-68be-88ad-8cfd-572a1858f440@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 2 Sep 2019 20:26:04 -0700
+Message-ID: <CAMKF1soRK9CDPJHmN=siKz1-odY4gzWukzK98s8a3EhaMJDiYQ@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: pull request for warrior
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -106,86 +53,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Sep 2019 03:02:15 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 03 Sep 2019 03:26:30 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-The following changes since commit 9b3b907f30b0d5b92d58c7e68289184fda733d3e:
+merged thanks
 
-  netkit-rsh: add tag to CVE patch (2019-05-27 22:22:25 -0700)
-
-are available in the git repository at:
-
-  https://git.openembedded.org/meta-openembedded
-aaa6eb0bb5da516373aa9e8c1dde8fdf85a54e95
-
-for you to fetch changes up to aaa6eb0bb5da516373aa9e8c1dde8fdf85a54e95:
-
-  lua: Security fix for CVE-2019-6706 (2019-09-02 19:54:39 -0700)
-
-----------------------------------------------------------------
-Armin Kuster (1):
-      lua: Security fix for CVE-2019-6706
-
-Peter Kjellerstedt (1):
-      apache2: Correct appending to SYSROOT_PREPROCESS_FUNCS
-
-Qi.Chen@windriver.com (1):
-      apache2: set CVE_PRODUCT
-
-Yi Zhao (2):
-      apache2: upgrade 2.4.34 -> 2.4.39
-      apache2: upgrade 2.4.39 -> 2.4.41
-
- .../recipes-devtools/lua/lua/CVE-2019-6706.patch   |  32 ++
- meta-oe/recipes-devtools/lua/lua_5.3.4.bb          |   1 +
- .../recipes-httpd/apache2/apache2-native_2.4.34.bb |  46 --
- ...nfigure-use-pkg-config-for-PCRE-detection.patch |   8 +-
- ...-up-the-core-size-limit-if-CoreDumpDirec.patch} |  12 +-
- ...ot-export-apr-apr-util-symbols-when-usin.patch} |  10 +-
- ...ache2-log-the-SELinux-context-at-startup.patch} |  23 +-
- ...replace-lynx-to-curl-in-apachectl-script.patch} |   6 +-
- ...-the-race-issue-of-parallel-installation.patch} |   6 +-
- ...apache2-allow-to-disable-selinux-support.patch} |   8 +-
- ...-not-use-relative-path-for-gen_test_char.patch} |   8 +-
- .../apache2/apache2/CVE-2018-11763.patch           | 512
----------------------
- .../apache2/apache2/apache-configure_perlbin.patch |  27 --
- .../{apache2_2.4.34.bb => apache2_2.4.41.bb}       | 202 ++++----
- meta-webserver/recipes-httpd/apache2/files/init    |   0
- 15 files changed, 190 insertions(+), 711 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/lua/lua/CVE-2019-6706.patch
- delete mode 100644
-meta-webserver/recipes-httpd/apache2/apache2-native_2.4.34.bb
- rename
-meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.1-corelimit.patch
-=> 0002-apache2-bump-up-the-core-size-limit-if-CoreDumpDirec.patch} (83%)
- rename
-meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.4-export.patch
-=> 0003-apache2-do-not-export-apr-apr-util-symbols-when-usin.patch} (80%)
- rename
-meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.1-selinux.patch
-=> 0004-apache2-log-the-SELinux-context-at-startup.patch} (85%)
- rename
-meta-webserver/recipes-httpd/apache2/apache2/{replace-lynx-to-curl-in-apachectl-script.patch
-=> 0005-replace-lynx-to-curl-in-apachectl-script.patch} (95%)
- rename
-meta-webserver/recipes-httpd/apache2/apache2/{httpd-2.4.3-fix-race-issue-of-dir-install.patch
-=> 0006-apache2-fix-the-race-issue-of-parallel-installation.patch} (94%)
- rename
-meta-webserver/recipes-httpd/apache2/apache2/{configure-allow-to-disable-selinux-support.patch
-=> 0007-apache2-allow-to-disable-selinux-support.patch} (91%)
- rename
-meta-webserver/recipes-httpd/apache2/apache2/{server-makefile.patch =>
-0008-apache2-do-not-use-relative-path-for-gen_test_char.patch} (76%)
- delete mode 100644
-meta-webserver/recipes-httpd/apache2/apache2/CVE-2018-11763.patch
- delete mode 100644
-meta-webserver/recipes-httpd/apache2/apache2/apache-configure_perlbin.patch
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.34.bb =>
-apache2_2.4.41.bb} (61%)
- mode change 100755 => 100644
-meta-webserver/recipes-httpd/apache2/files/init
-
+On Mon, Sep 2, 2019 at 7:48 PM akuster808 <akuster808@gmail.com> wrote:
+>
+> he following changes since commit 222cafdcd97549f67c98833721b4f8f33607555e:
+>
+>   wireless-regdb: Upgrade 2019.03.01 -> 2019.06.03 (2019-07-13 12:43:43
+> -0700)
+>
+> are available in the git repository at:
+>
+>   https://git.openembedded.org/meta-openembedded
+> 0afee3eacfd18a9962013830028f9e54b4973657
+>
+> for you to fetch changes up to 0afee3eacfd18a9962013830028f9e54b4973657:
+>
+>   apache2: upgrade 2.4.39 -> 2.4.41 (2019-09-02 19:39:53 -0700)
+>
+> ----------------------------------------------------------------
+> Adrian Bunk (5):
+>       zeromq: Upgrade 4.3.1 -> 4.3.2
+>       gnome-desktop3: Fix REQUIRED_DISTRO_FEATURES
+>       wireshark: Use an upstream URL that stays valid longer
+>       libgit2: Upgrade 0.27.8 -> 0.27.9
+>       vlc: notify switched to GTK+3 some time ago
+>
+> Carlos Rafael Giani (1):
+>       openh264: Fix armv7ve build
+>
+> Changqing Li (3):
+>       volume-key: fix "Nothing RPROVIDES" when multilib enabled
+>       isomd5sum: fix "Nothing RPROVIDES" when multilib enabled
+>       satyr: fix "Nothing RPROVIDES" when multilib enabled
+>
+> Fabian Klemp (1):
+>       openvpn: respect pid file in init.d service start
+>
+> Kai Kang (1):
+>       net-snmp: update SRC_URI
+>
+> Luca Ceresoli (2):
+>       fuse-exfat: moved to github
+>       exfat-utils: moved to github
+>
+> Martin Jansa (5):
+>       redis: backport a fix for stack trace generation on aarch64
+>       ntop: fix missing return from non-void function
+>       freeradius: add runtime dependency on perl
+>       scsirastools: add runtime dependency on bash
+>       scsirastools: add runtime dependency on bash II
+>
+> Mingli Yu (1):
+>       mariadb: Upgrade to 10.3.16
+>
+> Yi Zhao (2):
+>       fuse: upgrade 2.9.8 -> 2.9.9
+>       apache2: upgrade 2.4.39 -> 2.4.41
+>
+>  .../fuse-exfat/fuse-exfat_1.2.3.bb                 |  6 +--
+>  .../fuse/{fuse_2.9.8.bb => fuse_2.9.9.bb}          |  4 +-
+>  .../recipes-utils/exfat-utils/exfat-utils_1.2.3.bb |  2 +-
+>  .../gnome-desktop/gnome-desktop3_3.32.0.bb         |  2 +-
+>  .../recipes-multimedia/openh264/openh264_1.7.0.bb  |  1 +
+>  meta-multimedia/recipes-multimedia/vlc/vlc.inc     |  2 +-
+>  .../freeradius/freeradius_3.0.17.bb                |  2 +-
+>  .../recipes-protocols/net-snmp/net-snmp_5.8.bb     |  6 +--
+>  ...fix-missing-return-from-non-void-function.patch | 19 +++++++++
+>  meta-networking/recipes-support/ntop/ntop_5.0.1.bb |  1 +
+>  .../recipes-support/openvpn/openvpn/openvpn        | 12 +++++-
+>  .../recipes-support/wireshark/wireshark_3.0.1.bb   |  2 +-
+>  .../zeromq/{zeromq_4.3.1.bb => zeromq_4.3.2.bb}    |  4 +-
+>  ...native_10.3.15.bb => mariadb-native_10.3.16.bb} |  0
+>  meta-oe/recipes-dbs/mysql/mariadb.inc              |  8 ++--
+>  .../{mariadb_10.3.15.bb => mariadb_10.3.16.bb}     |  0
+>  .../recipes-extended/isomd5sum/isomd5sum_1.2.3.bb  |  8 ++--
+>  .../Fixed-stack-trace-generation-on-aarch64.patch  | 45
+> ++++++++++++++++++++++
+>  meta-oe/recipes-extended/redis/redis_4.0.14.bb     |  1 +
+>  .../scsirastools/scsirastools_1.6.6.bb             |  4 +-
+>  .../volume_key/volume-key_0.3.12.bb                |  7 ++--
+>  .../{libgit2_0.27.8.bb => libgit2_0.27.9.bb}       |  3 +-
+>  meta-oe/recipes-support/satyr/satyr_0.27.bb        |  4 +-
+>  .../{apache2_2.4.39.bb => apache2_2.4.41.bb}       |  4 +-
+>  24 files changed, 110 insertions(+), 37 deletions(-)
+>  rename meta-filesystems/recipes-support/fuse/{fuse_2.9.8.bb =>
+> fuse_2.9.9.bb} (94%)
+>  create mode 100644
+> meta-networking/recipes-support/ntop/ntop/fix-missing-return-from-non-void-function.patch
+>  rename meta-oe/recipes-connectivity/zeromq/{zeromq_4.3.1.bb =>
+> zeromq_4.3.2.bb} (85%)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.15.bb =>
+> mariadb-native_10.3.16.bb} (100%)
+>  rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.15.bb =>
+> mariadb_10.3.16.bb} (100%)
+>  create mode 100644
+> meta-oe/recipes-extended/redis/redis/Fixed-stack-trace-generation-on-aarch64.patch
+>  rename meta-oe/recipes-support/libgit2/{libgit2_0.27.8.bb =>
+> libgit2_0.27.9.bb} (90%)
+>  rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.39.bb =>
+> apache2_2.4.41.bb} (98%)
+>
 
