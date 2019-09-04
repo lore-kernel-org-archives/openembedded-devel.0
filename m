@@ -1,23 +1,24 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B3097F28F
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 823147F288
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Sep 2019 07:50:28 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x847oTOF006198
+	Wed,  4 Sep 2019 08:43:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x848gYe2017442
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 4 Sep 2019 00:50:29 -0700 (PDT)
-Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.468.0; Wed, 4 Sep 2019 00:50:28 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
+	Wed, 4 Sep 2019 01:43:00 -0700
+Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Wed, 4 Sep 2019 01:42:32 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 4 Sep 2019 16:16:28 +0800
-Message-ID: <1567584988-120128-1-git-send-email-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Wed, 4 Sep 2019 04:42:28 -0400
+Message-ID: <20190904084229.17739-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.20.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] netcf: Fix do_configure failed when multilib
+Subject: [meta-oe][Patch 1/2] mariadb: fix file conflictions when multilib enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,33 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Sep 2019 07:50:29 -0000
+X-List-Received-Date: Wed, 04 Sep 2019 08:43:09 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Fixed do_configure failed:
-$ bitbake lib32-netcf
+From: Kai Kang <kai.kang@windriver.com>
 
-cp: cannot stat '/path/to/lib32-recipe-sysroot/usr/share/gnulib': No such file or directory
+When multilib is enabled, it complains file conflictions of
+/usr/bin/mysql_install_db and /usr/bin/mysqld_safe.
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Inherit multilib_script to solve the issues.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-networking/recipes-support/netcf/netcf_0.2.8.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-dbs/mysql/mariadb.inc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
-index 0f49d60..c57e7d4 100644
---- a/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
-+++ b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
-@@ -16,7 +16,7 @@ UPSTREAM_CHECK_GITTAGREGEX = "release-(?P<pver>(\d+(\.\d+)+))"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 9a398b308..9ddf2bee5 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -28,7 +28,9 @@ S = "${WORKDIR}/mariadb-${PV}"
  
- DEPENDS += "augeas libnl libxslt libxml2"
+ BINCONFIG_GLOB = "mysql_config"
  
--do_configure[depends] += "gnulib:do_populate_sysroot"
-+do_configure[depends] += "${MLPREFIX}gnulib:do_populate_sysroot"
+-inherit cmake gettext binconfig update-rc.d useradd systemd
++inherit cmake gettext binconfig update-rc.d useradd systemd multilib_script
++
++MULTILIB_SCRIPTS = "${PN}-server:${bindir}/mysql_install_db ${PN}-server:${bindir}/mysqld_safe"
  
- S = "${WORKDIR}/git"
- 
+ INITSCRIPT_PACKAGES = "${PN}-server ${PN}-setupdb"
+ INITSCRIPT_NAME_${PN}-server = "mysqld"
 -- 
-2.7.4
+2.20.0
 
 
