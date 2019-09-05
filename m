@@ -1,47 +1,50 @@
-Return-Path: <maxime.roussinbelanger@gmail.com>
-Received: from mail-io1-f48.google.com (mail-io1-f48.google.com
-	[209.85.166.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 687457F2D9
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id E74677F2EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2019 14:04:24 +0000 (UTC)
-Received: by mail-io1-f48.google.com with SMTP id b136so5156414iof.3
+	Thu,  5 Sep 2019 15:19:31 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id y4so2353363lfe.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Sep 2019 07:04:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=6N2Ed+iycZtUjc00CHDac4oUuE7AWPNQO/b6SZ3pdpg=;
-	b=t2qGcflHTPltTy2k42mim5WXjSZM/Il9n0NQVlg8tbwzPMf1R4YFWmbmbr1jNGCSUg
-	1ZatDb4B3bZo3w8AlOHYHuehmh1CeWt23dkF7Lvc04iDdWFIUbbBCEXT3Jo0oWu5YqDg
-	+21k8wR5mq1zi3zIECErHsgDCwR3vIuor3OZxwsHuAriADUeJj0AZ3ZYJfp7BicDk1Wo
-	MN0iMunAbrZBaTxvNusdxCLEt1R5g1UCADC0C1v+0dCu+WRHLXuW1cFaNC0Psc3RYBEc
-	qbbTb69U0/TrZo2vZAVQRc999zNolTP2NoYjUjQbC1/5uYJgTAxiWZUF7WiWRkpR0+uQ
-	rB9w==
+	Thu, 05 Sep 2019 08:19:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=EqcLyNUt1nFaB9ls3ZfTQrZiQP/rjhjXfi6pGHeuARo=;
+	b=EcFDTDyoOQA1JiNLv3Zn5U0J+40vd4tHqka6Sv4qdt0EEXjF/5Wpg2mIK3NklyyJsJ
+	XKRhvxvNj6I+N8UMcXevJkJP4r38XBdADa7eJi/agNcKabIl6l7HG48OBy5/ps3JcFkH
+	uagvCoUyb4yMDZ7NBcomi6/tj3IYSEJVoEiSBljudSTlp5cqtAVkzvilYCZ4yGSLAp+x
+	ZaOD5VEiEHftTf+7osknyGeK21nnfWivHr+6829ckQTE0n4ISRVBKx6OjlYiZoAecuHm
+	zbrwmAq4CTfnexoOA0BPrLRzkVUvyhqdjcZPgzox/BNGLug1htjOrzHGdy4sFXFhBSnt
+	sslg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=6N2Ed+iycZtUjc00CHDac4oUuE7AWPNQO/b6SZ3pdpg=;
-	b=gfNAk9euQoK60hWdTCoeOnS+AMKwFy/6lRIbP5YBsETRrZd7rlBLG0UzfuL//11t5T
-	aspWFPE+UOTkPe4W23xlnnhj0HXoGQHb1hm7tCO8fc6GhzlJB60jJfZPegREB1Pljkrx
-	IOkhc+0ErReC2iPjwsGwDT6OkRvVcJTvaliUQQ0I5KCIJPzOyiQ2oa3KOs/J/fklOVBP
-	dxFT+cUx6VE2dSorue89XXIylCTDhfR7gdRk/d1+u0cJm+6Jq1LTiXLiQ9cSB1rYyMWd
-	TsexObSHo1WI7Yw1jlMIFA5L+d2OLIulsGGFkLOjlZ4cUI7nJu34G7J2VvIToSd+Ae1H
-	2vmg==
-X-Gm-Message-State: APjAAAV5+aRsC/5zpeb+YOHbGCybd8Vo6sOxOdvj9rXFnMyZBiqr16ua
-	Me6mvvW+adOlQmFhYBvOeCX4lGPf4OTVKS0D3cK4Pb4q
-X-Google-Smtp-Source: APXvYqwDqVFlUrlBYqLh38qHiYc6cN3u4STzhZfPpI/DdKvodkJdG/HaZvWNG4Ehnj/wYsbVh238/ARMe5G37G9GoTU=
-X-Received: by 2002:a5d:8913:: with SMTP id b19mr1136656ion.83.1567692264239; 
-	Thu, 05 Sep 2019 07:04:24 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190826033016.15205-1-maxime.roussinbelanger@gmail.com>
-In-Reply-To: <20190826033016.15205-1-maxime.roussinbelanger@gmail.com>
-From: =?UTF-8?Q?Maxime_Roussin=2DB=C3=A9langer?=
-	<maxime.roussinbelanger@gmail.com>
-Date: Thu, 5 Sep 2019 10:03:58 -0400
-Message-ID: <CAE=T-s6+VLHRXHT6xmL5yWHyeJ87ALstHtdJA_iucHA1pzg1Rg@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=EqcLyNUt1nFaB9ls3ZfTQrZiQP/rjhjXfi6pGHeuARo=;
+	b=jUgGNB48GRwjhvfPinIXRSErM+UI0CdQXIh4REtqP6aWLmKdJctWLy2feBSChMcYFZ
+	hnhDI60FMfKfmU/URUPBRAIlWvvI9MbP2SFbc0RoZO3v1kCRRJH0kNNhR5MvxJxt1pwo
+	AfxH4HMBnmVwFMXThOcEUVXDYJD8G42p8pW9oXATlURgIhbNGIlP2YnrduO/uRnkecb5
+	WUUn1PQs2bTDKureuFqfvzABZUBXR93aaorgd+PPG0FqBbgLVyXCYtHdvh5ATNiHE/b8
+	6AXgozKyT374GyKMjFW0gmTJAj2EelihGH3zvSdSaKdw+aX2cAU5Mqnohu+fFB4UevoY
+	mR4A==
+X-Gm-Message-State: APjAAAUNXuiNl094ZPNfBO4AXU7ClUL5lzoG17kuvNC2M9Gs/NjcAzVa
+	EnujgZxo2CXlYJ5kuaP2JKdr0ldxuVk=
+X-Google-Smtp-Source: APXvYqxmqxg8IPhVlTugwJ/t0vL8333CibMo6S+2qDei9415dWl8w1mEMITZGh8SJvTkRuoG/8Bnzg==
+X-Received: by 2002:ac2:4352:: with SMTP id o18mr2832769lfl.164.1567696771979; 
+	Thu, 05 Sep 2019 08:19:31 -0700 (PDT)
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
+	[213.89.0.115])
+	by smtp.gmail.com with ESMTPSA id x13sm494986lfc.80.2019.09.05.08.19.31
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 05 Sep 2019 08:19:31 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+X-Google-Original-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][thud][PATCH v3] libedit: Add native and nativesdk to BBCLASSEXTEND
+Date: Thu,  5 Sep 2019 17:19:23 +0200
+Message-Id: <20190905151923.25384-1-oleksandr.kravchuk@pelagicore.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+Subject: [PATCH][meta-oe] nano: update to 4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,43 +57,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2019 14:04:24 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 05 Sep 2019 15:19:32 -0000
 
-ping
+Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+---
+ meta-oe/recipes-support/nano/{nano_4.3.bb => nano_4.4.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/nano/{nano_4.3.bb => nano_4.4.bb} (79%)
 
-On Sun, Aug 25, 2019 at 11:30 PM Maxime Roussin-B=C3=A9langer <
-maxime.roussinbelanger@gmail.com> wrote:
+diff --git a/meta-oe/recipes-support/nano/nano_4.3.bb b/meta-oe/recipes-support/nano/nano_4.4.bb
+similarity index 79%
+rename from meta-oe/recipes-support/nano/nano_4.3.bb
+rename to meta-oe/recipes-support/nano/nano_4.4.bb
+index aa773bf75..18121be06 100644
+--- a/meta-oe/recipes-support/nano/nano_4.3.bb
++++ b/meta-oe/recipes-support/nano/nano_4.4.bb
+@@ -12,8 +12,8 @@ RDEPENDS_${PN} = "ncurses-terminfo-base"
+ PV_MAJOR = "${@d.getVar('PV').split('.')[0]}"
+ 
+ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+-SRC_URI[md5sum] = "23f4f7b5c0d1f04ad555960dc294f2b8"
+-SRC_URI[sha256sum] = "00d3ad1a287a85b4bf83e5f06cedd0a9f880413682bebd52b4b1e2af8cfc0d81"
++SRC_URI[md5sum] = "9650dd3eb0adbab6aaa748a6f1398ccb"
++SRC_URI[sha256sum] = "2af222e0354848ffaa3af31b5cd0a77917e9cb7742cd073d762f3c32f0f582c7"
+ 
+ inherit autotools gettext pkgconfig
+ 
+-- 
+2.17.1
 
-> To keep support of meta-clang support on thud branch.
-> It depends on libedit native
->
-> Signed-off-by: Maxime Roussin-B=C3=A9langer <maxime.roussinbelanger@gmail=
-.com>
-> ---
-> Changes in v2:
->         - Add missing meta-oe in subject
-> Changes in v3:
->         - Add missing signoff
->
-> meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
-> b/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
-> index 8cc0e959e0..60f4f5a22b 100644
-> --- a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
-> +++ b/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
-> @@ -19,3 +19,5 @@ SRC_URI[md5sum] =3D "97679319742f45d6cdcd6075511b14ac"
->  SRC_URI[sha256sum] =3D
-> "c41bea8fd140fb57ba67a98ec1d8ae0b8ffa82f4aba9c35a87e5a9499e653116"
->
->  S =3D "${WORKDIR}/${BPN}-${PV}"
-> +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> --
-> 2.20.1
->
->
 
