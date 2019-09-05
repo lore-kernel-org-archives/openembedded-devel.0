@@ -1,30 +1,30 @@
 Return-Path: <yuanc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 762DA7C7A3
+	by mail.openembedded.org (Postfix) with ESMTP id 26A7C7E544
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2019 08:13:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,469,1559491200"; d="scan'208";a="74880537"
+	Thu,  5 Sep 2019 08:22:04 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,470,1559491200"; d="scan'208";a="74880919"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Sep 2019 16:13:03 +0800
+	by heian.cn.fujitsu.com with ESMTP; 05 Sep 2019 16:22:05 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 070B44CDFCE9
+	by cn.fujitsu.com (Postfix) with ESMTP id 7E03E4CE042F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2019 16:13:03 +0800 (CST)
+	Thu,  5 Sep 2019 16:22:02 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.21) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 5 Sep 2019 16:13:06 +0800
+	Server (TLS) id 14.3.439.0; Thu, 5 Sep 2019 16:22:05 +0800
 From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Sep 2019 17:12:40 +0900
-Message-ID: <20190905081240.41457-1-yuanc.fnst@cn.fujitsu.com>
+Date: Thu, 5 Sep 2019 17:21:40 +0900
+Message-ID: <20190905082140.41579-1-yuanc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.17.2
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.21]
-X-yoursite-MailScanner-ID: 070B44CDFCE9.A1A7F
+X-yoursite-MailScanner-ID: 7E03E4CE042F.AF1E7
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-dbus: upgrade 1.2.8 -> 1.2.10
+Subject: [meta-python] [PATCH] python-pbr: upgrade 5.4.2 -> 5.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,43 +37,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2019 08:13:06 -0000
+X-List-Received-Date: Thu, 05 Sep 2019 08:22:05 -0000
 Content-Type: text/plain
-
-License File dbus-gmain/COPYING content changed:
-	Add SPDX-License-Identifier.
 
 Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 ---
- .../python/{python-dbus_1.2.8.bb => python-dbus_1.2.10.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-dbus_1.2.8.bb => python-dbus_1.2.10.bb} (83%)
+ .../python/{python-pbr_5.4.2.bb => python-pbr_5.4.3.bb}       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pbr_5.4.2.bb => python-pbr_5.4.3.bb} (62%)
 
-diff --git a/meta-python/recipes-devtools/python/python-dbus_1.2.8.bb b/meta-python/recipes-devtools/python/python-dbus_1.2.10.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python-dbus_1.2.8.bb
-rename to meta-python/recipes-devtools/python/python-dbus_1.2.10.bb
-index b3f724054..9907ea953 100644
---- a/meta-python/recipes-devtools/python/python-dbus_1.2.8.bb
-+++ b/meta-python/recipes-devtools/python/python-dbus_1.2.10.bb
-@@ -3,14 +3,14 @@ SECTION = "devel/python"
- HOMEPAGE = "http://www.freedesktop.org/Software/dbus"
- LICENSE = "MIT & AFL-2.1 | GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b03240518994df6d8c974675675e5ca4 \
--		    file://dbus-gmain/COPYING;md5=05c3eacd50f69bb1d58afec460baad57 "
-+		    file://dbus-gmain/COPYING;md5=99fece6728a80737c8fd3e7c734c17c4 "
- DEPENDS = "expat dbus dbus-glib virtual/libintl python-pyrex-native"
+diff --git a/meta-python/recipes-devtools/python/python-pbr_5.4.2.bb b/meta-python/recipes-devtools/python/python-pbr_5.4.3.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python-pbr_5.4.2.bb
+rename to meta-python/recipes-devtools/python/python-pbr_5.4.3.bb
+index 1023b2031..b21722fda 100644
+--- a/meta-python/recipes-devtools/python/python-pbr_5.4.2.bb
++++ b/meta-python/recipes-devtools/python/python-pbr_5.4.3.bb
+@@ -2,8 +2,8 @@ inherit setuptools
+ # The inc file is in oe-core
+ require recipes-devtools/python/python-pbr.inc
  
- SRC_URI = "http://dbus.freedesktop.org/releases/dbus-python/dbus-python-${PV}.tar.gz \
- "
+-SRC_URI[md5sum] = "ea90e1118a0132da752d45e68d10b2b8"
+-SRC_URI[sha256sum] = "9b321c204a88d8ab5082699469f52cc94c5da45c51f114113d01b3d993c24cdf"
++SRC_URI[md5sum] = "477d2aa285ad97250a172b199f4060b7"
++SRC_URI[sha256sum] = "2c8e420cd4ed4cec4e7999ee47409e876af575d4c35a45840d59e8b5f3155ab8"
  
--SRC_URI[md5sum] = "7379db774c10904f27e7e2743d90fb43"
--SRC_URI[sha256sum] = "abf12bbb765e300bf8e2a1b2f32f85949eab06998dbda127952c31cb63957b6f"
-+SRC_URI[md5sum] = "5d21d5ae6423f0e41caa3400af44edac"
-+SRC_URI[sha256sum] = "d4332bbd4a0054fa4010b259c293b84d461bbd9d7a8ef528157d151c0398d886"
- S = "${WORKDIR}/dbus-python-${PV}"
- 
- inherit distutils-base autotools pkgconfig
+ do_install_append() {
+         if [ -f ${D}${bindir}/pbr ]; then
 -- 
 2.17.1
 
