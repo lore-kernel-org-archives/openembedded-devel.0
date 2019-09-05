@@ -1,23 +1,47 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 539EA762B3
+Return-Path: <maxime.roussinbelanger@gmail.com>
+Received: from mail-io1-f48.google.com (mail-io1-f48.google.com
+	[209.85.166.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 687457F2D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2019 11:23:37 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com ([147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x85BNcfu026761
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  5 Sep 2019 14:04:24 +0000 (UTC)
+Received: by mail-io1-f48.google.com with SMTP id b136so5156414iof.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 5 Sep 2019 04:23:38 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.468.0; Thu, 5 Sep 2019 04:23:38 -0700
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Sep 2019 19:23:36 +0800
-Message-ID: <1567682616-88522-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Thu, 05 Sep 2019 07:04:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=6N2Ed+iycZtUjc00CHDac4oUuE7AWPNQO/b6SZ3pdpg=;
+	b=t2qGcflHTPltTy2k42mim5WXjSZM/Il9n0NQVlg8tbwzPMf1R4YFWmbmbr1jNGCSUg
+	1ZatDb4B3bZo3w8AlOHYHuehmh1CeWt23dkF7Lvc04iDdWFIUbbBCEXT3Jo0oWu5YqDg
+	+21k8wR5mq1zi3zIECErHsgDCwR3vIuor3OZxwsHuAriADUeJj0AZ3ZYJfp7BicDk1Wo
+	MN0iMunAbrZBaTxvNusdxCLEt1R5g1UCADC0C1v+0dCu+WRHLXuW1cFaNC0Psc3RYBEc
+	qbbTb69U0/TrZo2vZAVQRc999zNolTP2NoYjUjQbC1/5uYJgTAxiWZUF7WiWRkpR0+uQ
+	rB9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=6N2Ed+iycZtUjc00CHDac4oUuE7AWPNQO/b6SZ3pdpg=;
+	b=gfNAk9euQoK60hWdTCoeOnS+AMKwFy/6lRIbP5YBsETRrZd7rlBLG0UzfuL//11t5T
+	aspWFPE+UOTkPe4W23xlnnhj0HXoGQHb1hm7tCO8fc6GhzlJB60jJfZPegREB1Pljkrx
+	IOkhc+0ErReC2iPjwsGwDT6OkRvVcJTvaliUQQ0I5KCIJPzOyiQ2oa3KOs/J/fklOVBP
+	dxFT+cUx6VE2dSorue89XXIylCTDhfR7gdRk/d1+u0cJm+6Jq1LTiXLiQ9cSB1rYyMWd
+	TsexObSHo1WI7Yw1jlMIFA5L+d2OLIulsGGFkLOjlZ4cUI7nJu34G7J2VvIToSd+Ae1H
+	2vmg==
+X-Gm-Message-State: APjAAAV5+aRsC/5zpeb+YOHbGCybd8Vo6sOxOdvj9rXFnMyZBiqr16ua
+	Me6mvvW+adOlQmFhYBvOeCX4lGPf4OTVKS0D3cK4Pb4q
+X-Google-Smtp-Source: APXvYqwDqVFlUrlBYqLh38qHiYc6cN3u4STzhZfPpI/DdKvodkJdG/HaZvWNG4Ehnj/wYsbVh238/ARMe5G37G9GoTU=
+X-Received: by 2002:a5d:8913:: with SMTP id b19mr1136656ion.83.1567692264239; 
+	Thu, 05 Sep 2019 07:04:24 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH] drbd-utils: switch to add patch from change source in do_configure
+References: <20190826033016.15205-1-maxime.roussinbelanger@gmail.com>
+In-Reply-To: <20190826033016.15205-1-maxime.roussinbelanger@gmail.com>
+From: =?UTF-8?Q?Maxime_Roussin=2DB=C3=A9langer?=
+	<maxime.roussinbelanger@gmail.com>
+Date: Thu, 5 Sep 2019 10:03:58 -0400
+Message-ID: <CAE=T-s6+VLHRXHT6xmL5yWHyeJ87ALstHtdJA_iucHA1pzg1Rg@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-oe][thud][PATCH v3] libedit: Add native and nativesdk to BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,168 +54,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2019 11:23:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 05 Sep 2019 14:04:24 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Changqing Li <changqing.li@windriver.com>
+ping
 
-it is not proper change source in do_configure, it will make
-source not updated even local.conf have change the DISTRO_FEATURES
+On Sun, Aug 25, 2019 at 11:30 PM Maxime Roussin-B=C3=A9langer <
+maxime.roussinbelanger@gmail.com> wrote:
 
-[YOCTO: #13493]
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../0001-drbd-utils-support-usrmerge.patch         | 108 +++++++++++++++++++++
- .../recipes-support/drbd/drbd-utils_9.10.0.bb      |  12 +--
- 2 files changed, 109 insertions(+), 11 deletions(-)
- create mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-new file mode 100644
-index 0000000..5e12872
---- /dev/null
-+++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-utils-support-usrmerge.patch
-@@ -0,0 +1,108 @@
-+From 642b5823abeee27a0fdc2d12d0e1235461ace9ed Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Thu, 5 Sep 2019 18:57:39 +0800
-+Subject: [PATCH] drbd-utils: support usrmerge
-+
-+Upstream-Status: Inappropriate[oe-specific]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ configure.ac         |  2 +-
-+ scripts/Makefile.in  |  4 ++--
-+ user/v83/Makefile.in | 14 +++++++-------
-+ user/v84/Makefile.in | 14 +++++++-------
-+ 4 files changed, 17 insertions(+), 17 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 4df1b4d..c4ef1bc 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -176,7 +176,7 @@ AC_ARG_WITH(tmpfilesdir,
-+ AC_SUBST(tmpfilesdir)
-+ 
-+ # set default early
-+-default_udevdir=/lib/udev
-++default_udevdir=${prefix}/lib/udev
-+ if test x"$with_udev" = x || \
-+    test x"$with_udev" = xyes ; then
-+ 	if test x"$PKG_CONFIG" != x; then
-+diff --git a/scripts/Makefile.in b/scripts/Makefile.in
-+index fbb0beb..da701a1 100644
-+--- a/scripts/Makefile.in
-++++ b/scripts/Makefile.in
-+@@ -75,8 +75,8 @@ endif
-+ ifeq ($(subst both,systemd,$(initscripttype)),systemd)
-+ 	install -d $(DESTDIR)$(systemdunitdir)
-+ 	install -m 644 drbd.service $(DESTDIR)$(systemdunitdir)/
-+-	install -d $(DESTDIR)/lib/drbd/
-+-	install -m 755 drbd $(DESTDIR)/lib/drbd/
-++	install -d $(DESTDIR)/${nonarch_libdir}/drbd
-++	install -m 755 drbd $(DESTDIR)/${nonarch_libdir}/drbd
-+ 	install -d $(DESTDIR)$(tmpfilesdir)/
-+ 	install -m 444 drbd.tmpfiles.conf $(DESTDIR)$(tmpfilesdir)/drbd.conf
-+ endif
-+diff --git a/user/v83/Makefile.in b/user/v83/Makefile.in
-+index 27516de..b301376 100644
-+--- a/user/v83/Makefile.in
-++++ b/user/v83/Makefile.in
-+@@ -96,19 +96,19 @@ install:
-+ ifeq ($(WITH_83_SUPPORT),yes)
-+ 	install -d $(DESTDIR)$(localstatedir)/lib/drbd
-+ 	install -d $(DESTDIR)$(localstatedir)/lock
-+-	install -d $(DESTDIR)/lib/drbd/
-++	install -d $(DESTDIR)/${nonarch_libdir}/drbd/
-+ 	if getent group haclient > /dev/null 2> /dev/null ; then		\
-+-		install -g haclient -m 4750 drbdsetup-83 $(DESTDIR)/lib/drbd/ ;	\
-+-		install -m 755 drbdadm-83 $(DESTDIR)/lib/drbd/ ;		\
-++		install -g haclient -m 4750 drbdsetup-83 $(DESTDIR)/${nonarch_libdir}/drbd/ ;	\
-++		install -m 755 drbdadm-83 $(DESTDIR)/${nonarch_libdir}/drbd/ ;		\
-+ 	else									\
-+-		install -m 755 drbdsetup-83 $(DESTDIR)/lib/drbd/ ;		\
-+-		install -m 755 drbdadm-83 $(DESTDIR)/lib/drbd/ ; 		\
-++		install -m 755 drbdsetup-83 $(DESTDIR)/${nonarch_libdir}/drbd/ ;		\
-++		install -m 755 drbdadm-83 $(DESTDIR)/${nonarch_libdir}/drbd/ ; 		\
-+ 	fi
-+ endif
-+ 
-+ uninstall:
-+-	rm -f $(DESTDIR)/lib/drbd/drbdsetup-83
-+-	rm -f $(DESTDIR)/lib/drbd/drbdadm-83
-++	rm -f $(DESTDIR)/${nonarch_libdir}/drbd/drbdsetup-83
-++	rm -f $(DESTDIR)/${nonarch_libdir}/drbd/drbdadm-83
-+ 
-+ .PHONY: install uninstall clean distclean
-+ ../../configure:
-+diff --git a/user/v84/Makefile.in b/user/v84/Makefile.in
-+index 38977c6..05ef060 100644
-+--- a/user/v84/Makefile.in
-++++ b/user/v84/Makefile.in
-+@@ -109,19 +109,19 @@ ifeq ($(WITH_84_SUPPORT),yes)
-+ 	install -d $(DESTDIR)$(localstatedir)/lib/drbd
-+ 	install -d $(DESTDIR)$(localstatedir)/run/drbd
-+ 	install -d $(DESTDIR)$(localstatedir)/lock
-+-	install -d $(DESTDIR)/lib/drbd/
-++	install -d $(DESTDIR)/${nonarch_libdir}/drbd/
-+ 	if getent group haclient > /dev/null 2> /dev/null ; then	\
-+-		install -g haclient -m 4750 drbdsetup-84 $(DESTDIR)/lib/drbd/ ;	\
-+-		install -m 755 drbdadm-84 $(DESTDIR)/lib/drbd/ ;		\
-++		install -g haclient -m 4750 drbdsetup-84 $(DESTDIR)/${nonarch_libdir}/drbd/ ;	\
-++		install -m 755 drbdadm-84 $(DESTDIR)/${nonarch_libdir}/drbd/ ;		\
-+ 	else								\
-+-		install -m 755 drbdsetup-84 $(DESTDIR)/lib/drbd/ ;		\
-+-		install -m 755 drbdadm-84 $(DESTDIR)/lib/drbd/ ; 		\
-++		install -m 755 drbdsetup-84 $(DESTDIR)/${nonarch_libdir}/drbd/ ;		\
-++		install -m 755 drbdadm-84 $(DESTDIR)/${nonarch_libdir}/drbd/ ; 		\
-+ 	fi
-+ endif
-+ 
-+ uninstall:
-+-	rm -f $(DESTDIR)/lib/drbd/drbdsetup-84
-+-	rm -f $(DESTDIR)/lib/drbd/drbdadm-84
-++	rm -f $(DESTDIR)/${nonarch_libdir}/drbd/drbdsetup-84
-++	rm -f $(DESTDIR)/${nonarch_libdir}/drbd/drbdadm-84
-+ 
-+ spell:
-+ 	for f in drbdadm_adjust.c drbdadm_main.c drbdadm_parser.c drbdadm_usage_cnt.c drbdsetup.c drbdtool_common.c; do \
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-index d708511..0e14ae7 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_9.10.0.bb
-@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
- 
- SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
-            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
-+           ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
-           "
- # v9.10.0
- SRCREV_drbd-utils = "859151b228d3b3aacefb09d06d515a2589c22e35"
-@@ -38,17 +39,6 @@ EXTRA_OECONF = " \
- # If we have inherited reproducible_build, we want to use it.
- export WANT_DRBD_REPRODUCIBLE_BUILD = "yes"
- 
--do_configure_prepend() {
--    # move the the file under folder /lib/drbd/ to /usr/lib/drbd when usrmerge enabled
--    if ${@bb.utils.contains('DISTRO_FEATURES', 'usrmerge', 'true', 'false', d)}; then
--        for m_file in `find ${S} -name 'Makefile.in'`; do
--            sed -i -e "s;\$(DESTDIR)\/lib\/drbd;\$(DESTDIR)\${nonarch_libdir}\/drbd;g" $m_file
--        done
--        # move the the file under folder /lib/udev/ to /usr/lib/udev when usrmerge enabled
--        sed -i -e "s;default_udevdir=/lib/udev;default_udevdir=\${prefix}/lib/udev;g" ${S}/configure.ac
--    fi
--
--}
- do_install_append() {
-     # don't install empty /var/lock and /var/run to avoid conflict with base-files
-     rm -rf ${D}${localstatedir}/lock
--- 
-2.7.4
-
+> To keep support of meta-clang support on thud branch.
+> It depends on libedit native
+>
+> Signed-off-by: Maxime Roussin-B=C3=A9langer <maxime.roussinbelanger@gmail=
+.com>
+> ---
+> Changes in v2:
+>         - Add missing meta-oe in subject
+> Changes in v3:
+>         - Add missing signoff
+>
+> meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
+> b/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
+> index 8cc0e959e0..60f4f5a22b 100644
+> --- a/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
+> +++ b/meta-oe/recipes-devtools/libedit/libedit_20180525-3.1.bb
+> @@ -19,3 +19,5 @@ SRC_URI[md5sum] =3D "97679319742f45d6cdcd6075511b14ac"
+>  SRC_URI[sha256sum] =3D
+> "c41bea8fd140fb57ba67a98ec1d8ae0b8ffa82f4aba9c35a87e5a9499e653116"
+>
+>  S =3D "${WORKDIR}/${BPN}-${PV}"
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> --
+> 2.20.1
+>
+>
 
