@@ -1,30 +1,30 @@
 Return-Path: <yuanc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 26A7C7E544
+	by mail.openembedded.org (Postfix) with ESMTP id 767D87ED16
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2019 08:22:04 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,470,1559491200"; d="scan'208";a="74880919"
+	Thu,  5 Sep 2019 08:27:41 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,470,1559491200"; d="scan'208";a="74881173"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Sep 2019 16:22:05 +0800
+	by heian.cn.fujitsu.com with ESMTP; 05 Sep 2019 16:27:41 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7E03E4CE042F
+	by cn.fujitsu.com (Postfix) with ESMTP id 6EC4F4CDFCE9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Sep 2019 16:22:02 +0800 (CST)
+	Thu,  5 Sep 2019 16:27:41 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.21) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 5 Sep 2019 16:22:05 +0800
+	Server (TLS) id 14.3.439.0; Thu, 5 Sep 2019 16:27:44 +0800
 From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 5 Sep 2019 17:21:40 +0900
-Message-ID: <20190905082140.41579-1-yuanc.fnst@cn.fujitsu.com>
+Date: Thu, 5 Sep 2019 17:27:18 +0900
+Message-ID: <20190905082718.41748-1-yuanc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.17.2
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.21]
-X-yoursite-MailScanner-ID: 7E03E4CE042F.AF1E7
+X-yoursite-MailScanner-ID: 6EC4F4CDFCE9.A3794
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pbr: upgrade 5.4.2 -> 5.4.3
+Subject: [meta-python] [PATCH] python-pyasn1: upgrade 0.4.6 -> 0.4.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,33 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Sep 2019 08:22:05 -0000
+X-List-Received-Date: Thu, 05 Sep 2019 08:27:42 -0000
 Content-Type: text/plain
 
 Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 ---
- .../python/{python-pbr_5.4.2.bb => python-pbr_5.4.3.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pbr_5.4.2.bb => python-pbr_5.4.3.bb} (62%)
+ meta-python/recipes-devtools/python/python-pyasn1.inc         | 4 ++--
+ .../python/{python-pyasn1_0.4.6.bb => python-pyasn1_0.4.7.bb} | 0
+ .../{python3-pyasn1_0.4.6.bb => python3-pyasn1_0.4.7.bb}      | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyasn1_0.4.6.bb => python-pyasn1_0.4.7.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyasn1_0.4.6.bb => python3-pyasn1_0.4.7.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pbr_5.4.2.bb b/meta-python/recipes-devtools/python/python-pbr_5.4.3.bb
-similarity index 62%
-rename from meta-python/recipes-devtools/python/python-pbr_5.4.2.bb
-rename to meta-python/recipes-devtools/python/python-pbr_5.4.3.bb
-index 1023b2031..b21722fda 100644
---- a/meta-python/recipes-devtools/python/python-pbr_5.4.2.bb
-+++ b/meta-python/recipes-devtools/python/python-pbr_5.4.3.bb
-@@ -2,8 +2,8 @@ inherit setuptools
- # The inc file is in oe-core
- require recipes-devtools/python/python-pbr.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
+index 1086f30bf..014fcf9a3 100644
+--- a/meta-python/recipes-devtools/python/python-pyasn1.inc
++++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pyasn1.sourceforge.net/"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=a14482d15c2249de3b6f0e8a47e021fd"
  
--SRC_URI[md5sum] = "ea90e1118a0132da752d45e68d10b2b8"
--SRC_URI[sha256sum] = "9b321c204a88d8ab5082699469f52cc94c5da45c51f114113d01b3d993c24cdf"
-+SRC_URI[md5sum] = "477d2aa285ad97250a172b199f4060b7"
-+SRC_URI[sha256sum] = "2c8e420cd4ed4cec4e7999ee47409e876af575d4c35a45840d59e8b5f3155ab8"
+-SRC_URI[md5sum] = "67f1da0cf680761d29169e54e7d53159"
+-SRC_URI[sha256sum] = "b773d5c9196ffbc3a1e13bdf909d446cad80a039aa3340bcad72f395b76ebc86"
++SRC_URI[md5sum] = "50290e833395016c49903f4f9c7e47e5"
++SRC_URI[sha256sum] = "a9495356ca1d66ed197a0f72b41eb1823cf7ea8b5bd07191673e8147aecf8604"
  
- do_install_append() {
-         if [ -f ${D}${bindir}/pbr ]; then
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-codecs \
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1_0.4.6.bb b/meta-python/recipes-devtools/python/python-pyasn1_0.4.7.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyasn1_0.4.6.bb
+rename to meta-python/recipes-devtools/python/python-pyasn1_0.4.7.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyasn1_0.4.6.bb b/meta-python/recipes-devtools/python/python3-pyasn1_0.4.7.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyasn1_0.4.6.bb
+rename to meta-python/recipes-devtools/python/python3-pyasn1_0.4.7.bb
 -- 
 2.17.1
 
