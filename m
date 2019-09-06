@@ -1,55 +1,51 @@
-Return-Path: <prvs=145ea1953=alistair.francis@wdc.com>
-Received: from esa4.hgst.iphmx.com (esa4.hgst.iphmx.com [216.71.154.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 675557F377
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
+	[209.85.210.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A3D87ECC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Sep 2019 21:02:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1567803741; x=1599339741;
-	h=from:to:cc:subject:date:message-id:in-reply-to:
-	references:mime-version:content-transfer-encoding;
-	bh=mTmOzB3PzjQvXkivfwhvoY+E2AS6GwnXIhndDIdTTAk=;
-	b=bLh+v+U+eOrU8AVLrju7DpZAvy8rQEhDbTTYYSZ0hAmN43h1pnadm45X
-	mEo4sLHt6zJz4zDAZrb0buPytxKm76tsYUCN1evDuGd4CZF1VmnOW14aH
-	RQDbAHHonDVKTTILB96uNmcR0X+7XCGbJvJJMOmyIWMRoi9X4mCJWPLHM
-	KcjcNHjvj5bJWYdOqExcX1k8gV7kKprrmFp5BIMQeXzHGm3v57CQJT7qX
-	t0WM8bEbC/S5HJO4KqmBVwpYcLLRPQkZMR583W2Fu42Y1b+bjBDLF7iYy
-	r9pDy+nFb77/SJXSNoxlPfJ57nhimMBmKmgW+EFfkWb9mPq3HfDfYp4Hl g==;
-IronPort-SDR: iIUQGYmbJdmCp9vqCPljKisz+XMRgJWrb+4XBVDmvgMTQ8Xoc+ZSvLrCRyAZg1kQotY/ESCmtJ
-	uFKNfMOHtvjIomyF5pQsKMG5RmFxs/65zKyPSyd/fZAXQlKPplhy3xQ0q1jeHN+G0Pe1Yj/wJm
-	Yc6i5HLin21TpSqpumkdco1SxkiroXYheH7hduEOSeJDEdDv3hhPR3Rad6eGGlRSGbAzsmkLXP
-	FdKVrvlnZ56139e6Rvld0QclnZYtYCD42TBWjyBfVPiuWL2Fk1mrLzh4gdhT2QEIN5OOnhiQtp
-	XsA=
-X-IronPort-AV: E=Sophos;i="5.64,474,1559491200"; d="scan'208";a="117692390"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
-	([199.255.45.15])
-	by ob1.hgst.iphmx.com with ESMTP; 07 Sep 2019 04:55:14 +0800
-IronPort-SDR: OBVEhptMd62fzi1e7oeHCHUaY2G0wMZMwN4TFVM6orhK202u1aWTPkAGCY9/yaEz6WVzMsTkN2
-	v8SoepMOYNtg2hvaR5M0AH5GZq076FicThwFeZaQnDuDAGjJXA5Jw+Nh/EGc3ZeEp1dQHz7WIh
-	aVU0a4bRcTgzLgHFufRu+ro8Chdok/jlQ/8aIrtwpICBAntXTWoZbOvuRiOqcoPQApqi6V3cDK
-	YoikSQTgC3CLogRZZlgx30E2JDCBucfaiO5GjYTAjLPoh+IYWPoBdUE+9AcyI+4Rh7Ix+tME+k
-	wVk3wXnzceQbRdFGCbwnjC10
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
-	06 Sep 2019 13:52:07 -0700
-IronPort-SDR: HxcrrCi/nLJqB5OyGPR1+Ry2P+iYYNyPqzTJVG1MF6UcQSaX+WITnNdsJSxtCJG+XnMXm70vKy
-	Z2vgv2O5DB0KJabeH/6MJjSK1ppbv+X+inyld2RJAASOTup5Ccp9J1rIyKENiSI+6qkwg5YGzl
-	2iRQ0+WhKHwfIWpKNxFICBvLIAkcfL9DyHx8AEEEdjzdtkoLuX9mIWfCb2RFQHImVn4PwDogfV
-	TOveGsav9YsuqRGsyh/cFHc6NoD3GqpgMA4MR0ncx0VOkhCE6cR6ha9k5rmvY6grWyVFD+1KyJ
-	PM8=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
-	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
-	by uls-op-cesaip01.wdc.com with ESMTP; 06 Sep 2019 13:55:14 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
+	Fri,  6 Sep 2019 21:25:21 +0000 (UTC)
+Received: by mail-pf1-f170.google.com with SMTP id x127so5418831pfb.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Sep 2019 14:25:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=w4X7/GvPbTQKdUASR/t+QevFD08qC8B2pyEeSeu1XBI=;
+	b=Vge8WwMm3K2qdjNNyaYKH3uWSCs0b8ubZomhsgMrQYvIXWuaOsfqPDSRexFwi9REQc
+	1EXJ/HrF0778SJuMOIcQyydV9wUFSPNoMCXI6emaq17h/v9G8WMsCbhp3tyBB+JR7vGN
+	+l0pZvFaoDn+nlzJ7A59H2rUJHpQVS5BMMdxhNeeUnxhllB7JZKeJxHFcVEkFBpkms70
+	MK5YzT2LFgC9drFYlJzVtFdSko66sDiOzh8dFdA2X0mjvqrC/IzLBQf1w9VDq3x5HRjp
+	sNYrXKZozcZorY2bMFn2jNAt4P0mnX549QpLXVd28G7Oo+yDb0ieOfkHZJwaqAHw+927
+	JDqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=w4X7/GvPbTQKdUASR/t+QevFD08qC8B2pyEeSeu1XBI=;
+	b=rATocHmK298F1TB2Q/S5py/5cof5YUIZLKNq4Z2QIw4TjAbMBeZBKvS5X/fWDV+gK2
+	ryPtHC11kFQYuAUPUhGS+0DOGx3uwgd0WXaoDT7Uk1lUDXxtksYOqwNV7I4pc/ExbRGS
+	/P2mhdir+VY/Y+fYoAzOEZuktnL5yinuNKH9Abc2OtDE9Abq/U6A8KS7dzkQSrjL9xHl
+	kvIEexhBUaBd4hK4V4P8HGfzunyZXMdnl5aDZuSw2gbjHCfmloTCHH8JzChuUn6Qc66r
+	V7kakZ7oKPD0ByKzahpjJIfhTl61+IS6ru8gsFr6qhVxYRvi4PicVhSX5tHNawi0CSky
+	wilQ==
+X-Gm-Message-State: APjAAAVXhNnsG17x8ALV3xi4sbH9YVppPtVwiwEGhaCU8/ojkG5PZ8yp
+	lAjPTiGBN+ZAmmTq4bFLraHoPleNXsw=
+X-Google-Smtp-Source: APXvYqy/7z1L67H1rRSaw6sjZ4YIYiClTaKZOeuYuOYAITpYmRfWPX9qOqWdt0RcGMLzaRk+eMzaAA==
+X-Received: by 2002:a17:90b:948:: with SMTP id
+	dw8mr12000087pjb.48.1567805121417; 
+	Fri, 06 Sep 2019 14:25:21 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	c127sm9973660pfb.5.2019.09.06.14.25.20
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 06 Sep 2019 14:25:20 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Sep 2019 13:51:20 -0700
-Message-Id: <20190906205120.19040-3-alistair.francis@wdc.com>
+Date: Fri,  6 Sep 2019 14:25:13 -0700
+Message-Id: <20190906212513.16415-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20190906205120.19040-1-alistair.francis@wdc.com>
-References: <20190906205120.19040-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 3/3] python3-pytest-asyncio: Initial commit of 0.10.0
+Subject: [meta-oe][PATCH] ltrace: Fix build on mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,44 +58,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2019 21:02:19 -0000
+X-List-Received-Date: Fri, 06 Sep 2019 21:25:21 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- .../python/python-pytest-asyncio.inc                | 13 +++++++++++++
- .../python/python3-pytest-asyncio_0.10.0.bb         |  2 ++
- 2 files changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pytest-asyncio.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-asyncio_0.10.0.bb
+Newer kernel UAPI headers for mips have moved these needed defines
+around
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest-asyncio.inc b/meta-python/recipes-devtools/python/python-pytest-asyncio.inc
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../ltrace/ltrace/include_unistd_nr.patch     | 30 +++++++++++++++++++
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
+
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch b/meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
 new file mode 100644
-index 000000000..ad549690b
+index 0000000000..e4490bbb9e
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pytest-asyncio.inc
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "pytest-asyncio is an Apache2 licensed library, written in Python, for testing asyncio code with pytest"
-+HOMEPAGE = "https://github.com/pytest-dev/pytest-asyncio"
-+LICENSE = "Apache2"
-+LIC_FILES_CHKSUM = "file://README.rst;md5=ae62268d207c73b615fbefddaf91a881"
++++ b/meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
+@@ -0,0 +1,30 @@
++kernel headers have restructured mips syscall generation in kernel
++in recent versions, however, ltrace still has logic to define the
++syscall numbers based on old logic, this patch includes the legacy
++UAPI headers to get these defines
 +
-+SRC_URI[md5sum] = "247a7ec32f24a185341327c42a0f85bf"
-+SRC_URI[sha256sum] = "9fac5100fd716cbecf6ef89233e8590a4ad61d729d1732e0a96b84182df1daaf"
++Fixes errors e.g.
++../../../../git/sysdeps/linux-gnu/mips/trace.c:138:29: error: '__NR_O32_Linux' undeclared (first use in this function)
++  const int syscallbase[] = {__NR_O32_Linux, __NR_N32_Linux,
 +
-+inherit pypi
-+
-+DEPENDS += "${PYTHON_PN}-pytest-native"
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.10.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.10.0.bb
-new file mode 100644
-index 000000000..09f26f8d1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.10.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-pytest-asyncio.inc
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++--- a/sysdeps/linux-gnu/mips/trace.c
+++++ b/sysdeps/linux-gnu/mips/trace.c
++@@ -34,6 +34,16 @@
++ #include <assert.h>
++ #include <asm/unistd.h>
++ 
+++#ifndef __NR_O32_Linux
+++#include <asm/unistd_nr_o32.h>
+++#endif
+++#ifndef __NR_N32_Linux
+++#include <asm/unistd_nr_n64.h>
+++#endif
+++#ifndef __NR_N64_Linux
+++#include <asm/unistd_nr_n32.h>
+++#endif
+++
++ #include "backend.h"
++ #include "common.h"
++ #include "debug.h"
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index 3dc269c80e..ead637cb7e 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -27,6 +27,7 @@ SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http
+            file://0001-mips-plt.c-Delete-include-error.h.patch \
+            file://0001-move-fprintf-into-same-block-where-modname-and-symna.patch \
+            file://0001-hook-Do-not-append-int-to-std-string.patch \
++           file://include_unistd_nr.patch \
+            "
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.23.0
 
