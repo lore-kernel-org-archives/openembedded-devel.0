@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
-	[209.85.222.175])
-	by mail.openembedded.org (Postfix) with ESMTP id DA8A17F3EE
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id CC9F97F3B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Sep 2019 14:11:05 +0000 (UTC)
-Received: by mail-qk1-f175.google.com with SMTP id x5so5727173qkh.5
+	Fri,  6 Sep 2019 14:20:50 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id u40so7178346qth.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Sep 2019 07:11:07 -0700 (PDT)
+	Fri, 06 Sep 2019 07:20:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=TPKsc1cq21DACoi/AdlHIB4RzLCgZnw8b094ngCfB60=;
-	b=NcxIcawAmOUrs/d566zox75ROpCPwt01Nm3Z5PHiPD4hX6cyeOcceKD2jz8cNujw78
-	bdlTnF1pSPrNBjlVMDMNDLCq5lWoxACJ/CwLpjNkxuha/8DK/+QUcWlknwgesTy45hfF
-	m/WqebZi3vnVNP7pOTAcSNjPBTaA7lJ4PG9pDMaQIJSRi1kOUxt0dfV2RI2dCS/jW9yT
-	ytJ7+zIGuSQ/ZPEMHvivkQh89OGWiWhta7Yrg2yCZqSej7rVoUVjZL9hOd1GsHxSGwfN
-	F+KqAaReK2jecHfTiK1iUh9x0djzSepKZpnAXUPPeOARw1KukcMf/iKbzfkmVIMtCgGh
-	F/Tw==
+	:cc; bh=KU2+XnYoIgJQn0Y+dnTq4ybPPbBIC73XRA6MMBkMzTc=;
+	b=BwUtNWlV4QGiuk31dbakLJgWQFKrcB12CJwRHViGI0GeOy2D8utfQBTvvpTTCgxDTe
+	Un5EQfSTU4JBOCW31ni/0rU2oKV6J4g0DV1v7Peh0U/tsVjipLPyAmC5xdF/b2duANOf
+	RXMATpACZ3SmnO1DTo33vsVq5XGeh1O9xSD9eBQuXjFf6XBcj9E0jHuRC0p2GiFG+SXb
+	eHKThILP5pGm5+NwFUzUJz9zPIS6xZyQachDGbS308hmNZMmH5jx03dtAwrM89srSeMw
+	byidtN84orzivweeVMD2ley695nn3298h6Aol1BsESgZuLMesa+EUJD/J0gw51Wg+B1E
+	jRpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=TPKsc1cq21DACoi/AdlHIB4RzLCgZnw8b094ngCfB60=;
-	b=nstFN6d4V3xg3GwaPLMZ9FvkCR78u88zS118T3wSNhstQSFpla+rQkwTKmT7rc/oYs
-	ZRPTkFV9zgbkU1/K3sn7RscxvoJiVWxO6nRtGcKlRPsN8yx2Wo8t7uk657SDvpHuM1eG
-	0Fu346wibjGAG1PPg75LX8RqFhcolvDixU/RqW1KRCuKBRQaR5kijcrDiK5Tmvwk/dyL
-	PrxRd6qpBcHpwb0aNQC2feckOMw82wT2N2iFzuO1tr1hpQfea6FpL7K+gVIY/bG2Jxfm
-	gCV1vkqFrTOeXkgip/Mg97vaxyxZ9gijhZeHykTni2m2idsV20n2Kq2CVVLGItkHx/Sc
-	KP1Q==
-X-Gm-Message-State: APjAAAXwu6LeKB64Tlex3kw0Swxr13dlAafcAn06DR7idPbKv6XTcKPs
-	fJ+9718CBJGElrV1uBXqhhsHCkS7eY9OaBilKRk=
-X-Google-Smtp-Source: APXvYqyNkf8j+RuisYqeGb15eBI9QJtrf9J8uN4jKheCVL5sZOjltZRBoEsKBbpBugU4JeWPfHWA/TzF8PvibuRMViI=
-X-Received: by 2002:a37:e40b:: with SMTP id y11mr7407329qkf.9.1567779064901;
-	Fri, 06 Sep 2019 07:11:04 -0700 (PDT)
+	bh=KU2+XnYoIgJQn0Y+dnTq4ybPPbBIC73XRA6MMBkMzTc=;
+	b=AnB422x5/1GVn/H8iU+6QWX0pd5+YTaE+MYKARc2IEU6z3u48RvD7mVmnhntQXSGtb
+	ErGlQRAcRtmcLiVI5TlVGFFBl+GRjN5wU2lyGM77KOJWg7I45pbyMxrLFEQycrRqaMh8
+	bQPJbdVteU7mm/on4ydySaIJdGhVvd1y8WYOeVJHTJATLJSAPW9kkZqCmF91fGH1m5pz
+	628CXgqk2Z9kY0rkLMVwtZMApBYniWfg3uM2+hVR4LcF6JX3sp0aPw0/kFB9oZHBp4oA
+	I+lvyZR+yfeCwryrGxKWQ+vKzG4qc/UzNGwRWYbGFPAnc90xdjzu6uZQXCoV7G3zDnlN
+	HT4g==
+X-Gm-Message-State: APjAAAXtvebWPswm9XRiSdKYDTDGOPVVxrd4pSzl3jlNjRbQSPh7FIyG
+	kkT4gtV3KzqKP8X/YrCe0OMtw681Y38zl5jyXZw=
+X-Google-Smtp-Source: APXvYqzQTPPzwGU26CSX4Vo+pDBmi+2yhC2SKrZLMER6ywUSo+07vej3TIJU1TMFFk+sRnRnB3wUfJTXSwjEFg89kfk=
+X-Received: by 2002:a0c:c548:: with SMTP id y8mr5574835qvi.68.1567779651348;
+	Fri, 06 Sep 2019 07:20:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <1567401728-113652-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<CAMKF1spnx4pPh5ObnVTyahxE6Z8y7GCkv3GC_oCwf-fL_eYu9A@mail.gmail.com>
-	<CA+chaQdGBH3dr-S=T6o5ORbw4oJFsz6xkFJ39Vd10wrNCEb7dA@mail.gmail.com>
-In-Reply-To: <CA+chaQdGBH3dr-S=T6o5ORbw4oJFsz6xkFJ39Vd10wrNCEb7dA@mail.gmail.com>
+References: <20190906111903.16142-1-costamagnagianfranco@yahoo.it>
+In-Reply-To: <20190906111903.16142-1-costamagnagianfranco@yahoo.it>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 6 Sep 2019 07:10:53 -0700
-Message-ID: <CAMKF1sqHccaBZpMZNeGnNi+9TY3PZwvFobP-SAvLmpt_VYdfbg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 6 Sep 2019 07:20:40 -0700
+Message-ID: <CAMKF1sqq1nHoVQF65pP1X_hMU6ift7P8KOcqcsuEj1Omx7pqgg@mail.gmail.com>
+To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-cmd2: Add python3 version
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 1/2] grpc: don't use unexisting gettid function on glibc 2.29, it has been implemented only in 2.30 https://sourceware.org/git/?p=glibc.git; a=commit; h=1d0fc213824eaa2a8f8c4385daaa698ee8fb7c92 Signed-off-by: Francesco Mocci <francesco.mocci@abinsula.com> Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,136 +55,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2019 14:11:06 -0000
+X-List-Received-Date: Fri, 06 Sep 2019 14:20:51 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Sep 6, 2019 at 2:35 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+Please adjust the commit message so that there is a
+Small summary line followed by empty line and finally the detailed
+description
 
-> This seems to be merged before python3-colorama was provided
->
+On Fri, Sep 6, 2019 at 4:19 AM Gianfranco Costamagna <
+costamagna.gianfranco@gmail.com> wrote:
 
-Yes since the build did not break and it escaped my Eye now I am waiting
-for a fix before I blacklist it
-
+> ---
+>  .../grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch    | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> On Wed, Sep 4, 2019 at 7:11 AM Khem Raj <raj.khem@gmail.com> wrote:
+> diff --git
+> a/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
+> b/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
+> index c6afff2d2..4f9b115ec 100644
+> ---
+> a/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
+> +++
+> b/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
+> @@ -20,7 +20,7 @@ index 561276f0c2..25a74864a1 100644
+>   #include <time.h>
+>   #include <unistd.h>
 >
->> 03:10:10 ERROR: Nothing RPROVIDES 'python3-colorama' (but
->>
->> /mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/
->> python3-cmd2_0.9.16.bb
->> RDEPENDS on or otherwise requires it)
->> 03:10:10 ERROR: Nothing RPROVIDES 'python3-cmd2-dev' (but
->>
->> /mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/
->> python3-cmd2_0.9.16.bb
->> RDEPENDS on or otherwise requires it)
->> 03:10:10 No eligible RPROVIDERs exist for 'python3-cmd2-dev'
->> 03:10:11 ERROR: Nothing RPROVIDES 'python3-cmd2' (but
->>
->> /mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/
->> python3-cmd2_0.9.16.bb
->> RDEPENDS on or otherwise requires it)
->> 03:10:11 No eligible RPROVIDERs exist for 'python3-cmd2'
->>
->> On Sun, Sep 1, 2019 at 10:23 PM Zheng Ruoqin
->> <zhengrq.fnst@cn.fujitsu.com> wrote:
->> >
->> > Providing a python3 version of python-cmd2.
->> >
->> > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
->> > ---
->> >  .../recipes-devtools/python/python-cmd2.inc       | 13 +++++++++++++
->> >  .../recipes-devtools/python/python-cmd2_0.9.16.bb | 15 ++-------------
->> >  .../python/python3-cmd2_0.9.16.bb                 |  9 +++++++++
->> >  3 files changed, 24 insertions(+), 13 deletions(-)
->> >  create mode 100644 meta-python/recipes-devtools/python/python-cmd2.inc
->> >  create mode 100644 meta-python/recipes-devtools/python/
->> python3-cmd2_0.9.16.bb
->> >
->> > diff --git a/meta-python/recipes-devtools/python/python-cmd2.inc
->> b/meta-python/recipes-devtools/python/python-cmd2.inc
->> > new file mode 100644
->> > index 000000000..1a0be778b
->> > --- /dev/null
->> > +++ b/meta-python/recipes-devtools/python/python-cmd2.inc
->> > @@ -0,0 +1,13 @@
->> > +SUMMARY = "Extra features for standard library's cmd module"
->> > +HOMEPAGE = "http://packages.python.org/cmd2/"
->> > +LICENSE = "MIT"
->> > +LIC_FILES_CHKSUM =
->> "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
->> > +
->> > +SRC_URI[md5sum] = "df35bb2dca8f5e1f6090e1f0aa02960a"
->> > +SRC_URI[sha256sum] =
->> "4b78379d53aff811d1deac720bbe71661769822a5fb2d830cd730656d180fb3d"
->> > +
->> > +inherit pypi
->> > +
->> > +DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
->> > +
->> > +BBCLASSEXTEND = "native nativesdk"
->> > diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
->> b/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
->> > index 94db37a2d..17b6ae285 100644
->> > --- a/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
->> > +++ b/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
->> > @@ -1,14 +1,5 @@
->> > -SUMMARY = "Extra features for standard library's cmd module"
->> > -HOMEPAGE = "http://packages.python.org/cmd2/"
->> > -LICENSE = "MIT"
->> > -LIC_FILES_CHKSUM =
->> "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
->> > -
->> > -SRC_URI[md5sum] = "df35bb2dca8f5e1f6090e1f0aa02960a"
->> > -SRC_URI[sha256sum] =
->> "4b78379d53aff811d1deac720bbe71661769822a5fb2d830cd730656d180fb3d"
->> > -
->> > -inherit pypi setuptools
->> > -
->> > -DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
->> > +inherit setuptools
->> > +require python-cmd2.inc
->> >
->> >  RDEPENDS_${PN} += "\
->> >      ${PYTHON_PN}-doctest \
->> > @@ -21,5 +12,3 @@ RDEPENDS_${PN} += "\
->> >      ${PYTHON_PN}-threading \
->> >      ${PYTHON_PN}-textutils \
->> >      "
->> > -
->> > -BBCLASSEXTEND = "native nativesdk"
->> > diff --git a/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
->> b/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
->> > new file mode 100644
->> > index 000000000..f5c5c7e1a
->> > --- /dev/null
->> > +++ b/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
->> > @@ -0,0 +1,9 @@
->> > +inherit setuptools3
->> > +require python-cmd2.inc
->> > +
->> > +RDEPENDS_${PN} += "\
->> > +    ${PYTHON_PN}-pyperclip \
->> > +    ${PYTHON_PN}-colorama \
->> > +    ${PYTHON_PN}-attrs \
->> > +    ${PYTHON_PN}-wcwidth \
->> > +    "
->> > --
->> > 2.17.1
->> >
->> >
->> >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
+> -+#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 29)
+> ++#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 30)
+>  +#include <unistd.h>
+>  +#else
+>   static long gettid(void) { return syscall(__NR_gettid); }
+> @@ -38,7 +38,7 @@ index 08116b3ab5..d3d3025111 100644
+>
+>  -#ifndef NDEBUG
+>  +#if !defined(DEBUG)
+> -+#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 29)
+> ++#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 30)
+>  +#include <unistd.h>
+>  +#else
+>   static long gettid(void) { return syscall(__NR_gettid); }
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
