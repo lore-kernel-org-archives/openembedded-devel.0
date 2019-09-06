@@ -1,48 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id CC9F97F3B8
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 43A287F3F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Sep 2019 14:20:50 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id u40so7178346qth.11
+	Fri,  6 Sep 2019 16:32:53 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id m9so3398862pls.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Sep 2019 07:20:52 -0700 (PDT)
+	Fri, 06 Sep 2019 09:32:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=KU2+XnYoIgJQn0Y+dnTq4ybPPbBIC73XRA6MMBkMzTc=;
-	b=BwUtNWlV4QGiuk31dbakLJgWQFKrcB12CJwRHViGI0GeOy2D8utfQBTvvpTTCgxDTe
-	Un5EQfSTU4JBOCW31ni/0rU2oKV6J4g0DV1v7Peh0U/tsVjipLPyAmC5xdF/b2duANOf
-	RXMATpACZ3SmnO1DTo33vsVq5XGeh1O9xSD9eBQuXjFf6XBcj9E0jHuRC0p2GiFG+SXb
-	eHKThILP5pGm5+NwFUzUJz9zPIS6xZyQachDGbS308hmNZMmH5jx03dtAwrM89srSeMw
-	byidtN84orzivweeVMD2ley695nn3298h6Aol1BsESgZuLMesa+EUJD/J0gw51Wg+B1E
-	jRpw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=J036LRRWFP5Y8ESvtRb5/Ysn/lctUKnlgfpWnOEK30g=;
+	b=H5Gw16OlYK9EiruOgHLHjqwXdufxcUZzw1H67pMyuCH7CIOjgR2zs6xsQFq8G+kM7Q
+	FXZhI+iROVohTVXG1V/1Q9q0g4CxXB0Lp5u2sG28Oi6OmSDtIP/xJBEBlZG4bJgjyPJB
+	r1X4fZSyb7C7xHaYFBv49eL1rDT5VD6YOU8h8suKHUDVs/GLb7N8uhrqaF23ccqeInNX
+	/lMwJ2mbZ4AmuFfHxKzKEVye7RRPCmVGPqBVUvqCFWCQvbqGaR11yTHgFQtifvF3BiAa
+	kQqX5oeuQ3fDYfPV4pSg9yy7ct1/KFzQNJ4+Csqxjlm+KiYGjQ2uaAW6yVzV6OqyB9Ik
+	oGfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=KU2+XnYoIgJQn0Y+dnTq4ybPPbBIC73XRA6MMBkMzTc=;
-	b=AnB422x5/1GVn/H8iU+6QWX0pd5+YTaE+MYKARc2IEU6z3u48RvD7mVmnhntQXSGtb
-	ErGlQRAcRtmcLiVI5TlVGFFBl+GRjN5wU2lyGM77KOJWg7I45pbyMxrLFEQycrRqaMh8
-	bQPJbdVteU7mm/on4ydySaIJdGhVvd1y8WYOeVJHTJATLJSAPW9kkZqCmF91fGH1m5pz
-	628CXgqk2Z9kY0rkLMVwtZMApBYniWfg3uM2+hVR4LcF6JX3sp0aPw0/kFB9oZHBp4oA
-	I+lvyZR+yfeCwryrGxKWQ+vKzG4qc/UzNGwRWYbGFPAnc90xdjzu6uZQXCoV7G3zDnlN
-	HT4g==
-X-Gm-Message-State: APjAAAXtvebWPswm9XRiSdKYDTDGOPVVxrd4pSzl3jlNjRbQSPh7FIyG
-	kkT4gtV3KzqKP8X/YrCe0OMtw681Y38zl5jyXZw=
-X-Google-Smtp-Source: APXvYqzQTPPzwGU26CSX4Vo+pDBmi+2yhC2SKrZLMER6ywUSo+07vej3TIJU1TMFFk+sRnRnB3wUfJTXSwjEFg89kfk=
-X-Received: by 2002:a0c:c548:: with SMTP id y8mr5574835qvi.68.1567779651348;
-	Fri, 06 Sep 2019 07:20:51 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190906111903.16142-1-costamagnagianfranco@yahoo.it>
-In-Reply-To: <20190906111903.16142-1-costamagnagianfranco@yahoo.it>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=J036LRRWFP5Y8ESvtRb5/Ysn/lctUKnlgfpWnOEK30g=;
+	b=c06xNJYeEJUY5kBUhTxyIR0/ilsttvQdIPmC1fqFATgbZM1R6eLalcbQuNsDHBV7NQ
+	96j4/aNJJy9ZM3qaK0pjC95hKQFjXOW6X3ffOqZfa1K4CZH6rNJnk1JfJCeLEr1Z44Xu
+	Ejfkt8BPcXLrtQEMbwMMAMWhXizb+E0Fpnex+gufyBDtd8MvAve2UzjiRkBox3Nt+lyl
+	mMYzEoXN4/1Omoa2jVLO9JMXSbpPagY8HJIeZ1/WfP9WtI2EbXE6AjzjPA/DKSocftpy
+	VNWxoqlEorACDBGUI8n0Ors71qRqY3sE1aQLRlNPenESdjGL6g9dKVRG6H8wMWoHSCxc
+	8y9w==
+X-Gm-Message-State: APjAAAWpPzRHnh6yyQiqxe0KYUnMIT+4RUQ6dmn0KaVR9n8y6KnONHtI
+	aJw0JWasFflqjwa++pqE5C1iOWCVMWs=
+X-Google-Smtp-Source: APXvYqzFY0wK6VGeGH471kVWRTUViJn8Kcxk03NW+wiFbMRlT2nsgeAoPm9kBQo5UBb+voL7XbmCPw==
+X-Received: by 2002:a17:902:fe09:: with SMTP id
+	g9mr9352002plj.99.1567787573645; 
+	Fri, 06 Sep 2019 09:32:53 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3])
+	by smtp.gmail.com with ESMTPSA id t8sm2218205pjq.30.2019.09.06.09.32.52
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 06 Sep 2019 09:32:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 6 Sep 2019 07:20:40 -0700
-Message-ID: <CAMKF1sqq1nHoVQF65pP1X_hMU6ift7P8KOcqcsuEj1Omx7pqgg@mail.gmail.com>
-To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 1/2] grpc: don't use unexisting gettid function on glibc 2.29, it has been implemented only in 2.30 https://sourceware.org/git/?p=glibc.git; a=commit; h=1d0fc213824eaa2a8f8c4385daaa698ee8fb7c92 Signed-off-by: Francesco Mocci <francesco.mocci@abinsula.com> Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  6 Sep 2019 09:32:40 -0700
+Message-Id: <20190906163242.4770-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH V2 1/3] remmina: Add recipe for the remmina remote desktop client
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,53 +58,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2019 14:20:51 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 06 Sep 2019 16:32:53 -0000
+Content-Transfer-Encoding: 8bit
 
-Please adjust the commit message so that there is a
-Small summary line followed by empty line and finally the detailed
-description
+From: "aehs29@gmail.com" <aehs29@gmail.com>
 
-On Fri, Sep 6, 2019 at 4:19 AM Gianfranco Costamagna <
-costamagna.gianfranco@gmail.com> wrote:
+Remmina has become one of the most widely used RDP clients,
+it uses freeRDP 2.0 as a backend and also supports multiple
+network protocols like RSP, VNC, SPICE, NX, and SSH.
 
-> ---
->  .../grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch    | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git
-> a/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
-> b/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
-> index c6afff2d2..4f9b115ec 100644
-> ---
-> a/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
-> +++
-> b/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
-> @@ -20,7 +20,7 @@ index 561276f0c2..25a74864a1 100644
->   #include <time.h>
->   #include <unistd.h>
->
-> -+#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 29)
-> ++#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 30)
->  +#include <unistd.h>
->  +#else
->   static long gettid(void) { return syscall(__NR_gettid); }
-> @@ -38,7 +38,7 @@ index 08116b3ab5..d3d3025111 100644
->
->  -#ifndef NDEBUG
->  +#if !defined(DEBUG)
-> -+#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 29)
-> ++#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 30)
->  +#include <unistd.h>
->  +#else
->   static long gettid(void) { return syscall(__NR_gettid); }
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Alejandro Enedino Hernandez Samaniego <aehs29@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Rebased
+
+ .../recipes-support/remmina/remmina_1.3.6.bb  | 28 +++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+new file mode 100644
+index 0000000000..a14a2592cd
+--- /dev/null
++++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "A feature rich Remote Desktop Application written in GTK+"
++HOMEPAGE = "https://remmina.org"
++SECTION = "Support"
++LICENSE = "GPLv2 & openssl"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=dab7215512044d49037272ce1ac4ea8f file://LICENSE.OpenSSL;md5=c1eb3cee0a4dea27503c531267a69769"
++DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium libssh vte json-glib libsoup-2.4 libvncserver spice spice-protocol libsecret"
++
++SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
++"
++SRC_URI[md5sum] = "6da599c3a5cab2df37a70f8fba2f5438"
++SRC_URI[sha256sum] = "fbed745438bb0c21467b60cbd67c8148a9289b5ebc7482d06db443bea556af1a"
++
++S = "${WORKDIR}/Remmina-v${PV}"
++
++inherit cmake
++
++EXTRA_OECMAKE += "-DWITH_APPINDICATOR=OFF -DWITH_GETTEXT=OFF -DWITH_TRANSLATIONS=OFF"
++
++do_install_append(){
++    # We dont need the extra stuff form other desktop environments
++    rm -rf ${D}/${datadir}/xsessions
++    rm -rf ${D}/${datadir}/metainfo
++    rm -rf ${D}/${datadir}/gnome-session
++}
++
++RDEPENDS_${PN} = "bash"
++
++FILES_${PN}_append = " ${datadir}/icons/hicolor/*"
+-- 
+2.23.0
+
 
