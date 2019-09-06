@@ -1,53 +1,49 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DF7E7CFEE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
+	[209.85.222.175])
+	by mail.openembedded.org (Postfix) with ESMTP id DA8A17F3EE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Sep 2019 12:37:14 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id u16so6452927wrr.0
+	Fri,  6 Sep 2019 14:11:05 +0000 (UTC)
+Received: by mail-qk1-f175.google.com with SMTP id x5so5727173qkh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Sep 2019 05:37:15 -0700 (PDT)
+	Fri, 06 Sep 2019 07:11:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=RN76lJHyIkiz/toG/kKTpiPcy1V+9uWsT79G/EkMk1Q=;
-	b=TrWNhupDkYf5Axiz5C4ddVfOU4UsamotB01VLA2dnr/4ewy+EwwhfGJARDvqB5J/BH
-	Rq0pVcTy7biOVdOqtzGXBGeVnJW/AH3pInX91ts0FugtNL9i1NjTlBKPlR6yLF9ZYwcY
-	mYh+uHxev3kP/dbHnFssmkKPq5mPDl2wTBKzH/+NvlsqKK1VGR4gW0UYYEiU2M33LLQX
-	Kud2MEykfya+6xeNvYM+TT3heTHxjCkcPDYQ0hDkp7rEEzhSM7FaDEZN8WGDe243qcjU
-	HNEHzLHGax9o/LXZUjDOd6AaFW7rzzmbvUSgr16f/2zt75Kp11Acs7gI222qW8vQP6WH
-	sQIA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=TPKsc1cq21DACoi/AdlHIB4RzLCgZnw8b094ngCfB60=;
+	b=NcxIcawAmOUrs/d566zox75ROpCPwt01Nm3Z5PHiPD4hX6cyeOcceKD2jz8cNujw78
+	bdlTnF1pSPrNBjlVMDMNDLCq5lWoxACJ/CwLpjNkxuha/8DK/+QUcWlknwgesTy45hfF
+	m/WqebZi3vnVNP7pOTAcSNjPBTaA7lJ4PG9pDMaQIJSRi1kOUxt0dfV2RI2dCS/jW9yT
+	ytJ7+zIGuSQ/ZPEMHvivkQh89OGWiWhta7Yrg2yCZqSej7rVoUVjZL9hOd1GsHxSGwfN
+	F+KqAaReK2jecHfTiK1iUh9x0djzSepKZpnAXUPPeOARw1KukcMf/iKbzfkmVIMtCgGh
+	F/Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=RN76lJHyIkiz/toG/kKTpiPcy1V+9uWsT79G/EkMk1Q=;
-	b=D1G1XoCGJi0NybKGQu6WzCEbgAZUtu4wzSG6OXc6Xq13zHDJMpFboWlUZ3SMkmNs7R
-	3Df6Vl+An4rj8M846pot5J9uTDoQ8j1kk6l/LgxJgaNFPaQb6I7c+6cgy+dYBOJqwqzF
-	jIM6by/rpFipYLLxbbyBWdTBV+jUNc6x/T+EVChBTajvmqG3hf32hIEDFlbfQj9ivT0a
-	b4CKsLNt38OFCuNwsMXWuZwnJbFy+ZkW7070y9R0cG9Xcciu3M49v8f8GxEFWOv7m0Nm
-	pDn6/1lMQJJyVrwABgUuy/XGG9RAXg6Wkgf2jEheNZtBUo3k2UGgi707xEkbIXsyklqj
-	/OhQ==
-X-Gm-Message-State: APjAAAXueA7uIVSJbRQ7gmHfUQhYhxUxp1U/sXpr8oxZbn4oCPU4kLVo
-	djt1K5tL807Wr26q6WYGs1j0QPyR
-X-Google-Smtp-Source: APXvYqx8CMhn+3bXI49oHdjWkHs2BAh8Z7Msw7w/TpqaSML22wzjZeNmBPjeDIDBPWJM4Y8fUzRTsg==
-X-Received: by 2002:a5d:43cc:: with SMTP id v12mr7472635wrr.75.1567773434620; 
-	Fri, 06 Sep 2019 05:37:14 -0700 (PDT)
-Received: from Unimatrix05-Bionic.lan
-	([2001:b07:5d32:c012:7c5d:97d6:64f2:9ca6])
-	by smtp.gmail.com with ESMTPSA id k6sm9958213wrg.0.2019.09.06.05.37.13
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 06 Sep 2019 05:37:14 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Sep 2019 14:36:27 +0200
-Message-Id: <20190906123627.17290-2-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190906123627.17290-1-costamagnagianfranco@yahoo.it>
-References: <20190906123627.17290-1-costamagnagianfranco@yahoo.it>
-Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH 2/2] grpc: Change gettid patch with the upstream merged version
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=TPKsc1cq21DACoi/AdlHIB4RzLCgZnw8b094ngCfB60=;
+	b=nstFN6d4V3xg3GwaPLMZ9FvkCR78u88zS118T3wSNhstQSFpla+rQkwTKmT7rc/oYs
+	ZRPTkFV9zgbkU1/K3sn7RscxvoJiVWxO6nRtGcKlRPsN8yx2Wo8t7uk657SDvpHuM1eG
+	0Fu346wibjGAG1PPg75LX8RqFhcolvDixU/RqW1KRCuKBRQaR5kijcrDiK5Tmvwk/dyL
+	PrxRd6qpBcHpwb0aNQC2feckOMw82wT2N2iFzuO1tr1hpQfea6FpL7K+gVIY/bG2Jxfm
+	gCV1vkqFrTOeXkgip/Mg97vaxyxZ9gijhZeHykTni2m2idsV20n2Kq2CVVLGItkHx/Sc
+	KP1Q==
+X-Gm-Message-State: APjAAAXwu6LeKB64Tlex3kw0Swxr13dlAafcAn06DR7idPbKv6XTcKPs
+	fJ+9718CBJGElrV1uBXqhhsHCkS7eY9OaBilKRk=
+X-Google-Smtp-Source: APXvYqyNkf8j+RuisYqeGb15eBI9QJtrf9J8uN4jKheCVL5sZOjltZRBoEsKBbpBugU4JeWPfHWA/TzF8PvibuRMViI=
+X-Received: by 2002:a37:e40b:: with SMTP id y11mr7407329qkf.9.1567779064901;
+	Fri, 06 Sep 2019 07:11:04 -0700 (PDT)
+MIME-Version: 1.0
+References: <1567401728-113652-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<CAMKF1spnx4pPh5ObnVTyahxE6Z8y7GCkv3GC_oCwf-fL_eYu9A@mail.gmail.com>
+	<CA+chaQdGBH3dr-S=T6o5ORbw4oJFsz6xkFJ39Vd10wrNCEb7dA@mail.gmail.com>
+In-Reply-To: <CA+chaQdGBH3dr-S=T6o5ORbw4oJFsz6xkFJ39Vd10wrNCEb7dA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 6 Sep 2019 07:10:53 -0700
+Message-ID: <CAMKF1sqHccaBZpMZNeGnNi+9TY3PZwvFobP-SAvLmpt_VYdfbg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-cmd2: Add python3 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,167 +56,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2019 12:37:14 -0000
+X-List-Received-Date: Fri, 06 Sep 2019 14:11:06 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
----
- ...01-Define-gettid-only-for-glibc-2.30.patch | 128 +++++++++++++-----
- 1 file changed, 95 insertions(+), 33 deletions(-)
+On Fri, Sep 6, 2019 at 2:35 AM Martin Jansa <martin.jansa@gmail.com> wrote:
 
-diff --git a/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch b/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
-index 4f9b115ec..88b0af7f8 100644
---- a/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
-+++ b/meta-networking/recipes-devtools/grpc/grpc/0001-Define-gettid-only-for-glibc-2.30.patch
-@@ -1,53 +1,115 @@
--From c27261a8bc1e45ff7d7a585c79b2b871d47217e4 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 26 Jul 2019 18:56:26 -0700
--Subject: [PATCH] Define gettid() only for glibc < 2.30
-+Upstream-Status: Backport
- 
--glibc 2.30 has added this API, so let us use that when possible
-+From de6255941a5e1c2fb2d50e57f84e38c09f45023d Mon Sep 17 00:00:00 2001
-+From: Juanli Shen <juanlishen@google.com>
-+Date: Fri, 23 Aug 2019 08:46:09 -0700
-+Subject: [PATCH] Fix gettid() naming conflict
- 
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- src/core/lib/gpr/log_linux.cc          | 4 ++++
-- src/core/lib/iomgr/ev_epollex_linux.cc | 7 +++++--
-- 2 files changed, 9 insertions(+), 2 deletions(-)
-+ src/core/lib/gpr/log_linux.cc | 6 ++++--
-+ 1 file changed, 4 insertions(+), 2 deletions(-)
- 
- diff --git a/src/core/lib/gpr/log_linux.cc b/src/core/lib/gpr/log_linux.cc
--index 561276f0c2..25a74864a1 100644
-+index 561276f0c20..81026e5689b 100644
- --- a/src/core/lib/gpr/log_linux.cc
- +++ b/src/core/lib/gpr/log_linux.cc
--@@ -40,7 +40,11 @@
-+@@ -40,7 +40,9 @@
-  #include <time.h>
-  #include <unistd.h>
-  
--+#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 30)
--+#include <unistd.h>
--+#else
-- static long gettid(void) { return syscall(__NR_gettid); }
--+#endif
-+-static long gettid(void) { return syscall(__NR_gettid); }
-++// Not naming it as gettid() to avoid duplicate declarations when complied with
-++// GCC 9.1.
-++static long local_gettid(void) { return syscall(__NR_gettid); }
-  
-  void gpr_log(const char* file, int line, gpr_log_severity severity,
-               const char* format, ...) {
-+@@ -70,7 +72,7 @@ void gpr_default_log(gpr_log_func_args* args) {
-+   gpr_timespec now = gpr_now(GPR_CLOCK_REALTIME);
-+   struct tm tm;
-+   static __thread long tid = 0;
-+-  if (tid == 0) tid = gettid();
-++  if (tid == 0) tid = local_gettid();
-+ 
-+   timer = static_cast<time_t>(now.tv_sec);
-+   final_slash = strrchr(args->file, '/');
-+From 57586a1ca7f17b1916aed3dea4ff8de872dbf853 Mon Sep 17 00:00:00 2001
-+From: Benjamin Peterson <benjamin@dropbox.com>
-+Date: Fri, 3 May 2019 08:11:00 -0700
-+Subject: [PATCH] Rename gettid() functions.
-+
-+glibc 2.30 will declare its own gettid; see https://sourceware.org/git/?p=glibc.git;a=commit;h=1d0fc213824eaa2a8f8c4385daaa698ee8fb7c92. Rename the grpc versions to avoid naming conflicts.
-+---
-+ src/core/lib/gpr/log_linux.cc          | 6 ++----
-+ src/core/lib/gpr/log_posix.cc          | 4 ++--
-+ src/core/lib/iomgr/ev_epollex_linux.cc | 4 ++--
-+ 3 files changed, 6 insertions(+), 8 deletions(-)
-+
-+diff --git a/src/core/lib/gpr/log_linux.cc b/src/core/lib/gpr/log_linux.cc
-+index 81026e5689b..8b597b4cf2f 100644
-+--- a/src/core/lib/gpr/log_linux.cc
-++++ b/src/core/lib/gpr/log_linux.cc
-+@@ -40,9 +40,7 @@
-+ #include <time.h>
-+ #include <unistd.h>
-+ 
-+-// Not naming it as gettid() to avoid duplicate declarations when complied with
-+-// GCC 9.1.
-+-static long local_gettid(void) { return syscall(__NR_gettid); }
-++static long sys_gettid(void) { return syscall(__NR_gettid); }
-+ 
-+ void gpr_log(const char* file, int line, gpr_log_severity severity,
-+              const char* format, ...) {
-+@@ -72,7 +70,7 @@ void gpr_default_log(gpr_log_func_args* args) {
-+   gpr_timespec now = gpr_now(GPR_CLOCK_REALTIME);
-+   struct tm tm;
-+   static __thread long tid = 0;
-+-  if (tid == 0) tid = local_gettid();
-++  if (tid == 0) tid = sys_gettid();
-+ 
-+   timer = static_cast<time_t>(now.tv_sec);
-+   final_slash = strrchr(args->file, '/');
-+diff --git a/src/core/lib/gpr/log_posix.cc b/src/core/lib/gpr/log_posix.cc
-+index b6edc14ab6b..2f7c6ce3760 100644
-+--- a/src/core/lib/gpr/log_posix.cc
-++++ b/src/core/lib/gpr/log_posix.cc
-+@@ -31,7 +31,7 @@
-+ #include <string.h>
-+ #include <time.h>
-+ 
-+-static intptr_t gettid(void) { return (intptr_t)pthread_self(); }
-++static intptr_t sys_gettid(void) { return (intptr_t)pthread_self(); }
-+ 
-+ void gpr_log(const char* file, int line, gpr_log_severity severity,
-+              const char* format, ...) {
-+@@ -86,7 +86,7 @@ void gpr_default_log(gpr_log_func_args* args) {
-+   char* prefix;
-+   gpr_asprintf(&prefix, "%s%s.%09d %7" PRIdPTR " %s:%d]",
-+                gpr_log_severity_string(args->severity), time_buffer,
-+-               (int)(now.tv_nsec), gettid(), display_file, args->line);
-++               (int)(now.tv_nsec), sys_gettid(), display_file, args->line);
-+ 
-+   fprintf(stderr, "%-70s %s\n", prefix, args->message);
-+   gpr_free(prefix);
- diff --git a/src/core/lib/iomgr/ev_epollex_linux.cc b/src/core/lib/iomgr/ev_epollex_linux.cc
--index 08116b3ab5..d3d3025111 100644
-+index c2d80c08ddb..4a83cb6c215 100644
- --- a/src/core/lib/iomgr/ev_epollex_linux.cc
- +++ b/src/core/lib/iomgr/ev_epollex_linux.cc
--@@ -1101,10 +1101,13 @@ static void end_worker(grpc_pollset* pollset, grpc_pollset_worker* worker,
--   gpr_atm_no_barrier_fetch_add(&pollset->worker_count, -1);
-+@@ -1077,7 +1077,7 @@ static void end_worker(grpc_pollset* pollset, grpc_pollset_worker* worker,
-  }
-  
---#ifndef NDEBUG
--+#if !defined(DEBUG)
--+#if defined(__GLIBC__) && (__GLIBC_MINOR__ >= 30)
--+#include <unistd.h>
--+#else
-- static long gettid(void) { return syscall(__NR_gettid); }
-+ #ifndef NDEBUG
-+-static long gettid(void) { return syscall(__NR_gettid); }
-++static long sys_gettid(void) { return syscall(__NR_gettid); }
-  #endif
---
--+#endif
-+ 
-  /* pollset->mu lock must be held by the caller before calling this.
--    The function pollset_work() may temporarily release the lock (pollset->po.mu)
--    during the course of its execution but it will always re-acquire the lock and
---- 
--2.22.0
--
-+@@ -1097,7 +1097,7 @@ static grpc_error* pollset_work(grpc_pollset* pollset,
-+ #define WORKER_PTR (&worker)
-+ #endif
-+ #ifndef NDEBUG
-+-  WORKER_PTR->originator = gettid();
-++  WORKER_PTR->originator = sys_gettid();
-+ #endif
-+   if (GRPC_TRACE_FLAG_ENABLED(grpc_polling_trace)) {
-+     gpr_log(GPR_INFO,
--- 
-2.17.1
+> This seems to be merged before python3-colorama was provided
+>
 
+Yes since the build did not break and it escaped my Eye now I am waiting
+for a fix before I blacklist it
+
+>
+> On Wed, Sep 4, 2019 at 7:11 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+>> 03:10:10 ERROR: Nothing RPROVIDES 'python3-colorama' (but
+>>
+>> /mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/
+>> python3-cmd2_0.9.16.bb
+>> RDEPENDS on or otherwise requires it)
+>> 03:10:10 ERROR: Nothing RPROVIDES 'python3-cmd2-dev' (but
+>>
+>> /mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/
+>> python3-cmd2_0.9.16.bb
+>> RDEPENDS on or otherwise requires it)
+>> 03:10:10 No eligible RPROVIDERs exist for 'python3-cmd2-dev'
+>> 03:10:11 ERROR: Nothing RPROVIDES 'python3-cmd2' (but
+>>
+>> /mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/
+>> python3-cmd2_0.9.16.bb
+>> RDEPENDS on or otherwise requires it)
+>> 03:10:11 No eligible RPROVIDERs exist for 'python3-cmd2'
+>>
+>> On Sun, Sep 1, 2019 at 10:23 PM Zheng Ruoqin
+>> <zhengrq.fnst@cn.fujitsu.com> wrote:
+>> >
+>> > Providing a python3 version of python-cmd2.
+>> >
+>> > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+>> > ---
+>> >  .../recipes-devtools/python/python-cmd2.inc       | 13 +++++++++++++
+>> >  .../recipes-devtools/python/python-cmd2_0.9.16.bb | 15 ++-------------
+>> >  .../python/python3-cmd2_0.9.16.bb                 |  9 +++++++++
+>> >  3 files changed, 24 insertions(+), 13 deletions(-)
+>> >  create mode 100644 meta-python/recipes-devtools/python/python-cmd2.inc
+>> >  create mode 100644 meta-python/recipes-devtools/python/
+>> python3-cmd2_0.9.16.bb
+>> >
+>> > diff --git a/meta-python/recipes-devtools/python/python-cmd2.inc
+>> b/meta-python/recipes-devtools/python/python-cmd2.inc
+>> > new file mode 100644
+>> > index 000000000..1a0be778b
+>> > --- /dev/null
+>> > +++ b/meta-python/recipes-devtools/python/python-cmd2.inc
+>> > @@ -0,0 +1,13 @@
+>> > +SUMMARY = "Extra features for standard library's cmd module"
+>> > +HOMEPAGE = "http://packages.python.org/cmd2/"
+>> > +LICENSE = "MIT"
+>> > +LIC_FILES_CHKSUM =
+>> "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
+>> > +
+>> > +SRC_URI[md5sum] = "df35bb2dca8f5e1f6090e1f0aa02960a"
+>> > +SRC_URI[sha256sum] =
+>> "4b78379d53aff811d1deac720bbe71661769822a5fb2d830cd730656d180fb3d"
+>> > +
+>> > +inherit pypi
+>> > +
+>> > +DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+>> > +
+>> > +BBCLASSEXTEND = "native nativesdk"
+>> > diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
+>> b/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
+>> > index 94db37a2d..17b6ae285 100644
+>> > --- a/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
+>> > +++ b/meta-python/recipes-devtools/python/python-cmd2_0.9.16.bb
+>> > @@ -1,14 +1,5 @@
+>> > -SUMMARY = "Extra features for standard library's cmd module"
+>> > -HOMEPAGE = "http://packages.python.org/cmd2/"
+>> > -LICENSE = "MIT"
+>> > -LIC_FILES_CHKSUM =
+>> "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
+>> > -
+>> > -SRC_URI[md5sum] = "df35bb2dca8f5e1f6090e1f0aa02960a"
+>> > -SRC_URI[sha256sum] =
+>> "4b78379d53aff811d1deac720bbe71661769822a5fb2d830cd730656d180fb3d"
+>> > -
+>> > -inherit pypi setuptools
+>> > -
+>> > -DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+>> > +inherit setuptools
+>> > +require python-cmd2.inc
+>> >
+>> >  RDEPENDS_${PN} += "\
+>> >      ${PYTHON_PN}-doctest \
+>> > @@ -21,5 +12,3 @@ RDEPENDS_${PN} += "\
+>> >      ${PYTHON_PN}-threading \
+>> >      ${PYTHON_PN}-textutils \
+>> >      "
+>> > -
+>> > -BBCLASSEXTEND = "native nativesdk"
+>> > diff --git a/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
+>> b/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
+>> > new file mode 100644
+>> > index 000000000..f5c5c7e1a
+>> > --- /dev/null
+>> > +++ b/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
+>> > @@ -0,0 +1,9 @@
+>> > +inherit setuptools3
+>> > +require python-cmd2.inc
+>> > +
+>> > +RDEPENDS_${PN} += "\
+>> > +    ${PYTHON_PN}-pyperclip \
+>> > +    ${PYTHON_PN}-colorama \
+>> > +    ${PYTHON_PN}-attrs \
+>> > +    ${PYTHON_PN}-wcwidth \
+>> > +    "
+>> > --
+>> > 2.17.1
+>> >
+>> >
+>> >
+>> > --
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
 
