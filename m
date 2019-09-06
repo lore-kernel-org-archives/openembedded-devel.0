@@ -1,27 +1,23 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DF2A7EF4D
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E65EE6B076
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Sep 2019 01:26:48 +0000 (UTC)
+	Fri,  6 Sep 2019 02:19:26 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x861QmYa028514
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 5 Sep 2019 18:26:48 -0700 (PDT)
-Received: from [128.224.162.179] (128.224.162.179) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 5 Sep 2019 18:26:47 -0700
-To: Khem Raj <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-References: <20190829082942.128713-1-kai.kang@windriver.com>
-	<c0d140cb-bdac-7e6f-d118-bd2a370e5d1c@windriver.com>
-	<ccffd278-6ed8-ffb5-3c1d-09b945bfbb60@gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <367832c5-21c4-5366-53e3-c431f4e564f8@windriver.com>
-Date: Fri, 6 Sep 2019 09:25:27 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x862JRo0007813
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 5 Sep 2019 19:19:27 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Thu, 5 Sep 2019 19:19:27 -0700
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 6 Sep 2019 10:19:26 +0800
+Message-ID: <1567736366-145542-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <ccffd278-6ed8-ffb5-3c1d-09b945bfbb60@gmail.com>
-Subject: Re: [meta-oe][Patch] libwacom: add recipe
+Subject: [meta-filesystems][PATCH V2] xfsdump: support usrmerge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,150 +30,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2019 01:26:48 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 06 Sep 2019 02:19:27 -0000
+Content-Type: text/plain
 
-On 2019/9/6 上午9:10, Khem Raj wrote:
-> On 9/4/19 6:51 PM, Kang Kai wrote:
->> On 2019/8/29 下午4:29, kai.kang@windriver.com wrote:
->>> From: Kai Kang <kai.kang@windriver.com>
->>>
->>> Package libinput has a package config 'libwacom'. When it is set,
->>> package libwacom is required. So add the recipe of libwacom.
->>>
->>> Add a patch to generate udev rules file on target that it is not
->>> suitable for cross compile.
->
-> fails to build
->
-> https://errors.yoctoproject.org/Errors/Details/268566/
->
-> https://errors.yoctoproject.org/Errors/Details/268387/
+From: Changqing Li <changqing.li@windriver.com>
 
-Thanks. I'll check them.
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ .../files/0001-xfsdump-support-usrmerge.patch      | 48 ++++++++++++++++++++++
+ .../recipes-utils/xfsdump/xfsdump_3.1.8.bb         |  1 +
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/xfsdump/files/0001-xfsdump-support-usrmerge.patch
 
-Kai
-
-
->
->
->> Ping.
->>
->>
->>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>> ---
->>>    .../generate-udev-rules-on-target.patch       | 59 +++++++++++++++++++
->>>    .../recipes-extended/libwacom/libwacom_1.0.bb | 17 ++++++
->>>    2 files changed, 76 insertions(+)
->>>    create mode 100644
->>> meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
->>>    create mode 100644 meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
->>>
->>> diff --git
->>> a/meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
->>> b/meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
->>>
->>> new file mode 100644
->>> index 000000000..27e037c98
->>> --- /dev/null
->>> +++
->>> b/meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
->>> @@ -0,0 +1,59 @@
->>> +libwacom create a native executable file to generate udev rules
->>> file. But it is
->>> +not suitable for cross compile. And it is complicate to create
->>> libwacom-native
->>> +that libgudev-native and udev-native are required.
->>> +
->>> +So do not generate udev rules file during compilation. Install the
->>> executable
->>> +file to generate udev rules on target. It should put the generated
->>> rules file
->>> +at /lib/udev/rules.d/65-libwacom.rules.
->>> +
->>> +Upstream-Status: Inappropriate [cross-compile specific]
->>> +
->>> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>> +---
->>> +diff --git a/meson.build b/meson.build
->>> +index 6584c86..4009f5f 100644
->>> +--- a/meson.build
->>> ++++ b/meson.build
->>> +@@ -407,20 +407,20 @@ executable('libwacom-list-local-devices',
->>> +        include_directories: [includes_src],
->>> +        install: true)
->>> +
->>> +-tools_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
->>> ++tools_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root()),
->>> '-DLIBWACOM_DATA_DIR="@0@"'.format(dir_data)]
->>> +
->>> +-gen_udev_rules = executable('generate-udev-rules',
->>> ++gen_udev_rules = executable('libwacom-generate-udev-rules',
->>> +                 'tools/generate-udev-rules.c',
->>> +                 dependencies: [dep_libwacom, dep_glib],
->>> +                 include_directories: [includes_src],
->>> +                 c_args: tools_cflags,
->>> +-                install: false)
->>> +-custom_target('udev-rules',
->>> +-          command: gen_udev_rules,
->>> +-          capture: true,
->>> +-          output: '65-libwacom.rules',
->>> +-          install: true,
->>> +-          install_dir: join_paths(dir_udev, 'rules.d'))
->>> ++                install: true)
->>> ++#custom_target('udev-rules',
->>> ++#          command: gen_udev_rules,
->>> ++#          capture: true,
->>> ++#          output: '65-libwacom.rules',
->>> ++#          install: true,
->>> ++#          install_dir: join_paths(dir_udev, 'rules.d'))
->>> +
->>> + executable('list-devices',
->>> +        'tools/list-devices.c',
->>> +diff --git a/tools/generate-udev-rules.c b/tools/generate-udev-rules.c
->>> +index bb00e7b..fbf49f0 100644
->>> +--- a/tools/generate-udev-rules.c
->>> ++++ b/tools/generate-udev-rules.c
->>> +@@ -229,7 +229,7 @@ int main(int argc, char **argv)
->>> +     }
->>> +
->>> +
->>> +-    db = libwacom_database_new_for_path(TOPSRCDIR"/data");
->>> ++    db = libwacom_database_new_for_path(LIBWACOM_DATA_DIR);
->>> +
->>> +     list = libwacom_list_devices_from_database(db, NULL);
->>> +     if (!list) {
->>> diff --git a/meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
->>> b/meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
->>> new file mode 100644
->>> index 000000000..0787ad246
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
->>> @@ -0,0 +1,17 @@
->>> +DESCRIPTION = "libwacom is a library to identify wacom tablets and
->>> their model-specific features."
->>> +HOMEPAGE = "https://github.com/linuxwacom/libwacom/wiki"
->>> +SECTION = "libs"
->>> +
->>> +LICENSE = "MIT"
->>> +LIC_FILES_CHKSUM =
->>> "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
->>> +
->>> +DEPENDS = "libgudev libxml2"
->>> +
->>> +SRC_URI = "git://github.com/linuxwacom/libwacom.git;protocol=https \
->>> +           file://generate-udev-rules-on-target.patch \
->>> +           "
->>> +SRCREV = "ae6c9cf78802844349986ac2a708d87e891a3e6e"
->>> +
->>> +S = "${WORKDIR}/git"
->>> +
->>> +inherit meson pkgconfig
->>
-
+diff --git a/meta-filesystems/recipes-utils/xfsdump/files/0001-xfsdump-support-usrmerge.patch b/meta-filesystems/recipes-utils/xfsdump/files/0001-xfsdump-support-usrmerge.patch
+new file mode 100644
+index 0000000..04ec7b3
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/xfsdump/files/0001-xfsdump-support-usrmerge.patch
+@@ -0,0 +1,48 @@
++From 2da4cfe17b994d7f10017561ca8efe6b6bd5f3cf Mon Sep 17 00:00:00 2001
++From: Changqing Li <changqing.li@windriver.com>
++Date: Thu, 5 Sep 2019 11:17:15 +0800
++Subject: [PATCH] xfsdump: support usrmerge
++
++Upstream-Status: Inappropriate [oe-specific]
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++---
++ dump/Makefile    | 4 +---
++ restore/Makefile | 4 +---
++ 2 files changed, 2 insertions(+), 6 deletions(-)
++
++diff --git a/dump/Makefile b/dump/Makefile
++index 97879fa..14da664 100644
++--- a/dump/Makefile
+++++ b/dump/Makefile
++@@ -97,10 +97,8 @@ default: depend $(LTCOMMAND)
++ include $(BUILDRULES)
++ 
++ install: default
++-	$(INSTALL) -m 755 -d $(PKG_ROOT_SBIN_DIR)
++-	$(LTINSTALL) -m 755 $(LTCOMMAND) $(PKG_ROOT_SBIN_DIR)
++ 	$(INSTALL) -m 755 -d $(PKG_SBIN_DIR)
++-	$(INSTALL) -S $(PKG_ROOT_SBIN_DIR)/$(LTCOMMAND) $(PKG_SBIN_DIR)/$(LTCOMMAND)
+++	$(LTINSTALL) -m 755 $(LTCOMMAND) $(PKG_SBIN_DIR)
++ install-dev:
++ 
++ .dep: $(COMMINCL) $(COMMON) $(INVINCL) $(INVCOMMON)
++diff --git a/restore/Makefile b/restore/Makefile
++index c6f3f25..7835ecc 100644
++--- a/restore/Makefile
+++++ b/restore/Makefile
++@@ -107,10 +107,8 @@ default: depend $(LTCOMMAND)
++ include $(BUILDRULES)
++ 
++ install: default
++-	$(INSTALL) -m 755 -d $(PKG_ROOT_SBIN_DIR)
++-	$(LTINSTALL) -m 755 $(LTCOMMAND) $(PKG_ROOT_SBIN_DIR)
++ 	$(INSTALL) -m 755 -d $(PKG_SBIN_DIR)
++-	$(INSTALL) -S $(PKG_ROOT_SBIN_DIR)/$(LTCOMMAND) $(PKG_SBIN_DIR)/$(LTCOMMAND)
+++	$(LTINSTALL) -m 755 $(LTCOMMAND) $(PKG_SBIN_DIR)
++ install-dev:
++ 
++ .dep: $(COMMINCL) $(COMMON) $(INVINCL) $(INVCOMMON)
++-- 
++2.7.4
++
+diff --git a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.8.bb b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.8.bb
+index 0421aa0..9c57558 100644
+--- a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.8.bb
++++ b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.8.bb
+@@ -13,6 +13,7 @@ DEPENDS = "xfsprogs attr"
+ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsdump/${BP}.tar.xz \
+            file://remove-install-as-user.patch \
+            file://work-with-new-version-of-xfsprogs.patch \
++           ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-xfsdump-support-usrmerge.patch','',d)} \
+            "
+ SRC_URI[md5sum] = "84d3bc287b4a2bb5d16b2320a47049a7"
+ SRC_URI[sha256sum] = "ed14e67ae5b273c2698e767b43a46f033d361e540fe13feaaf9b110ee0edc585"
 -- 
-Kai Kang
+2.7.4
 
 
