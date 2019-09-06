@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FD187EF4D
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id C75977EF4D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Sep 2019 01:10:05 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id 4so2447532pgm.12
+	Fri,  6 Sep 2019 01:11:47 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id s12so3138387pfe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Sep 2019 18:10:06 -0700 (PDT)
+	Thu, 05 Sep 2019 18:11:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:autocrypt:organization:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=LXVBeHlk3F4qWcOQ/Wxw0nEX7CoLQNgEcsFcSyulz8E=;
-	b=PN557XryXLkbtML1jpaWUlVFTYmfPfxtUC4fBx9Q7ZLYt0JUvFlQ0ymTpL0wZzB8Lc
-	XwEYs3WBF0Q8Jcso0KYmG3hPlijf/B7COZ6j1dnUX6vyluLZhIpUcvc2+ghWOo8NwQi8
-	rOPlU7wXs2jtfs1Kwv6+m+X+TT/9bT8En8bsB68bT/vaiH3CBxP8FI0LiE2fReO+3IGK
-	j3Ru0BZaiJmsXNa7WsudgAsRvUET0vbq6Y82O0Cr86ZknGoDs4Vhsy5xle8bRr1a/xqz
-	xZmnJ3eI0bAb1MmRaR1VuE3WkOhEDP6sbvxxDCf7eDMnLB5jlHcT8JcbjPo1tbJdDw+h
-	FIvw==
+	bh=wwfppFPGcgv3GvOmpkLRlEsASSZpfG5aoNOoBEqz7CI=;
+	b=A95DfoJVuEgwQla26J7QyDX9MmFc77sg2w6hLtRZvIqKwyjjGSaUFeCukgPr5GDIS4
+	lpTertxvTrqTEAl4xjqPNUqQPZzfLmBibLR4o57O/GM4zYBSMLrGPvvgOinSCAJUZWMz
+	Q5Q7Ypi/Wc7Urk+sexnmHPTpuFvg8onorw2SBj/boj+viSf3kSCXi2JTeJNvOtRFOQv9
+	0lViQDxRLyTu8g98CNLavxdJfArBkEsk8J0r8vVpCRBekqqB3FffhALJoK13DpIcHNsq
+	bvwbrCD45ld7Cud2VQ5nXXqK2OvOiiOG+ShUT0B7srbw6sAbv/mr0Sp96AWYCmogR1EW
+	7Cbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:autocrypt
 	:organization:message-id:date:user-agent:mime-version:in-reply-to
 	:content-transfer-encoding:content-language;
-	bh=LXVBeHlk3F4qWcOQ/Wxw0nEX7CoLQNgEcsFcSyulz8E=;
-	b=bS+ubRh2jMZpxe/1L1jNXNWvUAfp/RjzY04/7VhMK60ebWJ35mvmZ9UR3rKALrMxhw
-	7aIZI2n07/+WdjG6KGAwa/bA1Lzq37CuBpMqXrxmo7zUWqjDqPTkWaLMRSkI5sill8wL
-	XfKpOCS1H17THPvfDrmcyigOY1b7swqgGqAKVWwN7l0xsGbW/KOUBTGbSbjV4K8bB7t9
-	PeF04eu535BGFJ5m+8s1H9yEsRkDSGtHK85y31HhLl+KGuPxUdY8fFQ+I0a+RS/Cy1l1
-	LgE/TgtfCEegYvA1VHMFYsmii90LfGX81f/Fi+4o40SXWtpgANaJufRZCbXB3LPkJujQ
-	GeBQ==
-X-Gm-Message-State: APjAAAX5QnPR0fZF2HejhBive8J5s4LMTxe+mocIv7rgV+4GKzLFa8nI
-	vSwtxl6VE6S0GV7iRtkEFn4IePwnvpE=
-X-Google-Smtp-Source: APXvYqyruKbsGkSwT+nQa5pYJwa9Q/yBhFaXvS/E4+xyE5yYmhP/fcPLe27OdP/YEC9qPpatZyG98Q==
-X-Received: by 2002:a62:7911:: with SMTP id u17mr7796117pfc.162.1567732205822; 
-	Thu, 05 Sep 2019 18:10:05 -0700 (PDT)
+	bh=wwfppFPGcgv3GvOmpkLRlEsASSZpfG5aoNOoBEqz7CI=;
+	b=eQLY5sKSMiCJ/71zGCJbNbOtlfrn5VY392g3QWH2YZMEHrvLBt4t6m2JyJiMOfh5D7
+	b9WPh/oDVuePrnd64ttMxtCzqsr1XVnEiYiF6PmSoIx1giM8qHPQZDxubmduZo4sDsh9
+	ut6s/AMqoQT/tU2h9DvtA4/Qz75zh0DU3uS5LRC5lxkr91+sXxcZDc3WO2Bm9XlWnXTg
+	PUBk9sjc1kRKpJuHAHjZy/1oN2DyPXOjxwfUpZZcBR9i0zi1S9b/Hj4hv9Uih5sBP+xh
+	az712hI9fkIFNit6y8uNyk/+t3JiMO10oA6lXtQU9jINFTHGGqbkPSQRSb+ScUiowSGM
+	xCbg==
+X-Gm-Message-State: APjAAAWxkFArGqJQsfYIEuKbrheGPFnGxb2Ks9GcS7ZcR3yfsZtT63+/
+	zhpqA7kEdhqsw70GDjAwr2HwMdP5pds=
+X-Google-Smtp-Source: APXvYqx/Udmt8DUnPq8Quv412R3JTCHB1mILreoOgEBQVpraPs3OXNWDJCS6o+5PLrKmtzdMz+6+FA==
+X-Received: by 2002:aa7:9794:: with SMTP id o20mr7665919pfp.8.1567732308205;
+	Thu, 05 Sep 2019 18:11:48 -0700 (PDT)
 Received: from [10.0.0.10] (c-73-71-176-3.hsd1.ca.comcast.net. [73.71.176.3])
 	by smtp.gmail.com with ESMTPSA id
-	y13sm3556822pfn.73.2019.09.05.18.10.04
+	i10sm4055733pfo.102.2019.09.05.18.11.47
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Thu, 05 Sep 2019 18:10:05 -0700 (PDT)
-To: Kang Kai <Kai.Kang@windriver.com>,
+	Thu, 05 Sep 2019 18:11:47 -0700 (PDT)
+To: Alejandro Hernandez <aehs29@gmail.com>,
 	openembedded-devel@lists.openembedded.org
-References: <20190829082942.128713-1-kai.kang@windriver.com>
-	<c0d140cb-bdac-7e6f-d118-bd2a370e5d1c@windriver.com>
+References: <1567637877-16295-1-git-send-email-aehs29@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 Autocrypt: addr=raj.khem@gmail.com; keydata=
 	mQGiBEqXaJERBACUvFofpD3FsxD9675wcPv+rzguIfsRWilrrpSZ61JHjLHwkUnmDLpLSdfv
@@ -78,13 +77,13 @@ Autocrypt: addr=raj.khem@gmail.com; keydata=
 	XlQNlB5grwH9o6uNtPbV7q/uRqmKq5EiiEkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1
 	VACcCkdaO3rb8/gRprldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
 Organization: HIMVIS LLC
-Message-ID: <ccffd278-6ed8-ffb5-3c1d-09b945bfbb60@gmail.com>
-Date: Thu, 5 Sep 2019 18:10:03 -0700
+Message-ID: <242a65b6-dd3e-66a3-e412-351eed4da7b6@gmail.com>
+Date: Thu, 5 Sep 2019 18:11:47 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.0
 MIME-Version: 1.0
-In-Reply-To: <c0d140cb-bdac-7e6f-d118-bd2a370e5d1c@windriver.com>
-Subject: Re: [meta-oe][Patch] libwacom: add recipe
+In-Reply-To: <1567637877-16295-1-git-send-email-aehs29@gmail.com>
+Subject: Re: [meta-oe][PATCH v2] remmina: Add recipe for the remmina remote desktop client
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -97,143 +96,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Sep 2019 01:10:05 -0000
+X-List-Received-Date: Fri, 06 Sep 2019 01:11:47 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
+we might need to add libexecinfo to DEPENDS on musl see
 
-On 9/4/19 6:51 PM, Kang Kai wrote:
-> On 2019/8/29 下午4:29, kai.kang@windriver.com wrote:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> Package libinput has a package config 'libwacom'. When it is set,
->> package libwacom is required. So add the recipe of libwacom.
->>
->> Add a patch to generate udev rules file on target that it is not
->> suitable for cross compile.
+https://errors.yoctoproject.org/Errors/Details/268552/
 
+can you take a look ?
 
-fails to build
-
-https://errors.yoctoproject.org/Errors/Details/268566/
-
-https://errors.yoctoproject.org/Errors/Details/268387/
-
-
+On 9/4/19 3:57 PM, Alejandro Hernandez wrote:
+> Remmina has become one of the most widely used RDP clients,
+> it uses freeRDP 2.0 as a backend and also supports multiple
+> network protocols like RSP, VNC, SPICE, NX, and SSH.
 >
-> Ping.
+> Signed-off-by: Alejandro Enedino Hernandez Samaniego <aehs29@gmail.com>
+> ---
+>  meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 28 ++++++++++++++++++++++++
+>  1 file changed, 28 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/remmina/remmina_1.3.6.bb
 >
->
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   .../generate-udev-rules-on-target.patch       | 59 +++++++++++++++++++
->>   .../recipes-extended/libwacom/libwacom_1.0.bb | 17 ++++++
->>   2 files changed, 76 insertions(+)
->>   create mode 100644
->> meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
->>   create mode 100644 meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
->>
->> diff --git
->> a/meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
->> b/meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
->>
->> new file mode 100644
->> index 000000000..27e037c98
->> --- /dev/null
->> +++
->> b/meta-oe/recipes-extended/libwacom/libwacom/generate-udev-rules-on-target.patch
->> @@ -0,0 +1,59 @@
->> +libwacom create a native executable file to generate udev rules
->> file. But it is
->> +not suitable for cross compile. And it is complicate to create
->> libwacom-native
->> +that libgudev-native and udev-native are required.
->> +
->> +So do not generate udev rules file during compilation. Install the
->> executable
->> +file to generate udev rules on target. It should put the generated
->> rules file
->> +at /lib/udev/rules.d/65-libwacom.rules.
->> +
->> +Upstream-Status: Inappropriate [cross-compile specific]
->> +
->> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> +---
->> +diff --git a/meson.build b/meson.build
->> +index 6584c86..4009f5f 100644
->> +--- a/meson.build
->> ++++ b/meson.build
->> +@@ -407,20 +407,20 @@ executable('libwacom-list-local-devices',
->> +        include_directories: [includes_src],
->> +        install: true)
->> +
->> +-tools_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root())]
->> ++tools_cflags = ['-DTOPSRCDIR="@0@"'.format(meson.source_root()),
->> '-DLIBWACOM_DATA_DIR="@0@"'.format(dir_data)]
->> +
->> +-gen_udev_rules = executable('generate-udev-rules',
->> ++gen_udev_rules = executable('libwacom-generate-udev-rules',
->> +                 'tools/generate-udev-rules.c',
->> +                 dependencies: [dep_libwacom, dep_glib],
->> +                 include_directories: [includes_src],
->> +                 c_args: tools_cflags,
->> +-                install: false)
->> +-custom_target('udev-rules',
->> +-          command: gen_udev_rules,
->> +-          capture: true,
->> +-          output: '65-libwacom.rules',
->> +-          install: true,
->> +-          install_dir: join_paths(dir_udev, 'rules.d'))
->> ++                install: true)
->> ++#custom_target('udev-rules',
->> ++#          command: gen_udev_rules,
->> ++#          capture: true,
->> ++#          output: '65-libwacom.rules',
->> ++#          install: true,
->> ++#          install_dir: join_paths(dir_udev, 'rules.d'))
->> +
->> + executable('list-devices',
->> +        'tools/list-devices.c',
->> +diff --git a/tools/generate-udev-rules.c b/tools/generate-udev-rules.c
->> +index bb00e7b..fbf49f0 100644
->> +--- a/tools/generate-udev-rules.c
->> ++++ b/tools/generate-udev-rules.c
->> +@@ -229,7 +229,7 @@ int main(int argc, char **argv)
->> +     }
->> +
->> +
->> +-    db = libwacom_database_new_for_path(TOPSRCDIR"/data");
->> ++    db = libwacom_database_new_for_path(LIBWACOM_DATA_DIR);
->> +
->> +     list = libwacom_list_devices_from_database(db, NULL);
->> +     if (!list) {
->> diff --git a/meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
->> b/meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
->> new file mode 100644
->> index 000000000..0787ad246
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/libwacom/libwacom_1.0.bb
->> @@ -0,0 +1,17 @@
->> +DESCRIPTION = "libwacom is a library to identify wacom tablets and
->> their model-specific features."
->> +HOMEPAGE = "https://github.com/linuxwacom/libwacom/wiki"
->> +SECTION = "libs"
->> +
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM =
->> "file://COPYING;md5=40a21fffb367c82f39fd91a3b137c36e"
->> +
->> +DEPENDS = "libgudev libxml2"
->> +
->> +SRC_URI = "git://github.com/linuxwacom/libwacom.git;protocol=https \
->> +           file://generate-udev-rules-on-target.patch \
->> +           "
->> +SRCREV = "ae6c9cf78802844349986ac2a708d87e891a3e6e"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +inherit meson pkgconfig
->
->
+> diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+> new file mode 100644
+> index 0000000..a14a259
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+> @@ -0,0 +1,28 @@
+> +DESCRIPTION = "A feature rich Remote Desktop Application written in GTK+"
+> +HOMEPAGE = "https://remmina.org"
+> +SECTION = "Support"
+> +LICENSE = "GPLv2 & openssl"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=dab7215512044d49037272ce1ac4ea8f file://LICENSE.OpenSSL;md5=c1eb3cee0a4dea27503c531267a69769"
+> +DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium libssh vte json-glib libsoup-2.4 libvncserver spice spice-protocol libsecret"
+> +
+> +SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
+> +"
+> +SRC_URI[md5sum] = "6da599c3a5cab2df37a70f8fba2f5438"
+> +SRC_URI[sha256sum] = "fbed745438bb0c21467b60cbd67c8148a9289b5ebc7482d06db443bea556af1a"
+> +
+> +S = "${WORKDIR}/Remmina-v${PV}"
+> +
+> +inherit cmake
+> +
+> +EXTRA_OECMAKE += "-DWITH_APPINDICATOR=OFF -DWITH_GETTEXT=OFF -DWITH_TRANSLATIONS=OFF"
+> +
+> +do_install_append(){
+> +    # We dont need the extra stuff form other desktop environments
+> +    rm -rf ${D}/${datadir}/xsessions
+> +    rm -rf ${D}/${datadir}/metainfo
+> +    rm -rf ${D}/${datadir}/gnome-session
+> +}
+> +
+> +RDEPENDS_${PN} = "bash"
+> +
+> +FILES_${PN}_append = " ${datadir}/icons/hicolor/*"
 
