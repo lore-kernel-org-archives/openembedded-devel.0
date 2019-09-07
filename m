@@ -1,50 +1,51 @@
-Return-Path: <aehs29@gmail.com>
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com
-	[209.85.167.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 167187F4B8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D57B7F4D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Sep 2019 19:20:38 +0000 (UTC)
-Received: by mail-lf1-f54.google.com with SMTP id w6so7606179lfl.2
+	Sat,  7 Sep 2019 19:41:54 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id n4so5426705pgv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Sep 2019 12:20:40 -0700 (PDT)
+	Sat, 07 Sep 2019 12:41:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=WC8U2ut4ECtlwUoe3z4Xmp9/glznEmfb1SPyyL1Ymhg=;
-	b=bOXfxq+0bgODnNkEVgvglAr6DzHQ9iWBvZ6WU+vnK53S/uIX88MoH9bAlxK5dS2Xiy
-	GLiOUfSMAturIqdVyPGtuhCQaPaVEFHoEg9+sDJ3mVVnS2BhJZjftQyYlwQVnEWykZB0
-	YUw1lkB5zF8AhtNp0mfnCcHZgKJVDOg5dBrrOJbwFCzCOy0ubT0wHhzX6S7Stbca2y/x
-	ArikEjoadUN7u8uMIDNGfdGLs0VUaou3naVO6dpCgk7sfPoDCy765tIovhbeB4I+CVJH
-	ezh5lWNucA+OACs6g0EtRUKJFfO2QvE5l04DGXdQJxKex1HH40AwzObrgIpdMXDKmplB
-	PSQQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=/aqJcJcxFWkWucmpUU3pQrVc8dkiwjQlECVV2QS81O4=;
+	b=eWf0MP0FFf/YD8bRdR/Xk+XrFF+8DGTfuOMXdV1AMN1i7xxtwfp0wW2Hze551dr9Zw
+	x0lSggAmJLCFJkBvffeEMephXiYUlSokNLBVg2jwZV5/kuMlvQRQTRDBP41uq4D6za7O
+	oKquuVaSzuKHWsOo6LLt1n5BQznCJ+GbHPmwp7HvCalOPu1VaSL6aYlnacjn5tWRwRvq
+	AFP2UDvBHDLhrQy1hlBbMn1fn4D92qUqJJzIBRPnUyw0MV+DAvEbHeATtHC9oiwERxOX
+	a4uRtVbnJYl3Fz6L5rvolw+ieFCKLCkWdceUjpLIZrARceVUlKuGcpm7rkPYSwU60tYT
+	RSAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=WC8U2ut4ECtlwUoe3z4Xmp9/glznEmfb1SPyyL1Ymhg=;
-	b=Tsmqyas/UghXPqumlXpOI17O8SUcQglo/8I7SEdnyvr9mcv1bUu3pvDadrlDnquMpo
-	x+et9MKFoAu0URJ3brjgjFz8W3HheoAOe62S490yWFo1yHm9J8P6/1xEx5F+//xshCP/
-	v0UICy8BjLsPN0nUsr6BJJvTal8Ilo1kQty3UJ3R8X5LgiQPxJiGDl/6AgJJvNuGGHAN
-	R7O/fOJY/L0RMy+91IVlqMqJ8PWPStNv2KQTC5MbdSsDjP12w/skna2LXPYAplpiKxhO
-	Ucu9nzJgMCzPIVKtaL0EXsXJd0L096smRQC4Tb3NFHcn3XrSl8MCaiQEx9aiA0Ymh7nU
-	0mBA==
-X-Gm-Message-State: APjAAAWxzyVOKBQtwFQLB9oWyWIN5cauYV552rW4if9tLkk5StNcUIVP
-	RxIx182JKl4T7HnL4/jGUVNcOjSB3N+WhU853YA=
-X-Google-Smtp-Source: APXvYqwU5XQZJ+yIEBasJkt9pVUVn8H/XnIkmCZgoXoVT0t7hPGGiTwdklj2SlZP8EeJnt1icHMf0d3HYZAnsUQLU6w=
-X-Received: by 2002:a19:6504:: with SMTP id z4mr10450928lfb.123.1567884039456; 
-	Sat, 07 Sep 2019 12:20:39 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=/aqJcJcxFWkWucmpUU3pQrVc8dkiwjQlECVV2QS81O4=;
+	b=Zqhn4Q9pEfpQSK34JSwisIqNWZzelvoM1wR/wYAT1x6JSzKPFVel3nzfJmPNXCSuKm
+	zObXX0cMyDLWHwvqj0HIXjBLZEUUruznZpBkTrOk63VKMwRjQZ2YzXrW9ZUETaBCgj8c
+	1SIYk8fXwxwTsSYIt5i67Nn52RxPOFt7WHNtR8jbmn0g0hF1+zCFIoLBRySLoErx5hte
+	Zwj2YG2x3u813CfrwNO8DNh9pkLbOQ50npt0gdRQJLw/PK93Oz+uc7TNzw7j4Y3+s6H4
+	DW0hhq0E7vv9eBhz6sLligrG9flcp+M/Bahp+nXjpV1cNfgtzHWj+nrCG/Hl4n0ZNbbP
+	jagQ==
+X-Gm-Message-State: APjAAAWXdEk1zlMuJYBP1Oq+AY6YxxwjAA4ZsnNwqNG63MY+IMqqH5V6
+	zofvDFsvXUsQQqhxe0LitxbWcpZosyY=
+X-Google-Smtp-Source: APXvYqwHxQPhnhZYYnMuxlEtI/NfStzdac90dbPxjGw9jr70ZjvhbiX1wdP3hmj8MeAaTdX4N/hy2A==
+X-Received: by 2002:a17:90a:3acf:: with SMTP id
+	b73mr16005626pjc.88.1567885314727; 
+	Sat, 07 Sep 2019 12:41:54 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3])
+	by smtp.gmail.com with ESMTPSA id j1sm9364631pgl.12.2019.09.07.12.41.54
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 07 Sep 2019 12:41:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  7 Sep 2019 12:41:44 -0700
+Message-Id: <20190907194145.35720-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-References: <20190906163242.4770-1-raj.khem@gmail.com>
-	<20190906163242.4770-2-raj.khem@gmail.com>
-	<CAHMutraN95VB7aMUsTi53sxOQ-hcMrdnw0Ji1uee6RTA=TDFpw@mail.gmail.com>
-	<CAMKF1srrukts0Esh_6QCKZyMo7-_xuKiowD7wMXiN_bVjjHy9w@mail.gmail.com>
-In-Reply-To: <CAMKF1srrukts0Esh_6QCKZyMo7-_xuKiowD7wMXiN_bVjjHy9w@mail.gmail.com>
-From: Alejandro Enedino Hernandez Samaniego <aehs29@gmail.com>
-Date: Sat, 7 Sep 2019 12:20:28 -0700
-Message-ID: <CAHMutrYywjg4hi3Hpsf4gnkmiE4B5s1Kkeuf3nyYUDtsz6tHNQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/3] remmina: Link with libexecinfo explicitly on musl
+Subject: [meta-networking][PATCH V2 1/2] drbd, netkit-rusers: Blacklist packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,70 +58,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Sep 2019 19:20:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 07 Sep 2019 19:41:55 -0000
+Content-Transfer-Encoding: 8bit
 
-On Sat, Sep 7, 2019, 9:25 AM Khem Raj <raj.khem@gmail.com> wrote:
+These fail to build always
 
-> another issue on arm
->
-> ERROR: Nothing PROVIDES 'spice' (but
-> /mnt/b/yoe/sources/meta-openembedded/meta-oe/recipes-support/remmina/
-> remmina_1.3.6.bb
-> DEPENDS on
-> or otherwise requires it)
-> spice was skipped: incompatible with host arm-yoe-linux-gnueabi (not
-> in COMPATIBLE_HOST)
->
-> I think you need to mold arch support for it as per deps
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Also drop from packagegroups
 
-I'll take a look later tonight, thanks.
+ .../packagegroups/packagegroup-meta-networking.bb             | 4 ++--
+ .../recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb        | 1 +
+ meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb         | 2 ++
+ 3 files changed, 5 insertions(+), 2 deletions(-)
 
-Alejandro
+diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+index 29ce51b232..f511d729e3 100644
+--- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
++++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+@@ -78,7 +78,7 @@ RDEPENDS_packagegroup-meta-networking-kernel = "\
+ RDEPENDS_packagegroup-meta-networking-netkit = "\
+     netkit-rwho-client netkit-rwho-server netkit-rsh-client netkit-rsh-server \
+     netkit-telnet netkit-tftp-client netkit-tftp-server \
+-    netkit-ftp netkit-rusers-client netkit-rusers-server netkit-rpc \
++    netkit-ftp netkit-rpc \
+     "
+ 
+ RDEPENDS_packagegroup-meta-networking-protocols = "\
+@@ -95,7 +95,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
+     phytool fwknop htpdate tcpreplay \
+     traceroute geoip-perl geoip geoipupdate esmtp \
+     libtdb netcf dnsmasq curlpp openipmi drbd-utils \
+-    drbd tunctl dovecot ipvsadm stunnel chrony spice-protocol \
++    tunctl dovecot ipvsadm stunnel chrony spice-protocol \
+     usbredir ntop wireshark tnftp lksctp-tools \
+     cim-schema-docs cim-schema-final cim-schema-exper \
+     libmemcached smcroute libtevent ipcalc c-ares uftp \
+diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+index 716794f447..ba1ad3f7f3 100644
+--- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
+@@ -69,3 +69,4 @@ RDEPENDS_${PN}-server += "tcp-wrappers xinetd rpcbind"
+ 
+ # http://errors.yoctoproject.org/Errors/Details/186962/
+ COMPATIBLE_HOST_libc-musl = 'null'
++PNBLACKLIST[netkit-rusers] = "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
+diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+index 6683781af5..23fe2021be 100644
+--- a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
++++ b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
+@@ -21,3 +21,5 @@ EXTRA_OEMAKE += "KDIR='${STAGING_KERNEL_DIR}'"
+ do_install () {
+     oe_runmake install DESTDIR="${D}"
+ }
++
++PNBLACKLIST[drbd] = "Kernel module Needs forward porting to kernel 5.2+"
+-- 
+2.23.0
 
-
-> On Fri, Sep 6, 2019 at 9:35 AM Alejandro Enedino Hernandez Samaniego
-> <aehs29@gmail.com> wrote:
-> >
-> > Hey Khem,
-> >
-> > Thanks for this, I hadn't fixed it because I have no access to my laptop
-> for now, looks good to me though.
-> >
-> > Alejandro
-> >
-> > On Fri, Sep 6, 2019, 9:32 AM Khem Raj <raj.khem@gmail.com> wrote:
-> >>
-> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >> Cc: Alejandro Enedino Hernandez Samaniego <aehs29@gmail.com>
-> >> ---
-> >>  meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 3 +++
-> >>  1 file changed, 3 insertions(+)
-> >>
-> >> diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-> b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-> >> index a14a2592cd..a86deccc8f 100644
-> >> --- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-> >> +++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-> >> @@ -5,6 +5,9 @@ LICENSE = "GPLv2 & openssl"
-> >>  LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=dab7215512044d49037272ce1ac4ea8f
-> file://LICENSE.OpenSSL;md5=c1eb3cee0a4dea27503c531267a69769"
-> >>  DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui
-> libsodium libssh vte json-glib libsoup-2.4 libvncserver spice
-> spice-protocol libsecret"
-> >>
-> >> +DEPENDS_append_libc-musl = "libexecinfo"
-> >> +LDFLAGS_append_libc-musl = " -lexecinfo"
-> >> +
-> >>  SRC_URI = "
-> https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2
-> \
-> >>  "
-> >>  SRC_URI[md5sum] = "6da599c3a5cab2df37a70f8fba2f5438"
-> >> --
-> >> 2.23.0
-> >>
->
 
