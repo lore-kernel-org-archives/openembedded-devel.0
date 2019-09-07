@@ -1,48 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 946C87F477
+Return-Path: <scottellis.developer@gmail.com>
+Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com
+	[209.85.219.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C5B47F31E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Sep 2019 14:36:16 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id d26so8661596qkk.2
+	Sat,  7 Sep 2019 15:42:33 +0000 (UTC)
+Received: by mail-yb1-f180.google.com with SMTP id 1so3284053ybj.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Sep 2019 07:36:17 -0700 (PDT)
+	Sat, 07 Sep 2019 08:42:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Ed+gMjomjGwM/SLzFaTXXEH1n/GRL80a6NoLK0qdu7g=;
-	b=evYwwMTKLKgjWJQSVis7owofn2x7t16JPbpKUAUzzgo37zcEKvMws0/ZcVOUM10eZT
-	d+QeNV2pv61HpHLjucB21mnP5jG+25REwtUJQi7RT5cPd41dx1M9dBR7Maefe1mOQwmq
-	1N9tULia3F24Nh1/FE2LFFD1qHZ2X7BBfauDIUrH2USsgaJ97K/M2qRMkHk0ukr9fu2w
-	KSTT1YBu5i0bovS+ho4BXIfPL7jr1Q9hF+YgKPMgtOtECi1efTWaAw9gRjcTRkXzcp/b
-	DvBq/T1/IEgRePtyUPoieF/tNKgkuyH4HoSUskx3F5hCoaMQne46DsFkjUNI0evU3Mag
-	XhkA==
+	h=from:to:cc:subject:date:message-id;
+	bh=E21XcukvKtpzFvFojps3G3ke8EfopP5ZdWcHRH6tk6M=;
+	b=jtnwbVS2DZRAVaJEg5emfb3WbLqftZbZUL5WlH93mrkgJVIok503Z47zJCx9BftRv+
+	L7AytQsL/eGs2cJA7h6qySY4/mrOK1U9h6gn1jRhmbFyFuI2WPAxyuUvKXJFQal1Blol
+	U8s202+GNUuaI+9SQmtIRPXfDtaE0jttpPDmw1u8t/CgvpE1JFV34WPvT5SgwlYwDoWX
+	3xHI/t29c1I4wh9/Zc6MfqPXdxOUQsFoOBPf/U34pEOoV9SKbBGa+wEpy8Ayub+pNphX
+	wIw+alRHPfKm8M53Q7wUwIwnGF5epWIve/+7eolDXeSD/OOs6I5KHf8DL0fKKflWCeWe
+	y5oA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Ed+gMjomjGwM/SLzFaTXXEH1n/GRL80a6NoLK0qdu7g=;
-	b=pZGsaCYJ6ztdiSYgfTjxWg0SDzNGR6+3slmH1JHRbTPCl2QdulquY+gbm3LpTRmsJS
-	BwOIiwGajSvV9XDu07cq2EIl0MRkcON4oLj7TYf7HEwo31PLx+wv4wP3Oe7FHI2fXyTf
-	xjVSsKzQO0ehRanIoVCLiChNs5+rMPSo0WeG6Q5k0NEzo3nr72l+3B03N+zP3odQcd4K
-	97+usXwfqiCUfFJUrht8ZU69kvfZYc4Pxa6Z/7YutPkgK31bs4MbNxMJfK/FUhb/uK8z
-	ok+3LibfnGK+FF2k0N58VY9TS1fUh5u52IRawZnu7acK+L9wGgt95O6+tsFmmtamvliy
-	ZXwg==
-X-Gm-Message-State: APjAAAXAif0DvE3d8XQa34HgpkSdzd/RvSHzaHHKrFo4np85n5+UGq2z
-	12FS/jjz1y4XueO3/+HXxm53BK5nKqYfUXpICZA=
-X-Google-Smtp-Source: APXvYqxwa2MX+M4LU/wHmzg4a7Psz8rRyLioha95KfRAKqSwcLQw32/xHcrOq0s/crGDIqZeUYOhd/ecjc2n129CE0o=
-X-Received: by 2002:ae9:edd8:: with SMTP id c207mr8109997qkg.337.1567866977011;
-	Sat, 07 Sep 2019 07:36:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190906212513.16415-1-raj.khem@gmail.com>
-	<c74a44cc-b085-e526-eabb-bb56441a5362@gmail.com>
-	<20190907102106.GA26201@localhost>
-In-Reply-To: <20190907102106.GA26201@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 7 Sep 2019 07:36:04 -0700
-Message-ID: <CAMKF1soYXXaF6GacgUJn0HQyYDgiY_QShxbN3RB6z0OWS2xgTg@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ltrace: Fix build on mips
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=E21XcukvKtpzFvFojps3G3ke8EfopP5ZdWcHRH6tk6M=;
+	b=W+suNxYoKktBFf+pGjAvtmXyTiVnnPnNOMSM9skgUtwSkNmPsSZM8J1m/CeR2nBxq5
+	+383FbTZovg0UjnMSemU4KQTcZPARjymV6gC4rEmhH9OfIQIrXpIoi1h1IlEjUphR/70
+	HqlomMXaXzR8m+D7vYFhVVn0kycUQV0wLX2lnGeogakq1lkNdb40Y65qzujo4p5FxTT0
+	p6x2JvQBN7xk3gBCgkSZGEy/VXoI+XTR9YxNS130f5F7Lk17j8iSlvODRx32+tyvNqwv
+	k0W9xIP3ezF/myCsBy4FYYK6s82i6shV/qDpp5UhWrARIPrdfU4QC6kuF3R/k8/ME06R
+	XdSA==
+X-Gm-Message-State: APjAAAUA+NNWhE/oKjBImWp06bj3i4NYIqS0nAv7RBQqTzbeOXIHXC2t
+	j5IJXC/v3PS/97FDjtgziYPAi/iH
+X-Google-Smtp-Source: APXvYqxrSuiWcAWn7x8uq8k22UGXjwLi+GoaETWcHAOGNXzH4nbQ11KrQY+qdqiUUgneO5E5MKK8cg==
+X-Received: by 2002:a25:3346:: with SMTP id z67mr5745803ybz.157.1567870954912; 
+	Sat, 07 Sep 2019 08:42:34 -0700 (PDT)
+Received: from fractal.jumpnow (c-73-234-253-132.hsd1.me.comcast.net.
+	[73.234.253.132]) by smtp.gmail.com with ESMTPSA id
+	h136sm1893628ywc.83.2019.09.07.08.42.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 07 Sep 2019 08:42:34 -0700 (PDT)
+From: Scott Ellis <scottellis.developer@gmail.com>
+X-Google-Original-From: Scott Ellis <scott@jumpnowtek.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  7 Sep 2019 11:42:30 -0400
+Message-Id: <1567870950-18976-1-git-send-email-scott@jumpnowtek.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] wireguard: Upgrade 20190702 to 20190905
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,26 +55,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Sep 2019 14:36:16 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 07 Sep 2019 15:42:34 -0000
 
-On Sat, Sep 7, 2019 at 3:21 AM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Fri, Sep 06, 2019 at 05:12:24PM -0700, akuster808 wrote:
-> > On 9/6/19 2:25 PM, Khem Raj wrote:
-> > > Newer kernel UAPI headers for mips have moved these needed defines
-> > > around
-> > >
-> > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >
-> > warrior too?
-> >...
->
-> No, this is not a problem with the UAPI headers in warrior.
+Signed-off-by: Scott Ellis <scott@jumpnowtek.com>
+---
+ ...eguard-module_0.0.20190702.bb => wireguard-module_0.0.20190905.bb} | 0
+ ...ireguard-tools_0.0.20190702.bb => wireguard-tools_0.0.20190905.bb} | 0
+ meta-networking/recipes-kernel/wireguard/wireguard.inc                | 4 ++--
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-module_0.0.20190702.bb => wireguard-module_0.0.20190905.bb} (100%)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_0.0.20190702.bb => wireguard-tools_0.0.20190905.bb} (100%)
 
-anything that's using kernel 5.0+ UAPI headers has this problem and
-warrior is using 5.0
-for linux-libc headers. see [1]
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190702.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190905.bb
+similarity index 100%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190702.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190905.bb
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190702.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190905.bb
+similarity index 100%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190702.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190905.bb
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+index 12dd9c8..4848740 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard.inc
++++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
+-SRC_URI[md5sum] = "7410a52bacc5eb85e1634a20c07d3bed"
+-SRC_URI[sha256sum] = "1a1311bc71abd47a72c47d918be3bacc486b3de90734661858af75cc990dbaac"
++SRC_URI[md5sum] = "97a8f781cb683f3a23ffa2f0cdb008cc"
++SRC_URI[sha256sum] = "78767ceeb5286beaa851145f072d920a340a9f1b771a2943b8efd638cee1a8f6"
+ 
+ S = "${WORKDIR}/WireGuard-${PV}/src/"
+-- 
+2.7.4
 
-[1] https://github.com/torvalds/linux/commit/9bcbf97c62931f27ab2c52f0848dec0cd48aee78
 
