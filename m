@@ -1,48 +1,48 @@
-Return-Path: <scottellis.developer@gmail.com>
-Received: from mail-yb1-f180.google.com (mail-yb1-f180.google.com
-	[209.85.219.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C5B47F31E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 15AF47ECAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Sep 2019 15:42:33 +0000 (UTC)
-Received: by mail-yb1-f180.google.com with SMTP id 1so3284053ybj.8
+	Sat,  7 Sep 2019 16:25:32 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id z67so8699634qkb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Sep 2019 08:42:35 -0700 (PDT)
+	Sat, 07 Sep 2019 09:25:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=E21XcukvKtpzFvFojps3G3ke8EfopP5ZdWcHRH6tk6M=;
-	b=jtnwbVS2DZRAVaJEg5emfb3WbLqftZbZUL5WlH93mrkgJVIok503Z47zJCx9BftRv+
-	L7AytQsL/eGs2cJA7h6qySY4/mrOK1U9h6gn1jRhmbFyFuI2WPAxyuUvKXJFQal1Blol
-	U8s202+GNUuaI+9SQmtIRPXfDtaE0jttpPDmw1u8t/CgvpE1JFV34WPvT5SgwlYwDoWX
-	3xHI/t29c1I4wh9/Zc6MfqPXdxOUQsFoOBPf/U34pEOoV9SKbBGa+wEpy8Ayub+pNphX
-	wIw+alRHPfKm8M53Q7wUwIwnGF5epWIve/+7eolDXeSD/OOs6I5KHf8DL0fKKflWCeWe
-	y5oA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=d6nsGlgaP8M87lEV7zH3L+0n3bvB1UhurYlbzh62uCI=;
+	b=uGEDiaEvyZEMmEmP/L92NL56wwuYChfeO08i42tkJuopYvE/AYUgP5+bqc/zETIM5y
+	lf9ygp5DnanJQ/94bAG6dQkwPUTs85q6gRE3tg05ZfCmXFAKZdwSs388pRi3nCpnEY+G
+	g/3RkeXI2q+2nUNI31GUhxl+W7y8kyjvY4gs85RUSLpHDZxpWtbpxRe+Gk+kM+VI/RCs
+	dYRpwFdfmm8FmEKqzGtCQ49WdTIi1Svn4sQxyzKcwqRRccAKX7YihQOdzGNUNVbv4+VF
+	NP7EVoXC/ZAw1Z7k08LX0VnhmcyVQ0RaKkJalgNytiTdnR1Jca766awlYisw9va9xS9O
+	g8CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=E21XcukvKtpzFvFojps3G3ke8EfopP5ZdWcHRH6tk6M=;
-	b=W+suNxYoKktBFf+pGjAvtmXyTiVnnPnNOMSM9skgUtwSkNmPsSZM8J1m/CeR2nBxq5
-	+383FbTZovg0UjnMSemU4KQTcZPARjymV6gC4rEmhH9OfIQIrXpIoi1h1IlEjUphR/70
-	HqlomMXaXzR8m+D7vYFhVVn0kycUQV0wLX2lnGeogakq1lkNdb40Y65qzujo4p5FxTT0
-	p6x2JvQBN7xk3gBCgkSZGEy/VXoI+XTR9YxNS130f5F7Lk17j8iSlvODRx32+tyvNqwv
-	k0W9xIP3ezF/myCsBy4FYYK6s82i6shV/qDpp5UhWrARIPrdfU4QC6kuF3R/k8/ME06R
-	XdSA==
-X-Gm-Message-State: APjAAAUA+NNWhE/oKjBImWp06bj3i4NYIqS0nAv7RBQqTzbeOXIHXC2t
-	j5IJXC/v3PS/97FDjtgziYPAi/iH
-X-Google-Smtp-Source: APXvYqxrSuiWcAWn7x8uq8k22UGXjwLi+GoaETWcHAOGNXzH4nbQ11KrQY+qdqiUUgneO5E5MKK8cg==
-X-Received: by 2002:a25:3346:: with SMTP id z67mr5745803ybz.157.1567870954912; 
-	Sat, 07 Sep 2019 08:42:34 -0700 (PDT)
-Received: from fractal.jumpnow (c-73-234-253-132.hsd1.me.comcast.net.
-	[73.234.253.132]) by smtp.gmail.com with ESMTPSA id
-	h136sm1893628ywc.83.2019.09.07.08.42.34
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 07 Sep 2019 08:42:34 -0700 (PDT)
-From: Scott Ellis <scottellis.developer@gmail.com>
-X-Google-Original-From: Scott Ellis <scott@jumpnowtek.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Sep 2019 11:42:30 -0400
-Message-Id: <1567870950-18976-1-git-send-email-scott@jumpnowtek.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] wireguard: Upgrade 20190702 to 20190905
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=d6nsGlgaP8M87lEV7zH3L+0n3bvB1UhurYlbzh62uCI=;
+	b=BfAkrCT5iBPLS5oxr2pwGes7XRcLlhgE8BQJUK2rkQfZ/zun3UQsBeOKdSZMd9y8Tl
+	Vleg+9eY4+8Jk9W7eF4zqz9DaMZCw0j4ntrV9ny7bwK7t/b0L9TDzwc8+UPIQcFbNwxD
+	WvRaglQt21D6dwxuhXeUTNqBO5HHtD/zT8z3lxEYqZco0ewrR07fH1CoH61Ax5mGUo3z
+	H7HDOxgvkYTOEljYskhihESMAEvS1onIBkyus0B/txV5WKEdNBLS8w9D/qCW2gRFGG1P
+	6u5pUlSNkWR2ZqxhWKfI16HgUbvhlpHLAExGcXjKI5nrgBO5Q1FWqcJsWiFKrYDhbbEY
+	ZAZA==
+X-Gm-Message-State: APjAAAUq4Di36w1ULD/Vd4BIMDk2HaaZh0Kt27kZ1Hc3bbJGZYMtS5NF
+	HLZrf60PXgPz5lEYWTJVBb+RRZ2kJa1SyawVOj8=
+X-Google-Smtp-Source: APXvYqxOtXB2yNf0vXuLYcWuBx5k7RQ0Ap6OF2y97zma8ysMjYiirStsu9WxKT0lUa1ar30598QuFwWk09146/NOOkI=
+X-Received: by 2002:a37:c403:: with SMTP id d3mr14853372qki.212.1567873533588; 
+	Sat, 07 Sep 2019 09:25:33 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190906163242.4770-1-raj.khem@gmail.com>
+	<20190906163242.4770-2-raj.khem@gmail.com>
+	<CAHMutraN95VB7aMUsTi53sxOQ-hcMrdnw0Ji1uee6RTA=TDFpw@mail.gmail.com>
+In-Reply-To: <CAHMutraN95VB7aMUsTi53sxOQ-hcMrdnw0Ji1uee6RTA=TDFpw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 7 Sep 2019 09:25:21 -0700
+Message-ID: <CAMKF1srrukts0Esh_6QCKZyMo7-_xuKiowD7wMXiN_bVjjHy9w@mail.gmail.com>
+To: Alejandro Enedino Hernandez Samaniego <aehs29@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/3] remmina: Link with libexecinfo explicitly on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,40 +55,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Sep 2019 15:42:34 -0000
+X-List-Received-Date: Sat, 07 Sep 2019 16:25:33 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Scott Ellis <scott@jumpnowtek.com>
----
- ...eguard-module_0.0.20190702.bb => wireguard-module_0.0.20190905.bb} | 0
- ...ireguard-tools_0.0.20190702.bb => wireguard-tools_0.0.20190905.bb} | 0
- meta-networking/recipes-kernel/wireguard/wireguard.inc                | 4 ++--
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-kernel/wireguard/{wireguard-module_0.0.20190702.bb => wireguard-module_0.0.20190905.bb} (100%)
- rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_0.0.20190702.bb => wireguard-tools_0.0.20190905.bb} (100%)
+another issue on arm
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190702.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190905.bb
-similarity index 100%
-rename from meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190702.bb
-rename to meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20190905.bb
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190702.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190905.bb
-similarity index 100%
-rename from meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190702.bb
-rename to meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20190905.bb
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
-index 12dd9c8..4848740 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard.inc
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
-@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
- SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
--SRC_URI[md5sum] = "7410a52bacc5eb85e1634a20c07d3bed"
--SRC_URI[sha256sum] = "1a1311bc71abd47a72c47d918be3bacc486b3de90734661858af75cc990dbaac"
-+SRC_URI[md5sum] = "97a8f781cb683f3a23ffa2f0cdb008cc"
-+SRC_URI[sha256sum] = "78767ceeb5286beaa851145f072d920a340a9f1b771a2943b8efd638cee1a8f6"
- 
- S = "${WORKDIR}/WireGuard-${PV}/src/"
--- 
-2.7.4
+ERROR: Nothing PROVIDES 'spice' (but
+/mnt/b/yoe/sources/meta-openembedded/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+DEPENDS on
+or otherwise requires it)
+spice was skipped: incompatible with host arm-yoe-linux-gnueabi (not
+in COMPATIBLE_HOST)
 
+I think you need to mold arch support for it as per deps
+
+On Fri, Sep 6, 2019 at 9:35 AM Alejandro Enedino Hernandez Samaniego
+<aehs29@gmail.com> wrote:
+>
+> Hey Khem,
+>
+> Thanks for this, I hadn't fixed it because I have no access to my laptop for now, looks good to me though.
+>
+> Alejandro
+>
+> On Fri, Sep 6, 2019, 9:32 AM Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> Cc: Alejandro Enedino Hernandez Samaniego <aehs29@gmail.com>
+>> ---
+>>  meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 3 +++
+>>  1 file changed, 3 insertions(+)
+>>
+>> diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+>> index a14a2592cd..a86deccc8f 100644
+>> --- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+>> +++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+>> @@ -5,6 +5,9 @@ LICENSE = "GPLv2 & openssl"
+>>  LIC_FILES_CHKSUM = "file://LICENSE;md5=dab7215512044d49037272ce1ac4ea8f file://LICENSE.OpenSSL;md5=c1eb3cee0a4dea27503c531267a69769"
+>>  DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium libssh vte json-glib libsoup-2.4 libvncserver spice spice-protocol libsecret"
+>>
+>> +DEPENDS_append_libc-musl = "libexecinfo"
+>> +LDFLAGS_append_libc-musl = " -lexecinfo"
+>> +
+>>  SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
+>>  "
+>>  SRC_URI[md5sum] = "6da599c3a5cab2df37a70f8fba2f5438"
+>> --
+>> 2.23.0
+>>
 
