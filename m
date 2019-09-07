@@ -1,50 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 403FA7D2E6
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id E4D9C7D2E6
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat,  7 Sep 2019 18:28:46 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id y22so6648742pfr.3
+Received: by mail-pf1-f177.google.com with SMTP id q10so6648487pfl.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Sep 2019 11:28:47 -0700 (PDT)
+	Sat, 07 Sep 2019 11:28:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=D9pEKYtOQbHSqNa92Sc+yNTyxeyY+woheNhUNnIW57g=;
-	b=AEr6gqU0SKbcJh/cbJWQbeJ9y0F1+anbbS+EhdOHxTjTJWlOHKvcRoARqDLTLSocn0
-	1niGXhW+IMheouvkGF+vo2J042EvotynDkSfAtp29lyKuSvCzzr1enkrW+HqicoDiGhR
-	+EmhwbUlmOjjNEP77Bi3O0CZXx4mq6SkJswIs1D8YveXSocm33hzpvWaa2VrROG3Ys/8
-	fIBM0hBe3c8/MXoK5hKYTPNEwux0m5lJouEaMOZA4zWSPv+d87yZHi2qtE56IlWOMh9f
-	5WbeGmgoUMjxiwE/BJvgzh7yDj6C1oLEUac3XZ9CpcuLMDQNbchn1W8i65P43gmz50Qv
-	7CRw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=fQ3S1H4reySvoGpgtCiX9/AnOPR/SRMWhrgkpJVoH5s=;
+	b=YJGiJVMI9+R5CXKIJyVtrftvLO4Ay//hlXaWuAFtmKP0F7ST3IEvsIk/XJaSU/WRJT
+	yiSpdGs/BBephwaYcW8yUp7jBDhycTlJ8OzksMKYq3acX0sogt4a/2mSlETedrnCmvuz
+	0im+EK4AksAbZnF0Bj8GTLpsRs6BrAJHaUxfcX2YBF6Uk8h+Vk8flUhOGHM6zJl6ca/Y
+	3aW8tDPqnxiNxghTwXbL5zXlUppNQfvOSfz3x0HR3evO+LxYW1dpMQTEqXMawo4+XhGi
+	3FOUKvYx1xMUCH95W6CeMOYQDzUnTcVGfbmK1GyYO7lkk4xYnSHgdZuhRSzM3T2x6dqD
+	EELQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=D9pEKYtOQbHSqNa92Sc+yNTyxeyY+woheNhUNnIW57g=;
-	b=VclrVPOFHFQAc64OKnKBnNmXZ1PLLRhKpZOE7IDqM3VCKSnaPWJmAj0/3SavrmncXZ
-	jx3JQW5Jh1IGY9SryZjSMFF4KZNne78YLzcBzhqVcFC1eqXqtoDjr+W3FagWcq9qepa8
-	kjsf2Li5ZnTlwd0WnbewhnBFQZ2MaX0MoKeHdhOCYx+gON2cmWzn9biKctis53MoGzhs
-	Vc38sHJITCAI0NYkC4kmTRND8YIXHeuDmh2ti2neWaALxReHMU3wY49LTj5sFYadJ2gg
-	1E7dSNI3PVDFHKX33dy9kuUq2Xp7tG9f1OIzaUEmo9D27HDI/igiDUbelGFpUc1vzIEx
-	xceA==
-X-Gm-Message-State: APjAAAUDHLtgFbqKseyP7e6O8Q1s98Mmm6wsjbZwv7bQCMFemogSa/uz
-	tNzQfQXC3aOXFrzLoRdsZn9XnRvBlqg=
-X-Google-Smtp-Source: APXvYqxMdJuo0UEoW/DwpkCjyYUDQvUDI8S2zCCnxr4U7kGg/OkUqtvonFfzuIAfqGNq0xsgXyDhoA==
-X-Received: by 2002:a63:2004:: with SMTP id g4mr13090799pgg.97.1567880926660; 
-	Sat, 07 Sep 2019 11:28:46 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=fQ3S1H4reySvoGpgtCiX9/AnOPR/SRMWhrgkpJVoH5s=;
+	b=DuTFuPgjeLqpNIKmWNldAGbItXQ2MAWLo2N4NN9DvtC5kURh+esEji4VjeJQmhALPe
+	/4OvjFRMl71ZTksmvwPglY20t4A0gBKrQSjwGWng4ybZ7JqLl9j5LpZf2v8n8CWGDeH/
+	4HHBrMzJNG3SrZpoc+12C7XhvQCljD4Id75Qw1t+yKToTFRD67XksAoqei6/UVvm9Nd0
+	16xG8V1XVnVE2Sct7A56zouPf7ASMyG9vgXRkTzcPM6uM3nJkoa1i5Tap7zI8PEdQU2y
+	+eTi3zszlGkXd9gbcc8O5b7zaBjCeCaJAtAoXln5IGmPDiE/6+Adf0lslK+43jSqxfVQ
+	K9bQ==
+X-Gm-Message-State: APjAAAWbvVJThMFEMQiHcWM37ALjBStU6DwQzQTVpAruyfS7T9aVWWYp
+	Eb53iFX/W2tMFmkqFjqdsTTaKmO5W50=
+X-Google-Smtp-Source: APXvYqwG5fQbnFmc2kQ4u3UJngd0tx26snsmWLyvv+NGMfZ5J/muYNVaq3mAfY2yp+IOF+/eb3ZU5Q==
+X-Received: by 2002:a63:f118:: with SMTP id f24mr14019468pgi.322.1567880927463;
+	Sat, 07 Sep 2019 11:28:47 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	w21sm8920672pjh.19.2019.09.07.11.28.45
+	w21sm8920672pjh.19.2019.09.07.11.28.46
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 07 Sep 2019 11:28:45 -0700 (PDT)
+	Sat, 07 Sep 2019 11:28:47 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Sep 2019 11:28:36 -0700
-Message-Id: <20190907182837.6419-1-raj.khem@gmail.com>
+Date: Sat,  7 Sep 2019 11:28:37 -0700
+Message-Id: <20190907182837.6419-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20190907182837.6419-1-raj.khem@gmail.com>
+References: <20190907182837.6419-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/2] drbd, netkit-rusers: Blacklist packages
+Subject: [meta-oe][PATCH 2/2] can-isotp,bpftool: Add to Blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,36 +59,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Sep 2019 18:28:46 -0000
+X-List-Received-Date: Sat, 07 Sep 2019 18:28:47 -0000
 Content-Transfer-Encoding: 8bit
 
-These fail to build always
+They need forward porting to kernel 5.2+
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb          | 1 +
- meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb           | 2 ++
+ meta-oe/recipes-extended/socketcan/can-isotp_git.bb | 2 ++
+ meta-oe/recipes-kernel/bpftool/bpftool.bb           | 1 +
  2 files changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-index 716794f447..ba1ad3f7f3 100644
---- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-@@ -69,3 +69,4 @@ RDEPENDS_${PN}-server += "tcp-wrappers xinetd rpcbind"
+diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+index 5df44f21f4..e40e1cd263 100644
+--- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+@@ -10,3 +10,5 @@ S = "${WORKDIR}/git"
+ inherit module
  
- # http://errors.yoctoproject.org/Errors/Details/186962/
- COMPATIBLE_HOST_libc-musl = 'null'
-+PNBLACKLIST[netkit-rusers] = "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
-diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
-index 6683781af5..23fe2021be 100644
---- a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
-+++ b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
-@@ -21,3 +21,5 @@ EXTRA_OEMAKE += "KDIR='${STAGING_KERNEL_DIR}'"
- do_install () {
-     oe_runmake install DESTDIR="${D}"
- }
+ EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
 +
-+PNBLACKLIST[drbd] = "Kernel module Needs forward porting to kernel 5.2+"
++PNBLACKLIST[can-isotp] = "Kernel module Needs forward porting to kernel 5.2+"
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+index e58bdd4933..6683eccf2d 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+@@ -32,3 +32,4 @@ python do_package_prepend() {
+ }
+ 
+ B = "${WORKDIR}/${BPN}-${PV}"
++PNBLACKLIST[bpftool] = "Needs forward porting to kernel 5.2+"
 -- 
 2.23.0
 
