@@ -1,52 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
-	[209.85.210.177])
-	by mail.openembedded.org (Postfix) with ESMTP id E4D9C7D2E6
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+	[209.85.210.173])
+	by mail.openembedded.org (Postfix) with ESMTP id EC03D7F4A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Sep 2019 18:28:46 +0000 (UTC)
-Received: by mail-pf1-f177.google.com with SMTP id q10so6648487pfl.0
+	Sat,  7 Sep 2019 18:44:09 +0000 (UTC)
+Received: by mail-pf1-f173.google.com with SMTP id x127so6639036pfb.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Sep 2019 11:28:48 -0700 (PDT)
+	Sat, 07 Sep 2019 11:44:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=fQ3S1H4reySvoGpgtCiX9/AnOPR/SRMWhrgkpJVoH5s=;
-	b=YJGiJVMI9+R5CXKIJyVtrftvLO4Ay//hlXaWuAFtmKP0F7ST3IEvsIk/XJaSU/WRJT
-	yiSpdGs/BBephwaYcW8yUp7jBDhycTlJ8OzksMKYq3acX0sogt4a/2mSlETedrnCmvuz
-	0im+EK4AksAbZnF0Bj8GTLpsRs6BrAJHaUxfcX2YBF6Uk8h+Vk8flUhOGHM6zJl6ca/Y
-	3aW8tDPqnxiNxghTwXbL5zXlUppNQfvOSfz3x0HR3evO+LxYW1dpMQTEqXMawo4+XhGi
-	3FOUKvYx1xMUCH95W6CeMOYQDzUnTcVGfbmK1GyYO7lkk4xYnSHgdZuhRSzM3T2x6dqD
-	EELQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=kS7sqo+83COCO6eBlIuSFZ6HYVJOodz7puVmLrnjbJA=;
+	b=HKgUy2l8ps3VVtL5gdj8wzKlGYXHiDpwPFUIn+yaOY5uGCXgiqJTqj3RBDJiD+Wau1
+	EVk6hwWeAQkqrbrK8wod4w1nXvNpiCemFMDaLQ1F7M1UoxNhlzBoyzYJom+429NZBsqw
+	CcdWVFlp0PJXHgNHwUlScgu9qxgDNTNw+s9iova5xhEVzTqy8PuyAXxxEOpVaO7WyTgS
+	Lxcj5B8dpzQd5e7Kx4YbE4NE7qjVo1DSupQ/N5pMlZMYse9W+Fvgxd9x4lxQf81+o+tM
+	HsAZ4ZD+fbwPQ3g9QUX4aVHXWVpr7AOiX7mvxL6b9vZBxHsDye3jVu2riKb4lPYXlE2U
+	D07A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=fQ3S1H4reySvoGpgtCiX9/AnOPR/SRMWhrgkpJVoH5s=;
-	b=DuTFuPgjeLqpNIKmWNldAGbItXQ2MAWLo2N4NN9DvtC5kURh+esEji4VjeJQmhALPe
-	/4OvjFRMl71ZTksmvwPglY20t4A0gBKrQSjwGWng4ybZ7JqLl9j5LpZf2v8n8CWGDeH/
-	4HHBrMzJNG3SrZpoc+12C7XhvQCljD4Id75Qw1t+yKToTFRD67XksAoqei6/UVvm9Nd0
-	16xG8V1XVnVE2Sct7A56zouPf7ASMyG9vgXRkTzcPM6uM3nJkoa1i5Tap7zI8PEdQU2y
-	+eTi3zszlGkXd9gbcc8O5b7zaBjCeCaJAtAoXln5IGmPDiE/6+Adf0lslK+43jSqxfVQ
-	K9bQ==
-X-Gm-Message-State: APjAAAWbvVJThMFEMQiHcWM37ALjBStU6DwQzQTVpAruyfS7T9aVWWYp
-	Eb53iFX/W2tMFmkqFjqdsTTaKmO5W50=
-X-Google-Smtp-Source: APXvYqwG5fQbnFmc2kQ4u3UJngd0tx26snsmWLyvv+NGMfZ5J/muYNVaq3mAfY2yp+IOF+/eb3ZU5Q==
-X-Received: by 2002:a63:f118:: with SMTP id f24mr14019468pgi.322.1567880927463;
-	Sat, 07 Sep 2019 11:28:47 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=kS7sqo+83COCO6eBlIuSFZ6HYVJOodz7puVmLrnjbJA=;
+	b=ZJvupQgObk/MDcDsonepp/yWEQcKep6Ydoywmnh6MKUHlk1qi9pFTvJxz7rbrkq8dE
+	waP0CB0VZp+bwdsF3zHdcB8vNse7uOV6jdAjN5J4jfzpDYIpsBlS8w5YXrNiOtimT7IM
+	VtNkMoEvqwqeKtzglRbDRfTWlFJPoimQYaTB4f9l2SFHkXA5j7rkUbbZaYiCUKdFScAS
+	wg5hTaQTd4+Y1bggpBM2cC9G7AnR2KAuVDnc3ZraiTFfU85fyrSSeI6oCkK2a2JuUP6/
+	DEGdTiU0Ii5Mv0HgTPNLNGy4q+ObEj6dfG5U+Ra4aKQrdQVnmaPvDs+0nwl43b3HUmeH
+	Li9g==
+X-Gm-Message-State: APjAAAV61yXpUwjPvYVk9FsIklVBbGRJUR8KDwfXjYP18rxP/O8gPClX
+	ydrhBJZ2CDaEf74SOixqzEw/k+su7Do=
+X-Google-Smtp-Source: APXvYqwq7QDFhiWflRAOh+Xdk83/pZNthuhhlzt5rBOanT+KIk7fsTkJIe8wKeZ4RJZTByAlaPS7BA==
+X-Received: by 2002:a62:f80a:: with SMTP id d10mr17906752pfh.98.1567881850379; 
+	Sat, 07 Sep 2019 11:44:10 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	w21sm8920672pjh.19.2019.09.07.11.28.46
+	64sm12469699pfx.31.2019.09.07.11.44.09
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 07 Sep 2019 11:28:47 -0700 (PDT)
+	Sat, 07 Sep 2019 11:44:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Sep 2019 11:28:37 -0700
-Message-Id: <20190907182837.6419-2-raj.khem@gmail.com>
+Date: Sat,  7 Sep 2019 11:44:03 -0700
+Message-Id: <20190907184403.9365-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20190907182837.6419-1-raj.khem@gmail.com>
-References: <20190907182837.6419-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] can-isotp,bpftool: Add to Blacklist
+Subject: [meta-oe][PATCH] vboxguestdrivers: Add to blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,36 +57,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Sep 2019 18:28:47 -0000
+X-List-Received-Date: Sat, 07 Sep 2019 18:44:10 -0000
 Content-Transfer-Encoding: 8bit
 
-They need forward porting to kernel 5.2+
+It has been failing for a long time, there is no point of keeping it
+alive by default
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/socketcan/can-isotp_git.bb | 2 ++
- meta-oe/recipes-kernel/bpftool/bpftool.bb           | 1 +
- 2 files changed, 3 insertions(+)
+ .../vboxguestdrivers/vboxguestdrivers_5.2.22.bb                | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-index 5df44f21f4..e40e1cd263 100644
---- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-+++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-@@ -10,3 +10,5 @@ S = "${WORKDIR}/git"
- inherit module
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
+index e394f34c76..0f8d7af3fa 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
+@@ -78,3 +78,6 @@ FILES_${PN} = "${base_sbindir}"
  
- EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+ # autoload if installed
+ KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
 +
-+PNBLACKLIST[can-isotp] = "Kernel module Needs forward porting to kernel 5.2+"
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-index e58bdd4933..6683eccf2d 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-@@ -32,3 +32,4 @@ python do_package_prepend() {
- }
- 
- B = "${WORKDIR}/${BPN}-${PV}"
-+PNBLACKLIST[bpftool] = "Needs forward porting to kernel 5.2+"
++PNBLACKLIST[vboxguestdrivers] = "Needs forward porting to kernel 5.2+"
++
 -- 
 2.23.0
 
