@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D57B7F4D0
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id D46477F4D4
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat,  7 Sep 2019 19:41:54 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id n4so5426705pgv.2
+Received: by mail-pg1-f169.google.com with SMTP id n190so5432601pgn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Sep 2019 12:41:55 -0700 (PDT)
+	Sat, 07 Sep 2019 12:41:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=/aqJcJcxFWkWucmpUU3pQrVc8dkiwjQlECVV2QS81O4=;
-	b=eWf0MP0FFf/YD8bRdR/Xk+XrFF+8DGTfuOMXdV1AMN1i7xxtwfp0wW2Hze551dr9Zw
-	x0lSggAmJLCFJkBvffeEMephXiYUlSokNLBVg2jwZV5/kuMlvQRQTRDBP41uq4D6za7O
-	oKquuVaSzuKHWsOo6LLt1n5BQznCJ+GbHPmwp7HvCalOPu1VaSL6aYlnacjn5tWRwRvq
-	AFP2UDvBHDLhrQy1hlBbMn1fn4D92qUqJJzIBRPnUyw0MV+DAvEbHeATtHC9oiwERxOX
-	a4uRtVbnJYl3Fz6L5rvolw+ieFCKLCkWdceUjpLIZrARceVUlKuGcpm7rkPYSwU60tYT
-	RSAw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=VfHKZWUDYW8vTWDC/L60PdkbjJuLYEQpSrEPqAEPouc=;
+	b=FCBJBqVZ5Eni8ZDtcUHWtodA4Fm1YCnEZtN924z/6W5WOVQeKwrjb4jzQKYjcaiV9L
+	ro5hxvKO7lHpCmpbqZZNreANxaL0qGpy5juZwuvyW2eepyygzA6BkEBro2EqKkGGWu1i
+	rTODDHpP701zZSR7mbpAYkCggVgF64qR1/X0T/UcGLnVv1HxTcfxaeIkV+bS8vEpj8BR
+	2cCGIJCwbPS/KOD1QlHGGQsBEj4qelyt8xEB7qbXRzZcrtEpTVNQVc1EydD+VdMTn/9H
+	71ANAG546QOFOQ6+gIzY8xADq+dxmv3vRrqoKauBJG0jLjs7Ba9nYHavp4ExhuU1NL25
+	PwJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=/aqJcJcxFWkWucmpUU3pQrVc8dkiwjQlECVV2QS81O4=;
-	b=Zqhn4Q9pEfpQSK34JSwisIqNWZzelvoM1wR/wYAT1x6JSzKPFVel3nzfJmPNXCSuKm
-	zObXX0cMyDLWHwvqj0HIXjBLZEUUruznZpBkTrOk63VKMwRjQZ2YzXrW9ZUETaBCgj8c
-	1SIYk8fXwxwTsSYIt5i67Nn52RxPOFt7WHNtR8jbmn0g0hF1+zCFIoLBRySLoErx5hte
-	Zwj2YG2x3u813CfrwNO8DNh9pkLbOQ50npt0gdRQJLw/PK93Oz+uc7TNzw7j4Y3+s6H4
-	DW0hhq0E7vv9eBhz6sLligrG9flcp+M/Bahp+nXjpV1cNfgtzHWj+nrCG/Hl4n0ZNbbP
-	jagQ==
-X-Gm-Message-State: APjAAAWXdEk1zlMuJYBP1Oq+AY6YxxwjAA4ZsnNwqNG63MY+IMqqH5V6
-	zofvDFsvXUsQQqhxe0LitxbWcpZosyY=
-X-Google-Smtp-Source: APXvYqwHxQPhnhZYYnMuxlEtI/NfStzdac90dbPxjGw9jr70ZjvhbiX1wdP3hmj8MeAaTdX4N/hy2A==
-X-Received: by 2002:a17:90a:3acf:: with SMTP id
-	b73mr16005626pjc.88.1567885314727; 
-	Sat, 07 Sep 2019 12:41:54 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=VfHKZWUDYW8vTWDC/L60PdkbjJuLYEQpSrEPqAEPouc=;
+	b=KXyTq9ScX46a87KDrtp1mROTgbyAVOwDvOGiWRr6SLwyV8wbYumfaVLGlu7jMQxZBW
+	fMq8wdsSgY1EtlL6JpG8AIU7+nGxLXqZIm6Bf7iY/LnOqCyps322q0hiCTAA251bcex3
+	UQRH4eDioRhGNmKLyRyUI5LSsu+R/lxtBpZlnX4Fp3mYL6zHY2+jRo2RXIH5Z1Hkbhjs
+	ErL4BctLMzXDkdYuMbZVQA4XKt3aI2TJ7T+qLV5tUEgwPcNYrZSGPgD3i8EORjRJWqvA
+	eDnB9+iiNc8RbymnH+roEvd+9S9uvOK5E/MZrFFIM0VSGAW06pg4Fu3OK93+gglnPI4J
+	krUA==
+X-Gm-Message-State: APjAAAWrn5FhUVJzwb57O0tEthEsmUWSRJEhxlhYnLJJrNkbGfvO0h2W
+	RubznEhEHzUYX5jOjPFkOgdCcto99y0=
+X-Google-Smtp-Source: APXvYqydL0pjgLRIeaBOPDHxErtiqlGvWpLITMQdd/QP/8tg/uB9BC8gATaCTIxqEKUXcbEtcCAiPw==
+X-Received: by 2002:a17:90a:fa3:: with SMTP id
+	32mr16930982pjz.35.1567885315553; 
+	Sat, 07 Sep 2019 12:41:55 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3])
 	by smtp.gmail.com with ESMTPSA id j1sm9364631pgl.12.2019.09.07.12.41.54
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 07 Sep 2019 12:41:54 -0700 (PDT)
+	Sat, 07 Sep 2019 12:41:55 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Sep 2019 12:41:44 -0700
-Message-Id: <20190907194145.35720-1-raj.khem@gmail.com>
+Date: Sat,  7 Sep 2019 12:41:45 -0700
+Message-Id: <20190907194145.35720-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20190907194145.35720-1-raj.khem@gmail.com>
+References: <20190907194145.35720-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH V2 1/2] drbd, netkit-rusers: Blacklist packages
+Subject: [meta-oe][PATCH V2 2/2] vboxguestdrivers, can-isotp, bpftool: Add to Blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,58 +63,74 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sat, 07 Sep 2019 19:41:55 -0000
 Content-Transfer-Encoding: 8bit
 
-These fail to build always
+They need forward porting to kernel 5.2+
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Also drop from packagegroups
+v2: Drop from packagegroups and squash vboxguestdrivers change
 
- .../packagegroups/packagegroup-meta-networking.bb             | 4 ++--
- .../recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb        | 1 +
- meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb         | 2 ++
- 3 files changed, 5 insertions(+), 2 deletions(-)
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb  | 6 +++---
+ meta-oe/recipes-extended/socketcan/can-isotp_git.bb         | 2 ++
+ meta-oe/recipes-kernel/bpftool/bpftool.bb                   | 1 +
+ .../vboxguestdrivers/vboxguestdrivers_5.2.22.bb             | 3 +++
+ 4 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-index 29ce51b232..f511d729e3 100644
---- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-+++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-@@ -78,7 +78,7 @@ RDEPENDS_packagegroup-meta-networking-kernel = "\
- RDEPENDS_packagegroup-meta-networking-netkit = "\
-     netkit-rwho-client netkit-rwho-server netkit-rsh-client netkit-rsh-server \
-     netkit-telnet netkit-tftp-client netkit-tftp-server \
--    netkit-ftp netkit-rusers-client netkit-rusers-server netkit-rpc \
-+    netkit-ftp netkit-rpc \
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 84a0df1d25..5bb0beb7a3 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -138,7 +138,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
+     p7zip p8platform libfile-fnmatch-perl \
+     rarpd redis rrdtool libfastjson librelp rsyslog sanlock \
+     sblim-cmpi-devel sblim-sfc-common sblim-sfcc \
+-    scsirastools sgpio smartmontools snappy can-isotp \
++    scsirastools sgpio smartmontools snappy \
+     can-utils libsocketcan tipcutils tiptop \
+     tmux uml-utilities upm vlock volume-key wipe zlog zram \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
+@@ -181,10 +181,10 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
      "
  
- RDEPENDS_packagegroup-meta-networking-protocols = "\
-@@ -95,7 +95,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
-     phytool fwknop htpdate tcpreplay \
-     traceroute geoip-perl geoip geoipupdate esmtp \
-     libtdb netcf dnsmasq curlpp openipmi drbd-utils \
--    drbd tunctl dovecot ipvsadm stunnel chrony spice-protocol \
-+    tunctl dovecot ipvsadm stunnel chrony spice-protocol \
-     usbredir ntop wireshark tnftp lksctp-tools \
-     cim-schema-docs cim-schema-final cim-schema-exper \
-     libmemcached smcroute libtevent ipcalc c-ares uftp \
-diff --git a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-index 716794f447..ba1ad3f7f3 100644
---- a/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb
-@@ -69,3 +69,4 @@ RDEPENDS_${PN}-server += "tcp-wrappers xinetd rpcbind"
+ RDEPENDS_packagegroup-meta-oe-kernel ="\
+-    agent-proxy bpftool broadcom-bt-firmware cpupower \
++    agent-proxy broadcom-bt-firmware cpupower \
+     crash ipmitool minicoredumper oprofile \
+     "
+-RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "bpftool crash minicoredumper"
++RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "crash minicoredumper"
  
- # http://errors.yoctoproject.org/Errors/Details/186962/
- COMPATIBLE_HOST_libc-musl = 'null'
-+PNBLACKLIST[netkit-rusers] = "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or directory"
-diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
-index 6683781af5..23fe2021be 100644
---- a/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
-+++ b/meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb
-@@ -21,3 +21,5 @@ EXTRA_OEMAKE += "KDIR='${STAGING_KERNEL_DIR}'"
- do_install () {
-     oe_runmake install DESTDIR="${D}"
- }
+ RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 = "crash"
+ RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64el = "crash"
+diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+index 5df44f21f4..e40e1cd263 100644
+--- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+@@ -10,3 +10,5 @@ S = "${WORKDIR}/git"
+ inherit module
+ 
+ EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
 +
-+PNBLACKLIST[drbd] = "Kernel module Needs forward porting to kernel 5.2+"
++PNBLACKLIST[can-isotp] = "Kernel module Needs forward porting to kernel 5.2+"
+diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+index e58bdd4933..6683eccf2d 100644
+--- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
++++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
+@@ -32,3 +32,4 @@ python do_package_prepend() {
+ }
+ 
+ B = "${WORKDIR}/${BPN}-${PV}"
++PNBLACKLIST[bpftool] = "Needs forward porting to kernel 5.2+"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
+index e394f34c76..0f8d7af3fa 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
+@@ -78,3 +78,6 @@ FILES_${PN} = "${base_sbindir}"
+ 
+ # autoload if installed
+ KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
++
++PNBLACKLIST[vboxguestdrivers] = "Needs forward porting to kernel 5.2+"
++
 -- 
 2.23.0
 
