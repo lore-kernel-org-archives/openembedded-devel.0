@@ -1,55 +1,48 @@
-Return-Path: <prvs=146f6ab91=alistair.francis@wdc.com>
-Received: from esa1.hgst.iphmx.com (esa1.hgst.iphmx.com [68.232.141.245])
-	by mail.openembedded.org (Postfix) with ESMTP id 97EB57F447
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 63DF27F440
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Sep 2019 00:14:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1567815279; x=1599351279;
-	h=from:to:cc:subject:date:message-id:in-reply-to:
-	references:mime-version:content-transfer-encoding;
-	bh=hOiGTR/IR93jps9fdy9IxqEEDzm0oGgJy5ZlFZWN8WQ=;
-	b=POHWIc5xrniGvR86fdmaTv04CP4iSWfZt7ULF9Pg6GpIQ1zczL65yWEu
-	DAfKSA4d/Z24DjXjo+FakbzX81cva2gMVQ7gr+mb0hu+QMRv2lGqk2b/H
-	GGSHn4we1vHUyiEdD9s0i+Yr1Ov1IjMoGqnC8AABI6scJ9W5GUzty16Mc
-	oHCiSzqNQTKKZBrLUuckkA7C9wSlTNf90IugPJp25PU+UJrlQtU36XQBg
-	LAnNeayF0PvBABSOTKBlDgGedWyhoEXLtVHlogwkwbIY2W2Ns8EiSphB3
-	Im+G96T487XAJvzTttNpHjyZv6nqFXWGZK3oEOf6KELuIp9XDK8aWS33/ A==;
-IronPort-SDR: cxItJDetzN0oIEsGIAQkVyTO59FzAaiTftb99PBVnO2x1+iEclQPwfasrUnTMjmkqy4Obl2SEE
-	iIHNnNp5gfQmOjAdNO5EY20HcBrb36zeV4GVjwrz4QoZJ8/eNIBKBd/oLtYzFtzBk5r/wFkkCM
-	mB/n27hrqq45oVp8PKH2EsMJiLfoIoa574RSOwxoF18os6IIBBnsI2LaQFV+dFhfnLfFg+rNIJ
-	x6p9hoA/ZhZtdB1UNHTjRZhSdsFd0aIB1+UClsExLCVTLMHydn9cKkj0wbfxvGsBEj3F1kjpH+
-	H3Q=
-X-IronPort-AV: E=Sophos;i="5.64,474,1559491200"; d="scan'208";a="224458639"
-Received: from uls-op-cesaip01.wdc.com (HELO uls-op-cesaep01.wdc.com)
-	([199.255.45.14])
-	by ob1.hgst.iphmx.com with ESMTP; 07 Sep 2019 08:07:32 +0800
-IronPort-SDR: 4rYvl0PQw6xxFKoOvNZTm7UqVtVf5KGUYWbxbg2/9RiUx2hmkt5jqKsSjl0Rws4RBKuBSw+RBs
-	b0dY1GUmhnrlLtxS1NFVs5R9isDChZLdwhMlhYvHdgrx1w5vgBMzcnfFNz5txYlV5M7Pj+wF1R
-	udjJTgJmKihl6jrzgoN0t0RSu7FoQt2JuQv43bfw2NP7TKXi8fhD4406ftRMXgN/sgo9i25/4U
-	C38E4HuZ0PhBLETceR1eRCkEAKrXc5B5pUFMCCxmNOEUG1Z1oWNrmqf1+ZIaSCKvQ7L660l959
-	McB7pG+mCKxOW20426Jwze9V
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-	by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
-	06 Sep 2019 17:04:23 -0700
-IronPort-SDR: tIKi2PlqRfyBf3Iz498Lwgj/oYgRfFb5ebLgTN49QXla/tp7B1147PN9BfVWnBfuK34KxUtBgh
-	OUqt7XQGp8oADJVJpndfzym9tNy9VEqMR/qSvN5zEIQK15JbDcCt2YM/gx1njXS6ntwZeeLV5r
-	WUNnmIue/1pfJfca41MJEx4K7c95qS6G6Ggzw+GYX/8Z7wQdvLIknxotHwaAl1xKtvwKIpEyAM
-	owE99PYvrMjhCcVkdV5p52AujctcJDV4mNSi899VT/jxUSX8zXluE3L755DUpZvQYur2Cpaijj
-	VIo=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
-	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
-	by uls-op-cesaip01.wdc.com with ESMTP; 06 Sep 2019 17:07:32 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Sep 2019 17:03:38 -0700
-Message-Id: <20190907000338.15544-2-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20190907000338.15544-1-alistair.francis@wdc.com>
-References: <20190907000338.15544-1-alistair.francis@wdc.com>
+	Sat,  7 Sep 2019 00:17:23 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id q203so7535834qke.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Sep 2019 17:17:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=ZYwIpA2UhQ6YM0lR7QzyPaItAj36IeUjkUW0COBcqlQ=;
+	b=W6mKYDR1K3ha6wAz9xHaYsd/nYBB1AH2l5CaK0eG4/x/UEGSLRSq/vs9iGgMdFgfDF
+	34x2G8z+Vqm0bmCTGZRJJ1lBiQfiocKVjH2ku8t3j951vLc3moAIl9Tc58mHPT7yvsvr
+	eMKai/3R7uhgbVJ3D8yrGUtcHiamHQzoNMSTVvI2MCZL/Sax8zNmPiRTgVky7yZjxnZ3
+	gFqn8q3jNb8sN/sNd067Npyeo6bZTsd5f4YJ10F1MYm13bgVjbLfJ0r1GbCN7UG9eNQn
+	TDld0LQF1LNoMkTSLgXRH2UdKcgpkuB3QhYDeRcXgo6RREsm2uZhX0xDo1FklJ7Lyex5
+	64mw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=ZYwIpA2UhQ6YM0lR7QzyPaItAj36IeUjkUW0COBcqlQ=;
+	b=QRx16kfC6b/vkAZw99q1SDLmxZHUlCayAIT5XVFcOR4e51LAyTdLd+UHKKJ2n1Zlzi
+	ix7z+fu2tujMjvBnY9O8V03kzyK1bTyNk03/0FhpwVmnDBS0Q4e4bdgT4dyn4yhlCwst
+	9Gu8px8q3IF18ENldtqcqlG4dIAfQJhBm/Z3dM3IiSwQqeSTlYbeXkDoOdAHV+XDyvHy
+	mrp2WWzknMoH7e4pd/WKx/ZPhuWbTTsX1Iw47MyGlY0Du4ug4e1tl0UPIGJy4EEB1xe+
+	fMnESVV9Fndk9QwpM6+aFz14QwfcmULg5XzqXBWdrs4Nn5m6dp0L3QOab7U/bSJnQ6qn
+	vm3g==
+X-Gm-Message-State: APjAAAW0e+24RALUBQdFj+Hnaz3W9X7vORwiTNsT+plbMkZPK6dII81d
+	T4ZN+8DcUDUQvXCoroqH5cL2bt8h2oAIY3aUe50=
+X-Google-Smtp-Source: APXvYqyGn+fZw0A+y7hpwomVNqXx+9BWGbRiSMLf5FEdWX/thq43B9DoK8GBJnK7giZ720Iok1uDvB/nyYcrTkDxHxY=
+X-Received: by 2002:a37:e40b:: with SMTP id y11mr10397303qkf.9.1567815443961; 
+	Fri, 06 Sep 2019 17:17:23 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-python][PATCH v2 2/2] python3-pytest-asyncio: Initial commit of 0.10.0
+References: <20190906212513.16415-1-raj.khem@gmail.com>
+	<c74a44cc-b085-e526-eabb-bb56441a5362@gmail.com>
+In-Reply-To: <c74a44cc-b085-e526-eabb-bb56441a5362@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 6 Sep 2019 17:17:13 -0700
+Message-ID: <CAMKF1sqDBJF47G9pmr8Ciqy68h-s3Dn07qyO-pwz8b=bsAWYwg@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ltrace: Fix build on mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,45 +55,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Sep 2019 00:14:37 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 07 Sep 2019 00:17:23 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- .../python/python-pytest-asyncio.inc                | 13 +++++++++++++
- .../python/python3-pytest-asyncio_0.10.0.bb         |  2 ++
- 2 files changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pytest-asyncio.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-asyncio_0.10.0.bb
+I think yes
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest-asyncio.inc b/meta-python/recipes-devtools/python/python-pytest-asyncio.inc
-new file mode 100644
-index 000000000..9132c7452
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pytest-asyncio.inc
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "pytest-asyncio is an Apache2 licensed library, written in Python, for testing asyncio code with pytest"
-+HOMEPAGE = "https://github.com/pytest-dev/pytest-asyncio"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://README.rst;md5=ae62268d207c73b615fbefddaf91a881"
-+
-+SRC_URI[md5sum] = "247a7ec32f24a185341327c42a0f85bf"
-+SRC_URI[sha256sum] = "9fac5100fd716cbecf6ef89233e8590a4ad61d729d1732e0a96b84182df1daaf"
-+
-+inherit pypi
-+
-+DEPENDS += "${PYTHON_PN}-pytest-native"
-+
-+BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.10.0.bb b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.10.0.bb
-new file mode 100644
-index 000000000..09f26f8d1
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-asyncio_0.10.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-pytest-asyncio.inc
--- 
-2.23.0
+On Fri, Sep 6, 2019 at 5:12 PM akuster808 <akuster808@gmail.com> wrote:
 
+>
+>
+> On 9/6/19 2:25 PM, Khem Raj wrote:
+> > Newer kernel UAPI headers for mips have moved these needed defines
+> > around
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+> warrior too?
+> > ---
+> >  .../ltrace/ltrace/include_unistd_nr.patch     | 30 +++++++++++++++++++
+> >  meta-oe/recipes-devtools/ltrace/ltrace_git.bb |  1 +
+> >  2 files changed, 31 insertions(+)
+> >  create mode 100644
+> meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
+> >
+> > diff --git
+> a/meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
+> b/meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
+> > new file mode 100644
+> > index 0000000000..e4490bbb9e
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
+> > @@ -0,0 +1,30 @@
+> > +kernel headers have restructured mips syscall generation in kernel
+> > +in recent versions, however, ltrace still has logic to define the
+> > +syscall numbers based on old logic, this patch includes the legacy
+> > +UAPI headers to get these defines
+> > +
+> > +Fixes errors e.g.
+> > +../../../../git/sysdeps/linux-gnu/mips/trace.c:138:29: error:
+> '__NR_O32_Linux' undeclared (first use in this function)
+> > +  const int syscallbase[] = {__NR_O32_Linux, __NR_N32_Linux,
+> > +
+> > +Upstream-Status: Pending
+> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > +--- a/sysdeps/linux-gnu/mips/trace.c
+> > ++++ b/sysdeps/linux-gnu/mips/trace.c
+> > +@@ -34,6 +34,16 @@
+> > + #include <assert.h>
+> > + #include <asm/unistd.h>
+> > +
+> > ++#ifndef __NR_O32_Linux
+> > ++#include <asm/unistd_nr_o32.h>
+> > ++#endif
+> > ++#ifndef __NR_N32_Linux
+> > ++#include <asm/unistd_nr_n64.h>
+> > ++#endif
+> > ++#ifndef __NR_N64_Linux
+> > ++#include <asm/unistd_nr_n32.h>
+> > ++#endif
+> > ++
+> > + #include "backend.h"
+> > + #include "common.h"
+> > + #include "debug.h"
+> > diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> > index 3dc269c80e..ead637cb7e 100644
+> > --- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> > +++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+> > @@ -27,6 +27,7 @@ SRC_URI = "git://
+> github.com/sparkleholic/ltrace.git;branch=master;protocol=http
+> >             file://0001-mips-plt.c-Delete-include-error.h.patch \
+> >
+>  file://0001-move-fprintf-into-same-block-where-modname-and-symna.patch \
+> >             file://0001-hook-Do-not-append-int-to-std-string.patch \
+> > +           file://include_unistd_nr.patch \
+> >             "
+> >  S = "${WORKDIR}/git"
+> >
+>
+>
 
