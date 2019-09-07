@@ -1,46 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 63DF27F440
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id A4AC47D69D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Sep 2019 00:17:23 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id q203so7535834qke.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Sep 2019 17:17:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZYwIpA2UhQ6YM0lR7QzyPaItAj36IeUjkUW0COBcqlQ=;
-	b=W6mKYDR1K3ha6wAz9xHaYsd/nYBB1AH2l5CaK0eG4/x/UEGSLRSq/vs9iGgMdFgfDF
-	34x2G8z+Vqm0bmCTGZRJJ1lBiQfiocKVjH2ku8t3j951vLc3moAIl9Tc58mHPT7yvsvr
-	eMKai/3R7uhgbVJ3D8yrGUtcHiamHQzoNMSTVvI2MCZL/Sax8zNmPiRTgVky7yZjxnZ3
-	gFqn8q3jNb8sN/sNd067Npyeo6bZTsd5f4YJ10F1MYm13bgVjbLfJ0r1GbCN7UG9eNQn
-	TDld0LQF1LNoMkTSLgXRH2UdKcgpkuB3QhYDeRcXgo6RREsm2uZhX0xDo1FklJ7Lyex5
-	64mw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ZYwIpA2UhQ6YM0lR7QzyPaItAj36IeUjkUW0COBcqlQ=;
-	b=QRx16kfC6b/vkAZw99q1SDLmxZHUlCayAIT5XVFcOR4e51LAyTdLd+UHKKJ2n1Zlzi
-	ix7z+fu2tujMjvBnY9O8V03kzyK1bTyNk03/0FhpwVmnDBS0Q4e4bdgT4dyn4yhlCwst
-	9Gu8px8q3IF18ENldtqcqlG4dIAfQJhBm/Z3dM3IiSwQqeSTlYbeXkDoOdAHV+XDyvHy
-	mrp2WWzknMoH7e4pd/WKx/ZPhuWbTTsX1Iw47MyGlY0Du4ug4e1tl0UPIGJy4EEB1xe+
-	fMnESVV9Fndk9QwpM6+aFz14QwfcmULg5XzqXBWdrs4Nn5m6dp0L3QOab7U/bSJnQ6qn
-	vm3g==
-X-Gm-Message-State: APjAAAW0e+24RALUBQdFj+Hnaz3W9X7vORwiTNsT+plbMkZPK6dII81d
-	T4ZN+8DcUDUQvXCoroqH5cL2bt8h2oAIY3aUe50=
-X-Google-Smtp-Source: APXvYqyGn+fZw0A+y7hpwomVNqXx+9BWGbRiSMLf5FEdWX/thq43B9DoK8GBJnK7giZ720Iok1uDvB/nyYcrTkDxHxY=
-X-Received: by 2002:a37:e40b:: with SMTP id y11mr10397303qkf.9.1567815443961; 
-	Fri, 06 Sep 2019 17:17:23 -0700 (PDT)
-MIME-Version: 1.0
+	Sat,  7 Sep 2019 10:21:09 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46QVnc4Z0Mz4q;
+	Sat,  7 Sep 2019 12:21:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1567851669;
+	bh=qxDBS0IY1bLis8aJ/i1HCFklLko7xyC5Ro4brzVZceg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=S0YobBrAmvh4CHcEiHQ/iLhIt8Gbr5pPE6t6F78Vt89TqlCbOAaTAptjKFhxnbdwK
+	yGNUkhgK5dxhLJrG4bywiK+ZyHEv+ZQyVO3TkBqTnBs2F3kMx6wuh+bvJbxuYoXWPM
+	2hkmE/BmgAR67mnufjlCVtjEqerOSFHge2NKTM2YLr1KxqqhYhAWr090JUqKrI71Sa
+	QbEPFj8mljwQFg0qvrtn4UQCRy8PB5hSkOa2v737OyEzxoavXoxCcY+E/P4gGpWGie
+	ff9BSqDhl5QN7YbZ+mLoZmUn8J/8I3xMbiXXsmedT+YhQojjvIkb5kpdbz9zvoZ96W
+	17dPEsJjStAr21ToTz2h96k5/D5lSH1zwp8f6WilTOGrmho9IAXk0a3BJ2AdKg9hta
+	igUvhtd1DgM5/q43S1ZhIr79yg1ZrznFETvrKTlhM5513G3bEXe6pcDHBlW3CCYNry
+	nFPGSSh9mJ8/y24Rf7F/Q6TVMg/5Mk55VAq++euUcgJWmAj/RhVLNziIbLZwwb54sg
+	zMRo4wRhOTVRL2dauOtLuyGc8SgRvyCDdhAOokyYA9S4dCpYYJhT+ADbpozNaBIjjW
+	sA4tu77ILEQ6SQgVv7NPYBcdPMhaDBa5S0dhskAj95oIksYtCe8YbWl8eAJeulitWy
+	bbDEcu0+Vnc/g98v8VX+3xe8=
+Date: Sat, 7 Sep 2019 13:21:06 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: akuster808 <akuster808@gmail.com>
+Message-ID: <20190907102106.GA26201@localhost>
 References: <20190906212513.16415-1-raj.khem@gmail.com>
 	<c74a44cc-b085-e526-eabb-bb56441a5362@gmail.com>
+MIME-Version: 1.0
 In-Reply-To: <c74a44cc-b085-e526-eabb-bb56441a5362@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 6 Sep 2019 17:17:13 -0700
-Message-ID: <CAMKF1sqDBJF47G9pmr8Ciqy68h-s3Dn07qyO-pwz8b=bsAWYwg@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH] ltrace: Fix build on mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -55,83 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Sep 2019 00:17:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 07 Sep 2019 10:21:10 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-I think yes
-
-On Fri, Sep 6, 2019 at 5:12 PM akuster808 <akuster808@gmail.com> wrote:
-
->
->
+On Fri, Sep 06, 2019 at 05:12:24PM -0700, akuster808 wrote:
 > On 9/6/19 2:25 PM, Khem Raj wrote:
 > > Newer kernel UAPI headers for mips have moved these needed defines
 > > around
 > >
 > > Signed-off-by: Khem Raj <raj.khem@gmail.com>
->
+> 
 > warrior too?
-> > ---
-> >  .../ltrace/ltrace/include_unistd_nr.patch     | 30 +++++++++++++++++++
-> >  meta-oe/recipes-devtools/ltrace/ltrace_git.bb |  1 +
-> >  2 files changed, 31 insertions(+)
-> >  create mode 100644
-> meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
-> >
-> > diff --git
-> a/meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
-> b/meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
-> > new file mode 100644
-> > index 0000000000..e4490bbb9e
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-devtools/ltrace/ltrace/include_unistd_nr.patch
-> > @@ -0,0 +1,30 @@
-> > +kernel headers have restructured mips syscall generation in kernel
-> > +in recent versions, however, ltrace still has logic to define the
-> > +syscall numbers based on old logic, this patch includes the legacy
-> > +UAPI headers to get these defines
-> > +
-> > +Fixes errors e.g.
-> > +../../../../git/sysdeps/linux-gnu/mips/trace.c:138:29: error:
-> '__NR_O32_Linux' undeclared (first use in this function)
-> > +  const int syscallbase[] = {__NR_O32_Linux, __NR_N32_Linux,
-> > +
-> > +Upstream-Status: Pending
-> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > +--- a/sysdeps/linux-gnu/mips/trace.c
-> > ++++ b/sysdeps/linux-gnu/mips/trace.c
-> > +@@ -34,6 +34,16 @@
-> > + #include <assert.h>
-> > + #include <asm/unistd.h>
-> > +
-> > ++#ifndef __NR_O32_Linux
-> > ++#include <asm/unistd_nr_o32.h>
-> > ++#endif
-> > ++#ifndef __NR_N32_Linux
-> > ++#include <asm/unistd_nr_n64.h>
-> > ++#endif
-> > ++#ifndef __NR_N64_Linux
-> > ++#include <asm/unistd_nr_n32.h>
-> > ++#endif
-> > ++
-> > + #include "backend.h"
-> > + #include "common.h"
-> > + #include "debug.h"
-> > diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-> b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-> > index 3dc269c80e..ead637cb7e 100644
-> > --- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-> > +++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-> > @@ -27,6 +27,7 @@ SRC_URI = "git://
-> github.com/sparkleholic/ltrace.git;branch=master;protocol=http
-> >             file://0001-mips-plt.c-Delete-include-error.h.patch \
-> >
->  file://0001-move-fprintf-into-same-block-where-modname-and-symna.patch \
-> >             file://0001-hook-Do-not-append-int-to-std-string.patch \
-> > +           file://include_unistd_nr.patch \
-> >             "
-> >  S = "${WORKDIR}/git"
-> >
->
->
+>...
+
+No, this is not a problem with the UAPI headers in warrior.
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
