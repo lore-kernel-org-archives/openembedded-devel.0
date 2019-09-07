@@ -1,53 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id D46477F4D4
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
+	[209.85.215.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CAFF7F4D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Sep 2019 19:41:54 +0000 (UTC)
-Received: by mail-pg1-f169.google.com with SMTP id n190so5432601pgn.0
+	Sat,  7 Sep 2019 19:54:32 +0000 (UTC)
+Received: by mail-pg1-f179.google.com with SMTP id n4so5435195pgv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Sep 2019 12:41:56 -0700 (PDT)
+	Sat, 07 Sep 2019 12:54:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=VfHKZWUDYW8vTWDC/L60PdkbjJuLYEQpSrEPqAEPouc=;
-	b=FCBJBqVZ5Eni8ZDtcUHWtodA4Fm1YCnEZtN924z/6W5WOVQeKwrjb4jzQKYjcaiV9L
-	ro5hxvKO7lHpCmpbqZZNreANxaL0qGpy5juZwuvyW2eepyygzA6BkEBro2EqKkGGWu1i
-	rTODDHpP701zZSR7mbpAYkCggVgF64qR1/X0T/UcGLnVv1HxTcfxaeIkV+bS8vEpj8BR
-	2cCGIJCwbPS/KOD1QlHGGQsBEj4qelyt8xEB7qbXRzZcrtEpTVNQVc1EydD+VdMTn/9H
-	71ANAG546QOFOQ6+gIzY8xADq+dxmv3vRrqoKauBJG0jLjs7Ba9nYHavp4ExhuU1NL25
-	PwJQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=WvPMyey1tKC9u9MYZm/5XEkAhjN45tVTDGMrZq8bDLY=;
+	b=PA2vZnLhEfVTsmOkp5NQEjTfU4RHPhAY77O424eBBsPmPjS5RxvP7OMVKw9dhh1d2M
+	oUNrm+fZ/u2loF1hcXF+dNn4fxphQ3vZKJCyrRWQpipZ0p0eyarX+rLscGU7yyrnZjcG
+	NTrNJ82/e0yu60vtStuJZbc+aD1bqjNjy1N92TUB4FlvvJAa5xjGWKCUrKS4tVUhVYTn
+	WJz1nUmLzR9TNWfcOdj2LSpGQs23X7WICGkfN/WwDYE60QZRkARd43/wb+yvDzC8W/Tn
+	5o4HnEals/JENzX3k7tt5EANA+4c/Br8gi9wW7LgxHwTshZCiwRSR9JfUQV+fIqtw7zm
+	H9dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=VfHKZWUDYW8vTWDC/L60PdkbjJuLYEQpSrEPqAEPouc=;
-	b=KXyTq9ScX46a87KDrtp1mROTgbyAVOwDvOGiWRr6SLwyV8wbYumfaVLGlu7jMQxZBW
-	fMq8wdsSgY1EtlL6JpG8AIU7+nGxLXqZIm6Bf7iY/LnOqCyps322q0hiCTAA251bcex3
-	UQRH4eDioRhGNmKLyRyUI5LSsu+R/lxtBpZlnX4Fp3mYL6zHY2+jRo2RXIH5Z1Hkbhjs
-	ErL4BctLMzXDkdYuMbZVQA4XKt3aI2TJ7T+qLV5tUEgwPcNYrZSGPgD3i8EORjRJWqvA
-	eDnB9+iiNc8RbymnH+roEvd+9S9uvOK5E/MZrFFIM0VSGAW06pg4Fu3OK93+gglnPI4J
-	krUA==
-X-Gm-Message-State: APjAAAWrn5FhUVJzwb57O0tEthEsmUWSRJEhxlhYnLJJrNkbGfvO0h2W
-	RubznEhEHzUYX5jOjPFkOgdCcto99y0=
-X-Google-Smtp-Source: APXvYqydL0pjgLRIeaBOPDHxErtiqlGvWpLITMQdd/QP/8tg/uB9BC8gATaCTIxqEKUXcbEtcCAiPw==
-X-Received: by 2002:a17:90a:fa3:: with SMTP id
-	32mr16930982pjz.35.1567885315553; 
-	Sat, 07 Sep 2019 12:41:55 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=WvPMyey1tKC9u9MYZm/5XEkAhjN45tVTDGMrZq8bDLY=;
+	b=DeQ8UC8UGPaCyWlv8X+MjP6RfDHAChBztQb2rwG/QZR83x98vQTNftwKC70n81EFEy
+	YVmyDH2H3/p7yBK1bFCGr9cAqUsS2+ORGSCXRCWmnKrPtiWiUV6PjNA471Cr2dQ6u2TY
+	r9W9L62N648IC5L6A/PuD4xV7MxZGdxiDeeRuz2x+8ph3EOXIgHjeAvs/6CR0XHgh8VO
+	kPz6Jq5zst7lbOLKGz2y4n6ITSCFvwIFpe5ZMErYJFr6MwVf6ibTUQvsM5xDZ964wrtd
+	dXEPduCVTDKPQPfQ1313muW9z7u/8YNnwv1/mpO6f1UGkuxpWWyo7b51jHxh8wH3rd8b
+	WKSQ==
+X-Gm-Message-State: APjAAAWQHWDrN2NKxx+V9D1wdr/epUiZsmuuXLRJVx4NMYqOwrLZzrMy
+	ldw0wGtFXYlzIxojL7ApJXNfMYZTs+k=
+X-Google-Smtp-Source: APXvYqylg4+v2uP/LK9P0xNfcaCQVjKpWfd6Is/Zf4zFtyHfDdu/aSktrp6JUwWQFHHZ9cPF+HrJlw==
+X-Received: by 2002:a62:d143:: with SMTP id t3mr18811327pfl.213.1567886073138; 
+	Sat, 07 Sep 2019 12:54:33 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
 	[73.71.176.3])
-	by smtp.gmail.com with ESMTPSA id j1sm9364631pgl.12.2019.09.07.12.41.54
+	by smtp.gmail.com with ESMTPSA id h11sm8961534pgv.5.2019.09.07.12.54.32
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 07 Sep 2019 12:41:55 -0700 (PDT)
+	Sat, 07 Sep 2019 12:54:32 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Sep 2019 12:41:45 -0700
-Message-Id: <20190907194145.35720-2-raj.khem@gmail.com>
+Date: Sat,  7 Sep 2019 12:54:23 -0700
+Message-Id: <20190907195423.9205-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20190907194145.35720-1-raj.khem@gmail.com>
-References: <20190907194145.35720-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2 2/2] vboxguestdrivers, can-isotp, bpftool: Add to Blacklist
+Subject: [meta-networking][PATCH] strongswan: Fix do_patch fuzz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,77 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Sep 2019 19:41:55 -0000
+X-List-Received-Date: Sat, 07 Sep 2019 19:54:32 -0000
 Content-Transfer-Encoding: 8bit
 
-They need forward porting to kernel 5.2+
+Refresh the patch to apply cleanly
+
+Fixes
+
+Applying patch 0001-memory.h-Include-stdint.h-for-uintptr_t.patch
+patching file src/libstrongswan/utils/utils/memory.h
+Hunk #1 succeeded at 26 with fuzz 2 (offset 4 lines).
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Drop from packagegroups and squash vboxguestdrivers change
+ .../0001-memory.h-Include-stdint.h-for-uintptr_t.patch    | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb  | 6 +++---
- meta-oe/recipes-extended/socketcan/can-isotp_git.bb         | 2 ++
- meta-oe/recipes-kernel/bpftool/bpftool.bb                   | 1 +
- .../vboxguestdrivers/vboxguestdrivers_5.2.22.bb             | 3 +++
- 4 files changed, 9 insertions(+), 3 deletions(-)
-
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 84a0df1d25..5bb0beb7a3 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -138,7 +138,7 @@ RDEPENDS_packagegroup-meta-oe-extended ="\
-     p7zip p8platform libfile-fnmatch-perl \
-     rarpd redis rrdtool libfastjson librelp rsyslog sanlock \
-     sblim-cmpi-devel sblim-sfc-common sblim-sfcc \
--    scsirastools sgpio smartmontools snappy can-isotp \
-+    scsirastools sgpio smartmontools snappy \
-     can-utils libsocketcan tipcutils tiptop \
-     tmux uml-utilities upm vlock volume-key wipe zlog zram \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11 wayland opengl", "boinc-client", "", d)} \
-@@ -181,10 +181,10 @@ RDEPENDS_packagegroup-meta-oe-graphics ="\
-     "
+diff --git a/meta-networking/recipes-support/strongswan/files/0001-memory.h-Include-stdint.h-for-uintptr_t.patch b/meta-networking/recipes-support/strongswan/files/0001-memory.h-Include-stdint.h-for-uintptr_t.patch
+index 00178c84a4..2d17507b17 100644
+--- a/meta-networking/recipes-support/strongswan/files/0001-memory.h-Include-stdint.h-for-uintptr_t.patch
++++ b/meta-networking/recipes-support/strongswan/files/0001-memory.h-Include-stdint.h-for-uintptr_t.patch
+@@ -9,13 +9,11 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  src/libstrongswan/utils/utils/memory.h | 2 ++
+  1 file changed, 2 insertions(+)
  
- RDEPENDS_packagegroup-meta-oe-kernel ="\
--    agent-proxy bpftool broadcom-bt-firmware cpupower \
-+    agent-proxy broadcom-bt-firmware cpupower \
-     crash ipmitool minicoredumper oprofile \
-     "
--RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "bpftool crash minicoredumper"
-+RDEPENDS_packagegroup-meta-oe-kernel_remove_libc-musl = "crash minicoredumper"
- 
- RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64 = "crash"
- RDEPENDS_packagegroup-meta-oe-kernel_remove_mips64el = "crash"
-diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-index 5df44f21f4..e40e1cd263 100644
---- a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-+++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
-@@ -10,3 +10,5 @@ S = "${WORKDIR}/git"
- inherit module
- 
- EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
-+
-+PNBLACKLIST[can-isotp] = "Kernel module Needs forward porting to kernel 5.2+"
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-index e58bdd4933..6683eccf2d 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-@@ -32,3 +32,4 @@ python do_package_prepend() {
- }
- 
- B = "${WORKDIR}/${BPN}-${PV}"
-+PNBLACKLIST[bpftool] = "Needs forward porting to kernel 5.2+"
-diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
-index e394f34c76..0f8d7af3fa 100644
---- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
-+++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
-@@ -78,3 +78,6 @@ FILES_${PN} = "${base_sbindir}"
- 
- # autoload if installed
- KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
-+
-+PNBLACKLIST[vboxguestdrivers] = "Needs forward porting to kernel 5.2+"
-+
+-diff --git a/src/libstrongswan/utils/utils/memory.h b/src/libstrongswan/utils/utils/memory.h
+-index e840330..8a356a8 100644
+ --- a/src/libstrongswan/utils/utils/memory.h
+ +++ b/src/libstrongswan/utils/utils/memory.h
+-@@ -22,6 +22,8 @@
+- #ifndef MEMORY_H_
+- #define MEMORY_H_
++@@ -26,6 +26,8 @@
++ #include <string.h>
++ #endif
+  
+ +#include <stdint.h>
+ +
 -- 
 2.23.0
 
