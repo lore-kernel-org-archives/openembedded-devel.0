@@ -1,37 +1,30 @@
 Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C38147F2D8
+	by mail.openembedded.org (Postfix) with ESMTP id 57D456C44B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Sep 2019 06:17:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,483,1559491200"; d="scan'208";a="75153242"
+	Mon,  9 Sep 2019 06:23:15 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,483,1559491200"; d="scan'208";a="75153479"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Sep 2019 14:17:46 +0800
+	by heian.cn.fujitsu.com with ESMTP; 09 Sep 2019 14:23:15 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id B2A314CE03E8;
-	Mon,  9 Sep 2019 14:17:38 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0439.000; Mon, 9 Sep 2019 14:17:50 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-python][PATCH] python-cmd2: Add python3 version
-Thread-Index: AQHVYU55SyJQFtjtG0CDj/3kugR1hKcadX4AgAhuNLA=
-Date: Mon, 9 Sep 2019 06:17:48 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF73B5B6E0C3@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1567401728-113652-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<CAMKF1spnx4pPh5ObnVTyahxE6Z8y7GCkv3GC_oCwf-fL_eYu9A@mail.gmail.com>
-In-Reply-To: <CAMKF1spnx4pPh5ObnVTyahxE6Z8y7GCkv3GC_oCwf-fL_eYu9A@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.225.35]
+	by cn.fujitsu.com (Postfix) with ESMTP id 52D354CE14E4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  9 Sep 2019 14:23:09 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 9 Sep 2019 14:23:20 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 9 Sep 2019 14:21:57 +0800
+Message-ID: <1568010117-113514-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: B2A314CE03E8.A9D88
+X-Originating-IP: [10.167.225.35]
+X-yoursite-MailScanner-ID: 52D354CE14E4.A6AA3
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-cmd2: Add python3 version
+Subject: [meta-python][PATCH] python-prettytable: Add python3 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,120 +37,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Sep 2019 06:17:47 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 09 Sep 2019 06:23:15 -0000
+Content-Type: text/plain
 
-SGkgS2hlbQ0KDQpOb3cgcHl0aG9uMy1jb2xvcmFtYSAgaXMgcHJvdmlkZWQg
-YnkgbWV0YS12aXJ0dWFsaXphdGlvbi4NClNob3VsZCBJIHN1Ym1pdCBhIG5l
-dyBwYXRjaCBvZiBweXRob24zLWNvbG9yYW1hICB0byBtZXRhLW9lPw0KDQpC
-ZXN0IHJlZ2FyZHMgDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tDQpaaGVuZyBSdW9xaW4NCk5hbmppbmcg
-RnVqaXRzdSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5TVCkN
-CkFERFIuOiBOby42IFdlbnpodSBSb2FkLCBTb2Z0d2FyZSBBdmVudWUsDQog
-ICAgICAgTmFuamluZywgMjEwMDEyLCBDaGluYQ0KTUFJTCA6IHpoZW5ncnEu
-Zm5zdEBjbi5mdWppc3R1LmNvbQ0KDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNz
-YWdlLS0tLS0NCj4gRnJvbTogS2hlbSBSYWogW21haWx0bzpyYWoua2hlbUBn
-bWFpbC5jb21dDQo+IFNlbnQ6IFdlZG5lc2RheSwgU2VwdGVtYmVyIDA0LCAy
-MDE5IDE6MTEgUE0NCj4gVG86IFpoZW5nLCBSdW9xaW4v6YORIOiLpemSpiA8
-emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29tPg0KPiBDYzogb3BlbmVtYmVk
-ZWQtZGV2ZWwgPG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnPg0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1weXRob25dW1BB
-VENIXSBweXRob24tY21kMjogQWRkIHB5dGhvbjMgdmVyc2lvbg0KPiANCj4g
-MDM6MTA6MTAgRVJST1I6IE5vdGhpbmcgUlBST1ZJREVTICdweXRob24zLWNv
-bG9yYW1hJyAoYnV0DQo+IC9tbnQvamVua2lucy93b3Jrc3BhY2UveW9jdG8t
-d29ybGQtZ2xpYmMvc291cmNlcy9tZXRhLQ0KPiBvcGVuZW1iZWRkZWQvbWV0
-YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy0NCj4g
-Y21kMl8wLjkuMTYuYmINCj4gUkRFUEVORFMgb24gb3Igb3RoZXJ3aXNlIHJl
-cXVpcmVzIGl0KQ0KPiAwMzoxMDoxMCBFUlJPUjogTm90aGluZyBSUFJPVklE
-RVMgJ3B5dGhvbjMtY21kMi1kZXYnIChidXQNCj4gL21udC9qZW5raW5zL3dv
-cmtzcGFjZS95b2N0by13b3JsZC1nbGliYy9zb3VyY2VzL21ldGEtDQo+IG9w
-ZW5lbWJlZGRlZC9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhv
-bi9weXRob24zLQ0KPiBjbWQyXzAuOS4xNi5iYg0KPiBSREVQRU5EUyBvbiBv
-ciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQo+IDAzOjEwOjEwIE5vIGVsaWdp
-YmxlIFJQUk9WSURFUnMgZXhpc3QgZm9yICdweXRob24zLWNtZDItZGV2Jw0K
-PiAwMzoxMDoxMSBFUlJPUjogTm90aGluZyBSUFJPVklERVMgJ3B5dGhvbjMt
-Y21kMicgKGJ1dA0KPiAvbW50L2plbmtpbnMvd29ya3NwYWNlL3lvY3RvLXdv
-cmxkLWdsaWJjL3NvdXJjZXMvbWV0YS0NCj4gb3BlbmVtYmVkZGVkL21ldGEt
-cHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtDQo+IGNt
-ZDJfMC45LjE2LmJiDQo+IFJERVBFTkRTIG9uIG9yIG90aGVyd2lzZSByZXF1
-aXJlcyBpdCkNCj4gMDM6MTA6MTEgTm8gZWxpZ2libGUgUlBST1ZJREVScyBl
-eGlzdCBmb3IgJ3B5dGhvbjMtY21kMicNCj4gDQo+IE9uIFN1biwgU2VwIDEs
-IDIwMTkgYXQgMTA6MjMgUE0gWmhlbmcgUnVvcWluIDx6aGVuZ3JxLmZuc3RA
-Y24uZnVqaXRzdS5jb20+DQo+IHdyb3RlOg0KPiA+DQo+ID4gUHJvdmlkaW5n
-IGEgcHl0aG9uMyB2ZXJzaW9uIG9mIHB5dGhvbi1jbWQyLg0KPiA+DQo+ID4g
-U2lnbmVkLW9mZi1ieTogWmhlbmcgUnVvcWluIDx6aGVuZ3JxLmZuc3RAY24u
-ZnVqaXRzdS5jb20+DQo+ID4gLS0tDQo+ID4gIC4uLi9yZWNpcGVzLWRldnRv
-b2xzL3B5dGhvbi9weXRob24tY21kMi5pbmMgICAgICAgfCAxMyArKysrKysr
-KysrKysrDQo+ID4gIC4uLi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRo
-b24tY21kMl8wLjkuMTYuYmIgfCAxNSArKy0tLS0tLS0tLS0tLS0NCj4gPiAg
-Li4uL3B5dGhvbi9weXRob24zLWNtZDJfMC45LjE2LmJiICAgICAgICAgICAg
-ICAgICB8ICA5ICsrKysrKysrKw0KPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDI0
-IGluc2VydGlvbnMoKyksIDEzIGRlbGV0aW9ucygtKSAgY3JlYXRlIG1vZGUN
-Cj4gPiAxMDA2NDQgbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRo
-b24vcHl0aG9uLWNtZDIuaW5jDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0K
-PiA+IG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhv
-bjMtY21kMl8wLjkuMTYuYmINCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRh
-LXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tY21kMi5p
-bmMNCj4gPiBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9u
-L3B5dGhvbi1jbWQyLmluYw0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+
-ID4gaW5kZXggMDAwMDAwMDAwLi4xYTBiZTc3OGINCj4gPiAtLS0gL2Rldi9u
-dWxsDQo+ID4gKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9w
-eXRob24vcHl0aG9uLWNtZDIuaW5jDQo+ID4gQEAgLTAsMCArMSwxMyBAQA0K
-PiA+ICtTVU1NQVJZID0gIkV4dHJhIGZlYXR1cmVzIGZvciBzdGFuZGFyZCBs
-aWJyYXJ5J3MgY21kIG1vZHVsZSINCj4gPiArSE9NRVBBR0UgPSAiaHR0cDov
-L3BhY2thZ2VzLnB5dGhvbi5vcmcvY21kMi8iDQo+ID4gK0xJQ0VOU0UgPSAi
-TUlUIg0KPiA+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6Ly9MSUNF
-TlNFO21kNT0wMWFlYWJlYTdhZTE1MjlhOGU0YjY3NGI3MTA3ZDZiYyINCj4g
-PiArDQo+ID4gK1NSQ19VUklbbWQ1c3VtXSA9ICJkZjM1YmIyZGNhOGY1ZTFm
-NjA5MGUxZjBhYTAyOTYwYSINCj4gPiArU1JDX1VSSVtzaGEyNTZzdW1dID0N
-Cj4gIjRiNzgzNzlkNTNhZmY4MTFkMWRlYWM3MjBiYmU3MTY2MTc2OTgyMmE1
-ZmIyZDgzMGNkNzMwNjU2ZDE4MGZiM2QiDQo+ID4gKw0KPiA+ICtpbmhlcml0
-IHB5cGkNCj4gPiArDQo+ID4gK0RFUEVORFMgKz0gIiR7UFlUSE9OX1BOfS1z
-ZXR1cHRvb2xzLXNjbS1uYXRpdmUiDQo+ID4gKw0KPiA+ICtCQkNMQVNTRVhU
-RU5EID0gIm5hdGl2ZSBuYXRpdmVzZGsiDQo+ID4gZGlmZiAtLWdpdCBhL21l
-dGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbi1jbWQy
-XzAuOS4xNi5iYg0KPiA+IGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29s
-cy9weXRob24vcHl0aG9uLWNtZDJfMC45LjE2LmJiDQo+ID4gaW5kZXggOTRk
-YjM3YTJkLi4xN2I2YWUyODUgMTAwNjQ0DQo+ID4gLS0tIGEvbWV0YS1weXRo
-b24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uLWNtZDJfMC45LjE2
-LmJiDQo+ID4gKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9w
-eXRob24vcHl0aG9uLWNtZDJfMC45LjE2LmJiDQo+ID4gQEAgLTEsMTQgKzEs
-NSBAQA0KPiA+IC1TVU1NQVJZID0gIkV4dHJhIGZlYXR1cmVzIGZvciBzdGFu
-ZGFyZCBsaWJyYXJ5J3MgY21kIG1vZHVsZSINCj4gPiAtSE9NRVBBR0UgPSAi
-aHR0cDovL3BhY2thZ2VzLnB5dGhvbi5vcmcvY21kMi8iDQo+ID4gLUxJQ0VO
-U0UgPSAiTUlUIg0KPiA+IC1MSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6
-Ly9MSUNFTlNFO21kNT0wMWFlYWJlYTdhZTE1MjlhOGU0YjY3NGI3MTA3ZDZi
-YyINCj4gPiAtDQo+ID4gLVNSQ19VUklbbWQ1c3VtXSA9ICJkZjM1YmIyZGNh
-OGY1ZTFmNjA5MGUxZjBhYTAyOTYwYSINCj4gPiAtU1JDX1VSSVtzaGEyNTZz
-dW1dID0NCj4gIjRiNzgzNzlkNTNhZmY4MTFkMWRlYWM3MjBiYmU3MTY2MTc2
-OTgyMmE1ZmIyZDgzMGNkNzMwNjU2ZDE4MGZiM2QiDQo+ID4gLQ0KPiA+IC1p
-bmhlcml0IHB5cGkgc2V0dXB0b29scw0KPiA+IC0NCj4gPiAtREVQRU5EUyAr
-PSAiJHtQWVRIT05fUE59LXNldHVwdG9vbHMtc2NtLW5hdGl2ZSINCj4gPiAr
-aW5oZXJpdCBzZXR1cHRvb2xzDQo+ID4gK3JlcXVpcmUgcHl0aG9uLWNtZDIu
-aW5jDQo+ID4NCj4gPiAgUkRFUEVORFNfJHtQTn0gKz0gIlwNCj4gPiAgICAg
-ICR7UFlUSE9OX1BOfS1kb2N0ZXN0IFwNCj4gPiBAQCAtMjEsNSArMTIsMyBA
-QCBSREVQRU5EU18ke1BOfSArPSAiXA0KPiA+ICAgICAgJHtQWVRIT05fUE59
-LXRocmVhZGluZyBcDQo+ID4gICAgICAke1BZVEhPTl9QTn0tdGV4dHV0aWxz
-IFwNCj4gPiAgICAgICINCj4gPiAtDQo+ID4gLUJCQ0xBU1NFWFRFTkQgPSAi
-bmF0aXZlIG5hdGl2ZXNkayINCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRh
-LXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLWNtZDJf
-MC45LjE2LmJiDQo+ID4gYi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xz
-L3B5dGhvbi9weXRob24zLWNtZDJfMC45LjE2LmJiDQo+ID4gbmV3IGZpbGUg
-bW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAuLmY1YzVjN2UxYQ0K
-PiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLXB5dGhvbi9yZWNp
-cGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLWNtZDJfMC45LjE2LmJiDQo+
-ID4gQEAgLTAsMCArMSw5IEBADQo+ID4gK2luaGVyaXQgc2V0dXB0b29sczMN
-Cj4gPiArcmVxdWlyZSBweXRob24tY21kMi5pbmMNCj4gPiArDQo+ID4gK1JE
-RVBFTkRTXyR7UE59ICs9ICJcDQo+ID4gKyAgICAke1BZVEhPTl9QTn0tcHlw
-ZXJjbGlwIFwNCj4gPiArICAgICR7UFlUSE9OX1BOfS1jb2xvcmFtYSBcDQo+
-ID4gKyAgICAke1BZVEhPTl9QTn0tYXR0cnMgXA0KPiA+ICsgICAgJHtQWVRI
-T05fUE59LXdjd2lkdGggXA0KPiA+ICsgICAgIg0KPiA+IC0tDQo+ID4gMi4x
-Ny4xDQo+ID4NCj4gPg0KPiA+DQo+ID4gLS0NCj4gPiBfX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiA+IE9wZW5l
-bWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gPiBPcGVuZW1iZWRkZWQt
-ZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9saXN0
-cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVk
-ZGVkLWRldmVsDQo+IA0KDQoKCg==
+Providing a python3 version of python-prettytable.
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ .../python/python-prettytable.inc             | 25 ++++++++++++++++++
+ .../python/python-prettytable_0.7.2.bb        | 26 +------------------
+ .../python/python3-prettytable_0.7.2.bb       |  3 +++
+ 3 files changed, 29 insertions(+), 25 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-prettytable.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
+
+diff --git a/meta-python/recipes-devtools/python/python-prettytable.inc b/meta-python/recipes-devtools/python/python-prettytable.inc
+new file mode 100644
+index 000000000..6004ecd33
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-prettytable.inc
+@@ -0,0 +1,25 @@
++SUMMARY = "Python library for displaying tabular data in a ASCII table format"
++HOMEPAGE = "http://code.google.com/p/prettytable"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3e73500ffa52de5071cff65990055282"
++
++SRC_URI[md5sum] = "0c1361104caff8b09f220748f9d69899"
++SRC_URI[sha256sum] = "a53da3b43d7a5c229b5e3ca2892ef982c46b7923b51e98f0db49956531211c4f"
++
++SRCNAME = "prettytable"
++
++SRC_URI = "https://pypi.python.org/packages/source/P/PrettyTable/${SRCNAME}-${PV}.zip"
++
++S = "${WORKDIR}/${SRCNAME}-${PV}"
++
++do_install_append() {
++    perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
++    for f in $perm_files; do
++        chmod 644 "${f}"
++    done
++}
++
++UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/PrettyTable/"
++UPSTREAM_CHECK_REGEX = "/PrettyTable/(?P<pver>(\d+[\.\-_]*)+)"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb b/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb
+index 406555ac3..69ff25927 100644
+--- a/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb
++++ b/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb
+@@ -1,27 +1,3 @@
+-SUMMARY = "Python library for displaying tabular data in a ASCII table format"
+-HOMEPAGE = "http://code.google.com/p/prettytable"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=3e73500ffa52de5071cff65990055282"
+-
+-SRC_URI[md5sum] = "0c1361104caff8b09f220748f9d69899"
+-SRC_URI[sha256sum] = "a53da3b43d7a5c229b5e3ca2892ef982c46b7923b51e98f0db49956531211c4f"
+-
+-SRCNAME = "prettytable"
+-
+-SRC_URI = "https://pypi.python.org/packages/source/P/PrettyTable/${SRCNAME}-${PV}.zip"
+-
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+ inherit setuptools
++require python-prettytable.inc
+ 
+-do_install_append() {
+-    perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
+-    for f in $perm_files; do
+-        chmod 644 "${f}"
+-    done
+-}
+-
+-UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/PrettyTable/"
+-UPSTREAM_CHECK_REGEX = "/PrettyTable/(?P<pver>(\d+[\.\-_]*)+)"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb b/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
+new file mode 100644
+index 000000000..5445f1019
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-prettytable_0.7.2.bb
+@@ -0,0 +1,3 @@
++inherit setuptools3
++require python-prettytable.inc
++
+-- 
+2.17.1
+
+
+
 
