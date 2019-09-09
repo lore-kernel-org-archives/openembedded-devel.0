@@ -1,50 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
-	[209.85.210.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 02D3E79980
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id D81897F2DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Sep 2019 20:43:56 +0000 (UTC)
-Received: by mail-pf1-f170.google.com with SMTP id q5so10035878pfg.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Sep 2019 13:43:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=w/zYYl4bv3xMf9n45JyFuxuH/xD0FiDt98jNSy2DNdM=;
-	b=NVd+f2/tcGKZ+uiOj70yiFCAZR/pzyMgCOiHDAekl5YmldZHU9swHQLUzEjwVc0V2g
-	UFlTBRD2VzV/fxSOFgy+l8rtp55m8BbTNGcrJQ++Np1nIaHUeUxwDwB/kKrT5rLILl6t
-	f56S6pcuYvl6o/DE2d4+rgztfOfpc4ZpKzap1lOxtz3Vj4aK67bPUhUeAYR1eRgWt9nh
-	3lPZWgl0nrfdUiWul0iYKgcu3cX4gh+FPx2kGKVcQOU6k8ADe/Z24BdDk48LA1qo+2Fs
-	B16dJp7wiR4DO8CEZcJGOjPfduzWGxy45pPPVVB0GyicqgPECZGgDFxV7C7UmRU8HVpp
-	9QEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=w/zYYl4bv3xMf9n45JyFuxuH/xD0FiDt98jNSy2DNdM=;
-	b=G8b0pKGTDvTkDfAgYJh1eHwtopSq0DMIMqouuzkX6ldqtCzBn0z75u7TaRR0vNm+Bu
-	Hz0eZORMNNEx8EE80a2ZNcAkcS0EjaK/BnVHYxXgnw80FRqOfjqys//1xqV7VO6UkZzG
-	AVQi/k5oq5UZFH7ei3XJD551h0o8yEWdjHzjjpCZ3U3EQdtFlePaNTJ4s7/OzRZSn+Un
-	XgzTP3LRtvxxmuQyxAwSuv5+kL8SLTKVCYACeo2Zgun2PSPLCyxMmqDsuFQ+nGrz2WbW
-	dB4c3hePA93w/fGU4WaN2P1OTeRNrCqroDAbddPK1lNMhQGXh2gSC3haOoR316fDAxx3
-	f4Vg==
-X-Gm-Message-State: APjAAAXDGST0MVjWoi1ZKaLQGi1en+6VIgQWEo9umtfSTOaHzjEKmilb
-	e/k1kT5aqvuhO+VK7v+EbGThM0MCxgw=
-X-Google-Smtp-Source: APXvYqwRj5v/GLggK2vCghOMTEXbO2oTMBBbBD2k1g+K1E1UofUZrEA+5UY+OZ1XNamLuUuDZ+Z9BA==
-X-Received: by 2002:a65:690b:: with SMTP id s11mr23460659pgq.10.1568061837329; 
-	Mon, 09 Sep 2019 13:43:57 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	v7sm16193202pff.87.2019.09.09.13.43.56
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Sep 2019 13:43:56 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Sep 2019 13:43:48 -0700
-Message-Id: <20190909204348.772880-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	Mon,  9 Sep 2019 20:57:06 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46S0pV47przCH;
+	Mon,  9 Sep 2019 22:57:05 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1568062626;
+	bh=jNqfyQMy+K5Ztf5SdA/LZspIJBHxH4WnXDwJKNHAhDA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=ikkyoQTBf6LZoO1t0KAqv6ZnFlO+qL4jGhTQ03VqaxnNMSwtkt8F2pf95d7YjGqVg
+	URwu831ktVQsUyhn3kkOe1s6Ddi7XApkzLxs4UQrhGdmVbS+D7eoGAqik5VipKox/I
+	p2EQ8ojlGvm0/0vnaTNxpn4OTw4DgGSpuBax7hGzLIArZnPSmadKU803vLtxucWZn4
+	fC268U5D0K73YO/glfS1f9L1nzcNyR6DIUYTlkO8xOq3uQHBwhRwhopIrHBGMfcL7Q
+	xxKszEvnVsiMhi8FIlZh7JVIq2WnxcE6XFBHx+2SOl2vpHNUzYGMJOZekCZq0Tn+2a
+	7z3I7ct/U8lxA5IB1k5IuWTGmLBvLNsnGAlyI8IOpsgl2V0vcwRWVaZe3O3hkzIazD
+	TUL8X2M1IdopnPjD7LgF/dYMPNiwhErRULTssCb/Ei2PK4hR04ksHkBPYQlhQgqTYj
+	2qbDi7M8xy2OwrFGGgb3CQvzcoicBtDsd7FKFJbPKKn9prYHCMJtPPEehnZylFlUQK
+	EwJqApGd2QR81dF+VfWj6i0SHKcXjzSfu+ZcM5DuWl7PKRmaEMbuVxEIiJis+mASVD
+	wBV5VTsz4LpWHC4nbqwqvXwtZi6ZdDA83DX5aMQ3I7C0vD7gC31ej7KHyNxCEi3oRf
+	9J86CAR6EULP12HeT0/fDUoo=
+Date: Mon, 9 Sep 2019 23:57:04 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Mathieu =?utf-8?Q?Alexandre-T=C3=A9treault?= <alexandretm@amotus.ca>
+Message-ID: <20190909205704.GA14642@localhost>
+References: <b6f2c586-cb29-5015-ec35-ab2c7dcf8d4d@amotus.ca>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] remmina: Add space before append operation
+In-Reply-To: <b6f2c586-cb29-5015-ec35-ab2c7dcf8d4d@amotus.ca>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Support for OpenJDK 9+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Sep 2019 20:43:57 -0000
+X-List-Received-Date: Mon, 09 Sep 2019 20:57:08 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-Fixes
-ERROR: Nothing PROVIDES 'libsecretlibexecinfo'
+On Mon, Sep 09, 2019 at 07:52:16PM +0000, Mathieu Alexandre-Tétreault wrote:
+> Howdy,
+> 
+> We recently got a request to add support for Java(OpenJdk) 9+.
+> I came to wonder if there was any limitations preventing the use of 
+> Openjdk 9+ on arm?
+> 
+> Any advise will be appreciated.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Debian stable ships OpenJDK 11 on three different arm architectures.
 
-diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-index cd6bc145c1..126680c574 100644
---- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-+++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
-@@ -8,7 +8,7 @@ DEPENDS += "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui libsodium li
- DEPENDS_append_x86 = " spice spice-protocol"
- DEPENDS_append_x86-64 = " spice spice-protocol"
- 
--DEPENDS_append_libc-musl = "libexecinfo"
-+DEPENDS_append_libc-musl = " libexecinfo"
- LDFLAGS_append_libc-musl = " -lexecinfo"
- 
- SRC_URI = "https://gitlab.com/Remmina/Remmina/-/archive/v${PV}/Remmina-v${PV}.tar.bz2 \
+> Cheers,
+> 
+> Mathieu
+
+cu
+Adrian
+
 -- 
-2.23.0
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
