@@ -1,50 +1,81 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B392379980
+Return-Path: <alexandretm@amotus.ca>
+Received: from CAN01-QB1-obe.outbound.protection.outlook.com
+	(mail-eopbgr660078.outbound.protection.outlook.com [40.107.66.78])
+	by mail.openembedded.org (Postfix) with ESMTP id 94BB77EA27
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Sep 2019 16:59:40 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id d15so9515648pfo.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Sep 2019 09:59:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=cQIrgpSRT2IjWFdoid9as23H6WFP9o3qZsSmTTreXb4=;
-	b=udWAxeyWLFh9GEnVvOzoEYH7pw3kQkClCfJeIgfht1tiTHq7zgVv55j8fujF3m6Ow4
-	CB/rWgxZFM/B7L6Fj4RomuILq1txmvOjzXBdTYUUIyuptzdR3i7ssqHMuh5fVVHBwB3F
-	LipUXK2nxn0N/AA0Zea8jWJxfNajur5H/eNt1R7tzJ7rEOBYRto2KfH/X5j6XP1Ar5mv
-	yVNJLVYGqIjM/cFNT5DjlHsKziP10bV28Ri8oWfx2RQuFDDjybxu5AzyJNgr5tGhmxMa
-	rXXu6pLLS9vdbFkxeuIqReAnpu+Ca1LI80ZAMJ5Aj5Ye1YX4ifhBBoESuRscQAMwzFkq
-	m3iQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=cQIrgpSRT2IjWFdoid9as23H6WFP9o3qZsSmTTreXb4=;
-	b=iVLYGWW8M8hTpjIuCzESCwbxjh5rN27bB803b1EkVR93WPsMkq6kdZan/qZ0gwh/KU
-	JmieRyYXd1/8XQni3F8JdGLfhgHrcRW27CFsL6sf4M/eM/1nXYskJpJa0N73ujwNLT4Z
-	B6FpmedHGV2FSeNnOcfuPDMktb4p2DblCE4wwFA1FOyDRtCu6QjX4+Eyi4ij22g6R5P/
-	UYTZtx+dxH5oSrMYfpcvSkwTqhWRP7L28hzSmhAk2Hlo4k8KLKGO7QznOf5IlBWTuW7g
-	MSabeZOzg+eWRye0jpL7gsbMdQUClytqV5LcTTXKp4CDY6uJWs5ofOR9aFEFLUSrfw6M
-	8/iQ==
-X-Gm-Message-State: APjAAAXxmoGhRAs6XmRBvqpPhj26IwTMqxSep+5ZRiuyzvi+Q4TMHW3p
-	njGSgw555/EO/CNfWzo3iKckM9R81VY=
-X-Google-Smtp-Source: APXvYqx9dsZwjcRjSY2gAeNL93UXMdLMJG6mNpAPNB7Djs3pOn1EQapSUr8pWhA09SpTEek9HzPZfw==
-X-Received: by 2002:a63:205f:: with SMTP id r31mr15325180pgm.159.1568048381270;
-	Mon, 09 Sep 2019 09:59:41 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	d69sm18437181pfd.175.2019.09.09.09.59.40
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Sep 2019 09:59:40 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Sep 2019 09:59:33 -0700
-Message-Id: <20190909165933.3132376-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	Mon,  9 Sep 2019 19:52:16 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=WAvMS6exHs202otkYANFwQ04IPZI4hQCycK9OCrW4ydyNx4uQ+tlUydteXX+2sV6z/PUFV1MAWZdIfXn4OD+lbeOSm1YPuagzaqMhwyXhv9JfK3mdvtJYemI7unDdK2A9MzYv/WfRnWYouDFxHvaOvtgRXJdmzlktbu3BScV2orGxvvUifh9qqTf5Qf/4k9PsL6OIl5N6fw2kFS9TvF84Cjd9OmY2S7u3zMB7ggxYFr5qeDy3zMOAiFoBdj3QPaqtPrW+pzdzMRlH8aKMzeTdAYXvao8OuriJ5bDnFSAH8T00C9sduWwz7LmF97MfzQ6/UcRyBjC1moaokDY1fqFYA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=vNIxW3786PjbegTs1ju5GChytGCcA9O20gi9wyt9vDM=;
+	b=GAcEabcU7t1mBP1Tym25eHMHSQ3CsNqArm9EUfKfE4Z6sB9SfQgcy0cfK+LkIUQUuMcHBk4QN58XefA19syabaPk9laIFC5zwJ1EOXH/KeU1U54bbS6a2Nabr6oKFTjb5f0gDOcS7TPzc9U2lndh/U8Q1clz5OkO/BmlApNUgF9NuyCiR8C+PueoBe4cLcXr2ZAmCwnJ/pb79EoY8LLLYr3rNNd//bQ130QwL9bVS6LQiVBRd0xKue59DQihy4gW7evyy2CjQ9WVVPePbgFJpxnTcPq+dwCNNSCHwCIlYNlVuNZ7FBmEiZlwzp5ODu0Vt2y2F1+j8WAPPgUCs0bS7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+	smtp.mailfrom=amotus.ca; dmarc=pass action=none header.from=amotus.ca; 
+	dkim=pass header.d=amotus.ca; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=dimonoff.onmicrosoft.com; s=selector2-dimonoff-onmicrosoft-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=vNIxW3786PjbegTs1ju5GChytGCcA9O20gi9wyt9vDM=;
+	b=sNn70mLpIwktMh4HCgXtWKVzTP3G9V35ZnbIRAzkDgNuyPbSodCXSwGb9LcbfjJR3ISkNq+2FHAgpcZuzNAkvvVqIdSacnvRycx7rl5az8n7fJNMCeuuAJxpLiBBA1GCznfgTK/t5VgjJdiVSb90p1In8YqwFcwselQE5GdVLlY=
+Received: from YT1PR01MB3225.CANPRD01.PROD.OUTLOOK.COM (10.255.40.207) by
+	YT1PR01MB2585.CANPRD01.PROD.OUTLOOK.COM (10.255.42.27) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2241.18; Mon, 9 Sep 2019 19:52:16 +0000
+Received: from YT1PR01MB3225.CANPRD01.PROD.OUTLOOK.COM
+	([fe80::e453:f27b:744f:5ad3]) by
+	YT1PR01MB3225.CANPRD01.PROD.OUTLOOK.COM
+	([fe80::e453:f27b:744f:5ad3%6]) with mapi id 15.20.2241.018;
+	Mon, 9 Sep 2019 19:52:16 +0000
+From: =?utf-8?B?TWF0aGlldSBBbGV4YW5kcmUtVMOpdHJlYXVsdA==?=
+	<alexandretm@amotus.ca>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Support for OpenJDK 9+
+Thread-Index: AQHVZ0gU5pgtlyO8106HiWTgwi9PtA==
+Date: Mon, 9 Sep 2019 19:52:16 +0000
+Message-ID: <b6f2c586-cb29-5015-ec35-ab2c7dcf8d4d@amotus.ca>
+Accept-Language: en-CA, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [24.37.194.182]
+x-clientproxiedby: YQXPR0101CA0070.CANPRD01.PROD.OUTLOOK.COM
+	(2603:10b6:c00:14::47) To YT1PR01MB3225.CANPRD01.PROD.OUTLOOK.COM
+	(2603:10b6:b01:3::15)
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=alexandretm@amotus.ca; 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: b415b9de-652f-4c1f-4f08-08d7355f373c
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(7021145)(8989299)(4534185)(7022145)(4603075)(4627221)(201702281549075)(8990200)(7048125)(7024125)(7027125)(7023125)(5600166)(711020)(4605104)(1401327)(2017052603328)(7193020);
+	SRVR:YT1PR01MB2585; 
+x-ms-traffictypediagnostic: YT1PR01MB2585:
+x-microsoft-antispam-prvs: <YT1PR01MB258561F40EFE29130D9DBF6DB2B70@YT1PR01MB2585.CANPRD01.PROD.OUTLOOK.COM>
+x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-forefront-prvs: 01559F388D
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(366004)(39840400004)(376002)(346002)(396003)(136003)(189003)(199004)(5660300002)(25786009)(6916009)(31686004)(6436002)(486006)(2616005)(476003)(508600001)(102836004)(316002)(6116002)(3846002)(6486002)(186003)(2351001)(14454004)(99286004)(66066001)(81166006)(81156014)(8936002)(2906002)(26005)(85202003)(6506007)(386003)(305945005)(8676002)(53936002)(6512007)(66946007)(36756003)(5640700003)(71190400001)(7736002)(14444005)(256004)(558084003)(66476007)(66556008)(71200400001)(64756008)(66446008)(85182001)(31696002)(7116003)(86362001)(52116002)(2501003);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:YT1PR01MB2585;
+	H:YT1PR01MB3225.CANPRD01.PROD.OUTLOOK.COM; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: amotus.ca does not designate
+	permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: lCSdrAh5rzAKKq9P7faexF3JEtuFEWYU6qnB+DAYxIc/tjKbDine9kZarK6P8EUhZY4xMm2wqAfUhYLS8Xg1kxubkM162FUoBoYGMGpOWUSCuaY2wzE3HoHD8qczmNbK6uL+mnxDrBN0WP33uyvfpdvG9WXzX9P45f4slKFYSTMLtnrKdb8WjMkbB7y7UFVlr8wK29aQu1e9zNIuMGlq4IEm6lxs9TyQWWjEq94vsjsa0j/rMspNXZTODYH5eDL+XC0ZDJbf3rFQYBsG8dHpWLHvP9SfGlSeN77Uye0dHyBzCb/VP6zb2mm4gKMxdp2ewigQm2MchOPWCF4LNG2f3gQq4rjM8eBn7dKl+mvQEbGddtxMYSgSKzM2h7WUWk0wxiS0W3IFgqrYs19NKHEFOlvXHrMRZLCkA6GclAZ5wcI=
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] kernel-selftest: Needs error.h which is missing in musl
+X-OriginatorOrg: amotus.ca
+X-MS-Exchange-CrossTenant-Network-Message-Id: b415b9de-652f-4c1f-4f08-08d7355f373c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Sep 2019 19:52:16.1978 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: c4063547-e5e6-4866-a386-58c3965da102
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: RTev2fVrP/J61y3J0b0GWYyEJzMYNnIm1bHefVff/YaB/6g1M0oIr/UE7e8n/1fjpuRBwOGieHUJzlgy1n1Cwg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: YT1PR01MB2585
+Subject: Support for OpenJDK 9+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,29 +88,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Sep 2019 16:59:40 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Sep 2019 19:52:17 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <8E7A188C0B020447B2485459A3956A40@CANPRD01.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 
-prog_tests/flow_dissector.c:3:10: fatal error: error.h: No such file or directory
-| #include <error.h>
-|          ^~~~~~~~~
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index ff9720f8d0..fb4534dca8 100644
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -115,3 +115,5 @@ RDEPENDS_${PN} += "python3"
- INSANE_SKIP_${PN} += "ldflags"
- 
- SECURITY_CFLAGS = ""
-+COMPATIBLE_HOST_libc-musl = 'null'
-+
--- 
-2.23.0
-
+SG93ZHksDQoNCldlIHJlY2VudGx5IGdvdCBhIHJlcXVlc3QgdG8gYWRkIHN1cHBvcnQgZm9yIEph
+dmEoT3BlbkpkaykgOSsuDQpJIGNhbWUgdG8gd29uZGVyIGlmIHRoZXJlIHdhcyBhbnkgbGltaXRh
+dGlvbnMgcHJldmVudGluZyB0aGUgdXNlIG9mIA0KT3BlbmpkayA5KyBvbiBhcm0/DQoNCkFueSBh
+ZHZpc2Ugd2lsbCBiZSBhcHByZWNpYXRlZC4NCg0KQ2hlZXJzLA0KDQpNYXRoaWV1DQoNCg==
 
