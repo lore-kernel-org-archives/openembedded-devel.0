@@ -1,42 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
-	[209.85.222.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 7215C6D74B
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Sep 2019 02:42:46 +0000 (UTC)
-Received: by mail-qk1-f174.google.com with SMTP id o11so11633162qkg.8
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Sep 2019 19:42:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=V+U1hA0ud0O4NglKrrRDSbeXxpmTyw6EKkb65Qk7PoA=;
-	b=aV0Q8CHMigjYyj822F5eacEh80V12MdxwR1NwmyXzagb+4q4osKHnZBv8475/seefn
-	VPzFIpSaKBtY7m2qpz1CCuZTCvpTi2CovM+MpYDMS7No1tYhNgEkiwVirXIS1+Ig9z9p
-	Ma3OcYWcB078HYZ1HhgCruI8xksmqISgEHAfwsqU7CWPT1eD5ZpXReA2b9mKg6M+epQC
-	sv1LHGmDbz3YwZWcqv7VG6U/98jJpqVx7xLvLel7gNuZLT4EtK2ONk+7crp5iUd8NJTf
-	bXLfHnujRa0knfE2OtrHmel9QwXCjxRMSrTwMuc1Ti6JWiB6mShh5nkD8jehWGfewdbG
-	5vyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=V+U1hA0ud0O4NglKrrRDSbeXxpmTyw6EKkb65Qk7PoA=;
-	b=gq/m/09e60QBhnBUfaYDn1mx9Q/mxsHlx4x4tjeMn7KnxFEDr15jaiESjYiRZr+/SS
-	/kyk1IlbHZBX+Wo7tGJE3AjIa9nbCTccWkXsQ8hRBUnFwIfJ9pg4pqgvTdPoJgv7gY5E
-	NdDP9TYCmfhG52MkF2OdUkx1ErqOL1gc2fYbuG0Qkuwp+E32yLEy+TZApyCGTJjkVJfn
-	xTAwETFtxVxsH2oMr7P/1U5mb1cKwtAok3pPITgPnA3SqKICqVDKkbWPnj9WYLWohVve
-	44EUEh+NfF4F7C2//GCGYlPNXklJf+tzcT6CspiIPivgoz6f+uA+o/Vt5+BbwqegIYSe
-	T1Fw==
-X-Gm-Message-State: APjAAAUtdr3BhthgPg/XEeTykVUe3xAvotGTf1u2dlOJlwA8Wb8hzano
-	xJNLpTVjq2iwcIJP7LaKIhLd1ogX30wGq+/jtlRf+4YQkLU=
-X-Google-Smtp-Source: APXvYqyExrrbPIxxQMCrz0BCeR2OSdSZ2QGsUD3mZg0Ollm0Ppfdq5gTaawEDNhwAZDEwi3GJBPSWOgbTBHCnzMvhmM=
-X-Received: by 2002:a37:c403:: with SMTP id d3mr21095724qki.212.1567996966630; 
-	Sun, 08 Sep 2019 19:42:46 -0700 (PDT)
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id C38147F2D8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  9 Sep 2019 06:17:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,483,1559491200"; d="scan'208";a="75153242"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Sep 2019 14:17:46 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id B2A314CE03E8;
+	Mon,  9 Sep 2019 14:17:38 +0800 (CST)
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0439.000; Mon, 9 Sep 2019 14:17:50 +0800
+From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-python][PATCH] python-cmd2: Add python3 version
+Thread-Index: AQHVYU55SyJQFtjtG0CDj/3kugR1hKcadX4AgAhuNLA=
+Date: Mon, 9 Sep 2019 06:17:48 +0000
+Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF73B5B6E0C3@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1567401728-113652-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<CAMKF1spnx4pPh5ObnVTyahxE6Z8y7GCkv3GC_oCwf-fL_eYu9A@mail.gmail.com>
+In-Reply-To: <CAMKF1spnx4pPh5ObnVTyahxE6Z8y7GCkv3GC_oCwf-fL_eYu9A@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.225.35]
 MIME-Version: 1.0
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 8 Sep 2019 19:42:20 -0700
-Message-ID: <CAMKF1sqsFw+0hO1rUpK6psQOo9+_Q9ok_Pohz9=dbw+7AD8YOg@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: State of OE world 2019-09-08
+X-yoursite-MailScanner-ID: B2A314CE03E8.A9D88
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-cmd2: Add python3 version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,539 +44,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Sep 2019 02:42:46 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 09 Sep 2019 06:17:47 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-https://www.openembedded.org/wiki/Bitbake_World_Status_Zeus
-
-== Failed tasks 2019-09-08 ==
-
-INFO: jenkins-job.sh-1.8.46 Complete log available at
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.report.20190908_140140.log
-
-=== common (3) ===
-    * sources/meta-openembedded/meta-gnome/recipes-extended/gparted/gparted_0.33.0.bb:do_package_qa
-    * sources/meta-openembedded/meta-oe/recipes-devtools/openocd/openocd_git.bb:do_compile
-    * sources/openembedded-core/meta/recipes-graphics/wayland/weston-init.bb:do_install
-
-=== common-x86 (0) ===
-
-=== qemuarm (0) ===
-
-=== qemuarm64 (0) ===
-
-=== qemux86 (3) ===
-    * sources/meta-openembedded/meta-oe/recipes-core/safec/safec_3.4.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
-    * sources/meta-openembedded/meta-oe/recipes-devtools/breakpad/breakpad_git.bb:do_compile
-
-=== qemux86_64 (0) ===
-
-=== Number of failed tasks (15) ===
-{| class=wikitable
-|-
-|| qemuarm || 3 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm.20190908_065258.log/
-||
-|-
-|| qemuarm64 || 3 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemuarm64.20190908_073153.log/
-||
-|-
-|| qemux86 || 6 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86.20190908_050302.log/
-||
-|-
-|| qemux86_64 || 3 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.world.qemux86-64.20190908_054120.log/
-||
-|}
-
-=== PNBLACKLISTs (10) ===
-
-=== QA issues (57) ===
-{| class=wikitable
-!| Count ||Issue
-|-
-||0 ||already-stripped
-|-
-||0 ||compile-host-path
-|-
-||0 ||file-rdeps
-|-
-||0 ||host-user-contaminated
-|-
-||0 ||installed-vs-shipped
-|-
-||0 ||invalid-pkgconfig
-|-
-||0 ||ldflags
-|-
-||0 ||libdir
-|-
-||0 ||pkgname
-|-
-||0 ||qa_pseudo
-|-
-||0 ||symlink-to-sysroot
-|-
-||0 ||textrel
-|-
-||0 ||unknown-configure-option
-|-
-||1 ||build-deps
-|-
-||56 ||version-going-backwards
-|}
-
-
-
-=== Incorrect PACKAGE_ARCH or sstate signatures (17) ===
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/warrior/log.signatures.20190908_080636.log/
-    * ERROR: 17 issues were found in these recipes: 96boards-tools
-atmel-qt-demo-init libcrypt-openssl-guess-perl-native
-libextutils-config-perl-native libextutils-helpers-perl-native
-libextutils-installpaths-perl-native libmodule-build-perl-native
-liburi-perl-native libxml-filter-buffertext-perl-native
-libxml-sax-base-perl-native libxml-sax-perl-native phpmyadmin runit
-xscreensaver
-
-    * ERROR: 2 errors found in
-signatures.qemux86.do_package_write_ipk.sigdata.log
-    * ERROR: 2 errors found in signatures.qemuarm.do_configure.sigdata.log
-    * ERROR: 10 errors found in
-signatures.qemuarm.do_populate_sysroot.sigdata.log
-    * ERROR: 3 errors found in
-signatures.qemuarm.do_package_write_ipk.sigdata.log
-
-    * ERROR: runit different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemux86
-    * ERROR: xscreensaver different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemux86
-    * ERROR: 2 errors found in
-/home/jenkins/oe/world/yoe/build/tmpfs/sstate-diff/1567955196/signatures.qemux86.do_package_write_ipk.sigdata.log
-    * ERROR: atmel-qt-demo-init different signature for task
-do_configure.sigdata between qemux86copy and qemuarm
-    * ERROR: libxml-filter-buffertext-perl-native different signature
-for task do_configure.sigdata between qemux86copy and qemuarm
-    * ERROR: 2 errors found in
-/home/jenkins/oe/world/yoe/build/tmpfs/sstate-diff/1567955196/signatures.qemuarm.do_configure.sigdata.log
-    * ERROR: atmel-qt-demo-init different signature for task
-do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: libcrypt-openssl-guess-perl-native different signature
-for task do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: libextutils-config-perl-native different signature for
-task do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: libextutils-helpers-perl-native different signature for
-task do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: libextutils-installpaths-perl-native different signature
-for task do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: libmodule-build-perl-native different signature for task
-do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: liburi-perl-native different signature for task
-do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: libxml-filter-buffertext-perl-native different signature
-for task do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: libxml-sax-base-perl-native different signature for task
-do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: libxml-sax-perl-native different signature for task
-do_populate_sysroot.sigdata between qemux86copy and qemuarm
-    * ERROR: 10 errors found in
-/home/jenkins/oe/world/yoe/build/tmpfs/sstate-diff/1567955196/signatures.qemuarm.do_populate_sysroot.sigdata.log
-    * ERROR: 96boards-tools different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemuarm
-    * ERROR: atmel-qt-demo-init different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemuarm
-    * ERROR: phpmyadmin different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemuarm
-    * ERROR: 3 errors found in
-/home/jenkins/oe/world/yoe/build/tmpfs/sstate-diff/1567955196/signatures.qemuarm.do_package_write_ipk.sigdata.log
-    * ERROR: 17 issues were found in these recipes: 96boards-tools
-atmel-qt-demo-init libcrypt-openssl-guess-perl-native
-libextutils-config-perl-native libextutils-helpers-perl-native
-libextutils-installpaths-perl-native libmodule-build-perl-native
-liburi-perl-native libxml-filter-buffertext-perl-native
-libxml-sax-base-perl-native libxml-sax-perl-native phpmyadmin runit
-xscreensaver
-
-
-PNBLACKLISTs:
-sources/meta-96boards:
-sources/meta-atmel:
-sources/meta-browser:
-sources/meta-clang:
-sources/meta-freescale:
-sources/meta-freescale-3rdparty:
-sources/meta-intel:
-sources/meta-odroid:
-sources/meta-openembedded:
-meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb:PNBLACKLIST[netkit-rusers]
-= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or
-directory"
-meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb:PNBLACKLIST[drbd]
-= "Kernel module Needs forward porting to kernel 5.2+"
-meta-oe/recipes-dbs/mongodb/mongodb_git.bb:PNBLACKLIST[mongodb] =
-"Since bbclass scons convert to python3, build mongodb failed"
-meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb:PNBLACKLIST[librcf]
-= " error: invalid use of incomplete type 'RCF::AsioIoService {aka
-class boost::asio::io_service}; among others?"
-meta-oe/recipes-extended/socketcan/can-isotp_git.bb:PNBLACKLIST[can-isotp]
-= "Kernel module Needs forward porting to kernel 5.2+"
-meta-oe/recipes-extended/sysdig/sysdig_git.bb:PNBLACKLIST[sysdig] =
-"configure: error: in
-'TOPDIR/build/tmpfs/work/core2-64-yoe-linux/sysdig/0.26.4-r0/build/c-ares-prefix/src/c-ares'"
-meta-oe/recipes-kernel/bpftool/bpftool.bb:PNBLACKLIST[bpftool] =
-"Needs forward porting to kernel 5.2+"
-meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb:PNBLACKLIST[vboxguestdrivers]
-= "Needs forward porting to kernel 5.2+"
-meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb:PNBLACKLIST[python3-cmd2]
-= "Nothing RPROVIDES 'python3-colorama' (but python3-cmd2_0.9.16.bb
-RDEPENDS on or otherwise requires it)"
-sources/meta-qcom:
-sources/meta-qt5:
-sources/meta-raspberrypi:
-sources/meta-riscv:
-sources/meta-rust:
-sources/meta-ti:
-sources/meta-variscite-fslc:
-sources/meta-yoe:
-sources/openembedded-core:
-meta/lib/oeqa/selftest/cases/imagefeatures.py:PNBLACKLIST[busybox] =
-"Don't build this"
-PNBLACKLIST[android-system] = "depends on lxc from
-meta-virtualiazation which isn't included in my world builds"
-PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
-directory in /home/builder/poky :/"
-PNBLACKLIST[smartrefrigerator] = "Needs porting to QT > 5.6"
-PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
-PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
-PNBLACKLIST[homeautomation] = "Needs porting to QT > 5.6"
-PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
-PNBLACKLIST[applicationlauncher] = "Needs porting to QT > 5.6"
-PNBLACKLIST[evolution-data-server] = "Qemu usermode hangs forever on
-abaco/kwaj builders when doing g-ir-scanner-qemuwrapper"
-
-
-QA issues by type:
-count: 0 issue: already-stripped
-
-
-count: 0 issue: libdir
-
-
-count: 0 issue: textrel
-
-
-count: 1 issue: build-deps
-gparted-0.33.0: gparted rdepends on hicolor-icon-theme, but it isn't a
-build dependency, missing hicolor-icon-theme in DEPENDS or
-PACKAGECONFIG? [build-deps]
-
-
-count: 0 issue: file-rdeps
-
-
-count: 56 issue: version-going-backwards
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-dbg went backwards which would break package feeds
-from (0:1.1-r2.222 to 0:1.1-r2.221) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-dbg went backwards which would break package feeds
-from (0:1.1-r2.228 to 0:1.1-r2.227) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-dev went backwards which would break package feeds
-from (0:1.1-r2.222 to 0:1.1-r2.221) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-dev went backwards which would break package feeds
-from (0:1.1-r2.228 to 0:1.1-r2.227) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-doc went backwards which would break package feeds
-from (0:1.1-r2.222 to 0:1.1-r2.221) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-doc went backwards which would break package feeds
-from (0:1.1-r2.228 to 0:1.1-r2.227) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-locale went backwards which would break package
-feeds from (0:1.1-r2.222 to 0:1.1-r2.221) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-locale went backwards which would break package
-feeds from (0:1.1-r2.228 to 0:1.1-r2.227) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-src went backwards which would break package feeds
-from (0:1.1-r2.222 to 0:1.1-r2.221) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-src went backwards which would break package feeds
-from (0:1.1-r2.228 to 0:1.1-r2.227) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-staticdev went backwards which would break package
-feeds from (0:1.1-r2.222 to 0:1.1-r2.221) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package
-atmel-qt-demo-init-staticdev went backwards which would break package
-feeds from (0:1.1-r2.228 to 0:1.1-r2.227) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package atmel-qt-demo-init
-went backwards which would break package feeds from (0:1.1-r2.222 to
-0:1.1-r2.221) [version-going-backwards]
-atmel-qt-demo-init-1.1: Package version for package atmel-qt-demo-init
-went backwards which would break package feeds from (0:1.1-r2.228 to
-0:1.1-r2.227) [version-going-backwards]
-os-release-1.0: Package version for package os-release-dbg went
-backwards which would break package feeds from (0:1.0-r0.226 to
-0:1.0-r0.225) [version-going-backwards]
-os-release-1.0: Package version for package os-release-dev went
-backwards which would break package feeds from (0:1.0-r0.226 to
-0:1.0-r0.225) [version-going-backwards]
-os-release-1.0: Package version for package os-release-doc went
-backwards which would break package feeds from (0:1.0-r0.226 to
-0:1.0-r0.225) [version-going-backwards]
-os-release-1.0: Package version for package os-release-locale went
-backwards which would break package feeds from (0:1.0-r0.226 to
-0:1.0-r0.225) [version-going-backwards]
-os-release-1.0: Package version for package os-release-src went
-backwards which would break package feeds from (0:1.0-r0.226 to
-0:1.0-r0.225) [version-going-backwards]
-os-release-1.0: Package version for package os-release-staticdev went
-backwards which would break package feeds from (0:1.0-r0.226 to
-0:1.0-r0.225) [version-going-backwards]
-os-release-1.0: Package version for package os-release went backwards
-which would break package feeds from (0:1.0-r0.226 to 0:1.0-r0.225)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-dbg went backwards
-which would break package feeds from (0:1.0-r8.278 to 0:1.0-r8.277)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-dev went backwards
-which would break package feeds from (0:1.0-r8.278 to 0:1.0-r8.277)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-ptest went backwards
-which would break package feeds from (0:1.0-r8.278 to 0:1.0-r8.277)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target-src went backwards
-which would break package feeds from (0:1.0-r8.278 to 0:1.0-r8.277)
-[version-going-backwards]
-packagegroup-core-standalone-sdk-target-1.0: Package version for
-package packagegroup-core-standalone-sdk-target went backwards which
-would break package feeds from (0:1.0-r8.278 to 0:1.0-r8.277)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-dbg went backwards which would break
-package feeds from (0:1.0-r3.276 to 0:1.0-r3.275)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-dev went backwards which would break
-package feeds from (0:1.0-r3.276 to 0:1.0-r3.275)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-ptest went backwards which would break
-package feeds from (0:1.0-r3.276 to 0:1.0-r3.275)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug-src went backwards which would break
-package feeds from (0:1.0-r3.276 to 0:1.0-r3.275)
-[version-going-backwards]
-packagegroup-core-tools-debug-1.0: Package version for package
-packagegroup-core-tools-debug went backwards which would break package
-feeds from (0:1.0-r3.276 to 0:1.0-r3.275) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-dbg went backwards which would break package
-feeds from (0:1.0-r13.276 to 0:1.0-r13.275) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug-dbg went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug-dev went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug-ptest went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-debug went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-dev went backwards which would break package
-feeds from (0:1.0-r13.276 to 0:1.0-r13.275) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended-dbg went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended-dev went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended-ptest went backwards which would
-break package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-extended went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics-dbg went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics-dev went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics-ptest went backwards which would
-break package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-graphics went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools-dbg went backwards which would
-break package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools-dev went backwards which would
-break package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools-ptest went backwards which would
-break package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-host-tools went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-ptest went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk-dbg went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk-dev went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk-ptest went backwards which would break
-package feeds from (0:1.0-r13.276 to 0:1.0-r13.275)
-[version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-sdk went backwards which would break package
-feeds from (0:1.0-r13.276 to 0:1.0-r13.275) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted-src went backwards which would break package
-feeds from (0:1.0-r13.276 to 0:1.0-r13.275) [version-going-backwards]
-packagegroup-self-hosted-1.0: Package version for package
-packagegroup-self-hosted went backwards which would break package
-feeds from (0:1.0-r13.276 to 0:1.0-r13.275) [version-going-backwards]
-
-
-count: 0 issue: host-user-contaminated
-
-
-count: 0 issue: installed-vs-shipped
-
-
-count: 0 issue: unknown-configure-option
-
-
-count: 0 issue: symlink-to-sysroot
-
-
-count: 0 issue: invalid-pkgconfig
-
-
-count: 0 issue: pkgname
-
-
-count: 0 issue: ldflags
-
-
-count: 0 issue: compile-host-path
-
-
-count: 0 issue: qa_pseudo
-
-
-
-This git log matches with the metadata as seen by qemuarm build.
-In some cases qemux86 and qemux86-64 builds are built with slightly
-different metadata, you can see the exact version near the top of each
-log.world.qemu* files linked from the report
-~/oe/world/yoe ~/oe/world/yoe
-
-== Tested changes (not included in master yet) - bitbake ==
-latest upstream commit:
-89dd570e bitbake-user-manual: Improve the example for Removal
-(Override Style Syntax)
-not included in master yet:
-37e957d3 bitbake: hashserv: Add request statistics
-d4ed71cb bitbake: hashserve: Log I/O waits and SQL time
-ef45fe62 bitbake: hashserv: Add more threads
-c02247d7 runqueue: Fix task migration problems
-
-== Tested changes (not included in master yet) - openembedded-core ==
-latest upstream commit:
-d41606244c oeqa/selftest: Tweak binutils tests tags as toolchain/user and system
-not included in master yet:
-3b2f4f198f recipes: Add runit and related recipes
-
-== Tested changes (not included in master yet) - meta-openembedded ==
-latest upstream commit:
-8d4d608b4 apache2: fix multilib file conflicts
-not included in master yet:
-86b4e8df8 xfsdump: support usrmerge
-25b2a4df8 python-paste: upgrade 3.1.1 -> 3.2.0
-0797189c3 libnet-dns-perl: upgrade 1.20 -> 1.21
-0c05d4987 grpc: don't use unexisting gettid function on glibc 2.29, it
-has been implemented only in 2.30
-26ca08541 grpc: Change gettid patch with the upstream merged version
-391d79571 hwdata: upgrade 0.326 -> 0.327
-e7b382602 samba: Fix configure tests to work with clang
-6b236cd02 dejagnu: Remove, moved to oe-core
-720a2ffe8 ltrace: Fix build on mips
-3bf4c102a python3-twine: Initial commit of 1.13.0
-7a706c066 python3-pytest-asyncio: Initial commit of 0.10.0
-dce0799b1 wireguard: Upgrade 20190702 to 20190905
-fb34a7c58 python-jinja2: Make asyncio specific to python3 module alone
-48471748f python3-cmd2: Add to blacklist
-ace2fc493 remmina: Add recipe for the remmina remote desktop client
-b4937b5d6 nodejs: Mark incompatible with risc-v
-eca729d98 drbd,netkit-rusers: Blacklist packages
-649d491b2 vboxguestdrivers,can-isotp,bpftool: Add to Blacklist
-3061ead8c strongswan: Fix do_patch fuzz
-c789bc116 sysdig: Upgrade to 0.26.4
-
-== Tested changes (not included in master yet) - meta-qt5 ==
-latest upstream commit:
-53500ad qtdeclarative: Use qmlcachegen provided by OE instead of system one.
-not included in master yet:
-a41cd9e qtwayland: remove workaround for missing private headers (QTBUG-71340)
-725c87d qtwayland: do not reference private modules in cmake Qt5WaylandClient
-4d8f350 qtwebengine: Rename jasoncpp to jsoncpp
-e8aa2dd qtwebengine: Add pulseaudio support
-8799d3b qtserialbus: Fix build with 5.2+ kernel headers
-dc502d5 qtwebengine: Fix compile failure with 5.2+ kernel headers
-12ea469 qttools: Add CONFIG+=config_clang_done when not building with clang
-aa00625 qt5-creator: Fix clangformat with clang 9.x
-
-== Tested changes (not included in master yet) - meta-browser ==
-latest upstream commit:
-e4ac6bb chromium: Update to 76.0.3808.132.
-not included in master yet:
-~/oe/world/yoe
+SGkgS2hlbQ0KDQpOb3cgcHl0aG9uMy1jb2xvcmFtYSAgaXMgcHJvdmlkZWQg
+YnkgbWV0YS12aXJ0dWFsaXphdGlvbi4NClNob3VsZCBJIHN1Ym1pdCBhIG5l
+dyBwYXRjaCBvZiBweXRob24zLWNvbG9yYW1hICB0byBtZXRhLW9lPw0KDQpC
+ZXN0IHJlZ2FyZHMgDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tDQpaaGVuZyBSdW9xaW4NCk5hbmppbmcg
+RnVqaXRzdSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5TVCkN
+CkFERFIuOiBOby42IFdlbnpodSBSb2FkLCBTb2Z0d2FyZSBBdmVudWUsDQog
+ICAgICAgTmFuamluZywgMjEwMDEyLCBDaGluYQ0KTUFJTCA6IHpoZW5ncnEu
+Zm5zdEBjbi5mdWppc3R1LmNvbQ0KDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNz
+YWdlLS0tLS0NCj4gRnJvbTogS2hlbSBSYWogW21haWx0bzpyYWoua2hlbUBn
+bWFpbC5jb21dDQo+IFNlbnQ6IFdlZG5lc2RheSwgU2VwdGVtYmVyIDA0LCAy
+MDE5IDE6MTEgUE0NCj4gVG86IFpoZW5nLCBSdW9xaW4v6YORIOiLpemSpiA8
+emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29tPg0KPiBDYzogb3BlbmVtYmVk
+ZWQtZGV2ZWwgPG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
+ZWQub3JnPg0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1weXRob25dW1BB
+VENIXSBweXRob24tY21kMjogQWRkIHB5dGhvbjMgdmVyc2lvbg0KPiANCj4g
+MDM6MTA6MTAgRVJST1I6IE5vdGhpbmcgUlBST1ZJREVTICdweXRob24zLWNv
+bG9yYW1hJyAoYnV0DQo+IC9tbnQvamVua2lucy93b3Jrc3BhY2UveW9jdG8t
+d29ybGQtZ2xpYmMvc291cmNlcy9tZXRhLQ0KPiBvcGVuZW1iZWRkZWQvbWV0
+YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy0NCj4g
+Y21kMl8wLjkuMTYuYmINCj4gUkRFUEVORFMgb24gb3Igb3RoZXJ3aXNlIHJl
+cXVpcmVzIGl0KQ0KPiAwMzoxMDoxMCBFUlJPUjogTm90aGluZyBSUFJPVklE
+RVMgJ3B5dGhvbjMtY21kMi1kZXYnIChidXQNCj4gL21udC9qZW5raW5zL3dv
+cmtzcGFjZS95b2N0by13b3JsZC1nbGliYy9zb3VyY2VzL21ldGEtDQo+IG9w
+ZW5lbWJlZGRlZC9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhv
+bi9weXRob24zLQ0KPiBjbWQyXzAuOS4xNi5iYg0KPiBSREVQRU5EUyBvbiBv
+ciBvdGhlcndpc2UgcmVxdWlyZXMgaXQpDQo+IDAzOjEwOjEwIE5vIGVsaWdp
+YmxlIFJQUk9WSURFUnMgZXhpc3QgZm9yICdweXRob24zLWNtZDItZGV2Jw0K
+PiAwMzoxMDoxMSBFUlJPUjogTm90aGluZyBSUFJPVklERVMgJ3B5dGhvbjMt
+Y21kMicgKGJ1dA0KPiAvbW50L2plbmtpbnMvd29ya3NwYWNlL3lvY3RvLXdv
+cmxkLWdsaWJjL3NvdXJjZXMvbWV0YS0NCj4gb3BlbmVtYmVkZGVkL21ldGEt
+cHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtDQo+IGNt
+ZDJfMC45LjE2LmJiDQo+IFJERVBFTkRTIG9uIG9yIG90aGVyd2lzZSByZXF1
+aXJlcyBpdCkNCj4gMDM6MTA6MTEgTm8gZWxpZ2libGUgUlBST1ZJREVScyBl
+eGlzdCBmb3IgJ3B5dGhvbjMtY21kMicNCj4gDQo+IE9uIFN1biwgU2VwIDEs
+IDIwMTkgYXQgMTA6MjMgUE0gWmhlbmcgUnVvcWluIDx6aGVuZ3JxLmZuc3RA
+Y24uZnVqaXRzdS5jb20+DQo+IHdyb3RlOg0KPiA+DQo+ID4gUHJvdmlkaW5n
+IGEgcHl0aG9uMyB2ZXJzaW9uIG9mIHB5dGhvbi1jbWQyLg0KPiA+DQo+ID4g
+U2lnbmVkLW9mZi1ieTogWmhlbmcgUnVvcWluIDx6aGVuZ3JxLmZuc3RAY24u
+ZnVqaXRzdS5jb20+DQo+ID4gLS0tDQo+ID4gIC4uLi9yZWNpcGVzLWRldnRv
+b2xzL3B5dGhvbi9weXRob24tY21kMi5pbmMgICAgICAgfCAxMyArKysrKysr
+KysrKysrDQo+ID4gIC4uLi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRo
+b24tY21kMl8wLjkuMTYuYmIgfCAxNSArKy0tLS0tLS0tLS0tLS0NCj4gPiAg
+Li4uL3B5dGhvbi9weXRob24zLWNtZDJfMC45LjE2LmJiICAgICAgICAgICAg
+ICAgICB8ICA5ICsrKysrKysrKw0KPiA+ICAzIGZpbGVzIGNoYW5nZWQsIDI0
+IGluc2VydGlvbnMoKyksIDEzIGRlbGV0aW9ucygtKSAgY3JlYXRlIG1vZGUN
+Cj4gPiAxMDA2NDQgbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRo
+b24vcHl0aG9uLWNtZDIuaW5jDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NA0K
+PiA+IG1ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhv
+bjMtY21kMl8wLjkuMTYuYmINCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRh
+LXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tY21kMi5p
+bmMNCj4gPiBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9u
+L3B5dGhvbi1jbWQyLmluYw0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+
+ID4gaW5kZXggMDAwMDAwMDAwLi4xYTBiZTc3OGINCj4gPiAtLS0gL2Rldi9u
+dWxsDQo+ID4gKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9w
+eXRob24vcHl0aG9uLWNtZDIuaW5jDQo+ID4gQEAgLTAsMCArMSwxMyBAQA0K
+PiA+ICtTVU1NQVJZID0gIkV4dHJhIGZlYXR1cmVzIGZvciBzdGFuZGFyZCBs
+aWJyYXJ5J3MgY21kIG1vZHVsZSINCj4gPiArSE9NRVBBR0UgPSAiaHR0cDov
+L3BhY2thZ2VzLnB5dGhvbi5vcmcvY21kMi8iDQo+ID4gK0xJQ0VOU0UgPSAi
+TUlUIg0KPiA+ICtMSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6Ly9MSUNF
+TlNFO21kNT0wMWFlYWJlYTdhZTE1MjlhOGU0YjY3NGI3MTA3ZDZiYyINCj4g
+PiArDQo+ID4gK1NSQ19VUklbbWQ1c3VtXSA9ICJkZjM1YmIyZGNhOGY1ZTFm
+NjA5MGUxZjBhYTAyOTYwYSINCj4gPiArU1JDX1VSSVtzaGEyNTZzdW1dID0N
+Cj4gIjRiNzgzNzlkNTNhZmY4MTFkMWRlYWM3MjBiYmU3MTY2MTc2OTgyMmE1
+ZmIyZDgzMGNkNzMwNjU2ZDE4MGZiM2QiDQo+ID4gKw0KPiA+ICtpbmhlcml0
+IHB5cGkNCj4gPiArDQo+ID4gK0RFUEVORFMgKz0gIiR7UFlUSE9OX1BOfS1z
+ZXR1cHRvb2xzLXNjbS1uYXRpdmUiDQo+ID4gKw0KPiA+ICtCQkNMQVNTRVhU
+RU5EID0gIm5hdGl2ZSBuYXRpdmVzZGsiDQo+ID4gZGlmZiAtLWdpdCBhL21l
+dGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbi1jbWQy
+XzAuOS4xNi5iYg0KPiA+IGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29s
+cy9weXRob24vcHl0aG9uLWNtZDJfMC45LjE2LmJiDQo+ID4gaW5kZXggOTRk
+YjM3YTJkLi4xN2I2YWUyODUgMTAwNjQ0DQo+ID4gLS0tIGEvbWV0YS1weXRo
+b24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uLWNtZDJfMC45LjE2
+LmJiDQo+ID4gKysrIGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9w
+eXRob24vcHl0aG9uLWNtZDJfMC45LjE2LmJiDQo+ID4gQEAgLTEsMTQgKzEs
+NSBAQA0KPiA+IC1TVU1NQVJZID0gIkV4dHJhIGZlYXR1cmVzIGZvciBzdGFu
+ZGFyZCBsaWJyYXJ5J3MgY21kIG1vZHVsZSINCj4gPiAtSE9NRVBBR0UgPSAi
+aHR0cDovL3BhY2thZ2VzLnB5dGhvbi5vcmcvY21kMi8iDQo+ID4gLUxJQ0VO
+U0UgPSAiTUlUIg0KPiA+IC1MSUNfRklMRVNfQ0hLU1VNID0NCj4gImZpbGU6
+Ly9MSUNFTlNFO21kNT0wMWFlYWJlYTdhZTE1MjlhOGU0YjY3NGI3MTA3ZDZi
+YyINCj4gPiAtDQo+ID4gLVNSQ19VUklbbWQ1c3VtXSA9ICJkZjM1YmIyZGNh
+OGY1ZTFmNjA5MGUxZjBhYTAyOTYwYSINCj4gPiAtU1JDX1VSSVtzaGEyNTZz
+dW1dID0NCj4gIjRiNzgzNzlkNTNhZmY4MTFkMWRlYWM3MjBiYmU3MTY2MTc2
+OTgyMmE1ZmIyZDgzMGNkNzMwNjU2ZDE4MGZiM2QiDQo+ID4gLQ0KPiA+IC1p
+bmhlcml0IHB5cGkgc2V0dXB0b29scw0KPiA+IC0NCj4gPiAtREVQRU5EUyAr
+PSAiJHtQWVRIT05fUE59LXNldHVwdG9vbHMtc2NtLW5hdGl2ZSINCj4gPiAr
+aW5oZXJpdCBzZXR1cHRvb2xzDQo+ID4gK3JlcXVpcmUgcHl0aG9uLWNtZDIu
+aW5jDQo+ID4NCj4gPiAgUkRFUEVORFNfJHtQTn0gKz0gIlwNCj4gPiAgICAg
+ICR7UFlUSE9OX1BOfS1kb2N0ZXN0IFwNCj4gPiBAQCAtMjEsNSArMTIsMyBA
+QCBSREVQRU5EU18ke1BOfSArPSAiXA0KPiA+ICAgICAgJHtQWVRIT05fUE59
+LXRocmVhZGluZyBcDQo+ID4gICAgICAke1BZVEhPTl9QTn0tdGV4dHV0aWxz
+IFwNCj4gPiAgICAgICINCj4gPiAtDQo+ID4gLUJCQ0xBU1NFWFRFTkQgPSAi
+bmF0aXZlIG5hdGl2ZXNkayINCj4gPiBkaWZmIC0tZ2l0DQo+ID4gYS9tZXRh
+LXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLWNtZDJf
+MC45LjE2LmJiDQo+ID4gYi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xz
+L3B5dGhvbi9weXRob24zLWNtZDJfMC45LjE2LmJiDQo+ID4gbmV3IGZpbGUg
+bW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAuLmY1YzVjN2UxYQ0K
+PiA+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLXB5dGhvbi9yZWNp
+cGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLWNtZDJfMC45LjE2LmJiDQo+
+ID4gQEAgLTAsMCArMSw5IEBADQo+ID4gK2luaGVyaXQgc2V0dXB0b29sczMN
+Cj4gPiArcmVxdWlyZSBweXRob24tY21kMi5pbmMNCj4gPiArDQo+ID4gK1JE
+RVBFTkRTXyR7UE59ICs9ICJcDQo+ID4gKyAgICAke1BZVEhPTl9QTn0tcHlw
+ZXJjbGlwIFwNCj4gPiArICAgICR7UFlUSE9OX1BOfS1jb2xvcmFtYSBcDQo+
+ID4gKyAgICAke1BZVEhPTl9QTn0tYXR0cnMgXA0KPiA+ICsgICAgJHtQWVRI
+T05fUE59LXdjd2lkdGggXA0KPiA+ICsgICAgIg0KPiA+IC0tDQo+ID4gMi4x
+Ny4xDQo+ID4NCj4gPg0KPiA+DQo+ID4gLS0NCj4gPiBfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KPiA+IE9wZW5l
+bWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCj4gPiBPcGVuZW1iZWRkZWQt
+ZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IGh0dHA6Ly9saXN0
+cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVk
+ZGVkLWRldmVsDQo+IA0KDQoKCg==
 
