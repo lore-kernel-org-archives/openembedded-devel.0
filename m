@@ -1,64 +1,48 @@
-Return-Path: <Javier.Viguera@digi.com>
-X-Greylist: delayed 831 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 10 Sep 2019 12:54:10 UTC
-Received: from mail1.bemta23.messagelabs.com (mail1.bemta23.messagelabs.com
-	[67.219.246.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 095567E63A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+	[209.85.221.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DAE47F37D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 12:54:10 +0000 (UTC)
-Received: from [67.219.246.101] (using TLSv1.2 with cipher
-	DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-5.bemta.az-b.us-east-1.aws.symcld.net id 39/22-07443-4B9977D5;
-	Tue, 10 Sep 2019 12:40:20 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrPIsWRWlGSWpSXmKPExsXi5LtOQHfzzPJ
-	Yg3OTzS32flrEaHHx8FJmByaPnbPusnuc27iCMYApijUzLym/IoE149nBl2wFsRXLPz9gbGD0
-	6mLk4hASWM0o8XbFHHYIZw2jxNVbPYwQzmJGiQ1f+5i6GDk5hAUsJZ5+ns0CYosIhEo8+PyTD
-	cQWEmgHaj9eDmKzCehJTL70hBnE5hWwlrizrh3MZhFQlXh+YzcjiC0qEC7x4skZNogaQYmTM5
-	+AzeQUiJY4cewqWA2zgIXEzPnnoWxxiVtP5jNB2PIS29/OYYbYqyJxcOllsBoJoPimzWfZJzA
-	KzkIydhaSUbOQjJqFZNQCRpZVjGZJRZnpGSW5iZk5uoYGBrqGhka6hrqGZpZ6iVW6SXqlxbqp
-	icUluoZ6ieXFesWVuck5KXp5qSWbGIHhn1LAuHIH49+Zb/QOMUpyMCmJ8uYZl8cK8SXlp1RmJ
-	BZnxBeV5qQWH2KU4eBQkuDdMh0oJ1iUmp5akZaZA4xFmLQEB4+SCO/uGUBp3uKCxNzizHSI1C
-	lGS457T+YuYuZYsHUJkNy14MliZiGWvPy8VClxXk9gxAsJgDRklObBjYOli0uMslLCvIwMDAx
-	CPAWpRbmZJajyrxjFORiVhHkfgazlycwrgdv6CuggJqCDfCtKQQ4qSURISTUwFX41em2dIZKj
-	fZXrtcnFVOt246PbPEWPaRifEqrQ+K2/7+ep4+dePNLQr592ZdZRCx6DrEb3FY9V5Vj0Sk4+e
-	7/j4fKA5DCHyHfPb3/pezLbN0izSn2XCo/hgfT4sN8LJ8UrTp6h2v/c7MwRB/9z74oOdm9ocb
-	ok1bdzkriph/v2mToSSdtqLkdXt87bLCwhxPuzpDDN4M2kr7J78rcvN24wLl7x789du+bZU1L
-	3t30QMvd4yLQ9qJm5br73i4sljOrZ/oVi3JGhUdo8KV/lJz1f26hSrhAWtk3tw/LW/SdV4x/P
-	DovjbP8yS3XifPEnVbk+bR/qX/9g1dZ0UzgvNF3J97t9uLLHgf5DOlJKLMUZiYZazEXFiQAa5
-	joVkgMAAA==
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-16.tower-385.messagelabs.com!1568119219!4848!1
-X-Originating-IP: [66.77.174.16]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.43.12; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 11603 invoked from network); 10 Sep 2019 12:40:19 -0000
-Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
-	by server-16.tower-385.messagelabs.com with ECDHE-RSA-AES256-SHA384
-	encrypted SMTP; 10 Sep 2019 12:40:19 -0000
-Received: from MTK-SMS-XCH02.digi.com (10.10.8.196) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Tue, 10 Sep 2019 07:40:19 -0500
-Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MTK-SMS-XCH02.digi.com
-	(10.10.8.196) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Tue, 10 Sep 2019 07:40:18 -0500
-Received: from [10.101.2.54] (10.101.2.54) by dor-sms-xch01.digi.com
-	(10.49.8.99) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Tue, 10 Sep 2019 14:40:16 +0200
-To: Armin Kuster <akuster808@gmail.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <cover.1560620937.git.akuster808@gmail.com>
-	<f2a4c4eab38fd07983bd08f6f3f415d69f831251.1560620937.git.akuster808@gmail.com>
-From: Javier Viguera <javier.viguera@digi.com>
-Message-ID: <ced08019-3ea9-6108-9aca-a39c7c87ed6b@digi.com>
-Date: Tue, 10 Sep 2019 14:40:09 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
-MIME-Version: 1.0
-In-Reply-To: <f2a4c4eab38fd07983bd08f6f3f415d69f831251.1560620937.git.akuster808@gmail.com>
-X-Originating-IP: [10.101.2.54]
-Subject: Re: [Warror][ 19/23] leptonica: fix SRC_URI
+	Tue, 10 Sep 2019 13:29:06 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id w13so20259296wru.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Sep 2019 06:29:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=S1Nb0hbbVwIJSDMx2mb0c8EaWyKqrUImcaGhy1aH6dk=;
+	b=vMNjJcGWObVeP3pnVTjNaSBKqCz8ilc9bs+sigqsGsV2btiqegHYzEKw2SUtNsgt28
+	k82EZLt+zToap8Svt0LMWRnt3VgXWCJV/JFiCQrbk4PRK58mGOddo2j+qulLYKIHJyKh
+	LsW+t/Ykkv13vNvPJ8QkRMGNigpFvr8mEVShCJO0x+xRYWU2+B9Y2xv2bze+2tJj1Q20
+	z0gpalVQM9BCGVFwVzCOAl9FyPNu8WYIln64AhpYoNbxkf6sYyLLsVK1SMYSxP37cPwQ
+	GBPirmZOp6KZ9R1TL9sYMnXc6+geeiZWXsfrcQ0Npepx1KtJCZWZVC6SF6zeuJvr5NZ5
+	PM2g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=S1Nb0hbbVwIJSDMx2mb0c8EaWyKqrUImcaGhy1aH6dk=;
+	b=N3PV5+XaUwRdi3tSjBPX6mRhwc0vaQseGFXctg1lwCPreqL7LrGJ1uTX5wOqjmQzkg
+	oNNp8KuZSBxtxHnrHSASBPDhNhmyUe9QJvHCsbdpGcGeSCkvT2osFaRYIEwE0YAUZHZV
+	zzXDRUp651dJwxrTv4sreXIXMla1NYidZKkkgyx+3fBh+YRW6qH3d8a1szuabuLEZWMb
+	SVSzxv1LLj5S81HU3N44suehmO1W6tKQ8pNmxlI+HsCFUEB1FhFwmFcyasBiysVXvDMG
+	96Pb9cmP1AN8XFBImKF8B2isLUOEJ2fc94W1f+BfP4EBppOkINq2H5N5382VJgT1MYty
+	zyYw==
+X-Gm-Message-State: APjAAAX/mN6VkM18eowbMjJcaAZehlgwM4aat7fWBX7JDTD0aINmPAeE
+	IpaFpodP46PhKUXWYL8I5nTn8cymnYk=
+X-Google-Smtp-Source: APXvYqzFZk738ED6Mq25J6jkSTwxMizwjvzC6DvSVZb4ftz8XeZXBSMH6cc12b5MB77q9asXNuCVaw==
+X-Received: by 2002:a5d:6504:: with SMTP id x4mr26550900wru.227.1568122146970; 
+	Tue, 10 Sep 2019 06:29:06 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	a190sm4320585wme.8.2019.09.10.06.29.06
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 10 Sep 2019 06:29:06 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Sep 2019 13:29:07 +0000
+Message-Id: <20190910132907.2257494-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] remmina: add distro_features_check for GTK3DISTROFEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,17 +55,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Sep 2019 12:54:11 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Sep 2019 13:29:06 -0000
 
-Hi Armin,
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-Care to cherry-pick this fix also to Thud?
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+index b95c400b28..0895a9d35b 100644
+--- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
++++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+@@ -15,7 +15,10 @@ SRC_URI[sha256sum] = "fbed745438bb0c21467b60cbd67c8148a9289b5ebc7482d06db443bea5
+ 
+ S = "${WORKDIR}/Remmina-v${PV}"
+ 
+-inherit cmake
++inherit cmake distro_features_check
++
++# depends on avahi-ui with this restriction
++ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
+ 
+ EXTRA_OECMAKE += "-DWITH_APPINDICATOR=OFF -DWITH_GETTEXT=OFF -DWITH_TRANSLATIONS=OFF"
+ 
+-- 
+2.17.1
 
-Thanks in advance.
-
---
-Javier Viguera
 
