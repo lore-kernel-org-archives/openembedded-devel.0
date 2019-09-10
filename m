@@ -1,25 +1,33 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 656CE7F385
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 775B57F357
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 09:58:57 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8A9wbuO005343
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 10 Sep 2019 09:59:47 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46SL9b4K14z4K
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 02:58:48 -0700
-Received: from localhost (128.224.162.136) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Tue, 10 Sep 2019 02:58:26 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Sep 2019 17:58:23 +0800
-Message-ID: <1568109504-17588-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.136]
-Subject: [meta-oe][PATCH 1/2] php: fix module path in mod_php.conf
+	Tue, 10 Sep 2019 11:59:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1568109587;
+	bh=2dAVWhcfB2d25s1AXUEBgfpMQv32euS2syPo7glVFLM=;
+	h=From:To:Subject:Date:From;
+	b=MjjPmBBK2ht1lo6I2P9qCh83fS9zmLehSH24+arAeqKKHSFHai7j7rl6mghXsONIQ
+	C0cBsXp1HpUmwAKabQV2Tb6VGUqraGaJjX/TxC+hD2HVCOxGiXjbsnmedhaOE6ZMgV
+	cFf2zWfSzaZ6pp39/NTTCA/pwojwe9+WN9/yCH5uSC0zBzHtn77BtVRhW+cwL6X3NR
+	bj7PP3QdEUlWliBS84SQIlaly43tdDrkb0YXRrKw2nfhYHaJpZzn42+PrFm517jYp2
+	mArrmXX+G5koUcA3a555nfQ3ngIr1BmsIB5DjOBgk5QKsE2G72H8V/FqFEZ0wr39dl
+	tzXHTA6ARYJMM8+PU7h7Ld1X7nMpG1/09aspxf7sy80nH28PE0tvAQnXZ7AnP/FRFY
+	rEOSqpagug/Mp70cGjgMTUDkRHKexxSw34LBEWRPWuQpebicfMx/jwjEstk9D3u32h
+	lxHVDKZe9TlFe4AAodbUQCdujXlRGMW4+8o75Sn/qBSTcbmrjrM+mXoOMK5p1wdFbG
+	5xt2ZfZ/Pp5/VT42FG5peYazNo9OK44Xp4UCMXEqQJung/pwIH1R0GS77JS2Bz7Zc6
+	l8QYY1CSLL2wdOirFMYtzjqoDTcohAhaOIwaNLBm0q0AnYlU0mXGkStZK4RY8CgEot
+	cA5euivD0PDOcYQetxWmdIKs=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Sep 2019 12:59:23 +0300
+Message-Id: <20190910095923.26781-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-python][PATCH] python3-cmd2: Remove PNBLACKLIST
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,46 +40,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Sep 2019 09:58:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Sep 2019 09:59:47 -0000
 
-The apache2 module's path has been changed from ${libdir} to
-${libexecdir} in commit 8d4d608b4e937bb3b8e3b260bd75338c3ff7e8fd. Update
-mod_php.conf to adapt it.
+python3-colorama is now available.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-oe/recipes-devtools/php/php.inc                 | 2 +-
- meta-oe/recipes-devtools/php/php/php-fpm-apache.conf | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index d738d2d..d280cd0 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -175,7 +175,7 @@ do_install_append_class-target() {
-         install -d ${D}${sysconfdir}/apache2/modules.d
-         install -d ${D}${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION}
-         install -m 644  ${WORKDIR}/70_mod_php${PHP_MAJOR_VERSION}.conf ${D}${sysconfdir}/apache2/modules.d
--        sed -i s,lib/,${libdir}/, ${D}${sysconfdir}/apache2/modules.d/70_mod_php${PHP_MAJOR_VERSION}.conf
-+        sed -i s,lib/,${libexecdir}/, ${D}${sysconfdir}/apache2/modules.d/70_mod_php${PHP_MAJOR_VERSION}.conf
-         cat ${S}/php.ini-production | \
-             sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
-             > ${D}${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION}/php.ini
-diff --git a/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
-index ef79a0c..f7f46d2 100644
---- a/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
-+++ b/meta-oe/recipes-devtools/php/php/php-fpm-apache.conf
-@@ -1,6 +1,6 @@
- # Taken from http://wiki.apache.org/httpd/PHP-FPM
- 
--LoadModule proxy_module      /usr/lib/apache2/modules/mod_proxy.so
--LoadModule proxy_fcgi_module /usr/lib/apache2/modules/mod_proxy_fcgi.so
-+LoadModule proxy_module      /usr/libexec/apache2/modules/mod_proxy.so
-+LoadModule proxy_fcgi_module /usr/libexec/apache2/modules/mod_proxy_fcgi.so
- 
- ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/usr/share/apache2/htdocs/
+diff --git a/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb b/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
+index 594e93dca..f5c5c7e1a 100644
+--- a/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
++++ b/meta-python/recipes-devtools/python/python3-cmd2_0.9.16.bb
+@@ -7,4 +7,3 @@ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-attrs \
+     ${PYTHON_PN}-wcwidth \
+     "
+-PNBLACKLIST[python3-cmd2] = "Nothing RPROVIDES 'python3-colorama' (but python3-cmd2_0.9.16.bb RDEPENDS on or otherwise requires it)"
 -- 
-2.7.4
+2.17.1
 
 
