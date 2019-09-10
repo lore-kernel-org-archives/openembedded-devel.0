@@ -1,41 +1,50 @@
-Return-Path: <prvs=149650af6=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 95C7D7BD9A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
+	[209.85.215.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 40E697E265
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 06:06:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1568095592; x=1599631592;
-	h=subject:to:references:from:message-id:date:mime-version:
-	in-reply-to:content-transfer-encoding;
-	bh=OyGqXQL8mMVY0dIEcGGbVJJWEapT8AyKzNns96ZTjeg=;
-	b=PllDt9Fgc2sM+3oNLuyQVJYV0lERBBYHWQlOILtswkLfGPOBOl0bL+6w
-	8USzzYCO7JjRsibmNYPZxQxshZqm3E10XB5+i/eCA9esWgF0f/1uCv1XB
-	33lrb56YnKC9sLP9XKQZnEN4xPsMRuB2y7dEASqrILRuuP+lma19yJPOZ
-	XmtuL0WtYCZP4jcyJzvs1RCsGOgWaBy2ngb9FC1HEpXCNWr4i5Dy8jaZd
-	TuXR0kMD7tkyt99v8++OsQX6dPtkdbFJkThQK2IWurdZF9bF57o6ogUzl
-	dYG2EBnP1fAcveBKervSHYWAveyQUcBndXQkmyXKsWefs2SlVKLT3BAUe Q==;
-IronPort-SDR: pmfwodSCZ9wztGBLHTTZRukuBhq9aV7PUcWeAPbEGCbvW0UBs7oWtKWccNUF3GaTun98ugWe8/
-	g5NRTgu2h+ucS09Gw0cTD8s26dX87vGKrZy1NuYisOKui6ZT1cTa1rdortnhJP0zhrzL5RVMZD
-	BYXNjEdrCvJ+Iichb6noCn5TIAgKCaANhLjFqz+vXExptjnrdCh7FvJJ1xdrC6hy0FPnnszuJe
-	r5gvylrjj83rototE1gQ09bMqWuCm6gxjmWfTirDJzwKYXyR/iKdR2bj7sn1pm42UMjoPIBc/Q
-	/GM=
-X-IronPort-AV: E=Sophos;i="5.64,487,1559512800"; 
-   d="scan'208";a="2325145"
-To: <openembedded-devel@lists.openembedded.org>
-References: <b6f2c586-cb29-5015-ec35-ab2c7dcf8d4d@amotus.ca>
-	<20190909205704.GA14642@localhost>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <6454a666-ebbe-ab60-533d-b60ffb927682@skidata.com>
-Date: Tue, 10 Sep 2019 08:06:31 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Tue, 10 Sep 2019 07:45:30 +0000 (UTC)
+Received: by mail-pg1-f181.google.com with SMTP id n190so9369315pgn.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Sep 2019 00:45:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=TEkLlXeAw4sdoUXUhZBvPM32I9b2q1uJ0KNUxu5qAUE=;
+	b=po++7iuWeaEKu9zzzqwwBLj7FMdK/MGAGiSxMJ6L2msiFO8Va/9BzjaCC1XOkiejPE
+	9WZwCZ1xFN/AyKOujI9RS2XVPlHATdbAxzdzBskqEy4may6hMUcb9z4KBpM03888M4op
+	5EANM15OcnfiZRN/VRpXPf1lr7nZwStUvfbCCUz1zSgz4JONPbDfd6f3SCDEEi9pwcI0
+	gQiUTDYMbyisgHtYlE4VWjHnruWRsvfe/uM+7uG7BixDiXMABw267OA0W0VlIzWzc307
+	ltGd0/lD/CqEHlQ3nmzGVnehGH4tZ2X05knDaXTzrDDSJX+/1naV+wwSlfMSCeodaijh
+	bZJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=TEkLlXeAw4sdoUXUhZBvPM32I9b2q1uJ0KNUxu5qAUE=;
+	b=Z+BKsPI5Bhy8wQbA1c2wjxogS5TczyfwtUrf1v/aHIh3FmZcYVSyPyjvdmI4SFbsMe
+	cKAQQHcWQfnBu3EdxAJMZPndC+ACPsMOcBdJGckwVqZHvnNWjK+rlwQwVtvyy2Ej/RnP
+	CEPVEAlwTs+eY5aOQYKKd4hHVVlmuuwhNygSlmytTe9GmNxSU4fSeWvfjM5+Dx68DVkz
+	jo330ybp2bN/00W0/3TsnoSEMniRQJaFSSU4rR4D5fQw9vB8bXMsqNdXblb26K1zqZ15
+	N/xavclkL/uuXS1emgI7gr0gmIiTrRdaZbgwjKT6K6J/jaDQkWvnhwLg1Ta2GxcXqKaE
+	UbKA==
+X-Gm-Message-State: APjAAAUKbZ0bX10vEb2xpoPtfQO9rjwskNlKpF9JLCMRGe5+RW1BtUD0
+	eaKkr/3f6AgrSJ9T7wD+FQPYVixZQUE=
+X-Google-Smtp-Source: APXvYqyu1/CZN81ymzSpRcRg1Pe5YxVXOOj4T/LNWPHhV11Kl1ZIUeTcUxbIRRRET8DkLjAz4nQvng==
+X-Received: by 2002:a62:2ec7:: with SMTP id u190mr6706872pfu.121.1568101530487;
+	Tue, 10 Sep 2019 00:45:30 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	n9sm18412114pfa.154.2019.09.10.00.45.29
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 10 Sep 2019 00:45:29 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Sep 2019 00:45:20 -0700
+Message-Id: <20190910074520.4022797-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <20190909205704.GA14642@localhost>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: Support for OpenJDK 9+
+Subject: [meta-oe][PATCH] php: Turn PCRE JIT off for riscv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,32 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Sep 2019 06:06:32 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
+X-List-Received-Date: Tue, 10 Sep 2019 07:45:30 -0000
 Content-Transfer-Encoding: 8bit
 
+Its not yet supported
 
-On 09/09/2019 22:57, Adrian Bunk wrote:
-> On Mon, Sep 09, 2019 at 07:52:16PM +0000, Mathieu Alexandre-Tétreault wrote:
->> Howdy,
->>
->> We recently got a request to add support for Java(OpenJdk) 9+.
->> I came to wonder if there was any limitations preventing the use of
->> Openjdk 9+ on arm?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/php/php.inc | 3 +++
+ 1 file changed, 3 insertions(+)
 
-None that I'm aware of...
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index d738d2d93f..23380da2cb 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -56,6 +56,9 @@ EXTRA_OECONF = "--enable-mbstring \
+                 ${COMMON_EXTRA_OECONF} \
+ "
+ 
++EXTRA_OECONF_append_riscv64 = " --with-pcre-jit=no"
++EXTRA_OECONF_append_riscv32 = " --with-pcre-jit=no"
++
+ CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=no ac_cv_lib_dl_dlopen=yes"
+ 
+ EXTRA_OECONF_class-native = " \
+-- 
+2.23.0
 
->>
->> Any advise will be appreciated.
-> 
-> Debian stable ships OpenJDK 11 on three different arm architectures.
-
-Additionally please take in mind the end-of-support of the OpenJDK 
-releases to make sure you put the effort in a long maintained version if 
-possible.
-
-Furthermore you may also take advantages of synergies with adoptopenjdk.net?
-
-regards;Richard.L
 
