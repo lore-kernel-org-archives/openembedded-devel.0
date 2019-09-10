@@ -1,33 +1,64 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id D36BE7CE12
+Return-Path: <Javier.Viguera@digi.com>
+X-Greylist: delayed 831 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 10 Sep 2019 12:54:10 UTC
+Received: from mail1.bemta23.messagelabs.com (mail1.bemta23.messagelabs.com
+	[67.219.246.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 095567E63A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 10:02:40 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46SLDx3pxHz4K
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 12:02:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1568109761;
-	bh=H9piVP+XF4a4I56lDvnzvIBObifbNcI2UHSxNEWsOFs=;
-	h=From:To:Subject:Date:From;
-	b=C7jSSY8PC/6e1gMJAoghAbY/5AWu9m8/5czZMohTyhxd0Ki0vgj52qEjd2+qaw/qL
-	VCdlF9Vm4Edx16u1KVdbblO6vF7vCdk1D7UdDcRM24bVLcMePmrN/L/UMeItUreDLK
-	GOSgKFksYOu9PcHmJrYEL16aA8EkI5gMXY8WDKODsUHAD675UtAG37yg8pNzbnc3xB
-	k07VB5V95di6IHeDlIvW3Y+OdJOawKawOL0MUDeN0FJCky/jBfLus9UWG5FYvL9YE6
-	6jZqu8Y1pBxFVgJVRNlaui0RS3qS4Gftld4uSWxB9tHLQZqwfXpjLjHZeeswo+UAF4
-	R1Z3GDKG0EnwMDfb7vKpMpExHpapiHWiSx5HqakgyaR1yqzXx/nvwZ6bBs2DmBDDLm
-	hx6udweIKoiKeINov23eaj0nUxfaN0pSbTKcDpYrPpuMDBk3PUhwP35GfsfQR7jLtf
-	Ok9i1XfDH2B/GWfjaQuSNwwwfVO1Cn2trijY+7GroJBLH//K+N4dZnmd3lmltWcf60
-	3eMoUAj9QQ+XyJ/5yUhGvnqzb4DwrY+aU3lRa+1Um3ucTapdQbdpnWo+z4j5TI2+a1
-	QiH6oPjGEtFtarhVkANQ6wjuFujN7zhYFcxKfjJCtJSrsxOqHk7+bqWHO1bAoFYDRv
-	2IKnz0oRsZ3SVhoaUUktqdpY=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Sep 2019 13:02:40 +0300
-Message-Id: <20190910100240.26965-2-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] php: Move more into php.inc after php5 removal
+	Tue, 10 Sep 2019 12:54:10 +0000 (UTC)
+Received: from [67.219.246.101] (using TLSv1.2 with cipher
+	DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-5.bemta.az-b.us-east-1.aws.symcld.net id 39/22-07443-4B9977D5;
+	Tue, 10 Sep 2019 12:40:20 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrPIsWRWlGSWpSXmKPExsXi5LtOQHfzzPJ
+	Yg3OTzS32flrEaHHx8FJmByaPnbPusnuc27iCMYApijUzLym/IoE149nBl2wFsRXLPz9gbGD0
+	6mLk4hASWM0o8XbFHHYIZw2jxNVbPYwQzmJGiQ1f+5i6GDk5hAUsJZ5+ns0CYosIhEo8+PyTD
+	cQWEmgHaj9eDmKzCehJTL70hBnE5hWwlrizrh3MZhFQlXh+YzcjiC0qEC7x4skZNogaQYmTM5
+	+AzeQUiJY4cewqWA2zgIXEzPnnoWxxiVtP5jNB2PIS29/OYYbYqyJxcOllsBoJoPimzWfZJzA
+	KzkIydhaSUbOQjJqFZNQCRpZVjGZJRZnpGSW5iZk5uoYGBrqGhka6hrqGZpZ6iVW6SXqlxbqp
+	icUluoZ6ieXFesWVuck5KXp5qSWbGIHhn1LAuHIH49+Zb/QOMUpyMCmJ8uYZl8cK8SXlp1RmJ
+	BZnxBeV5qQWH2KU4eBQkuDdMh0oJ1iUmp5akZaZA4xFmLQEB4+SCO/uGUBp3uKCxNzizHSI1C
+	lGS457T+YuYuZYsHUJkNy14MliZiGWvPy8VClxXk9gxAsJgDRklObBjYOli0uMslLCvIwMDAx
+	CPAWpRbmZJajyrxjFORiVhHkfgazlycwrgdv6CuggJqCDfCtKQQ4qSURISTUwFX41em2dIZKj
+	fZXrtcnFVOt246PbPEWPaRifEqrQ+K2/7+ep4+dePNLQr592ZdZRCx6DrEb3FY9V5Vj0Sk4+e
+	7/j4fKA5DCHyHfPb3/pezLbN0izSn2XCo/hgfT4sN8LJ8UrTp6h2v/c7MwRB/9z74oOdm9ocb
+	ok1bdzkriph/v2mToSSdtqLkdXt87bLCwhxPuzpDDN4M2kr7J78rcvN24wLl7x789du+bZU1L
+	3t30QMvd4yLQ9qJm5br73i4sljOrZ/oVi3JGhUdo8KV/lJz1f26hSrhAWtk3tw/LW/SdV4x/P
+	DovjbP8yS3XifPEnVbk+bR/qX/9g1dZ0UzgvNF3J97t9uLLHgf5DOlJKLMUZiYZazEXFiQAa5
+	joVkgMAAA==
+X-Env-Sender: Javier.Viguera@digi.com
+X-Msg-Ref: server-16.tower-385.messagelabs.com!1568119219!4848!1
+X-Originating-IP: [66.77.174.16]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.43.12; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 11603 invoked from network); 10 Sep 2019 12:40:19 -0000
+Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
+	by server-16.tower-385.messagelabs.com with ECDHE-RSA-AES256-SHA384
+	encrypted SMTP; 10 Sep 2019 12:40:19 -0000
+Received: from MTK-SMS-XCH02.digi.com (10.10.8.196) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Tue, 10 Sep 2019 07:40:19 -0500
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MTK-SMS-XCH02.digi.com
+	(10.10.8.196) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Tue, 10 Sep 2019 07:40:18 -0500
+Received: from [10.101.2.54] (10.101.2.54) by dor-sms-xch01.digi.com
+	(10.49.8.99) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Tue, 10 Sep 2019 14:40:16 +0200
+To: Armin Kuster <akuster808@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <cover.1560620937.git.akuster808@gmail.com>
+	<f2a4c4eab38fd07983bd08f6f3f415d69f831251.1560620937.git.akuster808@gmail.com>
+From: Javier Viguera <javier.viguera@digi.com>
+Message-ID: <ced08019-3ea9-6108-9aca-a39c7c87ed6b@digi.com>
+Date: Tue, 10 Sep 2019 14:40:09 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
+MIME-Version: 1.0
+In-Reply-To: <f2a4c4eab38fd07983bd08f6f3f415d69f831251.1560620937.git.akuster808@gmail.com>
+X-Originating-IP: [10.101.2.54]
+Subject: Re: [Warror][ 19/23] leptonica: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,66 +71,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Sep 2019 10:02:41 -0000
+X-List-Received-Date: Tue, 10 Sep 2019 12:54:11 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- meta-oe/recipes-devtools/php/php.inc      | 10 +++++-----
- meta-oe/recipes-devtools/php/php_7.3.9.bb |  8 --------
- 2 files changed, 5 insertions(+), 13 deletions(-)
+Hi Armin,
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 6e9315c1e..becf57a9f 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -74,10 +74,9 @@ PACKAGECONFIG_class-native = ""
- 
- PACKAGECONFIG[zip] = "--enable-zip --with-libzip=${STAGING_EXECPREFIXDIR},,libzip"
- 
--PACKAGECONFIG[mysql] = "--with-mysql=${STAGING_DIR_TARGET}${prefix} \
--                        --with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
--                        --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
--                        ,--without-mysql --without-mysqli --without-pdo-mysql \
-+PACKAGECONFIG[mysql] = "--with-mysqli=mysqlnd \
-+                        --with-pdo-mysql=mysqlnd \
-+                        ,--without-mysqli --without-pdo-mysql \
-                         ,mysql5"
- 
- PACKAGECONFIG[sqlite3] = "--with-sqlite3=${STAGING_LIBDIR}/.. \
-@@ -95,6 +94,7 @@ PACKAGECONFIG[imap] = "--with-imap=${STAGING_DIR_HOST} \
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
- PACKAGECONFIG[opcache] = "--enable-opcache,--disable-opcache"
- PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
-+PACKAGECONFIG[valgrind] = "--with-valgrind=${STAGING_DIR_TARGET}/usr,--with-valgrind=no,valgrind"
- 
- export PHP_NATIVE_DIR = "${STAGING_BINDIR_NATIVE}"
- export PHP_PEAR_PHP_BIN = "${STAGING_BINDIR_NATIVE}/php"
-@@ -216,7 +216,7 @@ FILES_${PN}-doc += "${PHP_LIBDIR}/php/doc"
- FILES_${PN}-cli = "${bindir}/php"
- FILES_${PN}-phar = "${bindir}/phar*"
- FILES_${PN}-cgi = "${bindir}/php-cgi"
--FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service"
-+FILES_${PN}-fpm = "${sbindir}/php-fpm ${sysconfdir}/php-fpm.conf ${datadir}/fpm ${sysconfdir}/init.d/php-fpm ${systemd_unitdir}/system/php-fpm.service ${sysconfdir}/php-fpm.d/www.conf.default"
- FILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
- CONFFILES_${PN}-fpm = "${sysconfdir}/php-fpm.conf"
- CONFFILES_${PN}-fpm-apache2 = "${sysconfdir}/apache2/conf.d/php-fpm.conf"
-diff --git a/meta-oe/recipes-devtools/php/php_7.3.9.bb b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-index 4d656da0f..23ab7ca8e 100644
---- a/meta-oe/recipes-devtools/php/php_7.3.9.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-@@ -17,11 +17,3 @@ SRC_URI_append_class-target = " \
- 
- SRC_URI[md5sum] = "bcc37749815009c9201e4c126e1ab8ee"
- SRC_URI[sha256sum] = "a39c9709a8c9eb7ea8ac4933ef7a78b92f7e5735a405c8b8e42ee39541d963c4"
--
--PACKAGECONFIG[mysql] = "--with-mysqli=mysqlnd \
--                        --with-pdo-mysql=mysqlnd \
--                        ,--without-mysqli --without-pdo-mysql \
--                        ,mysql5"
--PACKAGECONFIG[valgrind] = "--with-valgrind=${STAGING_DIR_TARGET}/usr,--with-valgrind=no,valgrind"
--
--FILES_${PN}-fpm += "${sysconfdir}/php-fpm.d/www.conf.default"
--- 
-2.17.1
+Care to cherry-pick this fix also to Thud?
 
+Thanks in advance.
+
+--
+Javier Viguera
 
