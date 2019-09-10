@@ -1,50 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 40E697E265
+Return-Path: <yuanc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id B10C97D3B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 07:45:30 +0000 (UTC)
-Received: by mail-pg1-f181.google.com with SMTP id n190so9369315pgn.0
+	Tue, 10 Sep 2019 08:50:21 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,489,1559491200"; d="scan'208";a="75223894"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 10 Sep 2019 16:50:05 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 89F404CE032E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 00:45:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=TEkLlXeAw4sdoUXUhZBvPM32I9b2q1uJ0KNUxu5qAUE=;
-	b=po++7iuWeaEKu9zzzqwwBLj7FMdK/MGAGiSxMJ6L2msiFO8Va/9BzjaCC1XOkiejPE
-	9WZwCZ1xFN/AyKOujI9RS2XVPlHATdbAxzdzBskqEy4may6hMUcb9z4KBpM03888M4op
-	5EANM15OcnfiZRN/VRpXPf1lr7nZwStUvfbCCUz1zSgz4JONPbDfd6f3SCDEEi9pwcI0
-	gQiUTDYMbyisgHtYlE4VWjHnruWRsvfe/uM+7uG7BixDiXMABw267OA0W0VlIzWzc307
-	ltGd0/lD/CqEHlQ3nmzGVnehGH4tZ2X05knDaXTzrDDSJX+/1naV+wwSlfMSCeodaijh
-	bZJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=TEkLlXeAw4sdoUXUhZBvPM32I9b2q1uJ0KNUxu5qAUE=;
-	b=Z+BKsPI5Bhy8wQbA1c2wjxogS5TczyfwtUrf1v/aHIh3FmZcYVSyPyjvdmI4SFbsMe
-	cKAQQHcWQfnBu3EdxAJMZPndC+ACPsMOcBdJGckwVqZHvnNWjK+rlwQwVtvyy2Ej/RnP
-	CEPVEAlwTs+eY5aOQYKKd4hHVVlmuuwhNygSlmytTe9GmNxSU4fSeWvfjM5+Dx68DVkz
-	jo330ybp2bN/00W0/3TsnoSEMniRQJaFSSU4rR4D5fQw9vB8bXMsqNdXblb26K1zqZ15
-	N/xavclkL/uuXS1emgI7gr0gmIiTrRdaZbgwjKT6K6J/jaDQkWvnhwLg1Ta2GxcXqKaE
-	UbKA==
-X-Gm-Message-State: APjAAAUKbZ0bX10vEb2xpoPtfQO9rjwskNlKpF9JLCMRGe5+RW1BtUD0
-	eaKkr/3f6AgrSJ9T7wD+FQPYVixZQUE=
-X-Google-Smtp-Source: APXvYqyu1/CZN81ymzSpRcRg1Pe5YxVXOOj4T/LNWPHhV11Kl1ZIUeTcUxbIRRRET8DkLjAz4nQvng==
-X-Received: by 2002:a62:2ec7:: with SMTP id u190mr6706872pfu.121.1568101530487;
-	Tue, 10 Sep 2019 00:45:30 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	n9sm18412114pfa.154.2019.09.10.00.45.29
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 10 Sep 2019 00:45:29 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Sep 2019 00:45:20 -0700
-Message-Id: <20190910074520.4022797-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	Tue, 10 Sep 2019 16:49:56 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.21) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 10 Sep 2019 16:50:14 +0800
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 10 Sep 2019 17:49:51 +0900
+Message-ID: <20190910084951.40869-1-yuanc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.17.2
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] php: Turn PCRE JIT off for riscv
+X-Originating-IP: [10.167.225.21]
+X-yoursite-MailScanner-ID: 89F404CE032E.AFBCA
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH 1/2] python-atomicwrites: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Sep 2019 07:45:30 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 10 Sep 2019 08:50:22 -0000
+Content-Type: text/plain
 
-Its not yet supported
+Add new recipe python-atomicwrites as it is RDEPEND of python-pytest.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-devtools/php/php.inc | 3 +++
- 1 file changed, 3 insertions(+)
+ .../recipes-devtools/python/python-atomicwrites.inc        | 7 +++++++
+ .../recipes-devtools/python/python-atomicwrites_1.3.0.bb   | 2 ++
+ .../recipes-devtools/python/python3-atomicwrites_1.3.0.bb  | 2 ++
+ 3 files changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-atomicwrites.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-atomicwrites_1.3.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-atomicwrites_1.3.0.bb
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index d738d2d93f..23380da2cb 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -56,6 +56,9 @@ EXTRA_OECONF = "--enable-mbstring \
-                 ${COMMON_EXTRA_OECONF} \
- "
- 
-+EXTRA_OECONF_append_riscv64 = " --with-pcre-jit=no"
-+EXTRA_OECONF_append_riscv32 = " --with-pcre-jit=no"
+diff --git a/meta-python/recipes-devtools/python/python-atomicwrites.inc b/meta-python/recipes-devtools/python/python-atomicwrites.inc
+new file mode 100644
+index 000000000..773e9dd77
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-atomicwrites.inc
+@@ -0,0 +1,7 @@
++DESCRIPTION = "Powerful Python library for atomic file writes"
++HOMEPAGE = "https://github.com/untitaker/python-atomicwrites"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=91cc36cfafeefb7863673bcfcb1d4da4"
 +
- CACHED_CONFIGUREVARS += "ac_cv_func_dlopen=no ac_cv_lib_dl_dlopen=yes"
- 
- EXTRA_OECONF_class-native = " \
++SRC_URI[md5sum] = "ce11f780a4ce0fce8a55d64494a88178"
++SRC_URI[sha256sum] = "75a9445bac02d8d058d5e1fe689654ba5a6556a1dfd8ce6ec55a0ed79866cfa6"
+diff --git a/meta-python/recipes-devtools/python/python-atomicwrites_1.3.0.bb b/meta-python/recipes-devtools/python/python-atomicwrites_1.3.0.bb
+new file mode 100644
+index 000000000..c7b41d603
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-atomicwrites_1.3.0.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools
++require python-atomicwrites.inc
+diff --git a/meta-python/recipes-devtools/python/python3-atomicwrites_1.3.0.bb b/meta-python/recipes-devtools/python/python3-atomicwrites_1.3.0.bb
+new file mode 100644
+index 000000000..9f306e60d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-atomicwrites_1.3.0.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools3
++require python-atomicwrites.inc
 -- 
-2.23.0
+2.17.1
+
+
 
 
