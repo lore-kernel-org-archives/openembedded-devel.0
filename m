@@ -1,79 +1,51 @@
-Return-Path: <lewis.muhlenkamp@stryker.com>
-Received: from NAM03-BY2-obe.outbound.protection.outlook.com
-	(mail-eopbgr780081.outbound.protection.outlook.com [40.107.78.81])
-	by mail.openembedded.org (Postfix) with ESMTP id D0EE77E735;
-	Wed, 11 Sep 2019 19:43:20 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=jFpRjOY8Pkc1AHJHoksW6mejq2jEn2ldcCEx04WsKX8w34n5D8n3wl4k94AbOCC3+/Um2Kq3fn/b0o+kORnbVR/8kNnVwrU457PpipxFqJpgIB4vsZuW9KZRHpy1K+4REFzIKj2klK0c6LXytB4yFI1qbtX48KvUXRTsk7yU1Ecduxjsf9kudyDzgsyMSMkW8oZzwJGXIfJKrIf8SZpji9kBP2Xdw+B/ePfgdla+qWdEN7cfi2haMKvkwcXc44HICHTm4BWL6HYiiikEzBjL3rgKLuBUhOniPMxGJevSCr7z5yJqDqunIezXGEeToUWcvIkvnm3VHGRxAeOY8LRA7Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=iFpbMIXDrl6QUlHcS3C3cQHuLUbIwncgQLyAXh9mSD8=;
-	b=B9JCCVAh7XDdVZp1D1fdBCGBtUsZehs6dYHD3Guzsstl50HPriKkLTSvS83e+aJbgT4VVKExrW8GQQfjOxPCvYdmS4f4TIb8vJPF0Lmxf/XHiytIssDBykc5kPBoHzLkyXTwHejOwbRfbpG1jhyVaKgsHTKomdKcPQX4g/t65RV5RcGsf/rI7DH+GDW4yYQ1eUqpsvd7ivyPwC1MY0Vc6AOC4gFIl260Q3RUfk+cbrU75z3VFSHs5FXx3G7r7YZ0+/FWBc+rlfY+GbYo4vcb/Y/CqWNjQpXBciZBxweFZaHa/VFngsXgfnuttxu6orm5YzxuhqZcHmsIBDrTuM7oMA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
-	smtp.mailfrom=stryker.com;
-	dmarc=pass action=none header.from=stryker.com; 
-	dkim=pass header.d=stryker.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stryker.com;
-	s=selector1;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=iFpbMIXDrl6QUlHcS3C3cQHuLUbIwncgQLyAXh9mSD8=;
-	b=vfr6vXpec9w5cM+58tQNqrH0xghE9tX4zu0MFNLRIt2B2pX0poCUwp3wFx4LBAjlLqVATF4rEPeaqA4rM9VVTc/btvnR09ATbAfPBJiWdCcDwFxU6lh44oNwe2wXPrXtdZ9iImORzXTH6r/nNfKD1X9aubW8EXjdIjsUjJPofL4=
-Received: from BN6PR0101MB2914.prod.exchangelabs.com (10.174.88.139) by
-	BN6PR0101MB2881.prod.exchangelabs.com (10.174.86.14) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2241.18; Wed, 11 Sep 2019 19:43:18 +0000
-Received: from BN6PR0101MB2914.prod.exchangelabs.com
-	([fe80::55ae:1d73:c222:271c]) by BN6PR0101MB2914.prod.exchangelabs.com
-	([fe80::55ae:1d73:c222:271c%3]) with mapi id 15.20.2241.022;
-	Wed, 11 Sep 2019 19:43:17 +0000
-From: "Muhlenkamp, Lewis" <lewis.muhlenkamp@stryker.com>
-To: "openembedded-core@lists.openembedded.org"
-	<openembedded-core@lists.openembedded.org>, openembedded-devel
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: How to enable root logical volume in systemd-boot
-Thread-Index: AdVo1g0Ey2JxhTvAR5ObltZu4MRyCQ==
-Date: Wed, 11 Sep 2019 19:43:17 +0000
-Message-ID: <BN6PR0101MB29146BD2B86D87C87925EDB48FB10@BN6PR0101MB2914.prod.exchangelabs.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=lewis.muhlenkamp@stryker.com; 
-x-originating-ip: [165.225.32.51]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: eca3919b-90d9-4d33-2b1b-08d736f04b49
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(7168020)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(4618075)(2017052603328)(7167020)(7193020);
-	SRVR:BN6PR0101MB2881; 
-x-ms-traffictypediagnostic: BN6PR0101MB2881:
-x-ms-exchange-purlcount: 2
-x-microsoft-antispam-prvs: <BN6PR0101MB28813F2EF0136C3E3411A17C8FB10@BN6PR0101MB2881.prod.exchangelabs.com>
-x-ms-oob-tlc-oobclassifiers: OLM:5236;
-x-forefront-prvs: 0157DEB61B
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(136003)(39860400002)(346002)(366004)(376002)(396003)(189003)(199004)(504964003)(7736002)(81166006)(316002)(3846002)(81156014)(8936002)(55236004)(110136005)(74316002)(9326002)(8676002)(2906002)(6306002)(54896002)(256004)(14444005)(26005)(236005)(102836004)(55016002)(9686003)(53936002)(186003)(66066001)(478600001)(33656002)(486006)(66946007)(476003)(66556008)(76116006)(66476007)(6436002)(450100002)(66446008)(64756008)(2501003)(52536014)(606006)(99286004)(71200400001)(71190400001)(6506007)(14454004)(86362001)(5660300002)(7696005)(790700001)(6116002)(25786009);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR0101MB2881;
-	H:BN6PR0101MB2914.prod.exchangelabs.com; FPR:; SPF:None; LANG:en;
-	PTR:InfoNoRecords; MX:1; A:1; 
-received-spf: None (protection.outlook.com: stryker.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: GqWqWJkONDgtgoDiQO67VR5aN/LczFZZd8J73947Q3s3E67P5uMH3PuAsguuzlCkl2Be5NSOFl4fPkgSnIX5PFUH39dpvwfK4Xwq8SMS6kRbwm6/4xAURmlvALct0zoB62kXdv+Ffm5R03PwmWyAzT/lPlK4z7HzfR77QyuCusx1bd1Y32mTrljtFOKQ3iBPhaVFIVYtR1pug7fyzzmD245IVML5GAbJsny18dXzRHQioCtEUbgyBCFH9xw6rJpLMq/O93LjCypASiH/6hjwedJg0bIxBI71rrdujpjtwLvL+w0fFbrrHd3+uAitvRa8XVEqsM87eRf+3d1LwR8C03eVl4FOeWR3fJY0XALby4v+Bp89AsVA2xgjhRZFuFjpOk4VtMuJhGRtzttlb8XW2wnt9+ebBzEj/MpXkTywVFE=
-x-ms-exchange-transport-forked: True
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
+	[209.85.210.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 810047EB41
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 20:50:56 +0000 (UTC)
+Received: by mail-pf1-f180.google.com with SMTP id w22so14452844pfi.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 13:50:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=co+Lpyv1rovLKJFe4+93yAmt8kyDfNR/GyXSVvOB0HQ=;
+	b=YY3H5VFsJLgxWyKGAu3STBoQStmo3osQ4QjMjJfywaAZvwHi8Es1Nu0SZa+8NlnLfR
+	6oy5tvytiie++JmUPh6CQOOAWY+KRrPXsC/fnwJxLHYgaRV/fiCWm5f5tI9y/aDKdx1N
+	+aT6rDoCn/PLcqXZ1MSs2AosCTFJ5oM0utv36AwQKGmaVRoJAgfBzFZJON73M8IYBBSV
+	Djiu//g5XCNu5Jm0RBhFMgOwNdUWipKaa5i2O9ZNCi7f+68XZq+OTUp4WzHfBCKco+2V
+	/OuvWqFFhNx9AT2GG0goSxPYpYUc+1OgxqmRfE8IqUZux+Vx/1V7nfNloa3muBCN9I09
+	jjuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=co+Lpyv1rovLKJFe4+93yAmt8kyDfNR/GyXSVvOB0HQ=;
+	b=kLjTp68uh8w6prF+jaXzrrXhXgObBBVEAaSDZfAA2T8KDnfBQY7Zc2VcCGDOKP1c5l
+	IOP5fTL8KUcPyR4jHWncBZLFJNDaSfr+qde9dgERQoNLnbCvPfOGuCyC1+cjl7LIvStb
+	2GXyY2QCB1OeDt3FbQjsJ1hebB48beSWB9PFMFVlVj/L6wtd3Rw//SioQeicVlf9S4jR
+	z257WNV+OOUg4uNg81CM3KQ9DeZq4I0FEUCKh/YYwYF84DT6dFKKb614cTpV11VU34Nr
+	qUVmv+Mq99W+9qsz/E/CngKRWm3JPjIEOvZwb5rek+wih3BO+zvB9aBkHDMOE+Z+siPW
+	pi8A==
+X-Gm-Message-State: APjAAAU4sihM2l+UOplTN/r3jOw/HNVcXQtHO0e0EJb87ecCSeSQmb+T
+	BE2b9hjENuJeqaN2lOcpv5iCMb1KK0k=
+X-Google-Smtp-Source: APXvYqyNTq/YfdfbR/7cNO2h9ezuyYKq19nqizHnQEkidybsaz6Mv5WpZDMse64CrzwJXLC/ALjWjQ==
+X-Received: by 2002:a17:90a:1996:: with SMTP id
+	22mr7940433pji.17.1568235056578; 
+	Wed, 11 Sep 2019 13:50:56 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	j2sm22832839pfe.130.2019.09.11.13.50.55
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 11 Sep 2019 13:50:56 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Sep 2019 13:50:46 -0700
+Message-Id: <20190911205046.1426775-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-OriginatorOrg: stryker.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: eca3919b-90d9-4d33-2b1b-08d736f04b49
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Sep 2019 19:43:17.8772 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 4e9dbbfb-394a-4583-8810-53f81f819e3b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: ENC2XTTIXiKtE0dObPBOo+ROhsEtfuVxqFrdeUzbmi1CUgSO/bsOcm8QgFMkNir3cwniTN7hCj3yjJLoXJjtNBnc2LSQ01pPweDNwAmZHkk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR0101MB2881
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: How to enable root logical volume in systemd-boot
+Subject: [meta-oe][PATCH] safec: Upgrade to 3.5 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -86,65 +58,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 19:43:21 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 11 Sep 2019 20:50:56 -0000
+Content-Transfer-Encoding: 8bit
 
-Hello,
+Add a patch to fix build on musl
 
-First, I was using 2.6.  I tried under 2.7 and got the same issue.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...r-Use-_ISOC11_SOURCE-only-with-glibc.patch | 30 +++++++++++++++++++
+ .../safec/{safec_3.4.bb => safec_3.5.bb}      |  6 ++--
+ 2 files changed, 34 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-core/safec/safec/0001-memrchr-Use-_ISOC11_SOURCE-only-with-glibc.patch
+ rename meta-oe/recipes-core/safec/{safec_3.4.bb => safec_3.5.bb} (64%)
 
-I need to have the root filesystem be a logical volume.
+diff --git a/meta-oe/recipes-core/safec/safec/0001-memrchr-Use-_ISOC11_SOURCE-only-with-glibc.patch b/meta-oe/recipes-core/safec/safec/0001-memrchr-Use-_ISOC11_SOURCE-only-with-glibc.patch
+new file mode 100644
+index 0000000000..8f18f48720
+--- /dev/null
++++ b/meta-oe/recipes-core/safec/safec/0001-memrchr-Use-_ISOC11_SOURCE-only-with-glibc.patch
+@@ -0,0 +1,30 @@
++From 57456b5d034c8965b11eceed1bf861c98a18c324 Mon Sep 17 00:00:00 2001
++From: "jenkins@kwaj" <jenkins@kwaj>
++Date: Wed, 11 Sep 2019 13:43:45 -0700
++Subject: [PATCH] memrchr: Use _ISOC11_SOURCE only with glibc
++
++this is a glibc feature test macro which is not available
++on other libraries e.g. musl
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/extmem/memrchr_s.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/extmem/memrchr_s.c b/src/extmem/memrchr_s.c
++index 8d10a7b9..e73d3579 100644
++--- a/src/extmem/memrchr_s.c
+++++ b/src/extmem/memrchr_s.c
++@@ -36,7 +36,7 @@
++ #endif
++ 
++ #ifdef HAVE_MEMRCHR
++-#ifndef _ISOC11_SOURCE
+++#if defined (__GLIBC__) && !defined(_ISOC11_SOURCE)
++ extern void *memrchr(const void *, int, size_t);
++ #endif
++ #endif
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb b/meta-oe/recipes-core/safec/safec_3.5.bb
+similarity index 64%
+rename from meta-oe/recipes-core/safec/safec_3.4.bb
+rename to meta-oe/recipes-core/safec/safec_3.5.bb
+index cc1fbcb735..c9ace3b0b8 100644
+--- a/meta-oe/recipes-core/safec/safec_3.4.bb
++++ b/meta-oe/recipes-core/safec/safec_3.5.bb
+@@ -7,8 +7,10 @@ SECTION = "lib"
+ inherit autotools pkgconfig
+ 
+ S = "${WORKDIR}/git"
+-SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
+-SRC_URI = "git://github.com/rurban/safeclib.git"
++SRCREV = "a99a052a56da409638c9fe7e096a5ae6661ca7cb"
++SRC_URI = "git://github.com/rurban/safeclib.git \
++           file://0001-memrchr-Use-_ISOC11_SOURCE-only-with-glibc.patch \
++"
+ 
+ CPPFLAGS_append_libc-musl = " -D_GNU_SOURCE"
+ 
+-- 
+2.23.0
 
-I updated my core-image-minimal-initramfs.bbappend to include the following=
-:
-
-PACKAGE_INSTALL_append =3D " lvm2"
-
-
-The gets the lvm2 commands into the initramfs.  I can now run pvcreate, vgc=
-reate and lvcreate in my custom initrdscripts/files/init-install-efi.sh scr=
-ipt.
-
-rootfs=3D/dev/sda2
-pvcreate $rootfs
-vgcreate vg_root $rootfs
-rootfs=3D/dev/vg_root/lv_root
-lvcreate -n lv_root -l 95%VG vg_root
-mkfs.ext4 -F -O 64bit $rootfs
-
-All of the above run successfully.
-
-I then try to update the loader file with the UUID of the logical volume
-
-SYSTEMDBOOT_CFGS=3D"/boot/loader/entries/boot.conf"
-rootuuid=3D$(blkid -o value -s UUID ${rootfs})
-sed -i "s@options *@options root=3DUUID=3D$rootuuid rw rootwait quiet @" $S=
-YSTEMDBOOT_CFGS
-
-These too are successful.  At least the appropriate changes are made.  Unfo=
-rtunately I do not think I am putting in all of the appropriate changes.
-
-When I boot, the system hangs waiting for root device.  I do not see any me=
-ssages in the boot output showing anything is trying to start any LVM servi=
-ces or run any LVM commands.  So, I am guessing I am missing items in the o=
-ptions line.
-
-I've tried manually editing the boot command when booting, but nothing has =
-worked.  I've tried adding lvm to the line, changing the root entry, etc.  =
-The boot always hangs waiting for the root device.
-
-I did not find anything useful online.  So, asking here.  If there is somet=
-hing online that would help, please point me in the right direction.
-
-If there is nothing, can anyone here help me get my openembedded linux OS t=
-o boot off of a root logical volume?
-
-Thank you in advance
-
-Lewis Muhlenkamp
-
-Follow this link to read our Privacy Statement<https://www.stryker.com/cont=
-ent/stryker/gb/en/legal/global-policy-statement.html/>
 
