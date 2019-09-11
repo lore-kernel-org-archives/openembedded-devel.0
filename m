@@ -1,58 +1,54 @@
 Return-Path: <prvs=1507a981f=alistair.francis@wdc.com>
-X-Greylist: delayed 601 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 11 Sep 2019 17:37:41 UTC
 Received: from esa2.hgst.iphmx.com (esa2.hgst.iphmx.com [68.232.143.124])
-	by mail.openembedded.org (Postfix) with ESMTP id A746A7E3AA
+	by mail.openembedded.org (Postfix) with ESMTP id CAD897EA65
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 11 Sep 2019 17:37:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1568223470; x=1599759470;
-	h=from:to:cc:subject:date:message-id:in-reply-to:
-	references:mime-version:content-transfer-encoding;
-	bh=+vcEhQcXXLAieTnAqUChwKa3uaUeIWq+LrC3XAG+eFw=;
-	b=pf53J3oVsEnzEdQZM+az9H6CG+H8I7JRTapYc8PLynb6tMDkbeN4fLZt
-	nDCPfxlDnTA3T17dMjf8ZT+cI1pWNSHvN8pUKgZYbat0GqfsYrXruGRE/
-	bNNcmSTHH5W/dXqsLGyvHvvr8Im+VDSrAYlYR+1UM3o/y8xyD9T+aTwi0
-	QOseZ5z7nzr7kPEu3Y6T8VyiHh4FwZJP03i+SX5FgIapBKg9bZdB+Vwy9
-	WdAfL3kMCrccnu4qAniQKlf5LX6/+bPqwygEdc4RiGTbQROJlf8gOGkq5
-	1fQ0M50kAkPKNC6IHqJuYV8Bi1BVEfBlWxpxMfDRnV5ZN8SYVgAP0cPZv w==;
-IronPort-SDR: 3GoG+FajvcYTwxXvzoWxOdVoCSZqBCfWLLcWPcD3MqiowhRZvNohs/4WEqDpjO1goOABzXhltv
-	1Y+MWpWAky2KWuGV83QUo0u9WY6Z/EDvkTjCZdZ8M5TTupFzMF271BA0AqtWO9YYPSOwTyiupa
-	Z2dyR5JQOwtbqIbS26tJNXuBpRdGMYMCgO+ZW1bxdMcdYdcN3PlVp6XCH19eW0RdATY7LZ1ozT
-	M3J3Oq/ykKq3q386Hrc7XyaQgb+zNsS8SPtlkAFE8p7Eo/rdCkniio/ksZ6unRbe+FjOXK7hos
-	IVc=
+	t=1568223471; x=1599759471;
+	h=from:to:cc:subject:date:message-id:mime-version:
+	content-transfer-encoding;
+	bh=1V6MpztfDEQ8njRcvJ97QQVRLWaL56klcFZtforvcTY=;
+	b=KQc7LsfI+e04p1aeQdr/8qIHtBNgdSJR8gjbfqPNqjqKiphD/bsDj5Gv
+	DizaETKO0syxKoeLjrGCcE5rqCUTocVxgPn2lHrtZ632eZc3lJvhbP4D5
+	12WDoTlu7PpsoanV3i+2tG0mGSEYvE/XGBoNeKYHji1IypjyTdeayWS9j
+	8PKzsxbT1KetKimQljreQFYdEfNBwpuWABW1r+Q4LnhlRWDRCugea1wxP
+	s6KW89EfhfzXpf08erC2aG4sZYqYPVtcnSJloupdgI10Mo3LwIGvr+Ep0
+	gzER2QxqfDgOat2/cLET2LBYF0PxoVU4LCfLwH7xoJHFZEeYYK3lMJcCx A==;
+IronPort-SDR: L+TmMji+8191TBbchYb+LrrwAHjiYooCrNfNOM4iU/7jfF8w741MQ2Rnej894WsZKY492EWiXA
+	M7d2c4lwCMNfgg9IemwDJHC9v6rxrfdjNVeIK13i2sPyFdEdWb5jod3KdIb0xIR4deJauo67QA
+	9eb1Bn1tNKdiRnqWzfk6xNxMWp1EZpJaPl0yn7N1A8sRBADGgp5aajDxhcLG3Pgx1RxX7dsRoV
+	1WmYsKraja2XPdjYIPH8YQalsW9xozLHH7jZkVq6qjr7K0iEslOvWkZ47l8A5IvbkoZFvI9KoE
+	BhY=
 X-URL-LookUp-ScanningError: 1
-X-IronPort-AV: E=Sophos;i="5.64,494,1559491200"; d="scan'208";a="218717328"
+X-IronPort-AV: E=Sophos;i="5.64,494,1559491200"; d="scan'208";a="218717327"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
 	([199.255.45.15])
 	by ob1.hgst.iphmx.com with ESMTP; 12 Sep 2019 01:27:55 +0800
-IronPort-SDR: Qzs7DI8aasn6rZv49ZNvReV3iDqu3SlrbK8kNGOUc3GyffEGYLQUsUn9bIGyD4wr1COPGehSlZ
-	l5FNOIt7Q2Gc2qcex3fRN5DtzDOFY4w/K/6sF82+FjbTpolNYDuvsuZ96FqmliguoujG/HpmCG
-	7Mt1hmzEv83/f6anEWmxRKB2RcK8W2/l7GLKAiZoqvC30CnXsBPSiItezNI5FBcZiOHbFU9wnY
-	d2lILm33AtTX5Iz3PkNIms/HO7ieTp73j6+QldNMuWzzN6v8q6JXikn/9nzTngEe4AKq5OfoEw
-	94MMU4Kqb/77HwoX9bV4THaE
+IronPort-SDR: F/HSQgu8a/BQEjU/83ifv//V3AyqYNhNWehfDActXOXUuJ31EmiI8nsey6qb1UwvjPqrW7k8JR
+	QmKMFI+uWMj+mxA/qGGrkQVItD8uowt4/iuxoPkbHiTmJrFzkmBgAC1+o1gV8m8Zg4hP8V8s6C
+	AF1xpRfzzdzHbs5q+K2hgQbn2dbOEtupXc5qZJPA2WMchR8DqVSqRQbFVYhzCIG5vg3ELHqXfY
+	eYtVxh9tB+FpDvoQobiXJ8ACaX8C09SoeHmgR/yHHPlU8fy29TEpdlM3GzYpPwlMTwbGufesIJ
+	x000INxSAMGaPf9WueBbOiXO
 Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
 	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
-	11 Sep 2019 10:24:27 -0700
-IronPort-SDR: CZC7Z4UnqEVWjDKZn+wST7EPE3XcMpg7qzchDCH1bWnBcpHhr2M/bLrogjPzXWJl1P6M78M5TR
-	2xiKdGmZljiHODe5yefCtHTsb2x9gf/3NmaRWhfXn4OYIIXwi8crM8rtGT32ObdUoKxs0MAjG/
-	r5zIPjfyIGQ0XETL35z8EC8PmlsGTCoAZXpNm4/UuWaqXwRnK8NrHm/nOz1S9LYhsFkykOQWqB
-	zOziI1bfOJnUdx07EIFzVm7SfKposqvSrx0M+NnlVsY8y/jiyqA0Nuu/C8GMGmDHRO/XsHm1DA
-	4JY=
+	11 Sep 2019 10:24:26 -0700
+IronPort-SDR: qKhTuYrCrtRaAU9lGXQlt+ItozztxfnjXMo2jkWAZsW9OE4UYJz/YLS44kAlwDlIPf1Sg9DK4e
+	69G5/FsCvZE76HlbruWWZAbU0ee531SxUmJl3aa6NSpXycJDaIzUWO8BG+heJwm6awJ2U8qd57
+	G1Y8sgpTzthlo023OzXh7V15Wg2hpkcOwqbv2MA6FVRhega48Fmk+v0gF8VnedLMttSUrX5DWN
+	3ajftbpnH0LSPxabp2GSNp3fbPGnKYGvObqJb2GlUa1JG6J+03tmQFBInR2GMp6dHk5QW9VQs6
+	jD0=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
 	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
-	by uls-op-cesaip02.wdc.com with ESMTP; 11 Sep 2019 10:27:42 -0700
+	by uls-op-cesaip02.wdc.com with ESMTP; 11 Sep 2019 10:27:41 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Sep 2019 10:23:39 -0700
-Message-Id: <20190911172339.11778-2-alistair.francis@wdc.com>
+Date: Wed, 11 Sep 2019 10:23:38 -0700
+Message-Id: <20190911172339.11778-1-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20190911172339.11778-1-alistair.francis@wdc.com>
-References: <20190911172339.11778-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] python3-xmlrunner: Initial commit of 1.7.7
+Subject: [PATCH 1/2] python3-requests-future: Initial commit of 0.9.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,29 +62,35 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 11 Sep 2019 17:37:41 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- .../recipes-devtools/python/python3-xmlrunner_1.7.7.bb   | 9 +++++++++
- 1 file changed, 9 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb
+ .../python/python3-requests-futures_0.9.5.bb       | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb b/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb
+diff --git a/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb b/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
 new file mode 100644
-index 000000000..7e7b5235e
+index 000000000..b94929d8c
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-xmlrunner_1.7.7.bb
-@@ -0,0 +1,9 @@
-+SUMMARY = "unittest-based test runner with Ant/JUnit like XML reporting"
-+HOMEPAGE = "https://github.com/pycontribs/xmlrunner"
-+LICENSE = "LGPL-3.0"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=fa964f202b6ae067ed5828fe43c77c1a"
++++ b/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
+@@ -0,0 +1,14 @@
++SUMMARY = "Small add-on for the python requests http library. Makes use of python 3.2’s concurrent.futures or the backport for prior versions of python."
++HOMEPAGE = "https://github.com/ross/requests-futures"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e1e50798d0afe0e1f87594c6619a2fa5"
 +
-+SRC_URI[md5sum] = "7b0b152ed2d278516aedbc0cac22dfb3"
-+SRC_URI[sha256sum] = "5a6113d049eca7646111ee657266966e5bbfb0b5ceb2e83ee0772e16d7110f39"
++SRC_URI[md5sum] = "e20dc6f063c70888a7f8225e349b6682"
++SRC_URI[sha256sum] = "33aa8a3b7892850701707d7e094b1e1ce7c4f7a36ff2a1dcc2da4e01a1a00f7e"
 +
 +inherit pypi setuptools3
++
++RDEPENDS_${PN} += " \
++    python3-requests \
++"
++
 -- 
 2.23.0
 
