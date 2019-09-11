@@ -1,53 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id CDE207CDEB
+Return-Path: <naveen.kumar.saini@intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id 72D487ECAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Sep 2019 04:54:04 +0000 (UTC)
-Received: by mail-pg1-f170.google.com with SMTP id x15so10865870pgg.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 21:54:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=TqT369hXVe1TrXsuL1NJ8vDWCiYfTnMNYmXg8xHDZkc=;
-	b=eGbNzxIyQtNTiNVyPTviVL8gz3fktCp4XxSlCxhHM3VDEJ6clYo0zWKcR4I0j8d60i
-	SsnIhEmMrY0L8XWFzUrlqTGRFu9UjqmF8E2VJANUKxr1d+qM3J4XPDVulAubJW4c6/61
-	C9/spKIQ3T6pqVXi0IQzdmGk0XVd4yWjHFnnKWo8Lt+vcyk0M+1xKdTzI3xf86lzQREE
-	qYHrfNLTmXIebon1QcG1mfJ36xQt1aECvlQgNOsTCsPNiCjPcOhEfcmtly3joKr4r7Q1
-	bl7lL/qbFfLrMbAeI3AtatPzhMIA1N9cWvDuZWcs0laYcXK3L5po1X2aW+RZZPOFWOXD
-	8mKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=TqT369hXVe1TrXsuL1NJ8vDWCiYfTnMNYmXg8xHDZkc=;
-	b=elwPo0X/smD+f5rkiT4Ejjgc9EnZj/SHUmVmSPZfsdcOjwV0nE0WU68EMCnK6tWyAx
-	6PtK7sb358Qefi2W5ccL/ySOAVm8jL+4HtB/0YKzWUNbaSVjAk66i4TA7CY7xRjdXqVH
-	oc/QXVs3AEkC3Js86kSxQA7fGiqDrLUhjTLyPHU7p/KDgJMu8rbDcoGJSQfe/WVLSLW8
-	TT2eY9krQOKbhOMQ5XS0SU8fRjUlErXRh3uarj/JSUs67M1t1CF05jYbPL+sLmmLssYu
-	yR+1YzxZDItrpvysBJ0TrKrLTvdE2GSOQ4feJe/ZZcp1KIj9Dnq37UMq9PxqrPHUOfaF
-	RDmw==
-X-Gm-Message-State: APjAAAXvswGiTT879Eg9+tVZ2zsRM/SQMqnsHwjQZjOkWkSQOe6EQ7SS
-	yD+Tez96sbvP4iKgENEAZ+E7bkjEOqg=
-X-Google-Smtp-Source: APXvYqzsKq7nQCxKsd2Q9a7JrtpbXk7/VJL7OUU5nNCk7g80lYQRJpaSsBIU/nLXZm3yXaWbBWegwA==
-X-Received: by 2002:a62:2ac4:: with SMTP id
-	q187mr18993058pfq.235.1568177645426; 
-	Tue, 10 Sep 2019 21:54:05 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	i6sm36123311pfq.20.2019.09.10.21.54.04
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 10 Sep 2019 21:54:05 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 11 Sep 2019 05:28:22 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	10 Sep 2019 22:28:23 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,492,1559545200"; d="scan'208";a="196784170"
+Received: from saininav-desk1.png.intel.com ([172.30.199.130])
+	by orsmga002.jf.intel.com with ESMTP; 10 Sep 2019 22:28:22 -0700
+From: Naveen Saini <naveen.kumar.saini@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Sep 2019 21:53:48 -0700
-Message-Id: <20190911045348.3308507-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20190911045348.3308507-1-raj.khem@gmail.com>
-References: <20190911045348.3308507-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Subject: [meta-webserver][PATCH 3/3] netdata: Update to 1.17.0 and fix build with clang/x86
+Date: Wed, 11 Sep 2019 13:31:03 +0800
+Message-Id: <20190911053103.12432-1-naveen.kumar.saini@intel.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [PATCH] pm-graph: upgrade 5.3 -> 5.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,40 +30,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 04:54:05 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 Sep 2019 05:28:22 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This release has python3 support so updating python3 to RDEPENDS.
+python subprocess comes with python3-core, so removing from RDEPENDS.
+
+Removed patch, which is already merged in this release.
+
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
 ---
- meta-webserver/recipes-webadmin/netdata/netdata_git.bb | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ .../pm-graph/pm-graph/0001-bootgraph.py.patch | 32 ---------------
+ .../0001-sleepgraph.py-use-python3.patch      | 39 +++++++++++++++++++
+ .../{pm-graph_5.3.bb => pm-graph_5.5.bb}      |  6 +--
+ 3 files changed, 42 insertions(+), 35 deletions(-)
+ delete mode 100644 meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch
+ create mode 100644 meta-oe/recipes-kernel/pm-graph/pm-graph/0001-sleepgraph.py-use-python3.patch
+ rename meta-oe/recipes-kernel/pm-graph/{pm-graph_5.3.bb => pm-graph_5.5.bb} (75%)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-index 811c2c5223..d179e84e33 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc9b848046ef54b5eaee6071947abd24"
- SRC_URI = "git://github.com/firehol/netdata.git;protocol=https \
-            file://0002-Makefiles-does-not-build-contrib-dir.patch \
- "
--SRCREV = "2c4146832061635273d153a5174c85fb1d967d57"
--PV = "1.16.0+git${SRCPV}"
-+SRCREV = "588ce5a7b18999dfa66698cd3a2f005f7a3c31cf"
-+PV = "1.17.0"
- 
- # patch to disable timeout because timeout are not available with actual version
- # of core-utils
-@@ -25,6 +25,9 @@ DEPENDS += "zlib util-linux"
- 
- inherit pkgconfig autotools-brokensep useradd systemd
- 
-+LIBS_toolchain-clang_x86 = "-latomic"
-+export LIBS
+diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch
+deleted file mode 100644
+index d49ce0138..000000000
+--- a/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-bootgraph.py.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From 0c94e32b218c31f31a7988577fb9bec595034e7b Mon Sep 17 00:00:00 2001
+-From: Todd Brandt <todd.e.brandt@linux.intel.com>
+-Date: Fri, 10 May 2019 15:10:35 -0700
+-Subject: [PATCH] bootgraph.py: - handle boot time start grep better, the regex
+- needs more complexity
+-
+-Upstream-Status: Backport [https://github.com/intel/pm-graph/commit/0c94e32b218c31f31a7988577fb9bec595034e7b]
+-
+-Signed-off-by: Liwei Song <liwei.song@windriver.com>
+----
+- bootgraph.py | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/bootgraph.py b/bootgraph.py
+-index a2b1b1897307..d7f4bd152bf1 100755
+---- a/bootgraph.py
+-+++ b/bootgraph.py
+-@@ -333,9 +333,9 @@ def parseKernelLog():
+- 			if(not sysvals.stamp['kernel']):
+- 				sysvals.stamp['kernel'] = sysvals.kernelVersion(msg)
+- 			continue
+--		m = re.match('.* setting system clock to (?P<t>.*) UTC.*', msg)
+-+		m = re.match('.* setting system clock to (?P<d>[0-9\-]*)[ A-Z](?P<t>[0-9:]*) UTC.*', msg)
+- 		if(m):
+--			bt = datetime.strptime(m.group('t'), '%Y-%m-%d %H:%M:%S')
+-+			bt = datetime.strptime(m.group('d')+' '+m.group('t'), '%Y-%m-%d %H:%M:%S')
+- 			bt = bt - timedelta(seconds=int(ktime))
+- 			data.boottime = bt.strftime('%Y-%m-%d_%H:%M:%S')
+- 			sysvals.stamp['time'] = bt.strftime('%B %d %Y, %I:%M:%S %p')
+--- 
+-2.22.0
+-
+diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-sleepgraph.py-use-python3.patch b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-sleepgraph.py-use-python3.patch
+new file mode 100644
+index 000000000..25c87093f
+--- /dev/null
++++ b/meta-oe/recipes-kernel/pm-graph/pm-graph/0001-sleepgraph.py-use-python3.patch
+@@ -0,0 +1,39 @@
++From 22ce65d997f99606a3bb9d2a660ead42eecc234a Mon Sep 17 00:00:00 2001
++From: Naveen Saini <naveen.kumar.saini@intel.com>
++Date: Wed, 11 Sep 2019 11:31:07 +0800
++Subject: [PATCH] sleepgraph.py: use python3
 +
- #systemd
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE_${PN} = "netdata.service"
++Already compatible with Python 3.
++Same goes for bootgraph.py
++
++Upstream-Status: Inappropriate [oe specific]
++
++Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
++---
++ bootgraph.py  | 2 +-
++ sleepgraph.py | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/bootgraph.py b/bootgraph.py
++index d3b99a1..efb5714 100755
++--- a/bootgraph.py
+++++ b/bootgraph.py
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python
+++#!/usr/bin/python3
++ # SPDX-License-Identifier: GPL-2.0-only
++ #
++ # Tool for analyzing boot timing
++diff --git a/sleepgraph.py b/sleepgraph.py
++index 1794c79..cfed8e0 100755
++--- a/sleepgraph.py
+++++ b/sleepgraph.py
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python
+++#!/usr/bin/python3
++ # SPDX-License-Identifier: GPL-2.0-only
++ #
++ # Tool for analyzing suspend/resume timing
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb
+similarity index 75%
+rename from meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
+rename to meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb
+index a9f540ab8..63a9fa88e 100644
+--- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.3.bb
++++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb
+@@ -5,10 +5,10 @@ HOMEPAGE = "https://01.org/pm-graph"
+ LICENSE  = "GPL-2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
+ 
+-SRCREV = "5be9a16547234cef5aca8bfaccd920490ea1cfa7"
++SRCREV = "cf59527dc24fdd2f314ae4dcaeb3d68a117988f6"
+ SRC_URI = "git://github.com/intel/pm-graph.git \
+            file://0001-Makefile-fix-multilib-build-failure.patch \
+-           file://0001-bootgraph.py.patch \
++           file://0001-sleepgraph.py-use-python3.patch \
+ "
+ S = "${WORKDIR}/git"
+ 
+@@ -19,4 +19,4 @@ do_install() {
+         oe_runmake install
+ }
+ 
+-RDEPENDS_${PN} += "python-core python-threading python-datetime python-subprocess python-compression"
++RDEPENDS_${PN} += "python3-core python3-threading python3-datetime python3-compression"
 -- 
-2.23.0
+2.17.1
 
 
