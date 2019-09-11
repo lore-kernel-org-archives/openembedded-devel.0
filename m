@@ -1,54 +1,79 @@
-Return-Path: <prvs=1507a981f=alistair.francis@wdc.com>
-Received: from esa2.hgst.iphmx.com (esa2.hgst.iphmx.com [68.232.143.124])
-	by mail.openembedded.org (Postfix) with ESMTP id CAD897EA65
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Sep 2019 17:37:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1568223471; x=1599759471;
-	h=from:to:cc:subject:date:message-id:mime-version:
-	content-transfer-encoding;
-	bh=1V6MpztfDEQ8njRcvJ97QQVRLWaL56klcFZtforvcTY=;
-	b=KQc7LsfI+e04p1aeQdr/8qIHtBNgdSJR8gjbfqPNqjqKiphD/bsDj5Gv
-	DizaETKO0syxKoeLjrGCcE5rqCUTocVxgPn2lHrtZ632eZc3lJvhbP4D5
-	12WDoTlu7PpsoanV3i+2tG0mGSEYvE/XGBoNeKYHji1IypjyTdeayWS9j
-	8PKzsxbT1KetKimQljreQFYdEfNBwpuWABW1r+Q4LnhlRWDRCugea1wxP
-	s6KW89EfhfzXpf08erC2aG4sZYqYPVtcnSJloupdgI10Mo3LwIGvr+Ep0
-	gzER2QxqfDgOat2/cLET2LBYF0PxoVU4LCfLwH7xoJHFZEeYYK3lMJcCx A==;
-IronPort-SDR: L+TmMji+8191TBbchYb+LrrwAHjiYooCrNfNOM4iU/7jfF8w741MQ2Rnej894WsZKY492EWiXA
-	M7d2c4lwCMNfgg9IemwDJHC9v6rxrfdjNVeIK13i2sPyFdEdWb5jod3KdIb0xIR4deJauo67QA
-	9eb1Bn1tNKdiRnqWzfk6xNxMWp1EZpJaPl0yn7N1A8sRBADGgp5aajDxhcLG3Pgx1RxX7dsRoV
-	1WmYsKraja2XPdjYIPH8YQalsW9xozLHH7jZkVq6qjr7K0iEslOvWkZ47l8A5IvbkoZFvI9KoE
-	BhY=
-X-URL-LookUp-ScanningError: 1
-X-IronPort-AV: E=Sophos;i="5.64,494,1559491200"; d="scan'208";a="218717327"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
-	([199.255.45.15])
-	by ob1.hgst.iphmx.com with ESMTP; 12 Sep 2019 01:27:55 +0800
-IronPort-SDR: F/HSQgu8a/BQEjU/83ifv//V3AyqYNhNWehfDActXOXUuJ31EmiI8nsey6qb1UwvjPqrW7k8JR
-	QmKMFI+uWMj+mxA/qGGrkQVItD8uowt4/iuxoPkbHiTmJrFzkmBgAC1+o1gV8m8Zg4hP8V8s6C
-	AF1xpRfzzdzHbs5q+K2hgQbn2dbOEtupXc5qZJPA2WMchR8DqVSqRQbFVYhzCIG5vg3ELHqXfY
-	eYtVxh9tB+FpDvoQobiXJ8ACaX8C09SoeHmgR/yHHPlU8fy29TEpdlM3GzYpPwlMTwbGufesIJ
-	x000INxSAMGaPf9WueBbOiXO
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
-	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
-	11 Sep 2019 10:24:26 -0700
-IronPort-SDR: qKhTuYrCrtRaAU9lGXQlt+ItozztxfnjXMo2jkWAZsW9OE4UYJz/YLS44kAlwDlIPf1Sg9DK4e
-	69G5/FsCvZE76HlbruWWZAbU0ee531SxUmJl3aa6NSpXycJDaIzUWO8BG+heJwm6awJ2U8qd57
-	G1Y8sgpTzthlo023OzXh7V15Wg2hpkcOwqbv2MA6FVRhega48Fmk+v0gF8VnedLMttSUrX5DWN
-	3ajftbpnH0LSPxabp2GSNp3fbPGnKYGvObqJb2GlUa1JG6J+03tmQFBInR2GMp6dHk5QW9VQs6
-	jD0=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
-	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
-	by uls-op-cesaip02.wdc.com with ESMTP; 11 Sep 2019 10:27:41 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Sep 2019 10:23:38 -0700
-Message-Id: <20190911172339.11778-1-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.23.0
+Return-Path: <lewis.muhlenkamp@stryker.com>
+Received: from NAM03-BY2-obe.outbound.protection.outlook.com
+	(mail-eopbgr780081.outbound.protection.outlook.com [40.107.78.81])
+	by mail.openembedded.org (Postfix) with ESMTP id D0EE77E735;
+	Wed, 11 Sep 2019 19:43:20 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=jFpRjOY8Pkc1AHJHoksW6mejq2jEn2ldcCEx04WsKX8w34n5D8n3wl4k94AbOCC3+/Um2Kq3fn/b0o+kORnbVR/8kNnVwrU457PpipxFqJpgIB4vsZuW9KZRHpy1K+4REFzIKj2klK0c6LXytB4yFI1qbtX48KvUXRTsk7yU1Ecduxjsf9kudyDzgsyMSMkW8oZzwJGXIfJKrIf8SZpji9kBP2Xdw+B/ePfgdla+qWdEN7cfi2haMKvkwcXc44HICHTm4BWL6HYiiikEzBjL3rgKLuBUhOniPMxGJevSCr7z5yJqDqunIezXGEeToUWcvIkvnm3VHGRxAeOY8LRA7Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=iFpbMIXDrl6QUlHcS3C3cQHuLUbIwncgQLyAXh9mSD8=;
+	b=B9JCCVAh7XDdVZp1D1fdBCGBtUsZehs6dYHD3Guzsstl50HPriKkLTSvS83e+aJbgT4VVKExrW8GQQfjOxPCvYdmS4f4TIb8vJPF0Lmxf/XHiytIssDBykc5kPBoHzLkyXTwHejOwbRfbpG1jhyVaKgsHTKomdKcPQX4g/t65RV5RcGsf/rI7DH+GDW4yYQ1eUqpsvd7ivyPwC1MY0Vc6AOC4gFIl260Q3RUfk+cbrU75z3VFSHs5FXx3G7r7YZ0+/FWBc+rlfY+GbYo4vcb/Y/CqWNjQpXBciZBxweFZaHa/VFngsXgfnuttxu6orm5YzxuhqZcHmsIBDrTuM7oMA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+	smtp.mailfrom=stryker.com;
+	dmarc=pass action=none header.from=stryker.com; 
+	dkim=pass header.d=stryker.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stryker.com;
+	s=selector1;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=iFpbMIXDrl6QUlHcS3C3cQHuLUbIwncgQLyAXh9mSD8=;
+	b=vfr6vXpec9w5cM+58tQNqrH0xghE9tX4zu0MFNLRIt2B2pX0poCUwp3wFx4LBAjlLqVATF4rEPeaqA4rM9VVTc/btvnR09ATbAfPBJiWdCcDwFxU6lh44oNwe2wXPrXtdZ9iImORzXTH6r/nNfKD1X9aubW8EXjdIjsUjJPofL4=
+Received: from BN6PR0101MB2914.prod.exchangelabs.com (10.174.88.139) by
+	BN6PR0101MB2881.prod.exchangelabs.com (10.174.86.14) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2241.18; Wed, 11 Sep 2019 19:43:18 +0000
+Received: from BN6PR0101MB2914.prod.exchangelabs.com
+	([fe80::55ae:1d73:c222:271c]) by BN6PR0101MB2914.prod.exchangelabs.com
+	([fe80::55ae:1d73:c222:271c%3]) with mapi id 15.20.2241.022;
+	Wed, 11 Sep 2019 19:43:17 +0000
+From: "Muhlenkamp, Lewis" <lewis.muhlenkamp@stryker.com>
+To: "openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>, openembedded-devel
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: How to enable root logical volume in systemd-boot
+Thread-Index: AdVo1g0Ey2JxhTvAR5ObltZu4MRyCQ==
+Date: Wed, 11 Sep 2019 19:43:17 +0000
+Message-ID: <BN6PR0101MB29146BD2B86D87C87925EDB48FB10@BN6PR0101MB2914.prod.exchangelabs.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=lewis.muhlenkamp@stryker.com; 
+x-originating-ip: [165.225.32.51]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: eca3919b-90d9-4d33-2b1b-08d736f04b49
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: BCL:0; PCL:0;
+	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(7168020)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(4618075)(2017052603328)(7167020)(7193020);
+	SRVR:BN6PR0101MB2881; 
+x-ms-traffictypediagnostic: BN6PR0101MB2881:
+x-ms-exchange-purlcount: 2
+x-microsoft-antispam-prvs: <BN6PR0101MB28813F2EF0136C3E3411A17C8FB10@BN6PR0101MB2881.prod.exchangelabs.com>
+x-ms-oob-tlc-oobclassifiers: OLM:5236;
+x-forefront-prvs: 0157DEB61B
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(136003)(39860400002)(346002)(366004)(376002)(396003)(189003)(199004)(504964003)(7736002)(81166006)(316002)(3846002)(81156014)(8936002)(55236004)(110136005)(74316002)(9326002)(8676002)(2906002)(6306002)(54896002)(256004)(14444005)(26005)(236005)(102836004)(55016002)(9686003)(53936002)(186003)(66066001)(478600001)(33656002)(486006)(66946007)(476003)(66556008)(76116006)(66476007)(6436002)(450100002)(66446008)(64756008)(2501003)(52536014)(606006)(99286004)(71200400001)(71190400001)(6506007)(14454004)(86362001)(5660300002)(7696005)(790700001)(6116002)(25786009);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR0101MB2881;
+	H:BN6PR0101MB2914.prod.exchangelabs.com; FPR:; SPF:None; LANG:en;
+	PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: stryker.com does not designate
+	permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: GqWqWJkONDgtgoDiQO67VR5aN/LczFZZd8J73947Q3s3E67P5uMH3PuAsguuzlCkl2Be5NSOFl4fPkgSnIX5PFUH39dpvwfK4Xwq8SMS6kRbwm6/4xAURmlvALct0zoB62kXdv+Ffm5R03PwmWyAzT/lPlK4z7HzfR77QyuCusx1bd1Y32mTrljtFOKQ3iBPhaVFIVYtR1pug7fyzzmD245IVML5GAbJsny18dXzRHQioCtEUbgyBCFH9xw6rJpLMq/O93LjCypASiH/6hjwedJg0bIxBI71rrdujpjtwLvL+w0fFbrrHd3+uAitvRa8XVEqsM87eRf+3d1LwR8C03eVl4FOeWR3fJY0XALby4v+Bp89AsVA2xgjhRZFuFjpOk4VtMuJhGRtzttlb8XW2wnt9+ebBzEj/MpXkTywVFE=
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-Subject: [PATCH 1/2] python3-requests-future: Initial commit of 0.9.5
+X-OriginatorOrg: stryker.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: eca3919b-90d9-4d33-2b1b-08d736f04b49
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Sep 2019 19:43:17.8772 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 4e9dbbfb-394a-4583-8810-53f81f819e3b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ENC2XTTIXiKtE0dObPBOo+ROhsEtfuVxqFrdeUzbmi1CUgSO/bsOcm8QgFMkNir3cwniTN7hCj3yjJLoXJjtNBnc2LSQ01pPweDNwAmZHkk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR0101MB2881
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: How to enable root logical volume in systemd-boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,37 +86,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 17:37:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 Sep 2019 19:43:21 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- .../python/python3-requests-futures_0.9.5.bb       | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
+Hello,
 
-diff --git a/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb b/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
-new file mode 100644
-index 000000000..b94929d8c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-requests-futures_0.9.5.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Small add-on for the python requests http library. Makes use of python 3.2’s concurrent.futures or the backport for prior versions of python."
-+HOMEPAGE = "https://github.com/ross/requests-futures"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e1e50798d0afe0e1f87594c6619a2fa5"
-+
-+SRC_URI[md5sum] = "e20dc6f063c70888a7f8225e349b6682"
-+SRC_URI[sha256sum] = "33aa8a3b7892850701707d7e094b1e1ce7c4f7a36ff2a1dcc2da4e01a1a00f7e"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += " \
-+    python3-requests \
-+"
-+
--- 
-2.23.0
+First, I was using 2.6.  I tried under 2.7 and got the same issue.
 
+I need to have the root filesystem be a logical volume.
+
+I updated my core-image-minimal-initramfs.bbappend to include the following=
+:
+
+PACKAGE_INSTALL_append =3D " lvm2"
+
+
+The gets the lvm2 commands into the initramfs.  I can now run pvcreate, vgc=
+reate and lvcreate in my custom initrdscripts/files/init-install-efi.sh scr=
+ipt.
+
+rootfs=3D/dev/sda2
+pvcreate $rootfs
+vgcreate vg_root $rootfs
+rootfs=3D/dev/vg_root/lv_root
+lvcreate -n lv_root -l 95%VG vg_root
+mkfs.ext4 -F -O 64bit $rootfs
+
+All of the above run successfully.
+
+I then try to update the loader file with the UUID of the logical volume
+
+SYSTEMDBOOT_CFGS=3D"/boot/loader/entries/boot.conf"
+rootuuid=3D$(blkid -o value -s UUID ${rootfs})
+sed -i "s@options *@options root=3DUUID=3D$rootuuid rw rootwait quiet @" $S=
+YSTEMDBOOT_CFGS
+
+These too are successful.  At least the appropriate changes are made.  Unfo=
+rtunately I do not think I am putting in all of the appropriate changes.
+
+When I boot, the system hangs waiting for root device.  I do not see any me=
+ssages in the boot output showing anything is trying to start any LVM servi=
+ces or run any LVM commands.  So, I am guessing I am missing items in the o=
+ptions line.
+
+I've tried manually editing the boot command when booting, but nothing has =
+worked.  I've tried adding lvm to the line, changing the root entry, etc.  =
+The boot always hangs waiting for the root device.
+
+I did not find anything useful online.  So, asking here.  If there is somet=
+hing online that would help, please point me in the right direction.
+
+If there is nothing, can anyone here help me get my openembedded linux OS t=
+o boot off of a root logical volume?
+
+Thank you in advance
+
+Lewis Muhlenkamp
+
+Follow this link to read our Privacy Statement<https://www.stryker.com/cont=
+ent/stryker/gb/en/legal/global-policy-statement.html/>
 
