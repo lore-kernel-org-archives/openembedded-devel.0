@@ -1,50 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
-	[209.85.210.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 738517D71B
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 28E9F7EF4D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Sep 2019 06:55:48 +0000 (UTC)
-Received: by mail-pf1-f171.google.com with SMTP id x127so13046923pfb.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Sep 2019 23:55:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5/RmFvjWMvwddWiVIskxM6u5hjgESiNYw2TAc6Gx1Yg=;
-	b=hEJxv3qeazNLDkW4b6RZBjLGht9xIlIyzIoFWV1R1GU0kjSlXyD9jADszhr8vzlNYR
-	uiUrW//dwsBxvtBlxvRjK1TTDIC4qBCwD+avUpZ54asHp+r+VoF5oS5HJFXt1EmrRrcH
-	M78ZLX+qJEzV4jJVcmAyopyiCjMrTj4IHDQz3RoU7RM0rdGKnQHBsjdcvGwsQUTaCzxr
-	cq/lBiPPAeXtqiETeCSa0FEvFAbK0/ZCyIBhqhW8l8vf8Rn9o9W0xLSKwEkFWoK39UIq
-	7vlcdDe8kzImPMOWiJk9zSSz1iIsGPvWTHqQrvAHagaYhSTTVHUln6PVmhOzDSX6nmp/
-	qEVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5/RmFvjWMvwddWiVIskxM6u5hjgESiNYw2TAc6Gx1Yg=;
-	b=hSq6Hg1R0PYQwcRc2q0MQVd/0BhhxqbYz9Ue9pFeJzA+b6Z8v7Q+nmBYNVODd2uaRF
-	YdwQuzr4+pCTryZUs1KUvw0+rNKhQDtQ6DZ96/iV2EKdenE+lLBJGiNbwtFIpqZyxhLy
-	FWGPp5E2R2tc183H+X0xPyB8DxzsjyxMeUBMOCEZLwwqKnmjxbfgKZW0iS05+S2/Hag/
-	oFU4goxXOAu6/E2oDUPJ9mTlYj3danDSSx8VlVV4Oe4WGd7aGE8wIGufveT5eFfgvt5q
-	cly3JaQvdLEy/bQixG6GPb8790E2vDwC9kRcA8fUyQtZmoemHnyYgJDI5sUatO9S7129
-	1FCA==
-X-Gm-Message-State: APjAAAV41k9FALjqfYt1Tlz3o6hsHfrD8kXDO3BwI/whDKHhpkIKfDAz
-	ZB6bUuVk/W4WaVIzhD6IJQwd3+0iDTw=
-X-Google-Smtp-Source: APXvYqzhtN4K4W8heTyD8lny6m5lwLcca1m8+Y2FsrQe16Js3o0YiUbrvxJwwyQgT7WfndPeZrGjiw==
-X-Received: by 2002:a63:1d0e:: with SMTP id d14mr31671351pgd.324.1568184948901;
-	Tue, 10 Sep 2019 23:55:48 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	j1sm18864063pgl.12.2019.09.10.23.55.48
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 10 Sep 2019 23:55:48 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Sep 2019 23:55:08 -0700
-Message-Id: <20190911065508.579805-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	Wed, 11 Sep 2019 08:32:10 +0000 (UTC)
+Received: from webmail.kmu-office.ch (unknown [IPv6:2a02:418:6a02::a3])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 009A95C0D8D;
+	Wed, 11 Sep 2019 10:32:09 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1568190729;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	content-transfer-encoding:content-transfer-encoding:
+	in-reply-to:in-reply-to:references:references;
+	bh=KMPVv0o3zgdMVGzNcP/BZ4gKBJras2klrwl0qLTEehs=;
+	b=Ww4n9P+jsKwFT2XOMmotBW7Sg8DEUPlOr326GbUZmU5Gd+Qv50LjvaZ1rc10RMPlHh8bKR
+	zg9F+nee5CVWDhN8BqOgoCiP2pdGgMS5w1szbJ+F5frfzvW4/tKK9g8tt54N3qGp1C95A1
+	fsdCt7IGdVtWWQ3MJVH4Nx4prM/8fs0=
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] safec: Define _GNU_SOURCE
+Date: Wed, 11 Sep 2019 10:32:08 +0200
+From: Stefan Agner <stefan@agner.ch>
+To: Khem Raj <raj.khem@gmail.com>, akuster808 <akuster808@gmail.com>
+In-Reply-To: <9ca2559a-1b60-367a-ce6e-5f85b4763c4f@gmail.com>
+References: <20190910214919.9171-1-stefan@agner.ch>
+	<c30d914c-da23-70f0-cde3-6bb32a5b8f98@gmail.com>
+	<9ca2559a-1b60-367a-ce6e-5f85b4763c4f@gmail.com>
+Message-ID: <02f8b7fb3398361ba2e1e7e33349da27@agner.ch>
+X-Sender: stefan@agner.ch
+User-Agent: Roundcube Webmail/1.3.9
+Cc: openembedded-devel@lists.openembedded.org,
+	Stefan Agner <stefan.agner@toradex.com>
+Subject: Re: [meta-filesystems][PATCH] fuse3: add libfuse3 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,33 +42,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 06:55:49 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 Sep 2019 08:32:10 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-musl does not define this variable automatically but safec does provide
-wrapper for some GNU extentions as well e.g.
+On 2019-09-11 03:40, Khem Raj wrote:
+> Hi Armin
+> 
+> On 9/10/19 3:06 PM, akuster808 wrote:
+>> Stefan,
+>>
+>> On 9/10/19 2:49 PM, Stefan Agner wrote:
+>>> From: Stefan Agner <stefan.agner@toradex.com>
+>>>
+>>> Add recipe for libfuse version 3 series. Follow the scheme other
+>>> distributions use and create a new recipe with 3 in its name.
+>>> To avoid conflict with the fuse (2) recipe this recipe does not
+>>> provide init scripts/configuration files which automatically load
+>>> the fuse kernel driver.
+>>>
+>>> Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
+>>
+>> This recipe appears to already exist in meta-filesystem
+>>
+>> https://git.openembedded.org/meta-openembedded/tree/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
+>>
+>> Is this a all together a different Major version that is not compatible
+>> with the one above? or should we just update the old one?
+>>
+> 
+> These are different revisions which can be installed together see [1]
+> I think best solution is as proposed where both revisions can live
+> together, we don't want to force fuse2 users to fuse3 since it could
+> mean quite a bit of unplanned work. Eventually we might drop fuse2
+> maybe in 3.1+ releases if all users of fuse in OE have moved over to
+> fuse3
 
-error: implicit declaration of function 'localtime_r' is invalid in C99
+Yes, fuse3 seems to be a non backward compatible release. Lots of
+project still require fuse2. E.g. in ArchLinux you can see that actually
+most packages still depend on fuse2:
+https://www.archlinux.org/packages/extra/x86_64/fuse2/
+https://www.archlinux.org/packages/extra/x86_64/fuse3/
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-core/safec/safec_3.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Given that so many projects still rely on fuse2, I guess dropping fuse2
+will be even further out.
 
-diff --git a/meta-oe/recipes-core/safec/safec_3.4.bb b/meta-oe/recipes-core/safec/safec_3.4.bb
-index b4c125faf4..cc1fbcb735 100644
---- a/meta-oe/recipes-core/safec/safec_3.4.bb
-+++ b/meta-oe/recipes-core/safec/safec_3.4.bb
-@@ -10,6 +10,8 @@ S = "${WORKDIR}/git"
- SRCREV = "62e6b2df55084316d027165d286e46beb40513dc"
- SRC_URI = "git://github.com/rurban/safeclib.git"
- 
-+CPPFLAGS_append_libc-musl = " -D_GNU_SOURCE"
-+
- COMPATIBLE_HOST = '(x86_64|i.86|powerpc|powerpc64|arm).*-linux'
- 
- RDEPENDS_${PN} = "perl"
--- 
-2.23.0
+--
+Stefan
 
+> 
+> [1]
+> https://github.com/libfuse/libfuse/blob/master/ChangeLog.rst#libfuse-300-2016-12-08
 
