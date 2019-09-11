@@ -1,35 +1,57 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 28E9F7EF4D
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 43BAE7EC43
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Sep 2019 08:32:10 +0000 (UTC)
-Received: from webmail.kmu-office.ch (unknown [IPv6:2a02:418:6a02::a3])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 009A95C0D8D;
-	Wed, 11 Sep 2019 10:32:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1568190729;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=KMPVv0o3zgdMVGzNcP/BZ4gKBJras2klrwl0qLTEehs=;
-	b=Ww4n9P+jsKwFT2XOMmotBW7Sg8DEUPlOr326GbUZmU5Gd+Qv50LjvaZ1rc10RMPlHh8bKR
-	zg9F+nee5CVWDhN8BqOgoCiP2pdGgMS5w1szbJ+F5frfzvW4/tKK9g8tt54N3qGp1C95A1
-	fsdCt7IGdVtWWQ3MJVH4Nx4prM/8fs0=
+	Wed, 11 Sep 2019 14:52:58 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 6B54018288
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 16:52:59 +0200 (CEST)
+X-Axis-User: NO
+X-Axis-NonUser: YES
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id rJ9rGoYnEDKv
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 16:52:56 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 72370183A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 16:52:56 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 5B1111E074
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 16:52:56 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 4FDA21E06E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 16:52:56 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder03.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 16:52:56 +0200 (CEST)
+Received: from saur.se.axis.com (saur.se.axis.com [10.92.3.10])
+	by thoth.se.axis.com (Postfix) with ESMTP id 4434E2D3D
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 16:52:56 +0200 (CEST)
+Received: from saur.se.axis.com (localhost [127.0.0.1])
+	by saur.se.axis.com (8.15.2/8.15.2) with ESMTPS id x8BEqucL015735
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Sep 2019 16:52:56 +0200
+Received: (from pkj@localhost)
+	by saur.se.axis.com (8.15.2/8.15.2/Submit) id x8BEquF6015734
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Sep 2019 16:52:56 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Sep 2019 16:52:54 +0200
+Message-Id: <20190911145254.15693-1-pkj@axis.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Date: Wed, 11 Sep 2019 10:32:08 +0200
-From: Stefan Agner <stefan@agner.ch>
-To: Khem Raj <raj.khem@gmail.com>, akuster808 <akuster808@gmail.com>
-In-Reply-To: <9ca2559a-1b60-367a-ce6e-5f85b4763c4f@gmail.com>
-References: <20190910214919.9171-1-stefan@agner.ch>
-	<c30d914c-da23-70f0-cde3-6bb32a5b8f98@gmail.com>
-	<9ca2559a-1b60-367a-ce6e-5f85b4763c4f@gmail.com>
-Message-ID: <02f8b7fb3398361ba2e1e7e33349da27@agner.ch>
-X-Sender: stefan@agner.ch
-User-Agent: Roundcube Webmail/1.3.9
-Cc: openembedded-devel@lists.openembedded.org,
-	Stefan Agner <stefan.agner@toradex.com>
-Subject: Re: [meta-filesystems][PATCH] fuse3: add libfuse3 recipe
+X-TM-AS-GCONF: 00
+Subject: [meta-oe][PATCH] lvm2/libdevmapper: Make it build for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,55 +64,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Sep 2019 08:32:10 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 11 Sep 2019 14:52:59 -0000
+Content-Transfer-Encoding: 8bit
 
-On 2019-09-11 03:40, Khem Raj wrote:
-> Hi Armin
-> 
-> On 9/10/19 3:06 PM, akuster808 wrote:
->> Stefan,
->>
->> On 9/10/19 2:49 PM, Stefan Agner wrote:
->>> From: Stefan Agner <stefan.agner@toradex.com>
->>>
->>> Add recipe for libfuse version 3 series. Follow the scheme other
->>> distributions use and create a new recipe with 3 in its name.
->>> To avoid conflict with the fuse (2) recipe this recipe does not
->>> provide init scripts/configuration files which automatically load
->>> the fuse kernel driver.
->>>
->>> Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
->>
->> This recipe appears to already exist in meta-filesystem
->>
->> https://git.openembedded.org/meta-openembedded/tree/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
->>
->> Is this a all together a different Major version that is not compatible
->> with the one above? or should we just update the old one?
->>
-> 
-> These are different revisions which can be installed together see [1]
-> I think best solution is as proposed where both revisions can live
-> together, we don't want to force fuse2 users to fuse3 since it could
-> mean quite a bit of unplanned work. Eventually we might drop fuse2
-> maybe in 3.1+ releases if all users of fuse in OE have moved over to
-> fuse3
+Backport a patch from upstream master that corrects the passing of
+link flags through configure.
 
-Yes, fuse3 seems to be a non backward compatible release. Lots of
-project still require fuse2. E.g. in ArchLinux you can see that actually
-most packages still depend on fuse2:
-https://www.archlinux.org/packages/extra/x86_64/fuse2/
-https://www.archlinux.org/packages/extra/x86_64/fuse3/
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ ...gure-Fix-setting-of-CLDFLAGS-default.patch | 78 +++++++++++++++++++
+ meta-oe/recipes-support/lvm2/lvm2.inc         |  1 +
+ 2 files changed, 79 insertions(+)
+ create mode 100644 meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch
 
-Given that so many projects still rely on fuse2, I guess dropping fuse2
-will be even further out.
+diff --git a/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch b/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch
+new file mode 100644
+index 000000000..07cb88ffb
+--- /dev/null
++++ b/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch
+@@ -0,0 +1,78 @@
++From 4a3e707402032788e09282e0f54fdf82c8a0f8fc Mon Sep 17 00:00:00 2001
++From: Marian Csontos <mcsontos@redhat.com>
++Date: Mon, 19 Aug 2019 14:54:43 +0200
++Subject: [PATCH] configure: Fix setting of CLDFLAGS default
++
++---
++ configure    | 6 +++---
++ configure.ac | 6 +++---
++ 2 files changed, 6 insertions(+), 6 deletions(-)
++
++Upstream-Status: Backport [https://sourceware.org/git/?p=lvm2.git;a=commit;h=4a3e707402032788e09282e0f54fdf82c8a0f8fc]
++Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
++
++diff --git a/configure b/configure
++index ff3a59b6b..4c8476502 100755
++--- a/configure
+++++ b/configure
++@@ -3077,7 +3077,7 @@ if test -z "$CFLAGS"; then :
++ fi
++ case "$host_os" in
++ 	linux*)
++-		CLDFLAGS="${CLDFLAGS:"$LDFLAGS"} -Wl,--version-script,.export.sym"
+++		CLDFLAGS="${CLDFLAGS-"$LDFLAGS"} -Wl,--version-script,.export.sym"
++ 		# equivalent to -rdynamic
++ 		ELDFLAGS="-Wl,--export-dynamic"
++ 		# FIXME Generate list and use --dynamic-list=.dlopen.sym
++@@ -3098,7 +3098,7 @@ case "$host_os" in
++ 		;;
++ 	darwin*)
++ 		CFLAGS="$CFLAGS -no-cpp-precomp -fno-common"
++-		CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
+++		CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
++ 		ELDFLAGS=
++ 		CLDWHOLEARCHIVE="-all_load"
++ 		CLDNOWHOLEARCHIVE=
++@@ -3111,7 +3111,7 @@ case "$host_os" in
++ 		BLKDEACTIVATE=no
++ 		;;
++ 	*)
++-		CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
+++		CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
++ 		;;
++ esac
++ 
++diff --git a/configure.ac b/configure.ac
++index 5da694631..830edb8da 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -30,7 +30,7 @@ AC_CANONICAL_TARGET([])
++ AS_IF([test -z "$CFLAGS"], [COPTIMISE_FLAG="-O2"])
++ case "$host_os" in
++ 	linux*)
++-		CLDFLAGS="${CLDFLAGS:"$LDFLAGS"} -Wl,--version-script,.export.sym"
+++		CLDFLAGS="${CLDFLAGS-"$LDFLAGS"} -Wl,--version-script,.export.sym"
++ 		# equivalent to -rdynamic
++ 		ELDFLAGS="-Wl,--export-dynamic"
++ 		# FIXME Generate list and use --dynamic-list=.dlopen.sym
++@@ -51,7 +51,7 @@ case "$host_os" in
++ 		;;
++ 	darwin*)
++ 		CFLAGS="$CFLAGS -no-cpp-precomp -fno-common"
++-		CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
+++		CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
++ 		ELDFLAGS=
++ 		CLDWHOLEARCHIVE="-all_load"
++ 		CLDNOWHOLEARCHIVE=
++@@ -64,7 +64,7 @@ case "$host_os" in
++ 		BLKDEACTIVATE=no
++ 		;;
++ 	*)
++-		CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
+++		CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
++ 		;;
++ esac
++ 
++-- 
++2.21.0
++
+diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+index f358663b0..6c95bfd02 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2.inc
++++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+@@ -15,6 +15,7 @@ SRC_URI = "https://sourceware.org/pub/lvm2/LVM2.${PV}.tgz \
+            file://0001-Avoid-bashisms-in-init-scripts.patch \
+            file://0005-do-not-build-manual.patch \
+            file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
++           file://0001-configure-Fix-setting-of-CLDFLAGS-default.patch \
+            "
+ SRC_URI[md5sum] = "5fc07da5461a3794a751dcfc355827d5"
+ SRC_URI[sha256sum] = "550ba750239fd75b7e52c9877565cabffef506bbf6d7f6f17b9700dee56c720f"
+-- 
+2.21.0
 
---
-Stefan
-
-> 
-> [1]
-> https://github.com/libfuse/libfuse/blob/master/ChangeLog.rst#libfuse-300-2016-12-08
 
