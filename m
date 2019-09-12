@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
-	[209.85.208.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 56E717E08E
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com
+	[209.85.208.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 098347E18C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 21:15:22 +0000 (UTC)
-Received: by mail-lj1-f171.google.com with SMTP id u14so24993132ljj.11
+	Thu, 12 Sep 2019 21:26:28 +0000 (UTC)
+Received: by mail-lj1-f173.google.com with SMTP id h2so18531239ljk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 14:15:23 -0700 (PDT)
+	Thu, 12 Sep 2019 14:26:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=8zqJfkb7f+kaWOY1/tlQyZNylu6pueEJBBykDGV5RwI=;
-	b=Ac72oqfpaBp8X6n0ItcoKvCICf8XqRLgRdzI48L5Oi0/U+4Bpk4AHqnwRf8HuIwNIH
-	Zs2tLwzW49DIz1A/pUfQf6KzAnIftQTgESG8BgIbu1z1eZvzXTvqynUWgEUHve0vmHL0
-	5K9GpQsZ8Zu654i5bXjnqFh9jDAbh4uXBpGQScvHiQvlQts9KnrVTR84frKFlsNyeRek
-	ctkMd5MarkBcPmOQmuEUkuyqnPZhuRD1I5webnxTS2e521DZEjJyg05fQr7PuHQnPqtZ
-	5G9BBmhth0eoNX9OnKcb1Uxa0ndKxadmn8XYIqlLCXEI4mmtk6qJZUflRGzbPQPSPLhh
-	qy0g==
+	bh=twWxdfjZFK88iboozoeMfoYOkHPD6mLGYuP4yZCGWMA=;
+	b=j9O9WMcsXdlxMkprz4LO3GvlRLk86Ak1CZvrTdxXhk61bZkK/dbykRDFY2mWWehqWI
+	ntdch2ZwUtgVAo1CdxcNxlb1BCcIAGvEC5Q3ezTIE2Jrknu4cXpg5WRd3Y0tjpZubamr
+	2h2bcyIx70a7Lytl/jjG9o8tZ0LPvvYU3+irQqXYjADQQDn4Ia9V94IMWLLsa5gdj2Hp
+	n0MGRRAGNcS7SD6/4cnNAXIEWTFrtGv8/pzbmMr5GBotd60Vb93Y5RjP79phATjg2dbi
+	s0bj67RE4NjiZfR+ICGQe7hfXzzuQeDE9P9r4mlxaSB2FmmIcjND4GQNcMvQJr9AKstY
+	3dsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=8zqJfkb7f+kaWOY1/tlQyZNylu6pueEJBBykDGV5RwI=;
-	b=INrmyHA/1xOlbzJQXTmCNnngrtpPRxVdZCZR+LTrt70zavKUvs6xBEQiHOrJF81zaD
-	S7dMpWMnUnJ2zJwM3LA+iP7iInmR26ff/mJ5JN3fkXYUgYNDrdB/LJX4tS9otDlBbbSG
-	3JvHTtV5Z38slglcK8N6XYPBLntCPRTLtKic8bXd2es/0RjiHfsgZBt9Q3imovyUxAYD
-	0hqFBOhf4GzGj7Y3+CU+WqLNHtLYCkaIkfEMLny0COtxWrffqBt93JXw20stJGFbWmv0
-	rkAOxKBLvb2taNUwQCWr7xdN1ns3JJIiQ8KbFUOhFZgCa1c8trklgAJMsaI0V4lWS36X
-	np6Q==
-X-Gm-Message-State: APjAAAUtzXaryo7ux9dfIjpITFv6997JPbxjT1zstE/X4YDestrLsWRG
-	kKdM4PCFDdfYpcl5s1lLpfeulLIzzko=
-X-Google-Smtp-Source: APXvYqynvs/LKYE81DAtk4vXCL7p8ZPxbXK8Mla6evhT0JbKfrWJJeJlSq90k5WckWhp26nTm6nWgg==
-X-Received: by 2002:a2e:5456:: with SMTP id y22mr28641723ljd.60.1568322922725; 
-	Thu, 12 Sep 2019 14:15:22 -0700 (PDT)
+	bh=twWxdfjZFK88iboozoeMfoYOkHPD6mLGYuP4yZCGWMA=;
+	b=dWvC3ZNZbvEc0z0T2hnUotyUm0iHb515UdrtTgw1ziMro/GoClsoILs3iliCDjm9BW
+	FTZwd3yKNhRINfer/mcs0yGGafbFlhXCQFWpMwIOJrcEGrs0xhys1T856FQFQS7shkCe
+	bFUQbpR9fuZ3+xd6j0NwCSN+6sStFmlmn0zk7nuhqcHODTNJSf9FXFN86l5foi1748Pk
+	LbLPKLXwqPhL5SN1POQXPN22Lzp/B2s27CO2vF20JGpe0ijuDftruNU7p1a0tWxUIv+H
+	w/N1XakYSwuYcjGINIqEOdxC3bwcWgCMsvd17d9HUoGULhz+rRnR3ZF9lsNRa3kjwAuA
+	7F/A==
+X-Gm-Message-State: APjAAAUa07M09e6bvtW0njkvzJQhAsMtid04R6galKGe4g5dvibbNbvW
+	gMSpSCXa5OHGrfs7MWOU7V8Fw4dYfAg=
+X-Google-Smtp-Source: APXvYqzz7LQOn2IAbAAPJ69MiRYILWJb10T6/uayuLfLbW6peOYyfaUYae5pb7ynbqY7s7mZ57dN9g==
+X-Received: by 2002:a2e:740a:: with SMTP id p10mr257124ljc.110.1568323589283; 
+	Thu, 12 Sep 2019 14:26:29 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
 	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
-	d28sm6559831lfq.88.2019.09.12.14.15.21
+	t16sm6611493lfp.38.2019.09.12.14.26.28
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 14:15:22 -0700 (PDT)
+	Thu, 12 Sep 2019 14:26:28 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Sep 2019 23:15:20 +0200
-Message-Id: <20190912211520.25521-1-open.source@oleksandr-kravchuk.com>
+Date: Thu, 12 Sep 2019 23:26:26 +0200
+Message-Id: <20190912212626.15710-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] ddrescue: update to 1.24
+Subject: [PATCH][meta-oe] evtest: update to 1.34
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,37 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 21:15:22 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 21:26:29 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../ddrescue/{ddrescue_1.22.bb => ddrescue_1.24.bb}          | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/ddrescue/{ddrescue_1.22.bb => ddrescue_1.24.bb} (90%)
+ meta-oe/recipes-test/evtest/{evtest_git.bb => evtest_1.34.bb} | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-oe/recipes-test/evtest/{evtest_git.bb => evtest_1.34.bb} (84%)
 
-diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.22.bb b/meta-oe/recipes-extended/ddrescue/ddrescue_1.24.bb
-similarity index 90%
-rename from meta-oe/recipes-extended/ddrescue/ddrescue_1.22.bb
-rename to meta-oe/recipes-extended/ddrescue/ddrescue_1.24.bb
-index 2df7db9e8..52bd11b1a 100644
---- a/meta-oe/recipes-extended/ddrescue/ddrescue_1.22.bb
-+++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.24.bb
-@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
-                     file://main_common.cc;beginline=5;endline=16;md5=3ec288b2676528cd2b069364e313016f"
+diff --git a/meta-oe/recipes-test/evtest/evtest_git.bb b/meta-oe/recipes-test/evtest/evtest_1.34.bb
+similarity index 84%
+rename from meta-oe/recipes-test/evtest/evtest_git.bb
+rename to meta-oe/recipes-test/evtest/evtest_1.34.bb
+index fa0d6e2fe..b5b929f45 100644
+--- a/meta-oe/recipes-test/evtest/evtest_git.bb
++++ b/meta-oe/recipes-test/evtest/evtest_1.34.bb
+@@ -7,11 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
- SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
--SRC_URI[md5sum] = "49c845ed89d25b534842e40366154cb4"
--SRC_URI[sha256sum] = "09857b2e8074813ac19da5d262890f722e5f7900e521a4c60354cef95eea10a7"
-+SRC_URI[md5sum] = "8ac89f833c0df221723e33b447e230fe"
-+SRC_URI[sha256sum] = "4b5d3feede70e3657ca6b3c7844f23131851cbb6af0cecc9721500f7d7021087"
+ DEPENDS = "libxml2"
  
- # This isn't already added by base.bbclass
- do_unpack[depends] += "lzip-native:do_populate_sysroot"
-@@ -42,4 +42,3 @@ do_install () {
-         rm -f ${D}${infodir}/dir
-     fi
- }
+-SRCREV = "ab140a2dab1547f7deb5233be6d94a388cf08b26"
++SRCREV = "16e5104127a620686bdddc4a9ad62881134d6c69"
+ SRC_URI = "git://anongit.freedesktop.org/evtest;protocol=git"
+ 
+-PV = "1.33+${SRCPV}"
 -
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
 -- 
 2.17.1
 
