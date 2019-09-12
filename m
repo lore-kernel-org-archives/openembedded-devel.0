@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
-	[209.85.167.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F42D7E08E
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id F3C907E21C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 21:31:03 +0000 (UTC)
-Received: by mail-lf1-f48.google.com with SMTP id r134so20498872lff.12
+	Thu, 12 Sep 2019 21:39:50 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id d10so20540761lfi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 14:31:04 -0700 (PDT)
+	Thu, 12 Sep 2019 14:39:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=uvwj8HMwJfJTOQfcA3BzL6R+7wygtyyiDW5TxZ52mu4=;
-	b=ta99YFvc7WdDAbmSHZYO5uB4bhspRZJXRN51va2NY+hpOgtLl95kuMVtsuHjRN+SWF
-	yiw/xwFs+SQJVu6oTLdXj1w231aWs5AIOux2Gce+bMAKHevi7TM50OiWop10M92YpA9A
-	L2bfqxe4uaJ/3hFXNOrW0O88Fjyyv8NzHDxsi37PLnytN10DMovqX7RA9MyWjtg/sdKB
-	gKNUPxUnREeWpwzMNlS1HfNlUDm0nmv5OLSbcFfdcNoUXRN1ayqTSDLiVoZqD+VrrFTY
-	0yyXDmYs1OqdNDDghW9mfguoJsvfFs0L9aJE0hN3K4bgpidlUrqDUK4EFFHjQw6ASuwv
-	dtzw==
+	bh=SujVy5HtlipWrbydH+TxVYTZ7h6E1WXsXG4ci+ZXJuE=;
+	b=ax6oB7ypmKx72XgnW5D0eQLeWNYIoWyg5G6CP5bi6bwQipGVgQ9xJETzkzMXKM6FKq
+	RoXLP4v/WtNtoNNbHEGvxId2IIkP2iAINr43eXTo3f40nsCeME3KWXwZgTpEVUP6TiJL
+	F+SOka6+uzcFuIe5mI8e7vYz4pU6WyR5Ad3djFuspEsyalNho6Xg9p+lcCkGIJ8vG2dJ
+	6OaXEyE1yRbXLTO6DoTDy5z/4AXiv7xYL33Fgez3lNz7NL8DjGGXLyv/LoTf7X3N5Y2c
+	nqpRm8mZiIlmzI+o0MO5IhRemJ8SANi3VtH3M4AB1mW8UufEDkGycIMhntoRkr5CXpTg
+	iWLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=uvwj8HMwJfJTOQfcA3BzL6R+7wygtyyiDW5TxZ52mu4=;
-	b=VzVECIeTr/qwcs/isIg4QJj/CCF4Jmua+Jc3jKsH92GpDGGlx4nQaSlqtyLdy3vCb3
-	9QLycJ7nsp3kN/2A2zLCY63HdJAW2T57NXSfw08z4e7MHsv3MBzpEnNyE81oTAU8AnsH
-	NpXyBZp/WpbUrL71ZCwZv1HzBNsQscaf2n4jl6MDtlLoH7IhDL2rUWkcqWTpP/V84Iuz
-	7pxI75QxeA/qLyifKzAWk8aEXbPdnx4DiphydsiT1aSw0zEsogJVNa9FrFnBrc7xiFOG
-	tq5nxPhhlzO1zxA1mJ+Rbby9mXNRsPBYscqMpoE96XJirKf6euDLMuqnTsYmDuLr8u0R
-	cXyw==
-X-Gm-Message-State: APjAAAXp8LPRt8MbuHpWVX7k7yzBzpSKzcyRvP+KsBPWDiEeyN+sAJIR
-	UIz/+QrXEqIti6GEpSGmzEOuyf5X1XI=
-X-Google-Smtp-Source: APXvYqztmNzTJ49fD7XjEbHuYPehVqkvKrb1MybljDCcH/G9fJDQCFTyMUGSQ6rx+NtfqXcTdaQ6SQ==
-X-Received: by 2002:ac2:530e:: with SMTP id c14mr2316471lfh.165.1568323863528; 
-	Thu, 12 Sep 2019 14:31:03 -0700 (PDT)
+	bh=SujVy5HtlipWrbydH+TxVYTZ7h6E1WXsXG4ci+ZXJuE=;
+	b=hvWT2uW1PyM3DQhy9XeD16OJsdEOLSDC53DuP9g9LS4jjL2CPHY/GL8tfz7kuaeZQG
+	QrsI2auwBcVIBB4gFki2gvXHJg4yhuVGlCMAmDUBhXAzwrG9P6kdA9yFmTnBgDRcUZtK
+	dX/5sonDtdLM6pTab+z9Ifk1v3R+J55i3vD9wORFJE+hdOi/Ji5NbXIv2BRLRmrREcW+
+	sL4LvhD0ztIppORlscOQx+FnIQrx6NRrBqBzUUk+1c2vSHhft9up1tJW9K7fXVyoyS0+
+	3mB57zXew3hWIeRsbD2GjklL3tb7/ZrKquIdaODoqAuhSwFlGOVF0WjDv36fd+oV+EJH
+	8vWw==
+X-Gm-Message-State: APjAAAVNgZ4MMvl6VF8ut5+Ahvr/Jfx6oZChXroyfxd/rgLDYXJcip4P
+	RXeYdzz/BLXywTHfskCzS/ulHjCX/ak=
+X-Google-Smtp-Source: APXvYqwLSWMNjwrXhqpGkq4qicsjJjDKdJI3i16dHOp3BFJKI/5dyhjXX6inWiYp9unRF+utL/rhpQ==
+X-Received: by 2002:a19:f111:: with SMTP id p17mr29091726lfh.187.1568324391483;
+	Thu, 12 Sep 2019 14:39:51 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
 	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
-	c21sm2918056lff.61.2019.09.12.14.31.02
+	w17sm6573199lfl.43.2019.09.12.14.39.50
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 14:31:03 -0700 (PDT)
+	Thu, 12 Sep 2019 14:39:50 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Sep 2019 23:30:59 +0200
-Message-Id: <20190912213059.18263-1-open.source@oleksandr-kravchuk.com>
+Date: Thu, 12 Sep 2019 23:39:48 +0200
+Message-Id: <20190912213948.21739-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] fmt: update to 6.0.0
+Subject: [PATCH][meta-oe] jsonrpc: update to 1.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 21:31:03 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 21:39:52 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-oe/recipes-support/fmt/{fmt_5.3.0.bb => fmt_6.0.0.bb} | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-support/fmt/{fmt_5.3.0.bb => fmt_6.0.0.bb} (67%)
+ .../jsonrpc/{jsonrpc_git.bb => jsonrpc_1.2.0.bb}       | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-devtools/jsonrpc/{jsonrpc_git.bb => jsonrpc_1.2.0.bb} (83%)
 
-diff --git a/meta-oe/recipes-support/fmt/fmt_5.3.0.bb b/meta-oe/recipes-support/fmt/fmt_6.0.0.bb
-similarity index 67%
-rename from meta-oe/recipes-support/fmt/fmt_5.3.0.bb
-rename to meta-oe/recipes-support/fmt/fmt_6.0.0.bb
-index be33bb863..c35c77b12 100644
---- a/meta-oe/recipes-support/fmt/fmt_5.3.0.bb
-+++ b/meta-oe/recipes-support/fmt/fmt_6.0.0.bb
-@@ -1,12 +1,11 @@
- SUMMARY = "open-source formatting library for C++"
- DESCRIPTION = "{fmt} is an open-source formatting library for C++. It can be used as a safe and fast alternative to (s)printf and iostreams."
- HOMEPAGE = "https://fmt.dev"
--LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=c2e38bc8629eac247a73b65c1548b2f0"
--SRCREV = "9e554999ce02cf86fcdfe74fe740c4fe3f5a56d5"
--PV .= "+git${SRCPV}"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=af88d758f75f3c5c48a967501f24384b"
+diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_git.bb b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb
+similarity index 83%
+rename from meta-oe/recipes-devtools/jsonrpc/jsonrpc_git.bb
+rename to meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb
+index aea11b082..b23775708 100644
+--- a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_git.bb
++++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb
+@@ -3,18 +3,14 @@ DESCRIPTION = "JsonRpc-Cpp is an OpenSource implementation of JSON-RPC \
+                protocol in C++. JSON-RPC is a lightweight remote procedure \
+                call protocol similar to XML-RPC."
+ HOMEPAGE = "https://github.com/cinemast/libjson-rpc-cpp"
+-
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4e728c5b36018f6c383b4b9efd9c8840"
+ SECTION = "libs"
+-DEPENDS = "curl jsoncpp libmicrohttpd hiredis"
  
- SRC_URI += "git://github.com/fmtlib/fmt"
-+SRCREV = "7512a55aa3ae309587ca89668ef9ec4074a51a1f"
+-PV = "1.1.1+git${SRCPV}"
+-# v1.1.1
+-SRCREV = "319783c635cf8cabcc1a980495c99a88f9ebbd97"
++DEPENDS = "curl jsoncpp libmicrohttpd hiredis"
+ 
+-SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp \
+-           "
++SRC_URI = "git://github.com/cinemast/libjson-rpc-cpp"
++SRCREV = "4ed5b00dcc409405a19e6d8c6478f703153430e1"
  
  S = "${WORKDIR}/git"
  
