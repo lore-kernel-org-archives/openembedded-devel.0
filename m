@@ -1,52 +1,36 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com
-	[209.85.208.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 9EA8A7E093
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id C712B7E093
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 21:04:36 +0000 (UTC)
-Received: by mail-lj1-f178.google.com with SMTP id 7so24961058ljw.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 14:04:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Kl5uknN4WQWRGzwDq5yOb0v4gqmHbPRquF6GrfD2lfs=;
-	b=E9CzrYyxdR0BlcQWkmP890JkOTMgY/5QM9cTfDfbmML2j9xTOce+IMJe/n/8D1Inse
-	UWdIMQZuXzpkZEd8SNQBttlyaV6vqc6cYyZnu/MWnqmDOSr2qsdhlJizczcGU7gILOFR
-	GItmoXhSQTXC+JHgXOwb4p8LcKGlYEplL+6RvbL0B6vbKNVMGNeMIuCJH/Fe7JGth8+i
-	d7BT3amsiURJmQBtdWvQ9NM7qsfdQvZ3hgIct0Yh2h1iLZDhE/TvXgaOoZM+K/THfdyy
-	G3TplwdEeRiMZQ3EDBYpT6zbB2sAbFggole6mVhr5qXENVEURGIZPySoHfqHyPslJUlx
-	cB5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Kl5uknN4WQWRGzwDq5yOb0v4gqmHbPRquF6GrfD2lfs=;
-	b=k5aD07dDfBOzpG6J/kSmGQjRfLThtualSsrsu7DRJDu0wvZ110x16yxjKIp6Zr4IWU
-	tWEuGsL7jNCRupA8veHKaUMwc1PF0v5G+6YnHLw8qXeaZyR4FrSRHztGbMhHBGdb5bDJ
-	kmzqInHzHCuhh/qw92SZKMt/FHLwbnlQKVbMtSK4EYIRtumA7KNjlfCnrKlvApURDrLO
-	brGfWpwpPE3DXbe5TeZZbLzg0dK+aM7ljr70XtCqjBF2r6O8gawl5wmIJ9+x9Of19GzP
-	yt3Cln3Z4ddGICnl8N2e65r+fKGvzLz2N+rwQIBNSJxJzNxdfVHkJ0Psvrsrq+Id4PrD
-	fTQw==
-X-Gm-Message-State: APjAAAWfcfU8Y7cd3oqoK4uc56+qhpzG7u7xmZkQu/KAlnaBiRdsGA1j
-	OviRddeA5Q2ozs/hSrkYCbvhUUJVLv0=
-X-Google-Smtp-Source: APXvYqxuzIn5SDLiNQjuJdNVbHvnzemAw8RQTeZqnlbdyZ8wZmEe9OSgX0FHJwwmpdLcgKNOBwY+lA==
-X-Received: by 2002:a2e:9b0c:: with SMTP id u12mr28336500lji.26.1568322277031; 
-	Thu, 12 Sep 2019 14:04:37 -0700 (PDT)
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
-	z30sm7585002lfj.63.2019.09.12.14.04.35
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 14:04:36 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Sep 2019 23:04:33 +0200
-Message-Id: <20190912210433.22723-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
+	Thu, 12 Sep 2019 21:12:51 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46Ts1H5mVCz56;
+	Thu, 12 Sep 2019 23:12:51 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1568322772;
+	bh=EJeJ5+gu2jxkakEpNwH/aR9OwvkJ5NvcRrgLgjTpXuk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=HT5Drtb6LQyCF28fTbcyCfETTT6V0JY44tp4rMjrmnQQS9TO7+iiX58Isx4mPU6/W
+	C4XJZr3u53VoUjz0vEAJctcAxCSqjKXv1PIEZ3fhWiEpGkubMaGSYIh+g9uJRejooe
+	D9Ik75oKwAKcxhsoTNTWxhd682omUhrnvIQTnVdUrJvbBrQ7+iKqEs1+t0nPOkWMew
+	X2RRfhpAfeZbXIPwDSOv7KdsL54p6H6A1BP2WDL2mN4BzG6C4nmuUgIM99da5/EqFW
+	yT6PNQs360h3Sg1UAhC/QgG5QAjp1lWVPLVtYVLU8XjbKtkq2GF3mG3drv3mYTsSFV
+	yGYp5fH/hpidAHG1Pbaut1jLpP5ajPDvXUOIp2dCegCB0bOnLZO2D56o/G6JURrkPJ
+	gJ81xCqqwXKYqYc+QltzRnl9p0vF5w4m2JvN/D3pnETDBQaLx0gs2aTvZgvu2ruBy1
+	4qQNQVr1uHVZxq+fsaXiE+QnuO9evQG39NZBAFOJfDwQ0H8V/kOi3NfEZs0RVasQE0
+	DpMZRVyTQnSqHhttUAHo6YmgESeGHJ20h13JaMLPdApYg7Toa3VRusWNzgH0cgvzMt
+	/bEVmL/B8JJex0ZFnjAwTFT1GhRWxf5tet0qzTnWxWNhxJdJzKS4ONgBM1MwHP0qLR
+	JuZpvhlpx4FETdt4ENe3VsBA=
+Date: Fri, 13 Sep 2019 00:12:49 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20190912211249.GA25165@localhost>
+References: <20190912201831.51848-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] capnproto: update to 0.7.0
+In-Reply-To: <20190912201831.51848-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-multimedia][PATCH] mycroft: Make rdep on alsa-oss conditional on glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,40 +43,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 21:04:38 -0000
-Content-Type: text/plain; charset=yes
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 12 Sep 2019 21:12:52 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-License checksum changed due to minor change to the LICENSE file
-mentioning other contributors (see @64db3a6def96453f775d).
+On Thu, Sep 12, 2019 at 01:18:31PM -0700, Khem Raj wrote:
+> alsa-oss does not build for musl so its marked incompatible for musl
+>...
+>  # Mycroft uses Alsa, PulseAudio and Flac
+> -RDEPENDS_${PN} += "alsa-oss alsa-utils alsa-plugins alsa-tools"
+> +RDEPENDS_${PN} += "alsa-utils alsa-plugins alsa-tools"
+> +RDEPENDS_${PN}_append_libc-glibc = " alsa-oss"
+>...
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
----
- .../capnproto/{capnproto_0.6.1.bb => capnproto_0.7.0.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/capnproto/{capnproto_0.6.1.bb => capnproto_0.7.0.bb} (81%)
+This looks wrong - either it needs also-oss or it does not need it.
 
-diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb b/meta-oe/recipes-devtools/capnproto/capnproto_0.7.0.bb
-similarity index 81%
-rename from meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
-rename to meta-oe/recipes-devtools/capnproto/capnproto_0.7.0.bb
-index 6ca3613db..c6bab5ec2 100644
---- a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
-+++ b/meta-oe/recipes-devtools/capnproto/capnproto_0.7.0.bb
-@@ -3,10 +3,10 @@ DESCRIPTION = "Cap’n Proto is an insanely fast data interchange format and cap
- HOMEPAGE = "https://github.com/sandstorm-io/capnproto"
- SECTION = "console/tools"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://../LICENSE;md5=0a5b5b742baf10cc1c158579eba7fb1d"
-+LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
- 
- SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV}"
--SRCREV = "c949a18da5f041a36cc218c5c4b79c7705999b4f"
-+SRCREV = "3f44c6db0f0f6c0cab0633f15f15d0a2acd01d19"
- 
- S = "${WORKDIR}/git/c++"
- 
+cu
+Adrian
+
 -- 
-2.17.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
