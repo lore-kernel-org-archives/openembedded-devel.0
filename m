@@ -1,49 +1,50 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com
-	[209.85.208.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 7DC3A7E3E8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
+	[209.85.210.182])
+	by mail.openembedded.org (Postfix) with ESMTP id E195C7E3E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 20:00:34 +0000 (UTC)
-Received: by mail-lj1-f173.google.com with SMTP id y23so24807142lje.9
+	Thu, 12 Sep 2019 20:18:38 +0000 (UTC)
+Received: by mail-pf1-f182.google.com with SMTP id h195so16675440pfe.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 13:00:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=5XaT+0hjt5/KgyWVOtxuwDNEtNcAJgJQmQkNx5LIwwM=;
-	b=SjRMZQ2H9yBjcgrSsvflLh3iGuynVRNssJJ3AwRbx77uwYU/4W1rIPDgvx4cSRVT/y
-	GxoAvYNmAeXzOaCUypB4gMQNCAiI1jyGglXydc9vpdIYo5YwJ84HGqZb/9HI+XxO6VTH
-	SOPAXF0iNuhzSRl3K4+thwmPqp1/cWKVmoSJ23hE+M0moRDtHFLxMhuGuGPRGAXtgiz2
-	1UzUShDZIpd65SCmxCg35YCU1E6AwK4m6BQGXJir4fyO4AemqhLndrXNYju0DLp1pbBR
-	kg6+/NcvaY/mWHICd+cubramz6YUAj+5L8+BA+n15x0ARjoDk06wcpJ1YevAQ+QNimMD
-	7WfA==
+	Thu, 12 Sep 2019 13:18:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=g/3NPfLrBktPOOTDo6AzAbHmU/8Ecl++h4go7SUt4dU=;
+	b=ABmCDuFjHR6ojMYCOIBcDrzlhbfD4krR93vh/UthKhQLjLARw+3t+AiI1mojnA5ZTn
+	BQIMPRko2VPJ8vtwXg3EeNHO3X/IDVPgwQxUvNn5lB3DZ7pnDOi9UTYGVJmznlziZ3zw
+	/SRDzcDVdFGweSd0AKU+d13Nk82GZUZp9+N7C68OP1Z8ycpVE/CzX7h5dXl3f9+6n9BY
+	5EvRl19PUShdQDaE+iJKo8PW2gceW1ggobz8OSX26v4z5BcjbvmmQEPnDMR6lFbtiuO6
+	dBjlkwX4ayr38slcyMX5yv/Qar3BMAThjYm8pxXOi8mobT8VwN2TNcFwwyBGv4QPSMwK
+	fFrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=5XaT+0hjt5/KgyWVOtxuwDNEtNcAJgJQmQkNx5LIwwM=;
-	b=DA3Ovilv/fWQqxGGiyhOHS2hyqxihFOrmg9OtfFUTdeUM84rpXKu/vaQ4TigikWr3t
-	z/RJAUNVa/u+e8CFoZi63yNF9uGfACvWNsx49XQrY+bungjbWLq46bZpI1VjtFBril4Z
-	mpeeIOCaO5VkmqGHifz2+ivIvVKCNXk1ohbF+fBARRFJHhnaoBA3NRpj7LcUmMiQuBxU
-	+5h57j2vxJd/SBIiMg79tsKTjV4vTa5G/pMdDVdVt3yo1gMQ2qSlxGf6Xpl6KuYL5r5/
-	Pyr3Wjz2pbR4aUarngJNuA9YaIEm3ceHJA3SCMVbrV+nxNM8G/k/cMjAic6h2RnAinwG
-	9Ybw==
-X-Gm-Message-State: APjAAAV/QchwEJ55ZGTcJRf4fm9Xs+rjQPl/8DAa8V7Ad4W3iejgkQvC
-	qTFySouuWBXXKo9yivioR9TX4qBAqqw=
-X-Google-Smtp-Source: APXvYqzqS/wCik3gmwRcEB1K239P+7GqpyUcGIONBwT0zkMEih6zFJ07F9l+ogGvODZvvuYUzvvO+A==
-X-Received: by 2002:a2e:9086:: with SMTP id l6mr1665157ljg.120.1568318434344; 
-	Thu, 12 Sep 2019 13:00:34 -0700 (PDT)
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115])
-	by smtp.gmail.com with ESMTPSA id n9sm3703366ljh.53.2019.09.12.13.00.33
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=g/3NPfLrBktPOOTDo6AzAbHmU/8Ecl++h4go7SUt4dU=;
+	b=Vm6pMtBJkkTKXSuFVoTJWVYZhrByjtL/i3AvJhPIo5svelx0AqIGbI2bwid/1Si8uo
+	QnyY26VW3db+j8Rl+z1is668mVN87yKEorfRSwxEYWuwQCEFMNEt5kicCrKb5AhydS/K
+	BwLP4AxrGvjalv1zZefPTywigviBVrzxIkR1ir8I/e2k/HcCO1Rb8/wCwEzFmFZsM3hi
+	KFiXpUqTBIRAgfG7oHNGLz9ie16iOSuROCb4IZ6VgnV6T5qIROCPVOua0zhScE9Agu5T
+	0N4n080342xwWVIcy7fuNMzCBLAPjD7Nd1Jn3XmEe5/hgyObYyoXdGU8kTZGfiBsv95A
+	E2Cg==
+X-Gm-Message-State: APjAAAXzcNslAcSkVLRvTJKLXCWHukLOMYr1rWhRn7tTmO0ddBPgICY6
+	eJnlzbeR6IEQgLNwtialMo7oH5jd3sU=
+X-Google-Smtp-Source: APXvYqyhfV6cfxuaCgys6OMAo3ornkYCH7Usa3IXG7yMjCkrNI7e1jq9cEf7BYokwZZRvXoRNPaZTg==
+X-Received: by 2002:aa7:8dc9:: with SMTP id j9mr53417297pfr.233.1568319519423; 
+	Thu, 12 Sep 2019 13:18:39 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	c2sm27091883pfd.66.2019.09.12.13.18.38
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 13:00:33 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+	Thu, 12 Sep 2019 13:18:39 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Sep 2019 22:00:31 +0200
-Message-Id: <20190912200031.32245-1-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] avro-c: update to 1.9.1
+Date: Thu, 12 Sep 2019 13:18:31 -0700
+Message-Id: <20190912201831.51848-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+Subject: [meta-multimedia][PATCH] mycroft: Make rdep on alsa-oss conditional on glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,82 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 20:00:34 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 20:18:39 -0000
+Content-Transfer-Encoding: 8bit
 
-Removed patch was upstreamed.
+alsa-oss does not build for musl so its marked incompatible for musl
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...avro-c-Fix-build-with-clang-compiler.patch | 37 -------------------
- .../avro/{avro-c_1.8.1.bb => avro-c_1.9.1.bb} |  6 +--
- 2 files changed, 2 insertions(+), 41 deletions(-)
- delete mode 100644 meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
- rename meta-oe/recipes-support/avro/{avro-c_1.8.1.bb => avro-c_1.9.1.bb} (64%)
+ meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch b/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
-deleted file mode 100644
-index 01235d8ef..000000000
---- a/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 518bb8ccfb3f3fc143fbd571782f3e40573d01b5 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 10 Apr 2017 09:15:04 -0700
--Subject: [PATCH] avro-c: Fix build with clang compiler
--
--Clang advertizes itself to be compatible with gcc 4.2.1
--while that was true several years ago, it now supports
--a lot more newer features, the test to just check gcc
--version should be supplanted with clang check as well
--so atomic support in clang can be asserted as well
--
--Fixes
--
--lang/c/src/avro/refcount.h:301:2: error: "No atomic implementation!"
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- lang/c/src/avro/refcount.h | 3 ++-
-- 1 file changed, 2 insertions(+), 1 deletion(-)
--
--diff --git a/lang/c/src/avro/refcount.h b/lang/c/src/avro/refcount.h
--index 69afa4fc..d76ba057 100644
----- a/lang/c/src/avro/refcount.h
--+++ b/lang/c/src/avro/refcount.h
--@@ -118,7 +118,8 @@ avro_refcount_dec(volatile int *refcount)
--  * GCC intrinsics
--  */
-- 
---#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500
--+#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500 \
--+|| defined(__clang__)
-- 
-- static inline void
-- avro_refcount_set(volatile int *refcount, int value)
---- 
--2.12.2
--
-diff --git a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb b/meta-oe/recipes-support/avro/avro-c_1.9.1.bb
-similarity index 64%
-rename from meta-oe/recipes-support/avro/avro-c_1.8.1.bb
-rename to meta-oe/recipes-support/avro/avro-c_1.9.1.bb
-index 276fe2b5a..709b9d5f7 100644
---- a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
-+++ b/meta-oe/recipes-support/avro/avro-c_1.9.1.bb
-@@ -8,10 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=73bdf70f268f0b3b9c5a83dd7a6f3324"
- DEPENDS = "jansson zlib xz"
- PV .= "+git${SRCPV}"
+diff --git a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb
+index becd0bf790..8d1c9179be 100644
+--- a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb
++++ b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb
+@@ -64,7 +64,8 @@ RDEPENDS_${PN} += "python3-pip \
+                  "
  
--SRCREV = "4b3677c32b879e0e7f717eb95f9135ac654da760"
--SRC_URI = "git://github.com/apache/avro \
--           file://0001-avro-c-Fix-build-with-clang-compiler.patch;patchdir=../../ \
--"
-+SRCREV = "89218262cde62e98fcb3778b86cd3f03056c54f3"
-+SRC_URI = "git://github.com/apache/avro;branch=branch-1.9"
- 
- S = "${WORKDIR}/git/lang/c"
+ # Mycroft uses Alsa, PulseAudio and Flac
+-RDEPENDS_${PN} += "alsa-oss alsa-utils alsa-plugins alsa-tools"
++RDEPENDS_${PN} += "alsa-utils alsa-plugins alsa-tools"
++RDEPENDS_${PN}_append_libc-glibc = " alsa-oss"
+ RDEPENDS_${PN} += "pulseaudio pulseaudio-misc pulseaudio-server"
+ RDEPENDS_${PN} += "flac"
  
 -- 
-2.17.1
+2.23.0
 
 
