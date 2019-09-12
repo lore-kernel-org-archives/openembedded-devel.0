@@ -1,49 +1,50 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
-	[209.85.167.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A0487E5F5
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
+	[209.85.167.45])
+	by mail.openembedded.org (Postfix) with ESMTP id A75B57E58B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 22:52:18 +0000 (UTC)
-Received: by mail-lf1-f48.google.com with SMTP id c195so5768065lfg.9
+	Thu, 12 Sep 2019 22:54:01 +0000 (UTC)
+Received: by mail-lf1-f45.google.com with SMTP id u3so5537914lfl.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 15:52:20 -0700 (PDT)
+	Thu, 12 Sep 2019 15:54:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=o199f47BxXLWZZMHZOIlMuJXgDjlf2ACWKD/7R2hwZc=;
-	b=NvNNJ/63ZAcuXeylPFFRDVIByESMoOvF3NA67yvXVZhekfOG8HpQVW5QR7cPqbp7qA
-	M3cHnudJr9nQE7zs3DKUCvkQa7BM8Md5aGrLqy+YHWAIilC+SGLUK/jKXvMxk9r7nKcg
-	8yB+R2ILB0ZJzcOqd2WntZFPKQWMMyRv6Brs6b7ElyM7vhaxr1VYmRt7biZIkSqLfwLO
-	boxYClm5AF4ujJYyyen8S7Wh5FFlqDPGQFMr+L6yfOZaiytWBmWsZcvx811b2xrThXrd
-	76uZLjaXLmVHgH9gtooSdaCRkyyI7yADC3IIsNrMqS4rnI8gFfsZHmogUG1vvJ/xQqAv
-	Ta3g==
+	bh=5nm5ZrPmeuIlw7NqTGBG+t7kUAorgmr7GfmZgUrC7qA=;
+	b=imlEYkF+q/qALWs+GGwKAogz2v2CFCKzuMc1J6ky1k2n0LP/UgS/MG+luOSKL7BQqN
+	VWLdXgr3CG/ZRDrEZAEErcFqK88O0o6z6Pf7OXp+bnLbfyb6gmLlQc9AXhYtaWbNU4uN
+	HDkGzYzbaEFfI5t8AT0/vEm5wLogwxKmjLRUbjNTYzFSEt8ba5gchyjSBi/T6YfRLooX
+	CZHnq4ixp6K+m9hL7atnBe7ZxzKE2t413kL9Oj6G4w/thqp+yfEFxbf/68IMoy1LJzVw
+	KXUUdEY+2BKjBeVl4YChixdYQ8zwTghFwo1sRtAztXZvUDfgybWC9NDrHAoo+IzghVZ4
+	ac8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=o199f47BxXLWZZMHZOIlMuJXgDjlf2ACWKD/7R2hwZc=;
-	b=ME5luO31IIdDTXPxkK5F3lmXFwVoR37l2xLvxCEkMOP1G6CIdhydM7PzGH6+fhX27+
-	J8dqFoRWPrX8M1sLHbJMyp1osarq4xoCVRtfVLXg8OtRywUfTkiSy1PDgU2McQU+UX1w
-	SC/LfBpXKd6NYQPuGEqmo9jinG2DVnyMGSRLwJDDWpOuH7dSBmRDQF66rw/Ey76coS7L
-	KFi3e/YvRS+h8kuM+h/uJb7rbPr5GKkFfxOKlT2yo4y9jJpLl0GpFdpixZVPSW0lprKQ
-	xmYkbY2dN5u/Ne0J9eZiiC48OK7KA1n6h7PNpzkMF+FXkmrNcZwjLGK2we64IuSIMoEC
-	qryg==
-X-Gm-Message-State: APjAAAX4pFd47ZxyFfPJoRVlD9kBOJTpMKcnsZglEM9fRVDnk7BXVJFg
-	mafuTC3vq+6Wtjv37WjduVA+FZL/2b4=
-X-Google-Smtp-Source: APXvYqzBsL/bLO/C971p71RVpIqv3Dt5Dec4F6zsDymNeA9t4gmSxwAH777NGBFOmIABsPEls9hjCA==
-X-Received: by 2002:ac2:5611:: with SMTP id v17mr7544235lfd.87.1568328739445; 
-	Thu, 12 Sep 2019 15:52:19 -0700 (PDT)
+	bh=5nm5ZrPmeuIlw7NqTGBG+t7kUAorgmr7GfmZgUrC7qA=;
+	b=DES3dW5ylHG+RzdQJcW1M1mZXRUc1Qi7zmR/t626Gg76r1wXiaMiAoRljDXY4+LVt1
+	gtitG3NCq18tK6Q+1w14vS7RKw5fwo/D6S2m4lB7eRoAXrGA7KJWdc8VQMGwSH3/QHxY
+	2f/PO1n4xaEUzc9V4AqIWv9J+p7yhg/i8GStXCztSDqA+zkrc65T9BmDB8JQ1KoG/9bq
+	hkOuVKjlbyP83ZTxGBOjUVVOt18VjmLyt3OwY+f0Ydwon+jtHRfQnl/zZSlyBUaFkqvH
+	zbvgMUWoziEAfA84tvH+blrfZMTTyQJKXPf1wqzdzy2BL10XQkQ+FMDqLqTpAUO+ffgp
+	EYgQ==
+X-Gm-Message-State: APjAAAUWa+6SB1E/aXJrAGzHy/jJi+D7IO0CkM3aJwt0zDtE6+BnfCBN
+	GWXb3zcULE0aRQtjhRKJ8sS/+S3visA=
+X-Google-Smtp-Source: APXvYqzxpHfOoorSEPPyd0RKLEin3gPt53x1SnJZbMVjzc1Iv+o0xZXYTPz94rB6xEJHSdgfSV3F1Q==
+X-Received: by 2002:a05:6512:304:: with SMTP id
+	t4mr30053319lfp.15.1568328842073; 
+	Thu, 12 Sep 2019 15:54:02 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115])
-	by smtp.gmail.com with ESMTPSA id i6sm6435738lfc.37.2019.09.12.15.52.18
+	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
+	w77sm6587977lff.49.2019.09.12.15.54.01
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 15:52:18 -0700 (PDT)
+	Thu, 12 Sep 2019 15:54:01 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Sep 2019 00:52:12 +0200
-Message-Id: <20190912225212.19943-1-open.source@oleksandr-kravchuk.com>
+Date: Fri, 13 Sep 2019 00:53:58 +0200
+Message-Id: <20190912225358.24258-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] xmessage: update to 1.0.5
+Subject: [PATCH][meta-oe] xorg-sgml-doctools: update to 1.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 22:52:19 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 22:54:02 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../xorg-app/{xmessage_1.0.4.bb => xmessage_1.0.5.bb}         | 4 ++--
+ .../{xorg-sgml-doctools_1.7.bb => xorg-sgml-doctools_1.11.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xmessage_1.0.4.bb => xmessage_1.0.5.bb} (60%)
+ rename meta-oe/recipes-graphics/xorg-doc/{xorg-sgml-doctools_1.7.bb => xorg-sgml-doctools_1.11.bb} (58%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xmessage_1.0.4.bb b/meta-oe/recipes-graphics/xorg-app/xmessage_1.0.5.bb
-similarity index 60%
-rename from meta-oe/recipes-graphics/xorg-app/xmessage_1.0.4.bb
-rename to meta-oe/recipes-graphics/xorg-app/xmessage_1.0.5.bb
-index 9960706d0..23cfb26c7 100644
---- a/meta-oe/recipes-graphics/xorg-app/xmessage_1.0.4.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xmessage_1.0.5.bb
-@@ -6,5 +6,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=73c7f696a728de728d7446cbca814cc5"
+diff --git a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.11.bb
+similarity index 58%
+rename from meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb
+rename to meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.11.bb
+index 80f1f008b..85687611e 100644
+--- a/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.7.bb
++++ b/meta-oe/recipes-graphics/xorg-doc/xorg-sgml-doctools_1.11.bb
+@@ -6,7 +6,7 @@ DEPENDS += "util-macros"
  
- DEPENDS += "libxaw"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c8c6c808cd3c797a07b24e443af1c449"
  
--SRC_URI[md5sum] = "2dd5ae46fa18abc9331bc26250a25005"
--SRC_URI[sha256sum] = "bcdf4b461c439bb3ade6e1e41c47d6218b912da8e9396b7ad70856db2f95ab68"
-+SRC_URI[md5sum] = "e50ffae17eeb3943079620cb78f5ce0b"
-+SRC_URI[sha256sum] = "373dfb81e7a6f06d3d22485a12fcde6e255d58c6dee1bbaeb00c7d0caa9b2029"
+-SRC_URI[md5sum] = "2588efb3f49f7fc6ecf41ce42e0b2e5e"
+-SRC_URI[sha256sum] = "84fd94e5c50556e6f77501485f8a48724cf3c95c6d58480bc280258ba14580c8"
++SRC_URI[md5sum] = "ee6dc0a8a693a908857af328b2462661"
++SRC_URI[sha256sum] = "e71ce1df82dcc51eb14be6f42171dcc6bdd11ef46c0c605d6da8af12bd73b74c"
+ 
+ FILES_${PN} += " /usr/share/sgml/X11"
 -- 
 2.17.1
 
