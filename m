@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f52.google.com (mail-lf1-f52.google.com
-	[209.85.167.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 6EDEF7E502
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com
+	[209.85.208.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 7830D7E507
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 22:11:43 +0000 (UTC)
-Received: by mail-lf1-f52.google.com with SMTP id r134so20567905lff.12
+	Thu, 12 Sep 2019 22:13:49 +0000 (UTC)
+Received: by mail-lj1-f178.google.com with SMTP id d5so25134223lja.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 15:11:44 -0700 (PDT)
+	Thu, 12 Sep 2019 15:13:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=jlthlWUcbPtOPncpqvPJcslCldaMPQhfov9uiudWUzg=;
-	b=aI8d2G8ovUTTR42viXtDmakwe10NserW1yGncKv997FjxXJCCmssMlim4HwMP0OolX
-	P6LWTX5eEKqA6Kbc3FhJYnCaStqkJCOwPNekS8nXBnMLOhVykUYDYe8zSaei6C0BlNJV
-	jaXoa6fqrhmXPiamMJsYYp9U87TEsZp3r9QKQCAa70uHhV0sUEIN5vt7GCn3BOG28my4
-	Xgw0PvzCSbbD7emV0XOQJdXx+3j9a/tsmDqHd6tlv/m9RcFPvlu5GYaRL2cdZH4OiwU7
-	s+Bucyj3vcj4eI202oTSdLau05z5ZmT+r1KHz8c/Jci9SOdeCfJD/4xlFOaTaEw0vfC6
-	s8JQ==
+	bh=UawldOYSs1MiBp7oyTas+pDdbTnqHua5stmB8xaUMK4=;
+	b=qV1PeHJm0LxoP47H5oPHWygrm+vDNlN+4jyKdlMCncrtRjX7axTnade/+MzadgiOLd
+	5zFf8B8QFyqo+wxwAsMhAfTXKfCDzgvIHzOje8XxuHBSEoyVzAucSZNQj6R9JaMyRQcL
+	4rESSV5FXNL1NhNzbPvhrHtMKZs1CzE2OckdiZCfMXi1RFLaRceAxJv8pSORVIndq4fP
+	S01LgLpDtRj6UM4RMZvJiGb/vrAn624ZRvwZngUag0VSbBHjrYb3CZbKqdFrlmb+QJLY
+	ifG1uzx4TdjqBt4ZN90vshxpx+CiL9AqaO4V3ulgTLwILK0fsExTMjD7mk/h8odGSISh
+	UK5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=jlthlWUcbPtOPncpqvPJcslCldaMPQhfov9uiudWUzg=;
-	b=dg+O9cadYhcc/aoBdPyP0pyT7ASh4WbFcRu1Qa5tirABdIGbBIiCwzo8iI1oaGtd1a
-	TmuN1OmVc0lFWatlGEhpgMv1tUO8vrxUnOG2DR3drmDBJJ9m3mcC9Kt38A1Y/5gMvF7q
-	wtIBVvAKcMpsazwUgACAVfcuAnEw9Xg9pWYZRxu0C/OSHn63NkL7DTEhTgxTzHXGyDZS
-	lIATZqyyTg/qnad6Zno9cbPOXMWdUyZfkawCw05jRobl+w5QNVpft7n+rtXsbp1ZAou7
-	iOX/hY9E1vvXmVVHjgg/m0mC4hgPMyVq71ByebcybLecJlnx2ne9oBhORf4iGmMUThq8
-	dIxA==
-X-Gm-Message-State: APjAAAWqz1pWZ9PeekcHC98n58VvVZg3dqrM1sXU2Sxt1URJoE5JuhIh
-	fMgnuovqYQIVePtsMiCAPBLhXZW/A7A=
-X-Google-Smtp-Source: APXvYqwIDt308WSgRrdGMSe4GANejIJOrm4o9/AhK6IOOzwefxrKH5bZ88u5EOplp9fmRBeOg/PFnA==
-X-Received: by 2002:a19:6556:: with SMTP id c22mr13710183lfj.90.1568326303708; 
-	Thu, 12 Sep 2019 15:11:43 -0700 (PDT)
+	bh=UawldOYSs1MiBp7oyTas+pDdbTnqHua5stmB8xaUMK4=;
+	b=uh0EI0JYyj6qR1Fl7Jb1ROMmmPDC2xQRQlOfPWH74mzZV3rzeB7UqfqQ5L9WWhVsp9
+	uoJ2OfRWdG34A5ki1FqwEQtRY6CKU9uthWWOf2v2ZnJlhfp83RRZs/FLUTmaZwqqlWgH
+	BANwYtzkfEUfQwO5J2eKiZNGiGCCkhlFVNlRSEQqStxMVX3Wr6g+o7XcgNCifhs79At+
+	CiA9cRodw5KzMQ4ZeHZ179+501FXhwEvzF4YdaBOu0Qzm2tLsWKvU744gi8FNgZ4T+Rh
+	722WnsMdj7WumCdNEk+XSg41yLU+4GJwkS0CNJKk3Tet301W1enW+kRkXMwMhmNj8wQT
+	E8Mw==
+X-Gm-Message-State: APjAAAXE1dI46tn+BW0OV0YEjzWRhglQDiotKEIr01pHr0ZZgnup6L+F
+	0xULTJe8uxc9XaFj/dFzpTOcKnd2Cck=
+X-Google-Smtp-Source: APXvYqzfMqIqFrETq5JuxLH4PF0d9vE2sNLXuDSnXlZXl48Nji09dcRKbyMVMfbVLbWfn0p7WdM/4g==
+X-Received: by 2002:a2e:8903:: with SMTP id d3mr22364586lji.192.1568326429687; 
+	Thu, 12 Sep 2019 15:13:49 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
 	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
-	126sm7777996lfh.45.2019.09.12.15.11.42
+	k13sm5984686ljc.96.2019.09.12.15.13.48
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 15:11:43 -0700 (PDT)
+	Thu, 12 Sep 2019 15:13:49 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Sep 2019 00:11:41 +0200
-Message-Id: <20190912221141.9609-1-open.source@oleksandr-kravchuk.com>
+Date: Fri, 13 Sep 2019 00:13:46 +0200
+Message-Id: <20190912221346.17170-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] libuv: update to 1.32.0
+Subject: [PATCH][meta-oe] libsocketcan: update to 0.0.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +56,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 22:11:43 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 22:13:49 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../libuv/{libuv_1.27.0.bb => libuv_1.32.0.bb}               | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/libuv/{libuv_1.27.0.bb => libuv_1.32.0.bb} (80%)
+ .../{libsocketcan_0.0.10.bb => libsocketcan_0.0.11.bb}          | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/socketcan/{libsocketcan_0.0.10.bb => libsocketcan_0.0.11.bb} (88%)
 
-diff --git a/meta-oe/recipes-connectivity/libuv/libuv_1.27.0.bb b/meta-oe/recipes-connectivity/libuv/libuv_1.32.0.bb
-similarity index 80%
-rename from meta-oe/recipes-connectivity/libuv/libuv_1.27.0.bb
-rename to meta-oe/recipes-connectivity/libuv/libuv_1.32.0.bb
-index 6fd0339c5..c7fa3c10f 100644
---- a/meta-oe/recipes-connectivity/libuv/libuv_1.27.0.bb
-+++ b/meta-oe/recipes-connectivity/libuv/libuv_1.32.0.bb
-@@ -4,8 +4,9 @@ BUGTRACKER = "https://github.com/libuv/libuv/issues"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a68902a430e32200263d182d44924d47"
+diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb
+similarity index 88%
+rename from meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb
+rename to meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb
+index 60ca58016..0debe47e0 100644
+--- a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb
++++ b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb
+@@ -5,7 +5,7 @@ SECTION = "libs/network"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://src/libsocketcan.c;beginline=3;endline=17;md5=97e38adced4385d8fba1ae2437cedee1"
  
--SRCREV = "a4fc9a66cc35256dbc4dcd67c910174f05b6daa6"
--SRC_URI = "git://github.com/libuv/libuv"
-+SRCREV = "697bea87b3a0b0e9b4e5ff86b39d1dedb70ee46d"
-+SRC_URI = "git://github.com/libuv/libuv;branch=v1.x"
-+
- S = "${WORKDIR}/git"
+-SRCREV = "51f1610160a1707f026f8c2d714a6f7aa3ca232b"
++SRCREV = "0ff01ae7e4d271a7b81241e7a7026bfcea0add3f"
  
- inherit autotools
+ SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=git"
+ 
 -- 
 2.17.1
 
