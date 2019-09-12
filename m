@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
-	[209.85.167.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 691187E08E
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
+	[209.85.167.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 38FAB7E08E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 21:44:02 +0000 (UTC)
-Received: by mail-lf1-f66.google.com with SMTP id d10so20547978lfi.0
+	Thu, 12 Sep 2019 21:45:15 +0000 (UTC)
+Received: by mail-lf1-f67.google.com with SMTP id d10so20549991lfi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 14:44:03 -0700 (PDT)
+	Thu, 12 Sep 2019 14:45:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=TFN2O9nQ85JbX3c6jHcrg0OT+Nb90nQ1GhTs6G4getc=;
-	b=KWowpE8TpXWpX60fCBwk4j8ahXKI9sDoKcvb2cYymskiTDFq7ALrubMUIz8gjiGSLA
-	SN+X5FLfjiQvBJFCEfpJXqRntYx1IJyR5ECHDycunjU6HXo0s4JWhPfvV58/0VtGaX4d
-	SlJXaCp7aYx3/LEBR4vCiBODyXrA1LeNZFSKmFj21lVOU9iCflZHLEigHILrJVMN91fZ
-	y6Tsa80EtG/5/A1d4rOMUdICF+ZwZxK4aRdYseOF3ERmTh8nj0ijNgslYYxdJmgKO2mx
-	fAzopuFxexXv/U3L93LG3JSuH6c/zYqzd0rOM2MNc6BtApeTU8AmFMrIY+ZiyqhrnNmu
-	XF8w==
+	bh=9qbR4MmpjjgZwyry6yESYSnJ2nZ8WZcFWaRMcKpbdu4=;
+	b=dOki0QJ5h2HmQJZiPb12vEsjQVGtX4eVpy8Ojxguos1cRNsgtz0zU9hy+oLmep4XbX
+	+FyaipUEj+8QYjMTq3I2ag2cOc9ZImW5YvddCPYPbv+EOOD+ATJbdXmZEqlmqQmInh2e
+	W9BicYsqcaGNpJ9cYWrSVy6JT/sLxE/K3uumuM+5E0SurcIQMhY+olvEQ+7faf0iCrQ4
+	NgGwmlYI5c+YSHfWaCY2d/OCvMH3xR8PQq0wxZaJGTOtf5hFGdHmLH5//pmYB2CsvFLC
+	ledAEuvZf25q7kFR4Z950N+yyHv6w2ILOSjE+7LdQCkbkCr6MG3IY9M8tYY8idbUMpxH
+	DQpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=TFN2O9nQ85JbX3c6jHcrg0OT+Nb90nQ1GhTs6G4getc=;
-	b=LfQZEL0XeCheUNgjRSjr+V6RVNVFWjLTDZCWw4ed6wX6qfUgDG5UP77uUdgHlvsV+C
-	MA5uxyuea0E1Q+LlLxeZXLB8HD7OAVb4S6z7hcgmSbKpuORV2+Q7r66BWDZR7HvX4t/b
-	eULZkasblRNyw0akYjcC/ez7qQheCAdGud4UGMsazvj9imHsLWIatknhZo4zswWtJ6CC
-	QduCX0apB3tYUxOXarn7ZoyyFWvrMaS/Mp3hhOQUiSgyxdlXv3UqzZwfkoNtJbwjFJ8Z
-	f5cCA7ZRH9uH/042QMxarCugVr/8rjV7thphy2SO3d/t86ovNCvSaA45MQEkoib+7HEu
-	zxlA==
-X-Gm-Message-State: APjAAAW6nZxxoPPEanu4cRAo//Opfoe4Wu9HrjMg9y+y8/GKeznGg6Kq
-	2kNA199pO99ALHbrN+mirXSiEtpSLCM=
-X-Google-Smtp-Source: APXvYqxyxrT6SUdx1YmB7iCkj1os+fYDAFY+lXIEarlzGGgqGIUzUp4MtD0rSOxYg9Sg0ugjHTJWvA==
-X-Received: by 2002:a05:6512:488:: with SMTP id v8mr313604lfq.37.1568324642831;
-	Thu, 12 Sep 2019 14:44:02 -0700 (PDT)
+	bh=9qbR4MmpjjgZwyry6yESYSnJ2nZ8WZcFWaRMcKpbdu4=;
+	b=f0+r8k1VHS662trF6IjVBwFIVMmPHT52N86EbPSjDau7OzQI+rnH15bN1QAwUR+j0k
+	oZGugxwnw/fDRoz+0AG9R6XRhy9ejCBhBQAzbdXV+NjydnfKKd+Odr+oFyW6K07frzSP
+	YxOe4hP67fm2XsnYNlk3ACnfQVGV61SNUaRrp8Qkbpp55N+eTTOArAIaN9/YmGPluwrj
+	4sR3GKgggCjwOY+eQAp4mfdgEyLimt0HlY4KRnbLkTsU4ppPDCJjyxinikcHgwy+C1V2
+	M5mDxU5tqy08ypb/fo+3n9r6SLMXBzYLTckemTcDIdCWeY46zv316cu6wH+lzsFhL4r2
+	O3ig==
+X-Gm-Message-State: APjAAAVXitMGb+dGwRNAhbrQAIyAb1iKoxzTofDUZy1T6dnM0ekfT2Y+
+	Px6LAmGZnTp3eEJxsWJRoBXNVVvmygc=
+X-Google-Smtp-Source: APXvYqwm3+9Zl4pDiBUPXwC/VjWa2GEqI4i+7Bwo205UoOF0VHFyeBCjhiFDmXpxoiSo4Db9XldCGA==
+X-Received: by 2002:ac2:514c:: with SMTP id q12mr29477777lfd.145.1568324715642;
+	Thu, 12 Sep 2019 14:45:15 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115])
-	by smtp.gmail.com with ESMTPSA id 6sm6671481lfa.24.2019.09.12.14.44.02
+	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
+	o18sm1828131lfb.25.2019.09.12.14.45.14
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 14:44:02 -0700 (PDT)
+	Thu, 12 Sep 2019 14:45:15 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Sep 2019 23:44:00 +0200
-Message-Id: <20190912214400.31763-1-open.source@oleksandr-kravchuk.com>
+Date: Thu, 12 Sep 2019 23:45:13 +0200
+Message-Id: <20190912214513.2969-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] libdvdread: update to 6.0.1
+Subject: [PATCH][meta-oe] libev: update to 4.27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,37 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 21:44:02 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 21:45:15 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{libdvdread_5.0.3.bb => libdvdread_6.0.1.bb}           | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-multimedia/libdvdread/{libdvdread_5.0.3.bb => libdvdread_6.0.1.bb} (71%)
+ .../libev/{libev_4.25.bb => libev_4.27.bb}                    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libev/{libev_4.25.bb => libev_4.27.bb} (79%)
 
-diff --git a/meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb b/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.0.1.bb
-similarity index 71%
-rename from meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb
-rename to meta-oe/recipes-multimedia/libdvdread/libdvdread_6.0.1.bb
-index 050672599..d68e792ba 100644
---- a/meta-oe/recipes-multimedia/libdvdread/libdvdread_5.0.3.bb
-+++ b/meta-oe/recipes-multimedia/libdvdread/libdvdread_6.0.1.bb
-@@ -2,12 +2,11 @@ SUMMARY = "DVD access multimeda library"
- SECTION = "libs/multimedia"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=64e753fa7d1ca31632bc383da3b57c27"
--SRC_URI = "http://download.videolan.org/pub/videolan/libdvdread/${PV}/libdvdread-${PV}.tar.bz2"
+diff --git a/meta-oe/recipes-connectivity/libev/libev_4.25.bb b/meta-oe/recipes-connectivity/libev/libev_4.27.bb
+similarity index 79%
+rename from meta-oe/recipes-connectivity/libev/libev_4.25.bb
+rename to meta-oe/recipes-connectivity/libev/libev_4.27.bb
+index 9456e51f1..b72b7af4f 100644
+--- a/meta-oe/recipes-connectivity/libev/libev_4.25.bb
++++ b/meta-oe/recipes-connectivity/libev/libev_4.27.bb
+@@ -5,8 +5,8 @@ LICENSE = "BSD-2-Clause | GPL-2.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
  
--SRC_URI[md5sum] = "b7b7d2a782087ed2a913263087083715"
--SRC_URI[sha256sum] = "321cdf2dbdc83c96572bc583cd27d8c660ddb540ff16672ecb28607d018ed82b"
-+SRC_URI = "http://download.videolan.org/pub/videolan/libdvdread/${PV}/libdvdread-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "b9eeaaaf3c41b1c3cb6c1622e7219aeb"
-+SRC_URI[sha256sum] = "28ce4f0063883ca4d37dfd40a2f6685503d679bca7d88d58e04ee8112382d5bd"
+ SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
+-SRC_URI[md5sum] = "911daf566534f745726015736a04f04a"
+-SRC_URI[sha256sum] = "78757e1c27778d2f3795251d9fe09715d51ce0422416da4abb34af3929c02589"
++SRC_URI[md5sum] = "d38925fbc030153fe674c4e0e864a69a"
++SRC_URI[sha256sum] = "2d5526fc8da4f072dd5c73e18fbb1666f5ef8ed78b73bba12e195cfdd810344e"
  
- inherit autotools lib_package binconfig pkgconfig
+ inherit autotools
  
- CONFIGUREOPTS_remove = "--disable-silent-rules"
--
 -- 
 2.17.1
 
