@@ -1,36 +1,49 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id C712B7E093
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com
+	[209.85.208.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 56E717E08E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 21:12:51 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46Ts1H5mVCz56;
-	Thu, 12 Sep 2019 23:12:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1568322772;
-	bh=EJeJ5+gu2jxkakEpNwH/aR9OwvkJ5NvcRrgLgjTpXuk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=HT5Drtb6LQyCF28fTbcyCfETTT6V0JY44tp4rMjrmnQQS9TO7+iiX58Isx4mPU6/W
-	C4XJZr3u53VoUjz0vEAJctcAxCSqjKXv1PIEZ3fhWiEpGkubMaGSYIh+g9uJRejooe
-	D9Ik75oKwAKcxhsoTNTWxhd682omUhrnvIQTnVdUrJvbBrQ7+iKqEs1+t0nPOkWMew
-	X2RRfhpAfeZbXIPwDSOv7KdsL54p6H6A1BP2WDL2mN4BzG6C4nmuUgIM99da5/EqFW
-	yT6PNQs360h3Sg1UAhC/QgG5QAjp1lWVPLVtYVLU8XjbKtkq2GF3mG3drv3mYTsSFV
-	yGYp5fH/hpidAHG1Pbaut1jLpP5ajPDvXUOIp2dCegCB0bOnLZO2D56o/G6JURrkPJ
-	gJ81xCqqwXKYqYc+QltzRnl9p0vF5w4m2JvN/D3pnETDBQaLx0gs2aTvZgvu2ruBy1
-	4qQNQVr1uHVZxq+fsaXiE+QnuO9evQG39NZBAFOJfDwQ0H8V/kOi3NfEZs0RVasQE0
-	DpMZRVyTQnSqHhttUAHo6YmgESeGHJ20h13JaMLPdApYg7Toa3VRusWNzgH0cgvzMt
-	/bEVmL/B8JJex0ZFnjAwTFT1GhRWxf5tet0qzTnWxWNhxJdJzKS4ONgBM1MwHP0qLR
-	JuZpvhlpx4FETdt4ENe3VsBA=
-Date: Fri, 13 Sep 2019 00:12:49 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20190912211249.GA25165@localhost>
-References: <20190912201831.51848-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <20190912201831.51848-1-raj.khem@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-multimedia][PATCH] mycroft: Make rdep on alsa-oss conditional on glibc
+	Thu, 12 Sep 2019 21:15:22 +0000 (UTC)
+Received: by mail-lj1-f171.google.com with SMTP id u14so24993132ljj.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Sep 2019 14:15:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=8zqJfkb7f+kaWOY1/tlQyZNylu6pueEJBBykDGV5RwI=;
+	b=Ac72oqfpaBp8X6n0ItcoKvCICf8XqRLgRdzI48L5Oi0/U+4Bpk4AHqnwRf8HuIwNIH
+	Zs2tLwzW49DIz1A/pUfQf6KzAnIftQTgESG8BgIbu1z1eZvzXTvqynUWgEUHve0vmHL0
+	5K9GpQsZ8Zu654i5bXjnqFh9jDAbh4uXBpGQScvHiQvlQts9KnrVTR84frKFlsNyeRek
+	ctkMd5MarkBcPmOQmuEUkuyqnPZhuRD1I5webnxTS2e521DZEjJyg05fQr7PuHQnPqtZ
+	5G9BBmhth0eoNX9OnKcb1Uxa0ndKxadmn8XYIqlLCXEI4mmtk6qJZUflRGzbPQPSPLhh
+	qy0g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=8zqJfkb7f+kaWOY1/tlQyZNylu6pueEJBBykDGV5RwI=;
+	b=INrmyHA/1xOlbzJQXTmCNnngrtpPRxVdZCZR+LTrt70zavKUvs6xBEQiHOrJF81zaD
+	S7dMpWMnUnJ2zJwM3LA+iP7iInmR26ff/mJ5JN3fkXYUgYNDrdB/LJX4tS9otDlBbbSG
+	3JvHTtV5Z38slglcK8N6XYPBLntCPRTLtKic8bXd2es/0RjiHfsgZBt9Q3imovyUxAYD
+	0hqFBOhf4GzGj7Y3+CU+WqLNHtLYCkaIkfEMLny0COtxWrffqBt93JXw20stJGFbWmv0
+	rkAOxKBLvb2taNUwQCWr7xdN1ns3JJIiQ8KbFUOhFZgCa1c8trklgAJMsaI0V4lWS36X
+	np6Q==
+X-Gm-Message-State: APjAAAUtzXaryo7ux9dfIjpITFv6997JPbxjT1zstE/X4YDestrLsWRG
+	kKdM4PCFDdfYpcl5s1lLpfeulLIzzko=
+X-Google-Smtp-Source: APXvYqynvs/LKYE81DAtk4vXCL7p8ZPxbXK8Mla6evhT0JbKfrWJJeJlSq90k5WckWhp26nTm6nWgg==
+X-Received: by 2002:a2e:5456:: with SMTP id y22mr28641723ljd.60.1568322922725; 
+	Thu, 12 Sep 2019 14:15:22 -0700 (PDT)
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
+	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
+	d28sm6559831lfq.88.2019.09.12.14.15.21
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 12 Sep 2019 14:15:22 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Sep 2019 23:15:20 +0200
+Message-Id: <20190912211520.25521-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] ddrescue: update to 1.24
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,29 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 21:12:52 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 12 Sep 2019 21:15:22 -0000
 
-On Thu, Sep 12, 2019 at 01:18:31PM -0700, Khem Raj wrote:
-> alsa-oss does not build for musl so its marked incompatible for musl
->...
->  # Mycroft uses Alsa, PulseAudio and Flac
-> -RDEPENDS_${PN} += "alsa-oss alsa-utils alsa-plugins alsa-tools"
-> +RDEPENDS_${PN} += "alsa-utils alsa-plugins alsa-tools"
-> +RDEPENDS_${PN}_append_libc-glibc = " alsa-oss"
->...
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../ddrescue/{ddrescue_1.22.bb => ddrescue_1.24.bb}          | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-extended/ddrescue/{ddrescue_1.22.bb => ddrescue_1.24.bb} (90%)
 
-This looks wrong - either it needs also-oss or it does not need it.
-
-cu
-Adrian
-
+diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.22.bb b/meta-oe/recipes-extended/ddrescue/ddrescue_1.24.bb
+similarity index 90%
+rename from meta-oe/recipes-extended/ddrescue/ddrescue_1.22.bb
+rename to meta-oe/recipes-extended/ddrescue/ddrescue_1.24.bb
+index 2df7db9e8..52bd11b1a 100644
+--- a/meta-oe/recipes-extended/ddrescue/ddrescue_1.22.bb
++++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.24.bb
+@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
+                     file://main_common.cc;beginline=5;endline=16;md5=3ec288b2676528cd2b069364e313016f"
+ 
+ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
+-SRC_URI[md5sum] = "49c845ed89d25b534842e40366154cb4"
+-SRC_URI[sha256sum] = "09857b2e8074813ac19da5d262890f722e5f7900e521a4c60354cef95eea10a7"
++SRC_URI[md5sum] = "8ac89f833c0df221723e33b447e230fe"
++SRC_URI[sha256sum] = "4b5d3feede70e3657ca6b3c7844f23131851cbb6af0cecc9721500f7d7021087"
+ 
+ # This isn't already added by base.bbclass
+ do_unpack[depends] += "lzip-native:do_populate_sysroot"
+@@ -42,4 +42,3 @@ do_install () {
+         rm -f ${D}${infodir}/dir
+     fi
+ }
+-
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.17.1
 
 
