@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com
-	[209.85.208.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 7830D7E507
+Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
+	[209.85.167.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 022997E553
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 22:13:49 +0000 (UTC)
-Received: by mail-lj1-f178.google.com with SMTP id d5so25134223lja.10
+	Thu, 12 Sep 2019 22:37:15 +0000 (UTC)
+Received: by mail-lf1-f66.google.com with SMTP id c195so5747512lfg.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 15:13:50 -0700 (PDT)
+	Thu, 12 Sep 2019 15:37:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=UawldOYSs1MiBp7oyTas+pDdbTnqHua5stmB8xaUMK4=;
-	b=qV1PeHJm0LxoP47H5oPHWygrm+vDNlN+4jyKdlMCncrtRjX7axTnade/+MzadgiOLd
-	5zFf8B8QFyqo+wxwAsMhAfTXKfCDzgvIHzOje8XxuHBSEoyVzAucSZNQj6R9JaMyRQcL
-	4rESSV5FXNL1NhNzbPvhrHtMKZs1CzE2OckdiZCfMXi1RFLaRceAxJv8pSORVIndq4fP
-	S01LgLpDtRj6UM4RMZvJiGb/vrAn624ZRvwZngUag0VSbBHjrYb3CZbKqdFrlmb+QJLY
-	ifG1uzx4TdjqBt4ZN90vshxpx+CiL9AqaO4V3ulgTLwILK0fsExTMjD7mk/h8odGSISh
-	UK5g==
+	bh=y7jeUpap/y9kM9wuelEimoTleQZ4DeKRRnTFVs9IHQQ=;
+	b=fFK95U/2tQ52es3C/hRhRIBLZfeIDvQlPAIea/yhmy0C1kfzAYlHa/mzGTzcLgDXMm
+	uw07S4v6VR+LR/tUPuAkED9eOCmyuSdwoeuTgbE395wS9eqLtgfsAVb1Ghi6xAhRoZh5
+	PlqTDKP53kuRCOTfizmTPocoDNjEkT1Wj3oOflGjgxL+Hu2qPgPXdcG13nPLaf0C80YE
+	l0QKUOMns1L0nRoXDmo8ye8jxyl6ZFiTidQ2HA0zHTVgpp6P2ltTc6tpPfw06ORpp60Y
+	BKqz+H/wfrrceP/VjVqgLuE7+kLtw2c6iGlY4+54mplB+1TN80+qH8ZF2sSH0rf72pvg
+	5+Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=UawldOYSs1MiBp7oyTas+pDdbTnqHua5stmB8xaUMK4=;
-	b=uh0EI0JYyj6qR1Fl7Jb1ROMmmPDC2xQRQlOfPWH74mzZV3rzeB7UqfqQ5L9WWhVsp9
-	uoJ2OfRWdG34A5ki1FqwEQtRY6CKU9uthWWOf2v2ZnJlhfp83RRZs/FLUTmaZwqqlWgH
-	BANwYtzkfEUfQwO5J2eKiZNGiGCCkhlFVNlRSEQqStxMVX3Wr6g+o7XcgNCifhs79At+
-	CiA9cRodw5KzMQ4ZeHZ179+501FXhwEvzF4YdaBOu0Qzm2tLsWKvU744gi8FNgZ4T+Rh
-	722WnsMdj7WumCdNEk+XSg41yLU+4GJwkS0CNJKk3Tet301W1enW+kRkXMwMhmNj8wQT
-	E8Mw==
-X-Gm-Message-State: APjAAAXE1dI46tn+BW0OV0YEjzWRhglQDiotKEIr01pHr0ZZgnup6L+F
-	0xULTJe8uxc9XaFj/dFzpTOcKnd2Cck=
-X-Google-Smtp-Source: APXvYqzfMqIqFrETq5JuxLH4PF0d9vE2sNLXuDSnXlZXl48Nji09dcRKbyMVMfbVLbWfn0p7WdM/4g==
-X-Received: by 2002:a2e:8903:: with SMTP id d3mr22364586lji.192.1568326429687; 
-	Thu, 12 Sep 2019 15:13:49 -0700 (PDT)
+	bh=y7jeUpap/y9kM9wuelEimoTleQZ4DeKRRnTFVs9IHQQ=;
+	b=DjPieXWdBlusnP+/s3aTzs44f3PibXKIXHL+GI23AiBAjGM7ONxK0D6XEP0LQ0mPpK
+	m+bmY2uPLySWjOQKgouPYiU2FO0JIe41K+Nb8oZBYN6Yj5gJxQEmupXwS4T4sOf1lilh
+	Yi/fXfLt0QCKePe+9fq25snH9RHxBpNWqcsgpoVPYuNqwAmoLxcDshW67byQKKAfY7NA
+	20DBRHkg1J9pT6/W3bA0qtMfpytdUjN+OKBvaU0JNMpDchMYosHMKij8LKmWLkvTXkbI
+	/LcuB5twgtfwAnc8uZkm8DB/BpsLOXMW3VM/sFyMA7VnXRQX9GdGGY3jI8ClbMPI5F0w
+	wriQ==
+X-Gm-Message-State: APjAAAXCKKlk1zXNrk3a5YveTwqJcXGWmgsXLbQibL5ASzfeZkQjkyYK
+	dFU7sOlAfOsre6wne8SsE0EC4HQ/pVY=
+X-Google-Smtp-Source: APXvYqxeYF4jRM+hGf1tDhExHKaJPdlhJOF9JEp8E54VfBg2hYMLph9kYTSEoCd49JBo/FqD2s60uw==
+X-Received: by 2002:ac2:43cb:: with SMTP id u11mr4322166lfl.38.1568327836300; 
+	Thu, 12 Sep 2019 15:37:16 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
-	k13sm5984686ljc.96.2019.09.12.15.13.48
+	[213.89.0.115])
+	by smtp.gmail.com with ESMTPSA id z7sm900684ljc.9.2019.09.12.15.37.15
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 15:13:49 -0700 (PDT)
+	Thu, 12 Sep 2019 15:37:15 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Sep 2019 00:13:46 +0200
-Message-Id: <20190912221346.17170-1-open.source@oleksandr-kravchuk.com>
+Date: Fri, 13 Sep 2019 00:37:13 +0200
+Message-Id: <20190912223713.26895-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] libsocketcan: update to 0.0.11
+Subject: [PATCH][meta-oe] pcsc-lite: update to 1.8.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 22:13:49 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 22:37:16 -0000
+
+License checksum was changed due to removed license info about remove
+code (see @0984e0f4a03e5e29bb5725b6f149f56c9e9c73c2).
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{libsocketcan_0.0.10.bb => libsocketcan_0.0.11.bb}          | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/socketcan/{libsocketcan_0.0.10.bb => libsocketcan_0.0.11.bb} (88%)
+ .../pcsc-lite/{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb} | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb} (86%)
 
-diff --git a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb
-similarity index 88%
-rename from meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb
-rename to meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb
-index 60ca58016..0debe47e0 100644
---- a/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.10.bb
-+++ b/meta-oe/recipes-extended/socketcan/libsocketcan_0.0.11.bb
-@@ -5,7 +5,7 @@ SECTION = "libs/network"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://src/libsocketcan.c;beginline=3;endline=17;md5=97e38adced4385d8fba1ae2437cedee1"
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+similarity index 86%
+rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
+rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+index 10f724e6c..1c764f7eb 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+@@ -8,13 +8,12 @@ LICENSE_${PN}-dev = "BSD"
+ LICENSE_${PN}-dbg = "BSD & GPLv3+"
+ LICENSE_${PN}-spy = "GPLv3+"
+ LICENSE_${PN}-spy-dev = "GPLv3+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=f38b3d1c7ef7fc2c8b6d20cd38efdc29"
++LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
+ DEPENDS = "udev"
  
--SRCREV = "51f1610160a1707f026f8c2d714a6f7aa3ca232b"
-+SRCREV = "0ff01ae7e4d271a7b81241e7a7026bfcea0add3f"
+ SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "0ec103b1ef298d0c58d6ef6b00b9cf17"
+-SRC_URI[sha256sum] = "6a358f61ed3b66a7f6e1f4e794a94c7be4c81b7a58ec360c33791e8d7d9bd405"
+-
++SRC_URI[md5sum] = "c20650a36062ab1689f37f3302c988f2"
++SRC_URI[sha256sum] = "d76d79edc31cf76e782b9f697420d3defbcc91778c3c650658086a1b748e8792"
  
- SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=git"
+ inherit autotools systemd pkgconfig
  
 -- 
 2.17.1
