@@ -1,53 +1,55 @@
 Return-Path: <prvs=15194f099=alistair.francis@wdc.com>
 Received: from esa6.hgst.iphmx.com (esa6.hgst.iphmx.com [216.71.154.45])
-	by mail.openembedded.org (Postfix) with ESMTP id A14967CFEE
+	by mail.openembedded.org (Postfix) with ESMTP id 585117CFEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 13:46:00 +0000 (UTC)
+	Thu, 12 Sep 2019 13:46:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1568295962; x=1599831962;
-	h=from:to:cc:subject:date:message-id:mime-version:
-	content-transfer-encoding;
-	bh=alBRGRAxQuvNWC+9Wi6bsgDhwoTmxGMvHiGK76NGB1Y=;
-	b=Z8ivYGW8QzL4mbKkRT6KSLCHWwVU4jyrmwMx2c9mSp0D6AqW5bG8sHXU
-	Nqd3S1TB1LtJH7YNjG8tTKydzFbzUw7BUTScyFEvh+9TEjns4aCfif43f
-	kRjRGIDza6ztoOWZl4rwe0PomFuN7aR+MRzSjQ4bsh0SC5OoSzhMVUxJR
-	nGYNYIZGZxzPeOE4fNgvi8ntzn5ntcI0xM1qHXLhq5T5Wh1SGCBjN4nDv
-	Y/NxyL+mL56NZdRtGL6WwakBApx9zePEWolk5EkGqaXUGJK+9BgGIxoCZ
-	cKeCtu3SHZbZtTqC+y0HqvlN4kVPli3L4+LRRo+7YZsECEAkyWf+lTS7f w==;
-IronPort-SDR: uyngeMZfMFS1o8hiE+7UjfK3jqoqcbiKFQtNYb16Ki6IN93q5ialFYld7gXsnrRe7SocgNWt3p
-	Wysq+ztfug0YEhIBA7303fmRUp63tOviVfPOKiHp+lPHjCuTtXqt8bgPBXGLvSCxjIP0t/Ywc3
-	HxC6zNaOUrwBxWvc1iwFYqmYnJbbBhaf8ggCIH5ecroyxoAwfXol+N0DU9LEtz0ww4tWmaIkAs
-	PYvEkkHRRuqJw59Y9Y7yJfjC3Mu7GFQU3Z64+jKJ57kFLhhq1ICf7TT7ZdoPez70JjMn0yI+hl
-	Nwg=
-X-IronPort-AV: E=Sophos;i="5.64,497,1559491200"; d="scan'208";a="119673082"
+	t=1568295963; x=1599831963;
+	h=from:to:cc:subject:date:message-id:in-reply-to:
+	references:mime-version:content-transfer-encoding;
+	bh=CgDvtHFv9rsn6lU1NBN3X1FPy71EospuNC4ypSb6i+w=;
+	b=RFNCeFDPeLlpxV4lPwZqjmB2DwMOH4jbkbVbBtFbaq9htUdSXSs2Dbp9
+	n3abqJEtJHYRr9XyFL4R7pMc57hgFPVEp6upMJATU1hrewsIP6IP/u0bx
+	jiFyYPLj40Q1zM0yGPkOjKS/6ByMfR9GA6F+4MsbOsr2Z+sZOpF8Bsb2i
+	dCttG4t7V6Cx+u73bBB3Sm4v5eh2OnrJw/A4mLGHD5EP4iLI+lOuee7Rc
+	2J9KZX8iX8xIxl25uvOthT3sj2J17XfKPMd1gq/P1Uclhm4M1Tzuh4TL+
+	XwbeVNlOy9xr6r2hjadGBdhoXci7bS1r/PLacwRB1o6FVggeurlqGDFiR A==;
+IronPort-SDR: DBphW9Vk02PDF9jacDwFZy8bDcpbaLvK0sWdQPzeVZiyEm1pODdtDjBlQzybxKYAfm13lr4Phx
+	kQxFuTqLBLhALgD4eTpSgWWbMIaCMK+HGinE522oANFiqWTjwIFzvYXu8n4ElvelQdl5ZAcDTq
+	xv5dHEbPoYPBv+021DGRn5ZsV7iqhYhlU14AJfm4juFL5ywFziw7EdITr3fFOpDZqMfR4x58SW
+	ENRyQvNnXn0P+b/usbmx1GX6NwXEkDHxIa4Cp0EMV0CJ+kVjSqdZpvR+VlLD4gHMGu0iRvOPwu
+	Vs4=
+X-IronPort-AV: E=Sophos;i="5.64,497,1559491200"; d="scan'208";a="119673085"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
 	([199.255.45.14])
-	by ob1.hgst.iphmx.com with ESMTP; 12 Sep 2019 21:46:02 +0800
-IronPort-SDR: wJj3/SF9TzonfM1oP9+hRZJ1aFl0TP3pXrhmJlY9YTTbFzghd9uBfoRIHIsAcmdKzlnctoJb5X
-	36+RE2LSalfzscKihAPVh40imxoeQZm4zZCgizwbWWzCHrZkpF9UglaWZjuRfCT129t6xh5woc
-	PC4iaPz8Zsa0D+REAUdBsfHH//57znyP8lTq0xQ2/fJQBD69CK2a0Uds9KUGOh7igogvlnDA8G
-	IeemgjnYFk6rmtwtFKSKAL5S0x3CG6A7mBOxP6igNCI5HZjFAqhl8CzjfnFdFKRiW2NBhfL+OM
-	vi/7mm9PzRWyPjlXM94BQe2F
+	by ob1.hgst.iphmx.com with ESMTP; 12 Sep 2019 21:46:03 +0800
+IronPort-SDR: taT1MmP32giQKwFSkNvzjgL4ViYSEz+GgJayZljutX3Wqa5acxRbUBPy9kgYbUhI+smiilhy6d
+	BcIrLah+5HA6GjWC8vrU6Dg3zTBWGpHyk/sxhcH8HqdD39RLFMOG4iJ4OEbB8mOJzaLGT0BuHi
+	WD8Sq5GwCnoqgtOqMtRA+LhoQUd6keaJ6giBQro507Duxoy/q310u2ihrC1jLnOiuCFtZERvKX
+	jVpDkTzPfNbosQ/YhP/OwMWbEBxiGwJIzkNOSNYHRH9XhFsD3iUw2VOIJX0BCk5jzO271So6aC
+	Z6np5INYrM4yM50oy+MFd5+q
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
 	by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
-	12 Sep 2019 06:42:43 -0700
-IronPort-SDR: 0wfBm9qos5fe27RCSqjYoHSgXKK4xJEI2X4bWUM4U6tRfRqfaLlJnk9Iz8KKeLnVQSJEhx7fS5
-	UtUEk+ok1X8J1JjX4aCvkZzBtwXweK4ZZZWeCekEf8vbBjHMkWg0n7/QXbNVx2/E0wx43juswr
-	2yJ3yQleAOyrC+SPu2BiY7uOEk/vwKUAd/O7tUSg8055KVoareF8az/gc/jGCMdH5qdoAyt0ba
-	8Y5w3Zny67AJZfpy8KFagUcKCon0F4+aE6higM/plGwCz4NyzQW+XIbIaOOEI7vYUOvgn63vpq
-	bBM=
+	12 Sep 2019 06:42:44 -0700
+IronPort-SDR: TvGC54qdvb168iUCvqr4Ysu5c3K/LKPmRfKV7sFr+XLXFzHftj7k7n/wV5aboUpIpgRSsS/18w
+	ClOAzoDzyTxwSkSaeRvSLT8rLopWN4CDxXF0iUDmcCyvqR4TsYnh/h2naXZRzmxwBQIkxMO76q
+	nQmN/hqxEO+WyNmXrSmXMiL7BKjIZfZ7IPcD+sJ8NaghO2RJxi6QJv41xfJ41Gfxmuuw4uu9Dk
+	XBmucOFiTECvqFhCMo97n/1pys5IsNCqqZxGus1tjVa98hz6BLeXqmFQwYWo+E+Vh1X0uZHJQY
+	zdI=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
 	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
-	by uls-op-cesaip01.wdc.com with ESMTP; 12 Sep 2019 06:46:02 -0700
+	by uls-op-cesaip01.wdc.com with ESMTP; 12 Sep 2019 06:46:03 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Sep 2019 06:41:56 -0700
-Message-Id: <20190912134158.22033-1-alistair.francis@wdc.com>
+Date: Thu, 12 Sep 2019 06:41:57 -0700
+Message-Id: <20190912134158.22033-2-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20190912134158.22033-1-alistair.francis@wdc.com>
+References: <20190912134158.22033-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2] python3-fasteners: Initial commit of 0.15
+Subject: [PATCH 2/2] python3-python-vlc: Initial commit of 3.0.7110
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,28 +62,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 13:46:00 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 13:46:01 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- .../recipes-devtools/python/python3-fasteners_0.15.bb    | 9 +++++++++
+ .../python/python3-python-vlc_3.0.7110.bb                | 9 +++++++++
  1 file changed, 9 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-fasteners_0.15.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-python-vlc_3.0.7110.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-fasteners_0.15.bb b/meta-python/recipes-devtools/python/python3-fasteners_0.15.bb
+diff --git a/meta-python/recipes-devtools/python/python3-python-vlc_3.0.7110.bb b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.7110.bb
 new file mode 100644
-index 000000000..8786a1484
+index 000000000..be63fed02
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-fasteners_0.15.bb
++++ b/meta-python/recipes-devtools/python/python3-python-vlc_3.0.7110.bb
 @@ -0,0 +1,9 @@
-+SUMMARY = "A python package that provides useful locks."
-+HOMEPAGE = "https://github.com/harlowja/fasteners"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4476c4be31402271e101d9a4a3430d52"
++SUMMARY = "This module provides ctypes-based bindings for the native libvlc API of the VLC video player."
++HOMEPAGE = "wiki.videolan.org/PythonBinding"
++LICENSE = "LGPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
 +
-+SRC_URI[md5sum] = "440f8ab461c8fed941355860d8669556"
-+SRC_URI[sha256sum] = "3a176da6b70df9bb88498e1a18a9e4a8579ed5b9141207762368a1017bf8f5ef"
++SRC_URI[md5sum] = "e128abf7115d6513582bd460c0e74485"
++SRC_URI[sha256sum] = "821bca0dbe08fbff97a65e56ff2318ad7d499330876579c39f01f3fb38c7b679"
 +
 +inherit pypi setuptools3
 -- 
