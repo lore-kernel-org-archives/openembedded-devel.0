@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com
-	[209.85.208.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 1196E7E584
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com
+	[209.85.208.177])
+	by mail.openembedded.org (Postfix) with ESMTP id E90C27E584
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 22:40:07 +0000 (UTC)
-Received: by mail-lj1-f173.google.com with SMTP id u14so25160185ljj.11
+	Thu, 12 Sep 2019 22:47:04 +0000 (UTC)
+Received: by mail-lj1-f177.google.com with SMTP id y5so14376635lji.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 15:40:09 -0700 (PDT)
+	Thu, 12 Sep 2019 15:47:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=q1B666hrOoQeWn4oG7fiy5OGuTuKy+PzZDnEQdPRuaQ=;
-	b=tudtZE1AWutnPDMYcpVZX6JtREGeLJ8+wZX5KDfGx51vYq6+AnGWawoId14sumLqOK
-	jqoUfxwjK6dphC7KES7RG1J/AiuQgGB6MgR4opIM390vejBvGjaiN6zCsV4e6QsPGJ3G
-	UUw92dP/ksEyi0927jU1VUU5BRrkwo/ssElVhWJCWJUvvUWBNWJ90NDgVRF+9ZS/ZJjL
-	jhtm+019J9uEXetZ9Xr6z9YUxGH7Pj/6XGKWBXaHnxw3prpVhX0/nHDWqLIaWbPJuhLs
-	tkFCXIpKb2e55q3Gtce+P0YfT5/wKeHDAHGbntlv4LrycLNwRtLsf/tEdwNxbCZ+Fmw+
-	2mjQ==
+	bh=QVfJNBFFy+cySuL9/NF99Ny1CxVe5jDaNBw8bBmWYig=;
+	b=F9PEsIn7824MYpJUxUM583o/NSTalIZNnMWInbNpFZGyLuNC1wgke+EBmhRUPHDNXn
+	/qLmPX7dvty1RdYEVmH7Mw9mlYBJCXLCPJ631Xvn/usyTRolBUhQKPB3uC4oMk2T0Ypp
+	T/QlHvtGzmC+3vMB0uji3whVudp7m8peXxjRpdKHd3FNvfjz9Dg/kr3V2d3r/dTRuCDa
+	Ai8P05blZEshXs3ue5fURLx1J+1QaL7V16Ru0LndSE2d/fP/gMphN3X8nIGzAzMi6t8h
+	BK3zibD00/c9suLbyC2lryOMD91zOTR720JEqwslFmXSqKvgeJCww7AfVsKGx4n1e5TB
+	ciMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=q1B666hrOoQeWn4oG7fiy5OGuTuKy+PzZDnEQdPRuaQ=;
-	b=Rfz2b/P3TuCO+pdeQdG05hzgbGcFfa8ahmFRT6ZvrCLtEZl1x6rs1idp/7xKJC0T5a
-	8WjwdC5TZyK0TpjqAcCPe44yw5q4gTSWGmQgha9Eg8SahUwoer0so6rmU6AwxXGOw6x+
-	SZ24rLgHu0YQ/ncKLMQpF4fwI05aJuw09fmr2/zx7PempcYAiXb3/5rM/B3Q/M46BQUr
-	QAqUgwevTbNMu0ZKaaNza5AXOFNpGt+GiRiyt+lMfT6vSkO4Qrm7UgElUiay512QQYz2
-	cLb3/jZm552/GjSB9SWO6J9oonnQJdNkiYG3YvWPHFdSetRMvSg1ldJyDQ9avih7KA+r
-	UrsQ==
-X-Gm-Message-State: APjAAAX56XaT5hpCI6U7Uzoht45qxzvwFCpog9NIMwdRWlDn+vNVT9ja
-	dSxEZXSLL5jh2s+BFAZwH2gyevCF1Iw=
-X-Google-Smtp-Source: APXvYqyiRD0PrXqRq/aW2XzexPxG6fXNzey6Wn+g6hOgKxRjQvBiPadCagx/lc/J3GrUZizHDToJ+w==
-X-Received: by 2002:a2e:b4ef:: with SMTP id s15mr2821870ljm.211.1568328008454; 
-	Thu, 12 Sep 2019 15:40:08 -0700 (PDT)
+	bh=QVfJNBFFy+cySuL9/NF99Ny1CxVe5jDaNBw8bBmWYig=;
+	b=IufqtWoHQB9OZDT/+X6OZTj7TZYTUOgOTgGSzmfBjG7EY9lozK6XafgdoZg9Sk888o
+	kEmubSaQUTWx3EP38ofOuETafVj5nJp2bYAuscy/+rb21qvzXeGfr4kLgCmkknIY0o0C
+	j/uRMBMdj54eEvnFkQ9+TiRkoEcIkeM/+btBgkAM7sur53fqCYQ3dIzfZst1FGkrNtXh
+	pGbt35KKEfJu4gYYFgoK6Dcnv9q0iz5HXTRCaWGWbbGrPu2iQV0EAtSQzjuAZTGm3Kwa
+	PGkZZcH1UHOTwCvFVXFpl7SxjlkoXnmbG/KGjyYZXVJQD9bF8n+5e5lHrFBK7ExZTEB7
+	7wdg==
+X-Gm-Message-State: APjAAAVfChrKMj3pe6+V36lPH/rJdKmgWFOX0deRCeHB/GD878dhotLe
+	9VRCd13O+2r9P90Q/sDNot+9AwgWAok=
+X-Google-Smtp-Source: APXvYqzdsbEgKMgDzZgns6kHehbdtHNwYFeuGmh8QU9LFlYEABwdKhpU0yO3L66oWFujZ1Z2AgsWQg==
+X-Received: by 2002:a2e:9881:: with SMTP id b1mr10447426ljj.134.1568328425124; 
+	Thu, 12 Sep 2019 15:47:05 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
 	[213.89.0.115])
-	by smtp.gmail.com with ESMTPSA id x14sm946143lfe.3.2019.09.12.15.40.07
+	by smtp.gmail.com with ESMTPSA id l9sm5959554ljg.79.2019.09.12.15.47.04
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 15:40:07 -0700 (PDT)
+	Thu, 12 Sep 2019 15:47:04 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Sep 2019 00:40:01 +0200
-Message-Id: <20190912224001.28092-1-open.source@oleksandr-kravchuk.com>
+Date: Fri, 13 Sep 2019 00:47:02 +0200
+Message-Id: <20190912224702.4418-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] tree: update to 1.8.0
+Subject: [PATCH][meta-oe] xclock: update to 1.0.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,32 +56,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 22:40:08 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 22:47:05 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-oe/recipes-support/tree/{tree_1.7.0.bb => tree_1.8.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/tree/{tree_1.7.0.bb => tree_1.8.0.bb} (80%)
+ .../xorg-app/{xclock_1.0.5.bb => xclock_1.0.9.bb}            | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xclock_1.0.5.bb => xclock_1.0.9.bb} (63%)
 
-diff --git a/meta-oe/recipes-support/tree/tree_1.7.0.bb b/meta-oe/recipes-support/tree/tree_1.8.0.bb
-similarity index 80%
-rename from meta-oe/recipes-support/tree/tree_1.7.0.bb
-rename to meta-oe/recipes-support/tree/tree_1.8.0.bb
-index 5eff55263..01b1ac384 100644
---- a/meta-oe/recipes-support/tree/tree_1.7.0.bb
-+++ b/meta-oe/recipes-support/tree/tree_1.8.0.bb
-@@ -5,8 +5,8 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=393a5ca445f6965873eca0259a17f833"
+diff --git a/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb b/meta-oe/recipes-graphics/xorg-app/xclock_1.0.9.bb
+similarity index 63%
+rename from meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
+rename to meta-oe/recipes-graphics/xorg-app/xclock_1.0.9.bb
+index cf970d5d6..31c553eee 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xclock_1.0.5.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xclock_1.0.9.bb
+@@ -6,6 +6,5 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=857759ade8f2ddde5c7b32ef7356ea36"
  
- SRC_URI = "http://mama.indstate.edu/users/ice/tree/src/${BP}.tgz"
--SRC_URI[md5sum] = "abe3e03e469c542d8e157cdd93f4d8a6"
--SRC_URI[sha256sum] = "6957c20e82561ac4231638996e74f4cfa4e6faabc5a2f511f0b4e3940e8f7b12"
-+SRC_URI[md5sum] = "715191c7f369be377fc7cc8ce0ccd835"
-+SRC_URI[sha256sum] = "715d5d4b434321ce74706d0dd067505bb60c5ea83b5f0b3655dae40aa6f9b7c2"
+ DEPENDS += " libxaw libxrender libxft libxkbfile libxt"
  
- # tree's default CFLAGS for Linux
- CFLAGS += "-Wall -DLINUX -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64"
+-SRC_URI[md5sum] = "eaf124bbc9d13e1a12a29faaa2ed3612"
+-SRC_URI[sha256sum] = "53a9169e24f3814fbfcfee3ca0b98637840a3156ed7c7e36ae03940fabae4c9a"
+-
++SRC_URI[md5sum] = "437522a96f424f68fc64ed34ece9b211"
++SRC_URI[sha256sum] = "cf461fb2c6f2ac42c54d8429ee2010fdb9a1442a370adfbfe8a7bfaf33c123bb"
 -- 
 2.17.1
 
