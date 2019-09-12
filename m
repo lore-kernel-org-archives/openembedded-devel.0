@@ -1,50 +1,38 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
-	[209.85.166.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 04E3A6B5C5
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 909A67E6AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 07:22:14 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id h144so52099736iof.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 00:22:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=lwje++WJhEOYcXnQTAFLGxhCkzbYR+2ka7V/aOZszMA=;
-	b=ZqJBgZA5o32JY45in0Uh93D96YWWIKcOjowwxC6/BeTaw/zqfzOyvzBRseIruJEhN/
-	BtKiAF4KqkbPv0Sst82STdSgMXFySdJW2I/Y4EVSaBT7dIexuJ/uP5bd2x3M5Tk1McsD
-	tFwH6od8D9pPVpiVTd8P3Zq1w6bFRqUpmORwrInoKt5Ljay7+3HYClCIBWIzjdEf0fTl
-	yk4rh8zs8177h3nVB0aZ8suDXfAWrQF8eDpmprDXDeAqGbBay+n1cX+iwK/ij39GElsv
-	QyfCshtw1vOb550xco26HT46EWrpgk9IkkGqAyBs78hRsEaFgNPAdHM59NYszNl+N1z2
-	B2JA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=lwje++WJhEOYcXnQTAFLGxhCkzbYR+2ka7V/aOZszMA=;
-	b=hyAVuFFVLMtiejzZNTxsYcBplrpwik2Rb0tGzfOdpMMhS5ciTC4bg8FS2yEUjbc/dH
-	wpUFeBWG7XLLDZvN12cgSnusM1Uv2H9n/uPqa5kfGhVwDyhcKl4ZQKC49cm7lvqvNyNg
-	YprBUvj8DoiPOuoTxql0lFVVf1vkoGoq6iMFgFX7ZPcvwSTYU7v6xE7GELHNmkdEno8U
-	NuawPfvUEODOzDAioJ8l5xf83Hw17vYeWgWsVMVSAvTxjHTx2YFbdg5+idDfZZKseTZb
-	bJpltAQ6/CAo+yp/cYtGjW31Wq954Q+rTPjf1DxsujFAofEbiuKVwkOBsj0fkr3Xaa/p
-	X+Yg==
-X-Gm-Message-State: APjAAAXvvmhuPtCoT02pWJqYpFJ5ubCoNoWuMOKZb6O29QKNLenm28xV
-	WwI8O4V+vfd8M1IZw/sJLvcT/vfpFsTzsdqyML6sZKmM
-X-Google-Smtp-Source: APXvYqw/5KDy0Fkt9ZDaBlq+Y1rNEBwEb6emmqoUsk3p1VkNF4Q/hsEltOMaZLY1qlVmDoXd11TZLfpydFV+7n33wFM=
-X-Received: by 2002:a02:3b6f:: with SMTP id i47mr17010572jaf.24.1568272935337; 
-	Thu, 12 Sep 2019 00:22:15 -0700 (PDT)
+	Thu, 12 Sep 2019 07:47:30 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	12 Sep 2019 00:47:31 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,489,1559545200"; d="scan'208";a="385960063"
+Received: from pgsmsx111.gar.corp.intel.com ([10.108.55.200])
+	by fmsmga006.fm.intel.com with ESMTP; 12 Sep 2019 00:47:30 -0700
+Received: from pgsmsx101.gar.corp.intel.com ([169.254.1.57]) by
+	PGSMSX111.gar.corp.intel.com ([169.254.2.128]) with mapi id
+	14.03.0439.000; Thu, 12 Sep 2019 15:47:29 +0800
+From: "Mittal, Anuj" <anuj.mittal@intel.com>
+To: "raj.khem@gmail.com" <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-python][PATCH 2/2] python3-networkx: add recipe
+Thread-Index: AQHVaQoyCIE7JyKI60qZCH6QvZYpxacm8VEAgAAzJYA=
+Date: Thu, 12 Sep 2019 07:47:29 +0000
+Message-ID: <f69c815d334fab58b81b774b2b35148424cb3fc8.camel@intel.com>
+References: <20190912013354.2924-1-anuj.mittal@intel.com>
+	<20190912013354.2924-2-anuj.mittal@intel.com>
+	<CAMKF1srcuBMHGVuNQ1E7hwWamPkg4Svo5i5dy_SMCM-5-WFmjg@mail.gmail.com>
+In-Reply-To: <CAMKF1srcuBMHGVuNQ1E7hwWamPkg4Svo5i5dy_SMCM-5-WFmjg@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.249.71.177]
 MIME-Version: 1.0
-References: <20190912070050.4388-1-brgl@bgdev.pl>
-	<CAMKF1so9rMwPvE=6jZqOhuisT+ZT-v6aePQMYCR7-0dOmWXzTg@mail.gmail.com>
-In-Reply-To: <CAMKF1so9rMwPvE=6jZqOhuisT+ZT-v6aePQMYCR7-0dOmWXzTg@mail.gmail.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Thu, 12 Sep 2019 09:22:03 +0200
-Message-ID: <CAMRc=Mf4Uh3UMOR4-u9qJp8AdfYadCaWVDDV3qtH00f=4CcQ5w@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] yad: new package
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH 2/2] python3-networkx: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,67 +45,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 07:22:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Sep 2019 07:47:30 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <B45914793F95274B94C80711850B4866@intel.com>
+Content-Transfer-Encoding: base64
 
-czw., 12 wrz 2019 o 09:16 Khem Raj <raj.khem@gmail.com> napisa=C5=82(a):
->
-> Hi Bartosz
->
-> On Thu, Sep 12, 2019 at 12:00 AM Bartosz Golaszewski <brgl@bgdev.pl> wrot=
-e:
-> >
-> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> >
-> > This adds a recipe for yad (Yet Another Dialog) - a command-line utilit=
-y
-> > allowing to display configurable dialog windows from shell scripts and
-> > parse the input from users.
-> >
-> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> > ---
-> >  meta-oe/recipes-graphics/yad/yad_4.1.bb | 18 ++++++++++++++++++
-> >  1 file changed, 18 insertions(+)
-> >  create mode 100644 meta-oe/recipes-graphics/yad/yad_4.1.bb
-> >
-> > diff --git a/meta-oe/recipes-graphics/yad/yad_4.1.bb b/meta-oe/recipes-=
-graphics/yad/yad_4.1.bb
-> > new file mode 100644
-> > index 000000000..cfb13c4b7
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-graphics/yad/yad_4.1.bb
-> > @@ -0,0 +1,18 @@
-> > +SUMMARY =3D "Yet Another Dialog"
-> > +DESCRIPTION =3D "Program allowing you to display GTK+ dialog boxes fro=
-m command line or shell scripts."
-> > +AUTHOR =3D "Victor Ananjevsky"
-> > +
-> > +LICENSE =3D "GPLv3"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dd32239bcb673463ab874e80d47f=
-ae504"
-> > +
-> > +SRC_URI =3D "git://github.com/v1cont/yad.git"
-> > +SRCREV =3D "3857a0a8822fc0a7206e804f15cc17b85a5f8ce2"
-> > +PV =3D "4.1+git${SRCPV}"
->
-> Lets rename the recipe PV to 4.1 since the SRCREV is pointing to that
-> exact release.
->
-
-So should I simply drop the assignment here?
-
-Bart
-
-> > +
-> > +inherit autotools gsettings
-> > +
-> > +DEPENDS =3D "gtk+3 glib-2.0-native intltool-native"
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +FILES_${PN} +=3D "${datadir}/icons/"
-> > --
-> > 2.21.0
-> >
+T24gV2VkLCAyMDE5LTA5LTExIGF0IDIxOjQ0IC0wNzAwLCBLaGVtIFJhaiB3cm90ZToNCj4gT24g
+V2VkLCBTZXAgMTEsIDIwMTkgYXQgNjozNCBQTSBBbnVqIE1pdHRhbCA8YW51ai5taXR0YWxAaW50
+ZWwuY29tPg0KPiB3cm90ZToNCj4gPiBuZXR3b3JreCBvbmx5IHN1cHBvcnRzIHB5dGhvbjMgc3Rh
+cnRpbmcgdjIuMy4gTW92ZSB0aGUgY29tbW9uIGNvZGUNCj4gPiB0bw0KPiA+IC5pbmMgYW5kIHJl
+bW92ZSBweXRob24tMnRvMyBSREVQRU5EUyB3aGljaCBpcyBubyBsb25nZXIgbmVlZGVkOg0KPiA+
+IA0KPiA+IGh0dHBzOi8vZ2l0aHViLmNvbS9uZXR3b3JreC9uZXR3b3JreC9jb21taXQvNGU2MTFk
+N2VhOTBjMjA4NjRkYWJhOTEyZDYxMTgyMjBkNWJiZGRmMw0KPiA+IA0KPiANCj4gdGhpcyBwYXRj
+aCBkb2VzIG5vdCBhcHBseSBjbGVhbmx5LiBJIHRoaW5rIGl0IHdvdWxkIGJlIGdvb2QgdG8gbW92
+ZQ0KPiBib3RoIHJlY2lwZXMgdG8gMi4zIGlmIHBvc3NpYmxlLg0KDQoyLjIgaXMgdGhlIGxhc3Qg
+cmVsZWFzZSB0byBzdXBwb3J0IHB5dGhvbjIgc28gdGhhdCB3aWxsIGhhdmUgdG8gc3RheSBhdA0K
+Mi4yLg0KDQpodHRwczovL25ldHdvcmt4LmdpdGh1Yi5pby9kb2N1bWVudGF0aW9uL3N0YWJsZS9u
+ZXdzLmh0bWwjbmV0d29ya3gtMi0zDQoNCkkgd2lsbCBmaXggYW5kIHNlbmQgdjIuDQoNClRoYW5r
+cywNCg0KQW51ag0K
 
