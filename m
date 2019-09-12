@@ -1,50 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
-	[209.85.210.182])
-	by mail.openembedded.org (Postfix) with ESMTP id E195C7E3E8
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com
+	[209.85.208.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 9EA8A7E093
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 20:18:38 +0000 (UTC)
-Received: by mail-pf1-f182.google.com with SMTP id h195so16675440pfe.5
+	Thu, 12 Sep 2019 21:04:36 +0000 (UTC)
+Received: by mail-lj1-f178.google.com with SMTP id 7so24961058ljw.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Sep 2019 13:18:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Thu, 12 Sep 2019 14:04:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=g/3NPfLrBktPOOTDo6AzAbHmU/8Ecl++h4go7SUt4dU=;
-	b=ABmCDuFjHR6ojMYCOIBcDrzlhbfD4krR93vh/UthKhQLjLARw+3t+AiI1mojnA5ZTn
-	BQIMPRko2VPJ8vtwXg3EeNHO3X/IDVPgwQxUvNn5lB3DZ7pnDOi9UTYGVJmznlziZ3zw
-	/SRDzcDVdFGweSd0AKU+d13Nk82GZUZp9+N7C68OP1Z8ycpVE/CzX7h5dXl3f9+6n9BY
-	5EvRl19PUShdQDaE+iJKo8PW2gceW1ggobz8OSX26v4z5BcjbvmmQEPnDMR6lFbtiuO6
-	dBjlkwX4ayr38slcyMX5yv/Qar3BMAThjYm8pxXOi8mobT8VwN2TNcFwwyBGv4QPSMwK
-	fFrw==
+	bh=Kl5uknN4WQWRGzwDq5yOb0v4gqmHbPRquF6GrfD2lfs=;
+	b=E9CzrYyxdR0BlcQWkmP890JkOTMgY/5QM9cTfDfbmML2j9xTOce+IMJe/n/8D1Inse
+	UWdIMQZuXzpkZEd8SNQBttlyaV6vqc6cYyZnu/MWnqmDOSr2qsdhlJizczcGU7gILOFR
+	GItmoXhSQTXC+JHgXOwb4p8LcKGlYEplL+6RvbL0B6vbKNVMGNeMIuCJH/Fe7JGth8+i
+	d7BT3amsiURJmQBtdWvQ9NM7qsfdQvZ3hgIct0Yh2h1iLZDhE/TvXgaOoZM+K/THfdyy
+	G3TplwdEeRiMZQ3EDBYpT6zbB2sAbFggole6mVhr5qXENVEURGIZPySoHfqHyPslJUlx
+	cB5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=g/3NPfLrBktPOOTDo6AzAbHmU/8Ecl++h4go7SUt4dU=;
-	b=Vm6pMtBJkkTKXSuFVoTJWVYZhrByjtL/i3AvJhPIo5svelx0AqIGbI2bwid/1Si8uo
-	QnyY26VW3db+j8Rl+z1is668mVN87yKEorfRSwxEYWuwQCEFMNEt5kicCrKb5AhydS/K
-	BwLP4AxrGvjalv1zZefPTywigviBVrzxIkR1ir8I/e2k/HcCO1Rb8/wCwEzFmFZsM3hi
-	KFiXpUqTBIRAgfG7oHNGLz9ie16iOSuROCb4IZ6VgnV6T5qIROCPVOua0zhScE9Agu5T
-	0N4n080342xwWVIcy7fuNMzCBLAPjD7Nd1Jn3XmEe5/hgyObYyoXdGU8kTZGfiBsv95A
-	E2Cg==
-X-Gm-Message-State: APjAAAXzcNslAcSkVLRvTJKLXCWHukLOMYr1rWhRn7tTmO0ddBPgICY6
-	eJnlzbeR6IEQgLNwtialMo7oH5jd3sU=
-X-Google-Smtp-Source: APXvYqyhfV6cfxuaCgys6OMAo3ornkYCH7Usa3IXG7yMjCkrNI7e1jq9cEf7BYokwZZRvXoRNPaZTg==
-X-Received: by 2002:aa7:8dc9:: with SMTP id j9mr53417297pfr.233.1568319519423; 
-	Thu, 12 Sep 2019 13:18:39 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	c2sm27091883pfd.66.2019.09.12.13.18.38
+	bh=Kl5uknN4WQWRGzwDq5yOb0v4gqmHbPRquF6GrfD2lfs=;
+	b=k5aD07dDfBOzpG6J/kSmGQjRfLThtualSsrsu7DRJDu0wvZ110x16yxjKIp6Zr4IWU
+	tWEuGsL7jNCRupA8veHKaUMwc1PF0v5G+6YnHLw8qXeaZyR4FrSRHztGbMhHBGdb5bDJ
+	kmzqInHzHCuhh/qw92SZKMt/FHLwbnlQKVbMtSK4EYIRtumA7KNjlfCnrKlvApURDrLO
+	brGfWpwpPE3DXbe5TeZZbLzg0dK+aM7ljr70XtCqjBF2r6O8gawl5wmIJ9+x9Of19GzP
+	yt3Cln3Z4ddGICnl8N2e65r+fKGvzLz2N+rwQIBNSJxJzNxdfVHkJ0Psvrsrq+Id4PrD
+	fTQw==
+X-Gm-Message-State: APjAAAWfcfU8Y7cd3oqoK4uc56+qhpzG7u7xmZkQu/KAlnaBiRdsGA1j
+	OviRddeA5Q2ozs/hSrkYCbvhUUJVLv0=
+X-Google-Smtp-Source: APXvYqxuzIn5SDLiNQjuJdNVbHvnzemAw8RQTeZqnlbdyZ8wZmEe9OSgX0FHJwwmpdLcgKNOBwY+lA==
+X-Received: by 2002:a2e:9b0c:: with SMTP id u12mr28336500lji.26.1568322277031; 
+	Thu, 12 Sep 2019 14:04:37 -0700 (PDT)
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
+	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
+	z30sm7585002lfj.63.2019.09.12.14.04.35
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Sep 2019 13:18:39 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 12 Sep 2019 14:04:36 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Sep 2019 13:18:31 -0700
-Message-Id: <20190912201831.51848-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+Date: Thu, 12 Sep 2019 23:04:33 +0200
+Message-Id: <20190912210433.22723-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH] mycroft: Make rdep on alsa-oss conditional on glibc
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH][meta-oe] capnproto: update to 0.7.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +59,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Sep 2019 20:18:39 -0000
+X-List-Received-Date: Thu, 12 Sep 2019 21:04:38 -0000
+Content-Type: text/plain; charset=yes
 Content-Transfer-Encoding: 8bit
 
-alsa-oss does not build for musl so its marked incompatible for musl
+License checksum changed due to minor change to the LICENSE file
+mentioning other contributors (see @64db3a6def96453f775d).
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ .../capnproto/{capnproto_0.6.1.bb => capnproto_0.7.0.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/capnproto/{capnproto_0.6.1.bb => capnproto_0.7.0.bb} (81%)
 
-diff --git a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb
-index becd0bf790..8d1c9179be 100644
---- a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb
-+++ b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.2.3.bb
-@@ -64,7 +64,8 @@ RDEPENDS_${PN} += "python3-pip \
-                  "
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb b/meta-oe/recipes-devtools/capnproto/capnproto_0.7.0.bb
+similarity index 81%
+rename from meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
+rename to meta-oe/recipes-devtools/capnproto/capnproto_0.7.0.bb
+index 6ca3613db..c6bab5ec2 100644
+--- a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_0.7.0.bb
+@@ -3,10 +3,10 @@ DESCRIPTION = "Cap’n Proto is an insanely fast data interchange format and cap
+ HOMEPAGE = "https://github.com/sandstorm-io/capnproto"
+ SECTION = "console/tools"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://../LICENSE;md5=0a5b5b742baf10cc1c158579eba7fb1d"
++LIC_FILES_CHKSUM = "file://../LICENSE;md5=a05663ae6cca874123bf667a60dca8c9"
  
- # Mycroft uses Alsa, PulseAudio and Flac
--RDEPENDS_${PN} += "alsa-oss alsa-utils alsa-plugins alsa-tools"
-+RDEPENDS_${PN} += "alsa-utils alsa-plugins alsa-tools"
-+RDEPENDS_${PN}_append_libc-glibc = " alsa-oss"
- RDEPENDS_${PN} += "pulseaudio pulseaudio-misc pulseaudio-server"
- RDEPENDS_${PN} += "flac"
+ SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV}"
+-SRCREV = "c949a18da5f041a36cc218c5c4b79c7705999b4f"
++SRCREV = "3f44c6db0f0f6c0cab0633f15f15d0a2acd01d19"
+ 
+ S = "${WORKDIR}/git/c++"
  
 -- 
-2.23.0
+2.17.1
 
 
