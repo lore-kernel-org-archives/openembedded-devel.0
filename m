@@ -1,51 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
-	[209.85.214.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C7037ECBE
+Return-Path: <phong@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 35F257EC40
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 21:24:09 +0000 (UTC)
-Received: by mail-pl1-f181.google.com with SMTP id x3so13767944plr.12
+	Fri, 13 Sep 2019 21:28:10 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8DLRpSx010141
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 14:24:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=q9Li6zgzR1iAiAmDNFXfP4K4CdZjmPYAtdYCG1SkV6s=;
-	b=DCYUCfG0hU4FPlofFHeGt1aiBjoHuwud0fAmCKZS579HkY56vNbWgAdc7NVD6bYN5q
-	seVkWNqT8tBN7JVQza0HJhrB+ylLzsjClwsvt97y0GNyidaAA3yJcO1XL2qjLhZNySI7
-	f2su95Rh/RlS0T46aYGDQbrFJoZri1cqTOAXuuS92piN2gIkADh+D1T+DdoNmV5/h2OI
-	ewfYcc85XVLoDrjrFcUI7nvA3myYhQDaCuZi6X7CDeUSwiU8cVbxWI4m5gKlvNmjj6cU
-	JS2T8KP6gZKVn4J46Iq1vun5hFb1MHs1EQo1qDkgq/615EnAnBa0ZtbtgZ1usJ+CGXN/
-	Dw6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=q9Li6zgzR1iAiAmDNFXfP4K4CdZjmPYAtdYCG1SkV6s=;
-	b=hEgPDuSwicgqggIPgmnXgonlbP0G/m+KO/PM8R+pMHue33LfLtdyv7hBJm66Kny4nT
-	3SsUaawgahTQQdWPErx69tKnFyB50WywoTPnOaAwSwP6DRr1ERwBEk74QY3zHclWvx4f
-	Tv0VRCptTulWjNhGSOyRihjoC0614cUhLhZ1zR0wSnc8lmaQ8rus5Koq0CGPByro7UFv
-	+F1XyVi0QE+JOWQuQ8dvvRfXUmeTkh61IugpCgK13d6c20n7iGURXNHGjemfJVk/cCYm
-	/cyFI132wTbu/YGHpBRSiwK7tK4WajV35AT4r98QWYNBF/ZO7EXyjEW6rj/erU4pl6rO
-	I5+Q==
-X-Gm-Message-State: APjAAAVW9gLZzqvy+pFBNTR/PiMmPsf1dWddSteYVbFE6hTXe4CQDh/x
-	AjqXt5MQKekLVE4rcQ/G+Hby+oSzCTs=
-X-Google-Smtp-Source: APXvYqw8NQB/ZWWFn6S6cIcDui7FcjIMPTifjOhJvW1DSbMNVlg9SiwmapMXqHWNW/UmSIr71i7DaA==
-X-Received: by 2002:a17:902:8ecc:: with SMTP id
-	x12mr52032685plo.258.1568409849613; 
-	Fri, 13 Sep 2019 14:24:09 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	f12sm25257479pgo.85.2019.09.13.14.24.08
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 13 Sep 2019 14:24:08 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Sep 2019 14:23:46 -0700
-Message-Id: <20190913212346.2393764-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	Fri, 13 Sep 2019 14:28:01 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 13 Sep 2019 14:27:40 -0700
+Received: by yow-lpggp3.wrs.com (Postfix, from userid 21010)	id 2DF6F20512;
+	Fri, 13 Sep 2019 17:27:40 -0400 (EDT)
+From: Peiran Hong <peiran.hong@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 13 Sep 2019 17:27:29 -0400
+Message-ID: <20190913212729.9448-1-peiran.hong@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH] bigbuckbunny: Use faster download mirrors
+Subject: [PATCH] tcpdump: Fix CVE-2017-16808
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,59 +33,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2019 21:24:09 -0000
+X-List-Received-Date: Fri, 13 Sep 2019 21:28:15 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Original URIs are very slow and these files are quite large where it can
-mean hours of download
+Backport selected parts of three upstream commits to fix
+CVE-2017-16808 where tcpdump 4.9.2 has a heap-based buffer over-read.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Upstream-Status: Backport
+[ several ]
+
+Upstream commits fully backported:
+46aead6  [CVE-2017-16808/AoE: Add a missing bounds check]
+
+Upstream commits partially backported:
+7068209  [Use nd_ types in 802.x and FDDI headers.]
+84ef17a  [Replace ND_TTEST2()/ND_TCHECK2() macros by macros using
+pointers (1/n)]
+
+46aead6 fixes the vulnerability and requires two macros defined in
+7068209 and 84ef17a, which are committed after the release of 4.9.2.
+Only the definition of the macros are taken from the two commits
+as they impact a wide range of code and are difficult to integrate.
+
+CVE: CVE-2017-16808
+
+Signed-off-by: Peiran Hong <peiran.hong@windriver.com>
 ---
- .../recipes-multimedia/sample-content/bigbuckbunny-1080p.bb     | 2 +-
- .../recipes-multimedia/sample-content/bigbuckbunny-480p.bb      | 2 +-
- .../recipes-multimedia/sample-content/bigbuckbunny-720p.bb      | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ ...16808-AoE-Add-a-missing-bounds-check.patch | 61 +++++++++++++++++++
+ .../recipes-support/tcpdump/tcpdump_4.9.2.bb  |  1 +
+ 2 files changed, 62 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
-index a80fc10ace..cee386c2a8 100644
---- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
-+++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
-@@ -3,7 +3,7 @@ LICENSE = "CC-BY-3.0"
- # http://www.bigbuckbunny.org/index.php/about/
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
+new file mode 100644
+index 000000000..919f2b009
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
+@@ -0,0 +1,61 @@
++From c45443a0d3e16b92622bea6b589e5930e8f0d815 Mon Sep 17 00:00:00 2001
++From: Peiran Hong <peiran.hong@windriver.com>
++Date: Fri, 13 Sep 2019 17:02:57 -0400
++Subject: [PATCH] CVE-2017-16808/AoE: Add a missing bounds check.
++
++---
++ netdissect.h | 12 ++++++++++++
++ print-aoe.c  |  1 +
++ 2 files changed, 13 insertions(+)
++
++diff --git a/netdissect.h b/netdissect.h
++index 089b0406..cd05fdb9 100644
++--- a/netdissect.h
+++++ b/netdissect.h
++@@ -69,6 +69,11 @@ typedef struct {
++ typedef unsigned char nd_uint8_t;
++ typedef signed char nd_int8_t;
++ 
+++/*
+++ * Use this for MAC addresses.
+++ */
+++#define MAC_ADDR_LEN    6               /* length of MAC addresses */
+++
++ /* snprintf et al */
++ 
++ #include <stdarg.h>
++@@ -309,12 +314,19 @@ struct netdissect_options {
++ 	((uintptr_t)ndo->ndo_snapend - (l) <= (uintptr_t)ndo->ndo_snapend && \
++          (uintptr_t)&(var) <= (uintptr_t)ndo->ndo_snapend - (l)))
++ 
+++#define ND_TTEST_LEN(p, l) \
+++  (IS_NOT_NEGATIVE(l) && \
+++        ((uintptr_t)ndo->ndo_snapend - (l) <= (uintptr_t)ndo->ndo_snapend && \
+++         (uintptr_t)(p) <= (uintptr_t)ndo->ndo_snapend - (l)))
+++
++ /* True if "var" was captured */
++ #define ND_TTEST(var) ND_TTEST2(var, sizeof(var))
++ 
++ /* Bail if "l" bytes of "var" were not captured */
++ #define ND_TCHECK2(var, l) if (!ND_TTEST2(var, l)) goto trunc
++ 
+++#define ND_TCHECK_LEN(p, l) if (!ND_TTEST_LEN(p, l)) goto trunc
+++
++ /* Bail if "var" was not captured */
++ #define ND_TCHECK(var) ND_TCHECK2(var, sizeof(var))
++ 
++diff --git a/print-aoe.c b/print-aoe.c
++index 97e93df2..ac097a04 100644
++--- a/print-aoe.c
+++++ b/print-aoe.c
++@@ -325,6 +325,7 @@ aoev1_reserve_print(netdissect_options *ndo,
++ 		goto invalid;
++ 	/* addresses */
++ 	for (i = 0; i < nmacs; i++) {
+++		ND_TCHECK_LEN(cp, MAC_ADDR_LEN);
++ 		ND_PRINT((ndo, "\n\tEthernet Address %u: %s", i, etheraddr_string(ndo, cp)));
++ 		cp += ETHER_ADDR_LEN;
++ 	}
++-- 
++2.21.0
++
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
+index 038c1617f..9bd861cd4 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
++++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
+@@ -12,6 +12,7 @@ SRC_URI = " \
+     file://avoid-absolute-path-when-searching-for-libdlpi.patch \
+     file://add-ptest.patch \
+     file://run-ptest \
++    file://0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch \
+ "
  
--SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_surround.avi"
-+SRC_URI = "http://themazzone.com/big_buck_bunny_1080p_surround.avi"
- SRC_URI[md5sum] = "223991c8b33564eb77988a4c13c1c76a"
- SRC_URI[sha256sum] = "69fe2cfe7154a6e752688e3a0d7d6b07b1605bbaf75b56f6470dc7b4c20c06ea"
- 
-diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
-index 59ac4788cb..d395b9206b 100644
---- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
-+++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
-@@ -3,7 +3,7 @@ LICENSE = "CC-BY-3.0"
- # http://www.bigbuckbunny.org/index.php/about/
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
- 
--SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi"
-+SRC_URI = "https://archive.org/download/BigBuckBunny/big_buck_bunny_480p_surround-fix.avi"
- SRC_URI[md5sum] = "ed7ed01e9aefba8ddd77c13332cec120"
- SRC_URI[sha256sum] = "40d1cf5bc8e1b0e55dac7bb2e3fbc2aea05b6679444864781299b24db044634f"
- 
-diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
-index 21b8f8f0f8..20d562749d 100644
---- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
-+++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
-@@ -3,7 +3,7 @@ LICENSE = "CC-BY-3.0"
- # http://www.bigbuckbunny.org/index.php/about/
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
- 
--SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_720p_surround.avi"
-+SRC_URI = "https://archive.org/download/BigBuckBunny/big_buck_bunny_720p_surround.avi"
- SRC_URI[md5sum] = "0da8fe124595f5b206d64cb1400bbefc"
- SRC_URI[sha256sum] = "b957d6e6212638441b52d3b620af157cc8d40c2a0342669294854a06edcd528c"
- 
+ SRC_URI[md5sum] = "9bbc1ee33dab61302411b02dd0515576"
 -- 
-2.23.0
+2.21.0
 
 
