@@ -1,49 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id DD9086C106
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id A937F7E993
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 16:04:08 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id x4so2793285qtq.8
+	Fri, 13 Sep 2019 16:20:50 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id v11so34498630qto.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 09:04:10 -0700 (PDT)
+	Fri, 13 Sep 2019 09:20:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=bsKRh9yP5CCQbQ2JxXrilvWGA2NqE64E0L7deE9RUA8=;
-	b=IUCBBTYpjfvj2y3yB8sRg/p4Zc+E+8TM25c5zT/Ah7YZaJRq0C6F32+WVhsPpiucAC
-	PjgBVqUTDFlERAVZ30rEu0dF42r9tJl4kvjsBpfGq3UfMNmR6xtUprFveOS0fqa8j96X
-	Tp9U/TGD2+P+4jNXBkqSCjun0IdRbOGgftHXqlBl041z7akPgWSNzkHFD6SgqROQ6Nfx
-	WGoJ3FVuNLonLxCpA10ds+2sxPOCoFgKscXNURQAKvzb2HpLaeK81pEUKnyQzwUKGsoI
-	KXXUSgmNZfgMNcCt8ErhJmRg+4UgE0FVQkpVt4aWBAiWL5PKmz3E8D2nVN9L1Xdf7k71
-	0G/A==
+	:cc; bh=0eFuOhQ4fnLIKYvCeYQvRIr27syXYNedOq4TjJXB0Dw=;
+	b=lgyR8PcnCBP0mf/oJdMzqY1bzNQEMh6Kln3n/glbrfvjIGOZx/NueDDjzvIk/dr7Te
+	UySGOw0rXjQNOyKk1PjRcRplB/tprHWUOuLqAmdMCUO3CpkgWuXtrjO7V2cpbOvrVBI2
+	7lvjA/ZApewm/CyAPooPjTNEeje9hMy0oNfpLNne+l1OaBnbTY3WOMx5jTvrc+t+uTXE
+	ogxcL6LRjx//lE2Uq6tW7v/zCQh4BUHMhSFsZwQ7phrG48Lt1GFh9RZTyEME9WZyIM13
+	2tp/FIlXX5RGnfB1sP2rr94i8HArrCicnqp2FkUVteNTinD6onugMpNeBjAUSR5k3w5/
+	IkKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=bsKRh9yP5CCQbQ2JxXrilvWGA2NqE64E0L7deE9RUA8=;
-	b=Zf7+6CpquHHWOVKl+qb32oUWjxnVjdTWGnqtKgNepR5fMgPzut/F2rk5bcQ3Zc0ELb
-	EkhPcj0eded0mllfmysttrLohqUr0Xp3u1iqQz9j0i0qdrGcQTNz+LuFmeQITXxKQAU9
-	K2aDzCwLFV5datSvHFF9jG8pHSLDSe2oxYdwZ269WNY+eisFuUNbJg9PRjCxokXtFZXU
-	CzCemN1racLeZq3WBST6uw44wLLmcHEeNpbq9e8jVYaiD93zX0dkIP7ENFHoT2Lg/EUu
-	RqZAtKULUtpRteJoZwR0KCiMAD0M7CJ4h4HYNNvpuFGF2IvPRu+iyoaIjP8aR4pv7lPn
-	Ainw==
-X-Gm-Message-State: APjAAAUU3Nqx871IfmwcRg9Yz3tP392ERMvJqwlErZFqyGDBXdxqvJwB
-	wEThrc47TRPBrOdIyqjlBchjKPDWp/XmyvuKcOQ=
-X-Google-Smtp-Source: APXvYqz2nBeW7cC7MJY6qWYdFKxqZmZ2GschrblPCBTbW8sDSSRU/0kLXDHNKiyuGur3prqHVuB1gplUiUkNjVHAsEQ=
-X-Received: by 2002:ac8:7445:: with SMTP id h5mr3895781qtr.53.1568390649435;
-	Fri, 13 Sep 2019 09:04:09 -0700 (PDT)
+	bh=0eFuOhQ4fnLIKYvCeYQvRIr27syXYNedOq4TjJXB0Dw=;
+	b=cJa6cn955tva4dLfauU+8SRwUdMsgZhHarlouYf5Pi7p6X8LAsYKj2u3/I54Gu4Cpl
+	2FnqELNkTTLxAy2LRuX/I5AKfWb6OurFqMOdUtO7sF4HBEz4rNFFJzjWOFRRVuqnyrTO
+	LVXvvLJh3ioI3x0x6TjEGL8KYeFMbImp5y22ZTTgGePSgUwxd+xWD1LsoEi1TAXQZyqd
+	B7lOksjrPNE8xeGkp/0dV1DsUotcjbmhNj2KR6XmlM3dOlR+69TNhyAMiXHWxaBiW4HO
+	vKQlLpkkX3iFuPfDRIWUxhx8T9d7JmXiqaTCK2Xf7YvvOVk+l+8mILg8T3jrYmovWzyw
+	19Vw==
+X-Gm-Message-State: APjAAAVTmcVIStsnZNe1ijV55MVr2dXr/c4DJGPWbRsZqFibgr1EeaEV
+	Zd5S6COJLrecSpC1wIffoty7ClV1wZ/OmN+C8RvZ871/lmk=
+X-Google-Smtp-Source: APXvYqzBJbjt68eEqC942RCHV67yxtYnzIsbwhafA7VKp5Uy/ODF4utb37GxtL+wES/zgL5xUVAcbDTC4itEgotfWUU=
+X-Received: by 2002:aed:3c52:: with SMTP id u18mr3906529qte.194.1568391651241; 
+	Fri, 13 Sep 2019 09:20:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190913102650.2022-1-Martin.Jansa@gmail.com>
-	<CA+chaQcx9Bu_ePY6kJNAmDaqReY4_rJMQ1Lf0qKb3DjvBBLWbQ@mail.gmail.com>
-	<CAMKF1soXkZ=6YOrgiZCXZeeODJd4x7tdLvioAT1P+5G8CpFqSA@mail.gmail.com>
-	<CA+chaQfjLx59L5TxeiAM4RP4qMwUWYhdT4uySiLyQLN5O-Z3gg@mail.gmail.com>
-In-Reply-To: <CA+chaQfjLx59L5TxeiAM4RP4qMwUWYhdT4uySiLyQLN5O-Z3gg@mail.gmail.com>
+References: <20190912223713.26895-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20190912223713.26895-1-open.source@oleksandr-kravchuk.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Sep 2019 09:03:43 -0700
-Message-ID: <CAMKF1sq8Up_9RxsmnNof8hbSvgMt_-Q8nQW7KO+XoYUW3CKGpg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-clang][PATCH] clang: make sure python3 is used for native builds
+Date: Fri, 13 Sep 2019 09:20:25 -0700
+Message-ID: <CAMKF1sqWfURSkMxAmENpxMqgYLn_gamUGbMnpZ57z3O0GHOE2w@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] pcsc-lite: update to 1.8.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,87 +53,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2019 16:04:09 -0000
+X-List-Received-Date: Fri, 13 Sep 2019 16:20:51 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Sep 13, 2019 at 7:49 AM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> OK, will do, README should be updated as well as it says to send individual patches to ML :).
+I think we need to use systemd distro feature to control libsystemd
+use see https://errors.yoctoproject.org/Errors/Details/270186/
 
-right. Send another patch to update that
-
+On Thu, Sep 12, 2019 at 3:37 PM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
 >
-> On Fri, Sep 13, 2019 at 3:59 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->> On Fri, Sep 13, 2019 at 3:53 AM Martin Jansa <martin.jansa@gmail.com> wrote:
->> >
->> > Please ignore this one.
->> >
->> > Now I've noticed that it was like this before "clang: Let cmake figure out
->> > python version for native" so I'll have to find why it doesn't work for me
->> > instead of reverting your recent changes.
->> >
->>
->> this change is fine, there is another problem especially when doing stage2 build
->> where it does not respect python settings from env so I was hoping
->> that it will help to
->> let it detect python from hosttools which it does but I think this
->> patch makes things better
->> I would certainly think lets keep it. I am also mulling to disable
->> stage2, it will mean that
->> we dont use LTO to build the compiler itself it might become a bit
->> slow to compile programs
->>
->> can you send this as github pull please since CI is triggered on pulls there ?
->>
->> > On Fri, Sep 13, 2019 at 12:26 PM Martin Jansa <martin.jansa@gmail.com>
->> > wrote:
->> >
->> > > * with /usr/bin/python -> python2.7 on the host, I was seeing:
->> > >   CMake Error at
->> > > work-shared/llvm-project-source-9.0.0-r0/git/lldb/cmake/modules/LLDBConfig.cmake:229
->> > > (message):
->> > >     Found incompatible Python interpreter (2.7) and Python libraries (3.7)
->> > >   Call Stack (most recent call first):
->> > >     work-shared/llvm-project-source-9.0.0-r0/git/lldb/CMakeLists.txt:20
->> > > (include)
->> > >
->> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> > > ---
->> > >  recipes-devtools/clang/clang_git.bb | 3 ++-
->> > >  1 file changed, 2 insertions(+), 1 deletion(-)
->> > >
->> > > diff --git a/recipes-devtools/clang/clang_git.bb b/recipes-devtools/clang/
->> > > clang_git.bb
->> > > index 3906ef1..880307f 100644
->> > > --- a/recipes-devtools/clang/clang_git.bb
->> > > +++ b/recipes-devtools/clang/clang_git.bb
->> > > @@ -17,7 +17,7 @@ BUILD_RANLIB_class-nativesdk = "llvm-ranlib"
->> > >  BUILD_NM_class-nativesdk = "llvm-nm"
->> > >  LDFLAGS_append_class-nativesdk = " -fuse-ld=gold"
->> > >
->> > > -inherit cmake cmake-native python3-dir
->> > > +inherit cmake cmake-native python3-dir python3native
->> > >
->> > >  OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
->> > >
->> > > @@ -102,6 +102,7 @@ EXTRA_OECMAKE_append_class-native = "\
->> > >                    -DBOOTSTRAP_LLVM_ENABLE_LLD=ON \
->> > >                    -DLLVM_TARGETS_TO_BUILD='${LLVM_TARGETS_TO_BUILD}' \
->> > >
->> > >  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD='${LLVM_EXPERIMENTAL_TARGETS_TO_BUILD}'
->> > > \
->> > > +                  -DPYTHON_EXECUTABLE='${PYTHON}' \
->> > >  "
->> > >  EXTRA_OECMAKE_append_class-nativesdk = "\
->> > >                    -DCMAKE_CROSSCOMPILING:BOOL=ON \
->> > > --
->> > > 2.17.1
->> > >
->> > >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> License checksum was changed due to removed license info about remove
+> code (see @0984e0f4a03e5e29bb5725b6f149f56c9e9c73c2).
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../pcsc-lite/{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb} | 7 +++----
+>  1 file changed, 3 insertions(+), 4 deletions(-)
+>  rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb} (86%)
+>
+> diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+> similarity index 86%
+> rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
+> rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+> index 10f724e6c..1c764f7eb 100644
+> --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
+> +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+> @@ -8,13 +8,12 @@ LICENSE_${PN}-dev = "BSD"
+>  LICENSE_${PN}-dbg = "BSD & GPLv3+"
+>  LICENSE_${PN}-spy = "GPLv3+"
+>  LICENSE_${PN}-spy-dev = "GPLv3+"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=f38b3d1c7ef7fc2c8b6d20cd38efdc29"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
+>  DEPENDS = "udev"
+>
+>  SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
+> -SRC_URI[md5sum] = "0ec103b1ef298d0c58d6ef6b00b9cf17"
+> -SRC_URI[sha256sum] = "6a358f61ed3b66a7f6e1f4e794a94c7be4c81b7a58ec360c33791e8d7d9bd405"
+> -
+> +SRC_URI[md5sum] = "c20650a36062ab1689f37f3302c988f2"
+> +SRC_URI[sha256sum] = "d76d79edc31cf76e782b9f697420d3defbcc91778c3c650658086a1b748e8792"
+>
+>  inherit autotools systemd pkgconfig
+>
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
