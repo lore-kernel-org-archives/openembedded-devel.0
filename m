@@ -1,46 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
-	[209.85.160.180])
-	by mail.openembedded.org (Postfix) with ESMTP id C39FF7DDA5
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D6C7B7E713
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 13:54:41 +0000 (UTC)
-Received: by mail-qt1-f180.google.com with SMTP id g13so33582776qtj.4
+	Fri, 13 Sep 2019 13:59:30 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id f16so1939886qkl.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 06:54:43 -0700 (PDT)
+	Fri, 13 Sep 2019 06:59:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=68DS8GZXhvzYcBStCimSbx1iMbOzdVOdEGQPwCci+AI=;
-	b=sSfTy/L3NzJcbr6PV6FgYbleCM+Ie+xjlkTuIWV4eLaTYve7kx3z7Rq/1fwHVAxzrD
-	ulalCu3jG/geWY55vYYo3k0j8BoyhaNoop6xfSeXOW8Yq1gDSg7QOGZq7VECYC4zewl/
-	xqR4/x/a7Xoa0w/547bzBgEOiCf7B3LBjgM8/bnZhqRs+Bq8h3OWBipyGH1TtjiyprXY
-	ec81X4DWtLYUOlHnPZyxyz4U2O7n+P3kepBN9JAr40+Tr4N9iGzq+zs2xo9FuOAN7gVj
-	BdqWtP/V1m9/eT42FGWGIEvi+ES0QHNRc+C56tToffZCvE4NwpKzAesalZa1JHHML9GE
-	Bd/g==
+	:cc; bh=P7KxosKBnz7xRwGqVjYwL3DBg6MfsqU9HqZDZaRxZ3o=;
+	b=T6aNQOGqqESDLIgiUDJ6K+0RVgHMRXuRz7QQWSLk0s1qxlrUkd1M63W3LAJ0BtrliH
+	Ft5ug3EfDCO+ObfsuFK6qA3LUyCjsR4dhr2kQjTmXzZVB5NhatWJDKhqxUXBkBgfdjwL
+	rscUtdz5Trt5lfMShJJWMy5CYoJAgoR+37M8n9O6/jwY1YwIirS3W2POd/tqWKFotlqh
+	RCV1EsIF/1wBaYYh4zJA3tz6Roc3tj6XUCfpeEgGtF08onMS4d+RT6jwjt8MqoimSlCm
+	iqSTP4tUhp6W/kbyOcEszzhQ478vdKWiiwi445vzFUFXEK8g7EtHd1Z0yqcl5y2jzFQ1
+	uoXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=68DS8GZXhvzYcBStCimSbx1iMbOzdVOdEGQPwCci+AI=;
-	b=gRi3eIkjm+CjcxyrdQZeoxQn98lcmykX61VXtlTWeq0vAQTnlFQMH6uBX8IByBR3xA
-	tVEy0LZPXGDFlOL6NeCliExoptoBVzQnKuAG+HkCTetDtFslJnfAUKdwN0j+avHCb3hO
-	TMCy4/i+tis1nZfpPdHqDm1ydcrwy1IIotWBvtGlPJvlIZ7LI3J5Us0ssJ1RPrnMVb1c
-	5/4D80p2aYkeELyOMWA9CDFaMK8pS2pJ6eGEKCdvYZrh7Zm7sdBDdCzcKW+eRzD7wrLY
-	hMX+h7jckaRLdqoz3efcsB93acCfk+63K3G54COjiPLwHLYoWe7inuvQBTB0+W8j58X5
-	69rw==
-X-Gm-Message-State: APjAAAXLFUu8g/9Wfy0aOE9n3vcc4BZBS/0+nfhd86I18ATQArHKJt4F
-	aPLtXBH7w7AZXiqEuaDyyiYb9ZJjo5ZHB7dyQl0=
-X-Google-Smtp-Source: APXvYqymZuPjzuTBwKzFq5rcdwkfffhpLQ3VSd97/a2yzzTNUiO2vIhhul5LMQ0xPo+HBPeqqg0orq8pWHSNbaGKTWs=
-X-Received: by 2002:ac8:1103:: with SMTP id c3mr3098492qtj.88.1568382882433;
-	Fri, 13 Sep 2019 06:54:42 -0700 (PDT)
+	bh=P7KxosKBnz7xRwGqVjYwL3DBg6MfsqU9HqZDZaRxZ3o=;
+	b=h+DypLE4TSwvueBojOgUnMKwed+bWHnTtyolpblhryUtf4XTXaul1/XCrtcsxfQHII
+	c5173tjb5/3mfCQpoG+NKLM4gtES8jzD7bQZiYUmQpQ+9SluIIRBLhMWau7FljNyCLPl
+	cm9ncEBGETCEU59cmfczyROTmEeOYwN9qe8QnfOt0cD3a2Rgzp1sa13cuofa/zRpTpez
+	y5kW16nY2zxJjoreRlC/kjDNSVGJWg+Mll3u+BSzCQPweDMYXNXTZKI+v+qVgYMeRnpO
+	1Xdc/tIwAfjphiqDVNij6qkNy6XJmXXwPd2TlaInwgqCnmQuJ/1VyaAzDB1yCPDtq+AM
+	booA==
+X-Gm-Message-State: APjAAAVmxEdvW2yT0rkVV3vZ/fc0Mn7av30zSgw8E2W1KgQVqV4rEgPu
+	2aUzwnV6QxMp46fIpE2VCXZqDpIvSFSM7SFtNPk=
+X-Google-Smtp-Source: APXvYqwzmNXi6ga5QIm8NuDi0tDwjEyTogtRMCtZ6ClzZu7ZFx2qYYuvaz5c57c4Tjaq1uI67z126Us+qfIE6Pei4bA=
+X-Received: by 2002:a37:e40b:: with SMTP id y11mr46160668qkf.9.1568383171570; 
+	Fri, 13 Sep 2019 06:59:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <1568379265-22706-1-git-send-email-trevor.gamblin@windriver.com>
-In-Reply-To: <1568379265-22706-1-git-send-email-trevor.gamblin@windriver.com>
+References: <20190913102650.2022-1-Martin.Jansa@gmail.com>
+	<CA+chaQcx9Bu_ePY6kJNAmDaqReY4_rJMQ1Lf0qKb3DjvBBLWbQ@mail.gmail.com>
+In-Reply-To: <CA+chaQcx9Bu_ePY6kJNAmDaqReY4_rJMQ1Lf0qKb3DjvBBLWbQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Sep 2019 06:54:16 -0700
-Message-ID: <CAMKF1so4CM9VfcCK_1nnSTZM54n0PzD4_vWEkP_az-k3sDD=sg@mail.gmail.com>
-To: Trevor Gamblin <trevor.gamblin@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] openjpeg: upgrade 2.3.0 -> 2.3.1
+Date: Fri, 13 Sep 2019 06:59:05 -0700
+Message-ID: <CAMKF1soXkZ=6YOrgiZCXZeeODJd4x7tdLvioAT1P+5G8CpFqSA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-clang][PATCH] clang: make sure python3 is used for native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,35 +54,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2019 13:54:42 -0000
+X-List-Received-Date: Fri, 13 Sep 2019 13:59:31 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Sep 13, 2019 at 5:54 AM Trevor Gamblin
-<trevor.gamblin@windriver.com> wrote:
+On Fri, Sep 13, 2019 at 3:53 AM Martin Jansa <martin.jansa@gmail.com> wrote:
 >
-> From: Trevor Gamblin <trevor.gamblin@windriver.com>
+> Please ignore this one.
 >
-> Upgrading fixes CVE-2018-21010 and incorporates other bug fixes
-> from upstream.
+> Now I've noticed that it was like this before "clang: Let cmake figure out
+> python version for native" so I'll have to find why it doesn't work for me
+> instead of reverting your recent changes.
 >
-> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->  .../recipes-graphics/openjpeg/{openjpeg_2.3.0.bb => openjpeg_2.3.1.bb}    | 0
->  1 file changed, 0 insertions(+), 0 deletions(-)
->  rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.3.0.bb => openjpeg_2.3.1.bb} (100%)
->
-> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> similarity index 100%
-> rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-> rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
 
-a simple rename does not help since its uses a git based fetcher, I am
-sure it will have to also update SRCREV, otherwise effectively it
-builds 2.3.0 in guise of 2.3.1
+this change is fine, there is another problem especially when doing stage2 build
+where it does not respect python settings from env so I was hoping
+that it will help to
+let it detect python from hosttools which it does but I think this
+patch makes things better
+I would certainly think lets keep it. I am also mulling to disable
+stage2, it will mean that
+we dont use LTO to build the compiler itself it might become a bit
+slow to compile programs
 
-> --
-> 2.7.4
+can you send this as github pull please since CI is triggered on pulls there ?
+
+> On Fri, Sep 13, 2019 at 12:26 PM Martin Jansa <martin.jansa@gmail.com>
+> wrote:
 >
+> > * with /usr/bin/python -> python2.7 on the host, I was seeing:
+> >   CMake Error at
+> > work-shared/llvm-project-source-9.0.0-r0/git/lldb/cmake/modules/LLDBConfig.cmake:229
+> > (message):
+> >     Found incompatible Python interpreter (2.7) and Python libraries (3.7)
+> >   Call Stack (most recent call first):
+> >     work-shared/llvm-project-source-9.0.0-r0/git/lldb/CMakeLists.txt:20
+> > (include)
+> >
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  recipes-devtools/clang/clang_git.bb | 3 ++-
+> >  1 file changed, 2 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/recipes-devtools/clang/clang_git.bb b/recipes-devtools/clang/
+> > clang_git.bb
+> > index 3906ef1..880307f 100644
+> > --- a/recipes-devtools/clang/clang_git.bb
+> > +++ b/recipes-devtools/clang/clang_git.bb
+> > @@ -17,7 +17,7 @@ BUILD_RANLIB_class-nativesdk = "llvm-ranlib"
+> >  BUILD_NM_class-nativesdk = "llvm-nm"
+> >  LDFLAGS_append_class-nativesdk = " -fuse-ld=gold"
+> >
+> > -inherit cmake cmake-native python3-dir
+> > +inherit cmake cmake-native python3-dir python3native
+> >
+> >  OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
+> >
+> > @@ -102,6 +102,7 @@ EXTRA_OECMAKE_append_class-native = "\
+> >                    -DBOOTSTRAP_LLVM_ENABLE_LLD=ON \
+> >                    -DLLVM_TARGETS_TO_BUILD='${LLVM_TARGETS_TO_BUILD}' \
+> >
+> >  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD='${LLVM_EXPERIMENTAL_TARGETS_TO_BUILD}'
+> > \
+> > +                  -DPYTHON_EXECUTABLE='${PYTHON}' \
+> >  "
+> >  EXTRA_OECMAKE_append_class-nativesdk = "\
+> >                    -DCMAKE_CROSSCOMPILING:BOOL=ON \
+> > --
+> > 2.17.1
+> >
+> >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
