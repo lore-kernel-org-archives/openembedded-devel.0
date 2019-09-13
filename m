@@ -1,27 +1,51 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 187C77E862
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com
+	[209.85.214.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 5C7037ECBE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 20:30:46 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8DKURwI008425
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 13 Sep 2019 21:24:09 +0000 (UTC)
+Received: by mail-pl1-f181.google.com with SMTP id x3so13767944plr.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 13:30:38 -0700
-Received: from [128.224.56.214] (128.224.56.214) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Fri, 13 Sep 2019 13:30:17 -0700
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <1568406492-14968-1-git-send-email-trevor.gamblin@windriver.com>
-Message-ID: <27ad3481-48af-ab60-eb30-af3caedcabd1@windriver.com>
-Date: Fri, 13 Sep 2019 16:30:16 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Fri, 13 Sep 2019 14:24:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=q9Li6zgzR1iAiAmDNFXfP4K4CdZjmPYAtdYCG1SkV6s=;
+	b=DCYUCfG0hU4FPlofFHeGt1aiBjoHuwud0fAmCKZS579HkY56vNbWgAdc7NVD6bYN5q
+	seVkWNqT8tBN7JVQza0HJhrB+ylLzsjClwsvt97y0GNyidaAA3yJcO1XL2qjLhZNySI7
+	f2su95Rh/RlS0T46aYGDQbrFJoZri1cqTOAXuuS92piN2gIkADh+D1T+DdoNmV5/h2OI
+	ewfYcc85XVLoDrjrFcUI7nvA3myYhQDaCuZi6X7CDeUSwiU8cVbxWI4m5gKlvNmjj6cU
+	JS2T8KP6gZKVn4J46Iq1vun5hFb1MHs1EQo1qDkgq/615EnAnBa0ZtbtgZ1usJ+CGXN/
+	Dw6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=q9Li6zgzR1iAiAmDNFXfP4K4CdZjmPYAtdYCG1SkV6s=;
+	b=hEgPDuSwicgqggIPgmnXgonlbP0G/m+KO/PM8R+pMHue33LfLtdyv7hBJm66Kny4nT
+	3SsUaawgahTQQdWPErx69tKnFyB50WywoTPnOaAwSwP6DRr1ERwBEk74QY3zHclWvx4f
+	Tv0VRCptTulWjNhGSOyRihjoC0614cUhLhZ1zR0wSnc8lmaQ8rus5Koq0CGPByro7UFv
+	+F1XyVi0QE+JOWQuQ8dvvRfXUmeTkh61IugpCgK13d6c20n7iGURXNHGjemfJVk/cCYm
+	/cyFI132wTbu/YGHpBRSiwK7tK4WajV35AT4r98QWYNBF/ZO7EXyjEW6rj/erU4pl6rO
+	I5+Q==
+X-Gm-Message-State: APjAAAVW9gLZzqvy+pFBNTR/PiMmPsf1dWddSteYVbFE6hTXe4CQDh/x
+	AjqXt5MQKekLVE4rcQ/G+Hby+oSzCTs=
+X-Google-Smtp-Source: APXvYqw8NQB/ZWWFn6S6cIcDui7FcjIMPTifjOhJvW1DSbMNVlg9SiwmapMXqHWNW/UmSIr71i7DaA==
+X-Received: by 2002:a17:902:8ecc:: with SMTP id
+	x12mr52032685plo.258.1568409849613; 
+	Fri, 13 Sep 2019 14:24:09 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	f12sm25257479pgo.85.2019.09.13.14.24.08
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 13 Sep 2019 14:24:08 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Sep 2019 14:23:46 -0700
+Message-Id: <20190913212346.2393764-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <1568406492-14968-1-git-send-email-trevor.gamblin@windriver.com>
-Subject: Re: [meta-oe][PATCH v3] openjpeg: upgrade 2.3.0 -> 2.3.1
+Subject: [meta-multimedia][PATCH] bigbuckbunny: Use faster download mirrors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,103 +58,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2019 20:30:47 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Fri, 13 Sep 2019 21:24:09 -0000
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
-On 9/13/19 4:28 PM, Trevor Gamblin wrote:
+Original URIs are very slow and these files are quite large where it can
+mean hours of download
 
-> From: Trevor Gamblin <trevor.gamblin@windriver.com>
->
-> Upgrading fixes CVE-2018-21010 and incorporates other bug fixes
-> from upstream.
->
-> The source upgrade to 2.3.1 changed the way include directories are
-> identified, so the patch 0001-Ensure-cmake-files-are-installed-at-common-location.patch
-> is no longer needed to help poppler find cmake files.
->
-> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->   ...ke-files-are-installed-at-common-location.patch | 48 ----------------------
->   .../{openjpeg_2.3.0.bb => openjpeg_2.3.1.bb}       |  3 +-
->   2 files changed, 1 insertion(+), 50 deletions(-)
->   delete mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cmake-files-are-installed-at-common-location.patch
->   rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.3.0.bb => openjpeg_2.3.1.bb} (79%)
->
-> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cmake-files-are-installed-at-common-location.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cmake-files-are-installed-at-common-location.patch
-> deleted file mode 100644
-> index 5c5fe64..0000000
-> --- a/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cmake-files-are-installed-at-common-location.patch
-> +++ /dev/null
-> @@ -1,48 +0,0 @@
-> -From fe491c0919f5adc8d626cb98c5ec19d0b99dfe20 Mon Sep 17 00:00:00 2001
-> -From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-> -Date: Thu, 27 Sep 2018 23:45:04 +0200
-> -Subject: [PATCH] Ensure cmake files are installed at common location
-> -MIME-Version: 1.0
-> -Content-Type: text/plain; charset=UTF-8
-> -Content-Transfer-Encoding: 8bit
-> -
-> -* Otherwise recent poppler is not able to find them
-> -* Include path needs adjustment with this change
-> -
-> -Upstream-Status: Inappropriate [Configuration]
-> -
-> -Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-> ----
-> - CMakeLists.txt                | 2 +-
-> - cmake/OpenJPEGConfig.cmake.in | 2 +-
-> - 2 files changed, 2 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/CMakeLists.txt b/CMakeLists.txt
-> -index ff70a06f..23d2fac4 100644
-> ---- a/CMakeLists.txt
-> -+++ b/CMakeLists.txt
-> -@@ -150,7 +150,7 @@ if(NOT OPENJPEG_INSTALL_PACKAGE_DIR)
-> -   # We could install *.cmake files in share/ however those files contains
-> -   # hardcoded path to libraries on a multi-arch system (fedora/debian) those
-> -   # path will be different (lib/i386-linux-gnu vs lib/x86_64-linux-gnu)
-> --  set(OPENJPEG_INSTALL_PACKAGE_DIR "${OPENJPEG_INSTALL_LIB_DIR}/${OPENJPEG_INSTALL_SUBDIR}")
-> -+  set(OPENJPEG_INSTALL_PACKAGE_DIR "${OPENJPEG_INSTALL_LIB_DIR}/cmake/${OPENJPEG_INSTALL_SUBDIR}")
-> - endif()
-> -
-> - if (APPLE)
-> -diff --git a/cmake/OpenJPEGConfig.cmake.in b/cmake/OpenJPEGConfig.cmake.in
-> -index b20294ca..6a2f4baf 100644
-> ---- a/cmake/OpenJPEGConfig.cmake.in
-> -+++ b/cmake/OpenJPEGConfig.cmake.in
-> -@@ -26,7 +26,7 @@ get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-> - if(EXISTS ${SELF_DIR}/OpenJPEGTargets.cmake)
-> -   # This is an install tree
-> -   include(${SELF_DIR}/OpenJPEGTargets.cmake)
-> --  get_filename_component(OPENJPEG_INCLUDE_ROOT "${SELF_DIR}/../../@OPENJPEG_INSTALL_INCLUDE_DIR@" ABSOLUTE)
-> -+  get_filename_component(OPENJPEG_INCLUDE_ROOT "${SELF_DIR}/../../../@OPENJPEG_INSTALL_INCLUDE_DIR@" ABSOLUTE)
-> -   set(OPENJPEG_INCLUDE_DIRS ${OPENJPEG_INCLUDE_ROOT})
-> -
-> - else()
-> ---
-> -2.14.4
-> -
-> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> similarity index 79%
-> rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-> rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> index d30ff48..7c92ebc 100644
-> --- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-> +++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> @@ -7,10 +7,9 @@ DEPENDS = "libpng tiff lcms zlib"
->   
->   SRC_URI = " \
->       git://github.com/uclouvain/openjpeg.git \
-> -    file://0001-Ensure-cmake-files-are-installed-at-common-location.patch \
->       file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
->   "
-> -SRCREV = "081de4b15f54cb4482035b7bf5e3fb443e4bc84b"
-> +SRCREV = "57096325457f96d8cd07bd3af04fe81d7a2ba788"
->   S = "${WORKDIR}/git"
->   
->   inherit cmake
-Misunderstood the purpose of the cmake includes patch in the last 
-version. Should build now (poppler build works for me).
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-multimedia/sample-content/bigbuckbunny-1080p.bb     | 2 +-
+ .../recipes-multimedia/sample-content/bigbuckbunny-480p.bb      | 2 +-
+ .../recipes-multimedia/sample-content/bigbuckbunny-720p.bb      | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
+index a80fc10ace..cee386c2a8 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
+@@ -3,7 +3,7 @@ LICENSE = "CC-BY-3.0"
+ # http://www.bigbuckbunny.org/index.php/about/
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
+ 
+-SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_1080p_surround.avi"
++SRC_URI = "http://themazzone.com/big_buck_bunny_1080p_surround.avi"
+ SRC_URI[md5sum] = "223991c8b33564eb77988a4c13c1c76a"
+ SRC_URI[sha256sum] = "69fe2cfe7154a6e752688e3a0d7d6b07b1605bbaf75b56f6470dc7b4c20c06ea"
+ 
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
+index 59ac4788cb..d395b9206b 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
+@@ -3,7 +3,7 @@ LICENSE = "CC-BY-3.0"
+ # http://www.bigbuckbunny.org/index.php/about/
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
+ 
+-SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi"
++SRC_URI = "https://archive.org/download/BigBuckBunny/big_buck_bunny_480p_surround-fix.avi"
+ SRC_URI[md5sum] = "ed7ed01e9aefba8ddd77c13332cec120"
+ SRC_URI[sha256sum] = "40d1cf5bc8e1b0e55dac7bb2e3fbc2aea05b6679444864781299b24db044634f"
+ 
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
+index 21b8f8f0f8..20d562749d 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
+@@ -3,7 +3,7 @@ LICENSE = "CC-BY-3.0"
+ # http://www.bigbuckbunny.org/index.php/about/
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
+ 
+-SRC_URI = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_720p_surround.avi"
++SRC_URI = "https://archive.org/download/BigBuckBunny/big_buck_bunny_720p_surround.avi"
+ SRC_URI[md5sum] = "0da8fe124595f5b206d64cb1400bbefc"
+ SRC_URI[sha256sum] = "b957d6e6212638441b52d3b620af157cc8d40c2a0342669294854a06edcd528c"
+ 
+-- 
+2.23.0
+
 
