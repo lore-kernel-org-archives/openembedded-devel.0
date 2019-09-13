@@ -1,47 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D6C7B7E713
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2576B7E713
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 13:59:30 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id f16so1939886qkl.9
+	Fri, 13 Sep 2019 14:05:41 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id g207so2925767wmg.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 06:59:32 -0700 (PDT)
+	Fri, 13 Sep 2019 07:05:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=P7KxosKBnz7xRwGqVjYwL3DBg6MfsqU9HqZDZaRxZ3o=;
-	b=T6aNQOGqqESDLIgiUDJ6K+0RVgHMRXuRz7QQWSLk0s1qxlrUkd1M63W3LAJ0BtrliH
-	Ft5ug3EfDCO+ObfsuFK6qA3LUyCjsR4dhr2kQjTmXzZVB5NhatWJDKhqxUXBkBgfdjwL
-	rscUtdz5Trt5lfMShJJWMy5CYoJAgoR+37M8n9O6/jwY1YwIirS3W2POd/tqWKFotlqh
-	RCV1EsIF/1wBaYYh4zJA3tz6Roc3tj6XUCfpeEgGtF08onMS4d+RT6jwjt8MqoimSlCm
-	iqSTP4tUhp6W/kbyOcEszzhQ478vdKWiiwi445vzFUFXEK8g7EtHd1Z0yqcl5y2jzFQ1
-	uoXg==
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=KyIzz+qmdYcQ0ItM4DhrOodMX3Dhmgw6YeCVpJ+XLks=;
+	b=aun9BI0x/gqZ5U7iHtG+5hTt8O9X9NNecjvRJuo3cpUmtmmyvIj6iXArhy5n3NmlKV
+	gzt/tz4hwbMclRn2zUqbD9XdS16RvkorGoAMSx2UTTHOxQbmrjUFdRpCXeJQZ6cvfbQb
+	8WeoTQfx4HX6cglIJm3PagMsVBc8qoar6uF4e+JvZNwanyTU9GYB5hwaDdoOI+qwcnVZ
+	v/ORajcOfyfvs9DmO1ZvWkEYTmq0Jg3YH1EkhJYNNEtarTUtCUV5EiAb8+gt6MUd04DJ
+	Fm02j0iWFttU01Mcr3dDOP1ztTdzeNg6ts4N+S6cjl/gPJznjaX3bRadzkqpcVVJ+WA1
+	e59w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=P7KxosKBnz7xRwGqVjYwL3DBg6MfsqU9HqZDZaRxZ3o=;
-	b=h+DypLE4TSwvueBojOgUnMKwed+bWHnTtyolpblhryUtf4XTXaul1/XCrtcsxfQHII
-	c5173tjb5/3mfCQpoG+NKLM4gtES8jzD7bQZiYUmQpQ+9SluIIRBLhMWau7FljNyCLPl
-	cm9ncEBGETCEU59cmfczyROTmEeOYwN9qe8QnfOt0cD3a2Rgzp1sa13cuofa/zRpTpez
-	y5kW16nY2zxJjoreRlC/kjDNSVGJWg+Mll3u+BSzCQPweDMYXNXTZKI+v+qVgYMeRnpO
-	1Xdc/tIwAfjphiqDVNij6qkNy6XJmXXwPd2TlaInwgqCnmQuJ/1VyaAzDB1yCPDtq+AM
-	booA==
-X-Gm-Message-State: APjAAAVmxEdvW2yT0rkVV3vZ/fc0Mn7av30zSgw8E2W1KgQVqV4rEgPu
-	2aUzwnV6QxMp46fIpE2VCXZqDpIvSFSM7SFtNPk=
-X-Google-Smtp-Source: APXvYqwzmNXi6ga5QIm8NuDi0tDwjEyTogtRMCtZ6ClzZu7ZFx2qYYuvaz5c57c4Tjaq1uI67z126Us+qfIE6Pei4bA=
-X-Received: by 2002:a37:e40b:: with SMTP id y11mr46160668qkf.9.1568383171570; 
-	Fri, 13 Sep 2019 06:59:31 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190913102650.2022-1-Martin.Jansa@gmail.com>
-	<CA+chaQcx9Bu_ePY6kJNAmDaqReY4_rJMQ1Lf0qKb3DjvBBLWbQ@mail.gmail.com>
-In-Reply-To: <CA+chaQcx9Bu_ePY6kJNAmDaqReY4_rJMQ1Lf0qKb3DjvBBLWbQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Sep 2019 06:59:05 -0700
-Message-ID: <CAMKF1soXkZ=6YOrgiZCXZeeODJd4x7tdLvioAT1P+5G8CpFqSA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-clang][PATCH] clang: make sure python3 is used for native builds
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=KyIzz+qmdYcQ0ItM4DhrOodMX3Dhmgw6YeCVpJ+XLks=;
+	b=Jb5T6NVbo83zU0d71P93TIp+L8QzfEsLtc0EIFp0sERYi+sba4qaw062WkaSGCmLFw
+	JYPui/rdRpSaH0z2Gzml5dcYX2pW9Rgtn2rHUb3PfM1niPAr2qi21DJZgdtCgxrSMPx9
+	crrV/x5YT1E3+I301z/5nlgRADy9yKoRxFFMenw0bMAT1ZP5FrA5YCrSp9hsbgQoPG7R
+	kfNCDIEYx/bWCis88/ZGJxdLzWtjiCj/YF02+E7d7/bUhw9QoeYrQQtSBxaLx8C/Z3Pw
+	4g4EGm8d9m/HOQxBrbCGaJ75Yq73DdOnb7PmywUcf4UzW5gdaHy8UFs2IhqZPp8pZvDF
+	UiJg==
+X-Gm-Message-State: APjAAAV4mXED8KyAYI9oXGyLCd0itgq2IidY/cZcqLqBA4R3RksqlByx
+	RSCBlcpyur9Xyo0r+rCECzDOxaCTlMg=
+X-Google-Smtp-Source: APXvYqwPpxGJK9Uk7pu2Sg1HXEp47Aknp0TZL75mdhg5/YC6nx70h6Y7g0aNGdtNBNvW+E+ezcl79w==
+X-Received: by 2002:a7b:c306:: with SMTP id k6mr3015976wmj.127.1568383541649; 
+	Fri, 13 Sep 2019 07:05:41 -0700 (PDT)
+Received: from beaker.muppets.liwing.de (p5B25B936.dip0.t-ipconnect.de.
+	[91.37.185.54]) by smtp.gmail.com with ESMTPSA id
+	q192sm2935493wme.23.2019.09.13.07.05.40
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 13 Sep 2019 07:05:40 -0700 (PDT)
+Sender: Jens Rehsack <rehsack@gmail.com>
+From: Jens Rehsack <sno@netbsd.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Sep 2019 16:05:33 +0200
+Message-Id: <20190913140533.7328-1-sno@netbsd.org>
+X-Mailer: git-send-email 2.17.1
+Cc: Jens Rehsack <sno@netbsd.org>
+Subject: [meta-oe][PATCH] libstatgrab: add recipe for libstatgrab-0.92
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,78 +56,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Sep 2019 13:59:31 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 13 Sep 2019 14:05:42 -0000
 
-On Fri, Sep 13, 2019 at 3:53 AM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> Please ignore this one.
->
-> Now I've noticed that it was like this before "clang: Let cmake figure out
-> python version for native" so I'll have to find why it doesn't work for me
-> instead of reverting your recent changes.
->
+With the recent update at begin of summer, which includes the fix
+for nxp bsp issues, it's time to bring libstatgrab to more people
+than the few who use it in datacenter monitoring.
 
-this change is fine, there is another problem especially when doing stage2 build
-where it does not respect python settings from env so I was hoping
-that it will help to
-let it detect python from hosttools which it does but I think this
-patch makes things better
-I would certainly think lets keep it. I am also mulling to disable
-stage2, it will mean that
-we dont use LTO to build the compiler itself it might become a bit
-slow to compile programs
+Language bindings will follow once base library is settled.
 
-can you send this as github pull please since CI is triggered on pulls there ?
+Signed-off-by: Jens Rehsack <sno@netbsd.org>
+---
+ .../libstatgrab/libstatgrab_0.92.bb           | 26 +++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
 
-> On Fri, Sep 13, 2019 at 12:26 PM Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->
-> > * with /usr/bin/python -> python2.7 on the host, I was seeing:
-> >   CMake Error at
-> > work-shared/llvm-project-source-9.0.0-r0/git/lldb/cmake/modules/LLDBConfig.cmake:229
-> > (message):
-> >     Found incompatible Python interpreter (2.7) and Python libraries (3.7)
-> >   Call Stack (most recent call first):
-> >     work-shared/llvm-project-source-9.0.0-r0/git/lldb/CMakeLists.txt:20
-> > (include)
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  recipes-devtools/clang/clang_git.bb | 3 ++-
-> >  1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/recipes-devtools/clang/clang_git.bb b/recipes-devtools/clang/
-> > clang_git.bb
-> > index 3906ef1..880307f 100644
-> > --- a/recipes-devtools/clang/clang_git.bb
-> > +++ b/recipes-devtools/clang/clang_git.bb
-> > @@ -17,7 +17,7 @@ BUILD_RANLIB_class-nativesdk = "llvm-ranlib"
-> >  BUILD_NM_class-nativesdk = "llvm-nm"
-> >  LDFLAGS_append_class-nativesdk = " -fuse-ld=gold"
-> >
-> > -inherit cmake cmake-native python3-dir
-> > +inherit cmake cmake-native python3-dir python3native
-> >
-> >  OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
-> >
-> > @@ -102,6 +102,7 @@ EXTRA_OECMAKE_append_class-native = "\
-> >                    -DBOOTSTRAP_LLVM_ENABLE_LLD=ON \
-> >                    -DLLVM_TARGETS_TO_BUILD='${LLVM_TARGETS_TO_BUILD}' \
-> >
-> >  -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD='${LLVM_EXPERIMENTAL_TARGETS_TO_BUILD}'
-> > \
-> > +                  -DPYTHON_EXECUTABLE='${PYTHON}' \
-> >  "
-> >  EXTRA_OECMAKE_append_class-nativesdk = "\
-> >                    -DCMAKE_CROSSCOMPILING:BOOL=ON \
-> > --
-> > 2.17.1
-> >
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
+new file mode 100644
+index 000000000..ab08d8bb2
+--- /dev/null
++++ b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION = "Utilities to collect and visualise system statistics"
++HOMEPAGE = "http://www.i-scream.org/libstatgrab/"
++
++LICENSE = "GPL-2.0+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++DEPENDS = "ncurses"
++
++PACKAGES_prepend = "statgrab statgrab-dbg saidar saidar-dbg ${PN}-mrtg "
++
++SRCREV = "fa7e1d9fe76c3a1a7ade264c746b3f5edc566f3b"
++SRC_URI = "git://github.com/libstatgrab/libstatgrab.git \
++          "
++# Perl5 is for tests only
++EXTRA_OECONF = "--without-perl5 --with-mnttab=/proc/mounts"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++FILES_statgrab = "${bindir}/statgrab"
++FILES_statgrab-dbg = "${bindir}/.debug/statgrab"
++FILES_saidar = "${bindir}/saidar"
++FILES_saidar-dbg = "${bindir}/.debug/saidar"
++FILES_${PN}-mrtg = "${bindir}/statgrab-make-mrtg-config ${bindir}/statgrab-make-mrtg-index"
++RDEPENDS_${PN}-mrtg_append = "perl statgrab"
+-- 
+2.17.1
+
 
