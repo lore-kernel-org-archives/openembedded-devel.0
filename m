@@ -1,48 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com
-	[209.85.160.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F2D57ED03
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
+	[209.85.160.174])
+	by mail.openembedded.org (Postfix) with ESMTP id A115B7ED03
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Sep 2019 02:10:55 +0000 (UTC)
-Received: by mail-qt1-f177.google.com with SMTP id o12so36313557qtf.3
+	Sat, 14 Sep 2019 02:14:15 +0000 (UTC)
+Received: by mail-qt1-f174.google.com with SMTP id u40so36243346qth.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 19:10:56 -0700 (PDT)
+	Fri, 13 Sep 2019 19:14:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Y9z9D4JifoPGFjB54fVcPbrA7lfx1+uXT58lH5f3yno=;
-	b=U28pu+HAn0B1sl3so2w4edgTCNRa/aj3yin+gS1GNYnBaS2ygT96PIWUimflSj+8t3
-	gYsN8rHIzpiYt2S1I24NHfMHYYRxh/7GbLZTBjfXDLvr9YIhygnEYXi3aYN6ziCXXj6a
-	gna7ng7vyKr5F5Wjn9zULN91BpjhI7AMXjZ0bwKBTFtNFB6qtZlGWyt0yYAMJG4Co8GT
-	Cwg/4z4QEd1kSPoNTH6Y4fycpUMzcuINyyzyU1yUQPC3G0tziuJKnwPbSKwaTfb2zRv5
-	+ll5oJ9ci891BFH2WFAFt3/XR0VxnWu0Himr1jo8zUreffisvQj0faNPR9PqaktvUUeO
-	na+g==
+	:cc; bh=OUW4osNO5V5Fq93BNPP/kb+mtaDYwyt5OuqVVcfGMrc=;
+	b=Zj8uANKlF1uA51rHOG9EVBhTKDwPp4/4K4wfV1a3S9+9nFeuXjkUw92wb+M/5iTQ+n
+	3PB436A+fcZ0h+ljMHJ5n4HbW4CFrJ7Lqnicfi9QOq2JRE+5Sruckx2uU9IjfAqePrfV
+	KE9QQNrMZyZkRccrf1GOj8lXL/IVLCaP38LGn50BqXL9hMQZpWvIWaDD8A9rDvhtbxq2
+	a0Id1khB7p5Y+xVbDEyMYA21F+ht+HGsHbKoYneBmcFHahL1sxRVExkxmxsSIWCuBA9J
+	8hr1+ZgJ+vfurIt82N5dHDDvO89hbp2fGapYwtU54KtYykqGGpDu4MuzAggqqvEmp4CR
+	4nJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Y9z9D4JifoPGFjB54fVcPbrA7lfx1+uXT58lH5f3yno=;
-	b=neiQ0/3Czh9AVMSNMN/hYo/hsf3i0CfOY+kRdd6f/MyUUTB37SqmgsY/ImcMERIinG
-	xmgyRaOn87KjLS0213wPI4V5iBvnZ9MEBC5t0t0jJKthtUHfM4cEx/hop+AHJlLY7SP3
-	ZAvfkXxcvk5M8KE8lWGfaFOeN+/xW5x2ZsikIlw7Q1ipg2hk4AC7iOXOBthWliGoj47Q
-	wFwfiubvE6cCAnpbF39mAsbRUzrEkt05Z2s3rvR0CIH9oL/vWlKrdsNySTEc/NxFLP8n
-	tSftP9q9tDals7wRHRwBOLlvCVdLESpcbdCrJx3Zb1jr9x71siRZfgZnMvXtNzf4evt0
-	qihg==
-X-Gm-Message-State: APjAAAUDmt4VEoCum0ubIHgAHPh0wxw/W9K9jlfNvwRUnEN+iVZLnvVZ
-	hF7PN3WQ/h4lZNrc2kEKW+xv2GrRiHCgxlnJx4i88tznL7U=
-X-Google-Smtp-Source: APXvYqyM5nxHa3pBb1BkojwASCSCgQy8CyXn4nn8fkvI37MvTnkj5HZrH2cjXSNix52r19YN2+6gmNJtgDENPmrMYj4=
-X-Received: by 2002:ac8:460d:: with SMTP id p13mr6630726qtn.378.1568427055864; 
-	Fri, 13 Sep 2019 19:10:55 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=OUW4osNO5V5Fq93BNPP/kb+mtaDYwyt5OuqVVcfGMrc=;
+	b=Pbsw5It56HBG0i3VXeAXph5QU3IYnIQt9BYu1oEtu7IqcKj+H/d26Vw53odV8Ev2m3
+	xMhS/rCjLCspHlnNRqAwxjbTFyLaWS/8oRkKvFvABvzRJTtzks4sUM/Afov+87Oby4qE
+	FXfWeaTbwp8NRKHvrHlYXWyxfJ1Ox4o0jWLgen8UyVQRIfRcvPiTzenrN9KtCmjFwsP5
+	WIl5h9V6SIhf/dkNO/B1MJwHWag4sRbHkaRHE7sun/sCu+nj6BoBQsdVedv52K99rFue
+	pt4+Lv0XwBiJ01rVqFw7zEawr04SbO1SOAwtSELj5SdOytmi0iMxOZOW6gCBNIBFNvaE
+	UROw==
+X-Gm-Message-State: APjAAAWh2TJfl1keNO4NeHAKh+WKsmCv4BAgNDj8r13wQ1qnKa7pzMoo
+	/0Z7jCngz+om7Q+g1hyR9G2BKUgdu+IjzlRQ3lpcJk3x4Gs=
+X-Google-Smtp-Source: APXvYqwa9XIK/4hfPbLKCSfvh6k+dxx9Ql74wBlPWxbmWXQ8DAhfKnW/ryJfh1Cu8pOEQZofLMbJyUZwq1oZ5lXZRvA=
+X-Received: by 2002:ac8:1103:: with SMTP id c3mr6460678qtj.88.1568427256292;
+	Fri, 13 Sep 2019 19:14:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <1568406492-14968-1-git-send-email-trevor.gamblin@windriver.com>
-	<27ad3481-48af-ab60-eb30-af3caedcabd1@windriver.com>
-In-Reply-To: <27ad3481-48af-ab60-eb30-af3caedcabd1@windriver.com>
+References: <20190913192745.1825-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20190913192745.1825-1-open.source@oleksandr-kravchuk.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Sep 2019 19:10:30 -0700
-Message-ID: <CAMKF1so=PtOSQ2H1mtZRFaMda5H5sbcC4YVwZgDZR9-bPtLpQw@mail.gmail.com>
-To: Trevor Gamblin <trevor.gamblin@windriver.com>
+Date: Fri, 13 Sep 2019 19:13:50 -0700
+Message-ID: <CAMKF1sodyWcm24H5fosyPC7scGK-+uabJqcvhuhhJa2zWdUheA@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] openjpeg: upgrade 2.3.0 -> 2.3.1
+Subject: Re: [PATCH v2][meta-oe] avro-c: update to 1.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,143 +53,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Sep 2019 02:10:55 -0000
+X-List-Received-Date: Sat, 14 Sep 2019 02:14:15 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-ends up with packaging errors on qemumips
+Fails with musl still
 
-01:26:05 ERROR: openjpeg-2.3.1-r0 do_package: QA Issue: openjpeg:
-Files/directories were installed but not shipped in any package:
-01:26:05   /usr/lib/openjpeg-2.3
-01:26:05   /usr/lib/openjpeg-2.3/OpenJPEGConfig.cmake
-01:26:05   /usr/lib/openjpeg-2.3/OpenJPEGTargets.cmake
-01:26:05   /usr/lib/openjpeg-2.3/OpenJPEGTargets-noconfig.cmake
-01:26:05 Please set FILES such that these items are packaged.
-Alternatively if they are unneeded, avoid installing them or delete
-them within do_install.
-01:26:05 openjpeg: 4 installed and not shipped files. [installed-vs-shipped=
-]
+lang/c/src/avro_generic_internal.h:63:39: error: 'ssize_t' undeclared
+(first use in this function); did you mean 'size_t'?
+01:28:42 |    63 |     ((gcls)->instance_size == NULL ? (ssize_t)-1 :
+(ssize_t)(gcls)->instance_size(&(gcls)->parent))
 
+I think it needs to pass -D_GNU_SOURCE via compiler cmdline
 
-On Fri, Sep 13, 2019 at 1:30 PM Trevor Gamblin
-<trevor.gamblin@windriver.com> wrote:
+On Fri, Sep 13, 2019 at 12:28 PM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
 >
-> On 9/13/19 4:28 PM, Trevor Gamblin wrote:
+> Removed patch was upstreamed.
 >
-> > From: Trevor Gamblin <trevor.gamblin@windriver.com>
-> >
-> > Upgrading fixes CVE-2018-21010 and incorporates other bug fixes
-> > from upstream.
-> >
-> > The source upgrade to 2.3.1 changed the way include directories are
-> > identified, so the patch 0001-Ensure-cmake-files-are-installed-at-commo=
-n-location.patch
-> > is no longer needed to help poppler find cmake files.
-> >
-> > Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> > ---
-> >   ...ke-files-are-installed-at-common-location.patch | 48 -------------=
----------
-> >   .../{openjpeg_2.3.0.bb =3D> openjpeg_2.3.1.bb}       |  3 +-
-> >   2 files changed, 1 insertion(+), 50 deletions(-)
-> >   delete mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/0001-En=
-sure-cmake-files-are-installed-at-common-location.patch
-> >   rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.3.0.bb =3D> open=
-jpeg_2.3.1.bb} (79%)
-> >
-> > diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cma=
-ke-files-are-installed-at-common-location.patch b/meta-oe/recipes-graphics/=
-openjpeg/openjpeg/0001-Ensure-cmake-files-are-installed-at-common-location.=
-patch
-> > deleted file mode 100644
-> > index 5c5fe64..0000000
-> > --- a/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cmake-file=
-s-are-installed-at-common-location.patch
-> > +++ /dev/null
-> > @@ -1,48 +0,0 @@
-> > -From fe491c0919f5adc8d626cb98c5ec19d0b99dfe20 Mon Sep 17 00:00:00 2001
-> > -From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail=
-.com>
-> > -Date: Thu, 27 Sep 2018 23:45:04 +0200
-> > -Subject: [PATCH] Ensure cmake files are installed at common location
-> > -MIME-Version: 1.0
-> > -Content-Type: text/plain; charset=3DUTF-8
-> > -Content-Transfer-Encoding: 8bit
-> > -
-> > -* Otherwise recent poppler is not able to find them
-> > -* Include path needs adjustment with this change
-> > -
-> > -Upstream-Status: Inappropriate [Configuration]
-> > -
-> > -Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > ----
-> > - CMakeLists.txt                | 2 +-
-> > - cmake/OpenJPEGConfig.cmake.in | 2 +-
-> > - 2 files changed, 2 insertions(+), 2 deletions(-)
-> > -
-> > -diff --git a/CMakeLists.txt b/CMakeLists.txt
-> > -index ff70a06f..23d2fac4 100644
-> > ---- a/CMakeLists.txt
-> > -+++ b/CMakeLists.txt
-> > -@@ -150,7 +150,7 @@ if(NOT OPENJPEG_INSTALL_PACKAGE_DIR)
-> > -   # We could install *.cmake files in share/ however those files cont=
-ains
-> > -   # hardcoded path to libraries on a multi-arch system (fedora/debian=
-) those
-> > -   # path will be different (lib/i386-linux-gnu vs lib/x86_64-linux-gn=
-u)
-> > --  set(OPENJPEG_INSTALL_PACKAGE_DIR "${OPENJPEG_INSTALL_LIB_DIR}/${OPE=
-NJPEG_INSTALL_SUBDIR}")
-> > -+  set(OPENJPEG_INSTALL_PACKAGE_DIR "${OPENJPEG_INSTALL_LIB_DIR}/cmake=
-/${OPENJPEG_INSTALL_SUBDIR}")
-> > - endif()
-> > -
-> > - if (APPLE)
-> > -diff --git a/cmake/OpenJPEGConfig.cmake.in b/cmake/OpenJPEGConfig.cmak=
-e.in
-> > -index b20294ca..6a2f4baf 100644
-> > ---- a/cmake/OpenJPEGConfig.cmake.in
-> > -+++ b/cmake/OpenJPEGConfig.cmake.in
-> > -@@ -26,7 +26,7 @@ get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIS=
-T_FILE}" PATH)
-> > - if(EXISTS ${SELF_DIR}/OpenJPEGTargets.cmake)
-> > -   # This is an install tree
-> > -   include(${SELF_DIR}/OpenJPEGTargets.cmake)
-> > --  get_filename_component(OPENJPEG_INCLUDE_ROOT "${SELF_DIR}/../../@OP=
-ENJPEG_INSTALL_INCLUDE_DIR@" ABSOLUTE)
-> > -+  get_filename_component(OPENJPEG_INCLUDE_ROOT "${SELF_DIR}/../../../=
-@OPENJPEG_INSTALL_INCLUDE_DIR@" ABSOLUTE)
-> > -   set(OPENJPEG_INCLUDE_DIRS ${OPENJPEG_INCLUDE_ROOT})
-> > -
-> > - else()
-> > ---
-> > -2.14.4
-> > -
-> > diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb b/meta=
--oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> > similarity index 79%
-> > rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-> > rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> > index d30ff48..7c92ebc 100644
-> > --- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-> > +++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> > @@ -7,10 +7,9 @@ DEPENDS =3D "libpng tiff lcms zlib"
-> >
-> >   SRC_URI =3D " \
-> >       git://github.com/uclouvain/openjpeg.git \
-> > -    file://0001-Ensure-cmake-files-are-installed-at-common-location.pa=
-tch \
-> >       file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.=
-patch \
-> >   "
-> > -SRCREV =3D "081de4b15f54cb4482035b7bf5e3fb443e4bc84b"
-> > +SRCREV =3D "57096325457f96d8cd07bd3af04fe81d7a2ba788"
-> >   S =3D "${WORKDIR}/git"
-> >
-> >   inherit cmake
-> Misunderstood the purpose of the cmake includes patch in the last
-> version. Should build now (poppler build works for me).
+> License checksum changed since http links were replaced with https ones
+> (see b83441d5d5a88c3ea6e9f7df9746e3060beb4512).
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  ...avro-c-Fix-build-with-clang-compiler.patch | 37 -------------------
+>  .../avro/{avro-c_1.8.1.bb => avro-c_1.9.1.bb} |  8 ++--
+>  2 files changed, 3 insertions(+), 42 deletions(-)
+>  delete mode 100644 meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
+>  rename meta-oe/recipes-support/avro/{avro-c_1.8.1.bb => avro-c_1.9.1.bb} (50%)
+>
+> diff --git a/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch b/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
+> deleted file mode 100644
+> index 01235d8ef..000000000
+> --- a/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
+> +++ /dev/null
+> @@ -1,37 +0,0 @@
+> -From 518bb8ccfb3f3fc143fbd571782f3e40573d01b5 Mon Sep 17 00:00:00 2001
+> -From: Khem Raj <raj.khem@gmail.com>
+> -Date: Mon, 10 Apr 2017 09:15:04 -0700
+> -Subject: [PATCH] avro-c: Fix build with clang compiler
+> -
+> -Clang advertizes itself to be compatible with gcc 4.2.1
+> -while that was true several years ago, it now supports
+> -a lot more newer features, the test to just check gcc
+> -version should be supplanted with clang check as well
+> -so atomic support in clang can be asserted as well
+> -
+> -Fixes
+> -
+> -lang/c/src/avro/refcount.h:301:2: error: "No atomic implementation!"
+> -
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ----
+> - lang/c/src/avro/refcount.h | 3 ++-
+> - 1 file changed, 2 insertions(+), 1 deletion(-)
+> -
+> -diff --git a/lang/c/src/avro/refcount.h b/lang/c/src/avro/refcount.h
+> -index 69afa4fc..d76ba057 100644
+> ---- a/lang/c/src/avro/refcount.h
+> -+++ b/lang/c/src/avro/refcount.h
+> -@@ -118,7 +118,8 @@ avro_refcount_dec(volatile int *refcount)
+> -  * GCC intrinsics
+> -  */
+> -
+> --#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500
+> -+#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500 \
+> -+|| defined(__clang__)
+> -
+> - static inline void
+> - avro_refcount_set(volatile int *refcount, int value)
+> ---
+> -2.12.2
+> -
+> diff --git a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb b/meta-oe/recipes-support/avro/avro-c_1.9.1.bb
+> similarity index 50%
+> rename from meta-oe/recipes-support/avro/avro-c_1.8.1.bb
+> rename to meta-oe/recipes-support/avro/avro-c_1.9.1.bb
+> index 276fe2b5a..05cb46e0f 100644
+> --- a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
+> +++ b/meta-oe/recipes-support/avro/avro-c_1.9.1.bb
+> @@ -3,15 +3,13 @@ HOMEPAGE = "http://apr.apache.org/"
+>  SECTION = "libs"
+>
+>  LICENSE = "Apache-2.0"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=73bdf70f268f0b3b9c5a83dd7a6f3324"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=6d502b41f76179fc84e536236f359cae"
+>
+>  DEPENDS = "jansson zlib xz"
+>  PV .= "+git${SRCPV}"
+>
+> -SRCREV = "4b3677c32b879e0e7f717eb95f9135ac654da760"
+> -SRC_URI = "git://github.com/apache/avro \
+> -           file://0001-avro-c-Fix-build-with-clang-compiler.patch;patchdir=../../ \
+> -"
+> +SRCREV = "89218262cde62e98fcb3778b86cd3f03056c54f3"
+> +SRC_URI = "git://github.com/apache/avro;branch=branch-1.9"
+>
+>  S = "${WORKDIR}/git/lang/c"
+>
+> --
+> 2.17.1
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
