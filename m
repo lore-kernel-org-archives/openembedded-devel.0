@@ -1,46 +1,55 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
-	[209.85.160.174])
-	by mail.openembedded.org (Postfix) with ESMTP id A115B7ED03
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
+	[209.85.128.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C0C77C7A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Sep 2019 02:14:15 +0000 (UTC)
-Received: by mail-qt1-f174.google.com with SMTP id u40so36243346qth.11
+	Sat, 14 Sep 2019 12:05:21 +0000 (UTC)
+Received: by mail-wm1-f47.google.com with SMTP id q18so5281247wmq.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Sep 2019 19:14:17 -0700 (PDT)
+	Sat, 14 Sep 2019 05:05:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=OUW4osNO5V5Fq93BNPP/kb+mtaDYwyt5OuqVVcfGMrc=;
-	b=Zj8uANKlF1uA51rHOG9EVBhTKDwPp4/4K4wfV1a3S9+9nFeuXjkUw92wb+M/5iTQ+n
-	3PB436A+fcZ0h+ljMHJ5n4HbW4CFrJ7Lqnicfi9QOq2JRE+5Sruckx2uU9IjfAqePrfV
-	KE9QQNrMZyZkRccrf1GOj8lXL/IVLCaP38LGn50BqXL9hMQZpWvIWaDD8A9rDvhtbxq2
-	a0Id1khB7p5Y+xVbDEyMYA21F+ht+HGsHbKoYneBmcFHahL1sxRVExkxmxsSIWCuBA9J
-	8hr1+ZgJ+vfurIt82N5dHDDvO89hbp2fGapYwtU54KtYykqGGpDu4MuzAggqqvEmp4CR
-	4nJQ==
+	h=sender:from:message-id:mime-version:subject:date:in-reply-to:cc:to
+	:references; bh=gMmBW36XrYL/4tkYdGZZ/o27TKBa8enx1eWyoA0UsCE=;
+	b=vcwIgg1BOso6NVyPawLNRBYT55BSBN45D0AO/CLfUbcPqUtjWJWtdfHwcwn1QsC8Vw
+	a6u0CY7i48a77xgyL1ZLccWdXa2qh61IX0S6cUbpxwKvUkmIWJjIik47ExpwMRhYyRin
+	TEJj2/NPRI6TmDR/ojfb/jCqpOEyHaQLAoWZAjuJ9TtLYtwGspC3D1T320X240iFvaay
+	WAdhFhOMAC9N2Mswycs9AseX2VWNnF/k1Ehw2tMJ3hSHF6U9Tdlq0t7tznGGP2mzbRUb
+	Z+WesuMNzFdEhAeWCbi9FV/IZ3CCSzSqMJhdvlkCxsvRf1Zcmz+m4K09q5qpuJZh4h8S
+	JTxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=OUW4osNO5V5Fq93BNPP/kb+mtaDYwyt5OuqVVcfGMrc=;
-	b=Pbsw5It56HBG0i3VXeAXph5QU3IYnIQt9BYu1oEtu7IqcKj+H/d26Vw53odV8Ev2m3
-	xMhS/rCjLCspHlnNRqAwxjbTFyLaWS/8oRkKvFvABvzRJTtzks4sUM/Afov+87Oby4qE
-	FXfWeaTbwp8NRKHvrHlYXWyxfJ1Ox4o0jWLgen8UyVQRIfRcvPiTzenrN9KtCmjFwsP5
-	WIl5h9V6SIhf/dkNO/B1MJwHWag4sRbHkaRHE7sun/sCu+nj6BoBQsdVedv52K99rFue
-	pt4+Lv0XwBiJ01rVqFw7zEawr04SbO1SOAwtSELj5SdOytmi0iMxOZOW6gCBNIBFNvaE
-	UROw==
-X-Gm-Message-State: APjAAAWh2TJfl1keNO4NeHAKh+WKsmCv4BAgNDj8r13wQ1qnKa7pzMoo
-	/0Z7jCngz+om7Q+g1hyR9G2BKUgdu+IjzlRQ3lpcJk3x4Gs=
-X-Google-Smtp-Source: APXvYqwa9XIK/4hfPbLKCSfvh6k+dxx9Ql74wBlPWxbmWXQ8DAhfKnW/ryJfh1Cu8pOEQZofLMbJyUZwq1oZ5lXZRvA=
-X-Received: by 2002:ac8:1103:: with SMTP id c3mr6460678qtj.88.1568427256292;
-	Fri, 13 Sep 2019 19:14:16 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190913192745.1825-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190913192745.1825-1-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Sep 2019 19:13:50 -0700
-Message-ID: <CAMKF1sodyWcm24H5fosyPC7scGK-+uabJqcvhuhhJa2zWdUheA@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+	h=x-gm-message-state:sender:from:message-id:mime-version:subject:date
+	:in-reply-to:cc:to:references;
+	bh=gMmBW36XrYL/4tkYdGZZ/o27TKBa8enx1eWyoA0UsCE=;
+	b=s0UArzd/ptK6JMy0gHNke8P3IZzOv+Xrnr59NiVCeF4/WGiXCpuXrvXgOd/Oky83Y9
+	XEMMiqJTH0fzdG3Jx+8O3PrI5CCyli4zAFI/p0J4ppFAomOmSLqkHDNj5oCGKMZuQVit
+	Y0QOmWYrL9WCaW+79huDfBItWCufRx7PtyH2A3MuoCoe+N05d23MLLN7RnZCoSkA5Qnd
+	MHAQf+F3HWWlPpiU+xqh+ssr+3drQUsH5LRpGuV2lXi+W/mQA2kqcBeEWfNInEei1lf9
+	4QncKrlHTlorfkHaGc/a8Bc0ovGFYDB+eUECjmOCa9bpE8xqXMmfA4XorqMTTDB+PV5u
+	73nQ==
+X-Gm-Message-State: APjAAAUIwLpiX6Je2O1CdS2ubCqA1KUs4Fnemriuu7JC0xH8IMREmahr
+	oCiE+yrFj0F6SludfmNjO/4=
+X-Google-Smtp-Source: APXvYqznuqdT71zpNPoqpDcuCBnSjGEZjKrKeg7pldGcKn+MiVmXoR7KipDFCMgfoYNYS7MC3426Xg==
+X-Received: by 2002:a7b:c351:: with SMTP id l17mr7548338wmj.44.1568462722066; 
+	Sat, 14 Sep 2019 05:05:22 -0700 (PDT)
+Received: from ernie.muppets.liwing.de (p5B25B936.dip0.t-ipconnect.de.
+	[91.37.185.54]) by smtp.gmail.com with ESMTPSA id
+	u68sm10955197wmu.12.2019.09.14.05.05.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 14 Sep 2019 05:05:20 -0700 (PDT)
+Sender: Jens Rehsack <rehsack@gmail.com>
+From: Jens Rehsack <sno@netbsd.org>
+Message-Id: <FBF5DE5C-344D-4F54-982E-113D0229F025@netbsd.org>
+Mime-Version: 1.0 (Mac OS X Mail 12.4 \(3445.104.11\))
+Date: Sat, 14 Sep 2019 14:05:16 +0200
+In-Reply-To: <CAMKF1soMXNPLopyXTV9t3M5f1KVpBOJCAa2TutCdJ7PL2Uv+2g@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+References: <20190913140533.7328-1-sno@netbsd.org>
+	<CAMKF1soMXNPLopyXTV9t3M5f1KVpBOJCAa2TutCdJ7PL2Uv+2g@mail.gmail.com>
+X-Mailer: Apple Mail (2.3445.104.11)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2][meta-oe] avro-c: update to 1.9.1
+Subject: Re: [meta-oe][PATCH] libstatgrab: add recipe for libstatgrab-0.92
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,109 +62,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Sep 2019 02:14:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 14 Sep 2019 12:05:21 -0000
+X-Groupsio-MsgNum: 79693
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_01E67465-E83D-4633-A5A0-00B26163035B";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
 
-Fails with musl still
+--Apple-Mail=_01E67465-E83D-4633-A5A0-00B26163035B
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
-lang/c/src/avro_generic_internal.h:63:39: error: 'ssize_t' undeclared
-(first use in this function); did you mean 'size_t'?
-01:28:42 |    63 |     ((gcls)->instance_size == NULL ? (ssize_t)-1 :
-(ssize_t)(gcls)->instance_size(&(gcls)->parent))
 
-I think it needs to pass -D_GNU_SOURCE via compiler cmdline
 
-On Fri, Sep 13, 2019 at 12:28 PM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> Removed patch was upstreamed.
->
-> License checksum changed since http links were replaced with https ones
-> (see b83441d5d5a88c3ea6e9f7df9746e3060beb4512).
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  ...avro-c-Fix-build-with-clang-compiler.patch | 37 -------------------
->  .../avro/{avro-c_1.8.1.bb => avro-c_1.9.1.bb} |  8 ++--
->  2 files changed, 3 insertions(+), 42 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
->  rename meta-oe/recipes-support/avro/{avro-c_1.8.1.bb => avro-c_1.9.1.bb} (50%)
->
-> diff --git a/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch b/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
-> deleted file mode 100644
-> index 01235d8ef..000000000
-> --- a/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
-> +++ /dev/null
-> @@ -1,37 +0,0 @@
-> -From 518bb8ccfb3f3fc143fbd571782f3e40573d01b5 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Mon, 10 Apr 2017 09:15:04 -0700
-> -Subject: [PATCH] avro-c: Fix build with clang compiler
-> -
-> -Clang advertizes itself to be compatible with gcc 4.2.1
-> -while that was true several years ago, it now supports
-> -a lot more newer features, the test to just check gcc
-> -version should be supplanted with clang check as well
-> -so atomic support in clang can be asserted as well
-> -
-> -Fixes
-> -
-> -lang/c/src/avro/refcount.h:301:2: error: "No atomic implementation!"
-> -
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - lang/c/src/avro/refcount.h | 3 ++-
-> - 1 file changed, 2 insertions(+), 1 deletion(-)
-> -
-> -diff --git a/lang/c/src/avro/refcount.h b/lang/c/src/avro/refcount.h
-> -index 69afa4fc..d76ba057 100644
-> ---- a/lang/c/src/avro/refcount.h
-> -+++ b/lang/c/src/avro/refcount.h
-> -@@ -118,7 +118,8 @@ avro_refcount_dec(volatile int *refcount)
-> -  * GCC intrinsics
-> -  */
-> -
-> --#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500
-> -+#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500 \
-> -+|| defined(__clang__)
-> -
-> - static inline void
-> - avro_refcount_set(volatile int *refcount, int value)
-> ---
-> -2.12.2
-> -
-> diff --git a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb b/meta-oe/recipes-support/avro/avro-c_1.9.1.bb
-> similarity index 50%
-> rename from meta-oe/recipes-support/avro/avro-c_1.8.1.bb
-> rename to meta-oe/recipes-support/avro/avro-c_1.9.1.bb
-> index 276fe2b5a..05cb46e0f 100644
-> --- a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
-> +++ b/meta-oe/recipes-support/avro/avro-c_1.9.1.bb
-> @@ -3,15 +3,13 @@ HOMEPAGE = "http://apr.apache.org/"
->  SECTION = "libs"
->
->  LICENSE = "Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=73bdf70f268f0b3b9c5a83dd7a6f3324"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=6d502b41f76179fc84e536236f359cae"
->
->  DEPENDS = "jansson zlib xz"
->  PV .= "+git${SRCPV}"
->
-> -SRCREV = "4b3677c32b879e0e7f717eb95f9135ac654da760"
-> -SRC_URI = "git://github.com/apache/avro \
-> -           file://0001-avro-c-Fix-build-with-clang-compiler.patch;patchdir=../../ \
-> -"
-> +SRCREV = "89218262cde62e98fcb3778b86cd3f03056c54f3"
-> +SRC_URI = "git://github.com/apache/avro;branch=branch-1.9"
->
->  S = "${WORKDIR}/git/lang/c"
->
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Am 13.09.2019 um 20:04 schrieb Khem Raj <raj.khem@gmail.com>:
+>=20
+> Fails
+>=20
+> https://errors.yoctoproject.org/Errors/Details/270231/ =
+<https://errors.yoctoproject.org/Errors/Details/270231/>
 
+Thanks - sending update soon ;)
+
+> On Fri, Sep 13, 2019 at 7:05 AM Jens Rehsack <sno@netbsd.org> wrote:
+>>=20
+>> With the recent update at begin of summer, which includes the fix
+>> for nxp bsp issues, it's time to bring libstatgrab to more people
+>> than the few who use it in datacenter monitoring.
+>>=20
+>> Language bindings will follow once base library is settled.
+>>=20
+>> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+>> ---
+>> .../libstatgrab/libstatgrab_0.92.bb           | 26 =
++++++++++++++++++++
+>> 1 file changed, 26 insertions(+)
+>> create mode 100644 =
+meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
+>>=20
+>> diff --git a/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb =
+b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
+>> new file mode 100644
+>> index 000000000..ab08d8bb2
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
+>> @@ -0,0 +1,26 @@
+>> +DESCRIPTION =3D "Utilities to collect and visualise system =
+statistics"
+>> +HOMEPAGE =3D "http://www.i-scream.org/libstatgrab/"
+>> +
+>> +LICENSE =3D "GPL-2.0+"
+>> +LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263"
+>> +
+>> +DEPENDS =3D "ncurses"
+>> +
+>> +PACKAGES_prepend =3D "statgrab statgrab-dbg saidar saidar-dbg =
+${PN}-mrtg "
+>> +
+>> +SRCREV =3D "fa7e1d9fe76c3a1a7ade264c746b3f5edc566f3b"
+>> +SRC_URI =3D "git://github.com/libstatgrab/libstatgrab.git \
+>> +          "
+>> +# Perl5 is for tests only
+>> +EXTRA_OECONF =3D "--without-perl5 --with-mnttab=3D/proc/mounts"
+>> +
+>> +S =3D "${WORKDIR}/git"
+>> +
+>> +inherit autotools pkgconfig
+>> +
+>> +FILES_statgrab =3D "${bindir}/statgrab"
+>> +FILES_statgrab-dbg =3D "${bindir}/.debug/statgrab"
+>> +FILES_saidar =3D "${bindir}/saidar"
+>> +FILES_saidar-dbg =3D "${bindir}/.debug/saidar"
+>> +FILES_${PN}-mrtg =3D "${bindir}/statgrab-make-mrtg-config =
+${bindir}/statgrab-make-mrtg-index"
+>> +RDEPENDS_${PN}-mrtg_append =3D "perl statgrab"
+>> --
+>> 2.17.1
+>>=20
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--
+Jens Rehsack - rehsack@gmail.com
+
+
+--Apple-Mail=_01E67465-E83D-4633-A5A0-00B26163035B
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEGutaqWUYV+tvC/mCRJmWrtzlCp0FAl1813wACgkQRJmWrtzl
+Cp2Wrg//f1HSXDQx16mhfju/wGN/rBr/1g+DUXzGHXrRh2E9iRV2mAd7FV8c1GwP
+qIrf7VmuUqPvjZgOgIBkcVnzF0Y4CvZb2YnLpgfg2Cu09mFiK3sqjSXfkmk0OTGV
++SaSIyZJscg5H/OCb8S9K2ahzWt4tmUo/GnXtDTwu+xkPp6GDvc3q1asm0g0WlVc
+ND6hgEo/NKnlJC4IbHOh92e5IWc6lhG6nU/Qnc9zwNHMxAXxS9yyemDWlzgdrfMG
+OV9JVlQchtER8Mk4UTIWHhheyoziFEFyrbhhks2IOnyHSL+Jfi9txRPT5R47DqH+
+xb4ZyfhoGM3QNKY0LkYb1Ntw8bxpLHMwQSb+hV9D87vCeT1BzyF4vWGKoNS8oUIW
+r16R+KTxX4CrWpZKcWBcc5nYn3U7YMjE+lRQ7dFwG6xtgT2MZISwVds7ivgnNfL4
+2n9qsSFZ4DKqSpuM1PtXqYonB3uf8SMk3krIXM2a2+7DDbYQIvQJyavpAivpp0+Z
+iUyIsdtxa1tEuN5tmLInPRqw6fjt5xIT3OeppUNm7vSkO7bk1gpi7Xmh6Od0dRzk
+NuAqXje5oGVESwE4QsZ2I34kHY5xErNZIHctjS9zJrz2Jm9lDeOOj2VT1Iha50Xv
+kGD+mYBfSsFPgy9v2ZxlXuMfkzc76K4Q6Axeyhjnj2Q5YCIVxLk=
+=Ywv0
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_01E67465-E83D-4633-A5A0-00B26163035B--
