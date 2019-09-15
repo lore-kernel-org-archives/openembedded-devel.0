@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f170.google.com (mail-lj1-f170.google.com
-	[209.85.208.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 45A527EC5D
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+	[209.85.208.195])
+	by mail.openembedded.org (Postfix) with ESMTP id AB5997EC47
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 23:42:30 +0000 (UTC)
-Received: by mail-lj1-f170.google.com with SMTP id q64so21489270ljb.12
+	Sun, 15 Sep 2019 23:42:35 +0000 (UTC)
+Received: by mail-lj1-f195.google.com with SMTP id s19so1350969lji.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 16:42:31 -0700 (PDT)
+	Sun, 15 Sep 2019 16:42:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=1vT1aleywnWbMsC6qIwiCqcE5Mq653/RIUsDnom0iaY=;
-	b=KlL59+cy/WN5kTdOS95keitzvgH2pP+ErU8JxSbZdYrnbGLd5vqJPGv2tqJmK/ukr/
-	6FAyqRYKfne/wRE5CqCpGxC5P72V7PGV5rPKlFyOI8yZSaZIlZYxCD7fCuRUtBt9kt74
-	2AMQE92rmrpBkSyxGc/Ng+OMEbTLZHQdG2z3W7Frw8NgpOoeSp9J1xrIaJjsKWP4lD3a
-	7UKdBi1QKGWXcIOHSlixZJ1BDt4vboBVNxnqh1gOWdql27hXJURe7r30y0jM8xZpfbh8
-	xIR+KLb3yQFmfPkhEwFel3il/sIQrcNr7GNrkVcxmQAmr1/UUpGTiyrB8x7kgVhMspG9
-	lRZw==
+	bh=vFUSlnDQ2qmPgYte9xBCsw7v2F+3C8qapdxI1PCmFWs=;
+	b=bwVh1JdoGBerpa2e8KkBobNbdm3V0GgLNFlTvTH6/2Tm33x9rNpBMy92mrzERsS92M
+	wokKy4eTS8ocYujZXTrwYDhLzIY26WA5TYbuSdcZRUi8xKlRkuZQSMOc1O1wZgLDwwcL
+	t3r4z11DnYZGVo3h5MqQF9Y7ogCsGv7hto/EkC8gAJu5gjAE31Q/ZxOCAWE7oBl2ujeP
+	W1d8xqhkS3OaMon0sEyMjgqKaL8HrYH3z02fqjG3TwcxSuj0PmDyGIbq01YEAsTUYtJv
+	9Qj0DflHC1MB+TgOeW8tMDERfWeri9xcyVd/hV3SyQJbgRqbve4+C2w47j9/xon6ikE6
+	ddqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=1vT1aleywnWbMsC6qIwiCqcE5Mq653/RIUsDnom0iaY=;
-	b=FV9jTtosA1uZNn9+KtpjAmGmJRPcIVzAqzL0hI4jAA6DlLj6028bswvXR71VeYYOkZ
-	/hGrC4R/bYfcC1aCignI7UqoaYf1cNNT9olPPk0lRdyXXdpGKQw6/aRE0ABqfda/Agl0
-	Hh0yUsKVRah+fqPfkFR7Nq5V1+xtengalQ07OV52RX6sgmyNWQ+LEuW5qlOG/hgRW1ba
-	cjouJIxjQF1wexdBj2Plk/vTipBJy2+Zc4PCWQ1yvXFh8PHJveLSlPS7oEwmezBvf0ZD
-	y53bAgJWkJb/zgsZ6asNhSP1cTnaScazmORou8dxF+PqQbbQqyCoz4NbshjqPFuzBKti
-	k/6w==
-X-Gm-Message-State: APjAAAVfjSqmVprKlhWpJAwL3GfBZ+6I7NqESnIEichnFFIsz3DagvYE
-	8M5BTkbFUJ6g+IkabXQiv9SD71LjDzU=
-X-Google-Smtp-Source: APXvYqy9L7vUQH8u6Ot6+z2P+3K7jBHlCOYcfjvXdPWGAajVf0DVoSgwlHL+CINeZ1pUIwLTLTT+nQ==
-X-Received: by 2002:a2e:9241:: with SMTP id v1mr5540785ljg.148.1568590950638; 
-	Sun, 15 Sep 2019 16:42:30 -0700 (PDT)
+	bh=vFUSlnDQ2qmPgYte9xBCsw7v2F+3C8qapdxI1PCmFWs=;
+	b=OSFXaUAuAVhtYHcvxJ1ZYN+kXyixueDV7MbrFHKo3EQ2UvGj6k4PJZ9RqwbwPaDuaw
+	Gqu7rR8jmCWOxLvIN6PYBWj33BW8UxB+GdYRg1cUpxNm6gqFDDj0aVy5bLjMAyJ+GQku
+	D/KtWqo6OS1Hiae1+518tiN3teioE7ZEWqdMKxBge4P0NXygXSNZua8TtcIksh5PMDHm
+	jSlI5mX9xvuCFMzTYqWeYn/S63u4aw4z+O8bZ+se+8CDkg2NmD2zzPgErXylSv68hFMk
+	mnZqIxN1HWhFEUOtvqpXQ31uOY7KFo1cTdzssEkMzwlawVeLJN6biC2ON038tvEUGwB9
+	AArA==
+X-Gm-Message-State: APjAAAVLGpp7xO2/40SqCXLmVESnL5WC90BBnZjGbnV8Yfsv5A48Rnw7
+	et3EE8f3ivaBwU0T0uSQwRFfL9h+COI=
+X-Google-Smtp-Source: APXvYqzaf702ShyCyC8/v2u2VW+A5zc0MJVMdeFfidg7KN6Kdv2cRQi9+miCSzRFdxlNZAVCkQ2ocA==
+X-Received: by 2002:a2e:b4c4:: with SMTP id r4mr9217192ljm.69.1568590955925;
+	Sun, 15 Sep 2019 16:42:35 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
-	m21sm8624396lfh.39.2019.09.15.16.42.29
+	[213.89.0.115])
+	by smtp.gmail.com with ESMTPSA id h1sm9097086lja.18.2019.09.15.16.42.35
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 15 Sep 2019 16:42:30 -0700 (PDT)
+	Sun, 15 Sep 2019 16:42:35 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Sep 2019 01:42:28 +0200
-Message-Id: <20190915234228.13416-1-open.source@oleksandr-kravchuk.com>
+Date: Mon, 16 Sep 2019 01:42:33 +0200
+Message-Id: <20190915234233.13529-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] libbytesize: update to 2.1
+Subject: [PATCH][meta-oe] iwd: update to 0.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,79 +56,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Sep 2019 23:42:30 -0000
+X-List-Received-Date: Sun, 15 Sep 2019 23:42:36 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../0001-fix-out-of-tree-build-failure.patch  | 37 -------------------
- ...{libbytesize_2.0.bb => libbytesize_2.1.bb} |  6 +--
- 2 files changed, 2 insertions(+), 41 deletions(-)
- delete mode 100644 meta-oe/recipes-support/libbytesize/files/0001-fix-out-of-tree-build-failure.patch
- rename meta-oe/recipes-support/libbytesize/{libbytesize_2.0.bb => libbytesize_2.1.bb} (87%)
+ meta-oe/recipes-connectivity/iwd/{iwd_0.19.bb => iwd_0.20.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/iwd/{iwd_0.19.bb => iwd_0.20.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/libbytesize/files/0001-fix-out-of-tree-build-failure.patch b/meta-oe/recipes-support/libbytesize/files/0001-fix-out-of-tree-build-failure.patch
-deleted file mode 100644
-index 3f42c25d7..000000000
---- a/meta-oe/recipes-support/libbytesize/files/0001-fix-out-of-tree-build-failure.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From 55802fd187b844f0c114c1657b18482bfc80ec51 Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Tue, 2 Jul 2019 02:52:31 +0000
--Subject: [PATCH] fix out of tree build failure
--
--Since commit [116da95 Add the '--version' option to bs_calc.py] applied,
--while build out of tree, there is a install failure
--...
--|install -m0755 ../../git/tools/bs_calc.py /usr/bin/bscalc
--|install: cannot stat '../../git/tools/bs_calc.py': No such file or directory
--...
--
--The generated bs_calc.py locates in builddir rather than srcdir
--
--Upstream-Status: Submitted [https://github.com/storaged-project/libbytesize/pull/59]
--
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-----
-- tools/Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/tools/Makefile.am b/tools/Makefile.am
--index 08223a8..ae22fed 100644
----- a/tools/Makefile.am
--+++ b/tools/Makefile.am
--@@ -5,7 +5,7 @@ dist_man1_MANS = bscalc.man
-- 
-- install-exec-local:
-- 	install -d ${DESTDIR}${bindir}
---	install -m0755 ${srcdir}/bs_calc.py ${DESTDIR}${bindir}/bscalc
--+	install -m0755 ${builddir}/bs_calc.py ${DESTDIR}${bindir}/bscalc
-- 
-- uninstall-local:
-- 	rm ${DESTDIR}${bindir}/bscalc
---- 
--2.17.1
--
-diff --git a/meta-oe/recipes-support/libbytesize/libbytesize_2.0.bb b/meta-oe/recipes-support/libbytesize/libbytesize_2.1.bb
-similarity index 87%
-rename from meta-oe/recipes-support/libbytesize/libbytesize_2.0.bb
-rename to meta-oe/recipes-support/libbytesize/libbytesize_2.1.bb
-index 74f1800d1..07bf1faae 100644
---- a/meta-oe/recipes-support/libbytesize/libbytesize_2.0.bb
-+++ b/meta-oe/recipes-support/libbytesize/libbytesize_2.1.bb
-@@ -9,10 +9,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.19.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.20.bb
+similarity index 95%
+rename from meta-oe/recipes-connectivity/iwd/iwd_0.19.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_0.20.bb
+index 2b4530e3c..42205034c 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_0.19.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_0.20.bb
+@@ -7,7 +7,7 @@ inherit autotools pkgconfig systemd
+ DEPENDS = "ell readline dbus"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+-SRCREV = "899d802744b7e12409e259f546ba5594ab90262c"
++SRCREV = "00f0039232cc73bbcf7a1875f8f9aae464d90a8f"
  S = "${WORKDIR}/git"
- B = "${S}"
  
--SRCREV = "92c00638a6f846df5c40dbb690f9fcf998ad6df2"
--SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master \
--           file://0001-fix-out-of-tree-build-failure.patch \
--"
-+SRCREV = "9ecc1042109528051983261ffd491d45e7c471e1"
-+SRC_URI = "git://github.com/rhinstaller/libbytesize;branch=master"
- 
- inherit gettext autotools python3native
- 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
 -- 
 2.17.1
 
