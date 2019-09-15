@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com
-	[209.85.167.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 607CF7EC66
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
+	[209.85.208.180])
+	by mail.openembedded.org (Postfix) with ESMTP id F17957ED4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 23:42:18 +0000 (UTC)
-Received: by mail-lf1-f51.google.com with SMTP id u28so5217621lfc.5
+	Sun, 15 Sep 2019 23:42:23 +0000 (UTC)
+Received: by mail-lj1-f180.google.com with SMTP id s19so1350787lji.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 16:42:19 -0700 (PDT)
+	Sun, 15 Sep 2019 16:42:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=QNM33w+1Tr4D/d5MGxwu96PYLKEJjtrSDAdR5G06Ieg=;
-	b=EIPpXbWzWodR+3s9WFGm40y4n2PqV35kteoAZosSGPVFZiZfI6zbbeNVYmRZ1KORUW
-	f4yPBQ51peJZliUniA6vUJlRg8VfcsBH7SbaB6U2vPial/bOVyUHHXJI3WgwBbedrRxq
-	scMDscakqc01tFsSKYYZ1NVgSJBm8CtYwmTt42vMXWoY8xXvR6orzXA3aqcD9t8w+4DQ
-	raqzdXQzd33HkEzGDF8+Q4yK1z2EijeD59qG5gDB9Jyc585rNnYVmgGmEr4WewdVyaIm
-	2ZarAI4qfydl14gxoFRHSWkUzaU+ePnQ37nxpoQ8jH/IM+axz+aljOONqQzP//5lk2rS
-	JXmw==
+	bh=u940TX9cfOh0O91eJi/A6AdQAzjcvqa6CauLV8KUz0c=;
+	b=AAPTYdyiDmojz1wLtisZ+F6J1L2D6wenDo1WVB1MeQDDrLuJx8KbtX/xXRqcvEqAEV
+	wdWYcBUDnfA0fv02VPK845Gn5zzJWSqsXfi3SH1Cyqld5gRtCzEIr/o1q3k1vDLbkKZV
+	PMIVBaHUj+P6qRvdIhxVxN7wZKj/V2uG7Gz/X9B+51l0s03uS7LlULD67S0WloCpg7/x
+	s5SqkkPrSICE2ldANhuQXWLRP5JujW4dUi216BVyIpZHKOHBkxzH0N1yTTnAs2KvqrCa
+	H9ExsWlH125zxMR1+cRYbTpcThWztHjjAv3md0Ks3P43km4OFYIWhfPrOQHc2m2DovTN
+	SWOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=QNM33w+1Tr4D/d5MGxwu96PYLKEJjtrSDAdR5G06Ieg=;
-	b=EmuJJ1uUlnO0UPJy08Udc/ghLgI+/1U8FIDYQpIfDuYeOtfSEJ27Fx/Gi9MKOGVRUb
-	k5SsyfH1aJFa/15I1zWd3UyiUFiY+nnNNS0Y8/7msQ5Vo7rmF/WmvkFLUr5QNG2/l2jR
-	7DCxZzbBgxqh3Eopyv9p1yvAcnjV2vy8QzMcXhgkTY54ctDA07slCtPPkjtipUUMCfiN
-	pFv3aRoeKaHae/YHSG4TuU7scIHS3wM7Cvhy5uZsQ3xIht3yxq8hFyMuXkXFj2UIYVOx
-	GzvJtLDeLn9M1SOdFvTfY00eX34ubUUwenxXnzJl26hz+sQKZw05cghReDQ8pRGPi2Gk
-	tdNw==
-X-Gm-Message-State: APjAAAWyCk6fgNHxznL1c2w3EmskevpIQ8bzQkbuL0MItj82PNLkZ8z5
-	cRcRRIIlxq8MiAQYK6JwltHO2aUUokQ=
-X-Google-Smtp-Source: APXvYqwoEZ/FmNqHTjM5Lb7js4qTot3qUNoJXV3sG7cxbN4snfXgCezpO1UYFOAFEpUChCqSuHSM9A==
-X-Received: by 2002:ac2:5310:: with SMTP id c16mr7145615lfh.5.1568590938747;
-	Sun, 15 Sep 2019 16:42:18 -0700 (PDT)
+	bh=u940TX9cfOh0O91eJi/A6AdQAzjcvqa6CauLV8KUz0c=;
+	b=BWw214GJNEcg5MPhROdPIuoxGTLp/CLm+22NWieoWiVUVjjxferxIAHLXCZ9SJGxJj
+	yyejFhjNLfsC208Qqg1TJAmktRWc3pcf8yeDWXcsGAytX45YlIkcIkCrX2ia3fgP9A2k
+	w+USdJbw+n9i4nHz2GnyVfRoYv+HYajtCCT3sAt4U/1qPq6URD8oAwTuV8I+a4p5rLuI
+	5jVmlsgNK7QDjE0hMsooJcRY+U1CQDWAKplhxQVXlHF9tR1COIuE5EkTRMlCKmB6iZpR
+	q2i5RjJcKAszf0Qh2sFJCni2PQvOHzvJwa3t1lA5nSJ0EHP3ihwM/sLFhrKGYn7dXtZo
+	U3tg==
+X-Gm-Message-State: APjAAAX5snTdauX1o81XMFzuPSn4z+l5NgVR7/BB5ab+NmtEg4YzOhw0
+	4YJF/VeRKVEL/aHsvtZtOhrl1OF+QSg=
+X-Google-Smtp-Source: APXvYqzeDvmFFuWz3RWWxXIOTXaSgbQc+G54C5I5LmSkuooQwRLX0bS7gEdw0dGlVemWbRx1le9NPg==
+X-Received: by 2002:a2e:9955:: with SMTP id r21mr9491332ljj.58.1568590944314; 
+	Sun, 15 Sep 2019 16:42:24 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115])
-	by smtp.gmail.com with ESMTPSA id f5sm8640480lfh.52.2019.09.15.16.42.18
+	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
+	d25sm8588046lfj.15.2019.09.15.16.42.23
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 15 Sep 2019 16:42:18 -0700 (PDT)
+	Sun, 15 Sep 2019 16:42:23 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Sep 2019 01:42:15 +0200
-Message-Id: <20190915234215.13184-1-open.source@oleksandr-kravchuk.com>
+Date: Mon, 16 Sep 2019 01:42:21 +0200
+Message-Id: <20190915234221.13296-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] lcms: update to 2.9
+Subject: [PATCH][meta-oe] libblockdev: update to 2.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +56,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Sep 2019 23:42:18 -0000
+X-List-Received-Date: Sun, 15 Sep 2019 23:42:24 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- meta-oe/recipes-support/lcms/{lcms_2.7.bb => lcms_2.9.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/lcms/{lcms_2.7.bb => lcms_2.9.bb} (70%)
+ .../libblockdev/{libblockdev_2.22.bb => libblockdev_2.23.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/libblockdev/{libblockdev_2.22.bb => libblockdev_2.23.bb} (97%)
 
-diff --git a/meta-oe/recipes-support/lcms/lcms_2.7.bb b/meta-oe/recipes-support/lcms/lcms_2.9.bb
-similarity index 70%
-rename from meta-oe/recipes-support/lcms/lcms_2.7.bb
-rename to meta-oe/recipes-support/lcms/lcms_2.9.bb
-index 12ccb2050..be72d765e 100644
---- a/meta-oe/recipes-support/lcms/lcms_2.7.bb
-+++ b/meta-oe/recipes-support/lcms/lcms_2.9.bb
-@@ -2,9 +2,10 @@ SUMMARY = "Little cms is a small-footprint, speed optimized color management eng
- SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=6c786c3b7a4afbd3c990f1b81261d516"
-+
- SRC_URI = "${SOURCEFORGE_MIRROR}/lcms/lcms2-${PV}.tar.gz"
--SRC_URI[md5sum] = "06c1626f625424a811fb4b5eb070839d"
--SRC_URI[sha256sum] = "4524234ae7de185e6b6da5d31d6875085b2198bc63b1211f7dde6e2d197d6a53"
-+SRC_URI[md5sum] = "8de1b7724f578d2995c8fdfa35c3ad0e"
-+SRC_URI[sha256sum] = "48c6fdf98396fa245ed86e622028caf49b96fa22f3e5734f853f806fbc8e7d20"
+diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.22.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
+similarity index 97%
+rename from meta-oe/recipes-extended/libblockdev/libblockdev_2.22.bb
+rename to meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
+index 985bd03e4..761619d9a 100644
+--- a/meta-oe/recipes-extended/libblockdev/libblockdev_2.22.bb
++++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
  
- DEPENDS = "tiff"
+ inherit autotools gobject-introspection
  
+-SRCREV = "f6e4538485d0442b3674e182c01ffe5a0f258ad4"
++SRCREV = "f5d2458e9e52d8c55b609ae8cf46ef0673b4a02a"
+ SRC_URI = " \
+     git://github.com/rhinstaller/libblockdev;branch=master \
+ "
 -- 
 2.17.1
 
