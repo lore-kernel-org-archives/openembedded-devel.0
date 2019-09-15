@@ -1,52 +1,55 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com
-	[209.85.167.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 36B1C7ECF9
+Return-Path: <jpuhlman@gmail.com>
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 150817E862
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 21:28:27 +0000 (UTC)
-Received: by mail-lf1-f48.google.com with SMTP id r134so25853618lff.12
+	Sun, 15 Sep 2019 21:57:39 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id f19so15874352plr.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 14:28:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=0fsZLBDjJfAIbTdc8WjHUxGKEwcJPdk7q61vdmtQ6pA=;
-	b=EgR9mqZk+naPSW9mMF70cNLPFthwkhWVbPs841NthJ8EH07aK/KgwACLfmfcXAeFEa
-	AIJzic5VATtHbNrmPxrttMxEX3sGn0cW+Qfu8VlBAWNqJ/n4hp/Blakhd8GIWZzXB06o
-	iiVIOopOf144GMNsCbXk3eMJxS3XYnNmyO8yLY1SC23w1glWUhTSnMj00xS60o/MSqbF
-	F3c/LAYgO4AASlxr9uOYthlJHg+OIsjgVQWQcSBt+qfHQwTWiF6GGSRmL6MtSVi71nRl
-	poB/y/MbKoPIaoBQw/lbCb/Qn8YwhEsl7ROcubDFo/pu4EnFXYP8MMP9rHQjhNmsey/X
-	CJ+g==
+	Sun, 15 Sep 2019 14:57:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=F+BUDnRgTsAGjLqDSqlu1ow6BHP6xmAknpEHMkdG8lw=;
+	b=HPErSuF86QPcz6YxJnyOfE+yrFK5ai+LUuzWc2Faug8puEX9Eo7L3omiYpQjG5Fi4i
+	Jn3um339ghTtBocM/5Qu3G+JnEp46UHeVhJo3BnmSc4mWGyHW450vEf1GgZN/96L9Oc8
+	ABsKITKRXthFW2t039u/W5ysKSmpSDNB31Cs17JFO6yuOBRrg7o8Iw/UannaDxE+yK3p
+	8eFahRKLDgG9nJU6Qpq2GLLdwNOsT9CrE0lJ0AseXrXs+VRl37PV8eLLZRc7VCiqsOri
+	d1wfqvLF8Gd7U14OHn0l3giqOL+DDZsWy8JVYWmKpFLkeKerlJ56TLUHGoJRrrilucs+
+	EvFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=0fsZLBDjJfAIbTdc8WjHUxGKEwcJPdk7q61vdmtQ6pA=;
-	b=SkKfibU4F5VHxIuVPwg4AQvl7V9PhhI4RpvKhyt6wj3NvS6C413OJUYYtlMjOKKFRV
-	qpavjEvFlg2d+/rFAGQ1v4a18YQo8YHotEbRdauaEZ7O5sNtT69kRvPlAt6+zvOqdkTO
-	vssha+qleZ8gEN3H11HyYTBOmwU5jOWkOEil4S2OMevml1iF+He7Zy+Q+/xneiQBV9JG
-	NxSDoARRusPd75LnpcPo+7xsd04iaBYNcz1TgZzauoRnMCIe6VXYASKblZrXa4AeFGKO
-	0B/JPTe9PC3Eb7DYADv9Q1/hTq+3gTaGRbzxYv/P0vCko+GRYSrutmvftubC6zkTF78z
-	rjxw==
-X-Gm-Message-State: APjAAAXRy3+XCPxVI+oPtXS41e4xV6MYFW2XZaPq7jwIdL8AA446qa7s
-	3Yn0WfPobZsfYgI5swB8McmmqiaEeeQ=
-X-Google-Smtp-Source: APXvYqws+R5ABE3f+RhddVLXoMgR0xLNZGxtQ6yVrJbhLdJGTN6c3FzAcqCWnmOZQvlNe4wkAePjjQ==
-X-Received: by 2002:a19:cc4f:: with SMTP id c76mr36232950lfg.117.1568582907416;
-	Sun, 15 Sep 2019 14:28:27 -0700 (PDT)
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115])
-	by smtp.gmail.com with ESMTPSA id c4sm8460600lfm.4.2019.09.15.14.28.26
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:mime-version:content-transfer-encoding;
+	bh=F+BUDnRgTsAGjLqDSqlu1ow6BHP6xmAknpEHMkdG8lw=;
+	b=puhm2N7U1VKa1VPhG5/JhDBCL3GsoM68ohLAtHFUrH9hdqXjspag8zIVHcu352BGqt
+	ShUsQTOw1ekOhYMQRmJ3OEH9W7oulcvWzy2ie/BbcViynoeZGYjLRfVItAWeGs5wbgaH
+	Tty6eI4egmz119fHgQTUD4odLRGp6vMZQb94/AatEdhGru14+/PMaxG7xdUBOJupmzfs
+	53GeG/b8oMrOAnw7umiDK79Kx9AkFYV6N/uyugUQfefjCd53xIj0lFZvv2Ix37SlH6bd
+	hI8Zhfa/HeZYHvFDvqj5eKoQ4tFn8g5gYHR7zPCsrvN3cyMQqfWEeZF1IXFzjmgYIuFB
+	QdHA==
+X-Gm-Message-State: APjAAAUJRKl2nB/N0ifzRP05ey2Ibn/qWOGpOKNfFRohtsSNTgpFFA6A
+	rtKkAp70ztdw9e/lyW0YnyksnhMJ
+X-Google-Smtp-Source: APXvYqzLHta9q+Xi3P17N7fuStuW8tPiBNusS95q/VDMFyK/9aXJD5Lxit1wrM/P1FUdIM3TsnCSrw==
+X-Received: by 2002:a17:902:bf0a:: with SMTP id
+	bi10mr22258127plb.185.1568584660686; 
+	Sun, 15 Sep 2019 14:57:40 -0700 (PDT)
+Received: from workhorse.localdomain
+	([2600:1700:4c90:60a0:56be:f7ff:fe12:d0bd])
+	by smtp.gmail.com with ESMTPSA id
+	p14sm33674531pfn.138.2019.09.15.14.57.39
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 15 Sep 2019 14:28:26 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+	Sun, 15 Sep 2019 14:57:40 -0700 (PDT)
+Sender: Jeremy Puhlman <jpuhlman@gmail.com>
+Received: by workhorse.localdomain (Postfix, from userid 1000)
+	id B1FBD2A0A1A; Sun, 15 Sep 2019 08:58:13 -0700 (PDT)
+From: Jeremy Puhlman <jpuhlman@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Sep 2019 23:28:10 +0200
-Message-Id: <20190915212810.27364-2-open.source@oleksandr-kravchuk.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190915212810.27364-1-open.source@oleksandr-kravchuk.com>
-References: <20190915212810.27364-1-open.source@oleksandr-kravchuk.com>
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe 2/2] babl: update to 0.1.62
+Date: Sun, 15 Sep 2019 08:58:04 -0700
+Message-Id: <20190915155804.18326-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Subject: [meta-clang][PATCH] Turn off wchar in editline for native*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,33 +62,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Sep 2019 21:28:27 -0000
+X-List-Received-Date: Sun, 15 Sep 2019 21:57:40 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+| In file included from /build/poky/build/tmp/work-shared/llvm-project-source-9.0.0-r0/git/lldb/source/Core/IOHandler.cpp:31:0:
+| /build/poky/build/tmp/work-shared/llvm-project-source-9.0.0-r0/git/lldb/include/lldb/Host/Editline.h:36:19:
+| fatal error: codecvt: No such file or directory
+|  #include <codecvt>
+|                    ^
+
+wchar causes codecvt to be included, which does not exist on centos7, which
+prevents clang-native from building.
+
+Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
 ---
- .../recipes-graphics/babl/{babl_0.1.28.bb => babl_0.1.62.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/babl/{babl_0.1.28.bb => babl_0.1.62.bb} (72%)
+ recipes-devtools/clang/clang_git.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/babl/babl_0.1.28.bb b/meta-oe/recipes-graphics/babl/babl_0.1.62.bb
-similarity index 72%
-rename from meta-oe/recipes-graphics/babl/babl_0.1.28.bb
-rename to meta-oe/recipes-graphics/babl/babl_0.1.62.bb
-index 9d8c90fdb..4a7dbcab3 100644
---- a/meta-oe/recipes-graphics/babl/babl_0.1.28.bb
-+++ b/meta-oe/recipes-graphics/babl/babl_0.1.62.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
- inherit gnomebase
- 
- SRC_URI = "http://ftp.gimp.org/pub/${BPN}/0.1/${BP}.tar.bz2"
--SRC_URI[md5sum] = "cc53d8474a43aafb7cdaccea56cfde44"
--SRC_URI[sha256sum] = "63f3ed23e72a857a0e6df53d9d968a325024177b01edbe314a0c98b499eb8603"
-+SRC_URI[md5sum] = "28fa9d43549378ceebe2871d7721dd46"
-+SRC_URI[sha256sum] = "dc279f174edbcb08821cf37e4ab0bc02e6949369b00b150c759a6c24bfd3f510"
- 
- FILES_${PN} += "${libdir}/babl-*/*.so"
- FILES_${PN}-dev += "${libdir}/babl-*/*.la"
+diff --git a/recipes-devtools/clang/clang_git.bb b/recipes-devtools/clang/clang_git.bb
+index ba69243..9278bd6 100644
+--- a/recipes-devtools/clang/clang_git.bb
++++ b/recipes-devtools/clang/clang_git.bb
+@@ -74,7 +74,7 @@ LLVM_BINDINGS_LIST;LLVM_ENABLE_FFI;FFI_INCLUDE_DIR;LLVM_OPTIMIZED_TABLEGEN;\
+ LLVM_ENABLE_RTTI;LLVM_ENABLE_EH;LLVM_BUILD_EXTERNAL_COMPILER_RT;CMAKE_SYSTEM_NAME;\
+ CMAKE_BUILD_TYPE;BUILD_SHARED_LIBS;LLVM_ENABLE_PROJECTS;LLVM_BINUTILS_INCDIR;\
+ LLVM_TARGETS_TO_BUILD;LLVM_EXPERIMENTAL_TARGETS_TO_BUILD;PYTHON_EXECUTABLE;\
+-PYTHON_LIBRARY;PYTHON_INCLUDE_DIR;LLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN;\
++PYTHON_LIBRARY;PYTHON_INCLUDE_DIR;LLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN;LLDB_EDITLINE_USE_WCHAR;\
+ "
+ #
+ # Default to build all OE-Core supported target arches (user overridable).
+@@ -114,6 +114,7 @@ EXTRA_OECMAKE_append_class-native = "\
+                   -DLLVM_TARGETS_TO_BUILD='${LLVM_TARGETS_TO_BUILD}' \
+                   -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD='${LLVM_EXPERIMENTAL_TARGETS_TO_BUILD}' \
+                   -DPYTHON_EXECUTABLE='${PYTHON}' \
++                  -DLLDB_EDITLINE_USE_WCHAR=0 \
+ "
+ EXTRA_OECMAKE_append_class-nativesdk = "\
+                   -DCMAKE_CROSSCOMPILING:BOOL=ON \
+@@ -128,6 +129,7 @@ EXTRA_OECMAKE_append_class-nativesdk = "\
+                   -DLLDB_TABLEGEN=${STAGING_BINDIR_NATIVE}/lldb-tblgen \
+                   -DPYTHON_LIBRARY=${STAGING_LIBDIR}/lib${PYTHON_DIR}${PYTHON_ABI}.so \
+                   -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} \
++                  -DLLDB_EDITLINE_USE_WCHAR=0 \
+ "
+ EXTRA_OECMAKE_append_class-target = "\
+                   -DCMAKE_CROSSCOMPILING:BOOL=ON \
 -- 
-2.17.1
+2.20.1
 
 
