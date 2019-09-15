@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com
-	[209.85.208.178])
-	by mail.openembedded.org (Postfix) with ESMTP id A1C287ED5A
+Received: from mail-lj1-f176.google.com (mail-lj1-f176.google.com
+	[209.85.208.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 16AE87ED4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 23:42:58 +0000 (UTC)
-Received: by mail-lj1-f178.google.com with SMTP id s19so1351333lji.6
+	Sun, 15 Sep 2019 23:43:03 +0000 (UTC)
+Received: by mail-lj1-f176.google.com with SMTP id 7so31975399ljw.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 16:43:00 -0700 (PDT)
+	Sun, 15 Sep 2019 16:43:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=jnOuscH5y+x2/Nu4S3bDIuqRPNtceLsfFasGpSHODkw=;
-	b=HxhOBJLMx67sNrht7U9QUpJQKCgvsCePtHp9KAmtu5587A4qLILTdiLLlerGJMytae
-	tlxpSo2XmZlhy2kEuR0TcADVPuG4rhfFYQsSoF5BKsYUIYMftFitT3G1WxEewPuGJrgK
-	KvyMbuDq6zuVlWh7iaXdJB6npGc6HGuio/RSVquVGFs25Um7W5vhaCZqLU/s2G/tDKAV
-	flVQGTgBfqY8ZiLrXLcw+P5X19o2kI6oCPSamee5iXSeymRVdT0TVZ8qxbFfYkNc89yt
-	SR7F/kImHnsQ9dkA2AReMfZrSQLTWYY4F7nEbFp6MXAsEgnUu5h2t84cr/EhZ3KWFpFX
-	i0HA==
+	bh=jDIFahaLZgnTb9JLbZx4Wh6QtwpDAQgu61xUa94l8yo=;
+	b=L+0ICmFfH70Oj6Q14EayNoKRy5PmYHHj0kHL4lD+7rp0QjuZef886cJuCOPLqrL4Qs
+	rXXMpqFb7i2xj4826hp9dwW74E3iWg/nqapraMS0aZE7GdiReyWj19KhC385tMIdZZ68
+	r+pI879fVWiIxUvphRB2B9yZa82fJh8pacKHABcjS7fj0r6ZL8Ag29XKDRBs4GqaeOnW
+	7TUrU0Gn5u7NFg5hFzW8zcGaYe+jMgdDcp7VREoI+Z7YYf2uLh0t72XcIwvtv8SBoYGm
+	2eEidSZIsXKoNPM5bLsbtCoPA6a/3x9zgHvAlDFnTDkoenH7bhdi5H0Nff01HOXs7R7B
+	XHRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=jnOuscH5y+x2/Nu4S3bDIuqRPNtceLsfFasGpSHODkw=;
-	b=RT3CFhu70FShPhfyI9txYPca2HnqDBSXx1AUw4ELDes7JSpiDauwE0zpWOHb8mEpKo
-	YuWmIEQVM/5OhJvaBzMkFFGxofQOjhXSdtr/Z0Rt92VJR1Zq0gg/aFLRSet6FP+/6fdU
-	YLBPpEghySWRJmS+tCadUncE4Dq26DhAaA85MCIzgicJvAsifw1S/vC1TyQRfnTxp2Yo
-	P4TUFDa9lkg35SZN7d2jYasf5QmUHJWXHmT1bwNNP3JwStnUvB0hW25MYXm3nkkzoPkv
-	zkOf9bUsmbiKQCnFG3bCWljLKRdtEMBw7ufi0D0Optm36HYDKx/IE2l0khWCXtsclLeN
-	gKlw==
-X-Gm-Message-State: APjAAAUY3xsAQz6YBSBPGfLBfDiRvaouzYP60arzIrxM2SzUCTgLKvHN
-	r6Iwn32H7b9YomxrDdfOMOmRHIshyVA=
-X-Google-Smtp-Source: APXvYqxGQ0lC8ltdDDnPf7cR/1fCsrYbP82HUy0va/OLeymNdpK/GUaf9qXZOGMkYT8Jho8TTb5DEg==
-X-Received: by 2002:a2e:8802:: with SMTP id x2mr345668ljh.113.1568590979059;
-	Sun, 15 Sep 2019 16:42:59 -0700 (PDT)
+	bh=jDIFahaLZgnTb9JLbZx4Wh6QtwpDAQgu61xUa94l8yo=;
+	b=L9j/IInkR1658KS1Jt1qbqIJOdCzTbr5WFu0Vff26DQmDIDGqTls3a+U0uXKjXJ+SM
+	AKIw2NkCqSDuRr1INQ3VKXqZUh4HnDJRXDszVsZwENg1pE3/4LoeSVCnwuINHk2YXEU4
+	/4C4kYhkmXZvbQ62vSrbU6BnVhrsyueoUDzgMFXAQ6td78jwJ/O6yP6jO9rd80MlQpI4
+	gwo3Iwn4zqGXwb355OOA/iHOxEtKHIR5U/mGzlVNSuxI/dAQ95Cg6oufORq3aqXN9oRY
+	/37NX1M/hjKkAsDCj6zkkNmexuIjfNhtNvjQS6L29sF5fK2XNNsFPNlmQrxUDkK+R4Al
+	8Ypg==
+X-Gm-Message-State: APjAAAUc0b6sOt218A2rsh5NguZK0WLRDjd0IunfWdaOgrerYP+wmJ7c
+	/8M11Cl4LjlxcDBBCuUeoQ4p29l5O0Y=
+X-Google-Smtp-Source: APXvYqyvHy/7UNsIIkbXKYw/HeizNRaatuM7+J42lX7vNOX1xxjC8kR6iSje1U5gpAyDNRsys9BxLA==
+X-Received: by 2002:a2e:98d2:: with SMTP id s18mr4480709ljj.68.1568590984357; 
+	Sun, 15 Sep 2019 16:43:04 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115])
-	by smtp.gmail.com with ESMTPSA id 81sm8143154lje.70.2019.09.15.16.42.58
+	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
+	y20sm6847523ljj.89.2019.09.15.16.43.03
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 15 Sep 2019 16:42:58 -0700 (PDT)
+	Sun, 15 Sep 2019 16:43:03 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Sep 2019 01:42:57 +0200
-Message-Id: <20190915234257.13921-1-open.source@oleksandr-kravchuk.com>
+Date: Mon, 16 Sep 2019 01:43:02 +0200
+Message-Id: <20190915234302.14043-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] flatbuffers: update to 1.11.0
+Subject: [PATCH][meta-oe] digitemp: update to 3.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Sep 2019 23:42:59 -0000
+X-List-Received-Date: Sun, 15 Sep 2019 23:43:04 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../{flatbuffers_1.10.0.bb => flatbuffers_1.11.0.bb}            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/flatbuffers/{flatbuffers_1.10.0.bb => flatbuffers_1.11.0.bb} (94%)
+ .../digitemp/{digitemp_git.bb => digitemp_3.7.2.bb}           | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+ rename meta-oe/recipes-support/digitemp/{digitemp_git.bb => digitemp_3.7.2.bb} (85%)
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
-rename to meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb
-index 452e1e65a..4a76b9273 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb
-@@ -10,7 +10,7 @@ RDEPENDS_${PN}-dev += "${PN}-compiler"
+diff --git a/meta-oe/recipes-support/digitemp/digitemp_git.bb b/meta-oe/recipes-support/digitemp/digitemp_3.7.2.bb
+similarity index 85%
+rename from meta-oe/recipes-support/digitemp/digitemp_git.bb
+rename to meta-oe/recipes-support/digitemp/digitemp_3.7.2.bb
+index 460aa1438..9fcc278d3 100644
+--- a/meta-oe/recipes-support/digitemp/digitemp_git.bb
++++ b/meta-oe/recipes-support/digitemp/digitemp_3.7.2.bb
+@@ -4,11 +4,9 @@ DEPENDS = "libusb1"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=44fee82a1d2ed0676cf35478283e0aa0"
  
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a873c5645c184d51e0f9b34e1d7cf559"
+-PV = "3.7.1+git${SRCPV}"
+-
+ SRC_URI = "git://github.com/bcl/digitemp"
  
--SRCREV = "c0698cc33f1e534bb59c455909b88cc2726089af"
-+SRCREV = "9e7e8cbe9f675123dd41b7c62868acad39188cae"
+-SRCREV = "389f67655efa1674f595106c3a47b5ad082609a7"
++SRCREV = "a162e63aad35358aab325388f3d5e88121606419"
  
- SRC_URI = "git://github.com/google/flatbuffers.git"
+ S = "${WORKDIR}/git"
  
 -- 
 2.17.1
