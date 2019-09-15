@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com
-	[209.85.167.42])
-	by mail.openembedded.org (Postfix) with ESMTP id E24EB7E6AC
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com
+	[209.85.208.177])
+	by mail.openembedded.org (Postfix) with ESMTP id CAE4D7ED5A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 23:41:56 +0000 (UTC)
-Received: by mail-lf1-f42.google.com with SMTP id t8so25940380lfc.13
+	Sun, 15 Sep 2019 23:42:01 +0000 (UTC)
+Received: by mail-lj1-f177.google.com with SMTP id 7so31974383ljw.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 16:41:57 -0700 (PDT)
+	Sun, 15 Sep 2019 16:42:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=iQUhRCfaL788IiMYRTMfg5w1oAxWsnGt8WhAQxnE9cA=;
-	b=tcoid5/CPSlhiQ/8zKFnziv0bCQInr+hjsei2mdtjU2EOdofFpdMoeyq8TVtMJ4mWx
-	djdor2i68PSybwUdqSJFWaEGS5pPOKRw+yGB5wCI0PZVcpDmdgGzdgfgYVvdNSMnuo5e
-	mpEKAjpwSpjK11wUXTgPYMX/oDrwRjxCTXU1IBwzYsdoMps2aJGqmhyZPP0O53xdRVey
-	2kyoi3dOBIXmckjDVIMdJzhicKj49hw+/FeJ8H7chjSaWDjf78b5qKSYnH43kDCfp4SZ
-	uGGW/XqBHJ2Mb1aGQ0hkBWqgid8Qs9m8uESwqHrEiJYMNGuSpuwprXGYo/UgKj4YrjsF
-	NfCg==
+	bh=acIoZTEgxjsMXVCj0NI0MuqFkWwLO4qgXnjuKUa6tIc=;
+	b=PQ7+b6mjheuqRC+u0n+E0nHz6WNcEVf95s+uhX/qmgm8RXFd7fIZoxQvd7YM68vxrQ
+	2mfjnwAWTRXK8onb4QYqk6KvM/5RQFdlHTSNrK9UJX2nUW8UOygU5HOFWPIprHtnQ1Zw
+	RRT6Zat++WEI9a/Udf2zcHs6hi4Gf0LOSX5+8Yer9NeHhECIryRMDawuesOqe3twCJ4P
+	Slbs7amtzvaUek4GKirYEIoPj8d0VKy7OpZ4Ogl+lgHSmNNDJDat7iLJ2zR8cvzNNEE1
+	hVgpg3rBoVNkkrkPtg8zet57Qtz4s1Y9CoEUYo+TaalhwqGhDbVeqKD9Wg/GWF2vGooN
+	Igeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=iQUhRCfaL788IiMYRTMfg5w1oAxWsnGt8WhAQxnE9cA=;
-	b=hs4S0U4ujHmSxenjEl8COsJA+xLuTxn02wu6FZp7qizV3pGwidUdRJSDPwzvbYN1aA
-	YhpeckJGsDGBCbwDsT+HuQ0NiSh/IcRlEiWkzQUrQFcWYd6KG5wh08WRiXtS7+7+tSv2
-	8qiKNluiRzhgb5aQkxjrNBQLgqiJZNSt89Fd/hOpEWrs9pkqHzKRgqsDf8SSJki9guwl
-	08HCgeCqtvZbkB5t9xwqxesU3x0w0mctyERmCLvIERdqjwQKfuTEfghC4REMlic3g/7G
-	S6b8cFw3JcRK/P1l3rWwREVH1jjENLHKOmpaZkhgAJY7J9PBYJs38tk8Fgx7FCqKM8X0
-	3cfw==
-X-Gm-Message-State: APjAAAXBYiJLRsT1MpC3TxduJNI7kziAtP6PEjcA3INnVRtno3z7vIwm
-	TAaou+UXyybq+/1+QTFiUo58az0vYWA=
-X-Google-Smtp-Source: APXvYqwEVTzxydrUW6+oVdavpCp0IFBTPW5an1amvWW+CGs6LpEAJN8KZhKEnhpTB1sQTSi8fAtiaA==
-X-Received: by 2002:a19:5515:: with SMTP id n21mr8592248lfe.131.1568590916531; 
-	Sun, 15 Sep 2019 16:41:56 -0700 (PDT)
+	bh=acIoZTEgxjsMXVCj0NI0MuqFkWwLO4qgXnjuKUa6tIc=;
+	b=rAXobks1onO/iap/KobqyPVB6Hk+tqVQJCz4wzgHKI8fXNslFxlEn/a1HsDi7aMX10
+	vIYJfqQz9iu+cvAh2PRt5L3hGbqyhr9axUTKovOWsu611rRcaoQZFw5DDsTiht7TEASI
+	5YPAlK6ofY2JZOKw7iIvZi4zKQojMcaKqIbiqQ0v7aPc/zGDMrsS6l51mczxLY3tqa5S
+	jEtu03ztnzWTTxbesqVGxVKVOOvMoFaqJ0YrBh40yH1hDgNlrfGPExqGnuqQPuzOfStS
+	ZsBJv7sFJ6Kc1xMku2kdjw+2HljECRlpfOrLFWetu4LlvJee9pN57BsMStZl22IcsQCU
+	+OGw==
+X-Gm-Message-State: APjAAAXWKqZixfR98YQxKNTBLkCv4IOQ78IwL/2DNrBsBLPA7I8KIiaT
+	uh8MkMBmtWHqOYRFus13GobB1+5E98M=
+X-Google-Smtp-Source: APXvYqyY1lo4Cfe4pHQ8rpWtWa9f0QnF4M5lAudxgkf7xrme0t+ik9bufTdLG4k6CfQEfgOiS48Ptg==
+X-Received: by 2002:a2e:9215:: with SMTP id k21mr1014978ljg.20.1568590922209; 
+	Sun, 15 Sep 2019 16:42:02 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
 	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
-	r16sm8488414lfi.77.2019.09.15.16.41.55
+	p9sm7982550lji.107.2019.09.15.16.42.01
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 15 Sep 2019 16:41:56 -0700 (PDT)
+	Sun, 15 Sep 2019 16:42:01 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Sep 2019 01:41:54 +0200
-Message-Id: <20190915234154.12707-1-open.source@oleksandr-kravchuk.com>
+Date: Mon, 16 Sep 2019 01:41:59 +0200
+Message-Id: <20190915234159.12862-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] libvpx: update to 1.8.1
+Subject: [PATCH][meta-oe] libvdpau: update to 1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,31 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Sep 2019 23:41:57 -0000
+X-List-Received-Date: Sun, 15 Sep 2019 23:42:02 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../webm/{libvpx_1.7.0.bb => libvpx_1.8.1.bb}                  | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-multimedia/webm/{libvpx_1.7.0.bb => libvpx_1.8.1.bb} (94%)
+ .../vdpau/{libvdpau_git.bb => libvdpau_1.3.bb}              | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-graphics/vdpau/{libvdpau_git.bb => libvdpau_1.3.bb} (79%)
 
-diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.7.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.8.1.bb
-similarity index 94%
-rename from meta-oe/recipes-multimedia/webm/libvpx_1.7.0.bb
-rename to meta-oe/recipes-multimedia/webm/libvpx_1.8.1.bb
-index 1d04ed1bd..70278ecca 100644
---- a/meta-oe/recipes-multimedia/webm/libvpx_1.7.0.bb
-+++ b/meta-oe/recipes-multimedia/webm/libvpx_1.8.1.bb
-@@ -7,8 +7,7 @@ LICENSE = "BSD"
+diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb b/meta-oe/recipes-graphics/vdpau/libvdpau_1.3.bb
+similarity index 79%
+rename from meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
+rename to meta-oe/recipes-graphics/vdpau/libvdpau_1.3.bb
+index b79a562c8..d96b50186 100644
+--- a/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
++++ b/meta-oe/recipes-graphics/vdpau/libvdpau_1.3.bb
+@@ -5,14 +5,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=83af8811a28727a13f04132cc33b7f58"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
+ DEPENDS = "virtual/libx11 libxext xorgproto"
  
--# SRCREV for 1.7.0
--SRCREV = "133f83e2c34b8d770ae06aa595cef3e254173fcb"
-+SRCREV = "8ae686757b708cd8df1d10c71586aff5355cfe1e"
- SRC_URI += "git://chromium.googlesource.com/webm/libvpx;protocol=https \
-             file://libvpx-configure-support-blank-prefix.patch \
-            "
+-PV = "1.1.1+git${SRCPV}"
+-
+-SRCREV = "a21bf7aa438f5dd40d0a300a3167aa3d6f26dccc"
++SRCREV = "f57a9904c43ef5d726320c77baa91d0c38361ed4"
+ SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit distro_features_check autotools pkgconfig
++inherit distro_features_check meson
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
 -- 
 2.17.1
 
