@@ -1,49 +1,49 @@
 Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f181.google.com (mail-lj1-f181.google.com
-	[209.85.208.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A95A7ECB9
+Received: from mail-lj1-f173.google.com (mail-lj1-f173.google.com
+	[209.85.208.173])
+	by mail.openembedded.org (Postfix) with ESMTP id C36B47EC4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 23:41:41 +0000 (UTC)
-Received: by mail-lj1-f181.google.com with SMTP id d5so32002017lja.10
+	Sun, 15 Sep 2019 23:41:46 +0000 (UTC)
+Received: by mail-lj1-f173.google.com with SMTP id f1so505037ljc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Sep 2019 16:41:42 -0700 (PDT)
+	Sun, 15 Sep 2019 16:41:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=Bo2jOwMoc+yY1pre5GU+tXw9kTGmSxbO1O2Tc6oRX9o=;
-	b=uKcpZVmgh0PB6vSrOSCS4uOP3VZeqcq+yLxlEkuDXJyOna/mRW+zOuEbkAvKrYIMtF
-	W8IEuExymgltUXfrfUxUPRKU3ratdhxXO8agCNRRiFSnTrh6MtDFbbQ/f2GWzX2XJ/rh
-	4WZDPqP5V7yB0UdTYsjDTcjr2AeX2Y5CjU5AERwBtotj7p34Fd6dbqGnL6yRjjMEKa0h
-	y14pn1sffDuA+wDVElqukC4k0jV4gQ2ABH1KWjDhwfWnUWYLvtdpqjhK+5kwq2t+qFdM
-	lw5j1EwTnTFd9VzFpTHZV5dL2ecKutVvZTvgsmC/+vkr4Vzgcr1vaHlq2VlQpzzbfdaD
-	Fp6A==
+	bh=ytje8WO4ZTzRJUOSt1HKW/Qun3vCpdPJ69etZ7AaGAY=;
+	b=D0/J+U6wZTmJ9TqSQ3UWOLWl20nLyK0lY5EtIlf7md+vGKfCgLsJ1MQEMbanPUf04r
+	XYxMgUQhFSVsqDibBPJPHUIhHjiItGFejKGz2wv+97Y9J67t8IKOfzo8vsGQ4xUQkWc3
+	6c6hDMoh+VUblUPGf26nR0HAuYI8YBc7/zRvm2Dh6ULX/SGu7P3BoQhKahu8xvCM7KrD
+	fYSKVJIexQ+U1QXta1E0O3QTrnUovBKTIxokhdHaDdxIzrwZxFipPR63HPYB0XbM9FZ3
+	IjCY3OtF4ZBbkG3rXH9mBxHuhN9RE6XJ11OcqQulJdKcFAt2q43GUdih5aEYsutQ9xhw
+	sBRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Bo2jOwMoc+yY1pre5GU+tXw9kTGmSxbO1O2Tc6oRX9o=;
-	b=sG32XVxUv1mXE6lPQjn79keXbhQC3f4Bjzdu2ffRc+lRIzd96YbQ5BgLxQp97Fl0AK
-	Qw3T301jnGuY5rRx7Qtf4Gws/cH89G3fhnQqzMwn0PPHqkagspY1pb5kJSFLyUGXmsUn
-	W4PdcwQQNMlG/p9YgF8PR5cuUxD+PMEbtOe5abPmUqKSLzNnz2dO6wG1tXISgTV5Lb8f
-	7DOWlwJHR9QnSQfwJb+3uX33cP6qQhy+9RCznaSm5TCihPNcvYx+IQLEsaGZE0rxyQuv
-	evK24UmtxOG5IzlCTTlHguCoPaX0IQiJjL9uqv9xuupT6ySC8W9YOgzqWPh89ZSWf6cA
-	vyQg==
-X-Gm-Message-State: APjAAAUWCP6PBnHXNkYoJtAZCXGBIXVN8Cej+WtJI/aZj+XL7mfguz/z
-	5m/QfXUXecWNoz6vpEqpJE6rRDDfmbw=
-X-Google-Smtp-Source: APXvYqziX1KE32XgDyuh2Xv34orADb/jeOrpg+X7/AyvdDjTnxsOQlN/fnszjoBLPziV9LgbF/4QpQ==
-X-Received: by 2002:a2e:88c6:: with SMTP id a6mr36419761ljk.39.1568590901590; 
-	Sun, 15 Sep 2019 16:41:41 -0700 (PDT)
+	bh=ytje8WO4ZTzRJUOSt1HKW/Qun3vCpdPJ69etZ7AaGAY=;
+	b=YRR3bdADHPXhCGNRjDsTEcH3gnR9P8x1j268kMGKhx/O5eN3u4uelDnJdX+Ws7VoRZ
+	/r2bKbzFm/KjTt7OjUqvs6xDEvtTgoY060Yf/2jvHtxj5mXvxQ0Kj5jho6f1oYP6zYbn
+	TyKS9JTMZGJsIvXfskXmyP9V2TfBd0MNDLaizvrbqsLixsAU3U3a1N/mjW78FD+PFFYp
+	DEXvgDrYn8nS6TK1WVNRmUgmvNhy5H+sKKjuJyATGL+sqdzddngZ5BjcwQ9LB0thR+ub
+	AWpbWB4BT5A7o/lrhwRNiv2oMrp/UJskvTESfPXT/t/2zasuHNuXbOVdE147snbLW25u
+	DYug==
+X-Gm-Message-State: APjAAAVyA9lE/XZuVdZPjzoTh7UySI3b6uRiuvoib+dnn6rf3Ev3vVXs
+	yNd9DKGKTkAGj7gJVJJQ6MU0KW8eh70=
+X-Google-Smtp-Source: APXvYqxBWumOfEe1SXub+f8QIzGb+82jMl68V+3FM/eHJl9pxjMY4DehwLBxyw9NQZrXfyxUdXC1yA==
+X-Received: by 2002:a2e:1648:: with SMTP id 8mr26820866ljw.194.1568590906485; 
+	Sun, 15 Sep 2019 16:41:46 -0700 (PDT)
 Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
 	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
-	h12sm1206668ljg.24.2019.09.15.16.41.40
+	y206sm8596596lfc.6.2019.09.15.16.41.45
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 15 Sep 2019 16:41:41 -0700 (PDT)
+	Sun, 15 Sep 2019 16:41:46 -0700 (PDT)
 From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Sep 2019 01:41:39 +0200
-Message-Id: <20190915234139.12373-1-open.source@oleksandr-kravchuk.com>
+Date: Mon, 16 Sep 2019 01:41:44 +0200
+Message-Id: <20190915234144.12484-1-open.source@oleksandr-kravchuk.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] python-cpuset: update to 1.6
+Subject: [PATCH][meta-oe] proj: update to 6.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Sep 2019 23:41:41 -0000
+X-List-Received-Date: Sun, 15 Sep 2019 23:41:47 -0000
 
 Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 ---
- .../python/{python-cpuset_1.5.7.bb => python-cpuset_1.6.bb}     | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/python/{python-cpuset_1.5.7.bb => python-cpuset_1.6.bb} (89%)
+ .../recipes-navigation/proj/{proj_4.9.3.bb => proj_6.1.1.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-navigation/proj/{proj_4.9.3.bb => proj_6.1.1.bb} (70%)
 
-diff --git a/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb b/meta-oe/recipes-devtools/python/python-cpuset_1.6.bb
-similarity index 89%
-rename from meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
-rename to meta-oe/recipes-devtools/python/python-cpuset_1.6.bb
-index 156e52a3a..1255a51f7 100644
---- a/meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
-+++ b/meta-oe/recipes-devtools/python/python-cpuset_1.6.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb b/meta-oe/recipes-navigation/proj/proj_6.1.1.bb
+similarity index 70%
+rename from meta-oe/recipes-navigation/proj/proj_4.9.3.bb
+rename to meta-oe/recipes-navigation/proj/proj_6.1.1.bb
+index f45f8948d..a4281b6b2 100644
+--- a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb
++++ b/meta-oe/recipes-navigation/proj/proj_6.1.1.bb
+@@ -6,8 +6,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
  
- S = "${WORKDIR}/git"
--SRCREV = "ae629aa1dc959342745ad97406adddf63bb6dbdd"
-+SRCREV = "6c46d71a1c6ee711063153b9f7787280128f7252"
- SRC_URI = "git://github.com/lpechacek/cpuset.git;protocol=https;"
+ SRC_URI = "http://download.osgeo.org/proj/proj-${PV}.tar.gz"
+-SRC_URI[md5sum] = "d598336ca834742735137c5674b214a1"
+-SRC_URI[sha256sum] = "6984542fea333488de5c82eea58d699e4aff4b359200a9971537cd7e047185f7"
++SRC_URI[md5sum] = "9a82a3174cacf319d94360a759fbcc8a"
++SRC_URI[sha256sum] = "5cf0a2360a28b5d724c53edbb87f3f3b14fd96001265411ac4e56f369e2d503f"
  
- inherit distutils
+ inherit autotools pkgconfig lib_package
+ 
 -- 
 2.17.1
 
