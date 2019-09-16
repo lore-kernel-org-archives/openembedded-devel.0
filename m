@@ -1,25 +1,24 @@
 Return-Path: <phong@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CACD17F288
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id BF07E7F27E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 17:43:14 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8GHgJwU013139
+	Mon, 16 Sep 2019 19:05:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x8GJ55sl025927
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 16 Sep 2019 10:42:50 -0700
+	Mon, 16 Sep 2019 12:05:05 -0700 (PDT)
 Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Mon, 16 Sep 2019 10:42:27 -0700
-Received: by yow-lpggp3.wrs.com (Postfix, from userid 21010)	id 62FC520512;
-	Mon, 16 Sep 2019 13:42:27 -0400 (EDT)
+	Mon, 16 Sep 2019 12:05:04 -0700
+Received: by yow-lpggp3.wrs.com (Postfix, from userid 21010)	id A11152048B;
+	Mon, 16 Sep 2019 15:05:04 -0400 (EDT)
 From: Peiran Hong <peiran.hong@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Sep 2019 13:41:59 -0400
-Message-ID: <20190916174159.11355-1-peiran.hong@windriver.com>
+Date: Mon, 16 Sep 2019 15:04:41 -0400
+Message-ID: <20190916190441.5734-1-peiran.hong@windriver.com>
 X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [meta-oe][thud][PATCH] tcpdump: Fix CVE-2017-16808
+Subject: [meta-oe][warrior][PATCH] tcpdump: Fix CVE-2017-16808
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 17:43:15 -0000
+X-List-Received-Date: Mon, 16 Sep 2019 19:05:05 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
@@ -133,11 +132,11 @@ index 000000000..919f2b009
 +2.21.0
 +
 diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
-index d38540e34..14e90b092 100644
+index 038c1617f..9bd861cd4 100644
 --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
 +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
-@@ -10,6 +10,7 @@ SRC_URI = " \
-     file://unnecessary-to-check-libpcap.patch \
+@@ -12,6 +12,7 @@ SRC_URI = " \
+     file://avoid-absolute-path-when-searching-for-libdlpi.patch \
      file://add-ptest.patch \
      file://run-ptest \
 +    file://0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch \
