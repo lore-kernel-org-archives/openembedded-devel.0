@@ -1,46 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com
-	[209.85.222.176])
-	by mail.openembedded.org (Postfix) with ESMTP id B5EBD7D1E9
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with ESMTP id AFA867F286
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 14:09:34 +0000 (UTC)
-Received: by mail-qk1-f176.google.com with SMTP id x134so102879qkb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 07:09:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=13E+k0i/QG9D1h3442k8NOnBK4joEFUd4pQIP+gZ3Gw=;
-	b=bAYTih225fx7VFFwP70gnhxn3q3DU+5vNqltVaxUnGVMfTjelYAiO/FfQpp9lWaWTH
-	rhcB8F+4oqBfnAnJ+Bd9dwrOclQc7ks+G8xU+HZi4tJvGdHJuGUQo0Dojuldd8MRXxIx
-	3H/YpbWR8RS0lqpEM7W3kJ8a5582iyFv1LAznrWfO8Z3AzNLQYzjCPJB1ZLPo3TBvNL6
-	811Tx3nb+vXXp5W5f0ThJ7Ou+OeFQ20ta6KNlREMkVQOXHV/s7ChPZGxuiclXKHB1j58
-	+RQRuvhK2wGXLA7fymYYZBUKA3Tqgq5jWur6bNiMN7CT1HDxBVLr5eVd0ThLEH8pzHJi
-	jMKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=13E+k0i/QG9D1h3442k8NOnBK4joEFUd4pQIP+gZ3Gw=;
-	b=ZbvW/Aw54llSVX6X8zouqF44+qxJfcCbk29HzflnOOacOopzw7E1hqCCGEgryI04BF
-	RAjRHdypJ8IeiX/CegcZQbxv45Moh8EL3YMS345daEWFLG/neAQsy47727BgsUXZKCVK
-	zWWjUZKdBLsgSwRIL3M3T2hPkOaeiyR/z+R5ATxh9L69nJ8ukOgxwtvN3vzSo0oWclLY
-	idPMS9r8oOefLjeBNK0tEI3NtvskCge+/stckqejU1BiFllGmj9uRMUXTJFV8j0dzNGy
-	KCouqgMXrLqilJuAnvVtnyGGmSXtBQZdaECp7UiuZ2yfQ5wa5EHSTRvv+i9CBP2nHSHh
-	pp7w==
-X-Gm-Message-State: APjAAAUGF3z1R/7NP3f8sCk3zO0peAIi9KnMkzxlI+N7eR732Xhc3CY/
-	Tonk3enDc+45sc7y1SOJFIEoDKbm0PNqSbURe4I=
-X-Google-Smtp-Source: APXvYqz0MPD3YopUI5FHgLkF9NApIcysLougrbXMEe8mRhVLq8AsCkfuxCUO6R7Spez/PU2mKc+ponJRKptSEaDBQfE=
-X-Received: by 2002:a37:6651:: with SMTP id a78mr109542qkc.474.1568642975489; 
-	Mon, 16 Sep 2019 07:09:35 -0700 (PDT)
+	Mon, 16 Sep 2019 16:38:22 +0000 (UTC)
+Received: (qmail 26451 invoked by uid 1003); 16 Sep 2019 16:38:28 -0000
+Received: from unknown (HELO ?172.20.43.249?) (philip@opensdr.com@69.47.194.20)
+	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP;
+	16 Sep 2019 16:38:28 -0000
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+From: Philip Balister <philip@balister.org>
+Openpgp: preference=signencrypt
+Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
+	mQENBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
+	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
+	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
+	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
+	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
+	AAG0JVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz6JAT4EEwECACgCGyMG
+	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
+	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
+	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
+	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
+	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
+	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4Yxi5AQ0ETo83gQEIAPs+ZC0R
+	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
+	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
+	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
+	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
+	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAYkBJQQYAQIADwIbDAUC
+	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
+	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
+	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
+	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
+	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
+	6eUfr0u7CwnEyqiQ
+Message-ID: <b5b5c822-756a-5ae5-7b58-07f437751909@balister.org>
+Date: Mon, 16 Sep 2019 11:38:20 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-References: <20190915212810.27364-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190915212810.27364-1-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 16 Sep 2019 07:09:09 -0700
-Message-ID: <CAMKF1spG5nXwFLdePxckqH0O6hAf7joBaBO_o5GXKG3chMu67w@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe 1/2] gelg: update to 0.4.16
+Subject: OpenEmbedded Developer Meeting on Day 2 of Yocto Project Summit after ELCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,80 +59,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 14:09:35 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 16 Sep 2019 16:38:23 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-MW
+Content-Transfer-Encoding: 8bit
 
-gimp fails like below
+Boy that is a mouthful. The date is November 1 2019 in Lyon, France.
 
-checking for gegl-0.3 >= 0.3.0... no
-configure: error: Package requirements (gegl-0.3 >= 0.3.0) were not met:
+On day 2 of the Yocto Project Summit after the Embedded Linux
+Conference, we are hosting an OpenEmbedded Developer meeting. This
+meeting is part of an ongoing series of meetings held for OpenEmbedded
+developers and users to exchange information about the project's
+direction and to explain to developers problems people face in the real
+world.
 
-No package 'gegl-0.3' found
+Please sign up here (attendance is capped at 40):
 
-seems to be related see
-https://errors.yoctoproject.org/Errors/Details/270690/
+https://www.openembedded.org/wiki/OEDEM_2019
 
-On Sun, Sep 15, 2019 at 2:28 PM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> License checksum was changed because http links in the file were
-> replaced with https (see @758b21f68438c53496078fb5cf177166f32e603a).
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  .../gegl/{gegl_0.3.18.bb => gegl_0.4.16.bb}        | 14 +++++++-------
->  1 file changed, 7 insertions(+), 7 deletions(-)
->  rename meta-oe/recipes-graphics/gegl/{gegl_0.3.18.bb => gegl_0.4.16.bb} (70%)
->
-> diff --git a/meta-oe/recipes-graphics/gegl/gegl_0.3.18.bb b/meta-oe/recipes-graphics/gegl/gegl_0.4.16.bb
-> similarity index 70%
-> rename from meta-oe/recipes-graphics/gegl/gegl_0.3.18.bb
-> rename to meta-oe/recipes-graphics/gegl/gegl_0.4.16.bb
-> index 0053c0c68..0a8064478 100644
-> --- a/meta-oe/recipes-graphics/gegl/gegl_0.3.18.bb
-> +++ b/meta-oe/recipes-graphics/gegl/gegl_0.4.16.bb
-> @@ -1,11 +1,11 @@
->  SUMMARY = "GEGL (Generic Graphics Library) is a graph based image processing framework"
->  LICENSE = "LGPL-3.0"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=f1a8bfcbc85304df454b65d378b299c7"
->  DEPENDS = "babl librsvg glib-2.0 gtk+ pango cairo expat zlib libpng jpeg virtual/libsdl json-glib intltool-native"
->
->  EXTRA_OECONF = "--disable-docs"
->
-> -inherit distro_features_check gnomebase vala gobject-introspection
-> +inherit distro_features_check gnomebase vala gobject-introspection gettext
->
->  REQUIRED_DISTRO_FEATURES = "x11"
->
-> @@ -16,16 +16,16 @@ PACKAGECONFIG[lcms] = "--with-lcms,--without-lcms,lcms"
->  PACKAGECONFIG[tiff] = "--with-libtiff,--without-libtiff,tiff"
->  PACKAGECONFIG[webp] = "--with-webp,--without-webp,webp"
->
-> -SRC_URI = "http://ftp.gimp.org/pub/${BPN}/0.3/${BP}.tar.bz2 \
-> +SRC_URI = "http://ftp.gimp.org/pub/${BPN}/0.4/${BP}.tar.bz2 \
->             file://pkgconfig.patch "
-> -SRC_URI[md5sum] = "6e5c6f229261478dc436a38c84405b2a"
-> -SRC_URI[sha256sum] = "d7858ef26ede136d14e3de188a9e9c0de7707061a9fb96d7d615fab4958491fb"
-> +SRC_URI[md5sum] = "cb17ac529a882f25f54c0115c63d4027"
-> +SRC_URI[sha256sum] = "0112df690301d9eb993cc48965fc71b7751c9021a4f4ee08fcae366c326b5e5a"
->
->  LDFLAGS += "-lm"
->
->  # There are a couple of non-symlink .so files installed into libdir, which need to go into main package
-> -FILES_${PN}_append = " ${libdir}/gegl-0.3/*.so ${libdir}/gegl-0.3/*.json ${libdir}/libgegl-npd-0.3.so ${libdir}/libgegl-sc-0.3.so"
-> -FILES_${PN}-dev_append = " ${libdir}/gegl-0.3/*.la ${libdir}/libgegl-0.3.so"
-> +FILES_${PN}_append = " ${libdir}/gegl-0.4/*.so ${libdir}/gegl-0.4/*.json ${libdir}/libgegl-npd-0.4.so ${libdir}/libgegl-sc-0.4.so"
-> +FILES_${PN}-dev_append = " ${libdir}/gegl-0.4/*.la ${libdir}/libgegl-0.4.so"
->  FILES_${PN}-dev_remove = "${libdir}/lib*.so"
->
->  # Fails to build with thumb-1 (qemuarm)
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Please add ideas for topics also. (Also add your T-shirt size after your
+name, no promises but the information might help us)
+
+More info and sign up information for the Yocto Project Summit is here:
+
+https://wiki.yoctoproject.org/wiki/Yocto_Project_Summit_2019
+
+Based on talk abstracts I've seen, Day 1 should be very interesting!
+
+Philip
+
+PS: For some historical perspective, here is the page from 2007:
+https://www.openembedded.org/wiki/Oedem2007
 
