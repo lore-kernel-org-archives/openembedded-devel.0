@@ -1,24 +1,25 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
+Return-Path: <phong@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A6477F26A
+	by mail.openembedded.org (Postfix) with ESMTP id CACD17F288
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 17:36:42 +0000 (UTC)
+	Mon, 16 Sep 2019 17:43:14 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8GHaNfn013023
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 10:36:33 -0700
-Received: from yow-dellw-ag.wrs.com (128.224.56.115) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.468.0; Mon, 16 Sep 2019 10:36:12 -0700
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8GHgJwU013139
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 16 Sep 2019 10:42:50 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Mon, 16 Sep 2019 10:42:27 -0700
+Received: by yow-lpggp3.wrs.com (Postfix, from userid 21010)	id 62FC520512;
+	Mon, 16 Sep 2019 13:42:27 -0400 (EDT)
+From: Peiran Hong <peiran.hong@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Sep 2019 13:36:11 -0400
-Message-ID: <1568655371-17140-1-git-send-email-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Mon, 16 Sep 2019 13:41:59 -0400
+Message-ID: <20190916174159.11355-1-peiran.hong@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v4] openjpeg: upgrade 2.3.0 -> 2.3.1
+Subject: [meta-oe][thud][PATCH] tcpdump: Fix CVE-2017-16808
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,109 +32,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 17:36:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 16 Sep 2019 17:43:15 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+Backport selected parts of three upstream commits to fix
+CVE-2017-16808 where tcpdump 4.9.2 has a heap-based buffer over-read.
 
-Upgrading fixes CVE-2018-21010 and incorporates other bug fixes
-from upstream.
+Upstream-Status: Backport
+[ several ]
 
-The source upgrade to 2.3.1 changed the way include directories are
-identified, so the patch 0001-Ensure-cmake-files-are-installed-at-common-location.patch
-is no longer needed to help poppler find cmake files.
+Upstream commits fully backported:
+46aead6  [CVE-2017-16808/AoE: Add a missing bounds check]
 
-The contents of /usr/lib/openjpeg-2.3 were added to the FILES
-list since poppler needs them to build.
+Upstream commits partially backported:
+7068209  [Use nd_ types in 802.x and FDDI headers.]
+84ef17a  [Replace ND_TTEST2()/ND_TCHECK2() macros by macros using
+pointers (1/n)]
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+46aead6 fixes the vulnerability and requires two macros defined in
+7068209 and 84ef17a, which are committed after the release of 4.9.2.
+Only the definition of the macros are taken from the two commits
+as they impact a wide range of code and are difficult to integrate.
+
+CVE: CVE-2017-16808
+
+Signed-off-by: Peiran Hong <peiran.hong@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ke-files-are-installed-at-common-location.patch | 48 ----------------------
- .../{openjpeg_2.3.0.bb => openjpeg_2.3.1.bb}       |  5 ++-
- 2 files changed, 3 insertions(+), 50 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cmake-files-are-installed-at-common-location.patch
- rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.3.0.bb => openjpeg_2.3.1.bb} (79%)
+ ...16808-AoE-Add-a-missing-bounds-check.patch | 61 +++++++++++++++++++
+ .../recipes-support/tcpdump/tcpdump_4.9.2.bb  |  1 +
+ 2 files changed, 62 insertions(+)
+ create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cmake-files-are-installed-at-common-location.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cmake-files-are-installed-at-common-location.patch
-deleted file mode 100644
-index 5c5fe64..0000000
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg/0001-Ensure-cmake-files-are-installed-at-common-location.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From fe491c0919f5adc8d626cb98c5ec19d0b99dfe20 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
--Date: Thu, 27 Sep 2018 23:45:04 +0200
--Subject: [PATCH] Ensure cmake files are installed at common location
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--* Otherwise recent poppler is not able to find them
--* Include path needs adjustment with this change
--
--Upstream-Status: Inappropriate [Configuration]
--
--Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-----
-- CMakeLists.txt                | 2 +-
-- cmake/OpenJPEGConfig.cmake.in | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index ff70a06f..23d2fac4 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -150,7 +150,7 @@ if(NOT OPENJPEG_INSTALL_PACKAGE_DIR)
--   # We could install *.cmake files in share/ however those files contains
--   # hardcoded path to libraries on a multi-arch system (fedora/debian) those
--   # path will be different (lib/i386-linux-gnu vs lib/x86_64-linux-gnu)
---  set(OPENJPEG_INSTALL_PACKAGE_DIR "${OPENJPEG_INSTALL_LIB_DIR}/${OPENJPEG_INSTALL_SUBDIR}")
--+  set(OPENJPEG_INSTALL_PACKAGE_DIR "${OPENJPEG_INSTALL_LIB_DIR}/cmake/${OPENJPEG_INSTALL_SUBDIR}")
-- endif()
-- 
-- if (APPLE)
--diff --git a/cmake/OpenJPEGConfig.cmake.in b/cmake/OpenJPEGConfig.cmake.in
--index b20294ca..6a2f4baf 100644
----- a/cmake/OpenJPEGConfig.cmake.in
--+++ b/cmake/OpenJPEGConfig.cmake.in
--@@ -26,7 +26,7 @@ get_filename_component(SELF_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-- if(EXISTS ${SELF_DIR}/OpenJPEGTargets.cmake)
--   # This is an install tree
--   include(${SELF_DIR}/OpenJPEGTargets.cmake)
---  get_filename_component(OPENJPEG_INCLUDE_ROOT "${SELF_DIR}/../../@OPENJPEG_INSTALL_INCLUDE_DIR@" ABSOLUTE)
--+  get_filename_component(OPENJPEG_INCLUDE_ROOT "${SELF_DIR}/../../../@OPENJPEG_INSTALL_INCLUDE_DIR@" ABSOLUTE)
--   set(OPENJPEG_INCLUDE_DIRS ${OPENJPEG_INCLUDE_ROOT})
-- 
-- else()
---- 
--2.14.4
--
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-similarity index 79%
-rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-index d30ff48..b19f910 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.0.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-@@ -7,13 +7,14 @@ DEPENDS = "libpng tiff lcms zlib"
- 
- SRC_URI = " \
-     git://github.com/uclouvain/openjpeg.git \
--    file://0001-Ensure-cmake-files-are-installed-at-common-location.patch \
-     file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
- "
--SRCREV = "081de4b15f54cb4482035b7bf5e3fb443e4bc84b"
-+SRCREV = "57096325457f96d8cd07bd3af04fe81d7a2ba788"
- S = "${WORKDIR}/git"
- 
- inherit cmake
- 
- # for multilib
- EXTRA_OECMAKE += "-DOPENJPEG_INSTALL_LIB_DIR=${@d.getVar('baselib').replace('/', '')}"
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
+new file mode 100644
+index 000000000..919f2b009
+--- /dev/null
++++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
+@@ -0,0 +1,61 @@
++From c45443a0d3e16b92622bea6b589e5930e8f0d815 Mon Sep 17 00:00:00 2001
++From: Peiran Hong <peiran.hong@windriver.com>
++Date: Fri, 13 Sep 2019 17:02:57 -0400
++Subject: [PATCH] CVE-2017-16808/AoE: Add a missing bounds check.
 +
-+FILES_${PN} += "${libdir}/openjpeg*"
++---
++ netdissect.h | 12 ++++++++++++
++ print-aoe.c  |  1 +
++ 2 files changed, 13 insertions(+)
++
++diff --git a/netdissect.h b/netdissect.h
++index 089b0406..cd05fdb9 100644
++--- a/netdissect.h
+++++ b/netdissect.h
++@@ -69,6 +69,11 @@ typedef struct {
++ typedef unsigned char nd_uint8_t;
++ typedef signed char nd_int8_t;
++ 
+++/*
+++ * Use this for MAC addresses.
+++ */
+++#define MAC_ADDR_LEN    6               /* length of MAC addresses */
+++
++ /* snprintf et al */
++ 
++ #include <stdarg.h>
++@@ -309,12 +314,19 @@ struct netdissect_options {
++ 	((uintptr_t)ndo->ndo_snapend - (l) <= (uintptr_t)ndo->ndo_snapend && \
++          (uintptr_t)&(var) <= (uintptr_t)ndo->ndo_snapend - (l)))
++ 
+++#define ND_TTEST_LEN(p, l) \
+++  (IS_NOT_NEGATIVE(l) && \
+++        ((uintptr_t)ndo->ndo_snapend - (l) <= (uintptr_t)ndo->ndo_snapend && \
+++         (uintptr_t)(p) <= (uintptr_t)ndo->ndo_snapend - (l)))
+++
++ /* True if "var" was captured */
++ #define ND_TTEST(var) ND_TTEST2(var, sizeof(var))
++ 
++ /* Bail if "l" bytes of "var" were not captured */
++ #define ND_TCHECK2(var, l) if (!ND_TTEST2(var, l)) goto trunc
++ 
+++#define ND_TCHECK_LEN(p, l) if (!ND_TTEST_LEN(p, l)) goto trunc
+++
++ /* Bail if "var" was not captured */
++ #define ND_TCHECK(var) ND_TCHECK2(var, sizeof(var))
++ 
++diff --git a/print-aoe.c b/print-aoe.c
++index 97e93df2..ac097a04 100644
++--- a/print-aoe.c
+++++ b/print-aoe.c
++@@ -325,6 +325,7 @@ aoev1_reserve_print(netdissect_options *ndo,
++ 		goto invalid;
++ 	/* addresses */
++ 	for (i = 0; i < nmacs; i++) {
+++		ND_TCHECK_LEN(cp, MAC_ADDR_LEN);
++ 		ND_PRINT((ndo, "\n\tEthernet Address %u: %s", i, etheraddr_string(ndo, cp)));
++ 		cp += ETHER_ADDR_LEN;
++ 	}
++-- 
++2.21.0
++
+diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
+index d38540e34..14e90b092 100644
+--- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
++++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
+@@ -10,6 +10,7 @@ SRC_URI = " \
+     file://unnecessary-to-check-libpcap.patch \
+     file://add-ptest.patch \
+     file://run-ptest \
++    file://0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch \
+ "
+ 
+ SRC_URI[md5sum] = "9bbc1ee33dab61302411b02dd0515576"
 -- 
-2.7.4
+2.21.0
 
 
