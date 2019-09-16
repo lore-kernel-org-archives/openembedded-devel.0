@@ -1,30 +1,36 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D3F7C6BC19
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 3580C7EFB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 04:45:52 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,510,1559491200"; d="scan'208";a="75506105"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Sep 2019 12:45:34 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id EEF234CE0C9C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 12:45:14 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 16 Sep 2019 12:45:35 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 16 Sep 2019 12:45:29 +0800
-Message-ID: <1568609129-49183-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 16 Sep 2019 06:47:46 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46WxdG5MHCz4t;
+	Mon, 16 Sep 2019 08:47:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1568616467;
+	bh=7xgdE9dfekT0XCcHWbMn+3dwvypEP/7aEoMfuhiABbg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=HrmJpvIjBKA2XZD74MixQ4uO/3LejVv//pYj+5GoXJ3tgf601ZO2uZDPq13/2I+1D
+	4ng0UI1vr4elX+71mXnESXzfWV4aJhH0OHQQiV6j/cbmnLV45i42aishKVWvpd0WFT
+	e6ATRQtqVVNfe3d6t5YhfFiQFv43VGhFbtiLZUc9FmFFrPS4jmDKU35Da76H81NPMu
+	MVxqCOojWDhpfltXwP0nBfaoB3O6M2eNtqqtrUco/oVJewlhlXZhwO8o0d9o/1DgV5
+	7mQTEJgnMoMVpw7QX5AhfpFUEikQpVOJKlZLWyoBoIifD2N8ExzFyVxiVZXgS/QFek
+	TOxioFrTy7+i9yyAwgafL8r5A2PigUsTWTRTbIAi0FeqBKiNPPla1/dFDbdr22ELhO
+	dZfel3qVI9oyuBqR0wRYzYSPaeEsOQIQAdGNFSIRqXqEswJubxFp58q06tvKjgsXyk
+	78W6GlYiZX7xf32LEsL1ta49mo/X62V5dTKppQ8AzR6SMSdMBIHiTMKihtR1YdRE3N
+	iGSzkyxp6+wfO7i7g5fMCcPqcmeS+9AwqHx1vYCwqedr4ee+f1AZ653CZaZ6dgQV/Q
+	ovCWHphEyv965OKlgMwyXItBcW8/mWjSKI9OWL0sLzsfnLH//x7g2VEH5gj+cwIGTA
+	LX4c2FcNRfY5AH5ZldJwUOQU=
+Date: Mon, 16 Sep 2019 09:47:44 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Message-ID: <20190916064744.GA7825@localhost>
+References: <1568609129-49183-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-yoursite-MailScanner-ID: EEF234CE0C9C.AD670
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] xrdp: 0.9.4 -> 0.9.11
+In-Reply-To: <1568609129-49183-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] xrdp: 0.9.4 -> 0.9.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,300 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 04:45:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 16 Sep 2019 06:47:47 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-1) Upgrade xrdp from 0.9.4 to 0.9.11.
-2) Remove patch that is included in 0.9.11.
-   0001-Fix-of-CVE-2017-16927.patch
-3) Remove patch that is not suitable for 0.9.11.
-   0001-Fix-sesman.ini-and-xrdp.ini.patch
+On Mon, Sep 16, 2019 at 12:45:29PM +0800, Zheng Ruoqin wrote:
+>...
+> --- a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+> +++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb
+>...
+> -SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
+> +SRCREV = "1e4b03eb3c9aa7173de251a328c93c073dcc0fca"
+>  
+> -PV = "0.9.4+git${SRCPV}"
+> +PV = "0.9.11+git${SRCPV}"
+>...
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../xrdp/0001-Fix-of-CVE-2017-16927.patch     | 148 ------------------
- .../0001-Fix-sesman.ini-and-xrdp.ini.patch    |  75 ---------
- .../xrdp/{xrdp_0.9.4.bb => xrdp_0.9.11.bb}    |  10 +-
- 3 files changed, 4 insertions(+), 229 deletions(-)
- delete mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-Fix-of-CVE-2017-16927.patch
- delete mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-Fix-sesman.ini-and-xrdp.ini.patch
- rename meta-oe/recipes-support/xrdp/{xrdp_0.9.4.bb => xrdp_0.9.11.bb} (91%)
+This is exactly the release, not a +git snapshot.
 
-diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-of-CVE-2017-16927.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-of-CVE-2017-16927.patch
-deleted file mode 100644
-index 4c93647f6..000000000
---- a/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-of-CVE-2017-16927.patch
-+++ /dev/null
-@@ -1,148 +0,0 @@
--Subject: [PATCH] Fix CVE-2017-16927
--
--sesman: scpv0, accept variable length data fields
--
--Upstream-Status: Backport 
--
-----
-- sesman/libscp/libscp_v0.c | 32 +++++++++++++++++++++++++-------
-- 1 file changed, 25 insertions(+), 7 deletions(-)
--
--diff --git a/sesman/libscp/libscp_v0.c b/sesman/libscp/libscp_v0.c
--index 5a0c8bf..5693407 100644
----- a/sesman/libscp/libscp_v0.c
--+++ b/sesman/libscp/libscp_v0.c
--@@ -161,7 +161,7 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
--     struct SCP_SESSION *session = 0;
--     tui16 sz;
--     tui32 code = 0;
---    char buf[257];
--+    char *buf = 0;
-- 
--     if (!skipVchk)
--     {
--@@ -226,27 +226,31 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
-- 
--         /* reading username */
--         in_uint16_be(c->in_s, sz);
---        buf[sz] = '\0';
--+        buf = g_new0(char, sz);
--         in_uint8a(c->in_s, buf, sz);
---
--+        buf[sz] = '\0';
--         if (0 != scp_session_set_username(session, buf))
--         {
--             scp_session_destroy(session);
--             log_message(LOG_LEVEL_WARNING, "[v0:%d] connection aborted: error setting username", __LINE__);
--+            g_free(buf);
--             return SCP_SERVER_STATE_INTERNAL_ERR;
--         }
--+        g_free(buf);
-- 
--         /* reading password */
--         in_uint16_be(c->in_s, sz);
---        buf[sz] = '\0';
--+        buf = g_new0(char, sz);
--         in_uint8a(c->in_s, buf, sz);
---
--+        buf[sz] = '\0';
--         if (0 != scp_session_set_password(session, buf))
--         {
--             scp_session_destroy(session);
--             log_message(LOG_LEVEL_WARNING, "[v0:%d] connection aborted: error setting password", __LINE__);
--+            g_free(buf);
--             return SCP_SERVER_STATE_INTERNAL_ERR;
--         }
--+        g_free(buf);
-- 
--         /* width */
--         in_uint16_be(c->in_s, sz);
--@@ -272,9 +276,11 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
-- 
--             if (sz > 0)
--             {
--+                buf = g_new0(char, sz);
--                 in_uint8a(c->in_s, buf, sz);
--                 buf[sz] = '\0';
--                 scp_session_set_domain(session, buf);
--+                g_free(buf);
--             }
--         }
-- 
--@@ -285,9 +291,11 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
-- 
--             if (sz > 0)
--             {
--+                buf = g_new0(char, sz);
--                 in_uint8a(c->in_s, buf, sz);
--                 buf[sz] = '\0';
--                 scp_session_set_program(session, buf);
--+                g_free(buf);
--             }
--         }
-- 
--@@ -298,9 +306,11 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
-- 
--             if (sz > 0)
--             {
--+                buf = g_new0(char, sz);
--                 in_uint8a(c->in_s, buf, sz);
--                 buf[sz] = '\0';
--                 scp_session_set_directory(session, buf);
--+                g_free(buf);
--             }
--         }
-- 
--@@ -311,9 +321,11 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
-- 
--             if (sz > 0)
--             {
--+                buf = g_new0(char, sz);
--                 in_uint8a(c->in_s, buf, sz);
--                 buf[sz] = '\0';
--                 scp_session_set_client_ip(session, buf);
--+                g_free(buf);
--             }
--         }
--     }
--@@ -332,29 +344,35 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
--         scp_session_set_type(session, SCP_GW_AUTHENTICATION);
--         /* reading username */
--         in_uint16_be(c->in_s, sz);
---        buf[sz] = '\0';
--+        buf = g_new0(char, sz);
--         in_uint8a(c->in_s, buf, sz);
--+        buf[sz] = '\0';
-- 
--         /* g_writeln("Received user name: %s",buf); */
--         if (0 != scp_session_set_username(session, buf))
--         {
--             scp_session_destroy(session);
--             /* until syslog merge log_message(s_log, LOG_LEVEL_WARNING, "[v0:%d] connection aborted: error setting        username", __LINE__);*/
--+            g_free(buf);
--             return SCP_SERVER_STATE_INTERNAL_ERR;
--         }
--+        g_free(buf);
-- 
--         /* reading password */
--         in_uint16_be(c->in_s, sz);
---        buf[sz] = '\0';
--+        buf = g_new0(char, sz);
--         in_uint8a(c->in_s, buf, sz);
--+        buf[sz] = '\0';
-- 
--         /* g_writeln("Received password: %s",buf); */
--         if (0 != scp_session_set_password(session, buf))
--         {
--             scp_session_destroy(session);
--             /* until syslog merge log_message(s_log, LOG_LEVEL_WARNING, "[v0:%d] connection aborted: error setting password", __LINE__); */
--+            g_free(buf);
--             return SCP_SERVER_STATE_INTERNAL_ERR;
--         }
--+        g_free(buf);
--     }
--     else
--     {
---- 
--2.7.4
--
-diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-sesman.ini-and-xrdp.ini.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-sesman.ini-and-xrdp.ini.patch
-deleted file mode 100644
-index deaadde8c..000000000
---- a/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-sesman.ini-and-xrdp.ini.patch
-+++ /dev/null
-@@ -1,75 +0,0 @@
--From a9c460f158d68c1b3de6a31ce853de5379977695 Mon Sep 17 00:00:00 2001
--From: Lei Maohui <leimaohui@cn.fujitsu.com>
--Date: Thu, 30 Nov 2017 11:10:04 +0900
--Subject: [PATCH] Fix sesman.ini and xrdp.ini
--
--Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
-----
-- sesman/sesman.ini | 20 ++++++--------------
-- xrdp/xrdp.ini     | 10 ----------
-- 2 files changed, 6 insertions(+), 24 deletions(-)
--
--diff --git a/sesman/sesman.ini b/sesman/sesman.ini
--index 8225ee4..c09189e 100644
----- a/sesman/sesman.ini
--+++ b/sesman/sesman.ini
--@@ -54,12 +54,14 @@ LogLevel=DEBUG
-- EnableSyslog=1
-- SyslogLevel=DEBUG
-- 
---[X11rdp]
---param=X11rdp
---param=-bs
--+[Xorg]
--+param=Xorg
--+param=-config
--+param=xrdp/xorg.conf
--+param=-noreset
-- param=-nolisten
-- param=tcp
---param=-uds
--+
-- 
-- [Xvnc]
-- param=Xvnc
--@@ -70,16 +72,6 @@ param=-localhost
-- param=-dpi
-- param=96
-- 
---[Xorg]
---param=Xorg
---param=-config
---param=xrdp/xorg.conf
---param=-noreset
---param=-nolisten
---param=tcp
---param=-logfile
---param=.xorgxrdp.%s.log
---
-- [Chansrv]
-- ; drive redirection, defaults to xrdp_client if not set
-- FuseMountName=thinclient_drives
--diff --git a/xrdp/xrdp.ini b/xrdp/xrdp.ini
--index cb6d7c3..9f63a69 100644
----- a/xrdp/xrdp.ini
--+++ b/xrdp/xrdp.ini
--@@ -157,16 +157,6 @@ ip=127.0.0.1
-- port=-1
-- code=20
-- 
---[X11rdp]
---name=X11rdp
---lib=libxup.so
---username=ask
---password=ask
---ip=127.0.0.1
---port=-1
---xserverbpp=24
---code=10
---
-- [Xvnc]
-- name=Xvnc
-- lib=libvnc.so
---- 
--1.8.4.2
--
-diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb
-similarity index 91%
-rename from meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-rename to meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb
-index 3ef7c9853..a3986177b 100644
---- a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-+++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.11.bb
-@@ -12,15 +12,13 @@ REQUIRED_DISTRO_FEATURES = "x11 pam"
- 
- SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
-            file://xrdp.sysconfig \
--           file://0001-Fix-sesman.ini-and-xrdp.ini.patch \
-            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
-            file://0001-Fix-the-compile-error.patch \
--           file://0001-Fix-of-CVE-2017-16927.patch \
-            "
- 
--SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
-+SRCREV = "1e4b03eb3c9aa7173de251a328c93c073dcc0fca"
- 
--PV = "0.9.4+git${SRCPV}"
-+PV = "0.9.11+git${SRCPV}"
- 
- S = "${WORKDIR}/git"
- 
-@@ -68,9 +66,9 @@ do_install_append() {
- 	sed -i -e 's,@sbindir@,${sbindir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
- 
- 	install -m 0644 ${S}/instfiles/*.ini ${D}${sysconfdir}/xrdp/
--	install -m 0644 ${S}/sesman/sesman.ini ${D}${sysconfdir}/xrdp/
-+	install -m 0644 ${S}/sesman/sesman.ini.in ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${S}/sesman/startwm.sh ${D}${sysconfdir}/xrdp/
--	install -m 0644 ${S}/xrdp/xrdp.ini ${D}${sysconfdir}/xrdp/
-+	install -m 0644 ${S}/xrdp/xrdp.ini.in ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${S}/xrdp/xrdp_keyboard.ini ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${S}/instfiles/xrdp.sh ${D}${sysconfdir}/xrdp/
- 	install -m 0644 ${S}/keygen/openssl.conf ${D}${sysconfdir}/xrdp/
+Please drop PV since it is already set automatically
+to the correct value.
+
+cu
+Adrian
+
 -- 
-2.17.1
 
-
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
