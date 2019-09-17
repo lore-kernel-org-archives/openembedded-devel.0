@@ -1,24 +1,49 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BCD77F81C
+Return-Path: <nathan@nathanrossi.com>
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id C6D677F88D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Sep 2019 01:27:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x8H1RqRe028648
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue, 17 Sep 2019 05:40:10 +0000 (UTC)
+Received: by mail-pf1-f177.google.com with SMTP id a2so1433726pfo.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 18:27:52 -0700 (PDT)
-Received: from localhost (128.224.162.195) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Mon, 16 Sep 2019 18:27:51 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Sep 2019 09:27:49 +0800
-Message-ID: <1568683669-25198-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Mon, 16 Sep 2019 22:40:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nathanrossi.com; s=google;
+	h=date:message-id:from:to:cc:subject:content-transfer-encoding
+	:mime-version; bh=0o5DWPtex4MLpx5B452uxh3OEdfofXEw07y9rkxX1ns=;
+	b=X2PrPhM1H7vekgqayht90t6rPi9Gd9+A8yDjltKQeINAjsKwUF8eVIPFSL8WihLg9V
+	C7CMArRzO2QwnanymvVD7di++gQyGiHfqqOgI8jFVDYcV3PV9Nvfs6fAmpfGqcM4wfPu
+	vDSRlp5FY919Oz60Q1mnOcn6Xb5GfXEz+0VyDlHlIMHixBnJZ+Dlw7e1O48ksAGKP77W
+	BzR1c/e+v5aUHHP3tkbdfDupGMUYC0XoQ9T5TdaP5LKEsgtN0TVL1NsbUBaH8IOCv4mt
+	fiT0CNduzjilLLa0cTgQ9mp/NNirIU7NigjMs94nJAR2BBlvt+Bo6LgT0L8JbV0UWErP
+	RNNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:message-id:from:to:cc:subject
+	:content-transfer-encoding:mime-version;
+	bh=0o5DWPtex4MLpx5B452uxh3OEdfofXEw07y9rkxX1ns=;
+	b=q1qA0d17QdtRh3o3pBpVfpmTDmSlJ7KmNNg403yOKW3r6lkAZ8jVh9fnQW/GsedquP
+	mSW7vRtfAL4VKITjypXboWLIUxiVyn6acuSBnNXggvQRdJHuEAWELKQS1hLkB0Qy3wU0
+	m9v0xqg1q9RExqicUC4Dmxx1uOhYVoVamlKWVCsS/CmsFZouhQeCsXFxwbshjRz9iDGS
+	UP0lGM6eQ7baGpgaemSgGAShiOLUaVDOXChrQ3l/X9J/5JZzawvVIz6oHx5UcdHquoLy
+	YggsD9faa/6gYTTf54byCoSowp+CHj2qP66uaOArs0hKHuBc+ER5Trhip1iSwqZpmzgc
+	9qfQ==
+X-Gm-Message-State: APjAAAXJYUNwgt6fkhlRdK1sAnqHGJPKTMt8rWmpJWck9YT3dJbl+2mn
+	/OguiPPhvRHNTE3wIfu7fYuyXRLDMz3HKw==
+X-Google-Smtp-Source: APXvYqyZT8/EzRa5JNPUxl5KHW97Tja14Hu8fNqOvUxyJ2jNWjXWyVqGDD+Gt+mOXzhP4SoviLbVlQ==
+X-Received: by 2002:aa7:9f0e:: with SMTP id g14mr2390009pfr.100.1568698811552; 
+	Mon, 16 Sep 2019 22:40:11 -0700 (PDT)
+Received: from [127.0.1.1] ([101.184.76.229])
+	by smtp.gmail.com with UTF8SMTPSA id
+	r23sm899990pjo.22.2019.09.16.22.40.09
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 16 Sep 2019 22:40:10 -0700 (PDT)
+Date: Tue, 17 Sep 2019 05:40:06 +0000
+Message-Id: <20190917054006.20179-1-nathan@nathanrossi.com>
+From: Nathan Rossi <nathan@nathanrossi.com>
+To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.195]
-Subject: [meta-networking][PATCH] samba: upgrade 4.10.7 -> 4.10.8
+Subject: [meta-oe][PATCH] libeigen: Add native and nativesdk to BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,41 +56,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Sep 2019 01:27:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 17 Sep 2019 05:40:10 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-Security fixes:
-
-CVE-2019-10197: Combination of parameters and permissions can allow user
-                to escape from the share path definition.
-
-See: https://www.samba.org/samba/history/samba-4.10.8.html
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Nathan Rossi <nathan@nathanrossi.com>
 ---
- .../recipes-connectivity/samba/{samba_4.10.7.bb => samba_4.10.8.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.10.7.bb => samba_4.10.8.bb} (98%)
+ meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.7.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/samba/samba_4.10.7.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-index 1b2bc08..d824eac 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.10.7.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-@@ -34,8 +34,8 @@ SRC_URI_append_libc-musl = " \
-            file://0001-samba-fix-musl-lib-without-innetgr.patch \
-           "
- 
--SRC_URI[md5sum] = "05472d0dd943b3ccbc3be5032a9eb563"
--SRC_URI[sha256sum] = "34f30494b6b63700f54be22be636e8a6e0430577166a76a017075e11c02a1ebb"
-+SRC_URI[md5sum] = "f3c722bbcd903479008fa1b529f56365"
-+SRC_URI[sha256sum] = "c41f05fb567f7359998b451543501c7690a2bf6551d658a76bd6916316a410f4"
- 
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
- 
--- 
-2.7.4
-
+diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+index e1deb662ae..f638848d15 100644
+--- a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
++++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
+@@ -18,3 +18,5 @@ FILES_${PN}-dev = "${includedir} ${datadir}/eigen3/cmake ${datadir}/cmake/Module
+ # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
+ RDEPENDS_${PN}-dev = ""
+ RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
++
++BBCLASSEXTEND = "native nativesdk"
+---
+2.23.0
 
