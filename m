@@ -1,28 +1,46 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 0FB2E7F276
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f170.google.com (mail-qt1-f170.google.com
+	[209.85.160.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B25C7E71A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 23:54:51 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	16 Sep 2019 16:54:52 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,514,1559545200"; d="scan'208";a="216383742"
-Received: from klim280-mobl1.gar.corp.intel.com (HELO linux.fritz.box)
-	([10.255.155.138])
-	by fmsmga002.fm.intel.com with ESMTP; 16 Sep 2019 16:54:49 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Sep 2019 11:54:35 +1200
-Message-Id: <3f1a1eae44e7de11c988c69b8b3c728f9c3dc565.1568678019.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1568678019.git.paul.eggleton@linux.intel.com>
-References: <cover.1568678019.git.paul.eggleton@linux.intel.com>
+	Tue, 17 Sep 2019 01:24:54 +0000 (UTC)
+Received: by mail-qt1-f170.google.com with SMTP id g16so2288409qto.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Sep 2019 18:24:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Im5B9OVM0D0YF185aqQWx/1nhVbUs53UzJHLz1nCKrM=;
+	b=lFx5uRpcvV+nuMMQGHkfCoJtvPvJLGsViV6ZsQWIdCxOZ4N4w8Xt3f619VXQlHTiz/
+	PAaH8Zno3Qx876JNBYwpKTyZ99wvqkB8r9ZfjbZGj4jigRcxDzkhG/aQNiSQEj8900DC
+	zi+K1gi7tWvu1/MYhoL/hp0WNmfy/m4shqEy8TMAArISp7ExEGu6tV01zUpkYRq0bAtt
+	Ykqy5SUrCi+Ge2i1NPqMmnJdQQKDp6ASk/u/j0/10+IqBRTb0ClmRapJ5Yr2t++Mde3i
+	r9nghct4UpRpapDXQjWZr59Fs/JsB9gyDzRH1qD+nQ0gic20NNtZsgxJkmEzjh7wX0CP
+	pBPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Im5B9OVM0D0YF185aqQWx/1nhVbUs53UzJHLz1nCKrM=;
+	b=jS9zSNmlEVRPvMRdoXvX/UmebsrtMOUgBsdkd/0V+Ku+0NZPWtqGOXvHwQloMkp2ft
+	9y4PkA8urB7W9F1NX9pAtsFUMcdibvzOA+k/I2f60PYYfm+09zzeXPQUBACzbiWO5i1i
+	KDxg0QgWBCk8fEpGaDI/URwCtRwAxjORivpH6LDKgMlLvnUxx0qMru93NGzENb/q6j4/
+	v2sQVk1FCXKP/MdidUJeyS+48e+UwHL3aUe1fsrMSPhvyV/BhNJo7m8GxJMAABnNIRWX
+	M0qXiWfzCGP5F3xT2tA0ctkYIlPlf1EAXQw19yPge5LZTHRktbZFmQNVMcn7saEVgHnE
+	n5ig==
+X-Gm-Message-State: APjAAAWyhI83y0K3ZWKQfRgZeFthR8J0rokhf/qXUwuSk1caCU00FO8k
+	9xeUJ9fO83urfYQMHw+H/sVkCyr83wyWtCUoMlNzZ9iSmd4=
+X-Google-Smtp-Source: APXvYqwRaNJXTDBSOd8q9R1QHOUidgUFgg0xbNhmpw9mycgj/mf0WgyZHlIZdt6Zi97oH8PCQ9u23rBjazhODZrzaVA=
+X-Received: by 2002:aed:3c52:: with SMTP id u18mr1353500qte.194.1568683495623; 
+	Mon, 16 Sep 2019 18:24:55 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH 1/1] mosquitto: update to 1.6.5
+References: <20190915234257.13921-1-open.source@oleksandr-kravchuk.com>
+In-Reply-To: <20190915234257.13921-1-open.source@oleksandr-kravchuk.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 16 Sep 2019 18:24:44 -0700
+Message-ID: <CAMKF1srSjmvfeGaQOaymggw5S_qtBGHiOTHCLfpJhfi3Z47rcA@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] flatbuffers: update to 1.11.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,67 +53,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Sep 2019 23:54:51 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 17 Sep 2019 01:24:55 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-A lot of changes upstream since the last upgrade, the highlights:
-* MQTT v5 protocol support
-* Performance improvements
-* New mosquitto_rr (request/response) client
-* TLS enhancements: OCSP stapling, TLS Engine support, explicit TLS v1.3
-  support, removed TLS v1.0 support
+Fails on musl
 
-For further details, see https://mosquitto.org/blog/
+https://errors.yoctoproject.org/Errors/Details/270781/
 
-Additionally, SUMMARY and DESCRIPTION were tidied up as needed.
+something like below might help
+https://github.com/buildroot/buildroot/blob/master/package/flatbuffers/0001-Add-detection-of-strtoull_l-function.patch
 
-Based upon an earlier upgrade patch by Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../{mosquitto_1.5.8.bb => mosquitto_1.6.5.bb}      | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_1.5.8.bb => mosquitto_1.6.5.bb} (86%)
-
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.8.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.5.bb
-similarity index 86%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.8.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.5.bb
-index 768b5930fb..4bb0720ca5 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.5.8.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.5.bb
-@@ -1,5 +1,9 @@
--SUMMARY = "Open source MQTT v3.1/3.1.1 implemention"
--DESCRIPTION = "Mosquitto is an open source (Eclipse licensed) message broker that implements the MQ Telemetry Transport protocol version 3.1 and 3.1.1. MQTT provides a lightweight method of carrying out messaging using a publish/subscribe model. "
-+SUMMARY = "Open source MQTT implementation"
-+DESCRIPTION = "Mosquitto is an open source (Eclipse licensed) message broker \
-+that implements the MQ Telemetry Transport protocol version 3.1, 3.1.1 and \
-+5, providing both an MQTT broker and several command-line clients. MQTT \
-+provides a lightweight method of carrying out messaging using a \
-+publish/subscribe model. "
- HOMEPAGE = "http://mosquitto.org/"
- SECTION = "console/network"
- LICENSE = "EPL-1.0 | EDL-1.0"
-@@ -14,8 +18,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://mosquitto.init \
- "
- 
--SRC_URI[md5sum] = "bbbcceb32db3657d9d436a8440a9db1c"
--SRC_URI[sha256sum] = "78d7e70c3794dc3a1d484b4f2f8d3addebe9c2da3f5a1cebe557f7d13beb0da4"
-+SRC_URI[md5sum] = "12a1bd274d5ec454649a06c1bf65d802"
-+SRC_URI[sha256sum] = "bc71b38b5a26fc7cc772853e5607c657868db9f9a6d2b15e2b677649a0f85d20"
- 
- inherit systemd update-rc.d useradd
- 
-@@ -79,6 +83,7 @@ FILES_libmosquittopp1 = "${libdir}/libmosquittopp.so.1"
- 
- FILES_${PN}-clients = "${bindir}/mosquitto_pub \
-                        ${bindir}/mosquitto_sub \
-+                       ${bindir}/mosquitto_rr \
- "
- 
- FILES_${PN}-examples = "${sysconfdir}/mosquitto/*.example"
--- 
-2.20.1
-
+On Sun, Sep 15, 2019 at 4:43 PM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
+>
+> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> ---
+>  .../{flatbuffers_1.10.0.bb => flatbuffers_1.11.0.bb}            | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-devtools/flatbuffers/{flatbuffers_1.10.0.bb => flatbuffers_1.11.0.bb} (94%)
+>
+> diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb
+> similarity index 94%
+> rename from meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
+> rename to meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb
+> index 452e1e65a..4a76b9273 100644
+> --- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.10.0.bb
+> +++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb
+> @@ -10,7 +10,7 @@ RDEPENDS_${PN}-dev += "${PN}-compiler"
+>
+>  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a873c5645c184d51e0f9b34e1d7cf559"
+>
+> -SRCREV = "c0698cc33f1e534bb59c455909b88cc2726089af"
+> +SRCREV = "9e7e8cbe9f675123dd41b7c62868acad39188cae"
+>
+>  SRC_URI = "git://github.com/google/flatbuffers.git"
+>
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
