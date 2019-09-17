@@ -1,6 +1,6 @@
 Return-Path: <prvs=156d039a9=alistair.francis@wdc.com>
 Received: from esa6.hgst.iphmx.com (esa6.hgst.iphmx.com [216.71.154.45])
-	by mail.openembedded.org (Postfix) with ESMTP id D36887FD93
+	by mail.openembedded.org (Postfix) with ESMTP id 058187FD42
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 17 Sep 2019 22:42:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
@@ -8,48 +8,48 @@ DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	t=1568760126; x=1600296126;
 	h=from:to:cc:subject:date:message-id:in-reply-to:
 	references:mime-version:content-transfer-encoding;
-	bh=mXGRL+6qcNXKFyDubpW7tFmsl5W49LrFTF/TK8s90uo=;
-	b=G6XNXx3IAitGrR/Qwf2buxj2ob6NBlUsebnF40uh2chaP9tnG4t1xTZF
-	pGGf7mu9xlt/gd6CzNGOfzKHEJFvuCbvyfHVzw6G7Q0ymv2Hfu+9g1QYP
-	1PZzfwPoq8LAC95nFvgj/M65YVVxPS4nJoxsQ0GEXp3p6U9n2i/PG4QOM
-	rmJ103IzjXFA+8agybn8n/mofKzzcJxsYseAWNSAlgfYAxNDfYu/HsOem
-	ve2dKU3hJoNvA6YoVP6gJXC00n4mylv19huYKoa/yLDj51HoESIKniV8P
-	N3CPByCDgd3Ro7/tCf6jNC/5uSfWBLIZvgfCKu/wWcwuIzG4ABz9VbrM5 g==;
-IronPort-SDR: TfVEZAB9XFKG3bNQl3q8lAKfKwkW/KEsrD/Eshfnvp2oogyQ9Taz+1wR9qsap7X7BMmIkJi6xd
-	ZnbX+nHuBs96/Pq5JUrR77GOl7ErnEX84EGiczEX029b21F+HgCF6X3auS0vR+s+LGwTy00a93
-	+6dRyxWTQIpf/nk+NQ86pzEfxWtOmHM4SRt42nuDKdrnLha/NtrhuAHSNsCKnIkMIrIO9wej34
-	HejnMhRE/r7itrAtrOygIsR85uzU0boRkHZ48fvBAAvy6TFs+Q3dKaf7/ox9c/383QvTAVft00
-	LMQ=
-X-IronPort-AV: E=Sophos;i="5.64,518,1559491200"; d="scan'208";a="120052154"
+	bh=EFQZJcS1MfIiEKjFfOzgLkCauQTC1MGSDK4gGG+oyYw=;
+	b=PUdFOfaScQ6VVHjcJ++xA5xn+kNwwMnQezK5OGzmaTCl8PCRdG+tsNYt
+	sS+QH+/M6w2fpkcrmALL8vB+UcIYVGWdayX87EEtOqg5gwloewLI6pcSk
+	RmKEXWYTAYTJyIqeXeDy03N/MciO4b9quQOF+fjSr4yQNIcR4Wnj0SQdC
+	Q6zqJfLvq53Hq/ewq2zrZfmXupZSxgmvPZ3AGBVyvYboDocCn43W3YEyy
+	m2MFHX/MLQTIy1qEuRCNuH2/aXlhLDGeVBs5ExXBEdBPWjITd1M1a/0Fz
+	XFFnQ/DbYbtRy1KR0LDaXiWmtOVnCk9z7jyN/ZGPYW1Rw+P3WSDwNESH4 Q==;
+IronPort-SDR: b0fFK0yM5QHS9N+cOwqnBfMqU9BtmcdrDyPhGdxNgfOpLzLEQdACpBpDAx8TgE7VO3ELX2ph/L
+	atLMWTERmBSuPPnhRZTgjgy9O1awEf9TUnoq+h7Z0DKJvF94yG00xb84N7vPH7X8xFw+88VBhL
+	Di6QwDpOeqlYDAKKdQsfq9lnxLFyOu8ZsG0VcRQe6Z64wyo//xiMqqq1u5Jvs7POKVwjxxrAzp
+	igfBzHjfXuMV7BXv5ENyNF6jyeuBWcpjT8PVOItoOdRriApn5mITk9xMTDJKWVCj165QaQi6wq
+	aXM=
+X-IronPort-AV: E=Sophos;i="5.64,518,1559491200"; d="scan'208";a="120052160"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
 	([199.255.45.15])
 	by ob1.hgst.iphmx.com with ESMTP; 18 Sep 2019 06:42:04 +0800
-IronPort-SDR: dFVnEOHQCxqqs0h0tlwpY+Rp+kBFCPQb529AVDmHvNbLvsOFfCvVOpVRpHur2fC/MiAOmPPVz0
-	KdoH6TOMRl3XWCLu4+qYs2cksgHLdJEw/jUQl1Yk+yXAbxCIMZqqdNBCHA/EFDrvLYKDQsoJqW
-	TNqxkvJSXzO9RG47chXBGb9CtcB/zMROwj9wjEARekQOfwdxfHcAfd9eKkwKyMDkbwNcG2IDVg
-	Q9gdfUQ8M0DVSPKlloEXe4rnVndWsvFrBMDnh+X2NfJyuKQESsmqhc7R5HJ7Wters1eF5xTUhH
-	IVAk/PMD/O52NLQJY0o/gAPi
+IronPort-SDR: KDdOeU38uX4bZetZsLwVJDI/gtkW7gP6SRgvEJOKsUkquGwIo5snDyVdXmZm2IWgmezZnT9oDr
+	J3kTSWN2qtu5vh/u5kPSudPCswhiTJJl1K5e9DvET4Ufps5t4s2pwbYXMEOuOtFlpCk7OPZezh
+	3USto7bzlJQ7gmeiYM98aHHSbDTaLBvh5hlxweRYZaXu0vGRy57SrLS+wqb0iFiBNy9wAQrzb7
+	w3Zg/Dur5qGJeUQUexM6VSB8ToVPmCUzTBMFgumBgOp96zTK1/6+h6ExrqaEhzKFVt1y7Zl6Ew
+	VUXL17YXC9/+2TIqYtelgeCa
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
 	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
 	17 Sep 2019 15:38:39 -0700
-IronPort-SDR: nENvV23QS2udRE3EC3tH/jdsFagEt+PDDA0B0zqOOIoaUihzooT+BeC8ba3rT4DzdJaCvrFXfD
-	l0TeO91F+9UdbOLLYXoYgcZkfohgSENI3eguxByeFcfgVFdmOIYAfjjGHTQVbWp3gknlXz4xfR
-	guE0h9a6fxi/ovFjEUlSRvxnVU88XP4xJ9KXrMDgft9wRZZDIlxLEeAi3Xube5+/z7B8vQGsG/
-	ClxSFkfwyKDN8Ayc5jVS0WZEwMigIgYBiKWPNJsE2GPbqCMnC7wkGiwSnJ42W8mZH+jbyMv5nY
-	T58=
+IronPort-SDR: tHqw07FzGEcfJ0kI8bwGZEx9Y3GC+mjb2bbJEFaJAfjOYCreT+6XlSYoLXO7R+NL4sm2dEDL0w
+	t9yjgHjlD2zTN0unx1pL1MjmIA+lSGWTC/VN6XzzNwd3QdFZ9QaxlH+G+EfXxQJIBuSjz/+XF3
+	Vae//XHVerozCagbP4d9hJcuZoqAZ1cMAqI8fnD8+THn9eCeWAf/+3Qo726sHqOtlOuTf1z+6t
+	cXORk7sIVfUauXC+lpD0qE+c50fEIOaV/7a3q8CjhlEFqQPR5oolV3GYiJiUlldOSSeLyjw4u2
+	U6Q=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
 	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
 	by uls-op-cesaip01.wdc.com with ESMTP; 17 Sep 2019 15:42:04 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Sep 2019 15:37:53 -0700
-Message-Id: <20190917223757.19701-2-alistair.francis@wdc.com>
+Date: Tue, 17 Sep 2019 15:37:55 -0700
+Message-Id: <20190917223757.19701-4-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20190917223757.19701-1-alistair.francis@wdc.com>
 References: <20190917223757.19701-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/6] python3-padatious: Initial commit of 0.4.7
+Subject: [PATCH 4/6] python3-precise-runner: Initial commit of version 0.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,23 +67,23 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- .../recipes-devtools/python/python3-padatious_0.4.7.bb   | 9 +++++++++
+ .../python/python3-precise-runner_0.3.1.bb               | 9 +++++++++
  1 file changed, 9 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-padatious_0.4.7.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-precise-runner_0.3.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-padatious_0.4.7.bb b/meta-python/recipes-devtools/python/python3-padatious_0.4.7.bb
+diff --git a/meta-python/recipes-devtools/python/python3-precise-runner_0.3.1.bb b/meta-python/recipes-devtools/python/python3-precise-runner_0.3.1.bb
 new file mode 100644
-index 000000000..4abe7c747
+index 000000000..98b62d899
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-padatious_0.4.7.bb
++++ b/meta-python/recipes-devtools/python/python3-precise-runner_0.3.1.bb
 @@ -0,0 +1,9 @@
-+SUMMARY = "An efficient and agile neural network intent parser. Padatious is a core component of Mycroft AI."
-+HOMEPAGE = "https://github.com/MycroftAI/padatious"
++SUMMARY = "A lightweight, simple-to-use, RNN wake word listener."
++HOMEPAGE = "https://github.com/MycroftAI/mycroft-precise"
 +LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://README.md;md5=77baec496a458dd0e0fc4ca64cd305bc"
++LIC_FILES_CHKSUM = "file://README.md;md5=2ad29e930f3107d52d2a55728bf62116"
 +
-+SRC_URI[md5sum] = "1f53967a1633baa8fd48f11139808a33"
-+SRC_URI[sha256sum] = "3c235942ff4151a3c36536fd776bd8a6d4d57c97046723d2fa80a89b34faac1f"
++SRC_URI[md5sum] = "a2434be110444192e804f4dada0ccecf"
++SRC_URI[sha256sum] = "1a464209fb4bf0a3f5d5a428310cb2a70487a01a6bc3a960d1dda90af896b80d"
 +
 +inherit pypi setuptools3
 -- 
