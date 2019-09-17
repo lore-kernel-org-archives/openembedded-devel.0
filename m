@@ -1,49 +1,50 @@
 Return-Path: <nathan@nathanrossi.com>
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
-	[209.85.210.177])
-	by mail.openembedded.org (Postfix) with ESMTP id C6D677F88D
+Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com
+	[209.85.215.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 165297F8B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Sep 2019 05:40:10 +0000 (UTC)
-Received: by mail-pf1-f177.google.com with SMTP id a2so1433726pfo.10
+	Tue, 17 Sep 2019 05:40:50 +0000 (UTC)
+Received: by mail-pg1-f174.google.com with SMTP id a24so1377298pgj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Sep 2019 22:40:12 -0700 (PDT)
+	Mon, 16 Sep 2019 22:40:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=nathanrossi.com; s=google;
 	h=date:message-id:from:to:cc:subject:content-transfer-encoding
-	:mime-version; bh=0o5DWPtex4MLpx5B452uxh3OEdfofXEw07y9rkxX1ns=;
-	b=X2PrPhM1H7vekgqayht90t6rPi9Gd9+A8yDjltKQeINAjsKwUF8eVIPFSL8WihLg9V
-	C7CMArRzO2QwnanymvVD7di++gQyGiHfqqOgI8jFVDYcV3PV9Nvfs6fAmpfGqcM4wfPu
-	vDSRlp5FY919Oz60Q1mnOcn6Xb5GfXEz+0VyDlHlIMHixBnJZ+Dlw7e1O48ksAGKP77W
-	BzR1c/e+v5aUHHP3tkbdfDupGMUYC0XoQ9T5TdaP5LKEsgtN0TVL1NsbUBaH8IOCv4mt
-	fiT0CNduzjilLLa0cTgQ9mp/NNirIU7NigjMs94nJAR2BBlvt+Bo6LgT0L8JbV0UWErP
-	RNNw==
+	:mime-version; bh=smqAVqaxhgkOtl2VPYxQp/CaTer54UmymQfsDR4r0MY=;
+	b=etLtRnf7Y37JSTmc/QfzCJqShbeb7s8m/TOxaDfKNaSguGiSXQsnacgeGulaI1KTOX
+	n5FdXeAxonPdRAcOfEJkwr91Tce4Ljv7d93cs9VMsjuMCPe3twoWQmgs6zM/CsaHJsHr
+	zFEPrIhvIB0/KqbEqLU29hK7+lXrai7lJtNoB/LWiz2qyHSfSSNYMQBHcsWkM2DlbFDF
+	3QRJTcYaOP3jGlDjPMlqJIB0+LSbCFypsQa9QtE/wh914K4zrZn9QIAaj4+HFrfAq3Rc
+	1vvP8wD8VHA73lDnNRi8sbIUyJjY1l+Hj+qp6qrUvQlUbF1dq6F9yveViF4fzGQu61Ky
+	yPfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:date:message-id:from:to:cc:subject
 	:content-transfer-encoding:mime-version;
-	bh=0o5DWPtex4MLpx5B452uxh3OEdfofXEw07y9rkxX1ns=;
-	b=q1qA0d17QdtRh3o3pBpVfpmTDmSlJ7KmNNg403yOKW3r6lkAZ8jVh9fnQW/GsedquP
-	mSW7vRtfAL4VKITjypXboWLIUxiVyn6acuSBnNXggvQRdJHuEAWELKQS1hLkB0Qy3wU0
-	m9v0xqg1q9RExqicUC4Dmxx1uOhYVoVamlKWVCsS/CmsFZouhQeCsXFxwbshjRz9iDGS
-	UP0lGM6eQ7baGpgaemSgGAShiOLUaVDOXChrQ3l/X9J/5JZzawvVIz6oHx5UcdHquoLy
-	YggsD9faa/6gYTTf54byCoSowp+CHj2qP66uaOArs0hKHuBc+ER5Trhip1iSwqZpmzgc
-	9qfQ==
-X-Gm-Message-State: APjAAAXJYUNwgt6fkhlRdK1sAnqHGJPKTMt8rWmpJWck9YT3dJbl+2mn
-	/OguiPPhvRHNTE3wIfu7fYuyXRLDMz3HKw==
-X-Google-Smtp-Source: APXvYqyZT8/EzRa5JNPUxl5KHW97Tja14Hu8fNqOvUxyJ2jNWjXWyVqGDD+Gt+mOXzhP4SoviLbVlQ==
-X-Received: by 2002:aa7:9f0e:: with SMTP id g14mr2390009pfr.100.1568698811552; 
-	Mon, 16 Sep 2019 22:40:11 -0700 (PDT)
+	bh=smqAVqaxhgkOtl2VPYxQp/CaTer54UmymQfsDR4r0MY=;
+	b=k9kpaPqVRp5MgNowOQfm8dUpjrCXM0PlCb2XsdNUDWu+rWoTwD1K+u545Edbaau0wv
+	5wXc5pwXhSwqEoDb+BDMcA/PyTq+f4cTEf8QIhaCwphd/yO1G12ZO7BpFMCYuGfwYpZ4
+	Wi0khekqh7zuFPVhenYbyclq6MBSo7i1AYDKTsLaNz6vzd+/LOEktvbhWbXkCuwT5d9I
+	Q3YnnXZrzvix75mgNhXuYKKUkRCmtYDo9k9cfpBS3QvPku9co0+N64yTQ2cQKgwEPGCk
+	UQArsarMt0bKIX2P5J6PO/CFWgCGMII3o/upFnYpc4Y3zyuBGHbbDGApHCU+a90o0T7o
+	asBg==
+X-Gm-Message-State: APjAAAVCQNEaaw8vj2ECOeOPr1x13mWUAXGfGjoozdtjQrk5ySLWm9YL
+	s/swQNSPOg5QgifRVINPyicxy4wW3I5/rg==
+X-Google-Smtp-Source: APXvYqw1A8V0PSq0NAKYRrVUT8HdiJsDepT/lBiKeEjTkOa2Q4NCV+mO0fURz+K08v1f/QsNfdVOfA==
+X-Received: by 2002:a17:90a:ba90:: with SMTP id
+	t16mr3180301pjr.104.1568698851471; 
+	Mon, 16 Sep 2019 22:40:51 -0700 (PDT)
 Received: from [127.0.1.1] ([101.184.76.229])
 	by smtp.gmail.com with UTF8SMTPSA id
-	r23sm899990pjo.22.2019.09.16.22.40.09
+	q42sm1011829pja.16.2019.09.16.22.40.49
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 16 Sep 2019 22:40:10 -0700 (PDT)
-Date: Tue, 17 Sep 2019 05:40:06 +0000
-Message-Id: <20190917054006.20179-1-nathan@nathanrossi.com>
+	Mon, 16 Sep 2019 22:40:50 -0700 (PDT)
+Date: Tue, 17 Sep 2019 05:40:46 +0000
+Message-Id: <20190917054046.20322-1-nathan@nathanrossi.com>
 From: Nathan Rossi <nathan@nathanrossi.com>
 To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libeigen: Add native and nativesdk to BBCLASSEXTEND
+Subject: [meta-python][PATCH] python*-pyusb: Add native and nativesdk to BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,23 +57,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Sep 2019 05:40:10 -0000
+X-List-Received-Date: Tue, 17 Sep 2019 05:40:51 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Nathan Rossi <nathan@nathanrossi.com>
 ---
- meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb | 2 ++
+ meta-python/recipes-devtools/python/python-pyusb.inc | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
-index e1deb662ae..f638848d15 100644
---- a/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
-+++ b/meta-oe/recipes-support/libeigen/libeigen_3.3.7.bb
-@@ -18,3 +18,5 @@ FILES_${PN}-dev = "${includedir} ${datadir}/eigen3/cmake ${datadir}/cmake/Module
- # ${PN} is empty so we need to tweak -dev and -dbg package dependencies
- RDEPENDS_${PN}-dev = ""
- RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+diff --git a/meta-python/recipes-devtools/python/python-pyusb.inc b/meta-python/recipes-devtools/python/python-pyusb.inc
+index 30bbe85a91..baf2db5301 100644
+--- a/meta-python/recipes-devtools/python/python-pyusb.inc
++++ b/meta-python/recipes-devtools/python/python-pyusb.inc
+@@ -8,3 +8,5 @@ SRC_URI[md5sum] = "862b56452c64948c787ad8ef9498590b"
+ SRC_URI[sha256sum] = "4e9b72cc4a4205ca64fbf1f3fff39a335512166c151ad103e55c8223ac147362"
+ 
+ inherit pypi
 +
 +BBCLASSEXTEND = "native nativesdk"
 ---
