@@ -1,55 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
-	[209.85.160.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 034248FFD6
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D6FD7FC41
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 19:27:42 +0000 (UTC)
-Received: by mail-qt1-f172.google.com with SMTP id o12so1183758qtf.3
+	Wed, 18 Sep 2019 20:43:18 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id n197so2371500iod.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 12:27:44 -0700 (PDT)
+	Wed, 18 Sep 2019 13:43:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=6DF5kJDqnHxVLJRA5365q9l3yZMojcHPCxJJC4BZXZc=;
-	b=iwdhziTo0+rdrNcXyjHyZYWJtYo6A16VbpLjEHDPmOEAi6tqK7BPfhzvIj8kCAFpmK
-	GNd2XtlTq0ISP9xo0ZBb7BwjdDmrD6C6/hw7xxJpCkHMUqbDgAr7Tr0jN2oYOoAkICSF
-	qad+2WbvMaEyEUCLzBrYFs46yzx886lfU8ejS6slAFwSKaiEvjbuY/zxk1MHM5OrscwY
-	GXn06nB+p3CMwO2Wa2K0KVGjGdnVxwi5vcEp7HV8P3QFUH8xVLGdPIf3WuB7vY/6JlNr
-	h1d7JnGQ+sqiIiL0tNfBsmSC/fAseYfW65BrP+sLrlGOBV/v10k88hAbaJO5FX3V9uAI
-	fkmA==
+	:cc; bh=wpLERbG9mu1iHQLEC4V9fP4qg1xKz5qjuZh3VUlInc4=;
+	b=KgaxMG2pVc1K3MZKjUiaXfbz+D5ZMZ+gPkoQxY3QNyAZYXB+JepQqdEzBMKgTiHW5t
+	6/Dps6N00Vg1pRWMMRSHtEnt03rvi7T4x2jo7HLBlr0u0Mp5OfPM/j63vmYg2s6wlibV
+	TDNFSlvJtozlO4FUd1QBPz5/jq/NRUN/WOCzc6S0KPdKMfAfUxaMzGCdCMW/9n0O+gq8
+	Vja8jQjGHL1mx8Ajcd9dvOv3HuZckPVhWxOmkn6ozHdYoM0kZNGSqDOjV5fwLnxQjzI0
+	xuMsAZao+AGzv/3DknnUx1i8srzqD8X2Ov2TGZg/1+wzXu0z2+s9SechcQpA1la5mMaf
+	DUqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=6DF5kJDqnHxVLJRA5365q9l3yZMojcHPCxJJC4BZXZc=;
-	b=VrzN093uRUjzk2Ld6a+6gsDNRvRiOOMbd/dbpQFIx5h9SUpq3R4HxACqO2WOcu6KGt
-	BM/IvBmw/gHJYmRvhEfOXhSFsEG/S+cOtuVtlDCmegI8IhMubf9VOYF0p50ppGgrjRTF
-	QuiPsIQl2/yqSbBp/iNNXSl6JZAmg63bbVZn+9TxMf1wERqbVURSTgQn1gN/pcv1kjl8
-	QstlZtMelKfUG7dBoz4yEbNIkHr0wbidQpU+RAEjbIm/6b2Jon3tF+JyYUv/qwhrKIc8
-	L8WSzB9rSn7Vhlllf2DSXiwtafM7KxzHsc7CLJ+Tm2KXfzaF6ta53XsG6vftw1CLL/4T
-	rAMQ==
-X-Gm-Message-State: APjAAAWsV3QZuv1kT+x0nl8PdFcnmAZlzorhf9tBsT+2Q2AKFmrtXwX9
-	bJpa4HZqQLQqth3YeYU+nw1SUFMT04XJKv/0uHlheWEWKOo=
-X-Google-Smtp-Source: APXvYqzC33mhOMl+JoSvmuzNQE/GKuBqOdZTbC0lycZLfTKqxcFFbsFOpwUacYDHmoWeOWIKlAL3luBf0bGrd4zwanM=
-X-Received: by 2002:ac8:5306:: with SMTP id t6mr5901159qtn.53.1568834863425;
-	Wed, 18 Sep 2019 12:27:43 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=wpLERbG9mu1iHQLEC4V9fP4qg1xKz5qjuZh3VUlInc4=;
+	b=bjF9i/d1oGgUDarneIwAPno7hQpxrReTaxg/5w7dvcqbHtPFM7+0+jA/DznSl9aEsn
+	4JMbfAqM9igJH+5CeettR1eiG0lToXO/XUKyHGaAUTa/aqp8JaVk/sxqRIP9KX44UCYO
+	CKjp32XwY8EkhmJh772VOTvg8dGJ9/wOhjFIb77WJjH5y724kpAeuXpB5zLqAUyNgLlD
+	Ew8UlUDwxkxAc2vXpCt5PbhOQ0ObMZ2J4q4CDgnabJjOeMa49ufycGf6/w6MouJ7aaPr
+	qNYMrFRAuKBGPBI97xZwIQk/93clWngL6Aui0wXEggMJOsNCrSyR8DfrPtdAMp6NWV92
+	oSMA==
+X-Gm-Message-State: APjAAAWssP1CV+Wxa//WNwQ0x4/AKuhoh4+HuDGe0wYAn2aoAzd2R2Py
+	Ua8w3X4EiIhwNQkWKNaC5Y2lsKcQ2AiTo1eS8Uk=
+X-Google-Smtp-Source: APXvYqy110VP/5mTYqE7ofabRbQ0qJ49X0Otg7GPuQktJ4/Ht5/Xsm5N7WZ/6AX7QqEWeq6W0Z3Ws1gTE0FuUPB/JIg=
+X-Received: by 2002:a6b:8f13:: with SMTP id r19mr7389562iod.121.1568839399087; 
+	Wed, 18 Sep 2019 13:43:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190828073827.8930-1-yuanc.fnst@cn.fujitsu.com>
-	<A8B665D90129BB4F9BA49400152BB380ABE5AD16@fmsmsx121.amr.corp.intel.com>
-	<90B94BBA23AFC744A826A4F23375C2D1018E28BAE8@G08CNEXMBPEKD01.g08.fujitsu.local>
-	<A8B665D90129BB4F9BA49400152BB380ABE5D0EA@fmsmsx121.amr.corp.intel.com>
-	<CANx9H-A2LzC7CU1UzMyHFfXDQ+KOcjt+GbOZpsHfQc0ELBRAnA@mail.gmail.com>
-	<CANx9H-ChPn4qGNP8h4VjxfAURzJ7VN+624L0Q8x55un7Y4rRqw@mail.gmail.com>
-	<A8B665D90129BB4F9BA49400152BB380ABE6A8AE@fmsmsx121.amr.corp.intel.com>
-	<A8B665D90129BB4F9BA49400152BB380ABE71DD3@fmsmsx121.amr.corp.intel.com>
-In-Reply-To: <A8B665D90129BB4F9BA49400152BB380ABE71DD3@fmsmsx121.amr.corp.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Sep 2019 12:27:17 -0700
-Message-ID: <CAMKF1soF_GgV6bjy6Q1jpBE4kYeUxmp0U3jjwBV8Xgau50vRiw@mail.gmail.com>
-To: "Koppolu, Chanakya" <chanakya.koppolu@intel.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python] [PATCH] python-pytest: upgrade 3.4.2 -> 5.1.1
+References: <1568805952-19822-1-git-send-email-vincent.prince.external@saftbatteries.com>
+	<1568805952-19822-5-git-send-email-vincent.prince.external@saftbatteries.com>
+	<CAMKF1sr=H7+_uAPgw3+VU3-NR3ztP-gTZPMOv2hO=wJ82BrZ_g@mail.gmail.com>
+	<CAB2nKc_9d3Uduco+BuoXbASFFXV3jAcyOMAr-1XrJycNL5BiAg@mail.gmail.com>
+	<CAMKF1sowOd6Q79CrFc-A56LKthisCsUUW0O-Do6mMN-96KWL1A@mail.gmail.com>
+In-Reply-To: <CAMKF1sowOd6Q79CrFc-A56LKthisCsUUW0O-Do6mMN-96KWL1A@mail.gmail.com>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Wed, 18 Sep 2019 22:43:06 +0200
+Message-ID: <CAB2nKc-w8EY0rRWdEr=NAzagcDVXDCJsJKBpTLv+6FzcW1ZbYA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Vincent Prince <vincent.prince.external@saftbatteries.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe] [PATCH 4/4] mongodb: bump to version 4.2.0+git18ce5c9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,583 +59,902 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2019 19:27:43 -0000
+X-List-Received-Date: Wed, 18 Sep 2019 20:43:18 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Yuan
+In  https://github.com/mongodb/mongo/blob/master/src/mongo/stdx/new.h,
+there is
 
-I see that the issue is not fully fixed yet as seen here
-https://github.com/openembedded/meta-openembedded/issues/144
+#if __cplusplus < 201703L || !defined(__cpp_lib_hardware_interference_size)
 
-Please see if this can be fixed as soon as possible, or we have to
-revert these recipes, I will wait for your response
+  ... define  hardware_constructive_interference_size manually
 
-Thanks
--Khem
+#else
 
-On Mon, Sep 16, 2019 at 10:30 AM Koppolu, Chanakya
-<chanakya.koppolu@intel.com> wrote:
->
-> Hello Chao,
->
-> Any update on adding the missing module 'importlib_metadata' and testing =
-for any more missing modules for the pytest upgrade?
->
-> Regards,
-> Chanakya
->
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-bounces@lists.openembedded.org] On Behalf Of Koppolu, Chanakya
-> Sent: Thursday, September 12, 2019 5:59 PM
-> To: Tim Orling <ticotimo@gmail.com>
-> Cc: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-python] [PATCH] python-pytest: upgrade 3.4.2 -> 5=
-.1.1
->
-> Hello Chao,
->
-> Looks like there are multiple runtime modules missing. Here is the log wi=
-th the latest packages:
->
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: root@intel-corei7-64:~# python3 -m pytest /tests/smoke/=
- |& tee smoke_test.log
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: cat smoke_test.log
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: Traceback (most recent call last):
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/runpy.py", line 193, in _run=
-_module_as_main
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: "__main__", mod_spec)
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/runpy.py", line 85, in _run_=
-code
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: exec(code, run_globals)
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/pytest.py", li=
-ne 6, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from _pytest.assertion import register_assert_rewrite
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/assert=
-ion/__init__.py", line 6, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from _pytest.assertion import rewrite
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/assert=
-ion/rewrite.py", line 24, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from _pytest.assertion import util
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/assert=
-ion/util.py", line 5, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: import _pytest._code
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/_code/=
-__init__.py", line 2, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from .code import Code  # noqa
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/_code/=
-code.py", line 18, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: import pluggy
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/pluggy/__init_=
-_.py", line 16, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from .manager import PluginManager, PluginValidationErr=
-or
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/pluggy/manager=
-.py", line 6, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: import importlib_metadata
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: ModuleNotFoundError: No module named 'importlib_metadat=
-a'
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: root@intel-corei7-64:~# Traceback (most recent call las=
-t):
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/runpy.py", line 193, in _run=
-_module_as_main
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: "__main__", mod_spec)
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/runpy.py", line 85, in _run_=
-code
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: exec(code, run_globals)
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/pytest.py", li=
-ne 6, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from _pytest.assertion import register_assert_rewrite
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/assert=
-ion/__init__.py", line 6, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from _pytest.assertion import rewrite
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/assert=
-ion/rewrite.py", line 24, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from _pytest.assertion import util
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/assert=
-ion/util.py", line 5, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: import _pytest._code
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/_code/=
-__init__.py", line 2, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from .code import Code  # noqa
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/_pytest/_code/=
-code.py", line 18, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: import pluggy
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/pluggy/__init_=
-_.py", line 16, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: from .manager import PluginManager, PluginValidationErr=
-or
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: File "/usr/lib64/python3.7/site-packages/pluggy/manager=
-.py", line 6, in <module>
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: import importlib_metadata
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: ModuleNotFoundError: No module named 'importlib_metadat=
-a'
-> 02:30:39  ERRR2/v3rnE#1        test_rt_smoke.py#_test @hxj7-eced|jfsrtse0=
-2/mbt-02a: console: root@intel-corei7-64:~#
-> 02:30:39  ERRR0/v3rn   test_rt_smoke.py#_test @hxj7-eced: evaluation erro=
-red
->
-> I think all missing runtime module should be tested prior to upgrade of p=
-ytest version.
->
-> Regards,
-> Chanakya
->
-> From: Tim Orling [mailto:ticotimo@gmail.com]
-> Sent: Wednesday, September 11, 2019 7:40 PM
-> To: Koppolu, Chanakya <chanakya.koppolu@intel.com>
-> Cc: Yuan, Chao <yuanc.fnst@cn.fujitsu.com>; openembedded-devel@lists.open=
-embedded.org
-> Subject: Re: [oe] [meta-python] [PATCH] python-pytest: upgrade 3.4.2 -> 5=
-.1.1
->
-> I see new patches on the mailing list. Thank you.
->
-> On Wed, Sep 11, 2019 at 7:38 PM Tim Orling <ticotimo@gmail.com<mailto:tic=
-otimo@gmail.com>> wrote:
-> We are missing ${PYTHON_PN}-atomicwrites recipe in meta-python. Fujitsu, =
-please provide recipe for this missing RDEPENDS and runtime test future upg=
-rades. You have broken functionality for others with your upgrade.
->
-> In the future, please runtime test all your changes to prevent this from =
-happening from again. We all depend on these packages working.
->
-> On Tue, Sep 10, 2019 at 1:25 PM Koppolu, Chanakya <chanakya.koppolu@intel=
-.com<mailto:chanakya.koppolu@intel.com>> wrote:
-> Hi Chao,
->
-> I tried your new patch and it doesn't fix the issue. I still see the same=
- module('atomicwrites') missing in python modules.
->
-> Regards,
-> Chanakya
->
-> -----Original Message-----
-> From: Yuan, Chao [mailto:yuanc.fnst@cn.fujitsu.com<mailto:yuanc.fnst@cn.f=
-ujitsu.com>]
-> Sent: Tuesday, September 10, 2019 1:55 AM
-> To: Koppolu, Chanakya <chanakya.koppolu@intel.com<mailto:chanakya.koppolu=
-@intel.com>>; openembedded-devel@lists.openembedded.org<mailto:openembedded=
--devel@lists.openembedded.org>
-> Subject: RE: [oe] [meta-python] [PATCH] python-pytest: upgrade 3.4.2 -> 5=
-.1.1
->
-> Hi Chanakya,
->
-> I have sent a patch(based on pytest 5.1.2) for this runtime error, please=
- try it again.
->
-> Regards,
-> Chao
->
-> > -----Original Message-----
-> > From: Koppolu, Chanakya
-> > <chanakya.koppolu@intel.com<mailto:chanakya.koppolu@intel.com>>
-> > Sent: Saturday, September 7, 2019 8:04 AM
-> > To: Yuan, Chao/=E8=A2=81 =E8=B6=85
-> > <yuanc.fnst@cn.fujitsu.com<mailto:yuanc.fnst@cn.fujitsu.com>>;
-> > openembedded-devel@lists.openembedded.org<mailto:openembedded-devel@li
-> > sts.openembedded.org>
-> > Subject: RE: [oe] [meta-python] [PATCH] python-pytest: upgrade 3.4.2
-> > -> 5.1.1
+using std::hardware_constructive_interference_size;
+using std::hardware_destructive_interference_size;
+
+#endif
+
+It goes to #else, so it seems there is a broken c++17 support for "Hardware
+interference size" feature on Clang?
+
+Le mer. 18 sept. 2019 =C3=A0 18:52, Khem Raj <raj.khem@gmail.com> a =C3=A9c=
+rit :
+
+> On Wed, Sep 18, 2019 at 9:41 AM Vincent Prince
+> <vincent.prince.fr@gmail.com> wrote:
 > >
-> > Hello,
+> > Hi,
 > >
-> > This pytest upgrade patch fails to test missing runtime modules. Our
-> > recent Yocto build from upstream found that the pytest fails to
-> > execute due to a missing module. Here is the error report:
+> > musl/arm64 problem seems quite easy to fix:
+> > src/mongo/util/errno_util.cpp: In function 'std::string
+> mongo::errnoWithDescription(int)': src/mongo/util/errno_util.cpp:66:21:
+> error: invalid conversion from 'int' to 'char*' [-fpermissive]
+> > msg =3D strerror_r(errNumber, buf, kBuflen);
 > >
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: root@intel-corei7-64:~# python3
-> > -m pytest /tests/smoke/ |& tee smoke_test.log
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: cat smoke_test.log
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: Traceback (most recent call last=
-):
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/runpy.py", line 193, in _run_module_as_main
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: "__main__", mod_spec)
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/runpy.py", line 85, in _run_code
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: exec(code, run_globals)
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/site-packages/pytest.py", line 6, in <module>
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: from _pytest.assertion import
-> > register_assert_rewrite
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/site-packages/_pytest/assertion/__init__.py",
-> > line 6, in <module>
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: from _pytest.assertion import re=
-write
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/site-packages/_pytest/assertion/rewrite.py",
-> > line 20, in <module>
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: import atomicwrites
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: ModuleNotFoundError: No module
-> > named 'atomicwrites'
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: root@intel-corei7-64:~#
-> > Traceback (most recent call last):
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/runpy.py", line 193, in _run_module_as_main
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: "__main__", mod_spec)
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/runpy.py", line 85, in _run_code
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: exec(code, run_globals)
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/site-packages/pytest.py", line 6, in <module>
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: from _pytest.assertion import
-> > register_assert_rewrite
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/site-packages/_pytest/assertion/__init__.py",
-> > line 6, in <module>
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: from _pytest.assertion import re=
-write
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: File
-> > "/usr/lib64/python3.7/site-packages/_pytest/assertion/rewrite.py",
-> > line 20, in <module>
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: import atomicwrites
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: ModuleNotFoundError: No module
-> > named 'atomicwrites'
-> > 02:24:14  ERRR2/jtnsE#1        test_rt_smoke.py#_test
-> > @hxj7-eced|jfsrtse02/mbt-02a: console: root@intel-corei7-64:~#
+> > clang/x86 looks more complicated to me:
+> > src/mongo/stdx/new.h:53:12: error: no member named
+> 'hardware_constructive_interference_size' in namespace 'std'
+> > using std::hardware_constructive_interference_size;
+> > ...
 > >
-> > Please prove a recipe for the missing module.
+> > I don't have resources to try patches for this outside Yocto build
+> system,
+> > so I can try to send v2 but if someone wants to help for these issues,
+> don't hesitate ;)
+>
+> Perhaps using -std=3Dc++17 will help ?
+>
 > >
-> > Regards,
-> > Chanakya
 > >
-> > -----Original Message-----
-> > From:
-> > openembedded-devel-bounces@lists.openembedded.org<mailto:openembedded-
-> > devel-bounces@lists.openembedded.org>
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org<mailto:opene
-> > mbedded-devel-bounces@lists.openembedded.org>] On Behalf Of Yuan Chao
-> > Sent: Wednesday, August 28, 2019 12:38 AM
-> > To:
-> > openembedded-devel@lists.openembedded.org<mailto:openembedded-devel@li
-> > sts.openembedded.org>
-> > Subject: [oe] [meta-python] [PATCH] python-pytest: upgrade 3.4.2 ->
-> > 5.1.1
 > >
-> > Refresh patch:
-> > 0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-> >
-> > Remove patch: pytest_version_fix.patch since this is not used.
-> >
-> > License update: Copyright year updated to 2019
-> >
-> > Signed-off-by: Yuan Chao
-> > <yuanc.fnst@cn.fujitsu.com<mailto:yuanc.fnst@cn.fujitsu.com>>
-> > ---
-> >  .../recipes-devtools/python/python-pytest.inc |  8
-> > +--  ...he-setup_requires-for-setuptools-scm.patch | 36 +++++++------
-> >  .../python-pytest/pytest_version_fix.patch    | 51 -------------------
-> >  ...pytest_3.4.2.bb<http://pytest_3.4.2.bb> =3D>
-> > python-pytest_5.1.1.bb<http://python-pytest_5.1.1.bb>} |  0
-> > ...ytest_3.4.2.bb<http://ytest_3.4.2.bb>
-> > =3D> python3-pytest_5.1.1.bb<http://python3-pytest_5.1.1.bb>} |  0
-> >  5 files changed, 24 insertions(+), 71 deletions(-)  delete mode
-> > 100644
-> > meta-python/recipes-devtools/python/python-pytest/pytest_version_fix.p
-> > atch  rename
-> > meta-python/recipes-devtools/python/{python-pytest_3.4.2.bb<http://pyt
-> > hon-pytest_3.4.2.bb> =3D>
-> > python-pytest_5.1.1.bb<http://python-pytest_5.1.1.bb>} (100%)  rename
-> > meta-python/recipes-devtools/python/{python3-pytest_3.4.2.bb<http://py
-> > thon3-pytest_3.4.2.bb> =3D>
-> > python3-pytest_5.1.1.bb<http://python3-pytest_5.1.1.bb>} (100%)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python-pytest.inc
-> > b/meta-python/recipes-devtools/python/python-pytest.inc
-> > index 4c32dfb04..49ef790f0 100644
-> > --- a/meta-python/recipes-devtools/python/python-pytest.inc
-> > +++ b/meta-python/recipes-devtools/python/python-pytest.inc
-> > @@ -1,13 +1,13 @@
-> >  SUMMARY =3D "Simple powerful teting with python"
-> >  HOMEPAGE =3D "http://pytest.org"
-> >  LICENSE =3D "MIT"
-> > -LIC_FILES_CHKSUM =3D
-> > "file://LICENSE;md5=3Dc39b24965f4aef64222cb35de9d47cc4<file:///\\LICENS=
-E;md5=3Dc39b24965f4aef64222cb35de9d47cc4>"
-> > +LIC_FILES_CHKSUM =3D
-> > "file://LICENSE;md5=3D640061b8cee64b308a4d2f9f556c12f2<file:///\\LICENS=
-E;md5=3D640061b8cee64b308a4d2f9f556c12f2>"
-> >
-> > -SRC_URI[md5sum] =3D "1b83a25d45fad893f430fc5031653c56"
-> > -SRC_URI[sha256sum] =3D
-> > "117bad36c1a787e1a8a659df35de53ba05f9f3398fb9e4ac17e80ad5903eb8c5"
-> > +SRC_URI[md5sum] =3D "662313b4f539f5b66d2fb77791458e82"
-> > +SRC_URI[sha256sum] =3D
-> > "c3d5020755f70c82eceda3feaf556af9a341334414a8eca521a18f463bcead88"
-> >
-> >  SRC_URI_append =3D "
-> > file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch=
-<file:///\\0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch=
-> \
-> > -                   file://pytest_version_fix.patch<file:///\\pytest_ve=
-rsion_fix.patch> "
-> > +                   "
-> >
-> >  inherit update-alternatives
-> >
-> > diff --git
-> > a/meta-python/recipes-devtools/python/python-pytest/0001-setup.py-remo
-> > ve-t he-setup_requires-for-setuptools-scm.patch
-> > b/meta-python/recipes-devtools/python/python-pytest/0001-setup.py-remo
-> > ve-t he-setup_requires-for-setuptools-scm.patch
-> > index 06dfcdfc6..c29fb12de 100644
-> > ---
-> > a/meta-python/recipes-devtools/python/python-pytest/0001-setup.py-remo
-> > ve-t he-setup_requires-for-setuptools-scm.patch
-> > +++ b/meta-python/recipes-devtools/python/python-pytest/0001-setup.py-
-> > +++ re move-the-setup_requires-for-setuptools-scm.patch
-> > @@ -1,7 +1,7 @@
-> > -From 24a901fd17926e8e05be4ed2e01b0113a2e3a852 Mon Sep 17 00:00:00
-> > 2001
-> > -From: Derek Straka <derek@asterius.io<mailto:derek@asterius.io>>
-> > -Date: Tue, 19 Dec 2017 11:36:39 -0500
-> > -Subject: [PATCH] [PATCH 1/1] setup.py: remove the setup_requires for
-> > +From ff784f4803ab33f5e3389e40d038d52d1e211843 Mon Sep 17 00:00:00
-> > 2001
-> > +From: Yuan Chao
-> > +<yuanc.fnst@cn.fujitsu.com<mailto:yuanc.fnst@cn.fujitsu.com>>
-> > +Date: Wed, 28 Aug 2019 16:12:27 +0900
-> > +Subject: [PATCH] [PATCH] setup.py: remove the setup_requires for
-> >   setuptools-scm
-> >
-> >  The setup_requires argument forces the download of the egg file for
-> > setuptools-scm @@ -12,21 +12,25 @@ file and in the release tarball it
-> > is already correctly created
-> >  Upstream-Status: Inappropriate [oe specific]
-> >
-> >  Signed-off-by: Derek Straka
-> > <derek@asterius.io<mailto:derek@asterius.io>>
-> > +
-> > +Signed-off-by: Yuan Chao
-> > +<yuanc.fnst@cn.fujitsu.com<mailto:yuanc.fnst@cn.fujitsu.com>>
-> >  ---
-> > - setup.py | 1 -
-> > - 1 file changed, 1 deletion(-)
-> > + setup.py | 2 +-
-> > + 1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> >  diff --git a/setup.py b/setup.py
-> > -index 3eb38ef..1163202 100644
-> > +index adbafb5..75fdd09 100644
-> >  --- a/setup.py
-> >  +++ b/setup.py
-> > -@@ -82,7 +82,6 @@ def main():
-> > -         keywords=3D"test unittest",
-> > -         cmdclass=3D{'test': PyTest},
-> > -         # the following should be enabled for release
-> > --        setup_requires=3D['setuptools-scm'],
-> > -         python_requires=3D'>=3D2.7, !=3D3.0.*, !=3D3.1.*, !=3D3.2.*, =
-!=3D3.3.*',
-> > -         install_requires=3Dinstall_requires,
-> > -         extras_require=3Dextras_require,
-> > +@@ -19,7 +19,7 @@ INSTALL_REQUIRES =3D [  def main():
-> > +     setup(
-> > +         use_scm_version=3D{"write_to": "src/_pytest/_version.py"},
-> > +-        setup_requires=3D["setuptools-scm", "setuptools>=3D40.0"],
-> > ++        setup_requires=3D["setuptools>=3D40.0"],
-> > +         package_dir=3D{"": "src"},
-> > +         extras_require=3D{
-> > +             "testing": [
-> >  --
-> > -2.7.4
-> > +2.17.1
-> > +
-> > diff --git
-> > a/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix
-> > .patc
-> > h
-> > b/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix
-> > .patc
-> > h
-> > deleted file mode 100644
-> > index b373d93e8..000000000
-> > ---
-> > a/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix
-> > .patc
-> > h
-> > +++ /dev/null
-> > @@ -1,51 +0,0 @@
-> > -Upstream-Status: Inappropriate (OE specific)
-> > -
-> > -python-pytest: remove fetch during do_compile phase
-> > -commit: c974fbf9ebf185552ab65301e07af44f36517abf
-> > -
-> > -introduced an issue by making the version 0.0.0 -this fixes that
-> > -
-> > -Signed-off-by: Armin Kuster
-> > <akuster@mvista.com<mailto:akuster@mvista.com>>
-> > -
-> > -Index: pytest-3.2.2/setup.py
-> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+> > Le mer. 18 sept. 2019 =C3=A0 17:45, Khem Raj <raj.khem@gmail.com> a =C3=
+=A9crit :
+> >>
+> >> Hi Vincent
+> >>
+> >> Thanks for working on this, it fails on couple of combinations
+> >>
+> >> clang/x86
+> >> https://errors.yoctoproject.org/Errors/Details/271195/
+> >>
+> >> musl/arm64
+> >> https://errors.yoctoproject.org/Errors/Details/271194/
+> >> On Wed, Sep 18, 2019 at 4:26 AM Vincent Prince
+> >> <vincent.prince.fr@gmail.com> wrote:
+> >> >
+> >> > MongoDB v4.2.0 adds python3 support that is needed by scons upgrade
+> [44f303b scons: inherit python3native].
+> >> >  - mongodb git commit 18ce5c9 was needed to fix
+> https://jira.mongodb.org/browse/SERVER-42787
+> >> >  - Add PREFIX and prefix to scons environment to fix unknown variabl=
+e
+> check (SConstruct#L1073)
+> >> >  - Previous patches are refreshed
+> >> >
+> >> > Signed-off-by: Vincent Prince <
+> vincent.prince.external@saftbatteries.com>
+> >> > ---
+> >> >  ...FPMathLib20U1-Check-for-__DEFINED_wchar_t.patch | 22 +++++----
+> >> >  ...001-Support-deprecated-resolver-functions.patch | 10 ++--
+> >> >  ...to-use-build-settings-from-environment-va.patch | 46
+> ++++++++---------
+> >> >  ...__-to-control-use-of-gnu_get_libc_version.patch | 29 ++++++-----
+> >> >  .../0001-Use-long-long-instead-of-int64_t.patch    | 26 +++++-----
+> >> >  ...001-asio-Dont-use-experimental-with-clang.patch | 29 +++++------
+> >> >  ...finition-for-the-macro-__ELF_NATIVE_CLASS.patch | 10 ++--
+> >> >  .../0002-Fix-default-stack-size-to-256K.patch      | 12 ++---
+> >> >  .../mongodb/0003-Fix-unknown-prefix-env.patch      | 19 ++++++++
+> >> >  .../0004-wiredtiger-Disable-strtouq-on-musl.patch  | 15 +++---
+> >> >  .../mongodb/mongodb/arm64-support.patch            | 57
+> +++++++++++++---------
+> >> >  meta-oe/recipes-dbs/mongodb/mongodb_git.bb         | 20 ++++----
+> >> >  12 files changed, 164 insertions(+), 131 deletions(-)
+> >> >  create mode 100644
+> meta-oe/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-env.patch
+> >> >
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for=
+-__DEFINED_wchar_t.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for=
+-__DEFINED_wchar_t.patch
+> >> > index 4d7ac3a..e636adc 100644
+> >> > ---
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for=
+-__DEFINED_wchar_t.patch
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for=
+-__DEFINED_wchar_t.patch
+> >> > @@ -1,7 +1,7 @@
+> >> > -From fbfceebce2121831904f2f7115252dd03b413a6d Mon Sep 17 00:00:00
+> 2001
+> >> > -From: Khem Raj <raj.khem@gmail.com>
+> >> > -Date: Tue, 19 Sep 2017 18:52:53 -0700
+> >> > -Subject: [PATCH] IntelRDFPMathLib20U1: Check for __DEFINED_wchar_t
+> >> > +From 97914aeab52b4d0ea0ab9e5ff985a1c5cddb0fa1 Mon Sep 17 00:00:00
+> 2001
+> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> > +Date: Mon, 16 Sep 2019 13:41:39 +0200
+> >> > +Subject: [PATCH 06/10] IntelRDFPMathLib20U1: Check for
+> __DEFINED_wchar_t
+> >> >
+> >> >  This is defined by musl if wchar_t is already defined
+> >> >
+> >> > @@ -12,16 +12,15 @@
+> src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h:46:15:
+> error: t
+> >> >  typedef int   wchar_t;
+> >> >
+> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> >  ---
+> >> > -Upstream-Status: Pending
+> >> > -
+> >> >   src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h |
+> 2 +-
+> >> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >> >
+> >> > -Index:
+> git/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
+> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > =3D=3D=3D=3D
-> > ---- pytest-3.2.2.orig/setup.py
-> > -+++ pytest-3.2.2/setup.py
-> > -@@ -1,5 +1,6 @@
-> > - import os
-> > - import sys
-> > -+import re
-> > - import setuptools
-> > - import pkg_resources
-> > - from setuptools import setup, Command -@@ -22,6 +23,18 @@
-> > classifiers =3D [
-> > - with open('README.rst') as fd:
-> > -     long_description =3D fd.read()
-> > -
-> > -+def read(*names, **kwargs):
-> > -+    with open(os.path.join( *names), 'r') as fp:
-> > -+        return fp.read()
-> > -+
-> > -+def find_version(*file_paths):
-> > -+    version_file =3D read(*file_paths)
-> > -+    version_match =3D re.search(r"^version =3D ['\']([^'\"]*)['\']",
-> > -+                              version_file, re.M)
-> > -+
-> > -+    if version_match:
-> > -+        return version_match.group(1)
-> > -+    raise RuntimeError("Unable to find version string.")
-> > -
-> > - def get_environment_marker_support_level():
-> > -     """
-> > -@@ -59,9 +72,7 @@ def main():
-> > -         name=3D'pytest',
-> > -         description=3D'pytest: simple powerful testing with Python',
-> > -         long_description=3Dlong_description,
-> > --        use_scm_version=3D{
-> > --            'write_to': '_pytest/_version.py',
-> > --        },
-> > -+    version=3Dfind_version("_pytest", "_version.py"),
-> > -         url=3D'http://pytest.org',
-> > -         license=3D'MIT license',
-> > -         platforms=3D['unix', 'linux', 'osx', 'cygwin', 'win32'],
-> > diff --git
-> > a/meta-python/recipes-devtools/python/python-pytest_3.4.2.bb<http://py
-> > thon-pytest_3.4.2.bb>
-> > b/meta-python/recipes-devtools/python/python-pytest_5.1.1.bb<http://py
-> > thon-pytest_5.1.1.bb>
-> > similarity index 100%
-> > rename from
-> > meta-python/recipes-devtools/python/python-pytest_3.4.2.bb<http://pyth
-> > on-pytest_3.4.2.bb> rename to
-> > meta-python/recipes-devtools/python/python-pytest_5.1.1.bb<http://pyth
-> > on-pytest_5.1.1.bb>
-> > diff --git
-> > a/meta-python/recipes-devtools/python/python3-pytest_3.4.2.bb<http://p
-> > ython3-pytest_3.4.2.bb>
-> > b/meta-python/recipes-devtools/python/python3-pytest_5.1.1.bb<http://p
-> > ython3-pytest_5.1.1.bb>
-> > similarity index 100%
-> > rename from
-> > meta-python/recipes-devtools/python/python3-pytest_3.4.2.bb<http://pyt
-> > hon3-pytest_3.4.2.bb> rename to
-> > meta-python/recipes-devtools/python/python3-pytest_5.1.1.bb<http://pyt
-> > hon3-pytest_5.1.1.bb>
-> > --
-> > 2.17.1
-> >
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@li
-> > sts.openembedded.org>
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > ----
+> git.orig/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
+> >> > -+++
+> git/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
+> >> > +diff --git
+> a/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
+> b/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
+> >> > +index 56775bc..be96a85 100755
+> >> > +---
+> a/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
+> >> > ++++
+> b/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
+> >> >  @@ -43,7 +43,7 @@
+> >> >
+> >> >   #if 0 // MongoDB Modification -- just `#include <stddef.h>`
+> >> > @@ -31,3 +30,6 @@ Index:
+> git/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
+> >> >   typedef int   wchar_t;
+> >> >   #endif
+> >> >   #else
+> >> > +--
+> >> > +2.7.4
+> >> > +
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Support-deprecated-resolver-fu=
+nctions.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Support-deprecated-resolver-fu=
+nctions.patch
+> >> > index 070411a..3d949c8 100644
+> >> > ---
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Support-deprecated-resolver-fu=
+nctions.patch
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Support-deprecated-resolver-fu=
+nctions.patch
+> >> > @@ -1,7 +1,7 @@
+> >> > -From 5994023a03634dfc0318976c293e7391fe6aa060 Mon Sep 17 00:00:00
+> 2001
+> >> > +From 8d035e84c2edb44461ef4df9cdef0a6dfce0a1d7 Mon Sep 17 00:00:00
+> 2001
+> >> >  From: Khem Raj <raj.khem@gmail.com>
+> >> >  Date: Fri, 24 Aug 2018 12:56:22 -0700
+> >> > -Subject: [PATCH 1/2] Support deprecated resolver functions
+> >> > +Subject: [PATCH 07/10] Support deprecated resolver functions
+> >> >
+> >> >  Needed for  musl libc
+> >> >
+> >> > @@ -12,10 +12,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> >   1 file changed, 6 insertions(+)
+> >> >
+> >> >  diff --git a/src/mongo/util/dns_query_posix-impl.h
+> b/src/mongo/util/dns_query_posix-impl.h
+> >> > -index d19958010c..bbca3309ed 100644
+> >> > +index a5e3629..fb29d2d 100644
+> >> >  --- a/src/mongo/util/dns_query_posix-impl.h
+> >> >  +++ b/src/mongo/util/dns_query_posix-impl.h
+> >> > -@@ -53,6 +53,12 @@
+> >> > +@@ -54,6 +54,12 @@
+> >> >
+> >> >   #include <boost/noncopyable.hpp>
+> >> >
+> >> > @@ -29,5 +29,5 @@ index d19958010c..bbca3309ed 100644
+> >> >   namespace dns {
+> >> >   // The anonymous namespace is safe, in this header, as it is not
+> really a header.  It is only used
+> >> >  --
+> >> > -2.18.0
+> >> > +2.7.4
+> >> >
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-build-settin=
+gs-from-environment-va.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-build-settin=
+gs-from-environment-va.patch
+> >> > index a6d721a..1908846 100644
+> >> > ---
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-build-settin=
+gs-from-environment-va.patch
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-build-settin=
+gs-from-environment-va.patch
+> >> > @@ -1,19 +1,20 @@
+> >> > -From 53368d3f4adc09dd84234a9af31771bcd8ca2757 Mon Sep 17 00:00:00
+> 2001
+> >> > -From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+> >> > -Date: Fri, 15 Jan 2016 22:41:28 +0100
+> >> > -Subject: [PATCH] Tell scons to use build settings from environment
+> variables
+> >> > +From 1b2e24e14ee72e54e466be2512c78272f62d60b4 Mon Sep 17 00:00:00
+> 2001
+> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> > +Date: Mon, 16 Sep 2019 13:21:44 +0200
+> >> > +Subject: [PATCH 01/10] Tell scons to use build settings from
+> environment
+> >> > + variables
+> >> >
+> >> >  Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
+> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> >  ---
+> >> >   SConstruct                | 8 ++++++--
+> >> > - src/mongo/util/SConscript | 2 ++
+> >> > - 2 files changed, 8 insertions(+), 2 deletions(-)
+> >> > + 1 files changed, 8 insertions(+), 2 deletions(-)
+> >> >
+> >> > -Index: git/SConstruct
+> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > ---- git.orig/SConstruct
+> >> > -+++ git/SConstruct
+> >> > -@@ -564,6 +564,7 @@ def variable_arch_converter(val):
+> >> > +diff --git a/SConstruct b/SConstruct
+> >> > +index 7ebbcbc..e63cf15 100644
+> >> > +--- a/SConstruct
+> >> > ++++ b/SConstruct
+> >> > +@@ -608,6 +608,7 @@ def variable_arch_converter(val):
+> >> >           'amd64':  'x86_64',
+> >> >           'emt64':   'x86_64',
+> >> >           'x86':    'i386',
+> >> > @@ -21,7 +22,7 @@ Index: git/SConstruct
+> >> >       }
+> >> >       val =3D val.lower()
+> >> >
+> >> > -@@ -652,7 +653,8 @@ env_vars.Add(
+> >> > +@@ -695,7 +696,8 @@ env_vars.Add(
+> >> >   )
+> >> >
+> >> >   env_vars.Add('CC',
+> >> > @@ -31,7 +32,7 @@ Index: git/SConstruct
+> >> >
+> >> >   env_vars.Add('CCFLAGS',
+> >> >       help=3D'Sets flags for the C and C++ compiler',
+> >> > -@@ -672,7 +674,8 @@ env_vars.Add('CPPPATH',
+> >> > +@@ -715,7 +717,8 @@ env_vars.Add('CPPPATH',
+> >> >       converter=3Dvariable_shlex_converter)
+> >> >
+> >> >   env_vars.Add('CXX',
+> >> > @@ -41,24 +42,15 @@ Index: git/SConstruct
+> >> >
+> >> >   env_vars.Add('CXXFLAGS',
+> >> >       help=3D'Sets flags for the C++ compiler',
+> >> > -@@ -961,6 +964,7 @@ envDict =3D dict(BUILD_ROOT=3DbuildDir,
+> >> > +@@ -1018,6 +1021,7 @@ envDict =3D dict(BUILD_ROOT=3DbuildDir,
+> >> >                  )
+> >> >
+> >> >   env =3D Environment(variables=3Denv_vars, **envDict)
+> >> >  +env.PrependENVPath('PATH', os.getenv('PATH'))
+> >> >   del envDict
+> >> >
+> >> > - env.AddMethod(mongo_platform.env_os_is_wrapper, 'TargetOSIs')
+> >> > -Index: git/src/mongo/util/SConscript
+> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > ---- git.orig/src/mongo/util/SConscript
+> >> > -+++ git/src/mongo/util/SConscript
+> >> > -@@ -329,6 +329,8 @@ if env['MONGO_ALLOCATOR'] =3D=3D 'tcmalloc':
+> >> > -                 'MONGO_HAVE_GPERFTOOLS_SIZE_CLASS_STATS'
+> >> > -             ]
+> >> > -         )
+> >> > -+    if not use_system_version_of_library('valgrind'):
+> >> > -+        tcmspEnv.InjectThirdPartyIncludePaths('valgrind')
+> >> > + for var in ['CC', 'CXX']:
+> >> >
+> >> > -     if not use_system_version_of_library('valgrind'):
+> >> > -         # Include valgrind since tcmalloc disables itself while
+> running under valgrind
+> >> > +--
+> >> > +2.7.4
+> >> > +
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-control-use-o=
+f-gnu_get_libc_version.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-control-use-o=
+f-gnu_get_libc_version.patch
+> >> > index c17ebf1..d98fa56 100644
+> >> > ---
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-control-use-o=
+f-gnu_get_libc_version.patch
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-control-use-o=
+f-gnu_get_libc_version.patch
+> >> > @@ -1,18 +1,18 @@
+> >> > -From 3eed8388b49d5d3cbc2db74fee1b017eb4b40d0a Mon Sep 17 00:00:00
+> 2001
+> >> > -From: Khem Raj <raj.khem@gmail.com>
+> >> > -Date: Sat, 2 Sep 2017 10:06:24 -0700
+> >> > -Subject: [PATCH] Use __GLIBC__ to control use of gnu_get_libc_versi=
+on
+> >> > +From d701ceeb15662038435b80ba556a80c17f76d2dc Mon Sep 17 00:00:00
+> 2001
+> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> > +Date: Mon, 16 Sep 2019 13:30:13 +0200
+> >> > +Subject: [PATCH 03/10] Use __GLIBC__ to control use of
+> gnu_get_libc_version
+> >> >
+> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> >  ---
+> >> > -Upstream-Status: Pending
+> >> > - src/mongo/util/processinfo_linux.cpp | 6 ++++--
+> >> > - 1 file changed, 4 insertions(+), 2 deletions(-)
+> >> > + src/mongo/util/processinfo_linux.cpp | 8 ++++----
+> >> > + 1 file changed, 4 insertions(+), 4 deletions(-)
+> >> >
+> >> > -Index: git/src/mongo/util/processinfo_linux.cpp
+> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > ---- git.orig/src/mongo/util/processinfo_linux.cpp
+> >> > -+++ git/src/mongo/util/processinfo_linux.cpp
+> >> > +diff --git a/src/mongo/util/processinfo_linux.cpp
+> b/src/mongo/util/processinfo_linux.cpp
+> >> > +index cccb91c..45c4b7d 100644
+> >> > +--- a/src/mongo/util/processinfo_linux.cpp
+> >> > ++++ b/src/mongo/util/processinfo_linux.cpp
+> >> >  @@ -44,10 +44,10 @@
+> >> >   #include <unistd.h>
+> >> >   #ifdef __BIONIC__
+> >> > @@ -27,8 +27,8 @@ Index: git/src/mongo/util/processinfo_linux.cpp
+> >> >   #endif
+> >> >
+> >> >   #include <boost/filesystem.hpp>
+> >> > -@@ -503,7 +503,7 @@ void ProcessInfo::SystemInfo::collectSys
+> >> > -     stringstream ss;
+> >> > +@@ -546,7 +546,7 @@ void
+> ProcessInfo::SystemInfo::collectSystemInfo() {
+> >> > +     std::stringstream ss;
+> >> >       ss << "uClibc-" << __UCLIBC_MAJOR__ << "." << __UCLIBC_MINOR__
+> << "." << __UCLIBC_SUBLEVEL__;
+> >> >       bExtra.append("libcVersion", ss.str());
+> >> >  -#else
+> >> > @@ -36,3 +36,6 @@ Index: git/src/mongo/util/processinfo_linux.cpp
+> >> >       bExtra.append("libcVersion", gnu_get_libc_version());
+> >> >   #endif
+> >> >       if (!verSig.empty())
+> >> > +--
+> >> > +2.7.4
+> >> > +
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instead-of-int64=
+_t.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instead-of-int64=
+_t.patch
+> >> > index 99edad3..b9c6704 100644
+> >> > ---
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instead-of-int64=
+_t.patch
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instead-of-int64=
+_t.patch
+> >> > @@ -1,7 +1,7 @@
+> >> > -From a4951489d649c2b609cbb80f6cfb49fdcad8bd43 Mon Sep 17 00:00:00
+> 2001
+> >> > +From 20fcbf2a05ee6542aba942f6006d149db70fb9ce Mon Sep 17 00:00:00
+> 2001
+> >> >  From: Khem Raj <raj.khem@gmail.com>
+> >> >  Date: Sat, 2 Sep 2017 10:03:37 -0700
+> >> > -Subject: [PATCH] Use long long instead of int64_t
+> >> > +Subject: [PATCH 02/10] Use long long instead of int64_t
+> >> >
+> >> >  Fixes
+> >> >  error: call to member function 'appendNumber' is ambiguous
+> >> > @@ -9,15 +9,14 @@ since this function expects long long as parameter
+> and not int64_t
+> >> >
+> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> >  ---
+> >> > -Upstream-Status: Pending
+> >> >   src/mongo/util/procparser.cpp | 10 +++++-----
+> >> >   1 file changed, 5 insertions(+), 5 deletions(-)
+> >> >
+> >> > -Index: git/src/mongo/util/procparser.cpp
+> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > ---- git.orig/src/mongo/util/procparser.cpp
+> >> > -+++ git/src/mongo/util/procparser.cpp
+> >> > -@@ -260,7 +260,7 @@ Status parseProcStat(const std::vector<S
+> >> > +diff --git a/src/mongo/util/procparser.cpp
+> b/src/mongo/util/procparser.cpp
+> >> > +index c574a3f..5ea66b7 100644
+> >> > +--- a/src/mongo/util/procparser.cpp
+> >> > ++++ b/src/mongo/util/procparser.cpp
+> >> > +@@ -261,7 +261,7 @@ Status parseProcStat(const
+> std::vector<StringData>& keys,
+> >> >
+> >> >                       StringData stringValue((*partIt).begin(),
+> (*partIt).end() - (*partIt).begin());
+> >> >
+> >> > @@ -26,7 +25,7 @@ Index: git/src/mongo/util/procparser.cpp
+> >> >
+> >> >                       if (!parseNumberFromString(stringValue,
+> &value).isOK()) {
+> >> >                           value =3D 0;
+> >> > -@@ -272,7 +272,7 @@ Status parseProcStat(const std::vector<S
+> >> > +@@ -273,7 +273,7 @@ Status parseProcStat(const
+> std::vector<StringData>& keys,
+> >> >               } else {
+> >> >                   StringData stringValue((*partIt).begin(),
+> (*partIt).end() - (*partIt).begin());
+> >> >
+> >> > @@ -35,7 +34,7 @@ Index: git/src/mongo/util/procparser.cpp
+> >> >
+> >> >                   if (!parseNumberFromString(stringValue,
+> &value).isOK()) {
+> >> >                       value =3D 0;
+> >> > -@@ -365,7 +365,7 @@ Status parseProcMemInfo(const std::vecto
+> >> > +@@ -366,7 +366,7 @@ Status parseProcMemInfo(const
+> std::vector<StringData>& keys,
+> >> >
+> >> >               StringData stringValue((*partIt).begin(),
+> (*partIt).end());
+> >> >
+> >> > @@ -44,7 +43,7 @@ Index: git/src/mongo/util/procparser.cpp
+> >> >
+> >> >               if (!parseNumberFromString(stringValue, &value).isOK()=
+)
+> {
+> >> >                   value =3D 0;
+> >> > -@@ -522,7 +522,7 @@ Status parseProcDiskStats(const std::vec
+> >> > +@@ -522,7 +522,7 @@ Status parseProcDiskStats(const
+> std::vector<StringData>& disks,
+> >> >                             StringData data,
+> >> >                             BSONObjBuilder* builder) {
+> >> >       bool foundKeys =3D false;
+> >> > @@ -53,7 +52,7 @@ Index: git/src/mongo/util/procparser.cpp
+> >> >       stats.reserve(kDiskFieldCount);
+> >> >
+> >> >       using string_split_iterator =3D
+> boost::split_iterator<StringData::const_iterator>;
+> >> > -@@ -597,7 +597,7 @@ Status parseProcDiskStats(const std::vec
+> >> > +@@ -597,7 +597,7 @@ Status parseProcDiskStats(const
+> std::vector<StringData>& disks,
+> >> >
+> >> >                   StringData stringValue((*partIt).begin(),
+> (*partIt).end());
+> >> >
+> >> > @@ -62,3 +61,6 @@ Index: git/src/mongo/util/procparser.cpp
+> >> >
+> >> >                   if (!parseNumberFromString(stringValue,
+> &value).isOK()) {
+> >> >                       value =3D 0;
+> >> > +--
+> >> > +2.7.4
+> >> > +
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experimental-wit=
+h-clang.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experimental-wit=
+h-clang.patch
+> >> > index b597422..e726933 100644
+> >> > ---
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experimental-wit=
+h-clang.patch
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experimental-wit=
+h-clang.patch
+> >> > @@ -1,28 +1,29 @@
+> >> > -From 31ca5c563f1d9a3f70258be3dd2b1e547a65a550 Mon Sep 17 00:00:00
+> 2001
+> >> > -From: Khem Raj <raj.khem@gmail.com>
+> >> > -Date: Tue, 5 Feb 2019 00:21:12 -0800
+> >> > -Subject: [PATCH] asio: Dont use experimental with clang
+> >> > +From 097e8a66930cfa28ac8bfa35f62d0a9ee3b74488 Mon Sep 17 00:00:00
+> 2001
+> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> > +Date: Mon, 16 Sep 2019 13:46:52 +0200
+> >> > +Subject: [PATCH 10/10] asio: Dont use experimental with clang
+> >> >
+> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> >  ---
+> >> > - .../asio-master/asio/include/asio/detail/string_view.hpp      | 4
+> ++--
+> >> > +
+> src/third_party/asio-master/asio/include/asio/detail/string_view.hpp | 4
+> ++--
+> >> >   1 file changed, 2 insertions(+), 2 deletions(-)
+> >> >
+> >> >  diff --git
+> a/src/third_party/asio-master/asio/include/asio/detail/string_view.hpp
+> b/src/third_party/asio-master/asio/include/asio/detail/string_view.hpp
+> >> > -index 222c02186d..3bf7494529 100644
+> >> > +index f09cebc..fa307b5 100644
+> >> >  ---
+> a/src/third_party/asio-master/asio/include/asio/detail/string_view.hpp
+> >> >  +++
+> b/src/third_party/asio-master/asio/include/asio/detail/string_view.hpp
+> >> > -@@ -28,8 +28,8 @@
+> >> > - namespace asio {
+> >> > -
+> >> > - #if defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
+> >> > +@@ -33,8 +33,8 @@ namespace asio {
+> >> > + using std::basic_string_view;
+> >> > + using std::string_view;
+> >> > + #elif defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
+> >> >  -using std::experimental::basic_string_view;
+> >> >  -using std::experimental::string_view;
+> >> >  +using std::basic_string_view;
+> >> >  +using std::string_view;
+> >> > - #else // defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
+> >> > - using std::basic_string_view;
+> >> > - using std::string_view;
+> >> > + #endif // defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
+> >> > +
+> >> > + } // namespace asio
+> >> >  --
+> >> > -2.20.1
+> >> > +2.7.4
+> >> >
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for-the-macro=
+-__ELF_NATIVE_CLASS.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for-the-macro=
+-__ELF_NATIVE_CLASS.patch
+> >> > index 098306f..869d284 100644
+> >> > ---
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for-the-macro=
+-__ELF_NATIVE_CLASS.patch
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for-the-macro=
+-__ELF_NATIVE_CLASS.patch
+> >> > @@ -1,7 +1,7 @@
+> >> > -From df7ef16afcc6ab55daa686e4f15c16e3d1280337 Mon Sep 17 00:00:00
+> 2001
+> >> > +From 73c6374ceb0c062e91210cc9ef3e0e9fa30ee514 Mon Sep 17 00:00:00
+> 2001
+> >> >  From: Khem Raj <raj.khem@gmail.com>
+> >> >  Date: Sat, 2 Sep 2017 12:42:30 -0700
+> >> > -Subject: [PATCH 2/4] Add a definition for the macro
+> __ELF_NATIVE_CLASS
+> >> > +Subject: [PATCH 04/10] Add a definition for the macro
+> __ELF_NATIVE_CLASS
+> >> >
+> >> >  It depends on the native arch's word size.
+> >> >
+> >> > @@ -11,10 +11,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> >   1 file changed, 9 insertions(+)
+> >> >
+> >> >  diff --git a/src/mongo/util/stacktrace_posix.cpp
+> b/src/mongo/util/stacktrace_posix.cpp
+> >> > -index 53ab85f56f..7c458e7ef2 100644
+> >> > +index 1d7b3d7..f81e329 100644
+> >> >  --- a/src/mongo/util/stacktrace_posix.cpp
+> >> >  +++ b/src/mongo/util/stacktrace_posix.cpp
+> >> > -@@ -37,6 +37,15 @@
+> >> > +@@ -39,6 +39,15 @@
+> >> >   #include <string>
+> >> >   #include <sys/utsname.h>
+> >> >
+> >> > @@ -31,5 +31,5 @@ index 53ab85f56f..7c458e7ef2 100644
+> >> >   #include "mongo/config.h"
+> >> >   #include "mongo/db/jsobj.h"
+> >> >  --
+> >> > -2.14.1
+> >> > +2.7.4
+> >> >
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0002-Fix-default-stack-size-to-256K=
+.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0002-Fix-default-stack-size-to-256K=
+.patch
+> >> > index 085fa50..59066b2 100644
+> >> > ---
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0002-Fix-default-stack-size-to-256K=
+.patch
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0002-Fix-default-stack-size-to-256K=
+.patch
+> >> > @@ -1,7 +1,7 @@
+> >> > -From 98543889f7ba38c02eb7cd9822f45e27d619edd6 Mon Sep 17 00:00:00
+> 2001
+> >> > +From ffe6045b190b735601cd209d3e7ac121604c5a4e Mon Sep 17 00:00:00
+> 2001
+> >> >  From: Khem Raj <raj.khem@gmail.com>
+> >> >  Date: Fri, 24 Aug 2018 13:07:01 -0700
+> >> > -Subject: [PATCH 2/2] Fix default stack size to 256K
+> >> > +Subject: [PATCH 08/10] Fix default stack size to 256K
+> >> >
+> >> >  On musl default stack size is ~80K which is too low
+> >> >  for mongodb
+> >> > @@ -10,14 +10,14 @@ Upstream-Status: Pending
+> >> >
+> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> >  ---
+> >> > - .../platform/stack_locator_pthread_getattr_np.cpp      | 10
+> ++++++++++
+> >> > + src/mongo/platform/stack_locator_pthread_getattr_np.cpp | 10
+> ++++++++++
+> >> >   1 file changed, 10 insertions(+)
+> >> >
+> >> >  diff --git a/src/mongo/platform/stack_locator_pthread_getattr_np.cp=
+p
+> b/src/mongo/platform/stack_locator_pthread_getattr_np.cpp
+> >> > -index 648d26a41c..6e398f00c9 100644
+> >> > +index 4f3044c..68e47e3 100644
+> >> >  --- a/src/mongo/platform/stack_locator_pthread_getattr_np.cpp
+> >> >  +++ b/src/mongo/platform/stack_locator_pthread_getattr_np.cpp
+> >> > -@@ -35,6 +35,16 @@
+> >> > +@@ -36,6 +36,16 @@
+> >> >   #include "mongo/util/assert_util.h"
+> >> >   #include "mongo/util/scopeguard.h"
+> >> >
+> >> > @@ -35,5 +35,5 @@ index 648d26a41c..6e398f00c9 100644
+> >> >
+> >> >   StackLocator::StackLocator() {
+> >> >  --
+> >> > -2.18.0
+> >> > +2.7.4
+> >> >
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-env.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-env.patch
+> >> > new file mode 100644
+> >> > index 0000000..3a27aac
+> >> > --- /dev/null
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-env.patch
+> >> > @@ -0,0 +1,19 @@
+> >> > +Index: git/SConstruct
+> >> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > +--- git.orig/SConstruct
+> >> > ++++ git/SConstruct
+> >> > +@@ -884,6 +884,14 @@ env_vars.Add('WINDOWS_OPENSSL_BIN',
+> >> > +     help=3D'Sets the path to the openssl binaries for packaging',
+> >> > +     default=3D'c:/openssl/bin')
+> >> > +
+> >> > ++env_vars.Add('PREFIX',
+> >> > ++    help=3D'installation prefix')
+> >> > ++
+> >> > ++env_vars.Add('prefix',
+> >> > ++    help=3D'installation prefix')
+> >> > ++
+> >> > ++
+> >> > ++
+> >> > + # -- Validate user provided options --
+> >> > +
+> >> > + # A dummy environment that should *only* have the variables we hav=
+e
+> set. In practice it has
+> >> > diff --git
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0004-wiredtiger-Disable-strtouq-on-=
+musl.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0004-wiredtiger-Disable-strtouq-on-=
+musl.patch
+> >> > index a2e1f79..2cea9bc 100644
+> >> > ---
+> a/meta-oe/recipes-dbs/mongodb/mongodb/0004-wiredtiger-Disable-strtouq-on-=
+musl.patch
+> >> > +++
+> b/meta-oe/recipes-dbs/mongodb/mongodb/0004-wiredtiger-Disable-strtouq-on-=
+musl.patch
+> >> > @@ -1,17 +1,17 @@
+> >> > -From a1c77702926eb8546ff96b00b5b994f7478dabae Mon Sep 17 00:00:00
+> 2001
+> >> > +From cc95a8878fa581b164dee8fb1f07b05b9d919ef0 Mon Sep 17 00:00:00
+> 2001
+> >> >  From: Khem Raj <raj.khem@gmail.com>
+> >> >  Date: Sat, 2 Sep 2017 13:13:15 -0700
+> >> > -Subject: [PATCH 4/4] wiredtiger: Disable strtouq on musl
+> >> > +Subject: [PATCH 09/10] wiredtiger: Disable strtouq on musl
+> >> >
+> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> >  ---
+> >> >   src/third_party/wiredtiger/build_linux/wiredtiger_config.h | 2 +-
+> >> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >> >
+> >> > -Index: git/src/third_party/wiredtiger/build_linux/wiredtiger_config=
+.h
+> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > ----
+> git.orig/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
+> >> > -+++ git/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
+> >> > +diff --git
+> a/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
+> b/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
+> >> > +index 82e9994..0399a67 100644
+> >> > +--- a/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
+> >> > ++++ b/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
+> >> >  @@ -104,7 +104,7 @@
+> >> >   #define HAVE_STRING_H 1
+> >> >
+> >> > @@ -21,3 +21,6 @@ Index:
+> git/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
+> >> >
+> >> >   /* Define to 1 if you have the `sync_file_range' function. */
+> >> >   /* #undef HAVE_SYNC_FILE_RANGE */
+> >> > +--
+> >> > +2.7.4
+> >> > +
+> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/arm64-support.patch
+> b/meta-oe/recipes-dbs/mongodb/mongodb/arm64-support.patch
+> >> > index c068987..15bd7da 100644
+> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/arm64-support.patch
+> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/arm64-support.patch
+> >> > @@ -1,25 +1,33 @@
+> >> > -Add alises for arm64 which is same as aarch64
+> >> > +From c9fc9e9a44b0fb764ce86a5e57f17d3c5bbfd8cd Mon Sep 17 00:00:00
+> 2001
+> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> > +Date: Mon, 16 Sep 2019 13:37:10 +0200
+> >> > +Subject: [PATCH 05/10] Add alises for arm64 which is same as aarch6=
+4
+> >> >
+> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> > -Upstream-Status: Pending
+> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+> >> > +---
+> >> > + SConstruct                                      | 1 +
+> >> > + src/third_party/IntelRDFPMathLib20U1/SConscript | 2 +-
+> >> > + src/third_party/wiredtiger/SConscript           | 2 +-
+> >> > + 3 files changed, 3 insertions(+), 2 deletions(-)
+> >> >
+> >> > -Index: git/SConstruct
+> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > ---- git.orig/SConstruct
+> >> > -+++ git/SConstruct
+> >> > -@@ -1055,6 +1055,7 @@ elif endian =3D=3D "big":
+> >> > +diff --git a/SConstruct b/SConstruct
+> >> > +index e63cf15..5593c78 100644
+> >> > +--- a/SConstruct
+> >> > ++++ b/SConstruct
+> >> > +@@ -1129,6 +1129,7 @@ elif endian =3D=3D "big":
+> >> >   processor_macros =3D {
+> >> > -     'arm'     : { 'endian': 'little', 'defines': ('__arm__',) },
+> >> > -     'aarch64' : { 'endian': 'little', 'defines': ('__arm64__',
+> '__aarch64__')},
+> >> > -+    'arm64'   : { 'endian': 'little', 'defines': ('__arm64__',
+> '__aarch64__')},
+> >> > -     'i386'    : { 'endian': 'little', 'defines': ('__i386',
+> '_M_IX86')},
+> >> > -     'ppc64le' : { 'endian': 'little', 'defines':
+> ('__powerpc64__',)},
+> >> > -     's390x'   : { 'endian': 'big',    'defines': ('__s390x__',)},
+> >> > -Index: git/src/third_party/IntelRDFPMathLib20U1/SConscript
+> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > ---- git.orig/src/third_party/IntelRDFPMathLib20U1/SConscript
+> >> > -+++ git/src/third_party/IntelRDFPMathLib20U1/SConscript
+> >> > -@@ -308,7 +308,7 @@ if processor =3D=3D 'i386':
+> >> > +     'arm'        : { 'endian': 'little', 'defines': ('__arm__',) }=
+,
+> >> > +     'aarch64'    : { 'endian': 'little', 'defines': ('__arm64__',
+> '__aarch64__')},
+> >> > ++    'arm64'      : { 'endian': 'little', 'defines': ('__arm64__',
+> '__aarch64__')},
+> >> > +     'i386'       : { 'endian': 'little', 'defines': ('__i386',
+> '_M_IX86')},
+> >> > +     'ppc64le'    : { 'endian': 'little', 'defines':
+> ('__powerpc64__',)},
+> >> > +     's390x'      : { 'endian': 'big',    'defines': ('__s390x__',)=
+},
+> >> > +diff --git a/src/third_party/IntelRDFPMathLib20U1/SConscript
+> b/src/third_party/IntelRDFPMathLib20U1/SConscript
+> >> > +index f23c071..fb82cd6 100644
+> >> > +--- a/src/third_party/IntelRDFPMathLib20U1/SConscript
+> >> > ++++ b/src/third_party/IntelRDFPMathLib20U1/SConscript
+> >> > +@@ -308,7 +308,7 @@ if processor =3D=3D 'i386' or processor =3D=3D
+> 'emscripten':
+> >> >   elif processor =3D=3D 'arm':
+> >> >       cpp_defines['IA32'] =3D '1'
+> >> >       cpp_defines['ia32'] =3D '1'
+> >> > @@ -28,11 +36,11 @@ Index:
+> git/src/third_party/IntelRDFPMathLib20U1/SConscript
+> >> >       cpp_defines['efi2'] =3D '1'
+> >> >       cpp_defines['EFI2'] =3D '1'
+> >> >   # Using 64 bit little endian
+> >> > -Index: git/src/third_party/wiredtiger/SConscript
+> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> >> > ---- git.orig/src/third_party/wiredtiger/SConscript
+> >> > -+++ git/src/third_party/wiredtiger/SConscript
+> >> > -@@ -151,7 +151,7 @@ condition_map =3D {
+> >> > +diff --git a/src/third_party/wiredtiger/SConscript
+> b/src/third_party/wiredtiger/SConscript
+> >> > +index cdd090b..97a1b3b 100644
+> >> > +--- a/src/third_party/wiredtiger/SConscript
+> >> > ++++ b/src/third_party/wiredtiger/SConscript
+> >> > +@@ -152,7 +152,7 @@ condition_map =3D {
+> >> >       'POSIX_HOST'   : not env.TargetOSIs('windows'),
+> >> >       'WINDOWS_HOST' : env.TargetOSIs('windows'),
+> >> >
+> >> > @@ -41,3 +49,6 @@ Index: git/src/third_party/wiredtiger/SConscript
+> >> >       'POWERPC_HOST' : env['TARGET_ARCH'] =3D=3D 'ppc64le',
+> >> >       'X86_HOST'     : env['TARGET_ARCH'] =3D=3D 'x86_64',
+> >> >       'ZSERIES_HOST' : env['TARGET_ARCH'] =3D=3D 's390x',
+> >> > +--
+> >> > +2.7.4
+> >> > +
+> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+> b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+> >> > index ed05517..11efa5f 100644
+> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+> >> > @@ -3,17 +3,18 @@ LICENSE =3D "SSPL-1 & Apache-2.0 & Zlib"
+> >> >  LIC_FILES_CHKSUM =3D
+> "file://LICENSE-Community.txt;md5=3D3a865f27f11f43ecbe542d9ea387dcf1 \
+> >> >
+> file://APACHE-2.0.txt;md5=3D3b83ef96387f14655fc854ddc3c6bd57"
+> >> >
+> >> > -DEPENDS =3D "openssl libpcre libpcap zlib boost curl python \
+> >> > -           python-setuptools-native python-typing-native \
+> >> > -           python-pyyaml-native python-cheetah-native \
+> >> > +DEPENDS =3D "openssl libpcre libpcap zlib boost curl python3 \
+> >> > +           python3-setuptools-native \
+> >> > +           python3-pyyaml-native python3-cheetah-native \
+> >> > +           python3-psutil-native python3-regex-native \
+> >> >             "
+> >> >
+> >> > -inherit scons dos2unix siteinfo pythonnative
+> >> > +inherit scons dos2unix siteinfo python3native
+> >> >
+> >> > -PV =3D "4.0.6+git${SRCPV}"
+> >> > -#v4.0.6
+> >> > -SRCREV =3D "caa42a1f75a56c7643d0b68d3880444375ec42e3"
+> >> > -SRC_URI =3D "git://github.com/mongodb/mongo.git;branch=3Dv4.0 \
+> >> > +PV =3D "4.2.0+git${SRCPV}"
+> >> > +#v4.2.0
+> >> > +SRCREV =3D "18ce5c9f56a01f2c933a720d64707f3456f81c8b"
+> >> > +SRC_URI =3D "git://github.com/mongodb/mongo.git;branch=3Dv4.2 \
+> >> >
+>  file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
+> >> >             file://0001-Use-long-long-instead-of-int64_t.patch \
+> >> >
+>  file://0001-Use-__GLIBC__-to-control-use-of-gnu_get_libc_version.patch \
+> >> > @@ -21,6 +22,7 @@ SRC_URI =3D "git://
+> github.com/mongodb/mongo.git;branch=3Dv4.0 \
+> >> >             file://arm64-support.patch \
+> >> >
+>  file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch \
+> >> >             file://0001-Support-deprecated-resolver-functions.patch =
+\
+> >> > +           file://0003-Fix-unknown-prefix-env.patch \
+> >> >             "
+> >> >  SRC_URI_append_libc-musl =3D"\
+> >> >             file://0002-Fix-default-stack-size-to-256K.patch \
+> >> > @@ -75,5 +77,3 @@ scons_do_install() {
+> >> >          ${STAGING_BINDIR_NATIVE}/scons install ${EXTRA_OESCONS}|| \
+> >> >          die "scons install execution failed."
+> >> >  }
+> >> > -
+> >> > -PNBLACKLIST[mongodb] =3D "Since bbclass scons convert to python3,
+> build mongodb failed"
+> >> > --
+> >> > 2.7.4
+> >> >
 >
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists=
-.openembedded.org>
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
