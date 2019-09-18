@@ -1,52 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
-	[209.85.210.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D7C39007C
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
+	[209.85.160.180])
+	by mail.openembedded.org (Postfix) with ESMTP id A275D9004E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 22:58:15 +0000 (UTC)
-Received: by mail-pf1-f177.google.com with SMTP id q7so939483pfh.8
+	Wed, 18 Sep 2019 23:45:16 +0000 (UTC)
+Received: by mail-qt1-f180.google.com with SMTP id j31so1945914qta.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 15:58:16 -0700 (PDT)
+	Wed, 18 Sep 2019 16:45:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=BtdANaCnSck1yAapIdV628Q3zaWpGr+0JMbUYOgixLA=;
-	b=tdPSVqnR5acNjMOFon8QJC5FeddVjV3w09uEE9KEw7RMyxgeAZkZ1jEHvx7Wt/YRvn
-	WdmOFYRzxdPtMHTgptSLJbnX4KWnFEeerFLNqTH0hhlMfkjjWSkKzPZe8/uveWoAeJ9p
-	hxIKFTTJrW5QPs02h+j1tuD8zd9OmI4fxefTd7eFtbYWeAJNo1N7FdzjrT1KWdg6r6nv
-	gSEiwbRUFjz4g2CS47IKIiyLgSG7C4PBEhews23vmSDd6GzmsfQL4zM0qBvFsLErvfOD
-	FAYrmy0pIEAQ2fz8rA8wVAyU4iGx40uOW2mLxAx/pafuiO6dePHwpj+E0PFv5M2FXXr5
-	FdDQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=uUif1huVoXk7t0Cht8fnbttFGoMNNetEwz4Ea0hBtXw=;
+	b=DCPTsxy9greD+jJMCH96ZBbyl4TtpcCiWjydMyVTPFUrPiQdUb6WFZCFXdy8KDvriu
+	OiWq6QZAdXB6bWcuyXsFBQuSyj0ccuE3B21jPhSWHD5/iqX+iAJaepTzdJWNLoPaFRsG
+	HzJB6oAvLhSo4W7kVwNdyTCy0gtp/umQXd/UG+uAn34+rCSjOKH1zEuVC48Bmj2AIWQu
+	G+EQsFG7loGfjKXkjLoBFtyZl0Fi5QFTQsa0fc3QJCJ9wpKzTEQCpDaYQLKtYl78H5sH
+	cU1N5C7KN/ywbpp/vixpulYznkHi67vdnUOdreAthaJcl0hZhgN9cbQJRbjopAvRP1cq
+	CLCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=BtdANaCnSck1yAapIdV628Q3zaWpGr+0JMbUYOgixLA=;
-	b=a8RKcVrry9q4GjQE5y+s0KsyZeaMgevBzdTRYd/kj1XSSICJfm5efSP1cLX6ltbJgt
-	7+8ZVOL7dU9I24p9ZzC/ilJXvcOZvCuxmtdtYG3H8G3JvVlr6aF8IzJV0ToL2CACDl/M
-	DOpe7DL+9Si+tbeQ5xuYB9saek7411C8TghQ5Yv/zoAojIVjWSxOnRlxig9GyQTYLZFX
-	RnVAerKaEiLr0YOwgQ9C8I9c/yxZjfF8+4kQ/6tXspdzG9EFMh2kOSkmKvEsyRytGRBU
-	JZenTVGnMcnD6m5vJ1vHyMte/dSsA2O5wwXg6N0A2N9eOggkrkmQ+ZTy+wHDveuC5PJP
-	IIPQ==
-X-Gm-Message-State: APjAAAWnEfJZYwQq/7Lpl5E9902grzevFqMiE2ntWPCf4SUJdMozfMje
-	AVUe6cjtuDsjDxVqhZepf+6GQ0UiKCs=
-X-Google-Smtp-Source: APXvYqwkKR7phpSqJ16Nrc9PPFGF1n4OGh2GPJglAdcEJAoxI7ScHqBF+TtpfiHG6/92GR3ht551hg==
-X-Received: by 2002:a17:90a:cb01:: with SMTP id z1mr351336pjt.96.1568847495784;
-	Wed, 18 Sep 2019 15:58:15 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	c35sm6333405pgl.72.2019.09.18.15.58.14
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 18 Sep 2019 15:58:15 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Sep 2019 15:58:05 -0700
-Message-Id: <20190918225805.825469-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20190918225805.825469-1-raj.khem@gmail.com>
-References: <20190918225805.825469-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=uUif1huVoXk7t0Cht8fnbttFGoMNNetEwz4Ea0hBtXw=;
+	b=MmPgsLVMz0cVqpfOjt8Y8g7fVz+PbbT9e+NdCoXTFDxssQIHkmDNFqc61UY3WXPeIq
+	V2hNCQjXazXMO/LbrEt+TXfYyxZrWHrh3X4rEFOpS24J5lByhPQFSwuiyuBdQb8SQ5Ow
+	GfguBE2uHhvPdR541t0JChRj/pj6YtpiIsw/cTE5q51CJQwaPW4LJaUhMhK1LwcGL/lK
+	j1st2T1Wn1ttY/97L4NHwl2TONkqT+A868vz3a6/gntybCy3z54mctXH+FQwOwZqJrlk
+	xC8V8jphobgD8+fgQhFq8KF1D18RhNTF7oKvufuydXOpBNiM61Ln5gybxm3eV9c15ODs
+	LNFA==
+X-Gm-Message-State: APjAAAUclpzu2AyF9a8dTTHk88xb6HIA0arOIw3q6HRoxxFWTYcPoU7w
+	NCFoUILFEPSqHBC4Oq9xyYJ0JBd0z2s2qo30AcEmh7SWpSY=
+X-Google-Smtp-Source: APXvYqwikA30VpGeF1z1b/WlBcF4Bu7Lo8pm7QdT0cx0xO40ACFPWjxUP+YD6O/y3FzSPK7Pr96z16IbqmUEj8qHvGk=
+X-Received: by 2002:aed:3576:: with SMTP id b51mr418426qte.378.1568850317100; 
+	Wed, 18 Sep 2019 16:45:17 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] live555: Switch SRC_URI where archives are kept for longer
+References: <20190912223713.26895-1-open.source@oleksandr-kravchuk.com>
+	<CAMKF1sqWfURSkMxAmENpxMqgYLn_gamUGbMnpZ57z3O0GHOE2w@mail.gmail.com>
+	<1d2dd5dd-0a92-c14a-3d75-79e2eba8584f@oleksandr-kravchuk.com>
+In-Reply-To: <1d2dd5dd-0a92-c14a-3d75-79e2eba8584f@oleksandr-kravchuk.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 18 Sep 2019 16:44:49 -0700
+Message-ID: <CAMKF1sojkV=3hHyW9hkd5P13LEH6DhxEjp8V0=hhF5hqgxL-Kg@mail.gmail.com>
+To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] pcsc-lite: update to 1.8.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,31 +55,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2019 22:58:15 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 18 Sep 2019 23:45:16 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Current location only maintains the latest archive and the releases are
-often enough that we might not update that frequent
+On Wed, Sep 18, 2019 at 3:37 PM Oleksandr Kravchuk
+<open.source@oleksandr-kravchuk.com> wrote:
+>
+> Right. Is there a common way to go around this?
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-multimedia/live555/live555.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+define packageconfig and enable it if systemd is in distro features
 
-diff --git a/meta-oe/recipes-multimedia/live555/live555.inc b/meta-oe/recipes-multimedia/live555/live555.inc
-index a88f7eb342..cf4dc7f4fe 100644
---- a/meta-oe/recipes-multimedia/live555/live555.inc
-+++ b/meta-oe/recipes-multimedia/live555/live555.inc
-@@ -8,7 +8,7 @@ LICENSE = "LGPLv3"
- SECTION = "devel"
- 
- URLV = "${@d.getVar('PV')[0:4]}.${@d.getVar('PV')[4:6]}.${@d.getVar('PV')[6:8]}"
--SRC_URI = "http://www.live555.com/liveMedia/public/live.${URLV}.tar.gz \
-+SRC_URI = "https://download.videolan.org/pub/contrib/live555/live.${URLV}.tar.gz \
-            file://config.linux-cross"
- # only latest live version stays on http://www.live555.com/liveMedia/public/, add mirror for older
- MIRRORS += "http://www.live555.com/liveMedia/public/ http://download.videolan.org/contrib/live555/ \n"
--- 
-2.23.0
+e.g.
+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+PACKAGECONFIG[systemd]  = "--enable-libsystemd,--disable-libsystemd,systemd,"
 
+> On 13/09/2019 18:20, Khem Raj wrote:
+> > I think we need to use systemd distro feature to control libsystemd
+> > use see https://errors.yoctoproject.org/Errors/Details/270186/
+> >
+> > On Thu, Sep 12, 2019 at 3:37 PM Oleksandr Kravchuk
+> > <open.source@oleksandr-kravchuk.com> wrote:
+> >> License checksum was changed due to removed license info about remove
+> >> code (see @0984e0f4a03e5e29bb5725b6f149f56c9e9c73c2).
+> >>
+> >> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+> >> ---
+> >>  .../pcsc-lite/{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb} | 7 +++----
+> >>  1 file changed, 3 insertions(+), 4 deletions(-)
+> >>  rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb} (86%)
+> >>
+> >> diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+> >> similarity index 86%
+> >> rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
+> >> rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+> >> index 10f724e6c..1c764f7eb 100644
+> >> --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
+> >> +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+> >> @@ -8,13 +8,12 @@ LICENSE_${PN}-dev = "BSD"
+> >>  LICENSE_${PN}-dbg = "BSD & GPLv3+"
+> >>  LICENSE_${PN}-spy = "GPLv3+"
+> >>  LICENSE_${PN}-spy-dev = "GPLv3+"
+> >> -LIC_FILES_CHKSUM = "file://COPYING;md5=f38b3d1c7ef7fc2c8b6d20cd38efdc29"
+> >> +LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
+> >>  DEPENDS = "udev"
+> >>
+> >>  SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
+> >> -SRC_URI[md5sum] = "0ec103b1ef298d0c58d6ef6b00b9cf17"
+> >> -SRC_URI[sha256sum] = "6a358f61ed3b66a7f6e1f4e794a94c7be4c81b7a58ec360c33791e8d7d9bd405"
+> >> -
+> >> +SRC_URI[md5sum] = "c20650a36062ab1689f37f3302c988f2"
+> >> +SRC_URI[sha256sum] = "d76d79edc31cf76e782b9f697420d3defbcc91778c3c650658086a1b748e8792"
+> >>
+> >>  inherit autotools systemd pkgconfig
+> >>
+> >> --
+> >> 2.17.1
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
