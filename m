@@ -1,57 +1,50 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f174.google.com (mail-lj1-f174.google.com
-	[209.85.208.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 7504190046
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A4A58FFFD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 22:37:56 +0000 (UTC)
-Received: by mail-lj1-f174.google.com with SMTP id d5so1512735lja.10
+	Wed, 18 Sep 2019 22:58:13 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id x10so707197pgi.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 15:37:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=gLhlYEbS54agacTTD0Lxk4tT9Z3dXdXqAANAxOze4uE=;
-	b=fYfFeH5DtfXQSJgjAC3RoQhc98CP5Und4X1Bo6o+Qb0x/ook4/LBUXBHD/35kMn99A
-	VyWRhfeM1AfDzuCU5yDh29+sLmKicbikxknh0xOOTU5T4QZoJPh8mgxxLNG9Lj1ZZQMy
-	n4sbHmtjTFTUutQSGFpn8nYbAnTdS0b3E2x1KC7ZUchURkXm9/uPW8om5dgI7srGT4Gq
-	nwvd/YePNO1DebMlZVdlpAMyOkgTOwy+q9UOnWkEvVxzMC1a1zg+bVl7QNm5QAJ4eGkC
-	wYblh94Bj+z+SMBxff2vdAf4LXhl3wz0PKGpfnDnkHPlyDhDeCMdHJa5CfEYVQPaqkLL
-	S3Pg==
+	Wed, 18 Sep 2019 15:58:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Rflk7NmsDwI6OQodI9qGpCXFi5fGZoTfX14kQu7jpHs=;
+	b=avO9Myt12AWu5w/lTc1Gyh+vJHcDEc+KaD5tpUIXWBDLovp44wqmBE3CnCAulpCbZP
+	yyhs00pQSijzD8E2mnTu4K+NW4rmVM5xHPBJ9Gcvva2jnaMnEbdRvO5cayeINUfs4daM
+	t+Gt21qZBTNNtByFoFbHsj4qdvxhdnG5TWqAb56WWO6BL6y6LhF3IgTrsEtAXA07iVMY
+	T83TKnK/btmbO4udBknji/qiYw2ihLHRiD126Hej7uEy72oalJjruRM+hPIcDFExlQpe
+	mQsa8JOaBKKnZStj++ZVWSppnrQ8o9mTHxzcbgIsHjtDRIrXdtyBsTqdLNjkMs7EATi6
+	ITvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=gLhlYEbS54agacTTD0Lxk4tT9Z3dXdXqAANAxOze4uE=;
-	b=uCpgFItimFuJmbX0Easb5NKMPl3cQmCopQU8KFOKFneD3ZnrzqJ2a0lQFJCr/oXM18
-	0SfQ1WJ7cEaPniE3U9RTLrfDV8EREjxPoKYc2HUSnRceRr99UalB2SPVcZixK4Um3RJd
-	Q1a8mCp/6gXtuhl/nTJQeTdg4N7qI9uOnZZFrE2fNJvtilCMScz8prZNNY3zJ1V+yJ/c
-	BJjO4Vgx8o/YVZEGzqOeSk/sELg9V1zHWuCiK8LOkexZn6wF2r8moxlgYIUW37dKVGVg
-	BU3hGGdyWEK1XZprQavHgYZ44KOfFvh+iUzugi1IlNiuaCF3dptPvJ7YAZv3OL43v/sv
-	/wUw==
-X-Gm-Message-State: APjAAAVyi0P5M30QdXxKqhqUJydzXxx5QXfBR3byQOc1J84UbYsAqCsZ
-	4+ZkvOxQwxPIk0oubPPB9BHYh8V4iqk=
-X-Google-Smtp-Source: APXvYqzpJL5R0k5W462K6ynhF/vmpaw6/0oaassoeJyZp1Kanpw86/FHs02JSrcw6/ErnCXSvE11IA==
-X-Received: by 2002:a2e:9799:: with SMTP id y25mr3607525lji.38.1568846276762; 
-	Wed, 18 Sep 2019 15:37:56 -0700 (PDT)
-Received: from [192.168.0.8] (c213-89-0-115.bredband.comhem.se. [213.89.0.115])
-	by smtp.gmail.com with ESMTPSA id
-	w77sm1196418lff.49.2019.09.18.15.37.55
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 18 Sep 2019 15:37:55 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>
-References: <20190912223713.26895-1-open.source@oleksandr-kravchuk.com>
-	<CAMKF1sqWfURSkMxAmENpxMqgYLn_gamUGbMnpZ57z3O0GHOE2w@mail.gmail.com>
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Message-ID: <1d2dd5dd-0a92-c14a-3d75-79e2eba8584f@oleksandr-kravchuk.com>
-Date: Thu, 19 Sep 2019 00:37:54 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Rflk7NmsDwI6OQodI9qGpCXFi5fGZoTfX14kQu7jpHs=;
+	b=rd9zsyHFVoIniKkeAU9DeQljabwImyzXvotZXhapzYLU8LouEZDhvo9rmfp5qObNDh
+	9tf9gbbHwKB1n7pD7kx9iFsREAqy/Nmd2WHlfH/xT6rJma4pO0D95DuxmsOsYT2+EP7T
+	jE6Yqdi8LOFtXA7nH1a+OajFqtJWkJKHBC1akp43OAFla18FPfGAjLRLz0UsUTVVeBdt
+	o4wtXFqwbUUbaaj08GiXBFxlYTg7YS0c7JWyKU1XW0T3C9rWdxcjRlu3hYgyvhx7Jcjf
+	ZAyjtBWl89NEQGDsYN+UPwKZi8L0/QFRrPd93ogTsof8cr1kZgoOAIYidG0PEUEnaOku
+	BV2g==
+X-Gm-Message-State: APjAAAWL4YBxWCRoUujlVXBnpUwo6a1up9SkLcAE3REvLhGsaFnGqGRP
+	6br+FvNKwwomuuiS6vMNsuzKnJlodlE=
+X-Google-Smtp-Source: APXvYqwzuWvsRwnUcMAvEALyCUmUeTIv8re7ZNjit0Bha2lg7Dmca1Yr6L+vg7jWOBZPIbbq9Eu/Rw==
+X-Received: by 2002:a17:90a:dc83:: with SMTP id j3mr307016pjv.99.1568847494298;
+	Wed, 18 Sep 2019 15:58:14 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	c35sm6333405pgl.72.2019.09.18.15.58.13
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 18 Sep 2019 15:58:13 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 18 Sep 2019 15:58:04 -0700
+Message-Id: <20190918225805.825469-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqWfURSkMxAmENpxMqgYLn_gamUGbMnpZ57z3O0GHOE2w@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] pcsc-lite: update to 1.8.25
+Subject: [meta-oe][PATCH 1/2] kernel-selftest: Disable the recipe by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,58 +57,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2019 22:37:58 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 18 Sep 2019 22:58:14 -0000
+Content-Transfer-Encoding: 8bit
 
-Right. Is there a common way to go around this?
+If one has meta-clang in layers then it will get enabled automatically
+or else, install clang/llvm on build host and add
 
-On 13/09/2019 18:20, Khem Raj wrote:
-> I think we need to use systemd distro feature to control libsystemd
-> use see https://errors.yoctoproject.org/Errors/Details/270186/
->
-> On Thu, Sep 12, 2019 at 3:37 PM Oleksandr Kravchuk
-> <open.source@oleksandr-kravchuk.com> wrote:
->> License checksum was changed due to removed license info about remove
->> code (see @0984e0f4a03e5e29bb5725b6f149f56c9e9c73c2).
->>
->> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
->> ---
->>  .../pcsc-lite/{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb} | 7 +++----
->>  1 file changed, 3 insertions(+), 4 deletions(-)
->>  rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb} (86%)
->>
->> diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
->> similarity index 86%
->> rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
->> rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
->> index 10f724e6c..1c764f7eb 100644
->> --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
->> +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
->> @@ -8,13 +8,12 @@ LICENSE_${PN}-dev = "BSD"
->>  LICENSE_${PN}-dbg = "BSD & GPLv3+"
->>  LICENSE_${PN}-spy = "GPLv3+"
->>  LICENSE_${PN}-spy-dev = "GPLv3+"
->> -LIC_FILES_CHKSUM = "file://COPYING;md5=f38b3d1c7ef7fc2c8b6d20cd38efdc29"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
->>  DEPENDS = "udev"
->>
->>  SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
->> -SRC_URI[md5sum] = "0ec103b1ef298d0c58d6ef6b00b9cf17"
->> -SRC_URI[sha256sum] = "6a358f61ed3b66a7f6e1f4e794a94c7be4c81b7a58ec360c33791e8d7d9bd405"
->> -
->> +SRC_URI[md5sum] = "c20650a36062ab1689f37f3302c988f2"
->> +SRC_URI[sha256sum] = "d76d79edc31cf76e782b9f697420d3defbcc91778c3c650658086a1b748e8792"
->>
->>  inherit autotools systemd pkgconfig
->>
->> --
->> 2.17.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+HOSTTOOLS += "clang llc"
+
+To config metadata then add COMPHOST = "(*)" in a bbappend
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index fb4534dca8..9e30c8df51 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -115,5 +115,10 @@ RDEPENDS_${PN} += "python3"
+ INSANE_SKIP_${PN} += "ldflags"
+ 
+ SECURITY_CFLAGS = ""
+-COMPATIBLE_HOST_libc-musl = 'null'
++
++# Set COMPHOST to (*) in a bbappend if you want to use it or include meta-clang in layer-mix
++
++COMPHOST ?= "null"
++COMPHOST_libc-musl = 'null'
++COMPATIBLE_HOST = "${COMPHOST}"
+ 
+-- 
+2.23.0
+
 
