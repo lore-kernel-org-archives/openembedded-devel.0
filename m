@@ -1,55 +1,55 @@
 Return-Path: <vincent.prince.fr@gmail.com>
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
-	[209.85.128.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 04335901D1
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+	[209.85.221.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 601B3901C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 11:26:31 +0000 (UTC)
-Received: by mail-wm1-f47.google.com with SMTP id o184so2143881wme.3
+	Wed, 18 Sep 2019 11:26:34 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id h7so6480995wrw.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 04:26:33 -0700 (PDT)
+	Wed, 18 Sep 2019 04:26:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=NdzQemPkL0IV3LsaU7Jf55E4KCvV68R5NCrXTKwDOhI=;
-	b=s6H9B7bkjjt+nmZBoie0rm+1JdJ/Dlkj/C3b1yb1UAq5yNGgFM+E6XlE1DZSqpxQY3
-	kD2HTSEE6NuhAOSsr9dMIF+tz6N8UaA6JbeqUmnRYXNKY+gJs4hjKav4ScR/gLESXKXL
-	Itqi5sdnzlpWTJ41WL2C1N8Z81f2lAZc0e8qhNl2qMWCNCzI7RmQ60gsJ2Xup4B3VRc0
-	QI99ak5b/qYywfM0vlv/8rSKbnEBmG/tY3RvufLPTbuB00skFxZD7HnN9iVw6yKu529V
-	1VHBGQfaksDnlTQ3zqge1X7sxR1ajiwsve/4UXwiX3czyoN17UAPgzhtl8zty3tIYw6G
-	xwCA==
+	bh=iNnrvXRs/0+808zvs0QOQycGQQ2Ix83oe6metS+HHVo=;
+	b=pSWuwVtl9LCZjEeb7r6Xd1+IMy9sB+5WjCBcTOAdPfxb24di3Ai3FbE8hqBqFg2NXN
+	8ZCSG958K4BwpaXfNTWUmB89Gdfoya+2nDt1IGbMJriPPRmeuam7SxLr2giqzVUeW2Lh
+	ROVjScULyMEF/2Znubmh3nqnkj0XIsBFXdwzChhQa2x5QvVbripEKpMgf/lFrsvQeU3r
+	Icn05F1s0IjZDMgucC9F3yqxp6b5SQYKrv62Eiggy9utjYv33/0mcMejCCVRBR9c3Ppz
+	yKX/SqPSjtbRCUXOAAtQ5vHNtiWRY4iuTsO2aDw3opKZ4bSfIs/BGOdRmkQQIkqk1k69
+	7n0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=NdzQemPkL0IV3LsaU7Jf55E4KCvV68R5NCrXTKwDOhI=;
-	b=mwV2I1ZHlUboYSyeiEHernHQWwiy7/6pp52nHYa0W1ULPeyWQAnyvv1HmwUXWEMniu
-	ggk8TVKENl3YQSq/tSQQ5DK3t+oWYzrFh1F7MD3BCnulByIzk6e17kKKpE+aTQLoxspe
-	v8A49YZGAvtDpTgOii90ltzgkUs+xvlPTueNGM50so/RrVUVbHhww3ERSF564TtXATJl
-	6vcd54+tq0evLM7N3tyoUFxNI46d5pxVmo57QtFhdUNZhw3O03Vlrx300jqqy1BlUPGM
-	9GCyigo0XgnpR1zl9DyHlbq/2wEpAc9cq7uca0afagLvREWePgS+7rKWcD9ja2hMw7m6
-	aehQ==
-X-Gm-Message-State: APjAAAVsJ9M1uE8zbSUUKM2fjl1IuA3Y8rQqdBpB9Ob3H0RB/vCELdo1
-	CzNBJpBvWJAdmfjz6BwDWS0lxoAIdEqycQ==
-X-Google-Smtp-Source: APXvYqxCVSZ8Bij8c+M25ixRBy1MAqbVkuV3z99ts0h+t9EsTmmt9SkAs+N+DLktwykBNC+59UihiQ==
-X-Received: by 2002:a7b:caa9:: with SMTP id r9mr2606833wml.14.1568805992184;
-	Wed, 18 Sep 2019 04:26:32 -0700 (PDT)
+	bh=iNnrvXRs/0+808zvs0QOQycGQQ2Ix83oe6metS+HHVo=;
+	b=jQaqrN7MZ5MToD0+LbshYP31ndMWb9ca6B1BbAyRLBQqsEfrl2BrTx44c1AFOtd3w8
+	YmJG3PRhnAa3IVh5nBpk4OcIoveVY5wqGOZJjRRuTV7w4MdjV5IkWCCTdiN5Qk7Hymyi
+	TrkLgwu1tii5GcV7DkkxYQGoJKRJPXuT+KsfwKp6XiFZBAy6TcXjLBkNu3+3JKck8Q3B
+	diLaRYYQYX9lYAyP/J6lgK3bPUX7eVUw7tzi0Yeq7cT1UJsDmFgnotQVwfoC1oioDosz
+	igmJwXdMMQoZOd+ksFRWtxEYnGNc5tiOvLRLlkxf4jZUaeBqKHqtl5Ltg0gg10WKF9H2
+	ssNQ==
+X-Gm-Message-State: APjAAAW4tSJf1lq+xOwXKv/QHzn9fH3o9Mq0BJ2E+BuyrL1qAevOh2Cj
+	l3ADG8GthjF+VxAQK9vVK7dyYe/PYwo6RQ==
+X-Google-Smtp-Source: APXvYqxZgfbHvrh29jUqGDWD42NGe3PZj1GpzektoBECDlP6sQqyqMRBRyOjwZd0oQNuObvKSerolQ==
+X-Received: by 2002:adf:ee4a:: with SMTP id w10mr2644061wro.138.1568805994742; 
+	Wed, 18 Sep 2019 04:26:34 -0700 (PDT)
 Received: from VM-VPR.corporate.saft.org
 	(i19-lef01-t2-89-85-250-196.ft.lns.abo.bbox.fr. [89.85.250.196])
 	by smtp.gmail.com with ESMTPSA id
-	o193sm2191749wme.39.2019.09.18.04.26.31
+	o193sm2191749wme.39.2019.09.18.04.26.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 18 Sep 2019 04:26:31 -0700 (PDT)
+	Wed, 18 Sep 2019 04:26:34 -0700 (PDT)
 From: Vincent Prince <vincent.prince.fr@gmail.com>
 X-Google-Original-From: Vincent Prince
 	<vincent.prince.external@saftbatteries.com>
 To: openembedded-devel@lists.openembedded.org,
 	raj.khem@gmail.com
-Date: Wed, 18 Sep 2019 13:25:49 +0200
-Message-Id: <1568805952-19822-2-git-send-email-vincent.prince.external@saftbatteries.com>
+Date: Wed, 18 Sep 2019 13:25:50 +0200
+Message-Id: <1568805952-19822-3-git-send-email-vincent.prince.external@saftbatteries.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1568805952-19822-1-git-send-email-vincent.prince.external@saftbatteries.com>
 References: <1568805952-19822-1-git-send-email-vincent.prince.external@saftbatteries.com>
 Cc: Vincent Prince <vincent.prince.external@saftbatteries.com>
-Subject: [meta-oe] [PATCH 1/4] python*-psutil: Add native and nativesdk to BBCLASSEXTEND
+Subject: [meta-oe] [PATCH 2/4] python3-cheetah: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,23 +62,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Sep 2019 11:26:32 -0000
+X-List-Received-Date: Wed, 18 Sep 2019 11:26:34 -0000
 
 Signed-off-by: Vincent Prince <vincent.prince.external@saftbatteries.com>
 ---
- meta-python/recipes-devtools/python/python-psutil.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-devtools/python/python3-cheetah_3.2.3.bb      | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-cheetah_3.2.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-psutil.inc b/meta-python/recipes-devtools/python/python-psutil.inc
-index e466c5c..0908c1c 100644
---- a/meta-python/recipes-devtools/python/python-psutil.inc
-+++ b/meta-python/recipes-devtools/python/python-psutil.inc
-@@ -18,3 +18,5 @@ RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-threading \
-     ${PYTHON_PN}-xml \
- "
+diff --git a/meta-python/recipes-devtools/python/python3-cheetah_3.2.3.bb b/meta-python/recipes-devtools/python/python3-cheetah_3.2.3.bb
+new file mode 100644
+index 0000000..52e8576
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-cheetah_3.2.3.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Python template engine and code generation tool"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=15e13a4ed0e5880e3e55ec88b0921181"
++
++PYPI_PACKAGE = "Cheetah3"
++inherit pypi setuptools3
++
++RDEPENDS_${PN} = "python3-pickle python3-pprint"
++RDEPENDS_${PN}_class-native = ""
 +
 +BBCLASSEXTEND = "native nativesdk"
++
++SRC_URI[md5sum] = "5629445e7fef9659da2b49e36aacdbff"
++SRC_URI[sha256sum] = "7c450bce04a82d34cf6d48992c736c2048246cbc00f7b4903a39cf9a8ea3990c"
++
 -- 
 2.7.4
 
