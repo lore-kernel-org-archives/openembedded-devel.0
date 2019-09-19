@@ -1,51 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id E85C49009D
+Return-Path: <yuanc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 8292890097
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2019 02:05:33 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id s17so842920plp.2
+	Thu, 19 Sep 2019 03:23:33 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,522,1559491200"; d="scan'208";a="75686592"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 19 Sep 2019 11:23:27 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 8791C4CE14EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 19:05:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=4zkg1Z5DTp/8kHJUGJRn9zrDTl6WW8BqcHDla7Sf//4=;
-	b=g87R/QEviSpqKc0GcIJAX5WPEft1c+3G3xsALft8jmRvpHhS/3S246BWB940ytQVL/
-	5SfAnfVCKiA6Lbgj17z/GhoqeU1UEyeYwFqu7dtqFtdwx4s2uq1WSRLmQN5F1kpuoC0Y
-	vpt5wNA4GJnsXUVTa2sBXIRBVtpw/Rg6VnnDF8+ThWgvLEjYXOjysj72FYl4ij7LaXOa
-	ksDUirpTqddBMVSUHTnZMQK9zCkXP/QGLFDF988WDdqzaWQZLXht1JkfGxmTt02X0RL/
-	IJyg5p/UwT4iP82ERCIcWNBV8iWluhAmFntOt5MWdbGxdR7eVMIx1CF8H8zWQXkgsG4L
-	HnBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=4zkg1Z5DTp/8kHJUGJRn9zrDTl6WW8BqcHDla7Sf//4=;
-	b=RWpaA6w0D4kLGL98UfG7aJv9nX0p6YUW7X8O3qwYE9iCzRH8uaUJz/BjpK48j8NbEQ
-	ga6CQQ7oAo1LoLE+6Aafz+jqHNouDZABjtN4ufl1MgR7fpUUdQa1p7yNukzv7bLX2p+h
-	Zd5TEzOZH9Atca3ZXwd60I1TZ2TMxru8vQKwU+/6KgcOAfx3ZJ2ULFvrODHScvWJK0/Z
-	A4nUt7Pych6UisoVG3eQgNU4K4bzNEE5B7iFUl8yyp1GldjKfpu8jt9YRTq4Pq4h9QAb
-	Syy9e/PW0qXeJ6dfIHyfHllSD3qOft1OEzjIWva4czzw7Oa51dhQAy+KhfL+vbf6Wr3h
-	2YKg==
-X-Gm-Message-State: APjAAAV1q+1EyXIuqpp966gW8Jz62pHjbTd/nRmb/Q56/XicCCagqOTO
-	rpWSUzALiPc+CKCVM+n+Ro7/HsShdqw=
-X-Google-Smtp-Source: APXvYqyKMzS8ZVEL/5jSp4pNuoD0POGjEmk2rCzHVMn9CZTf6e+7IODl8colKu18p2Ut7FdwtrHMMg==
-X-Received: by 2002:a17:902:a406:: with SMTP id
-	p6mr7526219plq.134.1568858734385; 
-	Wed, 18 Sep 2019 19:05:34 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3])
-	by smtp.gmail.com with ESMTPSA id c1sm7651815pfn.22.2019.09.18.19.05.33
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 18 Sep 2019 19:05:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Sep 2019 19:05:27 -0700
-Message-Id: <20190919020527.1399914-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	Thu, 19 Sep 2019 11:23:25 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.21) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 19 Sep 2019 11:23:29 +0800
+From: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 19 Sep 2019 12:23:01 +0900
+Message-ID: <20190919032301.48142-1-yuanc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.17.2
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] kernel-selftest: Exclude from world builds
+X-Originating-IP: [10.167.225.21]
+X-yoursite-MailScanner-ID: 8791C4CE14EB.A10EB
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH 1/6] python-more-itertools: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,31 +37,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2019 02:05:34 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 19 Sep 2019 03:23:33 -0000
+Content-Type: text/plain
 
-Avoid need for installing clang on host, or depending on meta-clang
+Add new recipe python-more-itertools as it is RDEPEND of python-zipp and python-pytest.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yuan Chao <yuanc.fnst@cn.fujitsu.com>
 ---
-v2: EXCLUDE_FROM_WORLD is enough for CI
+ .../recipes-devtools/python/python-more-itertools.inc    | 9 +++++++++
+ .../python/python-more-itertools_7.2.0.bb                | 2 ++
+ .../python/python3-more-itertools_7.2.0.bb               | 2 ++
+ 3 files changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-more-itertools.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
 
- meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-index fb4534dca8..02359e782b 100644
---- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-+++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
-@@ -117,3 +117,7 @@ INSANE_SKIP_${PN} += "ldflags"
- SECURITY_CFLAGS = ""
- COMPATIBLE_HOST_libc-musl = 'null'
- 
-+# It has native clang/llvm dependency, poky distro is reluctant to include them as deps
-+# this helps with world builds on AB
-+EXCLUDE_FROM_WORLD = "1"
+diff --git a/meta-python/recipes-devtools/python/python-more-itertools.inc b/meta-python/recipes-devtools/python/python-more-itertools.inc
+new file mode 100644
+index 000000000..41c334e8d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-more-itertools.inc
+@@ -0,0 +1,9 @@
++DESCRIPTION = "More routines for operating on iterables, beyond itertools"
++HOMEPAGE = "https://github.com/erikrose/more-itertools"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3396ea30f9d21389d7857719816f83b5"
 +
++SRC_URI[md5sum] = "f647bfd27243a7bebe53b5ddb6a3b1c4"
++SRC_URI[sha256sum] = "409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f832"
++
++inherit pypi setuptools3
+diff --git a/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb b/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
+new file mode 100644
+index 000000000..0702aad4e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools
++require python-more-itertools.inc
+diff --git a/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb b/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
+new file mode 100644
+index 000000000..28ddf88fb
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools3
++require python-more-itertools.inc
 -- 
-2.23.0
+2.17.1
+
+
 
 
