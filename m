@@ -1,46 +1,50 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by mail.openembedded.org (Postfix) with ESMTP id B22157FE5D
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A5937FEA9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2019 18:47:09 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id k5so10261612iol.5
+	Thu, 19 Sep 2019 20:34:11 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id v24so4957298ljj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2019 11:47:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=xC33CSajiiSAH6EctX9ydAke++HtRly1fO/rX9iHY1Q=;
-	b=j2ud4sE5wdrHErIcIVB9m/B6C/ITPi1NRcHJ5XMek30UTnvX2giqGQaS3zXK7cJE/v
-	IG0IL+L0eHf21F6wEcGzwTVseliRvSzVya70p3Re4RU/xfDeLCIiV5zJHNDlRf0qX3M9
-	lgLejT0sht0dU9YLPz4VTl7J/GOEphnto9m12xFe9m+4yE870ZAc0677tlpU6JyWpdFs
-	rfPl06Grpa5ymR1BpAPmZfI4Q8g728SxysZ0+OnLhSfB17unINLbFG7GgoYa8IPgFsuT
-	28pmFRSzkjwAfPIO8fpOXmbnKLKgHkOecT54yf042k8uPlKINKDJizE8/FXCJln4nThV
-	u4eA==
+	Thu, 19 Sep 2019 13:34:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=3RFq4UuU3hjLVWElwj4OP2zD9torSL/uTephZtg1PH4=;
+	b=sPZgSY2Mz8ldB5jghCyhd1HxoMeqtBV2bV+Z5WuQn4UnMwa1D9VbXj45ohlEgIbls7
+	/n4eacs9DXJXHgXn9CQfiPN/WoSjB3QyTWronID6Q8U5Xs5InnOc3ekNPWx2eULJnivi
+	GTJht78hulqCNtVkK9XMKmn0ee5dacNvbUptsWaAZczBJVt/loKmEtqNrdmMfAuRUn81
+	7yfnXQxqG24PK7zEAnizAlkY2yXeqbAGCGEwRlBvQ+XguyzNDJU7W48TLA2uBGoV7bjD
+	jrREth6TtUNeSHMpdp0WDPTc3p4b42kOKDTtgl1m2VrN8R1AsngEj5rHvYlXXCelgocF
+	cTBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=xC33CSajiiSAH6EctX9ydAke++HtRly1fO/rX9iHY1Q=;
-	b=BLQv3d2R6rFaSp99q6wxqq13dmdBoskwezkgviclJDZf5GfeCdUhOVlFBZ4hTz3g7H
-	4xK8N6qUav11/y5ry1+0bvAC+6GyCKTOsUDvbAA3jMvboXwQGIzRqGN3lFwRNvT7Qk4c
-	zT5AH6G4A2U67rzfoB1p/oarpRQUaFV/6spqrfKOMnefXzwzf7TaXK2MDZt70FSmx/xs
-	YlYlpqVvSdX0h0szo8C3WIBjlJeWFfZSMUFl6q3IYJAuM5NkVYFyFRsxZfm+kDM3WdiH
-	Y6V8Au2kaO2Qw6a8aik4SOdBNmubfiYbzP7vPTelu5r6xAa51+EkOaBj28qkKoQR86s4
-	tKmQ==
-X-Gm-Message-State: APjAAAWXlgKk4u9NqJDaddn5ReanU40rtZkZidPAc41oUmF3dGIfo7p/
-	bjHcEYenS+fxo6zx/CqoV0llHDJ5Kza9aTPRC7GXq3o9
-X-Google-Smtp-Source: APXvYqyfK89Jb3Js6H31R6sOhR6V9cNTOj8oW2hc3bI3cAY9KBTFhnEwE80kM3f6RhE8kjQBK9MvxLo8lAVx/7XUhSs=
-X-Received: by 2002:a05:6602:1d6:: with SMTP id
-	w22mr13309964iot.144.1568918830452; 
-	Thu, 19 Sep 2019 11:47:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190919181618.102575-1-alex.kiernan@gmail.com>
-In-Reply-To: <20190919181618.102575-1-alex.kiernan@gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Thu, 19 Sep 2019 19:46:59 +0100
-Message-ID: <CAO5Uq5RMEv4OzV_dXGo4frqm==mBobLvsCo4G9rfbv+_Fm77TA@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ostree: Add recipe
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3RFq4UuU3hjLVWElwj4OP2zD9torSL/uTephZtg1PH4=;
+	b=EO0AWWoy0EO6jqKyGkgPGRqc2t9RdRkTWurDxhKEDVbE7mpGqyLpuVSQ6mnpsxYyfI
+	24amCx7Gk8x+eyIfLkeomFrIxs8gWSEAbOyaoKYQfSBaF4+iBnb0Quo1ZSABEh+1u9pY
+	vFD2qN0cPFuxCStq1bO+a8NU+xuocq4F2zbfb/7X3lZzO1n/x5g2hXcAxjYyt61ZAVlj
+	jbRuuuMWVl5e5wWGd6yYVYVBWxZUhQAlPcMY2IQL0BNa8x3OEPHD/T3qOVg7COo4O7Kl
+	lVQDifKjMjWfXho2v4sQE1f53mQm7qym/qQ8SWDQavCcNai+3h/VxWoU9Bj0jhLK6lxS
+	kGWw==
+X-Gm-Message-State: APjAAAXF0Ppt/oXFyRoFr4JihKMf+VXHr8fOuRb29ybTUodqcbncuOFt
+	OXAwG2BLz+c0ZfXFo5YXTO29m72gHEU=
+X-Google-Smtp-Source: APXvYqyvkbKVFJAXIbPwpvHNYStvrV0r9ykgO5rH0WAxhhQbGvKHzoELGiYK12vW3qqA3Vsx+N1yiQ==
+X-Received: by 2002:a2e:8084:: with SMTP id i4mr1524360ljg.119.1568925251584; 
+	Thu, 19 Sep 2019 13:34:11 -0700 (PDT)
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
+	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
+	c26sm2090618ljj.45.2019.09.19.13.34.10
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 19 Sep 2019 13:34:10 -0700 (PDT)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+X-Google-Original-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Sep 2019 22:34:06 +0200
+Message-Id: <20190919203406.4665-1-oleksandr.kravchuk@pelagicore.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Subject: [PATCH v2][meta-oe] pcsc-lite: update to 1.8.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,225 +57,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2019 18:47:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 19 Sep 2019 20:34:11 -0000
 
-On Thu, Sep 19, 2019 at 7:16 PM Alex Kiernan <alex.kiernan@gmail.com> wrote:
->
-> Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> ---
->
->  ...lways-enable-trivial-httpd-for-tests.patch |  59 +++++++
->  ...cros-Add-TEMP_FAILURE_RETRY-for-musl.patch |  40 +++++
->  ...vial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch |  51 ++++++
->  .../recipes-extended/ostree/ostree_2019.3.bb  | 151 ++++++++++++++++++
->  4 files changed, 301 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch
->  create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch
->  create mode 100644 meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
->  create mode 100644 meta-oe/recipes-extended/ostree/ostree_2019.3.bb
->
-> diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch b/meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch
-> new file mode 100644
-> index 000000000000..c9e1306afde0
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch
-> @@ -0,0 +1,59 @@
-> +From 44e0647230b22cd136ae2fb252ce90eed4751970 Mon Sep 17 00:00:00 2001
-> +From: Alex Kiernan <alex.kiernan@gmail.com>
-> +Date: Wed, 4 Sep 2019 17:29:15 +0100
-> +Subject: [PATCH 1/2] Always enable trivial-httpd for tests
-> +
-> +When running tests we always need ostree-trivial-httpd, so enable it
-> +unconditionally
-> +
-> +Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> +Upstream-Status: Submitted [https://github.com/ostreedev/ostree/pull/1912]
-> +---
-> + Makefile.am        | 1 +
-> + ci/build.sh        | 5 +++++
-> + ci/travis-build.sh | 1 +
-> + 3 files changed, 7 insertions(+)
-> +
-> +diff --git a/Makefile.am b/Makefile.am
-> +index cd04a055045a..673dbf88de55 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -39,6 +39,7 @@ AM_DISTCHECK_CONFIGURE_FLAGS += \
-> +       --enable-gtk-doc \
-> +       --enable-man \
-> +       --disable-maintainer-mode \
-> ++      --enable-trivial-httpd-cmdline \
-> +       $(NULL)
-> +
-> + GITIGNOREFILES = aclocal.m4 build-aux/ buildutil/*.m4 config.h.in gtk-doc.make
-> +diff --git a/ci/build.sh b/ci/build.sh
-> +index 0901507498f2..806af050b780 100755
-> +--- a/ci/build.sh
-> ++++ b/ci/build.sh
-> +@@ -22,6 +22,11 @@ case "${CONFIGOPTS:-}" in
-> +         fi
-> +         ;;
-> + esac
-> ++# unless libsoup is disabled, enable trivial-httpd for the tests
-> ++case "${CONFIGOPTS:-}" in
-> ++    *--without-soup*) ;;
-> ++    *) CONFIGOPTS="${CONFIGOPTS:-} --enable-trivial-httpd-cmdline" ;;
-> ++esac
-> +
-> + # always fail on warnings; https://github.com/ostreedev/ostree/pull/971
-> + # NB: this disables the default set of flags from configure.ac
-> +diff --git a/ci/travis-build.sh b/ci/travis-build.sh
-> +index 3fd969bdced6..7c85313a2d32 100755
-> +--- a/ci/travis-build.sh
-> ++++ b/ci/travis-build.sh
-> +@@ -85,6 +85,7 @@ make="make -j${ci_parallel} V=1 VERBOSE=1"
-> +
-> + ../configure \
-> +     --enable-always-build-tests \
-> ++    --enable-trivial-httpd-cmdline \
-> +     ${ci_configopts}
-> +     "$@"
-> +
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch b/meta-oe/recipes-extended/ostree/ostree/0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch
-> new file mode 100644
-> index 000000000000..d8c044cb9224
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/ostree/ostree/0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch
-> @@ -0,0 +1,40 @@
-> +From 5a4f2ddb0a6c656b425a3caa41f5af766ed5f44b Mon Sep 17 00:00:00 2001
-> +From: Alex Kiernan <alex.kiernan@gmail.com>
-> +Date: Mon, 9 Sep 2019 14:19:18 +0100
-> +Subject: [PATCH] macros: Add TEMP_FAILURE_RETRY for musl
-> +
-> +TEMP_FAILURE_RETRY is glibc specific, add a definition for musl.
-> +
-> +See https://github.com/ostreedev/ostree/issues/731
-> +
-> +Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
-> +Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> +Upstream-Status: Accepted [https://gitlab.gnome.org/GNOME/libglnx/commit/15c06468804014fc49f6f340132930703f919b19]
-> +---
-> + glnx-macros.h | 10 ++++++++++
-> + 1 file changed, 10 insertions(+)
-> +
-> +diff --git a/libglnx.glnx-macros.h b/libglnx/glnx-macros.h
-> +index 6d8aca93f8a3..700fc75ceed0 100644
-> +--- a/libglnx.glnx-macros.h
-> ++++ b/libglnx/glnx-macros.h
-> +@@ -31,6 +31,16 @@ G_BEGIN_DECLS
-> + /* All of these are for C only. */
-> + #ifndef __GI_SCANNER__
-> +
-> ++/* fixes builds against musl, taken from glibc unistd.h */
-> ++#ifndef TEMP_FAILURE_RETRY
-> ++#define TEMP_FAILURE_RETRY(expression) \
-> ++  (__extension__                                                              \
-> ++    ({ long int __result;                                                     \
-> ++       do __result = (long int) (expression);                                 \
-> ++       while (__result == -1L && errno == EINTR);                             \
-> ++       __result; }))
-> ++#endif
-> ++
-> + /* Taken from https://github.com/systemd/systemd/src/basic/string-util.h
-> +  * at revision v228-666-gcf6c8c4
-> +  */
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch b/meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
-> new file mode 100644
-> index 000000000000..362b2f36ab51
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
-> @@ -0,0 +1,51 @@
-> +From 2629328b39ae117876f4854409c2231220a30b9c Mon Sep 17 00:00:00 2001
-> +From: Alex Kiernan <alex.kiernan@gmail.com>
-> +Date: Thu, 5 Sep 2019 13:22:15 +0100
-> +Subject: [PATCH 2/2] Gate ostree-trivial-httpd on BUILDOPT_TRIVIAL_HTTPD
-> +
-> +When building without --enable-trivial-httpd-cmdline, don't build or install
-> +the ostree-trivial-httpd binary.
-> +
-> +Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> +Upstream-Status: Submitted [https://github.com/ostreedev/ostree/pull/1912]
-> +---
-> + Makefile-ostree.am | 3 ++-
-> + configure.ac       | 3 +++
-> + 2 files changed, 5 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/Makefile-ostree.am b/Makefile-ostree.am
-> +index 76f39cad4b74..7b53cb148960 100644
-> +--- a/Makefile-ostree.am
-> ++++ b/Makefile-ostree.am
-> +@@ -143,12 +143,13 @@ ostree_SOURCES += src/ostree/ot-builtin-pull.c
-> + endif
-> +
-> + if USE_LIBSOUP
-> +-# Eventually once we stop things from using this, we should support disabling this
-> ++if BUILDOPT_TRIVIAL_HTTPD
-> + ostree_SOURCES += src/ostree/ot-builtin-trivial-httpd.c
-> + pkglibexec_PROGRAMS += ostree-trivial-httpd
-> + ostree_trivial_httpd_SOURCES = src/ostree/ostree-trivial-httpd.c
-> + ostree_trivial_httpd_CFLAGS = $(ostree_bin_shared_cflags) $(OT_INTERNAL_SOUP_CFLAGS)
-> + ostree_trivial_httpd_LDADD = $(ostree_bin_shared_ldadd) $(OT_INTERNAL_SOUP_LIBS)
-> ++endif
-> +
-> + if !USE_CURL
-> + # This is necessary for the cookie jar bits
-> +diff --git a/configure.ac b/configure.ac
-> +index 069bab01752e..ffc67980d507 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -192,6 +192,9 @@ AC_ARG_ENABLE(trivial-httpd-cmdline,
-> +   [Continue to support "ostree trivial-httpd" [default=no]])],,
-> +   enable_trivial_httpd_cmdline=no)
-> + AM_CONDITIONAL(BUILDOPT_TRIVIAL_HTTPD, test x$enable_trivial_httpd_cmdline = xyes)
-> ++AS_IF([test x$with_soup = xno && test x$enable_trivial_httpd_cmdline = xyes], [
-> ++  AC_MSG_ERROR([trivial-httpd enabled, but libsoup is not; libsoup is needed for trivial-httpd])
-> ++])
-> + AM_COND_IF(BUILDOPT_TRIVIAL_HTTPD,
-> +   [AC_DEFINE([BUILDOPT_ENABLE_TRIVIAL_HTTPD_CMDLINE], 1, [Define if we are enabling ostree trivial-httpd entrypoint])]
-> + )
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.3.bb b/meta-oe/recipes-extended/ostree/ostree_2019.3.bb
-> new file mode 100644
-> index 000000000000..6e2cd7267eb4
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/ostree/ostree_2019.3.bb
-> @@ -0,0 +1,151 @@
-> +SUMMARY = "Versioned Operating System Repository."
-> +DESCRIPTION = "libostree is both a shared library and suite of command line \
-> +tools that combines a \"git-like\" model for committing and downloading \
-> +bootable filesystem trees, along with a layer for deploying them and managing \
-> +the bootloader configuration."
-> +HOMEPAGE = "https://ostree.readthedocs.io"
-> +LICENSE = "LGPLv2.1"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
-> +
-> +DEPENDS = " \
-> +    glib-2.0 \
-> +    gpgme \
-> +    e2fsprogs \
-> +    libcap \
-> +    zlib \
-> +    xz \
-> +    bison-native \
-> +"
-> +
-> +# The Yocto mirror has an old export of ostree:
-> +# http://downloads.yoctoproject.org/mirror/sources/git2_github.com.ostreedev.ostree.tar.gz
-> +PREMIRRORS = ""
-> +
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
 
-I should've added a cover note to this - clearly this hack needs to go away.
+License checksum was changed due to removed license info about remove
+code (see @0984e0f4a03e5e29bb5725b6f149f56c9e9c73c2).
 
+Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+---
+ .../{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb}    | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/pcsc-lite/{pcsc-lite_1.8.22.bb => pcsc-lite_1.8.25.bb} (79%)
+
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+similarity index 79%
+rename from meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
+rename to meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+index 10f724e6c..a87c228a8 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.22.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.25.bb
+@@ -8,13 +8,12 @@ LICENSE_${PN}-dev = "BSD"
+ LICENSE_${PN}-dbg = "BSD & GPLv3+"
+ LICENSE_${PN}-spy = "GPLv3+"
+ LICENSE_${PN}-spy-dev = "GPLv3+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=f38b3d1c7ef7fc2c8b6d20cd38efdc29"
++LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
+ DEPENDS = "udev"
+ 
+ SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "0ec103b1ef298d0c58d6ef6b00b9cf17"
+-SRC_URI[sha256sum] = "6a358f61ed3b66a7f6e1f4e794a94c7be4c81b7a58ec360c33791e8d7d9bd405"
+-
++SRC_URI[md5sum] = "c20650a36062ab1689f37f3302c988f2"
++SRC_URI[sha256sum] = "d76d79edc31cf76e782b9f697420d3defbcc91778c3c650658086a1b748e8792"
+ 
+ inherit autotools systemd pkgconfig
+ 
+@@ -26,6 +25,10 @@ EXTRA_OECONF = " \
+ 
+ S = "${WORKDIR}/pcsc-lite-${PV}"
+ 
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++
++PACKAGECONFIG[systemd]  = ",--disable-libsystemd,systemd,"
++
+ PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-lib ${PN}-doc ${PN}-spy ${PN}-spy-dev"
+ 
+ RRECOMMENDS_${PN} = "ccid"
+@@ -36,7 +39,7 @@ FILES_${PN}-dev = "${includedir} \
+                    ${libdir}/pkgconfig \
+                    ${libdir}/libpcsclite.la \
+                    ${libdir}/libpcsclite.so"
+-                   
++
+ FILES_${PN}-spy = "${bindir}/pcsc-spy \
+                    ${libdir}/libpcscspy*${SOLIBS}"
+ FILES_${PN}-spy-dev = "${libdir}/libpcscspy.la \
 -- 
-Alex Kiernan
+2.17.1
+
 
