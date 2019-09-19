@@ -1,53 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 441F78FFE2
+Return-Path: <yuanc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 24E2590019
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2019 00:53:28 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id z67so1475179qkb.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 17:53:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=f1y3Yp2tWt9ZEczDT/wIFcqVTp/48xiTwCi/nITFuyk=;
-	b=HPhJKQ+/XW0TgU68QWr7lewGHLwPLgsf63Axoiu9nNm/I1qXjGhSJadZynyAAgxwfb
-	++HI2cYVtEpYww6XgTH2QO+s5x2s+84pEVWSwbJbRuNxFVgmgYOQCWrMUK/rsTKHeFQE
-	zT8RZybYG32+VES4INShgmqxkcOy1H0BCBDLO+eMAedul0lLUsjprKsXu3wHRAvqGG5L
-	Qj+0A9Sx+OJoZQXYDh/O/g882dB3Ep6kd1DbvShvFK1zyjkHVsWbqbmE2/E//p7za5mJ
-	ZIDqtsGw+bAa7wu5qJxvU5k22Frx4nBavoNWJSeY1zm+8KF1wxGsOT8OAKMoDNIhoag8
-	/+WQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=f1y3Yp2tWt9ZEczDT/wIFcqVTp/48xiTwCi/nITFuyk=;
-	b=cW4K/s87M4fJtmjXRT4B97qBDZ0f/E14DPtGfYVJDX4oBrzVZ792y1DTKPg1aG/Jd/
-	50CmhP6nuzlh10Vw7YiaFtMrBDhK76fJztyypTo9RsWD/lUNuI6gSTNc4KQ2rbo2sbek
-	J6MtvvxrsEtHkfNivR1NWNoQ1jMIjzZh/mX4jU9GFPKliwNOwb8A5kxZQKlAvhuLaTFP
-	dCLA/3owSCffrWXOmeuajhvo3h++ift5Fhi9O11YgClfeyZCvcLapv1or+dPCAaWEl1I
-	pLC6zE33ZN6qtvW7m86c4y1lzf6o/jmYO6ux+1fbsPc7Wq+ETYq/Vji9e0hUf2DVfszx
-	FyGw==
-X-Gm-Message-State: APjAAAUVfEsifI0JTycjau3zHYpOH7UDXU5bVs/9mtaH7bVKCGr1m4MO
-	/uryOH7tCoamLuTQfeYyEiyXn4lO/TU1nvcbQOY=
-X-Google-Smtp-Source: APXvYqxAjAbbyOlRRyUQx7PU0/S5x56FliJCVWeHz5kxJMX9Xh6fO0AaHZLYBC5C/+czh86vCDS/+SoXYPUmf+MeoRg=
-X-Received: by 2002:a37:6651:: with SMTP id a78mr359391qkc.474.1568854408386; 
-	Wed, 18 Sep 2019 17:53:28 -0700 (PDT)
+	Thu, 19 Sep 2019 01:09:41 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,522,1559491200"; d="scan'208";a="75678817"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 19 Sep 2019 09:09:40 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 170B24CDFCE9;
+	Thu, 19 Sep 2019 09:09:37 +0800 (CST)
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0439.000; Thu, 19 Sep 2019 09:09:41 +0800
+From: "Yuan, Chao" <yuanc.fnst@cn.fujitsu.com>
+To: Khem Raj <raj.khem@gmail.com>, "Koppolu, Chanakya"
+	<chanakya.koppolu@intel.com>
+Thread-Topic: [oe] [meta-python] [PATCH] python-pytest: upgrade 3.4.2 -> 5.1.1
+Thread-Index: AQHVaRM4ZesvuiXsv06sUuPdtyBPzKcmzoSAgAF2FgCABcv1gIADRViAgADkmAA=
+Date: Thu, 19 Sep 2019 01:09:45 +0000
+Message-ID: <90B94BBA23AFC744A826A4F23375C2D1018E28D3DF@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <20190828073827.8930-1-yuanc.fnst@cn.fujitsu.com>
+	<A8B665D90129BB4F9BA49400152BB380ABE5AD16@fmsmsx121.amr.corp.intel.com>
+	<90B94BBA23AFC744A826A4F23375C2D1018E28BAE8@G08CNEXMBPEKD01.g08.fujitsu.local>
+	<A8B665D90129BB4F9BA49400152BB380ABE5D0EA@fmsmsx121.amr.corp.intel.com>
+	<CANx9H-A2LzC7CU1UzMyHFfXDQ+KOcjt+GbOZpsHfQc0ELBRAnA@mail.gmail.com>
+	<CANx9H-ChPn4qGNP8h4VjxfAURzJ7VN+624L0Q8x55un7Y4rRqw@mail.gmail.com>
+	<A8B665D90129BB4F9BA49400152BB380ABE6A8AE@fmsmsx121.amr.corp.intel.com>
+	<A8B665D90129BB4F9BA49400152BB380ABE71DD3@fmsmsx121.amr.corp.intel.com>
+	<CAMKF1soF_GgV6bjy6Q1jpBE4kYeUxmp0U3jjwBV8Xgau50vRiw@mail.gmail.com>
+In-Reply-To: <CAMKF1soF_GgV6bjy6Q1jpBE4kYeUxmp0U3jjwBV8Xgau50vRiw@mail.gmail.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.225.21]
 MIME-Version: 1.0
-References: <1568805952-19822-1-git-send-email-vincent.prince.external@saftbatteries.com>
-	<1568805952-19822-5-git-send-email-vincent.prince.external@saftbatteries.com>
-	<CAMKF1sr=H7+_uAPgw3+VU3-NR3ztP-gTZPMOv2hO=wJ82BrZ_g@mail.gmail.com>
-	<CAB2nKc_9d3Uduco+BuoXbASFFXV3jAcyOMAr-1XrJycNL5BiAg@mail.gmail.com>
-	<CAMKF1sowOd6Q79CrFc-A56LKthisCsUUW0O-Do6mMN-96KWL1A@mail.gmail.com>
-	<CAB2nKc-w8EY0rRWdEr=NAzagcDVXDCJsJKBpTLv+6FzcW1ZbYA@mail.gmail.com>
-In-Reply-To: <CAB2nKc-w8EY0rRWdEr=NAzagcDVXDCJsJKBpTLv+6FzcW1ZbYA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Sep 2019 17:53:00 -0700
-Message-ID: <CAMKF1spbJ4JOVw6pQFQQ=odjqBSX+siyi4e+q8aCapyTH_DPsg@mail.gmail.com>
-To: Vincent Prince <vincent.prince.fr@gmail.com>
-Cc: Vincent Prince <vincent.prince.external@saftbatteries.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCH 4/4] mongodb: bump to version 4.2.0+git18ce5c9
+X-yoursite-MailScanner-ID: 170B24CDFCE9.A3E44
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: yuanc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python] [PATCH] python-pytest: upgrade 3.4.2 -> 5.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,877 +53,619 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2019 00:53:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 19 Sep 2019 01:09:43 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Wed, Sep 18, 2019 at 1:43 PM Vincent Prince
-<vincent.prince.fr@gmail.com> wrote:
->
-> In  https://github.com/mongodb/mongo/blob/master/src/mongo/stdx/new.h, th=
-ere is
->
-> #if __cplusplus < 201703L || !defined(__cpp_lib_hardware_interference_siz=
-e)
->
->   ... define  hardware_constructive_interference_size manually
->
-> #else
->
-> using std::hardware_constructive_interference_size;
-> using std::hardware_destructive_interference_size;
->
-> #endif
->
-> It goes to #else, so it seems there is a broken c++17 support for "Hardwa=
-re interference size" feature on Clang?
-
-No, since we are using std=3Dc++17 its coming rightly to else part the
-problem seemingly is that 32bit
-x86 does not implement this, Maybe even on gcc that is an issue, you
-can try with gcc for qemux86 and see if it works with gcc. If it does
-then we can just blacklist it in meta-clang and this patch can go
-in. Otheresie, I am fine if it was marked incompatible for x86 if its
-failing for both gcc and clang.
-
->
-> Le mer. 18 sept. 2019 =C3=A0 18:52, Khem Raj <raj.khem@gmail.com> a =C3=
-=A9crit :
->>
->> On Wed, Sep 18, 2019 at 9:41 AM Vincent Prince
->> <vincent.prince.fr@gmail.com> wrote:
->> >
->> > Hi,
->> >
->> > musl/arm64 problem seems quite easy to fix:
->> > src/mongo/util/errno_util.cpp: In function 'std::string mongo::errnoWi=
-thDescription(int)': src/mongo/util/errno_util.cpp:66:21: error: invalid co=
-nversion from 'int' to 'char*' [-fpermissive]
->> > msg =3D strerror_r(errNumber, buf, kBuflen);
->> >
->> > clang/x86 looks more complicated to me:
->> > src/mongo/stdx/new.h:53:12: error: no member named 'hardware_construct=
-ive_interference_size' in namespace 'std'
->> > using std::hardware_constructive_interference_size;
->> > ...
->> >
->> > I don't have resources to try patches for this outside Yocto build sys=
-tem,
->> > so I can try to send v2 but if someone wants to help for these issues,=
- don't hesitate ;)
->>
->> Perhaps using -std=3Dc++17 will help ?
-
-I meant not using c++17 on x86 might be helpful.
-
->>
->> >
->> >
->> >
->> > Le mer. 18 sept. 2019 =C3=A0 17:45, Khem Raj <raj.khem@gmail.com> a =
-=C3=A9crit :
->> >>
->> >> Hi Vincent
->> >>
->> >> Thanks for working on this, it fails on couple of combinations
->> >>
->> >> clang/x86
->> >> https://errors.yoctoproject.org/Errors/Details/271195/
->> >>
->> >> musl/arm64
->> >> https://errors.yoctoproject.org/Errors/Details/271194/
->> >> On Wed, Sep 18, 2019 at 4:26 AM Vincent Prince
->> >> <vincent.prince.fr@gmail.com> wrote:
->> >> >
->> >> > MongoDB v4.2.0 adds python3 support that is needed by scons upgrade=
- [44f303b scons: inherit python3native].
->> >> >  - mongodb git commit 18ce5c9 was needed to fix https://jira.mongod=
-b.org/browse/SERVER-42787
->> >> >  - Add PREFIX and prefix to scons environment to fix unknown variab=
-le check (SConstruct#L1073)
->> >> >  - Previous patches are refreshed
->> >> >
->> >> > Signed-off-by: Vincent Prince <vincent.prince.external@saftbatterie=
-s.com>
->> >> > ---
->> >> >  ...FPMathLib20U1-Check-for-__DEFINED_wchar_t.patch | 22 +++++----
->> >> >  ...001-Support-deprecated-resolver-functions.patch | 10 ++--
->> >> >  ...to-use-build-settings-from-environment-va.patch | 46 ++++++++--=
--------
->> >> >  ...__-to-control-use-of-gnu_get_libc_version.patch | 29 ++++++----=
--
->> >> >  .../0001-Use-long-long-instead-of-int64_t.patch    | 26 +++++-----
->> >> >  ...001-asio-Dont-use-experimental-with-clang.patch | 29 +++++-----=
--
->> >> >  ...finition-for-the-macro-__ELF_NATIVE_CLASS.patch | 10 ++--
->> >> >  .../0002-Fix-default-stack-size-to-256K.patch      | 12 ++---
->> >> >  .../mongodb/0003-Fix-unknown-prefix-env.patch      | 19 ++++++++
->> >> >  .../0004-wiredtiger-Disable-strtouq-on-musl.patch  | 15 +++---
->> >> >  .../mongodb/mongodb/arm64-support.patch            | 57 ++++++++++=
-+++---------
->> >> >  meta-oe/recipes-dbs/mongodb/mongodb_git.bb         | 20 ++++----
->> >> >  12 files changed, 164 insertions(+), 131 deletions(-)
->> >> >  create mode 100644 meta-oe/recipes-dbs/mongodb/mongodb/0003-Fix-un=
-known-prefix-env.patch
->> >> >
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0001-IntelRDFPMath=
-Lib20U1-Check-for-__DEFINED_wchar_t.patch b/meta-oe/recipes-dbs/mongodb/mon=
-godb/0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch
->> >> > index 4d7ac3a..e636adc 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/0001-IntelRDFPMathLib20U1=
--Check-for-__DEFINED_wchar_t.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0001-IntelRDFPMathLib20U1=
--Check-for-__DEFINED_wchar_t.patch
->> >> > @@ -1,7 +1,7 @@
->> >> > -From fbfceebce2121831904f2f7115252dd03b413a6d Mon Sep 17 00:00:00 =
-2001
->> >> > -From: Khem Raj <raj.khem@gmail.com>
->> >> > -Date: Tue, 19 Sep 2017 18:52:53 -0700
->> >> > -Subject: [PATCH] IntelRDFPMathLib20U1: Check for __DEFINED_wchar_t
->> >> > +From 97914aeab52b4d0ea0ab9e5ff985a1c5cddb0fa1 Mon Sep 17 00:00:00 =
-2001
->> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> > +Date: Mon, 16 Sep 2019 13:41:39 +0200
->> >> > +Subject: [PATCH 06/10] IntelRDFPMathLib20U1: Check for __DEFINED_w=
-char_t
->> >> >
->> >> >  This is defined by musl if wchar_t is already defined
->> >> >
->> >> > @@ -12,16 +12,15 @@ src/third_party/IntelRDFPMathLib20U1/LIBRARY/sr=
-c/bid_functions.h:46:15: error: t
->> >> >  typedef int   wchar_t;
->> >> >
->> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> >  ---
->> >> > -Upstream-Status: Pending
->> >> > -
->> >> >   src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h =
-| 2 +-
->> >> >   1 file changed, 1 insertion(+), 1 deletion(-)
->> >> >
->> >> > -Index: git/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_fu=
-nctions.h
->> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > ---- git.orig/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_=
-functions.h
->> >> > -+++ git/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_funct=
-ions.h
->> >> > +diff --git a/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_=
-functions.h b/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_function=
-s.h
->> >> > +index 56775bc..be96a85 100755
->> >> > +--- a/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functio=
-ns.h
->> >> > ++++ b/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functio=
-ns.h
->> >> >  @@ -43,7 +43,7 @@
->> >> >
->> >> >   #if 0 // MongoDB Modification -- just `#include <stddef.h>`
->> >> > @@ -31,3 +30,6 @@ Index: git/src/third_party/IntelRDFPMathLib20U1/L=
-IBRARY/src/bid_functions.h
->> >> >   typedef int   wchar_t;
->> >> >   #endif
->> >> >   #else
->> >> > +--
->> >> > +2.7.4
->> >> > +
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Support-depre=
-cated-resolver-functions.patch b/meta-oe/recipes-dbs/mongodb/mongodb/0001-S=
-upport-deprecated-resolver-functions.patch
->> >> > index 070411a..3d949c8 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Support-deprecated-r=
-esolver-functions.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Support-deprecated-r=
-esolver-functions.patch
->> >> > @@ -1,7 +1,7 @@
->> >> > -From 5994023a03634dfc0318976c293e7391fe6aa060 Mon Sep 17 00:00:00 =
-2001
->> >> > +From 8d035e84c2edb44461ef4df9cdef0a6dfce0a1d7 Mon Sep 17 00:00:00 =
-2001
->> >> >  From: Khem Raj <raj.khem@gmail.com>
->> >> >  Date: Fri, 24 Aug 2018 12:56:22 -0700
->> >> > -Subject: [PATCH 1/2] Support deprecated resolver functions
->> >> > +Subject: [PATCH 07/10] Support deprecated resolver functions
->> >> >
->> >> >  Needed for  musl libc
->> >> >
->> >> > @@ -12,10 +12,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> >   1 file changed, 6 insertions(+)
->> >> >
->> >> >  diff --git a/src/mongo/util/dns_query_posix-impl.h b/src/mongo/uti=
-l/dns_query_posix-impl.h
->> >> > -index d19958010c..bbca3309ed 100644
->> >> > +index a5e3629..fb29d2d 100644
->> >> >  --- a/src/mongo/util/dns_query_posix-impl.h
->> >> >  +++ b/src/mongo/util/dns_query_posix-impl.h
->> >> > -@@ -53,6 +53,12 @@
->> >> > +@@ -54,6 +54,12 @@
->> >> >
->> >> >   #include <boost/noncopyable.hpp>
->> >> >
->> >> > @@ -29,5 +29,5 @@ index d19958010c..bbca3309ed 100644
->> >> >   namespace dns {
->> >> >   // The anonymous namespace is safe, in this header, as it is not =
-really a header.  It is only used
->> >> >  --
->> >> > -2.18.0
->> >> > +2.7.4
->> >> >
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to=
--use-build-settings-from-environment-va.patch b/meta-oe/recipes-dbs/mongodb=
-/mongodb/0001-Tell-scons-to-use-build-settings-from-environment-va.patch
->> >> > index a6d721a..1908846 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-bu=
-ild-settings-from-environment-va.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Tell-scons-to-use-bu=
-ild-settings-from-environment-va.patch
->> >> > @@ -1,19 +1,20 @@
->> >> > -From 53368d3f4adc09dd84234a9af31771bcd8ca2757 Mon Sep 17 00:00:00 =
-2001
->> >> > -From: Sven Ebenfeld <sven.ebenfeld@gmail.com>
->> >> > -Date: Fri, 15 Jan 2016 22:41:28 +0100
->> >> > -Subject: [PATCH] Tell scons to use build settings from environment=
- variables
->> >> > +From 1b2e24e14ee72e54e466be2512c78272f62d60b4 Mon Sep 17 00:00:00 =
-2001
->> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> > +Date: Mon, 16 Sep 2019 13:21:44 +0200
->> >> > +Subject: [PATCH 01/10] Tell scons to use build settings from envir=
-onment
->> >> > + variables
->> >> >
->> >> >  Signed-off-by: Sven Ebenfeld <sven.ebenfeld@gmail.com>
->> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> >  ---
->> >> >   SConstruct                | 8 ++++++--
->> >> > - src/mongo/util/SConscript | 2 ++
->> >> > - 2 files changed, 8 insertions(+), 2 deletions(-)
->> >> > + 1 files changed, 8 insertions(+), 2 deletions(-)
->> >> >
->> >> > -Index: git/SConstruct
->> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > ---- git.orig/SConstruct
->> >> > -+++ git/SConstruct
->> >> > -@@ -564,6 +564,7 @@ def variable_arch_converter(val):
->> >> > +diff --git a/SConstruct b/SConstruct
->> >> > +index 7ebbcbc..e63cf15 100644
->> >> > +--- a/SConstruct
->> >> > ++++ b/SConstruct
->> >> > +@@ -608,6 +608,7 @@ def variable_arch_converter(val):
->> >> >           'amd64':  'x86_64',
->> >> >           'emt64':   'x86_64',
->> >> >           'x86':    'i386',
->> >> > @@ -21,7 +22,7 @@ Index: git/SConstruct
->> >> >       }
->> >> >       val =3D val.lower()
->> >> >
->> >> > -@@ -652,7 +653,8 @@ env_vars.Add(
->> >> > +@@ -695,7 +696,8 @@ env_vars.Add(
->> >> >   )
->> >> >
->> >> >   env_vars.Add('CC',
->> >> > @@ -31,7 +32,7 @@ Index: git/SConstruct
->> >> >
->> >> >   env_vars.Add('CCFLAGS',
->> >> >       help=3D'Sets flags for the C and C++ compiler',
->> >> > -@@ -672,7 +674,8 @@ env_vars.Add('CPPPATH',
->> >> > +@@ -715,7 +717,8 @@ env_vars.Add('CPPPATH',
->> >> >       converter=3Dvariable_shlex_converter)
->> >> >
->> >> >   env_vars.Add('CXX',
->> >> > @@ -41,24 +42,15 @@ Index: git/SConstruct
->> >> >
->> >> >   env_vars.Add('CXXFLAGS',
->> >> >       help=3D'Sets flags for the C++ compiler',
->> >> > -@@ -961,6 +964,7 @@ envDict =3D dict(BUILD_ROOT=3DbuildDir,
->> >> > +@@ -1018,6 +1021,7 @@ envDict =3D dict(BUILD_ROOT=3DbuildDir,
->> >> >                  )
->> >> >
->> >> >   env =3D Environment(variables=3Denv_vars, **envDict)
->> >> >  +env.PrependENVPath('PATH', os.getenv('PATH'))
->> >> >   del envDict
->> >> >
->> >> > - env.AddMethod(mongo_platform.env_os_is_wrapper, 'TargetOSIs')
->> >> > -Index: git/src/mongo/util/SConscript
->> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > ---- git.orig/src/mongo/util/SConscript
->> >> > -+++ git/src/mongo/util/SConscript
->> >> > -@@ -329,6 +329,8 @@ if env['MONGO_ALLOCATOR'] =3D=3D 'tcmalloc':
->> >> > -                 'MONGO_HAVE_GPERFTOOLS_SIZE_CLASS_STATS'
->> >> > -             ]
->> >> > -         )
->> >> > -+    if not use_system_version_of_library('valgrind'):
->> >> > -+        tcmspEnv.InjectThirdPartyIncludePaths('valgrind')
->> >> > + for var in ['CC', 'CXX']:
->> >> >
->> >> > -     if not use_system_version_of_library('valgrind'):
->> >> > -         # Include valgrind since tcmalloc disables itself while r=
-unning under valgrind
->> >> > +--
->> >> > +2.7.4
->> >> > +
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__=
--to-control-use-of-gnu_get_libc_version.patch b/meta-oe/recipes-dbs/mongodb=
-/mongodb/0001-Use-__GLIBC__-to-control-use-of-gnu_get_libc_version.patch
->> >> > index c17ebf1..d98fa56 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-con=
-trol-use-of-gnu_get_libc_version.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-__GLIBC__-to-con=
-trol-use-of-gnu_get_libc_version.patch
->> >> > @@ -1,18 +1,18 @@
->> >> > -From 3eed8388b49d5d3cbc2db74fee1b017eb4b40d0a Mon Sep 17 00:00:00 =
-2001
->> >> > -From: Khem Raj <raj.khem@gmail.com>
->> >> > -Date: Sat, 2 Sep 2017 10:06:24 -0700
->> >> > -Subject: [PATCH] Use __GLIBC__ to control use of gnu_get_libc_vers=
-ion
->> >> > +From d701ceeb15662038435b80ba556a80c17f76d2dc Mon Sep 17 00:00:00 =
-2001
->> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> > +Date: Mon, 16 Sep 2019 13:30:13 +0200
->> >> > +Subject: [PATCH 03/10] Use __GLIBC__ to control use of gnu_get_lib=
-c_version
->> >> >
->> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> >  ---
->> >> > -Upstream-Status: Pending
->> >> > - src/mongo/util/processinfo_linux.cpp | 6 ++++--
->> >> > - 1 file changed, 4 insertions(+), 2 deletions(-)
->> >> > + src/mongo/util/processinfo_linux.cpp | 8 ++++----
->> >> > + 1 file changed, 4 insertions(+), 4 deletions(-)
->> >> >
->> >> > -Index: git/src/mongo/util/processinfo_linux.cpp
->> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > ---- git.orig/src/mongo/util/processinfo_linux.cpp
->> >> > -+++ git/src/mongo/util/processinfo_linux.cpp
->> >> > +diff --git a/src/mongo/util/processinfo_linux.cpp b/src/mongo/util=
-/processinfo_linux.cpp
->> >> > +index cccb91c..45c4b7d 100644
->> >> > +--- a/src/mongo/util/processinfo_linux.cpp
->> >> > ++++ b/src/mongo/util/processinfo_linux.cpp
->> >> >  @@ -44,10 +44,10 @@
->> >> >   #include <unistd.h>
->> >> >   #ifdef __BIONIC__
->> >> > @@ -27,8 +27,8 @@ Index: git/src/mongo/util/processinfo_linux.cpp
->> >> >   #endif
->> >> >
->> >> >   #include <boost/filesystem.hpp>
->> >> > -@@ -503,7 +503,7 @@ void ProcessInfo::SystemInfo::collectSys
->> >> > -     stringstream ss;
->> >> > +@@ -546,7 +546,7 @@ void ProcessInfo::SystemInfo::collectSystemInf=
-o() {
->> >> > +     std::stringstream ss;
->> >> >       ss << "uClibc-" << __UCLIBC_MAJOR__ << "." << __UCLIBC_MINOR_=
-_ << "." << __UCLIBC_SUBLEVEL__;
->> >> >       bExtra.append("libcVersion", ss.str());
->> >> >  -#else
->> >> > @@ -36,3 +36,6 @@ Index: git/src/mongo/util/processinfo_linux.cpp
->> >> >       bExtra.append("libcVersion", gnu_get_libc_version());
->> >> >   #endif
->> >> >       if (!verSig.empty())
->> >> > +--
->> >> > +2.7.4
->> >> > +
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-long-long=
--instead-of-int64_t.patch b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-lo=
-ng-long-instead-of-int64_t.patch
->> >> > index 99edad3..b9c6704 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instea=
-d-of-int64_t.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Use-long-long-instea=
-d-of-int64_t.patch
->> >> > @@ -1,7 +1,7 @@
->> >> > -From a4951489d649c2b609cbb80f6cfb49fdcad8bd43 Mon Sep 17 00:00:00 =
-2001
->> >> > +From 20fcbf2a05ee6542aba942f6006d149db70fb9ce Mon Sep 17 00:00:00 =
-2001
->> >> >  From: Khem Raj <raj.khem@gmail.com>
->> >> >  Date: Sat, 2 Sep 2017 10:03:37 -0700
->> >> > -Subject: [PATCH] Use long long instead of int64_t
->> >> > +Subject: [PATCH 02/10] Use long long instead of int64_t
->> >> >
->> >> >  Fixes
->> >> >  error: call to member function 'appendNumber' is ambiguous
->> >> > @@ -9,15 +9,14 @@ since this function expects long long as paramete=
-r and not int64_t
->> >> >
->> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> >  ---
->> >> > -Upstream-Status: Pending
->> >> >   src/mongo/util/procparser.cpp | 10 +++++-----
->> >> >   1 file changed, 5 insertions(+), 5 deletions(-)
->> >> >
->> >> > -Index: git/src/mongo/util/procparser.cpp
->> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > ---- git.orig/src/mongo/util/procparser.cpp
->> >> > -+++ git/src/mongo/util/procparser.cpp
->> >> > -@@ -260,7 +260,7 @@ Status parseProcStat(const std::vector<S
->> >> > +diff --git a/src/mongo/util/procparser.cpp b/src/mongo/util/procpa=
-rser.cpp
->> >> > +index c574a3f..5ea66b7 100644
->> >> > +--- a/src/mongo/util/procparser.cpp
->> >> > ++++ b/src/mongo/util/procparser.cpp
->> >> > +@@ -261,7 +261,7 @@ Status parseProcStat(const std::vector<StringD=
-ata>& keys,
->> >> >
->> >> >                       StringData stringValue((*partIt).begin(), (*p=
-artIt).end() - (*partIt).begin());
->> >> >
->> >> > @@ -26,7 +25,7 @@ Index: git/src/mongo/util/procparser.cpp
->> >> >
->> >> >                       if (!parseNumberFromString(stringValue, &valu=
-e).isOK()) {
->> >> >                           value =3D 0;
->> >> > -@@ -272,7 +272,7 @@ Status parseProcStat(const std::vector<S
->> >> > +@@ -273,7 +273,7 @@ Status parseProcStat(const std::vector<StringD=
-ata>& keys,
->> >> >               } else {
->> >> >                   StringData stringValue((*partIt).begin(), (*partI=
-t).end() - (*partIt).begin());
->> >> >
->> >> > @@ -35,7 +34,7 @@ Index: git/src/mongo/util/procparser.cpp
->> >> >
->> >> >                   if (!parseNumberFromString(stringValue, &value).i=
-sOK()) {
->> >> >                       value =3D 0;
->> >> > -@@ -365,7 +365,7 @@ Status parseProcMemInfo(const std::vecto
->> >> > +@@ -366,7 +366,7 @@ Status parseProcMemInfo(const std::vector<Stri=
-ngData>& keys,
->> >> >
->> >> >               StringData stringValue((*partIt).begin(), (*partIt).e=
-nd());
->> >> >
->> >> > @@ -44,7 +43,7 @@ Index: git/src/mongo/util/procparser.cpp
->> >> >
->> >> >               if (!parseNumberFromString(stringValue, &value).isOK(=
-)) {
->> >> >                   value =3D 0;
->> >> > -@@ -522,7 +522,7 @@ Status parseProcDiskStats(const std::vec
->> >> > +@@ -522,7 +522,7 @@ Status parseProcDiskStats(const std::vector<St=
-ringData>& disks,
->> >> >                             StringData data,
->> >> >                             BSONObjBuilder* builder) {
->> >> >       bool foundKeys =3D false;
->> >> > @@ -53,7 +52,7 @@ Index: git/src/mongo/util/procparser.cpp
->> >> >       stats.reserve(kDiskFieldCount);
->> >> >
->> >> >       using string_split_iterator =3D boost::split_iterator<StringD=
-ata::const_iterator>;
->> >> > -@@ -597,7 +597,7 @@ Status parseProcDiskStats(const std::vec
->> >> > +@@ -597,7 +597,7 @@ Status parseProcDiskStats(const std::vector<St=
-ringData>& disks,
->> >> >
->> >> >                   StringData stringValue((*partIt).begin(), (*partI=
-t).end());
->> >> >
->> >> > @@ -62,3 +61,6 @@ Index: git/src/mongo/util/procparser.cpp
->> >> >
->> >> >                   if (!parseNumberFromString(stringValue, &value).i=
-sOK()) {
->> >> >                       value =3D 0;
->> >> > +--
->> >> > +2.7.4
->> >> > +
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use=
--experimental-with-clang.patch b/meta-oe/recipes-dbs/mongodb/mongodb/0001-a=
-sio-Dont-use-experimental-with-clang.patch
->> >> > index b597422..e726933 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experi=
-mental-with-clang.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0001-asio-Dont-use-experi=
-mental-with-clang.patch
->> >> > @@ -1,28 +1,29 @@
->> >> > -From 31ca5c563f1d9a3f70258be3dd2b1e547a65a550 Mon Sep 17 00:00:00 =
-2001
->> >> > -From: Khem Raj <raj.khem@gmail.com>
->> >> > -Date: Tue, 5 Feb 2019 00:21:12 -0800
->> >> > -Subject: [PATCH] asio: Dont use experimental with clang
->> >> > +From 097e8a66930cfa28ac8bfa35f62d0a9ee3b74488 Mon Sep 17 00:00:00 =
-2001
->> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> > +Date: Mon, 16 Sep 2019 13:46:52 +0200
->> >> > +Subject: [PATCH 10/10] asio: Dont use experimental with clang
->> >> >
->> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> >  ---
->> >> > - .../asio-master/asio/include/asio/detail/string_view.hpp      | 4=
- ++--
->> >> > + src/third_party/asio-master/asio/include/asio/detail/string_view.=
-hpp | 4 ++--
->> >> >   1 file changed, 2 insertions(+), 2 deletions(-)
->> >> >
->> >> >  diff --git a/src/third_party/asio-master/asio/include/asio/detail/=
-string_view.hpp b/src/third_party/asio-master/asio/include/asio/detail/stri=
-ng_view.hpp
->> >> > -index 222c02186d..3bf7494529 100644
->> >> > +index f09cebc..fa307b5 100644
->> >> >  --- a/src/third_party/asio-master/asio/include/asio/detail/string_=
-view.hpp
->> >> >  +++ b/src/third_party/asio-master/asio/include/asio/detail/string_=
-view.hpp
->> >> > -@@ -28,8 +28,8 @@
->> >> > - namespace asio {
->> >> > -
->> >> > - #if defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
->> >> > +@@ -33,8 +33,8 @@ namespace asio {
->> >> > + using std::basic_string_view;
->> >> > + using std::string_view;
->> >> > + #elif defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
->> >> >  -using std::experimental::basic_string_view;
->> >> >  -using std::experimental::string_view;
->> >> >  +using std::basic_string_view;
->> >> >  +using std::string_view;
->> >> > - #else // defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
->> >> > - using std::basic_string_view;
->> >> > - using std::string_view;
->> >> > + #endif // defined(ASIO_HAS_STD_EXPERIMENTAL_STRING_VIEW)
->> >> > +
->> >> > + } // namespace asio
->> >> >  --
->> >> > -2.20.1
->> >> > +2.7.4
->> >> >
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0002-Add-a-definit=
-ion-for-the-macro-__ELF_NATIVE_CLASS.patch b/meta-oe/recipes-dbs/mongodb/mo=
-ngodb/0002-Add-a-definition-for-the-macro-__ELF_NATIVE_CLASS.patch
->> >> > index 098306f..869d284 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for=
--the-macro-__ELF_NATIVE_CLASS.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0002-Add-a-definition-for=
--the-macro-__ELF_NATIVE_CLASS.patch
->> >> > @@ -1,7 +1,7 @@
->> >> > -From df7ef16afcc6ab55daa686e4f15c16e3d1280337 Mon Sep 17 00:00:00 =
-2001
->> >> > +From 73c6374ceb0c062e91210cc9ef3e0e9fa30ee514 Mon Sep 17 00:00:00 =
-2001
->> >> >  From: Khem Raj <raj.khem@gmail.com>
->> >> >  Date: Sat, 2 Sep 2017 12:42:30 -0700
->> >> > -Subject: [PATCH 2/4] Add a definition for the macro __ELF_NATIVE_C=
-LASS
->> >> > +Subject: [PATCH 04/10] Add a definition for the macro __ELF_NATIVE=
-_CLASS
->> >> >
->> >> >  It depends on the native arch's word size.
->> >> >
->> >> > @@ -11,10 +11,10 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> >   1 file changed, 9 insertions(+)
->> >> >
->> >> >  diff --git a/src/mongo/util/stacktrace_posix.cpp b/src/mongo/util/=
-stacktrace_posix.cpp
->> >> > -index 53ab85f56f..7c458e7ef2 100644
->> >> > +index 1d7b3d7..f81e329 100644
->> >> >  --- a/src/mongo/util/stacktrace_posix.cpp
->> >> >  +++ b/src/mongo/util/stacktrace_posix.cpp
->> >> > -@@ -37,6 +37,15 @@
->> >> > +@@ -39,6 +39,15 @@
->> >> >   #include <string>
->> >> >   #include <sys/utsname.h>
->> >> >
->> >> > @@ -31,5 +31,5 @@ index 53ab85f56f..7c458e7ef2 100644
->> >> >   #include "mongo/config.h"
->> >> >   #include "mongo/db/jsobj.h"
->> >> >  --
->> >> > -2.14.1
->> >> > +2.7.4
->> >> >
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0002-Fix-default-s=
-tack-size-to-256K.patch b/meta-oe/recipes-dbs/mongodb/mongodb/0002-Fix-defa=
-ult-stack-size-to-256K.patch
->> >> > index 085fa50..59066b2 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/0002-Fix-default-stack-si=
-ze-to-256K.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0002-Fix-default-stack-si=
-ze-to-256K.patch
->> >> > @@ -1,7 +1,7 @@
->> >> > -From 98543889f7ba38c02eb7cd9822f45e27d619edd6 Mon Sep 17 00:00:00 =
-2001
->> >> > +From ffe6045b190b735601cd209d3e7ac121604c5a4e Mon Sep 17 00:00:00 =
-2001
->> >> >  From: Khem Raj <raj.khem@gmail.com>
->> >> >  Date: Fri, 24 Aug 2018 13:07:01 -0700
->> >> > -Subject: [PATCH 2/2] Fix default stack size to 256K
->> >> > +Subject: [PATCH 08/10] Fix default stack size to 256K
->> >> >
->> >> >  On musl default stack size is ~80K which is too low
->> >> >  for mongodb
->> >> > @@ -10,14 +10,14 @@ Upstream-Status: Pending
->> >> >
->> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> >  ---
->> >> > - .../platform/stack_locator_pthread_getattr_np.cpp      | 10 +++++=
-+++++
->> >> > + src/mongo/platform/stack_locator_pthread_getattr_np.cpp | 10 ++++=
-++++++
->> >> >   1 file changed, 10 insertions(+)
->> >> >
->> >> >  diff --git a/src/mongo/platform/stack_locator_pthread_getattr_np.c=
-pp b/src/mongo/platform/stack_locator_pthread_getattr_np.cpp
->> >> > -index 648d26a41c..6e398f00c9 100644
->> >> > +index 4f3044c..68e47e3 100644
->> >> >  --- a/src/mongo/platform/stack_locator_pthread_getattr_np.cpp
->> >> >  +++ b/src/mongo/platform/stack_locator_pthread_getattr_np.cpp
->> >> > -@@ -35,6 +35,16 @@
->> >> > +@@ -36,6 +36,16 @@
->> >> >   #include "mongo/util/assert_util.h"
->> >> >   #include "mongo/util/scopeguard.h"
->> >> >
->> >> > @@ -35,5 +35,5 @@ index 648d26a41c..6e398f00c9 100644
->> >> >
->> >> >   StackLocator::StackLocator() {
->> >> >  --
->> >> > -2.18.0
->> >> > +2.7.4
->> >> >
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-p=
-refix-env.patch b/meta-oe/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-pref=
-ix-env.patch
->> >> > new file mode 100644
->> >> > index 0000000..3a27aac
->> >> > --- /dev/null
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-e=
-nv.patch
->> >> > @@ -0,0 +1,19 @@
->> >> > +Index: git/SConstruct
->> >> > +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > +--- git.orig/SConstruct
->> >> > ++++ git/SConstruct
->> >> > +@@ -884,6 +884,14 @@ env_vars.Add('WINDOWS_OPENSSL_BIN',
->> >> > +     help=3D'Sets the path to the openssl binaries for packaging',
->> >> > +     default=3D'c:/openssl/bin')
->> >> > +
->> >> > ++env_vars.Add('PREFIX',
->> >> > ++    help=3D'installation prefix')
->> >> > ++
->> >> > ++env_vars.Add('prefix',
->> >> > ++    help=3D'installation prefix')
->> >> > ++
->> >> > ++
->> >> > ++
->> >> > + # -- Validate user provided options --
->> >> > +
->> >> > + # A dummy environment that should *only* have the variables we ha=
-ve set. In practice it has
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0004-wiredtiger-Di=
-sable-strtouq-on-musl.patch b/meta-oe/recipes-dbs/mongodb/mongodb/0004-wire=
-dtiger-Disable-strtouq-on-musl.patch
->> >> > index a2e1f79..2cea9bc 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/0004-wiredtiger-Disable-s=
-trtouq-on-musl.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/0004-wiredtiger-Disable-s=
-trtouq-on-musl.patch
->> >> > @@ -1,17 +1,17 @@
->> >> > -From a1c77702926eb8546ff96b00b5b994f7478dabae Mon Sep 17 00:00:00 =
-2001
->> >> > +From cc95a8878fa581b164dee8fb1f07b05b9d919ef0 Mon Sep 17 00:00:00 =
-2001
->> >> >  From: Khem Raj <raj.khem@gmail.com>
->> >> >  Date: Sat, 2 Sep 2017 13:13:15 -0700
->> >> > -Subject: [PATCH 4/4] wiredtiger: Disable strtouq on musl
->> >> > +Subject: [PATCH 09/10] wiredtiger: Disable strtouq on musl
->> >> >
->> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> >  ---
->> >> >   src/third_party/wiredtiger/build_linux/wiredtiger_config.h | 2 +-
->> >> >   1 file changed, 1 insertion(+), 1 deletion(-)
->> >> >
->> >> > -Index: git/src/third_party/wiredtiger/build_linux/wiredtiger_confi=
-g.h
->> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > ---- git.orig/src/third_party/wiredtiger/build_linux/wiredtiger_con=
-fig.h
->> >> > -+++ git/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
->> >> > +diff --git a/src/third_party/wiredtiger/build_linux/wiredtiger_con=
-fig.h b/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
->> >> > +index 82e9994..0399a67 100644
->> >> > +--- a/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
->> >> > ++++ b/src/third_party/wiredtiger/build_linux/wiredtiger_config.h
->> >> >  @@ -104,7 +104,7 @@
->> >> >   #define HAVE_STRING_H 1
->> >> >
->> >> > @@ -21,3 +21,6 @@ Index: git/src/third_party/wiredtiger/build_linux=
-/wiredtiger_config.h
->> >> >
->> >> >   /* Define to 1 if you have the `sync_file_range' function. */
->> >> >   /* #undef HAVE_SYNC_FILE_RANGE */
->> >> > +--
->> >> > +2.7.4
->> >> > +
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/arm64-support.patc=
-h b/meta-oe/recipes-dbs/mongodb/mongodb/arm64-support.patch
->> >> > index c068987..15bd7da 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb/arm64-support.patch
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb/arm64-support.patch
->> >> > @@ -1,25 +1,33 @@
->> >> > -Add alises for arm64 which is same as aarch64
->> >> > +From c9fc9e9a44b0fb764ce86a5e57f17d3c5bbfd8cd Mon Sep 17 00:00:00 =
-2001
->> >> > +From: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> > +Date: Mon, 16 Sep 2019 13:37:10 +0200
->> >> > +Subject: [PATCH 05/10] Add alises for arm64 which is same as aarch=
-64
->> >> >
->> >> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> > -Upstream-Status: Pending
->> >> > +Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
->> >> > +---
->> >> > + SConstruct                                      | 1 +
->> >> > + src/third_party/IntelRDFPMathLib20U1/SConscript | 2 +-
->> >> > + src/third_party/wiredtiger/SConscript           | 2 +-
->> >> > + 3 files changed, 3 insertions(+), 2 deletions(-)
->> >> >
->> >> > -Index: git/SConstruct
->> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > ---- git.orig/SConstruct
->> >> > -+++ git/SConstruct
->> >> > -@@ -1055,6 +1055,7 @@ elif endian =3D=3D "big":
->> >> > +diff --git a/SConstruct b/SConstruct
->> >> > +index e63cf15..5593c78 100644
->> >> > +--- a/SConstruct
->> >> > ++++ b/SConstruct
->> >> > +@@ -1129,6 +1129,7 @@ elif endian =3D=3D "big":
->> >> >   processor_macros =3D {
->> >> > -     'arm'     : { 'endian': 'little', 'defines': ('__arm__',) },
->> >> > -     'aarch64' : { 'endian': 'little', 'defines': ('__arm64__', '_=
-_aarch64__')},
->> >> > -+    'arm64'   : { 'endian': 'little', 'defines': ('__arm64__', '_=
-_aarch64__')},
->> >> > -     'i386'    : { 'endian': 'little', 'defines': ('__i386', '_M_I=
-X86')},
->> >> > -     'ppc64le' : { 'endian': 'little', 'defines': ('__powerpc64__'=
-,)},
->> >> > -     's390x'   : { 'endian': 'big',    'defines': ('__s390x__',)},
->> >> > -Index: git/src/third_party/IntelRDFPMathLib20U1/SConscript
->> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > ---- git.orig/src/third_party/IntelRDFPMathLib20U1/SConscript
->> >> > -+++ git/src/third_party/IntelRDFPMathLib20U1/SConscript
->> >> > -@@ -308,7 +308,7 @@ if processor =3D=3D 'i386':
->> >> > +     'arm'        : { 'endian': 'little', 'defines': ('__arm__',) =
-},
->> >> > +     'aarch64'    : { 'endian': 'little', 'defines': ('__arm64__',=
- '__aarch64__')},
->> >> > ++    'arm64'      : { 'endian': 'little', 'defines': ('__arm64__',=
- '__aarch64__')},
->> >> > +     'i386'       : { 'endian': 'little', 'defines': ('__i386', '_=
-M_IX86')},
->> >> > +     'ppc64le'    : { 'endian': 'little', 'defines': ('__powerpc64=
-__',)},
->> >> > +     's390x'      : { 'endian': 'big',    'defines': ('__s390x__',=
-)},
->> >> > +diff --git a/src/third_party/IntelRDFPMathLib20U1/SConscript b/src=
-/third_party/IntelRDFPMathLib20U1/SConscript
->> >> > +index f23c071..fb82cd6 100644
->> >> > +--- a/src/third_party/IntelRDFPMathLib20U1/SConscript
->> >> > ++++ b/src/third_party/IntelRDFPMathLib20U1/SConscript
->> >> > +@@ -308,7 +308,7 @@ if processor =3D=3D 'i386' or processor =3D=3D=
- 'emscripten':
->> >> >   elif processor =3D=3D 'arm':
->> >> >       cpp_defines['IA32'] =3D '1'
->> >> >       cpp_defines['ia32'] =3D '1'
->> >> > @@ -28,11 +36,11 @@ Index: git/src/third_party/IntelRDFPMathLib20U1=
-/SConscript
->> >> >       cpp_defines['efi2'] =3D '1'
->> >> >       cpp_defines['EFI2'] =3D '1'
->> >> >   # Using 64 bit little endian
->> >> > -Index: git/src/third_party/wiredtiger/SConscript
->> >> > -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> >> > ---- git.orig/src/third_party/wiredtiger/SConscript
->> >> > -+++ git/src/third_party/wiredtiger/SConscript
->> >> > -@@ -151,7 +151,7 @@ condition_map =3D {
->> >> > +diff --git a/src/third_party/wiredtiger/SConscript b/src/third_par=
-ty/wiredtiger/SConscript
->> >> > +index cdd090b..97a1b3b 100644
->> >> > +--- a/src/third_party/wiredtiger/SConscript
->> >> > ++++ b/src/third_party/wiredtiger/SConscript
->> >> > +@@ -152,7 +152,7 @@ condition_map =3D {
->> >> >       'POSIX_HOST'   : not env.TargetOSIs('windows'),
->> >> >       'WINDOWS_HOST' : env.TargetOSIs('windows'),
->> >> >
->> >> > @@ -41,3 +49,6 @@ Index: git/src/third_party/wiredtiger/SConscript
->> >> >       'POWERPC_HOST' : env['TARGET_ARCH'] =3D=3D 'ppc64le',
->> >> >       'X86_HOST'     : env['TARGET_ARCH'] =3D=3D 'x86_64',
->> >> >       'ZSERIES_HOST' : env['TARGET_ARCH'] =3D=3D 's390x',
->> >> > +--
->> >> > +2.7.4
->> >> > +
->> >> > diff --git a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/r=
-ecipes-dbs/mongodb/mongodb_git.bb
->> >> > index ed05517..11efa5f 100644
->> >> > --- a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
->> >> > +++ b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
->> >> > @@ -3,17 +3,18 @@ LICENSE =3D "SSPL-1 & Apache-2.0 & Zlib"
->> >> >  LIC_FILES_CHKSUM =3D "file://LICENSE-Community.txt;md5=3D3a865f27f=
-11f43ecbe542d9ea387dcf1 \
->> >> >                      file://APACHE-2.0.txt;md5=3D3b83ef96387f14655f=
-c854ddc3c6bd57"
->> >> >
->> >> > -DEPENDS =3D "openssl libpcre libpcap zlib boost curl python \
->> >> > -           python-setuptools-native python-typing-native \
->> >> > -           python-pyyaml-native python-cheetah-native \
->> >> > +DEPENDS =3D "openssl libpcre libpcap zlib boost curl python3 \
->> >> > +           python3-setuptools-native \
->> >> > +           python3-pyyaml-native python3-cheetah-native \
->> >> > +           python3-psutil-native python3-regex-native \
->> >> >             "
->> >> >
->> >> > -inherit scons dos2unix siteinfo pythonnative
->> >> > +inherit scons dos2unix siteinfo python3native
->> >> >
->> >> > -PV =3D "4.0.6+git${SRCPV}"
->> >> > -#v4.0.6
->> >> > -SRCREV =3D "caa42a1f75a56c7643d0b68d3880444375ec42e3"
->> >> > -SRC_URI =3D "git://github.com/mongodb/mongo.git;branch=3Dv4.0 \
->> >> > +PV =3D "4.2.0+git${SRCPV}"
->> >> > +#v4.2.0
->> >> > +SRCREV =3D "18ce5c9f56a01f2c933a720d64707f3456f81c8b"
->> >> > +SRC_URI =3D "git://github.com/mongodb/mongo.git;branch=3Dv4.2 \
->> >> >             file://0001-Tell-scons-to-use-build-settings-from-envir=
-onment-va.patch \
->> >> >             file://0001-Use-long-long-instead-of-int64_t.patch \
->> >> >             file://0001-Use-__GLIBC__-to-control-use-of-gnu_get_lib=
-c_version.patch \
->> >> > @@ -21,6 +22,7 @@ SRC_URI =3D "git://github.com/mongodb/mongo.git;b=
-ranch=3Dv4.0 \
->> >> >             file://arm64-support.patch \
->> >> >             file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wc=
-har_t.patch \
->> >> >             file://0001-Support-deprecated-resolver-functions.patch=
- \
->> >> > +           file://0003-Fix-unknown-prefix-env.patch \
->> >> >             "
->> >> >  SRC_URI_append_libc-musl =3D"\
->> >> >             file://0002-Fix-default-stack-size-to-256K.patch \
->> >> > @@ -75,5 +77,3 @@ scons_do_install() {
->> >> >          ${STAGING_BINDIR_NATIVE}/scons install ${EXTRA_OESCONS}|| =
-\
->> >> >          die "scons install execution failed."
->> >> >  }
->> >> > -
->> >> > -PNBLACKLIST[mongodb] =3D "Since bbclass scons convert to python3, =
-build mongodb failed"
->> >> > --
->> >> > 2.7.4
->> >> >
+SGkgUmFqLCBDaGFuYWt5YQ0KDQpJJ20gdHJ5aW5nIHRvIGZpeCB0aGlzLg0K
+SXQgd2lsbCB0YWtlIHRpbWVzIHNpbmNlIGl0IGhhcyB0byBhZGQgc29tZSBu
+ZXcgcmVjaXBlLg0KDQpSZWdhcmRzLA0KWXVhbg0KDQo+IC0tLS0tT3JpZ2lu
+YWwgTWVzc2FnZS0tLS0tDQo+IEZyb206IEtoZW0gUmFqIDxyYWoua2hlbUBn
+bWFpbC5jb20+DQo+IFNlbnQ6IFRodXJzZGF5LCBTZXB0ZW1iZXIgMTksIDIw
+MTkgMzoyNyBBTQ0KPiBUbzogS29wcG9sdSwgQ2hhbmFreWEgPGNoYW5ha3lh
+LmtvcHBvbHVAaW50ZWwuY29tPg0KPiBDYzogWXVhbiwgQ2hhby/oooEg6LaF
+IDx5dWFuYy5mbnN0QGNuLmZ1aml0c3UuY29tPjsNCj4gb3BlbmVtYmVkZGVk
+LWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6
+IFtvZV0gW21ldGEtcHl0aG9uXSBbUEFUQ0hdIHB5dGhvbi1weXRlc3Q6IHVw
+Z3JhZGUgMy40LjIgLT4gNS4xLjENCj4gDQo+IEhpIFl1YW4NCj4gDQo+IEkg
+c2VlIHRoYXQgdGhlIGlzc3VlIGlzIG5vdCBmdWxseSBmaXhlZCB5ZXQgYXMg
+c2VlbiBoZXJlDQo+IGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuZW1iZWRkZWQv
+bWV0YS1vcGVuZW1iZWRkZWQvaXNzdWVzLzE0NA0KPiANCj4gUGxlYXNlIHNl
+ZSBpZiB0aGlzIGNhbiBiZSBmaXhlZCBhcyBzb29uIGFzIHBvc3NpYmxlLCBv
+ciB3ZSBoYXZlIHRvIHJldmVydCB0aGVzZQ0KPiByZWNpcGVzLCBJIHdpbGwg
+d2FpdCBmb3IgeW91ciByZXNwb25zZQ0KPiANCj4gVGhhbmtzDQo+IC1LaGVt
+DQo+IA0KPiBPbiBNb24sIFNlcCAxNiwgMjAxOSBhdCAxMDozMCBBTSBLb3Bw
+b2x1LCBDaGFuYWt5YQ0KPiA8Y2hhbmFreWEua29wcG9sdUBpbnRlbC5jb20+
+IHdyb3RlOg0KPiA+DQo+ID4gSGVsbG8gQ2hhbywNCj4gPg0KPiA+IEFueSB1
+cGRhdGUgb24gYWRkaW5nIHRoZSBtaXNzaW5nIG1vZHVsZSAnaW1wb3J0bGli
+X21ldGFkYXRhJyBhbmQgdGVzdGluZw0KPiBmb3IgYW55IG1vcmUgbWlzc2lu
+ZyBtb2R1bGVzIGZvciB0aGUgcHl0ZXN0IHVwZ3JhZGU/DQo+ID4NCj4gPiBS
+ZWdhcmRzLA0KPiA+IENoYW5ha3lhDQo+ID4NCj4gPiAtLS0tLU9yaWdpbmFs
+IE1lc3NhZ2UtLS0tLQ0KPiA+IEZyb206IG9wZW5lbWJlZGRlZC1kZXZlbC1i
+b3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBbbWFpbHRvOm9w
+ZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmddIE9uIEJlaGFsZg0KPiA+IE9mIEtvcHBvbHUsIENoYW5ha3lhDQo+ID4g
+U2VudDogVGh1cnNkYXksIFNlcHRlbWJlciAxMiwgMjAxOSA1OjU5IFBNDQo+
+ID4gVG86IFRpbSBPcmxpbmcgPHRpY290aW1vQGdtYWlsLmNvbT4NCj4gPiBD
+Yzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcN
+Cj4gPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1weXRob25dIFtQQVRDSF0g
+cHl0aG9uLXB5dGVzdDogdXBncmFkZSAzLjQuMg0KPiA+IC0+IDUuMS4xDQo+
+ID4NCj4gPiBIZWxsbyBDaGFvLA0KPiA+DQo+ID4gTG9va3MgbGlrZSB0aGVy
+ZSBhcmUgbXVsdGlwbGUgcnVudGltZSBtb2R1bGVzIG1pc3NpbmcuIEhlcmUg
+aXMgdGhlIGxvZyB3aXRoIHRoZQ0KPiBsYXRlc3QgcGFja2FnZXM6DQo+ID4N
+Cj4gPiAwMjozMDozOSAgRVJSUjIvdjNybkUjMSAgICAgICAgdGVzdF9ydF9z
+bW9rZS5weSNfdGVzdA0KPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJh
+OiBjb25zb2xlOiByb290QGludGVsLWNvcmVpNy02NDp+IyBweXRob24zIC1t
+DQo+IHB5dGVzdCAvdGVzdHMvc21va2UvIHwmIHRlZSBzbW9rZV90ZXN0Lmxv
+Zw0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMxICAgICAgICB0ZXN0X3J0
+X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21idC0w
+MmE6IGNvbnNvbGU6IGNhdCBzbW9rZV90ZXN0LmxvZw0KPiA+IDAyOjMwOjM5
+ICBFUlJSMi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0
+DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IFRy
+YWNlYmFjayAobW9zdCByZWNlbnQgY2FsbCBsYXN0KToNCj4gPiAwMjozMDoz
+OSAgRVJSUjIvdjNybkUjMSAgICAgICAgdGVzdF9ydF9zbW9rZS5weSNfdGVz
+dA0KPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBG
+aWxlICIvdXNyL2xpYjY0L3B5dGhvbjMuNy9ydW5weS5weSIsDQo+IGxpbmUg
+MTkzLCBpbiBfcnVuX21vZHVsZV9hc19tYWluDQo+ID4gMDI6MzA6MzkgIEVS
+UlIyL3Yzcm5FIzEgICAgICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4g
+QGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTogY29uc29sZTogIl9fbWFp
+bl9fIiwgbW9kX3NwZWMpDQo+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEg
+ICAgICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxq
+ZnNydHNlMDIvbWJ0LTAyYTogY29uc29sZTogRmlsZSAiL3Vzci9saWI2NC9w
+eXRob24zLjcvcnVucHkucHkiLA0KPiBsaW5lIDg1LCBpbiBfcnVuX2NvZGUN
+Cj4gPiAwMjozMDozOSAgRVJSUjIvdjNybkUjMSAgICAgICAgdGVzdF9ydF9z
+bW9rZS5weSNfdGVzdA0KPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJh
+OiBjb25zb2xlOiBleGVjKGNvZGUsIHJ1bl9nbG9iYWxzKQ0KPiA+IDAyOjMw
+OjM5ICBFUlJSMi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190
+ZXN0DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6
+IEZpbGUNCj4gIi91c3IvbGliNjQvcHl0aG9uMy43L3NpdGUtcGFja2FnZXMv
+cHl0ZXN0LnB5IiwgbGluZSA2LCBpbiA8bW9kdWxlPg0KPiA+IDAyOjMwOjM5
+ICBFUlJSMi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0
+DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IGZy
+b20gX3B5dGVzdC5hc3NlcnRpb24gaW1wb3J0DQo+IHJlZ2lzdGVyX2Fzc2Vy
+dF9yZXdyaXRlDQo+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAg
+IHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNydHNl
+MDIvbWJ0LTAyYTogY29uc29sZTogRmlsZQ0KPiAiL3Vzci9saWI2NC9weXRo
+b24zLjcvc2l0ZS1wYWNrYWdlcy9fcHl0ZXN0L2Fzc2VydGlvbi9fX2luaXRf
+Xy5weSIsIGxpbmUgNiwgaW4NCj4gPG1vZHVsZT4NCj4gPiAwMjozMDozOSAg
+RVJSUjIvdjNybkUjMSAgICAgICAgdGVzdF9ydF9zbW9rZS5weSNfdGVzdA0K
+PiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBmcm9t
+IF9weXRlc3QuYXNzZXJ0aW9uIGltcG9ydCByZXdyaXRlDQo+ID4gMDI6MzA6
+MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAgIHRlc3RfcnRfc21va2UucHkjX3Rl
+c3QNCj4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTogY29uc29sZTog
+RmlsZQ0KPiAiL3Vzci9saWI2NC9weXRob24zLjcvc2l0ZS1wYWNrYWdlcy9f
+cHl0ZXN0L2Fzc2VydGlvbi9yZXdyaXRlLnB5IiwgbGluZSAyNCwgaW4NCj4g
+PG1vZHVsZT4NCj4gPiAwMjozMDozOSAgRVJSUjIvdjNybkUjMSAgICAgICAg
+dGVzdF9ydF9zbW9rZS5weSNfdGVzdA0KPiBAaHhqNy1lY2VkfGpmc3J0c2Uw
+Mi9tYnQtMDJhOiBjb25zb2xlOiBmcm9tIF9weXRlc3QuYXNzZXJ0aW9uIGlt
+cG9ydCB1dGlsDQo+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAg
+IHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNydHNl
+MDIvbWJ0LTAyYTogY29uc29sZTogRmlsZQ0KPiAiL3Vzci9saWI2NC9weXRo
+b24zLjcvc2l0ZS1wYWNrYWdlcy9fcHl0ZXN0L2Fzc2VydGlvbi91dGlsLnB5
+IiwgbGluZSA1LCBpbg0KPiA8bW9kdWxlPg0KPiA+IDAyOjMwOjM5ICBFUlJS
+Mi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBo
+eGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IGltcG9ydCBf
+cHl0ZXN0Ll9jb2RlDQo+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAg
+ICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNy
+dHNlMDIvbWJ0LTAyYTogY29uc29sZTogRmlsZQ0KPiAiL3Vzci9saWI2NC9w
+eXRob24zLjcvc2l0ZS1wYWNrYWdlcy9fcHl0ZXN0L19jb2RlL19faW5pdF9f
+LnB5IiwgbGluZSAyLCBpbg0KPiA8bW9kdWxlPg0KPiA+IDAyOjMwOjM5ICBF
+UlJSMi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+
+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IGZyb20g
+LmNvZGUgaW1wb3J0IENvZGUgICMgbm9xYQ0KPiA+IDAyOjMwOjM5ICBFUlJS
+Mi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBo
+eGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IEZpbGUNCj4g
+Ii91c3IvbGliNjQvcHl0aG9uMy43L3NpdGUtcGFja2FnZXMvX3B5dGVzdC9f
+Y29kZS9jb2RlLnB5IiwgbGluZSAxOCwgaW4NCj4gPG1vZHVsZT4NCj4gPiAw
+MjozMDozOSAgRVJSUjIvdjNybkUjMSAgICAgICAgdGVzdF9ydF9zbW9rZS5w
+eSNfdGVzdA0KPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25z
+b2xlOiBpbXBvcnQgcGx1Z2d5DQo+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5F
+IzEgICAgICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gQGh4ajctZWNl
+ZHxqZnNydHNlMDIvbWJ0LTAyYTogY29uc29sZTogRmlsZQ0KPiAiL3Vzci9s
+aWI2NC9weXRob24zLjcvc2l0ZS1wYWNrYWdlcy9wbHVnZ3kvX19pbml0X18u
+cHkiLCBsaW5lIDE2LCBpbiA8bW9kdWxlPg0KPiA+IDAyOjMwOjM5ICBFUlJS
+Mi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBo
+eGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IGZyb20gLm1h
+bmFnZXIgaW1wb3J0IFBsdWdpbk1hbmFnZXIsDQo+IFBsdWdpblZhbGlkYXRp
+b25FcnJvcg0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMxICAgICAgICB0
+ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAy
+L21idC0wMmE6IGNvbnNvbGU6IEZpbGUNCj4gIi91c3IvbGliNjQvcHl0aG9u
+My43L3NpdGUtcGFja2FnZXMvcGx1Z2d5L21hbmFnZXIucHkiLCBsaW5lIDYs
+IGluIDxtb2R1bGU+DQo+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAg
+ICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNy
+dHNlMDIvbWJ0LTAyYTogY29uc29sZTogaW1wb3J0IGltcG9ydGxpYl9tZXRh
+ZGF0YQ0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMxICAgICAgICB0ZXN0
+X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21i
+dC0wMmE6IGNvbnNvbGU6IE1vZHVsZU5vdEZvdW5kRXJyb3I6IE5vIG1vZHVs
+ZQ0KPiBuYW1lZCAnaW1wb3J0bGliX21ldGFkYXRhJw0KPiA+IDAyOjMwOjM5
+ICBFUlJSMi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0
+DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IHJv
+b3RAaW50ZWwtY29yZWk3LTY0On4jIFRyYWNlYmFjaw0KPiAobW9zdCByZWNl
+bnQgY2FsbCBsYXN0KToNCj4gPiAwMjozMDozOSAgRVJSUjIvdjNybkUjMSAg
+ICAgICAgdGVzdF9ydF9zbW9rZS5weSNfdGVzdA0KPiBAaHhqNy1lY2VkfGpm
+c3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBGaWxlICIvdXNyL2xpYjY0L3B5
+dGhvbjMuNy9ydW5weS5weSIsDQo+IGxpbmUgMTkzLCBpbiBfcnVuX21vZHVs
+ZV9hc19tYWluDQo+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAg
+IHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNydHNl
+MDIvbWJ0LTAyYTogY29uc29sZTogIl9fbWFpbl9fIiwgbW9kX3NwZWMpDQo+
+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAgIHRlc3RfcnRfc21v
+a2UucHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTog
+Y29uc29sZTogRmlsZSAiL3Vzci9saWI2NC9weXRob24zLjcvcnVucHkucHki
+LA0KPiBsaW5lIDg1LCBpbiBfcnVuX2NvZGUNCj4gPiAwMjozMDozOSAgRVJS
+UjIvdjNybkUjMSAgICAgICAgdGVzdF9ydF9zbW9rZS5weSNfdGVzdA0KPiBA
+aHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBleGVjKGNv
+ZGUsIHJ1bl9nbG9iYWxzKQ0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMx
+ICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8
+amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IEZpbGUNCj4gIi91c3IvbGli
+NjQvcHl0aG9uMy43L3NpdGUtcGFja2FnZXMvcHl0ZXN0LnB5IiwgbGluZSA2
+LCBpbiA8bW9kdWxlPg0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMxICAg
+ICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8amZz
+cnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IGZyb20gX3B5dGVzdC5hc3NlcnRp
+b24gaW1wb3J0DQo+IHJlZ2lzdGVyX2Fzc2VydF9yZXdyaXRlDQo+ID4gMDI6
+MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAgIHRlc3RfcnRfc21va2UucHkj
+X3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTogY29uc29s
+ZTogRmlsZQ0KPiAiL3Vzci9saWI2NC9weXRob24zLjcvc2l0ZS1wYWNrYWdl
+cy9fcHl0ZXN0L2Fzc2VydGlvbi9fX2luaXRfXy5weSIsIGxpbmUgNiwgaW4N
+Cj4gPG1vZHVsZT4NCj4gPiAwMjozMDozOSAgRVJSUjIvdjNybkUjMSAgICAg
+ICAgdGVzdF9ydF9zbW9rZS5weSNfdGVzdA0KPiBAaHhqNy1lY2VkfGpmc3J0
+c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBmcm9tIF9weXRlc3QuYXNzZXJ0aW9u
+IGltcG9ydCByZXdyaXRlDQo+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEg
+ICAgICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxq
+ZnNydHNlMDIvbWJ0LTAyYTogY29uc29sZTogRmlsZQ0KPiAiL3Vzci9saWI2
+NC9weXRob24zLjcvc2l0ZS1wYWNrYWdlcy9fcHl0ZXN0L2Fzc2VydGlvbi9y
+ZXdyaXRlLnB5IiwgbGluZSAyNCwgaW4NCj4gPG1vZHVsZT4NCj4gPiAwMjoz
+MDozOSAgRVJSUjIvdjNybkUjMSAgICAgICAgdGVzdF9ydF9zbW9rZS5weSNf
+dGVzdA0KPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xl
+OiBmcm9tIF9weXRlc3QuYXNzZXJ0aW9uIGltcG9ydCB1dGlsDQo+ID4gMDI6
+MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAgIHRlc3RfcnRfc21va2UucHkj
+X3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTogY29uc29s
+ZTogRmlsZQ0KPiAiL3Vzci9saWI2NC9weXRob24zLjcvc2l0ZS1wYWNrYWdl
+cy9fcHl0ZXN0L2Fzc2VydGlvbi91dGlsLnB5IiwgbGluZSA1LCBpbg0KPiA8
+bW9kdWxlPg0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMxICAgICAgICB0
+ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAy
+L21idC0wMmE6IGNvbnNvbGU6IGltcG9ydCBfcHl0ZXN0Ll9jb2RlDQo+ID4g
+MDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAgIHRlc3RfcnRfc21va2Uu
+cHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTogY29u
+c29sZTogRmlsZQ0KPiAiL3Vzci9saWI2NC9weXRob24zLjcvc2l0ZS1wYWNr
+YWdlcy9fcHl0ZXN0L19jb2RlL19faW5pdF9fLnB5IiwgbGluZSAyLCBpbg0K
+PiA8bW9kdWxlPg0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMxICAgICAg
+ICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8amZzcnRz
+ZTAyL21idC0wMmE6IGNvbnNvbGU6IGZyb20gLmNvZGUgaW1wb3J0IENvZGUg
+ICMgbm9xYQ0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMxICAgICAgICB0
+ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAy
+L21idC0wMmE6IGNvbnNvbGU6IEZpbGUNCj4gIi91c3IvbGliNjQvcHl0aG9u
+My43L3NpdGUtcGFja2FnZXMvX3B5dGVzdC9fY29kZS9jb2RlLnB5IiwgbGlu
+ZSAxOCwgaW4NCj4gPG1vZHVsZT4NCj4gPiAwMjozMDozOSAgRVJSUjIvdjNy
+bkUjMSAgICAgICAgdGVzdF9ydF9zbW9rZS5weSNfdGVzdA0KPiBAaHhqNy1l
+Y2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBpbXBvcnQgcGx1Z2d5
+DQo+ID4gMDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAgIHRlc3RfcnRf
+c21va2UucHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAy
+YTogY29uc29sZTogRmlsZQ0KPiAiL3Vzci9saWI2NC9weXRob24zLjcvc2l0
+ZS1wYWNrYWdlcy9wbHVnZ3kvX19pbml0X18ucHkiLCBsaW5lIDE2LCBpbiA8
+bW9kdWxlPg0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMxICAgICAgICB0
+ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAy
+L21idC0wMmE6IGNvbnNvbGU6IGZyb20gLm1hbmFnZXIgaW1wb3J0IFBsdWdp
+bk1hbmFnZXIsDQo+IFBsdWdpblZhbGlkYXRpb25FcnJvcg0KPiA+IDAyOjMw
+OjM5ICBFUlJSMi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190
+ZXN0DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6
+IEZpbGUNCj4gIi91c3IvbGliNjQvcHl0aG9uMy43L3NpdGUtcGFja2FnZXMv
+cGx1Z2d5L21hbmFnZXIucHkiLCBsaW5lIDYsIGluIDxtb2R1bGU+DQo+ID4g
+MDI6MzA6MzkgIEVSUlIyL3Yzcm5FIzEgICAgICAgIHRlc3RfcnRfc21va2Uu
+cHkjX3Rlc3QNCj4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTogY29u
+c29sZTogaW1wb3J0IGltcG9ydGxpYl9tZXRhZGF0YQ0KPiA+IDAyOjMwOjM5
+ICBFUlJSMi92M3JuRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0
+DQo+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IE1v
+ZHVsZU5vdEZvdW5kRXJyb3I6IE5vIG1vZHVsZQ0KPiBuYW1lZCAnaW1wb3J0
+bGliX21ldGFkYXRhJw0KPiA+IDAyOjMwOjM5ICBFUlJSMi92M3JuRSMxICAg
+ICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+IEBoeGo3LWVjZWR8amZz
+cnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IHJvb3RAaW50ZWwtY29yZWk3LTY0
+On4jDQo+ID4gMDI6MzA6MzkgIEVSUlIwL3Yzcm4gICB0ZXN0X3J0X3Ntb2tl
+LnB5I190ZXN0IEBoeGo3LWVjZWQ6IGV2YWx1YXRpb24NCj4gZXJyb3JlZA0K
+PiA+DQo+ID4gSSB0aGluayBhbGwgbWlzc2luZyBydW50aW1lIG1vZHVsZSBz
+aG91bGQgYmUgdGVzdGVkIHByaW9yIHRvIHVwZ3JhZGUgb2YgcHl0ZXN0DQo+
+IHZlcnNpb24uDQo+ID4NCj4gPiBSZWdhcmRzLA0KPiA+IENoYW5ha3lhDQo+
+ID4NCj4gPiBGcm9tOiBUaW0gT3JsaW5nIFttYWlsdG86dGljb3RpbW9AZ21h
+aWwuY29tXQ0KPiA+IFNlbnQ6IFdlZG5lc2RheSwgU2VwdGVtYmVyIDExLCAy
+MDE5IDc6NDAgUE0NCj4gPiBUbzogS29wcG9sdSwgQ2hhbmFreWEgPGNoYW5h
+a3lhLmtvcHBvbHVAaW50ZWwuY29tPg0KPiA+IENjOiBZdWFuLCBDaGFvIDx5
+dWFuYy5mbnN0QGNuLmZ1aml0c3UuY29tPjsNCj4gPiBvcGVuZW1iZWRkZWQt
+ZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiA+IFN1YmplY3Q6IFJl
+OiBbb2VdIFttZXRhLXB5dGhvbl0gW1BBVENIXSBweXRob24tcHl0ZXN0OiB1
+cGdyYWRlIDMuNC4yDQo+ID4gLT4gNS4xLjENCj4gPg0KPiA+IEkgc2VlIG5l
+dyBwYXRjaGVzIG9uIHRoZSBtYWlsaW5nIGxpc3QuIFRoYW5rIHlvdS4NCj4g
+Pg0KPiA+IE9uIFdlZCwgU2VwIDExLCAyMDE5IGF0IDc6MzggUE0gVGltIE9y
+bGluZw0KPiA8dGljb3RpbW9AZ21haWwuY29tPG1haWx0bzp0aWNvdGltb0Bn
+bWFpbC5jb20+PiB3cm90ZToNCj4gPiBXZSBhcmUgbWlzc2luZyAke1BZVEhP
+Tl9QTn0tYXRvbWljd3JpdGVzIHJlY2lwZSBpbiBtZXRhLXB5dGhvbi4gRnVq
+aXRzdSwNCj4gcGxlYXNlIHByb3ZpZGUgcmVjaXBlIGZvciB0aGlzIG1pc3Np
+bmcgUkRFUEVORFMgYW5kIHJ1bnRpbWUgdGVzdCBmdXR1cmUNCj4gdXBncmFk
+ZXMuIFlvdSBoYXZlIGJyb2tlbiBmdW5jdGlvbmFsaXR5IGZvciBvdGhlcnMg
+d2l0aCB5b3VyIHVwZ3JhZGUuDQo+ID4NCj4gPiBJbiB0aGUgZnV0dXJlLCBw
+bGVhc2UgcnVudGltZSB0ZXN0IGFsbCB5b3VyIGNoYW5nZXMgdG8gcHJldmVu
+dCB0aGlzIGZyb20NCj4gaGFwcGVuaW5nIGZyb20gYWdhaW4uIFdlIGFsbCBk
+ZXBlbmQgb24gdGhlc2UgcGFja2FnZXMgd29ya2luZy4NCj4gPg0KPiA+IE9u
+IFR1ZSwgU2VwIDEwLCAyMDE5IGF0IDE6MjUgUE0gS29wcG9sdSwgQ2hhbmFr
+eWENCj4gPGNoYW5ha3lhLmtvcHBvbHVAaW50ZWwuY29tPG1haWx0bzpjaGFu
+YWt5YS5rb3Bwb2x1QGludGVsLmNvbT4+IHdyb3RlOg0KPiA+IEhpIENoYW8s
+DQo+ID4NCj4gPiBJIHRyaWVkIHlvdXIgbmV3IHBhdGNoIGFuZCBpdCBkb2Vz
+bid0IGZpeCB0aGUgaXNzdWUuIEkgc3RpbGwgc2VlIHRoZSBzYW1lDQo+IG1v
+ZHVsZSgnYXRvbWljd3JpdGVzJykgbWlzc2luZyBpbiBweXRob24gbW9kdWxl
+cy4NCj4gPg0KPiA+IFJlZ2FyZHMsDQo+ID4gQ2hhbmFreWENCj4gPg0KPiA+
+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gRnJvbTogWXVhbiwg
+Q2hhbw0KPiA+IFttYWlsdG86eXVhbmMuZm5zdEBjbi5mdWppdHN1LmNvbTxt
+YWlsdG86eXVhbmMuZm5zdEBjbi5mdWppdHN1LmNvbT5dDQo+ID4gU2VudDog
+VHVlc2RheSwgU2VwdGVtYmVyIDEwLCAyMDE5IDE6NTUgQU0NCj4gPiBUbzog
+S29wcG9sdSwgQ2hhbmFreWENCj4gPiA8Y2hhbmFreWEua29wcG9sdUBpbnRl
+bC5jb208bWFpbHRvOmNoYW5ha3lhLmtvcHBvbHVAaW50ZWwuY29tPj47DQo+
+ID4NCj4gb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5v
+cmc8bWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbA0KPiBAbGkNCj4gPiBzdHMu
+b3BlbmVtYmVkZGVkLm9yZz4NCj4gPiBTdWJqZWN0OiBSRTogW29lXSBbbWV0
+YS1weXRob25dIFtQQVRDSF0gcHl0aG9uLXB5dGVzdDogdXBncmFkZSAzLjQu
+Mg0KPiA+IC0+IDUuMS4xDQo+ID4NCj4gPiBIaSBDaGFuYWt5YSwNCj4gPg0K
+PiA+IEkgaGF2ZSBzZW50IGEgcGF0Y2goYmFzZWQgb24gcHl0ZXN0IDUuMS4y
+KSBmb3IgdGhpcyBydW50aW1lIGVycm9yLCBwbGVhc2UgdHJ5IGl0DQo+IGFn
+YWluLg0KPiA+DQo+ID4gUmVnYXJkcywNCj4gPiBDaGFvDQo+ID4NCj4gPiA+
+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gPiBGcm9tOiBLb3Bw
+b2x1LCBDaGFuYWt5YQ0KPiA+ID4gPGNoYW5ha3lhLmtvcHBvbHVAaW50ZWwu
+Y29tPG1haWx0bzpjaGFuYWt5YS5rb3Bwb2x1QGludGVsLmNvbT4+DQo+ID4g
+PiBTZW50OiBTYXR1cmRheSwgU2VwdGVtYmVyIDcsIDIwMTkgODowNCBBTQ0K
+PiA+ID4gVG86IFl1YW4sIENoYW8v6KKBIOi2hQ0KPiA+ID4gPHl1YW5jLmZu
+c3RAY24uZnVqaXRzdS5jb208bWFpbHRvOnl1YW5jLmZuc3RAY24uZnVqaXRz
+dS5jb20+PjsNCj4gPiA+DQo+IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5v
+cGVuZW1iZWRkZWQub3JnPG1haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwNCj4g
+QA0KPiA+ID4gbGkNCj4gPiA+IHN0cy5vcGVuZW1iZWRkZWQub3JnPg0KPiA+
+ID4gU3ViamVjdDogUkU6IFtvZV0gW21ldGEtcHl0aG9uXSBbUEFUQ0hdIHB5
+dGhvbi1weXRlc3Q6IHVwZ3JhZGUgMy40LjINCj4gPiA+IC0+IDUuMS4xDQo+
+ID4gPg0KPiA+ID4gSGVsbG8sDQo+ID4gPg0KPiA+ID4gVGhpcyBweXRlc3Qg
+dXBncmFkZSBwYXRjaCBmYWlscyB0byB0ZXN0IG1pc3NpbmcgcnVudGltZSBt
+b2R1bGVzLiBPdXINCj4gPiA+IHJlY2VudCBZb2N0byBidWlsZCBmcm9tIHVw
+c3RyZWFtIGZvdW5kIHRoYXQgdGhlIHB5dGVzdCBmYWlscyB0bw0KPiA+ID4g
+ZXhlY3V0ZSBkdWUgdG8gYSBtaXNzaW5nIG1vZHVsZS4gSGVyZSBpcyB0aGUg
+ZXJyb3IgcmVwb3J0Og0KPiA+ID4NCj4gPiA+IDAyOjI0OjE0ICBFUlJSMi9q
+dG5zRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+ID4gPiBA
+aHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiByb290QGlu
+dGVsLWNvcmVpNy02NDp+Iw0KPiA+ID4gcHl0aG9uMyAtbSBweXRlc3QgL3Rl
+c3RzL3Ntb2tlLyB8JiB0ZWUgc21va2VfdGVzdC5sb2cNCj4gPiA+IDAyOjI0
+OjE0ICBFUlJSMi9qdG5zRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190
+ZXN0DQo+ID4gPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25z
+b2xlOiBjYXQgc21va2VfdGVzdC5sb2cNCj4gPiA+IDAyOjI0OjE0ICBFUlJS
+Mi9qdG5zRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+ID4g
+PiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBUcmFj
+ZWJhY2sgKG1vc3QgcmVjZW50IGNhbGwgbGFzdCk6DQo+ID4gPiAwMjoyNDox
+NCAgRVJSUjIvanRuc0UjMSAgICAgICAgdGVzdF9ydF9zbW9rZS5weSNfdGVz
+dA0KPiA+ID4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTogY29uc29s
+ZTogRmlsZQ0KPiA+ID4gIi91c3IvbGliNjQvcHl0aG9uMy43L3J1bnB5LnB5
+IiwgbGluZSAxOTMsIGluIF9ydW5fbW9kdWxlX2FzX21haW4NCj4gPiA+IDAy
+OjI0OjE0ICBFUlJSMi9qdG5zRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5
+I190ZXN0DQo+ID4gPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBj
+b25zb2xlOiAiX19tYWluX18iLCBtb2Rfc3BlYykNCj4gPiA+IDAyOjI0OjE0
+ICBFUlJSMi9qdG5zRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0
+DQo+ID4gPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xl
+OiBGaWxlDQo+ID4gPiAiL3Vzci9saWI2NC9weXRob24zLjcvcnVucHkucHki
+LCBsaW5lIDg1LCBpbiBfcnVuX2NvZGUNCj4gPiA+IDAyOjI0OjE0ICBFUlJS
+Mi9qdG5zRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+ID4g
+PiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBleGVj
+KGNvZGUsIHJ1bl9nbG9iYWxzKQ0KPiA+ID4gMDI6MjQ6MTQgIEVSUlIyL2p0
+bnNFIzEgICAgICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gPiA+IEBo
+eGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IEZpbGUNCj4g
+PiA+ICIvdXNyL2xpYjY0L3B5dGhvbjMuNy9zaXRlLXBhY2thZ2VzL3B5dGVz
+dC5weSIsIGxpbmUgNiwgaW4gPG1vZHVsZT4NCj4gPiA+IDAyOjI0OjE0ICBF
+UlJSMi9qdG5zRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+
+ID4gPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBm
+cm9tIF9weXRlc3QuYXNzZXJ0aW9uIGltcG9ydA0KPiA+ID4gcmVnaXN0ZXJf
+YXNzZXJ0X3Jld3JpdGUNCj4gPiA+IDAyOjI0OjE0ICBFUlJSMi9qdG5zRSMx
+ICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+ID4gPiBAaHhqNy1l
+Y2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBGaWxlDQo+ID4gPiAi
+L3Vzci9saWI2NC9weXRob24zLjcvc2l0ZS1wYWNrYWdlcy9fcHl0ZXN0L2Fz
+c2VydGlvbi9fX2luaXRfXy5weSIsDQo+ID4gPiBsaW5lIDYsIGluIDxtb2R1
+bGU+DQo+ID4gPiAwMjoyNDoxNCAgRVJSUjIvanRuc0UjMSAgICAgICAgdGVz
+dF9ydF9zbW9rZS5weSNfdGVzdA0KPiA+ID4gQGh4ajctZWNlZHxqZnNydHNl
+MDIvbWJ0LTAyYTogY29uc29sZTogZnJvbSBfcHl0ZXN0LmFzc2VydGlvbiBp
+bXBvcnQNCj4gcmV3cml0ZQ0KPiA+ID4gMDI6MjQ6MTQgIEVSUlIyL2p0bnNF
+IzEgICAgICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gPiA+IEBoeGo3
+LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IEZpbGUNCj4gPiA+
+ICIvdXNyL2xpYjY0L3B5dGhvbjMuNy9zaXRlLXBhY2thZ2VzL19weXRlc3Qv
+YXNzZXJ0aW9uL3Jld3JpdGUucHkiLA0KPiA+ID4gbGluZSAyMCwgaW4gPG1v
+ZHVsZT4NCj4gPiA+IDAyOjI0OjE0ICBFUlJSMi9qdG5zRSMxICAgICAgICB0
+ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+ID4gPiBAaHhqNy1lY2VkfGpmc3J0
+c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBpbXBvcnQgYXRvbWljd3JpdGVzDQo+
+ID4gPiAwMjoyNDoxNCAgRVJSUjIvanRuc0UjMSAgICAgICAgdGVzdF9ydF9z
+bW9rZS5weSNfdGVzdA0KPiA+ID4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0
+LTAyYTogY29uc29sZTogTW9kdWxlTm90Rm91bmRFcnJvcjogTm8NCj4gPiA+
+IG1vZHVsZSBuYW1lZCAnYXRvbWljd3JpdGVzJw0KPiA+ID4gMDI6MjQ6MTQg
+IEVSUlIyL2p0bnNFIzEgICAgICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QN
+Cj4gPiA+IEBoeGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6
+IHJvb3RAaW50ZWwtY29yZWk3LTY0On4jDQo+ID4gPiBUcmFjZWJhY2sgKG1v
+c3QgcmVjZW50IGNhbGwgbGFzdCk6DQo+ID4gPiAwMjoyNDoxNCAgRVJSUjIv
+anRuc0UjMSAgICAgICAgdGVzdF9ydF9zbW9rZS5weSNfdGVzdA0KPiA+ID4g
+QGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTogY29uc29sZTogRmlsZQ0K
+PiA+ID4gIi91c3IvbGliNjQvcHl0aG9uMy43L3J1bnB5LnB5IiwgbGluZSAx
+OTMsIGluIF9ydW5fbW9kdWxlX2FzX21haW4NCj4gPiA+IDAyOjI0OjE0ICBF
+UlJSMi9qdG5zRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+
+ID4gPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiAi
+X19tYWluX18iLCBtb2Rfc3BlYykNCj4gPiA+IDAyOjI0OjE0ICBFUlJSMi9q
+dG5zRSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+ID4gPiBA
+aHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBGaWxlDQo+
+ID4gPiAiL3Vzci9saWI2NC9weXRob24zLjcvcnVucHkucHkiLCBsaW5lIDg1
+LCBpbiBfcnVuX2NvZGUNCj4gPiA+IDAyOjI0OjE0ICBFUlJSMi9qdG5zRSMx
+ICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+ID4gPiBAaHhqNy1l
+Y2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBleGVjKGNvZGUsIHJ1
+bl9nbG9iYWxzKQ0KPiA+ID4gMDI6MjQ6MTQgIEVSUlIyL2p0bnNFIzEgICAg
+ICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gPiA+IEBoeGo3LWVjZWR8
+amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IEZpbGUNCj4gPiA+ICIvdXNy
+L2xpYjY0L3B5dGhvbjMuNy9zaXRlLXBhY2thZ2VzL3B5dGVzdC5weSIsIGxp
+bmUgNiwgaW4gPG1vZHVsZT4NCj4gPiA+IDAyOjI0OjE0ICBFUlJSMi9qdG5z
+RSMxICAgICAgICB0ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+ID4gPiBAaHhq
+Ny1lY2VkfGpmc3J0c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBmcm9tIF9weXRl
+c3QuYXNzZXJ0aW9uIGltcG9ydA0KPiA+ID4gcmVnaXN0ZXJfYXNzZXJ0X3Jl
+d3JpdGUNCj4gPiA+IDAyOjI0OjE0ICBFUlJSMi9qdG5zRSMxICAgICAgICB0
+ZXN0X3J0X3Ntb2tlLnB5I190ZXN0DQo+ID4gPiBAaHhqNy1lY2VkfGpmc3J0
+c2UwMi9tYnQtMDJhOiBjb25zb2xlOiBGaWxlDQo+ID4gPiAiL3Vzci9saWI2
+NC9weXRob24zLjcvc2l0ZS1wYWNrYWdlcy9fcHl0ZXN0L2Fzc2VydGlvbi9f
+X2luaXRfXy5weSIsDQo+ID4gPiBsaW5lIDYsIGluIDxtb2R1bGU+DQo+ID4g
+PiAwMjoyNDoxNCAgRVJSUjIvanRuc0UjMSAgICAgICAgdGVzdF9ydF9zbW9r
+ZS5weSNfdGVzdA0KPiA+ID4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAy
+YTogY29uc29sZTogZnJvbSBfcHl0ZXN0LmFzc2VydGlvbiBpbXBvcnQNCj4g
+cmV3cml0ZQ0KPiA+ID4gMDI6MjQ6MTQgIEVSUlIyL2p0bnNFIzEgICAgICAg
+IHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gPiA+IEBoeGo3LWVjZWR8amZz
+cnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IEZpbGUNCj4gPiA+ICIvdXNyL2xp
+YjY0L3B5dGhvbjMuNy9zaXRlLXBhY2thZ2VzL19weXRlc3QvYXNzZXJ0aW9u
+L3Jld3JpdGUucHkiLA0KPiA+ID4gbGluZSAyMCwgaW4gPG1vZHVsZT4NCj4g
+PiA+IDAyOjI0OjE0ICBFUlJSMi9qdG5zRSMxICAgICAgICB0ZXN0X3J0X3Nt
+b2tlLnB5I190ZXN0DQo+ID4gPiBAaHhqNy1lY2VkfGpmc3J0c2UwMi9tYnQt
+MDJhOiBjb25zb2xlOiBpbXBvcnQgYXRvbWljd3JpdGVzDQo+ID4gPiAwMjoy
+NDoxNCAgRVJSUjIvanRuc0UjMSAgICAgICAgdGVzdF9ydF9zbW9rZS5weSNf
+dGVzdA0KPiA+ID4gQGh4ajctZWNlZHxqZnNydHNlMDIvbWJ0LTAyYTogY29u
+c29sZTogTW9kdWxlTm90Rm91bmRFcnJvcjogTm8NCj4gPiA+IG1vZHVsZSBu
+YW1lZCAnYXRvbWljd3JpdGVzJw0KPiA+ID4gMDI6MjQ6MTQgIEVSUlIyL2p0
+bnNFIzEgICAgICAgIHRlc3RfcnRfc21va2UucHkjX3Rlc3QNCj4gPiA+IEBo
+eGo3LWVjZWR8amZzcnRzZTAyL21idC0wMmE6IGNvbnNvbGU6IHJvb3RAaW50
+ZWwtY29yZWk3LTY0On4jDQo+ID4gPg0KPiA+ID4gUGxlYXNlIHByb3ZlIGEg
+cmVjaXBlIGZvciB0aGUgbWlzc2luZyBtb2R1bGUuDQo+ID4gPg0KPiA+ID4g
+UmVnYXJkcywNCj4gPiA+IENoYW5ha3lhDQo+ID4gPg0KPiA+ID4gLS0tLS1P
+cmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gPiA+IEZyb206DQo+ID4gPg0KPiBv
+cGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQu
+b3JnPG1haWx0bzpvcGVuZW1iZWRkZQ0KPiA+ID4gZC0gZGV2ZWwtYm91bmNl
+c0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0KPiA+ID4NCj4gW21haWx0bzpv
+cGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQu
+b3JnPG1haWx0bzpvcGUNCj4gPiA+IG5lIG1iZWRkZWQtZGV2ZWwtYm91bmNl
+c0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnPl0gT24gQmVoYWxmIE9mIFl1YW4N
+Cj4gPiA+IENoYW8NCj4gPiA+IFNlbnQ6IFdlZG5lc2RheSwgQXVndXN0IDI4
+LCAyMDE5IDEyOjM4IEFNDQo+ID4gPiBUbzoNCj4gPiA+DQo+IG9wZW5lbWJl
+ZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPG1haWx0bzpvcGVu
+ZW1iZWRkZWQtZGV2ZWwNCj4gQA0KPiA+ID4gbGkNCj4gPiA+IHN0cy5vcGVu
+ZW1iZWRkZWQub3JnPg0KPiA+ID4gU3ViamVjdDogW29lXSBbbWV0YS1weXRo
+b25dIFtQQVRDSF0gcHl0aG9uLXB5dGVzdDogdXBncmFkZSAzLjQuMiAtPg0K
+PiA+ID4gNS4xLjENCj4gPiA+DQo+ID4gPiBSZWZyZXNoIHBhdGNoOg0KPiA+
+ID4gMDAwMS1zZXR1cC5weS1yZW1vdmUtdGhlLXNldHVwX3JlcXVpcmVzLWZv
+ci1zZXR1cHRvb2xzLXNjbS5wYXRjaA0KPiA+ID4NCj4gPiA+IFJlbW92ZSBw
+YXRjaDogcHl0ZXN0X3ZlcnNpb25fZml4LnBhdGNoIHNpbmNlIHRoaXMgaXMg
+bm90IHVzZWQuDQo+ID4gPg0KPiA+ID4gTGljZW5zZSB1cGRhdGU6IENvcHly
+aWdodCB5ZWFyIHVwZGF0ZWQgdG8gMjAxOQ0KPiA+ID4NCj4gPiA+IFNpZ25l
+ZC1vZmYtYnk6IFl1YW4gQ2hhbw0KPiA+ID4gPHl1YW5jLmZuc3RAY24uZnVq
+aXRzdS5jb208bWFpbHRvOnl1YW5jLmZuc3RAY24uZnVqaXRzdS5jb20+Pg0K
+PiA+ID4gLS0tDQo+ID4gPiAgLi4uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9u
+L3B5dGhvbi1weXRlc3QuaW5jIHwgIDgNCj4gPiA+ICstLSAgLi4uaGUtc2V0
+dXBfcmVxdWlyZXMtZm9yLXNldHVwdG9vbHMtc2NtLnBhdGNoIHwgMzYNCj4g
+PiA+ICsrKysrKysrLS0tLS0tDQo+ID4gPiAgLi4uL3B5dGhvbi1weXRlc3Qv
+cHl0ZXN0X3ZlcnNpb25fZml4LnBhdGNoICAgIHwgNTEgLS0tLS0tLS0tLS0t
+LS0tLS0tLQ0KPiA+ID4gIC4uLnB5dGVzdF8zLjQuMi5iYjxodHRwOi8vcHl0
+ZXN0XzMuNC4yLmJiPiA9Pg0KPiA+ID4gcHl0aG9uLXB5dGVzdF81LjEuMS5i
+YjxodHRwOi8vcHl0aG9uLXB5dGVzdF81LjEuMS5iYj59IHwgIDANCj4gPiA+
+IC4uLnl0ZXN0XzMuNC4yLmJiPGh0dHA6Ly95dGVzdF8zLjQuMi5iYj4NCj4g
+PiA+ID0+IHB5dGhvbjMtcHl0ZXN0XzUuMS4xLmJiPGh0dHA6Ly9weXRob24z
+LXB5dGVzdF81LjEuMS5iYj59IHwgIDANCj4gPiA+ICA1IGZpbGVzIGNoYW5n
+ZWQsIDI0IGluc2VydGlvbnMoKyksIDcxIGRlbGV0aW9ucygtKSAgZGVsZXRl
+IG1vZGUNCj4gPiA+IDEwMDY0NA0KPiA+ID4gbWV0YS1weXRob24vcmVjaXBl
+cy1kZXZ0b29scy9weXRob24vcHl0aG9uLXB5dGVzdC9weXRlc3RfdmVyc2lv
+bl9maXgNCj4gPiA+IC5wDQo+ID4gPiBhdGNoICByZW5hbWUNCj4gPiA+IG1l
+dGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3tweXRob24tcHl0
+ZXN0XzMuNC4yLmJiPGh0dHA6Ly9wDQo+ID4gPiB5dA0KPiA+ID4gaG9uLXB5
+dGVzdF8zLjQuMi5iYj4gPT4NCj4gPiA+IHB5dGhvbi1weXRlc3RfNS4xLjEu
+YmI8aHR0cDovL3B5dGhvbi1weXRlc3RfNS4xLjEuYmI+fSAoMTAwJSkNCj4g
+PiA+IHJlbmFtZQ0KPiA+ID4gbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29s
+cy9weXRob24ve3B5dGhvbjMtcHl0ZXN0XzMuNC4yLmJiPGh0dHA6Ly8NCj4g
+PiA+IHB5DQo+ID4gPiB0aG9uMy1weXRlc3RfMy40LjIuYmI+ID0+DQo+ID4g
+PiBweXRob24zLXB5dGVzdF81LjEuMS5iYjxodHRwOi8vcHl0aG9uMy1weXRl
+c3RfNS4xLjEuYmI+fSAoMTAwJSkNCj4gPiA+DQo+ID4gPiBkaWZmIC0tZ2l0
+IGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9u
+LXB5dGVzdC5pbmMNCj4gPiA+IGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0
+b29scy9weXRob24vcHl0aG9uLXB5dGVzdC5pbmMNCj4gPiA+IGluZGV4IDRj
+MzJkZmIwNC4uNDllZjc5MGYwIDEwMDY0NA0KPiA+ID4gLS0tIGEvbWV0YS1w
+eXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uLXB5dGVzdC5p
+bmMNCj4gPiA+ICsrKyBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMv
+cHl0aG9uL3B5dGhvbi1weXRlc3QuaW5jDQo+ID4gPiBAQCAtMSwxMyArMSwx
+MyBAQA0KPiA+ID4gIFNVTU1BUlkgPSAiU2ltcGxlIHBvd2VyZnVsIHRldGlu
+ZyB3aXRoIHB5dGhvbiINCj4gPiA+ICBIT01FUEFHRSA9ICJodHRwOi8vcHl0
+ZXN0Lm9yZyINCj4gPiA+ICBMSUNFTlNFID0gIk1JVCINCj4gPiA+IC1MSUNf
+RklMRVNfQ0hLU1VNID0NCj4gPiA+DQo+ICJmaWxlOi8vTElDRU5TRTttZDU9
+YzM5YjI0OTY1ZjRhZWY2NDIyMmNiMzVkZTlkNDdjYzQ8ZmlsZTovLy9cXExJ
+Q0VOU0U7bQ0KPiBkNT1jMzliMjQ5NjVmNGFlZjY0MjIyY2IzNWRlOWQ0N2Nj
+ND4iDQo+ID4gPiArTElDX0ZJTEVTX0NIS1NVTSA9DQo+ID4gPg0KPiAiZmls
+ZTovL0xJQ0VOU0U7bWQ1PTY0MDA2MWI4Y2VlNjRiMzA4YTRkMmY5ZjU1NmMx
+MmYyPGZpbGU6Ly8vXFxMSUNFTlNFO20NCj4gZDU9NjQwMDYxYjhjZWU2NGIz
+MDhhNGQyZjlmNTU2YzEyZjI+Ig0KPiA+ID4NCj4gPiA+IC1TUkNfVVJJW21k
+NXN1bV0gPSAiMWI4M2EyNWQ0NWZhZDg5M2Y0MzBmYzUwMzE2NTNjNTYiDQo+
+ID4gPiAtU1JDX1VSSVtzaGEyNTZzdW1dID0NCj4gPiA+DQo+ICIxMTdiYWQz
+NmMxYTc4N2UxYThhNjU5ZGYzNWRlNTNiYTA1ZjlmMzM5OGZiOWU0YWMxN2U4
+MGFkNTkwM2ViOGM1Ig0KPiA+ID4gK1NSQ19VUklbbWQ1c3VtXSA9ICI2NjIz
+MTNiNGY1MzlmNWI2NmQyZmI3Nzc5MTQ1OGU4MiINCj4gPiA+ICtTUkNfVVJJ
+W3NoYTI1NnN1bV0gPQ0KPiA+ID4NCj4gImMzZDUwMjA3NTVmNzBjODJlY2Vk
+YTNmZWFmNTU2YWY5YTM0MTMzNDQxNGE4ZWNhNTIxYTE4ZjQ2M2JjZWFkODgi
+DQo+ID4gPg0KPiA+ID4gIFNSQ19VUklfYXBwZW5kID0gIg0KPiA+ID4NCj4g
+ZmlsZTovLzAwMDEtc2V0dXAucHktcmVtb3ZlLXRoZS1zZXR1cF9yZXF1aXJl
+cy1mb3Itc2V0dXB0b29scy1zY20ucGF0Y2g8ZmlsZTovDQo+IC8vXFwwMDAx
+LXNldHVwLnB5LXJlbW92ZS10aGUtc2V0dXBfcmVxdWlyZXMtZm9yLXNldHVw
+dG9vbHMtc2NtLnBhdGNoPiBcDQo+ID4gPiAtDQo+IGZpbGU6Ly9weXRlc3Rf
+dmVyc2lvbl9maXgucGF0Y2g8ZmlsZTovLy9cXHB5dGVzdF92ZXJzaW9uX2Zp
+eC5wYXRjaD4gIg0KPiA+ID4gKyAgICAgICAgICAgICAgICAgICAiDQo+ID4g
+Pg0KPiA+ID4gIGluaGVyaXQgdXBkYXRlLWFsdGVybmF0aXZlcw0KPiA+ID4N
+Cj4gPiA+IGRpZmYgLS1naXQNCj4gPiA+IGEvbWV0YS1weXRob24vcmVjaXBl
+cy1kZXZ0b29scy9weXRob24vcHl0aG9uLXB5dGVzdC8wMDAxLXNldHVwLnB5
+LXJlDQo+ID4gPiBtbyB2ZS10IGhlLXNldHVwX3JlcXVpcmVzLWZvci1zZXR1
+cHRvb2xzLXNjbS5wYXRjaA0KPiA+ID4gYi9tZXRhLXB5dGhvbi9yZWNpcGVz
+LWRldnRvb2xzL3B5dGhvbi9weXRob24tcHl0ZXN0LzAwMDEtc2V0dXAucHkt
+cmUNCj4gPiA+IG1vIHZlLXQgaGUtc2V0dXBfcmVxdWlyZXMtZm9yLXNldHVw
+dG9vbHMtc2NtLnBhdGNoDQo+ID4gPiBpbmRleCAwNmRmY2RmYzYuLmMyOWZi
+MTJkZSAxMDA2NDQNCj4gPiA+IC0tLQ0KPiA+ID4gYS9tZXRhLXB5dGhvbi9y
+ZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tcHl0ZXN0LzAwMDEtc2V0
+dXAucHktcmUNCj4gPiA+IG1vIHZlLXQgaGUtc2V0dXBfcmVxdWlyZXMtZm9y
+LXNldHVwdG9vbHMtc2NtLnBhdGNoDQo+ID4gPiArKysgYi9tZXRhLXB5dGhv
+bi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tcHl0ZXN0LzAwMDEt
+c2V0dXAucA0KPiA+ID4gKysrIHktIHJlIG1vdmUtdGhlLXNldHVwX3JlcXVp
+cmVzLWZvci1zZXR1cHRvb2xzLXNjbS5wYXRjaA0KPiA+ID4gQEAgLTEsNyAr
+MSw3IEBADQo+ID4gPiAtRnJvbSAyNGE5MDFmZDE3OTI2ZThlMDViZTRlZDJl
+MDFiMDExM2EyZTNhODUyIE1vbiBTZXAgMTcNCj4gMDA6MDA6MDANCj4gPiA+
+IDIwMDENCj4gPiA+IC1Gcm9tOiBEZXJlayBTdHJha2EgPGRlcmVrQGFzdGVy
+aXVzLmlvPG1haWx0bzpkZXJla0Bhc3Rlcml1cy5pbz4+DQo+ID4gPiAtRGF0
+ZTogVHVlLCAxOSBEZWMgMjAxNyAxMTozNjozOSAtMDUwMA0KPiA+ID4gLVN1
+YmplY3Q6IFtQQVRDSF0gW1BBVENIIDEvMV0gc2V0dXAucHk6IHJlbW92ZSB0
+aGUgc2V0dXBfcmVxdWlyZXMNCj4gPiA+IGZvcg0KPiA+ID4gK0Zyb20gZmY3
+ODRmNDgwM2FiMzNmNWUzMzg5ZTQwZDAzOGQ1MmQxZTIxMTg0MyBNb24gU2Vw
+IDE3IDAwOjAwOjAwDQo+ID4gPiAyMDAxDQo+ID4gPiArRnJvbTogWXVhbiBD
+aGFvDQo+ID4gPiArPHl1YW5jLmZuc3RAY24uZnVqaXRzdS5jb208bWFpbHRv
+Onl1YW5jLmZuc3RAY24uZnVqaXRzdS5jb20+Pg0KPiA+ID4gK0RhdGU6IFdl
+ZCwgMjggQXVnIDIwMTkgMTY6MTI6MjcgKzA5MDANCj4gPiA+ICtTdWJqZWN0
+OiBbUEFUQ0hdIFtQQVRDSF0gc2V0dXAucHk6IHJlbW92ZSB0aGUgc2V0dXBf
+cmVxdWlyZXMgZm9yDQo+ID4gPiAgIHNldHVwdG9vbHMtc2NtDQo+ID4gPg0K
+PiA+ID4gIFRoZSBzZXR1cF9yZXF1aXJlcyBhcmd1bWVudCBmb3JjZXMgdGhl
+IGRvd25sb2FkIG9mIHRoZSBlZ2cgZmlsZSBmb3INCj4gPiA+IHNldHVwdG9v
+bHMtc2NtIEBAIC0xMiwyMSArMTIsMjUgQEAgZmlsZSBhbmQgaW4gdGhlIHJl
+bGVhc2UgdGFyYmFsbA0KPiA+ID4gaXQgaXMgYWxyZWFkeSBjb3JyZWN0bHkg
+Y3JlYXRlZA0KPiA+ID4gIFVwc3RyZWFtLVN0YXR1czogSW5hcHByb3ByaWF0
+ZSBbb2Ugc3BlY2lmaWNdDQo+ID4gPg0KPiA+ID4gIFNpZ25lZC1vZmYtYnk6
+IERlcmVrIFN0cmFrYQ0KPiA+ID4gPGRlcmVrQGFzdGVyaXVzLmlvPG1haWx0
+bzpkZXJla0Bhc3Rlcml1cy5pbz4+DQo+ID4gPiArDQo+ID4gPiArU2lnbmVk
+LW9mZi1ieTogWXVhbiBDaGFvDQo+ID4gPiArPHl1YW5jLmZuc3RAY24uZnVq
+aXRzdS5jb208bWFpbHRvOnl1YW5jLmZuc3RAY24uZnVqaXRzdS5jb20+Pg0K
+PiA+ID4gIC0tLQ0KPiA+ID4gLSBzZXR1cC5weSB8IDEgLQ0KPiA+ID4gLSAx
+IGZpbGUgY2hhbmdlZCwgMSBkZWxldGlvbigtKQ0KPiA+ID4gKyBzZXR1cC5w
+eSB8IDIgKy0NCj4gPiA+ICsgMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0aW9u
+KCspLCAxIGRlbGV0aW9uKC0pDQo+ID4gPg0KPiA+ID4gIGRpZmYgLS1naXQg
+YS9zZXR1cC5weSBiL3NldHVwLnB5DQo+ID4gPiAtaW5kZXggM2ViMzhlZi4u
+MTE2MzIwMiAxMDA2NDQNCj4gPiA+ICtpbmRleCBhZGJhZmI1Li43NWZkZDA5
+IDEwMDY0NA0KPiA+ID4gIC0tLSBhL3NldHVwLnB5DQo+ID4gPiAgKysrIGIv
+c2V0dXAucHkNCj4gPiA+IC1AQCAtODIsNyArODIsNiBAQCBkZWYgbWFpbigp
+Og0KPiA+ID4gLSAgICAgICAgIGtleXdvcmRzPSJ0ZXN0IHVuaXR0ZXN0IiwN
+Cj4gPiA+IC0gICAgICAgICBjbWRjbGFzcz17J3Rlc3QnOiBQeVRlc3R9LA0K
+PiA+ID4gLSAgICAgICAgICMgdGhlIGZvbGxvd2luZyBzaG91bGQgYmUgZW5h
+YmxlZCBmb3IgcmVsZWFzZQ0KPiA+ID4gLS0gICAgICAgIHNldHVwX3JlcXVp
+cmVzPVsnc2V0dXB0b29scy1zY20nXSwNCj4gPiA+IC0gICAgICAgICBweXRo
+b25fcmVxdWlyZXM9Jz49Mi43LCAhPTMuMC4qLCAhPTMuMS4qLCAhPTMuMi4q
+LCAhPTMuMy4qJywNCj4gPiA+IC0gICAgICAgICBpbnN0YWxsX3JlcXVpcmVz
+PWluc3RhbGxfcmVxdWlyZXMsDQo+ID4gPiAtICAgICAgICAgZXh0cmFzX3Jl
+cXVpcmU9ZXh0cmFzX3JlcXVpcmUsDQo+ID4gPiArQEAgLTE5LDcgKzE5LDcg
+QEAgSU5TVEFMTF9SRVFVSVJFUyA9IFsgIGRlZiBtYWluKCk6DQo+ID4gPiAr
+ICAgICBzZXR1cCgNCj4gPiA+ICsgICAgICAgICB1c2Vfc2NtX3ZlcnNpb249
+eyJ3cml0ZV90byI6ICJzcmMvX3B5dGVzdC9fdmVyc2lvbi5weSJ9LA0KPiA+
+ID4gKy0gICAgICAgIHNldHVwX3JlcXVpcmVzPVsic2V0dXB0b29scy1zY20i
+LCAic2V0dXB0b29scz49NDAuMCJdLA0KPiA+ID4gKysgICAgICAgIHNldHVw
+X3JlcXVpcmVzPVsic2V0dXB0b29scz49NDAuMCJdLA0KPiA+ID4gKyAgICAg
+ICAgIHBhY2thZ2VfZGlyPXsiIjogInNyYyJ9LA0KPiA+ID4gKyAgICAgICAg
+IGV4dHJhc19yZXF1aXJlPXsNCj4gPiA+ICsgICAgICAgICAgICAgInRlc3Rp
+bmciOiBbDQo+ID4gPiAgLS0NCj4gPiA+IC0yLjcuNA0KPiA+ID4gKzIuMTcu
+MQ0KPiA+ID4gKw0KPiA+ID4gZGlmZiAtLWdpdA0KPiA+ID4gYS9tZXRhLXB5
+dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tcHl0ZXN0L3B5
+dGVzdF92ZXJzaW9uX2YNCj4gPiA+IGl4DQo+ID4gPiAucGF0Yw0KPiA+ID4g
+aA0KPiA+ID4gYi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhv
+bi9weXRob24tcHl0ZXN0L3B5dGVzdF92ZXJzaW9uX2YNCj4gPiA+IGl4DQo+
+ID4gPiAucGF0Yw0KPiA+ID4gaA0KPiA+ID4gZGVsZXRlZCBmaWxlIG1vZGUg
+MTAwNjQ0DQo+ID4gPiBpbmRleCBiMzczZDkzZTguLjAwMDAwMDAwMA0KPiA+
+ID4gLS0tDQo+ID4gPiBhL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMv
+cHl0aG9uL3B5dGhvbi1weXRlc3QvcHl0ZXN0X3ZlcnNpb25fZg0KPiA+ID4g
+aXgNCj4gPiA+IC5wYXRjDQo+ID4gPiBoDQo+ID4gPiArKysgL2Rldi9udWxs
+DQo+ID4gPiBAQCAtMSw1MSArMCwwIEBADQo+ID4gPiAtVXBzdHJlYW0tU3Rh
+dHVzOiBJbmFwcHJvcHJpYXRlIChPRSBzcGVjaWZpYykNCj4gPiA+IC0NCj4g
+PiA+IC1weXRob24tcHl0ZXN0OiByZW1vdmUgZmV0Y2ggZHVyaW5nIGRvX2Nv
+bXBpbGUgcGhhc2UNCj4gPiA+IC1jb21taXQ6IGM5NzRmYmY5ZWJmMTg1NTUy
+YWI2NTMwMWUwN2FmNDRmMzY1MTdhYmYNCj4gPiA+IC0NCj4gPiA+IC1pbnRy
+b2R1Y2VkIGFuIGlzc3VlIGJ5IG1ha2luZyB0aGUgdmVyc2lvbiAwLjAuMCAt
+dGhpcyBmaXhlcyB0aGF0DQo+ID4gPiAtDQo+ID4gPiAtU2lnbmVkLW9mZi1i
+eTogQXJtaW4gS3VzdGVyDQo+ID4gPiA8YWt1c3RlckBtdmlzdGEuY29tPG1h
+aWx0bzpha3VzdGVyQG12aXN0YS5jb20+Pg0KPiA+ID4gLQ0KPiA+ID4gLUlu
+ZGV4OiBweXRlc3QtMy4yLjIvc2V0dXAucHkNCj4gPiA+DQo+IC09PT09PT09
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PT0NCj4gPiA+ID09PT0NCj4gPiA+IC0tLS0gcHl0ZXN0LTMu
+Mi4yLm9yaWcvc2V0dXAucHkNCj4gPiA+IC0rKysgcHl0ZXN0LTMuMi4yL3Nl
+dHVwLnB5DQo+ID4gPiAtQEAgLTEsNSArMSw2IEBADQo+ID4gPiAtIGltcG9y
+dCBvcw0KPiA+ID4gLSBpbXBvcnQgc3lzDQo+ID4gPiAtK2ltcG9ydCByZQ0K
+PiA+ID4gLSBpbXBvcnQgc2V0dXB0b29scw0KPiA+ID4gLSBpbXBvcnQgcGtn
+X3Jlc291cmNlcw0KPiA+ID4gLSBmcm9tIHNldHVwdG9vbHMgaW1wb3J0IHNl
+dHVwLCBDb21tYW5kIC1AQCAtMjIsNiArMjMsMTggQEANCj4gPiA+IGNsYXNz
+aWZpZXJzID0gWw0KPiA+ID4gLSB3aXRoIG9wZW4oJ1JFQURNRS5yc3QnKSBh
+cyBmZDoNCj4gPiA+IC0gICAgIGxvbmdfZGVzY3JpcHRpb24gPSBmZC5yZWFk
+KCkNCj4gPiA+IC0NCj4gPiA+IC0rZGVmIHJlYWQoKm5hbWVzLCAqKmt3YXJn
+cyk6DQo+ID4gPiAtKyAgICB3aXRoIG9wZW4ob3MucGF0aC5qb2luKCAqbmFt
+ZXMpLCAncicpIGFzIGZwOg0KPiA+ID4gLSsgICAgICAgIHJldHVybiBmcC5y
+ZWFkKCkNCj4gPiA+IC0rDQo+ID4gPiAtK2RlZiBmaW5kX3ZlcnNpb24oKmZp
+bGVfcGF0aHMpOg0KPiA+ID4gLSsgICAgdmVyc2lvbl9maWxlID0gcmVhZCgq
+ZmlsZV9wYXRocykNCj4gPiA+IC0rICAgIHZlcnNpb25fbWF0Y2ggPSByZS5z
+ZWFyY2gociJedmVyc2lvbiA9IFsnXCddKFteJ1wiXSopWydcJ10iLA0KPiA+
+ID4gLSsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2ZXJzaW9uX2Zp
+bGUsIHJlLk0pDQo+ID4gPiAtKw0KPiA+ID4gLSsgICAgaWYgdmVyc2lvbl9t
+YXRjaDoNCj4gPiA+IC0rICAgICAgICByZXR1cm4gdmVyc2lvbl9tYXRjaC5n
+cm91cCgxKQ0KPiA+ID4gLSsgICAgcmFpc2UgUnVudGltZUVycm9yKCJVbmFi
+bGUgdG8gZmluZCB2ZXJzaW9uIHN0cmluZy4iKQ0KPiA+ID4gLQ0KPiA+ID4g
+LSBkZWYgZ2V0X2Vudmlyb25tZW50X21hcmtlcl9zdXBwb3J0X2xldmVsKCk6
+DQo+ID4gPiAtICAgICAiIiINCj4gPiA+IC1AQCAtNTksOSArNzIsNyBAQCBk
+ZWYgbWFpbigpOg0KPiA+ID4gLSAgICAgICAgIG5hbWU9J3B5dGVzdCcsDQo+
+ID4gPiAtICAgICAgICAgZGVzY3JpcHRpb249J3B5dGVzdDogc2ltcGxlIHBv
+d2VyZnVsIHRlc3Rpbmcgd2l0aCBQeXRob24nLA0KPiA+ID4gLSAgICAgICAg
+IGxvbmdfZGVzY3JpcHRpb249bG9uZ19kZXNjcmlwdGlvbiwNCj4gPiA+IC0t
+ICAgICAgICB1c2Vfc2NtX3ZlcnNpb249ew0KPiA+ID4gLS0gICAgICAgICAg
+ICAnd3JpdGVfdG8nOiAnX3B5dGVzdC9fdmVyc2lvbi5weScsDQo+ID4gPiAt
+LSAgICAgICAgfSwNCj4gPiA+IC0rICAgIHZlcnNpb249ZmluZF92ZXJzaW9u
+KCJfcHl0ZXN0IiwgIl92ZXJzaW9uLnB5IiksDQo+ID4gPiAtICAgICAgICAg
+dXJsPSdodHRwOi8vcHl0ZXN0Lm9yZycsDQo+ID4gPiAtICAgICAgICAgbGlj
+ZW5zZT0nTUlUIGxpY2Vuc2UnLA0KPiA+ID4gLSAgICAgICAgIHBsYXRmb3Jt
+cz1bJ3VuaXgnLCAnbGludXgnLCAnb3N4JywgJ2N5Z3dpbicsICd3aW4zMidd
+LA0KPiA+ID4gZGlmZiAtLWdpdA0KPiA+ID4gYS9tZXRhLXB5dGhvbi9yZWNp
+cGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tcHl0ZXN0XzMuNC4yLmJiPGh0
+dHA6Ly8NCj4gPiA+IHB5DQo+ID4gPiB0aG9uLXB5dGVzdF8zLjQuMi5iYj4N
+Cj4gPiA+IGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24v
+cHl0aG9uLXB5dGVzdF81LjEuMS5iYjxodHRwOi8vDQo+ID4gPiBweQ0KPiA+
+ID4gdGhvbi1weXRlc3RfNS4xLjEuYmI+DQo+ID4gPiBzaW1pbGFyaXR5IGlu
+ZGV4IDEwMCUNCj4gPiA+IHJlbmFtZSBmcm9tDQo+ID4gPiBtZXRhLXB5dGhv
+bi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tcHl0ZXN0XzMuNC4y
+LmJiPGh0dHA6Ly9weQ0KPiA+ID4gdGgNCj4gPiA+IG9uLXB5dGVzdF8zLjQu
+Mi5iYj4gcmVuYW1lIHRvDQo+ID4gPiBtZXRhLXB5dGhvbi9yZWNpcGVzLWRl
+dnRvb2xzL3B5dGhvbi9weXRob24tcHl0ZXN0XzUuMS4xLmJiPGh0dHA6Ly9w
+eQ0KPiA+ID4gdGgNCj4gPiA+IG9uLXB5dGVzdF81LjEuMS5iYj4NCj4gPiA+
+IGRpZmYgLS1naXQNCj4gPiA+IGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0
+b29scy9weXRob24vcHl0aG9uMy1weXRlc3RfMy40LjIuYmI8aHR0cDovDQo+
+ID4gPiAvcA0KPiA+ID4geXRob24zLXB5dGVzdF8zLjQuMi5iYj4NCj4gPiA+
+IGIvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9u
+My1weXRlc3RfNS4xLjEuYmI8aHR0cDovDQo+ID4gPiAvcA0KPiA+ID4geXRo
+b24zLXB5dGVzdF81LjEuMS5iYj4NCj4gPiA+IHNpbWlsYXJpdHkgaW5kZXgg
+MTAwJQ0KPiA+ID4gcmVuYW1lIGZyb20NCj4gPiA+IG1ldGEtcHl0aG9uL3Jl
+Y2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMtcHl0ZXN0XzMuNC4yLmJi
+PGh0dHA6Ly9wDQo+ID4gPiB5dA0KPiA+ID4gaG9uMy1weXRlc3RfMy40LjIu
+YmI+IHJlbmFtZSB0bw0KPiA+ID4gbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0
+b29scy9weXRob24vcHl0aG9uMy1weXRlc3RfNS4xLjEuYmI8aHR0cDovL3AN
+Cj4gPiA+IHl0DQo+ID4gPiBob24zLXB5dGVzdF81LjEuMS5iYj4NCj4gPiA+
+IC0tDQo+ID4gPiAyLjE3LjENCj4gPiA+DQo+ID4gPg0KPiA+ID4NCj4gPiA+
+IC0tDQo+ID4gPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fXw0KPiA+ID4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxp
+bmcgbGlzdA0KPiA+ID4NCj4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9w
+ZW5lbWJlZGRlZC5vcmc8bWFpbHRvOk9wZW5lbWJlZGRlZC1kZXZlbA0KPiBA
+DQo+ID4gPiBsaQ0KPiA+ID4gc3RzLm9wZW5lbWJlZGRlZC5vcmc+DQo+ID4g
+PiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KPiA+ID4NCj4gPg0KPiA+DQo+ID4N
+Cj4gPiAtLQ0KPiA+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fDQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxp
+bmcgbGlzdA0KPiA+DQo+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVu
+ZW1iZWRkZWQub3JnPG1haWx0bzpPcGVuZW1iZWRkZWQtZGV2ZWwNCj4gQGxp
+DQo+ID4gc3RzLm9wZW5lbWJlZGRlZC5vcmc+DQo+ID4gaHR0cDovL2xpc3Rz
+Lm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRk
+ZWQtZGV2ZWwNCj4gPiAtLQ0KPiA+IF9fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fDQo+ID4gT3BlbmVtYmVkZGVkLWRl
+dmVsIG1haWxpbmcgbGlzdA0KPiA+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0
+cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4gaHR0cDovL2xpc3RzLm9wZW5lbWJl
+ZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwN
+Cj4gPiAtLQ0KPiA+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fDQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxp
+bmcgbGlzdA0KPiA+IE9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
+ZWRkZWQub3JnDQo+ID4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcv
+bWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCj4gDQoNCgoK
 
