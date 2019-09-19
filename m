@@ -1,47 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
-	[209.85.222.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 095237FFF5
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by mail.openembedded.org (Postfix) with ESMTP id E85C49009D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2019 01:55:24 +0000 (UTC)
-Received: by mail-qk1-f172.google.com with SMTP id q203so1700280qke.1
+	Thu, 19 Sep 2019 02:05:33 +0000 (UTC)
+Received: by mail-pl1-f194.google.com with SMTP id s17so842920plp.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Sep 2019 18:55:26 -0700 (PDT)
+	Wed, 18 Sep 2019 19:05:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=aXKcCfQtAEcVeTc645kmm3c5mdfHK47ki2+1+mD8vrI=;
-	b=LyKpPBLPVdEpAr65K9runas8mFjNTV6HgX8lMVnzL4k3AOLZijU1KCih4u95FOMtbB
-	lETUYwkkCVzYKqWEaVUrQpoVsKbSbKrPt3UlFVzzEX7LbS22e0W8x2Ns8od/z4UzMtwx
-	FPYKBiOgIxx1zBtgzHaSRTFgkznNfYG811FR6d2aLmAEC9RD89aYZi6DXQpb2ZAO7kvD
-	/+qMbeJ/WAR519dvwVqTjkV8Uv6fT5U/MP6aBw/vydd5EGPH7MUfTUJD7t8oxd6/N4pm
-	E8CzwUnKj2Mxs4lt9x04w4apq264Oq1ZL12i1HVV7GvYOK1YZrdOil/i3gioFr8otRlQ
-	dELQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4zkg1Z5DTp/8kHJUGJRn9zrDTl6WW8BqcHDla7Sf//4=;
+	b=g87R/QEviSpqKc0GcIJAX5WPEft1c+3G3xsALft8jmRvpHhS/3S246BWB940ytQVL/
+	5SfAnfVCKiA6Lbgj17z/GhoqeU1UEyeYwFqu7dtqFtdwx4s2uq1WSRLmQN5F1kpuoC0Y
+	vpt5wNA4GJnsXUVTa2sBXIRBVtpw/Rg6VnnDF8+ThWgvLEjYXOjysj72FYl4ij7LaXOa
+	ksDUirpTqddBMVSUHTnZMQK9zCkXP/QGLFDF988WDdqzaWQZLXht1JkfGxmTt02X0RL/
+	IJyg5p/UwT4iP82ERCIcWNBV8iWluhAmFntOt5MWdbGxdR7eVMIx1CF8H8zWQXkgsG4L
+	HnBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=aXKcCfQtAEcVeTc645kmm3c5mdfHK47ki2+1+mD8vrI=;
-	b=gLVLIV0qgJmslX1YatUiXv/jU6J8SY2pf4rzOqJno3+rNr2lu8+DxKjGk2UcPkpsvq
-	PAdFcZteoCCiXx0dVojLQi/rqdo6cvUHdnx6l/l0lLucHWBtWVX2YzRYQrsdXNWyE++N
-	uadEI2qvxBUdbuG5fggn/YR5NIa6Boua/jhj/A9geYXelNFW90pn3s1j3NBe3Ien/E76
-	5hcGrI8P8qXMqzZtt4el3tyCZ02tjVUia2F1Boim5zN2kD7M7xcZ3bHrXLliqbHhvPVZ
-	cDmb22+KH0KfOfCvIis3dYEBia7S3MlUmXLLEz66iEAV7dFf4VhVZQ4rxtVWlS6+kIth
-	OPtg==
-X-Gm-Message-State: APjAAAUJhuC4lB6YvYszFzCEa2cRHLh4OvxCt/ZT6DZX/HTQm3bxRA9B
-	quUh5FTMzn3gSdv5Ev0HpMuW3K2fb5WBkMhVesk+uCt95FU=
-X-Google-Smtp-Source: APXvYqwmEu/h/eDOpfuk6qQ8Ht+mGBo6THWXb+paZbVUWDWRKXJ41tQXq6bGA8HsbfS1Uqz+YBm4SyK9SUpe9NJfN2M=
-X-Received: by 2002:a37:84c3:: with SMTP id g186mr502034qkd.71.1568858125525; 
-	Wed, 18 Sep 2019 18:55:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190919014547.7nchdno3cq3o2fs7@vctlabs.com>
-In-Reply-To: <20190919014547.7nchdno3cq3o2fs7@vctlabs.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4zkg1Z5DTp/8kHJUGJRn9zrDTl6WW8BqcHDla7Sf//4=;
+	b=RWpaA6w0D4kLGL98UfG7aJv9nX0p6YUW7X8O3qwYE9iCzRH8uaUJz/BjpK48j8NbEQ
+	ga6CQQ7oAo1LoLE+6Aafz+jqHNouDZABjtN4ufl1MgR7fpUUdQa1p7yNukzv7bLX2p+h
+	Zd5TEzOZH9Atca3ZXwd60I1TZ2TMxru8vQKwU+/6KgcOAfx3ZJ2ULFvrODHScvWJK0/Z
+	A4nUt7Pych6UisoVG3eQgNU4K4bzNEE5B7iFUl8yyp1GldjKfpu8jt9YRTq4Pq4h9QAb
+	Syy9e/PW0qXeJ6dfIHyfHllSD3qOft1OEzjIWva4czzw7Oa51dhQAy+KhfL+vbf6Wr3h
+	2YKg==
+X-Gm-Message-State: APjAAAV1q+1EyXIuqpp966gW8Jz62pHjbTd/nRmb/Q56/XicCCagqOTO
+	rpWSUzALiPc+CKCVM+n+Ro7/HsShdqw=
+X-Google-Smtp-Source: APXvYqyKMzS8ZVEL/5jSp4pNuoD0POGjEmk2rCzHVMn9CZTf6e+7IODl8colKu18p2Ut7FdwtrHMMg==
+X-Received: by 2002:a17:902:a406:: with SMTP id
+	p6mr7526219plq.134.1568858734385; 
+	Wed, 18 Sep 2019 19:05:34 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3])
+	by smtp.gmail.com with ESMTPSA id c1sm7651815pfn.22.2019.09.18.19.05.33
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 18 Sep 2019 19:05:33 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Sep 2019 18:54:59 -0700
-Message-ID: <CAMKF1sqts_odBkYixxMCHfgAr+-NxcfVYozGRPXX+j47gu4MKg@mail.gmail.com>
-To: "S. Lockwood-Childs" <sjl@vctlabs.com>
-Cc: Armin Kuster <akuster@mvista.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] wireshark: remove restriction to ARM ISA
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 18 Sep 2019 19:05:27 -0700
+Message-Id: <20190919020527.1399914-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH V2] kernel-selftest: Exclude from world builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,49 +58,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Sep 2019 01:55:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 19 Sep 2019 02:05:34 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Sep 18, 2019 at 6:51 PM S. Lockwood-Childs <sjl@vctlabs.com> wrote:
->
-> The restriction to ARM instruction set came in the original
-> wireshark recipe, which was 2 major versions ago (and also
-> a few toolchains ago). Wireshark 3.x seems to be building
-> fine allowing thumb instructions, at least on cortexa9t2hf.
-> ---
->  meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb | 2 --
->  1 file changed, 2 deletions(-)
->
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-> index efcd5e4..6de188d 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-> @@ -19,8 +19,6 @@ PE = "1"
->
->  inherit cmake pkgconfig python3native perlnative upstream-version-is-even
->
-> -ARM_INSTRUCTION_SET = "arm"
+Avoid need for installing clang on host, or depending on meta-clang
 
-it will be interesting to see if it is still the case with thumb1 on <= armv5t
-earlier we use to test qrmarm with thumb, maybe build with
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: EXCLUDE_FROM_WORLD is enough for CI
 
-MACHINE=qemuarmv5 and in recipe set
+ meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-ARM_INSTRUCTION_SET = "thumb"
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index fb4534dca8..02359e782b 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -117,3 +117,7 @@ INSANE_SKIP_${PN} += "ldflags"
+ SECURITY_CFLAGS = ""
+ COMPATIBLE_HOST_libc-musl = 'null'
+ 
++# It has native clang/llvm dependency, poky distro is reluctant to include them as deps
++# this helps with world builds on AB
++EXCLUDE_FROM_WORLD = "1"
++
+-- 
+2.23.0
 
-and see if it still builds.
-
-If not them limit this setting to arch <= v6
-> -
->  PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
->
->  PACKAGECONFIG_class-native = "libpcap gnutls ssl libssh"
-> --
-> 1.9.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
