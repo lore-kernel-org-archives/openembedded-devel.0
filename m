@@ -1,51 +1,52 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
-	[209.85.166.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F20B7FD97
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
+	[209.85.215.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 328B07FE9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2019 01:14:15 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id f12so12250883iog.12
+	Fri, 20 Sep 2019 01:28:50 +0000 (UTC)
+Received: by mail-pg1-f180.google.com with SMTP id h17so330965pgb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2019 18:14:17 -0700 (PDT)
+	Thu, 19 Sep 2019 18:28:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Xf2ubxx2ttZS6yLS8odeTZokHWejD4p5WbO4LH56BPM=;
-	b=bblibDwkk4xIJQtpD31Uw4iq9uW7VXpE9bbIeFbcLGEgYpOyLyO3/7/esrc1o347BZ
-	Qfhb5cLzSpGqPpNzhr5Lg6/3fYLeS6qCSyZLTUFHFLUfNLljxG1UcpZNMMXm0/eHQqto
-	8fnJElxpMejniXTUJsYtyURoAUOxxGLwbJoLOI1LGMDtWIpt7o9QFAaUCGc7bQwOidvN
-	nYsiPB3NApbeOpYZzyVawiw3tgd7LivgyM7kzSF3YLp9F6S1YAz5M8HrbzBQgzGlQjEA
-	0mNmxIVEQmWwcbsZpqTjIuBpYa4ngqNTHs2OaLEZYjojACaEGVbWsVCzM2azaKzms6L1
-	K4tQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E+mcimDmUhTMuVuHSNWEQGdV/9rsm+gx06sgJOYvP0w=;
+	b=N8Tx+C2V0AWStRBpOk9rgTVhyQJpKRHphmQfxTQdD38HU+IwmjmixjbSsaasfm6RRD
+	2uCRbL0W19s6PhAH3B9HyNjZpBZq5dSGhjqqjHtOi7goMhLS0KBgnFZC+PQNMQ1kHGxr
+	6opiwcW3hOJtOos7qaKZ9rdhVUEeUTXQO+J5V+xQHxkmVLaJKXfyvu3R1oOjKRky1l06
+	sP7fcee/8ZpBNhIYJZjG1qYzOzmgBwzxpFwsUEISvDOMe/xlf4tqlUAmqAkDhXAwHNvB
+	zkrhHtyw3xGtVP7vEAEWRxOWrBu6xAPniswOo6ZFF1bNoA4qFlpTA4LY8+q8P72HIxFY
+	lyFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Xf2ubxx2ttZS6yLS8odeTZokHWejD4p5WbO4LH56BPM=;
-	b=ZJpDlCz4XK4hCYo2vBv+MmhpY3bNyBQYkXJb2KTJ082aL4Qe7LB4Ex5z4Ez6EjxDB5
-	kbWMX6dJ3DilFWi1Ct607i7awXoRIrMdnGOEVpOXL3Vn8614s38PHEe0iFKlU+wSQ8R+
-	DyHzuH8AWuWNVMuodl+QABE7ZLZE4vmQj0u1DXOh1Mh2rrK1cewY+3LT8Vg+98+s6rTp
-	gPZZK3Q0yxuIElKASC8D4kBh+EYvQ5YHVychiQ8z6llajOW4YGBtDenhCJXeZ3rC0XRc
-	TF7ifgaT+fia7TnOoTwrDsKhaDAWmqMqXhrOMlGlXe4x88IkHbVLdiHmkd/danfLHOBQ
-	GTiA==
-X-Gm-Message-State: APjAAAVak+ygCPM8VWtx0A1Zsy/+qNggp6h0CSoHoC9lk43X0e+ZJEOw
-	jspwEI47amtdnbsso4Lv+jXgu5xkPVD1lYbCcAA=
-X-Google-Smtp-Source: APXvYqzJg8UiQvoB5eZdyI5xPgrZI44dKSYa8SANQ9Zgtp9bRUG0NnO+guZNtJrB1pHyd1sFScuT+V38bYDQ32irKA8=
-X-Received: by 2002:a6b:c7c2:: with SMTP id x185mr2090325iof.224.1568942055700;
-	Thu, 19 Sep 2019 18:14:15 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=E+mcimDmUhTMuVuHSNWEQGdV/9rsm+gx06sgJOYvP0w=;
+	b=KHl9yaBv4oB3n92dSKT3DEB6TBbejQFNKxlYQqLqQnl4LvzPeNIwrQRFczOCLdUHpD
+	DSrze5n4x/8vn+8NM6SfZkt8KTUlarFz3cFiVRfiKW7NmRPr0OBl0jb1j76tjIG0+wBc
+	9qFiJTQPRRWGgS3Z3Elpe8fUpy4vE9GvWVUXf/kpOvuInv2K3MQJINQn7hSWDAz5s1Wo
+	fG2qpEVnoQbWfZk6i60pMvmr4+8cGY9inZrwemSmSrNywzui+eDtzdHZ/MCSTUIHeWvo
+	aDZ+RWtLDhs0GUuPEd2Tky3yDeEjOYQI6tTz4mv/5w1d65Qy/St6BrBtI1fE9yhsUfI8
+	4diQ==
+X-Gm-Message-State: APjAAAXjKlYOi2LqrhTpxiY3rwmnFnEITINur/A2xmfGfnI5rok720hg
+	HMmG7HB8Iu01qDPvKIxRACPH652OJb4=
+X-Google-Smtp-Source: APXvYqwyYp44MY7DSG1Mt60lG28wGG05YabIQ7LG96KUOnTxZNQ2938MRDwGkfxWe9dEjbWjCqqaUQ==
+X-Received: by 2002:a63:3483:: with SMTP id
+	b125mr12007811pga.285.1568942930586; 
+	Thu, 19 Sep 2019 18:28:50 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3])
+	by smtp.gmail.com with ESMTPSA id u17sm220038pjn.7.2019.09.19.18.28.49
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 19 Sep 2019 18:28:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Sep 2019 18:28:35 -0700
+Message-Id: <20190920012835.1632438-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-References: <20190817081339.22253-1-schnitzeltony@gmail.com>
-	<20190817111825.GA2828@localhost>
-	<CALbNGRSBQv22cpj+T+KBS-1oOhpUomXBN78FHhFw52=pGEOp9A@mail.gmail.com>
-	<efd5c05c-1275-8077-84e1-f17fff05f8f6@gmail.com>
-	<CALbNGRQnxLXFXoSkPxWnFZJHWWdDvVP_=i9-ybYOVGzirty6Uw@mail.gmail.com>
-In-Reply-To: <CALbNGRQnxLXFXoSkPxWnFZJHWWdDvVP_=i9-ybYOVGzirty6Uw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 20 Sep 2019 03:14:04 +0200
-Message-ID: <CALbNGRSp+UH2gaBe5QdUTU4R4kui4ny8TbVnqEt442-0pA8onQ@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org, Adrian Bunk <bunk@stusta.de>
-Subject: Re: [warrior][PATCH 0/4] vlc adjustments
+Cc: cjhasu <sumit.jha420@gmail.com>
+Subject: [meta-python][PATCH] Remove "werkzeug-test" in RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,22 +59,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2019 01:14:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 20 Sep 2019 01:28:50 -0000
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 30, 2019 at 10:51 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
->
-> On Thu, Aug 29, 2019 at 4:16 PM akuster808 <akuster808@gmail.com> wrote:
-> > > Ping
-> >
-> > in stable/warrior-nmut for testing.
-> >
-> Thanks
->
-Patch 3 was applied / 1,2,4 not. Shall I resend or is there a reason
-not to apply them in warrior?
+From: cjhasu <sumit.jha420@gmail.com>
 
-Andreas
+werkzeug-test is not required for building "python3-flask".Hence it should be removed.And also there is no recipe for building werkzeug-test .Hence it is causing error for while building python3-flask.Please add this change ASAP
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-python/recipes-devtools/python/python-flask.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-python/recipes-devtools/python/python-flask.inc b/meta-python/recipes-devtools/python/python-flask.inc
+index 66ad1a6e74..ffd783f3df 100644
+--- a/meta-python/recipes-devtools/python/python-flask.inc
++++ b/meta-python/recipes-devtools/python/python-flask.inc
+@@ -13,4 +13,4 @@ CLEANBROKEN = "1"
+ 
+ PYPI_PACKAGE = "Flask"
+ 
+-RDEPENDS_${PN} = "${PYTHON_PN}-werkzeug ${PYTHON_PN}-werkzeug-tests ${PYTHON_PN}-jinja2 ${PYTHON_PN}-itsdangerous ${PYTHON_PN}-click"
++RDEPENDS_${PN} = "${PYTHON_PN}-werkzeug ${PYTHON_PN}-jinja2 ${PYTHON_PN}-itsdangerous ${PYTHON_PN}-click"
+-- 
+2.23.0
+
 
