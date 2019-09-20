@@ -1,52 +1,41 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
-	[209.85.215.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 328B07FE9E
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BE277FE2E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2019 01:28:50 +0000 (UTC)
-Received: by mail-pg1-f180.google.com with SMTP id h17so330965pgb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Sep 2019 18:28:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=E+mcimDmUhTMuVuHSNWEQGdV/9rsm+gx06sgJOYvP0w=;
-	b=N8Tx+C2V0AWStRBpOk9rgTVhyQJpKRHphmQfxTQdD38HU+IwmjmixjbSsaasfm6RRD
-	2uCRbL0W19s6PhAH3B9HyNjZpBZq5dSGhjqqjHtOi7goMhLS0KBgnFZC+PQNMQ1kHGxr
-	6opiwcW3hOJtOos7qaKZ9rdhVUEeUTXQO+J5V+xQHxkmVLaJKXfyvu3R1oOjKRky1l06
-	sP7fcee/8ZpBNhIYJZjG1qYzOzmgBwzxpFwsUEISvDOMe/xlf4tqlUAmqAkDhXAwHNvB
-	zkrhHtyw3xGtVP7vEAEWRxOWrBu6xAPniswOo6ZFF1bNoA4qFlpTA4LY8+q8P72HIxFY
-	lyFw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=E+mcimDmUhTMuVuHSNWEQGdV/9rsm+gx06sgJOYvP0w=;
-	b=KHl9yaBv4oB3n92dSKT3DEB6TBbejQFNKxlYQqLqQnl4LvzPeNIwrQRFczOCLdUHpD
-	DSrze5n4x/8vn+8NM6SfZkt8KTUlarFz3cFiVRfiKW7NmRPr0OBl0jb1j76tjIG0+wBc
-	9qFiJTQPRRWGgS3Z3Elpe8fUpy4vE9GvWVUXf/kpOvuInv2K3MQJINQn7hSWDAz5s1Wo
-	fG2qpEVnoQbWfZk6i60pMvmr4+8cGY9inZrwemSmSrNywzui+eDtzdHZ/MCSTUIHeWvo
-	aDZ+RWtLDhs0GUuPEd2Tky3yDeEjOYQI6tTz4mv/5w1d65Qy/St6BrBtI1fE9yhsUfI8
-	4diQ==
-X-Gm-Message-State: APjAAAXjKlYOi2LqrhTpxiY3rwmnFnEITINur/A2xmfGfnI5rok720hg
-	HMmG7HB8Iu01qDPvKIxRACPH652OJb4=
-X-Google-Smtp-Source: APXvYqwyYp44MY7DSG1Mt60lG28wGG05YabIQ7LG96KUOnTxZNQ2938MRDwGkfxWe9dEjbWjCqqaUQ==
-X-Received: by 2002:a63:3483:: with SMTP id
-	b125mr12007811pga.285.1568942930586; 
-	Thu, 19 Sep 2019 18:28:50 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3])
-	by smtp.gmail.com with ESMTPSA id u17sm220038pjn.7.2019.09.19.18.28.49
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 19 Sep 2019 18:28:50 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Sep 2019 18:28:35 -0700
-Message-Id: <20190920012835.1632438-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	Fri, 20 Sep 2019 06:36:05 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46ZP9w0yFjz4S;
+	Fri, 20 Sep 2019 08:36:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1568961364;
+	bh=oIJ2gyY0Na62yQFSXCQnguB7onQqD3Z8//aUyLDF+o8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=II2LSAnBBcP5a2hZgw7uXAWGIUlX/1MA701qqLN1mfc3d1FxqDiqleUPBvGnWuceh
+	B7sbVHaHFnFnpy/lHMVgXBnLfqjZ16WeP+htEbgBW+Wa0JCQ0FWsiTvJ9D5NOUlNte
+	4NjFYpJkOvwUitq5yfcnztscKJMBBiMpCpf/NjJXblyjrVB5ZrMU9WL96IkFlmyXcO
+	ct5/tSbAqigCuQQMFZavZ6ykr8TSCUau3L77WLx2Nk/WL3kxZCOGNlpl6bCCWOLOid
+	im25KUm4EklbTYvL7wjhOeIciibZ9y9KCqdVioBKB30NKH2tgEAi8lgQWdczi8v1z6
+	0OkIutFY5BnE9fQRjpZbwpq0YiGoBIJhUVZaQPhgBNITnGyGilKNmC9Hw9INoWl8ep
+	54R9e6IlhTp89mThVQHkABD0YQ1pRNu4XeSXSsVor6SCpe+W0DWJKyLtbj4aasjcol
+	ppf6qGy6KefD8yk4eBaTBPURoni6sBw8xN38L+NY7LcUN7ZTysnikwaO2XpnNYJiT/
+	lyyLTvGiUNLND+Sw1K3ieTBQbBjvi7L0H3Np/qj8ex7xjnjoNxAyCfz1UhOmt8tXAn
+	A07rsnNwjXpKYRjZRw/UHY2+2f4MytDEmUJ0/D8VqUNxbetoomSerVFddKkC/ysWDl
+	hgqno5TbDVT6xhoNzWkJQuKQ=
+Date: Fri, 20 Sep 2019 09:36:01 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Andreas =?utf-8?Q?M=C3=BCller?= <schnitzeltony@gmail.com>
+Message-ID: <20190920063600.GA8562@localhost>
+References: <20190817081339.22253-1-schnitzeltony@gmail.com>
+	<20190817111825.GA2828@localhost>
+	<CALbNGRSBQv22cpj+T+KBS-1oOhpUomXBN78FHhFw52=pGEOp9A@mail.gmail.com>
+	<efd5c05c-1275-8077-84e1-f17fff05f8f6@gmail.com>
+	<CALbNGRQnxLXFXoSkPxWnFZJHWWdDvVP_=i9-ybYOVGzirty6Uw@mail.gmail.com>
+	<CALbNGRSp+UH2gaBe5QdUTU4R4kui4ny8TbVnqEt442-0pA8onQ@mail.gmail.com>
 MIME-Version: 1.0
-Cc: cjhasu <sumit.jha420@gmail.com>
-Subject: [meta-python][PATCH] Remove "werkzeug-test" in RDEPENDS
+In-Reply-To: <CALbNGRSp+UH2gaBe5QdUTU4R4kui4ny8TbVnqEt442-0pA8onQ@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [warrior][PATCH 0/4] vlc adjustments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,29 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2019 01:28:50 -0000
+X-List-Received-Date: Fri, 20 Sep 2019 06:36:06 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-From: cjhasu <sumit.jha420@gmail.com>
+On Fri, Sep 20, 2019 at 03:14:04AM +0200, Andreas Müller wrote:
+> On Fri, Aug 30, 2019 at 10:51 AM Andreas Müller <schnitzeltony@gmail.com> wrote:
+> >
+> > On Thu, Aug 29, 2019 at 4:16 PM akuster808 <akuster808@gmail.com> wrote:
+> > > > Ping
+> > >
+> > > in stable/warrior-nmut for testing.
+> > >
+> > Thanks
+> >
+> Patch 3 was applied / 1,2,4 not. Shall I resend or is there a reason
+> not to apply them in warrior?
 
-werkzeug-test is not required for building "python3-flask".Hence it should be removed.And also there is no recipe for building werkzeug-test .Hence it is causing error for while building python3-flask.Please add this change ASAP
+2 and 4 (written by me) were not applied since I recommended against.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-python/recipes-devtools/python/python-flask.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Patch 1 I don't have an opinion about here, but Armin might have 
+misunderstood my comment as disapproval also for this one.
 
-diff --git a/meta-python/recipes-devtools/python/python-flask.inc b/meta-python/recipes-devtools/python/python-flask.inc
-index 66ad1a6e74..ffd783f3df 100644
---- a/meta-python/recipes-devtools/python/python-flask.inc
-+++ b/meta-python/recipes-devtools/python/python-flask.inc
-@@ -13,4 +13,4 @@ CLEANBROKEN = "1"
- 
- PYPI_PACKAGE = "Flask"
- 
--RDEPENDS_${PN} = "${PYTHON_PN}-werkzeug ${PYTHON_PN}-werkzeug-tests ${PYTHON_PN}-jinja2 ${PYTHON_PN}-itsdangerous ${PYTHON_PN}-click"
-+RDEPENDS_${PN} = "${PYTHON_PN}-werkzeug ${PYTHON_PN}-jinja2 ${PYTHON_PN}-itsdangerous ${PYTHON_PN}-click"
+> Andreas
+
+cu
+Adrian
+
 -- 
-2.23.0
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
