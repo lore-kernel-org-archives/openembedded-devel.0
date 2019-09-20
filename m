@@ -1,54 +1,54 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id C85157F9C1
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+	[209.85.128.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 33A867F8AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2019 09:05:36 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id k5so14514732iol.5
+	Fri, 20 Sep 2019 14:03:00 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id a6so2622768wma.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Sep 2019 02:05:38 -0700 (PDT)
+	Fri, 20 Sep 2019 07:03:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=m32vd1woqLPeDdkyeQlIAkDACE01REVfM3Qqpx/aF4Q=;
-	b=ZLouLpL1K4G6xv2Rve3Q6+BMQNFvlX9Cg8Tj+5EK/F3tVFKL6P19ymTQt4CzlkrdxM
-	JDABej7e7Q2txKQ8nnbfmK33s1/3L8PFLkR2Eql2byEHx3OQfNYK7+AP0NdYyhO7TvpE
-	v7bv17rXz4AzGV1lt+NWoGw4HmpoTLeGRWABeBMYtNueQMbBi38NNJYHFgExC2LW/K6P
-	9DKuTbZ6mbQkvznsLe2jo7HKnJGhcf23Ot8NyPX5andPjUoQf881NcCPY3mtjCom7jHY
-	CUdLponsJCrTGe6fttXzMT5tM4fSOsbIVcsDsea0mgMwa7iH3LmR87/1B2Y6YEXt00yF
-	tWUQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=61fnx9SWrZFFcUl+IEsmD3X+zSonBvYhMf0iFYMRy3o=;
+	b=B3SF416WdM8eJWOX0LE0L2IQLadnHqp/TCoBNcYlyeXNfMqXwmfggR9VJbOlj5YHux
+	j3YS+HolQH1Jgt1dmueGRTk/PzzHP6GvEcbJuDPIXFCnQYhMIa+w2z6IcbHxlfOjJ5oO
+	CkWdn2OWebfGnhjLERzj8zxXhSgHUpvAr3Jw8W2z2tAyfOo0iMpfyGJ4CGvuYO0jXO8I
+	w/meOpJ/fhoBGqfZvJzV9ixZ5FAuS+OhmEix2CcvyNK2kV3mUORnE6OFTl0o9VhC9KA8
+	PUar0IQ3F0Yc2isW8CI9S0yeQ2WWqvFknmDqEI+O6wE2gLh8WuunW82Llq8aE7LrJ5qt
+	STsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=m32vd1woqLPeDdkyeQlIAkDACE01REVfM3Qqpx/aF4Q=;
-	b=U+y1f9eFuMe38qYR7voFp5Jzzv9rIfKGa5wQzh0MS6yqaSNuKkOJvmYaJDpE2XMV1c
-	ZsIuVw+7pKjc2bRgCGuOINinXWSu3lu44uTErQTmfRFJipRKX5Iw7Vuhb04J/9DZKeY/
-	5zh7w14Abpvu6okc0y8/UfcS+uBYaCN13FmZzkJ1DIsT16L3iRPYpUVtlS7LYU1kXBXe
-	OgvIHCMzv8l5/FEaweL4LU4C+ZeXM3KPTdp2qtD4ngSBsvyAkN7BrhReQclqG9ugqGrx
-	uQzSAeKmThuUoC8Ium38D4CktLFfY1ee5esevEFUn3pTqcZFeBojmRby03Q8nX9wUfLp
-	8edg==
-X-Gm-Message-State: APjAAAXm8eEb0whnM/ttvi5XupWKk92x0kEu1qnyoDg5bI6VvJCzBWMp
-	N5sggAYIXWTvpzLdu2wA8jkyl6RZJNuljR/yakbfVYMZ
-X-Google-Smtp-Source: APXvYqzG9qmskBb9Qlh/z5X7BmnBEw8+v3x8ZP01ZSy0OiEhgsKPXSzP3Yjt6VFN5ZkZ0IQMyufCu9OlmHX2VI45IPg=
-X-Received: by 2002:a6b:8bd8:: with SMTP id
-	n207mr18066015iod.147.1568970337803; 
-	Fri, 20 Sep 2019 02:05:37 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190817081339.22253-1-schnitzeltony@gmail.com>
-	<20190817111825.GA2828@localhost>
-	<CALbNGRSBQv22cpj+T+KBS-1oOhpUomXBN78FHhFw52=pGEOp9A@mail.gmail.com>
-	<efd5c05c-1275-8077-84e1-f17fff05f8f6@gmail.com>
-	<CALbNGRQnxLXFXoSkPxWnFZJHWWdDvVP_=i9-ybYOVGzirty6Uw@mail.gmail.com>
-	<CALbNGRSp+UH2gaBe5QdUTU4R4kui4ny8TbVnqEt442-0pA8onQ@mail.gmail.com>
-	<20190920063600.GA8562@localhost>
-In-Reply-To: <20190920063600.GA8562@localhost>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 20 Sep 2019 11:05:26 +0200
-Message-ID: <CALbNGRRPQh6Ey9WR+Zpzu71V1bgHW3kksufq+sVvFRFui4VsFA@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [warrior][PATCH 0/4] vlc adjustments
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=61fnx9SWrZFFcUl+IEsmD3X+zSonBvYhMf0iFYMRy3o=;
+	b=OnUylxL2W58+bd2PLbFbr24fe+2gmLJqQyrYw1LWffRHRthrtuBE7rGXJcHH2IlVMW
+	3Ex4jNXoorLzQGCpQfhRM8LcgTeNWkSZfXw+tF07plCbsEbFLLDCaeJdvpYjlTsB7fP0
+	+ni53onAZS0WwnicBpfjdIB3ZFleRuatvX+Xw+d8isQcUSbUO9aqH2hS9GpS+QYYBL7y
+	GXLplAbYOBVF1r3pRMASfy97zLx+Cv78soZqa83hYU0fj3cjv/FpfYZ3qkNScawUygQm
+	dIm1AYD3b5a4ad4aGLSc5MZqf84NmSHixDNSde5U4+Np+9lMvFolL8d1dXIuGcfZFybm
+	tn3A==
+X-Gm-Message-State: APjAAAUOcSi41eORrzFEjn0qOdIxTUixn+5vdqUr2GYFs/9gM/YLMhA7
+	1wm4Fbf0rutvhee/osI7S8XWa5U5hhM=
+X-Google-Smtp-Source: APXvYqzwhSETBATq0FNdP2ektH9hP+w0zS2HhniKtU3XvJM2/lzZCuG9TkLn9t3qvFNQU4immqQJ6g==
+X-Received: by 2002:a1c:a54c:: with SMTP id o73mr3639446wme.68.1568988180436; 
+	Fri, 20 Sep 2019 07:03:00 -0700 (PDT)
+Received: from VM-VPR.corporate.saft.org ([80.215.101.3])
+	by smtp.gmail.com with ESMTPSA id
+	f186sm2338132wmg.21.2019.09.20.07.02.58
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 20 Sep 2019 07:02:59 -0700 (PDT)
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+X-Google-Original-From: Vincent Prince
+	<vincent.prince.external@saftbatteries.com>
+To: openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Date: Fri, 20 Sep 2019 16:02:39 +0200
+Message-Id: <1568988163-30013-1-git-send-email-vincent.prince.external@saftbatteries.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1568805952-19822-1-git-send-email-vincent.prince.external@saftbatteries.com>
+References: <1568805952-19822-1-git-send-email-vincent.prince.external@saftbatteries.com>
+Cc: Vincent Prince <vincent.prince.external@saftbatteries.com>
+Subject: [meta-oe] [PATCH v2 0/4] mongodb: bump to version 4.2.0+git18ce5c9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,38 +61,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Sep 2019 09:05:37 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 20 Sep 2019 14:03:00 -0000
 
-On Fri, Sep 20, 2019 at 8:36 AM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Fri, Sep 20, 2019 at 03:14:04AM +0200, Andreas M=C3=BCller wrote:
-> > On Fri, Aug 30, 2019 at 10:51 AM Andreas M=C3=BCller <schnitzeltony@gma=
-il.com> wrote:
-> > >
-> > > On Thu, Aug 29, 2019 at 4:16 PM akuster808 <akuster808@gmail.com> wro=
-te:
-> > > > > Ping
-> > > >
-> > > > in stable/warrior-nmut for testing.
-> > > >
-> > > Thanks
-> > >
-> > Patch 3 was applied / 1,2,4 not. Shall I resend or is there a reason
-> > not to apply them in warrior?
->
-> 2 and 4 (written by me) were not applied since I recommended against.
->
-> Patch 1 I don't have an opinion about here, but Armin might have
-> misunderstood my comment as disapproval also for this one.
->
-* OK let's forget 2 & 4
-* Patch 1 is important (for me):
-  1. Qt4 support is gone in vlc
-  2. Without Qt5 backend vlc is more or less useless
+This patch serie also adds some needed native python3 recipes:
+ - python3-psutil
+ - python3-cheetah
+ - python3-regex
 
-Cheers
+Vincent Prince (4):
+  python*-psutil: Add native and nativesdk to BBCLASSEXTEND
+  python3-cheetah: add recipe
+  python3-regex: add recipe
+  mongodb: bump to version 4.2.0+git18ce5c9
 
-Andreas
+ ...FPMathLib20U1-Check-for-__DEFINED_wchar_t.patch | 22 +++++----
+ ...001-Support-deprecated-resolver-functions.patch | 10 ++--
+ ...to-use-build-settings-from-environment-va.patch | 46 ++++++++---------
+ ...__-to-control-use-of-gnu_get_libc_version.patch | 29 ++++++-----
+ .../0001-Use-long-long-instead-of-int64_t.patch    | 26 +++++-----
+ ...001-asio-Dont-use-experimental-with-clang.patch | 29 +++++------
+ ...finition-for-the-macro-__ELF_NATIVE_CLASS.patch | 10 ++--
+ .../0002-Fix-default-stack-size-to-256K.patch      | 12 ++---
+ .../mongodb/0003-Fix-unknown-prefix-env.patch      | 19 ++++++++
+ .../mongodb/mongodb/0003-fix-musl-strerror_r.patch | 30 ++++++++++++
+ .../0004-wiredtiger-Disable-strtouq-on-musl.patch  | 15 +++---
+ .../mongodb/mongodb/arm64-support.patch            | 57 +++++++++++++---------
+ meta-oe/recipes-dbs/mongodb/mongodb_git.bb         | 22 +++++----
+ .../recipes-devtools/python/python-psutil.inc      |  2 +
+ .../python/python3-cheetah_3.2.3.bb                | 15 ++++++
+ .../python/python3-regex_2019.08.19.bb             | 12 +++++
+ 16 files changed, 225 insertions(+), 131 deletions(-)
+ create mode 100644 meta-oe/recipes-dbs/mongodb/mongodb/0003-Fix-unknown-prefix-env.patch
+ create mode 100644 meta-oe/recipes-dbs/mongodb/mongodb/0003-fix-musl-strerror_r.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-cheetah_3.2.3.bb
+ create mode 100755 meta-python/recipes-devtools/python/python3-regex_2019.08.19.bb
+
+-- 
+2.7.4
+
 
