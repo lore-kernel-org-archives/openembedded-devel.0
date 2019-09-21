@@ -1,47 +1,23 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id F39837F51D
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 322A87CFE9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Sep 2019 16:48:05 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id q17so9724284wrx.10
+	Sat, 21 Sep 2019 20:41:44 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x8LKfiQR005408
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Sep 2019 09:48:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=+SZaNDUuZsfs4fytK5FHUVRu4vaVoR35pnfGO2JGy68=;
-	b=Fl3W8YcCkOzH59CAxJo+PIgG+W45+GK9RpWbGXt56ABcXXm1m3alYpZCrVM0r4j+Bh
-	JRm0RGAqMA/3BLNBVQTPcSdKq6bQeHdtKrZLSzPpW+cTK1zd1VCUXPc1E/CKY/hzr2vW
-	aAwMobYScK2H0x+cKLK9PH1Ouz5St2qPk7exmC6D/FbxSs1qbAXyUFBAaS5phKX5He9q
-	Wzy88gnhlzqQUZPfJARLKYJH4O3CuX4nv/y7VrURkKWBX2t0NwihvNJwmemVZ7f0TSEn
-	CmD2YSArwVnEwwzlRFr/9y/laFx9UtSWG7He4Gl4N4BeoAOr+0Sr+Z2EWZb5WpptYQb/
-	dM7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+SZaNDUuZsfs4fytK5FHUVRu4vaVoR35pnfGO2JGy68=;
-	b=fcQp32bPCZy5Mpe8jo6jmznw8xfxaK4TAXvWBl/f5/WueE5IE+3UN5N1gTuc3d9axd
-	LncjqikbaAjAkMn8WLrRQAfAN9GvZ633z1w9FV0CqBTtICNPWe5kgpTv7r3Rr4+87pAY
-	hFhAz7GQ/jCHJl6tHw8OhZSrhFuFmygKweA5fD9mOXQRFkJdRtUY5R8viXwmRXTHJap8
-	QwBNzubh00JvPnmUtJmLNhUzLQfe2+WngqXaejjAVwB8T46tnkbPOFRKAL9M6rq/7J40
-	DyGYzDdQjtWcyZyLhGY+QMsVBkUbbi+8eeM5T33wOGlEr1wRGaQih+qEc8bZqQLLHif5
-	QT0A==
-X-Gm-Message-State: APjAAAWEi5+2P/LNU9txVwh2ypX0KynAsJ2b7hITAMmkjNRdi2NBvhht
-	ghhcyJdUATfuEiIDDZ7og5CJ1WMgfz0=
-X-Google-Smtp-Source: APXvYqwleO2og/mniKC9BwiZYWymGvtZT0R4VjdpimERGj+ADAceYqYJfI6YIAcabwCVyCTP2DyE6g==
-X-Received: by 2002:a5d:4d4f:: with SMTP id a15mr14302991wru.267.1569084486235;
-	Sat, 21 Sep 2019 09:48:06 -0700 (PDT)
-Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
-	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
-	s1sm11869236wrg.80.2019.09.21.09.48.05
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 21 Sep 2019 09:48:05 -0700 (PDT)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Sep 2019 17:48:03 +0100
-Message-Id: <20190921164803.57442-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v2] ostree: Add recipe
+	Sat, 21 Sep 2019 13:41:45 -0700 (PDT)
+Received: from fidler.wrs.com (172.25.44.5) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Sat, 21 Sep 2019 13:41:44 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sat, 21 Sep 2019 16:41:43 -0400
+Message-ID: <20190921204143.31098-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.22.0
+MIME-Version: 1.0
+Subject: [PATCH] rsyslog: update from 8.1907.0 to 8.1908.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,357 +30,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Sep 2019 16:48:06 -0000
+X-List-Received-Date: Sat, 21 Sep 2019 20:41:44 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Enable imfile-tests even if they take a while.
+
+ptest results for qemux86-64 with kvm and a timeout
+of 1000 seconds to allow stress tests to complete:
+
+Recipe           | Passed      | Failed   | Skipped   | Time(s)
+rsyslog-8.1907.0 | 365         | 4        | 2         | 2452
+rsyslog-8.1908.0 | 379         | 4        | 2         | 2538
+
+The failed tests for both 8.1907 and 8.1908 are:
+  FAIL: Test ./omfile-read-only-errmsg.sh (took 2 seconds)
+  FAIL: Test ./omfile-read-only.sh (took 2 seconds)
+  FAIL: Test ./privdropuser.sh (took 580 seconds)
+  FAIL: Test ./privdropuserid.sh (took 580 seconds)
+They are not fixed in this update.
+
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
+ .../rsyslog/{rsyslog_8.1907.0.bb => rsyslog_8.1908.0.bb}     | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1907.0.bb => rsyslog_8.1908.0.bb} (97%)
 
-Changes in v2:
-- override INTROSPECTION_SCANNER_ENV to allow gobject-introspection to build
-- don't enable rofiles-fuse by default to avoid bringing in meta-filesystems
-
- ...lways-enable-trivial-httpd-for-tests.patch |  59 +++++++
- ...cros-Add-TEMP_FAILURE_RETRY-for-musl.patch |  40 +++++
- ...vial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch |  51 ++++++
- .../recipes-extended/ostree/ostree_2019.3.bb  | 157 ++++++++++++++++++
- 4 files changed, 307 insertions(+)
- create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch
- create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch
- create mode 100644 meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
- create mode 100644 meta-oe/recipes-extended/ostree/ostree_2019.3.bb
-
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch b/meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch
-new file mode 100644
-index 000000000000..c9e1306afde0
---- /dev/null
-+++ b/meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch
-@@ -0,0 +1,59 @@
-+From 44e0647230b22cd136ae2fb252ce90eed4751970 Mon Sep 17 00:00:00 2001
-+From: Alex Kiernan <alex.kiernan@gmail.com>
-+Date: Wed, 4 Sep 2019 17:29:15 +0100
-+Subject: [PATCH 1/2] Always enable trivial-httpd for tests
-+
-+When running tests we always need ostree-trivial-httpd, so enable it
-+unconditionally
-+
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+Upstream-Status: Submitted [https://github.com/ostreedev/ostree/pull/1912]
-+---
-+ Makefile.am        | 1 +
-+ ci/build.sh        | 5 +++++
-+ ci/travis-build.sh | 1 +
-+ 3 files changed, 7 insertions(+)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index cd04a055045a..673dbf88de55 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -39,6 +39,7 @@ AM_DISTCHECK_CONFIGURE_FLAGS += \
-+ 	--enable-gtk-doc \
-+ 	--enable-man \
-+ 	--disable-maintainer-mode \
-++	--enable-trivial-httpd-cmdline \
-+ 	$(NULL)
-+ 
-+ GITIGNOREFILES = aclocal.m4 build-aux/ buildutil/*.m4 config.h.in gtk-doc.make
-+diff --git a/ci/build.sh b/ci/build.sh
-+index 0901507498f2..806af050b780 100755
-+--- a/ci/build.sh
-++++ b/ci/build.sh
-+@@ -22,6 +22,11 @@ case "${CONFIGOPTS:-}" in
-+         fi
-+         ;;
-+ esac
-++# unless libsoup is disabled, enable trivial-httpd for the tests
-++case "${CONFIGOPTS:-}" in
-++    *--without-soup*) ;;
-++    *) CONFIGOPTS="${CONFIGOPTS:-} --enable-trivial-httpd-cmdline" ;;
-++esac
-+ 
-+ # always fail on warnings; https://github.com/ostreedev/ostree/pull/971
-+ # NB: this disables the default set of flags from configure.ac
-+diff --git a/ci/travis-build.sh b/ci/travis-build.sh
-+index 3fd969bdced6..7c85313a2d32 100755
-+--- a/ci/travis-build.sh
-++++ b/ci/travis-build.sh
-+@@ -85,6 +85,7 @@ make="make -j${ci_parallel} V=1 VERBOSE=1"
-+ 
-+ ../configure \
-+     --enable-always-build-tests \
-++    --enable-trivial-httpd-cmdline \
-+     ${ci_configopts}
-+     "$@"
-+ 
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch b/meta-oe/recipes-extended/ostree/ostree/0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch
-new file mode 100644
-index 000000000000..d8c044cb9224
---- /dev/null
-+++ b/meta-oe/recipes-extended/ostree/ostree/0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch
-@@ -0,0 +1,40 @@
-+From 5a4f2ddb0a6c656b425a3caa41f5af766ed5f44b Mon Sep 17 00:00:00 2001
-+From: Alex Kiernan <alex.kiernan@gmail.com>
-+Date: Mon, 9 Sep 2019 14:19:18 +0100
-+Subject: [PATCH] macros: Add TEMP_FAILURE_RETRY for musl
-+
-+TEMP_FAILURE_RETRY is glibc specific, add a definition for musl.
-+
-+See https://github.com/ostreedev/ostree/issues/731
-+
-+Signed-off-by: Leon Woestenberg <leon@sidebranch.com>
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+Upstream-Status: Accepted [https://gitlab.gnome.org/GNOME/libglnx/commit/15c06468804014fc49f6f340132930703f919b19]
-+---
-+ glnx-macros.h | 10 ++++++++++
-+ 1 file changed, 10 insertions(+)
-+
-+diff --git a/libglnx.glnx-macros.h b/libglnx/glnx-macros.h
-+index 6d8aca93f8a3..700fc75ceed0 100644
-+--- a/libglnx.glnx-macros.h
-++++ b/libglnx/glnx-macros.h
-+@@ -31,6 +31,16 @@ G_BEGIN_DECLS
-+ /* All of these are for C only. */
-+ #ifndef __GI_SCANNER__
-+ 
-++/* fixes builds against musl, taken from glibc unistd.h */
-++#ifndef TEMP_FAILURE_RETRY
-++#define TEMP_FAILURE_RETRY(expression) \
-++  (__extension__                                                              \
-++    ({ long int __result;                                                     \
-++       do __result = (long int) (expression);                                 \
-++       while (__result == -1L && errno == EINTR);                             \
-++       __result; }))
-++#endif
-++
-+ /* Taken from https://github.com/systemd/systemd/src/basic/string-util.h
-+  * at revision v228-666-gcf6c8c4
-+  */
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch b/meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
-new file mode 100644
-index 000000000000..362b2f36ab51
---- /dev/null
-+++ b/meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
-@@ -0,0 +1,51 @@
-+From 2629328b39ae117876f4854409c2231220a30b9c Mon Sep 17 00:00:00 2001
-+From: Alex Kiernan <alex.kiernan@gmail.com>
-+Date: Thu, 5 Sep 2019 13:22:15 +0100
-+Subject: [PATCH 2/2] Gate ostree-trivial-httpd on BUILDOPT_TRIVIAL_HTTPD
-+
-+When building without --enable-trivial-httpd-cmdline, don't build or install
-+the ostree-trivial-httpd binary.
-+
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+Upstream-Status: Submitted [https://github.com/ostreedev/ostree/pull/1912]
-+---
-+ Makefile-ostree.am | 3 ++-
-+ configure.ac       | 3 +++
-+ 2 files changed, 5 insertions(+), 1 deletion(-)
-+
-+diff --git a/Makefile-ostree.am b/Makefile-ostree.am
-+index 76f39cad4b74..7b53cb148960 100644
-+--- a/Makefile-ostree.am
-++++ b/Makefile-ostree.am
-+@@ -143,12 +143,13 @@ ostree_SOURCES += src/ostree/ot-builtin-pull.c
-+ endif
-+ 
-+ if USE_LIBSOUP
-+-# Eventually once we stop things from using this, we should support disabling this
-++if BUILDOPT_TRIVIAL_HTTPD
-+ ostree_SOURCES += src/ostree/ot-builtin-trivial-httpd.c
-+ pkglibexec_PROGRAMS += ostree-trivial-httpd
-+ ostree_trivial_httpd_SOURCES = src/ostree/ostree-trivial-httpd.c
-+ ostree_trivial_httpd_CFLAGS = $(ostree_bin_shared_cflags) $(OT_INTERNAL_SOUP_CFLAGS)
-+ ostree_trivial_httpd_LDADD = $(ostree_bin_shared_ldadd) $(OT_INTERNAL_SOUP_LIBS)
-++endif
-+ 
-+ if !USE_CURL
-+ # This is necessary for the cookie jar bits
-+diff --git a/configure.ac b/configure.ac
-+index 069bab01752e..ffc67980d507 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -192,6 +192,9 @@ AC_ARG_ENABLE(trivial-httpd-cmdline,
-+   [Continue to support "ostree trivial-httpd" [default=no]])],,
-+   enable_trivial_httpd_cmdline=no)
-+ AM_CONDITIONAL(BUILDOPT_TRIVIAL_HTTPD, test x$enable_trivial_httpd_cmdline = xyes)
-++AS_IF([test x$with_soup = xno && test x$enable_trivial_httpd_cmdline = xyes], [
-++  AC_MSG_ERROR([trivial-httpd enabled, but libsoup is not; libsoup is needed for trivial-httpd])
-++])
-+ AM_COND_IF(BUILDOPT_TRIVIAL_HTTPD,
-+   [AC_DEFINE([BUILDOPT_ENABLE_TRIVIAL_HTTPD_CMDLINE], 1, [Define if we are enabling ostree trivial-httpd entrypoint])]
-+ )
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.3.bb b/meta-oe/recipes-extended/ostree/ostree_2019.3.bb
-new file mode 100644
-index 000000000000..52a2f1298d7b
---- /dev/null
-+++ b/meta-oe/recipes-extended/ostree/ostree_2019.3.bb
-@@ -0,0 +1,157 @@
-+SUMMARY = "Versioned Operating System Repository."
-+DESCRIPTION = "libostree is both a shared library and suite of command line \
-+tools that combines a \"git-like\" model for committing and downloading \
-+bootable filesystem trees, along with a layer for deploying them and managing \
-+the bootloader configuration."
-+HOMEPAGE = "https://ostree.readthedocs.io"
-+LICENSE = "LGPLv2.1"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
-+
-+DEPENDS = " \
-+    glib-2.0 \
-+    gpgme \
-+    e2fsprogs \
-+    libcap \
-+    zlib \
-+    xz \
-+    bison-native \
-+"
-+
-+# The Yocto mirror has an old export of ostree:
-+# http://downloads.yoctoproject.org/mirror/sources/git2_github.com.ostreedev.ostree.tar.gz
-+PREMIRRORS = ""
-+
-+SRC_URI = " \
-+    gitsm://github.com/ostreedev/ostree \
-+    file://0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch \
-+    file://0001-Always-enable-trivial-httpd-for-tests.patch \
-+    file://0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch \
-+"
-+SRCREV = "5c1697da78ebf6250a7130b8b9e6cbfbeaa34296"
-+
-+UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools bash-completion gobject-introspection gtk-doc pkgconfig systemd
-+
-+# package configuration - match ostree defaults, but without rofiles-fuse
-+# otherwise we introduce a dependendency on meta-filesystems
-+PACKAGECONFIG ??= " \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
-+    soup \
-+"
-+
-+# We include soup because ostree can't (currently) be built without
-+# soup or curl - https://github.com/ostreedev/ostree/issues/1897
-+PACKAGECONFIG_class-native ??= " \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
-+    soup \
-+"
-+
-+PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
-+PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
-+PACKAGECONFIG[dracut] = "--with-dracut, --without-dracut"
-+PACKAGECONFIG[gnutls] = "--with-crypto=gnutls, , gnutls"
-+PACKAGECONFIG[libarchive] = "--with-libarchive, --without-libarchive, libarchive"
-+PACKAGECONFIG[libmount] = "--with-libmount, --without-libmount, util-linux"
-+PACKAGECONFIG[man] = "--enable-man, --disable-man, libxslt-native docbook-xsl-stylesheets-native"
-+PACKAGECONFIG[mkinitcpio] = "--with-mkinitcpio, --without-mkinitcpio"
-+PACKAGECONFIG[no-http2] = "--disable-http2, --enable-http2"
-+PACKAGECONFIG[openssl] = "--with-crypto=openssl, , openssl"
-+PACKAGECONFIG[rofiles-fuse] = "--enable-rofiles-fuse, --disable-rofiles-fuse, fuse"
-+PACKAGECONFIG[selinux] = "--with-selinux, --without-selinux, libselinux"
-+PACKAGECONFIG[smack] = "--with-smack, --without-smack, smack"
-+PACKAGECONFIG[soup] = "--with-soup, --without-soup --disable-glibtest, libsoup-2.4"
-+PACKAGECONFIG[static] = ""
-+PACKAGECONFIG[systemd] = "--with-libsystemd --with-systemdsystemunitdir=${systemd_unitdir}/system, --without-libsystemd, systemd"
-+PACKAGECONFIG[trivial-httpd-cmdline] = "--enable-trivial-httpd-cmdline, --disable-trivial-httpd-cmdline"
-+
-+EXTRA_OECONF = " \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'static', '--with-static-compiler=\'${CC} ${CFLAGS} ${CPPFLAGS} ${LDFLAGS}\'', '', d)} \
-+"
-+
-+# Makefile-libostree.am overrides this to avoid a build problem with clang,
-+# but that fix breaks cross compilation and we don't need it
-+EXTRA_OEMAKE = " \
-+    INTROSPECTION_SCANNER_ENV= \
-+"
-+
-+EXTRA_OECONF_class-native = " \
-+    --with-builtin-grub2-mkconfig \
-+    --enable-wrpseudo-compat \
-+    --disable-otmpfile \
-+"
-+
-+# Path to ${prefix}/lib/ostree/ostree-grub-generator is hardcoded on the
-+# do_configure stage so we do depend on it
-+SYSROOT_DIR = "${STAGING_DIR_TARGET}"
-+SYSROOT_DIR_class-native = "${STAGING_DIR_NATIVE}"
-+do_configure[vardeps] += "SYSROOT_DIR"
-+
-+do_configure_prepend() {
-+    # this reflects what autogen.sh does, but the OE wrappers for autoreconf
-+    # allow it to work without the other gyrations which exist there
-+    cp ${S}/libglnx/Makefile-libglnx.am ${S}/libglnx/Makefile-libglnx.am.inc
-+    cp ${S}/bsdiff/Makefile-bsdiff.am ${S}/bsdiff/Makefile-bsdiff.am.inc
-+}
-+
-+do_install_append_class-native() {
-+    create_wrapper ${D}${bindir}/ostree OSTREE_GRUB2_EXEC="${STAGING_LIBDIR_NATIVE}/ostree/ostree-grub-generator"
-+}
-+
-+PACKAGES += " \
-+    ${PN}-dracut \
-+    ${PN}-grub \
-+    ${PN}-mkinitcpio \
-+    ${PN}-switchroot \
-+"
-+
-+FILES_${PN} = " \
-+    ${bindir}/ostree \
-+    ${bindir}/rofiles-fuse \
-+    ${datadir}/${BPN} \
-+    ${datadir}/gir-1.0 \
-+    ${libdir}/${BPN}/ostree-remount \
-+    ${libdir}/girepository-1.0 \
-+    ${libdir}/lib*${SOLIBS} \
-+    ${libdir}/tmpfiles.d/ostree-tmpfiles.conf \
-+    ${libexecdir}/libostree/ostree-trivial-httpd \
-+    ${sysconfdir}/ostree/remotes.d \
-+    ${systemd_unitdir}/system-generators/ostree-system-generator \
-+    ${systemd_unitdir}/system/ostree-finalize-staged.path \
-+    ${systemd_unitdir}/system/ostree-finalize-staged.service \
-+    ${systemd_unitdir}/system/ostree-remount.service \
-+"
-+FILES_${PN}-dracut = " \
-+    ${sysconfdir}/dracut.conf.d \
-+    ${libdir}/dracut \
-+"
-+FILES_${PN}-grub = " \
-+    ${sysconfdir}/grub.d \
-+    ${libexecdir}/libostree/grub2-15_ostree \
-+"
-+FILES_${PN}-mkinitcpio = " \
-+    ${sysconfdir}/ostree-mkinitcpio.conf \
-+    ${libdir}/initcpio \
-+"
-+FILES_${PN}-switchroot = " \
-+    ${libdir}/ostree/ostree-prepare-root \
-+    ${libdir}/systemd/system/ostree-prepare-root.service \
-+"
-+
-+RDEPENDS_${PN}-dracut = "bash"
-+RDEPENDS_${PN}-mkinitcpio = "bash"
-+RDEPENDS_${PN}_class-target = " \
-+    gnupg \
-+    ${PN}-switchroot \
-+"
-+
-+RRECOMMENDS_${PN} += "kernel-module-overlay"
-+
-+SYSTEMD_SERVICE_${PN} = "ostree-remount.service ostree-finalize-staged.path"
-+SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1907.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
+similarity index 97%
+rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.1907.0.bb
+rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
+index 4092833fc..bbb4b119a 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1907.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
+@@ -29,8 +29,8 @@ SRC_URI_append_libc-musl = " \
+     file://0001-Include-sys-time-h.patch \
+ "
+ 
+-SRC_URI[md5sum] = "97682af2b1d87f903458cfb41725fba6"
+-SRC_URI[sha256sum] = "eb27535ece93174ef6b551c88467d2c9cd826b62479625bb881a53d50b079fb5"
++SRC_URI[md5sum] = "6e9aa4ef4cad8ae49affa0a786cc9e2f"
++SRC_URI[sha256sum] = "f8c8e53b651e03a011667c60bd2d4dba7a7cb6ec04b247c8ea8514115527863b"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+@@ -38,6 +38,7 @@ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+ inherit autotools pkgconfig systemd update-rc.d ptest
+ 
+ EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
++EXTRA_OECONF += "--enable-imfile-tests"
+ 
+ # first line is default yes in configure
+ PACKAGECONFIG ??= " \
 -- 
-2.17.1
+2.22.0
 
 
