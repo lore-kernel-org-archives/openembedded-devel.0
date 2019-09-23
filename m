@@ -1,23 +1,30 @@
-Return-Path: <naveen.kumar.saini@intel.com>
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-	by mail.openembedded.org (Postfix) with ESMTP id 07B817CDC0
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 86D8F7CDAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 02:15:40 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	22 Sep 2019 19:15:42 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,538,1559545200"; d="scan'208";a="389327123"
-Received: from saininav-desk1.png.intel.com ([172.30.199.130])
-	by fmsmga006.fm.intel.com with ESMTP; 22 Sep 2019 19:15:41 -0700
-From: Naveen Saini <naveen.kumar.saini@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Sep 2019 10:18:32 +0800
-Message-Id: <20190923021832.6859-1-naveen.kumar.saini@intel.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] rrdtool: suppress appending of installation to perllocal.pod
+	Mon, 23 Sep 2019 02:39:19 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,538,1559491200"; d="scan'208";a="75867312"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 23 Sep 2019 10:39:19 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id B8E8D4CE14E8
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Sep 2019 10:39:19 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 23 Sep 2019 10:39:23 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 23 Sep 2019 10:39:10 +0800
+Message-ID: <20190923023910.774-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: B8E8D4CE14E8.ABE32
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-alembic: upgrade 1.1.0 -> 1.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,44 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 02:15:41 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 02:39:20 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-perl modules when gets installed can produce a perllocal.pod
-file for documenting a list of locally installed perl modules.
-This can conflict if multiple packages generate the file.
-
-Hits the conflict with apparmor & rrdtool packages.
-Error: Transaction check error:
-  file /usr/lib/perl5/5.30.0/x86_64-linux/perllocal.pod conflicts between attempted installs of rrdtool-1.7.2-r0.corei7_64 and apparmor-2.13.3-r0.corei7_64
-
-perllocal.pod files are for documentation purpose, so
-disabling does not harm. Generating perllocal.pod for perl
-module is disabled by passing NO_PERLLOCAL=1
-with ExtUtils::MakeMaker utility.
-
-https://perldoc.perl.org/5.30.0/ExtUtils/MakeMaker.html#Using-Attributes-and-Parameters
-
-[YOCTO #13491]
-
-Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-alembic.inc        | 4 ++--
+ .../{python-alembic_1.1.0.bb => python-alembic_1.2.0.bb}      | 0
+ .../{python3-alembic_1.1.0.bb => python3-alembic_1.2.0.bb}    | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-alembic_1.1.0.bb => python-alembic_1.2.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-alembic_1.1.0.bb => python3-alembic_1.2.0.bb} (100%)
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-index 1962a2dd4..b39ceda80 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-@@ -32,7 +32,7 @@ am_cv_python_pyexecdir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packag
- --disable-python,python,"
+diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
+index 7d11045ad..8c917e310 100644
+--- a/meta-python/recipes-devtools/python/python-alembic.inc
++++ b/meta-python/recipes-devtools/python/python-alembic.inc
+@@ -2,8 +2,8 @@ DESCRIPTION = "A database migration tool for SQLAlchemy"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=28aaf14a6592d14dbfb2f4abd597aa27"
  
- PACKAGECONFIG[perl] = \
--"--enable-perl=yes --with-perl-options='INSTALLDIRS="vendor" CCFLAGS="${CFLAGS}" NO_PACKLIST=1' \
-+"--enable-perl=yes --with-perl-options='INSTALLDIRS="vendor" CCFLAGS="${CFLAGS}" NO_PACKLIST=1 NO_PERLLOCAL=1' \
- ac_cv_path_PERL_CC='${CC}',  \
- --disable-perl,perl,"
+-SRC_URI[md5sum] = "69fb6b25923d4f1e3c392447b342e358"
+-SRC_URI[sha256sum] = "4a4811119efbdc5259d1f4c8f6de977b36ad3bcc919f59a29c2960c5ef9149e4"
++SRC_URI[md5sum] = "7cdba960544ecb59fd74e6433d82036c"
++SRC_URI[sha256sum] = "5609afbb2ab142a991b15ae436347c475f8a517f1610f2fd1b09cdca7c311f3f"
  
+ PYPI_PACKAGE = "alembic"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-alembic_1.1.0.bb b/meta-python/recipes-devtools/python/python-alembic_1.2.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-alembic_1.1.0.bb
+rename to meta-python/recipes-devtools/python/python-alembic_1.2.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.1.0.bb b/meta-python/recipes-devtools/python/python3-alembic_1.2.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-alembic_1.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-alembic_1.2.0.bb
 -- 
-2.17.1
+2.20.1
+
+
 
 
