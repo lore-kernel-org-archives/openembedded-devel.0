@@ -1,50 +1,55 @@
 Return-Path: <brgl@bgdev.pl>
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E21BB7D714
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A27E7E4FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 16:33:34 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id c6so21795552ioo.13
+	Mon, 23 Sep 2019 16:47:25 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id p7so10793436wmp.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 09:33:36 -0700 (PDT)
+	Mon, 23 Sep 2019 09:47:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=muWbDA5GtT0NroEn5BEUSate34x+C//m1HTcdsJjL8Y=;
-	b=JSNnEvucEUGmuakTa+x46z0wHUaBnYzz4cNgkE0Ub8rN2jZWt/kin6P1Aq2+I0AEsB
-	hYeDx/pQSPLgR9mqiZTLNk1BVpNihSIjfULRRt6C2fw69v7C1bdowg5IwlKr8sPuDI57
-	kgrNzSRLsIloypFo4bZEqCQBD2IEpdn0mALgTKtETrRB1ndN2WUqPRnX1seBXpL0gl5n
-	p74kf3Tz30/3vPqLvjT6ih11suCc6Hpu2YcqnJ9g0aef8g72PDD7O2IWSUgUP89i0Bdk
-	7mxdPa3hi+E21jZAhO/f28NoFf0eCeyfRe1iShVzItrcRJQiAaK0rMNPqv/ZoXuBYsyV
-	6ZjA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=I0wYPIHER28NUx3rHidUA5i1Z0JTXrnuYeVrKjVxOLo=;
+	b=vSXaxCBHHfL7Aph5T2pHlW95PN8vRw99PB1seDnWVP/br62EufbcnvnP494HefGEL8
+	1hG9ylvTvyaWa0hAemtjMHMudyNXbXrBdUXX1AqCKNBe4FV5XgclPViIvtMk3JeJ9KUE
+	yC8wj/yjFpsv/k5MWXOmjsH5Kq28iioIielIx2JpkXFFDzuU/XP0F4/byCFHntF0aplf
+	wPwv+c8hQdWm9pmRAwASzrWhkvJPkqR/rnY7agFwAcK20+5sOS9pkDmad4OrgcAgsUS/
+	cyX4j643GiTFcB1hp/GVdE70wHl/E/K1dHcGYeARf2q7fWJGpCID6tHB0yr5LeCz702W
+	BeBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=muWbDA5GtT0NroEn5BEUSate34x+C//m1HTcdsJjL8Y=;
-	b=YlUhvcLfNTG2SA2f72nwf/Eos6K9HLRnHlViKHJkwpqre+z8Mj4jreqddIEvuE1ySF
-	qopFzD+ufn61oXPIL20T16eRfMS67zH/vmQ9FFKfQpdYa17Bc31h7ADyV2ZerxTBUcda
-	qSoDhIVl4vMYY7t/9tHNRZo2rXA8sNa1dVK46q/h9Gwxda3VNR9dutFt0d+HBv41n0Bx
-	KPCRYxsX9hVVrNo4X93Xmn0T7s3XBUME8DkbNwWQU2uDRIkuYeTqnCdE2aDNAwxCHY6o
-	2FcScxr+LtES63sTwzIpLpqdNHy0dkj6XZ5uBi98gkiZ4bGq1N7U6eM/UrxICWX/Aa4V
-	lIfg==
-X-Gm-Message-State: APjAAAUE7T01P5N/H473GBS1YZn42ghRC2rtFQ/yjPpo/jYu2+Bu7kwV
-	LYvytUCm5ahgWLonzZ77YqW58ZCKECLPk13Zul41kA==
-X-Google-Smtp-Source: APXvYqw9vZXpHAQCCAnfQeQi+B05LHOoWX+vqAl6o8VNf+18WBiivCqLQhbcaP9APs7RQ/puandjVH87GTFUftf/65U=
-X-Received: by 2002:a02:7b0d:: with SMTP id q13mr278775jac.114.1569256415719; 
-	Mon, 23 Sep 2019 09:33:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190923155811.25526-1-brgl@bgdev.pl>
-	<CAMKF1srDtyMHk9bCNDDg6GEeHJ-Gf_kWopJ2ZoTqK3Y4CADtkg@mail.gmail.com>
-In-Reply-To: <CAMKF1srDtyMHk9bCNDDg6GEeHJ-Gf_kWopJ2ZoTqK3Y4CADtkg@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=I0wYPIHER28NUx3rHidUA5i1Z0JTXrnuYeVrKjVxOLo=;
+	b=JqFAUvGdeU0+Ipl3yzz+OceyQfcV4BCfdVYYeb+vm3ZnnfiG3NDlVk8oEabDw4Nncu
+	FJy8JDp+XQiSltgRbDdr2ESIwMyV8PtTR85wLqdsr9PMX/4w9EdW9tiWfhXmkWnud7HN
+	ciu885tM8TUyr02LebtUoGcWBKOZyKaA8yh9aZjbq6sfjbvyw2CRjGMg2yu45HEBmRgP
+	qsRQt5ARHiWWgei8nZyxmVHDiJkPzNoACf5RAKy65hTdbQQKt2qa2Kh7UZJ5PjxgmQkt
+	52FridsreF635c0YubliseuoVa2N3+oZT7hHt/ANJ6OR0LYBQR0R/RU/N2o6ifMG+9At
+	WMDw==
+X-Gm-Message-State: APjAAAX4STEwGzmZ/LFRMJmJnkRoCgsk6A7+3/QMYHK1sXvoOiaVv2sY
+	fk8HiWN2U6PR9ftR7V4Dw8ooEw==
+X-Google-Smtp-Source: APXvYqyEWzUcdbbq1FpXRJtKwlGMNXL9ofHevcnvEjWUEC1DvMHJAxR9W3+RqnT/9Kwz6Am1Ega3aQ==
+X-Received: by 2002:a05:600c:389:: with SMTP id
+	w9mr401312wmd.139.1569257246044; 
+	Mon, 23 Sep 2019 09:47:26 -0700 (PDT)
+Received: from debian-brgl.home (lfbn-1-7087-108.w90-116.abo.wanadoo.fr.
+	[90.116.255.108]) by smtp.gmail.com with ESMTPSA id
+	g185sm22269249wme.10.2019.09.23.09.47.24
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 23 Sep 2019 09:47:25 -0700 (PDT)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Mon, 23 Sep 2019 18:33:24 +0200
-Message-ID: <CAMRc=MdnBN9Qo3mSqid9QSOtsZh_zOYzjnwaUVoM7ZvKrJ4p=g@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>, Tim Orling <TicoTimo@gmail.com>,
+	Derek Straka <derek@asterius.io>
+Date: Mon, 23 Sep 2019 18:47:22 +0200
+Message-Id: <20190923164722.24650-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
 Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH v2] python3-dtschema: new package
+	openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH v3] python3-dtschema: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,75 +62,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 16:33:35 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 23 Sep 2019 16:47:25 -0000
+Content-Transfer-Encoding: 8bit
 
-pon., 23 wrz 2019 o 18:25 Khem Raj <raj.khem@gmail.com> napisa=C5=82(a):
->
->
->
-> On Mon, Sep 23, 2019 at 8:58 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote=
-:
->>
->> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->>
->> This adds a recipe for dtschema package developed by Rob Herring for
->> easy validation of YAML device-tree files in the linux kernel.
->>
->> The version is current git as the only release so far - v0.1 - is old
->> and doesn't work with kernel's dt_binding_check make target.
->>
->> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->> ---
->> v1 -> v2:
->> - added PV
->>
->> Note: I'm already seeing patch 1/2 from v1 of this series in master-next
->> so I'm only resending this one.
->>
->>  .../python/python3-dt-schema_git.bb               | 15 +++++++++++++++
->>  1 file changed, 15 insertions(+)
->>  create mode 100644 meta-python/recipes-devtools/python/python3-dt-schem=
-a_git.bb
->>
->> diff --git a/meta-python/recipes-devtools/python/python3-dt-schema_git.b=
-b b/meta-python/recipes-devtools/python/python3-dt-schema_git.bb
->> new file mode 100644
->> index 000000000..831b8fb8d
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-dt-schema_git.bb
->> @@ -0,0 +1,15 @@
->> +SUMMARY =3D "Tooling for devicetree validation using YAML and jsonschem=
-a"
->> +AUTHOR =3D "Rob Herring"
->> +
->> +LICENSE =3D "BSD-2-Clause"
->> +LIC_FILES_CHKSUM =3D "file://setup.py;beginline=3D2;endline=3D3;md5=3Dc=
-795d4924c5f739424fa8d9b569c6659"
->> +
->> +inherit setuptools3
->> +
->> +SRC_URI =3D "git://github.com/robherring/dt-schema.git"
->> +SRCREV =3D "5009e47c1c76e48871f5988e08dad61f3c91196b"
->> +PV =3D "0.1+git${SRCREV}"
->
->
-> It should be SRCPV
->>
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Sorry, my bad.
+This adds a recipe for dtschema package developed by Rob Herring for
+easy validation of YAML device-tree files in the linux kernel.
 
-Resending v3.
+The version is current git as the only release so far - v0.1 - is old
+and doesn't work with kernel's dt_binding_check make target.
 
-Bart
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+---
+v1 -> v2:
+- added PV
 
->>
->> +
->> +S =3D "${WORKDIR}/git"
->> +
->> +RDEPENDS_${PN} =3D "python3-jsonschema python3-ruamel-yaml"
->> --
->> 2.23.0
->>
+v2 -> v3:
+- fixed PV: used SRCPV instead of SRCREV
+
+Note: I'm already seeing patch 1/2 from v1 of this series in master-next
+so I'm only resending this one.
+
+ .../python/python3-dt-schema_git.bb               | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-dt-schema_git.bb
+
+diff --git a/meta-python/recipes-devtools/python/python3-dt-schema_git.bb b/meta-python/recipes-devtools/python/python3-dt-schema_git.bb
+new file mode 100644
+index 000000000..06a9012ca
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-dt-schema_git.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Tooling for devicetree validation using YAML and jsonschema"
++AUTHOR = "Rob Herring"
++
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=2;endline=3;md5=c795d4924c5f739424fa8d9b569c6659"
++
++inherit setuptools3
++
++SRC_URI = "git://github.com/robherring/dt-schema.git"
++SRCREV = "5009e47c1c76e48871f5988e08dad61f3c91196b"
++PV = "0.1+git${SRCPV}"
++
++S = "${WORKDIR}/git"
++
++RDEPENDS_${PN} = "python3-jsonschema python3-ruamel-yaml"
+-- 
+2.23.0
+
 
