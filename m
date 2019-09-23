@@ -1,55 +1,49 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A27E7E4FE
+Return-Path: <rehsack@gmail.com>
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AD7D7DDA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 16:47:25 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id p7so10793436wmp.4
+	Mon, 23 Sep 2019 17:27:09 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id v38so13649270edm.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 09:47:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=I0wYPIHER28NUx3rHidUA5i1Z0JTXrnuYeVrKjVxOLo=;
-	b=vSXaxCBHHfL7Aph5T2pHlW95PN8vRw99PB1seDnWVP/br62EufbcnvnP494HefGEL8
-	1hG9ylvTvyaWa0hAemtjMHMudyNXbXrBdUXX1AqCKNBe4FV5XgclPViIvtMk3JeJ9KUE
-	yC8wj/yjFpsv/k5MWXOmjsH5Kq28iioIielIx2JpkXFFDzuU/XP0F4/byCFHntF0aplf
-	wPwv+c8hQdWm9pmRAwASzrWhkvJPkqR/rnY7agFwAcK20+5sOS9pkDmad4OrgcAgsUS/
-	cyX4j643GiTFcB1hp/GVdE70wHl/E/K1dHcGYeARf2q7fWJGpCID6tHB0yr5LeCz702W
-	BeBA==
+	Mon, 23 Sep 2019 10:27:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=PM1aeE5dvKZKCnMnZl9ZTcsfe0Hh6Vjzdqz7uMRZMeo=;
+	b=Z7GZOwbDC7drd2ks92LJ50xwyZjm5421GPw4zMrZ+3bC291erFWP/dnGUcn/5fWnb0
+	r5v6+2EHW+GON5Rt86ZAKOnpcgrhTLIXD2DRx4s155WA0MCxbKPVUSvP6JwmFzWVUBBq
+	sgqthbQU7g+sMU8iyhR50LTsoaf5Mcf5yBQ5zYXy3ps2wOyxsku1hHTXT6apC+MeWjkp
+	1gqKYgGCcg4KwzGqrlVFmoQiP8fpTxpRQlDowmia9tpYqEZjtPHlSreL6+0H/zeekZz5
+	GRX1dwy3BR1RcQYIoUr/H+jxJUBUFqE16SptZ93gZOSRCz0Dr8lfH8rzRrLmnPOVrVdf
+	0Vaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=I0wYPIHER28NUx3rHidUA5i1Z0JTXrnuYeVrKjVxOLo=;
-	b=JqFAUvGdeU0+Ipl3yzz+OceyQfcV4BCfdVYYeb+vm3ZnnfiG3NDlVk8oEabDw4Nncu
-	FJy8JDp+XQiSltgRbDdr2ESIwMyV8PtTR85wLqdsr9PMX/4w9EdW9tiWfhXmkWnud7HN
-	ciu885tM8TUyr02LebtUoGcWBKOZyKaA8yh9aZjbq6sfjbvyw2CRjGMg2yu45HEBmRgP
-	qsRQt5ARHiWWgei8nZyxmVHDiJkPzNoACf5RAKy65hTdbQQKt2qa2Kh7UZJ5PjxgmQkt
-	52FridsreF635c0YubliseuoVa2N3+oZT7hHt/ANJ6OR0LYBQR0R/RU/N2o6ifMG+9At
-	WMDw==
-X-Gm-Message-State: APjAAAX4STEwGzmZ/LFRMJmJnkRoCgsk6A7+3/QMYHK1sXvoOiaVv2sY
-	fk8HiWN2U6PR9ftR7V4Dw8ooEw==
-X-Google-Smtp-Source: APXvYqyEWzUcdbbq1FpXRJtKwlGMNXL9ofHevcnvEjWUEC1DvMHJAxR9W3+RqnT/9Kwz6Am1Ega3aQ==
-X-Received: by 2002:a05:600c:389:: with SMTP id
-	w9mr401312wmd.139.1569257246044; 
-	Mon, 23 Sep 2019 09:47:26 -0700 (PDT)
-Received: from debian-brgl.home (lfbn-1-7087-108.w90-116.abo.wanadoo.fr.
-	[90.116.255.108]) by smtp.gmail.com with ESMTPSA id
-	g185sm22269249wme.10.2019.09.23.09.47.24
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=PM1aeE5dvKZKCnMnZl9ZTcsfe0Hh6Vjzdqz7uMRZMeo=;
+	b=FXFqsTK9WkkxJET7sZpNCgWiTyvJxIlnn9YFcwhH1FoUJecPriFTA4ajXQ4vik4D/h
+	h6VWXCvRqefL7R0NQMb6RAeZI5YhjxXsGIFa3sVOo6UcXbUtBQHwMPSpcByLjmuEZ5zK
+	clgSpNpHfLEtdn4M+i5RqX9++SBefRMliyi/gR7dmttHSs3NmF9WxlrCvLdkfU1qhQyW
+	1CSAmpyA3DiiuqZte87rsgnHbEb4ZQA4Mr5EUCp3nlTa9ptso183IorECaX2JtPr+r+e
+	FQIF5rV/FtjVKEHcS8iInirAWWZdN5GYkrTyHb9fB7M9nqgA25MTTbTgV/7kMiUolI09
+	u7yA==
+X-Gm-Message-State: APjAAAWQf0MBqsRQh/sUI0l4KTbut+MddWQ/nFQb1S3U4vZhS7di8pA7
+	xLq7Zdjw0xVTGAJ67GUDZvsZR+5R3Ig=
+X-Google-Smtp-Source: APXvYqzM1AtVlca94mnALZhyIOfAYkFDz23FbNdrG7rjrehlhnoM49ZiFag+rHZfTiBHQeLKQ1YyFA==
+X-Received: by 2002:a17:906:7621:: with SMTP id c1mr902740ejn.39.1569259630413;
+	Mon, 23 Sep 2019 10:27:10 -0700 (PDT)
+Received: from beaker.muppets.liwing.de (p5B25B936.dip0.t-ipconnect.de.
+	[91.37.185.54]) by smtp.gmail.com with ESMTPSA id
+	c15sm2242301edl.16.2019.09.23.10.27.09
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 23 Sep 2019 09:47:25 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>, Tim Orling <TicoTimo@gmail.com>,
-	Derek Straka <derek@asterius.io>
-Date: Mon, 23 Sep 2019 18:47:22 +0200
-Message-Id: <20190923164722.24650-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.23.0
-MIME-Version: 1.0
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH v3] python3-dtschema: new package
+	Mon, 23 Sep 2019 10:27:09 -0700 (PDT)
+Sender: Jens Rehsack <rehsack@gmail.com>
+From: Jens Rehsack <sno@netbsd.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 23 Sep 2019 19:26:50 +0200
+Message-Id: <20190923172650.21097-1-sno@netbsd.org>
+X-Mailer: git-send-email 2.17.1
+Cc: Jens Rehsack <sno@netbsd.org>
+Subject: [meta-oe][PATCH v2] libstatgrab: add recipe for libstatgrab-0.92
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,54 +56,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 16:47:25 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 23 Sep 2019 17:27:10 -0000
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+With the recent update at begin of summer, which includes the fix
+for nxp bsp issues, it's time to bring libstatgrab to more people
+than the few who use it in datacenter monitoring.
 
-This adds a recipe for dtschema package developed by Rob Herring for
-easy validation of YAML device-tree files in the linux kernel.
+Language bindings will follow once base library is settled.
 
-The version is current git as the only release so far - v0.1 - is old
-and doesn't work with kernel's dt_binding_check make target.
-
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Signed-off-by: Jens Rehsack <sno@netbsd.org>
 ---
-v1 -> v2:
-- added PV
+ .../libstatgrab/libstatgrab_0.92.bb           | 27 +++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
 
-v2 -> v3:
-- fixed PV: used SRCPV instead of SRCREV
-
-Note: I'm already seeing patch 1/2 from v1 of this series in master-next
-so I'm only resending this one.
-
- .../python/python3-dt-schema_git.bb               | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-dt-schema_git.bb
-
-diff --git a/meta-python/recipes-devtools/python/python3-dt-schema_git.bb b/meta-python/recipes-devtools/python/python3-dt-schema_git.bb
+diff --git a/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
 new file mode 100644
-index 000000000..06a9012ca
+index 000000000..4ede3c8c6
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-dt-schema_git.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Tooling for devicetree validation using YAML and jsonschema"
-+AUTHOR = "Rob Herring"
++++ b/meta-oe/recipes-extended/libstatgrab/libstatgrab_0.92.bb
+@@ -0,0 +1,27 @@
++DESCRIPTION = "Utilities to collect and visualise system statistics"
++HOMEPAGE = "http://www.i-scream.org/libstatgrab/"
 +
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://setup.py;beginline=2;endline=3;md5=c795d4924c5f739424fa8d9b569c6659"
++LICENSE = "GPL-2.0+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 +
-+inherit setuptools3
++DEPENDS = "ncurses"
 +
-+SRC_URI = "git://github.com/robherring/dt-schema.git"
-+SRCREV = "5009e47c1c76e48871f5988e08dad61f3c91196b"
-+PV = "0.1+git${SRCPV}"
++PACKAGES_prepend = "statgrab statgrab-dbg saidar saidar-dbg ${PN}-mrtg "
 +
-+S = "${WORKDIR}/git"
++# don't use the git tag unless docbooc2x is available to build the manpages
++SRC_URI = "https://github.com/libstatgrab/libstatgrab/releases/download/LIBSTATGRAB_0_92/libstatgrab-0.92.tar.gz \
++          "
++SRC_URI[md5sum] = "5362b2ddbec54b3901e7d70c22cda249"
++SRC_URI[sha256sum] = "5bf1906aff9ffc3eeacf32567270f4d819055d8386d98b9c8c05519012d5a196"
 +
-+RDEPENDS_${PN} = "python3-jsonschema python3-ruamel-yaml"
++# Perl5 is for tests only
++EXTRA_OECONF = "--without-perl5 --with-mnttab=/proc/mounts"
++
++inherit autotools pkgconfig
++
++FILES_statgrab = "${bindir}/statgrab"
++FILES_statgrab-dbg = "${bindir}/.debug/statgrab"
++FILES_saidar = "${bindir}/saidar"
++FILES_saidar-dbg = "${bindir}/.debug/saidar"
++FILES_${PN}-mrtg = "${bindir}/statgrab-make-mrtg-config ${bindir}/statgrab-make-mrtg-index"
++RDEPENDS_${PN}-mrtg_append = "perl statgrab"
 -- 
-2.23.0
+2.17.1
 
 
