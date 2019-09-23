@@ -1,30 +1,24 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id CCD607E648
+Return-Path: <Hongzhi.Song@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 575347E63A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 03:14:58 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,538,1559491200"; d="scan'208";a="75868690"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Sep 2019 11:14:58 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 748604CE14ED
+	Mon, 23 Sep 2019 03:30:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8N3U8sj013096
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 11:14:59 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 23 Sep 2019 11:15:02 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Sun, 22 Sep 2019 20:30:39 -0700
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Sun, 22 Sep 2019 20:30:20 -0700
+From: "Hongzhi.Song" <hongzhi.song@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 23 Sep 2019 11:14:30 +0800
-Message-ID: <20190923031430.19091-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Sun, 22 Sep 2019 20:30:20 -0700
+Message-ID: <20190923033020.53555-1-hongzhi.song@windriver.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 748604CE14ED.A9CEC
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pytest: upgrade 5.1.2 -> 5.1.3
+Subject: [meta-oe][PATCH] numactl: fix a error about lib32-numactl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,45 +31,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 03:14:59 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 03:30:48 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+lib32-numactl has a error:
+root@intel-x86-64:~# numademo -t -e 1M
+Configured Nodes does not match available memory nodes
+
+That's because (long long int) is assigned to (long int).
+This will cause (long int) overflow on 32bit system.
+
+Unify variable types and fix it.
+
+Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-pytest.inc         | 4 ++--
- .../python/{python-pytest_5.1.2.bb => python-pytest_5.1.3.bb} | 0
- .../{python3-pytest_5.1.2.bb => python3-pytest_5.1.3.bb}      | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pytest_5.1.2.bb => python-pytest_5.1.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pytest_5.1.2.bb => python3-pytest_5.1.3.bb} (100%)
+ ...1-numademo-fix-error-on-32bit-system.patch | 100 ++++++++++++++++++
+ .../recipes-support/numactl/numactl_git.bb    |   1 +
+ 2 files changed, 101 insertions(+)
+ create mode 100644 meta-oe/recipes-support/numactl/numactl/0001-numademo-fix-error-on-32bit-system.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
-index 5f3e60eef..576361c41 100644
---- a/meta-python/recipes-devtools/python/python-pytest.inc
-+++ b/meta-python/recipes-devtools/python/python-pytest.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://pytest.org"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=640061b8cee64b308a4d2f9f556c12f2"
+diff --git a/meta-oe/recipes-support/numactl/numactl/0001-numademo-fix-error-on-32bit-system.patch b/meta-oe/recipes-support/numactl/numactl/0001-numademo-fix-error-on-32bit-system.patch
+new file mode 100644
+index 000000000..506101711
+--- /dev/null
++++ b/meta-oe/recipes-support/numactl/numactl/0001-numademo-fix-error-on-32bit-system.patch
+@@ -0,0 +1,100 @@
++From 68485f8516884377e54c623b0deff73f97321d96 Mon Sep 17 00:00:00 2001
++From: "Hongzhi.Song" <hongzhi.song@windriver.com>
++Date: Thu, 19 Sep 2019 04:32:31 -0400
++Subject: [PATCH] numademo: fix error on 32bit system
++
++Error Info on 32bit:
++root@intel-x86:~# numademo -t -e 1M
++Configured Nodes does not match available memory nodes
++
++That's because sizeof(long)=4Word, but sizeof(long long)=8Word
++on 32bit. So (long long) assigning to (long) maybe cause overflow.
++
++long numa_node_size(int node, long *freep)
++{
++    ...
++    long sz = numa_node_size64_int(node, &f2);
++    ~^^~
++    return sz;
++    ...
++}
++long long numa_node_size64(int node, long long *freep)
++~^^   ^^~
++{
++    ...
++}
++
++Unify the return type of above functions.
++
++Upstream-Status: Accepted [next version is after 2.0.13 or 2.0.14]
++[https://github.com/numactl/numactl/commit/a7c4bc790a191d3e42b63850b409c1a72b75a4e1]
++                 Submitted [https://github.com/numactl/numactl/pull/79]
++[The first patch was merged but has a error, then the second fix it.]
++
++Signed-off-by: Hongzhi.Song <hongzhi.song@windriver.com>
++---
++ libnuma.c         | 4 ++--
++ numa.h            | 2 +-
++ numademo.c        | 2 +-
++ test/move_pages.c | 2 +-
++ 4 files changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/libnuma.c b/libnuma.c
++index cac8851..8b5c6aa 100644
++--- a/libnuma.c
+++++ b/libnuma.c
++@@ -791,10 +791,10 @@ long long numa_node_size64(int node, long long *freep)
++ 
++ make_internal_alias(numa_node_size64);
++ 
++-long numa_node_size(int node, long *freep)
+++long long numa_node_size(int node, long long *freep)
++ {
++ 	long long f2;
++-	long sz = numa_node_size64_int(node, &f2);
+++	long long sz = numa_node_size64_int(node, &f2);
++ 	if (freep)
++ 		*freep = f2;
++ 	return sz;
++diff --git a/numa.h b/numa.h
++index 3a8c543..268fb1d 100644
++--- a/numa.h
+++++ b/numa.h
++@@ -143,7 +143,7 @@ int numa_preferred(void);
++ 
++ /* Return node size and free memory */
++ long long numa_node_size64(int node, long long *freep);
++-long numa_node_size(int node, long *freep);
+++long long numa_node_size(int node, long long *freep);
++ 
++ int numa_pagesize(void);
++ 
++diff --git a/numademo.c b/numademo.c
++index a720db0..8c56da8 100644
++--- a/numademo.c
+++++ b/numademo.c
++@@ -301,7 +301,7 @@ int max_node, numnodes;
++ int get_node_list(void)
++ {
++         int a, got_nodes = 0;
++-        long free_node_sizes;
+++        long long free_node_sizes;
++ 
++         numnodes = numa_num_configured_nodes();
++         node_to_use = (int *)malloc(numnodes * sizeof(int));
++diff --git a/test/move_pages.c b/test/move_pages.c
++index d1d8436..f8ff25d 100644
++--- a/test/move_pages.c
+++++ b/test/move_pages.c
++@@ -26,7 +26,7 @@ int *node_to_use;
++ int get_node_list()
++ {
++         int a, got_nodes = 0, max_node, numnodes;
++-        long free_node_sizes;
+++        long long free_node_sizes;
++ 
++         numnodes = numa_num_configured_nodes();
++         node_to_use = (int *)malloc(numnodes * sizeof(int));
++-- 
++2.23.0
++
+diff --git a/meta-oe/recipes-support/numactl/numactl_git.bb b/meta-oe/recipes-support/numactl/numactl_git.bb
+index f13b1795f..20b7fed86 100644
+--- a/meta-oe/recipes-support/numactl/numactl_git.bb
++++ b/meta-oe/recipes-support/numactl/numactl_git.bb
+@@ -18,6 +18,7 @@ SRC_URI = "git://github.com/numactl/numactl \
+     file://Makefile \
+     file://run-ptest \
+     file://0001-define-run-test-target.patch \
++    file://0001-numademo-fix-error-on-32bit-system.patch \
+ "
  
--SRC_URI[md5sum] = "90fec5504fcebc5d1081bcd654df7cf0"
--SRC_URI[sha256sum] = "b78fe2881323bd44fd9bd76e5317173d4316577e7b1cddebae9136a4495ec865"
-+SRC_URI[md5sum] = "79efe2708aa73dd5c618e5a89d80ce58"
-+SRC_URI[sha256sum] = "cc6620b96bc667a0c8d4fa592a8c9c94178a1bd6cc799dbb057dfd9286d31a31"
- 
- SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch \
-                    "
-diff --git a/meta-python/recipes-devtools/python/python-pytest_5.1.2.bb b/meta-python/recipes-devtools/python/python-pytest_5.1.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pytest_5.1.2.bb
-rename to meta-python/recipes-devtools/python/python-pytest_5.1.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pytest_5.1.2.bb b/meta-python/recipes-devtools/python/python3-pytest_5.1.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pytest_5.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-pytest_5.1.3.bb
+ S = "${WORKDIR}/git"
 -- 
-2.20.1
-
-
+2.23.0
 
 
