@@ -1,30 +1,24 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B98B27E63A
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 29A5579CB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 03:40:12 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.64,538,1559491200"; d="scan'208";a="75869525"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Sep 2019 11:40:12 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id C3D264CE14E7
+	Mon, 23 Sep 2019 04:57:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id x8N4vtYQ026542
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 11:40:13 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 23 Sep 2019 11:40:15 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Sun, 22 Sep 2019 21:57:55 -0700 (PDT)
+Received: from localhost (128.224.162.203) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Sun, 22 Sep 2019 21:57:54 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 23 Sep 2019 11:40:04 +0800
-Message-ID: <20190923034004.9374-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Mon, 23 Sep 2019 12:57:52 +0800
+Message-ID: <1569214672-14713-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: C3D264CE14E7.A6A9C
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-urllib3: upgrade 1.25.3 -> 1.25.5
+X-Originating-IP: [128.224.162.203]
+Subject: [meta-webserver][PATCH] phpmyadmin: upgrade 4.9.0.1 -> 4.9.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,45 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 03:40:13 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 23 Sep 2019 04:57:54 -0000
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+License-Update: tecnickcom/tcpdf/LICENSE.TXT: copyright years updated.
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-urllib3.inc        | 4 ++--
- .../{python-urllib3_1.25.3.bb => python-urllib3_1.25.5.bb}    | 0
- .../{python3-urllib3_1.25.3.bb => python3-urllib3_1.25.5.bb}  | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-urllib3_1.25.3.bb => python-urllib3_1.25.5.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.3.bb => python3-urllib3_1.25.5.bb} (100%)
+ .../phpmyadmin/{phpmyadmin_4.9.0.1.bb => phpmyadmin_4.9.1.bb}       | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.9.0.1.bb => phpmyadmin_4.9.1.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python-urllib3.inc b/meta-python/recipes-devtools/python/python-urllib3.inc
-index e8cb1ae6e..8825e2f4a 100644
---- a/meta-python/recipes-devtools/python/python-urllib3.inc
-+++ b/meta-python/recipes-devtools/python/python-urllib3.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.0.1.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.1.bb
+similarity index 88%
+rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.0.1.bb
+rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.1.bb
+index a2fbbef..3da2d9b 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.0.1.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.phpmyadmin.net"
+ # Main code is GPLv2, vendor/tecnickcom/tcpdf is under LGPLv3, js/jquery is under MIT
+ LICENSE = "GPLv2 & LGPLv3 & MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+-                    file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c \
++                    file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=dd6470bbcd3436ca317f82d34abaf688 \
+                     file://js/vendor/jquery/MIT-LICENSE.txt;md5=e43aa437a6a1ba421653bd5034333bf9 \
+ "
  
--SRC_URI[md5sum] = "f09e95a5c42a7cc7ff7cb6a14c55fb69"
--SRC_URI[sha256sum] = "dbe59173209418ae49d485b87d1681aefa36252ee85884c31346debd19463232"
-+SRC_URI[md5sum] = "4dac6043f7603c5082ef6d629c6d81b3"
-+SRC_URI[sha256sum] = "2f3eadfea5d92bc7899e75b5968410b749a054b492d5a6379c1344a1481bc2cb"
+@@ -11,8 +11,8 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
+            file://apache.conf \
+ "
  
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-certifi \
-diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.25.3.bb b/meta-python/recipes-devtools/python/python-urllib3_1.25.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-urllib3_1.25.3.bb
-rename to meta-python/recipes-devtools/python/python-urllib3_1.25.5.bb
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.3.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.3.bb
-rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.5.bb
+-SRC_URI[md5sum] = "45629bb2ffe0f3501a0d3b8f73d6371c"
+-SRC_URI[sha256sum] = "e3de59f913c095433c8f6466f8826dfde09b097cfac78b665ddef9ddc03b0ed6"
++SRC_URI[md5sum] = "a165109629731f5311ec3171cce50972"
++SRC_URI[sha256sum] = "8f89dd62e3fdddabca187b092eeb5af4a4fb956189564c56038970519d0496c5"
+ 
+ UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
+ UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
 -- 
-2.20.1
-
-
+2.7.4
 
 
