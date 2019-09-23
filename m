@@ -1,49 +1,23 @@
-Return-Path: <open.source@oleksandr-kravchuk.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E07457D5EA
+Return-Path: <naveen.kumar.saini@intel.com>
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by mail.openembedded.org (Postfix) with ESMTP id 07B817CDC0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Sep 2019 21:30:58 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id a22so11783903ljd.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Sep 2019 14:31:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=soxeF77y/61kBSFaUqCo0tJlMOXcSVMlPIgZvQfLNcg=;
-	b=sTBkP9+PhDEnxWA4C5l8J7DNT8mZNeIXmyXz+It48AHGojZyCHCCMdqm+TzNRAzpTB
-	Y5eCVcSiu/wKo/wz19yMXQ33GI5UD/tPq6S+NED0tJlXGRjqAJlwg2ZDvqVVwWoc4AdY
-	q1qrxMUz8L5oTbcoX8Y/cjJCUtfuCVmCL4LNhuIMik3HNZbC7ADwplzQzEMUg0KidV8R
-	BNILzVGsAVw/gwor5w80PipoTv639Ocx9TATNETT6EjrCl/JRTPTgjf4CGHfZxwFW7vn
-	n/CTZhk60EpV53dTZNrUFptqIaVYqOeryOMUbYBHe7M7e4PGUUq/DpuUl0vsJSoHnCS9
-	qrBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=soxeF77y/61kBSFaUqCo0tJlMOXcSVMlPIgZvQfLNcg=;
-	b=QCq+hmz/0PaWMOofojzMucfQKdFz/NSDvAK5bZpZBFm/CP11EizVOhEa7F+POUucAz
-	AE3B2Gw8MwdzNUt8x5dWNtVCoH4Y27Qks4XKervRLx0PozxLK80ef4er41TRoPG+4OsZ
-	fk7rw/pYKTOrIvfUg1jdHVQNCGNxh1vqr6d2xl6xCgkAVa+r/4Asik74x5YgBEDMGsK0
-	qDYkdjTzhZjx4fDUWPk++DxM/yRfT3JzDhPQyi+DCEHziB/5S5WNiUHUb9XDP5P5jp+Y
-	cxmJLkDEtxl+y5661mA2rsVjHgLwi/39XWh64eH2DwfQNK6OeCaPSHUJJHAxFxJE27gA
-	zAcQ==
-X-Gm-Message-State: APjAAAU0Jt5cDJLTblflfVVV1ay2SAc0D1nHXBGuIwSXksolCixfxeay
-	wl9Y1wm2BSHgRoglIlG1XQV5SQqXZkM=
-X-Google-Smtp-Source: APXvYqxS29+WaY/HJ+vmwOYqHPDv9kHQQiC0OiAAJAkVN3VtcqRsZIP3oWEIvfyksX3yxUJUUJmE+A==
-X-Received: by 2002:a2e:a313:: with SMTP id l19mr14560639lje.205.1569187858959;
-	Sun, 22 Sep 2019 14:30:58 -0700 (PDT)
-Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
-	[213.89.0.115]) by smtp.gmail.com with ESMTPSA id
-	f22sm1793155lfa.41.2019.09.22.14.30.57
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 22 Sep 2019 14:30:58 -0700 (PDT)
-From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+	Mon, 23 Sep 2019 02:15:40 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	22 Sep 2019 19:15:42 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,538,1559545200"; d="scan'208";a="389327123"
+Received: from saininav-desk1.png.intel.com ([172.30.199.130])
+	by fmsmga006.fm.intel.com with ESMTP; 22 Sep 2019 19:15:41 -0700
+From: Naveen Saini <naveen.kumar.saini@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Sep 2019 23:30:52 +0200
-Message-Id: <20190922213052.14068-1-open.source@oleksandr-kravchuk.com>
+Date: Mon, 23 Sep 2019 10:18:32 +0800
+Message-Id: <20190923021832.6859-1-naveen.kumar.saini@intel.com>
 X-Mailer: git-send-email 2.17.1
-Cc: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Subject: [PATCH][meta-oe] jasper: update to 2.0.16
+Subject: [meta-oe][PATCH] rrdtool: suppress appending of installation to perllocal.pod
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,72 +30,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Sep 2019 21:30:59 -0000
+X-List-Received-Date: Mon, 23 Sep 2019 02:15:41 -0000
 
-Licence change due to modified copyright years (see @11ef9d44ac9795f4).
+perl modules when gets installed can produce a perllocal.pod
+file for documenting a list of locally installed perl modules.
+This can conflict if multiple packages generate the file.
 
-Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+Hits the conflict with apparmor & rrdtool packages.
+Error: Transaction check error:
+  file /usr/lib/perl5/5.30.0/x86_64-linux/perllocal.pod conflicts between attempted installs of rrdtool-1.7.2-r0.corei7_64 and apparmor-2.13.3-r0.corei7_64
+
+perllocal.pod files are for documentation purpose, so
+disabling does not harm. Generating perllocal.pod for perl
+module is disabled by passing NO_PERLLOCAL=1
+with ExtUtils::MakeMaker utility.
+
+https://perldoc.perl.org/5.30.0/ExtUtils/MakeMaker.html#Using-Attributes-and-Parameters
+
+[YOCTO #13491]
+
+Signed-off-by: Naveen Saini <naveen.kumar.saini@intel.com>
 ---
- .../recipes-graphics/jasper/jasper_1.900.1.bb | 18 --------------
- .../recipes-graphics/jasper/jasper_2.0.16.bb  | 24 +++++++++++++++++++
- 2 files changed, 24 insertions(+), 18 deletions(-)
- delete mode 100644 meta-oe/recipes-graphics/jasper/jasper_1.900.1.bb
- create mode 100644 meta-oe/recipes-graphics/jasper/jasper_2.0.16.bb
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/jasper/jasper_1.900.1.bb b/meta-oe/recipes-graphics/jasper/jasper_1.900.1.bb
-deleted file mode 100644
-index d2c7ffdab..000000000
---- a/meta-oe/recipes-graphics/jasper/jasper_1.900.1.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "Jpeg 2000 implementation"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=baa697d7510288a9cdcce9bd7edaf9bc"
--
--PR = "r1"
--
--SRC_URI = "git://github.com/mdadams/jasper.git;protocol=https"
--SRCREV = "b13b8c86be870107f83b0a9a4b77557cb2b65d69"
--
--S = "${WORKDIR}/git"
--
--inherit autotools lib_package
--
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[jpeg] = "--enable-libjpeg,--disable-libjpeg,jpeg"
--PACKAGECONFIG[opengl] = "--enable-opengl,--disable-opengl,freeglut"
--
--EXTRA_OECONF = "--enable-shared"
-diff --git a/meta-oe/recipes-graphics/jasper/jasper_2.0.16.bb b/meta-oe/recipes-graphics/jasper/jasper_2.0.16.bb
-new file mode 100644
-index 000000000..1d5a29438
---- /dev/null
-+++ b/meta-oe/recipes-graphics/jasper/jasper_2.0.16.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "Jpeg 2000 implementation"
-+HOMEPAGE = "https://github.com/mdadams/jasper"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a80440d1d8f17d041c71c7271d6e06eb"
-+
-+SRC_URI = "git://github.com/mdadams/jasper.git;protocol=https"
-+SRCREV = "9aef6d91a82a8a6aecb575cbee57f74470603cc2"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[jpeg] = "-DJAS_ENABLE_LIBJPEG=true, -DJAS_ENABLE_LIBJPEG=false, jpeg"
-+PACKAGECONFIG[opengl] = "-DJAS_ENABLE_OPENGL=true, -DJAS_ENABLE_OPENGL=false, freeglut"
-+
-+EXTRA_OECMAKE_append = " -DJAS_ENABLE_SHARED=true"
-+
-+do_install_append() {
-+    chrpath -d ${D}${bindir}/jasper
-+    chrpath -d ${D}${bindir}/imginfo
-+    chrpath -d ${D}${bindir}/imgcmp
-+    chrpath -d ${D}${libdir}/libjasper.so.*
-+}
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
+index 1962a2dd4..b39ceda80 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
+@@ -32,7 +32,7 @@ am_cv_python_pyexecdir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packag
+ --disable-python,python,"
+ 
+ PACKAGECONFIG[perl] = \
+-"--enable-perl=yes --with-perl-options='INSTALLDIRS="vendor" CCFLAGS="${CFLAGS}" NO_PACKLIST=1' \
++"--enable-perl=yes --with-perl-options='INSTALLDIRS="vendor" CCFLAGS="${CFLAGS}" NO_PACKLIST=1 NO_PERLLOCAL=1' \
+ ac_cv_path_PERL_CC='${CC}',  \
+ --disable-perl,perl,"
+ 
 -- 
 2.17.1
 
