@@ -1,24 +1,50 @@
-Return-Path: <phong@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E7BEA7CBD5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AC836D7C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Sep 2019 17:55:11 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x8NHtCZ1027743
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 23 Sep 2019 10:55:12 -0700 (PDT)
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Mon, 23 Sep 2019 10:55:11 -0700
-Received: by yow-lpggp3.wrs.com (Postfix, from userid 21010)	id 85FA81FF3F;
-	Mon, 23 Sep 2019 13:55:11 -0400 (EDT)
-From: Peiran Hong <peiran.hong@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 23 Sep 2019 13:54:32 -0400
-Message-ID: <20190923175432.38678-1-peiran.hong@windriver.com>
-X-Mailer: git-send-email 2.21.0
+	Tue, 24 Sep 2019 01:33:42 +0000 (UTC)
+Received: by mail-pl1-f194.google.com with SMTP id f19so191535plr.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Sep 2019 18:33:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=IlZtgga+S6RjMhnTV61i8sIPOwVETf6NGIFE4ExOOTM=;
+	b=TCNPNjyaILFCiwqAwLq6s1N5GbpyN4fe4nXmrjJ+SxkV/YyqsDSLlCxBD7N/3qVWE3
+	fnE/0oDCB5FoUFQAG3QkAPrRfaJ3TTR5OV/06V9fm3E7ShaL6n+Q3q38QFpH7oGz4U6P
+	JG4n023nlC63og67nMs8nflbCmEt/tdNnPNYLpwOTKBB/1fwuUBxL89Gf1wfprzg3BV2
+	gVwp4AiaQznAx0S0QuUgrq25HgqA+ab6bxyJaFWaR6BuK+6iCTY/cSl/WRRvvMruhvvc
+	KpS13dnt1DHsRlHdlwXsvQotEGNdaqj82YHsyXxZ9g6DdA3a6GUEmNitbU87CWHHj/2R
+	TjfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=IlZtgga+S6RjMhnTV61i8sIPOwVETf6NGIFE4ExOOTM=;
+	b=d9fHS91EihsVtdu4bsUF5cT2FquR732vaDMNa83n4xxjx69kXKhEuew+8tV+AZ+e0t
+	AE+YoyP4AF09ycm0hoc9AmZxNUwczWloyX1M2t4qKy5K+1TQ+1Zn7iHwylc3SrmD0S6f
+	XI9kptXUbR1TicoJWnNzxiJvmSEGdH+IsVQ8tGzqvYwm8LOj5FKql/z8EEBoFJexmX4/
+	ZbPJhAShZAtLEl878WQ1YvqfqZl/QPnEqGmECPCDAVyNFd+oQuSgRMua71E25Qdgbyuy
+	ijIZk9B0TJXYNuzYduygEpgvT8KtiX863JxJDA8qdRtKu8TOGdBO71iq9+wt2sODFERk
+	3NIA==
+X-Gm-Message-State: APjAAAWKnMICrUFooqbd2E5kmfFOq/z/bD3VoNmryyxTTVe1jhSx8/Pt
+	SgDlFkG4AiVI7ZAGBV0fw9na4hfPCaw=
+X-Google-Smtp-Source: APXvYqzeUU/3glj3nYydgb8N/mZGo6H1kOpEEz7BRWrE0Pr0ko0ntFAcoNEXqrVwyT4Vn2OBjhBKoQ==
+X-Received: by 2002:a17:902:bb84:: with SMTP id m4mr463914pls.10.1569288822656;
+	Mon, 23 Sep 2019 18:33:42 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3])
+	by smtp.gmail.com with ESMTPSA id o9sm49688pfp.67.2019.09.23.18.33.41
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 23 Sep 2019 18:33:42 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 23 Sep 2019 18:33:32 -0700
+Message-Id: <20190924013332.2305173-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] nmap: Update to 7.80
+Subject: [meta-oe][PATCH] mongodb: Fix build on musl/aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,162 +57,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Sep 2019 17:55:12 -0000
+X-List-Received-Date: Tue, 24 Sep 2019 01:33:42 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Updates nmap to v7.80, this solves the following CVEs:
-	- CVE-2017-18594
-	- CVE-2018-15173
-and addressed numerous bugs as well.
-The patch '0001-include-time.h-for-time-structure-definition.patch'
-is modified to be applicable to the new version while serving for
-the same purpose.
-The license changed in the commit https://github.com/nmap/nmap/commit/d639a53
-and is only a date bump without modification of any content in the
-license.
+one impl of strerror_r is glibc specific, therefore check for __GLIBC__
+also before using it
 
-Signed-off-by: Peiran Hong <peiran.hong@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ....h-header-to-pass-clang-compilation.patch} | 59 +++++++++----------
- .../nmap/{nmap_7.70.bb => nmap_7.80.bb}       |  8 +--
- 2 files changed, 31 insertions(+), 36 deletions(-)
- rename meta-oe/recipes-security/nmap/files/{0001-include-time.h-for-time-structure-definition.patch => 0001-Include-time.h-header-to-pass-clang-compilation.patch} (52%)
- rename meta-oe/recipes-security/nmap/{nmap_7.70.bb => nmap_7.80.bb} (85%)
+ ...rror_r-implementation-glibc-specific.patch | 31 +++++++++++++++++++
+ .../mongodb/0003-fix-musl-strerror_r.patch    | 30 ------------------
+ meta-oe/recipes-dbs/mongodb/mongodb_git.bb    |  2 +-
+ 3 files changed, 32 insertions(+), 31 deletions(-)
+ create mode 100644 meta-oe/recipes-dbs/mongodb/mongodb/0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch
+ delete mode 100644 meta-oe/recipes-dbs/mongodb/mongodb/0003-fix-musl-strerror_r.patch
 
-diff --git a/meta-oe/recipes-security/nmap/files/0001-include-time.h-for-time-structure-definition.patch b/meta-oe/recipes-security/nmap/files/0001-Include-time.h-header-to-pass-clang-compilation.patch
-similarity index 52%
-rename from meta-oe/recipes-security/nmap/files/0001-include-time.h-for-time-structure-definition.patch
-rename to meta-oe/recipes-security/nmap/files/0001-Include-time.h-header-to-pass-clang-compilation.patch
-index 561c8c82c..f93af2d79 100644
---- a/meta-oe/recipes-security/nmap/files/0001-include-time.h-for-time-structure-definition.patch
-+++ b/meta-oe/recipes-security/nmap/files/0001-Include-time.h-header-to-pass-clang-compilation.patch
-@@ -1,35 +1,39 @@
--From c774f2b129fd5acd5647d92c57a2079ae638a62b Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 20 Jan 2019 23:07:39 -0800
--Subject: [PATCH] include time.h for time structure definition
-+From a068952a20880fc864e8cb8b49f8a6b143a5ac30 Mon Sep 17 00:00:00 2001
-+From: Peiran Hong <peiran.hong@windriver.com>
-+Date: Fri, 20 Sep 2019 15:02:45 -0400
-+Subject: [PATCH] Include time.h header to pass clang compilation
- 
--Exposed by musl/clang
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- nmap_error.cc       | 1 +
-- nping/EchoServer.cc | 1 +
-- osscan.cc           | 1 +
-- osscan2.cc          | 1 +
-- service_scan.cc     | 1 +
-- 5 files changed, 5 insertions(+)
-+ nmap_error.cc       | 11 +----------
-+ nping/EchoServer.cc |  1 +
-+ osscan2.cc          |  1 +
-+ service_scan.cc     |  1 +
-+ 4 files changed, 4 insertions(+), 10 deletions(-)
- 
- diff --git a/nmap_error.cc b/nmap_error.cc
--index 19beafb..ea14e08 100644
-+index 588b13c33..254107ff5 100644
- --- a/nmap_error.cc
- +++ b/nmap_error.cc
--@@ -135,6 +135,7 @@
-+@@ -135,16 +135,7 @@
-  #include "xml.h"
-  
-  #include <errno.h>
-+-#if TIME_WITH_SYS_TIME
-+-# include <sys/time.h>
-+-# include <time.h>
-+-#else
-+-# if HAVE_SYS_TIME_H
-+-#  include <sys/time.h>
-+-# else
-+-#  include <time.h>
-+-# endif
-+-#endif
- +#include <time.h>
-  
-  extern NmapOps o;
-  
- diff --git a/nping/EchoServer.cc b/nping/EchoServer.cc
--index 70f39b0..40cd4d6 100644
-+index ccdcf9c2d..c403aeda5 100644
- --- a/nping/EchoServer.cc
- +++ b/nping/EchoServer.cc
- @@ -137,6 +137,7 @@
-@@ -40,20 +44,8 @@ index 70f39b0..40cd4d6 100644
-  
-  extern NpingOps o;
-  extern EchoServer es;
--diff --git a/osscan.cc b/osscan.cc
--index f851f60..6ae0c83 100644
----- a/osscan.cc
--+++ b/osscan.cc
--@@ -149,6 +149,7 @@
-- #  include <time.h>
-- # endif
-- #endif
--+#include <time.h>
-- 
-- #include <algorithm>
-- #include <list>
- diff --git a/osscan2.cc b/osscan2.cc
--index e341947..887fbd2 100644
-+index aa31feb12..89673e108 100644
- --- a/osscan2.cc
- +++ b/osscan2.cc
- @@ -147,6 +147,7 @@
-@@ -65,7 +57,7 @@ index e341947..887fbd2 100644
-  extern NmapOps o;
-  #ifdef WIN32
- diff --git a/service_scan.cc b/service_scan.cc
--index 9780ae3..e07b940 100644
-+index 57a92ed28..ef277bb1f 100644
- --- a/service_scan.cc
- +++ b/service_scan.cc
- @@ -145,6 +145,7 @@
-@@ -76,3 +68,6 @@ index 9780ae3..e07b940 100644
-  
-  #if HAVE_OPENSSL
-  /* OpenSSL 1.0.0 needs _WINSOCKAPI_ to be defined, otherwise it loads
-+-- 
-+2.21.0
+diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch
+new file mode 100644
+index 0000000000..5337fcdbfd
+--- /dev/null
++++ b/meta-oe/recipes-dbs/mongodb/mongodb/0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch
+@@ -0,0 +1,31 @@
++From ca004968b8d2149f72d4edcfe029489a8c5e10ca Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 23 Sep 2019 12:31:31 -0700
++Subject: [PATCH] Mark one of strerror_r implementation glibc specific
 +
-diff --git a/meta-oe/recipes-security/nmap/nmap_7.70.bb b/meta-oe/recipes-security/nmap/nmap_7.80.bb
-similarity index 85%
-rename from meta-oe/recipes-security/nmap/nmap_7.70.bb
-rename to meta-oe/recipes-security/nmap/nmap_7.80.bb
-index b1b150a7d..f24194da7 100644
---- a/meta-oe/recipes-security/nmap/nmap_7.70.bb
-+++ b/meta-oe/recipes-security/nmap/nmap_7.80.bb
-@@ -3,17 +3,17 @@ DESCRIPTION = "Nmap ("Network Mapper") is a free and open source (license) utili
- SECTION = "security"
- LICENSE = "GPL-2.0"
- 
--LIC_FILES_CHKSUM = "file://COPYING;beginline=7;endline=12;md5=1489288f46af415fadc4e8b6345ab9f4"
-+LIC_FILES_CHKSUM = "file://COPYING;beginline=7;endline=12;md5=66938a7e5b4c118eda78271de14874c2"
- 
- SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
-            file://nmap-redefine-the-python-library-dir.patch \
-            file://nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch \
--           file://0001-include-time.h-for-time-structure-definition.patch \
-+           file://0001-Include-time.h-header-to-pass-clang-compilation.patch \
-            file://0002-Fix-building-with-libc.patch \
++glibc has two incompatible strerror_r definitions, one of them is
++specific to glibc, mark this one so
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/mongo/util/errno_util.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/mongo/util/errno_util.cpp b/src/mongo/util/errno_util.cpp
++index 564c0071ea..4f7e1d3a38 100644
++--- a/src/mongo/util/errno_util.cpp
+++++ b/src/mongo/util/errno_util.cpp
++@@ -61,7 +61,7 @@ std::string errnoWithDescription(int errNumber) {
++     char buf[kBuflen];
++     char* msg{nullptr};
++ 
++-#if defined(__GNUC__) && defined(_GNU_SOURCE) && \
+++#if defined(__GNUC__) && defined(_GNU_SOURCE) && defined(__GLIBC__) && \
++     (!defined(__ANDROID_API__) || !(__ANDROID_API__ <= 22)) && !defined(EMSCRIPTEN)
++     msg = strerror_r(errNumber, buf, kBuflen);
++ #elif defined(_WIN32)
++-- 
++2.23.0
++
+diff --git a/meta-oe/recipes-dbs/mongodb/mongodb/0003-fix-musl-strerror_r.patch b/meta-oe/recipes-dbs/mongodb/mongodb/0003-fix-musl-strerror_r.patch
+deleted file mode 100644
+index c6035894ed..0000000000
+--- a/meta-oe/recipes-dbs/mongodb/mongodb/0003-fix-musl-strerror_r.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-Index: git/src/mongo/util/errno_util.cpp
+-===================================================================
+---- git.orig/src/mongo/util/errno_util.cpp
+-+++ git/src/mongo/util/errno_util.cpp
+-@@ -49,6 +49,16 @@ const char kUnknownMsg[] = "Unknown erro
+- const int kBuflen = 256;  // strerror strings in non-English locales can be large.
+- }  // namespace
+- 
+-+inline char const * strerror_r_helper( char const * r, char const * )
+-+{
+-+    return r;
+-+}
+-+
+-+inline char const * strerror_r_helper( int r, char const * buffer )
+-+{
+-+    return r == 0? buffer: "Unknown error";
+-+}
+-+
+- std::string errnoWithDescription(int errNumber) {
+- #if defined(_WIN32)
+-     if (errNumber == -1)
+-@@ -63,7 +73,7 @@ std::string errnoWithDescription(int err
+- 
+- #if defined(__GNUC__) && defined(_GNU_SOURCE) && \
+-     (!defined(__ANDROID_API__) || !(__ANDROID_API__ <= 22)) && !defined(EMSCRIPTEN)
+--    msg = strerror_r(errNumber, buf, kBuflen);
+-+    msg = strerror_r_helper(strerror_r(errNumber, buf, kBuflen));
+- #elif defined(_WIN32)
+- 
+-     LPWSTR errorText = nullptr;
+diff --git a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+index d3c19d6c4c..3e77ac32f3 100644
+--- a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+@@ -25,8 +25,8 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.2 \
+            file://0003-Fix-unknown-prefix-env.patch \
+            "
+ SRC_URI_append_libc-musl ="\
++           file://0001-Mark-one-of-strerror_r-implementation-glibc-specific.patch \
+            file://0002-Fix-default-stack-size-to-256K.patch \
+-           file://0003-fix-musl-strerror_r.patch \
+            file://0004-wiredtiger-Disable-strtouq-on-musl.patch \
             "
  
--SRC_URI[md5sum] = "84eb6fbe788e0d4918c2b1e39421bf79"
--SRC_URI[sha256sum] = "847b068955f792f4cc247593aca6dc3dc4aae12976169873247488de147a6e18"
-+SRC_URI[md5sum] = "d37b75b06d1d40f27b76d60db420a1f5"
-+SRC_URI[sha256sum] = "fcfa5a0e42099e12e4bf7a68ebe6fde05553383a682e816a7ec9256ab4773faa"
- 
- inherit autotools-brokensep pkgconfig pythonnative
- 
 -- 
-2.21.0
+2.23.0
 
 
