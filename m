@@ -1,23 +1,30 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id AC303602D9
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AD297F27B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Sep 2019 02:44:14 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	23 Sep 2019 19:44:15 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,542,1559545200"; d="scan'208";a="195555659"
-Received: from andromeda02.png.intel.com ([10.221.183.11])
-	by FMSMGA003.fm.intel.com with ESMTP; 23 Sep 2019 19:44:15 -0700
-From: Anuj Mittal <anuj.mittal@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Sep 2019 10:44:11 +0800
-Message-Id: <1569293051-81789-1-git-send-email-anuj.mittal@intel.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python3-test-generator: add recipe
+	Tue, 24 Sep 2019 06:00:34 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,542,1559491200"; d="scan'208";a="75922103"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 24 Sep 2019 14:00:32 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 3BF684CDFCE9
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Sep 2019 14:00:35 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 24 Sep 2019 14:00:36 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 24 Sep 2019 14:00:30 +0800
+Message-ID: <20190924060030.7475-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 3BF684CDFCE9.AC56F
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] fio: upgrade 3.15 -> 3.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,39 +37,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Sep 2019 02:44:14 -0000
+X-List-Received-Date: Tue, 24 Sep 2019 06:00:35 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Generator is a helper for generating test methods for nose
-while still using unittest.
+-files/0001-engines-splice-remove-buggy-mem_align-set.patch
+Removed since this is included in 3.16.
 
-Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../python/python3-test-generator_0.1.2.bb                | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
+ ...engines-splice-remove-buggy-mem_align-set.patch | 43 ----------------------
+ .../fio/{fio_3.15.bb => fio_3.16.bb}               |  3 +-
+ 2 files changed, 1 insertion(+), 45 deletions(-)
+ delete mode 100644 meta-oe/recipes-benchmark/fio/files/0001-engines-splice-remove-buggy-mem_align-set.patch
+ rename meta-oe/recipes-benchmark/fio/{fio_3.15.bb => fio_3.16.bb} (92%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb b/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
-new file mode 100644
-index 0000000..14943a4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Generator is a helper for generating test methods for nose while still using unittest."
-+DESCRIPTION = "Python package with modified subclasses of all stdlib XML \
-+parsers that prevent any potentially malicious operation."
-+
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=041a2bff595d40ccb4b36356f89dab00"
-+
-+SRC_URI[md5sum] = "6c69e73ba5b4b3ed62f7bcda071c64f1"
-+SRC_URI[sha256sum] = "ad5925c814bfe79497b43df096e3bb52c166d1577f7aff160137301676232f4a"
-+
-+inherit pypi setuptools3
-+
-+DEPENDS += "python3-nose-native"
-+
-+RDEPENDS_${PN} += "python3-six"
+diff --git a/meta-oe/recipes-benchmark/fio/files/0001-engines-splice-remove-buggy-mem_align-set.patch b/meta-oe/recipes-benchmark/fio/files/0001-engines-splice-remove-buggy-mem_align-set.patch
+deleted file mode 100644
+index cb18032..0000000
+--- a/meta-oe/recipes-benchmark/fio/files/0001-engines-splice-remove-buggy-mem_align-set.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From 8ca8a05d92fa799fe93a6edc27b058802211fddc Mon Sep 17 00:00:00 2001
+-From: Jens Axboe <axboe@kernel.dk>
+-Date: Sat, 3 Aug 2019 08:33:24 -0600
+-Subject: [PATCH] engines/splice: remove buggy ->mem_align set
+-
+-Two things wrong here:
+-
+-1) We align buffers by default, so no need for splice to do anything
+-   extra.
+-2) ->mem_align is not a true/false setting, it's the alignment itself.
+-   Hence the current setting to 1 is just buggy.
+-
+-Upstream-Status: Backport [https://github.com/axboe/fio/commit/8ca8a05d92fa799fe93a6edc27b058802211fddc]
+-
+-Fixes: https://github.com/axboe/fio/issues/810
+-Reported-by: Sitsofe Wheeler <sitsofe@yahoo.com>
+-Signed-off-by: Jens Axboe <axboe@kernel.dk>
+-Signed-off-by: Liwei Song <liwei.song@windriver.com>
+----
+- engines/splice.c | 7 -------
+- 1 file changed, 7 deletions(-)
+-
+-diff --git a/engines/splice.c b/engines/splice.c
+-index feb764feb2f4..6fc36bb6f154 100644
+---- a/engines/splice.c
+-+++ b/engines/splice.c
+-@@ -278,13 +278,6 @@ static int fio_spliceio_init(struct thread_data *td)
+- 	 */
+- 	sd->vmsplice_to_user_map = 1;
+- 
+--	/*
+--	 * And if vmsplice_to_user works, we definitely need aligned
+--	 * buffers. Just set ->odirect to force that.
+--	 */
+--	if (td_read(td))
+--		td->o.mem_align = 1;
+--
+- 	td->io_ops_data = sd;
+- 	return 0;
+- }
+--- 
+-2.22.0
+-
+diff --git a/meta-oe/recipes-benchmark/fio/fio_3.15.bb b/meta-oe/recipes-benchmark/fio/fio_3.16.bb
+similarity index 92%
+rename from meta-oe/recipes-benchmark/fio/fio_3.15.bb
+rename to meta-oe/recipes-benchmark/fio/fio_3.16.bb
+index df81759..092b2be 100644
+--- a/meta-oe/recipes-benchmark/fio/fio_3.15.bb
++++ b/meta-oe/recipes-benchmark/fio/fio_3.16.bb
+@@ -21,10 +21,9 @@ PACKAGECONFIG_NUMA_armeb = ""
+ PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
+ PACKAGECONFIG[numa] = ",--disable-numa,numactl"
+ 
+-SRCREV = "01bf5128d0581e267383f280c6a1dcd26517240f"
++SRCREV = "92f75708b530989fdb13b50be6604f44b80d038d"
+ SRC_URI = "git://git.kernel.dk/fio.git \
+           file://0001-update-the-interpreter-paths.patch \
+-          file://0001-engines-splice-remove-buggy-mem_align-set.patch \
+ "
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.7.4
+
+
 
 
