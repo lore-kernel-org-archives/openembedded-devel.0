@@ -1,26 +1,26 @@
 Return-Path: <Liezhi.Yang@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 413857E53A
+	by mail.openembedded.org (Postfix) with ESMTP id 8317A6D561
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Sep 2019 09:36:17 +0000 (UTC)
+	Wed, 25 Sep 2019 09:36:41 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8P9ZqTn019805
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8P9aMw2019815
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Sep 2019 02:36:08 -0700
+	Wed, 25 Sep 2019 02:36:32 -0700
 Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.468.0; Wed, 25 Sep 2019 02:36:03 -0700
+	14.3.468.0; Wed, 25 Sep 2019 02:36:11 -0700
 From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 Sep 2019 17:35:36 +0800
-Message-ID: <afc2928a9d44cbc743600bbbb18f02b9f73a3e18.1569403988.git.liezhi.yang@windriver.com>
+Date: Wed, 25 Sep 2019 17:35:39 +0800
+Message-ID: <e5f89cd592d668f94cbc0ab0321c976d2ec26188.1569403988.git.liezhi.yang@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1569403988.git.liezhi.yang@windriver.com>
 References: <cover.1569403988.git.liezhi.yang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/8] fuse: Fix installed-vs-shipped for nativesdk
+Subject: [PATCH 6/8] libnet-dns-sec-perl: Drop broken native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,56 +33,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2019 09:36:22 -0000
+X-List-Received-Date: Wed, 25 Sep 2019 09:36:41 -0000
 Content-Type: text/plain
 
-There are two problems:
-* The /dev is installed to '${D}/dev', not '${D}${base_prefix}'
-* The /etc is installed ${D}, but should be ${D}${sysconfdir}
+$ bitbake libnet-dns-sec-perl-native
+ERROR: Nothing RPROVIDES 'libcrypto-native' (but virtual:native:/path/to/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb RDEPENDS on or otherwise requires it)
 
-It works for target is because target's base_prefix is NULL, but it isn't work
-for native or nativesdk.
-
-Fixed:
-$ bitbake nativesdk-fuse
-ERROR: nativesdk-fuse-2.9.9-r0 do_package: QA Issue: nativesdk-fuse: Files/directories were installed but not shipped in any package:
-  /dev
-  /etc
-  /etc/init.d
-  /etc/udev
-  /etc/init.d/fuse
-  /etc/udev/rules.d
-  /etc/udev/rules.d/99-fuse.rules
+It's a broken native recipe which means no ones need it any more, so remove it.
 
 Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-index c83e7f6..95e8706 100644
---- a/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb
-@@ -54,7 +54,7 @@ do_configure_prepend() {
- }
- 
- do_install_append() {
--    rm -rf ${D}${base_prefix}/dev
-+    rm -rf ${D}/dev
- 
-     # systemd class remove the sysv_initddir only if systemd_system_unitdir
-     # contains anything, but it's not needed if sysvinit is not in DISTRO_FEATURES
-@@ -69,4 +69,10 @@ do_install_append() {
-     fi
- }
- 
-+do_install_append_class-nativesdk() {
-+    install -d ${D}${sysconfdir}
-+    mv ${D}/etc/* ${D}${sysconfdir}/
-+    rmdir ${D}/etc
-+}
-+
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb b/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb
+index 3fa6294..240ffec 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb
+@@ -29,5 +29,3 @@ RDEPENDS_${PN} = " \
+     perl-module-mime-base64 \
+     perl-module-test-more \
+ "
+-
+-BBCLASSEXTEND = "native"
 -- 
 2.7.4
 
