@@ -1,45 +1,23 @@
-Return-Path: <gaylord.charles@veo-labs.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 498A36C1C4
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 815586D561
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Sep 2019 09:20:35 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id r19so2759893wmh.2
+	Wed, 25 Sep 2019 09:35:38 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com ([147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id x8P9Zddx000771
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Sep 2019 02:20:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=veo-labs-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=B2Of+z1LjwAsaAKXUKsXyrFefxltqhDH6kSKck9C0kc=;
-	b=DKgz8pWi5O2vwjj7/BUep17Bye2ZWLegEB4x77Z317UF5fWJFWMxZc+TMoeGhO1JcK
-	AUShaiwQQxJtBeI8H99k8PBz8Nf8c/0b1yoqSR4e0mSi68UFmBXZzm6YOw+WEtlEU6bB
-	FZdxCsloxRLSHav0BFYunrABuTEjQqtI9nexr/Rg8RCzYbAvFLBGeVZECH4KbUBpcdOe
-	voh8g/kLdu71G8CtsWEFUCd79BPtY/ELMLrW3xX9BioxyX9Wuil2w7ZIicc/8/ot/679
-	YU3kPyEvfugzk/8aCwTvpvFDBBvRpxrN0fWbr3F1x0Av875l12FVs4nhWWG+hRDPVTyc
-	SvAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=B2Of+z1LjwAsaAKXUKsXyrFefxltqhDH6kSKck9C0kc=;
-	b=Vavhr01ffTFBVDzeK6IgEq7USs8BCflqRdkfu0rCkINHWSSPLYfeUVKBQWuON2Cew5
-	QBmYwm9OXqloY2HFIG5ZJpOCR4il3NuiQWBIQYA6uqigqdj+Z/MLrxWiDImNfmg/shJN
-	ervzdDOUnQ1H8M2cetDGcXPCsPifZr8ALHtP6Bp5yCpBLcVIj4wuYuQgaE+RabLp6Hvh
-	YIRyqpotU4lUMrz4R2zzGQ/zgBvfo+nI/+BSY8NHLl2jWJYr0mgudO181hF1xaEyiQq1
-	cCDQJ40qVOZuf/JVqMRdDHODzqQln611jkC9hILHQt+MCAaDUxQrFg8TZWX2ks+UzQed
-	t5og==
-X-Gm-Message-State: APjAAAVv8fB4hhnDsdLuvmujNbKUwmi+9gvsTdRuPyqDe7uZhmSPWm0Q
-	MzJTM5mQNhTX9J3wRM/vbsjWQa9XF1G3pP3frwyLsaGmCdM=
-X-Google-Smtp-Source: APXvYqxfgFotV950piBXWV3knGKSbMSKzhd2H0EB9L0sjOOkVyicqokJO98hQOpr6kI+S5jmUyqTXeyTu5nxJ7cA0hs=
-X-Received: by 2002:a05:600c:2311:: with SMTP id
-	17mr6378591wmo.39.1569403232603; 
-	Wed, 25 Sep 2019 02:20:32 -0700 (PDT)
+	Wed, 25 Sep 2019 02:35:39 -0700 (PDT)
+Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.468.0; Wed, 25 Sep 2019 02:35:38 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 Sep 2019 17:35:33 +0800
+Message-ID: <cover.1569403988.git.liezhi.yang@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-From: Gaylord Charles <gaylord.charles@veo-labs.com>
-Date: Wed, 25 Sep 2019 11:20:06 +0200
-Message-ID: <CAAqXYd28BP4hUHjs215ebh+JOp04hHEaK0jxSmfJYosWZfYYeQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-webserver][PATCH] nginx: fix install paths
+Subject: [PATCH 0/8] [meta-oe][meta-perl][meta-python] Fixes for native and nativesdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,47 +30,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2019 09:20:35 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 25 Sep 2019 09:35:38 -0000
+Content-Type: text/plain
 
-Hello,
+The following changes since commit 466fd78ac6a561ce7b47f2190f0aa3ea6aa3593e:
 
-This patch fixes Nginx install paths. I tried to build the native variant
-for testing purpose and had errors.
+  protobuf: upgrade 3.9.1 -> 3.9.2 (2019-09-24 10:35:46 -0700)
 
-Regards,
-Gaylord Charles
+are available in the git repository at:
 
-From b6dc845b645cc8667b2d89412c292c0801de9270 Mon Sep 17 00:00:00 2001
-From: Gaylord CHARLES <gaylord.charles@veo-labs.com>
-Date: Tue, 24 Sep 2019 18:56:45 +0200
-Subject: [PATCH] nginx: fix install paths
+  git://git.openembedded.org/meta-openembedded-contrib rbt/native
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=rbt/native
 
-- Use path variable instead of /usr
-- Replace the absolute path symlink with a relative one
+Robert Yang (8):
+  python-asn1crypto: extend to nativesdk
+  python-incremental: Drop broken nativesdk
+  fuse: Fix installed-vs-shipped for nativesdk
+  keyutils: Fix installed-vs-shipped for nativesdk
+  libnet-ssleay-perl: Drop broken native
+  libnet-dns-sec-perl: Drop broken native
+  iperf3: Drop broken native
+  spice: Drop broken native
 
-Signed-off-by: Gaylord CHARLES <gaylord.charles@veo-labs.com>
----
- meta-webserver/recipes-httpd/nginx/nginx.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-filesystems/recipes-support/fuse/fuse_2.9.9.bb        |  8 +++++++-
+ meta-networking/recipes-support/spice/spice_git.bb         |  3 +--
+ meta-oe/recipes-benchmark/iperf3/iperf3_3.7.bb             |  2 --
+ meta-oe/recipes-security/keyutils/keyutils_1.6.bb          | 12 ++++++++++++
+ meta-perl/recipes-perl/libnet/libnet-dns-sec-perl_1.10.bb  |  2 --
+ meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.85.bb   |  2 --
+ meta-python/recipes-devtools/python/python-asn1crypto.inc  |  2 +-
+ meta-python/recipes-devtools/python/python-incremental.inc |  2 +-
+ 8 files changed, 22 insertions(+), 11 deletions(-)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 29e7efc14..1e9d2e1a4 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -92,9 +92,9 @@ do_install () {
-             >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-     fi
-     install -d ${D}${sysconfdir}/${BPN}
--    ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-+    ln -snf ../../var/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-     install -d ${D}${NGINX_WWWDIR}
--    mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
-+    mv ${D}${exec_prefix}/html ${D}${NGINX_WWWDIR}/
-     chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
-
-     install -d ${D}${sysconfdir}/init.d
 -- 
-2.20.1
+2.7.4
+
 
