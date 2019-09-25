@@ -1,16 +1,16 @@
 Return-Path: <danc@opengear.com>
-Received: from NAM03-BY2-obe.outbound.protection.outlook.com
-	(mail-eopbgr780054.outbound.protection.outlook.com [40.107.78.54])
-	by mail.openembedded.org (Postfix) with ESMTP id D912F7E1E7
+Received: from NAM01-BY2-obe.outbound.protection.outlook.com
+	(mail-eopbgr810074.outbound.protection.outlook.com [40.107.81.74])
+	by mail.openembedded.org (Postfix) with ESMTP id B50BD7E093
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Sep 2019 07:45:09 +0000 (UTC)
+	Wed, 25 Sep 2019 08:05:53 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=ZHuL5pbvLrFSs+fJ7iezmcglLW//NwygTxI6nb3WBkw1Hs9ggeKWG0G0sbD2lWeIikd2hi4e5PZfK/g9sdjofuQjSFRHQ5hfeldEHUJJQg4L4Ej22U3PirrPHmRQqxv5fPaMGpQ31kpopvxbYUFFTRUL/lzujqysBGt+KpGzXq9OsVG1rlXNpD4gZrb62OuJxiHJmK0exo681PARqXFPMztOgrK8f+Py8HBvCGDzlblvRQSXg0FrVfcWpKbFgF2w97hu7BDKbMHBxXOhae/fGPz1UB4DEDsYiK+HeSnBZ1+OC4fuYAiABtN33svzd0i9psn3+jeSlO3IgTCgVx4A4g==
+	b=VT0je++VPS4/xGPxx3M+ckmTG5ADnFm7T9EtbRubeL2YrzJWir1XijbnbGGgoShJCoFdDBHItU2OZWotFnMq9v5+0heNOZcaUSVOVGZYkxQzOEW7T8FfubLFHmGdVpVbk43yevkzBKkjti0rSgQVMYKnNn5YwOJsrtII3WKYEVSY40/63v2gdYrzE2qYPTEqa1l3O3dFtPtkCbTYlPCWRSJdmZb5svHCQRQgkxu4+m1+bwKXiLAHpNEIgwePXJ46wS8oEUn1gKbPMxiR2VEHfQQ/4XNJKuDBfs9lYrbw8fuZAmeIVMTAN5QuOcBZ4g4MMg3jRCHZAvJWOkFmNPV7Lg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
 	s=arcselector9901;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=8VFbiUdc9nInrp2Bu6ntm44/e1hpssbu0bObmrg8ISM=;
-	b=HG2EDV1R/05hKG3JciF0WfPxm4skbPX4BMKCsV8A9PW0GRAzLHOgTzoyoyqQ+ljwfM1aBCGryVVSdf95i+pn2h1KLVud2+FH+iJ+S1VBDJqFUTWb1SVk62SjGIi5qZ35PqMXRhe4xeRPMHhEY1Zz7845D02wnvHfU7h7PJP+hHeD0PT+SM2aO4Uwx/o850ULR+bxZYAaWJwapbDVkkgqMoV8XnJVjnLKLJo3JKIAuKJNA88gpr2/o/b12HXFI4aCXKxo2QhI4ViWl3/fODXpsaL/7gaglnbBc0OzIWdQFZfn+S2ZmlLBNgQ4oaJF1om/TyzEjqQBn6CXi/P3AbVSBQ==
+	bh=ZgD4uTMh2lW46J7VgA4voAiC/Bg+SmpzZ5O6Zj5u6Hw=;
+	b=llA48mDuOc0JeRHIdPGnYEGkwKaYlIKbrVxVnj25lc6f/MqcNsaTnbVrg7dj+Yw1G9HlY4Qv9Ck0FxcLrfi4BvDZazEgSdDuPIfrDkcVgeM8hFXJU823lKDU43XyKQz+hOfQKKilNrqCPbsHdB2yNtwtmLD/+dfV7xlbb4Ux2siK7ft9ku0XpOR85zEfLF0WZ8t6tzPiwJRu6HD7liqHFohOJjsrlIfbqmbcEhgBT20x+f5wjvktII90MeMSou43aeCqO/thyTkzX/semInMuwPTvGeRuuvwwm2P1/NbpPAF+Mz/TZA+UtobcYJ/UlT1bfMMi8/sGFkjhKxtDf3clw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=permerror (sender ip
 	is 60.241.24.90)
 	smtp.rcpttodomain=lists.openembedded.org
@@ -20,18 +20,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=permerror (sender ip
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opengear.com;
 	s=selector2;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=8VFbiUdc9nInrp2Bu6ntm44/e1hpssbu0bObmrg8ISM=;
-	b=HivQg1kjrTmc+FJGcICMGTXEWrcH1sVYpcvJpSl/4c/WgmNPfKXT75iKoYUpWEwOTzUyrNCXf0lKSfuuYfKG+DEJ4wqNXqhqsrs+fd0DqTEugTaNBIesHconM9sFSsonSAG5F61qY1gfOhtNo2kar2np5IdqH/59RLLN77DO8aA=
-Received: from SN6PR1501CA0035.namprd15.prod.outlook.com (2603:10b6:805::48)
-	by BYAPR15MB2296.namprd15.prod.outlook.com (2603:10b6:a02:8b::13) with
+	bh=ZgD4uTMh2lW46J7VgA4voAiC/Bg+SmpzZ5O6Zj5u6Hw=;
+	b=PmkIZ3JH2XEFng2c+csykTaAF/jwUkDeJdxFCTOpI1ImTs2ttghZJymfp9iVPEBbGD2lwKgrU7pMOQH760aivFP4v/QKG8bMEpG/LY+TzUyHxwdOx/XSDmYW88E9LeO0heaq45c9ktqeplkF8mFHD9KYj7f8NmEj1LPw+5F5U+w=
+Received: from CH2PR15CA0001.namprd15.prod.outlook.com (2603:10b6:610:51::11)
+	by DM6PR15MB2811.namprd15.prod.outlook.com (2603:10b6:5:1b0::12) with
 	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2284.26;
-	Wed, 25 Sep 2019 07:45:08 +0000
-Received: from BN3NAM04FT027.eop-NAM04.prod.protection.outlook.com
-	(2a01:111:f400:7e4e::202) by SN6PR1501CA0035.outlook.office365.com
-	(2603:10b6:805::48) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2284.20 via
-	Frontend Transport; Wed, 25 Sep 2019 07:45:08 +0000
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2284.25;
+	Wed, 25 Sep 2019 08:05:52 +0000
+Received: from CO1NAM04FT006.eop-NAM04.prod.protection.outlook.com
+	(2a01:111:f400:7e4d::206) by CH2PR15CA0001.outlook.office365.com
+	(2603:10b6:610:51::11) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2305.15 via
+	Frontend Transport; Wed, 25 Sep 2019 08:05:50 +0000
 Authentication-Results: spf=permerror (sender IP is 60.241.24.90)
 	smtp.mailfrom=opengear.com; lists.openembedded.org;
 	dkim=none (message not
@@ -40,50 +40,50 @@ Authentication-Results: spf=permerror (sender IP is 60.241.24.90)
 Received-SPF: PermError (protection.outlook.com: domain of opengear.com used
 	an invalid SPF mechanism)
 Received: from postman.bne.opengear.com (60.241.24.90) by
-	BN3NAM04FT027.mail.protection.outlook.com (10.152.92.171) with
-	Microsoft SMTP Server id 15.20.2284.20 via Frontend Transport;
-	Wed, 25 Sep 2019 07:45:07 +0000
+	CO1NAM04FT006.mail.protection.outlook.com (10.152.90.104) with
+	Microsoft SMTP Server id 15.20.2284.25 via Frontend Transport;
+	Wed, 25 Sep 2019 08:05:49 +0000
 Received: from galangal.danc.bne.opengear.com (danc.bne.opengear.com
 	[192.168.254.90])
-	by postman.bne.opengear.com (Postfix) with ESMTPS id 53F49E746A;
-	Wed, 25 Sep 2019 17:45:04 +1000 (AEST)
+	by postman.bne.opengear.com (Postfix) with ESMTPS id 5D351E746A;
+	Wed, 25 Sep 2019 18:05:47 +1000 (AEST)
 Received: by galangal.danc.bne.opengear.com (Postfix, from userid 1090)
-	id 361C142965A9; Wed, 25 Sep 2019 17:45:04 +1000 (AEST)
+	id 453C942965A9; Wed, 25 Sep 2019 18:05:47 +1000 (AEST)
 From: Dan Callaghan <dan.callaghan@opengear.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Sep 2019 17:45:00 +1000
-Message-Id: <20190925074500.9427-1-dan.callaghan@opengear.com>
+Date: Wed, 25 Sep 2019 18:05:37 +1000
+Message-Id: <20190925080537.12606-1-dan.callaghan@opengear.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-EOPAttributedMessage: 0
 X-Forefront-Antispam-Report: CIP:60.241.24.90; IPV:CAL; CTRY:AU; EFV:NLI;
 	SFV:NSPM;
-	SFS:(10009020)(4636009)(39840400004)(136003)(396003)(376002)(346002)(448002)(189003)(199004)(48376002)(6266002)(2906002)(2351001)(50226002)(26826003)(305945005)(246002)(2870700001)(6666004)(356004)(50466002)(103686004)(8676002)(7636002)(8936002)(36756003)(5660300002)(44832011)(26005)(186003)(476003)(6916009)(2616005)(126002)(2361001)(107886003)(478600001)(47776003)(1076003)(70206006)(76130400001)(51416003)(70586007)(4744005)(336012)(426003)(486006)(6306002)(42186006)(36906005)(4326008)(316002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BYAPR15MB2296;
+	SFS:(10009020)(4636009)(136003)(396003)(39840400004)(376002)(346002)(448002)(189003)(199004)(6916009)(5660300002)(47776003)(2351001)(103686004)(26826003)(7636002)(6306002)(36756003)(2361001)(76130400001)(4326008)(356004)(50226002)(1076003)(478600001)(305945005)(6666004)(426003)(246002)(486006)(8936002)(107886003)(8676002)(6266002)(336012)(2616005)(186003)(2906002)(126002)(476003)(26005)(2870700001)(48376002)(36906005)(50466002)(42186006)(70586007)(44832011)(70206006)(316002)(51416003);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:DM6PR15MB2811;
 	H:postman.bne.opengear.com; FPR:; SPF:PermError; LANG:en;
 	PTR:brisbane.opengear.com; MX:1; A:1; 
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 8a790dc7-af99-4fed-8915-08d7418c498d
+X-MS-Office365-Filtering-Correlation-Id: 04f3757b-8fd0-4b5a-07c4-08d7418f2ddd
 X-Microsoft-Antispam: BCL:0; PCL:0;
-	RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600167)(711020)(4605104)(1401327)(2017052603328);
-	SRVR:BYAPR15MB2296; 
-X-MS-TrafficTypeDiagnostic: BYAPR15MB2296:|BYAPR15MB2296:
+	RULEID:(2390118)(7020095)(4652040)(8989299)(5600167)(711020)(4605104)(1401327)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328);
+	SRVR:DM6PR15MB2811; 
+X-MS-TrafficTypeDiagnostic: DM6PR15MB2811:|DM6PR15MB2811:
 X-MS-Exchange-PUrlCount: 3
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BYAPR15MB2296059F14C493456D1B6E0CB8870@BYAPR15MB2296.namprd15.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:1051;
+X-Microsoft-Antispam-PRVS: <DM6PR15MB2811E8C0C996861A48A6AF61B8870@DM6PR15MB2811.namprd15.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3044;
 X-Forefront-PRVS: 01713B2841
 X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam-Message-Info: 0VVxfTzc82HTHUnz5bo/JDcJk8kz9kCLDpieC6kYEf6wiUYtKY8zY+iOzkDjvaRIPVp/LaNXmP82b+y92ekeyYKX5ezbvkIEVW5++n0HBcnpR48K0OyvM936xlQWYK5kMsoE5tI8VNTnS1JDWvQGKdsW+Jrnu7vEoR059R0kIf2evglDtjbue2flykojEptAXBBR6NM4Go/zQP+Sa3Kf6wUrQ/iA7hqsiZ94Qr79DBf7G5ljimAMN9Glx0x2aUdvU1qB4x/lbIKCy4gyDxjQp7ehrUX2J085fQGV1RGuMG/NPvDkrQELbeJT0IgXOw0vlCpnXRaqqlshZrApC3gefZcdSfy6Y1qzV2aLAEvyaiyiNBjNZicTo9Isk2NDPK2SNeskh72amj1OgYcd8P16HqKWP1B+fpKy2/ddmIQZf1DH/tw2CIZcNQKl31iVJxETBXUcsAYl6T66ED++l44DLw==
+X-Microsoft-Antispam-Message-Info: wm20VOYlRqAGdYWxEobfh8upD9n3aoW4eO/ASBCZxjdPyZLto5Iy/ljpWE6O+Elpc5npT8D7ELluecc4FhvM0LgG0ytU6oFou0kjpd/1Djt0bq472ijHEsB74nL4QtdCjQpXgBqNvGXAxKBWEKfLa5/+YAb/Y3itJe+r4v/XWSqHKOk1rktQxjRqv7CePzumlmKSXzLjz5uHuiVv9lf6J58R7IDvgoydiKSh3V30jeqIVUoXwp/ctIr57BvcZE1TolSvVEz13vGxIZShYvKXsw+xHJe0YH/IMsjlza499DttR9Gg0MIKeWqFhW8N/XT2o//RcMIfRWgg8r7l1TOnz3y5dMINb8zyf+ZVatm1OcoM2w3FeZtLVXJN9q8MygsOr4NHA2ufQKncqn4FvZreV9hf0UIRMpOliUwd2PCCxIcneTQTFnXh+rmgQ7+Jqdxgm9tqbpcaFvRc9yU80QA/bA==
 X-OriginatorOrg: opengear.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2019 07:45:07.7010 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a790dc7-af99-4fed-8915-08d7418c498d
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2019 08:05:49.6979 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 04f3757b-8fd0-4b5a-07c4-08d7418f2ddd
 X-MS-Exchange-CrossTenant-Id: a6251c26-d21f-4164-a225-1f4eaebf5f9a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=a6251c26-d21f-4164-a225-1f4eaebf5f9a; Ip=[60.241.24.90];
 	Helo=[postman.bne.opengear.com]
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR15MB2296
-Subject: [meta-networking][PATCH] firewalld: add UPSTREAM_CHECK_URI
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR15MB2811
+Subject: [meta-python][PATCH] add new recipes for python-lrparsing, python3-lrparsing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -96,26 +96,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2019 07:45:11 -0000
+X-List-Received-Date: Wed, 25 Sep 2019 08:05:53 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
+The lrparsing library is an LR(1) parsing library for Python.
+Grammars can be defined using Python expressions.
 ---
- .../recipes-connectivity/firewalld/firewalld_0.7.1.bb            | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-devtools/python/python-lrparsing.inc | 16 ++++++++++++++++
+ .../python/python-lrparsing_1.0.16.bb            |  2 ++
+ .../python/python3-lrparsing_1.0.16.bb           |  2 ++
+ 3 files changed, 20 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-lrparsing.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-lrparsing_1.0.16.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-lrparsing_1.0.16.bb
 
-diff --git a/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.1.bb b/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.1.bb
-index 15567f636..a51c145eb 100644
---- a/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.1.bb
-+++ b/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.1.bb
-@@ -1,6 +1,7 @@
- SUMMARY = "Dynamic firewall daemon with a D-Bus interface"
- HOMEPAGE = "https://firewalld.org/"
- BUGTRACKER = "https://github.com/firewalld/firewalld/issues"
-+UPSTREAM_CHECK_URI = "https://github.com/firewalld/firewalld/releases"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- 
+diff --git a/meta-python/recipes-devtools/python/python-lrparsing.inc b/meta-python/recipes-devtools/python/python-lrparsing.inc
+new file mode 100644
+index 000000000..d125151cd
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-lrparsing.inc
+@@ -0,0 +1,16 @@
++SUMMARY = "Python LR parsing library"
++SECTION = "devel/python"
++LICENSE = "AGPL-3.0"
++LIC_FILES_CHKSUM = "file://agpl-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788"
++
++HOMEPAGE = "http://lrparsing.sourceforge.net/"
++BUGTRACKER = "https://sourceforge.net/p/lrparsing/tickets/"
++UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/lrparsing/files/"
++UPSTREAM_CHECK_REGEX = "lrparsing-(?P<pver>\d+(\.\d+)+)"
++SRC_URI = "${SOURCEFORGE_MIRROR}/lrparsing/lrparsing-${PV}.tar.gz"
++SRC_URI[md5sum] = "34357d69bce87654d792cd8f02d148b2"
++SRC_URI[sha256sum] = "b45afda44001dc5ba632934f74c043d40cce653f1a7526cfbcb68f6be055b8d7"
++
++S = "${WORKDIR}/lrparsing-${PV}"
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-lrparsing_1.0.16.bb b/meta-python/recipes-devtools/python/python-lrparsing_1.0.16.bb
+new file mode 100644
+index 000000000..2cfe3012e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-lrparsing_1.0.16.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-lrparsing.inc
+diff --git a/meta-python/recipes-devtools/python/python3-lrparsing_1.0.16.bb b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.16.bb
+new file mode 100644
+index 000000000..21a80cde1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-lrparsing_1.0.16.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-lrparsing.inc
 -- 
 2.20.1
 
