@@ -1,89 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0438F7E545
+Return-Path: <Trevor.Gamblin@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B7C97E3B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Sep 2019 13:22:06 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id h195so3418850pfe.5
+	Wed, 25 Sep 2019 13:26:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8PDPiwi025841
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Sep 2019 06:22:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:autocrypt:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=7f/hOtKrkv69sSPP+JZpCtTLZEgKNJgH34O1NRIdC9Q=;
-	b=sgiSswNwFC4VCbIvfEgvpq3GjhIxihknZb3Y3DO+lg4HcSWjan4uJw8lOIYPDHACUv
-	x1B8qqOjt/AbTiDzP11b2i+dbfiaC1gvBrLosB7uVbG/FG3/JdZQaNkzbckPnrXK1iQO
-	XGDpet1X3kmLuJxeOnCBDfcp66Y1s73a6KXBObjwsweEcMvxu8pu5jnpGa8dI2ofnilA
-	egABOeIPMDGyII/E4r500g5LrLkMtVAuq/7im7rCbtoAObR/SpFEMUmYKGVmdbjnB+el
-	cz/lq+hkuiSoN6tlDv+PidhGtzMzmohu57bkgVQGFP1ggjsLRQ5X2plHLqfoFZerAY6z
-	UXcw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:autocrypt
-	:organization:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=7f/hOtKrkv69sSPP+JZpCtTLZEgKNJgH34O1NRIdC9Q=;
-	b=Elogsnu5Ahpxua90Xj/lDnf1KYLOKPGu8n2jy9GSEqZyls3mrx00cFK3yNTjstaR3t
-	DWpegKXhthdZAeKoMl4jSCTyhjUSFceTDZOlUc0jEg3wWKYDg6SfTPpqSEoROsC4TVpq
-	Y9Ts9PJsS0X4mVHnwFKgn+dQh7nKWwGoXWzqmuJ0cH0VNKmjGTLk75BWP9SaiQjzGyBv
-	QT+5BG8PIivJ7iKWLPG/KzY2EU+cCXT1hUn0Oc6OnCaB6dY4Ylnc+7bO/qJi7DgR51mD
-	QSKXbSAe2hLI/qG9V4qpcSneeVuLdIMtgkMJjygT2+l1dU7eMjSUuu9JWXYRBQmfVWpl
-	uvHw==
-X-Gm-Message-State: APjAAAWZL5xb+l5JyqYOD6KDM0AH4VV16gT88lEkd3/BT9nZd62vpq7s
-	2u76cOeWJ+OWnl7sE8TZ6pQ3Hy9q/1w=
-X-Google-Smtp-Source: APXvYqxMdOqaOt+eXuWRvu40VTIvi1IWY+sx4IL2y2ueWILWZ4Q7KSe3R64oDqxbDdvX0m1Xao4Wcw==
-X-Received: by 2002:a63:682:: with SMTP id 124mr8730837pgg.102.1569417727246; 
-	Wed, 25 Sep 2019 06:22:07 -0700 (PDT)
-Received: from ?IPv6:2601:646:8500:1c20::cd8f? ([2601:646:8500:1c20::cd8f])
-	by smtp.gmail.com with ESMTPSA id
-	u3sm5433595pfn.134.2019.09.25.06.22.06
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Wed, 25 Sep 2019 06:22:06 -0700 (PDT)
-To: Gaylord Charles <gaylord.charles@veo-labs.com>,
-	openembedded-devel@lists.openembedded.org
-References: <CAAqXYd28BP4hUHjs215ebh+JOp04hHEaK0jxSmfJYosWZfYYeQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
-	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
-Organization: HIMVIS LLC
-Message-ID: <ee3c08d0-c2bf-70e5-ae8b-3aa29b260ae4@gmail.com>
-Date: Wed, 25 Sep 2019 06:22:05 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.1.0
+	Wed, 25 Sep 2019 06:25:54 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Wed, 25 Sep 2019 06:25:33 -0700
+From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 Sep 2019 09:25:33 -0400
+Message-ID: <20190925132533.6804-1-Trevor.Gamblin@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <CAAqXYd28BP4hUHjs215ebh+JOp04hHEaK0jxSmfJYosWZfYYeQ@mail.gmail.com>
-Subject: Re: [meta-webserver][PATCH] nginx: fix install paths
+Subject: [meta-oe][PATCH] haveged: upgrade v1.9.4 -> v1.9.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -96,55 +31,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Sep 2019 13:22:07 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Sep 2019 13:26:04 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
 
+Both of the patches used in v1.9.4 have been incorporated in v1.9.6,
+so they are no longer required - see upstream commits ceab89ad and
+f2193587.
 
-On 9/25/19 2:20 AM, Gaylord Charles wrote:
-> Hello,
-> 
-> This patch fixes Nginx install paths. I tried to build the native variant
-> for testing purpose and had errors.
-> 
-> Regards,
-> Gaylord Charles
-> 
-> From b6dc845b645cc8667b2d89412c292c0801de9270 Mon Sep 17 00:00:00 2001
-> From: Gaylord CHARLES <gaylord.charles@veo-labs.com>
-> Date: Tue, 24 Sep 2019 18:56:45 +0200
-> Subject: [PATCH] nginx: fix install paths
-> 
-> - Use path variable instead of /usr
-> - Replace the absolute path symlink with a relative one
-> 
-> Signed-off-by: Gaylord CHARLES <gaylord.charles@veo-labs.com>
-> ---
->  meta-webserver/recipes-httpd/nginx/nginx.inc | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> index 29e7efc14..1e9d2e1a4 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> @@ -92,9 +92,9 @@ do_install () {
->              >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
->      fi
->      install -d ${D}${sysconfdir}/${BPN}
-> -    ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-> +    ln -snf ../../var/run/${BPN} ${D}${sysconfdir}/${BPN}/run
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ .../fix-cpu-cache-size-detection.patch        | 20 ------------
+ ...d-Makefile.am-add-missing-dependency.patch | 32 -------------------
+ .../{haveged_1.9.4.bb => haveged_1.9.6.bb}    |  6 ++--
+ 3 files changed, 2 insertions(+), 56 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/haveged/haveged/fix-cpu-cache-size-detection.patch
+ delete mode 100644 meta-oe/recipes-extended/haveged/haveged/haveged-init.d-Makefile.am-add-missing-dependency.patch
+ rename meta-oe/recipes-extended/haveged/{haveged_1.9.4.bb => haveged_1.9.6.bb} (88%)
 
-localstatedir variable could have stayed there, any particular reason to
-drop it in favor of hardcoding /var
+diff --git a/meta-oe/recipes-extended/haveged/haveged/fix-cpu-cache-size-detection.patch b/meta-oe/recipes-extended/haveged/haveged/fix-cpu-cache-size-detection.patch
+deleted file mode 100644
+index 5b68f1966..000000000
+--- a/meta-oe/recipes-extended/haveged/haveged/fix-cpu-cache-size-detection.patch
++++ /dev/null
+@@ -1,20 +0,0 @@
+-Some ARM cpus does not report the cache size or say it is -1
+-
+-https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=866306
+-
+-Upstream-status: Pending
+-
+-Index: haveged-1.9.2/src/havegetune.c
+-===================================================================
+---- haveged-1.9.2.orig/src/havegetune.c
+-+++ haveged-1.9.2/src/havegetune.c
+-@@ -795,6 +795,9 @@ static int vfs_configInfoCache(
+-          ctype = vfs_configFile(pAnchor, path, vfs_configType);
+-          strcpy(path+plen, "size");
+-          size  = vfs_configFile(pAnchor, path, vfs_configInt);
+-+         if (size == -1) {
+-+             size = ctype == 'I' ? GENERIC_ICACHE : GENERIC_DCACHE;
+-+         }
+-          cfg_cacheAdd(pAnchor, SRC_VFS_INDEX,  pArgs[1], level, ctype, size);
+-          }
+-      }
+diff --git a/meta-oe/recipes-extended/haveged/haveged/haveged-init.d-Makefile.am-add-missing-dependency.patch b/meta-oe/recipes-extended/haveged/haveged/haveged-init.d-Makefile.am-add-missing-dependency.patch
+deleted file mode 100644
+index 020ac2c3b..000000000
+--- a/meta-oe/recipes-extended/haveged/haveged/haveged-init.d-Makefile.am-add-missing-dependency.patch
++++ /dev/null
+@@ -1,32 +0,0 @@
+-From b04eeea777df32364df74bd63fc5b7fb05d21c8d Mon Sep 17 00:00:00 2001
+-From: Jackie Huang <jackie.huang@windriver.com>
+-Date: Tue, 27 Mar 2018 10:21:09 +0800
+-Subject: [PATCH] init.d/Makefile.am: add missing dependency
+-
+-install-data-hook should depend on install-exec-hook, or the
+-haveged.service might be installed incorrectly when build
+-with -j option.
+-
+-Upstream-Status: Submitted [https://github.com/jirka-h/haveged/pull/13]
+-
+-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+-Signed-off-by: Khem Raj raj.khem@gmail.com
+----
+- init.d/Makefile.am | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/init.d/Makefile.am b/init.d/Makefile.am
+-index 5940f78..07bcdf7 100644
+---- a/init.d/Makefile.am
+-+++ b/init.d/Makefile.am
+-@@ -33,7 +33,7 @@ if ENABLE_SYSTEMD
+- install-exec-hook:
+- 	$(do_subst) < $(srcdir)/$(src_tmpl) > haveged.service;
+-
+--install-data-hook:
+-+install-data-hook: install-exec-hook
+- if ENABLE_SYSTEMD_LOOKUP
+- 	install -p -D -m644 haveged.service $(DESTDIR)`pkg-config --variable=systemdsystemunitdir systemd`/haveged.service;
+- else
+---
+-2.11.0
+diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.4.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.6.bb
+similarity index 88%
+rename from meta-oe/recipes-extended/haveged/haveged_1.9.4.bb
+rename to meta-oe/recipes-extended/haveged/haveged_1.9.6.bb
+index d0e1a29dd..0189e19c0 100644
+--- a/meta-oe/recipes-extended/haveged/haveged_1.9.4.bb
++++ b/meta-oe/recipes-extended/haveged/haveged_1.9.6.bb
+@@ -5,11 +5,9 @@ HOMEPAGE = "http://www.issihosts.com/haveged/index.html"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-# v1.9.4
+-SRCREV = "faa40ff345af194d3253f5fb030403e3c9831c36"
++# v1.9.6
++SRCREV = "1470a82a7f79110c79beea1ca5f2d3b0fd1a4668"
+ SRC_URI = "git://github.com/jirka-h/haveged.git \
+-           file://haveged-init.d-Makefile.am-add-missing-dependency.patch \
+-           file://fix-cpu-cache-size-detection.patch \
+ "
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.21.0
 
->      install -d ${D}${NGINX_WWWDIR}
-> -    mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
-> +    mv ${D}${exec_prefix}/html ${D}${NGINX_WWWDIR}/
->      chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
-> 
->      install -d ${D}${sysconfdir}/init.d
-> 
 
