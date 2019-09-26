@@ -1,47 +1,50 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 365D27E53E
+Return-Path: <gaylord.charles@veo-labs.com>
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+	[209.85.208.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 67CDA7EB14
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 09:12:12 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id n197so4536100iod.9
+	Thu, 26 Sep 2019 09:47:12 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id t3so1340519edw.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 02:12:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Thu, 26 Sep 2019 02:47:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=veo-labs-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=2qZ7AlEFUUiSrOD5Pi04lIv97vsquDOCtcmzy2HGnos=;
-	b=P/X7V4VVA7X996NJwj6fi2lFR92xdnaIZzSr/dHD77JNqYWvkVqrkbsenygZWLmaPu
-	9dmXlIggM4BxGlcOsH4LuxX1yye8VE7eEkT0i4KJbSb/HOHhPXQp6LXXQBEPsjgrcdQN
-	KJydbigqvhqZKlvoS++gUO8jyix5LIh0i6LTz3vG7edK7R9+s66LA7T3c7ddXRbJVLpH
-	uezMA+J3d3of/IWn1i3wjYds8Nin7el81n5IVB4Q/SUq8uISYUJiCtQVn+QZRkA7ho8U
-	x8r6b8hh40kGqPmP1cp96mDSbctat55Cgn0Ru/1X1zcSbve5Gs2aqM89tNNdG58Lmv5e
-	aGcQ==
+	:cc; bh=fgDosDPe3rTCNvNxTEg3eZjNw5fdGvNgAi3XU4bw64Y=;
+	b=G5eCrx9xz2z8kBp5tSwhpUIvJwXpu4njgqs1L/Tax9mk95ZNh4WdYW4H20NCyU85uy
+	eGLqO5LHKD2elmGyw5BV45FfxFVPXb5EnDbDvY5qXkB98KYgvTIvpmR9pu6MNUmyI1ZG
+	/Xn/0lk4i4dR/vx3sztjIHZUJMNhbEh5N8QIWu9BpAKqrnZGdlt6a2cVFSrT+Vlm0MTA
+	O+3tKeHx7VnXRdU3REnd7pkYSpMCVtHqAD3Wcrvna+kEXhTbE5PKgzHbyACGYNW99QwW
+	+kSxadlczjk2gKq1AsO2tU3/e4OO3jVYFJX42Y4a7BU71NkFuDCO5Gok1AoElCyE2cAD
+	495w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=2qZ7AlEFUUiSrOD5Pi04lIv97vsquDOCtcmzy2HGnos=;
-	b=RtcYaz6H68DMkQv7bTiQLqHZmt4CubCHsnre+jjE6HaSNA0C/gG4ef08xoaMQyt7qj
-	AzkTSYgp92HN0xCcxNv9hXOGHLibCRvEjhmGIni0ZzcWQYjHRCiyk4u5rUW/ES0ip4/e
-	xDNZqKgZxUWgm5OMoA3dnJK2vFjDfibDU2d7H0dVLYwR+ZBFStdWieh1ZKSCePpVVZon
-	w40aDloslttDSw54n0LbNDtxXYPFvU46wwVk8iz/oBxmyxuYaZWGdP9YgT9D6+vft2h0
-	sejcR5p3AuYiXm5cjzeno+phlonauXJb6t/PzJxxEv8+40ZLmvsMs9/rAXcehePBgYjp
-	8lLw==
-X-Gm-Message-State: APjAAAWye+Wa3J0XGjKgiY22WZULcRawIbDMJda7PlKezMyWgwnHulD3
-	zZEvPmR5WltKjbQ8UIat1JkN7b65XmJn1Y5W3OywuFTR
-X-Google-Smtp-Source: APXvYqw1GzzF8Jh+hmcKO/8+VMWd8K5nfToApcv54LwmJXMipcAbi77h4g4zD/st+cubRx9G2s0DHufCCZbCIKCmdi8=
-X-Received: by 2002:a02:a792:: with SMTP id e18mr2634868jaj.125.1569489133802; 
-	Thu, 26 Sep 2019 02:12:13 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=fgDosDPe3rTCNvNxTEg3eZjNw5fdGvNgAi3XU4bw64Y=;
+	b=HWj04ILoScbIj0h+108ULWPzCjNAHmH2D8z10ri4It03m5oYjddex2IjpilvhCTuHG
+	hLFdo5C44U0juX60nhE3R7MV+9JgwI0FUi+SHyPBTwOQrEqZxaQjMJvKM7He7gtemJSF
+	6hXrDrg2LmbgVAAVPk8TifG40sogK6KwiGTi1uwWsGJU05+svWwR3jkBxyP2lry4gZmE
+	HCvyNp8HGp3iDPZcDN4JZnvtBOesj+OH+0TEPPfn06G+T5gH2duKZf7MmOFwKbL6PacJ
+	aLns1/ESEpd2A6/D/l66OSSd83olB1vxLwSpEclvqKg18elZjbyNrci2o7/+8wqU4CjR
+	uG+w==
+X-Gm-Message-State: APjAAAXNcNIeVilev6FwYkhWLZx86DF7Mzv4FcQkTfIpMOZ0nyngUG4+
+	ubaSTWE6/M9XIVWJKm7+F+4EprEa4riAZFNxvv4JHg==
+X-Google-Smtp-Source: APXvYqzrAuBeFr38JriRdJOFwm2eHPQV4kT7qKtXTm7ISTk7YkbWKdHj7BqxmVMHkYpiRbxHV4VLf3IGe9USOAaZGcU=
+X-Received: by 2002:a17:906:19d3:: with SMTP id
+	h19mr2237015ejd.121.1569491232986; 
+	Thu, 26 Sep 2019 02:47:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190926071202.9750-1-schnitzeltony@gmail.com>
-In-Reply-To: <20190926071202.9750-1-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 26 Sep 2019 11:12:02 +0200
-Message-ID: <CALbNGRTAzotqiMVXeZ9Dhsz4ROc52ps2PH95kampxw0=BRWdDA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	Kang Kai <kai.kang@windriver.com>
-Subject: Re: [meta-xfce][PATCH 1/2] xfce-panel/systray: Draw icons/background properly when compositing is disabled
+References: <CAAqXYd28BP4hUHjs215ebh+JOp04hHEaK0jxSmfJYosWZfYYeQ@mail.gmail.com>
+	<ee3c08d0-c2bf-70e5-ae8b-3aa29b260ae4@gmail.com>
+In-Reply-To: <ee3c08d0-c2bf-70e5-ae8b-3aa29b260ae4@gmail.com>
+From: Gaylord Charles <gaylord.charles@veo-labs.com>
+Date: Thu, 26 Sep 2019 11:46:46 +0200
+Message-ID: <CAAqXYd3OvmuaYtUKmpCegXnYupz6xWDrZQrsiu+QnEFxM62xYA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-webserver][PATCH] nginx: fix install paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,151 +57,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2019 09:12:13 -0000
+X-List-Received-Date: Thu, 26 Sep 2019 09:47:12 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 26, 2019 at 9:12 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> * this was the last long lasting xfce bug that annoyed me
-> * while at it renumber patches
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  ...=3D> 0002-use-lxdm-to-replace-dm-tool.patch} |  0
->  ...-icons-without-compositing-Bug-14577.patch | 80 +++++++++++++++++++
->  .../xfce4-panel/xfce4-panel_4.14.0.bb         |  3 +-
->  3 files changed, 82 insertions(+), 1 deletion(-)
->  rename meta-xfce/recipes-xfce/xfce4-panel/files/{0001-use-lxdm-to-replac=
-e-dm-tool.patch =3D> 0002-use-lxdm-to-replace-dm-tool.patch} (100%)
->  create mode 100644 meta-xfce/recipes-xfce/xfce4-panel/files/0003-systray=
--Fix-icons-without-compositing-Bug-14577.patch
->
-> diff --git a/meta-xfce/recipes-xfce/xfce4-panel/files/0001-use-lxdm-to-re=
-place-dm-tool.patch b/meta-xfce/recipes-xfce/xfce4-panel/files/0002-use-lxd=
-m-to-replace-dm-tool.patch
-> similarity index 100%
-> rename from meta-xfce/recipes-xfce/xfce4-panel/files/0001-use-lxdm-to-rep=
-lace-dm-tool.patch
-> rename to meta-xfce/recipes-xfce/xfce4-panel/files/0002-use-lxdm-to-repla=
-ce-dm-tool.patch
-> diff --git a/meta-xfce/recipes-xfce/xfce4-panel/files/0003-systray-Fix-ic=
-ons-without-compositing-Bug-14577.patch b/meta-xfce/recipes-xfce/xfce4-pane=
-l/files/0003-systray-Fix-icons-without-compositing-Bug-14577.patch
-> new file mode 100644
-> index 000000000..12cc3f0dc
-> --- /dev/null
-> +++ b/meta-xfce/recipes-xfce/xfce4-panel/files/0003-systray-Fix-icons-wit=
-hout-compositing-Bug-14577.patch
-> @@ -0,0 +1,80 @@
-> +From f6f70cce417fd2982c2ce6f01016ed01deb6a9ae Mon Sep 17 00:00:00 2001
-> +From: "Ivan A. Melnikov" <iv@altlinux.org>
-> +Date: Mon, 23 Sep 2019 16:18:10 +0400
-> +Subject: [PATCH] systray: Fix icons without compositing (Bug #14577)
-> +
-> +Wrapper window uses RGBA visual when it's available;
-> +systray manager should try to do the same for
-> +the transparent or parent-relative background to work.
-> +
-> +That means that the manager and icons will work with
-> +RGBA visual even if the screen is not compositing; so
-> +we should always force-redraw the icons.
-> +
-> +Refs: https://bugzilla.xfce.org/show_bug.cgi?id=3D14577
-> +Signed-off-by: Ivan A. Melnikov <iv@altlinux.org>
-> +
-> +Upstream-Status: Accepted [1]
-> +
-> +[1] https://git.xfce.org/xfce/xfce4-panel/commit?id=3D820de57c44c381e470=
-91d3a7e214852bf8fafb53
-> +---
-> + plugins/systray/systray-manager.c | 10 ++++++----
-> + plugins/systray/systray.c         | 10 ----------
-> + 2 files changed, 6 insertions(+), 14 deletions(-)
-> +
-> +diff --git a/plugins/systray/systray-manager.c b/plugins/systray/systray=
--manager.c
-> +index 68836554..4915649c 100644
-> +--- a/plugins/systray/systray-manager.c
-> ++++ b/plugins/systray/systray-manager.c
-> +@@ -751,6 +751,7 @@ static void
-> + systray_manager_set_visual (SystrayManager *manager)
-> + {
-> +   GdkDisplay  *display;
-> ++  GdkVisual   *visual;
-> +   Visual      *xvisual;
-> +   Atom         visual_atom;
-> +   gulong       data[1];
-> +@@ -768,11 +769,12 @@ systray_manager_set_visual (SystrayManager *manage=
-r)
-> +   visual_atom =3D gdk_x11_get_xatom_by_name_for_display (display,
-> +       "_NET_SYSTEM_TRAY_VISUAL");
-> +
-> +-  if (gdk_screen_is_composited (gtk_widget_get_screen (manager->invisib=
-le))
-> +-      && (gdk_screen_get_rgba_visual (screen) !=3D NULL))
-> ++  visual =3D gdk_screen_get_rgba_visual (screen);
-> ++  panel_debug (PANEL_DEBUG_SYSTRAY, "rgba visual is %p", visual);
-> ++  if (visual !=3D NULL)
-> +     {
-> +-      /* get the rgba visual */
-> +-      xvisual =3D GDK_VISUAL_XVISUAL (gdk_screen_get_rgba_visual (scree=
-n));
-> ++      /* use the rgba visual */
-> ++      xvisual =3D GDK_VISUAL_XVISUAL (visual);
-> +     }
-> +   else
-> +     {
-> +diff --git a/plugins/systray/systray.c b/plugins/systray/systray.c
-> +index 3fb9520c..beae1973 100644
-> +--- a/plugins/systray/systray.c
-> ++++ b/plugins/systray/systray.c
-> +@@ -728,19 +728,9 @@ systray_plugin_box_draw (GtkWidget *box,
-> +                          gpointer   user_data)
-> + {
-> +   SystrayPlugin *plugin =3D XFCE_SYSTRAY_PLUGIN (user_data);
-> +-  GdkScreen      *screen;
-> +-
-> +   panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
-> +   panel_return_if_fail (cr !=3D NULL);
-> +
-> +-  screen =3D gtk_widget_get_screen (GTK_WIDGET (plugin));
-> +-
-> +-  if (G_LIKELY (screen !=3D NULL))
-> +-    {
-> +-      if (!gdk_screen_is_composited (screen))
-> +-        return;
-> +-    }
-> +-
-> +   /* separately draw all the composed tray icons after gtk
-> +    * handled the draw event */
-> +   gtk_container_foreach (GTK_CONTAINER (box),
-> +--
-> +2.21.0
-> +
-> diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.0.bb b/m=
-eta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.0.bb
-> index 749c3fea4..faec9b2b7 100644
-> --- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.0.bb
-> +++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.0.bb
-> @@ -12,7 +12,8 @@ SRC_URI[md5sum] =3D "940e8b430e28093a2e56e390055bcd51"
->  SRC_URI[sha256sum] =3D "d5f8f3bd7e142139987e5e62cda26135a424baabb5e47aa0=
-c23b4169d0a66ef4"
->  SRC_URI +=3D " \
->      file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.pat=
-ch \
-> -    file://0001-use-lxdm-to-replace-dm-tool.patch \
-> +    file://0002-use-lxdm-to-replace-dm-tool.patch \
-> +    file://0003-systray-Fix-icons-without-compositing-Bug-14577.patch \
->  "
->
->  python populate_packages_prepend() {
-> --
-> 2.21.0
->
-Few minutes age xfce4-panel 4.14.1 was released containing the patch -
-will send V2 tonight.
+Ok, thank you. I was not sure of this part.
+I was trying to fix this error :
 
-Andreas
+ERROR: nginx-native-1.15.7-r0 do_populate_sysroot: sstate found an absolute
+path symlink
+/home/gaylord/Projets/box/bbb/tmp/work/x86_64-linux/nginx-native/1.15.7-r0/=
+sysroot-destdir/home/gaylord/Projets/box/bbb/tmp/work/x86_64-linux/nginx-na=
+tive/1.15.7-r0/recipe-sysroot-native/etc/nginx/run
+pointing at
+/home/gaylord/Projets/box/bbb/tmp/work/x86_64-linux/nginx-native/1.15.7-r0/=
+recipe-sysroot-native/var/run/nginx.
+Please replace this with a relative link.
+
+Le mer. 25 sept. 2019 =C3=A0 15:22, Khem Raj <raj.khem@gmail.com> a =C3=A9c=
+rit :
+
+>
+>
+> On 9/25/19 2:20 AM, Gaylord Charles wrote:
+> > Hello,
+> >
+> > This patch fixes Nginx install paths. I tried to build the native varia=
+nt
+> > for testing purpose and had errors.
+> >
+> > Regards,
+> > Gaylord Charles
+> >
+> > From b6dc845b645cc8667b2d89412c292c0801de9270 Mon Sep 17 00:00:00 2001
+> > From: Gaylord CHARLES <gaylord.charles@veo-labs.com>
+> > Date: Tue, 24 Sep 2019 18:56:45 +0200
+> > Subject: [PATCH] nginx: fix install paths
+> >
+> > - Use path variable instead of /usr
+> > - Replace the absolute path symlink with a relative one
+> >
+> > Signed-off-by: Gaylord CHARLES <gaylord.charles@veo-labs.com>
+> > ---
+> >  meta-webserver/recipes-httpd/nginx/nginx.inc | 4 ++--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
+> > b/meta-webserver/recipes-httpd/nginx/nginx.inc
+> > index 29e7efc14..1e9d2e1a4 100644
+> > --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
+> > +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+> > @@ -92,9 +92,9 @@ do_install () {
+> >              >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
+> >      fi
+> >      install -d ${D}${sysconfdir}/${BPN}
+> > -    ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
+> > +    ln -snf ../../var/run/${BPN} ${D}${sysconfdir}/${BPN}/run
+>
+> localstatedir variable could have stayed there, any particular reason to
+> drop it in favor of hardcoding /var
+>
+> >      install -d ${D}${NGINX_WWWDIR}
+> > -    mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
+> > +    mv ${D}${exec_prefix}/html ${D}${NGINX_WWWDIR}/
+> >      chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
+> >
+> >      install -d ${D}${sysconfdir}/init.d
+> >
+>
 
