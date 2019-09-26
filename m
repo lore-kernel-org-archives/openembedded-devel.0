@@ -1,51 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AC3F7D076
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 62F437DD44
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 16:26:51 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id 3so3254955wmi.3
+	Thu, 26 Sep 2019 16:29:24 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id l3so3622496qtr.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 09:26:52 -0700 (PDT)
+	Thu, 26 Sep 2019 09:29:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=WukLySciGkOY+wiO4p7gapUlcWttzxghrkMXJ5i0WiQ=;
-	b=EY/5LJfn4WM8RVcc/HTuz3BprEk0Rg8qsa3ksb4xskTnRcGa1IL5nyow7e/XFQw3DV
-	fbakClrW8tsgAIoN26xAjpO8d2yIl1CtgZuWLLxXlEyahP6NP6Oq1T23wjnpFcfC1WUP
-	q03TLb7+rqYYtDSfR2Ex4s3ycivwAvx3Z0u8e1OEM/0I6vX+uGgoi0ykms4FF5H/THqJ
-	FSGWRGryaR6sPWMyVg3h40ZLjdTtZpNd757EicSI01xG+/o9HJ09g43dTyc5e4Fmv69O
-	7441f5Z+smRpzK1PQRU3Gmcya2LZoblkDrhTCH1W8dkudczZYe7t80XPpGbVW6GgyQNc
-	EfjA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=7CoSyzru/6BDNj6gkdKKKl4B6AYBKy+ubmOXxbPF+R4=;
+	b=Upq5xRPxF/gm//lKBhxnRPS1poqoZ1mHj0ZNrgNG2FkO2uEueOjaABO9n4Zct6bWk6
+	iLx2D3S/Q7UexG+aduZBryrTeKtsCI/Z23olivHxe41LmMKiaCe/cCKoAfPqCBdb38Nw
+	dyFAdPNEvNLMMKNu0u0sqUByhxntOvvZpYYe0EqYc4/4Hw6EOQj4Te583tasJy7zL9eM
+	Ifg9kcORpoX4+hFCXwXacEcbWsTJ9RaFBmoOZ9IVrUKmftZHXMpaEvyDA67fp8ro2xp5
+	awq/LyXfZbVscwAYOsbnmSmB1rpYm7ymkIEP0Kt2fwdDqbEjaEEDM4gTK6KbB3QvcoJM
+	7UjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=WukLySciGkOY+wiO4p7gapUlcWttzxghrkMXJ5i0WiQ=;
-	b=APLtJhKuckBEvjpi0fO+IolRYnWMoF8k5VYefzrbDDsGuORBx8IUQn28Ngfub87ZQ1
-	UmRhsik6QlEN0GNdZgpqqLw0ey5303Vep/qTYZjsb0FWxxi7+hRNDdE/JYk3wYDhoyZ0
-	I5MzdCoEVfMRNLWBb0Fa+HuLQNtZdUiaQCy23I9zZXPR7BebKTP5xkaCF86WKMkCh5vz
-	3JNwFHies2TjS7HKfAdLoWzM/sjSGgHWO5DPP4gpd4249UrJRuwF8DWvG+6A0US6WBKE
-	S8vt7AfLyX1eitSOzhsWjLT8uuKyacIKHLgzc8XQiKPqk69sViIN/0t+/urY3SawrhEa
-	txXQ==
-X-Gm-Message-State: APjAAAWDYoCSNcVV3bbEYQh7Og57JXDr0pETFpA39RTZg1gRa+SJDdPe
-	Capclnyv7a5JodFG0M1AlQxq2qkB4x8=
-X-Google-Smtp-Source: APXvYqwkP8XcAps8s+vOr/oPDaprVFaXH0wjwVrG7DrBWmHPk198PuPitVCYCF60vqy1M8g/NmuCDw==
-X-Received: by 2002:a1c:7d8e:: with SMTP id y136mr3607957wmc.83.1569515211670; 
-	Thu, 26 Sep 2019 09:26:51 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id
-	s19sm8414932wrb.14.2019.09.26.09.26.51
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 26 Sep 2019 09:26:51 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Sep 2019 16:26:55 +0000
-Message-Id: <20190926162655.375600-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190926162655.375600-1-Martin.Jansa@gmail.com>
-References: <20190926162655.375600-1-Martin.Jansa@gmail.com>
-Subject: [meta-networking][PATCH 2/2] Revert "spice: Drop broken native"
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=7CoSyzru/6BDNj6gkdKKKl4B6AYBKy+ubmOXxbPF+R4=;
+	b=sWQNCGhydIxpSAM1JcPquDkRR5cJ+zWqdr9Amv6sCaxaeOcTq9zRSpgORO6YUeq/Er
+	Nn0v10WXSGwFIsdFofcOBeGuzzSw21D1CY5oHR7JDoLBNM4btLHe/mFLjuJkDJe9fmn6
+	FU85DnUMq9/1fzBDYN2OErHSpJrdQ4PR9XqCXdOdtKpHZ9Fd2SX32jr/kgrmDrqq8+QE
+	I7mJIrmJ/71Cx7pwg5NY5fS/Y9J2IV18kUYQ7RuXacE6byqjP5Hvuyj64PW0cTN1N/lF
+	a8BVrRqPCV+XgVOikdZrmQ71Lvw57LsBWkBGCFJx78BF96muX8DS8aiSfQm9JuiT0kpz
+	+tdw==
+X-Gm-Message-State: APjAAAX1rzOJ1xch1XgSvIkgR2AcpzHZ9R3C5X/ixmdAp5qMswxyhTuw
+	mYNxkxpTzRyT2ZSvQqcsKKvg+IQHyeMXiu8OokNOVwF5
+X-Google-Smtp-Source: APXvYqwuyeuqKKZ7U4cpIwqpuL9cJF+CdWyO2xadBGH3/IK5ntBmOOd82EBOl68K/vMEMRR8KTJFaqiDrKcDZ8kAUxA=
+X-Received: by 2002:ac8:5306:: with SMTP id t6mr4882076qtn.53.1569515365023;
+	Thu, 26 Sep 2019 09:29:25 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190926080221.2217083-1-adrian.ratiu@collabora.com>
+	<CAMKF1srhhGeNkpektFdqjRxXsW+8b7Kk+yviekXvjOc82_qq7g@mail.gmail.com>
+	<87r243um8f.fsf@iwork.i-did-not-set--mail-host-address--so-tickle-me>
+In-Reply-To: <87r243um8f.fsf@iwork.i-did-not-set--mail-host-address--so-tickle-me>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 26 Sep 2019 09:28:58 -0700
+Message-ID: <CAMKF1sq5tSLNoWEwv8A1Yt=uqu9iwaQDUSH83V0d_5hWbq8FEQ@mail.gmail.com>
+To: Adrian Ratiu <adrian.ratiu@collabora.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe] [PATCH] renderdoc: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,40 +55,202 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2019 16:26:51 -0000
+X-List-Received-Date: Thu, 26 Sep 2019 16:29:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This reverts commit 5f32fd6b08d79b9a4d1bffb9b2bcbc535a5b27d2.
+On Thu, Sep 26, 2019 at 8:10 AM Adrian Ratiu <adrian.ratiu@collabora.com> wrote:
+>
+> Hello,
+>
+> On Thu, 26 Sep 2019, Khem Raj <raj.khem@gmail.com> wrote:
+> > https://errors.yoctoproject.org/Errors/Details/272045/
+>
+> Is using COMPATIBLE_MACHINE to stop the recipe from being built on
+> mips an acceptable solution? Something like:
+>
+> COMPATIBLE_MACHINE_mipsarch = "(^$)"
+>
 
-* fixed by restricting -Wno-error=address-of-packed-member only for
-  target, spice-native is still useful for qemu-native when spice
-  PACKAGECONFIG is enabled
+I think we need to understand the whole set of arches it supports just
+doing mips will fix one
+of the CI builds
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-networking/recipes-support/spice/spice_git.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
-index 2829a59d15..39bee99a4a 100644
---- a/meta-networking/recipes-support/spice/spice_git.bb
-+++ b/meta-networking/recipes-support/spice/spice_git.bb
-@@ -39,6 +39,7 @@ export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
- 
- CFLAGS_append_class-target = " -Wno-error=address-of-packed-member"
- 
-+PACKAGECONFIG_class-native = ""
- PACKAGECONFIG_class-nativesdk = ""
- PACKAGECONFIG ?= "sasl"
- 
-@@ -53,6 +54,6 @@ PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
- 
- COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
- 
--BBCLASSEXTEND = "nativesdk"
-+BBCLASSEXTEND = "native nativesdk"
- 
- EXTRA_OECONF_append_toolchain-clang = " --disable-werror"
--- 
-2.17.1
-
+> >
+> > On Thu, Sep 26, 2019 at 1:02 AM Adrian Ratiu <adrian.ratiu@collabora.com> wrote:
+> >>
+> >> RenderDoc is a MIT licensed stand-alone multi-platform graphics
+> >> debugger that allows easy frame by frame capture and detailed
+> >> introspection of any applications using Vulkan, OpenGL, OpenGL ES,
+> >> and others.
+> >>
+> >> Signed-off-by: Adrian Ratiu <adrian.ratiu@collabora.com>
+> >> ---
+> >>  ...d-instead-of-cross-compiling-shim-bi.patch | 57 +++++++++++++++++++
+> >>  ...eLists.txt-remove-flag-unsupported-b.patch | 48 ++++++++++++++++
+> >>  .../renderdoc/renderdoc_1.4.bb                | 29 ++++++++++
+> >>  3 files changed, 134 insertions(+)
+> >>  create mode 100644 meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
+> >>  create mode 100644 meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
+> >>  create mode 100644 meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
+> >>
+> >> diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch b/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
+> >> new file mode 100644
+> >> index 000000000..e96dedfc3
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
+> >> @@ -0,0 +1,57 @@
+> >> +From 41a8c9b5ac13066770baee476ebf9828371f4dad Mon Sep 17 00:00:00 2001
+> >> +From: Adrian Ratiu <adrian.ratiu@collabora.com>
+> >> +Date: Tue, 24 Sep 2019 16:07:18 +0300
+> >> +Subject: [PATCH] renderdoc: use xxd instead of cross-compiling shim binary
+> >> +
+> >> +Renderdoc's attempt to cross compile an xxd replacement by directly
+> >> +calling a host cross-compiler breaks under OE's recipe specific
+> >> +sysroots protection because this is not a native recipe, so we just
+> >> +use xxd-native instead.
+> >> +
+> >> +Upstream-Status: Inappropriate [embedded-specific]
+> >> +
+> >> +---
+> >> + renderdoc/CMakeLists.txt | 23 +----------------------
+> >> + 1 file changed, 1 insertion(+), 22 deletions(-)
+> >> +
+> >> +diff --git a/renderdoc/CMakeLists.txt b/renderdoc/CMakeLists.txt
+> >> +index 5cb7440a4..453a034ba 100644
+> >> +--- a/renderdoc/CMakeLists.txt
+> >> ++++ b/renderdoc/CMakeLists.txt
+> >> +@@ -370,26 +370,6 @@ set(data
+> >> + set(data_objects)
+> >> +
+> >> + if(UNIX)
+> >> +-    # If we're cross-compiling, include-bin will get built for the target and we
+> >> +-    # then can't execute it. Instead, we force calling c++ (which we can safely
+> >> +-    # assume is present) directly to build the binary
+> >> +-
+> >> +-    if(CMAKE_CROSSCOMPILING)
+> >> +-        set(HOST_NATIVE_CPP_COMPILER c++ CACHE STRING "Command to run to compile a .cpp into an executable. Default is just c++")
+> >> +-
+> >> +-        add_custom_command(OUTPUT ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin
+> >> +-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+> >> +-            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+> >> +-            COMMAND ${HOST_NATIVE_CPP_COMPILER} 3rdparty/include-bin/main.cpp -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin
+> >> +-            DEPENDS 3rdparty/include-bin/main.cpp)
+> >> +-        set(INCLUDE_BIN_EXE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin")
+> >> +-        set(INCLUDE_BIN_DEP "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin")
+> >> +-    else()
+> >> +-        add_executable(include-bin 3rdparty/include-bin/main.cpp)
+> >> +-        set(INCLUDE_BIN_EXE $<TARGET_FILE:include-bin>)
+> >> +-        set(INCLUDE_BIN_DEP include-bin)
+> >> +-    endif()
+> >> +-
+> >> +     foreach(res ${data})
+> >> +         set(in ${res})
+> >> +         set(working_dir ${CMAKE_CURRENT_SOURCE_DIR})
+> >> +@@ -399,8 +379,7 @@ if(UNIX)
+> >> +         add_custom_command(OUTPUT ${out_src}
+> >> +             WORKING_DIRECTORY ${working_dir}
+> >> +             COMMAND ${CMAKE_COMMAND} -E make_directory ${out_src_dir}
+> >> +-            COMMAND ${INCLUDE_BIN_EXE} ${in} ${out_src}
+> >> +-            DEPENDS ${INCLUDE_BIN_DEP}
+> >> ++            COMMAND xxd -i ${in} ${out_src}
+> >> +             DEPENDS ${res})
+> >> +
+> >> +         list(APPEND data_objects ${out_src})
+> >> diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch b/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
+> >> new file mode 100644
+> >> index 000000000..8cfac3b0e
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
+> >> @@ -0,0 +1,48 @@
+> >> +From 40511a6f4dc6311c8cf7f2954d1202ede55881ff Mon Sep 17 00:00:00 2001
+> >> +From: Adrian Ratiu <adrian.ratiu@collabora.com>
+> >> +Date: Wed, 25 Sep 2019 19:31:14 +0300
+> >> +Subject: [PATCH] (q)renderdoc/CMakeLists.txt: remove flag unsupported by GCC
+> >> +
+> >> +-Wno-unknown-warning is not supported by GCC, only by Clang so we
+> >> +remove it because newer GCC versions like 9.2.0 will complain, older
+> >> +versions would just ignore it.
+> >> +
+> >> +Upstream-Status: Pending [https://github.com/baldurk/renderdoc/pull/1530]
+> >> +
+> >> +Signed-off-by: Adrian Ratiu <adrian.ratiu@collabora.com>
+> >> +
+> >> +---
+> >> + qrenderdoc/CMakeLists.txt | 2 +-
+> >> + renderdoc/CMakeLists.txt  | 4 ++--
+> >> + 2 files changed, 3 insertions(+), 3 deletions(-)
+> >> +
+> >> +diff --git a/qrenderdoc/CMakeLists.txt b/qrenderdoc/CMakeLists.txt
+> >> +index 9fd65b2d3..d52dd274e 100644
+> >> +--- a/qrenderdoc/CMakeLists.txt
+> >> ++++ b/qrenderdoc/CMakeLists.txt
+> >> +@@ -149,7 +149,7 @@ file(WRITE
+> >> + if(CMAKE_COMPILER_IS_GNUCXX)
+> >> +     file(APPEND
+> >> +         ${CMAKE_BINARY_DIR}/qrenderdoc/qrenderdoc_cmake.pri
+> >> +-        "QMAKE_CXXFLAGS+=-Wno-unknown-warning -Wno-implicit-fallthrough -Wno-cast-function-type -Wno-stringop-truncation\n")
+> >> ++        "QMAKE_CXXFLAGS+=-Wno-implicit-fallthrough -Wno-cast-function-type -Wno-stringop-truncation\n")
+> >> + endif()
+> >> +
+> >> + # propagate build version info. Lots of escaping needed here to pass ""s into the define value
+> >> +diff --git a/renderdoc/CMakeLists.txt b/renderdoc/CMakeLists.txt
+> >> +index 453a034ba..abe7e1302 100644
+> >> +--- a/renderdoc/CMakeLists.txt
+> >> ++++ b/renderdoc/CMakeLists.txt
+> >> +@@ -320,10 +320,10 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR APPLE)
+> >> +
+> >> +     if(CMAKE_COMPILER_IS_GNUCXX)
+> >> +         set_property(SOURCE 3rdparty/jpeg-compressor/jpgd.cpp
+> >> +-            APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-unknown-warning -Wno-implicit-fallthrough")
+> >> ++            APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-implicit-fallthrough")
+> >> +
+> >> +         set_property(SOURCE strings/utf8printf.cpp
+> >> +-            APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-unknown-warning -Wno-format-truncation")
+> >> ++            APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-format-truncation")
+> >> +     endif()
+> >> +
+> >> +     # Need to add -Wno-unknown-warning-option since only newer clang versions have
+> >> diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
+> >> new file mode 100644
+> >> index 000000000..ca26ae8c3
+> >> --- /dev/null
+> >> +++ b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
+> >> @@ -0,0 +1,29 @@
+> >> +SUMMARY = "RenderDoc recipe providing renderdoccmd"
+> >> +DESCRIPTION = "RenderDoc is a frame-capture based graphics debugger"
+> >> +HOMEPAGE = "https://github.com/baldurk/renderdoc"
+> >> +LICENSE = "MIT"
+> >> +LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9753b1b4fba3261c27d1ce5c1acef667"
+> >> +
+> >> +SRCREV = "214d85228538e71cc63a0d7fa11dd75b1d56cc81"
+> >> +SRC_URI = "git://github.com/baldurk/${BPN}.git;protocol=http;branch=v1.x \
+> >> +          file://0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch \
+> >> +          file://0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch \
+> >> +"
+> >> +S = "${WORKDIR}/git"
+> >> +
+> >> +DEPENDS += "virtual/libx11 virtual/libgl libxcb xcb-util-keysyms vim-native"
+> >> +
+> >> +RDEPENDS_${PN} = "libxcb xcb-util-keysyms"
+> >> +
+> >> +inherit cmake python3native
+> >> +
+> >> +EXTRA_OECMAKE += "\
+> >> +       -DENABLE_QRENDERDOC=OFF \
+> >> +       -DENABLE_PYRENDERDOC=OFF \
+> >> +       -DENABLE_RENDERDOCCMD=ON \
+> >> +"
+> >> +
+> >> +TARGET_CFLAGS += "-Wno-error=deprecated-copy"
+> >> +
+> >> +FILES_${PN} += "${libdir}"
+> >> +FILES_${PN}-dev = "${includedir}"
+> >> --
+> >> 2.23.0
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
