@@ -1,48 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id CC1CC7ED22
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id A3E127E7BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 03:09:09 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id 4so575946qki.6
+	Thu, 26 Sep 2019 05:42:03 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,550,1559491200"; d="scan'208";a="76046336"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Sep 2019 13:42:02 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id B454C4CE14F5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Sep 2019 20:09:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=9YxKrCjmUojKAOW3RsWn+w1gN0+aZiwvErwM17H6rQI=;
-	b=Mnmgi/Tf66HZefRDJCMpxmahn0N2mfjXQ/M68tL3hor5Xsh7Q49P1NCTNL7k98AbGJ
-	lR+BkJRMB3OJFxUtukFgKwaDJeicaukZKam6l/IGWbhdCaaZAQeffheUdxFngQ0XInYy
-	8yOivp/OatkoeECS4au4hIbxG9FfoMlM1jb/TqHrss1FKC4PeXD+WtfIV6gf9nKM56vH
-	G1vv+gKaKGl3/y15IeN8Bt3WgZUSUZGnGy9HzhHnZzNZvzCHHNrasTRkKYf8nk5miu+p
-	ELvbZ7HOHL8sDPZmAPK32yWHQUdcvBvKLOHJdjaUNo8OxCSaARhbPzxXSsvhrezdpWw3
-	6iGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=9YxKrCjmUojKAOW3RsWn+w1gN0+aZiwvErwM17H6rQI=;
-	b=ON2fRzs6yAsBytK4FgJYdMdz3dHXdDdh1nZl/C+sVFeTZRP4mJ6TqcUGdbADkV4ogo
-	Vt6gFWUN+fgho04I07I8Y1QmR7QrDMRsqAChFaUxTbctqS4HSsWnRZtcrAeP3YFdB3tO
-	1CroNbTXluDY/PM8i6SMPnnFgQrP9yvC3BAOnDTCOqAwtGULY+f4aL6QYCvUVzmH5t1T
-	+qtNSLDDxzDrTI0M1UqbaEcLNSQneDidEz1masgKETpZGmTApPFhU1L7dd4lyhwqLld6
-	A69ch2llNOemlljo5GQmHw4fbzkGOTXJ1ugwaA026qI9FRa5fOpQNClKb/k/ZHL5vB9x
-	PqWQ==
-X-Gm-Message-State: APjAAAWkMTrgc81MPnZm/+1N6NUFCV/3s4vOLjsf1il5Gtq3oSJBUwyn
-	lZBw+4m/rVappFcJna247yxLqprCJxIEhB4oaIPbc57YRB0=
-X-Google-Smtp-Source: APXvYqwI0JHfV06h4a0iecpjykadTYAEAeZbC+eO9EIekr0vxb17vJo3Wxe7Cu4CCZV4l+VqmnRcGLKh0U7g3QMU9lI=
-X-Received: by 2002:a05:620a:13d1:: with SMTP id
-	g17mr1240453qkl.9.1569467350204; 
-	Wed, 25 Sep 2019 20:09:10 -0700 (PDT)
+	Thu, 26 Sep 2019 13:42:03 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 26 Sep 2019 13:42:13 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 26 Sep 2019 13:41:55 +0800
+Message-ID: <20190926054155.29515-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190926005223.12612-1-open.source@oleksandr-kravchuk.com>
-	<20190926005223.12612-2-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190926005223.12612-2-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 25 Sep 2019 20:08:44 -0700
-Message-ID: <CAMKF1sqUXPNTAq+BLdsW0GOXVssYd97zw68-aR9=OHOOuLC=PA@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2][meta-oe 2/2] tesseract-lang: update to 4.0.0
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: B454C4CE14F5.A9844
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-paste: upgrade 3.2.0 -> 3.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,55 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2019 03:09:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 26 Sep 2019 05:42:04 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Fails on musl
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../python/{python-paste_3.2.0.bb => python-paste_3.2.1.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-paste_3.2.0.bb => python-paste_3.2.1.bb} (71%)
 
-https://errors.yoctoproject.org/Errors/Details/272006/
+diff --git a/meta-python/recipes-devtools/python/python-paste_3.2.0.bb b/meta-python/recipes-devtools/python/python-paste_3.2.1.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python-paste_3.2.0.bb
+rename to meta-python/recipes-devtools/python/python-paste_3.2.1.bb
+index 92a97d1..6c78598 100644
+--- a/meta-python/recipes-devtools/python/python-paste_3.2.0.bb
++++ b/meta-python/recipes-devtools/python/python-paste_3.2.1.bb
+@@ -5,8 +5,8 @@ RDEPENDS_${PN} = "python-six"
+ 
+ LIC_FILES_CHKSUM = "file://docs/license.txt;md5=1798f29d55080c60365e6283cb49779c"
+ 
+-SRC_URI[md5sum] = "9225991c1c37a81e0aaac2fb046f3602"
+-SRC_URI[sha256sum] = "2153da2f1b09a69bce7633d7e3f9aaa802572e85f9ac1ed09ad93ef8599d31b6"
++SRC_URI[md5sum] = "4ec8ac6032270daf91ff9621bda019d0"
++SRC_URI[sha256sum] = "3d9c9e96a8408777b01976dfce900049e9e8c970e02198534f2c8c1b2cca5dee"
+ 
+ PYPI_PACKAGE = "Paste"
+ inherit pypi setuptools
+-- 
+2.7.4
 
-On Wed, Sep 25, 2019 at 5:53 PM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  .../{tesseract-lang_git.bb => tesseract-lang_4.0.0.bb}      | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-graphics/tesseract/{tesseract-lang_git.bb => tesseract-lang_4.0.0.bb} (82%)
->
-> diff --git a/meta-oe/recipes-graphics/tesseract/tesseract-lang_git.bb b/meta-oe/recipes-graphics/tesseract/tesseract-lang_4.0.0.bb
-> similarity index 82%
-> rename from meta-oe/recipes-graphics/tesseract/tesseract-lang_git.bb
-> rename to meta-oe/recipes-graphics/tesseract/tesseract-lang_4.0.0.bb
-> index ac36a91a3..75c2bc00e 100644
-> --- a/meta-oe/recipes-graphics/tesseract/tesseract-lang_git.bb
-> +++ b/meta-oe/recipes-graphics/tesseract/tesseract-lang_4.0.0.bb
-> @@ -3,16 +3,16 @@ SUMMARY = "tesseract-ocr language files"
->  LICENSE = "Apache-2.0"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=9648bd7af63bd3cc4f5ac046d12c49e4"
->
-> -PV = "3.04.00+git${SRCPV}"
-> -SRCREV = "3cf1e2df1fe1d1da29295c9ef0983796c7958b7d"
-> +SRCREV = "590567f20dc044f6948a8e2c61afc714c360ad0e"
->  SRC_URI = "git://github.com/tesseract-ocr/tessdata.git"
-> +
->  S = "${WORKDIR}/git"
->
->  inherit allarch
->
->  do_install() {
->      install -d ${D}${datadir}/tessdata
-> -    cp -R --no-dereference --preserve=mode,links -v ${S}/*.traineddata ${S}/*.cube.* ${S}/*.tesseract_cube.* ${D}${datadir}/tessdata
-> +    cp -R --no-dereference --preserve=mode,links -v ${S}/*.traineddata ${D}${datadir}/tessdata
->  }
->
->  python populate_packages_prepend () {
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
 
