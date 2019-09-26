@@ -1,52 +1,48 @@
-Return-Path: <gaylord.charles@veo-labs.com>
-Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
-	[209.85.208.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 110347DD44
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
+	[209.85.208.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 920DB7C426
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 15:32:13 +0000 (UTC)
-Received: by mail-ed1-f67.google.com with SMTP id c4so2544316edl.0
+	Thu, 26 Sep 2019 15:44:17 +0000 (UTC)
+Received: by mail-ed1-f49.google.com with SMTP id r16so2529689edq.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 08:32:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=veo-labs-com.20150623.gappssmtp.com; s=20150623;
+	Thu, 26 Sep 2019 08:44:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=hPFmFLMq8uN807gkGtcKfQgUlmeLZDNyMzsN6XdSxsY=;
-	b=kMW4NElRVIctfa4gMGkA5KbLXdCkQns33lT+auY8JarnrwUtVWtkA0pHwSwYkacG/n
-	S2P9ybq1DFZbkI8GvbvZr/G9L2jdPTJOpqHPzkI6o/3w+KZDvvgghLlsyrSF4E09DZTf
-	BsTbBIufpeJw880hBKBWGw09Yge4du098ZItftJM03qdu0N2gIMTVmExUAWEvD6L/nMZ
-	YvSFD5jzkbSHirlCAfXGnYQ1mmSgXTj12dZUJGqu/H+HfhZJIyo1Ivo35h5klXNu3lY5
-	1w3UAXcu9UWaw1FX3dfn7NRy6Rk5ZxNjRNj3+jAiz1+NpzpEkhu9kYKAXxDqT1poJ9qV
-	5Bqg==
+	:cc; bh=/OwucfeQ60ewHvokveEVd2Bvyie0o2mfNGBm9P1r/nU=;
+	b=kYoYPDYi+VQeuL4RTfvLMb/eJhItTV6NI+2OLfciyJzO2tOzuC0c/irl4z229P1Ax6
+	WaY3LEJPlCC+JWY2YTzgHghQ7J8lJ+Ia0d6H6q9OsAloktjlmNNYnkw+KWM242RVHcQN
+	Xhcts5dwYW/xupRHcgnl4knTPOdNE6IIm+2n8eq/7J0JNbNkscr/MTczVY/f2ybwjuAT
+	8sC5KJ9zg/+jVohPnf0AWvI1MvHPR4xXV3Sg4JJ31V0iNNB+Luj27UdndJ7grFeEqo0B
+	JYevGN9sfMw3p5k8Cy7AaS8Nujy0YgZN2sEAal24ozMr/gSzs8/gA3CSLG/6hrrILLy/
+	T8/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=hPFmFLMq8uN807gkGtcKfQgUlmeLZDNyMzsN6XdSxsY=;
-	b=r8y4ZqnvVtf/7J+IiqumvA6a0fQ8Yhm5hUN9kwSu6FS3MSH+Y1k2qLXIOPnAwlPGEs
-	Fmi85OBWnHdxudwQDOexCygusujLzfm7+UEM9woAlfXt/XyREHfQ8ySh+Tf/GL5BaEOl
-	f/nEblBvVjMWvNmV25OkWxngniAmYd39xMgWq1jibOGpfZHPXS+2TRc4pVW8xPRVeu2R
-	sq0dqIj8H5/PhAt2H9qheFhv9tlfrW/y+krk+K2m9c6hEygIT2K0HN5s4mAd7U6v4dEI
-	iDtZaP1zwP/kELfXpQnDrw/84hQuG2ol5TEjcNQ1d3aPN6tatmixvD7dDhGTY2G3pgnY
-	F20Q==
-X-Gm-Message-State: APjAAAXFwO6Z89y4zmRmC/8LZ8+loAG4BjIAQoxQbjfj9eO4PUH5IgrB
-	Hh3v7HdJwIbTPZCSpKpgtRv8siMlTFYmEu9Kg6EsmQ==
-X-Google-Smtp-Source: APXvYqxvA3p9VD4rUl0vgn60Iujvfy+zaNRTOtLgWrShZNT0Y8p7lJnIhDfRIOTShsZyOify+bQKdQS3fq20r1l1DCU=
-X-Received: by 2002:a17:906:7245:: with SMTP id
-	n5mr3695605ejk.173.1569511934560; 
-	Thu, 26 Sep 2019 08:32:14 -0700 (PDT)
+	bh=/OwucfeQ60ewHvokveEVd2Bvyie0o2mfNGBm9P1r/nU=;
+	b=oAM3eg70+g9Ctnx0GXOU0bRpm9WfOufy0/WusBjLSvWzlMAGVtY8Peh/Cd230LdmZp
+	ZUQHbTKt0vg6YVrdIDHBXcEKDbcdBNYFQ6Q6hO/Y/HM85S3EH3dL6YQjfXO9DZe/JkoI
+	IcZwRXa7amexoe5gHcN3xMW9yQcovG6DqD4GQYLC6EEMhjDxQHMv+n0MXWTuqpZwDfcI
+	PXUHdHnkanKMYmakiHBIVCh8uo+OXV6Yp1ig+51I+lnwQAUy8cAxcXVgKf2Q5LzDdWvI
+	n9qBsY5pNwrjLT+W70zddszl5AbWIOX/cqC7pxCh22py72ksKufAoWZNfRbtt2fjrX8j
+	1KYA==
+X-Gm-Message-State: APjAAAWE8J2ytL4cofOzBw07yHS1zb5xyQ5RP2PA7APh3ienU4pCskwB
+	WFimW1rR0mOZ30+nusyM6UjFz4djW9doRMWYCP2by/ye
+X-Google-Smtp-Source: APXvYqzE2/fZkRI/7k+KDgl4CdSVWoE2DFPkQKRn5rmY31hrPOKHjy5Jgr92o8eG1iSRj6VDAfY/1rQ3/pJFVdJ+wKI=
+X-Received: by 2002:aa7:c614:: with SMTP id h20mr4289544edq.209.1569512658161; 
+	Thu, 26 Sep 2019 08:44:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAAqXYd28BP4hUHjs215ebh+JOp04hHEaK0jxSmfJYosWZfYYeQ@mail.gmail.com>
-	<ee3c08d0-c2bf-70e5-ae8b-3aa29b260ae4@gmail.com>
-	<CAAqXYd3OvmuaYtUKmpCegXnYupz6xWDrZQrsiu+QnEFxM62xYA@mail.gmail.com>
-	<CAMKF1sr2nE7w=XVxRGoxdjF2pERe6Qcy1gA3KBv-zTpSM4frOg@mail.gmail.com>
-In-Reply-To: <CAMKF1sr2nE7w=XVxRGoxdjF2pERe6Qcy1gA3KBv-zTpSM4frOg@mail.gmail.com>
-From: Gaylord Charles <gaylord.charles@veo-labs.com>
-Date: Thu, 26 Sep 2019 17:31:47 +0200
-Message-ID: <CAAqXYd1eu6eynW9ozdgQVboYJV6O8prixJcHQoXd7kpQa3W9JA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+References: <cover.1569403988.git.liezhi.yang@windriver.com>
+	<10fa582ff48102bdf3380916207f636daa0f4c69.1569403988.git.liezhi.yang@windriver.com>
+In-Reply-To: <10fa582ff48102bdf3380916207f636daa0f4c69.1569403988.git.liezhi.yang@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 26 Sep 2019 17:44:15 +0200
+Message-ID: <CA+chaQfB7aTq_nLmy9Dkwdg=DyB4u_s769QvOWK_iuqtjq0u=A@mail.gmail.com>
+To: Robert Yang <liezhi.yang@windriver.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-webserver][PATCH] nginx: fix install paths
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 8/8] spice: Drop broken native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,119 +55,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2019 15:32:14 -0000
+X-List-Received-Date: Thu, 26 Sep 2019 15:44:18 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Yes, thanks.
+Can you check config.log to see what is broken on your native compiler?
 
-From c936d2d6f9db956432b187c0ca28cecd3ffc3bb2 Mon Sep 17 00:00:00 2001
-From: Gaylord CHARLES <gaylord.charles@veo-labs.com>
-Date: Tue, 24 Sep 2019 18:56:45 +0200
-Subject: [PATCH] nginx: fix install paths
+It was building fine for me and it's dependency of qemu-native when spice
+PACKAGECONFIG is enabled, so I would say it's still useful.
 
-- Use path variable instead of /usr
-- Replace the absolute path symlink with a relative one (using lnr)
+Maybe your host has really old gcc or something?
 
-Signed-off-by: Gaylord CHARLES <gaylord.charles@veo-labs.com>
----
- meta-webserver/recipes-httpd/nginx/nginx.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Wed, Sep 25, 2019 at 11:36 AM Robert Yang <liezhi.yang@windriver.com>
+wrote:
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 29e7efc14..6af42d72d 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -92,9 +92,9 @@ do_install () {
-             >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-     fi
-     install -d ${D}${sysconfdir}/${BPN}
--    ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-+    lnr ${D}${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-     install -d ${D}${NGINX_WWWDIR}
--    mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
-+    mv ${D}${exec_prefix}/html ${D}${NGINX_WWWDIR}/
-     chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
-
-     install -d ${D}${sysconfdir}/init.d
---=20
-2.20.1
-
-Le jeu. 26 sept. 2019 =C3=A0 15:11, Khem Raj <raj.khem@gmail.com> a =C3=A9c=
-rit :
-
-> On Thu, Sep 26, 2019 at 2:47 AM Gaylord Charles
-> <gaylord.charles@veo-labs.com> wrote:
-> >
-> > Ok, thank you. I was not sure of this part.
-> > I was trying to fix this error :
-> >
-> > ERROR: nginx-native-1.15.7-r0 do_populate_sysroot: sstate found an
-> absolute path symlink
-> /home/gaylord/Projets/box/bbb/tmp/work/x86_64-linux/nginx-native/1.15.7-r=
-0/sysroot-destdir/home/gaylord/Projets/box/bbb/tmp/work/x86_64-linux/nginx-=
-native/1.15.7-r0/recipe-sysroot-native/etc/nginx/run
-> pointing at
-> /home/gaylord/Projets/box/bbb/tmp/work/x86_64-linux/nginx-native/1.15.7-r=
-0/recipe-sysroot-native/var/run/nginx.
-> Please replace this with a relative link.
-> >
+> $ bitbake spice-native
+> checking whether the C compiler works... no
+> configure: error: in
+> `/path/to/spice-native/0.14.2+gitAUTOINC+7cbd70b931_4fc4c2db36-r0/build':
+> configure: error: C compiler cannot create executables
 >
-> right. Perhaps use lnr since that will work across all distros
+> It's a broken native recipe which means no ones need it any more, so
+> remove it.
 >
-> > Le mer. 25 sept. 2019 =C3=A0 15:22, Khem Raj <raj.khem@gmail.com> a =C3=
-=A9crit :
-> >>
-> >>
-> >>
-> >> On 9/25/19 2:20 AM, Gaylord Charles wrote:
-> >> > Hello,
-> >> >
-> >> > This patch fixes Nginx install paths. I tried to build the native
-> variant
-> >> > for testing purpose and had errors.
-> >> >
-> >> > Regards,
-> >> > Gaylord Charles
-> >> >
-> >> > From b6dc845b645cc8667b2d89412c292c0801de9270 Mon Sep 17 00:00:00 20=
-01
-> >> > From: Gaylord CHARLES <gaylord.charles@veo-labs.com>
-> >> > Date: Tue, 24 Sep 2019 18:56:45 +0200
-> >> > Subject: [PATCH] nginx: fix install paths
-> >> >
-> >> > - Use path variable instead of /usr
-> >> > - Replace the absolute path symlink with a relative one
-> >> >
-> >> > Signed-off-by: Gaylord CHARLES <gaylord.charles@veo-labs.com>
-> >> > ---
-> >> >  meta-webserver/recipes-httpd/nginx/nginx.inc | 4 ++--
-> >> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >> >
-> >> > diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> >> > b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> >> > index 29e7efc14..1e9d2e1a4 100644
-> >> > --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> >> > +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> >> > @@ -92,9 +92,9 @@ do_install () {
-> >> >              >> ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-> >> >      fi
-> >> >      install -d ${D}${sysconfdir}/${BPN}
-> >> > -    ln -snf ${localstatedir}/run/${BPN} ${D}${sysconfdir}/${BPN}/ru=
-n
-> >> > +    ln -snf ../../var/run/${BPN} ${D}${sysconfdir}/${BPN}/run
-> >>
-> >> localstatedir variable could have stayed there, any particular reason =
-to
-> >> drop it in favor of hardcoding /var
-> >>
-> >> >      install -d ${D}${NGINX_WWWDIR}
-> >> > -    mv ${D}/usr/html ${D}${NGINX_WWWDIR}/
-> >> > +    mv ${D}${exec_prefix}/html ${D}${NGINX_WWWDIR}/
-> >> >      chown ${NGINX_USER}:www-data -R ${D}${NGINX_WWWDIR}
-> >> >
-> >> >      install -d ${D}${sysconfdir}/init.d
-> >> >
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  meta-networking/recipes-support/spice/spice_git.bb | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
+>
+> diff --git a/meta-networking/recipes-support/spice/spice_git.bb
+> b/meta-networking/recipes-support/spice/spice_git.bb
+> index 552f81d..30e939a 100644
+> --- a/meta-networking/recipes-support/spice/spice_git.bb
+> +++ b/meta-networking/recipes-support/spice/spice_git.bb
+> @@ -39,7 +39,6 @@ export
+> PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
+>
+>  CFLAGS_append = " -Wno-error=address-of-packed-member"
+>
+> -PACKAGECONFIG_class-native = ""
+>  PACKAGECONFIG_class-nativesdk = ""
+>  PACKAGECONFIG ?= "sasl"
+>
+> @@ -54,6 +53,6 @@ PACKAGECONFIG[xinerama] =
+> "--enable-xinerama,--disable-xinerama,libxinerama,"
+>
+>  COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
+>
+> -BBCLASSEXTEND = "native nativesdk"
+> +BBCLASSEXTEND = "nativesdk"
+>
+>  EXTRA_OECONF_append_toolchain-clang = " --disable-werror"
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
