@@ -1,55 +1,17 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
-	[209.85.221.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 4626F7E719
+Return-Path: <adrian.ratiu@collabora.com>
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E2DF7E71C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 07:12:12 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id n14so1079104wrw.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 00:12:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=f99cbwTWHVS2Pj56XuCVTxaPlW9sMrEPJSXwdqvTOnA=;
-	b=RIJ5j+28P75uaswKXM0/xpAgjpYFAgOGE6wRQFozpDGuY2+OgDRTziz7UGZpG5UT5D
-	qMBNEyI14XLZd+g6rOTGlYrNBM3TlSq53C60yHzo8EaHt1UhA7GHUyJRzh23V9L7z6D2
-	cNsaUTXyzIVcOpPN51aoIbSXapY97jpcztZTICe7+zAWWEV8+XYf20QCGkopBvFANzQu
-	TsoD0IzcwnUZrNE3OItoY1CFKWeMLq065FWBovYKSZzi+jtOebyYvJ9GtURDug6Woa0+
-	S6QCB5+tgJ60M5jtw0WqKfZSzcWFEDXAJrNz5fwieFx/yIHlwzH0FQtC/txW0cegxxyw
-	I4qg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=f99cbwTWHVS2Pj56XuCVTxaPlW9sMrEPJSXwdqvTOnA=;
-	b=W0KwRi1OBC3amcxxMRe5BSP1ZR2ErhQH2ZmCcT8s7RJf5s5QDyYvKaFV0rfvSY2eSP
-	Zfr4uDPwtZQ3BGdQJCkWtgHGpDAApsmirJ/bCNytRHn8A0tx2aE61XP4IF0tZpUcoDrr
-	Lj3qaPebNnrSwpoPs2HceADQ/eRH19FyuioIPJF6dHeVkLArOIcGiyCA3y7jG5sCNthI
-	+3gGV2eLv4pQrxkodr0jimUcHaf0IDWD6vOqy9uolWGW7gv8ebDrjiIBdIKm3283bR9Y
-	+4gepsTPW3I3isps0vzgjuQZvqWHI+yWV2LxV+7eLFyQIABs5dmcUIOsihDdgzQgAHF5
-	PBow==
-X-Gm-Message-State: APjAAAWyYOZUlaXh17243UVCeYoiEB4CbjRj10RRh8Bv9hmgKSaycXcT
-	IZDQ/oyHWjH4/7CLTKmlb709yhUh
-X-Google-Smtp-Source: APXvYqw8hCi9jMsp6Pc1CsaMa1zIMMmuMqKO49BjzNGtbNDTBfKvTKH8EcYOWQI8jFfnOl16QqApVQ==
-X-Received: by 2002:adf:fa10:: with SMTP id m16mr1595342wrr.322.1569481932803; 
-	Thu, 26 Sep 2019 00:12:12 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F05552433B9EECE553F1384.dip0.t-ipconnect.de.
-	[2003:f0:7f05:5524:33b9:eece:553f:1384])
-	by smtp.gmail.com with ESMTPSA id
-	s19sm5183753wrb.14.2019.09.26.00.12.11
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 26 Sep 2019 00:12:11 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	kai.kang@windriver.com
-Date: Thu, 26 Sep 2019 09:12:02 +0200
-Message-Id: <20190926071202.9750-2-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190926071202.9750-1-schnitzeltony@gmail.com>
-References: <20190926071202.9750-1-schnitzeltony@gmail.com>
+	Thu, 26 Sep 2019 08:02:21 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(Authenticated sender: aratiu) with ESMTPSA id 1E13228EF0A
+From: Adrian Ratiu <adrian.ratiu@collabora.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 26 Sep 2019 11:02:21 +0300
+Message-Id: <20190926080221.2217083-1-adrian.ratiu@collabora.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 2/2] catfish: upgrade 1.4.9 -> 1.4.10
+Subject: [meta-oe] [PATCH] renderdoc: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,35 +24,177 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2019 07:12:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 26 Sep 2019 08:02:21 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../catfish/{catfish_1.4.9.bb => catfish_1.4.10.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/catfish/{catfish_1.4.9.bb => catfish_1.4.10.bb} (72%)
+RenderDoc is a MIT licensed stand-alone multi-platform graphics
+debugger that allows easy frame by frame capture and detailed
+introspection of any applications using Vulkan, OpenGL, OpenGL ES,
+and others.
 
-diff --git a/meta-xfce/recipes-apps/catfish/catfish_1.4.9.bb b/meta-xfce/recipes-apps/catfish/catfish_1.4.10.bb
-similarity index 72%
-rename from meta-xfce/recipes-apps/catfish/catfish_1.4.9.bb
-rename to meta-xfce/recipes-apps/catfish/catfish_1.4.10.bb
-index eec525b88..602368b3a 100644
---- a/meta-xfce/recipes-apps/catfish/catfish_1.4.9.bb
-+++ b/meta-xfce/recipes-apps/catfish/catfish_1.4.10.bb
-@@ -9,8 +9,8 @@ DEPENDS += "python3-distutils-extra-native"
- 
- B = "${S}"
- 
--SRC_URI[md5sum] = "829824fba33e86d03345bbc718e7b2d9"
--SRC_URI[sha256sum] = "29a39b85804336e4819dceff203693a5904b7e11d7e024b49b5aab2649ed944e"
-+SRC_URI[md5sum] = "1b8e7bfd955364b7912fb0a248329b3a"
-+SRC_URI[sha256sum] = "2573a004105031f871c92fed22a0c4b15bb96f2dff6e36c4f2959f56b62e343d"
- 
- FILES_${PN} += "${datadir}/metainfo"
- 
+Signed-off-by: Adrian Ratiu <adrian.ratiu@collabora.com>
+---
+ ...d-instead-of-cross-compiling-shim-bi.patch | 57 +++++++++++++++++++
+ ...eLists.txt-remove-flag-unsupported-b.patch | 48 ++++++++++++++++
+ .../renderdoc/renderdoc_1.4.bb                | 29 ++++++++++
+ 3 files changed, 134 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
+ create mode 100644 meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
+ create mode 100644 meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
+
+diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch b/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
+new file mode 100644
+index 000000000..e96dedfc3
+--- /dev/null
++++ b/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
+@@ -0,0 +1,57 @@
++From 41a8c9b5ac13066770baee476ebf9828371f4dad Mon Sep 17 00:00:00 2001
++From: Adrian Ratiu <adrian.ratiu@collabora.com>
++Date: Tue, 24 Sep 2019 16:07:18 +0300
++Subject: [PATCH] renderdoc: use xxd instead of cross-compiling shim binary
++
++Renderdoc's attempt to cross compile an xxd replacement by directly
++calling a host cross-compiler breaks under OE's recipe specific
++sysroots protection because this is not a native recipe, so we just
++use xxd-native instead.
++
++Upstream-Status: Inappropriate [embedded-specific]
++
++---
++ renderdoc/CMakeLists.txt | 23 +----------------------
++ 1 file changed, 1 insertion(+), 22 deletions(-)
++
++diff --git a/renderdoc/CMakeLists.txt b/renderdoc/CMakeLists.txt
++index 5cb7440a4..453a034ba 100644
++--- a/renderdoc/CMakeLists.txt
+++++ b/renderdoc/CMakeLists.txt
++@@ -370,26 +370,6 @@ set(data
++ set(data_objects)
++ 
++ if(UNIX)
++-    # If we're cross-compiling, include-bin will get built for the target and we
++-    # then can't execute it. Instead, we force calling c++ (which we can safely
++-    # assume is present) directly to build the binary
++-
++-    if(CMAKE_CROSSCOMPILING)
++-        set(HOST_NATIVE_CPP_COMPILER c++ CACHE STRING "Command to run to compile a .cpp into an executable. Default is just c++")
++-
++-        add_custom_command(OUTPUT ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin
++-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
++-            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
++-            COMMAND ${HOST_NATIVE_CPP_COMPILER} 3rdparty/include-bin/main.cpp -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin
++-            DEPENDS 3rdparty/include-bin/main.cpp)
++-        set(INCLUDE_BIN_EXE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin")
++-        set(INCLUDE_BIN_DEP "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin")
++-    else()
++-        add_executable(include-bin 3rdparty/include-bin/main.cpp)
++-        set(INCLUDE_BIN_EXE $<TARGET_FILE:include-bin>)
++-        set(INCLUDE_BIN_DEP include-bin)
++-    endif()
++-
++     foreach(res ${data})
++         set(in ${res})
++         set(working_dir ${CMAKE_CURRENT_SOURCE_DIR})
++@@ -399,8 +379,7 @@ if(UNIX)
++         add_custom_command(OUTPUT ${out_src}
++             WORKING_DIRECTORY ${working_dir}
++             COMMAND ${CMAKE_COMMAND} -E make_directory ${out_src_dir}
++-            COMMAND ${INCLUDE_BIN_EXE} ${in} ${out_src}
++-            DEPENDS ${INCLUDE_BIN_DEP}
+++            COMMAND xxd -i ${in} ${out_src}
++             DEPENDS ${res})
++ 
++         list(APPEND data_objects ${out_src})
+diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch b/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
+new file mode 100644
+index 000000000..8cfac3b0e
+--- /dev/null
++++ b/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
+@@ -0,0 +1,48 @@
++From 40511a6f4dc6311c8cf7f2954d1202ede55881ff Mon Sep 17 00:00:00 2001
++From: Adrian Ratiu <adrian.ratiu@collabora.com>
++Date: Wed, 25 Sep 2019 19:31:14 +0300
++Subject: [PATCH] (q)renderdoc/CMakeLists.txt: remove flag unsupported by GCC
++
++-Wno-unknown-warning is not supported by GCC, only by Clang so we
++remove it because newer GCC versions like 9.2.0 will complain, older
++versions would just ignore it.
++
++Upstream-Status: Pending [https://github.com/baldurk/renderdoc/pull/1530]
++
++Signed-off-by: Adrian Ratiu <adrian.ratiu@collabora.com>
++
++---
++ qrenderdoc/CMakeLists.txt | 2 +-
++ renderdoc/CMakeLists.txt  | 4 ++--
++ 2 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/qrenderdoc/CMakeLists.txt b/qrenderdoc/CMakeLists.txt
++index 9fd65b2d3..d52dd274e 100644
++--- a/qrenderdoc/CMakeLists.txt
+++++ b/qrenderdoc/CMakeLists.txt
++@@ -149,7 +149,7 @@ file(WRITE
++ if(CMAKE_COMPILER_IS_GNUCXX)
++     file(APPEND
++         ${CMAKE_BINARY_DIR}/qrenderdoc/qrenderdoc_cmake.pri
++-        "QMAKE_CXXFLAGS+=-Wno-unknown-warning -Wno-implicit-fallthrough -Wno-cast-function-type -Wno-stringop-truncation\n")
+++        "QMAKE_CXXFLAGS+=-Wno-implicit-fallthrough -Wno-cast-function-type -Wno-stringop-truncation\n")
++ endif()
++ 
++ # propagate build version info. Lots of escaping needed here to pass ""s into the define value
++diff --git a/renderdoc/CMakeLists.txt b/renderdoc/CMakeLists.txt
++index 453a034ba..abe7e1302 100644
++--- a/renderdoc/CMakeLists.txt
+++++ b/renderdoc/CMakeLists.txt
++@@ -320,10 +320,10 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR APPLE)
++ 
++     if(CMAKE_COMPILER_IS_GNUCXX)
++         set_property(SOURCE 3rdparty/jpeg-compressor/jpgd.cpp
++-            APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-unknown-warning -Wno-implicit-fallthrough")
+++            APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-implicit-fallthrough")
++ 
++         set_property(SOURCE strings/utf8printf.cpp
++-            APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-unknown-warning -Wno-format-truncation")
+++            APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-format-truncation")
++     endif()
++ 
++     # Need to add -Wno-unknown-warning-option since only newer clang versions have
+diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
+new file mode 100644
+index 000000000..ca26ae8c3
+--- /dev/null
++++ b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "RenderDoc recipe providing renderdoccmd"
++DESCRIPTION = "RenderDoc is a frame-capture based graphics debugger"
++HOMEPAGE = "https://github.com/baldurk/renderdoc"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9753b1b4fba3261c27d1ce5c1acef667"
++
++SRCREV = "214d85228538e71cc63a0d7fa11dd75b1d56cc81"
++SRC_URI = "git://github.com/baldurk/${BPN}.git;protocol=http;branch=v1.x \
++	   file://0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch \
++	   file://0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch \
++"
++S = "${WORKDIR}/git"
++
++DEPENDS += "virtual/libx11 virtual/libgl libxcb xcb-util-keysyms vim-native"
++
++RDEPENDS_${PN} = "libxcb xcb-util-keysyms"
++
++inherit cmake python3native
++
++EXTRA_OECMAKE += "\
++	-DENABLE_QRENDERDOC=OFF \
++	-DENABLE_PYRENDERDOC=OFF \
++	-DENABLE_RENDERDOCCMD=ON \
++"
++
++TARGET_CFLAGS += "-Wno-error=deprecated-copy"
++
++FILES_${PN} += "${libdir}"
++FILES_${PN}-dev = "${includedir}"
 -- 
-2.21.0
+2.23.0
 
 
