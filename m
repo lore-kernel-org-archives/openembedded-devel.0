@@ -1,46 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 63E0F6C132
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CFE47E648
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Sep 2019 00:58:08 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id n7so803461qtb.6
+	Thu, 26 Sep 2019 02:58:00 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.64,549,1559491200"; d="scan'208";a="76040050"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Sep 2019 10:58:00 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 04F0A4CE14F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Sep 2019 17:58:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=AjXamjm2/TJe5b+ptgkDxcJ6UfkCxBuoSnxidG64vFY=;
-	b=njpiyLZzDMlVCPNsfEyMYigyjTPNUQNHu258drZCovol1lLvP3futTzIEr/Q/BE7qo
-	Jomci2eglCTRoClTNLBBzaHfqp/h8e66ASXQNLtYoAUhpi4Q2f6VcwPf7abheUkToxcM
-	aywpKh/zyfcL7Pp1NaJsfx9NDgaU83tsylQggCxvKq6pj09fit1Hk2fBCGMAzHaa4QEA
-	Y8MfEmEhB3Ep3frZmtAMXSkdWty07KXqvPZBDuDf8OeuSP6a7sh2Q8kNhJLcb5GloE2f
-	KNQHIDj/Z5UvHjxfhbq9EjPaejhbJBZzmXR2shlQKvVGzSKIUUWvU1iNhNiL5tSDAjTC
-	WFCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=AjXamjm2/TJe5b+ptgkDxcJ6UfkCxBuoSnxidG64vFY=;
-	b=d4QywpwmCV62+zc6WM36yxZL6/M73WZIorQeLwLb0K6bnytp25xIyU6xFh67zVpCxX
-	lDMWEHCNMFDgOIuYKePRZnj6RggpN+vTfDVnb6hZAMM+lpjiGE2ZIBg3GXGiJWtBqq40
-	MTIYj80QQgpoSUkKEvSrA1eZS2JmRzww2e+4//kYbTQc259Byb+yV/OVVhNmzNx2nzUb
-	NKttKPNKaCf/GIhS3IycwFWf054nZ9fKn65f0JmzcDRoQ0nTbw1Ub5HpJqX2kwBCYXiT
-	33WlYlJvJ3X4XO+6ds/M3a8oyxwHy3LJoMGixu0IwxhgBHyeatD3mEhMPcErK3XjAsR4
-	xSmQ==
-X-Gm-Message-State: APjAAAVIaDzC2vldVFag789yFdD6+tT+zTIANB8fOLeyy+W02caJH8IV
-	Oh3OwgN3jZsN1r3idlP+0I26KUmDFF8Je/xeGzE3iNfhBqU=
-X-Google-Smtp-Source: APXvYqx7FSmTScZo1JIel/5op88Xe8kwuOM8RdRN8LdPjOWLqGRbzs0Vm8B7iRjn7jkzZMfXfaPef59Iks980LN/Kwc=
-X-Received: by 2002:ac8:e09:: with SMTP id a9mr1424292qti.88.1569459488937;
-	Wed, 25 Sep 2019 17:58:08 -0700 (PDT)
+	Thu, 26 Sep 2019 10:58:01 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 26 Sep 2019 10:58:10 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 26 Sep 2019 10:57:56 +0800
+Message-ID: <20190926025756.28042-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190925211412.23859-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20190925211412.23859-1-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 25 Sep 2019 17:57:42 -0700
-Message-ID: <CAMKF1soT4E2+nm_ZJ95CiKz2LzLDj6NUDcUQXdfFt9n9nuoVyg@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2][meta-oe] proj: update to 6.1.1
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 04F0A4CE14F4.ADF5C
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-alembic: upgrade 1.2.0 -> 1.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,50 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Sep 2019 00:58:08 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 26 Sep 2019 02:58:01 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-I think this is causing this failure
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-alembic.inc                | 4 ++--
+ .../python/{python-alembic_1.2.0.bb => python-alembic_1.2.1.bb}       | 0
+ .../python/{python3-alembic_1.2.0.bb => python3-alembic_1.2.1.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-alembic_1.2.0.bb => python-alembic_1.2.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-alembic_1.2.0.bb => python3-alembic_1.2.1.bb} (100%)
 
-https://errors.yoctoproject.org/Errors/Details/271996/
-https://errors.yoctoproject.org/Errors/Details/271995/
+diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
+index 8c917e3..fa178ce 100644
+--- a/meta-python/recipes-devtools/python/python-alembic.inc
++++ b/meta-python/recipes-devtools/python/python-alembic.inc
+@@ -2,8 +2,8 @@ DESCRIPTION = "A database migration tool for SQLAlchemy"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=28aaf14a6592d14dbfb2f4abd597aa27"
+ 
+-SRC_URI[md5sum] = "7cdba960544ecb59fd74e6433d82036c"
+-SRC_URI[sha256sum] = "5609afbb2ab142a991b15ae436347c475f8a517f1610f2fd1b09cdca7c311f3f"
++SRC_URI[md5sum] = "6fe272274fce2641b93998ef9b702b76"
++SRC_URI[sha256sum] = "9f907d7e8b286a1cfb22db9084f9ce4fde7ad7956bb496dc7c952e10ac90e36a"
+ 
+ PYPI_PACKAGE = "alembic"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-alembic_1.2.0.bb b/meta-python/recipes-devtools/python/python-alembic_1.2.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-alembic_1.2.0.bb
+rename to meta-python/recipes-devtools/python/python-alembic_1.2.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.2.0.bb b/meta-python/recipes-devtools/python/python3-alembic_1.2.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-alembic_1.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-alembic_1.2.1.bb
+-- 
+2.7.4
 
-On Wed, Sep 25, 2019 at 2:14 PM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
->
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
->  .../proj/{proj_4.9.3.bb => proj_6.1.1.bb}                   | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-navigation/proj/{proj_4.9.3.bb => proj_6.1.1.bb} (65%)
->
-> diff --git a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb b/meta-oe/recipes-navigation/proj/proj_6.1.1.bb
-> similarity index 65%
-> rename from meta-oe/recipes-navigation/proj/proj_4.9.3.bb
-> rename to meta-oe/recipes-navigation/proj/proj_6.1.1.bb
-> index f45f8948d..4f53aa46b 100644
-> --- a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb
-> +++ b/meta-oe/recipes-navigation/proj/proj_6.1.1.bb
-> @@ -6,9 +6,11 @@ LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
->
->  SRC_URI = "http://download.osgeo.org/proj/proj-${PV}.tar.gz"
-> -SRC_URI[md5sum] = "d598336ca834742735137c5674b214a1"
-> -SRC_URI[sha256sum] = "6984542fea333488de5c82eea58d699e4aff4b359200a9971537cd7e047185f7"
-> +SRC_URI[md5sum] = "9a82a3174cacf319d94360a759fbcc8a"
-> +SRC_URI[sha256sum] = "5cf0a2360a28b5d724c53edbb87f3f3b14fd96001265411ac4e56f369e2d503f"
->
->  inherit autotools pkgconfig lib_package
->
-> +DEPENDS = "sqlite3 sqlite3-native"
-> +
->  FILES_${PN} += "${datadir}/proj"
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
 
