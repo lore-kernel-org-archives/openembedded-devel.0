@@ -1,24 +1,50 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AE53F7DF61
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
+	[209.85.215.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FF227D25F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Sep 2019 21:16:00 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8RLFXfN020292
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 27 Sep 2019 21:47:04 +0000 (UTC)
+Received: by mail-pg1-f176.google.com with SMTP id s1so4137681pgv.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Sep 2019 14:15:49 -0700
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 27 Sep 2019 14:15:24 -0700
-From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Sep 2019 17:15:23 -0400
-Message-ID: <20190927211523.28562-1-Trevor.Gamblin@windriver.com>
-X-Mailer: git-send-email 2.21.0
+	Fri, 27 Sep 2019 14:47:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=A1hqHT2GS4lXFP/EM/3oYPkE+KY6Wnp3FAQ73PDxdHE=;
+	b=OpfgdP2QR+PDOlUpl3QqRzBJe1pWO0UgDA8SIgHkEz3uXdzLx65hjiVQx06x89qJIr
+	KuIGUKwyh+k6QvCG8d3vj9s5DoF85Pz7CiTS6AvP/JXCWpYQDy01uhsDfhB4SJsHaUdM
+	38vewkMcfq5NfqdlixDAFLCS/h/vU1VsbX29rH9Cp9udVuMnmPnuXdp+5Qaf8eTHw/oO
+	ww9jD/rvBQ9kT/inqkYyJy2ck2+z7fIHGExgcbWQE3onLoezjduhL4dCx5ZWVFSWbbT4
+	LbjESOZ1eB0nXuYNPqTbzPE2sDE8r8hci92mDcGEf+1PidwheNje01auP1rsM4+4vp88
+	WUqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=A1hqHT2GS4lXFP/EM/3oYPkE+KY6Wnp3FAQ73PDxdHE=;
+	b=A3YdO0gNqTh1CEtz77ZsJCkuibyXf1yupitzifmESPoe++0ZbqD+PdKVSWsgLbk8vM
+	NIVLz3Z3Aqr6u3Z7CbNSazavro5WN90YDk/2YVCnh7tjiuFDA5vGdM9i5LlyoW7km5Fc
+	bGaD3ireASUlW1K5A6+h7NkNSp8uXbcNSNzPEhbZHrpIg5/WP/9qGPXJxC3SiVoSFTIE
+	bM6qKwcU1E/VykUim0oIkD4sDhgpkcjbCLO+bP3p3fUjIWWCCqmnntVffjIKrXu50GBx
+	U05f1KLe+lysA4NKCYGr+hIT2iulXxn9OhIvpdvzLOm51nVIpKEfuyOe+fWfoEHFY3cn
+	QxGw==
+X-Gm-Message-State: APjAAAWiYEaWciNVHuCPUmii4pJVfvnnypat8E/CAb04UgUWeiaegZ6l
+	3lfF97KiXRt8uQUDdM4p3tRKq25lfRc=
+X-Google-Smtp-Source: APXvYqwO+xYAwUAopZ/qu2sP4HVVHzH3uvXN4akNupHbr8GK3GqUujT+Jo6aIAj0rAeFnZAqEW/lCw==
+X-Received: by 2002:a62:cb:: with SMTP id 194mr7225189pfa.130.1569620824726;
+	Fri, 27 Sep 2019 14:47:04 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	g20sm3352513pfo.73.2019.09.27.14.47.03
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 27 Sep 2019 14:47:04 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Sep 2019 14:46:53 -0700
+Message-Id: <20190927214653.2627591-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] kea: upgrade 1.5.0 -> 1.7.0
+Subject: [meta-networking][PATCH] opensaf: Fix duplicate copies of shared libs in package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,100 +57,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 21:16:00 -0000
+X-List-Received-Date: Fri, 27 Sep 2019 21:47:05 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
+some plugins are installed into libdir/opensaf but we were making a copy
+into libdir as well, this patch changes that so the packaged files are
+appearing only once
 
-The license checksum change is due to the date being updated.
+create_empty_library should be using cross compiler with linker flags,
+existig code in this area is not cross compile friendly
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+skip dev-elf QA test since some .so are stubs
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...le.am-update-hooksdir-for-lease_cmds.patch | 31 -------------------
- .../kea/{kea_1.5.0.bb => kea_1.7.0.bb}        |  9 +++---
- 2 files changed, 4 insertions(+), 36 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/kea/files/0003-Makefile.am-update-hooksdir-for-lease_cmds.patch
- rename meta-networking/recipes-connectivity/kea/{kea_1.5.0.bb => kea_1.7.0.bb} (82%)
+ ...rary-Use-CC-variable-intead-of-hardc.patch | 23 +++++++++++++++++++
+ .../opensaf/opensaf_5.19.07.bb                |  6 +++--
+ 2 files changed, 27 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch
 
-diff --git a/meta-networking/recipes-connectivity/kea/files/0003-Makefile.am-update-hooksdir-for-lease_cmds.patch b/meta-networking/recipes-connectivity/kea/files/0003-Makefile.am-update-hooksdir-for-lease_cmds.patch
-deleted file mode 100644
-index 381a3a7eb..000000000
---- a/meta-networking/recipes-connectivity/kea/files/0003-Makefile.am-update-hooksdir-for-lease_cmds.patch
-+++ /dev/null
-@@ -1,31 +0,0 @@
--From cd902b8b588681a27d5321f1ee078a1c8f6e6935 Mon Sep 17 00:00:00 2001
--From: Mingli Yu <Mingli.Yu@windriver.com>
--Date: Wed, 21 Mar 2018 06:01:38 +0000
--Subject: [PATCH 3/3] Makefile.am: update hooksdir for lease_cmds
--
--update hooksdir for lease_cmds
--
--Upstream-Status: Pending
--
--Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
--
-----
-- src/hooks/dhcp/lease_cmds/Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/src/hooks/dhcp/lease_cmds/Makefile.am b/src/hooks/dhcp/lease_cmds/Makefile.am
--index cfd6779..22cc4a9 100644
----- a/src/hooks/dhcp/lease_cmds/Makefile.am
--+++ b/src/hooks/dhcp/lease_cmds/Makefile.am
--@@ -37,7 +37,7 @@ liblease_cmds_la_CXXFLAGS = $(AM_CXXFLAGS)
-- liblease_cmds_la_CPPFLAGS = $(AM_CPPFLAGS)
-- 
-- # install the shared object into $(libdir)/hooks
---lib_hooksdir = $(libdir)/hooks
--+lib_hooksdir = $(libdir)/kea/hooks
-- lib_hooks_LTLIBRARIES = libdhcp_lease_cmds.la
-- 
-- libdhcp_lease_cmds_la_SOURCES  =
---- 
--2.18.0
--
-diff --git a/meta-networking/recipes-connectivity/kea/kea_1.5.0.bb b/meta-networking/recipes-connectivity/kea/kea_1.7.0.bb
-similarity index 82%
-rename from meta-networking/recipes-connectivity/kea/kea_1.5.0.bb
-rename to meta-networking/recipes-connectivity/kea/kea_1.7.0.bb
-index fb166df60..3123099a7 100644
---- a/meta-networking/recipes-connectivity/kea/kea_1.5.0.bb
-+++ b/meta-networking/recipes-connectivity/kea/kea_1.7.0.bb
-@@ -3,20 +3,19 @@ DESCRIPTION = "Kea is the next generation of DHCP software developed by ISC. It
- HOMEPAGE = "http://kea.isc.org"
- SECTION = "connectivity"
- LICENSE = "MPL-2.0 & Apache-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=2ed44ce4e0bbfdc1abfa6bf949b7ba3a"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0e5b01c848c7736a0c9e68f9c9cd0281"
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch
+new file mode 100644
+index 0000000000..21abcf75b5
+--- /dev/null
++++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch
+@@ -0,0 +1,23 @@
++From 300fd3e27e71a91fc52d3f985ed4fde548852853 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 27 Sep 2019 12:50:11 -0700
++Subject: [PATCH] create_empty_library: Use CC variable intead of hardcoding
++ gcc
++
++This ensures that cross-compiles can succeed, otherwise we get wrong
++architecture on these stub libraries
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ scripts/create_empty_library | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++--- a/scripts/create_empty_library
+++++ b/scripts/create_empty_library
++@@ -66,4 +66,4 @@ for s in $symbols; do
++     echo "SaAisErrorT $s() { return SA_AIS_ERR_UNAVAILABLE; }" >> "$tmpdir/lib.c"
++ done
++ rm -f "$1"
++-gcc -O2 -shared -fPIC "$tmpdir/lib.c" -Wl,-version-script="$2" -Wl,-soname="$libbase.so.$version1" -o "$1"
+++$CC -O2 -shared -fPIC "$tmpdir/lib.c" -Wl,-version-script="$2" -Wl,-soname="$libbase.so.$version1" -o "$1" $LDFLAGS
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+index 3df6824ff3..7ce54c3a31 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
+@@ -25,6 +25,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
+            file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
+            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
+            file://0001-Add-configure-time-check-for-gettid-API.patch \
++           file://0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch \
+            "
+ SRC_URI[md5sum] = "e9ae9de803a99b7ab33757a49858542f"
+ SRC_URI[sha256sum] = "caed672d03ab1fe3f27d333429c7ca03022714e7c6350500208b7bd7349f03ce"
+@@ -44,13 +45,11 @@ PACKAGECONFIG[plm] = "--enable-ais-plm,--disable-ais-plm,libvirt openhpi"
  
- DEPENDS += "kea-native"
+ PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
  
- SRC_URI = "\
-     http://ftp.isc.org/isc/kea/${PV}/${BP}.tar.gz \
--    file://0003-Makefile.am-update-hooksdir-for-lease_cmds.patch \
-     file://0001-remove-AC_TRY_RUN.patch \
-     file://kea-dhcp4.service \
-     file://kea-dhcp6.service \
-     file://kea-dhcp-ddns.service \
- "
--SRC_URI[md5sum] = "591d38e5fcc0251a8812e8bb1337578a"
--SRC_URI[sha256sum] = "edce4fab68ca7af607cf7f5bc86596e04fe0ef4b8e88906e339cdefcf21daaec"
-+SRC_URI[md5sum] = "c6406ac3d160161056d2fc36557ebd89"
-+SRC_URI[sha256sum] = "173c8e893690a611bc1d1c6fbe54a5c20fcd54429399a8dc3a0d7d2eb01bf8cc"
+-PKGLIBDIR="${libdir}"
+ CPPFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation"
+ CXXFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation -Wno-error=format-truncation="
+ LDFLAGS += "-Wl,--as-needed -latomic -Wl,--no-as-needed"
  
- inherit autotools systemd
+ do_install_append() {
+-    cp -av --no-preserve=ownership ${B}/lib/.libs/*.so* ${D}${libdir}
+     rm -fr "${D}${localstatedir}/lock"
+     rm -fr "${D}${localstatedir}/run"
+     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
+@@ -70,3 +69,6 @@ RDEPENDS_${PN} += "bash python"
  
-@@ -54,7 +53,7 @@ PACKAGECONFIG ??= "openssl log4cplus boost"
- 
- PACKAGECONFIG[openssl] = "--with-openssl=${STAGING_DIR_TARGET}${prefix},,openssl,openssl"
- PACKAGECONFIG[log4cplus] = "--with-log4cplus=${STAGING_DIR_TARGET}${prefix},,log4cplus,log4cplus"
--PACKAGECONFIG[boost] = "--with-boost-include=${STAGING_INCDIR} --with-boost-lib-dir=${STAGING_LIBDIR} --with-boost-libs=-lboost_system,,boost,boost"
-+PACKAGECONFIG[boost] = "--with-boost-libs=-lboost_system,,boost,boost"
- 
- FILES_${PN}-staticdev += "${libdir}/kea/hooks/*.a ${libdir}/hooks/*.a"
- FILES_${PN} += "${libdir}/hooks/*.so"
+ # http://errors.yoctoproject.org/Errors/Details/186970/
+ COMPATIBLE_HOST_libc-musl = 'null'
++
++INSANE_SKIP_${PN}-dev += "dev-elf"
++
 -- 
-2.21.0
+2.23.0
 
 
