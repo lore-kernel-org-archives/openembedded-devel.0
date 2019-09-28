@@ -1,33 +1,50 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 348 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 28 Sep 2019 01:02:29 UTC
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by mail.openembedded.org (Postfix) with ESMTP id 77DE87F29F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 150946C193
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2019 01:02:29 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 9370440BE2;
-	Sat, 28 Sep 2019 00:56:42 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id Doinxvt-6z0U; Sat, 28 Sep 2019 00:56:42 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 77FDB409E0;
-	Sat, 28 Sep 2019 00:56:41 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id A8201173BAD;
-	Fri, 27 Sep 2019 20:56:40 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Sat, 28 Sep 2019 01:35:55 +0000 (UTC)
+Received: by mail-pg1-f170.google.com with SMTP id c17so4353038pgg.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Sep 2019 18:35:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=S7D9af+L5PGoP91wPIK0p7+J7CqM0vq3SRnsbXUDHxc=;
+	b=dEnvvfsgEVHF1prNzcX4KCMboupjYJKu7as02QVZYFW1MaYE/YvVmO9FOxkqSav5+J
+	GJF0KIIy+djFnSzsBwKVGivkhmMK0nkA4wBI1AsF2Rv5clY/HZwdzkbFLqdb//PuhKCa
+	PCOUyKiJyITuhSQfiBK1PHrBk7uf4KDooBeJkCj0ugy7vp4TCLPtdlO5ROhnLOB1hhN8
+	n9QjqNo1p5ElDRqmTY9FraCucS0karxlc8bQuEOi/BNgB2Epii/hRe/BodLE8getrrlV
+	QC1yCQYimCOMgyBFUeIE2hSG6SfWOZ93VdTKpHLkKmg3aRHkU4yGISqQi+r3ilV8DkOO
+	8gig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=S7D9af+L5PGoP91wPIK0p7+J7CqM0vq3SRnsbXUDHxc=;
+	b=ScHyJ9KqG0OvxfGlhlC9vD1LzgDOIAO6vKxJ9nNyIJUnsfCkvLwdVyldj37PVcY4op
+	fCtjGkH+/CqOR0yR9Vpnx/PVi0NZC5sQblauh3iZAyQE+oBI0alDtemqmLH/5Ydhh0fB
+	6xji49fti3MPpmDkOvYMGMMPMYYWcu+aB9lqJxgQuesac8SwkuN72oLo9I9kmHYg9gPl
+	F8SWrnxI+6ZJJ+dmEABU6K+TP3XTI47Jtv6hd62mM8TnSD+XdWMrLxp+RyNhV5cEOcEm
+	NXgDXKv9rcRzlTWRhh/JTwblAAMs5fNaR2T/aXU1hUx5AcYHhlssvGHWriwEidBkg3mn
+	ks4Q==
+X-Gm-Message-State: APjAAAV8xerzeK/S4xbfn87LE5jMmjDG+NQQBBu6tYut2RCt/M4AS2LM
+	jEuwPuRpkSOIzn2OHrbHMheJGtcXVUIkeA==
+X-Google-Smtp-Source: APXvYqzCVAnjWPN6vWj0Lk2LGkqUDTrF5uatk8zGmL4GFh1E8ho2oR9k1WTbCDLN3OUnBuGWwHFw9A==
+X-Received: by 2002:a63:cf4e:: with SMTP id b14mr12557799pgj.109.1569634556368;
+	Fri, 27 Sep 2019 18:35:56 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
+	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
+	bx18sm5206525pjb.26.2019.09.27.18.35.55
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 27 Sep 2019 18:35:55 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Sep 2019 20:56:39 -0400
-Message-Id: <1569632199-7446-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [thud][PATCH] mariadb: update SRC_URI, as 5.5.64 has moved to archive
+Date: Fri, 27 Sep 2019 18:35:43 -0700
+Message-Id: <20190928013543.3537073-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] openipmi: Mark libOpenIPMI.so.0 as private lib in openipmi-perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,31 +57,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Sep 2019 01:02:29 -0000
+X-List-Received-Date: Sat, 28 Sep 2019 01:35:56 -0000
+Content-Transfer-Encoding: 8bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+libOpenIPMI.so.0 is SONAME for openIPMI.so in openipmi-perl package
+which means the shlibs code will automatically add it as a provider for
+this shared library but actual public library is provided by openipmi
+package, and it results in
 
-The old URL now gives 404 Not Found
+ERROR: openipmi-2.0.27-r0 do_package: openipmi: Multiple shlib providers for libOpenIPMI.so.0: openipmi-perl, openipmi (used by files: /mnt/jenkins/workspace/Yocto-world-musl/build/tmp/work/aarch64-yoe-linux/openipmi/2.0.27-r0/packages-split/openipmi/usr/bin/openipmi_eventd)
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+The library in perl package is actually not required to compete to
+provide for public interfaces
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-dbs/mysql/mariadb.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 4f7784b..f51667d 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb
+index 51cc256890..f092780399 100644
+--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb
++++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb
+@@ -51,6 +51,7 @@ PACKAGECONFIG ??= "gdbm"
+ PACKAGECONFIG[gdbm] = "ac_cv_header_gdbm_h=yes,ac_cv_header_gdbm_h=no,gdbm,"
  
--SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
-+SRC_URI = "http://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://fix-cmake-module-path.patch \
-            file://remove-bad-path.patch \
-            file://fix-mysqlclient-r-version.patch \
+ PACKAGES += "${PN}-perl ${PN}-python"
++PRIVATE_LIBS_${PN}-perl = "libOpenIPMI.so.0"
+ 
+ FILES_${PN}-perl = " \
+     ${libdir}/perl/vendor_perl/*/OpenIPMI.pm \
 -- 
-2.7.4
+2.23.0
 
 
