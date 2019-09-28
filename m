@@ -1,43 +1,43 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com
-	[209.85.160.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 58E557F306
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 929627F2F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2019 22:43:28 +0000 (UTC)
-Received: by mail-qt1-f176.google.com with SMTP id u40so12011170qth.11
+	Sat, 28 Sep 2019 22:43:31 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id u186so4794955qkc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2019 15:43:29 -0700 (PDT)
+	Sat, 28 Sep 2019 15:43:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:organization:content-transfer-encoding;
-	bh=pEhfiC0x9A66NgSEIg2ECD8lSoxD1j9U7ehO0l09Eag=;
-	b=JS3BFe7dDHGwx7evQgP6li0zkZSCX6a3cWZwlOvE4Ax2Y2tzH+WfimYcWACSN8lWit
-	1kHE4Y0NSBrcWd2liwMi5vBRAKvPWL4obxiIbK7gfd9tcPQz2zbNvRSr6tDqrip+dMbN
-	IuUCwDANXZqwE2qcBvMtDH45xdiRA30BGs8ec8JM6NXleDc7NlrS4zqWeuTIGYn/dOnr
-	4iXLHfF+11oEI5fYF9W/jmhINvQHZqXTkJD/jQwqVo5wQnscmACOwyS8sBLlPANCYXQH
-	VyZydXNtZGKhO318Dyim0fa7oT3V7C27KpCAUhK5woz/MyUHCrFz7mkcSiMzTTCmhSvS
-	noeQ==
-X-Gm-Message-State: APjAAAVOMhoFkucx3EeZEw2oET+qSiRrULvWW72NoNIHMavmrf48nW5j
-	ppAKjmVDmVhIen6G7pdF96C5MwluWqY=
-X-Google-Smtp-Source: APXvYqwu2rXuZsPj/VT26KBpE9umfkfkGIVDdVs/gZXbinyuzLpBIWUlwwA8iFUmkhGzNlfbAY2bVg==
-X-Received: by 2002:ac8:5245:: with SMTP id y5mr17917474qtn.33.1569710608940; 
-	Sat, 28 Sep 2019 15:43:28 -0700 (PDT)
-Received: from localhost ([181.220.83.67]) by smtp.gmail.com with ESMTPSA id
-	b26sm3180782qkl.43.2019.09.28.15.43.27
+	bh=useVLWvEHHCPsEfhQxUeXzFxviYR1MHO+r6Tk6oV5oA=;
+	b=T6yWuEavEA86NhmKqsK5PhYlRByq22abXxH2xOgOsiOOp8bDrXN9FsV18TvYOtMENT
+	CQM1+4GyWXi8Ulkf9AEvy5gFr8M2Vxs63TiJMZVQDjb8T7vAQKPJpUxZQb3LC3AmE7iA
+	KcOFbjdOB9IJQaFBPEa02jIk9s1JIGZeZaCDaaffD5Nv44OJLdIhH6PwJZ4+CP3NrjdQ
+	YzF5tcztOkHXFGxGeYaf3A9STmJEdVbwgUq4+uRwDI0HSy1ndYtcNiH9yuX9zsXXQVyW
+	ZjtbAqxGvq8Sy9AqYcvg/pHw1g0uqkgU38/CwcT/PLdCSy39S+k1BJbkBiWHbke78QO4
+	SdrA==
+X-Gm-Message-State: APjAAAV/U06E0YxE+XkOJKhdd1Xx7f/V7Z5S3A26L64ieQ4qrpJOBGI5
+	zNQvdNXsWoFjevwlNg9FYlm++oiiWn4=
+X-Google-Smtp-Source: APXvYqwpMLyE5bLAYOqVD/ASiA/nboZMwm1IzIZzwCsSrSBe/KJ/I01OBljFI2pIzxSk27CPVuTjAg==
+X-Received: by 2002:a37:b403:: with SMTP id d3mr11551645qkf.76.1569710612182; 
+	Sat, 28 Sep 2019 15:43:32 -0700 (PDT)
+Received: from localhost ([181.220.83.67])
+	by smtp.gmail.com with ESMTPSA id 44sm5297145qtu.45.2019.09.28.15.43.31
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 28 Sep 2019 15:43:28 -0700 (PDT)
+	Sat, 28 Sep 2019 15:43:31 -0700 (PDT)
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Sat, 28 Sep 2019 19:43:16 -0300
-Message-Id: <20190928224318.4127069-3-otavio@ossystems.com.br>
+Date: Sat, 28 Sep 2019 19:43:17 -0300
+Message-Id: <20190928224318.4127069-4-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20190928224318.4127069-1-otavio@ossystems.com.br>
 References: <20190928224318.4127069-1-otavio@ossystems.com.br>
 MIME-Version: 1.0
 Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe PATCH 3/5] networkmanager: Add sysvinit support
+Subject: [meta-oe PATCH 4/5] libqmi: Upgrade 1.22.2 -> 1.24.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,167 +50,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Sep 2019 22:43:28 -0000
+X-List-Received-Date: Sat, 28 Sep 2019 22:43:31 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
- .../networkmanager/networkmanager.initd       | 110 ++++++++++++++++++
- .../networkmanager/networkmanager_1.18.2.bb   |   6 +-
- 2 files changed, 115 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/networkmanager.initd
+ .../libqmi/{libqmi_1.22.2.bb => libqmi_1.24.0.bb}            | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.22.2.bb => libqmi_1.24.0.bb} (85%)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/networkmanager.initd b/meta-networking/recipes-connectivity/networkmanager/networkmanager/networkmanager.initd
-new file mode 100644
-index 000000000..4fdd80d41
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager/networkmanager.initd
-@@ -0,0 +1,110 @@
-+#! /bin/sh
-+### BEGIN INIT INFO
-+# Provides:          network-manager
-+# Required-Start:    $remote_fs dbus udev
-+# Required-Stop:     $remote_fs dbus udev
-+# Should-Start:      $syslog
-+# Should-Stop:       $syslog
-+# Default-Start:     2 3 4 5
-+# Default-Stop:      0 1 6
-+# Short-Description: network connection manager
-+# Description:       Daemon for automatically switching network
-+#            connections to the best available connection.
-+### END INIT INFO
-+
-+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-+DESC="network connection manager"
-+NAME="NetworkManager"
-+
-+DAEMON=/usr/sbin/$NAME
-+
-+PIDFILE=/run/$NAME/$NAME.pid
-+
-+SCRIPTNAME=/etc/init.d/network-manager
-+
-+. /etc/init.d/functions || exit 1
-+
-+# Exit if the package is not installed
-+[ -x "$DAEMON" ] || exit 0
-+
-+log_daemon_msg() {
-+    echo -n $*
-+}
-+
-+log_end_msg() {
-+    if [ $1 -eq 0 ]; then
-+        success
-+    else
-+        failure
-+    fi
-+    echo
-+}
-+
-+log_progress_msg () {
-+    if [ -z "${1:-}" ]; then
-+        return 1
-+    fi
-+    echo -n " $@"
-+}
-+
-+#
-+#   Function that starts the daemon/service.
-+#
-+d_start() {
-+    start-stop-daemon --start --quiet --pidfile $PIDFILE \
-+        --exec $DAEMON -- $DAEMON_OPTS
-+}
-+
-+#
-+#   Function that stops the daemon/service.
-+#
-+d_stop() {
-+    start-stop-daemon --stop --retry 5 --quiet --pidfile $PIDFILE \
-+        --exec $DAEMON
-+}
-+
-+d_reload() {
-+    start-stop-daemon --stop --signal HUP --quiet --pidfile $PIDFILE \
-+        --exec $DAEMON
-+}
-+
-+case "$1" in
-+  start)
-+    log_daemon_msg "Starting $DESC" "$NAME"
-+    d_start
-+    case "$?" in
-+        0) log_end_msg 0 ;;
-+        1) log_progress_msg "already started"
-+           log_end_msg 0 ;;
-+        *) log_end_msg 1 ;;
-+    esac
-+    ;;
-+  stop)
-+    log_daemon_msg "Stopping $DESC" "$NAME"
-+    d_stop
-+    case "$?" in
-+        0) log_end_msg 0 ;;
-+        1) log_progress_msg "already stopped"
-+           log_end_msg 0 ;;
-+        *) log_end_msg 1 ;;
-+    esac
-+    ;;
-+  reload|force-reload)
-+    log_daemon_msg "Reloading $DESC" "$NAME"
-+    d_reload
-+    log_end_msg $?
-+    ;;
-+  restart)
-+    $0 stop
-+    $0 start
-+    ;;
-+  status)
-+    status_of_proc -p $PIDFILE $DAEMON $NAME && exit 0 || exit $?
-+    ;;
-+  *)
-+    echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-reload|status}" >&2
-+    exit 1
-+    ;;
-+esac
-+
-+exit 0
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb
-index 3c220ec77..db69a5e77 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.2.bb
-@@ -19,10 +19,11 @@ DEPENDS = " \
-     curl \
- "
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.22.2.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.0.bb
+similarity index 85%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.22.2.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.24.0.bb
+index 3b2fe51bb..9b89e1dd8 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.22.2.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.0.bb
+@@ -13,8 +13,9 @@ inherit autotools pkgconfig bash-completion
  
--inherit gnomebase gettext systemd bash-completion vala gobject-introspection gtk-doc update-alternatives
-+inherit gnomebase gettext update-rc.d systemd bash-completion vala gobject-introspection gtk-doc update-alternatives
- 
- SRC_URI = " \
-     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
-+    file://${BPN}.initd \
-     file://0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
-     file://0002-Do-not-create-settings-settings-property-documentati.patch \
- "
-@@ -130,6 +131,7 @@ FILES_${PN}-nmtui-doc = " \
-     ${mandir}/man1/nmtui* \
- "
- 
-+INITSCRIPT_NAME = "network-manager"
- SYSTEMD_SERVICE_${PN} = "${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'NetworkManager.service NetworkManager-dispatcher.service', '', d)}"
- 
- ALTERNATIVE_PRIORITY = "100"
-@@ -138,6 +140,8 @@ ALTERNATIVE_TARGET[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','syste
- ALTERNATIVE_LINK_NAME[resolv-conf] = "${@bb.utils.contains('DISTRO_FEATURES','systemd','${sysconfdir}/resolv.conf','',d)}"
- 
- do_install_append() {
-+    install -Dm 0755 ${WORKDIR}/${BPN}.initd ${D}${sysconfdir}/init.d/network-manager
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
+            "
+-SRC_URI[md5sum] = "3fd831c1b0de4a4432be628432a960ff"
+-SRC_URI[sha256sum] = "f1f1e514a89b1dcba05cf7274895e7301a2da4c947b7c2f17acb84fc74038227"
 +
-     rm -rf ${D}/run ${D}${localstatedir}/run
++SRC_URI[md5sum] = "4b181c0a8b933226ce3dce09565fe8f8"
++SRC_URI[sha256sum] = "aeb69f90c273467cce246176cba0967c6413f1995a976992770a597c4fe28c79"
  
-     # For read-only filesystem, do not create links during bootup
+ PACKAGECONFIG ??= "udev mbim"
+ PACKAGECONFIG[udev] = ",--without-udev,libgudev"
 -- 
 2.23.0
 
