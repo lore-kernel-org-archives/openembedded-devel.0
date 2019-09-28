@@ -1,50 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FF227D25F
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 348 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 28 Sep 2019 01:02:29 UTC
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.openembedded.org (Postfix) with ESMTP id 77DE87F29F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Sep 2019 21:47:04 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id s1so4137681pgv.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Sep 2019 14:47:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=A1hqHT2GS4lXFP/EM/3oYPkE+KY6Wnp3FAQ73PDxdHE=;
-	b=OpfgdP2QR+PDOlUpl3QqRzBJe1pWO0UgDA8SIgHkEz3uXdzLx65hjiVQx06x89qJIr
-	KuIGUKwyh+k6QvCG8d3vj9s5DoF85Pz7CiTS6AvP/JXCWpYQDy01uhsDfhB4SJsHaUdM
-	38vewkMcfq5NfqdlixDAFLCS/h/vU1VsbX29rH9Cp9udVuMnmPnuXdp+5Qaf8eTHw/oO
-	ww9jD/rvBQ9kT/inqkYyJy2ck2+z7fIHGExgcbWQE3onLoezjduhL4dCx5ZWVFSWbbT4
-	LbjESOZ1eB0nXuYNPqTbzPE2sDE8r8hci92mDcGEf+1PidwheNje01auP1rsM4+4vp88
-	WUqQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=A1hqHT2GS4lXFP/EM/3oYPkE+KY6Wnp3FAQ73PDxdHE=;
-	b=A3YdO0gNqTh1CEtz77ZsJCkuibyXf1yupitzifmESPoe++0ZbqD+PdKVSWsgLbk8vM
-	NIVLz3Z3Aqr6u3Z7CbNSazavro5WN90YDk/2YVCnh7tjiuFDA5vGdM9i5LlyoW7km5Fc
-	bGaD3ireASUlW1K5A6+h7NkNSp8uXbcNSNzPEhbZHrpIg5/WP/9qGPXJxC3SiVoSFTIE
-	bM6qKwcU1E/VykUim0oIkD4sDhgpkcjbCLO+bP3p3fUjIWWCCqmnntVffjIKrXu50GBx
-	U05f1KLe+lysA4NKCYGr+hIT2iulXxn9OhIvpdvzLOm51nVIpKEfuyOe+fWfoEHFY3cn
-	QxGw==
-X-Gm-Message-State: APjAAAWiYEaWciNVHuCPUmii4pJVfvnnypat8E/CAb04UgUWeiaegZ6l
-	3lfF97KiXRt8uQUDdM4p3tRKq25lfRc=
-X-Google-Smtp-Source: APXvYqwO+xYAwUAopZ/qu2sP4HVVHzH3uvXN4akNupHbr8GK3GqUujT+Jo6aIAj0rAeFnZAqEW/lCw==
-X-Received: by 2002:a62:cb:: with SMTP id 194mr7225189pfa.130.1569620824726;
-	Fri, 27 Sep 2019 14:47:04 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net (c-73-71-176-3.hsd1.ca.comcast.net.
-	[73.71.176.3]) by smtp.gmail.com with ESMTPSA id
-	g20sm3352513pfo.73.2019.09.27.14.47.03
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 27 Sep 2019 14:47:04 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 28 Sep 2019 01:02:29 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 9370440BE2;
+	Sat, 28 Sep 2019 00:56:42 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id Doinxvt-6z0U; Sat, 28 Sep 2019 00:56:42 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 77FDB409E0;
+	Sat, 28 Sep 2019 00:56:41 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id A8201173BAD;
+	Fri, 27 Sep 2019 20:56:40 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Sep 2019 14:46:53 -0700
-Message-Id: <20190927214653.2627591-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] opensaf: Fix duplicate copies of shared libs in package
+Date: Fri, 27 Sep 2019 20:56:39 -0400
+Message-Id: <1569632199-7446-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [thud][PATCH] mariadb: update SRC_URI, as 5.5.64 has moved to archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,88 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Sep 2019 21:47:05 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 28 Sep 2019 01:02:29 -0000
 
-some plugins are installed into libdir/opensaf but we were making a copy
-into libdir as well, this patch changes that so the packaged files are
-appearing only once
+From: Denys Dmytriyenko <denys@ti.com>
 
-create_empty_library should be using cross compiler with linker flags,
-existig code in this area is not cross compile friendly
+The old URL now gives 404 Not Found
 
-skip dev-elf QA test since some .so are stubs
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
- ...rary-Use-CC-variable-intead-of-hardc.patch | 23 +++++++++++++++++++
- .../opensaf/opensaf_5.19.07.bb                |  6 +++--
- 2 files changed, 27 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch
+ meta-oe/recipes-dbs/mysql/mariadb.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch
-new file mode 100644
-index 0000000000..21abcf75b5
---- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch
-@@ -0,0 +1,23 @@
-+From 300fd3e27e71a91fc52d3f985ed4fde548852853 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 27 Sep 2019 12:50:11 -0700
-+Subject: [PATCH] create_empty_library: Use CC variable intead of hardcoding
-+ gcc
-+
-+This ensures that cross-compiles can succeed, otherwise we get wrong
-+architecture on these stub libraries
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ scripts/create_empty_library | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+--- a/scripts/create_empty_library
-++++ b/scripts/create_empty_library
-+@@ -66,4 +66,4 @@ for s in $symbols; do
-+     echo "SaAisErrorT $s() { return SA_AIS_ERR_UNAVAILABLE; }" >> "$tmpdir/lib.c"
-+ done
-+ rm -f "$1"
-+-gcc -O2 -shared -fPIC "$tmpdir/lib.c" -Wl,-version-script="$2" -Wl,-soname="$libbase.so.$version1" -o "$1"
-++$CC -O2 -shared -fPIC "$tmpdir/lib.c" -Wl,-version-script="$2" -Wl,-soname="$libbase.so.$version1" -o "$1" $LDFLAGS
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
-index 3df6824ff3..7ce54c3a31 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.07.bb
-@@ -25,6 +25,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-            file://0001-src-Add-missing-header-limits.h-for-_POSIX_HOST_NAME.patch \
-            file://0001-immpbe_dump.cc-Use-sys-wait.h-instead-of-wait.h.patch \
-            file://0001-Add-configure-time-check-for-gettid-API.patch \
-+           file://0001-create_empty_library-Use-CC-variable-intead-of-hardc.patch \
-            "
- SRC_URI[md5sum] = "e9ae9de803a99b7ab33757a49858542f"
- SRC_URI[sha256sum] = "caed672d03ab1fe3f27d333429c7ca03022714e7c6350500208b7bd7349f03ce"
-@@ -44,13 +45,11 @@ PACKAGECONFIG[plm] = "--enable-ais-plm,--disable-ais-plm,libvirt openhpi"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 4f7784b..f51667d 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
  
- PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)}"
- 
--PKGLIBDIR="${libdir}"
- CPPFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation"
- CXXFLAGS += "-Wno-error=stringop-overflow= -Wno-error=stringop-truncation -Wno-error=format-truncation="
- LDFLAGS += "-Wl,--as-needed -latomic -Wl,--no-as-needed"
- 
- do_install_append() {
--    cp -av --no-preserve=ownership ${B}/lib/.libs/*.so* ${D}${libdir}
-     rm -fr "${D}${localstatedir}/lock"
-     rm -fr "${D}${localstatedir}/run"
-     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
-@@ -70,3 +69,6 @@ RDEPENDS_${PN} += "bash python"
- 
- # http://errors.yoctoproject.org/Errors/Details/186970/
- COMPATIBLE_HOST_libc-musl = 'null'
-+
-+INSANE_SKIP_${PN}-dev += "dev-elf"
-+
+-SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
++SRC_URI = "http://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://fix-cmake-module-path.patch \
+            file://remove-bad-path.patch \
+            file://fix-mysqlclient-r-version.patch \
 -- 
-2.23.0
+2.7.4
 
 
