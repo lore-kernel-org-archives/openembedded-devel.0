@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BF307F281
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
+	[209.85.215.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 63ABD7F2B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Sep 2019 23:55:23 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id a2so4491709pfo.10
+	Sun, 29 Sep 2019 23:55:24 +0000 (UTC)
+Received: by mail-pg1-f177.google.com with SMTP id a24so6340666pgj.2
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 29 Sep 2019 16:55:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=ArQrmhMTUaLiIL6VjFftZwTl2x/46SQLBDIlzVKmD7s=;
-	b=SyfdDzvqMWVvBGK65t5xeFuhUanZILEIma9vD85u3TjggVj5yhfgLTYqc/RsKVsq99
-	PidjMj2CAxZt5IXmEH1PsD1Lqg+3zApJHqHG40iDf2tQbd3bPiXBfl2K9kwTliTwx5i2
-	v8MOrB7uULEYVOCN3t4JuXyS3nNm0K8ZvRKC7N24KI4+fgZq30sXPA2jCmHEHugTOewM
-	zfN/BjESztRfcfQes3GLvaIeQDEXkCkMa7nRncAufpmpRvUCz3WYtH1tkZijqcHp6dWb
-	hyQ1xhcpFceqMMJUODwdU9D2NRj2+8fWnGKYr9REQtgUPXciudY5v6JFFb70ZkL2p8yA
-	FdEA==
+	bh=PEqWDfRXHEVSLWj+xyD1p4p+vkFidV8qcfM21hdbrYs=;
+	b=FbmZejubUIgelsr7QXlVXYm2JLn2JStrl8JAQ3JcHI9N+xXd/8nGo/nYNoHSacwTKf
+	BGS7xkxt5MDbuIakklMUy5RTC2PuokYir1HqLpNC2R2rH7KComao1ZlbN3eReOlrPy9L
+	bHdSO2yIPVh0svrSz4hD/ejk0yKnG6D4YOm1Ap24KwUjzEINyD6L1NFUQ7pcqcu6yWov
+	8p+zOudvpFpqJrSC6pcljzLJ8TIvwqwxW9CzrSshixZ+GdIOSsqf7FvEVdfCeKrUzx7R
+	7ESmpDjbWel8z+zfC+ERvaNHbk6VEm3hPXL95qiU0owzvU4Y4t3BXEyf/+JAeqwipluk
+	OsEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=ArQrmhMTUaLiIL6VjFftZwTl2x/46SQLBDIlzVKmD7s=;
-	b=RAYnUrJK5chCfJGGhxlKUQr+WMNt04onI5tdWzbo+5TVCkkoaSrxDt9mUvjTrf28O8
-	ZwQnLmptwbFFxCDGwfe+du5zLuEEcTd2uTAE9HbiC/yxoVlELjO1D/qeGGaoI62I3c5i
-	Vu9SECaTAL0IthxdPkhoI32uDxaOjgqByQpsSTOdBAXkvlFUsMgrBT1slgBFXZ8jK84t
-	w48U8u5OQyNsfFiDQrYjxdrTKyWKoPZeD+g+hGGsrry3NK0/RHP04L84wTpouT6bwMgM
-	2RjryTUpSoNOHdPM2G7EPj0NyggOfixnr1nvBc3rdi94Wy5ZF9ihMm+Bu+9OumoJZIYQ
-	zEHA==
-X-Gm-Message-State: APjAAAUWq2bypftF9016OpTxSDwsC0R+mBkY2+9/9/QCn/WV+1Tw2z56
-	fv7hFjT+9YTD34n2om+2QC7env8kkL4=
-X-Google-Smtp-Source: APXvYqxE4D6nE295uOXh6LiTFCBOS1KdKYDiGH90XWvfO87ptud7WKhM0koh8nLwwmlE1aLPK86fww==
-X-Received: by 2002:a65:4002:: with SMTP id f2mr21516456pgp.447.1569801324585; 
-	Sun, 29 Sep 2019 16:55:24 -0700 (PDT)
+	bh=PEqWDfRXHEVSLWj+xyD1p4p+vkFidV8qcfM21hdbrYs=;
+	b=YNhYN0kZ5+49AKhR/JRgjPAw4gTXUEo0T5SPVSK1yA/jHG3O37AkkmmfdG7H9ZsIrt
+	gFUVRxXdsh85CIKrTU6uVofaPbHr1nyqqNK0Mp2+Lsf12lBgJ73SnDZ8DH5kunXPolVD
+	Gt8lhrqR9LN0dLIim3tawmUUuYGPkHdPcwLzbtRmV/AfcdJqdvfyZ11l/Gbd6PDYvOZf
+	LyYixiN9SHaQZNHp2IlspMafSRjDNNwlejeU3R+yO/P54hsQTdVC/iOj/XCIzbtstxyr
+	G/bp/Y7fMZjpSMFeoBF1n2oyWk4ns3PjEqRw/trTa1AsQCX0SP+p72W0fEtXF7bh+gbX
+	5jxw==
+X-Gm-Message-State: APjAAAWDDznKsUAwNjpEogn3sGSJVHSwo7Icj8WpXB3xXTpkSrzb/oKr
+	b6C3UO1kjPiVtVefvLz8HC7kg0tSHiI=
+X-Google-Smtp-Source: APXvYqwZhc1X3gTo+6xbkmwZGkkJF20ImNUnYcT+raBaj2BXchYLwX3iigqzNYK4K1uZeSk7o/Eltw==
+X-Received: by 2002:a62:8749:: with SMTP id i70mr17604449pfe.12.1569801325332; 
+	Sun, 29 Sep 2019 16:55:25 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:a5c0:edf9:811d:ad92:85c2])
 	by smtp.gmail.com with ESMTPSA id
-	p190sm14474778pfb.160.2019.09.29.16.55.23
+	p190sm14474778pfb.160.2019.09.29.16.55.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
 	Sun, 29 Sep 2019 16:55:24 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Sep 2019 16:55:05 -0700
-Message-Id: <7121ffac6230e8fe0ff09fcf98906bab03e27a75.1569801183.git.akuster808@gmail.com>
+Date: Sun, 29 Sep 2019 16:55:06 -0700
+Message-Id: <d18181125c6024b1e170c46988c42261f5ab2ee5.1569801183.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1569801183.git.akuster808@gmail.com>
 References: <cover.1569801183.git.akuster808@gmail.com>
-Subject: [warrior-next 07/10] bpftool.bb: Disable SECURITY_CFLAGS
+Subject: [warrior-next 08/10] linux-atm: Fix build with kernel headers 5.2+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,41 +59,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Sep 2019 23:55:23 -0000
+X-List-Received-Date: Sun, 29 Sep 2019 23:55:24 -0000
 
 From: Khem Raj <raj.khem@gmail.com>
 
-We do not pass CFLAGS to build and fortify sources needs some
-optimization to be enabled, its better to reset the additional flags and
-let the build system add them as it needs
-
-Fixes build failures like
-tools/include/tools/libc_compat.h:11:21: error: static declaration of 'reallocarray' follows non-static declaration
-|    11 | static inline void *reallocarray(void *ptr, size_t nmemb, size_t size)
-|       |                     ^~~~~~~~~~~~
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit d46e1e767f6b91dc25935e0c48d9d362dd50d879)
+(cherry picked from commit dff93352c83660f965771a3dc91f39ff23b685c5)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-kernel/bpftool/bpftool.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ ...mdump-Include-linux-sockios.h-for-SIOCGST.patch | 59 ++++++++++++++++++++++
+ .../recipes-support/linux-atm/linux-atm_2.5.2.bb   |  1 +
+ 2 files changed, 60 insertions(+)
+ create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch
 
-diff --git a/meta-oe/recipes-kernel/bpftool/bpftool.bb b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-index f75ac6f..a5df547 100644
---- a/meta-oe/recipes-kernel/bpftool/bpftool.bb
-+++ b/meta-oe/recipes-kernel/bpftool/bpftool.bb
-@@ -10,7 +10,9 @@ inherit bash-completion kernelsrc kernel-arch
- 
- do_populate_lic[depends] += "virtual/kernel:do_patch"
- 
--EXTRA_OEMAKE = "-C ${S}/tools/bpf/bpftool O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
-+EXTRA_OEMAKE = "V=1 -C ${S}/tools/bpf/bpftool O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch
+new file mode 100644
+index 0000000..a54869d
+--- /dev/null
++++ b/meta-networking/recipes-support/linux-atm/linux-atm/0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch
+@@ -0,0 +1,59 @@
++From 4456e13880803a300e4b6f263ad22a37481b5df5 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 29 Aug 2019 09:33:43 -0700
++Subject: [PATCH] saaldump,atmdump: Include linux/sockios.h for SIOCGSTAMP
 +
-+SECURITY_CFLAGS = ""
++In linux kernel commit 0768e17073dc527ccd18ed5f96ce85f9985e9115
++the asm-generic/sockios.h header no longer defines SIOCGSTAMP.
++Instead it provides only SIOCGSTAMP_OLD.
++
++The linux/sockios.h header now defines SIOCGSTAMP using either
++SIOCGSTAMP_OLD or SIOCGSTAMP_NEW as appropriate. This linux only
++header file is not pulled so we get a build failure.
++
++Fixes
++../../../linux-atm-2.5.2/src/maint/atmdump.c:142:18: error: use of undeclared identifier 'SIOCGSTAMP'
++            if (ioctl(s,SIOCGSTAMP,&stamp) < 0) {
++                        ^
++1 error generated.
++make[3]: *** [Makefile:623: atmdump.o] Error 1
++make[3]: *** Waiting for unfinished jobs....
++../../../linux-atm-2.5.2/src/maint/saaldump.c:169:14: error: use of undeclared identifier 'SIOCGSTAMP'
++        if (ioctl(s,SIOCGSTAMP,&stamp) < 0) {
++                    ^
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/maint/atmdump.c  | 2 +-
++ src/maint/saaldump.c | 2 +-
++ 2 files changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/src/maint/atmdump.c b/src/maint/atmdump.c
++index 8b17826..9e4853b 100644
++--- a/src/maint/atmdump.c
+++++ b/src/maint/atmdump.c
++@@ -5,7 +5,7 @@
++ #if HAVE_CONFIG_H
++ #include <config.h>
++ #endif
++-
+++#include <linux/sockios.h>
++ #include <stdlib.h>
++ #include <stdio.h>
++ #include <unistd.h>
++diff --git a/src/maint/saaldump.c b/src/maint/saaldump.c
++index 83bdde9..69429a8 100644
++--- a/src/maint/saaldump.c
+++++ b/src/maint/saaldump.c
++@@ -5,7 +5,7 @@
++ #if HAVE_CONFIG_H
++ #include <config.h>
++ #endif
++-
+++#include <linux/sockios.h>
++ #include <stdlib.h>
++ #include <stdarg.h>
++ #include <stdio.h>
++-- 
++2.23.0
++
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+index 9ed7ca6..e594906 100644
+--- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
++++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+@@ -12,6 +12,7 @@ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${P
+            file://0001-ttcp-Add-printf-format-string.patch \
+            file://0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch \
+            file://0001-IFNAMSIZ-is-defined-in-net-if.h.patch \
++           file://0001-saaldump-atmdump-Include-linux-sockios.h-for-SIOCGST.patch \
+ "
  
- do_configure[depends] += "virtual/kernel:do_shared_workdir"
- 
+ SRC_URI_append_libc-musl = " file://musl-no-on_exit.patch"
 -- 
 2.7.4
 
