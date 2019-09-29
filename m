@@ -1,26 +1,24 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CB677F25B
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id CEC297F25B
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 29 Sep 2019 05:54:26 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id x8T5sR6n018899
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x8T5sOV4001377
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2019 22:54:27 -0700 (PDT)
+	Sat, 28 Sep 2019 22:54:24 -0700 (PDT)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Sat, 28 Sep 2019 22:54:26 -0700
+	14.3.468.0; Sat, 28 Sep 2019 22:54:23 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 29 Sep 2019 13:42:39 +0800
-Message-ID: <5c53e8e7d48133717f3a65805d1770c848a9115d.1569734973.git.jackie.huang@windriver.com>
+Date: Sun, 29 Sep 2019 13:42:37 +0800
+Message-ID: <cover.1569734973.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1569734973.git.jackie.huang@windriver.com>
-References: <cover.1569734973.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 2/4] python-pymysql: add recipes for python2 and python3
+Subject: [meta-python][PATCH 0/4] Add new recipes four python packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,65 +31,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Sep 2019 05:54:26 -0000
+X-List-Received-Date: Sun, 29 Sep 2019 05:54:28 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-This package contains a pure-Python MySQL client library,
-based on PEP 249 Most public APIs are compatible with
-mysqlclient and MySQLdb.
+--
+The following changes since commit 41fe46157ca3caa96408a9a749d62c8bbc3c2794:
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-python/recipes-devtools/python/python-pymysql.inc | 18 ++++++++++++++++++
- .../recipes-devtools/python/python-pymysql_0.9.3.bb    |  2 ++
- .../recipes-devtools/python/python3-pymysql_0.9.3.bb   |  2 ++
- 3 files changed, 22 insertions(+)
+  python-paste: upgrade 3.2.0 -> 3.2.1 (2019-09-25 22:51:10 -0700)
+
+are available in the git repository at:
+
+  git://github.com/jackiehjm/meta-openembedded jackiehjm/python-versiontools_pymysql_statistics_pyperf_20190929
+  https://github.com/jackiehjm/meta-openembedded/tree/jackiehjm/python-versiontools_pymysql_statistics_pyperf_20190929
+
+Jackie Huang (4):
+  python-versiontools: add recipes for python2 and python3
+  python-pymysql: add recipes for python2 and python3
+  python-statistics: add new recipe
+  python-pyperf: add recipes for python2 and python3
+
+ .../recipes-devtools/python/python-pymysql.inc     | 18 +++++++++++++++++
+ .../python/python-pymysql_0.9.3.bb                 |  2 ++
+ .../recipes-devtools/python/python-pyperf.inc      | 23 ++++++++++++++++++++++
+ .../recipes-devtools/python/python-pyperf_1.6.1.bb |  4 ++++
+ .../python/python-statistics_1.0.3.5.bb            | 15 ++++++++++++++
+ .../python/python-versiontools.inc                 | 10 ++++++++++
+ .../python/python-versiontools_1.9.1.bb            |  2 ++
+ .../python/python3-pymysql_0.9.3.bb                |  2 ++
+ .../python/python3-pyperf_1.6.1.bb                 |  4 ++++
+ .../python/python3-versiontools_1.9.1.bb           |  2 ++
+ 10 files changed, 82 insertions(+)
  create mode 100644 meta-python/recipes-devtools/python/python-pymysql.inc
  create mode 100644 meta-python/recipes-devtools/python/python-pymysql_0.9.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-pyperf.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pyperf_1.6.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-statistics_1.0.3.5.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-versiontools.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-versiontools_1.9.1.bb
  create mode 100644 meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyperf_1.6.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pymysql.inc b/meta-python/recipes-devtools/python/python-pymysql.inc
-new file mode 100644
-index 0000000..8c7f455
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pymysql.inc
-@@ -0,0 +1,18 @@
-+SUMMARY = "A pure-Python MySQL client library"
-+DESCRIPTION = " \
-+  This package contains a pure-Python MySQL client library, based on PEP 249 \
-+  Most public APIs are compatible with mysqlclient and MySQLdb. \
-+  "
-+SECTION = "devel/python"
-+HOMEPAGE = "https://pymysql.readthedocs.io"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=528175c84163bb800d23ad835c7fa0fc"
-+
-+SRC_URI[md5sum] = "e5d9183cc0a775ac29f9e0365cca6556"
-+SRC_URI[sha256sum] = "d8c059dcd81dedb85a9f034d5e22dcb4442c0b201908bede99e306d65ea7c8e7"
-+
-+inherit pypi
-+
-+PYPI_PACKAGE = "PyMySQL"
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-cryptography"
-diff --git a/meta-python/recipes-devtools/python/python-pymysql_0.9.3.bb b/meta-python/recipes-devtools/python/python-pymysql_0.9.3.bb
-new file mode 100644
-index 0000000..27d097e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pymysql_0.9.3.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-pymysql.inc
-diff --git a/meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb b/meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb
-new file mode 100644
-index 0000000..13774bd
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-pymysql.inc
 -- 
 2.7.4
 
