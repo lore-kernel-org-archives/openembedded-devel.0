@@ -1,26 +1,26 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 754647E467
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 40A577F23B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Sep 2019 03:24:40 +0000 (UTC)
+	Sun, 29 Sep 2019 05:54:25 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id x8T3Ofv0011913
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8T5sQeP003987
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2019 20:24:41 -0700 (PDT)
-Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.468.0; Sat, 28 Sep 2019 20:24:41 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
+	Sat, 28 Sep 2019 22:54:26 -0700
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Sat, 28 Sep 2019 22:54:25 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 29 Sep 2019 11:24:43 +0800
-Message-ID: <a375d82d5287417286d50ebbfb3d6d2b386731cd.1569727253.git.liezhi.yang@windriver.com>
+Date: Sun, 29 Sep 2019 13:42:38 +0800
+Message-ID: <5009124accb35db6c229d72bd30fc01a0e7aafb3.1569734973.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1569727253.git.liezhi.yang@windriver.com>
-References: <cover.1569727253.git.liezhi.yang@windriver.com>
+In-Reply-To: <cover.1569734973.git.jackie.huang@windriver.com>
+References: <cover.1569734973.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/2] net-snmp: Fix PACKAGECONFIG for perl
+Subject: [meta-python][PATCH 1/4] python-versiontools: add recipes for python2 and python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,59 +33,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Sep 2019 03:24:40 -0000
+X-List-Received-Date: Sun, 29 Sep 2019 05:54:25 -0000
 Content-Type: text/plain
 
-* Remove perl-lib since it had been removed by oe-core:
-  commit 68552c353255188de3d5b42135360a30e7eac535
-  Author: Alexander Kanavin <alex.kanavin@gmail.com>
-  Date:   Sun Dec 2 12:46:37 2018 +0100
+From: Jackie Huang <jackie.huang@windriver.com>
 
-      perl: remove the previous version of the recipe
+python-versiontools is a smart replacement for plain
+tuple used in __version__.
 
-  Now the files are in perl pacakge.
-
-* Fix perl paths when perl is enabled.
-
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ meta-python/recipes-devtools/python/python-versiontools.inc    | 10 ++++++++++
+ .../recipes-devtools/python/python-versiontools_1.9.1.bb       |  2 ++
+ .../recipes-devtools/python/python3-versiontools_1.9.1.bb      |  2 ++
+ 3 files changed, 14 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-versiontools.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-versiontools_1.9.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index 60b2b38..192b6b5 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -50,7 +50,7 @@ PACKAGECONFIG[libnl] = "--with-nl, --without-nl, libnl"
- PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,,"
- 
- PACKAGECONFIG[perl] = "--enable-embedded-perl --with-perl-modules=yes, --disable-embedded-perl --with-perl-modules=no,\
--                       perl, perl perl-lib"
-+                       perl,"
- PACKAGECONFIG[des] = "--enable-des,--disable-des"
- 
- EXTRA_OECONF = "--enable-shared \
-@@ -88,8 +88,8 @@ do_configure_prepend() {
- 
-     if [ "${HAS_PERL}" = "1" ]; then
-         # this may need to be changed when package perl has any change.
--        cp -f ${STAGING_DIR_TARGET}/usr/lib*/perl/*/Config.pm ${WORKDIR}/
--        cp -f ${STAGING_DIR_TARGET}/usr/lib*/perl/*/Config_heavy.pl ${WORKDIR}/
-+        cp -f ${STAGING_DIR_TARGET}/usr/lib*/perl?/*/Config.pm ${WORKDIR}/
-+        cp -f ${STAGING_DIR_TARGET}/usr/lib*/perl?/*/*/Config_heavy.pl ${WORKDIR}/
-         sed -e "s@libpth => '/usr/lib.*@libpth => '${STAGING_DIR_TARGET}/${libdir} ${STAGING_DIR_TARGET}/${base_libdir}',@g" \
-             -e "s@privlibexp => '/usr@privlibexp => '${STAGING_DIR_TARGET}/usr@g" \
-             -e "s@scriptdir => '/usr@scriptdir => '${STAGING_DIR_TARGET}/usr@g" \
-@@ -190,7 +190,8 @@ ALLOW_EMPTY_${PN} = "1"
- ALLOW_EMPTY_${PN}-server = "1"
- ALLOW_EMPTY_${PN}-libs = "1"
- 
--FILES_${PN}-perl-modules = "${libdir}/perl/*"
-+FILES_${PN}-perl-modules = "${libdir}/perl?/*"
-+RDEPENDS_${PN}-perl-modules = "perl"
- 
- FILES_${PN}-libs = ""
- FILES_${PN}-mibs = "${datadir}/snmp/mibs"
+diff --git a/meta-python/recipes-devtools/python/python-versiontools.inc b/meta-python/recipes-devtools/python/python-versiontools.inc
+new file mode 100644
+index 0000000..b0e696f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-versiontools.inc
+@@ -0,0 +1,10 @@
++SUMMARY = "Smart replacement for plain tuple used in __version__"
++SECTION = "devel/python"
++HOMEPAGE = "https://launchpad.net/versiontools"
++LICENSE = "LGPLv3"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=20;md5=02193721a38fd8a05a4ddeb7df8e294d"
++
++inherit pypi
++
++SRC_URI[md5sum] = "602b7db8eea30dd29a1d451997adf251"
++SRC_URI[sha256sum] = "a969332887a18a9c98b0df0ea4d4ca75972f24ca94f06fb87d591377e83414f6"
+diff --git a/meta-python/recipes-devtools/python/python-versiontools_1.9.1.bb b/meta-python/recipes-devtools/python/python-versiontools_1.9.1.bb
+new file mode 100644
+index 0000000..6bfe82e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-versiontools_1.9.1.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-versiontools.inc
+diff --git a/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb b/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
+new file mode 100644
+index 0000000..e8d6b7d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-versiontools.inc
 -- 
 2.7.4
 
