@@ -1,26 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D4A817F23B
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A67F6D230
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Sep 2019 05:54:28 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8T5sUBv003990
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Sep 2019 22:54:30 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Sat, 28 Sep 2019 22:54:29 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 29 Sep 2019 13:42:41 +0800
-Message-ID: <95e4f51534535a918208aacb3062f4a608e096e3.1569734973.git.jackie.huang@windriver.com>
+	Sun, 29 Sep 2019 08:03:38 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x8T83bZH002411
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 29 Sep 2019 01:03:37 -0700 (PDT)
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.468.0; Sun, 29 Sep 2019 01:03:19 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Sun, 29 Sep 2019 16:03:17 +0800
+Message-ID: <1569744197-38674-1-git-send-email-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1569734973.git.jackie.huang@windriver.com>
-References: <cover.1569734973.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 4/4] python-pyperf: add recipes for python2 and python3
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH] lvm2: fix run lvcreate hung while PACKAGECONFIG udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,74 +31,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Sep 2019 05:54:29 -0000
+X-List-Received-Date: Sun, 29 Sep 2019 08:03:38 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Since lvm2-udevrules was removed from lvm RRECOMMENDS in the following commit:
+[3f64779ea libdevmapper/lvm2: force recipe libdevmapper to populate sysroot only]
+Execute the following command hung:
+$ dd if=/dev/zero of=./p0 bs=1M count=100
+$ dd if=/dev/zero of=./p1 bs=1M count=100
+$ losetup /dev/loop20  ./p0
+$ losetup /dev/loop21  ./p1
+$ pvcreate -y /dev/loop20 -ff
+$ pvcreate -y /dev/loop21 -ff
+$ vgcreate rootvg /dev/loop20 /dev/loop21
+$ lvcreate -v -y -L 50 -n rootlv rootvg
 
-The Python pyperf module is a toolkit to write,
-run and analyze benchmarks.
+Add the missing pacakge to PACKAGECONFIG[udev] runtime depends could
+fix the issue.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../recipes-devtools/python/python-pyperf.inc      | 23 ++++++++++++++++++++++
- .../recipes-devtools/python/python-pyperf_1.6.1.bb |  4 ++++
- .../python/python3-pyperf_1.6.1.bb                 |  4 ++++
- 3 files changed, 31 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pyperf.inc
- create mode 100644 meta-python/recipes-devtools/python/python-pyperf_1.6.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pyperf_1.6.1.bb
+ meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyperf.inc b/meta-python/recipes-devtools/python/python-pyperf.inc
-new file mode 100644
-index 0000000..81837f3
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyperf.inc
-@@ -0,0 +1,23 @@
-+SUMMARY = "A toolkit to write, run and analyze benchmarks"
-+DESCRIPTION = " \
-+The Python pyperf module is a toolkit to write, run and analyze benchmarks. \
-+Features: \
-+    * Simple API to run reliable benchmarks \
-+    * Automatically calibrate a benchmark for a time budget. \
-+    * Spawn multiple worker processes. \
-+    * Compute the mean and standard deviation. \
-+    * Detect if a benchmark result seems unstable. \
-+    * JSON format to store benchmark results. \
-+    * Support multiple units: seconds, bytes and integer. \
-+"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=78bc2e6e87c8c61272937b879e6dc2f8"
-+
-+SRC_URI[md5sum] = "d67fe5f447963da8873f3e9923f76de1"
-+SRC_URI[sha256sum] = "8d0143a22a13ee10c997a648f30b82cdc40175d5a20b11055ae058a82e45d371"
-+
-+inherit pypi
-+
-+PYPI_PACKAGE = "pyperf"
-+
-+DEPENDS += "${PYTHON_PN}-six-native"
-diff --git a/meta-python/recipes-devtools/python/python-pyperf_1.6.1.bb b/meta-python/recipes-devtools/python/python-pyperf_1.6.1.bb
-new file mode 100644
-index 0000000..a9d5c74
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyperf_1.6.1.bb
-@@ -0,0 +1,4 @@
-+inherit setuptools
-+require python-pyperf.inc
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-statistics"
-diff --git a/meta-python/recipes-devtools/python/python3-pyperf_1.6.1.bb b/meta-python/recipes-devtools/python/python3-pyperf_1.6.1.bb
-new file mode 100644
-index 0000000..5ba5efb
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyperf_1.6.1.bb
-@@ -0,0 +1,4 @@
-+inherit setuptools3
-+require python-pyperf.inc
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-misc"
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
+index f42bd8ed2..9907d4f92 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
++++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
+@@ -45,7 +45,7 @@ DEPENDS += "util-linux"
+ LVM2_PACKAGECONFIG_append_class-target = " \
+     udev \
+ "
+-PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udevdir=${nonarch_base_libdir}/udev/rules.d,--disable-udev_sync --disable-udev_rules,udev"
++PACKAGECONFIG[udev] = "--enable-udev_sync --enable-udev_rules --with-udevdir=${nonarch_base_libdir}/udev/rules.d,--disable-udev_sync --disable-udev_rules,udev,${PN}-udevrules"
+ 
+ PACKAGES =+ "libdevmapper"
+ FILES_libdevmapper = " \
 -- 
-2.7.4
+2.23.0
 
 
