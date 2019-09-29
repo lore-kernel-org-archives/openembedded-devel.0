@@ -1,22 +1,38 @@
-Return-Path: <adrian.ratiu@collabora.com>
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id 05D9E7D084
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 5393D7F277
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Sep 2019 17:46:18 +0000 (UTC)
+	Sun, 29 Sep 2019 18:15:09 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: aratiu) with ESMTPSA id 9AA3128BDBB
-From: Adrian Ratiu <adrian.ratiu@collabora.com>
-To: Adrian Bunk <bunk@stusta.de>, Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20190929124049.GB30130@localhost>
-References: <20190927165605.1900768-1-adrian.ratiu@collabora.com>
-	<CAMKF1sqTmvwNDbXnvHvUfPVjq-hPLAQ6Yne=sph3Q-gqLGU3UA@mail.gmail.com>
-	<20190929124049.GB30130@localhost>
-Date: Sun, 29 Sep 2019 20:46:25 +0300
-Message-ID: <87ftkf9ery.fsf@collabora.com>
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46hDGN358mz65;
+	Sun, 29 Sep 2019 20:15:08 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1569780908;
+	bh=U+dfUO/rKMpxO+80FwvLLXDRGOvn6e09fkrEkd5r9dI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=OeaXO7lrMzGAGyaX4qVZc2d2DYuuxGvBnkZpqmxELciqO59v6xf8P8ltAP0l9cYHw
+	HHMG8CH8lFrl9gR/BVynqfkeCDno7Ggo/hB8Rj4cbTUhq7NpiHfjZQDnc5Vl7UhOoD
+	8Ctl89LlY+PPs4Am6luz8h/aAV2x7VN3yJSlfnnrQ+w5JNBcCHnsrBrX6PGOCg7hvn
+	PsKf07pJc2n3QOVmrPHMluXIS+AeCq0H3bdscwtgSeeuJLdZD3UMv65qg3QzMjhWKf
+	nj2LUKdkTa/ZI8oUIgZBLhN74+SvZfdTm8bPjfBxrRmWJ0PPsrrWuUaOIYWy6G1HDo
+	dUK2FBaNZYI9rxScGB4XoAGdn3oSBEqGXDsHCxtrmkXU9HI6b9TTFrxrJKoGx8Eq6b
+	SnJTHb0WaaFkUYHIEabKDFzq/JCMaE3AfBPm/lEesCscURToLxdcJe5CW9WZVmoGm6
+	71gX6LrTVt4CmvxHcjawUQYDYLHXzNzjBfVOMfmxasr8v+XFDBqoRm0L/w6a/wJwF4
+	Krj8qOopwioxlfv8TjCvGIrmN2LOLtPeOHWMS196eN5QU6mGO3ogSA2L4L56K5rLmA
+	9Wg47ecTOMTGGEVrvu08/kTW3RGE5rZk1E7pxXXZLaRe6kd5l89klnz4WTa7j6NNG6
+	b+wQ9SvCraxQJ5An2itulRmc=
+Date: Sun, 29 Sep 2019 21:14:49 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Denys Dmytriyenko <denis@denix.org>
+Message-ID: <20190929181449.GD30130@localhost>
+References: <1569632199-7446-1-git-send-email-denis@denix.org>
+	<20190929124339.GC30130@localhost>
+	<20190929162007.GZ30018@denix.org>
 MIME-Version: 1.0
-Cc: Adrian Ratiu <adrian.ratiu@collabora.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] renderdoc: add new recipe
+In-Reply-To: <20190929162007.GZ30018@denix.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org, Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [thud][PATCH] mariadb: update SRC_URI, as 5.5.64 has moved to archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,59 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Sep 2019 17:46:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 29 Sep 2019 18:15:09 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Sun, 29 Sep 2019, Adrian Bunk <bunk@stusta.de> wrote:
-> On Sat, Sep 28, 2019 at 12:48:10PM -0700, Khem Raj wrote:
->> On Fri, Sep 27, 2019 at 9:56 AM Adrian Ratiu <adrian.ratiu@collabora.com> wrote:
->>...
->> > --- /dev/null
->> > +++ b/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
->> > @@ -0,0 +1,48 @@
->> > +From 40511a6f4dc6311c8cf7f2954d1202ede55881ff Mon Sep 17 00:00:00 2001
->> > +From: Adrian Ratiu <adrian.ratiu@collabora.com>
->> > +Date: Wed, 25 Sep 2019 19:31:14 +0300
->> > +Subject: [PATCH] (q)renderdoc/CMakeLists.txt: remove flag unsupported by GCC
->> > +
->> > +-Wno-unknown-warning is not supported by GCC, only by Clang so we
->> > +remove it because newer GCC versions like 9.2.0 will complain, older
->> > +versions would just ignore it.
->> > +
->> > +Upstream-Status: Pending [https://github.com/baldurk/renderdoc/pull/1530]
->> > +
->> 
->> gcc9 does support -Wno-unknown-warning perhaps you want
->> -Wno-error=unknown-warning
->>...
->> > +TARGET_CFLAGS += "-Wno-error=deprecated-copy"
->> > +
->> 
->> this option is GCC specific mark it
->> TARGET_CFLAGS_append_toolchain-gcc
->>...
->
-> Using -Wno-error always could solve both problems,
-> and would also avoid similar problems in the future.
+On Sun, Sep 29, 2019 at 12:20:07PM -0400, Denys Dmytriyenko wrote:
+> On Sun, Sep 29, 2019 at 03:43:39PM +0300, Adrian Bunk wrote:
+> > On Fri, Sep 27, 2019 at 08:56:39PM -0400, Denys Dmytriyenko wrote:
+> > > From: Denys Dmytriyenko <denys@ti.com>
+> > > 
+> > > The old URL now gives 404 Not Found
+> > >...
+> > > --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> > > +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> > > @@ -4,7 +4,7 @@ SECTION = "libs"
+> > >  LICENSE = "GPLv2"
+> > >  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+> > >  
+> > > -SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
+> > > +SRC_URI = "http://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+> > >...
+> > 
+> > This change should first go into master (and also warrior).
+> 
+> Yeah, let me just go downgrade master and warrior to this old version, 
+> so I can fix the download URL...
 
-That's a good idea, however I can't pass directly -Wno-error in the
-recipe because of how the top-level CMakelists.txt is written: it always
-*appends* -Werror to the flags, so it overwrites our -Wno-error.
+archive.mariadb.org has all versions, including some that are even more 
+recent than the version currently in master.
 
-A better solution which has the same effect is to use
--DCMAKE_BUILD_TYPE=Release which prevents -Werror being appended at all
-in the top-level CMakelists.txt (there is no other effect than this!)
+Not changing the URL in master now will only bring us the same problem 
+in zeus later.
 
-Thanks! Will send an updatet v4 soon.
+> Denys
 
->
-> cu
-> Adrian
->
-> -- 
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
