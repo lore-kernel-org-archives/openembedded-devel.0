@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com
-	[209.85.210.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 44A287F278
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+	[209.85.210.174])
+	by mail.openembedded.org (Postfix) with ESMTP id A87807F273
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Sep 2019 23:55:19 +0000 (UTC)
-Received: by mail-pf1-f178.google.com with SMTP id v4so4501050pff.6
+	Sun, 29 Sep 2019 23:55:20 +0000 (UTC)
+Received: by mail-pf1-f174.google.com with SMTP id b128so4515847pfa.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Sep 2019 16:55:20 -0700 (PDT)
+	Sun, 29 Sep 2019 16:55:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=cwkp7P9ceazueeYE7dmCpyyC6U1VOLCTu+r3Ewp9YE4=;
-	b=XzrtjEeZXFjuluaab3lsc3fg2oPJYQGAEBsipAzxoDJ5weYXzBlgEZQcWeO4GeV9eF
-	FASjPZVarySFNimWJ3k8u5Lg3vCWHuvNoonkWkB6PDqzi+kO23ZV3FM29psRfMm6ABns
-	86eXUCiRrm/oX7qvuQ470Yz5FTfbwl9lBPNAjROxC3SmmU2mIF2YNkZw9PXV/aQw+kmE
-	qUPKlURg7Qc9lK2jfLOeJ7y/nsC2dduB9CKmmuHyWltuXj+7xROdEcEErVZyJMGRPp9k
-	t73mLtITtb/Oxk2V3nDNIDSemgN026gBreEWZ5Q9YupYBKkIf//XzQQTuYIWdhPNoygN
-	TrYw==
+	bh=zhL90kITEdvR3O8Xziu0SXEcH4fCgbnJ3ng0fWMkiX8=;
+	b=RX6LsLAftDVkTVAWNY7nou2v9CiYraHQxIKADmvWmX7JIWKhw9GXBcgeqSLDVXs4kX
+	+L3epV2keE2sG8FKsjHke2SuFnfrsJ4lDW42JCqDKC9X87cucR8A/sXTh4T9QWtbogQe
+	EKbQ+VZWNebvbLBOXvKUbiM3Vm0tz/jAg/5gXnsj/6TAwuChOMIA4iqRMDbVYB+3niLV
+	uZEA7BLUmnx/11Z6ftvSsZ/ehr0rRWVYcOwfTXE5TjiBjrFmjdHgRrKqhOHn6NGl4zmJ
+	kyhgb0NDrWJvP341kax4UWgJWVwr77c566a4gDUM3fGdeXcKj/0IghLDVzZwFEnaVgcJ
+	j4Og==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=cwkp7P9ceazueeYE7dmCpyyC6U1VOLCTu+r3Ewp9YE4=;
-	b=apC9u6PXwpy44g348TBvO1OCiLiZ2ERtsQt5ZDuB7VGlHIOSwuaqnliX2Ed/RgInvL
-	kS07cvhLRZh88Bzc1EXtBdTp+tX6RVtzTgVMfYejf/1hmKlr15tymu2zI/lb0Dp/ZyNA
-	s1bVcEgsExc9EAoSQe7FqpKCN3KP3fpdAKzsAA7t9AvEJZRMG6oXwfaJPWHTBHv6oQq3
-	0kb6uIpostwecPk5XTip/iA9lYoMqoOXSBWHLtca0iB2LPQlatp7eXIJmwFlll82YGq6
-	OYMbpbP6VkjtxluNaO3qDvcA0pWqhscTKdvc3gEPWrlke3GKEhwLiIU0D6FMtMlmlprJ
-	oARA==
-X-Gm-Message-State: APjAAAVnWCV6B6+gVrbe2eGauXGgZXtXWf25zC2T0uuh1AFxaMGQe5Ic
-	ajFu3da8sKAh1ePcLNJvqPDbptatw9o=
-X-Google-Smtp-Source: APXvYqz8DH6ZKnV8s8X0lnW3wEu0gWSGYWk+ANh5G/jYx4957lSVApc5AiGukmILv8F9D0dKmUImbw==
-X-Received: by 2002:a63:ea52:: with SMTP id l18mr21756902pgk.145.1569801320274;
-	Sun, 29 Sep 2019 16:55:20 -0700 (PDT)
+	bh=zhL90kITEdvR3O8Xziu0SXEcH4fCgbnJ3ng0fWMkiX8=;
+	b=M6Vp1H4H0t1FZy1UsXfZjwGZ8PA/Z5U9boXBsaR0W9mq3y1nuiYaAUBe0tnnvCjSnU
+	1gXXyHKgG0DortR2go5Wi3sUST4FaMSZEZdHWEwZTM+g5eSVZhUvepvb9OXQJ5Flh1I2
+	wSz+F8TU/z1+NHjfVsfal1l8HCIebqJeIgy3Fn+RQybFlq8GvsVUQfyRK4ZyNkPz38X/
+	1xmYk4KFXvmQULdJG2/Ru9MxvuplHYX960PXtrTbnrEcIaQAhzGTupM81FlO+yRf/Rou
+	FKmnCqidCzzN11wVfPf76nc0uZyu2Q8DPgIrmsiNi7ewmkxgqm5U/mpPzncCS2SHk5bq
+	DY7w==
+X-Gm-Message-State: APjAAAXgsRD4x64phPMRxlEmPBMTXvAgNFzXAb4p97NUD1dRzF7fby1T
+	AUHWPdZko4JgymkCjyLfiag8lC14994=
+X-Google-Smtp-Source: APXvYqzIFKwPAstJj2io1ixKifn9LuExRqf9PMTAByyoSZYOPP3qJBOwIq/wRQw5o6FayfQSHQFrYA==
+X-Received: by 2002:a65:5043:: with SMTP id k3mr21950070pgo.406.1569801321553; 
+	Sun, 29 Sep 2019 16:55:21 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:a5c0:edf9:811d:ad92:85c2])
 	by smtp.gmail.com with ESMTPSA id
-	p190sm14474778pfb.160.2019.09.29.16.55.19
+	p190sm14474778pfb.160.2019.09.29.16.55.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 29 Sep 2019 16:55:19 -0700 (PDT)
+	Sun, 29 Sep 2019 16:55:20 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Sep 2019 16:55:01 -0700
-Message-Id: <aee04896d0d91d478b054080ef7a59e2d9e7696d.1569801183.git.akuster808@gmail.com>
+Date: Sun, 29 Sep 2019 16:55:02 -0700
+Message-Id: <cede91ddd57fb3ffc6212866c32dac3158c89e56.1569801183.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1569801183.git.akuster808@gmail.com>
 References: <cover.1569801183.git.akuster808@gmail.com>
-Subject: [warrior-next 03/10] apache2: fix multilib file conflicts
+Subject: [warrior-next 04/10] klibc: Pass -fno-builtin-bcmp with musl/clang combo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,62 +59,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Sep 2019 23:55:19 -0000
+X-List-Received-Date: Sun, 29 Sep 2019 23:55:20 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-There are errors of apache2 about files conflicts when multilib enabled:
+clang would emit bcmp built-in for musl bases system
+but here we do not link in musl C library, so its best
+to disable it
 
-| Error: Transaction check error:
-|   file /etc/apache2/extra/httpd-ssl.conf conflicts between attempted installs of lib32-apache2-2.4.41-r0.core2_32 and apache2-2.4.41-r0.core2_64
-|   file /etc/apache2/httpd.conf conflicts between attempted installs of lib32-apache2-2.4.41-r0.core2_32 and apache2-2.4.41-r0.core2_64
-|   file /usr/sbin/envvars conflicts between attempted installs of lib32-apache2-2.4.41-r0.core2_32 and apache2-2.4.41-r0.core2_64
-|   file /usr/sbin/envvars-std conflicts between attempted installs of lib32-apache2-2.4.41-r0.core2_32 and apache2-2.4.41-r0.core2_64
+Fixes
+git/usr/klibc/memmem.c:38: undefined reference to `bcmp'
 
-It makes libexecdir point to ${libdir}. Reset to ${libexecdir} which could
-eliminate file conflicts of the conf files. And remove /usr/sbin/envvars and
-/usr/sbin/envvars-std which only used by apachectl. They only add standard
-library path ${libdir} to LD_LIBRARY_PATH, so remove them to avoid multilib
-file conflicts.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 8d4d608b4e937bb3b8e3b260bd75338c3ff7e8fd)
+Cc: Andrea Adami <andrea.adami@gmail.com>
+(cherry picked from commit 11bc2775af3e47399ac268a2e6fbd63185e478ef)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-initramfs/recipes-devtools/klibc/klibc.inc | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-index be9c864..04fff64 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb
-@@ -53,7 +53,7 @@ EXTRA_OECONF_class-target = "\
-     --sysconfdir=${sysconfdir}/${BPN} \
-     --datadir=${datadir}/${BPN} \
-     --libdir=${libdir} \
--    --libexecdir=${libdir}/${BPN}/modules \
-+    --libexecdir=${libexecdir}/${BPN}/modules \
-     --localstatedir=${localstatedir} \
-     --enable-ssl \
-     --with-dbm=sdbm \
-@@ -78,7 +78,7 @@ EXTRA_OECONF_class-native = "\
-     "
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index 5805448..7faf0ca 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -33,6 +33,9 @@ ARMPATCHES_arm = "file://klibc-config-eabi.patch \
  
- do_configure_prepend() {
--    sed -i -e 's:$''{prefix}/usr/lib/cgi-bin:$''{libdir}/cgi-bin:g' ${S}/config.layout
-+    sed -i -e 's:$''{prefix}/usr/lib/cgi-bin:$''{libexecdir}/cgi-bin:g' ${S}/config.layout
- }
+ S = "${WORKDIR}/git"
  
- do_install_append_class-target() {
-@@ -139,7 +139,7 @@ do_install_append_class-target() {
-         install -m 0644 ${WORKDIR}/volatiles.04_apache2 ${D}${sysconfdir}/default/volatiles/04_apache2
-     fi
- 
--    rm -rf ${D}${localstatedir}
-+    rm -rf ${D}${localstatedir} ${D}${sbindir}/envvars*
-     chown -R root:root ${D}
- }
++OPTFLAGS = "${TUNE_CCARGS} -Os"
++OPTFLAGS_append_libc-musl_toolchain-clang = " -fno-builtin-bcmp"
++
+ PARALLEL_MAKE = ""
+ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
+                 'CROSS_COMPILE=${TARGET_PREFIX}' \
+@@ -43,7 +46,7 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
+                 'INSTALLDIR=${libdir}/klibc' \
+                 'SHLIBDIR=${libdir}' \
+                 '${KLIBCTHUMB}' \
+-                'KLIBCOPTFLAGS=${TUNE_CCARGS} -Os' \
++                'KLIBCOPTFLAGS=${OPTFLAGS}' \
+                  V=1 \
+                 "
  
 -- 
 2.7.4
