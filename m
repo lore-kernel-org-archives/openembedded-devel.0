@@ -1,24 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
+Return-Path: <Qi.Chen@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 62FBF6058C
+	by mail.openembedded.org (Postfix) with ESMTP id 5ADF07F1E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Sep 2019 08:40:03 +0000 (UTC)
+	Sun, 29 Sep 2019 09:29:58 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8T8e4NB008363
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x8T9TwwG009251
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Sep 2019 01:40:04 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	Sun, 29 Sep 2019 02:29:59 -0700
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.468.0; Sun, 29 Sep 2019 01:39:45 -0700
-From: <jackie.huang@windriver.com>
+	14.3.468.0; Sun, 29 Sep 2019 02:29:58 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 29 Sep 2019 16:28:28 +0800
-Message-ID: <1569745708-12228-1-git-send-email-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Sun, 29 Sep 2019 17:29:56 +0800
+Message-ID: <20190929092956.13147-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python-pika: add recipes for python2 and python3
+Subject: [meta-oe][PATCH] protobuf-c: fix race condition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,70 +31,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Sep 2019 08:40:03 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 29 Sep 2019 09:29:58 -0000
+Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
-
-Pika is a pure-Python implementation of the AMQP 0-9-1
-protocol including RabbitMQ’s extensions.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-devtools/python/python-pika.inc        | 22 ++++++++++++++++++++++
- .../recipes-devtools/python/python-pika_1.1.0.bb   |  2 ++
- .../recipes-devtools/python/python3-pika_1.1.0.bb  |  2 ++
- 3 files changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pika.inc
- create mode 100644 meta-python/recipes-devtools/python/python-pika_1.1.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pika_1.1.0.bb
+ .../0001-avoid-race-condition.patch           | 36 +++++++++++++++++++
+ .../protobuf/protobuf-c_1.3.2.bb              |  1 +
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-pika.inc b/meta-python/recipes-devtools/python/python-pika.inc
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
 new file mode 100644
-index 0000000..10be5bb
+index 000000000..4fc7703d8
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pika.inc
-@@ -0,0 +1,22 @@
-+SUMMARY = "Pika is a RabbitMQ (AMQP 0-9-1) client library for Python."
-+DESCRIPTION = " \
-+Pika is a pure-Python implementation of the AMQP 0-9-1 protocol \
-+including RabbitMQ’s extensions. \
-+"
-+SECTION = "devel/python"
-+HOMEPAGE = "https://pika.readthedocs.io"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=535836bf0a5de515a7bfee026075701d"
++++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
+@@ -0,0 +1,36 @@
++From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00 2001
++From: Chen Qi <Qi.Chen@windriver.com>
++Date: Sun, 29 Sep 2019 17:20:42 +0800
++Subject: [PATCH] avoid race condition
 +
-+SRC_URI[md5sum] = "6002400cdd33bf85ec8680ece72910d4"
-+SRC_URI[sha256sum] = "9fa76ba4b65034b878b2b8de90ff8660a59d925b087c5bb88f8fdbb4b64a1dbf"
++It's possible that the cxx-generate-packed-data.cc is compiled
++while the t/test-full.pb.h is being generated. This will result
++the following error.
 +
-+inherit pypi
++  DEBUG:	./t/test-full.pb.h:4:0: error: unterminated #ifndef
++  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
 +
-+PYPI_PACKAGE = "pika"
++Add a dependency to avoid such problem.
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-logging \
-+    ${PYTHON_PN}-tornado \
-+    ${PYTHON_PN}-twisted \
-+"
-diff --git a/meta-python/recipes-devtools/python/python-pika_1.1.0.bb b/meta-python/recipes-devtools/python/python-pika_1.1.0.bb
-new file mode 100644
-index 0000000..f7e0198
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pika_1.1.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-pika.inc
-diff --git a/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb b/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb
-new file mode 100644
-index 0000000..a151588
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pika_1.1.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-pika.inc
++Upstream-Status: Pending
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ Makefile.am | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/Makefile.am b/Makefile.am
++index b0cb065..1608ae0 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -156,6 +156,7 @@ noinst_PROGRAMS += \
++ t_generated_code2_cxx_generate_packed_data_SOURCES = \
++ 	t/generated-code2/cxx-generate-packed-data.cc \
++ 	t/test-full.pb.cc
+++t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
++ $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.h
++ t_generated_code2_cxx_generate_packed_data_CXXFLAGS = \
++ 	$(AM_CXXFLAGS) \
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+index 6d1ffc3f4..b92f82dec 100644
+--- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
++++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+@@ -15,6 +15,7 @@ DEPENDS = "protobuf-native protobuf"
+ SRCREV = "1390409f4ee4e26d0635310995b516eb702c3f9e"
+ 
+ SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
++           file://0001-avoid-race-condition.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.7.4
+2.17.1
 
 
