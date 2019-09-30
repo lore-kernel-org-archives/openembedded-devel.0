@@ -1,37 +1,49 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DA107ED46
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id D08297E668
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Sep 2019 08:04:44 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46hZgb1q7Nz87;
-	Mon, 30 Sep 2019 10:04:43 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1569830684;
-	bh=fo4zTcqPskVpsPPq9KeczF+QGUuI8CiU0xo/IaIdRDE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=W/PpfFt3aLKnOBzazaAp34iPTIvVpGGx6pWXG8CXOJL4eBAXB1EWs3tvr/0qbB4Xf
-	2KlAiyHDvmZ7NbjjjeLHQZeFy7KZZvmVzRqAc3i2q8b2gBy64TOT1nz5DAtFip/4CS
-	eEQV+ujFBtofO9TKlDpRvxekLH5KEM1A+t4LDzxFqa+/yqEjqFQv+BEh3/glKSBlDH
-	zq6eNPNebv9enIGOYi1wNRutrCf6ZCijiNCVIcGRf4PZvtlFQQ1yh8W8v6TbDc7NLw
-	HG/kj9G710RCudLDgV8KQRgiTeo1o4s0/zAjetuXuGLbXZLYZe5JgnjtzZRSBnvie4
-	dGH/3lH+wSiG8/ih1NIKziMhdh6IW8Yv6mzoSFAmMW4rqHS+EJQ2jjuJRXs/LFGkm8
-	M30CGYIwCXLxxGA5AK5/ZY413hs6X7mzQQdbAV3JX/x3PlEJwg1u2vaD7Ak0t5qc9j
-	43wuJQxt7sNH+B2IlhqjV/qkUKyisgG0djnAz+Fpl9DmPbb6I5cl7ZOwmoqhJpXXdv
-	gxEdGz+Na6EXXGmNyVaXeXeEFwrWOoR8v+95+eeiNsau/Fx7lOo+xTMOIn39KCCiga
-	hitoM+QOJWM9b4fa5qsCQqN6u/+a1t+veevqg2UCYeZ7gecrQ5lQKssavhnoYxe4zr
-	tn8PEV6yY8R6FSMSQCmjGQ1I=
-Date: Mon, 30 Sep 2019 11:04:41 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Armin Kuster <akuster808@gmail.com>
-Message-ID: <20190930080441.GA31191@localhost>
-References: <cover.1569801183.git.akuster808@gmail.com>
-	<6748bb66d50cab6acb56a0c4596d9d3c7650e4fb.1569801183.git.akuster808@gmail.com>
+	Mon, 30 Sep 2019 11:19:22 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id q10so37307583iop.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Sep 2019 04:19:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=agW1EHDR8ZTGsONmI7Txf3HjwKzsStz9BzeZRZPJAGI=;
+	b=lwYF9WlaKS4JbT50wfE48Xoda7G+zjLpouGFOSRTtUd3/o2e3y/RI03qBoqrAAB1by
+	cFYchfkCrUJTlH913nv3+w5p1/cRTKbniTU+LL4vKUceelOZiMBL73zCel3U09QIrRFV
+	pUWzmYrV6u1W5+qtut3wZonFlIzje5VufTfzHT13fP9x2hd6QNqk43JU+3rPr6NjQrjm
+	I+S2437malPcUN7Y4fmd7XfJiE3FT8ZHb8HNGxsi3RjEU3zsQQgvY7MF8ERfUMbDx5h4
+	VlMHwwVWkBY/8G3YusifWnmsdKvYpF3gY4+OKpWkSapnXOe8sBmSGpUrwohRkaS5+V2K
+	jXhg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=agW1EHDR8ZTGsONmI7Txf3HjwKzsStz9BzeZRZPJAGI=;
+	b=F7wYa34vm5f4jvbzE5pZ3UVtAQeESLxbVuCzp/VWQlnb9+BpLjerq6eLxZeKB+5pfE
+	QgdzwBDfc0Cuc/fsP2NSYQH3g7TL1dJ6iYbmFGBuVsa2GPXHzP9FIuGttMfuQwC3ME52
+	LIVzCTlEBkUnPXWhkS+SXfmpf+2UAlSD7nlePXMw2KVLEdDjoYK8PdJ1MtjKyOiAI7KI
+	VNhSXt0JrTFRPcxTerAM5O6P0WLY7nE95migyeMg4J4wbwVQgZB+4CvZw0JNsuh68Hxf
+	mik/tWmhxrTr9e79wXTwMZorcsKfZpAbUFtaefDJTjokB/4Kzs+bP7GS2mFlYiekvCoO
+	wrow==
+X-Gm-Message-State: APjAAAUWsXpuQP0BD4OADrAOmoGEpNe5K0M5hcYVCBWduC6FfpI3CIFU
+	LTI6yiJXI1s95Z9DjA5yBjVMcQmnXTgFpzoNf84=
+X-Google-Smtp-Source: APXvYqz3ZquUwR9d866mEpSokt6+TnmKiZTftc2LxVewG2PwZNk81NPbTP4wEofMfZ2U89gKED/5E3Y74TJWjEGmZtY=
+X-Received: by 2002:a5d:9849:: with SMTP id p9mr337962ios.102.1569842363687;
+	Mon, 30 Sep 2019 04:19:23 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <6748bb66d50cab6acb56a0c4596d9d3c7650e4fb.1569801183.git.akuster808@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [warrior-next 06/10] klibc: Fix build with 5.2+ kernel headers
+References: <CAB2nKc9YYhnO0YVn2Err6BtSQdP3fT_uz7xSS-W6VxEHX3dsiA@mail.gmail.com>
+In-Reply-To: <CAB2nKc9YYhnO0YVn2Err6BtSQdP3fT_uz7xSS-W6VxEHX3dsiA@mail.gmail.com>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Mon, 30 Sep 2019 13:19:12 +0200
+Message-ID: <CAB2nKc_wRyho9AK3r-_h35TLNSW87Xfmdm_EBng5BJQxYp7bgg@mail.gmail.com>
+To: richard.leitner@skidata.com, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	erkka.kaaria@intel.com, "Maxin B. John" <maxin.john@intel.com>,
+	Otavio Salvador <otavio.salvador@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-java] openjre-8 fmacro-prefix-map problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,22 +56,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Sep 2019 08:04:45 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Mon, 30 Sep 2019 11:19:23 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This and the other 3 "fix build with 5.2 headers" patches are all for 
-userspace code that uses the UAPI kernel headers that won't change in 
-warrior, so these 4 commits are not needed.
+Hello again,
 
-cu
-Adrian
+I see that there is a patch that should fix the problem:
+https://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/recipes-core/open=
+jdk/patches-openjdk-8/openjdk8-fix-adlc-flags.patch
+It is applied but it seems target compilation options are non filtered?
 
--- 
+Regards,
+Vincent
 
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+Le mer. 18 sept. 2019 =C3=A0 11:41, Vincent Prince <vincent.prince.fr@gmail=
+.com>
+a =C3=A9crit :
 
+> Hi,
+>
+> I'm trying to build my image on Yocto master branch, and it fails to
+> compile openjre-8 (It works fine on Warrior).
+>
+> Here's the error message:
+>
+> openjre-8-172b11-r0 do_compile: oe_runmake failed:
+>
+> g++ -DLINUX -D_GNU_SOURCE -DAMD64
+> -I/yocto/build-vc/tmp/work/corei7-64-cb-linux/openjre-8/172b11-r0/jdk8u-3=
+3d274a7dda0/hotspot/src/share/vm/prims
+> -I[skip...] -DASSERT -O2 -pipe -g -feliminate-unused-debug-types
+> -fmacro-prefix-map=3D/yocto/build-vc/tmp/work/corei7-64-cb-linux/openjre-=
+8/172b11-r0=3D/usr/src/debug/openjre-8/172b11-r0
+>
+> -fdebug-prefix-map=3D/yocto/build-vc/tmp/work/corei7-64-cb-linux/openjre-=
+8/172b11-r0=3D/usr/src/debug/openjre-8/172b11-r0
+>
+> -fdebug-prefix-map=3D/yocto/build-vc/tmp/work/corei7-64-cb-linux/openjre-=
+8/172b11-r0/recipe-sysroot=3D
+>
+> -fdebug-prefix-map=3D/yocto/build-vc/tmp/work/corei7-64-cb-linux/openjre-=
+8/172b11-r0/recipe-sysroot-native=3D
+>
+> -Wno-error=3Ddeprecated-declarations -DTARGET_OS_FAMILY_linux
+> -DTARGET_ARCH_x86 -DTARGET_ARCH_MODEL_x86_64 -DTARGET_OS_ARCH_linux_x86
+> -DTARGET_OS_ARCH_MODEL_linux_x86_64
+> -DTARGET_COMPILER_gcc -DCOMPILER2 -DCOMPILER1
+> -DDONT_USE_PRECOMPILED_HEADER -fno-rtti -fno-exceptions -D_REENTRANT
+> -fcheck-new -fvisibility=3Dhidden -pipe -fno-strict-aliasing -g
+> -fno-omit-frame-pointer -DTARGET_OS_FAMILY_linux -DTARGET_ARCH_x86
+> -DTARGET_ARCH_MODEL_x86_64 -DTARGET_OS_ARCH_linux_x86
+> -DTARGET_OS_ARCH_MODEL_linux_x86_64
+> -DTARGET_COMPILER_gcc -DCOMPILER2 -DCOMPILER1
+> -DDONT_USE_PRECOMPILED_HEADER -fno-rtti -fno-exceptions -D_REENTRANT
+> -fcheck-new -fvisibility=3Dhidden -pipe -fno-strict-aliasing -g
+> -fno-omit-frame-pointer
+> -isystem/yocto/build-vc/tmp/work/corei7-64-cb-linux/openjre-8/172b11-r0/r=
+ecipe-sysroot-native/usr/include
+> -O2 -pipe -Wno-error=3Ddeprecated-declarations -Werror
+> -c -o ../generated/adfiles/adlparse.o
+> /yocto/build-vc/tmp/work/corei7-64-cb-linux/openjre-8/172b11-r0/jdk8u-33d=
+274a7dda0/hotspot/src/share/vm/adlc/adlparse.cpp
+>
+> g++: error: unrecognized command line option
+> =E2=80=98-fmacro-prefix-map=3D/yocto/build-vc/tmp/work/corei7-64-cb-linux=
+/openjre-8/172b11-r0=3D/usr/src/debug/openjre-8/172b11-r0=E2=80=99
+>
+> /yocto/build-vc/tmp/work/corei7-64-cb-linux/openjre-8/172b11-r0/jdk8u-33d=
+274a7dda0/hotspot/make/linux/makefiles/adlc.make:222:
+> recipe for target '../generated/adfiles/adlparse.o' failed
+>
+> It seems Yocto master introduces new -fmacro-prefix-map compile flag that
+> g++ does not recognize?
+> Does it means I need to upgrade my gcc (5.4.0) version on build machine?
+> (Ubuntu 16.04).
+> If so, why it does not use -native package?
+>
+> Best regards,
+> Vincent
+>
 
