@@ -1,19 +1,37 @@
-Return-Path: <adrian.ratiu@collabora.com>
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id A05687F26B
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DA107ED46
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Sep 2019 07:18:01 +0000 (UTC)
+	Mon, 30 Sep 2019 08:04:44 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: aratiu) with ESMTPSA id E2EF528AF82
-From: Adrian Ratiu <adrian.ratiu@collabora.com>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 30 Sep 2019 10:18:03 +0300
-Message-Id: <20190930071803.38188-1-adrian.ratiu@collabora.com>
-X-Mailer: git-send-email 2.23.0
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46hZgb1q7Nz87;
+	Mon, 30 Sep 2019 10:04:43 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1569830684;
+	bh=fo4zTcqPskVpsPPq9KeczF+QGUuI8CiU0xo/IaIdRDE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=W/PpfFt3aLKnOBzazaAp34iPTIvVpGGx6pWXG8CXOJL4eBAXB1EWs3tvr/0qbB4Xf
+	2KlAiyHDvmZ7NbjjjeLHQZeFy7KZZvmVzRqAc3i2q8b2gBy64TOT1nz5DAtFip/4CS
+	eEQV+ujFBtofO9TKlDpRvxekLH5KEM1A+t4LDzxFqa+/yqEjqFQv+BEh3/glKSBlDH
+	zq6eNPNebv9enIGOYi1wNRutrCf6ZCijiNCVIcGRf4PZvtlFQQ1yh8W8v6TbDc7NLw
+	HG/kj9G710RCudLDgV8KQRgiTeo1o4s0/zAjetuXuGLbXZLYZe5JgnjtzZRSBnvie4
+	dGH/3lH+wSiG8/ih1NIKziMhdh6IW8Yv6mzoSFAmMW4rqHS+EJQ2jjuJRXs/LFGkm8
+	M30CGYIwCXLxxGA5AK5/ZY413hs6X7mzQQdbAV3JX/x3PlEJwg1u2vaD7Ak0t5qc9j
+	43wuJQxt7sNH+B2IlhqjV/qkUKyisgG0djnAz+Fpl9DmPbb6I5cl7ZOwmoqhJpXXdv
+	gxEdGz+Na6EXXGmNyVaXeXeEFwrWOoR8v+95+eeiNsau/Fx7lOo+xTMOIn39KCCiga
+	hitoM+QOJWM9b4fa5qsCQqN6u/+a1t+veevqg2UCYeZ7gecrQ5lQKssavhnoYxe4zr
+	tn8PEV6yY8R6FSMSQCmjGQ1I=
+Date: Mon, 30 Sep 2019 11:04:41 +0300
+From: Adrian Bunk <bunk@stusta.de>
+To: Armin Kuster <akuster808@gmail.com>
+Message-ID: <20190930080441.GA31191@localhost>
+References: <cover.1569801183.git.akuster808@gmail.com>
+	<6748bb66d50cab6acb56a0c4596d9d3c7650e4fb.1569801183.git.akuster808@gmail.com>
 MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
-Subject: [meta-oe] [PATCH v4] renderdoc: add new recipe
+In-Reply-To: <6748bb66d50cab6acb56a0c4596d9d3c7650e4fb.1569801183.git.akuster808@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [warrior-next 06/10] klibc: Fix build with 5.2+ kernel headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -26,144 +44,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Sep 2019 07:18:02 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 30 Sep 2019 08:04:45 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-RenderDoc is a MIT licensed stand-alone multi-platform graphics
-debugger that allows easy frame by frame capture and detailed
-introspection of any applications using Vulkan, OpenGL, OpenGL ES,
-and others.
+This and the other 3 "fix build with 5.2 headers" patches are all for 
+userspace code that uses the UAPI kernel headers that won't change in 
+warrior, so these 4 commits are not needed.
 
-Signed-off-by: Adrian Ratiu <adrian.ratiu@collabora.com>
----
+cu
+Adrian
 
-Changes since v3:
-    - Dropped 0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
-    - Added -DCMAKE_BUILD_TYPE=Release which has the only effect of not
-    appending -Werror in CMakelists.txt at the end of the recipe flags
-
-Changes since v2:
-    - Replace the multiple COMPATIBLE_MACHINE assignments with a single
-    COMPATIBLE_HOST regexp
-
-Changes since v1:
-    - Add COMPATIBLE_MACHINE assignemnts to avoid CI failures on
-    unsupported architectures
-    - Add libc test because recipe is only buildable with glibc,
-    tested against musl
-    - Minor whitespace fixes
-
- ...d-instead-of-cross-compiling-shim-bi.patch | 57 +++++++++++++++++++
- .../renderdoc/renderdoc_1.4.bb                | 35 ++++++++++++
- 2 files changed, 92 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
- create mode 100644 meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
-
-diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch b/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
-new file mode 100644
-index 000000000..e96dedfc3
---- /dev/null
-+++ b/meta-oe/recipes-graphics/renderdoc/renderdoc/0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch
-@@ -0,0 +1,57 @@
-+From 41a8c9b5ac13066770baee476ebf9828371f4dad Mon Sep 17 00:00:00 2001
-+From: Adrian Ratiu <adrian.ratiu@collabora.com>
-+Date: Tue, 24 Sep 2019 16:07:18 +0300
-+Subject: [PATCH] renderdoc: use xxd instead of cross-compiling shim binary
-+
-+Renderdoc's attempt to cross compile an xxd replacement by directly
-+calling a host cross-compiler breaks under OE's recipe specific
-+sysroots protection because this is not a native recipe, so we just
-+use xxd-native instead.
-+
-+Upstream-Status: Inappropriate [embedded-specific]
-+
-+---
-+ renderdoc/CMakeLists.txt | 23 +----------------------
-+ 1 file changed, 1 insertion(+), 22 deletions(-)
-+
-+diff --git a/renderdoc/CMakeLists.txt b/renderdoc/CMakeLists.txt
-+index 5cb7440a4..453a034ba 100644
-+--- a/renderdoc/CMakeLists.txt
-++++ b/renderdoc/CMakeLists.txt
-+@@ -370,26 +370,6 @@ set(data
-+ set(data_objects)
-+ 
-+ if(UNIX)
-+-    # If we're cross-compiling, include-bin will get built for the target and we
-+-    # then can't execute it. Instead, we force calling c++ (which we can safely
-+-    # assume is present) directly to build the binary
-+-
-+-    if(CMAKE_CROSSCOMPILING)
-+-        set(HOST_NATIVE_CPP_COMPILER c++ CACHE STRING "Command to run to compile a .cpp into an executable. Default is just c++")
-+-
-+-        add_custom_command(OUTPUT ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin
-+-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-+-            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-+-            COMMAND ${HOST_NATIVE_CPP_COMPILER} 3rdparty/include-bin/main.cpp -o ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin
-+-            DEPENDS 3rdparty/include-bin/main.cpp)
-+-        set(INCLUDE_BIN_EXE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin")
-+-        set(INCLUDE_BIN_DEP "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include-bin")
-+-    else()
-+-        add_executable(include-bin 3rdparty/include-bin/main.cpp)
-+-        set(INCLUDE_BIN_EXE $<TARGET_FILE:include-bin>)
-+-        set(INCLUDE_BIN_DEP include-bin)
-+-    endif()
-+-
-+     foreach(res ${data})
-+         set(in ${res})
-+         set(working_dir ${CMAKE_CURRENT_SOURCE_DIR})
-+@@ -399,8 +379,7 @@ if(UNIX)
-+         add_custom_command(OUTPUT ${out_src}
-+             WORKING_DIRECTORY ${working_dir}
-+             COMMAND ${CMAKE_COMMAND} -E make_directory ${out_src_dir}
-+-            COMMAND ${INCLUDE_BIN_EXE} ${in} ${out_src}
-+-            DEPENDS ${INCLUDE_BIN_DEP}
-++            COMMAND xxd -i ${in} ${out_src}
-+             DEPENDS ${res})
-+ 
-+         list(APPEND data_objects ${out_src})
-diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
-new file mode 100644
-index 000000000..b6e0c92f6
---- /dev/null
-+++ b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
-@@ -0,0 +1,35 @@
-+SUMMARY = "RenderDoc recipe providing renderdoccmd"
-+DESCRIPTION = "RenderDoc is a frame-capture based graphics debugger"
-+HOMEPAGE = "https://github.com/baldurk/renderdoc"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9753b1b4fba3261c27d1ce5c1acef667"
-+
-+SRCREV = "214d85228538e71cc63a0d7fa11dd75b1d56cc81"
-+SRC_URI = "git://github.com/baldurk/${BPN}.git;protocol=http;branch=v1.x \
-+	   file://0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch \
-+"
-+S = "${WORKDIR}/git"
-+
-+DEPENDS += "virtual/libx11 virtual/libgl libxcb xcb-util-keysyms vim-native"
-+
-+RDEPENDS_${PN} = "libxcb xcb-util-keysyms"
-+
-+inherit cmake python3native
-+
-+python __anonymous () {
-+    # only works on glibc systems
-+    if d.getVar('TCLIBC') != "glibc":
-+        raise bb.parse.SkipRecipe("incompatible with %s C library" % d.getVar('TCLIBC'))
-+}
-+
-+COMPATIBLE_HOST = "(x86_64|i.86|arm|aarch64).*-linux"
-+
-+EXTRA_OECMAKE += "\
-+    -DENABLE_QRENDERDOC=OFF \
-+    -DENABLE_PYRENDERDOC=OFF \
-+    -DENABLE_RENDERDOCCMD=ON \
-+    -DCMAKE_BUILD_TYPE=Release \
-+"
-+
-+FILES_${PN} += "${libdir}"
-+FILES_${PN}-dev = "${includedir}"
 -- 
-2.23.0
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
