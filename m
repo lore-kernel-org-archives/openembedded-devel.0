@@ -1,50 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
-	[209.85.221.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DDBF7F27B
+Return-Path: <jupiter.hce@gmail.com>
+Received: from mail-io1-f47.google.com (mail-io1-f47.google.com
+	[209.85.166.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 9812C7D5B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Oct 2019 09:07:59 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id n14so14468910wrw.9
+	Tue,  1 Oct 2019 11:22:17 +0000 (UTC)
+Received: by mail-io1-f47.google.com with SMTP id u8so46863583iom.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Oct 2019 02:08:01 -0700 (PDT)
+	Tue, 01 Oct 2019 04:22:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=LaPogA59eN0ely7vIEhBrMTnWzprhOCo7HLyZpZdK9g=;
-	b=SiqmqKq8bYrSunnDkaT1L4M5GAdIjd5q6cgGhSEG/opsKa8rxRMHAIwoCr/87+97qP
-	3VhMEgvgixPZjd7pcTJgjqjVRMigU0Rm6Fhhg8wlgXsgJJekxNHWxYqtjQRCJXdiqAEG
-	VQ0uqnMt6x8z07z4Tr2aePGxPP1kopJ6AAfiXD5C6d8g3w2DRX4OGIRXeyZNQeMmDKFn
-	gPxGu2eSApq1dqe3VA1NNrBhDa10naYId3hlk2+Uhd/lCnxzUQVcDg68WuuPZchWnGsx
-	r1hykj7JvNotchTbAAK5b1Qji2rADzutZIEXHAO7QSzj9YF6ozm8VzA78RXekGzBYire
-	ljZg==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=aL/VX/KWdj72RHiwy/T5oH27bHoHXoEylRFWzIeT21s=;
+	b=ubF5r+Z5qIXLpyZbQ1g0cGGvBea0xcbKzyQmYnp3SMdNJtuCPDVxDDD0VyLD7xt0Ll
+	d8S5mQ4mF3tuD3CNDGX1poc0fAtWkALr2gIxMHGDwxlsWUrr/5jN+S5y+OgNVTXgobWA
+	7NWOwAvaLwkF72zTKlIcM6RCTwMLX5zIL8i6Xki/3ABUYWxXgvRjXRZwdmGsLqjb1zd5
+	SU9lFLHjYb92PR3ok03ZvcbbbSp78Z85TwvGzBucWHzZtIkVDUjct98yEFO5P+8zmmBD
+	x3DmU6Qmgw5AkkqvzJfBhcUD8t/qBnxi18I8Gc7BZ2nKxjgpGUN9jjJMA1hDcnWRzzjR
+	hhPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=LaPogA59eN0ely7vIEhBrMTnWzprhOCo7HLyZpZdK9g=;
-	b=Go7Z7SN507xM8y55vCCGstTuIFCuRs/mXgPxKpUI+vW98cWnv2d58NSl9hBb3v/+zT
-	sum29+hmKZtpjbCCRgw8LEZGDsBXL2kKaiMl/LdwrZypnNIK6CC2+KDFt0DoCXJL0GfO
-	ZVGdGBuQWDyDL2HJsmupxxCsLvEmDORhIZe+d8ZoP/JgV4/NZHaMYseITjL+E2ZfGHrf
-	94N0ZLX6UZeqy7gbkJG1BK1qKxa/etMk+9BiypmEkR95Gf0KsD4FJ3M3aiu0TDVfPcvs
-	ySZhOrDj1fT5SPgdrlQDxKgF473qZYnfQ/D8QaqAPwcJ3oayFKxbxMyqgCQ/XrilmmLY
-	M3YQ==
-X-Gm-Message-State: APjAAAVKzAViW+d1gPgbJgukaBRDA2pbOIgznLHJxb5F58Xkrh9/EzI1
-	sH0bl7aBRKW0z+SZGlwwCy7ji+OY8UQ=
-X-Google-Smtp-Source: APXvYqwgu+fzP4JSntK6EwcgfVHXM8Vz7Lqfu/5RbvG44PKAdMOjk3SHGL9LIMZUHaCcKb4cg7sweQ==
-X-Received: by 2002:adf:e4ce:: with SMTP id v14mr16775255wrm.15.1569920880136; 
-	Tue, 01 Oct 2019 02:08:00 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id i1sm3153160wmb.19.2019.10.01.02.07.59
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 01 Oct 2019 02:07:59 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Oct 2019 09:07:56 +0000
-Message-Id: <20191001090756.1168-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191001090756.1168-1-Martin.Jansa@gmail.com>
-References: <20191001090756.1168-1-Martin.Jansa@gmail.com>
-Subject: [meta-networking][PATCHv2 2/2] Revert "spice: Drop broken native"
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=aL/VX/KWdj72RHiwy/T5oH27bHoHXoEylRFWzIeT21s=;
+	b=kw4Sq8DrVbYLkUg5gIhkN/xRToSoDVozDS6eLN9A47e+HVDnbNNMVjOArVjnStD4PX
+	ejHkgrNf1XbjiJR8BrxrnM/oOwnf9WsSvsgHYlnQfz5dRbU/h/lKad5R3bUHgCcOqvgF
+	GJK5MDDQ8JAk+Pb5uFGrzWnGm3OaJQoy47kcgu6JtoyFkb90/znUOKefGdcgHpFOKEZU
+	OQHN9EfdphTaEVBOdz/QfoP3Hjj3BTOki6ZoyT9Y8PcZQhmSaqia1GcPbspvJx3Nh6po
+	buxSdPLbzQfUJk7gDs1vNjDakIx/2vlZUEgBTbIm9GQeEEV74moZHNE+iFhMuTeckIvP
+	A1PA==
+X-Gm-Message-State: APjAAAXFVTgTOOItD1QjzKUhrWAo34lusOlj0Vf1jHNAIVLSPMa74wwo
+	joX9RHBg5WYCWbZHnhqXqwekEkigz5iiX4aZOGk28mFS
+X-Google-Smtp-Source: APXvYqwhPOru+KkHCa7z4ah0mk/8ormtuprezQfT9C89ZLsmH9EvD0AX9s1YhhQVeL7j9jtWEcrbsO/CJsYJOGgWLO4=
+X-Received: by 2002:a05:6638:73d:: with SMTP id
+	j29mr24497510jad.21.1569928938392; 
+	Tue, 01 Oct 2019 04:22:18 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:ac0:9c85:0:0:0:0:0 with HTTP;
+	Tue, 1 Oct 2019 04:22:17 -0700 (PDT)
+From: JH <jupiter.hce@gmail.com>
+Date: Tue, 1 Oct 2019 21:22:17 +1000
+Message-ID: <CAA=hcWTEWCO=5CvTR8idSAGq=1LQgFpZxTSE3da8M4YgmLzpPA@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Kernel 5.3 fails to compile No rules to make zImage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,40 +52,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Oct 2019 09:07:59 -0000
+X-List-Received-Date: Tue, 01 Oct 2019 11:22:17 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This reverts commit 5f32fd6b08d79b9a4d1bffb9b2bcbc535a5b27d2.
+Hi,
 
-* fixed by restricting -Wno-error=address-of-packed-member only for
-  target, spice-native is still useful for qemu-native when spice
-  PACKAGECONFIG is enabled
+I am building kernel 5.3 on imx6 but failed in do_compile, is anyone
+able to compile kernel 5.3?
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-networking/recipes-support/spice/spice_git.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Thank you.
 
-diff --git a/meta-networking/recipes-support/spice/spice_git.bb b/meta-networking/recipes-support/spice/spice_git.bb
-index 5e6fbf6bad..06a79c5001 100644
---- a/meta-networking/recipes-support/spice/spice_git.bb
-+++ b/meta-networking/recipes-support/spice/spice_git.bb
-@@ -39,6 +39,7 @@ export PYTHONPATH="${PKG_CONFIG_SYSROOT_DIR}${libdir}/python2.7/site-packages"
- 
- CFLAGS_append = " -Wno-error"
- 
-+PACKAGECONFIG_class-native = ""
- PACKAGECONFIG_class-nativesdk = ""
- PACKAGECONFIG ?= "sasl"
- 
-@@ -53,6 +54,6 @@ PACKAGECONFIG[xinerama] = "--enable-xinerama,--disable-xinerama,libxinerama,"
- 
- COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
- 
--BBCLASSEXTEND = "nativesdk"
-+BBCLASSEXTEND = "native nativesdk"
- 
- EXTRA_OECONF_append_toolchain-clang = " --disable-werror"
--- 
-2.17.1
+Kind regards.
 
+-jh
 
