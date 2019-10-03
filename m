@@ -1,26 +1,51 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 37F037ED15
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f67.google.com (mail-ed1-f67.google.com
+	[209.85.208.67])
+	by mail.openembedded.org (Postfix) with ESMTP id DC53C6C216
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Oct 2019 18:58:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id x93IwrYk013027
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  3 Oct 2019 23:38:09 +0000 (UTC)
+Received: by mail-ed1-f67.google.com with SMTP id a15so4207724edt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 3 Oct 2019 11:58:53 -0700 (PDT)
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 3 Oct 2019 11:58:52 -0700
-From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 3 Oct 2019 14:58:51 -0400
-Message-ID: <20191003185851.26495-2-Trevor.Gamblin@windriver.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191003185851.26495-1-Trevor.Gamblin@windriver.com>
-References: <20191003185851.26495-1-Trevor.Gamblin@windriver.com>
+	Thu, 03 Oct 2019 16:38:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=RUB/W+5iTiG0QwVE6vaGLavtS3TqRSL/A4ftpB5LtpM=;
+	b=CvEg2eh8uk+oScUe2GqBGJ2tZS59EPk8Pk42ZF75M3JN2cwyBAUd0XMyMdTgKXP5fX
+	cRhziCBVJiMj+3A7wgGrpn8Cv0PGRFbKcoQa8NfCJAC7BkEiy0bQEaVD+4UQefNudoDt
+	hHjPyy/zvVtJ9xlAKM2AngpjRoVEWS3Gs7475KuhtLDrm6ujF6saP5qZKo0PQXdMmFQ7
+	z1rjV0y5lqs0t+TlGpGQcXI+MTNQEYe88dOf1j2Nud92Jixump3bhoz831WqGTNGTs73
+	Lo/s7Vn9qArQ5iZuOfZHF/QHp4vEODLtvcLkvSszzrglvJs7Jy3yDyN/g1cRNrejoV9S
+	RQ5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=RUB/W+5iTiG0QwVE6vaGLavtS3TqRSL/A4ftpB5LtpM=;
+	b=RjXgmwTe9OrpHqNhHt6YGk/HT2E2iWheiZWODxOpCNqCNWn2qtGiFgQHxj+Pk0rs+m
+	YZJFOtNRJMJk1Lr8c0BLeIbwNBjZ7TZz3p01YumBYIsZ51FpZP7tzRhE1HGpIbZPjqG5
+	h6qIfjTg7E324GL2cZOHBxVZqC4i5TS5d9PW9h8YqVGglmh+0FUoEV+Vba6lespGE1LN
+	r54F+m7Q1P6CLnNHlevCaUZAzL+9DP/hWaf1Ptjbbj/yqsR4S/pCuwLJMboxv9YYLpDt
+	hRugW+0JAaAf7G5WKr45O0u1gFmEaIzwc0PBnQwoPB+YG84BJ31rh9BfHgPj68KHI1za
+	Nn6A==
+X-Gm-Message-State: APjAAAV+CBFRM4QBW/7J1Scxd5EaD/32cUxoNUK6c6KgZ3P7yCEjghwZ
+	NzVrOydTNukF80CSwM0B7Yjtbi1zGaQ62CeBjEc=
+X-Google-Smtp-Source: APXvYqzK4BjF981fD6d9rfUV9aB5bs2Rp+OtLMjge4hgzPnmQhYrcRfdCe74CcJMenYCHK6ssofIKU2Rc/n1UNHv0nM=
+X-Received: by 2002:a17:906:4a5a:: with SMTP id
+	a26mr10100570ejv.154.1570145890515; 
+	Thu, 03 Oct 2019 16:38:10 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 2/2] gd: fix CVE-2019-6978
+References: <20190927165605.1900768-1-adrian.ratiu@collabora.com>
+	<CAMKF1sqTmvwNDbXnvHvUfPVjq-hPLAQ6Yne=sph3Q-gqLGU3UA@mail.gmail.com>
+	<20190929124049.GB30130@localhost> <87ftkf9ery.fsf@collabora.com>
+In-Reply-To: <87ftkf9ery.fsf@collabora.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 4 Oct 2019 01:37:59 +0200
+Message-ID: <CA+chaQeeZFnAAUbGFGHgypBF-O53pv1Gv7q8ZmjiOH95D5Wksw@mail.gmail.com>
+To: Adrian Ratiu <adrian.ratiu@collabora.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [meta-oe][PATCH v3] renderdoc: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,339 +58,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Oct 2019 18:58:52 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 03 Oct 2019 23:38:11 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+This should have x11 in REQUIRED_DISTRO_FEATURES to fix:
 
-CVE: CVE-2019-6978
+ERROR: Nothing PROVIDES 'libxcb' (but
+meta-oe/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb DEPENDS on or
+otherwise requires it)
+libxcb was skipped: missing required distro feature 'x11' (not in
+DISTRO_FEATURES)
+ERROR: Required build target 'meta-world-pkgdata' has no buildable
+providers.
+Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
+'renderdoc', 'libxcb']
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
----
- .../recipes-support/gd/gd/CVE-2019-6978.patch | 299 ++++++++++++++++++
- meta-oe/recipes-support/gd/gd_2.2.5.bb        |   1 +
- 2 files changed, 300 insertions(+)
- create mode 100644 meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch
+On Sun, Sep 29, 2019 at 7:46 PM Adrian Ratiu <adrian.ratiu@collabora.com>
+wrote:
 
-diff --git a/meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch b/meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch
-new file mode 100644
-index 000000000..9beb23e83
---- /dev/null
-+++ b/meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch
-@@ -0,0 +1,299 @@
-+From 553702980ae89c83f2d6e254d62cf82e204956d0 Mon Sep 17 00:00:00 2001
-+From: "Christoph M. Becker" <cmbecker69@gmx.de>
-+Date: Thu, 17 Jan 2019 11:54:55 +0100
-+Subject: [PATCH] Fix #492: Potential double-free in gdImage*Ptr()
-+
-+Whenever `gdImage*Ptr()` calls `gdImage*Ctx()` and the latter fails, we
-+must not call `gdDPExtractData()`; otherwise a double-free would
-+happen.  Since `gdImage*Ctx()` are void functions, and we can't change
-+that for BC reasons, we're introducing static helpers which are used
-+internally.
-+
-+We're adding a regression test for `gdImageJpegPtr()`, but not for
-+`gdImageGifPtr()` and `gdImageWbmpPtr()` since we don't know how to
-+trigger failure of the respective `gdImage*Ctx()` calls.
-+
-+This potential security issue has been reported by Solmaz Salimi (aka.
-+Rooney).
-+---
-+ src/gd_gif_out.c                  | 18 +++++++++++++++---
-+ src/gd_jpeg.c                     | 20 ++++++++++++++++----
-+ src/gd_wbmp.c                     | 21 ++++++++++++++++++---
-+ tests/jpeg/.gitignore             |  1 +
-+ tests/jpeg/CMakeLists.txt         |  1 +
-+ tests/jpeg/Makemodule.am          |  3 ++-
-+ tests/jpeg/jpeg_ptr_double_free.c | 31 +++++++++++++++++++++++++++++++
-+ 7 files changed, 84 insertions(+), 11 deletions(-)
-+ create mode 100644 tests/jpeg/jpeg_ptr_double_free.c
-+
-+Upstream-Status: Backport [https://github.com/libgd/libgd/commit/553702980ae89c83f2d6e254d62cf82e204956d0]
-+CVE: CVE-2019-6978
-+
-+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-+
-+
-+diff --git a/src/gd_gif_out.c b/src/gd_gif_out.c
-+index 298a581..d5a9534 100644
-+--- a/src/gd_gif_out.c
-++++ b/src/gd_gif_out.c
-+@@ -99,6 +99,7 @@ static void char_init(GifCtx *ctx);
-+ static void char_out(int c, GifCtx *ctx);
-+ static void flush_char(GifCtx *ctx);
-+ 
-++static int _gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out);
-+ 
-+ 
-+ 
-+@@ -131,8 +132,11 @@ BGD_DECLARE(void *) gdImageGifPtr(gdImagePtr im, int *size)
-+ 	void *rv;
-+ 	gdIOCtx *out = gdNewDynamicCtx(2048, NULL);
-+ 	if (out == NULL) return NULL;
-+-	gdImageGifCtx(im, out);
-+-	rv = gdDPExtractData(out, size);
-++	if (!_gdImageGifCtx(im, out)) {
-++		rv = gdDPExtractData(out, size);
-++	} else {
-++		rv = NULL;
-++	}
-+ 	out->gd_free(out);
-+ 	return rv;
-+ }
-+@@ -220,6 +224,12 @@ BGD_DECLARE(void) gdImageGif(gdImagePtr im, FILE *outFile)
-+ 
-+ */
-+ BGD_DECLARE(void) gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
-++{
-++	_gdImageGifCtx(im, out);
-++}
-++
-++/* returns 0 on success, 1 on failure */
-++static int _gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
-+ {
-+ 	gdImagePtr pim = 0, tim = im;
-+ 	int interlace, BitsPerPixel;
-+@@ -231,7 +241,7 @@ BGD_DECLARE(void) gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
-+ 		based temporary image. */
-+ 		pim = gdImageCreatePaletteFromTrueColor(im, 1, 256);
-+ 		if(!pim) {
-+-			return;
-++			return 1;
-+ 		}
-+ 		tim = pim;
-+ 	}
-+@@ -247,6 +257,8 @@ BGD_DECLARE(void) gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
-+ 		/* Destroy palette based temporary image. */
-+ 		gdImageDestroy(	pim);
-+ 	}
-++
-++	return 0;
-+ }
-+ 
-+ 
-+diff --git a/src/gd_jpeg.c b/src/gd_jpeg.c
-+index fc05842..96ef430 100644
-+--- a/src/gd_jpeg.c
-++++ b/src/gd_jpeg.c
-+@@ -117,6 +117,8 @@ static void fatal_jpeg_error(j_common_ptr cinfo)
-+ 	exit(99);
-+ }
-+ 
-++static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality);
-++
-+ /*
-+  * Write IM to OUTFILE as a JFIF-formatted JPEG image, using quality
-+  * QUALITY.  If QUALITY is in the range 0-100, increasing values
-+@@ -231,8 +233,11 @@ BGD_DECLARE(void *) gdImageJpegPtr(gdImagePtr im, int *size, int quality)
-+ 	void *rv;
-+ 	gdIOCtx *out = gdNewDynamicCtx(2048, NULL);
-+ 	if (out == NULL) return NULL;
-+-	gdImageJpegCtx(im, out, quality);
-+-	rv = gdDPExtractData(out, size);
-++	if (!_gdImageJpegCtx(im, out, quality)) {
-++		rv = gdDPExtractData(out, size);
-++	} else {
-++		rv = NULL;
-++	}
-+ 	out->gd_free(out);
-+ 	return rv;
-+ }
-+@@ -253,6 +258,12 @@ void jpeg_gdIOCtx_dest(j_compress_ptr cinfo, gdIOCtx *outfile);
-+ 
-+ */
-+ BGD_DECLARE(void) gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
-++{
-++	_gdImageJpegCtx(im, outfile, quality);
-++}
-++
-++/* returns 0 on success, 1 on failure */
-++static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
-+ {
-+ 	struct jpeg_compress_struct cinfo;
-+ 	struct jpeg_error_mgr jerr;
-+@@ -287,7 +298,7 @@ BGD_DECLARE(void) gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
-+ 		if(row) {
-+ 			gdFree(row);
-+ 		}
-+-		return;
-++		return 1;
-+ 	}
-+ 
-+ 	cinfo.err->emit_message = jpeg_emit_message;
-+@@ -328,7 +339,7 @@ BGD_DECLARE(void) gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
-+ 	if(row == 0) {
-+ 		gd_error("gd-jpeg: error: unable to allocate JPEG row structure: gdCalloc returns NULL\n");
-+ 		jpeg_destroy_compress(&cinfo);
-+-		return;
-++		return 1;
-+ 	}
-+ 
-+ 	rowptr[0] = row;
-+@@ -405,6 +416,7 @@ BGD_DECLARE(void) gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
-+ 	jpeg_finish_compress(&cinfo);
-+ 	jpeg_destroy_compress(&cinfo);
-+ 	gdFree(row);
-++	return 0;
-+ }
-+ 
-+ 
-+diff --git a/src/gd_wbmp.c b/src/gd_wbmp.c
-+index f19a1c9..a49bdbe 100644
-+--- a/src/gd_wbmp.c
-++++ b/src/gd_wbmp.c
-+@@ -88,6 +88,8 @@ int gd_getin(void *in)
-+ 	return (gdGetC((gdIOCtx *)in));
-+ }
-+ 
-++static int _gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out);
-++
-+ /*
-+ 	Function: gdImageWBMPCtx
-+ 
-+@@ -100,6 +102,12 @@ int gd_getin(void *in)
-+ 		out   - the stream where to write
-+ */
-+ BGD_DECLARE(void) gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out)
-++{
-++	_gdImageWBMPCtx(image, fg, out);
-++}
-++
-++/* returns 0 on success, 1 on failure */
-++static int _gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out)
-+ {
-+ 	int x, y, pos;
-+ 	Wbmp *wbmp;
-+@@ -107,7 +115,7 @@ BGD_DECLARE(void) gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out)
-+ 	/* create the WBMP */
-+ 	if((wbmp = createwbmp(gdImageSX(image), gdImageSY(image), WBMP_WHITE)) == NULL) {
-+ 		gd_error("Could not create WBMP\n");
-+-		return;
-++		return 1;
-+ 	}
-+ 
-+ 	/* fill up the WBMP structure */
-+@@ -123,11 +131,15 @@ BGD_DECLARE(void) gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out)
-+ 
-+ 	/* write the WBMP to a gd file descriptor */
-+ 	if(writewbmp(wbmp, &gd_putout, out)) {
-++		freewbmp(wbmp);
-+ 		gd_error("Could not save WBMP\n");
-++		return 1;
-+ 	}
-+ 
-+ 	/* des submitted this bugfix: gdFree the memory. */
-+ 	freewbmp(wbmp);
-++
-++	return 0;
-+ }
-+ 
-+ /*
-+@@ -271,8 +283,11 @@ BGD_DECLARE(void *) gdImageWBMPPtr(gdImagePtr im, int *size, int fg)
-+ 	void *rv;
-+ 	gdIOCtx *out = gdNewDynamicCtx(2048, NULL);
-+ 	if (out == NULL) return NULL;
-+-	gdImageWBMPCtx(im, fg, out);
-+-	rv = gdDPExtractData(out, size);
-++	if (!_gdImageWBMPCtx(im, fg, out)) {
-++		rv = gdDPExtractData(out, size);
-++	} else {
-++		rv = NULL;
-++	}
-+ 	out->gd_free(out);
-+ 	return rv;
-+ }
-+diff --git a/tests/jpeg/.gitignore b/tests/jpeg/.gitignore
-+index c28aa87..13bcf04 100644
-+--- a/tests/jpeg/.gitignore
-++++ b/tests/jpeg/.gitignore
-+@@ -3,5 +3,6 @@
-+ /jpeg_empty_file
-+ /jpeg_im2im
-+ /jpeg_null
-++/jpeg_ptr_double_free
-+ /jpeg_read
-+ /jpeg_resolution
-+diff --git a/tests/jpeg/CMakeLists.txt b/tests/jpeg/CMakeLists.txt
-+index 19964b0..a8d8162 100644
-+--- a/tests/jpeg/CMakeLists.txt
-++++ b/tests/jpeg/CMakeLists.txt
-+@@ -2,6 +2,7 @@ IF(JPEG_FOUND)
-+ LIST(APPEND TESTS_FILES
-+ 	jpeg_empty_file
-+ 	jpeg_im2im
-++	jpeg_ptr_double_free
-+ 	jpeg_null
-+ )
-+ 
-+diff --git a/tests/jpeg/Makemodule.am b/tests/jpeg/Makemodule.am
-+index 7e5d317..b89e169 100644
-+--- a/tests/jpeg/Makemodule.am
-++++ b/tests/jpeg/Makemodule.am
-+@@ -2,7 +2,8 @@ if HAVE_LIBJPEG
-+ libgd_test_programs += \
-+ 	jpeg/jpeg_empty_file \
-+ 	jpeg/jpeg_im2im \
-+-	jpeg/jpeg_null
-++	jpeg/jpeg_null \
-++	jpeg/jpeg_ptr_double_free
-+ 
-+ if HAVE_LIBPNG
-+ libgd_test_programs += \
-+diff --git a/tests/jpeg/jpeg_ptr_double_free.c b/tests/jpeg/jpeg_ptr_double_free.c
-+new file mode 100644
-+index 0000000..df5a510
-+--- /dev/null
-++++ b/tests/jpeg/jpeg_ptr_double_free.c
-+@@ -0,0 +1,31 @@
-++/**
-++ * Test that failure to convert to JPEG returns NULL
-++ *
-++ * We are creating an image, set its width to zero, and pass this image to
-++ * `gdImageJpegPtr()` which is supposed to fail, and as such should return NULL.
-++ *
-++ * See also <https://github.com/libgd/libgd/issues/381>
-++ */
-++
-++
-++#include "gd.h"
-++#include "gdtest.h"
-++
-++
-++int main()
-++{
-++    gdImagePtr src, dst;
-++    int size;
-++
-++    src = gdImageCreateTrueColor(1, 10);
-++    gdTestAssert(src != NULL);
-++
-++    src->sx = 0; /* this hack forces gdImageJpegPtr() to fail */
-++
-++    dst = gdImageJpegPtr(src, &size, 0);
-++    gdTestAssert(dst == NULL);
-++
-++    gdImageDestroy(src);
-++
-++    return gdNumFailures();
-++}
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-support/gd/gd_2.2.5.bb b/meta-oe/recipes-support/gd/gd_2.2.5.bb
-index c846bda6b..35f9bb251 100644
---- a/meta-oe/recipes-support/gd/gd_2.2.5.bb
-+++ b/meta-oe/recipes-support/gd/gd_2.2.5.bb
-@@ -16,6 +16,7 @@ DEPENDS = "freetype libpng jpeg zlib tiff"
- SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
-            file://0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch \
-            file://CVE-2018-1000222.patch \
-+           file://CVE-2019-6978.patch \
-           "
- 
- SRCREV = "8255231b68889597d04d451a72438ab92a405aba"
--- 
-2.21.0
-
+> On Sun, 29 Sep 2019, Adrian Bunk <bunk@stusta.de> wrote:
+> > On Sat, Sep 28, 2019 at 12:48:10PM -0700, Khem Raj wrote:
+> >> On Fri, Sep 27, 2019 at 9:56 AM Adrian Ratiu <
+> adrian.ratiu@collabora.com> wrote:
+> >>...
+> >> > --- /dev/null
+> >> > +++
+> b/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
+> >> > @@ -0,0 +1,48 @@
+> >> > +From 40511a6f4dc6311c8cf7f2954d1202ede55881ff Mon Sep 17 00:00:00
+> 2001
+> >> > +From: Adrian Ratiu <adrian.ratiu@collabora.com>
+> >> > +Date: Wed, 25 Sep 2019 19:31:14 +0300
+> >> > +Subject: [PATCH] (q)renderdoc/CMakeLists.txt: remove flag
+> unsupported by GCC
+> >> > +
+> >> > +-Wno-unknown-warning is not supported by GCC, only by Clang so we
+> >> > +remove it because newer GCC versions like 9.2.0 will complain, older
+> >> > +versions would just ignore it.
+> >> > +
+> >> > +Upstream-Status: Pending [
+> https://github.com/baldurk/renderdoc/pull/1530]
+> >> > +
+> >>
+> >> gcc9 does support -Wno-unknown-warning perhaps you want
+> >> -Wno-error=unknown-warning
+> >>...
+> >> > +TARGET_CFLAGS += "-Wno-error=deprecated-copy"
+> >> > +
+> >>
+> >> this option is GCC specific mark it
+> >> TARGET_CFLAGS_append_toolchain-gcc
+> >>...
+> >
+> > Using -Wno-error always could solve both problems,
+> > and would also avoid similar problems in the future.
+>
+> That's a good idea, however I can't pass directly -Wno-error in the
+> recipe because of how the top-level CMakelists.txt is written: it always
+> *appends* -Werror to the flags, so it overwrites our -Wno-error.
+>
+> A better solution which has the same effect is to use
+> -DCMAKE_BUILD_TYPE=Release which prevents -Werror being appended at all
+> in the top-level CMakelists.txt (there is no other effect than this!)
+>
+> Thanks! Will send an updatet v4 soon.
+>
+> >
+> > cu
+> > Adrian
+> >
+> > --
+> >
+> >        "Is there not promise of rain?" Ling Tan asked suddenly out
+> >         of the darkness. There had been need of rain for many days.
+> >        "Only a promise," Lao Er said.
+> >                                        Pearl S. Buck - Dragon Seed
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
