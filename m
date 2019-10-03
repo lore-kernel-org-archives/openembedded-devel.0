@@ -1,24 +1,26 @@
 Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DA7F6BD08
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 37F037ED15
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Oct 2019 18:58:51 +0000 (UTC)
+	Thu,  3 Oct 2019 18:58:52 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x93IwqvD011686
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id x93IwrYk013027
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 3 Oct 2019 11:58:52 -0700
+	Thu, 3 Oct 2019 11:58:53 -0700 (PDT)
 Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 3 Oct 2019 11:58:51 -0700
+	Thu, 3 Oct 2019 11:58:52 -0700
 From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 3 Oct 2019 14:58:50 -0400
-Message-ID: <20191003185851.26495-1-Trevor.Gamblin@windriver.com>
+Date: Thu, 3 Oct 2019 14:58:51 -0400
+Message-ID: <20191003185851.26495-2-Trevor.Gamblin@windriver.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20191003185851.26495-1-Trevor.Gamblin@windriver.com>
+References: <20191003185851.26495-1-Trevor.Gamblin@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 1/2] php: fix CVE-2019-6978
+Subject: [meta-oe][PATCH v2 2/2] gd: fix CVE-2019-6978
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,77 +33,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Oct 2019 18:58:51 -0000
+X-List-Received-Date: Thu, 03 Oct 2019 18:58:52 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 From: Trevor Gamblin <trevor.gamblin@windriver.com>
 
-Patch for php to sync with the fix for the same issue in
-libgd.
-
 CVE: CVE-2019-6978
+
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- .../php/php/CVE-2019-6978.patch               | 192 ++++++++++++++++++
- meta-oe/recipes-devtools/php/php_7.3.9.bb     |   1 +
- 2 files changed, 193 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch
+ .../recipes-support/gd/gd/CVE-2019-6978.patch | 299 ++++++++++++++++++
+ meta-oe/recipes-support/gd/gd_2.2.5.bb        |   1 +
+ 2 files changed, 300 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch
 
-diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch
+diff --git a/meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch b/meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch
 new file mode 100644
-index 000000000..b7cdfd964
+index 000000000..9beb23e83
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch
-@@ -0,0 +1,192 @@
-+From 089f7c0bc28d399b0420aa6ef058e4c1c120b2ae Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch
+@@ -0,0 +1,299 @@
++From 553702980ae89c83f2d6e254d62cf82e204956d0 Mon Sep 17 00:00:00 2001
 +From: "Christoph M. Becker" <cmbecker69@gmx.de>
-+Date: Sat, 19 Jan 2019 10:35:39 +0100
-+Subject: [PATCH] Sync with upstream
++Date: Thu, 17 Jan 2019 11:54:55 +0100
++Subject: [PATCH] Fix #492: Potential double-free in gdImage*Ptr()
 +
-+Even though libgd/libgd#492 is not a relevant bug fix for PHP, since
-+the binding doesn't use the `gdImage*Ptr()` functions at all, we're
-+porting the fix to stay in sync here.
++Whenever `gdImage*Ptr()` calls `gdImage*Ctx()` and the latter fails, we
++must not call `gdDPExtractData()`; otherwise a double-free would
++happen.  Since `gdImage*Ctx()` are void functions, and we can't change
++that for BC reasons, we're introducing static helpers which are used
++internally.
++
++We're adding a regression test for `gdImageJpegPtr()`, but not for
++`gdImageGifPtr()` and `gdImageWbmpPtr()` since we don't know how to
++trigger failure of the respective `gdImage*Ctx()` calls.
++
++This potential security issue has been reported by Solmaz Salimi (aka.
++Rooney).
 +---
-+ ext/gd/libgd/gd_gif_out.c | 20 +++++++++++++++++---
-+ ext/gd/libgd/gd_jpeg.c    | 17 ++++++++++++++---
-+ ext/gd/libgd/gd_wbmp.c    | 18 +++++++++++++++---
-+ 3 files changed, 46 insertions(+), 9 deletions(-)
++ src/gd_gif_out.c                  | 18 +++++++++++++++---
++ src/gd_jpeg.c                     | 20 ++++++++++++++++----
++ src/gd_wbmp.c                     | 21 ++++++++++++++++++---
++ tests/jpeg/.gitignore             |  1 +
++ tests/jpeg/CMakeLists.txt         |  1 +
++ tests/jpeg/Makemodule.am          |  3 ++-
++ tests/jpeg/jpeg_ptr_double_free.c | 31 +++++++++++++++++++++++++++++++
++ 7 files changed, 84 insertions(+), 11 deletions(-)
++ create mode 100644 tests/jpeg/jpeg_ptr_double_free.c
 +
-+Upstream-Status: Backport [http://git.php.net/?p=php-src.git;a=commit;h=089f7c0bc28d399b0420aa6ef058e4c1c120b2ae]
++Upstream-Status: Backport [https://github.com/libgd/libgd/commit/553702980ae89c83f2d6e254d62cf82e204956d0]
 +CVE: CVE-2019-6978
 +
 +Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 +
-+diff --git a/ext/gd/libgd/gd_gif_out.c b/ext/gd/libgd/gd_gif_out.c
-+index 1f2a6b936a..2e1f38af70 100644
-+--- a/ext/gd/libgd/gd_gif_out.c
-++++ b/ext/gd/libgd/gd_gif_out.c
-+@@ -97,12 +97,18 @@ static void cl_hash (register count_int chsize, GifCtx *ctx);
-+ static void char_init (GifCtx *ctx);
-+ static void char_out (int c, GifCtx *ctx);
-+ static void flush_char (GifCtx *ctx);
-++
++
++diff --git a/src/gd_gif_out.c b/src/gd_gif_out.c
++index 298a581..d5a9534 100644
++--- a/src/gd_gif_out.c
+++++ b/src/gd_gif_out.c
++@@ -99,6 +99,7 @@ static void char_init(GifCtx *ctx);
++ static void char_out(int c, GifCtx *ctx);
++ static void flush_char(GifCtx *ctx);
++ 
 ++static int _gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out);
-++
-+ void * gdImageGifPtr (gdImagePtr im, int *size)
-+ {
-+   void *rv;
-+   gdIOCtx *out = gdNewDynamicCtx (2048, NULL);
-+-  gdImageGifCtx (im, out);
-+-  rv = gdDPExtractData (out, size);
++ 
++ 
++ 
++@@ -131,8 +132,11 @@ BGD_DECLARE(void *) gdImageGifPtr(gdImagePtr im, int *size)
++ 	void *rv;
++ 	gdIOCtx *out = gdNewDynamicCtx(2048, NULL);
++ 	if (out == NULL) return NULL;
++-	gdImageGifCtx(im, out);
++-	rv = gdDPExtractData(out, size);
 ++	if (!_gdImageGifCtx(im, out)) {
 ++		rv = gdDPExtractData(out, size);
 ++	} else {
 ++		rv = NULL;
 ++	}
-+   out->gd_free (out);
-+   return rv;
++ 	out->gd_free(out);
++ 	return rv;
 + }
-+@@ -115,6 +121,12 @@ void gdImageGif (gdImagePtr im, FILE * outFile)
-+ }
++@@ -220,6 +224,12 @@ BGD_DECLARE(void) gdImageGif(gdImagePtr im, FILE *outFile)
 + 
-+ void gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
++ */
++ BGD_DECLARE(void) gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
 ++{
 ++	_gdImageGifCtx(im, out);
 ++}
@@ -111,54 +127,55 @@ index 000000000..b7cdfd964
 + {
 + 	gdImagePtr pim = 0, tim = im;
 + 	int interlace, BitsPerPixel;
-+@@ -125,7 +137,7 @@ void gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
-+ 			based temporary image. */
++@@ -231,7 +241,7 @@ BGD_DECLARE(void) gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
++ 		based temporary image. */
 + 		pim = gdImageCreatePaletteFromTrueColor(im, 1, 256);
-+ 		if (!pim) {
++ 		if(!pim) {
 +-			return;
 ++			return 1;
 + 		}
 + 		tim = pim;
 + 	}
-+@@ -138,6 +150,8 @@ void gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
++@@ -247,6 +257,8 @@ BGD_DECLARE(void) gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
 + 		/* Destroy palette based temporary image. */
 + 		gdImageDestroy(	pim);
 + 	}
 ++
-++    return 0;
+++	return 0;
 + }
 + 
-+ static int
-+diff --git a/ext/gd/libgd/gd_jpeg.c b/ext/gd/libgd/gd_jpeg.c
-+index 8cf71fcbc9..ef46c4a22c 100644
-+--- a/ext/gd/libgd/gd_jpeg.c
-++++ b/ext/gd/libgd/gd_jpeg.c
-+@@ -132,6 +132,7 @@ const char * gdJpegGetVersionString()
-+ 	}
++ 
++diff --git a/src/gd_jpeg.c b/src/gd_jpeg.c
++index fc05842..96ef430 100644
++--- a/src/gd_jpeg.c
+++++ b/src/gd_jpeg.c
++@@ -117,6 +117,8 @@ static void fatal_jpeg_error(j_common_ptr cinfo)
++ 	exit(99);
 + }
 + 
 ++static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality);
-+ 
+++
 + /*
 +  * Write IM to OUTFILE as a JFIF-formatted JPEG image, using quality
-+@@ -153,8 +154,11 @@ void *gdImageJpegPtr (gdImagePtr im, int *size, int quality)
-+ {
++  * QUALITY.  If QUALITY is in the range 0-100, increasing values
++@@ -231,8 +233,11 @@ BGD_DECLARE(void *) gdImageJpegPtr(gdImagePtr im, int *size, int quality)
 + 	void *rv;
-+ 	gdIOCtx *out = gdNewDynamicCtx (2048, NULL);
-+-	gdImageJpegCtx (im, out, quality);
-+-	rv = gdDPExtractData (out, size);
++ 	gdIOCtx *out = gdNewDynamicCtx(2048, NULL);
++ 	if (out == NULL) return NULL;
++-	gdImageJpegCtx(im, out, quality);
++-	rv = gdDPExtractData(out, size);
 ++	if (!_gdImageJpegCtx(im, out, quality)) {
 ++		rv = gdDPExtractData(out, size);
 ++	} else {
 ++		rv = NULL;
 ++	}
-+ 	out->gd_free (out);
-+ 
++ 	out->gd_free(out);
 + 	return rv;
-+@@ -163,6 +167,12 @@ void *gdImageJpegPtr (gdImagePtr im, int *size, int quality)
-+ void jpeg_gdIOCtx_dest (j_compress_ptr cinfo, gdIOCtx * outfile);
++ }
++@@ -253,6 +258,12 @@ void jpeg_gdIOCtx_dest(j_compress_ptr cinfo, gdIOCtx *outfile);
 + 
-+ void gdImageJpegCtx (gdImagePtr im, gdIOCtx * outfile, int quality)
++ */
++ BGD_DECLARE(void) gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
 ++{
 ++	_gdImageJpegCtx(im, outfile, quality);
 ++}
@@ -168,39 +185,49 @@ index 000000000..b7cdfd964
 + {
 + 	struct jpeg_compress_struct cinfo;
 + 	struct jpeg_error_mgr jerr;
-+@@ -184,7 +194,7 @@ void gdImageJpegCtx (gdImagePtr im, gdIOCtx * outfile, int quality)
-+ 		if (row) {
-+ 			gdFree (row);
++@@ -287,7 +298,7 @@ BGD_DECLARE(void) gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
++ 		if(row) {
++ 			gdFree(row);
 + 		}
 +-		return;
 ++		return 1;
 + 	}
 + 
-+ 	cinfo.err->error_exit = fatal_jpeg_error;
-+@@ -277,6 +287,7 @@ void gdImageJpegCtx (gdImagePtr im, gdIOCtx * outfile, int quality)
-+ 	jpeg_finish_compress (&cinfo);
-+ 	jpeg_destroy_compress (&cinfo);
-+ 	gdFree (row);
++ 	cinfo.err->emit_message = jpeg_emit_message;
++@@ -328,7 +339,7 @@ BGD_DECLARE(void) gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
++ 	if(row == 0) {
++ 		gd_error("gd-jpeg: error: unable to allocate JPEG row structure: gdCalloc returns NULL\n");
++ 		jpeg_destroy_compress(&cinfo);
++-		return;
+++		return 1;
++ 	}
++ 
++ 	rowptr[0] = row;
++@@ -405,6 +416,7 @@ BGD_DECLARE(void) gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
++ 	jpeg_finish_compress(&cinfo);
++ 	jpeg_destroy_compress(&cinfo);
++ 	gdFree(row);
 ++	return 0;
 + }
 + 
-+ gdImagePtr gdImageCreateFromJpeg (FILE * inFile)
-+diff --git a/ext/gd/libgd/gd_wbmp.c b/ext/gd/libgd/gd_wbmp.c
-+index 55ced3443d..fd9edad2ca 100644
-+--- a/ext/gd/libgd/gd_wbmp.c
-++++ b/ext/gd/libgd/gd_wbmp.c
-+@@ -82,6 +82,7 @@ int gd_getin (void *in)
-+ 	return (gdGetC((gdIOCtx *) in));
++ 
++diff --git a/src/gd_wbmp.c b/src/gd_wbmp.c
++index f19a1c9..a49bdbe 100644
++--- a/src/gd_wbmp.c
+++++ b/src/gd_wbmp.c
++@@ -88,6 +88,8 @@ int gd_getin(void *in)
++ 	return (gdGetC((gdIOCtx *)in));
 + }
 + 
 ++static int _gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out);
+++
++ /*
++ 	Function: gdImageWBMPCtx
 + 
-+ /*      gdImageWBMPCtx
-+    **  --------------
-+@@ -93,6 +94,12 @@ int gd_getin (void *in)
-+    **  out:    the stream where to write
-+  */
-+ void gdImageWBMPCtx (gdImagePtr image, int fg, gdIOCtx * out)
++@@ -100,6 +102,12 @@ int gd_getin(void *in)
++ 		out   - the stream where to write
++ */
++ BGD_DECLARE(void) gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out)
 ++{
 ++	_gdImageWBMPCtx(image, fg, out);
 ++}
@@ -210,29 +237,35 @@ index 000000000..b7cdfd964
 + {
 + 	int x, y, pos;
 + 	Wbmp *wbmp;
-+@@ -100,7 +107,7 @@ void gdImageWBMPCtx (gdImagePtr image, int fg, gdIOCtx * out)
++@@ -107,7 +115,7 @@ BGD_DECLARE(void) gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out)
 + 	/* create the WBMP */
-+ 	if ((wbmp = createwbmp (gdImageSX (image), gdImageSY (image), WBMP_WHITE)) == NULL) {
-+ 		gd_error("Could not create WBMP");
++ 	if((wbmp = createwbmp(gdImageSX(image), gdImageSY(image), WBMP_WHITE)) == NULL) {
++ 		gd_error("Could not create WBMP\n");
 +-		return;
 ++		return 1;
 + 	}
 + 
 + 	/* fill up the WBMP structure */
-+@@ -116,7 +123,9 @@ void gdImageWBMPCtx (gdImagePtr image, int fg, gdIOCtx * out)
++@@ -123,11 +131,15 @@ BGD_DECLARE(void) gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out)
 + 
 + 	/* write the WBMP to a gd file descriptor */
-+ 	if (writewbmp (wbmp, &gd_putout, out)) {
++ 	if(writewbmp(wbmp, &gd_putout, out)) {
 ++		freewbmp(wbmp);
-+ 		gd_error("Could not save WBMP");
++ 		gd_error("Could not save WBMP\n");
 ++		return 1;
 + 	}
++ 
 + 	/* des submitted this bugfix: gdFree the memory. */
 + 	freewbmp(wbmp);
-+@@ -204,8 +213,11 @@ void * gdImageWBMPPtr (gdImagePtr im, int *size, int fg)
-+ {
+++
+++	return 0;
++ }
++ 
++ /*
++@@ -271,8 +283,11 @@ BGD_DECLARE(void *) gdImageWBMPPtr(gdImagePtr im, int *size, int fg)
 + 	void *rv;
 + 	gdIOCtx *out = gdNewDynamicCtx(2048, NULL);
++ 	if (out == NULL) return NULL;
 +-	gdImageWBMPCtx(im, fg, out);
 +-	rv = gdDPExtractData(out, size);
 ++	if (!_gdImageWBMPCtx(im, fg, out)) {
@@ -241,23 +274,97 @@ index 000000000..b7cdfd964
 ++		rv = NULL;
 ++	}
 + 	out->gd_free(out);
-+ 
 + 	return rv;
++ }
++diff --git a/tests/jpeg/.gitignore b/tests/jpeg/.gitignore
++index c28aa87..13bcf04 100644
++--- a/tests/jpeg/.gitignore
+++++ b/tests/jpeg/.gitignore
++@@ -3,5 +3,6 @@
++ /jpeg_empty_file
++ /jpeg_im2im
++ /jpeg_null
+++/jpeg_ptr_double_free
++ /jpeg_read
++ /jpeg_resolution
++diff --git a/tests/jpeg/CMakeLists.txt b/tests/jpeg/CMakeLists.txt
++index 19964b0..a8d8162 100644
++--- a/tests/jpeg/CMakeLists.txt
+++++ b/tests/jpeg/CMakeLists.txt
++@@ -2,6 +2,7 @@ IF(JPEG_FOUND)
++ LIST(APPEND TESTS_FILES
++ 	jpeg_empty_file
++ 	jpeg_im2im
+++	jpeg_ptr_double_free
++ 	jpeg_null
++ )
++ 
++diff --git a/tests/jpeg/Makemodule.am b/tests/jpeg/Makemodule.am
++index 7e5d317..b89e169 100644
++--- a/tests/jpeg/Makemodule.am
+++++ b/tests/jpeg/Makemodule.am
++@@ -2,7 +2,8 @@ if HAVE_LIBJPEG
++ libgd_test_programs += \
++ 	jpeg/jpeg_empty_file \
++ 	jpeg/jpeg_im2im \
++-	jpeg/jpeg_null
+++	jpeg/jpeg_null \
+++	jpeg/jpeg_ptr_double_free
++ 
++ if HAVE_LIBPNG
++ libgd_test_programs += \
++diff --git a/tests/jpeg/jpeg_ptr_double_free.c b/tests/jpeg/jpeg_ptr_double_free.c
++new file mode 100644
++index 0000000..df5a510
++--- /dev/null
+++++ b/tests/jpeg/jpeg_ptr_double_free.c
++@@ -0,0 +1,31 @@
+++/**
+++ * Test that failure to convert to JPEG returns NULL
+++ *
+++ * We are creating an image, set its width to zero, and pass this image to
+++ * `gdImageJpegPtr()` which is supposed to fail, and as such should return NULL.
+++ *
+++ * See also <https://github.com/libgd/libgd/issues/381>
+++ */
+++
+++
+++#include "gd.h"
+++#include "gdtest.h"
+++
+++
+++int main()
+++{
+++    gdImagePtr src, dst;
+++    int size;
+++
+++    src = gdImageCreateTrueColor(1, 10);
+++    gdTestAssert(src != NULL);
+++
+++    src->sx = 0; /* this hack forces gdImageJpegPtr() to fail */
+++
+++    dst = gdImageJpegPtr(src, &size, 0);
+++    gdTestAssert(dst == NULL);
+++
+++    gdImageDestroy(src);
+++
+++    return gdNumFailures();
+++}
 +-- 
 +2.17.1
 +
-diff --git a/meta-oe/recipes-devtools/php/php_7.3.9.bb b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-index 23ab7ca8e..a5c7b9b6b 100644
---- a/meta-oe/recipes-devtools/php/php_7.3.9.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-@@ -7,6 +7,7 @@ SRC_URI += "file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
-             file://0049-ext-intl-Use-pkg-config-to-detect-icu.patch \
-             file://0001-Use-pkg-config-for-libxml2-detection.patch \
-             file://debian-php-fixheader.patch \
-+            file://CVE-2019-6978.patch \
-            "
- SRC_URI_append_class-target = " \
-                                 file://pear-makefile.patch \
+diff --git a/meta-oe/recipes-support/gd/gd_2.2.5.bb b/meta-oe/recipes-support/gd/gd_2.2.5.bb
+index c846bda6b..35f9bb251 100644
+--- a/meta-oe/recipes-support/gd/gd_2.2.5.bb
++++ b/meta-oe/recipes-support/gd/gd_2.2.5.bb
+@@ -16,6 +16,7 @@ DEPENDS = "freetype libpng jpeg zlib tiff"
+ SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
+            file://0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch \
+            file://CVE-2018-1000222.patch \
++           file://CVE-2019-6978.patch \
+           "
+ 
+ SRCREV = "8255231b68889597d04d451a72438ab92a405aba"
 -- 
 2.21.0
 
