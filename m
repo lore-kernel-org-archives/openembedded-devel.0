@@ -1,49 +1,24 @@
-Return-Path: <george.mccollister@gmail.com>
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
-	[209.85.166.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1510B7F29D
+Return-Path: <Trevor.Gamblin@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id F21B06BD08
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Oct 2019 18:08:38 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id u8so7721572iom.5
+	Thu,  3 Oct 2019 18:55:56 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x93ItwK2011371
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Oct 2019 11:08:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=RH2WRFX+HFGF7Md43fBTkMkLmyEX3WNy/o+LblWxTks=;
-	b=X2tqcF9+jQ0GyLWh3sZ1nrGD0JK3sjp7YQvWxXs19j3YC5ZfjE8j16Or840Q3HF8aD
-	F26LTmuZudQD2ZYfVxYky59kA5eDC7KWE02IRrSVFXXeD3iFv9ppC8ZQ4RHG/sDesSQi
-	5sjfA2ewAtadPIZ//dL54CP8EpszL2WeEL58IiNNq5PBDjaEbSuB5Iwxa7PXW0Q2f8GH
-	hmXGu0iN9c6AlrBJr2c+3g6C6RO6+fhZMSt1zUdmv5bMrWZFjs5u9h/+St3oS6s2xMaN
-	FNZ4nKqhQI4W8BmT4BYB1hJMGhYxRhiBt1gI5mw9/+CMJix76iP9Xg7TkdrPFgvJoqhX
-	66Hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=RH2WRFX+HFGF7Md43fBTkMkLmyEX3WNy/o+LblWxTks=;
-	b=pExwYp/mNGj13GPvOdRmVrC22OCdrM4f0JjWfzGvRhRpbFlCftiGeqM9BDv1XV9Wur
-	Rwzp7Ecyp2ihZLAsy05OyJWnDNBsX/35mcsi0TvMThSwJdhjQ0Hr+uiGlb7/bOSFIRAs
-	/WJhRc+tlSRpNSY2Gqo585hu/benCK4YsM1TP4LpPF9Sv40C3NQf0AezarZllsngFWWU
-	XMXkn+ObeZG5FeqvGTfI5Rx4GkHtQlxk5Narw7jdMHvqhEvGMiGCliefjFXxN8qV4Pf/
-	9AqPruZu6Ac46uma1mmF6QlZs4Cq84IoYe9Brwe9vGfOHEB6XLfP9uWsf8BNNKFAihg5
-	cmNA==
-X-Gm-Message-State: APjAAAW4R2hK04AcZlkg3hfVvkeU5UNXkTsukRDv84RFapjDPoYHyyvT
-	7Ye5kB2YTWtqaHW6BLvYekuUOEg=
-X-Google-Smtp-Source: APXvYqy4/5qYXPShI1BciNi4CCh/+BhGIQBqlahgxLZinCSBvYF71VscA0ZHk2JoiATkc4av1lf0fQ==
-X-Received: by 2002:a6b:4416:: with SMTP id r22mr9136054ioa.297.1570126119201; 
-	Thu, 03 Oct 2019 11:08:39 -0700 (PDT)
-Received: from george-i7.novatech-llc.com ([216.21.169.52])
-	by smtp.gmail.com with ESMTPSA id t4sm1980422ili.8.2019.10.03.11.08.37
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 03 Oct 2019 11:08:38 -0700 (PDT)
-From: George McCollister <george.mccollister@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Oct 2019 13:08:31 -0500
-Message-Id: <20191003180831.26315-1-george.mccollister@gmail.com>
-X-Mailer: git-send-email 2.22.0
+	Thu, 3 Oct 2019 11:55:58 -0700 (PDT)
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 3 Oct 2019 11:55:57 -0700
+From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 3 Oct 2019 14:55:57 -0400
+Message-ID: <20191003185557.34440-1-Trevor.Gamblin@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] wireshark: fix qt5 build
+Subject: [meta-oe][PATCH] php: fix CVE-2019-6978
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,56 +31,234 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Oct 2019 18:08:40 -0000
+X-List-Received-Date: Thu, 03 Oct 2019 18:55:57 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Add qttools-native to PACKAGECONFIG[qt5] DEPENDS to resolve missing
-Qt5LinguistTools build error.
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
 
-Add qtmultimedia to PACKAGECONFIG[qt5] DEPENDS to resolve missing
-Qt5Multimedia build error.
+Patch for php to sync with the fix for the same issue in
+libgd.
 
-Add qtsvg to PACKAGECONFIG[qt5] DEPENDS to resolve missing Qt5Svg build
-error.
-
-Inherit cmake_qt5 when qt5 is in PACKAGECONFIG to resolve
-get_target_property() called with non-existent target "Qt5::qmake"
-build error.
-
-Automatically add qt5 to PACKAGECONFIG when meta-qt5 is in the build
-since adding qt5 via a .bbappend won't satisfy the conditional inherit
-cmake_qt5. The poppler recipe does exactly this.
-
-Signed-off-by: George McCollister <george.mccollister@gmail.com>
+CVE: CVE-2019-6978
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- .../recipes-support/wireshark/wireshark_3.0.3.bb            | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ .../php/php/CVE-2019-6978.patch               | 192 ++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_7.3.9.bb     |   1 +
+ 2 files changed, 193 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-index 6de188da2..a3c0b4998 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
-@@ -19,7 +19,7 @@ PE = "1"
- 
- inherit cmake pkgconfig python3native perlnative upstream-version-is-even
- 
--PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
-+PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5', '', d)}"
- 
- PACKAGECONFIG_class-native = "libpcap gnutls ssl libssh"
- 
-@@ -41,7 +41,9 @@ PACKAGECONFIG[lz4] = "-DENABLE_LZ4=ON,-DENABLE_LZ4=OFF, lz4"
- 
- # these next two options require addional layers
- PACKAGECONFIG[c-ares] = "-DENABLE_CARES=ON,-DENABLE_CARES=OFF, c-ares"
--PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON -DBUILD_wireshark=ON, -DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qtbase"
-+PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON -DBUILD_wireshark=ON, -DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qttools-native qtmultimedia qtsvg"
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch
+new file mode 100644
+index 000000000..b7cdfd964
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/CVE-2019-6978.patch
+@@ -0,0 +1,192 @@
++From 089f7c0bc28d399b0420aa6ef058e4c1c120b2ae Mon Sep 17 00:00:00 2001
++From: "Christoph M. Becker" <cmbecker69@gmx.de>
++Date: Sat, 19 Jan 2019 10:35:39 +0100
++Subject: [PATCH] Sync with upstream
 +
-+inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
- 
- EXTRA_OECMAKE += "-DENABLE_NETLINK=ON \
-                   -DBUILD_mmdbresolve=OFF \
++Even though libgd/libgd#492 is not a relevant bug fix for PHP, since
++the binding doesn't use the `gdImage*Ptr()` functions at all, we're
++porting the fix to stay in sync here.
++---
++ ext/gd/libgd/gd_gif_out.c | 20 +++++++++++++++++---
++ ext/gd/libgd/gd_jpeg.c    | 17 ++++++++++++++---
++ ext/gd/libgd/gd_wbmp.c    | 18 +++++++++++++++---
++ 3 files changed, 46 insertions(+), 9 deletions(-)
++
++Upstream-Status: Backport [http://git.php.net/?p=php-src.git;a=commit;h=089f7c0bc28d399b0420aa6ef058e4c1c120b2ae]
++CVE: CVE-2019-6978
++
++Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
++
++diff --git a/ext/gd/libgd/gd_gif_out.c b/ext/gd/libgd/gd_gif_out.c
++index 1f2a6b936a..2e1f38af70 100644
++--- a/ext/gd/libgd/gd_gif_out.c
+++++ b/ext/gd/libgd/gd_gif_out.c
++@@ -97,12 +97,18 @@ static void cl_hash (register count_int chsize, GifCtx *ctx);
++ static void char_init (GifCtx *ctx);
++ static void char_out (int c, GifCtx *ctx);
++ static void flush_char (GifCtx *ctx);
+++
+++static int _gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out);
+++
++ void * gdImageGifPtr (gdImagePtr im, int *size)
++ {
++   void *rv;
++   gdIOCtx *out = gdNewDynamicCtx (2048, NULL);
++-  gdImageGifCtx (im, out);
++-  rv = gdDPExtractData (out, size);
+++	if (!_gdImageGifCtx(im, out)) {
+++		rv = gdDPExtractData(out, size);
+++	} else {
+++		rv = NULL;
+++	}
++   out->gd_free (out);
++   return rv;
++ }
++@@ -115,6 +121,12 @@ void gdImageGif (gdImagePtr im, FILE * outFile)
++ }
++ 
++ void gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
+++{
+++	_gdImageGifCtx(im, out);
+++}
+++
+++/* returns 0 on success, 1 on failure */
+++static int _gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
++ {
++ 	gdImagePtr pim = 0, tim = im;
++ 	int interlace, BitsPerPixel;
++@@ -125,7 +137,7 @@ void gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
++ 			based temporary image. */
++ 		pim = gdImageCreatePaletteFromTrueColor(im, 1, 256);
++ 		if (!pim) {
++-			return;
+++			return 1;
++ 		}
++ 		tim = pim;
++ 	}
++@@ -138,6 +150,8 @@ void gdImageGifCtx(gdImagePtr im, gdIOCtxPtr out)
++ 		/* Destroy palette based temporary image. */
++ 		gdImageDestroy(	pim);
++ 	}
+++
+++    return 0;
++ }
++ 
++ static int
++diff --git a/ext/gd/libgd/gd_jpeg.c b/ext/gd/libgd/gd_jpeg.c
++index 8cf71fcbc9..ef46c4a22c 100644
++--- a/ext/gd/libgd/gd_jpeg.c
+++++ b/ext/gd/libgd/gd_jpeg.c
++@@ -132,6 +132,7 @@ const char * gdJpegGetVersionString()
++ 	}
++ }
++ 
+++static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality);
++ 
++ /*
++  * Write IM to OUTFILE as a JFIF-formatted JPEG image, using quality
++@@ -153,8 +154,11 @@ void *gdImageJpegPtr (gdImagePtr im, int *size, int quality)
++ {
++ 	void *rv;
++ 	gdIOCtx *out = gdNewDynamicCtx (2048, NULL);
++-	gdImageJpegCtx (im, out, quality);
++-	rv = gdDPExtractData (out, size);
+++	if (!_gdImageJpegCtx(im, out, quality)) {
+++		rv = gdDPExtractData(out, size);
+++	} else {
+++		rv = NULL;
+++	}
++ 	out->gd_free (out);
++ 
++ 	return rv;
++@@ -163,6 +167,12 @@ void *gdImageJpegPtr (gdImagePtr im, int *size, int quality)
++ void jpeg_gdIOCtx_dest (j_compress_ptr cinfo, gdIOCtx * outfile);
++ 
++ void gdImageJpegCtx (gdImagePtr im, gdIOCtx * outfile, int quality)
+++{
+++	_gdImageJpegCtx(im, outfile, quality);
+++}
+++
+++/* returns 0 on success, 1 on failure */
+++static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
++ {
++ 	struct jpeg_compress_struct cinfo;
++ 	struct jpeg_error_mgr jerr;
++@@ -184,7 +194,7 @@ void gdImageJpegCtx (gdImagePtr im, gdIOCtx * outfile, int quality)
++ 		if (row) {
++ 			gdFree (row);
++ 		}
++-		return;
+++		return 1;
++ 	}
++ 
++ 	cinfo.err->error_exit = fatal_jpeg_error;
++@@ -277,6 +287,7 @@ void gdImageJpegCtx (gdImagePtr im, gdIOCtx * outfile, int quality)
++ 	jpeg_finish_compress (&cinfo);
++ 	jpeg_destroy_compress (&cinfo);
++ 	gdFree (row);
+++	return 0;
++ }
++ 
++ gdImagePtr gdImageCreateFromJpeg (FILE * inFile)
++diff --git a/ext/gd/libgd/gd_wbmp.c b/ext/gd/libgd/gd_wbmp.c
++index 55ced3443d..fd9edad2ca 100644
++--- a/ext/gd/libgd/gd_wbmp.c
+++++ b/ext/gd/libgd/gd_wbmp.c
++@@ -82,6 +82,7 @@ int gd_getin (void *in)
++ 	return (gdGetC((gdIOCtx *) in));
++ }
++ 
+++static int _gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out);
++ 
++ /*      gdImageWBMPCtx
++    **  --------------
++@@ -93,6 +94,12 @@ int gd_getin (void *in)
++    **  out:    the stream where to write
++  */
++ void gdImageWBMPCtx (gdImagePtr image, int fg, gdIOCtx * out)
+++{
+++	_gdImageWBMPCtx(image, fg, out);
+++}
+++
+++/* returns 0 on success, 1 on failure */
+++static int _gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out)
++ {
++ 	int x, y, pos;
++ 	Wbmp *wbmp;
++@@ -100,7 +107,7 @@ void gdImageWBMPCtx (gdImagePtr image, int fg, gdIOCtx * out)
++ 	/* create the WBMP */
++ 	if ((wbmp = createwbmp (gdImageSX (image), gdImageSY (image), WBMP_WHITE)) == NULL) {
++ 		gd_error("Could not create WBMP");
++-		return;
+++		return 1;
++ 	}
++ 
++ 	/* fill up the WBMP structure */
++@@ -116,7 +123,9 @@ void gdImageWBMPCtx (gdImagePtr image, int fg, gdIOCtx * out)
++ 
++ 	/* write the WBMP to a gd file descriptor */
++ 	if (writewbmp (wbmp, &gd_putout, out)) {
+++		freewbmp(wbmp);
++ 		gd_error("Could not save WBMP");
+++		return 1;
++ 	}
++ 	/* des submitted this bugfix: gdFree the memory. */
++ 	freewbmp(wbmp);
++@@ -204,8 +213,11 @@ void * gdImageWBMPPtr (gdImagePtr im, int *size, int fg)
++ {
++ 	void *rv;
++ 	gdIOCtx *out = gdNewDynamicCtx(2048, NULL);
++-	gdImageWBMPCtx(im, fg, out);
++-	rv = gdDPExtractData(out, size);
+++	if (!_gdImageWBMPCtx(im, fg, out)) {
+++		rv = gdDPExtractData(out, size);
+++	} else {
+++		rv = NULL;
+++	}
++ 	out->gd_free(out);
++ 
++ 	return rv;
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-devtools/php/php_7.3.9.bb b/meta-oe/recipes-devtools/php/php_7.3.9.bb
+index 23ab7ca8e..a5c7b9b6b 100644
+--- a/meta-oe/recipes-devtools/php/php_7.3.9.bb
++++ b/meta-oe/recipes-devtools/php/php_7.3.9.bb
+@@ -7,6 +7,7 @@ SRC_URI += "file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
+             file://0049-ext-intl-Use-pkg-config-to-detect-icu.patch \
+             file://0001-Use-pkg-config-for-libxml2-detection.patch \
+             file://debian-php-fixheader.patch \
++            file://CVE-2019-6978.patch \
+            "
+ SRC_URI_append_class-target = " \
+                                 file://pear-makefile.patch \
 -- 
-2.22.0
+2.21.0
 
 
