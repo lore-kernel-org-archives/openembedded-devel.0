@@ -1,29 +1,47 @@
-Return-Path: <maciej.pijanowski@3mdeb.com>
-X-Greylist: delayed 8399 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 04 Oct 2019 19:14:41 UTC
-Received: from 18.mo1.mail-out.ovh.net (18.mo1.mail-out.ovh.net [46.105.35.72])
-	by mail.openembedded.org (Postfix) with ESMTP id 486407EE86
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
+	[209.85.166.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 846AC7E601
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2019 19:14:41 +0000 (UTC)
-Received: from player792.ha.ovh.net (unknown [10.108.35.59])
-	by mo1.mail-out.ovh.net (Postfix) with ESMTP id 797B7192B24
+	Fri,  4 Oct 2019 20:31:07 +0000 (UTC)
+Received: by mail-io1-f68.google.com with SMTP id w12so16249941iol.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2019 17:38:29 +0200 (CEST)
-Received: from 3mdeb.com (85-222-117-222.dynamic.chello.pl [85.222.117.222])
-	(Authenticated sender: maciej.pijanowski@3mdeb.com)
-	by player792.ha.ovh.net (Postfix) with ESMTPSA id E6799AA9A847;
-	Fri,  4 Oct 2019 15:38:26 +0000 (UTC)
-From: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Oct 2019 17:38:02 +0200
-Message-Id: <1570203482-7005-1-git-send-email-maciej.pijanowski@3mdeb.com>
-X-Mailer: git-send-email 2.7.4
-X-Ovh-Tracer-Id: 7454864758951259720
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedufedrhedugdekhecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecu
-Cc: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>, piotr.krol@3mdeb.com
-Subject: [meta-oe][PATCH] smem: package smemcap separately
+	Fri, 04 Oct 2019 13:31:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=PCsWfePwuF1sAIggIaA9q/ydjseIOM458lEGSZtWbsQ=;
+	b=YSWYYZ2NAj2cM8KfJn8vtq2MfhhAuD2fIuJCVBYMCrtIDbllZvmhW5+GZsHahEBktD
+	Z16zCYdf64JGdQkQ9DBgNIz4KFygw0r6UrPVNIRwwoRTiSOHI/IzSAFW72LirCt6QmV3
+	4nJiSGEUUiy1OXd5MugM2U/Uc1NVApLsf550xB1Awxeu4n8jZhj4MZeUeiTS4PyIGo23
+	yZJlrZq4AuUSKwQvQ5sOCWpWMrX9MYNld6G2uGjj3petHmOJqSyXMCbyRMC7nv3HNG8I
+	JtQMG5z2pJgOwEdqWacWD72sMarN1h6veRhvxKTniWCAG4TDccYORr/FYwi7x+/VUYsa
+	Hr9g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=PCsWfePwuF1sAIggIaA9q/ydjseIOM458lEGSZtWbsQ=;
+	b=UHrFHK3cC8iyCBm9+rdvnpKo2VvVIw4xT9ly2139hoOyc7iO8onU9sT8Ze/AxrdEUU
+	HYAT9xm3tW/j+ik7Pfd0/SVI9Apash9diDiTwHX4nDXAKDOFclgM6+dkn34ucR6ot4vk
+	alyV9b+a5O+JvSK+ILBKilHQlGBLQHID7YTaIop0wU+jDkzCspDBfgbwJ+I+O2z6+KjD
+	zMlT4XeGMUdOSDRl5NTTPylgUSTaHFZXpBY8ad2VcmAsVZrdCIz5sjgCiFi6fLIKr8T3
+	nkMVNEQY0C+JmTvGNmuXUkYalQn4I/erTlHyNpnK5j2TzOX9N+zEiI2oXXQzul/y4By/
+	TP7A==
+X-Gm-Message-State: APjAAAXUNVc22T1xVaEU2fg9hF43S3BEqem5sM21sZhVyJ2lgNLJZwZN
+	M3kgQmA7j1mKa7hStacliyoX3w2Y+A8dzQl1dqlgXA==
+X-Google-Smtp-Source: APXvYqz0iyBmXK+nVfwMjXWoIDcBaUgIegPRcyRujfDqeGSqZwE5RbOESSwpVIj9kZ1QkygdyGr8RdXPvcG4j4+f3QQ=
+X-Received: by 2002:a92:8e4f:: with SMTP id k15mr19069626ilh.108.1570221067965;
+	Fri, 04 Oct 2019 13:31:07 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190926223206.26850-1-schnitzeltony@gmail.com>
+In-Reply-To: <20190926223206.26850-1-schnitzeltony@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 4 Oct 2019 22:30:56 +0200
+Message-ID: <CALbNGRQ4g0rvAwedd8v+YH+GwGEwa_t=QioOERhx3qyNbrs_EA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	Kang Kai <kai.kang@windriver.com>
+Subject: Re: [meta-xfce][PATCH v2 1/2] catfish: upgrade 1.4.9 -> 1.4.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,32 +54,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2019 19:14:41 -0000
+X-List-Received-Date: Fri, 04 Oct 2019 20:31:07 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Maciej Pijanowski <maciej.pijanowski@3mdeb.com>
+On Fri, Sep 27, 2019 at 12:32 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+If xfce-patches require review these days: Kai can you take a look?
+If not: Ping
 
-smemcap is a tiny binary which allows capturing current state of the /proc
-for further offline analysis.
-
-Package it seperately so there is no need to install python runtime
-dependencies on the embedded system when not required.
----
- meta-oe/recipes-support/smem/smem_1.4.bb | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/meta-oe/recipes-support/smem/smem_1.4.bb b/meta-oe/recipes-support/smem/smem_1.4.bb
-index 519020f3b0d7..702217a33d3e 100644
---- a/meta-oe/recipes-support/smem/smem_1.4.bb
-+++ b/meta-oe/recipes-support/smem/smem_1.4.bb
-@@ -25,3 +25,7 @@ do_install() {
-         install -m 0644 ${S}/smem.8 ${D}/${mandir}/man8/
- }
- RDEPENDS_${PN} += "python-textutils python-compression python-shell python-codecs"
-+
-+PACKAGES =+ "smemcap"
-+
-+FILES_smemcap = "${bindir}/smemcap"
--- 
-2.7.4
-
+Andreas
 
