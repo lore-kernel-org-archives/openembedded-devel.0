@@ -1,24 +1,51 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CE0B7ED41
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
+	[209.85.222.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 72B2E7DE74
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2019 15:56:12 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x94FuC77011203
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  4 Oct 2019 16:31:39 +0000 (UTC)
+Received: by mail-qk1-f169.google.com with SMTP id h126so6331015qke.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 4 Oct 2019 08:56:13 -0700
-Received: from fidler.wrs.com (172.25.44.5) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 4 Oct 2019 08:56:12 -0700
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 4 Oct 2019 11:56:11 -0400
-Message-ID: <20191004155611.22562-1-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.22.0
+	Fri, 04 Oct 2019 09:31:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=3UuA+f7Ab7AvifmrHqzeLleV94nkpIpiRDCGOEa45YU=;
+	b=IxDWMe0SaG32CHdQLYQPkNlSvvrG/wvC+pMRnHGzpr0DQnoTBjxLNsoQm87Y3H4XTI
+	Go9R0SKtRIOfpf+MWJla1RXm0NAb7Zp8TVw3Q1x56dYFz7KyaFtvHDl0s5VGtfrmH81E
+	2P2Ebsp3wBpoInW7nqbLGhiDIOzOzWMvnnYrZTL9KZdNN4OdAkhwk2TlrWDi+veh/n1+
+	lf9RWVW7umyyc2lvMC2/YdHbUSS/DsfYh13e+OIU2jwmy3Xnuabxzu2G4d1IZD4K+1Eb
+	JPZa6jAmHI7QYU0tWHKV79LMo5D5NEiTbxpJYdSx5MMVgaFSuUqFkA2rXc9P5w8d/j0v
+	/XUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=3UuA+f7Ab7AvifmrHqzeLleV94nkpIpiRDCGOEa45YU=;
+	b=btmaoi+VP4IIL+Ph+IctitaY2HgRjxNsomlbpUhmUWx/mLI1ZaP6xlrRUnntoUb48o
+	IDbRIfvE/1KBDfQQgJV7+o9aBAnTZNn/57juAsuC9dYtevfRErl8SW2FVGrzGojnKi4R
+	xne8O/EKAyzez/gl3LrG2lBmuUCGfd7IHey0RmwkLCfSUg7CuLl1UcXKxgIbieym37AH
+	cwuSEWnCpFl1OsrzuwIm3B3HLvEfMUHBTgpQHgIt1GdaqrgNpW8aLisOKAtSoeziMKHV
+	TNDELElDnbZszRVfMcAxPNk1TZENNvJvmEc7/OZyMEYwjJC7zYA/JJ1hv0tkEH8a9/Cc
+	F/EQ==
+X-Gm-Message-State: APjAAAXfNALrtD8xO1W5SuWEaVVnqtMgt+kWp2hU6rDUtIfXPPa9wTlV
+	nbvhC81RGSZxr/EegklP5ZgGHcPi5fFdglxlRG4=
+X-Google-Smtp-Source: APXvYqywkE0oiaPBPZ/mnuOhgZ2IkEJMDsktLZzEaeMN0StUIbmHxSkdWpHgQVF/8LmIXHfWuc5yYKxyM+LhaT3hAwo=
+X-Received: by 2002:a37:6651:: with SMTP id a78mr11137599qkc.474.1570206699774;
+	Fri, 04 Oct 2019 09:31:39 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH] libteam: update from 1.28 to 1.29
+References: <20190927165605.1900768-1-adrian.ratiu@collabora.com>
+	<CAMKF1sqTmvwNDbXnvHvUfPVjq-hPLAQ6Yne=sph3Q-gqLGU3UA@mail.gmail.com>
+	<20190929124049.GB30130@localhost> <87ftkf9ery.fsf@collabora.com>
+	<CA+chaQeeZFnAAUbGFGHgypBF-O53pv1Gv7q8ZmjiOH95D5Wksw@mail.gmail.com>
+	<87ftk8kfb6.fsf@iwork.i-did-not-set--mail-host-address--so-tickle-me>
+In-Reply-To: <87ftk8kfb6.fsf@iwork.i-did-not-set--mail-host-address--so-tickle-me>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 4 Oct 2019 09:31:29 -0700
+Message-ID: <CAMKF1spptPUotLZSY2BLOL3u_z9NEVBUWL-tM7M2fxEcgpFuwA@mail.gmail.com>
+To: Adrian Ratiu <adrian.ratiu@collabora.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v3] renderdoc: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,33 +58,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2019 15:56:12 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Fri, 04 Oct 2019 16:31:39 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
----
- .../libteam/{libteam_1.28.bb => libteam_1.29.bb}                | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libteam/{libteam_1.28.bb => libteam_1.29.bb} (95%)
+Thanks Adrian
 
-diff --git a/meta-oe/recipes-support/libteam/libteam_1.28.bb b/meta-oe/recipes-support/libteam/libteam_1.29.bb
-similarity index 95%
-rename from meta-oe/recipes-support/libteam/libteam_1.28.bb
-rename to meta-oe/recipes-support/libteam/libteam_1.29.bb
-index b80bb4efa..821ca1938 100644
---- a/meta-oe/recipes-support/libteam/libteam_1.28.bb
-+++ b/meta-oe/recipes-support/libteam/libteam_1.29.bb
-@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/jpirko/libteam \
-            file://0001-team_basic_test.py-disable-RedHat-specific-test.patch \
-            file://run-ptest \
-            "
--SRCREV = "903950c7fcf28c32f4b62d9d1c07c0234e8378a2"
-+SRCREV = "e897f02bf2403d4859a99e090e34ea768b4c0540"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.22.0
+On Fri, Oct 4, 2019 at 2:52 AM Adrian Ratiu <adrian.ratiu@collabora.com>
+wrote:
 
+> Hi
+>
+> On Fri, 04 Oct 2019, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > This should have x11 in REQUIRED_DISTRO_FEATURES to fix:
+> >
+> > ERROR: Nothing PROVIDES 'libxcb' (but
+> > meta-oe/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb DEPENDS on
+> or
+> > otherwise requires it)
+> > libxcb was skipped: missing required distro feature 'x11' (not in
+> > DISTRO_FEATURES)
+> > ERROR: Required build target 'meta-world-pkgdata' has no buildable
+> > providers.
+> > Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
+> > 'renderdoc', 'libxcb']
+>
+> v4 of this patch was merged into master. I will send a new patch to add
+> the change you suggest. Thank you!
+>
+> >
+> > On Sun, Sep 29, 2019 at 7:46 PM Adrian Ratiu <adrian.ratiu@collabora.com
+> >
+> > wrote:
+> >
+> >> On Sun, 29 Sep 2019, Adrian Bunk <bunk@stusta.de> wrote:
+> >> > On Sat, Sep 28, 2019 at 12:48:10PM -0700, Khem Raj wrote:
+> >> >> On Fri, Sep 27, 2019 at 9:56 AM Adrian Ratiu <
+> >> adrian.ratiu@collabora.com> wrote:
+> >> >>...
+> >> >> > --- /dev/null
+> >> >> > +++
+> >>
+> b/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
+> >> >> > @@ -0,0 +1,48 @@
+> >> >> > +From 40511a6f4dc6311c8cf7f2954d1202ede55881ff Mon Sep 17 00:00:00
+> >> 2001
+> >> >> > +From: Adrian Ratiu <adrian.ratiu@collabora.com>
+> >> >> > +Date: Wed, 25 Sep 2019 19:31:14 +0300
+> >> >> > +Subject: [PATCH] (q)renderdoc/CMakeLists.txt: remove flag
+> >> unsupported by GCC
+> >> >> > +
+> >> >> > +-Wno-unknown-warning is not supported by GCC, only by Clang so we
+> >> >> > +remove it because newer GCC versions like 9.2.0 will complain,
+> older
+> >> >> > +versions would just ignore it.
+> >> >> > +
+> >> >> > +Upstream-Status: Pending [
+> >> https://github.com/baldurk/renderdoc/pull/1530]
+> >> >> > +
+> >> >>
+> >> >> gcc9 does support -Wno-unknown-warning perhaps you want
+> >> >> -Wno-error=unknown-warning
+> >> >>...
+> >> >> > +TARGET_CFLAGS += "-Wno-error=deprecated-copy"
+> >> >> > +
+> >> >>
+> >> >> this option is GCC specific mark it
+> >> >> TARGET_CFLAGS_append_toolchain-gcc
+> >> >>...
+> >> >
+> >> > Using -Wno-error always could solve both problems,
+> >> > and would also avoid similar problems in the future.
+> >>
+> >> That's a good idea, however I can't pass directly -Wno-error in the
+> >> recipe because of how the top-level CMakelists.txt is written: it always
+> >> *appends* -Werror to the flags, so it overwrites our -Wno-error.
+> >>
+> >> A better solution which has the same effect is to use
+> >> -DCMAKE_BUILD_TYPE=Release which prevents -Werror being appended at all
+> >> in the top-level CMakelists.txt (there is no other effect than this!)
+> >>
+> >> Thanks! Will send an updatet v4 soon.
+> >>
+> >> >
+> >> > cu
+> >> > Adrian
+> >> >
+> >> > --
+> >> >
+> >> >        "Is there not promise of rain?" Ling Tan asked suddenly out
+> >> >         of the darkness. There had been need of rain for many days.
+> >> >        "Only a promise," Lao Er said.
+> >> >                                        Pearl S. Buck - Dragon Seed
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+>
 
