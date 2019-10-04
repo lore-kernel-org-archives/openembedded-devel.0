@@ -1,18 +1,24 @@
-Return-Path: <adrian.ratiu@collabora.com>
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id 82DA37CD73
+Return-Path: <Ovidiu.Panait@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 31D077F2DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2019 11:40:22 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: aratiu) with ESMTPSA id B56AA29044E
-From: Adrian Ratiu <adrian.ratiu@collabora.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri,  4 Oct 2019 14:40:26 +0300
-Message-Id: <20191004114026.1705340-1-adrian.ratiu@collabora.com>
-X-Mailer: git-send-email 2.23.0
+	Fri,  4 Oct 2019 14:20:43 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x94EKh1s008708
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 4 Oct 2019 07:20:44 -0700
+Received: from otp-opanait-l1.corp.ad.wrs.com (128.224.124.169) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.468.0; Fri, 4 Oct 2019 07:20:37 -0700
+From: Ovidiu Panait <ovidiu.panait@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 4 Oct 2019 17:16:49 +0300
+Message-ID: <20191004141649.14409-1-ovidiu.panait@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe] [PATCH v2] renderdoc: add x11 to REQUIRED_DISTRO_FEATURES
+Subject: [meta-networking][PATCH 1/1] kea: Disable parallel install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,42 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2019 11:40:22 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 04 Oct 2019 14:20:43 -0000
+Content-Type: text/plain
 
-This recipe depends on having x11 enabled so we add it to fix:
+According to configure.ac, make install might fail when run with multiple jobs:
 
-ERROR: Nothing PROVIDES 'libxcb' (but
-meta-oe/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
-DEPENDS on or otherwise requires it)
-libxcb was skipped: missing required distro feature 'x11' (not in DISTRO_FEATURES)
+$ tail -15 log.do_configure
+...
+When running "make install" do not use any form of parallel or job
+server options (such as GNU make's -j option). Doing so may cause
+errors.
+...
 
-Signed-off-by: Adrian Ratiu <adrian.ratiu@collabora.com>
+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
 ---
+ meta-networking/recipes-connectivity/kea/kea_1.7.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Changes since v1:
-    - Added inherit distro_features_check otherwise the
-    REQUIRED_DISTRO_FEATURES var no-ops (oops!)
-
- meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
-index b6e0c92f6..c7e872409 100644
---- a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
-+++ b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
-@@ -14,7 +14,9 @@ DEPENDS += "virtual/libx11 virtual/libgl libxcb xcb-util-keysyms vim-native"
+diff --git a/meta-networking/recipes-connectivity/kea/kea_1.7.0.bb b/meta-networking/recipes-connectivity/kea/kea_1.7.0.bb
+index fb166df60..08e9923ba 100644
+--- a/meta-networking/recipes-connectivity/kea/kea_1.7.0.bb
++++ b/meta-networking/recipes-connectivity/kea/kea_1.7.0.bb
+@@ -60,3 +60,5 @@ FILES_${PN}-staticdev += "${libdir}/kea/hooks/*.a ${libdir}/hooks/*.a"
+ FILES_${PN} += "${libdir}/hooks/*.so"
  
- RDEPENDS_${PN} = "libxcb xcb-util-keysyms"
- 
--inherit cmake python3native
-+inherit cmake python3native distro_features_check
+ BBCLASSEXTEND += "native"
 +
-+REQUIRED_DISTRO_FEATURES = "x11"
- 
- python __anonymous () {
-     # only works on glibc systems
++PARALLEL_MAKEINST = ""
 -- 
-2.23.0
+2.20.1
 
 
