@@ -1,24 +1,24 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A0E9860720
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7CE0B7ED41
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2019 15:20:20 +0000 (UTC)
+	Fri,  4 Oct 2019 15:56:12 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x94FKLWN029209
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x94FuC77011203
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 4 Oct 2019 08:20:21 -0700 (PDT)
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 4 Oct 2019 08:20:19 -0700
-From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
+	Fri, 4 Oct 2019 08:56:13 -0700
+Received: from fidler.wrs.com (172.25.44.5) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 4 Oct 2019 08:56:12 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 4 Oct 2019 11:20:18 -0400
-Message-ID: <20191004152018.32461-1-Trevor.Gamblin@windriver.com>
-X-Mailer: git-send-email 2.21.0
+Date: Fri, 4 Oct 2019 11:56:11 -0400
+Message-ID: <20191004155611.22562-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] freeradius: mark as incompatible with armv5
+Subject: [PATCH] libteam: update from 1.28 to 1.29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,45 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2019 15:20:20 -0000
+X-List-Received-Date: Fri, 04 Oct 2019 15:56:12 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-
-Freeradius fails to build for armv5:
-
-| *** Warning: Linking the executable build/bin/local/radeapclient against the loadable module
-| *** libfreeradius-server.so is not portable!
-|
-| *** Warning: Linking the executable build/bin/local/radeapclient against the loadable module
-| *** libfreeradius-eap.so is not portable!
-path -Wl,/yow-lpggp31/tgamblin/freeradius.build/tmp-glibc/work/armv5e-oe-linux-gnueabi/freeradius/3.0.19-r0/git/build/lib/local//.libs
-/arm-oe-linux-gnueabi/9.2.0/ld: build/lib/local/.libs/libfreeradius-radius.so: undefined reference to `__atomic_compare_exchange_8'
-/arm-oe-linux-gnueabi/9.2.0/ld: build/lib/local/.libs/libfreeradius-radius.so: undefined reference to `__atomic_load_8'
-/arm-oe-linux-gnueabi/9.2.0/ld: build/lib/local/.libs/libfreeradius-radius.so: undefined reference to `__atomic_store_8'
-| collect2: error: ld returned 1 exit status
-| scripts/boiler.mk:630: recipe for target 'build/bin/local/radeapclient' failed
-
-gcc does not supply 64-bit atomic operations, so freeradius cannot
-be built. Marking as incompatible for armv5.
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- .../recipes-connectivity/freeradius/freeradius_3.0.19.bb        | 2 ++
- 1 file changed, 2 insertions(+)
+ .../libteam/{libteam_1.28.bb => libteam_1.29.bb}                | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libteam/{libteam_1.28.bb => libteam_1.29.bb} (95%)
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb
-index ded1a67ff..5f5556de3 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb
-@@ -228,3 +228,5 @@ FILES_${PN} =+ "${libdir}/rlm_*.so* ${libdir}/proto_*so*"
+diff --git a/meta-oe/recipes-support/libteam/libteam_1.28.bb b/meta-oe/recipes-support/libteam/libteam_1.29.bb
+similarity index 95%
+rename from meta-oe/recipes-support/libteam/libteam_1.28.bb
+rename to meta-oe/recipes-support/libteam/libteam_1.29.bb
+index b80bb4efa..821ca1938 100644
+--- a/meta-oe/recipes-support/libteam/libteam_1.28.bb
++++ b/meta-oe/recipes-support/libteam/libteam_1.29.bb
+@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/jpirko/libteam \
+            file://0001-team_basic_test.py-disable-RedHat-specific-test.patch \
+            file://run-ptest \
+            "
+-SRCREV = "903950c7fcf28c32f4b62d9d1c07c0234e8378a2"
++SRCREV = "e897f02bf2403d4859a99e090e34ea768b4c0540"
  
- RDEPENDS_${PN} += "perl"
- RDEPENDS_${PN}-utils = "${PN} perl"
-+
-+COMPATIBLE_HOST_armv5 = "null"
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.21.0
+2.22.0
 
 
