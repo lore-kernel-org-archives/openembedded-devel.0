@@ -1,51 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
-	[209.85.222.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 72B2E7DE74
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id EC33D6B512
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2019 16:31:39 +0000 (UTC)
-Received: by mail-qk1-f169.google.com with SMTP id h126so6331015qke.10
+	Fri,  4 Oct 2019 17:41:32 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id q5so4279796pfg.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Oct 2019 09:31:40 -0700 (PDT)
+	Fri, 04 Oct 2019 10:41:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=3UuA+f7Ab7AvifmrHqzeLleV94nkpIpiRDCGOEa45YU=;
-	b=IxDWMe0SaG32CHdQLYQPkNlSvvrG/wvC+pMRnHGzpr0DQnoTBjxLNsoQm87Y3H4XTI
-	Go9R0SKtRIOfpf+MWJla1RXm0NAb7Zp8TVw3Q1x56dYFz7KyaFtvHDl0s5VGtfrmH81E
-	2P2Ebsp3wBpoInW7nqbLGhiDIOzOzWMvnnYrZTL9KZdNN4OdAkhwk2TlrWDi+veh/n1+
-	lf9RWVW7umyyc2lvMC2/YdHbUSS/DsfYh13e+OIU2jwmy3Xnuabxzu2G4d1IZD4K+1Eb
-	JPZa6jAmHI7QYU0tWHKV79LMo5D5NEiTbxpJYdSx5MMVgaFSuUqFkA2rXc9P5w8d/j0v
-	/XUA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=uTZL5DT63RB2mYSRrHmREe017YaRanwZzFMHacVq9pY=;
+	b=GwULCBelAKblrIcv+IKPx87cT6d8l7neVKlZD209iysdKiEP16NaFUDeYvx3Lxehvh
+	W/UdA+GF6A7CgIKpi3rXqw+oLRuD6Teh7x+5R+IA+PNiX+Gn3SuAmjbR6dJ2TGGBTEdB
+	AuMBYe1EEN6kf70QSYUGEBKNorpZcQHJTCV6uW3EXa+v61fkpXjQDh/Yb+X5eApFeXPs
+	SlsWd9f7415CKDB17PMcTnFQEmplEeIW5jChyRhMQmeHTr1bRwvbrw2g6wS6I2/qmnov
+	c4kcbuxZIsibdJsJaSh0dY2xv9fFBE0/53D69rsu6ajy5a7cXXMvLtEWUo0VJ4x6pdfl
+	wUAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=3UuA+f7Ab7AvifmrHqzeLleV94nkpIpiRDCGOEa45YU=;
-	b=btmaoi+VP4IIL+Ph+IctitaY2HgRjxNsomlbpUhmUWx/mLI1ZaP6xlrRUnntoUb48o
-	IDbRIfvE/1KBDfQQgJV7+o9aBAnTZNn/57juAsuC9dYtevfRErl8SW2FVGrzGojnKi4R
-	xne8O/EKAyzez/gl3LrG2lBmuUCGfd7IHey0RmwkLCfSUg7CuLl1UcXKxgIbieym37AH
-	cwuSEWnCpFl1OsrzuwIm3B3HLvEfMUHBTgpQHgIt1GdaqrgNpW8aLisOKAtSoeziMKHV
-	TNDELElDnbZszRVfMcAxPNk1TZENNvJvmEc7/OZyMEYwjJC7zYA/JJ1hv0tkEH8a9/Cc
-	F/EQ==
-X-Gm-Message-State: APjAAAXfNALrtD8xO1W5SuWEaVVnqtMgt+kWp2hU6rDUtIfXPPa9wTlV
-	nbvhC81RGSZxr/EegklP5ZgGHcPi5fFdglxlRG4=
-X-Google-Smtp-Source: APXvYqywkE0oiaPBPZ/mnuOhgZ2IkEJMDsktLZzEaeMN0StUIbmHxSkdWpHgQVF/8LmIXHfWuc5yYKxyM+LhaT3hAwo=
-X-Received: by 2002:a37:6651:: with SMTP id a78mr11137599qkc.474.1570206699774;
-	Fri, 04 Oct 2019 09:31:39 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190927165605.1900768-1-adrian.ratiu@collabora.com>
-	<CAMKF1sqTmvwNDbXnvHvUfPVjq-hPLAQ6Yne=sph3Q-gqLGU3UA@mail.gmail.com>
-	<20190929124049.GB30130@localhost> <87ftkf9ery.fsf@collabora.com>
-	<CA+chaQeeZFnAAUbGFGHgypBF-O53pv1Gv7q8ZmjiOH95D5Wksw@mail.gmail.com>
-	<87ftk8kfb6.fsf@iwork.i-did-not-set--mail-host-address--so-tickle-me>
-In-Reply-To: <87ftk8kfb6.fsf@iwork.i-did-not-set--mail-host-address--so-tickle-me>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=uTZL5DT63RB2mYSRrHmREe017YaRanwZzFMHacVq9pY=;
+	b=OZcjZweFNHDqV6LhDfzK+Ygq1YsTTP5iEJpOkY+WiOVLHAfiY/3/iZ7jV9t9XF4CN3
+	kYPC8/6LsrUS4vJ226O0ZeEgjhAjXcidlSuIstoYDrywGLCMOw0ehzBvU0ynPoF+kxjE
+	NpiQoELYfdvgigXzealDNFTxxozIgfh0jpb9oOECBIAT6u4E2e3vKFcHYrRnYu95R7zi
+	I/+S0zJPNLzAe7lTSLXKh8+yiKHcc2V0IZObK1O6q6v209lRSp9Jsa2uAOprKE78NQlA
+	padxREeVqsA8hoIcbJngITDad4STn2z/QVjtaIm83Dj2+RUXuc50vN9ZjbyNhb12Qssy
+	bxnw==
+X-Gm-Message-State: APjAAAVRR7bh+ZLtY5PVULPUZ7sjEW6vhZhXP/V36C9o/mBL/10Xq670
+	irgDtRN1nT/sr8K32qxQC/3MnAsHsU4=
+X-Google-Smtp-Source: APXvYqz05vqinO649vW8HfFrHjrylQAl1U7tRu+47tt7QbBbeqBMGL3Ai6z/VJxk7IxdeiBVadBkWw==
+X-Received: by 2002:a63:1d02:: with SMTP id d2mr3408062pgd.190.1570210892791; 
+	Fri, 04 Oct 2019 10:41:32 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::7275])
+	by smtp.gmail.com with ESMTPSA id p11sm6357755pgb.1.2019.10.04.10.41.32
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 04 Oct 2019 10:41:32 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 4 Oct 2019 09:31:29 -0700
-Message-ID: <CAMKF1spptPUotLZSY2BLOL3u_z9NEVBUWL-tM7M2fxEcgpFuwA@mail.gmail.com>
-To: Adrian Ratiu <adrian.ratiu@collabora.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] renderdoc: add new recipe
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  4 Oct 2019 10:41:24 -0700
+Message-Id: <20191004174124.167120-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] xscreensaver: Remove xserver-nodm-init rdep
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,102 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2019 16:31:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 04 Oct 2019 17:41:34 -0000
+Content-Transfer-Encoding: 8bit
 
-Thanks Adrian
+this seems to be not required anyway
 
-On Fri, Oct 4, 2019 at 2:52 AM Adrian Ratiu <adrian.ratiu@collabora.com>
-wrote:
+Fixes
+ERROR: xscreensaver different signature for task do_package_write_ipk.sigdata between qemux86copy and qemux86
+Hash for dependent task x11-common/xserver-nodm-init_3.0.bb:do_packagedata changed from de0944d4fcaeed0efdb143a18cc406bd043469ae291de1704a999bc878a7691c to ba7bdaf35860ba5bf5a5f4ce06379a77c88eb9806e09a1fc5373933888a46507
 
-> Hi
->
-> On Fri, 04 Oct 2019, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > This should have x11 in REQUIRED_DISTRO_FEATURES to fix:
-> >
-> > ERROR: Nothing PROVIDES 'libxcb' (but
-> > meta-oe/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb DEPENDS on
-> or
-> > otherwise requires it)
-> > libxcb was skipped: missing required distro feature 'x11' (not in
-> > DISTRO_FEATURES)
-> > ERROR: Required build target 'meta-world-pkgdata' has no buildable
-> > providers.
-> > Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
-> > 'renderdoc', 'libxcb']
->
-> v4 of this patch was merged into master. I will send a new patch to add
-> the change you suggest. Thank you!
->
-> >
-> > On Sun, Sep 29, 2019 at 7:46 PM Adrian Ratiu <adrian.ratiu@collabora.com
-> >
-> > wrote:
-> >
-> >> On Sun, 29 Sep 2019, Adrian Bunk <bunk@stusta.de> wrote:
-> >> > On Sat, Sep 28, 2019 at 12:48:10PM -0700, Khem Raj wrote:
-> >> >> On Fri, Sep 27, 2019 at 9:56 AM Adrian Ratiu <
-> >> adrian.ratiu@collabora.com> wrote:
-> >> >>...
-> >> >> > --- /dev/null
-> >> >> > +++
-> >>
-> b/meta-oe/recipes-graphics/renderdoc/renderdoc/0002-q-renderdoc-CMakeLists.txt-remove-flag-unsupported-b.patch
-> >> >> > @@ -0,0 +1,48 @@
-> >> >> > +From 40511a6f4dc6311c8cf7f2954d1202ede55881ff Mon Sep 17 00:00:00
-> >> 2001
-> >> >> > +From: Adrian Ratiu <adrian.ratiu@collabora.com>
-> >> >> > +Date: Wed, 25 Sep 2019 19:31:14 +0300
-> >> >> > +Subject: [PATCH] (q)renderdoc/CMakeLists.txt: remove flag
-> >> unsupported by GCC
-> >> >> > +
-> >> >> > +-Wno-unknown-warning is not supported by GCC, only by Clang so we
-> >> >> > +remove it because newer GCC versions like 9.2.0 will complain,
-> older
-> >> >> > +versions would just ignore it.
-> >> >> > +
-> >> >> > +Upstream-Status: Pending [
-> >> https://github.com/baldurk/renderdoc/pull/1530]
-> >> >> > +
-> >> >>
-> >> >> gcc9 does support -Wno-unknown-warning perhaps you want
-> >> >> -Wno-error=unknown-warning
-> >> >>...
-> >> >> > +TARGET_CFLAGS += "-Wno-error=deprecated-copy"
-> >> >> > +
-> >> >>
-> >> >> this option is GCC specific mark it
-> >> >> TARGET_CFLAGS_append_toolchain-gcc
-> >> >>...
-> >> >
-> >> > Using -Wno-error always could solve both problems,
-> >> > and would also avoid similar problems in the future.
-> >>
-> >> That's a good idea, however I can't pass directly -Wno-error in the
-> >> recipe because of how the top-level CMakelists.txt is written: it always
-> >> *appends* -Werror to the flags, so it overwrites our -Wno-error.
-> >>
-> >> A better solution which has the same effect is to use
-> >> -DCMAKE_BUILD_TYPE=Release which prevents -Werror being appended at all
-> >> in the top-level CMakelists.txt (there is no other effect than this!)
-> >>
-> >> Thanks! Will send an updatet v4 soon.
-> >>
-> >> >
-> >> > cu
-> >> > Adrian
-> >> >
-> >> > --
-> >> >
-> >> >        "Is there not promise of rain?" Ling Tan asked suddenly out
-> >> >         of the darkness. There had been need of rain for many days.
-> >> >        "Only a promise," Lao Er said.
-> >> >                                        Pearl S. Buck - Dragon Seed
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
+index 3a88f12ec8..c2b345da6a 100644
+--- a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
++++ b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
+@@ -15,7 +15,7 @@ SRC_URI += " \
+ 
+ DEPENDS = "intltool-native libx11 libxext libxt libxft glib-2.0-native bc-native"
+ # These are only needed as part of the stopgap screensaver implementation:
+-RDEPENDS_${PN} += "xserver-nodm-init liberation-fonts"
++RDEPENDS_${PN} += "liberation-fonts"
+ 
+ inherit systemd perlnative pkgconfig gettext autotools-brokensep distro_features_check
+ 
+-- 
+2.23.0
+
 
