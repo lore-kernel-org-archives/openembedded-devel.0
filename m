@@ -1,50 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com
-	[209.85.222.171])
-	by mail.openembedded.org (Postfix) with ESMTP id CBC197E601
+Return-Path: <Trevor.Gamblin@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 887567F34B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Oct 2019 20:35:43 +0000 (UTC)
-Received: by mail-qk1-f171.google.com with SMTP id h126so7010912qke.10
+	Sat,  5 Oct 2019 02:53:56 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x952rsXZ006154
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Oct 2019 13:35:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=AkkjL8nkeKTmgZMk41sdRM84KdTjRz9MMyrxmvlEy24=;
-	b=LXO92DD+2mXpHaDDRZQt6xpAms1VXdTPk0dFnxS4vlpSOkfsrkc3YP2m9qb4Y0vsfV
-	CWZQLi3sAzdvq4EdMc+DOpnypLx/cIWdmsCZTd34HWVXY+406luzJPlmZsPI/+AD544J
-	wbSSBxTCR/YczkKPJIhw/wUspLHk/rder0W3Dmg+R8O1IMKDjjvWGnOUcMR83VvN6Ilm
-	//R8bB0/T1k66YauTQzudGG5feK/Jzw907XFXhrByj/BV81Hfyda3KHen9inX/Kk8uz/
-	ahm3+Z2V6S2KwZ2k26NxJeVPoV5ApUOqGPUMcJb5mOE5qWQXpt/Na8JF0NaciEx21reJ
-	Qi8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=AkkjL8nkeKTmgZMk41sdRM84KdTjRz9MMyrxmvlEy24=;
-	b=EOVls0Q1/OOdj3iQEhxjs9SP4/JlG/tb4euYj6Uv6YKY2IHxCZryd9MwN5yNpRWOT6
-	adkE2zmRpXsgLMVG9YmO1uQtdr0Gg5IO2vcVSVFoxoevEoidQHe8c6HA9BSRupXKiOru
-	UmBch5ejO80S0ZSSK8RO2SAZv/wZ8W3RaOUiGKLwyiQauKrTF/R5Ll2P8+/pJPjF5roS
-	jhGMqUNK9iaY9UgXRDLnTlO80y9yENlLEWT/CUcxqN8jrW3mG337oTIlUA5NDafvnskY
-	AsT9ZbjsXf5uF/8Spyjh7RqxwluxUw7atjQSLcIK2k3zwEipw02A/3uuH8evo5yayskw
-	epQQ==
-X-Gm-Message-State: APjAAAVxm7nbz+y7FccfOXCMGNMg9d2nHaEFw2q+9kOl8PCo98EuKFJP
-	LmEle0vLkdw+9LPSnkbKyxOv7JqAa7hVmo4ixDk=
-X-Google-Smtp-Source: APXvYqyeuTkMHizeJYcgKuGPeF6UHuY4mUMkKgMV/5ULGHR4Y9sFtIlYY3u5tpsqlHBUy+6+yWhm09rvXnDbel/3JXE=
-X-Received: by 2002:a37:5cc1:: with SMTP id
-	q184mr12327865qkb.212.1570221344191; 
-	Fri, 04 Oct 2019 13:35:44 -0700 (PDT)
+	Fri, 4 Oct 2019 19:53:54 -0700 (PDT)
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 4 Oct 2019 19:53:54 -0700
+From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 4 Oct 2019 22:53:53 -0400
+Message-ID: <20191005025353.6028-1-Trevor.Gamblin@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <20190926223206.26850-1-schnitzeltony@gmail.com>
-	<20190926223206.26850-2-schnitzeltony@gmail.com>
-	<CALbNGRTwfXEP0skCASQRq86R78ugkZw5NJGMFTgKhtL_Ohu0hw@mail.gmail.com>
-In-Reply-To: <CALbNGRTwfXEP0skCASQRq86R78ugkZw5NJGMFTgKhtL_Ohu0hw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 4 Oct 2019 13:35:33 -0700
-Message-ID: <CAMKF1sqYP5bee9=mcwLpiRU8rcbMWEdGz21y8iENkBtJm+a6nQ@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xfce][PATCH v2 2/2] xfce4-panel: upgrade 4.14.0 -> 4.14.1
+Subject: [meta-gnome][PATCH] gnome-desktop3: upgrade from 3.32.0 to 3.34.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,38 +31,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Oct 2019 20:35:44 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 05 Oct 2019 02:53:57 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Fri, Oct 4, 2019 at 1:31 PM Andreas M=C3=BCller <schnitzeltony@gmail.com=
->
-wrote:
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
 
-> On Fri, Sep 27, 2019 at 12:32 AM Andreas M=C3=BCller <schnitzeltony@gmail=
-.com>
-> wrote:
-> >
-> > * important bugfix release: systray draws icons properly when
-> compositing is
-> >   disabled
-> > * while at it renumber patches
-> >
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> If xfce-patches require review these days: Kai can you take a look?
-> If not: Ping
+Update to fix CVE-2019-11460 as well as add various bugfixes
+from upstream.
 
-Since they have been pending for a while
-I still wanted to give them a go for a build and see if all is okay. Still
-waiting on Kai to review them
+CVE: CVE-2019-11460
 
->
->
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ .../{gnome-desktop3_3.32.0.bb => gnome-desktop3_3.34.0.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop3_3.32.0.bb => gnome-desktop3_3.34.0.bb} (88%)
+
+diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.0.bb
+similarity index 88%
+rename from meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
+rename to meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.0.bb
+index 85ee5e6cf..77aa3fb61 100644
+--- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
++++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.0.bb
+@@ -14,8 +14,8 @@ inherit gnomebase pkgconfig upstream-version-is-even gobject-introspection distr
+ REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+ UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+ 
+-SRC_URI[archive.md5sum] = "e423ed6d648c6c4f9798fa9cd9ea8d99"
+-SRC_URI[archive.sha256sum] = "a6393dc5fc29fc0652ac84c73b3da205d0b0168128c4cf6d27797a08f3d07b54"
++SRC_URI[archive.md5sum] = "3149bbd12eaf6f4420b1a999131ec470"
++SRC_URI[archive.sha256sum] = "8d331ee655c1d56b2b97562a07c7a7598ff6706a11ff1cdce97423ebc6b62426"
+ 
+ SRC_URI += " \
+     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
+-- 
+2.21.0
+
 
