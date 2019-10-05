@@ -1,53 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CBBF7DF61
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
+	[209.85.222.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 756EF7E3BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Oct 2019 16:55:17 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id z12so5535350pgp.9
+	Sat,  5 Oct 2019 16:57:01 +0000 (UTC)
+Received: by mail-qk1-f182.google.com with SMTP id y189so8845737qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Oct 2019 09:55:18 -0700 (PDT)
+	Sat, 05 Oct 2019 09:57:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=atTOWQ9GWeYgNtl2YS3CrbZxyiBz5MTH7KM6faX0Di8=;
-	b=f8YQuDUwVZ2MYqZDR6v5gULlEu2x/rqeC9q/UHvUfr4BA6TJ0GgBhl4onBSfKMJass
-	x2V9/ewn9JPgEAH9F9nuU8O9xPovqE3z5GvPpcR+Hj6SR7f5Ju7R9P/LoTcIIjN3JUG7
-	NamdjxZXCCFoBp111dkXTzXXpjZz4xM/qWaC+/dnPvjfC68J5nu6LY8gu848LI5eUMgV
-	c9O+UaV/ccoII+ixBn3KapBdvV+go4QTUOxzM6eHEEIyTe68W2OwUviHwgtNX4WhauoB
-	ZgXWQnqKTQk37dJma98bgP9cW7gFU5Xk1K9REVgtsC1G6Jji+AYiKMjx2AUTLBrUY41a
-	c8TA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=UO53qJH7VcDI4gQN4f07WH4boQWhbuA4uj41Tg8mkdo=;
+	b=REbPHh+XrO5grtEn68WuskrFGJblR9f6FY0sCrb9D5E41ZyciHlAaKs4i9FpEmoPSg
+	TtbmaBpkjfTWBKKrsb9ZmNHFCRaM/GMZuyTEgc9z8T1UctYOBMwa+nlC5QXbLd9x3D0F
+	yqhpaOiifDB80UKU15mtoIo1E8ckxDjsrsfsMpJGk1b1NRRoro7P5vEdPfZUIgXsvZRH
+	O1HKbwQEK4JLA5Ihn7W+/5Od+YLrpyxHaZVj2DhmSMNEsEqm23e0Xw6C0D383WdFFZwx
+	eFfRHEYgkwW9gilLbUod+7UWkdIu9icAV9g095S4PdwWOks2sjdt2pRX9ZKffWWp+vHh
+	9hAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=atTOWQ9GWeYgNtl2YS3CrbZxyiBz5MTH7KM6faX0Di8=;
-	b=SuCzufwELptO1GY35lHbL0FHyt1cwBUGGiFclyXA1tlKV44+SE1iwCQFZWLtNbpu6a
-	/O9F0yKb2bNam7ynXyf8bg0jPcgALBkotWgqgAbH3s3aX7lpiVRQw0Eu92CHu5LorjPA
-	KX4oUFI03RhKY3vJLOJ59iLaqpZQlneCq0waCd3mSmkpgd855LnsiK3OeYuWrF9Ml7Ju
-	57MevPq+IMf24uIefWt9ssb+t/ChrtAWty/3lu3q4moMZGzCJlNGIHSyri6bIj8V0OFy
-	LJKRy0Yt270uDoaT6dl1xhf6o+rGA6Yk41dOES3gjkZeLFMfF1ZxBUex3RfygOzv4SQ7
-	OBCg==
-X-Gm-Message-State: APjAAAX4Smqj2nTkWLVEUhkhZoNQlLqTe1yDJUw5Jw8DxzlZCniS0qNd
-	VS+vPW5MpQwjsQun5fr4CvyCtZDMZNw=
-X-Google-Smtp-Source: APXvYqxMoTAvzNBAmKzDc9ht5O8xxDqCcrndP2yeJgJos4zUmWg1gFP3H/QE0Cqpb2UACona33MIlQ==
-X-Received: by 2002:a63:40c7:: with SMTP id
-	n190mr21533909pga.446.1570294517605; 
-	Sat, 05 Oct 2019 09:55:17 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::7275])
-	by smtp.gmail.com with ESMTPSA id
-	c64sm10648338pfc.19.2019.10.05.09.55.16
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 05 Oct 2019 09:55:17 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  5 Oct 2019 09:54:59 -0700
-Message-Id: <20191005165459.1363427-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191005165459.1363427-1-raj.khem@gmail.com>
-References: <20191005165459.1363427-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=UO53qJH7VcDI4gQN4f07WH4boQWhbuA4uj41Tg8mkdo=;
+	b=a9Jdu/O3WysuJS2GWw/3mYurrroP3gG+AR/6BnFruY6y+N+841x0iCqaWufhux7Szo
+	TzdvPUswkHaOeei5qqnqwcwIC4XUwDP2ZzYH7EZHEETrhag1pQsJbxFTQYLHk0Mg0BCt
+	OjBpY5/bJQPlzeChh+CccEVBXfbI5Ay5C7KsdsArEXrSW0j8lYE6FR6cLqq5Wu7FcqMc
+	OYJ5kUPSQcsvS/Syn2WPGlBZlw9lIi+DRJmyqir+/uDV+qvesZC7f5gVoieQYAFGlM12
+	ctyqI3V299KiCQ4lfux3phvysIEfBoUUhW+ItrbnoMzHPi0w9n71wSlXaBiOMwMA114+
+	Zbcw==
+X-Gm-Message-State: APjAAAUlwA5rcDqR5a4XuDFris7ISCdjWy7YTQ4MAulkk//c2HsdRVSt
+	BfaMMOWSrx21KQ6BPuwpBJj4pUE9cP6HED/rBgM=
+X-Google-Smtp-Source: APXvYqy7an/WVCEI2To7Y/UOhIv4ggwDjS+BIo9Q0ttmdPKcfSUULmzeE5KzueoDWPSwAOUqr+H3xs3neL6eWO44C1c=
+X-Received: by 2002:a37:5d83:: with SMTP id r125mr16316127qkb.9.1570294622054; 
+	Sat, 05 Oct 2019 09:57:02 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/3] fio: Fix build when march is armv7ve
+References: <1569632199-7446-1-git-send-email-denis@denix.org>
+	<20190929124339.GC30130@localhost> <20190929162007.GZ30018@denix.org>
+	<20190929181449.GD30130@localhost>
+	<59a54a48-0e0f-8cdf-f51b-0e5fdd70744e@gmail.com>
+In-Reply-To: <59a54a48-0e0f-8cdf-f51b-0e5fdd70744e@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 5 Oct 2019 09:56:35 -0700
+Message-ID: <CAMKF1sp94wxzUrxb_t7FdzvcLHye1pr67S3YXY31o5EHd_HmDQ@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: Denys Dmytriyenko <denys@ti.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [thud][PATCH] mariadb: update SRC_URI, as 5.5.64 has moved to archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,63 +58,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Oct 2019 16:55:17 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 05 Oct 2019 16:57:01 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...ch-arm-Consider-armv7ve-arch-as-well.patch | 28 +++++++++++++++++++
- meta-oe/recipes-benchmark/fio/fio_3.16.bb     |  1 +
- 2 files changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/fio/files/0001-arch-arm-Consider-armv7ve-arch-as-well.patch
+On Sat, Oct 5, 2019 at 9:12 AM akuster808 <akuster808@gmail.com> wrote:
+>
+>
+>
+> On 9/29/19 11:14 AM, Adrian Bunk wrote:
+> > On Sun, Sep 29, 2019 at 12:20:07PM -0400, Denys Dmytriyenko wrote:
+> >> On Sun, Sep 29, 2019 at 03:43:39PM +0300, Adrian Bunk wrote:
+> >>> On Fri, Sep 27, 2019 at 08:56:39PM -0400, Denys Dmytriyenko wrote:
+> >>>> From: Denys Dmytriyenko <denys@ti.com>
+> >>>>
+> >>>> The old URL now gives 404 Not Found
+> >>>> ...
+> >>>> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
+> >>>> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+> >>>> @@ -4,7 +4,7 @@ SECTION = "libs"
+> >>>>  LICENSE = "GPLv2"
+> >>>>  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+> >>>>
+> >>>> -SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
+> >>>> +SRC_URI = "http://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+> >>>> ...
+> >>> This change should first go into master (and also warrior).
+> >> Yeah, let me just go downgrade master and warrior to this old version,
+> >> so I can fix the download URL...
+> > archive.mariadb.org has all versions, including some that are even more
+> > recent than the version currently in master.
+> >
+> > Not changing the URL in master now will only bring us the same problem
+> > in zeus later.
+>
+> Currently Thud is broken and needs this fix. Being proactive to avoid a
+> future issue should not be a reason not to take this patch.
+>
 
-diff --git a/meta-oe/recipes-benchmark/fio/files/0001-arch-arm-Consider-armv7ve-arch-as-well.patch b/meta-oe/recipes-benchmark/fio/files/0001-arch-arm-Consider-armv7ve-arch-as-well.patch
-new file mode 100644
-index 0000000000..983a76fb6d
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/fio/files/0001-arch-arm-Consider-armv7ve-arch-as-well.patch
-@@ -0,0 +1,28 @@
-+From 2af58909cd9f2862d1dc07836e201361a2cd8d5d Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 5 Oct 2019 08:53:22 -0700
-+Subject: [PATCH] arch-arm: Consider armv7ve arch as well
-+
-+Upstream-Status: Submitted []
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ arch/arch-arm.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/arch/arch-arm.h b/arch/arch-arm.h
-+index 78cb2ebe..4f722967 100644
-+--- a/arch/arch-arm.h
-++++ b/arch/arch-arm.h
-+@@ -11,7 +11,7 @@
-+ #define nop             __asm__ __volatile__("mov\tr0,r0\t@ nop\n\t")
-+ #define read_barrier()	__asm__ __volatile__ ("" : : : "memory")
-+ #define write_barrier()	__asm__ __volatile__ ("" : : : "memory")
-+-#elif defined(__ARM_ARCH_7A__) || defined(__ARM_ARCH_8A__)
-++#elif defined(__ARM_ARCH_7A__) || defined(__ARM_ARCH_8A__) || defined(__ARM_ARCH_7VE__)
-+ #define	nop		__asm__ __volatile__ ("nop")
-+ #define read_barrier()	__sync_synchronize()
-+ #define write_barrier()	__sync_synchronize()
-+-- 
-+2.23.0
-+
-diff --git a/meta-oe/recipes-benchmark/fio/fio_3.16.bb b/meta-oe/recipes-benchmark/fio/fio_3.16.bb
-index 0db4a2e878..adab618780 100644
---- a/meta-oe/recipes-benchmark/fio/fio_3.16.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_3.16.bb
-@@ -24,6 +24,7 @@ PACKAGECONFIG[numa] = ",--disable-numa,numactl"
- SRCREV = "92f75708b530989fdb13b50be6604f44b80d038d"
- SRC_URI = "git://git.kernel.dk/fio.git \
-           file://0001-update-the-interpreter-paths.patch \
-+          file://0001-arch-arm-Consider-armv7ve-arch-as-well.patch \
- "
- 
- S = "${WORKDIR}/git"
--- 
-2.23.0
+using archive.mariadb.org makes sense for master too, so I have gone
+and adapted the patch to apply to master as well. however, it wont be
+a straight backport for thud so you have apply the proposed patch as
+such to thud. What is done on warrior needs to be figured out as well.
+see
 
+https://patchwork.openembedded.org/patch/165527/
+
+
+> - armin
+> >
+> >> Denys
+> > cu
+> > Adrian
+> >
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
