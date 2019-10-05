@@ -1,53 +1,47 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
-	[209.85.214.172])
-	by mail.openembedded.org (Postfix) with ESMTP id C02E27DE36
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Oct 2019 17:34:31 +0000 (UTC)
-Received: by mail-pl1-f172.google.com with SMTP id d22so4679195pll.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Oct 2019 10:34:33 -0700 (PDT)
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E1F66D666;
+	Sat,  5 Oct 2019 17:44:29 +0000 (UTC)
+Received: by mail-pg1-f178.google.com with SMTP id e1so5599977pgj.6;
+	Sat, 05 Oct 2019 10:44:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=+t0vsU53DhbAXQdC3o38cFj0VtC+1ALG8F6W5Jhopts=;
-	b=Y2e2HcEkNYn3d8KzZ0EGGw4Lz5/yYolwqa9w+alj9mE6G9OtDc1HBzZ0EpcP3ZcuUH
-	O0xP2VAki45z3j3od26jEBnuUxPB14Qfuw6IWx2ayfIctX/MuxODrzoEnk5eNtHaBisa
-	E09zrSHvzBt6ytMMtr/84OEXZ90Ln37xosY7vMfwrJN1D4V4/XMOvfJCvEuZic3vlv6V
-	MjbHyHMsIheZeVGsgOFSgKlx4isoC9mqIFTr1+8LQTSw3gkSdeCTYn+szNL8YhC1+5V6
-	z3kdZMSC0CjBThuXvdKczkLxDLA9jNTp6xQyppg3ojRCR0YJXrWSdTVRotuUnmFe5UJ2
-	McQg==
+	h=to:from:subject:openpgp:autocrypt:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=P6Psbn7zyP1TvAwlp5b23AR5dYKVzqdxZhSvKrzOmX8=;
+	b=HhuynY4yGKOwxSyAnUnark7yJLyhsjDq2Htsay+HF2D4Uy9QpOKnBu7260WZUtfbwd
+	5mLnSs7IHhw7IQAdhgzvt2pEOWSzhgjDRso4nZMWs3hCQe8xfVvf/WBuV6jXIhW3dzRP
+	Iz3NjQMdfp/ZaMuymb9QvNdKgiy8DusbYFa4EyeczCie1J3eE7MvGnC6Hj9v1s8ONVLx
+	6UeWwMerWEwFVhSws22s/clm8uObRPCT1oZmo6wtIAZ8F3KkV9RcCVz5LfnJJGeSiK2c
+	zOiTQeWblkw+n22iAwACgl6EMOFiVKAQ4bs5oXn5j1uPrpL86wfPAz/bigi7UfHdELiB
+	tIPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=+t0vsU53DhbAXQdC3o38cFj0VtC+1ALG8F6W5Jhopts=;
-	b=h8azmOX6iYeaM1U/CyvpWtpYKUQAj57O5y2VEIxxWOt5Y7ppQ/ZBcgI7qmAJEHQOKH
-	LyEyJOYZ8fjFcrKBRYogk2LhHWKkp7sjX7wcWrTRpSEGquiyxzjVIdDYmvmzQN6PWxRk
-	AhkEw+EN9jGIs8RwIXGBQEHRgONSFIPfhWX7MXD3tRaq5C5SZMD3aEFNbbTnF5ujybEq
-	/KuKXUDZik/6wv6UuL1rvrwthJr0tbcDpn+6SONxYrups07hFVrS9RDUZvxX8bS7sMQ4
-	ywlRaUP2o/fRpyLEYyNxKVf9CTaZnkyTJD7qz/dxhvJ54tag4RZw9Po+zwZgczvFXTse
-	ClnA==
-X-Gm-Message-State: APjAAAVkrcMqW8k7yAy7eTaVsWHrouNQowpgGgqILU005hxx1dzUiPjT
-	dkUli1HyzjhUReTci8eMU98mcQL0XgQ=
-X-Google-Smtp-Source: APXvYqwwIyCHGWS5BW4NEjbejeN7OQsm3A2N+soRxgavAKn/pKdzBhIDNO+YpM3yQAat+DeET18hJQ==
-X-Received: by 2002:a17:902:fe86:: with SMTP id
-	x6mr21440768plm.28.1570296872738; 
-	Sat, 05 Oct 2019 10:34:32 -0700 (PDT)
+	h=x-gm-message-state:to:from:subject:openpgp:autocrypt:message-id
+	:date:user-agent:mime-version:content-transfer-encoding
+	:content-language;
+	bh=P6Psbn7zyP1TvAwlp5b23AR5dYKVzqdxZhSvKrzOmX8=;
+	b=N+d4AxfvB83kqn4lHI53mD3sm06k10BC6pce4n1VxaIXUgqfH2x0tIYfSLMd3q22qZ
+	veMspupb8QmFMzazttk28I3qr1mRT11+hR9hjHbLVYDmPpxRDSoq+TAmCUPtF6XzNm6x
+	712qM8rIgRQz9Xz9+Iv1fRvUPg2/y4m46FGbvdpZQhWuH4VqWA0ZPKBVdy30qQIxyb+n
+	1rN2tVjHRpsQKRzOJda9dkpVhUYJkNKWkwVc0qaC0YF6FuT8xQ1/0hDQD0fE5/q0v254
+	s8PQjug4iq9cOUTl4IYQQ8pwKKtnQ4lidz0GdolIzE+9qm7Gq3OKziI7n4hBUrJ43ciw
+	/3Rw==
+X-Gm-Message-State: APjAAAWAiTY9Umi2///LRzD0HcGFasLcQW3NAOb5qlCA7Tci3oTxGBtq
+	73XptVDUQ8SNXMqDy4p5F6Y=
+X-Google-Smtp-Source: APXvYqxXMhtPKESA7mN7xhDftsCjQmjCq6Sk4cZdLCGRGXzvpf66bKh9PhJgNp92GptsWH8pD2xn0A==
+X-Received: by 2002:a63:d641:: with SMTP id d1mr17511208pgj.351.1570297470974; 
+	Sat, 05 Oct 2019 10:44:30 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:a5c0:88cc:97a9:c570:f3a6?
 	([2601:202:4180:a5c0:88cc:97a9:c570:f3a6])
 	by smtp.gmail.com with ESMTPSA id
-	l189sm9692792pgd.46.2019.10.05.10.34.31
+	71sm15963873pfw.147.2019.10.05.10.44.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 05 Oct 2019 10:34:32 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>
-References: <1569632199-7446-1-git-send-email-denis@denix.org>
-	<20190929124339.GC30130@localhost> <20190929162007.GZ30018@denix.org>
-	<20190929181449.GD30130@localhost>
-	<59a54a48-0e0f-8cdf-f51b-0e5fdd70744e@gmail.com>
-	<CAMKF1sp94wxzUrxb_t7FdzvcLHye1pr67S3YXY31o5EHd_HmDQ@mail.gmail.com>
+	Sat, 05 Oct 2019 10:44:30 -0700 (PDT)
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -93,16 +87,12 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <68dd4a12-9418-cbac-26d0-66870a331df3@gmail.com>
-Date: Sat, 5 Oct 2019 10:34:30 -0700
+Message-ID: <3758d20c-1e83-865a-6c29-aea46061bc79@gmail.com>
+Date: Sat, 5 Oct 2019 10:44:29 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sp94wxzUrxb_t7FdzvcLHye1pr67S3YXY31o5EHd_HmDQ@mail.gmail.com>
-Cc: Denys Dmytriyenko <denys@ti.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
-Subject: Re: [thud][PATCH] mariadb: update SRC_URI, as 5.5.64 has moved to archive
+Subject: Patchwork and stable branches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -115,69 +105,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Oct 2019 17:34:31 -0000
+X-List-Received-Date: Sat, 05 Oct 2019 17:44:30 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 Content-Language: en-US
 
+My apologies for cross posting.
+
+I have noticed some behavior I was not expecting with OE's Patchwork in
+that it is hiding patches.=C2=A0 I don't know if this is by design or a b=
+ug
+in our Patchwork.
+
+When a series of patches are submitted to the mailing list and are same
+fix but against different branches, all but the last=C2=A0 patch entered =
+are
+automatically marked as "suspended"=C2=A0 and then hidden from the defaul=
+t
+view.=C2=A0 I never noticed this before and is now adding a new dimension=
+ to
+the Stable branch maintenance process that I need to work around.=C2=A0 I=
+ am
+catching these issues as I compare my in box to patchwork.
 
 
-On 10/5/19 9:56 AM, Khem Raj wrote:
-> On Sat, Oct 5, 2019 at 9:12 AM akuster808 <akuster808@gmail.com> wrote:
->>
->>
->> On 9/29/19 11:14 AM, Adrian Bunk wrote:
->>> On Sun, Sep 29, 2019 at 12:20:07PM -0400, Denys Dmytriyenko wrote:
->>>> On Sun, Sep 29, 2019 at 03:43:39PM +0300, Adrian Bunk wrote:
->>>>> On Fri, Sep 27, 2019 at 08:56:39PM -0400, Denys Dmytriyenko wrote:
->>>>>> From: Denys Dmytriyenko <denys@ti.com>
->>>>>>
->>>>>> The old URL now gives 404 Not Found
->>>>>> ...
->>>>>> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
->>>>>> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
->>>>>> @@ -4,7 +4,7 @@ SECTION = "libs"
->>>>>>  LICENSE = "GPLv2"
->>>>>>  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->>>>>>
->>>>>> -SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
->>>>>> +SRC_URI = "http://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
->>>>>> ...
->>>>> This change should first go into master (and also warrior).
->>>> Yeah, let me just go downgrade master and warrior to this old version,
->>>> so I can fix the download URL...
->>> archive.mariadb.org has all versions, including some that are even more
->>> recent than the version currently in master.
->>>
->>> Not changing the URL in master now will only bring us the same problem
->>> in zeus later.
->> Currently Thud is broken and needs this fix. Being proactive to avoid a
->> future issue should not be a reason not to take this patch.
->>
-> using archive.mariadb.org makes sense for master too, so I have gone
-> and adapted the patch to apply to master as well. however, it wont be
-> a straight backport for thud so you have apply the proposed patch as
-> such to thud. What is done on warrior needs to be figured out as well.
-
-Thanks.
-
-I will put this on my plate to address for warrior.
-
-- armin
-> see
->
-> https://patchwork.openembedded.org/patch/165527/
->
->
->> - armin
->>>> Denys
->>> cu
->>> Adrian
->>>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+regards,
+Armin
 
 
