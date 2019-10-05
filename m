@@ -1,24 +1,41 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 887567F34B
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F62A7D39B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Oct 2019 02:53:56 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x952rsXZ006154
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Sat,  5 Oct 2019 13:35:25 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id l3so12768628qtr.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 4 Oct 2019 19:53:54 -0700 (PDT)
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 4 Oct 2019 19:53:54 -0700
-From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 4 Oct 2019 22:53:53 -0400
-Message-ID: <20191005025353.6028-1-Trevor.Gamblin@windriver.com>
-X-Mailer: git-send-email 2.21.0
+	Sat, 05 Oct 2019 06:35:27 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:organization:content-transfer-encoding;
+	bh=INKFjebKI9OlSdhFf3QU8yKUQJtATxOmOUMw/1mI8Ow=;
+	b=p09eY4ekGLfo0E/WghJPZH49EUbdw3HU31xCooG+AujijuuDsxbSDxVfr5NoKo8E6H
+	+qDRhqrK1rsi0AFAmQJspwurgRBQ2E0OLM/kbFAnH+Y/6S3DTBHe4U+JE9CZARlE7y51
+	kEDMi4/HYJxpLXTRBhkNKoiJNazGRYzGmFqzi+WKB25tDDHD0OdbYbYzBCzjF4mxo9DQ
+	eCtftkR69z0vDXwFAyBLrXv428cN7ajfks9hTKSyd+z+cvpnR+mrFbr2kFohGbBN7dM/
+	1FELXC9N5TMifClMfPOWndTT7xfFbZbpfUyzUJHXp1J7PD/ATjpw1G2gbR34JZOvUBhp
+	KWnA==
+X-Gm-Message-State: APjAAAV64498hsibKj3D+JrH2Qxv9bZt6PUisQmqf+3Dp4sNnVq2XQXt
+	zNComb36qN3Bi1ykfwjpA1vY/0WZStU=
+X-Google-Smtp-Source: APXvYqxITM89kDddF4Ipr4M6CD61ZpwJ0UXAB6udUFEsuK2DApTHqyXsZ4nSV3UasQrS31qlImXGVA==
+X-Received: by 2002:ac8:5345:: with SMTP id d5mr15334663qto.120.1570282526016; 
+	Sat, 05 Oct 2019 06:35:26 -0700 (PDT)
+Received: from localhost ([181.220.83.67]) by smtp.gmail.com with ESMTPSA id
+	d55sm5720209qta.41.2019.10.05.06.35.24
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 05 Oct 2019 06:35:24 -0700 (PDT)
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Sat,  5 Oct 2019 10:35:21 -0300
+Message-Id: <20191005133521.1780695-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH] gnome-desktop3: upgrade from 3.32.0 to 3.34.0
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-oe PATCH] zram: Avoid installing init and services, if unused
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Oct 2019 02:53:57 -0000
+X-List-Received-Date: Sat, 05 Oct 2019 13:35:25 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-
-Update to fix CVE-2019-11460 as well as add various bugfixes
-from upstream.
-
-CVE: CVE-2019-11460
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
- .../{gnome-desktop3_3.32.0.bb => gnome-desktop3_3.34.0.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop3_3.32.0.bb => gnome-desktop3_3.34.0.bb} (88%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.0.bb
-similarity index 88%
-rename from meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-rename to meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.0.bb
-index 85ee5e6cf..77aa3fb61 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.32.0.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.0.bb
-@@ -14,8 +14,8 @@ inherit gnomebase pkgconfig upstream-version-is-even gobject-introspection distr
- REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
- UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+ meta-oe/recipes-extended/zram/zram_0.1.bb | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
+
+diff --git a/meta-oe/recipes-extended/zram/zram_0.1.bb b/meta-oe/recipes-extended/zram/zram_0.1.bb
+index dfd75e71c..564a0877c 100644
+--- a/meta-oe/recipes-extended/zram/zram_0.1.bb
++++ b/meta-oe/recipes-extended/zram/zram_0.1.bb
+@@ -16,11 +16,16 @@ SRC_URI = " \
  
--SRC_URI[archive.md5sum] = "e423ed6d648c6c4f9798fa9cd9ea8d99"
--SRC_URI[archive.sha256sum] = "a6393dc5fc29fc0652ac84c73b3da205d0b0168128c4cf6d27797a08f3d07b54"
-+SRC_URI[archive.md5sum] = "3149bbd12eaf6f4420b1a999131ec470"
-+SRC_URI[archive.sha256sum] = "8d331ee655c1d56b2b97562a07c7a7598ff6706a11ff1cdce97423ebc6b62426"
+ do_install () {
+     # Sysvinit
+-    install -d ${D}${sysconfdir}/init.d
+-    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/zram
+-
+-    install -d ${D}${systemd_unitdir}/system
+-    install -m 0644 ${WORKDIR}/zram.service ${D}${systemd_unitdir}/system
++    if ${@bb.utils.contains('DISTRO_FEATURES','sysvinit','true','false',d)}; then
++	install -d ${D}${sysconfdir}/init.d
++	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/zram
++    fi
++
++    # SystemD
++    if ${@bb.utils.filter('DISTRO_FEATURES','systemd','true','false',d)}; then
++	install -d ${D}${systemd_unitdir}/system
++	install -m 0644 ${WORKDIR}/zram.service ${D}${systemd_unitdir}/system
++    fi
+ }
  
- SRC_URI += " \
-     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
+ FILES_${PN} = "${sysconfdir}"
 -- 
-2.21.0
+2.23.0
 
 
