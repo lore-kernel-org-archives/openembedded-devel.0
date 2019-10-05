@@ -1,104 +1,43 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 47D347DDCC
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Oct 2019 16:12:40 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id q15so4594865pll.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Oct 2019 09:12:41 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com
+	[209.85.222.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E20E7DE74
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat,  5 Oct 2019 16:18:05 +0000 (UTC)
+Received: by mail-qk1-f171.google.com with SMTP id u22so8741211qkk.11
+	for <Openembedded-devel@lists.openembedded.org>;
+	Sat, 05 Oct 2019 09:18:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=x+iVt9HMNk8g6VcW552hkD3O4xgFT0HMwjNTCT6mnec=;
-	b=bsQGs7DUufBUE1Hl4cAud1dcg6sSt2TFFIGM/kVbhG/ckDBgZITssgSb7fvHAcsSOG
-	khDeQ05rMnoCOjH0c26khTVfRkYL4BWwq2RoynnpHVwTTg0MK/UKcTUODawq/Iew7xFG
-	gc2JDjCeaeBsD7OwVqhlEZg626vL2EMt+nLhmjiHqD0xB/slLAxz+/P6+N+T9o2SJNR6
-	bI3FTb4uGinLU1CrYmxngYDf3eFoUCyqZsj7xGNuq7Qy9SI3qybOyf9NVEYkmBUVh7Do
-	l+TI1V5XHTxmw5c52ZHdzVxlufGnFuj27VeKiVA6nUjLPOYe2VOevPVk4dALW4c0AS5B
-	/5lQ==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=JxtVLTaJXctw/pUPRoBnCsSskuN0YPJyl0iEryKA16I=;
+	b=YfoLcD3WFqojgaMH5w44eh+L3hO0R9KgYaOKezc25UXMp8Ix4PrEsdflCpPRGGwU1x
+	jmo1OZFWnH7qC5a3jz19LO0HTa5k2T6l2nEhymobqrypaJ10bjDkKTXLfyRGVRX3dRCt
+	0V247D16KO9ZvnbOLlGxMwfFZ0X2F7f1OzBE3+1E19/gfxOjO4vdEWqL7SZ2QuB+Wz6K
+	ahwHEE1vCZHvffFOt1Tr62Vc+BeqDvoENoA9Ch2totvFWPybkkbIsOYgjs1RHCEcV+pv
+	0X0bwmvwbbOXTs44m51ImAfr4jwzkoYMMTDJtdEYQq6dBFK1BEli1SHK8LSEXc1Yr1ca
+	Yecg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=x+iVt9HMNk8g6VcW552hkD3O4xgFT0HMwjNTCT6mnec=;
-	b=VLEVRvprp8qGfcC+vfLonaAVwbXtSmpfrebZXPRIyzBQTvdOEJdk4m0AIcRQNIhTZP
-	1wJRDrCmdS7YeRrSfaL8gq1dBWk8s6AIpPNHS+aOV+7ZKNLcpXJQLDNNlu7QFAc9X7/O
-	ZjZj6jbblazGAz1NvWp8LM48WaS0Bd2IsNVwMeG/M+QcAKUiPvo2pD7n0/W+QalgexAw
-	xuzPOgMgPkyrlwR3JQxwJhTmmLHH/hiyWZb59tzy8pAGunaLI5Y1Er8LuOZpDjl6MYna
-	HcGOYD1iig4LZKZGTsW3/zXXHIfLB80N8B6JwWbWspDdg9v3QPy8jwm5tJJdkW/84Klf
-	3WMg==
-X-Gm-Message-State: APjAAAXFQeEJzqJU8LvNT2UfiaUTMP0lHUvmcIrrahPCUonesVfvTiIo
-	6vpIhOM07BWHnnkS6BLXboI=
-X-Google-Smtp-Source: APXvYqxWG87kSS+pTVHKQTLKjzcdje1js+OGynYHpOZiegcpiQOcq0XVyJwUVhesYy7Obcb4U3T/pA==
-X-Received: by 2002:a17:902:b685:: with SMTP id
-	c5mr21759886pls.215.1570291961437; 
-	Sat, 05 Oct 2019 09:12:41 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:a5c0:88cc:97a9:c570:f3a6?
-	([2601:202:4180:a5c0:88cc:97a9:c570:f3a6])
-	by smtp.gmail.com with ESMTPSA id
-	i37sm10735375pje.23.2019.10.05.09.12.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 05 Oct 2019 09:12:40 -0700 (PDT)
-To: Adrian Bunk <bunk@stusta.de>, Denys Dmytriyenko <denis@denix.org>
-References: <1569632199-7446-1-git-send-email-denis@denix.org>
-	<20190929124339.GC30130@localhost> <20190929162007.GZ30018@denix.org>
-	<20190929181449.GD30130@localhost>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <59a54a48-0e0f-8cdf-f51b-0e5fdd70744e@gmail.com>
-Date: Sat, 5 Oct 2019 09:12:40 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=JxtVLTaJXctw/pUPRoBnCsSskuN0YPJyl0iEryKA16I=;
+	b=PjlfNc8tJ89uP5frG9AJ0VzfqGKkKcCMXVxOdkoQeR+fgJW+bUL/2qAPMX1dXAYmi0
+	WaXBBx/MwOxC3R80MLVIxrkRLq7UzKgkbPZT+8JnxOaTksW9t6j+oXKG7x+kJKTEX1a6
+	CJSCQQvojm0yQZBhMCXlml6vhlYXlzw7+aCYLQAijd4DQBJYYthf3SIAs/M5TETXlO/D
+	nfghsVL26lV6dmFz5cN15bMxVucl8e8yCw8pfORj+PtdTqtZEqQGS4zSrGPtLtgpuWUB
+	qhS+468C70ojymjiZxJZcQZE8vjv0lP1+WQirZxQUvyXaIFToJff71WDGOBq9BjYcGgN
+	NsUA==
+X-Gm-Message-State: APjAAAVtfX5FpszsGitiogqzTmFNEa5Q06QIF8Tcvz6Cy3M+Hc/pxX/S
+	a+5MVh+tfAzg1fCDuvCVuLgtRqzy6pJRrcZd7soGN+GTpj0=
+X-Google-Smtp-Source: APXvYqy6cOYe/u8Rxic90ejVsboR5s5CUcSPQklUSPJ6bmQJxvCZ4emS7Led9nZZeMvSraYKjlFjCqLWMQ6omfqs/EA=
+X-Received: by 2002:a37:5cc1:: with SMTP id
+	q184mr16101377qkb.212.1570292285623; 
+	Sat, 05 Oct 2019 09:18:05 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20190929181449.GD30130@localhost>
-Cc: openembedded-devel@lists.openembedded.org, Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [thud][PATCH] mariadb: update SRC_URI, as 5.5.64 has moved to archive
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 5 Oct 2019 09:17:38 -0700
+Message-ID: <CAMKF1sotOosozDZxB8eGYjsQrOOtY6U+k63KCcFutKBuFBPT3A@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: State of OE world 2019-10-05
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -111,47 +50,326 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Oct 2019 16:12:40 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Sat, 05 Oct 2019 16:18:05 -0000
+Content-Type: text/plain; charset="UTF-8"
+
+Hello All
+
+Attached is the latest build state for master and soon to be Zeus
+release. If you have any major package upgrades or other patches,
+please send them soon. As the Zeus release approaches, we will try to
+stabilize current master and lockstep release with OE-Core
+
+Looking into shared state related fixes would be good to address as
+reported in the below report
+
+Thanks for your contributions
+
+http://www.openembedded.org/wiki/Bitbake_World_Status
+
+== Failed tasks 2019-10-05 ==
+
+INFO: jenkins-job.sh-1.8.46 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/zeus/log.report.20191005_070333.log
+
+=== common (0) ===
+
+=== common-x86 (0) ===
+
+=== qemuarm (0) ===
+
+=== qemuarm64 (0) ===
+
+=== qemux86 (0) ===
+
+=== qemux86_64 (0) ===
+
+=== Number of failed tasks (0) ===
+{| class=wikitable
+|-
+|| qemuarm || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/zeus/log.world.qemuarm.20191005_020541.log/
+||
+|-
+|| qemuarm64 || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/zeus/log.world.qemuarm64.20191005_024235.log/
+||
+|-
+|| qemux86 || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/zeus/log.world.qemux86.20191005_014231.log/
+||
+|-
+|| qemux86_64 || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/zeus/log.world.qemux86-64.20191005_021913.log/
+||
+|}
+
+=== PNBLACKLISTs (7) ===
+
+=== QA issues (0) ===
+{| class=wikitable
+!| Count ||Issue
+|-
+||0 ||already-stripped
+|-
+||0 ||build-deps
+|-
+||0 ||compile-host-path
+|-
+||0 ||file-rdeps
+|-
+||0 ||host-user-contaminated
+|-
+||0 ||installed-vs-shipped
+|-
+||0 ||invalid-pkgconfig
+|-
+||0 ||ldflags
+|-
+||0 ||libdir
+|-
+||0 ||pkgname
+|-
+||0 ||qa_pseudo
+|-
+||0 ||symlink-to-sysroot
+|-
+||0 ||textrel
+|-
+||0 ||unknown-configure-option
+|-
+||0 ||version-going-backwards
+|}
 
 
 
-On 9/29/19 11:14 AM, Adrian Bunk wrote:
-> On Sun, Sep 29, 2019 at 12:20:07PM -0400, Denys Dmytriyenko wrote:
->> On Sun, Sep 29, 2019 at 03:43:39PM +0300, Adrian Bunk wrote:
->>> On Fri, Sep 27, 2019 at 08:56:39PM -0400, Denys Dmytriyenko wrote:
->>>> From: Denys Dmytriyenko <denys@ti.com>
->>>>
->>>> The old URL now gives 404 Not Found
->>>> ...
->>>> --- a/meta-oe/recipes-dbs/mysql/mariadb.inc
->>>> +++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
->>>> @@ -4,7 +4,7 @@ SECTION = "libs"
->>>>  LICENSE = "GPLv2"
->>>>  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->>>>  
->>>> -SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
->>>> +SRC_URI = "http://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
->>>> ...
->>> This change should first go into master (and also warrior).
->> Yeah, let me just go downgrade master and warrior to this old version, 
->> so I can fix the download URL...
-> archive.mariadb.org has all versions, including some that are even more 
-> recent than the version currently in master.
->
-> Not changing the URL in master now will only bring us the same problem 
-> in zeus later.
+=== Incorrect PACKAGE_ARCH or sstate signatures (13) ===
 
-Currently Thud is broken and needs this fix. Being proactive to avoid a
-future issue should not be a reason not to take this patch.
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/zeus/log.signatures.20191005_031818.log/
+    * ERROR: 13 issues were found in these recipes: 96boards-tools
+atmel-qt-demo-init libcrypt-openssl-guess-perl-native
+libextutils-config-perl-native libextutils-helpers-perl-native
+libextutils-installpaths-perl-native libmodule-build-perl-native
+liburi-perl-native libxml-filter-buffertext-perl-native
+libxml-sax-base-perl-native libxml-sax-perl-native phpmyadmin
 
-- armin
->
->> Denys
-> cu
-> Adrian
->
+    * ERROR: 1 errors found in signatures.qemuarm.do_configure.sigdata.log
+    * ERROR: 9 errors found in
+signatures.qemuarm.do_populate_sysroot.sigdata.log
+    * ERROR: 3 errors found in
+signatures.qemuarm.do_package_write_ipk.sigdata.log
 
+    * ERROR: libxml-filter-buffertext-perl-native different signature
+for task do_configure.sigdata between qemux86copy and qemuarm
+    * ERROR: 1 errors found in
+/home/jenkins/oe/world/yoe/build/tmpfs/sstate-diff/1570270698/signatures.qemuarm.do_configure.sigdata.log
+    * ERROR: libcrypt-openssl-guess-perl-native different signature
+for task do_populate_sysroot.sigdata between qemux86copy and qemuarm
+    * ERROR: libextutils-config-perl-native different signature for
+task do_populate_sysroot.sigdata between qemux86copy and qemuarm
+    * ERROR: libextutils-helpers-perl-native different signature for
+task do_populate_sysroot.sigdata between qemux86copy and qemuarm
+    * ERROR: libextutils-installpaths-perl-native different signature
+for task do_populate_sysroot.sigdata between qemux86copy and qemuarm
+    * ERROR: libmodule-build-perl-native different signature for task
+do_populate_sysroot.sigdata between qemux86copy and qemuarm
+    * ERROR: liburi-perl-native different signature for task
+do_populate_sysroot.sigdata between qemux86copy and qemuarm
+    * ERROR: libxml-filter-buffertext-perl-native different signature
+for task do_populate_sysroot.sigdata between qemux86copy and qemuarm
+    * ERROR: libxml-sax-base-perl-native different signature for task
+do_populate_sysroot.sigdata between qemux86copy and qemuarm
+    * ERROR: libxml-sax-perl-native different signature for task
+do_populate_sysroot.sigdata between qemux86copy and qemuarm
+    * ERROR: 9 errors found in
+/home/jenkins/oe/world/yoe/build/tmpfs/sstate-diff/1570270698/signatures.qemuarm.do_populate_sysroot.sigdata.log
+    * ERROR: 96boards-tools different signature for task
+do_package_write_ipk.sigdata between qemux86copy and qemuarm
+    * ERROR: atmel-qt-demo-init different signature for task
+do_package_write_ipk.sigdata between qemux86copy and qemuarm
+    * ERROR: phpmyadmin different signature for task
+do_package_write_ipk.sigdata between qemux86copy and qemuarm
+    * ERROR: 3 errors found in
+/home/jenkins/oe/world/yoe/build/tmpfs/sstate-diff/1570270698/signatures.qemuarm.do_package_write_ipk.sigdata.log
+    * ERROR: 13 issues were found in these recipes: 96boards-tools
+atmel-qt-demo-init libcrypt-openssl-guess-perl-native
+libextutils-config-perl-native libextutils-helpers-perl-native
+libextutils-installpaths-perl-native libmodule-build-perl-native
+liburi-perl-native libxml-filter-buffertext-perl-native
+libxml-sax-base-perl-native libxml-sax-perl-native phpmyadmin
+
+
+PNBLACKLISTs:
+sources/meta-96boards:
+sources/meta-atmel:
+sources/meta-browser:
+sources/meta-clang:
+sources/meta-freescale:
+sources/meta-freescale-3rdparty:
+sources/meta-intel:
+sources/meta-odroid:
+sources/meta-openembedded:
+meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb:PNBLACKLIST[netkit-rusers]
+= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or
+directory"
+meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb:PNBLACKLIST[drbd]
+= "Kernel module Needs forward porting to kernel 5.2+"
+meta-oe/recipes-extended/socketcan/can-isotp_git.bb:PNBLACKLIST[can-isotp]
+= "Kernel module Needs forward porting to kernel 5.2+"
+meta-oe/recipes-extended/sysdig/sysdig_git.bb:PNBLACKLIST[sysdig] =
+"configure: error: in
+'TOPDIR/build/tmpfs/work/core2-64-yoe-linux/sysdig/0.26.4-r0/build/c-ares-prefix/src/c-ares'"
+meta-oe/recipes-kernel/bpftool/bpftool.bb:PNBLACKLIST[bpftool] =
+"Needs forward porting to kernel 5.2+"
+meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb:PNBLACKLIST[vboxguestdrivers]
+= "Needs forward porting to kernel 5.2+"
+sources/meta-qcom:
+sources/meta-qt5:
+sources/meta-raspberrypi:
+sources/meta-riscv:
+sources/meta-rust:
+sources/meta-ti:
+sources/meta-variscite-fslc:
+sources/meta-yoe:
+sources/openembedded-core:
+meta/lib/oeqa/selftest/cases/imagefeatures.py:PNBLACKLIST[busybox] =
+"Don't build this"
+PNBLACKLIST[android-system] = "depends on lxc from
+meta-virtualiazation which isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
+directory in /home/builder/poky :/"
+PNBLACKLIST[smartrefrigerator] = "Needs porting to QT > 5.6"
+PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
+PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
+PNBLACKLIST[homeautomation] = "Needs porting to QT > 5.6"
+PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
+PNBLACKLIST[applicationlauncher] = "Needs porting to QT > 5.6"
+PNBLACKLIST[evolution-data-server] = "Qemu usermode hangs forever on
+abaco/kwaj builders when doing g-ir-scanner-qemuwrapper"
+
+
+QA issues by type:
+count: 0 issue: already-stripped
+
+
+count: 0 issue: libdir
+
+
+count: 0 issue: textrel
+
+
+count: 0 issue: build-deps
+
+
+count: 0 issue: file-rdeps
+
+
+count: 0 issue: version-going-backwards
+
+
+count: 0 issue: host-user-contaminated
+
+
+count: 0 issue: installed-vs-shipped
+
+
+count: 0 issue: unknown-configure-option
+
+
+count: 0 issue: symlink-to-sysroot
+
+
+count: 0 issue: invalid-pkgconfig
+
+
+count: 0 issue: pkgname
+
+
+count: 0 issue: ldflags
+
+
+count: 0 issue: compile-host-path
+
+
+count: 0 issue: qa_pseudo
+
+
+
+This git log matches with the metadata as seen by qemuarm build.
+In some cases qemux86 and qemux86-64 builds are built with slightly
+different metadata, you can see the exact version near the top of each
+log.world.qemu* files linked from the report
+~/oe/world/yoe ~/oe/world/yoe
+
+== Tested changes (not included in master yet) - bitbake ==
+latest upstream commit:
+0d66f644 toaster: improve warnings when adding dependency to packages
+not included in master yet:
+f0f81440 bitbake: Bump verison 1.43.1 -> 1.43.2
+
+== Tested changes (not included in master yet) - openembedded-core ==
+latest upstream commit:
+520c6f30cd rootfs-postcommands: Avoid use of an hard-coded value
+not included in master yet:
+bc5a0d67b2 ethtool, libcap: fix upstream version check
+d8cc6da29a kernel-devicetree.bbclass: add missing backslash
+8e09dd88d7 devtool/standard.py: Not filtering devtool workspace for
+devtool finish
+6a4150c7a4 wic/direct: Partition numbering is broken for MBR primary
+partition #4
+5935aafed0 musl: Update to latest
+a99b7bdd39 qemu: Add ppc64 to QEMU_TARGETS
+515ce7cded watchdog: fix service PIDFile in do_install_append
+ef3a3af13a meta: add missing some description in devtools
+29f8dc9ddc oe.svg: Copy artwork from openembedded-classic.
+59b3d70c17 meson: fix RDEPENDS
+bf0eccf0bb insane: add check for perllocal.pod
+108ce1447c meson: update patch status
+d19161ac92 runit: Add runit and related recipes
+e7419a15a7 qemux86: Add identical qemux86copy variant for tests
+ae62f4141f qemuppc64: Add a QEMU machine definition for ppc64
+8e1625b739 image.bbclass,package-index.bb: Delete do_populate_lic task
+a9e3cc60e5 core-image-sato-sdk-ptest: Remove valgrind ptests for riscv
+9455d460da llvm: Update to 9.0.0
+7b7a283123 ghostscript: Disable libpaper
+
+== Tested changes (not included in master yet) - meta-openembedded ==
+latest upstream commit:
+e6d76b05a Revert "spice: Drop broken native"
+not included in master yet:
+fdd9aea01 zabbix: upgrade 3.0.9 -> 4.2.6
+a0c79bfcc python-toml: add recipes for python2 and python3
+b750c405c wireshark: fix qt5 build
+ec48bd3bd php: fix CVE-2019-6978
+6ce65dc3f gd: fix CVE-2019-6978
+1eaeb89b9 firewalld: update to 0.7.1
+b08e503eb strongswan: install dev headers
+a4412258e renderdoc: add x11 to REQUIRED_DISTRO_FEATURES
+e17a684f2 kea: Disable parallel install
+05de7a2cb libteam: update from 1.28 to 1.29
+6e31ebb24 xscreensaver: Remove xserver-nodm-init rdep
+01d539b32 smem: package smemcap separately
+593a29375 sysdig: Upgrade to 0.26.4
+9f5e1444a catfish: upgrade 1.4.9 -> 1.4.10
+a6c918c2c xfce4-panel: upgrade 4.14.0 -> 4.14.1
+
+== Tested changes (not included in master yet) - meta-qt5 ==
+latest upstream commit:
+12ea469 qttools: Add CONFIG+=config_clang_done when not building with clang
+not included in master yet:
+eb63611 qt5-creator: Fix clangformat with clang 9.x
+
+== Tested changes (not included in master yet) - meta-browser ==
+latest upstream commit:
+a7fdc17 chromium: Backport patch to fix renderer crash.
+not included in master yet:
+~/oe/world/yoe
 
