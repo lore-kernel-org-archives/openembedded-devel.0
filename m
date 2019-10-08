@@ -1,24 +1,24 @@
 Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D3857D2D6
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 03E9D7F36F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Oct 2019 13:41:37 +0000 (UTC)
+	Tue,  8 Oct 2019 13:43:40 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x98DfcXk003936
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id x98DhgBf008200
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 8 Oct 2019 06:41:39 -0700 (PDT)
+	Tue, 8 Oct 2019 06:43:42 -0700 (PDT)
 Received: from yow-tgamblin-wbox.wrs.com (128.224.56.205) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.468.0; Tue, 8 Oct 2019 06:41:38 -0700
+	14.3.468.0; Tue, 8 Oct 2019 06:43:41 -0700
 From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 8 Oct 2019 08:41:37 -0500
-Message-ID: <20191008134137.16189-1-Trevor.Gamblin@windriver.com>
+Date: Tue, 8 Oct 2019 08:43:41 -0500
+Message-ID: <20191008134341.16262-1-Trevor.Gamblin@windriver.com>
 X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] freeradius: add -latomic for armv5
+Subject: [meta-networking][PATCH v2] freeradius: add -latomic for armv5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Oct 2019 13:41:38 -0000
+X-List-Received-Date: Tue, 08 Oct 2019 13:43:41 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
@@ -52,6 +52,8 @@ path -Wl,/yow-lpggp31/tgamblin/freeradius.build/tmp-glibc/work/armv5e-oe-linux-g
 | scripts/boiler.mk:630: recipe for target 'build/bin/local/radeapclient' failed
 
 Explicitly link libatomic to fix the issue.
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
  .../recipes-connectivity/freeradius/freeradius_3.0.19.bb         | 1 +
  1 file changed, 1 insertion(+)
