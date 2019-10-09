@@ -1,33 +1,36 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 43CE97F45E
+	by mail.openembedded.org (Postfix) with ESMTP id 1AAA37F45E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Oct 2019 07:42:09 +0000 (UTC)
+	Wed,  9 Oct 2019 07:44:26 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46p5lP0BHjz4S
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Oct 2019 09:42:08 +0200 (CEST)
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46p5p33x1Kz4S;
+	Wed,  9 Oct 2019 09:44:26 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1570606929;
-	bh=lWUWidcQIofZzxG2/9rlq7v5EP9ZETNV7O6loTorpMU=;
-	h=From:To:Subject:Date:From;
-	b=H9jkSFJabcrgm9ifMrnZayfd5RoWE2yRGn6ieBA4U1Nmvj3e5mqJBWE6X6o5t6oyP
-	IjcbCr07YC86XdazHfEo8nNNQ71/XckSdh2Xpjfy7qdvp+DHK4GjJZ8dGzS/vDaDP6
-	4wXSsd+tHzC/wtH5xJ/Uw4C5cUsd44V4NY1Xh4ChLjjYtnuoA1edgSYgdGNMIsK1Ot
-	V82XTGMJtLmDR4GzxXWmGtyjGjwZxQ8p7/CXrvQad75OcgP+m15N6g6yPCCjYREmQ9
-	kkW3QodvPjlh8XAsF45JjXedcCv58srILL+m/aTQn5wgyQradWqyzDghtbcEW+FNld
-	rD66C2OdYciccO+gi7LGYr8hP5q+a3UVP1jCbdTNEvUhauFZrCHQ6/fPHh8ZMrKZ3J
-	A/oV5GEGalSR4hSNrEPbYIY7f3UFDZlLsO//x+JoWBKELH/wOZAE75AXT6vfDzZ8XM
-	QQqa+9OMliO5Cvi+cKoSZYLf4LRgxm1hmlfCM02Qe6Bp0XWVUm4EtR/j/jHhqOpX8k
-	tSbelfoaLIKP6cGEeHtqwK28BS+kcgSXLIFNbUvHzOH1gZWMQnjoCPpkaN0oDUU08Q
-	ak8gkRzUU/foYQG20W1J+SLlR5q+STmADldEpDx0l+sZhd0whrRJlTUYzKw9Eb1TAm
-	PuPqbddrw5x8rGloTTod9uMc=
+	s=default; t=1570607067;
+	bh=N2nQQfRhZp7TGuMn9CByYkSeSVr81bqHeXs4rC5AdC4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=bTcOdiLouIt6YAkr9ecTyKi51QfTzk02eeMFmIUwi3bkcauZ+n90uN6hQq28QlvTF
+	ajbmUjiG2KR/024Fp0dij4Z5AuhD1pDx5Yuy7M/RmZwaurR+RobHsnVDBn+Edmdxah
+	4ZIF6rQIr5BegTcc2t++nby/red+MMUicWXjbLTlAuRNAmX9LbQ5cBEhL4pEwbWMU8
+	yOEIGFUpLItnW445z1Dj4Y4k7IX2nQ8d9qSX6iNVH6HrsZ8+zYrgZwmJNFofSyzsJ+
+	3U7n1YUgAwfBrFzIJVV8gSBvskEi8E/wOjX7x1OimAeVat9N5i1u1wTMZJJXZgBKRv
+	HfIIhQYw4N5Mp+Mi27v0ofXjZf/sdGu3bgx7aoJRdsnF/KDr0CFWkGkfN723dfQXm/
+	u5dPeS7eOJDf0MAWXPu1M3+p372Cju28Qo0FlfoljelmM9E7GUyQlEuwbbNRHwYfEi
+	aq/1eBSrLtFNyk6CRDfyWr9hj8tjmHtF1cVGX9la+nxNGbDxCsMnV5VAlyBpZEe9tE
+	B565ee0SfWjixGZx3l9RrSxzZIAZLWcC2y279FV/XTdPiBp7WFGRe8QWxWWHyjQ8Zk
+	Zdh0b43+rUZenEkOxHjo/jAEyD7jNmiZ2YIphF4w2Y7OgsjskO4Bi0SU9EWCmPPWil
+	BXeOi3TxHLKczJLslqwxdRh0=
+Date: Wed, 9 Oct 2019 10:44:25 +0300
 From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Oct 2019 10:42:07 +0300
-Message-Id: <20191009074207.18686-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][warrior][PATCH] xmlrpc-c: Remove the RDEPENDS on perl
+To: Peiran Hong <peiran.hong@windriver.com>
+Message-ID: <20191009074425.GA26763@localhost>
+References: <20191007134340.36555-1-peiran.hong@windriver.com>
+MIME-Version: 1.0
+In-Reply-To: <20191007134340.36555-1-peiran.hong@windriver.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] tcpdump: upgrade 4.9.2 -> 4.9.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,29 +43,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2019 07:42:11 -0000
+X-List-Received-Date: Wed, 09 Oct 2019 07:44:27 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-The tools that use perl are no longer built.
+On Mon, Oct 07, 2019 at 09:43:40AM -0400, Peiran Hong wrote:
+>...
+> Deleted patch "0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch"
+> since the fix is included in the upgrade.
+>...
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb | 1 -
- 1 file changed, 1 deletion(-)
+The patch file is not deleted:
 
-diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
-index 524263760..6c31b6981 100644
---- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
-+++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
-@@ -15,7 +15,6 @@ SRCREV = "343a3b98e54999d67edb644bcd395aa9784fb16e"
- S = "${WORKDIR}/git/stable"
- 
- DEPENDS = "libxml2"
--RDEPENDS_${PN} = "perl"
- 
- inherit autotools-brokensep binconfig pkgconfig
- 
+>  .../tcpdump/tcpdump/add-ptest.patch           |  9 +++++----
+>  ...lute-path-when-searching-for-libdlpi.patch | 19 ++++++++++---------
+>  .../recipes-support/tcpdump/tcpdump/run-ptest |  4 ++--
+>  .../unnecessary-to-check-libpcap.patch        | 15 ++++++++-------
+>  .../{tcpdump_4.9.2.bb => tcpdump_4.9.3.bb}    | 12 +++++++++---
+>  5 files changed, 34 insertions(+), 25 deletions(-)
+>  rename meta-networking/recipes-support/tcpdump/{tcpdump_4.9.2.bb => tcpdump_4.9.3.bb} (74%)
+>...
+
+cu
+Adrian
+
 -- 
-2.17.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
