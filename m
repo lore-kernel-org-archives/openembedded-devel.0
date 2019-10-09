@@ -1,50 +1,51 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by mail.openembedded.org (Postfix) with ESMTP id F25AA7D5C4
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
+	[209.85.221.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F71B7DAFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Oct 2019 09:10:52 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id c6so3247331ioo.13
+	Wed,  9 Oct 2019 09:33:16 +0000 (UTC)
+Received: by mail-wr1-f52.google.com with SMTP id o18so1907376wrv.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Oct 2019 02:10:54 -0700 (PDT)
+	Wed, 09 Oct 2019 02:33:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=AEHX8+TuV/dF/dZ4Le5BXAlNqYSHKtMs+ytsIZ0DiF0=;
-	b=g+GywmFS6MCr3rA2Y0GkrOPRFeBijTRZppUXeFQKaf7nZxj0Zez1rQsfqJtzb/vuTN
-	88jRAms6tCBmf9TAMYyhIWDGIo6lc7u4slgLNBekvOLuWBxWXzhu1/lajsljrDkYEuQj
-	SFi4if7hyj6ne0I1bludXs+Eb6NjR9cugjrT7VSX5HmcudkB4x2OdzOjpAYhd2fM1eCQ
-	nB+UwxTs6POvN9hp2y9F+kYTIQ6Wn2xfxNfEx5Aw2UKy8JRKjetMHQ57d6hOU1gM19vg
-	6HTqIXcIKfBz5R3rnekuOMcf3kUjlm3Yj4I2jeNs5CyolpDRgMvrsTTcPkzBV6x28Zq+
-	H/lg==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=VVGKpcNe7+NqDJaMWnNamO4on9xv++iBmzPQtWb4sxI=;
+	b=Rlq6qU36q19BEdhMaIaZrE4SlrnU6G4MdOyCtdi9rEOANqSZToav6B7OcVKiNPxAhY
+	UBVjyapHEt+07xoyYbedDCD1JBSnh1WzicXnHnWIPxsSVg+9c/ZlzFIfXsCHOs1TZ/yD
+	2+1Fi1I5/mRhuA6R1hVUXBIEht4OB70J7QC9yKZovCnwo8ZH6bQt13KltW7gW7xtzbdd
+	3gx/oCPvtEG3Q5SQBlgAywadzaZHFnBNsiEvJW/016bhxOP+gf7HRQya+Yz04lMIjlS4
+	1HCEcIOiYy/KGUFIo1Ahan8VVkatcm/pTMsom54kqwpT3TN+P/rucvYMM0PFwJG+hMVK
+	AHlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=AEHX8+TuV/dF/dZ4Le5BXAlNqYSHKtMs+ytsIZ0DiF0=;
-	b=hdih8NXt4Z1Wto6VuIXEVSBuWC4qdDPZLd4nXA1neOjPBm/4Vxq+rX0cj12ZiOquDj
-	HWcb2ZoA9IB+ZxqrCo8tFVvnL8HlqCwTVr0XBDdK48Jl6eJjXIE3eormf+mxtMBGCoUy
-	yYfDZBCoyK6tzHvV2HkRCGw7dCn5GFoonQ63uWJdrTjiyARNHzsY17eiY8O+mj9+Qf+8
-	VlAUD8omxgS/lIlcB/aypfNMQoYRcir/39VCQJQyXGSs7RSe0Ot7LF1dndEk/1SAIsej
-	BUj4FTuFs9fStefgotQA/mSDwfZ+72bPOUkykBqRrWc9Zl6kLpRTpW8KcAollPF4XqmO
-	03cA==
-X-Gm-Message-State: APjAAAVw/ufKITXPL6U/2auwC7A+WzavlpcNh8zrUsMzwdkrD2Nl5Fnw
-	7IO5bLqswDSpmKW+g2piyqypDq9iJG1u3vSdOFs=
-X-Google-Smtp-Source: APXvYqza6aAOTWTiy1J76VHMIVA0j+HuFPlcpwMTRrZQu0rJ1d51Fdn4snIHeq5uDoyQHSJRIpQ2sYukkdc6FLFKbeU=
-X-Received: by 2002:a92:9a54:: with SMTP id t81mr2155356ili.147.1570612253928; 
-	Wed, 09 Oct 2019 02:10:53 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=VVGKpcNe7+NqDJaMWnNamO4on9xv++iBmzPQtWb4sxI=;
+	b=CHLg40PgRtJEGq7spcTIQzLSKaiugLaz/38SSgE8iLxQN3DnhP39/5OU5KGmoJ/ueq
+	oougnml1/Ity9fcGPS/kGkQObkitOcD4jBIL+OF+aKNezlWRgmbVPzSF59W/a66gx8hd
+	9rkDv7xKSEm0nXtI8Feeo+BdLaKtWDkjxFooFomC3WiXBVy9FpjmQb5BmmzKMnE7oqaC
+	NbUJ4mnZXbu8aBacD+f6r+ygIIrqFksvbjwsQD1tH8iePNgf/pnkGIMTTFW+p5SCzmPp
+	Jh3lNVMhGEjlUa72ppSyuRZZik0BzwsKSSJTNvo25XNbUNb7+1yQ92R3DMyo7lY85pqo
+	SqpQ==
+X-Gm-Message-State: APjAAAU1iWfMHYLUXgV/+5UwOBNU9ZdoiMnOAH1hRfn+hN3qPEClfs01
+	3DBbG74jgato3bOE0TXW449LNpDH
+X-Google-Smtp-Source: APXvYqySaPUvxwykl6LeoYdCfiMOEMzMz0olqn2U/HfNNq9ZJcUYa+1GIrEy550JzOrH7og/xIjHLA==
+X-Received: by 2002:adf:fc0d:: with SMTP id i13mr2003842wrr.354.1570613596644; 
+	Wed, 09 Oct 2019 02:33:16 -0700 (PDT)
+Received: from amue-work.zera.local ([195.50.169.54])
+	by smtp.gmail.com with ESMTPSA id
+	y19sm1655053wmi.13.2019.10.09.02.33.15
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 09 Oct 2019 02:33:16 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  9 Oct 2019 11:29:48 +0200
+Message-Id: <20191009092948.11277-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <20190926223206.26850-1-schnitzeltony@gmail.com>
-	<20190926223206.26850-2-schnitzeltony@gmail.com>
-	<CALbNGRTwfXEP0skCASQRq86R78ugkZw5NJGMFTgKhtL_Ohu0hw@mail.gmail.com>
-	<CAMKF1sqYP5bee9=mcwLpiRU8rcbMWEdGz21y8iENkBtJm+a6nQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sqYP5bee9=mcwLpiRU8rcbMWEdGz21y8iENkBtJm+a6nQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 9 Oct 2019 11:10:42 +0200
-Message-ID: <CALbNGRRUSkp0scHNSewoXh2WTBcy4wNZK+nhY2AhLekMPRDHoQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-xfce][PATCH v2 2/2] xfce4-panel: upgrade 4.14.0 -> 4.14.1
+Subject: [PATCH] polkit-group-rules: Fix error in do_rootfs for rpm package-manager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,39 +58,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2019 09:10:53 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Oct 2019 09:33:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 4, 2019 at 10:35 PM Khem Raj <raj.khem@gmail.com> wrote:
->
->
-> On Fri, Oct 4, 2019 at 1:31 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
->>
->> On Fri, Sep 27, 2019 at 12:32 AM Andreas M=C3=BCller <schnitzeltony@gmai=
-l.com> wrote:
->> >
->> > * important bugfix release: systray draws icons properly when composit=
-ing is
->> >   disabled
->> > * while at it renumber patches
->> >
->> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
->> If xfce-patches require review these days: Kai can you take a look?
->> If not: Ping
->
-> Since they have been pending for a while
-> I still wanted to give them a go for a build and see if all is okay. Stil=
-l waiting on Kai to review them
->>
->>
-Sorry to come back to this - did not find it in master(-next) anymore:
-It contains a bugfix annoying me for very very long time [1]
+* An issue in meta-mortsgna was reported. Discussion is found at [1]
+* We do similar in meta-gnome's gvfs for same reason [2]
+* This is a bugfix which should apply and work for many release-branches
 
-Or did I miss something
+Fixes:
+| Error: Transaction check error:
+|   file /etc/polkit-1/rules.d conflicts between attempted installs of polkit-group-rule-datetime-1.0-r0.cortexa7t2hf_neon_vfpv4 and polkit-0.115-r0.cortexa7t2hf_neon_vfpv4
 
-[1] https://bugzilla.xfce.org/show_bug.cgi?id=3D14577
+[1] https://github.com/schnitzeltony/meta-mortsgna/issues/11
+[2] https://github.com/openembedded/meta-openembedded/blob/fd1a0c9210b162ccb147e933984c755d32899efc/meta-gnome/recipes-gnome/gvfs/gvfs_1.41.2.bb#L72
 
-Andreas
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-extended/polkit/polkit-group-rule.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-extended/polkit/polkit-group-rule.inc b/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
+index 06ab10642..8ced8abe5 100644
+--- a/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
++++ b/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
+@@ -8,6 +8,6 @@ inherit useradd
+ 
+ do_install_prepend() {
+     install -m 700 -d ${D}${sysconfdir}/polkit-1/rules.d
+-    chown polkitd:polkitd ${D}${sysconfdir}/polkit-1/rules.d
++    chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
+ }
+ USERADD_PARAM_${PN}_prepend = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 polkitd;"
+-- 
+2.21.0
+
 
