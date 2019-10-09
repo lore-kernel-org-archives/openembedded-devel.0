@@ -1,36 +1,30 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AAA37F45E
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D4857F400
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Oct 2019 07:44:26 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46p5p33x1Kz4S;
-	Wed,  9 Oct 2019 09:44:26 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1570607067;
-	bh=N2nQQfRhZp7TGuMn9CByYkSeSVr81bqHeXs4rC5AdC4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=bTcOdiLouIt6YAkr9ecTyKi51QfTzk02eeMFmIUwi3bkcauZ+n90uN6hQq28QlvTF
-	ajbmUjiG2KR/024Fp0dij4Z5AuhD1pDx5Yuy7M/RmZwaurR+RobHsnVDBn+Edmdxah
-	4ZIF6rQIr5BegTcc2t++nby/red+MMUicWXjbLTlAuRNAmX9LbQ5cBEhL4pEwbWMU8
-	yOEIGFUpLItnW445z1Dj4Y4k7IX2nQ8d9qSX6iNVH6HrsZ8+zYrgZwmJNFofSyzsJ+
-	3U7n1YUgAwfBrFzIJVV8gSBvskEi8E/wOjX7x1OimAeVat9N5i1u1wTMZJJXZgBKRv
-	HfIIhQYw4N5Mp+Mi27v0ofXjZf/sdGu3bgx7aoJRdsnF/KDr0CFWkGkfN723dfQXm/
-	u5dPeS7eOJDf0MAWXPu1M3+p372Cju28Qo0FlfoljelmM9E7GUyQlEuwbbNRHwYfEi
-	aq/1eBSrLtFNyk6CRDfyWr9hj8tjmHtF1cVGX9la+nxNGbDxCsMnV5VAlyBpZEe9tE
-	B565ee0SfWjixGZx3l9RrSxzZIAZLWcC2y279FV/XTdPiBp7WFGRe8QWxWWHyjQ8Zk
-	Zdh0b43+rUZenEkOxHjo/jAEyD7jNmiZ2YIphF4w2Y7OgsjskO4Bi0SU9EWCmPPWil
-	BXeOi3TxHLKczJLslqwxdRh0=
-Date: Wed, 9 Oct 2019 10:44:25 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Peiran Hong <peiran.hong@windriver.com>
-Message-ID: <20191009074425.GA26763@localhost>
-References: <20191007134340.36555-1-peiran.hong@windriver.com>
+	Wed,  9 Oct 2019 08:23:42 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.67,273,1566835200"; d="scan'208";a="76695218"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Oct 2019 16:23:26 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 8ED694CE14F5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Oct 2019 16:23:20 +0800 (CST)
+Received: from localhost.local (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 9 Oct 2019 16:23:24 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 9 Oct 2019 16:23:24 +0800
+Message-ID: <20191009082324.32317-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20191007134340.36555-1-peiran.hong@windriver.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] tcpdump: upgrade 4.9.2 -> 4.9.3
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 8ED694CE14F5.A94FC
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-asn1crypto: upgrade 0.24.0 -> 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,35 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2019 07:44:27 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 09 Oct 2019 08:23:43 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Mon, Oct 07, 2019 at 09:43:40AM -0400, Peiran Hong wrote:
->...
-> Deleted patch "0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch"
-> since the fix is included in the upgrade.
->...
+-License-Update: Copyright year updated to 2019.
 
-The patch file is not deleted:
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-asn1crypto.inc           | 6 +++---
+ .../{python-asn1crypto_0.24.0.bb => python-asn1crypto_1.0.1.bb}     | 0
+ .../{python3-asn1crypto_0.24.0.bb => python3-asn1crypto_1.0.1.bb}   | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-asn1crypto_0.24.0.bb => python-asn1crypto_1.0.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-asn1crypto_0.24.0.bb => python3-asn1crypto_1.0.1.bb} (100%)
 
->  .../tcpdump/tcpdump/add-ptest.patch           |  9 +++++----
->  ...lute-path-when-searching-for-libdlpi.patch | 19 ++++++++++---------
->  .../recipes-support/tcpdump/tcpdump/run-ptest |  4 ++--
->  .../unnecessary-to-check-libpcap.patch        | 15 ++++++++-------
->  .../{tcpdump_4.9.2.bb => tcpdump_4.9.3.bb}    | 12 +++++++++---
->  5 files changed, 34 insertions(+), 25 deletions(-)
->  rename meta-networking/recipes-support/tcpdump/{tcpdump_4.9.2.bb => tcpdump_4.9.3.bb} (74%)
->...
-
-cu
-Adrian
-
+diff --git a/meta-python/recipes-devtools/python/python-asn1crypto.inc b/meta-python/recipes-devtools/python/python-asn1crypto.inc
+index e85ce9a..b18dbaf 100644
+--- a/meta-python/recipes-devtools/python/python-asn1crypto.inc
++++ b/meta-python/recipes-devtools/python/python-asn1crypto.inc
+@@ -2,12 +2,12 @@ DESCRIPTION = "A fast, pure Python library for parsing and serializing ASN.1 str
+ HOMEPAGE = "https://github.com/wbond/asn1crypto"
+ SECTION = "devel/python"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=52010cd3c7d7bd965b55721ef4d93ec2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7439e38f5e04ff62fae436184786b7ca"
+ 
+ PYPI_PACKAGE = "asn1crypto"
+ 
+-SRC_URI[md5sum] = "de3520426e81a6581352d4366f310eb1"
+-SRC_URI[sha256sum] = "9d5c20441baf0cb60a4ac34cc447c6c189024b6b4c6cd7877034f4965c464e49"
++SRC_URI[md5sum] = "cf33950b47b5148e29f1d62a6b6c009b"
++SRC_URI[sha256sum] = "0b199f211ae690df3db4fd6c1c4ff976497fb1da689193e368eedbadc53d9292"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-asn1crypto_0.24.0.bb b/meta-python/recipes-devtools/python/python-asn1crypto_1.0.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-asn1crypto_0.24.0.bb
+rename to meta-python/recipes-devtools/python/python-asn1crypto_1.0.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_1.0.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb
+rename to meta-python/recipes-devtools/python/python3-asn1crypto_1.0.1.bb
 -- 
+2.7.4
 
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+
 
 
