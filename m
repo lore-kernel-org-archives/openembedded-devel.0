@@ -1,49 +1,45 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 7067860197
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
+	[209.85.215.177])
+	by mail.openembedded.org (Postfix) with ESMTP id A79227F4CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Oct 2019 18:13:01 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id y72so2105868pfb.12
+	Wed,  9 Oct 2019 18:43:38 +0000 (UTC)
+Received: by mail-pg1-f177.google.com with SMTP id 23so1988130pgk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Oct 2019 11:13:02 -0700 (PDT)
+	Wed, 09 Oct 2019 11:43:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=d1sHksyPErND4r0rlyI4ey9qspgs0XiyQm62H+ElLXM=;
-	b=CwFl2NysEF1ew0cWOsSQ/3582ex4zaTnN+AA1fmk+yAXUIb1+ORRVycVxzeX8XRkyq
-	KU1COcrUpp1bOuQ04ZZ4obcxiZ1d93ux1Onr7oJ8ZBN3wxtBXvIV2JgrJLB6vXV9jFij
-	QquzJpeZ3A/FIZmmvTt3UUxF9vbsYv59C7ilQ6JUhwcaGHobYkizyUTStVkzH/31j9DI
-	H+DOO02/bYuoCj/0wZAZBgGRqvisjB5l17dkVG/izMyqPzfYnkM/FbQDJYa+uR6SNPqT
-	v3mS17FK//rv7eCtZyg5RTJfJge+3mlrRXRk0RsUEVUqzs6yaijIwpTay+1RVOIAGXSX
-	G18A==
+	h=to:cc:from:subject:openpgp:autocrypt:message-id:date:user-agent
+	:mime-version:content-transfer-encoding:content-language;
+	bh=JUixiXrO0s22RzKTZYR8B7jCtqighEUd0h5UmvzcGDA=;
+	b=DLKTJjb6iOzeNa+1Fx/HHLWZZWXGzTMUU4kWDQh8yxvWp3s8ZJPTIGUs0ePjjMjIqm
+	6BC43gSFzI1tkwj2RcXr0kWr/6XMunzP4rVAsGPjwPRd+wzjlOcHrgCL2euqSnadsXTg
+	x90V1Mt7RSkKzN3Vnx6ni3thXIH4Pj94ZfipIEdVqoBjZ87kiJ8r2MSfexqzCKRsRDN+
+	XMjtKDOKmiyhJUtWUSnINefGEda4D/IwLD5z6zPOHXDVTf6mi+ojhUJ4NGv69V+Nj263
+	CggHels1LUIvLEbSWVKTjLF+Ttsp3l5ZAnwbNaALFwbI/ktgd40Wktvzrd0yPRdr8BLg
+	ZTcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=d1sHksyPErND4r0rlyI4ey9qspgs0XiyQm62H+ElLXM=;
-	b=TuhiPdKEQ/fITlya+susv4Q+L+V53Tppd42H2CDBZ8J07p3FSx1M/gVNLv3brVBZ9/
-	l0t8lEXi1UHzE7ApYeQTFmMWazCDqaiY+UtrUO+FTK2sfWWt6FY1uZ7R0fhWrmqC9I5c
-	Hs9hJZlF9kdcqNDx8MCxt1iIcoyK6AhdwOZep9VmOg1gzf1NQUZVJjMgRxFplmc/s2AG
-	e6KMch9NeUcAJFI7tyVX2u71SjOwMV2YErBfSIT6zq0PBQVUQPD3MalEB6KarFvfxqs1
-	QruJHod4i45A9WqWfHsNzdNl97eR+NOP4/68lfo79VJ573p/3eHU4NmqxdvGXM9Stgdl
-	T6HQ==
-X-Gm-Message-State: APjAAAWhODkg+ZVTub2BavnGS7QF19/qwY2Yj9jzNxewvxS5992y57ca
-	jLbmlFtDfwsgoLslBaQRG8P+QV5f
-X-Google-Smtp-Source: APXvYqxBgIjJ2ihD6SxzeBFFA2V6VSrYoL5fak1mWIKo08Acp0bAqx/ejK5xW35tucOHfyntt5/41Q==
-X-Received: by 2002:a17:90a:80c2:: with SMTP id
-	k2mr5841256pjw.92.1570644781940; 
-	Wed, 09 Oct 2019 11:13:01 -0700 (PDT)
+	h=x-gm-message-state:to:cc:from:subject:openpgp:autocrypt:message-id
+	:date:user-agent:mime-version:content-transfer-encoding
+	:content-language;
+	bh=JUixiXrO0s22RzKTZYR8B7jCtqighEUd0h5UmvzcGDA=;
+	b=b+GFlMlfpzO63K7lknyA2D1h3AZ9JtHJdSxilys7cbDH5LFaTk/3wntmwWXIwtyfPy
+	97smbXqe+4AKNVLBVfyB3HdkE2QVbaXgKZ7TPhHEBE2uYS+4U0wbX3vYPf0RelINEdlZ
+	7TBEqQquM9UoZT/i6fXlnXQNMcyP2FVuYrZ/gH0erEjNckmUnj35y1oha+MRsfdqLB4E
+	Gb1Yu5KxAGbgEnJ3wz0NK2Bt2jbc6drZ5TvzjE3f6a9UgI4U6e2O3pcXf/D8zIw91WEQ
+	/BP52Ex06+xFnzfreZ3agpLfeU7N8LLK2HYC3sThGqvIdNZhW+lqVU80DSYAr062TgXb
+	PjFg==
+X-Gm-Message-State: APjAAAXhwe+9VIBpFM3dIMGHosDW4+h9zOdmrJm6b3aBhYXSxvJfZ1L0
+	sTE2dqoUS4OHosrgdk5fetLI3O+I
+X-Google-Smtp-Source: APXvYqw1XGJgmMWibnvDv157VSRa5SVB4vBoFE0fGL0FaxnMMd9Gk9jF8zRzHMMJ1BotTCs4YWovvw==
+X-Received: by 2002:aa7:9e88:: with SMTP id p8mr5559764pfq.10.1570646619317;
+	Wed, 09 Oct 2019 11:43:39 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:a5c0:3474:1cc:c6fb:432b?
 	([2601:202:4180:a5c0:3474:1cc:c6fb:432b])
-	by smtp.gmail.com with ESMTPSA id
-	l24sm3347291pff.151.2019.10.09.11.13.00
+	by smtp.gmail.com with ESMTPSA id 2sm5342780pfa.43.2019.10.09.11.43.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Oct 2019 11:13:01 -0700 (PDT)
-To: Adrian Bunk <bunk@stusta.de>, openembedded-devel@lists.openembedded.org
-References: <20191009074207.18686-1-bunk@stusta.de>
+	Wed, 09 Oct 2019 11:43:38 -0700 (PDT)
+To: Khem Raj <raj.khem@gmail.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -89,13 +85,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <712d85ff-bf08-fbf8-e3e9-b599adef6305@gmail.com>
-Date: Wed, 9 Oct 2019 11:13:00 -0700
+Message-ID: <27e08393-58f2-d1e9-865b-1ca8cc31a1aa@gmail.com>
+Date: Wed, 9 Oct 2019 11:43:36 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <20191009074207.18686-1-bunk@stusta.de>
-Subject: Re: [meta-oe][warrior][PATCH] xmlrpc-c: Remove the RDEPENDS on perl
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: warrior pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,37 +104,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Oct 2019 18:13:01 -0000
+X-List-Received-Date: Wed, 09 Oct 2019 18:43:38 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
+The following changes since commit 3bdbf72e3a4bf18a4a2c7afbde4f7ab773aeded9:
 
+  oprofile: drop kernel-vmlinux from RRECOMMENDS (2019-09-07 15:30:50 -0700)
 
-On 10/9/19 12:42 AM, Adrian Bunk wrote:
-> The tools that use perl are no longer built.
+are available in the git repository at:
 
-What error are you seeing that this fixes in warrior?
+  https://git.openembedded.org/meta-openembedded f4ccdf2
 
-- armin
->
-> Signed-off-by: Adrian Bunk <bunk@stusta.de>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb | 1 -
->  1 file changed, 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
-> index 524263760..6c31b6981 100644
-> --- a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
-> +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.51.03.bb
-> @@ -15,7 +15,6 @@ SRCREV = "343a3b98e54999d67edb644bcd395aa9784fb16e"
->  S = "${WORKDIR}/git/stable"
->  
->  DEPENDS = "libxml2"
-> -RDEPENDS_${PN} = "perl"
->  
->  inherit autotools-brokensep binconfig pkgconfig
->  
+for you to fetch changes up to f4ccdf2bc3fe4f00778629088baab840c868e36b:
+
+  mariadb: update SRC_URI to use archive.mariadb.org (2019-10-09
+11:26:58 -0700)
+
+----------------------------------------------------------------
+Dan Tran (1):
+      polkit: Fix CVE-2018-19788
+
+Denys Dmytriyenko (1):
+      mariadb: update SRC_URI to use archive.mariadb.org
+
+Kai Kang (1):
+      apache2: fix multilib file conflicts
+
+Khem Raj (4):
+      redis: Fix build with clang/x86
+      klibc: Pass -fno-builtin-bcmp with musl/clang combo
+      klibc: Disable bcmp builtin for clang on glibc as well
+      bpftool.bb: Disable SECURITY_CFLAGS
+
+Peiran Hong (1):
+      tcpdump: Fix CVE-2017-16808
+
+Trevor Gamblin (1):
+      gd: fix CVE-2019-6978
+
+ meta-initramfs/recipes-devtools/klibc/klibc.inc                 |   5 +-
+ .../0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch    |  61
+++++++
+ meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb        |   1 +
+ meta-oe/recipes-dbs/mysql/mariadb.inc                           |   2 +-
+ meta-oe/recipes-extended/polkit/polkit/CVE-2018-19788_p1.patch  | 194
+++++++++++++++++++
+ meta-oe/recipes-extended/polkit/polkit/CVE-2018-19788_p2.patch  | 153
+++++++++++++++
+ meta-oe/recipes-extended/polkit/polkit/CVE-2018-19788_p3.patch  |  53 +++++
+ meta-oe/recipes-extended/polkit/polkit_0.115.bb                 |  12 +-
+ .../redis/redis/0001-src-Do-not-reset-FINAL_LIBS.patch          |  32 +++
+ meta-oe/recipes-extended/redis/redis_4.0.14.bb                  |   5 +-
+ meta-oe/recipes-kernel/bpftool/bpftool.bb                       |   4 +-
+ meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch               | 299
+++++++++++++++++++++++++++++
+ meta-oe/recipes-support/gd/gd_2.2.5.bb                          |   1 +
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.41.bb          |   6 +-
+ 14 files changed, 817 insertions(+), 11 deletions(-)
+ create mode 100644
+meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
+ create mode 100644
+meta-oe/recipes-extended/polkit/polkit/CVE-2018-19788_p1.patch
+ create mode 100644
+meta-oe/recipes-extended/polkit/polkit/CVE-2018-19788_p2.patch
+ create mode 100644
+meta-oe/recipes-extended/polkit/polkit/CVE-2018-19788_p3.patch
+ create mode 100644
+meta-oe/recipes-extended/redis/redis/0001-src-Do-not-reset-FINAL_LIBS.patch
+ create mode 100644 meta-oe/recipes-support/gd/gd/CVE-2019-6978.patch
 
 
