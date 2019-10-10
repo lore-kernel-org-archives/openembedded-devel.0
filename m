@@ -1,33 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 39D507C274
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id DE8CD79B57
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2019 05:40:05 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x9A5e4nX003892
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 9 Oct 2019 22:40:04 -0700 (PDT)
-Received: from [128.224.158.229] (128.224.158.229) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Wed, 9 Oct 2019 22:40:04 -0700
-To: Khem Raj <raj.khem@gmail.com>, =?UTF-8?Q?Andreas_M=c3=bcller?=
-	<schnitzeltony@gmail.com>
-References: <20190926223206.26850-1-schnitzeltony@gmail.com>
-	<20190926223206.26850-2-schnitzeltony@gmail.com>
-	<CALbNGRTwfXEP0skCASQRq86R78ugkZw5NJGMFTgKhtL_Ohu0hw@mail.gmail.com>
-	<CAMKF1sqYP5bee9=mcwLpiRU8rcbMWEdGz21y8iENkBtJm+a6nQ@mail.gmail.com>
-	<CALbNGRRUSkp0scHNSewoXh2WTBcy4wNZK+nhY2AhLekMPRDHoQ@mail.gmail.com>
-	<CAMKF1spVBBW9vEW1U5ZtDaVXdu4DDip_4Wj3vzceAmcBF5TD8w@mail.gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <92362e02-d9d5-4575-4fb9-97ab5a6b7630@windriver.com>
-Date: Thu, 10 Oct 2019 13:39:59 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.8.0
+	Thu, 10 Oct 2019 05:57:02 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.67,279,1566835200"; d="scan'208";a="76756104"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 10 Oct 2019 13:57:02 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 57F884CE03C1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 13:56:59 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.40) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 10 Oct 2019 13:57:04 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 10 Oct 2019 13:57:02 +0800
+Message-ID: <20191010055702.15462-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spVBBW9vEW1U5ZtDaVXdu4DDip_4Wj3vzceAmcBF5TD8w@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH v2 2/2] xfce4-panel: upgrade 4.14.0 -> 4.14.1
+X-Originating-IP: [10.167.225.40]
+X-yoursite-MailScanner-ID: 57F884CE03C1.A92DE
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-beautifulsoup4: upgrade 4.8.0 -> 4.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,52 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2019 05:40:05 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Thu, 10 Oct 2019 05:57:03 -0000
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+Content-Type: text/plain
 
-On 2019/10/9 下午9:29, Khem Raj wrote:
-> On Wed, Oct 9, 2019 at 2:10 AM Andreas Müller <schnitzeltony@gmail.com> wrote:
->> On Fri, Oct 4, 2019 at 10:35 PM Khem Raj <raj.khem@gmail.com> wrote:
->>>
->>> On Fri, Oct 4, 2019 at 1:31 PM Andreas Müller <schnitzeltony@gmail.com> wrote:
->>>> On Fri, Sep 27, 2019 at 12:32 AM Andreas Müller <schnitzeltony@gmail.com> wrote:
->>>>> * important bugfix release: systray draws icons properly when compositing is
->>>>>    disabled
->>>>> * while at it renumber patches
->>>>>
->>>>> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
->>>> If xfce-patches require review these days: Kai can you take a look?
->>>> If not: Ping
->>> Since they have been pending for a while
->>> I still wanted to give them a go for a build and see if all is okay. Still waiting on Kai to review them
->>>>
->> Sorry to come back to this - did not find it in master(-next) anymore:
->> It contains a bugfix annoying me for very very long time [1]
->>
-> I was hoping that Kai would be able to review it but that has not happened yet.
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-beautifulsoup4.inc         | 4 ++--
+ ...{python-beautifulsoup4_4.8.0.bb => python-beautifulsoup4_4.8.1.bb} | 0
+ ...ython3-beautifulsoup4_4.8.0.bb => python3-beautifulsoup4_4.8.1.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-beautifulsoup4_4.8.0.bb => python-beautifulsoup4_4.8.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.8.0.bb => python3-beautifulsoup4_4.8.1.bb} (100%)
 
-Sorry, missed the emails that we have the National Holiday last week.
-
-The patches are fine with me.
-
-Acked-by: Kai Kang <kai.kang@windriver.com>
-
-
-Regards,
-Kai
-
-
->
->> Or did I miss something
->>
->> [1] https://bugzilla.xfce.org/show_bug.cgi?id=14577
->>
->> Andreas
-
-
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+index a7fa081..acf52dd 100644
+--- a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
++++ b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
+ 
+-SRC_URI[md5sum] = "2b34208b26b5c49d4c84a4b9cf78656a"
+-SRC_URI[sha256sum] = "25288c9e176f354bf277c0a10aa96c782a6a18a17122dba2e8cec4a97e03343b"
++SRC_URI[md5sum] = "be03d778cf61cf6734a480e2010d6657"
++SRC_URI[sha256sum] = "6135db2ba678168c07950f9a16c4031822c6f4aec75a65e0a97bc5ca09789931"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.0.bb b/meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.0.bb
+rename to meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.0.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.0.bb
+rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.1.bb
 -- 
-Kai Kang
+2.7.4
+
+
 
 
