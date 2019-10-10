@@ -1,30 +1,33 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 60F857CDAC
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 39D507C274
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2019 05:06:19 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.67,278,1566835200"; d="scan'208";a="76753665"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 10 Oct 2019 13:06:16 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 90C244CE03E4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2019 13:06:08 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 10 Oct 2019 13:06:18 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 10 Oct 2019 13:06:19 +0800
-Message-ID: <20191010050619.12347-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Thu, 10 Oct 2019 05:40:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x9A5e4nX003892
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 9 Oct 2019 22:40:04 -0700 (PDT)
+Received: from [128.224.158.229] (128.224.158.229) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Wed, 9 Oct 2019 22:40:04 -0700
+To: Khem Raj <raj.khem@gmail.com>, =?UTF-8?Q?Andreas_M=c3=bcller?=
+	<schnitzeltony@gmail.com>
+References: <20190926223206.26850-1-schnitzeltony@gmail.com>
+	<20190926223206.26850-2-schnitzeltony@gmail.com>
+	<CALbNGRTwfXEP0skCASQRq86R78ugkZw5NJGMFTgKhtL_Ohu0hw@mail.gmail.com>
+	<CAMKF1sqYP5bee9=mcwLpiRU8rcbMWEdGz21y8iENkBtJm+a6nQ@mail.gmail.com>
+	<CALbNGRRUSkp0scHNSewoXh2WTBcy4wNZK+nhY2AhLekMPRDHoQ@mail.gmail.com>
+	<CAMKF1spVBBW9vEW1U5ZtDaVXdu4DDip_4Wj3vzceAmcBF5TD8w@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <92362e02-d9d5-4575-4fb9-97ab5a6b7630@windriver.com>
+Date: Thu, 10 Oct 2019 13:39:59 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.8.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 90C244CE03E4.AA185
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-attrs: upgrade 19.1.0 -> 19.2.0
+In-Reply-To: <CAMKF1spVBBW9vEW1U5ZtDaVXdu4DDip_4Wj3vzceAmcBF5TD8w@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][PATCH v2 2/2] xfce4-panel: upgrade 4.14.0 -> 4.14.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,45 +40,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2019 05:06:20 -0000
+X-List-Received-Date: Thu, 10 Oct 2019 05:40:05 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Language: en-US
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- meta-python/recipes-devtools/python/python-attrs.inc                  | 4 ++--
- .../python/{python-attrs_19.1.0.bb => python-attrs_19.2.0.bb}         | 0
- .../python/{python3-attrs_19.1.0.bb => python3-attrs_19.2.0.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-attrs_19.1.0.bb => python-attrs_19.2.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-attrs_19.1.0.bb => python3-attrs_19.2.0.bb} (100%)
+On 2019/10/9 下午9:29, Khem Raj wrote:
+> On Wed, Oct 9, 2019 at 2:10 AM Andreas Müller <schnitzeltony@gmail.com> wrote:
+>> On Fri, Oct 4, 2019 at 10:35 PM Khem Raj <raj.khem@gmail.com> wrote:
+>>>
+>>> On Fri, Oct 4, 2019 at 1:31 PM Andreas Müller <schnitzeltony@gmail.com> wrote:
+>>>> On Fri, Sep 27, 2019 at 12:32 AM Andreas Müller <schnitzeltony@gmail.com> wrote:
+>>>>> * important bugfix release: systray draws icons properly when compositing is
+>>>>>    disabled
+>>>>> * while at it renumber patches
+>>>>>
+>>>>> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+>>>> If xfce-patches require review these days: Kai can you take a look?
+>>>> If not: Ping
+>>> Since they have been pending for a while
+>>> I still wanted to give them a go for a build and see if all is okay. Still waiting on Kai to review them
+>>>>
+>> Sorry to come back to this - did not find it in master(-next) anymore:
+>> It contains a bugfix annoying me for very very long time [1]
+>>
+> I was hoping that Kai would be able to review it but that has not happened yet.
 
-diff --git a/meta-python/recipes-devtools/python/python-attrs.inc b/meta-python/recipes-devtools/python/python-attrs.inc
-index bd0f7ee..13c9e5f 100644
---- a/meta-python/recipes-devtools/python/python-attrs.inc
-+++ b/meta-python/recipes-devtools/python/python-attrs.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.attrs.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d4ab25949a73fe7d4fdee93bcbdbf8ff"
- 
--SRC_URI[sha256sum] = "f0b870f674851ecbfbbbd364d6b5cbdff9dcedbc7f3f5e18a6891057f21fe399"
--SRC_URI[md5sum] = "2be7bce157988928f5ff2bb50a0b510d"
-+SRC_URI[sha256sum] = "f913492e1663d3c36f502e5e9ba6cd13cf19d7fab50aa13239e420fef95e1396"
-+SRC_URI[md5sum] = "d5a6ee80beaa072bd2b3bcb6fee0d508"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-attrs_19.1.0.bb b/meta-python/recipes-devtools/python/python-attrs_19.2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-attrs_19.1.0.bb
-rename to meta-python/recipes-devtools/python/python-attrs_19.2.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-attrs_19.1.0.bb b/meta-python/recipes-devtools/python/python3-attrs_19.2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-attrs_19.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-attrs_19.2.0.bb
+Sorry, missed the emails that we have the National Holiday last week.
+
+The patches are fine with me.
+
+Acked-by: Kai Kang <kai.kang@windriver.com>
+
+
+Regards,
+Kai
+
+
+>
+>> Or did I miss something
+>>
+>> [1] https://bugzilla.xfce.org/show_bug.cgi?id=14577
+>>
+>> Andreas
+
+
 -- 
-2.7.4
-
-
+Kai Kang
 
 
