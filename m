@@ -1,37 +1,57 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C3676C1D5
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BB88C6C0EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2019 08:50:54 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46plDF6RnGz2Y;
-	Thu, 10 Oct 2019 10:50:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1570697454;
-	bh=iZlRrLjJcLW0NuZNsafUYkULZ4WR6cyHmVKX2JpRfOo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=s1+r3a4cqEpeGtFS4LXWWBmmmAn/aYZ5w6XfbSx7VEyDqUwOtLBFC4Xy9t9ZWk8kT
-	P8d2pZ/+sRGu0jIzwzkfccvh8ibEjl1ycBzX64puBkq+Wv4hQsiGOlaWOdFmcJfZDj
-	pvy2COZxyh3yd/A81RF+iC26ozGnKC7X2PZVVM8K32PaDlxIRczE9auSO1AbHxXho+
-	sLxxOedvjBuwr4xEsUyc0lI3l6TpW1Ho+6Cev5Yq6eTSUB65cPUMRz5jzQwppFEGNV
-	bM9jM2UkMSZ2eVg/5XjXGlCFJdxyntRMcgPYqmUTwXuDF8T2zJnleLT1ffBwOwPqox
-	WhBL7JsCoMfCGlECQVp03sCRMGOy7/xjeHORXcbMol/Nho7dkMejPvXisGMwnlvh7G
-	OhRkbWZqO4d7Rh0PT9rEgX+c2V264nAiEYOoq+MQSfbXy8jBG2Vk2FHpBNv5Hvdzpj
-	AITFLk5Mkg7YzqilXwyUt994vSAPSJ6Gw9HDr6gOwO7B0QXptI+j0voSb6Z1ef2Gxe
-	RtFy+RDb73ifTWKsgMpU5cuE/ZD8XBY9StnRKY/PsegdN0qEVMybrE6983prwmkyl1
-	RnRwFSpo11hkZvvnqKvwC3aUPHuBPBtfPrjN45PA+RPM2TEF6G/aa5u8DuJxH0kwj2
-	tznCj///eAuAGywRxw7n+zVc=
-Date: Thu, 10 Oct 2019 11:50:51 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: akuster808 <akuster808@gmail.com>
-Message-ID: <20191010085051.GA8610@localhost>
-References: <20191009074207.18686-1-bunk@stusta.de>
-	<712d85ff-bf08-fbf8-e3e9-b599adef6305@gmail.com>
+	Thu, 10 Oct 2019 09:08:04 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id 41F261848D
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 11:08:04 +0200 (CEST)
+X-Axis-User: NO
+X-Axis-NonUser: YES
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id kFtXnZJ3Jnxx
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 11:08:03 +0200 (CEST)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 7638518421
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 11:08:03 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 5A1161A065
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 11:08:03 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 4DCB11A064
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 11:08:03 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder02.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 11:08:03 +0200 (CEST)
+Received: from saur.se.axis.com (saur.se.axis.com [10.92.3.10])
+	by thoth.se.axis.com (Postfix) with ESMTP id 415A530D9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 11:08:03 +0200 (CEST)
+Received: from saur.se.axis.com (localhost [127.0.0.1])
+	by saur.se.axis.com (8.15.2/8.15.2) with ESMTPS id x9A983uv014867
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 11:08:03 +0200
+Received: (from pkj@localhost)
+	by saur.se.axis.com (8.15.2/8.15.2/Submit) id x9A9837Y014866
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Oct 2019 11:08:03 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Oct 2019 11:08:00 +0200
+Message-Id: <20191010090800.14823-1-pkj@axis.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <712d85ff-bf08-fbf8-e3e9-b599adef6305@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][warrior][PATCH] xmlrpc-c: Remove the RDEPENDS on perl
+X-TM-AS-GCONF: 00
+Subject: [meta-oe][PATCH] kconfig-frontends: Retrieve the Git repository from GitLab
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,28 +64,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2019 08:50:55 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Oct 2019 09:08:06 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Oct 09, 2019 at 11:13:00AM -0700, akuster808 wrote:
-> On 10/9/19 12:42 AM, Adrian Bunk wrote:
-> > The tools that use perl are no longer built.
-> 
-> What error are you seeing that this fixes in warrior?
+The ymorin.is-a-geek.org site has been down since September and there
+is no indication of when, if ever, it will be back. Retrieve the
+repository from GitLab instead, recommended by the maintainer, Yann E
+Morin.
 
-It needlessly pulls in perl.
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+---
+ .../kconfig-frontends/kconfig-frontends_4.11.0.1.bb           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> - armin
-
-cu
-Adrian
-
+diff --git a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
+index de9a6eb99..fae80a79e 100644
+--- a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
++++ b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
+@@ -7,13 +7,13 @@ the effort of keeping an up-to-date, out-of-tree, packaging of the \
+ kconfig infrastructure, ready for use by third-party projects. \
+ The kconfig-frontends package provides the kconfig parser, as well as all \
+ the frontends"
+-HOMEPAGE = "http://ymorin.is-a-geek.org/projects/kconfig-frontends"
++HOMEPAGE = "https://gitlab.com/ymorin/kconfig-frontends"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=9b8cf60ff39767ff04b671fca8302408"
+ SECTION = "devel"
+ DEPENDS += "ncurses flex bison gperf-native bison-native"
+ RDEPENDS_${PN} += "python3 bash"
+-SRC_URI = "git://ymorin.is-a-geek.org/kconfig-frontends;branch=4.11.x \
++SRC_URI = "git://gitlab.com/ymorin/kconfig-frontends.git;protocol=https;branch=4.11.x \
+ 	   file://0001-Makefile-ensure-frontends-exits-before-writing-into-.patch \
+            file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch"
+ 
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.21.0
 
 
