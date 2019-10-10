@@ -1,61 +1,46 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4086E6C0EA
+Return-Path: <alex.kanavin@gmail.com>
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A90427F50E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2019 09:13:43 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 2238B1842E;
-	Thu, 10 Oct 2019 11:13:44 +0200 (CEST)
-X-Axis-User: NO
-X-Axis-NonUser: YES
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id rhaamql6W0gc; Thu, 10 Oct 2019 11:13:41 +0200 (CEST)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 5D96018421;
-	Thu, 10 Oct 2019 11:13:41 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 3E7DA1A065;
-	Thu, 10 Oct 2019 11:13:41 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 325161A064;
-	Thu, 10 Oct 2019 11:13:41 +0200 (CEST)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder02.se.axis.com (Postfix) with ESMTP;
-	Thu, 10 Oct 2019 11:13:41 +0200 (CEST)
-Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
-	by thoth.se.axis.com (Postfix) with ESMTP id 25C0EF6D;
-	Thu, 10 Oct 2019 11:13:41 +0200 (CEST)
-Received: from xbox12.axis.com (10.0.5.26) by XBOX03.axis.com (10.0.5.17) with
-	Microsoft SMTP Server (TLS) id 15.0.1365.1;
-	Thu, 10 Oct 2019 11:13:41 +0200
-Received: from XBOX03.axis.com (10.0.5.17) by xbox12.axis.com (10.0.5.26) with
-	Microsoft SMTP Server (TLS) id 15.0.1395.4;
-	Thu, 10 Oct 2019 11:13:40 +0200
-Received: from XBOX03.axis.com ([fe80::e49e:4060:87cc:61a]) by XBOX03.axis.com
-	([fe80::e49e:4060:87cc:61a%22]) with mapi id 15.00.1365.000;
-	Thu, 10 Oct 2019 11:13:40 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Armin Kuster <akuster808@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH] kconfig-frontends: Retrieve the Git
-	repository from GitLab
-Thread-Index: AQHVf0pD3WvxNzMOYUCsn+8ZaaFwNqdTljbA
-Date: Thu, 10 Oct 2019 09:13:40 +0000
-Message-ID: <a894dfe7a40e490480789090ef3f0b29@XBOX03.axis.com>
-References: <20191010090800.14823-1-pkj@axis.com>
-In-Reply-To: <20191010090800.14823-1-pkj@axis.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
-MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] kconfig-frontends: Retrieve the Git	repository from GitLab
+	Thu, 10 Oct 2019 11:20:31 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id v17so6355868wml.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 04:20:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=9aspXpLFnMjst1bSf9RtuZq1cfpAzTvAt/9v2UV8ZSk=;
+	b=LIAKxRqvXaHceEPU9rVfTsOqi99zvd9CLtwY1q0J5sH/94aa0iB7LyvqfskZ/bYjke
+	7sozxP5ra9yjups487vOaJgyVWrV3U7cds5xJ5oaWuNpXlVQeg/QBpFxhQa5EK40ViGB
+	TkFzVUwxnjQN3lNK9WH5akGcx7ME02PaU8cAAl6MGXs/xE9ipbKcTxPzN0f9K/v/QzqZ
+	J0Wr6dMU7GjpKqnWFMFTwxjf++v2DH9562OuHr4Kge2EveiCkr+V9KOumdvBJiWbTywY
+	dlD5FEEgmkkQKuKBqeviuMz+H8UEXseCUTLj22zoVbXAQ1cnAiCH9Lhy0GIRFBxif3Jx
+	gYkA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=9aspXpLFnMjst1bSf9RtuZq1cfpAzTvAt/9v2UV8ZSk=;
+	b=pz6pR+sP3aXIugps35PfLaN9cT4Oud+oBfYFO9LmNPMH4pVd82Jc6nxWSvqJyCRmDI
+	wqKr+H1pUKNa74fyywijwZ76+le41IZy+VqB77lvcQXAPqyHMxTZ51O88EnfKEAA1Yww
+	gXfVURRMlaoNsf3SWANICx/+0gYhBcK69ZwLnLcY+AU9htaGU77TLv++9gU4jJ2Oihwg
+	uYhqkQJU4TqH4MLs0rA1uPmODFChnVAh8NTNZtKFeu78hH+WjnkAJrN7tmnlD81evCo1
+	NnWTloUZ9SnM+u7kgkX66kpgTzCb4ZFT/kXtpU7X6NZQyH/JS0dpGqksEdbSnge5Pre4
+	vEUg==
+X-Gm-Message-State: APjAAAXsQtusTpVnkHIHWwxHj1jHfT47Y6gWHbAz6xCY0Oy79C8huzAW
+	vZwUtsGRksh9wUpwZ9SJ9SPSCaOXBms=
+X-Google-Smtp-Source: APXvYqwDNPhvzX3GE8ZWFUxr2EjdYZvSDa6jTF6YBqv4vIUywC5suqr4ZAh67/iJ/vEpU2fPOeeH6A==
+X-Received: by 2002:a1c:20d8:: with SMTP id g207mr7259926wmg.79.1570706432069; 
+	Thu, 10 Oct 2019 04:20:32 -0700 (PDT)
+Received: from alexander-box.luxoft.com ([62.96.135.139])
+	by smtp.gmail.com with ESMTPSA id q3sm6232426wru.33.2019.10.10.04.20.31
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 10 Oct 2019 04:20:31 -0700 (PDT)
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Oct 2019 13:20:25 +0200
+Message-Id: <20191010112025.4090-1-alex.kanavin@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [PATCH] lua: change a hard readline dependency into an optional one
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,66 +53,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2019 09:13:46 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 10 Oct 2019 11:20:32 -0000
 
-Armin, once this is accepted to master, can you backport it to Thud and=20
-Warrior as well? There has been no other changes to the recipe for a long=20
-time so it should apply without any problems.
+This requires patching the source code, as readline is hardcoded
+in there.
 
-//Peter
+The rationale is to allow disabling the dependency on a gplv3
+component (readline) where that license is blacklisted.
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org <openembedded-dev=
-el-bounces@lists.openembedded.org> On Behalf Of Peter Kjellerstedt
-> Sent: den 10 oktober 2019 11:08
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [meta-oe][PATCH] kconfig-frontends: Retrieve the Git reposi=
-tory from GitLab
->=20
-> The ymorin.is-a-geek.org site has been down since September and there
-> is no indication of when, if ever, it will be back. Retrieve the
-> repository from GitLab instead, recommended by the maintainer, Yann E
-> Morin.
->=20
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> ---
->  .../kconfig-frontends/kconfig-frontends_4.11.0.1.bb           | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends=
-_4.11.0.1.bb b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends=
-_4.11.0.1.bb
-> index de9a6eb99..fae80a79e 100644
-> --- a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0=
-.1.bb
-> +++ b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0=
-.1.bb
-> @@ -7,13 +7,13 @@ the effort of keeping an up-to-date, out-of-tree, packa=
-ging of the \
->  kconfig infrastructure, ready for use by third-party projects. \
->  The kconfig-frontends package provides the kconfig parser, as well as al=
-l \
->  the frontends"
-> -HOMEPAGE =3D "http://ymorin.is-a-geek.org/projects/kconfig-frontends"
-> +HOMEPAGE =3D "https://gitlab.com/ymorin/kconfig-frontends"
->  LICENSE =3D "GPL-2.0"
->  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D9b8cf60ff39767ff04b671fca8302=
-408"
->  SECTION =3D "devel"
->  DEPENDS +=3D "ncurses flex bison gperf-native bison-native"
->  RDEPENDS_${PN} +=3D "python3 bash"
-> -SRC_URI =3D "git://ymorin.is-a-geek.org/kconfig-frontends;branch=3D4.11.=
-x \
-> +SRC_URI =3D "git://gitlab.com/ymorin/kconfig-frontends.git;protocol=3Dht=
-tps;branch=3D4.11.x \
->  	   file://0001-Makefile-ensure-frontends-exits-before-writing-into-.pat=
-ch \
->             file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch"
->=20
-> --
-> 2.21.0
+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+---
+ ...ilding-lua-without-readline-on-Linux.patch | 59 +++++++++++++++++++
+ meta-oe/recipes-devtools/lua/lua_5.3.5.bb     |  9 ++-
+ 2 files changed, 65 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/lua/lua/0001-Allow-building-lua-without-readline-on-Linux.patch
+
+diff --git a/meta-oe/recipes-devtools/lua/lua/0001-Allow-building-lua-without-readline-on-Linux.patch b/meta-oe/recipes-devtools/lua/lua/0001-Allow-building-lua-without-readline-on-Linux.patch
+new file mode 100644
+index 000000000..e76790086
+--- /dev/null
++++ b/meta-oe/recipes-devtools/lua/lua/0001-Allow-building-lua-without-readline-on-Linux.patch
+@@ -0,0 +1,59 @@
++From 601ef636fc4dfb2af3e7fda88d8ea1c1d92affe4 Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Wed, 2 Oct 2019 17:54:15 +0200
++Subject: [PATCH] Allow building lua without readline on Linux
++
++Upstream-Status: Pending
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++---
++ Makefile      | 2 +-
++ src/Makefile  | 3 +++
++ src/luaconf.h | 5 +++++
++ 3 files changed, 9 insertions(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index 119110d..9f6df45 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -36,7 +36,7 @@ RM= rm -f
++ # == END OF USER SETTINGS -- NO NEED TO CHANGE ANYTHING BELOW THIS LINE =======
++ 
++ # Convenience platforms targets.
++-PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris
+++PLATS= aix bsd c89 freebsd generic linux linux-no-readline macosx mingw posix solaris
++ 
++ # What to install.
++ TO_BIN= lua luac
++diff --git a/src/Makefile b/src/Makefile
++index 64c78f7..5c0428a 100644
++--- a/src/Makefile
+++++ b/src/Makefile
++@@ -109,6 +109,9 @@ generic: $(ALL)
++ linux:
++ 	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_LINUX" SYSLIBS="-Wl,-E -ldl -lreadline"
++ 
+++linux-no-readline:
+++	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_LINUX_NO_READLINE" SYSLIBS="-Wl,-E -ldl"
+++
++ macosx:
++ 	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX" SYSLIBS="-lreadline"
++ 
++diff --git a/src/luaconf.h b/src/luaconf.h
++index 9eeeea6..d71ca25 100644
++--- a/src/luaconf.h
+++++ b/src/luaconf.h
++@@ -64,6 +64,11 @@
++ #define LUA_USE_READLINE	/* needs some extra libraries */
++ #endif
++ 
+++#if defined(LUA_USE_LINUX_NO_READLINE)
+++#define LUA_USE_POSIX
+++#define LUA_USE_DLOPEN		/* needs an extra library: -ldl */
+++#endif
+++
++ 
++ #if defined(LUA_USE_MACOSX)
++ #define LUA_USE_POSIX
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+index 265e2519e..ae41e627f 100644
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.5.bb
+@@ -4,9 +4,9 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=60aa5cfdbd40086501778d9b6ebf29ee"
+ HOMEPAGE = "http://www.lua.org/"
+ 
+-DEPENDS = "readline"
+ SRC_URI = "http://www.lua.org/ftp/lua-${PV}.tar.gz;name=tarballsrc \
+            file://lua.pc.in \
++           file://0001-Allow-building-lua-without-readline-on-Linux.patch \
+            "
+ 
+ # if no test suite matches PV release of Lua exactly, download the suite for the closest Lua release.
+@@ -24,18 +24,21 @@ SRC_URI[tarballtest.sha256sum] = "b80771238271c72565e5a1183292ef31bd7166414cd0d4
+ 
+ inherit pkgconfig binconfig ptest
+ 
++PACKAGECONFIG ??= "readline"
++PACKAGECONFIG[readline] = ",,readline"
++
+ UCLIBC_PATCHES += "file://uclibc-pthread.patch"
+ SRC_URI_append_libc-uclibc = "${UCLIBC_PATCHES}"
+ 
+ TARGET_CC_ARCH += " -fPIC ${LDFLAGS}"
+-EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -DLUA_USE_LINUX -fPIC' MYLDFLAGS='${LDFLAGS}'"
++EXTRA_OEMAKE = "'CC=${CC} -fPIC' 'MYCFLAGS=${CFLAGS} -fPIC' MYLDFLAGS='${LDFLAGS}'"
+ 
+ do_configure_prepend() {
+     sed -i -e s:/usr/local:${prefix}:g src/luaconf.h
+ }
+ 
+ do_compile () {
+-    oe_runmake linux
++    oe_runmake ${@bb.utils.contains('PACKAGECONFIG', 'readline', 'linux', 'linux-no-readline', d)}
+ }
+ 
+ do_install () {
+-- 
+2.17.1
 
 
