@@ -1,24 +1,50 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 37F9A7D048
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id AE2566B11A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2019 02:47:33 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x9B2lX0J024405
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 10 Oct 2019 19:47:33 -0700
-Received: from 2ebd3b390030.wrs.com (128.224.153.74) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.468.0; Thu, 10 Oct 2019 19:47:32 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Fri, 11 Oct 2019 02:46:15 +0000
-Message-ID: <20191011024615.198728-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Fri, 11 Oct 2019 02:52:39 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id e1so4903019pgj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Oct 2019 19:52:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=CazRO+mWf7zBCr/r2lUE35x1tOseh2eM6qk/+ND/OgU=;
+	b=bHBlWHp8EIRfXshRlLME+xo3QF/JaAivbEwTvl2l8N13PaH+BEn93G8hx8JkurN/KC
+	OMCTFJXbWSuBT5k5EHWs2BzzT3IHwGGIp7FgIyDFWAPiijh2fL8mUHZvrcY+q5DX7uKy
+	CwVd62cp4jFcbEJHjjhd+bHQg7VpA7d0Q9VHZafgp6m2uJYzxBKdnk+kDBzd10ch8Q/6
+	M+hNKo288wL1MdvsAzmgtC4esJ/6xkSK5/umYUF8C8Dm8LSTdvrLcl8lGp7ThkFLdRZT
+	SaPkoIXOIEqsPRwwweG3HTejlokfRWqdZYa6+tOJ2ax3Rls1c/+moccjW9ejD/bZWqRM
+	xMDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=CazRO+mWf7zBCr/r2lUE35x1tOseh2eM6qk/+ND/OgU=;
+	b=GBZYZVTbpAU9m8DLYR1e+0gnur0epvpRlQvYYuB8FHJwbqEiGZ/uw+yav2nXeTzQzu
+	N/3NgJFXPsWIvh55n2RV38Hycrgp1x5sOrcE1juoK0vv2qmTYg8IDR4XrH+xZa2y5WcN
+	I3gG0WGFhDgHGvNCJjlFsGKJyB/g2uFWY21FoLjRpAG3xirMIk4YC5beUjTKPcSHReiJ
+	Rc/sLRxQvU+E4Gy8tKUqewzfhBzuLQUuvJDCc+IV6QzdUk8cI+BMmWTe7HQrv2178zrp
+	KMTKy8YDq92g3MOjKS0CiigBrUv6wvIG/UX/yNV1HgPaX+JSexUxGhZdCwIMD9Wajwis
+	hfeQ==
+X-Gm-Message-State: APjAAAUFW/WYNmu9hZYiG/7szbS6r2LC9S1puFBXIvCTMeMQkVO90DBH
+	MhWuqp+nRn5XM+q588ZP8IUESzlFDTk=
+X-Google-Smtp-Source: APXvYqxsIHonUJtoyu7FAuuuH4jMun8KtBboMLehannvY/w8Z3vp3lfwu6b/fcyj9nFZBLKiG+5jDA==
+X-Received: by 2002:a62:a50b:: with SMTP id v11mr14003169pfm.164.1570762360110;
+	Thu, 10 Oct 2019 19:52:40 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::7275])
+	by smtp.gmail.com with ESMTPSA id
+	c10sm7517934pfo.49.2019.10.10.19.52.39
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 10 Oct 2019 19:52:39 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Oct 2019 19:52:31 -0700
+Message-Id: <20191011025231.2457830-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] lvm2: remove unsupported OPTIONS+="event_timeout" rule
+Subject: [meta-oe][PATCH V2] jsonrpc: Disable coverage in default build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,83 +57,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 02:47:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 11 Oct 2019 02:52:40 -0000
+Content-Transfer-Encoding: 8bit
 
-The OPTIONS+="event_timeout" is Unsupported since systemd/udev version 216,
-that is ~5 years ago.
+Building with intrumentation is only useful during development or
+optimization phases, in production, this will just make it slow and in
+some cases not work where file system might be readonly.
 
-Since systemd/udev version 243, there's a new message printed if unsupported
-OPTIONS value is used:
+If its needed then enable the packageconfig via a bbappend
 
-  Invalid value for OPTIONS key, ignoring: 'event_timeout=180'
-
-Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1740666
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc         |  1 +
- ...supported-OPTIONS-event_timeout-rule.patch | 39 +++++++++++++++++++
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch
+v2: Add coverage packageconfig
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index 6c95bfd02..5799f59f2 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -16,6 +16,7 @@ SRC_URI = "https://sourceware.org/pub/lvm2/LVM2.${PV}.tgz \
-            file://0005-do-not-build-manual.patch \
-            file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
-            file://0001-configure-Fix-setting-of-CLDFLAGS-default.patch \
-+           file://0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch \
-            "
- SRC_URI[md5sum] = "5fc07da5461a3794a751dcfc355827d5"
- SRC_URI[sha256sum] = "550ba750239fd75b7e52c9877565cabffef506bbf6d7f6f17b9700dee56c720f"
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch
-new file mode 100644
-index 000000000..5a6db4b88
---- /dev/null
-+++ b/meta-oe/recipes-support/lvm2/lvm2/0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch
-@@ -0,0 +1,39 @@
-+From e48f8328f9d35f23a24e5b27237e8ebf1dbfa269 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 10 Oct 2019 22:38:00 -0400
-+Subject: [PATCH] udev: remove unsupported OPTIONS+="event_timeout" rule
+ meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb
+index b23775708a..dbf44d796f 100644
+--- a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb
++++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb
+@@ -14,6 +14,9 @@ SRCREV = "4ed5b00dcc409405a19e6d8c6478f703153430e1"
+ 
+ S = "${WORKDIR}/git"
+ 
++PACKAGECONFIG ?= ""
++PACKAGECONFIG[coverage] = "-DWITH_COVERAGE=YES,-DWITH_COVERAGE=NO,,"
 +
-+The OPTIONS+="event_timeout" is Unsupported since systemd/udev version 216,
-+that is ~5 years ago.
-+
-+Since systemd/udev version 243, there's a new message printed if unsupported
-+OPTIONS value is used:
-+
-+  Invalid value for OPTIONS key, ignoring: 'event_timeout=180'
-+
-+Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1740666
-+
-+Signed-off-by: Peter Rajnoha <prajnoha@redhat.com>
-+
-+Upstream-Status: Backport [https://github.com/lvmteam/lvm2/commit/125f27ac37bc9b93cc96f64052b9681b3d479ee1]
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ udev/11-dm-lvm.rules.in | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/udev/11-dm-lvm.rules.in b/udev/11-dm-lvm.rules.in
-+index 91cb991..7c58994 100644
-+--- a/udev/11-dm-lvm.rules.in
-++++ b/udev/11-dm-lvm.rules.in
-+@@ -37,8 +37,6 @@ ENV{DM_SUBSYSTEM_UDEV_FLAG0}!="1", ENV{DM_NOSCAN}=="1", ENV{DM_UDEV_DISABLE_OTHE
-+ 
-+ ENV{DM_UDEV_DISABLE_SUBSYSTEM_RULES_FLAG}=="1", GOTO="lvm_end"
-+ 
-+-OPTIONS+="event_timeout=180"
-+-
-+ # Do not create symlinks for inappropriate subdevices.
-+ ENV{DM_LV_NAME}=="pvmove?*|?*_vorigin", GOTO="lvm_disable"
-+ ENV{DM_LV_LAYER}=="?*", GOTO="lvm_disable"
-+-- 
-+2.23.0
-+
+ inherit cmake
+ 
+ EXTRA_OECMAKE += "-DCOMPILE_TESTS=NO -DCOMPILE_STUBGEN=NO -DCOMPILE_EXAMPLES=NO \
 -- 
 2.23.0
 
