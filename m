@@ -1,36 +1,53 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id B67AC7F37D
+Return-Path: <prvs=18080c46d=alistair.francis@wdc.com>
+Received: from esa1.hgst.iphmx.com (esa1.hgst.iphmx.com [68.232.141.245])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E63D7F382
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2019 19:05:24 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 46qcpq53N8z4S;
-	Fri, 11 Oct 2019 21:05:23 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1570820723;
-	bh=DIMnWbkGZffbFGHTGWpWjFTDc9+8eIn7TCz0TiddB/A=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=eJu0oVYx71+iHMYGMNbUdG14W1BVGMeDnSrr2Papv2gjmEP2fFZA5k2t7K8AIP1aO
-	9vPlUpSv9CWSIyujtXQEzzFWQiiAb2Z6CJ/KrY7NtNdKrag77/Jsu44c6uU92YciXU
-	EL9WuD5CXbYG32d9FVtGek2/zwO1XtC/WTEW4uIQ4Tv8zvxHJeNQTC3P+KG2AQ3AY5
-	2OHcLPx7lj+h7nnqUjv14LutuoJWuKm1snKytUkdeKaH31PAuRItFR4ltddznHbN9q
-	5edAFTBY3T8s5r24G+AH8O12uASqBRlNza+5SDOWkoOsHjtoo6wY8a+eE590nK406Z
-	JBh5Cc1QuapgWjyMpyXkOxMFfJfNXJBP57f+yONVU8UOjComumnjVhQK+iJssDnzcH
-	J3UNP021bsuorin/aP2T/xo/hLPO5Ky3pL2gFuGz874vK5xCTh3QX2K6sn/jIEmx9S
-	U0Ma5nJXU/tTJBbB/Wvhiu60aTEPAl6jsS8BwBlGgv5HKp9zEisvADlYlkeDF1tNcw
-	Y8QUAeAwr0TO/1dgZaQsjSlS2Dho1F721I62PSznvid/WNs4KvPjB5yhGTAqby4uyY
-	knREsyLxFFQw4z/x0MVgvyvbln/fHRSaTvOeaeP4FPpb7x56O0v66O9qfe9sIEjrjX
-	J+hE3HI38XkNLS6x1/7B7TNY=
-Date: Fri, 11 Oct 2019 22:05:21 +0300
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20191011190521.GA20513@localhost>
-References: <20191011172818.718226-1-raj.khem@gmail.com>
+	Fri, 11 Oct 2019 21:25:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1570829158; x=1602365158;
+	h=from:to:cc:subject:date:message-id:mime-version:
+	content-transfer-encoding;
+	bh=/kPJ1hKCAfkALvwq9ZWoUg1Twc3gHa3Aa0NgBgAtmp0=;
+	b=VFDApOy+GBF42E+QIwOBBOX0GL/W5xA7EAm4nnrPZdhfSG2tY3qxeBa7
+	YLntIbm0Mzj0kktp3q6D5tRh/M3w4uR8Xkk48Zh2fTgwMRxC8MXOmz3Ou
+	kogLvSXRwHiGXMqTQgAJjzq5L+E24/MtN7hHRTBjbVx/ip3kr43B9206L
+	f6wmiUQE3KminS+aB0oafiLYg75zJSwgN6wNAq6iIY4eTdtJPfoLfIGd0
+	XO0TDjInKo0i1KoqNXHZijdti6HWtM7CZk8cIEoMxPTye6Uvwyr9DWbc/
+	+pFBsjlfD7w9Uf05ZBXklSazJbmDGBjmVExgwSbNXSxiSwnhj7aqdhNy4 Q==;
+IronPort-SDR: PvY1dD+ryJNBhRBGWgTntFnq7v4BUCn0p9O+/DCSruZV2xD1Zb1FDShdfAg7B6tKeLKTjMx90e
+	PbBmqN7Tnm1/YHclq2d5vH+4Uq1Zh3lYPTtpzBD6cSu0O9z/JD0SoVVVinxjKLO00ym3vNWU79
+	GKpkVv0whKwfPsuCUXAfaIqmYEYgLSna2pEnZEewpDw4yKZPV61t2cbiX1kaKNYHBJehDuh/DT
+	dCW6mKmrQg7Y8BF+TCoP1mGyeBKYQyjzt4lLCGY9UmjiStE3YoQSPlefA87nj6QCROPlBuIUjx
+	mHA=
+X-IronPort-AV: E=Sophos;i="5.67,285,1566835200"; d="scan'208";a="227380805"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+	([199.255.45.15])
+	by ob1.hgst.iphmx.com with ESMTP; 12 Oct 2019 05:25:57 +0800
+IronPort-SDR: ED6Sg+Z6TsR4Z13XZ50jMe1bbpVZaYdqdxUWdTaSw/mqQB36PXY1z0L6qE0go9kHKYmfEWvkVC
+	r57Akcutc4j/QTjueYwuM7A5StjWzKQeKCi3mJ9zbK4XdHflTjXLGrDpv6Pp2FD7cIYe28a5Bp
+	0ril+/bHFadphb3c5L2bB3EqcAZTt1IFXU1MqHEY/q5FFFQAZMlYhbWBLAD3HlxyrAoGUb0ojm
+	qHW4nTN9Z/itK+4tB2r6pToabbJMmPYsO6BtMpTe3nWCI0NpuUWn4pUWiUE9vORW7uB6hoCkot
+	21FWQbgZT4BbzYb0/jCnevyE
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+	11 Oct 2019 14:21:52 -0700
+IronPort-SDR: mGbs6NoG8t24t8ovdiyS16wZxH5snPIvBE9YxIFfnyvcc/5xO5txqwL0Mst39x7Wa0uUyd28S5
+	+FdZKN7Oh7aJQvj0PsY9rqhoASPbglhl0BeJthbolAjZftVbVdljcJCzKaT+XIcpT60r7VGULJ
+	iqJ3dWLmPX+gWqcGP3X2XxlYfOSZFw3Wb2ff/7kMqgUSOZoZmdISjQ/65wQJK0XXGiV/Vhi2fH
+	pXvWDpwn67/1H7b/DoANdTWBKxsMwqZ3xaN/JzGmx2UD86V+yNTYINavPyZQt13KFodkOZ4twm
+	9LA=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
+	by uls-op-cesaip01.wdc.com with ESMTP; 11 Oct 2019 14:25:57 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 11 Oct 2019 14:21:20 -0700
+Message-Id: <20191011212120.11453-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <20191011172818.718226-1-raj.khem@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] wvstreams: Disable calls to makecontext on musl
+Subject: [meta-java][PATCH] layer.conf: Mark as compatible with zeus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,28 +60,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 19:05:25 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Fri, 11 Oct 2019 21:25:56 -0000
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 11, 2019 at 10:28:18AM -0700, Khem Raj wrote:
-> makecontext API is deprecated and not implemented in musl
->...
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+Also, can the master-next branch be pushed to master?
 
-Does the resulting binary work correctly with musl?
+ conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The whole patch looks like turning a turning a build failure into
-broken runtime code, and that disabling the recipe with musl would
-be the only sane action.
-
-cu
-Adrian
-
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 90236be..cdba2cd 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+ BBFILE_COLLECTIONS += "meta-java"
+ BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
+ BBFILE_PRIORITY_meta-java = "10"
+-LAYERSERIES_COMPAT_meta-java = "thud warrior"
++LAYERSERIES_COMPAT_meta-java = "thud warrior zeus"
+ 
+ LICENSE_PATH += "${LAYERDIR}/licenses"
+ 
 -- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+2.23.0
 
 
