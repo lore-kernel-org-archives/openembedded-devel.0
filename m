@@ -1,53 +1,47 @@
-Return-Path: <prvs=18080c46d=alistair.francis@wdc.com>
-Received: from esa1.hgst.iphmx.com (esa1.hgst.iphmx.com [68.232.141.245])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E63D7F382
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 2ABC46BCA9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2019 21:25:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1570829158; x=1602365158;
-	h=from:to:cc:subject:date:message-id:mime-version:
-	content-transfer-encoding;
-	bh=/kPJ1hKCAfkALvwq9ZWoUg1Twc3gHa3Aa0NgBgAtmp0=;
-	b=VFDApOy+GBF42E+QIwOBBOX0GL/W5xA7EAm4nnrPZdhfSG2tY3qxeBa7
-	YLntIbm0Mzj0kktp3q6D5tRh/M3w4uR8Xkk48Zh2fTgwMRxC8MXOmz3Ou
-	kogLvSXRwHiGXMqTQgAJjzq5L+E24/MtN7hHRTBjbVx/ip3kr43B9206L
-	f6wmiUQE3KminS+aB0oafiLYg75zJSwgN6wNAq6iIY4eTdtJPfoLfIGd0
-	XO0TDjInKo0i1KoqNXHZijdti6HWtM7CZk8cIEoMxPTye6Uvwyr9DWbc/
-	+pFBsjlfD7w9Uf05ZBXklSazJbmDGBjmVExgwSbNXSxiSwnhj7aqdhNy4 Q==;
-IronPort-SDR: PvY1dD+ryJNBhRBGWgTntFnq7v4BUCn0p9O+/DCSruZV2xD1Zb1FDShdfAg7B6tKeLKTjMx90e
-	PbBmqN7Tnm1/YHclq2d5vH+4Uq1Zh3lYPTtpzBD6cSu0O9z/JD0SoVVVinxjKLO00ym3vNWU79
-	GKpkVv0whKwfPsuCUXAfaIqmYEYgLSna2pEnZEewpDw4yKZPV61t2cbiX1kaKNYHBJehDuh/DT
-	dCW6mKmrQg7Y8BF+TCoP1mGyeBKYQyjzt4lLCGY9UmjiStE3YoQSPlefA87nj6QCROPlBuIUjx
-	mHA=
-X-IronPort-AV: E=Sophos;i="5.67,285,1566835200"; d="scan'208";a="227380805"
-Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
-	([199.255.45.15])
-	by ob1.hgst.iphmx.com with ESMTP; 12 Oct 2019 05:25:57 +0800
-IronPort-SDR: ED6Sg+Z6TsR4Z13XZ50jMe1bbpVZaYdqdxUWdTaSw/mqQB36PXY1z0L6qE0go9kHKYmfEWvkVC
-	r57Akcutc4j/QTjueYwuM7A5StjWzKQeKCi3mJ9zbK4XdHflTjXLGrDpv6Pp2FD7cIYe28a5Bp
-	0ril+/bHFadphb3c5L2bB3EqcAZTt1IFXU1MqHEY/q5FFFQAZMlYhbWBLAD3HlxyrAoGUb0ojm
-	qHW4nTN9Z/itK+4tB2r6pToabbJMmPYsO6BtMpTe3nWCI0NpuUWn4pUWiUE9vORW7uB6hoCkot
-	21FWQbgZT4BbzYb0/jCnevyE
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
-	11 Oct 2019 14:21:52 -0700
-IronPort-SDR: mGbs6NoG8t24t8ovdiyS16wZxH5snPIvBE9YxIFfnyvcc/5xO5txqwL0Mst39x7Wa0uUyd28S5
-	+FdZKN7Oh7aJQvj0PsY9rqhoASPbglhl0BeJthbolAjZftVbVdljcJCzKaT+XIcpT60r7VGULJ
-	iqJ3dWLmPX+gWqcGP3X2XxlYfOSZFw3Wb2ff/7kMqgUSOZoZmdISjQ/65wQJK0XXGiV/Vhi2fH
-	pXvWDpwn67/1H7b/DoANdTWBKxsMwqZ3xaN/JzGmx2UD86V+yNTYINavPyZQt13KFodkOZ4twm
-	9LA=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
-	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
-	by uls-op-cesaip01.wdc.com with ESMTP; 11 Oct 2019 14:25:57 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Oct 2019 14:21:20 -0700
-Message-Id: <20191011212120.11453-1-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.23.0
+	Fri, 11 Oct 2019 23:52:47 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id 3so16383658qta.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Oct 2019 16:52:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=SWOIESBwww6OJZiF0cBLufFOE0yGSo7eVDLdsqt32a8=;
+	b=XWpVU+kXEntubH7TTe0ym6OQ7kKXG6eotHqZ3eNg/awtxVDWax3G5i/00eETWSG7LF
+	uT6VqOhPM5zOX1cEaWzWsFJV4NvRnaJ5AGwNdD46REVwApbfZZmIEc9LUAeaOg2CgFxG
+	dBclUSrTcFHO9NypVgDcUh11HRrBQ9ZlWCNaOIgLDU5VzkHb91n6lX4Kd7PgglmPZ0nC
+	FQrJVWLHwM7TZKW0YofpPnQ/D86uxTbT3NeAt6qs8vu+cl/8x26tkgWgVYuYnj9jSJhc
+	Fn2WV4WNH0UeS/WAbEM8jbF7eufD2Oq3L36dB2i9rQfpyAAu7uAmCmqCzNYE+jwydsps
+	bIAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=SWOIESBwww6OJZiF0cBLufFOE0yGSo7eVDLdsqt32a8=;
+	b=SEuU4p3L4vfJtIiA96izlt4YA+6tjknBlCe9kJgif943tmTM2e3y7RrYOpkDFCLIId
+	F30oIurXKgwcfoFqbBw3lLPCzhTENwsDokKWfIUanVap9iaROhm+abALnDdw6ZWt6kf+
+	z22lxTEGOwz7qdHrFgzUl3KNVZNztvH2PBopC021p/xCYGuoyfb3ONcrRXx2orOBqzwA
+	9qdXtSNoZo6G43WZV2kp6dozesdzPv9OfUdupCwfYlp3PBypIXBCBNaQkuWXOd3ij7xW
+	/FPmQhGwtgnZT5IvCfgn12XDC44rXLqmracUlwynwz1a2K/SHr1Xr+hZDuSLfyMWbRIt
+	KY2g==
+X-Gm-Message-State: APjAAAXxNWDNvz1TQAMUP1G6dyJFG9kqtVu5G/WPBngBvRz6f6+Awskx
+	PnREm9hLHSjL5trnZZzRh3UajXg+1QvdvTcMww0wOweSzlc=
+X-Google-Smtp-Source: APXvYqzggyM5/FC+OpIr5A9jLNxDjmFNTCJnDCYPIfFO0Vk/v6pI9ExJ0mYsmaF9gMHt+xoZmLAwhnMcP2O1XptkJ2o=
+X-Received: by 2002:ac8:768e:: with SMTP id g14mr5360300qtr.378.1570837967573; 
+	Fri, 11 Oct 2019 16:52:47 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-java][PATCH] layer.conf: Mark as compatible with zeus
+References: <20191011172818.718226-1-raj.khem@gmail.com>
+	<20191011190521.GA20513@localhost>
+In-Reply-To: <20191011190521.GA20513@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 11 Oct 2019 16:52:21 -0700
+Message-ID: <CAMKF1sp_ks30+_35CSv6W6ZRYOsCu9tb18H9dHo-XP88RQ--Kg@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] wvstreams: Disable calls to makecontext on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,30 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 21:25:56 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 11 Oct 2019 23:52:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
-Also, can the master-next branch be pushed to master?
+On Fri, Oct 11, 2019 at 12:05 PM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> On Fri, Oct 11, 2019 at 10:28:18AM -0700, Khem Raj wrote:
+> > makecontext API is deprecated and not implemented in musl
+> >...
+>
+> Does the resulting binary work correctly with musl?
+>
+> The whole patch looks like turning a turning a build failure into
+> broken runtime code, and that disabling the recipe with musl would
+> be the only sane action.
 
- conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I realized that I was trying to fix an already broken patch resulting
+in more brokenness. Perhaps using something like
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 90236be..cdba2cd 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
- BBFILE_COLLECTIONS += "meta-java"
- BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
- BBFILE_PRIORITY_meta-java = "10"
--LAYERSERIES_COMPAT_meta-java = "thud warrior"
-+LAYERSERIES_COMPAT_meta-java = "thud warrior zeus"
- 
- LICENSE_PATH += "${LAYERDIR}/licenses"
- 
--- 
-2.23.0
+https://github.com/apenwarr/wvstreams/commits/master
 
+Which should have this fixed but for now. I guess I should just remove
+the musl support.
+
+>
+> cu
+> Adrian
+>
+> --
+>
+>        "Is there not promise of rain?" Ling Tan asked suddenly out
+>         of the darkness. There had been need of rain for many days.
+>        "Only a promise," Lao Er said.
+>                                        Pearl S. Buck - Dragon Seed
+>
 
