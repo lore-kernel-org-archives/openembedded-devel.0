@@ -1,55 +1,49 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id DB81B6BA11
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id F06D17C89C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2019 22:34:38 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id q24so3472103plr.13
+	Fri, 11 Oct 2019 00:49:17 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id q10so5016099pfl.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2019 15:34:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=+Mnjk2XbYXRVQ4h0IKL52cB1rLd7L3Q5y4mMVIV8dj8=;
-	b=aQxvwExeGXDxotg5Jl40or/TavlBx58rAIXcazZlPSNyOxvcgtPjJPleVyKsTmAzhU
-	stIMcuA3uTLzawePItpSLLOY0qy6hkyPd20BNgNsB+ogAsHAlz7c3y8vZj82JAqyaMSM
-	Gxt/HKOHCstUMp2JDqMhHS46orSw4efzw88bI2+qBP8nQV6K2m7x8lwh8csygY7NIgzy
-	IYgTWC8M2Iw25gCbXKqtQviVdIw02Oj4a+LI1QpE8/46lX2cSsgKswDKyeUwoD6I9ZOB
-	YMgYJAUNBNGPA36flujWMjdSjyY/Ie96MHKjQXafh/5BBdumTir0wpSl+R9mkzjKkghY
-	5lNA==
+	Thu, 10 Oct 2019 17:49:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NPvIVEDj6g66Y2QD8iRJxBRN53HJUh2CE7NSLVMBgqc=;
+	b=WTiw9NU9Fb4L6h9WEe5kdrM8spZzSZpchWOTs9ojkw+XnARVJddS6ebmuLWjkpkSgT
+	ICKLp/bhvPJ3p2nKEozv8Pvs7TQx/Ttx7eGPk0ndhJN70R6BgIlNGtGLp7TMalZ9/Wab
+	jHz2SAFQqR/+5iK37GMiZrZ7E8P8hjGBzf6DDRskLHDFMEtHaRvszVZVkjPTua2seHrh
+	jMCKyFjkWIlx4FxLHeIEIiXqMZkvqiVR0ATFSYPSKZfr5xj+sRhzozS+mnYlLvvlEd6U
+	V5oOqERWGvXlft04ErnAxNMQFjjbllTKJX9/ZeMb5TcA8PhGKrE8loQDCTVoD8cgcPJS
+	s95w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=+Mnjk2XbYXRVQ4h0IKL52cB1rLd7L3Q5y4mMVIV8dj8=;
-	b=Fc/xUct9FxeeGgtGzw82IKhrBAoMe84V+T4Rzbq8hVMT3sy2ufRJAtE4tuyvhL5XMm
-	K8cAymwUUYI8hRw4O42RufuBhoY7uyQRTksYZO+ZpN1ISid1vQvMy8HhzWpCet8AqeGu
-	0QOKX6wXjrtPwl1BffynoWamXXKarW9NnhSbWDccEJ0jXDJ1RXEyjpx4PCAkxnttLTJu
-	KkJza84CgK2pV8GRvK/pFIOmfDUWNX+ZBLxh7EmsNKRZvJh8Disv0dPH1zdwC5kcG6b9
-	ZqdrRIJtXt1TNdgvn8fWBNcerI/6yXNraTteWBxa9w9Fniw2cljxCC7n2hixbmaAFeb3
-	LcHQ==
-X-Gm-Message-State: APjAAAXYRFBB9nBTRTRcw2548eYywXGIvYGJSdSH5CtuAr9A3X3qY05E
-	4EJkQpySbAUiwtysDIgRMaJt4g==
-X-Google-Smtp-Source: APXvYqzbDaTsgp3GsY0BFnf3qXEFD1eLYQV9qaYsppK++8kNeFPcik7rf8mkgOm9/liu7OBPXiVUlg==
-X-Received: by 2002:a17:902:6944:: with SMTP id
-	k4mr11830236plt.175.1570746879987; 
-	Thu, 10 Oct 2019 15:34:39 -0700 (PDT)
-Received: from debian-brgl.local ([204.153.194.98])
-	by smtp.gmail.com with ESMTPSA id 6sm5797121pgl.40.2019.10.10.15.34.39
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NPvIVEDj6g66Y2QD8iRJxBRN53HJUh2CE7NSLVMBgqc=;
+	b=SKSGoEtIQwYwWDYkaUg7QUNtpeXMSnusEQVZlfH9O/RZVfCZSnQdXi6thl5wqUNhHL
+	Wjtd3s05ypukAZ3YCXxGaMevloI+yXQRd2N6mg6VmJgWfCQ9u5uUgEETY7kts2MEZLJh
+	td4vCsHYcCsBOysyzat8J0Mj5EocrlA2auGqXB9njoDxf94nhRIGlwKI6wZiIs7AYnKb
+	i0dIsDwLbdy889FOqDHMT1pnkRYXQJaV8fo+FsGw4RG4ulpBJNtLOckVmfa9X68gTQdH
+	ZgnTRAnicEH8EWWPLVz9+Qfle9jydoaNGRgaD5wgUp+jYTplxo6l92j9kMyswDDIVbzU
+	oyRw==
+X-Gm-Message-State: APjAAAWe0XY86cALqkV+yt5H3zs9/6Mjt5E6l94HzSDvEyCrKOFWI5zb
+	nlJXSajoQUseBmQHXC4N/adTmfxfktE=
+X-Google-Smtp-Source: APXvYqx0Y4Gyo3t8WmO7fP6D7+BAGTjjx5JkX6jAZDScUohOf6s3m55gedQh08npE79gMR+zuLfQiA==
+X-Received: by 2002:aa7:8ad0:: with SMTP id b16mr13756138pfd.255.1570754958120;
+	Thu, 10 Oct 2019 17:49:18 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::7275])
+	by smtp.gmail.com with ESMTPSA id 14sm6822850pfn.21.2019.10.10.17.49.17
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 10 Oct 2019 15:34:39 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Oct 2019 00:34:29 +0200
-Message-Id: <20191010223429.31337-3-brgl@bgdev.pl>
+	Thu, 10 Oct 2019 17:49:17 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 10 Oct 2019 17:49:07 -0700
+Message-Id: <20191011004907.1347765-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191010223429.31337-1-brgl@bgdev.pl>
-References: <20191010223429.31337-1-brgl@bgdev.pl>
 MIME-Version: 1.0
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [meta-networking][PATCH 3/3] networkd-dispatcher: inherit systemd class
+Subject: [meta-oe][PATCH] jsonrpc: Disable coverage in default build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,49 +56,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Oct 2019 22:34:39 -0000
+X-List-Received-Date: Fri, 11 Oct 2019 00:49:18 -0000
 Content-Transfer-Encoding: 8bit
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Building with intrumentation is only useful during development or
+optimization phases, in production, this will just make it slow and in
+some cases not work where file system might be readonly.
 
-Use the systemd class to correctly plug the package into the systemd
-infrastructure.
-
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../networkd-dispatcher/networkd-dispatcher_2.0.1.bb      | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
-index 06c83e9d8..8523ae8c0 100644
---- a/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
-+++ b/meta-networking/recipes-daemons/networkd-dispatcher/networkd-dispatcher_2.0.1.bb
-@@ -7,7 +7,7 @@ AUTHOR = "Clayton Craft and others"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=84dcc94da3adb52b53ae4fa38fe49e5d"
+diff --git a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb
+index b23775708a..6ad0a49abd 100644
+--- a/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb
++++ b/meta-oe/recipes-devtools/jsonrpc/jsonrpc_1.2.0.bb
+@@ -18,6 +18,7 @@ inherit cmake
  
--inherit distro_features_check
-+inherit distro_features_check systemd
+ EXTRA_OECMAKE += "-DCOMPILE_TESTS=NO -DCOMPILE_STUBGEN=NO -DCOMPILE_EXAMPLES=NO \
+                   -DBUILD_SHARED_LIBS=YES -DBUILD_STATIC_LIBS=YES \
++                  -DWITH_COVERAGE=NO \
+                   -DCMAKE_LIBRARY_PATH=${libdir} \
+ "
  
- RDEPENDS_${PN} = "python3-pygobject python3-dbus"
- REQUIRED_DISTRO_FEATURES = "systemd"
-@@ -16,6 +16,10 @@ SRC_URI = "https://gitlab.com/craftyguy/networkd-dispatcher/-/archive/${PV}/netw
- SRC_URI[md5sum] = "304d7dcc21331ea295e207f8493cb8d8"
- SRC_URI[sha256sum] = "21f84c3646a043329dc64787e4e58dfce592b2559b0e3069af82c469805660c2"
- 
-+SYSTEMD_PACKAGES = "${PN}"
-+SYSTEMD_SERVICE_${PN} = "networkd-dispatcher.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
- # Nothing to build, just a python script to install
- do_configure[noexec] = "1"
- do_compile[noexec] = "1"
-@@ -25,5 +29,3 @@ do_install() {
-     install -D -m 0644 ${S}/networkd-dispatcher.service ${D}/${systemd_system_unitdir}/networkd-dispatcher.service
-     install -D -m 0644 ${S}/networkd-dispatcher.conf ${D}/${sysconfdir}/conf.d/networkd-dispatcher.conf
- }
--
--FILES_${PN} += "${systemd_system_unitdir}/networkd-dispatcher.service"
 -- 
 2.23.0
 
