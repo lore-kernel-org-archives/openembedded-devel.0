@@ -1,51 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
-	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C1467E3BC
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+	[209.85.221.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 806B67E3BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2019 08:06:37 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id h4so10792998wrv.7
+	Fri, 11 Oct 2019 08:06:38 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id j18so10757268wrq.10
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 11 Oct 2019 01:06:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=7d/niw0DDp4wM181FXgQEBFmxrIGujHhIG9J9OUpdUo=;
-	b=VicEocx2HxG1mU+9CsOiyZhOrdmYL6qVQ717inBlaSY6GDcFQnqrb6MPOW6UcArX8H
-	I77h+9N1/1WEdRUp8WEzYrO+BmvWAsd+5psctFOglnr5vSEsBSyY0TjACBv72SqVWFQa
-	ebW4NDUmA0lYxUIGuKBoZUD2OdyFpWi+9Iu29SJp6BxKhH8pO7BMnMOGOsoo7mUZa+De
-	bImFLQBx7waW0aAHFT1MLuq9c4UInT5FqXHDnJWSD7jaPa99/FSRnYAtEHG+BkCQGvaa
-	ZdSjUrUhP+KK+s6HjKlllDL0qd1oVSL/m760VhM5nE8uy26BNNHtmKmGeNuysyV0yP9r
-	iDYw==
+	bh=787Au2PP4H79QtksDr8H1bF8UTAT6wGk9Xu5VY44B4Y=;
+	b=B1ZKwanHzmQqV31nDssben6x/eP/EsVviZ9fiY4escP9ZSrsarEJYNcKJEYkhiJWpo
+	aAJQ2RscVpVeJHuMFuUbgxlAgc9PJ7TXsCiVEL9ijihpn3ZREVjXihk3vXGwyuukLDew
+	78JnLm+BOqz61adavAdhh+JbaKvdX2Xrplstl7Coal0fpO2lYVgXq7iOXE1n3nkbQixs
+	iXCJwowdQ2r54CQnw8e/+sS7MKyvgRC87ArSOR3p0VAX4e4OzkTzfw/aplHRsPBWUncI
+	o3XNhT42D5B8drFzlrBEidpR1ePBaZFw4+oo4xUJRnRBjUJCxu19LAETIFn24j5n5Iyy
+	gRCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7d/niw0DDp4wM181FXgQEBFmxrIGujHhIG9J9OUpdUo=;
-	b=rgjQ+EEYayHOzVqcoeFCyd0BB8O1L1nj61N+mXkp5cn3fHGXXxeMC0E0ZqZg3q7pEw
-	JfQkAyfWhxL4oR2WFt4D6ACURozfOFEKnOejY53uJOgJpQPSKJZSdRmv+52sR5YzjyoK
-	Px76IEr1Qj0o2qv5/G57hEilOL96xf4XGIc0NtNX5CgFRKKKVzgjMwRzIkVxYL1rbwn0
-	eMCIyocFcaF+GPwVDVdGtoN/E8jMh8dY8sgU44UDVDleBwLTQq6R2zH1TwgwJYlVM1rm
-	Uk8sjwqqERGNjiwGjHALQR0fbzxptlprY34YxUAo9nmfTpscMgGJH/2T01sWUANbwWDO
-	B/xw==
-X-Gm-Message-State: APjAAAXvlIoVwsJuJSZ8LJY/K8PKnOneLypdRfcHfBqmVAokYLVNNoea
-	U+LKsYbdMvH/e3heojoHeWt2pSsx
-X-Google-Smtp-Source: APXvYqxuVCqjVCzgqyTSo79Nm2wvNbjabJ4Z25ynzwSWYAPOrHam8K68oqXR7Z8bDERL03gJjaMDQA==
-X-Received: by 2002:a5d:4285:: with SMTP id k5mr1752761wrq.344.1570781197948; 
-	Fri, 11 Oct 2019 01:06:37 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=787Au2PP4H79QtksDr8H1bF8UTAT6wGk9Xu5VY44B4Y=;
+	b=OE+Lhvp0jQQzwncCyKWqepCcR3wzCoH5diDifgxPv5d3ATTI7wonMhMzGz1Dtgi/gn
+	kvCO4jUeXNc+a+FLulqu4CWN8Z3M1KXTiyPiO3hfC4wuF8WagCzcueCofGiNZknRjM1r
+	PpgQel5Pe9KSY7WOO88AjkH8giXVwwhyinsVoHN/6i5JRjhhlaI7CEL/WUB5TIXsnYDK
+	TMqSMbKwejXFw/Wm83tauI6JPtj9E5jN5WvptWc6C6Q+yCtG3rsoNAI/ghG8bISwRzXh
+	8hQgsnYvFA4Qnn0hV2bQ4IOMaZPU6nIJAk3HABLZOsogbHQ8yswSxwlyb/833AChxfn5
+	APJA==
+X-Gm-Message-State: APjAAAXq9c2vhwZMBUXWQF6h9QLDsGphgj7BF0xRxLRKrIwL4jjfIOJo
+	baiqMXcPT26HK1IqhueAqZDRRoLe
+X-Google-Smtp-Source: APXvYqzGYzyInuVUgmVUBJ5E8NXEfSrD0iJ59JnsHwZhOJtgZZ/7X1Net1vAYBN7Xg293hTE5dZn0w==
+X-Received: by 2002:a5d:6949:: with SMTP id r9mr8878509wrw.106.1570781199096; 
+	Fri, 11 Oct 2019 01:06:39 -0700 (PDT)
 Received: from amue-work.zera.local ([195.50.169.54])
 	by smtp.gmail.com with ESMTPSA id
-	y186sm15431226wmb.41.2019.10.11.01.06.36
+	y186sm15431226wmb.41.2019.10.11.01.06.38
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 11 Oct 2019 01:06:36 -0700 (PDT)
+	Fri, 11 Oct 2019 01:06:38 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Oct 2019 10:06:27 +0200
-Message-Id: <20191011080629.3136-1-schnitzeltony@gmail.com>
+Date: Fri, 11 Oct 2019 10:06:28 +0200
+Message-Id: <20191011080629.3136-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20191011080629.3136-1-schnitzeltony@gmail.com>
+References: <20191011080629.3136-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [warrior][PATCH 1/3] xfce4-panel: Draw icons/background properly when compositing is disabled
+Subject: [warrior][PATCH 2/3] polkit-group-rules: Fix error in do_rootfs for rpm package-manager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,121 +60,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 08:06:37 -0000
+X-List-Received-Date: Fri, 11 Oct 2019 08:06:38 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-A similar patch was sent for master [1] but that was superseded by upgrade of
-xfce4-panel 4.14.0 -> 4.14.1 [2]
+* An issue in meta-mortsgna was reported. Discussion is found at [1]
+* We do similar in meta-gnome's gvfs for same reason [2]
+* This is a bugfix which should apply and work for many release-branches
 
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2019-September/201966.html
-[2] http://lists.openembedded.org/pipermail/openembedded-devel/2019-September/201986.html
+Fixes:
+| Error: Transaction check error:
+|   file /etc/polkit-1/rules.d conflicts between attempted installs of polkit-group-rule-datetime-1.0-r0.cortexa7t2hf_neon_vfpv4 and polkit-0.115-r0.cortexa7t2hf_neon_vfpv4
+
+[1] https://github.com/schnitzeltony/meta-mortsgna/issues/11
+[2] https://github.com/openembedded/meta-openembedded/blob/fd1a0c9210b162ccb147e933984c755d32899efc/meta-gnome/recipes-gnome/gvfs/gvfs_1.41.2.bb#L72
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry picked from commit a47d38561249411449cc62ba878eb7c36916fe55)
 ---
- ...-icons-without-compositing-Bug-14577.patch | 80 +++++++++++++++++++
- .../xfce4-panel/xfce4-panel_4.13.4.bb         |  1 +
- 2 files changed, 81 insertions(+)
- create mode 100644 meta-xfce/recipes-xfce/xfce4-panel/files/0002-systray-Fix-icons-without-compositing-Bug-14577.patch
+Additional hints ontop of original commit message:
+* vlc does not support qt4 any more
+* without qt backend vlc is not exactly usable
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-panel/files/0002-systray-Fix-icons-without-compositing-Bug-14577.patch b/meta-xfce/recipes-xfce/xfce4-panel/files/0002-systray-Fix-icons-without-compositing-Bug-14577.patch
-new file mode 100644
-index 000000000..8fac5ad81
---- /dev/null
-+++ b/meta-xfce/recipes-xfce/xfce4-panel/files/0002-systray-Fix-icons-without-compositing-Bug-14577.patch
-@@ -0,0 +1,80 @@
-+From f6f70cce417fd2982c2ce6f01016ed01deb6a9ae Mon Sep 17 00:00:00 2001
-+From: "Ivan A. Melnikov" <iv@altlinux.org>
-+Date: Mon, 23 Sep 2019 16:18:10 +0400
-+Subject: [PATCH] systray: Fix icons without compositing (Bug #14577)
-+
-+Wrapper window uses RGBA visual when it's available;
-+systray manager should try to do the same for
-+the transparent or parent-relative background to work.
-+
-+That means that the manager and icons will work with
-+RGBA visual even if the screen is not compositing; so
-+we should always force-redraw the icons.
-+
-+Upstream-Status: Accepted [1]
-+
-+[1] https://git.xfce.org/xfce/xfce4-panel/commit?id=f6f70cce417fd2982c2ce6f01016ed01deb6a9ae
-+
-+Refs: https://bugzilla.xfce.org/show_bug.cgi?id=14577
-+Signed-off-by: Ivan A. Melnikov <iv@altlinux.org>
-+---
-+ plugins/systray/systray-manager.c | 10 ++++++----
-+ plugins/systray/systray.c         | 10 ----------
-+ 2 files changed, 6 insertions(+), 14 deletions(-)
-+
-+diff --git a/plugins/systray/systray-manager.c b/plugins/systray/systray-manager.c
-+index 68836554..4915649c 100644
-+--- a/plugins/systray/systray-manager.c
-++++ b/plugins/systray/systray-manager.c
-+@@ -751,6 +751,7 @@ static void
-+ systray_manager_set_visual (SystrayManager *manager)
-+ {
-+   GdkDisplay  *display;
-++  GdkVisual   *visual;
-+   Visual      *xvisual;
-+   Atom         visual_atom;
-+   gulong       data[1];
-+@@ -768,11 +769,12 @@ systray_manager_set_visual (SystrayManager *manager)
-+   visual_atom = gdk_x11_get_xatom_by_name_for_display (display,
-+       "_NET_SYSTEM_TRAY_VISUAL");
-+ 
-+-  if (gdk_screen_is_composited (gtk_widget_get_screen (manager->invisible))
-+-      && (gdk_screen_get_rgba_visual (screen) != NULL))
-++  visual = gdk_screen_get_rgba_visual (screen);
-++  panel_debug (PANEL_DEBUG_SYSTRAY, "rgba visual is %p", visual);
-++  if (visual != NULL)
-+     {
-+-      /* get the rgba visual */
-+-      xvisual = GDK_VISUAL_XVISUAL (gdk_screen_get_rgba_visual (screen));
-++      /* use the rgba visual */
-++      xvisual = GDK_VISUAL_XVISUAL (visual);
-+     }
-+   else
-+     {
-+diff --git a/plugins/systray/systray.c b/plugins/systray/systray.c
-+index 3fb9520c..beae1973 100644
-+--- a/plugins/systray/systray.c
-++++ b/plugins/systray/systray.c
-+@@ -728,19 +728,9 @@ systray_plugin_box_draw (GtkWidget *box,
-+                          gpointer   user_data)
-+ {
-+   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (user_data);
-+-  GdkScreen      *screen;
-+-
-+   panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
-+   panel_return_if_fail (cr != NULL);
-+ 
-+-  screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
-+-
-+-  if (G_LIKELY (screen != NULL))
-+-    {
-+-      if (!gdk_screen_is_composited (screen))
-+-        return;
-+-    }
-+-
-+   /* separately draw all the composed tray icons after gtk
-+    * handled the draw event */
-+   gtk_container_foreach (GTK_CONTAINER (box),
-+-- 
-+2.21.0
-+
-diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb
-index 18e054c9d..ecae873c3 100644
---- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb
-@@ -12,6 +12,7 @@ SRC_URI[md5sum] = "c0f132fed2110d37f351aadc9e80a034"
- SRC_URI[sha256sum] = "36ffd26ef7f5867c01ba310475b4358ff0e588cfd5599a266f0037a6c20052a1"
- SRC_URI += " \
-     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
-+    file://0002-systray-Fix-icons-without-compositing-Bug-14577.patch \
- "
+ meta-oe/recipes-extended/polkit/polkit-group-rule.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-extended/polkit/polkit-group-rule.inc b/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
+index 06ab10642..8ced8abe5 100644
+--- a/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
++++ b/meta-oe/recipes-extended/polkit/polkit-group-rule.inc
+@@ -8,6 +8,6 @@ inherit useradd
  
- python populate_packages_prepend() {
+ do_install_prepend() {
+     install -m 700 -d ${D}${sysconfdir}/polkit-1/rules.d
+-    chown polkitd:polkitd ${D}${sysconfdir}/polkit-1/rules.d
++    chown polkitd:root ${D}/${sysconfdir}/polkit-1/rules.d
+ }
+ USERADD_PARAM_${PN}_prepend = "--system --no-create-home --user-group --home-dir ${sysconfdir}/polkit-1 polkitd;"
 -- 
 2.21.0
 
