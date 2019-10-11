@@ -1,49 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 23FD77F53E
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id C69047F4B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2019 03:06:11 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id 205so5191355pfw.2
+	Fri, 11 Oct 2019 04:55:30 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id i76so5069528pgc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Oct 2019 20:06:12 -0700 (PDT)
+	Thu, 10 Oct 2019 21:55:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=fDQ8C4td01QZZYOak5uNU9zMYfXVkHlG6AkuIiV+j3Y=;
-	b=UiZtOfk1fKPkLSlk+1MjfhJQufWZGgkx7SRhj7iCpEXjzg95lZbh8bvXOGO+Zb8E5V
-	F2DNZdkPBiOtGTDDw+5GRV8ZgZ+BfVRtIvj8SXErIJ/praJEs2pIfSdJu/WaxoJSjjDP
-	qHIUg5nIlmh5G45dPK5bLkZFZcH/moUZtmDaAL57qQPhtYQtkwDNND7eTMQPn0mv21PT
-	lqzU9P5Pbhn9l8RfN4F+0lv5R1eAmNUyiFaI4NttBGYXE6HzzaExEsGIhGe5Yznquz8r
-	d4vNZvGH3VBwBe4x+AhnEzcSgU5mHYrf4Q4GfcbYCkD7oDjH/uGOj9CIOuxGBDVLqupY
-	dNPw==
+	bh=lRTpj0n8phlsixSjkD03p+NPeefhTVP1tNw5a+7iWN0=;
+	b=G1+iKX68AGubATuRgpqlweZ/qIQbTqTbtUFbPZlYmmKKMlvhkytH//pxY4syPDNqOU
+	zDh5NzSAb/y2Gvu9OaxGxI5tQog93Ath0ZVMomhfXVGa8JaHnFiQvSsvP4C/DqBtu759
+	up/mT9OCznl4DA4sv9himuykB7JwtKwz38dx8u2UdRCZ4DbSVG6MWAf91NEqhKXjbqA5
+	o2amGVwROJbFmDOv2Kb6st6RMum3bofsq3Q/jsJd1uTA0NxKtoCsJhHD+mns39LVqfAC
+	4A3NNbqRqINViXUcAVrSGmwEWIar41S411BRd3xjFEzSVysNcMjbTGxqd8/+Om/qP8tu
+	NCKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=fDQ8C4td01QZZYOak5uNU9zMYfXVkHlG6AkuIiV+j3Y=;
-	b=EhjVJWQddw9n8zECwX8Uq37N3+KnWSxo33Rn0/JYbM97o3vb4/BQucslfJp+fIKUrO
-	WPE9+gB8K3YG4aQrpnXat9feY4sCbPEMJ7yv/KzZBTvJHB+YQhu7qxD4bsehADghQY66
-	JlZNFLrkQ8SuqrIXz9yQ36uSvKLR+fWhzR3xPme5v4OsSLbK266kZZ5H00gFv15071zA
-	lgv2+9j2peG3ld/ZI9zy5GIWeDmJyBUum6DWDmr/qftx8cnuoegonhNhwS8qmOzVN6Tt
-	gqdTQ+gEkz326MUVxKSImX21k9goI6d4MaIDA92lyV5XKB6Uo8+NL61j4DU4DQUrTxxO
-	3PUQ==
-X-Gm-Message-State: APjAAAWooQCUs3EEoNMoTV3I1qehG7d/mtMnC+V1frmGvvkAWo/xpVgP
-	ZsadpyMDrSOY8Bx10S008DFOrH4KxJg=
-X-Google-Smtp-Source: APXvYqy9Uznn95P+p7FBvUhoBusVxpCdm7xsLtwoPnCkh4Rmz8UpziMQE3Kyi/WWlw0gmTYx76hk5g==
-X-Received: by 2002:a63:cf4d:: with SMTP id b13mr14313889pgj.396.1570763171516;
-	Thu, 10 Oct 2019 20:06:11 -0700 (PDT)
+	bh=lRTpj0n8phlsixSjkD03p+NPeefhTVP1tNw5a+7iWN0=;
+	b=XMnJX47Z//PHTxrjMeg2gJST/3MYj3kmEi1iCR4PlPsagIY+04l+SnQOmpDGdZffet
+	FXJkmcWKfZ1jKqEqD3Mu9Dr3s4TCL/1j69hRqyMp5JpbbgaYGDwOfTGhkHlWsVrzule8
+	LADXiJw9x4PcEfwfkufGmRAbQUio4NVQfmTp4LDahU21jCR+i33gBGKjBSXaFyaIt3Pv
+	8s8Ls5NUGxe7JUblDSm43GvAnKFEuD2Ws6EDRs9zSUXyG1OeecsTLGigo6EC+mFSvlt2
+	aDVMBz4KqTRAGv+vep0zW0cdUxr1RZIrUmCZQEu2tJQmRFSwwb+4fQFSr7MalYjKQivA
+	S/iw==
+X-Gm-Message-State: APjAAAVlIEyqNO5H8R65kl2tXzLYEOQ5i7s6FM3XWkIaExV2WBATWh9J
+	JKavD/auIwlkJBjNJvjdXlmTQi5rC5s=
+X-Google-Smtp-Source: APXvYqx2uqMTvj/azH3Jp4G8q3LwfdCA9THU2WiQD/YSWK0iNOl7Lpta9+G31pxPwQd4niRlW51dwg==
+X-Received: by 2002:a63:c446:: with SMTP id m6mr654753pgg.136.1570769730994;
+	Thu, 10 Oct 2019 21:55:30 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::7275])
-	by smtp.gmail.com with ESMTPSA id o9sm6452290pfp.67.2019.10.10.20.06.10
+	by smtp.gmail.com with ESMTPSA id
+	b185sm9695570pfg.14.2019.10.10.21.55.30
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 10 Oct 2019 20:06:11 -0700 (PDT)
+	Thu, 10 Oct 2019 21:55:30 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Oct 2019 20:06:03 -0700
-Message-Id: <20191011030603.2499110-1-raj.khem@gmail.com>
+Date: Thu, 10 Oct 2019 21:55:17 -0700
+Message-Id: <20191011045517.2565168-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] bdwgc: Enable C++ support and Additional options for musl
+Subject: [meta-oe][PATCH] a2jmidid: Fix build on risv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,27 +57,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 03:06:11 -0000
+X-List-Received-Date: Fri, 11 Oct 2019 04:55:30 -0000
 Content-Transfer-Encoding: 8bit
+
+Fixes
+../a2jmidid-8/sigsegv.c:102:39: error: no member named 'gregs' in 'struct mcontext_t'
+|                 ucontext->uc_mcontext.gregs[i]
+|                 ~~~~~~~~~~~~~~~~~~~~~ ^
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/bdwgc/bdwgc_8.0.4.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ .../jack/a2jmidid/riscv_ucontext.patch        | 24 +++++++++++++++++++
+ meta-oe/recipes-multimedia/jack/a2jmidid_8.bb |  1 +
+ 2 files changed, 25 insertions(+)
+ create mode 100644 meta-oe/recipes-multimedia/jack/a2jmidid/riscv_ucontext.patch
 
-diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_8.0.4.bb b/meta-oe/recipes-support/bdwgc/bdwgc_8.0.4.bb
-index 4c1393c946..905f95396a 100644
---- a/meta-oe/recipes-support/bdwgc/bdwgc_8.0.4.bb
-+++ b/meta-oe/recipes-support/bdwgc/bdwgc_8.0.4.bb
-@@ -37,4 +37,8 @@ inherit autotools pkgconfig
- PACKAGECONFIG ??= "libatomic-ops"
- PACKAGECONFIG[libatomic-ops] = "--with-libatomic-ops=yes,--with-libatomic-ops=no,libatomic-ops"
- 
-+EXTRA_OECONF += "--enable-cpluscplus"
+diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid/riscv_ucontext.patch b/meta-oe/recipes-multimedia/jack/a2jmidid/riscv_ucontext.patch
+new file mode 100644
+index 0000000000..23618f18a1
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/jack/a2jmidid/riscv_ucontext.patch
+@@ -0,0 +1,24 @@
++Add riscv specific checks to choose correct gregs and context structure definitions
 +
-+CFLAGS_append_libc-musl = " -D_GNU_SOURCE -DNO_GETCONTEXT -DSEARCH_FOR_DATA_START -DUSE_MMAP -DHAVE_DL_ITERATE_PHDR"
-+
- BBCLASSEXTEND = "native nativesdk"
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++--- a/sigsegv.c
+++++ b/sigsegv.c
++@@ -91,7 +91,7 @@ static void signal_segv(int signum, sigi
++     a2j_error("info.si_errno = %d", info->si_errno);
++     a2j_error("info.si_code  = %d (%s)", info->si_code, si_codes[info->si_code]);
++     a2j_error("info.si_addr  = %p", info->si_addr);
++-#if !defined(__alpha__) && !defined(__ia64__) && !defined(__FreeBSD_kernel__) && !defined(__arm__) && !defined(__hppa__) && !defined(__sh__) && !defined(__aarch64__)
+++#if !defined(__alpha__) && !defined(__ia64__) && !defined(__FreeBSD_kernel__) && !defined(__arm__) && !defined(__hppa__) && !defined(__sh__) && !defined(__aarch64__) && !defined(__riscv)
++     for(i = 0; i < NGREG; i++)
++         a2j_error("reg[%02d]       = 0x" REGFORMAT, i,
++ #if defined(__powerpc__)
++@@ -102,7 +102,7 @@ static void signal_segv(int signum, sigi
++                 ucontext->uc_mcontext.gregs[i]
++ #endif
++                 );
++-#endif /* alpha, ia64, kFreeBSD, arm, hppa aarch64 */
+++#endif /* alpha, ia64, kFreeBSD, arm, hppa aarch64 riscv */
++ 
++ #if defined(SIGSEGV_STACK_X86) || defined(SIGSEGV_STACK_IA64)
++ # if defined(SIGSEGV_STACK_IA64)
+diff --git a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
+index 7dcaaf6828..a0aa412232 100644
+--- a/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
++++ b/meta-oe/recipes-multimedia/jack/a2jmidid_8.bb
+@@ -13,6 +13,7 @@ SRC_URI = " \
+     http://download.gna.org/${BPN}/${BPN}-${PV}.tar.bz2 \
+     file://0001-wscript-add-pthread-library-dependency-to-fix-linkin.patch \
+     file://0002-aarch64.patch \
++    file://riscv_ucontext.patch \
+ "
+ SRC_URI[md5sum] = "9cf4edbc3ad2ddeeaf6c8c1791ff3ddd"
+ SRC_URI[sha256sum] = "2a9635f62aabc59edb54ada07048dd47e896b90caff94bcee710d3582606f55f"
 -- 
 2.23.0
 
