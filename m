@@ -1,26 +1,51 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D1D67F564
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+	[209.85.221.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C1467E3BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2019 06:01:32 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id x9B61Vub022219
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 10 Oct 2019 23:01:31 -0700 (PDT)
-Received: from 2ebd3b390030.wrs.com (128.224.153.74) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Thu, 10 Oct 2019 23:01:31 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Fri, 11 Oct 2019 06:00:14 +0000
-Message-ID: <20191011060014.34852-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191011024615.198728-1-hongxu.jia@windriver.com>
-References: <20191011024615.198728-1-hongxu.jia@windriver.com>
+	Fri, 11 Oct 2019 08:06:37 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id h4so10792998wrv.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Oct 2019 01:06:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7d/niw0DDp4wM181FXgQEBFmxrIGujHhIG9J9OUpdUo=;
+	b=VicEocx2HxG1mU+9CsOiyZhOrdmYL6qVQ717inBlaSY6GDcFQnqrb6MPOW6UcArX8H
+	I77h+9N1/1WEdRUp8WEzYrO+BmvWAsd+5psctFOglnr5vSEsBSyY0TjACBv72SqVWFQa
+	ebW4NDUmA0lYxUIGuKBoZUD2OdyFpWi+9Iu29SJp6BxKhH8pO7BMnMOGOsoo7mUZa+De
+	bImFLQBx7waW0aAHFT1MLuq9c4UInT5FqXHDnJWSD7jaPa99/FSRnYAtEHG+BkCQGvaa
+	ZdSjUrUhP+KK+s6HjKlllDL0qd1oVSL/m760VhM5nE8uy26BNNHtmKmGeNuysyV0yP9r
+	iDYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7d/niw0DDp4wM181FXgQEBFmxrIGujHhIG9J9OUpdUo=;
+	b=rgjQ+EEYayHOzVqcoeFCyd0BB8O1L1nj61N+mXkp5cn3fHGXXxeMC0E0ZqZg3q7pEw
+	JfQkAyfWhxL4oR2WFt4D6ACURozfOFEKnOejY53uJOgJpQPSKJZSdRmv+52sR5YzjyoK
+	Px76IEr1Qj0o2qv5/G57hEilOL96xf4XGIc0NtNX5CgFRKKKVzgjMwRzIkVxYL1rbwn0
+	eMCIyocFcaF+GPwVDVdGtoN/E8jMh8dY8sgU44UDVDleBwLTQq6R2zH1TwgwJYlVM1rm
+	Uk8sjwqqERGNjiwGjHALQR0fbzxptlprY34YxUAo9nmfTpscMgGJH/2T01sWUANbwWDO
+	B/xw==
+X-Gm-Message-State: APjAAAXvlIoVwsJuJSZ8LJY/K8PKnOneLypdRfcHfBqmVAokYLVNNoea
+	U+LKsYbdMvH/e3heojoHeWt2pSsx
+X-Google-Smtp-Source: APXvYqxuVCqjVCzgqyTSo79Nm2wvNbjabJ4Z25ynzwSWYAPOrHam8K68oqXR7Z8bDERL03gJjaMDQA==
+X-Received: by 2002:a5d:4285:: with SMTP id k5mr1752761wrq.344.1570781197948; 
+	Fri, 11 Oct 2019 01:06:37 -0700 (PDT)
+Received: from amue-work.zera.local ([195.50.169.54])
+	by smtp.gmail.com with ESMTPSA id
+	y186sm15431226wmb.41.2019.10.11.01.06.36
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 11 Oct 2019 01:06:36 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 11 Oct 2019 10:06:27 +0200
+Message-Id: <20191011080629.3136-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH V2] lvm2: remove unsupported OPTIONS+="event_timeout" rule
+Subject: [warrior][PATCH 1/3] xfce4-panel: Draw icons/background properly when compositing is disabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,86 +58,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Oct 2019 06:01:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 11 Oct 2019 08:06:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-The OPTIONS+="event_timeout" is Unsupported since systemd/udev version 216,
-that is ~5 years ago.
+A similar patch was sent for master [1] but that was superseded by upgrade of
+xfce4-panel 4.14.0 -> 4.14.1 [2]
 
-Since systemd/udev version 243, there's a new message printed if unsupported
-OPTIONS value is used:
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2019-September/201966.html
+[2] http://lists.openembedded.org/pipermail/openembedded-devel/2019-September/201986.html
 
-  Invalid value for OPTIONS key, ignoring: 'event_timeout=180'
-
-Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1740666
-
-The fix works on lvm2, it is not necessary for libdevmapper
- 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...supported-OPTIONS-event_timeout-rule.patch | 39 +++++++++++++++++++
- meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb  |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch
+ ...-icons-without-compositing-Bug-14577.patch | 80 +++++++++++++++++++
+ .../xfce4-panel/xfce4-panel_4.13.4.bb         |  1 +
+ 2 files changed, 81 insertions(+)
+ create mode 100644 meta-xfce/recipes-xfce/xfce4-panel/files/0002-systray-Fix-icons-without-compositing-Bug-14577.patch
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/files/0002-systray-Fix-icons-without-compositing-Bug-14577.patch b/meta-xfce/recipes-xfce/xfce4-panel/files/0002-systray-Fix-icons-without-compositing-Bug-14577.patch
 new file mode 100644
-index 000000000..5a6db4b88
+index 000000000..8fac5ad81
 --- /dev/null
-+++ b/meta-oe/recipes-support/lvm2/lvm2/0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch
-@@ -0,0 +1,39 @@
-+From e48f8328f9d35f23a24e5b27237e8ebf1dbfa269 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 10 Oct 2019 22:38:00 -0400
-+Subject: [PATCH] udev: remove unsupported OPTIONS+="event_timeout" rule
++++ b/meta-xfce/recipes-xfce/xfce4-panel/files/0002-systray-Fix-icons-without-compositing-Bug-14577.patch
+@@ -0,0 +1,80 @@
++From f6f70cce417fd2982c2ce6f01016ed01deb6a9ae Mon Sep 17 00:00:00 2001
++From: "Ivan A. Melnikov" <iv@altlinux.org>
++Date: Mon, 23 Sep 2019 16:18:10 +0400
++Subject: [PATCH] systray: Fix icons without compositing (Bug #14577)
 +
-+The OPTIONS+="event_timeout" is Unsupported since systemd/udev version 216,
-+that is ~5 years ago.
++Wrapper window uses RGBA visual when it's available;
++systray manager should try to do the same for
++the transparent or parent-relative background to work.
 +
-+Since systemd/udev version 243, there's a new message printed if unsupported
-+OPTIONS value is used:
++That means that the manager and icons will work with
++RGBA visual even if the screen is not compositing; so
++we should always force-redraw the icons.
 +
-+  Invalid value for OPTIONS key, ignoring: 'event_timeout=180'
++Upstream-Status: Accepted [1]
 +
-+Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=1740666
++[1] https://git.xfce.org/xfce/xfce4-panel/commit?id=f6f70cce417fd2982c2ce6f01016ed01deb6a9ae
 +
-+Signed-off-by: Peter Rajnoha <prajnoha@redhat.com>
-+
-+Upstream-Status: Backport [https://github.com/lvmteam/lvm2/commit/125f27ac37bc9b93cc96f64052b9681b3d479ee1]
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++Refs: https://bugzilla.xfce.org/show_bug.cgi?id=14577
++Signed-off-by: Ivan A. Melnikov <iv@altlinux.org>
 +---
-+ udev/11-dm-lvm.rules.in | 2 --
-+ 1 file changed, 2 deletions(-)
++ plugins/systray/systray-manager.c | 10 ++++++----
++ plugins/systray/systray.c         | 10 ----------
++ 2 files changed, 6 insertions(+), 14 deletions(-)
 +
-+diff --git a/udev/11-dm-lvm.rules.in b/udev/11-dm-lvm.rules.in
-+index 91cb991..7c58994 100644
-+--- a/udev/11-dm-lvm.rules.in
-++++ b/udev/11-dm-lvm.rules.in
-+@@ -37,8 +37,6 @@ ENV{DM_SUBSYSTEM_UDEV_FLAG0}!="1", ENV{DM_NOSCAN}=="1", ENV{DM_UDEV_DISABLE_OTHE
++diff --git a/plugins/systray/systray-manager.c b/plugins/systray/systray-manager.c
++index 68836554..4915649c 100644
++--- a/plugins/systray/systray-manager.c
+++++ b/plugins/systray/systray-manager.c
++@@ -751,6 +751,7 @@ static void
++ systray_manager_set_visual (SystrayManager *manager)
++ {
++   GdkDisplay  *display;
+++  GdkVisual   *visual;
++   Visual      *xvisual;
++   Atom         visual_atom;
++   gulong       data[1];
++@@ -768,11 +769,12 @@ systray_manager_set_visual (SystrayManager *manager)
++   visual_atom = gdk_x11_get_xatom_by_name_for_display (display,
++       "_NET_SYSTEM_TRAY_VISUAL");
 + 
-+ ENV{DM_UDEV_DISABLE_SUBSYSTEM_RULES_FLAG}=="1", GOTO="lvm_end"
-+ 
-+-OPTIONS+="event_timeout=180"
++-  if (gdk_screen_is_composited (gtk_widget_get_screen (manager->invisible))
++-      && (gdk_screen_get_rgba_visual (screen) != NULL))
+++  visual = gdk_screen_get_rgba_visual (screen);
+++  panel_debug (PANEL_DEBUG_SYSTRAY, "rgba visual is %p", visual);
+++  if (visual != NULL)
++     {
++-      /* get the rgba visual */
++-      xvisual = GDK_VISUAL_XVISUAL (gdk_screen_get_rgba_visual (screen));
+++      /* use the rgba visual */
+++      xvisual = GDK_VISUAL_XVISUAL (visual);
++     }
++   else
++     {
++diff --git a/plugins/systray/systray.c b/plugins/systray/systray.c
++index 3fb9520c..beae1973 100644
++--- a/plugins/systray/systray.c
+++++ b/plugins/systray/systray.c
++@@ -728,19 +728,9 @@ systray_plugin_box_draw (GtkWidget *box,
++                          gpointer   user_data)
++ {
++   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (user_data);
++-  GdkScreen      *screen;
 +-
-+ # Do not create symlinks for inappropriate subdevices.
-+ ENV{DM_LV_NAME}=="pvmove?*|?*_vorigin", GOTO="lvm_disable"
-+ ENV{DM_LV_LAYER}=="?*", GOTO="lvm_disable"
++   panel_return_if_fail (XFCE_IS_SYSTRAY_PLUGIN (plugin));
++   panel_return_if_fail (cr != NULL);
++ 
++-  screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
++-
++-  if (G_LIKELY (screen != NULL))
++-    {
++-      if (!gdk_screen_is_composited (screen))
++-        return;
++-    }
++-
++   /* separately draw all the composed tray icons after gtk
++    * handled the draw event */
++   gtk_container_foreach (GTK_CONTAINER (box),
 +-- 
-+2.23.0
++2.21.0
 +
-diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-index 9907d4f92..875709cd9 100644
---- a/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-+++ b/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb
-@@ -5,6 +5,7 @@ SRCREV = "913c28917e62577a2ef67152b2e5159237503dda"
+diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb
+index 18e054c9d..ecae873c3 100644
+--- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb
++++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb
+@@ -12,6 +12,7 @@ SRC_URI[md5sum] = "c0f132fed2110d37f351aadc9e80a034"
+ SRC_URI[sha256sum] = "36ffd26ef7f5867c01ba310475b4358ff0e588cfd5599a266f0037a6c20052a1"
  SRC_URI += " \
-             file://0001-dev-hdc-open-failed-No-medium-found-will-print-out-i.patch \
-             file://0001-fix-command-bin-findmnt-bin-lsblk-bin-sort-not-found.patch \
-+            file://0001-udev-remove-unsupported-OPTIONS-event_timeout-rule.patch \
-            "
+     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
++    file://0002-systray-Fix-icons-without-compositing-Bug-14577.patch \
+ "
  
- DEPENDS += "autoconf-archive-native"
+ python populate_packages_prepend() {
 -- 
-2.17.1
+2.21.0
 
 
