@@ -1,50 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
-	[209.85.215.171])
-	by mail.openembedded.org (Postfix) with ESMTP id E0D937F37D
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 687FB7F37D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Oct 2019 18:44:06 +0000 (UTC)
-Received: by mail-pg1-f171.google.com with SMTP id d26so6276035pgl.7
+	Fri, 11 Oct 2019 18:44:07 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id q21so6568043pfn.11
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 11 Oct 2019 11:44:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=y/dDR7/07b/OiNjnzx6OS722M/b3TQIJe6vtx+PauUI=;
-	b=Or/qKFTC2hxugeY/O67G/Qnxt9tis2l5q4yOVnBBxd3GN+GN1Ree9BSKjKS0qR0KhX
-	hoXTMuPS0bg2/4vELFjJ6cpi+SEk0l6BkkpGX1WjidrCHSxvMGzlItLpMLeXOTvamOSN
-	rVNKeQp1mUe5ewHTIBy3OHahGTtNp8N/cHowPQylu84D1BE7gnjcJC8UuzNGYrXo7GMJ
-	lz3+/hLoPU9oakN9063txbi8fPnT7sRjui0hEQPOKPjHTmLQegT9d8oaC6bWtg+cPx8C
-	bEiCzF7f+1uADN5rz2jmCT098BNlembdwRMp+O0V8P+0II96aiAmj/l99vBhJlALuoXr
-	ZBuQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=juzzwkBgVimyzHOW26sxxXqtJ+Tiy1XyM3MZxbKpofM=;
+	b=ValbFY2Yf2pi/zu2qAXpgLu3xsAHG6AkA8Rqo+sASru8iAkdWVv7hj8N3Hl5Epw6jw
+	7ZtW1AqyUZHQgkg2uWPVgOs/HJKJxdLFuHdPdfknHCgmK3t/dU+Er20+NnSUJ4YMaZHo
+	obiMnA3lJ+GJDTQkVKdAULF+TgfwT8fn3G+dfJHddyc6Pf4g6Ww1O0Llpebq1eIedI8A
+	H8a2LMf57jPTgsAiq053XPrV4uHvAqNr3gZO2U2iCJOdlEDUgo8V8E4XKilpeRlBlVYl
+	aep7sFqQD0M5ljUsy2GeEPQ6fSss7URQBll7RVBBZmZE06DOVciwKU3iFE/KFPdjMuba
+	M42A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=y/dDR7/07b/OiNjnzx6OS722M/b3TQIJe6vtx+PauUI=;
-	b=Wh/gil/qfZLfkxcdjchH5CHOVdusFIQBPbDwEAKCbJIndYer1NSVXV930mZw1fHkxl
-	bFJAapTaylTn1aonUi6Nc3uSSi+JoPbluumq55Wund04dAzOHb9uYjKd7/dmWlRtUCNJ
-	cYkRpVLdWXSnt2RFD30QT0c9YWbnN0l/O3Q0JSLBierFybZ0k7qTpjywH7OxiA7swihZ
-	wWDS2/MDISBPD2Skxa/gUXyT4f0Ey7pPcdjtTU4XM7rjhu/P6WDRT10o/ar5UuG0nqRt
-	ml++bhC321Zn/BgKVYcw9SwZdbt1eIlzuijZICnsOjxVl3sCFACA9o/SL3mdV3bl0+6n
-	nBdg==
-X-Gm-Message-State: APjAAAXQubrH05DFRp9Z09biwIe4WLraX80sCyPxqjj5F211l6/ZuuTb
-	oMmLnprybfBXHVWMq5YFsP9W6P86YhE=
-X-Google-Smtp-Source: APXvYqxtP+XUUbzn1OWKc+OewnpN8owp0L5Qx+ONJ7dLuJBO/apwgYBBPYo89GM5f79jRnBXSNQPzA==
-X-Received: by 2002:aa7:8d95:: with SMTP id i21mr3678537pfr.161.1570819447021; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=juzzwkBgVimyzHOW26sxxXqtJ+Tiy1XyM3MZxbKpofM=;
+	b=NMclRHUR8HMHe/BTPoEjJ7VkRhmY1jfwk9N5hA4TFdgs5iTX3SQKWoQBM58C2yAlcA
+	hwjZ7VSARkQh0R5KVaHGcHzo27dIoZuqaeMJcvUnyaX8/RTm/h0T5Gs8G6zQNRIBQzXg
+	yCAvTmdwV8+ZfOFxZuG622UwvNpJcjgVMC4WJ2/x4bx4lIwov48Pj63fuAx8aH2obAAe
+	XC4pvlmLDj2QdvxRPBkz3VKltSJ2ThOemTc2wK/lIvFQzGOHUd4VL4mjWhlYQlAVYDMO
+	PJ49Bw9oh75/64C02Fat8NI1bpUU8j0mh8rw2lagVUyIbUFczckWLWnD3HBEF6d/h5K8
+	5TGw==
+X-Gm-Message-State: APjAAAVH5a4PcIBT3AVw+hI7vtlu5ek5Z2sCYyRVARTjvzeZOpZ+7Uje
+	J5s/fvsp80ZrEGiavXkjdnSAjXOrB1o=
+X-Google-Smtp-Source: APXvYqytQpAQDHnzW6M5kIbuz4Wf9cZPJlIfyKLYBq0jbblVziUI4pTy6Qs9Wwr+GlPFLhDXEb9c4g==
+X-Received: by 2002:a63:a055:: with SMTP id u21mr18068250pgn.102.1570819447922;
 	Fri, 11 Oct 2019 11:44:07 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::7275])
 	by smtp.gmail.com with ESMTPSA id
-	a13sm15395535pfg.10.2019.10.11.11.44.06
+	a13sm15395535pfg.10.2019.10.11.11.44.07
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 11 Oct 2019 11:44:06 -0700 (PDT)
+	Fri, 11 Oct 2019 11:44:07 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Oct 2019 11:43:56 -0700
-Message-Id: <20191011184357.760697-1-raj.khem@gmail.com>
+Date: Fri, 11 Oct 2019 11:43:57 -0700
+Message-Id: <20191011184357.760697-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20191011184357.760697-1-raj.khem@gmail.com>
+References: <20191011184357.760697-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 1/2] tinyalsa: Update to latest
+Subject: [meta-multimedia][PATCH 2/2] packagegroup-meta-multimedia: Remove libsquish from rdeps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +62,27 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Fri, 11 Oct 2019 18:44:07 -0000
 Content-Transfer-Encoding: 8bit
 
-package tools binaries into PN
+libsquish builds a static library alone which is primarily used during
+build only. There is no runtime component to it.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa.bb | 5 +----
- 1 file changed, 1 insertion(+), 4 deletions(-)
+ .../packagegroups/packagegroup-meta-multimedia.bb               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa.bb b/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa.bb
-index 157e4c91f1..8b86f82430 100644
---- a/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa.bb
-+++ b/meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa.bb
-@@ -6,7 +6,7 @@ SECTION = "libs/multimedia"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://NOTICE;md5=dbdefe400d894b510a9de14813181d0b"
- 
--SRCREV = "67b9210d344c34e8d1aa0cfe638abce71c5221ca"
-+SRCREV = "8449529c7e50f432091539ba7b438e79b04059b5"
- SRC_URI = "git://github.com/tinyalsa/tinyalsa"
- PV = "1.1.1+git${SRCPV}"
- 
-@@ -19,6 +19,3 @@ inherit cmake
- #
- #    unresolvable R_AARCH64_ADR_PREL_PG_HI21 relocation against symbol `stderr@@GLIBC_2.17'
- CFLAGS += " -fPIC -DPIC "
--
--PACKAGES =+ "${PN}-tools"
--FILES_${PN}-tools = "${bindir}/*"
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+index 365618d958..cef45f9d6d 100644
+--- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -27,7 +27,7 @@ RDEPENDS_packagegroup-meta-multimedia = "\
+     fluidsynth cdparanoia vorbis-tools tremor caps libao libavc1394 \
+     opusfile gerbera libdvdcss webrtc-audio-processing \
+     rtmpdump libopenmpt schroedinger mpd mpc libmpdclient \
+-    ncmpc libmpd libsquish dcadec libiec61883 \
++    ncmpc libmpd dcadec libiec61883 \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "", "", d)} \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna gst-fluendo-mpegdemux vlc", "", d)} \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vo-aacenc sox libde265 gst-openmax", "", d)} \
 -- 
 2.23.0
 
