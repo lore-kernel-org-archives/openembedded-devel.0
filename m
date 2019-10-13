@@ -1,58 +1,55 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D80026D74B
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B6F6D7F35D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Oct 2019 15:37:06 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id f14so2405400pgi.9
+	Sun, 13 Oct 2019 01:04:47 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id 205so8316928pfw.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Oct 2019 08:37:08 -0700 (PDT)
+	Sat, 12 Oct 2019 18:04:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=message-id:subject:from:to:date:in-reply-to:references:organization
 	:user-agent:mime-version:content-transfer-encoding;
-	bh=2ajJ7O/Zu3t1FZaKNzMf2u64T9oDkQwGtgi8XNTmzcc=;
-	b=NTj45+steIZkfiQTIYTfW/ngX68JoDBU8WTAI56WhM04gKy1lGEJEyLMt4Lr6nVWAO
-	rCv39RD23YkMrFhuVLakI2/bhhmo1sqCtA+xgOkCwDJmUbyrEpTfAKspm5IfjBbGmb9Z
-	vbx6IwkI8Ci68t/yG190NP/Sgxm0adyHr6WwwHyPxT+80Vs2/BXGlZ/w2lFYG7Tw8Biy
-	M4lRU+oRpVd6S6dQ+8cmet7f47Rop8TKkEZKo5u3jrfDhTJPiLJ6PlIh73tIECjWM78m
-	dM98404BxCC8re4aW6ih+N0Z1Bg2ccYGy+2kdyuFQ5K3AKaoJg0VoYanOpU95jGkBRbo
-	NqKw==
+	bh=rf20JUsItNN0QmUw59F0O/GjZlyayFhKhM+XJRYfnIY=;
+	b=GxkTEujLtmmFUvtsxbtgW87/tal1/lnqLEoAe8QKDRCkT0cM9+9D3GL2TkVJO6DFLc
+	fNgSaRXDvBffnLa41bNhqOCSscBEfu9YB1PlmncI31k7/bUzWwEsjyeMU3li+xoYTfj/
+	89n1wWX3CRTnGihMPWdbIDRggoO2nTwlQ+gm7mNSkCe23Ma+RZCq++R75qJO61wCensw
+	ByC6ELsUTMeBjrW7n8JAvsl8aIfZ1GULFy1IxBum+7JpmggpxNWSi7ED52+gJuwfS8w0
+	AZ3KDoPh1/sapFXuElEDM9hTy3b8MDOLR3HZRht/+ozKj+9akoZHu3ylbmE7iLiEr1PY
+	5Mtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
 	:references:organization:user-agent:mime-version
 	:content-transfer-encoding;
-	bh=2ajJ7O/Zu3t1FZaKNzMf2u64T9oDkQwGtgi8XNTmzcc=;
-	b=JmVcWCxLYnGKlCZ4GP7QCkXzC32V7+IIcE+AJ0doDElueFAnTcbz9Vcc4MXOdxQodJ
-	zTGsC/eci0CEycXgEH8h/x7Lzjxo6rwiiyElv3cAJRcMEqisFq5WyQb2lPpYmxBoJ80O
-	QEeBfLW75JqH6ywZ4WnCiwwkXKsMFw365ZAU4mvPul/kLHOp47vxtq1Si0QbvAHmxjnr
-	tQJbolQutG2DXTJBzgU0h3RoivK9LfxsH7ykKJyNM50g3VEZzOeoTI/I5akmmpjFsV2X
-	woju9JiSg99mUX6jcff9ZY+sBzD68DLgggZbwULRzAvjXkcCqwpainWEHHSRxoJgI70+
-	tyzQ==
-X-Gm-Message-State: APjAAAVn3U/h6hI1sGQUwqq33X4SdJWuSRmgSSxasda+xIqWi6JUOdEh
-	MCT/A4T239Bqev/xqEB64Os=
-X-Google-Smtp-Source: APXvYqyGS96Fxo0jBikJ++hkDw36Z1xdByEVBwiuNvdoS0Qe26aKIK2zRGDHfObz1Itkp2DvBgB4Lg==
-X-Received: by 2002:a17:90a:1b45:: with SMTP id
-	q63mr24329275pjq.106.1570894627629; 
-	Sat, 12 Oct 2019 08:37:07 -0700 (PDT)
+	bh=rf20JUsItNN0QmUw59F0O/GjZlyayFhKhM+XJRYfnIY=;
+	b=sjxQsijCbVtGraEIuh8D3Hw07fu4nGbaBk18bsFUAC+PnvFtoSA0xv/vQdTj/sZU1B
+	romxxFft2P5oszNEybTjKcn16NIMhFHaMe1W2EBDaNmu1PZHiFcAsviuIA8WvlSZNAFS
+	JHZ+75UcjGTSmTyO9IDWQ1rN7/mAs9533Ozq3wwlwVILPbCTnodhwDpizQxjLd5r+o3s
+	dLNjo7EeQWPngc/4QHWodIezueL9qHaeN8DDeP1KZlE05r1wOMz41J7HS+Zbs2l3L1VK
+	Cv6XManCOVDNZ8lAcyzV3eF6yp+ZOXPW8qDYkmu0RRAC3XtQHxKl0z8WuMQp5gG0I1ar
+	gE7w==
+X-Gm-Message-State: APjAAAUAoccpdedQ5poT61TaurDaUUhu3uxJVtcsWrYd3yvTCz9Hxcoj
+	Hbb1jNhRn4jkWjw3rE7XfjYL8RPP90M=
+X-Google-Smtp-Source: APXvYqxIYrucxqn8fzD0A+q2x0xX863rTJKDtYVMau5xcczzKRDWZU4Jd2PRWj39D2LN4ul5EFpi+A==
+X-Received: by 2002:a63:4181:: with SMTP id o123mr6828850pga.301.1570928688533;
+	Sat, 12 Oct 2019 18:04:48 -0700 (PDT)
 Received: from tyche ([2601:646:8500:1c20::3d0e])
 	by smtp.gmail.com with ESMTPSA id
-	g35sm10732148pgl.27.2019.10.12.08.37.05
+	k17sm6367317pgh.30.2019.10.12.18.04.47
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 12 Oct 2019 08:37:06 -0700 (PDT)
-Message-ID: <1ff659c05553cc4516ff8a446525d46199c1946a.camel@gmail.com>
+	Sat, 12 Oct 2019 18:04:47 -0700 (PDT)
+Message-ID: <cf9719c92e3cee65d9bda6d2a68fd7bbefa215c0.camel@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>, 
+To: Trevor Gamblin <Trevor.Gamblin@windriver.com>, 
 	openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Oct 2019 08:37:05 -0700
-In-Reply-To: <20191012124434.129278-2-stefan.wiehler@missinglinkelectronics.com>
-References: <20191009151926.1733788-1-raj.khem@gmail.com>
-	<20191012124434.129278-1-stefan.wiehler@missinglinkelectronics.com>
-	<20191012124434.129278-2-stefan.wiehler@missinglinkelectronics.com>
+Date: Sat, 12 Oct 2019 18:04:47 -0700
+In-Reply-To: <20191011151148.39463-1-Trevor.Gamblin@windriver.com>
+References: <20191011151148.39463-1-Trevor.Gamblin@windriver.com>
 Organization: HIMVIS LLC
 User-Agent: Evolution 3.34.1 
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] nvme-cli: defer host ID generation to post installation
+Subject: Re: [meta-oe][PATCH] rsyslog: upgrade from 8.1908.0 to 8.1910.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,60 +62,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Oct 2019 15:37:07 -0000
+X-List-Received-Date: Sun, 13 Oct 2019 01:04:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Stefan
+Hi Trevor
 
-Please rebase it on top of latest master and resend please. Since half
-of this patch is already merged.
+I have taken the security fix patch for master and then backported it
+to zeus. that means this patch now needs to be rebased on top of latest
+master, can you resend it after rebase please ?
 
-On Sat, 2019-10-12 at 14:44 +0200, Stefan Wiehler wrote:
-> Signed-off-by: Stefan Wiehler <
-> stefan.wiehler@missinglinkelectronics.com>
-> ---
->  meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
+On Fri, 2019-10-11 at 11:11 -0400, Trevor Gamblin wrote:
+> From: Trevor Gamblin <trevor.gamblin@windriver.com>
 > 
-> diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb b/meta-
-> oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb
-> index 256d83f03..061c7a0fe 100644
-> --- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb
-> +++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb
-> @@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
->  SECTION = "console/utils"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
-> -DEPENDS = "util-linux util-linux-native"
-> +DEPENDS = "util-linux"
->  PV .= "+git${SRCPV}"
+> Upgrade to latest version for CVE-2019-17040 fix plus
+> other upstream bug fixes.
+> 
+> [GitHub Issue] -- https://github.com/rsyslog/rsyslog/pull/3875
+> 
+> CVE: CVE-2019-17040
+> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>  .../rsyslog/{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb}      | 4
+> ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1908.0.bb =>
+> rsyslog_8.1910.0.bb} (98%)
+> 
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
+> b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
+> similarity index 98%
+> rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
+> rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
+> index bbb4b119a..f50f9a34b 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
+> @@ -29,8 +29,8 @@ SRC_URI_append_libc-musl = " \
+>      file://0001-Include-sys-time-h.patch \
+>  "
 >  
->  SRC_URI = "git://github.com/linux-nvme/nvme-cli.git"
-> @@ -15,15 +15,18 @@ S = "${WORKDIR}/git"
->  inherit bash-completion systemd
+> -SRC_URI[md5sum] = "6e9aa4ef4cad8ae49affa0a786cc9e2f"
+> -SRC_URI[sha256sum] =
+> "f8c8e53b651e03a011667c60bd2d4dba7a7cb6ec04b247c8ea8514115527863b"
+> +SRC_URI[md5sum] = "6d4d94359d083f449f089b8dbb93c423"
+> +SRC_URI[sha256sum] =
+> "0219ee692f31a39743acb62aaf4196b644ce94edf386df4605fd6a11a4fe0c93"
 >  
->  do_install() {
-> -    oe_runmake install DESTDIR=${D} PREFIX=${prefix} \
-> +    oe_runmake install-spec DESTDIR=${D} PREFIX=${prefix} \
->          UDEVDIR=${nonarch_base_libdir}/udev
-> SYSTEMDDIR=${systemd_unitdir}
->  }
->  
->  pkg_postinst_ontarget_${PN}() {
->      ${sbindir}/nvme gen-hostnqn > ${sysconfdir}/nvme/hostnqn
-> +    ${bindir}/uuidgen > ${sysconfdir}/nvme/hostid
->  }
->  
->  PACKAGES =+ "${PN}-dracut ${PN}-zsh-completion"
->  
->  FILES_${PN}-dracut = "${libdir}/dracut/dracut.conf.d"
->  FILES_${PN}-zsh-completion = "${datadir}/zsh/site-functions"
-> +
-> +RDEPENDS_${PN} = "util-linux-uuidgen"
+>  UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+>  UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 > -- 
-> 2.19.2
+> 2.18.1
 > 
 
 
