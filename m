@@ -1,55 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B6F6D7F35D
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
+	[209.85.167.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F52D7F574
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2019 01:04:47 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id 205so8316928pfw.2
+	Sun, 13 Oct 2019 09:33:47 +0000 (UTC)
+Received: by mail-lf1-f66.google.com with SMTP id w6so9812762lfl.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Oct 2019 18:04:49 -0700 (PDT)
+	Sun, 13 Oct 2019 02:33:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=message-id:subject:from:to:date:in-reply-to:references:organization
-	:user-agent:mime-version:content-transfer-encoding;
-	bh=rf20JUsItNN0QmUw59F0O/GjZlyayFhKhM+XJRYfnIY=;
-	b=GxkTEujLtmmFUvtsxbtgW87/tal1/lnqLEoAe8QKDRCkT0cM9+9D3GL2TkVJO6DFLc
-	fNgSaRXDvBffnLa41bNhqOCSscBEfu9YB1PlmncI31k7/bUzWwEsjyeMU3li+xoYTfj/
-	89n1wWX3CRTnGihMPWdbIDRggoO2nTwlQ+gm7mNSkCe23Ma+RZCq++R75qJO61wCensw
-	ByC6ELsUTMeBjrW7n8JAvsl8aIfZ1GULFy1IxBum+7JpmggpxNWSi7ED52+gJuwfS8w0
-	AZ3KDoPh1/sapFXuElEDM9hTy3b8MDOLR3HZRht/+ozKj+9akoZHu3ylbmE7iLiEr1PY
-	5Mtg==
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-language;
+	bh=IPHyKiojjqO3HJk0OOpswMWVgdrT2JbwaXapYs/WcIE=;
+	b=gFG9wLnF68c1Rhn7Ky3R8Y7XdABmdNo9F9l7RGRYrw3eCs6l7YKBZBiWgh74V3ev0J
+	k7PoQDn/T7/yOOpX3Mazh8fdA4imPh5uV4pEJnDOzgzEVoql4naYOC6Ti98lROTZdhDV
+	kmXb5W3fZPbBMFJr35ktJiSmvjqZ7XZQg90cE952qyLSUh9UuSl/MvXOuuuSNipF6+Ia
+	K5ZlGhc26R/EH7LlSxIBhsBck3RTExDPPAOu4pES0mfjICeBKbg1jnMjEQiB/rTWhZYp
+	Qd6dSE2itIaWje2zH/Mb9Nct3LAmoWD4HV+I0BcDb6jwXXuewbACIcz+8pWjd3QfP3m4
+	eN6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:organization:user-agent:mime-version
-	:content-transfer-encoding;
-	bh=rf20JUsItNN0QmUw59F0O/GjZlyayFhKhM+XJRYfnIY=;
-	b=sjxQsijCbVtGraEIuh8D3Hw07fu4nGbaBk18bsFUAC+PnvFtoSA0xv/vQdTj/sZU1B
-	romxxFft2P5oszNEybTjKcn16NIMhFHaMe1W2EBDaNmu1PZHiFcAsviuIA8WvlSZNAFS
-	JHZ+75UcjGTSmTyO9IDWQ1rN7/mAs9533Ozq3wwlwVILPbCTnodhwDpizQxjLd5r+o3s
-	dLNjo7EeQWPngc/4QHWodIezueL9qHaeN8DDeP1KZlE05r1wOMz41J7HS+Zbs2l3L1VK
-	Cv6XManCOVDNZ8lAcyzV3eF6yp+ZOXPW8qDYkmu0RRAC3XtQHxKl0z8WuMQp5gG0I1ar
-	gE7w==
-X-Gm-Message-State: APjAAAUAoccpdedQ5poT61TaurDaUUhu3uxJVtcsWrYd3yvTCz9Hxcoj
-	Hbb1jNhRn4jkWjw3rE7XfjYL8RPP90M=
-X-Google-Smtp-Source: APXvYqxIYrucxqn8fzD0A+q2x0xX863rTJKDtYVMau5xcczzKRDWZU4Jd2PRWj39D2LN4ul5EFpi+A==
-X-Received: by 2002:a63:4181:: with SMTP id o123mr6828850pga.301.1570928688533;
-	Sat, 12 Oct 2019 18:04:48 -0700 (PDT)
-Received: from tyche ([2601:646:8500:1c20::3d0e])
-	by smtp.gmail.com with ESMTPSA id
-	k17sm6367317pgh.30.2019.10.12.18.04.47
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 12 Oct 2019 18:04:47 -0700 (PDT)
-Message-ID: <cf9719c92e3cee65d9bda6d2a68fd7bbefa215c0.camel@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: Trevor Gamblin <Trevor.Gamblin@windriver.com>, 
-	openembedded-devel@lists.openembedded.org
-Date: Sat, 12 Oct 2019 18:04:47 -0700
-In-Reply-To: <20191011151148.39463-1-Trevor.Gamblin@windriver.com>
-References: <20191011151148.39463-1-Trevor.Gamblin@windriver.com>
-Organization: HIMVIS LLC
-User-Agent: Evolution 3.34.1 
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-language;
+	bh=IPHyKiojjqO3HJk0OOpswMWVgdrT2JbwaXapYs/WcIE=;
+	b=eV9ApcvmCGoN5bfM2FWnjkEEJN0WiBbQrK4AxAFYTM/CnZlj/lLSS+fKpjxCDAjuEm
+	ddt4d8uAAmg7VkPknhFkQ2Php6dod/mUJTK8bsK8VvWZxMy7+UJyV+PvLEjgKnEFrfl+
+	LnOj9c9YmXPMirGvfPhuMQcjHqN+wQGa1I8Q4mAqve3DFC8DgBqI5MhbFPvDiJtzXvjU
+	TaCieF4dME/G5TeYxWh8ktthMVXUrutiPN0ns1UM3HjpZzYyhX53/YraNzup0MrMzzV0
+	HttNuT0Ue+Lc9Hb5jZaY7EZ2nB9IRsEv8nySw32adwY87KCqmkGine6afjAj3YD8/m4Y
+	mV7g==
+X-Gm-Message-State: APjAAAX5h5O1foz6Bty40qVKCFmTIBOODBEWlQKkGkz6wB5Aa94NrAWj
+	4XZ3cu0tOZTdzaYyBBKKE2UyG+FKenA=
+X-Google-Smtp-Source: APXvYqyizRNSF56YZ91iwrD1lR+nGdyBx6/cqJyiBspkyo4OPFd8XyIUdcEH5WiPT82XvBHZe2fmRg==
+X-Received: by 2002:ac2:47f1:: with SMTP id b17mr12740274lfp.31.1570959228050; 
+	Sun, 13 Oct 2019 02:33:48 -0700 (PDT)
+Received: from [192.168.10.117] (37-247-29-68.customers.ownit.se.
+	[37.247.29.68])
+	by smtp.gmail.com with ESMTPSA id z2sm3691447ljz.72.2019.10.13.02.33.46
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Sun, 13 Oct 2019 02:33:47 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+From: Jacob Kroon <jacob.kroon@gmail.com>
+Message-ID: <04a167ee-e63d-c4a3-7808-26ef5e9ed884@gmail.com>
+Date: Sun, 13 Oct 2019 11:33:45 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.1.0
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] rsyslog: upgrade from 8.1908.0 to 8.1910.0
+Subject: [meta-java] openjre-8: java from master/master-next crashes on startup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,56 +59,145 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Oct 2019 01:04:47 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 13 Oct 2019 09:33:48 -0000
+X-Groupsio-MsgNum: 80118
+Content-Type: multipart/mixed; boundary="------------4555E3C1F8DB68E3CE277916"
+Content-Language: en-US
+
+--------------4555E3C1F8DB68E3CE277916
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Trevor
+Hi,
 
-I have taken the security fix patch for master and then backported it
-to zeus. that means this patch now needs to be rebased on top of latest
-master, can you resend it after rebase please ?
+For me, this has been the status for quite a while now. First of all, 
+openjre-8 from master/master-next doesn't build on my Fedora 30 box, 
+I've been using the patch attached to this mail to get it to build.
+   Secondly, java always crashes on startup here:
 
-On Fri, 2019-10-11 at 11:11 -0400, Trevor Gamblin wrote:
-> From: Trevor Gamblin <trevor.gamblin@windriver.com>
-> 
-> Upgrade to latest version for CVE-2019-17040 fix plus
-> other upstream bug fixes.
-> 
-> [GitHub Issue] -- https://github.com/rsyslog/rsyslog/pull/3875
-> 
-> CVE: CVE-2019-17040
-> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->  .../rsyslog/{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb}      | 4
-> ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1908.0.bb =>
-> rsyslog_8.1910.0.bb} (98%)
-> 
-> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
-> b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
-> similarity index 98%
-> rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
-> rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
-> index bbb4b119a..f50f9a34b 100644
-> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
-> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
-> @@ -29,8 +29,8 @@ SRC_URI_append_libc-musl = " \
->      file://0001-Include-sys-time-h.patch \
->  "
->  
-> -SRC_URI[md5sum] = "6e9aa4ef4cad8ae49affa0a786cc9e2f"
-> -SRC_URI[sha256sum] =
-> "f8c8e53b651e03a011667c60bd2d4dba7a7cb6ec04b247c8ea8514115527863b"
-> +SRC_URI[md5sum] = "6d4d94359d083f449f089b8dbb93c423"
-> +SRC_URI[sha256sum] =
-> "0219ee692f31a39743acb62aaf4196b644ce94edf386df4605fd6a11a4fe0c93"
->  
->  UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
->  UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
-> -- 
-> 2.18.1
-> 
+> #0  Node::Node (this=0x805fa88, req=3)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/node.cpp:327
+> #1  0xb7499b63 in RegionNode::RegionNode (required=3, this=0x805fa88)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/cfgnode.hpp:73
+> #2  LoopNode::LoopNode (backedge=0x0, entry=0x0, this=0x805fa88)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/loopnode.hpp:88
+> #3  RootNode::RootNode (this=0x805fa88)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/rootnode.hpp:37
+> #4  Compile::Init (this=0x977feaf8, aliaslevel=0)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/compile.cpp:1079
+> #5  0xb74a02c5 in Compile::Compile (this=0x977feaf8, ci_env=0x977ff188, 
+>     generator=0xb7895270 <OptoRuntime::new_instance_Type()>, 
+>     stub_function=0xb7897070 <OptoRuntime::new_instance_C(Klass*, JavaThread*)> "U\211\345WVS\350\245+\237\377\201\303\205\217\062", 
+>     stub_name=0xb7a0a62f "_new_instance_Java", is_fancy_jump=0, pass_tls=true, 
+>     save_arg_registers=false, return_pc=false)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/compile.cpp:1012
+> #6  0xb789587b in OptoRuntime::generate_stub (env=0x977ff188, 
+>     gen=0xb7895270 <OptoRuntime::new_instance_Type()>, 
+>     C_function=0xb7897070 <OptoRuntime::new_instance_C(Klass*, JavaThread*)> "U\211\345WVS\350\245+\237\377\201\303\205\217\062", name=0xb7a0a62f "_new_instance_Java", 
+>     is_fancy_jump=0, pass_tls=true, save_argument_registers=false, return_pc=false)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/runtime.cpp:181
+> #7  0xb7895a5f in OptoRuntime::generate (env=0x977ff188)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/runtime.cpp:147
+> #8  0xb7417de9 in C2Compiler::init_c2_runtime ()
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/runtime/thread.hpp:1854
+> #9  0xb7417e35 in C2Compiler::initialize (this=0xb706b180)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/c2compiler.cpp:102
+> #10 0xb74a508c in CompileBroker::init_compiler_runtime ()
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/compiler/compileBroker.cpp:1674
+> #11 0xb74ab6ed in CompileBroker::compiler_thread_loop ()
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/compiler/compileBroker.cpp:1772
+> #12 0xb79238d5 in compiler_thread_entry (thread=0xb7079400, __the_thread__=0xb7079400)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/runtime/thread.cpp:3230
+> #13 0xb792d782 in JavaThread::thread_main_inner (this=0xb7079400)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/runtime/thread.hpp:1035
+> #14 0xb7820ce4 in java_start (thread=0xb7079400)
+>     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/os/linux/vm/os_linux.cpp:790
+> #15 0x4121244c in start_thread (arg=<optimized out>) at pthread_create.c:479
+> #16 0x4113bd56 in clone () at ../sysdeps/unix/sysv/linux/i386/clone.S:108
 
+The Node::Node() constructor uses an IDX_INIT() macro:
 
+> #define IDX_INIT(req) this->Init((req), (Compile*) this->_out)
+
+and Node::Init() does:
+
+> 297     inline int Node::Init(int req, Compile* C) {
+> 298	  assert(Compile::current() == C, "must use operator new(Compile*)");
+> 299	  int idx = C->next_unique();
+
+and here, this->_out = C = null, which I think leads to a segfault on 
+line 299.
+   I've tried looking at upstream jdk8u but can't find anything. Does 
+anyone have an idea of whats going on here, or if I should raise the 
+issue to openjdk ml ?
+
+Cheers,
+Jacob
+
+--------------4555E3C1F8DB68E3CE277916
+Content-Type: text/x-patch; charset=UTF-8;
+ name="0001-Fix-build.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="0001-Fix-build.patch"
+
+From: Jacob Kroon <jacob.kroon@mikrodidakt.se>
+Date: Fri, 2 Aug 2019 15:59:52 +0200
+Subject: [PATCH] Fix build
+
+---
+ recipes-core/icedtea/icedtea7-native.inc      |  2 ++
+ .../icedtea/openjdk-7-03b147/fix-build.patch  | 22 +++++++++++++++++++
+ 2 files changed, 24 insertions(+)
+ create mode 100644 recipes-core/icedtea/openjdk-7-03b147/fix-build.patch
+
+diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+index b578cb2..522244e 100644
+--- a/recipes-core/icedtea/icedtea7-native.inc
++++ b/recipes-core/icedtea/icedtea7-native.inc
+@@ -49,6 +49,7 @@ SRC_URI = " \
+   file://timezoneszip.patch \
+   file://sigsegv.patch;apply=no \
+   file://vframeArray_Fix_sigsegv.patch;apply=no \
++  file://fix-build.patch;apply=no \
+   "
+ 
+ S = "${WORKDIR}/${ICEDTEA}"
+@@ -161,6 +162,7 @@ do_configure_append() {
+ 	patch -p1 < ${WORKDIR}/jaxws_fix_NullPointerException.patch
+ 	patch -p1 < ${WORKDIR}/sigsegv.patch
+ 	patch -p1 < ${WORKDIR}/vframeArray_Fix_sigsegv.patch
++	patch -p1 < ${WORKDIR}/fix-build.patch
+ }
+ 
+ EXTRA_OEMAKE = ' \
+diff --git a/recipes-core/icedtea/openjdk-7-03b147/fix-build.patch b/recipes-core/icedtea/openjdk-7-03b147/fix-build.patch
+new file mode 100644
+index 0000000..671173a
+--- /dev/null
++++ b/recipes-core/icedtea/openjdk-7-03b147/fix-build.patch
+@@ -0,0 +1,22 @@
++--- a/openjdk-boot/hotspot/src/share/vm/code/relocInfo.hpp
+++++ b/openjdk-boot/hotspot/src/share/vm/code/relocInfo.hpp
++@@ -371,7 +371,7 @@ class relocInfo VALUE_OBJ_CLASS_SPEC {
++   // "immediate" in the prefix header word itself.  This optimization
++   // is invisible outside this module.)
++ 
++-  inline friend relocInfo prefix_relocInfo(int datalen = 0);
+++  inline friend relocInfo prefix_relocInfo(int datalen);
++ 
++  protected:
++   // an immediate relocInfo optimizes a prefix with one 10-bit unsigned value
++--- a/openjdk/hotspot/src/share/vm/code/relocInfo.hpp
+++++ b/openjdk/hotspot/src/share/vm/code/relocInfo.hpp
++@@ -371,7 +371,7 @@ class relocInfo VALUE_OBJ_CLASS_SPEC {
++   // "immediate" in the prefix header word itself.  This optimization
++   // is invisible outside this module.)
++ 
++-  inline friend relocInfo prefix_relocInfo(int datalen = 0);
+++  inline friend relocInfo prefix_relocInfo(int datalen);
++ 
++  protected:
++   // an immediate relocInfo optimizes a prefix with one 10-bit unsigned value
+
+--------------4555E3C1F8DB68E3CE277916--
