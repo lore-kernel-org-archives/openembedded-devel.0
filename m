@@ -1,25 +1,48 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 46A1C6C0EB
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com
+	[209.85.222.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FBE57D278
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Oct 2019 06:23:29 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x9E6NU0v010693
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 14 Oct 2019 10:14:43 +0000 (UTC)
+Received: by mail-qk1-f173.google.com with SMTP id y189so15385696qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Oct 2019 23:23:30 -0700 (PDT)
-Received: from localhost (128.224.158.164) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Sun, 13 Oct 2019 23:23:29 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Oct 2019 14:23:27 +0800
-Message-ID: <20191014062327.5873-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Mon, 14 Oct 2019 03:14:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=/U/WvxuEYuSGTieVi6GIC+0Sa/iVCUg5sGnoFxSzk3E=;
+	b=NI737Km0wMVnTtP8DSZJPFiJXx4ctRa3wqfbdy0sNohWcVZNZS5lz8qJAm70glpgk9
+	/m/9ky1hsRZRIud/jQBOblIiOAf24n0j/FLCcqeAOPk7Pdz05T82j+C/6Qunzhd9GMvo
+	o8EZJYMAEqdek7yG0vgTrObEleMbY71yFMPy0bBgc5ZB4mPc6N/VJYU8rRtM6FKcKfa9
+	nemnBIapfbzuvNUEK13vYBS1FMlFGVdTGRkzujZi9XPnNnbhCDntiqmQw10AXTxdaQi3
+	l8dqMXKbHzkM5xfLRTgvdHz+WIGUh7zUpA8r+3gx1GeYLI+9yElm+qduhFYTFp9sccKd
+	vnVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=/U/WvxuEYuSGTieVi6GIC+0Sa/iVCUg5sGnoFxSzk3E=;
+	b=cn6SLeq5hyQgLNkjqGZfJq/8QvTnGgbHRaSvKhAPugmNWrUgUvuEKgrfqPxguumK6J
+	1l4YoDinK4LPtwSA0XZIGRS8oK4d3CGEzHcmh88oBNxwVic1LlVPOXafMuCaGeIDhyaj
+	RZV7w8nLr+0NFTjBZEM3aJKJF2QG/mFKH34DUwRLCfMeYBU3kmwM99P2noFiQ/H25aVk
+	b6R2AftPs1OsJo4lgBmvJ/HUSLRYtwnjxtc+PG7+EaksIueUST8pf5ykFY9sogYyoBQB
+	c8Slfn66hJr+ZDgjrPXKcH/7bxmdjYWSvwBxUPsPCuC0RO9FawLss94SpNHYvy/5mkQR
+	1ojg==
+X-Gm-Message-State: APjAAAWvBi954R5o+0YO3/4m7yjvAd5Y3c9PBPUst2USZjXniOTT95qS
+	KjLiDDU43t5wBuli6us/3laiLUYyPy/zFUq/EvM=
+X-Google-Smtp-Source: APXvYqyxhglNtTwxdcPTqmieRPtHOqwu1MYGD3MlvPy8KXrUVtzlIqP1WqwxaupSRFUZVODexINMcNn2xjJQRsARnnw=
+X-Received: by 2002:a05:620a:222:: with SMTP id
+	u2mr1364085qkm.474.1571048083536; 
+	Mon, 14 Oct 2019 03:14:43 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [128.224.158.164]
-Subject: [meta-networking][PATCH] freeradius: fix CVE-2019-10143
+References: <20191014020047.27691-1-dan.callaghan@opengear.com>
+In-Reply-To: <20191014020047.27691-1-dan.callaghan@opengear.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 14 Oct 2019 03:14:32 -0700
+Message-ID: <CAMKF1sq=q=Ssmp69ze-9W2keDZ_nKa=7+6s=5zAOnmPRbg_pYw@mail.gmail.com>
+To: Dan Callaghan <dan.callaghan@opengear.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH] strongswan: add a PACKAGECONFIG for libbfd stack traces
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,145 +55,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Oct 2019 06:23:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 14 Oct 2019 10:14:43 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2019-10143
+On Mon, Oct 14, 2019 at 3:01 AM Dan Callaghan <dan.callaghan@opengear.com>
+wrote:
 
-Patch from:
-https://github.com/FreeRADIUS/freeradius-server/commit/1f233773962bf1a9c2d228a180eacddb9db2d574
+> Strongswan installs a signal handler for SIGSEGV, SIGILL, and SIGBUS
+> which attempts to print a stack trace of the crash. For producing line
+> numbers in the stack trace, it can use libbfd from binutils, or
+> libunwind, or else it falls back to a slower method using
+> /usr/bin/addr2line.
+>
+> Currently the addr2line method is unlikely to actually work, since there
+> is no RDEPENDS to pull that command into the image.
+>
+> This patch turns on the libbfd-based stack traces by default, which
+> should be a reasonable choice since binutils is already required for
+> building everything. The setting is nevertheless behind a PACKAGECONFIG
+> in case libbfd is not wanted in the final image.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- ...-to-radiusd-user-group-when-rotating-logs.patch | 104 +++++++++++++++++++++
- .../freeradius/freeradius_3.0.19.bb                |   1 +
- 2 files changed, 105 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
-new file mode 100644
-index 0000000..5859dc7
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
-@@ -0,0 +1,104 @@
-+From 1f233773962bf1a9c2d228a180eacddb9db2d574 Mon Sep 17 00:00:00 2001
-+From: Alexander Scheel <ascheel@redhat.com>
-+Date: Tue, 7 May 2019 16:04:29 -0400
-+Subject: [PATCH] su to radiusd user/group when rotating logs
-+
-+The su directive to logrotate ensures that log rotation happens under the
-+owner of the logs. Otherwise, logrotate runs as root:root, potentially
-+enabling privilege escalation if a RCE is discovered against the
-+FreeRADIUS daemon.
-+
-+Signed-off-by: Alexander Scheel <ascheel@redhat.com>
-+
-+Upstream-Status: Backport
-+[https://github.com/FreeRADIUS/freeradius-server/commit/1f233773962bf1a9c2d228a180eacddb9db2d574]
-+
-+CVE: CVE-2019-10143
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+---
-+ debian/freeradius.logrotate  | 3 +++
-+ redhat/freeradius-logrotate  | 1 +
-+ scripts/logrotate/freeradius | 3 +++
-+ suse/radiusd-logrotate       | 1 +
-+ 4 files changed, 8 insertions(+)
-+
-+diff --git a/debian/freeradius.logrotate b/debian/freeradius.logrotate
-+index 7d837d5..a8d29b7 100644
-+--- a/debian/freeradius.logrotate
-++++ b/debian/freeradius.logrotate
-+@@ -9,6 +9,7 @@
-+ 	notifempty
-+ 
-+ 	copytruncate
-++	su freerad freerad
-+ }
-+ 
-+ # (in order)
-+@@ -26,6 +27,7 @@
-+ 	notifempty
-+ 
-+ 	nocreate
-++	su freerad freerad
-+ }
-+ 
-+ # There are different detail-rotating strategies you can use.  One is
-+@@ -45,4 +47,5 @@
-+ 	notifempty
-+ 
-+ 	nocreate
-++	su freerad freerad
-+ }
-+diff --git a/redhat/freeradius-logrotate b/redhat/freeradius-logrotate
-+index 360765d..bb97ca5 100644
-+--- a/redhat/freeradius-logrotate
-++++ b/redhat/freeradius-logrotate
-+@@ -9,6 +9,7 @@ rotate 4
-+ missingok
-+ compress
-+ delaycompress
-++su radiusd radiusd
-+ 
-+ #
-+ #  The main server log
-+diff --git a/scripts/logrotate/freeradius b/scripts/logrotate/freeradius
-+index 3de435e..eecf631 100644
-+--- a/scripts/logrotate/freeradius
-++++ b/scripts/logrotate/freeradius
-+@@ -17,6 +17,7 @@
-+ 	notifempty
-+ 
-+ 	copytruncate
-++	su radiusd radiusd
-+ }
-+ 
-+ # (in order)
-+@@ -34,6 +35,7 @@
-+ 	notifempty
-+ 
-+ 	nocreate
-++	su radiusd radiusd
-+ }
-+ 
-+ # There are different detail-rotating strategies you can use.  One is
-+@@ -53,4 +55,5 @@
-+ 	notifempty
-+ 
-+ 	nocreate
-++	su radiusd radiusd
-+ }
-+diff --git a/suse/radiusd-logrotate b/suse/radiusd-logrotate
-+index 24d56be..be5a797 100644
-+--- a/suse/radiusd-logrotate
-++++ b/suse/radiusd-logrotate
-+@@ -11,6 +11,7 @@ missingok
-+ compress
-+ delaycompress
-+ notifempty
-++su radiusd radiusd
-+ 
-+ #
-+ #  The main server log
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb
-index 9da15e0..8c95bba 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.19.bb
-@@ -26,6 +26,7 @@ SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x; \
-     file://freeradius-fix-quoting-for-BUILT_WITH.patch \
-     file://freeradius-fix-error-for-expansion-of-macro.patch \
-     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
-+    file://0001-su-to-radiusd-user-group-when-rotating-logs.patch \
-     file://radiusd.service \
-     file://radiusd-volatiles.conf \
- "
--- 
-2.7.4
+Package config is fine but let=E2=80=99s not enable it by default
 
+
+> ---
+>  meta-networking/recipes-support/strongswan/strongswan_5.8.1.bb | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-support/strongswan/
+> strongswan_5.8.1.bb b/meta-networking/recipes-support/strongswan/
+> strongswan_5.8.1.bb
+> index 5408eed27..c8a8d1dc0 100644
+> --- a/meta-networking/recipes-support/strongswan/strongswan_5.8.1.bb
+> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.8.1.bb
+> @@ -24,10 +24,11 @@ EXTRA_OECONF =3D " \
+>
+>  EXTRA_OECONF +=3D "${@bb.utils.contains('DISTRO_FEATURES', 'systemd',
+> '--with-systemdsystemunitdir=3D${systemd_unitdir}/system/',
+> '--without-systemdsystemunitdir', d)}"
+>
+> -PACKAGECONFIG ??=3D "charon curl gmp openssl stroke sqlite3 \
+> +PACKAGECONFIG ??=3D "bfd charon curl gmp openssl stroke sqlite3 \
+>          ${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)} \
+>  "
+>  PACKAGECONFIG[aesni] =3D
+> "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
+> +PACKAGECONFIG[bfd] =3D
+> "--enable-bfd-backtraces,--disable-bfd-backtraces,binutils"
+>  PACKAGECONFIG[charon] =3D "--enable-charon,--disable-charon,"
+>  PACKAGECONFIG[curl] =3D
+> "--enable-curl,--disable-curl,curl,${PN}-plugin-curl"
+>  PACKAGECONFIG[gmp] =3D "--enable-gmp,--disable-gmp,gmp,${PN}-plugin-gmp"
+> --
+> 2.20.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
