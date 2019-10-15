@@ -1,48 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
-	[209.85.128.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 476357C89C
+Return-Path: <marek.bykowski@gmail.com>
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com
+	[209.85.167.47])
+	by mail.openembedded.org (Postfix) with ESMTP id EFDBA607E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2019 08:53:27 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id f22so19343767wmc.2
+	Tue, 15 Oct 2019 12:14:30 +0000 (UTC)
+Received: by mail-lf1-f47.google.com with SMTP id w6so14306069lfl.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2019 01:53:28 -0700 (PDT)
+	Tue, 15 Oct 2019 05:14:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=NUKwCZcncMEyzXLQeQ7dV4JAiwYnoRKHIIEyGEj8Yck=;
-	b=QmtXMTcmq/y16S3CP/plnzb3+9M2LpFQEHdl6oVkBPTc1mjnouuzl6tetm9osQ8soT
-	ddYsWIHwNGxt/9xnBROymSYjtt3yaMvhWsnd42yvrbbfvitH02HLb7EF6jMStnsI6XvS
-	Td9vRYYUgG9YqSDaUpClTWF1BdmTpcEGNuZOc1KgVteqYQ2O49+seyF+58X1B9ZH35kq
-	f1kwUifI58rTM/l90SYRcdYts77U6E/3oNRCKNryuPPecgAeTxtv5qQ02F/mHX0yisHa
-	FXu1uW78JROzW7HsDU/qe0AEF7AnC19+2DxA+jkwn5N/w2n7FWxPAGbVaKNlHSJe8tm9
-	OiUA==
+	bh=ZvrOTmPHNtSXBwJpLvg/6nHYT9A1U0I4M8NSiMShBA8=;
+	b=oh157VclHe9DIpm+RhLVSHoQ1Lqw/PUOW0BKoNdb2uJTdS176zT3zOtlq7NF39fQjH
+	aqeuRiJeHfg/ZimK5bLXw0K+UHAJSxRmW04IsYfv5TP2UnCKnFuBs52i8/FJKz8D7C9N
+	ibuFilZVXn58dXlJzHemDTpT0kdDNSry+QNdYhsV4iYtKVlvmsjslMoxTH544IB42CZ1
+	EThmv6KQAr8rrOAFHGhIxkXCX62yQq+aOqFEeR4kPlGi7OkraY4/OgeVGyzJ5b6uO4c4
+	PzRHmYOkFNtvs73M9KmvwoO+eN+5x1RVWV6LALw8YapF0y5ezQGT+rDbUxcf+k3fuUGa
+	vg6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=NUKwCZcncMEyzXLQeQ7dV4JAiwYnoRKHIIEyGEj8Yck=;
-	b=PE6kvmiwKOQ4G9JVVUkn0t4AL2DUKhNwdqhKH+VvOl+l8IilmRxPRt2trB3+3UE8Um
-	l1UG6MrISoA5PY8L7Bzd/viBjXsCt6AYGkDfpiwYqcgUKz3obhJ+JHhgMoplhcLhQ+OK
-	TTqXRjVwuXesgv50+Lv2GCrLZmooWDHntvyjx7Szbs2GKpNTfApPwQn1HoTtwTMwEbQ3
-	FyV7yoYXA+qKhbQd7PEB3YBDGivm2fie8dZfKo6lO4RgFjZxPzTyBYjfgxWMlCaG9glk
-	DDFgKPG+2OgeaRmvz7/w6iNuJHFsUpV8IlB0OzUU34GkHyuK2Jw8jKXNpSPAWfb8dsFg
-	JIoA==
-X-Gm-Message-State: APjAAAU7nJSAlbbRR8mn48vRRnMvZ/+6sCyrisjz9XGYuz0JLLol39Ev
-	6x0vdrQuGmsMSxRz65qwqs/2f2TU8sI=
-X-Google-Smtp-Source: APXvYqzkoWK5tRXIR87s60v4etthPwo5HLojaW2D5fHCMUO+JW2W7vd0EWdhDsc/xwPWim+75qrK+g==
-X-Received: by 2002:a1c:a385:: with SMTP id m127mr19457224wme.50.1571129607611;
-	Tue, 15 Oct 2019 01:53:27 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	bh=ZvrOTmPHNtSXBwJpLvg/6nHYT9A1U0I4M8NSiMShBA8=;
+	b=WCqL1m8KTeoxnMmgy6t6dXlZ9WQf6zGgj5BTYOCW0r4lK9eFr6zltj1ebN0hGK+1jP
+	UYVlibIxO4hey5B1E7U93uoAmCUfavrwqvniQ4DnXhOnXTHEdhQqisMqSg6mwGQs9jxe
+	78xki870IedOfzUAbXKK42oDk+D9Wd8gh5/RzrptDDVRcXjNOXa8wVzwIC1PtSq2AWH+
+	44j/pKLLa3W+hHLdSJeCXeh2yZHMLUm1WVWPj6fHR5zw7P431IlVTlI3ZNr+E1UNA2R8
+	SA7dc7r/CXIhzO1+xtguevYPYYfVuIWxJ0fAtxtYyqhv8I1bBSpz+RI4bJAFBgZGsVjo
+	b1rQ==
+X-Gm-Message-State: APjAAAW72ofABQbxf0XrD2mKK9jquPt4VuqWJ4BpRxuMM8s1Gh5QTQtE
+	0jJ3FpYse7WSTrP8C8qc1XUwvtx3kZU0Fg==
+X-Google-Smtp-Source: APXvYqxMoW2ZgEmQ3q609xzcbW9a/icUtkyUFyMtVeRd56S3zONnpyGWA/D7S51RK21ZOUM9h+AD+w==
+X-Received: by 2002:a05:6512:1de:: with SMTP id
+	f30mr663073lfp.176.1571141670358; 
+	Tue, 15 Oct 2019 05:14:30 -0700 (PDT)
+Received: from marek-VirtualBox.ccr.corp.intel.com ([78.133.233.210])
 	by smtp.gmail.com with ESMTPSA id
-	b130sm32610537wmh.12.2019.10.15.01.53.26
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 15 Oct 2019 01:53:26 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	c197sm5054134lfg.46.2019.10.15.05.14.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 15 Oct 2019 05:14:29 -0700 (PDT)
+From: marek.bykowski@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Oct 2019 08:53:23 +0000
-Message-Id: <20191015085323.3329-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][warrior][PATCH] python3-twofish: Fix missing return statements in module stubs
+Date: Tue, 15 Oct 2019 14:13:41 +0200
+Message-Id: <1571141621-20235-1-git-send-email-marek.bykowski@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe] [PATCH] lmbench: fix/clean-up the build for lmbench
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,80 +55,477 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2019 08:53:27 -0000
+X-List-Received-Date: Tue, 15 Oct 2019 12:14:31 -0000
 
-* fixes build with -Werror=return-type
-  twofish.c: In function 'init_twofish':
-  twofish.c:45:1: error: control reaches end of non-void function [-Werror=return-type]
-     45 | PyMODINIT_FUNC init_twofish(void) { }
-        | ^~~~~~~~~~~~~~
-  twofish.c: In function 'PyInit__twofish':
-  twofish.c:46:1: error: control reaches end of non-void function [-Werror=return-type]
-     46 | PyMODINIT_FUNC PyInit__twofish(void) { }
-        | ^~~~~~~~~~~~~~
-  cc1: some warnings being treated as errors
+From: Marek Bykowski <marek.bykowski@gmail.com>
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Fix/clean up a couple of things:
+- if lmbench doesn't use a return from a function attributed to warn_unused_result
+  supress it
+- fix buffer overflow
+- define feature_test_macro __USE_GNU compiling in sched_{get,set}affinity() used
+  in one of the lmbench binaries
+
+Signed-off-by: Marek Bykowski <marek.bykowski@gmail.com>
 ---
- ...ng-return-statements-in-module-stubs.patch | 38 +++++++++++++++++++
- .../python/python3-twofish_0.3.0.bb           |  2 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
+ .../0001-lmbench-clean-up-the-build.patch     | 434 ++++++++++++++++++
+ .../lmbench/lmbench_3.0-a9.bb                 |   1 +
+ 2 files changed, 435 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lmbench-clean-up-the-build.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch b/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lmbench-clean-up-the-build.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lmbench-clean-up-the-build.patch
 new file mode 100644
-index 0000000000..c25b2457e2
+index 000000000..476b3711a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
-@@ -0,0 +1,38 @@
-+From 5704610f4b3aed5210e9c5b7c05ff8b5b2364c9c Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Mon, 12 Aug 2019 08:18:21 +0000
-+Subject: [PATCH] Fix missing return statements in module stubs
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lmbench-clean-up-the-build.patch
+@@ -0,0 +1,434 @@
++From 78b3d1b51ffd4830869cd1db01ce56a279b1c048 Mon Sep 17 00:00:00 2001
++From: Marek Bykowski <marek.bykowski@gmail.com>
++Date: Tue, 15 Oct 2019 05:30:00 -0500
++Subject: [PATCH] lmbench: clean-up the build
 +
-+* fixes build with -Werror=return-type
-+  twofish.c: In function 'init_twofish':
-+  twofish.c:45:1: error: control reaches end of non-void function [-Werror=return-type]
-+     45 | PyMODINIT_FUNC init_twofish(void) { }
-+        | ^~~~~~~~~~~~~~
-+  twofish.c: In function 'PyInit__twofish':
-+  twofish.c:46:1: error: control reaches end of non-void function [-Werror=return-type]
-+     46 | PyMODINIT_FUNC PyInit__twofish(void) { }
-+        | ^~~~~~~~~~~~~~
-+  cc1: some warnings being treated as errors
++Fix/clean up a coule of things:
++- if lmbench doesn't use the return from a function attributed to warn_unused_result
++  supress it
++- fix buffer overflow
++- define feature_test_macro __USE_GNU compiling in sched_{get,set}affinity()
 +
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+
-+Upstream-Status: Submitted [https://github.com/keybase/python-twofish/pull/6]
++Signed-off-by: Marek Bykowski <marek.bykowski@gmail.com>
 +---
-+ twofish.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ src/bw_tcp.c           |  2 +-
++ src/bw_unix.c          |  4 ++--
++ src/hello.c            |  2 +-
++ src/lat_connect.c      |  2 +-
++ src/lat_fcntl.c        |  4 ++--
++ src/lat_fs.c           |  2 +-
++ src/lat_http.c         |  6 +++---
++ src/lat_proc.c         |  2 +-
++ src/lat_select.c       |  2 +-
++ src/lat_tcp.c          |  8 ++++----
++ src/lat_unix.c         |  2 +-
++ src/lat_unix_connect.c |  4 ++--
++ src/lib_sched.c        |  7 +++++--
++ src/lib_timing.c       | 18 +++++++++---------
++ src/lmhttp.c           | 26 +++++++++++++++++---------
++ src/memsize.c          |  4 ++--
++ 16 files changed, 53 insertions(+), 42 deletions(-)
 +
-+diff --git a/twofish.c b/twofish.c
-+index e324c34..d4487d8 100644
-+--- a/twofish.c
-++++ b/twofish.c
-+@@ -42,5 +42,5 @@ DL_EXPORT(void) exp_Twofish_decrypt(Twofish_key * xkey, uint8_t c[16], uint8_t p
-+ We need a stub init_twofish function so the module will link as a proper module.
-+ Do not import _twofish from python; it will not work since _twofish is not a *real* module
-+ */
-+-PyMODINIT_FUNC init_twofish(void) { }
-+-PyMODINIT_FUNC PyInit__twofish(void) { }
-++PyMODINIT_FUNC init_twofish(void) { return NULL; }
-++PyMODINIT_FUNC PyInit__twofish(void) { return NULL; }
-+-- 
-+2.17.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb b/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
-index e593f6f212..7b8eb2ef0f 100644
---- a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
-@@ -1,2 +1,4 @@
- require python-twofish.inc
- inherit setuptools3
-+
-+SRC_URI += "file://0001-Fix-missing-return-statements-in-module-stubs.patch"
++diff --git a/src/bw_tcp.c b/src/bw_tcp.c
++index cc27098..bf76fac 100644
++--- a/src/bw_tcp.c
+++++ b/src/bw_tcp.c
++@@ -60,7 +60,7 @@ main(int ac, char **av)
++ 		{
++ 			int	conn;
++ 			conn = tcp_connect(optarg, TCP_DATA, SOCKOPT_NONE);
++-			write(conn, "0", 1);
+++			(void) !write(conn, "0", 1);
++ 			exit(0);
++ 		}
++ 		case 'm':
++diff --git a/src/bw_unix.c b/src/bw_unix.c
++index ad71157..493db7c 100644
++--- a/src/bw_unix.c
+++++ b/src/bw_unix.c
++@@ -97,7 +97,7 @@ reader(iter_t iterations, void* cookie)
++ 	size_t	todo = state->bytes;
++ 
++ 	while (iterations-- > 0) {
++-		write(state->control[1], &todo, sizeof(todo));
+++		(void) !write(state->control[1], &todo, sizeof(todo));
++ 		for (done = 0; done < todo; done += n) {
++ 			if ((n = read(state->pipes[0], state->buf, state->xfer)) <= 0) {
++ 				/* error! */
++@@ -115,7 +115,7 @@ writer(int controlfd, int writefd, char* buf, void* cookie)
++ 	struct _state* state = (struct _state*)cookie;
++ 
++ 	for ( ;; ) {
++-		read(controlfd, &todo, sizeof(todo));
+++		(void) !read(controlfd, &todo, sizeof(todo));
++ 		for (done = 0; done < todo; done += n) {
++ #ifdef TOUCH
++ 			touch(buf, XFERSIZE);
++diff --git a/src/hello.c b/src/hello.c
++index 15a2493..0f7f237 100644
++--- a/src/hello.c
+++++ b/src/hello.c
++@@ -3,6 +3,6 @@
++ int
++ main()
++ {
++-	write(1, "Hello world\n", 12);
+++	(void) !write(1, "Hello world\n", 12);
++ 	return (0);
++ }
++diff --git a/src/lat_connect.c b/src/lat_connect.c
++index 4e5538e..2e08731 100644
++--- a/src/lat_connect.c
+++++ b/src/lat_connect.c
++@@ -52,7 +52,7 @@ main(int ac, char **av)
++ 			int sock = tcp_connect(av[optind],
++ 					       TCP_CONNECT,
++ 					       SOCKOPT_NONE);
++-			write(sock, "0", 1);
+++			(void) !write(sock, "0", 1);
++ 			close(sock);
++ 			exit(0);
++ 		}
++diff --git a/src/lat_fcntl.c b/src/lat_fcntl.c
++index 01847a8..3b9fd65 100644
++--- a/src/lat_fcntl.c
+++++ b/src/lat_fcntl.c
++@@ -120,8 +120,8 @@ initialize(iter_t iterations, void* cookie)
++ 	}
++ 	unlink(state->filename1);
++ 	unlink(state->filename2);
++-	write(state->fd1, buf, sizeof(buf));
++-	write(state->fd2, buf, sizeof(buf));
+++	(void) !write(state->fd1, buf, sizeof(buf));
+++	(void) !write(state->fd2, buf, sizeof(buf));
++ 	lock.l_type = F_WRLCK;
++ 	lock.l_whence = 0;
++ 	lock.l_start = 0;
++diff --git a/src/lat_fs.c b/src/lat_fs.c
++index 003a4ea..14efa25 100644
++--- a/src/lat_fs.c
+++++ b/src/lat_fs.c
++@@ -117,7 +117,7 @@ mkfile(char *name, size_t size)
++ 
++ 	while (size > 0) {
++ 		chunk = ((size > (128*1024)) ? (128*1024) : size);
++-		write(fd, buf, chunk);
+++		(void) !write(fd, buf, chunk);
++ 		size -= chunk;
++ 	}
++ 	close(fd);
++diff --git a/src/lat_http.c b/src/lat_http.c
++index 28d04f7..6ccc88e 100644
++--- a/src/lat_http.c
+++++ b/src/lat_http.c
++@@ -29,11 +29,11 @@ http(char *server, char *file, int prog)
++ 	if (debug) {
++ 		printf("%s", buf);
++ 	}
++-	write(sock, buf, strlen(buf));
+++	(void) !write(sock, buf, strlen(buf));
++ 	while ((n = read(sock, buf, XFERSIZE)) > 0) {
++ 		b += n;
++ 		if (echo) {
++-			write(1, buf, n);
+++			(void) !write(1, buf, n);
++ 		}
++ 	}
++ 	close(sock);
++@@ -49,7 +49,7 @@ killhttp(char *server, int prog)
++ 	int     sock;
++ 
++ 	sock = tcp_connect(server, prog, SOCKOPT_REUSE);
++-	write(sock, "EXIT", 4);
+++	(void) !write(sock, "EXIT", 4);
++ 	close(sock);
++ }
++ 
++diff --git a/src/lat_proc.c b/src/lat_proc.c
++index 6142661..e368956 100644
++--- a/src/lat_proc.c
+++++ b/src/lat_proc.c
++@@ -111,7 +111,7 @@ do_shell(iter_t iterations, void* cookie)
++ 		case 0:	/* child */
++ 			handle_scheduler(benchmp_childid(), 1, 1);
++ 			close(1);
++-			execlp("/bin/sh", "sh", "-c", PROG, 0);
+++			execlp("/bin/sh", "sh", "-c", PROG, (char *)0);
++ 			exit(1);
++ 
++ 		default:
++diff --git a/src/lat_select.c b/src/lat_select.c
++index 5217878..662e0ac 100644
++--- a/src/lat_select.c
+++++ b/src/lat_select.c
++@@ -131,7 +131,7 @@ server(void* cookie)
++ 		/* child server process */
++ 		while (pid == getppid()) {
++ 			int newsock = tcp_accept(state->sock, SOCKOPT_NONE);
++-			read(newsock, &state->fid, 1);
+++			(void) !read(newsock, &state->fid, 1);
++ 			close(newsock);
++ 		}
++ 		exit(0);
++diff --git a/src/lat_tcp.c b/src/lat_tcp.c
++index 6a11996..aad56b3 100644
++--- a/src/lat_tcp.c
+++++ b/src/lat_tcp.c
++@@ -104,7 +104,7 @@ init(iter_t iterations, void* cookie)
++ 		exit(1);
++ 	}
++ 
++-	write(state->sock, &msize, sizeof(int));
+++	(void) !write(state->sock, &msize, sizeof(int));
++ }
++ 
++ void
++@@ -125,8 +125,8 @@ doclient(iter_t iterations, void* cookie)
++ 	int 	sock   = state->sock;
++ 
++ 	while (iterations-- > 0) {
++-		write(sock, state->buf, state->msize);
++-		read(sock, state->buf, state->msize);
+++		(void) !write(sock, state->buf, state->msize);
+++		(void) !read(sock, state->buf, state->msize);
++ 	}
++ }
++ 
++@@ -169,7 +169,7 @@ doserver(int sock)
++ 			exit(4);
++ 		}
++ 		for (n = 0; read(sock, buf, msize) > 0; n++) {
++-			write(sock, buf, msize);
+++			(void) !write(sock, buf, msize);
++ 		}
++ 		free(buf);
++ 	} else {
++diff --git a/src/lat_unix.c b/src/lat_unix.c
++index 43ad6a3..d7ed2f3 100644
++--- a/src/lat_unix.c
+++++ b/src/lat_unix.c
++@@ -93,7 +93,7 @@ initialize(iter_t iterations, void* cookie)
++ 	/* Child sits and ping-pongs packets back to parent */
++ 	signal(SIGTERM, exit);
++ 	while (read(pState->sv[0], pState->buf, pState->msize) == pState->msize) {
++-		write(pState->sv[0], pState->buf, pState->msize);
+++		(void) !write(pState->sv[0], pState->buf, pState->msize);
++ 	}
++ 	exit(0);
++ }
++diff --git a/src/lat_unix_connect.c b/src/lat_unix_connect.c
++index a66b256..d21747c 100644
++--- a/src/lat_unix_connect.c
+++++ b/src/lat_unix_connect.c
++@@ -47,7 +47,7 @@ int main(int ac, char **av)
++ 		}
++ 		if (!strcmp(av[1], "-S")) {
++ 			int sock = unix_connect(CONNAME);
++-			write(sock, "0", 1);
+++			(void) !write(sock, "0", 1);
++ 			close(sock);
++ 			exit(0);
++ 		}
++@@ -92,7 +92,7 @@ void server_main(void)
++ 	for (;;) {
++ 		newsock = unix_accept(sock);
++ 		c = 0;
++-		read(newsock, &c, 1);
+++		(void) !read(newsock, &c, 1);
++ 		if (c && c == '0') {
++ 			unix_done(sock, CONNAME);
++ 			exit(0);
++diff --git a/src/lib_sched.c b/src/lib_sched.c
++index fc5f82d..635685f 100644
++--- a/src/lib_sched.c
+++++ b/src/lib_sched.c
++@@ -22,6 +22,7 @@
++ #endif
++ 
++ #if defined(HAVE_SCHED_SETAFFINITY)
+++#define __USE_GNU
++ #include <sched.h>
++ #endif
++ 
++@@ -205,7 +206,8 @@ sched_pin(int cpu)
++ 		sz = 1 + (2 * sched_ncpus()) / (8 * sizeof(unsigned long));
++ 		mask = (unsigned long*)malloc(sz * sizeof(unsigned long));
++ 		cpumask = (unsigned long*)malloc(sz * sizeof(unsigned long));
++-		retval = sched_getaffinity(0, sz * sizeof(unsigned long), cpumask);
+++		retval = sched_getaffinity(0, sz * sizeof(unsigned long),
+++					(cpu_set_t *) cpumask);
++ 		if (retval < 0) perror("sched_getaffinity:");
++ 		if (retval < 0) return retval;
++ 
++@@ -229,7 +231,8 @@ sched_pin(int cpu)
++ 			j++;
++ 		}
++ 	}
++-	retval = sched_setaffinity(0, sz * sizeof(unsigned long), mask);
+++	retval = sched_setaffinity(0, sz * sizeof(unsigned long),
+++			(const cpu_set_t *) mask);
++ 	if (retval < 0) perror("sched_setaffinity:");
++ #ifdef _DEBUG
++ 	fprintf(stderr, "sched_pin(%d): pid=%d, returning %d\n", cpu, (int)getpid(), retval);
++diff --git a/src/lib_timing.c b/src/lib_timing.c
++index 714f0da..db84e8f 100644
++--- a/src/lib_timing.c
+++++ b/src/lib_timing.c
++@@ -398,7 +398,7 @@ benchmp_parent(	int response,
++ 	}
++ 
++ 	/* send 'start' signal */
++-	write(start_signal, signals, parallel * sizeof(char));
+++	(void) !write(start_signal, signals, parallel * sizeof(char));
++ 
++ 	/* Collect 'done' signals */
++ 	for (i = 0; i < parallel * sizeof(char); i += bytes_read) {
++@@ -443,7 +443,7 @@ benchmp_parent(	int response,
++ 		FD_ZERO(&fds_error);
++ 
++ 		/* tell one child to report its results */
++-		write(result_signal, buf, sizeof(char));
+++		(void) !write(result_signal, buf, sizeof(char));
++ 
++ 		for (; n > 0; n -= bytes_read, buf += bytes_read) {
++ 			bytes_read = 0;
++@@ -484,7 +484,7 @@ benchmp_parent(	int response,
++ 	signal(SIGCHLD, SIG_DFL);
++ 	
++ 	/* send 'exit' signals */
++-	write(exit_signal, results, parallel * sizeof(char));
+++	(void) !write(exit_signal, results, parallel * sizeof(char));
++ 
++ 	/* Compute median time; iterations is constant! */
++ 	set_results(merged_results);
++@@ -690,13 +690,13 @@ benchmp_interval(void* _state)
++ 		       NULL, &timeout);
++ 		if (FD_ISSET(state->start_signal, &fds)) {
++ 			state->state = timing_interval;
++-			read(state->start_signal, &c, sizeof(char));
+++			(void) !read(state->start_signal, &c, sizeof(char));
++ 			iterations = state->iterations;
++ 		}
++ 		if (state->need_warmup) {
++ 			state->need_warmup = 0;
++ 			/* send 'ready' */
++-			write(state->response, &c, sizeof(char));
+++			(void) !write(state->response, &c, sizeof(char));
++ 		}
++ 		break;
++ 	case timing_interval:
++@@ -726,7 +726,7 @@ benchmp_interval(void* _state)
++ 		state->iterations = iterations;
++ 		if (state->state == cooldown) {
++ 			/* send 'done' */
++-			write(state->response, (void*)&c, sizeof(char));
+++			(void) !write(state->response, (void*)&c, sizeof(char));
++ 			iterations = state->iterations_batch;
++ 		}
++ 		break;
++@@ -741,8 +741,8 @@ benchmp_interval(void* _state)
++ 			 * the parent to tell us to send our results back.
++ 			 * From this point on, we will do no more "work".
++ 			 */
++-			read(state->result_signal, (void*)&c, sizeof(char));
++-			write(state->response, (void*)get_results(), state->r_size);
+++			(void) !read(state->result_signal, (void*)&c, sizeof(char));
+++			(void) !write(state->response, (void*)get_results(), state->r_size);
++ 			if (state->cleanup) {
++ 				if (benchmp_sigchld_handler == SIG_DFL)
++ 					signal(SIGCHLD, SIG_DFL);
++@@ -750,7 +750,7 @@ benchmp_interval(void* _state)
++ 			}
++ 
++ 			/* Now wait for signal to exit */
++-			read(state->exit_signal, (void*)&c, sizeof(char));
+++			(void) !read(state->exit_signal, (void*)&c, sizeof(char));
++ 			exit(0);
++ 		}
++ 	};
++diff --git a/src/lmhttp.c b/src/lmhttp.c
++index 41d9949..080b462 100644
++--- a/src/lmhttp.c
+++++ b/src/lmhttp.c
++@@ -277,26 +277,34 @@ void
++ dodir(char *name, int sock)
++ {
++ 	FILE	*p;
++-	char	buf[1024];
+++	char	*buf;
++ 	char	path[1024];
+++	size_t 	bytes;
++ 
++ 	if (dflg) printf("dodir(%s)\n", name);
+++	/* figure out a buf size and allocate with malloc */
+++	bytes = snprintf(buf, 0, "cd %s && ls -1a", name);
+++	buf = (char*) malloc(bytes + 1);
++ 	sprintf(buf, "cd %s && ls -1a", name);
++ 	p = popen(buf, "r");
++ 	if (!p && dflg) printf("Couldn't popen %s\n", buf);
+++	bytes = snprintf(buf, 0, "\
+++<HTML><HEAD>\n<TITLE>Index of /%s</TITLE></HEAD><BODY><H1>Index of /%s</H1>\n",
+++	    name, name);
+++	buf = (char*) realloc(buf, bytes + 1);
++ 	sprintf(buf, "\
++ <HTML><HEAD>\n<TITLE>Index of /%s</TITLE></HEAD><BODY><H1>Index of /%s</H1>\n",
++ 	    name, name);
++-	write(sock, buf, strlen(buf));
+++	(void) !write(sock, buf, strlen(buf));
++ 	while (fgets(buf, sizeof(buf), p)) {
++ 		buf[strlen(buf) - 1] = 0;
++ 		sprintf(path, "/%s/%s", name, buf);
++ 		if (dflg) printf("\t%s\n", path);
++-		write(sock, "<A HREF=\"", 9);
++-		write(sock, path, strlen(path));
++-		write(sock, "\">", 2);
++-		write(sock, buf, strlen(buf));
++-		write(sock, "</A><BR>\n", 9);
+++		(void) !write(sock, "<A HREF=\"", 9);
+++		(void) !write(sock, path, strlen(path));
+++		(void) !write(sock, "\">", 2);
+++		(void) !write(sock, buf, strlen(buf));
+++		(void) !write(sock, "</A><BR>\n", 9);
++ 	}
++ 	pclose(p);
++ }
++@@ -380,7 +388,7 @@ logit(int sock, char *name, int size)
++ 	len = sprintf(buf, "%u %u %s %u\n",
++ 	    *((unsigned int*)&sin.sin_addr), (unsigned int)time(0), name, size);
++ 	if (nbytes + len >= sizeof(logbuf)) {
++-		write(logfile, logbuf, nbytes);
+++		(void) !write(logfile, logbuf, nbytes);
++ 		nbytes = 0;
++ 	}
++ 	bcopy(buf, &logbuf[nbytes], len);
++@@ -390,7 +398,7 @@ logit(int sock, char *name, int size)
++ void die()
++ {
++ 	if (nbytes) {
++-		write(logfile, logbuf, nbytes);
+++		(void) !write(logfile, logbuf, nbytes);
++ 		nbytes = 0;
++ 	}
++ 	exit(1);
++diff --git a/src/memsize.c b/src/memsize.c
++index 82d7faf..35fff9d 100644
++--- a/src/memsize.c
+++++ b/src/memsize.c
++@@ -111,7 +111,7 @@ timeit(char *where, size_t size)
++ 		clear_alarm();
++ 		if ((sum / n) > too_long || alarm_triggered) {
++ 			size = range - incr;
++-			fprintf(stderr, "Error! Memory testing timeout! Touch one page of memory needs more than %d (usecs)\n ", too_long);
+++			fprintf(stderr, "Error! Memory testing timeout! Touch one page of memory needs more than %zu (usecs)\n ", too_long);
++ 			break;
++ 		}
++ 		for (s = s_prev; s <= range; s_prev = s, s *= 2)
++@@ -157,7 +157,7 @@ test_malloc(size_t size)
++ 		close(fid[0]);
++ 		p = malloc(size);
++ 		result = (p ? 1 : 0);
++-		write(fid[1], &result, sizeof(int));
+++		(void) !write(fid[1], &result, sizeof(int));
++ 		close(fid[1]);
++ 		if (p) free(p);
++ 		exit(0);
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+index 8e6e803a8..88d67f602 100644
+--- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+@@ -26,6 +26,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
+            file://0001-Check-for-musl-define-guard-before-redefining-sockle.patch \
+            file://0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch \
+            file://0001-src-Makefile-use-libdir-instead-of-hardcoded-lib.patch \
++           file://0001-lmbench-clean-up-the-build.patch \
+            "
+ SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
+ SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
 -- 
-2.17.1
+2.21.0.896.g6a6c0f1
 
 
