@@ -1,30 +1,48 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id CA4147F356
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+	[209.85.128.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 476357C89C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2019 08:01:59 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.67,298,1566835200"; d="scan'208";a="76987457"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Oct 2019 16:01:58 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 3C3E64CE14FF
+	Tue, 15 Oct 2019 08:53:27 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id f22so19343767wmc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2019 16:01:38 +0800 (CST)
-Received: from localhost.local (10.167.225.40) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 15 Oct 2019 16:01:55 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 15 Oct 2019 16:02:02 +0800
-Message-ID: <20191015080202.20441-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.40]
-X-yoursite-MailScanner-ID: 3C3E64CE14FF.A917A
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-xxhash: upgrade 1.4.1 -> 1.4.2
+	Tue, 15 Oct 2019 01:53:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=NUKwCZcncMEyzXLQeQ7dV4JAiwYnoRKHIIEyGEj8Yck=;
+	b=QmtXMTcmq/y16S3CP/plnzb3+9M2LpFQEHdl6oVkBPTc1mjnouuzl6tetm9osQ8soT
+	ddYsWIHwNGxt/9xnBROymSYjtt3yaMvhWsnd42yvrbbfvitH02HLb7EF6jMStnsI6XvS
+	Td9vRYYUgG9YqSDaUpClTWF1BdmTpcEGNuZOc1KgVteqYQ2O49+seyF+58X1B9ZH35kq
+	f1kwUifI58rTM/l90SYRcdYts77U6E/3oNRCKNryuPPecgAeTxtv5qQ02F/mHX0yisHa
+	FXu1uW78JROzW7HsDU/qe0AEF7AnC19+2DxA+jkwn5N/w2n7FWxPAGbVaKNlHSJe8tm9
+	OiUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=NUKwCZcncMEyzXLQeQ7dV4JAiwYnoRKHIIEyGEj8Yck=;
+	b=PE6kvmiwKOQ4G9JVVUkn0t4AL2DUKhNwdqhKH+VvOl+l8IilmRxPRt2trB3+3UE8Um
+	l1UG6MrISoA5PY8L7Bzd/viBjXsCt6AYGkDfpiwYqcgUKz3obhJ+JHhgMoplhcLhQ+OK
+	TTqXRjVwuXesgv50+Lv2GCrLZmooWDHntvyjx7Szbs2GKpNTfApPwQn1HoTtwTMwEbQ3
+	FyV7yoYXA+qKhbQd7PEB3YBDGivm2fie8dZfKo6lO4RgFjZxPzTyBYjfgxWMlCaG9glk
+	DDFgKPG+2OgeaRmvz7/w6iNuJHFsUpV8IlB0OzUU34GkHyuK2Jw8jKXNpSPAWfb8dsFg
+	JIoA==
+X-Gm-Message-State: APjAAAU7nJSAlbbRR8mn48vRRnMvZ/+6sCyrisjz9XGYuz0JLLol39Ev
+	6x0vdrQuGmsMSxRz65qwqs/2f2TU8sI=
+X-Google-Smtp-Source: APXvYqzkoWK5tRXIR87s60v4etthPwo5HLojaW2D5fHCMUO+JW2W7vd0EWdhDsc/xwPWim+75qrK+g==
+X-Received: by 2002:a1c:a385:: with SMTP id m127mr19457224wme.50.1571129607611;
+	Tue, 15 Oct 2019 01:53:27 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	b130sm32610537wmh.12.2019.10.15.01.53.26
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 15 Oct 2019 01:53:26 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 15 Oct 2019 08:53:23 +0000
+Message-Id: <20191015085323.3329-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-python][warrior][PATCH] python3-twofish: Fix missing return statements in module stubs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +55,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2019 08:02:01 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 15 Oct 2019 08:53:27 -0000
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+* fixes build with -Werror=return-type
+  twofish.c: In function 'init_twofish':
+  twofish.c:45:1: error: control reaches end of non-void function [-Werror=return-type]
+     45 | PyMODINIT_FUNC init_twofish(void) { }
+        | ^~~~~~~~~~~~~~
+  twofish.c: In function 'PyInit__twofish':
+  twofish.c:46:1: error: control reaches end of non-void function [-Werror=return-type]
+     46 | PyMODINIT_FUNC PyInit__twofish(void) { }
+        | ^~~~~~~~~~~~~~
+  cc1: some warnings being treated as errors
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-xxhash.inc         | 4 ++--
- .../{python3-xxhash_1.4.1.bb => python3-xxhash_1.4.2.bb}      | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-xxhash_1.4.1.bb => python3-xxhash_1.4.2.bb} (100%)
+ ...ng-return-statements-in-module-stubs.patch | 38 +++++++++++++++++++
+ .../python/python3-twofish_0.3.0.bb           |  2 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-xxhash.inc b/meta-python/recipes-devtools/python/python-xxhash.inc
-index 6b4448220..93b2a15a7 100644
---- a/meta-python/recipes-devtools/python/python-xxhash.inc
-+++ b/meta-python/recipes-devtools/python/python-xxhash.inc
-@@ -3,5 +3,5 @@ SECTION = "devel/python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5a8d76283514a1b7e6a414aba38629b5"
- 
--SRC_URI[md5sum] = "2e6c0bd69a540e15ff2222d6cb8da466"
--SRC_URI[sha256sum] = "6b5af8c37ff12745ae77f28e695c0d3a3327932fd229824e49382377e940fdf1"
-+SRC_URI[md5sum] = "80461eff10ac62214fa788a6045aab43"
-+SRC_URI[sha256sum] = "82cdc67b41da904aa2921107e9877814079d9b067a99f19852b5d85e8a40555d"
-diff --git a/meta-python/recipes-devtools/python/python3-xxhash_1.4.1.bb b/meta-python/recipes-devtools/python/python3-xxhash_1.4.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-xxhash_1.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-xxhash_1.4.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch b/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
+new file mode 100644
+index 0000000000..c25b2457e2
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
+@@ -0,0 +1,38 @@
++From 5704610f4b3aed5210e9c5b7c05ff8b5b2364c9c Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Mon, 12 Aug 2019 08:18:21 +0000
++Subject: [PATCH] Fix missing return statements in module stubs
++
++* fixes build with -Werror=return-type
++  twofish.c: In function 'init_twofish':
++  twofish.c:45:1: error: control reaches end of non-void function [-Werror=return-type]
++     45 | PyMODINIT_FUNC init_twofish(void) { }
++        | ^~~~~~~~~~~~~~
++  twofish.c: In function 'PyInit__twofish':
++  twofish.c:46:1: error: control reaches end of non-void function [-Werror=return-type]
++     46 | PyMODINIT_FUNC PyInit__twofish(void) { }
++        | ^~~~~~~~~~~~~~
++  cc1: some warnings being treated as errors
++
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++
++Upstream-Status: Submitted [https://github.com/keybase/python-twofish/pull/6]
++---
++ twofish.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/twofish.c b/twofish.c
++index e324c34..d4487d8 100644
++--- a/twofish.c
+++++ b/twofish.c
++@@ -42,5 +42,5 @@ DL_EXPORT(void) exp_Twofish_decrypt(Twofish_key * xkey, uint8_t c[16], uint8_t p
++ We need a stub init_twofish function so the module will link as a proper module.
++ Do not import _twofish from python; it will not work since _twofish is not a *real* module
++ */
++-PyMODINIT_FUNC init_twofish(void) { }
++-PyMODINIT_FUNC PyInit__twofish(void) { }
+++PyMODINIT_FUNC init_twofish(void) { return NULL; }
+++PyMODINIT_FUNC PyInit__twofish(void) { return NULL; }
++-- 
++2.17.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb b/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
+index e593f6f212..7b8eb2ef0f 100644
+--- a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
+@@ -1,2 +1,4 @@
+ require python-twofish.inc
+ inherit setuptools3
++
++SRC_URI += "file://0001-Fix-missing-return-statements-in-module-stubs.patch"
 -- 
-2.20.1
-
-
+2.17.1
 
 
