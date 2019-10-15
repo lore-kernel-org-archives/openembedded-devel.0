@@ -1,55 +1,55 @@
 Return-Path: <prvs=184014d2e=alistair.francis@wdc.com>
 Received: from esa6.hgst.iphmx.com (esa6.hgst.iphmx.com [216.71.154.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 835E07F46F
+	by mail.openembedded.org (Postfix) with ESMTP id A91687F385
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 15 Oct 2019 22:59:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1571180344; x=1602716344;
+	t=1571180345; x=1602716345;
 	h=from:to:cc:subject:date:message-id:in-reply-to:
 	references:mime-version:content-transfer-encoding;
-	bh=ZI5Ml/jWMkYhiFlX0OCT/l0HzI0E+Ynae2kVaDciqHo=;
-	b=MnBSjKkVkZMUD8jojX6CCiwyKvKP9iG7fT5jDxgHznRb+DBeLKSV8k4Z
-	A+6gXOn69Ik6eJEKM8t/TKW52J0x8JRRkP7GGBiCGEWnJFkF8Iu0BtsR1
-	TJ+hgqxDWkSPE1Q0prfH7h7KOmNDaL4Cy9fVdZoFWfoovrlBYn13QErtm
-	0Ry55LcfTTq7HzpQj2uDpNdGQGd+MQRC06Dq/DajSP5cNDNaGvIo9eX6N
-	mDPwC4pBEbY1A+nlmJmzSrGvuiFodhpVez+ARsTo9BK6/4CCDd8Gi429s
-	xW/MWbZcjFcQfAyDtcH9fQJvbJ+njOTlDCGKrgxFZ8NaYO4bVN5kbSqWo g==;
-IronPort-SDR: Y5KUi21YX/fv/Aff7qUtBE4XIECDcOYez261ytkQy6zXqNXvsCrI//Lg75S8B0z9jSXnuJGw0C
-	YXAe8hU5gQHOf2R2FnzBn2WWMXYD/ElVlD0uWsidJa6JCNc+bfjC0ces56UegiWTss+L7lgzxv
-	Z2ZSY/weYGbXRidu6/zSnDm+27z+pqD0feUuAT2fl4ZsDgvpzRhADRFjVBBTeHpj4ZI9qZrgl6
-	g089MESghWRegAe+cb+pAyho+FjgPTlRTjMi0do2TKtsamz8VV8eyXznjf3o64NJmeBxUjojzR
-	7ZA=
-X-IronPort-AV: E=Sophos;i="5.67,301,1566835200"; d="scan'208";a="122194673"
+	bh=raPGpBsp4Wme14dyjIFhvyXAKSykcxEDdtscLs6sJpQ=;
+	b=jdnbrYL9mD01qF9vDpnJjLTZ/SDf4NXepRNPmk3LheA+JOLM6ou2FyLD
+	VzCYgBY/fCQkA0kCoc4G7XPzn+l8N5zk3N7uxKVfT/WckqpcSpdJVcw8H
+	sZJsD2gw0ftTrFFQKCWhSq3LkOLwwK/nx7/qQ9o+Cvn/5icJXMI048q3D
+	RqltGmb2IgxVFFZ0J8RdYK4CiSYZYPIAMCbH85Xm+VTYp0e52HVjCDL4z
+	m+cTPeR3qpobZ7SJqdFAZaUqVE0P7MxEm/4ZZTx+pE6pRvpwwwTR03H0m
+	lrv8oqb8m0L24FBwVRWb0d46Vvg9q3b88qNiDnvtn1J4JTQY7v7KVbDDK w==;
+IronPort-SDR: sBA97gMJdvYiuYzBYWPh19tsdWUZg8axe+iXV/Xwjf/7B3ZRDtHyH+zYZvRM9aX3pdhTN3Lbex
+	LYvDHgKqp9nWA4sviwfP6lqQOV/NJlYUUIHwT+mQOxCjc41S3gvygCQyQ3zbhMDR7YddTCcsMg
+	XdGX4JTbNHuXUl/QthzQ//zJyjwukYzKRDxr3I7q5BgevY9nTb6cveY3CSzobwN1hyNMNk+Vdj
+	weHSGttQCipzPyIlRWHOWPUScbkbtC9yO4vlL1CJZ6jQQpwq81f8qnxJihLV7vXKQsuuOPDWlB
+	xq8=
+X-IronPort-AV: E=Sophos;i="5.67,301,1566835200"; d="scan'208";a="122194674"
 Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
 	([199.255.45.15])
 	by ob1.hgst.iphmx.com with ESMTP; 16 Oct 2019 06:59:04 +0800
-IronPort-SDR: ZJMQEZGc/eeNf4ihIQME7HnhS/cR3NjKUdMI9SpOUt/MMchFEQJaKr3DTg8JfwFT/HQPbLg0rM
-	yTTVLqrTs72kdoOYC1e2qzTcNQ+aHlCj6/YaIefFtOGl9ulzLr5MkaDML2tb+hf83qsPa9bwKG
-	mu3jfFjIoZoaqiM9gQDToO78VlXIkY1bMS5RXTc+60Vd+/sdQqThQkC7imVeSKE147/znAosNX
-	KGdUZJlSpp3cdzkvYCAJropx76TfXydQJsTl5RG7Bp+dXDhD5D2hy1LMBJnQQaRT43oyGy51q3
-	Fv6t2YRuGorWdNWcWVbqE555
+IronPort-SDR: VNdIRrOELhhpqaMHpGYov6Pnpu9LtM0Mc0nDd/BIbcUYX9jEwmbj+g9Bag1UUdRDuni27fCfxw
+	2YeCJ9wPJokhV/0s25NiJCxIw4izc/4Wg7PWEtZtaXgRArVOAcq1ltr6oP9EAMuP7po6hDrR3N
+	NAhE2FFHG4wjB/LyR4gac6NiQgXcy6F5jfC9GdNTfDiK7UP5IchSFK333TJ/14GrQ/etquzU7v
+	kcih9qGZz/nreQ0l6JhFtBmGjuulbJu3C8z08ADc+c/f65OhggS25hGu/BOR2VN812H7VMy6aQ
+	+Cm/JI0d8XtJCKiZP6o49JI6
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
 	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
 	15 Oct 2019 15:54:51 -0700
-IronPort-SDR: 6SM3UYYseqgI9bKI0jLvXPU0yhAfExwd9ZZsB0e94rl/06fkU8zFCuABnW4o9OAm9e39ZR/Vk4
-	G+lGnggwkfQEqSrnUVVqEJOBxwuXwBtHr4nHWYK3IDat5NWWgQ3DwpkhqA2j4tm0KIu9Rzyr+h
-	fRd1B1pPjPVA49mjlj6kU9NkKb1qAVTOEeutoE9nVtxHBGesQbvczXsb12ZYBDN7NIed+6qthT
-	wCckI1A0Mt7z6ohdQ3MP0naQdY56v3DzaUPo5lPNyopivbFEaQ4CFYZ2xveHTeSbOQgkDjrXWy
-	D6w=
+IronPort-SDR: aCXnASZcJ29nsAoF5ZDuVHXHnwtlByKEfQisgHyD+DdliMpWeD2gWz0H2Gsu+/V6LE1OR4aJwJ
+	N6NR52Uo5ZQn2BnfUmg3RWI9OD+MYBYrjEape99ONWLUZRBdStY9ejX1zg/nbd3vwuY7Qnz842
+	6Hhq9d0YACcUWa+DEBEn/WDRTI+RyYh0apjUViQ/8sL4Vpq2rImGZP7nEaUkwSKXsoXWVXJ1si
+	uHywmw9ru2g5goal5i4MRXeGXaIACzeSthJwllQONybpafCR51l9Ihp1JM8fHWQDbwC4TI6WB9
+	e8E=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
 	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
 	by uls-op-cesaip01.wdc.com with ESMTP; 15 Oct 2019 15:59:04 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Oct 2019 15:54:19 -0700
-Message-Id: <20191015225422.18179-4-alistair.francis@wdc.com>
+Date: Tue, 15 Oct 2019 15:54:20 -0700
+Message-Id: <20191015225422.18179-5-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20191015225422.18179-1-alistair.francis@wdc.com>
 References: <20191015225422.18179-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 4/7] python3-msk: Initial commit of version 0.3.13
+Subject: [meta-multimedia][PATCH 5/7] python3-google-api-python-client: Initial commit of 1.7.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,27 +67,25 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- .../recipes-devtools/python/python3-msk_0.3.13.bb     | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
+ .../python/python3-google-api-python-client_1.7.11.bb    | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-google-api-python-client_1.7.11.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb b/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
+diff --git a/meta-python/recipes-devtools/python/python3-google-api-python-client_1.7.11.bb b/meta-python/recipes-devtools/python/python3-google-api-python-client_1.7.11.bb
 new file mode 100644
-index 000000000..3f2aaf48d
+index 000000000..25e3b9c3f
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
-@@ -0,0 +1,11 @@
-+SUMMARY = "A tool to help with creating, uploading, and upgrading Mycroft skills on the skills repo."
-+HOMEPAGE = "https://github.com/MycroftAI/mycroft-skills-kit"
++++ b/meta-python/recipes-devtools/python/python3-google-api-python-client_1.7.11.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "The Google API Client for Python is a client library for accessing the Plus, Moderator, and many other Google APIs."
++HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
 +LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://README.md;md5=2f90e43663eddf1c33087419fbb35e28"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=94023d14f6b58272fd885e4e3f2f08b3"
 +
-+SRC_URI[md5sum] = "11d9fc865ef627efe68f25fc113974e8"
-+SRC_URI[sha256sum] = "55be86ff2cd0087016759f2b15b40861cda2a8d8a8d0c669fdacdf32a77a10da"
++SRC_URI[md5sum] = "6e28e8caf2e4d55ed5b7c48a538a61c9"
++SRC_URI[sha256sum] = "a8a88174f66d92aed7ebbd73744c2c319b4b1ce828e565f9ec721352d2e2fb8c"
 +
 +inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += "python3-git"
 -- 
 2.23.0
 
