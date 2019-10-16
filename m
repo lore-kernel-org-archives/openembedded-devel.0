@@ -1,16 +1,16 @@
 Return-Path: <mns@gomspace.com>
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
-	(mail-eopbgr80119.outbound.protection.outlook.com [40.107.8.119])
-	by mail.openembedded.org (Postfix) with ESMTP id C7CE77DE8F
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+	(mail-eopbgr150121.outbound.protection.outlook.com [40.107.15.121])
+	by mail.openembedded.org (Postfix) with ESMTP id 01F757F45A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 11:01:11 +0000 (UTC)
+	Wed, 16 Oct 2019 11:01:14 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=P8AjN+VKa3bV7ZqykZ/1lxwmmNuhUGjhVD81ur0oIiv1gXL6SuZ/38ljQbfqINsnoQurMp7Do1rZ9+kSHJU09/nSs29x+toWp4qQMnBuYhA+wAc3rDlL+0KnJhNh3aZbxlQDeMLpMvHtlgHlVv/gE/+UOXhfSgv/L/Pe+OQ6pqYzJfNXMU8Cb7YFp/eXpnm8UAVRYOKbWT/XSF2XPKXWgf5xURoNq5WLTta7pr1MbGc4Fokk7Ldd3nSbWDacNmSK5dFghBD3x5z365vRsdePYJrn+PARR98aC29qlu7TlhqTz/NYfIXnPA1jH20pVW2qgYnxXj4mVlnX7SeamSotKg==
+	b=a+aGzzuf8drB6N0Kkv/Tnf3Xw1JtABncKSduXLgU9HMtmB7CkKzuSZRPRCjOBKJUGkzwxwhJN5gQpQCtgvNmCCjOgVhhDVp3+JJVdPTZzPXP1mdBqARbKMQUpCj5vyhtiWMCXq0yuH6S1DMNljUE8bFvqdlsl/xS3Eq0ngEPm5VripASJ1kCTVWiN9WYg53wMgewekfLxlOCTiVoxJ+XiWD2ahgoQ74Yhx5U5aUAEvff64zBJKlZLyzzW4ZWwEd9vV3Qc2Zff/AUvxVNSgRJ59X+m9mTJ2GUhwjApJoKl9nNgDoIAfGAbrwDhyRPM8a9nP91J7+HVKZidnoPKo0VNg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
 	s=arcselector9901;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=PxFZrS4V6f0zqJhzgV6IXzp0S3KpWry+gYwLsHnsC/w=;
-	b=fcAa4iEOBeyDRUPmp9BHHr9m/ZHo5LWcRlo2O07cAKPGKcuCRSknGxLwsJtLA9fr7oeKqE/tqCCDwq44VQkS2zsoBr9020tJag2bdPL+MiwkEPrDInfzsUy2Z4xEzKk5768/ytA/Hdp6vzTP+kNLQlZbc3ZMgM5lh5FsYRSSbTbqgdbuJgtACMHxyZ7KG9WOnhITIev1v0ClCp8Og9WhkfMr/YO+WwScZnmTCRWUrSUef0bQ7VZAUdMF6OzP2sB4FS8WQ2Z4E4dO0fdKA/3mJqYUviUpSuxcooDVl304ITzdVZYmi81BMh0O2LvQkT6w3QcZ5VyGywUN16M+VTQ6Eg==
+	bh=SYCm7MhO8ITMdMCOb3lw1D2nYyEKvBOhhCNfkWICziY=;
+	b=AvP7sr8OD6S7LuRa1pRmcR6yYzWGVvdQhfdpAFsRRVmZzUH7pnYU8SaJwU7Rfe3b8CVbDznqcNEzIgp26hhPAmOgRAkKcL5YvmPchnAJb3xFjdIbIgoBsLxMmDL/mTybpTeLHqQpIrJLNfwyh64AObFmst48FUTQvX38+n2k1OnlIH49zH0rd9pS3mo9UxWtvY1Xd1Boagg81FrbQ+V/G1zR9SM0oNpkp2mIyw0+HaU0g/fCjCD9txetLLq9T72fhyNDLN4IJKpWQ5YYWY+co90GCCTgFn38quivQ7yrfmI1h1m5Ecisf3+UEYE5zffxhEV6DORFzCpViMRo5Redcw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 	79.171.149.172) smtp.rcpttodomain=lists.openembedded.org
 	smtp.mailfrom=gomspace.com;
@@ -19,18 +19,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gomspace.com;
 	s=selector2;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=PxFZrS4V6f0zqJhzgV6IXzp0S3KpWry+gYwLsHnsC/w=;
-	b=ODeAUnZvnioBXfobN9dlWfUK/bRo8L0bizToiRox4NTBXglmhys5WJSdTb3QC6FbGZCPfQVBQX/Y0ZIGYJWa/w5vkeo+KBJpVzxsLroi6IhrvEZvg9VftFrv7BQF2l4+xCT0krlmqDa89Ea91+q8Fj5Yq/TN3nNS1LtXXLGlL4w=
-Received: from VE1PR08CA0032.eurprd08.prod.outlook.com (2603:10a6:803:104::45)
-	by DB8PR08MB4042.eurprd08.prod.outlook.com (2603:10a6:10:a4::31) with
+	bh=SYCm7MhO8ITMdMCOb3lw1D2nYyEKvBOhhCNfkWICziY=;
+	b=vTmLCjmZ68ubmNOiPe5YyHIb63+e/YwlzrEEx9RjnU6ei3+ZDFDIMkw91yBk9pX/MFcME/7Y5eXoUo42wfCK9VJRAM2EnLEcDzX+pN2O9mH3eUyGDdAy2zz7JYHiPGrl12KuydmRcOp8qMBddqvFtFiqTI8xyVF6s3bt/MKZtw0=
+Received: from VE1PR08CA0011.eurprd08.prod.outlook.com (2603:10a6:803:104::24)
+	by DB6PR08MB2807.eurprd08.prod.outlook.com (2603:10a6:6:19::13) with
 	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2347.19;
-	Wed, 16 Oct 2019 11:01:11 +0000
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2347.18;
+	Wed, 16 Oct 2019 11:01:14 +0000
 Received: from HE1EUR01FT026.eop-EUR01.prod.protection.outlook.com
-	(2a01:111:f400:7e1f::209) by VE1PR08CA0032.outlook.office365.com
-	(2603:10a6:803:104::45) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2347.17 via
-	Frontend Transport; Wed, 16 Oct 2019 11:01:10 +0000
+	(2a01:111:f400:7e1f::209) by VE1PR08CA0011.outlook.office365.com
+	(2603:10a6:803:104::24) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2347.16 via
+	Frontend Transport; Wed, 16 Oct 2019 11:01:13 +0000
 Authentication-Results: spf=fail (sender IP is 79.171.149.172)
 	smtp.mailfrom=gomspace.com; lists.openembedded.org;
 	dkim=none (message not
@@ -44,16 +44,18 @@ Received: from gomspace.com (79.171.149.172) by
 	HE1EUR01FT026.mail.protection.outlook.com (10.152.0.158) with Microsoft
 	SMTP
 	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
-	15.20.2347.16 via Frontend Transport; Wed, 16 Oct 2019 11:01:10 +0000
+	15.20.2347.16 via Frontend Transport; Wed, 16 Oct 2019 11:01:11 +0000
 Received: from dell.gomspace.lan (10.0.8.211) by Ex01.gomspace.lan (10.0.1.60)
 	with Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1466.3;
-	Wed, 16 Oct 2019 13:01:09 +0200
+	Wed, 16 Oct 2019 13:01:11 +0200
 From: Martin Siegumfeldt <mns@gomspace.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 16 Oct 2019 13:00:55 +0200
-Message-ID: <20191016110057.11406-1-mns@gomspace.com>
+Date: Wed, 16 Oct 2019 13:00:56 +0200
+Message-ID: <20191016110057.11406-2-mns@gomspace.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20191016110057.11406-1-mns@gomspace.com>
+References: <20191016110057.11406-1-mns@gomspace.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.0.8.211]
 X-ClientProxiedBy: Ex01.gomspace.lan (10.0.1.60) To Ex01.gomspace.lan
@@ -61,28 +63,28 @@ X-ClientProxiedBy: Ex01.gomspace.lan (10.0.1.60) To Ex01.gomspace.lan
 X-EOPAttributedMessage: 0
 X-Forefront-Antispam-Report: CIP:79.171.149.172; IPV:CAL; CTRY:DK; EFV:NLI;
 	SFV:NSPM;
-	SFS:(10019020)(136003)(39840400004)(396003)(376002)(346002)(1110001)(339900001)(189003)(199004)(47776003)(5660300002)(40036005)(76130400001)(26005)(186003)(7736002)(305945005)(86362001)(16526019)(1076003)(336012)(6666004)(356004)(70586007)(33026002)(48376002)(70206006)(50466002)(36756003)(8936002)(316002)(21086003)(508600001)(2351001)(3846002)(6116002)(6916009)(16586007)(2906002)(386003)(26826003)(126002)(476003)(2616005)(486006)(53416004)(107886003)(50226002)(81156014)(51416003)(8676002)(81166006)(4326008)(105606002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:DB8PR08MB4042; H:gomspace.com;
-	FPR:; SPF:Fail; LANG:en; PTR:InfoDomainNonexistent; MX:1; A:1; 
+	SFS:(10019020)(396003)(376002)(136003)(39840400004)(346002)(1110001)(339900001)(199004)(189003)(6916009)(1076003)(16586007)(53416004)(316002)(105606002)(33026002)(48376002)(2351001)(6666004)(356004)(76176011)(51416003)(70586007)(70206006)(336012)(36756003)(81156014)(81166006)(4326008)(50226002)(21086003)(7736002)(47776003)(508600001)(8676002)(26826003)(50466002)(16526019)(26005)(8936002)(386003)(5660300002)(40036005)(186003)(476003)(107886003)(486006)(126002)(2906002)(86362001)(76130400001)(446003)(11346002)(3846002)(2616005)(6116002)(305945005);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:DB6PR08MB2807; H:gomspace.com;
+	FPR:; SPF:Fail; LANG:en; PTR:InfoDomainNonexistent; A:1; MX:1; 
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 4b8af0b5-494a-40c3-1fee-08d7522826f4
-X-MS-TrafficTypeDiagnostic: DB8PR08MB4042:
-X-Microsoft-Antispam-PRVS: <DB8PR08MB4042A7120856ED6A8ECB6BABC4920@DB8PR08MB4042.eurprd08.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:45;
+X-MS-Office365-Filtering-Correlation-Id: 64481e02-4250-420c-87f3-08d7522828cd
+X-MS-TrafficTypeDiagnostic: DB6PR08MB2807:
+X-Microsoft-Antispam-PRVS: <DB6PR08MB2807766641FAFD39301EFCDBC4920@DB6PR08MB2807.eurprd08.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:126;
 X-Forefront-PRVS: 0192E812EC
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: XWTNukjGqMv+IqrNqugZe/a/Ap7EWoJ9AhqP2ksvdMCwaBhiPjLnbTJsWgjAkMkT1gdSmKgzDA2acjCJTh+UDvE6a+DuKPrV71Z9PtO94fkNt6ozx/hqHHfFm3SX+YZRoEV9WTHeTm4lxmHTas/o6bh/A3qOpN9qbz+eYfW+7xLbmNT/pJbzAwL1j4ExWiP+4MhUhoeQ87d9ODoCoiy8H9cPwQSRZdze5FzZLlmHnkj8pCXbx89vGfMWz7IziL2o/E7U6brn8y0049Jx2vyua2YlzqyrBd9ysaHWyGnhbkYM91dG5IO9/fLXQUv1tSZdyLUPgdBx4rPo6lx4h49uhXnlWXFm92XYLPQcCH4m5Qd8XRNH0y65ifIcwgJcBwWIMqkaDMaFZ6VUbp6gympqb1tVGrr9jTr7QNNlszrDUko=
+X-Microsoft-Antispam-Message-Info: 8kWQdvlLl9im4vQ4z0LljkmCsZJYREwRS65MqAGA4y0gfVc23S2xQqwBGwlcE7D/l/pHqc/vnVSgLf7Yc29HQbr+8vuuuWV5watUBNbXouKsCURhhQOOt4h1AbXqW79IXEKlwRYLCZpfJEZJOl/4uAL7fJfRNHkDRTliBXUfWA4XgXJe8ifZ7LbntO0klMQxyx5tXw+9YY+U0EWLngXFReCH0uwYbETznC9MFUXTQikfpm7ooB5M96bL62UR2aOHYsOjZzVtGCiLSQIgHdU0VOH6+9mEXazD5NakHQ7T0Mi8Nen4xneqogx/TGCvA0Ri/QGU8hanSg/UUr2wAMhoZ7dYGSEvQYCOOTYcray6kVuzYq7mogLiiYchMMzdAg1FtQIlNou/5C+lzapDLXNS+QutyW/Oi8EUY8y5g3T9Rhk=
 X-OriginatorOrg: gomspace.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2019 11:01:10.0696 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4b8af0b5-494a-40c3-1fee-08d7522826f4
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2019 11:01:11.6769 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 64481e02-4250-420c-87f3-08d7522828cd
 X-MS-Exchange-CrossTenant-Id: 91ed1e54-6d8b-4599-84d8-65fe75fda3d1
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=91ed1e54-6d8b-4599-84d8-65fe75fda3d1;
 	Ip=[79.171.149.172]; Helo=[gomspace.com]
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB4042
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR08MB2807
 Cc: Martin Siegumfeldt <mns@gomspace.com>
-Subject: [meta-oe][PATCH 1/3] Revert "libiio: fix build of python bindins"
+Subject: [meta-oe][PATCH 2/3] libiio: allow python3 bindings to be built
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -95,36 +97,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Oct 2019 11:01:13 -0000
+X-List-Received-Date: Wed, 16 Oct 2019 11:01:15 -0000
 Content-Type: text/plain
-
-This reverts commit b0caf1fb82b90a6b123ba4463a8405568eda0389.
-
- * bindings are build through the variant 'libiio-python' and is not
-   intended installed as part of just 'libiio'
 
 Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
 ---
- meta-oe/recipes-support/libiio/libiio_git.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ meta-oe/recipes-support/libiio/libiio_git.bb | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-index cc0efccf9..5d422520b 100644
+index 5d422520b..4282355f8 100644
 --- a/meta-oe/recipes-support/libiio/libiio_git.bb
 +++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-@@ -24,11 +24,10 @@ EXTRA_OECMAKE = " \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DWITH_SYSTEMD=ON -DSYSTEMD_UNIT_INSTALL_DIR=${systemd_system_unitdir}', '', d)} \
- "
+@@ -11,7 +11,7 @@ SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
  
--PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND PYTHON_BINDINGS"
-+PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND"
+ S = "${WORKDIR}/git"
  
+-inherit cmake pythonnative systemd
++inherit cmake python3native systemd
+ 
+ DEPENDS = " \
+     flex-native bison-native libaio \
+@@ -29,16 +29,16 @@ PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND"
  PACKAGECONFIG[USB_BACKEND] = "-DWITH_USB_BACKEND=ON,-DWITH_USB_BACKEND=OFF,libusb1,libxml2"
  PACKAGECONFIG[NETWORK_BACKEND] = "-DWITH_NETWORK_BACKEND=ON,-DWITH_NETWORK_BACKEND=OFF,libxml2"
--PACKAGECONFIG[PYTHON_BINDINGS] = ",,python"
  
- PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-python"
+-PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-python"
++PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-${PYTHON_PN}"
  
+-RDEPENDS_${PN}-python = "${PN} python-ctypes python-stringold"
++RDEPENDS_${PN}-${PYTHON_PN} = "${PN} ${PYTHON_PN}-ctypes ${PYTHON_PN}-stringold"
+ 
+ FILES_${PN}-iiod = " \
+     ${sbindir}/iiod \
+     ${systemd_system_unitdir}/iiod.service \
+ "
+ FILES_${PN}-tests = "${bindir}"
+-FILES_${PN}-python = "${PYTHON_SITEPACKAGES_DIR}"
++FILES_${PN}-${PYTHON_PN} = "${PYTHON_SITEPACKAGES_DIR}"
+ 
+ SYSTEMD_PACKAGES = "${PN}-iiod"
+ SYSTEMD_SERVICE_${PN}-iiod = "iiod.service"
 -- 
 2.17.1
 
