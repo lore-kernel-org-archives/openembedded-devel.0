@@ -1,48 +1,53 @@
-Return-Path: <alistair23@gmail.com>
-Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
-	[209.85.208.194])
-	by mail.openembedded.org (Postfix) with ESMTP id ECEA07D088
+Return-Path: <prvs=185bab654=alistair.francis@wdc.com>
+Received: from esa4.hgst.iphmx.com (esa4.hgst.iphmx.com [216.71.154.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 5885E7F37E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 16:03:02 +0000 (UTC)
-Received: by mail-lj1-f194.google.com with SMTP id j19so24625579lja.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 09:03:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=57CRHDb+DVUPd9NThBpgVfksnTvP8kJ/O86FbVnx29c=;
-	b=b13UXypzl2SBORehonG886T6yAlj/Qh7r5Jz1dbdAVAYSHGTTW1M/CjXhB9wtnK9AJ
-	SydtPjiIXcJWQH9UH4H/hbolCpfLxlAAGFutAiFn7oohgCKRmvppZY0KbyYlC/HSVRFn
-	QbxO0ebTDDZhEUfZn4du7MJx7Y7HMTRsqpQeJ/Jzc8T2OZMtMdnRF3T3NYFxZPsHcjTI
-	L4mdZNkg+ImoRdNUXsPyU1mgotgktpDlQ8PxKF7L0+8IDfbelSM3F8wywFob+DuvvwOf
-	8lrMONwN+WOyWRCwSbPkg1ypYXx2IvmGJZWpYal3czBwO9E0nKJE2ADs5AJSNDinkJdo
-	7DUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=57CRHDb+DVUPd9NThBpgVfksnTvP8kJ/O86FbVnx29c=;
-	b=hcZQ5lSrzNhXOhuuvv9N5p6uqXuCQu9/A3Jj+jV8NseWc4ZVzEu0721Zb7nCDDY8KT
-	QKDfX1XCp6m96AvQoyLDIF5ERzlZxqRlNw5x3EMR58eKliOd/T6m/7507Du6FMTWk7cU
-	qB+9tuACQL+xTYxEpmgqE0TMmWivBDLhjoioa7oA4hKkqGZgAzOL4YgeS18+SNiG0Q06
-	9TY1OjEKm5eBO/PwV6jARnDnsL1OYm2dFXVAs+f1h/53GrJ1mWhj+C4uQXHEccsuUW7C
-	jjb1umrhsn73OLzJCGr+26jO0ysABTGB5Zgejw/DuKV5S0wAFHam+sX0ALvIUCA/Ehw+
-	DJKw==
-X-Gm-Message-State: APjAAAXDEGpbSthaAZG/tJ5H9btZOB+81b65CPXzS3lmkfapGLsuWG/X
-	jdTBof99Y46rLj1aIlPMAUQOmllQlPJ0UxGAcB0=
-X-Google-Smtp-Source: APXvYqzXLWYeYANseGTvn6qWtKeMbrTBP1dJ59+sRNfeZCEWyOf1VPhQc2PVwzt/SLhAezGC9hP2AGVuS1s971Buz7M=
-X-Received: by 2002:a2e:b17b:: with SMTP id a27mr26189652ljm.7.1571241782887; 
-	Wed, 16 Oct 2019 09:03:02 -0700 (PDT)
+	Wed, 16 Oct 2019 16:03:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1571241814; x=1602777814;
+	h=from:to:cc:subject:date:message-id:mime-version:
+	content-transfer-encoding;
+	bh=cUtfShSuHyW3Fb+958svYpfwf7L1XqUC0KrZLElftn4=;
+	b=nOFEeOXjI0GSSj3m7wTKGu520rqMzIKondrjbX5E7cPUxrdgalulST20
+	EKtfaAWAmany+QMsqiJw03Iz57FIgY8gpmDjwKK3mV4OQamDgGFfNP0LX
+	ogkfBrUQ6cABIVlscVILtfx4huplG5YD6it+/NDHt/any5KjzycQMZli4
+	s5u5ZUh0Pks7amHtN9W3XJtmNpMSuIMLMzOA19HZlOykXTjIUsVcqkQGb
+	xexiNyfiKLMViNYyznBXWevADRLs5wBqrWilDZaYgEcoa0MV0whhpl1li
+	ooe64xuB69wypvsZW7nDn9hBJX/dJPC2th9RBvN/qxheOJQXU6osaAD53 Q==;
+IronPort-SDR: wIYEfOdzyT5/Vu8ooXNWB/S/EvPYUknDn3DCeu3cO+OzMXCMAiyg0Mg98tiqzCaUr38GI7vNZD
+	T/3rwNsT/j7f/u8IVi9gGHuMHAQH6SN64cAp6wJqeCfmgqPrLRLRddu/UySK7nq8lml4WWAm/c
+	ltx2pDJ50DqoS5hppWZ6qArdnW8v6WCkbbpQYOyjBi047m1eSKN2D5ykm0LluvlW8lL+3YRRVe
+	iD7ORp3YjamANP8Uw5vAxuVdkE8ccDoqJfRXKfI1zEuQFVDk4tRD1fPh7hraRuq0EZmUhJYl7Q
+	Bg8=
+X-IronPort-AV: E=Sophos;i="5.67,304,1566835200"; d="scan'208";a="120680397"
+Received: from h199-255-45-15.hgst.com (HELO uls-op-cesaep02.wdc.com)
+	([199.255.45.15])
+	by ob1.hgst.iphmx.com with ESMTP; 17 Oct 2019 00:03:34 +0800
+IronPort-SDR: 0LeCPgNfJZcPBYYteEztEV9OWJA9US8Qxa9/VSagveMaqCv5YCSmoQCLw+2hYOHt4jjKtX7dwR
+	CUtI03seVXhcFiQ6dpGj/hpAsWvaj1UO/xkPSzQR05wvaohwOIUUbEXwo5RKZQgbNuH96VBhV/
+	Ht5PygUsX3fZ3OrJ2Jd+hMLhtTgyYBpaHw9QXPPndRKcbAvXrsxY5CbiE7KYzOxq7N0varbIXp
+	MxhpLE4KqwJfr571lEzLhJGypfSGRfZOZmvlNFMbx4HWz/veP3gm96BQTDxI8GTe0GNlsxpXQd
+	4VUBzvL3QXRE4c3y1DTf78tb
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+	16 Oct 2019 08:59:21 -0700
+IronPort-SDR: Kfbx2ONVW+RqR2bCHN+Ku7teWc0PwbqKF7R9aIjgaeCwdW7gOJRUk/djkYLKuSYnKthIaG/QyE
+	JJ0xYeEJmfZwokMkp31mHGs2EpBiz+e8pMuobtiXp/nFyCmsm/a/ru+GEpCM1gONBJyqAdplBG
+	P+N/sXy8VWAs/sHHY/hHdTZf4EArizC1/b/v450bl8Qh6mFNf2ujPTJw8iHiuLjf/k1Neg1+XE
+	rfuYJPMeUbui/TgDEAKWvNZkoKVjt+LXTEJf2WhUVypRuU4Ef5QrR1cC8/wWXS7Pom5iHDKNgx
+	f+Y=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
+	by uls-op-cesaip02.wdc.com with ESMTP; 16 Oct 2019 09:03:34 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 Oct 2019 08:58:40 -0700
+Message-Id: <20191016155844.20847-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-References: <20191015225422.18179-1-alistair.francis@wdc.com>
-	<20191015225422.18179-5-alistair.francis@wdc.com>
-	<CAMKF1spM=ZZVrct1NTfNLBuvS2b8YVY05Fu2F7qOtT0r85bLjQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spM=ZZVrct1NTfNLBuvS2b8YVY05Fu2F7qOtT0r85bLjQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Wed, 16 Oct 2019 08:57:55 -0700
-Message-ID: <CAKmqyKOT5-7o7bTHDAcwqeBi9M9hCj3_ODD4zk2FabPj1GHXoQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH 5/7] python3-google-api-python-client: Initial commit of 1.7.11
+Subject: [meta-python][PATCH v2 1/5] python3-pako: Initial commit of version 0.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,65 +60,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Oct 2019 16:03:03 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 16 Oct 2019 16:03:33 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 15, 2019 at 7:40 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> meta-python is probably better place for this
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+ .../recipes-devtools/python/python3-pako_0.2.3.bb        | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
 
-Yes it is. That is where I meant for it to go.
+diff --git a/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb b/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
+new file mode 100644
+index 000000000..24efa44e3
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
+@@ -0,0 +1,9 @@
++SUMMARY = "The universal package manager library"
++HOMEPAGE = "https://github.com/MycroftAI/pako"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
++
++SRC_URI[md5sum] = "8eb7077075091c50e4b8a9f939607277"
++SRC_URI[sha256sum] = "6be55fd8c5a2a6f02974f37438c1c47a3d9e764ce81c9d0a1a8c9a1815a59778"
++
++inherit pypi setuptools3
+-- 
+2.23.0
 
-I'll re-send the Python patches and they can go in first. Let's drop
-this series.
-
-Alistair
-
->
->
-> On Wed, Oct 16, 2019 at 4:30 AM Alistair Francis <alistair.francis@wdc.com>
-> wrote:
->
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> > ---
-> >  .../python/python3-google-api-python-client_1.7.11.bb    | 9 +++++++++
-> >  1 file changed, 9 insertions(+)
-> >  create mode 100644 meta-python/recipes-devtools/python/
-> > python3-google-api-python-client_1.7.11.bb
-> >
-> > diff --git a/meta-python/recipes-devtools/python/
-> > python3-google-api-python-client_1.7.11.bb
-> > b/meta-python/recipes-devtools/python/
-> > python3-google-api-python-client_1.7.11.bb
-> > new file mode 100644
-> > index 000000000..25e3b9c3f
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/
-> > python3-google-api-python-client_1.7.11.bb
-> > @@ -0,0 +1,9 @@
-> > +SUMMARY = "The Google API Client for Python is a client library for
-> > accessing the Plus, Moderator, and many other Google APIs."
-> > +HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
-> > +LICENSE = "Apache-2.0"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=94023d14f6b58272fd885e4e3f2f08b3"
-> > +
-> > +SRC_URI[md5sum] = "6e28e8caf2e4d55ed5b7c48a538a61c9"
-> > +SRC_URI[sha256sum] =
-> > "a8a88174f66d92aed7ebbd73744c2c319b4b1ce828e565f9ec721352d2e2fb8c"
-> > +
-> > +inherit pypi setuptools3
-> > --
-> > 2.23.0
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
