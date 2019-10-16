@@ -1,48 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F3607F238
+Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
+	[209.85.222.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 48B487F238
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 02:40:27 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id n7so33860725qtb.6
+	Wed, 16 Oct 2019 02:45:42 +0000 (UTC)
+Received: by mail-qk1-f179.google.com with SMTP id y189so21366953qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2019 19:40:28 -0700 (PDT)
+	Tue, 15 Oct 2019 19:45:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=3ZN+RtQrNjiIRy4Aq27YmpEqR6PVvwhsQEpMr9yThKQ=;
-	b=b8hxn04xbGzYOb4lUtkOi6URz29CAs3yqNYuj9jcuZYSJoyAQ5gdEVgzLSaV01LgWA
-	EZqDMTyCQsP5usp3hSuoQ9P4zfHSSL1O+1tQ5JflfRb/bEDALCycQhVL5gMywT+DavNI
-	/8RnkZVPoi/tMW+LoYZBmrSRf8OHw4f8LoSRKrF2On0/UJFuf0KwOiKFJAzbaLuBd7Bh
-	4q3zeuyo7PlQkHL043ACdlTRmBRqbikg5+IoV+48MYZ94uehZWfw/TFwmmZuQyRCF5p5
-	INhupUPLLZWHTV9Cw9YiAyZRSpSoU4TP9k5D/Ndp3shNonx3M3A8G3eqh0QZQdzTtiNP
-	svDw==
+	:cc; bh=aT+rG/3UC6bpB3ESJn/gUEKcchrMvIf5JDsEuEqP6fw=;
+	b=SIePc2i82O3/3hhSD2ZdcpG54Ynsag21eJrFtFUj/XcSflMgHefOuqZlvaX+USNfFm
+	JCZ+zmfHHab0qcS2WzWdpn3H5+SQsbslBxusUKpoLXY2T4YeiBA4xvJMgMC7cqFSGHdi
+	bvOKOJT4LUd2eba+yK42MY+oYSVZiIKtF95Nfa8BTdPiPy6sqWi0lvXLgQUxQhGigBsK
+	WnsGjOX87ql2CzXxmmEdaX5dwZfEFB61jpTbnGe7lYYnsPbWZX2hShfnGTe/SsBtAJjv
+	SoE6Z2IGqXhK3KCsYb+E5n3Crg4/FZyUYaYrkd0UqokwSqefVuWzXHedBYh7ockhOOoZ
+	r5Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=3ZN+RtQrNjiIRy4Aq27YmpEqR6PVvwhsQEpMr9yThKQ=;
-	b=SZJ21Ys3JLebN8+udLXdpeMk9Q0x6xnSab7J1jMvIhIcuA2HPcsQN/I2deBhqTeLBq
-	kShoAnr30jn6oO+UuUfbQSV/8fILnXPBO1+DZg9lHn8Lp3XCC6aoS+Ln8C1xSg8QsMUB
-	6vFQR5Gi2QNWvOeY9Fda7JepnOJU3QqZf/7HO0jk5wqCQtfJDWX++AoULQjSSlh/uoti
-	IO9mtJ28NId5DnHNvXCyPTLHSHim+N3qMQ2PNQgIMw9MBiUCZkPgPEgRrzHV0L4JX5AL
-	hjy1rfoQQ9x6KTs/yz0kVGI2IAu8njBeTAbY4B8aXnU/AUo6QOhG/dna08V5+RL+rhM+
-	9rjQ==
-X-Gm-Message-State: APjAAAVWblMW1i1AU3fLb7/aVvg18VqsexGuE1cwR0UXMPxzOnJyjN0T
-	zI67tvbxLoEFU2S0NOIGxXRxTcXdwseNOcftUZe3PX4iR7I=
-X-Google-Smtp-Source: APXvYqxIs3pKO2rFqpykXrLlLX8K0X2inFH+cb/l+gLG10UHFtGDMhOPR3MpYCOL1EIQHpcUjlQLYAtrlYaPFtfnuyU=
-X-Received: by 2002:ac8:3021:: with SMTP id f30mr41482104qte.80.1571193627529; 
-	Tue, 15 Oct 2019 19:40:27 -0700 (PDT)
+	bh=aT+rG/3UC6bpB3ESJn/gUEKcchrMvIf5JDsEuEqP6fw=;
+	b=pexCWhfqbPalNTAz3zjlmTev+cD+4qZpF4GC4/4Y9jx8BgJCBf/lI9H/K3Xp70oAj3
+	npFXC3wd7zzyoSv2dJsmoWU9ye511vOmuBuJ8QouuYKUt8w8O5is7kZkOUL5lp1Sfw0A
+	5BtkDGCZcZVdZAcoRNihSonM3nKJkNWowUQlwcSZO8QaGaKyZYUmvO7JPFiwvNpvXtfa
+	DO6IzAR7/R6hdsmINpJmDReECwmTaXSt7yyJ0Xv3V5XDQ7JN+KREBGX929Au7UaKvMLu
+	CV5TpwJp953gYoVosJFa8STV1lQDpSiQayLX/7b4phlMHGBAGfQs4NRpryq2cwGzO303
+	GuGQ==
+X-Gm-Message-State: APjAAAUslKfS5vMgbU/1o5EGtCDQyxqDlo35FH4F/+m//LR3Y5zoWM6n
+	g3H2hF7m6GAp7XyBgQCszW8O/3Gk/cEfXdGGxYY=
+X-Google-Smtp-Source: APXvYqx+19hOstfBgASt+p6k3zVrCSwr3ychpFfpqkH27cHPFw9FwmUof46s7n/q+9D8dj9y91kGUU3teFslGsWcBUQ=
+X-Received: by 2002:a05:620a:14b9:: with SMTP id
+	x25mr39312443qkj.9.1571193943617; 
+	Tue, 15 Oct 2019 19:45:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191015225422.18179-1-alistair.francis@wdc.com>
-	<20191015225422.18179-5-alistair.francis@wdc.com>
-In-Reply-To: <20191015225422.18179-5-alistair.francis@wdc.com>
+References: <20191014222047.22306-1-schnitzeltony@gmail.com>
+	<20191015174854.GN16029@bill-the-cat>
+	<CALbNGRSjsd2LJWKSKNOcC6cNiC+mZNA6EjpGi+u8UcdpDv3arQ@mail.gmail.com>
+In-Reply-To: <CALbNGRSjsd2LJWKSKNOcC6cNiC+mZNA6EjpGi+u8UcdpDv3arQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 15 Oct 2019 19:40:16 -0700
-Message-ID: <CAMKF1spM=ZZVrct1NTfNLBuvS2b8YVY05Fu2F7qOtT0r85bLjQ@mail.gmail.com>
-To: Alistair Francis <alistair.francis@wdc.com>
+Date: Tue, 15 Oct 2019 19:45:32 -0700
+Message-ID: <CAMKF1sp8KvvACfgujOUzBitKW2wD4f=aVtVZsxMMcwbrhYMkWw@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-multimedia][PATCH 5/7] python3-google-api-python-client: Initial commit of 1.7.11
+Cc: Tom Rini <trini@konsulko.com>, openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/2] pipewire: initial add 0.2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,46 +57,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Oct 2019 02:40:27 -0000
+X-List-Received-Date: Wed, 16 Oct 2019 02:45:43 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-meta-python is probably better place for this
+Tom and Andreas
 
+I think it will be good to converge the recipe if we want to host it in
+meta-oe such that agl also is able to use it while Andreas has time
+constraints can I ask Tom to look into delta that=E2=80=99s needed for it t=
+o usable
+with AGL as well ? Secondly it would be good to keep default packageconfig
+to be common enough that covers normal case that Andreas has
 
-On Wed, Oct 16, 2019 at 4:30 AM Alistair Francis <alistair.francis@wdc.com>
+On Wed, Oct 16, 2019 at 12:28 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om>
 wrote:
 
-> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
-> ---
->  .../python/python3-google-api-python-client_1.7.11.bb    | 9 +++++++++
->  1 file changed, 9 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-google-api-python-client_1.7.11.bb
+> On Tue, Oct 15, 2019 at 7:48 PM Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Oct 15, 2019 at 12:20:46AM +0200, Andreas M=C3=BCller wrote:
+> >
+> > > Have 0.2.4 in meta-qt5-extra as dependency for liri-shell. Soon it
+> gets an
+> > > optional dependency for mutter so move latest to meta-oe.
+> > >
+> > > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > > ---
+> > >  .../pipewire/pipewire_git.bb                  | 32
+> +++++++++++++++++++
+> > >  1 file changed, 32 insertions(+)
+> > >  create mode 100644 meta-oe/recipes-multimedia/pipewire/
+> pipewire_git.bb
+> > >
+> > > diff --git a/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
+> b/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
+> > > new file mode 100644
+> > > index 000000000..9b9b64205
+> > > --- /dev/null
+> > > +++ b/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
+> > > @@ -0,0 +1,32 @@
+> > > +SUMMARY =3D "Multimedia processing graphs"
+> > > +HOMEPAGE =3D "http://pipewire.org/"
+> > > +LICENSE =3D "LGPLv2.1"
+> > > +LIC_FILES_CHKSUM =3D " \
+> > > +    file://LICENSE;md5=3Dd8153c6e65986f862a0550ca74a3ed73 \
+> > > +    file://LGPL;md5=3D2d5025d4aa3495befef8f17206a5b0a1 \
+> > > +"
+> > > +
+> > > +inherit meson
+> > > +
+> > > +DEPENDS +=3D " \
+> > > +    dbus \
+> > > +    glib-2.0 \
+> > > +    alsa-lib \
+> > > +    v4l-utils \
+> > > +    gstreamer1.0 \
+> > > +    gstreamer1.0-plugins-base \
+> > > +"
+> > > +
+> > > +SRC_URI =3D "git://github.com/PipeWire/pipewire.git"
+> > > +PV =3D "0.2.7"
+> > > +SRCREV =3D "14c11c0fe4d366bad4cfecdee97b6652ff9ed63d"
+> > > +S =3D "${WORKDIR}/git"
+> > > +
+> > > +
+> > > +FILES_${PN} +=3D " \
+> > > +    ${systemd_user_unitdir} \
+> > > +    ${libdir}/pipewire-0.2 \
+> > > +    ${libdir}/spa \
+> > > +    ${libdir}/gstreamer-1.0 \
+> > > +"
+> >
+> > A few thoughts.  First, there's a lot of knobs that can be set, and it
+> > might be a good idea to take a look at the recipe in AGL:
+> >
+> https://gerrit.automotivelinux.org/gerrit/gitweb?p=3DAGL/meta-agl-devel.g=
+it;a=3Dtree;f=3Dmeta-pipewire/recipes-multimedia/pipewire;h=3D59d7d7bae1b0c=
+072afbfe804857c0f7b4676766a;hb=3DHEAD
+> Sorry but I do not have the resources to test all these knobs.
+> Currently pipewire is yet another optional dependency for mutter on my
+> way to gnome-desktop (which is already a challenge). Once I got there
+> I can think of further 'optimizations'
 >
-> diff --git a/meta-python/recipes-devtools/python/
-> python3-google-api-python-client_1.7.11.bb
-> b/meta-python/recipes-devtools/python/
-> python3-google-api-python-client_1.7.11.bb
-> new file mode 100644
-> index 000000000..25e3b9c3f
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/
-> python3-google-api-python-client_1.7.11.bb
-> @@ -0,0 +1,9 @@
-> +SUMMARY = "The Google API Client for Python is a client library for
-> accessing the Plus, Moderator, and many other Google APIs."
-> +HOMEPAGE = "https://github.com/googleapis/google-api-python-client"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=94023d14f6b58272fd885e4e3f2f08b3"
-> +
-> +SRC_URI[md5sum] = "6e28e8caf2e4d55ed5b7c48a538a61c9"
-> +SRC_URI[sha256sum] =
-> "a8a88174f66d92aed7ebbd73744c2c319b4b1ce828e565f9ec721352d2e2fb8c"
-> +
-> +inherit pypi setuptools3
-> --
-> 2.23.0
+> Cheers
 >
+> Andreas
+> >
+> > Second, it's worth keeping in mind for future updates that after v0.2.7
+> > the license changed to MIT (and yes, I know LIC_FILES_CHKSUM will catch
+> > this):
+> > https://github.com/PipeWire/pipewire/blob/master/LICENSE
+> >
+> > --
+> > Tom
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
