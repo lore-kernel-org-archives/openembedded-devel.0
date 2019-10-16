@@ -1,59 +1,47 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E9B0B7F385
+Return-Path: <aatrapps@gmail.com>
+Received: from mail-yb1-f194.google.com (mail-yb1-f194.google.com
+	[209.85.219.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 798777F37B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 16:46:53 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id A544218422
+	Wed, 16 Oct 2019 17:17:46 +0000 (UTC)
+Received: by mail-yb1-f194.google.com with SMTP id y204so8051687yby.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 18:46:54 +0200 (CEST)
-X-Axis-User: NO
-X-Axis-NonUser: YES
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id Pu_EbJQtl4ml
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 18:46:51 +0200 (CEST)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id DD5EA18441
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 18:46:51 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id CA2701A06F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 18:46:51 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id BED581A075
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 18:46:51 +0200 (CEST)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder02.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 18:46:51 +0200 (CEST)
-Received: from saur.se.axis.com (saur.se.axis.com [10.92.3.10])
-	by seth.se.axis.com (Postfix) with ESMTP id B2F4F4E4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 18:46:51 +0200 (CEST)
-Received: from saur.se.axis.com (localhost [127.0.0.1])
-	by saur.se.axis.com (8.15.2/8.15.2) with ESMTPS id x9GGkpm3025599
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 18:46:51 +0200
-Received: (from pkj@localhost)
-	by saur.se.axis.com (8.15.2/8.15.2/Submit) id x9GGkpJU025598
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Oct 2019 18:46:51 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+	Wed, 16 Oct 2019 10:17:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=9DEUnxYu1LW81wJeRRDcT4r0fTzEnKzRmMuohNc3gU4=;
+	b=OZnSPM/3e2FC9tk2vYrCE/q+8jkuVgsyKR2yOLP0+nPvXVdj0sMkVfAcTwH9aVHG/V
+	QwoQWkW6Nbe09xrUfTpwWvCrqYYri3m9Dj+cpnhbqBnZkzr+AFULixy+IEb0pXxXKCNP
+	X4t6iqZ6dPLPQaatowo8jE68cU+5F5hTLZKMh0/GGANqGTYDiLZE8gShy1B7i6EqVv31
+	4aCOQCJRHykre102qdWDYu2TVkmjrvMajwrrF89EzqD0UN3MOyWBVhHsMFjr43aUJdZd
+	C310NInXB+YQnKjkvC6DOHeJvKKDtaiLDS0Am8bzlTdHKD55X4pk31ekLSF/yV3ULQEC
+	ce+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=9DEUnxYu1LW81wJeRRDcT4r0fTzEnKzRmMuohNc3gU4=;
+	b=fyH92RDVN6Hvm0RsAxRYSz8tGTcmwGivyahCfQqPYnq/dfUZBRuYjU1R0GGpGSWGv/
+	Sa7SOUoDi/q7Lhn2WFKda86czLMRtVI3G+j45liGCNR9HnvlnV4G9DIcKf96skRgB/Mc
+	9CxEq6rajG5DktyI1bOCfWyhRtmp7MVzZa1TjIpNkjRpZbiADfKmTT7nqVzgbTGkz/l1
+	dOspndmmWg+cR4NbOycVl4wzrKOkSRtJw/zJZnm20aqr4p0rYkMsMLjmPhdu6Ad5V7y4
+	8ABIqYldRqSs4y6y/Z3Zl5fGKZXv6fpMostSuK5noc4AN21c8BII4XXu843WiOmGQy0g
+	qWWQ==
+X-Gm-Message-State: APjAAAWxtSpjaTfxtmWX+zyFnZI9SiBO0jsaCBNQNx/xFe55CY3cRrb6
+	E2WKuU3go03NmaYMEFR/5KJ2o1wRvrc=
+X-Google-Smtp-Source: APXvYqzzEbonL13G+PR4Q6e3BckFaUF9GMvGSyiTDjtlLXTVa/dnCFazwXdOP79+vCgK9j8ZZgiVfg==
+X-Received: by 2002:a25:da07:: with SMTP id n7mr29599386ybf.418.1571246266874; 
+	Wed, 16 Oct 2019 10:17:46 -0700 (PDT)
+Received: from aatir-VirtualBox.ibmmobiledemo.com ([170.225.9.143])
+	by smtp.gmail.com with ESMTPSA id
+	l77sm6237562ywb.32.2019.10.16.10.17.45
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 16 Oct 2019 10:17:46 -0700 (PDT)
+From: Aatir <aatrapps@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 16 Oct 2019 18:46:50 +0200
-Message-Id: <20191016164650.25544-2-pkj@axis.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191016164650.25544-1-pkj@axis.com>
-References: <20191016164650.25544-1-pkj@axis.com>
-MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Subject: [meta-oe][warrior][PATCH 2/2] kconfig-frontends: Retrieve the Git repository from GitLab
+Date: Wed, 16 Oct 2019 12:17:38 -0500
+Message-Id: <20191016171738.9703-1-aatrapps@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [PATCH] nlohmann-fifo: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,43 +54,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Oct 2019 16:46:54 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 16 Oct 2019 17:17:46 -0000
 
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+From: Tekkub <aatrapps@gmail.com>
 
-The ymorin.is-a-geek.org site has been down since September and there
-is no indication of when, if ever, it will be back. Retrieve the
-repository from GitLab instead, recommended by the maintainer, Yann E
-Morin.
+Adding nlohmann-fifo, a c++ header library for fifo maps.
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Aatir <aatrapps@gmail.com>
 ---
- .../kconfig-frontends/kconfig-frontends_4.11.0.1.bb           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../nlohmann-fifo/nlohmann-fifo_git.bb        | 24 +++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
 
-diff --git a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
-index de9a6eb99..fae80a79e 100644
---- a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
-+++ b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
-@@ -7,13 +7,13 @@ the effort of keeping an up-to-date, out-of-tree, packaging of the \
- kconfig infrastructure, ready for use by third-party projects. \
- The kconfig-frontends package provides the kconfig parser, as well as all \
- the frontends"
--HOMEPAGE = "http://ymorin.is-a-geek.org/projects/kconfig-frontends"
-+HOMEPAGE = "https://gitlab.com/ymorin/kconfig-frontends"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9b8cf60ff39767ff04b671fca8302408"
- SECTION = "devel"
- DEPENDS += "ncurses flex bison gperf-native bison-native"
- RDEPENDS_${PN} += "python3 bash"
--SRC_URI = "git://ymorin.is-a-geek.org/kconfig-frontends;branch=4.11.x \
-+SRC_URI = "git://gitlab.com/ymorin/kconfig-frontends.git;protocol=https;branch=4.11.x \
- 	   file://0001-Makefile-ensure-frontends-exits-before-writing-into-.patch \
-            file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch"
- 
+diff --git a/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
+new file mode 100644
+index 000000000..326a4abfb
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nlohmann-fifo/nlohmann-fifo_git.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "fifo maps for c++"
++HOMEPAGE = "https://github.com/nlohmann/fifo_map"
++SECTION = "libs"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.MIT;md5=b67209a1e36b682a8226de19d265b1e0"
++
++SRC_URI = "git://github.com/nlohmann/fifo_map.git"
++
++PV = "1.0.0+git${SRCPV}"
++
++SRCREV = "0dfbf5dacbb15a32c43f912a7e66a54aae39d0f9"
++
++S = "${WORKDIR}/git"
++
++# nlohmann-fifo is a header only C++ library, so the main package will be empty.
++
++RDEPENDS_${PN}-dev = ""
++
++BBCLASSEXTEND = "native nativesdk"
++
++do_install() {
++    install -d ${D}${includedir}
++    install -m 0644 ${S}/src/fifo_map.hpp ${D}${includedir} 
++}
 -- 
-2.21.0
+2.17.1
 
 
