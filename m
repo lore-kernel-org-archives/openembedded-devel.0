@@ -1,55 +1,49 @@
-Return-Path: <prvs=184014d2e=alistair.francis@wdc.com>
-Received: from esa6.hgst.iphmx.com (esa6.hgst.iphmx.com [216.71.154.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F4837F46F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
+	[209.85.222.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 15BD27D6A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Oct 2019 22:59:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1571180345; x=1602716345;
-	h=from:to:cc:subject:date:message-id:in-reply-to:
-	references:mime-version:content-transfer-encoding;
-	bh=E8hdTGahktb+l5F+aQfk4Lvr0sPRxhqOS+KoRrtLveE=;
-	b=UR9pCF1YasdsDuIQVdUwxOb9GPkL0ZG01YSAHO1o4Zxw6HfWXIlJiAbw
-	o4i4c96pXDZPROqtNTBDCgFmPQtU1KZ5KVQTeKHLtrAtHiyFo7UwEc29Z
-	KhSZgASw9gKxsF1HWouVNadw177KFKPH2+wW8/9EDbADGWWCRcy3D/fI8
-	Tx8GrH7aE8oqoifOeAVa+K+5fob9M30sL6H3yjKQMkzN6r1KA97WgFqHS
-	kM3qPPxEsh7u0uotkMnxzW6XgjCU71stDQKoYf9cBdKezahUvwL868Rmm
-	CP21Lhelc6We93yrgyySi6hKEhzqsvjUjJS5XS6ndteXugMfEaIXYFS5H A==;
-IronPort-SDR: pzMI4gG2/rHnh2N680j9yg7t5m2fEpXceRo7c/Q89knNLz7c6t/FuSW6uQR/bvyZC1H+8nFHXj
-	LqB4bufeG/hdl25xWiiMy8bqnupAKl8kx+wOKcH3nqn0fJ2LExXqqyzcnukU+QcDz/xzNifEoz
-	nzDXTacjwcBruhGc4iP4K/uaGNUtEwz8H/vA1zNeH3wrMrmXnemNjtozxoI0VgEFg74GazZA5m
-	6+ZeSI0yiSZfqd2w1+/GT/AWHuvF5jfNUAQA5XtE/lknp/vatUWU0SH4cvzm2SCMSvYX3t+T/S
-	UtQ=
-X-IronPort-AV: E=Sophos;i="5.67,301,1566835200"; d="scan'208";a="122194676"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
-	([199.255.45.15])
-	by ob1.hgst.iphmx.com with ESMTP; 16 Oct 2019 06:59:04 +0800
-IronPort-SDR: 2nIf7H+Nh78Yki/C9rrTviJpwRlzdMd2rmXm6KUOyC2NzXk9IbfhVn7t5uRMhByTuzSQrcvOn3
-	ZOQV0+1iYlX29K+eFGKVKM51qiONgRC9+VfO0Tt5UIN9Ml7xhV9nH6G8E+FCjhdp9tawQrW1de
-	1u+Ezq0tDkmrn1GN5tyVcDy+LnQ8JFX4yVmunab3DilO70cOEubjaJHO8MH7AP2eaywsA5n23r
-	hatugMAklbuopQxIgrFmDvzpkgHYVNzfyK9YzdttHwafJemEHtxS7Vm5M13jcwsVHIDz8AYidu
-	h8NU4BnRZqYjSam1ZM4I+mST
-Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
-	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
-	15 Oct 2019 15:54:52 -0700
-IronPort-SDR: pRjbAJ7UPC0WIVRyBLflqjJFq8XgmWw+MvxKEtbvJBkXpX1fkQ/j5vCCV/bTDzs+Fnf6kRgQwz
-	T3rJi3+xg6qp6xgy2E2CnkTHs60pJy3NYU2PUz2kpOIBwyOtFQtXw1gjLyi19foyvztVm6Nise
-	Jaht5Acr3SQevIa9CIwALI2oqeFiMcJrombApLQWiDLZcObDL0Ff/dxSC8XT0NZuHkmfT7L6yw
-	MZO5JLm5tJ9URL7l18dgv2aB1yxB7HxNlmk7FXiPi5cm+orJtqCqWjbBMfmHNKH3ygDvW9U8tP
-	RfU=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
-	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
-	by uls-op-cesaip01.wdc.com with ESMTP; 15 Oct 2019 15:59:04 -0700
-From: Alistair Francis <alistair.francis@wdc.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Oct 2019 15:54:22 -0700
-Message-Id: <20191015225422.18179-7-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191015225422.18179-1-alistair.francis@wdc.com>
-References: <20191015225422.18179-1-alistair.francis@wdc.com>
+	Wed, 16 Oct 2019 01:17:01 +0000 (UTC)
+Received: by mail-qk1-f170.google.com with SMTP id e66so619897qkf.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Oct 2019 18:17:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=TXVo2PWfKMv454XHPcpboU9uL5kfK58gJ9TEC149oF0=;
+	b=IDfVO7fCWHKdEGxIO9WR78dD582NMPXrAquNJ4jla2mlGeZy4cFMLQCOOrRbvLVDIg
+	HS0Tv5raUrrSo+Qv1zs8/5H0vuVa/149kMQrYOxdnChuklbi6aXVhOTDOUvwXzLeoQL6
+	DJOo9RjqVS108sm7N97chSEB75DwR+4eUetTbwqm7fcFwHXPf3ASJEP9oK7JxzOlhtJR
+	Ip9ktQEZocTejty/99y2P0DDi7rv0WI6h3pt4ChpbR1+z981w1WqiLiV9fxDOnH7f4Tr
+	OUgKt+3fgCA9Oq5EJ8eTXDE4XvaQSg0DVSaPGZqD0eUIbsmNITBalpZnAeY//vGLF4F1
+	tMxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=TXVo2PWfKMv454XHPcpboU9uL5kfK58gJ9TEC149oF0=;
+	b=gR11oYp3sQ2VbQok3zaKCKswUgP2xy4AEpI/XjiAGgYbGZejOUFgOoA+VyI1Q8M0Nc
+	Wxqqxy71cHfL6ZZS2J78OdVLo8S88irBT6eJ9GKHLvWqytNCbc7u/XGk7/hIQlf/uIw0
+	YLFh43OL7xcG1sbw0ay1v/MXD9CT4sPBDmHYKR23TjlbOxr15YqhQ5PoYsPBjoXsouyH
+	I+QGtDgcwm4Pw4jWw7VCzjnK/QW67mBzZ++sTZj1P3RJdbIIVNPuryetTP0dZozyhHji
+	E0tKtOVa2w15BY8QFwdbJBoafe8/EfcwGgZyvKZi8ES1NOdfQwjveXjDjXd+PpEfRpGO
+	f3LA==
+X-Gm-Message-State: APjAAAWKEHuEvbZdSUuSwIIL3SMYhWSUwCYv99Pw1u3uxcTG4/nuYN4i
+	enCShVuMZ14gsD6Y+9CoBgt7zLR3+WMul5GL04Q=
+X-Google-Smtp-Source: APXvYqxppEGL288RxKQkbIucuA8s5tjze/5PNo1mCFkVWqZzUm+e+hmZd57AzktG6GWsgS3QEXCKgxZ/ihrPukxuK+w=
+X-Received: by 2002:a37:b985:: with SMTP id
+	j127mr38566775qkf.337.1571188622678; 
+	Tue, 15 Oct 2019 18:17:02 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 7/7] mycroft: Run the files from /var
+References: <20191014122601.18745-1-urs.fassler@bbv.ch>
+In-Reply-To: <20191014122601.18745-1-urs.fassler@bbv.ch>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 15 Oct 2019 18:16:50 -0700
+Message-ID: <CAMKF1sqSp_8FSEGXzcd4_Tf5GDQxYTZ=GKUhFo_7B7yjPcZEWg@mail.gmail.com>
+To: =?UTF-8?B?VXJzIEbDpHNzbGVy?= <urs.fassler@bbv.ch>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, "denys@ti.com" <denys@ti.com>
+Subject: Re: [meta-networking][PATCH] open62541: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,64 +56,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Oct 2019 22:59:03 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 16 Oct 2019 01:17:02 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-To avoid errors when running on a read only /lib/ file system copy the
-files to /var and run mycroft from there.
+On Mon, Oct 14, 2019 at 5:56 PM Urs F=C3=A4ssler <urs.fassler@bbv.ch> wrote=
+:
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
----
- .../recipes-multimedia/mycroft/files/mycroft-setup.service  | 3 ++-
- .../recipes-multimedia/mycroft/files/mycroft.service        | 6 +++---
- .../recipes-multimedia/mycroft/mycroft_19.8.1.bb            | 1 +
- 3 files changed, 6 insertions(+), 4 deletions(-)
+> It provides a open source implementation for OPC UA.
+> ---
+>  .../files/0001-fix_ignored_return_value.patch | 17 ++++++++++
+>  .../open62541/open62541_1.0.bb                | 32 +++++++++++++++++++
+>  2 files changed, 49 insertions(+)
+>  create mode 100644
+> meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored_ret=
+urn_value.patch
+>  create mode 100644 meta-networking/recipes-connectivity/open62541/
+> open62541_1.0.bb
+>
+> diff --git
+> a/meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored_r=
+eturn_value.patch
+> b/meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored_r=
+eturn_value.patch
+> new file mode 100644
+> index 000000000..3a8377ec5
+> --- /dev/null
+> +++
+> b/meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored_r=
+eturn_value.patch
+> @@ -0,0 +1,17 @@
+> +diff --git a/plugins/ua_pki_default.c b/plugins/ua_pki_default.c
+> +index 79331bc9..b20ad95c 100644
+> +--- a/plugins/ua_pki_default.c
+> ++++ b/plugins/ua_pki_default.c
+> +@@ -89,7 +89,11 @@ fileNamesFromFolder(const UA_String *folder, size_t
+> *pathsSize, UA_String **path
+> +
+> +     struct dirent *ent;
+> +     char buf2[PATH_MAX + 1];
+> +-    realpath(buf, buf2);
+> ++    char *res =3D realpath(buf, buf2);
+> ++    if(res =3D=3D NULL) {
+> ++        closedir(dir);
+> ++        return UA_STATUSCODE_BADINTERNALERROR;
+> ++    }
+> +     size_t pathlen =3D strlen(buf2);
+> +     *pathsSize =3D 0;
+> +     while((ent =3D readdir (dir)) !=3D NULL && *pathsSize < 256) {
+> diff --git a/meta-networking/recipes-connectivity/open62541/
+> open62541_1.0.bb b/meta-networking/recipes-connectivity/open62541/
+> open62541_1.0.bb
+> new file mode 100644
+> index 000000000..c34e70660
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/open62541/open62541_1.0.bb
+> @@ -0,0 +1,32 @@
+> +HOMEPAGE =3D "http://open62541.org/"
+> +SUMMARY =3D "Open source implementation of OPC UA - library"
+> +LICENSE =3D "MPL-2.0"
+> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D815ca599c9df247a0c7f619bab123=
+dad"
+> +
+> +SRCREV =3D "ce5209d78d3821504d31b3bbdb03f53d6e3f93a7"
+> +SRC_URI =3D " \
+> +       gitsm://github.com/open62541/open62541.git \
+> +       file://0001-fix_ignored_return_value.patch \
+> +"
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit cmake python3native
+> +
+> +DEPENDS +=3D " \
+> +       python3-six-native \
+> +       mbedtls \
+> +"
+> +
+> +EXTRA_OECMAKE =3D " \
+> +       -DCMAKE_BUILD_TYPE=3DDebug \
 
-diff --git a/meta-multimedia/recipes-multimedia/mycroft/files/mycroft-setup.service b/meta-multimedia/recipes-multimedia/mycroft/files/mycroft-setup.service
-index 07598235e..4b4bcdd77 100644
---- a/meta-multimedia/recipes-multimedia/mycroft/files/mycroft-setup.service
-+++ b/meta-multimedia/recipes-multimedia/mycroft/files/mycroft-setup.service
-@@ -5,7 +5,8 @@ After=systemd-user-sessions.service
- 
- [Service]
- Type=oneshot
--ExecStart=@LIBDIR@/mycroft/dev_setup.sh --allow-root
-+ExecStart=cp -rf @LIBDIR@/mycroft /var/
-+ExecStart=/var/mycroft/dev_setup.sh --allow-root
- 
- [Install]
- WantedBy=multi-user.target
-diff --git a/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service b/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
-index 28729f6b1..c7f477f13 100644
---- a/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
-+++ b/meta-multimedia/recipes-multimedia/mycroft/files/mycroft.service
-@@ -5,10 +5,10 @@ After=mycroft-setup.service
- 
- [Service]
- Type=forking
--WorkingDirectory=@LIBDIR@/mycroft
-+WorkingDirectory=/var/mycroft
- ExecStartPre=mkdir -p /var/log/mycroft
--ExecStart=@LIBDIR@/mycroft/start-mycroft.sh all
--ExecStop=@LIBDIR@/mycroft/stop-mycroft.sh all
-+ExecStart=/var/mycroft/start-mycroft.sh all
-+ExecStop=/var/mycroft/stop-mycroft.sh all
- 
- [Install]
- WantedBy=multi-user.target
-diff --git a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
-index 54c06f5b6..d4ac4096b 100644
---- a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
-+++ b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
-@@ -24,6 +24,7 @@ inherit systemd
- 
- # Mycroft installs itself on the host
- # Just copy the setup files to the rootfs
-+# The mycroft-setup service will copy the files to /var/ where we run them from
- do_install() {
-     install -d ${D}${libdir}/
-     cp -r ${B} ${D}${libdir}/mycroft
--- 
-2.23.0
 
+If we used Release build type would be nicer from release point of view
+unless only difference is debug info if there are more differences then
+maybe add a packageconfig to control this setting and enable it when doing
+DEBUG_ENABLED =3D =E2=80=9C1=E2=80=9D builds only
+
+>
+> +       -DBUILD_SHARED_LIBS=3DON \
+> +       -DUA_NAMESPACE_ZERO=3DREDUCED \
+> +       -DUA_ENABLE_ENCRYPTION=3DON \
+> +       -DUA_BUILD_EXAMPLES=3DOFF \
+> +"
+> +
+> +FILES_${PN}-dev +=3D "${libdir}/cmake/*"
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> +
+> --
+> 2.20.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
