@@ -1,42 +1,57 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-yw1-f67.google.com (mail-yw1-f67.google.com
-	[209.85.161.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D671F7F57D
+Return-Path: <marek.bykowski@gmail.com>
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com
+	[209.85.208.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B29D7F665
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 13:53:13 +0000 (UTC)
-Received: by mail-yw1-f67.google.com with SMTP id l64so867903ywe.13
+	Thu, 17 Oct 2019 14:10:55 +0000 (UTC)
+Received: by mail-lj1-f172.google.com with SMTP id q64so2695849ljb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 06:53:15 -0700 (PDT)
+	Thu, 17 Oct 2019 07:10:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=date:from:to:cc:subject:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=7U7Yfe5CIhgtIUwu2Tk2Zgfa0Kk2VXgDurAvpRecJMw=;
+	b=G+B5F9vGs8moBxWDfq44G2efexs9nknlpTMZjccGnCjfNG3QMmN59SZtGsf1UfYrkO
+	lvfc4OlYHN0yTmQ0qIPaW5Sb8muIsLXs9nggGNvATYQnoAM+13VshT3T2CZ9oSuhEuZ3
+	CgJuV8YI1sp7WasvNC0/dkmmosBDpghKTH/+ernqQRn4S9aHytKn6mcgoiuvQOe8hhmT
+	ORWdu08DkkDqPlzu3/0qVjuZISLpC3H61ToBfsSJ9gq2rZDL8dxkWtwKP5JsdpMzS0hI
+	7doyn+KRzFSdTi8TmLYDLs4g947o/aBoc/UGxZdz47AOr5FwEqthme1PQ6NMDOWkWPwe
+	Wurw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=BTBI6FGA9GFcXEbBZCje3y+w7W1HYxQy3s1pibQfxVU=;
-	b=nZ8JXurF5gTrNkyTiNn6pe3hXvHCGHbPyAPmX6LvQN7ThUxzoeBzb3AU/cLaLUalJY
-	Ykp5Ws0ShjIVmxjSeJBmsp5EoI+NruacT+cqxTzuC4ZZ7Hs4yQpOQG7549PR65eSzDah
-	X5nZnzsJ08wzjr/UU7T8d1gR3Jr3vScdcteXTAUQyc6CuPAXlTjq8c9o/MkkS6n4zl0M
-	MjUn1hVo0bo3GRpOQFn1wykGEg58qV697C5iP7ax6RRYMP6ORollXgUteKtWWYY9BCKn
-	rB3DVuLBTqw4HFMNVpxAZdhw5C1/G4iNM4T2CcvCY/Qi/I229OLDuPcxJS/ARIGAZFs4
-	bNfw==
-X-Gm-Message-State: APjAAAUHFqFibY5KqOLmyBxyhs8+xHmgzvG3rVl0GWKxtmpExRbtmcg6
-	F2JB6xIGVIhqtPhveRCBMGKpS0RhcQ==
-X-Google-Smtp-Source: APXvYqxMWYmSvfsgKp2QzA3Rxh0gLLvHjD80ENZXeSSoy6dvvlPkGnzLragFlR40CUISeqF0Mgkm/A==
-X-Received: by 2002:a81:498c:: with SMTP id w134mr2969369ywa.416.1571320394196;
-	Thu, 17 Oct 2019 06:53:14 -0700 (PDT)
-Received: from bill-the-cat.local (cpe-65-184-142-8.ec.res.rr.com.
-	[65.184.142.8])
-	by smtp.gmail.com with ESMTPSA id y205sm524568ywc.6.2019.10.17.06.53.13
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 17 Oct 2019 06:53:13 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Oct 2019 09:53:09 -0400
-Message-Id: <20191017135309.32441-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.17.1
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=7U7Yfe5CIhgtIUwu2Tk2Zgfa0Kk2VXgDurAvpRecJMw=;
+	b=Q+GgqBc1+ImfpPxm/b7zjOk3xt9PI+syJUGBrh7ilNl1QUr9yC1JxnCXR61Zcjbsg3
+	LbOkYbdCbQ+94syW3+S4E0l36yYNWanSlGdQBn4l8Q2Gh2iP4Rh7Q6s605nTOeyaOQhM
+	yqzido/h+jRgyJux2fIwm9oFsmDLb6hcmlb/MLcQ6k5TNvSev5reRphYJjVqgg1CG9kX
+	496aJudroYpb1jKWH4eqBq2hh7gn33ZerMmGlyihwqJ5wYL9tLL/XBpzTmAlFA6krU4N
+	st91JLncxsAMre9fARAiyR6tKcw3Sf0/xRo9CksP180FOIovyqiMs+hJPNEZXweIJHvc
+	FKqw==
+X-Gm-Message-State: APjAAAW944wxoDtZRNkPAVf5lDEGhvZeZxLI8JbteatEnLjEDx43cVte
+	sK3nmjcSPpex1AuFDKYOZWw=
+X-Google-Smtp-Source: APXvYqxXwT9yowajZcJ9K/nBCY5YPisgi6FJKlJWfX6yENKlOxjwHFvyt2PcaBGfwI+75uW6jP8wVA==
+X-Received: by 2002:a05:651c:20b:: with SMTP id
+	y11mr2732491ljn.161.1571321456477; 
+	Thu, 17 Oct 2019 07:10:56 -0700 (PDT)
+Received: from localhost ([78.133.233.210]) by smtp.gmail.com with ESMTPSA id
+	g10sm1039496lfb.76.2019.10.17.07.10.55
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 17 Oct 2019 07:10:56 -0700 (PDT)
+Date: Thu, 17 Oct 2019 16:10:34 +0200
+From: "marek.bykowski@gmail.com" <marek.bykowski@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20191017161034.7126719c@gmail.com>
+In-Reply-To: <CAMKF1srjpre+zbi6Q2==McOEvV8njBdzqOf8nGxor9NN5tMoig@mail.gmail.com>
+References: <1571141621-20235-1-git-send-email-marek.bykowski@gmail.com>
+	<20191016104557.GA7998@localhost>
+	<20191016142112.10a645d2@gmail.com>
+	<CAMKF1srjpre+zbi6Q2==McOEvV8njBdzqOf8nGxor9NN5tMoig@mail.gmail.com>
+X-Mailer: Claws Mail 3.13.2 (GTK+ 2.24.30; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Cc: George Kiagiadakis <george.kiagiadakis@collabora.com>,
-	=?UTF-8?q?Jan-Simon=20M=C3=B6ller?= <jsmoeller@linuxfoundation.org>
-Subject: [meta-oe][PATCHv2] pipewire: Initial add of 0.2.7
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [meta-oe] [PATCHv2] lmbench: Fix/clean-up the build for lmbench
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,97 +64,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 13:53:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 17 Oct 2019 14:10:56 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-From: George Kiagiadakis <george.kiagiadakis@collabora.com>
+> fails to compile
+> https://errors.yoctoproject.org/Errors/Details/273942/
 
-Add PACKAGECONFIG options for the currently available features.
-
-[Based on pipewire.inc / pipewire_git.bb from meta-agl-devel/meta-pipewire]
-
-Cc: Andreas Müller <schnitzeltony@gmail.com>
-Signed-off-by: Jan-Simon Möller <jsmoeller@linuxfoundation.org>
-Signed-off-by: George Kiagiadakis <george.kiagiadakis@collabora.com>
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- .../pipewire/pipewire_git.bb                  | 65 +++++++++++++++++++
- 1 file changed, 65 insertions(+)
- create mode 100644 meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
-
-diff --git a/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb b/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
-new file mode 100644
-index 000000000000..bcb3015f8bdc
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
-@@ -0,0 +1,65 @@
-+SUMMARY = "Multimedia processing server for Linux"
-+AUTHOR = "Wim Taymans <wtaymans@redhat.com>"
-+HOMEPAGE = "https://pipewire.org"
-+SECTION = "multimedia"
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = " \
-+    file://LICENSE;md5=d8153c6e65986f862a0550ca74a3ed73 \
-+    file://LGPL;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-+"
-+DEPENDS = "alsa-lib dbus udev"
-+SRCREV = "14c11c0fe4d366bad4cfecdee97b6652ff9ed63d"
-+PV = "0.2.7"
-+
-+SRC_URI = "git://github.com/PipeWire/pipewire"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit meson pkgconfig systemd manpages
-+
-+PACKAGECONFIG ??= "\
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-+    gstreamer \
-+"
-+
-+PACKAGECONFIG[systemd] = "-Dsystemd=true,-Dsystemd=false,systemd"
-+PACKAGECONFIG[gstreamer] = "-Dgstreamer=enabled,-Dgstreamer=disabled,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
-+PACKAGECONFIG[manpages] = "-Dman=true,-Dman=false,libxml-parser-perl-native"
-+
-+PACKAGES =+ "\
-+    ${PN}-spa-plugins \
-+    ${PN}-alsa \
-+    ${PN}-config \
-+    gstreamer1.0-${PN} \
-+    lib${PN} \
-+    lib${PN}-modules \
-+"
-+
-+RDEPENDS_lib${PN} += "lib${PN}-modules ${PN}-spa-plugins"
-+
-+FILES_${PN} = "\
-+    ${sysconfdir}/pipewire/pipewire.conf \
-+    ${bindir}/pipewire* \
-+    ${systemd_user_unitdir}/* \
-+"
-+FILES_lib${PN} = "\
-+    ${libdir}/libpipewire-*.so.* \
-+"
-+FILES_lib${PN}-modules = "\
-+    ${libdir}/pipewire-*/* \
-+"
-+FILES_${PN}-spa-plugins = "\
-+    ${bindir}/spa-* \
-+    ${libdir}/spa/* \
-+"
-+FILES_${PN}-alsa = "\
-+    ${libdir}/alsa-lib/* \
-+    ${datadir}/alsa/alsa.conf.d/50-pipewire.conf \
-+"
-+FILES_gstreamer1.0-${PN} = "\
-+    ${libdir}/gstreamer-1.0/* \
-+"
-+
-+CONFFILES_${PN} = "\
-+    ${sysconfdir}/pipewire/pipewire.conf \
-+"
--- 
-2.17.1
-
+Thanks! I built for x86 and it went just fine. I have an aarch64/and mcpu=cortex-a53
+toolchain as well, so will test against it and will resend after corrections.
 
