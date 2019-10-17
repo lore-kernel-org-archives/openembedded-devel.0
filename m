@@ -1,50 +1,52 @@
 Return-Path: <christophe.priouzeau@st.com>
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
-	[91.207.212.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 469987F643
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+	[62.209.51.94])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A7DE7F6A9
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 17 Oct 2019 14:46:08 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
-	by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
-	x9HEfCPE007459 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 16:46:08 +0200
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+	by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+	x9HEk2GC023544 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Oct 2019 16:46:09 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
 	h=from : to : cc : subject
-	: date : message-id : content-type : content-transfer-encoding :
-	mime-version; s=STMicroelectronics;
-	bh=ie/FKVaCS1eIUfHAdn/47dFbtXOiaFAZW6ak4N6TvAY=;
-	b=fYHZf9DfR0I8GozR3E3udXhDFlhA4itxBkPrDfSoORgYJRgMPmRqHr8i8xx6YIvaFSlq
-	ap7GdCh6wRtB3AYKjmIdiKBgWPW7FLEFXLYHh1anDQrS42LPu2Q2sAAFL4KrOmjqKEny
-	HBYjygJHGgQ3z4/zQOItfDMPxeGMJutDyS8zoOjgZJjhWIJzJfiOXcxSAWAKm740UUl4
-	8cGNdHj6pWlaYNmO6d8Rip/v5QkzMNGHMyBiS2JJYBRsbvq5k+Ou9x3vX+5EVz3bJgxw
-	0vtprhghsjtYKsN7miphCPC//OEypUi9mKYUb+jXSS97IHo3kRwgnbYZtx6t0HwLly9M
-	ww== 
+	: date : message-id : references : in-reply-to : content-type :
+	content-transfer-encoding : mime-version; s=STMicroelectronics;
+	bh=BiJaq/p6gDufVenLamdfv/xSxQjjitjyiYqyEtWqe7c=;
+	b=opdOUJyOINQZ4e7mjP7+7GMOOqeP3+8EyFrbVShB/mFOh/zEvALF1OJX7LPXRYWbHvN9
+	IwZAHUZBXG9l9Yypkg04AGtByWHcMwLq1Bh3N0ikkkaUFua/j94TjfrGNWVhcEZuKX8X
+	Svc694n0Ezk7Kt9g5QdpK65HM1MT92V7gzWWu76U7rWMXTmOs2krh1C7v3mqVeSM6g0u
+	7NMiPua+w+6fwyfGu//Xq6G+4JULXG/U6asgtmf5055T/8WFKy0tSt7b3K6wYaORJu/y
+	aNf8nil3m24Vfca6itgEL7/XL1veY1aQ+rBD2iVPlCe3fp3jsEI4pO3mplruvEUaoeuY
+	/w== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx08-00178001.pphosted.com with ESMTP id 2vk3ya51cb-1
+	by mx07-00178001.pphosted.com with ESMTP id 2vk4kxcf66-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
 	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
 	Thu, 17 Oct 2019 16:46:08 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3D55C100034
+	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 99AC610002A
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 17 Oct 2019 16:46:08 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 31D8E2C6068
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 93AD92C6068
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 17 Oct 2019 16:46:08 +0200 (CEST)
-Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE3.st.com
-	(10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
-	Thu, 17 Oct 2019 16:46:07 +0200
+Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE2.st.com
+	(10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2;
+	Thu, 17 Oct 2019 16:46:08 +0200
 Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
 	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
-	15.00.1347.000; Thu, 17 Oct 2019 16:46:07 +0200
+	15.00.1347.000; Thu, 17 Oct 2019 16:46:08 +0200
 From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH 1/2] xscreensaver: Clarify BSD license variant
-Thread-Index: AQHVhPmcMW5nSTLIf0ix0LYkkQz7Fg==
-Date: Thu, 17 Oct 2019 14:46:07 +0000
-Message-ID: <20191017144605.24746-1-christophe.priouzeau@st.com>
+Thread-Topic: [meta-oe][PATCH 2/2] openjpeg: Clarify BSD license variant
+Thread-Index: AQHVhPmcDgjEDzmCWUaPblfxQlzXug==
+Date: Thu, 17 Oct 2019 14:46:08 +0000
+Message-ID: <20191017144605.24746-2-christophe.priouzeau@st.com>
+References: <20191017144605.24746-1-christophe.priouzeau@st.com>
+In-Reply-To: <20191017144605.24746-1-christophe.priouzeau@st.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
@@ -55,7 +57,7 @@ MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
 	definitions=2019-10-17_05:2019-10-17,2019-10-17 signatures=0
 Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-Subject: [meta-oe][PATCH 1/2] xscreensaver: Clarify BSD license variant
+Subject: [meta-oe][PATCH 2/2] openjpeg: Clarify BSD license variant
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -73,27 +75,27 @@ Content-Language: en-US
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-The License of xscreensaver is BSD-0-Clause.
+The License of openjpeg is BSD-2-Clause.
 
 Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
 ---
- meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb | 2 +-
+ meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb b/m=
-eta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
-index c2b345da6..62f00563c 100644
---- a/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
-+++ b/meta-oe/recipes-graphics/xscreensaver/xscreensaver_5.39.bb
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb b/meta-oe/=
+recipes-graphics/openjpeg/openjpeg_2.3.1.bb
+index b19f9109d..ffd4099b4 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
 @@ -1,6 +1,6 @@
- SUMMARY =3D "X screen saver and locker"
-=20
+ DESCRIPTION =3D "OpenJPEG library is an open-source JPEG 2000 codec"
+ HOMEPAGE =3D "http://www.openjpeg.org"
 -LICENSE =3D "BSD"
-+LICENSE =3D "BSD-0-Clause"
- LIC_FILES_CHKSUM =3D "file://driver/xscreensaver.h;endline=3D10;md5=3De141=
-ab5822fb2d43694e1e47b59fc0df"
++LICENSE =3D "BSD-2-Clause"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dc648878b4840d7babaade1303e7f108=
+c"
 =20
- SRC_URI =3D "https://www.jwz.org/${BPN}/${BP}.tar.gz"
+ DEPENDS =3D "libpng tiff lcms zlib"
 --=20
 2.17.1
 
