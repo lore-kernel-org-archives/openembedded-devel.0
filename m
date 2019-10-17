@@ -1,47 +1,49 @@
-Return-Path: <alistair23@gmail.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id BE52F79C7C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A701F7F6AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 22:04:34 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id d1so4099232ljl.13
+	Thu, 17 Oct 2019 22:11:18 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id r9so3015262edl.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 15:04:36 -0700 (PDT)
+	Thu, 17 Oct 2019 15:11:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DIVtzab9/C8orq/LNkCKoq3U1ZYFIx/MvAmOwkjs/VY=;
-	b=Te2mP4T0VOgUauBINc9/PvSVPaYRRhAkTZK4iC6thgqkMByg34UHD9PWk8yyZ0alP9
-	mS38XXcRkTD5B7jyZ/0xBa6ijyypfJoGm68hpofCJz1P+XocXidmiE4j6rKuHm1rZnrv
-	6p3oiE+5tvtEftXOcbnx0njEJFACB8y9Eqn5gxnT1MFtesmW+7IMkLRyfqKtDJ6VNhng
-	ZruiMNdnX1plmpaRXzG/Feu5a1Q3eeOxFQ/h+UBngVgRub1XTrqHTGjuqFbec5ALJMM2
-	/PRQQQN7Uz9d8B1Oz1wu3iPOzWMXcjQXt7sOPPCU+YYj20hGsJEZLkphR/Swyt8RW+0N
-	r7dA==
+	:cc; bh=G8laASoa6O5k2cCzCNzms/eWMgSzHMve7G1aNGigW3E=;
+	b=JqKmFiu4dpQ8kHvV5hHSCtT4qML2lAz1U2YUismkaxs4bGTStSrY1SuwdgONh8fIEI
+	cwhUVARzZvTaPJ4kK0oiLloT61qG90w5vnaQgARs4pIh9e3Kkg4ezePM/4tLWxbof7ya
+	BEzFNFdEJzKjOIbgR6zt18oLYLgBdbnZX0RuxcjetWRVG5WnAGaK9buGEMqESzSZWNMT
+	GLT/cGPidtZU/2oXgfD1I+0CnpBn4qk5YwY3CnCw4uOIl0G4t63R4srR7P73V5xFdU0W
+	GJenBZwgi4OHPbFUX8xGtPfO7AYxUU5B+3Uw/8FUAoTPJgB0iWSJ1v12QaRHwvrgKlyI
+	k6Hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=DIVtzab9/C8orq/LNkCKoq3U1ZYFIx/MvAmOwkjs/VY=;
-	b=PoX9pNhOL5ComTWYUAhyM6w6hMut2CUyTWASRtVdGNRSd0bWUT8f6eRu6vBtBh2Ss6
-	WJzIKvy5Rtdyb1DYljzU3jBcozL9PDalsBt+XLj2LQY0nHK6yWb4+Qspfe59ALzDs4wJ
-	SRUuEDeQY1fJGt7bBfDF4UsfkfYTXi+bHMT830DzMf+eVYbkSrr0DfjDkO11Biellg1p
-	y7vAeL+Ztkx9EPbp7m2TA6pfGRSL7flrBUQVrVrOPluPLJbDIpD2BudXSIsZXWEwMzxR
-	fMoAIkAlFi3psmUJEfYI9GtzBtzQn+7eg5gf6zBcPmkdbncOQC8if+kqNRCbk7Ddh1Fb
-	YFxA==
-X-Gm-Message-State: APjAAAWbGAxIALxjXoXC7s1uFyyJZ4cwUfk2XYTgKn+ozXZUXNKEmfle
-	RGvNcjj1wd716r5nBcwJtM7ZFmxZAQV/m041GDs=
-X-Google-Smtp-Source: APXvYqzqen3XkLOiH3OlJ+9ad/46R52BMGaCt3WbH8/gUCqyPGa9t/Not33XGY5FmpaUQO52D4M3/kkZXhe/DbrGA0k=
-X-Received: by 2002:a2e:82cd:: with SMTP id n13mr3960682ljh.156.1571349875204; 
-	Thu, 17 Oct 2019 15:04:35 -0700 (PDT)
+	bh=G8laASoa6O5k2cCzCNzms/eWMgSzHMve7G1aNGigW3E=;
+	b=BFISa2EQMkPDdzJcil8lXzs81g2j54jCZY0NTaZoa/MSi8RYy+cFHmkJtyVqG/lZ8W
+	/s4RxrqKuF55VyTB8MLV6qOjaA+7H+9rGXBGP+nMPMSzCvyfoyG9iAsr5V6QkIYeqPwy
+	NaG0CCmL3bD97NNPyTgwVWkoynwzL6ABGo07dbAjYr+pKwrJGPdeMm9tRTE3I83y1imI
+	j/u4LAIgBZzqha+m0T0x9PZLbRrIv0C6qMdU3S/GFSKFtJVZcfgblzCNS84XG2iF7Y7E
+	CZElqHyUbwjaOSCaSsbEKBCuuszsE5sQtdYEW707u67g4JwkDCsfKMTMbopcwxAc1aEo
+	XY8A==
+X-Gm-Message-State: APjAAAUpyrYX/9Bcglz92c/jnOLmy1HE3jPk7IFBR7WPoSCGOY9sGR9m
+	DQysQDKlMCFirh0MSJEHoi5oY8VWf9G//y5pjng=
+X-Google-Smtp-Source: APXvYqwxWkR+wmxhs/+1EUWvbi/SH/TTokRvngZBx+TniI+QERI2uhPBG01m/DxQMBFlm3VwL54kvlSjs99qDV34B5s=
+X-Received: by 2002:a17:906:66d2:: with SMTP id
+	k18mr5903859ejp.100.1571350279202; 
+	Thu, 17 Oct 2019 15:11:19 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191016155844.20847-1-alistair.francis@wdc.com>
-	<CAMKF1spRe3J0sAW0ScbAoivkFemfXAQy5VNtyNUda4d4mmY_PQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spRe3J0sAW0ScbAoivkFemfXAQy5VNtyNUda4d4mmY_PQ@mail.gmail.com>
-From: Alistair Francis <alistair23@gmail.com>
-Date: Thu, 17 Oct 2019 14:59:25 -0700
-Message-ID: <CAKmqyKPLv4njUSfgjx8xuMTeeRJ0VfyMFTwCwdywrbSwAUMUsw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH v2 1/5] python3-pako: Initial commit of version 0.2.3
+References: <20190929092956.13147-1-Qi.Chen@windriver.com>
+	<20191017204414.GB1499@jama>
+In-Reply-To: <20191017204414.GB1499@jama>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 18 Oct 2019 00:11:12 +0200
+Message-ID: <CA+chaQcpMndabwwuv+c8203ATbcwNEMJ8zjLDnqTkzkqyw4OrQ@mail.gmail.com>
+To: Chen Qi <Qi.Chen@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] protobuf-c: fix race condition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,55 +56,154 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 22:04:35 -0000
+X-List-Received-Date: Thu, 17 Oct 2019 22:11:19 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 17, 2019 at 5:49 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Fails to package
->
-> https://errors.yoctoproject.org/Errors/Details/273941/
+Hmm I spoke too soon, at least rebuilding protobuf-c-native with this
+change backported to thud still failed once with:
 
-v3 sent which fixes this failure.
+../git/t/generated-code2/cxx-generate-packed-data.cc:28:17: error: =E2=80=
+=98foo=E2=80=99 is
+not a namespace-name
+ using namespace foo;
+                 ^~~
+../git/t/generated-code2/cxx-generate-packed-data.cc:28:20: error: expected
+namespace-name before =E2=80=98;=E2=80=99 token
+ using namespace foo;
+                    ^
+../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+=E2=80=98TestEnumSmall=E2=80=99 does not name a type
+ #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
+                                    ^
+../git/t/generated-code2/common-test-arrays.h:44:1: note: in expansion of
+macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
+ TEST_ENUM_SMALL_TYPE_NAME enum_small_0[] =3D { TEST_ENUM_SMALL(VALUE) };
+ ^~~~~~~~~~~~~~~~~~~~~~~~~
+../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+=E2=80=98TestEnumSmall=E2=80=99 does not name a type
+ #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
+                                    ^
+../git/t/generated-code2/common-test-arrays.h:45:1: note: in expansion of
+macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
+ TEST_ENUM_SMALL_TYPE_NAME enum_small_1[] =3D { TEST_ENUM_SMALL(OTHER_VALUE=
+)
+};
+ ^~~~~~~~~~~~~~~~~~~~~~~~~
+../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+=E2=80=98TestEnumSmall=E2=80=99 does not name a type
+ #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
+                                    ^
+../git/t/generated-code2/common-test-arrays.h:47:1: note: in expansion of
+macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
+ TEST_ENUM_SMALL_TYPE_NAME enum_small_random[] =3D
+{T(0),T(1),T(1),T(0),T(0),T(1),T(1),T(1),T(0),T(0),T(0),T(0),T(0),T(1),T(1)=
+,T(1),T(1),T(1),T(1),T(0),T(1),T(1),T(0),T(1),T(1),T(0)
+};
+ ^~~~~~~~~~~~~~~~~~~~~~~~~
+...
+so it probably doesn't fix the issue completely.
 
-Alistair
 
->
-> On Wed, Oct 16, 2019 at 9:03 AM Alistair Francis
-> <alistair.francis@wdc.com> wrote:
-> >
-> > Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+On Thu, Oct 17, 2019 at 10:44 PM Martin Jansa <martin.jansa@gmail.com>
+wrote:
+
+> On Sun, Sep 29, 2019 at 05:29:56PM +0800, Chen Qi wrote:
+> > Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 > > ---
-> >  .../recipes-devtools/python/python3-pako_0.2.3.bb        | 9 +++++++++
-> >  1 file changed, 9 insertions(+)
-> >  create mode 100644 meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
+> >  .../0001-avoid-race-condition.patch           | 36 +++++++++++++++++++
+> >  .../protobuf/protobuf-c_1.3.2.bb              |  1 +
+> >  2 files changed, 37 insertions(+)
+> >  create mode 100644
+> meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.pa=
+tch
 > >
-> > diff --git a/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb b/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
+> > diff --git
+> a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.=
+patch
+> b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.=
+patch
 > > new file mode 100644
-> > index 000000000..24efa44e3
+> > index 000000000..4fc7703d8
 > > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
-> > @@ -0,0 +1,9 @@
-> > +SUMMARY = "The universal package manager library"
-> > +HOMEPAGE = "https://github.com/MycroftAI/pako"
-> > +LICENSE = "Apache-2.0"
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
+> > +++
+> b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.=
+patch
+> > @@ -0,0 +1,36 @@
+> > +From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00 2001
+> > +From: Chen Qi <Qi.Chen@windriver.com>
+> > +Date: Sun, 29 Sep 2019 17:20:42 +0800
+> > +Subject: [PATCH] avoid race condition
 > > +
-> > +SRC_URI[md5sum] = "8eb7077075091c50e4b8a9f939607277"
-> > +SRC_URI[sha256sum] = "6be55fd8c5a2a6f02974f37438c1c47a3d9e764ce81c9d0a1a8c9a1815a59778"
+> > +It's possible that the cxx-generate-packed-data.cc is compiled
+> > +while the t/test-full.pb.h is being generated. This will result
+> > +the following error.
 > > +
-> > +inherit pypi setuptools3
+> > +  DEBUG:     ./t/test-full.pb.h:4:0: error: unterminated #ifndef
+> > +  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
+> > +
+> > +Add a dependency to avoid such problem.
+> > +
+> > +Upstream-Status: Pending
+>
+> Thanks for this patch, it seems to indeed fix this issue, I've reported
+> a while ago:
+>
+> https://www.mail-archive.com/openembedded-devel@lists.openembedded.org/ms=
+g64363.html
+>
+> I think the upstream would be interested in this fix as well, see:
+>
+> https://github.com/protobuf-c/protobuf-c/commit/b0bb56303366e2c072ee38eb5=
+f1f11251b07239c
+>
+> Cheers,
+>
+> > +
+> > +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> > +---
+> > + Makefile.am | 1 +
+> > + 1 file changed, 1 insertion(+)
+> > +
+> > +diff --git a/Makefile.am b/Makefile.am
+> > +index b0cb065..1608ae0 100644
+> > +--- a/Makefile.am
+> > ++++ b/Makefile.am
+> > +@@ -156,6 +156,7 @@ noinst_PROGRAMS +=3D \
+> > + t_generated_code2_cxx_generate_packed_data_SOURCES =3D \
+> > +     t/generated-code2/cxx-generate-packed-data.cc \
+> > +     t/test-full.pb.cc
+> > ++t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
+> > + $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb=
+.h
+> > + t_generated_code2_cxx_generate_packed_data_CXXFLAGS =3D \
+> > +     $(AM_CXXFLAGS) \
+> > +--
+> > +2.17.1
+> > +
+> > diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> > index 6d1ffc3f4..b92f82dec 100644
+> > --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> > +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> > @@ -15,6 +15,7 @@ DEPENDS =3D "protobuf-native protobuf"
+> >  SRCREV =3D "1390409f4ee4e26d0635310995b516eb702c3f9e"
+> >
+> >  SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git \
+> > +           file://0001-avoid-race-condition.patch \
+> >            "
+> >
+> >  S =3D "${WORKDIR}/git"
 > > --
-> > 2.23.0
+> > 2.17.1
 > >
 > > --
 > > _______________________________________________
 > > Openembedded-devel mailing list
 > > Openembedded-devel@lists.openembedded.org
 > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 > --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
 
