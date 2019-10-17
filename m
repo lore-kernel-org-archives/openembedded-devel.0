@@ -1,53 +1,25 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A5F1D6C4D8
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AE797F35D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 22:48:25 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id z9so80657wrl.11
+	Thu, 17 Oct 2019 03:24:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x9H3O9SJ003456
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 15:48:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=DlUx8KhttvpoxkUP/7PkZg/p9pZPaKvU/KnnQiWkJCQ=;
-	b=gD+WJ3Ej4kWgL9Dp+GlPuPWHDmqSR0Ziq1AdejmsegorrVW/bKbOGQnDHrsogTlaII
-	ioScOhXndLCqEj44bXndWmAgeDAFA+fhP2mM7aj9OFvdMYTBPrJsl3TDSA4ZBciQ/vr9
-	Fw1sqJyRFcypzU7mVdUNqedLu8G5mx9RJJUPz80oAkiz+0/vnKEMJnwwvU8t152h/29f
-	+WXFiZVOImZ2LBgbWYUqgDOuStekzlrDMHupxGZhokzyjrdgHWEGN3/AxBsQkarQlV3y
-	LLQLcmog+9vOB/1rkFx4sA/XoI5RfQvN6hQdkDx6lTctpcEww9sT2OpmaQPYb1vTMEgh
-	xPIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=DlUx8KhttvpoxkUP/7PkZg/p9pZPaKvU/KnnQiWkJCQ=;
-	b=DPrObLRtwyQJ4sqSiGaoCNjAE8YKfFlBvYBuYaeZ9FMdvLu6EVZmbBEHbUbJJbKWqS
-	lyRMgpTKSeNgRvcJj6fl0GdGSwTxILSho0ycD5w744QEZObgnXv0y6XEgcLO0LSiPsyt
-	F9nchHKhsR2XQwmxET0JJZPHR8af+J74aD+t24vslhTcnGA+6SmIHUK0lFsNbcT3XAMu
-	T7wg4kDE/f2GlZIsd7K690f2Lb2P/v5R+iK66owlv7LERcJHTYqVE4UE4LWOEsqatyKa
-	ci9/22od4aIkKrj52M/w6li/tnBLmIcuGx/jRwtVBjruOhmYBGWw0wtNT+rAvX14NPLj
-	nkBw==
-X-Gm-Message-State: APjAAAW9IuCzbqzrHriCHkLF2fg5g3ooiJymGHEBBu12W7kg4Fpna5f8
-	x5cVGvOKMQPUGskbZzC/FhALKMMI
-X-Google-Smtp-Source: APXvYqx9Vf4vrdZS+aWkvxUMLenKkuYs5FDtxIuedBwJUYcK1vMhZE+ZXzEUvJsYLrncURG4uTmT5A==
-X-Received: by 2002:a05:6000:1051:: with SMTP id
-	c17mr202954wrx.124.1571266105859; 
-	Wed, 16 Oct 2019 15:48:25 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F0A1D63A9BE116FE394DBDF.dip0.t-ipconnect.de.
-	[2003:f0:7f0a:1d63:a9be:116f:e394:dbdf])
-	by smtp.gmail.com with ESMTPSA id d4sm276939wrc.54.2019.10.16.15.48.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 16 Oct 2019 15:48:25 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Oct 2019 00:48:17 +0200
-Message-Id: <20191016224817.16707-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Wed, 16 Oct 2019 20:24:09 -0700 (PDT)
+Received: from localhost (128.224.158.241) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Wed, 16 Oct 2019 20:24:08 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 17 Oct 2019 11:24:05 +0800
+Message-ID: <20191017032405.14893-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [PATCH] libmbim: upgrade 1.18.0 -> 1.20.0
+X-Originating-IP: [128.224.158.241]
+Subject: [meta-networking][PATCH] ipvsadm: install initscript to /etc/init.d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,37 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Oct 2019 22:48:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 17 Oct 2019 03:24:08 -0000
+Content-Type: text/plain
 
-Fixes build errors that popped up by upgrade of glib-2.0 to 2.62.1 in
-oe-core/master [1]
+Move initscript from /etc/rc.d/init.d to /etc/init.d
 
-[1] http://lists.openembedded.org/pipermail/openembedded-core/2019-October/287944.html
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../libmbim/{libmbim_1.18.0.bb => libmbim_1.20.0.bb}          | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/libmbim/{libmbim_1.18.0.bb => libmbim_1.20.0.bb} (82%)
+ meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.18.0.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.20.0.bb
-similarity index 82%
-rename from meta-oe/recipes-connectivity/libmbim/libmbim_1.18.0.bb
-rename to meta-oe/recipes-connectivity/libmbim/libmbim_1.20.0.bb
-index 9f59ad6b4..17d784766 100644
---- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.18.0.bb
-+++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.20.0.bb
-@@ -14,5 +14,5 @@ inherit autotools pkgconfig bash-completion
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-            file://clang.patch \
- "
--SRC_URI[md5sum] = "840cd133bc0f715a7ee4797dd9ac5562"
--SRC_URI[sha256sum] = "6cf40128d83d087946a7d8577e735526202e034d52f90047735329609097b282"
-+SRC_URI[md5sum] = "b5506db07fb2a0b118e0d6e59b3d5b8f"
-+SRC_URI[sha256sum] = "2cf7c6c7aa9e962a589f61bff2766035b61792ef961131a21fcbbe043f91a866"
+diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
+index 22cb88ac1..b375ca94e 100644
+--- a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
++++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
+@@ -34,7 +34,9 @@ do_compile() {
+ }
+ 
+ do_install() {
+-    sed -i -e "s;SBIN\t\t= \$(BUILD_ROOT)/sbin;SBIN\t\t= \$(BUILD_ROOT)/$base_sbindir;" ${S}/Makefile
++    sed -i -e "s;SBIN\t\t= \$(BUILD_ROOT)/sbin;SBIN\t\t= \$(BUILD_ROOT)$base_sbindir;" \
++        -e "s;INIT\t\t= \$(BUILD_ROOT)/etc/rc.d/init.d;INIT\t\t= \$(BUILD_ROOT)${sysconfdir}/init.d;" \
++        ${S}/Makefile
+     oe_runmake 'BUILD_ROOT=${D}' install
+ }
+ 
 -- 
-2.21.0
+2.17.1
 
 
