@@ -1,47 +1,61 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 066287F69C
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 94FD7731CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 20:45:22 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id p14so3855564wro.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 13:45:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=kiYITeFg7ubMe5TlhR1NmOOfrwpb9MhoDKi48LYBNdM=;
-	b=ofhW+GFa9nqpIKQCpGcMeT7BHwPqtgEiHiet4SqVpRCYryi5RUZFwJhgWnFPDMXDby
-	XZxTcFgKYxNtkVn8a50YKkSeSIzuKwZsDBVjVC43WcdKbrrCp8IwmgytztTR88dhH6re
-	7U/kViLMJTxxiXA/IzPM6Lvq/AXCWJWerHrHdkUVSXIjDjpzyKG2WLijs33FxMVKumJz
-	0feF+0P5N0KsUvjuU/IfF2i0y5Yw/BV7j0OC4PVGXzCPdmIOLbknjUBjnvjCm0RSz7yE
-	8mZI9NgWH3PzdM/HjzJnslURZaW4jZMoGOrhJyjsrol+XWSEr23WQ/AiStxHGqVG5b7m
-	XI1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=kiYITeFg7ubMe5TlhR1NmOOfrwpb9MhoDKi48LYBNdM=;
-	b=dxFZBhwVF2FAtJ5k21Nj4Kl61DNRAfc+tAARD7Avx35VOi/+cgTZBZteuvhpyKApcI
-	Tk8qBwToeENdIwx/7I8NrwyyMVXyRsBXP9V5tTk5XDfzL3zsyIEJXofit7C3tCv/knZ7
-	i88qNK31by/q4v4WkFRucea/2KrO1BVhz6Z0sn3eqBeqfajchxzcilD1FY8gkRdkCbVw
-	jYfyCZcZMaFTP90z9kwr34EJV85jNTo4+S7CgHpdpQf6SDXzvRxBsX67NhW2jsJPl4bE
-	62qOXaXzBaFei7cLYi3PaWRGsf1ZQg8OgoyWf5BNEmlaK1iMYXz7KV07O9yF9Ht7/WF7
-	0SUQ==
-X-Gm-Message-State: APjAAAX9DL839QZblBsU+3dH9gmA+enetr5P3AipgyQs/9PCwcNE5vW1
-	1RRphYSRZDjGNm2wVa4mqp25bRP/
-X-Google-Smtp-Source: APXvYqwrJWLZCpD0rsk9LNE5KNbBjJZM+3WtlT4nrEz+yuf1LlGr8HoSJSJJmaa43UybZZ94N4mVyA==
-X-Received: by 2002:adf:e302:: with SMTP id b2mr4356907wrj.298.1571345123446; 
-	Thu, 17 Oct 2019 13:45:23 -0700 (PDT)
-Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id u1sm4040816wru.90.2019.10.17.13.45.22
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 17 Oct 2019 13:45:22 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Oct 2019 20:45:24 +0000
-Message-Id: <20191017204524.625-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][warrior][PATCH] protobuf-c: fix race condition
+	Thu, 17 Oct 2019 21:12:29 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id E2308184A2;
+	Thu, 17 Oct 2019 23:12:29 +0200 (CEST)
+X-Axis-User: NO
+X-Axis-NonUser: YES
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id M0uE1771GXQp; Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
+Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 407AD1849F;
+	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 23AC01A081;
+	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
+Received: from boulder02.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 178901A07C;
+	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder02.se.axis.com (Postfix) with ESMTP;
+	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
+Received: from XBOX08.axis.com (xbox08.axis.com [10.0.15.178])
+	by thoth.se.axis.com (Postfix) with ESMTP id 0AA4E2FA9;
+	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
+Received: from XBOX03.axis.com (10.0.5.17) by XBOX08.axis.com (10.0.15.178)
+	with Microsoft SMTP Server (TLS) id 15.0.1395.4;
+	Thu, 17 Oct 2019 23:12:27 +0200
+Received: from XBOX03.axis.com ([fe80::e49e:4060:87cc:61a]) by XBOX03.axis.com
+	([fe80::e49e:4060:87cc:61a%22]) with mapi id 15.00.1365.000;
+	Thu, 17 Oct 2019 23:12:27 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Tom Rini <trini@konsulko.com>
+Thread-Topic: [oe] [meta-oe][PATCHv2] pipewire: Initial add of 0.2.7
+Thread-Index: AQHVhPJHHb7YltMhkUWhTl2xMdK7lqde3lfw///iBwCAAJQs8A==
+Date: Thu, 17 Oct 2019 21:12:27 +0000
+Message-ID: <11adeb7603d84ebc941d0835c5a00f0b@XBOX03.axis.com>
+References: <20191017135309.32441-1-trini@konsulko.com>
+	<a481c7b712504bb4a40364fab7ff1a0b@XBOX03.axis.com>
+	<20191017141932.GJ16029@bill-the-cat>
+In-Reply-To: <20191017141932.GJ16029@bill-the-cat>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
+MIME-Version: 1.0
+X-TM-AS-GCONF: 00
+Cc: George Kiagiadakis <george.kiagiadakis@collabora.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	=?iso-8859-1?Q?Jan-Simon_M=F6ller?= <jsmoeller@linuxfoundation.org>
+Subject: Re: [meta-oe][PATCHv2] pipewire: Initial add of 0.2.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,78 +68,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 20:45:23 -0000
+X-List-Received-Date: Thu, 17 Oct 2019 21:12:30 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-From: "Qi.Chen@windriver.com" <Qi.Chen@windriver.com>
+> -----Original Message-----
+> From: Tom Rini <trini@konsulko.com>
+> Sent: den 17 oktober 2019 16:20
+> To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+> Cc: openembedded-devel@lists.openembedded.org; George Kiagiadakis
+> <george.kiagiadakis@collabora.com>; Jan-Simon M=F6ller
+> <jsmoeller@linuxfoundation.org>
+> Subject: Re: [oe] [meta-oe][PATCHv2] pipewire: Initial add of 0.2.7
+>=20
+> On Thu, Oct 17, 2019 at 02:11:11PM +0000, Peter Kjellerstedt wrote:
+>=20
+> > Just to add to this, I have attached a recipe for pipewire that we=20
+> > used to use (we have not used it for a while so it is not up-to-date).=
+=20
+> > It should hopefully give you some more ideas. E.g., it uses automatic
+> > splitting of all the spa and module packages similar to how the=20
+> > GStreamer plugins are automatically split into separate packages.
+>=20
+> I hesitate on adding stuff like this right now in that with 0.3 (and
+> audio support) a bunch more stuff changes.  One of my goals right now
+> is to get pipewire 0.2.7 in such that it meets Andreas' needs and then
+> with 0.3 later being able to confirm his use case still works when=20
+> updating.
+>=20
+> --
+> Tom
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Sinan Kaya <okaya@kernel.org>
-(cherry picked from commit 489d3b4b932ee8016d792341f8ea5836a9522cd4)
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../0001-avoid-race-condition.patch           | 36 +++++++++++++++++++
- .../protobuf/protobuf-c_1.3.1.bb              |  3 +-
- 2 files changed, 38 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
+As I wrote, it was mainly to give you more ideas. Since we were sitting=20
+on them, but not using them ourselves, I thought it better to pass them=20
+along. Then you, or anyone else, can use them to improve the recipe at=20
+a convenient time.
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
-new file mode 100644
-index 0000000000..4fc7703d81
---- /dev/null
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
-@@ -0,0 +1,36 @@
-+From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00 2001
-+From: Chen Qi <Qi.Chen@windriver.com>
-+Date: Sun, 29 Sep 2019 17:20:42 +0800
-+Subject: [PATCH] avoid race condition
-+
-+It's possible that the cxx-generate-packed-data.cc is compiled
-+while the t/test-full.pb.h is being generated. This will result
-+the following error.
-+
-+  DEBUG:	./t/test-full.pb.h:4:0: error: unterminated #ifndef
-+  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
-+
-+Add a dependency to avoid such problem.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-+---
-+ Makefile.am | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index b0cb065..1608ae0 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -156,6 +156,7 @@ noinst_PROGRAMS += \
-+ t_generated_code2_cxx_generate_packed_data_SOURCES = \
-+ 	t/generated-code2/cxx-generate-packed-data.cc \
-+ 	t/test-full.pb.cc
-++t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
-+ $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.h
-+ t_generated_code2_cxx_generate_packed_data_CXXFLAGS = \
-+ 	$(AM_CXXFLAGS) \
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-index 7ef0300925..17f92f04bb 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-@@ -15,7 +15,8 @@ DEPENDS = "protobuf-native protobuf"
- PV .= "+git${SRCPV}"
- SRCREV = "269771b4b45d3aba04e59569f53600003db8d9ff"
- 
--SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
-+SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
-+           file://0001-avoid-race-condition.patch"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.17.1
+//Peter
 
 
