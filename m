@@ -1,53 +1,55 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id A51267F64A
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id A75667F69A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 20:44:10 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id p14so3852303wro.4
+	Thu, 17 Oct 2019 20:44:54 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id b24so3913079wmj.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 13:44:11 -0700 (PDT)
+	Thu, 17 Oct 2019 13:44:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=MOXwFI32mHuziiRQ69OQ0+upUBi/MxNH4f7jARiShEQ=;
-	b=rI6ohaz+UMHajL8MjaCrIQuC7b0hRzzbCgr6gRaKm44y9WY7PfROYxjraNhLtOVdGI
-	OHupF/CHRUcPiZWzlHkdZwy6tSFtlqCStdiVtbrFCotAm/4IUsURZuSok4vbaO+QsPNt
-	+k2qT2cJ1zqMI/b2xXyFa4G6oeSq5lsGHUgWn/4vVkXOH0ok3+Qs1GuiUtHd8Bqwebab
-	ot5VUpOjcvuyC9uuNiIrB0G0xin15S+ReVqwzvtkk5vMruIc1mq3eYxf1tRkEy8RM4TO
-	aO/uYDIvKjRf3NXJbkgjVrRsTvpG2bnL6E9HEz4ammoBMErm1h/hZu6mFrAmrSgCArEw
-	Nmzg==
+	bh=5ZBntD9vuOSnAttUeDdxEjbeNDxk8g4VCxH+3gmsvds=;
+	b=dvv5zyKX48AwVGcdiR7EDwWcGUmXhyBxMTwx79pKRGWt+ky81Trx73XIDemAsfmT3z
+	bkQzle9fKR+pEjJvMgM/wmGog5FDnzK31Alx2DDt2RNvOqk843mXa13Hc6oF2r3ZlY7v
+	RQ60W0pyV0g7vkslT8r+3C++4wMuofYxyfkGc2cK99+ChOlruEjVeTeh3bArxhFTktzP
+	OTibZ+zZs9V5NkWVwDiH5lNAg7PMnjjsih9ulHt8qJyZh0lzybfKwOAFBcec7SIT/P0k
+	CBrXC4VGlWSCcPhBslVgeaG8CzFwTjsWwjgQh/sbsEcEf0l39CU/NGtTxk5PmJFI0BwV
+	3eyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=MOXwFI32mHuziiRQ69OQ0+upUBi/MxNH4f7jARiShEQ=;
-	b=stkbxwZPOUA8a+ltA5wHpzeH50T6hXv/mdALC16UnH1IFoDzFmhIf+E+G86v/3Ig/3
-	Pxscw9N/f8W9Yt+a2MVhkfPPrr72/IukWaAedFz9W6cTl4LSveUpS/MeWmVdj/5u/BXK
-	sWAcbUMgF6a38ROavrniRf4GXMXQxmkFa4HzmNYnbcVhz6vFr3QzUJzsNuYDZpz5H9gN
-	vCVi+1sBLTe20GZUlZhyzZsB/z8wAMOizSiOGUR4qrlWMsHRyqXJdtekGgLI/p0OESH0
-	ULI0QUoGOEl778zfOrjHtQr8Ijjo6jRAz9hWWwNoC7YdkQJvYLDFSkK24hTBOJVLOgGQ
-	kjWw==
-X-Gm-Message-State: APjAAAU4IdWWWGlMlw5lmCw3oLGoqqgfVP/XBsy9QiMzLjjD/eV/yF0P
-	ie/4Ct6TNBY6bN5O4VRL2Cw=
-X-Google-Smtp-Source: APXvYqztZ14VB8ANRnLfRTsHubV8O4NZgPRoab+D3gKy4oOXmlAJOYsuHfGHiMPK9XAQBnX11rnOKg==
-X-Received: by 2002:adf:ed52:: with SMTP id u18mr4960569wro.16.1571345051106; 
-	Thu, 17 Oct 2019 13:44:11 -0700 (PDT)
+	bh=5ZBntD9vuOSnAttUeDdxEjbeNDxk8g4VCxH+3gmsvds=;
+	b=sGqimSpmwRMLl5W72CkjP38rHh6Kvoafy1mdzntUI7NYdjYLvJFoAVx5TnNA1Bd5Zt
+	jIY3p01VtGimu24bSK3vSlyaKn3En4Q6qYY0LFIzG+RPdIblrj9HTRXsBC2OkbkayHw8
+	mV36yqnqYgU8+DehathOZbXqB33LGfb/k+85VAwSQy+yYxPr6mPfWFI0KpefQCIWydPK
+	kmbUzLGuvcZME9aGCiJBrxNZA3HTRAbC9Bwei7MraTDrt++di576Xhga+oyQAylUsDMJ
+	J0FEAnoXWh0b7jo7IPgVoBcbM88ODlh59G90drs/l5eHzxeK2xl628v0xkcR5TK7wX9J
+	tx3Q==
+X-Gm-Message-State: APjAAAUk5reebged6jPHXauloH/GxSLJ1DfzQB3Ep9LdnU+ssyNmhvnm
+	COFxaB4oE6KurG6qAvMser8=
+X-Google-Smtp-Source: APXvYqy1UTle/ih1TBPykrIJrH8I6aSjxg0EI+r2NwrHua1ioiODBkuzeqXs3txdZ7RoLtqLlWquqg==
+X-Received: by 2002:a05:600c:40f:: with SMTP id
+	q15mr4432034wmb.30.1571345095273; 
+	Thu, 17 Oct 2019 13:44:55 -0700 (PDT)
 Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id j19sm2793682wre.0.2019.10.17.13.44.10
+	by smtp.gmail.com with ESMTPSA id
+	y19sm3100682wmi.13.2019.10.17.13.44.54
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 17 Oct 2019 13:44:10 -0700 (PDT)
+	Thu, 17 Oct 2019 13:44:54 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 17 Oct 2019 22:44:14 +0200
-To: Chen Qi <Qi.Chen@windriver.com>
-Message-ID: <20191017204414.GB1499@jama>
-References: <20190929092956.13147-1-Qi.Chen@windriver.com>
+Date: Thu, 17 Oct 2019 22:44:58 +0200
+To: Sinan Kaya <okaya@kernel.org>
+Message-ID: <20191017204458.GC1499@jama>
+References: <20191017033946.16494-1-okaya@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20190929092956.13147-1-Qi.Chen@windriver.com>
+In-Reply-To: <20191017033946.16494-1-okaya@kernel.org>
 User-Agent: Mutt/1.12.2 (2019-09-21)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] protobuf-c: fix race condition
+Subject: Re: [meta-oe][thud][PATCH] protobuf-c: fix race condition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,23 +62,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 20:44:10 -0000
-X-Groupsio-MsgNum: 80209
+X-List-Received-Date: Thu, 17 Oct 2019 20:44:54 -0000
+X-Groupsio-MsgNum: 80210
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="s2ZSL+KKDSLx8OML"
+	protocol="application/pgp-signature"; boundary="kVXhAStRUZ/+rrGn"
 Content-Disposition: inline
 
---s2ZSL+KKDSLx8OML
+--kVXhAStRUZ/+rrGn
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Sep 29, 2019 at 05:29:56PM +0800, Chen Qi wrote:
+On Thu, Oct 17, 2019 at 03:39:46AM +0000, Sinan Kaya wrote:
+> From: "Qi.Chen@windriver.com" <Qi.Chen@windriver.com>
+>=20
 > Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Sinan Kaya <okaya@kernel.org>
+> (cherry picked from commit 489d3b4b932ee8016d792341f8ea5836a9522cd4)
+
+Yes this is needed in thud as well, but first it should be backported to
+warrior as well, I'll send separate patch for that.
+
 > ---
 >  .../0001-avoid-race-condition.patch           | 36 +++++++++++++++++++
->  .../protobuf/protobuf-c_1.3.2.bb              |  1 +
->  2 files changed, 37 insertions(+)
+>  .../protobuf/protobuf-c_1.3.1.bb              |  3 +-
+>  2 files changed, 38 insertions(+), 1 deletion(-)
 >  create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avo=
 id-race-condition.patch
 >=20
@@ -104,18 +115,6 @@ ion.patch
 > +Add a dependency to avoid such problem.
 > +
 > +Upstream-Status: Pending
-
-Thanks for this patch, it seems to indeed fix this issue, I've reported
-a while ago:
-https://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg6=
-4363.html
-
-I think the upstream would be interested in this fix as well, see:
-https://github.com/protobuf-c/protobuf-c/commit/b0bb56303366e2c072ee38eb5f1=
-f11251b07239c
-
-Cheers,
-
 > +
 > +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 > +---
@@ -137,21 +136,23 @@ Cheers,
 > +--=20
 > +2.17.1
 > +
-> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb b/meta=
--oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
-> index 6d1ffc3f4..b92f82dec 100644
-> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
-> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
-> @@ -15,6 +15,7 @@ DEPENDS =3D "protobuf-native protobuf"
->  SRCREV =3D "1390409f4ee4e26d0635310995b516eb702c3f9e"
+> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb b/meta=
+-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
+> index 7ef030092..17f92f04b 100644
+> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
+> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
+> @@ -15,7 +15,8 @@ DEPENDS =3D "protobuf-native protobuf"
+>  PV .=3D "+git${SRCPV}"
+>  SRCREV =3D "269771b4b45d3aba04e59569f53600003db8d9ff"
 > =20
->  SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git \
-> +           file://0001-avoid-race-condition.patch \
->            "
+> -SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git"
+> +SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git \
+> +           file://0001-avoid-race-condition.patch"
 > =20
 >  S =3D "${WORKDIR}/git"
+> =20
 > --=20
-> 2.17.1
+> 2.23.0
 >=20
 > --=20
 > _______________________________________________
@@ -162,15 +163,15 @@ Cheers,
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---s2ZSL+KKDSLx8OML
+--kVXhAStRUZ/+rrGn
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXajSnQAKCRA3VSO3ZXaA
-HArlAKCArgrqgz9t9Wd8xbnnq4p+vMQ+vwCgoxgloIRxff04wn1QNVStr9ZUkn4=
-=rh7d
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXajSyQAKCRA3VSO3ZXaA
+HOY9AKCq2xnisEDh88Fs6LTX90TGZZFbdQCeLZHyWb/qupefFY1loLVYM2J7Je4=
+=wO38
 -----END PGP SIGNATURE-----
 
---s2ZSL+KKDSLx8OML--
+--kVXhAStRUZ/+rrGn--
