@@ -1,24 +1,64 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id F1E357F645
+Return-Path: <christophe.priouzeau@st.com>
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+	[62.209.51.94])
+	by mail.openembedded.org (Postfix) with ESMTP id 4557B7F593
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 12:53:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id x9HCrqwB019285
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 05:53:52 -0700 (PDT)
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 17 Oct 2019 05:53:51 -0700
-From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Oct 2019 08:53:51 -0400
-Message-ID: <20191017125351.501-1-Trevor.Gamblin@windriver.com>
-X-Mailer: git-send-email 2.18.1
+	Thu, 17 Oct 2019 13:03:09 +0000 (UTC)
+Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
+	by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+	x9HD1nao024888; Thu, 17 Oct 2019 15:03:08 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+	h=from : to : subject :
+	date : message-id : references : in-reply-to : content-type :
+	content-id :
+	content-transfer-encoding : mime-version; s=STMicroelectronics;
+	bh=osXdz/K443YAnkfJTXNkG5rHQK3h81rUVMJ/cmf695I=;
+	b=eiCKztg4+NUJa19Uxclh/bf617lT+JEvt9fl/RGgnp06b/YehoAcDkFQVPvdQxPfIhD1
+	lVPRxPO/zx9nFmi2//yERefgU3FkK3RoL/ZoXrK41EzzxlHbPvH6bbPJ98rv2LA4wt7q
+	D3ezGhLSOCNlo/JWBxR2+YDywhGAR5AfbR/E1w2qfTnMJmFjJpTREYL2hmw7MQZl/xie
+	V6v7JeINPX+LlSma1+SVhiSIiRQ7ETIDxhhfMRHzbZXPiqbfRmCHw9m4lm/gMX6ZUoCH
+	ASMUDHoZQdWe5K8GBxu/LRUrENwdtY1fv4W1LDBLaDxr7vCAwbPG7aePV4AWoSZ10PR8
+	1g== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+	by mx07-00178001.pphosted.com with ESMTP id 2vk4kxbx3e-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT); Thu, 17 Oct 2019 15:03:08 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9E2EF100034;
+	Thu, 17 Oct 2019 15:03:03 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 95A432074F1; 
+	Thu, 17 Oct 2019 15:03:03 +0200 (CEST)
+Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE2.st.com
+	(10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2;
+	Thu, 17 Oct 2019 15:03:03 +0200
+Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
+	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
+	15.00.1347.000; Thu, 17 Oct 2019 15:03:03 +0200
+From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
+To: akuster808 <akuster808@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-xfce][PATCH 1/3] xfce4-mpc-plugin: Clarify BSD
+	license variant
+Thread-Index: AQHVhALripn2gCdeWUKSVX5TGB8JT6ddV8OAgAFVGgA=
+Date: Thu, 17 Oct 2019 13:03:03 +0000
+Message-ID: <f8818f99-5a7e-9f0f-6667-e60abb40ecad@st.com>
+References: <20191016092013.6460-1-christophe.priouzeau@st.com>
+	<f4efa716-3f05-8e5a-6d39-6182717f3a96@gmail.com>
+In-Reply-To: <f4efa716-3f05-8e5a-6d39-6182717f3a96@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.49]
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] quagga: fix PIDFile path for service files
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
+	definitions=2019-10-17_04:2019-10-17,2019-10-17 signatures=0
+Subject: Re: [meta-xfce][PATCH 1/3] xfce4-mpc-plugin: Clarify BSD license variant
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,130 +71,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 12:53:51 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 17 Oct 2019 13:03:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <A444C681534AAE49A11018C89190ABE0@st.com>
+Content-Transfer-Encoding: base64
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-
-Multiple quagga service files are causing the following type of message to
-appear during boot:
-
-/lib/systemd/system/zebra.service:10: PIDFile= references a path below legacy
-directory /var/run/, updating /var/run/quagga/zebra.pid → /run/quagga/zebra.pid;
-please update the unit file accordingly.
-
-Update the service files included as part of the recipe to use /run instead of
-/var/run as the PIDFile path.
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
----
- meta-networking/recipes-protocols/quagga/files/bgpd.service   | 4 ++--
- meta-networking/recipes-protocols/quagga/files/ospf6d.service | 4 ++--
- meta-networking/recipes-protocols/quagga/files/ospfd.service  | 4 ++--
- meta-networking/recipes-protocols/quagga/files/ripd.service   | 4 ++--
- meta-networking/recipes-protocols/quagga/files/ripngd.service | 4 ++--
- meta-networking/recipes-protocols/quagga/files/zebra.service  | 4 ++--
- 6 files changed, 12 insertions(+), 12 deletions(-)
-
-diff --git a/meta-networking/recipes-protocols/quagga/files/bgpd.service b/meta-networking/recipes-protocols/quagga/files/bgpd.service
-index 76f9f61e7..c1021fbd7 100644
---- a/meta-networking/recipes-protocols/quagga/files/bgpd.service
-+++ b/meta-networking/recipes-protocols/quagga/files/bgpd.service
-@@ -7,9 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/bgpd.conf
- [Service]
- Type=forking
- EnvironmentFile=-@SYSCONFDIR@/default/quagga
--PIDFile=@localstatedir@/run/quagga/bgpd.pid
-+PIDFile=/run/quagga/bgpd.pid
- ExecStart=@SBINDIR@/bgpd -d $bgpd_options -f @SYSCONFDIR@/quagga/bgpd.conf
--ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/bgpd.pid
-+ExecStopPost=@base_bindir@/rm -rf /run/quagga/bgpd.pid
- Restart=on-abort
- 
- [Install]
-diff --git a/meta-networking/recipes-protocols/quagga/files/ospf6d.service b/meta-networking/recipes-protocols/quagga/files/ospf6d.service
-index a2e493b42..99d0e6dca 100644
---- a/meta-networking/recipes-protocols/quagga/files/ospf6d.service
-+++ b/meta-networking/recipes-protocols/quagga/files/ospf6d.service
-@@ -7,9 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/ospf6d.conf
- [Service]
- Type=forking
- EnvironmentFile=-@SYSCONFDIR@/default/quagga
--PIDFile=@localstatedir@/run/quagga/ospf6d.pid
-+PIDFile=/run/quagga/ospf6d.pid
- ExecStart=@SBINDIR@/ospf6d -d $ospf6d_options -f @SYSCONFDIR@/quagga/ospf6d.conf
--ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/ospf6d.pid
-+ExecStopPost=@base_bindir@/rm -rf /run/quagga/ospf6d.pid
- Restart=on-abort
- 
- [Install]
-diff --git a/meta-networking/recipes-protocols/quagga/files/ospfd.service b/meta-networking/recipes-protocols/quagga/files/ospfd.service
-index 0c62cbce5..fe8343be1 100644
---- a/meta-networking/recipes-protocols/quagga/files/ospfd.service
-+++ b/meta-networking/recipes-protocols/quagga/files/ospfd.service
-@@ -7,9 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/ospfd.conf
- [Service]
- Type=forking
- EnvironmentFile=-@SYSCONFDIR@/default/quagga
--PIDFile=@localstatedir@/run/quagga/ospfd.pid
-+PIDFile=/run/quagga/ospfd.pid
- ExecStart=@SBINDIR@/ospfd -d $ospfd_options -f @SYSCONFDIR@/quagga/ospfd.conf
--ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/ospfd.pid
-+ExecStopPost=@base_bindir@/rm -rf /run/quagga/ospfd.pid
- Restart=on-abort
- 
- [Install]
-diff --git a/meta-networking/recipes-protocols/quagga/files/ripd.service b/meta-networking/recipes-protocols/quagga/files/ripd.service
-index 1d20389e8..7af65ca8a 100644
---- a/meta-networking/recipes-protocols/quagga/files/ripd.service
-+++ b/meta-networking/recipes-protocols/quagga/files/ripd.service
-@@ -7,9 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/ripd.conf
- [Service]
- Type=forking
- EnvironmentFile=-@SYSCONFDIR@/default/quagga
--PIDFile=@localstatedir@/run/quagga/ripd.pid
-+PIDFile=/run/quagga/ripd.pid
- ExecStart=@SBINDIR@/ripd -d $ripd_options -f @SYSCONFDIR@/quagga/ripd.conf
--ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/ripd.pid
-+ExecStopPost=@base_bindir@/rm -rf /run/quagga/ripd.pid
- Restart=on-abort
- 
- [Install]
-diff --git a/meta-networking/recipes-protocols/quagga/files/ripngd.service b/meta-networking/recipes-protocols/quagga/files/ripngd.service
-index 0355ad12a..9305f86be 100644
---- a/meta-networking/recipes-protocols/quagga/files/ripngd.service
-+++ b/meta-networking/recipes-protocols/quagga/files/ripngd.service
-@@ -7,9 +7,9 @@ ConditionPathExists=@SYSCONFDIR@/quagga/ripngd.conf
- [Service]
- Type=forking
- EnvironmentFile=-@SYSCONFDIR@/default/quagga
--PIDFile=@localstatedir@/run/quagga/ripngd.pid
-+PIDFile=/run/quagga/ripngd.pid
- ExecStart=@SBINDIR@/ripngd -d $ripngd_options -f @SYSCONFDIR@/quagga/ripngd.conf
--ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/ripngd.pid
-+ExecStopPost=@base_bindir@/rm -rf /run/quagga/ripngd.pid
- Restart=on-abort
- 
- [Install]
-diff --git a/meta-networking/recipes-protocols/quagga/files/zebra.service b/meta-networking/recipes-protocols/quagga/files/zebra.service
-index e4fb6c808..e34af7242 100644
---- a/meta-networking/recipes-protocols/quagga/files/zebra.service
-+++ b/meta-networking/recipes-protocols/quagga/files/zebra.service
-@@ -7,10 +7,10 @@ ConditionPathExists=@SYSCONFDIR@/quagga/zebra.conf
- [Service]
- Type=forking
- EnvironmentFile=-@SYSCONFDIR@/default/quagga
--PIDFile=@localstatedir@/run/quagga/zebra.pid
-+PIDFile=/run/quagga/zebra.pid
- ExecStartPre=@BASE_SBINDIR@/ip route flush proto zebra
- ExecStart=@SBINDIR@/zebra -d $zebra_options -f @SYSCONFDIR@/quagga/zebra.conf
--ExecStopPost=@base_bindir@/rm -rf @localstatedir@/run/quagga/zebra.pid
-+ExecStopPost=@base_bindir@/rm -rf /run/quagga/zebra.pid
- Restart=on-abort
- 
- [Install]
--- 
-2.18.1
-
+T24gMTAvMTYvMTkgNjo0MiBQTSwgYWt1c3RlcjgwOCB3cm90ZToNCj4NCj4gT24gMTAvMTYvMTkg
+MjoyMCBBTSwgQ2hyaXN0b3BoZSBQUklPVVpFQVUgd3JvdGU6DQo+PiBUaGUgTGljZW5zZSBvZiB4
+ZmNlNCBtcGMgcGx1Z2luIGlzIEJTRC0wLUNsYXVzZS4NCj4gU2hvdWxkbid0IHRoaXMgYWxzbyBi
+ZSBiYWNrcG9ydGVkIHRvIHN0YWJsZSBicmFuY2hlcz8NCkl0IGNhbiBiZSwgdGhlIG1haW4gZ29h
+bCBvZiB0aGlzIHNlcmllcyBvZiBwYXRjaCBhcmUgdG8gcmVtb3ZlIGFsbCBjYWxsIA0Kb2YgQlNE
+IGxpY2Vuc2UgYW5kDQpyZXBsYWNlIGl0IGJ5IHRoZSBjb3JyZXNwb25kZW50IEJEUyBsaWNlbnNl
+IChoZXJlIEJTRC0wLUNsYXVzZSkNCj4NCj4NCj4+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waGUg
+UHJpb3V6ZWF1IDxjaHJpc3RvcGhlLnByaW91emVhdUBzdC5jb20+DQo+PiAtLS0NCj4+ICAgLi4u
+L3hmY2U0LW1wYy1wbHVnaW4veGZjZTQtbXBjLXBsdWdpbl8wLjUuMi5iYiAgICAgICAgICAgICAg
+ICAgIHwgMiArLQ0KPj4gICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRp
+b24oLSkNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvbWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRpYS94
+ZmNlNC1tcGMtcGx1Z2luL3hmY2U0LW1wYy1wbHVnaW5fMC41LjIuYmIgYi9tZXRhLXhmY2UvcmVj
+aXBlcy1tdWx0aW1lZGlhL3hmY2U0LW1wYy1wbHVnaW4veGZjZTQtbXBjLXBsdWdpbl8wLjUuMi5i
+Yg0KPj4gaW5kZXggZmY5NTRhY2I4Li45ZDAzMWRkNTkgMTAwNjQ0DQo+PiAtLS0gYS9tZXRhLXhm
+Y2UvcmVjaXBlcy1tdWx0aW1lZGlhL3hmY2U0LW1wYy1wbHVnaW4veGZjZTQtbXBjLXBsdWdpbl8w
+LjUuMi5iYg0KPj4gKysrIGIvbWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRpYS94ZmNlNC1tcGMt
+cGx1Z2luL3hmY2U0LW1wYy1wbHVnaW5fMC41LjIuYmINCj4+IEBAIC0xLDcgKzEsNyBAQA0KPj4g
+ICBTVU1NQVJZID0gIlNpbXBsZSBjbGllbnQgcGx1Z2luIGZvciBNdXNpYyBQbGF5ZXIgRGFlbW9u
+Ig0KPj4gICBIT01FUEFHRSA9ICJodHRwczovL2dvb2RpZXMueGZjZS5vcmcvcHJvamVjdHMvcGFu
+ZWwtcGx1Z2lucy94ZmNlNC1tcGMtcGx1Z2luIg0KPj4gICBTRUNUSU9OID0gIngxMS9hcHBsaWNh
+dGlvbiINCj4+IC1MSUNFTlNFID0gIkJTRCINCj4+ICtMSUNFTlNFID0gIkJTRC0wLUNsYXVzZSIN
+Cj4+ICAgTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vQ09QWUlORzttZDU9MzYwNGQ5ODdlNmRm
+ZGZjNjcyYzc1NGQwODk1M2IwZTAiDQo+PiAgIA0KPj4gICBpbmhlcml0IHhmY2UtcGFuZWwtcGx1
+Z2lu
 
