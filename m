@@ -1,6 +1,6 @@
 Return-Path: <prvs=18631316f=alistair.francis@wdc.com>
 Received: from esa3.hgst.iphmx.com (esa3.hgst.iphmx.com [216.71.153.141])
-	by mail.openembedded.org (Postfix) with ESMTP id 49AFD7F69D
+	by mail.openembedded.org (Postfix) with ESMTP id 950EB7F6A9
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 17 Oct 2019 21:14:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
@@ -8,48 +8,48 @@ DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	t=1571346879; x=1602882879;
 	h=from:to:cc:subject:date:message-id:in-reply-to:
 	references:mime-version:content-transfer-encoding;
-	bh=xaBPsdLmq29afAShvmKNC6IyODs9Ho1i8C8DsFbcGmU=;
-	b=DUJB95p+TlBUZ8PZzBRQN+94vpRukGRQrZxilO6ZYub4h74PzlO4ISna
-	aUYuF/EprfOgpTDWT/OStoDFtkCsjMzifkJZ5IwLs/QlZX8JwQLL0K3Fj
-	sKLvJtMKnu+hAryuEJo2+gqSnsqKjPO1yhMt3+NWcVtHj9bf5MJbOnGGx
-	uXuD0+yk8Cm06JePiNqYLacf4XaFXDZYWNZOs5vM/b2wrwYUVt/ws2Jxq
-	nDO8Y/yqE4AzMLoqVd/lAcPe6+yzCQ4zXIhmxX3e4wIHMpoVex6Bmpj6l
-	TpdabZ1Pmw0ayxiKdUKR+PZLt/AxQgAzXCDxbVHNT5ZEjy2Stam6Bgc0r w==;
-IronPort-SDR: M+jMtv4z6/Y9HuHGQaQ9PHFIXv667eYFrkujwpRfvAAcRWWJwxYterHsHHV5L3U5l+miSREVG7
-	vXApIq48Sx46oVLMh1y5O5+bezXMCA5JcTJ6uqnC3MrhMcjRCy2eJwX2V6XfQGf+rhUuZ3NJkG
-	4xihCnW/WM8hXrc9DureBBwMN7Ye81iXn41+njeFiKlDTHh6ZR3ZmC+EDA2lMmE1yJ/GGJ0QTQ
-	7r8AWCgwoUOteqaeDHDYcsI7qJjZG47xI1JqkA6twLYMuslHKurr5ywEErdyypxQasRaodNp/h
-	Pq4=
-X-IronPort-AV: E=Sophos;i="5.67,309,1566835200"; d="scan'208";a="125212827"
+	bh=ZI5Ml/jWMkYhiFlX0OCT/l0HzI0E+Ynae2kVaDciqHo=;
+	b=porGSPJD3Y156abcJQhazcKj50krV3HUJaivNXgiWaWfOHpYYEqLXJ0S
+	Qw99AWTwEqjJs1WALxbH9c36OiqgG6Glq8TDh/On4DGHTQmhHZ7R2QNQu
+	L/dlvx/J9yyj+d3W2ommAruhtjeXIMrfE5gMPSOLraGK0kWQgdieQiHZ3
+	JT5PZDccCYEhtmCxFrwWGX4JJZv5oUVb4S4yF4CMJrpTUtRjbFA+lG0ga
+	xHVS2UQcL3mCo/CT+lgTQw4s2OUxwghXFgn4MeupIJin3LvB9gnTlXjLG
+	hsbhxClSZKdMRKre9wHFtfMtzx6+/USXuV7IsygS2u0TcROpJCnt/Dwpl A==;
+IronPort-SDR: ZY/oeqMDL3lub+P/Njnrb+cu+KgMcyQ5nJxLB5lj5792ELVSieoAJ+D2xFe2+VX1GxReITh7G2
+	cxL/Kw6dgdFJ1rwUi24+8RnajMat+P8MIzDsvYLGZgJ3Y/X0/r1VQwZWVlFQR/a3USmAHV1MXj
+	juZmDDz8dyRokjCsruXM4H4qc/Mb7A/MW1apP/NJm1CPne4d2t0NeD6SF846SlU+NrJU0mf4VT
+	D8pmKGoRPolr26y424NP4rv4p0zwZLQfn017dfdcEQ2npnzJwb7wtUinMZGPA1EFT9J/0nqY7z
+	Va4=
+X-IronPort-AV: E=Sophos;i="5.67,309,1566835200"; d="scan'208";a="125212828"
 Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
 	([199.255.45.14])
 	by ob1.hgst.iphmx.com with ESMTP; 18 Oct 2019 05:07:31 +0800
-IronPort-SDR: k6IlMn8L9JzDyn5an0rhwxuo4SvMX6PNv86T7Nc6TSDCEd5GfEnqJd+i4+lE5CcUzBXBa7qN2A
-	RXP8//tW5dnuzXzx+RCmaWAbG1tgqwWgbXtVSj4MP0SO5CsTGPKaLRqtGx6WL9FzLQ++Tre1tj
-	XhXvmcGPuqFZAFEV6ZlKFADvp0K8TosO7JCuxNLw8XVUmLNBiSH7NgFpJJnSUylG6qJF4dQw6r
-	zStAb3kW1NYS7gMMrmGyybxyubhW3l6LklqDlsG4HXNouOdYgbiZl4uI2GAbsdBsJpPqJZwMjj
-	mlcvfUjzsz7MnSnteOT4rjkx
+IronPort-SDR: AaRrgW19GJcJQ6A7lJQVjfG4Dq+kcKxyKt66t78wvC273/Wi+sN6heWQuxSV5FZ8XM7PJxq1po
+	uVcA8NMwjph0oBwNfLcLogUR7MM9IjlZLGm85EzKV+jNLPhcnRsmn53Atwdq40CeMy2F/oVakV
+	btiwRcsXWz0IMb1iPs2SWz3upUbGuQOmXvefF9kQd+KsCXPKuKfblQQs5snGN7wRrra8xgKEz6
+	s7xKKSWSQ9NuJz6tPUKh5UjtqPjgjZmI5k8txkhPzhLo1Iv92ysdOFZnI1oD+fTeqQ29K9y38i
+	tIu3G+U/QFGxqtba/5IXKQdN
 Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
 	by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
 	17 Oct 2019 14:03:10 -0700
-IronPort-SDR: +i92FxXPwbF0ds443GUKYVUSUwBEeSt2tPCm4V94yjBxpKiPc0e4jMORmMHq9qHC+KtP4LfefB
-	dOwGLEptXR5dLRtFOpa2aKJjOCVOfPUdfZNppmclh7Hs8bK97p30EfFt7T8ojiXOLatWsgbtuW
-	10Guwjiq1DwKdW4AXBt/MyjHDof1N27put0L9VuaVJA1RFC6c+pyqKmWiOVRwYY8wFevaniBse
-	BNU6ykdox2LK9EbqYIuLCq+p2dt5bbtAKxC5S2ykS7SOtiMvmmfrP7rEon6v/ZDthR+nddyOge
-	ACw=
+IronPort-SDR: vqi5TYN5vQvdz9jBfuZN07TsOsvFeKkh+3+YVGRsa7Al3jPH7mNp5CSb9YvAhPBVzwzlLwWkAj
+	Rr2LmfyU9rI0jU/Rm3H6hdagzTo75XCfn2Mxq4MwjExti1qoHRWCKJeDsJgYYYhfuTaFB1SviK
+	y/OMKpS8tBVs/olR9jUOTUcRXkjAAN9krlGZPgclFW4tSEfysVBV4nVT5zLY0xdGEgbtQOxRuu
+	iqoBN0WCC/morXuXhLZkFiJzLPovrs0mTT9LSsYe1PijOip4NxgD2wZrsbnKgWNHv/Q+85Z6D3
+	ynY=
 WDCIronportException: Internal
 Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
 	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
 	by uls-op-cesaip01.wdc.com with ESMTP; 17 Oct 2019 14:07:30 -0700
 From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Oct 2019 14:02:44 -0700
-Message-Id: <20191017210246.19550-3-alistair.francis@wdc.com>
+Date: Thu, 17 Oct 2019 14:02:45 -0700
+Message-Id: <20191017210246.19550-4-alistair.francis@wdc.com>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20191017210246.19550-1-alistair.francis@wdc.com>
 References: <20191017210246.19550-1-alistair.francis@wdc.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH v3 3/5] python3-msm: Initial commit of version 0.8.3
+Subject: [meta-python][PATCH v3 4/5] python3-msk: Initial commit of version 0.3.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,36 +67,27 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- .../python/python3-msm_0.8.3.bb               | 20 +++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-msm_0.8.3.bb
+ .../recipes-devtools/python/python3-msk_0.3.13.bb     | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-msm_0.8.3.bb b/meta-python/recipes-devtools/python/python3-msm_0.8.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb b/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
 new file mode 100644
-index 000000000..24e1ccb3b
+index 000000000..3f2aaf48d
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-msm_0.8.3.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "Mycroft Skill Manager, in python!"
-+HOMEPAGE = "https://github.com/MycroftAI/mycroft-skills-manager"
++++ b/meta-python/recipes-devtools/python/python3-msk_0.3.13.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "A tool to help with creating, uploading, and upgrading Mycroft skills on the skills repo."
++HOMEPAGE = "https://github.com/MycroftAI/mycroft-skills-kit"
 +LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
++LIC_FILES_CHKSUM = "file://README.md;md5=2f90e43663eddf1c33087419fbb35e28"
 +
-+SRC_URI[md5sum] = "d5f580c58389b337f5577cb92f36e788"
-+SRC_URI[sha256sum] = "c201785997f3b766ec376a89bbb3367889ac542183ca26733ffe002bb94917b4"
++SRC_URI[md5sum] = "11d9fc865ef627efe68f25fc113974e8"
++SRC_URI[sha256sum] = "55be86ff2cd0087016759f2b15b40861cda2a8d8a8d0c669fdacdf32a77a10da"
 +
 +inherit pypi setuptools3
 +
-+RDEPENDS_${PN} += "\
-+    python3-pako \
-+    python3-monotonic \
-+    python3-appdirs \
-+"
-+
-+do_install_append() {
-+    # Stop this from being installed
-+    rm -rf ${D}/usr/share
-+}
++RDEPENDS_${PN} += "python3-git"
 -- 
 2.23.0
 
