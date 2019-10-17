@@ -1,61 +1,55 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 94FD7731CF
+Return-Path: <prvs=18631316f=alistair.francis@wdc.com>
+X-Greylist: delayed 427 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 17 Oct 2019 21:14:36 UTC
+Received: from esa3.hgst.iphmx.com (esa3.hgst.iphmx.com [216.71.153.141])
+	by mail.openembedded.org (Postfix) with ESMTP id 86FD47F69D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 21:12:29 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id E2308184A2;
-	Thu, 17 Oct 2019 23:12:29 +0200 (CEST)
-X-Axis-User: NO
-X-Axis-NonUser: YES
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id M0uE1771GXQp; Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 407AD1849F;
-	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 23AC01A081;
-	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 178901A07C;
-	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder02.se.axis.com (Postfix) with ESMTP;
-	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
-Received: from XBOX08.axis.com (xbox08.axis.com [10.0.15.178])
-	by thoth.se.axis.com (Postfix) with ESMTP id 0AA4E2FA9;
-	Thu, 17 Oct 2019 23:12:28 +0200 (CEST)
-Received: from XBOX03.axis.com (10.0.5.17) by XBOX08.axis.com (10.0.15.178)
-	with Microsoft SMTP Server (TLS) id 15.0.1395.4;
-	Thu, 17 Oct 2019 23:12:27 +0200
-Received: from XBOX03.axis.com ([fe80::e49e:4060:87cc:61a]) by XBOX03.axis.com
-	([fe80::e49e:4060:87cc:61a%22]) with mapi id 15.00.1365.000;
-	Thu, 17 Oct 2019 23:12:27 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Tom Rini <trini@konsulko.com>
-Thread-Topic: [oe] [meta-oe][PATCHv2] pipewire: Initial add of 0.2.7
-Thread-Index: AQHVhPJHHb7YltMhkUWhTl2xMdK7lqde3lfw///iBwCAAJQs8A==
-Date: Thu, 17 Oct 2019 21:12:27 +0000
-Message-ID: <11adeb7603d84ebc941d0835c5a00f0b@XBOX03.axis.com>
-References: <20191017135309.32441-1-trini@konsulko.com>
-	<a481c7b712504bb4a40364fab7ff1a0b@XBOX03.axis.com>
-	<20191017141932.GJ16029@bill-the-cat>
-In-Reply-To: <20191017141932.GJ16029@bill-the-cat>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+	Thu, 17 Oct 2019 21:14:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1571346878; x=1602882878;
+	h=from:to:cc:subject:date:message-id:mime-version:
+	content-transfer-encoding;
+	bh=dUi8IQYpNgSwubVT4QFzpPvXMaQhIGUVPwl1xRRxmRY=;
+	b=jGPTNgml5BfN+Yp9tCzaB7kzMa/paE43mE5J9XpXifeG1Ds/RTRLfnSQ
+	RyiS1yYuYmP9Qt5nPAIvEtOgmbkp2G5qHBNiJHD2w+AfYYFSBblHo1dpO
+	5BxIrraR8omFhgUh9YC9iiT48hjNqLwSOBTyuTZSV6sP/Ip0ELxPeAfxV
+	YfMSpcM5oISns4uB90Sd7QIpyvVS6dP3obpk2JN51ShnZruJ2Q6P0rKxl
+	oF30rumpSXVHR5MclXs1Sc7xQp6ytvQVJLitUZSTyrGGMgecTQ93/Odjp
+	j0PNHTb1JMWK898rYODZTDpFixDRXXypuJ0hXjaC2XVZ5VLbeMd+y6KXV g==;
+IronPort-SDR: 2b45zjJdUZjqljNSBFroR0HIzhvElj6p48/f/87e0uSuOZXAQ+5+l9t+EhPmWLr00TEMLDSWyz
+	F7CcNugQ6xA8ePRQKSaW//2AoJd4gVp4daAuUTq3P2j8YatVkfGnu5mFB4mFWADmvlJgRgHNGZ
+	LQS1gHzNLZKXJGAXad7BVL2XhuBPBqqQxhKdcb6SUQb7wHKGfprECnCG0KOSLneJBxHAi26srH
+	1kXN0k1J1sYWOzmZa1/Ywoi93x1KrIowpyXCGE8y0BrBubKf3PNmP5AWfcyU5c3kGYRDjCflx3
+	LhU=
+X-IronPort-AV: E=Sophos;i="5.67,309,1566835200"; d="scan'208";a="125212825"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+	([199.255.45.14])
+	by ob1.hgst.iphmx.com with ESMTP; 18 Oct 2019 05:07:31 +0800
+IronPort-SDR: ILq3fzXKdlHypdpXo9j899yE2Y5zQi68Pl51bdsUv8A+8lypu3NOrfkMUdA/ynI10B4h/26xqy
+	QqHo2+vyPoz3vnH2d1iNahbbI6XajWGGPu+B6kEFUz/Ahx/caT2o6qLs0oVhpf78OJggBS4uPp
+	Su45kS4c2P9IF0KOdy6y9+v5I/jC0hAB+T673k+Xd6ZNZYURpuFNXtYGvCF7CVQNSNZLIc2qVm
+	dTiPhHaCNE/t55iBp/pBdhXTLTMICTk2PMNlFMCp8oCNr4v1XlEJ6UuKtZE/eDMpuiGivQCFlq
+	ATjAjqKgFMgAaZ0c0RUdkvjl
+Received: from uls-op-cesaip01.wdc.com ([10.248.3.36])
+	by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+	17 Oct 2019 14:03:09 -0700
+IronPort-SDR: bOVE3AWYYRXVBnAY+AWVoVTB4QduQxRR66lYisIhJsjPPHNT446+ePvkPUqXsyhfDnpavzdoSv
+	HpA93nX/rtw/irjxgUTnoCsUjdN2S8wHuVGafktIb+AvCd4OvWrmkRQ1AIUTmnfqf9arhZFSHI
+	etdskbBgMrNCYzqNwC2250VuQKHQN/OLWbrlq88nxuk2SwzJUs7m/8rWprhzOCMvJO369HCXiv
+	Zo6nr1k14LiELtPfJAyBcUDFe5QYhyqEN42jY1OyR6HS++KBg8/7JWm0yS6DugGemCmyK2Dt+C
+	F4o=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+	risc6-mainframe.int.fusionio.com) ([10.196.157.58])
+	by uls-op-cesaip01.wdc.com with ESMTP; 17 Oct 2019 14:07:29 -0700
+From: Alistair Francis <alistair.francis@wdc.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 Oct 2019 14:02:42 -0700
+Message-Id: <20191017210246.19550-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Cc: George Kiagiadakis <george.kiagiadakis@collabora.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	=?iso-8859-1?Q?Jan-Simon_M=F6ller?= <jsmoeller@linuxfoundation.org>
-Subject: Re: [meta-oe][PATCHv2] pipewire: Initial add of 0.2.7
+Subject: [meta-python][PATCH v3 1/5] python3-pako: Initial commit of version 0.2.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,43 +62,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 21:12:30 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Oct 2019 21:14:36 -0000
+Content-Transfer-Encoding: 8bit
 
-> -----Original Message-----
-> From: Tom Rini <trini@konsulko.com>
-> Sent: den 17 oktober 2019 16:20
-> To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> Cc: openembedded-devel@lists.openembedded.org; George Kiagiadakis
-> <george.kiagiadakis@collabora.com>; Jan-Simon M=F6ller
-> <jsmoeller@linuxfoundation.org>
-> Subject: Re: [oe] [meta-oe][PATCHv2] pipewire: Initial add of 0.2.7
->=20
-> On Thu, Oct 17, 2019 at 02:11:11PM +0000, Peter Kjellerstedt wrote:
->=20
-> > Just to add to this, I have attached a recipe for pipewire that we=20
-> > used to use (we have not used it for a while so it is not up-to-date).=
-=20
-> > It should hopefully give you some more ideas. E.g., it uses automatic
-> > splitting of all the spa and module packages similar to how the=20
-> > GStreamer plugins are automatically split into separate packages.
->=20
-> I hesitate on adding stuff like this right now in that with 0.3 (and
-> audio support) a bunch more stuff changes.  One of my goals right now
-> is to get pipewire 0.2.7 in such that it meets Andreas' needs and then
-> with 0.3 later being able to confirm his use case still works when=20
-> updating.
->=20
-> --
-> Tom
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+---
+v3:
+ - Fix package failure
 
-As I wrote, it was mainly to give you more ideas. Since we were sitting=20
-on them, but not using them ourselves, I thought it better to pass them=20
-along. Then you, or anyone else, can use them to improve the recipe at=20
-a convenient time.
+ .../recipes-devtools/python/python3-pako_0.2.3.bb   | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
 
-//Peter
+diff --git a/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb b/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
+new file mode 100644
+index 000000000..21c48fca6
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pako_0.2.3.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "The universal package manager library"
++HOMEPAGE = "https://github.com/MycroftAI/pako"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
++
++SRC_URI[md5sum] = "8eb7077075091c50e4b8a9f939607277"
++SRC_URI[sha256sum] = "6be55fd8c5a2a6f02974f37438c1c47a3d9e764ce81c9d0a1a8c9a1815a59778"
++
++inherit pypi setuptools3
++
++do_install_append() {
++    rm -rf ${D}/usr/share
++}
+-- 
+2.23.0
 
 
