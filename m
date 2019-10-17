@@ -1,64 +1,50 @@
-Return-Path: <christophe.priouzeau@st.com>
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
-	[62.209.51.94])
-	by mail.openembedded.org (Postfix) with ESMTP id 4557B7F593
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id DC24F7F666
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 13:03:09 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
-	by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
-	x9HD1nao024888; Thu, 17 Oct 2019 15:03:08 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
-	h=from : to : subject :
-	date : message-id : references : in-reply-to : content-type :
-	content-id :
-	content-transfer-encoding : mime-version; s=STMicroelectronics;
-	bh=osXdz/K443YAnkfJTXNkG5rHQK3h81rUVMJ/cmf695I=;
-	b=eiCKztg4+NUJa19Uxclh/bf617lT+JEvt9fl/RGgnp06b/YehoAcDkFQVPvdQxPfIhD1
-	lVPRxPO/zx9nFmi2//yERefgU3FkK3RoL/ZoXrK41EzzxlHbPvH6bbPJ98rv2LA4wt7q
-	D3ezGhLSOCNlo/JWBxR2+YDywhGAR5AfbR/E1w2qfTnMJmFjJpTREYL2hmw7MQZl/xie
-	V6v7JeINPX+LlSma1+SVhiSIiRQ7ETIDxhhfMRHzbZXPiqbfRmCHw9m4lm/gMX6ZUoCH
-	ASMUDHoZQdWe5K8GBxu/LRUrENwdtY1fv4W1LDBLaDxr7vCAwbPG7aePV4AWoSZ10PR8
-	1g== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx07-00178001.pphosted.com with ESMTP id 2vk4kxbx3e-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT); Thu, 17 Oct 2019 15:03:08 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9E2EF100034;
-	Thu, 17 Oct 2019 15:03:03 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 95A432074F1; 
-	Thu, 17 Oct 2019 15:03:03 +0200 (CEST)
-Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE2.st.com
-	(10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2;
-	Thu, 17 Oct 2019 15:03:03 +0200
-Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
-	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
-	15.00.1347.000; Thu, 17 Oct 2019 15:03:03 +0200
-From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-To: akuster808 <akuster808@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-xfce][PATCH 1/3] xfce4-mpc-plugin: Clarify BSD
-	license variant
-Thread-Index: AQHVhALripn2gCdeWUKSVX5TGB8JT6ddV8OAgAFVGgA=
-Date: Thu, 17 Oct 2019 13:03:03 +0000
-Message-ID: <f8818f99-5a7e-9f0f-6667-e60abb40ecad@st.com>
-References: <20191016092013.6460-1-christophe.priouzeau@st.com>
-	<f4efa716-3f05-8e5a-6d39-6182717f3a96@gmail.com>
-In-Reply-To: <f4efa716-3f05-8e5a-6d39-6182717f3a96@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.49]
+	Thu, 17 Oct 2019 13:03:28 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id u20so1117730plq.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Oct 2019 06:03:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=K7LuPo3g4LHzzqAV/wfconDw4ZSwoC6znY8Y1mzQS+g=;
+	b=N1I4ctyisctoXCx1zQ+5oxBL5bXJB5ZcjI5Z/X6yazoGnPJlq/jRH0YXDM+zRFL0bv
+	iAEYJfcbuIZ0bKNBWsJ9eHiswkooG/Eb9gban8Ix83FjhcZo1pAAdsdzbN2yKTQvYRuI
+	Xc5OZel4rLrLIqFryTt73plARVCmlgaMetXQeP2DkR/1/0VaVDZmxgPuM7DeWAamd3i3
+	TvGQiZ7zsafzfO3CeH/ogYxjx0Z4PSbMP2gUwVv/bRs+oAbLJmOwVBEgP/KSo7dSd1bR
+	2b3HFloZidbvXgnoLpITFlqkEUU+QOEj6H9xw1Ty5AYLRwc32OfdVZio9BRGIKds5eIY
+	3sNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=K7LuPo3g4LHzzqAV/wfconDw4ZSwoC6znY8Y1mzQS+g=;
+	b=KLyEe+bRtyyzzbDAJNurG3Ze4YuycvY50ZAGPzVpGHQnK1ZfeLyu7cXjUekNNDc0Qu
+	y9BpT7MpxI8L7zoD+B1INUCuzITHQC7MauJvsq98jviemXDJNjxWg6IBX/egnwxFgFbv
+	tfiUDEFh8AgyW4XTu+daXbXPUXF+tPa1mJs0Q23WIsoUepebDWUJu81M8WyCfsCkZaQH
+	ueMgA6bbcJq2r72RHcHggO73zMY0/4znrL++JcaS8JENm8y/Danby7FC1pzbdfo3+486
+	x/xHhLHSLO+9U11AyUOWwiwj9P2sc54wvnzvJAIY9MJ72zDwGXtAviTfMQO/bnDoo+Tz
+	pXUg==
+X-Gm-Message-State: APjAAAW21uPTKIfpPtXmdjMtAh7VXH6ba+hxRPJ6t9f3R/6ih0Fr5aDp
+	EcGzLpitB4B+JvqfquQYfrKSygKeADOufg==
+X-Google-Smtp-Source: APXvYqwThXdR1ub6RPvTV4bTjxxbSrs3I2GDu10/7p1E4c+QlTrzVATDQSHSpniySjWpfMBfsuNt8w==
+X-Received: by 2002:a17:902:aa8a:: with SMTP id
+	d10mr4001410plr.64.1571317409242; 
+	Thu, 17 Oct 2019 06:03:29 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::e34d])
+	by smtp.gmail.com with ESMTPSA id 14sm2877424pfn.21.2019.10.17.06.03.28
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 17 Oct 2019 06:03:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 17 Oct 2019 06:03:17 -0700
+Message-Id: <20191017130318.1978280-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
-	definitions=2019-10-17_04:2019-10-17,2019-10-17 signatures=0
-Subject: Re: [meta-xfce][PATCH 1/3] xfce4-mpc-plugin: Clarify BSD license variant
+Subject: [meta-oe][PATCH 1/2] pidgin-sipe: Upgrade to 1.25.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,34 +57,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 13:03:09 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <A444C681534AAE49A11018C89190ABE0@st.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 17 Oct 2019 13:03:29 -0000
+Content-Transfer-Encoding: 8bit
 
-T24gMTAvMTYvMTkgNjo0MiBQTSwgYWt1c3RlcjgwOCB3cm90ZToNCj4NCj4gT24gMTAvMTYvMTkg
-MjoyMCBBTSwgQ2hyaXN0b3BoZSBQUklPVVpFQVUgd3JvdGU6DQo+PiBUaGUgTGljZW5zZSBvZiB4
-ZmNlNCBtcGMgcGx1Z2luIGlzIEJTRC0wLUNsYXVzZS4NCj4gU2hvdWxkbid0IHRoaXMgYWxzbyBi
-ZSBiYWNrcG9ydGVkIHRvIHN0YWJsZSBicmFuY2hlcz8NCkl0IGNhbiBiZSwgdGhlIG1haW4gZ29h
-bCBvZiB0aGlzIHNlcmllcyBvZiBwYXRjaCBhcmUgdG8gcmVtb3ZlIGFsbCBjYWxsIA0Kb2YgQlNE
-IGxpY2Vuc2UgYW5kDQpyZXBsYWNlIGl0IGJ5IHRoZSBjb3JyZXNwb25kZW50IEJEUyBsaWNlbnNl
-IChoZXJlIEJTRC0wLUNsYXVzZSkNCj4NCj4NCj4+IFNpZ25lZC1vZmYtYnk6IENocmlzdG9waGUg
-UHJpb3V6ZWF1IDxjaHJpc3RvcGhlLnByaW91emVhdUBzdC5jb20+DQo+PiAtLS0NCj4+ICAgLi4u
-L3hmY2U0LW1wYy1wbHVnaW4veGZjZTQtbXBjLXBsdWdpbl8wLjUuMi5iYiAgICAgICAgICAgICAg
-ICAgIHwgMiArLQ0KPj4gICAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRp
-b24oLSkNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvbWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRpYS94
-ZmNlNC1tcGMtcGx1Z2luL3hmY2U0LW1wYy1wbHVnaW5fMC41LjIuYmIgYi9tZXRhLXhmY2UvcmVj
-aXBlcy1tdWx0aW1lZGlhL3hmY2U0LW1wYy1wbHVnaW4veGZjZTQtbXBjLXBsdWdpbl8wLjUuMi5i
-Yg0KPj4gaW5kZXggZmY5NTRhY2I4Li45ZDAzMWRkNTkgMTAwNjQ0DQo+PiAtLS0gYS9tZXRhLXhm
-Y2UvcmVjaXBlcy1tdWx0aW1lZGlhL3hmY2U0LW1wYy1wbHVnaW4veGZjZTQtbXBjLXBsdWdpbl8w
-LjUuMi5iYg0KPj4gKysrIGIvbWV0YS14ZmNlL3JlY2lwZXMtbXVsdGltZWRpYS94ZmNlNC1tcGMt
-cGx1Z2luL3hmY2U0LW1wYy1wbHVnaW5fMC41LjIuYmINCj4+IEBAIC0xLDcgKzEsNyBAQA0KPj4g
-ICBTVU1NQVJZID0gIlNpbXBsZSBjbGllbnQgcGx1Z2luIGZvciBNdXNpYyBQbGF5ZXIgRGFlbW9u
-Ig0KPj4gICBIT01FUEFHRSA9ICJodHRwczovL2dvb2RpZXMueGZjZS5vcmcvcHJvamVjdHMvcGFu
-ZWwtcGx1Z2lucy94ZmNlNC1tcGMtcGx1Z2luIg0KPj4gICBTRUNUSU9OID0gIngxMS9hcHBsaWNh
-dGlvbiINCj4+IC1MSUNFTlNFID0gIkJTRCINCj4+ICtMSUNFTlNFID0gIkJTRC0wLUNsYXVzZSIN
-Cj4+ICAgTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vQ09QWUlORzttZDU9MzYwNGQ5ODdlNmRm
-ZGZjNjcyYzc1NGQwODk1M2IwZTAiDQo+PiAgIA0KPj4gICBpbmhlcml0IHhmY2UtcGFuZWwtcGx1
-Z2lu
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../{pidgin-sipe_1.24.0.bb => pidgin-sipe_1.25.0.bb}       | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-support/pidgin/{pidgin-sipe_1.24.0.bb => pidgin-sipe_1.25.0.bb} (85%)
+
+diff --git a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.25.0.bb
+similarity index 85%
+rename from meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
+rename to meta-oe/recipes-support/pidgin/pidgin-sipe_1.25.0.bb
+index 7632fd2de7..1d739874be 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin-sipe_1.24.0.bb
++++ b/meta-oe/recipes-support/pidgin/pidgin-sipe_1.25.0.bb
+@@ -5,14 +5,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+ DEPENDS = "pidgin gmime intltool-native glib-2.0-native"
+ 
+-inherit pkgconfig
+-inherit autotools
++inherit autotools gettext pkgconfig
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/sipe/pidgin-sipe-${PV}.tar.xz \
+ "
+ 
+-SRC_URI[md5sum] = "b91106d28c235b347a63dcb676f7b66a"
+-SRC_URI[sha256sum] = "958803722b23d869131f76bd90df9da19116d4ca5a873e5253371479b7390f43"
++SRC_URI[md5sum] = "0e742f021dc8c3f17435aea05c3e0314"
++SRC_URI[sha256sum] = "738b121b11f2b3f1744150c00cb381222eb6cf67161a7742797eb4f03e64a2ba"
+ 
+ PACKAGECONFIG ??= "nss krb5"
+ PACKAGECONFIG[nss] = "--enable-nss=yes,--enable-nss=no,nss"
+-- 
+2.23.0
+
 
