@@ -1,25 +1,46 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AE797F35D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 95A1E7F579
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 03:24:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x9H3O9SJ003456
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 17 Oct 2019 03:28:42 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id u184so595076qkd.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 20:24:09 -0700 (PDT)
-Received: from localhost (128.224.158.241) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Wed, 16 Oct 2019 20:24:08 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Oct 2019 11:24:05 +0800
-Message-ID: <20191017032405.14893-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Wed, 16 Oct 2019 20:28:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=3nhUV6e6qe9odsyxM+llksw+Rq8UZZAGnq4enVsTozk=;
+	b=AasvMTYuworPeMnZZUc60/OZQZDvmRf20q4PDYYKIHiRW6tnkRGvU0sPtpfy71Prpd
+	rnJVPUNWESBiHcpQO8y9QMc9OdfesopJBkH1WhDwQ7aDq9361mQgt2M33PsiqUL+wVWF
+	IqUAnTprW59bHWnBG78jXfjTA86uQZP0pccmoLopkTZgobTikP4j8udyWQsFIYJ1kQHe
+	sFyqKjPhuzKW5rX9i9pvVg7+c1oCB1Pe2wFaATodB4DsC0iFfnQ2l9elcLjENiVo4mRg
+	x9fwhR9kKrB+UyVkaoYdSndO6tFrnT/2Vnu+wpzD2HBtVeXA28mfhX0PQMvErXNvcd7q
+	UOBQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=3nhUV6e6qe9odsyxM+llksw+Rq8UZZAGnq4enVsTozk=;
+	b=R3Oa5b6So2pzRYjrh2q67QbL0py1ZyxNljdOnfJyaZQpQyNV6BZCXe88B9cHl6dUPc
+	EuEWNk/zUQmw7NnrZTdTT/Z6T12zLrprSN/lCRx+6u/i5rIQ6H5z43C061VwSukXfLI8
+	gHoxLkTEw4PbXfYZRHLzNl/5JSRafc8IDyyPukkSte5VMyw++vrtJgOEf/0wAqiYrlyz
+	0d4lggHYC3GM9AU/+jSMnZuPB0FyKDsHmGXnB2CJl+3hbprVpjlZmwHBDY8ADhk4kHpX
+	nTl4IuiLgc6n9e3jWZYUo7Yzypw6pFOMzu85r5CYud5xI/ZyebMb3sCo/nIR6z5OXuXF
+	PCzA==
+X-Gm-Message-State: APjAAAXf9xDU0at0ZxY7Ga/MqZ8EQUJ1rKzQs8H57IEHEutofZCKrh4T
+	tIHlFtDKssjXKWLuUYBcZFz301DdNSTU6AO12O4=
+X-Google-Smtp-Source: APXvYqwjJKjqSHArtkOVnXVHVug3dfFz3nxE4i+RFeCoOeINnFnXICBvrlTzKc+v6Uh9UARH3NEnHgTapWmT9Iwpu8k=
+X-Received: by 2002:a37:b985:: with SMTP id j127mr1301405qkf.337.1571282922934;
+	Wed, 16 Oct 2019 20:28:42 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [128.224.158.241]
-Subject: [meta-networking][PATCH] ipvsadm: install initscript to /etc/init.d
+References: <1570962384-18643-1-git-send-email-ankit.tarot@gmail.com>
+In-Reply-To: <1570962384-18643-1-git-send-email-ankit.tarot@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 17 Oct 2019 08:58:16 +0530
+Message-ID: <CAMKF1spaP3ztOn+-Nyib8aR=7ZLwtATBe1mMvvbHKzTshhTOoQ@mail.gmail.com>
+To: Ankit Navik <ankit.tarot@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] glfw: Initial recipe for glfw
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,32 +53,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 03:24:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 17 Oct 2019 03:28:42 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Move initscript from /etc/rc.d/init.d to /etc/init.d
+fails to build https://errors.yoctoproject.org/Errors/Details/273662/
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
-index 22cb88ac1..b375ca94e 100644
---- a/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
-+++ b/meta-networking/recipes-support/ipvsadm/ipvsadm_1.30.bb
-@@ -34,7 +34,9 @@ do_compile() {
- }
- 
- do_install() {
--    sed -i -e "s;SBIN\t\t= \$(BUILD_ROOT)/sbin;SBIN\t\t= \$(BUILD_ROOT)/$base_sbindir;" ${S}/Makefile
-+    sed -i -e "s;SBIN\t\t= \$(BUILD_ROOT)/sbin;SBIN\t\t= \$(BUILD_ROOT)$base_sbindir;" \
-+        -e "s;INIT\t\t= \$(BUILD_ROOT)/etc/rc.d/init.d;INIT\t\t= \$(BUILD_ROOT)${sysconfdir}/init.d;" \
-+        ${S}/Makefile
-     oe_runmake 'BUILD_ROOT=${D}' install
- }
- 
--- 
-2.17.1
-
+On Sun, Oct 13, 2019 at 3:55 PM Ankit Navik <ankit.tarot@gmail.com> wrote:
+>
+> It adds generic recipe for glfw: a multi-platform library for OpenGL,
+> OpenGL ES, Vulkan, window and input.
+>
+> Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+> ---
+>  meta-oe/recipes-core/glfw/glfw_3.3.bb | 20 ++++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+>  create mode 100644 meta-oe/recipes-core/glfw/glfw_3.3.bb
+>
+> diff --git a/meta-oe/recipes-core/glfw/glfw_3.3.bb b/meta-oe/recipes-core/glfw/glfw_3.3.bb
+> new file mode 100644
+> index 0000000..b23d723
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/glfw/glfw_3.3.bb
+> @@ -0,0 +1,20 @@
+> +SUMMARY  = "A multi-platform library for OpenGL, OpenGL ES, Vulkan, window and input"
+> +HOMEPAGE = "https://www.glfw.org/"
+> +DESCRIPTION = "GLFW is an Open Source, multi-platform library for OpenGL, \
+> +OpenGL ES and Vulkan application development. It provides a simple, \
+> +platform-independent API for creating windows, contexts and surfaces, reading \
+> +input, handling events, etc."
+> +LICENSE  = "Zlib"
+> +LIC_FILES_CHKSUM = "file://LICENSE.md;md5=98d93d1ddc537f9b9ea6def64e046b5f"
+> +SECTION = "lib"
+> +
+> +inherit pkgconfig cmake
+> +
+> +S = "${WORKDIR}/git"
+> +SRC_URI = "git://github.com/glfw/glfw.git"
+> +SRCREV = "d25248343e248337284dfbe5ecd1eddbd37ae66d"
+> +
+> +EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
+> +
+> +DEPENDS = "libpng libglu zlib libxrandr libxinerama libxi libxcursor"
+> +REQUIRED_DISTRO_FEATURES = "x11"
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
