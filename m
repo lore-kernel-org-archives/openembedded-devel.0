@@ -1,31 +1,50 @@
-Return-Path: <okaya@kernel.org>
-X-Greylist: delayed 368 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 17 Oct 2019 03:45:55 UTC
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B5817F610
+Return-Path: <h4nn35.work@gmail.com>
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+	[209.85.210.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 7969A6C42C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 03:45:55 +0000 (UTC)
-Received: from
-	sinanubuntu1604.mkjiurmyylmellclgttazegk5f.bx.internal.cloudapp.net
-	(unknown [40.121.86.130])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 329202082C;
-	Thu, 17 Oct 2019 03:39:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1571283588;
-	bh=A0eJ+djK30YrTcIj0aeHVwPiWU5BVvyZuv9VQzaVD8E=;
-	h=From:To:Cc:Subject:Date:From;
-	b=2uL3wdBKhVWCSA9uBoVyzjyisrkNQb5KvRM69kCvQsXkt9w9PGHTLniwbk8Ob4M6i
-	tCT26v3qBfY11e8fS9VtezeSVST5lLKOpXtyJD9sFIFZ+9ljgMmeyvpYcZTLiM/ccH
-	EQiqwLqGG777zZnqkuRN2H4iRz+7fAU9gNvzjOcc=
-From: Sinan Kaya <okaya@kernel.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 17 Oct 2019 03:39:46 +0000
-Message-Id: <20191017033946.16494-1-okaya@kernel.org>
-X-Mailer: git-send-email 2.23.0
+	Thu, 17 Oct 2019 05:51:42 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id 21so829047otj.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Oct 2019 22:51:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=lnnxuA8Ynxuv4RutZrTzzrC6xGncqHuQp465UTmAviA=;
+	b=mVdHjD7rFj2oIu32sMvJAp0I3SK8BeV4WpwxZK2xsIctzOERHg0zgRaDxkuVOs26Jb
+	+x8k8KGBLmrr2nSyoF9DKALs0VpEh+Has61O3TJ04zUWdRYUYTeVpoGov6SN3BC1r8E3
+	CSd2BXRK17Hwd2qJGc8lcsrFAFriudiZpz+oAEDdlM/phHPZ8+MjsqT626FLuJbtHCeq
+	DXVdQQsYujE3DGNaKD+eTCNS2wHyQ+jYfZ/6XnWWtzBstP3VdJxL8dS9msQItvAhV7H8
+	k/ob88ty5k6BPleYYZCCnEsPt9LVckTonyclZmVx8MD2abdfEuGxFuoOm1eCWvLJm7Gp
+	3S5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=lnnxuA8Ynxuv4RutZrTzzrC6xGncqHuQp465UTmAviA=;
+	b=pAOWF7mePDfbzkJ9dzFvJqXx1C5U5aHJpmdB6Xq8L+2igpg70/yL90DmSBBSWhSFIH
+	jfCSSZhA7QRE670FtYQLgKVvZLRapvvW3MfmlfPcG4LqnYgQMtVGORKCCR7zlg9H6DcR
+	MY8u54mLXuajQcg62Q9C7XPyCgLpXMKGUEnN0ZqeyMfmjCdpwgmexHOlQImwdSjGOdYY
+	AfDhxf/ROJmB9azL9XVM5pDkSCDvhwQIO2NxQAcqF1GVktLG71cM1i53BdZSxXTyKgLY
+	B/DfMqUrh6lAaigwbmTzZiUNPaLCU5qJ+EQY/F3Osmx9RVo7ISxieCumH4R7rDvHtZtW
+	0CVg==
+X-Gm-Message-State: APjAAAUsN8e8ZFckZiaPaAvlp/THVPNUeckaPYlsEWOoL8muluxmw5Qs
+	v7n792zj++C/hEhlazQI0gHVoqgAkqPs3fTFfQ==
+X-Google-Smtp-Source: APXvYqyvN37CTwPpU4scYb4zTGBWdtTntulWcjgPmoGyRWlpkrCcXj3d2xT4zXPtCpIrGkEDQ+DZFSEcQ+eGh+ZMVgY=
+X-Received: by 2002:a05:6830:14ca:: with SMTP id
+	t10mr1493221otq.174.1571291503214; 
+	Wed, 16 Oct 2019 22:51:43 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][thud][PATCH] protobuf-c: fix race condition
+References: <20191014122601.18745-1-urs.fassler@bbv.ch>
+	<CAMKF1sqSp_8FSEGXzcd4_Tf5GDQxYTZ=GKUhFo_7B7yjPcZEWg@mail.gmail.com>
+In-Reply-To: <CAMKF1sqSp_8FSEGXzcd4_Tf5GDQxYTZ=GKUhFo_7B7yjPcZEWg@mail.gmail.com>
+From: Johannes Pointner <h4nn35.work@gmail.com>
+Date: Thu, 17 Oct 2019 07:51:31 +0200
+Message-ID: <CAHvQdo3+ad16L9MF0K+y6xGCiNd0L-=OK4Vo1qx7SigRJxD8YQ@mail.gmail.com>
+To: =?UTF-8?B?VXJzIEbDpHNzbGVy?= <urs.fassler@bbv.ch>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, "denys@ti.com" <denys@ti.com>
+Subject: Re: [meta-networking][PATCH] open62541: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,78 +57,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 03:45:55 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 17 Oct 2019 05:51:42 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: "Qi.Chen@windriver.com" <Qi.Chen@windriver.com>
+Hello Urs,
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Sinan Kaya <okaya@kernel.org>
-(cherry picked from commit 489d3b4b932ee8016d792341f8ea5836a9522cd4)
----
- .../0001-avoid-race-condition.patch           | 36 +++++++++++++++++++
- .../protobuf/protobuf-c_1.3.1.bb              |  3 +-
- 2 files changed, 38 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
-
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
-new file mode 100644
-index 000000000..4fc7703d8
---- /dev/null
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
-@@ -0,0 +1,36 @@
-+From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00 2001
-+From: Chen Qi <Qi.Chen@windriver.com>
-+Date: Sun, 29 Sep 2019 17:20:42 +0800
-+Subject: [PATCH] avoid race condition
-+
-+It's possible that the cxx-generate-packed-data.cc is compiled
-+while the t/test-full.pb.h is being generated. This will result
-+the following error.
-+
-+  DEBUG:	./t/test-full.pb.h:4:0: error: unterminated #ifndef
-+  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
-+
-+Add a dependency to avoid such problem.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-+---
-+ Makefile.am | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index b0cb065..1608ae0 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -156,6 +156,7 @@ noinst_PROGRAMS += \
-+ t_generated_code2_cxx_generate_packed_data_SOURCES = \
-+ 	t/generated-code2/cxx-generate-packed-data.cc \
-+ 	t/test-full.pb.cc
-++t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
-+ $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.h
-+ t_generated_code2_cxx_generate_packed_data_CXXFLAGS = \
-+ 	$(AM_CXXFLAGS) \
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-index 7ef030092..17f92f04b 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-@@ -15,7 +15,8 @@ DEPENDS = "protobuf-native protobuf"
- PV .= "+git${SRCPV}"
- SRCREV = "269771b4b45d3aba04e59569f53600003db8d9ff"
- 
--SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
-+SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
-+           file://0001-avoid-race-condition.patch"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.23.0
-
+On Wed, Oct 16, 2019 at 3:17 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Mon, Oct 14, 2019 at 5:56 PM Urs F=C3=A4ssler <urs.fassler@bbv.ch> wro=
+te:
+>
+> > It provides a open source implementation for OPC UA.
+> > ---
+> >  .../files/0001-fix_ignored_return_value.patch | 17 ++++++++++
+> >  .../open62541/open62541_1.0.bb                | 32 +++++++++++++++++++
+> >  2 files changed, 49 insertions(+)
+> >  create mode 100644
+> > meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored_r=
+eturn_value.patch
+> >  create mode 100644 meta-networking/recipes-connectivity/open62541/
+> > open62541_1.0.bb
+> >
+> > diff --git
+> > a/meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored=
+_return_value.patch
+> > b/meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored=
+_return_value.patch
+> > new file mode 100644
+> > index 000000000..3a8377ec5
+> > --- /dev/null
+> > +++
+> > b/meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored=
+_return_value.patch
+> > @@ -0,0 +1,17 @@
+> > +diff --git a/plugins/ua_pki_default.c b/plugins/ua_pki_default.c
+> > +index 79331bc9..b20ad95c 100644
+> > +--- a/plugins/ua_pki_default.c
+> > ++++ b/plugins/ua_pki_default.c
+> > +@@ -89,7 +89,11 @@ fileNamesFromFolder(const UA_String *folder, size_t
+> > *pathsSize, UA_String **path
+> > +
+> > +     struct dirent *ent;
+> > +     char buf2[PATH_MAX + 1];
+> > +-    realpath(buf, buf2);
+> > ++    char *res =3D realpath(buf, buf2);
+> > ++    if(res =3D=3D NULL) {
+> > ++        closedir(dir);
+> > ++        return UA_STATUSCODE_BADINTERNALERROR;
+> > ++    }
+> > +     size_t pathlen =3D strlen(buf2);
+> > +     *pathsSize =3D 0;
+> > +     while((ent =3D readdir (dir)) !=3D NULL && *pathsSize < 256) {
+> > diff --git a/meta-networking/recipes-connectivity/open62541/
+> > open62541_1.0.bb b/meta-networking/recipes-connectivity/open62541/
+> > open62541_1.0.bb
+> > new file mode 100644
+> > index 000000000..c34e70660
+> > --- /dev/null
+> > +++ b/meta-networking/recipes-connectivity/open62541/open62541_1.0.bb
+> > @@ -0,0 +1,32 @@
+> > +HOMEPAGE =3D "http://open62541.org/"
+> > +SUMMARY =3D "Open source implementation of OPC UA - library"
+> > +LICENSE =3D "MPL-2.0"
+> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D815ca599c9df247a0c7f619bab1=
+23dad"
+> > +
+> > +SRCREV =3D "ce5209d78d3821504d31b3bbdb03f53d6e3f93a7"
+> > +SRC_URI =3D " \
+> > +       gitsm://github.com/open62541/open62541.git \
+> > +       file://0001-fix_ignored_return_value.patch \
+> > +"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +inherit cmake python3native
+> > +
+> > +DEPENDS +=3D " \
+> > +       python3-six-native \
+> > +       mbedtls \
+> > +"
+> > +
+> > +EXTRA_OECMAKE =3D " \
+> > +       -DCMAKE_BUILD_TYPE=3DDebug \
+>
+>
+> If we used Release build type would be nicer from release point of view
+> unless only difference is debug info if there are more differences then
+> maybe add a packageconfig to control this setting and enable it when doin=
+g
+> DEBUG_ENABLED =3D =E2=80=9C1=E2=80=9D builds only
+>
+> >
+> > +       -DBUILD_SHARED_LIBS=3DON \
+> > +       -DUA_NAMESPACE_ZERO=3DREDUCED \
+> > +       -DUA_ENABLE_ENCRYPTION=3DON \
+> > +       -DUA_BUILD_EXAMPLES=3DOFF \
+> > +"
+It would maybe make sense to use PACKAGECONFIG for these settings so
+it would much easier to customize the library e.g. enable examples,
+use a different UA_NAMESPACE,...
+> > +
+> > +FILES_${PN}-dev +=3D "${libdir}/cmake/*"
+> > +
+> > +BBCLASSEXTEND =3D "native nativesdk"
+> > +
+> > --
+> > 2.20.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
