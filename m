@@ -1,50 +1,30 @@
-Return-Path: <h4nn35.work@gmail.com>
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
-	[209.85.210.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 7969A6C42C
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B6097F625
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Oct 2019 05:51:42 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id 21so829047otj.11
+	Thu, 17 Oct 2019 06:14:14 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.67,306,1566835200"; d="scan'208";a="77089240"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 17 Oct 2019 14:14:15 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id EB4A14CE14E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Oct 2019 22:51:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=lnnxuA8Ynxuv4RutZrTzzrC6xGncqHuQp465UTmAviA=;
-	b=mVdHjD7rFj2oIu32sMvJAp0I3SK8BeV4WpwxZK2xsIctzOERHg0zgRaDxkuVOs26Jb
-	+x8k8KGBLmrr2nSyoF9DKALs0VpEh+Has61O3TJ04zUWdRYUYTeVpoGov6SN3BC1r8E3
-	CSd2BXRK17Hwd2qJGc8lcsrFAFriudiZpz+oAEDdlM/phHPZ8+MjsqT626FLuJbtHCeq
-	DXVdQQsYujE3DGNaKD+eTCNS2wHyQ+jYfZ/6XnWWtzBstP3VdJxL8dS9msQItvAhV7H8
-	k/ob88ty5k6BPleYYZCCnEsPt9LVckTonyclZmVx8MD2abdfEuGxFuoOm1eCWvLJm7Gp
-	3S5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=lnnxuA8Ynxuv4RutZrTzzrC6xGncqHuQp465UTmAviA=;
-	b=pAOWF7mePDfbzkJ9dzFvJqXx1C5U5aHJpmdB6Xq8L+2igpg70/yL90DmSBBSWhSFIH
-	jfCSSZhA7QRE670FtYQLgKVvZLRapvvW3MfmlfPcG4LqnYgQMtVGORKCCR7zlg9H6DcR
-	MY8u54mLXuajQcg62Q9C7XPyCgLpXMKGUEnN0ZqeyMfmjCdpwgmexHOlQImwdSjGOdYY
-	AfDhxf/ROJmB9azL9XVM5pDkSCDvhwQIO2NxQAcqF1GVktLG71cM1i53BdZSxXTyKgLY
-	B/DfMqUrh6lAaigwbmTzZiUNPaLCU5qJ+EQY/F3Osmx9RVo7ISxieCumH4R7rDvHtZtW
-	0CVg==
-X-Gm-Message-State: APjAAAUsN8e8ZFckZiaPaAvlp/THVPNUeckaPYlsEWOoL8muluxmw5Qs
-	v7n792zj++C/hEhlazQI0gHVoqgAkqPs3fTFfQ==
-X-Google-Smtp-Source: APXvYqyvN37CTwPpU4scYb4zTGBWdtTntulWcjgPmoGyRWlpkrCcXj3d2xT4zXPtCpIrGkEDQ+DZFSEcQ+eGh+ZMVgY=
-X-Received: by 2002:a05:6830:14ca:: with SMTP id
-	t10mr1493221otq.174.1571291503214; 
-	Wed, 16 Oct 2019 22:51:43 -0700 (PDT)
+	Thu, 17 Oct 2019 14:13:49 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 17 Oct 2019 14:14:09 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 17 Oct 2019 14:14:21 +0800
+Message-ID: <20191017061421.1917-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20191014122601.18745-1-urs.fassler@bbv.ch>
-	<CAMKF1sqSp_8FSEGXzcd4_Tf5GDQxYTZ=GKUhFo_7B7yjPcZEWg@mail.gmail.com>
-In-Reply-To: <CAMKF1sqSp_8FSEGXzcd4_Tf5GDQxYTZ=GKUhFo_7B7yjPcZEWg@mail.gmail.com>
-From: Johannes Pointner <h4nn35.work@gmail.com>
-Date: Thu, 17 Oct 2019 07:51:31 +0200
-Message-ID: <CAHvQdo3+ad16L9MF0K+y6xGCiNd0L-=OK4Vo1qx7SigRJxD8YQ@mail.gmail.com>
-To: =?UTF-8?B?VXJzIEbDpHNzbGVy?= <urs.fassler@bbv.ch>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, "denys@ti.com" <denys@ti.com>
-Subject: Re: [meta-networking][PATCH] open62541: add new recipe
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: EB4A14CE14E3.AAEBE
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-cffi: upgrade 1.12.3 -> 1.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,123 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Oct 2019 05:51:42 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Oct 2019 06:14:15 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hello Urs,
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-cffi.inc                   | 4 ++--
+ .../python/{python-cffi_1.12.3.bb => python-cffi_1.13.0.bb}           | 0
+ .../python/{python3-cffi_1.12.3.bb => python3-cffi_1.13.0.bb}         | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cffi_1.12.3.bb => python-cffi_1.13.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cffi_1.12.3.bb => python3-cffi_1.13.0.bb} (100%)
 
-On Wed, Oct 16, 2019 at 3:17 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Mon, Oct 14, 2019 at 5:56 PM Urs F=C3=A4ssler <urs.fassler@bbv.ch> wro=
-te:
->
-> > It provides a open source implementation for OPC UA.
-> > ---
-> >  .../files/0001-fix_ignored_return_value.patch | 17 ++++++++++
-> >  .../open62541/open62541_1.0.bb                | 32 +++++++++++++++++++
-> >  2 files changed, 49 insertions(+)
-> >  create mode 100644
-> > meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored_r=
-eturn_value.patch
-> >  create mode 100644 meta-networking/recipes-connectivity/open62541/
-> > open62541_1.0.bb
-> >
-> > diff --git
-> > a/meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored=
-_return_value.patch
-> > b/meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored=
-_return_value.patch
-> > new file mode 100644
-> > index 000000000..3a8377ec5
-> > --- /dev/null
-> > +++
-> > b/meta-networking/recipes-connectivity/open62541/files/0001-fix_ignored=
-_return_value.patch
-> > @@ -0,0 +1,17 @@
-> > +diff --git a/plugins/ua_pki_default.c b/plugins/ua_pki_default.c
-> > +index 79331bc9..b20ad95c 100644
-> > +--- a/plugins/ua_pki_default.c
-> > ++++ b/plugins/ua_pki_default.c
-> > +@@ -89,7 +89,11 @@ fileNamesFromFolder(const UA_String *folder, size_t
-> > *pathsSize, UA_String **path
-> > +
-> > +     struct dirent *ent;
-> > +     char buf2[PATH_MAX + 1];
-> > +-    realpath(buf, buf2);
-> > ++    char *res =3D realpath(buf, buf2);
-> > ++    if(res =3D=3D NULL) {
-> > ++        closedir(dir);
-> > ++        return UA_STATUSCODE_BADINTERNALERROR;
-> > ++    }
-> > +     size_t pathlen =3D strlen(buf2);
-> > +     *pathsSize =3D 0;
-> > +     while((ent =3D readdir (dir)) !=3D NULL && *pathsSize < 256) {
-> > diff --git a/meta-networking/recipes-connectivity/open62541/
-> > open62541_1.0.bb b/meta-networking/recipes-connectivity/open62541/
-> > open62541_1.0.bb
-> > new file mode 100644
-> > index 000000000..c34e70660
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-connectivity/open62541/open62541_1.0.bb
-> > @@ -0,0 +1,32 @@
-> > +HOMEPAGE =3D "http://open62541.org/"
-> > +SUMMARY =3D "Open source implementation of OPC UA - library"
-> > +LICENSE =3D "MPL-2.0"
-> > +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D815ca599c9df247a0c7f619bab1=
-23dad"
-> > +
-> > +SRCREV =3D "ce5209d78d3821504d31b3bbdb03f53d6e3f93a7"
-> > +SRC_URI =3D " \
-> > +       gitsm://github.com/open62541/open62541.git \
-> > +       file://0001-fix_ignored_return_value.patch \
-> > +"
-> > +
-> > +S =3D "${WORKDIR}/git"
-> > +
-> > +inherit cmake python3native
-> > +
-> > +DEPENDS +=3D " \
-> > +       python3-six-native \
-> > +       mbedtls \
-> > +"
-> > +
-> > +EXTRA_OECMAKE =3D " \
-> > +       -DCMAKE_BUILD_TYPE=3DDebug \
->
->
-> If we used Release build type would be nicer from release point of view
-> unless only difference is debug info if there are more differences then
-> maybe add a packageconfig to control this setting and enable it when doin=
-g
-> DEBUG_ENABLED =3D =E2=80=9C1=E2=80=9D builds only
->
-> >
-> > +       -DBUILD_SHARED_LIBS=3DON \
-> > +       -DUA_NAMESPACE_ZERO=3DREDUCED \
-> > +       -DUA_ENABLE_ENCRYPTION=3DON \
-> > +       -DUA_BUILD_EXAMPLES=3DOFF \
-> > +"
-It would maybe make sense to use PACKAGECONFIG for these settings so
-it would much easier to customize the library e.g. enable examples,
-use a different UA_NAMESPACE,...
-> > +
-> > +FILES_${PN}-dev +=3D "${libdir}/cmake/*"
-> > +
-> > +BBCLASSEXTEND =3D "native nativesdk"
-> > +
-> > --
-> > 2.20.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
+index 818d238..07baa2d 100644
+--- a/meta-python/recipes-devtools/python/python-cffi.inc
++++ b/meta-python/recipes-devtools/python/python-cffi.inc
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+ DEPENDS += "libffi ${PYTHON_PN}-pycparser"
+ 
+-SRC_URI[md5sum] = "35ad1f9e1003cac9404c1493eb10d7f5"
+-SRC_URI[sha256sum] = "041c81822e9f84b1d9c401182e174996f0bae9991f33725d059b771744290774"
++SRC_URI[md5sum] = "2c90be6d3bfbf80ab732b28fd677051d"
++SRC_URI[sha256sum] = "8fe230f612c18af1df6f348d02d682fe2c28ca0a6c3856c99599cdacae7cf226"
+ 
+ RDEPENDS_${PN}_class-target = " \
+     ${PYTHON_PN}-ctypes \
+diff --git a/meta-python/recipes-devtools/python/python-cffi_1.12.3.bb b/meta-python/recipes-devtools/python/python-cffi_1.13.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-cffi_1.12.3.bb
+rename to meta-python/recipes-devtools/python/python-cffi_1.13.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.12.3.bb b/meta-python/recipes-devtools/python/python3-cffi_1.13.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-cffi_1.12.3.bb
+rename to meta-python/recipes-devtools/python/python3-cffi_1.13.0.bb
+-- 
+2.7.4
+
+
+
 
