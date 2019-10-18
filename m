@@ -1,52 +1,45 @@
-Return-Path: <diego.rondini@kynetics.com>
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
-	[209.85.128.49])
-	by mail.openembedded.org (Postfix) with ESMTP id EEBB97D39C
+Return-Path: <3kU6qXQMKAMoCq0w44w1u.s42@flex--wak.bounces.google.com>
+Received: from mail-pf1-f202.google.com (mail-pf1-f202.google.com
+	[209.85.210.202])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CB387F6BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 22:15:00 +0000 (UTC)
-Received: by mail-wm1-f49.google.com with SMTP id r17so10229357wme.0
+	Fri, 18 Oct 2019 23:45:20 +0000 (UTC)
+Received: by mail-pf1-f202.google.com with SMTP id i28so5804896pfq.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 15:15:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kynetics-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=uEmQY0lqwWzeQhpZDlV1t0MCRT7qv/Cs0q0xn4NPb0k=;
-	b=RwsCSeONOwWFXiNwC6k3lkQm8cjqfZJo0tgcZwBZa3TKTaXNVUjuvJRu0IIZzMvYPU
-	smKqL0PDxBzXxgEKoadZ8bnaOmxqmVJrZKuMZdiCNLbKDI3kmtjijbK/5FecjLyDvThV
-	vw6uN9OzbQ4ZjWq7VRVyk95U/+oKd7xYHzN1OwbB3RPbeidfPrAKg2G/wDFCtJRKt/oG
-	AUv/sXcRpJKL7n2P2XiKibkLXthaff7NCzqLcvQGl4FuUB42NnWqTw8hU0F1fmDmT7by
-	aYxyepELbr4fKmKcUwJA/5DkjtZ7I9RIh41iNbLNHUkP+nK+/mF/rjsFWTAHpg8vJuMr
-	EZew==
+	Fri, 18 Oct 2019 16:45:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=date:message-id:mime-version:subject:from:to:cc;
+	bh=HckXpIUzAJdRZsQK1gscl4mgha/04dry8wZm3WrY1NQ=;
+	b=iAcnx7a0WTdiS4gmcfHVwmebEvr7Mf84WjLIi1npAxOK87xNdcJys79uPo/78nGf/9
+	VtAICtYTjS4mg33FyTJ/MKYxNAiddGop+rrFSZCabkZfsnsPPvFEcVWU5TGgHLfezKlw
+	woQWT2vGcUu63ncU3OKUq0pot5jKkx7JsBohTB9JHhZK1eB5Q2VaJ7QHcCCG/sZqNEDq
+	yIze4KYJMcD8uCPC3N8uQ5wIvGxpJOlwZXxZRsizj39DIVq1qmiKfpRtm6DIGFgsXSTU
+	wdI+zUmWMNPN0ayZKyVmnxYi4NZXTwsScrtvmx3TCkSkEOyrpj9PZOf6aDoUza1xfPGX
+	8QYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=uEmQY0lqwWzeQhpZDlV1t0MCRT7qv/Cs0q0xn4NPb0k=;
-	b=QpqSrUtVoZC6zDw10aJYfqE48xjWAssyiQHrtJ+ixeEJfSCjUGCyVivaTNi2cNXfgO
-	FqUpQT71UbNV1QPoP6n+jOY71HdNQ8n6vBpuxNAnpqcKRiVjto3A3eM14ter+0RrXb/v
-	H4D3rofx1FDqr/StsDXS78lODR09qOkn5xV79mghAPO8eVsWtfASKJJgbCaZ4l/eR9s2
-	+DihBPF2P2L6PX5Y/nPTwCGySD9c8D4WcJbIugaA0tGtQN13Dz80KCPmvu+EQWQfEcoK
-	565YbA3kSI/aGuA1lyBJ8+ryUUsJ16ysn/TGM8C9ER2Qgp8GHdjImIA5Vq0MesMILZJR
-	m2dA==
-X-Gm-Message-State: APjAAAW29oqpB2Afa5s+YPb5XVpjpvPiwLvdQFKiMpyIJEPbp/sKordU
-	6treXUkcJKkTJn45k2KQYTKxuMycBcI=
-X-Google-Smtp-Source: APXvYqyGtB+CSSHaCTj0DgaPelHWuomPPJDM8SFUJZBZqKAvdZgC+QLEKP2xcx6QgQ+1IAf/I1fC/w==
-X-Received: by 2002:a7b:caa9:: with SMTP id r9mr9058790wml.58.1571436901392;
-	Fri, 18 Oct 2019 15:15:01 -0700 (PDT)
-Received: from localhost.localdomain ([81.29.205.101])
-	by smtp.gmail.com with ESMTPSA id
-	t11sm6352097wmi.25.2019.10.18.15.15.00
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 18 Oct 2019 15:15:00 -0700 (PDT)
-From: Diego Rondini <diego.rondini@kynetics.com>
+	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+	bh=HckXpIUzAJdRZsQK1gscl4mgha/04dry8wZm3WrY1NQ=;
+	b=SBLT+jY5L8py1WmBQ5zVzQ0TVQ9CysU3axr9vJLNr86zrj+oPEoYuI7a/yDXJ782vc
+	VUlHCbNuUBX9opMZF3j7ZgL7IFi8R5j83vI/Nh4kIoTvSddLLvoAcql+u8iDbZwKd4A8
+	ZyA7tIizROToS8n3mXqEp/JFSRZGPzWtDkM2L5DdZUzPEYqXrFhxUAQNLqe8ZDTD1RLD
+	wMAm0x3CtI1+7dEYSBzRVqcHm8mLebaZIBtZjdbN9Yy2qQdma657cX1PitkeCj3/p9WF
+	ofRSBbFa3vC9/yUkQN3TMZiGsmvfFi2WN5PspJVUNzOIG1p11HWo+ApwJXadnkmBypo4
+	RsXw==
+X-Gm-Message-State: APjAAAW9SAALWzUv2O4gwnylOG6ebWCJv/LUiV8n5ZU1o+hXR3L4wGQB
+	YFVzncneru0d42avPP1sYIlGti+BUmaTbrUlWkH6S1b2qfPS8aXWVsCSYrHbmOhWZiEkbsAjyOy
+	xomUnHIig00w6sH5iabADRQ3IYt15PHhZm6T+kH/8/i6FB1YPZnUr0HWc76hfL5W7uONBUdyiUS
+	YI4uo=
+X-Google-Smtp-Source: APXvYqwEdbWAa4yNKRQPa83m3PE/gSyvfrQW7PqA+8KEmVsCEStXUC2cY6BCe/TV5JgJA2WHJn4HPsQ=
+X-Received: by 2002:a65:6641:: with SMTP id z1mr13082198pgv.23.1571442321871; 
+	Fri, 18 Oct 2019 16:45:21 -0700 (PDT)
+Date: Fri, 18 Oct 2019 16:45:15 -0700
+Message-Id: <20191018234515.15676-1-wak@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.22.0
+From: "William A. Kennington III" <wak@google.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Oct 2019 00:13:39 +0200
-Message-Id: <20191018221339.2581-1-diego.rondini@kynetics.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-Cc: Diego Rondini <diego.rondini@kynetics.com>
-Subject: [meta-oe][PATCH] ttf-roboto: add recipe
+Subject: [meta-oe][PATCH] span-lite: Init at 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,40 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 22:15:01 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 18 Oct 2019 23:45:21 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Roboto is an Apache licensed sans-serif typeface family developed by Google as
-the system font for its mobile operating system Android, and released in 2011
-for Android 4.0 "Ice Cream Sandwich".
-
-Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
+Signed-off-by: William A. Kennington III <wak@google.com>
 ---
- .../recipes-graphics/ttf-fonts/ttf-roboto_2.138.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-roboto_2.138.bb
+ meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-roboto_2.138.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-roboto_2.138.bb
+diff --git a/meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb b/meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb
 new file mode 100644
-index 000000000..521caff74
+index 000000000..0ea2dcc8d
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-roboto_2.138.bb
-@@ -0,0 +1,14 @@
-+require ttf.inc
++++ b/meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "single-file header-only version of a C++20-like span for C++98, C++11 and later"
++HOMEPAGE = "https://github.com/martinmoene/span-lite"
++LICENSE = "BSL-1.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
 +
-+SUMMARY = "Roboto fonts"
-+HOMEPAGE = "https://fonts.google.com/specimen/Roboto"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
++SRC_URI += "git://github.com/martinmoene/span-lite"
++SRCREV = "34118d2df7976f635c8fd35b5959f86cb52ba93c"
 +
-+SRC_URI = "https://github.com/google/roboto/releases/download/v${PV}/roboto-android.zip"
-+SRC_URI[md5sum] = "3b43a5cb33196ec25e44d5fcb40219e1"
-+SRC_URI[sha256sum] = "c825453253f590cfe62557733e7173f9a421fff103b00f57d33c4ad28ae53baf"
++S = "${WORKDIR}/git"
 +
-+S = "${WORKDIR}"
-+
-+FILES_${PN} = "${datadir}/fonts/truetype/*.ttf"
++inherit cmake
++inherit ptest
 -- 
-2.21.0
+2.22.0
 
 
