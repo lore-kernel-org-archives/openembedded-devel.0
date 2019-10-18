@@ -1,24 +1,48 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5729E7F68E
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+	[209.85.210.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CB807F696
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 12:19:45 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x9ICJkJ1003900
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 18 Oct 2019 18:38:15 +0000 (UTC)
+Received: by mail-pf1-f174.google.com with SMTP id h195so4394958pfe.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 05:19:46 -0700 (PDT)
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 18 Oct 2019 05:19:45 -0700
-From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Oct 2019 08:19:45 -0400
-Message-ID: <20191018121945.919-1-Trevor.Gamblin@windriver.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] freeradius: fix PIDFile path in radiusd.service file
+	Fri, 18 Oct 2019 11:38:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=jTAe75iOsiQ/q81AldTJDsa1gn78yvADLW4EVlKQdvk=;
+	b=dN1Sxl55yg2FBpl80fHGvaiROKVIRyvouydEAXiq7M7mce7qzd9LGqODUCbkslqlSv
+	/yPq4knbGoQFcHDwp2S3E/ImaqxtXQxrVmjXyKUmfC3uEpZmcMjYkm/JJgiIXTzVCLSF
+	+dYMpk3WZOBSkNkBHtp0Crh6tw8QgjtJIfTyUQcandIOUGuJAMWCdqEk+c83zK12zjne
+	4QBvmxzQgnXS9jKupQda6MYB3yug+lg2ivPzIXyNYJC5tsUlI+7BElXTHHP7cezxN6dL
+	QvcG4KmVrAHJosFXIOH8OvGuLKcP/B9I2fwQ9Po4d5uttLtNwv3yh1dDABTvE0ADhDY5
+	Ujxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=jTAe75iOsiQ/q81AldTJDsa1gn78yvADLW4EVlKQdvk=;
+	b=A4pcKvhhYbaxNd8gxdl4Bo1FwyI02ENbbA0/bTXqsfyvBIk0Laglak+qsIG6uH/MEV
+	7nOm7+ygAdZrZaBW3iI1apRElE60DuCWLAYhpHWcsuz6cZhRqVYMefJTf6IIBXHRRD3D
+	S7VVKao+WT8ldkmNVfABATpGJfJb4RY2rhoiZc2ttRBfXw2U9BieEPupoRpw4vBDHxWG
+	wrQ7F0pwP805DRIfSao5CGt7Ny9D0xXa/luqrthUY4r9W2ow1nqBxpUN6ITSkFJV6WOR
+	rG9UzZLWRWFHLjdLR9Du/LUTlowrmTu30JQ5rmY1Wj+UWIPZxFKzokAfQOG6YVAgfH41
+	5anQ==
+X-Gm-Message-State: APjAAAUj89c78YZPEA+qB7AgENgAsgkDO6p/Ta3kLf5JAmZagykYwSJA
+	fPcOwQ+UxLNeQvjY0a2kiEwHPLAU
+X-Google-Smtp-Source: APXvYqyA9weJ0NcY5CR5JHWX1qDMR/rLFlh0HTPThOnjf5/F9r4ZUa8qkSmhm+n28QBZmeOZta7Z1Q==
+X-Received: by 2002:aa7:8a97:: with SMTP id a23mr8320349pfc.76.1571423896290; 
+	Fri, 18 Oct 2019 11:38:16 -0700 (PDT)
+Received: from pahoa2.kama-aina.net (c-67-181-203-136.hsd1.ca.comcast.net.
+	[67.181.203.136]) by smtp.gmail.com with ESMTPSA id
+	i22sm6895813pgg.20.2019.10.18.11.38.15
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 18 Oct 2019 11:38:15 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 18 Oct 2019 11:38:13 -0700
+Message-Id: <20191018183813.8781-1-akuster808@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][master][zeus][PATCH] renderdoc: package need opengl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,42 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 12:19:47 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 18 Oct 2019 18:38:15 -0000
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+ERROR: Nothing PROVIDES 'virtual/libgl'
 
-radiusd.service references a legacy path for its PIDFile, which
-results in a warning at boot:
+found via yocto-check-layer
 
-systemd[1]: /lib/systemd/system/radiusd.service:7: PIDFile= references a path
-below legacy directory /var/run/, updating /var/run/radiusd/radiusd.pid →
-/run/radiusd/radiusd.pid; please update the unit file accordingly.
-
-Modify the recipe's radiusd.service file to use the correct path.
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-connectivity/freeradius/files/radiusd.service     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/files/radiusd.service b/meta-networking/recipes-connectivity/freeradius/files/radiusd.service
-index 8dae0df5b..2d766488e 100644
---- a/meta-networking/recipes-connectivity/freeradius/files/radiusd.service
-+++ b/meta-networking/recipes-connectivity/freeradius/files/radiusd.service
-@@ -4,8 +4,8 @@ After=syslog.target network.target
+diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
+index c7e872409f..684a204ead 100644
+--- a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
++++ b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.4.bb
+@@ -16,7 +16,7 @@ RDEPENDS_${PN} = "libxcb xcb-util-keysyms"
  
- [Service]
- Type=forking
--PIDFile=@STATEDIR@/run/radiusd/radiusd.pid
--ExecStartPre=-@BASE_BINDIR@/chown -R radiusd.radiusd @STATEDIR@/run/radiusd
-+PIDFile=/run/radiusd/radiusd.pid
-+ExecStartPre=-@BASE_BINDIR@/chown -R radiusd.radiusd /run/radiusd
- ExecStartPre=@SBINDIR@/radiusd -C
- ExecStart=@SBINDIR@/radiusd -d @SYSCONFDIR@/raddb
- ExecReload=@SBINDIR@/radiusd -C
+ inherit cmake python3native distro_features_check
+ 
+-REQUIRED_DISTRO_FEATURES = "x11"
++REQUIRED_DISTRO_FEATURES = "x11 opengl"
+ 
+ python __anonymous () {
+     # only works on glibc systems
 -- 
-2.21.0
+2.17.1
 
 
