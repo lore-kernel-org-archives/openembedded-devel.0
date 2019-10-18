@@ -1,23 +1,25 @@
 Return-Path: <okaya@kernel.org>
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 53D9D7F6A9
+	by mail.openembedded.org (Postfix) with ESMTP id 3656D7E5FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 00:03:29 +0000 (UTC)
+	Fri, 18 Oct 2019 01:15:56 +0000 (UTC)
 Received: from [10.70.64.143] (unknown [131.107.147.143])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 6C6F121D7C;
-	Fri, 18 Oct 2019 00:03:30 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 475A621852
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Oct 2019 01:15:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1571357010;
-	bh=dZYUWUxnImVDOyvpfdDvcKUpuxT+osALzhLadjzNehE=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=ZfnS8zExEQt0bnqg8/7zk9fHC7EZOXMGPjJiZX6lJ9NWjXaAwt2WuJOXwIfcNEaU1
-	WBEOkHZ/Fps53bNLo/dDpv3k4rH+ygGZv0VpQTLZ6PgpXRCKOwZ4AlG8elgYf3T2QC
-	PuWdKNPPkCZ/h3k/iW3z1t3khHPDketBszswy+Y8=
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20191017033946.16494-1-okaya@kernel.org>
-	<20191017204458.GC1499@jama>
+	s=default; t=1571361358;
+	bh=rGIXrDr1w8TpXvgG1QrNDoGvEKaqsMzPKJrZS7eGgn0=;
+	h=Subject:To:References:From:Date:In-Reply-To:From;
+	b=mIgQxRjy1Dx6S1rpZPwhH/QJE5K3HyoFB+ZNAleS6Bs21c+FLFedqUpsL1UKhjJ7W
+	Opc0bfXHtJK65Cj024n5+od9QpKPERDBr61n0VYuzkAlJ36+Y/Ik0SFJWR05TucPtH
+	EbgR/AOKombinEt2rlmgM/CuZqw39xJ+5Zar73YI=
+To: openembedded-devel@lists.openembedded.org
+References: <20190929092956.13147-1-Qi.Chen@windriver.com>
+	<20191017204414.GB1499@jama>
+	<CA+chaQcpMndabwwuv+c8203ATbcwNEMJ8zjLDnqTkzkqyw4OrQ@mail.gmail.com>
 From: Sinan Kaya <okaya@kernel.org>
 Openpgp: preference=signencrypt
 Autocrypt: addr=okaya@kernel.org; keydata=
@@ -44,14 +46,13 @@ Autocrypt: addr=okaya@kernel.org; keydata=
 	9EiM2eXpJw+Rz+vKjSt1YIhg46YbdZrDM2FGrt9ve3YaM5H0lzJgq/JQPKFdbd5MB0X37Qc+
 	2m/A9u9SFnOovA42DgXUyC2cSbIJdPWOK9PnzfXqF3sX9Aol2eLUmQuLpThJtq5EHu6FzJ7Y
 	L+s0nPaNMKwv/Xhhm6Y=
-Message-ID: <ec47f955-daea-64b1-9b98-2ad7b974fc2d@kernel.org>
-Date: Thu, 17 Oct 2019 17:03:30 -0700
+Message-ID: <ca9513dd-0a49-61ac-5747-edb4b1e4f384@kernel.org>
+Date: Thu, 17 Oct 2019 18:15:57 -0700
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
 	Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <20191017204458.GC1499@jama>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][thud][PATCH] protobuf-c: fix race condition
+In-Reply-To: <CA+chaQcpMndabwwuv+c8203ATbcwNEMJ8zjLDnqTkzkqyw4OrQ@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] protobuf-c: fix race condition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,22 +65,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 00:03:29 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Fri, 18 Oct 2019 01:15:57 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 10/17/2019 1:44 PM, Martin Jansa wrote:
-> On Thu, Oct 17, 2019 at 03:39:46AM +0000, Sinan Kaya wrote:
->> From: "Qi.Chen@windriver.com" <Qi.Chen@windriver.com>
->>
->> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> Signed-off-by: Sinan Kaya <okaya@kernel.org>
->> (cherry picked from commit 489d3b4b932ee8016d792341f8ea5836a9522cd4)
-> Yes this is needed in thud as well, but first it should be backported to
-> warrior as well, I'll send separate patch for that.
-> 
+On 10/17/2019 3:11 PM, Martin Jansa wrote:
+> Hmm I spoke too soon, at least rebuilding protobuf-c-native with this
+> change backported to thud still failed once with:
 
-Thanks Martin
+Maybe, there are multiple issues as you mentioned. I'm monitoring our
+build pipeline for failures too.
+
+I have always seen this:
+
++  DEBUG:     ./t/test-full.pb.h:4:0: error: unterminated #ifndef
++  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
+
 
