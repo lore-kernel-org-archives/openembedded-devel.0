@@ -1,58 +1,50 @@
-Return-Path: <okaya@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 3656D7E5FB
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 04E4E6C3A9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 01:15:56 +0000 (UTC)
-Received: from [10.70.64.143] (unknown [131.107.147.143])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 475A621852
+	Fri, 18 Oct 2019 02:12:32 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id w2so3930160qkf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 01:15:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1571361358;
-	bh=rGIXrDr1w8TpXvgG1QrNDoGvEKaqsMzPKJrZS7eGgn0=;
-	h=Subject:To:References:From:Date:In-Reply-To:From;
-	b=mIgQxRjy1Dx6S1rpZPwhH/QJE5K3HyoFB+ZNAleS6Bs21c+FLFedqUpsL1UKhjJ7W
-	Opc0bfXHtJK65Cj024n5+od9QpKPERDBr61n0VYuzkAlJ36+Y/Ik0SFJWR05TucPtH
-	EbgR/AOKombinEt2rlmgM/CuZqw39xJ+5Zar73YI=
-To: openembedded-devel@lists.openembedded.org
-References: <20190929092956.13147-1-Qi.Chen@windriver.com>
-	<20191017204414.GB1499@jama>
-	<CA+chaQcpMndabwwuv+c8203ATbcwNEMJ8zjLDnqTkzkqyw4OrQ@mail.gmail.com>
-From: Sinan Kaya <okaya@kernel.org>
-Openpgp: preference=signencrypt
-Autocrypt: addr=okaya@kernel.org; keydata=
-	mQENBFrnOrUBCADGOL0kF21B6ogpOkuYvz6bUjO7NU99PKhXx1MfK/AzK+SFgxJF7dMluoF6
-	uT47bU7zb7HqACH6itTgSSiJeSoq86jYoq5s4JOyaj0/18Hf3/YBah7AOuwk6LtV3EftQIhw
-	9vXqCnBwP/nID6PQ685zl3vH68yzF6FVNwbDagxUz/gMiQh7scHvVCjiqkJ+qu/36JgtTYYw
-	8lGWRcto6gr0eTF8Wd8f81wspmUHGsFdN/xPsZPKMw6/on9oOj3AidcR3P9EdLY4qQyjvcNC
-	V9cL9b5I/Ud9ghPwW4QkM7uhYqQDyh3SwgEFudc+/RsDuxjVlg9CFnGhS0nPXR89SaQZABEB
-	AAG0HVNpbmFuIEtheWEgPG9rYXlhQGtlcm5lbC5vcmc+iQFOBBMBCAA4FiEEYdOlMSE+a7/c
-	ckrQvGF4I+4LAFcFAlztcAoCGwMFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AACgkQvGF4I+4L
-	AFfidAf/VKHInxep0Z96iYkIq42432HTZUrxNzG9IWk4HN7c3vTJKv2W+b9pgvBF1SmkyQSy
-	8SJ3Zd98CO6FOHA1FigFyZahVsme+T0GsS3/OF1kjrtMktoREr8t0rK0yKpCTYVdlkHadxmR
-	Qs5xLzW1RqKlrNigKHI2yhgpMwrpzS+67F1biT41227sqFzW9urEl/jqGJXaB6GV+SRKSHN+
-	ubWXgE1NkmfAMeyJPKojNT7ReL6eh3BNB/Xh1vQJew+AE50EP7o36UXghoUktnx6cTkge0ZS
-	qgxuhN33cCOU36pWQhPqVSlLTZQJVxuCmlaHbYWvye7bBOhmiuNKhOzb3FcgT7kBDQRa5zq1
-	AQgAyRq/7JZKOyB8wRx6fHE0nb31P75kCnL3oE+smKW/sOcIQDV3C7mZKLf472MWB1xdr4Tm
-	eXeL/wT0QHapLn5M5wWghC80YvjjdolHnlq9QlYVtvl1ocAC28y43tKJfklhHiwMNDJfdZbw
-	9lQ2h+7nccFWASNUu9cqZOABLvJcgLnfdDpnSzOye09VVlKr3NHgRyRZa7me/oFJCxrJlKAl
-	2hllRLt0yV08o7i14+qmvxI2EKLX9zJfJ2rGWLTVe3EJBnCsQPDzAUVYSnTtqELu2AGzvDiM
-	gatRaosnzhvvEK+kCuXuCuZlRWP7pWSHqFFuYq596RRG5hNGLbmVFZrCxQARAQABiQEfBBgB
-	CAAJBQJa5zq1AhsMAAoJELxheCPuCwBX2UYH/2kkMC4mImvoClrmcMsNGijcZHdDlz8NFfCI
-	gSb3NHkarnA7uAg8KJuaHUwBMk3kBhv2BGPLcmAknzBIehbZ284W7u3DT9o1Y5g+LDyx8RIi
-	e7pnMcC+bE2IJExCVf2p3PB1tDBBdLEYJoyFz/XpdDjZ8aVls/pIyrq+mqo5LuuhWfZzPPec
-	9EiM2eXpJw+Rz+vKjSt1YIhg46YbdZrDM2FGrt9ve3YaM5H0lzJgq/JQPKFdbd5MB0X37Qc+
-	2m/A9u9SFnOovA42DgXUyC2cSbIJdPWOK9PnzfXqF3sX9Aol2eLUmQuLpThJtq5EHu6FzJ7Y
-	L+s0nPaNMKwv/Xhhm6Y=
-Message-ID: <ca9513dd-0a49-61ac-5747-edb4b1e4f384@kernel.org>
-Date: Thu, 17 Oct 2019 18:15:57 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
+	Thu, 17 Oct 2019 19:12:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=zDgqjE2cnKs93RTT0G5Ru+hN4QMqoklMhf+9Y3IOWuc=;
+	b=sohxykSwM3Kgyte1JPhSh90WWtFNMlfJSNx/Uj8CTknGl30UFkDiMTJNtONqljE925
+	mwIitmKgg+RIYAAn/BN/sVBT6ptMbQm1QxB7bk4AgerpZXeD93CHiTMW9cwgkELl1jpz
+	UHvyuYdxh+DHPG0ojB5T8M7Az1Nb9qhgKmr9vK/LhaHNuUAN2oE3niTCp/YlNK9goj0r
+	m9ShXeGwVyoOjwaouKAMijiohAO+WPM12/16rse2P9SfcEWEs9u15YF9J5egSvocwhOQ
+	gmf8lv90Ezuer3/2MAZq21J99/+5vYPmfS+KxbxCiGyC5XJikHgX9rtfeeqyPCgGl2hR
+	a/oQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=zDgqjE2cnKs93RTT0G5Ru+hN4QMqoklMhf+9Y3IOWuc=;
+	b=k6lgfKyh0zozJdsfTydnfybgjRwqu9ZGxbRMN43KjOrN2/CZZF22iMse7A8/hLR/ZC
+	MWtLj709zsTv4fP4EJVHJBGNLJoYnbYXElg6TLKfVVaSIRVlWpLPeQZ9ZZIZefDCqw1B
+	d5b5Dqnt75yzb4l43LxEkQhzzZfkiKr3jS69EihjlXGIh4WlWzP6GEC2tBQtwDOMw+3l
+	gqQzbt5c+velRE46WP9v8Gh8L1J/0rCJfsq1c79fwBAxW/D5NHE2nCDZhFHmBflUuHDX
+	sfrtAoOLI4gK6X3aCzm4XuSRmVUM4rEbehU3OcNAeQ/H5zyT+SfqHMCYQFupMtbQGH/X
+	ge6w==
+X-Gm-Message-State: APjAAAX6bYqZQFlAVI7vfOuMKhXsN+7EX55qNwCm2Tf1lOwJJI93Eg0V
+	K92pk8QkBw86kTTfQY9xXlnM1H8Kvy95ubBmHGI=
+X-Google-Smtp-Source: APXvYqwiMgKCdGO6oqXPUymzQnAjmkmecSrms1EmM/KKjQHGfPVL7IgOFRIn/M63C4TffldkIBA+jn93gtZ9ojKtsKo=
+X-Received: by 2002:a05:620a:14b9:: with SMTP id
+	x25mr6677420qkj.9.1571364753355; 
+	Thu, 17 Oct 2019 19:12:33 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQcpMndabwwuv+c8203ATbcwNEMJ8zjLDnqTkzkqyw4OrQ@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] protobuf-c: fix race condition
+References: <20191017130318.1978280-1-raj.khem@gmail.com>
+	<20191017130318.1978280-2-raj.khem@gmail.com>
+	<CALbNGRTVOM5_svEfSdcWQ65ZiBUj_Vqr8ZfqBpTYPQky52_aTw@mail.gmail.com>
+In-Reply-To: <CALbNGRTVOM5_svEfSdcWQ65ZiBUj_Vqr8ZfqBpTYPQky52_aTw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 18 Oct 2019 07:42:22 +0530
+Message-ID: <CAMKF1sqvB7E7JzhfJTk_i-=6+7fWhEm_Roq2vJYwY+HsohBq-g@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-gnome][PATCH 2/2] dconf: Upgrade to 0.34.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,21 +57,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 01:15:57 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 18 Oct 2019 02:12:33 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 10/17/2019 3:11 PM, Martin Jansa wrote:
-> Hmm I spoke too soon, at least rebuilding protobuf-c-native with this
-> change backported to thud still failed once with:
+No, it doesn't. But it did fine with older meson
 
-Maybe, there are multiple issues as you mentioned. I'm monitoring our
-build pipeline for failures too.
+On Thu, Oct 17, 2019 at 8:10 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m>
+wrote:
 
-I have always seen this:
-
-+  DEBUG:     ./t/test-full.pb.h:4:0: error: unterminated #ifndef
-+  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
-
+> On Thu, Oct 17, 2019 at 3:03 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  .../recipes-gnome/dconf/{dconf_0.32.0.bb =3D> dconf_0.34.0.bb}  | 4 ++=
+--
+> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> >  rename meta-gnome/recipes-gnome/dconf/{dconf_0.32.0.bb =3D>
+> dconf_0.34.0.bb} (76%)
+> >
+> > diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.32.0.bb
+> b/meta-gnome/recipes-gnome/dconf/dconf_0.34.0.bb
+> > similarity index 76%
+> > rename from meta-gnome/recipes-gnome/dconf/dconf_0.32.0.bb
+> > rename to meta-gnome/recipes-gnome/dconf/dconf_0.34.0.bb
+> > index 8d1bbdfd1a..a1996a1a37 100644
+> > --- a/meta-gnome/recipes-gnome/dconf/dconf_0.32.0.bb
+> > +++ b/meta-gnome/recipes-gnome/dconf/dconf_0.34.0.bb
+> > @@ -3,8 +3,8 @@ LICENSE =3D "LGPLv2.1"
+> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D2d5025d4aa3495befef8f17206a=
+5b0a1"
+> >  SECTION =3D "x11/gnome"
+> >
+> > -SRC_URI[archive.md5sum] =3D "e1ac0b6285abefeed69ca9e380e44f5a"
+> > -SRC_URI[archive.sha256sum] =3D
+> "68bce78b19bc94cb2c3bb8587e37f9e5e338568c3a674f86edde9c9f1624ffab"
+> > +SRC_URI[archive.md5sum] =3D "a3ab18ed51a0494a1c8436fef20cc1b0"
+> > +SRC_URI[archive.sha256sum] =3D
+> "943a94ab16121de5580ceaed2605b87444d1bca1c6cd8beefb778bcb0aa2da52"
+> >
+> >  DEPENDS =3D "dbus glib-2.0 intltool-native"
+> >
+> Have same here: Does it build for you with meson 0.52.0?
+>
+> Andreas
+>
 
