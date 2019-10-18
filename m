@@ -1,50 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D7047C86A
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BD09F60720
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 19:07:05 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id r18so5362924eds.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 12:07:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=UVWmcG3w5XQX31fEOw8LAs1D2fsgXgad2hL7FDhj1o4=;
-	b=ZZ1KOVRAbw5kOxtRJBaonhVhKburfuPW6xndpDI1LA/Q5eocCXBJwoeAczZxptpbiM
-	ZHrBIJbwbJgZ4gCb+p40ON6QdOtpYIiTl+wuZZDt4nWpjByATlgpFdaYMqYdJtOJ6NCi
-	ocopeztBSmgbP4czikCPlRVeCFfeSF0Me8tRt8mU5rCiyHTLRjib2zCuxC1KuMx5L+7K
-	h9dez22a73dVHdxLuLo/XPFJqeafY7fR3e2ZEjDH/iqxMPiubeXphI5vwbJDo2DLXDs1
-	4SGNIYi3ikJ7+s9NJolsz8P+8T+mzmab2UqjHLQEMvAlLwuP0Uu1Hwr4Y4w0KGcpQr/v
-	QfRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=UVWmcG3w5XQX31fEOw8LAs1D2fsgXgad2hL7FDhj1o4=;
-	b=Ucn0VwKFKb6/LpxD+TATZw49e7RdYd83EtletKul0uY6StFf23EptiRKw65HmRItDv
-	hPUlKJXZfHd0Ej0svx/mEeC04eAdnyXWQIn/RPACgFrLG5T5tqUiOzs99NW2nfpf9Kd/
-	LXl7OfWn30/T+RAsO50HRbHkmtZVifMADWtgUojpIhg9Zi2pvFfksyjcfdvF3r7lMRa5
-	E7mo41D22PjAjDtgGFM8qfppTbROfajpYjwQhph/MiDgfxPjX/UE3G/HLuNooKDicQLk
-	RAEbojL9p1U4C4dst2TXnohDApJKUVTXZxDSDO1wJwIBPj4Va4zomwQSUIJ0yXzXm/kS
-	eQIA==
-X-Gm-Message-State: APjAAAVAybKhH00BMBHWf5ZIYs0gHlpwjBkI901Yf+XFqILNOEpZMSj0
-	DaOOLVRQAl/2m7nq0fXW1TuR8JJxYXdYAp0XKxg=
-X-Google-Smtp-Source: APXvYqyiwfqfRzlCqbzvJAmSBb7IK059vchRFWJoURZ3sIZAL49duOXMZ2IP1tjXAhgZdcul23HYNp1wZE0QuOn0T/E=
-X-Received: by 2002:aa7:da4a:: with SMTP id w10mr11174868eds.209.1571425625962;
-	Fri, 18 Oct 2019 12:07:05 -0700 (PDT)
+	Fri, 18 Oct 2019 19:49:59 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x9IJnr6a022102
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 18 Oct 2019 12:49:54 -0700
+Received: from [172.25.44.5] (172.25.44.5) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 18 Oct 2019 12:49:53 -0700
+To: "marek.bykowski@gmail.com" <marek.bykowski@gmail.com>, Khem Raj
+	<raj.khem@gmail.com>
+References: <1571141621-20235-1-git-send-email-marek.bykowski@gmail.com>
+	<20191016104557.GA7998@localhost> <20191016142112.10a645d2@gmail.com>
+	<CAMKF1srjpre+zbi6Q2==McOEvV8njBdzqOf8nGxor9NN5tMoig@mail.gmail.com>
+	<20191018134224.62ca6095@gmail.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <83e0f896-8ec4-df4f-d14c-256cb70774c1@windriver.com>
+Date: Fri, 18 Oct 2019 15:49:51 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
 MIME-Version: 1.0
-References: <20190929092956.13147-1-Qi.Chen@windriver.com>
-	<20191017204414.GB1499@jama>
-	<CA+chaQcpMndabwwuv+c8203ATbcwNEMJ8zjLDnqTkzkqyw4OrQ@mail.gmail.com>
-	<CAMKF1sq30Y4p=7ckBc+2cQmg2-bTs9p4KG4ddOqrZibQHTCexQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sq30Y4p=7ckBc+2cQmg2-bTs9p4KG4ddOqrZibQHTCexQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 18 Oct 2019 21:06:54 +0200
-Message-ID: <CA+chaQfNsqJJAkCXV_ZuO17mtNh4CDm7YjeuFQvh9bTTs4ad2w@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] protobuf-c: fix race condition
+In-Reply-To: <20191018134224.62ca6095@gmail.com>
+X-Originating-IP: [172.25.44.5]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [meta-oe] [PATCHv3] lmbench: Fix/clean-up the build for lmbench
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,201 +40,213 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 19:07:06 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Oct 2019 19:49:59 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-One more data point is that it might be fixed completely with 1.3.2 version
-used in zeus/master and failing less often then without this patch in 1.3.1
-used in thud/warrior.
+On 10/18/19 7:42 AM, marek.bykowski@gmail.com wrote:
+> Fix/clean up a couple of things:
+> - if lmbench doesn't use a return from a function attributed to warn_unused_result
+>    suppress the warning/s
+> - fix buffer overflow
+> - define feature_test_macro_GNU_SOURCE compiling in sched_{get,set}affinity()
+> - go strict for a pre-build check if sched_{get,set}affinity() from glibc builds
+>    cleanly. If it is not compile it out.
+> 
+> Signed-off-by: Marek Bykowski<marek.bykowski@gmail.com>
+> Reviewed-off-by: Marcin Lapaj<marcin.lapaj@tieto.com>
+> ---
+> Changelog V2->V3:
+> - primary I have made it strict in a pre-build check if sched_{get,set}affinity()
+>    do not throw any warnings. If they do there is a possibility of a mismatch
+>    between the routines signatures in the app and their definitions in the glibc
+>    and, as a result, decided on skipping the affinity all together. Anyway I don't
+>    think affinity is used that often (if at all) in lmbench. It is better-off
+>    to script it around and use "taskset" to control the CPU's affinity
+> - additionally I have tested building it against x86 and aarch64 toolchains
+> ---
+>   ...h-Fix-clean-up-the-build-for-lmbench.patch | 475 ++++++++++++++++++
+>   .../lmbench/lmbench_3.0-a9.bb                 |   1 +
+>   2 files changed, 476 insertions(+)
+>   create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lmbench-Fix-clean-up-the-build-for-lmbench.patch
+> 
+> diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lmbench-Fix-clean-up-the-build-for-lmbench.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lmbench-Fix-clean-up-the-build-for-lmbench.patch
+> new file mode 100644
+> index 000000000..ba650040e
+> --- /dev/null
+> +++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lmbench-Fix-clean-up-the-build-for-lmbench.patch
+> @@ -0,0 +1,475 @@
+> +lmbench: Fix/clean-up the build for lmbench
+> +
+> +Fix/clean up a coule of things:
+> +- if lmbench doesn't use a return from a function attributed to warn_unused_result
+> +  supress the warning/s
+> +- fix buffer overflow
+> +- define feature_test_macro_GNU_SOURCE compiling in sched_{get,set}affinity()
+> +- go strict for a pre-build check if sched_{get,set}affinity() from glibc builds
+> +  cleanly. If it is not compile it out.
+> +
+> +Signed-off-by: Marek Bykowski<marek.bykowski@gmail.com>
+> +Reviewed-off-by: Marcin Lapaj<marcin.lapaj@tieto.com>
+> +
+> +---
+> + scripts/build          | 24 +++++++++++++++---------
+> + src/bw_tcp.c           |  2 +-
+> + src/bw_unix.c          |  4 ++--
+> + src/hello.c            |  2 +-
+> + src/lat_connect.c      |  2 +-
+> + src/lat_fcntl.c        |  4 ++--
+> + src/lat_fs.c           |  2 +-
+> + src/lat_http.c         |  6 +++---
+> + src/lat_proc.c         |  2 +-
+> + src/lat_select.c       |  2 +-
+> + src/lat_tcp.c          |  8 ++++----
+> + src/lat_unix.c         |  2 +-
+> + src/lat_unix_connect.c |  4 ++--
+> + src/lib_sched.c        |  7 +++++--
+> + src/lib_timing.c       | 18 +++++++++---------
+> + src/lmhttp.c           | 26 +++++++++++++++++---------
+> + src/memsize.c          |  4 ++--
+> + 17 files changed, 68 insertions(+), 51 deletions(-)
+> +
+> +diff --git a/scripts/build b/scripts/build
+> +index 3786741..c0930d6 100755
+> +--- a/scripts/build
+> ++++ b/scripts/build
+> +@@ -33,7 +33,7 @@ else
+> + 	fi
+> + fi
+> + rm -f ${BASE}$$ ${BASE}$$.o ${BASE}$$.c
+> +-	
+> ++
+> + # check for IA64 HP-UX w/ HP's ANSI compiler; may need pointer swizzling
+> + arch=`echo $OS | awk -F- '{print $1;}'`
+> + if [ "X$CC" = "Xcc" -a "X$arch" = "Xia64" ]
+> +@@ -272,14 +272,20 @@ ${CC} ${CFLAGS} -o ${BASE}$$ ${BASE}$$.c ${LDLIBS} 1>${NULL} 2>${NULL} \
+> + 	&& CFLAGS="${CFLAGS} -DHAVE_BINDPROCESSOR=1";
+> + rm -f ${BASE}$$ ${BASE}$$.o ${BASE}$$.c
+> +
+> +-# check that we have sched_setaffinity
+> +-echo "#include <stdlib.h>" > ${BASE}$$.c
+> +-echo "#include <unistd.h>" >> ${BASE}$$.c
+> +-echo "#include <sched.h>" >> ${BASE}$$.c
+> +-echo "main() { unsigned long mask = 1; return sched_setaffinity(0, sizeof(unsigned long), &mask); }" >> ${BASE}$$.c
+> +-${CC} ${CFLAGS} -o ${BASE}$$ ${BASE}$$.c ${LDLIBS} 1>${NULL} 2>${NULL} \
+> +-	&& CFLAGS="${CFLAGS} -DHAVE_SCHED_SETAFFINITY=1";
+> +-rm -f ${BASE}$$ ${BASE}$$.o ${BASE}$$.c
+> ++# check that we have sched_setaffinity and it builds cleanly
+> ++cat << '_ACEOF' > ${BASE}$$.c
+> ++#define _GNU_SOURCE
+> ++#include <stdlib.h>
+> ++#include <unistd.h>
+> ++#include <sched.h>
+> ++int main() {
+> ++cpu_set_t set; CPU_ZERO(&set); CPU_SET(0, &set);
+> ++if (sched_setaffinity(0, sizeof(set), &set) == -1) exit(EXIT_FAILURE); exit(EXIT_SUCCESS);
+> ++}
+> ++_ACEOF
+> ++${CC} ${CFLAGS} -o ${BASE}$$ ${BASE}$$.c ${LDLIBS} 1>${NULL} 2>${BASE}$$_err
+> ++test -s ${BASE}$$_err || CFLAGS="${CFLAGS} -DHAVE_SCHED_SETAFFINITY=1"
+> ++rm -f ${BASE}$$_err ${BASE}$$ ${BASE}$$.o ${BASE}$$.c
+> +
+> +
+> + if [ ! -d ${BINDIR} ]; then mkdir -p ${BINDIR}; fi
+> +diff --git a/src/bw_tcp.c b/src/bw_tcp.c
+> +index cc27098..bf76fac 100644
+> +--- a/src/bw_tcp.c
+> ++++ b/src/bw_tcp.c
+> +@@ -60,7 +60,7 @@ main(int ac, char **av)
+> + 		{
+> + 			int	conn;
+> + 			conn = tcp_connect(optarg, TCP_DATA, SOCKOPT_NONE);
+> +-			write(conn, "0", 1);
+> ++			(void) !write(conn, "0", 1);
+> + 			exit(0);
+> + 		}
+> + 		case 'm':
+> +diff --git a/src/bw_unix.c b/src/bw_unix.c
+> +index ad71157..493db7c 100644
+> +--- a/src/bw_unix.c
+> ++++ b/src/bw_unix.c
+> +@@ -97,7 +97,7 @@ reader(iter_t iterations, void* cookie)
+> + 	size_t	todo = state->bytes;
+> +
+> + 	while (iterations-- > 0) {
+> +-		write(state->control[1], &todo, sizeof(todo));
+> ++		(void) !write(state->control[1], &todo, sizeof(todo));
+> + 		for (done = 0; done < todo; done += n) {
+> + 			if ((n = read(state->pipes[0], state->buf, state->xfer)) <= 0) {
+> + 				/* error! */
+> +@@ -115,7 +115,7 @@ writer(int controlfd, int writefd, char* buf, void* cookie)
+> + 	struct _state* state = (struct _state*)cookie;
+> +
+> + 	for ( ;; ) {
+> +-		read(controlfd, &todo, sizeof(todo));
+> ++		(void) !read(controlfd, &todo, sizeof(todo));
+> + 		for (done = 0; done < todo; done += n) {
+> + #ifdef TOUCH
+> + 			touch(buf, XFERSIZE);
+> +diff --git a/src/hello.c b/src/hello.c
+> +index 15a2493..0f7f237 100644
+> +--- a/src/hello.c
+> ++++ b/src/hello.c
+> +@@ -3,6 +3,6 @@
+> + int
+> + main()
+> + {
+> +-	write(1, "Hello world\n", 12);
+> ++	(void) !write(1, "Hello world\n", 12);
 
-I was rebuilding it 300 times in thud/warrior/zeus and got 5-6 failures in
-thud/warrior but none in zeus.
 
-I've started another for loop to rebuilt it 1000 time with zeus and if it
-works then I'll retest warrior and thud with 1.3.2 upgrade backported to
-them - if it works then we can either backport whole upgrade or check the
-1.3.1 1.3.2 diff to find out what else we need to backport from there.
+Hi Merek,
 
-On Fri, Oct 18, 2019 at 11:07 AM Khem Raj <raj.khem@gmail.com> wrote:
+What's the "!" for ? It doesn't seem to be essential.
 
-> Yes I have seen same build failures on master even after this fix on
-> machine with more cpus so the fix while seems to address the problem is n=
-ot
-> fixing is completely when I get a chance I will look into the logic mysel=
-f
-> too but I think we have to delve into it a bit More
->
-> On Fri, Oct 18, 2019 at 3:41 AM Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->
->> Hmm I spoke too soon, at least rebuilding protobuf-c-native with this
->> change backported to thud still failed once with:
->>
->> ../git/t/generated-code2/cxx-generate-packed-data.cc:28:17: error: =E2=
-=80=98foo=E2=80=99
->> is
->> not a namespace-name
->>  using namespace foo;
->>                  ^~~
->> ../git/t/generated-code2/cxx-generate-packed-data.cc:28:20: error:
->> expected
->> namespace-name before =E2=80=98;=E2=80=99 token
->>  using namespace foo;
->>                     ^
->> ../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
->> =E2=80=98TestEnumSmall=E2=80=99 does not name a type
->>  #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
->>                                     ^
->> ../git/t/generated-code2/common-test-arrays.h:44:1: note: in expansion o=
-f
->> macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
->>  TEST_ENUM_SMALL_TYPE_NAME enum_small_0[] =3D { TEST_ENUM_SMALL(VALUE) }=
-;
->>  ^~~~~~~~~~~~~~~~~~~~~~~~~
->> ../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
->> =E2=80=98TestEnumSmall=E2=80=99 does not name a type
->>  #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
->>                                     ^
->> ../git/t/generated-code2/common-test-arrays.h:45:1: note: in expansion o=
-f
->> macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
->>  TEST_ENUM_SMALL_TYPE_NAME enum_small_1[] =3D { TEST_ENUM_SMALL(OTHER_VA=
-LUE)
->> };
->>  ^~~~~~~~~~~~~~~~~~~~~~~~~
->> ../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
->> =E2=80=98TestEnumSmall=E2=80=99 does not name a type
->>  #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
->>                                     ^
->> ../git/t/generated-code2/common-test-arrays.h:47:1: note: in expansion o=
-f
->> macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
->>  TEST_ENUM_SMALL_TYPE_NAME enum_small_random[] =3D
->>
->> {T(0),T(1),T(1),T(0),T(0),T(1),T(1),T(1),T(0),T(0),T(0),T(0),T(0),T(1),T=
-(1),T(1),T(1),T(1),T(1),T(0),T(1),T(1),T(0),T(1),T(1),T(0)
->> };
->>  ^~~~~~~~~~~~~~~~~~~~~~~~~
->> ...
->> so it probably doesn't fix the issue completely.
->>
->>
->> On Thu, Oct 17, 2019 at 10:44 PM Martin Jansa <martin.jansa@gmail.com>
->> wrote:
->>
->> > On Sun, Sep 29, 2019 at 05:29:56PM +0800, Chen Qi wrote:
->> > > Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
->> > > ---
->> > >  .../0001-avoid-race-condition.patch           | 36
->> +++++++++++++++++++
->> > >  .../protobuf/protobuf-c_1.3.2.bb              |  1 +
->> > >  2 files changed, 37 insertions(+)
->> > >  create mode 100644
->> >
->> meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.p=
-atch
->> > >
->> > > diff --git
->> >
->> a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition=
-.patch
->> >
->> b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition=
-.patch
->> > > new file mode 100644
->> > > index 000000000..4fc7703d8
->> > > --- /dev/null
->> > > +++
->> >
->> b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition=
-.patch
->> > > @@ -0,0 +1,36 @@
->> > > +From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00
->> 2001
->> > > +From: Chen Qi <Qi.Chen@windriver.com>
->> > > +Date: Sun, 29 Sep 2019 17:20:42 +0800
->> > > +Subject: [PATCH] avoid race condition
->> > > +
->> > > +It's possible that the cxx-generate-packed-data.cc is compiled
->> > > +while the t/test-full.pb.h is being generated. This will result
->> > > +the following error.
->> > > +
->> > > +  DEBUG:     ./t/test-full.pb.h:4:0: error: unterminated #ifndef
->> > > +  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
->> > > +
->> > > +Add a dependency to avoid such problem.
->> > > +
->> > > +Upstream-Status: Pending
->> >
->> > Thanks for this patch, it seems to indeed fix this issue, I've reporte=
-d
->> > a while ago:
->> >
->> >
->> https://www.mail-archive.com/openembedded-devel@lists.openembedded.org/m=
-sg64363.html
->> >
->> > I think the upstream would be interested in this fix as well, see:
->> >
->> >
->> https://github.com/protobuf-c/protobuf-c/commit/b0bb56303366e2c072ee38eb=
-5f1f11251b07239c
->> >
->> > Cheers,
->> >
->> > > +
->> > > +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
->> > > +---
->> > > + Makefile.am | 1 +
->> > > + 1 file changed, 1 insertion(+)
->> > > +
->> > > +diff --git a/Makefile.am b/Makefile.am
->> > > +index b0cb065..1608ae0 100644
->> > > +--- a/Makefile.am
->> > > ++++ b/Makefile.am
->> > > +@@ -156,6 +156,7 @@ noinst_PROGRAMS +=3D \
->> > > + t_generated_code2_cxx_generate_packed_data_SOURCES =3D \
->> > > +     t/generated-code2/cxx-generate-packed-data.cc \
->> > > +     t/test-full.pb.cc
->> > > ++t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
->> > > + $(t_generated_code2_cxx_generate_packed_data_OBJECTS):
->> t/test-full.pb.h
->> > > + t_generated_code2_cxx_generate_packed_data_CXXFLAGS =3D \
->> > > +     $(AM_CXXFLAGS) \
->> > > +--
->> > > +2.17.1
->> > > +
->> > > diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
->> > b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
->> > > index 6d1ffc3f4..b92f82dec 100644
->> > > --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
->> > > +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
->> > > @@ -15,6 +15,7 @@ DEPENDS =3D "protobuf-native protobuf"
->> > >  SRCREV =3D "1390409f4ee4e26d0635310995b516eb702c3f9e"
->> > >
->> > >  SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git \
->> > > +           file://0001-avoid-race-condition.patch \
->> > >            "
->> > >
->> > >  S =3D "${WORKDIR}/git"
->> > > --
->> > > 2.17.1
->> > >
->> > > --
->> > > _______________________________________________
->> > > Openembedded-devel mailing list
->> > > Openembedded-devel@lists.openembedded.org
->> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> >
->> > --
->> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
->> >
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
+In unistd.h:
+extern ssize_t write (int __fd, const void *__buf, size_t __n) __wur;
+
+and in cdefs.h:
+---------------
+/* If fortification mode, we warn about unused results of certain
+    function calls which can lead to problems.  */
+#if __GNUC_PREREQ (3,4)
+# define __attribute_warn_unused_result__ \
+    __attribute__ ((__warn_unused_result__))
+# if __USE_FORTIFY_LEVEL > 0
+#  define __wur __attribute_warn_unused_result__
+# endif
+#else
+# define __attribute_warn_unused_result__ /* empty */
+#endif
+#ifndef __wur
+# define __wur /* Ignore */
+#endif
+---------------
+
+so did you consider just making a compiler specific fix/hack
+for gcc/clang such as:
+    #define __wur /* Ignore */
+You could do that in each file that needs it.
+While that's still ugly, it is at least more localized.
+
+
+Also, did you confirm that this change doesn't affect the
+resulting binary code? I expect that it won't but it's a
+benchmark so it's worth confirming.
+
+
+Finally, lmbench hasn't released a new tarball on sf.net in 5 years:
+    https://sourceforge.net/projects/lmbench/
+There's a new somewhat active version of lmbench:
+    https://github.com/intel/lmbench
+Should we use that version?
+
+Sorry to leave this until v3 but the:
+    (void) !foo()
+syntax triggered me! ;-)
+
+-- 
+# Randy MacLeod
+# Wind River Linux
 
