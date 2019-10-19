@@ -1,45 +1,49 @@
-Return-Path: <3kU6qXQMKAMoCq0w44w1u.s42@flex--wak.bounces.google.com>
-Received: from mail-pf1-f202.google.com (mail-pf1-f202.google.com
-	[209.85.210.202])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CB387F6BC
+Return-Path: <ankit.tarot@gmail.com>
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
+	[209.85.215.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 872247F6E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 23:45:20 +0000 (UTC)
-Received: by mail-pf1-f202.google.com with SMTP id i28so5804896pfq.16
+	Sat, 19 Oct 2019 08:35:26 +0000 (UTC)
+Received: by mail-pg1-f176.google.com with SMTP id p12so4667046pgn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Oct 2019 16:45:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
-	h=date:message-id:mime-version:subject:from:to:cc;
-	bh=HckXpIUzAJdRZsQK1gscl4mgha/04dry8wZm3WrY1NQ=;
-	b=iAcnx7a0WTdiS4gmcfHVwmebEvr7Mf84WjLIi1npAxOK87xNdcJys79uPo/78nGf/9
-	VtAICtYTjS4mg33FyTJ/MKYxNAiddGop+rrFSZCabkZfsnsPPvFEcVWU5TGgHLfezKlw
-	woQWT2vGcUu63ncU3OKUq0pot5jKkx7JsBohTB9JHhZK1eB5Q2VaJ7QHcCCG/sZqNEDq
-	yIze4KYJMcD8uCPC3N8uQ5wIvGxpJOlwZXxZRsizj39DIVq1qmiKfpRtm6DIGFgsXSTU
-	wdI+zUmWMNPN0ayZKyVmnxYi4NZXTwsScrtvmx3TCkSkEOyrpj9PZOf6aDoUza1xfPGX
-	8QYg==
+	Sat, 19 Oct 2019 01:35:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=w3HFeVSYhLhrgbJEDKOxUKbP6Mn42cTtTyZw1Dau8H0=;
+	b=T4dDl6pur5TrDwIqTJE/W2Rw89LjGBXH4kd97I2geGxEAERJ8ZRTspNefBkdwghNYr
+	Zpyys3g/Lt7tP14Ff8ougBYjfs0Sba/2AdNrFiW/f9Zu0A+PePyMY4re83r5ELtN/PMb
+	1Evcao1UkWtVZEQLCj8avhq9SG+ghcVZ7g7cTrcE3oo+03uvv3iM1GDrNpJF76Y4p24r
+	5n97lS+vzCkvvBSYRTqw5pl7tE1EF3dZoEPdrm+7L7oxnrGMwgXkA/JeQX3G0Pq8myVU
+	Ve7joe+jYccwu3vd6xESWD0iRnhb2KFAWp3qUvlWMFImpA16uZN4qQ+QqbmIkPzlE38i
+	JROQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-	bh=HckXpIUzAJdRZsQK1gscl4mgha/04dry8wZm3WrY1NQ=;
-	b=SBLT+jY5L8py1WmBQ5zVzQ0TVQ9CysU3axr9vJLNr86zrj+oPEoYuI7a/yDXJ782vc
-	VUlHCbNuUBX9opMZF3j7ZgL7IFi8R5j83vI/Nh4kIoTvSddLLvoAcql+u8iDbZwKd4A8
-	ZyA7tIizROToS8n3mXqEp/JFSRZGPzWtDkM2L5DdZUzPEYqXrFhxUAQNLqe8ZDTD1RLD
-	wMAm0x3CtI1+7dEYSBzRVqcHm8mLebaZIBtZjdbN9Yy2qQdma657cX1PitkeCj3/p9WF
-	ofRSBbFa3vC9/yUkQN3TMZiGsmvfFi2WN5PspJVUNzOIG1p11HWo+ApwJXadnkmBypo4
-	RsXw==
-X-Gm-Message-State: APjAAAW9SAALWzUv2O4gwnylOG6ebWCJv/LUiV8n5ZU1o+hXR3L4wGQB
-	YFVzncneru0d42avPP1sYIlGti+BUmaTbrUlWkH6S1b2qfPS8aXWVsCSYrHbmOhWZiEkbsAjyOy
-	xomUnHIig00w6sH5iabADRQ3IYt15PHhZm6T+kH/8/i6FB1YPZnUr0HWc76hfL5W7uONBUdyiUS
-	YI4uo=
-X-Google-Smtp-Source: APXvYqwEdbWAa4yNKRQPa83m3PE/gSyvfrQW7PqA+8KEmVsCEStXUC2cY6BCe/TV5JgJA2WHJn4HPsQ=
-X-Received: by 2002:a65:6641:: with SMTP id z1mr13082198pgv.23.1571442321871; 
-	Fri, 18 Oct 2019 16:45:21 -0700 (PDT)
-Date: Fri, 18 Oct 2019 16:45:15 -0700
-Message-Id: <20191018234515.15676-1-wak@google.com>
-Mime-Version: 1.0
-X-Mailer: git-send-email 2.22.0
-From: "William A. Kennington III" <wak@google.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=w3HFeVSYhLhrgbJEDKOxUKbP6Mn42cTtTyZw1Dau8H0=;
+	b=ioL8DVuzXQEaHQDUZ6YmUAzzdJrWLCHFpDccUhl5uDIva5mZiO5TRmxa86Yh8nQuHD
+	U9u3UQmfn8eYNWcEczNNzDJijTfl7q7M0gly1yTSpzJgGW5jxGjfUYarDC96f9zHsQDp
+	WMnX10/Sv8MPMzGGCW2yCTED3kCpvRoBAb5AWpP7erjcuYFnIPXSeT7Q8nHi8gr+M+ZB
+	4nOAaZl/Ni/Wbu1rPoIZQzzt3k66XWTzZk7GbGzOZqPkiYUrZeA5D60yHV5s4PWeql5o
+	ytryxlkeZfAXHd11XCPGpzMefWvDOcxe6v770FgXz/vCwleY2TvQ6eUma1IxgYroSs5o
+	zcjQ==
+X-Gm-Message-State: APjAAAV+VtBZdBmIz6TW9C2P+ijZkT3gMZBfoXy7W7y9/7xlIBY4zLQj
+	qWcxhrA9nJCYR+UfbfsMWlB/XTd5ksk=
+X-Google-Smtp-Source: APXvYqw4Jc9ceKSnWda7/ZQXYQZLUtuettG5LobxIG828qNITXh/IZTwagClO2E3/cuqZBqMxtG/Aw==
+X-Received: by 2002:a17:90a:bc41:: with SMTP id
+	t1mr16064849pjv.67.1571474127299; 
+	Sat, 19 Oct 2019 01:35:27 -0700 (PDT)
+Received: from localhost.localdomain ([192.55.55.41])
+	by smtp.gmail.com with ESMTPSA id
+	193sm9635263pfc.59.2019.10.19.01.35.25
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 19 Oct 2019 01:35:26 -0700 (PDT)
+From: Ankit Navik <ankit.tarot@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH] span-lite: Init at 0.6.0
+Date: Sat, 19 Oct 2019 14:07:07 +0530
+Message-Id: <1571474227-28534-1-git-send-email-ankit.tarot@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH v2] glfw: Initial recipe for glfw
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,34 +56,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Oct 2019 23:45:21 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 19 Oct 2019 08:35:27 -0000
 
-Signed-off-by: William A. Kennington III <wak@google.com>
+It adds generic recipe for glfw: a multi-platform library for OpenGL,
+OpenGL ES, Vulkan, window and input.
+
+Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
 ---
- meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb
+ meta-oe/recipes-core/glfw/glfw_3.3.bb | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-core/glfw/glfw_3.3.bb
 
-diff --git a/meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb b/meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb
+diff --git a/meta-oe/recipes-core/glfw/glfw_3.3.bb b/meta-oe/recipes-core/glfw/glfw_3.3.bb
 new file mode 100644
-index 000000000..0ea2dcc8d
+index 0000000..e3853a2
 --- /dev/null
-+++ b/meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "single-file header-only version of a C++20-like span for C++98, C++11 and later"
-+HOMEPAGE = "https://github.com/martinmoene/span-lite"
-+LICENSE = "BSL-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
++++ b/meta-oe/recipes-core/glfw/glfw_3.3.bb
+@@ -0,0 +1,22 @@
++SUMMARY  = "A multi-platform library for OpenGL, OpenGL ES, Vulkan, window and input"
++HOMEPAGE = "https://www.glfw.org/"
++DESCRIPTION = "GLFW is an Open Source, multi-platform library for OpenGL, \
++OpenGL ES and Vulkan application development. It provides a simple, \
++platform-independent API for creating windows, contexts and surfaces, reading \
++input, handling events, etc."
++LICENSE  = "Zlib"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=98d93d1ddc537f9b9ea6def64e046b5f"
++SECTION = "lib"
 +
-+SRC_URI += "git://github.com/martinmoene/span-lite"
-+SRCREV = "34118d2df7976f635c8fd35b5959f86cb52ba93c"
++inherit pkgconfig cmake
 +
 +S = "${WORKDIR}/git"
++SRC_URI = "git://github.com/glfw/glfw.git"
++SRCREV = "d25248343e248337284dfbe5ecd1eddbd37ae66d"
 +
-+inherit cmake
-+inherit ptest
++EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
++
++DEPENDS = "libpng libglu zlib libxrandr libxinerama libxi libxcursor"
++REQUIRED_DISTRO_FEATURES = "x11"
++
++COMPATIBLE_HOST_libc-musl = "null"
 -- 
-2.22.0
+2.7.4
 
 
