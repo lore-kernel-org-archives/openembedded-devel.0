@@ -1,54 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 889E260017
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CE7160685
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Oct 2019 15:59:41 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id f22so10353233wmc.2
+	Mon, 21 Oct 2019 03:13:18 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.67,322,1566835200"; d="scan'208";a="77253516"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 21 Oct 2019 11:13:18 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 438174CE14FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Oct 2019 08:59:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=YVrOI3Nk4ufoXYup4P7MziERx8zV62cq883cEyYWs6s=;
-	b=e8feu1IYifl+dQqYJn162JXbNHnPq9+aaYGFIHHJRDhcigS4yTu/9bEy0tORPwljMN
-	uUhwEfnTGSf6UrmBRfwd4K4ALJE1dgl0a4oYWhdKKBaPDm/qRBMH0Ado0ObrXlH1PKmp
-	8nQUKBPPCc1NKnAgcDZiD13zqb8fHmLn3Spjngl9qqPMqoT8kD9nW11+v45SHGloQsP5
-	hvHXhVuSlEiog5DEj7JH2tXXJcphFyeh5TTqLN9wWI2eneFSWcDV6VrFbDhNndlzI+19
-	xdcWsoauG1K28y6nYUUfUyiLaUjt1PVbLSOUYBCKrvVA8pDu+OM2AjjMRap3IfclCoDX
-	h4Eg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=YVrOI3Nk4ufoXYup4P7MziERx8zV62cq883cEyYWs6s=;
-	b=cKZ/GqGuriJ0p7ASzMpZdo7+D0nb5U/7GJMO6atOAUgOoeN293ArL7hgxnnoUJrVNS
-	eZt0S6kJiCaGWfRJ0JRoykm3fXKOM16hOjmV5GG8cEX5c6VC2JQnYNh/8eG/LMjAMNm/
-	OUq23/9wcniOYeNv9rgKhFMqQ1B47Wzc4of+S0Ci6Ip/pLmu4DQn3Y9bHO/hlFF6n6uU
-	7jkL26Rcje2+OhcoFYqy5n9Opr720+uKwCE8AuIm82ioyUd59gPMRsONJOZcQEUuTAI1
-	i6h3TQ6P0z7KEfPLoUctOSW5gQ0sRYsAiZZfXydzL5SD4H0C2mpx+JswhGflWxKTf6j1
-	XKCA==
-X-Gm-Message-State: APjAAAWy+k9z7f72bd7HNkTsr3LylpPgxrPnhHN7EqAePXKavqMeSU32
-	3SbHe9YHZQEf6drcc41selAAGWCm
-X-Google-Smtp-Source: APXvYqwRouOQo+ZtF3Sm8ul+8u6epc1VTaZt/bqbevWJxkQpkwy3wBpqtbX+NyMDiftFQhS2HuSfiw==
-X-Received: by 2002:a1c:2884:: with SMTP id
-	o126mr16911387wmo.153.1571587182090; 
-	Sun, 20 Oct 2019 08:59:42 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F405267812FFCF570F737A6.dip0.t-ipconnect.de.
-	[2003:f0:7f40:5267:812f:fcf5:70f7:37a6])
-	by smtp.gmail.com with ESMTPSA id
-	a71sm11428293wme.11.2019.10.20.08.59.40
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 20 Oct 2019 08:59:41 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	richard.purdie@linuxfoundation.org
-Date: Sun, 20 Oct 2019 17:59:34 +0200
-Message-Id: <20191020155934.2476-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Mon, 21 Oct 2019 11:12:48 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 21 Oct 2019 11:13:18 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 21 Oct 2019 11:13:30 +0800
+Message-ID: <20191021031330.19087-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [PATCH] dconf: Fix build with meson 0.52
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 438174CE14FE.A8C3C
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] ltrace:Bug fix for data type length judgment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,73 +37,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Oct 2019 15:59:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Oct 2019 03:13:18 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
+...
+if (byte_size == sizeof(long)) {
 
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+        *type = is_signed ? ARGTYPE_LONG : ARGTYPE_ULONG;
 
-Slightly adjusted patch sent to mailing list [1]
+        return true;
 
-[1] http://lists.openembedded.org/pipermail/openembedded-core/2019-October/288108.html
+}
+...
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+If ltrace's target command has a dbg package, ltrace will look for the debug file and analyze its contents.
+Ltrace determines the type of analysis result variable. The type of the variable is longlong.
+On 32-bit systems, longlong is 8 and long is 4 (same as in).
+An error occurred because the ltrace code did not process a variable of length 8.
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Wang Mingyu <wangmy.fnst@cn.fujitsu.com>
 ---
+ ...001-Bug-fix-for-data-type-length-judgment.patch | 42 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  1 +
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-Bug-fix-for-data-type-length-judgment.patch
 
-Should apply on master-next
-
- .../dconf/dconf/fix-meson-0.52.patch          | 25 +++++++++++++++++++
- .../recipes-gnome/dconf/dconf_0.34.0.bb       |  2 ++
- 2 files changed, 27 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/dconf/dconf/fix-meson-0.52.patch
-
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf/fix-meson-0.52.patch b/meta-gnome/recipes-gnome/dconf/dconf/fix-meson-0.52.patch
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-Bug-fix-for-data-type-length-judgment.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-Bug-fix-for-data-type-length-judgment.patch
 new file mode 100644
-index 000000000..485c46509
+index 0000000..98cc9ba
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/dconf/dconf/fix-meson-0.52.patch
-@@ -0,0 +1,25 @@
-+With meson 0.52 the build fails due to duplicate symbols. There is a fix
-+to meson but the dconf build also needs tweaking.
++++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-Bug-fix-for-data-type-length-judgment.patch
+@@ -0,0 +1,42 @@
++From 5226333bddb755dbefd780d31450e0238dd5d3bd Mon Sep 17 00:00:00 2001
++From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
++Date: Wed, 16 Oct 2019 08:24:23 +0900
++Subject: [PATCH] Bug fix for data type length judgment.
 +
-+https://gitlab.gnome.org/GNOME/dconf/issues/59
-+https://github.com/mesonbuild/meson/pull/5936
++...
++if (byte_size == sizeof(long)) {
 +
-+Despite the comments there about this being incorrect, libdconf is unchanged
-+between 0.51 and 0.52 and this patch.
++	*type = is_signed ? ARGTYPE_LONG : ARGTYPE_ULONG;
 +
-+Upstream-Status: Pending [under discussion, see above links]
-+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
++	return true;
 +
-+Index: dconf-0.34.0/client/meson.build
-+===================================================================
-+--- dconf-0.34.0.orig/client/meson.build
-++++ dconf-0.34.0/client/meson.build
-+@@ -28,7 +28,7 @@ libdconf_client = static_library(
++}
++...
++
++If ltrace's target command has a dbg package, ltrace will look for the debug file and analyze its contents.
++Ltrace determines the type of analysis result variable. The type of the variable is longlong.
++On 32-bit systems, longlong is 8 and long is 4 (same as in).
++An error occurred because the ltrace code did not process a variable of length 8.
++
++Upstream-Status: Pending
++Signed-off-by: Wang Mingyu <wangmy.fnst@cn.fujitsu.com>
++---
++ dwarf_prototypes.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/dwarf_prototypes.c b/dwarf_prototypes.c
++index bfac177..9887d4b 100644
++--- a/dwarf_prototypes.c
+++++ b/dwarf_prototypes.c
++@@ -190,7 +190,7 @@ static bool get_integer_base_type(enum arg_type *type, int byte_size,
++ 		return true;
++ 	}
 + 
-+ libdconf_client_dep = declare_dependency(
-+   dependencies: gio_dep,
-+-  link_whole: libdconf_client,
-++  link_with: libdconf_client,
-+ )
-+ 
-+ libdconf = shared_library(
-diff --git a/meta-gnome/recipes-gnome/dconf/dconf_0.34.0.bb b/meta-gnome/recipes-gnome/dconf/dconf_0.34.0.bb
-index a1996a1a3..ef549432e 100644
---- a/meta-gnome/recipes-gnome/dconf/dconf_0.34.0.bb
-+++ b/meta-gnome/recipes-gnome/dconf/dconf_0.34.0.bb
-@@ -12,6 +12,8 @@ GNOMEBASEBUILDCLASS = "meson"
- 
- inherit gnomebase bash-completion vala
- 
-+SRC_URI += "file://fix-meson-0.52.patch"
++-	if (byte_size == sizeof(long)) {
+++	if (byte_size == sizeof(long long)) {
++ 		*type = is_signed ? ARGTYPE_LONG : ARGTYPE_ULONG;
++ 		return true;
++ 	}
++-- 
++2.7.4
 +
- # I/O error : Attempt to load network entity http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl
- EXTRA_OEMESON = "-Dman=false"
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index ead637c..5c4e7c5 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http
+            file://0001-move-fprintf-into-same-block-where-modname-and-symna.patch \
+            file://0001-hook-Do-not-append-int-to-std-string.patch \
+            file://include_unistd_nr.patch \
++           file://0001-Bug-fix-for-data-type-length-judgment.patch \
+            "
+ S = "${WORKDIR}/git"
  
 -- 
-2.21.0
+2.7.4
+
+
 
 
