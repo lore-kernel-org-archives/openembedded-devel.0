@@ -1,49 +1,46 @@
-Return-Path: <philip@balister.org>
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with ESMTP id B4E8E7D200
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id C780D7F44C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Oct 2019 16:43:07 +0000 (UTC)
-Received: (qmail 15081 invoked by uid 1003); 21 Oct 2019 16:43:13 -0000
-Received: from unknown (HELO ?192.168.11.139?)
-	(philip@opensdr.com@73.152.143.112)
-	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP;
-	21 Oct 2019 16:43:13 -0000
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	Yocto Project <yocto@yoctoproject.org>
-From: Philip Balister <philip@balister.org>
-Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
-	mQENBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
-	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
-	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
-	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
-	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
-	AAG0JVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz6JAT4EEwECACgCGyMG
-	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
-	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
-	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
-	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
-	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
-	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4Yxi5AQ0ETo83gQEIAPs+ZC0R
-	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
-	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
-	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
-	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
-	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAYkBJQQYAQIADwIbDAUC
-	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
-	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
-	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
-	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
-	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
-	6eUfr0u7CwnEyqiQ
-Message-ID: <f4beeff0-61dd-dca3-a0a2-b622877dd892@balister.org>
-Date: Mon, 21 Oct 2019 12:43:07 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.1.1
+	Mon, 21 Oct 2019 21:26:40 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id u184so14264816qkd.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Oct 2019 14:26:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=OMRr3MmYoFhxXjSVHI3jr1HEXPHwEYw1QQZQ5MVUx4A=;
+	b=jsL8oFI1CVWsYvlZtGDnLNRzcyBMun+pwz1eUB9WGP+QyAThBWx0Am8wg2Lip2hpzo
+	3wIFna2SffNzY75QyeZ1zvPn4FC0rnD/IK+bWwsl1DhUIVc2b0Q157jrO5ztvmouKRM6
+	VUmQmfsO71Tnngg26NoGTbOIQJAdVlvfO9p7y5ehilQ/piCXtpeEWnjkgGNwZzufyXaY
+	cTOAYVFnXG/kjc1/qwwMVas1ohzO6EhylqMngelXtl5rTENiOE6VrwTBBPypveJtOF75
+	w/c3ycCHj4JepatJ8KO9WVDhNZie/aKEmYkzQklQfxf1KhqcdeUSRwcSObz+infro6xD
+	fl5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=OMRr3MmYoFhxXjSVHI3jr1HEXPHwEYw1QQZQ5MVUx4A=;
+	b=A7DYyITtXpSqSv5IE14YoWNqCICXLoe3mTtOxEiczfSgifF2FsK5B94yPgazqqQo7x
+	DCLZs2iq5zPOWqaFAtRvzTnsR3zitX/V/53mlBHC6F00X5Ym6IGfHMVeYVIN20ekI3d3
+	cen2cKRVhw4bSqUw7UflPo7kFpJtJ/35M6Mfjwd2SuKlNnm1M89TmJ99VWwroDHBTaxc
+	iM60AyoS8ZTo0mlgrhN0r3l9dgTZIJS2LTLbEvykD1+gi8aaZwcLeTMFibchnEd46Qao
+	X70vg6f6RIS3W+UFr/c936h/VnxmHySdcyckr5CEp6h6Fq9SKYMpT4Qv7edW+q4F/tCl
+	KqrQ==
+X-Gm-Message-State: APjAAAWuyJOhbMBpDw4uCujOb01I0T2x0NqVaUWUfP4dSZv0HOAzvp9Y
+	aj7+O9oiRW4v33s/3Xi3jvzBV2eIDSVQisRZOTE=
+X-Google-Smtp-Source: APXvYqyRqRTHziOs4pxkDQxwbPeo98LB4DHzydOKa372fdmfLZZzPBWDFKSvwHJt7yOjZphZO5GpbgwSTgffZfXNO8Y=
+X-Received: by 2002:ae9:f30e:: with SMTP id p14mr23661131qkg.71.1571693201170; 
+	Mon, 21 Oct 2019 14:26:41 -0700 (PDT)
 MIME-Version: 1.0
-Subject: OEDEM at Yocto Project Summit after ELCE
+References: <20191018234515.15676-1-wak@google.com>
+In-Reply-To: <20191018234515.15676-1-wak@google.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 21 Oct 2019 14:26:14 -0700
+Message-ID: <CAMKF1soSC=gmGrk+3DxdbLa_nr4Qj92489_1_4gBKPAB8mu=hQ@mail.gmail.com>
+To: "William A. Kennington III" <wak@google.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] span-lite: Init at 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,23 +53,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2019 16:43:08 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 21 Oct 2019 21:26:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Just a reminder we are holding a developer meeting as part of the Yocto
-Project Summit after ELCE in Lyon next week.
+also fails with libc++/clang
 
-Please review the agenda and add items. We need to create a schedule
-with times to help people involved with day 2 of the Yocto Project
-Summit. Help us out by getting everything you think we should discuss in
-person on the agenda!
+https://errors.yoctoproject.org/Errors/Details/274130/
 
-Information on the developer meeting and links to the Yocto Project
-Summit are at:
-
-https://www.openembedded.org/wiki/OEDEM_2019
-
-Philip
+On Fri, Oct 18, 2019 at 4:45 PM William A. Kennington III via
+Openembedded-devel <openembedded-devel@lists.openembedded.org> wrote:
+>
+> Signed-off-by: William A. Kennington III <wak@google.com>
+> ---
+>  meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb
+>
+> diff --git a/meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb b/meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb
+> new file mode 100644
+> index 000000000..0ea2dcc8d
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/span-lite/span-lite_0.6.0.bb
+> @@ -0,0 +1,12 @@
+> +SUMMARY = "single-file header-only version of a C++20-like span for C++98, C++11 and later"
+> +HOMEPAGE = "https://github.com/martinmoene/span-lite"
+> +LICENSE = "BSL-1.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
+> +
+> +SRC_URI += "git://github.com/martinmoene/span-lite"
+> +SRCREV = "34118d2df7976f635c8fd35b5959f86cb52ba93c"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit cmake
+> +inherit ptest
+> --
+> 2.22.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
