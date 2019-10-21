@@ -1,58 +1,48 @@
-Return-Path: <marek.bykowski@gmail.com>
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com
-	[209.85.167.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 57DC87F232
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 8079D7F382
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Oct 2019 09:30:24 +0000 (UTC)
-Received: by mail-lf1-f45.google.com with SMTP id z12so9489597lfj.9
+	Mon, 21 Oct 2019 11:52:30 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id e14so756896qto.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Oct 2019 02:30:25 -0700 (PDT)
+	Mon, 21 Oct 2019 04:52:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:cc:subject:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=KITnyJzPEjHpwE+N3mKyZZF6kAg6T6SXN8Zg3pqYng8=;
-	b=ETk14Z9WDpDDKOPj0r+jSIzdE738QTgzAC6wukuT8gl7pW0jZFWFHfzsi/uVXkf0u/
-	tLnWNKUez3OM7zGTpe4+8AkDoz0HmJH/9bpKAUOkGVwzp83mDKiyv+j0Sn+3Z53tk3F4
-	R2gzFmeD6ec4YZF9X+411ke1gobGgSJp1rVAHyQ3SAxLPA/eMQCVg5euSqKAMkdXGCMQ
-	RzN3Oie+hvFij3cuKYYS0MLv4kovgdXoH9Ty4piXD+I4gODgDpOvuci0SUngR7pziHzj
-	nFjcmg3nO60UiLKFWnvwchR2gC3bMSnnOOVuZWR3oM0VNGrceAgD0nVT1fr1gqAiR2LH
-	nAFg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=KydRCVIMrwIGulbc6rxriXtnEa/7gzhEU2NYrEOM8jo=;
+	b=oRSrIiWEn7/nhMvRygGJW6I6G6pk0rIcAc+rVqKgwooKnpfr5LAdVcPT6ftbSN0ITz
+	4TLNOUYgAQjQa/45YLgevFlSsl5UG2o+49F/jMC60ARCJYhyoH1XMcBt1H+Wz1GGKh+Z
+	RCn+OiYqAjv0Mrq0081mBTdE5HSh4o/sgeFSFhrH8jsGzKo0o+bXU0YwDKyHJ7U2mJ66
+	XkJHFdZFPdfNFmTAveGFz0zjJ7D5I1NLm55ftJ4dZrhMhMBkzWSdX8WJyflCtA+/ftb7
+	H9OFGcSw0iM+lGrUeccT4CYvCxsY3vwH/70GFYi16KrPfMivz9VATLX+XA5r4XtdWrIh
+	ofww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=KITnyJzPEjHpwE+N3mKyZZF6kAg6T6SXN8Zg3pqYng8=;
-	b=S7CPiV1Lum2i/NJePI+ei6fVk8oL9DlKHMZFtWLRrJ0TQnwu9V502AehTpgXnNnruJ
-	/e2QEqDJg2LKnHXgBQtuERKxuFnNpJPzdCeyMlzhGgXtWymjqHWv7xeevBr9AMOVvzaP
-	2O8dh6kCpsJZakQDKLSNmRh1cGyxEH6NapJrEIn08lYdtH7wcBFkQzWx9OzNRi9O0foB
-	eaQ+UcjYOsL4DN8Ptp6e4JxnLkeK9KqtwQ0RiiSl93M9nuuI48p763KpiNigOsMgXMnT
-	WsTIlqf3X7AXlCdkNrPOjLPR1H1wFptcVBSf7qZqXk9KvsQVF8OMq5ol/t7uZ5fMygF3
-	tTOA==
-X-Gm-Message-State: APjAAAUjXhGxQLMSQPBv5GxDtZ9uXf7TqHRQU0AC7QK+vMDFHFAMMCYR
-	ywNosM4GyaRw0WXedPOQMjA=
-X-Google-Smtp-Source: APXvYqzg3D7O96pfK41Zpo9QGfBIzIIXH8hhCnUJ6WYa4ZqKybZWjRoEMIohwy2UdFpVQlDDT0LfNA==
-X-Received: by 2002:ac2:4d04:: with SMTP id r4mr4352308lfi.136.1571650223580; 
-	Mon, 21 Oct 2019 02:30:23 -0700 (PDT)
-Received: from localhost ([78.133.233.210]) by smtp.gmail.com with ESMTPSA id
-	o13sm5744348ljh.35.2019.10.21.02.30.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Oct 2019 02:30:23 -0700 (PDT)
-Date: Mon, 21 Oct 2019 11:30:18 +0200
-From: "marek.bykowski@gmail.com" <marek.bykowski@gmail.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <20191021113018.3c684d51@gmail.com>
-In-Reply-To: <83e0f896-8ec4-df4f-d14c-256cb70774c1@windriver.com>
-References: <1571141621-20235-1-git-send-email-marek.bykowski@gmail.com>
-	<20191016104557.GA7998@localhost>
-	<20191016142112.10a645d2@gmail.com>
-	<CAMKF1srjpre+zbi6Q2==McOEvV8njBdzqOf8nGxor9NN5tMoig@mail.gmail.com>
-	<20191018134224.62ca6095@gmail.com>
-	<83e0f896-8ec4-df4f-d14c-256cb70774c1@windriver.com>
-X-Mailer: Claws Mail 3.13.2 (GTK+ 2.24.30; x86_64-pc-linux-gnu)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=KydRCVIMrwIGulbc6rxriXtnEa/7gzhEU2NYrEOM8jo=;
+	b=fMYJPeUvMPuTNxY33QYNvmeekSlVfaaTXwqEsfi9nbyFPawhBhJe7Ai20GX4YmW9ZQ
+	tKW+tcr8qvE/QMz99HpbLvy7gpwIpe9ZdozYJx4xwrltaxHVHmHcUHDqnJpS0YaZsn0R
+	K2TMSc5mYl6qzaKlRR2/AuSUV9WJNAUh14lU6L7Z8WwDglzBBfgexHt+JN6wm+tDJvLd
+	Q/talXMnctfQiCkAnuY6T+3l1Ej815n7/gcot5sNNC6gm1cBZVOpR7TjfAnH+qNH+TMp
+	cuBu1ILcK0UZS5CtFbb5P6ACck9jm1ubrRMSja4iyUjolieQAzg+FLbPxpIQKr67Ty4e
+	5jtw==
+X-Gm-Message-State: APjAAAUpoTOxbCToyx9nn/LhhX8xp9/gHBax+sAgKCnExyYn1MOI8Q8v
+	JQnXgBV6nI9E5SM2X4fCVoJXt1DWgYv+l5OjOJ/gBTE7v7c=
+X-Google-Smtp-Source: APXvYqxyhhX+WRSAQdIozNImJg/au1fZ0Ux1P5hcSHSn1H9Eqt/GORM6HBO+KoFXbUq/bACI9PZXYqBtlda/8HL2HjQ=
+X-Received: by 2002:ac8:768e:: with SMTP id g14mr24256415qtr.378.1571658750779;
+	Mon, 21 Oct 2019 04:52:30 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Adrian Bunk <bunk@stusta.de>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCHv3] lmbench: Fix/clean-up the build for lmbench
+References: <20191017144659.24850-1-christophe.priouzeau@st.com>
+	<20191017144659.24850-4-christophe.priouzeau@st.com>
+In-Reply-To: <20191017144659.24850-4-christophe.priouzeau@st.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 21 Oct 2019 04:52:03 -0700
+Message-ID: <CAMKF1spQFVSM=J4xvswgEJjUqKwX_wPO3Wspy4wt4N8R1Zc7tg@mail.gmail.com>
+To: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 4/7] libsmi: Clarify BSD license variant
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,56 +55,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2019 09:30:24 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 21 Oct 2019 11:52:30 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-> What's the "!" for ? It doesn't seem to be essential.
+On Thu, Oct 17, 2019 at 7:47 AM Christophe PRIOUZEAU
+<christophe.priouzeau@st.com> wrote:
+>
+> The License of libsmi is BSD-3-Clause and TCL.
+>
+> Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
+> ---
+>  meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
+> index b537ce67d..c2142a628 100644
+> --- a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
+> +++ b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
+> @@ -1,7 +1,7 @@
+>  SUMMARY = "A Library to Access SMI MIB Information"
+>  HOMEPAGE = "https://www.ibr.cs.tu-bs.de/projects/libsmi"
+>
+> -LICENSE = "BSD"
+> +LICENSE = "BSD-3-Clause && TCL"
 
-It is a logical negation making warn_unused_result happy (one uses the result in the end) followed by a cast to void discarding the result. With only casting to void the compiler remains to warn.
+This should be '&' instead of '&&', I have made relevant changes
+before accepting this into master
 
-> so did you consider just making a compiler specific fix/hack
-> for gcc/clang such as:
->     #define __wur /* Ignore */
-> You could do that in each file that needs it.
-> While that's still ugly, it is at least more localized.
-
-In your hack/fix #define __wur /* Ignore */ should be preceded with #undef __wur, isn't it? Yes, this should indeed be neater than "(void) !foo()" but my concern would be it may impact all the routines using __wur discarding they attributes and not only the ones of our interest (somehow a short list of the routines using __wur from glibc below). Not sure if this is a worry though, haven't inspected lmbench if uses any functions with __wur except the write/read being "fixed" by this "(void)!".
-
-$ grep -Irn extern.*__wur ./stdlib/stdlib.h
-97:extern size_t __ctype_get_mb_cur_max (void) __THROW __wur;
-385:extern char *l64a (long int __n) __THROW __wur;
-634:extern char *getenv (const char *__name) __THROW __nonnull ((1)) __wur;
-688:extern int mkstemp (char *__template) __nonnull ((1)) __wur;
-698:extern int mkstemp64 (char *__template) __nonnull ((1)) __wur;
-710:extern int mkstemps (char *__template, int __suffixlen) __nonnull ((1)) __wur;
-731:extern char *mkdtemp (char *__template) __THROW __nonnull ((1)) __wur;
-742:extern int mkostemp (char *__template, int __flags) __nonnull ((1)) __wur;
-752:extern int mkostemp64 (char *__template, int __flags) __nonnull ((1)) __wur;
-784:extern int system (const char *__command) __wur;
-840:extern int abs (int __x) __THROW __attribute__ ((__const__)) __wur;
-841:extern long int labs (long int __x) __THROW __attribute__ ((__const__)) __wur;
-946:extern int rpmatch (const char *__response) __THROW __nonnull ((1)) __wur;
-968:extern int posix_openpt (int __oflag) __wur;
-985:extern char *ptsname (int __fd) __THROW __wur;
- 
-> Also, did you confirm that this change doesn't affect the
-> resulting binary code? I expect that it won't but it's a
-> benchmark so it's worth confirming.
-
-I think it will, as the write/read are parts of latency path but I feel this should be negligent eating up a tens/hundreds?! of CPU cycles (say with CPU 1G, 100 cycles is 10ns)
-
-> Finally, lmbench hasn't released a new tarball on sf.net in 5 years:
->     https://sourceforge.net/projects/lmbench/
-> There's a new somewhat active version of lmbench:
->     https://github.com/intel/lmbench
-> Should we use that version?
-
-I'm not sure what is better, the original (sf.net) but not maintained in a quite few years or one taken over by one of the companies (intel), looked after by them, that is just making a use of it. Such company's project may go to an end of the life cycle leaving openembedded without the sources. Besides you never know who is committing and if you can rely on their changes. I think all together the biggest problem is that lmbench is being officially discontinued in a few years to date and to have reliable in openembedded I would be inclined somebody from openembedded takes the original over and maintains it (as intel did).
- 
-> Sorry to leave this until v3 but the:
->     (void) !foo()
-> syntax triggered me! ;-)
-
-Suppressing the warning I may refer to as to "better than nothing" but the golden solution would be to fix it properly and probably use the return as suggested by the authors of this routine/s.
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=3ad3076f9332343a21636cfd351f05b7"
+>
+>  SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
+> --
+> 2.17.1
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
