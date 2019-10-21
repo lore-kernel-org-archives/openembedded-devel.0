@@ -1,77 +1,49 @@
-Return-Path: <lewis.muhlenkamp@stryker.com>
-Received: from NAM05-CO1-obe.outbound.protection.outlook.com
-	(mail-eopbgr720080.outbound.protection.outlook.com [40.107.72.80])
-	by mail.openembedded.org (Postfix) with ESMTP id C52A17F4C7;
-	Mon, 21 Oct 2019 13:23:26 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=HZopWZpZfIJSIOSo6+ka1QVR4Cz5c/kWQs5HwtcbAZT7ztV56g4nbGMaRFUuw7FRvx5XGvpiGDEhSqR9XXovmXG1E9fGnyAjp76y2N4BUOcRapc461Nl4HBUa2qz15zSHiqSI580aIuzxafU4xgflqITvTR8R56Vok99ukQM4d2Hrp0G1b/Hx0Y56D+xACb/yne/HcZhSmCaAhTNrDFz4MtStvZatejdr/vCB1qTBGLCM6HxYHguCNZVz3/Tz0kLyTtoqA/oBDtAFH+f4gWyY3cPPaUMP9jC975kgv38/BJwA20iIodjxBDDJ5LA7E74esgoacXqBMAPcI5oI/MeVQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=WXUOOLY4RrIerUroWh4QO1jp1kWT+3FmlzCVKaN6HTw=;
-	b=n0qftzZvKiKfmzqk8EfMYYA5JimMHK/CvdP5Q8TrAHHFl1Hv1H5NnjAQwcL9yqj8x8VWoZqpLBt+zVX+S4jU+FJMzvZU8nAvVOYkUXyrDhzTFZ1zwmUsk0oU6JazI0APJnsU2eEf2DO4SEm9D0BGm0LIUKA3ArsYgpvxzyRA1c9ZWDBVJuobeEW/06HkHEwcpbJGUQzyXIFOlEBANWslx/U1w8+auHZ2Xs4PxVLj9Gojmz7uUHd8qG9byfwPLhMRzgK2PymN5zhAn3Vc+sVTOk7iD4TwirKx5uyTO6aBfcbobIJ3kfDsMs5GnDdwE8fY5u0jrNrdJhBbe1AZ/7E2mA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
-	smtp.mailfrom=stryker.com;
-	dmarc=pass action=none header.from=stryker.com; 
-	dkim=pass header.d=stryker.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stryker.com;
-	s=selector1;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=WXUOOLY4RrIerUroWh4QO1jp1kWT+3FmlzCVKaN6HTw=;
-	b=GzckmLRWWFFV24h5CRDTNHh9+nPifZAKxbxiyWmhrR2waP0oT4IEmyKhh2np1Dg/nK7JKQgKeiynBF3zBZSHBrSyC6CA3MVun4+N3HlU3YZXq0gaqTqVP8cNpgkG/188g7ALiWLutlJMi14lDh3W5wnXZ7M9+VYztuXMItnla7g=
-Received: from BN6PR0101MB2914.prod.exchangelabs.com (10.174.88.139) by
-	BN6PR0101MB2993.prod.exchangelabs.com (10.174.87.144) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2347.22; Mon, 21 Oct 2019 13:23:26 +0000
-Received: from BN6PR0101MB2914.prod.exchangelabs.com
-	([fe80::8d2d:4a8a:9c10:b95f]) by BN6PR0101MB2914.prod.exchangelabs.com
-	([fe80::8d2d:4a8a:9c10:b95f%7]) with mapi id 15.20.2347.029;
-	Mon, 21 Oct 2019 13:23:26 +0000
-From: "Muhlenkamp, Lewis" <lewis.muhlenkamp@stryker.com>
-To: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	"openembedded-core@lists.openembedded.org"
-	<openembedded-core@lists.openembedded.org>, openembedded-devel
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Ext4 filesystem name does not exist
-Thread-Index: AdWIDVkTsL1UE6iPQ9GeZbQhPOw2Xw==
-Date: Mon, 21 Oct 2019 13:23:26 +0000
-Message-ID: <BN6PR0101MB2914D42404393531264E9DB18F690@BN6PR0101MB2914.prod.exchangelabs.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=lewis.muhlenkamp@stryker.com; 
-x-originating-ip: [165.225.32.66]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: a37d8a64-3adc-4ca7-b506-08d75629db34
-x-ms-office365-filtering-ht: Tenant
-x-ms-traffictypediagnostic: BN6PR0101MB2993:
-x-microsoft-antispam-prvs: <BN6PR0101MB2993E3D68FA661FC756F7CB38F690@BN6PR0101MB2993.prod.exchangelabs.com>
-x-ms-oob-tlc-oobclassifiers: OLM:10000;
-x-forefront-prvs: 0197AFBD92
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(366004)(376002)(346002)(39860400002)(136003)(396003)(199004)(189003)(26005)(102836004)(486006)(5660300002)(186003)(6506007)(7696005)(66476007)(66556008)(99286004)(76116006)(71200400001)(71190400001)(55236004)(64756008)(66446008)(66066001)(52536014)(2906002)(476003)(55016002)(6306002)(54896002)(9686003)(86362001)(33656002)(66946007)(74316002)(7736002)(6116002)(236005)(110136005)(790700001)(3846002)(316002)(8676002)(6436002)(25786009)(478600001)(606006)(14454004)(8936002)(81166006)(9326002)(81156014)(2501003)(256004)(14444005);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR0101MB2993;
-	H:BN6PR0101MB2914.prod.exchangelabs.com; FPR:; SPF:None; LANG:en;
-	PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: stryker.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: kegtSVX6i7ML1PRGd5ZMfQMk3s/wVLFHcQ6T6vkQpKV/0cLtqC2f5iwLiwmavltmOxzlkiI4WDz7Ww6GyPNaw49n0fgF50IytBNP5SvTGQYosrFPu2YSOlMhECVaMR9JP32B7uEg2u3k5H3+cId2vyafnnkEZZIP4l3A2PSAqAIvM2LfL9mKBtObFhlOJNuffIdxft042mqIhsr926mDfdm1IxP31h0hnu/t/R4Ud01NZ7eGApE4hmERYFI24gWLuGMTRZud/Gwq+hVUVdbyLLbfFGvf1JU2vI+fZEYdox2jvKQGyws9f68+/ULuVCc9NtgS0qg7b/eyKz8lwEolKm8iWZCeTrwOXzdKT9Z3g9wOqtSzAvS9s1+xz1XpsOa+jjFfP2S11746d+eOE7XciJOQsbm25aog8RKldKwBflg=
-x-ms-exchange-transport-forked: True
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with ESMTP id B4E8E7D200
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 21 Oct 2019 16:43:07 +0000 (UTC)
+Received: (qmail 15081 invoked by uid 1003); 21 Oct 2019 16:43:13 -0000
+Received: from unknown (HELO ?192.168.11.139?)
+	(philip@opensdr.com@73.152.143.112)
+	by mail.geekisp.com with (ECDHE-RSA-AES128-GCM-SHA256 encrypted) SMTP;
+	21 Oct 2019 16:43:13 -0000
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	Yocto Project <yocto@yoctoproject.org>
+From: Philip Balister <philip@balister.org>
+Autocrypt: addr=philip@balister.org; prefer-encrypt=mutual; keydata=
+	mQENBE6PN4EBCADXwOSVOvTrJ370tH2RmiR22OuCBcKfnKTLztyV5zA0veDB1kmrIajh+sJe
+	HWNqsib0v19S3wdrvqzKrztSfNAgUctvkAuTOloU81dmbAjDSge6nFxjzIIz6XjNvmP5xl9J
+	rstPm4i4dhAs5436xf4Bh0vn3C/Bp4fKwXBSW/Xto7vuiuSK03ojon3F8O2WNEmKxHyubFP1
+	2tNvXOp/PeAR4LTnYq6fdAAofvbpbPDBg8qICe6j1UXaIyU93IbW+bJp1RFbeakWxiTw+eQ2
+	fVjG5XnubNX0YBlmjHDJhjeqV1uwkImNHlZknecLjT7g37vIMwz+PTfPIhmIGffzqtHlABEB
+	AAG0JVBoaWxpcCBCYWxpc3RlciA8cGhpbGlwQGJhbGlzdGVyLm9yZz6JAT4EEwECACgCGyMG
+	CwkIBwMCBhUIAgkKCwQWAgMBAh4BAheABQJYM1D9BQkRKOdqAAoJEMDJd4rr0merDX4H/3Pr
+	nYKDnml7LRiikoOTFJb4r7ub04skrkGI2DAYvRUPH110KXaan84Qo2Yl4r/ma15Lpqx+cdPR
+	3KbFlSWyjgY6CMN/BclutsK4mFkoxnmhdYJvc5M2TDfZLxBPMTeQiHo0MwxUB5v81mv812bx
+	YKfEOg3ndk7C/TE0Q8ZER7p6fU3ol/e0ilLyaCpd85nkEcOEI7BdBBGhKWii+Cwvv8g2ofQZ
+	3wAsqQFp7PFxlEjo5Xc1QGqo7L+UlDG23QjUn33n+wZMZm9EUZFu1c1MAGZsvXiqKw8P07Mj
+	yyf6h6EMVP8wME7gnkxsZkpKv04mSvKpDLIInmRW9ZlHXaJ4Yxi5AQ0ETo83gQEIAPs+ZC0R
+	gF4blrRIiVHdkARncAxUwSUbti5Ku23dQ0iBizozh4YGucgW48gxsvJCkCc9s/4C9e3vYiCZ
+	GVGC8x6Ll3vE7xwRQ/euVqJ0mXG7tNK1zAPpSgI6aooPSZCW7PBvwY8uMvzzCzP+EBd0+oA5
+	uXQSEcyOJUYy4beferoHUiBjBkyNd+v2iaJf7KjAYYxJOcPvtnq/VL09hlmtCD5zghOn80rt
+	LqF66BJkHmATopSWyor1qz7gmowdCkFkUJDNW7yJT1wVANqDd9P5A8vYhngwJTHsvXVftmvB
+	gLiJjYuKst36G2AOHgm4ls5jRMa/k7jWue1RKM5LxzgBtLUAEQEAAYkBJQQYAQIADwIbDAUC
+	WDNRbAUJESjn5AAKCRDAyXeK69Jnq1qYB/93aiBdenAuu0H/zGWEFFB14cdhDR4S4q0EbfXl
+	1z9o3Irazw6WMtLe12zJ4/Xl41Mh/IH8/+AgDnigisrkKRN1TkiOGDUVnS0akkhML3ONbeFd
+	ocYEwBAPDTxAaWNoyjDe/bORokSJn31cFoG6QYyzUct79npHorbaXW0zW+KC77Do53yUKQ8+
+	icWpfiCMk1YzSHCr0y5NZNVxac9a0+IDzH/YBbNdJLNaMvXcuege1Qqz85pdR0P4XuCVRD2j
+	ZAbcGJzZXlu9ZzpIHjtZoyF8paJRMQwzWEO3/Txksmm7K8eu8Tz2JVpjiOIj44MOTKoRGKjO
+	6eUfr0u7CwnEyqiQ
+Message-ID: <f4beeff0-61dd-dca3-a0a2-b622877dd892@balister.org>
+Date: Mon, 21 Oct 2019 12:43:07 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.1.1
 MIME-Version: 1.0
-X-OriginatorOrg: stryker.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a37d8a64-3adc-4ca7-b506-08d75629db34
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Oct 2019 13:23:26.6077 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 4e9dbbfb-394a-4583-8810-53f81f819e3b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4N/PZqNI9CdCLPje7FQEizOmxm2Xy581j/czBcZynkwmKrZlv/hiawJvD2UvQGkWxcySrS7Iwbiez3dDhDHXrbjbgnxZLmsoEoJFWnkem30=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR0101MB2993
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Ext4 filesystem name does not exist
+Subject: OEDEM at Yocto Project Summit after ELCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -84,127 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Oct 2019 13:23:27 -0000
+X-List-Received-Date: Mon, 21 Oct 2019 16:43:08 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Just a reminder we are holding a developer meeting as part of the Yocto
+Project Summit after ELCE in Lyon next week.
 
-I have been doing builds using a Docker setup on a VMware ESXi 6.5 virtual =
-machine running Ubuntu 18.04 for the past year.  I have been asked to move =
-to building on a VM in Azure.  I created a VM in Azure using the Ubuntu 18.=
-04 image from Canonical.  When I try to do the same build in Azure, I get t=
-he following error messages:
+Please review the agenda and add items. We need to create a schedule
+with times to help people involved with day 2 of the Yocto Project
+Summit. Help us out by getting everything you think we should discuss in
+person on the agenda!
 
-=3D=3D=3D Start ERROR messages =3D=3D=3D
-ERROR: docker-base-image-1.0-r0 do_image_wic: Function failed: do_image_wic=
- (log file is located at /home/blah/build-0.0.13/tmp-glibc/work/intel_corei=
-7_64-oe-linux/foo/1.0-r0/temp/log.do_image_wic.44033)
-ERROR: Logfile of failure stored in: /home/blah/build-0.0.13/tmp-glibc/work=
-/intel_corei7_64-oe-linux/foo/1.0-r0/temp/log.do_image_wic.44033
-| OSError: [Errno 22] Invalid argument
-| wic.filemap.Error: cannot get block size for '/home/blah/build-0.0.13/tmp=
--glibc/work/intel_corei7_64-oe-linux/foo/1.0-r0/deploy-foo-image-complete/f=
-oo-intel-corei7-64-0.0.13/tmp.wic.5lmon88k/boot.img': [Errno 22] Invalid ar=
-gument
-| ERROR: Function failed: do_image_wic (log file is located at /home/blah/b=
-uild-0.0.13/tmp-glibc/work/intel_corei7_64-oe-linux/foo/1.0-r0/temp/log.do_=
-image_wic.44033)
-ERROR: Task (/home/blah/meta-stryker/common/recipes-common/images/foo.bb:do=
-_image_wic) failed with exit code '1'
-Summary: There was 1 ERROR message shown, returning a non-zero exit code.
-ERROR:   Ext4 filesystem name (/home/blah/build-0.0.13/tmp-glibc/deploy/ima=
-ges/intel-corei7-64/foo-intel-corei7-64-0.0.13.rootfs.ext4) does not exist.
-=3D=3D=3D End ERROR messages =3D=3D=3D
+Information on the developer meeting and links to the Yocto Project
+Summit are at:
 
-The log.do_image_wic.44033 has the following stack trace.
+https://www.openembedded.org/wiki/OEDEM_2019
 
-=3D=3D=3D Start log.do_image_wic.44033 stack trace =3D=3D=3D
-DEBUG: Python function extend_recipe_sysroot finished
-DEBUG: Executing shell function do_image_wic
-INFO: Creating image(s)...
-
-WARNING: overhead-factor was specified, but size was not, so bitbake variab=
-les will be used for the size. In this case both IMAGE_OVERHEAD_FACTOR and =
---overhead-factor will be applied
-Traceback (most recent call last):
-  File "/home/blah/oe-core/scripts/lib/wic/filemap.py", line 97, in __init_=
-_
-    self.block_size =3D get_block_size(self._f_image)
-  File "/home/bruce/oe-core/scripts/lib/wic/filemap.py", line 40, in get_bl=
-ock_size
-    binary_data =3D fcntl.ioctl(file_obj, 2, struct.pack('I', 0))
-OSError: [Errno 22] Invalid argument
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/blah/oe-core/scripts/wic", line 534, in <module>
-    sys.exit(main(sys.argv[1:]))
-  File "/home/blah/oe-core/scripts/wic", line 529, in main
-    return hlp.invoke_subcommand(args, parser, hlp.wic_help_usage, subcomma=
-nds)
-  File "/home/blah/oe-core/scripts/lib/wic/help.py", line 98, in invoke_sub=
-command
-    subcmd[0](args, usage)
-  File "/home/blah/oe-core/scripts/wic", line 234, in wic_create_subcommand
-    native_sysroot, options)
-  File "/home/blah/oe-core/scripts/lib/wic/engine.py", line 202, in wic_cre=
-ate
-    plugin.do_create()
-  File "/home/blah/oe-core/scripts/lib/wic/plugins/imager/direct.py", line =
-101, in do_create
-    self.assemble()
-  File "/home/blah/oe-core/scripts/lib/wic/plugins/imager/direct.py", line =
-218, in assemble
-    self._image.assemble()
-  File "/home/blah/oe-core/scripts/lib/wic/plugins/imager/direct.py", line =
-605, in assemble
-    sparse_copy(source, self.path, seek=3Dpart.start * self.sector_size)
-  File "/home/blah/oe-core/scripts/lib/wic/filemap.py", line 552, in sparse=
-_copy
-    fmap =3D api(src_fname)
-  File "/home/blah/oe-core/scripts/lib/wic/filemap.py", line 534, in filema=
-p
-    return FilemapFiemap(image, log)
-  File "/home/blah/oe-core/scripts/lib/wic/filemap.py", line 352, in __init=
-__
-    _FilemapBase.__init__(self, image, log)
-  File "/home/blah/oe-core/scripts/lib/wic/filemap.py", line 100, in __init=
-__
-    % (self._image_path, err))
-wic.filemap.Error: cannot get block size for '/home/blah/build-0.0.13/tmp-g=
-libc/work/intel_corei7_64-oe-linux/foo/1.0-r0/deploy-foo-image-complete/foo=
--intel-corei7-64-0.0.13/tmp.wic.5lmon88k/boot.img': [Errno 22] Invalid argu=
-ment
-WARNING: exit code 1 from a shell command.
-ERROR: Function failed: do_image_wic (log file is located at /home/blah/bui=
-ld-0.0.13/tmp-glibc/work/intel_corei7_64-oe-linux/foo/1.0-r0/temp/log.do_im=
-age_wic.44033)
-=3D=3D=3D End log.do_image_wic.44033 stack trace =3D=3D=3D
-
-For some reason, it looks like it appears on the Azure VM the build is look=
-ing for boot.img in a temporary directory, .../tmp-glibc/work/intel_corei7_=
-64-oe-linux/foo/1.0-r0/deploy-foo-complete/foo-intel-corei7-64-0.0.13/tmp.w=
-ic.5lmon88k.  The tmp.wic.5lmon88k does not exist.  However, in the .../foo=
--intel-corei7-64-0.0.13 there is a boot.img file.
-
-So, I'm very confused as to why my build works on my VMware ESXi 6.5 VM but=
- not on the Azure VM.  I'm using docker-ce 18.09.1 on my VMware ESXi 6.5 VM=
-.  I am using docker-ce 19.03.3 on my Azure VM.  The Dockerfile and all of =
-the files I'm copying into the Docker image are the same.  I've done side b=
-y side builds.  So, I'm very confident I'm downloading the same OpenEmbedde=
-d GIT repos.  I'm guessing I'm missing something somewhere, but I do not kn=
-ow where.
-
-If anyone can help me understand this, and give me guidance on how to fix t=
-his, it would be greatly appreciated.
-
-Thank you
-
-Lewis Muhlenkamp
-
-Follow this link to read our Privacy Statement<https://www.stryker.com/cont=
-ent/stryker/gb/en/legal/global-policy-statement.html/>
+Philip
 
