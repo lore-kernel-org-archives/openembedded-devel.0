@@ -1,64 +1,59 @@
-Return-Path: <christophe.priouzeau@st.com>
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
-	[91.207.212.93])
-	by mail.openembedded.org (Postfix) with ESMTP id D4A577F763
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id C0EA57F76B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Oct 2019 14:19:16 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
-	by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
-	x9ME6CpT001425 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Oct 2019 16:19:17 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
-	h=from : to : cc : subject
-	: date : message-id : references : in-reply-to : content-type :
-	content-transfer-encoding : mime-version; s=STMicroelectronics;
-	bh=ma/yr2IXLzkfdT5r0E2V0kzlC4ibfQkJhivN475RxpY=;
-	b=tT7+sGzgUuRmRpEnEi14Td8EbI9O4blfYHjEr5drXc2UhGZomVzr/u9TIMiuDSw2hg4G
-	1o7P9hzLEJEZ5SDtBrzcTYuw7YsC6kUMyT7BWzgGy3jEBW/wd4lUlUa+4BMwQZMciZq4
-	E195j5TAvs90U5bXWajcm30+OK2Cx/L/iMETk11+bJrhsiBmtjBJLbobV8rJNRc0aOh/
-	5A+ocVwIZbijUfebkRtyFKtPEasJQ06d1H5/8BZDsBXaGKBmDdVug/+ETq9ouNi9PBfE
-	g0ed1SN6phFQWPCZsLiogCfj2+nq0s5jkROanhIJ0so6lvCwII8LP4Y6JuIeAR6q9jsJ
-	wg== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx08-00178001.pphosted.com with ESMTP id 2vqwxy6vbj-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Oct 2019 16:19:17 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 2242910002A
+	Tue, 22 Oct 2019 21:37:13 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id p4so19701744wrm.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Oct 2019 16:19:17 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1CD062AEF90
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Oct 2019 16:19:17 +0200 (CEST)
-Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE2.st.com
-	(10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2;
-	Tue, 22 Oct 2019 16:19:16 +0200
-Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
-	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
-	15.00.1347.000; Tue, 22 Oct 2019 16:19:16 +0200
-From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-networking][PATCH 16/16] tcpdump: Clarify BSD license
-	variant
-Thread-Index: AQHViOOvncOb07xTu0WtkU0ZLNqQvA==
-Date: Tue, 22 Oct 2019 14:19:16 +0000
-Message-ID: <20191022141907.4412-16-christophe.priouzeau@st.com>
-References: <20191022141907.4412-1-christophe.priouzeau@st.com>
-In-Reply-To: <20191022141907.4412-1-christophe.priouzeau@st.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.49]
+	Tue, 22 Oct 2019 14:37:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=a8Uk7++vyotoEvOXAib2EeJ3moiiBq+Pr1y4d+NUcJo=;
+	b=u6Lk/BE9dlETL4FVVdqccnLxoOs2JJc/SInHxuat+A80+E5yPDszHbj3HJOAeBlNec
+	p/ZU8eOBMR6HIsRekrkOkNhZon9R99WD+ZS+cugPukyZrNuVcRrLwdT7j+Sr1Utw12Ba
+	lEEFSqCTlTn/OXu5uxEFOMJ5Q06JpAHs2XFrMd8E2Na1BcTTB++39DbyIikMFp8BB3+d
+	DtGStHkeHmgK3N3m7tkI/VGeabiS719xoMNvQ+DTkx1X2lSJN9oCuKGux+va6LOvMo1P
+	yJdLIvmnirEwRsg6/NsBTpuL/NV+Hkuel31W9QihDYxxJ7cUozrqTyL3TWxjcJUeWphY
+	DpXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=a8Uk7++vyotoEvOXAib2EeJ3moiiBq+Pr1y4d+NUcJo=;
+	b=iuHm6ilNc5rsmVze2PQwhrvcBUVhF7fzcKk88fTOircIMDsEmO+MwFIj08DbE2hfua
+	HEhZbMRGzs6HitvUgwFf350hjxu24FbXxZhf/zJVHHpKqpk3+AUDASDJCOCLwb8HiImO
+	XpHZAOI7prdA6xIxQ89811lgUvOpjeGTX8Bvlw/B3neC1Q9kWUt7oakANPMLZnWQ1vll
+	cq6wFYsJhTsNbeQ9ClH+mLmZ4xcTu1HRrdzpgbbeUbmfAG/Y6TEzdfXkgZ8Orf4ac2bp
+	Vf2/4itICeCTU6pxWJTKJiPtdfdVVGieawEyMQJHAomdjQTGHrfGMw4VRB02D9ayspPc
+	4dEw==
+X-Gm-Message-State: APjAAAVdZu3EIO8Mvd6dEEyCQyu+KNRZSRIz5K0AcHAFMi4CS9Q7cr1t
+	kW3rU1kOlvaPBXoUywzq2Po=
+X-Google-Smtp-Source: APXvYqxqSN3oxgJQKyOC62Y9/RMCE2C938GxFp655i6H9pDQ26OTXU8/xATQvnJrSdg8LdulsYTRZg==
+X-Received: by 2002:a05:6000:18d:: with SMTP id
+	p13mr5157895wrx.396.1571780233926; 
+	Tue, 22 Oct 2019 14:37:13 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id
+	c14sm13375925wru.24.2019.10.22.14.37.12
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 22 Oct 2019 14:37:12 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 22 Oct 2019 23:37:18 +0200
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20191022213718.GA2607@jama>
+References: <20190929092956.13147-1-Qi.Chen@windriver.com>
+	<20191017204414.GB1499@jama>
+	<CA+chaQcpMndabwwuv+c8203ATbcwNEMJ8zjLDnqTkzkqyw4OrQ@mail.gmail.com>
+	<CAMKF1sq30Y4p=7ckBc+2cQmg2-bTs9p4KG4ddOqrZibQHTCexQ@mail.gmail.com>
+	<CA+chaQfNsqJJAkCXV_ZuO17mtNh4CDm7YjeuFQvh9bTTs4ad2w@mail.gmail.com>
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
-	definitions=2019-10-22_03:2019-10-22,2019-10-22 signatures=0
-Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-Subject: [meta-networking][PATCH 16/16] tcpdump: Clarify BSD license variant
+In-Reply-To: <CA+chaQfNsqJJAkCXV_ZuO17mtNh4CDm7YjeuFQvh9bTTs4ad2w@mail.gmail.com>
+User-Agent: Mutt/1.12.2 (2019-09-21)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] protobuf-c: fix race condition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,33 +66,255 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Oct 2019 14:19:17 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Tue, 22 Oct 2019 21:37:14 -0000
+X-Groupsio-MsgNum: 80272
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="BXVAT5kNtrzKuDFl"
+Content-Disposition: inline
+
+--BXVAT5kNtrzKuDFl
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-The License of tcpdump is BSD-3-Clause.
+On Fri, Oct 18, 2019 at 09:06:54PM +0200, Martin Jansa wrote:
+> One more data point is that it might be fixed completely with 1.3.2 versi=
+on
+> used in zeus/master and failing less often then without this patch in 1.3=
+=2E1
+> used in thud/warrior.
+>=20
+> I was rebuilding it 300 times in thud/warrior/zeus and got 5-6 failures in
+> thud/warrior but none in zeus.
+>=20
+> I've started another for loop to rebuilt it 1000 time with zeus and if it
+> works then I'll retest warrior and thud with 1.3.2 upgrade backported to
+> them - if it works then we can either backport whole upgrade or check the
+> 1.3.1 1.3.2 diff to find out what else we need to backport from there.
 
-Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
----
- meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+1000 times in zeus =3D 0 failures
+100 times in thud with 1.3.2 backported ~ 10 failures
+1000 times in thud with 1.3.2 as well as protobuf-native 3.9.2 =3D 0 failur=
+es
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb b/met=
-a-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-index 3cd12aee7..05fc99bdc 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.3.bb
-@@ -1,7 +1,7 @@
- SUMMARY =3D "A sophisticated network protocol analyzer"
- HOMEPAGE =3D "http://www.tcpdump.org/"
- SECTION =3D "net"
--LICENSE =3D "BSD"
-+LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D1d4b0366557951c84a94fabe3529f86=
-7"
-=20
- DEPENDS =3D "libpcap"
+The protobuf-c upgrade isn't need to be backported to thud, there aren't
+many changes:
+https://github.com/protobuf-c/protobuf-c/compare/269771b4b45d3aba04e59569f5=
+3600003db8d9ff...1390409f4ee4e26d0635310995b516eb702c3f9e
+
+protobuf on the other hand was upgraded from 3.6.1 to 3.9.2 in zeus and
+the diff is big (1028 commits):
+https://github.com/protocolbuffers/protobuf/compare/48cb18e5c419ddd23d9badc=
+fe4e9df7bde1979b2...52b2447247f535663ac1c292e088b4b27d2910ef
+
+quick grep in git log didn't reveal what might be causing the race
+condition, upgrading whole protobuf in warrior and thud isn't an option
+as well.
+
+Anyone interested in digging a bit deeper?
+
+I don't want to block this change, because it seems to completely fix it
+for zeus/master and partially improve it also for warrior and thud.
+
+We don't use protobuf much, so for our builds I think I'll just backport
+whole protobuf upgrade to thud once protobuf-c fix is in thud.
+
+Regards,
+
+> On Fri, Oct 18, 2019 at 11:07 AM Khem Raj <raj.khem@gmail.com> wrote:
+>=20
+> > Yes I have seen same build failures on master even after this fix on
+> > machine with more cpus so the fix while seems to address the problem is=
+ not
+> > fixing is completely when I get a chance I will look into the logic mys=
+elf
+> > too but I think we have to delve into it a bit More
+> >
+> > On Fri, Oct 18, 2019 at 3:41 AM Martin Jansa <martin.jansa@gmail.com>
+> > wrote:
+> >
+> >> Hmm I spoke too soon, at least rebuilding protobuf-c-native with this
+> >> change backported to thud still failed once with:
+> >>
+> >> ../git/t/generated-code2/cxx-generate-packed-data.cc:28:17: error: =E2=
+=80=98foo=E2=80=99
+> >> is
+> >> not a namespace-name
+> >>  using namespace foo;
+> >>                  ^~~
+> >> ../git/t/generated-code2/cxx-generate-packed-data.cc:28:20: error:
+> >> expected
+> >> namespace-name before =E2=80=98;=E2=80=99 token
+> >>  using namespace foo;
+> >>                     ^
+> >> ../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+> >> =E2=80=98TestEnumSmall=E2=80=99 does not name a type
+> >>  #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
+> >>                                     ^
+> >> ../git/t/generated-code2/common-test-arrays.h:44:1: note: in expansion=
+ of
+> >> macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
+> >>  TEST_ENUM_SMALL_TYPE_NAME enum_small_0[] =3D { TEST_ENUM_SMALL(VALUE)=
+ };
+> >>  ^~~~~~~~~~~~~~~~~~~~~~~~~
+> >> ../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+> >> =E2=80=98TestEnumSmall=E2=80=99 does not name a type
+> >>  #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
+> >>                                     ^
+> >> ../git/t/generated-code2/common-test-arrays.h:45:1: note: in expansion=
+ of
+> >> macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
+> >>  TEST_ENUM_SMALL_TYPE_NAME enum_small_1[] =3D { TEST_ENUM_SMALL(OTHER_=
+VALUE)
+> >> };
+> >>  ^~~~~~~~~~~~~~~~~~~~~~~~~
+> >> ../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+> >> =E2=80=98TestEnumSmall=E2=80=99 does not name a type
+> >>  #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
+> >>                                     ^
+> >> ../git/t/generated-code2/common-test-arrays.h:47:1: note: in expansion=
+ of
+> >> macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
+> >>  TEST_ENUM_SMALL_TYPE_NAME enum_small_random[] =3D
+> >>
+> >> {T(0),T(1),T(1),T(0),T(0),T(1),T(1),T(1),T(0),T(0),T(0),T(0),T(0),T(1)=
+,T(1),T(1),T(1),T(1),T(1),T(0),T(1),T(1),T(0),T(1),T(1),T(0)
+> >> };
+> >>  ^~~~~~~~~~~~~~~~~~~~~~~~~
+> >> ...
+> >> so it probably doesn't fix the issue completely.
+> >>
+> >>
+> >> On Thu, Oct 17, 2019 at 10:44 PM Martin Jansa <martin.jansa@gmail.com>
+> >> wrote:
+> >>
+> >> > On Sun, Sep 29, 2019 at 05:29:56PM +0800, Chen Qi wrote:
+> >> > > Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> >> > > ---
+> >> > >  .../0001-avoid-race-condition.patch           | 36
+> >> +++++++++++++++++++
+> >> > >  .../protobuf/protobuf-c_1.3.2.bb              |  1 +
+> >> > >  2 files changed, 37 insertions(+)
+> >> > >  create mode 100644
+> >> >
+> >> meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition=
+=2Epatch
+> >> > >
+> >> > > diff --git
+> >> >
+> >> a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-conditi=
+on.patch
+> >> >
+> >> b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-conditi=
+on.patch
+> >> > > new file mode 100644
+> >> > > index 000000000..4fc7703d8
+> >> > > --- /dev/null
+> >> > > +++
+> >> >
+> >> b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-conditi=
+on.patch
+> >> > > @@ -0,0 +1,36 @@
+> >> > > +From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00
+> >> 2001
+> >> > > +From: Chen Qi <Qi.Chen@windriver.com>
+> >> > > +Date: Sun, 29 Sep 2019 17:20:42 +0800
+> >> > > +Subject: [PATCH] avoid race condition
+> >> > > +
+> >> > > +It's possible that the cxx-generate-packed-data.cc is compiled
+> >> > > +while the t/test-full.pb.h is being generated. This will result
+> >> > > +the following error.
+> >> > > +
+> >> > > +  DEBUG:     ./t/test-full.pb.h:4:0: error: unterminated #ifndef
+> >> > > +  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
+> >> > > +
+> >> > > +Add a dependency to avoid such problem.
+> >> > > +
+> >> > > +Upstream-Status: Pending
+> >> >
+> >> > Thanks for this patch, it seems to indeed fix this issue, I've repor=
+ted
+> >> > a while ago:
+> >> >
+> >> >
+> >> https://www.mail-archive.com/openembedded-devel@lists.openembedded.org=
+/msg64363.html
+> >> >
+> >> > I think the upstream would be interested in this fix as well, see:
+> >> >
+> >> >
+> >> https://github.com/protobuf-c/protobuf-c/commit/b0bb56303366e2c072ee38=
+eb5f1f11251b07239c
+> >> >
+> >> > Cheers,
+> >> >
+> >> > > +
+> >> > > +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> >> > > +---
+> >> > > + Makefile.am | 1 +
+> >> > > + 1 file changed, 1 insertion(+)
+> >> > > +
+> >> > > +diff --git a/Makefile.am b/Makefile.am
+> >> > > +index b0cb065..1608ae0 100644
+> >> > > +--- a/Makefile.am
+> >> > > ++++ b/Makefile.am
+> >> > > +@@ -156,6 +156,7 @@ noinst_PROGRAMS +=3D \
+> >> > > + t_generated_code2_cxx_generate_packed_data_SOURCES =3D \
+> >> > > +     t/generated-code2/cxx-generate-packed-data.cc \
+> >> > > +     t/test-full.pb.cc
+> >> > > ++t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
+> >> > > + $(t_generated_code2_cxx_generate_packed_data_OBJECTS):
+> >> t/test-full.pb.h
+> >> > > + t_generated_code2_cxx_generate_packed_data_CXXFLAGS =3D \
+> >> > > +     $(AM_CXXFLAGS) \
+> >> > > +--
+> >> > > +2.17.1
+> >> > > +
+> >> > > diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> >> > b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> >> > > index 6d1ffc3f4..b92f82dec 100644
+> >> > > --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> >> > > +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> >> > > @@ -15,6 +15,7 @@ DEPENDS =3D "protobuf-native protobuf"
+> >> > >  SRCREV =3D "1390409f4ee4e26d0635310995b516eb702c3f9e"
+> >> > >
+> >> > >  SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git \
+> >> > > +           file://0001-avoid-race-condition.patch \
+> >> > >            "
+> >> > >
+> >> > >  S =3D "${WORKDIR}/git"
+> >> > > --
+> >> > > 2.17.1
+> >> > >
+> >> > > --
+> >> > > _______________________________________________
+> >> > > Openembedded-devel mailing list
+> >> > > Openembedded-devel@lists.openembedded.org
+> >> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >> >
+> >> > --
+> >> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> >> >
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+> >
+
 --=20
-2.17.1
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--BXVAT5kNtrzKuDFl
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXa92jQAKCRA3VSO3ZXaA
+HP6VAKCPnPhBIGqsy5vcw1JEgg+gAJyoigCeJU3CJHKzsVED1INpYqRntinG7GM=
+=gdZu
+-----END PGP SIGNATURE-----
+
+--BXVAT5kNtrzKuDFl--
