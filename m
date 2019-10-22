@@ -1,39 +1,39 @@
 Return-Path: <christophe.priouzeau@st.com>
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
 	[91.207.212.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 84C2F7F74A
+	by mail.openembedded.org (Postfix) with ESMTP id CD5B67F745
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 22 Oct 2019 14:19:14 +0000 (UTC)
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
 	by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
-	x9ME0rjT011264 for <openembedded-devel@lists.openembedded.org>;
+	x9ME6A7J001413 for <openembedded-devel@lists.openembedded.org>;
 	Tue, 22 Oct 2019 16:19:15 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
 	h=from : to : cc : subject
 	: date : message-id : references : in-reply-to : content-type :
 	content-transfer-encoding : mime-version; s=STMicroelectronics;
-	bh=2sV7lHNAJYyMB58rypCXaQLTUcaiQBz52lQok94DdeI=;
-	b=N9Wa8N39IUGXDQL9j9L+YKbVGf+fjzZWs446/lSWprA0pIxVdrvC2uj3ldXuJIJsnlMe
-	/YxPPf64lFyem+2pLzs04yUGqgYScGPu74zia4bDPKPMUJyWb8DvXfbRVTh83ixjlM0I
-	rkiAr6jsmAcB6BgYDCbpzoyvZ+Y+3SICbUMh/DLv6LiK2eBDAL/pi/qpWyJbE5b2dEy5
-	2g74JagoJXmfShYNo0Og3lUzuUCiOhb3jY7dZFeVekelJOmWWucqBm3H41SvD5BIySJT
-	DFfJaequdXc7as7jMSAgREyiJqRhKzHe8cJQVDdobaO+DwYpI4uvjxBoLiJ9OjI3Vgsg
-	wA== 
+	bh=VMvjE17CkADpPC+VAFlto2gkhri2rY4WdrkPvKksDTM=;
+	b=KZ7hPKaBlOdf+3sibw9xiVE8WWPU5zUgzczq2ccG4rB11ZPyK6egRAVsTvLUfG0lKuNr
+	j3dK2bq8haqRREdp+JWq7+wo5Vk24nfuju67FzQNRZqtdVvHDBLNU1OuTvR3SA1sEB81
+	C6iSa7Nfh6wnWwv5eoiLBqKK51p3COhCqn7rhBd6xAuy9NxX+wpohROY1Pe81EPo8hkW
+	lNqJ2/9r0a+yI8/J0wN9lgFg9uJJiq7IhZ1gqhpEW5S+nJSsI4pEzwldniVD3Pnd18W5
+	ndiIowfNlJz3hrJwClDSP2IvHTA5yz2CGsd8Zn/dQIHF+tzOYaFHS2s1j2gyB7hx42Ep
+	JQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx08-00178001.pphosted.com with ESMTP id 2vqwva6wbw-1
+	by mx08-00178001.pphosted.com with ESMTP id 2vqwxy6vbc-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
 	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
 	Tue, 22 Oct 2019 16:19:15 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B00A110003D
+	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 27C7010003A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Oct 2019 16:19:14 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A9A7C2AEF90
+	Tue, 22 Oct 2019 16:19:15 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
+	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 20D392AEF90
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Oct 2019 16:19:14 +0200 (CEST)
-Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE3.st.com
-	(10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+	Tue, 22 Oct 2019 16:19:15 +0200 (CEST)
+Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE1.st.com
+	(10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
 	Tue, 22 Oct 2019 16:19:14 +0200
 Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
 	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
@@ -41,11 +41,11 @@ Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
 From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-networking][PATCH 12/16] radiusclient: Clarify BSD license
+Thread-Topic: [meta-networking][PATCH 13/16] celt051: Clarify BSD license
 	variant
-Thread-Index: AQHViOOufkyB+wYMC0mR8ry8ZC7S+A==
+Thread-Index: AQHViOOuGnnQXqrkZkGtQo1ZJSyqXQ==
 Date: Tue, 22 Oct 2019 14:19:14 +0000
-Message-ID: <20191022141907.4412-12-christophe.priouzeau@st.com>
+Message-ID: <20191022141907.4412-13-christophe.priouzeau@st.com>
 References: <20191022141907.4412-1-christophe.priouzeau@st.com>
 In-Reply-To: <20191022141907.4412-1-christophe.priouzeau@st.com>
 Accept-Language: en-US
@@ -58,7 +58,7 @@ MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
 	definitions=2019-10-22_03:2019-10-22,2019-10-22 signatures=0
 Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-Subject: [meta-networking][PATCH 12/16] radiusclient: Clarify BSD license variant
+Subject: [meta-networking][PATCH 13/16] celt051: Clarify BSD license variant
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,34 +76,29 @@ Content-Language: en-US
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-The License of radiusclient is BSD-3-Clause and
-BSD-2-Clause and HPND.
+The License of celt051 is BSD-2-Clause.
 
 Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
 ---
- .../recipes-protocols/radiusclient-ng/radiusclient-ng_0.5.6.bb  | 2 +-
+ meta-networking/recipes-support/celt051/celt051_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/radiusclient-ng/radiusclient=
--ng_0.5.6.bb b/meta-networking/recipes-protocols/radiusclient-ng/radiusclie=
-nt-ng_0.5.6.bb
-index 780423f0f..ea3775452 100644
---- a/meta-networking/recipes-protocols/radiusclient-ng/radiusclient-ng_0.5=
-.6.bb
-+++ b/meta-networking/recipes-protocols/radiusclient-ng/radiusclient-ng_0.5=
-.6.bb
-@@ -12,7 +12,7 @@ SRC_URI =3D "${DEBIAN_MIRROR}/main/r/${BPN}/${BPN}_${PV}.=
-orig.tar.gz \
- SRC_URI[md5sum] =3D "6fb7d4d0aefafaee7385831ac46a8e9c"
- SRC_URI[sha256sum] =3D "282a9f1355f190efbb06c0d7c4e062eaa652caf342ed3ad361=
-ac595f72f09f14"
+diff --git a/meta-networking/recipes-support/celt051/celt051_git.bb b/meta-=
+networking/recipes-support/celt051/celt051_git.bb
+index 116800522..12b9124f7 100644
+--- a/meta-networking/recipes-support/celt051/celt051_git.bb
++++ b/meta-networking/recipes-support/celt051/celt051_git.bb
+@@ -9,7 +9,7 @@ with high quality. Unlike these formats CELT imposes very l=
+ittle delay \
+ on the signal, even less than is typical for speech centric formats \
+ like Speex, GSM, or G.729."
 =20
 -LICENSE =3D "BSD"
-+LICENSE =3D "BSD-3-Clause & BSD-2-Clause & HPND"
- LIC_FILES_CHKSUM =3D "file://COPYRIGHT;md5=3D3e47566c9271b786693d8a08792db=
-f41"
++LICENSE =3D "BSD-2-Clause"
+ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D375f60ab360d17f0172737036ff155b=
+2"
 =20
- inherit autotools-brokensep
+ PV =3D "0.5.1.3+git${SRCPV}"
 --=20
 2.17.1
 
