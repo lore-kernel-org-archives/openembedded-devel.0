@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 48D517F89A
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
+	[209.85.214.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 562C07F844
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 16:14:05 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id p1so12432423pgi.4
+	Wed, 23 Oct 2019 16:14:06 +0000 (UTC)
+Received: by mail-pl1-f176.google.com with SMTP id c16so6576623plz.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 09:14:06 -0700 (PDT)
+	Wed, 23 Oct 2019 09:14:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=FvTaCx/JRyuXdvIgSqeiw3vXhXURiUamzXoIfhURXvQ=;
-	b=ckZrXZebwCKKg7zVqCDiSiYGXRt2regoi0Jr5rOMEWSTh2A7gt661Oil8tp0Q1c9VL
-	fqi2Hd6XwDVV7g/P/S3vbrNLew1m4i+k0CsETa1WXoC/lJqt2lGiZeqF7ACXx5eDHfEa
-	ks3mrgdx0tPBKf9PTT2KPcENLZ9vdnmXEXaQAh4mDfQbNxRKep7jLTs/eueHBt3H/lbU
-	OA+7H5ccNRBm+fzt371pKLZtpc/IqkU6tDrOmvbKCniQuYQpUz9AIvGgkBsj/I+0+zoj
-	vm63A+lFZKIlS3G/Mk/xl+N4IjiC5Yz0kigZ21y6+PTJ9oKmCHCS1xxZKiUZSv3hUc4e
-	OXKg==
+	bh=4GttEKtjLgLh3Dq8HmRJ2twnF64wj6axnvClfwESFd0=;
+	b=Gzy9AC63aQl/YNHaTYulsSKuMRYKymbnCOBNGLf9NFbH7KH1hrY2Cw6gePTK4sQPQN
+	O5H1s+ohYnZRbKYJVQ/pRtJvaYfDXPOyql1p2b0pBVp+uNJDc/DxAeaxv2x/GnypwOwV
+	60tVQvT45a1xBaePQ4Cp3INXP+NzDWj0ikv58Wf9Dacwi1uRub8P/WyBlysO3hPIbhC+
+	kPESNQksRfAksA98Lemg0OVO0M5u6atEzz/4U0GQ++WC86XJnyEEWGfqrufzkh2J8D2S
+	7kmc1MyVuj5g+6KRslaCa8ThbgeH8twOHzU5hzr57rPXtAMn7nE9JVbYVj8F+R8yZhDC
+	SB7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=FvTaCx/JRyuXdvIgSqeiw3vXhXURiUamzXoIfhURXvQ=;
-	b=JPQ46ZaFW6NFY4cJ/LgaKU6saQJ8CGD4YmxkwSBb6gomTYUvJfLZtR+6eiQnjbJ6tC
-	69V10o84hNEsHxl+Y8MnDvG/k4/FiJvxXT7Tb9dmpuzPHSFBDTGV8Le7pzN3hEHWDZjs
-	FXBkoce4BSRJ4Bv45+y8cpuhdYbhHroz4aoRbrChDqcXdB7TLYDnG1BJfHbAYAHRj4iz
-	HBn1uGSLkJiW74eUVAR7R0VtjCRdJcaZK41cx2E6LoGGg6kUf7BrUwaWPQZcg7KCcxFQ
-	nFRraa/dHdiQ4GWV1fyOd3+OkRphjq0iniu5IckvI4MPGnQ3ZKAIpD48WyeapkSR97L4
-	mpjw==
-X-Gm-Message-State: APjAAAVNzUd4CxDzj580WbMa3tbvmkhZKxMrA5IjOup77jUi+sI0mhNS
-	giziMQXPpNw/ykJCJP4iIMhYjK7i
-X-Google-Smtp-Source: APXvYqy3Rf2KPLi3amRZo3SG/WFQuYAmaS7knCG0EpjQv94qWqY7s3lrG42pSX2FmwWNi43ePsjpQw==
-X-Received: by 2002:a17:90a:a605:: with SMTP id
-	c5mr1016446pjq.28.1571847246111; 
-	Wed, 23 Oct 2019 09:14:06 -0700 (PDT)
+	bh=4GttEKtjLgLh3Dq8HmRJ2twnF64wj6axnvClfwESFd0=;
+	b=banEOGq79Lk0p9baIJTVEdvkld0SKRov1Z37qrBdPaJX+JcsrIQefco9IH3eJAZ5tY
+	w13mw8SlF1bNIpj21mLGCewTi7GnJ4LnGKvOzeMIbSzCTqNcpiT8eOqMthGwmuGsv5Jz
+	N8Sy9a8oMR7/oNiJB5pNzWWRvWsrdyAXzslA8SlB55asV0v75w38vC9n4i4mXvTUIJ++
+	1l7uJgrgXVMJB3pGGVbHIqaHO1jOCQFxPCjMrcHHWcEzj8bCO8rup98tjveLNYEij0y2
+	eEflwa3TqYnBz/aiUMLlRsfL3dqary2rHFVo3SfYiVR9fjxEWkQcRQmCCqjU60qQvdwt
+	6ViQ==
+X-Gm-Message-State: APjAAAX4pRi28TUchgJCv5F++fgfWoqCmzCF2/N5mzbC/5alrB3im1Rf
+	+rTeuhWDhC5D2tYKUpEzVlY5SEgv
+X-Google-Smtp-Source: APXvYqwqjtNWXFDWJt5ArSlyB2W/Rek/r2CLMIzWkuzn1Lkz6Z96VcM73jAho84cq2PI4+O330tW+w==
+X-Received: by 2002:a17:902:8d8e:: with SMTP id
+	v14mr10580916plo.312.1571847247108; 
+	Wed, 23 Oct 2019 09:14:07 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:d998:942e:6613:6ef4])
 	by smtp.gmail.com with ESMTPSA id
-	d19sm23179067pjz.5.2019.10.23.09.14.04
+	d19sm23179067pjz.5.2019.10.23.09.14.06
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 23 Oct 2019 09:14:05 -0700 (PDT)
+	Wed, 23 Oct 2019 09:14:06 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Oct 2019 09:13:52 -0700
-Message-Id: <7f011d0ba2e0dd31f3f07d03730974ea862e926b.1571847041.git.akuster808@gmail.com>
+Date: Wed, 23 Oct 2019 09:13:53 -0700
+Message-Id: <b71e3bb1db813bf4bfdf45492ed5f69b643d9587.1571847041.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1571847041.git.akuster808@gmail.com>
 References: <cover.1571847041.git.akuster808@gmail.com>
-Subject: [warrior 07/10] protobuf-c: fix race condition
+Subject: [warrior 08/10] xorg-fonts-100dpi: Change License Custom -> MIT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,78 +60,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Oct 2019 16:14:05 -0000
+X-List-Received-Date: Wed, 23 Oct 2019 16:14:06 -0000
 
-From: "Qi.Chen@windriver.com" <Qi.Chen@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+This is a meta package which collects a bunch of 100dpi font packages
+together which all are also under MIT license, Custom is not a known
+type moreover MIT is well suited for this recipe for compatibility
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Sinan Kaya <okaya@kernel.org>
-(cherry picked from commit 489d3b4b932ee8016d792341f8ea5836a9522cd4)
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+(cherry picked from commit c95c94d689f3b4972db72f511a60bcef52b8080d)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../protobuf-c/0001-avoid-race-condition.patch     | 36 ++++++++++++++++++++++
- .../recipes-devtools/protobuf/protobuf-c_1.3.1.bb  |  3 +-
- 2 files changed, 38 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
+ meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
-new file mode 100644
-index 0000000..4fc7703
---- /dev/null
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
-@@ -0,0 +1,36 @@
-+From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00 2001
-+From: Chen Qi <Qi.Chen@windriver.com>
-+Date: Sun, 29 Sep 2019 17:20:42 +0800
-+Subject: [PATCH] avoid race condition
-+
-+It's possible that the cxx-generate-packed-data.cc is compiled
-+while the t/test-full.pb.h is being generated. This will result
-+the following error.
-+
-+  DEBUG:	./t/test-full.pb.h:4:0: error: unterminated #ifndef
-+  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
-+
-+Add a dependency to avoid such problem.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-+---
-+ Makefile.am | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index b0cb065..1608ae0 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -156,6 +156,7 @@ noinst_PROGRAMS += \
-+ t_generated_code2_cxx_generate_packed_data_SOURCES = \
-+ 	t/generated-code2/cxx-generate-packed-data.cc \
-+ 	t/test-full.pb.cc
-++t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
-+ $(t_generated_code2_cxx_generate_packed_data_OBJECTS): t/test-full.pb.h
-+ t_generated_code2_cxx_generate_packed_data_CXXFLAGS = \
-+ 	$(AM_CXXFLAGS) \
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-index 7ef0300..17f92f0 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.1.bb
-@@ -15,7 +15,8 @@ DEPENDS = "protobuf-native protobuf"
- PV .= "+git${SRCPV}"
- SRCREV = "269771b4b45d3aba04e59569f53600003db8d9ff"
+diff --git a/meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb b/meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb
+index 45e3f7b..ae97040 100644
+--- a/meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb
++++ b/meta-oe/recipes-graphics/xorg-font/xorg-fonts-100dpi.bb
+@@ -1,5 +1,5 @@
+ SUMMARY = "Xorg 100 DPI font set"
+-LICENSE = "Custom"
++LICENSE = "MIT"
  
--SRC_URI = "git://github.com/protobuf-c/protobuf-c.git"
-+SRC_URI = "git://github.com/protobuf-c/protobuf-c.git \
-+           file://0001-avoid-race-condition.patch"
- 
- S = "${WORKDIR}/git"
- 
+ inherit packagegroup distro_features_check
+ # rdepends on font recipes with this restriction
 -- 
 2.7.4
 
