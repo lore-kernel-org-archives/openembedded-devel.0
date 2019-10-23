@@ -1,54 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 54FE77F8A1
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C5D87F882
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 16:14:01 +0000 (UTC)
-Received: by mail-pg1-f169.google.com with SMTP id p1so12432324pgi.4
+	Wed, 23 Oct 2019 16:14:02 +0000 (UTC)
+Received: by mail-pg1-f178.google.com with SMTP id l24so7490193pgh.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 09:14:02 -0700 (PDT)
+	Wed, 23 Oct 2019 09:14:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=0D1m6JhucjJA78LjrqZbTpuTppKfjMdSlhDURS7rTr0=;
-	b=kCDpz+1IVpMVYruxpWQPKDMA3BGlXDCEaP5ohHYgYwKcxaxhLF/Ecr00OMUen0p+Pm
-	pr86XXO/957iWw/opGjXgryUVpGapQs5lVPLRNfiN2ClO4odFSnCRDk5qZiLPvNhQFCy
-	yI9xrPOcCeigQYYIc01CO3Ig17vVOnYopYFcPXp44YFNZ6hwL3fO9F3n306LNatktBnw
-	8QMnl1fSkQpGlGrhf6GduyWr6f2aBU4e4X9DOrmnc+lvL5lDleVvDOB/tBJK911x2APX
-	LYNVfv2virCxQlJvDgKbPPUJePkqv2/Z6YbWbVGzWvTwBkOEL8FLSicC/FWaGF7GgMdE
-	kHMQ==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=Rs9ys8z9jBIau4+qYDjtDYUAG5LwJQcA0DBeW7Cwp/4=;
+	b=emX/JxQoYUJD8Uu57DfZrjY+iWgFnfemYrAIrnRv7WoiVJWGvDRZ1u2c3C5swMobzb
+	oqLGDr/41dLPDVbJjw9rmaHSVPvLJV6CQR9OH7w6sr6uxIQm5SWgHZvkbPofVesS3tZC
+	BFyG5hdYKkCe4JnGTY+AQ7IXlQcGIjN6jQTLP0BF+1C7tXaRB7dBTWYVtZaD/cr6PaNL
+	nFktqdOVv2ipl1g3z8TugeWMgMwLUv7b2yePrro3So+ouftyERq9MDWfPpXtp4D5Hjk+
+	YB1jdfAti6JwCwDv24gQYrInw5QtfhuqY+lyfbVIvISWAwCcGQBd9vYwmyTE7tyGyJUa
+	4u7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=0D1m6JhucjJA78LjrqZbTpuTppKfjMdSlhDURS7rTr0=;
-	b=UyUmBnEhYz45gvgTT6BEVzFVvS9/jOCXtH3sO8jMW++aAoes5NOWNNbtfhaq7Yiftz
-	jELolXV87BEUFeqtzN7o/QgoyPjwgAskO8PB9uGptaFzKXdpFMT6vWeV9PXmlYhrdGLl
-	NgKFT8PNGLZECahASygbAzRgN5SU6NOEErTlIpyYq31OsHuFAjb5Dkn8rOun2SM7F9Z8
-	ZPRIA/yZDQcMPEVaNFGCASlXPUmIKmmyKgB/tX5wQvIGHiN504DOaIFt2Vla75FSfRrX
-	ZSP4pWOy5euXlPEuM4fm09NgYVTycWDNnJ6KrqijGz45MhLj5urwabs0qGYcTHGW3M4I
-	Q1ew==
-X-Gm-Message-State: APjAAAVZ2AESeHzu9+dcicFCCA/IOgKBYWr8UUVaTTz4vkvbjYZTXYJt
-	5lyPJk9FjL5PWAmYZ0scsi3yR399
-X-Google-Smtp-Source: APXvYqxL5YVV0wFWlRCw5mA93rc2sauSmoweXcW5urzldkgyU789xBoxk5LSuL3gHLGEUgSJ8eu1SQ==
-X-Received: by 2002:a63:4556:: with SMTP id u22mr10511637pgk.2.1571847241682; 
-	Wed, 23 Oct 2019 09:14:01 -0700 (PDT)
+	:references;
+	bh=Rs9ys8z9jBIau4+qYDjtDYUAG5LwJQcA0DBeW7Cwp/4=;
+	b=QfT2mDRJJdqyPkMFEdnYq1LN3aUioucRvMubZQVfqQtBVxXAFeO48EgPAnMqADAl/t
+	5efbpJvvk0bETPpXR7xdGxKxmhgeUYIBvyvi2tMNsBumcMjh6a1nFmK2RfnNl5LAVMEa
+	y/f3fAOgxRFD1yL6b6veV20u7tbrLMdu7ls6E3JoXzJ82TeRJZziADppBLtHc7wpW2wb
+	OxfRw1kJO/V1jiUlvSrzxQ76n0ptaJK56hpbZh9yFB33StSHLYbsMpI5kDEO5M8JTDb2
+	vFBSJTJLoYf/iqkg15BXvEShDzRVc0xFKo6zvPs3IApzAEUO9aul6XcC3eWWVILYMKIZ
+	lk2A==
+X-Gm-Message-State: APjAAAWN3yMGFU3DakOK9WMCH7rjQJVWyw/sXhihRBFukxY/neHGykWu
+	y0JyvCLHhuDB5zSG6TFK2aGh17rJ
+X-Google-Smtp-Source: APXvYqzfaBcVFYep1Uq5SqPQ1WJ5Xyx6ULm9dj4HnylVSV+1qT6Baq6nh47aKwvJUP/SOxvD1/lSlQ==
+X-Received: by 2002:a62:65c1:: with SMTP id z184mr11808410pfb.42.1571847242765;
+	Wed, 23 Oct 2019 09:14:02 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:d998:942e:6613:6ef4])
 	by smtp.gmail.com with ESMTPSA id
-	d19sm23179067pjz.5.2019.10.23.09.14.00
+	d19sm23179067pjz.5.2019.10.23.09.14.01
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 23 Oct 2019 09:14:01 -0700 (PDT)
+	Wed, 23 Oct 2019 09:14:02 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Oct 2019 09:13:48 -0700
-Message-Id: <cba875fdac3081137d8b33ee7fb5dc9e8d7818da.1571847041.git.akuster808@gmail.com>
+Date: Wed, 23 Oct 2019 09:13:49 -0700
+Message-Id: <59475ff3927faad212816c1894c140ffae1eeabf.1571847041.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1571847041.git.akuster808@gmail.com>
 References: <cover.1571847041.git.akuster808@gmail.com>
-MIME-Version: 1.0
-Subject: [warrior 03/10] vlc: rework qt PACKAGECONFIG
+Subject: [warrior 04/10] python3-twofish: Fix missing return statements in module stubs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,76 +59,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Oct 2019 16:14:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 23 Oct 2019 16:14:02 -0000
 
-From: Andreas Müller <schnitzeltony@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 
-* qt4 support is gone -> move to qt5
-* while at it remove noop libtool copy
+* fixes build with -Werror=return-type
+  twofish.c: In function 'init_twofish':
+  twofish.c:45:1: error: control reaches end of non-void function [-Werror=return-type]
+     45 | PyMODINIT_FUNC init_twofish(void) { }
+        | ^~~~~~~~~~~~~~
+  twofish.c: In function 'PyInit__twofish':
+  twofish.c:46:1: error: control reaches end of non-void function [-Werror=return-type]
+     46 | PyMODINIT_FUNC PyInit__twofish(void) { }
+        | ^~~~~~~~~~~~~~
+  cc1: some warnings being treated as errors
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit a086334bce809327a9ca6fe1006ae63861116349)
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc.inc | 24 +++++++++++++++---------
- 1 file changed, 15 insertions(+), 9 deletions(-)
+ ...missing-return-statements-in-module-stubs.patch | 38 ++++++++++++++++++++++
+ .../python/python3-twofish_0.3.0.bb                |  2 ++
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-index e5102a3..0bedc5d 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-@@ -36,12 +36,17 @@ EXTRA_OECONF = "\
-     --enable-realrtsp \
-     --disable-libtar \
-     --enable-avcodec \
--    ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}/moc4 \
--    ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}/rcc4 \
--    ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}/uic4 \
-+    ac_cv_path_MOC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/moc \
-+    ac_cv_path_RCC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/rcc \
-+    ac_cv_path_UIC=${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}/uic \
- "
- 
--PACKAGECONFIG ?= " live555 dc1394 dv1394 notify fontconfig freetype dvdread png ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)}"
-+PACKAGECONFIG ?= " \
-+    live555 dc1394 dv1394 notify fontconfig freetype dvdread png \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
-+"
+diff --git a/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch b/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
+new file mode 100644
+index 0000000..c25b245
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
+@@ -0,0 +1,38 @@
++From 5704610f4b3aed5210e9c5b7c05ff8b5b2364c9c Mon Sep 17 00:00:00 2001
++From: Martin Jansa <Martin.Jansa@gmail.com>
++Date: Mon, 12 Aug 2019 08:18:21 +0000
++Subject: [PATCH] Fix missing return statements in module stubs
 +
-+inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'qmake5_paths', '', d)}
- 
- PACKAGECONFIG[mad] = "--enable-mad,--disable-mad,libmad"
- PACKAGECONFIG[a52] = "--enable-a52,--disable-a52,liba52"
-@@ -54,7 +59,7 @@ PACKAGECONFIG[opencv] = "--enable-opencv,--disable-opencv,opencv"
- PACKAGECONFIG[speex] = "--enable-speex,--disable-speex,speex"
- PACKAGECONFIG[gstreamer] = "--enable-gst-decode,--disable-gst-decode,gstreamer1.0 gstreamer1.0-plugins-base gst-plugins-bad"
- PACKAGECONFIG[vpx] = "--enable-vpx,--disable-vpx, libvpx"
--PACKAGECONFIG[qt4] = "--enable-qt,--disable-qt, qt4-x11-free"
-+PACKAGECONFIG[qt5] = "--enable-qt,--disable-qt, qtbase-native qtx11extras qtsvg"
- PACKAGECONFIG[freerdp] = "--enable-freerdp,--disable-freerdp, freerdp"
- PACKAGECONFIG[dvbpsi] = "--enable-dvbpsi,--disable-dvbpsi, libdvbpsi"
- PACKAGECONFIG[samba] = "--enable-smbclient,--disable-smbclient, samba"
-@@ -76,12 +81,13 @@ PACKAGECONFIG[x11] = "--with-x --enable-xcb,--without-x --disable-xcb,  xcb-util
- PACKAGECONFIG[png] = "--enable-png,--disable-png,libpng"
- PACKAGECONFIG[vdpau] = "--enable-vdpau,--disable-vdpau,libvdpau"
- 
--do_configure_prepend() {
--    cp ${STAGING_DATADIR}/libtool/config.* ${S}/autotools/ || true
--}
--
- do_configure_append() {
-     sed -i -e s:'${top_builddir_slash}libtool':'${top_builddir_slash}'${TARGET_SYS}-libtool:g ${B}/doltlibtool
++* fixes build with -Werror=return-type
++  twofish.c: In function 'init_twofish':
++  twofish.c:45:1: error: control reaches end of non-void function [-Werror=return-type]
++     45 | PyMODINIT_FUNC init_twofish(void) { }
++        | ^~~~~~~~~~~~~~
++  twofish.c: In function 'PyInit__twofish':
++  twofish.c:46:1: error: control reaches end of non-void function [-Werror=return-type]
++     46 | PyMODINIT_FUNC PyInit__twofish(void) { }
++        | ^~~~~~~~~~~~~~
++  cc1: some warnings being treated as errors
 +
-+    # moc needs support: precreate build paths
-+    for qtpath in adapters components/epg components/playlist components/sout dialogs managers styles util/buttons; do
-+        mkdir -p "${B}/modules/gui/qt/$qtpath"
-+    done
- }
- 
- # This recipe packages vlc as a library as well, so qt4 dependencies
++Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
++
++Upstream-Status: Submitted [https://github.com/keybase/python-twofish/pull/6]
++---
++ twofish.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/twofish.c b/twofish.c
++index e324c34..d4487d8 100644
++--- a/twofish.c
+++++ b/twofish.c
++@@ -42,5 +42,5 @@ DL_EXPORT(void) exp_Twofish_decrypt(Twofish_key * xkey, uint8_t c[16], uint8_t p
++ We need a stub init_twofish function so the module will link as a proper module.
++ Do not import _twofish from python; it will not work since _twofish is not a *real* module
++ */
++-PyMODINIT_FUNC init_twofish(void) { }
++-PyMODINIT_FUNC PyInit__twofish(void) { }
+++PyMODINIT_FUNC init_twofish(void) { return NULL; }
+++PyMODINIT_FUNC PyInit__twofish(void) { return NULL; }
++-- 
++2.17.1
++
+diff --git a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb b/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
+index e593f6f..7b8eb2e 100644
+--- a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
++++ b/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
+@@ -1,2 +1,4 @@
+ require python-twofish.inc
+ inherit setuptools3
++
++SRC_URI += "file://0001-Fix-missing-return-statements-in-module-stubs.patch"
 -- 
 2.7.4
 
