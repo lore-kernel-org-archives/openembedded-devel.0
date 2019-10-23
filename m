@@ -1,35 +1,49 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E8536B076
+Return-Path: <nick83ola@gmail.com>
+Received: from mail-oi1-f194.google.com (mail-oi1-f194.google.com
+	[209.85.167.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CC3AF6B076
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 09:31:21 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,220,1569254400"; d="scan'208";a="77361286"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 23 Oct 2019 17:31:21 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 3CC6B4CE1507
+	Wed, 23 Oct 2019 09:36:23 +0000 (UTC)
+Received: by mail-oi1-f194.google.com with SMTP id i16so16794103oie.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 17:23:27 +0800 (CST)
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.85) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 23 Oct 2019 17:31:20 +0800
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Wed, 23 Oct 2019 17:31:19 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 23 Oct 2019 17:31:07 +0800
-Message-ID: <1571823067-128967-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Wed, 23 Oct 2019 02:36:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=kgs9BizitfjDaBbO3n2SKsLJu+95VgTGI50bRAyY3CU=;
+	b=dGFlngEIeyLPtgdsqx67CYGlCimkDew/6UpNL+fjV1iFvZbgEXvFoZabUGltWl9tk1
+	x/DZuWEdDrA43CB4jF/UKO0B4fU93ZhcBhsCKDoVvMOvfl4Z0kS/7hDaZRpJQxwcfU2U
+	rFQEvsX5upUt/O0WwB9JZmfafzkcZ7vKRFeWmYTP04u2czN9aWA7NXu3i8DvlfARbGI+
+	BXDzRUBzZSpwOQmMvYgurAb/wHIr5mefHa3LyE35b+OQBLtePirSXypjSdZV8RaX77zD
+	9L4Tx1VTbE44CKSNnUvKUNs8lPAq8jPm8qB3YFHBHwRqldQ7zCwQY0WAt/gDkd1HndIs
+	Pelg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=kgs9BizitfjDaBbO3n2SKsLJu+95VgTGI50bRAyY3CU=;
+	b=ZML0ct6VIpJnsOkwBaUcIxHYnzVvhLS5Dnd9fl0vxlbEMFSXUCjZ+U6zBYpeaa1Kxl
+	iGp3QC6lJDyV+Pr0vHbqAYcYm7qJ9e8qoyRm8ks4FIrBXDfJ9qGUFM1iXv62n8pwcFaQ
+	V4/lirCx/VjHX+ZX9dEUgBOQTgAUWxJJ6JLRHfNLnhaSZmm9wChBjOBM4P3fEYEj0kpq
+	rVqggqDfxr7Orrf1bZ4+EpeGGziEXki/xlSngLv/35mG80jXP1PxMpAPt0b2jiA6ztjc
+	H5ZNUrNhMzxXh2wcFVv7lfxDYpmSlf3UjEKpObe7DKbUTGr4sTXLGEk/RvQpZHP2qsYr
+	xACw==
+X-Gm-Message-State: APjAAAXA8znZq7jhkp3H/8aNVAB9fJnd6BpTIKi7+7TyGqTeY+/h9shP
+	/NDDibvhMakPNAlMVsovC6YyBg2kPN4=
+X-Google-Smtp-Source: APXvYqwUH80stqeoiYD30bJYEaZNb4bDAbnmdxN6q8VClQweK6K0XsJQRkJ+wsOO61NLb35svU/Bow==
+X-Received: by 2002:aca:b154:: with SMTP id a81mr6855175oif.142.1571823384309; 
+	Wed, 23 Oct 2019 02:36:24 -0700 (PDT)
+Received: from nick-bbestie.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id o5sm716091otl.73.2019.10.23.02.36.22
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 23 Oct 2019 02:36:23 -0700 (PDT)
+From: Nicola Lunghi <nick83ola@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 23 Oct 2019 10:36:01 +0100
+Message-Id: <20191023093600.30161-1-nick83ola@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 3CC6B4CE1507.A785D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] byacc: upgrade 20180510 -> 20190617
+Subject: [meta-python][PATCH] python3-dbus-next: first commit of dbus-next 0.1.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,247 +56,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Oct 2019 09:31:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 23 Oct 2019 09:36:24 -0000
+Content-Transfer-Encoding: 8bit
 
-1) Update 0001-byacc-do-not-reorder-CC-and-CFLAGS.patch for new version.
+From pypi page:
 
-2) Update LIC_FILES_CHKSUM for date has been changed from '2004-2017,2018' to '2004-2018,2019'.
+python-dbus-next plans to improve over other DBus libraries for Python in the
+following ways:
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+ * Zero dependencies and pure Python 3.
+ * Support for multiple IO backends including asyncio and the GLib main loop.
+ * Nonblocking IO suitable for GUI development.
+ * Target the latest language features of Python for beautiful services and
+   clients.
+ * Complete implementation of the DBus type system without ever guessing types.
+ * Integration tests for all features of the library.
+ * Completely documented public API.
+
+Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
 ---
- .../0001-byacc-do-not-reorder-CC-and-CFLAGS.patch  | 151 +++++++++++++++++++--
- .../byacc/{byacc_20180510.bb => byacc_20190617.bb} |   6 +-
- 2 files changed, 139 insertions(+), 18 deletions(-)
- rename meta-oe/recipes-extended/byacc/{byacc_20180510.bb => byacc_20190617.bb} (58%)
+ .../python3-dbus-next/python3-dbus-next_0.1.2.bb      | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-dbus-next/python3-dbus-next_0.1.2.bb
 
-diff --git a/meta-oe/recipes-extended/byacc/byacc/0001-byacc-do-not-reorder-CC-and-CFLAGS.patch b/meta-oe/recipes-extended/byacc/byacc/0001-byacc-do-not-reorder-CC-and-CFLAGS.patch
-index 3bc0db9..24864ea 100644
---- a/meta-oe/recipes-extended/byacc/byacc/0001-byacc-do-not-reorder-CC-and-CFLAGS.patch
-+++ b/meta-oe/recipes-extended/byacc/byacc/0001-byacc-do-not-reorder-CC-and-CFLAGS.patch
-@@ -10,16 +10,18 @@ Upstream-Status: Inappropriate [OE Specific]
- 
- Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
- 
-+Update for 20190617.
-+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
- ---
-  aclocal.m4 |   1 -
-- configure  | 140 -------------------------------------------------------------
-- 2 files changed, 141 deletions(-)
-+ configure  | 259 -------------------------------------------------------------
-+ 2 files changed, 260 deletions(-)
- 
- diff --git a/aclocal.m4 b/aclocal.m4
--index 0d14f26..0cefa08 100644
-+index 338465f..3311057 100644
- --- a/aclocal.m4
- +++ b/aclocal.m4
--@@ -1038,7 +1038,6 @@ CF_GCC_VERSION
-+@@ -1231,7 +1231,6 @@ CF_GCC_VERSION
-  CF_ACVERSION_CHECK(2.52,
-  	[AC_PROG_CC_STDC],
-  	[CF_ANSI_CC_REQD])
-@@ -28,21 +30,140 @@ index 0d14f26..0cefa08 100644
-  dnl ---------------------------------------------------------------------------
-  dnl CF_PROG_GROFF version: 3 updated: 2018/01/07 13:16:19
- diff --git a/configure b/configure
--index d27ae31..077c648 100755
-+index ebb1f0f..a56cb17 100755
- --- a/configure
- +++ b/configure
--@@ -1946,146 +1946,6 @@ esac
-+@@ -1957,265 +1957,6 @@ esac
-  # This should have been defined by AC_PROG_CC
-  : ${CC:=cc}
-  
---echo "$as_me:1949: checking \$CC variable" >&5
-+-echo "$as_me:1960: checking \$CFLAGS variable" >&5
-+-echo $ECHO_N "checking \$CFLAGS variable... $ECHO_C" >&6
-+-case "x$CFLAGS" in
-+-(*-[IUD]*)
-+-	echo "$as_me:1964: result: broken" >&5
-+-echo "${ECHO_T}broken" >&6
-+-	{ echo "$as_me:1966: WARNING: your environment uses the CFLAGS variable to hold CPPFLAGS options" >&5
-+-echo "$as_me: WARNING: your environment uses the CFLAGS variable to hold CPPFLAGS options" >&2;}
-+-	cf_flags="$CFLAGS"
-+-	CFLAGS=
-+-	for cf_arg in $cf_flags
-+-	do
-+-
-+-cf_fix_cppflags=no
-+-cf_new_cflags=
-+-cf_new_cppflags=
-+-cf_new_extra_cppflags=
-+-
-+-for cf_add_cflags in $cf_arg
-+-do
-+-case $cf_fix_cppflags in
-+-(no)
-+-	case $cf_add_cflags in
-+-	(-undef|-nostdinc*|-I*|-D*|-U*|-E|-P|-C)
-+-		case $cf_add_cflags in
-+-		(-D*)
-+-			cf_tst_cflags=`echo ${cf_add_cflags} |sed -e 's/^-D[^=]*='\''\"[^"]*//'`
-+-
-+-			test "x${cf_add_cflags}" != "x${cf_tst_cflags}" \
-+-				&& test -z "${cf_tst_cflags}" \
-+-				&& cf_fix_cppflags=yes
-+-
-+-			if test $cf_fix_cppflags = yes ; then
-+-
-+-	test -n "$cf_new_extra_cppflags" && cf_new_extra_cppflags="$cf_new_extra_cppflags "
-+-	cf_new_extra_cppflags="${cf_new_extra_cppflags}$cf_add_cflags"
-+-
-+-				continue
-+-			elif test "${cf_tst_cflags}" = "\"'" ; then
-+-
-+-	test -n "$cf_new_extra_cppflags" && cf_new_extra_cppflags="$cf_new_extra_cppflags "
-+-	cf_new_extra_cppflags="${cf_new_extra_cppflags}$cf_add_cflags"
-+-
-+-				continue
-+-			fi
-+-			;;
-+-		esac
-+-		case "$CPPFLAGS" in
-+-		(*$cf_add_cflags)
-+-			;;
-+-		(*)
-+-			case $cf_add_cflags in
-+-			(-D*)
-+-				cf_tst_cppflags=`echo "x$cf_add_cflags" | sed -e 's/^...//' -e 's/=.*//'`
-+-
-+-CPPFLAGS=`echo "$CPPFLAGS" | \
-+-	sed	-e 's/-[UD]'"$cf_tst_cppflags"'\(=[^ 	]*\)\?[ 	]/ /g' \
-+-		-e 's/-[UD]'"$cf_tst_cppflags"'\(=[^ 	]*\)\?$//g'`
-+-
-+-				;;
-+-			esac
-+-
-+-	test -n "$cf_new_cppflags" && cf_new_cppflags="$cf_new_cppflags "
-+-	cf_new_cppflags="${cf_new_cppflags}$cf_add_cflags"
-+-
-+-			;;
-+-		esac
-+-		;;
-+-	(*)
-+-
-+-	test -n "$cf_new_cflags" && cf_new_cflags="$cf_new_cflags "
-+-	cf_new_cflags="${cf_new_cflags}$cf_add_cflags"
-+-
-+-		;;
-+-	esac
-+-	;;
-+-(yes)
-+-
-+-	test -n "$cf_new_extra_cppflags" && cf_new_extra_cppflags="$cf_new_extra_cppflags "
-+-	cf_new_extra_cppflags="${cf_new_extra_cppflags}$cf_add_cflags"
-+-
-+-	cf_tst_cflags=`echo ${cf_add_cflags} |sed -e 's/^[^"]*"'\''//'`
-+-
-+-	test "x${cf_add_cflags}" != "x${cf_tst_cflags}" \
-+-		&& test -z "${cf_tst_cflags}" \
-+-		&& cf_fix_cppflags=no
-+-	;;
-+-esac
-+-done
-+-
-+-if test -n "$cf_new_cflags" ; then
-+-
-+-	test -n "$CFLAGS" && CFLAGS="$CFLAGS "
-+-	CFLAGS="${CFLAGS}$cf_new_cflags"
-+-
-+-fi
-+-
-+-if test -n "$cf_new_cppflags" ; then
-+-
-+-	test -n "$CPPFLAGS" && CPPFLAGS="$CPPFLAGS "
-+-	CPPFLAGS="${CPPFLAGS}$cf_new_cppflags"
-+-
-+-fi
-+-
-+-if test -n "$cf_new_extra_cppflags" ; then
-+-
-+-	test -n "$EXTRA_CPPFLAGS" && EXTRA_CPPFLAGS="$EXTRA_CPPFLAGS "
-+-	EXTRA_CPPFLAGS="${EXTRA_CPPFLAGS}$cf_new_extra_cppflags"
-+-
-+-fi
-+-
-+-	done
-+-	;;
-+-(*)
-+-	echo "$as_me:2074: result: ok" >&5
-+-echo "${ECHO_T}ok" >&6
-+-	;;
-+-esac
-+-
-+-echo "$as_me:2079: checking \$CC variable" >&5
- -echo $ECHO_N "checking \$CC variable... $ECHO_C" >&6
- -case "$CC" in
- -(*[\ \	]-*)
---	echo "$as_me:1953: result: broken" >&5
-+-	echo "$as_me:2083: result: broken" >&5
- -echo "${ECHO_T}broken" >&6
---	{ echo "$as_me:1955: WARNING: your environment misuses the CC variable to hold CFLAGS/CPPFLAGS options" >&5
---echo "$as_me: WARNING: your environment misuses the CC variable to hold CFLAGS/CPPFLAGS options" >&2;}
-+-	{ echo "$as_me:2085: WARNING: your environment uses the CC variable to hold CFLAGS/CPPFLAGS options" >&5
-+-echo "$as_me: WARNING: your environment uses the CC variable to hold CFLAGS/CPPFLAGS options" >&2;}
- -	# humor him...
- -	cf_prog=`echo "$CC" | sed -e 's/	/ /g' -e 's/[ ]* / /g' -e 's/[ ]*[ ]-[^ ].*//'`
- -	cf_flags=`echo "$CC" | ${AWK:-awk} -v prog="$cf_prog" '{ printf("%s", substr($0,1+length(prog))); }'`
-@@ -158,24 +279,24 @@ index d27ae31..077c648 100755
- -	done
- -	test -n "$verbose" && echo "	resulting CC: '$CC'" 1>&6
- -
---echo "${as_me:-configure}:2072: testing resulting CC: '$CC' ..." 1>&5
-+-echo "${as_me:-configure}:2202: testing resulting CC: '$CC' ..." 1>&5
- -
- -	test -n "$verbose" && echo "	resulting CFLAGS: '$CFLAGS'" 1>&6
- -
---echo "${as_me:-configure}:2076: testing resulting CFLAGS: '$CFLAGS' ..." 1>&5
-+-echo "${as_me:-configure}:2206: testing resulting CFLAGS: '$CFLAGS' ..." 1>&5
- -
- -	test -n "$verbose" && echo "	resulting CPPFLAGS: '$CPPFLAGS'" 1>&6
- -
---echo "${as_me:-configure}:2080: testing resulting CPPFLAGS: '$CPPFLAGS' ..." 1>&5
-+-echo "${as_me:-configure}:2210: testing resulting CPPFLAGS: '$CPPFLAGS' ..." 1>&5
- -
- -	;;
- -(*)
---	echo "$as_me:2084: result: ok" >&5
-+-	echo "$as_me:2214: result: ok" >&5
- -echo "${ECHO_T}ok" >&6
- -	;;
- -esac
- -
-- echo "$as_me:2089: checking whether ${MAKE-make} sets \${MAKE}" >&5
-+ echo "$as_me:2219: checking whether ${MAKE-make} sets \${MAKE}" >&5
-  echo $ECHO_N "checking whether ${MAKE-make} sets \${MAKE}... $ECHO_C" >&6
-  set dummy ${MAKE-make}; ac_make=`echo "$2" | sed 'y,./+-,__p_,'`
- -- 
-diff --git a/meta-oe/recipes-extended/byacc/byacc_20180510.bb b/meta-oe/recipes-extended/byacc/byacc_20190617.bb
-similarity index 58%
-rename from meta-oe/recipes-extended/byacc/byacc_20180510.bb
-rename to meta-oe/recipes-extended/byacc/byacc_20190617.bb
-index f30c426..2834b7c 100644
---- a/meta-oe/recipes-extended/byacc/byacc_20180510.bb
-+++ b/meta-oe/recipes-extended/byacc/byacc_20190617.bb
-@@ -4,9 +4,9 @@
- # Setting to PD as this is what the upstream has it as.
- 
- LICENSE = "PD"
--LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=8b2933503c0443e041d3168dc0c65640"
-+LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=3eb7c635434fafe23ef30fc263e63b2f"
- require byacc.inc
- 
--SRC_URI[md5sum] = "97fdc0745e0ff0cef5c09d57d0c6752d"
--SRC_URI[sha256sum] = "d0940dbffbc7e9c9dd4985c25349c390beede84ae1d9fe86b71c0aa659a6d693"
-+SRC_URI[md5sum] = "17b3f7e7ed570d785b145064d99df615"
-+SRC_URI[sha256sum] = "f87868167b920bf2cb30fc32b62f63ae15671181ef329226d1063100be02518d"
- 
+diff --git a/meta-python/recipes-devtools/python/python3-dbus-next/python3-dbus-next_0.1.2.bb b/meta-python/recipes-devtools/python/python3-dbus-next/python3-dbus-next_0.1.2.bb
+new file mode 100644
+index 000000000..967163ab7
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-dbus-next/python3-dbus-next_0.1.2.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "A zero-dependency DBus library for Python with asyncio support"
++HOMEPAGE = "https://github.com/acrisci/python-dbus-next"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b32e18a71bcdd072bce21f204629a104"
++
++SRC_URI[md5sum] = "df838d695284dd1775860f9691a8663f"
++SRC_URI[sha256sum] = "a567d845ceed5feac48dda7faeb9ff2571f9a434a3c32b9b363f763e82368762"
++
++inherit pypi setuptools3
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.7.4
-
-
+2.20.1
 
 
