@@ -1,51 +1,50 @@
 Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
-	[209.85.221.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 53B977F8BB
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
+	[209.85.221.49])
+	by mail.openembedded.org (Postfix) with ESMTP id B395D7F8E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 21:17:04 +0000 (UTC)
-Received: by mail-wr1-f52.google.com with SMTP id s1so14870799wro.0
+	Wed, 23 Oct 2019 22:38:06 +0000 (UTC)
+Received: by mail-wr1-f49.google.com with SMTP id n15so12997422wrw.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 14:17:05 -0700 (PDT)
+	Wed, 23 Oct 2019 15:38:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=linuxfoundation.org; s=google;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=wu7MRan2mMS2ix0Xn1wZU9EKhMQZK9jmjLXuKKm66a8=;
-	b=MpM31G3qw//eGvEv/EjFBidoraFKBYBGLB/3yGS2ABAkYV3/nYaOcFYsCJMSgNCeKE
-	sE+8KTgX/B20Uofvv5FgTPIbYFZzqIIXZR2pSKubltZSvt219CKlQbIgdCauX1Zeewj9
-	Hk53XWFPbFD0Ja6Hd6SANftVTmd2wkeTcQpZQ=
+	h=message-id:subject:from:to:date:in-reply-to:references:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=V5xTufe4NPRDUk2r3Oat4YlD5cXh6Z7rssbOtyp+BfY=;
+	b=Efm53YXwy1uc9q/U1VwNrKoUIbLpDAjcwlNXjwtw76g8u2Qbyt5VJseZXHqYV0+aS+
+	NosQc7UJiD+f0BfgLzYm+uloqpgOQoOSa7PXCMlRXdDQapt8MLWeCRB73exwCLUOxj3n
+	OBhIBpXjP1qiYdV74jR1gyo6s/eznIr6149hU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=wu7MRan2mMS2ix0Xn1wZU9EKhMQZK9jmjLXuKKm66a8=;
-	b=l4KYhy3uo4StlttGl9C3teqdZG/JF29X2yORLrOaiECGn7hKWyYVb0bFUcSLzDFYhG
-	zevi45jkOyBmu0/IhhZ9RmM1iwhV9UKdP1pVSFisHN0EhdKyX88Nh5A1maoSixsRw64i
-	DuW+YMsmDQokRTs8wwCocS4OpjxLv1iT/fu/FgHJ7WKyzsaDOLaPhGYpd29xcmMXQBZj
-	nDaaErbTFRQAUGi9HfkmTDMXKgEYPhxwtqFAihzuz4VzPnp68iLd+S84fKc4z6u5gTbW
-	1Je/ZVi64hO8FpTVdnCEvgo2rH9GhJnEx/sA4u7/TacmJz+RUCcp3lbq+nm74qjc7uba
-	Bpsg==
-X-Gm-Message-State: APjAAAXpjCFu7rlUytD8nkpRflBVU10uI+K2bWLwU8ZsJdAGtzyasF/z
-	iC1BZB1Ti/B5MoasJIMHcO9PL0OzkpY=
-X-Google-Smtp-Source: APXvYqw0Bye8aqYeIcpJNZw3yMFbKhr6D4RXrG2dvb6L0I6eSCn4USUPnCNB8RUweUKKTCl4smCV2Q==
-X-Received: by 2002:a5d:62c5:: with SMTP id o5mr706902wrv.388.1571865424697;
-	Wed, 23 Oct 2019 14:17:04 -0700 (PDT)
-Received: from hex.int.rpsys.net (5751f4a1.skybroadband.com. [87.81.244.161])
-	by smtp.gmail.com with ESMTPSA id
-	a9sm614899wmf.14.2019.10.23.14.17.03
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:user-agent:mime-version:content-transfer-encoding;
+	bh=V5xTufe4NPRDUk2r3Oat4YlD5cXh6Z7rssbOtyp+BfY=;
+	b=ts7TDlVBbV4n6zyRCvwgNrl6bqXT5AVprFoxXRKE7B1wUSMWEjHkPHXX2MZ14TcgkR
+	WcE24BQhtGpsgspq+kZ7usQmlrtLV8r/Hi6qgC2pyvXrGxCxC5MclS5Y9iCb8uSKTkML
+	PT4vypN0QpFnZh4yu0GOUdIssUdsKVbUdcQwZLk9QE+SYrPWmKGcvgA/I4LIhYeKfuZF
+	cdbopmHJQ/zZSsuCjPFnBz7GtFX86lxSub3RXaqbtLE1LJ36lhrgFYfmyR7pyZ3s+VgX
+	bG1XXVi9Vvu4O4WI0aN0n/GMLmjFlJ4O8l1KNJ83mugwsP4L/vczzYcukHv9Xx3NlB7p
+	8vWQ==
+X-Gm-Message-State: APjAAAVWRcVCboP6q2e7y4YFTCr7oYlVh4moqem7DMN0wF0nh765GKWd
+	pxUKgawbndJ76a+QCh10nVYNpA==
+X-Google-Smtp-Source: APXvYqxzomarpx6bgxgxwY5v5nxqA5/8tYhaZ3akYIKlatfgxogDNRv1nmqK41AjlHuxI8OpHwPP/w==
+X-Received: by 2002:adf:e806:: with SMTP id o6mr777758wrm.139.1571870287394;
+	Wed, 23 Oct 2019 15:38:07 -0700 (PDT)
+Received: from hex (5751f4a1.skybroadband.com. [87.81.244.161])
+	by smtp.gmail.com with ESMTPSA id r81sm515582wme.16.2019.10.23.15.38.06
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 23 Oct 2019 14:17:04 -0700 (PDT)
+	Wed, 23 Oct 2019 15:38:06 -0700 (PDT)
+Message-ID: <74cfcc6194868f8afbf5c6e82b17283f4e9340ce.camel@linuxfoundation.org>
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Oct 2019 22:17:02 +0100
-Message-Id: <20191023211702.15125-2-richard.purdie@linuxfoundation.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191023211702.15125-1-richard.purdie@linuxfoundation.org>
-References: <20191023211702.15125-1-richard.purdie@linuxfoundation.org>
+To: Muminul Russell <misla011@fiu.edu>, 
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 23 Oct 2019 23:38:05 +0100
+In-Reply-To: <CAK=B8ybAAncCAZ_EAGiH6+u5-cYYKPAwfJhxTi0Gj6Q8JfeZrA@mail.gmail.com>
+References: <CAK=B8ybAAncCAZ_EAGiH6+u5-cYYKPAwfJhxTi0Gj6Q8JfeZrA@mail.gmail.com>
+User-Agent: Evolution 3.34.1-2 
 MIME-Version: 1.0
-Subject: [PATCH 2/2] python3-astor: Fix issue with new version of setuptools
+Subject: Re: Build info in the spec file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,55 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Oct 2019 21:17:04 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 23 Oct 2019 22:38:07 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
----
- .../python3-astor/fix-new-setuptools.patch     | 18 ++++++++++++++++++
- .../python/python3-astor_0.8.0.bb              |  3 ++-
- 2 files changed, 20 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-astor/fix-new-setuptools.patch
+On Wed, 2019-10-23 at 14:00 -0700, Muminul Russell wrote:
+> Hello Developers,
+> 
+> Yocto can generate spec file for rpm packaging. But that spec file
+> does not have %build and %install macro. Is there any work done
+> already to include those 2 macros? Or could you give me hints how can
+> I do that?
 
-diff --git a/meta-python/recipes-devtools/python/python3-astor/fix-new-setuptools.patch b/meta-python/recipes-devtools/python/python3-astor/fix-new-setuptools.patch
-new file mode 100644
-index 000000000..90defe25c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-astor/fix-new-setuptools.patch
-@@ -0,0 +1,18 @@
-+New versions of setuptools can't parse this expression. We know our python versions
-+match so just remove it until upstream fixes it.
-+
-+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-+Upstream-Status: Pending
-+
-+Index: git/setup.cfg
-+===================================================================
-+--- git.orig/setup.cfg
-++++ git/setup.cfg
-+@@ -34,7 +34,6 @@ classifiers =
-+ zip_safe = True
-+ include_package_data = True
-+ packages = find:
-+-python_requires = >=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*
-+ 
-+ [options.packages.find]
-+ exclude = tests
-diff --git a/meta-python/recipes-devtools/python/python3-astor_0.8.0.bb b/meta-python/recipes-devtools/python/python3-astor_0.8.0.bb
-index c2dc9245c..97dbdbbea 100644
---- a/meta-python/recipes-devtools/python/python3-astor_0.8.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-astor_0.8.0.bb
-@@ -4,7 +4,8 @@ SECTION = "devel/python"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=561205fdabc3ec52cae2d30815b8ade7"
- 
--SRC_URI = "git://github.com/berkerpeksag/astor.git"
-+SRC_URI = "git://github.com/berkerpeksag/astor.git \
-+           file://fix-new-setuptools.patch"
- SRCREV ?= "4ca3a26e52f08678854c2841cd0fdf223461e47d"
- 
- inherit setuptools3
--- 
-2.20.1
+OE uses its own cross building process. You can't encode that cross
+building process into those macros. rpmbuild assumes native compiling.
+People have tried and concluded its really not practical.
+
+Think about the fact that even if you did have something there, the
+original process used to run the build would be different. That means
+two different code paths, one of which will probably end up with
+different results and hence be broken.
+
+So yes, I understand the desire but it really doesn't make sense.
+
+Cheers,
+
+Richard
 
 
