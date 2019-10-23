@@ -1,53 +1,61 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
-	[209.85.210.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 698847F8A9
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 882B57F882
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 16:14:08 +0000 (UTC)
-Received: by mail-pf1-f175.google.com with SMTP id a2so13226478pfo.10
+	Wed, 23 Oct 2019 16:23:44 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id p4so22798383wrm.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 09:14:09 -0700 (PDT)
+	Wed, 23 Oct 2019 09:23:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=/LdHcH+SNHax5NXzplqcFrBo4kc34yb833/pcVXE190=;
-	b=the9pBfIO2/Nz0sG7IlxwOjZg/5Z/gLO7Wp4GOjACogtlayKYc9eR4Rd/doFyrbUwj
-	yqaNl7DzzW4QtqGXVZXe5aD1p0ZZGcVAsH2IhDLmQ70dcC1ZFw2quiOZAH7lgxccMfY7
-	vbQuUF9ykB/o0VuWFvq1xnuAEny7Zo9M3saqyzze8vsvjVammSqTwQXMgRlyxST07W91
-	ikIMgUlOZPxUa8tI9q241rc9TOT/HpM0BFU7TIhIKW9oZt1PuFwIZrBWJKxSzCsywRUn
-	uTd5Szhhu60yQqBhPVNeviJ2JnQrOxAj6CtAUd7R3ZUh335fWEWzxkGHOUX5O+491rFh
-	LPSg==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=1yQJuRmlGnRIqBiBZ35V9Ae3/go9dxRz7/SPZm45iiU=;
+	b=KPL/60EzIHbyi/vVsOKglGvFw1tmMnev06qqHH0Qx0+9/yAh5PKypAjpYAp0+uF8Ef
+	U+8VS0nlgLDOtyZ/fMe+CAD6hTYjuaZnLGSOMuyhr2fiG6iaB+4b7orw/2qXyhsfITqW
+	cndkTjSvK2RSVqNON/gYNBB6mswUwGO1zxOFmUr088+LDxN4QVwhJV2VyG761mAJ/1MC
+	9xs58CvCrMKG4FXgHCbRJO0jquPbKkHRQwTdQTFN7NJXkvupGHcXjEPPyp0Ogux/BG8T
+	rwD/ASMvjI+0y2OJinmPSrbJdmFpbYYEQV86CPgXlmhgrsVSCZkIPusGJKp4DEal8Et6
+	5ZLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=/LdHcH+SNHax5NXzplqcFrBo4kc34yb833/pcVXE190=;
-	b=UPp21NFLKcPHznKd86+kA8mdlP3R8GrcUdQwIl1Qqp+0cbWrl7c5W/oJggpiADpicH
-	87/W3fHWv0VcU9YtUTGiuYdtrNdWHqC5gytbk6Ig3l4ZhwK2eTtJjRtcmMiQKc/SSezY
-	FbNPAbMXXfCFeHP3Z0v37DHrbTkkjUqLJ+N2wAeoAgUh9ZpuotF2+TQ6mvFfuDl3w+Sl
-	BWKV5Yv8EPcM83DR17xNlkunZuharhk4tVBz1BgtUdAFiU+ITopUKYYFZZKSAFo/kFx3
-	KR+TZQnyyBW91bSRG1ccyGmP1PJj2nYHmjSqVlC8vDMVtjAE+Z+lZDmCiXYtN9mLsb2x
-	w8Nw==
-X-Gm-Message-State: APjAAAWGeZUtAyoModRx9wzJfYDyunfmTxBlz9nhcVTHU8K9ldXWpouC
-	5P5hm+1V4U0ZXVOezZHcy0Wpin/9
-X-Google-Smtp-Source: APXvYqxUxR31rsg6b8vCkhf6Wbfd5qQjgr5q07GLyg0lIW3+MNAOqdsttvPrHOqRju9jnNqe6YyMmQ==
-X-Received: by 2002:a62:68c1:: with SMTP id
-	d184mr11817330pfc.195.1571847249365; 
-	Wed, 23 Oct 2019 09:14:09 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:a5c0:d998:942e:6613:6ef4])
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=1yQJuRmlGnRIqBiBZ35V9Ae3/go9dxRz7/SPZm45iiU=;
+	b=Fr2M+Mi3Do3E43+s6yzobT9K5qaQkK8yH1OqDsb0t0srhqGQaRCTuDv7uyBHKPftL/
+	iWKJk5eKEJAsgeDyyf6dsDHWH+JFh0XqNj0NmjsWYEUchu2J4KJ7WgJ/KbUG5CoPiT5u
+	akyZy0UD61eH4+F6/qFy3ODLuyptF1y7cdYbes8+MetR70KknOTThCVOVKkZ7MwHoVVS
+	LQ2YU9HFfuYDHn9dmb+KWnVPxQm2H8q/QEKuC1fhl1ra6osgtU1FfSF2QnomnylCImCZ
+	pQcgJQpiON5aRtaJno+aRx9E03H4BNyeheeQDStazC//NdfLDBBlVmhk0OZpISQrIvNC
+	V1Cg==
+X-Gm-Message-State: APjAAAXuEXxh0FGh+xG2hPFaS4Zwhul89IdUsdVuIe2EGUEr7z95t2QK
+	gF35gmXbB/uI4mjX8mdXqckJgb9A
+X-Google-Smtp-Source: APXvYqx1pXG8w7qCFwx8wQQfLd4kC5iZfn7B7O5xBs4K/o9HL5XDobCP8ZhwcPOn4/Kp/3hWE83D4Q==
+X-Received: by 2002:a05:6000:1252:: with SMTP id
+	j18mr9048462wrx.23.1571847825049; 
+	Wed, 23 Oct 2019 09:23:45 -0700 (PDT)
+Received: from localhost (ip-217-030-068-212.aim-net.cz. [217.30.68.212])
 	by smtp.gmail.com with ESMTPSA id
-	d19sm23179067pjz.5.2019.10.23.09.14.08
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 23 Oct 2019 09:14:08 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Oct 2019 09:13:55 -0700
-Message-Id: <a24acf94d48d635eca668ea34598c6e5c857e3f8.1571847041.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1571847041.git.akuster808@gmail.com>
-References: <cover.1571847041.git.akuster808@gmail.com>
-Subject: [warrior 10/10] tcpdump: Delete unused patch
+	w7sm17948368wmd.22.2019.10.23.09.23.44
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 23 Oct 2019 09:23:44 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 23 Oct 2019 18:23:52 +0200
+To: akuster808 <akuster808@gmail.com>
+Message-ID: <20191023162352.GA1538@jama>
+References: <20190929092956.13147-1-Qi.Chen@windriver.com>
+	<20191017204414.GB1499@jama>
+	<CA+chaQcpMndabwwuv+c8203ATbcwNEMJ8zjLDnqTkzkqyw4OrQ@mail.gmail.com>
+	<CAMKF1sq30Y4p=7ckBc+2cQmg2-bTs9p4KG4ddOqrZibQHTCexQ@mail.gmail.com>
+	<CA+chaQfNsqJJAkCXV_ZuO17mtNh4CDm7YjeuFQvh9bTTs4ad2w@mail.gmail.com>
+	<20191022213718.GA2607@jama>
+	<afac42ea-c54b-1fd2-5b38-fcde9bf67674@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <afac42ea-c54b-1fd2-5b38-fcde9bf67674@gmail.com>
+User-Agent: Mutt/1.12.2 (2019-09-21)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] protobuf-c: fix race condition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,90 +68,268 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Oct 2019 16:14:08 -0000
+X-List-Received-Date: Wed, 23 Oct 2019 16:23:44 -0000
+X-Groupsio-MsgNum: 80314
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="ew6BAiZeqk4r7MaW"
+Content-Disposition: inline
 
-From: Peiran Hong <peiran.hong@windriver.com>
+--ew6BAiZeqk4r7MaW
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Delete patch "0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch"
-since it is not used in the tcpdump recipe anymore.
+On Wed, Oct 23, 2019 at 08:50:10AM -0700, akuster808 wrote:
+>=20
+>=20
+> On 10/22/19 2:37 PM, Martin Jansa wrote:
+> > On Fri, Oct 18, 2019 at 09:06:54PM +0200, Martin Jansa wrote:
+> >> One more data point is that it might be fixed completely with 1.3.2 ve=
+rsion
+> >> used in zeus/master and failing less often then without this patch in =
+1.3.1
+> >> used in thud/warrior.
+> >>
+> >> I was rebuilding it 300 times in thud/warrior/zeus and got 5-6 failure=
+s in
+> >> thud/warrior but none in zeus.
+> >>
+> >> I've started another for loop to rebuilt it 1000 time with zeus and if=
+ it
+> >> works then I'll retest warrior and thud with 1.3.2 upgrade backported =
+to
+> >> them - if it works then we can either backport whole upgrade or check =
+the
+> >> 1.3.1 1.3.2 diff to find out what else we need to backport from there.
+> > 1000 times in zeus =3D 0 failures
+> > 100 times in thud with 1.3.2 backported ~ 10 failures
+> > 1000 times in thud with 1.3.2 as well as protobuf-native 3.9.2 =3D 0 fa=
+ilures
+> >
+> > The protobuf-c upgrade isn't need to be backported to thud, there aren't
+> > many changes:
+> > https://github.com/protobuf-c/protobuf-c/compare/269771b4b45d3aba04e595=
+69f53600003db8d9ff...1390409f4ee4e26d0635310995b516eb702c3f9e
+> >
+> > protobuf on the other hand was upgraded from 3.6.1 to 3.9.2 in zeus and
+> > the diff is big (1028 commits):
+> > https://github.com/protocolbuffers/protobuf/compare/48cb18e5c419ddd23d9=
+badcfe4e9df7bde1979b2...52b2447247f535663ac1c292e088b4b27d2910ef
+> >
+> > quick grep in git log didn't reveal what might be causing the race
+> > condition, upgrading whole protobuf in warrior and thud isn't an option
+> > as well.
+> >
+> > Anyone interested in digging a bit deeper?
+> >
+> > I don't want to block this change, because it seems to completely fix it
+> > for zeus/master and partially improve it also for warrior and thud.
+> >
+> > We don't use protobuf much, so for our builds I think I'll just backport
+> > whole protobuf upgrade to thud once protobuf-c fix is in thud.
+>=20
+> So is https://patchwork.openembedded.org/patch/165905/ still a go for
+> warrior?
 
-Signed-off-by: Peiran Hong <peiran.hong@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 01b55a8a552d460acbe3673268733a78b47c5c03)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- ...2017-16808-AoE-Add-a-missing-bounds-check.patch | 61 ----------------------
- 1 file changed, 61 deletions(-)
- delete mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
+I think it is and for thud as well. Once there is a fix for protobuf as
+well, it should be in separate follow-up change anyway.
 
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
-deleted file mode 100644
-index 919f2b0..0000000
---- a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
-+++ /dev/null
-@@ -1,61 +0,0 @@
--From c45443a0d3e16b92622bea6b589e5930e8f0d815 Mon Sep 17 00:00:00 2001
--From: Peiran Hong <peiran.hong@windriver.com>
--Date: Fri, 13 Sep 2019 17:02:57 -0400
--Subject: [PATCH] CVE-2017-16808/AoE: Add a missing bounds check.
--
-----
-- netdissect.h | 12 ++++++++++++
-- print-aoe.c  |  1 +
-- 2 files changed, 13 insertions(+)
--
--diff --git a/netdissect.h b/netdissect.h
--index 089b0406..cd05fdb9 100644
----- a/netdissect.h
--+++ b/netdissect.h
--@@ -69,6 +69,11 @@ typedef struct {
-- typedef unsigned char nd_uint8_t;
-- typedef signed char nd_int8_t;
-- 
--+/*
--+ * Use this for MAC addresses.
--+ */
--+#define MAC_ADDR_LEN    6               /* length of MAC addresses */
--+
-- /* snprintf et al */
-- 
-- #include <stdarg.h>
--@@ -309,12 +314,19 @@ struct netdissect_options {
-- 	((uintptr_t)ndo->ndo_snapend - (l) <= (uintptr_t)ndo->ndo_snapend && \
--          (uintptr_t)&(var) <= (uintptr_t)ndo->ndo_snapend - (l)))
-- 
--+#define ND_TTEST_LEN(p, l) \
--+  (IS_NOT_NEGATIVE(l) && \
--+        ((uintptr_t)ndo->ndo_snapend - (l) <= (uintptr_t)ndo->ndo_snapend && \
--+         (uintptr_t)(p) <= (uintptr_t)ndo->ndo_snapend - (l)))
--+
-- /* True if "var" was captured */
-- #define ND_TTEST(var) ND_TTEST2(var, sizeof(var))
-- 
-- /* Bail if "l" bytes of "var" were not captured */
-- #define ND_TCHECK2(var, l) if (!ND_TTEST2(var, l)) goto trunc
-- 
--+#define ND_TCHECK_LEN(p, l) if (!ND_TTEST_LEN(p, l)) goto trunc
--+
-- /* Bail if "var" was not captured */
-- #define ND_TCHECK(var) ND_TCHECK2(var, sizeof(var))
-- 
--diff --git a/print-aoe.c b/print-aoe.c
--index 97e93df2..ac097a04 100644
----- a/print-aoe.c
--+++ b/print-aoe.c
--@@ -325,6 +325,7 @@ aoev1_reserve_print(netdissect_options *ndo,
-- 		goto invalid;
-- 	/* addresses */
-- 	for (i = 0; i < nmacs; i++) {
--+		ND_TCHECK_LEN(cp, MAC_ADDR_LEN);
-- 		ND_PRINT((ndo, "\n\tEthernet Address %u: %s", i, etheraddr_string(ndo, cp)));
-- 		cp += ETHER_ADDR_LEN;
-- 	}
---- 
--2.21.0
--
--- 
-2.7.4
+with protobuf-c fix included I got 28 failures in 1000 rebuilds
+without protobuf-c fix I got 5 failures in 308 rebuilds (still running)
 
+so the rate seems similar if not the same (but there might be other
+aspects like load on the build machine from other builds), before I was
+seeing lower frequency of failures with this included.
 
+Cheers,
+
+> >> On Fri, Oct 18, 2019 at 11:07 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >>
+> >>> Yes I have seen same build failures on master even after this fix on
+> >>> machine with more cpus so the fix while seems to address the problem =
+is not
+> >>> fixing is completely when I get a chance I will look into the logic m=
+yself
+> >>> too but I think we have to delve into it a bit More
+> >>>
+> >>> On Fri, Oct 18, 2019 at 3:41 AM Martin Jansa <martin.jansa@gmail.com>
+> >>> wrote:
+> >>>
+> >>>> Hmm I spoke too soon, at least rebuilding protobuf-c-native with this
+> >>>> change backported to thud still failed once with:
+> >>>>
+> >>>> ../git/t/generated-code2/cxx-generate-packed-data.cc:28:17: error: =
+=E2=80=98foo=E2=80=99
+> >>>> is
+> >>>> not a namespace-name
+> >>>>  using namespace foo;
+> >>>>                  ^~~
+> >>>> ../git/t/generated-code2/cxx-generate-packed-data.cc:28:20: error:
+> >>>> expected
+> >>>> namespace-name before =E2=80=98;=E2=80=99 token
+> >>>>  using namespace foo;
+> >>>>                     ^
+> >>>> ../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+> >>>> =E2=80=98TestEnumSmall=E2=80=99 does not name a type
+> >>>>  #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
+> >>>>                                     ^
+> >>>> ../git/t/generated-code2/common-test-arrays.h:44:1: note: in expansi=
+on of
+> >>>> macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
+> >>>>  TEST_ENUM_SMALL_TYPE_NAME enum_small_0[] =3D { TEST_ENUM_SMALL(VALU=
+E) };
+> >>>>  ^~~~~~~~~~~~~~~~~~~~~~~~~
+> >>>> ../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+> >>>> =E2=80=98TestEnumSmall=E2=80=99 does not name a type
+> >>>>  #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
+> >>>>                                     ^
+> >>>> ../git/t/generated-code2/common-test-arrays.h:45:1: note: in expansi=
+on of
+> >>>> macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
+> >>>>  TEST_ENUM_SMALL_TYPE_NAME enum_small_1[] =3D { TEST_ENUM_SMALL(OTHE=
+R_VALUE)
+> >>>> };
+> >>>>  ^~~~~~~~~~~~~~~~~~~~~~~~~
+> >>>> ../git/t/generated-code2/cxx-generate-packed-data.cc:31:36: error:
+> >>>> =E2=80=98TestEnumSmall=E2=80=99 does not name a type
+> >>>>  #define TEST_ENUM_SMALL_TYPE_NAME  TestEnumSmall
+> >>>>                                     ^
+> >>>> ../git/t/generated-code2/common-test-arrays.h:47:1: note: in expansi=
+on of
+> >>>> macro =E2=80=98TEST_ENUM_SMALL_TYPE_NAME=E2=80=99
+> >>>>  TEST_ENUM_SMALL_TYPE_NAME enum_small_random[] =3D
+> >>>>
+> >>>> {T(0),T(1),T(1),T(0),T(0),T(1),T(1),T(1),T(0),T(0),T(0),T(0),T(0),T(=
+1),T(1),T(1),T(1),T(1),T(1),T(0),T(1),T(1),T(0),T(1),T(1),T(0)
+> >>>> };
+> >>>>  ^~~~~~~~~~~~~~~~~~~~~~~~~
+> >>>> ...
+> >>>> so it probably doesn't fix the issue completely.
+> >>>>
+> >>>>
+> >>>> On Thu, Oct 17, 2019 at 10:44 PM Martin Jansa <martin.jansa@gmail.co=
+m>
+> >>>> wrote:
+> >>>>
+> >>>>> On Sun, Sep 29, 2019 at 05:29:56PM +0800, Chen Qi wrote:
+> >>>>>> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> >>>>>> ---
+> >>>>>>  .../0001-avoid-race-condition.patch           | 36
+> >>>> +++++++++++++++++++
+> >>>>>>  .../protobuf/protobuf-c_1.3.2.bb              |  1 +
+> >>>>>>  2 files changed, 37 insertions(+)
+> >>>>>>  create mode 100644
+> >>>> meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-conditi=
+on.patch
+> >>>>>> diff --git
+> >>>> a/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condi=
+tion.patch
+> >>>> b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condi=
+tion.patch
+> >>>>>> new file mode 100644
+> >>>>>> index 000000000..4fc7703d8
+> >>>>>> --- /dev/null
+> >>>>>> +++
+> >>>> b/meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condi=
+tion.patch
+> >>>>>> @@ -0,0 +1,36 @@
+> >>>>>> +From 216e31260b618ec73862f9f5336597f391444dac Mon Sep 17 00:00:00
+> >>>> 2001
+> >>>>>> +From: Chen Qi <Qi.Chen@windriver.com>
+> >>>>>> +Date: Sun, 29 Sep 2019 17:20:42 +0800
+> >>>>>> +Subject: [PATCH] avoid race condition
+> >>>>>> +
+> >>>>>> +It's possible that the cxx-generate-packed-data.cc is compiled
+> >>>>>> +while the t/test-full.pb.h is being generated. This will result
+> >>>>>> +the following error.
+> >>>>>> +
+> >>>>>> +  DEBUG:     ./t/test-full.pb.h:4:0: error: unterminated #ifndef
+> >>>>>> +  ./t/test-full.pb.h:4:0: error: unterminated #ifndef
+> >>>>>> +
+> >>>>>> +Add a dependency to avoid such problem.
+> >>>>>> +
+> >>>>>> +Upstream-Status: Pending
+> >>>>> Thanks for this patch, it seems to indeed fix this issue, I've repo=
+rted
+> >>>>> a while ago:
+> >>>>>
+> >>>>>
+> >>>> https://www.mail-archive.com/openembedded-devel@lists.openembedded.o=
+rg/msg64363.html
+> >>>>> I think the upstream would be interested in this fix as well, see:
+> >>>>>
+> >>>>>
+> >>>> https://github.com/protobuf-c/protobuf-c/commit/b0bb56303366e2c072ee=
+38eb5f1f11251b07239c
+> >>>>> Cheers,
+> >>>>>
+> >>>>>> +
+> >>>>>> +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> >>>>>> +---
+> >>>>>> + Makefile.am | 1 +
+> >>>>>> + 1 file changed, 1 insertion(+)
+> >>>>>> +
+> >>>>>> +diff --git a/Makefile.am b/Makefile.am
+> >>>>>> +index b0cb065..1608ae0 100644
+> >>>>>> +--- a/Makefile.am
+> >>>>>> ++++ b/Makefile.am
+> >>>>>> +@@ -156,6 +156,7 @@ noinst_PROGRAMS +=3D \
+> >>>>>> + t_generated_code2_cxx_generate_packed_data_SOURCES =3D \
+> >>>>>> +     t/generated-code2/cxx-generate-packed-data.cc \
+> >>>>>> +     t/test-full.pb.cc
+> >>>>>> ++t/generated-code2/cxx-generate-packed-data.cc: t/test-full.pb.h
+> >>>>>> + $(t_generated_code2_cxx_generate_packed_data_OBJECTS):
+> >>>> t/test-full.pb.h
+> >>>>>> + t_generated_code2_cxx_generate_packed_data_CXXFLAGS =3D \
+> >>>>>> +     $(AM_CXXFLAGS) \
+> >>>>>> +--
+> >>>>>> +2.17.1
+> >>>>>> +
+> >>>>>> diff --git a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> >>>>> b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> >>>>>> index 6d1ffc3f4..b92f82dec 100644
+> >>>>>> --- a/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> >>>>>> +++ b/meta-oe/recipes-devtools/protobuf/protobuf-c_1.3.2.bb
+> >>>>>> @@ -15,6 +15,7 @@ DEPENDS =3D "protobuf-native protobuf"
+> >>>>>>  SRCREV =3D "1390409f4ee4e26d0635310995b516eb702c3f9e"
+> >>>>>>
+> >>>>>>  SRC_URI =3D "git://github.com/protobuf-c/protobuf-c.git \
+> >>>>>> +           file://0001-avoid-race-condition.patch \
+> >>>>>>            "
+> >>>>>>
+> >>>>>>  S =3D "${WORKDIR}/git"
+> >>>>>> --
+> >>>>>> 2.17.1
+> >>>>>>
+> >>>>>> --
+> >>>>>> _______________________________________________
+> >>>>>> Openembedded-devel mailing list
+> >>>>>> Openembedded-devel@lists.openembedded.org
+> >>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>>> --
+> >>>>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> >>>>>
+> >>>> --
+> >>>> _______________________________________________
+> >>>> Openembedded-devel mailing list
+> >>>> Openembedded-devel@lists.openembedded.org
+> >>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>>
+> >
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--ew6BAiZeqk4r7MaW
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXbB+lwAKCRA3VSO3ZXaA
+HOuEAJ9TuqO1LgC0DVi/ICyy3XrHJv2qPQCgtN0Dd8DOsDh97HPjed8lf7VHUso=
+=B65o
+-----END PGP SIGNATURE-----
+
+--ew6BAiZeqk4r7MaW--
