@@ -1,50 +1,44 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E9EBD7F874
+Return-Path: <misla011@fiu.edu>
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
+	[209.85.222.180])
+	by mail.openembedded.org (Postfix) with ESMTP id E7B887F8A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 20:14:08 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id 6so457641wmf.0
+	Wed, 23 Oct 2019 21:00:57 +0000 (UTC)
+Received: by mail-qk1-f180.google.com with SMTP id a194so17159789qkg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 13:14:10 -0700 (PDT)
+	Wed, 23 Oct 2019 14:00:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=mhPxFta/799kYPW+TRqAHypejPVAiDLeEw6oBNIcQaw=;
-	b=CiFMxey1iD1YOvGOzK0NADUK5m/WG87iAYWJNwBmCa24OB8W58ehdItTQUQW6AVb4z
-	I4hyEvEqjJwLkCEEZhjN+rF2cAQ2QlmbgbK689CKKTd1uecB2vIGXVghGCAsWi9y9X/5
-	tFpQ6CCaK+lHNfwyyNwRvU5FiJdtADmvw5LLI=
+	d=fiu-edu.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Luhzf8iGeWCF6DTbh3aPHFC+yV7uP4E/8+E2sXlO4SI=;
+	b=ILYM7fzTKeuoT2urbgTuxeo1fSkM5gWk4ZOQ2Ff0XHNhHpzAwBDIx5BCSfNk2crE2o
+	VlznhjKQLn/PUOCBCX3BcPHQ32FFyuS8G5HE3RwT3Oduv1oN10KaOqX674sxrQFj9sAG
+	GvRtztrQKrqyPOjoULP+1VrCr8rq/pugAc/sXYOjSaLgMxwcPEnlkMlJ4Sf52pMGplYA
+	4dz6cSqDovS7FKwoxFk04h4Pxr0heBmqsxt8zq2Et+jKSKk6e44bLY6fLr8N6qkkFkMx
+	KDQdX+15AuT1bWwpBfQ4e3LXmC3HWAQ9Tm8q4dxtR8uf6gWZ0KQNWcwu7W5ilQkSz7Ce
+	lfuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=mhPxFta/799kYPW+TRqAHypejPVAiDLeEw6oBNIcQaw=;
-	b=pP88Yf0J+BZqZIWzDECHKRNlhaB90UTw281/uqib3N2DRUKLp/iUqDqiXD5R1dqzi+
-	ARdlyyKn6/edg2LZt5ByzlgNaw4eyXmsS+mr+ToIl41IIT4vnnZEtw1AZ2INwDFDRdDh
-	saJqqiAIy88xPijtHUvekYenQuk96TmcTDYtgoAvHpmuA8lb015yxMWogr9b2BBADD0P
-	C3LNgYLlUu/5rAAZelSrrLjdvWMTJiVpFH88Pjgq8RQrnp9aIc3crQw40j+KcAStyYyr
-	vPu0F7/YYYzvNUHs3fKq7kFaE4DV/uzQtNAzM4tfZYJm8YUvN7CsSVQkMyDNh/mLu1jo
-	6WTg==
-X-Gm-Message-State: APjAAAWHsRSOlKDfyavAI02TEAtx7A4C6gO960IAKse933Htpvhh3Akc
-	epsOR7pkXQ0YCNdsPtgtYxZMdM9mqI8=
-X-Google-Smtp-Source: APXvYqzAkMLVPmZ7Ttk+8ukxBhIZNfGIhRrCn0uQhAXyXqpX1mbQlIYGIAhhSuJ335xsbT16/10y0g==
-X-Received: by 2002:a05:600c:387:: with SMTP id
-	w7mr1567321wmd.138.1571861649288; 
-	Wed, 23 Oct 2019 13:14:09 -0700 (PDT)
-Received: from hex.int.rpsys.net (5751f4a1.skybroadband.com. [87.81.244.161])
-	by smtp.gmail.com with ESMTPSA id
-	a13sm24275525wrf.73.2019.10.23.13.14.08
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 23 Oct 2019 13:14:08 -0700 (PDT)
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Oct 2019 21:14:07 +0100
-Message-Id: <20191023201407.14068-1-richard.purdie@linuxfoundation.org>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Luhzf8iGeWCF6DTbh3aPHFC+yV7uP4E/8+E2sXlO4SI=;
+	b=mnX7IiIgYy5Edr8UkcFdh8gl8Pjurnq7f0SRzvDBUXzridAKNSbJuZy5XThVKYM96t
+	WDrBNNozD3Vw3ksGKtv3LcVI1IdUiuIhXrxSEXd2aetQRkkpQGhoB9QQ8tWy8GCWlYsq
+	DlvOchAz/iWGHY0jz8snDgH+4hwnkHcQKI7/YAt72KxWXiUFasZj2xz/04RG2KFC8poU
+	Vh7dttx3okpykOFgKlV/4FpDkJVrm0Exe0VVK73DVqO/UL6Y6kMQq58Tqv2NtbQLFLQE
+	x6UL8fj7MvI479l87Bh12rLuFMzrd0NKUFzJM2ruXihS8qnEfx2qhpjyQazhw6UJOFzc
+	gIYA==
+X-Gm-Message-State: APjAAAVABN5e2pXDokKRNKzqd0qbeK+OvhmMg0TleIF9ZE4hZwQgnWsm
+	zng4TGEKJxLYuwATQfFMTXrnTucQRraXysILXIeY+MGI5BI=
+X-Google-Smtp-Source: APXvYqzqy3mpWGtmIbBHr0WJS3BbaXkYzpNYYF+MU6HW0xhc0CrJCbvSr2GgVSKXYwlfSlgTY/v2gJ3iObcijxOEIlY=
+X-Received: by 2002:a37:85c5:: with SMTP id
+	h188mr10407275qkd.191.1571864458227; 
+	Wed, 23 Oct 2019 14:00:58 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH] libiio: Disable python support for determism
+From: Muminul Russell <misla011@fiu.edu>
+Date: Wed, 23 Oct 2019 14:00:47 -0700
+Message-ID: <CAK=B8ybAAncCAZ_EAGiH6+u5-cYYKPAwfJhxTi0Gj6Q8JfeZrA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: Build info in the spec file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +51,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Oct 2019 20:14:09 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 23 Oct 2019 21:00:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Recent cmake changes in OE-Core mean python is now detected from
-PATH. For determism, disable the python bindings to match
-previous behaviour.
+Hello Developers,
 
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
----
- meta-oe/recipes-support/libiio/libiio_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+Yocto can generate spec file for rpm packaging. But that spec file
+does not have %build and %install macro. Is there any work done
+already to include those 2 macros? Or could you give me hints how can
+I do that?
 
-diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-index 4e57d5b77..63248b4e3 100644
---- a/meta-oe/recipes-support/libiio/libiio_git.bb
-+++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-@@ -22,6 +22,7 @@ DEPENDS = " \
- EXTRA_OECMAKE = " \
-     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-     -DUDEV_RULES_INSTALL_DIR=${nonarch_base_libdir}/udev/rules.d \
-+    -DPYTHON_BINDINGS=OFF \
-     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DWITH_SYSTEMD=ON -DSYSTEMD_UNIT_INSTALL_DIR=${systemd_system_unitdir}', '', d)} \
- "
- 
--- 
-2.20.1
-
+Thanks in advance,
+Russell
 
