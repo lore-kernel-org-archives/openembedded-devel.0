@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
-	[209.85.215.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C5D87F882
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+	[209.85.210.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 467F67F89D
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 23 Oct 2019 16:14:02 +0000 (UTC)
-Received: by mail-pg1-f178.google.com with SMTP id l24so7490193pgh.10
+Received: by mail-pf1-f176.google.com with SMTP id 21so1972105pfj.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 09:14:03 -0700 (PDT)
+	Wed, 23 Oct 2019 09:14:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Rs9ys8z9jBIau4+qYDjtDYUAG5LwJQcA0DBeW7Cwp/4=;
-	b=emX/JxQoYUJD8Uu57DfZrjY+iWgFnfemYrAIrnRv7WoiVJWGvDRZ1u2c3C5swMobzb
-	oqLGDr/41dLPDVbJjw9rmaHSVPvLJV6CQR9OH7w6sr6uxIQm5SWgHZvkbPofVesS3tZC
-	BFyG5hdYKkCe4JnGTY+AQ7IXlQcGIjN6jQTLP0BF+1C7tXaRB7dBTWYVtZaD/cr6PaNL
-	nFktqdOVv2ipl1g3z8TugeWMgMwLUv7b2yePrro3So+ouftyERq9MDWfPpXtp4D5Hjk+
-	YB1jdfAti6JwCwDv24gQYrInw5QtfhuqY+lyfbVIvISWAwCcGQBd9vYwmyTE7tyGyJUa
-	4u7g==
+	bh=msuyBThiLUVogPlfIca8UOJWcxVOVm8lWpLV5fBVeE4=;
+	b=oFjYZ2Dq/+nK0OAUEjXQVsXE7M5FkMzhZPgDlXZLaTa23s9v6RNhWyvHl08UiZtFbG
+	TH40Hpof0mEuE9zvX8YzrNF4E6XJei8pMfnWXw6uOHeOjouWF1xOF0c7FoFTOk9MNt3b
+	u9NWQHbAjYjignypusgFuIDh2wfqfNBGPeWvOIquUWMCbgoR8y/Wusj3h0ZaJ4pzk88o
+	7LHw8xWKATi/0ixUys+uewoLaR9O+2hYTi3EmhfVNmvXKSSYmN8mKrmYG4zdmHFBCHXM
+	mgB5I2cJ2bzLprjBvBwy+v63ChF0WMtwtAQLMjozatqn2+IaaVxyCXEGdLi8ZJxcUqN/
+	ZtgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=Rs9ys8z9jBIau4+qYDjtDYUAG5LwJQcA0DBeW7Cwp/4=;
-	b=QfT2mDRJJdqyPkMFEdnYq1LN3aUioucRvMubZQVfqQtBVxXAFeO48EgPAnMqADAl/t
-	5efbpJvvk0bETPpXR7xdGxKxmhgeUYIBvyvi2tMNsBumcMjh6a1nFmK2RfnNl5LAVMEa
-	y/f3fAOgxRFD1yL6b6veV20u7tbrLMdu7ls6E3JoXzJ82TeRJZziADppBLtHc7wpW2wb
-	OxfRw1kJO/V1jiUlvSrzxQ76n0ptaJK56hpbZh9yFB33StSHLYbsMpI5kDEO5M8JTDb2
-	vFBSJTJLoYf/iqkg15BXvEShDzRVc0xFKo6zvPs3IApzAEUO9aul6XcC3eWWVILYMKIZ
-	lk2A==
-X-Gm-Message-State: APjAAAWN3yMGFU3DakOK9WMCH7rjQJVWyw/sXhihRBFukxY/neHGykWu
-	y0JyvCLHhuDB5zSG6TFK2aGh17rJ
-X-Google-Smtp-Source: APXvYqzfaBcVFYep1Uq5SqPQ1WJ5Xyx6ULm9dj4HnylVSV+1qT6Baq6nh47aKwvJUP/SOxvD1/lSlQ==
-X-Received: by 2002:a62:65c1:: with SMTP id z184mr11808410pfb.42.1571847242765;
-	Wed, 23 Oct 2019 09:14:02 -0700 (PDT)
+	bh=msuyBThiLUVogPlfIca8UOJWcxVOVm8lWpLV5fBVeE4=;
+	b=JgcqGGBKXGyJjSlZauCVYFUfL0Xod9FhyR7s6SmCk0zG9lNyriELf7/mO2IkiY0Ujh
+	WVpTaOU07bPhiv9cjGYbZLNqHwpLQ2Zy1HCIRUM7kDOYHqEDLaowgQyypPyFJmL5AxAO
+	j7vpWZYZrsQZYfmF18mMK3GFApIRYfzpa/NGcC1FFfQhqTMR6V/A+Sv2WDwGua9Fw27m
+	n+uE93tUuBXt8pZQkoi64sgBc+D+qQUBnJjiJE0YfH7877CQXLWjPgou6QEUBZ0wng8P
+	Zc79SEG4Cvvl3jmv9BPVtap9Q4PjNUhpsT8UQIMvh9k5z3EzOfvoF1IIX17RPrpYIZGR
+	9gjw==
+X-Gm-Message-State: APjAAAVimXcymZ3AwSh8dcwEA9adkZHY68N5lidSdZ7CUSCLf+ugzrwl
+	Wi7C4RFwBVE6GvpmQHEZcelpD1ke
+X-Google-Smtp-Source: APXvYqz+8r4taNKVf3/OJAbqQtemfItSUPqr13zoUBPr2DV8azaVWQTrvuTXTwLPta/CqF0O1c0tOQ==
+X-Received: by 2002:a17:90a:3086:: with SMTP id h6mr998214pjb.46.1571847243769;
+	Wed, 23 Oct 2019 09:14:03 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:d998:942e:6613:6ef4])
 	by smtp.gmail.com with ESMTPSA id
-	d19sm23179067pjz.5.2019.10.23.09.14.01
+	d19sm23179067pjz.5.2019.10.23.09.14.02
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 23 Oct 2019 09:14:02 -0700 (PDT)
+	Wed, 23 Oct 2019 09:14:03 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Oct 2019 09:13:49 -0700
-Message-Id: <59475ff3927faad212816c1894c140ffae1eeabf.1571847041.git.akuster808@gmail.com>
+Date: Wed, 23 Oct 2019 09:13:50 -0700
+Message-Id: <f59d83d7c51a1d93dfcade6c863a35c67df106f6.1571847041.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1571847041.git.akuster808@gmail.com>
 References: <cover.1571847041.git.akuster808@gmail.com>
-Subject: [warrior 04/10] python3-twofish: Fix missing return statements in module stubs
+Subject: [warrior 05/10] jsoncpp: add native BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,82 +59,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Oct 2019 16:14:02 -0000
+X-List-Received-Date: Wed, 23 Oct 2019 16:14:03 -0000
 
-From: Martin Jansa <martin.jansa@gmail.com>
+From: Pavel Modilaynen <pavelmn@axis.com>
 
-* fixes build with -Werror=return-type
-  twofish.c: In function 'init_twofish':
-  twofish.c:45:1: error: control reaches end of non-void function [-Werror=return-type]
-     45 | PyMODINIT_FUNC init_twofish(void) { }
-        | ^~~~~~~~~~~~~~
-  twofish.c: In function 'PyInit__twofish':
-  twofish.c:46:1: error: control reaches end of non-void function [-Werror=return-type]
-     46 | PyMODINIT_FUNC PyInit__twofish(void) { }
-        | ^~~~~~~~~~~~~~
-  cc1: some warnings being treated as errors
+Extend to native builds, this is useful for unit tests.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...missing-return-statements-in-module-stubs.patch | 38 ++++++++++++++++++++++
- .../python/python3-twofish_0.3.0.bb                |  2 ++
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
+ meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch b/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
-new file mode 100644
-index 0000000..c25b245
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
-@@ -0,0 +1,38 @@
-+From 5704610f4b3aed5210e9c5b7c05ff8b5b2364c9c Mon Sep 17 00:00:00 2001
-+From: Martin Jansa <Martin.Jansa@gmail.com>
-+Date: Mon, 12 Aug 2019 08:18:21 +0000
-+Subject: [PATCH] Fix missing return statements in module stubs
+diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb
+index 88e3320..97fc6c7 100644
+--- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb
++++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb
+@@ -19,3 +19,5 @@ S = "${WORKDIR}/git"
+ inherit cmake
+ 
+ EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DJSONCPP_WITH_TESTS=OFF"
 +
-+* fixes build with -Werror=return-type
-+  twofish.c: In function 'init_twofish':
-+  twofish.c:45:1: error: control reaches end of non-void function [-Werror=return-type]
-+     45 | PyMODINIT_FUNC init_twofish(void) { }
-+        | ^~~~~~~~~~~~~~
-+  twofish.c: In function 'PyInit__twofish':
-+  twofish.c:46:1: error: control reaches end of non-void function [-Werror=return-type]
-+     46 | PyMODINIT_FUNC PyInit__twofish(void) { }
-+        | ^~~~~~~~~~~~~~
-+  cc1: some warnings being treated as errors
-+
-+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-+
-+Upstream-Status: Submitted [https://github.com/keybase/python-twofish/pull/6]
-+---
-+ twofish.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/twofish.c b/twofish.c
-+index e324c34..d4487d8 100644
-+--- a/twofish.c
-++++ b/twofish.c
-+@@ -42,5 +42,5 @@ DL_EXPORT(void) exp_Twofish_decrypt(Twofish_key * xkey, uint8_t c[16], uint8_t p
-+ We need a stub init_twofish function so the module will link as a proper module.
-+ Do not import _twofish from python; it will not work since _twofish is not a *real* module
-+ */
-+-PyMODINIT_FUNC init_twofish(void) { }
-+-PyMODINIT_FUNC PyInit__twofish(void) { }
-++PyMODINIT_FUNC init_twofish(void) { return NULL; }
-++PyMODINIT_FUNC PyInit__twofish(void) { return NULL; }
-+-- 
-+2.17.1
-+
-diff --git a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb b/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
-index e593f6f..7b8eb2e 100644
---- a/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twofish_0.3.0.bb
-@@ -1,2 +1,4 @@
- require python-twofish.inc
- inherit setuptools3
-+
-+SRC_URI += "file://0001-Fix-missing-return-statements-in-module-stubs.patch"
++BBCLASSEXTEND = "native"
 -- 
 2.7.4
 
