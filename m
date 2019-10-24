@@ -1,48 +1,30 @@
-Return-Path: <misla011@fiu.edu>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id F314A7F8BB
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id EA9F47F823
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 22:39:27 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id c17so31668500qtn.8
+	Thu, 24 Oct 2019 04:48:57 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,223,1569254400"; d="scan'208";a="77394156"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 24 Oct 2019 12:48:57 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id D140C4B6EC7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Oct 2019 15:39:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=fiu-edu.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=n/vsoJQDl4a7z03uED5+fxyGRtuwZQo3QTaGBWPH338=;
-	b=IMYPVORzJOLFDjpKiJB8t2GtIy4byLOhVWJz5pEnBUdC17I6Z8gtOax2m0MTriAp+C
-	VnjKyUjDsC+HNx5zg3N+oC5QmIJgZEpxK2MxKUGji7dreMptU7H8+m8A1Lt3RiBpfOH8
-	eBfjrOrwnGSg5YZFIoKnor+IIH84kDbMzxdimgLR3h6OR8BFUxTj6fUxWLY8cHOdtZjG
-	MjjjO0N0QFO5FKhyDHTRJ0uaEhZXRkQnQaUX2RKiBrLXoVo7nrHMhBeSQu9EO3axS+YR
-	tx07rRafYMFdVy/YhG3GbXFMZ64D7syRjS3t6TnYd6izrQQ7CCIsdDwhxZTIbosa+cik
-	NqMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=n/vsoJQDl4a7z03uED5+fxyGRtuwZQo3QTaGBWPH338=;
-	b=qD1LxeCNRCtUbLGejxHG00x5Ouv00mZyH3C3Mg+6yTjb5hFYyx0NuYTT0J++/ApzDS
-	6BjSo2w2yhxBndTWMb+FemfcEn7d00nb/9y4aSnMuowQT4lA94EhqCtJWOyxLZY3BqaB
-	Nf+9enj++hPqDLnkRlMDUHNsTyad6v4qwYVPJXIFWwaqbp+7+4dxwphlXjNBAalNUHOS
-	d8HHuKI2SxjKP0RPRZn3CfWLeKgs9uYN//GdxmHa64lPeGcQDBgr9X2Q7QbTlHX4mblS
-	MNE9IkyjOuHd6lRoMPDhdVcinXaEYRzzmA5wtbnHpAp7tmqlHl0/sWaugHnI+zUC/kGC
-	GK3g==
-X-Gm-Message-State: APjAAAUedJ9vhgM9WHhY1qbVJYgiuUDOG1K+M6uMy4EPcjWENy0uZUsq
-	fA2zyDHYbze9qAStLzrFIVsSpM1LnqLZ6GlkbM6+XQ==
-X-Google-Smtp-Source: APXvYqxiKnSJsp33XFZ+6+Tdrppm2pDSuuRTKoHhn31dzLftoiSQ98eOQgkXHED0HgwCfZVv/n5lN8WPC9XyvfA1iBU=
-X-Received: by 2002:ac8:5150:: with SMTP id h16mr102663qtn.39.1571870368602;
-	Wed, 23 Oct 2019 15:39:28 -0700 (PDT)
+	Thu, 24 Oct 2019 12:41:03 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 24 Oct 2019 12:48:56 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 24 Oct 2019 12:49:10 +0800
+Message-ID: <20191024044910.951-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <CAK=B8ybAAncCAZ_EAGiH6+u5-cYYKPAwfJhxTi0Gj6Q8JfeZrA@mail.gmail.com>
-	<74cfcc6194868f8afbf5c6e82b17283f4e9340ce.camel@linuxfoundation.org>
-In-Reply-To: <74cfcc6194868f8afbf5c6e82b17283f4e9340ce.camel@linuxfoundation.org>
-From: Muminul Russell <misla011@fiu.edu>
-Date: Wed, 23 Oct 2019 15:39:17 -0700
-Message-ID: <CAK=B8yYDsHFSF32xJVO_7sSWcyi_quxVt84Nd979OYW5-TOh9w@mail.gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: Build info in the spec file
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: D140C4B6EC7F.A919B
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-pyro4: upgrade 4.73 -> 4.77
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,35 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Oct 2019 22:39:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 24 Oct 2019 04:48:58 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Ok, thanks for the clarification.
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../python-pyro4/{python-pyro4_4.73.bb => python-pyro4_4.77.bb}       | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-connectivity/python-pyro4/{python-pyro4_4.73.bb => python-pyro4_4.77.bb} (70%)
 
-On Wed, Oct 23, 2019 at 3:38 PM Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
->
-> On Wed, 2019-10-23 at 14:00 -0700, Muminul Russell wrote:
-> > Hello Developers,
-> >
-> > Yocto can generate spec file for rpm packaging. But that spec file
-> > does not have %build and %install macro. Is there any work done
-> > already to include those 2 macros? Or could you give me hints how can
-> > I do that?
->
-> OE uses its own cross building process. You can't encode that cross
-> building process into those macros. rpmbuild assumes native compiling.
-> People have tried and concluded its really not practical.
->
-> Think about the fact that even if you did have something there, the
-> original process used to run the build would be different. That means
-> two different code paths, one of which will probably end up with
-> different results and hence be broken.
->
-> So yes, I understand the desire but it really doesn't make sense.
->
-> Cheers,
->
-> Richard
->
+diff --git a/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.73.bb b/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.77.bb
+similarity index 70%
+rename from meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.73.bb
+rename to meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.77.bb
+index 88f5b18..738cf86 100644
+--- a/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.73.bb
++++ b/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.77.bb
+@@ -2,8 +2,8 @@ SUMMARY = "Python Remote Objects"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=cd13dafd4eeb0802bb6efea6b4a4bdbc"
+ 
+-SRC_URI[md5sum] = "0375c061b93411feb86da01e801df888"
+-SRC_URI[sha256sum] = "536b07a097d0619e7ab1effa3747fda177a24168d17a07a93ca9ac30977608f7"
++SRC_URI[md5sum] = "21f015ae93cf9ea2bbbc418a2267e9fb"
++SRC_URI[sha256sum] = "2bfe12a22f396474b0e57c898c7e2c561a8f850bf2055d8cf0f7119f0c7a523f"
+ 
+ PYPI_PACKAGE = "Pyro4"
+ 
+-- 
+2.7.4
+
+
+
 
