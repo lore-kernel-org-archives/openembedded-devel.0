@@ -1,53 +1,62 @@
-Return-Path: <keton22@gmail.com>
-Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
-	[209.85.167.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 019977F820
+Return-Path: <christophe.priouzeau@st.com>
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+	[62.209.51.94])
+	by mail.openembedded.org (Postfix) with ESMTP id C24357F978
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 09:07:18 +0000 (UTC)
-Received: by mail-oi1-f196.google.com with SMTP id a15so20004386oic.0
+	Thu, 24 Oct 2019 09:20:35 +0000 (UTC)
+Received: from pps.filterd (m0046668.ppops.net [127.0.0.1])
+	by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
+	x9O9GS7s013923 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Oct 2019 11:20:35 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
+	h=from : to : cc : subject
+	: date : message-id : content-type : content-transfer-encoding :
+	mime-version; s=STMicroelectronics;
+	bh=rnCqHJIiM/GjPDR1NJFs99aoCUbC0JpaFyO8wF4LLjw=;
+	b=J15fP6/ndZZXgIFWK2duXAt3fUyA15C2F7JPW9WkfiG/9ItlShlUeGKqUseETOo9tjHD
+	EgmUHPw5T6DTu/aGtScrn5sfvWFOp61MiiwLPbdIgsl/oqbfhc8Fgb//PIYcQ8zp43tk
+	TAXBQTy5hc23OPk09qYuHKUf0QNn02P/mQRjy47CpP+HUVuY14LN2zZ0PHHuTMK0tYDv
+	TZxRAAsx3ZBdRfxJLurKkSP6MvW7EyKNrVCMHr+x2Elm0YzWBYCGAuElfogPqJhHJi4Q
+	9qp/s3xMkBgbqq+xPh2dxkmGhw0TYKmgiLfEcjWpFT6HnK+YYi+jJvqcoV2ca2lbqyho
+	DQ== 
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+	by mx07-00178001.pphosted.com with ESMTP id 2vt9s48scb-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Oct 2019 11:20:35 +0200
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 5CC6A10003B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 02:07:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=a5raO8aEOomW7wegGy1GsN+zX45CZyBwCG2Cb5TCyt4=;
-	b=eYxw6kGC46lfe73Zg9Ok18iHdsbltcoS4HpUQKpCUMEFwRPrUx27cBfYocYhsUEzL2
-	paByYt3E+JwzyzOBMLFJd/tvUeqM2k14j8A4wi9rqB2/3uOddkELjEOp9E94ozDjW2hU
-	IemacPB3kTACLJ9HDsz1Q29jZqRRscF05BBK6tpBFPWC8h8EkzLNEIXNs5DB9mieqQ+U
-	kbISiS3np3T5r++hJD+LOBUympxSV7vOxdMQcZGrPLWFoV+BWTlnO0UskbHjDwTMYNDb
-	FmMAtV+0FMOFHYorjNobHeM/X1Yr/l8vDiYqScIDJyvZikala+jS0z9c+dCKiGFMzq5O
-	Er4g==
-X-Gm-Message-State: APjAAAWKDoiPTx7yoBO3D325SqVGakdu0/vMEVeO1aZiw9qhlrQcYRS/
-	BecQ+AlSpxniAdBPD3fP3IUGOPriU0g=
-X-Google-Smtp-Source: APXvYqzPGKZFF+0mDo/5bYDgjRnvw59bbpXlLA5QrHAPtIJLTp8xzy9HqIvbgDkI+LGsW8+JzXFH4w==
-X-Received: by 2002:aca:100f:: with SMTP id 15mr3784118oiq.166.1571908039729; 
-	Thu, 24 Oct 2019 02:07:19 -0700 (PDT)
-Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com.
-	[209.85.210.53])
-	by smtp.gmail.com with ESMTPSA id o2sm7013968ota.3.2019.10.24.02.07.19
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Thu, 24 Oct 2019 02:07:19 -0700 (PDT)
-Received: by mail-ot1-f53.google.com with SMTP id n48so5071015ota.11
+	Thu, 24 Oct 2019 11:20:35 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 51A6E21EAF1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 02:07:19 -0700 (PDT)
-X-Received: by 2002:a9d:3476:: with SMTP id
-	v109mr10672234otb.211.1571908039142; 
-	Thu, 24 Oct 2019 02:07:19 -0700 (PDT)
+	Thu, 24 Oct 2019 11:20:35 +0200 (CEST)
+Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE2.st.com
+	(10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2;
+	Thu, 24 Oct 2019 11:20:35 +0200
+Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
+	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
+	15.00.1347.000; Thu, 24 Oct 2019 11:20:35 +0200
+From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-python][PATCH 01/10] Python: flask-sqlalchemy: Clarify BSD
+	license variant
+Thread-Index: AQHVikxKRyzjqFY6u0WPE82VUr7eHA==
+Date: Thu, 24 Oct 2019 09:20:34 +0000
+Message-ID: <20191024092032.2430-1-christophe.priouzeau@st.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.75.127.45]
 MIME-Version: 1.0
-References: <CAJNJ+3e6C_gwQ7Oyq0xKTiDCo47SHcr5naChERq0wFrk+r7N9w@mail.gmail.com>
-	<CAMKF1sr3YHNUOm=7AEU6VZJDSy-3CdeVgOXAiUvM0Z9e0n+4Sg@mail.gmail.com>
-	<CAJNJ+3daY1os_VUtVg8AU+POUK+E6q6GF-FkMx9dWfOEAmygEw@mail.gmail.com>
-	<CAMKF1soZwpo0YewBPFJRqg6BQRkftPfcMLn91Vj=J538wox-2w@mail.gmail.com>
-In-Reply-To: <CAMKF1soZwpo0YewBPFJRqg6BQRkftPfcMLn91Vj=J538wox-2w@mail.gmail.com>
-From: =?UTF-8?Q?Micha=C5=82_Lower?= <michal@pcb.red>
-Date: Thu, 24 Oct 2019 11:07:07 +0200
-X-Gmail-Original-Message-ID: <CAJNJ+3eixSQNxEd1WQKfucQ0ySh4N1qR9oGK=wLh=TrNN66M9g@mail.gmail.com>
-Message-ID: <CAJNJ+3eixSQNxEd1WQKfucQ0ySh4N1qR9oGK=wLh=TrNN66M9g@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] update python setuptools-scm from 2.1.0 to 3.3.3
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
+	definitions=2019-10-24_06:2019-10-23,2019-10-24 signatures=0
+Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
+Subject: [meta-python][PATCH 01/10] Python: flask-sqlalchemy: Clarify BSD license variant
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,106 +69,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2019 09:07:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 24 Oct 2019 09:20:36 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-thanks for the hint, will do.
+The License of python flask-sqlalchemy is BSD-3-Clause.
 
-czw., 24 pa=C5=BA 2019 o 11:03 Khem Raj <no-reply@forwardemail.net> napisa=
-=C5=82(a):
->
-> On Thu, Oct 24, 2019 at 9:48 AM Micha=C5=82 Lower <michal@pcb.red> wrote:
-> >
-> > > please use git format-patch to generate it
-> > This is exactly what I've did. Sadly it appears that Gmail inserts
-> > line breaks on its own. Can I send the patch as an attachment so it
-> > will be kept intact? I cannot use git send-email since it doesn't
-> > support gmail two actor authentication and my account doesn't allow
-> > for application passwords.
->
-> yeah I see. if you use github then send a pull request against
-> https://github.com/openembedded/meta-openembedded
-> I do process that as well.
->
-> >
-> > czw., 24 pa=C5=BA 2019 o 10:18 Khem Raj <no-reply@forwardemail.net> nap=
-isa=C5=82(a):
-> > >
-> > > Hi Micha=C5=82
-> > >
-> > > This patch appears malformed. So please use git format-patch to
-> > > generate it and git send-email to send it also rebase it on top of
-> > > latest master
-> > >
-> > > On Tue, Oct 22, 2019 at 9:03 AM Micha=C5=82 Lower <michal@pcb.red> wr=
-ote:
-> > > >
-> > > > Previous version fails to compile for zeus branch. Upgrading fixes =
-that.
-> > > >
-> > > > Signed-off-by: Michal Lower <michal at pcb.red>
-> > > > ---
-> > > >  meta-python/recipes-devtools/python/python-setuptools-scm.inc | 4 =
-++--
-> > > >  ...setuptools-scm_2.1.0.bb =3D> python-setuptools-scm_3.3.3.bb} | =
-0
-> > > >  ...etuptools-scm_2.1.0.bb =3D> python3-setuptools-scm_3.3.3.bb} | =
-0
-> > > >  3 files changed, 2 insertions(+), 2 deletions(-)
-> > > >  rename meta-python/recipes-devtools/python/{python-setuptools-scm_=
-2.1.0.bb
-> > > > =3D> python-setuptools-scm_3.3.3.bb} (100%)
-> > > >  rename meta-python/recipes-devtools/python/{python3-setuptools-scm=
-_2.1.0.bb
-> > > > =3D> python3-setuptools-scm_3.3.3.bb} (100%)
-> > > >
-> > > > diff --git a/meta-python/recipes-devtools/python/python-setuptools-=
-scm.inc
-> > > > b/meta-python/recipes-devtools/python/python-setuptools-scm.inc
-> > > > index 98883ec39..a7e1bf6ad 100644
-> > > > --- a/meta-python/recipes-devtools/python/python-setuptools-scm.inc
-> > > > +++ b/meta-python/recipes-devtools/python/python-setuptools-scm.inc
-> > > > @@ -2,8 +2,8 @@ SUMMARY =3D "the blessed package to manage your ver=
-sions
-> > > > by scm tags"
-> > > >  LICENSE =3D "MIT"
-> > > >  LIC_FILES_CHKSUM =3D
-> > > > "file://PKG-INFO;beginline=3D8;endline=3D8;md5=3D8227180126797a0148=
-f94f483f3e1489"
-> > > >
-> > > > -SRC_URI[md5sum] =3D "cfec5d2dbbd0a85c40066f79035b5878"
-> > > > -SRC_URI[sha256sum] =3D
-> > > > "a767141fecdab1c0b3c8e4c788ac912d7c94a0d6c452d40777ba84f918316379"
-> > > > +SRC_URI[md5sum] =3D "50b2199082fe808d032ec1710c9d7415"
-> > > > +SRC_URI[sha256sum] =3D
-> > > > "bd25e1fb5e4d603dcf490f1fde40fb4c595b357795674c3e5cb7f6217ab39ea5"
-> > > >
-> > > >  PYPI_PACKAGE =3D "setuptools_scm"
-> > > >  inherit pypi
-> > > > diff --git a/meta-python/recipes-devtools/python/python-setuptools-=
-scm_2.1.0.bb
-> > > > b/meta-python/recipes-devtools/python/python-setuptools-scm_3.3.3.b=
-b
-> > > > similarity index 100%
-> > > > rename from meta-python/recipes-devtools/python/python-setuptools-s=
-cm_2.1.0.bb
-> > > > rename to meta-python/recipes-devtools/python/python-setuptools-scm=
-_3.3.3.bb
-> > > > diff --git a/meta-python/recipes-devtools/python/python3-setuptools=
--scm_2.1.0.bb
-> > > > b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.=
-bb
-> > > > similarity index 100%
-> > > > rename from meta-python/recipes-devtools/python/python3-setuptools-=
-scm_2.1.0.bb
-> > > > rename to meta-python/recipes-devtools/python/python3-setuptools-sc=
-m_3.3.3.bb
-> > > > --
-> > > > 2.17.1
-> > > > --
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
+---
+ meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-python/recipes-devtools/python/python-flask-sqlalchemy.in=
+c b/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
+index e0efbc63a..957d07dbb 100644
+--- a/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
++++ b/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
+@@ -1,5 +1,5 @@
+ DESCRIPTION =3D "Adds SQLAlchemy support to your Flask application."
+-LICENSE =3D "BSD"
++LICENSE =3D "BSD-3-Clause"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D5ed1b8cc741515a835a7f6bf2f62ef4=
+a"
+=20
+ SRC_URI[md5sum] =3D "373ce61dfd03b593ad2eaba68c9fee35"
+--=20
+2.17.1
 
