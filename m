@@ -1,39 +1,39 @@
 Return-Path: <christophe.priouzeau@st.com>
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
 	[91.207.212.93])
-	by mail.openembedded.org (Postfix) with ESMTP id A4C1E7F99E
+	by mail.openembedded.org (Postfix) with ESMTP id 001C17F992
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 24 Oct 2019 09:34:39 +0000 (UTC)
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
 	by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
-	x9O9UxHC011908 for <openembedded-devel@lists.openembedded.org>;
+	x9O9V2VH011932 for <openembedded-devel@lists.openembedded.org>;
 	Thu, 24 Oct 2019 11:34:40 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
 	h=from : to : cc : subject
 	: date : message-id : references : in-reply-to : content-type :
 	content-transfer-encoding : mime-version; s=STMicroelectronics;
-	bh=zoTk0MEXcxOm4oTGK7YjYLxOQZ8NtcErFF5McJZkBy4=;
-	b=tBA5bLw/sW80keBBN2eEumK61BuXhOqawPfO4/G1Yl2rTpTharxzavhJFMjdBfCRMhmY
-	2FKrkD2+N1rFtym/WZ1YCyCnsiuKpoBbbo7yG9CWQC+AOafkuR/G3qlUjsXGbIDwfepQ
-	Ier74XyvPNKCU0Bw2dpx0hPp5I5hWhC+pGI3jRDzHhqklbyfdcL4T861HF8P4EoklMd2
-	AObJHPsI8Osq3o6LTtCT+cMHcV7N7Nv0n8X/IWyrdFZqt6LWu/V7ET0zABIHuJ7WO3HC
-	PSqsNo5kZB667/uPg8YYnIbpglGzE48GAG2PaMtbUCXa9NqLB+kL1erZl9tsWX5o3FkD
-	eA== 
+	bh=WaGvYSG2hl1/xAevb/O2YOZyus4oeIwErakBUM1ZvDc=;
+	b=zoJAcTWdwr9xaihMBSg6yCxcoJtxYaE0K5NXxncjJcCXPAFET3k2KBcAFDqNYJnZqqH4
+	i8ZEpHLkAIq2TqJFh2fBg/hP6f1ZP2a/xWa15bOxCyvPkot16cqtFMusZJHJt0nfPPn9
+	cpcea01OKq15pdopSjP9dHvLrOHdHUlt7cg5p/p0qREAT02RSNNsh9TJlXk1FU91PQDt
+	TnYU1rEqwWHYU5EYDcSOASMIffVBE59FsDpCSi86f2IP0MfOpGSef+/Gr/DUe4qoUD1q
+	QXQegwgK8Ozuk9QqzAbwOmJAAD7lJDw5Vdd1anXzev8AD/PHkqC76z8Gv/4spvwbuqrl
+	LA== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx08-00178001.pphosted.com with ESMTP id 2vt9s50sk8-1
+	by mx08-00178001.pphosted.com with ESMTP id 2vt9s50ska-1
 	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
 	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
 	Thu, 24 Oct 2019 11:34:40 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id F319910002A
+	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4B2E7100039
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 11:34:39 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node3.st.com [10.75.127.18])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EC73E21F169
+	Thu, 24 Oct 2019 11:34:40 +0200 (CEST)
+Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
+	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 41FB221F169
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 11:34:39 +0200 (CEST)
-Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE3.st.com
-	(10.75.127.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
+	Thu, 24 Oct 2019 11:34:40 +0200 (CEST)
+Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE2.st.com
+	(10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2;
 	Thu, 24 Oct 2019 11:34:39 +0200
 Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
 	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
@@ -41,11 +41,11 @@ Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
 From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-python][PATCH 09/10] Python: webcolors: Clarify BSD
-	license variant
-Thread-Index: AQHVik5BmiypAsVHwUy3cjK/nEGvIg==
+Thread-Topic: [meta-python][PATCH 10/10] Python: werkzeug: Clarify BSD license
+	variant
+Thread-Index: AQHVik5CSgnnVSda8kmLblR22CAsIw==
 Date: Thu, 24 Oct 2019 09:34:39 +0000
-Message-ID: <20191024093428.4538-9-christophe.priouzeau@st.com>
+Message-ID: <20191024093428.4538-10-christophe.priouzeau@st.com>
 References: <20191024093428.4538-1-christophe.priouzeau@st.com>
 In-Reply-To: <20191024093428.4538-1-christophe.priouzeau@st.com>
 Accept-Language: en-US
@@ -58,7 +58,7 @@ MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
 	definitions=2019-10-24_06:2019-10-23,2019-10-24 signatures=0
 Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-Subject: [meta-python][PATCH 09/10] Python: webcolors: Clarify BSD license variant
+Subject: [meta-python][PATCH 10/10] Python: werkzeug: Clarify BSD license variant
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,27 +76,29 @@ Content-Language: en-US
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-The License of python webcolors is BSD-3-Clause.
+The License of python werkzeug is BSD-3-Clause.
 
 Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
 ---
- meta-python/recipes-devtools/python/python-webcolors.inc | 2 +-
+ meta-python/recipes-devtools/python/python-werkzeug.inc | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-webcolors.inc b/met=
-a-python/recipes-devtools/python/python-webcolors.inc
-index a02bbbbed..ef254e33b 100644
---- a/meta-python/recipes-devtools/python/python-webcolors.inc
-+++ b/meta-python/recipes-devtools/python/python-webcolors.inc
-@@ -1,5 +1,5 @@
- SUMMARY =3D "Simple Python module for working with HTML/CSS color definiti=
-ons."
+diff --git a/meta-python/recipes-devtools/python/python-werkzeug.inc b/meta=
+-python/recipes-devtools/python/python-werkzeug.inc
+index c04a4e0c4..e630fdd09 100644
+--- a/meta-python/recipes-devtools/python/python-werkzeug.inc
++++ b/meta-python/recipes-devtools/python/python-werkzeug.inc
+@@ -7,7 +7,7 @@ HTTP utilities to handle entity tags, cache control headers=
+, HTTP dates, \
+ cookie handling, file uploads, a powerful URL routing system and a bunch \
+ of community contributed addon modules."
+ HOMEPAGE =3D "http://werkzeug.pocoo.org/"
 -LICENSE =3D "BSD"
 +LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D197add016087e6884a012b0f185d44a=
-d"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ded9a0b7c0254616d72dadb98b293ef1=
+b"
 =20
- SRC_URI[md5sum] =3D "40890db38b2a856e526a568864025fe6"
+ SRC_URI[md5sum] =3D "6d20b5be2d245be4ac7706cc390d130c"
 --=20
 2.17.1
 
