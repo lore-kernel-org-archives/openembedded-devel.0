@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 207DB7D185
+	by mail.openembedded.org (Postfix) with ESMTP id 299EC7F823
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 05:42:18 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,223,1569254400"; d="scan'208";a="77395825"
+	Thu, 24 Oct 2019 05:54:21 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,223,1569254400"; d="scan'208";a="77396303"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 24 Oct 2019 13:42:18 +0800
+	by heian.cn.fujitsu.com with ESMTP; 24 Oct 2019 13:54:21 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 21C684CE1509
+	by cn.fujitsu.com (Postfix) with ESMTP id 123024CE1508
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 13:34:21 +0800 (CST)
+	Thu, 24 Oct 2019 13:46:28 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 24 Oct 2019 13:42:15 +0800
+	Server (TLS) id 14.3.439.0; Thu, 24 Oct 2019 13:54:23 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Oct 2019 13:42:29 +0800
-Message-ID: <20191024054229.1795-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 24 Oct 2019 13:54:35 +0800
+Message-ID: <20191024055435.2042-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 21C684CE1509.A711E
+X-yoursite-MailScanner-ID: 123024CE1508.AA873
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-aws-iot-device-sdk-python: upgrade 1.4.0 -> 1.4.7
+Subject: [meta-python] [PATCH] python-backports-ssl: upgrade 3.5.0.1 -> 3.7.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,42 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2019 05:42:19 -0000
+X-List-Received-Date: Thu, 24 Oct 2019 05:54:22 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../recipes-devtools/python/python-aws-iot-device-sdk-python.inc      | 4 ++--
- ...-sdk-python_1.4.0.bb => python-aws-iot-device-sdk-python_1.4.7.bb} | 0
- ...sdk-python_1.4.0.bb => python3-aws-iot-device-sdk-python_1.4.7.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-aws-iot-device-sdk-python_1.4.0.bb => python-aws-iot-device-sdk-python_1.4.7.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-aws-iot-device-sdk-python_1.4.0.bb => python3-aws-iot-device-sdk-python_1.4.7.bb} (100%)
+ ...hon-backports-ssl_3.5.0.1.bb => python-backports-ssl_3.7.0.1.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-backports-ssl_3.5.0.1.bb => python-backports-ssl_3.7.0.1.bb} (79%)
 
-diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
-index 7423fa7..60493e1 100644
---- a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
-+++ b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "\
-     file://AWSIoTPythonSDK/core/protocol/paho/client.py;endline=14;md5=5a3c8a1a4bb71bd934f450ecff972ad9 \
- "
+diff --git a/meta-python/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb b/meta-python/recipes-devtools/python/python-backports-ssl_3.7.0.1.bb
+similarity index 79%
+rename from meta-python/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb
+rename to meta-python/recipes-devtools/python/python-backports-ssl_3.7.0.1.bb
+index 45492da..9032a7c 100644
+--- a/meta-python/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb
++++ b/meta-python/recipes-devtools/python/python-backports-ssl_3.7.0.1.bb
+@@ -7,10 +7,10 @@ match_hostname() function for performing this check instead of requiring every a
+ implement the check separately. This backport brings match_hostname() to users of earlier versions of Python"
  
--SRC_URI[md5sum] = "50a5c46410c2b44b5c09f1ea5eb15a3b"
--SRC_URI[sha256sum] = "b3c8af3ce24eab861447a194f3c382509dd70e90452c86a5426f1e7272460177"
-+SRC_URI[md5sum] = "2b3df629827d8bc18ca4d927b4885a17"
-+SRC_URI[sha256sum] = "7e67c8cfeee8a1c8fd251bcc418de9d4dca697753565c9a9e614525179d9555d"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=95a5ee8fd779fbeca8b4cbca64433c87"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b2adbe8bfdeb625c9a01afd9aaa66619"
  
- inherit pypi
+-SRC_URI[md5sum] = "c03fc5e2c7b3da46b81acf5cbacfe1e6"
+-SRC_URI[sha256sum] = "502ad98707319f4a51fa2ca1c677bd659008d27ded9f6380c79e8932e38dcdf2"
++SRC_URI[md5sum] = "32d2f593af01a046bec3d2f5181a420a"
++SRC_URI[sha256sum] = "bb82e60f9fbf4c080eabd957c39f0641f0fc247d9a16e31e26d594d8f42b9fd2"
  
-diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.4.0.bb b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.4.7.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.4.0.bb
-rename to meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.4.7.bb
-diff --git a/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.0.bb b/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.7.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.7.bb
+ PYPI_PACKAGE = "backports.ssl_match_hostname"
+ inherit pypi setuptools
 -- 
 2.7.4
 
