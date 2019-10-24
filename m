@@ -1,51 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A4D97F8FD
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 53DD07CECE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 07:54:13 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id e15so13710413pgu.13
+	Thu, 24 Oct 2019 08:08:41 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id o25so23210669qtr.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 00:54:14 -0700 (PDT)
+	Thu, 24 Oct 2019 01:08:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=5UOopt6MiBKhlHvFyvwo66zngJXqDdbv0AQ+niciEnc=;
-	b=joXRTf5I+mimrYz5RPxr1tlUQfL297ZrgM6/a0uP1ihoqqjjBesS2X4k24caJcvTWV
-	2dLm7wn99WAfigLlGvzj46Qf8sHFLHsckk2plccoMtM7c8U5/FnPs7Nv1C78UmOwxdok
-	EqY7zYlCaxQBG4YdUkqkbEusUHtXzlKfM4f+nNEvP47w12EDq7Z4IFhYcY+Db2t+KN1F
-	UeIUaWYTT5T7d12WfEzIZ0POAGN3I1VcKdKLventls1XerComM4y5qSV0cg8H+Mtno55
-	RP7DiVy6A49r+3lm2y2GjNI63QKe2Vw9wISoJp+lD3ftcmfKJZYL88mxCV9bkdKzD6aE
-	+LkA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=z5/cT10hQqNgVx/cRisuN62b4HOIitNdkouaQ/UJzNg=;
+	b=LLta98/hMui5uv0UKNXSuQ8nM5+30xy8X33PtzB/27GEs+xQHVlBbESwJSVqooVpuP
+	PsoQnLR4n3lKmn0vK/efVdy45DKPeGjxAqr51VZ6RF+sre77ZVPrN1Oc3NYbFwy/I4zu
+	CJFEVPuz7P5DRXVKPLfTJMkK3oHvdtqeEO+I6QY9akQRLV1E7cnXRltBojvR5geGjgUA
+	kQLGVC7mFLFpGdXkekCX724XF99QdHae1EQjd+OvC4f2bnksWWCU4JBzIojekPl1POBH
+	Y8PuXaeQNOniJrjLTwlAcZDFe/3kh+jj1CNzbFSG6SY3Y1HCMb4BTc6VTZpSvppUz2M9
+	bFtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=5UOopt6MiBKhlHvFyvwo66zngJXqDdbv0AQ+niciEnc=;
-	b=c31bo9XMCDxXe9HfwmgImDChe44CFOGz+Qp5b5pGyeEZHMc7cioO9pttmAUpu3y2Zc
-	/TLQYXS7h/X3PDDNyeCfaY7zIdoYJX+jiAjs9i1nmPplnmKAZ38IKz77dfjxjyrqzrTr
-	Zw/I9JNV3ZOPjef8d++bxZJac3VkVK1PXJOvkywnwY8VSaxWOUFUXD5q78eX7jNNtp57
-	/Wrl0oACnMHTWsmL7sNs7D5x8zD8q0fkaIcn+WsEuENANUpdadSogriywB1aGk1z9DVH
-	wVLcvZgpCDoPqfu+zUTzNhgDR9F57e1Yodk+dQsDxQVcV9y2nrnuHM1sV9bpkssXJZqh
-	qfZA==
-X-Gm-Message-State: APjAAAVw9yLCcG46eVsY+IXyOJYY6/mmfvUn2RUmmSkdEC4/ZYBp4qr7
-	e3z8EevR7Y2V9vGE2TjmynMMXvn5dQ+gWg==
-X-Google-Smtp-Source: APXvYqy8/SMPLlXd6dH17P+GPCCY8FNjVvYBHr3WDqU1cX6xl/JS7fJafvIf2rDuYmpKWotFwczHPQ==
-X-Received: by 2002:a62:6247:: with SMTP id w68mr16312374pfb.11.1571903653949; 
-	Thu, 24 Oct 2019 00:54:13 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::a6a5])
-	by smtp.gmail.com with ESMTPSA id k93sm3402431pjh.3.2019.10.24.00.54.13
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 24 Oct 2019 00:54:13 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Oct 2019 00:53:55 -0700
-Message-Id: <20191024075355.2136934-6-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191024075355.2136934-1-raj.khem@gmail.com>
-References: <20191024075355.2136934-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=z5/cT10hQqNgVx/cRisuN62b4HOIitNdkouaQ/UJzNg=;
+	b=tB66wMAFyANivcZ1eKL+uNjIzfvGYBTjPSLmLBuTwK/mTfmn6RIX0Hg7Mb2r+gCKID
+	9r+jPiBbrnP4RcxAGjaTu9pe3fh+mmMOJaJmMjkvJcCvIblMHe8pzq0E/zBqv+R6IN+s
+	1wE4b3e36hlpa0xphSbNkSLbDWEUV+ZxdBHznbkHdd0IyyD1pmcMr5Uj3Awn8ww5k5UB
+	gllJ32C9U5fYVgjjRQHuBhmCh8Aoe0R4LVWHdlxosI5uCcuknhDwl76koegk0+iBMDvm
+	1PdtNjzTBkcOfSKbxVpLiyQgzXaHEgkrSOKs86nzBgZExG9gZJBYsQO44of77q1LJgjK
+	cPiQ==
+X-Gm-Message-State: APjAAAXfmCrqsuUlYB9Mqp+7OoGitB01AI+t9p3RPyDyZ2uNRCQpayCw
+	8M0MrppfRchhL5/40ycxWtrKX2XL6G7IKpDjZvY=
+X-Google-Smtp-Source: APXvYqwG2Tg5peh7GX/pvkcjxTyHv4KmiPrjDW/hzyQb1v4fFf7Y5+MSeZ69IaOeuL4e+0200j6ttqz55MAhNtZBCs8=
+X-Received: by 2002:a0c:e5c1:: with SMTP id u1mr13290366qvm.206.1571904521845; 
+	Thu, 24 Oct 2019 01:08:41 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 6/6] upm: Define PYTHON_INCLUDE_DIR and PYTHON_LIBRARY for cmake
+References: <20191023211702.15125-1-richard.purdie@linuxfoundation.org>
+In-Reply-To: <20191023211702.15125-1-richard.purdie@linuxfoundation.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 24 Oct 2019 09:08:15 +0100
+Message-ID: <CAMKF1spa6g3QynzOXGyZooVFCkVEjrsxP-caQYkwuU5iNG83uw@mail.gmail.com>
+To: Richard Purdie <richard.purdie@linuxfoundation.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/2] python3-astor: Upgrade 0.7.1->0.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,33 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2019 07:54:14 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 24 Oct 2019 08:08:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Otherwise it peeks into native sysroot now and starts using native
-python which is undesirable, this is happening after the oe-core change
+Hi Richard
 
-https://git.openembedded.org/openembedded-core/commit/?id=7847f431cd8db59fce8c9401a603c4b0678ee16d
+This also needed SRCREV bump, so I have actually staged a fix with
+that change as well.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-extended/upm/upm_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-extended/upm/upm_git.bb
-index a6b379ec36..fb22e83359 100644
---- a/meta-oe/recipes-extended/upm/upm_git.bb
-+++ b/meta-oe/recipes-extended/upm/upm_git.bb
-@@ -36,7 +36,7 @@ BINDINGS_armv5 ??= "python"
- PACKAGECONFIG ??= "${@bb.utils.contains('PACKAGES', 'node-${PN}', 'nodejs', '', d)} \
-  ${@bb.utils.contains('PACKAGES', '${PYTHON_PN}-${PN}', 'python', '', d)}"
- 
--PACKAGECONFIG[python] = "-DBUILDSWIGPYTHON=ON, -DBUILDSWIGPYTHON=OFF, swig-native ${PYTHON_PN},"
-+PACKAGECONFIG[python] = "-DBUILDSWIGPYTHON=ON -DPYTHON_LIBRARY=${STAGING_LIBDIR}/lib${PYTHON_DIR}${PYTHON_ABI}.so -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI}, -DBUILDSWIGPYTHON=OFF, swig-native ${PYTHON_PN},"
- PACKAGECONFIG[nodejs] = "-DBUILDSWIGNODE=ON, -DBUILDSWIGNODE=OFF, swig-native nodejs-native,"
- 
- FILES_${PYTHON_PN}-${PN} = "${PYTHON_SITEPACKAGES_DIR}"
--- 
-2.23.0
-
+On Wed, Oct 23, 2019 at 10:17 PM Richard Purdie
+<richard.purdie@linuxfoundation.org> wrote:
+>
+> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+> ---
+>  .../python/{python3-astor_0.7.1.bb => python3-astor_0.8.0.bb}     | 0
+>  1 file changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-python/recipes-devtools/python/{python3-astor_0.7.1.bb => python3-astor_0.8.0.bb} (100%)
+>
+> diff --git a/meta-python/recipes-devtools/python/python3-astor_0.7.1.bb b/meta-python/recipes-devtools/python/python3-astor_0.8.0.bb
+> similarity index 100%
+> rename from meta-python/recipes-devtools/python/python3-astor_0.7.1.bb
+> rename to meta-python/recipes-devtools/python/python3-astor_0.8.0.bb
+> --
+> 2.20.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
