@@ -1,64 +1,51 @@
-Return-Path: <christophe.priouzeau@st.com>
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
-	[91.207.212.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 001C17F992
+Return-Path: <marek.bykowski@gmail.com>
+Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com
+	[209.85.167.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 951237F993
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 09:34:39 +0000 (UTC)
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
-	by mx08-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
-	x9O9V2VH011932 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 11:34:40 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
-	h=from : to : cc : subject
-	: date : message-id : references : in-reply-to : content-type :
-	content-transfer-encoding : mime-version; s=STMicroelectronics;
-	bh=WaGvYSG2hl1/xAevb/O2YOZyus4oeIwErakBUM1ZvDc=;
-	b=zoJAcTWdwr9xaihMBSg6yCxcoJtxYaE0K5NXxncjJcCXPAFET3k2KBcAFDqNYJnZqqH4
-	i8ZEpHLkAIq2TqJFh2fBg/hP6f1ZP2a/xWa15bOxCyvPkot16cqtFMusZJHJt0nfPPn9
-	cpcea01OKq15pdopSjP9dHvLrOHdHUlt7cg5p/p0qREAT02RSNNsh9TJlXk1FU91PQDt
-	TnYU1rEqwWHYU5EYDcSOASMIffVBE59FsDpCSi86f2IP0MfOpGSef+/Gr/DUe4qoUD1q
-	QXQegwgK8Ozuk9QqzAbwOmJAAD7lJDw5Vdd1anXzev8AD/PHkqC76z8Gv/4spvwbuqrl
-	LA== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx08-00178001.pphosted.com with ESMTP id 2vt9s50ska-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 11:34:40 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 4B2E7100039
+	Thu, 24 Oct 2019 09:45:43 +0000 (UTC)
+Received: by mail-oi1-f195.google.com with SMTP id v138so1145540oif.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 11:34:40 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node2.st.com [10.75.127.17])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 41FB221F169
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 11:34:40 +0200 (CEST)
-Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE2.st.com
-	(10.75.127.17) with Microsoft SMTP Server (TLS) id 15.0.1347.2;
-	Thu, 24 Oct 2019 11:34:39 +0200
-Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
-	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
-	15.00.1347.000; Thu, 24 Oct 2019 11:34:39 +0200
-From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-python][PATCH 10/10] Python: werkzeug: Clarify BSD license
-	variant
-Thread-Index: AQHVik5CSgnnVSda8kmLblR22CAsIw==
-Date: Thu, 24 Oct 2019 09:34:39 +0000
-Message-ID: <20191024093428.4538-10-christophe.priouzeau@st.com>
-References: <20191024093428.4538-1-christophe.priouzeau@st.com>
-In-Reply-To: <20191024093428.4538-1-christophe.priouzeau@st.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.47]
+	Thu, 24 Oct 2019 02:45:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=hyyncmvXG9++fMo8SUnuBFsAcNCaTkc7c7W3RdNbY0U=;
+	b=DoQDDoHJMhRHDVgzIOQWGr9QRi9g3Y/91Wqf0Z61KXNJbCqM944OU8sRiaRfpq/8eu
+	8fWfNiHGX9vc0i6m2/lxt+GzSih0wGPrpjvrl2SjcXcrn7qru+DZn+rUnZWAXdE3kefW
+	/+p5VTxOgvRy1nEmOUsw3B+N3DMClgmBlvJUfF9v95FxK46hmBU3PUr9e9UFU9b/D5ts
+	llbefgF602evSbkwc10i6G+KBlYTmGb2ZgOC1UvUlldvfWEzZPlxMx/rDCL64C7EUO0S
+	8RFUXPkQL5/FYcfQC/GHBvqRANQ21oq3+b/MJ1bwvVIhKKzqcXNCCPVCT9tVAaXdWO3m
+	LiIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=hyyncmvXG9++fMo8SUnuBFsAcNCaTkc7c7W3RdNbY0U=;
+	b=KKNL3W9dNiU5ZRVpQ+etYhbiw8xsK93cAGPOfpSCzzY5kpDGWmgNSHxPB1gZk/Jofy
+	SLjzmjo1PLN52WOUnRElgT/8x1hCdJf9ppTdIFm+TVAozsnztF5ZcgvsEOfYLP/6olgW
+	cKaHUTDJ3Ftm0QDb+yKavEPujPsd255k9ygGE312wGkl3K3Y36bMMLP64F+qPtbSwc8D
+	536M9mJzkCZuwuijiizAHSXrAqo03M5wnqK3DHHs2swvMBxRZ/8kgJpsu3HE+ovYg3QK
+	O3Lko7zX7JRNvEvgtmr1cd/COfLZLKrbUi/zN3g8AUkD/Zny/i++ziHbKb/pWEi4RzA7
+	34/A==
+X-Gm-Message-State: APjAAAUjtYpqbqSDer2mKORA85B1QCYw2iz/5AMFKs5voVuVkpz/qZB5
+	vuhpgRMhaDWhiDjOgh3LXkYYgyQphFAjIIcLo3o=
+X-Google-Smtp-Source: APXvYqy+n4mnR5zW7uvZm2qf/vGhngU5HCAR37zFX6Oiqfsgj/fSYNR+y5uVQBRt8U4hFgRGAT8QuXCJ8Cb5FUWt7P4=
+X-Received: by 2002:aca:4c86:: with SMTP id z128mr3919121oia.91.1571910344199; 
+	Thu, 24 Oct 2019 02:45:44 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
-	definitions=2019-10-24_06:2019-10-23,2019-10-24 signatures=0
-Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-Subject: [meta-python][PATCH 10/10] Python: werkzeug: Clarify BSD license variant
+References: <CAJNJ+3e6C_gwQ7Oyq0xKTiDCo47SHcr5naChERq0wFrk+r7N9w@mail.gmail.com>
+	<CAMKF1sr3YHNUOm=7AEU6VZJDSy-3CdeVgOXAiUvM0Z9e0n+4Sg@mail.gmail.com>
+	<CAJNJ+3daY1os_VUtVg8AU+POUK+E6q6GF-FkMx9dWfOEAmygEw@mail.gmail.com>
+	<CAMKF1soZwpo0YewBPFJRqg6BQRkftPfcMLn91Vj=J538wox-2w@mail.gmail.com>
+	<CAJNJ+3eixSQNxEd1WQKfucQ0ySh4N1qR9oGK=wLh=TrNN66M9g@mail.gmail.com>
+In-Reply-To: <CAJNJ+3eixSQNxEd1WQKfucQ0ySh4N1qR9oGK=wLh=TrNN66M9g@mail.gmail.com>
+From: Marek <marek.bykowski@gmail.com>
+Date: Thu, 24 Oct 2019 11:45:32 +0200
+Message-ID: <CAHw2UgD3Vbt6t=+oYvJec7k2g0xWEyqFr6DvC-9TtnJVvgvHUg@mail.gmail.com>
+To: =?UTF-8?Q?Micha=C5=82_Lower?= <michal@pcb.red>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] update python setuptools-scm from 2.1.0 to 3.3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,34 +58,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2019 09:34:40 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 24 Oct 2019 09:45:43 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-The License of python werkzeug is BSD-3-Clause.
+Or use any other email client like Claws, works perfectly for upstream patc=
+hes
 
-Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
----
- meta-python/recipes-devtools/python/python-werkzeug.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, 24 Oct 2019 at 11:07, Micha=C5=82 Lower <michal@pcb.red> wrote:
+>
+> thanks for the hint, will do.
+>
+> czw., 24 pa=C5=BA 2019 o 11:03 Khem Raj <no-reply@forwardemail.net> napis=
+a=C5=82(a):
+> >
+> > On Thu, Oct 24, 2019 at 9:48 AM Micha=C5=82 Lower <michal@pcb.red> wrot=
+e:
+> > >
+> > > > please use git format-patch to generate it
+> > > This is exactly what I've did. Sadly it appears that Gmail inserts
+> > > line breaks on its own. Can I send the patch as an attachment so it
+> > > will be kept intact? I cannot use git send-email since it doesn't
+> > > support gmail two actor authentication and my account doesn't allow
+> > > for application passwords.
+> >
+> > yeah I see. if you use github then send a pull request against
+> > https://github.com/openembedded/meta-openembedded
+> > I do process that as well.
+> >
+> > >
+> > > czw., 24 pa=C5=BA 2019 o 10:18 Khem Raj <no-reply@forwardemail.net> n=
+apisa=C5=82(a):
+> > > >
+> > > > Hi Micha=C5=82
+> > > >
+> > > > This patch appears malformed. So please use git format-patch to
+> > > > generate it and git send-email to send it also rebase it on top of
+> > > > latest master
+> > > >
+> > > > On Tue, Oct 22, 2019 at 9:03 AM Micha=C5=82 Lower <michal@pcb.red> =
+wrote:
+> > > > >
+> > > > > Previous version fails to compile for zeus branch. Upgrading fixe=
+s that.
+> > > > >
+> > > > > Signed-off-by: Michal Lower <michal at pcb.red>
+> > > > > ---
+> > > > >  meta-python/recipes-devtools/python/python-setuptools-scm.inc | =
+4 ++--
+> > > > >  ...setuptools-scm_2.1.0.bb =3D> python-setuptools-scm_3.3.3.bb} =
+| 0
+> > > > >  ...etuptools-scm_2.1.0.bb =3D> python3-setuptools-scm_3.3.3.bb} =
+| 0
+> > > > >  3 files changed, 2 insertions(+), 2 deletions(-)
+> > > > >  rename meta-python/recipes-devtools/python/{python-setuptools-sc=
+m_2.1.0.bb
+> > > > > =3D> python-setuptools-scm_3.3.3.bb} (100%)
+> > > > >  rename meta-python/recipes-devtools/python/{python3-setuptools-s=
+cm_2.1.0.bb
+> > > > > =3D> python3-setuptools-scm_3.3.3.bb} (100%)
+> > > > >
+> > > > > diff --git a/meta-python/recipes-devtools/python/python-setuptool=
+s-scm.inc
+> > > > > b/meta-python/recipes-devtools/python/python-setuptools-scm.inc
+> > > > > index 98883ec39..a7e1bf6ad 100644
+> > > > > --- a/meta-python/recipes-devtools/python/python-setuptools-scm.i=
+nc
+> > > > > +++ b/meta-python/recipes-devtools/python/python-setuptools-scm.i=
+nc
+> > > > > @@ -2,8 +2,8 @@ SUMMARY =3D "the blessed package to manage your v=
+ersions
+> > > > > by scm tags"
+> > > > >  LICENSE =3D "MIT"
+> > > > >  LIC_FILES_CHKSUM =3D
+> > > > > "file://PKG-INFO;beginline=3D8;endline=3D8;md5=3D8227180126797a01=
+48f94f483f3e1489"
+> > > > >
+> > > > > -SRC_URI[md5sum] =3D "cfec5d2dbbd0a85c40066f79035b5878"
+> > > > > -SRC_URI[sha256sum] =3D
+> > > > > "a767141fecdab1c0b3c8e4c788ac912d7c94a0d6c452d40777ba84f918316379=
+"
+> > > > > +SRC_URI[md5sum] =3D "50b2199082fe808d032ec1710c9d7415"
+> > > > > +SRC_URI[sha256sum] =3D
+> > > > > "bd25e1fb5e4d603dcf490f1fde40fb4c595b357795674c3e5cb7f6217ab39ea5=
+"
+> > > > >
+> > > > >  PYPI_PACKAGE =3D "setuptools_scm"
+> > > > >  inherit pypi
+> > > > > diff --git a/meta-python/recipes-devtools/python/python-setuptool=
+s-scm_2.1.0.bb
+> > > > > b/meta-python/recipes-devtools/python/python-setuptools-scm_3.3.3=
+.bb
+> > > > > similarity index 100%
+> > > > > rename from meta-python/recipes-devtools/python/python-setuptools=
+-scm_2.1.0.bb
+> > > > > rename to meta-python/recipes-devtools/python/python-setuptools-s=
+cm_3.3.3.bb
+> > > > > diff --git a/meta-python/recipes-devtools/python/python3-setuptoo=
+ls-scm_2.1.0.bb
+> > > > > b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.=
+3.bb
+> > > > > similarity index 100%
+> > > > > rename from meta-python/recipes-devtools/python/python3-setuptool=
+s-scm_2.1.0.bb
+> > > > > rename to meta-python/recipes-devtools/python/python3-setuptools-=
+scm_3.3.3.bb
+> > > > > --
+> > > > > 2.17.1
+> > > > > --
+> > > > > _______________________________________________
+> > > > > Openembedded-devel mailing list
+> > > > > Openembedded-devel@lists.openembedded.org
+> > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-diff --git a/meta-python/recipes-devtools/python/python-werkzeug.inc b/meta=
--python/recipes-devtools/python/python-werkzeug.inc
-index c04a4e0c4..e630fdd09 100644
---- a/meta-python/recipes-devtools/python/python-werkzeug.inc
-+++ b/meta-python/recipes-devtools/python/python-werkzeug.inc
-@@ -7,7 +7,7 @@ HTTP utilities to handle entity tags, cache control headers=
-, HTTP dates, \
- cookie handling, file uploads, a powerful URL routing system and a bunch \
- of community contributed addon modules."
- HOMEPAGE =3D "http://werkzeug.pocoo.org/"
--LICENSE =3D "BSD"
-+LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ded9a0b7c0254616d72dadb98b293ef1=
-b"
-=20
- SRC_URI[md5sum] =3D "6d20b5be2d245be4ac7706cc390d130c"
+
+
 --=20
-2.17.1
+Sl=C3=A1n,
+Marek
 
