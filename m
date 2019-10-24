@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 86ECD7D185
+	by mail.openembedded.org (Postfix) with ESMTP id 207DB7D185
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 05:28:28 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,223,1569254400"; d="scan'208";a="77395324"
+	Thu, 24 Oct 2019 05:42:18 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,223,1569254400"; d="scan'208";a="77395825"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 24 Oct 2019 13:28:28 +0800
+	by heian.cn.fujitsu.com with ESMTP; 24 Oct 2019 13:42:18 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 6F8F14B6EC86
+	by cn.fujitsu.com (Postfix) with ESMTP id 21C684CE1509
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Oct 2019 13:20:30 +0800 (CST)
+	Thu, 24 Oct 2019 13:34:21 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 24 Oct 2019 13:28:24 +0800
+	Server (TLS) id 14.3.439.0; Thu, 24 Oct 2019 13:42:15 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Oct 2019 13:28:38 +0800
-Message-ID: <20191024052838.1587-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 24 Oct 2019 13:42:29 +0800
+Message-ID: <20191024054229.1795-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 6F8F14B6EC86.AB66B
+X-yoursite-MailScanner-ID: 21C684CE1509.A711E
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-astroid: upgrade 1.6.5 -> 2.3.2
+Subject: [meta-python] [PATCH] python-aws-iot-device-sdk-python: upgrade 1.4.0 -> 1.4.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,49 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Oct 2019 05:28:29 -0000
+X-List-Received-Date: Thu, 24 Oct 2019 05:42:19 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--Add depends:pytest-runner-native.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-astroid.inc              | 6 ++++--
- .../python/{python-astroid_1.6.5.bb => python-astroid_2.3.2.bb}     | 0
- .../python/{python3-astroid_1.6.5.bb => python3-astroid_2.3.2.bb}   | 0
- 3 files changed, 4 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-astroid_1.6.5.bb => python-astroid_2.3.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-astroid_1.6.5.bb => python3-astroid_2.3.2.bb} (100%)
+ .../recipes-devtools/python/python-aws-iot-device-sdk-python.inc      | 4 ++--
+ ...-sdk-python_1.4.0.bb => python-aws-iot-device-sdk-python_1.4.7.bb} | 0
+ ...sdk-python_1.4.0.bb => python3-aws-iot-device-sdk-python_1.4.7.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-aws-iot-device-sdk-python_1.4.0.bb => python-aws-iot-device-sdk-python_1.4.7.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-aws-iot-device-sdk-python_1.4.0.bb => python3-aws-iot-device-sdk-python_1.4.7.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-astroid.inc b/meta-python/recipes-devtools/python/python-astroid.inc
-index fae0f13..171d320 100644
---- a/meta-python/recipes-devtools/python/python-astroid.inc
-+++ b/meta-python/recipes-devtools/python/python-astroid.inc
-@@ -4,11 +4,13 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
+index 7423fa7..60493e1 100644
+--- a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
++++ b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "\
+     file://AWSIoTPythonSDK/core/protocol/paho/client.py;endline=14;md5=5a3c8a1a4bb71bd934f450ecff972ad9 \
+ "
  
--SRC_URI[md5sum] = "2dd01ef0d5b5f0fc754c1ba40137b61c"
--SRC_URI[sha256sum] = "fc9b582dba0366e63540982c3944a9230cbc6f303641c51483fa547dcc22393a"
-+SRC_URI[md5sum] = "b2cd5c0383ff33c1410e737c2607aa7a"
-+SRC_URI[sha256sum] = "09a3fba616519311f1af8a461f804b68f0370e100c9264a035aa7846d7852e33"
+-SRC_URI[md5sum] = "50a5c46410c2b44b5c09f1ea5eb15a3b"
+-SRC_URI[sha256sum] = "b3c8af3ce24eab861447a194f3c382509dd70e90452c86a5426f1e7272460177"
++SRC_URI[md5sum] = "2b3df629827d8bc18ca4d927b4885a17"
++SRC_URI[sha256sum] = "7e67c8cfeee8a1c8fd251bcc418de9d4dca697753565c9a9e614525179d9555d"
  
  inherit pypi
  
-+DEPENDS += "${PYTHON_PN}-pytest-runner-native"
-+
- PACKAGES =+ "${PN}-tests"
- 
- FILES_${PN}-tests += " \
-diff --git a/meta-python/recipes-devtools/python/python-astroid_1.6.5.bb b/meta-python/recipes-devtools/python/python-astroid_2.3.2.bb
+diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.4.0.bb b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.4.7.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-astroid_1.6.5.bb
-rename to meta-python/recipes-devtools/python/python-astroid_2.3.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_1.6.5.bb b/meta-python/recipes-devtools/python/python3-astroid_2.3.2.bb
+rename from meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.4.0.bb
+rename to meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.4.7.bb
+diff --git a/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.0.bb b/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.7.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-astroid_1.6.5.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.3.2.bb
+rename from meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.4.7.bb
 -- 
 2.7.4
 
