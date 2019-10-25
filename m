@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
 	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 243236C0C0
+	by mail.openembedded.org (Postfix) with ESMTP id 160B57E265
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 21:37:42 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id w14so5445205qto.9
+	Fri, 25 Oct 2019 21:38:23 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id t20so5424760qtr.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 14:37:43 -0700 (PDT)
+	Fri, 25 Oct 2019 14:38:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=65lLtZkpJg80TJ5FeFLK5zFPJSyNmGGyoB76AmnPHXo=;
-	b=mjZmp65lnFkMy0nUFqc3niklFt8a1ZO74yRN87ctTkOhX4ZyBqvMqrZimSBBDYO4it
-	wxC2wUMT9YSkC7jSt1WpGTxMg2ADlaXJfi1lCAvyQdZprQNH30z8ymCzCyzbvzJ9FdDl
-	duJ/YaS94paY5UP5L55ycQdvVBF2EkQvJYFysOQCjfOQXpbw8NdLj3NIx1S2ugQhajUx
-	6+K+KAOBDRBMWrixMJYO8PP/kQ5Y9UCzfmpJYP47QOgPgPmWcCCgeF9V/PS8XSipWmn6
-	q7YEE7t9jLHUHC5YKfETY89ua9exPm/qqq5PZQpAU9EmVJqUKD0t0wWS+8OM8HztkGYh
-	mlhQ==
+	bh=8lzmtM/hixKWnf2ejQnfR3uwE2EpFY6qndnzzTjoLVQ=;
+	b=Oc9fK8WyKVHQFH1UcAqTnbP4fc4hvtQPg0V+JXb2q+B8A4LzeYGbuSQNXQ8pSoUHjF
+	MiTZU8kQvXGCSumQ7nOj21PrphIZHgstw2QDthjrXm2IPUllLWSzbEAmneDBg13gWCjb
+	Tt2AoCubKc/c7q5laSR9RBsGtT0fVnZWc4Cm3BK5aZVUE8aoalCWrBjw8ify8FxT+dOO
+	AqW8/ewINxDtGX88U7AZG9TVuNZ9qbx9kq+xmg8HgRlv45meHX5hFre/4rYPtEucYPSV
+	6nYJ2Qasz4UJlCuq9vBvNgtUKCbhPcR2dQmqzLV/TG9G+lKNQ730IPOSgqGUGwohSS72
+	6HCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=65lLtZkpJg80TJ5FeFLK5zFPJSyNmGGyoB76AmnPHXo=;
-	b=fSF6Aw/qswbeBm8spD9OykYZ5wOxO+EzUgIkjbuuO3E1z3L5mFKjx+fyzbIq4lkI0Y
-	w+v2OaJVA7AHPHYLRsKaxXyi7pDihAswRCBfrOCAwRec9JAVV6vwozU4u4eLq972BJxp
-	MwvH/mSLNf/lZ9oSqsWizYvTN+pkJ+v1zIN90p9FP+eVtedHcsvzn6y3ZHIsVViIMvtJ
-	VyGJud+AImZgbs2Y6HXHv93fb4Q9MhUPIgAnbZlJcK/n9FUHpENMRKbCQZ51EPUd5kgg
-	edVUF9p90MGJcY4b09P1KhrYJkRNuxb/+a0OgChSnn+pco3gcfF2wMQbfh+XNa4OS3cN
-	GU6g==
-X-Gm-Message-State: APjAAAVl0UeAUSXYNQyxAFzFoxl4nSfT6ksgQtPOvPJl6gr1C1LEe9am
-	jijYYimurgNLMbY6xItr5xzZVP5qUKqvVX1cPtcDGi6sBOQ3wg==
-X-Google-Smtp-Source: APXvYqya8JTo5IP43kqMzsUSj+FvEDJtULdGTSPhvFFZT03xBt3vKtTFjVTqGjC2ezik7qoGOqH4X1S8VY+8szaUBGk=
-X-Received: by 2002:ac8:768e:: with SMTP id g14mr5484547qtr.378.1572039462340; 
-	Fri, 25 Oct 2019 14:37:42 -0700 (PDT)
+	bh=8lzmtM/hixKWnf2ejQnfR3uwE2EpFY6qndnzzTjoLVQ=;
+	b=UFyoBjIOaBG9HZE8oblBqQ9peDh5wVm84xyE3bhnaSMmBPdjNOA22/j96SfAqSc471
+	jxeXK3wvlJ5mo4Bsrl+H+jghR1n3lybpl8HNkBsZeLxPFLC0tjughZwx8e4yXsVnvJFH
+	Zc53Q3jgKIk5DfgMsVtiQPEAzTQktKDzEHdvdR8KCddj/MWT6sc2eJPWOxoc+jWMiHR4
+	FOgGp1+KI+oao7LtV8FIoQg6oDX6yput6jcr7osoCRPX/ea9xnZKlO7ZnYBjlpoIK5oe
+	OE5VoVWJLjPKJesVvfzOnHaqn87aYCB7yawvOEDJIs0yWcYUfPqMFLCq4ESUGZ/11M8/
+	Fr3w==
+X-Gm-Message-State: APjAAAVO7e0Dacm0DvwE9S+Qvg0CnIouXpwkhJaizektIEw4FU9ZIo+J
+	DcpeSb2BZwkoiQ8czZxjv0Z14OCx2A6SkBwtSLg=
+X-Google-Smtp-Source: APXvYqwpY/vyUQ8Psw9Y+RmtJknyJxJlYy4fiWqco5mGVGPWEhetSbZXNKnTP2UcOWuxNzzFNnn8z7KcDeAXPs+W5yA=
+X-Received: by 2002:ad4:45b1:: with SMTP id y17mr3709132qvu.55.1572039504686; 
+	Fri, 25 Oct 2019 14:38:24 -0700 (PDT)
 MIME-Version: 1.0
 References: <20191025072113.11172-1-schnitzeltony@gmail.com>
-	<20191025072113.11172-15-schnitzeltony@gmail.com>
-In-Reply-To: <20191025072113.11172-15-schnitzeltony@gmail.com>
+	<20191025072113.11172-13-schnitzeltony@gmail.com>
+In-Reply-To: <20191025072113.11172-13-schnitzeltony@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 25 Oct 2019 22:37:15 +0100
-Message-ID: <CAMKF1so2PpCg4ot6g1wjAs9sneFRypXU0qaGbxR-hQ3zo1wjqg@mail.gmail.com>
+Date: Fri, 25 Oct 2019 22:37:58 +0100
+Message-ID: <CAMKF1spm8LGyxHQ4gae7bT4Hm8UG1Kv3NteCN1JQgYE6P1+ojw@mail.gmail.com>
 To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 14/15] colord: initial add 1.4.4
+Subject: Re: [PATCH 12/15] ibus: initial add 1.5.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,469 +55,168 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 21:37:42 -0000
+X-List-Received-Date: Fri, 25 Oct 2019 21:38:24 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Native build fails
+Fails
 
-https://errors.yoctoproject.org/Errors/Details/274649/
+https://errors.yoctoproject.org/Errors/Details/274650/
 
 On Fri, Oct 25, 2019 at 8:23 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
 m> wrote:
 >
-> * It is a dependency for upcoming gnome-settings-daemon
-> * It is used by GNOME and KDE [1] so  move it to meta-oe
-> * Getting it to build was a bit tricky. Udev (systemd) is a mandatory
->   dependency and for native we do not support build. To get around native=
- build
->   was stripped down to what's necessary only. Native build is done with t=
-he
->   help of configuration in recipe and (old-school) Makefile. This solutio=
-n was
->   chosen to avoid massive patching of meson build which tends to be a
->   maintenance burden (as experienced at KDE recipes in meta-qt5-extra).
->
-> [1] https://www.freedesktop.org/software/colord/intro.html
+> It is a depency for gnome-shell
 >
 > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 > ---
->  .../recipes-support/colord/colord-native.bb   |  64 +++++++
->  ...n-cd_icc_create_from_edid-to-avoid-u.patch | 166 ++++++++++++++++++
->  .../colord/colord-native/Makefile             |  48 +++++
->  meta-oe/recipes-support/colord/colord.bb      |  45 +++++
->  meta-oe/recipes-support/colord/colord.inc     |  13 ++
->  ...Run-native-cd_idt8-cd_create_profile.patch |  59 +++++++
->  6 files changed, 395 insertions(+)
->  create mode 100644 meta-oe/recipes-support/colord/colord-native.bb
->  create mode 100644 meta-oe/recipes-support/colord/colord-native/0001-Mov=
-e-the-function-cd_icc_create_from_edid-to-avoid-u.patch
->  create mode 100644 meta-oe/recipes-support/colord/colord-native/Makefile
->  create mode 100644 meta-oe/recipes-support/colord/colord.bb
->  create mode 100644 meta-oe/recipes-support/colord/colord.inc
->  create mode 100644 meta-oe/recipes-support/colord/colord/0001-Run-native=
--cd_idt8-cd_create_profile.patch
+>  .../recipes-support/ibus/ibus-native.bb       | 28 +++++++++++++
+>  meta-gnome/recipes-support/ibus/ibus.bb       | 33 ++++++++++++++++
+>  meta-gnome/recipes-support/ibus/ibus.inc      | 33 ++++++++++++++++
+>  ...start-dbus-we-do-not-have-dbus-lauch.patch | 39 +++++++++++++++++++
+>  4 files changed, 133 insertions(+)
+>  create mode 100644 meta-gnome/recipes-support/ibus/ibus-native.bb
+>  create mode 100644 meta-gnome/recipes-support/ibus/ibus.bb
+>  create mode 100644 meta-gnome/recipes-support/ibus/ibus.inc
+>  create mode 100644 meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-=
+to-start-dbus-we-do-not-have-dbus-lauch.patch
 >
-> diff --git a/meta-oe/recipes-support/colord/colord-native.bb b/meta-oe/re=
-cipes-support/colord/colord-native.bb
+> diff --git a/meta-gnome/recipes-support/ibus/ibus-native.bb b/meta-gnome/=
+recipes-support/ibus/ibus-native.bb
 > new file mode 100644
-> index 000000000..845041cc4
+> index 000000000..0c095f15e
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/colord/colord-native.bb
-> @@ -0,0 +1,64 @@
+> +++ b/meta-gnome/recipes-support/ibus/ibus-native.bb
+> @@ -0,0 +1,28 @@
 > +require ${BPN}.inc
 > +
-> +FILESEXTRAPATHS_prepend :=3D "${THISDIR}/${BPN}-native:"
+> +inherit native
 > +
-> +inherit meson native
-> +
-> +DEPENDS +=3D " \
-> +    meson-native \
+> +DEPENDS =3D " \
 > +    glib-2.0-native \
-> +    lcms-native \
+> +    dbus-native \
+> +    iso-codes \
 > +"
 > +
-> +SRC_URI +=3D " \
-> +    file://0001-Move-the-function-cd_icc_create_from_edid-to-avoid-u.pat=
-ch \
-> +    file://Makefile;subdir=3D${BPN}-${PV} \
-> +"
+> +PACKAGECONFIG =3D ""
 > +
-> +do_configure() {
-> +    # we expect meson to fail - but before it extracts project's version=
- in log file
-> +    meson ${MESONOPTS} "${MESON_SOURCEPATH}" "${B}" ${MESON_CROSS_FILE} =
-${EXTRA_OEMESON} > /dev/null 2>&1 || true
-> +
-> +    # extract and split version
-> +    version=3D`grep 'Project version:' ${B}/meson-logs/meson-log.txt | s=
-ed 's|Project version: ||'`
-> +    major=3D`echo $version | cut -d. -f1`
-> +    minor=3D`echo $version | cut -d. -f2`
-> +    micro=3D`echo $version | cut -d. -f3`
-> +    echo "Project version: $major.$minor.$micro"
-> +
-> +    # extract project name
-> +    proj_name=3D`grep 'Project name:' ${B}/meson-logs/meson-log.txt | se=
-d 's|Project name: ||'`
-> +
-> +    # create cd-version.h
-> +    mkdir -p ${B}/colord
-> +       sed ${S}/lib/colord/cd-version.h.in \
-> +               -e 's:@CD_MAJOR_VERSION_PRIVATE@:1:g' \
-> +               -e 's:@CD_MINOR_VERSION_PRIVATE@:4:g' \
-> +               -e 's:@CD_MICRO_VERSION_PRIVATE@:4:g' \
-> +               > ${B}/colord/cd-version.h
-> +
-> +    # create config.h based on target build and add what's necessary onl=
-y
-> +    localedir=3D`echo ${datadir}/locale | sed 's:${prefix}/::g'`
-> +    echo "#define LOCALEDIR \"$localedir\"" >> ${B}/config.h
-> +    echo "#define GETTEXT_PACKAGE \"colord\"" >> ${B}/config.h
-> +    echo "#define PACKAGE_NAME \"$proj_name\"" >> ${B}/config.h
-> +    echo "#define PACKAGE_VERSION \"$version\"" >> ${B}/config.h
-> +}
+> +# for allarch iso-codes
+> +EXTRA_NATIVE_PKGCONFIG_PATH =3D ":${RECIPE_SYSROOT}${datadir_native}/pkg=
+config"
 > +
 > +do_compile() {
-> +    oe_runmake -C${S} DESTDIR=3D${B}
+> +    cd src
+> +    oe_runmake ibusenumtypes.h ibusenumtypes.c
+> +    oe_runmake unicode-parser
 > +}
 > +
 > +do_install() {
-> +    version=3D`grep 'Project version:' ${B}/meson-logs/meson-log.txt | s=
-ed 's|Project version: ||'`
-> +    major=3D`echo $version | cut -d. -f1`
+> +    install -d ${D}/${libdir}
+> +    install -m 755 ${S}/src/.libs/libibus-*.so* ${D}/${libdir}
 > +
-> +    install -d ${D}${libdir}
-> +    install -m 755 ${B}/libcolord.so ${D}${libdir}/libcolord.so.$version
-> +    ln -s libcolord.so.$version "${D}/${libdir}/libcolord.so"
-> +    ln -s libcolord.so.$version "${D}/${libdir}/libcolord.so.$major"
-> +
-> +    install -d ${D}${bindir}
-> +    install -m 755 ${B}/cd_create_profile ${D}${bindir}/
-> +    install -m 755 ${B}/cd_idt8 ${D}${bindir}/
+> +    install -d ${D}/${bindir}
+> +    install -m 755 ${S}/src/.libs/unicode-parser ${D}/${bindir}
 > +}
-> diff --git a/meta-oe/recipes-support/colord/colord-native/0001-Move-the-f=
-unction-cd_icc_create_from_edid-to-avoid-u.patch b/meta-oe/recipes-support/=
-colord/colord-native/0001-Move-the-function-cd_icc_create_from_edid-to-avoi=
-d-u.patch
+> diff --git a/meta-gnome/recipes-support/ibus/ibus.bb b/meta-gnome/recipes=
+-support/ibus/ibus.bb
 > new file mode 100644
-> index 000000000..278b90e07
+> index 000000000..28f572ee7
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/colord/colord-native/0001-Move-the-function=
--cd_icc_create_from_edid-to-avoid-u.patch
-> @@ -0,0 +1,166 @@
-> +From cbb8f5c05fce1d56ae2e5fa9f57fc49c47bed5ab Mon Sep 17 00:00:00 2001
-> +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
-om>
-> +Date: Sun, 12 May 2019 21:58:02 +0200
-> +Subject: [PATCH] Move the function cd_icc_create_from_edid to avoid udev
-> + dependeny
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +We do not have udev-native so it is a dependeny we cannot satisfy
-> +
-> +Upstream-Status: Inappropriate [OE specific]
-> +
-> +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> +---
-> + lib/colord/cd-edid.c | 63 ++++++++++++++++++++++++++++++++++++++++++++
-> + lib/colord/cd-icc.c  | 62 -------------------------------------------
-> + 2 files changed, 63 insertions(+), 62 deletions(-)
-> +
-> +diff --git a/lib/colord/cd-edid.c b/lib/colord/cd-edid.c
-> +index a5e2328..dec509a 100644
-> +--- a/lib/colord/cd-edid.c
-> ++++ b/lib/colord/cd-edid.c
-> +@@ -687,3 +687,66 @@ cd_edid_new (void)
-> +       edid =3D g_object_new (CD_TYPE_EDID, NULL);
-> +       return CD_EDID (edid);
-> + }
-> ++
-> ++/**
-> ++ * cd_icc_create_from_edid_data:
-> ++ * @icc: A valid #CdIcc
-> ++ * @edid: EDID data
-> ++ * @error: A #GError, or %NULL
-> ++ *
-> ++ * Creates an ICC profile from EDID data.
-> ++ *
-> ++ * Return value: %TRUE for success
-> ++ *
-> ++ * Since: 1.1.2
-> ++ **/
-> ++gboolean
-> ++cd_icc_create_from_edid_data (CdIcc *icc, CdEdid *edid, GError **error)
-> ++{
-> ++      CdIccPrivate *priv =3D GET_PRIVATE (icc);
-> ++      const gchar *data;
-> ++
-> ++      /* not loaded */
-> ++      if (priv->lcms_profile !=3D NULL) {
-> ++              g_set_error_literal (error,
-> ++                                   CD_ICC_ERROR,
-> ++                                   CD_ICC_ERROR_FAILED_TO_CREATE,
-> ++                                   "already loaded or generated");
-> ++              return FALSE;
-> ++      }
-> ++
-> ++      /* create from parsed object */
-> ++      if (!cd_icc_create_from_edid (icc,
-> ++                                    cd_edid_get_gamma (edid),
-> ++                                    cd_edid_get_red (edid),
-> ++                                    cd_edid_get_green (edid),
-> ++                                    cd_edid_get_blue (edid),
-> ++                                    cd_edid_get_white (edid),
-> ++                                    error)) {
-> ++              return FALSE;
-> ++      }
-> ++
-> ++      /* set copyright */
-> ++      cd_icc_set_copyright (icc, NULL,
-> ++                            /* deliberately not translated */
-> ++                            "This profile is free of known copyright re=
-strictions.");
-> ++
-> ++      /* set 'ICC meta Tag for Monitor Profiles' data */
-> ++      data =3D cd_edid_get_checksum (edid);
-> ++      if (data !=3D NULL)
-> ++              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_MD5, d=
-ata);
-> ++      data =3D cd_edid_get_monitor_name (edid);
-> ++      if (data !=3D NULL)
-> ++              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_MODEL,=
- data);
-> ++      data =3D cd_edid_get_serial_number (edid);
-> ++      if (data !=3D NULL)
-> ++              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_SERIAL=
-, data);
-> ++      data =3D cd_edid_get_pnp_id (edid);
-> ++      if (data !=3D NULL)
-> ++              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_MNFT, =
-data);
-> ++      data =3D cd_edid_get_vendor_name (edid);
-> ++      if (data !=3D NULL)
-> ++              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_VENDOR=
-, data);
-> ++      return TRUE;
-> ++}
-> ++
-> +diff --git a/lib/colord/cd-icc.c b/lib/colord/cd-icc.c
-> +index f231814..2c8fe77 100644
-> +--- a/lib/colord/cd-icc.c
-> ++++ b/lib/colord/cd-icc.c
-> +@@ -3094,68 +3094,6 @@ out:
-> +       return ret;
-> + }
-> +
-> +-/**
-> +- * cd_icc_create_from_edid_data:
-> +- * @icc: A valid #CdIcc
-> +- * @edid: EDID data
-> +- * @error: A #GError, or %NULL
-> +- *
-> +- * Creates an ICC profile from EDID data.
-> +- *
-> +- * Return value: %TRUE for success
-> +- *
-> +- * Since: 1.1.2
-> +- **/
-> +-gboolean
-> +-cd_icc_create_from_edid_data (CdIcc *icc, CdEdid *edid, GError **error)
-> +-{
-> +-      CdIccPrivate *priv =3D GET_PRIVATE (icc);
-> +-      const gchar *data;
-> +-
-> +-      /* not loaded */
-> +-      if (priv->lcms_profile !=3D NULL) {
-> +-              g_set_error_literal (error,
-> +-                                   CD_ICC_ERROR,
-> +-                                   CD_ICC_ERROR_FAILED_TO_CREATE,
-> +-                                   "already loaded or generated");
-> +-              return FALSE;
-> +-      }
-> +-
-> +-      /* create from parsed object */
-> +-      if (!cd_icc_create_from_edid (icc,
-> +-                                    cd_edid_get_gamma (edid),
-> +-                                    cd_edid_get_red (edid),
-> +-                                    cd_edid_get_green (edid),
-> +-                                    cd_edid_get_blue (edid),
-> +-                                    cd_edid_get_white (edid),
-> +-                                    error)) {
-> +-              return FALSE;
-> +-      }
-> +-
-> +-      /* set copyright */
-> +-      cd_icc_set_copyright (icc, NULL,
-> +-                            /* deliberately not translated */
-> +-                            "This profile is free of known copyright re=
-strictions.");
-> +-
-> +-      /* set 'ICC meta Tag for Monitor Profiles' data */
-> +-      data =3D cd_edid_get_checksum (edid);
-> +-      if (data !=3D NULL)
-> +-              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_MD5, d=
-ata);
-> +-      data =3D cd_edid_get_monitor_name (edid);
-> +-      if (data !=3D NULL)
-> +-              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_MODEL,=
- data);
-> +-      data =3D cd_edid_get_serial_number (edid);
-> +-      if (data !=3D NULL)
-> +-              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_SERIAL=
-, data);
-> +-      data =3D cd_edid_get_pnp_id (edid);
-> +-      if (data !=3D NULL)
-> +-              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_MNFT, =
-data);
-> +-      data =3D cd_edid_get_vendor_name (edid);
-> +-      if (data !=3D NULL)
-> +-              cd_icc_add_metadata (icc, CD_PROFILE_METADATA_EDID_VENDOR=
-, data);
-> +-      return TRUE;
-> +-}
-> +-
-> + /**
-> +  * cd_icc_create_from_edid:
-> +  * @icc: A valid #CdIcc
-> +--
-> +2.20.1
-> +
-> diff --git a/meta-oe/recipes-support/colord/colord-native/Makefile b/meta=
--oe/recipes-support/colord/colord-native/Makefile
-> new file mode 100644
-> index 000000000..ca265ca6f
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/colord/colord-native/Makefile
-> @@ -0,0 +1,48 @@
-> +# For native build cd_idt8, cd_create_profile and a tiny version of libc=
-olord.so
-> +# only. By reducing the library to what's necessary, we avoid dependenci=
-es on
-> +# naitve udev and libgudev
-> +
-> +CFLAGS+=3D$(shell pkg-config --cflags gio-2.0)
-> +CFLAGS+=3D$(shell pkg-config --cflags lcms2)
-> +CFLAGS+=3D-I./lib -I./lib/colord -I$(DESTDIR) -DCD_COMPILATION
-> +
-> +LDFLAGS+=3D$(shell pkg-config --libs gio-2.0)
-> +LDFLAGS+=3D$(shell pkg-config --libs lcms2)
-> +LDFLAGS+=3D-lm
-> +
-> +all: cd_idt8 cd_create_profile
-> +
-> +LIBSOURCES =3D \
-> +       lib/colord/cd-it8.c \
-> +       lib/colord/cd-color.c \
-> +       lib/colord/cd-spectrum.c \
-> +       lib/colord/cd-math.c \
-> +       lib/colord/cd-interp-akima.c \
-> +       lib/colord/cd-context-lcms.c \
-> +       lib/colord/cd-interp.c \
-> +       lib/colord/cd-interp-linear.c \
-> +       lib/colord/cd-it8-utils.c \
-> +       lib/colord/cd-enum.c \
-> +    lib/colord/cd-icc.c \
-> +    lib/colord/cd-icc-utils.c \
-> +    lib/colord/cd-dom.c
-> +
-> +libcolord.so: $(LIBSOURCES)
-> +       $(CC) $(CFLAGS) -fPIC -shared -Wl,-soname,$@ $^ -o $(DESTDIR)/$@
-> +
-> +cd_idt8.o: client/cd-it8.c
-> +       $(CC) $(CFLAGS) -c $^ -o $(DESTDIR)/$@
-> +
-> +cd_idt8: libcolord.so cd_idt8.o
-> +       $(CC) $(LDFLAGS) -L$(DESTDIR) -lcolord $(DESTDIR)/cd_idt8.o -o $(=
-DESTDIR)/$@
-> +
-> +cd_create_profile.o: client/cd-create-profile.c
-> +       $(CC) $(CFLAGS) -c $^ -o $(DESTDIR)/$@
-> +
-> +cd_create_profile: libcolord.so cd_create_profile.o
-> +       $(CC) $(LDFLAGS) -L$(DESTDIR) -lcolord $(DESTDIR)/cd_create_profi=
-le.o -o $(DESTDIR)/$@
-> +
-> +.PHONY: clean
-> +
-> +clean:
-> +       rm -f $(DESTDIR)/libcolord.so $(DESTDIR)/*.o $(DESTDIR)/cd_idt8 $=
-(DESTDIR)/cd_create_profile
-> diff --git a/meta-oe/recipes-support/colord/colord.bb b/meta-oe/recipes-s=
-upport/colord/colord.bb
-> new file mode 100644
-> index 000000000..5c691e463
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/colord/colord.bb
-> @@ -0,0 +1,45 @@
+> +++ b/meta-gnome/recipes-support/ibus/ibus.bb
+> @@ -0,0 +1,33 @@
 > +require ${BPN}.inc
 > +
-> +inherit meson gobject-introspection gsettings gettext bash-completion sy=
-stemd distro_features_check useradd
-> +
-> +# polkit and gobject-introspection are mandatory and cannot be configure=
-d
-> +REQUIRED_DISTRO_FEATURES =3D "polkit gobject-introspection-data"
-> +UNKNOWN_CONFIGURE_WHITELIST_append =3D " introspection"
-> +
-> +DEPENDS +=3D " \
+> +DEPENDS =3D " \
 > +    ${BPN}-native \
+> +    glib-2.0-native \
 > +    glib-2.0 \
-> +    lcms \
-> +    sqlite3 \
-> +    libgusb \
-> +    libgudev \
-> +    polkit \
+> +    dbus \
+> +    iso-codes \
 > +"
 > +
-> +SRC_URI +=3D " \
-> +    file://0001-Run-native-cd_idt8-cd_create_profile.patch \
+> +inherit gtk-icon-cache bash-completion
+> +
+> +PACKAGECONFIG ??=3D " \
+> +    dconf gtk3 vala \
+> +    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)} \
 > +"
 > +
-> +EXTRA_OEMESON =3D " \
-> +    -Dman=3Dfalse \
-> +    -Ddocs=3Dfalse \
-> +"
-> +
-> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)=
-}"
-> +PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue, -Dsystemd=3Dtrue, systemd"
-> +
-> +SYSTEMD_SERVICE_${PN} =3D "colord.service"
+> +do_configure_prepend() {
+> +    # run native unicode-parser
+> +    sed -i 's:$(builddir)/unicode-parser:unicode-parser:g' ${S}/src/Make=
+file.am
+> +}
 > +
 > +FILES_${PN} +=3D " \
 > +    ${datadir}/dbus-1 \
-> +    ${datadir}/polkit-1 \
+> +    ${datadir}/GConf \
 > +    ${datadir}/glib-2.0 \
-> +    ${datadir}/color \
-> +    ${systemd_user_unitdir} \
-> +    ${libdir}/tmpfiles.d \
-> +    ${libdir}/colord-plugins \
-> +    ${libdir}/colord-sensors \
+> +    ${libdir}/gtk-3.0 \
 > +"
 > +
-> +USERADD_PACKAGES =3D "${PN}"
-> +USERADD_PARAM_${PN} =3D "--system --user-group -d /var/lib/colord -s /bi=
-n/false colord"
-> diff --git a/meta-oe/recipes-support/colord/colord.inc b/meta-oe/recipes-=
-support/colord/colord.inc
-> new file mode 100644
-> index 000000000..7497fed51
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/colord/colord.inc
-> @@ -0,0 +1,13 @@
-> +SUMMARY =3D "Making color management just work"
-> +HOMEPAGE =3D "https://www.freedesktop.org/software/colord/"
-> +LICENSE =3D "GPLv2 & LGPLv2.1"
-> +LIC_FILES_CHKSUM =3D " \
-> +    file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4263 \
-> +    file://meson.build;beginline=3D3;endline=3D3;md5=3Df42198707d793be58=
-b274d34fd5238c3 \
+> +FILES_${PN}-dev +=3D " \
+> +    ${datadir}/gettext \
 > +"
 > +
-> +PV =3D "1.4.4"
-> +SRC_URI =3D "https://www.freedesktop.org/software/colord/releases/${BPN}=
--${PV}.tar.xz"
-> +SRC_URI[md5sum] =3D "32c2709a6002d9ee750483aaed6379c8"
-> +SRC_URI[sha256sum] =3D "9a0fe80160bf88efddb582a9fc0169f56065276dc3882c47=
-dddb9eecd048c0a5"
-> +
-> diff --git a/meta-oe/recipes-support/colord/colord/0001-Run-native-cd_idt=
-8-cd_create_profile.patch b/meta-oe/recipes-support/colord/colord/0001-Run-=
-native-cd_idt8-cd_create_profile.patch
+> diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipe=
+s-support/ibus/ibus.inc
 > new file mode 100644
-> index 000000000..4b52aa337
+> index 000000000..8b98b892a
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/colord/colord/0001-Run-native-cd_idt8-cd_cr=
-eate_profile.patch
-> @@ -0,0 +1,59 @@
-> +From 5aad8831c0fb71940d6c4f982b0b30ffb6ae33b3 Mon Sep 17 00:00:00 2001
+> +++ b/meta-gnome/recipes-support/ibus/ibus.inc
+> @@ -0,0 +1,33 @@
+> +SUMMARY =3D "Intelligent Input Bus for Linux/Unix"
+> +HOMEPAGE =3D "https://github.com/ibus/ibus/wiki"
+> +LICENSE =3D "LGPLv2.1"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857fcd118f065f900982=
+c24"
+> +
+> +inherit autotools-brokensep pkgconfig gobject-introspection gettext gtk-=
+doc vala
+> +
+> +PV =3D "1.5.21"
+> +SRC_URI =3D " \
+> +    git://github.com/ibus/ibus.git \
+> +    file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch=
+ \
+> +"
+> +SRCREV =3D "ae0040c73466bb6e78fce5e669a55fcce6ffd16d"
+> +S =3D "${WORKDIR}/git"
+> +
+> +PACKAGECONFIG[appindicator] =3D "--enable-appindicator,--disable-appindi=
+cator,qtbase"
+> +PACKAGECONFIG[dconf] =3D "--enable-dconf,--disable-dconf,dconf"
+> +PACKAGECONFIG[gtk2] =3D "--enable-gtk2,--disable-gtk2,gtk+"
+> +PACKAGECONFIG[gtk3] =3D "--enable-gtk3,--disable-gtk3,gtk+3"
+> +PACKAGECONFIG[wayland]  =3D "--enable-wayland,--disable-wayland,wayland"
+> +PACKAGECONFIG[vala]  =3D "--enable-vala,--disable-vala"
+> +PACKAGECONFIG[x11]  =3D "--enable-xim --enable-ui,--disable-xim --disabl=
+e-ui,virtual/libx11"
+> +
+> +EXTRA_OECONF =3D " \
+> +    --disable-tests \
+> +    --disable-emoji-dict \
+> +    --disable-python2 \
+> +"
+> +
+> +do_configure_prepend() {
+> +    touch ${S}/ChangeLog
+> +    touch ${S}/ABOUT-NLS
+> +}
+> diff --git a/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-star=
+t-dbus-we-do-not-have-dbus-lauch.patch b/meta-gnome/recipes-support/ibus/ib=
+us/0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch
+> new file mode 100644
+> index 000000000..3701d19f5
+> --- /dev/null
+> +++ b/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-start-dbus-=
+we-do-not-have-dbus-lauch.patch
+> @@ -0,0 +1,39 @@
+> +From f567bcbc2108d722faa90afeb03d3a3bcdf5f58b Mon Sep 17 00:00:00 2001
 > +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
 om>
-> +Date: Sun, 12 May 2019 22:47:05 +0200
-> +Subject: [PATCH] Run native cd_idt8/cd_create_profile
+> +Date: Fri, 10 May 2019 14:30:08 +0200
+> +Subject: [PATCH] Do not try to start dbus - we do not have dbus-lauch
 > +MIME-Version: 1.0
 > +Content-Type: text/plain; charset=3DUTF-8
 > +Content-Transfer-Encoding: 8bit
@@ -526,51 +225,31 @@ om>
 > +
 > +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 > +---
-> + data/cmf/meson.build        | 2 +-
-> + data/illuminant/meson.build | 2 +-
-> + data/profiles/meson.build   | 2 +-
-> + 3 files changed, 3 insertions(+), 3 deletions(-)
+> + data/dconf/make-dconf-override-db.sh | 6 ------
+> + 1 file changed, 6 deletions(-)
 > +
-> +diff --git a/data/cmf/meson.build b/data/cmf/meson.build
-> +index a693cd7..1ae3613 100644
-> +--- a/data/cmf/meson.build
-> ++++ b/data/cmf/meson.build
-> +@@ -2,7 +2,7 @@ foreach arg: [ 'CIE1964-10deg-XYZ', 'CIE1931-2deg-XYZ' ]
-> +   custom_target(arg,
-> +     input: arg + '.csv',
-> +     output: arg + '.cmf',
-> +-    command: [ cd_idt8, 'create-cmf', '@OUTPUT@', '@INPUT@', '1.0' ],
-> ++    command: [ 'cd_idt8', 'create-cmf', '@OUTPUT@', '@INPUT@', '1.0' ],
-> +     install: true,
-> +     install_dir: join_paths(datadir, 'colord', 'cmf')
-> +   )
-> +diff --git a/data/illuminant/meson.build b/data/illuminant/meson.build
-> +index f8dfa07..ad7dced 100644
-> +--- a/data/illuminant/meson.build
-> ++++ b/data/illuminant/meson.build
-> +@@ -24,7 +24,7 @@ foreach arg: generated_spectra
-> +   custom_target(arg,
-> +     input: arg + '.csv',
-> +     output: arg + '.sp',
-> +-    command: [ cd_idt8, 'create-sp', '@OUTPUT@', '@INPUT@', '100.0' ],
-> ++    command: [ 'cd_idt8', 'create-sp', '@OUTPUT@', '@INPUT@', '100.0' ]=
-,
-> +     install: true,
-> +     install_dir: join_paths(datadir, 'colord', 'illuminant')
-> +   )
-> +diff --git a/data/profiles/meson.build b/data/profiles/meson.build
-> +index 591b97d..2cef011 100644
-> +--- a/data/profiles/meson.build
-> ++++ b/data/profiles/meson.build
-> +@@ -59,7 +59,7 @@ foreach arg: icc_profiles
-> +   generated_icc =3D custom_target(arg + '.icc',
-> +     input: xml_i18n,
-> +     output: arg + '.icc',
-> +-    command: [ cd_create_profile, '--output=3D@OUTPUT@', '@INPUT@' ],
-> ++    command: [ 'cd_create_profile', '--output=3D@OUTPUT@', '@INPUT@' ],
-> +     install: true,
-> +     install_dir: join_paths(datadir, 'color', 'icc', 'colord'),
-> +   )
+> +diff --git a/data/dconf/make-dconf-override-db.sh b/data/dconf/make-dcon=
+f-override-db.sh
+> +index 9c650e97..02fbf059 100755
+> +--- a/data/dconf/make-dconf-override-db.sh
+> ++++ b/data/dconf/make-dconf-override-db.sh
+> +@@ -12,10 +12,6 @@ export XDG_CACHE_HOME=3D"$TMPDIR/cache"
+> + export GSETTINGS_SCHEMA_DIR=3D"$TMPDIR/schemas"
+> + mkdir -p $XDG_CONFIG_HOME $XDG_CACHE_HOME $GSETTINGS_SCHEMA_DIR
+> +
+> +-eval `dbus-launch --sh-syntax`
+> +-
+> +-trap 'rm -rf $TMPDIR; kill $DBUS_SESSION_BUS_PID' ERR
+> +-
+> + # in case that schema is not installed on the system
+> + glib-compile-schemas --targetdir "$GSETTINGS_SCHEMA_DIR" "$PWD"
+> +
+> +@@ -46,5 +42,3 @@ for schema in $schemas; do
+> + done
+> +
+> + rm -rf $TMPDIR
+> +-
+> +-kill $DBUS_SESSION_BUS_PID
 > +--
 > +2.20.1
 > +
