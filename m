@@ -1,32 +1,32 @@
 Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 918D77F972
+	by mail.openembedded.org (Postfix) with ESMTP id 535BC7FA9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 12:19:57 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,228,1569254400"; d="scan'208";a="77477608"
+	Fri, 25 Oct 2019 12:31:37 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,228,1569254400"; d="scan'208";a="77477962"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Oct 2019 20:19:58 +0800
+	by heian.cn.fujitsu.com with ESMTP; 25 Oct 2019 20:31:37 +0800
 Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 8F0654CE150E
+	by cn.fujitsu.com (Postfix) with ESMTP id EC2F84B6EC86
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 20:12:04 +0800 (CST)
+	Fri, 25 Oct 2019 20:23:41 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.35) by
 	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Fri, 25 Oct 2019 20:20:00 +0800
+	Server (TLS) id 15.0.1395.4; Fri, 25 Oct 2019 20:31:37 +0800
 From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 26 Oct 2019 04:14:21 +0800
-Message-ID: <1572034461-73779-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Date: Sat, 26 Oct 2019 04:25:51 +0800
+Message-ID: <1572035151-73961-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
 	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
-X-yoursite-MailScanner-ID: 8F0654CE150E.A5748
+X-yoursite-MailScanner-ID: EC2F84B6EC86.A7ACA
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-filesystems][PATCH] f2fs-tools: upgrade 1.11.0 -> 1.13.0
+Subject: [meta-filesystems][PATCH] xorriso: upgrade 1.4.0 -> 1.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,79 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 12:19:58 -0000
+X-List-Received-Date: Fri, 25 Oct 2019 12:31:39 -0000
 Content-Type: text/plain
-
-1) Upgrade f2fs-tools from 1.11.0 to 1.13.0.
-
-2) Remove patch 0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch as there is no AC_CHECK_FILE in configure.ac.
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- ...emove-AC_CHECK_FILE-for-cross-compilation.patch | 32 ----------------------
- .../{f2fs-tools_1.11.0.bb => f2fs-tools_1.13.0.bb} |  5 ++--
- 2 files changed, 2 insertions(+), 35 deletions(-)
- delete mode 100644 meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch
- rename meta-filesystems/recipes-utils/f2fs-tools/{f2fs-tools_1.11.0.bb => f2fs-tools_1.13.0.bb} (78%)
+ .../recipes-utils/xorriso/{xorriso_1.4.0.bb => xorriso_1.5.0.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-filesystems/recipes-utils/xorriso/{xorriso_1.4.0.bb => xorriso_1.5.0.bb} (86%)
 
-diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch
-deleted file mode 100644
-index cf844bf..0000000
---- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch
-+++ /dev/null
-@@ -1,32 +0,0 @@
--From 3b3c6e6376babcd9a0b0db312b0e1e3bb3ab833e Mon Sep 17 00:00:00 2001
--From: Sven Ebenfeld <sven.ebenfeld@vaillant.de>
--Date: Wed, 26 Nov 2014 10:36:44 +0100
--Subject: [PATCH] Remove AC_CHECK_FILE for cross compilation
--
-----
-- configure.ac | 7 +------
-- 1 file changed, 1 insertion(+), 6 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index 0111e72..8c286d4 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -20,14 +20,9 @@ AC_DEFINE([F2FS_MINOR_VERSION], m4_bpatsubst(f2fs_tools_version,
-- 				[\([0-9]*\).\([0-9]*\)\(\w\|\W\)*], [\2]),
-- 				[Minor version for f2fs-tools])
-- 
---AC_CHECK_FILE(.git,
---	AC_DEFINE([F2FS_TOOLS_DATE],
---		"m4_bpatsubst(f2fs_tools_gitdate,
---		[\([0-9-]*\)\(\w\|\W\)*], [\1])",
---		[f2fs-tools date based on Git commits]),
-- 	AC_DEFINE([F2FS_TOOLS_DATE],
-- 		"f2fs_tools_date",
---		[f2fs-tools date based on Source releases]))
--+		[f2fs-tools date based on Source releases])
-- 
-- AC_CONFIG_SRCDIR([config.h.in])
-- AC_CONFIG_HEADER([config.h])
---- 
--1.8.1.rc3
--
-diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.11.0.bb b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.13.0.bb
-similarity index 78%
-rename from meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.11.0.bb
-rename to meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.13.0.bb
-index 2240049..870281b 100644
---- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.11.0.bb
-+++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.13.0.bb
-@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=362b4b2594cd362b874a97718faa51d3"
- # to provide libuuid
- DEPENDS = "util-linux"
+diff --git a/meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb b/meta-filesystems/recipes-utils/xorriso/xorriso_1.5.0.bb
+similarity index 86%
+rename from meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb
+rename to meta-filesystems/recipes-utils/xorriso/xorriso_1.5.0.bb
+index b26709e..1c743ef 100644
+--- a/meta-filesystems/recipes-utils/xorriso/xorriso_1.4.0.bb
++++ b/meta-filesystems/recipes-utils/xorriso/xorriso_1.5.0.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
--# v1.11.0
--SRCREV = "b98fab3666e498c2e27ad9dcda6874c9b683f06b"
-+# v1.13.0
-+SRCREV = "284f77f0075a16a2ad1f3b0fb89b7f64a1bc755d"
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git \
--           file://0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch \
-            file://0001-f2fs-tools-Use-srcdir-prefix-to-denote-include-path.patch \
-            "
- S = "${WORKDIR}/git"
+ SRC_URI = "http://www.gnu.org/software/${BPN}/${BPN}-${PV}.tar.gz"
+ 
+-SRC_URI[md5sum] = "ec79fd2736b8da76e7a870e27cadf6fa"
+-SRC_URI[sha256sum] = "0bd1e085015b28c24f57697d6def2fe84517967dc417554c0c3ccf1685ed0e56"
++SRC_URI[md5sum] = "e5fbae9ada52730fbe248ab9a88e7127"
++SRC_URI[sha256sum] = "a93fa7ae5bb1902198cddfec25201388156932f36f2f5da829bf4fcae9a6062b"
+ 
+ PACKAGECONFIG ??= "acl attr zlib bzip2 readline"
+ PACKAGECONFIG[acl] = "--enable-libacl,--disable-libacl,acl,"
 -- 
 2.7.4
 
