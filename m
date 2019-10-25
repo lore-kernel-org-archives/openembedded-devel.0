@@ -1,49 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AE0C7FA8E
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id AFB547FAA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 17:32:03 +0000 (UTC)
-Received: by mail-pg1-f182.google.com with SMTP id w3so1973802pgt.5
+	Fri, 25 Oct 2019 17:34:29 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id t8so4423356qtc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 10:32:04 -0700 (PDT)
+	Fri, 25 Oct 2019 10:34:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=IY5gNFLRiTuANVDGOdFKpbUfbvigpGmQgN/6xaXFvTs=;
-	b=G9HPqwszHemx328uL4V1E33bIggUiBn9yO1gmTk4Bcnm33KqQjVpQcPAtOJAaAANbP
-	6PVnWHNhyBw38P3sVIaEWv3RLi6cdMS1lRZ7kiBahxMsS+6MxLDguV/+I3gorCVaNLuS
-	5XDJHj1/7SNFJ2xJCplTmdeE58wcERe6iqtF9repSsVsm0dAoICQatsGKmCabqtIpoou
-	r64lqySd1NYhGfRpKf1cqmIF+ELaa7iReX4m0Q02DiWCfpAtzBBwfsYl9ehV6e/54Hie
-	zPwBJCzP6rhVMGePU+alZkswS3iF5V3CLZ4njN9m6lg46meMcF3A5K/y06Aep5SIOI8v
-	K4wg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=fD5cUWaSynoqHqZww7MBkTjRxuou4I1aBorqoscESyM=;
+	b=hiWzXu1LOF7yuxEiGbQRTOiw9QiupwR62jujDh97q2bwJT3n3MhcDYdAM6IeQXylUp
+	lKSISfh00p/dolOogFvat9iiOEZCgbcAK9N7SZ8Ig9t+TgvtZYXljN1VhOv1sJOLwmJ/
+	REMdzSY4IrL2LvFvsj+gw0f59JqbZLu7pE359p40Gv8hig9eNnXfFLLby4COuAaxC+L+
+	p0ilnagTZEZHMvw316nUuzQ/yZNw4C9YUApQy9Qs30BfZ0FFlri/1qjsywCXbV/GqlAj
+	h9ROutS2k8mI2LvHJdCKYZ3J7LNYE+wRc0noDTCZ39lGlyuQ6t6dU1dmgOyGsS9Vck5f
+	oZGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=IY5gNFLRiTuANVDGOdFKpbUfbvigpGmQgN/6xaXFvTs=;
-	b=Yj7/S1PEElI6JP81wZnECUn8dzfGPSF4yskywT2/xow3nTmgMftSd9UTD6C/vxDTzI
-	dg12ZnOCstVBY4sGkMeG2i9JBsp3vEl8B1vc8kfiStBEr5h+pKV3RJSPY2yAgL142Iz/
-	MYq4MqscSFMLrWEx9oNN+/Is5NUUeOIC3/9JPwlq6dKznxu6FgCGulI7aNUwzx8qSTCN
-	szvrLIhNrQq8KPfzz5zG/M0+6PWVntqqwNqqKZ/+xqBRFuCZKFEIwNT1hIjVamXvVLGZ
-	BGU0EqEgK+O1aN7M5BmnTwVwH7B2PQ8NNtmyOH+cugRT6PUfPdphLPbaUg8lJLEgpCR7
-	4vYQ==
-X-Gm-Message-State: APjAAAVOL4HMKWHpXK7RPS6hElo0HISH9Nn87rNBrVFcJHxsHVbNQXQG
-	noYfYNlzHm+X4NHxC6VJynQCCBm3NgMbOw==
-X-Google-Smtp-Source: APXvYqwFLoxMqpizIqvO6/szcb2gKUsfMfv3gu3Da+dIq7LyX89gymo3XubFa5jqAq09UyFbnPqqXA==
-X-Received: by 2002:a62:68c1:: with SMTP id d184mr5730663pfc.195.1572024723752;
-	Fri, 25 Oct 2019 10:32:03 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::a6a5])
-	by smtp.gmail.com with ESMTPSA id c1sm3511547pjc.23.2019.10.25.10.32.03
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 25 Oct 2019 10:32:03 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Oct 2019 10:31:43 -0700
-Message-Id: <20191025173143.1426578-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=fD5cUWaSynoqHqZww7MBkTjRxuou4I1aBorqoscESyM=;
+	b=reb5gNKNyb2vxp069/CWh6cLWIHuwzsdil7f4fenuMV25h2HkQo+DpNM7dQY5MibrU
+	v9Q9w1kDWSacFiGon+txFTeXxRTgC3IZ1PDa28R7Z5FF2UsPhX5Uzfm6siIZI3JXdtSo
+	GrFHS//p88Z9/7eQgf0vUC3o03Zd92deJpGz9HNDZdsW6OqrSS3LMBk6Ei+DWnbWrYON
+	FUcO4CDBFlFS6eYdHh90Vrm1KewvdfGqpIkxECkuIHiq6MY5dHuJXEJQ56F5xihv70B0
+	Wj3mhuc9JPMXnOokgSNDGBZsS7PA7XzSomG0aIbjPSPuir1CdkGkMX9M0p0zkEBnmuGL
+	cbYw==
+X-Gm-Message-State: APjAAAXme1FXpEIk6QAKsRWmLdaKERhHuYNnA8n6LuYjlh5Z/vdY3fvx
+	1Nt9dIheZyZMt6Mx5fIBmq13CY/VC/p/MmR3uxvsxr70o7LWjQ==
+X-Google-Smtp-Source: APXvYqwa2UZi8icQlBtoSZ+yRzDYer8ROFThZ+KSTSVmaPVHk3aVl+/alf2t+GKpP5surJGzknsrDzqDQvARxzDmM78=
+X-Received: by 2002:a0c:ff44:: with SMTP id y4mr4257098qvt.99.1572024870212;
+	Fri, 25 Oct 2019 10:34:30 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] libiio: Inherit distutils3-base for packaging python files
+References: <20191025070808.2913-1-zangrc.fnst@cn.fujitsu.com>
+In-Reply-To: <20191025070808.2913-1-zangrc.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 25 Oct 2019 18:34:03 +0100
+Message-ID: <CAMKF1spg=wfY9bDCjXgs9jCOeqMeCPP9cmM8xvecywNASeQNCg@mail.gmail.com>
+To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking] [PATCH] autofs: upgrade 5.1.5 -> 5.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +53,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 17:32:03 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 25 Oct 2019 17:34:29 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v2: inherit distutils3-base not distutils-base
+fails on musl
 
- meta-oe/recipes-support/libiio/libiio_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+https://errors.yoctoproject.org/Errors/Details/274617/
 
-diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-index 4e57d5b77b..e6e0eaef8b 100644
---- a/meta-oe/recipes-support/libiio/libiio_git.bb
-+++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
- 
- S = "${WORKDIR}/git"
- 
--inherit cmake python3native systemd
-+inherit cmake python3native systemd distutils3-base
- 
- DEPENDS = " \
-     flex-native bison-native libaio \
--- 
-2.23.0
-
+On Fri, Oct 25, 2019 at 8:08 AM Zang Ruochen <zangrc.fnst@cn.fujitsu.com> wrote:
+>
+> -Refresh the following patch:
+>         autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
+>
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+> ---
+>  .../autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch          | 2 +-
+>  .../recipes-daemons/autofs/{autofs_5.1.5.bb => autofs_5.1.6.bb}       | 4 ++--
+>  2 files changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-networking/recipes-daemons/autofs/{autofs_5.1.5.bb => autofs_5.1.6.bb} (95%)
+>
+> diff --git a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
+> index 410827b..3928604 100644
+> --- a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
+> +++ b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
+> @@ -20,7 +20,7 @@ index 493b9f1..268d06b 100644
+>  --- a/configure.in
+>  +++ b/configure.in
+>  @@ -12,7 +12,7 @@ define([AC_CACHE_SAVE], )dnl
+> - AC_INIT(.autofs-5.1.5)
+> + AC_INIT(.autofs-5.1.6)
+>
+>   # for pkg-config macros
+>  -m4_include([/usr/share/aclocal/pkg.m4])
+> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
+> similarity index 95%
+> rename from meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb
+> rename to meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
+> index 9e43549..67d03d6 100644
+> --- a/meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb
+> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
+> @@ -28,8 +28,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
+>             "
+>
+>
+> -SRC_URI[md5sum] = "03b13168ec7bd66a6f2d5f6fea705eee"
+> -SRC_URI[sha256sum] = "86a8e56ea9d72bb53ff8cdfeefb5cafe983592c6b0178fb99c4a731e59879181"
+> +SRC_URI[md5sum] = "e6800e0afd6009ecdff148088c564050"
+> +SRC_URI[sha256sum] = "82094cad44f4e5c4f93eff2789cd66b57d7ab3fa646b7722d97608571001e694"
+>
+>  UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
+>
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
