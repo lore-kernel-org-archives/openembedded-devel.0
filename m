@@ -1,64 +1,52 @@
-Return-Path: <christophe.priouzeau@st.com>
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
-	[62.209.51.94])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BABA7FA6A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
+	[209.85.222.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 597D67FA5D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 07:40:45 +0000 (UTC)
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
-	by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
-	x9P7ZiGk019914 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 09:40:46 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com;
-	h=from : to : cc : subject
-	: date : message-id : references : in-reply-to : content-type :
-	content-transfer-encoding : mime-version; s=STMicroelectronics;
-	bh=T5LR8FZ5O5uBcT2+2wRfeR7fD+0ZpLGotkhLZMSd5vo=;
-	b=vBgLcofJ5mShxiTnyCcAZ67nRcaAqdmyk6dxCwZKEay9k1kNzntiDx5i3SzTv+GXQ3bv
-	G1CMjPRFSPYFrd0L7eP8+IqV2rGlR3aBwAPHUGggilrLs7XtCR2Ffr7Bi1FbwWH9NX5z
-	gTHC6Zi7ifgQ+5aikcw8fqd/RRZKVnmKrDFxLP7Vs579atLdLfgarXLbC/V0dTwqUU7y
-	aUNEiwtnAl/0S1lHDJjiClCALhDY+xX8zYBdsHt3RR7JSLlmIbgak+UaVbi/X/sLH+hR
-	CCmE1G+lMgAYxfU/xk653aQL6OnPbTmfRJLDQj86gVQNVfDmJgJ1LF7R6e5u+zNm8eqK
-	Cw== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-	by mx07-00178001.pphosted.com with ESMTP id 2vt9s1x91x-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 09:40:46 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-	by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B5113100038
+	Fri, 25 Oct 2019 09:08:55 +0000 (UTC)
+Received: by mail-qk1-f172.google.com with SMTP id e66so1047886qkf.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 09:40:45 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag6node1.st.com [10.75.127.16])
-	by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AD9342B97A1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 09:40:45 +0200 (CEST)
-Received: from SFHDAG6NODE2.st.com (10.75.127.17) by SFHDAG6NODE1.st.com
-	(10.75.127.16) with Microsoft SMTP Server (TLS) id 15.0.1473.3;
-	Fri, 25 Oct 2019 09:40:45 +0200
-Received: from SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6]) by
-	SFHDAG6NODE2.st.com ([fe80::a56f:c186:bab7:13d6%20]) with mapi id
-	15.00.1347.000; Fri, 25 Oct 2019 09:40:45 +0200
-From: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-python][PATCH 10/10] Python: ujson: Clarify BSD license
-	variant
-Thread-Index: AQHViweC/QPMTiNwXkek/aAqvXIAQw==
-Date: Fri, 25 Oct 2019 07:40:45 +0000
-Message-ID: <20191025074040.16602-10-christophe.priouzeau@st.com>
-References: <20191025074040.16602-1-christophe.priouzeau@st.com>
-In-Reply-To: <20191025074040.16602-1-christophe.priouzeau@st.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.51]
+	Fri, 25 Oct 2019 02:08:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=nZPnQzgdS7wiH+g45jydgY2tpOoYySKmGq8KfheQwIk=;
+	b=HyslE71Btjep/Tp2RXf33sCpkvdSrF6qK8dgjB140AcChrIWMpQyeiF6RxUGDjSy/s
+	TiGQRMgZdb5fEn53XJ6rsvJwrEaP2ugO+eO4P38g8bQlilP7PpcDYc/YdFx2p4Lo61vL
+	gMrbsaFT9rUjJv1TkbeMM+3/4corgYbTaOsYcEF46iYrZzfZjqUNjfFd/ZRMkBOYekG+
+	fyWImgT6Vkud5uxJ3Do7vzVTZa8Iknl6lVn8OvZdStaUgxgKh2fMhCB5NvRyzo6JvdUq
+	NoIzHiu2jVeXN13rQ2cnZbKhaGloVTPyjdcDM/Tb6rmr2FX2zHqItYP5onM3PEIDbXta
+	sLpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=nZPnQzgdS7wiH+g45jydgY2tpOoYySKmGq8KfheQwIk=;
+	b=UxJ0yKIRFF5KbEZkuL+jFjOCmle/7DyVu2vtIbCwDPBGb8QQkjH+0aLiPqKewoviEH
+	Ai/sVLJPOuWEPUL9ASLIEzP83h2lIprwXvrvYM5fssdeH0/njW4nZvLX5f6OrREwsP/r
+	/oVUxorM0dljNpP166ikAD9z1xgtdu3OYMR6+2KKH88/x1h3D9mip2sz6D0zrkwi2O8Y
+	hl/0UPlrGVbIr5kMBGIUYZxtjZ3ZgGTPn/ffAADaZ2OABU0ijP5l1tStiA+J/lgULrSg
+	kNw9uTiiQDgvOBcMVZ9y2EInwzlwmWdttmVhhlumV5Jui4i+etwESLIGQSdZ5Krs1gfY
+	bIqg==
+X-Gm-Message-State: APjAAAUSeRXdituG3B7CMWWZgTYr65ItM/LHNZ2dIO6Z4ZwIjFQWXpWM
+	Oht8UBLqgtePkTsKMR+cvdsWkwNQqfpJMXTPNnKWdmBrxNI=
+X-Google-Smtp-Source: APXvYqwThTeTMAJRFoOP/HRfNggm+G5XOTcyd2V2oV1YGNTQ8ES198uH4/YRfIBhkd6hd1LKCMMqoP0rmRaaG2KL93E=
+X-Received: by 2002:a05:620a:20d2:: with SMTP id
+	f18mr2011365qka.474.1571994535728; 
+	Fri, 25 Oct 2019 02:08:55 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
-	definitions=2019-10-25_04:2019-10-23,2019-10-25 signatures=0
-Cc: Christophe PRIOUZEAU <christophe.priouzeau@st.com>
-Subject: [meta-python][PATCH 10/10] Python: ujson: Clarify BSD license variant
+References: <20191009123218.19821-1-m.schwan@phytec.de>
+	<84402ad74c6fc2da7db63f59d9082c35b6686ee4.camel@phytec.de>
+	<CAMKF1srpMJYKpH05Z5Ubv7CB_nAQ3O70-z3V0O+MwedsOQrtEA@mail.gmail.com>
+	<CAMKF1sotEEJe9NwkD5+pht-MZW+WKAY+CKjyJ7h5miovyVZs1w@mail.gmail.com>
+	<9254d78a3ffd70fbda4f7fe4e5a10e8058a413cf.camel@phytec.de>
+In-Reply-To: <9254d78a3ffd70fbda4f7fe4e5a10e8058a413cf.camel@phytec.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 25 Oct 2019 10:08:44 +0100
+Message-ID: <CAMKF1srmNZGx=1G5B=rAaaNHJ=pWqwq=pT3art=Sv8XtFDS7=w@mail.gmail.com>
+To: Martin Schwan <m.schwan@phytec.de>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH v2] python-waitress: Add recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,34 +59,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 07:40:46 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Fri, 25 Oct 2019 09:08:56 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-The License of python ujson is BSD-3-Clause.
+On Fri, Oct 25, 2019 at 8:39 AM Martin Schwan <m.schwan@phytec.de> wrote:
 
-Signed-off-by: Christophe Priouzeau <christophe.priouzeau@st.com>
----
- meta-python/recipes-devtools/python/python-ujson.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> Ah, thank you! I should have checked that before. I expected to get a
+> notification email for merged or otherwise updated patches.
 
-diff --git a/meta-python/recipes-devtools/python/python-ujson.inc b/meta-py=
-thon/recipes-devtools/python/python-ujson.inc
-index c3d0bfeed..8f05de856 100644
---- a/meta-python/recipes-devtools/python/python-ujson.inc
-+++ b/meta-python/recipes-devtools/python/python-ujson.inc
-@@ -1,7 +1,7 @@
- SUMMARY  =3D "Ultra fast JSON encoder and decoder for Python"
- DESCRIPTION =3D "UltraJSON is an ultra fast JSON encoder and decoder writt=
-en in pure C with bindings for Python 2.5+ and 3."
-=20
--LICENSE =3D "BSD"
-+LICENSE =3D "BSD-3-Clause"
- LIC_FILES_CHKSUM =3D "file://PKG-INFO;beginline=3D8;endline=3D8;md5=3D88df=
-8e78b9edfd744953862179f2d14e"
-=20
- SRC_URI[md5sum] =3D "42f77b0cce686dfa4da2e68480b1dd24"
---=20
-2.17.1
+
+Usually patchwork should do that not sure if that=E2=80=99s working or not
+
+>
+>
+> On Fri, 2019-10-25 at 00:00 +0100, Khem Raj wrote:
+> > Now I see that its already in master see
+> >
+> >
+> https://git.openembedded.org/meta-openembedded/commit/?id=3Daaeb37656349d=
+b7f8562bf0ac1c11685f20a5212
+> >
+> > On Thu, Oct 24, 2019 at 1:46 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > > Hi Martin
+> > >
+> > > Thanks for following up on this usually patches appear on
+> patchwork.openembedded.org and I pick it up from there it seems either I
+> missed it or it did not appear on patchwork
+> > >
+> > > If it=E2=80=99s not staged in master-next and there is no response to=
+ it then
+> it went missing I am traveling these days so a bit sporadic on responses =
+I
+> will check it next time I am near computer and stage it if all is ok
+> > >
+> > > Thanks for your contribution
+> > >
+> > > On Thu, Oct 24, 2019 at 12:38 PM Martin Schwan <m.schwan@phytec.de>
+> wrote:
+> > > > Hi,
+> > > >
+> > > > just wanted to kindly ask if anyone had time reviewing this patch?
+> This
+> > > > is my first patch for this project, maybe I am missing something. I=
+s
+> > > > there anything that stops this from being merged?
+> > > >
+> > > > On Wed, 2019-10-09 at 14:32 +0200, Martin Schwan wrote:
+> > > > > Waitress is a pure-Python WSGI server.
+> > > > >
+> > > > > Signed-off-by: Martin Schwan <m.schwan@phytec.de>
+> > > > > ---
+> > > > > Changes in v2:
+> > > > >  - Fixed missing "K" in "LIC_FILES_CHKSUM"
+> > > > > ---
+> > > > >  .../recipes-devtools/python/python-waitress.inc        | 10
+> ++++++++++
+> > > > >  .../recipes-devtools/python/python-waitress_1.3.1.bb   |  2 ++
+> > > > >  .../recipes-devtools/python/python3-waitress_1.3.1.bb  |  2 ++
+> > > > >  3 files changed, 14 insertions(+)
+> > > > >  create mode 100644
+> meta-python/recipes-devtools/python/python-waitress.inc
+> > > > >  create mode 100644 meta-python/recipes-devtools/python/
+> python-waitress_1.3.1.bb
+> > > > >  create mode 100644 meta-python/recipes-devtools/python/
+> python3-waitress_1.3.1.bb
+> > > > >
+> > > > > diff --git
+> a/meta-python/recipes-devtools/python/python-waitress.inc
+> b/meta-python/recipes-devtools/python/python-waitress.inc
+> > > > > new file mode 100644
+> > > > > index 000000000..732c31dbd
+> > > > > --- /dev/null
+> > > > > +++ b/meta-python/recipes-devtools/python/python-waitress.inc
+> > > > > @@ -0,0 +1,10 @@
+> > > > > +SUMMARY =3D "A WSGI server for Python"
+> > > > > +DESCRIPTION =3D "Waitress is meant to be a production-quality
+> pure-Python WSGI \
+> > > > > +    server with very acceptable performance."
+> > > > > +HOMEPAGE =3D "https://github.com/Pylons/waitress"
+> > > > > +SECTION =3D "devel/python"
+> > > > > +LICENSE =3D "ZPL-2.1"
+> > > > > +LIC_FILES_CHKSUM =3D
+> "file://LICENSE.txt;md5=3D78ccb3640dc841e1baecb3e27a6966b2"
+> > > > > +
+> > > > > +SRC_URI[md5sum] =3D "d9132d313de0c5e0fec34ef9ede5442e"
+> > > > > +SRC_URI[sha256sum] =3D
+> "278e09d6849acc1365404bbf7d790d0423b159802e850c726e8cd0a126a2dac7"
+> > > > > diff --git a/meta-python/recipes-devtools/python/
+> python-waitress_1.3.1.bb b/meta-python/recipes-devtools/python/
+> python-waitress_1.3.1.bb
+> > > > > new file mode 100644
+> > > > > index 000000000..26a628ea0
+> > > > > --- /dev/null
+> > > > > +++ b/meta-python/recipes-devtools/python/python-waitress_1.3.1.b=
+b
+> > > > > @@ -0,0 +1,2 @@
+> > > > > +inherit setuptools pypi
+> > > > > +require python-waitress.inc
+> > > > > diff --git a/meta-python/recipes-devtools/python/
+> python3-waitress_1.3.1.bb b/meta-python/recipes-devtools/python/
+> python3-waitress_1.3.1.bb
+> > > > > new file mode 100644
+> > > > > index 000000000..83c8b66d8
+> > > > > --- /dev/null
+> > > > > +++ b/meta-python/recipes-devtools/python/
+> python3-waitress_1.3.1.bb
+> > > > > @@ -0,0 +1,2 @@
+> > > > > +inherit setuptools3 pypi
+> > > > > +require python-waitress.inc
+> > > > > --
+> > > > > 2.23.0
+> > > > >
+> > > >
+> > > > --
+> > > > _______________________________________________
+> > > > Openembedded-devel mailing list
+> > > > Openembedded-devel@lists.openembedded.org
+> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
