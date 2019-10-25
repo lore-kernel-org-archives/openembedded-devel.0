@@ -1,52 +1,34 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 30F767FA78
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 196957FAA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 16:53:10 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id o3so4206389qtj.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 09:53:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:mime-version:organization
-	:content-transfer-encoding;
-	bh=gHTvVdBsxxSidjhI4/WtwczHo1IzQT+2GuAg2GTbo7E=;
-	b=dteqancit5/xXugzUfbEHQc/2cn2jqfJnLrC85ZsxGHFOsVKDjXE/FBli4XsG/w5Qt
-	lMo3vST21oHfyowylIZuY9C33iCNzz3hmo6BJVXvHsFfAAy62P7pseH/RrqTv+jftxND
-	Egy++ME/JFiBlpUkxh7g17fSMBXjNba+UxvYoEIB+OHGRmifkl3NsbHlC2Y9jPV8qBq6
-	+2wVe3tAQcHpuFCyQ3Y/ONKf4/GlDj6W29tB9rNNUenjsgLLuSQzXqvwWQ5JBF0Hjf33
-	jzli80ceS7Av2AwV1GJh0yJ+21711e4NP4/IH3qcySQmtL9BqDe2SihzoPEP5MJadWhg
-	gEXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:organization:content-transfer-encoding;
-	bh=gHTvVdBsxxSidjhI4/WtwczHo1IzQT+2GuAg2GTbo7E=;
-	b=YkTpOlr3nBe/1Lb5AQXw48w4NRvrZ3p1nrHMyJ/WbW9RMLIn5HQmv68lZAa6OxOoA/
-	wrm6rm0loKmBnf8k/B3UyqP6GZQoD6gdRI4AT39+TlTIOLidgkXuquY0zOWzjSurfGNs
-	rXUJj6o+McFwiQM6qq2lLbdq5zH5vD1PwCjX+k89UxR1z2XGQiRo1APf0L5EnlKM7CsC
-	ESmRY3bToz3qXOWBMq7jISIFkQuhuXkoXNVhzHa6HRnDrahtYKgxZGhyUx5HR4M/7Wfr
-	WtsQCutzRnj1zU2YnsCFhg56K4Y4IkiYnlszXlHxEtnpwHMNREcwslub2N71Ex7uuL8h
-	R5rA==
-X-Gm-Message-State: APjAAAVyH+EBnNdQeo5QGyC/loe8Aybi6iJw/01Bv4XRjvUtk7NJDKHf
-	kFi6IeudThc9HlWuzbuoz5FZMg+cHmoSsw==
-X-Google-Smtp-Source: APXvYqxzeoOaQ361pSUmHfH5vkNrgR044XcSG2jwSq8b9BE80qxmIFvfJR8Belj0GNmarJAycBWWfQ==
-X-Received: by 2002:ac8:4241:: with SMTP id r1mr4094696qtm.111.1572022390921; 
-	Fri, 25 Oct 2019 09:53:10 -0700 (PDT)
-Received: from pikachu.lab.ossystems ([181.220.83.67])
-	by smtp.gmail.com with ESMTPSA id j2sm1408469qki.15.2019.10.25.09.53.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 25 Oct 2019 09:53:10 -0700 (PDT)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Oct 2019 13:52:55 -0300
-Message-Id: <20191025165255.27837-1-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.20.1
+	Fri, 25 Oct 2019 17:30:54 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x9PHUsFe011132
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 25 Oct 2019 10:30:54 -0700 (PDT)
+Received: from [172.25.44.8] (172.25.44.8) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 25 Oct 2019 10:30:54 -0700
+To: Marek <marek.bykowski@gmail.com>, =?UTF-8?Q?Micha=c5=82_Lower?=
+	<michal@pcb.red>
+References: <CAJNJ+3e6C_gwQ7Oyq0xKTiDCo47SHcr5naChERq0wFrk+r7N9w@mail.gmail.com>
+	<CAMKF1sr3YHNUOm=7AEU6VZJDSy-3CdeVgOXAiUvM0Z9e0n+4Sg@mail.gmail.com>
+	<CAJNJ+3daY1os_VUtVg8AU+POUK+E6q6GF-FkMx9dWfOEAmygEw@mail.gmail.com>
+	<CAMKF1soZwpo0YewBPFJRqg6BQRkftPfcMLn91Vj=J538wox-2w@mail.gmail.com>
+	<CAJNJ+3eixSQNxEd1WQKfucQ0ySh4N1qR9oGK=wLh=TrNN66M9g@mail.gmail.com>
+	<CAHw2UgD3Vbt6t=+oYvJec7k2g0xWEyqFr6DvC-9TtnJVvgvHUg@mail.gmail.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <c5392435-2c09-873a-235d-206fa0d9d026@windriver.com>
+Date: Fri, 25 Oct 2019 13:30:52 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.1.2
 MIME-Version: 1.0
-Organization: O.S. Systems Software LTDA.
-Subject: [meta-python][PATCH] python*-setuptools-scm: Update to version 3.3.3
+In-Reply-To: <CAHw2UgD3Vbt6t=+oYvJec7k2g0xWEyqFr6DvC-9TtnJVvgvHUg@mail.gmail.com>
+X-Originating-IP: [172.25.44.8]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] update python setuptools-scm from 2.1.0 to 3.3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,42 +41,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 16:53:11 -0000
+X-List-Received-Date: Fri, 25 Oct 2019 17:30:55 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-CA
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
----
- meta-python/recipes-devtools/python/python-setuptools-scm.inc | 4 ++--
- ...setuptools-scm_2.1.0.bb => python-setuptools-scm_3.3.3.bb} | 0
- ...etuptools-scm_2.1.0.bb => python3-setuptools-scm_3.3.3.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-setuptools-scm_2.1.0.bb => python-setuptools-scm_3.3.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-setuptools-scm_2.1.0.bb => python3-setuptools-scm_3.3.3.bb} (100%)
+On 10/24/19 5:45 AM, Marek wrote:
+> Or use any other email client like Claws, works perfectly for upstream patches
 
-diff --git a/meta-python/recipes-devtools/python/python-setuptools-scm.inc b/meta-python/recipes-devtools/python/python-setuptools-scm.inc
-index 98883ec39..a7e1bf6ad 100644
---- a/meta-python/recipes-devtools/python/python-setuptools-scm.inc
-+++ b/meta-python/recipes-devtools/python/python-setuptools-scm.inc
-@@ -2,8 +2,8 @@ SUMMARY = "the blessed package to manage your versions by scm tags"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+Marek,
+   Is the client going to behave better than git send-email?
+
+Michał,
+
+Did you look at:
+   https://git-scm.com/docs/git-send-email/
+for:
+   "Use gmail as the smtp server" ?
+
+Our docs:
  
--SRC_URI[md5sum] = "cfec5d2dbbd0a85c40066f79035b5878"
--SRC_URI[sha256sum] = "a767141fecdab1c0b3c8e4c788ac912d7c94a0d6c452d40777ba84f918316379"
-+SRC_URI[md5sum] = "50b2199082fe808d032ec1710c9d7415"
-+SRC_URI[sha256sum] = "bd25e1fb5e4d603dcf490f1fde40fb4c595b357795674c3e5cb7f6217ab39ea5"
- 
- PYPI_PACKAGE = "setuptools_scm"
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-setuptools-scm_2.1.0.bb b/meta-python/recipes-devtools/python/python-setuptools-scm_3.3.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-setuptools-scm_2.1.0.bb
-rename to meta-python/recipes-devtools/python/python-setuptools-scm_3.3.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-setuptools-scm_2.1.0.bb b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-setuptools-scm_2.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
+https://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded#Sending_using_git-send-email
+
+do cover the basic setup but don't cover a multifactor authentication
+setup that the man page mentions. If that works for Michał, we can
+add a sentence and a link in the OE Howto doc.
+Send patches to yourself or to me if you want to try it out.
+
+Thanks,
+
+../Randy
+
+> 
+> On Thu, 24 Oct 2019 at 11:07, Michał Lower <michal@pcb.red> wrote:
+>>
+>> thanks for the hint, will do.
+>>
+>> czw., 24 paź 2019 o 11:03 Khem Raj <no-reply@forwardemail.net> napisał(a):
+>>>
+>>> On Thu, Oct 24, 2019 at 9:48 AM Michał Lower <michal@pcb.red> wrote:
+>>>>
+>>>>> please use git format-patch to generate it
+>>>> This is exactly what I've did. Sadly it appears that Gmail inserts
+>>>> line breaks on its own. Can I send the patch as an attachment so it
+>>>> will be kept intact? I cannot use git send-email since it doesn't
+>>>> support gmail two actor authentication and my account doesn't allow
+>>>> for application passwords.
+>>>
+>>> yeah I see. if you use github then send a pull request against
+>>> https://github.com/openembedded/meta-openembedded
+>>> I do process that as well.
+>>>
+>>>>
+>>>> czw., 24 paź 2019 o 10:18 Khem Raj <no-reply@forwardemail.net> napisał(a):
+>>>>>
+>>>>> Hi Michał
+>>>>>
+>>>>> This patch appears malformed. So please use git format-patch to
+>>>>> generate it and git send-email to send it also rebase it on top of
+>>>>> latest master
+>>>>>
+>>>>> On Tue, Oct 22, 2019 at 9:03 AM Michał Lower <michal@pcb.red> wrote:
+>>>>>>
+>>>>>> Previous version fails to compile for zeus branch. Upgrading fixes that.
+>>>>>>
+>>>>>> Signed-off-by: Michal Lower <michal at pcb.red>
+>>>>>> ---
+>>>>>>   meta-python/recipes-devtools/python/python-setuptools-scm.inc | 4 ++--
+>>>>>>   ...setuptools-scm_2.1.0.bb => python-setuptools-scm_3.3.3.bb} | 0
+>>>>>>   ...etuptools-scm_2.1.0.bb => python3-setuptools-scm_3.3.3.bb} | 0
+>>>>>>   3 files changed, 2 insertions(+), 2 deletions(-)
+>>>>>>   rename meta-python/recipes-devtools/python/{python-setuptools-scm_2.1.0.bb
+>>>>>> => python-setuptools-scm_3.3.3.bb} (100%)
+>>>>>>   rename meta-python/recipes-devtools/python/{python3-setuptools-scm_2.1.0.bb
+>>>>>> => python3-setuptools-scm_3.3.3.bb} (100%)
+>>>>>>
+>>>>>> diff --git a/meta-python/recipes-devtools/python/python-setuptools-scm.inc
+>>>>>> b/meta-python/recipes-devtools/python/python-setuptools-scm.inc
+>>>>>> index 98883ec39..a7e1bf6ad 100644
+>>>>>> --- a/meta-python/recipes-devtools/python/python-setuptools-scm.inc
+>>>>>> +++ b/meta-python/recipes-devtools/python/python-setuptools-scm.inc
+>>>>>> @@ -2,8 +2,8 @@ SUMMARY = "the blessed package to manage your versions
+>>>>>> by scm tags"
+>>>>>>   LICENSE = "MIT"
+>>>>>>   LIC_FILES_CHKSUM =
+>>>>>> "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+>>>>>>
+>>>>>> -SRC_URI[md5sum] = "cfec5d2dbbd0a85c40066f79035b5878"
+>>>>>> -SRC_URI[sha256sum] =
+>>>>>> "a767141fecdab1c0b3c8e4c788ac912d7c94a0d6c452d40777ba84f918316379"
+>>>>>> +SRC_URI[md5sum] = "50b2199082fe808d032ec1710c9d7415"
+>>>>>> +SRC_URI[sha256sum] =
+>>>>>> "bd25e1fb5e4d603dcf490f1fde40fb4c595b357795674c3e5cb7f6217ab39ea5"
+>>>>>>
+>>>>>>   PYPI_PACKAGE = "setuptools_scm"
+>>>>>>   inherit pypi
+>>>>>> diff --git a/meta-python/recipes-devtools/python/python-setuptools-scm_2.1.0.bb
+>>>>>> b/meta-python/recipes-devtools/python/python-setuptools-scm_3.3.3.bb
+>>>>>> similarity index 100%
+>>>>>> rename from meta-python/recipes-devtools/python/python-setuptools-scm_2.1.0.bb
+>>>>>> rename to meta-python/recipes-devtools/python/python-setuptools-scm_3.3.3.bb
+>>>>>> diff --git a/meta-python/recipes-devtools/python/python3-setuptools-scm_2.1.0.bb
+>>>>>> b/meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
+>>>>>> similarity index 100%
+>>>>>> rename from meta-python/recipes-devtools/python/python3-setuptools-scm_2.1.0.bb
+>>>>>> rename to meta-python/recipes-devtools/python/python3-setuptools-scm_3.3.3.bb
+>>>>>> --
+>>>>>> 2.17.1
+>>>>>> --
+>>>>>> _______________________________________________
+>>>>>> Openembedded-devel mailing list
+>>>>>> Openembedded-devel@lists.openembedded.org
+>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> 
+> 
+
+
 -- 
-2.20.1
-
+# Randy MacLeod
+# Wind River Linux
 
