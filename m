@@ -1,49 +1,32 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-il1-f195.google.com (mail-il1-f195.google.com
-	[209.85.166.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E55F7FA0D
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 23B617F7DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 12:07:45 +0000 (UTC)
-Received: by mail-il1-f195.google.com with SMTP id o16so1601953ilq.9
+	Fri, 25 Oct 2019 12:18:03 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,228,1569254400"; d="scan'208";a="77477544"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 Oct 2019 20:18:03 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id B46264CE1507
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Oct 2019 05:07:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=zRdgmpnCtANE/VY65hliq1KiPf/dm8tgbCIZUydyj9M=;
-	b=Tcpg3Be7veTZLdfPoyHzW9UKkYXCkxSZ0T6c9/nHhS+qcXTB0ZOePIc4fjw2s9vT/t
-	daqOKvjr+Q3R7iMKQ1PV3JtZ6ix27fXhi/y30XFNCXdwXWk0fXB0/yIjjyxkpHnnzF0D
-	Jc8V8PT4hZXHxvpBs66qvAfAxzXSlaFV8OqtdpiYMS2cpej2Lxx0UG4fJeS4rAn6D518
-	K1DKKn2ovUYPOeLcKML1H3XVu/0dy3sED1f2OsGe0HvljgOc2FjyL7QtL1eIoFIVxzIf
-	lb+t5g03cYlJgpLJzFIrh2qPCK5Lq8DHEckp17ZJoiSF18755zDBPCDpxPP7L/yhLMjk
-	Fkzg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=zRdgmpnCtANE/VY65hliq1KiPf/dm8tgbCIZUydyj9M=;
-	b=fhRp3G0baIHXBe6mniDIa91gcYe8W2NXWGanBorZuWw/KZUwMgnmmu69oimqvPZk7c
-	CxiQDBNHQFFBWtjDWogDH9ytPmuCzITRydYoi8SbZ6PsLyjjXnmo+JyAQJgJEoglsoES
-	lz0ZkTN54o7hl6s4nSR9qtYVJo1cuZ4Ot6zjfgbUH8SAYdNNCpkDFVUIzJ62j4W9SlCy
-	aDtGcNhUT8yNE6jfpinsfstgnVmfoZUC0Ls7Zy/o2tIfnNNZfb6Bm9vTB/qIbHeKelu9
-	UoHk8f8wIWK4Ms4CxpSRXFUzkQ7z0tO4bUGpSujYxpE7jkNYBIcM2Q5RGgO5UcyDunpt
-	OMqw==
-X-Gm-Message-State: APjAAAVhaiZBeDMWeZnvWfr3cOCrH49yxEHtJBaSt7wDrrYe1gglgLGN
-	29hDfntMUzC5g9Od4Sbrnv+6rZECwNweRyF6JK7rxQ==
-X-Google-Smtp-Source: APXvYqxtJSjFLtFl2hYtMp4cVBWZ99Tf8bMPu6/7V0svP/p7qqGFMuQwrJfAZx7H8w/3HaZyMpZGmlQapXzIlDTKeZc=
-X-Received: by 2002:a92:9e08:: with SMTP id q8mr4024577ili.108.1572005266149; 
-	Fri, 25 Oct 2019 05:07:46 -0700 (PDT)
+	Fri, 25 Oct 2019 20:10:08 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Fri, 25 Oct 2019 20:18:04 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sat, 26 Oct 2019 04:12:19 +0800
+Message-ID: <1572034339-73575-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20191025072113.11172-1-schnitzeltony@gmail.com>
-	<20191025072113.11172-10-schnitzeltony@gmail.com>
-	<20191025114506.GA24586@localhost>
-In-Reply-To: <20191025114506.GA24586@localhost>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 25 Oct 2019 14:07:34 +0200
-Message-ID: <CALbNGRQTdYJd4BgyEDuNr1KwtScJZR-0KZR6U___Ut7uW47GPg@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 09/15] zenity: pretify recipe a bit
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
+X-yoursite-MailScanner-ID: B46264CE1507.A4C9A
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-filesystems][PATCH] simple-mtpfs: upgrade to 0.3.0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,32 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Oct 2019 12:07:45 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 25 Oct 2019 12:18:05 -0000
+Content-Type: text/plain
 
-On Fri, Oct 25, 2019 at 1:45 PM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Fri, Oct 25, 2019 at 09:21:07AM +0200, Andreas M=C3=BCller wrote:
-> >...
-> > -SRC_URI =3D "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GN=
-OMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=3Darchive \
-> > +SRC_URI =3D " \
-> > +    ${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${=
-PV}.tar.${GNOME_COMPRESS_TYPE};name=3Darchive \
-> >      file://0001-build-don-t-generate-manual.patch \
-> >  "
-> >...
->
-> This should also stop overwriting the gnomebase SRC_URI, replace with:
->
-> SRC_URI +=3D " \
->     file://0001-build-don-t-generate-manual.patch \
-> "
->
-> cu
-> Adrian
-LOL - V2 will come
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-Andreas
+diff --git a/meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_git.bb b/meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_git.bb
+index f85977f..595b349 100644
+--- a/meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_git.bb
++++ b/meta-filesystems/recipes-filesystems/simple-mtpfs/simple-mtpfs_git.bb
+@@ -7,7 +7,8 @@ DEPENDS = "fuse libmtp"
+ 
+ inherit autotools pkgconfig
+ 
++# 0.3.0
+ SRC_URI = "git://github.com/phatina/simple-mtpfs.git;protocol=https;branch=master"
+-SRCREV = "a7ab64c7e4d7aca155cbc7ce9412aaf68ef6e404"
++SRCREV = "c9a691fc52fafaa55d26ac629856153c0514015a"
+ 
+ S = "${WORKDIR}/git"
+-- 
+2.7.4
+
+
+
 
