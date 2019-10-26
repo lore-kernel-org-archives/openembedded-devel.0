@@ -1,45 +1,46 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
-	[209.85.221.51])
-	by mail.openembedded.org (Postfix) with ESMTP id E78F17FC11
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
+	[209.85.221.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C12D7F7E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Oct 2019 08:43:41 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id c2so4822665wrr.10
+	Sat, 26 Oct 2019 09:06:09 +0000 (UTC)
+Received: by mail-wr1-f50.google.com with SMTP id z11so4844801wro.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Oct 2019 01:43:43 -0700 (PDT)
+	Sat, 26 Oct 2019 02:06:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=to:cc:from:subject:openpgp:autocrypt:message-id:date:user-agent
-	:mime-version:content-transfer-encoding:content-language;
-	bh=2TskLE6SVkNxI2d7UA5/Xid773d1lqAEKMpnLHUOBNk=;
-	b=veKB1jhGdOQerfDPcYguJ5GGyLUzzkqD397NQpdhIy+E6lqfdNu/UqYCXkW6Z1isjg
-	Llkm9MX0Zl9S124/2f7pi7tjMdLl+1SnrK/AaqucGKn1Wg/K49Yzrd1420fm+1bxdM8i
-	UaIXlVqrzx1i+kMRbiZiHg/B0C3UyAYqNocMdkmr/CTDKSOtEQg5uoe4K9IB/Rs6vTZq
-	NANRc3NM4G4TdJERe0RL89x89tPTLt9daP79h9pWlJg3C/LXOaDo8rFG/G6RO0mJNI/x
-	m2DZ+fHEGj9stCtaU4oZL/YKXtLdZ2GYESvKTMGxShjEsfqE5PCFprD+LXPdcTo9NywW
-	ZoKA==
+	h=to:followup-to:from:subject:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:content-transfer-encoding:content-language;
+	bh=wDkrTFCywexR9WqtlYkz0p2578QfwSLwX0sAChrweEE=;
+	b=mtuphorJTI5vObJwWdnUzHZ7yP+KbVEd6RO1EGmUesbOoeVaFusCXyg8f2gpuaEjsL
+	/QxUOiGTJmtRl3ZnpawLBkc0Mymz3g6OSKLcV0G/qx9B4vVcodoeOKXbvb4N/+TUszt+
+	IUfic+KVaNmTH3Lkepca4/VlZhzUOMuM11V/QUTAHcV6PMJV80tn4HC2FI4KIzpz7tVN
+	YBAZmvb9MYPKSMka4CFByOVb2jHbHngosACddt4OPDtM6WYU3b4RILBbBzWGxRG5lARg
+	0g/5Z75hM4jVRUX2GHGDBwonGr8UYke8qIqzyszx9MygHHUgfaTttmAVSj6u771UO3FL
+	S9pw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:cc:from:subject:openpgp:autocrypt:message-id
-	:date:user-agent:mime-version:content-transfer-encoding
+	h=x-gm-message-state:to:followup-to:from:subject:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:content-transfer-encoding
 	:content-language;
-	bh=2TskLE6SVkNxI2d7UA5/Xid773d1lqAEKMpnLHUOBNk=;
-	b=G3SmrvjRXBuWbm4eyImRRqR5jZyl5J1JLQTnD+EZBo0E49whj2fWgE1GOKMb+P+fq1
-	pZGkTXcLANNO1BJQu0YnZmFmkV0SYIHtYpZnbqcVa7JF8YYaRJZPw0d9nfW3q5wWqNaS
-	EFHj4eO9ZJNma4V90VB5A4SflOlbYoZktv+/nk1ZoDsX5Bg4KS03O/D6TYQHWJ4ro8V6
-	5GoQ9a2/jFInYgO03owVrx7OoaZdx/EhfC9PenSL5VQokbB9KIjv1zqsh6YtA+H5ID8b
-	IxyjMU+RGguNL50aFAGr5ZssspEFYRxVuCtQ+tnPRaoZbhB+icnloHkArcU8e5EawzT5
-	iEXA==
-X-Gm-Message-State: APjAAAUeSv0JXq2u7qLQMRnBg+Yi1153B9u8Yt7giHbpxiN4xfUJEdPD
-	FPT4CuEGN8aI73IHiUoEeQk=
-X-Google-Smtp-Source: APXvYqwDjn+lv846hbGpe2fgdntJRBJRyMxadi8l+CVNf8/tB/YZovSVa6iePGebhecsXoHugYJlTw==
-X-Received: by 2002:adf:fe12:: with SMTP id n18mr6970020wrr.114.1572079422425; 
-	Sat, 26 Oct 2019 01:43:42 -0700 (PDT)
+	bh=wDkrTFCywexR9WqtlYkz0p2578QfwSLwX0sAChrweEE=;
+	b=Gtt0ohtjWaZsQPWYefZLsF8BvMyg9lhTnxINYqcGGKdPtL4RoMeVuzt12/tXTcBXKG
+	Z6dXDarnK/hru3+Z44SdoVBVxyBo9rSdgrnJYhR9kJ0URwtfHjD4mATog+IhN5s8xV80
+	+H/XWCCbQ1GLKq4CGO5Gz9OSf5ROI+bFjA/E2JVMGsp+GQVjNWTDJUPnJVPsxc9HW896
+	rSqaLA0PYuVZMXKxGXNJD6nqEsJ64pyxweuNBo5OLiadsZ7qUvK37z9NTLQSUjNTfsSd
+	crRvH1hYwuG4ZNZVuVZ4LlWOwrR0RC7eJ6RUKQ+eQueuSFvgcYhhoIUD4us7g7AiULIV
+	DUVg==
+X-Gm-Message-State: APjAAAWXewcx6YxL31kYHnXn6UGzjcXBR+tU1lYQlKxnDvzuj3nIU7vx
+	gtwN2ZTwj2xNqR7tgqKFe6lhwMAFMNc=
+X-Google-Smtp-Source: APXvYqxI6W3YTDBy3L6/HanGfnW44L5MinMBsZFgWsBH9Xl0mOKZ6/fDpUwpSotl4vRJ6yj1BHEiaQ==
+X-Received: by 2002:adf:e542:: with SMTP id z2mr6226368wrm.338.1572080770464; 
+	Sat, 26 Oct 2019 02:06:10 -0700 (PDT)
 Received: from [10.192.11.162] ([178.18.58.186])
-	by smtp.gmail.com with ESMTPSA id
-	a17sm6493848wrx.84.2019.10.26.01.43.41
+	by smtp.gmail.com with ESMTPSA id l8sm4859237wru.22.2019.10.26.02.06.09
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 26 Oct 2019 01:43:42 -0700 (PDT)
+	Sat, 26 Oct 2019 02:06:09 -0700 (PDT)
 To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Followup-To: Khem Raj <raj.khem@gmail.com>
 From: akuster808 <akuster808@gmail.com>
 Openpgp: preference=signencrypt
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
@@ -85,12 +86,12 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <7dcc70b4-c510-c20d-4afc-8f6d53b82589@gmail.com>
-Date: Sat, 26 Oct 2019 01:43:41 -0700
+Message-ID: <4dda49b3-8eb9-b89b-5a1a-a8a396cbd17f@gmail.com>
+Date: Sat, 26 Oct 2019 02:06:09 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
 	Thunderbird/60.9.0
 MIME-Version: 1.0
-Subject: warrior pull request
+Subject: thud merge quest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -103,79 +104,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Oct 2019 08:43:42 -0000
+X-List-Received-Date: Sat, 26 Oct 2019 09:06:10 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
-The following changes since commit f4ccdf2bc3fe4f00778629088baab840c868e36b:
+The following changes since commit 2d088d252624b19df384aecc434d23afb636178f:
 
-  mariadb: update SRC_URI to use archive.mariadb.org (2019-10-09
-11:26:58 -0700)
+  postgres: update to 10.10 (2019-09-04 17:34:11 -0700)
 
 are available in the git repository at:
 
-  git://git.openembedded.org/meta-openembedded warrior-next
+  git://git.openembedded.org/meta-openembedded thud-next
 
-for you to fetch changes up to a24acf94d48d635eca668ea34598c6e5c857e3f8:
+for you to fetch changes up to 446bd615fd7cb9bc7a159fe5c2019ed08d1a7a93:
 
-  tcpdump: Delete unused patch (2019-10-19 08:25:27 -0700)
+  tcpdump: Fix CVE-2017-16808 (2019-10-05 09:01:00 -0700)
 
 ----------------------------------------------------------------
-Andreas Müller (3):
-      xfce4-panel: Draw icons/background properly when compositing is
-disabled
-      polkit-group-rules: Fix error in do_rootfs for rpm package-manager
-      vlc: rework qt PACKAGECONFIG
+Dan Tran (1):
+      polkit: Fix CVE-2018-19788
 
-Khem Raj (1):
-      xorg-fonts-100dpi: Change License Custom -> MIT
+Denys Dmytriyenko (1):
+      mariadb: update SRC_URI, as 5.5.64 has moved to archive
 
-Martin Jansa (1):
-      python3-twofish: Fix missing return statements in module stubs
+Peiran Hong (1):
+      tcpdump: Fix CVE-2017-16808
 
-Pavel Modilaynen (1):
-      jsoncpp: add native BBCLASSEXTEND
-
-Peiran Hong (2):
-      tcpdump: upgrade 4.9.2 -> 4.9.3
-      tcpdump: Delete unused patch
-
-Peter Kjellerstedt (1):
-      kconfig-frontends: Retrieve the Git repository from GitLab
-
-Qi.Chen@windriver.com (1):
-      protobuf-c: fix race condition
-
- meta-multimedia/recipes-multimedia/vlc/vlc.inc     | 24 ++++---
- ...2017-16808-AoE-Add-a-missing-bounds-check.patch | 61 -----------------
- .../tcpdump/tcpdump/add-ptest.patch                |  9 +--
- ...-absolute-path-when-searching-for-libdlpi.patch | 19 ++---
- .../recipes-support/tcpdump/tcpdump/run-ptest      |  4 +-
- .../tcpdump/unnecessary-to-check-libpcap.patch     | 15 ++--
- .../tcpdump/{tcpdump_4.9.2.bb => tcpdump_4.9.3.bb} | 12 +++-
- meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.4.bb  |  2 +
- .../kconfig-frontends_4.11.0.1.bb                  |  4 +-
- .../protobuf-c/0001-avoid-race-condition.patch     | 36 ++++++++++
- .../recipes-devtools/protobuf/protobuf-c_1.3.1.bb  |  3 +-
- .../recipes-extended/polkit/polkit-group-rule.inc  |  2 +-
- .../xorg-font/xorg-fonts-100dpi.bb                 |  2 +-
- ...missing-return-statements-in-module-stubs.patch | 38 ++++++++++
- .../python/python3-twofish_0.3.0.bb                |  2 +
- ...y-Fix-icons-without-compositing-Bug-14577.patch | 80
-++++++++++++++++++++++
- .../recipes-xfce/xfce4-panel/xfce4-panel_4.13.4.bb |  1 +
- 17 files changed, 214 insertions(+), 100 deletions(-)
- delete mode 100644
+ ...2017-16808-AoE-Add-a-missing-bounds-check.patch |  61 +++++++
+ .../recipes-support/tcpdump/tcpdump_4.9.2.bb       |   1 +
+ meta-oe/recipes-dbs/mysql/mariadb.inc              |   2 +-
+ .../polkit/polkit/CVE-2018-19788_p1.patch          | 194
++++++++++++++++++++++
+ .../polkit/polkit/CVE-2018-19788_p2.patch          | 153 ++++++++++++++++
+ .../polkit/polkit/CVE-2018-19788_p3.patch          |  53 ++++++
+ meta-oe/recipes-extended/polkit/polkit_0.115.bb    |   3 +
+ 7 files changed, 466 insertions(+), 1 deletion(-)
+ create mode 100644
 meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-16808-AoE-Add-a-missing-bounds-check.patch
- rename meta-networking/recipes-support/tcpdump/{tcpdump_4.9.2.bb =>
-tcpdump_4.9.3.bb} (74%)
  create mode 100644
-meta-oe/recipes-devtools/protobuf/protobuf-c/0001-avoid-race-condition.patch
+meta-oe/recipes-extended/polkit/polkit/CVE-2018-19788_p1.patch
  create mode 100644
-meta-python/recipes-devtools/python/python3-twofish/0001-Fix-missing-return-statements-in-module-stubs.patch
+meta-oe/recipes-extended/polkit/polkit/CVE-2018-19788_p2.patch
  create mode 100644
-meta-xfce/recipes-xfce/xfce4-panel/files/0002-systray-Fix-icons-without-compositing-Bug-14577.patch
-
+meta-oe/recipes-extended/polkit/polkit/CVE-2018-19788_p3.patch
 
 
