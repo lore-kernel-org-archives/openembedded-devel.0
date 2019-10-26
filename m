@@ -1,47 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6046A6C0C0
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+	[209.85.210.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 773107FC32
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Oct 2019 07:18:34 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id o25so6865738qtr.5
+	Sat, 26 Oct 2019 08:39:44 +0000 (UTC)
+Received: by mail-pf1-f169.google.com with SMTP id v19so3307213pfm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Oct 2019 00:18:35 -0700 (PDT)
+	Sat, 26 Oct 2019 01:39:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=5BmEvsiugDKgyPkyBftmF4evfXZI/giM5Wbfhooxf0s=;
-	b=QgK8puc/aDp2oZ0pvo+ErcQGN5UlSZrWRLIR0u5IWhjg5qVGrL4PDV2K1FUTwGBZmr
-	XiSmjbTbyjUrF/6MfL6wRsVlUsmq48dTs0PAFxikIWHI7e+vGE47Yhu2aUUzpy3qNKVS
-	Oe8hh0uPRxdr/f0zb5gQ8itOKHpVP7vURsQdw3X4pRdU/pCKYFGuogL3Ir29DgO5HRGo
-	Fcn4fzhIrG/+OW4TvA9R34zvkAw38zY72UszfFcF8gXnf4XBr7Br9E9HmHqAPAa3ScBB
-	nTpyUu/eiUojYSCW9UzePBlbCmq++QxTXni+5rtGH97K0HwIYdouabrGOm/Hj/qwIHYq
-	P27Q==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=v9FG6MHDo0iswwruHtDum4U/uOpwclwnVMz9i/CyCbQ=;
+	b=oFmH/uZfdMb2XhHA4Mfxib9/ypbS0vL0SVwsbwzOCQeEmYyTqh9YaeniXq+LtBE1hQ
+	1p3n0YuDRXauWBWIB2QACG9OkVhuFzuVRfDM/u8LIO6uncppcgXDT+Bh0sfcqvTBFtiG
+	gnrgcJChjI9vlRqD20a4Y9aMCCv5FPOMZzJEr6j2kJ6dVthD0EFSLfOhrWTlUxfnBITk
+	bTMuUfBMHP+4W5q9KjSCznx2vB/bP0qgJMRVo1YahjaC6utTkUS+zT3B4ZhYy/8pyzSb
+	ywTmDVbHMPi+C0AdclShaN/fZtVR84y+DWyN2A2i5UG9ZV67RVHNy/WiqOXQy1xjLzEW
+	0PkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=5BmEvsiugDKgyPkyBftmF4evfXZI/giM5Wbfhooxf0s=;
-	b=MD4wUvBwbxB0JccGfXo8WdIjS8swMdKLlRMPrD+nCFX3J5fTn+qVjsIZvRvEyFh5NE
-	OY1e5c9DVx47bOf5IogD4TCX9HP4tmPKEDyJxdWd0rPhUPxRlx1MOtWIwmborrsPXX6F
-	8gQBQqda6042PDh5f38KpTR8FNj0qUIbMnnAFFdJR6DoPfUNI6Kw1kY1fbhbhWcQU/iG
-	wRmMniHihb/olh5yeq5VBwGh7mfXEIcIea8zOFixS606/kwZDQvrcXZG7IMltXQDL3vz
-	ZELobVyAryFWxarMBt4Xd/hOqfX2G1nw8LoACP0tlbDNcCwupbiX51M5H9w1MX1jtaa9
-	lk3A==
-X-Gm-Message-State: APjAAAWE9rfR1RveDW8FnbfxnGP/UkC8p8KTQ4kKEh2tGL6wCTqF8M5z
-	vKaIKzDY+/aF0nvmkPZAGMHk4BZdOPXR5Bzvgis=
-X-Google-Smtp-Source: APXvYqzX3vJvv4nhtDdvnwTQY/Xi7c5R03rSO41pEw99PqNvV/ln0enGagEAhWrl/p8naoWaYXqPUMVb+ES3mALtomM=
-X-Received: by 2002:ac8:7617:: with SMTP id t23mr7320811qtq.88.1572074314762; 
-	Sat, 26 Oct 2019 00:18:34 -0700 (PDT)
-MIME-Version: 1.0
-References: <20191025191221.17914-1-luca.boccassi@gmail.com>
-	<20191025191221.17914-2-luca.boccassi@gmail.com>
-In-Reply-To: <20191025191221.17914-2-luca.boccassi@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=v9FG6MHDo0iswwruHtDum4U/uOpwclwnVMz9i/CyCbQ=;
+	b=fvcn3Oep1HaTkG6NcdIKavyEBNbA9PIak/93F/H1lWwefClZEfeR9ZNYcd7XL/ci+H
+	cYNKJk9+HMy30bl0Wq7JKituDznwWgaWqnARgBboFMnQttZoWcgKvNpqACkeTKzxKtOY
+	ghXed9SINCduKg+04RWopmk8DZvB0Q0v2Bg5fzRl9lDlMMgEUxLoCHSOQH2P5Y2d8TOh
+	23ndk2j0CGuxl4lf7DOn4H7Ipih0p2pVxDsjIJLev5m4Nor5AVyOtau6nrKbKsM6gt3A
+	LYLcpQNR/HiJ6R53LPm1Hm93d0LNNOvwfbTRGBbpAit/0M6WFvXIYMGTcMmiGzA8D87v
+	vCSw==
+X-Gm-Message-State: APjAAAVokLJh1aT6DTD2VFhhMoGFm5iSJq40QkP0ZuY5QX10T878Md2M
+	QtSpXIGzn0SxtLimIiNgOSWeb/Jus61hJQ==
+X-Google-Smtp-Source: APXvYqxb7RYoljBN8p67By2yPy3ila1ELzW7FiDvna1TB7m64cUg8fSQ6qRnAtSvO7XmbI2sgE7lxw==
+X-Received: by 2002:a63:471b:: with SMTP id u27mr9169968pga.96.1572079184520; 
+	Sat, 26 Oct 2019 01:39:44 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::a6a5])
+	by smtp.gmail.com with ESMTPSA id
+	u68sm5022459pfu.39.2019.10.26.01.39.43
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 26 Oct 2019 01:39:43 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 26 Oct 2019 08:18:08 +0100
-Message-ID: <CAMKF1soK6n8t2trCx7N8vkpZ7CcJpLZdVzFuQ7bYipAHcH2+qw@mail.gmail.com>
-To: Luca Boccassi <luca.boccassi@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/3] dbus-broker: backport patches from master
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 26 Oct 2019 01:39:27 -0700
+Message-Id: <20191026083927.2700529-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] open-vm-tools: Fix build by removing deprecated G_INLINE_FUNC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,289 +57,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Oct 2019 07:18:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 26 Oct 2019 08:39:44 -0000
+Content-Transfer-Encoding: 8bit
 
-On Fri, Oct 25, 2019 at 8:13 PM <luca.boccassi@gmail.com> wrote:
->
-> From: Luca Boccassi <luca.boccassi@microsoft.com>
->
-> These patches fix issues found in Fedora 30, which switched from
-> dbus-daemon to dbus-broker.
-> These backports align meta-oe to Fedora 30.
->
-> Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
-> ---
->  ...h-improve-error-handling-for-opendir.patch | 48 +++++++++++
->  ...he-constant-used-for-invalid-timesta.patch | 86 +++++++++++++++++++
->  ...s-socket-treat-MSG_CTRUNC-gracefully.patch | 83 ++++++++++++++++++
->  meta-oe/recipes-core/dbus/dbus-broker_21.bb   |  3 +
->  4 files changed, 220 insertions(+)
->  create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/0001-launch-improve-error-handling-for-opendir.patch
->  create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/0002-metrics-change-the-constant-used-for-invalid-timesta.patch
->  create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/0003-dbus-socket-treat-MSG_CTRUNC-gracefully.patch
->
-> diff --git a/meta-oe/recipes-core/dbus/dbus-broker/0001-launch-improve-error-handling-for-opendir.patch b/meta-oe/recipes-core/dbus/dbus-broker/0001-launch-improve-error-handling-for-opendir.patch
-> new file mode 100644
-> index 000000000..ccc175bb8
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/dbus/dbus-broker/0001-launch-improve-error-handling-for-opendir.patch
-> @@ -0,0 +1,48 @@
-> +From f42d5e38859c65a186acd0da94bbeeca12faf7a2 Mon Sep 17 00:00:00 2001
-> +From: David Rheinsberg <david.rheinsberg@gmail.com>
-> +Date: Thu, 2 May 2019 17:33:34 +0200
-> +Subject: [PATCH] launch: improve error handling for opendir()
-> +
-> +This improves the error-handling of opendir() by always printing
-> +diagnostics. Furthermore, it aligns the behavior with dbus-deamon and
-> +ignores EACCES.
-> +
-> +Signed-off-by: David Rheinsberg <david.rheinsberg@gmail.com>
-> +Upstream-Status: dbus-broker@f42d5e38859c65a186acd0da94bbeeca12faf7a2
-> +---
-> + src/launch/launcher.c | 17 +++++++++++++++--
-> + 1 file changed, 15 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/src/launch/launcher.c b/src/launch/launcher.c
-> +index 31a5364..2ec4bda 100644
-> +--- a/src/launch/launcher.c
-> ++++ b/src/launch/launcher.c
-> +@@ -749,10 +749,23 @@ static int launcher_load_service_dir(Launcher *launcher, const char *dirpath, NS
-> +
-> +         dir = opendir(dirpath);
-> +         if (!dir) {
-> +-                if (errno == ENOENT || errno == ENOTDIR)
-> ++                if (errno == ENOENT || errno == ENOTDIR) {
-> +                         return 0;
-> +-                else
-> ++                } else if (errno == EACCES) {
-> ++                        log_append_here(&launcher->log, LOG_ERR, 0, NULL);
-> ++                        r = log_commitf(&launcher->log, "Access denied to service directory '%s'\n", dirpath);
-> ++                        if (r)
-> ++                                return error_fold(r);
-> ++
-> ++                        return 0;
-> ++                } else {
-> ++                        log_append_here(&launcher->log, LOG_ERR, errno, NULL);
-> ++                        r = log_commitf(&launcher->log, "Unable to open service directory '%s': %m\n", dirpath);
-> ++                        if (r)
-> ++                                return error_fold(r);
-> ++
-> +                         return error_origin(-errno);
-> ++                }
-> +         }
-> +
-> +         r = dirwatch_add(launcher->dirwatch, dirpath);
-> +--
-> +2.20.1
-> +
-> diff --git a/meta-oe/recipes-core/dbus/dbus-broker/0002-metrics-change-the-constant-used-for-invalid-timesta.patch b/meta-oe/recipes-core/dbus/dbus-broker/0002-metrics-change-the-constant-used-for-invalid-timesta.patch
-> new file mode 100644
-> index 000000000..67a2dc46f
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/dbus/dbus-broker/0002-metrics-change-the-constant-used-for-invalid-timesta.patch
-> @@ -0,0 +1,86 @@
-> +From 3570b3e9ba367f10718b56336ce32d5254f66575 Mon Sep 17 00:00:00 2001
-> +From: Tom Gundersen <teg@jklm.no>
-> +Date: Thu, 9 May 2019 13:00:37 +0200
-> +Subject: [PATCH] metrics: change the constant used for invalid timestamps
-> +
-> +Use (uint64_t)-1 rather than 0 to indicate an invalid timestamp. It
-> +should not be possible for the kernel to return 0 from
-> +clock_gettime(), but we have received some reports of our asserts
-> +triggering, so avoid the issue entirely  by using -1 instead (which
-> +really can never be returned).
-> +
-> +See https://retrace.fedoraproject.org/faf/reports/2539484/
-> +
-> +Signed-off-by: Tom Gundersen <teg@jklm.no>
-> +Upstream-Status: dbus-broker@3570b3e9ba367f10718b56336ce32d5254f66575
-> +---
-> + src/util/metrics.c | 8 ++++----
-> + src/util/metrics.h | 9 ++++++---
-> + 2 files changed, 10 insertions(+), 7 deletions(-)
-> +
-> +diff --git a/src/util/metrics.c b/src/util/metrics.c
-> +index b5a7182..eef94eb 100644
-> +--- a/src/util/metrics.c
-> ++++ b/src/util/metrics.c
-> +@@ -26,7 +26,7 @@ void metrics_init(Metrics *metrics, clockid_t id) {
-> + }
-> +
-> + void metrics_deinit(Metrics *metrics) {
-> +-        c_assert(!metrics->timestamp);
-> ++        c_assert(metrics->timestamp == METRICS_TIMESTAMP_INVALID);
-> +         metrics_init(metrics, metrics->id);
-> + }
-> +
-> +@@ -82,7 +82,7 @@ void metrics_sample_add(Metrics *metrics, uint64_t timestamp) {
-> +  * a sample is not currently running.
-> +  */
-> + void metrics_sample_start(Metrics *metrics) {
-> +-        c_assert(!metrics->timestamp);
-> ++        c_assert(metrics->timestamp == METRICS_TIMESTAMP_INVALID);
-> +         metrics->timestamp = metrics_get_time(metrics);
-> + }
-> +
-> +@@ -93,11 +93,11 @@ void metrics_sample_start(Metrics *metrics) {
-> +  * End a currently running sample, and update the internal state.
-> +  */
-> + void metrics_sample_end(Metrics *metrics) {
-> +-        c_assert(metrics->timestamp);
-> ++        c_assert(metrics->timestamp != METRICS_TIMESTAMP_INVALID);
-> +
-> +         metrics_sample_add(metrics, metrics->timestamp);
-> +
-> +-        metrics->timestamp = 0;
-> ++        metrics->timestamp = METRICS_TIMESTAMP_INVALID;
-> + }
-> +
-> + /**
-> +diff --git a/src/util/metrics.h b/src/util/metrics.h
-> +index a8ee915..b00dee6 100644
-> +--- a/src/util/metrics.h
-> ++++ b/src/util/metrics.h
-> +@@ -8,6 +8,8 @@
-> + #include <stdlib.h>
-> + #include <time.h>
-> +
-> ++#define METRICS_TIMESTAMP_INVALID ((uint64_t) -1)
-> ++
-> + typedef struct Metrics Metrics;
-> +
-> + struct Metrics {
-> +@@ -23,9 +25,10 @@ struct Metrics {
-> +         uint64_t sum_of_squares;
-> + };
-> +
-> +-#define METRICS_INIT(_id) {                     \
-> +-                .minimum = (uint64_t) -1,       \
-> +-                .id = (_id),                    \
-> ++#define METRICS_INIT(_id) {                                     \
-> ++                .minimum = (uint64_t) -1,                       \
-> ++                .id = (_id),                                    \
-> ++                .timestamp = METRICS_TIMESTAMP_INVALID,         \
-> +         }
-> +
-> + void metrics_init(Metrics *metrics, clockid_t id);
-> +--
-> +2.21.0
-> +
-> diff --git a/meta-oe/recipes-core/dbus/dbus-broker/0003-dbus-socket-treat-MSG_CTRUNC-gracefully.patch b/meta-oe/recipes-core/dbus/dbus-broker/0003-dbus-socket-treat-MSG_CTRUNC-gracefully.patch
-> new file mode 100644
-> index 000000000..53f9e71aa
-> --- /dev/null
-> +++ b/meta-oe/recipes-core/dbus/dbus-broker/0003-dbus-socket-treat-MSG_CTRUNC-gracefully.patch
-> @@ -0,0 +1,83 @@
-> +From 520c47c53deeb893e03194fefaf3c5b9223ede27 Mon Sep 17 00:00:00 2001
-> +From: David Rheinsberg <david.rheinsberg@gmail.com>
-> +Date: Fri, 10 May 2019 10:58:06 +0200
-> +Subject: [PATCH] dbus/socket: treat MSG_CTRUNC gracefully
-> +
-> +As it turns out, LSMs allow clients to trigger a MSG_CTRUNC on the
-> +remote side of a unix socket. Whenever LSMs reject the transmission of
-> +an FD, they will simply drop the FD and set MSG_CTRUNC, without any
-> +other error notification.
-> +
-> +Therefore, we must assume any occurance of MSG_CTRUNC is trigger by a
-> +client. This makes it impossible to consider MSG_CTRUNC for any other
-> +error handling, and as such we are left to disconnecting the client and
-> +ignoring the flag.
-> +
-> +Luckily, MSG_CTRUNC is expected for any other event, so we only used it
-> +for diagnostics so far.
-> +
-> +Signed-off-by: David Rheinsberg <david.rheinsberg@gmail.com>
-> +Upstream-Status: dbus-broker@520c47c53deeb893e03194fefaf3c5b9223ede27
-> +---
-> + src/dbus/socket.c | 44 +++++++++++++++++++++++++++++++++-----------
-> + 1 file changed, 33 insertions(+), 11 deletions(-)
-> +
-> +diff --git a/src/dbus/socket.c b/src/dbus/socket.c
-> +index cacdff2..6e6ba10 100644
-> +--- a/src/dbus/socket.c
-> ++++ b/src/dbus/socket.c
-> +@@ -593,18 +593,40 @@ static int socket_recvmsg(Socket *socket,
-> +
-> +         if (msg.msg_flags & MSG_CTRUNC) {
-> +                 /*
-> +-                 * This flag means the control-buffer was too small to retrieve
-> +-                 * all data. If this can be triggered remotely, it means a peer
-> +-                 * can cause us to miss FDs. Hence, we really must protect
-> +-                 * against this.
-> +-                 * We do provide suitably sized buffers to be prepared for any
-> +-                 * possible scenario. So if this happens, something is fishy
-> +-                 * and we better report it.
-> +-                 * Note that this is also reported by the kernel if we exceeded
-> +-                 * our NOFILE limit. Since this implies resource
-> +-                 * misconfiguration as well, we treat it the same way.
-> ++                 * Our control-buffer-size is carefully calculated to be big
-> ++                 * enough for any possible ancillary data we expect. Therefore,
-> ++                 * the kernel should never be required to truncate it, and thus
-> ++                 * MSG_CTRUNC will never be set. This is also foward compatible
-> ++                 * to future extensions to the ancillary data, since these must
-> ++                 * be enabled explicitly before the kernel considers forwarding
-> ++                 * them.
-> ++                 *
-> ++                 * Unfortunately, the SCM_RIGHTS implementation might set this
-> ++                 * flag as well. In particular, if not all FDs can be returned
-> ++                 * to user-space, MSG_CTRUNC will be set (signalling that the
-> ++                 * FD-set is non-complete). No other error is returned or
-> ++                 * signalled, though. There are several reasons why the FD
-> ++                 * transmission can fail. Most importantly, if we exhaust our
-> ++                 * FD limit, further FDs will simply be discarded. We are
-> ++                 * protected against this by our accounting-quotas, but we
-> ++                 * would still like to catch this condition and warn loudly.
-> ++                 * However, FDs are also dropped if the security layer refused
-> ++                 * the transmission of the FD in question. This means, if an
-> ++                 * LSM refuses the D-Bus client to send us an FD, the FD is
-> ++                 * just dropped and MSG_CTRUNC will be set. This can be
-> ++                 * triggered by clients.
-> ++                 *
-> ++                 * To summarize: In an ideal world, we would expect this flag
-> ++                 * to never be set, and we would just use
-> ++                 * `error_origin(-ENOTRECOVERABLE)` to provide diagnostics.
-> ++                 * Unfortunately, the gross misuse of this flag for LSM
-> ++                 * security enforcements means we have to assume any occurence
-> ++                 * of MSG_CTRUNC means the client was refused to send a
-> ++                 * specific message. Our only possible way to deal with this is
-> ++                 * to disconnect the client.
-> +                  */
-> +-                r = error_origin(-ENOTRECOVERABLE);
-> ++                socket_close(socket);
-> ++                r = SOCKET_E_LOST_INTEREST;
-> +                 goto error;
-> +         }
-> +
-> +--
-> +2.21.0
-> +
-> diff --git a/meta-oe/recipes-core/dbus/dbus-broker_21.bb b/meta-oe/recipes-core/dbus/dbus-broker_21.bb
-> index 0b0301fe0..fd77afc60 100644
-> --- a/meta-oe/recipes-core/dbus/dbus-broker_21.bb
-> +++ b/meta-oe/recipes-core/dbus/dbus-broker_21.bb
-> @@ -8,6 +8,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
->
->  SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-broker-${PV}.tar.xz"
->  SRC_URI[sha256sum] = "6fff9a831a514659e2c7d704e76867ce31ebcf43e8d7a62e080c6656f64cd39e"
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ....-Remove-references-to-deprecated-G_.patch | 94 +++++++++++++++++++
+ .../open-vm-tools/open-vm-tools_11.0.1.bb     |  1 +
+ 2 files changed, 95 insertions(+)
+ create mode 100644 meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
 
-It seems to be missing md5sum also move is below SRC_URI for formatting sake
+diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
+new file mode 100644
+index 0000000000..6cb5dfcccb
+--- /dev/null
++++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch
+@@ -0,0 +1,94 @@
++From 6fb28085e867d7c3ef46577d9ff193a185693bcb Mon Sep 17 00:00:00 2001
++From: Oliver Kurth <okurth@vmware.com>
++Date: Mon, 30 Sep 2019 16:24:27 -0700
++Subject: [PATCH] GitHub Issue #367. Remove references to deprecated G_INLINE_FUNC.
++
++G_INLINE_FUNC was a work-around for compilers that didn't support
++static inline.  Change uses of it to static inline.
++
++Upstream-Status: Backport
++[https://github.com/vmware/open-vm-tools/commit/89c0d444567eb525e8d083fb564c46d68e96660c]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ open-vm-tools/lib/include/vmware/tools/plugin.h     | 2 +-
++ open-vm-tools/lib/include/vmware/tools/threadPool.h | 8 ++++----
++ open-vm-tools/lib/include/vmware/tools/utils.h      | 9 ---------
++ 3 files changed, 5 insertions(+), 14 deletions(-)
++
++diff --git a/open-vm-tools/lib/include/vmware/tools/plugin.h b/open-vm-tools/lib/include/vmware/tools/plugin.h
++index f9acc6a2..deefd1f3 100644
++--- a/open-vm-tools/lib/include/vmware/tools/plugin.h
+++++ b/open-vm-tools/lib/include/vmware/tools/plugin.h
++@@ -290,7 +290,7 @@ typedef struct ToolsAppCtx {
++  *
++  * @return TRUE if COM is initialized when the function returns.
++  */
++-G_INLINE_FUNC gboolean
+++static inline gboolean
++ ToolsCore_InitializeCOM(ToolsAppCtx *ctx)
++ {
++    if (!ctx->comInitialized) {
++diff --git a/open-vm-tools/lib/include/vmware/tools/threadPool.h b/open-vm-tools/lib/include/vmware/tools/threadPool.h
++index 3f2082b3..5880fbcf 100644
++--- a/open-vm-tools/lib/include/vmware/tools/threadPool.h
+++++ b/open-vm-tools/lib/include/vmware/tools/threadPool.h
++@@ -91,7 +91,7 @@ typedef struct ToolsCorePool {
++  *******************************************************************************
++  */
++ 
++-G_INLINE_FUNC ToolsCorePool *
+++static inline ToolsCorePool *
++ ToolsCorePool_GetPool(ToolsAppCtx *ctx)
++ {
++    ToolsCorePool *pool = NULL;
++@@ -123,7 +123,7 @@ ToolsCorePool_GetPool(ToolsAppCtx *ctx)
++  *******************************************************************************
++  */
++ 
++-G_INLINE_FUNC guint
+++static inline guint
++ ToolsCorePool_SubmitTask(ToolsAppCtx *ctx,
++                          ToolsCorePoolCb cb,
++                          gpointer data,
++@@ -153,7 +153,7 @@ ToolsCorePool_SubmitTask(ToolsAppCtx *ctx,
++  *******************************************************************************
++  */
++ 
++-G_INLINE_FUNC void
+++static inline void
++ ToolsCorePool_CancelTask(ToolsAppCtx *ctx,
++                          guint taskId)
++ {
++@@ -197,7 +197,7 @@ ToolsCorePool_CancelTask(ToolsAppCtx *ctx,
++  *******************************************************************************
++  */
++ 
++-G_INLINE_FUNC gboolean
+++static inline gboolean
++ ToolsCorePool_StartThread(ToolsAppCtx *ctx,
++                           const gchar *threadName,
++                           ToolsCorePoolCb cb,
++diff --git a/open-vm-tools/lib/include/vmware/tools/utils.h b/open-vm-tools/lib/include/vmware/tools/utils.h
++index f6574590..a3292d5c 100644
++--- a/open-vm-tools/lib/include/vmware/tools/utils.h
+++++ b/open-vm-tools/lib/include/vmware/tools/utils.h
++@@ -51,15 +51,6 @@
++ #  include <sys/time.h>
++ #endif
++ 
++-
++-/* Work around a glib limitation: it doesn't set G_INLINE_FUNC on Win32. */
++-#if defined(G_PLATFORM_WIN32)
++-#  if defined(G_INLINE_FUNC)
++-#     undef G_INLINE_FUNC
++-#  endif
++-#  define G_INLINE_FUNC static __inline
++-#endif
++-
++ #ifndef ABS
++ #  define ABS(x) (((x) >= 0) ? (x) : -(x))
++ #endif
++-- 
++2.23.0
++
+diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
+index 5dcf818381..e43a39b613 100644
+--- a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
++++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_11.0.1.bb
+@@ -38,6 +38,7 @@ SRC_URI = "git://github.com/vmware/open-vm-tools.git;protocol=https \
+     file://0011-Use-uintmax_t-for-handling-rlim_t.patch;patchdir=.. \
+     file://0012-Use-off64_t-instead-of-__off64_t.patch;patchdir=.. \
+     file://0013-misc-Do-not-print-NULL-string-into-logs.patch;patchdir=.. \
++    file://0001-GitHub-Issue-367.-Remove-references-to-deprecated-G_.patch;patchdir=.. \
+ "
+ SRCREV = "d3edfd142a81096f9f58aff17d84219b457f4987"
+ 
+-- 
+2.23.0
 
-> +SRC_URI_append += "file://0001-launch-improve-error-handling-for-opendir.patch"
-> +SRC_URI_append += "file://0002-metrics-change-the-constant-used-for-invalid-timesta.patch"
-> +SRC_URI_append += "file://0003-dbus-socket-treat-MSG_CTRUNC-gracefully.patch"
-
-Please add it to main SRC_URI there is no need for appends then.
-
->
->  inherit meson pkgconfig systemd distro_features_check
->
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
