@@ -1,47 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f53.google.com (mail-io1-f53.google.com
-	[209.85.166.53])
-	by mail.openembedded.org (Postfix) with ESMTP id D325A7F8AE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
+	[209.85.222.180])
+	by mail.openembedded.org (Postfix) with ESMTP id DEAB17FA6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 15:33:20 +0000 (UTC)
-Received: by mail-io1-f53.google.com with SMTP id s17so573961iol.12
+	Sun, 27 Oct 2019 15:56:37 +0000 (UTC)
+Received: by mail-qk1-f180.google.com with SMTP id c25so65972qkk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 08:33:22 -0700 (PDT)
+	Sun, 27 Oct 2019 08:56:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=gChB5il3qP1nyVgnEP5WmxYLMQrvxRDVnxz5eWLzUC4=;
-	b=gQ4zofPELzwm//r0iZe63wmuwF+goD+CJHkObxlwPMhj9IB7sMcAuyB98gZ+4IVa2y
-	jBwxEeAmWTJSqzWP9r4vb0p4X8UvdCU2DKIoEL5ur6Sp8/evY60AQ09qlsPRBZ8XEgTQ
-	IE6YDzXfgrB1O7uoxT4hq4KX03/qYD8J0gGOaw0xkxAa4IdBIrD0bsfUC+wC7eSe+/R0
-	O7sqYnhtVnbu4TSaZ6UV7QAtJoUtVp/x8DU1Xj/HwlKQoIUpge6UvqyzLZZFqr6MaVmJ
-	a2J3sfCrAMyWpkNRMSIzv9/gJAGW5jAeNyyD9MLTn9U/MuBVKjIBFUk45bBXcwNFlk36
-	LzIQ==
+	:cc:content-transfer-encoding;
+	bh=EJGB6lQw7Icp0HHnwLb+noGEUvcuAAb2dJtFd0/j6wc=;
+	b=ZDQ13trzeP4eDNA6ZZR0qqAv2cQyy35SvwZgTqNWGGemPuqzKQ8xKjjiXzTiTM4bsL
+	gwDhKnNOkXzG06Ir/BMWFbIyZxkypheQjojq2sprMhlNk59RQEehy+Sa6LumYw8hYZ8B
+	nn8VK4NbkXY33/LRwI2k3Q4dgXmq5fvq0MeegXT6bOvue6KulCUJ0Sb3vAgtHPqCB6sG
+	mL1ENzN7xntxAC+lttt5SG6Mmms1VeaEJhP0txYKwBpIQYwmNuL0wZYjIlw9Jtn5aT3z
+	+pJstNEyQUjh17icorpqz2pocdZZxT5nMA/1d9lJtmelMjByNWLib3fbaumJ9iICokjC
+	MJ+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=gChB5il3qP1nyVgnEP5WmxYLMQrvxRDVnxz5eWLzUC4=;
-	b=jI7Db+RWjEHXc73KUX3nrzISkYejMTMq8UfwnBU/At3QMsRvx1A7a5zCbFT0UAAI0+
-	T8Z5H8S+qjY96a0e7mPaQFeWKbOaLJj9HQH6TunXhMcTrfkwDsvO5HphwZ1Xbg9jM3Up
-	w4Y97j29qxR8K6jW9CsogtyKqeBxxv8L9XUc2zqZ2Wz/h6O0Xh/fHT3q/tiIn76whukW
-	lybZfvPYkuIW26dAKzNacMczjLYjRXPsYieMdpE8OgZYlinzeLEcC7wTTSUYlQm3/TGu
-	GsIRF6HTxyFNq3stvjRzaN4di3hKqHNB7P9U7FyLfs3hGg2OT0yzfDROGSK8FId5GFpU
-	589Q==
-X-Gm-Message-State: APjAAAWn9TWNCcISUhmRMbz9ARxEz2J0lwlVigLbCisZey0Rfp5pXzSe
-	wanfMqhx41b8e6hV5Vz631e5I3cahIfPHR5Q7RU69cTf
-X-Google-Smtp-Source: APXvYqzE6UgUs6Yci6asL9pwEoxhiqUzYoQ4ivOpoVxh4MkAnEH5o7iusNgZqng2Dy2GhonRQHNMm26XFl6AzF6tpME=
-X-Received: by 2002:a05:6638:6a6:: with SMTP id
-	d6mr4693176jad.21.1572190401428; 
-	Sun, 27 Oct 2019 08:33:21 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=EJGB6lQw7Icp0HHnwLb+noGEUvcuAAb2dJtFd0/j6wc=;
+	b=UCwmDjBODlKiRT0i1yHkYQKlbsaeHJ0vJknWjPIzZIZma5vIsFcy9JOIzI+geij/ph
+	tU/ZOP/puAAgvQT/mp3iUSD9smKXZLYj5M3LLrH9dxqr1XouqGN+1EbZzq4EcRDnJLkc
+	/zbvVUCcYKR+ykYG83bpNSEGFIrxIOegvhtramebSirt9/DfD9sQw3784AQzvsFlaA/F
+	IRLW0Da4bFLgjRGFyfPuQ4MyvaLVWgJbCS+Z1TkgDOro+GcZz+uqALI8+T6iEoB1fxQp
+	VV81n0eP9wp9Yi+H//tTbgk4sJSjdwr2+z+FP1GeiuDLo76g5eG5jkh9f35SYXXY46ML
+	ePJQ==
+X-Gm-Message-State: APjAAAV7U30B6zVv1DlQLPY8Vx5VRUWfcohyAGR3l4M8uSxo18tG+aCE
+	VJynH0MKuLemIRqEVyhfrfdyxz7aL4ZhANO4yzk=
+X-Google-Smtp-Source: APXvYqxVJEoa1m1auYmIS63i9TmcZpV44cNZrzwUV6POhQi7vkzwoxf6cVXgRdjyX4EhVQE0YMASlDzNHXyz6CKYHog=
+X-Received: by 2002:a05:620a:134b:: with SMTP id
+	c11mr11704099qkl.71.1572191798490; 
+	Sun, 27 Oct 2019 08:56:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20191025072113.11172-1-schnitzeltony@gmail.com>
-In-Reply-To: <20191025072113.11172-1-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sun, 27 Oct 2019 16:33:10 +0100
-Message-ID: <CALbNGRShkF=Qn1nSD5MaavPUN0hr9VAYaZ9GfhUUh_ej7e7rsQ@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
-	Khem Raj <raj.khem@gmail.com>
+	<CALbNGRShkF=Qn1nSD5MaavPUN0hr9VAYaZ9GfhUUh_ej7e7rsQ@mail.gmail.com>
+In-Reply-To: <CALbNGRShkF=Qn1nSD5MaavPUN0hr9VAYaZ9GfhUUh_ej7e7rsQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 27 Oct 2019 16:56:12 +0100
+Message-ID: <CAMKF1spmQFC5YRBfXQ3eoHeLvH_NaMpODFQqNbVQkOEsTJWcFA@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 00/15] Upgrades & GNOME preparations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -55,42 +56,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Oct 2019 15:33:21 -0000
+X-List-Received-Date: Sun, 27 Oct 2019 15:56:38 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 25, 2019 at 9:21 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+On Sun, Oct 27, 2019 at 4:33 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
 m> wrote:
 >
-> Upgrades & tiny preparations for GNOME crusade
+> On Fri, Oct 25, 2019 at 9:21 AM Andreas M=C3=BCller <schnitzeltony@gmail.=
+com> wrote:
+> >
+> > Upgrades & tiny preparations for GNOME crusade
+> >
+> > Andreas M=C3=BCller (15):
+> >   gtkmm3: upgrade 3.24.1 -> 3.24.2
+> >   geany: upgrade 1.34.1 -> 1.36
+> >   geany-plugins: upgrade 1.34 -> 1.36
+> >   libstemmer: initial add 2.0.0
+> >   appstream-glib: initial add 0.7.16
+> >   yelp-xsl: initial add 3.34.0
+> >   yelp-tools: initial add 3.32.2
+> >   yelp: initial add 3.34.0
+> >   zenity: pretify recipe a bit
+> >   glibmm: upgrade 2.60.0 -> 2.62.0
+> >   libsigc++-3: initial add 3.0.0
+> >   ibus: initial add 1.5.21
+> >   libgusb: initial add 0.3.0+
+> >   colord: initial add 1.4.4
+> >   colord-gtk: initial add 0.2.0
+> >
+> Hi Khem,
 >
-> Andreas M=C3=BCller (15):
->   gtkmm3: upgrade 3.24.1 -> 3.24.2
->   geany: upgrade 1.34.1 -> 1.36
->   geany-plugins: upgrade 1.34 -> 1.36
->   libstemmer: initial add 2.0.0
->   appstream-glib: initial add 0.7.16
->   yelp-xsl: initial add 3.34.0
->   yelp-tools: initial add 3.32.2
->   yelp: initial add 3.34.0
->   zenity: pretify recipe a bit
->   glibmm: upgrade 2.60.0 -> 2.62.0
->   libsigc++-3: initial add 3.0.0
->   ibus: initial add 1.5.21
->   libgusb: initial add 0.3.0+
->   colord: initial add 1.4.4
->   colord-gtk: initial add 0.2.0
+> Just saw you added some of this series to master. Since the
+> zenity/itstool issue [1] requires rework on many recipes please
+> ignore/remove ALL the pending from this series in master-next - I'll
+> come back with a reworked series addressing all issues.
 >
-Hi Khem,
+> Thanks for your support and patience
+>
 
-Just saw you added some of this series to master. Since the
-zenity/itstool issue [1] requires rework on many recipes please
-ignore/remove ALL the pending from this series in master-next - I'll
-come back with a reworked series addressing all issues.
+no worries I have removed ibus, colord colord-gtk and zenity which I
+am expecting new revs
+others all look fine so they are merged.
 
-Thanks for your support and patience
-
-[1] https://errors.yoctoproject.org/Errors/Details/274743/
-
-Andreas
+> [1] https://errors.yoctoproject.org/Errors/Details/274743/
+>
+> Andreas
 
