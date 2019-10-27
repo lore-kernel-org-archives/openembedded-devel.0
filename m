@@ -1,54 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
-	[209.85.128.52])
-	by mail.openembedded.org (Postfix) with ESMTP id E8B527FAA5
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+	[209.85.128.53])
+	by mail.openembedded.org (Postfix) with ESMTP id E2C997FA96
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 23:36:11 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id 6so8347172wmf.0
+	Sun, 27 Oct 2019 23:36:12 +0000 (UTC)
+Received: by mail-wm1-f53.google.com with SMTP id w9so7259401wmm.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 16:36:13 -0700 (PDT)
+	Sun, 27 Oct 2019 16:36:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=N4hIc1Jde8CsBv0tFlqkPEOum3oLMm9SKsc/NP71tX0=;
-	b=CNRrOMx/OI5d0bGRVC92pPK0q7lB1h7yeCzjIDcfa2dbzbRAupl4kkfpF27FKDwTyl
-	r3ic/8Kd1fY0KKeGdHKmM6eKoUFyL4UG5MW4sBFdy/4zjRcWbB8rbciRQxPtwN+7zEtT
-	jre02PPiDzjYG2L5SRxbk980rSSzfYBIqgMK1bRi6fu0V8wzo6O+PR20E6sR+MxbQ5zv
-	9n9XZbTOgo0Cl42B70YoGxe0ptTPiWPwNfJblsg/BDEW3pnU+P4ICq6X/Mj6HI101JLH
-	wBORAm2XXlgEoeU4xMSyQ7Ca9+9ycIB3fHj22zJHQbey0gc2/Z5MelICG5bFe8kCvF00
-	kEGA==
+	bh=Bf2UcVp+Vzq3Lj2vqyity/aQD/UW4z0/FM/LeFcFkbQ=;
+	b=f7teb9qmoTzODwGGZZb+NwYTbJ15QbYCedYp3AduNf0B7WaG2kz14rwoeq1p/hM/O3
+	tj0/GCmqODujypIAPv+Jo4fOmGWi3XukS4WwKAmBhoyXIPWJdtktF4k5vnoqVUIs3BI0
+	XlTBEf09HxujyeSj9m32FkPqcww7euDSBnJCfkJH64I7G0l+wVzXNmvYH+C9FM+sAi6c
+	6kacEuEs3BsNN2nub/br3TXxZomktKSMHPUuSEQPVnm7k7Bp1Um0U3qHB0iwG0q1LQpb
+	URVk9AXfB2Aw4XT2BDD5+Zy/Rw1o0+YmDSOVnk6KpLmFehwrg1vDY6072r1bDkiy47Ke
+	+Vog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=N4hIc1Jde8CsBv0tFlqkPEOum3oLMm9SKsc/NP71tX0=;
-	b=IyeG0RXPeVKWt7jEWo27WHibn9nADCtFjyveWjpot6eabkBmmw5STg1CXRwvR+AGPV
-	n5y5OeITahMgRAVzXdWIptBuglJibnkHW0UmtQxmCdlWgSUYxQXWHSGcV29bupWZ2T31
-	2wMEEysKPsfhvla5whx7nahe32ypBjCPyxSa29s9VcU59VUebfbiXWrlfeM5BSVZEb3q
-	5KzlTzqnM+Jzsc/k6QOFfY2FF5QosXl3Pi2s8c4M4FTSdUe1qqldFasYQvIz1n5caK93
-	otwWxeBqEqXy8LV0XhfZkp5kWzkUWUvPUe921ZgI6Uo6Cc0MMzgPXBY/878NKQJW5hbb
-	ZyRQ==
-X-Gm-Message-State: APjAAAWQSzgkhEfiDINBi5082mkFFFyW3twM9Etz9ADZ1NtM2Np5vbXo
-	tHEBmttBAUzBiX7rZ6Yy9yiltpON
-X-Google-Smtp-Source: APXvYqxpZEVZ2la+bIn5o4fQ0JpkPAAF0csSWapexLPlD6+2rTBZYNRMUyYd0GxCEEQRV+cAFr6xgQ==
-X-Received: by 2002:a1c:67d7:: with SMTP id b206mr12645668wmc.68.1572219372595;
-	Sun, 27 Oct 2019 16:36:12 -0700 (PDT)
+	bh=Bf2UcVp+Vzq3Lj2vqyity/aQD/UW4z0/FM/LeFcFkbQ=;
+	b=NjvS0kzevO3YCCnoPuchTkvgQkJp4R/lSIktSL8/cipCsm2c85GeHO0V4lR3NkbgZ0
+	HFUkdyjyGJ0wBNqOzE5n7Pw9lyotPN+wnB9bDkz8m6+HOeUxqVMQIe0qmUBdOfwChG4+
+	6PcBv6pN5QO4K36X4FiggyHNZlDgCq/UTYFNJT+pBbcqj8KJExuN9e2n6oGecO3A8XyE
+	qnATuF7LO3BRrOUNg3J38Zhl9QU2LLh9Z4k2TOIquo3WCMwtam+owP8N9i9igRoJp7jB
+	utO0k/he2vVQ3pq5MI2CFmDvGb4AYyJ8CoxFMf8D30Pv3MJ6dJ6o+qRaccRJf2KXQkP/
+	NyhQ==
+X-Gm-Message-State: APjAAAXzPPzbipftm8lgExeWMQmn6buWo7LQML1gxjchlifCI2ZLdGxO
+	hD1oOr/yd4m3YofdQUMit79rFq8F
+X-Google-Smtp-Source: APXvYqxTJr8FvLMRlSuK0EGDrSOb1Sl0eSJ1cb9k+4YsEXuTNfBfGv3tx1JtYZqFcDrLLdRnBU4uYA==
+X-Received: by 2002:a1c:8189:: with SMTP id
+	c131mr13087598wmd.151.1572219373435; 
+	Sun, 27 Oct 2019 16:36:13 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F320614DE89D4DE1A96B15C.dip0.t-ipconnect.de.
 	[2003:f0:7f32:614:de89:d4de:1a96:b15c])
-	by smtp.gmail.com with ESMTPSA id a17sm8699929wmb.8.2019.10.27.16.36.11
+	by smtp.gmail.com with ESMTPSA id a17sm8699929wmb.8.2019.10.27.16.36.12
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 27 Oct 2019 16:36:11 -0700 (PDT)
+	Sun, 27 Oct 2019 16:36:12 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Oct 2019 00:35:40 +0100
-Message-Id: <20191027233545.4146-15-schnitzeltony@gmail.com>
+Date: Mon, 28 Oct 2019 00:35:41 +0100
+Message-Id: <20191027233545.4146-16-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191027233545.4146-1-schnitzeltony@gmail.com>
 References: <20191027233545.4146-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 14/19] gnome-bluetooth: upgrade 3.32.1 -> 3.34.0
+Subject: [PATCH 15/19] glade3: upgrade 3.8.5 -> 3.8.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,33 +62,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Oct 2019 23:36:12 -0000
+X-List-Received-Date: Sun, 27 Oct 2019 23:36:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+* online help support was added - ship it optionally
+* prettify recipe a bit
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{gnome-bluetooth_3.32.1.bb => gnome-bluetooth_3.34.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-bluetooth/{gnome-bluetooth_3.32.1.bb => gnome-bluetooth_3.34.0.bb} (78%)
+ .../recipes-devtools/glade/glade3_3.8.5.bb    | 23 -------------------
+ .../recipes-devtools/glade/glade3_3.8.6.bb    | 18 +++++++++++++++
+ 2 files changed, 18 insertions(+), 23 deletions(-)
+ delete mode 100644 meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb
+ create mode 100644 meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.0.bb
-similarity index 78%
-rename from meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb
-rename to meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.0.bb
-index 3c4438e7e..ae6587be1 100644
---- a/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.32.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-bluetooth/gnome-bluetooth_3.34.0.bb
-@@ -16,7 +16,7 @@ inherit gnomebase gtk-icon-cache gtk-doc gobject-introspection upstream-version-
- # gtk-icon-cache bbclass will take care of this for us.
- EXTRA_OEMESON = "-Dicon_update=false"
- 
--SRC_URI[archive.md5sum] = "5b3d66f564a5067ea154750cdb6d850d"
--SRC_URI[archive.sha256sum] = "6441cafd313af94fba28b701698074f97d693b9023788a74e8e6f16f817ba1aa"
-+SRC_URI[archive.md5sum] = "0c567e124a52e8ddc31c8bed0c3e57a1"
-+SRC_URI[archive.sha256sum] = "e867e67423e1dc78c56c2ea11dec066ce0254238d559e4777c80fa2935eb6baf"
- 
- RDEPENDS_${PN} += "bluez5"
+diff --git a/meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb b/meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb
+deleted file mode 100644
+index c3da3e9b9..000000000
+--- a/meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-SUMMARY = "Glade - A User Interface Designer"
+-HOMEPAGE = "http://www.gnu.org/software/gnash"
+-LICENSE = "GPLv2 & LGPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
+-                    file://COPYING.GPL;md5=9ac2e7cff1ddaf48b6eab6028f23ef88 \
+-                    file://COPYING.LGPL;md5=252890d9eee26aab7b432e8b8a616475"
+-DEPENDS = "gtk+ gnome-doc-utils gnome-common libxml2 intltool-native"
+-
+-inherit distro_features_check autotools pkgconfig pythonnative gtk-icon-cache
+-
+-REQUIRED_DISTRO_FEATURES = "x11"
+-
+-SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-${PV}.tar.xz \
+-           file://0001-gnome-doc-utils.make-sysrooted-pkg-config.patch \
+-           file://0002-fix-gcc-6-build.patch \
+-           file://0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch \
+-           "
+-SRC_URI[md5sum] = "4e4b4f5ee34a03e017e4cef97d796c1f"
+-SRC_URI[sha256sum] = "58a5f6e4df4028230ddecc74c564808b7ec4471b1925058e29304f778b6b2735"
+-
+-EXTRA_OECONF += "--disable-scrollkeeper"
+-
+-FILES_${PN} += "${datadir}/icons"
+diff --git a/meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb b/meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb
+new file mode 100644
+index 000000000..8ed30944b
+--- /dev/null
++++ b/meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Glade - A User Interface Designer"
++HOMEPAGE = "http://www.gnu.org/software/gnash"
++LICENSE = "GPLv2 & LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
++                    file://COPYING.GPL;md5=9ac2e7cff1ddaf48b6eab6028f23ef88 \
++                    file://COPYING.LGPL;md5=252890d9eee26aab7b432e8b8a616475"
++DEPENDS = "gtk+ gnome-doc-utils gnome-common libxml2 intltool-native yelp-tools-native"
++
++inherit gnomebase gnome-help distro_features_check pythonnative gtk-icon-cache
++
++REQUIRED_DISTRO_FEATURES = "x11"
++
++SRC_URI += " \
++    file://0002-fix-gcc-6-build.patch \
++    file://0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch \
++"
++SRC_URI[archive.md5sum] = "c16756952967f7316d64593124761027"
++SRC_URI[archive.sha256sum] = "aaeeebffaeb3068fb23757a2eede46adeb4c7cecc740feed7654e065491f5449"
 -- 
 2.21.0
 
