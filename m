@@ -1,55 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
-	[209.85.128.53])
-	by mail.openembedded.org (Postfix) with ESMTP id E2C997FA96
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id DA8887FA81
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 23:36:12 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id w9so7259401wmm.5
+	Sun, 27 Oct 2019 23:36:13 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id q130so7270509wme.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 16:36:14 -0700 (PDT)
+	Sun, 27 Oct 2019 16:36:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=Bf2UcVp+Vzq3Lj2vqyity/aQD/UW4z0/FM/LeFcFkbQ=;
-	b=f7teb9qmoTzODwGGZZb+NwYTbJ15QbYCedYp3AduNf0B7WaG2kz14rwoeq1p/hM/O3
-	tj0/GCmqODujypIAPv+Jo4fOmGWi3XukS4WwKAmBhoyXIPWJdtktF4k5vnoqVUIs3BI0
-	XlTBEf09HxujyeSj9m32FkPqcww7euDSBnJCfkJH64I7G0l+wVzXNmvYH+C9FM+sAi6c
-	6kacEuEs3BsNN2nub/br3TXxZomktKSMHPUuSEQPVnm7k7Bp1Um0U3qHB0iwG0q1LQpb
-	URVk9AXfB2Aw4XT2BDD5+Zy/Rw1o0+YmDSOVnk6KpLmFehwrg1vDY6072r1bDkiy47Ke
-	+Vog==
+	bh=QMXzKEb8/jzJXGpfkXF64naY8j0gRlZeRMlout4IuJo=;
+	b=sjAckclXo0DBnVKWichMrpvMooyNPmoGnzuPzu8pnU7BALXiniQQLzuaMNDXN5jrdV
+	b+OXl5nWA9muyXkp2QAhPSM5C+7X4HZab5MDOQvT5/5VBoeB5UW2gnCKp1lLmh82Nt18
+	/3krKRZ1+NbBOUtpKdfKeYuCqODVW1Q0wZ6sKW98m1dhXXc8+r02fQHl+d4vlBzabKJL
+	jjhjZtgKz9jPAQTXQEd7tWivIVUm8sLoST5kMPD7lEoNI4p0Xm7NN9WKxkriALuhENVS
+	a0I68nhZV+ZkIkjPlbn2VZT224J0RAUKdH2lUU6pPUN9zJD3330QYp7CV/uBvR/SkIRs
+	C9nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=Bf2UcVp+Vzq3Lj2vqyity/aQD/UW4z0/FM/LeFcFkbQ=;
-	b=NjvS0kzevO3YCCnoPuchTkvgQkJp4R/lSIktSL8/cipCsm2c85GeHO0V4lR3NkbgZ0
-	HFUkdyjyGJ0wBNqOzE5n7Pw9lyotPN+wnB9bDkz8m6+HOeUxqVMQIe0qmUBdOfwChG4+
-	6PcBv6pN5QO4K36X4FiggyHNZlDgCq/UTYFNJT+pBbcqj8KJExuN9e2n6oGecO3A8XyE
-	qnATuF7LO3BRrOUNg3J38Zhl9QU2LLh9Z4k2TOIquo3WCMwtam+owP8N9i9igRoJp7jB
-	utO0k/he2vVQ3pq5MI2CFmDvGb4AYyJ8CoxFMf8D30Pv3MJ6dJ6o+qRaccRJf2KXQkP/
-	NyhQ==
-X-Gm-Message-State: APjAAAXzPPzbipftm8lgExeWMQmn6buWo7LQML1gxjchlifCI2ZLdGxO
-	hD1oOr/yd4m3YofdQUMit79rFq8F
-X-Google-Smtp-Source: APXvYqxTJr8FvLMRlSuK0EGDrSOb1Sl0eSJ1cb9k+4YsEXuTNfBfGv3tx1JtYZqFcDrLLdRnBU4uYA==
-X-Received: by 2002:a1c:8189:: with SMTP id
-	c131mr13087598wmd.151.1572219373435; 
-	Sun, 27 Oct 2019 16:36:13 -0700 (PDT)
+	bh=QMXzKEb8/jzJXGpfkXF64naY8j0gRlZeRMlout4IuJo=;
+	b=dL6VfuJgC5j4HArnDBMFJ0cW3yM4hWQhSglT/iwVYyJh1/UzEfZwk0rE5kqcSQQcLi
+	20rtIBDXc39cj5NkP3AxXJuUUGQzdlsSLWeGYWUBg5s79vfVpobhCC/xDyusflftmNW4
+	McH//sCPFXFpiUUQW6U64ALbPL8WfPMX0EgrjpifhKIZUGDez/+uAPQdzYWwPQQu42Q/
+	XLgr4B8+Q2ln5+SLXfn77mvM6vGNUXKYG4NeB84SG4vRBRaf8F+YqmojRxvEoI75uzHR
+	d1Gorw8gmXa5puuWTvx1z6apgwm8JrtJ6UQMaLRcxVXloAOSxLWLOFv9MUd+O9gCEgFu
+	ClEg==
+X-Gm-Message-State: APjAAAUIxfRavf0bilD492ff+YOP9jI/cQCOAWRdAqlmjMhPoY5VFD+x
+	bBl7+uAJ+OodprVt66pjatcJdB1N
+X-Google-Smtp-Source: APXvYqxrBREAE7+KYvnS5tO7+6BtQQbEkB9AsGlXc1OoGRKb1AZL8lk6MSTCwl91gbyRa9TNrvNh5A==
+X-Received: by 2002:a1c:7311:: with SMTP id d17mr12306179wmb.49.1572219374427; 
+	Sun, 27 Oct 2019 16:36:14 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F320614DE89D4DE1A96B15C.dip0.t-ipconnect.de.
 	[2003:f0:7f32:614:de89:d4de:1a96:b15c])
-	by smtp.gmail.com with ESMTPSA id a17sm8699929wmb.8.2019.10.27.16.36.12
+	by smtp.gmail.com with ESMTPSA id a17sm8699929wmb.8.2019.10.27.16.36.13
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 27 Oct 2019 16:36:12 -0700 (PDT)
+	Sun, 27 Oct 2019 16:36:13 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Oct 2019 00:35:41 +0100
-Message-Id: <20191027233545.4146-16-schnitzeltony@gmail.com>
+Date: Mon, 28 Oct 2019 00:35:42 +0100
+Message-Id: <20191027233545.4146-17-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191027233545.4146-1-schnitzeltony@gmail.com>
 References: <20191027233545.4146-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 15/19] glade3: upgrade 3.8.5 -> 3.8.6
+Subject: [PATCH 16/19] gspell: upgrade 1.8.1 -> 1.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,74 +61,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Oct 2019 23:36:13 -0000
+X-List-Received-Date: Sun, 27 Oct 2019 23:36:14 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* online help support was added - ship it optionally
-* prettify recipe a bit
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-devtools/glade/glade3_3.8.5.bb    | 23 -------------------
- .../recipes-devtools/glade/glade3_3.8.6.bb    | 18 +++++++++++++++
- 2 files changed, 18 insertions(+), 23 deletions(-)
- delete mode 100644 meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb
- create mode 100644 meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb
+ .../gspell/{gspell_1.8.1.bb => gspell_1.8.2.bb}             | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-gnome/recipes-gnome/gspell/{gspell_1.8.1.bb => gspell_1.8.2.bb} (51%)
 
-diff --git a/meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb b/meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb
-deleted file mode 100644
-index c3da3e9b9..000000000
---- a/meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--SUMMARY = "Glade - A User Interface Designer"
--HOMEPAGE = "http://www.gnu.org/software/gnash"
--LICENSE = "GPLv2 & LGPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
--                    file://COPYING.GPL;md5=9ac2e7cff1ddaf48b6eab6028f23ef88 \
--                    file://COPYING.LGPL;md5=252890d9eee26aab7b432e8b8a616475"
--DEPENDS = "gtk+ gnome-doc-utils gnome-common libxml2 intltool-native"
--
--inherit distro_features_check autotools pkgconfig pythonnative gtk-icon-cache
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
--SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-${PV}.tar.xz \
--           file://0001-gnome-doc-utils.make-sysrooted-pkg-config.patch \
--           file://0002-fix-gcc-6-build.patch \
--           file://0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch \
--           "
--SRC_URI[md5sum] = "4e4b4f5ee34a03e017e4cef97d796c1f"
--SRC_URI[sha256sum] = "58a5f6e4df4028230ddecc74c564808b7ec4471b1925058e29304f778b6b2735"
--
--EXTRA_OECONF += "--disable-scrollkeeper"
--
--FILES_${PN} += "${datadir}/icons"
-diff --git a/meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb b/meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb
-new file mode 100644
-index 000000000..8ed30944b
---- /dev/null
-+++ b/meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Glade - A User Interface Designer"
-+HOMEPAGE = "http://www.gnu.org/software/gnash"
-+LICENSE = "GPLv2 & LGPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=aabe87591cb8ae0f3c68be6977bb5522 \
-+                    file://COPYING.GPL;md5=9ac2e7cff1ddaf48b6eab6028f23ef88 \
-+                    file://COPYING.LGPL;md5=252890d9eee26aab7b432e8b8a616475"
-+DEPENDS = "gtk+ gnome-doc-utils gnome-common libxml2 intltool-native yelp-tools-native"
-+
-+inherit gnomebase gnome-help distro_features_check pythonnative gtk-icon-cache
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+SRC_URI += " \
-+    file://0002-fix-gcc-6-build.patch \
-+    file://0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch \
-+"
-+SRC_URI[archive.md5sum] = "c16756952967f7316d64593124761027"
-+SRC_URI[archive.sha256sum] = "aaeeebffaeb3068fb23757a2eede46adeb4c7cecc740feed7654e065491f5449"
+diff --git a/meta-gnome/recipes-gnome/gspell/gspell_1.8.1.bb b/meta-gnome/recipes-gnome/gspell/gspell_1.8.2.bb
+similarity index 51%
+rename from meta-gnome/recipes-gnome/gspell/gspell_1.8.1.bb
+rename to meta-gnome/recipes-gnome/gspell/gspell_1.8.2.bb
+index 9de298c41..128a89f5d 100644
+--- a/meta-gnome/recipes-gnome/gspell/gspell_1.8.1.bb
++++ b/meta-gnome/recipes-gnome/gspell/gspell_1.8.2.bb
+@@ -1,4 +1,4 @@
+-SUMMARY = "spell adds spell-checking to a GTK+ applications"
++SUMMARY = "gspell adds spell-checking to a GTK+ applications"
+ HOMEPAGE = "https://wiki.gnome.org/Projects/gspell"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8c2e1ec1540fb3e0beb68361344cba7e"
+@@ -7,5 +7,5 @@ DEPENDS = "gtk+3 iso-codes enchant2"
+ 
+ inherit gnomebase gettext gobject-introspection
+ 
+-SRC_URI[archive.md5sum] = "8269918ea5ff798e49943e7daf6a32b9"
+-SRC_URI[archive.sha256sum] = "819a1d23c7603000e73f5e738bdd284342e0cd345fb0c7650999c31ec741bbe5"
++SRC_URI[archive.md5sum] = "4f857382bc9d8d4afe1e67e5b5b9dbff"
++SRC_URI[archive.sha256sum] = "bb9195c3a95bacf556d0203e9691f7489e0d3bc5ae1e5a440c89b2f2435d3ed6"
 -- 
 2.21.0
 
