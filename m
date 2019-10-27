@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 581C37FA7D
+	by mail.openembedded.org (Postfix) with ESMTP id BAA967F96B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 22:57:56 +0000 (UTC)
+	Sun, 27 Oct 2019 23:19:50 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 471YCl2LNwz3P
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 471Yj25pvqz4H
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 23:57:55 +0100 (CET)
+	Mon, 28 Oct 2019 00:19:50 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572217075;
-	bh=tXEItfqUA9LATKQeZ1bvVrZtyIxo2vpHLYcT4b3ig2E=;
+	s=default; t=1572218390;
+	bh=5o95SHeB8XWlakX4OHRKaluA1GKTq3jpNPrLZ6J3FE8=;
 	h=From:To:Subject:Date:From;
-	b=I7nTjWFJKqVA2zm2TY/yADZ7CoSIV096/o893c/FXVJVydxMDWhXoQdTDY67xJUZc
-	HS/Bciwx7h/ierdVL857v+JgBrFOceFY/VAavuXSafojZ5me1oHkC4ujhuGJyU4f2J
-	CMV313+xkJXLmbCYbvPCcUXaTxYHJ1VBZ0fNNFGEA6cFS3KcKt/yhHYAmDzyMQO+NV
-	EWFzzJTDiXYR+dk55Nq2ebr5wWZYYuiVRw9iS8yA+9cR7JEyAzPEg1Vgr69L9nrnb4
-	/3J+s04jNwfjUGtNMsFGuLjN5eAI50+53Cgmv3Ct1XtcacTQ6byy7Hdi6yGKYlRWH/
-	LU02QT6PzTRhNpFXmD40jfWr8mS9nOxF53PDuYPImRMvTqlzGudbeUNhPy6QsTx+gz
-	Cg3YLeecp9Krrnr9CknE2W5pHuU4KaMbQtJyPYgTwdaECWAEYEe365KxqR7JwO0sTV
-	lJEehVu0i3LMYyYUBs9ITUMD7WD8bpB4bXdIG7DoHWmm7SLqLiQ98k/LysKB0f4GlI
-	hMw9NJMCY3b6vZi9kdKZ4pPxANUX8hvAcV20F8Bfwj/BPIEqOjpL/JkYCgmW7o+FRd
-	1+oFf/1LnNHLOqDCuOoMKHfN53yKD9lah/lxkW2ZchDGR5RHjaPm+H6PswIQN5Cx6d
-	lkhn9WWykBoxffk7P1jt2fBg=
+	b=JDqdUHuQui346QQ3jlxdmYki2hglattfn09VhkU8mkCKzh2xc9sT3qDI1R56RiebZ
+	iCVnEjMTKIspQyOlcs0MT7aEFoq98qRboJNHpkrVadCEBFhw3fJOeSeisuYx2/Emqf
+	L183Q2/GDWh2GaGalb9sFRnpzYRX3iCBzVO7CREJz6YukjsVCadN5BuXn/VWui9qQN
+	/arqK5HfQPrdZ8x2XqDG87+JwXGmoyedv3q8KTRkjkO2wTJfWcSmJf7YnQYyg8lRBm
+	OuQD8wBhduBZsY9IdZE9kGHHdJBiFkNvOJfwqr8qnoJq0ZlXugewTQYmjbS9TOHAUp
+	lWmW4MApf8KkwmqhpiNS2jZQn9N0mNzRlfQP6NRqNBRnOsV5XJybA35W7KNjU6nl+Q
+	Yyt0ERumdoszD9aMa0RjPcF20BWwNM6k638G4SqpxOBCAAjm/pyVoK1gEZWQ6/vGRI
+	PnGXut9HsLaFoFvdzJtz9rcAbr3FMCzo7L+Wm7BK8QQW1QHsLYQiy/286YXtEy7njJ
+	c77xkn/TYgESr2z8AT/4GAq02gd4h6LJCtvV4L3K6pGVnAoeBtOqmudH42H3YP8cZN
+	4JVQoFq4sC1kC7DLT1gVQJcCLl42lser2QG62AfzT5pb8etfz+DN1CEMHrf9SUnImc
+	0z88FcW6oLQMKLXEw5+/GsXU=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Oct 2019 00:57:54 +0200
-Message-Id: <20191027225754.16055-1-bunk@stusta.de>
+Date: Mon, 28 Oct 2019 01:19:50 +0200
+Message-Id: <20191027231950.22344-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] gpsd: Backport a memory leak fix
+Subject: [meta-oe][PATCH] gpsd: Stop depending on chrpath-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,70 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Oct 2019 22:57:56 -0000
+X-List-Received-Date: Sun, 27 Oct 2019 23:19:52 -0000
+
+chrpath is no longer used since 3.15.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../0001-gps_shm_close-Free-privdata.patch    | 37 +++++++++++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb  |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+ meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
-new file mode 100644
-index 000000000..9b3801580
---- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
-@@ -0,0 +1,37 @@
-+From 2a4b3bcde0d73a3a4a6644d5f944ac9d16023ba9 Mon Sep 17 00:00:00 2001
-+From: Adrian Bunk <bunk@stusta.de>
-+Date: Mon, 21 Oct 2019 13:53:25 +0300
-+Subject: gps_shm_close: Free privdata
-+
-+Previously every open/close cycle leaked privdata.
-+
-+Signed-off-by: Adrian Bunk <bunk@stusta.de>
-+Signed-off-by: Gary E. Miller <gem@rellim.com>
-+
-+Upstream-Status: Backport
-+---
-+ libgps_shm.c | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
-+
-+diff --git a/libgps_shm.c b/libgps_shm.c
-+index d93972bba..12bb3760b 100644
-+--- a/libgps_shm.c
-++++ b/libgps_shm.c
-+@@ -163,8 +163,12 @@ int gps_shm_read(struct gps_data_t *gpsdata)
-+ 
-+ void gps_shm_close(struct gps_data_t *gpsdata)
-+ {
-+-    if (PRIVATE(gpsdata) && PRIVATE(gpsdata)->shmseg != NULL)
-+-	(void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
-++    if (PRIVATE(gpsdata)) {
-++        if (PRIVATE(gpsdata)->shmseg != NULL)
-++	    (void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
-++        free(PRIVATE(gpsdata));
-++        gpsdata->privdata = NULL;
-++    }
-+ }
-+ 
-+ int gps_shm_mainloop(struct gps_data_t *gpsdata, int timeout,
-+-- 
-+2.20.1
-+
 diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-index a28d59dce..054af4082 100644
+index 054af4082..6834bd45a 100644
 --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
 +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-@@ -9,6 +9,7 @@ EXTRANATIVEPATH += "chrpath-native"
+@@ -2,11 +2,9 @@ SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
+ SECTION = "console/network"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=01764c35ae34d9521944bb6ab312af53"
+-DEPENDS = "dbus ncurses python python3 libusb1 chrpath-replacement-native pps-tools"
++DEPENDS = "dbus ncurses python python3 libusb1 pps-tools"
+ PROVIDES = "virtual/gpsd"
  
+-EXTRANATIVEPATH += "chrpath-native"
+-
  SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
      file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-+    file://0001-gps_shm_close-Free-privdata.patch \
- "
- SRC_URI[md5sum] = "b3bf88706794eb8e5f2c2543bf7ba87b"
- SRC_URI[sha256sum] = "27dd24d45b2ac69baab7933da2bf6ae5fb0be90130f67e753c110a3477155f39"
+     file://0001-gps_shm_close-Free-privdata.patch \
+@@ -33,7 +31,6 @@ EXTRA_OESCONS = " \
+     libQgpsmm='false' \
+     debug='false' \
+     nostrip='true' \
+-    chrpath='yes' \
+     systemd='${SYSTEMD_OESCONS}' \
+     libdir='${libdir}' \
+     manbuild='false' \
 -- 
 2.17.1
 
