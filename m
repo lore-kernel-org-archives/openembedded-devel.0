@@ -1,50 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 362BE7F82E
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 015B57F82E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 06:05:18 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id o25so9812073qtr.5
+	Sun, 27 Oct 2019 06:08:34 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id g50so9830436qtb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Oct 2019 23:05:20 -0700 (PDT)
+	Sat, 26 Oct 2019 23:08:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=WDY26COmsX3GWS94QJQwyHo4R11GzIBPO5EGpRREb/Y=;
-	b=c8uAtPMERq3wD/8KADwJjpizbn9hw91O1JrCOTq49335m6M2Xm/4ZEHccKjBeQO1iU
-	b8kqel5WRPcPZ7SfW0TwPHTU+InnwJxe1HuDSMxQJ40PnKloYcaUSQtvNGZHZiV/liC8
-	KtOuTJT3JFeVNotkXBYYNHVqlQeSZq/6rS4GespD6NoMgepbVHXTHOSn4UzNwX/es+9i
-	nxxYt4/tjjZTbH9KpAW/90ejPTQXAjZjQ+8n2e/B0KtCpCHsnDgfspeut39T1zkPMV0b
-	lSxDG46yFmw9N0rD1ypWsPyJK3ILfootWEhDw9ELa4ZmkoyNNAfHnKA8k5d4aIxdNA7W
-	7MwQ==
+	bh=8l83pTUsYogoOftiSJuhpfF/NhNqmytEWXbmvioLUEY=;
+	b=cl1xml3lZYZYl2jKMxnHj3OSF4hp4pA+ev7hHzQKoLZjQXuGtvWUS5lgVpQ9nIN53s
+	MVz8EFx3rrnhLV5IOjPckCNqksaY8MFBqq1BWnHhLlaPJWa9oYdmYYaomAqnVwSL+alm
+	Swalt3yAevJCuI6empQ8xIe0UjgVO/iUQ4FWXv+9H1AlsuVoTGfaJGGtIJjnSeGvAq+s
+	z9HlNvPCwhWiwNr3WNgfdElgH9eUrfucnwFVBQRUfWmswHF6XGwtbwDcnF807TVABs1m
+	RtHSS9af3XVTsJ6ANo/YvID6g1ODoYDlX3gjrWiLNifg+Hmh0oRfNdb9EU81GqKiaj/n
+	WRCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=WDY26COmsX3GWS94QJQwyHo4R11GzIBPO5EGpRREb/Y=;
-	b=ikooAPD6aoUEWpYulFpC6vCv2hHLoW1x4cr0nrK0AYmmCgMh7MtDQDFToS2Orv/FHR
-	/Hy22vl4UI5KvxlQ8iCCkOIeoZgnMZsixvPqRvrUucOAM/ocOT82UZsti3XJ3cVs7/Hg
-	Z5ic/4RdsTVyM0FUgC+XePpoyFXmGUXkSnCyixIuhWIyHKoFyxe5lYcnk4eepq3dKmhP
-	cAzECC8zVbGBGrdGNu0cBMEhZopz4HkCZzUMaRBei+gBw5TIhLcdE9dwMIgFTvjYBTm3
-	GZSNWgHMsvoTldfVdx6fHu9+51+uPVNuwhs+g86qzv/sf/DZLHsXPq80WyHFm2ui5aE0
-	lP+g==
-X-Gm-Message-State: APjAAAWQZ/qhNHJIIF35bMtdvRDO16b2vDjA2pCZCDu+1ty667mLRqJH
-	Bq58244d/P3TdXRnBjmO5k+t4ssM1tc0nn6QUTw=
-X-Google-Smtp-Source: APXvYqyHWvfWxwbBtnwJfuH7kd4D3Av8cxA36nbfPgKBco6eUA8jIZJZ9wNLgivBLBsrQgDJ7VLCbYMfZ5lbUV+hgAY=
-X-Received: by 2002:ac8:411b:: with SMTP id q27mr11995330qtl.53.1572156319206; 
-	Sat, 26 Oct 2019 23:05:19 -0700 (PDT)
+	bh=8l83pTUsYogoOftiSJuhpfF/NhNqmytEWXbmvioLUEY=;
+	b=UdQaM7HY2TzUUMcl6c0gQVrVlS9ptl+HXxLKp9fjuhWHZ7psRdpZcxM1JastBsGrLg
+	obI+nUTvjtvMU4Nx6P7s045GGPG56P55Sq6cJYBsr4FpFoZ0X75uuuYEtIExVjl5bHgu
+	9hkMdhr68XNKXpWJSvF7bTOh2vlu8ZjO4RXdnrH+Ex+2Kn339GMDiJZIKt17L+ClD2PN
+	tGebTkQjaKhFa0kETKwHIUSWpah75wSeZcv9UbiDrY2KL8rxIDionUhhafwg8MAdbPVO
+	fAtYvzPBfbip5Y3VF9+rn/eFbJplRjJQwA10I3GsVjVM5m0OhcR0IzgYemxUH8eweLug
+	9j/Q==
+X-Gm-Message-State: APjAAAU7q2NCnymguyXspGkywIEM9drp0rKVnZvL5WDHVoqxmutQFoBT
+	Gw8WQ00viwQzdIsUvx5zQI/B2LTYodQJRjay+x8=
+X-Google-Smtp-Source: APXvYqyWiqH7QVXJBqtJsGDPNB5oSBJW6NOtzDNypMbKoepqIBbFN5QfrC5/Cwark7xjIc/EhA9ZcPg1um3L7ktrQQU=
+X-Received: by 2002:ad4:45b1:: with SMTP id y17mr9664954qvu.55.1572156515577; 
+	Sat, 26 Oct 2019 23:08:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20191026093404.19659-1-schnitzeltony@gmail.com>
-	<20191026093404.19659-4-schnitzeltony@gmail.com>
-	<CAMKF1sqBUTk01=tQ=V6ECnXz5jj6r9ARi1kMyJFL5Xp2-41UjQ@mail.gmail.com>
-	<CALbNGRTurd2uh2fvu=eWk2hjeiJpJsQeiYd6zhjaY9r6fgXOyg@mail.gmail.com>
-In-Reply-To: <CALbNGRTurd2uh2fvu=eWk2hjeiJpJsQeiYd6zhjaY9r6fgXOyg@mail.gmail.com>
+	<20191026093404.19659-3-schnitzeltony@gmail.com>
+In-Reply-To: <20191026093404.19659-3-schnitzeltony@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 27 Oct 2019 07:04:52 +0100
-Message-ID: <CAMKF1so25cP0PuM8nchSyY2JTLQQ3X=5_9nRr73mMXW3Ly92iw@mail.gmail.com>
+Date: Sun, 27 Oct 2019 07:08:09 +0100
+Message-ID: <CAMKF1sqoAUa_Fs1LeLK0U2N=U2nS4cGwVWvYJ3xQNqq8_sJj5Q@mail.gmail.com>
 To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/2] zenity: rework recipe
+Subject: Re: [PATCH 1/2] gnome-help.bbclass: Handle gnome-help files with new distro feature 'helpfiles'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,24 +55,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Oct 2019 06:05:20 -0000
+X-List-Received-Date: Sun, 27 Oct 2019 06:08:35 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 26, 2019 at 1:10 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
+On Sat, Oct 26, 2019 at 11:34 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
 >
-> On Sat, Oct 26, 2019 at 11:43 AM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > I dropped https://patchwork.openembedded.org/patch/166178/ and took
-> > this one. It seems to include those changes as well.
-> >
-> Was not precise enough but that was my intention -thanks
+> Now that we can build gnome help files, let our users decide what to do w=
+ith
+> them:
 >
+> if 'helpfiles' not in DISTRO_FEATURES
+>     delete all help contents during install
+> else
+>   if PACKAGE_NO_HELP_SPLIT =3D=3D 1
+>       pack all help files to ${PN}-help
+>   else
+>       pack help files to ${PN}-help-<lingua>
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  meta-gnome/classes/gnome-help.bbclass | 69 +++++++++++++++++++++++++++
+>  meta-gnome/conf/layer.conf            |  3 ++
+>  2 files changed, 72 insertions(+)
+>  create mode 100644 meta-gnome/classes/gnome-help.bbclass
+>
+> diff --git a/meta-gnome/classes/gnome-help.bbclass b/meta-gnome/classes/g=
+nome-help.bbclass
+> new file mode 100644
+> index 000000000..967091ba4
+> --- /dev/null
+> +++ b/meta-gnome/classes/gnome-help.bbclass
+> @@ -0,0 +1,69 @@
+> +# Class to pack gnome help files or delete them during install
+> +# There are the following cases:
+> +#
+> +# if 'helpfiles' not in DISTRO_FEATURES
+> +#     delete all help contants during install
+> +# else
+> +#   if PACKAGE_NO_HELP_SPLIT =3D=3D 1
+> +#       pack all help files to ${PN}-help
+> +#   else
+> +#       pack all help files to ${PN}-help-<lingua>
+> +
+> +FILES_${PN}-help =3D "${datadir}/*/translations"
+> +
+> +# Dummy to get yelp build & PACKAGE_NO_HELP_SPLIT set 1
+> +PACKAGES_append =3D " ${PN}-help"
+> +FILES_${PN}-help =3D "${datadir}/help"
+> +RRECOMMENDS_${PN}-help =3D "${@bb.utils.contains('DISTRO_FEATURES','help=
+files','yelp','',d)}"
+> +
+> +do_install_append() {
+> +    if ${@bb.utils.contains('DISTRO_FEATURES','helpfiles','false','true'=
+,d)}; then
+> +        rm -rf ${D}${datadir}/help/*
+> +    fi
+> +}
+> +
+> +python gnome_do_split_help() {
+> +    if bb.utils.contains('DISTRO_FEATURES', 'helpfiles', False, True, d)=
+:
+> +        return
+> +
+> +    if (d.getVar('PACKAGE_NO_HELP_SPLIT') =3D=3D '1'):
+> +        # all help files go to ${
+> +        bb.debug(1, "package requested not splitting help-files")
+> +        return
+> +
+> +    packages =3D (d.getVar('PACKAGES') or "").split()
+> +    datadir =3D d.getVar('datadir')
+> +    dvar =3D d.getVar('PKGD')
+> +    pn =3D d.getVar('PN')
+> +
+> +    if pn + '-help' in packages:
+> +        packages.remove(pn + '-help')
+> +
+> +    helpdir =3D os.path.join(dvar + datadir, 'help')
+> +
+> +    if not cpath.isdir(helpdir):
+> +        bb.warn("No help files in this package - remove gnome-help from =
+inherit?")
+> +        return
+> +
+> +    helps =3D os.listdir(helpdir)
+> +
+> +    summary =3D d.getVar('SUMMARY') or pn
+> +    description =3D d.getVar('DESCRIPTION') or ""
+> +    locale_section =3D d.getVar('LOCALE_SECTION')
+> +    mlprefix =3D d.getVar('MLPREFIX') or ""
+> +    for l in sorted(helps):
+> +        ln =3D legitimize_package_name(l)
+> +        pkg =3D pn + '-help-' + ln
+> +        packages.append(pkg)
+> +        d.setVar('FILES_' + pkg, os.path.join(datadir, 'help', l))
+> +        d.setVar('RRECOMMENDS_' + pkg, '%syelp' % mlprefix)
+> +        d.setVar('SUMMARY_' + pkg, '%s - %s help' % (summary, l))
+> +        d.setVar('DESCRIPTION_' + pkg, '%s  This package contains langua=
+ge help files for the %s locale.' % (description, l))
+> +        if locale_section:
+> +            d.setVar('SECTION_' + pkg, locale_section)
+> +
+> +    d.setVar('PACKAGES', ' '.join(packages))
+> +}
+> +
+> +PACKAGESPLITFUNCS_prepend =3D "gnome_do_split_help "
+> +
+> diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
+> index 862d622ee..c4d4574bc 100644
+> --- a/meta-gnome/conf/layer.conf
+> +++ b/meta-gnome/conf/layer.conf
+> @@ -15,3 +15,6 @@ LAYERVERSION_gnome-layer =3D "1"
+>  LAYERDEPENDS_gnome-layer =3D "core openembedded-layer networking-layer"
+>
+>  LAYERSERIES_COMPAT_gnome-layer =3D "thud warrior zeus"
+> +
+> +# GNOME Help files
+> +PACKAGES_DYNAMIC_append =3D " ^${PN}-help-.*"
 
-this fails to compile e.g.
+if we put this in layer.conf it will appear at global config meta
+data, since it remains pertinent to gnome
+perhaps its best to add it in gnome related bbclass maybe
 
-https://errors.yoctoproject.org/Errors/Details/274743/
-
-> Andreas
+> --
+> 2.21.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
