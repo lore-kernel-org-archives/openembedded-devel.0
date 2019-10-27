@@ -1,48 +1,48 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C3D9F7F7C5
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
+	[209.85.166.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B3417FA4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 09:25:16 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id i26so7154939iog.9
+	Sun, 27 Oct 2019 13:22:09 +0000 (UTC)
+Received: by mail-il1-f194.google.com with SMTP id z10so5682697ilo.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 02:25:18 -0700 (PDT)
+	Sun, 27 Oct 2019 06:22:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=hheS+hKMf26VcYgqHTH8Yr3yK5L9Vqd+0gY9mM5JM+c=;
-	b=oblmja1azMW5yCzKY92rhk4LMxZzLjRUkNZSg+ZAEcYzkWtYhVQdawcUkkB7las9pG
-	bew2dThl9AjuvVgFVSbJxPuMmwwRWznOroR9ClNq1dRjB2hnNQN7URFyGasupJ+TJSDs
-	OTuCkAhlX8gl0GWHk/3/bHBACgN1Jx+tTeH67pxb/UYj4xiDXj4+wye4bw7NnCOeeYUp
-	+ttlyNUZkM7Cxs6RYs/wAzd+BVTBvLH/8zntBut9oqv76mvy0bCFN6B5yKwazA+CVm0Y
-	bzLe+cON8AGComyI2R82ZRu6MAoRpKFxJ4QLzLrL+P1A+Z+roqVf5Lx+gtrbX8s/NTXf
-	za4w==
+	:cc; bh=R/olEno0naWk8l22zGc/6frG74VP7GnbugxquSKhiqA=;
+	b=jvFVxZ08aQZWuvU2E/xtSKZ172Q9yiE2tNXlU05QzYZavUQJFNuKMPWk38t5eSwnaF
+	+3plSDu7I/ZU61b3AOirmLWLILd4V6DGM2WJEzMlKqpf6MMoy1YhUjLa9Shj9ENaJ1RS
+	AGZWV9wrU0hx8XG5NI7zRW3STNNPx1IIyLpooJxW0kWc0tIaAFasuI9LNhbF+OI3g4i5
+	gc3UWkeHt4OmwYeebJdadtsKPA30YTv47CeWi+C/xjTIOzn+NfG3FYbBMFEJbihRxifS
+	DeAmfaSANZa5+q+gGCezzHPI9sNYMickpT622HYMBCOlDNl0BDJq5/ieSWpyAiacRz+k
+	nuGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=hheS+hKMf26VcYgqHTH8Yr3yK5L9Vqd+0gY9mM5JM+c=;
-	b=hFrKQiPY46p8dgjRr3mj3sPMR6V8H4rB8HnaA2Q5O4SvCzYJBUlVigYCWAbhClaGYS
-	NpVl13Bmt1l89Its24wYmxaDYWQ3AC6sz0d5uuXnAImR4Yu7rbaNNAGvl4Uh0UixrSYw
-	0EBRwYIJUyr1uhMgW6sfEJU3+CJSRv3R3CfF0xjMz2fRWIaP3DoxNDwU672OdU8Rt9wY
-	gK3W1LnZwnNiW6keZ9Butdt/6vO5I7kTXY4aCE3/81WeWHQrE5pIsCkcrKpz4FjJrYb3
-	0J9LTVrUxgFPXih5SwUN7sjeemVzcFcmYY/zGxVBJHG0sAtlN6GuE+mfZfpET7HfUCpx
-	cHRg==
-X-Gm-Message-State: APjAAAVwvDsDvWfBeHkGJyv5ytY07eoVyRfnCuWjQz9B/ngIsuH7AcVY
-	xj3L9eU13n3Bb32JDWMooZt78V3uVQbX73QDGs8=
-X-Google-Smtp-Source: APXvYqwJTNSmOQzLCXRQsOnZkfUFISupsmyfhUVGus254KBsP+u92FhsMeES2QY7+wpPpuPbTjEryhP+H/O3nT7ugCY=
-X-Received: by 2002:a5d:8185:: with SMTP id u5mr12039892ion.147.1572168317977; 
-	Sun, 27 Oct 2019 02:25:17 -0700 (PDT)
+	bh=R/olEno0naWk8l22zGc/6frG74VP7GnbugxquSKhiqA=;
+	b=Md4TlU/PkJeeFXoxQXi2f89Pit9uEr9NWl/0dCBe6eaYJsKjCAZzoTQlQ0w73TKHyU
+	ttOT2PVbfRXr27U+aSuVo5e5DaczJfJRrzfDNruhKhwyiUoOd2hmRE10Y9EjaS6ioZZc
+	q/h21oW5gnOzeh5N4pa63g7F5gfUgM022mHBqVqO9lFXBKrLpnqxAfbKdoVzLi55bZDV
+	4E9TOoFM42Lii8kVMNcwQLSiuZ0V2F4PZEIYFC4uhrQuyRgTcjdiPFvWfUJ7BDqmvg7h
+	nOgjBU3Wk9fUVFGMu25ozhv8KQeHBgqHDy/GszcWWiAiqDGYhGaJrkTFmtyP1U0I7FIz
+	N09g==
+X-Gm-Message-State: APjAAAU5rHIDTB4KU8PG8tsVhauMe3QWyYRSR/C2KNcjG4c1SBfyK6Xk
+	D+PedIQukE61VJ+TQMCbrYnMxsT5AatjqWoRCDI=
+X-Google-Smtp-Source: APXvYqzF+o3aQ963m2gmX13Q3HjFL+VzXjTkYwL4T3nVct+IkFEVsxCGql2G8oUAikDiHlHj6RqgZuJCoIfjC+66TDI=
+X-Received: by 2002:a92:c04f:: with SMTP id o15mr5356516ilf.267.1572182530658; 
+	Sun, 27 Oct 2019 06:22:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20191026093404.19659-1-schnitzeltony@gmail.com>
-	<20191026093404.19659-3-schnitzeltony@gmail.com>
-	<CAMKF1sqoAUa_Fs1LeLK0U2N=U2nS4cGwVWvYJ3xQNqq8_sJj5Q@mail.gmail.com>
-In-Reply-To: <CAMKF1sqoAUa_Fs1LeLK0U2N=U2nS4cGwVWvYJ3xQNqq8_sJj5Q@mail.gmail.com>
+	<20191026093404.19659-2-schnitzeltony@gmail.com>
+	<CAMKF1srE3x_69uh=YwVSoCH+MT8ZKQixedh02=Aq3JXikh3dtw@mail.gmail.com>
+In-Reply-To: <CAMKF1srE3x_69uh=YwVSoCH+MT8ZKQixedh02=Aq3JXikh3dtw@mail.gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sun, 27 Oct 2019 10:25:06 +0100
-Message-ID: <CALbNGRSM09Q=qvEHJXhFgCVG=_6BjNpQejHAsg6ah2et3xc=ag@mail.gmail.com>
+Date: Sun, 27 Oct 2019 14:21:59 +0100
+Message-ID: <CALbNGRRT1Uhp+kioNT+dEkAfqBMGgmUSFvAOL-PN1AuUeb5uSQ@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/2] gnome-help.bbclass: Handle gnome-help files with new distro feature 'helpfiles'
+Subject: Re: [PATCH v2] colord: initial add 1.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,19 +55,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Oct 2019 09:25:18 -0000
+X-List-Received-Date: Sun, 27 Oct 2019 13:22:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Sun, Oct 27, 2019 at 7:08 AM Khem Raj <raj.khem@gmail.com> wrote:
-> > +PACKAGES_DYNAMIC_append = " ^${PN}-help-.*"
+On Sat, Oct 26, 2019 at 8:15 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> if we put this in layer.conf it will appear at global config meta
-> data, since it remains pertinent to gnome
-> perhaps its best to add it in gnome related bbclass maybe
+> OK a bit better, native seems to build but target one fails when
+> building for non-systemd distros
+> see https://errors.yoctoproject.org/Errors/Details/274721/
+>
+> > +PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=true, systemd"
+^ Caused by typo here
 
-You are right this looks odd. Try to remember what my thought were >6
-month ago but I think this is another candidate for V2 (or with the
-others V3)
+sorry for wasting your time - V3 arrives soon
 
 Andreas
 
