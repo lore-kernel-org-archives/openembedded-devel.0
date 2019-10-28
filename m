@@ -1,27 +1,46 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 926BE7FA9A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C6D97FA59
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 22:16:30 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	28 Oct 2019 15:16:32 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.68,241,1569308400"; d="scan'208";a="229842338"
-Received: from mng-mobl.gar.corp.intel.com (HELO shodan.fritz.box)
-	([10.249.76.230])
-	by fmsmga002.fm.intel.com with ESMTP; 28 Oct 2019 15:16:30 -0700
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 11:16:21 +1300
-Message-Id: <b861622f69daacf750318ce60fdb8551942b5865.1572300962.git.paul.eggleton@linux.intel.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.1572300962.git.paul.eggleton@linux.intel.com>
-References: <cover.1572300962.git.paul.eggleton@linux.intel.com>
+	Mon, 28 Oct 2019 22:21:06 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id l15so10488132qtr.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Oct 2019 15:21:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=f83pycLRbN/D9qdnZVeLbk6VLTUzf04TnWwP6gIoewo=;
+	b=ICjkVoBaFG9JUtIUJvYuS5UxcIY7cnnIfYYQEMzIAZj4JoIz4/0gO/eYmdgfuQHKNp
+	2Dz/GJn2wskgXK3sKe2cve9pK5fDxUSiJJw6ZV2SJGOknYFyXEO/fIl6aDXniTG7tDWv
+	yVpahhpeynxMe7NaMACATEJ5SuKTl9S9SlrdR/IT85aPYo21eXcA0m28JOHuOaS1lLop
+	NV8xG/7dlXHEIEf46KsrkCTdLF79OUcy3QP+kMBkEpS2b+M0xSCz1dYoxiTp3k+dER0t
+	/WVMyYsuW/sS9JwA6vwUhnRV8V2iQlJTHXMwqhgFiBRHAo1zocBcK/8ypu9o/MAdZFXF
+	emUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=f83pycLRbN/D9qdnZVeLbk6VLTUzf04TnWwP6gIoewo=;
+	b=c9epPsQQ5Rfmdh6kMy1Of1MQXqRDs4eVdj7g57Ed/NqgMDBtP7Zmouq36tOLcprecG
+	8gaJCY293ocSjWL3Yg9G+vUUFuNnK+7gbQj6bhts+OQznchSuLF/lOiADM6u6hvCh+5p
+	SEhDwqcup6p3KRPruo5i5xXCXQXiT14IFeOvwIfDtMIGpTSnPySiD+y4mX+TV7DvQ72h
+	cH8df7iGgWA4toQOPAqkBExfjA6robvP3Wowo5RmU86kXpn/ua9iMda9nAHydoZ8Y6+1
+	3IXEFO/YvIK/wIhkt6oxA8hcs4gnsuQV3kgC2//Mjxugo2w4bA6mEFAzzqci7LHql3kG
+	eYHQ==
+X-Gm-Message-State: APjAAAWCvIBO0rJF1E0vqK6KdzW0NhUHg8WTeqPZkepr0T3X++Adj4XS
+	RjvVIELI5dwHf7N5w7Y3CpdYf9DypUX3+KVHc18qvG87uNBuIw==
+X-Google-Smtp-Source: APXvYqwwVxVd9w8LF+ZHkx/K7pNKBl6uBSz8PjoS/j15UWWEG556US8GjdHJr4a74qCjs4ecbRcZVEbX5p87gAFdfWo=
+X-Received: by 2002:ac8:411b:: with SMTP id q27mr959340qtl.53.1572301267041;
+	Mon, 28 Oct 2019 15:21:07 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 1/1] python3-pillow: update to 6.2.1
+References: <20191028152722.31428-1-mns@gomspace.com>
+In-Reply-To: <20191028152722.31428-1-mns@gomspace.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Oct 2019 23:20:39 +0100
+Message-ID: <CAMKF1spcbB4OP4A6AgQBq+qmrD4pb82XWonRJiqOpMDbEYPp0w@mail.gmail.com>
+To: Martin Siegumfeldt <mns@gomspace.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libiio: Conditionally inherit distutils3-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,89 +53,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 22:16:30 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 28 Oct 2019 22:21:06 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Upstream release notes:
+On Mon, Oct 28, 2019 at 4:27 PM Martin Siegumfeldt <mns@gomspace.com> wrote:
+>
+>  * inherit only when PACKAGECONFIG indicates Python bindings is build
+>
+> Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
+> ---
+>  meta-oe/recipes-support/libiio/libiio_git.bb | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
+> index e6e0eaef8..027e4d5e5 100644
+> --- a/meta-oe/recipes-support/libiio/libiio_git.bb
+> +++ b/meta-oe/recipes-support/libiio/libiio_git.bb
+> @@ -12,7 +12,7 @@ SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
+>
+>  S = "${WORKDIR}/git"
+>
+> -inherit cmake python3native systemd distutils3-base
+> +inherit cmake python3native systemd
+>
+>  DEPENDS = " \
+>      flex-native bison-native libaio \
+> @@ -30,6 +30,8 @@ PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND"
+>  PACKAGECONFIG[USB_BACKEND] = "-DWITH_USB_BACKEND=ON,-DWITH_USB_BACKEND=OFF,libusb1,libxml2"
+>  PACKAGECONFIG[NETWORK_BACKEND] = "-DWITH_NETWORK_BACKEND=ON,-DWITH_NETWORK_BACKEND=OFF,libxml2"
+>
+> +inherit ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'distutils3-base', '', d)}
+> +
 
-  https://pillow.readthedocs.io/en/stable/releasenotes/6.2.0.html
-  https://pillow.readthedocs.io/en/stable/releasenotes/6.2.1.html
+we also need to define this packageconfig where it should add
+-DPYTHON_BINDINGS=OFF
+when it is not set
 
-Also fixes CVE-2019-16865:
-
-  https://nvd.nist.gov/vuln/detail/CVE-2019-16865
-
-Signed-off-by: Paul Eggleton <paul.eggleton@linux.intel.com>
----
- .../0001-explicitly-set-compile-options.patch    | 16 +++++++---------
- ...on3-pillow_6.1.bb => python3-pillow_6.2.1.bb} |  4 ++--
- 2 files changed, 9 insertions(+), 11 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pillow_6.1.bb => python3-pillow_6.2.1.bb} (86%)
-
-diff --git a/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch b/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
-index d4372696fe..35aee42145 100644
---- a/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
-+++ b/meta-python/recipes-devtools/python/python3-pillow/0001-explicitly-set-compile-options.patch
-@@ -1,4 +1,4 @@
--From 9f3073bf6a7c7c51bb49d25f65c8f75cc704a5ee Mon Sep 17 00:00:00 2001
-+From 862a981ce462cd83a99e3db9faeeda1f8c64983f Mon Sep 17 00:00:00 2001
- From: Hongxu Jia <hongxu.jia@windriver.com>
- Date: Mon, 18 Mar 2019 23:23:55 -0400
- Subject: [PATCH] explicitly set compile options
-@@ -10,18 +10,19 @@ explicitly set build_ext options for oe-core's
- Upstream-Status: Inappropriate [oe specific]
- 
- Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+
- ---
-  setup.cfg | 12 ++++++++++++
-  1 file changed, 12 insertions(+)
- 
- diff --git a/setup.cfg b/setup.cfg
--index 3ab2e127..e92615f3 100644
-+index 1c6ebc84..1ccc3d69 100644
- --- a/setup.cfg
- +++ b/setup.cfg
--@@ -4,3 +4,15 @@ test=pytest
-- [flake8]
-- extend-ignore = E203, W503
-- max-line-length = 88
-+@@ -13,3 +13,15 @@ multi_line_output = 3
-+ 
-+ [tool:pytest]
-+ addopts = -rs
- +
- +[build_ext]
- +disable-platform-guessing = 1
-@@ -34,6 +35,3 @@ index 3ab2e127..e92615f3 100644
- +disable-webp = 1
- +disable-webpmux = 1
- +disable-imagequant = 1
---- 
--2.20.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-pillow_6.1.bb b/meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb
-similarity index 86%
-rename from meta-python/recipes-devtools/python/python3-pillow_6.1.bb
-rename to meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb
-index 1d91066481..a383a3ff91 100644
---- a/meta-python/recipes-devtools/python/python3-pillow_6.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pillow_6.2.1.bb
-@@ -5,11 +5,11 @@ HOMEPAGE = "https://pillow.readthedocs.io"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=55c0f320370091249c1755c0d2b48e89"
- 
--SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=6.1.x \
-+SRC_URI = "git://github.com/python-pillow/Pillow.git;branch=6.2.x \
-            file://0001-support-cross-compiling.patch \
-            file://0001-explicitly-set-compile-options.patch \
- "
--SRCREV ?= "aaca672173413883fbcefd659f04d74fe44fb5d5"
-+SRCREV ?= "6e0f07bbe38def22d36ee176b2efd9ea74b453a6"
- 
- 
- inherit setuptools3
--- 
-2.20.1
-
+>  PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-${PYTHON_PN}"
+>
+>  RDEPENDS_${PN}-${PYTHON_PN} = "${PN} ${PYTHON_PN}-ctypes ${PYTHON_PN}-stringold"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
