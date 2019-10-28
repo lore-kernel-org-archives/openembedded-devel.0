@@ -1,47 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
-	[209.85.166.66])
-	by mail.openembedded.org (Postfix) with ESMTP id ADA4D7FAA9
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 7748C7FA7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 23:59:42 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id h9so8734051ioh.2
+	Mon, 28 Oct 2019 01:37:58 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,238,1569254400"; d="scan'208";a="77559228"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 28 Oct 2019 09:37:43 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id B2E694B6EC6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Oct 2019 16:59:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=asCqGrotRwTjr/6KgU5dEzfMqXj4UJ+tZZz1hlb2++A=;
-	b=iqJIvETTIIWjyVv8usKMXz8kTgAhEve9kh/ieqHw0tz1rnX1oescOFat6904nSqiar
-	dfs0Mx/XQpMd2PpyRw3FCJ+UcZCbVlP5Ibq7OKyhqDeIXMiIwtTvdOYIUDhh36Y8LXDM
-	8I+coPeolREx69I8Qlz83k5vRqQVPl0ylMb2So3CxMYvLDggIUjbAG4mpfKLMW/SJnaZ
-	z6Ixje82sNfm+ufkw3RBYiT24iBtgHtTREa0ftE0RKOI3XWSyixKUdSyoHX1UREB80E3
-	Ut63FiHWOTe8j9Z96N4aZ62Opp8ngfWGIl/xJLnchMIDWTVfL4b6wjkyKDMhgBWWuPGk
-	vcoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=asCqGrotRwTjr/6KgU5dEzfMqXj4UJ+tZZz1hlb2++A=;
-	b=hYYsKzx0uC2/Gt/u3e8RXOsiuANuD+wswnQDvLdithzFseC+OhWOBiy3xiGQgyZdMZ
-	jzEJF8LGhme1zN5frxG4fhNCEqaU14IpwmF0Gl1kyxbItthcgW1zVcOyO4ZjRIx4lvU4
-	RFw20taKBA33Spemn/9eU8Ugr4Y4EgDAG9r3bH7B5dqEIsq/sx8gdIkIwGDijhB1OPat
-	NC/Q1CbgjJ5tMc6LbVAe9e0mGdA8IhdxkL4txrn2NjhyYdy0J4ZiKQre88nRE80k+Zb9
-	mD0sPyrgKv06MWIt0wMKDwqHkPF3FKiF0Ew+Nm/2Wg/DMYZS57Cq9vsOhM6tZA6ib7HK
-	huiQ==
-X-Gm-Message-State: APjAAAVHjMiIugtdgvmBBBiz/98sBAYVFYaWfAtvyPTNKOLlL4I6P29W
-	wberNylyLDdm7TdrPnvzboL2mfc6ULqAjWtFtrWOng==
-X-Google-Smtp-Source: APXvYqx92HOwlWxPRYbTTia4+9RwfkjPAGlk/qscQKz2lIKokT7sU9aDxrN47hmRxlhXt9gTpypJGJb+KDGb9bXLdG8=
-X-Received: by 2002:a5e:d502:: with SMTP id e2mr3150816iom.224.1572220783471; 
-	Sun, 27 Oct 2019 16:59:43 -0700 (PDT)
+	Mon, 28 Oct 2019 09:29:45 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 28 Oct 2019 09:37:50 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 28 Oct 2019 09:37:37 +0800
+Message-ID: <20191028013737.19666-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20191027233545.4146-1-schnitzeltony@gmail.com>
-	<20191027233545.4146-20-schnitzeltony@gmail.com>
-In-Reply-To: <20191027233545.4146-20-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 28 Oct 2019 00:59:32 +0100
-Message-ID: <CALbNGRS=zdR0MdRFHc8M7tODNNavN3tQaM1pQdLim0q6_Vn-KA@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 19/19] ibus: initial add 1.5.21
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: B2E694B6EC6E.AA4CD
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-bitarray: upgrade 0.8.3 -> 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,17 +37,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Oct 2019 23:59:42 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Oct 2019 01:37:58 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Mon, Oct 28, 2019 at 12:36 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
->
-> It is a depency for gnome-shell
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-Aargh - it was improperly tested - please ignore
+-License-Update: Update PKG-INFO.
 
-Andreas
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-bitarray.inc             | 6 +++---
+ .../python/{python-bitarray_0.8.3.bb => python-bitarray_1.0.1.bb}   | 0
+ .../python/{python3-bitarray_0.8.3.bb => python3-bitarray_1.0.1.bb} | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-bitarray_0.8.3.bb => python-bitarray_1.0.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_0.8.3.bb => python3-bitarray_1.0.1.bb} (100%)
+
+diff --git a/meta-python/recipes-devtools/python/python-bitarray.inc b/meta-python/recipes-devtools/python/python-bitarray.inc
+index 480f048..e7d49db 100644
+--- a/meta-python/recipes-devtools/python/python-bitarray.inc
++++ b/meta-python/recipes-devtools/python/python-bitarray.inc
+@@ -1,10 +1,10 @@
+ SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
+ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=f4ce1ae80a385140f0ddb2bcef410b06"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=d736cf16034030b4aab4ea179d91e778"
+ 
+-SRC_URI[md5sum] = "f3131ac2a277f3b70dbb6132ca8f8889"
+-SRC_URI[sha256sum] = "050cd30b810ddb3aa941e7ddfbe0d8065e793012d0a88cb5739ec23624b9895e"
++SRC_URI[md5sum] = "56f55188d8d5361834db0bc7120f8998"
++SRC_URI[sha256sum] = "3eb500f8b9cde19e14472fcbee0195dbf0fbac006f8406a03f0cfb495dff20a0"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-bitarray_0.8.3.bb b/meta-python/recipes-devtools/python/python-bitarray_1.0.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-bitarray_0.8.3.bb
+rename to meta-python/recipes-devtools/python/python-bitarray_1.0.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_0.8.3.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.0.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-bitarray_0.8.3.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_1.0.1.bb
+-- 
+2.7.4
+
+
+
 
