@@ -1,52 +1,88 @@
-Return-Path: <luca.boccassi@gmail.com>
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
-	[209.85.221.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F5547FA9A
+Return-Path: <mns@gomspace.com>
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+	(mail-eopbgr70137.outbound.protection.outlook.com [40.107.7.137])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F1BD7FA45
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 14:58:30 +0000 (UTC)
-Received: by mail-wr1-f42.google.com with SMTP id q13so10202838wrs.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 07:58:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=E/ISlAcdp8VG+ZJgwvVzFRc5CuDLUmCoKv5aWrrDUSo=;
-	b=hMcplNdI7PcboKIgzg6oZ3k2+cMUtORYEE9/qVryQW4iFTyY6DzxzHAJF1Nuw7v5Np
-	XhH+EIwOZxsHKCsEYnS9tJbhHsKw0SXPFh6WEqhDa+UvmdpzRCfa1TIfrOVQ5aBMrxLG
-	uEarKjO4U04zP0f3BA3p8nKRJz5HsL06pUPH3iXFLTc2ie8Ev0KFgCmk23xDQp5XKVnZ
-	+8q2GEiK7a913ohZw3DbrIgAKgDVXYBOps0/5Mg8FXaFDTRGW7jIHrEEm42wk+e3mMA2
-	E+pv7JJmQ/qypO+ibJGmPx7o1cKiYMcP6WUSHJrgLbW/oBKa05YeBhEqFsTzDHdjia9W
-	bBWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=E/ISlAcdp8VG+ZJgwvVzFRc5CuDLUmCoKv5aWrrDUSo=;
-	b=gZKneJhMFPnRAjnl0OZjf7XPchFB2wFOVrCNFcxWrJqH8Mp1rfPtrI1SG7nzYYKkzb
-	MpfYgGRpMCEdVzUjKIOO7w5dMZkqcjR4f7Ac43fyXoUO8bA01c/rfskMjKTAK7JU9tmY
-	+tCfZaMSaswpMHpqQb+4wUVGbFdBAtEvUAeWxg+Y3sBDUyBgkFv/mbtFq9W8cM44wMkl
-	5CO02euckQLaIAAJRLnsx8xzmUyA+kHMjypmye8aSWvpgxmBp8c48tyRTV+JNJT0blcI
-	0bSKzQ1N48Bh6+Aao/MCn2u2OR57Dr39Cfq9MYiOErjvuyfRznXc8XdPi+m6FZ41nH1U
-	tERA==
-X-Gm-Message-State: APjAAAXBijkrcW3/kPpEaYQfKS7JzNA1do6ZsvfueQ4wiWZMaNwFyg8d
-	TCZ4bpkJ2/YFwnpDQfRE4aNvqG+q
-X-Google-Smtp-Source: APXvYqy1fWxM+qkNu35eMynSl/QPcrUDinyar7cAVC4wI0vCerIJoXFCjkAO6BsoQs5fvuYmCgn66w==
-X-Received: by 2002:adf:ab5b:: with SMTP id r27mr16168511wrc.13.1572274710888; 
-	Mon, 28 Oct 2019 07:58:30 -0700 (PDT)
-Received: from localhost ([88.98.246.218]) by smtp.gmail.com with ESMTPSA id
-	o189sm18134432wmo.23.2019.10.28.07.58.29
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 28 Oct 2019 07:58:30 -0700 (PDT)
-From: luca.boccassi@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Oct 2019 14:58:23 +0000
-Message-Id: <20191028145823.7462-4-luca.boccassi@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191028145823.7462-1-luca.boccassi@gmail.com>
-References: <20191025191221.17914-1-luca.boccassi@gmail.com>
-	<20191028145823.7462-1-luca.boccassi@gmail.com>
+	Mon, 28 Oct 2019 15:27:33 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=C2p3KBW/yVvDQ4fi16eZIq3G0FfeBAFhPJFRYPgsZlqx3NMkozXCx0RRUXAmzrzMBtokx3NAlMGLpKtoBjy/95+NLe/+IFpDEia6+rC7Blmm+GcXjRWGFjVJW0wAYhRS3eM3H1AxvtHiKhyguOzneuIwUtu19hnVFubc15pZUBgPhViVSVPHOBYCj2wOIgkT2OAICQ84Drjbd/QTOD05TQK5Fq9cGEdSlp5qebiWxMuGoeEoINKvsg0c6ZZkYju9VyMVA9GcO5WKxIDvvfQu8ELShQ/UtW2jBPhjGVbn1GOGh4RkH9chpmKNcXYx5u1Otz5lcvfkA92kdw2O0CQXKA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=QgjPRY4P9rTuQCouKyT2aL9v0wCWX6zcRvcs+bN1kz0=;
+	b=Rwu/enykj0N6w3oNQaN8g1bkfFV6fjMXp1eTiU1zLcM4I506YknAHm2uZ4hvpfV6CQliAEjPPNK/aezyVb/kjOeBbmCPgR/+5GmabuKRanT7Fq4Q4mQtHFZcVZVmkn6xK+B3Nj41/KIaelB6IpKNn2UUJ5lfkhH9dpBLNtMImzQs6Cah6sICil5da2he+oW+VmuZXEoPMsSHPZbZd4HK/M+zWwxaSxxpWCDhoPdcHSoxX0dy1VLONQA6WWPUXcC5ccAbqEqSoayaoDZIdTyFDUHGjXapbvD26Fc8vrx/NumX2M5846N96yRsNFTwGh2qbhZlysHNsEz/Cm9905fFDg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
+	79.171.149.172) smtp.rcpttodomain=lists.openembedded.org
+	smtp.mailfrom=gomspace.com;
+	dmarc=none action=none header.from=gomspace.com; 
+	dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gomspace.com;
+	s=selector2;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=QgjPRY4P9rTuQCouKyT2aL9v0wCWX6zcRvcs+bN1kz0=;
+	b=wfy2TSJuXPkyX7HcY12DFO4VaSWbfIuTrxxuViHz9fpbRcn3O/HyrUN2P0pHcRztkG3moouWa7j/TrwyADPC7pPQXbXA6upTM4pfYhZhh0ijKmDDjqiVX0K12SnrGVkHSv2OuPQCavqwnAO6xpiTk/MtIB2AjHHa4YDz+Zm7LGU=
+Received: from DB6PR0801CA0060.eurprd08.prod.outlook.com (2603:10a6:4:2b::28)
+	by AM4PR0802MB2145.eurprd08.prod.outlook.com (2603:10a6:200:5d::7)
+	with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2387.25;
+	Mon, 28 Oct 2019 15:27:33 +0000
+Received: from DB5EUR01FT044.eop-EUR01.prod.protection.outlook.com
+	(2a01:111:f400:7e02::203) by DB6PR0801CA0060.outlook.office365.com
+	(2603:10a6:4:2b::28) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.2387.22 via
+	Frontend Transport; Mon, 28 Oct 2019 15:27:33 +0000
+Authentication-Results: spf=fail (sender IP is 79.171.149.172)
+	smtp.mailfrom=gomspace.com; lists.openembedded.org;
+	dkim=none (message not
+	signed) header.d=none;lists.openembedded.org; dmarc=none action=none
+	header.from=gomspace.com;
+Received-SPF: Fail (protection.outlook.com: domain of gomspace.com does not
+	designate 79.171.149.172 as permitted sender)
+	receiver=protection.outlook.com; client-ip=79.171.149.172;
+	helo=gomspace.com; 
+Received: from gomspace.com (79.171.149.172) by
+	DB5EUR01FT044.mail.protection.outlook.com (10.152.4.182) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
+	15.20.2387.20 via Frontend Transport; Mon, 28 Oct 2019 15:27:33 +0000
+Received: from dell.gomspace.lan (10.0.8.211) by Ex01.gomspace.lan (10.0.1.60)
+	with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1466.3;
+	Mon, 28 Oct 2019 16:27:32 +0100
+From: Martin Siegumfeldt <mns@gomspace.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 28 Oct 2019 16:27:22 +0100
+Message-ID: <20191028152722.31428-1-mns@gomspace.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v3 4/4] dbus-broker: add patch to fix build with musl libc
+X-Originating-IP: [10.0.8.211]
+X-ClientProxiedBy: Ex01.gomspace.lan (10.0.1.60) To Ex01.gomspace.lan
+	(10.0.1.60)
+X-EOPAttributedMessage: 0
+X-Forefront-Antispam-Report: CIP:79.171.149.172; IPV:CAL; CTRY:DK; EFV:NLI;
+	SFV:NSPM;
+	SFS:(10019020)(136003)(39840400004)(346002)(396003)(376002)(1110001)(339900001)(189003)(199004)(2906002)(316002)(40036005)(3846002)(50466002)(36756003)(126002)(48376002)(16586007)(6116002)(476003)(305945005)(6916009)(2616005)(7736002)(105606002)(26826003)(14444005)(47776003)(50226002)(51416003)(508600001)(70206006)(70586007)(86362001)(107886003)(4326008)(356004)(6666004)(53416004)(33026002)(5660300002)(336012)(1076003)(386003)(8676002)(81156014)(21086003)(81166006)(8936002)(186003)(26005)(16526019)(76130400001)(2351001)(486006);
+	DIR:OUT; SFP:1102; SCL:1; SRVR:AM4PR0802MB2145; H:gomspace.com;
+	FPR:; SPF:Fail; LANG:en; PTR:InfoDomainNonexistent; MX:1; A:1; 
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 935909fe-3527-4e9c-1edd-08d75bbb5a8c
+X-MS-TrafficTypeDiagnostic: AM4PR0802MB2145:
+X-Microsoft-Antispam-PRVS: <AM4PR0802MB21451CCCF671C4EACEFDDE10C4660@AM4PR0802MB2145.eurprd08.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:126;
+X-Forefront-PRVS: 0204F0BDE2
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: F+A4g6dOlNunzA03cD2DvcrxxBnaHDetJ/wiCf1u8ZrWO48Sf3ba1DuO+elRErxOlalml4K2eothzexeg5GIoBDRPpHrDMEwr2fAgdaoCSPuxkVl1lTXvpQBIP7TySDPAmB6OnT6cYqhWAbzbkZrLvnNF7YQKqpcwKqklNzn1ATr7GqpGv+hJxPzSFQv9EUq01mehFwAD3a/PJfgHLblxjspBisZGiAFOc795eE/VuMf/6wnrPKRK2lbdnnbmdOa9BK0VRYC0rkC6vZmMutw1VjZGnk7vaY2qKNgIOqi6RL5gcSLxhevKejQq+KjEWvl+A4gkQXt+/rNnxY1u9mdKP5CInJEv6E7vQoUFN6HhiSpQLt+kRMUb0fpCp+aA5igPfhF+sXyYB2Nc4wEKvC+3/lQaJgMD1s0gk/sG7q6pxc9W0NwZ2DjVA/wmPcUI0wt
+X-OriginatorOrg: gomspace.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2019 15:27:33.1478 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 935909fe-3527-4e9c-1edd-08d75bbb5a8c
+X-MS-Exchange-CrossTenant-Id: 91ed1e54-6d8b-4599-84d8-65fe75fda3d1
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=91ed1e54-6d8b-4599-84d8-65fe75fda3d1;
+	Ip=[79.171.149.172]; Helo=[gomspace.com]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM4PR0802MB2145
+Cc: Martin Siegumfeldt <mns@gomspace.com>
+Subject: [meta-oe][PATCH] libiio: Conditionally inherit distutils3-base
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,79 +95,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 14:58:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 28 Oct 2019 15:27:34 -0000
+Content-Type: text/plain
 
-From: Luca Boccassi <luca.boccassi@microsoft.com>
+ * inherit only when PACKAGECONFIG indicates Python bindings is build
 
-Forwarded upstream: https://github.com/bus1/dbus-broker/pull/214
+Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
 ---
-v2: added
-v3: no changes
+ meta-oe/recipes-support/libiio/libiio_git.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
- ...04-launcher-fix-build-with-musl-libc.patch | 38 +++++++++++++++++++
- meta-oe/recipes-core/dbus/dbus-broker_21.bb   |  1 +
- 2 files changed, 39 insertions(+)
- create mode 100644 meta-oe/recipes-core/dbus/dbus-broker/0004-launcher-fix-build-with-musl-libc.patch
-
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker/0004-launcher-fix-build-with-musl-libc.patch b/meta-oe/recipes-core/dbus/dbus-broker/0004-launcher-fix-build-with-musl-libc.patch
-new file mode 100644
-index 000000000..0348d9722
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/dbus-broker/0004-launcher-fix-build-with-musl-libc.patch
-@@ -0,0 +1,38 @@
-+From fc1d26dd08c48c04fc9883b36a94c219aba2091c Mon Sep 17 00:00:00 2001
-+From: Luca Boccassi <luca.boccassi@microsoft.com>
-+Date: Mon, 28 Oct 2019 14:31:38 +0000
-+Subject: [PATCH] launcher: fix build with musl libc
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+../src/launch/launcher.c: In function ‘launcher_fork’:
-+../src/launch/launcher.c:378:60: error: ‘WEXITED’ undeclared (first use in this function); did you mean ‘WIFEXITED’?
-+         r = sd_event_add_child(launcher->event, NULL, pid, WEXITED, launcher_on_child_exit, launcher);
-+                                                            ^~~~~~~
-+                                                            WIFEXITED
-+
-+Include sys/wait.h which defines it.
-+
-+Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
-+Suggested-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: pending https://github.com/bus1/dbus-broker/pull/214
-+---
-+ src/launch/launcher.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/launch/launcher.c b/src/launch/launcher.c
-+index 2ec4bda..1f38fcf 100644
-+--- a/src/launch/launcher.c
-++++ b/src/launch/launcher.c
-+@@ -10,6 +10,7 @@
-+ #include <stdlib.h>
-+ #include <sys/prctl.h>
-+ #include <sys/un.h>
-++#include <sys/wait.h>
-+ #include <systemd/sd-bus.h>
-+ #include <systemd/sd-daemon.h>
-+ #include <systemd/sd-event.h>
-+-- 
-+2.20.1
-+
-diff --git a/meta-oe/recipes-core/dbus/dbus-broker_21.bb b/meta-oe/recipes-core/dbus/dbus-broker_21.bb
-index c509ff6f2..d2d051070 100644
---- a/meta-oe/recipes-core/dbus/dbus-broker_21.bb
-+++ b/meta-oe/recipes-core/dbus/dbus-broker_21.bb
-@@ -10,6 +10,7 @@ SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-bro
- SRC_URI += " file://0001-launch-improve-error-handling-for-opendir.patch"
- SRC_URI += " file://0002-metrics-change-the-constant-used-for-invalid-timesta.patch"
- SRC_URI += " file://0003-dbus-socket-treat-MSG_CTRUNC-gracefully.patch"
-+SRC_URI += " file://0004-launcher-fix-build-with-musl-libc.patch"
- SRC_URI[md5sum] = "a17886a92ab1e0bc2e4b1a274339e388"
- SRC_URI[sha256sum] = "6fff9a831a514659e2c7d704e76867ce31ebcf43e8d7a62e080c6656f64cd39e"
+diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
+index e6e0eaef8..027e4d5e5 100644
+--- a/meta-oe/recipes-support/libiio/libiio_git.bb
++++ b/meta-oe/recipes-support/libiio/libiio_git.bb
+@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
  
+ S = "${WORKDIR}/git"
+ 
+-inherit cmake python3native systemd distutils3-base
++inherit cmake python3native systemd
+ 
+ DEPENDS = " \
+     flex-native bison-native libaio \
+@@ -30,6 +30,8 @@ PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND"
+ PACKAGECONFIG[USB_BACKEND] = "-DWITH_USB_BACKEND=ON,-DWITH_USB_BACKEND=OFF,libusb1,libxml2"
+ PACKAGECONFIG[NETWORK_BACKEND] = "-DWITH_NETWORK_BACKEND=ON,-DWITH_NETWORK_BACKEND=OFF,libxml2"
+ 
++inherit ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'distutils3-base', '', d)}
++
+ PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-${PYTHON_PN}"
+ 
+ RDEPENDS_${PN}-${PYTHON_PN} = "${PN} ${PYTHON_PN}-ctypes ${PYTHON_PN}-stringold"
 -- 
-2.20.1
+2.17.1
 
 
