@@ -1,88 +1,26 @@
-Return-Path: <mns@gomspace.com>
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
-	(mail-eopbgr70137.outbound.protection.outlook.com [40.107.7.137])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F1BD7FA45
+Return-Path: <tgamblin@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B892A7FA3F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 15:27:33 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=C2p3KBW/yVvDQ4fi16eZIq3G0FfeBAFhPJFRYPgsZlqx3NMkozXCx0RRUXAmzrzMBtokx3NAlMGLpKtoBjy/95+NLe/+IFpDEia6+rC7Blmm+GcXjRWGFjVJW0wAYhRS3eM3H1AxvtHiKhyguOzneuIwUtu19hnVFubc15pZUBgPhViVSVPHOBYCj2wOIgkT2OAICQ84Drjbd/QTOD05TQK5Fq9cGEdSlp5qebiWxMuGoeEoINKvsg0c6ZZkYju9VyMVA9GcO5WKxIDvvfQu8ELShQ/UtW2jBPhjGVbn1GOGh4RkH9chpmKNcXYx5u1Otz5lcvfkA92kdw2O0CQXKA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=QgjPRY4P9rTuQCouKyT2aL9v0wCWX6zcRvcs+bN1kz0=;
-	b=Rwu/enykj0N6w3oNQaN8g1bkfFV6fjMXp1eTiU1zLcM4I506YknAHm2uZ4hvpfV6CQliAEjPPNK/aezyVb/kjOeBbmCPgR/+5GmabuKRanT7Fq4Q4mQtHFZcVZVmkn6xK+B3Nj41/KIaelB6IpKNn2UUJ5lfkhH9dpBLNtMImzQs6Cah6sICil5da2he+oW+VmuZXEoPMsSHPZbZd4HK/M+zWwxaSxxpWCDhoPdcHSoxX0dy1VLONQA6WWPUXcC5ccAbqEqSoayaoDZIdTyFDUHGjXapbvD26Fc8vrx/NumX2M5846N96yRsNFTwGh2qbhZlysHNsEz/Cm9905fFDg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
-	79.171.149.172) smtp.rcpttodomain=lists.openembedded.org
-	smtp.mailfrom=gomspace.com;
-	dmarc=none action=none header.from=gomspace.com; 
-	dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gomspace.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=QgjPRY4P9rTuQCouKyT2aL9v0wCWX6zcRvcs+bN1kz0=;
-	b=wfy2TSJuXPkyX7HcY12DFO4VaSWbfIuTrxxuViHz9fpbRcn3O/HyrUN2P0pHcRztkG3moouWa7j/TrwyADPC7pPQXbXA6upTM4pfYhZhh0ijKmDDjqiVX0K12SnrGVkHSv2OuPQCavqwnAO6xpiTk/MtIB2AjHHa4YDz+Zm7LGU=
-Received: from DB6PR0801CA0060.eurprd08.prod.outlook.com (2603:10a6:4:2b::28)
-	by AM4PR0802MB2145.eurprd08.prod.outlook.com (2603:10a6:200:5d::7)
-	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2387.25;
-	Mon, 28 Oct 2019 15:27:33 +0000
-Received: from DB5EUR01FT044.eop-EUR01.prod.protection.outlook.com
-	(2a01:111:f400:7e02::203) by DB6PR0801CA0060.outlook.office365.com
-	(2603:10a6:4:2b::28) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.2387.22 via
-	Frontend Transport; Mon, 28 Oct 2019 15:27:33 +0000
-Authentication-Results: spf=fail (sender IP is 79.171.149.172)
-	smtp.mailfrom=gomspace.com; lists.openembedded.org;
-	dkim=none (message not
-	signed) header.d=none;lists.openembedded.org; dmarc=none action=none
-	header.from=gomspace.com;
-Received-SPF: Fail (protection.outlook.com: domain of gomspace.com does not
-	designate 79.171.149.172 as permitted sender)
-	receiver=protection.outlook.com; client-ip=79.171.149.172;
-	helo=gomspace.com; 
-Received: from gomspace.com (79.171.149.172) by
-	DB5EUR01FT044.mail.protection.outlook.com (10.152.4.182) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
-	15.20.2387.20 via Frontend Transport; Mon, 28 Oct 2019 15:27:33 +0000
-Received: from dell.gomspace.lan (10.0.8.211) by Ex01.gomspace.lan (10.0.1.60)
-	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1466.3;
-	Mon, 28 Oct 2019 16:27:32 +0100
-From: Martin Siegumfeldt <mns@gomspace.com>
+	Mon, 28 Oct 2019 17:46:06 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x9SHk7EC022954
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Oct 2019 10:46:07 -0700
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Mon, 28 Oct 2019 10:46:07 -0700
+Received: by ala-lpggp2.wrs.com (Postfix, from userid 20958)	id 4A828C61144;
+	Mon, 28 Oct 2019 10:46:07 -0700 (PDT)
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 28 Oct 2019 16:27:22 +0100
-Message-ID: <20191028152722.31428-1-mns@gomspace.com>
-X-Mailer: git-send-email 2.17.1
+Date: Mon, 28 Oct 2019 10:46:05 -0700
+Message-ID: <20191028174605.11112-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-Originating-IP: [10.0.8.211]
-X-ClientProxiedBy: Ex01.gomspace.lan (10.0.1.60) To Ex01.gomspace.lan
-	(10.0.1.60)
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:79.171.149.172; IPV:CAL; CTRY:DK; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10019020)(136003)(39840400004)(346002)(396003)(376002)(1110001)(339900001)(189003)(199004)(2906002)(316002)(40036005)(3846002)(50466002)(36756003)(126002)(48376002)(16586007)(6116002)(476003)(305945005)(6916009)(2616005)(7736002)(105606002)(26826003)(14444005)(47776003)(50226002)(51416003)(508600001)(70206006)(70586007)(86362001)(107886003)(4326008)(356004)(6666004)(53416004)(33026002)(5660300002)(336012)(1076003)(386003)(8676002)(81156014)(21086003)(81166006)(8936002)(186003)(26005)(16526019)(76130400001)(2351001)(486006);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:AM4PR0802MB2145; H:gomspace.com;
-	FPR:; SPF:Fail; LANG:en; PTR:InfoDomainNonexistent; MX:1; A:1; 
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 935909fe-3527-4e9c-1edd-08d75bbb5a8c
-X-MS-TrafficTypeDiagnostic: AM4PR0802MB2145:
-X-Microsoft-Antispam-PRVS: <AM4PR0802MB21451CCCF671C4EACEFDDE10C4660@AM4PR0802MB2145.eurprd08.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:126;
-X-Forefront-PRVS: 0204F0BDE2
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: F+A4g6dOlNunzA03cD2DvcrxxBnaHDetJ/wiCf1u8ZrWO48Sf3ba1DuO+elRErxOlalml4K2eothzexeg5GIoBDRPpHrDMEwr2fAgdaoCSPuxkVl1lTXvpQBIP7TySDPAmB6OnT6cYqhWAbzbkZrLvnNF7YQKqpcwKqklNzn1ATr7GqpGv+hJxPzSFQv9EUq01mehFwAD3a/PJfgHLblxjspBisZGiAFOc795eE/VuMf/6wnrPKRK2lbdnnbmdOa9BK0VRYC0rkC6vZmMutw1VjZGnk7vaY2qKNgIOqi6RL5gcSLxhevKejQq+KjEWvl+A4gkQXt+/rNnxY1u9mdKP5CInJEv6E7vQoUFN6HhiSpQLt+kRMUb0fpCp+aA5igPfhF+sXyYB2Nc4wEKvC+3/lQaJgMD1s0gk/sG7q6pxc9W0NwZ2DjVA/wmPcUI0wt
-X-OriginatorOrg: gomspace.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2019 15:27:33.1478 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 935909fe-3527-4e9c-1edd-08d75bbb5a8c
-X-MS-Exchange-CrossTenant-Id: 91ed1e54-6d8b-4599-84d8-65fe75fda3d1
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=91ed1e54-6d8b-4599-84d8-65fe75fda3d1;
-	Ip=[79.171.149.172]; Helo=[gomspace.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM4PR0802MB2145
-Cc: Martin Siegumfeldt <mns@gomspace.com>
-Subject: [meta-oe][PATCH] libiio: Conditionally inherit distutils3-base
+Subject: [meta-oe][PATCH v2] rsyslog: upgrade from v8.1908.0 to v8.1910.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -95,39 +33,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 15:27:34 -0000
+X-List-Received-Date: Mon, 28 Oct 2019 17:46:06 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
- * inherit only when PACKAGECONFIG indicates Python bindings is build
+Upgrade rsyslog to latest version for various
+fixes including the following CVEs:
 
-Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
+CVE: CVE-2019-17040
+CVE: CVE-2019-17041
+
+Backported patches for those fixes were removed since
+they are contained in v8.1910.0.
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- meta-oe/recipes-support/libiio/libiio_git.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../rsyslog/0001-Out-of-bounds-issue.patch    | 31 -------------
+ ...edfrom-bugfix-potential-misadressing.patch | 43 -------------------
+ ...syslog_8.1908.0.bb => rsyslog_8.1910.0.bb} |  6 +--
+ 3 files changed, 2 insertions(+), 78 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-Out-of-bounds-issue.patch
+ delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-pmaixforwardedfrom-bugfix-potential-misadressing.patch
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-index e6e0eaef8..027e4d5e5 100644
---- a/meta-oe/recipes-support/libiio/libiio_git.bb
-+++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Out-of-bounds-issue.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Out-of-bounds-issue.patch
+deleted file mode 100644
+index b494ca687..000000000
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-Out-of-bounds-issue.patch
++++ /dev/null
+@@ -1,31 +0,0 @@
+-From b0894088b680666035a3418326e13bc99d4fed49 Mon Sep 17 00:00:00 2001
+-From: Philippe Duveau <pduveau@users.noreply.github.com>
+-Date: Tue, 24 Sep 2019 20:45:25 +0200
+-Subject: [PATCH] Out of bounds issue
+-
+-Add a new sanity check after determining the level len.
+----
+- contrib/pmdb2diag/pmdb2diag.c | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-Upstream-Status: Backport [https://github.com/rsyslog/rsyslog/commit/b0894088b6]
+-CVE: CVE-2019-17040
+-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+-diff --git a/contrib/pmdb2diag/pmdb2diag.c b/contrib/pmdb2diag/pmdb2diag.c
+-index 2b5916301..5810eb4df 100644
+---- a/contrib/pmdb2diag/pmdb2diag.c
+-+++ b/contrib/pmdb2diag/pmdb2diag.c
+-@@ -134,6 +134,10 @@ CODESTARTparse2
+- 		ABORT_FINALIZE(0);
+- 	}
+- 
+-+	/* let recheck with the real level len */
+-+	if(pMsg->iLenRawMsg - (int)pMsg->offAfterPRI < pInst->levelpos+lvl_len)
+-+		ABORT_FINALIZE(RS_RET_COULD_NOT_PARSE);
+-+
+- 	DBGPRINTF("db2parse Level %d\n", pMsg->iSeverity);
+- 
+- 	end = (char*)pMsg->pszRawMsg + pMsg->iLenRawMsg ;
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-pmaixforwardedfrom-bugfix-potential-misadressing.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-pmaixforwardedfrom-bugfix-potential-misadressing.patch
+deleted file mode 100644
+index 0b32766a5..000000000
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-pmaixforwardedfrom-bugfix-potential-misadressing.patch
++++ /dev/null
+@@ -1,43 +0,0 @@
+-From 10549ba915556c557b22b3dac7e4cb73ad22d3d8 Mon Sep 17 00:00:00 2001
+-From: Rainer Gerhards <rgerhards@adiscon.com>
+-Date: Fri, 27 Sep 2019 13:36:02 +0200
+-Subject: [PATCH] pmaixforwardedfrom bugfix: potential misadressing
+-
+----
+- contrib/pmaixforwardedfrom/pmaixforwardedfrom.c | 9 +++++++++
+- 1 file changed, 9 insertions(+)
+-
+-Upstream-Status: Backport [https://github.com/rsyslog/rsyslog/pull/3884]
+-CVE: CVE-2019-17041
+-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+-
+-diff --git a/contrib/pmaixforwardedfrom/pmaixforwardedfrom.c b/contrib/pmaixforwardedfrom/pmaixforwardedfrom.c
+-index 37157c7d4..ebf12ebbe 100644
+---- a/contrib/pmaixforwardedfrom/pmaixforwardedfrom.c
+-+++ b/contrib/pmaixforwardedfrom/pmaixforwardedfrom.c
+-@@ -109,6 +109,10 @@ CODESTARTparse
+- 	/* bump the message portion up by skipLen(23 or 5) characters to overwrite the "Message forwarded from
+- " or "From " with the hostname */
+- 	lenMsg -=skipLen;
+-+	if(lenMsg < 2) {
+-+		dbgprintf("not a AIX message forwarded from message has nothing after header\n");
+-+		ABORT_FINALIZE(RS_RET_COULD_NOT_PARSE);
+-+	}
+- 	memmove(p2parse, p2parse + skipLen, lenMsg);
+- 	*(p2parse + lenMsg) = '\n';
+- 	*(p2parse + lenMsg + 1)  = '\0';
+-@@ -120,6 +124,11 @@ really an AIX log, but has a similar preamble */
+- 		--lenMsg;
+- 		++p2parse;
+- 	}
+-+	if (lenMsg < 1) {
+-+		dbgprintf("not a AIX message forwarded from message has nothing after colon "
+-+			"or no colon at all\n");
+-+		ABORT_FINALIZE(RS_RET_COULD_NOT_PARSE);
+-+	}
+- 	if (lenMsg && *p2parse != ':') {
+- 	DBGPRINTF("not a AIX message forwarded from mangled log but similar enough that the preamble has "
+- 		"been removed\n");
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
+similarity index 96%
+rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
+rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
+index f9e44421d..f50f9a34b 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
+@@ -23,16 +23,14 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
+            file://rsyslog.logrotate \
+            file://use-pkgconfig-to-check-libgcrypt.patch \
+            file://run-ptest \
+-           file://0001-Out-of-bounds-issue.patch \
+-           file://0001-pmaixforwardedfrom-bugfix-potential-misadressing.patch \
+ "
  
- S = "${WORKDIR}/git"
+ SRC_URI_append_libc-musl = " \
+     file://0001-Include-sys-time-h.patch \
+ "
  
--inherit cmake python3native systemd distutils3-base
-+inherit cmake python3native systemd
+-SRC_URI[md5sum] = "6e9aa4ef4cad8ae49affa0a786cc9e2f"
+-SRC_URI[sha256sum] = "f8c8e53b651e03a011667c60bd2d4dba7a7cb6ec04b247c8ea8514115527863b"
++SRC_URI[md5sum] = "6d4d94359d083f449f089b8dbb93c423"
++SRC_URI[sha256sum] = "0219ee692f31a39743acb62aaf4196b644ce94edf386df4605fd6a11a4fe0c93"
  
- DEPENDS = " \
-     flex-native bison-native libaio \
-@@ -30,6 +30,8 @@ PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND"
- PACKAGECONFIG[USB_BACKEND] = "-DWITH_USB_BACKEND=ON,-DWITH_USB_BACKEND=OFF,libusb1,libxml2"
- PACKAGECONFIG[NETWORK_BACKEND] = "-DWITH_NETWORK_BACKEND=ON,-DWITH_NETWORK_BACKEND=OFF,libxml2"
- 
-+inherit ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'distutils3-base', '', d)}
-+
- PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-${PYTHON_PN}"
- 
- RDEPENDS_${PN}-${PYTHON_PN} = "${PN} ${PYTHON_PN}-ctypes ${PYTHON_PN}-stringold"
+ UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 -- 
-2.17.1
+2.23.0
 
 
