@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F8A67FA43
+	by mail.openembedded.org (Postfix) with ESMTP id 716647FA45
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 28 Oct 2019 18:54:48 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4723mn1j5Wz8b
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4723mm3HSmz7x
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 19:54:49 +0100 (CET)
+	Mon, 28 Oct 2019 19:54:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572288889;
-	bh=5BlkuNYMPP00qKLl9yBzxsKng40HFhgFoukeYL9Ao4M=;
+	s=default; t=1572288888;
+	bh=b7CFM6Jd0NEMZI1X5IYeHAYzkfsfoYsy7eXkPEDX7+s=;
 	h=From:To:Subject:Date:From;
-	b=iIz+epYgcm8AvLHR6DTKQRostTD4BVrHZdOwTW9Tj8VLTwxVIz5atEGrURUwhZ6xO
-	3grel4wixaaUxhOH3iPY9Mv9O3ppR94/LneWb87XtpWKQvtsv2acC4e/xxsnjqvxr1
-	LY2Rg0fGvEN0zTzTFKpTqQed8QDDuuEzW95xmKsy2bjr8RZUmNwviv3JbhQZNzt4t1
-	uqbqduaIxCX7IzsN+Vonm6gCc/CF33bwPIEKE/CMw0GlVa4VZgfcj+yB+TrMKIvP/A
-	ATjOvZcNUAlh/jACp3OGuJxMA/SVj4i4hsSRNc3WAh7qm99VkqRi4f5NxEH4eJ/sCE
-	x1Jg07qC/aZEcn59Abj1vRImHxbMFy7DB3e37Rh1yM7BKvl16k1Dn7LeJuxm4K2wtJ
-	gsj1VogO1ArA6pzYT6tgJc+lV8jhnWKjQqySBr2wfDPMSIChAbiXPVfXKURx9fI3P5
-	USLFHkJ9pAK1RfxQWej7eAguGTmOyuZ6wAZpJ3q5q1DEGu0Hx1tXPA/QBUYhOdsrwS
-	FkE2qyz7iYIRITrO0W4jcjBL7mO+6RVA8gHAE1HyOCd68NQkIzauY69WJxa7JpW7l+
-	VAP1Z3wl/sHBQBp+fAo8sp4BptdAtWmgXnw64FGCWeehEJpAQeDL+5aj5Antczcrio
-	zZRg6LW/hzyZXwx30HAXk3SI=
+	b=fAMUguUYRZeKKxThXhiF2fIEZmwXBRy+1g9KtHR8CcMle3EKbEc/ffDHTqu6nj9L1
+	h3CJI0Nu5fyrLkFUWLIrYTVbRpx2hGdUmE7ypNhhgeegX9gIRaZSgZxmeaRubkWlaL
+	iXqjY6P7u5cCbwBeLV8uI81bCUFLaLHjNk7XXwQ9al/vWml0Y78+EjR8EtESNu9UnD
+	RRwnpW5FVmVhv7IAnWccDa6NQdzEQPdih1mkxuO5lN+AmZv9oBF+D7XJMQwUox82So
+	igcnbmqwVP4MN3fko9GqiDhSCWEpp2fR78lnTt3pYbZjqnt+HnzGtPZqxQJ2IkfZ2L
+	61PIA0LefusytbCpXjDEcBO2v9AdzshnjDwOyEdgQ8ri3erMzoimOaVXmnQYbog6gJ
+	Mqm7Gt94HPNdTw1iD0zbTxvbRp2LqEKSKqumQxHgoCl5ZdV0DxdNFvH458ynWL3Jof
+	+lcv6keSipUpmc67eYwcckzoFsfi1VVpG0gI2FpXvJiCtXE9yJ8/lumfyG/FG4CMVA
+	Yvp/M+GLAh4GjctqLecy+yp4WPpjdAFKOop3p3otcc6LwBdh60Zpsag0+gb+jS6U/9
+	zQSPiWjboIIsJvvCOWaUvyKnhhE+Lcssye/tIgEUGUU3lFPLxpIZM/JkTRGGQjvoRE
+	+fSHRZADMcR5nnDYjc6dQXs8=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Oct 2019 20:54:47 +0200
-Message-Id: <20191028185447.3553-4-bunk@stusta.de>
+Date: Mon, 28 Oct 2019 20:54:45 +0200
+Message-Id: <20191028185447.3553-2-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH] vlc: Upgrade 3.0.6 -> 3.0.8
+Subject: [meta-multimedia][PATCH] gstd: Fix the version number
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,56 +42,55 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 28 Oct 2019 18:54:49 -0000
 
-Workaround for riscv64 issue fixed upstream removed.
+This is Gstd 0.6.3 for GStreamer 1.x.
+
 Also merge the inc into the recipe.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb   | 11 -----------
- .../recipes-multimedia/vlc/{vlc.inc => vlc_3.0.8.bb}  |  8 +++++++-
- 2 files changed, 7 insertions(+), 12 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb
- rename meta-multimedia/recipes-multimedia/vlc/{vlc.inc => vlc_3.0.8.bb} (94%)
+ .../recipes-multimedia/gstreamer-1.0/gstd_1.0.bb            | 3 ---
+ .../gstreamer-1.0/{gstd.inc => gstd_git.bb}                 | 6 +++++-
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
+ rename meta-multimedia/recipes-multimedia/gstreamer-1.0/{gstd.inc => gstd_git.bb} (82%)
 
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
 deleted file mode 100644
-index fcd321cb0..000000000
---- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb
+index 94f6b575b..000000000
+--- a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_1.0.bb
 +++ /dev/null
-@@ -1,11 +0,0 @@
--require ${BPN}.inc
+@@ -1,3 +0,0 @@
+-require gstd.inc
 -
--LDFLAGS_append_riscv64 = " -pthread"
--
--SRC_URI += " \
--            file://0006-make-opencv-configurable.patch \
--            file://0007-use-vorbisidec.patch \
--            file://0008-fix-luaL-checkint.patch \
--"
--SRC_URI[md5sum] = "4ff71d262e070fd19f86a1c3542c7b4e"
--SRC_URI[sha256sum] = "18c16d4be0f34861d0aa51fbd274fb87f0cab3b7119757ead93f3db3a1f27ed3"
-diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
-similarity index 94%
-rename from meta-multimedia/recipes-multimedia/vlc/vlc.inc
-rename to meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
-index 7308465b1..8ea09b921 100644
---- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
-+++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
-@@ -16,7 +16,13 @@ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
- # While this item does not require it, it depends on ffmpeg which does
- LICENSE_FLAGS = "commercial"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd.inc b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_git.bb
+similarity index 82%
+rename from meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd.inc
+rename to meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_git.bb
+index 455d89684..828caa883 100644
+--- a/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd.inc
++++ b/meta-multimedia/recipes-multimedia/gstreamer-1.0/gstd_git.bb
+@@ -1,8 +1,9 @@
+-DESCRIPTION = "Gstreamer Daemon 1.0"
++DESCRIPTION = "Gstreamer Daemon"
+ SUMMARY = "GStreamer framework for controlling audio and video streaming using TCP connection messages"
+ HOMEPAGE = "https://developer.ridgerun.com/wiki/index.php?title=Gstd-1.0"
+ SECTION = "multimedia"
+ LICENSE = "GPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
--SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
-+SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
-+           file://0006-make-opencv-configurable.patch \
-+           file://0007-use-vorbisidec.patch \
-+           file://0008-fix-luaL-checkint.patch \
-+"
-+SRC_URI[md5sum] = "744442ec0c145453ea1d257914c8072e"
-+SRC_URI[sha256sum] = "e0149ef4a20a19b9ecd87309c2d27787ee3f47dfd47c6639644bc1f6fd95bdf6"
+ DEPENDS = "gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad gstreamer1.0-rtsp-server json-glib libdaemon"
  
- inherit autotools gettext pkgconfig distro_features_check
+@@ -14,6 +15,9 @@ SRC_URI = "git://git@github.com/RidgeRun/gstd-1.x.git;protocol=https;branch=${SR
+            "
+ S = "${WORKDIR}/git"
  
++# Remove the +really when upstream version is > 1.0
++PV = "1.0+really0.6.3"
++
+ inherit autotools pkgconfig gettext gtk-doc
+ 
+ do_configure_prepend() {
 -- 
 2.17.1
 
