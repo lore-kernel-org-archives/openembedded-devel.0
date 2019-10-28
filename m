@@ -1,48 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
-	[209.85.160.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F5927F98E
+Return-Path: <luca.boccassi@gmail.com>
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
+	[209.85.221.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 244646007A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 13:58:07 +0000 (UTC)
-Received: by mail-qt1-f172.google.com with SMTP id l15so8054178qtr.10
+	Mon, 28 Oct 2019 14:53:52 +0000 (UTC)
+Received: by mail-wr1-f46.google.com with SMTP id e11so10222620wrv.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 06:58:08 -0700 (PDT)
+	Mon, 28 Oct 2019 07:53:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eBvBiw7dNSPbwEHbFy9lg2V2TkNyjVANyNsK7DFb/6A=;
-	b=PgJiK31VZ0vINLMhCAuV+VL74pqUC1H9gm1Mcnn96lsIYThhtc7kR1DL0gXDxPmIXS
-	MgaXH4xV+pHrJxauSDbLz+3aQfl5f+1Q6zbCp+Hwv6oaWDuCSsct7p/nER+Pt2jP7JHj
-	/fbPTcOxqsQ6gENDQWndaZhtvXz2KX4nXAiQEIRnzY5ndzejzmVdAoCDep13YFaIUXwr
-	FxASg2cVaj6eZTV8/ArLU74Vg93cfma9OBPWugR5Z/6yPPYcjxB4Qmw6BmYPeaotkkN5
-	ep+Zw5+HjRfvQ1C+g5MBTwLdv4JSZ3Lt/+nZSgpcIujA3QJMFCqgO2NHKVc/JXKRR+GK
-	SJtQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=qLisvVcU5Ok6/2j/avNCVC7c2sSl/P7Ml7HL/e50QHc=;
+	b=Kbuerj9abHC247Yyb1uj6nTXc2dabk3UWkOiTd78IOSWBHxl8921Oxvas57w5NlxpB
+	UWJl9fbtnWxyK2WwWW/hngF0ofQhKcc/Bb7xysVaC8ZKGQHX8M6o/3DsT4N7CcYPUVDR
+	2GoUM+cJy16E5MJOA8GdpyOFjgRyREiHPqJKo4cpRUMVQQnGsd0zS+VwGQ72uXmGliia
+	AJk4tQuxfw4MtlQ/4Y6Ct66BoQYpzDmXteI2FYE5/IzeCJ44JQguy649OqzZDXYoBTAs
+	t8L4MYjXrZzpot581SHhZz4/NHCLobuLC2pn8bzmIUM0Ul2ZVVDNfsZx3sXBrytIYgjm
+	DRMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=eBvBiw7dNSPbwEHbFy9lg2V2TkNyjVANyNsK7DFb/6A=;
-	b=H6YLXr7RBBXEyTNDFPoa4itbhtIHJc/bwXZ15iLutCWr6ZVLIW/hce0yjm1VtPpy/f
-	j3wNB/95YU7LTSlc5e0rA4uVT2IBbCjGVe1+7M4jjnDUhn/wpidmicbzLl9EO5Y3HL/8
-	VrnHTyQ6S/X3pwrqKOj/ZF6E86+F8njvCI1A3/WM2rvHxiIwa9ZwzkUHFkAVBFW+tIe9
-	7PXAglbeDZGRctrJCxDiwC0axfEypuJaF0cE5xXTBKQqrhjLFUVFPxDlvmU+88wHhZ5g
-	8jFxLL3WNHDafPUxuFOCo4AowduoFIraYyKRCN+Rst+yg+d27PmApxoHlWAkTOtzfbnT
-	SoZw==
-X-Gm-Message-State: APjAAAWHTiMvIch8RRv4auRwN3sdxPD+ZASBJ34HcA4e3XFpjVtqo6DK
-	EuHKo/wwCX2la99AqSv4rs91rl6LsDPE/6DIhxw=
-X-Google-Smtp-Source: APXvYqxZbQaJwAf/iinvbQ6bNN8vorCg6Xl43G1NNBP4G5vl6V7mF1GPrq2xZByQViCm1uY6pke5nhwcnbRaO2tOyts=
-X-Received: by 2002:ac8:6054:: with SMTP id k20mr7014766qtm.88.1572271087882; 
-	Mon, 28 Oct 2019 06:58:07 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=qLisvVcU5Ok6/2j/avNCVC7c2sSl/P7Ml7HL/e50QHc=;
+	b=eMme4bpDQE0EJBG2nv0+QOkEmmVWqcEfONE6UTlJC/5rCgzZRK1/e0EmcuEPHEEVGI
+	aFqm7jLUF14jHvLMf13UrPChScMeHWcdN8LWylC+6eBwijBDqqD7KVqFCaRBii/jRB97
+	HdoaKG4kYKH57D1HAUdC6Nb0XqA8TX9Waa7BHmx74ybs+tmjp53oQojQC+xZT8T+7LAv
+	YButeuD8wulJR7x65DRLXBtFlRI0gc2BqMNbfAwFXhTmOPv8PjfrYf7nU8y8xd0cz9hp
+	MKEW78JceYM7oh9WEEwd6SofhgQaZio6GM7p6lyX2euMd31Os6qLf/ifICE0fclyDO0k
+	hYEA==
+X-Gm-Message-State: APjAAAW76L7LviGJHrgYwVzN3w6tTUOrz6ggwPlw7AQ2y/Jc3pMhUVR3
+	miebpLy4DbBQF4N416v1UoTRLRkD
+X-Google-Smtp-Source: APXvYqwB/AP93GPgJpeTJNprVCHYiHBFU5+5QEBcA26l1CHsRDwMBMTXWV/x5gJ0+A6LVu/osh8jgA==
+X-Received: by 2002:a5d:52c4:: with SMTP id r4mr14538465wrv.168.1572274433171; 
+	Mon, 28 Oct 2019 07:53:53 -0700 (PDT)
+Received: from localhost ([88.98.246.218]) by smtp.gmail.com with ESMTPSA id
+	j22sm15617619wrd.41.2019.10.28.07.53.52
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 28 Oct 2019 07:53:52 -0700 (PDT)
+From: luca.boccassi@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Oct 2019 14:53:47 +0000
+Message-Id: <20191028145350.6606-1-luca.boccassi@gmail.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191025191221.17914-1-luca.boccassi@gmail.com>
+References: <20191025191221.17914-1-luca.boccassi@gmail.com>
 MIME-Version: 1.0
-References: <595fa4eb0a404956aae3fa9a7a25ba12@gomspace.com>
-In-Reply-To: <595fa4eb0a404956aae3fa9a7a25ba12@gomspace.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Oct 2019 14:57:56 +0100
-Message-ID: <CAMKF1sqUw6fbN=096+ed29=iLW+7y+0YnqBVeEG_Qy3AoT1fqQ@mail.gmail.com>
-To: Martin Siegumfeldt <mns@gomspace.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: Libiio Python Bindings
+Subject: [meta-oe][PATCH v2 1/4] dbus-broker: 19 -> 21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,43 +58,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 13:58:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 28 Oct 2019 14:53:53 -0000
+Content-Transfer-Encoding: 8bit
 
-On Mon, Oct 28, 2019 at 1:33 PM Martin Siegumfeldt <mns@gomspace.com> wrote:
+From: Luca Boccassi <luca.boccassi@microsoft.com>
 
-> Hi,
->
-> I noticed that since
-> http://lists.openembedded.org/pipermail/openembedded-devel/2019-October/202502.html
-> was merged, libiio started depending on 'python3-core', even without any
-> dependencies defined towards libiio-python3.
->
-> We use
->
-> RDEPENDS_${PN} += "libiio"
->
-> for describing the (native library) dependency (i.e. without bindings), and
->
-> RDEPENDS_${PN} += "libiio-${PYTHON_PN}"
->
-> for a dependency including the bindings - isn't this valid?
->
-> I assume, that a pure native library dependency (i.e. without python
-> bindings) should not introduce any python core functionality?
+Add /lib/systemd/catalog to the package, as snippets for the journal are
+now shipped.
 
+Signed-off-by: Luca Boccassi <luca.boccassi@microsoft.com>
+---
+v2: add md5sum
 
-I am happy to take a patch to make it a packageconfig and keep it off by
-default
+ .../dbus/{dbus-broker_19.bb => dbus-broker_21.bb}             | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+ rename meta-oe/recipes-core/dbus/{dbus-broker_19.bb => dbus-broker_21.bb} (74%)
 
->
->
-> Thanks,
-> Martin Siegumfeldt
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker_19.bb b/meta-oe/recipes-core/dbus/dbus-broker_21.bb
+similarity index 74%
+rename from meta-oe/recipes-core/dbus/dbus-broker_19.bb
+rename to meta-oe/recipes-core/dbus/dbus-broker_21.bb
+index 82d8b8ba6..f22916aba 100644
+--- a/meta-oe/recipes-core/dbus/dbus-broker_19.bb
++++ b/meta-oe/recipes-core/dbus/dbus-broker_21.bb
+@@ -7,7 +7,8 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=7b486c2338d225a1405d979ed2c15ce8"
+ 
+ SRC_URI = "https://github.com/bus1/dbus-broker/releases/download/v${PV}/dbus-broker-${PV}.tar.xz"
+-SRC_URI[sha256sum] = "1648227f5a347d4f38d8a29bb9295a73a25c3feb4f3e79e3f04cc847343da3ed"
++SRC_URI[md5sum] = "7d2e7e72b45c3cb7c25d21a53ce30c7d"
++SRC_URI[sha256sum] = "6fff9a831a514659e2c7d704e76867ce31ebcf43e8d7a62e080c6656f64cd39e"
+ 
+ inherit meson pkgconfig systemd distro_features_check
+ 
+@@ -19,3 +20,4 @@ SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+ 
+ FILES_${PN} += "${systemd_system_unitdir}"
+ FILES_${PN} += "${systemd_user_unitdir}"
++FILES_${PN} += "${libdir}/systemd/catalog"
+-- 
+2.20.1
+
 
