@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
 	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C6D97FA59
+	by mail.openembedded.org (Postfix) with ESMTP id 4FD997FA7B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 22:21:06 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id l15so10488132qtr.10
+	Mon, 28 Oct 2019 22:25:21 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id g50so17135039qtb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 15:21:07 -0700 (PDT)
+	Mon, 28 Oct 2019 15:25:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=f83pycLRbN/D9qdnZVeLbk6VLTUzf04TnWwP6gIoewo=;
-	b=ICjkVoBaFG9JUtIUJvYuS5UxcIY7cnnIfYYQEMzIAZj4JoIz4/0gO/eYmdgfuQHKNp
-	2Dz/GJn2wskgXK3sKe2cve9pK5fDxUSiJJw6ZV2SJGOknYFyXEO/fIl6aDXniTG7tDWv
-	yVpahhpeynxMe7NaMACATEJ5SuKTl9S9SlrdR/IT85aPYo21eXcA0m28JOHuOaS1lLop
-	NV8xG/7dlXHEIEf46KsrkCTdLF79OUcy3QP+kMBkEpS2b+M0xSCz1dYoxiTp3k+dER0t
-	/WVMyYsuW/sS9JwA6vwUhnRV8V2iQlJTHXMwqhgFiBRHAo1zocBcK/8ypu9o/MAdZFXF
-	emUw==
+	:cc; bh=uyGmPOqw4AU4gyucGGMw+DPDmoolCrp8ehQwPbwAjoY=;
+	b=GypxC+h8USaS2yZrIIrS+Fq4S8NEH/rMS3xtfyUHm+BE7PnZfQJixO0BhOsNuuUZfP
+	HgyEqAJMSsyG5LRauiW90+7F5K1S+4Ec68tkbYrHIPzPa10gGzg1QKrQmEB5vIlpoG8V
+	9AqMwfyX0ySfxAf+KKAj8i1d05gzDXN0oeMSj0hF7st+HdXhEBSTDSuCnHEfB6AFDVns
+	ElBsvJJScI+pyNXwbRqki/iS6f1Jtm3Ot5B9uO+nJstJlvS4mU0CruPIM7CzB+PwpeKw
+	OFNyx6+gN5AZKhe6W4zY5/oJ70aLnom5eJykj4tjdjDMvOunNpUQ3zsazsQzaTMUkMU2
+	JWCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=f83pycLRbN/D9qdnZVeLbk6VLTUzf04TnWwP6gIoewo=;
-	b=c9epPsQQ5Rfmdh6kMy1Of1MQXqRDs4eVdj7g57Ed/NqgMDBtP7Zmouq36tOLcprecG
-	8gaJCY293ocSjWL3Yg9G+vUUFuNnK+7gbQj6bhts+OQznchSuLF/lOiADM6u6hvCh+5p
-	SEhDwqcup6p3KRPruo5i5xXCXQXiT14IFeOvwIfDtMIGpTSnPySiD+y4mX+TV7DvQ72h
-	cH8df7iGgWA4toQOPAqkBExfjA6robvP3Wowo5RmU86kXpn/ua9iMda9nAHydoZ8Y6+1
-	3IXEFO/YvIK/wIhkt6oxA8hcs4gnsuQV3kgC2//Mjxugo2w4bA6mEFAzzqci7LHql3kG
-	eYHQ==
-X-Gm-Message-State: APjAAAWCvIBO0rJF1E0vqK6KdzW0NhUHg8WTeqPZkepr0T3X++Adj4XS
-	RjvVIELI5dwHf7N5w7Y3CpdYf9DypUX3+KVHc18qvG87uNBuIw==
-X-Google-Smtp-Source: APXvYqwwVxVd9w8LF+ZHkx/K7pNKBl6uBSz8PjoS/j15UWWEG556US8GjdHJr4a74qCjs4ecbRcZVEbX5p87gAFdfWo=
-X-Received: by 2002:ac8:411b:: with SMTP id q27mr959340qtl.53.1572301267041;
-	Mon, 28 Oct 2019 15:21:07 -0700 (PDT)
+	bh=uyGmPOqw4AU4gyucGGMw+DPDmoolCrp8ehQwPbwAjoY=;
+	b=n83bHxxmfO2K1m33FM/hmtB970eyhI4tHL7O9ZMBqtDGf9ip8NyGP707b+iwPQAru1
+	fCpsofaeYl53GnI7Ec23RzRw5Hbfi9CnzuJZGdl/6Sd1UXj6agLXhL+WVQNcN6QGmjrV
+	4tqKATqsPtWbEvFXXzPK2JDg/xyEV/mASz+JZc19i2nZUpLANxcclIqhu+97PkkJi3sW
+	UPtUPb+OIItio+xkgzlGcT8kujA9NW0x7IcTG0zDIuApN5RWDvhrYAAFwv4YLe6Ku7El
+	4kRwrvWCe1cNhN8iodXbmr284BAAJ0LKVEtb8QUriAGJuILCT5BfqlCFW9ZRHyLYX6eP
+	dhtA==
+X-Gm-Message-State: APjAAAVGgX3DDGWcrxuDTJSaUCCLpCRWP1v2lvKVwBO8bYcD18UYWJNV
+	az0FfX/1diLMcy9DI+xjAoZTWy+KldYKCMOIn+c=
+X-Google-Smtp-Source: APXvYqydPT6Vp2g8kly99D0PdAzjvavbDNUS6+XeGQZHCPuaIt/QXF8X20yF4oO64o4fqqGCUnJDoMSu7x184tvWtXY=
+X-Received: by 2002:a0c:ff44:: with SMTP id y4mr19048383qvt.99.1572301521874; 
+	Mon, 28 Oct 2019 15:25:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191028152722.31428-1-mns@gomspace.com>
-In-Reply-To: <20191028152722.31428-1-mns@gomspace.com>
+References: <1572261898-121933-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1572261898-121933-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Oct 2019 23:20:39 +0100
-Message-ID: <CAMKF1spcbB4OP4A6AgQBq+qmrD4pb82XWonRJiqOpMDbEYPp0w@mail.gmail.com>
-To: Martin Siegumfeldt <mns@gomspace.com>
+Date: Mon, 28 Oct 2019 23:24:55 +0100
+Message-ID: <CAMKF1sobidrrj0aE62buy4H1nJk_AMUCoXANgds4or7bnZkkNg@mail.gmail.com>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libiio: Conditionally inherit distutils3-base
+Subject: Re: [meta-networking][PATCH] autofs: upgrade 5.1.5 -> 5.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,47 +53,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 22:21:06 -0000
+X-List-Received-Date: Mon, 28 Oct 2019 22:25:21 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Oct 28, 2019 at 4:27 PM Martin Siegumfeldt <mns@gomspace.com> wrote:
+https://errors.yoctoproject.org/Errors/Details/274854/
+i already mentioned it to another similar patch
+
+On Mon, Oct 28, 2019 at 4:30 AM Zheng Ruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
 >
->  * inherit only when PACKAGECONFIG indicates Python bindings is build
+> 1) Upgrade autofs from 5.1.5 to 5.1.6.
 >
-> Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
+> 2) Update 0001-Do-not-hardcode-path-for-pkg.m4.patch for 5.1.6.
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 > ---
->  meta-oe/recipes-support/libiio/libiio_git.bb | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
+>  .../autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch      | 14 ++++++--------
+>  .../autofs/{autofs_5.1.5.bb => autofs_5.1.6.bb}            |  4 ++--
+>  2 files changed, 8 insertions(+), 10 deletions(-)
+>  rename meta-networking/recipes-daemons/autofs/{autofs_5.1.5.bb => autofs_5.1.6.bb} (95%)
 >
-> diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-> index e6e0eaef8..027e4d5e5 100644
-> --- a/meta-oe/recipes-support/libiio/libiio_git.bb
-> +++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-> @@ -12,7 +12,7 @@ SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
+> diff --git a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
+> index 410827b..364b05c 100644
+> --- a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
+> +++ b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
+> @@ -1,9 +1,4 @@
+> -From a27217a5437da313d251b4a765bf7cb60ffaa62d Mon Sep 17 00:00:00 2001
+> -From: Changqing Li <changqing.li@windriver.com>
+> -Date: Tue, 27 Nov 2018 15:27:47 +0800
+> -Subject: [PATCH] From 6d24365f0828185fd1bb4d199209ca07eb95c41d Mon Sep 17
+> - 00:00:00 2001 From: Khem Raj <raj.khem@gmail.com> Date: Fri, 24 Aug 2018
+> - 06:24:36 +0000 Subject: [PATCH] Do not hardcode path for pkg.m4
+> +Subject: [PATCH] Do not hardcode path for pkg.m4
 >
->  S = "${WORKDIR}/git"
+>  Upstream-Status: Pending
 >
-> -inherit cmake python3native systemd distutils3-base
-> +inherit cmake python3native systemd
+> @@ -11,16 +6,19 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
 >
->  DEPENDS = " \
->      flex-native bison-native libaio \
-> @@ -30,6 +30,8 @@ PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND"
->  PACKAGECONFIG[USB_BACKEND] = "-DWITH_USB_BACKEND=ON,-DWITH_USB_BACKEND=OFF,libusb1,libxml2"
->  PACKAGECONFIG[NETWORK_BACKEND] = "-DWITH_NETWORK_BACKEND=ON,-DWITH_NETWORK_BACKEND=OFF,libxml2"
->
-> +inherit ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'distutils3-base', '', d)}
+>  update patch to version 5.1.5
+>  Signed-off-by: Changqing Li <changqing.li@windriver.com>
 > +
-
-we also need to define this packageconfig where it should add
--DPYTHON_BINDINGS=OFF
-when it is not set
-
->  PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-${PYTHON_PN}"
+> +update patch to version 5.1.6
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+>  ---
+>   configure.in | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
->  RDEPENDS_${PN}-${PYTHON_PN} = "${PN} ${PYTHON_PN}-ctypes ${PYTHON_PN}-stringold"
+>  diff --git a/configure.in b/configure.in
+> -index 493b9f1..268d06b 100644
+> +index 859eaa6..2ae04bd 100644
+>  --- a/configure.in
+>  +++ b/configure.in
+>  @@ -12,7 +12,7 @@ define([AC_CACHE_SAVE], )dnl
+> - AC_INIT(.autofs-5.1.5)
+> + AC_INIT(.autofs-5.1.6)
+>
+>   # for pkg-config macros
+>  -m4_include([/usr/share/aclocal/pkg.m4])
+> diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
+> similarity index 95%
+> rename from meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb
+> rename to meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
+> index 9e43549..67d03d6 100644
+> --- a/meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb
+> +++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
+> @@ -28,8 +28,8 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
+>             "
+>
+>
+> -SRC_URI[md5sum] = "03b13168ec7bd66a6f2d5f6fea705eee"
+> -SRC_URI[sha256sum] = "86a8e56ea9d72bb53ff8cdfeefb5cafe983592c6b0178fb99c4a731e59879181"
+> +SRC_URI[md5sum] = "e6800e0afd6009ecdff148088c564050"
+> +SRC_URI[sha256sum] = "82094cad44f4e5c4f93eff2789cd66b57d7ab3fa646b7722d97608571001e694"
+>
+>  UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
+>
 > --
-> 2.17.1
+> 2.7.4
+>
+>
 >
 > --
 > _______________________________________________
