@@ -1,49 +1,50 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f42.google.com (mail-io1-f42.google.com
-	[209.85.166.42])
-	by mail.openembedded.org (Postfix) with ESMTP id BA0F67FA98
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
+	[209.85.222.182])
+	by mail.openembedded.org (Postfix) with ESMTP id BB80E7FA8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 21:11:13 +0000 (UTC)
-Received: by mail-io1-f42.google.com with SMTP id h9so12415447ioh.2
+	Mon, 28 Oct 2019 21:40:43 +0000 (UTC)
+Received: by mail-qk1-f182.google.com with SMTP id e66so10020087qkf.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 14:11:15 -0700 (PDT)
+	Mon, 28 Oct 2019 14:40:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=xEaqyqZGr/FsUtgZOkrGmKOBLmR6ZCtVi+Tt4zsqrqw=;
-	b=lqt4cbHmU6EDKscIF4UMNhdVugQelLWrOy482KBymjPi8KP738WRaG7E0hB/3weqx1
-	dPul1uyixopxUmLbzpqg3k3W8jkHMt+PijkiCkDvlotZzy6l/u301ROhzeAlqq0fgKU4
-	T9GDtFCFFTz9Y0yIPvdZcF0Vcj6RGdyCAJd806pBosAaog5xuafLqOg5eo2uptDfxLJi
-	B6UuPDjkereTOcKOjzmpi6/92v6CBHEC6yjkHks3yQAGIauVlAPy8rGHEyhip6ZC8nOK
-	rVlh4DM2EQlF7l5F8CQn91fSS6dhLjYce7i/xYn6Pf8rrXSQLkkZ3UYQbLpYYxa6hBpO
-	Cnlg==
+	:cc; bh=tpXg7/5vXqRuJiSVm3rKAAeoOt0URkpYCZPAA8lPrRA=;
+	b=pR787ZoB1Tsypfvjiw5+ogXBT8PX/Ndr1MtViwhqJj3wPyxQEvfmYK6uIE1/TXOgc7
+	mR/VFOuWPrwVCgzeWDcmQv8Imn4a+hEIsFm3Cl6rVg+9l/T2pmakLNP4DKq09ilSE8ZN
+	3aThyr1JKeq6HDObMr0LCk/C1WtSCmIGx+p1wcSbwekfrJL1chKkUe57hJtEm4eo4M5i
+	eXkG9kED5oDI2dQV9IrUb0bJkE1uiVgDqx8575uused4TeHegK5N5TAiO+2dY6NuY+1r
+	BbyxN9YQ4VYlehx0djU329nNhC2I3im+DIMIpn87CmbS2EPoyzpia6ev985BZwtAzAsQ
+	kdig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=xEaqyqZGr/FsUtgZOkrGmKOBLmR6ZCtVi+Tt4zsqrqw=;
-	b=poO+uR7k5yZbZ/t1T2g8hwqMAAR8QYXtGNKe7vaROGTWwQ+oYMOvDO1PjPpZ4KQ8si
-	pJLqfVmcHttfqwNxNOdZo88fTfSwIyXOtAaKZOiTcLh7JEiUWKQvTbJsoP+jQfuC56wf
-	Dw308DhsPnpVYzY4sWy6pASsyi6uFJVVAapiG5mn9o40XQcg7f3U4/9Kk8zHQFQznbhu
-	dh8f1t4XkGwOY76MOKawjdebikt5j4Fc70xD2Z8G3lxXvH6+SuLlcVqu4lRBxkqX1g8g
-	x9zXDsh+xny9tjG5262n2Sz02hSaNzjOmPtJZRE29IpDyvCiDVzxGYsI29VQxn4eU6j2
-	8asg==
-X-Gm-Message-State: APjAAAXppl27l6GhpfLD9gPUeCzI8eRb4Xc3s6CVLTOhraX3jYyLIGxf
-	CSeUO5xgFhZ104DFdTAaWYYZlnHrroN+g+ljOaY=
-X-Google-Smtp-Source: APXvYqwAjFCd8DDp6L+nFvK7C5NEkJoHiemqXmCGpRi/p42hZYQ5aKpizlyVTh/IeQFn+Bl6iIL99fGYtOFejJMlIiE=
-X-Received: by 2002:a05:6638:928:: with SMTP id
-	8mr18759644jak.124.1572297074758; 
-	Mon, 28 Oct 2019 14:11:14 -0700 (PDT)
+	bh=tpXg7/5vXqRuJiSVm3rKAAeoOt0URkpYCZPAA8lPrRA=;
+	b=mpz4vvLSJ5mmzdR2Pvy17J2gudNsCY4Hey04PWO1b3YZ6r/D7ygIcdRaXL55DDVLsi
+	k+bTWZcpd94uGTSvGTMYy03uIxfGlvHSe4tnMGBr2kSerbR3G3jvW0eeyS4JWG4MRm/0
+	yExj/QWG4w35MHPmE9ZopIRfdev5Dq0d3KQ9+UwkcpCq6Hvkcwk5Zi9eH5Oab3lVYUJQ
+	Ceibnyk3n9pTUGGkHS6m1AHlTS/bEWNrMMWg7aKVNCniFkBu0kULCITGOITAOEbWqJO3
+	zIg4otra8Em8pPmSffPuQG7hz2HZFtnSjYGCiZowgkfxw1X6axIcdD1PHbwYRXsFKSyq
+	ZYBQ==
+X-Gm-Message-State: APjAAAWP7N81fDv9MQuX6afguYY8LakmMeBh/AQ+G5mE/eVdVfiyeu17
+	nc9iPSAkCD5nRP3rkoJvvepnU7peyrage57hCI0=
+X-Google-Smtp-Source: APXvYqy92BSGN75OW0S8/mPoUFHGkQZeXKzAJqBsXJ2kbzZuxo5k804v2sP9ALUg+9G7FGGPl2qEuCrh+zBKG3oITbw=
+X-Received: by 2002:ae9:f010:: with SMTP id l16mr2689868qkg.212.1572298844210; 
+	Mon, 28 Oct 2019 14:40:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20191027233545.4146-1-schnitzeltony@gmail.com>
-	<20191027233545.4146-16-schnitzeltony@gmail.com>
-	<CAMKF1sp17i93Od+zEiRP3d5dNG0B2E0iSYhWbBaK4-hdwT-bbQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sp17i93Od+zEiRP3d5dNG0B2E0iSYhWbBaK4-hdwT-bbQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 28 Oct 2019 22:11:03 +0100
-Message-ID: <CALbNGRRbMbzGDQCqE2RGxSTiNV1hFHPEyd4kNUKG_HEQnJwgwg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+	<20191027233545.4146-8-schnitzeltony@gmail.com>
+	<CAMKF1sqVM6zVRftnq_fsPXRxp=fR+mEeofhgw6LFd3vgOUNFLQ@mail.gmail.com>
+	<CALbNGRTmZWpYHDiG_2uXaQyGWi0GPwTvXhfsUcsNJ51Fx8AWAg@mail.gmail.com>
+In-Reply-To: <CALbNGRTmZWpYHDiG_2uXaQyGWi0GPwTvXhfsUcsNJ51Fx8AWAg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Oct 2019 22:40:24 +0100
+Message-ID: <CAMKF1spH0prGFUio+prvufVwm9kah5rNtU8HT7+A6LwTtZOuyA@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 15/19] glade3: upgrade 3.8.5 -> 3.8.6
+Subject: Re: [PATCH 07/19] colord: initial add 1.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,15 +57,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 21:11:13 -0000
+X-List-Received-Date: Mon, 28 Oct 2019 21:40:43 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 28, 2019 at 9:09 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> https://errors.yoctoproject.org/Errors/Details/274843/
->
-Forgot to add itstool to inherit - oh I wish my environment would be
-closer to autobuilder...
+On Mon, Oct 28, 2019 at 9:50 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m>
+wrote:
 
-Andreas
+> On Mon, Oct 28, 2019 at 9:08 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > https://errors.yoctoproject.org/Errors/Details/274841/
+> This is exactly the same error V1 caused and it was fixed in V2 [1].
+> Wanted to look what you applied but in master-next colord is already
+> gone.
+>
+> So I have to ask: Are you sure you applied [2]/[3]?
+>
+> Maybe I caused confusion by not naming it V3...
+>
+> [1]
+> http://lists.openembedded.org/pipermail/openembedded-devel/2019-October/2=
+02531.html
+> [2]
+> http://lists.openembedded.org/pipermail/openembedded-devel/2019-October/2=
+02550.html
+> [3] https://patchwork.openembedded.org/patch/166279/
+>
+
+I was applying latest from your pull request especially
+
+https://patchwork.openembedded.org/patch/166279/
+
+
+> Andreas
+>
 
