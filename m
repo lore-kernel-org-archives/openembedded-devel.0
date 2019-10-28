@@ -1,47 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FE3A7FA7B
+Return-Path: <crg7475@mailbox.org>
+X-Greylist: delayed 416 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 28 Oct 2019 23:05:35 UTC
+Received: from mx2.mailbox.org (mx2.mailbox.org [80.241.60.215])
+	by mail.openembedded.org (Postfix) with ESMTP id A8A377FA8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 22:26:32 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id m4so10139654qke.9
+	Mon, 28 Oct 2019 23:05:35 +0000 (UTC)
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+	[IPv6:2001:67c:2050:105:465:1:2:0])
+	(using TLSv1.2 with cipher ECDHE-RSA-CHACHA20-POLY1305 (256/256 bits))
+	(No client certificate requested)
+	by mx2.mailbox.org (Postfix) with ESMTPS id D5E4BA4A23
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 15:26:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=J91NHVjF2SHJWLHPVvw6aHvuF38obtf1BUHc5ryK74c=;
-	b=Cp5CDyew2K1hd7P8gJts6EEnUaIzU9AV0TBiJagnIH5VKiiP5zLThRK/+G3rDgW7DW
-	YbXq/ykrCtV2MFuslSRDrk56xC+4sFuVSxfYyGjkq+LeDaYFxYp38A2k7GDUE/GsV60T
-	egm8/ErCLcKQHxr2WPpIYJ7w9jl7ync6fjIoGg3b2aSnTHpQIkuj2ObRJqdQB55g1tra
-	6N/Mu7b99joC6mxVaetFJtUNQk+NEfqB8iu1uF7s9r/FkYNx1q3yITiTnQw+nM/jWv6D
-	SwS166WaO3U+zqFaJbc0arc+XX1MLxcTvehkM+tXhiqACVLBQvva+WD4DWHEiJO+1s9e
-	sAYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=J91NHVjF2SHJWLHPVvw6aHvuF38obtf1BUHc5ryK74c=;
-	b=bOdXjWmC9RMhpLswmLHQp9Wv6Y+6mw0s6EiXlpb/seVqrKtYRY6b2NrhbZVw/A8Svf
-	0pDCxo2pfT6XuMZwXOS2DOMvn8ZKp/ixjuzpVaCyQNpgwVyv8ieMZu0i5TJX3HRiKhs7
-	PLBX6osOzy9fanGMfp81pOc8mOPhARaZ9o6cKT97+BEBRlEQmeyQD+EMCkELs72lskFA
-	omJMfnY/BvMNzldX0D31++yPF3GuRSlCQn8e5LFdeXzKSrieFqkjjJFepuOy/MPX1UQO
-	8OXNUjgxzB36jGfgpjJvY66tND/nMB94S7gZKDJlpWHVtpViGqWvv+FfBOxf8qxFnF2F
-	znfg==
-X-Gm-Message-State: APjAAAX6rGMCEH6x8/NnnvCQDSPAxNW6VQ8ZV8w0IZbi23tKh5Z71vGC
-	bZgAeQ1mbRGhwOASbM+bpdU3WQDubLSa/UgDsCU=
-X-Google-Smtp-Source: APXvYqwnFwFd1lLBGFOT+qq2IF7f6NRbvYaKrXDCn8WRHHiaGe1400U0vKxyI+Xk+FxoPgsBVmYW6kriq1yBiXKjd/A=
-X-Received: by 2002:a37:b985:: with SMTP id
-	j127mr18316735qkf.337.1572301592793; 
-	Mon, 28 Oct 2019 15:26:32 -0700 (PDT)
-MIME-Version: 1.0
-References: <1572261818-121860-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1572261818-121860-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Oct 2019 23:26:06 +0100
-Message-ID: <CAMKF1soBJg4dXOHuqNLY_-bToMgFLOzd9JttS8m7CkdgGOZjow@mail.gmail.com>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] dhcpcd: upgrade 8.0.2 -> 8.1.1
+	Mon, 28 Oct 2019 23:58:39 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=mailbox.org; h=
+	message-id:date:date:subject:subject:from:from:received; s=
+	mail20150812; t=1572303519; bh=hXwMhpUjabsGAXCnhlbgyUUMwKx3/n9qb
+	6fbJjdRXYw=; b=dzAtXWNLDwYH2w0T3pb3NsJSJSjSL0NWRKnhvZZLOqOrmkiWe
+	WtdNKwRE7HSXrbHWel8ZdIsREogewUBGmIIoSt7IRhJskxPeVFHvbXRxPQsjB/+j
+	AfXGu9rzuHKnbF2eMzS3K6wJb2424OSgQ7+X4Fz1Njf6KzydETOyxXhOhVj/jJmU
+	QCmmunE55PjA1rSsk8UgARsdLDLM43pNGLrTpHpsInCzDoKr7lprneoVSRUyct1i
+	T9dAj6R8JNOcCExr43hdoJgfJg0SmNuyoNRt3tsp57METcssrnmg2EHaRYdUdPsP
+	5vEl5OCxlH+953qcVNdE+/p+M9hBFVhGCSYYQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+	s=mail20150812; t=1572303519;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc; bh=6QMAlNtkD+otfFP8Dc1RWBcF3dR+nX22n3KpTabdsxY=;
+	b=erd4qlWJnOIsQkIczhhmB27XKeOIE9pYRWZFcfMgX4WaWQmszr4NrZ+LrRoFMA1ebRQFMX
+	cXtsDYoct9FbuI8ZEb6FAJQTHSFqd2WzqfxnnsYhRIqvSJt+ul3ewypZCh5I+sg/2pN7kR
+	fZk6Ldo5KA834VqNrzghGMramiUwRZeNy1mjINRWznQDVExJHJA/peWXGC8goCUuRTs3qZ
+	Y/u9oF6IpwEFuh5VqfLk1NhuUsfhQ/fInwZlhxxjeAdwwnxrdCepOkrtRUyFLN92RqwPEZ
+	En05+Ac3BcRbPK18uBEXpcJa2N8sawffz0BGByr333zxueiNrQoxptVvMOTLoQ==
+X-Virus-Scanned: amavisd-new at heinlein-support.de
+Received: from smtp2.mailbox.org ([80.241.60.241])
+	by spamfilter02.heinlein-hosting.de (spamfilter02.heinlein-hosting.de
+	[80.241.56.116]) (amavisd-new, port 10030) with ESMTP id xmbikKw1vrb6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Oct 2019 23:58:39 +0100 (CET)
+From: Carlos Rafael Giani <crg7475@mailbox.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Oct 2019 23:58:31 +0100
+Message-Id: <20191028225831.16745-1-crg7475@mailbox.org>
+Subject: [meta-oe][PATCH] opencv: Enable pkg-config .pc file generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,48 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 22:26:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 28 Oct 2019 23:05:35 -0000
 
-fails on musl
+In OpenCV 4, .pc file generation is disabled by default. Yet, other
+software such as GStreamer and FFmpeg rely on the .pc files during build
+time configuration. Explicitely enable .pc file generation to make sure
+pkg-config can be used for getting information about OpenCV.
 
-https://errors.yoctoproject.org/Errors/Details/274853/
+Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
+---
+ meta-oe/recipes-support/opencv/opencv_4.1.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-On Mon, Oct 28, 2019 at 4:29 AM Zheng Ruoqin
-<zhengrq.fnst@cn.fujitsu.com> wrote:
->
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ---
->  .../recipes-connectivity/dhcpcd/{dhcpcd_8.0.2.bb => dhcpcd_8.1.1.bb}  | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-connectivity/dhcpcd/{dhcpcd_8.0.2.bb => dhcpcd_8.1.1.bb} (86%)
->
-> diff --git a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.0.2.bb b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.1.1.bb
-> similarity index 86%
-> rename from meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.0.2.bb
-> rename to meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.1.1.bb
-> index 79d1dad..87e0bb4 100644
-> --- a/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.0.2.bb
-> +++ b/meta-networking/recipes-connectivity/dhcpcd/dhcpcd_8.1.1.bb
-> @@ -11,8 +11,8 @@ UPSTREAM_CHECK_URI = "https://roy.marples.name/downloads/dhcpcd/"
->
->  SRC_URI = "http://roy.marples.name/downloads/${BPN}/${BPN}-${PV}.tar.xz \
->             file://0001-remove-INCLUDEDIR-to-prevent-build-issues.patch"
-> -SRC_URI[md5sum] = "c0375a1f725f1c191b43af60e4f7175b"
-> -SRC_URI[sha256sum] = "33a26ad561546cd2cfe1e6de6352a85df72b41c37def8c7eb00e90e57c627a5c"
-> +SRC_URI[md5sum] = "dc4f29a62afc53cdac311e925cfd1bc7"
-> +SRC_URI[sha256sum] = "485d308fe10febd36b6f936e4260e4ab34a146e4f00a9f7a5509c4377ad5ea82"
->
->  inherit pkgconfig autotools-brokensep
->
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+index 77b5dd60c..5e89db097 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+@@ -64,6 +64,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
+     -DCMAKE_SKIP_RPATH=ON \
+     -DOPENCV_ICV_HASH=${IPP_MD5} \
+     -DIPPROOT=${WORKDIR}/ippicv_lnx \
++    -DOPENCV_GENERATE_PKGCONFIG=ON \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
+-- 
+2.17.1
+
 
