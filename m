@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 707BB7FA44
+	by mail.openembedded.org (Postfix) with ESMTP id 6F8A67FA43
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 28 Oct 2019 18:54:48 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4723mm0WC1z4Q
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4723mn1j5Wz8b
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 19:54:47 +0100 (CET)
+	Mon, 28 Oct 2019 19:54:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572288888;
-	bh=o7+fLRB9W23uR4GM4pfYoRsXx7dPLz9W0pMOqF4oxEw=;
+	s=default; t=1572288889;
+	bh=5BlkuNYMPP00qKLl9yBzxsKng40HFhgFoukeYL9Ao4M=;
 	h=From:To:Subject:Date:From;
-	b=ckXS7jv8hQCeS6JBCZq/DkcGTgQjtij6O3j5JwGA8WbYCHZ4K1hr7ZBqHb34P0yef
-	iSXqew5usPq2/A95EkZHgDAf0brgQISvuHB25Z2Paf2M0ratmGshIP9IJEfoA/kJOM
-	G2vPIAZiSMV8Aqylea+wFlHLnGXlVxQPYok9qQg6XOFfHkrcolZaZQcH+mp7PeEp4B
-	wbyCZSVpxHiEufoVSnXPwzF+8w7xW+olOqVcEvM+Gd65PH5wJuwDN4pfaC30gT5PAk
-	N4ygtb/rDRs4F2GTXRpMYF386wOgxzrHeBF2y77jKr70DyiT2Zg0OWbhbObYvnupVU
-	7fs9pa04ipluCdvjXlxOWfKxQJvaSf5macQVQZEVmt6YAXrJXOuZLGOBbA9vbO7XJo
-	6cG4v52C/0yw6SDA2WdzGeIKNo1awcFU+fItLIQQDrXlcGOJbo/13Y3B1J299VM1nx
-	1poo5xI2hiu56J8ICspuRqGj1aMXgBNJYXlJw1XJplFZCxD0cV6yxsGjUpCHIGKucc
-	6jOBN/lk3fvWjJK+gq+7/jTWTx/OS8GHWP90PJ0TZLARb6vFH9i2zrWfgNipGBG4gr
-	F9i8LdgynFvhuOB7Hic1aIv/ymlqG5u5G8pVyhJHQCJJstcrDrlBEp8yE9xcXANDMz
-	St1QEay06aquPyUkGNfnvE+4=
+	b=iIz+epYgcm8AvLHR6DTKQRostTD4BVrHZdOwTW9Tj8VLTwxVIz5atEGrURUwhZ6xO
+	3grel4wixaaUxhOH3iPY9Mv9O3ppR94/LneWb87XtpWKQvtsv2acC4e/xxsnjqvxr1
+	LY2Rg0fGvEN0zTzTFKpTqQed8QDDuuEzW95xmKsy2bjr8RZUmNwviv3JbhQZNzt4t1
+	uqbqduaIxCX7IzsN+Vonm6gCc/CF33bwPIEKE/CMw0GlVa4VZgfcj+yB+TrMKIvP/A
+	ATjOvZcNUAlh/jACp3OGuJxMA/SVj4i4hsSRNc3WAh7qm99VkqRi4f5NxEH4eJ/sCE
+	x1Jg07qC/aZEcn59Abj1vRImHxbMFy7DB3e37Rh1yM7BKvl16k1Dn7LeJuxm4K2wtJ
+	gsj1VogO1ArA6pzYT6tgJc+lV8jhnWKjQqySBr2wfDPMSIChAbiXPVfXKURx9fI3P5
+	USLFHkJ9pAK1RfxQWej7eAguGTmOyuZ6wAZpJ3q5q1DEGu0Hx1tXPA/QBUYhOdsrwS
+	FkE2qyz7iYIRITrO0W4jcjBL7mO+6RVA8gHAE1HyOCd68NQkIzauY69WJxa7JpW7l+
+	VAP1Z3wl/sHBQBp+fAo8sp4BptdAtWmgXnw64FGCWeehEJpAQeDL+5aj5Antczcrio
+	zZRg6LW/hzyZXwx30HAXk3SI=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Oct 2019 20:54:44 +0200
-Message-Id: <20191028185447.3553-1-bunk@stusta.de>
+Date: Mon, 28 Oct 2019 20:54:47 +0200
+Message-Id: <20191028185447.3553-4-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH] gerbera: Upgrade 1.3.0 -> 1.3.2
+Subject: [meta-multimedia][PATCH] vlc: Upgrade 3.0.6 -> 3.0.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,63 +42,56 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 28 Oct 2019 18:54:49 -0000
 
-Use the upstream systemd service file.
+Workaround for riscv64 issue fixed upstream removed.
+Also merge the inc into the recipe.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../gerbera/files/gerbera.service                   | 13 -------------
- .../recipes-multimedia/gerbera/gerbera_git.bb       |  8 ++------
- 2 files changed, 2 insertions(+), 19 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/gerbera/files/gerbera.service
+ meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb   | 11 -----------
+ .../recipes-multimedia/vlc/{vlc.inc => vlc_3.0.8.bb}  |  8 +++++++-
+ 2 files changed, 7 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb
+ rename meta-multimedia/recipes-multimedia/vlc/{vlc.inc => vlc_3.0.8.bb} (94%)
 
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/files/gerbera.service b/meta-multimedia/recipes-multimedia/gerbera/files/gerbera.service
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb
 deleted file mode 100644
-index 1b5a3ad3e..000000000
---- a/meta-multimedia/recipes-multimedia/gerbera/files/gerbera.service
+index fcd321cb0..000000000
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.6.bb
 +++ /dev/null
-@@ -1,13 +0,0 @@
--[Unit]
--Description=Start Gerbera, an UPnP media server
--After=multi-user.target network-online.target
--Wants=network-online.target
+@@ -1,11 +0,0 @@
+-require ${BPN}.inc
 -
--[Service]
--ExecStart=/usr/bin/gerbera
--Environment='HOME=/root'
--Type=simple
--RemainAfterExit=yes
+-LDFLAGS_append_riscv64 = " -pthread"
 -
--[Install]
--WantedBy=multi-user.target
-\ No newline at end of file
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-index 9c78da0d2..c96e4c52e 100644
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-+++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-@@ -4,12 +4,10 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
+-SRC_URI += " \
+-            file://0006-make-opencv-configurable.patch \
+-            file://0007-use-vorbisidec.patch \
+-            file://0008-fix-luaL-checkint.patch \
+-"
+-SRC_URI[md5sum] = "4ff71d262e070fd19f86a1c3542c7b4e"
+-SRC_URI[sha256sum] = "18c16d4be0f34861d0aa51fbd274fb87f0cab3b7119757ead93f3db3a1f27ed3"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc.inc b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
+similarity index 94%
+rename from meta-multimedia/recipes-multimedia/vlc/vlc.inc
+rename to meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
+index 7308465b1..8ea09b921 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc.inc
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
+@@ -16,7 +16,13 @@ DEPENDS = "coreutils-native fribidi libtool libgcrypt libgcrypt-native \
+ # While this item does not require it, it depends on ffmpeg which does
+ LICENSE_FLAGS = "commercial"
  
- SRC_URI = "git://github.com/v00d00/gerbera.git;protocol=https \
--    file://gerbera.service \
- "
+-SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz"
++SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
++           file://0006-make-opencv-configurable.patch \
++           file://0007-use-vorbisidec.patch \
++           file://0008-fix-luaL-checkint.patch \
++"
++SRC_URI[md5sum] = "744442ec0c145453ea1d257914c8072e"
++SRC_URI[sha256sum] = "e0149ef4a20a19b9ecd87309c2d27787ee3f47dfd47c6639644bc1f6fd95bdf6"
  
--PV = "1.3.0+git${SRCPV}"
--# v1.3.0
--SRCREV = "c7a81fb41e446ee67b3eac90e2caecd6de651a16"
-+PV = "1.3.2"
-+SRCREV = "42b035ea9098c02af503d6391a0ed56d973aaf23"
+ inherit autotools gettext pkgconfig distro_features_check
  
- S = "${WORKDIR}/git"
- 
-@@ -26,8 +24,6 @@ EXTRA_OECMAKE = "-DWITH_JS=FALSE -DWITH_MAGIC=FALSE -DWITH_EXIF=FALSE -DLIBUUID_
- 
- do_install_append() {
-     install -d ${D}/root/.config/
--    install -d ${D}${systemd_system_unitdir}
--    install -m 0644 ${WORKDIR}/gerbera.service ${D}${systemd_system_unitdir}/
- }
- 
- FILES_${PN} += "/root/.config/"
 -- 
 2.17.1
 
