@@ -1,48 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 1774E7FA46
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F6A77FA50
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 20:09:23 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id c21so16469126qtj.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 13:09:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=onn0NPamuaNWwt9oppg3gJ4mXwLFqe6gwWFrua5OwBQ=;
-	b=ReLHYqPDSH2X18Gydc7LJES0+jwuE2VbG55fdZgN1Gq/Q7GhyDkgBCSNFXXY8q0dvS
-	hsdWE7bSs/eSRgCoyb/AZtsjK14onnUpLBzkXsz3jFYL5r3/wpRWmPZ90RhBWV3wVLjM
-	kByFd3P2C/WYwyJnc+8DHO3zirErpLYgXq6zUpmk24Tsqfm7U3G4CoUU9g9CwbrJAtXt
-	hL7H2IKg7lXw25zF6SM97nyrmN567rPvtk9FzJYhhl2dLOHVb6QF0k0RH65eHaBxPjFD
-	GAY1x0y+gJvrUyFcehKHJ9DJn2uSpcFnQqy+Da2WOwiGPP3Mq0aibZr/zH6i4P6U/v/l
-	FVQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=onn0NPamuaNWwt9oppg3gJ4mXwLFqe6gwWFrua5OwBQ=;
-	b=jQ8P9AHdiLMDlrMgIAlI+1+300LpsnQKHpcSF7kcnCcX45fVJDSyC6+9v85EqWCj5S
-	ywx+EIAO9vzxxq/bQq1kKiyBH5x9BrjYXWj+YHEMJrGEu5Ea4D+s3aox20b2YBTkJhmn
-	1hGVNIKKITfdP2p2cSHUAtH1NfHTU3yD/8/Kc+jsycj46lZ1gfu/wKJVaDDe2tA6zpJ8
-	MsrGTbHox1g7hXI1t9OQNePP9c4wktpcVu4fbZQdmOSj/nOn3p3+1yezfIpJ7UPGE4wd
-	3wrNRpXudEGDeMUhuSgEWF+U6UhIqXfDXdCQ/ZFmWdLsuXS0RWLguaUAXsi3fW8ls5cP
-	vnvg==
-X-Gm-Message-State: APjAAAW6hrtEVlzQnQ2pOVViyy0ygRm2g2dlsBTF4wgTKJlZRxJwvabL
-	yN+879NmQX4zCuK6ea9dy3arfQnd/mrU/EeUXhc=
-X-Google-Smtp-Source: APXvYqxZTUlK8FxiSB+lTqRAQfygpxj73B5piIgSHex1gUMhyFrtxgOnXIpyIPNiUWo0x1O2/O4EyzDnV18s84PUlEM=
-X-Received: by 2002:ac8:6054:: with SMTP id k20mr339537qtm.88.1572293363677;
-	Mon, 28 Oct 2019 13:09:23 -0700 (PDT)
+	Mon, 28 Oct 2019 20:20:45 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4725gw1CvNz4Q;
+	Mon, 28 Oct 2019 21:20:43 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1572294044;
+	bh=gAfWSGVtMidkkrf6OsjWr9LMTkONUd51cvWgwqbZ1A4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=Zon9U2EZqBD+JcwnQb4V3bGq2ELOJCNkRancPmdTge9BiUp9R1z9xBF7sA8dseP86
+	zILXhSCmYkwN9H8BTGcwX8IQ7zLLQX4I7b+GxBwG8zUryXJwD42fXuEJVelYd8LT6x
+	7E46joHVtJVWm5kQ9cyTFViWCow3IdSETUjU6SPVcjrPhYCNj+HBWIRsQzy8fH89M6
+	Qx2d0FIgFPdlSJYIc9A9xFbdLP9awWZsxKls8NnYtYHqDDJ9vXdh/FqiyFjxcHKijl
+	ujxTDSJrXlOmKYU2Te2UdBMCAZ+J81/zzJ+jEDeDgtjPb2Ojtps2KZ4Hqj3U38YMYB
+	ayfEsl9HNCgRX+n1xxJ0GJyol2QyyM0RogdpQvfrcc9kiRENZj2j6JLoUGVkI9UuYd
+	Z3Opr96NsY+EZNPbEgh5xVJiq9kQm9AjxjySFlECRBXajPRfRHjWHGTHVexL2Tj/BS
+	2yovNrHfFmdCyxoPYE6VDwYxKgvbtvEsTQbRK4g6+NzqiYOchc7l0NxMEySMGDgDlK
+	VV3VVDmQCfxLvVHaeQusir7QXN8YsDJ6ldidr9PAQYrX1H0IUkS+rX+RtBjA+/UVv4
+	5SH4SKWkhPOJf2JB7DNuNrcbe+6VmSREvvpqgWGpkut1oCVZG7gPemZflvzbfaDppv
+	OAHvnlMQIKNKFDVM77LfFOBk=
+Date: Mon, 28 Oct 2019 22:20:41 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20191028202041.GA2753@localhost>
+References: <20191028185447.3553-2-bunk@stusta.de>
+	<CAMKF1soT7MoQc7CG9qEYDjJpYevDzB9M5WDPmsWCbfGZTRc1yg@mail.gmail.com>
 MIME-Version: 1.0
-References: <20191027233545.4146-1-schnitzeltony@gmail.com>
-	<20191027233545.4146-16-schnitzeltony@gmail.com>
-In-Reply-To: <20191027233545.4146-16-schnitzeltony@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Oct 2019 21:08:55 +0100
-Message-ID: <CAMKF1sp17i93Od+zEiRP3d5dNG0B2E0iSYhWbBaK4-hdwT-bbQ@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 15/19] glade3: upgrade 3.8.5 -> 3.8.6
+In-Reply-To: <CAMKF1soT7MoQc7CG9qEYDjJpYevDzB9M5WDPmsWCbfGZTRc1yg@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-multimedia][PATCH] gstd: Fix the version number
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,101 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 20:09:23 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Oct 2019 20:20:45 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-https://errors.yoctoproject.org/Errors/Details/274843/
+On Mon, Oct 28, 2019 at 08:36:32PM +0100, Khem Raj wrote:
+> On Mon, Oct 28, 2019 at 7:55 PM Adrian Bunk <bunk@stusta.de> wrote:
+>...
+> > +# Remove the +really when upstream version is > 1.0
+> > +PV = "1.0+really0.6.3"
+> 
+> We already have 1.0 so will this sort above that ?
+>...
 
-On Mon, Oct 28, 2019 at 12:38 AM Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om> wrote:
->
-> * online help support was added - ship it optionally
-> * prettify recipe a bit
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  .../recipes-devtools/glade/glade3_3.8.5.bb    | 23 -------------------
->  .../recipes-devtools/glade/glade3_3.8.6.bb    | 18 +++++++++++++++
->  2 files changed, 18 insertions(+), 23 deletions(-)
->  delete mode 100644 meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb
->  create mode 100644 meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb
->
-> diff --git a/meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb b/meta-xfce=
-/recipes-devtools/glade/glade3_3.8.5.bb
-> deleted file mode 100644
-> index c3da3e9b9..000000000
-> --- a/meta-xfce/recipes-devtools/glade/glade3_3.8.5.bb
-> +++ /dev/null
-> @@ -1,23 +0,0 @@
-> -SUMMARY =3D "Glade - A User Interface Designer"
-> -HOMEPAGE =3D "http://www.gnu.org/software/gnash"
-> -LICENSE =3D "GPLv2 & LGPLv2"
-> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Daabe87591cb8ae0f3c68be6977bb5=
-522 \
-> -                    file://COPYING.GPL;md5=3D9ac2e7cff1ddaf48b6eab6028f2=
-3ef88 \
-> -                    file://COPYING.LGPL;md5=3D252890d9eee26aab7b432e8b8a=
-616475"
-> -DEPENDS =3D "gtk+ gnome-doc-utils gnome-common libxml2 intltool-native"
-> -
-> -inherit distro_features_check autotools pkgconfig pythonnative gtk-icon-=
-cache
-> -
-> -REQUIRED_DISTRO_FEATURES =3D "x11"
-> -
-> -SRC_URI =3D "http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-${=
-PV}.tar.xz \
-> -           file://0001-gnome-doc-utils.make-sysrooted-pkg-config.patch \
-> -           file://0002-fix-gcc-6-build.patch \
-> -           file://0001-Add-G_GNUC_PRINTF-on-functions-with-format-string=
-s.patch \
-> -           "
-> -SRC_URI[md5sum] =3D "4e4b4f5ee34a03e017e4cef97d796c1f"
-> -SRC_URI[sha256sum] =3D "58a5f6e4df4028230ddecc74c564808b7ec4471b1925058e=
-29304f778b6b2735"
-> -
-> -EXTRA_OECONF +=3D "--disable-scrollkeeper"
-> -
-> -FILES_${PN} +=3D "${datadir}/icons"
-> diff --git a/meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb b/meta-xfce=
-/recipes-devtools/glade/glade3_3.8.6.bb
-> new file mode 100644
-> index 000000000..8ed30944b
-> --- /dev/null
-> +++ b/meta-xfce/recipes-devtools/glade/glade3_3.8.6.bb
-> @@ -0,0 +1,18 @@
-> +SUMMARY =3D "Glade - A User Interface Designer"
-> +HOMEPAGE =3D "http://www.gnu.org/software/gnash"
-> +LICENSE =3D "GPLv2 & LGPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Daabe87591cb8ae0f3c68be6977bb5=
-522 \
-> +                    file://COPYING.GPL;md5=3D9ac2e7cff1ddaf48b6eab6028f2=
-3ef88 \
-> +                    file://COPYING.LGPL;md5=3D252890d9eee26aab7b432e8b8a=
-616475"
-> +DEPENDS =3D "gtk+ gnome-doc-utils gnome-common libxml2 intltool-native y=
-elp-tools-native"
-> +
-> +inherit gnomebase gnome-help distro_features_check pythonnative gtk-icon=
--cache
-> +
-> +REQUIRED_DISTRO_FEATURES =3D "x11"
-> +
-> +SRC_URI +=3D " \
-> +    file://0002-fix-gcc-6-build.patch \
-> +    file://0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch=
- \
-> +"
-> +SRC_URI[archive.md5sum] =3D "c16756952967f7316d64593124761027"
-> +SRC_URI[archive.sha256sum] =3D "aaeeebffaeb3068fb23757a2eede46adeb4c7cec=
-c740feed7654e065491f5449"
-> --
-> 2.21.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+That's the point, similar to +git in PV.
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
