@@ -1,28 +1,48 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 421EC7FA9D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
+	[209.85.160.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 6F5927F98E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 13:05:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id x9SD56d0009449
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 28 Oct 2019 06:05:06 -0700 (PDT)
-Received: from [128.224.56.205] (128.224.56.205) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Mon, 28 Oct 2019 06:05:05 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <20191011151148.39463-1-Trevor.Gamblin@windriver.com>
-	<CAMKF1spHtQ0JQd3FUP7y_OrwAacMxZhbPzxkj2KMRCwQUhZQZA@mail.gmail.com>
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-Message-ID: <09dcb9d0-0d65-22c9-e98e-ca29a781b7ed@windriver.com>
-Date: Mon, 28 Oct 2019 09:05:04 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
+	Mon, 28 Oct 2019 13:58:07 +0000 (UTC)
+Received: by mail-qt1-f172.google.com with SMTP id l15so8054178qtr.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Oct 2019 06:58:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=eBvBiw7dNSPbwEHbFy9lg2V2TkNyjVANyNsK7DFb/6A=;
+	b=PgJiK31VZ0vINLMhCAuV+VL74pqUC1H9gm1Mcnn96lsIYThhtc7kR1DL0gXDxPmIXS
+	MgaXH4xV+pHrJxauSDbLz+3aQfl5f+1Q6zbCp+Hwv6oaWDuCSsct7p/nER+Pt2jP7JHj
+	/fbPTcOxqsQ6gENDQWndaZhtvXz2KX4nXAiQEIRnzY5ndzejzmVdAoCDep13YFaIUXwr
+	FxASg2cVaj6eZTV8/ArLU74Vg93cfma9OBPWugR5Z/6yPPYcjxB4Qmw6BmYPeaotkkN5
+	ep+Zw5+HjRfvQ1C+g5MBTwLdv4JSZ3Lt/+nZSgpcIujA3QJMFCqgO2NHKVc/JXKRR+GK
+	SJtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=eBvBiw7dNSPbwEHbFy9lg2V2TkNyjVANyNsK7DFb/6A=;
+	b=H6YLXr7RBBXEyTNDFPoa4itbhtIHJc/bwXZ15iLutCWr6ZVLIW/hce0yjm1VtPpy/f
+	j3wNB/95YU7LTSlc5e0rA4uVT2IBbCjGVe1+7M4jjnDUhn/wpidmicbzLl9EO5Y3HL/8
+	VrnHTyQ6S/X3pwrqKOj/ZF6E86+F8njvCI1A3/WM2rvHxiIwa9ZwzkUHFkAVBFW+tIe9
+	7PXAglbeDZGRctrJCxDiwC0axfEypuJaF0cE5xXTBKQqrhjLFUVFPxDlvmU+88wHhZ5g
+	8jFxLL3WNHDafPUxuFOCo4AowduoFIraYyKRCN+Rst+yg+d27PmApxoHlWAkTOtzfbnT
+	SoZw==
+X-Gm-Message-State: APjAAAWHTiMvIch8RRv4auRwN3sdxPD+ZASBJ34HcA4e3XFpjVtqo6DK
+	EuHKo/wwCX2la99AqSv4rs91rl6LsDPE/6DIhxw=
+X-Google-Smtp-Source: APXvYqxZbQaJwAf/iinvbQ6bNN8vorCg6Xl43G1NNBP4G5vl6V7mF1GPrq2xZByQViCm1uY6pke5nhwcnbRaO2tOyts=
+X-Received: by 2002:ac8:6054:: with SMTP id k20mr7014766qtm.88.1572271087882; 
+	Mon, 28 Oct 2019 06:58:07 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spHtQ0JQd3FUP7y_OrwAacMxZhbPzxkj2KMRCwQUhZQZA@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] rsyslog: upgrade from 8.1908.0 to 8.1910.0
+References: <595fa4eb0a404956aae3fa9a7a25ba12@gomspace.com>
+In-Reply-To: <595fa4eb0a404956aae3fa9a7a25ba12@gomspace.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Oct 2019 14:57:56 +0100
+Message-ID: <CAMKF1sqUw6fbN=096+ed29=iLW+7y+0YnqBVeEG_Qy3AoT1fqQ@mail.gmail.com>
+To: Martin Siegumfeldt <mns@gomspace.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: Libiio Python Bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,58 +55,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 13:05:08 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 28 Oct 2019 13:58:07 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 10/25/19 5:36 PM, Khem Raj wrote:
+On Mon, Oct 28, 2019 at 1:33 PM Martin Siegumfeldt <mns@gomspace.com> wrote:
 
-> Failed to build for musl here
+> Hi,
 >
-> https://errors.yoctoproject.org/Errors/Details/274648/
+> I noticed that since
+> http://lists.openembedded.org/pipermail/openembedded-devel/2019-October/202502.html
+> was merged, libiio started depending on 'python3-core', even without any
+> dependencies defined towards libiio-python3.
 >
-> On Fri, Oct 11, 2019 at 4:12 PM Trevor Gamblin
-> <Trevor.Gamblin@windriver.com> wrote:
->> From: Trevor Gamblin <trevor.gamblin@windriver.com>
->>
->> Upgrade to latest version for CVE-2019-17040 fix plus
->> other upstream bug fixes.
->>
->> [GitHub Issue] -- https://github.com/rsyslog/rsyslog/pull/3875
->>
->> CVE: CVE-2019-17040
->> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
->> ---
->>   .../rsyslog/{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb}      | 4 ++--
->>   1 file changed, 2 insertions(+), 2 deletions(-)
->>   rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb} (98%)
->>
->> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
->> similarity index 98%
->> rename from meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
->> rename to meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
->> index bbb4b119a..f50f9a34b 100644
->> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1908.0.bb
->> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1910.0.bb
->> @@ -29,8 +29,8 @@ SRC_URI_append_libc-musl = " \
->>       file://0001-Include-sys-time-h.patch \
->>   "
->>
->> -SRC_URI[md5sum] = "6e9aa4ef4cad8ae49affa0a786cc9e2f"
->> -SRC_URI[sha256sum] = "f8c8e53b651e03a011667c60bd2d4dba7a7cb6ec04b247c8ea8514115527863b"
->> +SRC_URI[md5sum] = "6d4d94359d083f449f089b8dbb93c423"
->> +SRC_URI[sha256sum] = "0219ee692f31a39743acb62aaf4196b644ce94edf386df4605fd6a11a4fe0c93"
->>
->>   UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
->>   UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
->> --
->> 2.18.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-Just testing a v2 now. Sorry for the delay.
+> We use
+>
+> RDEPENDS_${PN} += "libiio"
+>
+> for describing the (native library) dependency (i.e. without bindings), and
+>
+> RDEPENDS_${PN} += "libiio-${PYTHON_PN}"
+>
+> for a dependency including the bindings - isn't this valid?
+>
+> I assume, that a pure native library dependency (i.e. without python
+> bindings) should not introduce any python core functionality?
+
+
+I am happy to take a patch to make it a packageconfig and keep it off by
+default
+
+>
+>
+> Thanks,
+> Martin Siegumfeldt
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
