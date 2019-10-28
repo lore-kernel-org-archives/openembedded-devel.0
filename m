@@ -1,50 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
-	[209.85.222.182])
-	by mail.openembedded.org (Postfix) with ESMTP id BB80E7FA8C
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id BC6AC7FA83
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 21:40:43 +0000 (UTC)
-Received: by mail-qk1-f182.google.com with SMTP id e66so10020087qkf.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 14:40:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=tpXg7/5vXqRuJiSVm3rKAAeoOt0URkpYCZPAA8lPrRA=;
-	b=pR787ZoB1Tsypfvjiw5+ogXBT8PX/Ndr1MtViwhqJj3wPyxQEvfmYK6uIE1/TXOgc7
-	mR/VFOuWPrwVCgzeWDcmQv8Imn4a+hEIsFm3Cl6rVg+9l/T2pmakLNP4DKq09ilSE8ZN
-	3aThyr1JKeq6HDObMr0LCk/C1WtSCmIGx+p1wcSbwekfrJL1chKkUe57hJtEm4eo4M5i
-	eXkG9kED5oDI2dQV9IrUb0bJkE1uiVgDqx8575uused4TeHegK5N5TAiO+2dY6NuY+1r
-	BbyxN9YQ4VYlehx0djU329nNhC2I3im+DIMIpn87CmbS2EPoyzpia6ev985BZwtAzAsQ
-	kdig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=tpXg7/5vXqRuJiSVm3rKAAeoOt0URkpYCZPAA8lPrRA=;
-	b=mpz4vvLSJ5mmzdR2Pvy17J2gudNsCY4Hey04PWO1b3YZ6r/D7ygIcdRaXL55DDVLsi
-	k+bTWZcpd94uGTSvGTMYy03uIxfGlvHSe4tnMGBr2kSerbR3G3jvW0eeyS4JWG4MRm/0
-	yExj/QWG4w35MHPmE9ZopIRfdev5Dq0d3KQ9+UwkcpCq6Hvkcwk5Zi9eH5Oab3lVYUJQ
-	Ceibnyk3n9pTUGGkHS6m1AHlTS/bEWNrMMWg7aKVNCniFkBu0kULCITGOITAOEbWqJO3
-	zIg4otra8Em8pPmSffPuQG7hz2HZFtnSjYGCiZowgkfxw1X6axIcdD1PHbwYRXsFKSyq
-	ZYBQ==
-X-Gm-Message-State: APjAAAWP7N81fDv9MQuX6afguYY8LakmMeBh/AQ+G5mE/eVdVfiyeu17
-	nc9iPSAkCD5nRP3rkoJvvepnU7peyrage57hCI0=
-X-Google-Smtp-Source: APXvYqy92BSGN75OW0S8/mPoUFHGkQZeXKzAJqBsXJ2kbzZuxo5k804v2sP9ALUg+9G7FGGPl2qEuCrh+zBKG3oITbw=
-X-Received: by 2002:ae9:f010:: with SMTP id l16mr2689868qkg.212.1572298844210; 
-	Mon, 28 Oct 2019 14:40:44 -0700 (PDT)
+	Mon, 28 Oct 2019 22:16:28 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	28 Oct 2019 15:16:29 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.68,241,1569308400"; d="scan'208";a="229842326"
+Received: from mng-mobl.gar.corp.intel.com (HELO shodan.fritz.box)
+	([10.249.76.230])
+	by fmsmga002.fm.intel.com with ESMTP; 28 Oct 2019 15:16:27 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 29 Oct 2019 11:16:20 +1300
+Message-Id: <cover.1572300962.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20191027233545.4146-1-schnitzeltony@gmail.com>
-	<20191027233545.4146-8-schnitzeltony@gmail.com>
-	<CAMKF1sqVM6zVRftnq_fsPXRxp=fR+mEeofhgw6LFd3vgOUNFLQ@mail.gmail.com>
-	<CALbNGRTmZWpYHDiG_2uXaQyGWi0GPwTvXhfsUcsNJ51Fx8AWAg@mail.gmail.com>
-In-Reply-To: <CALbNGRTmZWpYHDiG_2uXaQyGWi0GPwTvXhfsUcsNJ51Fx8AWAg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Oct 2019 22:40:24 +0100
-Message-ID: <CAMKF1spH0prGFUio+prvufVwm9kah5rNtU8HT7+A6LwTtZOuyA@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 07/19] colord: initial add 1.4.4
+Subject: [meta-python][PATCH 0/1] python3-pillow: update to 6.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,39 +32,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Oct 2019 21:40:43 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Oct 2019 22:16:28 -0000
+Content-Transfer-Encoding: 8bit
 
-On Mon, Oct 28, 2019 at 9:50 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m>
-wrote:
+Includes a CVE fix.
 
-> On Mon, Oct 28, 2019 at 9:08 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > https://errors.yoctoproject.org/Errors/Details/274841/
-> This is exactly the same error V1 caused and it was fixed in V2 [1].
-> Wanted to look what you applied but in master-next colord is already
-> gone.
->
-> So I have to ask: Are you sure you applied [2]/[3]?
->
-> Maybe I caused confusion by not naming it V3...
->
-> [1]
-> http://lists.openembedded.org/pipermail/openembedded-devel/2019-October/2=
-02531.html
-> [2]
-> http://lists.openembedded.org/pipermail/openembedded-devel/2019-October/2=
-02550.html
-> [3] https://patchwork.openembedded.org/patch/166279/
->
+The following changes since commit 18506b797bcfe162999223b79919e7c730875bb4:
 
-I was applying latest from your pull request especially
+  pavucontrol: polish the recipe (2019-10-26 23:10:06 -0700)
 
-https://patchwork.openembedded.org/patch/166279/
+are available in the Git repository at:
 
+  git://git.openembedded.org/meta-openembedded-contrib paule/pillow
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=paule/pillow
 
-> Andreas
->
+Paul Eggleton (1):
+  python3-pillow: update to 6.2.1
+
+ .../0001-explicitly-set-compile-options.patch    | 16 +++++++---------
+ ...on3-pillow_6.1.bb => python3-pillow_6.2.1.bb} |  4 ++--
+ 2 files changed, 9 insertions(+), 11 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pillow_6.1.bb => python3-pillow_6.2.1.bb} (86%)
+
+-- 
+2.20.1
+
 
