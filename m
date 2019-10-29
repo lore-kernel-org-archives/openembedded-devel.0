@@ -1,33 +1,41 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 306C77FA20
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
+	[209.85.128.52])
+	by mail.openembedded.org (Postfix) with ESMTP id E686E7FA14
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 18:31:27 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472gCM6f7nz65
+	Tue, 29 Oct 2019 18:35:08 +0000 (UTC)
+Received: by mail-wm1-f52.google.com with SMTP id g24so3707561wmh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 19:31:27 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572373888;
-	bh=jqf4zchcpWxnfOf1VqakTzdAhQcviPoB9IYy0DlABOU=;
-	h=From:To:Subject:Date:From;
-	b=MPSCfJviAdGVt7W9dLDa388BqpRSQhxC8FLNe9vv+GqLc2Aj8bDqsubiz2D2oWmja
-	BfSQ7LpW9SdUc3X385voT0IcDaXysZ4ToyLQsQKSRfFQhNZBbjqbFL89Pl+NNCh66C
-	4ErGeR7rbnZj8GBjVGXsXps6NphPLCtB1d8YBS17fgdtt26KKASsPY2A597MfZ7ugV
-	HVASJ1lvOfFbp5w7Ts8wYHQj9gp5ESNzZbr0x083v7Uct1Zwjxa+rbK9b0qRHsvu1C
-	x6A6YmtfEfbdSej+f5mAEm6gp9TKDQms/KwXXd8Lc406OF3YGIsO57rHY7U0zm1JnO
-	70LzSHFZDudnMjQky2QGAARw7o6uXlfAQmFr2OnILUnd2qWsWOW+DaxV37+MhRGCuf
-	m2CUU4ohW5BFUP8hRXB8zoLw0R7TsfvjAA1fE5kDg7WcWKwILHHI0ohHd8pLBayiZB
-	N89yG5/AAcsy9JT8pwYltU7IoP1HaGtE7fz9WHliIGph+yoJWZtpLqnAGPDrGMQfBO
-	XSSnxf5Ub7KZy322pBlmIOdAewZqMwCoxcrgXfIVo2/zNIij6AlxuXs1CgJl6hK6en
-	G5XWeFLzNC7Ozdl5wIobWeQNA85ESQiM5BoHDqyE4gcH9r06UnkgWhnPtKwBEEyHiv
-	8oc8sF129G47hU71lSjVCrBw=
-From: Adrian Bunk <bunk@stusta.de>
+	Tue, 29 Oct 2019 11:35:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=dN0ZSKnMHPXurDqr8I1B6L0dseTWXO+klkspolo4dRc=;
+	b=STD4LKlGFerlgXH1U3fqVLddKG0P4iPAtNzBtgUSx07c/LirP5Wsb3gSm06Ls7DdPl
+	MR2aZwyfNREZPUz3D+RFDAPBHlv0b20IOpEnq1iDfssyWJS8n2V4Oo2/pMFUYF8d5bL7
+	u6d9233t4xtkatnW+7QtMKWhLrtZPDnn8ZgZcfgpgx8s+tnkfTWue2lkoNf+uBjTuM5d
+	CV13FY0c6y3EhJn0+SYrpZPHV/mEwYSaf+E7PuHBkFZi4iAYMpkXnWuZP5zy9Us9W7HA
+	j/S3SHx3mwxJVUzblHV9wYahxGk9xUxvzjmZtR4toVS89cluiNSpfO7boPQfYlyyrXmr
+	+mKQ==
+X-Gm-Message-State: APjAAAUKcqeuaPY1nLQ0ppJRV8g2i/10aOjKLBLqsKZpQ/u6//EUNaef
+	dOuutiQPf1kq+6mShjm6g7zun5wv
+X-Google-Smtp-Source: APXvYqzXbeQWL8NCnI5leW3bIUfEOiBsdF0/VQV0odkyoirraOnKxE/EKCDyKrjpdkkA2VR41n6TUw==
+X-Received: by 2002:a1c:a751:: with SMTP id q78mr5704576wme.129.1572374109448; 
+	Tue, 29 Oct 2019 11:35:09 -0700 (PDT)
+Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	q14sm19470655wre.27.2019.10.29.11.35.08
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 29 Oct 2019 11:35:08 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 20:31:22 +0200
-Message-Id: <20191029183123.1868-9-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] pegtl: Upgrade 2.1.4 -> 2.8.1
+Date: Tue, 29 Oct 2019 18:35:07 +0000
+Message-Id: <20191029183508.29985-1-git@andred.net>
+X-Mailer: git-send-email 2.23.0.rc1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/2] libuv: update to 1.33.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,90 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 18:31:27 -0000
+X-List-Received-Date: Tue, 29 Oct 2019 18:35:09 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Removed patch for issue fixed upstream.
-Year updated in LICENSE.
-
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: André Draszik <git@andred.net>
 ---
- ...clang-warning-about-non-virtual-dtor.patch | 25 -------------------
- meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb | 13 ----------
- meta-oe/recipes-extended/pegtl/pegtl_2.8.1.bb | 12 +++++++++
- 3 files changed, 12 insertions(+), 38 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/pegtl/pegtl/0001-Fix-clang-warning-about-non-virtual-dtor.patch
- delete mode 100644 meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb
- create mode 100644 meta-oe/recipes-extended/pegtl/pegtl_2.8.1.bb
+ .../libuv/{libuv_1.32.0.bb => libuv_1.33.1.bb}                  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-connectivity/libuv/{libuv_1.32.0.bb => libuv_1.33.1.bb} (90%)
 
-diff --git a/meta-oe/recipes-extended/pegtl/pegtl/0001-Fix-clang-warning-about-non-virtual-dtor.patch b/meta-oe/recipes-extended/pegtl/pegtl/0001-Fix-clang-warning-about-non-virtual-dtor.patch
-deleted file mode 100644
-index 0c79c4c09..000000000
---- a/meta-oe/recipes-extended/pegtl/pegtl/0001-Fix-clang-warning-about-non-virtual-dtor.patch
-+++ /dev/null
-@@ -1,25 +0,0 @@
--From 340110292b35d367205953a59e7eab28e1f4a0bb Mon Sep 17 00:00:00 2001
--From: Daniel Frey <d.frey@gmx.de>
--Date: Sat, 7 Apr 2018 09:13:51 +0200
--Subject: [PATCH] Fix clang-warning about non-virtual dtor
--
--Upstream-Status: Backport [https://github.com/taocpp/PEGTL/commit/340110292b35d367205953a59e7eab28e1f4a0bb]
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- src/example/pegtl/json_classes.hpp | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
----- a/src/example/pegtl/json_classes.hpp
--+++ b/src/example/pegtl/json_classes.hpp
--@@ -34,10 +34,7 @@ namespace examples
--          : type( in_type )
--       {
--       }
---
---      ~json_base()
---      {
---      }
--+      virtual ~json_base() = default;
--    };
-- 
--    inline std::ostream& operator<<( std::ostream& o, const json_base& j )
-diff --git a/meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb b/meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb
-deleted file mode 100644
-index 344a80524..000000000
---- a/meta-oe/recipes-extended/pegtl/pegtl_2.1.4.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--DESCRIPTION="header-only library for creating parsers according to Parsing Expression Grammar"
--HOMEPAGE="https://github.com/taocpp/PEGTL"
--LICENSE="MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=80cb066ab204c7fe022f1cfe0c2c6818"
--
--SRCREV = "776fa4a1e8bda860008524f6dd9473967c8375b1"
--SRC_URI = "git://git@github.com/taocpp/PEGTL.git;protocol=https;branch=master \
--           file://0001-Fix-clang-warning-about-non-virtual-dtor.patch \
--          "
--
--inherit cmake
--
--S = "${WORKDIR}/git"
-diff --git a/meta-oe/recipes-extended/pegtl/pegtl_2.8.1.bb b/meta-oe/recipes-extended/pegtl/pegtl_2.8.1.bb
-new file mode 100644
-index 000000000..7333363ec
---- /dev/null
-+++ b/meta-oe/recipes-extended/pegtl/pegtl_2.8.1.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION="header-only library for creating parsers according to Parsing Expression Grammar"
-+HOMEPAGE="https://github.com/taocpp/PEGTL"
-+LICENSE="MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ae77b0d903a788cb48f4f0926ffc468b"
-+
-+SRCREV = "7aff80da2ca4fcb0b47f32ba684ff2e1cd48c579"
-+SRC_URI = "git://github.com/taocpp/PEGTL.git;protocol=https;branch=2.x \
-+          "
-+
-+inherit cmake
-+
-+S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-connectivity/libuv/libuv_1.32.0.bb b/meta-oe/recipes-connectivity/libuv/libuv_1.33.1.bb
+similarity index 90%
+rename from meta-oe/recipes-connectivity/libuv/libuv_1.32.0.bb
+rename to meta-oe/recipes-connectivity/libuv/libuv_1.33.1.bb
+index c7fa3c10f..604568e62 100644
+--- a/meta-oe/recipes-connectivity/libuv/libuv_1.32.0.bb
++++ b/meta-oe/recipes-connectivity/libuv/libuv_1.33.1.bb
+@@ -4,7 +4,7 @@ BUGTRACKER = "https://github.com/libuv/libuv/issues"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a68902a430e32200263d182d44924d47"
+ 
+-SRCREV = "697bea87b3a0b0e9b4e5ff86b39d1dedb70ee46d"
++SRCREV = "07ad32138f4d2285ba2226b5e20462b27b091a59"
+ SRC_URI = "git://github.com/libuv/libuv;branch=v1.x"
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.17.1
+2.23.0.rc1
 
 
