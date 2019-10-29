@@ -1,46 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FD4060125
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 7ED5D60125
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 21:27:43 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id l3so281490qtp.2
+	Tue, 29 Oct 2019 21:37:48 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id e14so330915qto.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 14:27:44 -0700 (PDT)
+	Tue, 29 Oct 2019 14:37:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=RFsAZkuDcQjYS/jq27S8Mk5WVjG3GjWZLS29KxtWyWc=;
-	b=nArlrjmuN06GakCjEgRDIT/J7o+IPVOapq2UXP6jTBMPmJxYlhZjC7lb7dCl5kfwYI
-	AtSfRbj6FhBSsJUj2fZ74ZdvWLDTv1VGXsBZloxyl0Q+GsWOaPWnip4Qps7sH0kBpZOl
-	DeZ8gewyIWuuiWbkeuyPWBnZbrZPgNx/JcDzxVnUEsOGdg0KkusRUgBVdZsCD7FNiPjl
-	UnBb8A1s5cJS3Yp5Ef36A4rndKizajBKkLj6xO1RcrPhorGdRqMcf+Tlzg2mOMYKhkMK
-	fax69+kXJwdhRSVe1VAel639KnX/r9+PbqNhYX+XihCZDjVUYfGfR0zz7nTmwlWotevi
-	b/TQ==
+	:cc:content-transfer-encoding;
+	bh=RyvVS8sMc63w1wFcWkdpHeWgNN+U1Mw18x0M8pitKnI=;
+	b=Nvj0G20lTlTO7KynEwbVnNOVjPZ845aNsvmjkaAieXtpF2QYvm97XYIGDve00gyJJX
+	sOcD8HY+dfkruSTX8If/JgTmK0xGJrJdcnwhp1jCxmAUvQceCHaZQ5DxBL7hs4TaW85h
+	Pgw2/HuFB3UZ1HCc39k2Nae6qw+wD8r29tXtYzWbVNpJdIWWRfWAMBup+r7m26N/rYVv
+	+LXYz7JW6MWyW6Q4LuPcMvjj8cRc+c0j2bl/j4q7l8gW3WoVjfmPbNhOFOu6B7bPaxXU
+	Vwk5Vyi+dA8qRAz0WSATcKkrL5gxZ7zmXwFvf/1E5lpnxLnAg43OV8htX+cx/3+gmRE8
+	KDxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=RFsAZkuDcQjYS/jq27S8Mk5WVjG3GjWZLS29KxtWyWc=;
-	b=AmyKKCLvymQiRndzUBKcI6c4uecDBJDeIW4vqqhBQk/w9kpMuFtKbEdAxsMN0kp7Xb
-	Z0MotIRPv1LyGYI+xi37YHXS6zrunPm0mu/sL4o3o1y9ZEoEJ3tQQ+EKNbkKOKmZEUf6
-	tUJqHKEbXoBKvT22YAFed4rRM3aI97iBh8I8b+UtJvj434tTHyqBZyd634RVruvXkSl8
-	eGkehOfhpxKILZgDdINTnVncs6UYM+6DDkmkF1gRqJ0JpV74HcSPIqueQOq5L29WZCVd
-	trtf1DTOmIWyfIbxvQ6oi0+9V4nGoUhKo3t9TlzE+je1itCm0TDMRAVccC/B8/KlBq2j
-	E3Jw==
-X-Gm-Message-State: APjAAAUZ05ruo4JhDyaiMfxVRCq6mTNb7C9qzqfN0kUNGo6CwD7j+fnB
-	8lguY1Cse7sm6q5CDc6g8LLuQ5AIC7/tjkxYytzmIeGyARwHSA==
-X-Google-Smtp-Source: APXvYqy6/W5fpjS3Nmx3g5+i1SaylDvGmxZ2U9lzf7V/aG9lsRuyYdhFzldVSGA8kw6VoJxTqQ4vqDM6Te7iCi4EuUc=
-X-Received: by 2002:ac8:411b:: with SMTP id q27mr1476292qtl.53.1572384463763; 
-	Tue, 29 Oct 2019 14:27:43 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=RyvVS8sMc63w1wFcWkdpHeWgNN+U1Mw18x0M8pitKnI=;
+	b=QY7kwMeN1skS0YpzE7O9HHtnEaiZG70Ml2eVRFkTChcjnAPMWl0+2NQKBhhoE6843+
+	WCjDiTIxR+8OaRxTzlx4CTg0DGe0dWduxI92IUboYvJ9dln9YOsnpIsqRLpsDLrl4NyV
+	ey432M4f10ZmOjROZJyp9ec3gs48318BYoHLO/+7UC5V9MVhjd/BVRrONRCIkIHUuEBT
+	omVi90MjWhevsAsDx7uUznPjbm7FXeExbFWccnxalBcSalQiOfm3DdJS1tx8dwX9O2JB
+	ParcPxTNhIaSCd+9DF0T4VYDZEB1vlLPoCwNUve9LgFYB8eukrt5aBJpoKaUjNWz+rw5
+	q2lA==
+X-Gm-Message-State: APjAAAWNI90OIe6bZPrBXAjQ/OtwI4aromaLfx9u8Jn9PuBK+RtLr+Yp
+	rAkhLxz5aHPq72V2eYItOAfo5Uc6iLITfjFe8hk=
+X-Google-Smtp-Source: APXvYqyL1nOyXFCuy+bMKr8tZLn0SZuoE+mJQ6vC00aZ8FvLvpnul1HFzUA50EwnuPJmHOh2uXoxZN6EBbBHHgTjNm8=
+X-Received: by 2002:aed:2724:: with SMTP id n33mr1516099qtd.194.1572385068985; 
+	Tue, 29 Oct 2019 14:37:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191029102000.11329-1-mns@gomspace.com>
-In-Reply-To: <20191029102000.11329-1-mns@gomspace.com>
+References: <20191029010253.5784-1-schnitzeltony@gmail.com>
+	<CAMKF1spGD1djY6F4hMYCTMWyEm=Fdq_ZmMcWFE8rxnhe7xv-mA@mail.gmail.com>
+	<CALbNGRR=kGo-Dt1VKn=2AkWQwDXHEKF2M5Hwb5y0uGVfE2yrzg@mail.gmail.com>
+In-Reply-To: <CALbNGRR=kGo-Dt1VKn=2AkWQwDXHEKF2M5Hwb5y0uGVfE2yrzg@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 29 Oct 2019 22:27:17 +0100
-Message-ID: <CAMKF1spaJvH1AS15KK1MUwD7HM-UKiGtb1oB9eRRBe-t9kxHyg@mail.gmail.com>
-To: Martin Siegumfeldt <mns@gomspace.com>
+Date: Tue, 29 Oct 2019 22:37:22 +0100
+Message-ID: <CAMKF1soAzh=sMUfuXDh=dWZEboHUO1+sSFk0Q=h_t75WD8Pn7g@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] libiio: Conditionally inherit distutils3-base
+Subject: Re: [PATCH v4 1/4] colord: initial add 1.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,63 +56,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 21:27:43 -0000
+X-List-Received-Date: Tue, 29 Oct 2019 21:37:48 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 29, 2019 at 11:21 AM Martin Siegumfeldt <mns@gomspace.com> wrote:
->
->  * inherit only when libiio-python3 is build.
->
->  * also add PACKAGECONFIG variant that allows python bindings to be
->    enabled and disabled. It adheres to the current CMake logic and
->    defaults to an 'out-out' approach.
->
-> Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
-> ---
->  meta-oe/recipes-support/libiio/libiio_git.bb | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recipes-support/libiio/libiio_git.bb
-> index e6e0eaef8..ec3a39de1 100644
-> --- a/meta-oe/recipes-support/libiio/libiio_git.bb
-> +++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-> @@ -12,7 +12,7 @@ SRC_URI = "git://github.com/analogdevicesinc/libiio.git;protocol=https"
->
->  S = "${WORKDIR}/git"
->
-> -inherit cmake python3native systemd distutils3-base
-> +inherit cmake python3native systemd
->
->  DEPENDS = " \
->      flex-native bison-native libaio \
-> @@ -25,10 +25,13 @@ EXTRA_OECMAKE = " \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DWITH_SYSTEMD=ON -DSYSTEMD_UNIT_INSTALL_DIR=${systemd_system_unitdir}', '', d)} \
->  "
->
-> -PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND"
-> +PACKAGECONFIG ??= "USB_BACKEND NETWORK_BACKEND PYTHON_BINDINGS"
+it seems its not linking with gobject-2.0 properly, pango had similar
+problem which was fixed with
+https://gitlab.gnome.org/GNOME/pango/commit/d0cb6be7431d1a3c711bd45bcf05b34=
+601604037
 
-this change is not needed.
-
+On Tue, Oct 29, 2019 at 4:43 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
 >
->  PACKAGECONFIG[USB_BACKEND] = "-DWITH_USB_BACKEND=ON,-DWITH_USB_BACKEND=OFF,libusb1,libxml2"
->  PACKAGECONFIG[NETWORK_BACKEND] = "-DWITH_NETWORK_BACKEND=ON,-DWITH_NETWORK_BACKEND=OFF,libxml2"
-> +PACKAGECONFIG[PYTHON_BINDINGS] = "-DPYTHON_BINDINGS=ON,-DPYTHON_BINDINGS=OFF"
-
-this should be
-PACKAGECONFIG[libiio-python3] = "-DPYTHON_BINDINGS=ON,-DPYTHON_BINDINGS=OFF"
-
-> +
-> +inherit ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'distutils3-base', '', d)}
+> On Tue, Oct 29, 2019 at 3:15 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > Fails again
+> >
+> > https://errors.yoctoproject.org/Errors/Details/274899/
+> >
+> Continuing like this does not make sense any more. Need to set up an
+> environment where I can reproduce this error - may last.
 >
->  PACKAGES =+ "${PN}-iiod ${PN}-tests ${PN}-${PYTHON_PN}"
->
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Andreas
 
