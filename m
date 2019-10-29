@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id BBD377FA20
+	by mail.openembedded.org (Postfix) with ESMTP id E02207FA25
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 29 Oct 2019 18:31:26 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472gCL4dGnzQN
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472gCM3Xs3zRY
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 19:31:26 +0100 (CET)
+	Tue, 29 Oct 2019 19:31:27 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572373886;
-	bh=1yuBmf0HMx5T709Pz4Ht5D1qevBIzvz88R+27wRl6RI=;
+	s=default; t=1572373887;
+	bh=CZHS+O7uHudG+qPyLTEA2jlkjkaR5+0n0BbvLiPREdA=;
 	h=From:To:Subject:Date:From;
-	b=TopiDkD3kF9kjz2UOd0hwwQfbrJSRN7KFtX688qKIYb9nNnVF7mAL9jIxciYZ+Lz0
-	zGBknm37xPbkU1S/HEP2A8mp0lWMFDf8McY7bd406N48Vqi15w0iD6CiPS1x4OiYQA
-	X3zrwRhirW/YGFK/LXhfUkBdzm2i0PkTuSNXIoyL58Q4AK++1FNwM1jC6e6xDQfs8o
-	1p0iRCeJXggbpVpY1t0iZLD77m18w9A/rA64ohCVDxgWyxU4Ji5AdNHTlSq8gW6zkP
-	9g/qmtzDCBZ2+B5zZ9LC50OPytZutlPKPL/g1PSgS/qsyKUIUDkN3H0oaenhXosFMF
-	F9ceUwj8UkHArHwOmghWCW4CDrXvZEuimyLvc0mq9Wyg3iQwy7kY5oOlqrwEqIYKJi
-	fvLDqFnkCQRRjUfLJAH7hDQI6ujftpaOJq/wZBTOlDMJAT/LACmAP8Fj4GEDTMJvI0
-	LELBQbLXHTEA8AxN5JEMKsp28kyDZM7akVG96C2lb9QInHJK5A4VHaltEOb3zhzbN1
-	72bP5yBfkMg3MKoKCoZv6gHkJuPSniRxahSXOqLUoEmL/wj3c+kBHYeV2pw4VENY81
-	WO1WqBTyKGHt1wucezXvqOT86JFhX0T7zuu/WHVJ0VOZ/FUSH1L47N4ngAjX+Gxlgc
-	8hwSFL4nkGp9XAdNgKfKv/UY=
+	b=XffGC+Z2AFKwfrw5orwbh7YMx7NLqI6M7sVK3UNecr+5SJPdDiYNCptaJ49mq/aql
+	OWkEAd1PFT8k87QJ6QuoAb15s20MZVhzOdbdH407S8UjHW+l8IQnsmbcWDtgJVoejE
+	azSqAWii16gLZ/i/1jY0CRfZaBIBLXoDku9wP8DJpknVB8zgTgpQePl+e1moSXovfm
+	PIxwcypwxScrFJGayYx56pAKzmfNJFICGpvXGl8rJfSr2O6M+XSItbFQK19vy8IAus
+	CBcSI4+VMWogIPjS8PJwIQrzzZOGikT6JYIksVx5/VqwMvjxfVH+PN5EqZC1W2jk1p
+	o9lH1imZnwvbUW+Dqs/xugmnwsarS2urLLafqkPiUk/Vq5HZlYG5KxI0dZM0xTEEuZ
+	uCxvJh496o1XM5xITP9lqRTy0Talk20gveECuhQIaAkDD728BNbCNDgtpJWrE/+bHR
+	g/0+pxs2fiEpLH9HwqgAx7vrNz84CUcF5NkdL5pCS+RRQQOcXyHQn8qF35Ys4tF5TT
+	FHIqfr9rS3vopwXKHcEHh9C+mEAcWFKCj2O3emdqE12tBJrpbIAYw+e5EZcfuoxht4
+	9I8CrfY33F8jpFgtwZ8jCymzQWpg4VX4ZLCFUo9f1jbQV+Q+8IjHULm25WAmZz1PXt
+	qMAFXBtw+t9sSPoREwQmBQz8=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 20:31:19 +0200
-Message-Id: <20191029183123.1868-6-bunk@stusta.de>
+Date: Tue, 29 Oct 2019 20:31:21 +0200
+Message-Id: <20191029183123.1868-8-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] php: Upgrade 7.3.9 -> 7.3.11
+Subject: [meta-oe][PATCH] libnss-nisplus: Upgrade to the latest upstream git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,254 +42,282 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 29 Oct 2019 18:31:27 -0000
 
-Patch for issue fixed upstream removed.
-Also merge the inc into the recipe.
+Patch applied upstream removed.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ...xt-intl-Use-pkg-config-to-detect-icu.patch | 161 ------------------
- .../php/{php.inc => php_7.3.11.bb}            |  12 ++
- meta-oe/recipes-devtools/php/php_7.3.9.bb     |  20 ---
- 3 files changed, 12 insertions(+), 181 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch
- rename meta-oe/recipes-devtools/php/{php.inc => php_7.3.11.bb} (94%)
- delete mode 100644 meta-oe/recipes-devtools/php/php_7.3.9.bb
+ .../libnss-nisplus/libnss-nisplus.bb          |   3 +-
+ ...us-hosts-Remove-use-of-RES_USE_INET6.patch | 245 ------------------
+ 2 files changed, 1 insertion(+), 247 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus/0001-nisplus-hosts-Remove-use-of-RES_USE_INET6.patch
 
-diff --git a/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch b/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch
+diff --git a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb b/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+index 3a0a87eea..c9d259b1a 100644
+--- a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
++++ b/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus.bb
+@@ -15,10 +15,9 @@ DEPENDS += "libtirpc libnsl2"
+ 
+ PV = "1.3+git${SRCPV}"
+ 
+-SRCREV = "c6934373c7bac91499ff7bbe7d2439599325ca63"
++SRCREV = "116219e215858f4af9370171d3ead63baca8fdb4"
+ 
+ SRC_URI = "git://github.com/thkukuk/libnss_nisplus \
+-           file://0001-nisplus-hosts-Remove-use-of-RES_USE_INET6.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus/0001-nisplus-hosts-Remove-use-of-RES_USE_INET6.patch b/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus/0001-nisplus-hosts-Remove-use-of-RES_USE_INET6.patch
 deleted file mode 100644
-index 2258c4c7f..000000000
---- a/meta-oe/recipes-devtools/php/php/0049-ext-intl-Use-pkg-config-to-detect-icu.patch
+index cf380ddf4..000000000
+--- a/meta-oe/recipes-extended/libnss-nisplus/libnss-nisplus/0001-nisplus-hosts-Remove-use-of-RES_USE_INET6.patch
 +++ /dev/null
-@@ -1,161 +0,0 @@
--From 03fecab78f9fa747ad8ab3484e7ca00c0148321d Mon Sep 17 00:00:00 2001
--From: Changqing Li <changqing.li@windriver.com>
--Date: Sun, 28 Apr 2019 16:45:02 +0800
--Subject: [PATCH] From: Hugh McMaster <hugh.mcmaster@outlook.com> Date: Wed, 5
-- Dec 2018 23:27:30 +1100 Subject: ext/intl: Use pkg-config to detect icu
+@@ -1,245 +0,0 @@
+-From 184bda40e05053cd2df61c28bec0baa7353697bb Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Wed, 28 Aug 2019 09:49:10 -0700
+-Subject: [PATCH] nisplus-hosts: Remove use of RES_USE_INET6
 -
--The developers of icu recommend using pkg-config to detect icu,
--because icu-config is deprecated.
+-Upstream glibc dropped it starting glibc 2.30
+-see
+-https://sourceware.org/git/?p=glibc.git;a=commit;h=3f8b44be0a658266adff5ece1e4bc3ce097a5dbe
 -
--Upstream-Status: Pending
--
--update to version 7.3.4
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
+-Upstream-Status: Submitted [https://github.com/thkukuk/libnss_nisplus/pull/2]
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- acinclude.m4       | 95 ++++++------------------------------------------------
-- ext/intl/config.m4 | 16 ++++-----
-- 2 files changed, 15 insertions(+), 96 deletions(-)
+- src/Makefile.am     |  3 +-
+- src/mapv4v6addr.h   | 69 ---------------------------------------------
+- src/nisplus-hosts.c | 58 ++++++++-----------------------------
+- 3 files changed, 13 insertions(+), 117 deletions(-)
+- delete mode 100644 src/mapv4v6addr.h
 -
--diff --git a/acinclude.m4 b/acinclude.m4
--index 7d77c33..86b0ecc 100644
----- a/acinclude.m4
--+++ b/acinclude.m4
--@@ -2158,92 +2158,15 @@ dnl
-- dnl Common setup macro for ICU
-- dnl
-- AC_DEFUN([PHP_SETUP_ICU],[
---  PHP_ARG_WITH(icu-dir,,
---  [  --with-icu-dir=DIR      Specify where ICU libraries and headers can be found], DEFAULT, no)
---
---  if test "$PHP_ICU_DIR" = "no"; then
---    PHP_ICU_DIR=DEFAULT
---  fi
---
---  AC_MSG_CHECKING([for location of ICU headers and libraries])
---  found_icu=no
---
---  dnl First try to find pkg-config
---  if test -z "$PKG_CONFIG"; then
---    AC_PATH_PROG(PKG_CONFIG, pkg-config, no)
---  fi
---
---  dnl If pkg-config is found try using it
---  if test "$PHP_ICU_DIR" = "DEFAULT" && test -x "$PKG_CONFIG" && $PKG_CONFIG --exists icu-uc icu-io icu-i18n; then
---    if $PKG_CONFIG --atleast-version=40 icu-uc; then
---      found_icu=yes
---      icu_version_full=`$PKG_CONFIG --modversion icu-uc`
---      ac_IFS=$IFS
---      IFS="."
---      set $icu_version_full
---      IFS=$ac_IFS
---      icu_version=`expr [$]1 \* 1000 + [$]2`
---      AC_MSG_RESULT([found $icu_version_full])
---
---      ICU_LIBS=`$PKG_CONFIG --libs icu-uc icu-io icu-i18n`
---      ICU_INCS=`$PKG_CONFIG --cflags-only-I icu-uc icu-io icu-i18n`
---      ICU_CXXFLAGS="-DU_USING_ICU_NAMESPACE=1"
---
---      AC_MSG_RESULT([found $ICU_VERSION])
---
---      PHP_EVAL_LIBLINE($ICU_LIBS, $1)
---      PHP_EVAL_INCLINE($ICU_INCS)
---    else
---      AC_MSG_ERROR([ICU version 4.0 or later required.])
---    fi
---  fi
---
---  dnl If pkg-config fails for some reason, revert to the old method
---  if test "$found_icu" = "no"; then
---    if test "$PHP_ICU_DIR" = "DEFAULT"; then
---      dnl Try to find icu-config
---      AC_PATH_PROG(ICU_CONFIG, icu-config, no, [$PATH:/usr/local/bin])
---    else
---      ICU_CONFIG="$PHP_ICU_DIR/bin/icu-config"
---    fi
---
---    dnl Trust icu-config to know better what the install prefix is..
---    icu_install_prefix=`$ICU_CONFIG --prefix 2> /dev/null`
---    if test "$?" != "0" || test -z "$icu_install_prefix"; then
---      AC_MSG_RESULT([not found])
---      AC_MSG_ERROR([Unable to detect ICU prefix or $ICU_CONFIG failed. Please verify ICU install prefix and make sure icu-config works.])
---    else
---      AC_MSG_RESULT([$icu_install_prefix])
---
---      dnl Check ICU version
---      AC_MSG_CHECKING([for ICU 4.0 or greater])
---      icu_version_full=`$ICU_CONFIG --version`
---      ac_IFS=$IFS
---      IFS="."
---      set $icu_version_full
---      IFS=$ac_IFS
---      icu_version=`expr [$]1 \* 1000 + [$]2`
---      AC_MSG_RESULT([found $icu_version_full])
---
---      if test "$icu_version" -lt "4000"; then
---        AC_MSG_ERROR([ICU version 4.0 or later is required])
---      fi
---
---      ICU_VERSION=$icu_version
---      ICU_INCS=`$ICU_CONFIG --cppflags-searchpath`
---      ICU_LIBS=`$ICU_CONFIG --ldflags --ldflags-icuio`
---      PHP_EVAL_INCLINE($ICU_INCS)
---      PHP_EVAL_LIBLINE($ICU_LIBS, $1)
---
---      ICU_CXXFLAGS=`$ICU_CONFIG --cxxflags`
---      if test "$icu_version" -ge "49000"; then
---        ICU_CXXFLAGS="$ICU_CXXFLAGS -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit"
---        ICU_CFLAGS="-DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1"
---      fi
---      if test "$icu_version" -ge "60000"; then
---        ICU_CFLAGS="$ICU_CFLAGS -DU_HIDE_OBSOLETE_UTF_OLD_H=1"
---      fi
---    fi
--+  PKG_CHECK_MODULES([ICU], [icu-io >= 50.1])
--+  PHP_EVAL_INCLINE($ICU_CFLAGS)
--+  PHP_EVAL_LIBLINE($ICU_LIBS, $1)
--+  
--+  ICU_CFLAGS="$ICU_CFLAGS -DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1"
--+  ICU_CXXFLAGS="$ICU_CXXFLAGS -DUNISTR_FROM_CHAR_EXPLICIT=explicit -DUNISTR_FROM_STRING_EXPLICIT=explicit"
--+  
--+  if $PKG_CONFIG icu-io --atleast-version=60; then
--+    ICU_CFLAGS="$ICU_CFLAGS -DU_HIDE_OBSOLETE_UTF_OLD_H=1"
--   fi
-- ])
+-diff --git a/src/Makefile.am b/src/Makefile.am
+-index e879d5c..37ef86c 100644
+---- a/src/Makefile.am
+-+++ b/src/Makefile.am
+-@@ -15,8 +15,7 @@ AM_CPPFLAGS = -I$(srcdir) @TIRPC_CFLAGS@ @LIBNSL_CFLAGS@
 - 
--diff --git a/ext/intl/config.m4 b/ext/intl/config.m4
--index 4b9f469..fdae88a 100644
----- a/ext/intl/config.m4
--+++ b/ext/intl/config.m4
--@@ -9,15 +9,7 @@ if test "$PHP_INTL" != "no"; then
--   PHP_SETUP_ICU(INTL_SHARED_LIBADD)
--   PHP_SUBST(INTL_SHARED_LIBADD)
--   PHP_REQUIRE_CXX()
---  INTL_COMMON_FLAGS="$ICU_INCS $ICU_CFLAGS -Wno-write-strings -D__STDC_LIMIT_MACROS -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
---  if test "$icu_version" -ge "4002"; then
---    icu_spoof_src=" spoofchecker/spoofchecker_class.c \
---    spoofchecker/spoofchecker.c\
---    spoofchecker/spoofchecker_create.c\
---    spoofchecker/spoofchecker_main.c"
---  else
---    icu_spoof_src=""
---  fi
--+  INTL_COMMON_FLAGS="$ICU_CFLAGS -Wno-write-strings -D__STDC_LIMIT_MACROS -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
--   PHP_NEW_EXTENSION(intl, php_intl.c \
--     intl_error.c \
--     intl_convert.c \
--@@ -68,7 +60,11 @@ if test "$PHP_INTL" != "no"; then
--     transliterator/transliterator_methods.c \
--     uchar/uchar.c \
--     idn/idn.c \
---    $icu_spoof_src, $ext_shared,,$INTL_COMMON_FLAGS,cxx)
--+    spoofchecker/spoofchecker_class.c \
--+    spoofchecker/spoofchecker.c\
--+    spoofchecker/spoofchecker_create.c\
--+    spoofchecker/spoofchecker_main.c \
--+    , $ext_shared,,$INTL_COMMON_FLAGS,cxx)
+- lib_LTLIBRARIES = libnss_nisplus.la
 - 
--   PHP_INTL_CXX_SOURCES="intl_convertcpp.cpp \
--     common/common_enum.cpp \
+--noinst_HEADERS = libc-lock.h nss-nisplus.h netgroup.h nisplus-parser.h \
+--		 mapv4v6addr.h
+-+noinst_HEADERS = libc-lock.h nss-nisplus.h netgroup.h nisplus-parser.h
+- check_PROGRAMS = nss_loader-test
+- nss_loader_test_LDADD = -ldl
+- 
+-diff --git a/src/mapv4v6addr.h b/src/mapv4v6addr.h
+-deleted file mode 100644
+-index 7f85f7d..0000000
+---- a/src/mapv4v6addr.h
+-+++ /dev/null
+-@@ -1,69 +0,0 @@
+--/*
+-- * ++Copyright++ 1985, 1988, 1993
+-- * -
+-- * Copyright (c) 1985, 1988, 1993
+-- *    The Regents of the University of California.  All rights reserved.
+-- *
+-- * Redistribution and use in source and binary forms, with or without
+-- * modification, are permitted provided that the following conditions
+-- * are met:
+-- * 1. Redistributions of source code must retain the above copyright
+-- *    notice, this list of conditions and the following disclaimer.
+-- * 2. Redistributions in binary form must reproduce the above copyright
+-- *    notice, this list of conditions and the following disclaimer in the
+-- *    documentation and/or other materials provided with the distribution.
+-- * 4. Neither the name of the University nor the names of its contributors
+-- *    may be used to endorse or promote products derived from this software
+-- *    without specific prior written permission.
+-- *
+-- * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+-- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+-- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+-- * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+-- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+-- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+-- * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+-- * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+-- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+-- * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+-- * SUCH DAMAGE.
+-- * -
+-- * Portions Copyright (c) 1993 by Digital Equipment Corporation.
+-- *
+-- * Permission to use, copy, modify, and distribute this software for any
+-- * purpose with or without fee is hereby granted, provided that the above
+-- * copyright notice and this permission notice appear in all copies, and that
+-- * the name of Digital Equipment Corporation not be used in advertising or
+-- * publicity pertaining to distribution of the document or software without
+-- * specific, written prior permission.
+-- *
+-- * THE SOFTWARE IS PROVIDED "AS IS" AND DIGITAL EQUIPMENT CORP. DISCLAIMS ALL
+-- * WARRANTIES WITH REGARD TO THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES
+-- * OF MERCHANTABILITY AND FITNESS.   IN NO EVENT SHALL DIGITAL EQUIPMENT
+-- * CORPORATION BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+-- * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+-- * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS
+-- * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS
+-- * SOFTWARE.
+-- * -
+-- * --Copyright--
+-- */
+--
+--#include <string.h>
+--#include <arpa/nameser.h>
+--
+--static void
+--map_v4v6_address (const char *src, char *dst)
+--{
+--  u_char *p = (u_char *) dst;
+--  int i;
+--
+--  /* Move the IPv4 part to the right position.  */
+--  memcpy (dst + 12, src, INADDRSZ);
+--
+--  /* Mark this ipv6 addr as a mapped ipv4. */
+--  for (i = 0; i < 10; i++)
+--    *p++ = 0x00;
+--  *p++ = 0xff;
+--  *p = 0xff;
+--}
+-diff --git a/src/nisplus-hosts.c b/src/nisplus-hosts.c
+-index cc00aa2..d37b209 100644
+---- a/src/nisplus-hosts.c
+-+++ b/src/nisplus-hosts.c
+-@@ -42,14 +42,9 @@ static u_long tablename_len;
+- #define NISENTRYLEN(idx, col, res) \
+- 	(NIS_RES_OBJECT (res)[idx].EN_data.en_cols.en_cols_val[col].ec_value.ec_value_len)
+- 
+--/* Get implementation for some internal functions. */
+--#include "mapv4v6addr.h"
+--
+--
+- static int
+- _nss_nisplus_parse_hostent (nis_result *result, int af, struct hostent *host,
+--			    char *buffer, size_t buflen, int *errnop,
+--			    int flags)
+-+			    char *buffer, size_t buflen, int *errnop)
+- {
+-   unsigned int i;
+-   char *first_unused = buffer;
+-@@ -66,8 +61,7 @@ _nss_nisplus_parse_hostent (nis_result *result, int af, struct hostent *host,
+- 
+-   char *data = first_unused;
+- 
+--  if (room_left < (af != AF_INET || (flags & AI_V4MAPPED) != 0
+--		   ? IN6ADDRSZ : INADDRSZ))
+-+  if (room_left < INADDRSZ)
+-     {
+-     no_more_room:
+-       *errnop = ERANGE;
+-@@ -78,18 +72,8 @@ _nss_nisplus_parse_hostent (nis_result *result, int af, struct hostent *host,
+-   if (af != AF_INET6
+-       && inet_pton (AF_INET, NISENTRYVAL (0, 2, result), data) > 0)
+-     {
+--      assert ((flags & AI_V4MAPPED) == 0 || af != AF_UNSPEC);
+--      if (flags & AI_V4MAPPED)
+--	{
+--	  map_v4v6_address (data, data);
+--	  host->h_addrtype = AF_INET6;
+--	  host->h_length = IN6ADDRSZ;
+--	}
+--      else
+--	{
+--	  host->h_addrtype = AF_INET;
+--	  host->h_length = INADDRSZ;
+--	}
+-+      host->h_addrtype = AF_INET;
+-+      host->h_length = INADDRSZ;
+-     }
+-   else if (af != AF_INET
+- 	   && inet_pton (AF_INET6, NISENTRYVAL (0, 2, result), data) > 0)
+-@@ -319,12 +303,8 @@ internal_nisplus_gethostent_r (struct hostent *host, char *buffer,
+- 	    }
+- 	}
+- 
+--      if (_res.options & RES_USE_INET6)
+--	parse_res = _nss_nisplus_parse_hostent (result, AF_INET6, host, buffer,
+--						buflen, errnop, AI_V4MAPPED);
+--      else
+--	parse_res = _nss_nisplus_parse_hostent (result, AF_INET, host, buffer,
+--						buflen, errnop, 0);
+-+      parse_res = _nss_nisplus_parse_hostent (result, AF_INET, host, buffer,
+-+						buflen, errnop);
+- 
+-       if (parse_res == -1)
+- 	{
+-@@ -379,7 +359,7 @@ get_tablename (int *herrnop)
+- static enum nss_status
+- internal_gethostbyname2_r (const char *name, int af, struct hostent *host,
+- 			   char *buffer, size_t buflen, int *errnop,
+--			   int *herrnop, int flags)
+-+			   int *herrnop)
+- {
+-   if (tablename_val == NULL)
+-     {
+-@@ -454,7 +434,7 @@ internal_gethostbyname2_r (const char *name, int af, struct hostent *host,
+-     }
+- 
+-   int parse_res = _nss_nisplus_parse_hostent (result, af, host, buffer,
+--					      buflen, errnop, flags);
+-+					      buflen, errnop);
+- 
+-   nis_freeresult (result);
+- 
+-@@ -485,8 +465,7 @@ _nss_nisplus_gethostbyname2_r (const char *name, int af, struct hostent *host,
+-     }
+- 
+-   return internal_gethostbyname2_r (name, af, host, buffer, buflen, errnop,
+--				    herrnop,
+--			 ((_res.options & RES_USE_INET6) ? AI_V4MAPPED : 0));
+-+				    herrnop);
+- }
+- 
+- 
+-@@ -495,19 +474,8 @@ _nss_nisplus_gethostbyname_r (const char *name, struct hostent *host,
+- 			      char *buffer, size_t buflen, int *errnop,
+- 			      int *h_errnop)
+- {
+--  if (_res.options & RES_USE_INET6)
+--    {
+--      enum nss_status status;
+--
+--      status = internal_gethostbyname2_r (name, AF_INET6, host, buffer,
+--					  buflen, errnop, h_errnop,
+--					  AI_V4MAPPED);
+--      if (status == NSS_STATUS_SUCCESS)
+--	return status;
+--    }
+--
+-   return internal_gethostbyname2_r (name, AF_INET, host, buffer,
+--				   buflen, errnop, h_errnop, 0);
+-+				   buflen, errnop, h_errnop);
+- }
+- 
+- 
+-@@ -555,9 +523,7 @@ _nss_nisplus_gethostbyaddr_r (const void *addr, socklen_t addrlen, int af,
+-     }
+- 
+-   parse_res = _nss_nisplus_parse_hostent (result, af, host,
+--					  buffer, buflen, errnop,
+--					  ((_res.options & RES_USE_INET6)
+--					   ? AI_V4MAPPED : 0));
+-+					  buffer, buflen, errnop);
+-   nis_freeresult (result);
+- 
+-   if (parse_res > 0)
+-@@ -584,7 +550,7 @@ _nss_nisplus_gethostbyname4_r (const char *name, struct gaih_addrtuple **pat,
+- 
+-   enum nss_status status = internal_gethostbyname2_r (name, AF_UNSPEC, &host,
+- 						      buffer, buflen,
+--						      errnop, herrnop, 0);
+-+						      errnop, herrnop);
+-   if (status == NSS_STATUS_SUCCESS)
+-     {
+-       if (*pat == NULL)
 --- 
--2.7.4
+-2.23.0
 -
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php_7.3.11.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/php/php.inc
-rename to meta-oe/recipes-devtools/php/php_7.3.11.bb
-index 3d537e5b6..e7fb847fa 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php_7.3.11.bb
-@@ -3,6 +3,7 @@ HOMEPAGE = "http://www.php.net"
- SECTION = "console/network"
- 
- LICENSE = "PHP-3.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=fb07bfc51f6d5e0c30b65d9701233b2e"
- 
- BBCLASSEXTEND = "native"
- DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native"
-@@ -12,6 +13,11 @@ PHP_MAJOR_VERSION = "${@d.getVar('PV').split('.')[0]}"
- 
- SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
-+           file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
-+           file://0048-Use-pkg-config-for-FreeType2-detection.patch \
-+           file://0001-Use-pkg-config-for-libxml2-detection.patch \
-+           file://debian-php-fixheader.patch \
-+           file://CVE-2019-6978.patch \
-           "
- 
- SRC_URI_append_class-target = " \
-@@ -22,8 +28,14 @@ SRC_URI_append_class-target = " \
-             file://php-fpm-apache.conf \
-             file://70_mod_php${PHP_MAJOR_VERSION}.conf \
-             file://php-fpm.service \
-+            file://pear-makefile.patch \
-+            file://phar-makefile.patch \
-+            file://0001-opcache-config.m4-enable-opcache.patch \
-+            file://xfail_two_bug_tests.patch \
-           "
- S = "${WORKDIR}/php-${PV}"
-+SRC_URI[md5sum] = "21b710b4126d4d54714de9693a6c7b0d"
-+SRC_URI[sha256sum] = "92d1ff4b13c7093635f1ec338a5e6891ca99b10e65fbcadd527e5bb84d11b5e7"
- 
- inherit autotools pkgconfig pythonnative gettext
- 
-diff --git a/meta-oe/recipes-devtools/php/php_7.3.9.bb b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-deleted file mode 100644
-index a5c7b9b6b..000000000
---- a/meta-oe/recipes-devtools/php/php_7.3.9.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--require php.inc
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=fb07bfc51f6d5e0c30b65d9701233b2e"
--
--SRC_URI += "file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
--            file://0048-Use-pkg-config-for-FreeType2-detection.patch \
--            file://0049-ext-intl-Use-pkg-config-to-detect-icu.patch \
--            file://0001-Use-pkg-config-for-libxml2-detection.patch \
--            file://debian-php-fixheader.patch \
--            file://CVE-2019-6978.patch \
--           "
--SRC_URI_append_class-target = " \
--                                file://pear-makefile.patch \
--                                file://phar-makefile.patch \
--                                file://0001-opcache-config.m4-enable-opcache.patch \
--                                file://xfail_two_bug_tests.patch \
--                                "
--
--SRC_URI[md5sum] = "bcc37749815009c9201e4c126e1ab8ee"
--SRC_URI[sha256sum] = "a39c9709a8c9eb7ea8ac4933ef7a78b92f7e5735a405c8b8e42ee39541d963c4"
 -- 
 2.17.1
 
