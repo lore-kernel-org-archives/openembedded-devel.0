@@ -1,41 +1,43 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
-	[209.85.128.52])
-	by mail.openembedded.org (Postfix) with ESMTP id E686E7FA14
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F34C7FA1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 18:35:08 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id g24so3707561wmh.5
+	Tue, 29 Oct 2019 18:35:09 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id t16so14809192wrr.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 11:35:10 -0700 (PDT)
+	Tue, 29 Oct 2019 11:35:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=dN0ZSKnMHPXurDqr8I1B6L0dseTWXO+klkspolo4dRc=;
-	b=STD4LKlGFerlgXH1U3fqVLddKG0P4iPAtNzBtgUSx07c/LirP5Wsb3gSm06Ls7DdPl
-	MR2aZwyfNREZPUz3D+RFDAPBHlv0b20IOpEnq1iDfssyWJS8n2V4Oo2/pMFUYF8d5bL7
-	u6d9233t4xtkatnW+7QtMKWhLrtZPDnn8ZgZcfgpgx8s+tnkfTWue2lkoNf+uBjTuM5d
-	CV13FY0c6y3EhJn0+SYrpZPHV/mEwYSaf+E7PuHBkFZi4iAYMpkXnWuZP5zy9Us9W7HA
-	j/S3SHx3mwxJVUzblHV9wYahxGk9xUxvzjmZtR4toVS89cluiNSpfO7boPQfYlyyrXmr
-	+mKQ==
-X-Gm-Message-State: APjAAAUKcqeuaPY1nLQ0ppJRV8g2i/10aOjKLBLqsKZpQ/u6//EUNaef
-	dOuutiQPf1kq+6mShjm6g7zun5wv
-X-Google-Smtp-Source: APXvYqzXbeQWL8NCnI5leW3bIUfEOiBsdF0/VQV0odkyoirraOnKxE/EKCDyKrjpdkkA2VR41n6TUw==
-X-Received: by 2002:a1c:a751:: with SMTP id q78mr5704576wme.129.1572374109448; 
-	Tue, 29 Oct 2019 11:35:09 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=Jiq5mbQoaJqX5SVItb/6AHtvuVa4YByt/eEkFv8jG+M=;
+	b=AvkuzsE9CxZo+jKn+i+dN+alk9v+Gx6P0nSp+/vdtba5ryryP6iWdUdhRGZaGY/+MT
+	zYViLENlILipZ5lvSOOEJFJQzc2Z/h6Bqyr2vsnfbBRHrHN6rhTmm8ETqb/rbJSr0V1P
+	R6C07QE57L/vP9mgjWwxhhh7UIHAeJrqTIsGvlNobQcKfc9Tk1HRM6Ks9IGA9Db0XDXA
+	JNrvwaZtaTrRHJHF0toBi2oHajv+Dp2qr+84iCIef8YXzUY8mqm7euMeyVoCI2llYwcI
+	ui0A5pBPprpVZMZ3ZhY4KjM0CFGufcu6spqUFNb23TAq04899T2xyMVycFbyQ6NCPuWC
+	pOJg==
+X-Gm-Message-State: APjAAAUAtnpbQ1nRF9QlPq6X3qP4SFFVIlBeuzcK+L0lRdLmrp+lbypP
+	Wy+LDd4SxciDeVlj/radDlTdgC6P
+X-Google-Smtp-Source: APXvYqy5b1Oj6UFVkXqN7qlSMzk5yAywiMYtDUGnscVMepSw8amFPiLJaqbLlobiSxXrpLzBIC3EmQ==
+X-Received: by 2002:a5d:49cf:: with SMTP id t15mr20976643wrs.63.1572374110539; 
+	Tue, 29 Oct 2019 11:35:10 -0700 (PDT)
 Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	q14sm19470655wre.27.2019.10.29.11.35.08
+	q14sm19470655wre.27.2019.10.29.11.35.09
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 29 Oct 2019 11:35:08 -0700 (PDT)
+	Tue, 29 Oct 2019 11:35:09 -0700 (PDT)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 18:35:07 +0000
-Message-Id: <20191029183508.29985-1-git@andred.net>
+Date: Tue, 29 Oct 2019 18:35:08 +0000
+Message-Id: <20191029183508.29985-2-git@andred.net>
 X-Mailer: git-send-email 2.23.0.rc1
+In-Reply-To: <20191029183508.29985-1-git@andred.net>
+References: <20191029183508.29985-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] libuv: update to 1.33.1
+Subject: [meta-oe][PATCH 2/2] nodejs: allow use of system libuv (and make default)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,32 +50,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 18:35:09 -0000
+X-List-Received-Date: Tue, 29 Oct 2019 18:35:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Use system libuv via PACKAGECONFIG by default. So far,
+nodejs had been built using its embedded copy of libuv,
+which we generally try to avoid, for the known reasons
+(independent updates, cve & license checks, etc).
+
 Signed-off-by: André Draszik <git@andred.net>
 ---
- .../libuv/{libuv_1.32.0.bb => libuv_1.33.1.bb}                  | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-connectivity/libuv/{libuv_1.32.0.bb => libuv_1.33.1.bb} (90%)
+ meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libuv/libuv_1.32.0.bb b/meta-oe/recipes-connectivity/libuv/libuv_1.33.1.bb
-similarity index 90%
-rename from meta-oe/recipes-connectivity/libuv/libuv_1.32.0.bb
-rename to meta-oe/recipes-connectivity/libuv/libuv_1.33.1.bb
-index c7fa3c10f..604568e62 100644
---- a/meta-oe/recipes-connectivity/libuv/libuv_1.32.0.bb
-+++ b/meta-oe/recipes-connectivity/libuv/libuv_1.33.1.bb
-@@ -4,7 +4,7 @@ BUGTRACKER = "https://github.com/libuv/libuv/issues"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a68902a430e32200263d182d44924d47"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
+index 6dacc2824..e86804124 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
+@@ -49,9 +49,10 @@ ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '-
+ GYP_DEFINES_append_mipsel = " mips_arch_variant='r1' "
+ ARCHFLAGS ?= ""
  
--SRCREV = "697bea87b3a0b0e9b4e5ff86b39d1dedb70ee46d"
-+SRCREV = "07ad32138f4d2285ba2226b5e20462b27b091a59"
- SRC_URI = "git://github.com/libuv/libuv;branch=v1.x"
+-PACKAGECONFIG ??= "ares icu zlib"
++PACKAGECONFIG ??= "ares icu libuv zlib"
+ PACKAGECONFIG[ares] = "--shared-cares,,c-ares"
+ PACKAGECONFIG[icu] = "--with-intl=system-icu,--without-intl,icu"
++PACKAGECONFIG[libuv] = "--shared-libuv,,libuv"
+ PACKAGECONFIG[zlib] = "--shared-zlib,,zlib"
  
- S = "${WORKDIR}/git"
+ # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
 -- 
 2.23.0.rc1
 
