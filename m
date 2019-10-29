@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F8387FA4D
+	by mail.openembedded.org (Postfix) with ESMTP id B08F07FA37
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 29 Oct 2019 09:06:59 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472Qh405TGzQt
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472Qh434hvzJm
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 10:06:59 +0100 (CET)
+	Tue, 29 Oct 2019 10:07:00 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1572340020;
-	bh=gJnKQ9CfyRruG9WFjQHAO6u8+fUMDeT/wClfL+EUm1k=;
+	bh=+37eadK1wiMj+/HFIC8e0l+psfNzdMiv8y2bsLYNDLU=;
 	h=From:To:Subject:Date:From;
-	b=p75QVIIXljemy5EEd7ZGY+Ui9iBWiEgfGpWnyUq4EFMc8dcdXUaRfDSY056iNVjjL
-	JlPgY7rZp+IjzdkUNZXhJ9HejF+fqvQoQx3jahASazQu8yJ2K9dDYZ3f0WTYJR4z90
-	FxmiOXpDX08a5UK/lmJXNk00uoM+MsbjQcyBGZG7PomvpqT3apNBz9JWjDkCcuAeff
-	UCrCWfdsyOvl+G4PdrPUcVTfhVZhqxVN4UKIQYb+a0UJ6y8JLZ7P2qAZdh9XnAXpKS
-	NvGM1cDbQ3VOmabOXKozgEN+mYSq77IwoRFvlBcLXAxKZwi9l0hewDgn+JYomlOC5T
-	PbjAyc7Fsj/x7OZpLsOOaQ2suuHLzC2rrE1qeVof5s+ZgjTyR/yv81qLtgtJlA+qK+
-	fjPWiC3MjXnyi0U+7P4xSNJJiCP1M5yNCOOkQp4hvQci05Mz4GAar0xkvjzmxlTd/e
-	gvdhVYkVaW4zg+Zy6eq0Msron1t8Pczi3rZCXWp1gJcBvEcyJIU7OSoCwTAJswyhEq
-	U2dengqZkmQDKSX3m3H4gDypU2kUgEjZzdrHtEocmkVvELPgqDhv6EW33BFralDy0s
-	BuHa4kZc2wjNZC635jQ8tjYiWQmFGUqQg2ONbU9MrtS95UTTTk3+32wlhf38exa6GY
-	VcuJ+I6SOwjC9fztQC0yEhlk=
+	b=U0x58nHdgzKIpAKCLN9uMkuGuufg5VVtfyI1WIQc9U345UY6Z0I2uqog074GSUbd6
+	bxRLymfnwVhbEYuSwHYAE9ob/wQwWLLGW6ytDeheRQZr0KbNpg0I+BqaLeD4ZNaIog
+	oScfOCI00cHUv9tOw/uGCTxNnC7JWe9xOdU56yqKpjtEh3lqmdsP9d7qPJYtoO8BRn
+	AxopYfYU4/3SYN52/EaXpnzfaB0qhgh/3K2+JD/5fGc7y8pR4LxMdAJox9qVL1+dWI
+	difgx2roiMtVPYTSeTPwYNEkoHixSKnQHZwEOu7WPLNgG4ABXQXv4tBHE3wXdeV7oT
+	i5XtKWLKl31PK0utlXGyAEZvFUbR821xd2smDo3LSIxdqEq3AVX2WppSlRZd/9Iwps
+	7uCBnBATnfuMwj02sj26zoAOvcs7qwV+QmrJ9yMJGb3wCBjs+nH+7XyTQQHqkKVPcH
+	X0xf1bSbwYM0G3lpFYgFrLgoa9aZKGMyxqd1ysXNdxS6I2RxrNFNwvCM0JVVq85Xvi
+	L+nsBXXoE3/91t3zBisf6aqyjfiqpru9D0ZcJPFZgryQUz/y4ms0oE350lM6jSz++0
+	wg9Zd6ea8WClsBaWbgCbFlw2y2ebFqWe2NZm8TNXBZD7qDriz5Vp8MvvZc4zsvBvR4
+	/L+uTOXNjXHl4+exQiSgtNB0=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 11:06:56 +0200
-Message-Id: <20191029090657.30771-5-bunk@stusta.de>
+Date: Tue, 29 Oct 2019 11:06:57 +0200
+Message-Id: <20191029090657.30771-6-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] cim-schema: Remove duplicate file
+Subject: [meta-networking][PATCH] dovecot: Upgrade 2.2.36.3 -> 2.2.36.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,52 +42,32 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 29 Oct 2019 09:06:59 -0000
 
+The release contains the CVE-2019-11500 fix.
+
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../cim-schema/cim-schema/files/LICENSE       | 34 -------------------
- 1 file changed, 34 deletions(-)
- delete mode 100644 meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
+ .../dovecot/{dovecot_2.2.36.3.bb => dovecot_2.2.36.4.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/dovecot/{dovecot_2.2.36.3.bb => dovecot_2.2.36.4.bb} (95%)
 
-diff --git a/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE b/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
-deleted file mode 100644
-index 54a28120e..000000000
---- a/meta-networking/recipes-support/cim-schema/cim-schema/files/LICENSE
-+++ /dev/null
-@@ -1,34 +0,0 @@
--// Copyright 1998-2008 Distributed Management Task Force, Inc. (DMTF).
--// All rights reserved.
--// DMTF is a not-for-profit association of industry members dedicated
--// to promoting enterprise and systems management and interoperability.
--// DMTF specifications and documents may be reproduced by
--// members and non-members, provided that correct attribution is given.
--// As DMTF specifications may be revised from time to time,
--// the particular version and release date should always be noted.
--// 
--// Implementation of certain elements of this standard or proposed
--// standard may be subject to third party patent rights, including
--// provisional patent rights (herein "patent rights"). DMTF makes
--// no representations to users of the standard as to the existence
--// of such rights, and is not responsible to recognize, disclose, or
--// identify any or all such third party patent right, owners or
--// claimants, nor for any incomplete or inaccurate identification or
--// disclosure of such rights, owners or claimants. DMTF shall have no
--// liability to any party, in any manner or circumstance, under any
--// legal theory whatsoever, for failure to recognize, disclose, or
--// identify any such third party patent rights, or for such party's
--// reliance on the standard or incorporation thereof in its product,
--// protocols or testing procedures. DMTF shall have no liability to
--// any party implementing such standard, whether such implementation
--// is foreseeable or not, nor to any patent owner or claimant, and shall
--// have no liability or responsibility for costs or losses incurred if
--// a standard is withdrawn or modified after publication, and shall be
--// indemnified and held harmless by any party implementing the
--// standard from any and all claims of infringement by a patent owner
--// for such implementations.
--// 
--// For information about patents held by third-parties which have
--// notified the DMTF that, in their opinion, such patent may relate to
--// or impact implementations of DMTF standards, visit
--// http://www.dmtf.org/about/policies/disclosures.php.
+diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.4.bb
+similarity index 95%
+rename from meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
+rename to meta-networking/recipes-support/dovecot/dovecot_2.2.36.4.bb
+index be633e03b..239a25273 100644
+--- a/meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
++++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.4.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
+            file://0001-doveadm-Fix-parallel-build.patch \
+            "
+ 
+-SRC_URI[md5sum] = "80c1c271b1c4cbe26a793f4e3b09eb8e"
+-SRC_URI[sha256sum] = "992521305fa1d61f4726aac2619ccc65094a3cc2e5c80644455199764305863e"
++SRC_URI[md5sum] = "66c4d71858b214afee5b390ee602dee2"
++SRC_URI[sha256sum] = "777c61e264869e9b288b8d6603f4ed3ac3aac9ec573908067353f51269dce2fe"
+ 
+ DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc"
+ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
 -- 
 2.17.1
 
