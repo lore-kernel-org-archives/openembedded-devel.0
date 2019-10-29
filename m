@@ -1,33 +1,34 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id E336A7FA1F
+	by mail.openembedded.org (Postfix) with ESMTP id E14347F9CE
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 29 Oct 2019 18:31:25 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472gCJ3B0Zz65
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472gCL1CrnzPG
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 19:31:24 +0100 (CET)
+	Tue, 29 Oct 2019 19:31:26 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572373884;
-	bh=YZoNUNCJJ48yP3uQE00RWzIBhsO9QLUOp8733XYga34=;
+	s=default; t=1572373886;
+	bh=MBu2l+E5YDMIjCUQDZ1AcYArOAQrh9czmckG3UaWM+k=;
 	h=From:To:Subject:Date:From;
-	b=mVI+xK3vx2ED/njb3ceVAy1oD/VvYGxOjjYGva0Quu+XEZcNw45AB22/ojwKNyqjB
-	nSoP81do3s1KhM0qEfH5P6W9X7WbiTJlBs6vjdsZgS2js0fRlKR04yikVO3gSwpJqV
-	Q39MlxsmUpRALgYUoJFJEFpv/IHDeGe0HHVX+haifc9aSqPDHif/+Qf4u3J3244q7+
-	X+pkdxoUmtuhrELhnrUT5dj3Ws1aQo857X/0hUfZCBfkIrfrHxtp28L+OkDrGiccLK
-	XGWsisxhulaLfcI99YqealQ7VxnNIEQCqqvDfLMhcRrC4BPasUyksA9shCq5td6+Be
-	GWVrVT1HlqkK6cM/x9R43TLkNl539S0goc2+JcmKezImAyxpl1N0KEYZVFIm9f/L8N
-	uHukINVyaOKFuI2xnGqfsJlvIWfTzmhb2S834JRGF2kuJi8plD7kn1PnVIwtmfKOeJ
-	Chwg6vSGtKYJb9xWlS7FZTcBQJEwcrhbvGNWYQG0NYbhScBRqryfFwLS49Yvz4Ve1j
-	AXAkp7OsnkObUBR2uwey9RgbvQC89NoL4c7q5t11/ja8UF9/KGsoi+gQbAH71hCA3c
-	YHeVsAwaRzbqDHfisdIzR5OeOvno8FbDWclD5j7OpJoqm6p3V+4VDqcztUUaDEp1kt
-	Lty9hE+XuRyyHjnjzmcSEtWg=
+	b=YoRd3A1mZVCZVdwbX/ii5ZlcWLW1t4vX76AftSMwTDvVEv3I0WkTZTcME6w9j+ge1
+	sATTLdvKDXFz/EK9EdsAQD2rq5qgpg8ZjfrB0nwgxyUG7souTWPB7o9oone3qE3+5f
+	PI5Tz831rmEMGXWy7cOMvsuhfE4nTQO+G4cFVXR2EACZ3rwUG7VC0xNUeaPE5hhlwz
+	IO9YPCW1ZiiTrSUdqG91B88wbWqgcqf/9bks/+f8qZOZzwtM3A5p1XxrZVNgt1M718
+	n6RYTnUXrhPOBV1UuTy5m8CEL5Du02aWU5/IhRvJ/kJfxrodmL8BgZiIayb6ZpPKBo
+	joeXDroMgDuSiGh7YwaNNZnW2WsE2XdgBYnByh/lwmTPNYTxf3yDSLRz5vH+SFO3Oi
+	R3mTZqhWFI05+aC8UokHrAoRDMurPhcEjGqkz5etxSwXJF6B/wncGml/qV7iY4aboA
+	s5sLEHZnnKR1B2o0dVgHvIq0529UC0AHUwUyv83Pu/AMFaCxN9sYgnf4ZsP+xinflA
+	DRH3Guvf2ncHSVRQhusQeOtytkJBnF9JxQ59xgc1OUiHxhE9sC92kEv42QTIPgjs2C
+	Dh//J1ui/s/ukeKwTvwNYl62QWdqUGi9pcPMOZfDiuG4AFBH+XyFcqI7I4qhct6JsT
+	z7iZd4kOslpyrQaXv1Ybof58=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 20:31:14 +0200
-Message-Id: <20191029183123.1868-1-bunk@stusta.de>
+Date: Tue, 29 Oct 2019 20:31:18 +0200
+Message-Id: <20191029183123.1868-5-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] flashrom: Upgrade 1.0 -> 1.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] nodejs: Upgrade 10.16.3 -> 10.17.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,366 +42,173 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 29 Oct 2019 18:31:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Patches applied upstream removed.
+Patch applied upstream removed.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ...pi-Avoid-deprecated-libusb-functions.patch |  39 ----
- ...latform-Add-riscv-to-known-platforms.patch |  37 ----
- .../recipes-bsp/flashrom/flashrom/sst26.patch | 198 ------------------
- meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb  |  20 --
- meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb  |  19 ++
- 5 files changed, 19 insertions(+), 294 deletions(-)
- delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-ch341a_spi-Avoid-deprecated-libusb-functions.patch
- delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-platform-Add-riscv-to-known-platforms.patch
- delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/sst26.patch
- delete mode 100644 meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb
- create mode 100644 meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb
+ ...pto-reduce-memory-usage-of-SignFinal.patch | 122 ------------------
+ .../{nodejs_10.16.3.bb => nodejs_10.17.0.bb}  |   5 +-
+ 2 files changed, 2 insertions(+), 125 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_10.16.3.bb => nodejs_10.17.0.bb} (95%)
 
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-ch341a_spi-Avoid-deprecated-libusb-functions.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-ch341a_spi-Avoid-deprecated-libusb-functions.patch
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
 deleted file mode 100644
-index df8028627..000000000
---- a/meta-oe/recipes-bsp/flashrom/flashrom/0001-ch341a_spi-Avoid-deprecated-libusb-functions.patch
+index ed3bac39b..000000000
+--- a/meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
 +++ /dev/null
-@@ -1,39 +0,0 @@
--From e5f68189ab3602b1042cc8423fd6a3a23abd5455 Mon Sep 17 00:00:00 2001
--From: Alex James <theracermaster@gmail.com>
--Date: Sat, 14 Apr 2018 22:59:57 -0500
--Subject: [PATCH] ch341a_spi: Avoid deprecated libusb functions
+@@ -1,122 +0,0 @@
+-From 20282b1cb0389553421c4c5b14de198c5dfff50b Mon Sep 17 00:00:00 2001
+-From: Anna Henningsen <anna@addaleax.net>
+-Date: Sat, 20 Oct 2018 05:24:54 +0200
+-Subject: [PATCH] src: use more explicit return type in Sign::SignFinal()
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
 -
--libusb 1.0.22 marked libusb_set_debug as deprecated. For such versions
--of libusb, use libusb_set_option instead.
+-Using the non-indexed variant of `std::get<>` broke Travis CI.
+-Also, this allows us to be a bit more concise when returning
+-from `SignFinal()` due to some error condition.
 -
--Change-Id: Ib71ebe812316eaf49136979a942a946ef9e4d487
--Signed-off-by: Alex James <theracermaster@gmail.com>
--Reviewed-on: https://review.coreboot.org/25681
--Tested-by: Nico Huber <nico.h@gmx.de>
--Reviewed-by: David Hendricks <david.hendricks@gmail.com>
+-Refs: https://github.com/nodejs/node/pull/23427
+-
+-PR-URL: https://github.com/nodejs/node/pull/23779
+-Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>
+-Reviewed-By: Tobias Nießen <tniessen@tnie.de>
+-Reviewed-By: Refael Ackermann <refack@gmail.com>
+-Reviewed-By: Colin Ihrig <cjihrig@gmail.com>
 ----
--Upstream-Status: Backport
-- ch341a_spi.c | 7 ++++++-
-- 1 file changed, 6 insertions(+), 1 deletion(-)
+- src/node_crypto.cc | 23 +++++++++++------------
+- src/node_crypto.h  | 12 +++++++++++-
+- 2 files changed, 22 insertions(+), 13 deletions(-)
 -
--diff --git a/ch341a_spi.c b/ch341a_spi.c
--index 6eb2804..d880510 100644
----- a/ch341a_spi.c
--+++ b/ch341a_spi.c
--@@ -444,7 +444,12 @@ int ch341a_spi_init(void)
-- 		return -1;
-- 	}
-- 
---	libusb_set_debug(NULL, 3); // Enable information, warning and error messages (only).
--+	/* Enable information, warning, and error messages (only). */
--+#if LIBUSB_API_VERSION < 0x01000106
--+	libusb_set_debug(NULL, 3);
--+#else
--+	libusb_set_option(NULL, LIBUSB_OPTION_LOG_LEVEL, LIBUSB_LOG_LEVEL_INFO);
--+#endif
-- 
-- 	uint16_t vid = devs_ch341a_spi[0].vendor_id;
-- 	uint16_t pid = devs_ch341a_spi[0].device_id;
---- 
--2.17.0
--
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-platform-Add-riscv-to-known-platforms.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-platform-Add-riscv-to-known-platforms.patch
-deleted file mode 100644
-index 7ba69a917..000000000
---- a/meta-oe/recipes-bsp/flashrom/flashrom/0001-platform-Add-riscv-to-known-platforms.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From d2a28dcdbd1051d2f48320e2eda3393581fe0519 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 17 Mar 2018 23:08:29 -0700
--Subject: [PATCH] platform: Add riscv to known platforms
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
--Upstream-Status: Submitted [https://review.coreboot.org/#/c/flashrom/+/25260/]
-- platform.h | 5 ++++-
-- 1 file changed, 4 insertions(+), 1 deletion(-)
--
--diff --git a/platform.h b/platform.h
--index b2fdcd0..2cadbb3 100644
----- a/platform.h
--+++ b/platform.h
--@@ -69,6 +69,9 @@
-- #elif defined (__m68k__)
-- 	#define __FLASHROM_ARCH__ "m68k"
-- 	#define IS_M68K 1
--+#elif defined (__riscv)
--+	#define __FLASHROM_ARCH__ "riscv"
--+	#define IS_RISCV 1
-- #elif defined (__sh__)
-- 	#define __FLASHROM_ARCH__ "sh"
-- 	#define IS_SH 1
--@@ -77,7 +80,7 @@
-- 	#define IS_S390 1
-- #endif
-- 
---#if !(IS_X86 || IS_MIPS || IS_PPC || IS_ARM || IS_SPARC || IS_ALPHA || IS_HPPA || IS_M68K || IS_SH || IS_S390)
--+#if !(IS_X86 || IS_MIPS || IS_PPC || IS_ARM || IS_SPARC || IS_ALPHA || IS_HPPA || IS_M68K || IS_RISCV || IS_SH || IS_S390)
-- #error Unknown architecture
-- #endif
-- 
---- 
--2.16.2
--
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/sst26.patch b/meta-oe/recipes-bsp/flashrom/flashrom/sst26.patch
-deleted file mode 100644
-index 46a01529f..000000000
---- a/meta-oe/recipes-bsp/flashrom/flashrom/sst26.patch
-+++ /dev/null
-@@ -1,198 +0,0 @@
----- flashrom-0.9.9.orig/chipdrivers.h
--+++ flashrom-0.9.9/chipdrivers.h
--@@ -103,6 +103,7 @@
-- int spi_prettyprint_status_register_sst25(struct flashctx *flash);
-- int spi_prettyprint_status_register_sst25vf016(struct flashctx *flash);
-- int spi_prettyprint_status_register_sst25vf040b(struct flashctx *flash);
--+int spi_disable_blockprotect_sst26_global_unprotect(struct flashctx *flash);
-- 
-- /* sfdp.c */
-- int probe_spi_sfdp(struct flashctx *flash);
----- flashrom-0.9.9.orig/flashchips.c
--+++ flashrom-0.9.9/flashchips.c
--@@ -12564,6 +12564,120 @@
-- 
-- 	{
-- 		.vendor		= "SST",
--+		.name		= "SST26VF016B(A)",
--+		.bustype	= BUS_SPI,
--+		.manufacture_id	= SST_ID,
--+		.model_id	= SST_SST26VF016B,
--+		.total_size	= 2048,
--+		.page_size	= 256,
--+		.feature_bits	= FEATURE_WRSR_WREN | FEATURE_OTP,
--+		.tested		= TEST_OK_PREW,
--+		.probe		= probe_spi_rdid,
--+		.probe_timing	= TIMING_ZERO,
--+		.block_erasers	=
--+		{
--+			{
--+				.eraseblocks = { {4 * 1024, 512} },
--+				.block_erase = spi_block_erase_20,
--+			}, {
--+				.eraseblocks = {
--+					{8 * 1024, 4},
--+					{32 * 1024, 1},
--+					{64 * 1024, 30},
--+					{32 * 1024, 1},
--+					{8 * 1024, 4},
--+				},
--+				.block_erase = spi_block_erase_d8,
--+			}, {
--+				.eraseblocks = { {2 * 1024 * 1024, 1} },
--+				.block_erase = spi_block_erase_c7,
--+			},
--+		},
--+		.printlock	= spi_prettyprint_status_register_plain, /* TODO: improve */
--+		.unlock		= spi_disable_blockprotect_sst26_global_unprotect,
--+		.write		= spi_chip_write_256, /* Multi I/O supported */
--+		.read		= spi_chip_read, /* Fast read (0x0B) and multi I/O supported */
--+		.voltage	= {2700, 3600},
--+	},
--+	{
--+		.vendor		= "SST",
--+		.name		= "SST26VF032B(A)",
--+		.bustype	= BUS_SPI,
--+		.manufacture_id	= SST_ID,
--+		.model_id	= SST_SST26VF032B,
--+		.total_size	= 4096,
--+		.page_size	= 256,
--+		.feature_bits	= FEATURE_WRSR_WREN | FEATURE_OTP,
--+		.tested		= TEST_UNTESTED,
--+		.probe		= probe_spi_rdid,
--+		.probe_timing	= TIMING_ZERO,
--+		.block_erasers	=
--+		{
--+			{
--+				.eraseblocks = { {4 * 1024, 1024} },
--+				.block_erase = spi_block_erase_20,
--+			}, {
--+				.eraseblocks = {
--+					{8 * 1024, 4},
--+					{32 * 1024, 1},
--+					{64 * 1024, 62},
--+					{32 * 1024, 1},
--+					{8 * 1024, 4},
--+				},
--+				.block_erase = spi_block_erase_d8,
--+			}, {
--+				.eraseblocks = { {4 * 1024 * 1024, 1} },
--+				.block_erase = spi_block_erase_c7,
--+			},
--+		},
--+		.printlock	= spi_prettyprint_status_register_plain, /* TODO: improve */
--+		.unlock		= spi_disable_blockprotect_sst26_global_unprotect,
--+		.write		= spi_chip_write_256, /* Multi I/O supported */
--+		.read		= spi_chip_read, /* Fast read (0x0B) and multi I/O supported */
--+		.voltage	= {2700, 3600},
--+	},
--+
--+
--+	{
--+		.vendor		= "SST",
--+		.name		= "SST26VF064B(A)",
--+		.bustype	= BUS_SPI,
--+		.manufacture_id	= SST_ID,
--+		.model_id	= SST_SST26VF064B,
--+		.total_size	= 8192,
--+		.page_size	= 256,
--+		.feature_bits	= FEATURE_WRSR_WREN | FEATURE_OTP,
--+		.tested		= TEST_OK_PREW,
--+		.probe		= probe_spi_rdid,
--+		.probe_timing	= TIMING_ZERO,
--+		.block_erasers	=
--+		{
--+			{
--+				.eraseblocks = { {4 * 1024, 2048} },
--+				.block_erase = spi_block_erase_20,
--+			}, {
--+				.eraseblocks = {
--+					{8 * 1024, 4},
--+					{32 * 1024, 1},
--+					{64 * 1024, 126},
--+					{32 * 1024, 1},
--+					{8 * 1024, 4},
--+				},
--+				.block_erase = spi_block_erase_d8,
--+			}, {
--+				.eraseblocks = { {8 * 1024 * 1024, 1} },
--+				.block_erase = spi_block_erase_c7,
--+			},
--+		},
--+		.printlock	= spi_prettyprint_status_register_plain, /* TODO: improve */
--+		.unlock		= spi_disable_blockprotect_sst26_global_unprotect,
--+		.write		= spi_chip_write_256, /* Multi I/O supported */
--+		.read		= spi_chip_read, /* Fast read (0x0B) and multi I/O supported */
--+		.voltage	= {2700, 3600},
--+	},
--+
--+	{
--+		.vendor		= "SST",
-- 		.name		= "SST25WF512",
-- 		.bustype	= BUS_SPI,
-- 		.manufacture_id	= SST_ID,
----- flashrom-0.9.9.orig/flashchips.h
--+++ flashrom-0.9.9/flashchips.h
--@@ -697,6 +697,8 @@
-- #define SST_SST25VF064C		0x254B
-- #define SST_SST26VF016		0x2601
-- #define SST_SST26VF032		0x2602
--+#define SST_SST26VF016B		0x2641
--+#define SST_SST26VF032B		0x2642
-- #define SST_SST26VF064B		0x2643
-- #define SST_SST27SF512		0xA4
-- #define SST_SST27SF010		0xA5
----- flashrom-0.9.9.orig/linux_spi.c
--+++ flashrom-0.9.9/linux_spi.c
--@@ -141,6 +141,16 @@
-- 	return 0;
+-diff --git a/src/node_crypto.cc b/src/node_crypto.cc
+-index bd8d9e032554..ec7d4f2bb5be 100644
+---- a/src/node_crypto.cc
+-+++ b/src/node_crypto.cc
+-@@ -3562,22 +3562,20 @@ static MallocedBuffer<unsigned char> Node_SignFinal(EVPMDPointer&& mdctx,
+-   return MallocedBuffer<unsigned char>();
 - }
 - 
--+static void print_hex(const char *msg, const void *buf, size_t len)
--+{
--+        size_t i;
--+	msg_pspew("%s:\n", msg);
--+        for (i = 0; i < len; i++) {
--+                msg_pspew(" %02x", ((uint8_t *)buf)[i]);
--+        }
--+        msg_pspew("\n");
--+}
--+
-- static int linux_spi_send_command(struct flashctx *flash, unsigned int writecnt,
-- 				  unsigned int readcnt,
-- 				  const unsigned char *txbuf,
--@@ -172,10 +182,12 @@
-- 	else
-- 		iocontrol_code = SPI_IOC_MESSAGE(2);
+--std::pair<SignBase::Error, MallocedBuffer<unsigned char>> Sign::SignFinal(
+-+Sign::SignResult Sign::SignFinal(
+-     const char* key_pem,
+-     int key_pem_len,
+-     const char* passphrase,
+-     int padding,
+-     int salt_len) {
+--  MallocedBuffer<unsigned char> buffer;
+--
+-   if (!mdctx_)
+--    return std::make_pair(kSignNotInitialised, std::move(buffer));
+-+    return SignResult(kSignNotInitialised);
 - 
--+	print_hex("Write", txbuf, writecnt);
-- 	if (ioctl(fd, iocontrol_code, msg) == -1) {
-- 		msg_cerr("%s: ioctl: %s\n", __func__, strerror(errno));
-- 		return -1;
-- 	}
--+	if (readcnt) print_hex("Got", rxbuf, readcnt);
-- 	return 0;
+-   EVPMDPointer mdctx = std::move(mdctx_);
+- 
+-   BIOPointer bp(BIO_new_mem_buf(const_cast<char*>(key_pem), key_pem_len));
+-   if (!bp)
+--    return std::make_pair(kSignPrivateKey, std::move(buffer));
+-+    return SignResult(kSignPrivateKey);
+- 
+-   EVPKeyPointer pkey(PEM_read_bio_PrivateKey(bp.get(),
+-                                              nullptr,
+-@@ -3588,7 +3586,7 @@ std::pair<SignBase::Error, MallocedBuffer<unsigned char>> Sign::SignFinal(
+-   // without `pkey` being set to nullptr;
+-   // cf. the test of `test_bad_rsa_privkey.pem` for an example.
+-   if (!pkey || 0 != ERR_peek_error())
+--    return std::make_pair(kSignPrivateKey, std::move(buffer));
+-+    return SignResult(kSignPrivateKey);
+- 
+- #ifdef NODE_FIPS_MODE
+-   /* Validate DSA2 parameters from FIPS 186-4 */
+-@@ -3612,9 +3610,10 @@ std::pair<SignBase::Error, MallocedBuffer<unsigned char>> Sign::SignFinal(
+-   }
+- #endif  // NODE_FIPS_MODE
+- 
+--  buffer = Node_SignFinal(std::move(mdctx), pkey, padding, salt_len);
+-+  MallocedBuffer<unsigned char> buffer =
+-+      Node_SignFinal(std::move(mdctx), pkey, padding, salt_len);
+-   Error error = buffer.is_empty() ? kSignPrivateKey : kSignOk;
+--  return std::make_pair(error, std::move(buffer));
+-+  return SignResult(error, std::move(buffer));
 - }
 - 
----- flashrom-0.9.9.orig/spi25_statusreg.c
--+++ flashrom-0.9.9/spi25_statusreg.c
--@@ -196,6 +196,19 @@
-- 	return spi_disable_blockprotect_generic(flash, 0x3C, 0, 0, 0xFF);
-- }
 - 
--+int spi_disable_blockprotect_sst26_global_unprotect(struct flashctx *flash)
--+{
--+	int result = spi_write_enable(flash);
--+	if (result)
--+		return result;
+-@@ -3639,18 +3638,18 @@ void Sign::SignFinal(const FunctionCallbackInfo<Value>& args) {
+- 
+-   ClearErrorOnReturn clear_error_on_return;
+- 
+--  std::pair<Error, MallocedBuffer<unsigned char>> ret = sign->SignFinal(
+-+  SignResult ret = sign->SignFinal(
+-       buf,
+-       buf_len,
+-       len >= 2 && !args[1]->IsNull() ? *passphrase : nullptr,
+-       padding,
+-       salt_len);
+- 
+--  if (std::get<Error>(ret) != kSignOk)
+--    return sign->CheckThrow(std::get<Error>(ret));
+-+  if (ret.error != kSignOk)
+-+    return sign->CheckThrow(ret.error);
+- 
+-   MallocedBuffer<unsigned char> sig =
+--      std::move(std::get<MallocedBuffer<unsigned char>>(ret));
+-+      std::move(ret.signature);
+- 
+-   Local<Object> rc =
+-       Buffer::New(env, reinterpret_cast<char*>(sig.release()), sig.size)
+-diff --git a/src/node_crypto.h b/src/node_crypto.h
+-index 6fcf737f6c43..0c26c1f6ff1d 100644
+---- a/src/node_crypto.h
+-+++ b/src/node_crypto.h
+-@@ -518,7 +518,17 @@ class Sign : public SignBase {
+-  public:
+-   static void Initialize(Environment* env, v8::Local<v8::Object> target);
+- 
+--  std::pair<Error, MallocedBuffer<unsigned char>> SignFinal(
+-+  struct SignResult {
+-+    Error error;
+-+    MallocedBuffer<unsigned char> signature;
 -+
--+	static const unsigned char cmd[] = { 0x98 }; /* ULBPR */
--+	result = spi_send_command(flash, sizeof(cmd), 0, cmd, NULL);
--+	if (result)
--+		msg_cerr("ULBPR failed\n");
--+	return result;
--+}
+-+    explicit SignResult(
+-+        Error err,
+-+        MallocedBuffer<unsigned char>&& sig = MallocedBuffer<unsigned char>())
+-+      : error(err), signature(std::move(sig)) {}
+-+  };
 -+
-- /* A common block protection disable that tries to unset the status register bits masked by 0x0C (BP0-1) and
--  * protected/locked by bit #7. Useful when bits 4-5 may be non-0). */
-- int spi_disable_blockprotect_bp1_srwd(struct flashctx *flash)
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb
-deleted file mode 100644
-index 1c1724668..000000000
---- a/meta-oe/recipes-bsp/flashrom/flashrom_1.0.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--DESCRIPTION = "flashrom is a utility for identifying, reading, writing, verifying and erasing flash chips"
--LICENSE = "GPLv2"
--HOMEPAGE = "http://flashrom.org"
--
--LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
--DEPENDS = "pciutils libusb libusb-compat"
--
--SRC_URI = "https://download.flashrom.org/releases/flashrom-${PV}.tar.bz2 \
--           file://sst26.patch \
--           file://0001-platform-Add-riscv-to-known-platforms.patch \
--           file://0001-ch341a_spi-Avoid-deprecated-libusb-functions.patch \
--           "
--SRC_URI[md5sum] = "42d999990c735d88653627cefcc13b9a"
--SRC_URI[sha256sum] = "3702fa215ba5fb5af8e54c852d239899cfa1389194c1e51cb2a170c4dc9dee64"
--
--inherit pkgconfig
--
--do_install() {
--    oe_runmake PREFIX=${prefix} DESTDIR=${D} install
--}
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb
-new file mode 100644
-index 000000000..074a1a5f6
---- /dev/null
-+++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "flashrom is a utility for identifying, reading, writing, verifying and erasing flash chips"
-+LICENSE = "GPLv2"
-+HOMEPAGE = "http://flashrom.org"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+DEPENDS = "pciutils libusb libusb-compat"
-+
-+SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
-+           "
-+SRC_URI[md5sum] = "91bab6c072e38a493bb4eb673e4fe0d6"
-+SRC_URI[sha256sum] = "aeada9c70c22421217c669356180c0deddd0b60876e63d2224e3260b90c14e19"
-+
-+S = "${WORKDIR}/flashrom-v${PV}"
-+
-+inherit pkgconfig
-+
-+do_install() {
-+    oe_runmake PREFIX=${prefix} DESTDIR=${D} install
-+}
+-+  SignResult SignFinal(
+-       const char* key_pem,
+-       int key_pem_len,
+-       const char* passphrase,
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.17.0.bb
+similarity index 95%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_10.17.0.bb
+index a978eebe4..bc12df307 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.17.0.bb
+@@ -17,7 +17,6 @@ COMPATIBLE_HOST_riscv32 = "null"
+ 
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
+-           file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
+            file://0004-Make-compatibility-with-gcc-4.8.patch \
+            file://0005-Link-atomic-library.patch \
+            file://0006-Use-target-ldflags.patch \
+@@ -26,8 +25,8 @@ SRC_URI_append_class-target = " \
+            file://0002-Using-native-torque.patch \
+            "
+ 
+-SRC_URI[md5sum] = "b41275a018e670947c1950b12f050a2f"
+-SRC_URI[sha256sum] = "7bf1123d7415964775b8f81fe6ec6dd5c3c08abb42bb71dfe4409dbeeba26bbd"
++SRC_URI[md5sum] = "d5a56d0abf764a91f627f0690cd4b9f3"
++SRC_URI[sha256sum] = "412667d76bd5273c07cb69c215998109fd5bb35c874654f93e6a0132d666c58e"
+ 
+ S = "${WORKDIR}/node-v${PV}"
+ 
 -- 
 2.17.1
 
