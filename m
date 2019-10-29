@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 7820C7FA37
+	by mail.openembedded.org (Postfix) with ESMTP id DD4C07FA4D
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 29 Oct 2019 09:06:58 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472Qh22MHjzCK
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472Qh349D3zQN
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 10:06:58 +0100 (CET)
+	Tue, 29 Oct 2019 10:06:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572340018;
-	bh=cPnTbpMoUlZYRq1BRh8woKEeaifIwGYrrNB/We2soh0=;
+	s=default; t=1572340019;
+	bh=xKRYqsTSmA+/XzsyKrN/hm4oQh8aUZkJlAHyhArEO7M=;
 	h=From:To:Subject:Date:From;
-	b=FzyHXleIVC2/AQXPeedRQskZ/qPaIZuHr3fTiXkLvq0e3jKtiefA4qKDGMoadpapW
-	QTrZwL9LimBZ1OGvMdysy295SLSi+EfQajCqrQMQ8qyddM+Vfl4LG0OQE6FpkSmvG1
-	qOdYvZ+f29pnpZrpYC1Oq8mErcyNZg2lo29AQOxwGaKre9CQo9r35CDxnw4FF9bY+q
-	Uiad+Ifl4Hufxp7GWlPtukKdA817+ooMsv4P99Y4d+/iavciV+ardEnqy4HTn6xOx+
-	kBksuPeq3FUaY0NxfB469rBU+t7PxVAE4b7oml6YFEQ6x8E355ulvWhN4UKxbaQU66
-	gINYM8n6AlsFCyA0WVz39ZnqYpcsEEWeduseKS+NEApelrGSR4+yri1f+Ub/kwUti1
-	zhW02utz2fq/g4+FRmVO8xUh+QB2T1pyLqRmzzbvFd+uRJa1MQne6U5BojZkU3O4Cy
-	Z/udsfpLP/dgqkZfXfr6mxG1F7UfnkDFJp2SOV2e8BDmDA9tH9uiK2P+HlMO2g1iCj
-	KBOZ4Y6JWKbBRbsxtF9y3dH0se6jVkO9wB/ZmS0j2RUZzUgm62uNCzMgicw1WWrX0K
-	u3tpwEUqstRKql4YsQJUa9WH4Iol1vJ5y/vru64zg6UCZ+m7wsJKrIyOg1Oe3hwVtf
-	DBTdfMfSV7JGUhZQSZOpUrTM=
+	b=CizdZoMFEeupTVAPPkyZi73OXeF0L8Pi922GywnWDhKyTbdkeuKcKWOrdz6z6oc3P
+	tVDn96hfSxrSnl2RMl0ix6OrKtAqVAwMi1Pn0/gwvnBXysHWRLWVT6198qp626Y67H
+	s78+7HrHqMXObC1o5HQG9n0CVuXeNGvRme+XSpe31VJEtdAfFzmnc8x102GcsnjXSO
+	lW4iZ2EPMQw9lwoL2LrA1NhOTBTjkc5DYifOMl0rEA1NtA9Is7uajDpuZ9mdPa+SAQ
+	0b667UCWXovO2sZymvk0Skyv2J1qavsaKCv81SUVEm3TcXdcSxowMa9VuF7ySsEpwj
+	cV79fvdmVjeJRbqknK9OUjQRvQEhWru6cvXhGyCa8HiNrUJ2OISYffQowc+QuTwAC2
+	9I47QzK+tKrnkobSfBCEHaRqyGzPmhUtDhctsQrNjJIS0wVvKM85AtoJSLCNrY08xv
+	ENSnqwslYQ/5z9V64U61S5arCi2xNsbvB/iFvPpk63PIYn9pX/G+j3qHNiKDELZXhx
+	eJNcJRI88SiqgiJCuoPZ0QCF6l7PUErTDdnfIKjaQT+0KMYbemYb8z2HYO9x6d4lDP
+	pf3kyJnjek3zs5e7lS1+BRSwKrGSB5/jSzKpYWvOmJWj3LLSG3NdeA5cRPxxPoOANL
+	1Z74oHKxb7fOwkbVhPS8eYf0=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 11:06:52 +0200
-Message-Id: <20191029090657.30771-1-bunk@stusta.de>
+Date: Tue, 29 Oct 2019 11:06:55 +0200
+Message-Id: <20191029090657.30771-4-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] lftp: Remove no longer needed patch
+Subject: [meta-networking][PATCH] usrsctp: Upgrade to a more recent git snapshot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,77 +42,64 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 29 Oct 2019 09:06:59 -0000
 
-The root cause has already been fixed in glibc.
+Patch applied upstream removed.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../files/fix-gcc-6-conflicts-signbit.patch   | 44 -------------------
- .../recipes-connectivity/lftp/lftp_4.8.4.bb   |  1 -
- 2 files changed, 45 deletions(-)
- delete mode 100644 meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch
+ ...0001-Use-foreign-switch-for-automake.patch | 28 -------------------
+ .../recipes-protocols/usrsctp/usrsctp_git.bb  |  3 +-
+ 2 files changed, 1 insertion(+), 30 deletions(-)
+ delete mode 100644 meta-networking/recipes-protocols/usrsctp/usrsctp/0001-Use-foreign-switch-for-automake.patch
 
-diff --git a/meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch b/meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch
+diff --git a/meta-networking/recipes-protocols/usrsctp/usrsctp/0001-Use-foreign-switch-for-automake.patch b/meta-networking/recipes-protocols/usrsctp/usrsctp/0001-Use-foreign-switch-for-automake.patch
 deleted file mode 100644
-index 952232b7a..000000000
---- a/meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch
+index b932ebbb4..000000000
+--- a/meta-networking/recipes-protocols/usrsctp/usrsctp/0001-Use-foreign-switch-for-automake.patch
 +++ /dev/null
-@@ -1,44 +0,0 @@
----- lftp-4.6.3a/src/NetAccess.cc.orig	2016-06-18 10:25:51.063358981 -0400
--+++ lftp-4.6.3a/src/NetAccess.cc	2016-06-18 10:26:04.143359209 -0400
--@@ -21,7 +21,7 @@
+@@ -1,28 +0,0 @@
+-From 748bc693cf24baf42e459e12f152349e392b6737 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 20 Dec 2016 21:32:11 -0800
+-Subject: [PATCH] Use foreign switch for automake
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- configure.ac | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 64cc9994..19ccd4a3 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -29,7 +29,7 @@ dnl SUCH DAMAGE.
+- dnl
 - 
-- #include <errno.h>
-- #include <assert.h>
---#include <math.h>
--+#include <cmath>
-- #include <sys/types.h>
+- AC_INIT([libusrsctp], [0.9.3.0])
+--AM_INIT_AUTOMAKE
+-+AM_INIT_AUTOMAKE([foreign])
 - 
-- #include "NetAccess.h"
----- lftp-4.6.3a/src/Speedometer.cc.orig	2016-06-18 10:24:58.895358073 -0400
--+++ lftp-4.6.3a/src/Speedometer.cc	2016-06-18 10:25:10.879358281 -0400
--@@ -18,7 +18,7 @@
--  */
-- 
-- #include <config.h>
---#include <math.h>
--+#include <cmath>
-- #include <stdlib.h>
-- #include "Speedometer.h"
-- #include "misc.h"
----- lftp-4.6.3a/src/FileCopy.cc.orig	2016-06-18 10:24:15.939357325 -0400
--+++ lftp-4.6.3a/src/FileCopy.cc	2016-06-18 10:24:24.583357475 -0400
--@@ -36,7 +36,7 @@
-- #include <sys/types.h>
-- #include <sys/stat.h>
-- #include <fcntl.h>
---#include <math.h>
--+#include <cmath>
-- #include <stddef.h>
-- #include "FileCopy.h"
-- #include "url.h"
----- lftp-4.6.3a/src/ResMgr.cc.orig	2016-06-18 10:23:31.387356549 -0400
--+++ lftp-4.6.3a/src/ResMgr.cc	2016-06-18 10:23:41.771356729 -0400
--@@ -23,7 +23,7 @@
-- #include <ctype.h>
-- #include <unistd.h>
-- #include <stdlib.h>
---#include <math.h>
--+#include <cmath>
-- #include <sys/types.h>
-- #include <sys/stat.h>
-- #include <errno.h>
-diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb
-index bf793d91d..ce669eb4f 100644
---- a/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb
-+++ b/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb
-@@ -7,7 +7,6 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+- AC_PROG_CC
+- AC_PROG_LIBTOOL
+--- 
+-2.11.0
+-
+diff --git a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
+index 3ec746684..a5a5605da 100644
+--- a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
++++ b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
+@@ -2,9 +2,8 @@ DESCRIPTION = "This is a userland SCTP stack supporting FreeBSD, Linux, Mac OS X
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=ffcf846341f3856d79a483eafa18e2a5"
  
- SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
--           file://fix-gcc-6-conflicts-signbit.patch \
+-SRCREV = "dbfc1b8c4cf1a46a4d8987ba542d5ff06bdaf14c"
++SRCREV = "a10cd498d964508c0e6ec6bd2be9dd4afcbb4d86"
+ SRC_URI = "git://github.com/sctplab/usrsctp;protocol=https;branch=master \
+-           file://0001-Use-foreign-switch-for-automake.patch \
            "
- SRC_URI[md5sum] = "a56b5047dbfda052df4c1dfd197aa092"
- SRC_URI[sha256sum] = "a853edbd075b008c315679c7882b6dcc6821ed2365d2ed843a412acd3d40da0e"
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.17.1
 
