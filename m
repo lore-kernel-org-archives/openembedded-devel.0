@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A47D7FA4F
+	by mail.openembedded.org (Postfix) with ESMTP id 7820C7FA37
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 29 Oct 2019 09:06:58 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472Qh31GbSzPG
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472Qh22MHjzCK
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 10:06:59 +0100 (CET)
+	Tue, 29 Oct 2019 10:06:58 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572340019;
-	bh=DGfYuHjsC1T57VSOqDRnq6WDZ9fz1fE6PzsodyZyG4Q=;
+	s=default; t=1572340018;
+	bh=cPnTbpMoUlZYRq1BRh8woKEeaifIwGYrrNB/We2soh0=;
 	h=From:To:Subject:Date:From;
-	b=HCvazaBrGsdNHFqfNR7XxI11FPmqdmbqZvjENwiTk6RlKUdHxkOjm4GMu7kglNBD0
-	z0Jx3ylD6hdu/d+MXM0IswBuZ4GyLN5DTUQUacRAj+N0oa5xmbLOVwOidhvNsbRDAv
-	gOiQbwjgPRLDqpVQppoleJIeAhmPLgx4RyvLRAF+kuwiFvdSjDDLTsPtNcs3p+F+9z
-	WxjvXbOzA3V/J7CpzowbjWFPQeBlmrOBRWmZFzBy0+nQDhF9S4lKvhMLw398NDv6/q
-	rBN6uC+DaNk2odwNSQ4IbBf7b038hUwqhMo200Xtewa7+yO7pOWtyJ0cbK97j9jZY7
-	1rkI/FiegOIp/XdnmfxDaCdWlHP318woM5J4H7CkrXbNS3UDwwVb/NWstxhkAh9j3X
-	U7H8ANhUehRveXTB8Ue5i8qd1LDZqaeNp7PSnGG2Iv+d8IPgH4A7tOZ+eZBDZLph+L
-	D0yzpNYxzKe3cX7qWmm2O/lZ7rVRfSGPn//W4MH5F7E9/NBG0CM8f2uJdMLXlfHWEP
-	uXxkKblA037mTQQF9mSu7qFO5ixhZQpt3jFjRrjgocWNpAUWQXiVH4Lx+xhjzv5BTh
-	TIsib38ywxjolnhhMeNNPQGc/4VEoWxQB+7ZzkVoENUNoum9K2HaHo04MCRvTZYfM2
-	K6l7NorFYUs0LaEiGkr6n+3U=
+	b=FzyHXleIVC2/AQXPeedRQskZ/qPaIZuHr3fTiXkLvq0e3jKtiefA4qKDGMoadpapW
+	QTrZwL9LimBZ1OGvMdysy295SLSi+EfQajCqrQMQ8qyddM+Vfl4LG0OQE6FpkSmvG1
+	qOdYvZ+f29pnpZrpYC1Oq8mErcyNZg2lo29AQOxwGaKre9CQo9r35CDxnw4FF9bY+q
+	Uiad+Ifl4Hufxp7GWlPtukKdA817+ooMsv4P99Y4d+/iavciV+ardEnqy4HTn6xOx+
+	kBksuPeq3FUaY0NxfB469rBU+t7PxVAE4b7oml6YFEQ6x8E355ulvWhN4UKxbaQU66
+	gINYM8n6AlsFCyA0WVz39ZnqYpcsEEWeduseKS+NEApelrGSR4+yri1f+Ub/kwUti1
+	zhW02utz2fq/g4+FRmVO8xUh+QB2T1pyLqRmzzbvFd+uRJa1MQne6U5BojZkU3O4Cy
+	Z/udsfpLP/dgqkZfXfr6mxG1F7UfnkDFJp2SOV2e8BDmDA9tH9uiK2P+HlMO2g1iCj
+	KBOZ4Y6JWKbBRbsxtF9y3dH0se6jVkO9wB/ZmS0j2RUZzUgm62uNCzMgicw1WWrX0K
+	u3tpwEUqstRKql4YsQJUa9WH4Iol1vJ5y/vru64zg6UCZ+m7wsJKrIyOg1Oe3hwVtf
+	DBTdfMfSV7JGUhZQSZOpUrTM=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 11:06:54 +0200
-Message-Id: <20191029090657.30771-3-bunk@stusta.de>
+Date: Tue, 29 Oct 2019 11:06:52 +0200
+Message-Id: <20191029090657.30771-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] mdns: Mark as incompatible with musl
+Subject: [meta-networking][PATCH] lftp: Remove no longer needed patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,82 +42,77 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 29 Oct 2019 09:06:59 -0000
 
-musl does not support mDNS or NSS plugins.
+The root cause has already been fixed in glibc.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ...Do-not-include-nss.h-when-libc-glibc.patch | 42 -------------------
- .../recipes-protocols/mdns/mdns_878.200.35.bb |  3 +-
- 2 files changed, 2 insertions(+), 43 deletions(-)
- delete mode 100644 meta-networking/recipes-protocols/mdns/files/0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch
+ .../files/fix-gcc-6-conflicts-signbit.patch   | 44 -------------------
+ .../recipes-connectivity/lftp/lftp_4.8.4.bb   |  1 -
+ 2 files changed, 45 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch
 
-diff --git a/meta-networking/recipes-protocols/mdns/files/0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch b/meta-networking/recipes-protocols/mdns/files/0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch
+diff --git a/meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch b/meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch
 deleted file mode 100644
-index 863866d18..000000000
---- a/meta-networking/recipes-protocols/mdns/files/0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch
+index 952232b7a..000000000
+--- a/meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch
 +++ /dev/null
-@@ -1,42 +0,0 @@
--From d3082d2c606c810aa0a39378bf1e02575af3a301 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Fri, 2 Feb 2018 21:54:11 -0800
--Subject: [PATCH] nss_mdns: Do not include nss.h when libc != glibc
--
--Provide nss_status macro instead for non-glibc case
--where nss.h is absent
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- mDNSPosix/nss_mdns.c | 13 ++++++++++++-
-- 1 file changed, 12 insertions(+), 1 deletion(-)
--
--diff --git a/mDNSPosix/nss_mdns.c b/mDNSPosix/nss_mdns.c
--index afadb3c..c469584 100755
----- a/mDNSPosix/nss_mdns.c
--+++ b/mDNSPosix/nss_mdns.c
--@@ -378,8 +378,19 @@ init_config ();
+@@ -1,44 +0,0 @@
+---- lftp-4.6.3a/src/NetAccess.cc.orig	2016-06-18 10:25:51.063358981 -0400
+-+++ lftp-4.6.3a/src/NetAccess.cc	2016-06-18 10:26:04.143359209 -0400
+-@@ -21,7 +21,7 @@
 - 
-- #define ENTNAME  hostent
-- #define DATABASE "hosts"
---
--+#ifdef __GLIBC__
-- #include <nss.h>
--+#else
--+enum nss_status
--+{
--+    NSS_STATUS_TRYAGAIN = -2,
--+    NSS_STATUS_UNAVAIL,
--+    NSS_STATUS_NOTFOUND,
--+    NSS_STATUS_SUCCESS,
--+    NSS_STATUS_RETURN
--+};
--+#define NETDB_INTERNAL NULL
--+#endif
-- // For nss_status
-- #include <netdb.h>
-- // For hostent
---- 
--2.16.1
--
-diff --git a/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb b/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb
-index 1bd17031a..1353b2bed 100644
---- a/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb
-+++ b/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb
-@@ -4,12 +4,13 @@ HOMEPAGE = "http://developer.apple.com/networking/bonjour/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://../LICENSE;md5=31c50371921e0fb731003bbc665f29bf"
+- #include <errno.h>
+- #include <assert.h>
+--#include <math.h>
+-+#include <cmath>
+- #include <sys/types.h>
+- 
+- #include "NetAccess.h"
+---- lftp-4.6.3a/src/Speedometer.cc.orig	2016-06-18 10:24:58.895358073 -0400
+-+++ lftp-4.6.3a/src/Speedometer.cc	2016-06-18 10:25:10.879358281 -0400
+-@@ -18,7 +18,7 @@
+-  */
+- 
+- #include <config.h>
+--#include <math.h>
+-+#include <cmath>
+- #include <stdlib.h>
+- #include "Speedometer.h"
+- #include "misc.h"
+---- lftp-4.6.3a/src/FileCopy.cc.orig	2016-06-18 10:24:15.939357325 -0400
+-+++ lftp-4.6.3a/src/FileCopy.cc	2016-06-18 10:24:24.583357475 -0400
+-@@ -36,7 +36,7 @@
+- #include <sys/types.h>
+- #include <sys/stat.h>
+- #include <fcntl.h>
+--#include <math.h>
+-+#include <cmath>
+- #include <stddef.h>
+- #include "FileCopy.h"
+- #include "url.h"
+---- lftp-4.6.3a/src/ResMgr.cc.orig	2016-06-18 10:23:31.387356549 -0400
+-+++ lftp-4.6.3a/src/ResMgr.cc	2016-06-18 10:23:41.771356729 -0400
+-@@ -23,7 +23,7 @@
+- #include <ctype.h>
+- #include <unistd.h>
+- #include <stdlib.h>
+--#include <math.h>
+-+#include <cmath>
+- #include <sys/types.h>
+- #include <sys/stat.h>
+- #include <errno.h>
+diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb
+index bf793d91d..ce669eb4f 100644
+--- a/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb
++++ b/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb
+@@ -7,7 +7,6 @@ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
  
-+COMPATIBLE_HOST_libc-musl = 'null'
-+
- RPROVIDES_${PN} += "libdns_sd.so"
- 
- SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${PV}.tar.gz \
-            file://build.patch;patchdir=.. \
-            file://mdns.service \
--           file://0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch;patchdir=.. \
-            "
- SRC_URI[md5sum] = "e773f290a7d29f1072247985d6add2ff"
- SRC_URI[sha256sum] = "e777b4d7dbf5eb1552cb80090ad1ede319067ab6e45e3990d68aabf6e8b3f5a0"
+ SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
+-           file://fix-gcc-6-conflicts-signbit.patch \
+           "
+ SRC_URI[md5sum] = "a56b5047dbfda052df4c1dfd197aa092"
+ SRC_URI[sha256sum] = "a853edbd075b008c315679c7882b6dcc6821ed2365d2ed843a412acd3d40da0e"
 -- 
 2.17.1
 
