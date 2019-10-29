@@ -1,34 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id E14347F9CE
+	by mail.openembedded.org (Postfix) with ESMTP id E42417FA20
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 29 Oct 2019 18:31:25 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472gCL1CrnzPG
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472gCK2S2LzCK
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 19:31:26 +0100 (CET)
+	Tue, 29 Oct 2019 19:31:25 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572373886;
-	bh=MBu2l+E5YDMIjCUQDZ1AcYArOAQrh9czmckG3UaWM+k=;
+	s=default; t=1572373885;
+	bh=eF5xm+1isUaaK6vilKGyagg0njrRlB3M0b33DhlBh6k=;
 	h=From:To:Subject:Date:From;
-	b=YoRd3A1mZVCZVdwbX/ii5ZlcWLW1t4vX76AftSMwTDvVEv3I0WkTZTcME6w9j+ge1
-	sATTLdvKDXFz/EK9EdsAQD2rq5qgpg8ZjfrB0nwgxyUG7souTWPB7o9oone3qE3+5f
-	PI5Tz831rmEMGXWy7cOMvsuhfE4nTQO+G4cFVXR2EACZ3rwUG7VC0xNUeaPE5hhlwz
-	IO9YPCW1ZiiTrSUdqG91B88wbWqgcqf/9bks/+f8qZOZzwtM3A5p1XxrZVNgt1M718
-	n6RYTnUXrhPOBV1UuTy5m8CEL5Du02aWU5/IhRvJ/kJfxrodmL8BgZiIayb6ZpPKBo
-	joeXDroMgDuSiGh7YwaNNZnW2WsE2XdgBYnByh/lwmTPNYTxf3yDSLRz5vH+SFO3Oi
-	R3mTZqhWFI05+aC8UokHrAoRDMurPhcEjGqkz5etxSwXJF6B/wncGml/qV7iY4aboA
-	s5sLEHZnnKR1B2o0dVgHvIq0529UC0AHUwUyv83Pu/AMFaCxN9sYgnf4ZsP+xinflA
-	DRH3Guvf2ncHSVRQhusQeOtytkJBnF9JxQ59xgc1OUiHxhE9sC92kEv42QTIPgjs2C
-	Dh//J1ui/s/ukeKwTvwNYl62QWdqUGi9pcPMOZfDiuG4AFBH+XyFcqI7I4qhct6JsT
-	z7iZd4kOslpyrQaXv1Ybof58=
+	b=rAfimVcYGxc5BgGGoTUCk3VgMAJeagb6u1PCXI4z543cBy/5WX03KLvmqOW2NTwyx
+	LdJjwh1/tY24EpbLJl3OX7GgexBHuK0Eb2EyBY2E07IiZHnZPXhX+OTCL6Qr0fApiF
+	cSPGbFRW8jM4YszYx2/L3QvXbuCzxxibbZ/2Wj5jnwy+YqKxJZTh5+Q08d5nMJiHdS
+	FHGkhBu+67iCk0g9YRxZKXbOjTduCBubD3KHUYO/9lldybzPLoBoXNuVI9v+9cUlq9
+	DHylYggeN9y3fFyNX2RK9NvTom9i9pOLh0xoZjiMW9QH6zzd8ik6Oae1+tK8js6TwT
+	PmrjOLgMV9G1RBN2zoPyAF9z8yZ+P42xiGW5uiJseOKOwxap3cuNSnF72W/pupqygo
+	p0TzSwOW//yHeSvyzTe1brpOlqQHno/KFiyKZO1a3szk2/JwwgcZTArfWYB5zBcTOQ
+	ZFa76AxLi2LWSJdP9skpRu+G5v8WL5l+mLbMN6/BQAfUwuHZmO5BwIjcQeo0RQ1MXu
+	X5ajK69XfJyw2o3p2qo8WwKVIQ1YhRIm3bgwvOj0GoU9nDKLi+WJfwnpnmoeAkiSNk
+	4yMvVDqu7yP9cwQsj2YaNnbRrF/P8DvLjQ4FcL/y00GQa4gLWweueJefSZS+Rr5EG7
+	Y2QuKds0Rhzb2vNyyiVN/VoY=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 20:31:18 +0200
-Message-Id: <20191029183123.1868-5-bunk@stusta.de>
+Date: Tue, 29 Oct 2019 20:31:16 +0200
+Message-Id: <20191029183123.1868-3-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] nodejs: Upgrade 10.16.3 -> 10.17.0
+Subject: [meta-oe][PATCH] cgdb: Upgrade 0.6.8 -> 0.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,172 +41,92 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 29 Oct 2019 18:31:26 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-Patch applied upstream removed.
+Obsolete patch removed.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ...pto-reduce-memory-usage-of-SignFinal.patch | 122 ------------------
- .../{nodejs_10.16.3.bb => nodejs_10.17.0.bb}  |   5 +-
- 2 files changed, 2 insertions(+), 125 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
- rename meta-oe/recipes-devtools/nodejs/{nodejs_10.16.3.bb => nodejs_10.17.0.bb} (95%)
+ .../cgdb/cgdb/remove-help2man.patch           | 47 -------------------
+ .../cgdb/{cgdb_0.6.8.bb => cgdb_0.7.1.bb}     |  8 ++--
+ 2 files changed, 4 insertions(+), 51 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/cgdb/cgdb/remove-help2man.patch
+ rename meta-oe/recipes-devtools/cgdb/{cgdb_0.6.8.bb => cgdb_0.7.1.bb} (75%)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
+diff --git a/meta-oe/recipes-devtools/cgdb/cgdb/remove-help2man.patch b/meta-oe/recipes-devtools/cgdb/cgdb/remove-help2man.patch
 deleted file mode 100644
-index ed3bac39b..000000000
---- a/meta-oe/recipes-devtools/nodejs/nodejs/0003-Crypto-reduce-memory-usage-of-SignFinal.patch
+index 4358629b7..000000000
+--- a/meta-oe/recipes-devtools/cgdb/cgdb/remove-help2man.patch
 +++ /dev/null
-@@ -1,122 +0,0 @@
--From 20282b1cb0389553421c4c5b14de198c5dfff50b Mon Sep 17 00:00:00 2001
--From: Anna Henningsen <anna@addaleax.net>
--Date: Sat, 20 Oct 2018 05:24:54 +0200
--Subject: [PATCH] src: use more explicit return type in Sign::SignFinal()
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
+@@ -1,47 +0,0 @@
+-Disable building manpages so that make install doesn't fail due to lack of help2man
 -
--Using the non-indexed variant of `std::get<>` broke Travis CI.
--Also, this allows us to be a bit more concise when returning
--from `SignFinal()` due to some error condition.
+-Upstream-Status: Inappropriate [config]
 -
--Refs: https://github.com/nodejs/node/pull/23427
--
--PR-URL: https://github.com/nodejs/node/pull/23779
--Reviewed-By: Joyee Cheung <joyeec9h3@gmail.com>
--Reviewed-By: Tobias Nießen <tniessen@tnie.de>
--Reviewed-By: Refael Ackermann <refack@gmail.com>
--Reviewed-By: Colin Ihrig <cjihrig@gmail.com>
+-Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
 ----
-- src/node_crypto.cc | 23 +++++++++++------------
-- src/node_crypto.h  | 12 +++++++++++-
-- 2 files changed, 22 insertions(+), 13 deletions(-)
+- configure.ac    | 3 ---
+- doc/Makefile.am | 5 -----
+- 2 files changed, 8 deletions(-)
 -
--diff --git a/src/node_crypto.cc b/src/node_crypto.cc
--index bd8d9e032554..ec7d4f2bb5be 100644
----- a/src/node_crypto.cc
--+++ b/src/node_crypto.cc
--@@ -3562,22 +3562,20 @@ static MallocedBuffer<unsigned char> Node_SignFinal(EVPMDPointer&& mdctx,
--   return MallocedBuffer<unsigned char>();
-- }
+-diff --git a/configure.ac b/configure.ac
+-index ee7eca0..1f0d924 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -134,9 +134,6 @@ dnl check that the required tools are available to generate documentation
+- if test "$HAS_MAKEINFO" != "yes" ; then
+- 	AC_MSG_ERROR([Please install makeinfo before installing])
+- fi
+--if test "$HAS_HELP2MAN" != "yes" ; then
+--	AC_MSG_ERROR([Please install help2man])
+--fi
 - 
---std::pair<SignBase::Error, MallocedBuffer<unsigned char>> Sign::SignFinal(
--+Sign::SignResult Sign::SignFinal(
--     const char* key_pem,
--     int key_pem_len,
--     const char* passphrase,
--     int padding,
--     int salt_len) {
---  MallocedBuffer<unsigned char> buffer;
+- dnl Checking for log10 function in math - I would like to remove this
+- AC_CHECK_LIB(m, log10)
+-diff --git a/doc/Makefile.am b/doc/Makefile.am
+-index 60662f6..0ae0013 100644
+---- a/doc/Makefile.am
+-+++ b/doc/Makefile.am
+-@@ -1,15 +1,10 @@
+- info_TEXINFOS = cgdb.texi
+- cgdb_TEXINFOS = gpl.texi
+- 
+--dist_man_MANS = cgdb.1
+- EXTRA_DIST = cgdb.txt
+- 
+- dist_pkgdata_DATA = cgdb.txt
+- 
+--# generate the man page using help2man.
+--cgdb.1:
+--	help2man --output=$(top_srcdir)/doc/cgdb.1 $(top_builddir)/cgdb/cgdb$(EXEEXT)
 --
--   if (!mdctx_)
---    return std::make_pair(kSignNotInitialised, std::move(buffer));
--+    return SignResult(kSignNotInitialised);
-- 
--   EVPMDPointer mdctx = std::move(mdctx_);
-- 
--   BIOPointer bp(BIO_new_mem_buf(const_cast<char*>(key_pem), key_pem_len));
--   if (!bp)
---    return std::make_pair(kSignPrivateKey, std::move(buffer));
--+    return SignResult(kSignPrivateKey);
-- 
--   EVPKeyPointer pkey(PEM_read_bio_PrivateKey(bp.get(),
--                                              nullptr,
--@@ -3588,7 +3586,7 @@ std::pair<SignBase::Error, MallocedBuffer<unsigned char>> Sign::SignFinal(
--   // without `pkey` being set to nullptr;
--   // cf. the test of `test_bad_rsa_privkey.pem` for an example.
--   if (!pkey || 0 != ERR_peek_error())
---    return std::make_pair(kSignPrivateKey, std::move(buffer));
--+    return SignResult(kSignPrivateKey);
-- 
-- #ifdef NODE_FIPS_MODE
--   /* Validate DSA2 parameters from FIPS 186-4 */
--@@ -3612,9 +3610,10 @@ std::pair<SignBase::Error, MallocedBuffer<unsigned char>> Sign::SignFinal(
--   }
-- #endif  // NODE_FIPS_MODE
-- 
---  buffer = Node_SignFinal(std::move(mdctx), pkey, padding, salt_len);
--+  MallocedBuffer<unsigned char> buffer =
--+      Node_SignFinal(std::move(mdctx), pkey, padding, salt_len);
--   Error error = buffer.is_empty() ? kSignPrivateKey : kSignOk;
---  return std::make_pair(error, std::move(buffer));
--+  return SignResult(error, std::move(buffer));
-- }
-- 
-- 
--@@ -3639,18 +3638,18 @@ void Sign::SignFinal(const FunctionCallbackInfo<Value>& args) {
-- 
--   ClearErrorOnReturn clear_error_on_return;
-- 
---  std::pair<Error, MallocedBuffer<unsigned char>> ret = sign->SignFinal(
--+  SignResult ret = sign->SignFinal(
--       buf,
--       buf_len,
--       len >= 2 && !args[1]->IsNull() ? *passphrase : nullptr,
--       padding,
--       salt_len);
-- 
---  if (std::get<Error>(ret) != kSignOk)
---    return sign->CheckThrow(std::get<Error>(ret));
--+  if (ret.error != kSignOk)
--+    return sign->CheckThrow(ret.error);
-- 
--   MallocedBuffer<unsigned char> sig =
---      std::move(std::get<MallocedBuffer<unsigned char>>(ret));
--+      std::move(ret.signature);
-- 
--   Local<Object> rc =
--       Buffer::New(env, reinterpret_cast<char*>(sig.release()), sig.size)
--diff --git a/src/node_crypto.h b/src/node_crypto.h
--index 6fcf737f6c43..0c26c1f6ff1d 100644
----- a/src/node_crypto.h
--+++ b/src/node_crypto.h
--@@ -518,7 +518,17 @@ class Sign : public SignBase {
--  public:
--   static void Initialize(Environment* env, v8::Local<v8::Object> target);
-- 
---  std::pair<Error, MallocedBuffer<unsigned char>> SignFinal(
--+  struct SignResult {
--+    Error error;
--+    MallocedBuffer<unsigned char> signature;
--+
--+    explicit SignResult(
--+        Error err,
--+        MallocedBuffer<unsigned char>&& sig = MallocedBuffer<unsigned char>())
--+      : error(err), signature(std::move(sig)) {}
--+  };
--+
--+  SignResult SignFinal(
--       const char* key_pem,
--       int key_pem_len,
--       const char* passphrase,
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.17.0.bb
-similarity index 95%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_10.17.0.bb
-index a978eebe4..bc12df307 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.17.0.bb
-@@ -17,7 +17,6 @@ COMPATIBLE_HOST_riscv32 = "null"
+- cgdb.txt: cgdb.texi $(srcdir)/version.texi $(cgdb_TEXINFOS)
+- TEXTS = cgdb.txt
+- text-am: $(TEXTS)
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-devtools/cgdb/cgdb_0.6.8.bb b/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
+similarity index 75%
+rename from meta-oe/recipes-devtools/cgdb/cgdb_0.6.8.bb
+rename to meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
+index 74019fb62..c2315aeb2 100644
+--- a/meta-oe/recipes-devtools/cgdb/cgdb_0.6.8.bb
++++ b/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
+@@ -10,11 +10,11 @@ DEPENDS = "flex-native readline ncurses"
+ inherit autotools
  
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
--           file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
-            file://0004-Make-compatibility-with-gcc-4.8.patch \
-            file://0005-Link-atomic-library.patch \
-            file://0006-Use-target-ldflags.patch \
-@@ -26,8 +25,8 @@ SRC_URI_append_class-target = " \
-            file://0002-Using-native-torque.patch \
-            "
+ SRC_URI = "http://cgdb.me/files/${BP}.tar.gz \
+-    file://remove-help2man.patch"
+-SRC_URI[md5sum] = "7bd38c79bf4d794d239928fef401fca3"
+-SRC_URI[sha256sum] = "be203e29be295097439ab67efe3dc8261f742c55ff3647718d67d52891f4cf41"
++"
++SRC_URI[md5sum] = "a104862ffd3145b076303992e9a3af26"
++SRC_URI[sha256sum] = "bb723be58ec68cb59a598b8e24a31d10ef31e0e9c277a4de07b2f457fe7de198"
  
--SRC_URI[md5sum] = "b41275a018e670947c1950b12f050a2f"
--SRC_URI[sha256sum] = "7bf1123d7415964775b8f81fe6ec6dd5c3c08abb42bb71dfe4409dbeeba26bbd"
-+SRC_URI[md5sum] = "d5a56d0abf764a91f627f0690cd4b9f3"
-+SRC_URI[sha256sum] = "412667d76bd5273c07cb69c215998109fd5bb35c874654f93e6a0132d666c58e"
- 
- S = "${WORKDIR}/node-v${PV}"
+-CACHED_CONFIGUREVARS = "ac_cv_file__dev_ptmx=yes ac_cv_rl_version=6.2"
++CACHED_CONFIGUREVARS = "ac_cv_file__dev_ptmx=yes ac_cv_rl_version=6.2 ac_cv_file__proc_self_status=yes"
+ EXTRA_OECONF = "--with-readline=${STAGING_LIBDIR} \
+     --with-ncurses=${STAGING_LIBDIR}"
  
 -- 
 2.17.1
