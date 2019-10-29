@@ -1,30 +1,53 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id F375A7FB21
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id B020A7FBB7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 05:49:18 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,242,1569254400"; d="scan'208";a="77621828"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 Oct 2019 13:49:17 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 4D2B04B6EC86
+	Tue, 29 Oct 2019 07:25:31 +0000 (UTC)
+Received: by mail-wm1-f51.google.com with SMTP id g7so1337164wmk.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 13:41:17 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 29 Oct 2019 13:49:15 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 29 Oct 2019 13:49:28 +0800
-Message-ID: <20191029054928.26567-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Tue, 29 Oct 2019 00:25:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=81eUNXgNxBkIoT1zCmHthZXO4v/CnwLaG3XL6gy50kw=;
+	b=hOpoCBDQY5kcMW0c2ew/gqyet509+O4nbaBrpA4rBTc+BEoih9itMcZ79ijICisNCR
+	X1zlH0/hro0hkQI0wbUUjkquzPN39Npf88P4auK9f4bSXURpWzyaQsvlpW8nJcNVJFrF
+	vmILCnLRr6/KMyWhh3sQW82oR6ctF6YfZ8H1VemMBuqXIPgCqE+rNuf03Q3cPHfXwRlt
+	iu01UKy4zVUpOOQqWBuKmhV1qnh19Qg0kbWuDNzcUBZpXceW98pv59I9gH8FAmDZP0Lp
+	EVawKp7rHPFbjzckyYk9j0wrwTLXXtep/OGNCzj4h1W6EHKWlbw/lL4LgevTAgnH+F9d
+	p6+Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=81eUNXgNxBkIoT1zCmHthZXO4v/CnwLaG3XL6gy50kw=;
+	b=BPvmfRe2xZkKvd2uv2F80IKeTwF+UPBCV33vmNjeyaP4VSNAC6abRNiYTJgCqUBXdJ
+	dMFJdlBHdibL9E80Rak12g2fHx8u5tgutgLunjxob99Vv+faVF5ZD2MnXB8+ZCnmALVW
+	IvXE1CbSvGzwTr4iqwBfibTn1JLw09zPjMwCYWYjnslr1OFP0v20FnZkgrP//Bext40U
+	CzDHdyqcg9+vcU4IgpNab5F2JGl310P770B4WMzKDsvu0DjeBp3mDCz9FiWHZCgysKR5
+	SHaDL3Ol+42qsV+veegI6lv00IccKKV9oumTBCwCzEQxglXEMlgoXGW8jen1Be7Q20cb
+	PyMw==
+X-Gm-Message-State: APjAAAXue2g/PCyIG9NGx1CdtF6hVtyrEel6hwhsotckyMOhxFP9UNpr
+	DIyxVAKIe7sUzHgfpXCG+GNPmjEx
+X-Google-Smtp-Source: APXvYqwZp2NPiWAImU0on5+8J3UG1T8pPBYkJQZ7SZqS7aDi45FuL2w9CD3nX3kc2qKw4L6cK2DamA==
+X-Received: by 2002:a1c:4c09:: with SMTP id z9mr1084898wmf.33.1572333931833;
+	Tue, 29 Oct 2019 00:25:31 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F3206791C2D7DC04F339B1D.dip0.t-ipconnect.de.
+	[2003:f0:7f32:679:1c2d:7dc0:4f33:9b1d])
+	by smtp.gmail.com with ESMTPSA id
+	36sm28568711wrj.42.2019.10.29.00.25.30
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 29 Oct 2019 00:25:30 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 29 Oct 2019 08:25:23 +0100
+Message-Id: <20191029072523.5068-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 4D2B04B6EC86.A8B95
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking] [PATCHv2] autofs: upgrade 5.1.5 -> 5.1.6
+Subject: [PATCH] unicode-ucd: Set correct SUMMARY and HOMEPAGE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,110 +60,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 05:49:19 -0000
+X-List-Received-Date: Tue, 29 Oct 2019 07:25:32 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
--When compiling version 5.1.6 on musl, the following error occurs:
-| In file included from defaults.c:32:
-| ../include/log.h:49:8: error: unknown type name 'pid_t'
--Add autofs/0001-Bug-fix-for-pid_t-not-found-on-musl.patch to fix it.
-
--Refresh the following patch:
- autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...-Bug-fix-for-pid_t-not-found-on-musl.patch | 30 +++++++++++++++++++
- ...0001-Do-not-hardcode-path-for-pkg.m4.patch |  4 +--
- .../{autofs_5.1.5.bb => autofs_5.1.6.bb}      |  5 ++--
- 3 files changed, 35 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/autofs/autofs/0001-Bug-fix-for-pid_t-not-found-on-musl.patch
- rename meta-networking/recipes-daemons/autofs/{autofs_5.1.5.bb => autofs_5.1.6.bb} (93%)
+ meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-daemons/autofs/autofs/0001-Bug-fix-for-pid_t-not-found-on-musl.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-Bug-fix-for-pid_t-not-found-on-musl.patch
-new file mode 100644
-index 000000000..2a583466e
---- /dev/null
-+++ b/meta-networking/recipes-daemons/autofs/autofs/0001-Bug-fix-for-pid_t-not-found-on-musl.patch
-@@ -0,0 +1,30 @@
-+From d0d5ac317dab11610a5fc91ca3e7f5ad72ce2236 Mon Sep 17 00:00:00 2001
-+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-+Date: Tue, 29 Oct 2019 13:19:37 +0800
-+Subject: [PATCH] Bug fix for pid_t not found on musl.
-+
-+When compiling version 5.1.6 on musl, the following error occurs:
-+log.h:49:8: error: unknown type name 'pid_t'
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-+---
-+ lib/defaults.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/lib/defaults.c b/lib/defaults.c
-+index a6ea116..b3ecfa5 100644
-+--- a/lib/defaults.c
-++++ b/lib/defaults.c
-+@@ -21,6 +21,7 @@
-+ #include <string.h>
-+ #include <sys/utsname.h>
-+ #include <sys/stat.h>
-++#include <sys/types.h>
-+ #include <stdarg.h>
-+ 
-+ #include "config.h"
-+-- 
-+2.20.1
-+
-diff --git a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
-index 410827b33..b991acad3 100644
---- a/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
-+++ b/meta-networking/recipes-daemons/autofs/autofs/0001-Do-not-hardcode-path-for-pkg.m4.patch
-@@ -9,7 +9,7 @@ Upstream-Status: Pending
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- 
--update patch to version 5.1.5
-+update patch to version 5.1.6
- Signed-off-by: Changqing Li <changqing.li@windriver.com>
- ---
-  configure.in | 2 +-
-@@ -20,7 +20,7 @@ index 493b9f1..268d06b 100644
- --- a/configure.in
- +++ b/configure.in
- @@ -12,7 +12,7 @@ define([AC_CACHE_SAVE], )dnl
-- AC_INIT(.autofs-5.1.5)
-+ AC_INIT(.autofs-5.1.6)
-  
-  # for pkg-config macros
- -m4_include([/usr/share/aclocal/pkg.m4])
-diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
-similarity index 93%
-rename from meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb
-rename to meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
-index 9e43549e8..aeadc9d5d 100644
---- a/meta-networking/recipes-daemons/autofs/autofs_5.1.5.bb
-+++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.6.bb
-@@ -25,11 +25,12 @@ SRC_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/autofs-${PV}.tar.gz \
-            file://pkgconfig-libnsl.patch \
-            file://0001-modules-lookup_multi.c-Replace-__S_IEXEC-with-S_IEXE.patch \
-            file://0001-Do-not-hardcode-path-for-pkg.m4.patch \
-+           file://0001-Bug-fix-for-pid_t-not-found-on-musl.patch \
-            "
- 
- 
--SRC_URI[md5sum] = "03b13168ec7bd66a6f2d5f6fea705eee"
--SRC_URI[sha256sum] = "86a8e56ea9d72bb53ff8cdfeefb5cafe983592c6b0178fb99c4a731e59879181"
-+SRC_URI[md5sum] = "e6800e0afd6009ecdff148088c564050"
-+SRC_URI[sha256sum] = "82094cad44f4e5c4f93eff2789cd66b57d7ab3fa646b7722d97608571001e694"
- 
- UPSTREAM_CHECK_URI = "${KERNELORG_MIRROR}/linux/daemons/autofs/v5/"
+diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
+index 88a116f63..89ab565ce 100644
+--- a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
++++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
+@@ -1,5 +1,5 @@
+-SUMMARY = "C++11 command line parser"
+-HOMEPAGE = "https://github.com/CLIUtils/CLI11"
++SUMMARY = "Unicode Character Database"
++HOMEPAGE = "https://unicode.org/ucd/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://unicode.org.license.html;beginline=42;endline=85;md5=67619d0c52706853c0256514e7fd04cd"
  
 -- 
-2.20.1
-
-
+2.21.0
 
 
