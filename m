@@ -1,33 +1,52 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id B08F07FA37
+Return-Path: <yann.dirson@blade-group.com>
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id AFDD67FAA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 09:06:59 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472Qh434hvzJm
+	Tue, 29 Oct 2019 09:46:54 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id w9so1633158wmm.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 10:07:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572340020;
-	bh=+37eadK1wiMj+/HFIC8e0l+psfNzdMiv8y2bsLYNDLU=;
-	h=From:To:Subject:Date:From;
-	b=U0x58nHdgzKIpAKCLN9uMkuGuufg5VVtfyI1WIQc9U345UY6Z0I2uqog074GSUbd6
-	bxRLymfnwVhbEYuSwHYAE9ob/wQwWLLGW6ytDeheRQZr0KbNpg0I+BqaLeD4ZNaIog
-	oScfOCI00cHUv9tOw/uGCTxNnC7JWe9xOdU56yqKpjtEh3lqmdsP9d7qPJYtoO8BRn
-	AxopYfYU4/3SYN52/EaXpnzfaB0qhgh/3K2+JD/5fGc7y8pR4LxMdAJox9qVL1+dWI
-	difgx2roiMtVPYTSeTPwYNEkoHixSKnQHZwEOu7WPLNgG4ABXQXv4tBHE3wXdeV7oT
-	i5XtKWLKl31PK0utlXGyAEZvFUbR821xd2smDo3LSIxdqEq3AVX2WppSlRZd/9Iwps
-	7uCBnBATnfuMwj02sj26zoAOvcs7qwV+QmrJ9yMJGb3wCBjs+nH+7XyTQQHqkKVPcH
-	X0xf1bSbwYM0G3lpFYgFrLgoa9aZKGMyxqd1ysXNdxS6I2RxrNFNwvCM0JVVq85Xvi
-	L+nsBXXoE3/91t3zBisf6aqyjfiqpru9D0ZcJPFZgryQUz/y4ms0oE350lM6jSz++0
-	wg9Zd6ea8WClsBaWbgCbFlw2y2ebFqWe2NZm8TNXBZD7qDriz5Vp8MvvZc4zsvBvR4
-	/L+uTOXNjXHl4+exQiSgtNB0=
-From: Adrian Bunk <bunk@stusta.de>
+	Tue, 29 Oct 2019 02:46:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=blade-group.com; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=tG2fK1nmDYsLG0pDnBYs784JLtmx2wG0I4COq0ueisg=;
+	b=mQajuFk5MK1msDWjpMNwgePVa4jumWYGXs0itw5gzXfvus/Gi0BrYMnvZVapeI19++
+	l0tnRp7dROe1+inHXmFg1NPu1saZEdqSuUJkWn+cN7TaAHXL0g4vkQAN4JKgQ6eTPKO2
+	jyCiMLWksMRf3k9drpyajYJ3YaW14mIORQqcRAHvtj/+0/yftUDR9RWTCqay2YWlav1G
+	jfN5oC6510j3NRspWJlon6iC8FI1BEF5EibYLZt2JRXySefLn8LLE5Bn4D506sfX3SEo
+	Qfh5bWSX9s70IWKRLeFMJg7JCXAfqddMlYmHsfPqEMNAORf0EQVtiwYmn2yXe58VIhlP
+	cxIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=tG2fK1nmDYsLG0pDnBYs784JLtmx2wG0I4COq0ueisg=;
+	b=uC6RsYGmg/qq51Pwrg0hwXRU4UVDZzKnGCZFyVxhgPlxqmdrleHY3h8U7Rw6xBdDSn
+	2hEUiEx8pOmdenlzBl8kHEX9QIOfwQ+cpHiBock7xplJ5x5Ihq+umQLMos2nsN7Mqc4V
+	WoZNOhHwetDhNVnoa1ZQ6vqLk4M10UvhFlUpCXdlzymYBH1iEHiPPpj+bWO3voHAklOn
+	z+wwhQ9nDhaCoUEZS+2voVQRdCiG4r+vfs60QOBNfaDUBd5xQe+2jQmE6am9XOb58jx0
+	l6sHKoHTLcCIdlbqZjMBkyLlkoW+/tZ+NP09so6EHEpPfl7Qb1LqTTl05fejkcsit+cC
+	0sdw==
+X-Gm-Message-State: APjAAAU+R11qj5F1hGpWQkgcpHUCVpM8SLuV7VVJMDl7Bqh0XLnX+bqn
+	m0vPNjCcJm6HZVfrBK63WzbSkRHE3fYd9Q==
+X-Google-Smtp-Source: APXvYqxmtR1AtNJOXy3EsFF7Ksugx/fUwL73/lCq3Qpae6+2x5O9n8bNcp1iDzi0ix9zooDcEs1FiA==
+X-Received: by 2002:a1c:1fca:: with SMTP id f193mr2933603wmf.173.1572342414806;
+	Tue, 29 Oct 2019 02:46:54 -0700 (PDT)
+Received: from yantop.local ([85.118.38.73])
+	by smtp.gmail.com with ESMTPSA id 1sm13672910wrr.16.2019.10.29.02.46.53
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 29 Oct 2019 02:46:53 -0700 (PDT)
+From: yann.dirson@blade-group.com
+X-Google-Original-From: yann@blade-group.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 11:06:57 +0200
-Message-Id: <20191029090657.30771-6-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] dovecot: Upgrade 2.2.36.3 -> 2.2.36.4
+Date: Tue, 29 Oct 2019 10:45:26 +0100
+Message-Id: <20191029094526.26093-1-yann@blade-group.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+Cc: Yann Dirson <yann@blade-group.com>
+Subject: [PATCH] mesa: fix meson configure fix when 'dri' is excluded from PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,35 +59,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 09:06:59 -0000
+X-List-Received-Date: Tue, 29 Oct 2019 09:46:55 -0000
+Content-Transfer-Encoding: 8bit
 
-The release contains the CVE-2019-11500 fix.
+From: Yann Dirson <yann@blade-group.com>
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Yann Dirson <yann@blade-group.com>
 ---
- .../dovecot/{dovecot_2.2.36.3.bb => dovecot_2.2.36.4.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/dovecot/{dovecot_2.2.36.3.bb => dovecot_2.2.36.4.bb} (95%)
+ .../mesa/files/0003-Allow-enable-DRI-without-DRI-drivers.patch  | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.4.bb
-similarity index 95%
-rename from meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
-rename to meta-networking/recipes-support/dovecot/dovecot_2.2.36.4.bb
-index be633e03b..239a25273 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.2.36.3.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.36.4.bb
-@@ -12,8 +12,8 @@ SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
-            file://0001-doveadm-Fix-parallel-build.patch \
-            "
- 
--SRC_URI[md5sum] = "80c1c271b1c4cbe26a793f4e3b09eb8e"
--SRC_URI[sha256sum] = "992521305fa1d61f4726aac2619ccc65094a3cc2e5c80644455199764305863e"
-+SRC_URI[md5sum] = "66c4d71858b214afee5b390ee602dee2"
-+SRC_URI[sha256sum] = "777c61e264869e9b288b8d6603f4ed3ac3aac9ec573908067353f51269dce2fe"
- 
- DEPENDS = "openssl xz zlib bzip2 libcap icu libtirpc"
- CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+diff --git a/meta/recipes-graphics/mesa/files/0003-Allow-enable-DRI-without-DRI-drivers.patch b/meta/recipes-graphics/mesa/files/0003-Allow-enable-DRI-without-DRI-drivers.patch
+index 3458c19199..346b217585 100644
+--- a/meta/recipes-graphics/mesa/files/0003-Allow-enable-DRI-without-DRI-drivers.patch
++++ b/meta/recipes-graphics/mesa/files/0003-Allow-enable-DRI-without-DRI-drivers.patch
+@@ -23,7 +23,7 @@ index 0e50bb26c0a..de065c290d6 100644
+  with_dri_swrast = dri_drivers.contains('swrast')
+  
+ -with_dri = dri_drivers.length() != 0 and dri_drivers != ['']
+-+with_dri = get_option('dri') or (_drivers.length() != 0 and _drivers != [''])
+++with_dri = get_option('dri') or (dri_drivers.length() != 0 and dri_drivers != [''])
+  
+  gallium_drivers = get_option('gallium-drivers')
+  if gallium_drivers.contains('auto')
 -- 
-2.17.1
+2.23.0
 
 
