@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 795337FA4D
+	by mail.openembedded.org (Postfix) with ESMTP id 7A47D7FA4F
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 29 Oct 2019 09:06:58 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472Qh25NQqzJm
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472Qh31GbSzPG
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 10:06:58 +0100 (CET)
+	Tue, 29 Oct 2019 10:06:59 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572340018;
-	bh=LjOAYe0tdKXjr/g92UABrIOG3E4EYY0caEA+7KJBucs=;
+	s=default; t=1572340019;
+	bh=DGfYuHjsC1T57VSOqDRnq6WDZ9fz1fE6PzsodyZyG4Q=;
 	h=From:To:Subject:Date:From;
-	b=pYZR0ZVY2rErvh1Xvg7BYpg+Nta9H4juytOoKeracWSra0id6w6s20qOSL3BtNpJR
-	ZW1Pe5+mVGhRPPw9VJ7qY+JMc2Zm/NpWcF0l+IU+MZUpvs3cTIEuIuluawIczM4Yn/
-	kKDRKN6QnIRCS80W6jOKH5aKeN7ALj10+loIo/gAX+smKjAzYX6IPQQu81mXgndP1a
-	PpVbKdnqMoq8jxHpYPWDOnBYztRVzKpDinqyq9cIub5UzhlXbQx/S1+p3yxQB72lsL
-	Bn9ZSEEE4VCnUi+YAhX2eZ1sziBQTEmF3fyMAGWabN1kvdex1D43NnWibvJzt5PzL2
-	qmBcaYds+NyGYV/JwPRjfl3ayoPcWKYf/q4oX4lxxXMxDP3vUDrpCObuWGvXJiQ2F5
-	2Z2cdBLSxPRBwVjnl+lAfD0WJpbHhiFjPPN20w3ReosuBuY4FvS1w5bhgl1qIrrNPT
-	bJgHR0h2CutMwmN6qpMIWDbO8uEDSEGBtxsFlkfnrgI1QjVDuhlkzRyp0FbRRWq0Jr
-	zwu5H4z63NO6I7iiXHe8EyPGAaRSSfbFm+ZyB/ztTBPF1zZ6Q4R15UFAWNqWdoHseR
-	SU4hlEgolUUkSkfXTvpxuBZIEvi3o2W1+VRvAFcJeXQyQvPsMJpTgJ8I6yFTMianI4
-	uIPh8fALwA8Rlq3Ez+MpP8CE=
+	b=HCvazaBrGsdNHFqfNR7XxI11FPmqdmbqZvjENwiTk6RlKUdHxkOjm4GMu7kglNBD0
+	z0Jx3ylD6hdu/d+MXM0IswBuZ4GyLN5DTUQUacRAj+N0oa5xmbLOVwOidhvNsbRDAv
+	gOiQbwjgPRLDqpVQppoleJIeAhmPLgx4RyvLRAF+kuwiFvdSjDDLTsPtNcs3p+F+9z
+	WxjvXbOzA3V/J7CpzowbjWFPQeBlmrOBRWmZFzBy0+nQDhF9S4lKvhMLw398NDv6/q
+	rBN6uC+DaNk2odwNSQ4IbBf7b038hUwqhMo200Xtewa7+yO7pOWtyJ0cbK97j9jZY7
+	1rkI/FiegOIp/XdnmfxDaCdWlHP318woM5J4H7CkrXbNS3UDwwVb/NWstxhkAh9j3X
+	U7H8ANhUehRveXTB8Ue5i8qd1LDZqaeNp7PSnGG2Iv+d8IPgH4A7tOZ+eZBDZLph+L
+	D0yzpNYxzKe3cX7qWmm2O/lZ7rVRfSGPn//W4MH5F7E9/NBG0CM8f2uJdMLXlfHWEP
+	uXxkKblA037mTQQF9mSu7qFO5ixhZQpt3jFjRrjgocWNpAUWQXiVH4Lx+xhjzv5BTh
+	TIsib38ywxjolnhhMeNNPQGc/4VEoWxQB+7ZzkVoENUNoum9K2HaHo04MCRvTZYfM2
+	K6l7NorFYUs0LaEiGkr6n+3U=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 11:06:53 +0200
-Message-Id: <20191029090657.30771-2-bunk@stusta.de>
+Date: Tue, 29 Oct 2019 11:06:54 +0200
+Message-Id: <20191029090657.30771-3-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][PATCH] lldpd: Upgrade 1.0.3 -> 1.0.4
+Subject: [meta-networking][PATCH] mdns: Mark as incompatible with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,72 +40,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 09:06:58 -0000
+X-List-Received-Date: Tue, 29 Oct 2019 09:06:59 -0000
 
-Backported patch removed.
+musl does not support mDNS or NSS plugins.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ...1-priv-include-limits.h-for-PATH_MAX.patch | 27 -------------------
- .../lldpd/{lldpd_1.0.3.bb => lldpd_1.0.4.bb}  |  5 ++--
- 2 files changed, 2 insertions(+), 30 deletions(-)
- delete mode 100644 meta-networking/recipes-daemons/lldpd/files/0001-priv-include-limits.h-for-PATH_MAX.patch
- rename meta-networking/recipes-daemons/lldpd/{lldpd_1.0.3.bb => lldpd_1.0.4.bb} (91%)
+ ...Do-not-include-nss.h-when-libc-glibc.patch | 42 -------------------
+ .../recipes-protocols/mdns/mdns_878.200.35.bb |  3 +-
+ 2 files changed, 2 insertions(+), 43 deletions(-)
+ delete mode 100644 meta-networking/recipes-protocols/mdns/files/0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch
 
-diff --git a/meta-networking/recipes-daemons/lldpd/files/0001-priv-include-limits.h-for-PATH_MAX.patch b/meta-networking/recipes-daemons/lldpd/files/0001-priv-include-limits.h-for-PATH_MAX.patch
+diff --git a/meta-networking/recipes-protocols/mdns/files/0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch b/meta-networking/recipes-protocols/mdns/files/0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch
 deleted file mode 100644
-index 9ea4a9ffb..000000000
---- a/meta-networking/recipes-daemons/lldpd/files/0001-priv-include-limits.h-for-PATH_MAX.patch
+index 863866d18..000000000
+--- a/meta-networking/recipes-protocols/mdns/files/0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch
 +++ /dev/null
-@@ -1,27 +0,0 @@
--From c6a283bfcbfefe9c89113e81b0f792c12c4eefb8 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?S=C3=B6ren=20Tempel?= <soeren+git@soeren-tempel.net>
--Date: Mon, 25 Mar 2019 18:43:03 +0100
--Subject: [PATCH] priv: include limits.h for PATH_MAX
+@@ -1,42 +0,0 @@
+-From d3082d2c606c810aa0a39378bf1e02575af3a301 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Fri, 2 Feb 2018 21:54:11 -0800
+-Subject: [PATCH] nss_mdns: Do not include nss.h when libc != glibc
 -
--Upstream-Status: Backport
+-Provide nss_status macro instead for non-glibc case
+-where nss.h is absent
 -
--Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- src/daemon/priv.c | 1 +
-- 1 file changed, 1 insertion(+)
+- mDNSPosix/nss_mdns.c | 13 ++++++++++++-
+- 1 file changed, 12 insertions(+), 1 deletion(-)
 -
--diff --git a/src/daemon/priv.c b/src/daemon/priv.c
--index f4d6bdf..ba5ae58 100644
----- a/src/daemon/priv.c
--+++ b/src/daemon/priv.c
--@@ -27,6 +27,7 @@
-- #include <unistd.h>
-- #include <signal.h>
-- #include <errno.h>
--+#include <limits.h>
-- #include <sys/wait.h>
-- #include <sys/stat.h>
-- #include <sys/socket.h>
+-diff --git a/mDNSPosix/nss_mdns.c b/mDNSPosix/nss_mdns.c
+-index afadb3c..c469584 100755
+---- a/mDNSPosix/nss_mdns.c
+-+++ b/mDNSPosix/nss_mdns.c
+-@@ -378,8 +378,19 @@ init_config ();
+- 
+- #define ENTNAME  hostent
+- #define DATABASE "hosts"
+--
+-+#ifdef __GLIBC__
+- #include <nss.h>
+-+#else
+-+enum nss_status
+-+{
+-+    NSS_STATUS_TRYAGAIN = -2,
+-+    NSS_STATUS_UNAVAIL,
+-+    NSS_STATUS_NOTFOUND,
+-+    NSS_STATUS_SUCCESS,
+-+    NSS_STATUS_RETURN
+-+};
+-+#define NETDB_INTERNAL NULL
+-+#endif
+- // For nss_status
+- #include <netdb.h>
+- // For hostent
 --- 
--2.17.1
+-2.16.1
 -
-diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.3.bb b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
-similarity index 91%
-rename from meta-networking/recipes-daemons/lldpd/lldpd_1.0.3.bb
-rename to meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
-index e650b5795..8fdaf848f 100644
---- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.3.bb
-+++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
-@@ -9,11 +9,10 @@ SRC_URI = "\
-     http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
-     file://lldpd.init.d \
-     file://lldpd.default \
--    file://0001-priv-include-limits.h-for-PATH_MAX.patch \
-     "
+diff --git a/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb b/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb
+index 1bd17031a..1353b2bed 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb
++++ b/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb
+@@ -4,12 +4,13 @@ HOMEPAGE = "http://developer.apple.com/networking/bonjour/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://../LICENSE;md5=31c50371921e0fb731003bbc665f29bf"
  
--SRC_URI[md5sum] = "04844328f053ee343344d892efb8a00c"
--SRC_URI[sha256sum] = "39fced395168015416bfe78b95414facf066f841f349024433aa20ab54e4c360"
-+SRC_URI[md5sum] = "33e8d58623f99184e4e709cbbfe45db3"
-+SRC_URI[sha256sum] = "5319bc032fabf1008d5d91e280276aa7f1bbfbb70129d8526cd4526d7c22724f"
++COMPATIBLE_HOST_libc-musl = 'null'
++
+ RPROVIDES_${PN} += "libdns_sd.so"
  
- inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
- 
+ SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${PV}.tar.gz \
+            file://build.patch;patchdir=.. \
+            file://mdns.service \
+-           file://0001-nss_mdns-Do-not-include-nss.h-when-libc-glibc.patch;patchdir=.. \
+            "
+ SRC_URI[md5sum] = "e773f290a7d29f1072247985d6add2ff"
+ SRC_URI[sha256sum] = "e777b4d7dbf5eb1552cb80090ad1ede319067ab6e45e3990d68aabf6e8b3f5a0"
 -- 
 2.17.1
 
