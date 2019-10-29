@@ -1,54 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
 Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
 	[209.85.128.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A46D7FBA8
+	by mail.openembedded.org (Postfix) with ESMTP id A293F7FB98
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 01:03:06 +0000 (UTC)
-Received: by mail-wm1-f50.google.com with SMTP id g24so805157wmh.5
+	Tue, 29 Oct 2019 01:03:07 +0000 (UTC)
+Received: by mail-wm1-f50.google.com with SMTP id n7so819907wmc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Oct 2019 18:03:07 -0700 (PDT)
+	Mon, 28 Oct 2019 18:03:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=PyuDrNXMRG1cRmEee2e7oSV704XtX2iPCwGbAiTmquM=;
-	b=Pz15DDmtOk5Q+aTYOO22C/pILZ+UNOUkmkx/75PztDRhFGRKadD73CrKSfI/M1CH51
-	uNugefc5jlbjSU9f5U95l0vjdQDK+D/zVH8CuB7FOaanQ/cufLR3WjF9zMyBK8VDf5MD
-	DIDZMAyYgRLsgzBYCKc8Y9nYQl0XscnxUd/yhyDi5H/SDtdm0WhkfhxltyCVXufdYTzV
-	o0xCdXGdMxSaEI78FAXvoC2nfy6gtMARwEkN4bUDgikcl709lH5iELBC2QbG4/9p9tJ/
-	m9BGBIt0v488J3FutqAgC9EbNoOVLV8R94VInbH3/lw8pKONW1NS36gEsb39vDp6F0/4
-	kcxA==
+	bh=KUZE4QVTglY37W0yxK17cMYb4NnlmOpLpchYXMQQxgM=;
+	b=BcCLYv9MmVyrg0mTda7eE2yWlXM1+t+MyQ+3phEkOHZH5i3S6SpCAwqCxNC6ZpcK/S
+	ddHVEUbbyeB240DzkNHv6QNAa7hsYuWpgJeGzJK/OdhGIpJfIkxhgbuVHk9oG+o8Il1n
+	Llah0cEoQaJKSjrYqUQyFkwT0AV27RRcHKQdC2t5Clcqy9hsBXc2af4/krdT0OCqpIwj
+	Ku2+8602b7TNvuuHbvyIY0c6freaBxL6hQ+LG+QoVUqPBBHGc6VPoLyh9KN2VnSMR9K+
+	zPgNJRSCkFUW3imHTyg4BKuhfi+D9Hxf0q5ONwb9/u/HmSSBYdO3Ci5XT77C83CmHfpU
+	2abg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=PyuDrNXMRG1cRmEee2e7oSV704XtX2iPCwGbAiTmquM=;
-	b=rDueiyRrKkx6LrRtWJC/yACIAuyhmLve6obSLN89rG2AopG819udTSlSEzPZB+TMe6
-	BtP2tHdq67eIA/nSyWDcW30tIjznFcTrcy31vbg8gN8RG5umqs/CuLMJ6kUTjWB2rvfT
-	wZCjvdMVuUaCCu/rz9oF9aSFEwqfbcqJ2fVsZM0TUPkXseAK/3iJ4uCZUm75Kon7f1bh
-	gNAOeUr0fzqT2Xlw68bREZMxjIgO7hy9CKDn6u7nLbmInXfF3lSPjijO7QN2kFNvhyJZ
-	S+6hj6RVlDaLyXU8a+J/ZthSF3lnOIXHiOn5BBhdHXCzPpUqdtHpGaAh/ELUpUTUIsxd
-	2u+w==
-X-Gm-Message-State: APjAAAWG+BcirDWg37IAtywN2BGLSf/WPKQ5yF6ZqjWdpFSxVK3VoDRD
-	q8q1/j69vllk9IXCQb4Gk2ffqfrk
-X-Google-Smtp-Source: APXvYqxAs5fkhN/46SIEsmNGOLodPsUlBa0Fd4r4ZEj3jAmXt2wK722NJyN/Q4b5w58pD1o5mnsQ3Q==
-X-Received: by 2002:a1c:7c07:: with SMTP id x7mr1789166wmc.130.1572310986561; 
-	Mon, 28 Oct 2019 18:03:06 -0700 (PDT)
+	bh=KUZE4QVTglY37W0yxK17cMYb4NnlmOpLpchYXMQQxgM=;
+	b=kpYGtmXiTt+acxUlWZ9Dut8WRAMoSKlVxspgfZNTt7ZJ2V8Wf5t8wc73BrzHUA2vzj
+	CoW6FvTvI9ivnk7vhpakSl7kHBA2AlefwLr2IUZlzyleWGwyokBPN3JCWgSAaQG71t0L
+	JBQGLCxxhfMnHgb0cMKyga+769G4dRENg/dg3rMHraO1NhdiCmxSnFC0DaF9imJfyxXE
+	U7ovCSFExOZQ/FG3GK8HRMagimI2I688D4bBrF6PQi+SiSzcCrniM06XivKNpmL0cYn2
+	mNgxC42oGw8EIK7T/jxlMjRXXdnYBqobAKHZLMfXqBWmUEYmOjQXi3LOIBFdP0DDka0l
+	Zd9g==
+X-Gm-Message-State: APjAAAXHX0MU4XgNI5W24QjlPicB1DTQwkIpBkYD2Gi8Ju5LkH6pdCNZ
+	cyf+srunDfv5DNrZ22z7Bq6Gl2f3
+X-Google-Smtp-Source: APXvYqwcg6iuE+8tenKVlmu3U7TlfZCXAcndCIEwTmDJxqaLzIbl9DoGowHLA6oeeu81LykXeNWzCQ==
+X-Received: by 2002:a1c:1947:: with SMTP id 68mr1557399wmz.139.1572310987822; 
+	Mon, 28 Oct 2019 18:03:07 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F3206985B50CF9AC855C254.dip0.t-ipconnect.de.
 	[2003:f0:7f32:698:5b50:cf9a:c855:c254])
-	by smtp.gmail.com with ESMTPSA id k3sm8758714wrn.95.2019.10.28.18.03.05
+	by smtp.gmail.com with ESMTPSA id k3sm8758714wrn.95.2019.10.28.18.03.06
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 28 Oct 2019 18:03:05 -0700 (PDT)
+	Mon, 28 Oct 2019 18:03:06 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 02:02:52 +0100
-Message-Id: <20191029010253.5784-3-schnitzeltony@gmail.com>
+Date: Tue, 29 Oct 2019 02:02:53 +0100
+Message-Id: <20191029010253.5784-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191029010253.5784-1-schnitzeltony@gmail.com>
 References: <20191029010253.5784-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/4] unicode-ucd: initial add 12.1.0
+Subject: [PATCH v2 4/4] ibus: initial add 1.5.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,49 +61,195 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 01:03:06 -0000
+X-List-Received-Date: Tue, 29 Oct 2019 01:03:08 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It is a build dependency for ibus
+It is a depency for gnome-shell
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../unicode-ucd/unicode-ucd_12.1.0.bb         | 25 +++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
 
-diff --git a/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
+v1 -> v2: went out too early with breaking configure option
+v2 -> v3: avoid using build host's unicode-ucd / slightly rework PACKAGECONFIG
+          defaults
+
+ .../recipes-support/ibus/ibus-native.bb       | 30 ++++++++++++++
+ meta-gnome/recipes-support/ibus/ibus.bb       | 37 ++++++++++++++++++
+ meta-gnome/recipes-support/ibus/ibus.inc      | 36 +++++++++++++++++
+ ...start-dbus-we-do-not-have-dbus-lauch.patch | 39 +++++++++++++++++++
+ 4 files changed, 142 insertions(+)
+ create mode 100644 meta-gnome/recipes-support/ibus/ibus-native.bb
+ create mode 100644 meta-gnome/recipes-support/ibus/ibus.bb
+ create mode 100644 meta-gnome/recipes-support/ibus/ibus.inc
+ create mode 100644 meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch
+
+diff --git a/meta-gnome/recipes-support/ibus/ibus-native.bb b/meta-gnome/recipes-support/ibus/ibus-native.bb
 new file mode 100644
-index 000000000..88a116f63
+index 000000000..3f8e1ed12
 --- /dev/null
-+++ b/meta-oe/recipes-support/unicode-ucd/unicode-ucd_12.1.0.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "C++11 command line parser"
-+HOMEPAGE = "https://github.com/CLIUtils/CLI11"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://unicode.org.license.html;beginline=42;endline=85;md5=67619d0c52706853c0256514e7fd04cd"
++++ b/meta-gnome/recipes-support/ibus/ibus-native.bb
+@@ -0,0 +1,30 @@
++require ${BPN}.inc
 +
-+SRC_URI = " \
-+    https://www.unicode.org/Public/zipped/${PV}/UCD.zip;name=ucd;subdir=ucd \
-+    https://www.unicode.org/license.html;name=license;subdir=${BP};downloadfilename=unicode.org.license.html \
++inherit native
++
++DEPENDS += " \
++    glib-2.0-native \
++    dbus-native \
++    iso-codes \
 +"
-+SRC_URI[ucd.md5sum] = "430cbdac2615451571dd69a976dd08f6"
-+SRC_URI[ucd.sha256sum] = "25ba51a0d4c6fa41047b7a5e5733068d4a734588f055f61e85f450097834a0a6"
 +
-+SRC_URI[license.md5sum] = "f03bafb623258f85ff2032c1ce567b7c"
-+SRC_URI[license.sha256sum] = "983225207de8a707d0903a8d70fb7a4b28c5e0f64f2366e84a6192a2d618fed4"
++PACKAGECONFIG = ""
 +
-+inherit allarch
++# for allarch iso-codes
++EXTRA_NATIVE_PKGCONFIG_PATH = ":${RECIPE_SYSROOT}${datadir_native}/pkgconfig"
++# for allarch unicode-ucd - just to make configure happy
++EXTRA_OECONF += "--with-ucd-dir=${RECIPE_SYSROOT}${datadir_native}/unicode/ucd"
 +
-+do_configure[noexec] = "1"
-+
-+do_install() {
-+    install -d ${D}${datadir}/unicode
-+    cp -rf ${WORKDIR}/ucd ${D}${datadir}/unicode
++do_compile() {
++    cd src
++    oe_runmake ibusenumtypes.h ibusenumtypes.c
++    oe_runmake unicode-parser
 +}
 +
-+FILES_${PN} = "${datadir}/unicode/ucd"
++do_install() {
++    install -d ${D}/${libdir}
++    install -m 755 ${S}/src/.libs/libibus-*.so* ${D}/${libdir}
++
++    install -d ${D}/${bindir}
++    install -m 755 ${S}/src/.libs/unicode-parser ${D}/${bindir}
++}
+diff --git a/meta-gnome/recipes-support/ibus/ibus.bb b/meta-gnome/recipes-support/ibus/ibus.bb
+new file mode 100644
+index 000000000..caec455b6
+--- /dev/null
++++ b/meta-gnome/recipes-support/ibus/ibus.bb
+@@ -0,0 +1,37 @@
++require ${BPN}.inc
++
++DEPENDS += " \
++    ${BPN}-native \
++    glib-2.0-native \
++    glib-2.0 \
++    dbus \
++    iso-codes \
++"
++
++inherit gtk-icon-cache bash-completion
++
++# for unicode-ucd
++EXTRA_OECONF += "--with-ucd-dir=${STAGING_DATADIR}/unicode/ucd"
++
++PACKAGECONFIG ??= " \
++    dconf vala \
++    ${@bb.utils.contains_any('DISTRO_FEATURES', [ 'wayland', 'x11' ], 'gtk3', '', d)} \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)} \
++"
++
++do_configure_prepend() {
++    # run native unicode-parser
++    sed -i 's:$(builddir)/unicode-parser:unicode-parser:g' ${S}/src/Makefile.am
++}
++
++FILES_${PN} += " \
++    ${datadir}/dbus-1 \
++    ${datadir}/GConf \
++    ${datadir}/glib-2.0 \
++    ${libdir}/gtk-3.0 \
++"
++
++FILES_${PN}-dev += " \
++    ${datadir}/gettext \
++"
++
+diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipes-support/ibus/ibus.inc
+new file mode 100644
+index 000000000..0f4ae7d04
+--- /dev/null
++++ b/meta-gnome/recipes-support/ibus/ibus.inc
+@@ -0,0 +1,36 @@
++SUMMARY = "Intelligent Input Bus for Linux/Unix"
++HOMEPAGE = "https://github.com/ibus/ibus/wiki"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
++
++inherit autotools-brokensep pkgconfig gobject-introspection gettext gtk-doc vala
++
++PV = "1.5.21"
++
++DEPENDS = "unicode-ucd"
++
++SRC_URI = " \
++    git://github.com/ibus/ibus.git \
++    file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch \
++"
++SRCREV = "ae0040c73466bb6e78fce5e669a55fcce6ffd16d"
++S = "${WORKDIR}/git"
++
++PACKAGECONFIG[appindicator] = "--enable-appindicator,--disable-appindicator,qtbase"
++PACKAGECONFIG[dconf] = "--enable-dconf,--disable-dconf,dconf"
++PACKAGECONFIG[gtk2] = "--enable-gtk2,--disable-gtk2,gtk+"
++PACKAGECONFIG[gtk3] = "--enable-gtk3,--disable-gtk3,gtk+3"
++PACKAGECONFIG[wayland]  = "--enable-wayland,--disable-wayland,wayland"
++PACKAGECONFIG[vala]  = "--enable-vala,--disable-vala"
++PACKAGECONFIG[x11]  = "--enable-xim --enable-ui,--disable-xim --disable-ui,virtual/libx11"
++
++EXTRA_OECONF = " \
++    --disable-tests \
++    --disable-emoji-dict \
++    --disable-python2 \
++"
++
++do_configure_prepend() {
++    touch ${S}/ChangeLog
++    touch ${S}/ABOUT-NLS
++}
+diff --git a/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch b/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch
+new file mode 100644
+index 000000000..3701d19f5
+--- /dev/null
++++ b/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch
+@@ -0,0 +1,39 @@
++From f567bcbc2108d722faa90afeb03d3a3bcdf5f58b Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
++Date: Fri, 10 May 2019 14:30:08 +0200
++Subject: [PATCH] Do not try to start dbus - we do not have dbus-lauch
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++---
++ data/dconf/make-dconf-override-db.sh | 6 ------
++ 1 file changed, 6 deletions(-)
++
++diff --git a/data/dconf/make-dconf-override-db.sh b/data/dconf/make-dconf-override-db.sh
++index 9c650e97..02fbf059 100755
++--- a/data/dconf/make-dconf-override-db.sh
+++++ b/data/dconf/make-dconf-override-db.sh
++@@ -12,10 +12,6 @@ export XDG_CACHE_HOME="$TMPDIR/cache"
++ export GSETTINGS_SCHEMA_DIR="$TMPDIR/schemas"
++ mkdir -p $XDG_CONFIG_HOME $XDG_CACHE_HOME $GSETTINGS_SCHEMA_DIR
++ 
++-eval `dbus-launch --sh-syntax`
++-
++-trap 'rm -rf $TMPDIR; kill $DBUS_SESSION_BUS_PID' ERR
++-
++ # in case that schema is not installed on the system
++ glib-compile-schemas --targetdir "$GSETTINGS_SCHEMA_DIR" "$PWD"
++ 
++@@ -46,5 +42,3 @@ for schema in $schemas; do
++ done
++ 
++ rm -rf $TMPDIR
++-
++-kill $DBUS_SESSION_BUS_PID
++-- 
++2.20.1
++
 -- 
 2.21.0
 
