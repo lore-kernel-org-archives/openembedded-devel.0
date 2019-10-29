@@ -1,40 +1,33 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
-	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id E08E76BBE6
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id E23C57FA1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 16:42:24 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id c22so3150072wmd.1
+	Tue, 29 Oct 2019 18:31:25 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 472gCJ6cyJz8b
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 09:42:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=VMkwcC8lJdpCVr5Z3oXnw+86zvE1oJLyEiIrAn6z1QE=;
-	b=Wt9vFWCFwALxjwCbnGCNAtLXKF/LorDN+FDM0kJ2d2X042p21KOxN8psfiiodbANw6
-	+MwrAUzcOzgq8WhlSKK/q0PoeR8JJDgVXz++U0nrLiT7+Q33GtSiVvT9Rpd/SrUTw/Px
-	0oGqVUdUD1HQ7WJuVoAoNUFIJMjIIvXlN6lrs4ceUzkPfSd9jmmUyahm5y7oVrTG1/bB
-	qwq0PVJz+rYQZSPT2QEn7gN54+7p+4cOtoPK5F8c0oA7EfD1XAYoWunSSahE+60Ugjar
-	XParWZ3JK0ZKRas3tvIlzjzSQWb17lpnopw43/+UlL8e6l0XKxkBNewgl5hbF2rlaLSE
-	thbw==
-X-Gm-Message-State: APjAAAUHZAm0NraunoVanbH/E31iFJ4f6oPQu5fpR7uyeinRUJQVTYi+
-	Cm+O+o4/AIVtS5HlS4iuqAaFC9yD
-X-Google-Smtp-Source: APXvYqz8INwBlp9yqSHCaQqCFFCzG+X+FBsxcPgHUW4eIogA+nIeVlsiwxTBKs6P1bceKCgoTuykhQ==
-X-Received: by 2002:a1c:411:: with SMTP id 17mr4644590wme.122.1572367345373;
-	Tue, 29 Oct 2019 09:42:25 -0700 (PDT)
-Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id 65sm27082196wrs.9.2019.10.29.09.42.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 29 Oct 2019 09:42:24 -0700 (PDT)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+	Tue, 29 Oct 2019 19:31:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1572373885;
+	bh=ZjfOhyCmilo3OfyVhaQ8ogweV59i1TMfT7MvPbPSM9s=;
+	h=From:To:Subject:Date:From;
+	b=JB54gasrx4Ez4mqwZHQ44Qeh6PHX3P5hUUJBAVAQsOlQWQWen7qiQMFrjdFesDqCN
+	qfgeqAZIjDULmidaYn7A0CYQ+bNhOwRFvOzDEHxcQ1NDIxkMcB8+vs8FUwzqpj7hVM
+	HecS9oX6JwvziOeK7OqqstegIRvUHKz6nHG1z93wqDHYdxSeilVeZmcLn54AfTPWh+
+	7T8kXKKdHdu4PnQYHNQPvJSYxh2FGFRqTiNnbF+qIFfBTNv8l/N8648f3QnPnxRW2M
+	Dz30OKLipn3LXh71iLgThlCI22WGY5erC0JAeVblADdm0waiCdPb6UxeW4k733E9ri
+	B1vX6QnvAHVPSnUZFl/hnWBoDUedBxh7phoqoPWAlxqQyXDouZhS/E5q6r+TeEl5h5
+	6BUcs6i/redc3IyRf6/v29qJnmO1tnkXBQysX/bcu3qfs3B2Q1mQeJHRSB2NYjGKH7
+	4NMYCYrQrESlf8TFMhlPRYmAYF+hmLKFC8VJ6cK9zlbdgTHtdaoGeaayrOS4zbMcS4
+	6KDqzTsK7JulP04lEOXsbJTCZcqtpmlxKABYGwX1aobIuuoQ52I/bw7OP3wzXJ7LmH
+	+9bQjWIh3/aqKyH1jXfViWI71TeRT4rXV0XwcLii8nUdXmEovtPfmB7PVspevQEGrn
+	FcP5PNbz03J5lxKnDNq/Rulo=
+From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 29 Oct 2019 16:42:24 +0000
-Message-Id: <20191029164224.40188-1-git@andred.net>
-X-Mailer: git-send-email 2.23.0.rc1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] nodejs: allow use of system c-ares (and make default)
+Date: Tue, 29 Oct 2019 20:31:15 +0200
+Message-Id: <20191029183123.1868-2-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] libtorrent: Upgrade to 0.13.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,44 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Oct 2019 16:42:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 29 Oct 2019 18:31:26 -0000
 
-Use system c-ares via PACKAGECONFIG by default. So far,
-nodejs had been built using its embedded copy of c-ares,
-which we generally try to avoid, for the known reasons
-(independent updates, cve & license checks, etc).
-
-Notes:
-* otherwise nodejs uses its bundled version of c-ares
-* the PACKAGECONFIG variable is 'ares' so as to be in
-  line with other uses of this (wget & curl recipes in
-  OE core)
-
-Signed-off-by: André Draszik <git@andred.net>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
-index 30724d41a..6dacc2824 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
-@@ -49,9 +49,10 @@ ARCHFLAGS_arm = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', '-
- GYP_DEFINES_append_mipsel = " mips_arch_variant='r1' "
- ARCHFLAGS ?= ""
+diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
+index b2dffcdb9..fa106ea41 100644
+--- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
++++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
+@@ -11,9 +11,9 @@ SRC_URI = "git://github.com/rakshasa/libtorrent \
+            file://0001-implement-64bit-atomic-for-mips.patch \
+            file://0001-Define-64bit-atomic-helpers-for-ppc-32-bit.patch \
+            "
+-SRCREV = "074f6ec51a2e4bc5c6140b4dad13c9bb56f3f0dc"
++SRCREV = "756f70010779927dc0691e1e722ed433d5d295e1"
  
--PACKAGECONFIG ??= "zlib icu"
--PACKAGECONFIG[zlib] = "--shared-zlib,,zlib"
-+PACKAGECONFIG ??= "ares icu zlib"
-+PACKAGECONFIG[ares] = "--shared-cares,,c-ares"
- PACKAGECONFIG[icu] = "--with-intl=system-icu,--without-intl,icu"
-+PACKAGECONFIG[zlib] = "--shared-zlib,,zlib"
+-PV = "0.13.7+git${SRCPV}"
++PV = "0.13.8"
  
- # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
- do_configure () {
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.23.0.rc1
+2.17.1
 
 
