@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 11A2C7F977
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 883587F977
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2019 06:54:47 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id e14so1875117qto.1
+	Wed, 30 Oct 2019 06:56:40 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id x21so1788354qto.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Oct 2019 23:54:49 -0700 (PDT)
+	Tue, 29 Oct 2019 23:56:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=gkZLdqY8XTlNKzSVzopBAQOHffHnEu77YgLWhY25xPQ=;
-	b=SalXe/t60lE98qYLKq3Pfv+9d0PI5MMLSn+Y3L5Ww+sGoOcWQQcWLYFGKNFAO5ZaFN
-	F2+s7vgOWRtMoFHNo90wIvlTfCihxcZMyaia25OAWAtIoSl7QIxqJDpMb1O4ncnDawBd
-	CclGiJvGEYkqJM75JX/OTttmLTu/KgNWUhurYVFw6kbdu3gL0zB5mKmpXvR8D/aD/3Fn
-	BtaHAVkiIyPX9q2eSm2FW3ifmVh9oF+A+bUDgA5mt+vqD5ph+UGhNEbwr0IKp4GTE1VW
-	EPfiR0GBbjDoZYp6aQq6IAJXeUrmnxdfPyrzhZg0F9t40NHfmQg43JP6oHBHZL3hPJ3p
-	l+Vw==
+	:cc; bh=hnpjC+LAg70Fwx86GYRRIMUTi1vqGiU2TO0j+Za+OyY=;
+	b=Kr1kdJ4F+w/35THiT/PxxSquhFHRDw3Vh84/BkekvgHXIN6aDmuthSPLKCKoW3Rlbd
+	hZR3mUOFLyIcd/KZ2Nmvud3sc/RmVItNJo/QUz/A/Enh96Vu4MNrvjd1c7tt6pfeqImX
+	2AbDyYnoqG04kr88BQKdd3Wx1jxt3LFS2ap9YOAXCq1qLWrzg6rEIOveEg0l4NaX6cvm
+	nra5My7Y80Edi1m81B7dyVUSymHrNIcpVxxgZIzNL9Pb5cjZ5zzaSzgLAtNZjjrgl2fT
+	qIBRKwSsAcvXX/hvM72mq8l2G65XS7jTETONfjEP1nD7x2ePKgPnzDZ2wWU1Lvg/fHux
+	If0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=gkZLdqY8XTlNKzSVzopBAQOHffHnEu77YgLWhY25xPQ=;
-	b=bLZSp8EklD0HY4GbcU+EjNlZnmDsunvF+yXIBwG+XGN9E1lY3m5wQz4Om/Jrh6M7v0
-	eCHAnd2hOPnueRd70MXp4URTlaQqV4zvu0v1eIrzAIWfUWRkpLI0KCM9DnOvboK2izrz
-	/iymMiN1aQ7uEm+3u9lWuQgMb+Fslla0pWdUy8YYR2veyDQ92TnyvDMX19rxa+ySoznD
-	gKaZcMwWnReGRJtCyXIyWjyREZUksCY7UvLK3VP5RmfpmV/rxp2sGNKBDLAR4wYnmJYi
-	iHUujfRBnXGTlJwQedxQwdYyksciEVYukL2dPIolSjZXj4NLTZpegdJdY/Qkg30lP3/6
-	neiA==
-X-Gm-Message-State: APjAAAW588f6FokSH64t6VLiuzMXaSbXzKZcVO8eelNXLIqZ7XPdlMh2
-	fyyATVgvbnc+O8GDFuiswhqjQ0D0KhYDiupUH5km9j2bM9euvw==
-X-Google-Smtp-Source: APXvYqx12tW/9/ZLeto1ieTBHHIRlgGICELKLGd6QsxD3KbW1V9SzCr9xGIJx5GbO5NrK5vSAamKPksdVjI46TSU/J8=
-X-Received: by 2002:ad4:45b1:: with SMTP id y17mr25272153qvu.55.1572418488455; 
-	Tue, 29 Oct 2019 23:54:48 -0700 (PDT)
+	bh=hnpjC+LAg70Fwx86GYRRIMUTi1vqGiU2TO0j+Za+OyY=;
+	b=iICqrEx3iskCH3uaxaLHAdZpJgoJDRiQ4NAXZyZoMM8Xgk5NRb8A57+oWhjtxYYp9s
+	/Ybv3CgnDIK3DECHAjg8IBqEgrhAuCY+pCaC2lQ4zb+AtwJXX3N5wEpz5qwmjLbw3npD
+	0ZhRnQP3ywA+n5bFYOPYwzsp12H6yfeJn3vJ58dRpVheuWhzrFCNeJzeUhjPaUz999mS
+	JISlMviI+whD8Ph5k6Kt1xlfuztNS+XQx7mrg0kDPn4PHel0Q1C8wLxpSyno8yXhCVpG
+	zYt83sP7DoKnXezfBZ9blLZgxIgHsOlI9uo4k7eH4okdNneGjhatK6NUnK/AgXj/pgtT
+	E5gA==
+X-Gm-Message-State: APjAAAX8YYohWOSukkIhhrWVbbJi25XzmRyxqhSUyAAPYTX4JUpZ1J8x
+	Uue9dfeT9N0YGEKI//LW5Q1qNzADICjoCoL5zCAhkZG3PKVJLQ==
+X-Google-Smtp-Source: APXvYqz8180XbaiI7cnNgy6GJen4h2DKvlTVbHmFO917OfhEobYgeRB1WRNzvoBbzqnbsfmh5HP+6+xt4BRFoC+gv0Y=
+X-Received: by 2002:aed:2724:: with SMTP id n33mr3420113qtd.194.1572418601026; 
+	Tue, 29 Oct 2019 23:56:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191029090657.30771-1-bunk@stusta.de>
-In-Reply-To: <20191029090657.30771-1-bunk@stusta.de>
+References: <20191029183123.1868-3-bunk@stusta.de>
+In-Reply-To: <20191029183123.1868-3-bunk@stusta.de>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Oct 2019 07:54:22 +0100
-Message-ID: <CAMKF1sp2cs11WhP-YBCQhKP5Ac+D8ZcfqMfkq6r0hzxd5urhWg@mail.gmail.com>
+Date: Wed, 30 Oct 2019 07:56:14 +0100
+Message-ID: <CAMKF1so_r3VT5XVGSJkYw0bQrnxtdTpdqBcMFtEKiyPbBnz+ew@mail.gmail.com>
 To: Adrian Bunk <bunk@stusta.de>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] lftp: Remove no longer needed patch
+Subject: Re: [meta-oe][PATCH] cgdb: Upgrade 0.6.8 -> 0.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,90 +53,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2019 06:54:48 -0000
+X-List-Received-Date: Wed, 30 Oct 2019 06:56:40 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-it still fails on musl with signbin conflicts so we still need that
-patch or maybe help configure by defining it something like pass
-gl_cv_func_signbit=yes via EXTRA_OECONF
+fails on mips
+https://errors.yoctoproject.org/Errors/Details/274947/
 
-
-see error
-https://errors.yoctoproject.org/Errors/Details/274949/
-
-On Tue, Oct 29, 2019 at 10:07 AM Adrian Bunk <bunk@stusta.de> wrote:
+On Tue, Oct 29, 2019 at 7:32 PM Adrian Bunk <bunk@stusta.de> wrote:
 >
-> The root cause has already been fixed in glibc.
+> Obsolete patch removed.
 >
 > Signed-off-by: Adrian Bunk <bunk@stusta.de>
 > ---
->  .../files/fix-gcc-6-conflicts-signbit.patch   | 44 -------------------
->  .../recipes-connectivity/lftp/lftp_4.8.4.bb   |  1 -
->  2 files changed, 45 deletions(-)
->  delete mode 100644 meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch
+>  .../cgdb/cgdb/remove-help2man.patch           | 47 -------------------
+>  .../cgdb/{cgdb_0.6.8.bb => cgdb_0.7.1.bb}     |  8 ++--
+>  2 files changed, 4 insertions(+), 51 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/cgdb/cgdb/remove-help2man.patch
+>  rename meta-oe/recipes-devtools/cgdb/{cgdb_0.6.8.bb => cgdb_0.7.1.bb} (75%)
 >
-> diff --git a/meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch b/meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch
+> diff --git a/meta-oe/recipes-devtools/cgdb/cgdb/remove-help2man.patch b/meta-oe/recipes-devtools/cgdb/cgdb/remove-help2man.patch
 > deleted file mode 100644
-> index 952232b7a..000000000
-> --- a/meta-networking/recipes-connectivity/lftp/files/fix-gcc-6-conflicts-signbit.patch
+> index 4358629b7..000000000
+> --- a/meta-oe/recipes-devtools/cgdb/cgdb/remove-help2man.patch
 > +++ /dev/null
-> @@ -1,44 +0,0 @@
-> ---- lftp-4.6.3a/src/NetAccess.cc.orig  2016-06-18 10:25:51.063358981 -0400
-> -+++ lftp-4.6.3a/src/NetAccess.cc       2016-06-18 10:26:04.143359209 -0400
-> -@@ -21,7 +21,7 @@
+> @@ -1,47 +0,0 @@
+> -Disable building manpages so that make install doesn't fail due to lack of help2man
 > -
-> - #include <errno.h>
-> - #include <assert.h>
-> --#include <math.h>
-> -+#include <cmath>
-> - #include <sys/types.h>
+> -Upstream-Status: Inappropriate [config]
 > -
-> - #include "NetAccess.h"
-> ---- lftp-4.6.3a/src/Speedometer.cc.orig        2016-06-18 10:24:58.895358073 -0400
-> -+++ lftp-4.6.3a/src/Speedometer.cc     2016-06-18 10:25:10.879358281 -0400
-> -@@ -18,7 +18,7 @@
-> -  */
+> -Signed-off-by: Matthieu Crapet <Matthieu.Crapet@ingenico.com>
+> ----
+> - configure.ac    | 3 ---
+> - doc/Makefile.am | 5 -----
+> - 2 files changed, 8 deletions(-)
 > -
-> - #include <config.h>
-> --#include <math.h>
-> -+#include <cmath>
-> - #include <stdlib.h>
-> - #include "Speedometer.h"
-> - #include "misc.h"
-> ---- lftp-4.6.3a/src/FileCopy.cc.orig   2016-06-18 10:24:15.939357325 -0400
-> -+++ lftp-4.6.3a/src/FileCopy.cc        2016-06-18 10:24:24.583357475 -0400
-> -@@ -36,7 +36,7 @@
-> - #include <sys/types.h>
-> - #include <sys/stat.h>
-> - #include <fcntl.h>
-> --#include <math.h>
-> -+#include <cmath>
-> - #include <stddef.h>
-> - #include "FileCopy.h"
-> - #include "url.h"
-> ---- lftp-4.6.3a/src/ResMgr.cc.orig     2016-06-18 10:23:31.387356549 -0400
-> -+++ lftp-4.6.3a/src/ResMgr.cc  2016-06-18 10:23:41.771356729 -0400
-> -@@ -23,7 +23,7 @@
-> - #include <ctype.h>
-> - #include <unistd.h>
-> - #include <stdlib.h>
-> --#include <math.h>
-> -+#include <cmath>
-> - #include <sys/types.h>
-> - #include <sys/stat.h>
-> - #include <errno.h>
-> diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb
-> index bf793d91d..ce669eb4f 100644
-> --- a/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb
-> +++ b/meta-networking/recipes-connectivity/lftp/lftp_4.8.4.bb
-> @@ -7,7 +7,6 @@ LICENSE = "GPLv3"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+> -diff --git a/configure.ac b/configure.ac
+> -index ee7eca0..1f0d924 100644
+> ---- a/configure.ac
+> -+++ b/configure.ac
+> -@@ -134,9 +134,6 @@ dnl check that the required tools are available to generate documentation
+> - if test "$HAS_MAKEINFO" != "yes" ; then
+> -       AC_MSG_ERROR([Please install makeinfo before installing])
+> - fi
+> --if test "$HAS_HELP2MAN" != "yes" ; then
+> --      AC_MSG_ERROR([Please install help2man])
+> --fi
+> -
+> - dnl Checking for log10 function in math - I would like to remove this
+> - AC_CHECK_LIB(m, log10)
+> -diff --git a/doc/Makefile.am b/doc/Makefile.am
+> -index 60662f6..0ae0013 100644
+> ---- a/doc/Makefile.am
+> -+++ b/doc/Makefile.am
+> -@@ -1,15 +1,10 @@
+> - info_TEXINFOS = cgdb.texi
+> - cgdb_TEXINFOS = gpl.texi
+> -
+> --dist_man_MANS = cgdb.1
+> - EXTRA_DIST = cgdb.txt
+> -
+> - dist_pkgdata_DATA = cgdb.txt
+> -
+> --# generate the man page using help2man.
+> --cgdb.1:
+> --      help2man --output=$(top_srcdir)/doc/cgdb.1 $(top_builddir)/cgdb/cgdb$(EXEEXT)
+> --
+> - cgdb.txt: cgdb.texi $(srcdir)/version.texi $(cgdb_TEXINFOS)
+> - TEXTS = cgdb.txt
+> - text-am: $(TEXTS)
+> ---
+> -1.9.1
+> -
+> diff --git a/meta-oe/recipes-devtools/cgdb/cgdb_0.6.8.bb b/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
+> similarity index 75%
+> rename from meta-oe/recipes-devtools/cgdb/cgdb_0.6.8.bb
+> rename to meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
+> index 74019fb62..c2315aeb2 100644
+> --- a/meta-oe/recipes-devtools/cgdb/cgdb_0.6.8.bb
+> +++ b/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
+> @@ -10,11 +10,11 @@ DEPENDS = "flex-native readline ncurses"
+>  inherit autotools
 >
->  SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.bz2 \
-> -           file://fix-gcc-6-conflicts-signbit.patch \
->            "
->  SRC_URI[md5sum] = "a56b5047dbfda052df4c1dfd197aa092"
->  SRC_URI[sha256sum] = "a853edbd075b008c315679c7882b6dcc6821ed2365d2ed843a412acd3d40da0e"
+>  SRC_URI = "http://cgdb.me/files/${BP}.tar.gz \
+> -    file://remove-help2man.patch"
+> -SRC_URI[md5sum] = "7bd38c79bf4d794d239928fef401fca3"
+> -SRC_URI[sha256sum] = "be203e29be295097439ab67efe3dc8261f742c55ff3647718d67d52891f4cf41"
+> +"
+> +SRC_URI[md5sum] = "a104862ffd3145b076303992e9a3af26"
+> +SRC_URI[sha256sum] = "bb723be58ec68cb59a598b8e24a31d10ef31e0e9c277a4de07b2f457fe7de198"
+>
+> -CACHED_CONFIGUREVARS = "ac_cv_file__dev_ptmx=yes ac_cv_rl_version=6.2"
+> +CACHED_CONFIGUREVARS = "ac_cv_file__dev_ptmx=yes ac_cv_rl_version=6.2 ac_cv_file__proc_self_status=yes"
+>  EXTRA_OECONF = "--with-readline=${STAGING_LIBDIR} \
+>      --with-ncurses=${STAGING_LIBDIR}"
+>
 > --
 > 2.17.1
 >
