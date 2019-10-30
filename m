@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id CE9B07F96F
+Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
+	[209.85.222.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A60B7F96F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2019 21:19:55 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id e14so5411518qto.1
+	Wed, 30 Oct 2019 21:20:55 +0000 (UTC)
+Received: by mail-qk1-f175.google.com with SMTP id d13so4450135qko.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2019 14:19:57 -0700 (PDT)
+	Wed, 30 Oct 2019 14:20:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=3l/RX11wOixfqfC0rJhPmUw7X6mGYNTDz6rvXT+yP20=;
-	b=b7XDN8rFWPwicNcxqR1e3NvhogpJYvEu3EiUoQDqB07hIJMfOS4cfkW1PQLDlYzhsk
-	5UGjZXbjKh08iX+O+qX1SS1Glo7mQ60zt9Fx/p5wPxhtYKFXhULoy6KDc5cINPTaOlrE
-	eIaDN0kL9aSRBdXcb8s9ONJBOOGB53K7AP16zuaXHNd7R0q94zrDQ49B/0X0Rbwjzkwz
-	dUX3OmVLJtJrUuAWiVk9z72b0R1cgc/NIn8lvXOzrzfwnQbkRLhhxHT/Bk2ZgltjL9/c
-	/L467KIIlvYoTyvoMqzHDJqgsoeNnXGGSW9EDVoCLRLqVNVbhKQdKl58PFIR0PgWo9hP
-	9YkA==
+	:cc; bh=4+7chqMiXQ1LxBMrVv5ILDcSqnbpqniYZCVwqSXWHBs=;
+	b=tl1eNBAlMf7CPC+QtbkIz+8WVPwW8n3T6FucilOde4P02tp2NYzB8sjLNzrt6kn7xt
+	rbQXL51DXEF/ugEiZ4zM5HkGc3vwDPTMCw34CjSmyFljFw1gQ+Lug6p8TZG/bj2EXX5b
+	9VFYqe15Bcuoa6tJHnuEVS1UMbzYZP3FrqE+xdVi6244towgN3Kq2sl4ZSrXRHHWWQeT
+	nM5xoZDH0Gj+sgEHjN0wEZ/e2kH/UHPeI2d2/1aaKS8MD4BFMsOYA24pTaYQQnI//aqd
+	NFnTaTe8dBoO+ESrISU/Vto6m3EZ/dIrCgoc/ssz865VEZe1tDoEL4OQVSQbroeGCXEk
+	g26A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=3l/RX11wOixfqfC0rJhPmUw7X6mGYNTDz6rvXT+yP20=;
-	b=qMH6BNd63wFuVCfathAHGuvuD3uetcJEhyfv69JIfmwkQWdgUdRvFOE0bz5qemRc1W
-	eYCVWOucocRNxsIUuoWwI2VuSYzzPkLLdAs1haK+NzO51DRiyCjbUjfucIGcUHkzPtem
-	1d4MUMmdrTlxCFcZSYcNSweJE1O+v+O+tH+AgIymu0WPKjKnXMLIRbfWdH5JUdUtt/ku
-	AiGa15SUxTBEzQqYOT9sPMZf2utFHhEakHfBzw63xb2XTy4FomHu6rnKAGMVqecklKXC
-	pTr9K1K0rDkN+lS6g3Ocnc8a6YgIoKmucJznsZfufM5RlwzBaTTcQfoPuW4gUd02VTI5
-	cOCA==
-X-Gm-Message-State: APjAAAW1Fz3o//2oTTdhXECIKrXi5uQdrbgSOvRfXwMewFxPV14eevtm
-	IvXcsdvNEH5KQPyQjKaLkvyWf9Tv/qeiYQGoIL4=
-X-Google-Smtp-Source: APXvYqwDFT7XGG69aEu9fSv9OiwwZi9rL9/V5JNEoGbD7rM3i6WeVzuhBZUghxxXtMoAD1xFHB7hfoN7ksc0A3HAkKY=
-X-Received: by 2002:aed:2724:: with SMTP id n33mr2261080qtd.194.1572470396400; 
-	Wed, 30 Oct 2019 14:19:56 -0700 (PDT)
+	bh=4+7chqMiXQ1LxBMrVv5ILDcSqnbpqniYZCVwqSXWHBs=;
+	b=nEiv/viLeSnoHcFPhUKvD37WKypcZVK/+ORHt/iQyWMOm27dpBA1/n44oAMwhZJNae
+	mcJIT3MUlEtLEa+fia4UHNUEEXBqCuDDN7K4PgY5du/XZB+GFknfNLkqgdTlASNbRjFt
+	UTaZs0au/sJJnv62LX+Odypx7hQGevf3VbIqA1UDQCJu+BOKcVSK8l2RM3wH62UKkEiJ
+	IwpyVIt/a3lrCKiqylzAso4IT7zOSTKafpV7lQN0j3CA7p2rbIwCMVGO/x5ZoWG9uNaD
+	lDvLcDvZGwjxlWW6XS0/tckR/V+y84oV6RITd6YuRAIsBkwzcTEhua/FJrTsHuo7l6dy
+	8hLA==
+X-Gm-Message-State: APjAAAXGC9ANvI1pLYBJ0+xIElN2GU7ENuug0PgA7zNf2T+W/aKyEc9e
+	EO3vGecnU0//zfHmbSmYbBkhye5RQ/9gIGJ69WY=
+X-Google-Smtp-Source: APXvYqweMq7KRGxycqOvjW8fXE3+V4kNLLme6mG9VMwUS8eIKlGnhtyMbl2ZmgLD1+exCTEjAp3ieMnQ6W6Qbj0Qa7Q=
+X-Received: by 2002:ae9:f010:: with SMTP id l16mr2100979qkg.212.1572470455909; 
+	Wed, 30 Oct 2019 14:20:55 -0700 (PDT)
 MIME-Version: 1.0
-References: <1572422730-16094-1-git-send-email-akuster808@gmail.com>
-In-Reply-To: <1572422730-16094-1-git-send-email-akuster808@gmail.com>
+References: <d245fa1d-b237-ec80-2834-abcedf303422@gmail.com>
+In-Reply-To: <d245fa1d-b237-ec80-2834-abcedf303422@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Oct 2019 22:19:29 +0100
-Message-ID: <CAMKF1spBXxQX9=qOhuC-zCXvx5sdehTVE7fF+whjA59unBGEjA@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [zeus][PATCH] packagegroup-meta-multimedia: Remove libsquish from rdeps
+Date: Wed, 30 Oct 2019 22:20:29 +0100
+Message-ID: <CAMKF1sq-OsssCemdqqOr2L1k8iuZWZKJNcbw0kV1=kTUQ3bZZA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: LAYERSERIES_COMPAT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,37 +53,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2019 21:19:56 -0000
+X-List-Received-Date: Wed, 30 Oct 2019 21:20:55 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Thanks Armin, this patch is already in zeus
+On Wed, Oct 30, 2019 at 8:42 AM akuster808 <akuster808@gmail.com> wrote:
+>
+> Hello,
+>
+>  I noticed that the LAYERSERIES_COMPAT in meta-openembedded is set to
+> cover these three branches "thud warrior zeus".   Is there any
+> validation that the newer branches work against the older core branches ?
+>
 
-On Wed, Oct 30, 2019 at 9:05 AM Armin Kuster <akuster808@gmail.com> wrote:
+I think all except zeus should be removed from master branch.
+
+> - Armin
+> |
 >
-> From: Khem Raj <raj.khem@gmail.com>
->
-> libsquish builds a static library alone which is primarily used during
-> build only. There is no runtime component to it.
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb    | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-> index 365618d..cef45f9 100644
-> --- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-> +++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-> @@ -27,7 +27,7 @@ RDEPENDS_packagegroup-meta-multimedia = "\
->      fluidsynth cdparanoia vorbis-tools tremor caps libao libavc1394 \
->      opusfile gerbera libdvdcss webrtc-audio-processing \
->      rtmpdump libopenmpt schroedinger mpd mpc libmpdclient \
-> -    ncmpc libmpd libsquish dcadec libiec61883 \
-> +    ncmpc libmpd dcadec libiec61883 \
->      ${@bb.utils.contains("DISTRO_FEATURES", "pam", "", "", d)} \
->      ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna gst-fluendo-mpegdemux vlc", "", d)} \
->      ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vo-aacenc sox libde265 gst-openmax", "", d)} \
+> |
 > --
-> 2.7.4
->
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
