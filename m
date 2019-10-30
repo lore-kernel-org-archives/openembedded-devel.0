@@ -1,98 +1,47 @@
-Return-Path: <mns@gomspace.com>
-Received: from EUR01-VE1-obe.outbound.protection.outlook.com
-	(mail-eopbgr140129.outbound.protection.outlook.com [40.107.14.129])
-	by mail.openembedded.org (Postfix) with ESMTP id 56E2A7F9BD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BF3B7F96F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2019 13:42:30 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=C1/xtpGKoo4cZjl4PnViiNl5YRXUkXl5Z3WgSJILKvuU34+sh+imx8dJz6VIsWB9O+WgtMXVFLDfyemDD8fySIq6Ew1Awl29TMHxQy1E4qHx0Rb99aLH7QBcKsnWvG/DUMltbVxA4COQOgpT/4j4pMBHstVsIpox6a8ago664z4tB9x/PN/4eFC6/8Bqd56Xhkzem+e2S1yLAphJqAGAq0XS9gAOvwKCtGsZsgWedv6r3BpDjcEvjJZrDO5ez93vOC4l+z5hAExA5SfLNevdFpQgu9ObSPBlXMJ4u6y3SAYLVT3kxn8la/EFEPoJRyj+kgRmhM8ZK/5U4yBFbA8fNA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=HgqEKXJL9/ZcfFYQaJDrlBQWlyoQt4xSPmf8IP4vMAU=;
-	b=B9BcSNjDnyk9jABAsUSXLBO9lo5XRbfTIqhQHIdAeAQMfkvWBS9VqKTpcoH/P6MkdVO9foQVV7whkHP3ukY/eobhVTNf9sXScIyEnNFABLFm1Ql8c4IskPOflW2xqLKkWe321auQ+YejOZk5+lYv2/4kA9pmbhDQYcn81vKta8ypIOVXWyT7qrnfNDZL14ItebJZ48zSb5uK8P9sEXcrmJ+mooG0LKJ1jd6zTwp0sdYR88otyNEn8yxYZ8CMkYD027NiIU7Cvc/T+WbnQa6fv5dtkCpZ/EZKc/5Cw1hJoqWnZjjblI4swOxHNitxTGxxPKG0iG3DebfVP6/LeqC+Mg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=fail (sender ip is
-	79.171.149.172) smtp.rcpttodomain=lists.openembedded.org
-	smtp.mailfrom=gomspace.com;
-	dmarc=none action=none header.from=gomspace.com; 
-	dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gomspace.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=HgqEKXJL9/ZcfFYQaJDrlBQWlyoQt4xSPmf8IP4vMAU=;
-	b=ZupStx77eQno115pAEQrPr41kjOsFGhUpmNLcsBX3yXsdU7lfOA3S3ER8TuvisR9t8wMHsZ0vQgTERLkBV76MgUp2OqSm/RtMuItYzAMHGho6I08zkluUscNgBDXo4owIFBhvBu245Q7vgbGy/m+veIUHenn++fHLDu1eUMkfu4=
-Received: from VI1PR08CA0109.eurprd08.prod.outlook.com (2603:10a6:800:d4::11)
-	by DB6PR08MB2840.eurprd08.prod.outlook.com (2603:10a6:6:1d::31) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2387.20;
-	Wed, 30 Oct 2019 13:42:23 +0000
-Received: from DB5EUR01FT051.eop-EUR01.prod.protection.outlook.com
-	(2a01:111:f400:7e02::202) by VI1PR08CA0109.outlook.office365.com
-	(2603:10a6:800:d4::11) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.2408.17 via
-	Frontend Transport; Wed, 30 Oct 2019 13:42:23 +0000
-Authentication-Results: spf=fail (sender IP is 79.171.149.172)
-	smtp.mailfrom=gomspace.com; lists.openembedded.org;
-	dkim=none (message not
-	signed) header.d=none;lists.openembedded.org; dmarc=none action=none
-	header.from=gomspace.com;
-Received-SPF: Fail (protection.outlook.com: domain of gomspace.com does not
-	designate 79.171.149.172 as permitted sender)
-	receiver=protection.outlook.com; client-ip=79.171.149.172;
-	helo=gomspace.com; 
-Received: from gomspace.com (79.171.149.172) by
-	DB5EUR01FT051.mail.protection.outlook.com (10.152.5.6) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
-	15.20.2387.20 via Frontend Transport; Wed, 30 Oct 2019 13:42:22 +0000
-Received: from Ex01.gomspace.lan (10.0.1.60) by Ex01.gomspace.lan (10.0.1.60)
-	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.1466.3;
-	Wed, 30 Oct 2019 14:42:22 +0100
-Received: from Ex01.gomspace.lan ([fe80::21fc:471c:6190:5f20]) by
-	Ex01.gomspace.lan ([fe80::21fc:471c:6190:5f20%4]) with mapi id
-	15.01.1466.003; Wed, 30 Oct 2019 14:42:22 +0100
-From: Martin Siegumfeldt <mns@gomspace.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH v2] libiio: Conditionally inherit
-	distutils3-base
-Thread-Index: AQHVjkKSZ/PXJ/kysEeR9AR2Qt5dSKdyEf6AgADeRS0=
-Date: Wed, 30 Oct 2019 13:42:22 +0000
-Message-ID: <e807bfbc855d425eae5ef3444940fae7@gomspace.com>
-References: <20191029102000.11329-1-mns@gomspace.com>,
-	<CAMKF1spaJvH1AS15KK1MUwD7HM-UKiGtb1oB9eRRBe-t9kxHyg@mail.gmail.com>
-In-Reply-To: <CAMKF1spaJvH1AS15KK1MUwD7HM-UKiGtb1oB9eRRBe-t9kxHyg@mail.gmail.com>
-Accept-Language: en-US, da-DK
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.0.8.211]
+	Wed, 30 Oct 2019 21:18:15 +0000 (UTC)
+Received: by mail-qt1-f179.google.com with SMTP id e14so5404652qto.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Oct 2019 14:18:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=J2XI/PnIFsKvkQgBLZef2Bpbp+Rp77OommhxGJRuzJk=;
+	b=T7SiZ9wDF0399g9VjpYWUFqPDdOiAbUoG5kgbFNDtCpqC32xmHST8R09BBF3LP6TAR
+	Ja4gzJIq73keS0Ro3fGo6eWfzp3cp34mfcdy1Ij8PuPDDDF3+VnR876xYb2487oxiLqv
+	TAhF8A3HSOeBfRHQ4rtpT8czc5PXcMCkrIRyZi+Hb914aZZv/Yk/yQoV0gxvANvnZqcb
+	pxo98Y04Ek762/+56CQA1cUsRnRWEutAn4EHeCXH0pUxYbF333JXi24S/482jZyqTHfO
+	3lzZa8sB5Yhb9Qyh+XNnlh6qAzvhjCcDtfSJd6YC8//atF5QUKKn7st0qOVq6RpdA1+r
+	81JA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=J2XI/PnIFsKvkQgBLZef2Bpbp+Rp77OommhxGJRuzJk=;
+	b=qiDTdJ9DMSeToeBySXUaczdmk64R9iDhhV5O442kzP+fh9GSUQ76GLdrlhMBVwAL8c
+	WjuyfCDTWRxBr3YYh2q5ai8lCbiTXFwMdyyVqRCZ5B2M/ecovVb4Batr4Z0r/5+5PnmT
+	jDEaYL9BfMF6iO0fqA7S67Aw28ictVDOOV6P5dPgKcCsmYQ2K8jouSQh967lhH6dYxaJ
+	0fw0+EvAQeLzTSCONbIVOgjHnxE7MVYdZEU4ZbvhFiPCokB3eDiCjtKM0NwfvH6Hd6v3
+	O7JSd29aGZ4IQHrYHK4zCxP4giRNqPiSDWwFa6dhMvgo5vnX2Z+jOgskOiAnanJ40GJE
+	kY0A==
+X-Gm-Message-State: APjAAAWoxamc0wYbBGZjotL+yu4SfQjJbJkA/AaIPDVdMcqWdAFnKmj1
+	6FShVvRACp7pwIIxQF3AYOX+zEmK6Jr4GQ50WIw=
+X-Google-Smtp-Source: APXvYqzE99UufXS18tdcfnM/+vlUkPWUL/sncteA71CJJOCBjV1p6zPNeMqntE8VP5StmaVHWm1p4ZL5wvqAIvR6H1M=
+X-Received: by 2002:ac8:c86:: with SMTP id n6mr2236310qti.80.1572470295189;
+	Wed, 30 Oct 2019 14:18:15 -0700 (PDT)
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:79.171.149.172; IPV:CAL; CTRY:DK; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10019020)(396003)(39840400004)(376002)(136003)(346002)(1110001)(339900001)(189003)(199004)(108616005)(105606002)(14454004)(3846002)(2906002)(102836004)(508600001)(24736004)(21086003)(14444005)(6116002)(33026002)(6916009)(356004)(6306002)(47776003)(966005)(305945005)(26826003)(4326008)(316002)(486006)(7736002)(53546011)(336012)(229853002)(23756003)(76176011)(40036005)(6246003)(5660300002)(36756003)(81156014)(81166006)(8936002)(8676002)(53416004)(446003)(126002)(76130400001)(70206006)(86362001)(50466002)(26005)(2616005)(70586007)(11346002)(476003)(8746002)(186003);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:DB6PR08MB2840; H:gomspace.com;
-	FPR:; SPF:Fail; LANG:en; PTR:InfoDomainNonexistent; MX:1; A:1; 
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: eb0a9a6a-8cbb-4bec-4c71-08d75d3efe22
-X-MS-TrafficTypeDiagnostic: DB6PR08MB2840:
-X-MS-Exchange-PUrlCount: 1
-X-Microsoft-Antispam-PRVS: <DB6PR08MB2840EF124C8BEAD6D76E2820C4600@DB6PR08MB2840.eurprd08.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:632;
-X-Forefront-PRVS: 02065A9E77
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: YyXImjKShBfrUKhTMmfsRm7RzyBJi+vrjLcszkhKHv30cFeY0mDVYdqCcaHnVCZnlopKwbxjidbuMQXW/tMKU4eti4ajc2tCzGZhgZSwF7sKFP7iITqJq/9PIeR98yOk1CWtH21EdFPEq53iolLrMvaLZeI4DnyDoPr6oUs3OcxMSh/41w5vLqIj6EKMAFIGVT8IFa/yZOZCY77vP+3UA9kr7Qaa5Tyrq3Gc67sIAFKB0gqU/PE5NbQlrRgA/RczBjj/BMyUkHdqkUw2lyTSvSE+w98ZZJQERFDgY1eK9/DDeCf38FNetvJwk3Vc+XlSxRwVPuNsCSWPDDg/yxR4w1HBcFWbBxSWzetfrg0i4pjOp3X60a2zFwAbOA0ouNJ9noE79isMJz3tSBilFEStyotKGw3c1SQdyC9Ynd6uxRWij5ud5AxtRzYSVLVlpC0lr973ZVV/vXBpcZ6ClfGni1gMLgj6A5KVzknLl5hdhjw=
-X-OriginatorOrg: gomspace.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Oct 2019 13:42:22.8400 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: eb0a9a6a-8cbb-4bec-4c71-08d75d3efe22
-X-MS-Exchange-CrossTenant-Id: 91ed1e54-6d8b-4599-84d8-65fe75fda3d1
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=91ed1e54-6d8b-4599-84d8-65fe75fda3d1;
-	Ip=[79.171.149.172]; Helo=[gomspace.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR08MB2840
+References: <1572422790-16185-1-git-send-email-akuster808@gmail.com>
+In-Reply-To: <1572422790-16185-1-git-send-email-akuster808@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 30 Oct 2019 22:17:47 +0100
+Message-ID: <CAMKF1spD-K-14w90zVqbHf17z=6PDj2P460RjhLH_+xOQnT4Sg@mail.gmail.com>
+To: Armin Kuster <akuster808@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] libiio: Conditionally inherit distutils3-base
+Subject: Re: [zeus][PATCH] README: updated Maintainers list for Zeus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -105,80 +54,447 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2019 13:42:30 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Wed, 30 Oct 2019 21:18:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-_____________________________________
-From: Khem Raj <raj.khem@gmail.com>
-Sent: Tuesday, October 29, 2019 10:27 PM
-To: Martin Siegumfeldt
-Cc: openembeded-devel
-Subject: Re: [oe] [meta-oe][PATCH v2] libiio: Conditionally inherit distuti=
-ls3-base
+Thanks Armin
 
-On Tue, Oct 29, 2019 at 11:21 AM Martin Siegumfeldt <mns@gomspace.com> wrot=
-e:
+Applied
+
+On Wed, Oct 30, 2019 at 9:06 AM Armin Kuster <akuster808@gmail.com> wrote:
 >
->  * inherit only when libiio-python3 is build.
->
->  * also add PACKAGECONFIG variant that allows python bindings to be
->    enabled and disabled. It adheres to the current CMake logic and
->    defaults to an 'out-out' approach.
->
-> Signed-off-by: Martin Siegumfeldt <mns@gomspace.com>
+> Signed-off-by: Armin Kuster <akuster808@gmail.com>
 > ---
->  meta-oe/recipes-support/libiio/libiio_git.bb | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
+>  README                      |  2 +-
+>  meta-filesystems/README     | 10 +++++-----
+>  meta-gnome/README           | 10 +++++-----
+>  meta-initramfs/README       |  8 ++++----
+>  meta-multimedia/README      | 10 +++++-----
+>  meta-networking/MAINTAINERS | 32 +++-----------------------------
+>  meta-networking/README      |  6 +++---
+>  meta-oe/README              |  8 ++++----
+>  meta-perl/README            | 10 ++++------
+>  meta-python/README          | 12 +++++-------
+>  meta-webserver/README       |  8 ++++----
+>  meta-xfce/README            | 10 +++++-----
+>  12 files changed, 48 insertions(+), 78 deletions(-)
 >
-> diff --git a/meta-oe/recipes-support/libiio/libiio_git.bb b/meta-oe/recip=
-es-support/libiio/libiio_git.bb
-> index e6e0eaef8..ec3a39de1 100644
-> --- a/meta-oe/recipes-support/libiio/libiio_git.bb
-> +++ b/meta-oe/recipes-support/libiio/libiio_git.bb
-> @@ -12,7 +12,7 @@ SRC_URI =3D "git://github.com/analogdevicesinc/libiio.g=
-it;protocol=3Dhttps"
+> diff --git a/README b/README
+> index 7318f09..d0b5b91 100644
+> --- a/README
+> +++ b/README
+> @@ -1,6 +1,6 @@
+>  Collection of layers for the OE-core universe
 >
->  S =3D "${WORKDIR}/git"
+> -Main layer maintainer: Khem Raj <raj.khem@gmail.com>
+> +zeus maintainer: Armin Kuster  <akuster808@gmail.com>
 >
-> -inherit cmake python3native systemd distutils3-base
-> +inherit cmake python3native systemd
+>  This repository is a collection of layers to suppliment OE-Core
+>  with additional packages, Each layer have designated maintainer
+> diff --git a/meta-filesystems/README b/meta-filesystems/README
+> index edcf8bf..7d1945c 100644
+> --- a/meta-filesystems/README
+> +++ b/meta-filesystems/README
+> @@ -11,26 +11,26 @@ This layer depends on:
 >
->  DEPENDS =3D " \
->      flex-native bison-native libaio \
-> @@ -25,10 +25,13 @@ EXTRA_OECMAKE =3D " \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '-DWITH_SYSTEMD=
-=3DON -DSYSTEMD_UNIT_INSTALL_DIR=3D${systemd_system_unitdir}', '', d)} \
->  "
+>    URI: git://git.openembedded.org/openembedded-core
+>    layers: meta
+> -  branch: master
+> +  branch: zeus
 >
-> -PACKAGECONFIG ??=3D "USB_BACKEND NETWORK_BACKEND"
-> +PACKAGECONFIG ??=3D "USB_BACKEND NETWORK_BACKEND PYTHON_BINDINGS"
-
-this change is not needed.
-
+>    URI: git://git.openembedded.org/meta-openembedded
+>    layers: meta-oe
+> -  branch: master
+> +  branch: zeus
 >
->  PACKAGECONFIG[USB_BACKEND] =3D "-DWITH_USB_BACKEND=3DON,-DWITH_USB_BACKE=
-ND=3DOFF,libusb1,libxml2"
->  PACKAGECONFIG[NETWORK_BACKEND] =3D "-DWITH_NETWORK_BACKEND=3DON,-DWITH_N=
-ETWORK_BACKEND=3DOFF,libxml2"
-> +PACKAGECONFIG[PYTHON_BINDINGS] =3D "-DPYTHON_BINDINGS=3DON,-DPYTHON_BIND=
-INGS=3DOFF"
-
-this should be
-PACKAGECONFIG[libiio-python3] =3D "-DPYTHON_BINDINGS=3DON,-DPYTHON_BINDINGS=
-=3DOFF"
-
-Ok, patch updated and resent - hopefully we are closing in :)
-
-> +
-> +inherit ${@bb.utils.contains('PACKAGECONFIG', 'libiio-python3', 'distuti=
-ls3-base', '', d)}
+>  Patches
+>  =3D=3D=3D=3D=3D=3D=3D
 >
->  PACKAGES =3D+ "${PN}-iiod ${PN}-tests ${PN}-${PYTHON_PN}"
+>  Please submit any patches against the filesystems layer to the
+>  OpenEmbedded development mailing list (openembedded-devel@lists.openembe=
+dded.org)
+> -with '[meta-filesystems]' in the subject.
+> +with '[meta-filesystems][zeus]' in the subject.
 >
+> -Layer maintainer: Khem Raj <raj.khem@gmail.com>
+> +zeus maintainer: Armin Kuster <akuster808@gmail.com>
+>
+>  When sending single patches, please use something like:
+>
+>     git send-email -1 -M \
+>          --to openembedded-devel@lists.openembedded.org \
+> -        --subject-prefix=3Dmeta-filesystems][PATCH
+> +        --subject-prefix=3Dmeta-filesystems][zeus][PATCH
+>
+>
+>  Table of Contents
+> diff --git a/meta-gnome/README b/meta-gnome/README
+> index 3c5b4c5..cffd93a 100644
+> --- a/meta-gnome/README
+> +++ b/meta-gnome/README
+> @@ -3,16 +3,16 @@ Dependencies
+>  This layer depends on:
+>
+>  URI: git://github.com/openembedded/oe-core.git
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>  URI: git://github.com/openembedded/meta-oe.git
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+> -Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-gnome]' in the subject'
+> +Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-gnome][zeus]' in the subject'
+>
+>  When sending single patches, please using something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-gnome][PATCH'
+> +'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-gnome][zeus][PATCH'
+>
+> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> +zeus maintainer: Armin Kuster <akuster808@gmail.com>
+> diff --git a/meta-initramfs/README b/meta-initramfs/README
+> index 79244d4..f786d22 100644
+> --- a/meta-initramfs/README
+> +++ b/meta-initramfs/README
+> @@ -12,7 +12,7 @@ Dependencies
+>  This layer depends on:
+>
+>  URI: git://github.com/openembedded/oe-core.git
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>
+> @@ -20,12 +20,12 @@ Maintenance
+>  -----------
+>
+>  Send patches / pull requests to openembedded-devel@lists.openembedded.or=
+g
+> -with '[meta-initramfs]' in the subject.
+> +with '[meta-initramfs][zeus]' in the subject.
+>
+>  When sending single patches, please using something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-initramfs][PATCH'
+> +'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-initramfs][zeus][PATCH'
+>
+> -Interm layer maintainer: Khem Raj <raj.khem@gmail.com>
+> +zeus maintainer: Armin Kuster <akuster808@gmail.com>
+>
+>
+>  License
+> diff --git a/meta-multimedia/README b/meta-multimedia/README
+> index 20f4fb8..968079f 100644
+> --- a/meta-multimedia/README
+> +++ b/meta-multimedia/README
+> @@ -1,19 +1,19 @@
+>  This layer depends on:
+>
+>  URI: git://github.com/openembedded/oe-core.git
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>  URI: git://github.com/openembedded/meta-oe.git
+>  layers: meta-oe
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+> -Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-multimedia]' in the subject'
+> +Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-multimedia][zeus]' in the subject'
+>
+>  When sending single patches, please use something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-multimedia][PATCH
+> +'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-multimedia][zeus][PATCH
+>
+>  You are encouraged to fork the mirror on github https://github.com/opene=
+mbedded/meta-oe/ to share your patches, this is preferred for patch sets co=
+nsisting of more than one patch. Other services like gitorious, repo.or.cz =
+or self hosted setups are of course accepted as well, 'git fetch <remote>' =
+works the same on all of them. We recommend github because it is free, easy=
+ to use, has been proven to be reliable and has a really good web GUI.
+>
+> -Layer maintainer: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> +zeus maintainer: Armin Kuster <akuster808@gmail.com>
+> diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
+> index 5c4c4ce..1fcb636 100644
+> --- a/meta-networking/MAINTAINERS
+> +++ b/meta-networking/MAINTAINERS
+> @@ -2,38 +2,12 @@ This file contains a list of maintainers for the meta-n=
+etworking layer.
+>
+>  Please submit any patches against meta-networking to the OpenEmbedded
+>  development mailing list (openembedded-devel@lists.openembedded.org) wit=
+h
+> -'[meta-networking]' in the subject.
+> +'[meta-networking][zeus]' in the subject.
+>
+>  When sending single patches, please use something like:
+>
+>     git send-email -1 -M \
+>          --to openembedded-devel@lists.openembedded.org \
+> -        --subject-prefix=3Dmeta-networking][PATCH
+> +        --subject-prefix=3Dmeta-networking][zeus][PATCH
+>
+> -You may also contact the maintainers directly.
+> -
+> -Descriptions of section entries:
+> -
+> -        M: Mail patches to: FullName <address@domain>
+> -        F: Files and directories with wildcard patterns.
+> -           A trailing slash includes all files and subdirectory files.
+> -           F: recipes-devtools/    all files in and below recipes-devtoo=
+ls
+> -           F: recipes-selinux/*    all files in recipes-selinux, but not=
+ below
+> -           One pattern per line.  Multiple F: lines acceptable.
+> -
+> -Please keep this list in alphabetical order.
+> -
+> -Maintainers List (try to look for most precise areas first)
+> -
+> -COMMON
+> -M:      Khem Raj <raj.khem@gmail.com>
+> -M:      "Joe MacDonald (backup)" <joe@deserted.net>
+> -L:      openembedded-devel@lists.openembedded.org
+> -Q:      https://patchwork.openembedded.org/project/oe/
+> -S:      Maintained
+> -F:      conf
+> -F:      recipes-*
+> -
+> -NETKIT
+> -M:      Armin Kuster <akuster808@gmail.com>
+> -F:      recipes-netkit
+> +zeus Maintainer:      Armin Kuster <akuster808@gmail.com>
+> diff --git a/meta-networking/README b/meta-networking/README
+> index e1ba27d..41217dd 100644
+> --- a/meta-networking/README
+> +++ b/meta-networking/README
+> @@ -18,19 +18,19 @@ Dependencies
+>  This layer depends on:
+>
+>  URI: git://github.com/openembedded/openembedded-core.git
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>  For some recipes, the meta-oe layer is required:
+>
+>  URI: git://github.com/openembedded/meta-openembedded.git
+>  subdirectory: meta-oe
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>  URI: git://github.com/openembedded/meta-openembedded.git
+>  subdirectory: meta-python
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>  Maintenance
+> diff --git a/meta-oe/README b/meta-oe/README
+> index 347816b..623056e 100644
+> --- a/meta-oe/README
+> +++ b/meta-oe/README
+> @@ -4,7 +4,7 @@ meta-oe
+>  This layer depends on:
+>
+>  URI: git://github.com/openembedded/openembedded-core.git
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>  luajit recipe requires host compiler to be able to generate 32bit code w=
+hen target is 32bit
+> @@ -14,10 +14,10 @@ e.g. on archlinux based distributions install prerequ=
+isites like below
+>
+>  pacman -S lib32-gcc-libs lib32-glibc
+>
+> -Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-oe]' in the subject'
+> +Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-oe][zeus]' in the subject'
+>
+>  When sending single patches, please use something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-oe][PATCH'
+> +'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-oe][zeus][PATCH'
+>
+>  You are encouraged to fork the mirror on GitHub https://github.com/opene=
+mbedded/openembedded-core
+>  to share your patches, this is preferred for patch sets consisting of mo=
+re than one patch.
+> @@ -26,4 +26,4 @@ Other services like gitorious, repo.or.cz or self-hoste=
+d setups are of course ac
+>  'git fetch <remote>' works the same on all of them. We recommend GitHub =
+because it is free, easy
+>  to use, has been proven to be reliable and has a really good web GUI.
+>
+> -layer maintainer: Khem Raj <raj.khem@gmail.com>
+> +zeus maintainer: Armin Kuster <akuster808@gmail.com>
+> diff --git a/meta-perl/README b/meta-perl/README
+> index 67f2910..6f18466 100644
+> --- a/meta-perl/README
+> +++ b/meta-perl/README
+> @@ -52,7 +52,7 @@ Dependencies
+>  This layer depends on:
+>
+>    URI: git://git.openembedded.org/openembedded-core
+> -  branch: master
+> +  branch: zeus
+>    revision: HEAD
+>    prio: default
+>
+> @@ -75,14 +75,12 @@ Maintenance
+>  -----------
+>
+>  Send patches / pull requests to openembedded-devel@lists.openembedded.or=
+g with
+> -'[meta-perl]' in the subject.
+> +'[meta-perl][zeus]' in the subject.
+>
+>  When sending single patches, please using something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-perl][PATCH'
+> +'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-perl][zeus][PATCH'
+>
+> -Layer maintainers:
+> -    Hongxu Jia <hongxu.jia@windriver.com>
+> -    Tim "moto-timo" Orling <ticotimo@gmail.com>
+> +zeus maintainers: Armin kuster <akuster808@gmail.com>
+>
+>  License
+>  -------
+> diff --git a/meta-python/README b/meta-python/README
+> index 705b035..bd79192 100644
+> --- a/meta-python/README
+> +++ b/meta-python/README
+> @@ -13,12 +13,12 @@ The meta-python layer depends on:
+>
+>         URI: git://git.openembedded.org/openembedded-core
+>         layers: meta
+> -       branch: master
+> +       branch: zeus
+>         revision: HEAD
+>
+>         URI: git://git.openembedded.org/meta-openembedded
+>         layers: meta-oe
+> -       branch: master
+> +       branch: zeus
+>         revision: HEAD
+>
+>  Please follow the recommended setup procedures of your OE distribution.
+> @@ -35,15 +35,13 @@ comments and patch review. It is subscriber only, so =
+please register
+>  before posting.
+>
+>  Send pull requests to openembedded-devel@lists.openembedded.org with
+> -'[meta-python]' in the subject.
+> +'[meta-python][zeus]' in the subject.
+>
+>  When sending single patches, please use something like:
+> -'git send-email -M -1 --to=3Dopenembedded-devel@lists.openembedded.org -=
+-subject-prefix=3Dmeta-python][PATCH'
+> +'git send-email -M -1 --to=3Dopenembedded-devel@lists.openembedded.org -=
+-subject-prefix=3Dmeta-python][zeus][PATCH'
+>
+>  Maintenance
+>  -------------------------
+>
+> -Layer Maintainers:
+> -        Tim "moto-timo" Orling <TicoTimo@gmail.com>
+> -        Derek Straka <derek@asterius.io>
+> +zeus Maintainers: Armin Kuster <akuster808@gmail.com>
+>
+> diff --git a/meta-webserver/README b/meta-webserver/README
+> index 7b60630..b39cd23 100644
+> --- a/meta-webserver/README
+> +++ b/meta-webserver/README
+> @@ -13,14 +13,14 @@ This layer depends on:
+>
+>  URI: git://github.com/openembedded/oe-core.git
+>  subdirectory: meta
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>  For some recipes, the meta-oe layer is required:
+>
+>  URI: git://github.com/openembedded/meta-oe.git
+>  subdirectory: meta-oe
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>
+> @@ -52,9 +52,9 @@ Maintenance
+>  -----------
+>
+>  Send patches / pull requests to openembedded-devel@lists.openembedded.or=
+g
+> -with '[meta-webserver]' in the subject.
+> +with '[meta-webserver][zeus]' in the subject.
+>
+> -Layer maintainer: Derek Straka <derek@asterius.io>
+> +zeus Maintainer: Armin Kuster <akuster808@gmail.com>
+>
+>
+>  License
+> diff --git a/meta-xfce/README b/meta-xfce/README
+> index 70ad47a..b250307 100644
+> --- a/meta-xfce/README
+> +++ b/meta-xfce/README
+> @@ -1,11 +1,11 @@
+>  This layer depends on:
+>
+>  URI: git://github.com/openembedded/oe-core.git
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>
+>  URI: git://github.com/openembedded/meta-oe.git
+> -branch: master
+> +branch: zeus
+>  revision: HEAD
+>  meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this rep=
+ository.
+>
+> @@ -14,9 +14,9 @@ this to local.conf:
+>
+>  BBMASK =3D "meta-xfce/recipes-multimedia"
+>
+> -Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-xfce]' in the subject'
+> +Send pull requests to openembedded-devel@lists.openembedded.org with '[m=
+eta-xfce][zeus]' in the subject'
+>
+>  When sending single patches, please using something like:
+> -'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-xfce][PATCH'
+> +'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --s=
+ubject-prefix=3Dmeta-xfce][zeus][PATCH'
+>
+> -Layer maintainer: Kai Kang <kai.kang@windriver.com>
+> +zeus Maintainer: Armin Kuster <akuster808@gmail.com>
 > --
-> 2.17.1
+> 2.7.4
 >
 > --
 > _______________________________________________
