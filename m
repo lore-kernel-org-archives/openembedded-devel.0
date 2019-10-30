@@ -1,30 +1,48 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 56B467FBF9
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 287347F6CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2019 07:51:02 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id x9U7ovuV002380
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 30 Oct 2019 00:50:57 -0700 (PDT)
-Received: from [128.224.158.241] (128.224.158.241) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Wed, 30 Oct 2019 00:50:57 -0700
-To: Khem Raj <raj.khem@gmail.com>
-References: <1572261789-121779-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<9eeabeb7-0884-eab9-55a4-18a219615bd7@windriver.com>
-	<CAMKF1sp5SCXPWHSd4PsGBwOZsxnteyhQNpLuSY65NgOGOWettQ@mail.gmail.com>
-From: Yi Zhao <yi.zhao@windriver.com>
-Message-ID: <6f5adbf0-44a3-ea21-8bc0-63b6ed195a19@windriver.com>
-Date: Wed, 30 Oct 2019 15:50:54 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1sp5SCXPWHSd4PsGBwOZsxnteyhQNpLuSY65NgOGOWettQ@mail.gmail.com>
-X-Originating-IP: [128.224.158.241]
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] daq: upgrade 2.0.6 -> 2.2.2
+	Wed, 30 Oct 2019 08:05:34 +0000 (UTC)
+Received: by mail-pf1-f177.google.com with SMTP id c7so1009463pfo.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Oct 2019 01:05:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=D0K0Ecvh36wQZhIWyl2GuOQjap9i8zCuHkSU6JtyiR8=;
+	b=EmoLHVacEbKnbz4+vUDCM5K2r8NP9+Wn2plnpdCxkZivYS2ZoqNj/4ZA9aAGQx5G8y
+	W3ap15G2TJq/zDMFNAdWLqv/L3uMVBibz1t8iU7BYmVSksJS4HwqlZFZ18z6wqCUTSB1
+	H4zw4J3B3EFTpg+pZdz8Qta8KUgyhl3fGd5BlE4PUxSEkglvyGEaMz3Lzi/Nvbns0DlN
+	e3PhbUUlCpjVcv9z/Zh5ZxnhoNB9bQqi8pugmFtdxlmncR9F5OdClR+k6gR3e+7sHNNk
+	9bzwqD69qw4o7+IMCWJMOwINLuTs8a3ajMHlnJf4x7aRdJqyny3L6XnJ5qNygUqszMEh
+	k5uw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=D0K0Ecvh36wQZhIWyl2GuOQjap9i8zCuHkSU6JtyiR8=;
+	b=cMmnT6AOSD3sSKcWHUfMYT9X6aeUqa3hixkuXmS2N2ciNo3OypxHdCUDehgaD8/sl1
+	APahdxXHM0AaQTmCBq9FnX1Su3OottFQJGUg0HOPF9cDD8vvuyetsvM1N4CKKSHBqvlV
+	md2ENBIZ9OYhjvS8/Ao0piEu+wYGSQCP/kwoWofO3nW8xukWkXQeWgqXW1IVO/eiucsw
+	JdL+z39zEsDQN/0BEDzDDDQnhfm7f1+3XQZkL37AwwK5JWvXNjvmF1Lm3E01F16TDQqX
+	z4KcFnZV++7qDDOMqgLhPerngVfscxKm7eZ9H3mLEBdvtVp/YKLGAgFAshqONYx3xOF/
+	JgDQ==
+X-Gm-Message-State: APjAAAUcyWsi3wAZDvbzi4auvDIIOv02rYwBsfU7Dfclk+mS1qQrXIFx
+	bXESF8ywCq9vX0av51H8oGcpBGMC
+X-Google-Smtp-Source: APXvYqw2jg/lojzoxv3cAQJWNg5NdMM1O3eKUnQD+kpWYowm6aYtmQKBqx/VS1dTYdPv4hfs0z2WRQ==
+X-Received: by 2002:a17:90a:b118:: with SMTP id
+	z24mr11956342pjq.84.1572422734942; 
+	Wed, 30 Oct 2019 01:05:34 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com ([91.217.168.176])
+	by smtp.gmail.com with ESMTPSA id
+	g24sm1629137pfi.81.2019.10.30.01.05.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 30 Oct 2019 01:05:34 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 30 Oct 2019 09:05:30 +0100
+Message-Id: <1572422730-16094-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [zeus][PATCH] packagegroup-meta-multimedia: Remove libsquish from rdeps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,62 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2019 07:51:02 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 30 Oct 2019 08:05:35 -0000
 
+From: Khem Raj <raj.khem@gmail.com>
 
-On 10/28/19 1:56 PM, Khem Raj wrote:
-> On Mon, Oct 28, 2019 at 6:15 AM Yi Zhao <yi.zhao@windriver.com> wrote:
->> Hi Ruoqin,
->>
->>
->> Please don't update this recipe because the day 2.0.x is needed by snort
->> 2.x.
->>
->>
-> is there any way forward for snort.
+libsquish builds a static library alone which is primarily used during
+build only. There is no runtime component to it.
 
-Snort 3.0 which depends on daq 2.2.2 is still beta version: 
-https://snort.org/downloads
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+index 365618d..cef45f9 100644
+--- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -27,7 +27,7 @@ RDEPENDS_packagegroup-meta-multimedia = "\
+     fluidsynth cdparanoia vorbis-tools tremor caps libao libavc1394 \
+     opusfile gerbera libdvdcss webrtc-audio-processing \
+     rtmpdump libopenmpt schroedinger mpd mpc libmpdclient \
+-    ncmpc libmpd libsquish dcadec libiec61883 \
++    ncmpc libmpd dcadec libiec61883 \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "", "", d)} \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna gst-fluendo-mpegdemux vlc", "", d)} \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vo-aacenc sox libde265 gst-openmax", "", d)} \
+-- 
+2.7.4
 
-//Yi
-
-
->
->> //Yi
->>
->>
->> On 10/28/19 7:23 PM, Zheng Ruoqin wrote:
->>> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
->>> ---
->>>    .../recipes-connectivity/daq/{daq_2.0.6.bb => daq_2.2.2.bb}           | 4 ++--
->>>    1 file changed, 2 insertions(+), 2 deletions(-)
->>>    rename meta-networking/recipes-connectivity/daq/{daq_2.0.6.bb => daq_2.2.2.bb} (88%)
->>>
->>> diff --git a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb b/meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
->>> similarity index 88%
->>> rename from meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
->>> rename to meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
->>> index 42ffb17..29ac5c7 100644
->>> --- a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
->>> +++ b/meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
->>> @@ -25,8 +25,8 @@ EXTRA_OECONF = "--disable-nfq-module --disable-ipq-module --includedir=${include
->>>    PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
->>>    PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
->>>
->>> -SRC_URI[md5sum] = "2cd6da422a72c129c685fc4bb848c24c"
->>> -SRC_URI[sha256sum] = "b40e1d1273e08aaeaa86e69d4f28d535b7e53bdb3898adf539266b63137be7cb"
->>> +SRC_URI[md5sum] = "c61f60674a5f951f0c50faf33a611fee"
->>> +SRC_URI[sha256sum] = "7cd818cabb1ad35360e83076e54775f07165ee71407dc672d147e27d3cd37f7b"
->>>
->>>    inherit autotools
->>>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
