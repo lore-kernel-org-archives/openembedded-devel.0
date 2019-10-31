@@ -1,36 +1,32 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 62E287F95B
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 19EDD7F76B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Oct 2019 21:52:38 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 473Md16bP7z4D;
-	Wed, 30 Oct 2019 22:52:37 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572472358;
-	bh=znD4So4VDVGKxi7ROGeOEXs0OmhFrufmIfJ+W3m4HZg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=NUGcDOf1PbPGtgYyciJHoj0j8ZFzbAqnt/qKVViyHseCh32jKMkR99w67uwatzxku
-	NwiTBDqcwlGEE/p3rwTj4h9TY6hJ+vSIcIPyiGIey8s9ltWhX24xQZlxfYSvC6/eer
-	8K8SoKDIuefSB8w192XKEVQYpLECkBw7FXwML/4BCaQwEEXLXb0SA/qUUrVDaFc2B9
-	PZieB9LWf7JyNcRmCoAy9K6Yjmj5yLiSWyuUabUpj448IJ8+I7lqDGBHD7DzdklOxA
-	Mie9+d5ctidQLLHtxcmX0PCyugk1bE6Yygkk550uD1LqEVKhc0jjFqoCbnZzGZUUQi
-	99RoalJha0DXZ1t/cPsjgxTR13LBZCqXgpbQCDAMX6LhqoPGOMR+0uHue2bKS8MT/R
-	ZuSVdv9MVHV/BB9h2gWyHKU3D5Zm5BX8VGOQswI6CzQ1fN4pNtsAA7q+v10qFw1HdI
-	mAlTd6IZujpuS3u1Si88WsnTm9kataYdXUOC2PSG5tpXi7T8zojXw95iGyYhDWjKNy
-	wcrv9C5ExQxs7blL++D+3aENloz+mB8oTLy502JSVlrrK8+kte2r5dUOFkxQ2FUxSl
-	ylvaR/IgrGjnzwpSK5kCOMTJFX85arusxFoC+C2Wr/vkzGXSVcBKzomjf6mAbyq79O
-	FCS6t5BShuHs9sKInhEv5J/A=
-Date: Wed, 30 Oct 2019 23:52:35 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Message-ID: <20191030215235.GA7373@localhost>
-References: <1572468965-36724-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	Thu, 31 Oct 2019 01:15:35 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,248,1569254400"; d="scan'208";a="77711805"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 31 Oct 2019 09:15:34 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id CA7E54CE1510
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Oct 2019 09:07:33 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 31 Oct 2019 09:15:32 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 31 Oct 2019 17:09:50 +0800
+Message-ID: <1572512990-46235-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-In-Reply-To: <1572468965-36724-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] libowfat: upgrade 0.31 -> 0.32
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: CA7E54CE1510.A72DA
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking][PATCH v2] libowfat: upgrade 0.31 -> 0.32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,22 +39,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Oct 2019 21:52:38 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 31 Oct 2019 01:15:36 -0000
+Content-Type: text/plain
 
-This breaks the build of ncp:
-| ncp.c:8:10: fatal error: dns.h: No such file or directory
-|     8 | #include "dns.h"
-|       |          ^~~~~~~
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ .../recipes-support/ncp/{libowfat_0.31.bb => libowfat_0.32.bb}      | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/ncp/{libowfat_0.31.bb => libowfat_0.32.bb} (80%)
 
-The reason is the following upstream change:
-  move headers to <libowfat/> upon install
-
-The recipe was already doing this, so now we got 
-the header files in /usr/include/libowfat/libowfat
-
-Fix in the libowfat recipe:
+diff --git a/meta-networking/recipes-support/ncp/libowfat_0.31.bb b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+similarity index 80%
+rename from meta-networking/recipes-support/ncp/libowfat_0.31.bb
+rename to meta-networking/recipes-support/ncp/libowfat_0.32.bb
+index 4b072f7..a5e2c21 100644
+--- a/meta-networking/recipes-support/ncp/libowfat_0.31.bb
++++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
+@@ -7,8 +7,8 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ 
+ SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "120798fab86cfd72dc6b12284d248dd0"
+-SRC_URI[sha256sum] = "d1e4ac1cfccbb7dc51d77d96398e6302d229ba7538158826c84cb4254c7e8a12"
++SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
++SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
+ 
+ EXTRA_OEMAKE = "\
+     DIET= \
+@@ -19,7 +19,7 @@ EXTRA_OEMAKE = "\
  do_install() {
      make install \
          DESTDIR=${D} \
@@ -67,17 +75,9 @@ Fix in the libowfat recipe:
          LIBDIR=${libdir} \
          MAN3DIR=${mandir}/man3
  }
-:
-
-
-cu
-Adrian
-
 -- 
+2.7.4
 
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+
 
 
