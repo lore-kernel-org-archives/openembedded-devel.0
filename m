@@ -1,30 +1,35 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id BAD627F896
+	by mail.openembedded.org (Postfix) with ESMTP id B4B387F896
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 07:18:00 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,250,1569254400"; d="scan'208";a="77730872"
+	Thu, 31 Oct 2019 07:20:01 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,250,1569254400"; d="scan'208";a="77731015"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Oct 2019 15:17:58 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 565614CE1511
+	by heian.cn.fujitsu.com with ESMTP; 31 Oct 2019 15:20:02 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id 04B4F4CE1511
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 15:09:55 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 31 Oct 2019 15:17:53 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Thu, 31 Oct 2019 15:12:03 +0800 (CST)
+Received: from G08CNEXJMPEKD02.g08.fujitsu.local (10.167.33.202) by
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 31 Oct 2019 15:20:02 +0800
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXJMPEKD02.g08.fujitsu.local (10.167.33.202) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 31 Oct 2019 15:20:02 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Oct 2019 15:18:03 +0800
-Message-ID: <20191031071803.21651-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Thu, 31 Oct 2019 23:14:21 +0800
+Message-ID: <1572534861-51039-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 565614CE1511.A643E
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+	G08CNEXJMPEKD02.g08.fujitsu.local (10.167.33.202)
+X-yoursite-MailScanner-ID: 04B4F4CE1511.A595D
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-javaobj-py3: upgrade 0.2.4 -> 0.3.0
+Subject: [meta-oe][PATCH] iozone3: upgrade 484 -> 487
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,50 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2019 07:18:01 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 31 Oct 2019 07:20:02 -0000
 Content-Type: text/plain
 
--License-Update: The old version of the license file was deleted in the new version, so choose another file containing the license information for verification.
+1) Update LIC_FILES_CHKSUM as line number has been changed.
 
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-javaobj-py3.inc  | 6 +++---
- ...hon-javaobj-py3_0.2.4.bb => python-javaobj-py3_0.3.0.bb} | 0
- ...n3-javaobj-py3_0.2.4.bb => python3-javaobj-py3_0.3.0.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-javaobj-py3_0.2.4.bb => python-javaobj-py3_0.3.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-javaobj-py3_0.2.4.bb => python3-javaobj-py3_0.3.0.bb} (100%)
+ .../recipes-benchmark/iozone3/{iozone3_484.bb => iozone3_487.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-benchmark/iozone3/{iozone3_484.bb => iozone3_487.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python-javaobj-py3.inc b/meta-python/recipes-devtools/python/python-javaobj-py3.inc
-index a0e802ca7..b10f00bba 100644
---- a/meta-python/recipes-devtools/python/python-javaobj-py3.inc
-+++ b/meta-python/recipes-devtools/python/python-javaobj-py3.inc
-@@ -5,10 +5,10 @@ DESCRIPTION = "python-javaobj is a python library that provides functions\
-  representation is a standard data interchange format in Java world."
- HOMEPAGE = "https://github.com/tcalmant/python-javaobj"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://javaobj.py;beginline=21;endline=33;md5=8b504419ce78f8133b21b4d4a89ef7e9"
-+LIC_FILES_CHKSUM = "file://setup.py;beginline=15;endline=27;md5=af9ce26ac2de1b7436eb08c9308b4a1e"
+diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_484.bb b/meta-oe/recipes-benchmark/iozone3/iozone3_487.bb
+similarity index 95%
+rename from meta-oe/recipes-benchmark/iozone3/iozone3_484.bb
+rename to meta-oe/recipes-benchmark/iozone3/iozone3_487.bb
+index f218b87..42864be 100644
+--- a/meta-oe/recipes-benchmark/iozone3/iozone3_484.bb
++++ b/meta-oe/recipes-benchmark/iozone3/iozone3_487.bb
+@@ -4,14 +4,14 @@ AUTHOR = "Don Capps <don.capps2@verizon.net>, William D. Norcott <wnorcott@us.or
+ SECTION = "console/tests"
+ LICENSE = "iozone3"
+ LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dcad0f9edea735b5f4b \
+-    file://iozone.c;beginline=269;endline=275;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
++    file://iozone.c;beginline=276;endline=282;md5=77f9ee51e45b57a7e7519c4fa0b4f00b \
+ "
+ SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
+     file://parallelism.patch \
+     file://copyright.txt \
+ "
+-SRC_URI[md5sum] = "aa6b88ab83793cb6809ca06949a6ab01"
+-SRC_URI[sha256sum] = "e816e6ae2f02003f2a6d19d47fcd9a50fdd8078da4f35fe3d4b9caf91c3d7216"
++SRC_URI[md5sum] = "2dbe035caf99c5367625352e158bb866"
++SRC_URI[sha256sum] = "2c488a7ccddd624fd557af16e71442c367b131d6178e1b4023bbd532bacdda59"
  
--SRC_URI[md5sum] = "f669bb8099380e3dd84db3d542aa5b68"
--SRC_URI[sha256sum] = "b8b0d310fd97e1c7914d7911ee9d3f4b3d84d2a674aa95a4b0da3d8f155fc1bb"
-+SRC_URI[md5sum] = "1c6189a0d9aef51d74bfc52cd2953991"
-+SRC_URI[sha256sum] = "a57469e4f0d0eeba7482ad9839595db6e99ca4ac6630a4c8064dda75a2182549"
+ UPSTREAM_CHECK_REGEX = "iozone3_(?P<pver>\d+).tar"
  
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-javaobj-py3_0.2.4.bb b/meta-python/recipes-devtools/python/python-javaobj-py3_0.3.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-javaobj-py3_0.2.4.bb
-rename to meta-python/recipes-devtools/python/python-javaobj-py3_0.3.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-javaobj-py3_0.2.4.bb b/meta-python/recipes-devtools/python/python3-javaobj-py3_0.3.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-javaobj-py3_0.2.4.bb
-rename to meta-python/recipes-devtools/python/python3-javaobj-py3_0.3.0.bb
 -- 
-2.20.1
+2.7.4
 
 
 
