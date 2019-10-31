@@ -1,105 +1,33 @@
-Return-Path: <Peter.Kolbus@garmin.com>
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
-	(mail-eopbgr770114.outbound.protection.outlook.com [40.107.77.114])
-	by mail.openembedded.org (Postfix) with ESMTP id AF5B77FA3F
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id A6F307F9BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 16:36:03 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=bRZoY0zN0zCJcw0uVrnlBzyXAFCBWuND9xQ0G4VPYtmpMH77/LB7tpCkWikoAHwJm5u2N9Eq4c1H3tUN+SJSI5pyILbfZ6f8xDxhp2BwWXbMSuIOSwW5kyDLT3pg2L5lgQvpyTHCyNKCquill0yauML45eVrN29/Mj2CcoIAibOUnVk6gbjvz43lQ6aFedK9wifOm1UtYps+zwz/x2lA5/CNyTqcZpS3yFnWdaDctEevASWxkoW5/ArmcdiJhZryOYqmZAK+YXCDC3NKTJt+AiWwPPbfJRW6+HFyEkLSRA16m+SLj5aDoa/UJFZZn7Cy4sv+cS91Iz6tSyrZDwS52g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=/Te+A7giWftjnOJpMFkeHQjtwN1A9lWXdM6Yu70EunQ=;
-	b=DfvOCQyMKCB+cFLh9MyjaVlioSPwBhI7Hor6+KbMmiOIi3lXRDTX/0AlesDJrNCczdcPd5sLgUEn8FcNonQW2tn6MUpHjUSdN4KNMT339G0slqZgJMQtGwkkWPpjc2FyLuQuS/Pug/dXfq+BGE9dK3KCIx1KXOZpFym58GDP/bVOymWNIqyL71bsGFFmzBJ/aTfY316ICEKLVDIcT+faQ4Y3cIIUBn6j8kH2F0T9zRIecnYjDk6HEYSUGxUIaGKqGxtgDH4QheTdhuok85MF7e74vaJwD1R3fOVwSTFefptzPtKOJIiDSE6Bfb7XioVOJd+AM0Nse0JYiw8zCH6tWg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
-	204.77.163.244) smtp.rcpttodomain=lists.openembedded.org
-	smtp.mailfrom=garmin.com;
-	dmarc=pass (p=none sp=none pct=100) action=none
-	header.from=garmin.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garmin.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=/Te+A7giWftjnOJpMFkeHQjtwN1A9lWXdM6Yu70EunQ=;
-	b=Gzx44nsaRyrhZlW/eUXZXNGyNK1FesF/VcDA0RvrwDxpEYdsGtCG8v0eP5HUKYv6hq1XKxvz7TqBm45GTAa4NoZ8TXKG8zac9WqD/T7Jbc8B6RcRVu9y7RjGb/v1iFPBoguAszDOn/ALQnNuDAQ+zJT0i4XOPINIe7iJQC1lfzs=
-Received: from SN6PR04CA0101.namprd04.prod.outlook.com (2603:10b6:805:f2::42)
-	by DM6PR04MB4937.namprd04.prod.outlook.com (2603:10b6:5:15::14) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2387.22;
-	Thu, 31 Oct 2019 16:36:02 +0000
-Received: from BN3NAM01FT010.eop-nam01.prod.protection.outlook.com
-	(2a01:111:f400:7e41::206) by SN6PR04CA0101.outlook.office365.com
-	(2603:10b6:805:f2::42) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2408.20 via
-	Frontend Transport; Thu, 31 Oct 2019 16:36:02 +0000
-Authentication-Results: spf=pass (sender IP is 204.77.163.244)
-	smtp.mailfrom=garmin.com; lists.openembedded.org; dkim=none (message not
-	signed) header.d=none;lists.openembedded.org; dmarc=pass action=none
-	header.from=garmin.com;
-Received-SPF: Pass (protection.outlook.com: domain of garmin.com designates
-	204.77.163.244 as permitted sender) receiver=protection.outlook.com;
-	client-ip=204.77.163.244; helo=edgetransport.garmin.com;
-Received: from edgetransport.garmin.com (204.77.163.244) by
-	BN3NAM01FT010.mail.protection.outlook.com (10.152.66.245) with
-	Microsoft SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2387.28 via Frontend Transport; Thu, 31 Oct 2019 16:36:01 +0000
-Received: from OLAWPA-EXMB3.ad.garmin.com (10.5.144.15) by
-	olawpa-edge1.garmin.com (10.60.4.227) with Microsoft SMTP Server
-	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
-	15.1.1466.3; Thu, 31 Oct 2019 11:35:59 -0500
-Received: from OLAWPA-EXMB10.ad.garmin.com (10.5.144.12) by
-	OLAWPA-EXMB3.ad.garmin.com (10.5.144.15) with Microsoft SMTP Server
-	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
-	15.1.1779.2; Thu, 31 Oct 2019 11:35:59 -0500
-Received: from ola-ght37x2-bionic.ad.garmin.com (10.5.84.15) by
-	smtp.garmin.com (10.5.144.12) with Microsoft SMTP Server id 15.1.1779.2
-	via Frontend Transport; Thu, 31 Oct 2019 11:35:59 -0500
-From: Peter Kolbus <peter.kolbus@garmin.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Oct 2019 11:33:59 -0500
-Message-ID: <20191031163358.6087-3-peter.kolbus@garmin.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191031163358.6087-1-peter.kolbus@garmin.com>
-References: <20191031163358.6087-1-peter.kolbus@garmin.com>
-MIME-Version: 1.0
-X-TM-AS-Product-Ver: SMEX-12.5.0.1300-8.5.1010-25014.000
-X-TM-AS-Result: No-0.993000-8.000000-10
-X-TMASE-MatchedRID: Uj7tCJGADpxKzaNiN7Y92oY5QY8KaJtTpFneQuQ5zuJBL//DKiVczvSl
-	q/vsgUCj1QEUsfUtk/ygxATYtZXsTbZDMuZIpa/+A9lly13c/gHaCn4DqCiXNrZk7gsuflVK+8T
-	WQtoYdid9LQinZ4QefPcjNeVeWlqY+gtHj7OwNO0Q+z869mqTM19bqZ4J9RsnOGWmrLeRyKkd55
-	4KOYp2DsRzTq6Ox6W8cGBnuSJR7eY8gNNPfV9D9wUM1Ffl54AypMm+3vXm7rJC64ThGKG5gJv/R
-	pZfki/udbOeWh4Hcdo9DPAht+JHkAwP0tMr7k2fLRzsXBnGKF6eqD9WtJkSIw==
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--0.993000-8.000000
-X-TMASE-Version: SMEX-12.5.0.1300-8.5.1010-25014.000
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-HT: Tenant
-X-Forefront-Antispam-Report: CIP:204.77.163.244; IPV:CAL; SCL:-1; CTRY:US;
-	EFV:NLI; SFV:NSPM;
-	SFS:(10019020)(346002)(396003)(39860400002)(376002)(136003)(189003)(199004)(76130400001)(5660300002)(486006)(44832011)(2870700001)(36756003)(426003)(6916009)(11346002)(2616005)(476003)(446003)(126002)(316002)(336012)(107886003)(2906002)(1076003)(356004)(50466002)(48376002)(305945005)(50226002)(2351001)(86362001)(106002)(51416003)(70206006)(7636002)(4326008)(76176011)(478600001)(186003)(246002)(70586007)(26826003)(26005)(8676002)(54906003)(47776003)(8936002)(7696005);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:DM6PR04MB4937;
-	H:edgetransport.garmin.com; FPR:; SPF:Pass; LANG:en;
-	PTR:extedge.garmin.com; MX:1; A:1; 
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 207566d2-7714-4d12-7946-08d75e206a71
-X-MS-TrafficTypeDiagnostic: DM6PR04MB4937:
-X-Microsoft-Antispam-PRVS: <DM6PR04MB49376EF06E7E207FAD4306F5FF630@DM6PR04MB4937.namprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:152;
-X-Forefront-PRVS: 02070414A1
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: +t8QPEGDUAiAfdw5Jo6HYqGV4FfBvdpIecDkQg3aRd+4HsBMfiOlsXrjMzFsrI1LMvHONmEWQqsJZtGHNEOwtqzh+74IEFGq9EuPNhd9Sj+dLUQVTxM8vZkTRPxWkr7o0ttUeVt/NA+AbU2/jUwUHuU+lpl18JWue2OX1D9Wo4p5FprOi8QKRsN4B0aQxDeRxcH2C7qfs+bJmV/Sd0wfYlwQUXCQme+A7LGBxRsI9Zs1GF+MAO1nUlE4nG4kxKPfN3DD4A6HhwdDaW1boOqIgcCKTaB1gr653MaqUuAGPueP/rad0Eu4PIV9LYEer/L7qzQRuRO1ZUo98Ysnd/b780l8Yw6MLh24yhkNTg9jMGnNmNYtXxLU5o9DDpX6YVbAC2gxB05sRUXZiVhGUt62osz+jwkA0MofWE76DfYF0R71Z6FzM4HHQ90tsqTsBoNW
-X-OriginatorOrg: garmin.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Oct 2019 16:36:01.2773 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 207566d2-7714-4d12-7946-08d75e206a71
-X-MS-Exchange-CrossTenant-Id: 38d0d425-ba52-4c0a-a03e-2a65c8e82e2d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=38d0d425-ba52-4c0a-a03e-2a65c8e82e2d;
-	Ip=[204.77.163.244]; Helo=[edgetransport.garmin.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR04MB4937
-Cc: Daniela Plascencia <daniela.plascencia@linux.intel.com>
-Subject: [meta-python][morty][PATCH 2/2] python-setuptools-scm: add native to BBCLASSEXTEND
+	Thu, 31 Oct 2019 16:53:10 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 473rx11X5fz40
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Oct 2019 17:53:09 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1572540789;
+	bh=y8BvOuf8B+XNgrH0S5P593H0Zn5c0/j5gh6WdS3tLHM=;
+	h=From:To:Subject:Date:From;
+	b=RKcY6fDlQDmcRu+idpvPFQ/jtt+TZzoyJCuA5fzgr9RPJBXnC3fFXKYgJNmGzxma8
+	ybbCU1YmbkpUjnTS8qSKzPOsUrjUS6EPqXqcWBdp3vb3zTeQ2r4SVL7rINthuOMbS+
+	QFDJl6yFp0fGZ1IMalt0wXucAQJgkKaCDHKXG2gA1Ph/9k7VKffXwdkFwqRzR50pX7
+	xsmAWwIh65BgYHZ2Qxx88WScwPlBzhrtqtE0H/O3KFNiNpKU0FuzQyFZESD0wJ2AdM
+	6FuZEw+nErRzdHpkDK0nARrfloayRYTEyEBzQ0ELxZrACE0TzQDadzLHr0wdVSi++S
+	tLsCuBoOQjEqht40oiixxpL1BqhqduQwdKzjWDuN63ggFlutTGknsGzzrai5cn/qCH
+	CHuVY7nZi+SOyLhG/NZgg3BOzpG2SFXiMlRApTfF+vEOFs6xC01+S81tlEgw5HN55B
+	7rNDjVwzD8Kr9PbJJ5DVsDoxiVfqBHFzipHltkuKJq3oeCd6JW/o13XPPVsx21Bi8W
+	QFhpw2UGZj57WjnELceWMYoLjF/OrksSy1I0jcEHHVW6Reb6kMFXY9DLOoHWCcxzRF
+	cWL2uK/qV86dIRdMLiAjBeVwyuwzGmUSqgQIz01HJ7WjGfqTxXWazO0HKCoocXtp60
+	kOMDDxFHOOUwyQuzhKpmdMek=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 31 Oct 2019 18:53:08 +0200
+Message-Id: <20191031165308.24633-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][zeus][PATCH] gpsd: Backport a memory leak fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -112,43 +40,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2019 16:36:03 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 31 Oct 2019 16:53:11 -0000
 
-From: Daniela Plascencia <daniela.plascencia@linux.intel.com>
-
-Enables a native variant of python-setuptools-scm
-by adding BBCLASSEXTEND to the recipe.
-
-Signed-off-by: Daniela Plascencia <daniela.plascencia@linux.intel.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-
-(cherry picked from commit 3aac48c722fa836e04e95a495d758b8ee0d0cdda)
-
-Signed-off-by: Peter Kolbus <peter.kolbus@garmin.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python-setuptools-scm_1.15.0.bb | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ .../0001-gps_shm_close-Free-privdata.patch    | 37 +++++++++++++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb  |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb b/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb
-index 45204c98c..afbc83ea9 100644
---- a/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb
-+++ b/meta-python/recipes-devtools/python/python-setuptools-scm_1.15.0.bb
-@@ -6,8 +6,10 @@ SRC_URI[md5sum] = "b6916c78ed6253d6602444fad4279c5b"
- SRC_URI[sha256sum] = "daf12d05aa2155a46aa357453757ffdc47d87f839e62114f042bceac6a619e2f"
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+new file mode 100644
+index 000000000..9b3801580
+--- /dev/null
++++ b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+@@ -0,0 +1,37 @@
++From 2a4b3bcde0d73a3a4a6644d5f944ac9d16023ba9 Mon Sep 17 00:00:00 2001
++From: Adrian Bunk <bunk@stusta.de>
++Date: Mon, 21 Oct 2019 13:53:25 +0300
++Subject: gps_shm_close: Free privdata
++
++Previously every open/close cycle leaked privdata.
++
++Signed-off-by: Adrian Bunk <bunk@stusta.de>
++Signed-off-by: Gary E. Miller <gem@rellim.com>
++
++Upstream-Status: Backport
++---
++ libgps_shm.c | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
++
++diff --git a/libgps_shm.c b/libgps_shm.c
++index d93972bba..12bb3760b 100644
++--- a/libgps_shm.c
+++++ b/libgps_shm.c
++@@ -163,8 +163,12 @@ int gps_shm_read(struct gps_data_t *gpsdata)
++ 
++ void gps_shm_close(struct gps_data_t *gpsdata)
++ {
++-    if (PRIVATE(gpsdata) && PRIVATE(gpsdata)->shmseg != NULL)
++-	(void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
+++    if (PRIVATE(gpsdata)) {
+++        if (PRIVATE(gpsdata)->shmseg != NULL)
+++	    (void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
+++        free(PRIVATE(gpsdata));
+++        gpsdata->privdata = NULL;
+++    }
++ }
++ 
++ int gps_shm_mainloop(struct gps_data_t *gpsdata, int timeout,
++-- 
++2.20.1
++
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+index a28d59dce..054af4082 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+@@ -9,6 +9,7 @@ EXTRANATIVEPATH += "chrpath-native"
  
- PYPI_PACKAGE = "setuptools_scm"
--inherit pypi setuptools
- 
--RDEPENDS_${PN} = "python-py python-setuptools python-argparse python-debugger python-json"
-+RDEPENDS_${PN}_class-target = "python-py python-setuptools python-argparse python-debugger python-json"
-+RDEPENDS_${PN}_class-native = "python-setuptools-native"
- 
-+BBCLASSEXTEND =+ "native"
- 
-+inherit pypi setuptools
+ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
++    file://0001-gps_shm_close-Free-privdata.patch \
+ "
+ SRC_URI[md5sum] = "b3bf88706794eb8e5f2c2543bf7ba87b"
+ SRC_URI[sha256sum] = "27dd24d45b2ac69baab7933da2bf6ae5fb0be90130f67e753c110a3477155f39"
 -- 
-2.23.0
+2.17.1
 
 
