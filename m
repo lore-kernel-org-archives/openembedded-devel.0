@@ -1,30 +1,51 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7465E6C0B7
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 03D9A7F896
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 06:40:17 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,250,1569254400"; d="scan'208";a="77728106"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Oct 2019 14:40:17 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 179EB4CE1513
+	Thu, 31 Oct 2019 07:16:58 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id u184so5944900qkd.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 14:32:18 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 31 Oct 2019 14:40:16 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Oct 2019 14:40:29 +0800
-Message-ID: <20191031064029.19290-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Thu, 31 Oct 2019 00:17:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=0YUJcL/G4j37KoXTkc6Xr03i717DopwbmgUNL/vCJlE=;
+	b=SflLUhNwToLY4YMX5CLG1dnMkqTSHf+5TAXp+wBUHBC6uVdxBOhDkVa05S5Umc3h0i
+	eg985RqxePrmejyAmZHIN1ma/Nvg0Gd5/xjY3aEaCJaoDvkMGHvs1h6U3YIQt9CCM2Jm
+	UUHL03RxZLV5/P06BgJvsPERietPppakGaQwfgvRdGEfnpQw6d90xj+xXzTTti1xtKgE
+	B/S+1X8F78leaTucX8Qnwj8d9kLm6/NJS6x3GT9a0qTebh0MBHUas1XN4UlpykUEHyte
+	aQ5Dji+yqWcD6eOQpJYgxH+NPXF/mh4zDeafV7DIlMKABSaWUiYZNC+FYLrSEHEO7wYV
+	GAeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=0YUJcL/G4j37KoXTkc6Xr03i717DopwbmgUNL/vCJlE=;
+	b=RaIoWMY/wy2o2yEaNidk/y8Zl7z+8NCoOyS9YkpH2GLfeXeSfmvlJqOYTT9h6WZmPB
+	CK1nMHYMdrZGBFrs2ZSlcQkYO4OuUAyBf3iI0VnbtjzsqTT8IgOv9QeOx9cXtDr7Sg/8
+	N7keHZbseAR9oBnhphFibpTrU7oD4Xa2HK41Jd34H/CdYziEs+K7fiQSnuekDz0I7a5q
+	oMC+WzTwFKDqHujqAAJ/ouKtz7lE6yqu4i8ngZYdonIEYXbbw+H8/fyXY/8XOQhgSQ2R
+	vcss8o/N1hCQbpjuGWgUwYiK5wIqp7yI4TGB/QlI+TuZD98l1uY/cYDs8V3LGbfqxaWp
+	9UNw==
+X-Gm-Message-State: APjAAAVM9R8h6ww/BCQfwaonmbnpqm1daF32bDCBy41XwpLlD4Ewp6GR
+	ojWmh9fp/z1x6UZZFyYEMO4ZdEtBF4sYWYoGJdQ=
+X-Google-Smtp-Source: APXvYqzftEDE0BhJfkqF8aH+e0hpX4g1ceNVbKAy3nu+u3eSObvUHRM87xcbfQzEtW93oLsmacWGf8eTTyaCN7lCVms=
+X-Received: by 2002:a05:620a:20d2:: with SMTP id
+	f18mr4111067qka.474.1572506219232; 
+	Thu, 31 Oct 2019 00:16:59 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 179EB4CE1513.AB510
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-isort: upgrade 4.3.4 -> 4.3.21
+References: <1572261789-121779-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<9eeabeb7-0884-eab9-55a4-18a219615bd7@windriver.com>
+	<CAMKF1sp5SCXPWHSd4PsGBwOZsxnteyhQNpLuSY65NgOGOWettQ@mail.gmail.com>
+	<6f5adbf0-44a3-ea21-8bc0-63b6ed195a19@windriver.com>
+In-Reply-To: <6f5adbf0-44a3-ea21-8bc0-63b6ed195a19@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 31 Oct 2019 08:16:48 +0100
+Message-ID: <CAMKF1spM+W-vKm1UO=N6vdsEuRVKV5uCsoizncp4vrQKoedv6w@mail.gmail.com>
+To: Yi Zhao <yi.zhao@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] daq: upgrade 2.0.6 -> 2.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,45 +58,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2019 06:40:18 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 31 Oct 2019 07:16:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- meta-python/recipes-devtools/python/python-isort.inc          | 4 ++--
- .../python/{python-isort_4.3.4.bb => python-isort_4.3.21.bb}  | 0
- .../{python3-isort_4.3.4.bb => python3-isort_4.3.21.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-isort_4.3.4.bb => python-isort_4.3.21.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-isort_4.3.4.bb => python3-isort_4.3.21.bb} (100%)
+Thanks I think I will rely on you to monitor it and update both recipes
+together when 3.0 is out
 
-diff --git a/meta-python/recipes-devtools/python/python-isort.inc b/meta-python/recipes-devtools/python/python-isort.inc
-index 359b18012..324d4cf10 100644
---- a/meta-python/recipes-devtools/python/python-isort.inc
-+++ b/meta-python/recipes-devtools/python/python-isort.inc
-@@ -4,8 +4,8 @@ LICENSE = "MIT"
- SECTION = "devel/python"
- LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
- 
--SRC_URI[md5sum] = "fb554e9c8f9aa76e333a03d470a5cf52"
--SRC_URI[sha256sum] = "b9c40e9750f3d77e6e4d441d8b0266cf555e7cdabdcff33c4fd06366ca761ef8"
-+SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
-+SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-isort_4.3.4.bb b/meta-python/recipes-devtools/python/python-isort_4.3.21.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-isort_4.3.4.bb
-rename to meta-python/recipes-devtools/python/python-isort_4.3.21.bb
-diff --git a/meta-python/recipes-devtools/python/python3-isort_4.3.4.bb b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-isort_4.3.4.bb
-rename to meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
--- 
-2.20.1
+On Wed, Oct 30, 2019 at 8:51 AM Yi Zhao <yi.zhao@windriver.com> wrote:
 
-
-
+>
+> On 10/28/19 1:56 PM, Khem Raj wrote:
+> > On Mon, Oct 28, 2019 at 6:15 AM Yi Zhao <yi.zhao@windriver.com> wrote:
+> >> Hi Ruoqin,
+> >>
+> >>
+> >> Please don't update this recipe because the day 2.0.x is needed by snort
+> >> 2.x.
+> >>
+> >>
+> > is there any way forward for snort.
+>
+> Snort 3.0 which depends on daq 2.2.2 is still beta version:
+> https://snort.org/downloads
+>
+>
+> //Yi
+>
+>
+> >
+> >> //Yi
+> >>
+> >>
+> >> On 10/28/19 7:23 PM, Zheng Ruoqin wrote:
+> >>> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> >>> ---
+> >>>    .../recipes-connectivity/daq/{daq_2.0.6.bb => daq_2.2.2.bb}
+>    | 4 ++--
+> >>>    1 file changed, 2 insertions(+), 2 deletions(-)
+> >>>    rename meta-networking/recipes-connectivity/daq/{daq_2.0.6.bb =>
+> daq_2.2.2.bb} (88%)
+> >>>
+> >>> diff --git a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
+> b/meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
+> >>> similarity index 88%
+> >>> rename from meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
+> >>> rename to meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
+> >>> index 42ffb17..29ac5c7 100644
+> >>> --- a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
+> >>> +++ b/meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
+> >>> @@ -25,8 +25,8 @@ EXTRA_OECONF = "--disable-nfq-module
+> --disable-ipq-module --includedir=${include
+> >>>    PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6',
+> d)}"
+> >>>    PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+> >>>
+> >>> -SRC_URI[md5sum] = "2cd6da422a72c129c685fc4bb848c24c"
+> >>> -SRC_URI[sha256sum] =
+> "b40e1d1273e08aaeaa86e69d4f28d535b7e53bdb3898adf539266b63137be7cb"
+> >>> +SRC_URI[md5sum] = "c61f60674a5f951f0c50faf33a611fee"
+> >>> +SRC_URI[sha256sum] =
+> "7cd818cabb1ad35360e83076e54775f07165ee71407dc672d147e27d3cd37f7b"
+> >>>
+> >>>    inherit autotools
+> >>>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
