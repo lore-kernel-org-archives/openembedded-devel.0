@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com
-	[209.85.222.173])
-	by mail.openembedded.org (Postfix) with ESMTP id AB82B7FAB6
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 75DAD7F998
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 21:42:49 +0000 (UTC)
-Received: by mail-qk1-f173.google.com with SMTP id m4so8620136qke.9
+	Thu, 31 Oct 2019 22:07:41 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id y10so3830369qto.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 14:42:51 -0700 (PDT)
+	Thu, 31 Oct 2019 15:07:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=yUV1QtLuGbp0M1MtNs9HKKrJzIKaztE/+377SEkWjDk=;
-	b=iDBFHqOYagYfhDIAJ7wQd58saOACMbHiP78p2HhrPWySs+jAqDeOGbj3nVeMHGL2Km
-	1HX1XvgdVAFB0SnbQYW42glOqG7b38aG7wHBQCuElrEe7EGrt7seJX3BN8zkug+E474X
-	pig2D8l6DAWqbVBwD6MMCtjRxPyH4111sU1E1dxxhx4YiO9kcOE5FaoewApOhp7Lyemo
-	Br5Bax3yq+osGsRFUQV0wfpgpbKeqO0W6Cb9aeOP9sdp2qpgf5haFnDv4yRaiVCrGusi
-	evBECpJ+NLFy621lG+oyWK6TBr5S6qhrx9C2F8cR0OFuYMUn57+VuRkiofv1NBK+NM4G
-	m0Xw==
+	:cc; bh=+VYL6IMHXQ1urih25HhiZdfy9hUXM9z8gMIqc0Xoq9E=;
+	b=b0QXSKyKXfeBXeaZ6ZGbLm9LuDtw970KvKt1WorHVdYILqUvu2VkfOJQcfe/kGSY3t
+	lBF3tLoJ8AVHjbcHfQSUS7rcO25WkC57/4hkU0SQyV96WKpVf8g9XzMyDHsLiTpjYfT+
+	OTsL+1ZomBgQKxbAwNS2fRYytsVeUETYVc0Kf7PIBS0hBV1sMgAmsPoFMN5ved8Q6bRD
+	1xFyoANeWECAOjqqbaGILu0O6QD5V2q0yKipl096TaNAI7/6qI6IAxbbZXn4JQc6LrbH
+	hBjZtvZWh17berSICw/B+oRvQmGezun6ZDTft3Nhz1CcjOt18rf6gaLN2plVXXv+ZEOC
+	1K4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=yUV1QtLuGbp0M1MtNs9HKKrJzIKaztE/+377SEkWjDk=;
-	b=HP7cAl31DxpcIBlDSVjhqsO8+Yz8WRw80R6AqaXDsR/ipJZm5wi5BOqvs5UBulX7LD
-	npmCuRKUCFFc55BgQDOYSbFXiUAdtMrwSw1ly4CZyQH2wTkqEEBwZhn4DwxJmZ7q/+4v
-	1nrHZa1PM+nw1rWKJVUMJa+rm/702/WTAJX2fT+Yn66enKM4Q6abKZZGrdYgFj4/HPT7
-	ygpeWG6KrIuTtPbNEr/nvRzf8tq6ZBBHwZxZtfB+sEMWXYhwvNnnRW+sDcmf72ymo5Zu
-	So3MgCuUPvocPb+xLUNfX95giDRGHJ3ceW6e32s/JeAJ5HmCiLT2nvvoJkCWQTJkeuYZ
-	6/Bw==
-X-Gm-Message-State: APjAAAUf7L0AQZyUDQNqk+zgMWNlmQFJkW9BrE+q2zRomC5Fnikli//P
-	dIWBHQ4xxXVQPKiF7ZHGzgkgEZdjpN7pwTYh1mHUT08aIM8=
-X-Google-Smtp-Source: APXvYqzpVe0D/xa3J4ocCR3VAR2WXPKSV2lI2xtNw00mOMIEB3jHwoDfobL6DhPyeMJTA/ctRxuzuUG54/+n2dEk9Xk=
-X-Received: by 2002:a05:620a:20d2:: with SMTP id
-	f18mr2480qka.474.1572558170208; 
-	Thu, 31 Oct 2019 14:42:50 -0700 (PDT)
+	bh=+VYL6IMHXQ1urih25HhiZdfy9hUXM9z8gMIqc0Xoq9E=;
+	b=OvTG2Lc47jMnYiGwgwjd1THwsHyD5P3OLeUxPHsUDRH1v8m/gXmt+UnIJS2JCY9dRs
+	DennVjOkPrKCwMhpTn6AWflfvVdM1RvTi6elwPIxDDtJzQX/zaAk9CN0EgY0eCQtkb4d
+	HoH/Ml6D/gQTFlWvx47zzyvNLOLPJYhLGfcAtYHwOol/91lr6utObuwmod6RKaDSbox/
+	Q6sYNOAewHkeM+mgBPOJHhPvI2kmLh8OoxNGIruxhAN6CCIUD68hxuSrzKCkG7hPA1/f
+	H+bvCVxMxF41lU1wEyAQiNT5e96DTq+T5TDmtWYmCis7/TmCJnKOa8M2AficHCoaXufM
+	1c6A==
+X-Gm-Message-State: APjAAAW882LpzlfPAnrzRu9cMTFRmnNwylBB8YMWEKKz60ObsiNKWIE7
+	8Yq+mfWNYiZPByOY9J4xqpFKF1CyBp5b4T4gvQA=
+X-Google-Smtp-Source: APXvYqyqofhS/f/MuoSewYAndXpb0xvyfQDwoyEy6WyZYekbAZr7Qf7PjerRBhp7PEWWnobYiFA8juSym2Z9F391Tbc=
+X-Received: by 2002:ac8:2476:: with SMTP id d51mr2795498qtd.378.1572559661896; 
+	Thu, 31 Oct 2019 15:07:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <1572541818-52903-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1572541818-52903-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+References: <20191031161616.5855-1-peter.kolbus@garmin.com>
+In-Reply-To: <20191031161616.5855-1-peter.kolbus@garmin.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 31 Oct 2019 03:45:11 -0700
-Message-ID: <CAMKF1soaNt24NMyQwc6hzwOD6RkMBqmW-GH+5NkDYHVY8F_oVw@mail.gmail.com>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Date: Thu, 31 Oct 2019 15:07:30 -0700
+Message-ID: <CAMKF1sqj0LQzhcihWj1TMEcG4EdaLiU7Btte6AY=gs2HkJUdGQ@mail.gmail.com>
+To: Peter Kolbus <peter.kolbus@garmin.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] ledmon: upgrade to 0.93
+Subject: Re: [meta-python][morty][PATCH] python-markupsafe: Extend to build native version too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,142 +54,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2019 21:42:49 -0000
+X-List-Received-Date: Thu, 31 Oct 2019 22:07:41 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Oct 31, 2019 at 9:16 AM Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Morty is not maintained anymore
+
+On Thu, Oct 31, 2019 at 9:16 AM Peter Kolbus <peter.kolbus@garmin.com>
 wrote:
 
-> 1) inherit autotools-brokensep as new version use autotools.
+> From: Khem Raj <raj.khem@gmail.com>
 >
-> 2) Add a patch to fix compile error.
->    0001-Disable-Waddress-of-packed-member-to-fix-compi.patch
+> chromium-60+ will need it
 >
-> 3) Modify do_install_append() function to fix do_package error as follows:
->    ledmon-git-r0 do_package: SYSTEMD_SERVICE_ledmon value ledmon.service
-> does not exist
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 >
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> (cherry picked from commit b28aa7fac9631c228bee98cfd2a0edea3c163916)
+>
+> Signed-off-by: Peter Kolbus <peter.kolbus@garmin.com>
 > ---
->  ...le-Waddress-of-packed-member-to-fix-compi.patch | 35
-> ++++++++++++++++++++++
->  meta-oe/recipes-bsp/ledmon/ledmon_git.bb           | 13 ++++----
->  2 files changed, 43 insertions(+), 5 deletions(-)
->  create mode 100644
-> meta-oe/recipes-bsp/ledmon/ledmon/0001-Disable-Waddress-of-packed-member-to-fix-compi.patch
+>  meta-python/recipes-devtools/python/python-markupsafe_0.23.bb | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git
-> a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Disable-Waddress-of-packed-member-to-fix-compi.patch
-> b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Disable-Waddress-of-packed-member-to-fix-compi.patch
-> new file mode 100644
-> index 0000000..bd2b204
-> --- /dev/null
-> +++
-> b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Disable-Waddress-of-packed-member-to-fix-compi.patch
-> @@ -0,0 +1,35 @@
-> +From 310540bbf853bc9bea384962d6acf66c7e99fd83 Mon Sep 17 00:00:00 2001
-> +From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> +Date: Thu, 31 Oct 2019 12:52:57 +0900
-> +Subject: [PATCH] Disable -Waddress-of-packed-member to fix compile
-> + error.
+> diff --git a/meta-python/recipes-devtools/python/python-markupsafe_0.23.bb
+> b/meta-python/recipes-devtools/python/python-markupsafe_0.23.bb
+> index 396eff102..5c9884b9f 100644
+> --- a/meta-python/recipes-devtools/python/python-markupsafe_0.23.bb
+> +++ b/meta-python/recipes-devtools/python/python-markupsafe_0.23.bb
+> @@ -1,2 +1,4 @@
+>  inherit setuptools
+>  require python-markupsafe.inc
 > +
-> +"-Waddress-of-packed-member" is enabled by default with gcc-9, and raise
-> the following waring.
-> +
-> +|   550 |  _dump_sgpio_amd(&amd_reg->amd);
-> +|       |                  ^~~~~~~~~~~~~
-> +| amd_sgpio.c: In function '_write_amd_register':
-> +| amd_sgpio.c:558:18: error: taking address of packed member of 'struct
-> amd_register' may result in an unaligned pointer value
-> [-Werror=address-of-packed-member]
-> +
-> +So disable it.
-> +
-> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> +---
-> + configure.ac | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index 7bc20f8..bf89a3c 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -24,6 +24,7 @@ AX_AM_CFLAGS_ADD([-Werror=alloca])
-> + AX_AM_CFLAGS_ADD([-Werror=missing-field-initializers])
-> + AX_AM_CFLAGS_ADD([-Werror])
-> + AX_AM_CFLAGS_ADD([-Werror=format-signedness])
-> ++AX_AM_CFLAGS_ADD([-Wno-address-of-packed-member])
-> +
-
-
-This warning knob may not be available always so
-Either we fix the warning by altering the code and making it go away or we
-disable werror completely
-Of course first option is preferred
-
->
-> + AC_SUBST([AM_CFLAGS])
-> + AC_SUBST([AM_CPPFLAGS])
-> +--
-> +2.7.4
-> +
-> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-> b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-> index 74ae56c..5825868 100644
-> --- a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-> +++ b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-> @@ -11,15 +11,17 @@ LIC_FILES_CHKSUM =
-> "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
->
->  DEPENDS = "sg3-utils udev"
->
-> -inherit systemd
-> +inherit autotools-brokensep systemd
->
-
-This is sad that we move to new version and out of tree build is broken can
-we fix that rather than patching it out ?
-
-It might be upstream worthy patch as well
-
-
->  SYSTEMD_SERVICE_${PN} = "ledmon.service"
->
-> +# 0.93
->  SRC_URI = "git://github.com/intel/ledmon;branch=master \
->             file://0002-include-sys-select.h-and-sys-types.h.patch \
-> +
->  file://0001-Disable-Waddress-of-packed-member-to-fix-compi.patch \
->            "
->
-> -SRCREV = "ad1304ca1363d727425a1f23703c523e21feae4f"
-> +SRCREV = "1d72f9cb5c9163b2ecdf19709935720e65f5b90e"
->
->  COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
->  COMPATIBLE_HOST_libc-musl = "null"
-> @@ -28,7 +30,8 @@ S = "${WORKDIR}/git"
->  EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}' CFLAGS='${CFLAGS}'"
->
->  do_install_append() {
-> -       install -d ${D}/${systemd_unitdir}/system
-> -       oe_runmake  DESTDIR=${D}  install
-> -       oe_runmake  DESTDIR=${D}${systemd_unitdir}/system  install-systemd
-> +        if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true',
-> 'false', d)}; then
-> +               install -d ${D}${systemd_unitdir}/system
-> +               install -m 0755 ${S}/systemd/ledmon.service
-> ${D}${systemd_unitdir}/system
-> +        fi
->  }
+> +BBCLASSEXTEND = "native"
 > --
-> 2.7.4
+> 2.23.0
 >
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
