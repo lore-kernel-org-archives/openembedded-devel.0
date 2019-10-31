@@ -1,26 +1,26 @@
 Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A0CF47FAC4
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 610C97FA48
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 18:34:55 +0000 (UTC)
+	Thu, 31 Oct 2019 18:34:56 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id x9VIYueS018401
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id x9VIYvD2013373
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 11:34:56 -0700
+	Thu, 31 Oct 2019 11:34:57 -0700 (PDT)
 Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 31 Oct 2019 11:34:56 -0700
+	Thu, 31 Oct 2019 11:34:57 -0700
 From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Oct 2019 14:34:51 -0400
-Message-ID: <20191031183453.24150-3-Trevor.Gamblin@windriver.com>
+Date: Thu, 31 Oct 2019 14:34:52 -0400
+Message-ID: <20191031183453.24150-4-Trevor.Gamblin@windriver.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191031183453.24150-1-Trevor.Gamblin@windriver.com>
 References: <20191031183453.24150-1-Trevor.Gamblin@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/4] python-h2: add recipe
+Subject: [PATCH 3/4] python-hyperframe: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,7 +33,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2019 18:34:55 -0000
+X-List-Received-Date: Thu, 31 Oct 2019 18:34:56 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
@@ -41,46 +41,46 @@ From: Trevor Gamblin <trevor.gamblin@windriver.com>
 
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- .../recipes-connectivity/python-h2/python-h2.inc       | 10 ++++++++++
- .../recipes-connectivity/python-h2/python-h2_3.1.1.bb  |  3 +++
- .../recipes-connectivity/python-h2/python3-h2_3.1.1.bb |  3 +++
+ .../python-hyperframe/python-hyperframe.inc            | 10 ++++++++++
+ .../python-hyperframe/python-hyperframe_5.2.0.bb       |  3 +++
+ .../python-hyperframe/python3-hyperframe_5.2.0.bb      |  3 +++
  3 files changed, 16 insertions(+)
- create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2.inc
- create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
- create mode 100644 meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
+ create mode 100644 meta-python/recipes-connectivity/python-hyperframe/python-hyperframe.inc
+ create mode 100644 meta-python/recipes-connectivity/python-hyperframe/python-hyperframe_5.2.0.bb
+ create mode 100644 meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_5.2.0.bb
 
-diff --git a/meta-python/recipes-connectivity/python-h2/python-h2.inc b/meta-python/recipes-connectivity/python-h2/python-h2.inc
+diff --git a/meta-python/recipes-connectivity/python-hyperframe/python-hyperframe.inc b/meta-python/recipes-connectivity/python-hyperframe/python-hyperframe.inc
 new file mode 100644
-index 000000000..42629c261
+index 000000000..0066bf8e6
 --- /dev/null
-+++ b/meta-python/recipes-connectivity/python-h2/python-h2.inc
++++ b/meta-python/recipes-connectivity/python-hyperframe/python-hyperframe.inc
 @@ -0,0 +1,10 @@
-+DESCRIPTION = "HTTP/2 State-Machine based protocol implementation"
-+HOMEPAGE = "https://github.com/python-hyper/hyper-h2"
++DESCRIPTION = "HTTP/2 framing layer for Python"
++HOMEPAGE = "https://github.com/python-hyper/hyperframe"
 +LICENSE = "MIT"
 +
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5bf1c68e73fbaec2b1687b7e71514393"
 +
-+SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
-+SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
++SRC_URI[md5sum] = "6919183242feb26d8bce3b4cba81defd"
++SRC_URI[sha256sum] = "a9f5c17f2cc3c719b917c4f33ed1c61bd1f8dfac4b1bd23b7c80b3400971b41f"
 +
 +inherit pypi
-diff --git a/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
+diff --git a/meta-python/recipes-connectivity/python-hyperframe/python-hyperframe_5.2.0.bb b/meta-python/recipes-connectivity/python-hyperframe/python-hyperframe_5.2.0.bb
 new file mode 100644
-index 000000000..b84129742
+index 000000000..4f0c9977a
 --- /dev/null
-+++ b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
++++ b/meta-python/recipes-connectivity/python-hyperframe/python-hyperframe_5.2.0.bb
 @@ -0,0 +1,3 @@
-+require python-h2.inc
++require python-hyperframe.inc
 +
 +inherit setuptools
-diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
+diff --git a/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_5.2.0.bb b/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_5.2.0.bb
 new file mode 100644
-index 000000000..7230a27e8
+index 000000000..f10fb6df1
 --- /dev/null
-+++ b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
++++ b/meta-python/recipes-connectivity/python-hyperframe/python3-hyperframe_5.2.0.bb
 @@ -0,0 +1,3 @@
-+require python-h2.inc
++require python-hyperframe.inc
 +
 +inherit setuptools3
 -- 
