@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 055087F95E
+	by mail.openembedded.org (Postfix) with ESMTP id 7465E6C0B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 06:29:41 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,250,1569254400"; d="scan'208";a="77727379"
+	Thu, 31 Oct 2019 06:40:17 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,250,1569254400"; d="scan'208";a="77728106"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Oct 2019 14:29:41 +0800
+	by heian.cn.fujitsu.com with ESMTP; 31 Oct 2019 14:40:17 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 14BDA4CE1511
+	by cn.fujitsu.com (Postfix) with ESMTP id 179EB4CE1513
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Oct 2019 14:21:39 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.81) by
+	Thu, 31 Oct 2019 14:32:18 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 31 Oct 2019 14:29:37 +0800
+	Server (TLS) id 14.3.439.0; Thu, 31 Oct 2019 14:40:16 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 31 Oct 2019 14:29:47 +0800
-Message-ID: <20191031062947.17265-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 31 Oct 2019 14:40:29 +0800
+Message-ID: <20191031064029.19290-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 14BDA4CE1511.ABB5E
+X-yoursite-MailScanner-ID: 179EB4CE1513.AB510
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-intervals: upgrade 1.5.4 -> 1.10.0
+Subject: [meta-python] [PATCH] python-isort: upgrade 4.3.4 -> 4.3.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,41 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Oct 2019 06:29:42 -0000
+X-List-Received-Date: Thu, 31 Oct 2019 06:40:18 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-intervals.inc      | 4 ++--
- .../{python-intervals_1.5.4.bb => python-intervals_1.10.0.bb} | 0
- ...python3-intervals_1.5.4.bb => python3-intervals_1.10.0.bb} | 0
+ meta-python/recipes-devtools/python/python-isort.inc          | 4 ++--
+ .../python/{python-isort_4.3.4.bb => python-isort_4.3.21.bb}  | 0
+ .../{python3-isort_4.3.4.bb => python3-isort_4.3.21.bb}       | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-intervals_1.5.4.bb => python-intervals_1.10.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-intervals_1.5.4.bb => python3-intervals_1.10.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-isort_4.3.4.bb => python-isort_4.3.21.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-isort_4.3.4.bb => python3-isort_4.3.21.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-intervals.inc b/meta-python/recipes-devtools/python/python-intervals.inc
-index a915e09f9..4489aa59d 100644
---- a/meta-python/recipes-devtools/python/python-intervals.inc
-+++ b/meta-python/recipes-devtools/python/python-intervals.inc
-@@ -9,7 +9,7 @@ PYPI_PACKAGE := "python-intervals"
+diff --git a/meta-python/recipes-devtools/python/python-isort.inc b/meta-python/recipes-devtools/python/python-isort.inc
+index 359b18012..324d4cf10 100644
+--- a/meta-python/recipes-devtools/python/python-isort.inc
++++ b/meta-python/recipes-devtools/python/python-isort.inc
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+ 
+-SRC_URI[md5sum] = "fb554e9c8f9aa76e333a03d470a5cf52"
+-SRC_URI[sha256sum] = "b9c40e9750f3d77e6e4d441d8b0266cf555e7cdabdcff33c4fd06366ca761ef8"
++SRC_URI[md5sum] = "05d66f2eb7ce2c2d702e86bac24bf9e4"
++SRC_URI[sha256sum] = "54da7e92468955c4fceacd0c86bd0ec997b0e1ee80d97f67c35a78b719dccab1"
  
  inherit pypi
  
--SRC_URI[md5sum] = "a35dd44269fdb134bf19cfd80cb2c120"
--SRC_URI[sha256sum] = "a8a15b7c2fadb8465310f44aa96e384828b35a29de38ac74738cd665924cb8ac"
-+SRC_URI[md5sum] = "8955317ff4e42590c90ba6247b1caaed"
-+SRC_URI[sha256sum] = "0d26746eaed0be78a61dd289bb7a10721b08770bb3e807614835f490d514f2a5"
- 
- BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python-intervals_1.5.4.bb b/meta-python/recipes-devtools/python/python-intervals_1.10.0.bb
+diff --git a/meta-python/recipes-devtools/python/python-isort_4.3.4.bb b/meta-python/recipes-devtools/python/python-isort_4.3.21.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-intervals_1.5.4.bb
-rename to meta-python/recipes-devtools/python/python-intervals_1.10.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-intervals_1.5.4.bb b/meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
+rename from meta-python/recipes-devtools/python/python-isort_4.3.4.bb
+rename to meta-python/recipes-devtools/python/python-isort_4.3.21.bb
+diff --git a/meta-python/recipes-devtools/python/python3-isort_4.3.4.bb b/meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-intervals_1.5.4.bb
-rename to meta-python/recipes-devtools/python/python3-intervals_1.10.0.bb
+rename from meta-python/recipes-devtools/python/python3-isort_4.3.4.bb
+rename to meta-python/recipes-devtools/python/python3-isort_4.3.21.bb
 -- 
 2.20.1
 
