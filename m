@@ -1,32 +1,36 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id AF7677FBF9
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id E87267F8D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 07:44:36 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,254,1569254400"; d="scan'208";a="77786280"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 15:44:36 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 1E89D4CE1645
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 15:36:37 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Fri, 1 Nov 2019 15:44:38 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Nov 2019 19:24:19 +0800
-Message-ID: <1572607459-67246-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Fri,  1 Nov 2019 08:37:03 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 474Ft55Ygxz5h;
+	Fri,  1 Nov 2019 09:37:01 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1572597422;
+	bh=13qCgTIPWVs4/ThK0rWl4gBn2NCqkobcJota0gSF+o0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=SkDXW5Ncaqnesbqgmny7kG3APc8lxNQ+fWcV4RM/jOXH3JUu2HhpCp29zTm7JtVQ1
+	byIq5IAKD15x74BqfcE3F2Cdm6hAw5VR+obM8e9/w5/jO5VmCd4rFvt2edcq+h5dsj
+	0SudV0vQEHF9XpK6SOZg8T8qGl++7h52XHSmBTB47puO8qOCsnMX1xl76Rqafvkgzo
+	IDTlKXwCmQvAG4tytMROY8jD8FpjiQsV9LRs7aFl1o8jtOrhUY1n/ODvnccCL7pK36
+	lF3mdXHEFraezAX6ctYrCd07kAom9TvGMlFV5ICApmh0xqkzIbdbYYzoJhfZwHP+/P
+	4z2yvCz+J9eKBFHL77jR6qLcJ0AgC6+R+wwZZ8UL3tVqEpNJR471IjANTOaQMvs/9m
+	uri+NzYHBzB7jfC1qa+SwEHt7h5sqxFKoydpp5arCxDAFkfaoUB9G0RCQOQEu/RYlD
+	M32MN7i3szR1x6ttAg0dSmwd4S22RN+3WRBZ/pNMOoPq7RbcblOm7/z0jfAqs8Txng
+	ksV2NLv8v6MZiBGeoY/3dXTM7m2h6J5niJ0uQ2SO5xeQnYibk8mof/OOsMO37yEbhR
+	oqfT9/NJXe91rvEsQk/K31pOzRe5/L2VOPwdWRMC6MbQ+WC9trFuknD+lz10XTpibV
+	/qh9OnEoqY87jKet9dhklD0w=
+Date: Fri, 1 Nov 2019 10:36:58 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Message-ID: <20191101083658.GA15243@localhost>
+References: <1572534977-51385-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
-X-yoursite-MailScanner-ID: 1E89D4CE1645.A875B
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] iwd: upgrade 0.20 -> 0.23
+In-Reply-To: <1572534977-51385-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] libtorrent: upgrade 0.13.7 -> 0.13.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,43 +43,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 07:44:37 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Nov 2019 08:37:04 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-1) Add DEPEND python-docutils-native to generate manual pages.
+On Thu, Oct 31, 2019 at 11:16:17PM +0800, Zheng Ruoqin wrote:
+>...
+> -SRCREV = "074f6ec51a2e4bc5c6140b4dad13c9bb56f3f0dc"
+> +SRCREV = "756f70010779927dc0691e1e722ed433d5d295e1"
+>  
+> -PV = "0.13.7+git${SRCPV}"
+> +PV = "0.13.8+git${SRCPV}"
+>...
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-connectivity/iwd/{iwd_0.20.bb => iwd_0.23.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-connectivity/iwd/{iwd_0.20.bb => iwd_0.23.bb} (87%)
+This is exactly the 0.13.8 release, please change to
+  PV = "0.13.8"
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.20.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-similarity index 87%
-rename from meta-oe/recipes-connectivity/iwd/iwd_0.20.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-index 4220503..d48fb84 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_0.20.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-@@ -2,12 +2,12 @@ DESCRIPTION = "Wireless daemon for Linux"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
- 
--inherit autotools pkgconfig systemd
-+inherit autotools pkgconfig systemd pythonnative
- 
--DEPENDS = "ell readline dbus"
-+DEPENDS = "ell readline dbus python-docutils-native"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
--SRCREV = "00f0039232cc73bbcf7a1875f8f9aae464d90a8f"
-+SRCREV = "77f16ae26fc013477f6362a0c33f0e52e82863e0"
- S = "${WORKDIR}/git"
- 
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+cu
+Adrian
+
 -- 
-2.7.4
 
-
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
