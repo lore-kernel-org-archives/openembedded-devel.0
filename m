@@ -1,24 +1,46 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BDB077FC9D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D972D7FC8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 18:22:50 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xA1IMqed020791
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  1 Nov 2019 19:13:20 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id c26so14273927qtj.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Nov 2019 11:22:52 -0700 (PDT)
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Fri, 1 Nov 2019 11:22:51 -0700
-From: Joe Slater <joe.slater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Nov 2019 11:22:51 -0700
-Message-ID: <20191101182251.128816-1-joe.slater@windriver.com>
-X-Mailer: git-send-email 2.13.0
+	Fri, 01 Nov 2019 12:13:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=DYfN/9ESKvkYwz6QqwOYoPQ3U0+e5F2vNFyBMpKFp7s=;
+	b=EPgoCMrLJ9+/lmFJNDt3sdpvQFBAQtcprCzswtOjCMlI7E5HDdQ0jhbaywxX7/8/FY
+	aUREcqiyOnawJKuvbq7nMXBjneWML8QQzZgfz050VeB1HaV3BydXZc5jl3lKc4T/NE4O
+	HGAus325RTnalG9f5ElVt63+SumX/To2riRC4zdZmCl/j3wXl/eOGsGIUWDit7Ha1Znm
+	av+Og2TzDezaTvjpxf6sHSG2UsBhPZ2ZNISw9G3isSIGOtY9oLwVqFPx8AaPeDLGsXcI
+	uv94ItFVNYNzHjpNB+cbYAFeYUkSz67mjYgxGa/aIXPSvvH3gpWwTB/W9R9iKBaF0xbN
+	76sA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=DYfN/9ESKvkYwz6QqwOYoPQ3U0+e5F2vNFyBMpKFp7s=;
+	b=WyZcGJUuyqyTv/0Yed5NeTmhRL0+ZJCjO28LWKxmvAwGXAY0SrrfdaImowysBhmYIo
+	8JTx75SDwLSFRIikc5g51A6mcqr74QIOh1GMYIuasEFyektefIudHzeqngsjDJXflZ+g
+	2lRPKmS6XAs7De+Hm6ApY4Wyl84kDrYdLWP/nikfW+qaZ30U2L5iDc1loIo2N1rz09wB
+	MMhrWDialn8JJmy7MrKP1GwFGsk4qbY16DarDwfReaR3+wES2fCTCqokyjwYQSKP9AGN
+	oAnkYxuBLGncZ11s8aN7c/7xv09IPHBT6SkbW89rMK58IojxzY1dXco9zz4+0scgk3lt
+	uTMw==
+X-Gm-Message-State: APjAAAVOnisDZ2oa5ecZ1ty8E+aO6XkWlf8VObvgxy5VjX4Q2PqBC4xm
+	GbgJZTCs5F4PJFoEyr6X2JK5Yv5lnqylsnIzwXM=
+X-Google-Smtp-Source: APXvYqyvnuEyOacNyppuF3yDVQNJNJhYBbfAbHmTW8vvSyZy6dLOp0K8tu8bhmYu5iLNCRTHgcs5+K4f3/akBnFAJL0=
+X-Received: by 2002:ad4:5349:: with SMTP id v9mr10405019qvs.55.1572635601089; 
+	Fri, 01 Nov 2019 12:13:21 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/1] syslog-ng: change conf files to version 3.19
+References: <20191101055734.2056-1-alex.kiernan@gmail.com>
+In-Reply-To: <20191101055734.2056-1-alex.kiernan@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 1 Nov 2019 12:12:50 -0700
+Message-ID: <CAMKF1sqEJgqCPAxhjZPQ11XRXiJOi487gQBkPLhUy5oS6ZsLgA@mail.gmail.com>
+To: Alex Kiernan <alex.kiernan@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] ostree: Upgrade 2019.4 -> 2019.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,64 +53,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 18:22:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Nov 2019 19:13:21 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Also add dns_cache(no) option to eliminate initialization warning.
+Fails to patch
 
-Signed-off-by: Joe Slater <joe.slater@windriver.com>
----
- meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd  | 9 +++++++--
- meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit | 9 +++++++--
- 2 files changed, 14 insertions(+), 4 deletions(-)
+RROR: ostree-2019.5-r0 do_patch: Command Error: 'quilt --quiltrc
+/mnt/b/yoe/build/tmp/work/aarch64-yoe-linux-musl/ostree/2019.5-r0/recipe-sysroot-native/etc/quiltrc
+push' exited with 0  Output:
+Applying patch 0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
+patching file Makefile-ostree.am
+patching file configure.ac
+Hunk #1 FAILED at 192.
+1 out of 1 hunk FAILED -- rejects in file configure.ac
+Patch 0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
+does not apply (enforce with -f)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
-index 9e910ca..965abf7 100644
---- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
-+++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
-@@ -1,11 +1,16 @@
--@version: 3.15
-+@version: 3.19
- #
- # Syslog-ng configuration file, compatible with default Debian syslogd
- # installation. Originally written by anonymous (I can't find his name)
- # Revised, and rewrited by me (SZALAY Attila <sasa@debian.org>)
-+#
-+# Move to 3.19
-+#     Only change is to add dns_cache(no) to options to suppress initialization warning.
-+#
-+#     Joe Slater <joe.slater@windriver.com>
- 
- # First, set some global options.
--options { chain_hostnames(off); flush_lines(0); use_dns(no); use_fqdn(no);
-+options { chain_hostnames(off); flush_lines(0); use_dns(no); dns_cache(no); use_fqdn(no);
- 	  owner("root"); group("adm"); perm(0640); stats_freq(0);
- 	  bad_hostname("^gconfd$");
- };
-diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
-index fb183ee..2b39b8c 100644
---- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
-+++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
-@@ -1,11 +1,16 @@
--@version: 3.15
-+@version: 3.19
- #
- # Syslog-ng configuration file, compatible with default Debian syslogd
- # installation. Originally written by anonymous (I can't find his name)
- # Revised, and rewrited by me (SZALAY Attila <sasa@debian.org>)
-+#
-+# Move to 3.19
-+#     Only change is to add dns_cache(no) to options to suppress initialization warning.
-+#
-+#     Joe Slater <joe.slater@windriver.com>
- 
- # First, set some global options.
--options { chain_hostnames(off); flush_lines(0); use_dns(no); use_fqdn(no);
-+options { chain_hostnames(off); flush_lines(0); use_dns(no); dns_cache(no); use_fqdn(no);
- 	  owner("root"); group("adm"); perm(0640); stats_freq(0);
- 	  bad_hostname("^gconfd$");
- };
--- 
-2.7.4
-
+On Thu, Oct 31, 2019 at 10:57 PM Alex Kiernan <alex.kiernan@gmail.com> wrote:
+>
+> Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+> ---
+>
+>  .../ostree/{ostree_2019.4.bb => ostree_2019.5.bb}               | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-extended/ostree/{ostree_2019.4.bb => ostree_2019.5.bb} (99%)
+>
+> diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+> similarity index 99%
+> rename from meta-oe/recipes-extended/ostree/ostree_2019.4.bb
+> rename to meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+> index 505c9fcccc59..efe1b3616f23 100644
+> --- a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb
+> +++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+> @@ -28,7 +28,7 @@ SRC_URI = " \
+>      file://0001-Always-enable-trivial-httpd-for-tests.patch \
+>      file://0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch \
+>  "
+> -SRCREV = "9d39e7d91e8497987cad69a3fbed5c5fc91eebdc"
+> +SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
+>
+>  UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
+>
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
