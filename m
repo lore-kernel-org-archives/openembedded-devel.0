@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F30A7FC10
+	by mail.openembedded.org (Postfix) with ESMTP id 178E07FC0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 06:39:52 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,254,1569254400"; d="scan'208";a="77783408"
+	Fri,  1 Nov 2019 07:13:49 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,254,1569254400"; d="scan'208";a="77785043"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 14:39:52 +0800
+	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 15:13:48 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 1201141B7076
+	by cn.fujitsu.com (Postfix) with ESMTP id 3EF4A4CE1508
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 14:31:50 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.81) by
+	Fri,  1 Nov 2019 15:05:46 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 14:39:50 +0800
+	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 15:13:46 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Nov 2019 14:40:02 +0800
-Message-ID: <20191101064002.22685-1-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 1 Nov 2019 15:13:47 +0800
+Message-ID: <20191101071347.24675-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 1201141B7076.A7FA0
+X-yoursite-MailScanner-ID: 3EF4A4CE1508.A963D
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pycryptodome: upgrade 3.4.11 -> 3.9.0
+Subject: [meta-python] [PATCH] python-pyexpect: upgrade 1.0.17 -> 1.0.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,47 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 06:39:53 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 07:13:50 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--License-Update: Add Apache 2.0 license.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-pycryptodome.inc | 6 +++---
- ...-pycryptodome_3.4.11.bb => python-pycryptodome_3.9.0.bb} | 0
- ...pycryptodome_3.4.11.bb => python3-pycryptodome_3.9.0.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pycryptodome_3.4.11.bb => python-pycryptodome_3.9.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pycryptodome_3.4.11.bb => python3-pycryptodome_3.9.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-pyexpect.inc       | 4 ++--
+ .../{python-pyexpect_1.0.17.bb => python-pyexpect_1.0.19.bb}  | 0
+ ...{python3-pyexpect_1.0.17.bb => python3-pyexpect_1.0.19.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyexpect_1.0.17.bb => python-pyexpect_1.0.19.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyexpect_1.0.17.bb => python3-pyexpect_1.0.19.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pycryptodome.inc b/meta-python/recipes-devtools/python/python-pycryptodome.inc
-index c4969f966..113e811b1 100644
---- a/meta-python/recipes-devtools/python/python-pycryptodome.inc
-+++ b/meta-python/recipes-devtools/python/python-pycryptodome.inc
-@@ -3,10 +3,10 @@ DESCRIPTION = "PyCryptodome is a self-contained Python package of low-level\
-  cryptographic primitives."
- HOMEPAGE = "http://www.pycryptodome.org"
- LICENSE = "PD & BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=775fe77831c03bf82f35abc0e230d4c1"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=6dc0e2a13d2f25d6f123c434b761faba"
- 
--SRC_URI[md5sum] = "a2587b6381b0ef4eb960cea1e7507d04"
--SRC_URI[sha256sum] = "c5dd29e9f1b733e74311bf95d0e544e91bd1d14bc0366e8f443562d8d9920b7d"
-+SRC_URI[md5sum] = "97ee98c95f350927bcc0e937976f17ee"
-+SRC_URI[sha256sum] = "dbeb08ad850056747aa7d5f33273b7ce0b9a77910604a1be7b7a6f2ef076213f"
+diff --git a/meta-python/recipes-devtools/python/python-pyexpect.inc b/meta-python/recipes-devtools/python/python-pyexpect.inc
+index d2d41d51d..85d9588a8 100644
+--- a/meta-python/recipes-devtools/python/python-pyexpect.inc
++++ b/meta-python/recipes-devtools/python/python-pyexpect.inc
+@@ -7,5 +7,5 @@ LIC_FILES_CHKSUM = "file://README.md;md5=500b884e9dcd5f677a53cbbee8ace939"
  
  inherit pypi
  
-diff --git a/meta-python/recipes-devtools/python/python-pycryptodome_3.4.11.bb b/meta-python/recipes-devtools/python/python-pycryptodome_3.9.0.bb
+-SRC_URI[md5sum] = "c71307d6c7096fdbde0813018dfa0092"
+-SRC_URI[sha256sum] = "d656ef7e07a8aa539ce0a4883a683341037b6fc1c329bf55b63bffbf2cce9582"
++SRC_URI[md5sum] = "dc744289858001925c75d21e26f1260f"
++SRC_URI[sha256sum] = "bff4654b113dac6c2231e486e11dcb23281ddc0742a5404467303fe7638829ef"
+diff --git a/meta-python/recipes-devtools/python/python-pyexpect_1.0.17.bb b/meta-python/recipes-devtools/python/python-pyexpect_1.0.19.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pycryptodome_3.4.11.bb
-rename to meta-python/recipes-devtools/python/python-pycryptodome_3.9.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pycryptodome_3.4.11.bb b/meta-python/recipes-devtools/python/python3-pycryptodome_3.9.0.bb
+rename from meta-python/recipes-devtools/python/python-pyexpect_1.0.17.bb
+rename to meta-python/recipes-devtools/python/python-pyexpect_1.0.19.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.17.bb b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pycryptodome_3.4.11.bb
-rename to meta-python/recipes-devtools/python/python3-pycryptodome_3.9.0.bb
+rename from meta-python/recipes-devtools/python/python3-pyexpect_1.0.17.bb
+rename to meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
 -- 
 2.20.1
 
