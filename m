@@ -1,30 +1,32 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E8996C109
+	by mail.openembedded.org (Postfix) with ESMTP id DC5DC7F642
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 05:37:57 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,253,1569254400"; d="scan'208";a="77780089"
+	Fri,  1 Nov 2019 05:55:03 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,254,1569254400"; d="scan'208";a="77780854"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 13:37:57 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 0710241B7076
+	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 13:54:46 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 21A894CE1508
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 13:29:57 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 13:37:56 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Fri,  1 Nov 2019 13:46:45 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Fri, 1 Nov 2019 13:54:46 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Nov 2019 13:38:13 +0800
-Message-ID: <20191101053813.7568-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Fri, 1 Nov 2019 17:34:21 +0800
+Message-ID: <1572600861-65655-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 0710241B7076.A9BEC
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: 21A894CE1508.A62AC
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pybind11: upgrade 2.2.3 -> 2.4.3
+Subject: [meta-oe][PATCH] rtorrent: upgrade 0.9.7 -> 0.9.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,41 +39,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 05:37:58 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 01 Nov 2019 05:55:04 -0000
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- meta-python/recipes-devtools/python/python-pybind11.inc       | 4 ++--
- .../{python-pybind11_2.2.3.bb => python-pybind11_2.4.3.bb}    | 0
- .../{python3-pybind11_2.2.3.bb => python3-pybind11_2.4.3.bb}  | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pybind11_2.2.3.bb => python-pybind11_2.4.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pybind11_2.2.3.bb => python3-pybind11_2.4.3.bb} (100%)
+1) Upgrade rtorrent from 0.9.7 to 0.9.8.
 
-diff --git a/meta-python/recipes-devtools/python/python-pybind11.inc b/meta-python/recipes-devtools/python/python-pybind11.inc
-index 1722875ab..d1d53e125 100644
---- a/meta-python/recipes-devtools/python/python-pybind11.inc
-+++ b/meta-python/recipes-devtools/python/python-pybind11.inc
-@@ -3,5 +3,5 @@ HOMEPAGE = "https://github.com/wjakob/pybind11"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=beb87117af69fd10fbf9fb14c22a2e62"
+2) Update don-t-run-code-while-configuring-package.patch for new version
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ .../don-t-run-code-while-configuring-package.patch | 48 +++++++++++++---------
+ .../recipes-connectivity/rtorrent/rtorrent_git.bb  |  6 +--
+ 2 files changed, 32 insertions(+), 22 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent/don-t-run-code-while-configuring-package.patch b/meta-oe/recipes-connectivity/rtorrent/rtorrent/don-t-run-code-while-configuring-package.patch
+index 79d4f29..7d09f43 100644
+--- a/meta-oe/recipes-connectivity/rtorrent/rtorrent/don-t-run-code-while-configuring-package.patch
++++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent/don-t-run-code-while-configuring-package.patch
+@@ -1,19 +1,26 @@
+-Using AC_RUN_IFELSE prevent people from configuring package for
+-cross-compiling. Don't run code while configuring package.
++Using AC_RUN_IFELSE prevent people from configuring package
++ for cross-compiling. Don't run code while configuring package.
  
--SRC_URI[md5sum] = "5b9611041e4ea66b2b919239e3bacd65"
--SRC_URI[sha256sum] = "87ff3ae777d9326349af5272974581270b2a0909b2392dc0cc57eb28ce23bcc3"
-+SRC_URI[md5sum] = "23fdca8191b16ce3e7f38fb9e4252b2d"
-+SRC_URI[sha256sum] = "72e6def53fb491f7f4e92692029d2e7bb5a0783314f20d80222735ff10a75758"
-diff --git a/meta-python/recipes-devtools/python/python-pybind11_2.2.3.bb b/meta-python/recipes-devtools/python/python-pybind11_2.4.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pybind11_2.2.3.bb
-rename to meta-python/recipes-devtools/python/python-pybind11_2.4.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pybind11_2.2.3.bb b/meta-python/recipes-devtools/python/python3-pybind11_2.4.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pybind11_2.2.3.bb
-rename to meta-python/recipes-devtools/python/python3-pybind11_2.4.3.bb
+ Upstream-Status: Pending
+ Signed-off-by: Andrei Gherzan <andrei@gherzan.ro>
+ 
+-Index: libtorrent-0.13.3/scripts/checks.m4
+-===================================================================
+---- libtorrent-0.13.3.orig/scripts/checks.m4	2012-05-14 14:17:04.000000000 +0300
+-+++ libtorrent-0.13.3/scripts/checks.m4	2013-02-10 15:28:37.414445524 +0200
+-@@ -95,40 +95,6 @@
++Update for 0.9.8.
++Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
++---
++ scripts/checks.m4 | 34 ----------------------------------
++ scripts/common.m4 | 28 ----------------------------
++ 2 files changed, 62 deletions(-)
+ 
++diff --git a/scripts/checks.m4 b/scripts/checks.m4
++index 83be846..1af80f5 100644
++--- a/scripts/checks.m4
+++++ b/scripts/checks.m4
++@@ -95,40 +95,6 @@ AC_DEFUN([TORRENT_CHECK_KQUEUE], [
++ 
+  AC_DEFUN([TORRENT_CHECK_KQUEUE_SOCKET_ONLY], [
+    AC_MSG_CHECKING(whether kqueue supports pipes and ptys)
+ -
+--  AC_RUN_IFELSE([AC_LANG_SOURCE([
++-  AC_LINK_IFELSE([AC_LANG_SOURCE([
+ -      #include <fcntl.h>
+ -      #include <stdlib.h>
+ -      #include <unistd.h>
+@@ -47,18 +54,18 @@ Index: libtorrent-0.13.3/scripts/checks.m4
+ -      AC_MSG_RESULT(no)
+ -    ])
+  ])
+-
++ 
+  AC_DEFUN([TORRENT_WITH_KQUEUE], [
+-Index: libtorrent-0.13.3/scripts/common.m4
+-===================================================================
+---- libtorrent-0.13.3.orig/scripts/common.m4	2012-05-14 14:17:04.000000000 +0300
+-+++ libtorrent-0.13.3/scripts/common.m4	2013-02-10 15:27:55.874446741 +0200
+-@@ -222,38 +222,10 @@
+-
++diff --git a/scripts/common.m4 b/scripts/common.m4
++index aaf005e..42fb016 100644
++--- a/scripts/common.m4
+++++ b/scripts/common.m4
++@@ -152,38 +152,10 @@ dnl   Need to fix this so that it uses the stuff defined by the system.
++ 
+  AC_DEFUN([TORRENT_CHECK_EXECINFO], [
+    AC_MSG_CHECKING(for execinfo.h)
+ -
+--  AC_RUN_IFELSE([AC_LANG_SOURCE([
++-  AC_COMPILE_IFELSE([AC_LANG_SOURCE([
+ -      #include <execinfo.h>
+ -      int main() { backtrace((void**)0, 0); backtrace_symbols((char**)0, 0); return 0;}
+ -      ])],
+@@ -69,11 +76,11 @@ Index: libtorrent-0.13.3/scripts/common.m4
+ -      AC_MSG_RESULT(no)
+ -  ])
+  ])
+-
++ 
+  AC_DEFUN([TORRENT_CHECK_ALIGNED], [
+    AC_MSG_CHECKING(the byte alignment)
+ -
+--  AC_RUN_IFELSE([AC_LANG_SOURCE([
++-  AC_LINK_IFELSE([AC_LANG_SOURCE([
+ -      #include <inttypes.h>
+ -      int main() {
+ -        char buf@<:@8@:>@ = { 0, 0, 0, 0, 1, 0, 0, 0 };
+@@ -90,5 +97,8 @@ Index: libtorrent-0.13.3/scripts/common.m4
+ -      AC_MSG_RESULT(required)
+ -  ])
+  ])
+-
++ 
++ 
++-- 
++2.7.4
+ 
+diff --git a/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
+index 9bb81c4..6f0e8c1 100644
+--- a/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
++++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
+@@ -8,10 +8,10 @@ DEPENDS = "libsigc++-2.0 curl cppunit libtorrent ncurses"
+ SRC_URI = "git://github.com/rakshasa/rtorrent \
+     file://don-t-run-code-while-configuring-package.patch \
+ "
+-# v0.9.7
+-SRCREV = "327164f9d86aafcd2500a317d485374df32ea622"
++# v0.9.8
++SRCREV = "6154d1698756e0c4842b1c13a0e56db93f1aa947"
+ 
+-PV = "0.9.7+git${SRCPV}"
++PV = "0.9.8+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.20.1
+2.7.4
 
 
 
