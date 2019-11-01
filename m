@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BCD67FC14
+	by mail.openembedded.org (Postfix) with ESMTP id 2288C7F821
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 05:12:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,253,1569254400"; d="scan'208";a="77779125"
+	Fri,  1 Nov 2019 05:24:04 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,253,1569254400"; d="scan'208";a="77779551"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 13:12:29 +0800
+	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 13:24:05 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id B32AD4CE1514
+	by cn.fujitsu.com (Postfix) with ESMTP id 84EDC41B7076
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 13:04:27 +0800 (CST)
+	Fri,  1 Nov 2019 13:16:02 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 13:12:28 +0800
+	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 13:24:02 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Nov 2019 13:12:44 +0800
-Message-ID: <20191101051244.28406-1-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 1 Nov 2019 13:24:04 +0800
+Message-ID: <20191101052404.5844-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: B32AD4CE1514.AA62F
+X-yoursite-MailScanner-ID: 84EDC41B7076.A7F78
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-progress: upgrade 1.4 -> 1.5
+Subject: [meta-python] [PATCH] python-prompt-toolkit: upgrade 2.0.4 -> 2.0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,42 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 05:12:47 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 05:24:05 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-progress.inc       | 4 ++--
- .../python/{python-progress_1.4.bb => python-progress_1.5.bb} | 0
- .../{python3-progress_1.4.bb => python3-progress_1.5.bb}      | 0
+ meta-python/recipes-devtools/python/python-prompt-toolkit.inc | 4 ++--
+ ...rompt-toolkit_2.0.4.bb => python-prompt-toolkit_2.0.10.bb} | 0
+ ...ompt-toolkit_2.0.4.bb => python3-prompt-toolkit_2.0.10.bb} | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-progress_1.4.bb => python-progress_1.5.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-progress_1.4.bb => python3-progress_1.5.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-prompt-toolkit_2.0.4.bb => python-prompt-toolkit_2.0.10.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-prompt-toolkit_2.0.4.bb => python3-prompt-toolkit_2.0.10.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-progress.inc b/meta-python/recipes-devtools/python/python-progress.inc
-index 9f00615c4..d59ba2cc5 100644
---- a/meta-python/recipes-devtools/python/python-progress.inc
-+++ b/meta-python/recipes-devtools/python/python-progress.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://github.com/verigak/progress/"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=aef5566ac4fede9815eccf124c281317"
+diff --git a/meta-python/recipes-devtools/python/python-prompt-toolkit.inc b/meta-python/recipes-devtools/python/python-prompt-toolkit.inc
+index ef1b05639..91aa7bb19 100644
+--- a/meta-python/recipes-devtools/python/python-prompt-toolkit.inc
++++ b/meta-python/recipes-devtools/python/python-prompt-toolkit.inc
+@@ -2,8 +2,8 @@ SUMMARY = "Library for building powerful interactive command lines in Python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b2cde7da89f0c1f3e49bf968d00d554f"
  
--SRC_URI[md5sum] = "057981e2f09029288f5255b1ea3ab64d"
--SRC_URI[sha256sum] = "5e2f9da88ed8236a76fffbee3ceefd259589cf42dfbc2cec2877102189fae58a"
-+SRC_URI[md5sum] = "408df0e3db0ad4b74f19f6beec814ae4"
-+SRC_URI[sha256sum] = "69ecedd1d1bbe71bf6313d88d1e6c4d2957b7f1d4f71312c211257f7dae64372"
+-SRC_URI[md5sum] = "8db8b8e40e91bc6dce133d8d5727a717"
+-SRC_URI[sha256sum] = "ff58ce8bb82c11c43416dd3eec7701dcbe8c576e2d7649f1d2b9d21a2fd93808"
++SRC_URI[md5sum] = "5016c523e603cd7119644fbc0f00ce53"
++SRC_URI[sha256sum] = "f15af68f66e664eaa559d4ac8a928111eebd5feda0c11738b5998045224829db"
  
- RDEPENDS_${PN}_class-target += " \
-     ${PYTHON_PN}-datetime \
-diff --git a/meta-python/recipes-devtools/python/python-progress_1.4.bb b/meta-python/recipes-devtools/python/python-progress_1.5.bb
+ PYPI_PACKAGE = "prompt_toolkit"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-prompt-toolkit_2.0.4.bb b/meta-python/recipes-devtools/python/python-prompt-toolkit_2.0.10.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-progress_1.4.bb
-rename to meta-python/recipes-devtools/python/python-progress_1.5.bb
-diff --git a/meta-python/recipes-devtools/python/python3-progress_1.4.bb b/meta-python/recipes-devtools/python/python3-progress_1.5.bb
+rename from meta-python/recipes-devtools/python/python-prompt-toolkit_2.0.4.bb
+rename to meta-python/recipes-devtools/python/python-prompt-toolkit_2.0.10.bb
+diff --git a/meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.4.bb b/meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-progress_1.4.bb
-rename to meta-python/recipes-devtools/python/python3-progress_1.5.bb
+rename from meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.4.bb
+rename to meta-python/recipes-devtools/python/python3-prompt-toolkit_2.0.10.bb
 -- 
 2.20.1
 
