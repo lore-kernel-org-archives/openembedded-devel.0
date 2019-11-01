@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C2E557FC9D
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id AE5CF7BD9A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 17:05:23 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id t26so13751251qtr.5
+	Fri,  1 Nov 2019 17:06:57 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id d13so11349468qko.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 10:05:25 -0700 (PDT)
+	Fri, 01 Nov 2019 10:06:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=2jRgJwaTWDDiYZkOqjhBGrIN1Tp+TgmyWg3gpiElYFc=;
-	b=MLEZ9vo4c72fcn0LJHvMt/d6xjJZZOUx5XHeWbmivJYzTgC6LieC81yMTt1RiqlBVJ
-	eFO2bjSYhw2VKWCWyQJC7AAx86j2oMGueLsCafEYSGL0nPIjvEdzck9aHuUR3YeLnyTG
-	LseRDG5Qg3QTHgIA51K6Hu/OSwFj7DwWBHR14yvxU2I3ogGB+2XpOGW5Rh4qkjPMb8Rq
-	ZW2YWSwfXrl73Bbay0iEax9NNbSUiHeJgYuNvBmBQEHF9nQZIm3tOyv6nw7EkA6WyQ3H
-	4Rws8q5zecQCZAhHJNLXBut8sFwee+XPUTnbVsH7l7N4eBHmDsD6SgZYMTS/ni1MuTBc
-	bWDQ==
+	:cc; bh=AzjvBFoBkj7Ny5I2h5fOwP7HhW0lqaqoYr8DsYrw8Lg=;
+	b=cljCdyf6SS4uRtxPuSuai33+yN0Vf7jiZJ5PjeLNNmSwIUeuEXFSRpn/uJ4wToIBvf
+	qwKO+oT0uNG5+o2GvLMsJHHcr8JNvyVzV6lxuTcWRflrRmMmh61W+9VkUNhTJovtg6SX
+	0FQu3xHdFd85MSSziqiB4/EC2JeWrqjc/FXIBVWWAFdGNBtk+uN7/tk/+je/sKkgwpnD
+	t2UmPu1TSjJRDfRK2EHAlctkjvLkLFJh45CODfA2UmHDEfHe8vwhuv8K2C8ss31UuEYP
+	1XkRFmg5F44SFwP8nLshKECw4huTcsQPypt49WajqOWpsfrNbMvx44tfPk9IhwxgaU8s
+	6iKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=2jRgJwaTWDDiYZkOqjhBGrIN1Tp+TgmyWg3gpiElYFc=;
-	b=dLCh7QugyRzgTGxvU3k60ZilytZVmVofCsWHmKZziJNouX4qj2wbfd+Rr01Yfku8hE
-	7wg+DdlINQssuVH2HiUs5JULXp7LiFll8iaPKqUjmDfn+HsaZglOYdxsXThOmlHcgGH+
-	THwNytD71RPdPEXGcStaw8PTuw181KcFGCGUvsT6lP9mlCIFzZzIxVCTjD4dKtImtZZu
-	Vw9XTkUnF4XuzeL1kgNIeIdATnZPXirGIqDL2I1JpoXXYAFiU/FjTgIlnITgNumwsCpr
-	Vo9Uolh93zWbx+spA+ipu2Suobnr2RVvwypy54ThkfTdqktChTjI82m+bl+4ScVW7dYY
-	MdjA==
-X-Gm-Message-State: APjAAAXx3OdA3eCEKRgGbP6UiuwbUDH0Sub1TXpghN2LbcgNrlG3bgZM
-	awW0TanOATR3O9QJtRLVJ9y03o9zGJ7c9upjuXk=
-X-Google-Smtp-Source: APXvYqxAfBGaXmtSaCy9DrGvwWkxTWxlh4t+bSAkn0NoPGbPkEIUqEGHbab/7L9/hEBbBU3ill6rlxla7zQL/lUqGKc=
-X-Received: by 2002:ac8:2ddc:: with SMTP id q28mr353100qta.88.1572627924364;
-	Fri, 01 Nov 2019 10:05:24 -0700 (PDT)
+	bh=AzjvBFoBkj7Ny5I2h5fOwP7HhW0lqaqoYr8DsYrw8Lg=;
+	b=q+3oTetfbt0eY54xwpaIbwiLzYebebdvLgA0qPEPoft3VLVS0+aFeI5nPec7RSQjI9
+	PEfQU2lpWva/mgdrbNM0kKlV+yKy9XW3g72oqGDJqlSEMl8qSNaJPti+SOYA+5W3dH1Q
+	Kc937AvrCpwcrsJib/DxNgDhNV7vP3mJOFKffxsQH0U6vqemAWKJBsCDnamkv1BuC6gX
+	jNXl2yF+c34b4U3ZoNQ0ixwsmWxsfAWQL2ps/y9+8HxvCyfuewPMf+AuATi0E20l1DRw
+	EMtc7XlxlQyn4QFPjohDr2cXugKRly9Fohv8IeCvoGgDUG+EzaVESHmE2NZ34LgRyWyV
+	CatQ==
+X-Gm-Message-State: APjAAAV4polVwlZbjS3TwgrfdyqKtobQQkR5nlSXsj5gC6uEE4KQ7v67
+	4OxY3CLaDZ0Jer/5mQxXxGLCvzzTAAJgDhVK9A0=
+X-Google-Smtp-Source: APXvYqxBhBGWxpRVaKzspaQx+jRhLquqhTLvzn9rHQQDHmLI40tljBQq2gOUolLbexl7VsK9KzmoRvCNllFPFU1W9XA=
+X-Received: by 2002:a05:620a:a9a:: with SMTP id
+	v26mr6630111qkg.71.1572628018027; 
+	Fri, 01 Nov 2019 10:06:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191031184223.14080-1-Trevor.Gamblin@windriver.com>
-	<20191031184223.14080-3-Trevor.Gamblin@windriver.com>
-	<84a3f2b5-264d-3f50-1fea-c6b8f6c292b5@gmail.com>
-In-Reply-To: <84a3f2b5-264d-3f50-1fea-c6b8f6c292b5@gmail.com>
+References: <1572600890-65720-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1572600890-65720-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 Nov 2019 10:04:58 -0700
-Message-ID: <CAMKF1srBK7CzoBvNW0vbW2iP0cy3KRRnHr1=uSO926xxM=tRGw@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
+Date: Fri, 1 Nov 2019 10:06:31 -0700
+Message-ID: <CAMKF1sqM5e0sEJ8ycLye7xFe9U6+iWc_Mf8Q0jza0ttECwQ=yQ@mail.gmail.com>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/4] python-h2: add recipe
+Subject: Re: [meta-oe][PATCH v2] ledmon: upgrade to 0.93
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,67 +54,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 17:05:24 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 17:06:57 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Nov 1, 2019 at 8:40 AM akuster808 <akuster808@gmail.com> wrote:
+On Thu, Oct 31, 2019 at 10:55 PM Zheng Ruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
 >
-> are these V2 or just a miss fire?
+> 1) inherit autotools as new version use autotools.
 >
+> 2) Add a patch to fix compile error.
+>    0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+>
+> 3) Modify do_install_append() function to fix do_package error as follows:
+>    ledmon-git-r0 do_package: SYSTEMD_SERVICE_ledmon value ledmon.service does not exist
+>
+> 4) Add ${S}/config in CFLAGS.
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  ...-t-build-with-Werror-to-fix-compile-error.patch | 29 ++++++++++++++++++++++
+>  meta-oe/recipes-bsp/ledmon/ledmon_git.bb           | 17 +++++++++----
+>  2 files changed, 41 insertions(+), 5 deletions(-)
+>  create mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+>
+> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+> new file mode 100644
+> index 0000000..b65f1a7
+> --- /dev/null
+> +++ b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+> @@ -0,0 +1,29 @@
+> +Subject: [PATCH] Don't build with -Werror to fix compile error.
+> +
+> +|   550 |  _dump_sgpio_amd(&amd_reg->amd);
+> +|       |                  ^~~~~~~~~~~~~
+> +| amd_sgpio.c: In function '_write_amd_register':
+> +| amd_sgpio.c:558:18: error: taking address of packed member of 'struct amd_register' may result in an unaligned pointer value [-Werror=address-of-packed-member]
+> +
+> +Upstream-Status: Pending
 
-there was no meta-python in the subject line. So there was another set
-which was sent
-which I have picked
+this was submitted isnt it? if so then please put the right status
+here. One line patches are easy to
+be mistaken and carried forward even when upstreamed.
 
+> +
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> +---
+> + configure.ac | 1 -
+> + 1 file changed, 1 deletion(-)
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index 7bc20f8..7e01bd5 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -22,7 +22,6 @@ AX_AM_CFLAGS_ADD([-Werror=format-truncation=1])
+> + AX_AM_CFLAGS_ADD([-Werror=shift-negative-value])
+> + AX_AM_CFLAGS_ADD([-Werror=alloca])
+> + AX_AM_CFLAGS_ADD([-Werror=missing-field-initializers])
+> +-AX_AM_CFLAGS_ADD([-Werror])
+> + AX_AM_CFLAGS_ADD([-Werror=format-signedness])
+> +
+> + AC_SUBST([AM_CFLAGS])
+> +--
+> +2.7.4
+> +
+> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
+> index 74ae56c..f9ae9aa 100644
+> --- a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
+> +++ b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
+> @@ -11,15 +11,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+>
+>  DEPENDS = "sg3-utils udev"
+>
+> -inherit systemd
+> +inherit autotools systemd
+>
+>  SYSTEMD_SERVICE_${PN} = "ledmon.service"
+>
+> +# 0.93
+>  SRC_URI = "git://github.com/intel/ledmon;branch=master \
+>             file://0002-include-sys-select.h-and-sys-types.h.patch \
+> +           file://0001-Don-t-build-with-Werror-to-fix-compile-error.patch \
+>            "
+>
+> -SRCREV = "ad1304ca1363d727425a1f23703c523e21feae4f"
+> +SRCREV = "1d72f9cb5c9163b2ecdf19709935720e65f5b90e"
+>
+>  COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+>  COMPATIBLE_HOST_libc-musl = "null"
+> @@ -27,8 +29,13 @@ COMPATIBLE_HOST_libc-musl = "null"
+>  S = "${WORKDIR}/git"
+>  EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}' CFLAGS='${CFLAGS}'"
+>
+> +# The ledmon sources include headers in ${S}/config to build but not in CFLAGS.
+> +# We need to add this include path in CFLAGS.
+> +CFLAGS += "-I${S}/config"
+> +
+>  do_install_append() {
+> -       install -d ${D}/${systemd_unitdir}/system
+> -       oe_runmake  DESTDIR=${D}  install
+> -       oe_runmake  DESTDIR=${D}${systemd_unitdir}/system  install-systemd
+> +        if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+> +               install -d ${D}${systemd_unitdir}/system
+> +               install -m 0755 ${S}/systemd/ledmon.service ${D}${systemd_unitdir}/system
+> +        fi
+>  }
+> --
+> 2.7.4
 >
 >
-> On 10/31/19 11:42 AM, Trevor Gamblin wrote:
-> > From: Trevor Gamblin <trevor.gamblin@windriver.com>
-> >
-> > Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> > ---
-> >  .../recipes-connectivity/python-h2/python-h2.inc       | 10 ++++++++++
-> >  .../recipes-connectivity/python-h2/python-h2_3.1.1.bb  |  3 +++
-> >  .../recipes-connectivity/python-h2/python3-h2_3.1.1.bb |  3 +++
-> >  3 files changed, 16 insertions(+)
-> >  create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2.inc
-> >  create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
-> >  create mode 100644 meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
-> >
-> > diff --git a/meta-python/recipes-connectivity/python-h2/python-h2.inc b/meta-python/recipes-connectivity/python-h2/python-h2.inc
-> > new file mode 100644
-> > index 000000000..42629c261
-> > --- /dev/null
-> > +++ b/meta-python/recipes-connectivity/python-h2/python-h2.inc
-> > @@ -0,0 +1,10 @@
-> > +DESCRIPTION = "HTTP/2 State-Machine based protocol implementation"
-> > +HOMEPAGE = "https://github.com/python-hyper/hyper-h2"
-> > +LICENSE = "MIT"
-> > +
-> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
-> > +
-> > +SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
-> > +SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
-> > +
-> > +inherit pypi
-> > diff --git a/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
-> > new file mode 100644
-> > index 000000000..b84129742
-> > --- /dev/null
-> > +++ b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
-> > @@ -0,0 +1,3 @@
-> > +require python-h2.inc
-> > +
-> > +inherit setuptools
-> > diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
-> > new file mode 100644
-> > index 000000000..7230a27e8
-> > --- /dev/null
-> > +++ b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
-> > @@ -0,0 +1,3 @@
-> > +require python-h2.inc
-> > +
-> > +inherit setuptools3
 >
 > --
 > _______________________________________________
