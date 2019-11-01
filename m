@@ -1,47 +1,47 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E8EA7F818
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 1563A7EDF1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 12:08:56 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id 18so10643816ion.6
+	Fri,  1 Nov 2019 14:39:30 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id i19so1763887qki.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 05:08:58 -0700 (PDT)
+	Fri, 01 Nov 2019 07:39:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=90BL+iO2Xz+2RzOE1YwQMkMC9cOW1lCSma9M2ov1csI=;
-	b=lMsM7gZMtYdupjUybkQff0klZb7ZuIQybtnFbUKGmg1CZEKTw4YXMPR8pHqb9Kejfw
-	66ekUGjVxvkSdjrzyzAuVemfqqKEr+YHJsRcKBGdzpoy4C6Q/Jolc3I5oO6sHbW6Xy2m
-	pAy+UBidj8gREcgzqSHxcNLaIK+eyKp9xoyj6ATjTBlpXUwVGjA9weYKtXg7gyZKJUAB
-	JecoftG26Y+CivuMnVfGRVL+/YkZwSxV+4ok3B6xKc07szfJzHH6hQzYanmWaSQw3ag/
-	yQvaCXMEBImiUWv0bgwRG4tFEEZQt9SbHYXsj1a6iluQr7mnihVj0Hdutea/iDhIYzYF
-	zoOA==
+	:cc; bh=2h9oHEVGqyGvAwrPhPBhmA44DgUU2f1Fx85fOS6ZCGY=;
+	b=fvCGRFSbNLJ8d2KGYOjE59O3FapYlQmagOSt/zf1B3fvtik6bANmVbb9QbxF7LWZxH
+	NNKU36E2fMR2p6L5GFyEjogau3ZxLru+aFVGmydNoiCJnJQ6TL0z6qKa2AVDftZ/ijxV
+	XRCL42pTSbjwRDx2gj0qug44coTEjQzGdGeEUlkFc4XX+bYiygXiuP24qbbw5I74qREh
+	24eQDOvK9o4VeTxpRH0Rnxon3ssCbzq1hd+PWZesZmYdOfEZPwp2qiV/IQZ+8hA/a7JT
+	XOMr9B9DlHQbuMrG2mfYes52Nr6yoKtgGTYCum6VdzL6AZoPYxE/OoqdYDRF/jAQy0EU
+	Sk7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=90BL+iO2Xz+2RzOE1YwQMkMC9cOW1lCSma9M2ov1csI=;
-	b=GHYr8xqfGyGniXwoEXtbG950wINP1iSa/7Pz0okUWyKUNTgs7/VpGBl+vs1LLia/uu
-	fQFTxT3PQLL/r7lJoWEOykU5OUrFIqQPJKCz79jZ1K6jecrPyRHaFZoRorEltdAlkdop
-	XFBMp2kmprOiQiKyrhpMFM7TDi1wZ8oLOpQY9aeJgYC2T5pqW/bAfL7VJKlxhh2TlyvP
-	uuCx8tOlppD/2adpCBCB66gtgNmTO6bxFWkauE+n8w2Kc32XNbyrnonWK964ll3VJNqW
-	5LSHD9gLwWXyOyDWvAXUOkdebc+s99bTgv0lnI1CQsxeDOKBkXhZGCxO8+dvRCfjrGX4
-	vhyQ==
-X-Gm-Message-State: APjAAAWxcGkBm6f3XG0XIv5HKjyZy4gg0YgPQN10dCwvuktdyexlGt74
-	NTw9Pn/cXnUaSuXfcmfs46KrNj2ml7muHpBYfOE6URjf
-X-Google-Smtp-Source: APXvYqyoFWHqcHmJbtub3XOZvWFLK7uPH94oEf9oks0wO9aGHy5E50XLn2Mz+CYlsHQkrI2TVacNHd7aWsDmylNDMfg=
-X-Received: by 2002:a5d:8185:: with SMTP id u5mr9468362ion.147.1572610137771; 
-	Fri, 01 Nov 2019 05:08:57 -0700 (PDT)
+	bh=2h9oHEVGqyGvAwrPhPBhmA44DgUU2f1Fx85fOS6ZCGY=;
+	b=bCqCpnCktMrOtMrjG3H/E/fuzACnNOydsSjnGp3oED0tmr+Bs72U6Y3PfY92Tqqnuk
+	Ycj3qJ7BDJF3asG1r1+ZuR8FaNK7Bb1XfW+6iST2AcOaWg8MF7BQCBvEnyvH7vwtvFdA
+	LvK4z7zgSny3F3KwvfCSHCeToa3q9dgkBkxYBBLKccLrH0i/2ErISCbOfyDKaLs5FFDf
+	MUlHeiuZbWDdESavbv6ILQShoTRz19xpHp9xPj1QBKzEYYV9B86thaIaP/YCQAvQkl4L
+	dbWapc0CLpvaRe8s7MUMMrErymcWal8BN+/5OZ9nt5zrjg0jFqaVQTlTYkE+54kpBT2r
+	K+jA==
+X-Gm-Message-State: APjAAAV2GzxOonMaTislD42sP/Mp6vmOcvdzWLeveCJ6VIFBTaoATe6S
+	lMDs+ZbCUjdS07bwEgp/wVlBInR0K32ZdHuNOqo=
+X-Google-Smtp-Source: APXvYqxuD0k0jCE1Lp15nX1W/heLc7SPI9y8ttP4taCpoFtqDxnPdstHS0S2Bb9OyzItC0U0Yv0dwmEgvXUkqC03Kvw=
+X-Received: by 2002:a05:620a:14b7:: with SMTP id
+	x23mr1102596qkj.474.1572619171508; 
+	Fri, 01 Nov 2019 07:39:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <1572616775-69362-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<CANNYZj_aty2tpJ6qttT3phqktydh_xz0sVPwv-n4hfYQjKHr-Q@mail.gmail.com>
-In-Reply-To: <CANNYZj_aty2tpJ6qttT3phqktydh_xz0sVPwv-n4hfYQjKHr-Q@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 1 Nov 2019 13:08:45 +0100
-Message-ID: <CALbNGRSOUYZyLs54vKNQV9PurhnxugMmjn6kj6cb1nkos5O+8Q@mail.gmail.com>
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] glibmm: upgrade 2.62.0 -> 2.63.1
+References: <1572607459-67246-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1572607459-67246-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 1 Nov 2019 07:39:04 -0700
+Message-ID: <CAMKF1sqngtqVNPer5oytnH7xe1xGGJ7FLaz6GGz_BWzdhmojUg@mail.gmail.com>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] iwd: upgrade 0.20 -> 0.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,110 +54,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 12:08:58 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 14:39:31 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Nov 1, 2019 at 11:55 AM Alexander Kanavin
-<alex.kanavin@gmail.com> wrote:
->
-> Is 2.63.1 a pre-release version? As a gnome project, it's probably
-> following the odd-even scheme.
->
-> Alex
->
-form [1]
+Fails on musl
 
-| 2.63.1: (unstable):
-| Distro packagers should probably not package this yet.
+https://errors.yoctoproject.org/Errors/Details/275171/
 
-So why should we?
-
-[1] http://ftp.gnome.org/pub/gnome/sources/glibmm/2.63/glibmm-2.63.1.news
-
-Andreas
-> On Fri, 1 Nov 2019 at 11:20, Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> wrote:
+On Fri, Nov 1, 2019 at 12:45 AM Zheng Ruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
 >
-> > 1) Update DEPEND from libsigc++-2.0 to libsigc++-3.
-> >
-> > 2) Update install dir from glibmm-2.4 to glibmm-2.64.
-> >
-> > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> > ---
-> >  .../glib-2.0/{glibmm_2.62.0.bb => glibmm_2.63.1.bb}        | 14
-> > +++++++-------
-> >  1 file changed, 7 insertions(+), 7 deletions(-)
-> >  rename meta-oe/recipes-core/glib-2.0/{glibmm_2.62.0.bb =>
-> > glibmm_2.63.1.bb} (68%)
-> >
-> > diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.62.0.bb
-> > b/meta-oe/recipes-core/glib-2.0/glibmm_2.63.1.bb
-> > similarity index 68%
-> > rename from meta-oe/recipes-core/glib-2.0/glibmm_2.62.0.bb
-> > rename to meta-oe/recipes-core/glib-2.0/glibmm_2.63.1.bb
-> > index 75eea4e..99f5cf9 100644
-> > --- a/meta-oe/recipes-core/glib-2.0/glibmm_2.62.0.bb
-> > +++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.63.1.bb
-> > @@ -5,7 +5,7 @@ LICENSE = "LGPLv2.1 & GPLv2"
-> >  LIC_FILES_CHKSUM = "file://COPYING;md5=42dfffebc56fec7527aac53b7a89d1d8 \
-> >
-> >  file://COPYING.tools;md5=751419260aa954499f7abaabaa882bbe"
-> >
-> > -DEPENDS = "mm-common glib-2.0 libsigc++-2.0 glib-2.0-native"
-> > +DEPENDS = "mm-common glib-2.0 libsigc++-3 glib-2.0-native"
-> >  inherit gnomebase
-> >
-> >  SHRT_VER =
-> > "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
-> > @@ -13,23 +13,23 @@ SHRT_VER =
-> > "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
-> >  SRC_URI += " \
-> >      file://remove-examples.patch \
-> >  "
-> > -SRC_URI[archive.md5sum] = "7da228e3f0c6a10024b9a7708c53691e"
-> > -SRC_URI[archive.sha256sum] =
-> > "36659f13cc73282392d1305858f3bbca46fbd1ce2f078cc9db8b9f79b2e93cfe"
-> > +SRC_URI[archive.md5sum] = "6d00da9e119d3cd1a27caaae4b00114e"
-> > +SRC_URI[archive.sha256sum] =
-> > "4f99e29bd0a67afd94c0d6fdad2b86bc5cd944cd5d4ff097520dc58b6c997ada"
-> >
-> >  do_install_append() {
-> > -    install -d ${D}${datadir}/glibmm-2.4
-> > +    install -d ${D}${datadir}/glibmm-2.64
-> >      install -d ${D}${datadir}/aclocal
-> >
-> > -    install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.4/
-> > +    install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.64/
-> >      install -m 0644 scripts/glibmm_check_perl.m4 ${D}${datadir}/aclocal/
-> > || true
-> >
-> >      for i in generate_wrap_init.pl gmmproc; do
-> > -        sed -i -e '1s,.*,#!${bindir}/env perl,'
-> > ${D}${libdir}/glibmm-2.4/proc/$i
-> > +        sed -i -e '1s,.*,#!${bindir}/env perl,'
-> > ${D}${libdir}/glibmm-2.64/proc/$i
-> >      done
-> >  }
-> >
-> >  FILES_${PN} = "${libdir}/lib*.so.*"
-> > -FILES_${PN}-dev += "${datadir}/glibmm-* ${libdir}/glibmm-2.4/include/
-> > ${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
-> > +FILES_${PN}-dev += "${datadir}/glibmm-* ${libdir}/glibmm-2.64/include/
-> > ${libdir}/glibmm-2.64/proc/ ${libdir}/giomm-2.64/include/"
-> >
-> >  RDEPENDS_${PN}-dev = "perl"
-> >  SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
-> > --
-> > 2.7.4
-> >
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+> 1) Add DEPEND python-docutils-native to generate manual pages.
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-connectivity/iwd/{iwd_0.20.bb => iwd_0.23.bb} | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-connectivity/iwd/{iwd_0.20.bb => iwd_0.23.bb} (87%)
+>
+> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.20.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
+> similarity index 87%
+> rename from meta-oe/recipes-connectivity/iwd/iwd_0.20.bb
+> rename to meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
+> index 4220503..d48fb84 100644
+> --- a/meta-oe/recipes-connectivity/iwd/iwd_0.20.bb
+> +++ b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
+> @@ -2,12 +2,12 @@ DESCRIPTION = "Wireless daemon for Linux"
+>  LICENSE = "LGPL-2.1"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+>
+> -inherit autotools pkgconfig systemd
+> +inherit autotools pkgconfig systemd pythonnative
+>
+> -DEPENDS = "ell readline dbus"
+> +DEPENDS = "ell readline dbus python-docutils-native"
+>
+>  SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+> -SRCREV = "00f0039232cc73bbcf7a1875f8f9aae464d90a8f"
+> +SRCREV = "77f16ae26fc013477f6362a0c33f0e52e82863e0"
+>  S = "${WORKDIR}/git"
+>
+>  PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+> --
+> 2.7.4
+>
+>
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
