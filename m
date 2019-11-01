@@ -1,47 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3ADEF7FCC8
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D002A7FCCE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 21:19:14 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id m16so11677816qki.11
+	Fri,  1 Nov 2019 21:22:20 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id c8so7250442pgb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 14:19:15 -0700 (PDT)
+	Fri, 01 Nov 2019 14:22:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=3VTyF5d3pHSEerDHhs9D3bPKgTAPKa0yBS6Su020nFY=;
-	b=LMVELDyTtUjLVFNcEnvxUODji5SNoA/liUc7gq2uGTCZ0Ipw8Bl7z8HBhwcMMBZLDl
-	Tctt19ffq8QKU/6vYVI2/dD/fXkoKdRuo79HyLeKYQsaqN3OCAtGBE6UAf5HYA9GePyw
-	1Z4nWXh18k08pOssIqPUHxIzvmCXYbbJyYw/Cvw2J35pF61EV0p1iz04HlE68UysgUcN
-	azxTUQX5EaH5UxO4HaEe4aJFKCfaH7ZNcWQBb/YFVlHSozT3mRD10X2CYLQPidX0ZmaJ
-	4ojuB+EqE2xQKfF5BJ5qbPh2mcf/RuOhXwV58qjGr1mV5Olkcs0suyVX6WsNKmLNVjfV
-	ORlw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NJ1YL+qvPRCvvWQrZUwDyjjy7lp7hoBDouSVx8yMYWQ=;
+	b=CJNiDsWwbuytHaF69WFdkGlA1Yp95NSBbQKB69P8tnWzt5oCVfJZS/4XoybUpQI0ws
+	cUa+kYnz0Uq1dkiK34/HvgsURmH6RvFG3D/Wot6Ka4jbEbxPtOOERKhoeImDX7jIyU63
+	SCuSnt68FSRWjyb1klXl/lffj2dGZgD/ewwW1sQKFC1P2C39khO5xYWuTws3WqQiww2Y
+	XQy6QRzBrcLDo1Y9uhxLW/r/OwWpxDgciP7qMb98T2QwWe420Ayw4Qw+4IwYYXFJd/vq
+	qNXZChIh2dlyPXl3r78tatUe2MBSuKDuAQj8CkX740Jc0ftp/tM0mMnxdahXoYX5Ja4P
+	nWXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=3VTyF5d3pHSEerDHhs9D3bPKgTAPKa0yBS6Su020nFY=;
-	b=Gn/rmig8cOl0PXvprLuboQjbuAvNLxM/gjxjTqauyAoatDoH2MhVRQgZUs0MdgF+mH
-	dohBAoDiZgKhYHPjK5r6Xph9rP1EexVhfpMRrRrmU1a8NEFUaz5rZ7U6PErKtRHoV5Cj
-	5AQgI0WTrMAX4ZsGRibUjZwnOEUYh/xkoiL5X3vZu6v5DXbaHHY7j+2dbsnUd/rZBF+K
-	adzDnQO9+wM+A2nHvgEW451nLtgQdGlGKvTzr9ar3pnDOvUhT2m5kWSbUaq0mwIc75ov
-	GWpizq8FpjDsZ4MrY9sMFLa8j6E1NEZww0KyAutLIW8ng96rsTyRMBHO3PRpRofvG2V1
-	QuSQ==
-X-Gm-Message-State: APjAAAVwHx9NOx1Mnt5JzV5PuDs+MIzBaBgg7Ngo7CzzwxMIKZXdluMV
-	Op/XmOweX79vKszPmjoaCWJLyttfaIItKKaSrMM=
-X-Google-Smtp-Source: APXvYqyectwl+xf7guZ20GGwHZ1MWHZUTELPSoiqsLoRp5Nf8yRimXDx343CkiWN5GUhXLqurG29ZipZcCqn55n75L0=
-X-Received: by 2002:a37:84b:: with SMTP id 72mr12352683qki.337.1572643154802; 
-	Fri, 01 Nov 2019 14:19:14 -0700 (PDT)
-MIME-Version: 1.0
-References: <1572600861-65655-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<20191101204750.GA6557@localhost>
-In-Reply-To: <20191101204750.GA6557@localhost>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NJ1YL+qvPRCvvWQrZUwDyjjy7lp7hoBDouSVx8yMYWQ=;
+	b=nOjLE+J6dQBjB36MNUmTBBuGaOa1BGzW0YynHIDMr2DLoVTFGZbLPdhqAGDMzmFDT0
+	MONedWvttdBQnscjU+ZANW8LhlFLupvE56EfFJhpZdUyD8UuU27+7IOQyaBjQbnWZKA7
+	rI9/wQ+rOCod8LZ+RkYLAwaakRxh8CDop74DaalVHrob0/Svewg3ORLu4YKV0PVc0wys
+	ZMhZ3h7goBXytx2raGb2eEtFmJ4R9q1bUOoiK6/ZDy3wnNtJeQEmrBOfN0QnJjINTYJA
+	BznZJbmzlt0v9wqxVdCUBzPv4jyRevj3GOP2wFkJsqxKTf8vXR5FpKvfyMuDm7vfhXUI
+	QE4Q==
+X-Gm-Message-State: APjAAAU4xeTWp/5mePIpGnkYaO65I/ceTrW6/N6trF/ILls546HZnGBs
+	G9rYYsHniJUlHo6tZrqIwhfDh+JvPqc=
+X-Google-Smtp-Source: APXvYqz3EpdcI0U3r7sOe/IaZOegsworubiQmr6Her90FCKb7Iv1jzprvlearK+atWwxmST4TqusoA==
+X-Received: by 2002:a63:ff1e:: with SMTP id k30mr15371701pgi.273.1572643341127;
+	Fri, 01 Nov 2019 14:22:21 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::f974])
+	by smtp.gmail.com with ESMTPSA id
+	s198sm3307530pgs.81.2019.11.01.14.22.20
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 01 Nov 2019 14:22:20 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 Nov 2019 14:18:48 -0700
-Message-ID: <CAMKF1srwsBaNv2U35t9zfbGHOJ07pC2P7YVL47FGem6XHpDJsQ@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] rtorrent: upgrade 0.9.7 -> 0.9.8
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Nov 2019 14:22:08 -0700
+Message-Id: <20191101212208.2299017-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] miniupnpd: Build config.h before full build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,49 +57,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 21:19:14 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 01 Nov 2019 21:22:20 -0000
+Content-Transfer-Encoding: 8bit
 
-On Fri, Nov 1, 2019 at 1:48 PM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Fri, Nov 01, 2019 at 05:34:21PM +0800, Zheng Ruoqin wrote:
-> >...
-> > index 9bb81c4..6f0e8c1 100644
-> > --- a/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
-> > +++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
-> > @@ -8,10 +8,10 @@ DEPENDS = "libsigc++-2.0 curl cppunit libtorrent ncurses"
-> >  SRC_URI = "git://github.com/rakshasa/rtorrent \
-> >      file://don-t-run-code-while-configuring-package.patch \
-> >  "
-> > -# v0.9.7
-> > -SRCREV = "327164f9d86aafcd2500a317d485374df32ea622"
-> > +# v0.9.8
-> > +SRCREV = "6154d1698756e0c4842b1c13a0e56db93f1aa947"
-> >
-> > -PV = "0.9.7+git${SRCPV}"
-> > +PV = "0.9.8+git${SRCPV}"
-> >...
->
-> This is exactly the 0.9.8 release, please change to
->   PV = "0.9.8"
->
+This fixes a race condition e.g.
 
-I have already tweaked this patch in master-next
+testminissdp.c:15:10: fatal error: config.h: No such file or directory
+   15 | #include "config.h"
+      |          ^~~~~~~~~~
+compilation terminated.
+<builtin>: recipe for target 'testminissdp.o' failed
 
->
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb     | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
+index 595e211ea5..81bfe66a9e 100644
+--- a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
++++ b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
+@@ -26,6 +26,7 @@ do_configure_prepend() {
+ 
+ do_compile() {
+     cd ${S}
++    CONFIG_OPTIONS="${IPV6} --leasefile --vendorcfg" oe_runmake -f Makefile.linux config.h
+     CONFIG_OPTIONS="${IPV6} --leasefile --vendorcfg" oe_runmake -f Makefile.linux
+ }
+ 
+-- 
+2.23.0
+
 
