@@ -1,50 +1,24 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
-	[209.85.166.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BDEE97FCA2
+Return-Path: <joe.slater@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 82AFC7FC9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 18:10:58 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id c11so11795711iom.10
+	Fri,  1 Nov 2019 18:20:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xA1IK6qN020782
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 11:11:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eXiE7w7JmFSoweBamCYVmH7eo9nLBECA55OyeYlHIp0=;
-	b=XAbDl3368qg1ejjowWrl0YSBC70seoOJdYDyXwgOz4Vz6S6cuJLNHJe+0YCqF013KT
-	Piy1BTHUd+S5W0PcEV/FE1gnfvUsF0y0LtdPF38VKnw17RBDbm17ClnfJmR4ZhD90nFk
-	G7QFI11XxMBIcCg07ipbu73E9cWCblivZwZ/a+GEs34BOuBNUgVCO45X+OyOPHvRDTQM
-	xQD/+E8UR0Yd/NndR30WE4v415X7WDNklivBATR0aBkAd66pjqFWlN55nPH8YejMzj6u
-	niVzZORnwAXZKKoBUz/UenL6PyyrU9H3e6kHHPvbpBAvnMaPHWq1V0bEkd5du55gRTs0
-	KZFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=eXiE7w7JmFSoweBamCYVmH7eo9nLBECA55OyeYlHIp0=;
-	b=I7h7vUS9jUKxdyAXikVwujKC+0BEm991hhlTD2A5pmgXVprLQ6fSCJ4+y1U64DeyLA
-	pozcGlapcDN+gKqwDmuOmmlIOFPc8xd6/IaCAEER3DLVoz4682dA1vXsVdDgnkSWcmz6
-	ohln8e2R+6qVC3Rqf5Miknd5AQL6fdnMRePQtPpE3lmbbUFu6YiC392BnQ0wIc62kwkN
-	PqBCnus2pplGZdlMg2gYQkhSalxBgogMAKRVQ3XuIhCQx4aHC2ox13tappZ5wjPMSG87
-	Fr4X1FFHyul6dSpA6hgCx1t1Ptwzae57wfLAhEYNOXijhxuOW/K4e4cr8SH4QFxZS839
-	4vPg==
-X-Gm-Message-State: APjAAAUG9QM4VeZUIiFtVZHNxrzVB76AWrmC3zywym97+reOf8y1s3Gv
-	uCJRBgJW0KFzM8yLkeZgwYbE7B3VBbBwD0w44vU=
-X-Google-Smtp-Source: APXvYqycs8HZvUYmC9Lzyerw5fetMznhvWXLuZQOWKYREhA4vqdTpT9W4GCVsx4tqFyqewHu0aDQ8NyszbSHCLH+dsw=
-X-Received: by 2002:a5e:d806:: with SMTP id l6mr8464556iok.299.1572631859669; 
-	Fri, 01 Nov 2019 11:10:59 -0700 (PDT)
+	Fri, 1 Nov 2019 11:20:06 -0700 (PDT)
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Fri, 1 Nov 2019 11:20:05 -0700
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 1 Nov 2019 11:20:05 -0700
+Message-ID: <20191101182005.127439-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.13.0
 MIME-Version: 1.0
-References: <20191029010253.5784-1-schnitzeltony@gmail.com>
-	<20191029010253.5784-4-schnitzeltony@gmail.com>
-	<CAMKF1srqmOG5k8mfAZ04YH0DUUROSLUCVLwMGUrRQ-=Y2yeFsg@mail.gmail.com>
-	<CALbNGRQn151mjXniXnS+Edi79VMomdaUiP9-hbzzMo30dAwCog@mail.gmail.com>
-	<CAMKF1sq-2rVXqmYeVNTqjaB7DsKFJr9+u095P826_N3E2RhNMw@mail.gmail.com>
-In-Reply-To: <CAMKF1sq-2rVXqmYeVNTqjaB7DsKFJr9+u095P826_N3E2RhNMw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 1 Nov 2019 19:10:48 +0100
-Message-ID: <CALbNGRRmNDE-i7RXY8562DmpymCmX-18m6DjDo0bo5=O_x6E-Q@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2 4/4] ibus: initial add 1.5.21
+Subject: [meta-oe][PATCH 1/1] syslog-ng: add volatile directory init for systemd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,30 +31,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 18:10:58 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 01 Nov 2019 18:20:05 -0000
+Content-Type: text/plain
 
-On Fri, Nov 1, 2019 at 6:04 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > > Hi Andreas
-> > >
-> > > I see this fail on ubuntu 18.04 host
-> > > https://errors.yoctoproject.org/Errors/Details/275175/
-> > See what I can do - is it a server 'only' installation?
-> >
->
-> thats right. Its minimal server install + OE prerequisites
->
-> > Andreas
-Think I got it: By the tailored build I created a race condition which
-tends to pop up on high numbers of threads for make: Your server
-builds with make -j 16.
+systemd requires volatile file/directory specifications to
+be in a tmpfiles.d directory.  We put ours in /etc/tmpfiles.d.
 
-Will create a V2 building ibusmarshalers.* explicitly and run tests
-with high numbers for make to see if there are others.
+Also eliminate SRC_URI duplication in .bb and .inc files.
 
-Tailoring build is nasty business but necessary in our project sometimes...
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+---
+ meta-oe/recipes-support/syslog-ng/files/syslog-ng-tmp.conf |  1 +
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc            |  6 ++++++
+ meta-oe/recipes-support/syslog-ng/syslog-ng_3.19.1.bb      | 10 ++++------
+ 3 files changed, 11 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-support/syslog-ng/files/syslog-ng-tmp.conf
 
-Cheers
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng-tmp.conf b/meta-oe/recipes-support/syslog-ng/files/syslog-ng-tmp.conf
+new file mode 100644
+index 0000000..32a7953
+--- /dev/null
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng-tmp.conf
+@@ -0,0 +1 @@
++d /var/run/syslog-ng 0755 root root
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+index b00cb91..4c22d4b 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+@@ -15,6 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=24c0c5cb2c83d9f2ab725481e4df5240"
+ # util-linux added to get libuuid
+ DEPENDS = "libpcre flex glib-2.0 openssl util-linux"
+ 
++# We expect the recipe to add anything specific for that version to these defaults.
++#
+ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.tar.gz \
+            file://syslog-ng.conf.systemd \
+            file://syslog-ng.conf.sysvinit \
+@@ -74,8 +76,12 @@ do_install_append() {
+     install -d ${D}/${sysconfdir}/${BPN}
+     install -d ${D}/${sysconfdir}/init.d
+     install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog
++
+     install -d ${D}/${sysconfdir}/default/volatiles/
+     install -m 755 ${WORKDIR}/volatiles.03_syslog-ng ${D}/${sysconfdir}/default/volatiles/03_syslog-ng
++    install -d ${D}/${sysconfdir}/tmpfiles.d/
++    install -m 755 ${WORKDIR}/syslog-ng-tmp.conf ${D}/${sysconfdir}/tmpfiles.d/syslog-ng.conf
++
+     install -d ${D}/${localstatedir}/lib/${BPN}
+     # Remove /var/run as it is created on startup
+     rm -rf ${D}${localstatedir}/run
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.19.1.bb b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.19.1.bb
+index 4eecf6b..852343c 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng_3.19.1.bb
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng_3.19.1.bb
+@@ -1,15 +1,13 @@
+ require syslog-ng.inc
+ 
+-SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.tar.gz \
+-           file://syslog-ng.conf.systemd \
+-           file://syslog-ng.conf.sysvinit \
+-           file://initscript \
+-           file://volatiles.03_syslog-ng \
+-           file://configure.ac-add-option-enable-thread-tls-to-manage-.patch \
++# We only want to add stuff we need to the defaults provided in syslog-ng.inc.
++#
++SRC_URI += " \
+            file://fix-config-libnet.patch \
+            file://fix-invalid-ownership.patch \
+            file://syslog-ng.service-the-syslog-ng-service.patch \
+            file://0001-syslog-ng-fix-segment-fault-during-service-start.patch \
++           file://syslog-ng-tmp.conf \
+            "
+ 
+ SRC_URI[md5sum] = "aa79bc13d9fd925aa5fb9516e87aacd3"
+-- 
+2.7.4
 
-Andreas
 
