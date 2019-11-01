@@ -1,102 +1,48 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
-	[209.85.210.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 50A9B7FCA1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com
+	[209.85.160.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B0167FC67
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 15:40:27 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id 21so7316611pfj.9
+	Fri,  1 Nov 2019 16:34:26 +0000 (UTC)
+Received: by mail-qt1-f180.google.com with SMTP id c26so13604683qtj.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 08:40:28 -0700 (PDT)
+	Fri, 01 Nov 2019 09:34:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:openpgp:autocrypt:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=7/ajHB3ycWIYJBImZH7iAIbyPObGCaiY8SoXfSPzqOc=;
-	b=KRn7/t9Ws8o3iXBvFM66+bRfs/WoYmo16GCfjQnx6Y0i1eiCrvRjpHEQ25kHTpAxhM
-	cpesWlgP/tLpyW4SrWWWIGflg/Ecpx+lGzTQy6wSbiSYzgoxAq5WCHvow1iA0l0YLRw7
-	Flv2lopoTlP3tHB2DWbgkXBFIAYgC2m/zKiqjZmOY6NmNDlYzyhGV/uDbrVk6T3pVXHM
-	fxKOsaNN2tDOt5Mt6FaGEE03Fpd3gDnbFj0gOxgxRYkWT1xTlNNkTGDpb9G/gOt2rlFY
-	LE/O1vVyPxKjYj2bluwqeHozVjJEAnY4L3YQlG8sPGD4BM92IjLGKdUGKzEPr+k7rmVh
-	88kQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=IadQU/Tf8416kqVucHiJ0uyowsv+IgpsJEbY3EmAQJk=;
+	b=VS4SK32KJ7UUxTYfvGO2zPoJ62GLpywz3DHlD5SHPo8mwNQhpAGbC1v8doRza30wbM
+	GPZo+1Unp9TyizydvRBG5SJRtBWhKA4VZ2uK/idwiI8RjhJOXjpbMs9dwWfCBtyejWll
+	zns0b2mQj/86owMg1JTyGxu1exqRAOr9qf0XMDE4wI/BcjCJCD4u/afAuVj2VE/hWe+4
+	H+ix4A+rqjr6MQYkdNgyCXB+6lMnfUl2YlX35oqbHMkQJnDu9hZJDX8UqUKaUmdOfx2h
+	JqMsZwCDtKZMbk7/+m8EIzfhZiQBpVF+jY6gMaQr8Mmk3zp9k1AfBBYmjFkeHz2XjQN4
+	1WwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=7/ajHB3ycWIYJBImZH7iAIbyPObGCaiY8SoXfSPzqOc=;
-	b=Fk46HQLByVJs5vTs6AWUFliR6YS4Z230HyrtcsSFWY+0e/xUY7LVXcLBbiJL4LFT/X
-	zaQzUQNJqWuEGm8pKz9u7QgBHKSZJSc+grbo5x6eaXtr5hXa6+6tf6R8misBrwm4hzFm
-	11AemibO0z9ZZdqp7X9FJ/56ggxkOFt5KDKSCknBgM4xj+t9Hd4VUBpmX5jh5HgFNVfy
-	ZNsqvXKgl+JY4p9hzo+2xn4OhJQ6eMprbKHdyu2ViMgsNU22rbbhdE9O3TDBps9EEr4W
-	RbikbN0b2tu9fNyZZY13rvy89wX5uEb+lCkQUIq8UjQlEnlLgtRi78LbditTZazjA/bQ
-	gXTQ==
-X-Gm-Message-State: APjAAAVecivQZg8AINSd60px5ixsSF6e+5Vce5g8BWv0RYAGesXRKgjR
-	2wXjhIfW1s/46YrFKWV8YyGSNBuS
-X-Google-Smtp-Source: APXvYqz0497W0TfjOyQ2DVW4P+IG8iXXpfKN14GzOwxew5q5z9QXPBz4MdnJGzqzHplwv82/ByTCVQ==
-X-Received: by 2002:a17:90a:d989:: with SMTP id
-	d9mr16069893pjv.90.1572622828062; 
-	Fri, 01 Nov 2019 08:40:28 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:a5c0:e96b:2d4c:84be:986f?
-	([2601:202:4180:a5c0:e96b:2d4c:84be:986f])
-	by smtp.gmail.com with ESMTPSA id i2sm2159380pgt.34.2019.11.01.08.40.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Nov 2019 08:40:27 -0700 (PDT)
-To: Trevor Gamblin <Trevor.Gamblin@windriver.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20191031184223.14080-1-Trevor.Gamblin@windriver.com>
-	<20191031184223.14080-3-Trevor.Gamblin@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	mQINBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
-	Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
-	mP97lWgGHbiEVsDpjzmMZGlJ6pDVZzxykkJExKaosE46AcA8KvfhRQg5zRyYBtinzs8Zu8AP
-	aquZVHNXxPwjKPaSEEYqQjFeiNgFTavV+AhM2dmPmGUWCX9RZisrqA4slGwEB0srMdFf12Zg
-	mD35Y9jZ80qpu5LPtJCFcsaAlebqR+dg36pIpiRR+olhN1wmC6LYP1vw6uMEYBjkTa2Rnb6+
-	C4FDzCJD4UCrUvLMNeTW810DY0bjMMj3SfmSGSfQUssaaaTXCVlLGuGxyCr/kza1rHaXMKum
-	Ek4EFj1fyn7AfkSLEHfJfY4sO1tpgigvs4eD/4ZSQEXSu/TjVvyKx4EvUbhlGMRyH2CPwD/H
-	7DFF8tcVtJvCwUUW+zKtjxjSSLrhniNMXAOQJZ6CdaqCe4OyJQT5aRdr+FWbBRjpaRCCf5nf
-	dTc88NMU9PrBT3vu0QJ5WNPO6MJpnb+d8iMNLZAz8tv8JMm2l+sMcNKSJ6lhX8peoBsfMVqc
-	FgiykEO0fUt7DCbUYR5tLjM/3E5tHvTjMooVJyOxoufVLYtTtQARAQABtCFha3VzdGVyODA4
-	IDxha3VzdGVyODA4QGdtYWlsLmNvbT6JAj0EEwEIACcFAlnlUP4CGyMFCQlmAYAFCwkIBwIG
-	FQgJCgsCBBYCAwECHgECF4AACgkQ7ou0mfRW5/kuhRAAlR2FTq5572jrX5nnPR7AqI2bvSVb
-	vqGLlvv739WhghvagbC+tu05QguopAhWW1/DcHK2+QtfIoC9UZrSW4RaO0CCo5sPjqK7l1KT
-	ngWX/rGjF6xTF2QN0U/btcpMyVN2CNtVLwsDF9e+GHKoUcnFkP+JP8vHGokN9k6E/c97hLaL
-	IJPeKl8LZXc2Efk+MaW1NXkfDJdcp/p+voajbihSQO6OZ/o+x9d2I3ZybKfTZ71+ek5Hxzjz
-	g6KkMOI7KJjlmBlrQFAtVbS+CFAKrwkYznE6ggkcmGv3N7DeUBTUR78hf+EZEAM+ajeLMtrG
-	rXE00pIb+gLGYPZxba5pCdQ+qWUW38qi9UnIRPm6fq7Ypx1r6XwJvbgCOkhbxo3D4YUdyC0b
-	FE9lgrg8htbc9in4j2+hVI6ALswNjLprzXdzdKrd+T3Egx36o3Z/qrYsW2o5/A5sVvvASVKi
-	wRPuEKhEhfmiHUPLvuKqhMoymHaz3fg5D2Q8G0gSDkLgeEpAjiWqf4+AGLx+MSDai7DSOsmI
-	t61kWxs7cFTB32UrB/TDoVNn3Fm88ZFQpA/bngikE9jgEm045mSY86fNlbFj2mcCd0Ha1i1n
-	aYc97RpgfjNMWyHDVHOGrNg/hJjkGa5RsAXkfyBwltHRw0Hj4urUQ3rr8um8PLe43SezPwXA
-	oRoyDxC5Ag0EWeVQ/gEQALNHwj5VSPdnvXy1RXUuH+rclMx4x8zaqDyY0YqHfA7b/d8Y0VAt
-	Y6YpzDeFTwD8A0Wfb7kZ2mlDIE6ODCB71uT/E3C6b+FiiN+lgzslznjUW+9l8ddDhRrC8HMG
-	37vrXF5h++PTXUKEKUlkDib1w093tu3mlJXUvIAzl8CEHkptF6Br0L9XxFwuWoNUfjT9IorQ
-	0SVIhvq5PhVAITXUD5fD7/N8B4TYegmHFRo1UaaKSnSHwlJJkzKpeWOH8QTYrP0RHxX86Obv
-	IZuwbAo3F3oojcvLJt9NxWnbEmEALkleklLZnukgu7q5Wp1VDwhUbMFTLb6qmnBa/Xi30uOk
-	0l1TMHDbeQswvQDOZBAMukSRqyBetKxQ3iTfZ/3z1ubQRcVDbVlMDScSHQq0LK3F9yMOMM/6
-	0QPqJjl13xn/+Bn7WJiAIXXwzAV7uo6i0khFfjDtCDQ40aeffqOLxp1yMLkc3EKJGcQ5F6O2
-	ycEf4QXCYUbMXjxB0EJB8y7z+xOi5Mmd/pPlVmZ2gQK84NAL90p7n7jRlyf3gOUY+JOl4c5e
-	UFiIhOzmuqNrvPOiZ02GXh6SGUU5y7IgSoIKvXSFgHAn2OG/tcspBmkyv6IuNVpmbmEgYn4I
-	Rnt40UXVQkxTh0dENFhk2cjunMYozV/OqYCgmZLFSeJd8kAo4yn+yOtNABEBAAGJAiUEGAEI
-	AA8FAlnlUP4CGwwFCQlmAYAACgkQ7ou0mfRW5/nNcg//R63cbOS6zLtvdnPub3Ssp1Ft8Wmv
-	mni+kccuNApuDV7d63QckYxjAfUv2zYMLpbh87gVbLyCq9ASn552EbfRhTvHdk44CgbHBVcI
-	ZBEdZWgRR5ViJakQSYHpP2e5AGNFnx9gSIuRTaa5rvZM+4xeoZ2vJiq93TtaYPr7UFNfK+c4
-	vv4C66lkt9l95/I10eSc3RqbOKZW47emlg4X3ygEoB9k2lPrpspyf6sUuSEi0WrlSxoLAr6p
-	JG8rTUErYNeXe6JCdL31odDx1Dh5sdKIj2RicUYZNilxu9f1M7jZwf2ra1FGAlKj2ybqmgpZ
-	EFteaiCinEYsvDyZyOiWHjAFI+RZIPQQL3AnVp4l7wYD3r9hnqYPww0slyMDcb9262RoFkHq
-	dDwxPYarrNjWUpOzxB6bFxOgNRdCTgvQl8Ftk8a/yXB6vHeUSm1vPFCBxQPZytyfOLhEWm0J
-	/mkVL0Z6iRK3p1LKnpLYCS4/esL2u7RrhPyCs2SsL58YcQF/g+PpeT9geZ+oyZ/4IQ+TWJoU
-	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
-	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
-	8CS2NxU=
-Message-ID: <84a3f2b5-264d-3f50-1fea-c6b8f6c292b5@gmail.com>
-Date: Fri, 1 Nov 2019 08:40:26 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=IadQU/Tf8416kqVucHiJ0uyowsv+IgpsJEbY3EmAQJk=;
+	b=gYyfQg3vi/9jlgsISAmKc7uVLkcEHf3nkO2706DxErmYW6b1ASfWIzEi3luLPsYW5S
+	IxP3IkkMo5BDjmnrWwRh8sr83O9xi0Az78uu5iqlZNVONtDIkozs8sqQZPThiHXsMIJT
+	opw4nv9fS/4+2wWLOo+RrOIOhFOawCUji6fZrNk8FRWdZp+Tkp266694ZC4vF1Tg+tx1
+	yX0AaUE7hOS9uuDGDDtk54deGykQL+5awAyRsqTUHlJCmta2RQPG3ou0KpXfVAOdIAuq
+	gi8ZBdB4WcGejBzkir81NziYMs6jbS+SRSY6b79ze/xGnWPJ3z9aPXF+TFrqN0FmiRo6
+	zG9Q==
+X-Gm-Message-State: APjAAAUCx0b1Lu6aByw2lRcRc53pG+LX7cDwvSSvoJalpI2G746dXqiw
+	ohd7uQVk6KGqz9R+ULMC5s2Xb/TGfg2DPzhrrDI=
+X-Google-Smtp-Source: APXvYqyLVRJpQPsQbA6PrK26M8A8Hh6F+KFYMeW/qTPt1Umq7GV5Opihr915oHQy9d98gL9rJGjIB3eeGWrz83PwRM8=
+X-Received: by 2002:ac8:c86:: with SMTP id n6mr193662qti.80.1572626066833;
+	Fri, 01 Nov 2019 09:34:26 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20191031184223.14080-3-Trevor.Gamblin@windriver.com>
-Subject: Re: [PATCH 2/4] python-h2: add recipe
+References: <20191029010253.5784-1-schnitzeltony@gmail.com>
+	<20191029010253.5784-4-schnitzeltony@gmail.com>
+In-Reply-To: <20191029010253.5784-4-schnitzeltony@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 1 Nov 2019 09:34:00 -0700
+Message-ID: <CAMKF1srqmOG5k8mfAZ04YH0DUUROSLUCVLwMGUrRQ-=Y2yeFsg@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v2 4/4] ibus: initial add 1.5.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -109,61 +55,228 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 15:40:27 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 01 Nov 2019 16:34:27 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-are these V2 or just a miss fire?
+Hi Andreas
 
+I see this fail on ubuntu 18.04 host
+https://errors.yoctoproject.org/Errors/Details/275175/
 
-
-On 10/31/19 11:42 AM, Trevor Gamblin wrote:
-> From: Trevor Gamblin <trevor.gamblin@windriver.com>
+On Mon, Oct 28, 2019 at 6:03 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
 >
-> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> It is a depency for gnome-shell
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 > ---
->  .../recipes-connectivity/python-h2/python-h2.inc       | 10 ++++++++++
->  .../recipes-connectivity/python-h2/python-h2_3.1.1.bb  |  3 +++
->  .../recipes-connectivity/python-h2/python3-h2_3.1.1.bb |  3 +++
->  3 files changed, 16 insertions(+)
->  create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2.inc
->  create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
->  create mode 100644 meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
 >
-> diff --git a/meta-python/recipes-connectivity/python-h2/python-h2.inc b/meta-python/recipes-connectivity/python-h2/python-h2.inc
+> v1 -> v2: went out too early with breaking configure option
+> v2 -> v3: avoid using build host's unicode-ucd / slightly rework PACKAGEC=
+ONFIG
+>           defaults
+>
+>  .../recipes-support/ibus/ibus-native.bb       | 30 ++++++++++++++
+>  meta-gnome/recipes-support/ibus/ibus.bb       | 37 ++++++++++++++++++
+>  meta-gnome/recipes-support/ibus/ibus.inc      | 36 +++++++++++++++++
+>  ...start-dbus-we-do-not-have-dbus-lauch.patch | 39 +++++++++++++++++++
+>  4 files changed, 142 insertions(+)
+>  create mode 100644 meta-gnome/recipes-support/ibus/ibus-native.bb
+>  create mode 100644 meta-gnome/recipes-support/ibus/ibus.bb
+>  create mode 100644 meta-gnome/recipes-support/ibus/ibus.inc
+>  create mode 100644 meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-=
+to-start-dbus-we-do-not-have-dbus-lauch.patch
+>
+> diff --git a/meta-gnome/recipes-support/ibus/ibus-native.bb b/meta-gnome/=
+recipes-support/ibus/ibus-native.bb
 > new file mode 100644
-> index 000000000..42629c261
+> index 000000000..3f8e1ed12
 > --- /dev/null
-> +++ b/meta-python/recipes-connectivity/python-h2/python-h2.inc
-> @@ -0,0 +1,10 @@
-> +DESCRIPTION = "HTTP/2 State-Machine based protocol implementation"
-> +HOMEPAGE = "https://github.com/python-hyper/hyper-h2"
-> +LICENSE = "MIT"
+> +++ b/meta-gnome/recipes-support/ibus/ibus-native.bb
+> @@ -0,0 +1,30 @@
+> +require ${BPN}.inc
 > +
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
+> +inherit native
 > +
-> +SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
-> +SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
+> +DEPENDS +=3D " \
+> +    glib-2.0-native \
+> +    dbus-native \
+> +    iso-codes \
+> +"
 > +
-> +inherit pypi
-> diff --git a/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
+> +PACKAGECONFIG =3D ""
+> +
+> +# for allarch iso-codes
+> +EXTRA_NATIVE_PKGCONFIG_PATH =3D ":${RECIPE_SYSROOT}${datadir_native}/pkg=
+config"
+> +# for allarch unicode-ucd - just to make configure happy
+> +EXTRA_OECONF +=3D "--with-ucd-dir=3D${RECIPE_SYSROOT}${datadir_native}/u=
+nicode/ucd"
+> +
+> +do_compile() {
+> +    cd src
+> +    oe_runmake ibusenumtypes.h ibusenumtypes.c
+> +    oe_runmake unicode-parser
+> +}
+> +
+> +do_install() {
+> +    install -d ${D}/${libdir}
+> +    install -m 755 ${S}/src/.libs/libibus-*.so* ${D}/${libdir}
+> +
+> +    install -d ${D}/${bindir}
+> +    install -m 755 ${S}/src/.libs/unicode-parser ${D}/${bindir}
+> +}
+> diff --git a/meta-gnome/recipes-support/ibus/ibus.bb b/meta-gnome/recipes=
+-support/ibus/ibus.bb
 > new file mode 100644
-> index 000000000..b84129742
+> index 000000000..caec455b6
 > --- /dev/null
-> +++ b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
-> @@ -0,0 +1,3 @@
-> +require python-h2.inc
+> +++ b/meta-gnome/recipes-support/ibus/ibus.bb
+> @@ -0,0 +1,37 @@
+> +require ${BPN}.inc
 > +
-> +inherit setuptools
-> diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
+> +DEPENDS +=3D " \
+> +    ${BPN}-native \
+> +    glib-2.0-native \
+> +    glib-2.0 \
+> +    dbus \
+> +    iso-codes \
+> +"
+> +
+> +inherit gtk-icon-cache bash-completion
+> +
+> +# for unicode-ucd
+> +EXTRA_OECONF +=3D "--with-ucd-dir=3D${STAGING_DATADIR}/unicode/ucd"
+> +
+> +PACKAGECONFIG ??=3D " \
+> +    dconf vala \
+> +    ${@bb.utils.contains_any('DISTRO_FEATURES', [ 'wayland', 'x11' ], 'g=
+tk3', '', d)} \
+> +    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland x11', d)} \
+> +"
+> +
+> +do_configure_prepend() {
+> +    # run native unicode-parser
+> +    sed -i 's:$(builddir)/unicode-parser:unicode-parser:g' ${S}/src/Make=
+file.am
+> +}
+> +
+> +FILES_${PN} +=3D " \
+> +    ${datadir}/dbus-1 \
+> +    ${datadir}/GConf \
+> +    ${datadir}/glib-2.0 \
+> +    ${libdir}/gtk-3.0 \
+> +"
+> +
+> +FILES_${PN}-dev +=3D " \
+> +    ${datadir}/gettext \
+> +"
+> +
+> diff --git a/meta-gnome/recipes-support/ibus/ibus.inc b/meta-gnome/recipe=
+s-support/ibus/ibus.inc
 > new file mode 100644
-> index 000000000..7230a27e8
+> index 000000000..0f4ae7d04
 > --- /dev/null
-> +++ b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
-> @@ -0,0 +1,3 @@
-> +require python-h2.inc
+> +++ b/meta-gnome/recipes-support/ibus/ibus.inc
+> @@ -0,0 +1,36 @@
+> +SUMMARY =3D "Intelligent Input Bus for Linux/Unix"
+> +HOMEPAGE =3D "https://github.com/ibus/ibus/wiki"
+> +LICENSE =3D "LGPLv2.1"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfbc093901857fcd118f065f900982=
+c24"
 > +
-> +inherit setuptools3
-
+> +inherit autotools-brokensep pkgconfig gobject-introspection gettext gtk-=
+doc vala
+> +
+> +PV =3D "1.5.21"
+> +
+> +DEPENDS =3D "unicode-ucd"
+> +
+> +SRC_URI =3D " \
+> +    git://github.com/ibus/ibus.git \
+> +    file://0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch=
+ \
+> +"
+> +SRCREV =3D "ae0040c73466bb6e78fce5e669a55fcce6ffd16d"
+> +S =3D "${WORKDIR}/git"
+> +
+> +PACKAGECONFIG[appindicator] =3D "--enable-appindicator,--disable-appindi=
+cator,qtbase"
+> +PACKAGECONFIG[dconf] =3D "--enable-dconf,--disable-dconf,dconf"
+> +PACKAGECONFIG[gtk2] =3D "--enable-gtk2,--disable-gtk2,gtk+"
+> +PACKAGECONFIG[gtk3] =3D "--enable-gtk3,--disable-gtk3,gtk+3"
+> +PACKAGECONFIG[wayland]  =3D "--enable-wayland,--disable-wayland,wayland"
+> +PACKAGECONFIG[vala]  =3D "--enable-vala,--disable-vala"
+> +PACKAGECONFIG[x11]  =3D "--enable-xim --enable-ui,--disable-xim --disabl=
+e-ui,virtual/libx11"
+> +
+> +EXTRA_OECONF =3D " \
+> +    --disable-tests \
+> +    --disable-emoji-dict \
+> +    --disable-python2 \
+> +"
+> +
+> +do_configure_prepend() {
+> +    touch ${S}/ChangeLog
+> +    touch ${S}/ABOUT-NLS
+> +}
+> diff --git a/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-star=
+t-dbus-we-do-not-have-dbus-lauch.patch b/meta-gnome/recipes-support/ibus/ib=
+us/0001-Do-not-try-to-start-dbus-we-do-not-have-dbus-lauch.patch
+> new file mode 100644
+> index 000000000..3701d19f5
+> --- /dev/null
+> +++ b/meta-gnome/recipes-support/ibus/ibus/0001-Do-not-try-to-start-dbus-=
+we-do-not-have-dbus-lauch.patch
+> @@ -0,0 +1,39 @@
+> +From f567bcbc2108d722faa90afeb03d3a3bcdf5f58b Mon Sep 17 00:00:00 2001
+> +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail.c=
+om>
+> +Date: Fri, 10 May 2019 14:30:08 +0200
+> +Subject: [PATCH] Do not try to start dbus - we do not have dbus-lauch
+> +MIME-Version: 1.0
+> +Content-Type: text/plain; charset=3DUTF-8
+> +Content-Transfer-Encoding: 8bit
+> +
+> +Upstream-Status: Inappropriate [OE specific]
+> +
+> +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> +---
+> + data/dconf/make-dconf-override-db.sh | 6 ------
+> + 1 file changed, 6 deletions(-)
+> +
+> +diff --git a/data/dconf/make-dconf-override-db.sh b/data/dconf/make-dcon=
+f-override-db.sh
+> +index 9c650e97..02fbf059 100755
+> +--- a/data/dconf/make-dconf-override-db.sh
+> ++++ b/data/dconf/make-dconf-override-db.sh
+> +@@ -12,10 +12,6 @@ export XDG_CACHE_HOME=3D"$TMPDIR/cache"
+> + export GSETTINGS_SCHEMA_DIR=3D"$TMPDIR/schemas"
+> + mkdir -p $XDG_CONFIG_HOME $XDG_CACHE_HOME $GSETTINGS_SCHEMA_DIR
+> +
+> +-eval `dbus-launch --sh-syntax`
+> +-
+> +-trap 'rm -rf $TMPDIR; kill $DBUS_SESSION_BUS_PID' ERR
+> +-
+> + # in case that schema is not installed on the system
+> + glib-compile-schemas --targetdir "$GSETTINGS_SCHEMA_DIR" "$PWD"
+> +
+> +@@ -46,5 +42,3 @@ for schema in $schemas; do
+> + done
+> +
+> + rm -rf $TMPDIR
+> +-
+> +-kill $DBUS_SESSION_BUS_PID
+> +--
+> +2.20.1
+> +
+> --
+> 2.21.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
