@@ -1,32 +1,48 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A10E97F95C
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
+	[209.85.166.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 476527FC1F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 10:22:29 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,254,1569254400"; d="scan'208";a="77792760"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 18:22:30 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id CEAD64CE1514
+	Fri,  1 Nov 2019 10:45:22 +0000 (UTC)
+Received: by mail-io1-f68.google.com with SMTP id p6so10428957iod.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 18:14:29 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Fri, 1 Nov 2019 18:22:31 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Nov 2019 22:00:49 +0800
-Message-ID: <1572616849-69504-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Fri, 01 Nov 2019 03:45:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=Mr9PTnA0nciut6M/veuq7cuOCcNvebIUsEDrD0FJcUk=;
+	b=LGPnD9TwQmiHMbspB5ToEaE5L0tIfxszpebWFQDrvBfHyKGf/HZ4KVxEqMon7zb//d
+	w24/is8Un7eXgGJ54tminKKXRifscpq/rLoQhDz3uwScpTClg3Du392ksUGZrBK4vbdM
+	fzcmAXhMrBSzMGQ8kU0vf5KfIe4nO8BkUYxH4uDVJcLlZeLVznSKHRweNBWxRNrQxdVP
+	qB/xRXIIYmg7pjA2ziRlypzhgH2XB+dU7bmGNGhw9u1OsakudPnPQGwzp3ibG9CQ56wH
+	2AWtKucJCVXEuBg8BWXEkqb1/v4aQ/+Oy18jDlQkKKs30+VvA+zoD/BBZ6alvLG+uqMp
+	QGAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=Mr9PTnA0nciut6M/veuq7cuOCcNvebIUsEDrD0FJcUk=;
+	b=OEC52i+prKL3qh7uU9OVfrrH/MIsg8GqfxJquPna1ozt8KFQbbLV6NzL1itLlbfIVY
+	TdUKj13yStWVmm1GnRxoe+hq4UCQkVTowDA27bGSxnBtiC66e2QOdS7l3Y9I+TDLhXLT
+	eoiQBPstrGcDSPu2TdE3Rkm7DGUh6aZX8pTBG7dkDKBdXTwHunttTrfgeh0Mnw1fRnO3
+	A5aIKnn9ZbfdwwxKuHC9lDYabcc5G7qb9SaiKcSHqSFWbWnl1S//fM62U4hOq4Rrsfj3
+	aWbz73/N6sUEbXpgyYNhUtz3iWlsiBFVMo4+BNJ/CK81n8qZz95dcTjeTlZjkzB6swqq
+	ApMQ==
+X-Gm-Message-State: APjAAAV3AA6FacUHKJVzdp0HaFnmS9/zyNNxF350+siUkiOLTh+MoW04
+	FgPqu7V3aXheOsgElZ3qojKZKYHVZ1ps2RtMOQX8JOrC
+X-Google-Smtp-Source: APXvYqygnEJpRxn2KB6f9TPL3pFQ/jC9Rhs+WgZjga+mCPu36MhuY21jx4VGlQXG9MBPneYawxHxlVKMOyGjtc5YX00=
+X-Received: by 2002:a5d:81c3:: with SMTP id t3mr9914651iol.300.1572605122931; 
+	Fri, 01 Nov 2019 03:45:22 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
-X-yoursite-MailScanner-ID: CEAD64CE1514.A959C
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH v2] libtorrent: upgrade 0.13.7 -> 0.13.8
+References: <20191011212120.11453-1-alistair.francis@wdc.com>
+In-Reply-To: <20191011212120.11453-1-alistair.francis@wdc.com>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Fri, 1 Nov 2019 11:44:45 +0100
+Message-ID: <CAB2nKc8MA7uLUxbJrzh-a48AHe66XoghYaGLxF0PRH7y45RiWQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: "Maxin B. John" <maxin.john@intel.com>,
+	Otavio Salvador <otavio.salvador@gmail.com>
+Subject: Re: [meta-java][PATCH] layer.conf: Mark as compatible with zeus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,33 +55,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 10:22:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Nov 2019 10:45:22 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Hi Team,
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-index b2dffcd..1533a28 100644
---- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-@@ -11,9 +11,9 @@ SRC_URI = "git://github.com/rakshasa/libtorrent \
-            file://0001-implement-64bit-atomic-for-mips.patch \
-            file://0001-Define-64bit-atomic-helpers-for-ppc-32-bit.patch \
-            "
--SRCREV = "074f6ec51a2e4bc5c6140b4dad13c9bb56f3f0dc"
-+SRCREV = "756f70010779927dc0691e1e722ed433d5d295e1"
- 
--PV = "0.13.7+git${SRCPV}"
-+PV = "0.13.8"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.7.4
+Would it be possible to create Zeus branch for meta-java?
+By the way, master branch didn't move since April, any issue
+maintaining this layer?
 
+Kind regards,
+Vincent
 
-
+Le ven. 11 oct. 2019 =C3=A0 23:26, Alistair Francis
+<alistair.francis@wdc.com> a =C3=A9crit :
+>
+> Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+> ---
+> Also, can the master-next branch be pushed to master?
+>
+>  conf/layer.conf | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index 90236be..cdba2cd 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -7,7 +7,7 @@ BBFILES +=3D "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/rec=
+ipes*/*/*.bbappend"
+>  BBFILE_COLLECTIONS +=3D "meta-java"
+>  BBFILE_PATTERN_meta-java :=3D "^${LAYERDIR}/"
+>  BBFILE_PRIORITY_meta-java =3D "10"
+> -LAYERSERIES_COMPAT_meta-java =3D "thud warrior"
+> +LAYERSERIES_COMPAT_meta-java =3D "thud warrior zeus"
+>
+>  LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+>
+> --
+> 2.23.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
