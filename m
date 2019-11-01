@@ -1,50 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 74C4B6BF37
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C2E557FC9D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 17:04:04 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id o49so13742379qta.7
+	Fri,  1 Nov 2019 17:05:23 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id t26so13751251qtr.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 10:04:05 -0700 (PDT)
+	Fri, 01 Nov 2019 10:05:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=zwXrY1sQtckfELXgbZitdFz6qpYzPIY9/CsieNNi5qg=;
-	b=IJpoF9LJaCev3R9PD8M15pO3fLVzaN2DiN6Ke5iOASSIkm4sN4AbEYrj2U/0jHmmEw
-	at4nHfGVU+JQV+8pacqaxQfIo0yYfxejuwrerbvvODWgJQwvNpWVIcOwdgBCGweMhdMJ
-	+FFozsSlEjdqNi2FTWoKvS4keiJplibxC7AHx2h09r8BQ87GB7FFg89UfyW0hCBrtjYu
-	P8ZjUuhg5WDMMjMj7y3g1DDtOi9jgLUnCmr+GrkD+GKzbXe34aQ74RCGXTzmnX654QgR
-	HO+c3+iIMXIIt4yof7wgb/G2QHtfqEHQvQ5GunO7zi8Uo+5z1hz12o6BuYZ9Bdf9jgu6
-	Aq8Q==
+	:cc; bh=2jRgJwaTWDDiYZkOqjhBGrIN1Tp+TgmyWg3gpiElYFc=;
+	b=MLEZ9vo4c72fcn0LJHvMt/d6xjJZZOUx5XHeWbmivJYzTgC6LieC81yMTt1RiqlBVJ
+	eFO2bjSYhw2VKWCWyQJC7AAx86j2oMGueLsCafEYSGL0nPIjvEdzck9aHuUR3YeLnyTG
+	LseRDG5Qg3QTHgIA51K6Hu/OSwFj7DwWBHR14yvxU2I3ogGB+2XpOGW5Rh4qkjPMb8Rq
+	ZW2YWSwfXrl73Bbay0iEax9NNbSUiHeJgYuNvBmBQEHF9nQZIm3tOyv6nw7EkA6WyQ3H
+	4Rws8q5zecQCZAhHJNLXBut8sFwee+XPUTnbVsH7l7N4eBHmDsD6SgZYMTS/ni1MuTBc
+	bWDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=zwXrY1sQtckfELXgbZitdFz6qpYzPIY9/CsieNNi5qg=;
-	b=pk6YjvZDA3HxdZaAwsAfqYTevsBIvXQ8s7v+ge83ZtDrcnnlhG7cJehN7sU+EMyolb
-	vwU+AxMjNYaTgKYHrqvqOMnLXTVqdeNPE4JhS/ZvuEjoN9xx8jCUzLgg53wKkkcsGt6j
-	WPqqvM2xYVryZ2tfZby1+JX0idWu+M9Frmu7eQaCKYOIHOBramaCed0TJc3WYqVtGzcc
-	lFFf5XydBC3CxnDnUpe2jUnI4biVdXqI0CqocY529DAkGFk4G/dUJKIwOtqZr5oHQaoe
-	tBC3tZqO2oUXmPbyQSZZvKpD4LG7kS9syQaUEsoBPBwOkVSHQ2dFARdNCmJB8+7Tu0Ay
-	etpw==
-X-Gm-Message-State: APjAAAWsTHGm58metFmsuSJrTpNPrkeGVrUomBb9Eg4iP/aW2qyG5rpv
-	mtTRgjoMPFT3bKumM4YwG7RnKT/pR6/t6PAeNd0=
-X-Google-Smtp-Source: APXvYqzMtnjHykftCuHHJq+5hK/IDjiTc2ckYdGbZ5lcMj8mdkIrjDrjk6Z+PRudA/JJ4ghwu9jhA/0rltg+rJ4Vzms=
-X-Received: by 2002:ac8:2476:: with SMTP id d51mr318810qtd.378.1572627844940; 
-	Fri, 01 Nov 2019 10:04:04 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=2jRgJwaTWDDiYZkOqjhBGrIN1Tp+TgmyWg3gpiElYFc=;
+	b=dLCh7QugyRzgTGxvU3k60ZilytZVmVofCsWHmKZziJNouX4qj2wbfd+Rr01Yfku8hE
+	7wg+DdlINQssuVH2HiUs5JULXp7LiFll8iaPKqUjmDfn+HsaZglOYdxsXThOmlHcgGH+
+	THwNytD71RPdPEXGcStaw8PTuw181KcFGCGUvsT6lP9mlCIFzZzIxVCTjD4dKtImtZZu
+	Vw9XTkUnF4XuzeL1kgNIeIdATnZPXirGIqDL2I1JpoXXYAFiU/FjTgIlnITgNumwsCpr
+	Vo9Uolh93zWbx+spA+ipu2Suobnr2RVvwypy54ThkfTdqktChTjI82m+bl+4ScVW7dYY
+	MdjA==
+X-Gm-Message-State: APjAAAXx3OdA3eCEKRgGbP6UiuwbUDH0Sub1TXpghN2LbcgNrlG3bgZM
+	awW0TanOATR3O9QJtRLVJ9y03o9zGJ7c9upjuXk=
+X-Google-Smtp-Source: APXvYqxAfBGaXmtSaCy9DrGvwWkxTWxlh4t+bSAkn0NoPGbPkEIUqEGHbab/7L9/hEBbBU3ill6rlxla7zQL/lUqGKc=
+X-Received: by 2002:ac8:2ddc:: with SMTP id q28mr353100qta.88.1572627924364;
+	Fri, 01 Nov 2019 10:05:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191029010253.5784-1-schnitzeltony@gmail.com>
-	<20191029010253.5784-4-schnitzeltony@gmail.com>
-	<CAMKF1srqmOG5k8mfAZ04YH0DUUROSLUCVLwMGUrRQ-=Y2yeFsg@mail.gmail.com>
-	<CALbNGRQn151mjXniXnS+Edi79VMomdaUiP9-hbzzMo30dAwCog@mail.gmail.com>
-In-Reply-To: <CALbNGRQn151mjXniXnS+Edi79VMomdaUiP9-hbzzMo30dAwCog@mail.gmail.com>
+References: <20191031184223.14080-1-Trevor.Gamblin@windriver.com>
+	<20191031184223.14080-3-Trevor.Gamblin@windriver.com>
+	<84a3f2b5-264d-3f50-1fea-c6b8f6c292b5@gmail.com>
+In-Reply-To: <84a3f2b5-264d-3f50-1fea-c6b8f6c292b5@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 Nov 2019 10:03:38 -0700
-Message-ID: <CAMKF1sq-2rVXqmYeVNTqjaB7DsKFJr9+u095P826_N3E2RhNMw@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 1 Nov 2019 10:04:58 -0700
+Message-ID: <CAMKF1srBK7CzoBvNW0vbW2iP0cy3KRRnHr1=uSO926xxM=tRGw@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2 4/4] ibus: initial add 1.5.21
+Subject: Re: [PATCH 2/4] python-h2: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,23 +55,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 17:04:04 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 17:05:24 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Nov 1, 2019 at 9:53 AM Andreas M=C3=BCller <schnitzeltony@gmail.com=
-> wrote:
+On Fri, Nov 1, 2019 at 8:40 AM akuster808 <akuster808@gmail.com> wrote:
 >
-> On Fri, Nov 1, 2019 at 5:34 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > Hi Andreas
-> >
-> > I see this fail on ubuntu 18.04 host
-> > https://errors.yoctoproject.org/Errors/Details/275175/
-> See what I can do - is it a server 'only' installation?
+> are these V2 or just a miss fire?
 >
 
-thats right. Its minimal server install + OE prerequisites
+there was no meta-python in the subject line. So there was another set
+which was sent
+which I have picked
 
-> Andreas
+>
+>
+> On 10/31/19 11:42 AM, Trevor Gamblin wrote:
+> > From: Trevor Gamblin <trevor.gamblin@windriver.com>
+> >
+> > Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> > ---
+> >  .../recipes-connectivity/python-h2/python-h2.inc       | 10 ++++++++++
+> >  .../recipes-connectivity/python-h2/python-h2_3.1.1.bb  |  3 +++
+> >  .../recipes-connectivity/python-h2/python3-h2_3.1.1.bb |  3 +++
+> >  3 files changed, 16 insertions(+)
+> >  create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2.inc
+> >  create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
+> >  create mode 100644 meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
+> >
+> > diff --git a/meta-python/recipes-connectivity/python-h2/python-h2.inc b/meta-python/recipes-connectivity/python-h2/python-h2.inc
+> > new file mode 100644
+> > index 000000000..42629c261
+> > --- /dev/null
+> > +++ b/meta-python/recipes-connectivity/python-h2/python-h2.inc
+> > @@ -0,0 +1,10 @@
+> > +DESCRIPTION = "HTTP/2 State-Machine based protocol implementation"
+> > +HOMEPAGE = "https://github.com/python-hyper/hyper-h2"
+> > +LICENSE = "MIT"
+> > +
+> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
+> > +
+> > +SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
+> > +SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
+> > +
+> > +inherit pypi
+> > diff --git a/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
+> > new file mode 100644
+> > index 000000000..b84129742
+> > --- /dev/null
+> > +++ b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
+> > @@ -0,0 +1,3 @@
+> > +require python-h2.inc
+> > +
+> > +inherit setuptools
+> > diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
+> > new file mode 100644
+> > index 000000000..7230a27e8
+> > --- /dev/null
+> > +++ b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
+> > @@ -0,0 +1,3 @@
+> > +require python-h2.inc
+> > +
+> > +inherit setuptools3
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
