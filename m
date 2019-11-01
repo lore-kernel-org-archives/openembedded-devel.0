@@ -1,35 +1,30 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 145547F7DA
+	by mail.openembedded.org (Postfix) with ESMTP id 452E97FC39
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 02:40:34 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,253,1569254400"; d="scan'208";a="77773192"
+	Fri,  1 Nov 2019 02:47:39 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,253,1569254400"; d="scan'208";a="77773628"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 10:40:34 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id B3BD94CE19E5;
-	Fri,  1 Nov 2019 10:32:30 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0439.000; Fri, 1 Nov 2019 10:40:37 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: reply: [oe] [meta-oe][PATCH] ledmon: upgrade to 0.93
-Thread-Index: AdWQXV3OSphAW4WMT/Gabbpo558qGA==
-Date: Fri, 1 Nov 2019 02:40:29 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF73B5B946E7@G08CNEXMBPEKD01.g08.fujitsu.local>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.225.35]
+	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 10:47:39 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 6D8D34CE1649
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  1 Nov 2019 10:39:39 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 10:47:41 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 1 Nov 2019 10:47:55 +0800
+Message-ID: <20191101024755.3131-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: B3BD94CE19E5.AD5F7
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 6D8D34CE1649.A9711
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: reply: [meta-oe][PATCH] ledmon: upgrade to 0.93
+Subject: [meta-python] [PATCH] python-lazy-object-proxy: upgrade 1.3.1 -> 1.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,136 +37,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 02:40:35 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 01 Nov 2019 02:47:39 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-SGkgS2hlbQ0KDQorIEFYX0FNX0NGTEFHU19BREQoWy1XZXJyb3I9Zm9ybWF0
-LXNpZ25lZG5lc3NdKQ0KKytBWF9BTV9DRkxBR1NfQUREKFstV25vLWFkZHJl
-c3Mtb2YtcGFja2VkLW1lbWJlcl0pDQorIA0KDQo+VGhpcyB3YXJuaW5nIGtu
-b2IgbWF5IG5vdCBiZSBhdmFpbGFibGUgYWx3YXlzIHNvDQo+RWl0aGVyIHdl
-IGZpeCB0aGUgd2FybmluZyBieSBhbHRlcmluZyB0aGUgY29kZSBhbmQgbWFr
-aW5nIGl0IGdvIGF3YXkgb3Igd2UgZGlzYWJsZSB3ZXJyb3IgY29tcGxldGVs
-eQ0KPk9mIGNvdXJzZSBmaXJzdCBvcHRpb24gaXMgcHJlZmVycmVkDQoNCkkg
-Zm91bmQgYSBuZXcgcHVsbCByZXF1ZXN0IHRvIGZpeCB0aGlzIHByb2JsZW0u
-IENhbiBJIGJhY2twb3J0IGl0PyANCmh0dHBzOi8vZ2l0aHViLmNvbS9pbnRl
-bC9sZWRtb24vcHVsbC80OC9jb21taXRzDQoNCi1pbmhlcml0IHN5c3RlbWQN
-Citpbmhlcml0IGF1dG90b29scy1icm9rZW5zZXAgc3lzdGVtZA0KDQo+VGhp
-cyBpcyBzYWQgdGhhdCB3ZSBtb3ZlIHRvIG5ldyB2ZXJzaW9uIGFuZCBvdXQg
-b2YgdHJlZSBidWlsZCBpcyBicm9rZW4gY2FuIHdlIGZpeCB0aGF0IHJhdGhl
-ciB0aGFuIHBhdGNoaW5nIGl0IG91dCA/IA0KPkl0IG1pZ2h0IGJlIHVwc3Ry
-ZWFtIHdvcnRoeSBwYXRjaCBhcyB3ZWxsDQoNCkZvciB0aGlzIHByb2JsZW0s
-IEkgZm91bmQgaW5oZXJpdCBhdXRvdG9vbHMgc3lzdGVtIGFsc28gd29ya3Mg
-d2VsbC4gU28gc2hvdWxkIEkgaW5oZXJpdCBhdXRvdG9vbHM/DQoNCsKgIC0t
-DQpCZXN0IFJlZ2FyZHMNCg0K5Y+R5Lu25Lq6OiBLaGVtIFJhaiA8cmFqLmto
-ZW1AZ21haWwuY29tPiANCuWPkemAgeaXtumXtDogMjAxOeW5tDEw5pyIMzHm
-l6UgMTg6NDUNCuaUtuS7tuS6ujogWmhlbmcsIFJ1b3Fpbi/pg5Eg6Iul6ZKm
-IDx6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5jb20+DQrmioTpgIE6IG9wZW5l
-bWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQrkuLvpopg6
-IFJlOiBbb2VdIFttZXRhLW9lXVtQQVRDSF0gbGVkbW9uOiB1cGdyYWRlIHRv
-IDAuOTMNCg0KDQoNCk9uIFRodSwgT2N0IDMxLCAyMDE5IGF0IDk6MTYgQU0g
-WmhlbmcgUnVvcWluIDxtYWlsdG86emhlbmdycS5mbnN0QGNuLmZ1aml0c3Uu
-Y29tPiB3cm90ZToNCjEpIGluaGVyaXQgYXV0b3Rvb2xzLWJyb2tlbnNlcCBh
-cyBuZXcgdmVyc2lvbiB1c2UgYXV0b3Rvb2xzLg0KDQoyKSBBZGQgYSBwYXRj
-aCB0byBmaXggY29tcGlsZSBlcnJvci4NCsKgIMKgMDAwMS1EaXNhYmxlLVdh
-ZGRyZXNzLW9mLXBhY2tlZC1tZW1iZXItdG8tZml4LWNvbXBpLnBhdGNoDQoN
-CjMpIE1vZGlmeSBkb19pbnN0YWxsX2FwcGVuZCgpIGZ1bmN0aW9uIHRvIGZp
-eCBkb19wYWNrYWdlIGVycm9yIGFzIGZvbGxvd3M6DQrCoCDCoGxlZG1vbi1n
-aXQtcjAgZG9fcGFja2FnZTogU1lTVEVNRF9TRVJWSUNFX2xlZG1vbiB2YWx1
-ZSBsZWRtb24uc2VydmljZSBkb2VzIG5vdCBleGlzdA0KDQpTaWduZWQtb2Zm
-LWJ5OiBaaGVuZyBSdW9xaW4gPG1haWx0bzp6aGVuZ3JxLmZuc3RAY24uZnVq
-aXRzdS5jb20+DQotLS0NCsKgLi4ubGUtV2FkZHJlc3Mtb2YtcGFja2VkLW1l
-bWJlci10by1maXgtY29tcGkucGF0Y2ggfCAzNSArKysrKysrKysrKysrKysr
-KysrKysrDQrCoG1ldGEtb2UvcmVjaXBlcy1ic3AvbGVkbW9uL2h0dHA6Ly9s
-ZWRtb25fZ2l0LmJiwqAgwqAgwqAgwqAgwqAgwqB8IDEzICsrKystLS0tDQrC
-oDIgZmlsZXMgY2hhbmdlZCwgNDMgaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlv
-bnMoLSkNCsKgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1i
-c3AvbGVkbW9uL2xlZG1vbi8wMDAxLURpc2FibGUtV2FkZHJlc3Mtb2YtcGFj
-a2VkLW1lbWJlci10by1maXgtY29tcGkucGF0Y2gNCg0KZGlmZiAtLWdpdCBh
-L21ldGEtb2UvcmVjaXBlcy1ic3AvbGVkbW9uL2xlZG1vbi8wMDAxLURpc2Fi
-bGUtV2FkZHJlc3Mtb2YtcGFja2VkLW1lbWJlci10by1maXgtY29tcGkucGF0
-Y2ggYi9tZXRhLW9lL3JlY2lwZXMtYnNwL2xlZG1vbi9sZWRtb24vMDAwMS1E
-aXNhYmxlLVdhZGRyZXNzLW9mLXBhY2tlZC1tZW1iZXItdG8tZml4LWNvbXBp
-LnBhdGNoDQpuZXcgZmlsZSBtb2RlIDEwMDY0NA0KaW5kZXggMDAwMDAwMC4u
-YmQyYjIwNA0KLS0tIC9kZXYvbnVsbA0KKysrIGIvbWV0YS1vZS9yZWNpcGVz
-LWJzcC9sZWRtb24vbGVkbW9uLzAwMDEtRGlzYWJsZS1XYWRkcmVzcy1vZi1w
-YWNrZWQtbWVtYmVyLXRvLWZpeC1jb21waS5wYXRjaA0KQEAgLTAsMCArMSwz
-NSBAQA0KK0Zyb20gMzEwNTQwYmJmODUzYmM5YmVhMzg0OTYyZDZhY2Y2NmM3
-ZTk5ZmQ4MyBNb24gU2VwIDE3IDAwOjAwOjAwIDIwMDENCitGcm9tOiBaaGVu
-ZyBSdW9xaW4gPG1haWx0bzp6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5jb20+
-DQorRGF0ZTogVGh1LCAzMSBPY3QgMjAxOSAxMjo1Mjo1NyArMDkwMA0KK1N1
-YmplY3Q6IFtQQVRDSF0gRGlzYWJsZSAtV2FkZHJlc3Mtb2YtcGFja2VkLW1l
-bWJlciB0byBmaXggY29tcGlsZQ0KKyBlcnJvci4NCisNCisiLVdhZGRyZXNz
-LW9mLXBhY2tlZC1tZW1iZXIiIGlzIGVuYWJsZWQgYnkgZGVmYXVsdCB3aXRo
-IGdjYy05LCBhbmQgcmFpc2UgdGhlIGZvbGxvd2luZyB3YXJpbmcuDQorDQor
-fMKgIMKgNTUwIHzCoCBfZHVtcF9zZ3Bpb19hbWQoJmFtZF9yZWctPmFtZCk7
-DQorfMKgIMKgIMKgIMKgfMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIF5+
-fn5+fn5+fn5+fn4NCit8IGFtZF9zZ3Bpby5jOiBJbiBmdW5jdGlvbiAnX3dy
-aXRlX2FtZF9yZWdpc3Rlcic6DQorfCBhbWRfc2dwaW8uYzo1NTg6MTg6IGVy
-cm9yOiB0YWtpbmcgYWRkcmVzcyBvZiBwYWNrZWQgbWVtYmVyIG9mICdzdHJ1
-Y3QgYW1kX3JlZ2lzdGVyJyBtYXkgcmVzdWx0IGluIGFuIHVuYWxpZ25lZCBw
-b2ludGVyIHZhbHVlIFstV2Vycm9yPWFkZHJlc3Mtb2YtcGFja2VkLW1lbWJl
-cl0NCisNCitTbyBkaXNhYmxlIGl0Lg0KKw0KK1NpZ25lZC1vZmYtYnk6IFpo
-ZW5nIFJ1b3FpbiA8bWFpbHRvOnpoZW5ncnEuZm5zdEBjbi5mdWppdHN1LmNv
-bT4NCistLS0NCisgaHR0cDovL2NvbmZpZ3VyZS5hYyB8IDEgKw0KKyAxIGZp
-bGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKykNCisNCitkaWZmIC0tZ2l0IGEv
-aHR0cDovL2NvbmZpZ3VyZS5hYyBiL2h0dHA6Ly9jb25maWd1cmUuYWMNCitp
-bmRleCA3YmMyMGY4Li5iZjg5YTNjIDEwMDY0NA0KKy0tLSBhL2h0dHA6Ly9j
-b25maWd1cmUuYWMNCisrKysgYi9odHRwOi8vY29uZmlndXJlLmFjDQorQEAg
-LTI0LDYgKzI0LDcgQEAgQVhfQU1fQ0ZMQUdTX0FERChbLVdlcnJvcj1hbGxv
-Y2FdKQ0KKyBBWF9BTV9DRkxBR1NfQUREKFstV2Vycm9yPW1pc3NpbmctZmll
-bGQtaW5pdGlhbGl6ZXJzXSkNCisgQVhfQU1fQ0ZMQUdTX0FERChbLVdlcnJv
-cl0pDQorIEFYX0FNX0NGTEFHU19BREQoWy1XZXJyb3I9Zm9ybWF0LXNpZ25l
-ZG5lc3NdKQ0KKytBWF9BTV9DRkxBR1NfQUREKFstV25vLWFkZHJlc3Mtb2Yt
-cGFja2VkLW1lbWJlcl0pDQorIA0KDQpUaGlzIHdhcm5pbmcga25vYiBtYXkg
-bm90IGJlIGF2YWlsYWJsZSBhbHdheXMgc28NCkVpdGhlciB3ZSBmaXggdGhl
-IHdhcm5pbmcgYnkgYWx0ZXJpbmcgdGhlIGNvZGUgYW5kIG1ha2luZyBpdCBn
-byBhd2F5IG9yIHdlIGRpc2FibGUgd2Vycm9yIGNvbXBsZXRlbHkNCk9mIGNv
-dXJzZSBmaXJzdCBvcHRpb24gaXMgcHJlZmVycmVkwqANCg0KKyBBQ19TVUJT
-VChbQU1fQ0ZMQUdTXSkNCisgQUNfU1VCU1QoW0FNX0NQUEZMQUdTXSkNCist
-LSANCisyLjcuNA0KKw0KZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1i
-c3AvbGVkbW9uL2h0dHA6Ly9sZWRtb25fZ2l0LmJiIGIvbWV0YS1vZS9yZWNp
-cGVzLWJzcC9sZWRtb24vaHR0cDovL2xlZG1vbl9naXQuYmINCmluZGV4IDc0
-YWU1NmMuLjU4MjU4NjggMTAwNjQ0DQotLS0gYS9tZXRhLW9lL3JlY2lwZXMt
-YnNwL2xlZG1vbi9odHRwOi8vbGVkbW9uX2dpdC5iYg0KKysrIGIvbWV0YS1v
-ZS9yZWNpcGVzLWJzcC9sZWRtb24vaHR0cDovL2xlZG1vbl9naXQuYmINCkBA
-IC0xMSwxNSArMTEsMTcgQEAgTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8v
-Q09QWUlORzttZDU9MDYzNmU3M2ZmMDIxNWU4ZDY3MmRjNGMzMmMzMTdiYjMg
-XA0KDQrCoERFUEVORFMgPSAic2czLXV0aWxzIHVkZXYiDQoNCi1pbmhlcml0
-IHN5c3RlbWQNCitpbmhlcml0IGF1dG90b29scy1icm9rZW5zZXAgc3lzdGVt
-ZA0KDQpUaGlzIGlzIHNhZCB0aGF0IHdlIG1vdmUgdG8gbmV3IHZlcnNpb24g
-YW5kIG91dCBvZiB0cmVlIGJ1aWxkIGlzIGJyb2tlbiBjYW4gd2UgZml4IHRo
-YXQgcmF0aGVyIHRoYW4gcGF0Y2hpbmcgaXQgb3V0ID/CoA0KDQpJdCBtaWdo
-dCBiZSB1cHN0cmVhbSB3b3J0aHkgcGF0Y2ggYXMgd2VsbA0KDQoNCsKgU1lT
-VEVNRF9TRVJWSUNFXyR7UE59ID0gImxlZG1vbi5zZXJ2aWNlIg0KDQorIyAw
-LjkzDQrCoFNSQ19VUkkgPSAiZ2l0Oi8vaHR0cDovL2dpdGh1Yi5jb20vaW50
-ZWwvbGVkbW9uO2JyYW5jaD1tYXN0ZXIgXA0KwqAgwqAgwqAgwqAgwqAgwqAg
-ZmlsZTovLzAwMDItaW5jbHVkZS1zeXMtc2VsZWN0LmgtYW5kLXN5cy10eXBl
-cy5oLnBhdGNoIFwNCivCoCDCoCDCoCDCoCDCoCDCoGZpbGU6Ly8wMDAxLURp
-c2FibGUtV2FkZHJlc3Mtb2YtcGFja2VkLW1lbWJlci10by1maXgtY29tcGku
-cGF0Y2ggXA0KwqAgwqAgwqAgwqAgwqAgwqAiDQoNCi1TUkNSRVYgPSAiYWQx
-MzA0Y2ExMzYzZDcyNzQyNWExZjIzNzAzYzUyM2UyMWZlYWU0ZiINCitTUkNS
-RVYgPSAiMWQ3MmY5Y2I1YzkxNjNiMmVjZGYxOTcwOTkzNTcyMGU2NWY1Yjkw
-ZSINCg0KwqBDT01QQVRJQkxFX0hPU1QgPSAiKGkuODZ8eDg2XzY0KS4qLWxp
-bnV4Ig0KwqBDT01QQVRJQkxFX0hPU1RfbGliYy1tdXNsID0gIm51bGwiDQpA
-QCAtMjgsNyArMzAsOCBAQCBTID0gIiR7V09SS0RJUn0vZ2l0Ig0KwqBFWFRS
-QV9PRU1BS0UgPSAiQ0M9JyR7Q0N9JyBMREZMQUdTPScke0xERkxBR1N9JyBD
-RkxBR1M9JyR7Q0ZMQUdTfSciDQoNCsKgZG9faW5zdGFsbF9hcHBlbmQoKSB7
-DQotwqAgwqAgwqAgwqBpbnN0YWxsIC1kICR7RH0vJHtzeXN0ZW1kX3VuaXRk
-aXJ9L3N5c3RlbQ0KLcKgIMKgIMKgIMKgb2VfcnVubWFrZcKgIERFU1RESVI9
-JHtEfcKgIGluc3RhbGwNCi3CoCDCoCDCoCDCoG9lX3J1bm1ha2XCoCBERVNU
-RElSPSR7RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtwqAgaW5zdGFsbC1z
-eXN0ZW1kDQorwqAgwqAgwqAgwqAgaWYgbWFpbHRvOiR7QGJiLnV0aWxzLmNv
-bnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCAnc3lzdGVtZCcsICd0cnVlJywg
-J2ZhbHNlJywgZCl9OyB0aGVuDQorwqAgwqAgwqAgwqAgwqAgwqAgwqAgwqBp
-bnN0YWxsIC1kICR7RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lzdGVtDQorwqAg
-wqAgwqAgwqAgwqAgwqAgwqAgwqBpbnN0YWxsIC1tIDA3NTUgJHtTfS9zeXN0
-ZW1kL2xlZG1vbi5zZXJ2aWNlICR7RH0ke3N5c3RlbWRfdW5pdGRpcn0vc3lz
-dGVtDQorwqAgwqAgwqAgwqAgZmkNCsKgfQ0KLS0gDQoyLjcuNA0KDQoNCg0K
-LS0gDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fXw0KT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KbWFp
-bHRvOk9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3Jn
-DQpodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3Rp
-bmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KCgo=
+-License-Update: Copyright year updated to 2019.
+
+-Add setuptools_scm native recipe to DEPENDS.
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../recipes-devtools/python/python-lazy-object-proxy.inc  | 8 +++++---
+ ...t-proxy_1.3.1.bb => python-lazy-object-proxy_1.4.3.bb} | 0
+ ...-proxy_1.3.1.bb => python3-lazy-object-proxy_1.4.3.bb} | 0
+ 3 files changed, 5 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-lazy-object-proxy_1.3.1.bb => python-lazy-object-proxy_1.4.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-lazy-object-proxy_1.3.1.bb => python3-lazy-object-proxy_1.4.3.bb} (100%)
+
+diff --git a/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc b/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc
+index b88afce0e..bbbd66ce6 100644
+--- a/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc
++++ b/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc
+@@ -2,9 +2,11 @@ SUMMARY = "A fast and thorough lazy object proxy"
+ HOMEPAGE = "https://python-lazy-object-proxy.readthedocs.io/"
+ LICENSE = "BSD-2-Clause"
+ SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=ec680df42d8ad56427a83308817658cc"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=9c5c2c74370826468065c5702b8a1fcf"
+ 
+-SRC_URI[md5sum] = "e128152b76eb5b9ba759504936139fd0"
+-SRC_URI[sha256sum] = "eb91be369f945f10d3a49f5f9be8b3d0b93a4c2be8f8a5b83b0571b8123e0a7a"
++DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
++
++SRC_URI[md5sum] = "5c64c06affcd2a7c6ddc848af4280cca"
++SRC_URI[sha256sum] = "f3900e8a5de27447acbf900b4750b0ddfd7ec1ea7fbaf11dfa911141bc522af0"
+ 
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-lazy-object-proxy_1.3.1.bb b/meta-python/recipes-devtools/python/python-lazy-object-proxy_1.4.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-lazy-object-proxy_1.3.1.bb
+rename to meta-python/recipes-devtools/python/python-lazy-object-proxy_1.4.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.3.1.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.4.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.3.1.bb
+rename to meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.4.3.bb
+-- 
+2.20.1
+
+
+
 
