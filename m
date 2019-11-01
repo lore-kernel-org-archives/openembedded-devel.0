@@ -1,30 +1,49 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BE4CA7FC96
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
+	[209.85.210.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 29C027FCA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 17:30:07 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xA1HU89h020099
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 1 Nov 2019 10:30:08 -0700 (PDT)
-Received: from [128.224.22.123] (128.224.22.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Fri, 1 Nov 2019 10:30:06 -0700
-To: Khem Raj <raj.khem@gmail.com>, akuster808 <akuster808@gmail.com>
-References: <20191031184223.14080-1-Trevor.Gamblin@windriver.com>
-	<20191031184223.14080-3-Trevor.Gamblin@windriver.com>
-	<84a3f2b5-264d-3f50-1fea-c6b8f6c292b5@gmail.com>
-	<CAMKF1srBK7CzoBvNW0vbW2iP0cy3KRRnHr1=uSO926xxM=tRGw@mail.gmail.com>
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-Message-ID: <dc2e91d1-02f8-25c8-5240-65d1d72c7e1c@windriver.com>
-Date: Fri, 1 Nov 2019 13:30:05 -0400
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.1.1
+	Fri,  1 Nov 2019 17:32:28 +0000 (UTC)
+Received: by mail-pf1-f175.google.com with SMTP id 3so7505255pfb.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Nov 2019 10:32:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=d5rr+Ie0j1fnfaUpA0RwBRRqxPUb+6oDcvyz9TYFvdw=;
+	b=i4KrmZL+7rdkzZ6ro8xOUgnPlML8sYfvarAhSLNRwFMvXVfKWZwuusnSkB3haKoyJ1
+	GYLTxLSW8NQzz6KaCqAz6aoQ3/hbDyqiQLztRCnoEbvFnAaGhiISJJQ6T/D8kPmGPbsg
+	Ea0CDJP9lNnmri0C54qRsMbYbuRwpzyWVMjJgz4pkTUabvqQJXTE+ABy16UhSWmt/cNs
+	BUiHXCIfUb+Eg1v0Op0XaPl8MWIiHJd75RRzidplzQshylfBreGcQ1icL5XhY4W/6u5Q
+	V5lV7/4VP2tBOy5YwDKsL5zP6dnPeZobhqlnzalLdORAnff+Tp9CApgHiHEv6W4tevaA
+	49Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=d5rr+Ie0j1fnfaUpA0RwBRRqxPUb+6oDcvyz9TYFvdw=;
+	b=kpKwRQkM2s/rqR8t224lIg0sJ7BNaHgFO5ppht2m44gKxf2JiLDFd0ltN60Vmh4DnL
+	Y9k7i1+ad17sNj8lxqogZjqYAeHgjIeTxS+q13JlGTCnw3ROKYastroYSCYBxC9gl9Dw
+	aSDORrLVI1XiqcxsQ7ygszil3KHOhAbKxGZ+uxN4cEwwMihuMYOuk9Qr2VGaqvAKFV6M
+	aVq1lQvnol1mk2xM/EmgGa9aOsDQChqGZBKOKUeTnvoFmWUf7f7eYhqNUUx1iuWxTr+t
+	yU8tDTvSeSO2qq5szI5PxU3tRLcOXG21w7Qi0diotTRSW7vu+s2cdpj8dTjEq7UJ3olm
+	ALGw==
+X-Gm-Message-State: APjAAAX467HDQtFDDzYpdhiT0NvZ4rrJ8BPlPWpie57h7L/QkXMLyoEe
+	2KhgGr0c6Hx/evaG5tR3DzYSDWKxvZc=
+X-Google-Smtp-Source: APXvYqy5GPdE/OGMbBMnVnWrhKVWlzP1LoKMHqXedN32xy5kl6+7FMETzd5aCbZkl1RfeofhOk+QPA==
+X-Received: by 2002:a62:fb0f:: with SMTP id x15mr15150087pfm.59.1572629548294; 
+	Fri, 01 Nov 2019 10:32:28 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::f974])
+	by smtp.gmail.com with ESMTPSA id q1sm2042261pgr.92.2019.11.01.10.32.27
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 01 Nov 2019 10:32:27 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Nov 2019 10:32:12 -0700
+Message-Id: <20191101173212.1184403-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srBK7CzoBvNW0vbW2iP0cy3KRRnHr1=uSO926xxM=tRGw@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/4] python-h2: add recipe
+Subject: [meta-networking][PATCH] miniupnpd: Update to 2.1.20191006
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,72 +56,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 17:30:07 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 01 Nov 2019 17:32:28 -0000
+Content-Transfer-Encoding: 8bit
 
-On 11/1/19 1:04 PM, Khem Raj wrote:
+Forward port the patches
 
-> On Fri, Nov 1, 2019 at 8:40 AM akuster808 <akuster808@gmail.com> wrote:
->> are these V2 or just a miss fire?
->>
-> there was no meta-python in the subject line. So there was another set
-> which was sent
-> which I have picked
-Right, sorry for the confusion. I had sent them at first without the 
-meta-python label and re-sent to clarify.
->>
->> On 10/31/19 11:42 AM, Trevor Gamblin wrote:
->>> From: Trevor Gamblin <trevor.gamblin@windriver.com>
->>>
->>> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
->>> ---
->>>   .../recipes-connectivity/python-h2/python-h2.inc       | 10 ++++++++++
->>>   .../recipes-connectivity/python-h2/python-h2_3.1.1.bb  |  3 +++
->>>   .../recipes-connectivity/python-h2/python3-h2_3.1.1.bb |  3 +++
->>>   3 files changed, 16 insertions(+)
->>>   create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2.inc
->>>   create mode 100644 meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
->>>   create mode 100644 meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
->>>
->>> diff --git a/meta-python/recipes-connectivity/python-h2/python-h2.inc b/meta-python/recipes-connectivity/python-h2/python-h2.inc
->>> new file mode 100644
->>> index 000000000..42629c261
->>> --- /dev/null
->>> +++ b/meta-python/recipes-connectivity/python-h2/python-h2.inc
->>> @@ -0,0 +1,10 @@
->>> +DESCRIPTION = "HTTP/2 State-Machine based protocol implementation"
->>> +HOMEPAGE = "https://github.com/python-hyper/hyper-h2"
->>> +LICENSE = "MIT"
->>> +
->>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b6b2f6bbe76528af543242d606c14851"
->>> +
->>> +SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
->>> +SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
->>> +
->>> +inherit pypi
->>> diff --git a/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
->>> new file mode 100644
->>> index 000000000..b84129742
->>> --- /dev/null
->>> +++ b/meta-python/recipes-connectivity/python-h2/python-h2_3.1.1.bb
->>> @@ -0,0 +1,3 @@
->>> +require python-h2.inc
->>> +
->>> +inherit setuptools
->>> diff --git a/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
->>> new file mode 100644
->>> index 000000000..7230a27e8
->>> --- /dev/null
->>> +++ b/meta-python/recipes-connectivity/python-h2/python3-h2_3.1.1.bb
->>> @@ -0,0 +1,3 @@
->>> +require python-h2.inc
->>> +
->>> +inherit setuptools3
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-Add-OpenEmbedded-cross-compile-case.patch   | 12 +++++-------
+ ...npd_2.1.20190630.bb => miniupnpd_2.1.20191006.bb} |  4 ++--
+ 2 files changed, 7 insertions(+), 9 deletions(-)
+ rename meta-networking/recipes-connectivity/miniupnpd/{miniupnpd_2.1.20190630.bb => miniupnpd_2.1.20191006.bb} (92%)
+
+diff --git a/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch b/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch
+index cd4291d91b..e33d8eac1d 100644
+--- a/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch
++++ b/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch
+@@ -3,17 +3,15 @@ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 22 Dec 2018 18:47:45 -0800
+ Subject: [PATCH] Add OpenEmbedded cross compile case
+ 
+-Upstream-Status: Pending
++Upstream-Status: Submitted [https://github.com/miniupnp/miniupnp/pull/410]
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+  genconfig.sh | 11 +++++++++++
+  1 file changed, 11 insertions(+)
+ 
+-diff --git a/genconfig.sh b/genconfig.sh
+-index dc42462..59922e9 100755
+ --- a/genconfig.sh
+ +++ b/genconfig.sh
+-@@ -98,6 +98,12 @@ if [ -f ../shared/tomato_version ]; then
++@@ -103,6 +103,12 @@ if [ -f ../shared/tomato_version ]; then
+  	OS_VERSION="Tomato $TOMATO_VER"
+  fi
+  
+@@ -26,14 +24,14 @@ index dc42462..59922e9 100755
+  ${RM} ${CONFIGFILE}
+  
+  echo "/* MiniUPnP Project" >> ${CONFIGFILE}
+-@@ -318,6 +324,11 @@ case $OS_NAME in
++@@ -346,6 +352,11 @@ case $OS_NAME in
+  		echo "#define USE_IFACEWATCHER 1" >> ${CONFIGFILE}
+- 		FW=netfilter
++ 		FW=iptables
+  		;;
+ +	OpenEmbedded)
+ +		OS_URL=http://www.openembedded.org/
+ +		echo "#define USE_IFACEWATCHER 1" >> ${CONFIGFILE}
+-+		FW=netfilter
+++		FW=iptables
+ +		;;
+  	AstLinux)
+  		OS_URL=http://www.astlinux.org/
+diff --git a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20190630.bb b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
+similarity index 92%
+rename from meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20190630.bb
+rename to meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
+index 6b8fdca4c3..595e211ea5 100644
+--- a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20190630.bb
++++ b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
+@@ -15,8 +15,8 @@ SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${BP}.tar.gz;do
+            file://miniupnpd.service \
+            file://0001-Add-OpenEmbedded-cross-compile-case.patch \
+            "
+-SRC_URI[md5sum] = "394e676f555d8047be69730d9c4d23a5"
+-SRC_URI[sha256sum] = "29f49fe6868597d041ee29f511fa7b65781b9e4e85ef2569a2381c2079e1743e"
++SRC_URI[md5sum] = "340789edd49c113afe37834cc901a1e8"
++SRC_URI[sha256sum] = "218fad7af31f3c22fb4c9db28a55a2a8b5067d41f5b38f52008a057a00d2206d"
+ 
+ IPV6 = "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--ipv6', '', d)}"
+ 
+-- 
+2.23.0
+
 
