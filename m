@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 526917FC37
+	by mail.openembedded.org (Postfix) with ESMTP id 5E3A97FC35
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 03:10:25 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,253,1569254400"; d="scan'208";a="77774867"
+	Fri,  1 Nov 2019 03:21:28 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,253,1569254400"; d="scan'208";a="77775391"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 11:10:25 +0800
+	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 11:21:26 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2FE6B4CE1515
+	by cn.fujitsu.com (Postfix) with ESMTP id BFDE841B7076
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 11:02:26 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.81) by
+	Fri,  1 Nov 2019 11:13:24 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 11:10:28 +0800
+	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 11:21:27 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Nov 2019 11:10:30 +0800
-Message-ID: <20191101031030.19075-1-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 1 Nov 2019 11:21:41 +0800
+Message-ID: <20191101032141.20864-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 2FE6B4CE1515.A84F1
+X-yoursite-MailScanner-ID: BFDE841B7076.AA5A5
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-parse: upgrade 1.8.4 -> 1.12.1
+Subject: [meta-python] [PATCH] python-pathlib2: upgrade 2.3.4 -> 2.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,47 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 03:10:26 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 03:21:28 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--License-Update: Copyright year updated to 2019.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-parse.inc        | 6 +++---
- .../{python-parse_1.8.4.bb => python-parse_1.12.1.bb}       | 0
- .../{python3-parse_1.8.4.bb => python3-parse_1.12.1.bb}     | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-parse_1.8.4.bb => python-parse_1.12.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-parse_1.8.4.bb => python3-parse_1.12.1.bb} (100%)
+ meta-python/recipes-devtools/python/python-pathlib2.inc       | 4 ++--
+ .../{python-pathlib2_2.3.4.bb => python-pathlib2_2.3.5.bb}    | 0
+ .../{python3-pathlib2_2.3.4.bb => python3-pathlib2_2.3.5.bb}  | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pathlib2_2.3.4.bb => python-pathlib2_2.3.5.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pathlib2_2.3.4.bb => python3-pathlib2_2.3.5.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-parse.inc b/meta-python/recipes-devtools/python/python-parse.inc
-index fa55a93c5..ccd5a9377 100644
---- a/meta-python/recipes-devtools/python/python-parse.inc
-+++ b/meta-python/recipes-devtools/python/python-parse.inc
-@@ -1,10 +1,10 @@
- SUMMARY = "Parse strings using a specification based on the Python format() syntax"
- HOMEPAGE = "https://github.com/r1chardj0n3s/parse"
+diff --git a/meta-python/recipes-devtools/python/python-pathlib2.inc b/meta-python/recipes-devtools/python/python-pathlib2.inc
+index c25e5a080..c5ba99d4f 100644
+--- a/meta-python/recipes-devtools/python/python-pathlib2.inc
++++ b/meta-python/recipes-devtools/python/python-pathlib2.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/mcmtroffaes/pathlib2"
  LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://parse.py;beginline=1273;endline=1291;md5=5147afdd9b3615290ad8733f0137a1a1"
-+LIC_FILES_CHKSUM = "file://parse.py;beginline=1317;endline=1337;md5=fa03bae3f51a2db25e239e869c647437"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=042856c23a3e903b33bf361ea1cbe29a"
  
--SRC_URI[md5sum] = "fa69ab2fe846f9b183411391f7c6897b"
--SRC_URI[sha256sum] = "c3cdf6206f22aeebfa00e5b954fcfea13d1b2dc271c75806b6025b94fb490939"
-+SRC_URI[md5sum] = "8fc634769f1d841f14a52dd731ca447a"
-+SRC_URI[sha256sum] = "a5fca7000c6588d77bc65c28f3f21bfce03b5e44daa8f9f07c17fe364990d717"
+-SRC_URI[md5sum] = "96da6398b3ea944417b84ccb25b171aa"
+-SRC_URI[sha256sum] = "446014523bb9be5c28128c4d2a10ad6bb60769e78bd85658fe44a450674e0ef8"
++SRC_URI[md5sum] = "f2bd0a363eb0f8fa0556f35c1d9e66fb"
++SRC_URI[sha256sum] = "6cd9a47b597b37cc57de1c05e56fb1a1c9cc9fab04fe78c29acd090418529868"
  
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-parse_1.8.4.bb b/meta-python/recipes-devtools/python/python-parse_1.12.1.bb
+ RDEPENDS_${PN} += "${PYTHON_PN}-six"
+diff --git a/meta-python/recipes-devtools/python/python-pathlib2_2.3.4.bb b/meta-python/recipes-devtools/python/python-pathlib2_2.3.5.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-parse_1.8.4.bb
-rename to meta-python/recipes-devtools/python/python-parse_1.12.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-parse_1.8.4.bb b/meta-python/recipes-devtools/python/python3-parse_1.12.1.bb
+rename from meta-python/recipes-devtools/python/python-pathlib2_2.3.4.bb
+rename to meta-python/recipes-devtools/python/python-pathlib2_2.3.5.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pathlib2_2.3.4.bb b/meta-python/recipes-devtools/python/python3-pathlib2_2.3.5.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-parse_1.8.4.bb
-rename to meta-python/recipes-devtools/python/python3-parse_1.12.1.bb
+rename from meta-python/recipes-devtools/python/python3-pathlib2_2.3.4.bb
+rename to meta-python/recipes-devtools/python/python3-pathlib2_2.3.5.bb
 -- 
 2.20.1
 
