@@ -1,49 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
-	[209.85.210.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 29C027FCA4
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by mail.openembedded.org (Postfix) with ESMTP id BDEE97FCA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 17:32:28 +0000 (UTC)
-Received: by mail-pf1-f175.google.com with SMTP id 3so7505255pfb.10
+	Fri,  1 Nov 2019 18:10:58 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id c11so11795711iom.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 10:32:29 -0700 (PDT)
+	Fri, 01 Nov 2019 11:11:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=d5rr+Ie0j1fnfaUpA0RwBRRqxPUb+6oDcvyz9TYFvdw=;
-	b=i4KrmZL+7rdkzZ6ro8xOUgnPlML8sYfvarAhSLNRwFMvXVfKWZwuusnSkB3haKoyJ1
-	GYLTxLSW8NQzz6KaCqAz6aoQ3/hbDyqiQLztRCnoEbvFnAaGhiISJJQ6T/D8kPmGPbsg
-	Ea0CDJP9lNnmri0C54qRsMbYbuRwpzyWVMjJgz4pkTUabvqQJXTE+ABy16UhSWmt/cNs
-	BUiHXCIfUb+Eg1v0Op0XaPl8MWIiHJd75RRzidplzQshylfBreGcQ1icL5XhY4W/6u5Q
-	V5lV7/4VP2tBOy5YwDKsL5zP6dnPeZobhqlnzalLdORAnff+Tp9CApgHiHEv6W4tevaA
-	49Iw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=eXiE7w7JmFSoweBamCYVmH7eo9nLBECA55OyeYlHIp0=;
+	b=XAbDl3368qg1ejjowWrl0YSBC70seoOJdYDyXwgOz4Vz6S6cuJLNHJe+0YCqF013KT
+	Piy1BTHUd+S5W0PcEV/FE1gnfvUsF0y0LtdPF38VKnw17RBDbm17ClnfJmR4ZhD90nFk
+	G7QFI11XxMBIcCg07ipbu73E9cWCblivZwZ/a+GEs34BOuBNUgVCO45X+OyOPHvRDTQM
+	xQD/+E8UR0Yd/NndR30WE4v415X7WDNklivBATR0aBkAd66pjqFWlN55nPH8YejMzj6u
+	niVzZORnwAXZKKoBUz/UenL6PyyrU9H3e6kHHPvbpBAvnMaPHWq1V0bEkd5du55gRTs0
+	KZFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=d5rr+Ie0j1fnfaUpA0RwBRRqxPUb+6oDcvyz9TYFvdw=;
-	b=kpKwRQkM2s/rqR8t224lIg0sJ7BNaHgFO5ppht2m44gKxf2JiLDFd0ltN60Vmh4DnL
-	Y9k7i1+ad17sNj8lxqogZjqYAeHgjIeTxS+q13JlGTCnw3ROKYastroYSCYBxC9gl9Dw
-	aSDORrLVI1XiqcxsQ7ygszil3KHOhAbKxGZ+uxN4cEwwMihuMYOuk9Qr2VGaqvAKFV6M
-	aVq1lQvnol1mk2xM/EmgGa9aOsDQChqGZBKOKUeTnvoFmWUf7f7eYhqNUUx1iuWxTr+t
-	yU8tDTvSeSO2qq5szI5PxU3tRLcOXG21w7Qi0diotTRSW7vu+s2cdpj8dTjEq7UJ3olm
-	ALGw==
-X-Gm-Message-State: APjAAAX467HDQtFDDzYpdhiT0NvZ4rrJ8BPlPWpie57h7L/QkXMLyoEe
-	2KhgGr0c6Hx/evaG5tR3DzYSDWKxvZc=
-X-Google-Smtp-Source: APXvYqy5GPdE/OGMbBMnVnWrhKVWlzP1LoKMHqXedN32xy5kl6+7FMETzd5aCbZkl1RfeofhOk+QPA==
-X-Received: by 2002:a62:fb0f:: with SMTP id x15mr15150087pfm.59.1572629548294; 
-	Fri, 01 Nov 2019 10:32:28 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::f974])
-	by smtp.gmail.com with ESMTPSA id q1sm2042261pgr.92.2019.11.01.10.32.27
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 01 Nov 2019 10:32:27 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Nov 2019 10:32:12 -0700
-Message-Id: <20191101173212.1184403-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=eXiE7w7JmFSoweBamCYVmH7eo9nLBECA55OyeYlHIp0=;
+	b=I7h7vUS9jUKxdyAXikVwujKC+0BEm991hhlTD2A5pmgXVprLQ6fSCJ4+y1U64DeyLA
+	pozcGlapcDN+gKqwDmuOmmlIOFPc8xd6/IaCAEER3DLVoz4682dA1vXsVdDgnkSWcmz6
+	ohln8e2R+6qVC3Rqf5Miknd5AQL6fdnMRePQtPpE3lmbbUFu6YiC392BnQ0wIc62kwkN
+	PqBCnus2pplGZdlMg2gYQkhSalxBgogMAKRVQ3XuIhCQx4aHC2ox13tappZ5wjPMSG87
+	Fr4X1FFHyul6dSpA6hgCx1t1Ptwzae57wfLAhEYNOXijhxuOW/K4e4cr8SH4QFxZS839
+	4vPg==
+X-Gm-Message-State: APjAAAUG9QM4VeZUIiFtVZHNxrzVB76AWrmC3zywym97+reOf8y1s3Gv
+	uCJRBgJW0KFzM8yLkeZgwYbE7B3VBbBwD0w44vU=
+X-Google-Smtp-Source: APXvYqycs8HZvUYmC9Lzyerw5fetMznhvWXLuZQOWKYREhA4vqdTpT9W4GCVsx4tqFyqewHu0aDQ8NyszbSHCLH+dsw=
+X-Received: by 2002:a5e:d806:: with SMTP id l6mr8464556iok.299.1572631859669; 
+	Fri, 01 Nov 2019 11:10:59 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] miniupnpd: Update to 2.1.20191006
+References: <20191029010253.5784-1-schnitzeltony@gmail.com>
+	<20191029010253.5784-4-schnitzeltony@gmail.com>
+	<CAMKF1srqmOG5k8mfAZ04YH0DUUROSLUCVLwMGUrRQ-=Y2yeFsg@mail.gmail.com>
+	<CALbNGRQn151mjXniXnS+Edi79VMomdaUiP9-hbzzMo30dAwCog@mail.gmail.com>
+	<CAMKF1sq-2rVXqmYeVNTqjaB7DsKFJr9+u095P826_N3E2RhNMw@mail.gmail.com>
+In-Reply-To: <CAMKF1sq-2rVXqmYeVNTqjaB7DsKFJr9+u095P826_N3E2RhNMw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 1 Nov 2019 19:10:48 +0100
+Message-ID: <CALbNGRRmNDE-i7RXY8562DmpymCmX-18m6DjDo0bo5=O_x6E-Q@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v2 4/4] ibus: initial add 1.5.21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,79 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 17:32:28 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 01 Nov 2019 18:10:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Forward port the patches
+On Fri, Nov 1, 2019 at 6:04 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > > Hi Andreas
+> > >
+> > > I see this fail on ubuntu 18.04 host
+> > > https://errors.yoctoproject.org/Errors/Details/275175/
+> > See what I can do - is it a server 'only' installation?
+> >
+>
+> thats right. Its minimal server install + OE prerequisites
+>
+> > Andreas
+Think I got it: By the tailored build I created a race condition which
+tends to pop up on high numbers of threads for make: Your server
+builds with make -j 16.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-Add-OpenEmbedded-cross-compile-case.patch   | 12 +++++-------
- ...npd_2.1.20190630.bb => miniupnpd_2.1.20191006.bb} |  4 ++--
- 2 files changed, 7 insertions(+), 9 deletions(-)
- rename meta-networking/recipes-connectivity/miniupnpd/{miniupnpd_2.1.20190630.bb => miniupnpd_2.1.20191006.bb} (92%)
+Will create a V2 building ibusmarshalers.* explicitly and run tests
+with high numbers for make to see if there are others.
 
-diff --git a/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch b/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch
-index cd4291d91b..e33d8eac1d 100644
---- a/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch
-+++ b/meta-networking/recipes-connectivity/miniupnpd/files/0001-Add-OpenEmbedded-cross-compile-case.patch
-@@ -3,17 +3,15 @@ From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 22 Dec 2018 18:47:45 -0800
- Subject: [PATCH] Add OpenEmbedded cross compile case
- 
--Upstream-Status: Pending
-+Upstream-Status: Submitted [https://github.com/miniupnp/miniupnp/pull/410]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-  genconfig.sh | 11 +++++++++++
-  1 file changed, 11 insertions(+)
- 
--diff --git a/genconfig.sh b/genconfig.sh
--index dc42462..59922e9 100755
- --- a/genconfig.sh
- +++ b/genconfig.sh
--@@ -98,6 +98,12 @@ if [ -f ../shared/tomato_version ]; then
-+@@ -103,6 +103,12 @@ if [ -f ../shared/tomato_version ]; then
-  	OS_VERSION="Tomato $TOMATO_VER"
-  fi
-  
-@@ -26,14 +24,14 @@ index dc42462..59922e9 100755
-  ${RM} ${CONFIGFILE}
-  
-  echo "/* MiniUPnP Project" >> ${CONFIGFILE}
--@@ -318,6 +324,11 @@ case $OS_NAME in
-+@@ -346,6 +352,11 @@ case $OS_NAME in
-  		echo "#define USE_IFACEWATCHER 1" >> ${CONFIGFILE}
-- 		FW=netfilter
-+ 		FW=iptables
-  		;;
- +	OpenEmbedded)
- +		OS_URL=http://www.openembedded.org/
- +		echo "#define USE_IFACEWATCHER 1" >> ${CONFIGFILE}
--+		FW=netfilter
-++		FW=iptables
- +		;;
-  	AstLinux)
-  		OS_URL=http://www.astlinux.org/
-diff --git a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20190630.bb b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
-similarity index 92%
-rename from meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20190630.bb
-rename to meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
-index 6b8fdca4c3..595e211ea5 100644
---- a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20190630.bb
-+++ b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
-@@ -15,8 +15,8 @@ SRC_URI = "http://miniupnp.tuxfamily.org/files/download.php?file=${BP}.tar.gz;do
-            file://miniupnpd.service \
-            file://0001-Add-OpenEmbedded-cross-compile-case.patch \
-            "
--SRC_URI[md5sum] = "394e676f555d8047be69730d9c4d23a5"
--SRC_URI[sha256sum] = "29f49fe6868597d041ee29f511fa7b65781b9e4e85ef2569a2381c2079e1743e"
-+SRC_URI[md5sum] = "340789edd49c113afe37834cc901a1e8"
-+SRC_URI[sha256sum] = "218fad7af31f3c22fb4c9db28a55a2a8b5067d41f5b38f52008a057a00d2206d"
- 
- IPV6 = "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', '--ipv6', '', d)}"
- 
--- 
-2.23.0
+Tailoring build is nasty business but necessary in our project sometimes...
 
+Cheers
+
+Andreas
 
