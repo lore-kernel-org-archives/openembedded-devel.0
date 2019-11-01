@@ -1,47 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id AE5CF7BD9A
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id E7E417FCA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 17:06:57 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id d13so11349468qko.3
+	Fri,  1 Nov 2019 17:25:20 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id a194so11353941qkg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 10:06:59 -0700 (PDT)
+	Fri, 01 Nov 2019 10:25:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=AzjvBFoBkj7Ny5I2h5fOwP7HhW0lqaqoYr8DsYrw8Lg=;
-	b=cljCdyf6SS4uRtxPuSuai33+yN0Vf7jiZJ5PjeLNNmSwIUeuEXFSRpn/uJ4wToIBvf
-	qwKO+oT0uNG5+o2GvLMsJHHcr8JNvyVzV6lxuTcWRflrRmMmh61W+9VkUNhTJovtg6SX
-	0FQu3xHdFd85MSSziqiB4/EC2JeWrqjc/FXIBVWWAFdGNBtk+uN7/tk/+je/sKkgwpnD
-	t2UmPu1TSjJRDfRK2EHAlctkjvLkLFJh45CODfA2UmHDEfHe8vwhuv8K2C8ss31UuEYP
-	1XkRFmg5F44SFwP8nLshKECw4huTcsQPypt49WajqOWpsfrNbMvx44tfPk9IhwxgaU8s
-	6iKQ==
+	:cc:content-transfer-encoding;
+	bh=YjYa67PZc8Bw6UFY1gwIcZm9ijvMf5axgJGzTBaPMNQ=;
+	b=KMLgUDSo2jri44PSVLmmWWcG4uSBT5FOk5s79bJ/NxmEHIwZMg9f13/nfospnzrO6n
+	dcHyL8mbnApscHsKievrPcTcX1Dtu+lCqp118+WXlclOxfUSXogkQhHsfHKKvBnI5Kcb
+	hCIUySoaW9ypwoCwmLoNfonrcXN3azh4nAmzRFmakSmtgzOS5fytOHJ60ifZxT/NwSNK
+	9ipiEDJH4SjiCPSJam+HI3Z9gLoJwC1WLYqAeFp7sgzeI9BXEvqk8ekWysrLq4C8U0dF
+	+cd2TaSK1jnlfBkHXrB4ZD24924fasZzwDT+JG6+pA0akQp/iRncDyHckCDjyCcaXeas
+	N3EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=AzjvBFoBkj7Ny5I2h5fOwP7HhW0lqaqoYr8DsYrw8Lg=;
-	b=q+3oTetfbt0eY54xwpaIbwiLzYebebdvLgA0qPEPoft3VLVS0+aFeI5nPec7RSQjI9
-	PEfQU2lpWva/mgdrbNM0kKlV+yKy9XW3g72oqGDJqlSEMl8qSNaJPti+SOYA+5W3dH1Q
-	Kc937AvrCpwcrsJib/DxNgDhNV7vP3mJOFKffxsQH0U6vqemAWKJBsCDnamkv1BuC6gX
-	jNXl2yF+c34b4U3ZoNQ0ixwsmWxsfAWQL2ps/y9+8HxvCyfuewPMf+AuATi0E20l1DRw
-	EMtc7XlxlQyn4QFPjohDr2cXugKRly9Fohv8IeCvoGgDUG+EzaVESHmE2NZ34LgRyWyV
-	CatQ==
-X-Gm-Message-State: APjAAAV4polVwlZbjS3TwgrfdyqKtobQQkR5nlSXsj5gC6uEE4KQ7v67
-	4OxY3CLaDZ0Jer/5mQxXxGLCvzzTAAJgDhVK9A0=
-X-Google-Smtp-Source: APXvYqxBhBGWxpRVaKzspaQx+jRhLquqhTLvzn9rHQQDHmLI40tljBQq2gOUolLbexl7VsK9KzmoRvCNllFPFU1W9XA=
-X-Received: by 2002:a05:620a:a9a:: with SMTP id
-	v26mr6630111qkg.71.1572628018027; 
-	Fri, 01 Nov 2019 10:06:58 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=YjYa67PZc8Bw6UFY1gwIcZm9ijvMf5axgJGzTBaPMNQ=;
+	b=TkaOSX8gCIMMt/PBOjLT4b7/hY5pQbNiK8U/+RVt899H/5MdAETBEvx4L/AbyBIynM
+	0AOK2UaG5AUJs3z9WoAbx8Gc/HFYprut6alfq+yS6wT/KUWZQoXhxlORXsqEUZTOhpRw
+	KNwx+XhJkzvpxeA+rBptULmuowD6W2mz2OCOJvA5GuPfS1NH4qhIbxyQKTEv6kMP7P1n
+	FJ4EkVO93cjFQWKhcSfIHW40og/aXcaocyrmjYhlc4fUvRhstU5nbEVsq3mR01pLVdi3
+	xZpGXYX8QwZpLWvunW+n5y6q45QfvG5vD8Z/V++5FnXs/5JIbsU0XZgke36elJkcpr5i
+	zG7A==
+X-Gm-Message-State: APjAAAXq3h28V3x6fhsR5BDjrmXhFIQOs8PIkZVSpFq6in2DPLD8tBjk
+	0l5aENGacjIWs2M/DKbQQx9QqO7Awoq8fRE934ko3WPw
+X-Google-Smtp-Source: APXvYqx9qP2tS70aALK5mEx2dUTFhVSv/ORxJAdf2l4I3hQJuGwsQXh1rSVx6a4J0h3gmiC71HAwtpHJendVlF3RA9Y=
+X-Received: by 2002:a37:6554:: with SMTP id z81mr789925qkb.9.1572629121280;
+	Fri, 01 Nov 2019 10:25:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <1572600890-65720-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1572600890-65720-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+References: <1572616775-69362-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<CANNYZj_aty2tpJ6qttT3phqktydh_xz0sVPwv-n4hfYQjKHr-Q@mail.gmail.com>
+	<CALbNGRSOUYZyLs54vKNQV9PurhnxugMmjn6kj6cb1nkos5O+8Q@mail.gmail.com>
+In-Reply-To: <CALbNGRSOUYZyLs54vKNQV9PurhnxugMmjn6kj6cb1nkos5O+8Q@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 Nov 2019 10:06:31 -0700
-Message-ID: <CAMKF1sqM5e0sEJ8ycLye7xFe9U6+iWc_Mf8Q0jza0ttECwQ=yQ@mail.gmail.com>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] ledmon: upgrade to 0.93
+Date: Fri, 1 Nov 2019 10:24:54 -0700
+Message-ID: <CAMKF1soOz5=rJEcLM_VNpMOfUto8d3yQo-8bO1Xz8RVqh3Qxpw@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] glibmm: upgrade 2.62.0 -> 2.63.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,115 +56,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 17:06:57 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 17:25:21 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 31, 2019 at 10:55 PM Zheng Ruoqin
-<zhengrq.fnst@cn.fujitsu.com> wrote:
+On Fri, Nov 1, 2019 at 5:09 AM Andreas M=C3=BCller <schnitzeltony@gmail.com=
+> wrote:
 >
-> 1) inherit autotools as new version use autotools.
+> On Fri, Nov 1, 2019 at 11:55 AM Alexander Kanavin
+> <alex.kanavin@gmail.com> wrote:
+> >
+> > Is 2.63.1 a pre-release version? As a gnome project, it's probably
+> > following the odd-even scheme.
+> >
+> > Alex
+> >
+> form [1]
 >
-> 2) Add a patch to fix compile error.
->    0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+> | 2.63.1: (unstable):
+> | Distro packagers should probably not package this yet.
 >
-> 3) Modify do_install_append() function to fix do_package error as follows:
->    ledmon-git-r0 do_package: SYSTEMD_SERVICE_ledmon value ledmon.service does not exist
+> So why should we?
 >
-> 4) Add ${S}/config in CFLAGS.
+> [1] http://ftp.gnome.org/pub/gnome/sources/glibmm/2.63/glibmm-2.63.1.news
 >
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ---
->  ...-t-build-with-Werror-to-fix-compile-error.patch | 29 ++++++++++++++++++++++
->  meta-oe/recipes-bsp/ledmon/ledmon_git.bb           | 17 +++++++++----
->  2 files changed, 41 insertions(+), 5 deletions(-)
->  create mode 100644 meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
->
-> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
-> new file mode 100644
-> index 0000000..b65f1a7
-> --- /dev/null
-> +++ b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
-> @@ -0,0 +1,29 @@
-> +Subject: [PATCH] Don't build with -Werror to fix compile error.
-> +
-> +|   550 |  _dump_sgpio_amd(&amd_reg->amd);
-> +|       |                  ^~~~~~~~~~~~~
-> +| amd_sgpio.c: In function '_write_amd_register':
-> +| amd_sgpio.c:558:18: error: taking address of packed member of 'struct amd_register' may result in an unaligned pointer value [-Werror=address-of-packed-member]
-> +
-> +Upstream-Status: Pending
 
-this was submitted isnt it? if so then please put the right status
-here. One line patches are easy to
-be mistaken and carried forward even when upstreamed.
+thanks for calling it out. I agree I think we should wait for 2.64 stable.
 
-> +
-> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> +---
-> + configure.ac | 1 -
-> + 1 file changed, 1 deletion(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index 7bc20f8..7e01bd5 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -22,7 +22,6 @@ AX_AM_CFLAGS_ADD([-Werror=format-truncation=1])
-> + AX_AM_CFLAGS_ADD([-Werror=shift-negative-value])
-> + AX_AM_CFLAGS_ADD([-Werror=alloca])
-> + AX_AM_CFLAGS_ADD([-Werror=missing-field-initializers])
-> +-AX_AM_CFLAGS_ADD([-Werror])
-> + AX_AM_CFLAGS_ADD([-Werror=format-signedness])
-> +
-> + AC_SUBST([AM_CFLAGS])
-> +--
-> +2.7.4
-> +
-> diff --git a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-> index 74ae56c..f9ae9aa 100644
-> --- a/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-> +++ b/meta-oe/recipes-bsp/ledmon/ledmon_git.bb
-> @@ -11,15 +11,17 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
->
->  DEPENDS = "sg3-utils udev"
->
-> -inherit systemd
-> +inherit autotools systemd
->
->  SYSTEMD_SERVICE_${PN} = "ledmon.service"
->
-> +# 0.93
->  SRC_URI = "git://github.com/intel/ledmon;branch=master \
->             file://0002-include-sys-select.h-and-sys-types.h.patch \
-> +           file://0001-Don-t-build-with-Werror-to-fix-compile-error.patch \
->            "
->
-> -SRCREV = "ad1304ca1363d727425a1f23703c523e21feae4f"
-> +SRCREV = "1d72f9cb5c9163b2ecdf19709935720e65f5b90e"
->
->  COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
->  COMPATIBLE_HOST_libc-musl = "null"
-> @@ -27,8 +29,13 @@ COMPATIBLE_HOST_libc-musl = "null"
->  S = "${WORKDIR}/git"
->  EXTRA_OEMAKE = "CC='${CC}' LDFLAGS='${LDFLAGS}' CFLAGS='${CFLAGS}'"
->
-> +# The ledmon sources include headers in ${S}/config to build but not in CFLAGS.
-> +# We need to add this include path in CFLAGS.
-> +CFLAGS += "-I${S}/config"
-> +
->  do_install_append() {
-> -       install -d ${D}/${systemd_unitdir}/system
-> -       oe_runmake  DESTDIR=${D}  install
-> -       oe_runmake  DESTDIR=${D}${systemd_unitdir}/system  install-systemd
-> +        if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-> +               install -d ${D}${systemd_unitdir}/system
-> +               install -m 0755 ${S}/systemd/ledmon.service ${D}${systemd_unitdir}/system
-> +        fi
->  }
-> --
-> 2.7.4
->
->
->
+> Andreas
+> > On Fri, 1 Nov 2019 at 11:20, Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> > wrote:
+> >
+> > > 1) Update DEPEND from libsigc++-2.0 to libsigc++-3.
+> > >
+> > > 2) Update install dir from glibmm-2.4 to glibmm-2.64.
+> > >
+> > > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> > > ---
+> > >  .../glib-2.0/{glibmm_2.62.0.bb =3D> glibmm_2.63.1.bb}        | 14
+> > > +++++++-------
+> > >  1 file changed, 7 insertions(+), 7 deletions(-)
+> > >  rename meta-oe/recipes-core/glib-2.0/{glibmm_2.62.0.bb =3D>
+> > > glibmm_2.63.1.bb} (68%)
+> > >
+> > > diff --git a/meta-oe/recipes-core/glib-2.0/glibmm_2.62.0.bb
+> > > b/meta-oe/recipes-core/glib-2.0/glibmm_2.63.1.bb
+> > > similarity index 68%
+> > > rename from meta-oe/recipes-core/glib-2.0/glibmm_2.62.0.bb
+> > > rename to meta-oe/recipes-core/glib-2.0/glibmm_2.63.1.bb
+> > > index 75eea4e..99f5cf9 100644
+> > > --- a/meta-oe/recipes-core/glib-2.0/glibmm_2.62.0.bb
+> > > +++ b/meta-oe/recipes-core/glib-2.0/glibmm_2.63.1.bb
+> > > @@ -5,7 +5,7 @@ LICENSE =3D "LGPLv2.1 & GPLv2"
+> > >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D42dfffebc56fec7527aac53b7=
+a89d1d8 \
+> > >
+> > >  file://COPYING.tools;md5=3D751419260aa954499f7abaabaa882bbe"
+> > >
+> > > -DEPENDS =3D "mm-common glib-2.0 libsigc++-2.0 glib-2.0-native"
+> > > +DEPENDS =3D "mm-common glib-2.0 libsigc++-3 glib-2.0-native"
+> > >  inherit gnomebase
+> > >
+> > >  SHRT_VER =3D
+> > > "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+> > > @@ -13,23 +13,23 @@ SHRT_VER =3D
+> > > "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+> > >  SRC_URI +=3D " \
+> > >      file://remove-examples.patch \
+> > >  "
+> > > -SRC_URI[archive.md5sum] =3D "7da228e3f0c6a10024b9a7708c53691e"
+> > > -SRC_URI[archive.sha256sum] =3D
+> > > "36659f13cc73282392d1305858f3bbca46fbd1ce2f078cc9db8b9f79b2e93cfe"
+> > > +SRC_URI[archive.md5sum] =3D "6d00da9e119d3cd1a27caaae4b00114e"
+> > > +SRC_URI[archive.sha256sum] =3D
+> > > "4f99e29bd0a67afd94c0d6fdad2b86bc5cd944cd5d4ff097520dc58b6c997ada"
+> > >
+> > >  do_install_append() {
+> > > -    install -d ${D}${datadir}/glibmm-2.4
+> > > +    install -d ${D}${datadir}/glibmm-2.64
+> > >      install -d ${D}${datadir}/aclocal
+> > >
+> > > -    install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.4/
+> > > +    install -m 0644 glib/glibmmconfig.h ${D}${datadir}/glibmm-2.64/
+> > >      install -m 0644 scripts/glibmm_check_perl.m4 ${D}${datadir}/aclo=
+cal/
+> > > || true
+> > >
+> > >      for i in generate_wrap_init.pl gmmproc; do
+> > > -        sed -i -e '1s,.*,#!${bindir}/env perl,'
+> > > ${D}${libdir}/glibmm-2.4/proc/$i
+> > > +        sed -i -e '1s,.*,#!${bindir}/env perl,'
+> > > ${D}${libdir}/glibmm-2.64/proc/$i
+> > >      done
+> > >  }
+> > >
+> > >  FILES_${PN} =3D "${libdir}/lib*.so.*"
+> > > -FILES_${PN}-dev +=3D "${datadir}/glibmm-* ${libdir}/glibmm-2.4/inclu=
+de/
+> > > ${libdir}/glibmm-2.4/proc/ ${libdir}/giomm-2.4/include/"
+> > > +FILES_${PN}-dev +=3D "${datadir}/glibmm-* ${libdir}/glibmm-2.64/incl=
+ude/
+> > > ${libdir}/glibmm-2.64/proc/ ${libdir}/giomm-2.64/include/"
+> > >
+> > >  RDEPENDS_${PN}-dev =3D "perl"
+> > >  SECURITY_CFLAGS =3D "${SECURITY_NO_PIE_CFLAGS}"
+> > > --
+> > > 2.7.4
+> > >
+> > >
+> > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
