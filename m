@@ -1,46 +1,36 @@
-Return-Path: <krussell7711@gmail.com>
-Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
-	[209.85.210.66])
-	by mail.openembedded.org (Postfix) with ESMTP id C7D6C7FCC1
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 141817FCAB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 20:01:04 +0000 (UTC)
-Received: by mail-ot1-f66.google.com with SMTP id s3so1746224otk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 13:01:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=agiPZsvOgJQyv0rySxsGPGoYSQhnRCyhsbPcCaJjngk=;
-	b=avBpkp11OySULSrBvPuigujcJ/zHYUAApMIbHH+JXMR3dhbgTdZYE/nCVhxqn/WnMe
-	l+fM7qfPzWGcRbuJU2YZDWPH7slwIJckmmyHn1TmZVB1oQ5GGw7V9j8SKHA2iA19bQAZ
-	3fWcMCRwiojiJk8hjHiA6bc5EwfkOU+lrI0KR3cdeQiw3PdVnJkc4dagAPTDnU3CzIT8
-	j+rHZdoLzjSr6Q5OZovgZYb/hepuvQlOjQw9h5rZSQIaAGyUOdJ1sXAZQxMkp2DaiXOy
-	YxOqZsCoH9rFuV7tR73R04e8DCTMujTmkcIbReN+2WsNVeLIVX2XH3qWUM11xknMOpmQ
-	hlqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=agiPZsvOgJQyv0rySxsGPGoYSQhnRCyhsbPcCaJjngk=;
-	b=p8KDeVuh6fTR/RrHshBVGWJwN5nUYV+ov1lnx7nFg5alrjD5wtOZDrTKeETSa8zYUv
-	pluvLhXGPxNlDfd1F0CDZrunNRiIiPw28ln9kQ9pKxxEGM8a1eS6PJVq3cnJsR1TXh3h
-	VTB1+gBkwCa7lwFh1wwH9D6Jw2pdY2sTnaIT+Qfdm+JXZIYdVZouPwQWU1iRWjsgJ7Dz
-	u1+R6+ofPlh6Aqs5WiIp1g/TzZaKFZL65Tq9i3D7WGyte7RIr6a77c3UTo9fucbNBAx+
-	ReBMT5j+Unmr19NNARjjP2PYlg+446Emy0GJ+hGmWCgIlmsVYg2JEejYPEAmG++LO1Q/
-	89tQ==
-X-Gm-Message-State: APjAAAV64IrN6DJIsIgy9v9/geymuZwx3ErOJ1ne/FdRbScyrz45k3i3
-	JN8jBlxBVsjEoXjKDIeJJKwhg7dPh4Ga6hiv0RcsUdmd
-X-Google-Smtp-Source: APXvYqykBk6cvUUC488JqWr2500nJf9p7LUpMABIB9Jjfs1hLVRZXKSCrlMdDqWis0sCH3Qj7Szbor7wLocjZGAb7bw=
-X-Received: by 2002:a9d:6c46:: with SMTP id g6mr6391405otq.203.1572638465302; 
-	Fri, 01 Nov 2019 13:01:05 -0700 (PDT)
+	Fri,  1 Nov 2019 20:47:53 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 474Z5N5Wh0z65;
+	Fri,  1 Nov 2019 21:47:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1572641273;
+	bh=9Jb/rR/Trq8Z7JQLhC7QdFsQiAkdBI5ZgPJA2Kr9UgI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=EHyE5pJAC0PrFW5XmgLmcKP16yz6neEp3zhzQG5Tmk21ci9tC2HYiA3uiIBGJr96+
+	44VRk/W8R/7+yviLHI6GszoKDh/Ir7+kb47c0s26dPSGUL2CtKQZ9xKGvcaMdfbrX8
+	3m/ox2WwhK/xNCKKsUoBUTWPJwynMfPlUV5gdBHtVTuqrxedAv4S1RJxTpYMla491y
+	/w5FD1Fxg3tcgx/3y6PbjPVQh+x0U6KwPmxxRb8gSnwtKLuM0P0cNq1tUl+sqPUwHK
+	ASpFtv1aeI+BeVj3uc9VrKl0fJx8oDQpdTVaYId7aiCXwA7RojOqEst6ClReyBTZA3
+	7jcdGp++N+Un48nGtf4dkyL5ba0QroAeuLdMz11Q+cY0yTnVtUktHNAHNNijBE21kI
+	rqhlMW8DzRVsvRr43nfaaft5z6FPEw4DG5wcDdIGOtFmfgupdGgx1FA5ToMsZ54Cv9
+	mFefAycAY2omlGAdGIENkECBmgsRvEenD+7MAu4a8m18cgGznXHWd4xSgyL6l1Iga4
+	+lhcZj21+PVmK1lfnbxnWgWbHbwMJv/ngYeKGRa5/LqmpdQPKvsJpQZ7v6nsfPLPo3
+	hNXGWAhGrMrK8MSZbqJUpiP07uQnFyGCM/mN4UNVe1pTugpefgUlRYqK2VPcQ7f1bs
+	3eOTrQGa4yCH0toamnJq+AEY=
+Date: Fri, 1 Nov 2019 22:47:50 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Message-ID: <20191101204750.GA6557@localhost>
+References: <1572600861-65655-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-References: <20190204220137.26744-1-bkylerussell@gmail.com>
-In-Reply-To: <20190204220137.26744-1-bkylerussell@gmail.com>
-From: Kyle Russell <bkylerussell@gmail.com>
-Date: Fri, 1 Nov 2019 16:00:54 -0400
-Message-ID: <CAFrQVPN7hstMH_LRvzGRW8HAd=a_m9wGWT9PYpidOKGqhSgqQQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org, richard.leitner@skidata.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-java][PATCH] icedtea7-native: set default x11 PACKAGECONFIG from DISTRO_FEATURES
+In-Reply-To: <1572600861-65655-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] rtorrent: upgrade 0.9.7 -> 0.9.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,68 +43,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 20:01:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 01 Nov 2019 20:47:54 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Hi Richard,
+On Fri, Nov 01, 2019 at 05:34:21PM +0800, Zheng Ruoqin wrote:
+>...
+> index 9bb81c4..6f0e8c1 100644
+> --- a/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
+> +++ b/meta-oe/recipes-connectivity/rtorrent/rtorrent_git.bb
+> @@ -8,10 +8,10 @@ DEPENDS = "libsigc++-2.0 curl cppunit libtorrent ncurses"
+>  SRC_URI = "git://github.com/rakshasa/rtorrent \
+>      file://don-t-run-code-while-configuring-package.patch \
+>  "
+> -# v0.9.7
+> -SRCREV = "327164f9d86aafcd2500a317d485374df32ea622"
+> +# v0.9.8
+> +SRCREV = "6154d1698756e0c4842b1c13a0e56db93f1aa947"
+>  
+> -PV = "0.9.7+git${SRCPV}"
+> +PV = "0.9.8+git${SRCPV}"
+>...
 
-Can you take a look at this patch I sent back in February?  I just ran into
-a similar error during do_configure while trying to build icedtea7-native
-from thud on a host without xorg-x11-proto-devel installed.  I think this
-change should allow the X11 headers to build and be pulled from the
-appropriate -native packages during bitbake instead of requiring the host
-dependency.
+This is exactly the 0.9.8 release, please change to
+  PV = "0.9.8"
 
-Thank you,
 
-Kyle
+cu
+Adrian
 
-On Mon, Feb 4, 2019 at 5:01 PM Kyle Russell <bkylerussell@gmail.com> wrote:
+-- 
 
-> If x11 is specified in DISTRO_FEATURES, then make it a default
-> PACKAGECONFIG option when building icedtea7-native; otherwise, the
-> libx11-native dependency won't be satisfied.
->
-> The recipe reads as though icedtea7-native can build completely without
-> X11, but if the libx11-native headers are not installed on the host
-> system, compile errors in multiple units because of a missing X11/Xlib.h.
->
-> In file included from
-> ../../../src/share/native/sun/awt/../java2d/pipe/Region.h:34:0,
->                  from
-> ../../../src/share/native/sun/awt/../java2d/loops/GraphicsPrimitiveMgr.c:31:
-> ../../../src/solaris/native/sun/awt/utility/rect.h:31:22: fatal error:
-> X11/Xlib.h: No such file or directory
->
-> In this example, it appears that GraphicsPrimitiveMgr.c is supposed to
-> be compiled even in headless mode, so the dependency still seems to be
-> needed.
->
-> Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
-> ---
->  recipes-core/icedtea/icedtea7-native.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/recipes-core/icedtea/icedtea7-native.inc
-> b/recipes-core/icedtea/icedtea7-native.inc
-> index 69f5d25..62dea78 100644
-> --- a/recipes-core/icedtea/icedtea7-native.inc
-> +++ b/recipes-core/icedtea/icedtea7-native.inc
-> @@ -11,7 +11,7 @@ DEPENDS = "virtual/javac-native virtual/java-native
-> classpath-native \
->            unzip-native make-native util-linux-native\
->            "
->
-> -PACKAGECONFIG ??= ""
-> +PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11',
-> '', d)}"
->  PACKAGECONFIG[x11] = ",--disable-headful,libx11-native xorgproto-native
-> libxt-native libxext-native libxrender-native"
->
->  OEMAKE_BUILD_HEADLESS_ONLY = "${@bb.utils.contains('PACKAGECONFIG',
-> 'x11', '', 'BUILD_HEADLESS_ONLY=1', d)}"
-> --
-> 2.20.1
->
->
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
