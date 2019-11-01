@@ -1,46 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D972D7FC8C
+Return-Path: <krussell7711@gmail.com>
+Received: from mail-ot1-f66.google.com (mail-ot1-f66.google.com
+	[209.85.210.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C7D6C7FCC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 19:13:20 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id c26so14273927qtj.10
+	Fri,  1 Nov 2019 20:01:04 +0000 (UTC)
+Received: by mail-ot1-f66.google.com with SMTP id s3so1746224otk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 12:13:22 -0700 (PDT)
+	Fri, 01 Nov 2019 13:01:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DYfN/9ESKvkYwz6QqwOYoPQ3U0+e5F2vNFyBMpKFp7s=;
-	b=EPgoCMrLJ9+/lmFJNDt3sdpvQFBAQtcprCzswtOjCMlI7E5HDdQ0jhbaywxX7/8/FY
-	aUREcqiyOnawJKuvbq7nMXBjneWML8QQzZgfz050VeB1HaV3BydXZc5jl3lKc4T/NE4O
-	HGAus325RTnalG9f5ElVt63+SumX/To2riRC4zdZmCl/j3wXl/eOGsGIUWDit7Ha1Znm
-	av+Og2TzDezaTvjpxf6sHSG2UsBhPZ2ZNISw9G3isSIGOtY9oLwVqFPx8AaPeDLGsXcI
-	uv94ItFVNYNzHjpNB+cbYAFeYUkSz67mjYgxGa/aIXPSvvH3gpWwTB/W9R9iKBaF0xbN
-	76sA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=agiPZsvOgJQyv0rySxsGPGoYSQhnRCyhsbPcCaJjngk=;
+	b=avBpkp11OySULSrBvPuigujcJ/zHYUAApMIbHH+JXMR3dhbgTdZYE/nCVhxqn/WnMe
+	l+fM7qfPzWGcRbuJU2YZDWPH7slwIJckmmyHn1TmZVB1oQ5GGw7V9j8SKHA2iA19bQAZ
+	3fWcMCRwiojiJk8hjHiA6bc5EwfkOU+lrI0KR3cdeQiw3PdVnJkc4dagAPTDnU3CzIT8
+	j+rHZdoLzjSr6Q5OZovgZYb/hepuvQlOjQw9h5rZSQIaAGyUOdJ1sXAZQxMkp2DaiXOy
+	YxOqZsCoH9rFuV7tR73R04e8DCTMujTmkcIbReN+2WsNVeLIVX2XH3qWUM11xknMOpmQ
+	hlqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=DYfN/9ESKvkYwz6QqwOYoPQ3U0+e5F2vNFyBMpKFp7s=;
-	b=WyZcGJUuyqyTv/0Yed5NeTmhRL0+ZJCjO28LWKxmvAwGXAY0SrrfdaImowysBhmYIo
-	8JTx75SDwLSFRIikc5g51A6mcqr74QIOh1GMYIuasEFyektefIudHzeqngsjDJXflZ+g
-	2lRPKmS6XAs7De+Hm6ApY4Wyl84kDrYdLWP/nikfW+qaZ30U2L5iDc1loIo2N1rz09wB
-	MMhrWDialn8JJmy7MrKP1GwFGsk4qbY16DarDwfReaR3+wES2fCTCqokyjwYQSKP9AGN
-	oAnkYxuBLGncZ11s8aN7c/7xv09IPHBT6SkbW89rMK58IojxzY1dXco9zz4+0scgk3lt
-	uTMw==
-X-Gm-Message-State: APjAAAVOnisDZ2oa5ecZ1ty8E+aO6XkWlf8VObvgxy5VjX4Q2PqBC4xm
-	GbgJZTCs5F4PJFoEyr6X2JK5Yv5lnqylsnIzwXM=
-X-Google-Smtp-Source: APXvYqyvnuEyOacNyppuF3yDVQNJNJhYBbfAbHmTW8vvSyZy6dLOp0K8tu8bhmYu5iLNCRTHgcs5+K4f3/akBnFAJL0=
-X-Received: by 2002:ad4:5349:: with SMTP id v9mr10405019qvs.55.1572635601089; 
-	Fri, 01 Nov 2019 12:13:21 -0700 (PDT)
+	:message-id:subject:to;
+	bh=agiPZsvOgJQyv0rySxsGPGoYSQhnRCyhsbPcCaJjngk=;
+	b=p8KDeVuh6fTR/RrHshBVGWJwN5nUYV+ov1lnx7nFg5alrjD5wtOZDrTKeETSa8zYUv
+	pluvLhXGPxNlDfd1F0CDZrunNRiIiPw28ln9kQ9pKxxEGM8a1eS6PJVq3cnJsR1TXh3h
+	VTB1+gBkwCa7lwFh1wwH9D6Jw2pdY2sTnaIT+Qfdm+JXZIYdVZouPwQWU1iRWjsgJ7Dz
+	u1+R6+ofPlh6Aqs5WiIp1g/TzZaKFZL65Tq9i3D7WGyte7RIr6a77c3UTo9fucbNBAx+
+	ReBMT5j+Unmr19NNARjjP2PYlg+446Emy0GJ+hGmWCgIlmsVYg2JEejYPEAmG++LO1Q/
+	89tQ==
+X-Gm-Message-State: APjAAAV64IrN6DJIsIgy9v9/geymuZwx3ErOJ1ne/FdRbScyrz45k3i3
+	JN8jBlxBVsjEoXjKDIeJJKwhg7dPh4Ga6hiv0RcsUdmd
+X-Google-Smtp-Source: APXvYqykBk6cvUUC488JqWr2500nJf9p7LUpMABIB9Jjfs1hLVRZXKSCrlMdDqWis0sCH3Qj7Szbor7wLocjZGAb7bw=
+X-Received: by 2002:a9d:6c46:: with SMTP id g6mr6391405otq.203.1572638465302; 
+	Fri, 01 Nov 2019 13:01:05 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191101055734.2056-1-alex.kiernan@gmail.com>
-In-Reply-To: <20191101055734.2056-1-alex.kiernan@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 1 Nov 2019 12:12:50 -0700
-Message-ID: <CAMKF1sqEJgqCPAxhjZPQ11XRXiJOi487gQBkPLhUy5oS6ZsLgA@mail.gmail.com>
-To: Alex Kiernan <alex.kiernan@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ostree: Upgrade 2019.4 -> 2019.5
+References: <20190204220137.26744-1-bkylerussell@gmail.com>
+In-Reply-To: <20190204220137.26744-1-bkylerussell@gmail.com>
+From: Kyle Russell <bkylerussell@gmail.com>
+Date: Fri, 1 Nov 2019 16:00:54 -0400
+Message-ID: <CAFrQVPN7hstMH_LRvzGRW8HAd=a_m9wGWT9PYpidOKGqhSgqQQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org, richard.leitner@skidata.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-java][PATCH] icedtea7-native: set default x11 PACKAGECONFIG from DISTRO_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,53 +53,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 19:13:21 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 20:01:05 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Fails to patch
+Hi Richard,
 
-RROR: ostree-2019.5-r0 do_patch: Command Error: 'quilt --quiltrc
-/mnt/b/yoe/build/tmp/work/aarch64-yoe-linux-musl/ostree/2019.5-r0/recipe-sysroot-native/etc/quiltrc
-push' exited with 0  Output:
-Applying patch 0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
-patching file Makefile-ostree.am
-patching file configure.ac
-Hunk #1 FAILED at 192.
-1 out of 1 hunk FAILED -- rejects in file configure.ac
-Patch 0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
-does not apply (enforce with -f)
+Can you take a look at this patch I sent back in February?  I just ran into
+a similar error during do_configure while trying to build icedtea7-native
+from thud on a host without xorg-x11-proto-devel installed.  I think this
+change should allow the X11 headers to build and be pulled from the
+appropriate -native packages during bitbake instead of requiring the host
+dependency.
 
-On Thu, Oct 31, 2019 at 10:57 PM Alex Kiernan <alex.kiernan@gmail.com> wrote:
+Thank you,
+
+Kyle
+
+On Mon, Feb 4, 2019 at 5:01 PM Kyle Russell <bkylerussell@gmail.com> wrote:
+
+> If x11 is specified in DISTRO_FEATURES, then make it a default
+> PACKAGECONFIG option when building icedtea7-native; otherwise, the
+> libx11-native dependency won't be satisfied.
 >
-> Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+> The recipe reads as though icedtea7-native can build completely without
+> X11, but if the libx11-native headers are not installed on the host
+> system, compile errors in multiple units because of a missing X11/Xlib.h.
+>
+> In file included from
+> ../../../src/share/native/sun/awt/../java2d/pipe/Region.h:34:0,
+>                  from
+> ../../../src/share/native/sun/awt/../java2d/loops/GraphicsPrimitiveMgr.c:31:
+> ../../../src/solaris/native/sun/awt/utility/rect.h:31:22: fatal error:
+> X11/Xlib.h: No such file or directory
+>
+> In this example, it appears that GraphicsPrimitiveMgr.c is supposed to
+> be compiled even in headless mode, so the dependency still seems to be
+> needed.
+>
+> Signed-off-by: Kyle Russell <bkylerussell@gmail.com>
 > ---
->
->  .../ostree/{ostree_2019.4.bb => ostree_2019.5.bb}               | 2 +-
+>  recipes-core/icedtea/icedtea7-native.inc | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
->  rename meta-oe/recipes-extended/ostree/{ostree_2019.4.bb => ostree_2019.5.bb} (99%)
 >
-> diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-> similarity index 99%
-> rename from meta-oe/recipes-extended/ostree/ostree_2019.4.bb
-> rename to meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-> index 505c9fcccc59..efe1b3616f23 100644
-> --- a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb
-> +++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-> @@ -28,7 +28,7 @@ SRC_URI = " \
->      file://0001-Always-enable-trivial-httpd-for-tests.patch \
->      file://0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch \
->  "
-> -SRCREV = "9d39e7d91e8497987cad69a3fbed5c5fc91eebdc"
-> +SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
+> diff --git a/recipes-core/icedtea/icedtea7-native.inc
+> b/recipes-core/icedtea/icedtea7-native.inc
+> index 69f5d25..62dea78 100644
+> --- a/recipes-core/icedtea/icedtea7-native.inc
+> +++ b/recipes-core/icedtea/icedtea7-native.inc
+> @@ -11,7 +11,7 @@ DEPENDS = "virtual/javac-native virtual/java-native
+> classpath-native \
+>            unzip-native make-native util-linux-native\
+>            "
 >
->  UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
+> -PACKAGECONFIG ??= ""
+> +PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11',
+> '', d)}"
+>  PACKAGECONFIG[x11] = ",--disable-headful,libx11-native xorgproto-native
+> libxt-native libxext-native libxrender-native"
 >
+>  OEMAKE_BUILD_HEADLESS_ONLY = "${@bb.utils.contains('PACKAGECONFIG',
+> 'x11', '', 'BUILD_HEADLESS_ONLY=1', d)}"
 > --
-> 2.17.1
+> 2.20.1
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
