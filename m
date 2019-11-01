@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E3A97FC35
+	by mail.openembedded.org (Postfix) with ESMTP id 7F4737F7AB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 03:21:28 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,253,1569254400"; d="scan'208";a="77775391"
+	Fri,  1 Nov 2019 03:32:52 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,253,1569254400"; d="scan'208";a="77775864"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 11:21:26 +0800
+	by heian.cn.fujitsu.com with ESMTP; 01 Nov 2019 11:32:52 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id BFDE841B7076
+	by cn.fujitsu.com (Postfix) with ESMTP id 694784CE1508
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Nov 2019 11:13:24 +0800 (CST)
+	Fri,  1 Nov 2019 11:24:53 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 11:21:27 +0800
+	Server (TLS) id 14.3.439.0; Fri, 1 Nov 2019 11:32:56 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Nov 2019 11:21:41 +0800
-Message-ID: <20191101032141.20864-1-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 1 Nov 2019 11:33:10 +0800
+Message-ID: <20191101033310.22950-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: BFDE841B7076.AA5A5
+X-yoursite-MailScanner-ID: 694784CE1508.A8139
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pathlib2: upgrade 2.3.4 -> 2.3.5
+Subject: [meta-python] [PATCH] python-periphery: upgrade 1.1.1 -> 2.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,41 +37,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Nov 2019 03:21:28 -0000
+X-List-Received-Date: Fri, 01 Nov 2019 03:32:53 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
+-License-Update: Upgrade file PKG-INFO.
+
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-pathlib2.inc       | 4 ++--
- .../{python-pathlib2_2.3.4.bb => python-pathlib2_2.3.5.bb}    | 0
- .../{python3-pathlib2_2.3.4.bb => python3-pathlib2_2.3.5.bb}  | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pathlib2_2.3.4.bb => python-pathlib2_2.3.5.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pathlib2_2.3.4.bb => python3-pathlib2_2.3.5.bb} (100%)
+ meta-python/recipes-devtools/python/python-periphery.inc      | 4 ++--
+ meta-python/recipes-devtools/python/python-periphery_1.1.1.bb | 4 ----
+ meta-python/recipes-devtools/python/python-periphery_2.0.0.bb | 4 ++++
+ .../recipes-devtools/python/python3-periphery_1.1.1.bb        | 4 ----
+ .../recipes-devtools/python/python3-periphery_2.0.0.bb        | 4 ++++
+ 5 files changed, 10 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-periphery_1.1.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-periphery_2.0.0.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python3-periphery_1.1.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-periphery_2.0.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pathlib2.inc b/meta-python/recipes-devtools/python/python-pathlib2.inc
-index c25e5a080..c5ba99d4f 100644
---- a/meta-python/recipes-devtools/python/python-pathlib2.inc
-+++ b/meta-python/recipes-devtools/python/python-pathlib2.inc
-@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/mcmtroffaes/pathlib2"
+diff --git a/meta-python/recipes-devtools/python/python-periphery.inc b/meta-python/recipes-devtools/python/python-periphery.inc
+index 539c3579c..ea43e5fa7 100644
+--- a/meta-python/recipes-devtools/python/python-periphery.inc
++++ b/meta-python/recipes-devtools/python/python-periphery.inc
+@@ -2,6 +2,6 @@ DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI
+ HOMEPAGE = "http://pythonhosted.org/python-periphery/"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=042856c23a3e903b33bf361ea1cbe29a"
  
--SRC_URI[md5sum] = "96da6398b3ea944417b84ccb25b171aa"
--SRC_URI[sha256sum] = "446014523bb9be5c28128c4d2a10ad6bb60769e78bd85658fe44a450674e0ef8"
-+SRC_URI[md5sum] = "f2bd0a363eb0f8fa0556f35c1d9e66fb"
-+SRC_URI[sha256sum] = "6cd9a47b597b37cc57de1c05e56fb1a1c9cc9fab04fe78c29acd090418529868"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=063846af82b555d48822cf43dc6db6af"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=19f978bd6c8afe3fa9e408b71330512f"
  
- RDEPENDS_${PN} += "${PYTHON_PN}-six"
-diff --git a/meta-python/recipes-devtools/python/python-pathlib2_2.3.4.bb b/meta-python/recipes-devtools/python/python-pathlib2_2.3.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pathlib2_2.3.4.bb
-rename to meta-python/recipes-devtools/python/python-pathlib2_2.3.5.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pathlib2_2.3.4.bb b/meta-python/recipes-devtools/python/python3-pathlib2_2.3.5.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pathlib2_2.3.4.bb
-rename to meta-python/recipes-devtools/python/python3-pathlib2_2.3.5.bb
+-PYPI_PACKAGE = "python-periphery"
+\ No newline at end of file
++PYPI_PACKAGE = "python-periphery"
+diff --git a/meta-python/recipes-devtools/python/python-periphery_1.1.1.bb b/meta-python/recipes-devtools/python/python-periphery_1.1.1.bb
+deleted file mode 100644
+index 6ae7fed81..000000000
+--- a/meta-python/recipes-devtools/python/python-periphery_1.1.1.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-inherit pypi setuptools
+-require python-periphery.inc
+-
+-SRC_URI[sha256sum] = "fe8f351934edce72cd919b4eb070878ebff551db5e21aea61e0f446101f0a79f"
+\ No newline at end of file
+diff --git a/meta-python/recipes-devtools/python/python-periphery_2.0.0.bb b/meta-python/recipes-devtools/python/python-periphery_2.0.0.bb
+new file mode 100644
+index 000000000..7069f3fdd
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-periphery_2.0.0.bb
+@@ -0,0 +1,4 @@
++inherit pypi setuptools
++require python-periphery.inc
++
++SRC_URI[sha256sum] = "2df05528a7668db4fb3faaff516b34ed99e9009ed9610a4efe3ea6c0ea8a3aab"
+diff --git a/meta-python/recipes-devtools/python/python3-periphery_1.1.1.bb b/meta-python/recipes-devtools/python/python3-periphery_1.1.1.bb
+deleted file mode 100644
+index ba9a95dbf..000000000
+--- a/meta-python/recipes-devtools/python/python3-periphery_1.1.1.bb
++++ /dev/null
+@@ -1,4 +0,0 @@
+-inherit pypi setuptools3
+-require python-periphery.inc
+-
+-SRC_URI[sha256sum] = "fe8f351934edce72cd919b4eb070878ebff551db5e21aea61e0f446101f0a79f"
+\ No newline at end of file
+diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.0.0.bb b/meta-python/recipes-devtools/python/python3-periphery_2.0.0.bb
+new file mode 100644
+index 000000000..d0c8bed26
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-periphery_2.0.0.bb
+@@ -0,0 +1,4 @@
++inherit pypi setuptools3
++require python-periphery.inc
++
++SRC_URI[sha256sum] = "2df05528a7668db4fb3faaff516b34ed99e9009ed9610a4efe3ea6c0ea8a3aab"
 -- 
 2.20.1
 
