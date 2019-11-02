@@ -1,47 +1,46 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-il1-f193.google.com (mail-il1-f193.google.com
-	[209.85.166.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BA337FCAF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CAD5674813
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Nov 2019 08:33:40 +0000 (UTC)
-Received: by mail-il1-f193.google.com with SMTP id z10so10626593ilo.8
+	Sat,  2 Nov 2019 18:03:44 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id q70so13695973qke.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Nov 2019 01:33:42 -0700 (PDT)
+	Sat, 02 Nov 2019 11:03:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6eiaekJf9zwwtPZHtsGOi48Dqy8bPw0IyZCqJIcsU+Q=;
-	b=Ljvnb/eV2ZziMz1kilAlYN5AVRecTl8FyZKEcFXDfa2BAYbbAGi+3+rpccDXrThsUZ
-	bO0sPTrtSarLSbFlvxz7ww7orQIWM7weeArG6atyfHx+djWoXw26BeHK1TENSBdx5jhM
-	SUQwHXmQEOgT+CS7nkqwkoFJuiyH5lteDIDIyYXkrIOojcQJEdwYjxjcyUMdYRZhfTr8
-	7Zu6dkscGxTUAAtEWTTdaoSap5CskOeQXoL9AExBHNmISeGr0AC/lrQblJhjYDIk8Hkq
-	cw9IjdlpEFdM3Ml3gU0uB7WCBIcdBXuzSTGm76vNLgw9XBdDtNHtayaaBnZVXC9xP7/7
-	RYEQ==
+	:cc; bh=qkSQSKXZPKpnxAjOi5BskCK1JumJ7y+6agY9Quo3h3c=;
+	b=Nv36qFgopvfMlb4J0YVlBrJXWKp0T9Xbryo8mRvNn+1d2u2d9vENMx8BJgx+DTM06z
+	t81ze4rdExQJbo3y0cxQk8gjsx2/eYSWUDxcZm2Y36ZUnJkl5S+8Kg8HRAdD1GPGdG7I
+	zUyHwXeR12ZwBhnTFTRtckn5Lc+LjCIwB/lOp21w9yRHCM31OHdqAzAtnbzxAaOtpFKW
+	cY9b7i4CeKTbWxDqjgDTRp6kzjiaYhr55bg0P0f4x0z6lIwG21asqkO4w0MwpIOhCrfN
+	YA1CRCKXia/vFv/nXsybkuPP/TYGJGMd6Wdq7Xkn9eq8ealyJ7bW7MA0uZ+8sbkoU+BB
+	z7Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=6eiaekJf9zwwtPZHtsGOi48Dqy8bPw0IyZCqJIcsU+Q=;
-	b=RzViT8r0QCOE4yIZPEBeSI/VWTAG9hfiOp3k4cpTTU3ZUKJMnrXRTn24V3rCd3R3xe
-	avkdtGzfs+AOad7Qq+sDERYb/+msQHUoiLdjmJ3X/ohAGnPr17NkJt1wSa+fRyZq/JyN
-	m0DkX8BqVjlvYNhcd0vSJW0bjU8xZ/INhHXQiJ7sT5n3K4VLYRlg/2bwdpD4oqAZmnXG
-	i/0+QQh/EhhhYw60ChT67XpouIxO2UpBDoOZffd3eb848Y+MEjRvAm6Mhj5eokGsS6bJ
-	SDT59a90hg3Mbf0DuiaW/ogcbIJ4SXpdnubN1sOpzYIUhVYsi/bvA+fTJkTF7gXJuzjd
-	NPLw==
-X-Gm-Message-State: APjAAAV2We5nCxU82Wl4APvTCghTwrpaE9vN/WxhU3vVV6WKQjmNlJ96
-	FvOUC9vmCU+/RYDaXowKzplX/MuPLak78eSNeLo=
-X-Google-Smtp-Source: APXvYqw7XuWYN1J6T4pAkWUxbB8mmDFUdXmOpwNkV4de0QtJwW/eIHrgnZNcEA1FEbh3ubkOmLuXi2nW42r00QtfyWk=
-X-Received: by 2002:a92:470d:: with SMTP id u13mr17070079ila.217.1572683622010;
-	Sat, 02 Nov 2019 01:33:42 -0700 (PDT)
+	bh=qkSQSKXZPKpnxAjOi5BskCK1JumJ7y+6agY9Quo3h3c=;
+	b=ZZIZ176Jj+c/kOhkDZwa6FarVJhDSpFNSTfzUd22LhuPJg01aWHB/+1zLJxtEXnSCS
+	ClsZZws8XKAX+fs4YSUFeY63Rs4igI/RDpVuWkYhdM1E3TsuAkXYtYuSlncva64cB+35
+	XMLnGAsJtgv+1ExfxidY7gDtZ3GSV1re59SE6RfrRXFR6Od/WkrU0hU6F0Ylk1l9+fJw
+	yKf2DLmIIam664JtO4q15PDFi9tY3zhw+2yOt6BGMsM6UmLr7H7MWbOwN5JYXr+k2mmk
+	NNGObHkIAJc3X0JKITK2JodmmevfNL+p4RHZcHXq9spR7r6rA6ksFhH9L9e3w2b3P8vh
+	nCbg==
+X-Gm-Message-State: APjAAAXLRSNuRtpzabo/xCNPmAFlL6L44RC5AVr3UGi0XGbREKw2aeIO
+	EYhGJwmyBuGV9sHJzEHcEQmBHDQiUF/1rry/HOIIrqOn
+X-Google-Smtp-Source: APXvYqyseoVkZGFAV7I+Tmqlo637WsU8NLsOzP5JP5dJCcuIeNv/k1nghr9K4QzvBzc5uj1OH/tAAqNKK+PZBnQdbkU=
+X-Received: by 2002:a37:6554:: with SMTP id z81mr5200799qkb.9.1572717825208;
+	Sat, 02 Nov 2019 11:03:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20191101055734.2056-1-alex.kiernan@gmail.com>
-	<CAMKF1sqEJgqCPAxhjZPQ11XRXiJOi487gQBkPLhUy5oS6ZsLgA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqEJgqCPAxhjZPQ11XRXiJOi487gQBkPLhUy5oS6ZsLgA@mail.gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Sat, 2 Nov 2019 08:33:31 +0000
-Message-ID: <CAO5Uq5RXNBV4PjDWwQbpq3U=WjvxBBtG_3gupSQP1E2c+FXRGg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+References: <1572607459-67246-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1572607459-67246-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 2 Nov 2019 11:03:18 -0700
+Message-ID: <CAMKF1soJ99bwEYUyszo9L28Uoo9DF-Le6JRtoCGXZ3orNxjqBA@mail.gmail.com>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ostree: Upgrade 2019.4 -> 2019.5
+Subject: Re: [meta-oe][PATCH] iwd: upgrade 0.20 -> 0.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,66 +53,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Nov 2019 08:33:41 -0000
+X-List-Received-Date: Sat, 02 Nov 2019 18:03:45 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Nov 1, 2019 at 7:13 PM Khem Raj <raj.khem@gmail.com> wrote:
+Zheng
+
+I have taken this and mostly it will be in master shortly, however, I
+see that 1.0 is also out in last week or so.
+do you plan to work on upgrading to 1.0 as well ?
+
+On Fri, Nov 1, 2019 at 12:45 AM Zheng Ruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
 >
-> Fails to patch
+> 1) Add DEPEND python-docutils-native to generate manual pages.
 >
-> RROR: ostree-2019.5-r0 do_patch: Command Error: 'quilt --quiltrc
-> /mnt/b/yoe/build/tmp/work/aarch64-yoe-linux-musl/ostree/2019.5-r0/recipe-sysroot-native/etc/quiltrc
-> push' exited with 0  Output:
-> Applying patch 0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
-> patching file Makefile-ostree.am
-> patching file configure.ac
-> Hunk #1 FAILED at 192.
-> 1 out of 1 hunk FAILED -- rejects in file configure.ac
-> Patch 0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
-> does not apply (enforce with -f)
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-connectivity/iwd/{iwd_0.20.bb => iwd_0.23.bb} | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-connectivity/iwd/{iwd_0.20.bb => iwd_0.23.bb} (87%)
 >
-
-Bother... looks I failed to test with just that patch and not the
-subsequent one where I threw away those patches and implemented ptest.
-
-Will redo
-
-> On Thu, Oct 31, 2019 at 10:57 PM Alex Kiernan <alex.kiernan@gmail.com> wrote:
-> >
-> > Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> > ---
-> >
-> >  .../ostree/{ostree_2019.4.bb => ostree_2019.5.bb}               | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >  rename meta-oe/recipes-extended/ostree/{ostree_2019.4.bb => ostree_2019.5.bb} (99%)
-> >
-> > diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-> > similarity index 99%
-> > rename from meta-oe/recipes-extended/ostree/ostree_2019.4.bb
-> > rename to meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-> > index 505c9fcccc59..efe1b3616f23 100644
-> > --- a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb
-> > +++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-> > @@ -28,7 +28,7 @@ SRC_URI = " \
-> >      file://0001-Always-enable-trivial-httpd-for-tests.patch \
-> >      file://0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch \
-> >  "
-> > -SRCREV = "9d39e7d91e8497987cad69a3fbed5c5fc91eebdc"
-> > +SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
-> >
-> >  UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
-> >
-> > --
-> > 2.17.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
-
--- 
-Alex Kiernan
+> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.20.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
+> similarity index 87%
+> rename from meta-oe/recipes-connectivity/iwd/iwd_0.20.bb
+> rename to meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
+> index 4220503..d48fb84 100644
+> --- a/meta-oe/recipes-connectivity/iwd/iwd_0.20.bb
+> +++ b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
+> @@ -2,12 +2,12 @@ DESCRIPTION = "Wireless daemon for Linux"
+>  LICENSE = "LGPL-2.1"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+>
+> -inherit autotools pkgconfig systemd
+> +inherit autotools pkgconfig systemd pythonnative
+>
+> -DEPENDS = "ell readline dbus"
+> +DEPENDS = "ell readline dbus python-docutils-native"
+>
+>  SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+> -SRCREV = "00f0039232cc73bbcf7a1875f8f9aae464d90a8f"
+> +SRCREV = "77f16ae26fc013477f6362a0c33f0e52e82863e0"
+>  S = "${WORKDIR}/git"
+>
+>  PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
