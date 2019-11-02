@@ -1,51 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
-	[209.85.210.181])
-	by mail.openembedded.org (Postfix) with ESMTP id E6B6F7FCEF
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-il1-f193.google.com (mail-il1-f193.google.com
+	[209.85.166.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BA337FCAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Nov 2019 01:01:48 +0000 (UTC)
-Received: by mail-pf1-f181.google.com with SMTP id q26so8120346pfn.11
+	Sat,  2 Nov 2019 08:33:40 +0000 (UTC)
+Received: by mail-il1-f193.google.com with SMTP id z10so10626593ilo.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Nov 2019 18:01:50 -0700 (PDT)
+	Sat, 02 Nov 2019 01:33:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=lJefjT0JqEGekG5ppVmNLIMl6xIogQC2fWKRXIp61mw=;
-	b=GearqNv1FcNbMCvXm6hw0XWzRIdpaZ1c7+GvXBOb3G+rq1Us8IjP/cQ3j8VNBMau0B
-	hLSTL3s0W1PiDPpkB+T3VSIBvIBao2qR1ZiJfL1lOoDtiXop6OqsQ5eZm2kdTU1tDW61
-	P8viGcdRp56IM+gML+doJ/kdVNlT0+6AbuClHEQmjU5eAVE5m2HXenkKE9h74nei6Ceh
-	00DoRPZ7aR+vBjhn4ho0gnMk5w9UNJRBkCnOOkJzEGnn9vI6x5Gvu/k00yFQr0bPsquf
-	DmZfVdLVQIAsmI4Cdb3S+8rya2DGGQyFzSY+9GhXiIJp5v6VOCTCFwQZAwPxfQylF/Bj
-	T2YA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=6eiaekJf9zwwtPZHtsGOi48Dqy8bPw0IyZCqJIcsU+Q=;
+	b=Ljvnb/eV2ZziMz1kilAlYN5AVRecTl8FyZKEcFXDfa2BAYbbAGi+3+rpccDXrThsUZ
+	bO0sPTrtSarLSbFlvxz7ww7orQIWM7weeArG6atyfHx+djWoXw26BeHK1TENSBdx5jhM
+	SUQwHXmQEOgT+CS7nkqwkoFJuiyH5lteDIDIyYXkrIOojcQJEdwYjxjcyUMdYRZhfTr8
+	7Zu6dkscGxTUAAtEWTTdaoSap5CskOeQXoL9AExBHNmISeGr0AC/lrQblJhjYDIk8Hkq
+	cw9IjdlpEFdM3Ml3gU0uB7WCBIcdBXuzSTGm76vNLgw9XBdDtNHtayaaBnZVXC9xP7/7
+	RYEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=lJefjT0JqEGekG5ppVmNLIMl6xIogQC2fWKRXIp61mw=;
-	b=ZiEdlyZnF88jEzPgwxG8hs829wRbE4ZRJRIx8cdCRnd1xlhMoZsciIjPj19ZXxCEaX
-	/H40qcp8gSZ24nvVfUgzhqFeqjpoATIMYSC0Qj5BEJtivSGXqCixjVMCw9S0Qja5LKxJ
-	VZYxMRwJIaJTH0e+qeto+gqI2pP7rNz+W9//1MyfXxd9i7gSfizYGYJMlavsEB/8ispt
-	B1UW3EnncVygK9QLChwXNQeenlVWTkMj4BnqetdTIX6rcuuzTMVzjQVBWIJPv0yweIDR
-	dX3HERFyLfefCpXyKVbzxWrmlkc+aWLU9UK5ElVAACOf+h1UyRMTMqfDvbEvqf0WSJiN
-	rr6g==
-X-Gm-Message-State: APjAAAUbHJVfFdPl2BCxPUL8TxSfcOzk6pWYGVzRvTY3QyzdjDgTaymU
-	eYnpeuWU40Cqk73FQjivLlrI0N0WgDM=
-X-Google-Smtp-Source: APXvYqw4tV8tj1ToU3rUzKCZAL+p9aGF/Ai/og9sv7kabc899GnZVZVfJGR2X4tx++OflnKXq+ESng==
-X-Received: by 2002:a63:69c9:: with SMTP id
-	e192mr17260834pgc.271.1572656509141; 
-	Fri, 01 Nov 2019 18:01:49 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::f974])
-	by smtp.gmail.com with ESMTPSA id
-	d2sm2416862pfo.106.2019.11.01.18.01.48
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 01 Nov 2019 18:01:48 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Nov 2019 18:01:34 -0700
-Message-Id: <20191102010134.3797423-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=6eiaekJf9zwwtPZHtsGOi48Dqy8bPw0IyZCqJIcsU+Q=;
+	b=RzViT8r0QCOE4yIZPEBeSI/VWTAG9hfiOp3k4cpTTU3ZUKJMnrXRTn24V3rCd3R3xe
+	avkdtGzfs+AOad7Qq+sDERYb/+msQHUoiLdjmJ3X/ohAGnPr17NkJt1wSa+fRyZq/JyN
+	m0DkX8BqVjlvYNhcd0vSJW0bjU8xZ/INhHXQiJ7sT5n3K4VLYRlg/2bwdpD4oqAZmnXG
+	i/0+QQh/EhhhYw60ChT67XpouIxO2UpBDoOZffd3eb848Y+MEjRvAm6Mhj5eokGsS6bJ
+	SDT59a90hg3Mbf0DuiaW/ogcbIJ4SXpdnubN1sOpzYIUhVYsi/bvA+fTJkTF7gXJuzjd
+	NPLw==
+X-Gm-Message-State: APjAAAV2We5nCxU82Wl4APvTCghTwrpaE9vN/WxhU3vVV6WKQjmNlJ96
+	FvOUC9vmCU+/RYDaXowKzplX/MuPLak78eSNeLo=
+X-Google-Smtp-Source: APXvYqw7XuWYN1J6T4pAkWUxbB8mmDFUdXmOpwNkV4de0QtJwW/eIHrgnZNcEA1FEbh3ubkOmLuXi2nW42r00QtfyWk=
+X-Received: by 2002:a92:470d:: with SMTP id u13mr17070079ila.217.1572683622010;
+	Sat, 02 Nov 2019 01:33:42 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] poco: Fix build on risc-v
+References: <20191101055734.2056-1-alex.kiernan@gmail.com>
+	<CAMKF1sqEJgqCPAxhjZPQ11XRXiJOi487gQBkPLhUy5oS6ZsLgA@mail.gmail.com>
+In-Reply-To: <CAMKF1sqEJgqCPAxhjZPQ11XRXiJOi487gQBkPLhUy5oS6ZsLgA@mail.gmail.com>
+From: Alex Kiernan <alex.kiernan@gmail.com>
+Date: Sat, 2 Nov 2019 08:33:31 +0000
+Message-ID: <CAO5Uq5RXNBV4PjDWwQbpq3U=WjvxBBtG_3gupSQP1E2c+FXRGg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] ostree: Upgrade 2019.4 -> 2019.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,69 +54,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Nov 2019 01:01:49 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 02 Nov 2019 08:33:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Patch fixes following error
+On Fri, Nov 1, 2019 at 7:13 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Fails to patch
+>
+> RROR: ostree-2019.5-r0 do_patch: Command Error: 'quilt --quiltrc
+> /mnt/b/yoe/build/tmp/work/aarch64-yoe-linux-musl/ostree/2019.5-r0/recipe-sysroot-native/etc/quiltrc
+> push' exited with 0  Output:
+> Applying patch 0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
+> patching file Makefile-ostree.am
+> patching file configure.ac
+> Hunk #1 FAILED at 192.
+> 1 out of 1 hunk FAILED -- rejects in file configure.ac
+> Patch 0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
+> does not apply (enforce with -f)
+>
 
-TOPDIR/build/tmp/work/riscv64-yoe-linux-musl/poco/1.9.4-r0/git/Foundation/src/utils.h:76:2: error: Target architecture was not detected as supported by Double-Conversion.
- ^
-1 error generated.
+Bother... looks I failed to test with just that patch and not the
+subsequent one where I threw away those patches and implemented ptest.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...ble-operations-when-using-double-flo.patch | 28 +++++++++++++++++++
- meta-oe/recipes-support/poco/poco_1.9.4.bb    |  1 +
- 2 files changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-support/poco/poco/0001-riscv-Enable-double-operations-when-using-double-flo.patch
+Will redo
 
-diff --git a/meta-oe/recipes-support/poco/poco/0001-riscv-Enable-double-operations-when-using-double-flo.patch b/meta-oe/recipes-support/poco/poco/0001-riscv-Enable-double-operations-when-using-double-flo.patch
-new file mode 100644
-index 0000000000..c0de32dafe
---- /dev/null
-+++ b/meta-oe/recipes-support/poco/poco/0001-riscv-Enable-double-operations-when-using-double-flo.patch
-@@ -0,0 +1,28 @@
-+From 589a5442a841b156a1890bc2d26e7a5103e2f672 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 1 Nov 2019 17:53:50 -0700
-+Subject: [PATCH] riscv: Enable double operations when using double float abi
-+
-+Upstream-Status: Submitted [https://github.com/pocoproject/poco/pull/2825]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Foundation/src/utils.h | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/Foundation/src/utils.h b/Foundation/src/utils.h
-+index 69cea1aca..ff7a5c9ce 100644
-+--- a/Foundation/src/utils.h
-++++ b/Foundation/src/utils.h
-+@@ -63,7 +63,8 @@
-+     defined(__SH4__) || defined(__alpha__) || \
-+     defined(_MIPS_ARCH_MIPS32R2) || \
-+     defined(__AARCH64EL__) || \
-+-    defined(nios2) || defined(__nios2) || defined(__nios2__)
-++    defined(nios2) || defined(__nios2) || defined(__nios2__) || \
-++    (defined(__riscv) && defined(__riscv_float_abi_double))
-+ #define DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS 1
-+ #elif defined(_M_IX86) || defined(__i386__) || defined(__i386)
-+ #if defined(_WIN32)
-+-- 
-+2.23.0
-+
-diff --git a/meta-oe/recipes-support/poco/poco_1.9.4.bb b/meta-oe/recipes-support/poco/poco_1.9.4.bb
-index 212abe29bb..c854481de3 100644
---- a/meta-oe/recipes-support/poco/poco_1.9.4.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.9.4.bb
-@@ -11,6 +11,7 @@ DEPENDS = "libpcre zlib"
- SRC_URI = " \
-     git://github.com/pocoproject/poco.git;branch=poco-${PV} \
-     file://0001-Don-t-try-to-install-non-existing-Encodings-testsuit.patch \
-+    file://0001-riscv-Enable-double-operations-when-using-double-flo.patch \
-     file://run-ptest \
-    "
- SRCREV = "b95393dcc3640807838e8323b4e600e54d2e8116"
+> On Thu, Oct 31, 2019 at 10:57 PM Alex Kiernan <alex.kiernan@gmail.com> wrote:
+> >
+> > Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+> > ---
+> >
+> >  .../ostree/{ostree_2019.4.bb => ostree_2019.5.bb}               | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >  rename meta-oe/recipes-extended/ostree/{ostree_2019.4.bb => ostree_2019.5.bb} (99%)
+> >
+> > diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+> > similarity index 99%
+> > rename from meta-oe/recipes-extended/ostree/ostree_2019.4.bb
+> > rename to meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+> > index 505c9fcccc59..efe1b3616f23 100644
+> > --- a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb
+> > +++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+> > @@ -28,7 +28,7 @@ SRC_URI = " \
+> >      file://0001-Always-enable-trivial-httpd-for-tests.patch \
+> >      file://0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch \
+> >  "
+> > -SRCREV = "9d39e7d91e8497987cad69a3fbed5c5fc91eebdc"
+> > +SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
+> >
+> >  UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
+> >
+> > --
+> > 2.17.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+
 -- 
-2.23.0
-
+Alex Kiernan
 
