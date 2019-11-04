@@ -1,30 +1,32 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 248F16D74B
+	by mail.openembedded.org (Postfix) with ESMTP id D0C377D185
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2019 01:39:50 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,265,1569254400"; d="scan'208";a="77870514"
+	Mon,  4 Nov 2019 02:09:28 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,265,1569254400"; d="scan'208";a="77871904"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 04 Nov 2019 09:39:50 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id E42D64CE1511
+	by heian.cn.fujitsu.com with ESMTP; 04 Nov 2019 10:09:28 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id 1DFF94CE1519
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2019 09:31:47 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 4 Nov 2019 09:39:53 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Mon,  4 Nov 2019 10:01:22 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Mon, 4 Nov 2019 10:09:27 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 4 Nov 2019 09:40:08 +0800
-Message-ID: <20191104014008.17756-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Mon, 4 Nov 2019 13:49:02 +0800
+Message-ID: <1572846542-117839-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: E42D64CE1511.A7554
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
+X-yoursite-MailScanner-ID: 1DFF94CE1519.A86BC
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pyjks: upgrade 17.1.1 -> 19.0.0
+Subject: [meta-networking][PATCH] mdns: upgrade 878.200.35 -> 878.260.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,44 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2019 01:39:52 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 04 Nov 2019 02:09:29 -0000
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-pyjks.inc          | 4 ++--
- .../python/{python-pyjks_17.1.1.bb => python-pyjks_19.0.0.bb} | 0
- .../{python3-pyjks_17.1.1.bb => python3-pyjks_19.0.0.bb}      | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyjks_17.1.1.bb => python-pyjks_19.0.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyjks_17.1.1.bb => python3-pyjks_19.0.0.bb} (100%)
+ .../recipes-protocols/mdns/{mdns_878.200.35.bb => mdns_878.260.1.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-protocols/mdns/{mdns_878.200.35.bb => mdns_878.260.1.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyjks.inc b/meta-python/recipes-devtools/python/python-pyjks.inc
-index d866c5650..9a066f7f1 100644
---- a/meta-python/recipes-devtools/python/python-pyjks.inc
-+++ b/meta-python/recipes-devtools/python/python-pyjks.inc
-@@ -6,8 +6,8 @@ HOMEPAGE = "http://github.com/kurtbrose/pyjks"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=9694d6cc724caf7f7386be88a4a81958"
+diff --git a/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb b/meta-networking/recipes-protocols/mdns/mdns_878.260.1.bb
+similarity index 95%
+rename from meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb
+rename to meta-networking/recipes-protocols/mdns/mdns_878.260.1.bb
+index 1353b2b..0178945 100644
+--- a/meta-networking/recipes-protocols/mdns/mdns_878.200.35.bb
++++ b/meta-networking/recipes-protocols/mdns/mdns_878.260.1.bb
+@@ -12,8 +12,8 @@ SRC_URI = "https://opensource.apple.com/tarballs/mDNSResponder/mDNSResponder-${P
+            file://build.patch;patchdir=.. \
+            file://mdns.service \
+            "
+-SRC_URI[md5sum] = "e773f290a7d29f1072247985d6add2ff"
+-SRC_URI[sha256sum] = "e777b4d7dbf5eb1552cb80090ad1ede319067ab6e45e3990d68aabf6e8b3f5a0"
++SRC_URI[md5sum] = "aeb92d838a4aa2402ef128ed501484eb"
++SRC_URI[sha256sum] = "3cc71582e8eee469c2de8ecae1d769e7f32b3468dfb7f2ca77f1dee1f30a7d1e"
  
--SRC_URI[md5sum] = "d53501e7c80d465969742bc6bee91d49"
--SRC_URI[sha256sum] = "709c44a303dd6b2464078ebeb677417e717818d4b3dc3844a462bef9d215dcc8"
-+SRC_URI[md5sum] = "b6e8f3b91be355d15e3ba99de2cccf9b"
-+SRC_URI[sha256sum] = "9ce5b40289bcdffcd6a8e7118b333ba8ba2ec4c9ebc5e324885cc8a69767011a"
+ PARALLEL_MAKE = ""
  
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-pyjks_17.1.1.bb b/meta-python/recipes-devtools/python/python-pyjks_19.0.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyjks_17.1.1.bb
-rename to meta-python/recipes-devtools/python/python-pyjks_19.0.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyjks_17.1.1.bb b/meta-python/recipes-devtools/python/python3-pyjks_19.0.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyjks_17.1.1.bb
-rename to meta-python/recipes-devtools/python/python3-pyjks_19.0.0.bb
 -- 
-2.20.1
+2.7.4
 
 
 
