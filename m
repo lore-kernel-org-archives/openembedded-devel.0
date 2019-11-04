@@ -1,53 +1,26 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 379EB7FC36
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id AD2E77F230
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Nov 2019 00:38:00 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id w8so6005607plq.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Nov 2019 17:38:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=1sypRWdd1JI30HmE0/aYQQcirp++j2EkypewvfsINAQ=;
-	b=WhIbptqZb43qUhp16vqXeW78CD6rQ9nfXHADJd8226lz5NB+EWZ2ByMh+JznD9ch6L
-	HZVrragiEM0xQArdwV3Vq8oWVBnMKn/2SzJFhGV1H6ShXW0fckEeJlL1L5CRXF6mlcAY
-	aB+h16UPfp4lcsih/rH1VAVySWmpP3uUL9ktKth6cGrQaWa5LcyD37QaeO8WSScYeBMF
-	bf4Be2Db09V28+cX4qGkDAHL9yFhjd0/WoalLzI3nWHFgtRV1Fn8T5zQoGF3NO7QQrqh
-	EOtptylizS51YO4YLh5KeJhaLYT4LRahV1WMA0jsOubgpUf8CDVkI/6m+lNH02pwArb3
-	q0AA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=1sypRWdd1JI30HmE0/aYQQcirp++j2EkypewvfsINAQ=;
-	b=KA1f0z1ROJTFOM4xUYT5LxByb/pnQm/81p0L6GBayQvCFLOiZK8htkFJ5z/fQGEjz0
-	cOhV9o/vRKIU246B8EZrxEf2QEE0oyxGLzyvg9Z0kfddcL7ifk/acLk6HzMopE6VFKdc
-	fTpZtwK6MhySkJa9xrGlO9mc+0xxGWyZn2QsJ6QedmSbxA49nUiBmQ92UfjKGRezlSrl
-	W/vhPC5AsJueYgkPG0ktVzUkoBC4GFrbyoQ3BpoHvHFsTCss6/0ENMGbFOZ9xN5tu3q1
-	fIMfVDaqUfSqMAKdi/dgWq/wpsGOKIPWIi4SE3BC4Yxu56TWDLWGhN161uVRKioyB9EF
-	MSjg==
-X-Gm-Message-State: APjAAAUwyrcDB7h2YhDEvWBCN1oDbnskFtERrU4hHEaFhF1cl0bE18hY
-	E4MvdqhNTQzpXezci7bIJv6iA9fPU18=
-X-Google-Smtp-Source: APXvYqyW+52Omg91HvHbOOWO5gx1VGw94kDtywL4bGLHfYTeXw5SNb8zF+nqO3sJDHq76jXzmSww4A==
-X-Received: by 2002:a17:902:8218:: with SMTP id
-	x24mr20086611pln.139.1572741480736; 
-	Sat, 02 Nov 2019 17:38:00 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::5caf])
-	by smtp.gmail.com with ESMTPSA id
-	129sm11256685pfg.38.2019.11.02.17.37.59
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 02 Nov 2019 17:38:00 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  2 Nov 2019 17:37:42 -0700
-Message-Id: <20191103003742.1595-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191103003742.1595-1-raj.khem@gmail.com>
-References: <20191103003742.1595-1-raj.khem@gmail.com>
+	Mon,  4 Nov 2019 00:44:56 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xA40ipDg003573
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 3 Nov 2019 16:44:53 -0800
+Received: from [128.224.158.136] (128.224.158.136) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Sun, 3 Nov 2019 16:44:51 -0800
+To: Adrian Bunk <bunk@stusta.de>, <openembedded-devel@lists.openembedded.org>
+References: <20191028221629.24134-1-bunk@stusta.de>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <1134f258-9f35-d410-cb1d-6d6e6e28f638@windriver.com>
+Date: Mon, 4 Nov 2019 08:39:42 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] iwd: Use python3 variant of docutils during build
+In-Reply-To: <20191028221629.24134-1-bunk@stusta.de>
+Subject: Re: [meta-xfce][PATCH] xfce-polkit: Upgrade 0.2 -> 0.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +33,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Nov 2019 00:38:00 -0000
+X-List-Received-Date: Mon, 04 Nov 2019 00:44:56 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-python2 is on its way out
+On 2019/10/29 上午6:16, Adrian Bunk wrote:
+> Patch applied upstream removed.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-connectivity/iwd/iwd_0.23.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Fine with me.
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-index d48fb84504..20c6d04f7a 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-@@ -2,9 +2,9 @@ DESCRIPTION = "Wireless daemon for Linux"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
- 
--inherit autotools pkgconfig systemd pythonnative
-+inherit autotools pkgconfig systemd python3native
- 
--DEPENDS = "ell readline dbus python-docutils-native"
-+DEPENDS = "ell readline dbus python3-docutils-native"
- 
- SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
- SRCREV = "77f16ae26fc013477f6362a0c33f0e52e82863e0"
+Acked-by: Kai Kang <kai.kang@windriver.com>
+
+Regards,
+Kai
+
+
+>
+> Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> ---
+>   .../files/0001-fix-Name-Comment-fields.patch  | 34 -------------------
+>   ...{xfce-polkit_0.2.bb => xfce-polkit_0.3.bb} |  3 +-
+>   2 files changed, 1 insertion(+), 36 deletions(-)
+>   delete mode 100644 meta-xfce/recipes-apps/xfce-polkit/files/0001-fix-Name-Comment-fields.patch
+>   rename meta-xfce/recipes-apps/xfce-polkit/{xfce-polkit_0.2.bb => xfce-polkit_0.3.bb} (77%)
+>
+> diff --git a/meta-xfce/recipes-apps/xfce-polkit/files/0001-fix-Name-Comment-fields.patch b/meta-xfce/recipes-apps/xfce-polkit/files/0001-fix-Name-Comment-fields.patch
+> deleted file mode 100644
+> index e872249d5..000000000
+> --- a/meta-xfce/recipes-apps/xfce-polkit/files/0001-fix-Name-Comment-fields.patch
+> +++ /dev/null
+> @@ -1,34 +0,0 @@
+> -From fb1f83c04dd5262897b09e60fa8b39090d0d4619 Mon Sep 17 00:00:00 2001
+> -From: Rex Dieter <rdieter@math.unl.edu>
+> -Date: Thu, 12 Nov 2015 13:53:03 -0600
+> -Subject: [PATCH] fix Name/Comment fields
+> -
+> -Validate as a valid .desktop file per
+> -http://standards.freedesktop.org/desktop-entry-spec/latest/
+> -
+> -See also issue #2
+> -
+> -Upstream-Status: Applied [1]
+> -
+> -[1] https://github.com/ncopa/xfce-polkit/commit/fb1f83c04dd5262897b09e60fa8b39090d0d4619
+> ----
+> - xfce-polkit.desktop.in | 4 ++--
+> - 1 file changed, 2 insertions(+), 2 deletions(-)
+> -
+> -diff --git a/xfce-polkit.desktop.in b/xfce-polkit.desktop.in
+> -index 8575896..dd9f09c 100644
+> ---- a/xfce-polkit.desktop.in
+> -+++ b/xfce-polkit.desktop.in
+> -@@ -1,7 +1,7 @@
+> - [Desktop Entry]
+> - Type=Application
+> --_Name=XFCE PolKit
+> --_Comment=Policykit Authentication Agent
+> -+Name=XFCE PolKit
+> -+Comment=Policykit Authentication Agent
+> - Exec=@xfce_polkit_libexecdir@/xfce-polkit
+> - Icon=gtk-dialog-authentication
+> - NotShowIn=GNOME;KDE;
+> ---
+> -2.14.3
+> -
+> diff --git a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
+> similarity index 77%
+> rename from meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
+> rename to meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
+> index 62d8d6de9..3a396c0f7 100644
+> --- a/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.2.bb
+> +++ b/meta-xfce/recipes-apps/xfce-polkit/xfce-polkit_0.3.bb
+> @@ -9,7 +9,6 @@ REQUIRED_DISTRO_FEATURES = "polkit"
+>   
+>   SRC_URI = " \
+>       git://github.com/ncopa/${BPN}.git \
+> -    file://0001-fix-Name-Comment-fields.patch \
+>   "
+> -SRCREV = "6ad1ee833c9e22e4dd72a8f7d54562d046965283"
+> +SRCREV = "6d3282cc1734c305850d48f5bf4b4d94e88885e9"
+>   S = "${WORKDIR}/git"
+
+
 -- 
-2.23.0
+Kai Kang
 
 
