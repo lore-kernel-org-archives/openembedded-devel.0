@@ -1,50 +1,46 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
-	[209.85.221.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 350BE7BEDF
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by mail.openembedded.org (Postfix) with ESMTP id F2F037F876
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2019 11:38:06 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id t1so10730637wrv.4
+	Mon,  4 Nov 2019 11:38:47 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id k1so18013148iom.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Nov 2019 03:38:07 -0800 (PST)
+	Mon, 04 Nov 2019 03:38:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Ow/Xj6vqxu3gQvvAzfPkbOCmRfxqOYCHLIXk9gIl4PY=;
-	b=FKHkaFbK5mxhNkXjbqBAyMDBPbVWrK04pzosTUpfAGiYserDXoSJdRhOfdbIYqwy6o
-	QNvNAD2EcZkjMwS9+dlafjiNJDdqAo9FBwOmftJyzu6Cab0Y1hOU1alGe+VaWLbMWCHG
-	sQYpj7zuRz/fuGL44FcW3WeuD9Mi90ZFC5zFtIhwzOBmLezSvWDIBdVlQ4Ry0dtYz853
-	z/CX1ThmQol36lxPLczi+aGCLAlhxxt7YFzGOz1ocwuoN5YMyYZlxMrk7diL2TWYJMsR
-	jXtki9hnfduD59f4UiYMAWEmRv+omqFvmP0xWa2TKleKrBuQkAWfdkfS7rSKB86NsTKL
-	3rpw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=XysMVd9YUbT0QVz+gKCIViOS6Nhjnk4sdJP9i9yE3G8=;
+	b=hgMPF2hKhOMzrWWzxFwQfxGOnBzMWt+mxJxczEuHLNNv0VM1A0CSKxiSnTprZxwzmY
+	+xBRSOCDkl9J09XiyEJmv/GliSVqmfxh5OTX5DD5N/RFW3KGlXTTfiQCkLmFw9AmzNdm
+	yrPKnugP2HLIdPnqiH3VP2oHcJjEgcZ1NW/kY6EXQm/M5ZLSdlLBH4HD6YkFOkU6usTr
+	8mLfNC7zoUcYebraZjtIUw2eU+/pRbrBLTFTFOClC/d67uedav6/Y2wH4KKovWhAuDxs
+	f/gYMTZG7lXmc5iLdapYWCFxullt5qOMVI6aHQOCm67WnIXwmMPHf+PY6S26a4WrEDqq
+	hhPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Ow/Xj6vqxu3gQvvAzfPkbOCmRfxqOYCHLIXk9gIl4PY=;
-	b=T0B9lJY1ol0D/H44Zfa6biZ4dCF7vhaOKcNmJRGN048mTmDeoYQ2BOfzYtVpJzeJgK
-	HAhAMXpm6oxkrCA0xVd1fPPnZGNvJ/1roueGbg3pKVYLrcyoMbQI3SOeGZQrmnh7crH8
-	dMOxRmZ0/fVPtDvrqK3c4Cy88oM5Mfx+HSWK65RTg7dRqyds4Rrt0EOix+IWLkW1V3pU
-	V5PuszaZjYmaFZDQzX8ZxIjpn9VWLD7XnZnZpZC7D99EuD3HD6nN0cIgHhkl4bu4RrlG
-	H0jMXmO6uxh2UZveIno1TseeL+osJFUjtnvnIl9Q14am3QBVjOMS/Bu2xvjT/+srpl5Z
-	cCCA==
-X-Gm-Message-State: APjAAAVmgsRdpNE1BWB2+7ZZKb7hSrvXMXqewmX7kDRyhiDW5YC3jNdp
-	hTHBjBseUQgv3FvIrmwbI17AtWuG
-X-Google-Smtp-Source: APXvYqx6vWhOTIfoRo+FQS8KF7myJxRgtPY08fwTrKnZcVEdXmMBT/6P8r4+zZNFkcXxJzB+tCLdyA==
-X-Received: by 2002:adf:b199:: with SMTP id q25mr24231680wra.320.1572867486587;
-	Mon, 04 Nov 2019 03:38:06 -0800 (PST)
-Received: from amue-work.zera.local ([195.50.169.54])
-	by smtp.gmail.com with ESMTPSA id g5sm8283581wmf.37.2019.11.04.03.38.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 04 Nov 2019 03:38:06 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  4 Nov 2019 12:38:00 +0100
-Message-Id: <20191104113800.17336-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=XysMVd9YUbT0QVz+gKCIViOS6Nhjnk4sdJP9i9yE3G8=;
+	b=OvskwNxrSwfNKCI9XjLN1RNtpRukC+70+jyxxe8Kx853BlZQiH+cAiRUZJqTMGovlb
+	TPQApPsOEazRszrbxMLUXJQ5vav9AjEVHfvwD1lRHlBz1za3fu8y3+rsn6R/gyA9KlWo
+	1KlPR7SsLOcFHpeFLAtoVJtqYWCsyd28BESUT0ghk6uhDJwMzGxPv38gFpGMDtA6+j5E
+	33U3eC8aLVj8LFrG3sEBf4VnrP/o2VagxBCdqQjJzV3TG6zjrS0Kok5FdHVUWsCu7I70
+	iKfTvUo8rc43aWYbpNNYyw0jpwHs/GqXmOk0liqRGhNiQYSvq7X5gYNco+Qtq6vw9tnj
+	fXdQ==
+X-Gm-Message-State: APjAAAW5xczdmh5iWJf2fuIkwPOZglLalkTBZySRWKbyhRyrYuBk0Rsf
+	1M9n8bDRzVmOxz1u53HZsJAwVmbqQhizSt/zG3Q=
+X-Google-Smtp-Source: APXvYqxuKOBYR+F8L3LUUl/ywsw2+SXZruNaV0NFbX2JrZHMwCXrOjF1ZuD+dgHqo46ooMknaYHc3s2ba/htoPBq8E8=
+X-Received: by 2002:a5d:8146:: with SMTP id f6mr23721048ioo.108.1572867528797; 
+	Mon, 04 Nov 2019 03:38:48 -0800 (PST)
 MIME-Version: 1.0
-Subject: [PATCH V2] mm-common: upgrade 0.9.12 -> 1.0.0 / meson build / add SUMMARY
+References: <1572876614-6152-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1572876614-6152-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 4 Nov 2019 12:38:37 +0100
+Message-ID: <CALbNGRT49DwpLZ2BA2x1pBY+ynGQ9rn=hDZeExAY0G8Hkei65Q@mail.gmail.com>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] mm-common: upgrade 0.9.12 -> 1.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,41 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2019 11:38:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 04 Nov 2019 11:38:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../{mm-common_0.9.12.bb => mm-common_1.0.0.bb}       | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
- rename meta-oe/recipes-core/mm-common/{mm-common_0.9.12.bb => mm-common_1.0.0.bb} (36%)
+On Mon, Nov 4, 2019 at 11:31 AM Zheng Ruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
+>
+Have send similar + meson-build + summary
 
-diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb b/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
-similarity index 36%
-rename from meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb
-rename to meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
-index 4f91f31e4..0b9e58917 100644
---- a/meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb
-+++ b/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
-@@ -1,9 +1,12 @@
-+SUMMARY = "Common GNOME build files for C++ bindings"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
- inherit gnomebase
- 
--SRC_URI[archive.md5sum] = "be1c61587db989c7677375a729b94672"
--SRC_URI[archive.sha256sum] = "ceffdcce1e5b52742884c233ec604bf6fded12eea9da077ce7a62c02c87e7c0b"
-+SRC_URI[archive.md5sum] = "9087b8612d75cbc1fad0c99e15c2a718"
-+SRC_URI[archive.sha256sum] = "b97d9b041e5952486cab620b44ab09f6013a478f43b6699ae899b8a4da189cd4"
- 
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+GNOMEBASEBUILDCLASS = "meson"
- 
- BBCLASSEXTEND = "native"
--- 
-2.21.0
-
+Andreas
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb | 9 ---------
+>  meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb  | 9 +++++++++
+>  2 files changed, 9 insertions(+), 9 deletions(-)
+>  delete mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb
+>  create mode 100644 meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
+>
+> diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb b/meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb
+> deleted file mode 100644
+> index 4f91f31..0000000
+> --- a/meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb
+> +++ /dev/null
+> @@ -1,9 +0,0 @@
+> -inherit gnomebase
+> -
+> -SRC_URI[archive.md5sum] = "be1c61587db989c7677375a729b94672"
+> -SRC_URI[archive.sha256sum] = "ceffdcce1e5b52742884c233ec604bf6fded12eea9da077ce7a62c02c87e7c0b"
+> -
+> -LICENSE = "GPLv2"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+> -
+> -BBCLASSEXTEND = "native"
+> diff --git a/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb b/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
+> new file mode 100644
+> index 0000000..3dccbd8
+> --- /dev/null
+> +++ b/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
+> @@ -0,0 +1,9 @@
+> +inherit gnomebase
+> +
+> +SRC_URI[archive.md5sum] = "9087b8612d75cbc1fad0c99e15c2a718"
+> +SRC_URI[archive.sha256sum] = "b97d9b041e5952486cab620b44ab09f6013a478f43b6699ae899b8a4da189cd4"
+> +
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+> +
+> +BBCLASSEXTEND = "native"
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
