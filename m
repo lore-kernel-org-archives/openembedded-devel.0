@@ -1,47 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f173.google.com (mail-qt1-f173.google.com
-	[209.85.160.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 39DEF7F7CF
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+	[209.85.221.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 169EC7CBDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2019 17:04:02 +0000 (UTC)
-Received: by mail-qt1-f173.google.com with SMTP id x21so24916845qto.12
+	Mon,  4 Nov 2019 19:01:25 +0000 (UTC)
+Received: by mail-wr1-f44.google.com with SMTP id w18so18402760wrt.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Nov 2019 09:04:04 -0800 (PST)
+	Mon, 04 Nov 2019 11:01:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7WXLNS/o4d10rarrNKMqoJjL687p4q1nLe21ZGlaF9A=;
-	b=j2USN+ok85hzSgCCqyUt4D8/BjeKwaCFNOf8clqqgMuNOyW2cKzz6ylKyVxrGip2m2
-	N+srPUwYW3GCjWdKY7dOtCsYP5U/YXz2CCFSDv4rfX18xEVIFZcSZx/VoL7y9iIGg+Xk
-	hJFk8KC9W45O7sKpmIYq+gyxo2jWsq1jQmFBM8RDFcCJxVSSxBT1Z5IOzLp7dOXkcH2y
-	fClE8N+IjncPWf40bEoBO905L7hQ4LNxZD1XRjTv4vuBsC/9d36FdNbiM33R9N0ze00a
-	BJdTMyFQbUVbk+KkbrHllB/89f420+SefWVkwyseIC8aFsh33YCR4srqg/Hd+tKcZJ2K
-	Yzkw==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qZy+Mv+aQhXdADKhGYYnoP6nDmdxUC+apNgxZVp9SLI=;
+	b=LeJdCbOjUdticzOmdS/zLV7mluOTXMobKE/KDtedGZOYBrUm9g9kCXVrK6uGXUxog6
+	vux4doxwt1sL+oXqvFuoCSX1OL+f41Iximwu/+blDPPQhDpBToQ1jKmqmb7ZqinAHww2
+	syxVMiUVAB+ngvB7ONpJxDFho5Yz0GMOJGoZ0LtPKa6Qd8L5GenI/v0L4xBS83N7+gwa
+	NnflWNOZINd3kXsHZ9GE16uoW17uPQEgKDn2zEoriTrVdItXarLGAA0VGo9DNg2wC8d+
+	1fNbZa0KiwUU5XG0GcepQUw3xGoiQnkbVXfVMfpdkqyIZx8FRpeQB+OC7aotBkdETMHJ
+	dhzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=7WXLNS/o4d10rarrNKMqoJjL687p4q1nLe21ZGlaF9A=;
-	b=RILCNwcrzu+fwD8wtRnQK5qn3yF8iyBWV7uKX4+4DeZ/u+MSsC8Rm3SLp0EO7FfUJ/
-	4ja/Gm3bQKIFW7qfyhOQAJS+IzjfW0c2VAjgNow3eykx/YMF+VwjWWy2rbqzxQsOKYgo
-	Jc1urvz8QxhbFeyw9y+nhU7rKlh4bjl18Z+LFRtUpleHMVSwsvtRUDX/YS4KNwijn22Z
-	7BomkWiIRdHUVZwF44gudtZT/K8BzCWSIM5kaaHoKOlxZHqNlylarQgWD3iZ3UyMbCrf
-	k4V5AodWd4vNXoUEVauy6dSRPxORwtH7IzCqeqkLzafkmMlYm76jFkJ1du7PkZiiu3Gu
-	bcTg==
-X-Gm-Message-State: APjAAAXsICQyQg3bfXvVou3LL0EU/pDhaKIc2V7QQ/XTpGUq4qbPTzj/
-	Cd5+Mhzw0PZfn+KywC1U5OO2zgEh7Gi4LG2Co6a3qw6P
-X-Google-Smtp-Source: APXvYqzFj3ughldpZoPRSzizGpXhaVDpNthVrcTT0+drFVZ7fpSJSmp8TAr9WL2YO60QgH1mVFGI+pQWHgurso8qmD4=
-X-Received: by 2002:ac8:2ddc:: with SMTP id q28mr13297592qta.88.1572887043168; 
-	Mon, 04 Nov 2019 09:04:03 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qZy+Mv+aQhXdADKhGYYnoP6nDmdxUC+apNgxZVp9SLI=;
+	b=HGIx4pvgFcISyW/r+DhVCMXD2z+zoVWkRNG1CFPNJNfBSvK/qm1TzKTC3QfJJ6rTYk
+	T3uMKCw338VOGhhhElWtiWH7RohUWd2yFQZRvWjzQhZOWyr3XjIM/cZptTx3NBG2WowN
+	rgStDL/hFB9CYhn+kECoCXCYhfpcy2TnX2TKLoXl/gUMjSkCZHW71/RpuRyBmotSnscD
+	aKRJSWvMLYGreogbaoBiCLPo4jM4DNlnYCtxvw/0fMIVE1PH9oi/o826l9rzOAHaUuLB
+	OG/gPaEdCDxW+ARBiq3qnw3yoFzWTM0N8U3PXgCA/Zjm0208FR7jy3haGH1DjwMJit64
+	5XGQ==
+X-Gm-Message-State: APjAAAXqmnk8H3PZY43d4lf6Pd4MxtPeKTSz2lDAIcu6rGn5l4Wxkf/e
+	J9Kihw2ituLgst6EEh9QYgo84Bd8
+X-Google-Smtp-Source: APXvYqz9h58VEPnYohjB5iJdJXCcbLcPBbCP2FUsZu7vo1SJq+78+bPdVnRvf/7rTnavV21qT8AQ5g==
+X-Received: by 2002:a5d:6412:: with SMTP id z18mr14149834wru.30.1572894086455; 
+	Mon, 04 Nov 2019 11:01:26 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F438C365CAC9282E0012A3C.dip0.t-ipconnect.de.
+	[2003:f0:7f43:8c36:5cac:9282:e001:2a3c])
+	by smtp.gmail.com with ESMTPSA id
+	u21sm21916069wmu.27.2019.11.04.11.01.25
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 04 Nov 2019 11:01:25 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  4 Nov 2019 20:01:12 +0100
+Message-Id: <20191104190114.5076-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <20191104155948.3080-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20191104155948.3080-1-open.source@oleksandr-kravchuk.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 4 Nov 2019 09:03:51 -0800
-Message-ID: <CAMKF1spk+Nx6Tcp5CstO9gz0K3Lbf-Ayw2KuLkxKgcp3hbTy8Q@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][meta-oe 1/2] iwd: Use python3 variant of docutils during build
+Subject: [PATCH 0/2] mm-common follow-ups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,42 +60,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2019 17:04:03 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 04 Nov 2019 19:01:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-This is in master already
+To avoid another rebasing dance I sent out 'upgrade 0.9.12 -> 1.0.0 / meson
+build / add SUMMARY' in a hurry.
+Since hurry has never been a good idea I decided to look into mm-common
+again and found:
 
-On Mon, Nov 4, 2019 at 8:00 AM Oleksandr Kravchuk <
-open.source@oleksandr-kravchuk.com> wrote:
+Andreas Müller (2):
+  mm-common: do really build with meson
+  mm-common: build for allarch
 
-> From: Khem Raj <raj.khem@gmail.com>
->
-> python2 is on its way out
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-connectivity/iwd/iwd_0.23.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-> b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-> index d48fb8450..20c6d04f7 100644
-> --- a/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-> +++ b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
-> @@ -2,9 +2,9 @@ DESCRIPTION = "Wireless daemon for Linux"
->  LICENSE = "LGPL-2.1"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
->
-> -inherit autotools pkgconfig systemd pythonnative
-> +inherit autotools pkgconfig systemd python3native
->
-> -DEPENDS = "ell readline dbus python-docutils-native"
-> +DEPENDS = "ell readline dbus python3-docutils-native"
->
->  SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
->  SRCREV = "77f16ae26fc013477f6362a0c33f0e52e82863e0"
-> --
-> 2.17.1
->
->
+ ...ot-ask-for-python-installation-versi.patch | 41 +++++++++++++++++++
+ .../recipes-core/mm-common/mm-common_1.0.0.bb |  9 ++--
+ 2 files changed, 45 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-core/mm-common/mm-common/0001-meson.build-do-not-ask-for-python-installation-versi.patch
+
+-- 
+2.21.0
+
 
