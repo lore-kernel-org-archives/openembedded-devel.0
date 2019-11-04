@@ -1,47 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 854B17F893
+Return-Path: <open.source@oleksandr-kravchuk.com>
+Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
+	[209.85.167.66])
+	by mail.openembedded.org (Postfix) with ESMTP id DD0487F8C1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2019 15:54:45 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id m4so18046374qke.9
+	Mon,  4 Nov 2019 16:00:17 +0000 (UTC)
+Received: by mail-lf1-f66.google.com with SMTP id j5so12632341lfh.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Nov 2019 07:54:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=MFLZL+canwr5VP6aP2UJwFhygXlYSHR+CClpWOPVn/w=;
-	b=H0Uh9Vhj9FNNUzA8p4Fiiov16EthWKmH7z9+qKuTlrIsHzApYsCnDxkP+SDnsxIFP1
-	O1DF13FNbVyWJmJqrNaV5Jsf63zyOlL0vDlniYDz6KwAl6e3wgW+ep5n1bH3qy4AKuI0
-	0NC2AywQD4qnW7X/pkcW9+5dcQtSgQzj/lBsxElWgP6drG5xaLbb8pwZTTojMfjltwxc
-	q7UOkwuAea2reOJcHeG1cGk9IHnv9hf+nru7etRaqyDUPQRX7LVPsbulvxw9EUZzrXck
-	Vr3D16UhuSrxoAOeFvV2C45K4cFQnyPzoGEV8RHpwN5AH2HLaZ1sQS0O8SKq6ZH5r+zz
-	MjeA==
+	Mon, 04 Nov 2019 08:00:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oleksandr-kravchuk-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=KXH7z9zNZWmofRJghNuS1xZWypAPe1SUNqtxFp2FTVI=;
+	b=h/BNSijxWE8tyTKexHWeby6SpDiMgR6XGixfc66MvS+BW6dVe28IRv60MqXMZIBSaL
+	dPm+7WmwohBh6wxMFBNODemsRqKRKsFQOhwzPh2NpbVFr1d8SMaytENp+XQ9E9qpBaA5
+	/8MGYJXgNdgsKj/e+vpEb90q8pUlP2kkuLu8MoOy57zhs+e9fiVrZ/ot3YLsYnxh9A8V
+	M+sggC60dyNsyYhDBy04rQwWmdXyC9Vio4ICni8X46vJMEj6W6hUkHtAUiX6mIGFnAqF
+	R24dgdEfj3yLe/tqZC0EIhnmCKGfKWQxjlGi38ThZNqyHngLwNrUw5bCHk8mXFMfwMv1
+	md9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=MFLZL+canwr5VP6aP2UJwFhygXlYSHR+CClpWOPVn/w=;
-	b=hBpBHm1Latg7ao8o89OD4ES0ir4zevI/FYiEexWQllBohAYNIcFVxp+vlczzQsa8ez
-	PNE8gBDO87NL72RjkF4MsO6R5Kx0zlT8Y9G5gEb619MKC4s8xuRgprMR8Zc6r+jDzJtv
-	wZDqmUNcdBYNIykX5SsGQK0gmhu9H7KD/8JXJ6aDW0gSlxGf9yBV/HHvw6LhAk8SS7bS
-	q+QRShOjwYx7jkDHv7M6iji3y3ywfg1aC+YUoaydy7aiM8+6FV3M5o1oM9w0WRa1z75L
-	ROVuu8hTn/pqaBJ8coER2U9gNr2s81JGCivZ+tqVMf3NZ5U/6xZ/+jd6R1LdC9TsvTxm
-	pj/A==
-X-Gm-Message-State: APjAAAV40f2hc6n1zQhziyVRK1JAbUm/NgwPuF8XcpnS3l9xJbvh+/5v
-	OejDmFqJbQpMICUcpWNOTvyzQsKpmgFkDgmWbDY=
-X-Google-Smtp-Source: APXvYqzPEhfXPDwuuAoDC9dx8ZDSnG82wuMf7Ja9x89OJtulmIiKtX/KULK+4tAvZB6tGkxdrdfjpqRsak+5pAmkG7U=
-X-Received: by 2002:a37:84b:: with SMTP id 72mr22977366qki.337.1572882886067; 
-	Mon, 04 Nov 2019 07:54:46 -0800 (PST)
-MIME-Version: 1.0
-References: <1572850027-118636-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1572850027-118636-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 4 Nov 2019 07:54:35 -0800
-Message-ID: <CAMKF1sq8CKUSuosD7iBEr-apueF-x-ErFh-ucF6rgj0ZWe5cWg@mail.gmail.com>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] ledmon: Modify the Upstream-Status to Submitted.
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=KXH7z9zNZWmofRJghNuS1xZWypAPe1SUNqtxFp2FTVI=;
+	b=ZeJCS7Gldb22PL6Ef6k7uj4kRdaLzghnPHi0xl55/P6X3w3WRNmjRYTlv18SUFF4vD
+	Bs3G82IQJPt8NTW6pFRBc1PlZwTxXLcaBd/5KFlF/JZO4kQZ+sVmVR79NKF42eTyX3bV
+	2HjpqZZtEBGq7dyY3uGf6vJV3MuLKARjDgkosPz1vJKi+QpoxJDxH2z9oYwZcMXva7Lm
+	K7wChRhc9VfISVDo5D5kIGWuR1mpZpqUVZA5XwtkNP94Z87WsTCQ9GO9FhmMRl2x0d2W
+	QcxkwL4PnQPd8MJr3CKnphoscQxvQNIG5hXvuawaRG7aeo782XCNyIFtvUKmO3tmjrpr
+	8E7g==
+X-Gm-Message-State: APjAAAWpH8hTruJ1cKaz2UDK3ZvplcGDKlqL/GdoMiqtnDoDlR0at4Lw
+	L3sLqp4n7BqObUnnqtP5cPp+UWTeJl4=
+X-Google-Smtp-Source: APXvYqyb0P2bAmcLzexQqw4j0tOX0m+uDOcdcKN4hREfTSx8t+Tg5PGHFrft6NmMF9LuS2dL3nEmaw==
+X-Received: by 2002:a19:e018:: with SMTP id x24mr16946078lfg.191.1572883218175;
+	Mon, 04 Nov 2019 08:00:18 -0800 (PST)
+Received: from localhost.localdomain (c213-89-0-115.bredband.comhem.se.
+	[213.89.0.115])
+	by smtp.gmail.com with ESMTPSA id g3sm7108292ljj.59.2019.11.04.08.00.17
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 04 Nov 2019 08:00:17 -0800 (PST)
+From: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  4 Nov 2019 16:59:47 +0100
+Message-Id: <20191104155948.3080-1-open.source@oleksandr-kravchuk.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [PATCH][meta-oe 1/2] iwd: Use python3 variant of docutils during build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,52 +55,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2019 15:54:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 04 Nov 2019 16:00:18 -0000
 
-On Sun, Nov 3, 2019 at 7:07 PM Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-wrote:
+From: Khem Raj <raj.khem@gmail.com>
 
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ---
->  .../ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch      |
-> 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git
-> a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
-> b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
-> index b65f1a7..753957d 100644
-> ---
-> a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
-> +++
-> b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
-> @@ -5,7 +5,7 @@ Subject: [PATCH] Don't build with -Werror to fix compile
-> error.
->  | amd_sgpio.c: In function '_write_amd_register':
->  | amd_sgpio.c:558:18: error: taking address of packed member of 'struct
-> amd_register' may result in an unaligned pointer value
-> [-Werror=address-of-packed-member]
->
-> -Upstream-Status: Pending
-> +Upstream-Status: Submitted
+python2 is on its way out
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-connectivity/iwd/iwd_0.23.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Please add link as well to upstream pull request
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
+index d48fb8450..20c6d04f7 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_0.23.bb
+@@ -2,9 +2,9 @@ DESCRIPTION = "Wireless daemon for Linux"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+ 
+-inherit autotools pkgconfig systemd pythonnative
++inherit autotools pkgconfig systemd python3native
+ 
+-DEPENDS = "ell readline dbus python-docutils-native"
++DEPENDS = "ell readline dbus python3-docutils-native"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
+ SRCREV = "77f16ae26fc013477f6362a0c33f0e52e82863e0"
+-- 
+2.17.1
 
->
->
->  Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
->  ---
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
