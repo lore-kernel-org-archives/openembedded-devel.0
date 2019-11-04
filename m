@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 2ACBE7F8C6
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 854B17F893
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2019 15:53:50 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id g50so24630148qtb.4
+	Mon,  4 Nov 2019 15:54:45 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id m4so18046374qke.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Nov 2019 07:53:51 -0800 (PST)
+	Mon, 04 Nov 2019 07:54:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6aQapF0ZG+qon8oLEMtCxt7lLv3n4iQGzFw621grGiU=;
-	b=iCFfua5hJfCvlteAwZ2jSMO0+w9pcy8HvSw1AD6OekoS00zYya2XFwEkSPWIpBXSyM
-	8UZa/uXEJJfRuelwyvm7PSMd5bbGSnzLyia0LqYpGUgcmwflbRIYaXZF0GNFsEksJGgy
-	IJ2PFf/Z0u3pnS6AGYY1xkit9RyXw3NkCDb01m3IQuanseoFZ0BvL+HHtFxNV9ekuBYI
-	Wu2uRKd2Umhq19OuHuyHYFxd9nrdsDJ2MFfpzFaJIBO+ym9JKgDmQRo4G42H+ecNDruC
-	lk8FhyznWHvv3I4kF+poAGL+9a5GLxRmsw1yLcXHbPc9pfKHbUeaSV9+jiyJtfC4XSpQ
-	kH6w==
+	:cc; bh=MFLZL+canwr5VP6aP2UJwFhygXlYSHR+CClpWOPVn/w=;
+	b=H0Uh9Vhj9FNNUzA8p4Fiiov16EthWKmH7z9+qKuTlrIsHzApYsCnDxkP+SDnsxIFP1
+	O1DF13FNbVyWJmJqrNaV5Jsf63zyOlL0vDlniYDz6KwAl6e3wgW+ep5n1bH3qy4AKuI0
+	0NC2AywQD4qnW7X/pkcW9+5dcQtSgQzj/lBsxElWgP6drG5xaLbb8pwZTTojMfjltwxc
+	q7UOkwuAea2reOJcHeG1cGk9IHnv9hf+nru7etRaqyDUPQRX7LVPsbulvxw9EUZzrXck
+	Vr3D16UhuSrxoAOeFvV2C45K4cFQnyPzoGEV8RHpwN5AH2HLaZ1sQS0O8SKq6ZH5r+zz
+	MjeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=6aQapF0ZG+qon8oLEMtCxt7lLv3n4iQGzFw621grGiU=;
-	b=P6KjFGQNbkCdNYfs9ZNCn5Je2JNkRf3kf06so/CeJsEd1mCTZkyItZ3M+cMe0nNBp9
-	6401TIXALD+2ZEd0id/T/YyhAlWkUWRAPUlJpNe2k5f99eGsodUZNU9VyvTb512bYoqW
-	Muyqp2RMmbAhmzeNcJL6Lobapg6baKb5lHTf+DV8jZYXoihdR1mYfxhPn5zNeWdR8ekL
-	GKuIZREKhNoqY6xFiYMd/QayyJ1xXdYWCpbz0jF6BE+p6KC5RfvM9j5aNVqsoEdzPsmn
-	gyp+uK4UQDSWl6xM8GT1/NL0Jm3IZ6ES5bFGNF2XCGHQVdMrBhZrmXPT6VQabNX5vLf4
-	RqTQ==
-X-Gm-Message-State: APjAAAX6s62JpFZQ8PN9k3pG1RwzLIyTMWTqVhkklWPzkqbwbg3QRCfn
-	JAjdRlrGV/mbLnG1R6GtSGjsfPhlQ1CzEzEl3Z0=
-X-Google-Smtp-Source: APXvYqxVq7ZoNTosOQYFYP/O3yXqYaiwwDrQaivEMhmm0+SYILbg2Mu76h9hbQRByST1MUTmXsCg6akJifEvewPnrtE=
-X-Received: by 2002:ac8:2ddc:: with SMTP id q28mr12925017qta.88.1572882830634; 
-	Mon, 04 Nov 2019 07:53:50 -0800 (PST)
+	bh=MFLZL+canwr5VP6aP2UJwFhygXlYSHR+CClpWOPVn/w=;
+	b=hBpBHm1Latg7ao8o89OD4ES0ir4zevI/FYiEexWQllBohAYNIcFVxp+vlczzQsa8ez
+	PNE8gBDO87NL72RjkF4MsO6R5Kx0zlT8Y9G5gEb619MKC4s8xuRgprMR8Zc6r+jDzJtv
+	wZDqmUNcdBYNIykX5SsGQK0gmhu9H7KD/8JXJ6aDW0gSlxGf9yBV/HHvw6LhAk8SS7bS
+	q+QRShOjwYx7jkDHv7M6iji3y3ywfg1aC+YUoaydy7aiM8+6FV3M5o1oM9w0WRa1z75L
+	ROVuu8hTn/pqaBJ8coER2U9gNr2s81JGCivZ+tqVMf3NZ5U/6xZ/+jd6R1LdC9TsvTxm
+	pj/A==
+X-Gm-Message-State: APjAAAV40f2hc6n1zQhziyVRK1JAbUm/NgwPuF8XcpnS3l9xJbvh+/5v
+	OejDmFqJbQpMICUcpWNOTvyzQsKpmgFkDgmWbDY=
+X-Google-Smtp-Source: APXvYqzPEhfXPDwuuAoDC9dx8ZDSnG82wuMf7Ja9x89OJtulmIiKtX/KULK+4tAvZB6tGkxdrdfjpqRsak+5pAmkG7U=
+X-Received: by 2002:a37:84b:: with SMTP id 72mr22977366qki.337.1572882886067; 
+	Mon, 04 Nov 2019 07:54:46 -0800 (PST)
 MIME-Version: 1.0
-References: <1572876614-6152-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<CALbNGRT49DwpLZ2BA2x1pBY+ynGQ9rn=hDZeExAY0G8Hkei65Q@mail.gmail.com>
-In-Reply-To: <CALbNGRT49DwpLZ2BA2x1pBY+ynGQ9rn=hDZeExAY0G8Hkei65Q@mail.gmail.com>
+References: <1572850027-118636-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1572850027-118636-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 4 Nov 2019 07:53:39 -0800
-Message-ID: <CAMKF1soZyf80FjPUJgBfLnAReo-cG2rCYd1dOyDFZR0uqnwYjQ@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 4 Nov 2019 07:54:35 -0800
+Message-ID: <CAMKF1sq8CKUSuosD7iBEr-apueF-x-ErFh-ucF6rgj0ZWe5cWg@mail.gmail.com>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] mm-common: upgrade 0.9.12 -> 1.0.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ledmon: Modify the Upstream-Status to Submitted.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,78 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2019 15:53:50 -0000
+X-List-Received-Date: Mon, 04 Nov 2019 15:54:45 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 4, 2019 at 3:38 AM Andreas M=C3=BCller <schnitzeltony@gmail.com=
->
+On Sun, Nov 3, 2019 at 7:07 PM Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 wrote:
 
-> On Mon, Nov 4, 2019 at 11:31 AM Zheng Ruoqin
-> <zhengrq.fnst@cn.fujitsu.com> wrote:
-> >
-> Have send similar + meson-build + summary
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  .../ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch      |
+> 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
+> diff --git
+> a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+> b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+> index b65f1a7..753957d 100644
+> ---
+> a/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+> +++
+> b/meta-oe/recipes-bsp/ledmon/ledmon/0001-Don-t-build-with-Werror-to-fix-compile-error.patch
+> @@ -5,7 +5,7 @@ Subject: [PATCH] Don't build with -Werror to fix compile
+> error.
+>  | amd_sgpio.c: In function '_write_amd_register':
+>  | amd_sgpio.c:558:18: error: taking address of packed member of 'struct
+> amd_register' may result in an unaligned pointer value
+> [-Werror=address-of-packed-member]
+>
+> -Upstream-Status: Pending
+> +Upstream-Status: Submitted
 
-Thanks picked that one already
 
+Please add link as well to upstream pull request
 
-> Andreas
-> > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> > ---
-> >  meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb | 9 ---------
-> >  meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb  | 9 +++++++++
-> >  2 files changed, 9 insertions(+), 9 deletions(-)
-> >  delete mode 100644 meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb
-> >  create mode 100644 meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
-> >
-> > diff --git a/meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb
-> b/meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb
-> > deleted file mode 100644
-> > index 4f91f31..0000000
-> > --- a/meta-oe/recipes-core/mm-common/mm-common_0.9.12.bb
-> > +++ /dev/null
-> > @@ -1,9 +0,0 @@
-> > -inherit gnomebase
-> > -
-> > -SRC_URI[archive.md5sum] =3D "be1c61587db989c7677375a729b94672"
-> > -SRC_URI[archive.sha256sum] =3D
-> "ceffdcce1e5b52742884c233ec604bf6fded12eea9da077ce7a62c02c87e7c0b"
-> > -
-> > -LICENSE =3D "GPLv2"
-> > -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa8=
-82bbe"
-> > -
-> > -BBCLASSEXTEND =3D "native"
-> > diff --git a/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
-> b/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
-> > new file mode 100644
-> > index 0000000..3dccbd8
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-core/mm-common/mm-common_1.0.0.bb
-> > @@ -0,0 +1,9 @@
-> > +inherit gnomebase
-> > +
-> > +SRC_URI[archive.md5sum] =3D "9087b8612d75cbc1fad0c99e15c2a718"
-> > +SRC_URI[archive.sha256sum] =3D
-> "b97d9b041e5952486cab620b44ab09f6013a478f43b6699ae899b8a4da189cd4"
-> > +
-> > +LICENSE =3D "GPLv2"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa8=
-82bbe"
-> > +
-> > +BBCLASSEXTEND =3D "native"
-> > --
-> > 2.7.4
-> >
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+>  Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+>  ---
+> --
+> 2.7.4
+>
+>
+>
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
