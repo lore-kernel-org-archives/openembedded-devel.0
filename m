@@ -1,46 +1,47 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-il1-f179.google.com (mail-il1-f179.google.com
-	[209.85.166.179])
-	by mail.openembedded.org (Postfix) with ESMTP id C17BE7F859
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 7DF4D7CBDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Nov 2019 19:43:40 +0000 (UTC)
-Received: by mail-il1-f179.google.com with SMTP id m5so6818883ilq.0
+	Mon,  4 Nov 2019 19:56:12 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id j13so3473048ioe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Nov 2019 11:43:42 -0800 (PST)
+	Mon, 04 Nov 2019 11:56:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=LAQ96wqRFu/S9/B95e9KWBMt4YoRh3AfW+Pz+trFSYc=;
-	b=VOjXoxy2gjjHVccZhWPpdM/P/FXXXf4b6f+XWwKDIkGOLppgKIwOLUNx4nxRl0H8tq
-	ZSJc9r4wo2M8RmOzil5CfQuNeiHJKC9SpksiAy4fpdEgA8nmQqnq726P5JTpq0LeD71M
-	eWEtmLCF0Lp/3NlLvVPk2ZQdUCa7kl7nV2l4qpUA4m4wvankmwIjiTHsqrXB+KO8ZPUc
-	CUei78rnO7W6xCMzVa68lqXVDqP77xPzdLp8eMcJCzPhf1jG0tYyd+iawpNc/0AXApx8
-	fFVJSEKjJ9d5Oc9SmfpX+mmdckVFeoQ73HJw0w6yM1D9Ot5bwicGBi05tGFFjFcOWDmR
-	PlxA==
+	:content-transfer-encoding;
+	bh=wHJKnH2x1SP8bNBqI9F+z0WHIbG+rmEidk0X3FZkm2Y=;
+	b=fv1DACmfGCM/fCfp7me/+6DmVlhYsykl7sKtYG9vYjOcE4cA1JN9vd/pj+Oal1wo8i
+	tJz9O+OHLEy4hTB0QCxXDrL8bqbmcTN8867pgxLHvSKTOn3fHRBrhX2wgK7DrOjOS+ej
+	Zx/SVbPWXAweCGlouf0Pf0EvDKvhC/MaagrFST7Gmj6xH44aPhhVlHJTjmuRUXQln+ke
+	YRvSfqSS7T+qi9fd819RxuAqTjvbFDLfAIMGm9ogLKH6uPvWosabOyvnmI47nCfwVPUs
+	qfnFA8iSagzjsjY5dmmLvAKkzGixYwyvLGUjHM3QbaL7Jua+cDtBnz4Sq08AIy1HrDBj
+	RgsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=LAQ96wqRFu/S9/B95e9KWBMt4YoRh3AfW+Pz+trFSYc=;
-	b=FdzVMNS0FusdV5Wa36qMXkuIrwQJcUR13u2aJCaubWslDRjpFOPFgdVB3rI5MgJK/K
-	hxG7N2rQhXu3luAqNsy2H42dqL4taHlJWVHjyhASfsMaxbc30KA0ZPRcCltSkUNuMbp/
-	K3sLfmuo6rf4Pav9r2oJEhE3LMQOIhyr4TOF4CsqAl2EbJUsSZgwQepn9NSJuxVmsEcf
-	9oaP+EZHPm8wiTkUu9lP7EAIbX4D8NE+0IohCKNnmVldGcn5+El9dHMgxytMf/gIDdY6
-	ll5W77DGDgkr4cLokdsauJDJhasRMYV11o5F9NSBG44RBoGC0g7/Qv/42uAOw3NoFtlh
-	vM9Q==
-X-Gm-Message-State: APjAAAUSzGdFUrECZixoIuCuqVBVcxBc/JXh98g4tqIr1V2MV/z/slc4
-	4ydJjO/tMjZLRdgxDi+e02esm1jD3UYJYIhBC56q09eH
-X-Google-Smtp-Source: APXvYqznGkbPrkql641JmirmWBxeDo7OmjTtg476IaSvkqHIUTTbgrvPS9AtkehptjE02TlWVsl9thcl5GscvQBXf2A=
-X-Received: by 2002:a92:7308:: with SMTP id o8mr32000754ilc.102.1572896621604; 
-	Mon, 04 Nov 2019 11:43:41 -0800 (PST)
+	:message-id:subject:to:content-transfer-encoding;
+	bh=wHJKnH2x1SP8bNBqI9F+z0WHIbG+rmEidk0X3FZkm2Y=;
+	b=e3x+EN/9JzuJQIRfydBcCo1hxEPZWyu/2r6RaUq2U+/IhLVQCBYaR1VmgBF5x1uRVH
+	wGlFCJLPFqbxBAHt6uWs3iT7NoNH2dHIiDi34M/JlTYWKKl4G3hLoGSt3outbXPWj3G6
+	+aeuCPvraeMQuTg+NqGMSSyrNljQ/e5IWKDxqHHGcEeBX+eV1EI+QjboKeV10doY0YbO
+	/MprN+01EvzyLPHdYvUdEO9ckBUgV+N0VB2Y/KGGNmypsAUbC/dSi9G6BG3VhhSOx3ZO
+	jRbkVfvcsBncU3em+yIXiNOBCcyfn5w98M/TQnAC08BI0gkbt3TkleusUhdtZH45ORby
+	Vj8w==
+X-Gm-Message-State: APjAAAVuSZl+8bKbkrPaORrYTQ3iMkZ3A64yDAdmbhgh8hv02JrzRZaU
+	0Hi/4rwgMbccwTQAnjB0dW58Hjr96GJ/Ijlbu2krA4gn
+X-Google-Smtp-Source: APXvYqxg+Qm1WVrYN5IdvxbWsl8TGreRgAzeACzbul6RKug8f/4lMl6VnTXkU7WW7rtN80SRd8o4af2Hl6LKh/4zR1U=
+X-Received: by 2002:a5d:8146:: with SMTP id f6mr25934031ioo.108.1572897373266; 
+	Mon, 04 Nov 2019 11:56:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20191104160052.6615-1-open.source@oleksandr-kravchuk.com>
-In-Reply-To: <20191104160052.6615-1-open.source@oleksandr-kravchuk.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Mon, 4 Nov 2019 19:43:30 +0000
-Message-ID: <CAO5Uq5THZzp+Wxu0S4tEtkZOZG5+v_9-Ey0-qO8t4exxbqD9Zw@mail.gmail.com>
-To: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-oe] iwd: update to 1.0
+References: <20191104190114.5076-1-schnitzeltony@gmail.com>
+	<20191104190114.5076-3-schnitzeltony@gmail.com>
+In-Reply-To: <20191104190114.5076-3-schnitzeltony@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 4 Nov 2019 20:56:02 +0100
+Message-ID: <CALbNGRRW0_jMhchE9L0PEsjd1LvAw5qMQny2RkJh3==Sd=D76A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/2] mm-common: build for allarch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,25 +54,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Nov 2019 19:43:40 -0000
+X-List-Received-Date: Mon, 04 Nov 2019 19:56:12 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 4, 2019 at 4:01 PM Oleksandr Kravchuk
-<open.source@oleksandr-kravchuk.com> wrote:
+On Mon, Nov 4, 2019 at 8:01 PM Andreas M=C3=BCller <schnitzeltony@gmail.com=
+> wrote:
 >
-> Signed-off-by: Oleksandr Kravchuk <open.source@oleksandr-kravchuk.com>
-> ---
+> mm-common does not compile anything and just installs scripts/marcros/doc=
+s. So
+> make it allarch and save a few build-tasks.
+Please ignore this one: It breaks dependency chain for
+libsigc++-3-native & libsigc++-2.0-native
 
-This is failing for me when building w/ systemd enabled:
+BTW: why do we have native variants for libsigc++-?
 
-ERROR: iwd-1.0-r0 do_package: QA Issue: iwd: Files/directories were
-installed but not shipped in any package:
-  /usr/lib/systemd/network
-  /usr/lib/systemd/network/80-iwd.link
-Please set FILES such that these items are packaged. Alternatively if
-they are unneeded, avoid installing them or delete them within
-do_install.
-
--- 
-Alex Kiernan
+Andreas
 
