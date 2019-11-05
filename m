@@ -1,37 +1,40 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BA037F9C6
+Return-Path: <prvs=2054d270f=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F7A87F8A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Nov 2019 13:57:47 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 476rpN3ZYCzCL;
-	Tue,  5 Nov 2019 14:57:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1572962268;
-	bh=QUNwHTd4u0nYhhUAc95zxpV780obEPq1bDkJVbjXsM4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=nEeFQ76rSclUFKbLRw5ecgXc/Ki6Nxy8jGwdB24zcn7i/BS22Shz6JSmwIZfk+H5e
-	JBGt3HRfjAk6/Q58FikFbuNpvDf3OqmYs7Y+xR6HTVTFcjty7gjIrReHjdanFE2UDa
-	K7zhJ6goj3FRHwptZJtqqH2F3vGErbYBJD0iAGvIm3yvUkWYE6S897W72ajB3hP+RQ
-	4jW1qIYmSk8r1EmbPVgDcW0NpKOajmZeXdOOTS+IdzLPvKrrmeEOEFydW5n5XwulIy
-	KnFOQfWDhvCTtY5flaEOMbfA8r2JwjshIKWtXt8Q7Zi3V/fRFOR0z+4dZkPGJLr/MD
-	esB4S/SCceGycjHBYjqMNU7QOP0yxADUNj3GVHiNQigDwxwd9kEx0g0f7mKNQRbvUp
-	LvDKkga67rIZp2Y95wdaxNLUolBtIIWp38y4aqMWbrYhTAmV5884Espr1Hjm4kYmSI
-	uIXskrSO9Zmrl9v5mDnFDbUhiutdKOv3NIJ0Ag9Hp+dcI93bWYGWa34ccaoNsE7i/g
-	VuYoA/VFZL95KYBJyaIolqX/DR5RDqEID6YZ+HN3TZ+gU26b4KBf+yUk+RIFUoVnnB
-	egVukBOFtI2nG8im+aAzMGGXDiB0c+4RJTQjaHIeDAcg4v9WFVZAf3yGtOKLEKgNu+
-	NPYCH/1RUpz+/m9O3WN12ZkE=
-Date: Tue, 5 Nov 2019 15:57:46 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Martin Siegumfeldt <mns@gomspace.com>
-Message-ID: <20191105135746.GC20425@localhost>
-References: <20191105120031.6579-1-mns@gomspace.com>
-	<20191105135512.GB20425@localhost>
+	Tue,  5 Nov 2019 14:21:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1572963677; x=1604499677;
+	h=subject:to:references:cc:from:message-id:date:
+	mime-version:in-reply-to:content-transfer-encoding;
+	bh=ciIPjnQA5RohyD/6wNKbWViVxwaHS9tmgSZ7LbdZ8V0=;
+	b=k2HVz7ExCVNZz1VjRHMenlo/OVne+J/yCApqZ2bMY04zMG/FWiAOo+ew
+	mK+mmvsesPwAiknmJuuz+IwhIIipr4QKBahrJSvVe/vXbA7sNYW0pfZ+5
+	Yjx/wXtbSgKCcAgNe9T3L4tZq5a4Yyf7k5UnYi2bRsL14Lpwsgpz2rqQ2
+	wqsj8JiM9n2T7WE2M6vDsFGKGtGy00OAqwO5ZP5HVginVwhUzKc7itvJK
+	kIfUvw4u5t9uVMT3YlgrBwQlxfGCPTXj5AKAu5hrdxQwamBRbgAoRXB6/
+	A61OsTWdSJMXowfxdDzuid0CAYAv2WT9h4ySvbWzfRKS94q1SB1+08nae w==;
+IronPort-SDR: hdppQAnkGmWMC9Udw/Fvf7Kexd+XFLXJiMtyS0wmLrYrl0GjLkSVGlBJEIeJqOeVNwfu06Fawu
+	Xp1A0YvMvR0pQ2B9GKPJtjBENSrcEK8hE//G8iDxae93n06rzYZ6QxpvhJMOxu2EXk8km2AQXx
+	Ngoii2S0MdHjC+DA2/4oeHAueQFqGS5I49VGpC6aq3+QfdsfD46WL/8Kj/BtKMXRcCFr+ELVHy
+	/t/uPkX+ynU5Z0lJ9dBXzpFSQdxOnEDo0BF4K0Eiph+Ug9nzjRvEekkiqgdD2U/r8wbwOn6xmv
+	E4I=
+X-IronPort-AV: E=Sophos;i="5.68,271,1569276000"; 
+   d="scan'208";a="2408028"
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <20191105084045.20756-1-richard.leitner@skidata.com>
+From: Richard Leitner <richard.leitner@skidata.com>
+Message-ID: <7c9aea64-9b06-fcf8-7731-3dfb8d0cc8dd@skidata.com>
+Date: Tue, 5 Nov 2019 15:21:13 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.1.1
 MIME-Version: 1.0
-In-Reply-To: <20191105135512.GB20425@localhost>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe,thud][PATCH 0/6] libiio: backports from master
+In-Reply-To: <20191105084045.20756-1-richard.leitner@skidata.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: Re: [meta-java][PATCH] layer.conf: remove compatibility with thud and warrior
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,38 +47,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Nov 2019 13:57:48 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Tue, 05 Nov 2019 14:21:16 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Tue, Nov 05, 2019 at 03:55:12PM +0200, Adrian Bunk wrote:
-> On Tue, Nov 05, 2019 at 01:00:25PM +0100, Martin Siegumfeldt wrote:
-> > Backport libiio patches from master bumping libiio to v0.18 and
+Hi,
+this is a note to let you know that I've just added this patch to the
+master-next branch of the meta-java repository at
+	git://git.yoctoproject.org/meta-java
+
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
+
+If you have any questions, please let me know.
+
+regards;Richard.L
+
+
+On 05/11/2019 09:40, Richard Leitner wrote:
+> As we want to start some cleanup work on meta-java stay only compatible
+> with zeus.
 > 
-> Upgrading on an upstream stable branch can be OK,
-> especially when this is the lowest risk way to fix CVEs.
+> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> ---
+>   conf/layer.conf | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> But upgrading to new releases on the master branch is usually not worth 
-> the regression risk - the default is to avoid changes in OE stable branches.
+> diff --git a/conf/layer.conf b/conf/layer.conf
+> index cdba2cd..9be071d 100644
+> --- a/conf/layer.conf
+> +++ b/conf/layer.conf
+> @@ -7,7 +7,7 @@ BBFILES += "${LAYERDIR}/recipes*/*/*.bb ${LAYERDIR}/recipes*/*/*.bbappend"
+>   BBFILE_COLLECTIONS += "meta-java"
+>   BBFILE_PATTERN_meta-java := "^${LAYERDIR}/"
+>   BBFILE_PRIORITY_meta-java = "10"
+> -LAYERSERIES_COMPAT_meta-java = "thud warrior zeus"
+> +LAYERSERIES_COMPAT_meta-java = "zeus"
+>   
+>   LICENSE_PATH += "${LAYERDIR}/licenses"
+>   
 > 
-> > allows building python3 bindings
-> >...
-> 
-> No new features in OE stable branches.
-
-And even more important:
-No removal of features users might be using.
-
-Like the Python2 bindings in this case.
-
-cu
-Adrian
-
--- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
-
 
