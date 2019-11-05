@@ -1,48 +1,64 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
-	[209.85.208.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 601487F961
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com
+	[209.85.210.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 23F8E7F8B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Nov 2019 10:05:36 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id g3so14966025ljl.11
+	Tue,  5 Nov 2019 11:43:21 +0000 (UTC)
+Received: by mail-ot1-f46.google.com with SMTP id r24so1045732otk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Nov 2019 02:05:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=kwacxk2RbZlVX9vwRH/wIbJcvHF5u0y6TnuokMK3zB4=;
-	b=UkSf5JHybDq5Vt0O81+o17FsZ4XufvkiqeGhXp0BqUEx/Ia1P+zby/vs+UWiymP3G9
-	yUkyLc5deH4ZQqEFXXUg9NTBekOrJtls9G8cMGbWzcPDhduWKc3PY1MpNmiGHdJR9gNf
-	MZ6++xgGCA635scYR6oz9UFjwzwODD4jslRgSvciQIit8PPOoS5MXI1VYllhLn53rnyS
-	uPXI1g8Pe1HsZ5rk2FWIih9dHQ+46wpJKuqwAbXy4UnlL1uSmJB9WbhVbBK/L/FMN9oy
-	LIMhCLHqhIcvHZE4nskvNz+/oKiDXT8HIuLH02NLDaUFErBdHkLYuT87gNh5/pxEi67V
-	wwNg==
+	Tue, 05 Nov 2019 03:43:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
+	:cc; bh=ehH6X0XTMeixB4qIZcMvoNmlOOg9UnTXhaStHP6zWA4=;
+	b=rI/m6dsLBQ4KLfYg0giJT2muChkLui2DV4fGSOvpl4om6NLWJMs+ssax094MSpIf+j
+	q9Ayx7MqsHDJuNS3MTskZI0v/dqhDlQDXxjeEBMdFSmBXbeMocpVDgxWXUPF9Ncml+oF
+	q/Noiaskzg2Gbht/uD/NgMGlWGV8UH7BPCvbMP31qR0fbZLpgxnJxYm7ImXzYmQ/wFM8
+	sDqKQcQfqeEXPRKS/9ocFHyD0+u3LNYvPh5PBNvWxTOn9iiZBW+huWZrcJKU/6WAZYu6
+	cu5J0WFGjmuvPD2ZvFolLWu3Y6t+RBZdOX3btuZl+kPPTe2+modYwoPpVeq2bVMWKnJP
+	uVUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=kwacxk2RbZlVX9vwRH/wIbJcvHF5u0y6TnuokMK3zB4=;
-	b=SyuIopM4oYJWq36bXZy7SbyvdTs1BU9iGm6vWUn0sNSUCJoVxe5ktu7C6J3dg0MSDQ
-	ahkyunNnHJAY61GfrDS3QcCSqjmCyz2amz/NXBa3vQJMYrticj2YxEp8YkVu8mobFYfW
-	oDFsoEt2/qb37kTfTtH9FjmrQ20NCWTfmo3fcafbhCkcdpNRa4oRuSS8FW/1TJPJSFv/
-	Vn60yxlHJ20r7lydusmhHGNI0i5QuOSy1aD/MyZYDf/A0bYSq+pe6DxVH9z/8UgyO0Zx
-	V7xfzSR4RykjM1GRNArYilcqepDKMcmk0DAXh99ZTmYIPa/qwacTCek4+0btu88ZAStr
-	DgYQ==
-X-Gm-Message-State: APjAAAX98mndshRQ83ucQYuoyKJkidE1TDJH8pTDvJ5izF6po7GWCD+U
-	9bn/jCvrNrbHc2bMrwfyttlvC931A+4=
-X-Google-Smtp-Source: APXvYqyNs/7HY4RbFZ7G7sdX75PfOnqFRn9o97Po6L9HKhXKE7e4/5c233+cjOe3a35GdYOCtonuIg==
-X-Received: by 2002:a2e:6e15:: with SMTP id j21mr1675351ljc.17.1572948336780; 
-	Tue, 05 Nov 2019 02:05:36 -0800 (PST)
-Received: from localhost.localdomain (m77-218-240-151.cust.tele2.se.
-	[77.218.240.151])
-	by smtp.gmail.com with ESMTPSA id e2sm8421250lfc.2.2019.11.05.02.05.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 05 Nov 2019 02:05:36 -0800 (PST)
-From: liu.ming50@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Nov 2019 11:05:31 +0100
-Message-Id: <1572948331-9704-1-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe] [PATCH] python-jsonschema: RDEPENDS on python-importlib-metadata
+	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
+	:message-id:subject:to:cc;
+	bh=ehH6X0XTMeixB4qIZcMvoNmlOOg9UnTXhaStHP6zWA4=;
+	b=lQJWJrWcWGCwcAY9Y09yhPfU3BAxRgcI+XOGNFWe2JFeHDihkR62llxKUtqDjpKvJM
+	y3T/uBRe2Wgzzxc3RR4JQfffxfPEgXFqf/VuYAw4hvaFPf2XxxbbvWUlAdDKBmogqB7/
+	ve99ESeuqEup5an3YZ1kkrIE8q+c62lUUgBCtuzSoFP09tNPFRCeVzaHhNiWJbaSfaHx
+	VyeF5jHEDbmjFb4R64gK0upA2ObkEizVahjlRfyrMycpJdQUh7X/uFqcHhgn2ny16ctN
+	Y16qehGyDdjNKVJFtGAWz+POxGoQNi/lllleYkZ/e8MiZ2yj+UCq+eRWhW9WD5oeyXXC
+	1P/Q==
+X-Gm-Message-State: APjAAAXLfgbuAkvE1NtCwKAfxSKtmaNxM0uYwrvXFPkuB8+VXrh8dcH2
+	Me3fDAGhP+IpcbC/FtRQD26k7JKzf9WYRg==
+X-Google-Smtp-Source: APXvYqys3LvZGneaU/Qmm1DnDiWKU4AQ9REhCH4bLnO9BXQvTzxun1yiEahmDbBtyjpMvpQs7Jr4lw==
+X-Received: by 2002:a9d:3b76:: with SMTP id
+	z109mr21400759otb.193.1572954202484; 
+	Tue, 05 Nov 2019 03:43:22 -0800 (PST)
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com.
+	[209.85.167.173]) by smtp.gmail.com with ESMTPSA id
+	t32sm6248179otb.28.2019.11.05.03.43.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Tue, 05 Nov 2019 03:43:21 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-oi1-f173.google.com with SMTP id j7so17237098oib.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Nov 2019 03:43:21 -0800 (PST)
+X-Received: by 2002:aca:5955:: with SMTP id n82mr3432716oib.37.1572954200501; 
+	Tue, 05 Nov 2019 03:43:20 -0800 (PST)
+MIME-Version: 1.0
+References: <20191011212120.11453-1-alistair.francis@wdc.com>
+	<CAB2nKc8MA7uLUxbJrzh-a48AHe66XoghYaGLxF0PRH7y45RiWQ@mail.gmail.com>
+	<e3824981-20c0-b5e2-752b-e63ad6df771b@skidata.com>
+	<CAB2nKc9VVvMDFKJ6oD972qV2grS5m26Mzg0tujFX-+Uqy7nM5g@mail.gmail.com>
+In-Reply-To: <CAB2nKc9VVvMDFKJ6oD972qV2grS5m26Mzg0tujFX-+Uqy7nM5g@mail.gmail.com>
+Date: Tue, 5 Nov 2019 08:43:08 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKoRdkypab2kp+5oHMFOUoq_B879VApmfAtkE1ghx7Ti3A@mail.gmail.com>
+Message-ID: <CAP9ODKoRdkypab2kp+5oHMFOUoq_B879VApmfAtkE1ghx7Ti3A@mail.gmail.com>
+To: Vincent Prince <vincent.prince.fr@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] layer.conf: Mark as compatible with zeus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +71,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Nov 2019 10:05:37 -0000
+X-List-Received-Date: Tue, 05 Nov 2019 11:43:22 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Ming Liu <liu.ming50@gmail.com>
+On Tue, Nov 5, 2019 at 5:58 AM Vincent Prince
+<vincent.prince.fr@gmail.com> wrote:
+> Thanks Richard, no problem for delay, we all have lot of work (and
+> hopefully it will continue)
 
-This fixes a following runtime issue:
-|      raise DistributionNotFound(req, requirers)
-| pkg_resources.DistributionNotFound: The 'importlib_metadata'
-| distribution was not found and is required by jsonschema
+Same here. We are focused on other customer stuff and didn't use java lately.
 
-Signed-off-by: Ming Liu <liu.ming50@gmail.com>
----
- meta-python/recipes-devtools/python/python-jsonschema.inc | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
-index 6fdc024..95c40aa 100644
---- a/meta-python/recipes-devtools/python/python-jsonschema.inc
-+++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
-@@ -9,6 +9,7 @@ DEPENDS += "${PYTHON_PN}-vcversioner-native"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-core \
-+    ${PYTHON_PN}-importlib-metadata \
-     ${PYTHON_PN}-io \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-netclient \
 -- 
-2.7.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
 
