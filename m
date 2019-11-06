@@ -1,24 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B4177F872
+	by mail.openembedded.org (Postfix) with ESMTP id 9DEDD7F8BC
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed,  6 Nov 2019 07:49:37 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xA67nZfe005072
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xA67ncnf005075
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 5 Nov 2019 23:49:35 -0800 (PST)
+	Tue, 5 Nov 2019 23:49:38 -0800 (PST)
 Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Tue, 5 Nov 2019 23:49:35 -0800
+	Tue, 5 Nov 2019 23:49:37 -0800
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <raj.khem@gmail.com>
-Date: Tue, 5 Nov 2019 23:49:28 -0800
-Message-ID: <20191106074935.46751-1-hongxu.jia@windriver.com>
+Date: Tue, 5 Nov 2019 23:49:31 -0800
+Message-ID: <20191106074935.46751-4-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20191106074935.46751-1-hongxu.jia@windriver.com>
+References: <20191106074935.46751-1-hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH 1/8] python-more-itertools: downgrade 7.2.0 -> 5.0.0
+Subject: [meta-python][PATCH 4/8] python-scandir: add version 1.10.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,53 +37,34 @@ X-List-Received-Date: Wed, 06 Nov 2019 07:49:37 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Python 2.7 is no longer supported. The 5.0.0 release will be the last
-version targeting Python 2.7. [1]
+It is required by python-pathlib2.
 
-[1] https://github.com/erikrose/more-itertools/commit/560b045b430e8292c18cf5283de4fdc3e13e56f7
+The recipe refers the duplicated one in meta-iot-cloud
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-more-itertools.inc  | 3 ---
- ...-more-itertools_7.2.0.bb => python-more-itertools_5.0.0.bb} | 3 +++
- .../recipes-devtools/python/python3-more-itertools_7.2.0.bb    | 3 +++
- 3 files changed, 6 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-more-itertools_7.2.0.bb => python-more-itertools_5.0.0.bb} (29%)
+ .../recipes-devtools/python/python-scandir_1.10.0.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-scandir_1.10.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-more-itertools.inc b/meta-python/recipes-devtools/python/python-more-itertools.inc
-index 8d814a6f0..33095b3d3 100644
---- a/meta-python/recipes-devtools/python/python-more-itertools.inc
-+++ b/meta-python/recipes-devtools/python/python-more-itertools.inc
-@@ -2,6 +2,3 @@ DESCRIPTION = "More routines for operating on iterables, beyond itertools"
- HOMEPAGE = "https://github.com/erikrose/more-itertools"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3396ea30f9d21389d7857719816f83b5"
--
--SRC_URI[md5sum] = "f647bfd27243a7bebe53b5ddb6a3b1c4"
--SRC_URI[sha256sum] = "409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f832"
-diff --git a/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb b/meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
-similarity index 29%
-rename from meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
-rename to meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
-index 0702aad4e..c66e55cac 100644
---- a/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
-@@ -1,2 +1,5 @@
- inherit pypi setuptools
- require python-more-itertools.inc
+diff --git a/meta-python/recipes-devtools/python/python-scandir_1.10.0.bb b/meta-python/recipes-devtools/python/python-scandir_1.10.0.bb
+new file mode 100644
+index 000000000..253c2342b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-scandir_1.10.0.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "A better directory iterator and faster os.walk()"
++HOMEPAGE = "https://github.com/benhoyt/scandir"
++AUTHOR = "Ben Hoyt"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=482ee62da51806409d432a80eed4e3ea"
 +
-+SRC_URI[md5sum] = "f2ea58aa336ce6c13b7b225b3bbe305d"
-+SRC_URI[sha256sum] = "38a936c0a6d98a38bcc2d03fdaaedaba9f412879461dd2ceff8d37564d6522e4"
-diff --git a/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb b/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
-index 28ddf88fb..06d45ce54 100644
---- a/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
-@@ -1,2 +1,5 @@
- inherit pypi setuptools3
- require python-more-itertools.inc
++SRC_URI = "git://github.com/benhoyt/scandir.git"
++SRCREV = "982e6ba60e7165ef965567eacd7138149c9ce292"
 +
-+SRC_URI[md5sum] = "f647bfd27243a7bebe53b5ddb6a3b1c4"
-+SRC_URI[sha256sum] = "409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f832"
++S = "${WORKDIR}/git"
++
++inherit setuptools
 -- 
 2.21.0
 
