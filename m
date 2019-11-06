@@ -1,52 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
-	[209.85.210.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 164C57F8AA
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A3177F8DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2019 03:49:22 +0000 (UTC)
-Received: by mail-pf1-f182.google.com with SMTP id s5so9540571pfh.9
+	Wed,  6 Nov 2019 05:59:16 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id w18so24248506wrt.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Nov 2019 19:49:24 -0800 (PST)
+	Tue, 05 Nov 2019 21:59:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=nn9weU2IqF9aqFLeeSpESn9tiwLRSaFjtr+ALvtWU8I=;
-	b=jiVj3b8DRNEW+XINhySu6hAOWovnKQnosnxVzmOR2l7dPhDt392NBEh/75/eFCmRvh
-	0dE7rGE+TfXBmo9nfAm5ejUZ7rl07z5x/Jrcs0agqfg2zG5VhUseC7RAfoUpuWKxs/Zm
-	+hgYD27kPMFkxue7UQrl+FvPiv9F5NaP95jcju+AB4McclTkkRDBRGq/u9IiFPGyNWFD
-	q/pcShjQZZ3miz5ciXnQVxlcwMhRFAfZ6gn9rHaumiNMBhYd6mhrgxzWSbgWbQm+OrOq
-	xwTpJ6N0tDCqyFgjEdStPKF3hgU+dLFt/MQbyNoQHN30kG4mLf1YqvyVyVAC/LfoDwGA
-	lmuw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=17uNI+By6TUN4NR8IC7VXEOh1cU64LybqusKXiSRTQw=;
+	b=pPsVLhFiC36ODO6LJk6DdgAWlQEYLvmQwrgzSRvHtmWF17NBBUv9BG2e7Q2xrCnG2d
+	R2ZdQjnoOlCOEFC3Cd2PWLg1QGZmUiofNp/WFrMTQgpzjMgo9+aefDSqTexGa6Vo5dMb
+	4l8ravsgd1B8fzdsfqNCV5xfYHpyrE/YJ2aCaLCx3PoNkEt/XWOy+r02r3OeAFWghNKd
+	z8+DdMxb2Fyy1bhxhMR/GLu+MHlh7wjdaACoOYGhe+2/N64n0dtOHlmBHtA7PGpiruB+
+	FXgrBYyXtMppZS9xo2GvkH6guNS9tsQs4avOK9JrT92YsomFejSHCvX4uLBa73YLhsMS
+	ktLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=nn9weU2IqF9aqFLeeSpESn9tiwLRSaFjtr+ALvtWU8I=;
-	b=JXxh/wlW10/rKyrJqoxJ4+3AmAHhanZIRMNNxPdiCAAarN9N5HpMTg0w+9xIWt399a
-	qlhjAGuqTePHdXM5vVScQoWSJ1WZFx2SrNegimbi/1h63/vJneXtM3Ubz4gJMW976flL
-	SojHIzh5QJGufycyoGyVzGbs/+YBPz+ZktYVDZDb41WuXwtjCwLu0mt+ivSpq09psI7M
-	LLFWGOCPcWB8Lj+7mDFgl6lNb+xhnphq901VPgk736TV+F04/gn3E/zGh2S5leGNhjMD
-	G4GURbBmkY/qjeJfmlM/AY72LvvsBLrKG5xLMHT5NSHgKOlJoDbb1dAknnFiH6Qc0+2h
-	/9BQ==
-X-Gm-Message-State: APjAAAUdAMmz/YVrHLDBQhZzOFK9fjD0Djq9a4qRRy7EeLJLnXxdh6Bd
-	lF8Ng1xTvWCLSTSlpfActSD3TenX6MI=
-X-Google-Smtp-Source: APXvYqx6T3IV3mwCLuESZikNsxWD+cNXnJEtgob+jdkjLTZ+zi3WEpUv8OREz0t5u/6qaDV6dv7aiw==
-X-Received: by 2002:a17:90a:ba18:: with SMTP id
-	s24mr756229pjr.69.1573012163493; 
-	Tue, 05 Nov 2019 19:49:23 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::5caf])
-	by smtp.gmail.com with ESMTPSA id 39sm912407pjo.7.2019.11.05.19.49.22
+	:references;
+	bh=17uNI+By6TUN4NR8IC7VXEOh1cU64LybqusKXiSRTQw=;
+	b=Mw/aPLsuN3ErXxwWZgtCko47oqK5q1sLACjRHXYebn2VlT8TDzasEpnQj+b9MJF0R7
+	HZpz6z9WDxGRIK09oCOwzyLkqoY7b1JWt0BK2Frn+Qhp2MFl591H2M+l6Y6yGVbccjj7
+	aP+DrdMwxeFnttwxI60LvR7XiardGk2azie/5XZG2esW9tuQtViQuh3KyZdeLUEy/j2c
+	swWLybmAfAvjdX3VyCmqzMpcdo0pbP/dBB9dzf7/ON1+8PYGZjlxdTj7ogtSjU7TSUGc
+	RryI8/HQRR0j/H5uiTHIKukElPcjul4vVrMh7eJ8GemfXLSLiZreXxn+AWLEy55ajOOA
+	+GSA==
+X-Gm-Message-State: APjAAAWBYz0qXPC7ySn33/+PrE6s/PG5PZhjcq21eo+uZe+2YxKSgE1Q
+	fKhw4dSzXGOsy+hsmTsFoyt+D/Db
+X-Google-Smtp-Source: APXvYqzN8vLw75O71CXAqKv+7z/LfbW4+KSCEt9dOxd3f6rblVDxkMWbw3x5qSZbJ/rNZ6r7CCo5eg==
+X-Received: by 2002:adf:c58f:: with SMTP id m15mr875477wrg.362.1573019956621; 
+	Tue, 05 Nov 2019 21:59:16 -0800 (PST)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
+	g4sm15489451wru.75.2019.11.05.21.59.15
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 05 Nov 2019 19:49:23 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 05 Nov 2019 21:59:16 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Nov 2019 19:49:04 -0800
-Message-Id: <20191106034904.2815791-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
-In-Reply-To: <20191106034904.2815791-1-raj.khem@gmail.com>
-References: <20191106034904.2815791-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH 3/3] libowfat: Fix parallel build
+Date: Wed,  6 Nov 2019 05:59:10 +0000
+Message-Id: <20191106055910.105795-2-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20191106055910.105795-1-alex.kiernan@gmail.com>
+References: <20191106055910.105795-1-alex.kiernan@gmail.com>
+Subject: [meta-oe][PATCH v3 2/2] ostree: Upgrade 2019.4 -> 2019.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,58 +57,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2019 03:49:23 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 06 Nov 2019 05:59:16 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- .../ncp/libowfat/parallel_make.patch          | 20 +++++++++++++++++++
- .../recipes-support/ncp/libowfat_0.32.bb      |  4 +++-
- 2 files changed, 23 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/ncp/libowfat/parallel_make.patch
 
-diff --git a/meta-networking/recipes-support/ncp/libowfat/parallel_make.patch b/meta-networking/recipes-support/ncp/libowfat/parallel_make.patch
-new file mode 100644
-index 0000000000..ea39c771c3
---- /dev/null
-+++ b/meta-networking/recipes-support/ncp/libowfat/parallel_make.patch
-@@ -0,0 +1,20 @@
-+Depend on haveuint128.h for umult64.c
-+
-+This fixes parallel build issue e.g.
-+mult/umult64.c:9:10: fatal error: 'haveuint128.h' file not found
-+#include "haveuint128.h"
-+         ^~~~~~~~~~~~~~~
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/Makefile
-++++ b/Makefile
-+@@ -430,7 +430,7 @@ range_str4inbuf.o: mult/range_str4inbuf.
-+ range_strinbuf.o: mult/range_strinbuf.c rangecheck.h
-+ umult16.o: mult/umult16.c uint16.h
-+ umult32.o: mult/umult32.c uint32.h
-+-umult64.o: mult/umult64.c uint64.h
-++umult64.o: mult/umult64.c uint64.h haveuint128.h
-+ open_append.o: open/open_append.c open.h
-+ open_excl.o: open/open_excl.c open.h
-+ open_read.o: open/open_read.c open.h
-diff --git a/meta-networking/recipes-support/ncp/libowfat_0.32.bb b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-index a5e2c21cf0..b668b0ed5f 100644
---- a/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-+++ b/meta-networking/recipes-support/ncp/libowfat_0.32.bb
-@@ -6,7 +6,9 @@ HOMEPAGE = "http://www.fefe.de/libowfat"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+Changes in v3: None
+Changes in v2: None
+
+ .../ostree/{ostree_2019.4.bb => ostree_2019.5.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/ostree/{ostree_2019.4.bb => ostree_2019.5.bb} (99%)
+
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+similarity index 99%
+rename from meta-oe/recipes-extended/ostree/ostree_2019.4.bb
+rename to meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+index f438b35ebee2..035b4bb88689 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+@@ -32,7 +32,7 @@ SRC_URI = " \
+     file://0003-tests-Avoid-musl-failure-with-cp-a.patch \
+     file://0001-build-create-tests-directory-for-split-builds.patch \
+ "
+-SRCREV = "9d39e7d91e8497987cad69a3fbed5c5fc91eebdc"
++SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
  
--SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz"
-+SRC_URI = "https://www.fefe.de/${BPN}/${BP}.tar.xz \
-+           file://parallel_make.patch \
-+          "
- SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
- SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
  
 -- 
-2.24.0
+2.17.1
 
 
