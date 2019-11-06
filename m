@@ -1,50 +1,47 @@
 Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
-	[209.85.221.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A3177F8DA
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id C7BB07F8BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2019 05:59:16 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id w18so24248506wrt.3
+	Wed,  6 Nov 2019 05:59:15 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id e6so22376875wrw.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 05 Nov 2019 21:59:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=17uNI+By6TUN4NR8IC7VXEOh1cU64LybqusKXiSRTQw=;
-	b=pPsVLhFiC36ODO6LJk6DdgAWlQEYLvmQwrgzSRvHtmWF17NBBUv9BG2e7Q2xrCnG2d
-	R2ZdQjnoOlCOEFC3Cd2PWLg1QGZmUiofNp/WFrMTQgpzjMgo9+aefDSqTexGa6Vo5dMb
-	4l8ravsgd1B8fzdsfqNCV5xfYHpyrE/YJ2aCaLCx3PoNkEt/XWOy+r02r3OeAFWghNKd
-	z8+DdMxb2Fyy1bhxhMR/GLu+MHlh7wjdaACoOYGhe+2/N64n0dtOHlmBHtA7PGpiruB+
-	FXgrBYyXtMppZS9xo2GvkH6guNS9tsQs4avOK9JrT92YsomFejSHCvX4uLBa73YLhsMS
-	ktLA==
+	h=from:to:cc:subject:date:message-id;
+	bh=NSLIfKQighiHvpDWYznLIM4v54CfeXHVmvgF/XNxbEk=;
+	b=cmEN9XHidCFsDPHGwnOuE/SKGfHnT8QaysNIIx0B9b3i+Z6/T4jg7wjbFuY9mIYOfy
+	5HrbggJx9m0rSeYErJfdOhlEM0CzU50E6Q9NuK/1qTbQh3Uk/Rq0dhFzPlmhGu32KxaV
+	RKzvsU6bbGNqdmJWA71XhUHa3MnVfoMqqpcC8wz89MP5DwFAg5d8YGEUQtuVhs0Fd5EE
+	XLq14MwHiRgzqf+5sK5qtcbqsV0vMgzCG8ylYdvwgghNuv/U9NhJMIi1m0igO7HS+t84
+	aKu39JfOpm2sYFTWijrK7jjGHugGmHpy0Pdza/F+Lzblz6gaMRIA8xN+ghqUiUGE+oMU
+	KTVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=17uNI+By6TUN4NR8IC7VXEOh1cU64LybqusKXiSRTQw=;
-	b=Mw/aPLsuN3ErXxwWZgtCko47oqK5q1sLACjRHXYebn2VlT8TDzasEpnQj+b9MJF0R7
-	HZpz6z9WDxGRIK09oCOwzyLkqoY7b1JWt0BK2Frn+Qhp2MFl591H2M+l6Y6yGVbccjj7
-	aP+DrdMwxeFnttwxI60LvR7XiardGk2azie/5XZG2esW9tuQtViQuh3KyZdeLUEy/j2c
-	swWLybmAfAvjdX3VyCmqzMpcdo0pbP/dBB9dzf7/ON1+8PYGZjlxdTj7ogtSjU7TSUGc
-	RryI8/HQRR0j/H5uiTHIKukElPcjul4vVrMh7eJ8GemfXLSLiZreXxn+AWLEy55ajOOA
-	+GSA==
-X-Gm-Message-State: APjAAAWBYz0qXPC7ySn33/+PrE6s/PG5PZhjcq21eo+uZe+2YxKSgE1Q
-	fKhw4dSzXGOsy+hsmTsFoyt+D/Db
-X-Google-Smtp-Source: APXvYqzN8vLw75O71CXAqKv+7z/LfbW4+KSCEt9dOxd3f6rblVDxkMWbw3x5qSZbJ/rNZ6r7CCo5eg==
-X-Received: by 2002:adf:c58f:: with SMTP id m15mr875477wrg.362.1573019956621; 
-	Tue, 05 Nov 2019 21:59:16 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=NSLIfKQighiHvpDWYznLIM4v54CfeXHVmvgF/XNxbEk=;
+	b=a0+Hg1pk/O+2YdkPUPOYH3NX482A5XYYd0F2R6m4DXI12ImVca3EvN6x0CQKaqf+Ja
+	G5q4thriy1BkNddcXE56CsQrY8vZm9apR4ymjGIXbm/JsuHKoLA+iu2vrc6lErVMP0wV
+	azpdyYbH4LvvhGS7eeew3ULaXFSJoISQHbOzGk1N9F1hKEfjqsu69bVd8rTG0EPBtBpT
+	DIYOph3uciIgXJp+6ZTCN+J6EbjzQHcJ/BQ1W5Ws89j65zHTRmXAzYBxMBbO21b38PHx
+	ESEJjvi0oCUWwBX+WtYVxVOT2wXYdaEPaF1fEAIL+RlMaYeRinnTxJizzKBg+ofVAvej
+	1vqg==
+X-Gm-Message-State: APjAAAU+RtR/ctVxJp+7e+owxt5hce1ncNxbJ4MnmpxxLk2c0ICSAs/i
+	xfZoV65b2UMcaXus40/jHud5OQ6T
+X-Google-Smtp-Source: APXvYqyku+OgLOIg6mrhLdHYuFmzVu91KOlJsu4e/0lQo8RK/+Lo1huDjWXlUXnFjIkBFb7sslNpmA==
+X-Received: by 2002:adf:fbc4:: with SMTP id d4mr966868wrs.265.1573019955795;
+	Tue, 05 Nov 2019 21:59:15 -0800 (PST)
 Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
 	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
-	g4sm15489451wru.75.2019.11.05.21.59.15
+	g4sm15489451wru.75.2019.11.05.21.59.14
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 05 Nov 2019 21:59:16 -0800 (PST)
+	Tue, 05 Nov 2019 21:59:14 -0800 (PST)
 From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Nov 2019 05:59:10 +0000
-Message-Id: <20191106055910.105795-2-alex.kiernan@gmail.com>
+Date: Wed,  6 Nov 2019 05:59:09 +0000
+Message-Id: <20191106055910.105795-1-alex.kiernan@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191106055910.105795-1-alex.kiernan@gmail.com>
-References: <20191106055910.105795-1-alex.kiernan@gmail.com>
-Subject: [meta-oe][PATCH v3 2/2] ostree: Upgrade 2019.4 -> 2019.5
+Subject: [meta-oe][PATCH v3 1/2] ostree: Add support for ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,32 +56,526 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 06 Nov 2019 05:59:16 -0000
 
+Move ostree-trivial-httpd to its own package so we can RDEPEND on it in both
+the main ostree and ptest packages. Drop the patches to remove
+ostree-trivial-httpd based on --enable-trivial-httpd-cmdline as they break
+installed tests (and were reverted upstream).
+
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
 
-Changes in v3: None
-Changes in v2: None
+Changes in v3:
+- add patch to ensure tests/ is created
 
- .../ostree/{ostree_2019.4.bb => ostree_2019.5.bb}               | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-extended/ostree/{ostree_2019.4.bb => ostree_2019.5.bb} (99%)
+Changes in v2:
+- include ptest changes against 2019.4 so can we remove the
+  BUILDOPT_TRIVIAL_HTTPD changes before upgrading to 2019.5 as they were
+  reverted upstream
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-similarity index 99%
-rename from meta-oe/recipes-extended/ostree/ostree_2019.4.bb
-rename to meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-index f438b35ebee2..035b4bb88689 100644
+ ...lways-enable-trivial-httpd-for-tests.patch | 59 -------------------
+ ...ate-tests-directory-for-split-builds.patch | 43 ++++++++++++++
+ ...-EPIPE-failures-when-head-terminates.patch | 51 ++++++++++++++++
+ ...-core-Fallback-to-en_US.UTF-8-locale.patch | 42 +++++++++++++
+ ...vial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch | 51 ----------------
+ ...Assume-C.UTF-8-if-locale-isn-t-found.patch | 40 +++++++++++++
+ ...3-tests-Avoid-musl-failure-with-cp-a.patch | 52 ++++++++++++++++
+ .../recipes-extended/ostree/ostree/run-ptest  |  3 +
+ .../recipes-extended/ostree/ostree_2019.4.bb  | 45 ++++++++++++--
+ 9 files changed, 271 insertions(+), 115 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch
+ create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-build-create-tests-directory-for-split-builds.patch
+ create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-tests-Handle-EPIPE-failures-when-head-terminates.patch
+ create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-tests-core-Fallback-to-en_US.UTF-8-locale.patch
+ delete mode 100644 meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
+ create mode 100644 meta-oe/recipes-extended/ostree/ostree/0002-tests-core-Assume-C.UTF-8-if-locale-isn-t-found.patch
+ create mode 100644 meta-oe/recipes-extended/ostree/ostree/0003-tests-Avoid-musl-failure-with-cp-a.patch
+ create mode 100644 meta-oe/recipes-extended/ostree/ostree/run-ptest
+
+diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch b/meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch
+deleted file mode 100644
+index c9e1306afde0..000000000000
+--- a/meta-oe/recipes-extended/ostree/ostree/0001-Always-enable-trivial-httpd-for-tests.patch
++++ /dev/null
+@@ -1,59 +0,0 @@
+-From 44e0647230b22cd136ae2fb252ce90eed4751970 Mon Sep 17 00:00:00 2001
+-From: Alex Kiernan <alex.kiernan@gmail.com>
+-Date: Wed, 4 Sep 2019 17:29:15 +0100
+-Subject: [PATCH 1/2] Always enable trivial-httpd for tests
+-
+-When running tests we always need ostree-trivial-httpd, so enable it
+-unconditionally
+-
+-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+-Upstream-Status: Submitted [https://github.com/ostreedev/ostree/pull/1912]
+----
+- Makefile.am        | 1 +
+- ci/build.sh        | 5 +++++
+- ci/travis-build.sh | 1 +
+- 3 files changed, 7 insertions(+)
+-
+-diff --git a/Makefile.am b/Makefile.am
+-index cd04a055045a..673dbf88de55 100644
+---- a/Makefile.am
+-+++ b/Makefile.am
+-@@ -39,6 +39,7 @@ AM_DISTCHECK_CONFIGURE_FLAGS += \
+- 	--enable-gtk-doc \
+- 	--enable-man \
+- 	--disable-maintainer-mode \
+-+	--enable-trivial-httpd-cmdline \
+- 	$(NULL)
+- 
+- GITIGNOREFILES = aclocal.m4 build-aux/ buildutil/*.m4 config.h.in gtk-doc.make
+-diff --git a/ci/build.sh b/ci/build.sh
+-index 0901507498f2..806af050b780 100755
+---- a/ci/build.sh
+-+++ b/ci/build.sh
+-@@ -22,6 +22,11 @@ case "${CONFIGOPTS:-}" in
+-         fi
+-         ;;
+- esac
+-+# unless libsoup is disabled, enable trivial-httpd for the tests
+-+case "${CONFIGOPTS:-}" in
+-+    *--without-soup*) ;;
+-+    *) CONFIGOPTS="${CONFIGOPTS:-} --enable-trivial-httpd-cmdline" ;;
+-+esac
+- 
+- # always fail on warnings; https://github.com/ostreedev/ostree/pull/971
+- # NB: this disables the default set of flags from configure.ac
+-diff --git a/ci/travis-build.sh b/ci/travis-build.sh
+-index 3fd969bdced6..7c85313a2d32 100755
+---- a/ci/travis-build.sh
+-+++ b/ci/travis-build.sh
+-@@ -85,6 +85,7 @@ make="make -j${ci_parallel} V=1 VERBOSE=1"
+- 
+- ../configure \
+-     --enable-always-build-tests \
+-+    --enable-trivial-httpd-cmdline \
+-     ${ci_configopts}
+-     "$@"
+- 
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-build-create-tests-directory-for-split-builds.patch b/meta-oe/recipes-extended/ostree/ostree/0001-build-create-tests-directory-for-split-builds.patch
+new file mode 100644
+index 000000000000..d94b3ded9b3e
+--- /dev/null
++++ b/meta-oe/recipes-extended/ostree/ostree/0001-build-create-tests-directory-for-split-builds.patch
+@@ -0,0 +1,43 @@
++From 114fe5067b58a2434b44855eee48f865186fe0fa Mon Sep 17 00:00:00 2001
++From: Alex Kiernan <alex.kiernan@gmail.com>
++Date: Tue, 5 Nov 2019 22:26:23 +0000
++Subject: [PATCH] build: create tests directory for split builds
++
++When `--disable-dependency-tracking` is in effect with separate build
++directory, the tests directory isn't created as a result of the
++dependency generation, which leads to a build race for the tests
++directory being created and failures:
++
++  Making all in .
++  make[2]: Entering directory 'TOPDIR/build/tmp/work/riscv64-yoe-linux-musl/ostree/2019.5-r0/build'
++  (echo '[Test]' > tests/test-local-pull-depth.sh.test.tmp; \
++  echo 'Type=session' >> tests/test-local-pull-depth.sh.test.tmp; \
++  echo 'Exec=env G_TEST_SRCDIR=/usr/libexec/installed-tests/libostree G_TEST_BUILDDIR=/usr/libexec/installed-tests/libostree /usr/libexec/installed-tests/libostree/test-local-pull-depth.sh' >> tests/test-local-pull-depth.sh.test.tmp; \
++  mv tests/test-local-pull-depth.sh.test.tmp tests/test-local-pull-depth.sh.test)
++  /bin/sh: tests/test-local-pull-depth.sh.test.tmp: No such file or directory
++  /bin/sh: line 1: tests/test-local-pull-depth.sh.test.tmp: No such file or directory
++  /bin/sh: line 2: tests/test-local-pull-depth.sh.test.tmp: No such file or directory
++  mv: cannot stat 'tests/test-local-pull-depth.sh.test.tmp': No such file or directory
++  make[2]: *** [Makefile:9282: tests/test-local-pull-depth.sh.test] Error 1
++
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++Upstream-Status: Pending
++---
++ buildutil/glib-tap.mk | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/buildutil/glib-tap.mk b/buildutil/glib-tap.mk
++index 34b8f21ea26a..9a944a0acc88 100644
++--- a/buildutil/glib-tap.mk
+++++ b/buildutil/glib-tap.mk
++@@ -116,6 +116,7 @@ installed_testcases = $(test_programs) $(installed_test_programs) \
++ installed_test_meta_DATA = $(installed_testcases:=.test)
++ 
++ %.test: %$(EXEEXT) Makefile
+++	@$(MKDIR_P) $(dir $@)
++ 	$(AM_V_GEN) (echo '[Test]' > $@.tmp; \
++ 	echo 'Type=session' >> $@.tmp; \
++ 	echo 'Exec=env G_TEST_SRCDIR=$(installed_testdir) G_TEST_BUILDDIR=$(installed_testdir) $(installed_testdir)/$(notdir $<)' >> $@.tmp; \
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-tests-Handle-EPIPE-failures-when-head-terminates.patch b/meta-oe/recipes-extended/ostree/ostree/0001-tests-Handle-EPIPE-failures-when-head-terminates.patch
+new file mode 100644
+index 000000000000..fdb733ebe4f2
+--- /dev/null
++++ b/meta-oe/recipes-extended/ostree/ostree/0001-tests-Handle-EPIPE-failures-when-head-terminates.patch
+@@ -0,0 +1,51 @@
++From fb519f0361565cad0d340095263a1e8866ec4f89 Mon Sep 17 00:00:00 2001
++From: Alex Kiernan <alex.kiernan@gmail.com>
++Date: Thu, 31 Oct 2019 11:30:00 +0000
++Subject: [PATCH 1/3] tests: Handle EPIPE failures when head terminates
++
++When using musl, it appears that the default is line buffered output, so
++when `head -1` reads from a pipe we have to handle the source end of the
++pipe getting EPIPE.
++
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++Upstream-Status: Accepted [v2019.6]
++---
++ tests/pull-test.sh            | 2 +-
++ tests/test-pull-mirrorlist.sh | 4 ++--
++ 2 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/tests/pull-test.sh b/tests/pull-test.sh
++index 0a97a1195582..2cfd8e02f790 100644
++--- a/tests/pull-test.sh
+++++ b/tests/pull-test.sh
++@@ -177,7 +177,7 @@ if ! skip_one_without_user_xattrs; then
++     ${CMD_PREFIX} ostree --repo=cacherepo pull-local ostree-srv/gnomerepo main
++     rev=$(ostree --repo=cacherepo rev-parse main)
++     ${CMD_PREFIX} ostree --repo=cacherepo ls -R -C main > ls.txt
++-    regfile_hash=$(grep -E -e '^-0' ls.txt | head -1 | awk '{ print $5 }')
+++    regfile_hash=$((grep -E -e '^-0' ls.txt || true) | head -1 | awk '{ print $5 }')
++     ${CMD_PREFIX} ostree --repo=repo remote add --set=gpg-verify=false corruptrepo $(cat httpd-address)/ostree/corruptrepo
++     # Make this a loop so in the future we can add more object types like commit etc.
++     for object in ${regfile_hash}.file; do
++diff --git a/tests/test-pull-mirrorlist.sh b/tests/test-pull-mirrorlist.sh
++index 4e44852d3971..85ff66e99f8e 100755
++--- a/tests/test-pull-mirrorlist.sh
+++++ b/tests/test-pull-mirrorlist.sh
++@@ -47,12 +47,12 @@ setup_mirror content_mirror3
++ 
++ # Let's delete a file from 1 so that it falls back on 2
++ cd ${test_tmpdir}/content_mirror1/ostree/gnomerepo
++-filez=$(find objects/ -name '*.filez' | head -n 1)
+++filez=$((find objects/ -name '*.filez' || true) | head -n 1)
++ rm ${filez}
++ 
++ # Let's delete a file from 1 and 2 so that it falls back on 3
++ cd ${test_tmpdir}/content_mirror1/ostree/gnomerepo
++-filez=$(find objects/ -name '*.filez' | head -n 1)
+++filez=$((find objects/ -name '*.filez' || true) | head -n 1)
++ rm ${filez}
++ cd ${test_tmpdir}/content_mirror2/ostree/gnomerepo
++ rm ${filez}
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-tests-core-Fallback-to-en_US.UTF-8-locale.patch b/meta-oe/recipes-extended/ostree/ostree/0001-tests-core-Fallback-to-en_US.UTF-8-locale.patch
+new file mode 100644
+index 000000000000..dcafb0995784
+--- /dev/null
++++ b/meta-oe/recipes-extended/ostree/ostree/0001-tests-core-Fallback-to-en_US.UTF-8-locale.patch
+@@ -0,0 +1,42 @@
++From 4d17cd917fe4fb67d2f9e4881b6693ac7289f423 Mon Sep 17 00:00:00 2001
++From: Alex Kiernan <alex.kiernan@gmail.com>
++Date: Wed, 30 Oct 2019 07:55:41 +0000
++Subject: [PATCH 1/4] tests/core: Fallback to en_US.UTF-8 locale
++
++A number of tests expect explicit left/right single quotes in their
++messages, which will never happen in the C locale. Change so we pick a
++likely UTF-8 locale, or fail if we can't find one.
++
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++Upstream-Status: Accepted [v2019.6]
++---
++ tests/libtest-core.sh | 12 ++++--------
++ 1 file changed, 4 insertions(+), 8 deletions(-)
++
++diff --git a/tests/libtest-core.sh b/tests/libtest-core.sh
++index f6f94288fc61..bc191332c916 100644
++--- a/tests/libtest-core.sh
+++++ b/tests/libtest-core.sh
++@@ -35,15 +35,11 @@ assert_not_reached () {
++ }
++ 
++ # Some tests look for specific English strings. Use a UTF-8 version
++-# of the C (POSIX) locale if we have one, or fall back to POSIX
+++# of the C (POSIX) locale if we have one, or fall back to en_US.UTF-8
++ # (https://sourceware.org/glibc/wiki/Proposals/C.UTF-8)
++-if locale -a | grep '^C.UTF-8$' >/dev/null; then
++-    export LC_ALL=C.UTF-8
++-elif locale -a | grep '^C.utf8$' >/dev/null; then
++-    export LC_ALL=C.utf8
++-else
++-    export LC_ALL=C
++-fi
+++export LC_ALL=$(locale -a | grep -Ee '\.(UTF-8|utf8)' | grep -iEe '^(C|en_US)' | head -1 || true)
+++if [ -z "${LC_ALL}" ]; then fatal "Can't find suitable UTF-8 locale"; fi
+++
++ # A GNU extension, used whenever LC_ALL is not C
++ unset LANGUAGE
++ 
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch b/meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
+deleted file mode 100644
+index 362b2f36ab51..000000000000
+--- a/meta-oe/recipes-extended/ostree/ostree/0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch
++++ /dev/null
+@@ -1,51 +0,0 @@
+-From 2629328b39ae117876f4854409c2231220a30b9c Mon Sep 17 00:00:00 2001
+-From: Alex Kiernan <alex.kiernan@gmail.com>
+-Date: Thu, 5 Sep 2019 13:22:15 +0100
+-Subject: [PATCH 2/2] Gate ostree-trivial-httpd on BUILDOPT_TRIVIAL_HTTPD
+-
+-When building without --enable-trivial-httpd-cmdline, don't build or install
+-the ostree-trivial-httpd binary.
+-
+-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+-Upstream-Status: Submitted [https://github.com/ostreedev/ostree/pull/1912]
+----
+- Makefile-ostree.am | 3 ++-
+- configure.ac       | 3 +++
+- 2 files changed, 5 insertions(+), 1 deletion(-)
+-
+-diff --git a/Makefile-ostree.am b/Makefile-ostree.am
+-index 76f39cad4b74..7b53cb148960 100644
+---- a/Makefile-ostree.am
+-+++ b/Makefile-ostree.am
+-@@ -143,12 +143,13 @@ ostree_SOURCES += src/ostree/ot-builtin-pull.c
+- endif
+- 
+- if USE_LIBSOUP
+--# Eventually once we stop things from using this, we should support disabling this
+-+if BUILDOPT_TRIVIAL_HTTPD
+- ostree_SOURCES += src/ostree/ot-builtin-trivial-httpd.c
+- pkglibexec_PROGRAMS += ostree-trivial-httpd
+- ostree_trivial_httpd_SOURCES = src/ostree/ostree-trivial-httpd.c
+- ostree_trivial_httpd_CFLAGS = $(ostree_bin_shared_cflags) $(OT_INTERNAL_SOUP_CFLAGS)
+- ostree_trivial_httpd_LDADD = $(ostree_bin_shared_ldadd) $(OT_INTERNAL_SOUP_LIBS)
+-+endif
+- 
+- if !USE_CURL
+- # This is necessary for the cookie jar bits
+-diff --git a/configure.ac b/configure.ac
+-index 069bab01752e..ffc67980d507 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -192,6 +192,9 @@ AC_ARG_ENABLE(trivial-httpd-cmdline,
+-   [Continue to support "ostree trivial-httpd" [default=no]])],,
+-   enable_trivial_httpd_cmdline=no)
+- AM_CONDITIONAL(BUILDOPT_TRIVIAL_HTTPD, test x$enable_trivial_httpd_cmdline = xyes)
+-+AS_IF([test x$with_soup = xno && test x$enable_trivial_httpd_cmdline = xyes], [
+-+  AC_MSG_ERROR([trivial-httpd enabled, but libsoup is not; libsoup is needed for trivial-httpd])
+-+])
+- AM_COND_IF(BUILDOPT_TRIVIAL_HTTPD,
+-   [AC_DEFINE([BUILDOPT_ENABLE_TRIVIAL_HTTPD_CMDLINE], 1, [Define if we are enabling ostree trivial-httpd entrypoint])]
+- )
+--- 
+-2.17.1
+-
+diff --git a/meta-oe/recipes-extended/ostree/ostree/0002-tests-core-Assume-C.UTF-8-if-locale-isn-t-found.patch b/meta-oe/recipes-extended/ostree/ostree/0002-tests-core-Assume-C.UTF-8-if-locale-isn-t-found.patch
+new file mode 100644
+index 000000000000..5ab9c8f6d75c
+--- /dev/null
++++ b/meta-oe/recipes-extended/ostree/ostree/0002-tests-core-Assume-C.UTF-8-if-locale-isn-t-found.patch
+@@ -0,0 +1,40 @@
++From 3d48021fb0892721fab8359b49470e521aaed493 Mon Sep 17 00:00:00 2001
++From: Alex Kiernan <alex.kiernan@gmail.com>
++Date: Thu, 31 Oct 2019 11:28:07 +0000
++Subject: [PATCH 2/3] tests/core: Assume C.UTF-8 if locale isn't found
++
++When building with musl there's no locale command, also its default
++locale is C.UTF-8, so just get C.UTF-8 if we can't find locale.
++
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++Upstream-Status: Accepted [v2019.6]
++---
++ tests/libtest-core.sh | 12 +++++++++---
++ 1 file changed, 9 insertions(+), 3 deletions(-)
++
++diff --git a/tests/libtest-core.sh b/tests/libtest-core.sh
++index bc191332c916..46aafab03cc8 100644
++--- a/tests/libtest-core.sh
+++++ b/tests/libtest-core.sh
++@@ -37,9 +37,15 @@ assert_not_reached () {
++ # Some tests look for specific English strings. Use a UTF-8 version
++ # of the C (POSIX) locale if we have one, or fall back to en_US.UTF-8
++ # (https://sourceware.org/glibc/wiki/Proposals/C.UTF-8)
++-export LC_ALL=$(locale -a | grep -Ee '\.(UTF-8|utf8)' | grep -iEe '^(C|en_US)' | head -1 || true)
++-if [ -z "${LC_ALL}" ]; then fatal "Can't find suitable UTF-8 locale"; fi
++-
+++#
+++# If we can't find the locale command assume we have support for C.UTF-8
+++# (e.g. musl based systems)
+++if type -p locale >/dev/null; then
+++    export LC_ALL=$(locale -a | grep -Ee '\.(UTF-8|utf8)' | grep -iEe '^(C|en_US)' | head -1 || true)
+++    if [ -z "${LC_ALL}" ]; then fatal "Can't find suitable UTF-8 locale"; fi
+++else
+++    export LC_ALL=C.UTF-8
+++fi
++ # A GNU extension, used whenever LC_ALL is not C
++ unset LANGUAGE
++ 
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/ostree/ostree/0003-tests-Avoid-musl-failure-with-cp-a.patch b/meta-oe/recipes-extended/ostree/ostree/0003-tests-Avoid-musl-failure-with-cp-a.patch
+new file mode 100644
+index 000000000000..834617c12d96
+--- /dev/null
++++ b/meta-oe/recipes-extended/ostree/ostree/0003-tests-Avoid-musl-failure-with-cp-a.patch
+@@ -0,0 +1,52 @@
++From abf1a7392b2fa1945286a39a35190d74fe141e52 Mon Sep 17 00:00:00 2001
++From: Alex Kiernan <alex.kiernan@gmail.com>
++Date: Thu, 31 Oct 2019 17:09:36 +0000
++Subject: [PATCH 3/3] tests: Avoid musl failure with `cp -a`
++
++When copying the tree, using musl and GNU coreutils, something gets confused
++when setting the ownership of symlinks and the copy fails with:
++
++  cp: failed to preserve ownership for osdata-devel/bin: Not supported
++
++Rework using tar to avoid the problem.
++
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++Upstream-Status: Accepted [v2019.6]
++---
++ tests/libtest.sh        | 4 +++-
++ tests/test-admin-gpg.sh | 4 +++-
++ 2 files changed, 6 insertions(+), 2 deletions(-)
++
++diff --git a/tests/libtest.sh b/tests/libtest.sh
++index ba00073a10a7..3f5fd931bc1e 100755
++--- a/tests/libtest.sh
+++++ b/tests/libtest.sh
++@@ -440,7 +440,9 @@ EOF
++     ${CMD_PREFIX} ostree --repo=${test_tmpdir}/testos-repo commit --add-metadata-string version=1.0.10 -b testos/buildmaster/x86_64-runtime -s "Build"
++ 
++     cd ${test_tmpdir}
++-    cp -a osdata osdata-devel
+++    rm -rf osdata-devel
+++    mkdir osdata-devel
+++    tar -C osdata -cf - . | tar -C osdata-devel -xf -
++     cd osdata-devel
++     mkdir -p usr/include
++     echo "a development header" > usr/include/foo.h
++diff --git a/tests/test-admin-gpg.sh b/tests/test-admin-gpg.sh
++index 1f50c8a9a508..dc776743776c 100755
++--- a/tests/test-admin-gpg.sh
+++++ b/tests/test-admin-gpg.sh
++@@ -90,7 +90,9 @@ EOF
++     ${CMD_PREFIX} ostree --repo=${test_tmpdir}/testos-repo commit --add-metadata-string version=1.0.10 -b testos/buildmaster/x86_64-runtime -s "Build" --gpg-sign=$keyid --gpg-homedir=${test_tmpdir}/gpghome
++ 
++     cd ${test_tmpdir}
++-    cp -a osdata osdata-devel
+++    rm -rf osdata-devel
+++    mkdir osdata-devel
+++    tar -C osdata -cf - . | tar -C osdata-devel -xf -
++     cd osdata-devel
++     mkdir -p usr/include
++     echo "a development header" > usr/include/foo.h
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-extended/ostree/ostree/run-ptest b/meta-oe/recipes-extended/ostree/ostree/run-ptest
+new file mode 100644
+index 000000000000..963d1f69285d
+--- /dev/null
++++ b/meta-oe/recipes-extended/ostree/ostree/run-ptest
+@@ -0,0 +1,3 @@
++#! /bin/sh
++
++gnome-desktop-testing-runner libostree
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb b/meta-oe/recipes-extended/ostree/ostree_2019.4.bb
+index 505c9fcccc59..f438b35ebee2 100644
 --- a/meta-oe/recipes-extended/ostree/ostree_2019.4.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-@@ -32,7 +32,7 @@ SRC_URI = " \
-     file://0003-tests-Avoid-musl-failure-with-cp-a.patch \
-     file://0001-build-create-tests-directory-for-split-builds.patch \
++++ b/meta-oe/recipes-extended/ostree/ostree_2019.4.bb
+@@ -25,8 +25,12 @@ PREMIRRORS = ""
+ SRC_URI = " \
+     gitsm://github.com/ostreedev/ostree \
+     file://0001-macros-Add-TEMP_FAILURE_RETRY-for-musl.patch \
+-    file://0001-Always-enable-trivial-httpd-for-tests.patch \
+-    file://0002-Gate-ostree-trivial-httpd-on-BUILDOPT_TRIVIAL_HTTPD.patch \
++    file://run-ptest \
++    file://0001-tests-core-Fallback-to-en_US.UTF-8-locale.patch \
++    file://0001-tests-Handle-EPIPE-failures-when-head-terminates.patch \
++    file://0002-tests-core-Assume-C.UTF-8-if-locale-isn-t-found.patch \
++    file://0003-tests-Avoid-musl-failure-with-cp-a.patch \
++    file://0001-build-create-tests-directory-for-split-builds.patch \
  "
--SRCREV = "9d39e7d91e8497987cad69a3fbed5c5fc91eebdc"
-+SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
+ SRCREV = "9d39e7d91e8497987cad69a3fbed5c5fc91eebdc"
  
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
+@@ -34,9 +38,9 @@ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
  
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools bash-completion gobject-introspection gtk-doc pkgconfig systemd
++inherit autotools bash-completion gobject-introspection gtk-doc pkgconfig ptest-gnome systemd
+ 
+-# package configuration - match ostree defaults, but without rofiles-fuse
++# Package configuration - match ostree defaults, but without rofiles-fuse
+ # otherwise we introduce a dependendency on meta-filesystems
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+@@ -107,6 +111,7 @@ PACKAGES += " \
+     ${PN}-grub \
+     ${PN}-mkinitcpio \
+     ${PN}-switchroot \
++    ${PN}-trivial-httpd \
+ "
+ 
+ FILES_${PN} = " \
+@@ -118,7 +123,6 @@ FILES_${PN} = " \
+     ${libdir}/girepository-1.0 \
+     ${libdir}/lib*${SOLIBS} \
+     ${libdir}/tmpfiles.d/ostree-tmpfiles.conf \
+-    ${libexecdir}/libostree/ostree-trivial-httpd \
+     ${sysconfdir}/ostree/remotes.d \
+     ${systemd_unitdir}/system-generators/ostree-system-generator \
+     ${systemd_unitdir}/system/ostree-finalize-staged.path \
+@@ -141,17 +145,48 @@ FILES_${PN}-switchroot = " \
+     ${libdir}/ostree/ostree-prepare-root \
+     ${systemd_unitdir}/system/ostree-prepare-root.service \
+ "
++FILES_${PN}-trivial-httpd = " \
++    ${libexecdir}/libostree/ostree-trivial-httpd \
++"
+ 
++RDEPENDS_${PN} = " \
++    ${@bb.utils.contains('PACKAGECONFIG', 'trivial-httpd-cmdline', '${PN}-trivial-httpd', '', d)} \
++"
+ RDEPENDS_${PN}-dracut = "bash"
+ RDEPENDS_${PN}-mkinitcpio = "bash"
+ RDEPENDS_${PN}_class-target = " \
+     gnupg \
+     ${PN}-switchroot \
+ "
++RDEPENDS_${PN}-ptest += " \
++    attr \
++    bash \
++    coreutils \
++    cpio \
++    diffutils \
++    findutils \
++    grep \
++    python3-core \
++    python3-multiprocessing \
++    python3-pyyaml \
++    ${PN}-trivial-httpd \
++"
++RDEPENDS_${PN}-ptest_append_libc-glibc = " glibc-utils glibc-localedata-en-us"
+ 
+ RRECOMMENDS_${PN} += "kernel-module-overlay"
++RRECOMMENDS_${PN}-ptest += "strace"
+ 
+ SYSTEMD_SERVICE_${PN} = "ostree-remount.service ostree-finalize-staged.path"
+ SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
+ 
+ BBCLASSEXTEND = "native"
++
++python __anonymous() {
++    if bb.utils.contains('PTEST_ENABLED', '1', 'True', 'False', d):
++        if 'meta-python' not in d.getVar('BBFILE_COLLECTIONS').split():
++            raise bb.parse.SkipRecipe('ptest requires meta-python to be present.')
++        elif 'soup' not in d.getVar('PACKAGECONFIG').split():
++            raise bb.parse.SkipRecipe('ptest requires soup enabled in PACKAGECONFIG.')
++        elif not oe.utils.any_distro_features(d, "xattr"):
++            raise bb.parse.SkipRecipe('ptest requires xattr enabled in DISTRO_FEATURES.')
++}
 -- 
 2.17.1
 
