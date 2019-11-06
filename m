@@ -1,46 +1,37 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f43.google.com (mail-io1-f43.google.com
-	[209.85.166.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D18D7F7C3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2019 20:54:31 +0000 (UTC)
-Received: by mail-io1-f43.google.com with SMTP id s17so28462198iol.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Nov 2019 12:54:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=UkSrHMSV8oy+lkdPScPotQ7NIq4Fvzo2kSaAbPPnBlQ=;
-	b=OQbomCGytzqUeSPc0aS3j/eEagalsJsQS1uPKh0Z3iLeEYtgAhWiCzj6dmUrnQAIjQ
-	HkinSsCqibpFGcxJbPb1vjBwbXO7Vnag/GqJECmIfLqFCGWQNb90PsjvSykGi7OJkXSE
-	V19x60zgAiIYmMM78f2DFuwMo2QWy67VA84OCZR9lMPU4WZHHREQC7+7qTud0hpAyhuc
-	RM/WMNy5Zj62v1Vi05Qg5xArfHgPQBxS+3VOaqzHTvbnrX/ltBAUsCig5NMoZJwnstMT
-	JWLEAN6cAfSbZYBsqsmlWGJODfI6+EH1OR5FT43JiY12OEUUJ3D7fJYB9U9mox6lmKai
-	uDJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=UkSrHMSV8oy+lkdPScPotQ7NIq4Fvzo2kSaAbPPnBlQ=;
-	b=ZYce+bw3vFjD0z75qFN0nV6WFDXA2DJwOl/2cZaZMmXb2mMU5wQ7gHJ6dOsreLgeqG
-	9iSBDovalODjA6GUjVY2TqIqh8FjUtHHV+OgnZ8qQV4qR0LS3xCZ9mZcOcQ2iZkCpECu
-	LsA72pkKbS4AwC0DHVJwY5Pvl+MT6uodYStb5MANZ3WX1FEqy66AsjYIj3jT+LKm9grV
-	+zlAZKT/A5mbQP+rU32je/Dzr8vdz4utcGXhIFnwwD+9izwGtBm1lTCtl5iIFgbAOOTb
-	JGfwwm+i3jc5A7zV1l4wK/NAsXLX8BM26u5UaPKEbbcQ3Cx68Y4zAJOCOe6bI72EeJAI
-	prew==
-X-Gm-Message-State: APjAAAWdv51LeX/iRYwwZuY5ExB17C+T4n+5VS/dVCPjyKrJhsagRTIh
-	ozK8U0bouVwenDkG27OTLOr6viArW3pA+TDuIZQ=
-X-Google-Smtp-Source: APXvYqyCqYa0ZiUSWHNcOFK5ofpXegvNaqIOWepPQzRwRzssgatmHajmck8CIaZZ4FJieklYso+8S54kLeRjO4YnKQs=
-X-Received: by 2002:a02:77d5:: with SMTP id g204mr6082jac.125.1573073672118;
-	Wed, 06 Nov 2019 12:54:32 -0800 (PST)
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id CF4477F7DA;
+	Wed,  6 Nov 2019 21:41:11 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 477g2Z3tmdz9v;
+	Wed,  6 Nov 2019 22:41:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1573076470;
+	bh=l2Gxf3HpoIo8ARDKF61anQdWtuHoxneZqIYYSNtmaro=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=THxfQ8kbwedo4zPNHKHopMttbcSVr1FjOi2ZMVQDToNAoGnLmPV/FpqQf6zPLA6qt
+	bAyxl4IxFUpj6FqT5gz2g3iMFO7PLDswMwrQWJOVHPiECPuGpiPWlqNZW3JcvhS4eY
+	oQrSTkVofUpsC5zhUySF/ZtHy1gry4KC/ANk6QH1OEgSWjeIApr+mK9PNgVM+pqjSN
+	u7Y58HOABfevvrJFg7mCJLpG8Y7rkDTMKJrmM09z/mbasmDLBvAwYwx93puX1I+BHY
+	ozjIjYT3xEODwz9WEwNpHafRYZxV/c8a2VnYc0fGgKaI0SCzIgZ1X8uEj2Yu0avCBi
+	zTbSoLqP8qZWt58/M1FRaDQJjte2sIdNprK/VcBqu68LV53+MFoiAnDOuhCyTBtS3h
+	E4iRgP1vKIwgEyHlak0QpGg8EyQpIPDFT2Hn/Evd/W7P94R7+hol9zq543b3/485aq
+	zwq+cLNQzcIGlgSVip42MfAI6EYrrx5EC6ZVR+PTsR7/jLmBVDlDHQZFBfFgEUF/pK
+	Deh748DDYGzI0RTCzY9mJhdKrRFqjPkPyty6zoDDw8Jh3kHB1cI2WrQjofRw1/nkmD
+	HOYWuFifklZcrytiObsjfZr2hNyFWnsdv6M/mSEk9eMp0Zx5ldM/v1oyQFJXaSKc7K
+	u3fof44ThkkwcFFTxlvAlwzA=
+Date: Wed, 6 Nov 2019 23:41:08 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Paul Barker <paul@betafive.co.uk>
+Message-ID: <20191106214108.GC14721@localhost>
+References: <ab96ec4a-5dcb-4d01-8519-13c00094a44c@www.fastmail.com>
 MIME-Version: 1.0
-References: <1573051950-45551-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1573051950-45551-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 6 Nov 2019 21:54:20 +0100
-Message-ID: <CALbNGRT0WBKd-rm2_BjE2-NJaDT_zf9GQafwZu-T4U2e6_BDgg@mail.gmail.com>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libpeas: upgrade 1.22.0 -> 1.24.0
+In-Reply-To: <ab96ec4a-5dcb-4d01-8519-13c00094a44c@www.fastmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Yocto discussion list <yocto@yoctoproject.org>,
+	OE Architecture <openembedded-architecture@lists.openembedded.org>,
+	OE Devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [yocto] Using GitLab for OE/Yocto layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,69 +44,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2019 20:54:31 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 06 Nov 2019 21:41:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Wed, Nov 6, 2019 at 12:45 PM Zheng Ruoqin
-<zhengrq.fnst@cn.fujitsu.com> wrote:
->
-> Change buildtool from autotools to meson with version upgrade.
->
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+On Wed, Nov 06, 2019 at 04:01:03PM +0000, Paul Barker wrote:
+>...
+> At the risk of bikeshedding I'd like to get some feedback on these ideas at this stage. Have I missed any advantages/disadvantages?
+>...
 
-have similar:
+Three comments from me:
 
-+ cleanup dependencies
-+ -> V1.24.1
-+ remove distro_features_check
-+ GIR_EXTRA_LIBS_PATH can go
 
-Was just sent - sorry for chiming in again
+1. Patch review
 
-Andreas
+Merge requests work well when there is one maintainer who reviews 
+everything. For not regressing on the current level of review before
+something hits master, merging a merge request into master-next
+should then result in patch review emails sent to a list.
+Or a setup where creation of a merge request automatically generates
+review emails.
 
-> ---
->  .../libpeas/{libpeas_1.22.0.bb => libpeas_1.24.0.bb}          | 11 +++++------
->  1 file changed, 5 insertions(+), 6 deletions(-)
->  rename meta-oe/recipes-gnome/libpeas/{libpeas_1.22.0.bb => libpeas_1.24.0.bb} (58%)
->
-> diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.24.0.bb
-> similarity index 58%
-> rename from meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
-> rename to meta-oe/recipes-gnome/libpeas/libpeas_1.24.0.bb
-> index dd1b53e..33c5fbb 100644
-> --- a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
-> +++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.24.0.bb
-> @@ -5,16 +5,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
->
->  DEPENDS = "gnome-common gtk+3 intltool-native"
->
-> +GNOMEBASEBUILDCLASS = "meson"
->  inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache distro_features_check
->
-> -# gobject-introspection is mandatory and cannot be configured
-> -REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-> -UNKNOWN_CONFIGURE_WHITELIST_append = " --enable-introspection --disable-introspection"
-> +GTKDOC_MESON_OPTION = "gtk_doc"
->
-> -SRC_URI[archive.md5sum] = "a20dc55c3f88ad06da9491cfd7de7558"
-> -SRC_URI[archive.sha256sum] = "5b2fc0f53962b25bca131a5ec0139e6fef8e254481b6e777975f7a1d2702a962"
-> +SRC_URI[archive.md5sum] = "7a136eea60930012deff2f7bfa3673be"
-> +SRC_URI[archive.sha256sum] = "0b9a00138c129a663de3eef5569b00ace03ce31d345f7af783768e9f35c8e6f9"
->
-> -PACKAGECONFIG[python3] = "--enable-python3,--disable-python3,python3-pygobject"
-> +PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
->
->  export GIR_EXTRA_LIBS_PATH = "${B}/libpeas/.libs"
->
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+This is similar to all patches for stable branches now being sent for 
+review to the mailing list a few days before they get merged into the 
+stable branch, which has caught problematic patches due to more people 
+reviewing them.
+
+
+2. Maintaining an own GitLab instance
+
+This was mentioned as an option. Expect upgrades to new GitLab releases 
+once per month, which is work and as with all software never without 
+regression risk.
+
+Not a dealbreaker, but has to be resourced.
+
+
+3. Long-term suistainability
+
+Whatever the past track record of GitLab is, chances are the company 
+behind it will sooner or later be bought by another company - and then 
+anything can happen.
+
+The code behind SourceForge was also at some point made available under
+an open source licence, and forks being used in instances like Debian
+Alioth ended up being unmaintainable dead ends long-term.
+
+Berkeley DB would be an example where the company behind the software 
+was bought by another company, and now there are plenty of CVEs that
+are unfixable due to changed licencing.
+
+Is there anyone capable and willing to continue open source maintainance 
+of the GitLab open source sources if the company behind it would stop 
+the open source releases tomorrow?
+
+With projects like GNOME using GitLab the answer might be "yes",
+but this should be evaluated before moving infrastructure to GitLab.
+
+
+> Paul Barker
+
+cu
+Adrian
+
+-- 
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
+
 
