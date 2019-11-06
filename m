@@ -1,60 +1,47 @@
-Return-Path: <paul@betafive.co.uk>
-X-Greylist: delayed 611 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 06 Nov 2019 16:11:35 UTC
-Received: from out5-smtp.messagingengine.com (out5-smtp.messagingengine.com
-	[66.111.4.29])
-	by mail.openembedded.org (Postfix) with ESMTP id DB7837F7C8;
-	Wed,  6 Nov 2019 16:11:35 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-	by mailout.nyi.internal (Postfix) with ESMTP id 0FA8C2212F;
-	Wed,  6 Nov 2019 11:01:24 -0500 (EST)
-Received: from imap2 ([10.202.2.52])
-	by compute1.internal (MEProxy); Wed, 06 Nov 2019 11:01:24 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=betafive.co.uk;
-	h=mime-version:message-id:date:from:to:subject:content-type; s=
-	fm2; bh=K/ie/aHI5wWDLouwAuP/q5rC78xsZUEV6zOsmUGp5Do=; b=hXfH+tLG
-	T9yFPi/bJ1+0AUy0qizmGP4scCb/f8UjsSNTuBRRb6sZxuNGO3ZDS+k+KiL37xj8
-	myScK3TXuE3po86JqKhYZEWNJoP0wwbD88uajSXo1QFpBl0ubIhHjEO123mxt013
-	EC21gTJXIh9BEppCiXXcYklw4my8rPYcDjmo9Sb4Gau0I35dSPN7gQNWOEffcAhc
-	CkqXs/+zoG5RO9FpFzGce87TRACu6isEone46RIW8KqjoqWWovSCfsyNxpjlRDfU
-	utd73C79EsOvhscypPt1Smnn2gVf6v6+lKiCLWyWUgc5QJU2+Pa04B/kIx1Idk06
-	aJzBesuVcnC70Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=content-type:date:from:message-id
-	:mime-version:subject:to:x-me-proxy:x-me-proxy:x-me-sender
-	:x-me-sender:x-sasl-enc; s=fm1; bh=K/ie/aHI5wWDLouwAuP/q5rC78xsZ
-	UEV6zOsmUGp5Do=; b=dugMcMEO4AVvD5+1xx58GI5GeYIHWLXg+qu0MbslKJKwr
-	RVMpW6oLr3mkcTCjSW5Krw2AXUnNmgsOC27i/TOL0QJULF+OncB8D8sh8dndmFiS
-	/5tR7G9fLYVFtG3WFakEVsvJxX0C13OhBvJBsAPushraSrJaV1pyvUpTLX8Z0n0b
-	TmPOHeRJhHdSDH/G0gcT8D7hntU9F1sV4ljRnEqP8JexLja5frNSs0usPPWEFbs9
-	s8jOMiZrnmHSxB05BPprfTxgF0Z3Xu9LJ/IlC+pd2pvHY7nbFMghozL2ncpUQMEQ
-	1nCawZeszZ7fKXx5W5VrSQ1q+Lu6XSo2GdLMbPKIQ==
-X-ME-Sender: <xms:U-7CXeeQpNnfaBrOCIdr2Ybmhn_h3X2q0txR9t_QhOfkKNpfy0Vhhw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedufedruddujedgkeehucetufdoteggodetrfdotf
-	fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-	uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-	goufhushhpvggtthffohhmrghinhculdegledmnecujfgurhepofgfggfkfffhvffutges
-	thdtredtreertdenucfhrhhomhepfdfrrghulhcuuegrrhhkvghrfdcuoehprghulhessg
-	gvthgrfhhivhgvrdgtohdruhhkqeenucffohhmrghinhepghhoohhglhgvrdgtohhmpdhg
-	ihhtlhgrsgdrtghomhdphihotghtohhprhhojhgvtghtrdhorhhgpdhophgvnhgvmhgsvg
-	guuggvugdrohhrghenucfrrghrrghmpehmrghilhhfrhhomhepphgruhhlsegsvghtrghf
-	ihhvvgdrtghordhukhenucevlhhushhtvghrufhiiigvpedt
-X-ME-Proxy: <xmx:U-7CXUVVpM-Jz4TicbPk-xfUooobvbmU1Xz0IihC2zHRcBvcRCMITQ>
-	<xmx:U-7CXU8rRFCXIHxQk7B0s2tFJ_0HgzWSbTgJ_8AQiZJCr0RCF5D2aQ>
-	<xmx:U-7CXbNXrRqHPAFohQgnEvNIjq7lJOtai7rmuUW7x85eYMJo2Eitpw>
-	<xmx:U-7CXdWJ15C0WNkggTIYgBpzZa_Lkrdi6x2NzM-ttrOAeR_hQmwHiQ>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id 7C919E00AE; Wed,  6 Nov 2019 11:01:23 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.1.7-509-ge3ec61c-fmstable-20191030v1
-Mime-Version: 1.0
-Message-Id: <ab96ec4a-5dcb-4d01-8519-13c00094a44c@www.fastmail.com>
-Date: Wed, 06 Nov 2019 16:01:03 +0000
-From: "Paul Barker" <paul@betafive.co.uk>
-To: "Yocto discussion list" <yocto@yoctoproject.org>,
-	"OE Devel" <openembedded-devel@lists.openembedded.org>,
-	"OE Architecture" <openembedded-architecture@lists.openembedded.org>
-Subject: Using GitLab for OE/Yocto layers
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
+	[209.85.160.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 914DB7F822
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  6 Nov 2019 17:42:13 +0000 (UTC)
+Received: by mail-qt1-f172.google.com with SMTP id u22so34561680qtq.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Nov 2019 09:42:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=hfwM+tQI5s64j2xOu3HOI+kFwKLvGrHS3UajLRFDSpA=;
+	b=fcupYoA/zpHUOdTDuW5wvisDACR0X+6ST0+Q/7d38vDJEYENW7GwKuWdOpN6Uw4HuP
+	wGai9hIszHRU6r8FaoMx/rVwN5IhAjWEof7D4SOOtzXK/cbeJtPHinJu5sxJTYZv2bWv
+	Grc95rlOYPPbj2KyAs3HNECYIhzgb43HRq23dtDZU/uCKzavHDVFimu4MDylPamMco3p
+	voRVH8ASPBSB0mCxZEL4AEvBtaqSPEN8nQMRiLWw6upJ0/cqcWsn56Ays9Hj6Es4PKsH
+	+jAj/u+EdrZePOKeNZ2WJUI4zybqwmeQCiA70GkuO3nSxokVsgXj95p2v+PXwvCnDfve
+	0hpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=hfwM+tQI5s64j2xOu3HOI+kFwKLvGrHS3UajLRFDSpA=;
+	b=kHrDr3qDBDoI0ADbOsCYuPsWs36ZySPXwhZ8F/P7I4lcJirIeAJTDNZu/Iw6AOAWqX
+	6NRiz9YC/u+X58iI0iDBFv6ta/xK9yzNV90fwDmBUvkFnqDEfZg7lz8BisEs1GBPPgUx
+	3F7jMYLolg4KjyrolyFLutA0jlWgeTZEoMUoVjVx3hZHOJx2h6T7KOZpU4/TfF/sG4y/
+	K0aoeiFbt6XE4yD2njJfO3JrO6JpeUHHHJHANLQlv9dXjcLPNZ2izxn3DnxJjbR6X5Xd
+	ekCPN748T7d6uAAIgJPRveDk6IUPBWfKApLXYIg8I59ROIQvqX9kSw3cVJQrQn0ADzgD
+	1sVA==
+X-Gm-Message-State: APjAAAUlhDufyjXd5A+yXNrRtY2Vx6qO6aKhH7Ye19iiLV6aAb08KKoB
+	6QSsy66soPnAUcjudpLtoWDD/tkdBBA1ameB3Gk=
+X-Google-Smtp-Source: APXvYqy/onnnfC5obqDu4u1A2MQYyv6dJOlUgE0Kgc7ihR42OOCU6CGK9/HkGRSFO7BaKsD977UJm6uf11+lXZ3cy/0=
+X-Received: by 2002:ac8:1415:: with SMTP id k21mr3540633qtj.80.1573062134132; 
+	Wed, 06 Nov 2019 09:42:14 -0800 (PST)
+MIME-Version: 1.0
+References: <1573042209-43148-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1573042209-43148-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 6 Nov 2019 09:42:03 -0800
+Message-ID: <CAMKF1sqQiw0VKxO+PvQ89LmiuW9p5FZmX6L=mcAvFQk2JLwjfg@mail.gmail.com>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] ccid: upgrade 1.4.30 -> 1.4.31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,39 +54,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2019 16:11:36 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 06 Nov 2019 17:42:13 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hey folks,
+Please submit this patch upstream too
 
-We had some initial discussion at OEDEM about the patch submission process and how repositories are hosted (see https://docs.google.com/document/d/1Qm1mJ6xLozWW9NgBnokue7TmhwgFP8b2HR8TUlaQwNs/edit#heading=h.o4qtddy8bh9i).
+On Wed, Nov 6, 2019 at 12:33 AM Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+wrote:
 
-Patch submission via mailing list still has some key features (such as ability to compose a patch response offline) and I don't expect that the core OE/Yocto repositories will be changing their workflow in the short term. However, lots of tools and non-core layers already use a pull request model for patch submission, typically via GitHub or GitLab.
-
-I'd like to propose that we set up a common place for OE/Yocto repositories which want to use this pull request model and start to collaborate on some of the tooling. As discussed in OEDEM, GitLab has a few major advantages over GitHub, BitBucket, etc here as they've got a track record of working well with open source projects and we can run the software on our own infrastructure if desired. We can use something like https://gitlab.com/openembedded at first to trial things and then maybe move to https://gitlab.openembedded.org (or gitlab.yoctoproject.org) if things look good.
-
-I see the following advantages to this approach:
-
-* Increased bus factor for repository administration - several layers currently have only one admin or live in someone's personal GitHub account, we risk losing access to these if the person in question disappears.
-
-* Integrated issue tracking - we can standardise on a few issue labels and use milestones in GitLab to correspond to Yocto release branches. As the repositories would be in the same group we would be able to make use of group-level issue lists and boards to show issues across several layers.
-
-* Integrated merge request tracking - Similar to issues, we would be able to see a combined group-level list of open merge requests. This is a good view to use to help out other layer maintainers as you can easily see new merge requests across all repositories and pick a few to review.
-
-* Separation of patches to different repositories/branches - Where one mailing list takes patches for many repositories it's often confusing which repository or branch is the target for a given patch.
-
-* Easier contribution from behind corporate firewalls or buggy email servers - contribution is via ssh/https.
-
-* Subgroups - GitLab supports more than one layer of grouping so we can organise repositories even within the top level "openembedded" group.
-
-* Ability to enable/disable merge requests per-repository - With GitHub you can't disable pull requests. If your repository takes patches by another method you have to manually watch out for pull requests and comment on each one to tell the contributor how to submit patches. With GitLab this isn't necessary as you can just turn off merge requests for that repository.
-
-* Ability to standardise on automated testing - we can integrate patchtest and yocto-check-layer with GitLab CI and run these scripts on each merge request. This requires a bit of work in both test scripts to allow configuration as not all tests will be appropriate for all layers. However it's much easier than integrating these scripts with several incompatible repository hosts and CI systems.
-
-* Ability to standardise on security - If we want to we can enforce two-factor authentication (2FA) for logins, make use of the merge request approvals feature in GitLab, etc. We don't need to do that initially but it may be useful in the future.
-
-At the risk of bikeshedding I'd like to get some feedback on these ideas at this stage. Have I missed any advantages/disadvantages? Is anyone interested in helping to guinea pig this with a couple of layers/repositories to see how it works in practice?
-
--- 
-Paul Barker
+> 1) Add 0001-Add-build-rule-for-README.patch to fix do_configure error:
+>    Makefile.am: required file `./README' not found
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  .../ccid/ccid/0001-Add-build-rule-for-README.patch | 22
+> ++++++++++++++++++++++
+>  .../ccid/{ccid_1.4.30.bb => ccid_1.4.31.bb}        |  5 +++--
+>  2 files changed, 25 insertions(+), 2 deletions(-)
+>  create mode 100644
+> meta-oe/recipes-support/ccid/ccid/0001-Add-build-rule-for-README.patch
+>  rename meta-oe/recipes-support/ccid/{ccid_1.4.30.bb => ccid_1.4.31.bb}
+> (71%)
+>
+> diff --git
+> a/meta-oe/recipes-support/ccid/ccid/0001-Add-build-rule-for-README.patch
+> b/meta-oe/recipes-support/ccid/ccid/0001-Add-build-rule-for-README.patch
+> new file mode 100644
+> index 0000000..586ff18
+> --- /dev/null
+> +++
+> b/meta-oe/recipes-support/ccid/ccid/0001-Add-build-rule-for-README.patch
+> @@ -0,0 +1,22 @@
+> +Subject: [PATCH] Add build rule for README.
+> +
+> +fix do_configure error:
+> +Makefile.am: required file `./README' not found
+> +
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> +---
+> + Makefile.am | 1 +
+> + 1 file changed, 1 insertion(+)
+> +
+> +diff --git a/Makefile.am b/Makefile.am
+> +index 49574a3..a5a7c2a 100644
+> +--- a/Makefile.am
+> ++++ b/Makefile.am
+> +@@ -26,3 +26,4 @@ libtool: $(LIBTOOL_DEPS)
+> + ChangeLog:
+> +       git log --stat --decorate=short > $@
+> +
+> ++README: README.md
+> +--
+> +2.7.4
+> +
+> diff --git a/meta-oe/recipes-support/ccid/ccid_1.4.30.bb
+> b/meta-oe/recipes-support/ccid/ccid_1.4.31.bb
+> similarity index 71%
+> rename from meta-oe/recipes-support/ccid/ccid_1.4.30.bb
+> rename to meta-oe/recipes-support/ccid/ccid_1.4.31.bb
+> index 95a41d2..de07bfd 100644
+> --- a/meta-oe/recipes-support/ccid/ccid_1.4.30.bb
+> +++ b/meta-oe/recipes-support/ccid/ccid_1.4.31.bb
+> @@ -8,10 +8,11 @@ RDEPENDS_${PN} = "pcsc-lite"
+>
+>  SRC_URI = "https://ccid.apdu.fr/files/ccid-${PV}.tar.bz2 \
+>      file://no-dep-on-libfl.patch \
+> +    file://0001-Add-build-rule-for-README.patch \
+>  "
+>
+> -SRC_URI[md5sum] = "817abceef715e02cb47617621fe192e0"
+> -SRC_URI[sha256sum] =
+> "ac17087be08880a0cdf99a8a2799a4ef004dc6ffa08b4d9b0ad995f39a53ff7c"
+> +SRC_URI[md5sum] = "e4690f3362f95adb2332fd47a2b08212"
+> +SRC_URI[sha256sum] =
+> "6b48d7b6e4390e038d25630f8664fe81618ab00f232d6efbe0e3cc6df28ce8f7"
+>
+>  inherit autotools pkgconfig
+>
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
