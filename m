@@ -1,28 +1,32 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F2726B96C
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F25B7F96F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2019 09:30:33 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id xA69UXZC023898
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 6 Nov 2019 01:30:33 -0800 (PST)
-Received: from [128.224.158.209] (128.224.158.209) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
-	Wed, 6 Nov 2019 01:30:32 -0800
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>
-References: <20191106074935.46751-1-hongxu.jia@windriver.com>
-	<CALbNGRSyJYthd3zWWXfVBCzTNXhdNBA9K-MKAGFqHYVEuLNWYg@mail.gmail.com>
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <620c7105-97cf-0595-0c72-fb6bcc660348@windriver.com>
-Date: Wed, 6 Nov 2019 17:30:29 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
+	Wed,  6 Nov 2019 11:12:44 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,274,1569254400"; d="scan'208";a="77949539"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 06 Nov 2019 19:12:44 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id F0DCE4CE151A
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  6 Nov 2019 19:04:40 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Wed, 6 Nov 2019 19:12:44 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 6 Nov 2019 22:52:30 +0800
+Message-ID: <1573051950-45551-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRSyJYthd3zWWXfVBCzTNXhdNBA9K-MKAGFqHYVEuLNWYg@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH 1/8] python-more-itertools: downgrade 7.2.0 -> 5.0.0
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: F0DCE4CE151A.AA0B3
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] libpeas: upgrade 1.22.0 -> 1.24.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,46 +39,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2019 09:30:34 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 06 Nov 2019 11:12:45 -0000
+Content-Type: text/plain
 
-On 11/6/19 5:07 PM, Andreas Müller wrote:
-> On Wed, Nov 6, 2019 at 8:59 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
->> Python 2.7 is no longer supported. The 5.0.0 release will be the last
->> version targeting Python 2.7. [1]
->>
->> [1] https://github.com/erikrose/more-itertools/commit/560b045b430e8292c18cf5283de4fdc3e13e56f7
->>
->> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> * Version going backwards
-> * Such a patch at times python2 is eol - really?
+Change buildtool from autotools to meson with version upgrade.
 
-All these patches just make python2 module work.
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ .../libpeas/{libpeas_1.22.0.bb => libpeas_1.24.0.bb}          | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-gnome/libpeas/{libpeas_1.22.0.bb => libpeas_1.24.0.bb} (58%)
 
-Should we clarify that we do not support python2? If yes, we could clean 
-up them.
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.24.0.bb
+similarity index 58%
+rename from meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
+rename to meta-oe/recipes-gnome/libpeas/libpeas_1.24.0.bb
+index dd1b53e..33c5fbb 100644
+--- a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
++++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.24.0.bb
+@@ -5,16 +5,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
+ 
+ DEPENDS = "gnome-common gtk+3 intltool-native"
+ 
++GNOMEBASEBUILDCLASS = "meson"
+ inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache distro_features_check
+ 
+-# gobject-introspection is mandatory and cannot be configured
+-REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+-UNKNOWN_CONFIGURE_WHITELIST_append = " --enable-introspection --disable-introspection"
++GTKDOC_MESON_OPTION = "gtk_doc"
+ 
+-SRC_URI[archive.md5sum] = "a20dc55c3f88ad06da9491cfd7de7558"
+-SRC_URI[archive.sha256sum] = "5b2fc0f53962b25bca131a5ec0139e6fef8e254481b6e777975f7a1d2702a962"
++SRC_URI[archive.md5sum] = "7a136eea60930012deff2f7bfa3673be"
++SRC_URI[archive.sha256sum] = "0b9a00138c129a663de3eef5569b00ace03ce31d345f7af783768e9f35c8e6f9"
+ 
+-PACKAGECONFIG[python3] = "--enable-python3,--disable-python3,python3-pygobject"
++PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
+ 
+ export GIR_EXTRA_LIBS_PATH = "${B}/libpeas/.libs"
+ 
+-- 
+2.7.4
 
-In this case, if we do not support python2 more-itertools, we should also
-
-clean up these python2 recipes (python-pytest,python-pluggy,python-zipp)
-
-that runtime depends on more-itertools.
-
-
-As above upstream commits [1] said, the old version 5.0.0 is the last 
-version
-
-to support python2. Two choice: going backwards or cleaning up, it is 
-impossible
-
-to patch latest more-itertools to support python2
-
-
-//Hongxu
-
-> Andreas
 
 
 
