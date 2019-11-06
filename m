@@ -1,53 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
-	[209.85.221.54])
-	by mail.openembedded.org (Postfix) with ESMTP id CB2DE7FC0D
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
+	[209.85.221.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 113907F95C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2019 20:54:15 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id e6so183454wrw.1
+	Wed,  6 Nov 2019 20:54:16 +0000 (UTC)
+Received: by mail-wr1-f46.google.com with SMTP id b3so71171wrs.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Nov 2019 12:54:17 -0800 (PST)
+	Wed, 06 Nov 2019 12:54:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=ai0viyfDTMYgPJZ0EbrwBiyHpaIMLfn2lFBtAeDktwM=;
-	b=KoM854T+J6tKbMi0LlmBC3hE+5h6SHsw4t6+jkEf8qogmH4wvCOn6/hzkXtJ6pr7K1
-	CDLCriB414ffglM8QGKOCAlyV65BjCISqWNKXw2TMKnQq/HFq5KTGkzges6c9zJG5wDo
-	zoz3eHBcyanMUgV55cyURb00nF6AM3IzaVXwEYDjLI93AHfxrHZfJQabS9aPXQfrxas9
-	yQGSwhPRLM0Sm+NkKWN3rWycmbHBE6EZzxOer5Y4nD7tCZmh6m42lUpv1HYbTw4mQOzD
-	jxiDxqIRgRteCXt5vzkIoJAk6lWJfvruLBvxMRMIP6xWtSMh807AF38iU5VuInAF073z
-	Navw==
+	bh=dX8yFKifRnd6zkLL0dBySpdHFb2kXlNL24wEgN0/T7Y=;
+	b=r/QuRoHXhwtao8tBQHneNhZbucr/qU2BPljzN+EldG+Nq3IHtkzzSt8+SnA6i0Kn69
+	U/9J+gmO77zImo9BPJ1XBgtRlqmySUEwSRgGq2wezfaSU/AEPnX+N73VMwn2dM0ZHO22
+	hhSpjeBCjSxkxm14VUdNlu/xZ0uGYFINclLFNTMfy/Fh6fKP2VfCYoClen0cZ6STJbRd
+	wSXYVEqqSfaFPqwTPzYP9wNbH8bIby5ONCai6ebbBWsIYTAR5P47JUuEENY+M6xW8MHp
+	oFsf9VmxrV22jI/he0XKwZ0X3PWLvCe/nCvhmmpEtCF7HbMtyfOmPVmnFHV64iV3YZcA
+	jGpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ai0viyfDTMYgPJZ0EbrwBiyHpaIMLfn2lFBtAeDktwM=;
-	b=VhK/sTklqvfMzIpT2YhvYuh+dqBsQ23xsXpqag9m3n9wm5IWD40mJwhbn7S/DGN0X5
-	BWWTY9XIitPQkz0NlWjq7s6JEFfJPlG43QtSBXMlK4Kjqb1NPAJdz1/K6K0dNNph/aRU
-	+4ixmq1qt8lyLvEFxOnwAWAumVtTZBXnEV1psx+oWdvnEH66EEBryvfI3TOzC/cEwGuE
-	Swgia1QsjCJ1/m1bEMCq6nBiOKn1MjinmAZ/IJaGnndCEXqtUUaENhyjLFtqGlzIM6nq
-	3NjNEV/vizCQnfd5gxp/Ve2p0K0xrQhfbNGcpnsuG1cI0rHbLbWR+W6WUComKAyk3GxW
-	P3Dg==
-X-Gm-Message-State: APjAAAWy5AtYnZFLaDMvxmMfNDi7qJKOZJJl67cLI5QI6OM8IC/csTds
-	NnBNpJFhfCjYX1lIiGoFSzXIg9wi
-X-Google-Smtp-Source: APXvYqy3XgXV8BkbrJlwUebPRsFQKH/IBS9Qq9pidOc0Prv1ZOrD2cm4mtB4v7Rg5wE4UqCKoocWHg==
-X-Received: by 2002:adf:eacf:: with SMTP id o15mr492543wrn.24.1573073656121;
-	Wed, 06 Nov 2019 12:54:16 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=dX8yFKifRnd6zkLL0dBySpdHFb2kXlNL24wEgN0/T7Y=;
+	b=KNCgNd2qxTDq53Y+APVkeZN0Z4TcLKZF8es9bpZQVt74QLmcWzkvORYZJyqTLnWCsV
+	qq4LqhBhzkQbrtGsrFKYMYWah3pKRCKL24khYKH904X9EKHEb7TzBy1BSNXklUifq+79
+	mSbYFvzY3vySjC8Plrh9Rt/Uhk2z8fpYbjkB/zUmWnjLeaY1AfsaJueKe23N0zYCQwGx
+	eOmiERBCM0yEm1L4WAWQDYWclculep6OH1XOKm92rQRiGlmVSohtAY/se+L6sQG996iL
+	dSxM+Ngt4FU5Dvd7LCC46x25nESPZT06YPBtm6cnX+N9a1GPM7Ipc2txG/JRTOZdSUdF
+	xr8w==
+X-Gm-Message-State: APjAAAV0A9YviSFyQuwS+/O0Mvllb9XMYvsSaRYSJSmnwmIw8RBUR+Ca
+	IJwxmgC8ahcD6+/G6NdOhteA5bA9
+X-Google-Smtp-Source: APXvYqx2jnPdqIBdo0/dBn/fUm727gj+OGL9WTTATkAJG0PV5So61LRkoa51byx7XpmZDYbJY3Mlow==
+X-Received: by 2002:a5d:6585:: with SMTP id q5mr4364263wru.158.1573073657565; 
+	Wed, 06 Nov 2019 12:54:17 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F438C581B49BA34826387FE.dip0.t-ipconnect.de.
 	[2003:f0:7f43:8c58:1b49:ba34:8263:87fe])
 	by smtp.gmail.com with ESMTPSA id
-	i13sm17699440wrp.12.2019.11.06.12.54.14
+	i13sm17699440wrp.12.2019.11.06.12.54.16
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 06 Nov 2019 12:54:15 -0800 (PST)
+	Wed, 06 Nov 2019 12:54:16 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org,
 	zhengrq.fnst@cn.fujitsu.com
-Date: Wed,  6 Nov 2019 21:54:06 +0100
-Message-Id: <20191106205407.18957-1-schnitzeltony@gmail.com>
+Date: Wed,  6 Nov 2019 21:54:07 +0100
+Message-Id: <20191106205407.18957-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20191106205407.18957-1-schnitzeltony@gmail.com>
+References: <20191106205407.18957-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH v2 1/2] Add gnome help packages to image according to IMAGE_LINGUAS
+Subject: [PATCH 2/2] libpeas: upgrade 1.22.0 -> 1.24.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,42 +62,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2019 20:54:16 -0000
+X-List-Received-Date: Wed, 06 Nov 2019 20:54:17 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-In case
+* move to meson build
+* remove intltool-native & gnome-common from DEPENDS - they are not needed
+* with meson build gir is configurable -> gobject-introspection-data is not a
+  required distro feature any more
 
-* 'helpfiles' is in DISTRO_FEATURES and
-* PACKAGE_NO_HELP_SPLIT is not set to '1'
-
-those help packages matching language selections in IMAGE_LINGUAS are added to
-image automatically.
-
-For more details see:
-
-[1] https://github.com/openembedded/meta-openembedded/blob/master/meta-gnome/classes/gnome-help.bbclass
-[2] https://github.com/openembedded/openembedded-core/commit/3a9e9585aeb67234901b2f842113dbe20c3801b3
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
+ .../{libpeas_1.22.0.bb => libpeas_1.24.1.bb}    | 17 +++++++----------
+ 1 file changed, 7 insertions(+), 10 deletions(-)
+ rename meta-oe/recipes-gnome/libpeas/{libpeas_1.22.0.bb => libpeas_1.24.1.bb} (41%)
 
-v1 -> v2: Add IMAGE_LINGUAS_COMPLEMENTARY only if helpfiles is in DISTRO_FEATURES
-
- meta-gnome/conf/layer.conf | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
-index 862d622ee..d381fdf07 100644
---- a/meta-gnome/conf/layer.conf
-+++ b/meta-gnome/conf/layer.conf
-@@ -8,6 +8,9 @@ BBFILE_COLLECTIONS += "gnome-layer"
- BBFILE_PATTERN_gnome-layer := "^${LAYERDIR}/"
- BBFILE_PRIORITY_gnome-layer = "7"
+diff --git a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb b/meta-oe/recipes-gnome/libpeas/libpeas_1.24.1.bb
+similarity index 41%
+rename from meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
+rename to meta-oe/recipes-gnome/libpeas/libpeas_1.24.1.bb
+index dd1b53e39..6c8e0e0bf 100644
+--- a/meta-oe/recipes-gnome/libpeas/libpeas_1.22.0.bb
++++ b/meta-oe/recipes-gnome/libpeas/libpeas_1.24.1.bb
+@@ -3,20 +3,17 @@ HOMEPAGE = "https://wiki.gnome.org/Projects/Libpeas"
+ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4b54a1fd55a448865a0b32d41598759d"
  
-+# auto-pack gnome help files
-+IMAGE_LINGUAS_COMPLEMENTARY_append = " ${@bb.utils.contains('DISTRO_FEATURES','helpfiles','*-help-%s','',d)}"
-+
- # This should only be incremented on significant changes that will
- # cause compatibility issues with other layers
- LAYERVERSION_gnome-layer = "1"
+-DEPENDS = "gnome-common gtk+3 intltool-native"
++DEPENDS = "gtk+3"
+ 
+-inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache distro_features_check
++GNOMEBASEBUILDCLASS = "meson"
++GTKDOC_MESON_OPTION = "gtk_doc"
+ 
+-# gobject-introspection is mandatory and cannot be configured
+-REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+-UNKNOWN_CONFIGURE_WHITELIST_append = " --enable-introspection --disable-introspection"
++inherit gnomebase gobject-introspection gtk-doc gtk-icon-cache
+ 
+-SRC_URI[archive.md5sum] = "a20dc55c3f88ad06da9491cfd7de7558"
+-SRC_URI[archive.sha256sum] = "5b2fc0f53962b25bca131a5ec0139e6fef8e254481b6e777975f7a1d2702a962"
++SRC_URI[archive.md5sum] = "bbecf334a7333d0a5d4d655ba38be9b4"
++SRC_URI[archive.sha256sum] = "9c3acf7a567cbb4f8bf62b096e013f12c3911cc850c3fa9900cbd5aa4f6ec284"
+ 
+-PACKAGECONFIG[python3] = "--enable-python3,--disable-python3,python3-pygobject"
+-
+-export GIR_EXTRA_LIBS_PATH = "${B}/libpeas/.libs"
++PACKAGECONFIG[python3] = "-Dpython3=true,-Dpython3=false,python3-pygobject"
+ 
+ PACKAGES =+ "${PN}-demo ${PN}-python3"
+ FILES_${PN}-demo = " \
 -- 
 2.21.0
 
