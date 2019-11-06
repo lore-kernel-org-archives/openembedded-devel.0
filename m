@@ -1,50 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EC2A7F610
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+	[209.85.214.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 139A07F8AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Nov 2019 03:49:18 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id y24so10768558plr.12
+	Wed,  6 Nov 2019 03:49:20 +0000 (UTC)
+Received: by mail-pl1-f179.google.com with SMTP id d29so4418014plj.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Nov 2019 19:49:19 -0800 (PST)
+	Tue, 05 Nov 2019 19:49:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=mGI5Gd8rzAmyYGgGeYcJKbNa0r7E47vIGkM0bWg6bkM=;
-	b=XpWpQoKLOKJbOAB/xpKNVSzrogbU3TTA7phk18II/wPtOCpMJVqo+tf8YM1C+4WVon
-	rm4Mn2xeH5CiF/xeBjJVsElHMTMFos4AUlemzhH44L6zMHz9GatYIMGekpYo/qD3qL3k
-	R7SdzOvawDXN+qx+A0okWI1DRdmjVoLRcx6P4OJWCnribmQzNCzHaMG9UOw69fiwdffD
-	zPTQPFCrbDLyp6XwzMzk+0LJ38ZIsK5Fhg6TWnerpDtT+UPgRuvT5neVdYNpn21PyIc5
-	xtDa224/s5reZzIrz05thrCvxY86HydUvDFru9mNhiW2aaYBmoxBGzQkudlQDZC+9zUH
-	DAMg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=+FOdv7QhqTnbN6SKPcmL+O/oXBlt0xsmAKn3aGq5zzI=;
+	b=hMN0hzb/nvxgIo2GK8DuZOqSY7Y6NTO+OW9fDrXddTn8RVLhF1N3W0tGPnEBRVpkgR
+	D7QpHSkvQ9e6LyhdBv7g7mp6fgROpTag4Bhj274X/swbkPWD4Zt30an26JZXhtTv1PPW
+	THUDCogZVIAejbYpCk1Ayj5OKSb9hufaMh7M3ZyRiLB9uhh1NZpCfULBPCbs09asiNmV
+	QRxeJREIg/XXWyMiguaVJ2VimDzxfVKC5YgxRvwh/UYAA5kD+AQDRrFjwtll/066LNdO
+	J4709NxxiwDGUCuUZR2xMu8EIJrqLrw3pjt/81TSSupXXuytIh6WPpqYc9gBHAzsDCPA
+	UaPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=mGI5Gd8rzAmyYGgGeYcJKbNa0r7E47vIGkM0bWg6bkM=;
-	b=IpljtOHSRdAnjwvUPF0hv3yKIpDDD+D8J/JGEhbiiz43SrffTJBze2UxtyqjHnLUQf
-	4VqBpFn/FL8frlrf3x541UKjrDyM4a05JlJk9rcvAZDJhz8oI2+BPXNPzPEa2PnSkwTY
-	xQWWekyOho0PnOdDK5i65ZF3BwBX7m4CktPZ4ea5Ul/rF0wudJnEE+DPKB50tWWVQDkJ
-	BRNhjPozO7q3wfr7FIMS8u8rUyJ431kU0W3nP1HL4jgBbh+gtePl4UoOPle091oc4D3b
-	nvldzr8iopgH4RR9JGX+y3+jswefLApQ7m+umB7mUfl6nC1OM3tuCnG3uSkNqk9BG2wN
-	DJDg==
-X-Gm-Message-State: APjAAAWvXYh3PHTaEs++H6miROMTB5H8o2LnW2a3KiyJFJQM5UiAcmEa
-	zXOfPPrAeKWWOLHRYsuMnZjVyvMMeTA=
-X-Google-Smtp-Source: APXvYqwBmIvg/tkFdyt7fGUG8mZfUZPX82a/5qPeoHsjAhzB2UTiIG5p6xvCHzXI2APGXBDqZxFNrQ==
-X-Received: by 2002:a17:902:7d96:: with SMTP id
-	a22mr310425plm.318.1573012158877; 
-	Tue, 05 Nov 2019 19:49:18 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=+FOdv7QhqTnbN6SKPcmL+O/oXBlt0xsmAKn3aGq5zzI=;
+	b=k2jWErj3lAURMRc9CMJPYFbnlNjYADrbtFKUeMOSFqhAueLDtwjLDOjgVxt2l6mCPR
+	xkYdooQXJDbTOsWdIVYbi+oyrzqIrrkvPZ6B3fnFoWNtcEbnDwJLnL6rbT7tFJwQc7MT
+	fUk8eO2jh344CzRjv34ctaI+CN0RZYw2IbY3AjwzpLnn9LCyjdUiMywVNHbj+droiLCr
+	ALB/t+Qj0pqaa+RHN8EeGuogTI2uFLvgtGq7Uc9wEH3V9kaC+BalYEmKb+jlL8+YRRD4
+	BYadRZ56y0TIkFIl8SsCJtmZRUoUpuOjSTttBlKY+w+ZXZ5sbY/BXyG4roQDzirCJ4cB
+	7JLw==
+X-Gm-Message-State: APjAAAVwq+FT6wYrJM1m4YMMdZAe31TFr6wpKof8Bu8M7TODYSxYcCo/
+	d9Y4seZribKY7GAH4ZREuGezXw+LhVw=
+X-Google-Smtp-Source: APXvYqzpf0lWKI5vip9T0L318vbngzhy7Q6n0jAXsOJYAnrF1vWk7TpiDf/iFx0HLYzmSxO7R0uu2A==
+X-Received: by 2002:a17:902:aa41:: with SMTP id
+	c1mr302455plr.153.1573012161477; 
+	Tue, 05 Nov 2019 19:49:21 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::5caf])
-	by smtp.gmail.com with ESMTPSA id 39sm912407pjo.7.2019.11.05.19.49.18
+	by smtp.gmail.com with ESMTPSA id 39sm912407pjo.7.2019.11.05.19.49.20
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 05 Nov 2019 19:49:18 -0800 (PST)
+	Tue, 05 Nov 2019 19:49:21 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  5 Nov 2019 19:49:02 -0800
-Message-Id: <20191106034904.2815791-1-raj.khem@gmail.com>
+Date: Tue,  5 Nov 2019 19:49:03 -0800
+Message-Id: <20191106034904.2815791-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.0
+In-Reply-To: <20191106034904.2815791-1-raj.khem@gmail.com>
+References: <20191106034904.2815791-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/3] ifplugd: Include stdint.h for uintXX_t
+Subject: [meta-networking][PATCH 2/3] netkit-rwho: Include stdint.h for int32_t
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,51 +59,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Nov 2019 03:49:19 -0000
+X-List-Received-Date: Wed, 06 Nov 2019 03:49:21 -0000
 Content-Transfer-Encoding: 8bit
 
-stdint.h is standard header which should provide these types
-Fixes
+This ensures that when libc does not include stdint.h indirectly then it
+still can compile
 
-../../ifplugd-0.28/src/ethtool-local.h:27:9: error: unknown type name 'uint8_t'
-typedef uint8_t u8;
-        ^
+Fixes
+| ../include/protocols/rwhod.h:57:2: error: unknown type name 'int32_t'; did you mean 'uint32_t'?
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../ifplugd/ifplugd/Fix-build-with-musl.patch        | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ ...002-Fix-build-issues-found-with-musl.patch | 21 ++++++++++---------
+ 1 file changed, 11 insertions(+), 10 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/ifplugd/ifplugd/Fix-build-with-musl.patch b/meta-oe/recipes-connectivity/ifplugd/ifplugd/Fix-build-with-musl.patch
-index 4bd40606b0..35665bd3f2 100644
---- a/meta-oe/recipes-connectivity/ifplugd/ifplugd/Fix-build-with-musl.patch
-+++ b/meta-oe/recipes-connectivity/ifplugd/ifplugd/Fix-build-with-musl.patch
-@@ -9,13 +9,14 @@ Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-  src/ethtool-local.h | 6 +++---
-  1 file changed, 3 insertions(+), 3 deletions(-)
+diff --git a/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0002-Fix-build-issues-found-with-musl.patch b/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0002-Fix-build-issues-found-with-musl.patch
+index 717b4d73f4..349a1351fe 100644
+--- a/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0002-Fix-build-issues-found-with-musl.patch
++++ b/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0002-Fix-build-issues-found-with-musl.patch
+@@ -12,8 +12,6 @@ Upstream-Status: Pending
+  rwhod/rwhod.c     | 5 +++--
+  3 files changed, 5 insertions(+), 2 deletions(-)
  
--diff --git a/src/ethtool-local.h b/src/ethtool-local.h
--index 200476b..0edc7a9 100644
- --- a/src/ethtool-local.h
- +++ b/src/ethtool-local.h
--@@ -22,9 +22,9 @@
-+@@ -20,11 +20,11 @@
-+  * along with ifplugd; if not, write to the Free Software Foundation,
-+  * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
-   */
-- 
-+-
-++#include <stdint.h>
-  typedef unsigned long long u64;
- -typedef __uint32_t u32;        
- -typedef __uint16_t u16;        
-@@ -26,6 +27,3 @@ index 200476b..0edc7a9 100644
+-diff --git a/ruptime/ruptime.c b/ruptime/ruptime.c
+-index 1d4f7b6..f1f043c 100644
+ --- a/ruptime/ruptime.c
+ +++ b/ruptime/ruptime.c
+ @@ -53,6 +53,7 @@ char ruptime_rcsid[] =
+@@ -24,11 +22,9 @@ index 1d4f7b6..f1f043c 100644
   
-  #include "ethtool-kernel.h"
+  struct hs {
+  	char	hs_hostname[MAXHOSTNAMELEN];
+-diff --git a/rwho/rwho.c b/rwho/rwho.c
+-index 63919ac..71aec9e 100644
+ --- a/rwho/rwho.c
+ +++ b/rwho/rwho.c
+-@@ -49,6 +49,7 @@ char rcsid[] = "$Id: rwho.c,v 1.7 1999/08/01 20:44:18 dholland Exp $";
++@@ -49,6 +49,7 @@ char rcsid[] = "$Id: rwho.c,v 1.7 1999/0
+  #include <assert.h>
+  #include <stdio.h>
+  #include <time.h>
+@@ -36,8 +32,6 @@ index 63919ac..71aec9e 100644
+  #include <protocols/rwhod.h>
   
+  #include "../version.h"
+-diff --git a/rwhod/rwhod.c b/rwhod/rwhod.c
+-index 54498d0..40cabcf 100644
+ --- a/rwhod/rwhod.c
+ +++ b/rwhod/rwhod.c
+ @@ -76,6 +76,7 @@ char rcsid[] =
+@@ -66,6 +60,13 @@ index 54498d0..40cabcf 100644
+  /*
+   * Taken from:
+   *
 --- 
--2.20.1
+-2.14.1
 -
++--- a/include/protocols/rwhod.h
+++++ b/include/protocols/rwhod.h
++@@ -37,6 +37,7 @@
++ #ifndef _RWHOD_H_
++ #define	_RWHOD_H_
++ 
+++#include <stdint.h>
++ /*
++  * rwho protocol packet format.
++  */
 -- 
 2.24.0
 
