@@ -1,30 +1,32 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C30C7F895
+	by mail.openembedded.org (Postfix) with ESMTP id E4A647F7D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 07:17:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,277,1569254400"; d="scan'208";a="77992071"
+	Thu,  7 Nov 2019 08:23:51 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,277,1569254400"; d="scan'208";a="77995521"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2019 15:17:23 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 633F24CE1511
+	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2019 16:23:50 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id AC7CF4CE20C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 15:09:14 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 7 Nov 2019 15:17:25 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Thu,  7 Nov 2019 16:15:45 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 7 Nov 2019 16:23:51 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 7 Nov 2019 15:17:38 +0800
-Message-ID: <20191107071738.7664-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Thu, 7 Nov 2019 20:03:32 +0800
+Message-ID: <1573128212-61709-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 633F24CE1511.A439F
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204)
+X-yoursite-MailScanner-ID: AC7CF4CE20C0.A7814
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-flask-migrate: upgrade 2.2.1 -> 2.5.2
+Subject: [meta-oe][PATCH] mariadb: upgrade 10.3.16 -> 10.3.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,44 +39,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 07:17:25 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 07 Nov 2019 08:23:52 -0000
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-flask-migrate.inc  | 4 ++--
- ...n-flask-migrate_2.2.1.bb => python-flask-migrate_2.5.2.bb} | 0
- ...-flask-migrate_2.2.1.bb => python3-flask-migrate_2.5.2.bb} | 0
+ .../mysql/{mariadb-native_10.3.16.bb => mariadb-native_10.3.18.bb}    | 0
+ meta-oe/recipes-dbs/mysql/mariadb.inc                                 | 4 ++--
+ meta-oe/recipes-dbs/mysql/{mariadb_10.3.16.bb => mariadb_10.3.18.bb}  | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flask-migrate_2.2.1.bb => python-flask-migrate_2.5.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-flask-migrate_2.2.1.bb => python3-flask-migrate_2.5.2.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.16.bb => mariadb-native_10.3.18.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.16.bb => mariadb_10.3.18.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-migrate.inc b/meta-python/recipes-devtools/python/python-flask-migrate.inc
-index dfb20e9ee..5202f8be0 100644
---- a/meta-python/recipes-devtools/python/python-flask-migrate.inc
-+++ b/meta-python/recipes-devtools/python/python-flask-migrate.inc
-@@ -2,8 +2,8 @@ DESCRIPTION = "SQLAlchemy database migrations for Flask applications using Alemb
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b69377f79f3f48c661701236d5a6a85"
- 
--SRC_URI[md5sum] = "aaeee55431d0287063657122ff41a0e6"
--SRC_URI[sha256sum] = "cd1b4e6cb829eeb41c02ad9202d83bef5f4b7a036dd9fad72ce96ad1e22efb07"
-+SRC_URI[md5sum] = "bedeb0366740fda6912fea683be11968"
-+SRC_URI[sha256sum] = "a96ff1875a49a40bd3e8ac04fce73fdb0870b9211e6168608cbafa4eb839d502"
- 
- PYPI_PACKAGE = "Flask-Migrate"
- 
-diff --git a/meta-python/recipes-devtools/python/python-flask-migrate_2.2.1.bb b/meta-python/recipes-devtools/python/python-flask-migrate_2.5.2.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.16.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.18.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-flask-migrate_2.2.1.bb
-rename to meta-python/recipes-devtools/python/python-flask-migrate_2.5.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-flask-migrate_2.2.1.bb b/meta-python/recipes-devtools/python/python3-flask-migrate_2.5.2.bb
+rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.3.16.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.3.18.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index f1c71fe..e1ae58a 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -19,8 +19,8 @@ SRC_URI = "http://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
+            file://clang_version_header_conflict.patch \
+            file://fix-arm-atomic.patch \
+           "
+-SRC_URI[md5sum] = "11220d0b94c5c24caa2e1e9eaba38e31"
+-SRC_URI[sha256sum] = "39e9723eaf620afd99b0925b2c2a5a50a89110ba50040adf14cce7cf89e5e21b"
++SRC_URI[md5sum] = "b3524c0825c3a1c255496daea38304a0"
++SRC_URI[sha256sum] = "69456ca85bf9d96c6d28b4ade2a9f6787d79a602e27ef941f9ba4e0b55dddedc"
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+ 
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.3.16.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.3.18.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-flask-migrate_2.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-flask-migrate_2.5.2.bb
+rename from meta-oe/recipes-dbs/mysql/mariadb_10.3.16.bb
+rename to meta-oe/recipes-dbs/mysql/mariadb_10.3.18.bb
 -- 
-2.20.1
+2.7.4
 
 
 
