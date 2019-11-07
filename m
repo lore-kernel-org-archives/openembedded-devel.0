@@ -1,46 +1,24 @@
-Return-Path: <jdmason@kudzu.us>
-Received: from mail-il1-f170.google.com (mail-il1-f170.google.com
-	[209.85.166.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 044767F9A6
+Return-Path: <joe.slater@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 17DE17F944
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 17:01:58 +0000 (UTC)
-Received: by mail-il1-f170.google.com with SMTP id s5so2469033iln.4
+	Thu,  7 Nov 2019 18:13:06 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xA7ID744014420
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Nov 2019 09:02:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=3FY1KB7dOKJqzlyT2wPDI5iln+xlRhIiMoBhSOmVyQ0=;
-	b=LgV+hgNdFf1UaF3pvd0BtId8A3/LNMvbTBUkbohWbAy1hhdmR5DgQLZ6NTjZlDOTmu
-	aC8nm71szSvMvhlv+snU+EHSRDAtU0VrRrn9hTswXq/XKWqygkzAiJ83PFDVQJ1wTLYO
-	jNMwiQuED9joQgKpUNuApaCziaPsH3llSFWVO+1NQG5hRrJDoqDWaXC0YQIc623SKXLC
-	dQ49+1uPCvAxN4/dCivU9eQ9EQH6/MjbcDBjLmyQS292TOPNBhAY1aBy6Ma0F5icqig8
-	0KPQTpkC2yDWe3JhJB+0u9lquKbk5EqCZUsBKUoiGMOiuuwZzlgWqYV3LpiFD+y4rmlO
-	0/AQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=3FY1KB7dOKJqzlyT2wPDI5iln+xlRhIiMoBhSOmVyQ0=;
-	b=ZFPJtIGTKq1KHLSuxL3rnoxvyN2VrZBCNHDP/UeE+DSsOCCglSSNjnm4JWfh4dLAC6
-	Ce6mvEPcjBGdGvBFbsfDvig8OdbT34pnZydAMPhEuhIOArDEhDjtVaeGIA+LlDOOTShE
-	mk1XwaEknrt5WFyTqSUvrUgDWUZECjNF/mszBEIRWkDMKX1KJmb41PIORamrFzaqmk7J
-	MsEYfY8BReOhrywsYjvszI3jL5u18YYGf/2BXju/Q8JckpCtXs+bUx3DD5054rWuetvv
-	e53eYd3Epw6iFgOpeRFJ3JuRKpoNOyBmufyu9ZbH5Nz3WCMrdPqsTsYsD0iBaPdp4pgK
-	xAXQ==
-X-Gm-Message-State: APjAAAUGP1DxZS+l39YrgpBdrL+JTMhtMYd1vO+dZnP6EYHWIIfqd6yD
-	I5IFrW0ZnO1bU4C4WBiDTGhahQ72bz0G/G6M7MvlyEoTCxPz9Q==
-X-Google-Smtp-Source: APXvYqyon0NRlMSooHH8iwi0XIjWY9gkahvvDDBkS9+FiSg9fbUJ+pGNkp2pdYVvcIE4kQtwPwH/mvGJ3RYXh3OkSBQ=
-X-Received: by 2002:a92:8388:: with SMTP id p8mr5826502ilk.49.1573146119708;
-	Thu, 07 Nov 2019 09:01:59 -0800 (PST)
+	Thu, 7 Nov 2019 10:13:07 -0800
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 7 Nov 2019 10:13:07 -0800
+From: Joe Slater <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 7 Nov 2019 10:13:07 -0800
+Message-ID: <20191107181307.3722-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.13.0
 MIME-Version: 1.0
-From: Jon Mason <jdmason@kudzu.us>
-Date: Thu, 7 Nov 2019 12:01:48 -0500
-Message-ID: <CAPoiz9x+8E-NHEkO=1GXMFHRn-FTST6iizTAZcmceE5qCK+PEA@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	Yocto discussion list <yocto@yoctoproject.org>
-Subject: OpenEmbedded event at FOSDEM20
+Subject: [oe-core][zeus][PATCH 1/1] webkitgtk: fix occasional link error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,15 +31,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 17:01:59 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 07 Nov 2019 18:13:07 -0000
+Content-Type: text/plain
 
-OpenEmbedded is considering creating a mini-conference attached to
-FOSDEM 2020 (https://fosdem.org/2020/), and we would like your help.
-Please fill out this short, 10 question, survey to determine the
-viability of such an effort.
-https://www.surveymonkey.com/r/9QP76CL
+Partial backport from WebKit.git.  See patch for details.
 
-Thank you,
-The OpenEmbedded Board
+Fixed in webkitgtk 2.26.1.
+
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
+---
+ .../webkit/webkitgtk/fix-link-error.patch          | 45 ++++++++++++++++++++++
+ meta/recipes-sato/webkit/webkitgtk_2.24.4.bb       |  1 +
+ 2 files changed, 46 insertions(+)
+ create mode 100755 meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch
+
+diff --git a/meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch b/meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch
+new file mode 100755
+index 0000000..9696ddd
+--- /dev/null
++++ b/meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch
+@@ -0,0 +1,45 @@
++webkitgtk: fix an occasional link error
++
++Part of ae465a4e...  Changelog is not included in the source tarball.
++
++Upstream-Status:  backport [git://git.webkit.org/WebKit.git]
++
++commit ae465a4e3b1498b6c4038fc7e596e0e3662d116f
++Author: Hironori.Fujii@sony.com <Hironori.Fujii@sony.com@268f45cc-cd09-0410-ab3c-d52691b4dbfc>
++Date:   Fri Jun 28 07:38:09 2019 +0000
++
++    [Win] unresolved external symbol "JSC::JSObject::didBecomePrototype(void)" referenced in function "JSC::Structure::create(...)"
++    https://bugs.webkit.org/show_bug.cgi?id=199312
++    
++    Reviewed by Keith Miller.
++    
++    WinCairo port, clang-cl Release builds reported a following linkage error:
++    
++    > WebCore.lib(UnifiedSource-4babe430-10.cpp.obj) : error LNK2019: unresolved external symbol "public: void __cdecl JSC::JSObject::didBecomePrototype(void)" (?didBecomePrototype@JSObject@JSC@@QEAAXXZ) referenced in function "public: static class JSC::Structure * __cdecl JSC::Structure::create(class JSC::VM &,class JSC::JSGlobalObject *,class JSC::JSValue,class JSC::TypeInfo const &,struct JSC::ClassInfo const *,unsigned char,unsigned int)" (?create@Structure@JSC@@SAPEAV12@AEAVVM@2@PEAVJSGlobalObject@2@VJSValue@2@AEBVTypeInfo@2@PEBUClassInfo@2@EI@Z)
++    
++    No new tests because there is no behavior change.
++    
++    * Modules/indexeddb/server/SQLiteIDBBackingStore.cpp: Include <JavaScriptCore/JSCInlines.h>,
++    and do not include headers which is included by it.
++    
++    git-svn-id: http://svn.webkit.org/repository/webkit/trunk@246922 268f45cc-cd09-0410-ab3c-d52691b4dbfc
++
++[ modification of Changelog deleted ]
++
++diff --git a/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp b/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp
++index d1b047c..0899a9a 100644
++--- a/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp
+++++ b/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp
++@@ -49,11 +49,8 @@
++ #include "SQLiteTransaction.h"
++ #include "ThreadSafeDataBuffer.h"
++ #include <JavaScriptCore/AuxiliaryBarrierInlines.h>
++-#include <JavaScriptCore/HeapInlines.h>
++-#include <JavaScriptCore/JSCJSValueInlines.h>
++-#include <JavaScriptCore/JSGlobalObject.h>
+++#include <JavaScriptCore/JSCInlines.h>
++ #include <JavaScriptCore/StrongInlines.h>
++-#include <JavaScriptCore/StructureInlines.h>
++ #include <wtf/FileSystem.h>
++ #include <wtf/NeverDestroyed.h>
++ #include <wtf/text/StringConcatenateNumbers.h>
+diff --git a/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb b/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb
+index 8c695ce..b04ec82 100644
+--- a/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb
++++ b/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb
+@@ -23,6 +23,7 @@ SRC_URI = "http://www.webkitgtk.org/releases/${BPN}-${PV}.tar.xz \
+            file://include_array.patch \
+            file://narrowing.patch \
+            file://0001-gstreamer-add-a-missing-format-string.patch \
++           file://fix-link-error.patch \
+            "
+ 
+ SRC_URI[md5sum] = "c214963d8c0e7d83460da04a0d8dda87"
+-- 
+2.7.4
+
 
