@@ -1,42 +1,40 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 2ED527F7C4
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 048717F79E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 11:15:38 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id c17so2038049wmk.2
+	Thu,  7 Nov 2019 11:44:03 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id x4so2127003wmi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Nov 2019 03:15:39 -0800 (PST)
+	Thu, 07 Nov 2019 03:44:05 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=WCNjsAezh3UkUpqO0NBmxCs99b4PEfMImXu1hIK09gc=;
-	b=W8ZTGbNgNj49mo+AYk48QgUfvPLaeCtxs4fQWlvGxJDzfPJuPlQ5srbNhC7CPDiDEM
-	ALCMggza4xgq2Kk/5MGOTkmd6TY8wjypdheglxOFqjxQLg1ydt/gYSSXpg1azcjX8l8u
-	nHGWJ8abS0hvfXBWTOMANdBmvPpFEzZAeQrkfwnJiAN0agk0dLMKNS2OYU17UnnRgtv+
-	m4s8oxveKJRewx4iWsDWijuUMFbMrdMgJmSBo4wNGt0oTZuz39hVnNoPrQoHHeTWl31U
-	2NVc6kXAXCc0PLL/fpOszXlExVEFVmK2R5G6Cn/axA1WlaVJH4Z62Q0TnqvrUZeSbYgQ
-	EU1Q==
-X-Gm-Message-State: APjAAAUoQxnUqP+Evsj+pn1EYzQuAkm3bb/ofXEVlYYUqq87ETaxJgnv
-	XbtOIhLxrh1cpEwnjYAXUWkB8B5u
-X-Google-Smtp-Source: APXvYqz5IQPbdiDtDmq6A4mGkIIS+YVhobs0uHur8zup5Oo7jpdjZIRJIYsHlOK5pxhIXN89cUvLmQ==
-X-Received: by 2002:a1c:30b:: with SMTP id 11mr2153212wmd.171.1573125338685;
-	Thu, 07 Nov 2019 03:15:38 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=N+4TYLTlwVQXCtqM/B3Zuvmo8xcXmOckW2+GnR6SlQQ=;
+	b=IZKMfYN9kXqTak3exgokw0ygLAVzah2BoYETnjViQs+oue/ZmLamDGc7dVFfGXVWXh
+	EP4yCrfCipRoTRKKoQZGnQpmBjVqTjJ48WGFydfCrAbbIw/lZ0F1Bbfb0h5NeFdlD2h1
+	97ZPDxg5bc8wkBE9uwMhMgTPlXoByfHxtYam9nVR45K+iCL6ag9mU2thuENoIOrLSxTA
+	LOMLtj3Uhd0jtIw6Pk7wFLbv0j8LbS7DQJiYZqcUDdVdsechKcfO8K3XQKgTHmGyoiTT
+	GXyS53nZSik4j2XYjF2IdzNdaPjP8/taI2n/RtlPWfqZjW+xF30qCKQyXe2gTY9xvj/d
+	KeRw==
+X-Gm-Message-State: APjAAAU+D/6Pcw2jLwCpVArAKezQl7zJfYRSw4VRQ1kU4UmE8kAqwqt7
+	fdg8rQSGWTPzoAQdh8umGO2CDUvp
+X-Google-Smtp-Source: APXvYqzaNVdXavohDVxgjGBjO80PKWXGCyN6rKAAdRRGx29rHpFLLq2T1Xz0F557ZQQqXsTq6tbE8w==
+X-Received: by 2002:a7b:cbd9:: with SMTP id n25mr2618501wmi.64.1573127044120; 
+	Thu, 07 Nov 2019 03:44:04 -0800 (PST)
 Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id d4sm428610wrw.83.2019.11.07.03.15.37
+	by smtp.gmail.com with ESMTPSA id 76sm2283613wma.0.2019.11.07.03.44.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 07 Nov 2019 03:15:37 -0800 (PST)
+	Thu, 07 Nov 2019 03:44:03 -0800 (PST)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Nov 2019 11:15:35 +0000
-Message-Id: <20191107111535.40523-3-git@andred.net>
+Date: Thu,  7 Nov 2019 11:43:59 +0000
+Message-Id: <20191107114402.933-1-git@andred.net>
 X-Mailer: git-send-email 2.23.0.rc1
-In-Reply-To: <20191107111535.40523-1-git@andred.net>
-References: <20191107111535.40523-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/3] libev: allow to build a -native package
+Subject: [meta-networking][PATCH 1/4] nghttp2: fix UPSTREAM_CHECK_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,27 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 11:15:38 -0000
+X-List-Received-Date: Thu, 07 Nov 2019 11:44:04 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This will e.g. enable us to use it from nghttp2-native
+This was added incorrectly in the previous recipe update
+and doesn't actually work.
 
 Signed-off-by: André Draszik <git@andred.net>
 ---
- meta-oe/recipes-connectivity/libev/libev_4.27.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libev/libev_4.27.bb b/meta-oe/recipes-connectivity/libev/libev_4.27.bb
-index b72b7af4f..be4536b9c 100644
---- a/meta-oe/recipes-connectivity/libev/libev_4.27.bb
-+++ b/meta-oe/recipes-connectivity/libev/libev_4.27.bb
-@@ -17,3 +17,5 @@ do_install_append() {
-     # still basic so drop it for now.
-     rm ${D}${includedir}/event.h
- }
-+
-+BBCLASSEXTEND = "native"
+diff --git a/meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb
+index 6077daf76..913065a04 100644
+--- a/meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb
++++ b/meta-networking/recipes-support/nghttp2/nghttp2_1.39.1.bb
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=764abdf30b2eadd37ce47dcbce0ea1ec"
+ 
+-+UPSTREAM_CHECK_URI = "https://github.com/nghttp2/nghttp2/releases"
++UPSTREAM_CHECK_URI = "https://github.com/nghttp2/nghttp2/releases"
+ 
+ SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.xz"
+ SRC_URI[md5sum] = "02b015cb178c46f27dd87228e33db35f"
 -- 
 2.23.0.rc1
 
