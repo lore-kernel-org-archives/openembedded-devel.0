@@ -1,39 +1,46 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 49AD37F95D
+Return-Path: <jdmason@kudzu.us>
+Received: from mail-il1-f170.google.com (mail-il1-f170.google.com
+	[209.85.166.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 044767F9A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 16:18:33 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4787qr50QqzF2;
-	Thu,  7 Nov 2019 17:18:31 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1573143513;
-	bh=7e22VcpbM0sOO2DUD744uT9Bh3AC5IcPqU9SYpb2pQU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=R2rte5HhzL7Ow1QVac7dBWkbYclT7h0kY0BMaboiHF/pxz8YM2WMeJkUEVOaaxfF4
-	VNVrq7Hi05bo1KpUMiXtKmp4PQqKABotX0xBOC5X+KvA5GSoZCz0UIqJ2aKaPWGgjR
-	pvLTEp1WHoEesN+NwW1WeZ+ahyAx5odH20VXb8qgIb7OPKGfPNY5ilIpXWLsat5+/A
-	+LlbUgPG1HF4mL4fI71RjobNS7OkS3cpgdlnuKH1dTR5HECyV+JQSCYF9RbHGqHWtP
-	xEuGxj43WDvtXCesxu+lO6rVnU0E0bx3lojLgLoVxzkxtIOW+7oumgwr+YaxqmnPhm
-	OM/V0Sbgc+dYamfvO8Vk4VzoFum4LW2IHqdesoM6ZCd/k12kJ2TV3iVdy9EFp9IxBa
-	LhN9xVSdNA66nH5UwiQBKYUM+4SZxGX1PKROn3JL68UBHyLYFDNCOE5FRjQmIyGg2I
-	dO9dSM771mTmYnhFRmLyxgTohBbsdUGv7HV09uKeB8fp8oOSbMTnZPgh2biyPLwkdq
-	FJttONda0uRnNbXhQuoVb5GsIbwYcf0x4szNL0ib9KCliZG+1DDqJ0FRTdw4WlA8Te
-	tL9mYEA9XZFnvaT4y1cwK1XgtUg6eWNiohzS02TVamUDeR8vgwLeZbno8nYK+qmi0j
-	RO1vlWhmeyJYNy7JbyPgpxQ4=
-Date: Thu, 7 Nov 2019 18:18:29 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <20191107161829.GA31984@localhost>
-References: <20191106074935.46751-1-hongxu.jia@windriver.com>
-	<CALbNGRSyJYthd3zWWXfVBCzTNXhdNBA9K-MKAGFqHYVEuLNWYg@mail.gmail.com>
-	<620c7105-97cf-0595-0c72-fb6bcc660348@windriver.com>
+	Thu,  7 Nov 2019 17:01:58 +0000 (UTC)
+Received: by mail-il1-f170.google.com with SMTP id s5so2469033iln.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Nov 2019 09:02:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=3FY1KB7dOKJqzlyT2wPDI5iln+xlRhIiMoBhSOmVyQ0=;
+	b=LgV+hgNdFf1UaF3pvd0BtId8A3/LNMvbTBUkbohWbAy1hhdmR5DgQLZ6NTjZlDOTmu
+	aC8nm71szSvMvhlv+snU+EHSRDAtU0VrRrn9hTswXq/XKWqygkzAiJ83PFDVQJ1wTLYO
+	jNMwiQuED9joQgKpUNuApaCziaPsH3llSFWVO+1NQG5hRrJDoqDWaXC0YQIc623SKXLC
+	dQ49+1uPCvAxN4/dCivU9eQ9EQH6/MjbcDBjLmyQS292TOPNBhAY1aBy6Ma0F5icqig8
+	0KPQTpkC2yDWe3JhJB+0u9lquKbk5EqCZUsBKUoiGMOiuuwZzlgWqYV3LpiFD+y4rmlO
+	0/AQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=3FY1KB7dOKJqzlyT2wPDI5iln+xlRhIiMoBhSOmVyQ0=;
+	b=ZFPJtIGTKq1KHLSuxL3rnoxvyN2VrZBCNHDP/UeE+DSsOCCglSSNjnm4JWfh4dLAC6
+	Ce6mvEPcjBGdGvBFbsfDvig8OdbT34pnZydAMPhEuhIOArDEhDjtVaeGIA+LlDOOTShE
+	mk1XwaEknrt5WFyTqSUvrUgDWUZECjNF/mszBEIRWkDMKX1KJmb41PIORamrFzaqmk7J
+	MsEYfY8BReOhrywsYjvszI3jL5u18YYGf/2BXju/Q8JckpCtXs+bUx3DD5054rWuetvv
+	e53eYd3Epw6iFgOpeRFJ3JuRKpoNOyBmufyu9ZbH5Nz3WCMrdPqsTsYsD0iBaPdp4pgK
+	xAXQ==
+X-Gm-Message-State: APjAAAUGP1DxZS+l39YrgpBdrL+JTMhtMYd1vO+dZnP6EYHWIIfqd6yD
+	I5IFrW0ZnO1bU4C4WBiDTGhahQ72bz0G/G6M7MvlyEoTCxPz9Q==
+X-Google-Smtp-Source: APXvYqyon0NRlMSooHH8iwi0XIjWY9gkahvvDDBkS9+FiSg9fbUJ+pGNkp2pdYVvcIE4kQtwPwH/mvGJ3RYXh3OkSBQ=
+X-Received: by 2002:a92:8388:: with SMTP id p8mr5826502ilk.49.1573146119708;
+	Thu, 07 Nov 2019 09:01:59 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <620c7105-97cf-0595-0c72-fb6bcc660348@windriver.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Yuan Chao <yuanc.fnst@cn.fujitsu.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH 1/8] python-more-itertools: downgrade 7.2.0 -> 5.0.0
+From: Jon Mason <jdmason@kudzu.us>
+Date: Thu, 7 Nov 2019 12:01:48 -0500
+Message-ID: <CAPoiz9x+8E-NHEkO=1GXMFHRn-FTST6iizTAZcmceE5qCK+PEA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	Yocto discussion list <yocto@yoctoproject.org>
+Subject: OpenEmbedded event at FOSDEM20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,45 +53,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 16:18:34 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 07 Nov 2019 17:01:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Nov 06, 2019 at 05:30:29PM +0800, Hongxu Jia wrote:
->...
-> Should we clarify that we do not support python2? If yes, we could clean up
-> them.
-> 
-> In this case, if we do not support python2 more-itertools, we should also
-> 
-> clean up these python2 recipes (python-pytest,python-pluggy,python-zipp)
-> 
-> that runtime depends on more-itertools.
-> 
-> 
-> As above upstream commits [1] said, the old version 5.0.0 is the last
-> version
-> 
-> to support python2. Two choice: going backwards or cleaning up,
->...
+OpenEmbedded is considering creating a mini-conference attached to
+FOSDEM 2020 (https://fosdem.org/2020/), and we would like your help.
+Please fill out this short, 10 question, survey to determine the
+viability of such an effort.
+https://www.surveymonkey.com/r/9QP76CL
 
-python-more-itertools was added to master less than 2 months ago,
-and the inital add was version 7.2.0.
-
-What you write implies that the Python2 version was never working,
-and should be removed with all reverse dependencies from both master
-and zeus.
-
-> //Hongxu
-
-cu
-Adrian
-
--- 
-
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
-
+Thank you,
+The OpenEmbedded Board
 
