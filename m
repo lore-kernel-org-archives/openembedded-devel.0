@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D02A7F7BA
+	by mail.openembedded.org (Postfix) with ESMTP id 6C30C7F895
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 03:53:01 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,276,1569254400"; d="scan'208";a="77982654"
+	Thu,  7 Nov 2019 07:17:24 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,277,1569254400"; d="scan'208";a="77992071"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2019 11:53:01 +0800
+	by heian.cn.fujitsu.com with ESMTP; 07 Nov 2019 15:17:23 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id EF9044CE1A0A
+	by cn.fujitsu.com (Postfix) with ESMTP id 633F24CE1511
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 11:44:53 +0800 (CST)
+	Thu,  7 Nov 2019 15:09:14 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 7 Nov 2019 11:52:58 +0800
+	Server (TLS) id 14.3.439.0; Thu, 7 Nov 2019 15:17:25 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 7 Nov 2019 11:53:17 +0800
-Message-ID: <20191107035317.22784-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 7 Nov 2019 15:17:38 +0800
+Message-ID: <20191107071738.7664-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: EF9044CE1A0A.AAE87
+X-yoursite-MailScanner-ID: 633F24CE1511.A439F
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-flask-babel: upgrade 0.11.2 -> 0.12.2
+Subject: [meta-python] [PATCH] python-flask-migrate: upgrade 2.2.1 -> 2.5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,42 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 03:53:02 -0000
+X-List-Received-Date: Thu, 07 Nov 2019 07:17:25 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-flask-babel.inc    | 4 ++--
- ...hon-flask-babel_0.11.2.bb => python-flask-babel_0.12.2.bb} | 0
- ...n3-flask-babel_0.11.2.bb => python3-flask-babel_0.12.2.bb} | 0
+ meta-python/recipes-devtools/python/python-flask-migrate.inc  | 4 ++--
+ ...n-flask-migrate_2.2.1.bb => python-flask-migrate_2.5.2.bb} | 0
+ ...-flask-migrate_2.2.1.bb => python3-flask-migrate_2.5.2.bb} | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flask-babel_0.11.2.bb => python-flask-babel_0.12.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-flask-babel_0.11.2.bb => python3-flask-babel_0.12.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-flask-migrate_2.2.1.bb => python-flask-migrate_2.5.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-flask-migrate_2.2.1.bb => python3-flask-migrate_2.5.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-babel.inc b/meta-python/recipes-devtools/python/python-flask-babel.inc
-index f560f3ed5..0e507f337 100644
---- a/meta-python/recipes-devtools/python/python-flask-babel.inc
-+++ b/meta-python/recipes-devtools/python/python-flask-babel.inc
-@@ -2,8 +2,8 @@ DESCRIPTION = "i18n and l10n support for Flask based on babel and pytz"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=51917f3e8e858f5ae295a7d0e2eb3cc9"
+diff --git a/meta-python/recipes-devtools/python/python-flask-migrate.inc b/meta-python/recipes-devtools/python/python-flask-migrate.inc
+index dfb20e9ee..5202f8be0 100644
+--- a/meta-python/recipes-devtools/python/python-flask-migrate.inc
++++ b/meta-python/recipes-devtools/python/python-flask-migrate.inc
+@@ -2,8 +2,8 @@ DESCRIPTION = "SQLAlchemy database migrations for Flask applications using Alemb
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b69377f79f3f48c661701236d5a6a85"
  
--SRC_URI[md5sum] = "07803453743f139309021572a799c6b3"
--SRC_URI[sha256sum] = "c0d75710bd4b0fe866f9f2347de6e19208712f9cec006436b4c1c15d4cb0c939"
-+SRC_URI[md5sum] = "fcf2f360ff279d3133e40974804efd72"
-+SRC_URI[sha256sum] = "316ad183e42003f3922957fa643d0a1e8e34a0f0301a88c3a8f605bc37ba5c86"
+-SRC_URI[md5sum] = "aaeee55431d0287063657122ff41a0e6"
+-SRC_URI[sha256sum] = "cd1b4e6cb829eeb41c02ad9202d83bef5f4b7a036dd9fad72ce96ad1e22efb07"
++SRC_URI[md5sum] = "bedeb0366740fda6912fea683be11968"
++SRC_URI[sha256sum] = "a96ff1875a49a40bd3e8ac04fce73fdb0870b9211e6168608cbafa4eb839d502"
  
- PYPI_PACKAGE = "Flask-Babel"
+ PYPI_PACKAGE = "Flask-Migrate"
  
-diff --git a/meta-python/recipes-devtools/python/python-flask-babel_0.11.2.bb b/meta-python/recipes-devtools/python/python-flask-babel_0.12.2.bb
+diff --git a/meta-python/recipes-devtools/python/python-flask-migrate_2.2.1.bb b/meta-python/recipes-devtools/python/python-flask-migrate_2.5.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-flask-babel_0.11.2.bb
-rename to meta-python/recipes-devtools/python/python-flask-babel_0.12.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-flask-babel_0.11.2.bb b/meta-python/recipes-devtools/python/python3-flask-babel_0.12.2.bb
+rename from meta-python/recipes-devtools/python/python-flask-migrate_2.2.1.bb
+rename to meta-python/recipes-devtools/python/python-flask-migrate_2.5.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-flask-migrate_2.2.1.bb b/meta-python/recipes-devtools/python/python3-flask-migrate_2.5.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-flask-babel_0.11.2.bb
-rename to meta-python/recipes-devtools/python/python3-flask-babel_0.12.2.bb
+rename from meta-python/recipes-devtools/python/python3-flask-migrate_2.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-flask-migrate_2.5.2.bb
 -- 
 2.20.1
 
