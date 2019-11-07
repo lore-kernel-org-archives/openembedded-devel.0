@@ -1,51 +1,39 @@
-Return-Path: <anders.roxell@linaro.org>
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com
-	[209.85.208.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A2BB7F95D
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 49AD37F95D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 16:11:00 +0000 (UTC)
-Received: by mail-lj1-f172.google.com with SMTP id 139so2922786ljf.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Nov 2019 08:11:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=T43CLwwj7QSgC5q/QabAR99dOs2KwEjE/2fE2yLMQ9o=;
-	b=r8VPsSUKM663r3+3D+OaeSR/sWSI0DtQg100XubfXehQdt0aDZ9VndNtwIst5opJec
-	u7lPxS4fFnQrX5Q5FbmB2J02phAI8gV+y8xAriRfW0hpRd7VdZkvhonQjjIPN1ip4mDs
-	CbBS5FsXHsa8UoXrKxTD2E8k65NIE8CP4jgUUQ/9Vryr/fa3RdopqrXVnBfKgQkQb/M3
-	o7x70fPRAoLiVvQpTmE/oVmTcnIQ1XiLSUpro2gpv34LewwDhRi/gTL9TeBTUs7k3F3F
-	gglxdRxuOC8MTNeG9UvjbMQ1fQ2ho3LM3Rs3HIizM57RMWV4OLoyAZ2hMhmilQkqBriw
-	IIrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=T43CLwwj7QSgC5q/QabAR99dOs2KwEjE/2fE2yLMQ9o=;
-	b=lf6hzj1aGApaRSk7a9eiJHSXVctOmN4PqH7mq5l4kB6N0uQ5iX5wNLVCDbgnXizXiT
-	CWEdTHwgn6QvIDrSfohQdoMaAZPpOV0U5TdnE2+cbPn+/TWmNsy+ngtRh3cCQEerb3re
-	4MCbKRmVdHRqaM8v3HpvDa0Lfm2/wHzRZCQOZ72UR5BaYQGTdpxmoGbhf7R0TaJjz8AR
-	im7GW/jOQvqSVsLrRltktMV1G4sQTaqabUjOEDDOclqDWvXeQh6wKpsdsT6hQcZA/5et
-	eISo3B2MUm/O0XwJ6BQjkaUKp35GIUXAUwqg4Estlpg6emTu+fWhffZ7kGAEcp2aqCGk
-	tp6Q==
-X-Gm-Message-State: APjAAAWys9LrThmp5G7ZH07cuA7hGv5fLEPlDDZu9Zonv9StYfgp+PrE
-	+OkuNmX7h0J5Ud/g1N99XLVBZxVvgCsC1Q==
-X-Google-Smtp-Source: APXvYqzCRT5dZhJk8L4ebPOo2Uv+INHXq37nG0xhi5koaOQ06vgMkTBJKQzRoJDDPRaMjoFH3/KxpQ==
-X-Received: by 2002:a2e:9e4c:: with SMTP id g12mr3101114ljk.103.1573143060847; 
-	Thu, 07 Nov 2019 08:11:00 -0800 (PST)
-Received: from localhost (c-413e70d5.07-21-73746f28.bbcust.telenor.se.
-	[213.112.62.65]) by smtp.gmail.com with ESMTPSA id
-	k25sm1297528ljg.22.2019.11.07.08.11.00
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 07 Nov 2019 08:11:00 -0800 (PST)
-From: Anders Roxell <anders.roxell@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Nov 2019 17:10:55 +0100
-Message-Id: <20191107161055.908-1-anders.roxell@linaro.org>
-X-Mailer: git-send-email 2.20.1
+	Thu,  7 Nov 2019 16:18:33 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 4787qr50QqzF2;
+	Thu,  7 Nov 2019 17:18:31 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1573143513;
+	bh=7e22VcpbM0sOO2DUD744uT9Bh3AC5IcPqU9SYpb2pQU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=R2rte5HhzL7Ow1QVac7dBWkbYclT7h0kY0BMaboiHF/pxz8YM2WMeJkUEVOaaxfF4
+	VNVrq7Hi05bo1KpUMiXtKmp4PQqKABotX0xBOC5X+KvA5GSoZCz0UIqJ2aKaPWGgjR
+	pvLTEp1WHoEesN+NwW1WeZ+ahyAx5odH20VXb8qgIb7OPKGfPNY5ilIpXWLsat5+/A
+	+LlbUgPG1HF4mL4fI71RjobNS7OkS3cpgdlnuKH1dTR5HECyV+JQSCYF9RbHGqHWtP
+	xEuGxj43WDvtXCesxu+lO6rVnU0E0bx3lojLgLoVxzkxtIOW+7oumgwr+YaxqmnPhm
+	OM/V0Sbgc+dYamfvO8Vk4VzoFum4LW2IHqdesoM6ZCd/k12kJ2TV3iVdy9EFp9IxBa
+	LhN9xVSdNA66nH5UwiQBKYUM+4SZxGX1PKROn3JL68UBHyLYFDNCOE5FRjQmIyGg2I
+	dO9dSM771mTmYnhFRmLyxgTohBbsdUGv7HV09uKeB8fp8oOSbMTnZPgh2biyPLwkdq
+	FJttONda0uRnNbXhQuoVb5GsIbwYcf0x4szNL0ib9KCliZG+1DDqJ0FRTdw4WlA8Te
+	tL9mYEA9XZFnvaT4y1cwK1XgtUg6eWNiohzS02TVamUDeR8vgwLeZbno8nYK+qmi0j
+	RO1vlWhmeyJYNy7JbyPgpxQ4=
+Date: Thu, 7 Nov 2019 18:18:29 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <20191107161829.GA31984@localhost>
+References: <20191106074935.46751-1-hongxu.jia@windriver.com>
+	<CALbNGRSyJYthd3zWWXfVBCzTNXhdNBA9K-MKAGFqHYVEuLNWYg@mail.gmail.com>
+	<620c7105-97cf-0595-0c72-fb6bcc660348@windriver.com>
 MIME-Version: 1.0
-Cc: paolo.valente@linaro.org
-Subject: [PATCH] s-suite: install missing create_config.sh
+In-Reply-To: <620c7105-97cf-0595-0c72-fb6bcc660348@windriver.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: Yuan Chao <yuanc.fnst@cn.fujitsu.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH 1/8] python-more-itertools: downgrade 7.2.0 -> 5.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +46,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 16:11:00 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 07 Nov 2019 16:18:34 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-When running s-suite v3.6, it complains that create_config.sh isn't
-installed.
+On Wed, Nov 06, 2019 at 05:30:29PM +0800, Hongxu Jia wrote:
+>...
+> Should we clarify that we do not support python2? If yes, we could clean up
+> them.
+> 
+> In this case, if we do not support python2 more-itertools, we should also
+> 
+> clean up these python2 recipes (python-pytest,python-pluggy,python-zipp)
+> 
+> that runtime depends on more-itertools.
+> 
+> 
+> As above upstream commits [1] said, the old version 5.0.0 is the last
+> version
+> 
+> to support python2. Two choice: going backwards or cleaning up,
+>...
 
-./config_params.sh: line 1: ../create_config.sh: No such file or directory
+python-more-itertools was added to master less than 2 months ago,
+and the inital add was version 7.2.0.
 
-Rework so that create_config.sh is installed.
+What you write implies that the Python2 version was never working,
+and should be removed with all reverse dependencies from both master
+and zeus.
 
-Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
----
- meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+> //Hongxu
 
-diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-index 71483d88be1d..d6852e29fb34 100644
---- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-+++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
-@@ -19,6 +19,7 @@ do_install() {
- 
-     install -m0755 ${S}/def_config.sh ${D}/opt/S-suite
-     install -m0755 ${S}/config_params.sh ${D}/opt/S-suite
-+    install -m0755 ${S}/create_config.sh ${D}/opt/S-suite
-     install -m0755 ${S}/process_config.sh ${D}/opt/S-suite
- }
- 
+cu
+Adrian
+
 -- 
-2.20.1
+
+       "Is there not promise of rain?" Ling Tan asked suddenly out
+        of the darkness. There had been need of rain for many days.
+       "Only a promise," Lao Er said.
+                                       Pearl S. Buck - Dragon Seed
 
 
