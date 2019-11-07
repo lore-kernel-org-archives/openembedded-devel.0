@@ -1,45 +1,51 @@
-Return-Path: <prvs=2076570a8=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id CC52C7C127
+Return-Path: <anders.roxell@linaro.org>
+Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com
+	[209.85.208.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A2BB7F95D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 15:19:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1573139956; x=1604675956;
-	h=subject:to:references:from:message-id:date:mime-version:
-	in-reply-to:content-transfer-encoding;
-	bh=x0en6ecpXsD3vLMRfGLG01I7V0LDt9BFnIgiIqVJ24s=;
-	b=GGBgMGdo4pNnrHDHtmMhjP7aX6TgQeQkWBFys2S8TYa5s2AVCAoL5hMm
-	ZCqh269ensDyt5G5RMzcOpy8tplOZHaQ5EXfVIT4I3uO2OpogEtMZcXDu
-	LkBmxnaJSJI6Ze4MiuO0cmgCe7t2e9xxYiUSLTQoR4BfiKRhzlnVcoQ95
-	al8tcSWkmpCajWc0cl1YyT1EYsCo23kJTxgINqkcvG783Yp5H5WF+5Ksm
-	uYbVOa6p9zRtVEy/Oh1I5kvNF9WtFLCYPkJdV9E1U26IiJk3XryMWPMtm
-	boeJnhdPmuqE0lOf872PqFisrcp5CEWvX9wQvQXn60t1y2muEp4UuXvmO w==;
-IronPort-SDR: uolQUcNWYq/5d7J6iOLPAHr5dp0LNUIzdrI1JvNlvEYXepIvOoWEWZWYgamkkZl6OPLrrgwecj
-	yS9ZckyTDlQje7GaVutAjHS7c0AnqfSFA/5o4JUiE/fIndm/GBOONRmePnMF9pR9QzKV2/XX2I
-	wXnRUA1ZRgpgPwkeCqE67517hS63SAX4elkXrI8F8ERlilz0T+V+ASBC562FacooVgUYmUNJR7
-	P6lojMmJbt3ZwyNXdfiUgsNY5uHw1DIjVt6Z55XZyA4RFo6Zz5vp/OChaAlhuNzNcniYnYv8Gy
-	blM=
-X-IronPort-AV: E=Sophos;i="5.68,278,1569276000"; d="scan'208";a="20757595"
-To: "chris.laplante@agilent.com" <chris.laplante@agilent.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <b6f2c586-cb29-5015-ec35-ab2c7dcf8d4d@amotus.ca>
-	<20190909205704.GA14642@localhost>
-	<6454a666-ebbe-ab60-533d-b60ffb927682@skidata.com>
-	<CY4PR12MB16534186A02A4649C5D9F17F8B9F0@CY4PR12MB1653.namprd12.prod.outlook.com>
-	<CY4PR12MB1653332D03E68DF8C59AB10A8B780@CY4PR12MB1653.namprd12.prod.outlook.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <35cdc1c6-0cbc-1c9c-2905-d8376a729a05@skidata.com>
-Date: Thu, 7 Nov 2019 16:19:08 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.1.1
+	Thu,  7 Nov 2019 16:11:00 +0000 (UTC)
+Received: by mail-lj1-f172.google.com with SMTP id 139so2922786ljf.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 07 Nov 2019 08:11:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=T43CLwwj7QSgC5q/QabAR99dOs2KwEjE/2fE2yLMQ9o=;
+	b=r8VPsSUKM663r3+3D+OaeSR/sWSI0DtQg100XubfXehQdt0aDZ9VndNtwIst5opJec
+	u7lPxS4fFnQrX5Q5FbmB2J02phAI8gV+y8xAriRfW0hpRd7VdZkvhonQjjIPN1ip4mDs
+	CbBS5FsXHsa8UoXrKxTD2E8k65NIE8CP4jgUUQ/9Vryr/fa3RdopqrXVnBfKgQkQb/M3
+	o7x70fPRAoLiVvQpTmE/oVmTcnIQ1XiLSUpro2gpv34LewwDhRi/gTL9TeBTUs7k3F3F
+	gglxdRxuOC8MTNeG9UvjbMQ1fQ2ho3LM3Rs3HIizM57RMWV4OLoyAZ2hMhmilQkqBriw
+	IIrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=T43CLwwj7QSgC5q/QabAR99dOs2KwEjE/2fE2yLMQ9o=;
+	b=lf6hzj1aGApaRSk7a9eiJHSXVctOmN4PqH7mq5l4kB6N0uQ5iX5wNLVCDbgnXizXiT
+	CWEdTHwgn6QvIDrSfohQdoMaAZPpOV0U5TdnE2+cbPn+/TWmNsy+ngtRh3cCQEerb3re
+	4MCbKRmVdHRqaM8v3HpvDa0Lfm2/wHzRZCQOZ72UR5BaYQGTdpxmoGbhf7R0TaJjz8AR
+	im7GW/jOQvqSVsLrRltktMV1G4sQTaqabUjOEDDOclqDWvXeQh6wKpsdsT6hQcZA/5et
+	eISo3B2MUm/O0XwJ6BQjkaUKp35GIUXAUwqg4Estlpg6emTu+fWhffZ7kGAEcp2aqCGk
+	tp6Q==
+X-Gm-Message-State: APjAAAWys9LrThmp5G7ZH07cuA7hGv5fLEPlDDZu9Zonv9StYfgp+PrE
+	+OkuNmX7h0J5Ud/g1N99XLVBZxVvgCsC1Q==
+X-Google-Smtp-Source: APXvYqzCRT5dZhJk8L4ebPOo2Uv+INHXq37nG0xhi5koaOQ06vgMkTBJKQzRoJDDPRaMjoFH3/KxpQ==
+X-Received: by 2002:a2e:9e4c:: with SMTP id g12mr3101114ljk.103.1573143060847; 
+	Thu, 07 Nov 2019 08:11:00 -0800 (PST)
+Received: from localhost (c-413e70d5.07-21-73746f28.bbcust.telenor.se.
+	[213.112.62.65]) by smtp.gmail.com with ESMTPSA id
+	k25sm1297528ljg.22.2019.11.07.08.11.00
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 07 Nov 2019 08:11:00 -0800 (PST)
+From: Anders Roxell <anders.roxell@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  7 Nov 2019 17:10:55 +0100
+Message-Id: <20191107161055.908-1-anders.roxell@linaro.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <CY4PR12MB1653332D03E68DF8C59AB10A8B780@CY4PR12MB1653.namprd12.prod.outlook.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex6srv.skidata.net (192.168.111.84) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: Support for OpenJDK 9+
+Cc: paolo.valente@linaro.org
+Subject: [PATCH] s-suite: install missing create_config.sh
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,33 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 15:19:15 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 07 Nov 2019 16:11:00 -0000
+Content-Transfer-Encoding: 8bit
 
+When running s-suite v3.6, it complains that create_config.sh isn't
+installed.
 
-On 07/11/2019 15:48, chris.laplante@agilent.com wrote:
->>>>> We recently got a request to add support for Java(OpenJdk) 9+.
->>>>> I came to wonder if there was any limitations preventing the use of
->>>>> Openjdk 9+ on arm?
->>>
->>> None that I'm aware of...
->>
->> I have a somewhat related question. Is there a technical reason that we're still using GNU Classpath? That project looks to be
->> thoroughly abandoned since 2012. As you may have seen last night I submitted some patches to fix some "simple" bugs in BigDecimal.
->> By "simple", I mean the kind of bug that I'd expect to bite many users, as opposed to an esoteric or corner-case bug.
->>
->> If it's just that no one has ever volunteered to move to something newer, then I may be able to help. No commitments yet though.
+./config_params.sh: line 1: ../create_config.sh: No such file or directory
 
-Hi,
-AFAIK there are no technical reasons for Classpath and any help is of 
-course greatly appreciated ;-)
+Rework so that create_config.sh is installed.
 
-regards;Richard.L
+Signed-off-by: Anders Roxell <anders.roxell@linaro.org>
+---
+ meta-oe/recipes-benchmark/s-suite/s-suite_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-> 
-> Bump?
-> 
+diff --git a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+index 71483d88be1d..d6852e29fb34 100644
+--- a/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
++++ b/meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
+@@ -19,6 +19,7 @@ do_install() {
+ 
+     install -m0755 ${S}/def_config.sh ${D}/opt/S-suite
+     install -m0755 ${S}/config_params.sh ${D}/opt/S-suite
++    install -m0755 ${S}/create_config.sh ${D}/opt/S-suite
+     install -m0755 ${S}/process_config.sh ${D}/opt/S-suite
+ }
+ 
+-- 
+2.20.1
 
 
