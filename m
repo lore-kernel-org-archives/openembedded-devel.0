@@ -1,56 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A147E7FC75
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 69B227F9AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 17:13:50 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id m4so5891742qke.9
+	Fri,  8 Nov 2019 18:11:01 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id u22so7415480qtq.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Nov 2019 09:13:52 -0800 (PST)
+	Fri, 08 Nov 2019 10:11:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=klyB68hiouvKT8lvccfgdVzG6NBok790hoqRbmaC6Rc=;
-	b=twe6h1+Ahm05vt0bjuUCw8Wbyq/kLNQ6d44I1hKRSV4v1sIrhxeLNK+RLY7ipQkS7Y
-	Au/ICe8uZo8Q7+pTf1YjdUhol+LPZi4Hqj5zAPzSvKJvnoK0kUuXEqLLEgWJxvJfvA2r
-	tCAKrB37hhJ2Wa9veTWJyCZc+aPcPMUnekcjCxbedacxMJMqH/cqkQ1gpbL3xxP+D2wi
-	3uYC2zlVQNy2nvDNI+GOYJ1fgfRJseHcuQQRs749KPzEQS2SRidAOn45IMgonlpcY4CL
-	Pz701sj+LEqTxQ0vZtAP8/KQO9PxCYsRyvVHQhr8tYlolYmAVzsT8kjFFx3HzRA1ag6t
-	OVEw==
+	:cc; bh=aw5Oz3WM/VcIvcvBb8RPOLd2EmCmex0RshM6hhJ6YoU=;
+	b=rz3ZcAtHCzbi2UTfPJfB6OV8S5++myFEScFCrO3FKZx4xDquQhthXVJjWPqHJSsBf+
+	d7id9mN0SXy9reOr+3dq+uiqjJVb4/a92agloFk1yF/ygC5iM+pLsCo3qtPOY2h2OCi2
+	JkR6S+S+Rmf+lbPWqDnggUK4uIldxVFTJqf8WkDCZer6zuLh5LrRv6s7j9Jbhq3Nt06h
+	W3uiUczHwkw9y+1JK/HS3bH3+znELGPw3aQIdPA5olVslPySgkhZjkK5iHLfJ0h+ODI+
+	kZUCMbSsZ8R5IhaR/yyJYkqXQ+TKXL+PQqFjP7WY7fClJRnapAYhCYA2HAXFvO5IWar1
+	yRhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=klyB68hiouvKT8lvccfgdVzG6NBok790hoqRbmaC6Rc=;
-	b=hA4RGGScPexWan1rxdkmm6fqNQgHY6YvC89lTTq7TPs9ZcYZ9zGOcwqDPf8cOvwhfu
-	Fiqm8DQd1ahFO3M6+73nr0cdyNAvdt/V/sgkSngEo96cZIrdiWfUWPrFJywD6ErdP10s
-	OETcf/ndSvnn4vGwzIFRvp5mKiL9ZdU6hQwp94drX4A/nSpfCVIqg+C2EF/Ekb78SB4e
-	BNn8qo6PmnxNjOA7DkrBG4q2u/kFeoW/UG07XHx6gTMGzyyjRP4Typdn03yZIKXIyAQP
-	YTfDP0vgHZ+i2Qe4zZfVQL8Vgy0aehacYFVZYjeHrDV9HNrQuNu2pHqAJUKxkYbE3mZd
-	sibA==
-X-Gm-Message-State: APjAAAXBuhgPTBwOY6bUN3V01pS695jRiV/ZTlNXJUuvsdwLhtdiT3/O
-	T7mslR5wzj4ODyGIUlqfljhxRpQRO8nAVB1/qKA=
-X-Google-Smtp-Source: APXvYqwdTee9nT5HRzlZTgFBPsOZcOCsxEXZ5sg85tS8TJOZht2GyJGAJNlc4ABxq7oBYQR9mA+4kqnFscQtg68AHks=
-X-Received: by 2002:a37:6554:: with SMTP id z81mr10283146qkb.9.1573233231220; 
-	Fri, 08 Nov 2019 09:13:51 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=aw5Oz3WM/VcIvcvBb8RPOLd2EmCmex0RshM6hhJ6YoU=;
+	b=Of4iAh8CskIilx1fwa6iAylKkqsvHTH9bvjcxQEifhpNQdb3U/THmjFZbV2d+vJDE8
+	4t6EmXEowO/z6k91QQckSx2T7myqc6MgnigkgVblz488QQF2GYVb/g1IL7BSHQj2l745
+	cN4cWe7IIB7GiS0aPJaIiDXfW/raR8kFzmHnrqN1yl4CkqTYiC4qVYMQYP0lh/imRSWs
+	T1qxGyH7R308YpKK2rm1N+FMDwDwNPaIqKIoj/WqKCURmFwwI9Z3mrEw2Vl6utmJ7WKk
+	AYv2hJlDRQUoLJwINzTqbimb79SVLZl2s7y0mXVYIXUXWMspqCaddtzvuX+IU0hsiee3
+	yvaA==
+X-Gm-Message-State: APjAAAWKRGENa8bv/WpfkOC7/DWlOHFJQfNttNGN1q1x/efraMnOYwWU
+	X6+TVgBIrw55PwXOT+hguIA0aBK0nFROEhIrrI0=
+X-Google-Smtp-Source: APXvYqzzEyStbO9RUX463LDYMTvhEBEBCVjvN3W+/qVRv+CgmP+2UfkxsIVe9Ocvn0olT7WKpWvo5TEXqe/6c2pgK5U=
+X-Received: by 2002:ac8:1415:: with SMTP id k21mr11661441qtj.80.1573236661870; 
+	Fri, 08 Nov 2019 10:11:01 -0800 (PST)
 MIME-Version: 1.0
-References: <1571141621-20235-1-git-send-email-marek.bykowski@gmail.com>
-	<20191016104557.GA7998@localhost> <20191016142112.10a645d2@gmail.com>
-	<CAMKF1srjpre+zbi6Q2==McOEvV8njBdzqOf8nGxor9NN5tMoig@mail.gmail.com>
-	<20191018134224.62ca6095@gmail.com>
-	<83e0f896-8ec4-df4f-d14c-256cb70774c1@windriver.com>
-	<20191021113018.3c684d51@gmail.com>
-	<0411e8da-91a7-f586-2d65-490e8c327c2d@windriver.com>
-	<20191022091523.60d5434a@gmail.com> <20191022120320.71fb6436@gmail.com>
-	<CAHw2UgAT_sL39YBSRJ2D7EKA28=4aL3OHJX7LW2Y4CVw_6STwg@mail.gmail.com>
-In-Reply-To: <CAHw2UgAT_sL39YBSRJ2D7EKA28=4aL3OHJX7LW2Y4CVw_6STwg@mail.gmail.com>
+References: <20191108091441.25374-1-stefan@agner.ch>
+In-Reply-To: <20191108091441.25374-1-stefan@agner.ch>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 8 Nov 2019 09:13:24 -0800
-Message-ID: <CAMKF1srcG7HP18wyYMK8Sn4uLbzyr+ePTGCLUZXvyecVj6nBoQ@mail.gmail.com>
-To: Marek <marek.bykowski@gmail.com>
-Cc: Adrian Bunk <bunk@stusta.de>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCHv3] lmbench: Fix/clean-up the build for lmbench
+Date: Fri, 8 Nov 2019 10:10:34 -0800
+Message-ID: <CAMKF1spuqH_1dTyRy_gPLTVusyiVkxokDZMmPmDStAR=Db0q7A@mail.gmail.com>
+To: Stefan Agner <stefan@agner.ch>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Stefan Agner <stefan.agner@toradex.com>
+Subject: Re: [meta-oe][PATCH] zstd: move recipe to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,53 +54,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 17:13:50 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 18:11:01 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Hi Marek
+can you ping me when its merged into oe-core
 
-I thought there are some feedbacks to be addressed, so I was hoping to get =
-a v3
-
-On Fri, Nov 8, 2019 at 5:24 AM Marek <marek.bykowski@gmail.com> wrote:
+On Fri, Nov 8, 2019 at 1:14 AM Stefan Agner <stefan@agner.ch> wrote:
 >
-> Any thoughts if this is going to be included in the upstream?
-> Thanks,
-> Marek
+> From: Stefan Agner <stefan.agner@toradex.com>
 >
-> On Tue, 22 Oct 2019 at 12:03, marek.bykowski@gmail.com
-> <marek.bykowski@gmail.com> wrote:
-> >
-> > On Tue, 22 Oct 2019 09:15:23 +0200
-> > "marek.bykowski@gmail.com" <marek.bykowski@gmail.com> wrote:
-> >
-> > > On Mon, 21 Oct 2019 19:42:45 -0400
-> > > Randy MacLeod <randy.macleod@windriver.com> wrote:
-> > >
-> > > > We have had Intel employees working on oe-core / meta-openembedded
-> > > > for years so I hope that you will send the commit to that repo on
-> > > > github and indicate the
-> > > > upstream-status in the patch what we integrate into meta-oe.
-> > >
-> > > Hi Randy,
-> > >
-> > > I'm Intel (actually a subcontractor to them) working on occasion with
-> > > Daniel Drogomir, Charlie Paul, and Chantale Ouimet from Windriver. I
-> > > have put the names as chances they may be your colleagues. Even
-> > > though I'm Intel I didn't know of lmbench Intel repo on github - this
-> > > must a totally different team. Sure I'll send the patch onto that
-> > > repo indicating these are the changes integration planned into
-> > > meta-oe.
-> > >
-> > > Regards,
-> > > Marek
-> >
-> > Done https://github.com/intel/lmbench/pull/9
+> Move the zstd recipe to openembedded-core and hence remove it in
+> meta-oe.
 >
+> Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
+> ---
+>  meta-oe/recipes-extended/zstd/zstd_1.4.4.bb | 35 ---------------------
+>  1 file changed, 35 deletions(-)
+>  delete mode 100644 meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
 >
+> diff --git a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb b/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
+> deleted file mode 100644
+> index eb201f413..000000000
+> --- a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
+> +++ /dev/null
+> @@ -1,35 +0,0 @@
+> -SUMMARY = "Zstandard - Fast real-time compression algorithm"
+> -DESCRIPTION = "Zstandard is a fast lossless compression algorithm, targeting \
+> -real-time compression scenarios at zlib-level and better compression ratios. \
+> -It's backed by a very fast entropy stage, provided by Huff0 and FSE library."
+> -HOMEPAGE = "http://www.zstd.net/"
+> -SECTION = "console/utils"
+> -
+> -LICENSE = "BSD-3-Clause & GPLv2"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
+> -                    file://COPYING;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
+> -
+> -SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1"
+> -
+> -SRCREV = "10f0e6993f9d2f682da6d04aa2385b7d53cbb4ee"
+> -UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+> -
+> -S = "${WORKDIR}/git"
+> -
+> -PACKAGECONFIG ??= ""
+> -PACKAGECONFIG[lz4] = "HAVE_LZ4=1,HAVE_LZ4=0,lz4"
+> -PACKAGECONFIG[lzma] = "HAVE_LZMA=1,HAVE_LZMA=0,xz"
+> -PACKAGECONFIG[zlib] = "HAVE_ZLIB=1,HAVE_ZLIB=0,zlib"
+> -
+> -# See programs/README.md for how to use this
+> -ZSTD_LEGACY_SUPPORT ??= "4"
+> -
+> -do_compile () {
+> -    oe_runmake ${PACKAGECONFIG_CONFARGS} ZSTD_LEGACY_SUPPORT=${ZSTD_LEGACY_SUPPORT}
+> -}
+> -
+> -do_install () {
+> -    oe_runmake install 'DESTDIR=${D}'
+> -}
+> -
+> -BBCLASSEXTEND = "native nativesdk"
+> --
+> 2.17.1
 >
 > --
-> Sl=C3=A1n,
-> Marek
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
