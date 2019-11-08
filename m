@@ -1,26 +1,24 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id D4C897FC6E
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 708077F265
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 09:14:48 +0000 (UTC)
-Received: from paloverde.toradex.int (unknown [31.10.206.124])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 963A05C086F;
-	Fri,  8 Nov 2019 10:14:49 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1573204489;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:content-type:content-transfer-encoding:
-	in-reply-to:references; bh=d4sxuJtmBf4CcuO9OOBN/UDcCjrpUy+ddffrg0kZwFs=;
-	b=VRWYIFRCPjbCg3qmWXFvHchDA2G1nyhmT4zwBvZ2Ea9p827U8Xz686NGkUjw+WP4z/5WYN
-	eLJ5cncoLnSv5pK4EDqoKcKrYv27fLUvfh4s2yi7iKJvGRtCcXCOa4BRbFUkudtQvN1UZ1
-	o66eDwoV+VIsFLe/jXngTHoM+YaRSlU=
-From: Stefan Agner <stefan@agner.ch>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Nov 2019 09:14:41 +0000
-Message-Id: <20191108091441.25374-1-stefan@agner.ch>
+	Fri,  8 Nov 2019 10:22:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xA8AMe19006855
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 8 Nov 2019 02:22:40 -0800
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Fri, 8 Nov 2019 02:22:39 -0800
+From: <kai.kang@windriver.com>
+To: <schnitzeltony@gmail.com>
+Date: Fri, 8 Nov 2019 18:22:33 +0800
+Message-ID: <20191108102237.34824-1-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.17.1
-Cc: Stefan Agner <stefan.agner@toradex.com>
-Subject: [meta-oe][PATCH] zstd: move recipe to oe-core
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-xfce][Patch 0/4] Update 3 packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,60 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 09:14:49 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 10:22:40 -0000
+Content-Type: text/plain
 
-From: Stefan Agner <stefan.agner@toradex.com>
+From: Kai Kang <kai.kang@windriver.com>
 
-Move the zstd recipe to openembedded-core and hence remove it in
-meta-oe.
 
-Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
----
- meta-oe/recipes-extended/zstd/zstd_1.4.4.bb | 35 ---------------------
- 1 file changed, 35 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
+Kai Kang (4):
+  xfce4-genmon-plugin: 4.0.1 -> 4.0.2
+  xfce-panel-plugin.bbclass: correct SRC_URI with xfce_verdir
+  xfce4-weather-plugin: 0.9.1 -> 0.10.0
+  xfce4-screensaver: 0.1.5 -> 0.1.8
 
-diff --git a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb b/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
-deleted file mode 100644
-index eb201f413..000000000
---- a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--SUMMARY = "Zstandard - Fast real-time compression algorithm"
--DESCRIPTION = "Zstandard is a fast lossless compression algorithm, targeting \
--real-time compression scenarios at zlib-level and better compression ratios. \
--It's backed by a very fast entropy stage, provided by Huff0 and FSE library."
--HOMEPAGE = "http://www.zstd.net/"
--SECTION = "console/utils"
--
--LICENSE = "BSD-3-Clause & GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
--                    file://COPYING;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
--
--SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1"
--
--SRCREV = "10f0e6993f9d2f682da6d04aa2385b7d53cbb4ee"
--UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
--
--S = "${WORKDIR}/git"
--
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[lz4] = "HAVE_LZ4=1,HAVE_LZ4=0,lz4"
--PACKAGECONFIG[lzma] = "HAVE_LZMA=1,HAVE_LZMA=0,xz"
--PACKAGECONFIG[zlib] = "HAVE_ZLIB=1,HAVE_ZLIB=0,zlib"
--
--# See programs/README.md for how to use this
--ZSTD_LEGACY_SUPPORT ??= "4"
--
--do_compile () {
--    oe_runmake ${PACKAGECONFIG_CONFARGS} ZSTD_LEGACY_SUPPORT=${ZSTD_LEGACY_SUPPORT}
--}
--
--do_install () {
--    oe_runmake install 'DESTDIR=${D}'
--}
--
--BBCLASSEXTEND = "native nativesdk"
+ meta-xfce/classes/xfce-panel-plugin.bbclass                | 4 ++--
+ ...ce4-screensaver_0.1.5.bb => xfce4-screensaver_0.1.8.bb} | 7 ++++---
+ ...genmon-plugin_4.0.1.bb => xfce4-genmon-plugin_4.0.2.bb} | 4 ++--
+ ...ther-plugin_0.9.1.bb => xfce4-weather-plugin_0.10.0.bb} | 4 ++--
+ 4 files changed, 10 insertions(+), 9 deletions(-)
+ rename meta-xfce/recipes-apps/xfce4-screensaver/{xfce4-screensaver_0.1.5.bb => xfce4-screensaver_0.1.8.bb} (81%)
+ rename meta-xfce/recipes-panel-plugins/genmon/{xfce4-genmon-plugin_4.0.1.bb => xfce4-genmon-plugin_4.0.2.bb} (71%)
+ rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.9.1.bb => xfce4-weather-plugin_0.10.0.bb} (72%)
+
 -- 
 2.17.1
 
