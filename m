@@ -1,27 +1,30 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 069EC7FC1B
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id E82367FC10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 03:24:57 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xA83Otmw009808
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  8 Nov 2019 03:40:16 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,280,1569254400"; d="scan'208";a="78041408"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 08 Nov 2019 11:40:16 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 543754CE1646
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Nov 2019 19:24:55 -0800 (PST)
-Received: from localhost (128.224.158.241) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Thu, 7 Nov 2019 19:24:55 -0800
-From: Yi Zhao <yi.zhao@windriver.com>
+	Fri,  8 Nov 2019 11:32:10 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 11:40:15 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 Nov 2019 11:24:49 +0800
-Message-ID: <20191108032449.9342-2-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191108032449.9342-1-yi.zhao@windriver.com>
-References: <20191108032449.9342-1-yi.zhao@windriver.com>
+Date: Fri, 8 Nov 2019 11:40:46 +0800
+Message-ID: <20191108034046.26820-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.158.241]
-Subject: [meta-networking][PATCH 2/2] samba: upgrade 4.10.8 -> 4.10.10
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 543754CE1646.A6A6C
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-flask-restful: upgrade 0.3.6 -> 0.3.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,45 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 03:24:58 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 03:40:17 -0000
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Security fixes:
-
-CVE-2019-10218: Client code can return filenames containing path
-                separators.
-CVE-2019-14833: Samba AD DC check password script does not receive the
-                full password.
-CVE-2019-14847: User with "get changes" permission can crash AD DC LDAP
-                server via dirsync.
-
-See: https://www.samba.org/samba/history/samba-4.10.10.html
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../samba/{samba_4.10.8.bb => samba_4.10.10.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.10.8.bb => samba_4.10.10.bb} (98%)
+ meta-python/recipes-devtools/python/python-flask-restful.inc  | 4 ++--
+ ...n-flask-restful_0.3.6.bb => python-flask-restful_0.3.7.bb} | 0
+ ...-flask-restful_0.3.6.bb => python3-flask-restful_0.3.7.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-flask-restful_0.3.6.bb => python-flask-restful_0.3.7.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-flask-restful_0.3.6.bb => python3-flask-restful_0.3.7.bb} (100%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
-index d824eacf9..d84c338c9 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
-@@ -34,8 +34,8 @@ SRC_URI_append_libc-musl = " \
-            file://0001-samba-fix-musl-lib-without-innetgr.patch \
-           "
+diff --git a/meta-python/recipes-devtools/python/python-flask-restful.inc b/meta-python/recipes-devtools/python/python-flask-restful.inc
+index 0485f85aa..dcbcd0d76 100644
+--- a/meta-python/recipes-devtools/python/python-flask-restful.inc
++++ b/meta-python/recipes-devtools/python/python-flask-restful.inc
+@@ -6,8 +6,8 @@ HOMEPAGE = "https://github.com/flask-restful/flask-restful"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=685bb55ed99a366bb431995f5eef2783"
  
--SRC_URI[md5sum] = "f3c722bbcd903479008fa1b529f56365"
--SRC_URI[sha256sum] = "c41f05fb567f7359998b451543501c7690a2bf6551d658a76bd6916316a410f4"
-+SRC_URI[md5sum] = "dde27447f39d124efe18f719ccf956dd"
-+SRC_URI[sha256sum] = "700c734b51610e2feaa0d6744f9bec0c0d8917bca8cc78d5b63a4591f32866a5"
+-SRC_URI[md5sum] = "8243ca101185b130d8fa529cbdbdbddd"
+-SRC_URI[sha256sum] = "5795519501347e108c436b693ff9a4d7b373a3ac9069627d64e4001c05dd3407"
++SRC_URI[md5sum] = "a7217ef1159be38af5faf61aa09aabef"
++SRC_URI[sha256sum] = "f8240ec12349afe8df1db168ea7c336c4e5b0271a36982bff7394f93275f2ca9"
  
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
+ inherit pypi
  
+diff --git a/meta-python/recipes-devtools/python/python-flask-restful_0.3.6.bb b/meta-python/recipes-devtools/python/python-flask-restful_0.3.7.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-flask-restful_0.3.6.bb
+rename to meta-python/recipes-devtools/python/python-flask-restful_0.3.7.bb
+diff --git a/meta-python/recipes-devtools/python/python3-flask-restful_0.3.6.bb b/meta-python/recipes-devtools/python/python3-flask-restful_0.3.7.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-flask-restful_0.3.6.bb
+rename to meta-python/recipes-devtools/python/python3-flask-restful_0.3.7.bb
 -- 
-2.17.1
+2.20.1
+
+
 
 
