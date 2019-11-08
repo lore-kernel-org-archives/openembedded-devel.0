@@ -1,30 +1,24 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C8C27FAB2
+Return-Path: <Zhixiong.Chi@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 28DDB7FC3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 05:23:07 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,280,1569254400"; d="scan'208";a="78048577"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 08 Nov 2019 13:23:07 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 06A5A4CE1BE4
+	Fri,  8 Nov 2019 06:10:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id xA86Amhf000803
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 13:15:02 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 13:23:07 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Thu, 7 Nov 2019 22:10:48 -0800 (PST)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 7 Nov 2019 22:10:48 -0800
+From: Zhixiong Chi <zhixiong.chi@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 Nov 2019 13:23:37 +0800
-Message-ID: <20191108052337.24923-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Thu, 7 Nov 2019 22:10:48 -0800
+Message-ID: <20191108061048.20492-1-zhixiong.chi@windriver.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 06A5A4CE1BE4.AAD1B
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-flask-sqlalchemy: upgrade 2.3.2 -> 2.4.1
+Subject: [meta-oe] gtkwave: add the libtirpc dependence and config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,49 +31,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 05:23:07 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 06:10:48 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--License-Update: Renamed from LICENSE to LICENSE.rst and Copyright year changed to 2010.
+Since the oe-core commit "libtirpc: create the symbol link for rpc
+header files" create the symbol link of header files, so during
+checking it will find the related header files, then it will use
+the old PRC_LDADD value "-lrpc" other than "-ltirpc".
+So we add the option "--with-tirpc" to the configure command and
+add the dependence.
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
 ---
- .../recipes-devtools/python/python-flask-sqlalchemy.inc     | 6 +++---
- ...sqlalchemy_2.3.2.bb => python-flask-sqlalchemy_2.4.1.bb} | 0
- ...qlalchemy_2.3.2.bb => python3-flask-sqlalchemy_2.4.1.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flask-sqlalchemy_2.3.2.bb => python-flask-sqlalchemy_2.4.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-flask-sqlalchemy_2.3.2.bb => python3-flask-sqlalchemy_2.4.1.bb} (100%)
+ meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc b/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
-index 957d07dbb..86ba9dda5 100644
---- a/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
-+++ b/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Adds SQLAlchemy support to your Flask application."
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=5ed1b8cc741515a835a7f6bf2f62ef4a"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
+diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+index 310c41067..2be8d7bb7 100644
+--- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
++++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
+@@ -11,13 +11,13 @@ SRC_URI[md5sum] = "eac3073ef381e0c09da33590296ca37f"
+ SRC_URI[sha256sum] = "efa6bbbeb3bd54104425a69a2aa0d079bb5c3ecc1c420ba57dcaa1c97c5a22f6"
  
--SRC_URI[md5sum] = "373ce61dfd03b593ad2eaba68c9fee35"
--SRC_URI[sha256sum] = "5971b9852b5888655f11db634e87725a9031e170f37c0ce7851cf83497f56e53"
-+SRC_URI[md5sum] = "1f5781cf3e1a2b1aabda47a5b20d2073"
-+SRC_URI[sha256sum] = "6974785d913666587949f7c2946f7001e4fa2cb2d19f4e69ead02e4b8f50b33d"
+ inherit pkgconfig autotools gettext texinfo
+-DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
++DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0 libtirpc"
+ RDEPENDS_${PN} = "tk-lib"
  
- PYPI_PACKAGE = "Flask-SQLAlchemy"
+ # depends on gtk+ which has this restriction
+ inherit distro_features_check
+ ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
  
-diff --git a/meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.3.2.bb b/meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.4.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.3.2.bb
-rename to meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.4.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-flask-sqlalchemy_2.3.2.bb b/meta-python/recipes-devtools/python/python3-flask-sqlalchemy_2.4.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-flask-sqlalchemy_2.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-flask-sqlalchemy_2.4.1.bb
+-EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS}"
++EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS} --with-tirpc"
+ 
+ FILES_${PN} = "${bindir} ${datadir}"
 -- 
-2.20.1
-
-
+2.23.0
 
 
