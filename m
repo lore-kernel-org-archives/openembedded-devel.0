@@ -1,55 +1,47 @@
-Return-Path: <marek.bykowski@gmail.com>
-Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com
-	[209.85.167.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D73177F746
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-il1-f172.google.com (mail-il1-f172.google.com
+	[209.85.166.172])
+	by mail.openembedded.org (Postfix) with ESMTP id A0D367F99E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 13:24:36 +0000 (UTC)
-Received: by mail-oi1-f196.google.com with SMTP id y194so5223045oie.4
+	Fri,  8 Nov 2019 13:58:41 +0000 (UTC)
+Received: by mail-il1-f172.google.com with SMTP id o18so5185838ils.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Nov 2019 05:24:38 -0800 (PST)
+	Fri, 08 Nov 2019 05:58:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=tjxd9+I4blDxvTzsOgeruQPRQtgy0ENq0qaanLyY610=;
-	b=rMcMOY+dn5zfBOjdVF8S9Obz779//s3RPJYmenvW6u7f9TuIxRtpbbnyxqzcUaGV97
-	f1673bz5U9rWdIM90UlNPPSi279dzKc5LXB8IKEe63JWnP01sFvjN5khZQ63pmE10M+t
-	y05rvDOYFCSmIoKVjtNh1xcGrV78Ffmn/wd/7HzKfDmeIIkuNL6txJ85uIO2HDZqkGcZ
-	BCntAkh73qlOjM8qxgOm91E/DQRXB+MjKJtx5tsQIgXiFgUiqH0e8PV9VeMfZl2ocpnT
-	LZGzJHJIAaywdocNkWh6gSkxhhK/uCQCu8ObElDX8rwhuamMprHP+myhs7ulmS+mhwPn
-	pCwA==
+	bh=vW76M6ExSo/o+N/LPk7VFexYE3klmVtvkAUP+BwlO4o=;
+	b=A3DdtLwKVKTmrl2xm1dlj2imD4csy4lBd7pWuVeoA/g9LugKgqmeq7t4RWpcxg0hdj
+	s2h7yqIoqUgzyCbw9Adca1IcdDJdxT1zrTljGVtShLCC9GY+Y0gdrerzc/ssFqY1DZwA
+	8Smejde4P12cPddqM8BtaGdpyZ6ezd1MLNxOzNmDtZlfNs9Kk94pXun3mrbrgsD6KhNW
+	eCW5HuYKoHP3OedBRuCOjw5ENDr7PWAYCznTm0TiHoVYZd4VSOJyL+pXY2ZCA8xv5O+Z
+	1SZHuyqiv5zXVPSpZ3LSmeILtcmvfSKy2XmeZWMwUyomzAfTld34eOMjNqJFRgkXm8iC
+	xYXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=tjxd9+I4blDxvTzsOgeruQPRQtgy0ENq0qaanLyY610=;
-	b=X9h2mQMxMbVpQ583WLKCNgP+56yZX7XxgnjLgWhnqqvU7tsep6YpW4jFvRBRAnhXDk
-	t7MQpHrgJzd92zH4MjpVsfqRRIogHNOGDx/VAXZOzqrCQoHeRBGQYjRpXnIPetay/8Is
-	o/FBgcOvuqaCZwg0eSw/wZAT0qvEmYUMOL04/FpjX4u3/aZl4iZT4MDwMyKJ1dJNCpVV
-	1yB9kPFsS9mO/Uc+o5KsoYuaWZhsxTjz6MLUvR6I84Pt0bNsj2snHlQmRZ5OS9q2GaWU
-	KbKqxmOVzHPOMXSFwVNVKe/cUvHDSjljouWMXYwN7gb1m2LvuMclJl6lu3q0JCyjWf3N
-	32vg==
-X-Gm-Message-State: APjAAAUjY6gR5bligUhAs6H3OJX49acfPM4wklXzzNA6qJqCu5Zacpt5
-	rX5fR0r6DAeDPx2mDgfgxQ8i72Qnrt3bR5wMCm0=
-X-Google-Smtp-Source: APXvYqx22tTjc/+QcESj/P0bM6ZpG0+GsKG7pcdt2jU6BU9G8QEyThYB+ci801FclVapzFN9PqgCm/wlqkMTmZDGNGU=
-X-Received: by 2002:aca:abc2:: with SMTP id u185mr9386984oie.160.1573219477527;
-	Fri, 08 Nov 2019 05:24:37 -0800 (PST)
+	bh=vW76M6ExSo/o+N/LPk7VFexYE3klmVtvkAUP+BwlO4o=;
+	b=SwJSs0UaFGLFpAwfVWcqVox/ZcQEiKmTpH/BfOYhre8PDL72NW9Jy/UfWARqL1/QYr
+	ZhQ59KfdDwrNZhwfK8tTZbcOcl/ZKuV+SJXlMvKqw9CPlTaWXuYh8mINzgivYta15emk
+	I81X954enlMDFXzS5gOr0/sFvYKm2R0Dh6wpiIwSCHxB/XPmLJjcfS5XfbtbgW0I3Obd
+	rAxZ6Z80r7GAlZSdU/sEOrxV00Ubafl4FPMPNUYtIlp/7kZxAuE73IdeMWRJEKMr7SJF
+	aW8wgck5sImfuBwq0NDpL9QVu7zs6s+7sYq5Eg8hPsdoq/Z6dKu2ZTXVSQb4TgzAWHkc
+	fwaw==
+X-Gm-Message-State: APjAAAVI2TlxBjpDvvgif9BBKCd/35XpU1HA0MjVQJJRn9bsnUO5CQTT
+	ijecaplie7+xJlSDLZ2p+naGVy7UlLAA+dcphT8=
+X-Google-Smtp-Source: APXvYqxEnDKvTEswBqCb+6yK7tWMea3wjIOhC6ShGaQuN7oAYPD6DXsbgKgoZS9cxz+79B22AwqLX3sCGJslpdRKmIg=
+X-Received: by 2002:a92:d80e:: with SMTP id y14mr13081260ilm.267.1573221522348;
+	Fri, 08 Nov 2019 05:58:42 -0800 (PST)
 MIME-Version: 1.0
-References: <1571141621-20235-1-git-send-email-marek.bykowski@gmail.com>
-	<20191016104557.GA7998@localhost> <20191016142112.10a645d2@gmail.com>
-	<CAMKF1srjpre+zbi6Q2==McOEvV8njBdzqOf8nGxor9NN5tMoig@mail.gmail.com>
-	<20191018134224.62ca6095@gmail.com>
-	<83e0f896-8ec4-df4f-d14c-256cb70774c1@windriver.com>
-	<20191021113018.3c684d51@gmail.com>
-	<0411e8da-91a7-f586-2d65-490e8c327c2d@windriver.com>
-	<20191022091523.60d5434a@gmail.com> <20191022120320.71fb6436@gmail.com>
-In-Reply-To: <20191022120320.71fb6436@gmail.com>
-From: Marek <marek.bykowski@gmail.com>
-Date: Fri, 8 Nov 2019 14:24:25 +0100
-Message-ID: <CAHw2UgAT_sL39YBSRJ2D7EKA28=4aL3OHJX7LW2Y4CVw_6STwg@mail.gmail.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
-Cc: Adrian Bunk <bunk@stusta.de>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCHv3] lmbench: Fix/clean-up the build for lmbench
+References: <20191108102237.34824-1-kai.kang@windriver.com>
+In-Reply-To: <20191108102237.34824-1-kai.kang@windriver.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 8 Nov 2019 14:58:30 +0100
+Message-ID: <CALbNGRTfR7peFiRnfyGUkgeDf+5R-zHg0Q8+-Y4uHSvbBpOeBQ@mail.gmail.com>
+To: Kang Kai <kai.kang@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][Patch 0/4] Update 3 packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,46 +54,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 13:24:37 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 13:58:41 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Any thoughts if this is going to be included in the upstream?
-Thanks,
-Marek
-
-On Tue, 22 Oct 2019 at 12:03, marek.bykowski@gmail.com
-<marek.bykowski@gmail.com> wrote:
+On Fri, Nov 8, 2019 at 11:22 AM <kai.kang@windriver.com> wrote:
 >
-> On Tue, 22 Oct 2019 09:15:23 +0200
-> "marek.bykowski@gmail.com" <marek.bykowski@gmail.com> wrote:
+> From: Kai Kang <kai.kang@windriver.com>
 >
-> > On Mon, 21 Oct 2019 19:42:45 -0400
-> > Randy MacLeod <randy.macleod@windriver.com> wrote:
-> >
-> > > We have had Intel employees working on oe-core / meta-openembedded
-> > > for years so I hope that you will send the commit to that repo on
-> > > github and indicate the
-> > > upstream-status in the patch what we integrate into meta-oe.
-> >
-> > Hi Randy,
-> >
-> > I'm Intel (actually a subcontractor to them) working on occasion with
-> > Daniel Drogomir, Charlie Paul, and Chantale Ouimet from Windriver. I
-> > have put the names as chances they may be your colleagues. Even
-> > though I'm Intel I didn't know of lmbench Intel repo on github - this
-> > must a totally different team. Sure I'll send the patch onto that
-> > repo indicating these are the changes integration planned into
-> > meta-oe.
-> >
-> > Regards,
-> > Marek
 >
-> Done https://github.com/intel/lmbench/pull/9
-
-
-
---=20
-Sl=C3=A1n,
-Marek
+Acked-By: : Andreas M=C3=BCller <schnitzeltony@gmail.com>
 
