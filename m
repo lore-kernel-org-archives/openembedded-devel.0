@@ -1,25 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FAE17FAC4
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 069EC7FC1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 03:24:51 +0000 (UTC)
+	Fri,  8 Nov 2019 03:24:57 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xA83OqY0028022
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xA83Otmw009808
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 7 Nov 2019 19:24:52 -0800
+	Thu, 7 Nov 2019 19:24:55 -0800 (PST)
 Received: from localhost (128.224.158.241) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Thu, 7 Nov 2019 19:24:51 -0800
+	Thu, 7 Nov 2019 19:24:55 -0800
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 Nov 2019 11:24:48 +0800
-Message-ID: <20191108032449.9342-1-yi.zhao@windriver.com>
+Date: Fri, 8 Nov 2019 11:24:49 +0800
+Message-ID: <20191108032449.9342-2-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20191108032449.9342-1-yi.zhao@windriver.com>
+References: <20191108032449.9342-1-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.158.241]
-Subject: [meta-networking][PATCH 1/2] libldb: upgrade 1.5.5 -> 1.5.6
+Subject: [meta-networking][PATCH 2/2] samba: upgrade 4.10.8 -> 4.10.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,33 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 03:24:51 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 03:24:58 -0000
 Content-Type: text/plain
+
+Security fixes:
+
+CVE-2019-10218: Client code can return filenames containing path
+                separators.
+CVE-2019-14833: Samba AD DC check password script does not receive the
+                full password.
+CVE-2019-14847: User with "get changes" permission can crash AD DC LDAP
+                server via dirsync.
+
+See: https://www.samba.org/samba/history/samba-4.10.10.html
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb}               | 4 ++--
+ .../samba/{samba_4.10.8.bb => samba_4.10.10.bb}               | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb} (95%)
+ rename meta-networking/recipes-connectivity/samba/{samba_4.10.8.bb => samba_4.10.10.bb} (98%)
 
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-similarity index 95%
-rename from meta-networking/recipes-support/libldb/libldb_1.5.5.bb
-rename to meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-index b19c964d8..99eb6f9ce 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-@@ -33,8 +33,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
-                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
-                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
+similarity index 98%
+rename from meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
+rename to meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
+index d824eacf9..d84c338c9 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
+@@ -34,8 +34,8 @@ SRC_URI_append_libc-musl = " \
+            file://0001-samba-fix-musl-lib-without-innetgr.patch \
+           "
  
--SRC_URI[md5sum] = "339a41ac9efaec680e6d1469dd9aa35b"
--SRC_URI[sha256sum] = "199f5861aa863f538ec66d5fa95ecc13254a2030c53daf0e47363fa9ba235c68"
-+SRC_URI[md5sum] = "fc58ef432c1fcb03fc3bb6cccce08977"
-+SRC_URI[sha256sum] = "ff82474d0bf109e415a2d50334bde5715f486a53ff4bb8c7f74459dd229e975b"
+-SRC_URI[md5sum] = "f3c722bbcd903479008fa1b529f56365"
+-SRC_URI[sha256sum] = "c41f05fb567f7359998b451543501c7690a2bf6551d658a76bd6916316a410f4"
++SRC_URI[md5sum] = "dde27447f39d124efe18f719ccf956dd"
++SRC_URI[sha256sum] = "700c734b51610e2feaa0d6744f9bec0c0d8917bca8cc78d5b63a4591f32866a5"
  
- inherit waf-samba distro_features_check
- REQUIRED_DISTRO_FEATURES = "pam"
+ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
+ 
 -- 
 2.17.1
 
