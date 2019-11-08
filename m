@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C83347F8AB
+	by mail.openembedded.org (Postfix) with ESMTP id 8EE7C7F990
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 08:00:14 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,280,1569254400"; d="scan'208";a="78055023"
+	Fri,  8 Nov 2019 08:16:13 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,280,1569254400"; d="scan'208";a="78056705"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 08 Nov 2019 16:00:13 +0800
+	by heian.cn.fujitsu.com with ESMTP; 08 Nov 2019 16:16:13 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 44C6C4CE1BF2
+	by cn.fujitsu.com (Postfix) with ESMTP id C0B944B6EC6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 15:52:07 +0800 (CST)
+	Fri,  8 Nov 2019 16:08:05 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 16:00:13 +0800
+	Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 16:16:13 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 Nov 2019 16:00:43 +0800
-Message-ID: <20191108080043.9903-1-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 8 Nov 2019 16:16:41 +0800
+Message-ID: <20191108081641.12122-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 44C6C4CE1BF2.AA607
+X-yoursite-MailScanner-ID: C0B944B6EC6D.A9F8B
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-serpent: upgrade 1.25 -> 1.28
+Subject: [meta-python] [PATCH] python-smbus: upgrade 4.0 -> 4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,46 +37,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 08:00:15 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 08:16:14 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--License-Update: Upgrade PKG-INFO.
+-License-Update: Changed contact and address.
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-serpent.inc      | 6 +++---
- .../{python-serpent_1.25.bb => python-serpent_1.28.bb}      | 0
- .../{python3-serpent_1.25.bb => python3-serpent_1.28.bb}    | 0
+ meta-python/recipes-devtools/python/python-smbus.inc        | 6 +++---
+ .../python/{python-smbus_4.0.bb => python-smbus_4.1.bb}     | 0
+ .../python/{python3-smbus_4.0.bb => python3-smbus_4.1.bb}   | 0
  3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-serpent_1.25.bb => python-serpent_1.28.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-serpent_1.25.bb => python3-serpent_1.28.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-smbus_4.0.bb => python-smbus_4.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-smbus_4.0.bb => python3-smbus_4.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-serpent.inc b/meta-python/recipes-devtools/python/python-serpent.inc
-index 2ba65706b..1a3aac07f 100644
---- a/meta-python/recipes-devtools/python/python-serpent.inc
-+++ b/meta-python/recipes-devtools/python/python-serpent.inc
-@@ -1,9 +1,9 @@
- SUMMARY = "Serialization based on ast.literal_eval"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5a8193ba89f1083617f32d522f6485e9"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5cd70632b6cdb96df9ddaf6a4ce619e6"
+diff --git a/meta-python/recipes-devtools/python/python-smbus.inc b/meta-python/recipes-devtools/python/python-smbus.inc
+index f472a57f4..8ba1ab2b8 100644
+--- a/meta-python/recipes-devtools/python/python-smbus.inc
++++ b/meta-python/recipes-devtools/python/python-smbus.inc
+@@ -1,11 +1,11 @@
+ SUMMARY = "Set of i2c tools for linux - Python module"
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://smbusmodule.c;beginline=1;endline=17;md5=fa24df321a520ff8e10f203425ab9fa8"
++LIC_FILES_CHKSUM = "file://smbusmodule.c;beginline=1;endline=18;md5=46e424fb045901ab25e0f92c28c80055"
+ PR = "r1"
  
--SRC_URI[md5sum] = "0f9684622125a527fa4fbe2587738973"
--SRC_URI[sha256sum] = "264a028e059c1b557701ae7c567cdab330dbd228ff924489343efcb39bd828a0"
-+SRC_URI[md5sum] = "15ef8b67c76a6d19bac9c16731a1e62a"
-+SRC_URI[sha256sum] = "f306336ca09aa38e526f3b03cab58eb7e45af09981267233167bcf3bfd6436ab"
+ SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz "
+-SRC_URI[md5sum] = "d92a288d70f306d3895e3a7e9c14c9aa"
+-SRC_URI[sha256sum] = "5b60daf6f011de0acb61de57dba62f2054bb39f19961d67e0c91610f071ca403"
++SRC_URI[md5sum] = "3536237a6b51fb10caacdc3b8a496237"
++SRC_URI[sha256sum] = "ef8f77afc70e7dbfd1171bfeae87a8a7f10074829370ce8d9ccd585a014e0073"
  
- inherit pypi
+ DEPENDS += "i2c-tools"
  
-diff --git a/meta-python/recipes-devtools/python/python-serpent_1.25.bb b/meta-python/recipes-devtools/python/python-serpent_1.28.bb
+diff --git a/meta-python/recipes-devtools/python/python-smbus_4.0.bb b/meta-python/recipes-devtools/python/python-smbus_4.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-serpent_1.25.bb
-rename to meta-python/recipes-devtools/python/python-serpent_1.28.bb
-diff --git a/meta-python/recipes-devtools/python/python3-serpent_1.25.bb b/meta-python/recipes-devtools/python/python3-serpent_1.28.bb
+rename from meta-python/recipes-devtools/python/python-smbus_4.0.bb
+rename to meta-python/recipes-devtools/python/python-smbus_4.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.0.bb b/meta-python/recipes-devtools/python/python3-smbus_4.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-serpent_1.25.bb
-rename to meta-python/recipes-devtools/python/python3-serpent_1.28.bb
+rename from meta-python/recipes-devtools/python/python3-smbus_4.0.bb
+rename to meta-python/recipes-devtools/python/python3-smbus_4.1.bb
 -- 
 2.20.1
 
