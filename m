@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 13FF47F367
+	by mail.openembedded.org (Postfix) with ESMTP id A60997FC46
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 07:35:24 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,280,1569254400"; d="scan'208";a="78053985"
+	Fri,  8 Nov 2019 07:43:59 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,280,1569254400"; d="scan'208";a="78054327"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 08 Nov 2019 15:35:25 +0800
+	by heian.cn.fujitsu.com with ESMTP; 08 Nov 2019 15:43:58 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 4BDB84CE1A01
+	by cn.fujitsu.com (Postfix) with ESMTP id CD8044B6AE15
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 15:27:19 +0800 (CST)
+	Fri,  8 Nov 2019 15:35:49 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 15:35:25 +0800
+	Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 15:43:55 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 Nov 2019 15:35:55 +0800
-Message-ID: <20191108073555.32402-1-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 8 Nov 2019 15:44:26 +0800
+Message-ID: <20191108074426.7647-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 4BDB84CE1A01.A9119
+X-yoursite-MailScanner-ID: CD8044B6AE15.AA225
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pysmi: upgrade 0.2.2 -> 0.3.4
+Subject: [meta-python] [PATCH] python-pytest: upgrade 5.2.1 -> 5.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,39 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 07:35:25 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 07:44:00 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--License-Update: Copyright year updated to 2019.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../python/{python-pysmi_0.2.2.bb => python-pysmi_0.3.4.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pysmi_0.2.2.bb => python-pysmi_0.3.4.bb} (59%)
+ meta-python/recipes-devtools/python/python-pytest.inc         | 4 ++--
+ .../python/{python-pytest_5.2.1.bb => python-pytest_5.2.2.bb} | 0
+ .../{python3-pytest_5.2.1.bb => python3-pytest_5.2.2.bb}      | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pytest_5.2.1.bb => python-pytest_5.2.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pytest_5.2.1.bb => python3-pytest_5.2.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pysmi_0.2.2.bb b/meta-python/recipes-devtools/python/python-pysmi_0.3.4.bb
-similarity index 59%
-rename from meta-python/recipes-devtools/python/python-pysmi_0.2.2.bb
-rename to meta-python/recipes-devtools/python/python-pysmi_0.3.4.bb
-index 7a2d89d99..43aa4b84c 100644
---- a/meta-python/recipes-devtools/python/python-pysmi_0.2.2.bb
-+++ b/meta-python/recipes-devtools/python/python-pysmi_0.3.4.bb
-@@ -6,10 +6,10 @@ HOMEPAGE = "https://pypi.python.org/pypi/pysmi"
- SECTION = "devel/python"
+diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
+index fa264f791..a26d41084 100644
+--- a/meta-python/recipes-devtools/python/python-pytest.inc
++++ b/meta-python/recipes-devtools/python/python-pytest.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pytest.org"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=640061b8cee64b308a4d2f9f556c12f2"
  
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=d8b1bbadd635f187dee74d999a8c67b8"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=a088b5c72b59d51a5368ad3b18e219bf"
+-SRC_URI[md5sum] = "00561d0295aab167987f8a4f784964c4"
+-SRC_URI[sha256sum] = "ca563435f4941d0cb34767301c27bc65c510cb82e90b9ecf9cb52dc2c63caaa0"
++SRC_URI[md5sum] = "889344299c9182aff67d6e461cb7af29"
++SRC_URI[sha256sum] = "27abc3fef618a01bebb1f0d6d303d2816a99aa87a5968ebc32fe971be91eb1e6"
  
--SRC_URI[md5sum] = "3b0f71e4e9f730d211f09d8ef5371140"
--SRC_URI[sha256sum] = "2a315cc3e556b3428372b69da663a24d2f0df9e9ab075b022cb133855f25aef7"
-+SRC_URI[md5sum] = "10a9dd140ad512eed9f37344df83ce9d"
-+SRC_URI[sha256sum] = "bd15a15020aee8376cab5be264c26330824a8b8164ed0195bd402dd59e4e8f7c"
- 
- inherit pypi setuptools
- 
+ SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch \
+                    "
+diff --git a/meta-python/recipes-devtools/python/python-pytest_5.2.1.bb b/meta-python/recipes-devtools/python/python-pytest_5.2.2.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pytest_5.2.1.bb
+rename to meta-python/recipes-devtools/python/python-pytest_5.2.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pytest_5.2.1.bb b/meta-python/recipes-devtools/python/python3-pytest_5.2.2.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pytest_5.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-pytest_5.2.2.bb
 -- 
 2.20.1
 
