@@ -1,30 +1,32 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0390D7FA1A
+	by mail.openembedded.org (Postfix) with ESMTP id 7A1F67F836
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 08:27:34 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,280,1569254400"; d="scan'208";a="78057156"
+	Fri,  8 Nov 2019 09:05:30 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,280,1569254400"; d="scan'208";a="78058944"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 08 Nov 2019 16:27:33 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id E587B4B6AE15
+	by heian.cn.fujitsu.com with ESMTP; 08 Nov 2019 17:05:13 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id B0F324CE1646
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 16:19:23 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 16:27:31 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Fri,  8 Nov 2019 16:57:07 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Fri, 8 Nov 2019 17:05:14 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 8 Nov 2019 16:28:00 +0800
-Message-ID: <20191108082800.14614-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Fri, 8 Nov 2019 20:44:37 +0800
+Message-ID: <1573217077-81107-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: E587B4B6AE15.A7876
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201)
+X-yoursite-MailScanner-ID: B0F324CE1646.A4C88
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-snimpy: upgrade 0.8.12 -> 0.8.13
+Subject: [meta-oe][PATCH] zabbix: upgrade 4.2.7 -> 4.2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 08:27:35 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 08 Nov 2019 09:05:30 -0000
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../{python-snimpy_0.8.12.bb => python-snimpy_0.8.13.bb}      | 4 ++--
+ .../recipes-connectivity/zabbix/{zabbix_4.2.7.bb => zabbix_4.2.8.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-snimpy_0.8.12.bb => python-snimpy_0.8.13.bb} (79%)
+ rename meta-oe/recipes-connectivity/zabbix/{zabbix_4.2.7.bb => zabbix_4.2.8.bb} (95%)
 
-diff --git a/meta-python/recipes-devtools/python/python-snimpy_0.8.12.bb b/meta-python/recipes-devtools/python/python-snimpy_0.8.13.bb
-similarity index 79%
-rename from meta-python/recipes-devtools/python/python-snimpy_0.8.12.bb
-rename to meta-python/recipes-devtools/python/python-snimpy_0.8.13.bb
-index c5af48dd3..c885a7fbe 100644
---- a/meta-python/recipes-devtools/python/python-snimpy_0.8.12.bb
-+++ b/meta-python/recipes-devtools/python/python-snimpy_0.8.13.bb
-@@ -8,8 +8,8 @@ DEPENDS += "libsmi python-cffi-native python-vcversioner-native"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://docs/license.rst;md5=7c53ab2d1240828625c3e093d049d4f4"
+diff --git a/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.7.bb b/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.8.bb
+similarity index 95%
+rename from meta-oe/recipes-connectivity/zabbix/zabbix_4.2.7.bb
+rename to meta-oe/recipes-connectivity/zabbix/zabbix_4.2.8.bb
+index ed6c55b..489ab0b 100644
+--- a/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.7.bb
++++ b/meta-oe/recipes-connectivity/zabbix/zabbix_4.2.8.bb
+@@ -28,8 +28,8 @@ SRC_URI = "http://jaist.dl.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stab
+     file://zabbix-agent.service \
+ "
  
--SRC_URI[md5sum] = "6d016b6356db432e6a87ad708eb8fcb6"
--SRC_URI[sha256sum] = "04efcfba867ffb0e10cc8d7f93a553ceb6bdf2ee34e49762749028a2c76096c1"
-+SRC_URI[md5sum] = "7c57acac10226df5bf43e10b929942df"
-+SRC_URI[sha256sum] = "98b1790977b435332c03ab2603f6621eeeee69a50453ac01ca55dc7696d08535"
+-SRC_URI[md5sum] = "601d3c29322c720c72018950ed969d0a"
+-SRC_URI[sha256sum] = "9d9bdf1d858048d72811de04269a429aba257fac2e4b6e782d5a2b1d3a82f627"
++SRC_URI[md5sum] = "9a816afd4f7984a841bed64a25ba523c"
++SRC_URI[sha256sum] = "57dbc2a95a09581b5196d2abc86ee1aaf65f3c909d6b4bc53d260dc4dd69b9c6"
  
- inherit pypi setuptools
+ inherit autotools-brokensep linux-kernel-base pkgconfig systemd useradd
  
 -- 
-2.20.1
+2.7.4
 
 
 
