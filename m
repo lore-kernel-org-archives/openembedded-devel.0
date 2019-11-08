@@ -1,50 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id C35A57FBAC
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C8C27FAB2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 05:18:31 +0000 (UTC)
-Received: by mail-pf1-f196.google.com with SMTP id d13so3895471pfq.2
+	Fri,  8 Nov 2019 05:23:07 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,280,1569254400"; d="scan'208";a="78048577"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 08 Nov 2019 13:23:07 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 06A5A4CE1BE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Nov 2019 21:18:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=+t2I0MRfckF+w/zuKs5WJaUZn6NshR5GBHUdMw6h0+U=;
-	b=BICVEboRLJ7r+NuFewmWYef0NB2tFtuhuGd3JRWoxigzLeGy+snjd5iyM6Jl8F4mox
-	im0XZHmkC9XJb4aeR5FfP0EcNRJqNzr1Qb8MZKP7V/TNu2qyWJTLWTOFnOF24rSnKVrk
-	5uGdnvQytuSsgdmZ0II/+Du/IqZEhJ26QSTrfPnEjw9IVqj3nkkyjeI+gIpMx2Vu19ej
-	ZI6+OfTF0aKepT2mW4xxnCwsclUU2GZit/kKpMDSYoPAjE/tVto8aF9G8//IdFT3tzGu
-	flIzZzZY3WOzQPBQ4uAoDnWe5NCCS3+h9yc05Vqr2Bd1HWk8+1y6XCFVYNoEVs4OVObK
-	4Xbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=+t2I0MRfckF+w/zuKs5WJaUZn6NshR5GBHUdMw6h0+U=;
-	b=kiN9am+SPyZiUEh0MUK+W9dtxSfZN0yO07q30bVf2ORrzSu1usKo88LkXqhe80DAQ+
-	7yz/6uTSh2J//Ow3j5yzIsun28R9YyYMwPCxw23WUBlOWS7r88CduTl7i3I2DIEjM5Wd
-	VlknCAdPnlIwKOuTRBIpS3CaI8ULiOnoPreSU7r7ehHnWBk++Wv8eQIcAFGH40hTDEM5
-	j1MTGI8ML0Lal3MJv7X324lF/9vfr98M7vXBbwPcC5dLNMEUqIX+HsC+LYdkgPhemjvB
-	3PgEEdU5KCkif3zp77nu5vyFNcEr657LTpcscubg33cyAYeDZrAKI1XdAFb0fmajsKxv
-	SFEw==
-X-Gm-Message-State: APjAAAXvu9tE06Zc5s7lwel1K6F/TDmOjSuYBCfJIA9Xnh9LTA/cdUwt
-	+G73fKeseam9KjsS2Kd3wBNLZU/0AX4=
-X-Google-Smtp-Source: APXvYqxSaefvITv6YMR0B8cebQeLOrTLmVW5ibuxl53dzi9aSwo+D0RU98Yj7ZOYkO8PqRZ92eZkBQ==
-X-Received: by 2002:a62:6458:: with SMTP id y85mr9346702pfb.133.1573190312311; 
-	Thu, 07 Nov 2019 21:18:32 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::5caf])
-	by smtp.gmail.com with ESMTPSA id
-	o15sm6723119pgn.49.2019.11.07.21.18.31
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 07 Nov 2019 21:18:31 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Nov 2019 21:18:14 -0800
-Message-Id: <20191108051814.4143267-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
+	Fri,  8 Nov 2019 13:15:02 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 8 Nov 2019 13:23:07 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 8 Nov 2019 13:23:37 +0800
+Message-ID: <20191108052337.24923-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gtkwave: Upgrade to 3.3.102
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 06A5A4CE1BE4.AAD1B
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-flask-sqlalchemy: upgrade 2.3.2 -> 2.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,34 +37,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 05:18:32 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 05:23:07 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-License-Update: Renamed from LICENSE to LICENSE.rst and Copyright year changed to 2010.
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../gtkwave/{gtkwave_3.3.98.bb => gtkwave_3.3.102.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/gtkwave/{gtkwave_3.3.98.bb => gtkwave_3.3.102.bb} (85%)
+ .../recipes-devtools/python/python-flask-sqlalchemy.inc     | 6 +++---
+ ...sqlalchemy_2.3.2.bb => python-flask-sqlalchemy_2.4.1.bb} | 0
+ ...qlalchemy_2.3.2.bb => python3-flask-sqlalchemy_2.4.1.bb} | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-flask-sqlalchemy_2.3.2.bb => python-flask-sqlalchemy_2.4.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-flask-sqlalchemy_2.3.2.bb => python3-flask-sqlalchemy_2.4.1.bb} (100%)
 
-diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.102.bb
-similarity index 85%
-rename from meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-rename to meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.102.bb
-index 310c410674..a2f946398b 100644
---- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-+++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.102.bb
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
+diff --git a/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc b/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
+index 957d07dbb..86ba9dda5 100644
+--- a/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
++++ b/meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "Adds SQLAlchemy support to your Flask application."
+ LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=5ed1b8cc741515a835a7f6bf2f62ef4a"
++LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=ffeffa59c90c9c4a033c7574f8f3fb75"
  
- SRC_URI = "http://gtkwave.sourceforge.net/${BP}.tar.gz"
+-SRC_URI[md5sum] = "373ce61dfd03b593ad2eaba68c9fee35"
+-SRC_URI[sha256sum] = "5971b9852b5888655f11db634e87725a9031e170f37c0ce7851cf83497f56e53"
++SRC_URI[md5sum] = "1f5781cf3e1a2b1aabda47a5b20d2073"
++SRC_URI[sha256sum] = "6974785d913666587949f7c2946f7001e4fa2cb2d19f4e69ead02e4b8f50b33d"
  
--SRC_URI[md5sum] = "eac3073ef381e0c09da33590296ca37f"
--SRC_URI[sha256sum] = "efa6bbbeb3bd54104425a69a2aa0d079bb5c3ecc1c420ba57dcaa1c97c5a22f6"
-+SRC_URI[md5sum] = "13da7d4235d4031fde52971830458850"
-+SRC_URI[sha256sum] = "80bb7cb92db45872209f4ca48fc95a0460e0d89b0fe0c310c836d9b04c77fec7"
+ PYPI_PACKAGE = "Flask-SQLAlchemy"
  
- inherit pkgconfig autotools gettext texinfo
- DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
+diff --git a/meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.3.2.bb b/meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.4.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.3.2.bb
+rename to meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.4.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-flask-sqlalchemy_2.3.2.bb b/meta-python/recipes-devtools/python/python3-flask-sqlalchemy_2.4.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-flask-sqlalchemy_2.3.2.bb
+rename to meta-python/recipes-devtools/python/python3-flask-sqlalchemy_2.4.1.bb
 -- 
-2.24.0
+2.20.1
+
+
 
 
