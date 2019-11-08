@@ -1,49 +1,49 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com
-	[209.85.167.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 842AF7FA34
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 103E47FAAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Nov 2019 22:27:20 +0000 (UTC)
-Received: by mail-lf1-f43.google.com with SMTP id d6so2469580lfc.0
+	Fri,  8 Nov 2019 01:40:54 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id m16so3864167qki.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Nov 2019 14:27:21 -0800 (PST)
+	Thu, 07 Nov 2019 17:40:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=/AxNsBA+Uq7JnecqnwJP/wovrMLzYFZqUDFzoLV7glY=;
-	b=COyZ9wBnPOR1yKzlT9EQrRgZj/ga010fooQKE3o0pUS/oqa1xd/V1x6hCGejKCpHEd
-	p95k1G/FMNh+QRN6fCCk4zteT0srjTNQ6oj5nIqUFZQhe0z7dhxCvI0SJWhC+uC8bZoW
-	6xva8H0EFiKjiaNd/r1rrwMOHRZ1TQiN1QVQZ0mciLeBSqpX2lj5heFJw3R2Kx5uhJRJ
-	AHmto5RClrgBal4cW1wWXmcFpuz/TehEbuWC+/yM692hieXC40IgxVoFS3lKhwQFS6CB
-	B1tFvmXZIz6Z77iudrBOP4CfRR0zGzO99JGrlgxE16sPjb+1levby0KiRKxJH4l3k5fS
-	oaZg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=YxVdAEgBtHOFMF9YKvZRsoCtE8sRruTHwvqs4v8It28=;
+	b=Nr1W2FaXZ6wb2wLRweWrraKYz0EKqA2zktJxASmnFTCx5s+WXlMwxI4cnK8WGhUN+l
+	mCfkxBmq5sau+XloyEI5cu5jyWHFf8qHEfWVtxSXJSEgAUqGQZimHLDvLQD+B226ru0s
+	pkxy9M0I41XFTGGo0iQ02UAmOwkEjGgvAALgVh4foOqJ6rk93EoXV7aV/n6m/+G1o+uW
+	Q6TN6UvN4tz1W1TbV3LeXxywPw9DWdR+vsjmbkP9gpSCtdrtkKQ5sfAa36YeNpRICZQe
+	kd1lgZJdGafrAz4mdZAMeF+GL1lDZ/S2Tn0I7T8Y2IvTnyuG0nuTLvvoDCqC0OvDqR6I
+	RYQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=/AxNsBA+Uq7JnecqnwJP/wovrMLzYFZqUDFzoLV7glY=;
-	b=bkjcSrU6/IwBAJyKzcCuQDlHu0vCKCy6Z6DQfr5qfEf3IFH8MJPk9Wykjgtl9gVkyq
-	ijckZu1MFyrxGmLLLwzIu5Mtizoh9fXqQulBK7GzNWdNBJoYjcfWRrP9Nn40hKj4Q2Qg
-	xHcU6gbvXHYfdCkmpSRXCLZRavMpdjfcDjLbsPubUG+jYuCfgpgYM98cLW/rM5SmmkxC
-	vMHQUaVy9c4ehOhV9vvgkH2HeDhGbmmUVNZfIIcbc6A9Y1lOt97R0S69qb4gLz52eeut
-	olx1t7FBni0HlF2Hemdrsf3LQTIYJaJBtQdPhILqI6BXeBSamyTL0ccZinQTW13yEO70
-	OCeA==
-X-Gm-Message-State: APjAAAVrM6wozfA4Mjxv1hOlxqpYp5Rfde8MFaktkdDcs5O3N25oWe3V
-	ix324AecsPcrCJMe4Df7RJFsuD7n
-X-Google-Smtp-Source: APXvYqxYE9ecLSW9oQeUUEChKWOXNP0vOjsrEXa2ILU/kZhBVCwHC1PeE2WwDsPp7JTFaEzKSI1OoQ==
-X-Received: by 2002:ac2:43da:: with SMTP id u26mr4128076lfl.63.1573165640448; 
-	Thu, 07 Nov 2019 14:27:20 -0800 (PST)
-Received: from peterliu-Precision-7530.lan
-	(c-75fd72d5.022-417-73746f13.bbcust.telenor.se. [213.114.253.117])
-	by smtp.gmail.com with ESMTPSA id p5sm1521694ljg.57.2019.11.07.14.27.18
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 07 Nov 2019 14:27:19 -0800 (PST)
-From: liu.ming50@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Nov 2019 23:27:16 +0100
-Message-Id: <1573165636-17664-1-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: patrickvacek@gmail.com, stefan.agner@toradex.com,
-	Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe] [PATCH] ostree: fix some invalid condition checking
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=YxVdAEgBtHOFMF9YKvZRsoCtE8sRruTHwvqs4v8It28=;
+	b=BL/7GKITpzH8dKmKkno5NcdiYWLIt5LbAheeOWbFz6y5ea5QUH+kEvLA/xwCsrcANv
+	4cuv19Ng82+xaFwX8EVadT5RMLS1cvBq6J8NnRN5LTxSCr2Gcky11zPyAUtfhAjWRv7j
+	rMwIYDtM0tpFYdmrNLI0xkjs20ZO4oGZBo3LWUrFo8cdrMufQKHNPr87MWJ49MvdabEk
+	X/5F3VF+Ii9Q3BxHDMFvlmTr/lcu55XvEkjKw1YFbLN7AOzKtTUo28uuMISC7Mx820R+
+	L+EH48d3GEY3RFjwCvDW2eAjHl45UBbZvVHs8wkd7f0FflMN2fyljfs32lv6z8JSjj9A
+	8hWA==
+X-Gm-Message-State: APjAAAUPMu6QSl6fjWco5Cjf1HFrGu52DhA6kDz5bCfeLocY7O/+1u48
+	oKbqqXqMV3e9tRDlLDl3AQyoArgDNl1OCIjpIrE=
+X-Google-Smtp-Source: APXvYqyh132aBKljonBW4Umo7QUNhmDjlpzsj2/Gu4W9OMJAkuikwI0tM3uAGE1J9JxcWOK7pDwdHIrwQ/3SXDDZzVQ=
+X-Received: by 2002:a37:84b:: with SMTP id 72mr6435284qki.337.1573177255618;
+	Thu, 07 Nov 2019 17:40:55 -0800 (PST)
+MIME-Version: 1.0
+References: <20191106074935.46751-1-hongxu.jia@windriver.com>
+	<CALbNGRSyJYthd3zWWXfVBCzTNXhdNBA9K-MKAGFqHYVEuLNWYg@mail.gmail.com>
+	<620c7105-97cf-0595-0c72-fb6bcc660348@windriver.com>
+In-Reply-To: <620c7105-97cf-0595-0c72-fb6bcc660348@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 7 Nov 2019 17:40:29 -0800
+Message-ID: <CAMKF1spQOVXGcitE__xXrfB1G54tEqau4JEaVXW4xEiBo521nw@mail.gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH 1/8] python-more-itertools: downgrade 7.2.0 -> 5.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,41 +56,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Nov 2019 22:27:20 -0000
+X-List-Received-Date: Fri, 08 Nov 2019 01:40:55 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Ming Liu <liu.ming50@gmail.com>
+On Wed, Nov 6, 2019 at 1:30 AM Hongxu Jia <hongxu.jia@windriver.com> wrote:
+>
+> On 11/6/19 5:07 PM, Andreas M=C3=BCller wrote:
+> > On Wed, Nov 6, 2019 at 8:59 AM Hongxu Jia <hongxu.jia@windriver.com> wr=
+ote:
+> >> Python 2.7 is no longer supported. The 5.0.0 release will be the last
+> >> version targeting Python 2.7. [1]
+> >>
+> >> [1] https://github.com/erikrose/more-itertools/commit/560b045b430e8292=
+c18cf5283de4fdc3e13e56f7
+> >>
+> >> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> > * Version going backwards
+> > * Such a patch at times python2 is eol - really?
+>
+> All these patches just make python2 module work.
+>
+> Should we clarify that we do not support python2? If yes, we could clean
+> up them.
 
-- PTEST_ENABLED is a target specific variable, avoid to check that for
-  ostree-native recipe.
-- one of soup, curl PACKAGECONFIG would satisfy not running into the
-  problem https://github.com/ostreedev/ostree/issues/1897, it should
-  not stick to soup. For instance, the curl is being chosen in
-  meta-updater rather than soup.
+as long as we have python2 in OE-core, IMO we should not drop the support.
 
-Signed-off-by: Ming Liu <liu.ming50@gmail.com>
----
- meta-oe/recipes-extended/ostree/ostree_2019.5.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> In this case, if we do not support python2 more-itertools, we should also
+>
+> clean up these python2 recipes (python-pytest,python-pluggy,python-zipp)
+>
+> that runtime depends on more-itertools.
+>
+>
+> As above upstream commits [1] said, the old version 5.0.0 is the last
+> version
+>
+> to support python2. Two choice: going backwards or cleaning up, it is
+> impossible
+>
+> to patch latest more-itertools to support python2
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-index 035b4bb..b3b34a1 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-@@ -182,10 +182,10 @@ SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
- BBCLASSEXTEND = "native"
- 
- python __anonymous() {
--    if bb.utils.contains('PTEST_ENABLED', '1', 'True', 'False', d):
--        if 'meta-python' not in d.getVar('BBFILE_COLLECTIONS').split():
-+    if not bb.data.inherits_class('native', d) and bb.utils.contains('PTEST_ENABLED', '1', 'True', 'False', d):
-+        if not bb.utils.contains_any('BBFILE_COLLECTIONS', 'meta-python', 'True', 'False', d):
-             raise bb.parse.SkipRecipe('ptest requires meta-python to be present.')
--        elif 'soup' not in d.getVar('PACKAGECONFIG').split():
-+        elif not bb.utils.contains_any('PACKAGECONFIG', 'soup curl', 'True', 'False', d):
-             raise bb.parse.SkipRecipe('ptest requires soup enabled in PACKAGECONFIG.')
-         elif not oe.utils.any_distro_features(d, "xattr"):
-             raise bb.parse.SkipRecipe('ptest requires xattr enabled in DISTRO_FEATURES.')
--- 
-2.7.4
+this recipe was just added in last release ( zeus ) so I think its
+fine to downgrade
+since I dont think we have folks with feeds from previous releases
+that will have to
+maintain upgradable feeds.
 
+But I think we should also apply these changes to zeus more importantly.
+
+>
+>
+> //Hongxu
+>
+> > Andreas
+>
+>
 
