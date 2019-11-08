@@ -1,47 +1,78 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 69B227F9AE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Nov 2019 18:11:01 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id u22so7415480qtq.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Nov 2019 10:11:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=aw5Oz3WM/VcIvcvBb8RPOLd2EmCmex0RshM6hhJ6YoU=;
-	b=rz3ZcAtHCzbi2UTfPJfB6OV8S5++myFEScFCrO3FKZx4xDquQhthXVJjWPqHJSsBf+
-	d7id9mN0SXy9reOr+3dq+uiqjJVb4/a92agloFk1yF/ygC5iM+pLsCo3qtPOY2h2OCi2
-	JkR6S+S+Rmf+lbPWqDnggUK4uIldxVFTJqf8WkDCZer6zuLh5LrRv6s7j9Jbhq3Nt06h
-	W3uiUczHwkw9y+1JK/HS3bH3+znELGPw3aQIdPA5olVslPySgkhZjkK5iHLfJ0h+ODI+
-	kZUCMbSsZ8R5IhaR/yyJYkqXQ+TKXL+PQqFjP7WY7fClJRnapAYhCYA2HAXFvO5IWar1
-	yRhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=aw5Oz3WM/VcIvcvBb8RPOLd2EmCmex0RshM6hhJ6YoU=;
-	b=Of4iAh8CskIilx1fwa6iAylKkqsvHTH9bvjcxQEifhpNQdb3U/THmjFZbV2d+vJDE8
-	4t6EmXEowO/z6k91QQckSx2T7myqc6MgnigkgVblz488QQF2GYVb/g1IL7BSHQj2l745
-	cN4cWe7IIB7GiS0aPJaIiDXfW/raR8kFzmHnrqN1yl4CkqTYiC4qVYMQYP0lh/imRSWs
-	T1qxGyH7R308YpKK2rm1N+FMDwDwNPaIqKIoj/WqKCURmFwwI9Z3mrEw2Vl6utmJ7WKk
-	AYv2hJlDRQUoLJwINzTqbimb79SVLZl2s7y0mXVYIXUXWMspqCaddtzvuX+IU0hsiee3
-	yvaA==
-X-Gm-Message-State: APjAAAWKRGENa8bv/WpfkOC7/DWlOHFJQfNttNGN1q1x/efraMnOYwWU
-	X6+TVgBIrw55PwXOT+hguIA0aBK0nFROEhIrrI0=
-X-Google-Smtp-Source: APXvYqzzEyStbO9RUX463LDYMTvhEBEBCVjvN3W+/qVRv+CgmP+2UfkxsIVe9Ocvn0olT7WKpWvo5TEXqe/6c2pgK5U=
-X-Received: by 2002:ac8:1415:: with SMTP id k21mr11661441qtj.80.1573236661870; 
-	Fri, 08 Nov 2019 10:11:01 -0800 (PST)
+Return-Path: <lewis.muhlenkamp@stryker.com>
+Received: from NAM01-BN3-obe.outbound.protection.outlook.com
+	(mail-eopbgr740050.outbound.protection.outlook.com [40.107.74.50])
+	by mail.openembedded.org (Postfix) with ESMTP id CD5867FB43;
+	Fri,  8 Nov 2019 20:46:36 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=S+FD7uFlUFObX/5Lws3tIWylwQPrtrkol2llZcahT9/v3D5u+PSo5nIWKjKRe0MvFDCQmmz9vwa+uh0+vHQ4M93iSCfzO1gctZuRkyfbMmNF8Ht/+xYh8EE6Zg5ZZkqsJa2ujVEM8SuCAUhfko9F4FvQac8uv4sqECjskEKe/DpyNQQDd05fR1eFr3uCokuoCHADXfdjmYCbRDPuU+hXE8XbJIpUfNyk5nT9nfXiI0pEcjuhph7MGmYHSa9C2F2S50VKOL+9W4ZwwOMaKxep1E5aEVrRd9QT7MjWPntR7diFoHD+W7abJg3Y9xLFVWrCL7KWPYBdjHrOJrJd6zu1Cg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=yY+RvKL8GuYsjZtMzaVGuaee+2Tt4Tztz+VrElXMVWY=;
+	b=QUdsw6xrjMSQHA3l5Hi1epBBnN/vIUxVVBmHUL4H4csCYpx/OWDUBeMvM2jZSEftySDHDQNLz7toAvZBL5A1T4PFzVsHDihiDAKrw53GscQ6Ogm56Fw60JTElkwG/sRC9tSuElwapg9gIcYRIwZ5tdqpP82Vg+tGO3GpiROQvGfxObWYb1w/FKfkWrm2OoWKVmKnN3IcsGsmYhd438zRj4bLfs0nUkj3ybR1M8EHInq2KmcpBKnaBPAqFWbmynZ4NELPBkyfdKomI9NC3LpBFH0EIiHJQUxPOLsXq10L6yL834LKDAcfndEI0wtaC2wJl4lWCcjkRASVnMyX0bNsQA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+	smtp.mailfrom=stryker.com;
+	dmarc=pass action=none header.from=stryker.com; 
+	dkim=pass header.d=stryker.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stryker.com;
+	s=selector1;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=yY+RvKL8GuYsjZtMzaVGuaee+2Tt4Tztz+VrElXMVWY=;
+	b=LGcdcj94BcRcJAr6n9exBJ4H2UUM23PEoZ6MpQAU6ZppNpo+f+SH/WfU0Fc69nsggUzkMZsO1m6+yOoU+pZafN9upn/kT7oWqtVBnZC9x9cXUvJMt1RqEpGP51rjhtZ9dCtHcSKVUaLaEacP83IGedSHodjNDygBPNWtH0U3ihg=
+Received: from BN6PR0101MB2914.prod.exchangelabs.com (10.174.88.139) by
+	BN6PR0101MB3154.prod.exchangelabs.com (10.174.87.24) with Microsoft
+	SMTP
+	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+	15.20.2430.22; Fri, 8 Nov 2019 20:46:36 +0000
+Received: from BN6PR0101MB2914.prod.exchangelabs.com
+	([fe80::5551:3fd0:8175:4dbb]) by BN6PR0101MB2914.prod.exchangelabs.com
+	([fe80::5551:3fd0:8175:4dbb%6]) with mapi id 15.20.2430.023;
+	Fri, 8 Nov 2019 20:46:36 +0000
+From: "Muhlenkamp, Lewis" <lewis.muhlenkamp@stryker.com>
+To: "openembedded-core@lists.openembedded.org"
+	<openembedded-core@lists.openembedded.org>, openembedded-devel
+	<openembedded-devel@lists.openembedded.org>, Anuj Mittal
+	<anuj.mittal@intel.com>
+Thread-Topic: How to enable x11 with intel-corei7-64 machine in meta-intel
+	layer
+Thread-Index: AdWWc06FYisVFQ2dQfCNAAWEp8chxQ==
+Date: Fri, 8 Nov 2019 20:46:36 +0000
+Message-ID: <BN6PR0101MB291467F2D2FCD0A1803982F58F7B0@BN6PR0101MB2914.prod.exchangelabs.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=lewis.muhlenkamp@stryker.com; 
+x-originating-ip: [165.225.32.55]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: eaaee1f1-ba6b-40f6-a418-08d7648cbf8f
+x-ms-traffictypediagnostic: BN6PR0101MB3154:
+x-microsoft-antispam-prvs: <BN6PR0101MB315492002F6CB62FE27478468F7B0@BN6PR0101MB3154.prod.exchangelabs.com>
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-forefront-prvs: 0215D7173F
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(396003)(376002)(39860400002)(136003)(366004)(346002)(189003)(199004)(81156014)(33656002)(5660300002)(52536014)(81166006)(8936002)(9326002)(66946007)(76116006)(66446008)(64756008)(66556008)(66476007)(74316002)(110136005)(7736002)(2906002)(2501003)(66066001)(8676002)(14454004)(25786009)(790700001)(71200400001)(71190400001)(6306002)(99286004)(316002)(606006)(186003)(236005)(6436002)(9686003)(54896002)(55016002)(478600001)(256004)(7696005)(86362001)(26005)(476003)(6506007)(486006)(102836004)(3846002)(55236004)(6116002);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR0101MB3154;
+	H:BN6PR0101MB2914.prod.exchangelabs.com; FPR:; SPF:None; LANG:en;
+	PTR:InfoNoRecords; MX:1; A:1; 
+received-spf: None (protection.outlook.com: stryker.com does not designate
+	permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: ABAS0qxpa9lTLurdnarjRoaLJAat8A9B4SbwLH5f3Gd0PmKRwTSStWP7YpcRn85nL59R26IaU3pTkfm5u3xI7hETawydVDKodpYLykMW4f00tPfZnIGE+iC84iyaJzAZQh39ot3S576rZTzQQB0ex1oZcnUgLeOSSBLciuKsGNJIXSewlmCIf+e9FAh8XLtQ0hTGkm+9yxDERfp/zkEFVxjgx+vkT6luZZgrDKJAAccg/uhyGqaPrzBexKpJSFo+xmM9p6Pg2A8FCr5paq+9YGGd7kAg9OBeXMEhrW7UZiXAZ4aVJXuMPxokiZSNT6TEJdMrM0NesaYEDhF/9paB8Y09S1dO4j7slggped3MO20ZYZQBELDwhqY4+XWGI4bhcwbU7c3SedlC21rfKtPfBSRA5TwikcgvhpPHfytcDebMV+haZd5cSXJNd/eU9A7i
+x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
-References: <20191108091441.25374-1-stefan@agner.ch>
-In-Reply-To: <20191108091441.25374-1-stefan@agner.ch>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 8 Nov 2019 10:10:34 -0800
-Message-ID: <CAMKF1spuqH_1dTyRy_gPLTVusyiVkxokDZMmPmDStAR=Db0q7A@mail.gmail.com>
-To: Stefan Agner <stefan@agner.ch>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Stefan Agner <stefan.agner@toradex.com>
-Subject: Re: [meta-oe][PATCH] zstd: move recipe to oe-core
+X-OriginatorOrg: stryker.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: eaaee1f1-ba6b-40f6-a418-08d7648cbf8f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Nov 2019 20:46:36.5816 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 4e9dbbfb-394a-4583-8810-53f81f819e3b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: JM5SegMuzshzeFotXP6e83Z6Mw2HxpR1+DeHuxG84k3jwqJ5Pg9xHOnMADB+Ay8IBZIoz+krY1SAlCkwumnLPOtZDWxhnL2KYdr3RPOdEpw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR0101MB3154
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: How to enable x11 with intel-corei7-64 machine in meta-intel layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,71 +85,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Nov 2019 18:11:01 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 08 Nov 2019 20:46:38 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-can you ping me when its merged into oe-core
+Hello,
 
-On Fri, Nov 8, 2019 at 1:14 AM Stefan Agner <stefan@agner.ch> wrote:
->
-> From: Stefan Agner <stefan.agner@toradex.com>
->
-> Move the zstd recipe to openembedded-core and hence remove it in
-> meta-oe.
->
-> Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
-> ---
->  meta-oe/recipes-extended/zstd/zstd_1.4.4.bb | 35 ---------------------
->  1 file changed, 35 deletions(-)
->  delete mode 100644 meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
->
-> diff --git a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb b/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
-> deleted file mode 100644
-> index eb201f413..000000000
-> --- a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
-> +++ /dev/null
-> @@ -1,35 +0,0 @@
-> -SUMMARY = "Zstandard - Fast real-time compression algorithm"
-> -DESCRIPTION = "Zstandard is a fast lossless compression algorithm, targeting \
-> -real-time compression scenarios at zlib-level and better compression ratios. \
-> -It's backed by a very fast entropy stage, provided by Huff0 and FSE library."
-> -HOMEPAGE = "http://www.zstd.net/"
-> -SECTION = "console/utils"
-> -
-> -LICENSE = "BSD-3-Clause & GPLv2"
-> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
-> -                    file://COPYING;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
-> -
-> -SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1"
-> -
-> -SRCREV = "10f0e6993f9d2f682da6d04aa2385b7d53cbb4ee"
-> -UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
-> -
-> -S = "${WORKDIR}/git"
-> -
-> -PACKAGECONFIG ??= ""
-> -PACKAGECONFIG[lz4] = "HAVE_LZ4=1,HAVE_LZ4=0,lz4"
-> -PACKAGECONFIG[lzma] = "HAVE_LZMA=1,HAVE_LZMA=0,xz"
-> -PACKAGECONFIG[zlib] = "HAVE_ZLIB=1,HAVE_ZLIB=0,zlib"
-> -
-> -# See programs/README.md for how to use this
-> -ZSTD_LEGACY_SUPPORT ??= "4"
-> -
-> -do_compile () {
-> -    oe_runmake ${PACKAGECONFIG_CONFARGS} ZSTD_LEGACY_SUPPORT=${ZSTD_LEGACY_SUPPORT}
-> -}
-> -
-> -do_install () {
-> -    oe_runmake install 'DESTDIR=${D}'
-> -}
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+I've been trying to figure out how to get x11 enabled with my intel-corei7-=
+64 machine.
+
+If I have in my local.conf file MACHINE set to intel-corei7-64 and I run "b=
+itbake core-image-x11", bitbake fails.  The error message I get in the .../=
+tmp-glibc/work/corei7-64-oe-linux/xf86-video-intel/2_2.99.917+gitAUTOINC+e4=
+fe79cf0d-r0/build/config.log file is as follows:
+
+=3D=3D=3D Start config.log excerpt =3D=3D=3D
+configure:22309: checking whether to include XvMC support
+configure:22311: result: yes
+configure:22345: checking which acceleration method to use by default
+configure:22356: error: No default acceleration option
+=3D=3D=3D End config.log excerpt =3D=3D=3D
+
+I've tried different things I've found doing Google searches.  None of them=
+ have worked.
+
+This is a bare bone setup.  I am using the thud branch.  My bblayers.conf f=
+ile is as follows:
+
+=3D=3D=3D Start bblayers.conf =3D=3D=3D
+# LAYER_CONF_VERSION is increased each time build/conf/bblayers.conf
+# changes incompatibly
+LCONF_VERSION =3D "7"
+
+BBPATH =3D "${TOPDIR}"
+BBFILES ?=3D ""
+
+BBLAYERS ?=3D " \
+  ${HOME}/oe-core/meta \
+  ${HOME}/meta-openembedded/meta-python \
+  ${HOME}/meta-openembedded/meta-gnome \
+  ${HOME}/meta-openembedded/meta-filesystems \
+  ${HOME}/meta-openembedded/meta-oe \
+  ${HOME}/meta-openembedded/meta-networking \
+  ${HOME}/meta-openembedded/meta-initramfs \
+  ${HOME}/meta-openembedded/meta-webserver \
+  ${HOME}/meta-intel \
+  ${HOME}/meta-virtualization \
+  ${HOME}/meta-cloud-services \
+  ${HOME}/meta-cloud-services/meta-openstack \
+  ${HOME}/meta-iot-cloud \
+  ${HOME}/meta-secure-core/meta-tpm \
+ "
+=3D=3D=3D End bblayers.conf =3D=3D=3D
+
+The only change I made to the local.conf file was to set MACHINE to intel-c=
+orei7-64.
+
+I then ran "bitbake core-image-x11" and get the error.
+
+I'm guessing I need to add something more to my local.conf, but all of the =
+different things I've tried have failed.
+
+Any and all help would be appreciated.
+
+Thank you
+
+Lewis Muhlenkamp
+
+Follow this link to read our Privacy Statement<https://www.stryker.com/cont=
+ent/stryker/gb/en/legal/global-policy-statement.html/>
 
