@@ -1,16 +1,16 @@
 Return-Path: <obi@opendreambox.org>
 Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
-	by mail.openembedded.org (Postfix) with ESMTP id A499960720
+	by mail.openembedded.org (Postfix) with ESMTP id CEF997F8DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Nov 2019 14:51:41 +0000 (UTC)
+	Sun, 10 Nov 2019 14:52:25 +0000 (UTC)
 Received: by p910.zcs.saftware.de (Postfix, from userid 1000)
-	id D3411BE0AC6; Sun, 10 Nov 2019 15:51:38 +0100 (CET)
+	id 665E0BE0AC6; Sun, 10 Nov 2019 15:52:24 +0100 (CET)
 From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Nov 2019 15:51:38 +0100
-Message-Id: <20191110145138.3192-1-obi@opendreambox.org>
+Date: Sun, 10 Nov 2019 15:52:24 +0100
+Message-Id: <20191110145224.7593-1-obi@opendreambox.org>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] live555: Move test progams out of main package
+Subject: [meta-oe][PATCH] pugixml: Update to version 1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,31 +23,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Nov 2019 14:51:41 -0000
+X-List-Received-Date: Sun, 10 Nov 2019 14:52:26 -0000
 
-All binaries previously listed in FILES_${PN} come from a
-directory called 'testProgs' and will seldomly be used.
+Licence checksum changed due to updated copyright statement.
 
 Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-oe/recipes-multimedia/live555/live555.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../pugixml/{pugixml_1.9.bb => pugixml_1.10.bb}             | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/pugixml/{pugixml_1.9.bb => pugixml_1.10.bb} (79%)
 
-diff --git a/meta-oe/recipes-multimedia/live555/live555.inc b/meta-oe/recipes-multimedia/live555/live555.inc
-index cf4dc7f4fe..e08d11b0c2 100644
---- a/meta-oe/recipes-multimedia/live555/live555.inc
-+++ b/meta-oe/recipes-multimedia/live555/live555.inc
-@@ -49,8 +49,8 @@ do_install() {
-     install -m 0755 ${S}/mediaServer/live555MediaServer ${D}${bindir}/
- }
+diff --git a/meta-oe/recipes-devtools/pugixml/pugixml_1.9.bb b/meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb
+similarity index 79%
+rename from meta-oe/recipes-devtools/pugixml/pugixml_1.9.bb
+rename to meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb
+index ad45f87ecd..d48ad37512 100644
+--- a/meta-oe/recipes-devtools/pugixml/pugixml_1.9.bb
++++ b/meta-oe/recipes-devtools/pugixml/pugixml_1.10.bb
+@@ -7,11 +7,11 @@ data-driven tree queries."
+ HOMPAGE = "https://pugixml.org/"
  
--PACKAGES =+ " live555-openrtsp live555-playsip live555-mediaserver"
--FILES_${PN} = "${bindir}/sapWatch ${bindir}/testMPEG1or2ProgramToTransportStream ${bindir}/testMPEG1or2Splitter ${bindir}/testMPEG1or2VideoReceiver ${bindir}/testMPEG2TransportStreamTrickPlay ${bindir}/testOnDemandRTSPServer ${bindir}/testRelay ${bindir}/testAMRAudioStreamer ${bindir}/testDVVideoStreamer ${bindir}/testMP3Receiver ${bindir}/testMP3Streamer ${bindir}/testMPEG1or2AudioVideoStreamer ${bindir}/testMPEG1or2VideoStreamer ${bindir}/testMPEG2TransportStreamer ${bindir}/testMPEG4VideoStreamer ${bindir}/testWAVAudioStreamer ${bindir}/vobStreamer ${bindir}/MPEG2TransportStreamIndexer"
-+PACKAGES =+ "live555-openrtsp live555-playsip live555-mediaserver live555-examples"
- FILES_live555-openrtsp = "${bindir}/openRTSP"
- FILES_live555-playsip = "${bindir}/playSIP"
- FILES_live555-mediaserver = "${bindir}/live555MediaServer"
-+FILES_live555-examples = "${bindir}/*"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://readme.txt;beginline=29;endline=52;md5=1d569c2ed59c94ddd9586051f8c67da6"
++LIC_FILES_CHKSUM = "file://readme.txt;beginline=29;endline=52;md5=d5ee91fb74cbb64223b3693fd64eb169"
+ 
+ SRC_URI = "https://github.com/zeux/${BPN}/releases/download/v${PV}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "7286ee2ed11376b6b780ced19fae0b64"
+-SRC_URI[sha256sum] = "d156d35b83f680e40fd6412c4455fdd03544339779134617b9b28d19e11fdba6"
++SRC_URI[md5sum] = "f97237e9908201c6d8536210747b66af"
++SRC_URI[sha256sum] = "55f399fbb470942410d348584dc953bcaec926415d3462f471ef350f29b5870a"
+ 
+ inherit cmake
+ 
 -- 
 2.17.1
 
