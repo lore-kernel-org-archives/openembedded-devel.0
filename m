@@ -1,50 +1,16 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F0D86BA11
+Return-Path: <obi@opendreambox.org>
+Received: from mail.saftware.de (mail.saftware.de [83.141.3.46])
+	by mail.openembedded.org (Postfix) with ESMTP id A499960720
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Nov 2019 00:36:29 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id n13so7713419pff.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Nov 2019 16:36:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=G9JQGp0cu4jB8QiC8m6+gXPzjaqkzfGJWPV9mxEGdxA=;
-	b=LqmConr2y56RwubaufmrTngJa3bPMI7i/F3I8YL5PrYPJM/80CcB8/WNEpY4etQRvM
-	tp16DrLER8BdklEU0WN4UuYSHEpO25a4gPqsUiSjjNQ7tPnRiIgVAFv+7YDiq9gYVWqb
-	auY/65a53osTqGwXuwILno/fk6NJnQlwswuUT0U0wP4aH+Ixgy+kvXfo5j5NwL4J2WCG
-	ArIz8vtcLVSd0Hb5JyoSIT16vohJX7Z9UAeqFUmfydW2XCSsHyKAPCoLTM6r3xRv0T6q
-	hDTKfcwVEmSmrWxqznu60M4thAuJw/P8OuWDk1KT5No2sCF93wUFpzQVNZsEAMqD7S43
-	7hLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=G9JQGp0cu4jB8QiC8m6+gXPzjaqkzfGJWPV9mxEGdxA=;
-	b=Z+F81gzqfXV2XXfzKboXl21/P31VQoj7rfuu6v+rBMcpn6IqNPhRA9eyHYVaa2UrMN
-	08TJI2ypqAXT9EMxOUDP8+cwqOp7U29TVdHi/3+gG6yXLDCAXEdU8TZW3OmrWII0nNac
-	UgCHYMp2bcVzm76SVrvXOXPv/8NxzT+6+Tl5AJpBiLQxYFE4ZJdE6tjE0Qek1fNHGyAu
-	DoW0SfD/mrazIc5A3T3DN0109rx4SMHlewcPd993cfdcUMu44df3er4s1RBUEjhnoWHE
-	ELiM1qjPM6mYhQ3iJOJr+fWrdYRX9H5+sPz9iU6z0zZbF+fJm6mQ30fpC+NTQMNzIC/g
-	qQ3w==
-X-Gm-Message-State: APjAAAXa2ro1yoFuMmIVnw7aFfnMLMDuRkHf1UdWScyeoh/TzTWlltuV
-	JJTCYf2NHO2QEFOBfJSPwn97jOTx2gM=
-X-Google-Smtp-Source: APXvYqyr+vTE1t3seVaAL4WPOseQVFMFEoY/ovHyxmLZjdQoirDJYx6FON+D9O2G9j96JefNoezUJQ==
-X-Received: by 2002:a17:90b:300c:: with SMTP id
-	hg12mr24897247pjb.75.1573346189591; 
-	Sat, 09 Nov 2019 16:36:29 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::a99e])
-	by smtp.gmail.com with ESMTPSA id z5sm9663463pgi.19.2019.11.09.16.36.28
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 09 Nov 2019 16:36:29 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Sun, 10 Nov 2019 14:51:41 +0000 (UTC)
+Received: by p910.zcs.saftware.de (Postfix, from userid 1000)
+	id D3411BE0AC6; Sun, 10 Nov 2019 15:51:38 +0100 (CET)
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  9 Nov 2019 16:36:16 -0800
-Message-Id: <20191110003616.1710474-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] syslog-ng: Do not install non-existing systemd file
+Date: Sun, 10 Nov 2019 15:51:38 +0100
+Message-Id: <20191110145138.3192-1-obi@opendreambox.org>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] live555: Move test progams out of main package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +23,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Nov 2019 00:36:29 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 10 Nov 2019 14:51:41 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+All binaries previously listed in FILES_${PN} come from a
+directory called 'testProgs' and will seldomly be used.
+
+Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
 ---
- meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 1 -
- 1 file changed, 1 deletion(-)
+ meta-oe/recipes-multimedia/live555/live555.inc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-index 4c22d4b0f0..3aba4473dc 100644
---- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-+++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
-@@ -92,7 +92,6 @@ do_install_append() {
+diff --git a/meta-oe/recipes-multimedia/live555/live555.inc b/meta-oe/recipes-multimedia/live555/live555.inc
+index cf4dc7f4fe..e08d11b0c2 100644
+--- a/meta-oe/recipes-multimedia/live555/live555.inc
++++ b/meta-oe/recipes-multimedia/live555/live555.inc
+@@ -49,8 +49,8 @@ do_install() {
+     install -m 0755 ${S}/mediaServer/live555MediaServer ${D}${bindir}/
+ }
  
-         install -d ${D}${systemd_unitdir}/system/
-         install -m 0644 ${S}/contrib/systemd/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@.service
--        install -m 0644 ${S}/${BPN}.service ${D}${systemd_unitdir}/system/${BPN}.service
-         install -m 0644 ${S}/contrib/systemd/${BPN}@default ${D}${sysconfdir}/default/${BPN}@default
- 
-         sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${sysconfdir}/default/${BPN}@default
+-PACKAGES =+ " live555-openrtsp live555-playsip live555-mediaserver"
+-FILES_${PN} = "${bindir}/sapWatch ${bindir}/testMPEG1or2ProgramToTransportStream ${bindir}/testMPEG1or2Splitter ${bindir}/testMPEG1or2VideoReceiver ${bindir}/testMPEG2TransportStreamTrickPlay ${bindir}/testOnDemandRTSPServer ${bindir}/testRelay ${bindir}/testAMRAudioStreamer ${bindir}/testDVVideoStreamer ${bindir}/testMP3Receiver ${bindir}/testMP3Streamer ${bindir}/testMPEG1or2AudioVideoStreamer ${bindir}/testMPEG1or2VideoStreamer ${bindir}/testMPEG2TransportStreamer ${bindir}/testMPEG4VideoStreamer ${bindir}/testWAVAudioStreamer ${bindir}/vobStreamer ${bindir}/MPEG2TransportStreamIndexer"
++PACKAGES =+ "live555-openrtsp live555-playsip live555-mediaserver live555-examples"
+ FILES_live555-openrtsp = "${bindir}/openRTSP"
+ FILES_live555-playsip = "${bindir}/playSIP"
+ FILES_live555-mediaserver = "${bindir}/live555MediaServer"
++FILES_live555-examples = "${bindir}/*"
 -- 
-2.24.0
+2.17.1
 
 
