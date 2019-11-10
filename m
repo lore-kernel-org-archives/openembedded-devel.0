@@ -1,50 +1,42 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 18C187F994
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 44BA56C4D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Nov 2019 16:58:56 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id q22so7676199pgk.2
+	Sun, 10 Nov 2019 21:28:05 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id c17so11299946wmk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 10 Nov 2019 08:58:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=KuzXSRF5PCaTYvf/grL3dv8QifqzhQwYjQV8vOGuIF8=;
-	b=oypO+Yd82woz3OoWRnlr5jAEdQF7RSrlbH5FMLIxoWYs7cORTuwgdQTr20L4VNFZ4s
-	dUGbnKFoUfi+hcwH/Z/ZYQTVE9WmZ1nr41F12qCCDaAzQJshRmWQFtDvH9fZVBM/3e9X
-	8j7ZT63FjxCgGndbgbxzRQW53eCJsoM5mLZCsII3gxLenU48LhKLAK7fE0p3q4w660k2
-	AXiop9pYF+Bl0OSktOUhtWCm0rsfOhpQOZzAGd2rnHsFVD8mPHxXTnvBJF7vz/yHQeEt
-	4I5IFuEqd8i75jRGkl6jyRJXoRNiaatC8VraTmb1BiJcd0peygc36z9XIy5omejpG2vK
-	bBUQ==
+	Sun, 10 Nov 2019 13:28:06 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=KuzXSRF5PCaTYvf/grL3dv8QifqzhQwYjQV8vOGuIF8=;
-	b=lFAP7ozvgmq0rTzBVmU2HDKi/RuKTcmP/XWqXndu2GcTc0iu5S13n7tD19pQY76NyB
-	+zfEjvrovPj2NiHcC8gfi9C7qhVlfPiyosmQeKz6vPd5fPXDDlxvcmkG3hdzWZfNiChm
-	1qPRmIaeLnL6Fd8qaCXTt3SZudF5+sekfgSIBKnh2jxVFJB0X253vzXEG40iz7i6guvQ
-	irYTCIHe+A+JnufVpU4n9tWz4v+ZvtMvHKdRAro1nd5PqSZvQb2bAanIPIX1zZiD7WSM
-	nsTHddSX5WKTNyIohVYLcHKu7PdxPzYXvhZYWCYMM8JiwumKQrmRwL2Ih7et0qJ39bNw
-	/qwg==
-X-Gm-Message-State: APjAAAUYaoe1JtzfPhqw58qRPBoDQhtiSAn3BHWGGE9nbszrVMje4G8B
-	OUwzoT+QIgOf1maL7JkbzWLcH7xkUbc=
-X-Google-Smtp-Source: APXvYqwPBODouqE0SbmcuDZqsncDk6VkV1v9McMSKxdeUy3jB5TfwT0IfEYCh9aK6HAU7R/RrOeiXw==
-X-Received: by 2002:a63:d011:: with SMTP id z17mr18580503pgf.119.1573405137196;
-	Sun, 10 Nov 2019 08:58:57 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::a99e])
+	bh=LFYD7sJQIhL6PK9IS0GfAhkXNepi8ztXdkafJUPOR8I=;
+	b=oNdOixVBsFPA0V1aDHmUguYGDBB9RtGEyS47dJAe2u/Geh7kYNQKHiM39Tpz5xHH23
+	pEcAIQytsGwT9R14U05XDrXG9YKAOfepy0gSpzeUVAzOacbsfemOSOnFexANpW9Wmeae
+	h+B1CEGIbna8WSQ3ZWuPNnQSesN9VHEI8JYeEUg6AioXwGx7l7sWufB6qDzkAIq+Ky4O
+	5VclssJ6TwfzAKRm6zGmT9H7Lm1kNY/yEuR0Be8/4FOGvDBS8yq/ZdjbhgBghiSE160L
+	aQJD2ailZuH18G+aVH9p4mJN5lddLD6bLQ1chdXInAwGVBlb78+RzeFnqSU7NIkSKhlB
+	P/dQ==
+X-Gm-Message-State: APjAAAXlIjZw2Qw+gxclC8a9El3JiJjUyu1K4FcB9icXhjkNyCcOJliS
+	nNzxAaOL5GiHdhFqMPQKNI655QIl
+X-Google-Smtp-Source: APXvYqxOrQQZAJy7Qh765qFp512GGf8yCR1t1iCYx7cnHhtbLIzVEYetB4kH9fkXhjKsquB8sknKlA==
+X-Received: by 2002:a05:600c:2295:: with SMTP id
+	21mr16592312wmf.85.1573421285460; 
+	Sun, 10 Nov 2019 13:28:05 -0800 (PST)
+Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	q200sm13352139pfq.87.2019.11.10.08.58.56
+	n17sm12862421wrp.40.2019.11.10.13.28.04
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 10 Nov 2019 08:58:56 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Sun, 10 Nov 2019 13:28:04 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Nov 2019 08:58:42 -0800
-Message-Id: <20191110165842.4105728-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
+Date: Sun, 10 Nov 2019 21:28:02 +0000
+Message-Id: <20191110212803.9262-1-git@andred.net>
+X-Mailer: git-send-email 2.23.0.rc1
 MIME-Version: 1.0
-Subject: [meta-webserver][PATCH] cherokee: Update to latest
+Subject: [meta-python][PATCH 1/2] gyp: update to fcd686f1880f
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,28 +49,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 10 Nov 2019 16:58:57 -0000
+X-List-Received-Date: Sun, 10 Nov 2019 21:28:05 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+This brings a few python3 fixes:
+fcd686f1 (origin/master, origin/HEAD, master) Add .tbd to the .xcodeproj generator’s extension map
+a8921fca fix encoding issues with inputs for better Python 3 support
+12ef00df fix make output checks under C locale
+aca1e2c3 Fix Python 3 incompatibilities
+4f1618ab Add missing b'' qualifier from da63cb0f.
+da63cb0f Misc python3 fixes in xcode_emulation.
+5c270f76 Fix incorrect depfile path relativization
+9f2a7bb1 Add flake8 checks to travis configuration.
+
+Signed-off-by: André Draszik <git@andred.net>
 ---
- meta-webserver/recipes-httpd/cherokee/cherokee_git.bb | 2 +-
+ meta-python/recipes-devtools/gyp/gyp_git.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_git.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_git.bb
-index 3f7eae4c16..69d64725e5 100644
---- a/meta-webserver/recipes-httpd/cherokee/cherokee_git.bb
-+++ b/meta-webserver/recipes-httpd/cherokee/cherokee_git.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-python/recipes-devtools/gyp/gyp_git.bb b/meta-python/recipes-devtools/gyp/gyp_git.bb
+index 2b3f3fb2b..61f3c8637 100644
+--- a/meta-python/recipes-devtools/gyp/gyp_git.bb
++++ b/meta-python/recipes-devtools/gyp/gyp_git.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ab828cb8ce4c62ee82945a11247b6bbd"
+ SECTION = "devel"
  
- DEPENDS = "unzip-native libpcre openssl mysql5 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+ SRC_URI = "git://chromium.googlesource.com/external/gyp;protocol=https"
+-SRCREV = "8bee09f4a57807136593ddc906b0b213c21f9014"
++SRCREV = "fcd686f1880fa52a1ee78d3e98af1b88cb334528"
  
--SRCREV = "75f041e2255e6dd0692db2f14611c2647dbe8425"
-+SRCREV = "9a75e65b876bcc376cb6b379dca1f7ce4a055c59"
- PV = "1.2.104+git${SRCPV}"
- SRC_URI = "git://github.com/cherokee/webserver \
-            file://cherokee.init \
+ S = "${WORKDIR}/git"
+ PV = "0.1+git${SRCPV}"
 -- 
-2.24.0
+2.23.0.rc1
 
 
