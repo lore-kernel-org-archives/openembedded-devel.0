@@ -1,48 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com
-	[209.85.208.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 290177F33B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F0D86BA11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Nov 2019 21:03:40 +0000 (UTC)
-Received: by mail-ed1-f45.google.com with SMTP id r16so8940938edq.2
+	Sun, 10 Nov 2019 00:36:29 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id n13so7713419pff.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Nov 2019 13:03:42 -0800 (PST)
+	Sat, 09 Nov 2019 16:36:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DTj8e7NB1wFZXVbMA1OBxMIxDDVsKWNC8pYBwU9Ia3E=;
-	b=KQ0L/UO3UeJ34qej9L/mhSCVkS1hkyb6YWE3xG+XDl767Wlu8eSKQxi2x1FyQqB+Gl
-	nNUB0myhnJHH1+PW6DNcTucK7fViPBhBqOWHP36u7C1mTJ39lTl6EHXDl6nBZ9vmXOLh
-	LzCwcXS3x2VbTaxe8I6aGdO6mDhgBNla0d1F3iuGuLvva3kegA+2WJso9SdTKSyqjv1m
-	G1AwxveZ+5eBZ9yQHole3acZOCpTnYYRKNPu1qGP+X9+tg6W6rfVlxUbtzt9B8g2bGhi
-	JmqfMA7i1RO2r8XKeydzlqoFVvvGL+2G15jLzrT5AQMqkCXL2KrzfID7ipdkpYfSQ6Wx
-	gzAQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=G9JQGp0cu4jB8QiC8m6+gXPzjaqkzfGJWPV9mxEGdxA=;
+	b=LqmConr2y56RwubaufmrTngJa3bPMI7i/F3I8YL5PrYPJM/80CcB8/WNEpY4etQRvM
+	tp16DrLER8BdklEU0WN4UuYSHEpO25a4gPqsUiSjjNQ7tPnRiIgVAFv+7YDiq9gYVWqb
+	auY/65a53osTqGwXuwILno/fk6NJnQlwswuUT0U0wP4aH+Ixgy+kvXfo5j5NwL4J2WCG
+	ArIz8vtcLVSd0Hb5JyoSIT16vohJX7Z9UAeqFUmfydW2XCSsHyKAPCoLTM6r3xRv0T6q
+	hDTKfcwVEmSmrWxqznu60M4thAuJw/P8OuWDk1KT5No2sCF93wUFpzQVNZsEAMqD7S43
+	7hLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=DTj8e7NB1wFZXVbMA1OBxMIxDDVsKWNC8pYBwU9Ia3E=;
-	b=p9e1LTCOR30CCOKvTv5zd4fG39Pi0BgVlA40e2CHs3UT67J+zOp12emCdM6lzKFKQm
-	I1uXWzUZWF7iLIqO0DZyyN29Y/8/cuYllYrlUqE9OGeE2EqfX6MdbA7tq7MBBG3SfSym
-	kgFDyxFwV4dSqkjgen0hwcdX3ggOklJPm6uOpJXikDSxuulPenLnQ4qhaXWLN8aGjCtt
-	Z7hhFG6rDgk9Jz0oelveOcAi4MyoTSWdzluSod8F8W/3OWHYWPEhB14trGm480bpMjYC
-	Etx+8bqF7CEJ0zUmYeABQjZoqtDXlA37ryQDL3iMypkm340T10+hGSgRwJim6kbNOglM
-	RPRA==
-X-Gm-Message-State: APjAAAXLHEaKP5VUeJLBmJoi0pgaAL2nTUcbtmny9GgGS+ga88uZkKZg
-	v7zfuBL3vGxpUKfyVv7cCyG66FHXct2UNT0zgr5ZUUeL
-X-Google-Smtp-Source: APXvYqwAktBYwJ4EA6TociekV+Qidv+zg4Wc087HqTcwBsUDeqtViYNOHwGGbYEhcbQ4A5Iit/KGw4FdUXSD3fX1uHU=
-X-Received: by 2002:a17:906:3ca:: with SMTP id
-	c10mr15141931eja.140.1573333421600; 
-	Sat, 09 Nov 2019 13:03:41 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=G9JQGp0cu4jB8QiC8m6+gXPzjaqkzfGJWPV9mxEGdxA=;
+	b=Z+F81gzqfXV2XXfzKboXl21/P31VQoj7rfuu6v+rBMcpn6IqNPhRA9eyHYVaa2UrMN
+	08TJI2ypqAXT9EMxOUDP8+cwqOp7U29TVdHi/3+gG6yXLDCAXEdU8TZW3OmrWII0nNac
+	UgCHYMp2bcVzm76SVrvXOXPv/8NxzT+6+Tl5AJpBiLQxYFE4ZJdE6tjE0Qek1fNHGyAu
+	DoW0SfD/mrazIc5A3T3DN0109rx4SMHlewcPd993cfdcUMu44df3er4s1RBUEjhnoWHE
+	ELiM1qjPM6mYhQ3iJOJr+fWrdYRX9H5+sPz9iU6z0zZbF+fJm6mQ30fpC+NTQMNzIC/g
+	qQ3w==
+X-Gm-Message-State: APjAAAXa2ro1yoFuMmIVnw7aFfnMLMDuRkHf1UdWScyeoh/TzTWlltuV
+	JJTCYf2NHO2QEFOBfJSPwn97jOTx2gM=
+X-Google-Smtp-Source: APXvYqyr+vTE1t3seVaAL4WPOseQVFMFEoY/ovHyxmLZjdQoirDJYx6FON+D9O2G9j96JefNoezUJQ==
+X-Received: by 2002:a17:90b:300c:: with SMTP id
+	hg12mr24897247pjb.75.1573346189591; 
+	Sat, 09 Nov 2019 16:36:29 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::a99e])
+	by smtp.gmail.com with ESMTPSA id z5sm9663463pgi.19.2019.11.09.16.36.28
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 09 Nov 2019 16:36:29 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  9 Nov 2019 16:36:16 -0800
+Message-Id: <20191110003616.1710474-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-References: <20191109195436.78248-1-raj.khem@gmail.com>
-In-Reply-To: <20191109195436.78248-1-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 9 Nov 2019 22:03:30 +0100
-Message-ID: <CA+chaQec06vqFFH0buJY6bTNzLK_jPD8-KV5xJxfpPZux_AHMA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] sip: Upgrade to 4.19.19
+Subject: [meta-oe][PATCH] syslog-ng: Do not install non-existing systemd file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,79 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Nov 2019 21:03:41 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 10 Nov 2019 00:36:29 -0000
+Content-Transfer-Encoding: 8bit
 
-Any idea why it built ok for me when testing 5.13 with glibc?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 1 -
+ 1 file changed, 1 deletion(-)
 
-In the e-mail you mentioned failures with musl, is this upgrade needed only
-together with musl? You also mentioned it's new failure and 5.13 is in
-meta-qt5 for quite some time, the recent upgrade was just from 5.13.0 to
-5.13.2, maybe it got caused by
-https://github.com/meta-qt5/meta-qt5/pull/243 instead?
-Still this PR builds fine here with 5.13.2, glibc, qemux86-64.
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+index 4c22d4b0f0..3aba4473dc 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+@@ -92,7 +92,6 @@ do_install_append() {
+ 
+         install -d ${D}${systemd_unitdir}/system/
+         install -m 0644 ${S}/contrib/systemd/${BPN}@.service ${D}${systemd_unitdir}/system/${BPN}@.service
+-        install -m 0644 ${S}/${BPN}.service ${D}${systemd_unitdir}/system/${BPN}.service
+         install -m 0644 ${S}/contrib/systemd/${BPN}@default ${D}${sysconfdir}/default/${BPN}@default
+ 
+         sed -i -e 's,@SBINDIR@,${sbindir},g' ${D}${systemd_unitdir}/system/${BPN}@.service ${D}${sysconfdir}/default/${BPN}@default
+-- 
+2.24.0
 
-If that is the case, then we might need this upgrade in zeus branch as well
-(5.13 is in meta-qt5/zeus)
-
-Cheers,
-
-On Sat, Nov 9, 2019 at 8:55 PM Khem Raj <raj.khem@gmail.com> wrote:
-
-> Needed for QT 5.13 based python modules
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-devtools/sip/sip.inc                        | 6 +++---
->  .../sip/{sip3_4.19.16.bb => sip3_4.19.19.bb}                | 0
->  .../recipes-devtools/sip/{sip_4.19.16.bb => sip_4.19.19.bb} | 0
->  3 files changed, 3 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-devtools/sip/{sip3_4.19.16.bb => sip3_4.19.19.bb}
-> (100%)
->  rename meta-oe/recipes-devtools/sip/{sip_4.19.16.bb => sip_4.19.19.bb}
-> (100%)
->
-> diff --git a/meta-oe/recipes-devtools/sip/sip.inc
-> b/meta-oe/recipes-devtools/sip/sip.inc
-> index 092531b322..d8e32a7687 100644
-> --- a/meta-oe/recipes-devtools/sip/sip.inc
-> +++ b/meta-oe/recipes-devtools/sip/sip.inc
-> @@ -5,9 +5,9 @@ LICENSE = "GPLv2+"
->  LIC_FILES_CHKSUM =
-> "file://LICENSE-GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
->
->  SRC_URI = "
-> https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz
-> \
-> -          "
-> -SRC_URI[md5sum] = "7e854b0da395ddc8fb5da82d0321994d"
->
-> -SRC_URI[sha256sum] =
-> "184c790d58e9527fc6bdac2bbf8638f3d1b41dea922cad8eb83172b4ba70c620"
-> +"
-> +SRC_URI[md5sum] = "98111479309dc472410f26080d6d4a88"
-> +SRC_URI[sha256sum] =
-> "5436b61a78f48c7e8078e93a6b59453ad33780f80c644e5f3af39f94be1ede44"
->
->  S = "${WORKDIR}/sip-${PV}"
->
-> diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
-> b/meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
-> similarity index 100%
-> rename from meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
-> rename to meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
-> diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.16.bb
-> b/meta-oe/recipes-devtools/sip/sip_4.19.19.bb
-> similarity index 100%
-> rename from meta-oe/recipes-devtools/sip/sip_4.19.16.bb
-> rename to meta-oe/recipes-devtools/sip/sip_4.19.19.bb
-> --
-> 2.24.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
