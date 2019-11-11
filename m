@@ -1,34 +1,46 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 37F177F7D5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id A6DB67FA3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Nov 2019 16:40:27 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47Bc7J0wQ9z6P;
-	Mon, 11 Nov 2019 17:40:27 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1573490428;
-	bh=aB1f2lLQj1w7zkVa5LvMiJKHrxqtjUwFOgNxusJyB8s=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=q5soibX+bTDqray02U4La3kztBr6MRfSbzG1uKbbetkW0hbzkBap/ZuL/eAJWBKux
-	TWE1p4Cmmt/h/2n+7JCMjXvD9dZ8ej4k1wxplLhlprOaGIUiKFP8KAv74MgUPB+zSA
-	4x+RAxje0X28vUpUczkmSfEI3Trt+4SOGtsD6CrDMlu2Csp7LrMfRM0Xl4B/vWa3Z5
-	Yjx/t8NOVmpdCLFgoqkZX0zkzNTyCSS3PksuK+l5lCvuucKATgsiEIlNbUFOX69C6u
-	vpTCkyGGSnHvOg9MjG+lQCc5T6miAy7q/IGdfI8FW5ucY6002VpbEcnTMH1qit82Zm
-	CsXjHAN1S2YdIJ9no37bArq83qcpw+HW/Us/KzBodNwSM74yb3ax8KEh0+1rxIHsN5
-	xV4038wKbUhVDPhbKlii9aTtiioJRarc/5p/OGzoke8MFiKmpx0cf17FqHqI1sTWtv
-	ZgSIeG7ZqbBkkAMjRGRtNC+afneBzqHSLXDnHQnYEaXzEql8ZdMpRjX7BxQXZR81q2
-	DoKTTHQ7Y7hcUDourexp1KPkPwOnRcqeRShW4NB6Vj/3NauC+cFhY7IA6Zalj4D6nb
-	QPQdWxgUINX98vwvJZklY6Y5Be82MDBS+RVKVGM2otHck1RSGwS0WRIaKvdX73cMDa
-	r4BgQG+t63YtDz8Kt4y+cgYo=
-Date: Mon, 11 Nov 2019 18:40:26 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20191111164026.GI28797@localhost>
-References: <20191111160535.547773-1-raj.khem@gmail.com>
+	Mon, 11 Nov 2019 17:20:03 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id i17so4902106qtq.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Nov 2019 09:20:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=uKIHYO6SR1l+Y2pZ2yub8+A1BPl+cYgsGl/UE+bYhN8=;
+	b=ZkcPYvFiPKkrRpZ/pyAV6CLyd8PIzdSC5btdqPq++WQselHVX66Ykh2VKfezEXbMX8
+	WyvmEruGWspJtI+nJA9cMOVDahUuA9cixuZmE/GvU8kF6DZpOG31LS+Uhgi3aJ1FnM0+
+	Qu7XY2bnIOci84Cg+Ft8XdYg32MoNwREQYScFLnqZOEpLqmeTJKEJimWFD6a5n8KaHcg
+	sxwX0jv0rOfoNEVZaTtGLIKevrHKmDaDJhWmdY4O5RAwsj1llYziWwKzHbCEPRHChxKv
+	eAvoSG4fdEb3a4WVsldrisvwOdawbsQPmh25jEG0b8H+JxPSefxru4kPy4pXReVjsT0p
+	+CtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=uKIHYO6SR1l+Y2pZ2yub8+A1BPl+cYgsGl/UE+bYhN8=;
+	b=ZuZQ0YPWTteM9JpzmPAKxWAEYnMdb5twwPNDBXw8D5mNiylPtJWTLA3R4M1U7X69sN
+	JZtzD31L9DngE8fOG96tIWg+pOwTz1VFwpIqZUuOXQlyJlya+slHBZV3flBxFi3XTlZh
+	E24MtNi7/CyGBxVBE525IVjG7q86aMs/CN3CHeHlGNsJrQZlBybMBQul+qeqrVohlprE
+	FugqVccYfzBMz9DMI5v4K4mV4ApG/5lfeCsUb7tvgJDQflTY2cG+TGzNXZegrQolcfiI
+	ufjACAVKvpEYS1W2QV2+8deUpS1LGv9AEfsZBLFt7pe18fRSYbaaIg9zgPP+TtWUDB21
+	1tJQ==
+X-Gm-Message-State: APjAAAW6+SSfXamqXE0lw+z0vzOUZIpaKmSIGdi/nVCEvNkPwA9zZ4G8
+	ReJU1ceYQzNjf5JUzOSfV8z2UQ3wFtCpUVGv3DnlH48I
+X-Google-Smtp-Source: APXvYqzHz62xFMXgjJdYbOtbxxEeAX3fFDR2HZC6wSTmXYUds1zb97qDbIrIKzNIaZSwz7FaBWZCNE3KBL+KM/bshj4=
+X-Received: by 2002:ac8:1415:: with SMTP id k21mr26235638qtj.80.1573492804152; 
+	Mon, 11 Nov 2019 09:20:04 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20191111160535.547773-1-raj.khem@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+References: <20191111160535.547773-1-raj.khem@gmail.com>
+	<20191111164026.GI28797@localhost>
+In-Reply-To: <20191111164026.GI28797@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 11 Nov 2019 09:19:53 -0800
+Message-ID: <CAMKF1sq+zujuwnVE4iywYQ6zCN8sFTggpgsCkcMF8_yNDB_LSQ@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-networking][PATCH] lowpan-tools: Blacklist as its deprecated use wpan-tools instead
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -43,20 +55,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Nov 2019 16:40:28 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Mon, 11 Nov 2019 17:20:03 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This should also be removed from packagegroup-meta-networking.
+On Mon, Nov 11, 2019 at 8:40 AM Adrian Bunk <bunk@stusta.de> wrote:
 
-cu
-Adrian
+> This should also be removed from packagegroup-meta-networking.
 
--- 
 
-       "Is there not promise of rain?" Ling Tan asked suddenly out
-        of the darkness. There had been need of rain for many days.
-       "Only a promise," Lao Er said.
-                                       Pearl S. Buck - Dragon Seed
+That=E2=80=99s right thanks
 
+>
+>
+> cu
+> Adrian
+>
+> --
+>
+>        "Is there not promise of rain?" Ling Tan asked suddenly out
+>         of the darkness. There had been need of rain for many days.
+>        "Only a promise," Lao Er said.
+>                                        Pearl S. Buck - Dragon Seed
+>
+>
 
