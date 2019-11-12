@@ -1,48 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A6DB67FA3E
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+	[209.85.210.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 534AE7FC08
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Nov 2019 17:20:03 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id i17so4902106qtq.1
+	Tue, 12 Nov 2019 05:17:01 +0000 (UTC)
+Received: by mail-pf1-f172.google.com with SMTP id s5so12473325pfh.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Nov 2019 09:20:05 -0800 (PST)
+	Mon, 11 Nov 2019 21:17:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=uKIHYO6SR1l+Y2pZ2yub8+A1BPl+cYgsGl/UE+bYhN8=;
-	b=ZkcPYvFiPKkrRpZ/pyAV6CLyd8PIzdSC5btdqPq++WQselHVX66Ykh2VKfezEXbMX8
-	WyvmEruGWspJtI+nJA9cMOVDahUuA9cixuZmE/GvU8kF6DZpOG31LS+Uhgi3aJ1FnM0+
-	Qu7XY2bnIOci84Cg+Ft8XdYg32MoNwREQYScFLnqZOEpLqmeTJKEJimWFD6a5n8KaHcg
-	sxwX0jv0rOfoNEVZaTtGLIKevrHKmDaDJhWmdY4O5RAwsj1llYziWwKzHbCEPRHChxKv
-	eAvoSG4fdEb3a4WVsldrisvwOdawbsQPmh25jEG0b8H+JxPSefxru4kPy4pXReVjsT0p
-	+CtQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=6EfbnO4Rp3xdO0e982FEFAxoOWuky8UF9kg9l4HkFuk=;
+	b=fyx3WbGerZJDK0Gw/zPiUEy/+PVfFMRCRhcfQNsB8VU7Jg2Y1VJcjUSbHXl5mtSerJ
+	nKM7f7GolJ8mYcxN0UUVg8S3AhPpzRpuvMAlnSFeHr+PBnnelNsFIoMSt980Ka+FcemR
+	kV7tZ+RsuMPrugQpgc4K4Vs05GAlmTxgh8wS41kXUfzPuT0XB1YaE8yauKSG6FIZpfI3
+	+mwDXDcn9Tzvu5FRejTCi01gl6XAKxD8CrMSGADJmIhwzl+hhAe5gP7XcgUrcEvrQVYq
+	C5srYB8l+GHA/CXUyOSnepIzfO7hO9IA7HciBK3SaNM9LASrTHgsL+HuxDjIvzihpITD
+	JD4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=uKIHYO6SR1l+Y2pZ2yub8+A1BPl+cYgsGl/UE+bYhN8=;
-	b=ZuZQ0YPWTteM9JpzmPAKxWAEYnMdb5twwPNDBXw8D5mNiylPtJWTLA3R4M1U7X69sN
-	JZtzD31L9DngE8fOG96tIWg+pOwTz1VFwpIqZUuOXQlyJlya+slHBZV3flBxFi3XTlZh
-	E24MtNi7/CyGBxVBE525IVjG7q86aMs/CN3CHeHlGNsJrQZlBybMBQul+qeqrVohlprE
-	FugqVccYfzBMz9DMI5v4K4mV4ApG/5lfeCsUb7tvgJDQflTY2cG+TGzNXZegrQolcfiI
-	ufjACAVKvpEYS1W2QV2+8deUpS1LGv9AEfsZBLFt7pe18fRSYbaaIg9zgPP+TtWUDB21
-	1tJQ==
-X-Gm-Message-State: APjAAAW6+SSfXamqXE0lw+z0vzOUZIpaKmSIGdi/nVCEvNkPwA9zZ4G8
-	ReJU1ceYQzNjf5JUzOSfV8z2UQ3wFtCpUVGv3DnlH48I
-X-Google-Smtp-Source: APXvYqzHz62xFMXgjJdYbOtbxxEeAX3fFDR2HZC6wSTmXYUds1zb97qDbIrIKzNIaZSwz7FaBWZCNE3KBL+KM/bshj4=
-X-Received: by 2002:ac8:1415:: with SMTP id k21mr26235638qtj.80.1573492804152; 
-	Mon, 11 Nov 2019 09:20:04 -0800 (PST)
-MIME-Version: 1.0
-References: <20191111160535.547773-1-raj.khem@gmail.com>
-	<20191111164026.GI28797@localhost>
-In-Reply-To: <20191111164026.GI28797@localhost>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=6EfbnO4Rp3xdO0e982FEFAxoOWuky8UF9kg9l4HkFuk=;
+	b=cQ45/TqY036DZaAYPtMBToX4OvZg22q+haTPacL5ZVvEGfndaWIqEXy7CsKhU6jkYT
+	PaCa+COSfMZbiL1MM6H+RuZwT4SfR8n3L1o1hadskwcR31496JrKi4IRwkK3OVDLGbY/
+	mvPXO8hMhUtRqxyRPJSxRWWb5GgkeZSDyfyCxgznLCS67oJXpirRTs/lVIyZnlxWx6Oy
+	nqbasa09iU9TY06M+7nSpZgm4mUSm227Ch2SNbRFBWWtI62uuCZZZkhOmGRRr/5bVf1J
+	Z1dWmkVNTYBXddOuAu6r75fKr46sHuQX8Dd85Z20ilHOjMl+a1J959aw/s/k7TRzy6xq
+	ejcg==
+X-Gm-Message-State: APjAAAXdpWODCmOySPiomoWrN7oDYhwYa/Nuu+NztYKbU0jq8iX94vSn
+	eIk2dsT8gbuzpjqXBAt5qlqcGyIVG54=
+X-Google-Smtp-Source: APXvYqwGntwa+mlYf1NWURnF+X16t/IcvsBGTfYNElh2uHHRClL08NBlcQ6p5lGFudkzQTsLBcquUg==
+X-Received: by 2002:a63:1f08:: with SMTP id f8mr33552999pgf.145.1573535821746; 
+	Mon, 11 Nov 2019 21:17:01 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::a99e])
+	by smtp.gmail.com with ESMTPSA id
+	j14sm15605886pfi.168.2019.11.11.21.17.00
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 11 Nov 2019 21:17:00 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 11 Nov 2019 09:19:53 -0800
-Message-ID: <CAMKF1sq+zujuwnVE4iywYQ6zCN8sFTggpgsCkcMF8_yNDB_LSQ@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] lowpan-tools: Blacklist as its deprecated use wpan-tools instead
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 11 Nov 2019 21:16:47 -0800
+Message-Id: <20191112051648.472467-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH V2] lowpan-tools: Blacklist as its deprecated use wpan-tools instead
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,28 +57,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Nov 2019 17:20:03 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 12 Nov 2019 05:17:01 -0000
+Content-Transfer-Encoding: 8bit
 
-On Mon, Nov 11, 2019 at 8:40 AM Adrian Bunk <bunk@stusta.de> wrote:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Delete lowpan-tools from packagegroup-meta-networking
 
-> This should also be removed from packagegroup-meta-networking.
+ .../recipes-core/packagegroups/packagegroup-meta-networking.bb  | 2 +-
+ .../recipes-support/lowpan-tools/lowpan-tools_git.bb            | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
+diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+index 8f8d7fe3c8..9109b105f9 100644
+--- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
++++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+@@ -108,7 +108,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
+     usbredir ntop wireshark tnftp lksctp-tools \
+     cim-schema-docs cim-schema-final cim-schema-exper \
+     libmemcached smcroute libtevent ipcalc c-ares uftp \
+-    ntimed linux-atm ssmtp openvpn lowpan-tools rdma-core \
++    ntimed linux-atm ssmtp openvpn rdma-core \
+     iftop aoetools tcpslice tcpdump libtalloc memcached nuttcp netcat \
+     netcat-openbsd fetchmail yp-tools ypbind-mt yp-tools \
+     arptables macchanger nghttp2 strongswan fping \
+diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+index b70c43f156..585968f836 100644
+--- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
++++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+@@ -35,3 +35,5 @@ FILES_${PN}-dbg += "${libexecdir}/lowpan-tools/.debug/"
+ 
+ PACKAGES =+ "${PN}-python"
+ FILES_${PN}-python = "${libdir}/python*"
++
++PNBLACKLIST[lowpan-tools] = "WARNING these tools are deprecated! Use wpan-tools instead"
+-- 
+2.24.0
 
-That=E2=80=99s right thanks
-
->
->
-> cu
-> Adrian
->
-> --
->
->        "Is there not promise of rain?" Ling Tan asked suddenly out
->         of the darkness. There had been need of rain for many days.
->        "Only a promise," Lao Er said.
->                                        Pearl S. Buck - Dragon Seed
->
->
 
