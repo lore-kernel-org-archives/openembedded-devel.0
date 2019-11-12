@@ -1,52 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C90B7F68F
+Return-Path: <joe.slater@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 33BFD7F57B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2019 22:05:52 +0000 (UTC)
-Received: by mail-pg1-f179.google.com with SMTP id z24so12771964pgu.4
+	Tue, 12 Nov 2019 23:36:15 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id xACNaGke028624
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2019 14:05:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=Qw1lFVAFgTJOZdeQ8PlUf/GGmg5c/44kH2dq2U11Z1s=;
-	b=ol3DinYhXDHBJropo7dSmWFgRURvdDCQEagm1cwNAFQLtlXcKiAjUb2Q/D3VC4/yXC
-	v5cncT70aP6zG3okq4v4tueW85vWZhr27IUILGJjTfIdlIPvplm9xYytTF5SsIqTz26M
-	Dda8dPc1D7rzuvAvsEVLEBg/Fk5SEcv0QK+WFD8hOPLVrc9rRX3h6U6eI7zcsT4TgNOf
-	pXQlTUsGDkv3sHCjz2d0232mzrDwtu4B7U/zU6Htd0JB8AUyoPgKp5NXKcohZ/ZTppPe
-	npFFDeL2HcBWYypKZecRclnzWHj/gTVihMBx8pFZtruk40X00e4P9EzByiZ/aY0fzTe1
-	7t3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=Qw1lFVAFgTJOZdeQ8PlUf/GGmg5c/44kH2dq2U11Z1s=;
-	b=E94JrIgWihSS0PsmhxHtAJyPet/4wiApNX4wLlemZG1zZriW3ahwU76aVWilTzTdFd
-	X9Q8yY9hxayi+AtneOZAKDTmhYGG8o7z+PQgp924QdyduNC7J1fPQDV1jgNyTbewpdFX
-	AdHaV3il1UFafY5m4reUxcDXKSOd4biOfRzpQTpb4S3ZfJGi8Q5H72aZGsHXECxb0Hey
-	rLaJnVE5iVA8/tVhofIkcxq0aW7fKJ+UcIiEYzQcynhiDPiTJbcOcADURKrwwmEFDu4l
-	SKkd1eL/5tuGZak/2aziEwQIsc++IsOjniCGCQChkKwPTpn70nl5oRhBjUGQS8RIlqey
-	08OQ==
-X-Gm-Message-State: APjAAAWG7UC2NjSpqVoZ3pjoaTphx/RRAq03Mh1Fgzl42WvYY5tkWt1u
-	7BV80kbgAu+zFgvO2hyOPdKVYegIN20=
-X-Google-Smtp-Source: APXvYqy/oOtx34jOye6896HvGzCdg60SWGZjIGDfbCn3waWZp1JjG1dwrY74wTulBcvLY85kXMGyNQ==
-X-Received: by 2002:a63:644:: with SMTP id 65mr29399582pgg.306.1573596352919; 
-	Tue, 12 Nov 2019 14:05:52 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::30e8])
-	by smtp.gmail.com with ESMTPSA id
-	i123sm29919902pfe.145.2019.11.12.14.05.52
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 12 Nov 2019 14:05:52 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Nov 2019 14:05:29 -0800
-Message-Id: <20191112220529.2433890-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
-In-Reply-To: <20191112220529.2433890-1-raj.khem@gmail.com>
-References: <20191112220529.2433890-1-raj.khem@gmail.com>
+	Tue, 12 Nov 2019 15:36:16 -0800 (PST)
+Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.80]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0468.000;
+	Tue, 12 Nov 2019 15:36:15 -0800
+From: "Slater, Joseph" <joe.slater@windriver.com>
+To: "Slater, Joseph" <joe.slater@windriver.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-oe][zeus][PATCH 1/1] php: fix CVE-2019-11043
+Thread-Index: AQHVmZ9TMcYcEEQfgkKUPwuiwdkmdaeIMA3Q
+Date: Tue, 12 Nov 2019 23:36:14 +0000
+Message-ID: <007BD92917A2324FA403BCF9A464CF84FA8F6548@ALA-MBD.corp.ad.wrs.com>
+References: <20191112212244.53157-1-joe.slater@windriver.com>
+In-Reply-To: <20191112212244.53157-1-joe.slater@windriver.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [147.11.119.237]
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 2/2] tvheadend: Set CLEANBROKEN
+Subject: Re: [meta-oe][zeus][PATCH 1/1] php: fix CVE-2019-11043
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,31 +40,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Nov 2019 22:05:52 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 12 Nov 2019 23:36:15 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-It cant be rebuilt in same configured sources as of now.
-| Makefile:755: /support/.mk: No such file or directory
-| make: *** No rule to make target '/support/.mk'.  Stop.
-| ERROR: oe_runmake failed
+Oops, the patch is only part of commit ab061f95ca.  I could document this, =
+or just leave it.    Joe
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-----Original Message-----
+From: Joe Slater <joe.slater@windriver.com>=20
+Sent: Tuesday, November 12, 2019 1:23 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: Slater, Joseph <joe.slater@windriver.com>; MacLeod, Randy <Randy.MacLeo=
+d@windriver.com>
+Subject: [meta-oe][zeus][PATCH 1/1] php: fix CVE-2019-11043
+
+Backport unmodified patch from git.php.net.  Fixed in php 7.3.11.
+
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../recipes-devtools/php/php/CVE-2019-11043.patch  | 38 ++++++++++++++++++=
+++++
+ meta-oe/recipes-devtools/php/php_7.3.9.bb          |  1 +
+ 2 files changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11043.patch
 
-diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-index d7f749b647..e31fc6bb85 100644
---- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-+++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-@@ -23,3 +23,6 @@ EXTRA_OECONF += "--arch=${TARGET_ARCH} \
-                  --disable-ffmpeg_static \
-                  --disable-libav \
-                  "
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-11043.patch b/meta-o=
+e/recipes-devtools/php/php/CVE-2019-11043.patch
+new file mode 100644
+index 0000000..7e20063
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/CVE-2019-11043.patch
+@@ -0,0 +1,38 @@
++From ab061f95ca966731b1c84cf5b7b20155c0a1c06a Mon Sep 17 00:00:00 2001
++From: Jakub Zelenka <bukka@php.net>
++Date: Sat, 12 Oct 2019 15:56:16 +0100
++Subject: [PATCH] Fix bug #78599 (env_path_info underflow can lead to=20
++RCE)
 +
-+CLEANBROKEN = "1"
++CVE: CVE-2019-11043
 +
--- 
-2.24.0
++Fixed in php version 7.3.11.
++
++Upstream-Status: Backport [https://git.php.net/repository/php-src.git]
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++---
++ NEWS                                          |  4 +-
++ sapi/fpm/fpm/fpm_main.c                       |  4 +-
++ .../tests/bug78599-path-info-underflow.phpt   | 61 +++++++++++++++++++
++ sapi/fpm/tests/tester.inc                     | 11 +++-
++ 4 files changed, 75 insertions(+), 5 deletions(-)  create mode 100644=20
++sapi/fpm/tests/bug78599-path-info-underflow.phpt
++
++diff --git a/sapi/fpm/fpm/fpm_main.c b/sapi/fpm/fpm/fpm_main.c index=20
++24a7e5d56a..50f92981f1 100644
++--- a/sapi/fpm/fpm/fpm_main.c
+++++ b/sapi/fpm/fpm/fpm_main.c
++@@ -1209,8 +1209,8 @@ static void init_request_info(void)
++ 								path_info =3D script_path_translated + ptlen;
++ 								tflag =3D (slen !=3D 0 && (!orig_path_info || strcmp(orig_path_in=
+fo, path_info) !=3D 0));
++ 							} else {
++-								path_info =3D env_path_info ? env_path_info + pilen - slen : NULL=
+;
++-								tflag =3D (orig_path_info !=3D path_info);
+++								path_info =3D (env_path_info && pilen > slen) ? env_path_info + p=
+ilen - slen : NULL;
+++								tflag =3D path_info && (orig_path_info !=3D path_info);
++ 							}
++=20
++ 							if (tflag) {
++--
++2.17.1
++
+diff --git a/meta-oe/recipes-devtools/php/php_7.3.9.bb b/meta-oe/recipes-de=
+vtools/php/php_7.3.9.bb
+index a5c7b9b..e886cb1 100644
+--- a/meta-oe/recipes-devtools/php/php_7.3.9.bb
++++ b/meta-oe/recipes-devtools/php/php_7.3.9.bb
+@@ -8,6 +8,7 @@ SRC_URI +=3D "file://0001-acinclude.m4-don-t-unset-cache-va=
+riables.patch \
+             file://0001-Use-pkg-config-for-libxml2-detection.patch \
+             file://debian-php-fixheader.patch \
+             file://CVE-2019-6978.patch \
++            file://CVE-2019-11043.patch \
+            "
+ SRC_URI_append_class-target =3D " \
+                                 file://pear-makefile.patch \
+--
+2.7.4
 
 
