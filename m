@@ -1,56 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 335B97D2AE
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1568E7D6B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Nov 2019 04:35:54 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id bb5so521435plb.4
+	Wed, 13 Nov 2019 05:38:39 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,299,1569254400"; d="scan'208";a="78395346"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 13 Nov 2019 13:38:39 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id CCF1E4CE1BE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Nov 2019 20:35:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:organization:user-agent:mime-version:content-transfer-encoding;
-	bh=/murioVXoAI8vnTsdVU9UhZhCePb0fGbjjxydCE2dRc=;
-	b=UZU1tVb1WJl1EHs7y8cs1PgC/3mLNK+EUnbpJ1O+O/PZ7lP02ZUDRvY9mLJ6bYcvBC
-	xhc2FABXxtOb9YP19qzJp5RmdVS0PkiWRLL5dZDLrcd7/R8lObwDmQc3fIqyiUoINGBB
-	hS/qRT2d5p8dp0sHrgTH9e5ATyCL/fIq7nftbHsrWbmBuri+ej+THvXmgWC3MFIhtXTX
-	cLF0bSI6S852nK7Etk7vpDucajhEeMQJR4sjBdKCk2U3fG9EhRVJsD7ikdGudnX9YYbf
-	0Dtpncd2Rv69AC+PIdseuMwC5W1gN0mlF+zWSpbTZAPma9+MntK9TmmPuHxT/SOe7UAY
-	w+yw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:organization:user-agent:mime-version
-	:content-transfer-encoding;
-	bh=/murioVXoAI8vnTsdVU9UhZhCePb0fGbjjxydCE2dRc=;
-	b=OVMd+Pb1PdBmnwi/MBugrxu/a83VGc7SPFv403OQHdzn6q4lbLZjGxsvEBFLoow44v
-	g0MTGyzYv5pLPfQqIEV+Yp6zxcnTrprf9LqlSsTdS1+A0usmE3T1o21SomWwF+Jw8/QZ
-	I0Md8WPJknyCtoY/f01xRyPacdOi7aBhxLeSOIQOETDry32CsWxoynqE4KDCT9ttWpku
-	cado+wlFbQCUHjmJxTsPm0izRjWOi/3opzSLeru0r1FzDb7ZSW9VxxfdIwNPDRZ9fHN0
-	QVFEQ7oIPPviMIY8udp+y+qldoC9UxN1Jg5ws95FP9xLoQao0ABEQP8KnZsX4m8SxkHk
-	dw/w==
-X-Gm-Message-State: APjAAAWzju1ps4E2gkDuf+ZdqkFPAUssvp29ar/mFkSQopFOHf6tN34q
-	fYOvHuOBu+ytgt2TtcV5gW0=
-X-Google-Smtp-Source: APXvYqzyiACmOMklb2p4AOx886+4vE5QAcVsyM3iPSb0l1zpGbPvVbUyxHZ7I+o58A1ob2Cu0WIpdg==
-X-Received: by 2002:a17:902:6b0a:: with SMTP id
-	o10mr1547980plk.15.1573619754822; 
-	Tue, 12 Nov 2019 20:35:54 -0800 (PST)
-Received: from tyche ([2601:646:8500:1c20::db51])
-	by smtp.gmail.com with ESMTPSA id a23sm694176pjv.26.2019.11.12.20.35.53
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 12 Nov 2019 20:35:54 -0800 (PST)
-Message-ID: <28310deb2c64152b225cbd630c51f590bdfbb5bc.camel@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 12 Nov 2019 20:35:53 -0800
-In-Reply-To: <CA+chaQec06vqFFH0buJY6bTNzLK_jPD8-KV5xJxfpPZux_AHMA@mail.gmail.com>
-References: <20191109195436.78248-1-raj.khem@gmail.com>
-	<CA+chaQec06vqFFH0buJY6bTNzLK_jPD8-KV5xJxfpPZux_AHMA@mail.gmail.com>
-Organization: HIMVIS LLC
-User-Agent: Evolution 3.34.1 
+	Wed, 13 Nov 2019 13:30:28 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 13 Nov 2019 13:38:38 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 13 Nov 2019 13:39:11 +0800
+Message-ID: <20191113053911.13168-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] sip: Upgrade to 4.19.19
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: CCF1E4CE1BE7.AA506
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-filesystems] [PATCH] fuse3: upgrade 3.7.0 -> 3.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,92 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Nov 2019 04:35:54 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 13 Nov 2019 05:38:40 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Sat, 2019-11-09 at 22:03 +0100, Martin Jansa wrote:
-> Any idea why it built ok for me when testing 5.13 with glibc?
-> 
-> In the e-mail you mentioned failures with musl, is this upgrade
-> needed only together with musl? You also mentioned it's new failure
-> and 5.13 is in meta-qt5 for quite some time, the recent upgrade was
-> just from 5.13.0 to 5.13.2, maybe it got caused by 
-> https://github.com/meta-qt5/meta-qt5/pull/243 instead? Still this PR
-> builds fine here with 5.13.2, glibc, qemux86-64.
-> 
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../recipes-support/fuse/{fuse3_3.7.0.bb => fuse3_3.8.0.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-filesystems/recipes-support/fuse/{fuse3_3.7.0.bb => fuse3_3.8.0.bb} (91%)
 
-it seems likely the cause, I have posted a pull request
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.7.0.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.8.0.bb
+similarity index 91%
+rename from meta-filesystems/recipes-support/fuse/fuse3_3.7.0.bb
+rename to meta-filesystems/recipes-support/fuse/fuse3_3.8.0.bb
+index f0cbf12a9..b5bbe042a 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.7.0.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.8.0.bb
+@@ -13,8 +13,8 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+ 
+ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
+ "
+-SRC_URI[md5sum] = "b9e6558aa25f66c0f1a95d1c7455b944"
+-SRC_URI[sha256sum] = "3aea4766da5e2751aba82e8f77047d5d3c412bc3c298e4ec9532e59d7bd73a7a"
++SRC_URI[md5sum] = "f184004cd3724f579cd602fa5232681b"
++SRC_URI[sha256sum] = "4a464f6df782a1dca1f7e85bf64ff6ece9547b389557aae4160371cb1c898d61"
+ 
+ S = "${WORKDIR}/fuse-${PV}"
+ 
+-- 
+2.20.1
 
-https://github.com/meta-qt5/meta-qt5/pull/255
 
-Which upgrades pyqt5 to 5.13.2 as well, secondly it disables/blacklists
-py2 version of recipe, I think py2 is on its way out anyway so we can
-ignore that, second patch adds a patch to qtwebengine to fix the
-do_install issue with musl. Please take a look at this pull.
-
-> If that is the case, then we might need this upgrade in zeus branch
-> as well (5.13 is in meta-qt5/zeus)
-
-
-I guess, just blacklist py2 version of pyqt5 in zeus would be
-sufficient.
-
-
-> 
-> Cheers,
-> 
-> On Sat, Nov 9, 2019 at 8:55 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > Needed for QT 5.13 based python modules
-> > 
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  meta-oe/recipes-devtools/sip/sip.inc                        | 6
-> > +++---
-> >  .../sip/{sip3_4.19.16.bb => sip3_4.19.19.bb}                | 0
-> >  .../recipes-devtools/sip/{sip_4.19.16.bb => sip_4.19.19.bb} | 0
-> >  3 files changed, 3 insertions(+), 3 deletions(-)
-> >  rename meta-oe/recipes-devtools/sip/{sip3_4.19.16.bb =>
-> > sip3_4.19.19.bb} (100%)
-> >  rename meta-oe/recipes-devtools/sip/{sip_4.19.16.bb =>
-> > sip_4.19.19.bb} (100%)
-> > 
-> > diff --git a/meta-oe/recipes-devtools/sip/sip.inc b/meta-
-> > oe/recipes-devtools/sip/sip.inc
-> > index 092531b322..d8e32a7687 100644
-> > --- a/meta-oe/recipes-devtools/sip/sip.inc
-> > +++ b/meta-oe/recipes-devtools/sip/sip.inc
-> > @@ -5,9 +5,9 @@ LICENSE = "GPLv2+"
-> >  LIC_FILES_CHKSUM = "file://LICENSE-
-> > GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
-> > 
-> >  SRC_URI = "
-> > https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz
-> > \
-> > -          "
-> > -SRC_URI[md5sum] = "7e854b0da395ddc8fb5da82d0321994d"             
-> >              
-> > -SRC_URI[sha256sum] =
-> > "184c790d58e9527fc6bdac2bbf8638f3d1b41dea922cad8eb83172b4ba70c620"
-> > +"
-> > +SRC_URI[md5sum] = "98111479309dc472410f26080d6d4a88"
-> > +SRC_URI[sha256sum] =
-> > "5436b61a78f48c7e8078e93a6b59453ad33780f80c644e5f3af39f94be1ede44"
-> > 
-> >  S = "${WORKDIR}/sip-${PV}"
-> > 
-> > diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.16.bb b/meta-
-> > oe/recipes-devtools/sip/sip3_4.19.19.bb
-> > similarity index 100%
-> > rename from meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
-> > rename to meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
-> > diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.16.bb b/meta-
-> > oe/recipes-devtools/sip/sip_4.19.19.bb
-> > similarity index 100%
-> > rename from meta-oe/recipes-devtools/sip/sip_4.19.16.bb
-> > rename to meta-oe/recipes-devtools/sip/sip_4.19.19.bb
-> > -- 
-> > 2.24.0
-> > 
 
 
