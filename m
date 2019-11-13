@@ -1,33 +1,56 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 514 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 13 Nov 2019 04:23:12 UTC
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by mail.openembedded.org (Postfix) with ESMTP id 247F47DE36
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 335B97D2AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Nov 2019 04:23:11 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 5EB2240BF4;
-	Wed, 13 Nov 2019 04:14:39 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id oMjIQk13IvRJ; Wed, 13 Nov 2019 04:14:39 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3743940BC0;
-	Wed, 13 Nov 2019 04:14:38 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 55CB21742EA;
-	Tue, 12 Nov 2019 23:14:37 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 12 Nov 2019 23:14:37 -0500
-Message-Id: <1573618477-12608-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-networking][PATCH] mbedtls: upgrade 2.16.2 -> 2.16.3
+	Wed, 13 Nov 2019 04:35:54 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id bb5so521435plb.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Nov 2019 20:35:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:organization:user-agent:mime-version:content-transfer-encoding;
+	bh=/murioVXoAI8vnTsdVU9UhZhCePb0fGbjjxydCE2dRc=;
+	b=UZU1tVb1WJl1EHs7y8cs1PgC/3mLNK+EUnbpJ1O+O/PZ7lP02ZUDRvY9mLJ6bYcvBC
+	xhc2FABXxtOb9YP19qzJp5RmdVS0PkiWRLL5dZDLrcd7/R8lObwDmQc3fIqyiUoINGBB
+	hS/qRT2d5p8dp0sHrgTH9e5ATyCL/fIq7nftbHsrWbmBuri+ej+THvXmgWC3MFIhtXTX
+	cLF0bSI6S852nK7Etk7vpDucajhEeMQJR4sjBdKCk2U3fG9EhRVJsD7ikdGudnX9YYbf
+	0Dtpncd2Rv69AC+PIdseuMwC5W1gN0mlF+zWSpbTZAPma9+MntK9TmmPuHxT/SOe7UAY
+	w+yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:organization:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=/murioVXoAI8vnTsdVU9UhZhCePb0fGbjjxydCE2dRc=;
+	b=OVMd+Pb1PdBmnwi/MBugrxu/a83VGc7SPFv403OQHdzn6q4lbLZjGxsvEBFLoow44v
+	g0MTGyzYv5pLPfQqIEV+Yp6zxcnTrprf9LqlSsTdS1+A0usmE3T1o21SomWwF+Jw8/QZ
+	I0Md8WPJknyCtoY/f01xRyPacdOi7aBhxLeSOIQOETDry32CsWxoynqE4KDCT9ttWpku
+	cado+wlFbQCUHjmJxTsPm0izRjWOi/3opzSLeru0r1FzDb7ZSW9VxxfdIwNPDRZ9fHN0
+	QVFEQ7oIPPviMIY8udp+y+qldoC9UxN1Jg5ws95FP9xLoQao0ABEQP8KnZsX4m8SxkHk
+	dw/w==
+X-Gm-Message-State: APjAAAWzju1ps4E2gkDuf+ZdqkFPAUssvp29ar/mFkSQopFOHf6tN34q
+	fYOvHuOBu+ytgt2TtcV5gW0=
+X-Google-Smtp-Source: APXvYqzyiACmOMklb2p4AOx886+4vE5QAcVsyM3iPSb0l1zpGbPvVbUyxHZ7I+o58A1ob2Cu0WIpdg==
+X-Received: by 2002:a17:902:6b0a:: with SMTP id
+	o10mr1547980plk.15.1573619754822; 
+	Tue, 12 Nov 2019 20:35:54 -0800 (PST)
+Received: from tyche ([2601:646:8500:1c20::db51])
+	by smtp.gmail.com with ESMTPSA id a23sm694176pjv.26.2019.11.12.20.35.53
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 12 Nov 2019 20:35:54 -0800 (PST)
+Message-ID: <28310deb2c64152b225cbd630c51f590bdfbb5bc.camel@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 12 Nov 2019 20:35:53 -0800
+In-Reply-To: <CA+chaQec06vqFFH0buJY6bTNzLK_jPD8-KV5xJxfpPZux_AHMA@mail.gmail.com>
+References: <20191109195436.78248-1-raj.khem@gmail.com>
+	<CA+chaQec06vqFFH0buJY6bTNzLK_jPD8-KV5xJxfpPZux_AHMA@mail.gmail.com>
+Organization: HIMVIS LLC
+User-Agent: Evolution 3.34.1 
+MIME-Version: 1.0
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] sip: Upgrade to 4.19.19
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,47 +63,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Nov 2019 04:23:12 -0000
+X-List-Received-Date: Wed, 13 Nov 2019 04:35:54 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-From: Denys Dmytriyenko <denys@ti.com>
+On Sat, 2019-11-09 at 22:03 +0100, Martin Jansa wrote:
+> Any idea why it built ok for me when testing 5.13 with glibc?
+> 
+> In the e-mail you mentioned failures with musl, is this upgrade
+> needed only together with musl? You also mentioned it's new failure
+> and 5.13 is in meta-qt5 for quite some time, the recent upgrade was
+> just from 5.13.0 to 5.13.2, maybe it got caused by 
+> https://github.com/meta-qt5/meta-qt5/pull/243 instead? Still this PR
+> builds fine here with 5.13.2, glibc, qemux86-64.
+> 
 
-* Mbed TLS 2.16.3 is a maintenance release of the Mbed TLS 2.16 branch, and
-  provides bug fixes and minor enhancements.
+it seems likely the cause, I have posted a pull request
 
-https://github.com/ARMmbed/mbedtls/releases/tag/mbedtls-2.16.3
+https://github.com/meta-qt5/meta-qt5/pull/255
 
-Most importantly, this fixes breakage on ARMv5TE platforms:
+Which upgrades pyqt5 to 5.13.2 as well, secondly it disables/blacklists
+py2 version of recipe, I think py2 is on its way out anyway so we can
+ignore that, second patch adds a patch to qtwebengine to fix the
+do_install issue with musl. Please take a look at this pull.
 
-* Fix the build on ARMv5TE in ARM mode to not use assembly instructions that
-  are only available in Thumb mode.
+> If that is the case, then we might need this upgrade in zeus branch
+> as well (5.13 is in meta-qt5/zeus)
 
-https://github.com/ARMmbed/mbedtls/pull/2169
 
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- .../mbedtls/{mbedtls_2.16.2.bb => mbedtls_2.16.3.bb}                  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/mbedtls/{mbedtls_2.16.2.bb => mbedtls_2.16.3.bb} (92%)
+I guess, just blacklist py2 version of pyqt5 in zeus would be
+sufficient.
 
-diff --git a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.2.bb b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.3.bb
-similarity index 92%
-rename from meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.2.bb
-rename to meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.3.bb
-index b0bd942..79d0dbe 100644
---- a/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.2.bb
-+++ b/meta-networking/recipes-connectivity/mbedtls/mbedtls_2.16.3.bb
-@@ -23,8 +23,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=302d50a6369f5f22efdb674db908167a"
- SECTION = "libs"
- 
- SRC_URI = "https://tls.mbed.org/download/mbedtls-${PV}-apache.tgz"
--SRC_URI[md5sum] = "37cdec398ae9ebdd4640df74af893c95"
--SRC_URI[sha256sum] = "a6834fcd7b7e64b83dfaaa6ee695198cb5019a929b2806cb0162e049f98206a4"
-+SRC_URI[md5sum] = "90ce7c7a001d2514410280706b3ab1a7"
-+SRC_URI[sha256sum] = "ec1bee6d82090ed6ea2690784ea4b294ab576a65d428da9fe8750f932d2da661"
- 
- inherit cmake
- 
--- 
-2.7.4
+
+> 
+> Cheers,
+> 
+> On Sat, Nov 9, 2019 at 8:55 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > Needed for QT 5.13 based python modules
+> > 
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  meta-oe/recipes-devtools/sip/sip.inc                        | 6
+> > +++---
+> >  .../sip/{sip3_4.19.16.bb => sip3_4.19.19.bb}                | 0
+> >  .../recipes-devtools/sip/{sip_4.19.16.bb => sip_4.19.19.bb} | 0
+> >  3 files changed, 3 insertions(+), 3 deletions(-)
+> >  rename meta-oe/recipes-devtools/sip/{sip3_4.19.16.bb =>
+> > sip3_4.19.19.bb} (100%)
+> >  rename meta-oe/recipes-devtools/sip/{sip_4.19.16.bb =>
+> > sip_4.19.19.bb} (100%)
+> > 
+> > diff --git a/meta-oe/recipes-devtools/sip/sip.inc b/meta-
+> > oe/recipes-devtools/sip/sip.inc
+> > index 092531b322..d8e32a7687 100644
+> > --- a/meta-oe/recipes-devtools/sip/sip.inc
+> > +++ b/meta-oe/recipes-devtools/sip/sip.inc
+> > @@ -5,9 +5,9 @@ LICENSE = "GPLv2+"
+> >  LIC_FILES_CHKSUM = "file://LICENSE-
+> > GPL2;md5=e91355d8a6f8bd8f7c699d62863c7303"
+> > 
+> >  SRC_URI = "
+> > https://www.riverbankcomputing.com/static/Downloads/sip/${PV}/sip-${PV}.tar.gz
+> > \
+> > -          "
+> > -SRC_URI[md5sum] = "7e854b0da395ddc8fb5da82d0321994d"             
+> >              
+> > -SRC_URI[sha256sum] =
+> > "184c790d58e9527fc6bdac2bbf8638f3d1b41dea922cad8eb83172b4ba70c620"
+> > +"
+> > +SRC_URI[md5sum] = "98111479309dc472410f26080d6d4a88"
+> > +SRC_URI[sha256sum] =
+> > "5436b61a78f48c7e8078e93a6b59453ad33780f80c644e5f3af39f94be1ede44"
+> > 
+> >  S = "${WORKDIR}/sip-${PV}"
+> > 
+> > diff --git a/meta-oe/recipes-devtools/sip/sip3_4.19.16.bb b/meta-
+> > oe/recipes-devtools/sip/sip3_4.19.19.bb
+> > similarity index 100%
+> > rename from meta-oe/recipes-devtools/sip/sip3_4.19.16.bb
+> > rename to meta-oe/recipes-devtools/sip/sip3_4.19.19.bb
+> > diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.16.bb b/meta-
+> > oe/recipes-devtools/sip/sip_4.19.19.bb
+> > similarity index 100%
+> > rename from meta-oe/recipes-devtools/sip/sip_4.19.16.bb
+> > rename to meta-oe/recipes-devtools/sip/sip_4.19.19.bb
+> > -- 
+> > 2.24.0
+> > 
 
 
