@@ -1,49 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D1BA9731C8
+Return-Path: <nick83ola@gmail.com>
+Received: from mail-oi1-f181.google.com (mail-oi1-f181.google.com
+	[209.85.167.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 1E9C97F7D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Nov 2019 16:12:53 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id y39so3191302qty.0
+	Wed, 13 Nov 2019 17:19:32 +0000 (UTC)
+Received: by mail-oi1-f181.google.com with SMTP id n14so2454785oie.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Nov 2019 08:12:55 -0800 (PST)
+	Wed, 13 Nov 2019 09:19:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=MKBwysKqGr9wq9tw8sGRxpRzW3x3V4DuvjccHYZjZro=;
-	b=ST98tDXtRch4NFN9bMCEar7TpSn0CnhVC9RzHiBw5xNXkEdywiAHA9S3ew+Hq2skdI
-	rvjJjIByo8HHHZAJqGuEmv/t7Fv5ZIIYSAphrACnPUOnyFggHQy2823zLEHNOoyEm4za
-	kUrNS1wU3u0dt4ywfcpgN8kPC5eixbF7tqeyFywrKDkeyZN1LBOVnx+j1PBRigA0alf6
-	Eiyg6a54jciIqXcqUg5fSVQwfOsqOjqS6r4AiSm5tsPL4d0sWlJLwg4aX39DqeN0Ud4B
-	ENheRZtM8ycurX9VPHWkUsA6V6VesSxQCDuoWh/VioNeop3idu+HXECP84+Vnuhvynrz
-	h7mQ==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4r2pPeO5uQggj+lLv35GESveNb7zLufYEJqwS4ecvx8=;
+	b=pAays9rdiQOQy8BIxIppkrI64FFhoIntXxaeXX7/DqeWwFWhvL0cfI4uVLILHR42my
+	E4WyIfRicLj2vHTGdIq+eV/NqaoFlYnU29QyYHdzsX422A4l+Wa69ntK4AjZvq7fb0eu
+	FGt9itrEKYSgPRuO41Vsh0WFShsww8NQZNZOx8ew8H6PG4+oN3/sr9+1x+DNgEgAxMWN
+	LeE4jnFie93ZgiYTfAhCJ6X+XhgII8Xb7+h1kcwHGGAwKyBzpL9urHptiHwDWM50gD68
+	ivq/TXIIRZswDRk+cRlRQi5vAeolGWeYnBZBVbWvYx6rKClZOmFoysGij9BeTKJGeybi
+	ij+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=MKBwysKqGr9wq9tw8sGRxpRzW3x3V4DuvjccHYZjZro=;
-	b=nb2BRgRsDEBJmHEjjdHXOqX1oJWe7TwuYK06mZfwxWQQcU6sNIL7SbKf0DAioEbtBk
-	24sZjObrAnMtb/EcYcVw2s9U1DhSSU0KcvcNCeag8QfdQ109QAuNijbVsSBh+cB8Sput
-	ABP6Y27KYVORQMPYTsl+2pVdNtZXQ4TAEhYTeqDKPS8oAk2sGCv5z3eev5cc9TMNSqHE
-	4bWxD7USHHKZW5qvCCQZIB5yDgbQXruQCR0z1VbNkE0QzaYz4q579jm/g8lNOJr3ErxS
-	FTLV1SLocds28XxtDUUwWGRp3cNNYmtdytBoCqAOUykztkS1QLHqDDyeiCCzA3TFt5ka
-	moRw==
-X-Gm-Message-State: APjAAAUtjHHKS0gQGD0IuOnEVccSfpVtSR33A9tVa9IZ+8on1PHf1zgD
-	NVJ30WAJz7yu0pY9/gMTaxjenmWd8ETpi9i8iMVjY+Ur
-X-Google-Smtp-Source: APXvYqxB2X70oBl9mlldzXvidHrNJTqcAT40riwQFcqjKWds55w71bMm5L2iC67S7qmvRIbx21D2caRmdJBDgjjWKtA=
-X-Received: by 2002:ac8:66d7:: with SMTP id m23mr3389703qtp.53.1573661574138; 
-	Wed, 13 Nov 2019 08:12:54 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4r2pPeO5uQggj+lLv35GESveNb7zLufYEJqwS4ecvx8=;
+	b=EIK24jdrslrIDiRy9j+YArWUNurh71BKIciICoy3Q3npo6t7zo153jS+gUH3w6tPGk
+	A7y2axXSE1KxjVQ7xte99T5va8lHjSkHOJPRruzeEq3LLzM4hMEfMVfMrM9JTn5mXyhz
+	YMmJGmO2ZD+LHb3NgvN150Te9nzKvD0rDaOkhFi6aurqDsXyagxslJgkduZ2N/G/9nGP
+	B27YzL/iBaU/iJfuE9OCuLkqGC8RGLcEtd2qN9uN1sTSLuEHN0WdluCU5a2CiLJncSLC
+	n9TvfpwKDs7D8eIg+PMc0NSKTrr1dWk18zqIobxwV3lvb0CCqs1CRPlUIlgYOqSKcoat
+	RdnQ==
+X-Gm-Message-State: APjAAAUCuwJf5ssYktdIdt+UyuNHmoYip6CmMmlcudJ5h+Xcr87UDbDy
+	X4k3Uj6Kt5UmiN+77+ld0jkh1E8k6Vs=
+X-Google-Smtp-Source: APXvYqyeSxgyzwReVTGlBsuNI5dH88bll96gudosTDRfVi9U7YWEncr/Wv/RD5BCNty79PDHWA83Zg==
+X-Received: by 2002:aca:5145:: with SMTP id f66mr4038819oib.0.1573665572360;
+	Wed, 13 Nov 2019 09:19:32 -0800 (PST)
+Received: from nick-bbestie.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id 38sm925838oth.19.2019.11.13.09.19.30
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 13 Nov 2019 09:19:31 -0800 (PST)
+From: Nicola Lunghi <nick83ola@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 Nov 2019 17:19:00 +0000
+Message-Id: <20191113171859.35167-1-nick83ola@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20191110220510.10077-1-git@andred.net>
-	<20191113095811.14815-1-git@andred.net>
-	<ce628d72e8512b493003f72dac66237576dace19.camel@andred.net>
-In-Reply-To: <ce628d72e8512b493003f72dac66237576dace19.camel@andred.net>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 13 Nov 2019 08:12:23 -0800
-Message-ID: <CAMKF1soqSmt+-iocU_HBaMC4tzpgR8xiSWoj6yA70+4d+A6aww@mail.gmail.com>
-To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] nodejs: ensure to use correct compiler & flags always
+Subject: [meta-python][PATCH] python-backports-abc: update to 0.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,129 +57,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Nov 2019 16:12:54 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 13 Nov 2019 17:19:32 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Nov 13, 2019 at 4:19 AM Andr=C3=A9 Draszik <git@andred.net> wrote:
->
-> Khem,
->
-> This is a rev2, as v1 is still in master-next, only.
-> I forgot to set the subject line right...
->
+Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+---
+ .../python/python-backports-abc_0.4.bb         | 18 ------------------
+ .../python/python-backports-abc_0.5.bb         | 11 +++++++++++
+ 2 files changed, 11 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-backports-abc_0.4.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-backports-abc_0.5.bb
 
-thanks for letting me know
+diff --git a/meta-python/recipes-devtools/python/python-backports-abc_0.4.bb b/meta-python/recipes-devtools/python/python-backports-abc_0.4.bb
+deleted file mode 100644
+index 6a4d267bc7..0000000000
+--- a/meta-python/recipes-devtools/python/python-backports-abc_0.4.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-SUMMARY = "collections.abc from Python 3.4"
+-DESCRIPTION = "A backport of recent additions to the 'collections.abc' module"
+-
+-LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=dd98d01d471fac8d8dbdd975229dba03"
+-
+-# pypi package doesn't have valid entry for license
+-SRC_URI += "https://raw.githubusercontent.com/cython/backports_abc/master/LICENSE;name=license"
+-
+-SRC_URI[md5sum] = "0b65a216ce9dc9c1a7e20a729dd7c05b"
+-SRC_URI[sha256sum] = "8b3e4092ba3d541c7a2f9b7d0d9c0275b21c6a01c53a61c731eba6686939d0a5"
+-SRC_URI[license.md5sum] = "dd98d01d471fac8d8dbdd975229dba03"
+-SRC_URI[license.sha256sum] = "0a4f3b38055f50f047a42521568fa6ddb9a5976c2884f6ae138796d0f71150ca"
+-
+-
+-
+-PYPI_PACKAGE = "backports_abc"
+-inherit pypi setuptools
+diff --git a/meta-python/recipes-devtools/python/python-backports-abc_0.5.bb b/meta-python/recipes-devtools/python/python-backports-abc_0.5.bb
+new file mode 100644
+index 0000000000..b588a31a30
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-backports-abc_0.5.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "collections.abc from Python 3.5"
++DESCRIPTION = "A backport of recent additions to the 'collections.abc' module"
++LICENSE = "PSF"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=dd98d01d471fac8d8dbdd975229dba03"
++
++PYPI_PACKAGE = "backports_abc"
++
++SRC_URI[md5sum] = "7d1936ec183a3586290adf60f6f96764"
++SRC_URI[sha256sum] = "033be54514a03e255df75c5aee8f9e672f663f93abb723444caec8fe43437bde"
++
++inherit pypi setuptools
+-- 
+2.20.1
 
-> Cheers,
-> Andre'
->
-> On Wed, 2019-11-13 at 09:58 +0000, Andr=C3=A9 Draszik wrote:
-> > NodeJS comes with an embedded, patched, version of gyp.
-> >
-> > Normally, gyp supports compiling for the build machine, e.g.
-> > native tools that need to be compiled to run during the build,
-> > and for the host, using different variables, e.g. CC and
-> > CC.host, etc.
-> > Most of this has been patched out in the NodeJS version of gyp,
-> > and essentially it only supports compiling using one compiler -
-> > ${CC}. This modification excludes LDFLAGS for native tools, and
-> > those still evaluate LDFLAGS.host (only).
-> >
-> > While this modified behaviour is OK for the OE use-case of building
-> > native and target tools separately, it means that this recipe can
-> > not work as-is with standard gyp, and wrong LDFLAGS are being used
-> > for some of the tools compiled (torque) in either case.
-> >
-> > By setting the make variables that gyp-generated makefiles inspect,
-> > we support use of unpatched gyp, and we ensure that all tools
-> > are compiled with correct LDFLAGS in either case.
-> >
-> > This now also allows us to drop the patch that had been applied to
-> > work-around this problem.
-> >
-> > Signed-off-by: Andr=C3=A9 Draszik <git@andred.net>
-> >
-> > ---
-> > v2: _append not needed for EXTRA_OEMAKE
-> > ---
-> >  .../nodejs/0006-Use-target-ldflags.patch      | 24 -------------------
-> >  .../recipes-devtools/nodejs/nodejs_10.17.0.bb | 13 +++++++++-
-> >  2 files changed, 12 insertions(+), 25 deletions(-)
-> >  delete mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-tar=
-get-ldflags.patch
-> >
-> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldf=
-lags.patch b/meta-oe/recipes-
-> > devtools/nodejs/nodejs/0006-Use-target-ldflags.patch
-> > deleted file mode 100644
-> > index f6569cd57..000000000
-> > --- a/meta-oe/recipes-devtools/nodejs/nodejs/0006-Use-target-ldflags.pa=
-tch
-> > +++ /dev/null
-> > @@ -1,24 +0,0 @@
-> > -The target LDFLAGS have been ignored. Tools like torque
-> > -have been loaded from system libraries, even if a native
-> > -one was the target.
-> > -|$ ldd torque
-> > -|    libz.so.1 =3D> /lib/x86_64-linux-gnu/libz.so.1
-> > -|    libcrypto.so.1.1 =3D> /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1
-> > -|    libssl.so.1.1 =3D> /usr/lib/x86_64-linux-gnu/libssl.so.1.1
-> > -|    libicui18n.so.63 =3D> not found
-> > -|    libicuuc.so.63 =3D> not found
-> > -...
-> > -
-> > -Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-> > -
-> > -diff -Naur node-v10.15.1/deps/v8/gypfiles/toolchain.gypi node-v10.15.1=
-/deps/v8/gypfiles/toolchain.gypi
-> > ---- node-v10.15.1/deps/v8/gypfiles/toolchain.gypi    2019-03-18 15:01:=
-39.000000000 +0100
-> > -+++ node-v10.15.1/deps/v8/gypfiles/toolchain.gypi    2019-03-18 15:04:=
-08.628361308 +0100
-> > -@@ -1106,6 +1106,7 @@
-> > -             'cflags': [ '-fno-strict-aliasing' ],
-> > -           }],
-> > -         ],  # conditions
-> > -+        'ldflags+': [ '$(LDFLAGS)' ],
-> > -       }],
-> > -       ['OS=3D=3D"solaris"', {
-> > -         'defines': [ '__C99FEATURES__=3D1' ],  # isinf() etc.
-> > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.17.0.bb b/meta-o=
-e/recipes-devtools/nodejs/nodejs_10.17.0.bb
-> > index 4013c6931..9af0d998c 100644
-> > --- a/meta-oe/recipes-devtools/nodejs/nodejs_10.17.0.bb
-> > +++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.17.0.bb
-> > @@ -19,7 +19,6 @@ SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV=
-}.tar.xz \
-> >             file://0001-Disable-running-gyp-files-for-bundled-deps.patc=
-h \
-> >             file://0004-Make-compatibility-with-gcc-4.8.patch \
-> >             file://0005-Link-atomic-library.patch \
-> > -           file://0006-Use-target-ldflags.patch \
-> >             "
-> >  SRC_URI_append_class-target =3D " \
-> >             file://0002-Using-native-torque.patch \
-> > @@ -58,6 +57,18 @@ PACKAGECONFIG[libuv] =3D "--shared-libuv,,libuv"
-> >  PACKAGECONFIG[nghttp2] =3D "--shared-nghttp2,,nghttp2"
-> >  PACKAGECONFIG[zlib] =3D "--shared-zlib,,zlib"
-> >
-> > +# We don't want to cross-compile during target compile,
-> > +# and we need to use the right flags during host compile,
-> > +# too.
-> > +EXTRA_OEMAKE =3D "\
-> > +    CC.host=3D'${CC}' \
-> > +    CFLAGS.host=3D'${CPPFLAGS} ${CFLAGS}' \
-> > +    CXX.host=3D'${CXX}' \
-> > +    CXXFLAGS.host=3D'${CPPFLAGS} ${CXXFLAGS}' \
-> > +    LDFLAGS.host=3D'${LDFLAGS}' \
-> > +    AR.host=3D'${AR}' \
-> > +"
-> > +
-> >  # Node is way too cool to use proper autotools, so we install two wrap=
-pers to forcefully inject proper arch cflags to
-> > workaround gypi
-> >  do_configure () {
-> >      rm -rf ${S}/deps/openssl
->
 
