@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B1427F2C0
+	by mail.openembedded.org (Postfix) with ESMTP id A49F160720
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Nov 2019 06:52:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,299,1569254400"; d="scan'208";a="78397981"
+	Wed, 13 Nov 2019 08:08:24 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.68,299,1569254400"; d="scan'208";a="78400857"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 13 Nov 2019 14:52:09 +0800
+	by heian.cn.fujitsu.com with ESMTP; 13 Nov 2019 16:08:24 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id E7D714CE1A0C
+	by cn.fujitsu.com (Postfix) with ESMTP id D13194CE1BE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Nov 2019 14:43:58 +0800 (CST)
+	Wed, 13 Nov 2019 16:00:11 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 13 Nov 2019 14:52:09 +0800
+	Server (TLS) id 14.3.439.0; Wed, 13 Nov 2019 16:08:21 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 13 Nov 2019 14:52:41 +0800
-Message-ID: <20191113065241.11917-1-zangrc.fnst@cn.fujitsu.com>
+Date: Wed, 13 Nov 2019 16:08:54 +0800
+Message-ID: <20191113080854.15620-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: E7D714CE1A0C.AAC41
+X-yoursite-MailScanner-ID: D13194CE1BE7.A8D89
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-astroid: upgrade 2.3.2 -> 2.3.3
+Subject: [meta-python] [PATCH] python-bitarray: upgrade 1.0.1 -> 1.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,42 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Nov 2019 06:52:09 -0000
+X-List-Received-Date: Wed, 13 Nov 2019 08:08:26 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
+-License-Update: Update PKG-INFO.
+
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-astroid.inc        | 4 ++--
- .../{python-astroid_2.3.2.bb => python-astroid_2.3.3.bb}      | 0
- .../{python3-astroid_2.3.2.bb => python3-astroid_2.3.3.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-astroid_2.3.2.bb => python-astroid_2.3.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-astroid_2.3.2.bb => python3-astroid_2.3.3.bb} (100%)
+ meta-python/recipes-devtools/python/python-bitarray.inc     | 6 +++---
+ .../{python-bitarray_1.0.1.bb => python-bitarray_1.1.0.bb}  | 0
+ ...{python3-bitarray_1.0.1.bb => python3-bitarray_1.1.0.bb} | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-bitarray_1.0.1.bb => python-bitarray_1.1.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_1.0.1.bb => python3-bitarray_1.1.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-astroid.inc b/meta-python/recipes-devtools/python/python-astroid.inc
-index 171d32015..e9a68789e 100644
---- a/meta-python/recipes-devtools/python/python-astroid.inc
-+++ b/meta-python/recipes-devtools/python/python-astroid.inc
-@@ -4,8 +4,8 @@ SECTION = "devel/python"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+diff --git a/meta-python/recipes-devtools/python/python-bitarray.inc b/meta-python/recipes-devtools/python/python-bitarray.inc
+index e7d49db80..da5d11f1c 100644
+--- a/meta-python/recipes-devtools/python/python-bitarray.inc
++++ b/meta-python/recipes-devtools/python/python-bitarray.inc
+@@ -1,10 +1,10 @@
+ SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
+ HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+ LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=d736cf16034030b4aab4ea179d91e778"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=00f0d12ccaf4e6b0b4fe501663621fa3"
  
--SRC_URI[md5sum] = "b2cd5c0383ff33c1410e737c2607aa7a"
--SRC_URI[sha256sum] = "09a3fba616519311f1af8a461f804b68f0370e100c9264a035aa7846d7852e33"
-+SRC_URI[md5sum] = "5f3d73d82d1753b59bb49a6bc6046dee"
-+SRC_URI[sha256sum] = "71ea07f44df9568a75d0f354c49143a4575d90645e9fead6dfb52c26a85ed13a"
+-SRC_URI[md5sum] = "56f55188d8d5361834db0bc7120f8998"
+-SRC_URI[sha256sum] = "3eb500f8b9cde19e14472fcbee0195dbf0fbac006f8406a03f0cfb495dff20a0"
++SRC_URI[md5sum] = "743d396a1012d6f7d791d8a526da302d"
++SRC_URI[sha256sum] = "9f578314c7808eb1416620dc7d7977d4787a65a4f61b4c9685343a860712615b"
  
  inherit pypi
  
-diff --git a/meta-python/recipes-devtools/python/python-astroid_2.3.2.bb b/meta-python/recipes-devtools/python/python-astroid_2.3.3.bb
+diff --git a/meta-python/recipes-devtools/python/python-bitarray_1.0.1.bb b/meta-python/recipes-devtools/python/python-bitarray_1.1.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-astroid_2.3.2.bb
-rename to meta-python/recipes-devtools/python/python-astroid_2.3.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-astroid_2.3.2.bb b/meta-python/recipes-devtools/python/python3-astroid_2.3.3.bb
+rename from meta-python/recipes-devtools/python/python-bitarray_1.0.1.bb
+rename to meta-python/recipes-devtools/python/python-bitarray_1.1.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.0.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.1.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-astroid_2.3.2.bb
-rename to meta-python/recipes-devtools/python/python3-astroid_2.3.3.bb
+rename from meta-python/recipes-devtools/python/python3-bitarray_1.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-bitarray_1.1.0.bb
 -- 
 2.20.1
 
