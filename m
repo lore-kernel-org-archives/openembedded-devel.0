@@ -1,50 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0FF787F6CF
+Return-Path: <nick83ola@gmail.com>
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+	[209.85.210.67])
+	by mail.openembedded.org (Postfix) with ESMTP id E41646C4D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 06:10:14 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id q22so3034767pgk.2
+	Thu, 14 Nov 2019 12:48:18 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id w24so4242012otk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Nov 2019 22:10:16 -0800 (PST)
+	Thu, 14 Nov 2019 04:48:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=ku4W+bh+KwKwhlC1EC4bZUwaB0j6S4PFdYhtjqV38jo=;
-	b=jw983nZubHKXjRq7E0UteH71HObdq57iTai9m+gg/SF9RTEEu2fDXcGW9dnA/D6Su8
-	nx6zDiop4cBtsZGeqmGl4dbMueWP9CeZ3KuN5X5ksYYFBswrtZoO4YSPgjirDwc3IngU
-	txZLSOVefRymNOGZQS+lPB5TTMHguAYMQ9XZ6KxuMgxwv31g46eSzeeN8Jrl21qZ3ESs
-	L25H1QBmMDXIAlzwphwEVUYfml3yqeLtVAa2tTNJVcqESph5tEJJVQdSZ6YX2OU0mWkV
-	XmlOpbmfcjZ5OntIagW9E/vn704sLBmw2xTZlV7zWpo2YGnfHbU4dZ8ziAPlxf45QQR3
-	ZruA==
+	bh=27GEgDODRB2vv81VYU7mU9Ws7kPt14Id/edGJaQpg6c=;
+	b=nnuU3Lgys5dBTGb6Am5/7Y8N3Ce7RrPi8S42wtKOrZyy/h3th9x9IV1mCoyEN6bTjh
+	/kuo8kmKHrxQvftu8RvNiTTz+LCEENqHN65MrZJ207dtQcvbvaQzJoMTnffX2vzUYPUl
+	lwdq6eDYeH62u1qs99XoXuRLVDlVVOMcFCXiFVOwrcIwMB0DJ+m+pHIpoS3i6uBE0GeY
+	XaPjgxfZRFJW+q++n2zJHyR5X56rDQlMD7u1FuyJ9ppMOWO4ZP1JTMB2d73yRalMoMlx
+	mF9hXdcrS6jvYTbfaVECfOj+maQypvJIbKTfoIieV9vTqZbqZAAodIgJUvmNDkszlxdS
+	o8TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=ku4W+bh+KwKwhlC1EC4bZUwaB0j6S4PFdYhtjqV38jo=;
-	b=CaquP/glVLzPel59ce/XaTKQ2L4MglRGv0YD08/cQDMzQiSnbYbBClagJAMurGxRc8
-	4F3WeWpWdrURySgrX7K7eH+mkYkykXUpNtrACFTtgbX5yZUp16HFiG/+5VV2p6fBWa/m
-	4RZosjLPNOgXHc95oEmhJWsWDFjQU4zTuGivaEjSRyuNa6rnUwa5+ipq1Cnu0pL3RWcb
-	ONBlC4C4aSjyoF6nnZs4DH0yewdP9M9AlwJctfpuX/5ILzzvx7xu9jKUSv67AFKAntuC
-	xOfCwiEtdhLfJegrNDf2CsaDr/z5Xas+dC4NVzAjxBw28mU38HhBSh53SKy+ZMNPLEDQ
-	VQyQ==
-X-Gm-Message-State: APjAAAUPMzKdnNzQlvf8qWTXKEErSmeurWC7DuOm7ACG0Q29lfqcY07S
-	hyc8Z3Kgn5AMI9Eyl1vYBdPBL4INZ8o=
-X-Google-Smtp-Source: APXvYqwJASS38fvYq6EMl1obsYdcRxSbc44v71Jb80Uuv022mBPGV9wTco0I9sMpvGytAm1nwhcgvg==
-X-Received: by 2002:a63:4961:: with SMTP id y33mr8395858pgk.264.1573711815326; 
-	Wed, 13 Nov 2019 22:10:15 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::30e8])
-	by smtp.gmail.com with ESMTPSA id
-	v15sm4735093pfe.44.2019.11.13.22.10.14
+	bh=27GEgDODRB2vv81VYU7mU9Ws7kPt14Id/edGJaQpg6c=;
+	b=hEXhzV9wYlCmYu00GmZFzeq6HjIvJ4lYE/RrlfHGE4k+9QGRVwYz4Qv/r4ebP77fz0
+	lFHpTp/w+suaubdJ6mIDf2OG5Hh8YugIcvRaGliPKTlnf1Rc11zjiOQmPILzzTAGarE+
+	asB+nJ4m8q3FDeTZniVxDHqNJ5SQbSOCll4rzcHVtcvXQno6da5kGGv8SDgmCvk3mzxv
+	Gh3icfjxvTyRLfd0KErCbZB0RoGWIrw55dVapOJQtsd49M/KvTstLCclQj/+U4TtF5uc
+	kk7M/WRmfPT9Ave4WecPtCOi8KDMW3NweE/cNkpPmKE9ls6BmiuezCFJ0HySXBNB/KD7
+	q5kQ==
+X-Gm-Message-State: APjAAAUFQMN2hkB2ub59P5TR+LfgiSJjCiWDboljxSYnTyO+VoR5QuJn
+	bDII7M1V8ezzCDgSYDHgiMWFwDbdrrI=
+X-Google-Smtp-Source: APXvYqxwJ6/0QboVhpVfaqF7SDJePMmyGJ8MuEelueCQTnVt8l3HPSM7gx11kffsCg60L/QiqTbKeA==
+X-Received: by 2002:a9d:155:: with SMTP id 79mr6775421otu.240.1573735699311;
+	Thu, 14 Nov 2019 04:48:19 -0800 (PST)
+Received: from nick-bbestie.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id k9sm849933otc.35.2019.11.14.04.48.17
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 13 Nov 2019 22:10:14 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 14 Nov 2019 04:48:18 -0800 (PST)
+From: Nicola Lunghi <nick83ola@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Nov 2019 22:10:01 -0800
-Message-Id: <20191114061001.3605114-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
+Date: Thu, 14 Nov 2019 12:47:58 +0000
+Message-Id: <20191114124757.9570-1-nick83ola@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] python-six: Update to 1.13.0
+Subject: [meta-python][PATCH] python-rfc3339-validator: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,20 +57,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Nov 2019 06:10:15 -0000
+X-List-Received-Date: Thu, 14 Nov 2019 12:48:19 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../python/{python-six_1.12.0.bb => python-six_1.13.0.bb}         | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-devtools/python/{python-six_1.12.0.bb => python-six_1.13.0.bb} (100%)
+This is an optional dependency for python-jsonschema
 
-diff --git a/meta-oe/recipes-devtools/python/python-six_1.12.0.bb b/meta-oe/recipes-devtools/python/python-six_1.13.0.bb
-similarity index 100%
-rename from meta-oe/recipes-devtools/python/python-six_1.12.0.bb
-rename to meta-oe/recipes-devtools/python/python-six_1.13.0.bb
+Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+---
+ .../python/python-rfc3339-validator.inc       | 25 +++++++++++++++
+ ...e-pytest-runner-to-test_requirements.patch | 32 +++++++++++++++++++
+ .../python/python-rfc3339-validator_0.1.1.bb  |  2 ++
+ .../python/python3-rfc3339-validator_0.1.1.bb |  2 ++
+ 4 files changed, 61 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-rfc3339-validator.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
+ create mode 100644 meta-python/recipes-devtools/python/python-rfc3339-validator_0.1.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb
+
+diff --git a/meta-python/recipes-devtools/python/python-rfc3339-validator.inc b/meta-python/recipes-devtools/python/python-rfc3339-validator.inc
+new file mode 100644
+index 0000000000..3da082984d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-rfc3339-validator.inc
+@@ -0,0 +1,25 @@
++SUMMARY = "A pure python RFC3339 validator"
++HOMEPAGE = "https://github.com/naimetti/rfc3339-validator"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
++
++FILESEXTRAPATHS_prepend := "${THISDIR}/python-rfc3339-validator:"
++
++SRC_URI[md5sum] = "9d8899041d83f98180bddd8b62ee7e99"
++SRC_URI[sha256sum] = "20a600d01fbb1f793cbb6f4ec4ebb2104f4c9e80d74d5f78350b63ecc6cccd08"
++
++PYPI_PACKAGE = "rfc3339_validator"
++
++inherit pypi
++
++SRC_URI_append = " \
++    file://0001-setup.py-move-pytest-runner-to-test_requirements.patch \
++"
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-six \
++"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch b/meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
+new file mode 100644
+index 0000000000..ce8ca0bc8c
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-rfc3339-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
+@@ -0,0 +1,32 @@
++From 2de281fdca88f223ace1eb6428a77b9903c69264 Mon Sep 17 00:00:00 2001
++From: Nicola Lunghi <nicola.lunghi@jci.com>
++Date: Thu, 14 Nov 2019 11:58:28 +0000
++Subject: [PATCH] setup.py: move pytest-runner to test_requirements
++
++This fixes an issue with yocto build.
++pytest-runner is only needed when running tests.
++
++Upstream-Status: Pending
++---
++ setup.py | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/setup.py b/setup.py
++index 9a50767..e3b1c6e 100644
++--- a/setup.py
+++++ b/setup.py
++@@ -12,9 +12,9 @@ requirements = [
++     'six',
++ ]
++ 
++-setup_requirements = ['pytest-runner', ]
+++setup_requirements = []
++ 
++-test_requirements = ['pytest>=3', ]
+++test_requirements = ['pytest>=3', 'pytest-runner']
++ 
++ setup(
++     author="Nicolas Aimetti",
++-- 
++2.20.1
++
+diff --git a/meta-python/recipes-devtools/python/python-rfc3339-validator_0.1.1.bb b/meta-python/recipes-devtools/python/python-rfc3339-validator_0.1.1.bb
+new file mode 100644
+index 0000000000..29b8a6e0d1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-rfc3339-validator_0.1.1.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-rfc3339-validator.inc
+\ No newline at end of file
+diff --git a/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb
+new file mode 100644
+index 0000000000..f4ee8fedaa
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-rfc3339-validator_0.1.1.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-rfc3339-validator.inc
+\ No newline at end of file
 -- 
-2.24.0
+2.20.1
 
 
