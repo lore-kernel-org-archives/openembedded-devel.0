@@ -1,52 +1,53 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com
-	[209.85.167.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 8105D7F74B
+Return-Path: <leon.anavi@konsulko.com>
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+	[209.85.208.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 23B4C7F997
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 20:29:50 +0000 (UTC)
-Received: by mail-oi1-f175.google.com with SMTP id l20so6506077oie.10
+	Thu, 14 Nov 2019 20:53:34 +0000 (UTC)
+Received: by mail-lj1-f195.google.com with SMTP id 139so8221723ljf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 12:29:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=iTTonewRpVyWpwulrIOpIHtNS8bK88FiEPbjGXponmA=;
-	b=UmR+4mgxcdDih9b7XC2peonwm6hxtYh/y9R9JIADcM5SVuJK85pdn2eExotzmIgnoP
-	iQtnJGzwmaoQeLnL3auruJ5XDBIozAjkxqhMx0LKMGTVQdgdoHLg6YrqvjWLAMth6QWT
-	frdFTc5k82i0Vz6o+WW4CprXoJ8zNEEBnKVfU+NaVEkWFSupZe3we1BYlekPt8KLVJeV
-	q/hTH2DlhPsNdZlDWyRxpR0SiGcZf4rztrTu6WxOjuvFAXk9DE113DoANz2ItkxrKqTt
-	tjRUo6QYiz4ro3UWGvylxVGVx7wUQav1qsg39JOry19fvBOBnndQwIuIsxTIti/4EZtt
-	PeTw==
+	Thu, 14 Nov 2019 12:53:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=HVSY3V5nLsu6/PVYMeW0YZGpi+S5slGqFjQySqLWDOw=;
+	b=NjxInhWFjW1bpAOU/FsqBTkB8fskmJk+nq4w/xj1rPpuYDiN9AKOLQCpYCTrq72d+i
+	HKVwFap+5GzKZdfHMUKouomV0aPSoYFdOjrBfJA6qoGqb+kg668fKmZSLgTC09ER/Vg/
+	tNHhpcZjiQ5W6Z8A1yjQo7ex9B9S/P75bF3X4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=iTTonewRpVyWpwulrIOpIHtNS8bK88FiEPbjGXponmA=;
-	b=r0Fup9zrKJsREkNyPd3+acaDuYG0KP9wu0fvmuAsj26o/wLf9DMD1RMkaEm9c9wUI+
-	aBVxyaDvpuWacRlP3YjTx6j1Um3S13BQ5ITo3BgVGYeIc2FJCzk/f3dF+mvhJ/dxC1Ja
-	PqcJozcStL/IVPh+bWr0a8e+22l/qp8MZKj9O1PjMWYkvN4aLczOlrLfQoeFENKaWiOf
-	Cxzm4YjmId45/leC0HNZs9pD1n5vR2p9KUiT3IaBUAA9+W+OOcFJ9ZHGAYSRgsYXODFc
-	3DgHR9Nsg970n0h+RacJOyMFDXjZRSB2TzvLwm6J0iA+u6F9XwGmZLzYoLOXuIdMQNAm
-	N28w==
-X-Gm-Message-State: APjAAAUHD85ott679Qbt+SRQVWvxphlgx40CNFZDG/QBfjdP7THgbbVB
-	eph+GxyeCPgh3u1tYDtRbzMYZm86T6A=
-X-Google-Smtp-Source: APXvYqxp5mGtUIfqfq9lW7ickK7G7vUeqeVem5N232YK19Qd7rACcPJsENqgzagyisMgj7ivj9iRBQ==
-X-Received: by 2002:aca:ea57:: with SMTP id i84mr4860416oih.73.1573763390971; 
-	Thu, 14 Nov 2019 12:29:50 -0800 (PST)
-Received: from nick-bbestie.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id 62sm2149130otq.78.2019.11.14.12.29.49
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 14 Nov 2019 12:29:50 -0800 (PST)
-From: Nicola Lunghi <nick83ola@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Nov 2019 20:28:01 +0000
-Message-Id: <20191114202759.26789-2-nick83ola@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191114202759.26789-1-nick83ola@gmail.com>
-References: <20191114202759.26789-1-nick83ola@gmail.com>
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=HVSY3V5nLsu6/PVYMeW0YZGpi+S5slGqFjQySqLWDOw=;
+	b=rt4Mc9Yi7uqo2F96rIbd+YSUDLLRLdBDUq/T5gdunMTZkuC+XYIcyQ7kz8vR9ij0rw
+	0LcVy1N+TBXJCXTeyRyLMCTg/lG3ThH3NnCI9TJwSUjEwUV6X/egrTv9hrkh5pQVR8xL
+	uahAFrEAPjd2iHE1M47MwsGjkwLO3FSuUkYdDiZXeDCjB4jbCM5ANFHV4t4Fx1+JqoA2
+	L46FQxVpd8nzjG7VUgT6yhseZiIzDQkCEflbJ0/H5N4FFyFNmQnOHbVpH2i6w0GdBAd3
+	H4fPTxd+dVCLIV1PZOepUqpSCSxT6J3OWRDUXkvvlxAyHiUaEEJai5fn1lWMDHZZfhLT
+	2LRA==
+X-Gm-Message-State: APjAAAWg2JX95BKAuqXKWBP075JVWJKbM7ZQCfYeQeHab+BX4Ld6jzfY
+	dFG61AP2NaoUsR4qYZtkKqLE31a1Y+0=
+X-Google-Smtp-Source: APXvYqz6khxDV/rvQef/DBzuF7bEk8FVRgZ7avzEytNnlzVx23IoV1QzG/OjmCTDps90ZMwSHRT9yw==
+X-Received: by 2002:a2e:97d8:: with SMTP id m24mr8655005ljj.62.1573764815273; 
+	Thu, 14 Nov 2019 12:53:35 -0800 (PST)
+Received: from [192.168.4.166] ([78.130.245.67])
+	by smtp.gmail.com with ESMTPSA id a5sm2787403ljm.56.2019.11.14.12.53.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 14 Nov 2019 12:53:34 -0800 (PST)
+To: Khem Raj <raj.khem@gmail.com>, akuster808 <akuster808@gmail.com>
+References: <1573752010-26608-1-git-send-email-leon.anavi@konsulko.com>
+	<dbae500e-b459-005e-ec2b-5d4f5ef66f18@gmail.com>
+	<CAMKF1sqtcxZjwRk+Zuqgf0UqiDm98NmCjaZbSsSNT0Y=eZY4BA@mail.gmail.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
+Message-ID: <77b2e088-1b0d-2748-274e-5a3e25b29381@konsulko.com>
+Date: Thu, 14 Nov 2019 22:53:33 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 2/2] python-jsonschema: add PACKAGECONFIG format_nongpl
+In-Reply-To: <CAMKF1sqtcxZjwRk+Zuqgf0UqiDm98NmCjaZbSsSNT0Y=eZY4BA@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] surf: Add simple web browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,158 +60,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Nov 2019 20:29:50 -0000
+X-List-Received-Date: Thu, 14 Nov 2019 20:53:35 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-This is the backport of a patch upstream
-- 10f8a3e Add format validators as separate modules
+Hi Armin, Khem,
 
-that add an option permit to use validator that don't contain GPLv3 code.
+On 14.11.19 г. 21:10 ч., Khem Raj wrote:
+> On Thu, Nov 14, 2019 at 10:53 AM akuster808 <akuster808@gmail.com> wrote:
+>>
+>>
+>> On 11/14/19 9:20 AM, Leon Anavi wrote:
+>>> Add a recipe for surf, a simple web browser based on WebKit2/GTK+.
+>> shouldn't this go into the meta-webserver layer ?
+> perhaps but its the browser
+I will be happy to move it to a more appropriate location. Where should 
+this recipe go?
 
-Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
----
- .../python/python-jsonschema.inc              | 12 +++
- ...-setup.cfg-add-non-GPL-format-option.patch | 96 +++++++++++++++++++
- 2 files changed, 108 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-jsonschema/0001-setup.cfg-add-non-GPL-format-option.patch
+I have been thinking a lot before submitting the patch and I decided to 
+add it to recipes-graphics and set SECTION to "x11/graphics" because it 
+is a web browser with GUI. The other web browser, links, is in 
+meta-oe/recipes-support.
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
-index df41f06a2..9b81b7ad4 100644
---- a/meta-python/recipes-devtools/python/python-jsonschema.inc
-+++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
-@@ -6,10 +6,15 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8 \
- DEPENDS += "${PYTHON_PN}-vcversioner-native ${PYTHON_PN}-setuptools-scm-native"
- PR = "r1"
- 
-+FILESEXTRAPATHS_prepend := "${THISDIR}/python-jsonschema:"
-+
-+SRC_URI_append = " file://0001-setup.cfg-add-non-GPL-format-option.patch"
-+
- SRC_URI[md5sum] = "a802ab85600074a726ef6acc4e6a8148"
- SRC_URI[sha256sum] = "2fa0684276b6333ff3c0b1b27081f4b2305f0a36cf702a23db50edb141893c3f"
- 
- PACKAGECONFIG ??= "format"
-+# PACKAGECONFIG ??= "format_nongpl"
- PACKAGECONFIG[format] = ",,,\
-     ${PYTHON_PN}-idna \
-     ${PYTHON_PN}-jsonpointer \
-@@ -17,6 +22,13 @@ PACKAGECONFIG[format] = ",,,\
-     ${PYTHON_PN}-rfc3987 \
-     ${PYTHON_PN}-strict-rfc3339 \
- "
-+PACKAGECONFIG[format_nongpl] = ",,,\
-+    ${PYTHON_PN}-idna \
-+    ${PYTHON_PN}-jsonpointer \
-+    ${PYTHON_PN}-webcolors \
-+    ${PYTHON_PN}-rfc3986-validator \
-+    ${PYTHON_PN}-rfc3339-validator \
-+"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-attrs \
-diff --git a/meta-python/recipes-devtools/python/python-jsonschema/0001-setup.cfg-add-non-GPL-format-option.patch b/meta-python/recipes-devtools/python/python-jsonschema/0001-setup.cfg-add-non-GPL-format-option.patch
-new file mode 100644
-index 000000000..96fd48447
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-jsonschema/0001-setup.cfg-add-non-GPL-format-option.patch
-@@ -0,0 +1,96 @@
-+From 8df0332475991884b8e1801d31f9c3e06d06bf9f Mon Sep 17 00:00:00 2001
-+From: Nicola Lunghi <nick83ola@gmail.com>
-+Date: Thu, 14 Nov 2019 18:58:56 +0000
-+Subject: [PATCH] setup.cfg: add non GPL format option
-+
-+This is a rewrite of the following upstream commits:
-+
-+ - 10f8a3e Add format validators as separate modules
-+ - af37707 non GPL format option
-+
-+removing all the non necessary bits (tox in particular)
-+
-+Original author: Nicolas Aimetti <naimetti@yahoo.com.ar>
-+
-+Upstream-status: Invalid.
-+---
-+ jsonschema/_format.py | 33 ++++++++++++++++++++++++++++-----
-+ setup.cfg             |  6 ++++++
-+ 2 files changed, 34 insertions(+), 5 deletions(-)
-+
-+diff --git a/jsonschema/_format.py b/jsonschema/_format.py
-+index aa04090..c967d98 100644
-+--- a/jsonschema/_format.py
-++++ b/jsonschema/_format.py
-+@@ -248,7 +248,26 @@ else:
-+ try:
-+     import rfc3987
-+ except ImportError:
-+-    pass
-++    try:
-++        from rfc3986_validator import validate_rfc3986
-++    except ImportError:
-++        pass
-++    else:
-++        @_checks_drafts(name="uri",)
-++        def is_uri(instance):
-++            if not isinstance(instance, str_types):
-++                return True
-++            return validate_rfc3986(instance, rule="URI")
-++
-++        @_checks_drafts(
-++            draft6="uri-reference",
-++            draft7="uri-reference",
-++            raises=ValueError,
-++        )
-++        def is_uri_reference(instance):
-++            if not isinstance(instance, str_types):
-++                return True
-++            return validate_rfc3986(instance, rule="URI_reference")
-+ else:
-+     @_checks_drafts(draft7="iri", raises=ValueError)
-+     def is_iri(instance):
-+@@ -280,15 +299,19 @@ else:
-+ 
-+ 
-+ try:
-+-    import strict_rfc3339
-++    from strict_rfc3339 import validate_rfc3339
-+ except ImportError:
-+-    pass
-+-else:
-++    try:
-++        from rfc3339_validator import validate_rfc3339
-++    except ImportError:
-++        validate_rfc3339 = None
-++
-++if validate_rfc3339:
-+     @_checks_drafts(name="date-time")
-+     def is_datetime(instance):
-+         if not isinstance(instance, str_types):
-+             return True
-+-        return strict_rfc3339.validate_rfc3339(instance)
-++        return validate_rfc3339(instance)
-+ 
-+     @_checks_drafts(draft7="time")
-+     def is_time(instance):
-+diff --git a/setup.cfg b/setup.cfg
-+index 74bc4a7..878221c 100644
-+--- a/setup.cfg
-++++ b/setup.cfg
-+@@ -40,6 +40,12 @@ format =
-+ 	rfc3987
-+ 	strict-rfc3339
-+ 	webcolors
-++format_nongpl =
-++	idna
-++	jsonpointer>1.13
-++	webcolors
-++	rfc3986-validator>0.1.0
-++	rfc3339-validator
-+ 
-+ [options.entry_points]
-+ console_scripts = 
-+-- 
-+2.20.1
-+
+Best regards,
+Leon
+>
+>>> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>>> ---
+>>>   .../0001-config.mk-Fix-compiler-and-linker.patch   | 36 ++++++++++++++++++++++
+>>>   meta-oe/recipes-graphics/surf/surf_2.0.bb          | 30 ++++++++++++++++++
+>>>   2 files changed, 66 insertions(+)
+>>>   create mode 100644 meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+>>>   create mode 100644 meta-oe/recipes-graphics/surf/surf_2.0.bb
+>>>
+>>> diff --git a/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+>>> new file mode 100644
+>>> index 0000000..a3e33ea
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+>>> @@ -0,0 +1,36 @@
+>>> +From df199f82752398f86d2332dce53f52e2cfb50c87 Mon Sep 17 00:00:00 2001
+>>> +From: Leon Anavi <leon.anavi@konsulko.com>
+>>> +Date: Thu, 14 Nov 2019 14:28:39 +0000
+>>> +Subject: [PATCH] config.mk: Fix compiler and linker
+>>> +
+>>> +Do not set explicitly compiler and linker.
+>>> +
+>>> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+>>> +---
+>>> + config.mk | 6 +++---
+>>> + 1 file changed, 3 insertions(+), 3 deletions(-)
+>>> +
+>>> +diff --git a/config.mk b/config.mk
+>>> +index df6e812..bf07406 100644
+>>> +--- a/config.mk
+>>> ++++ b/config.mk
+>>> +@@ -15,8 +15,8 @@ GTKINC = `pkg-config --cflags gtk+-3.0 webkit2gtk-4.0`
+>>> + GTKLIB = `pkg-config --libs gtk+-3.0 webkit2gtk-4.0`
+>>> +
+>>> + # includes and libs
+>>> +-INCS = -I. -I/usr/include -I${X11INC} ${GTKINC}
+>>> +-LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 ${GTKLIB} -lgthread-2.0
+>>> ++INCS = ${GTKINC}
+>>> ++LIBS = -lc -lX11 ${GTKLIB} -lgthread-2.0
+>>> +
+>>> + # flags
+>>> + CPPFLAGS = -DVERSION=\"${VERSION}\" -DWEBEXTDIR=\"${LIBPREFIX}\" -D_DEFAULT_SOURCE
+>>> +@@ -28,4 +28,4 @@ LDFLAGS = -s ${LIBS}
+>>> + #LDFLAGS = ${LIBS}
+>>> +
+>>> + # compiler and linker
+>>> +-CC = cc
+>>> ++#CC = cc
+>>> +--
+>>> +2.7.4
+>>> +
+>>> diff --git a/meta-oe/recipes-graphics/surf/surf_2.0.bb b/meta-oe/recipes-graphics/surf/surf_2.0.bb
+>>> new file mode 100644
+>>> index 0000000..98d3b23
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-graphics/surf/surf_2.0.bb
+>>> @@ -0,0 +1,30 @@
+>>> +SUMMARY = "Simple web browser"
+>>> +DESCRIPTION = "Simple open source web browser based on WebKit2/GTK"
+>>> +HOMEPAGE = "https://surf.suckless.org/"
+>>> +SECTION = "x11/graphics"
+>>> +LICENSE = "MIT"
+>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b57e7f7720307a02d5a6598b00fe3afa"
+>>> +
+>>> +DEPENDS = "webkitgtk gtk+ gtk+3 glib-2.0 xserver-nodm-init"
+>>> +
+>>> +REQUIRED_DISTRO_FEATURES = "x11"
+>>> +
+>>> +SRC_URI = "git://git.suckless.org/surf;branch=surf-webkit2 \
+>>> +           file://0001-config.mk-Fix-compiler-and-linker.patch \
+>>> +"
+>>> +SRCREV = "b814567e2bf8bda07cea8de1c7a062f4aa437b65"
+>>> +
+>>> +S = "${WORKDIR}/git"
+>>> +
+>>> +inherit pkgconfig
+>>> +
+>>> +TARGET_CC_ARCH += "${LDFLAGS}"
+>>> +
+>>> +do_install () {
+>>> +     install -d ${D}${bindir}
+>>> +     install -m 0644 ${S}/surf ${D}${bindir}
+>>> +     chmod +x ${D}${bindir}/surf
+>>> +}
+>>> +
+>>> +INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+>>> +INHIBIT_PACKAGE_STRIP = "1"
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 -- 
-2.20.1
+Leon Anavi
+Software Engineer
+konsulko.com
 
 
