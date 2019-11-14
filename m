@@ -1,49 +1,49 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-il1-f196.google.com (mail-il1-f196.google.com
-	[209.85.166.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B0A57FA33
+Received: from mail-il1-f195.google.com (mail-il1-f195.google.com
+	[209.85.166.195])
+	by mail.openembedded.org (Postfix) with ESMTP id A22157FA33
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 22:50:36 +0000 (UTC)
-Received: by mail-il1-f196.google.com with SMTP id a7so6910443ild.6
+	Thu, 14 Nov 2019 22:51:51 +0000 (UTC)
+Received: by mail-il1-f195.google.com with SMTP id s5so6927288iln.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 14:50:37 -0800 (PST)
+	Thu, 14 Nov 2019 14:51:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=4QJAKMG35WCP89uk6inOrmHbwWbQ/R3OI7PHQfB9/Ik=;
-	b=rRiUEwuWZK+hUAKzPQ+s64WFIkBduc4QzE9peIiwGk0VZF70Wb7ud59mMrvNtzs1DU
-	T/Ee72h9w0s+y6vgbDXmOLZ1IGgkLYtm8+Ww3KsY4JHfEHcszP0841+sTw0RQJ+gZKdH
-	tZOiaHF7w6EH7NHglx71CMnGmYtw37YEUOjDL6AVSZctGkGgBNLqj4I/aEbveeM4W01F
-	MtIEu2VjRtevTzjq1uFg7D4df8bC7CYlhomYlHePEa/PfWthMsCUWOGD8aG0YtjlkOri
-	Scf9ISYhFLUi0U4+Tf+vRRXMx32Ck8KCBxvblhVM/JcNEzX1xRDwkda0Ltx7xS9yfFxu
-	o+WQ==
+	bh=oXOVAlB8OF4EpDogWjmVdYhNeiUQ+/1UBtrcA64XPcI=;
+	b=era1rL059FZ/2VVvE9Q26KSIKez2FQnI0kceSzkvglTQ1Kdssdsv6CUCAnjj622mdw
+	VTaXU58Qm1Jr0knpbcD6LniojnS22kTSi+PS4rAaPMW7WPMScjBPTcpc5TC53pUrayg0
+	893RKUwJ5QfFt4UOLnQ8bQkKD7OWMrA8gDNfg9GC+NQZajYEc/bXgceWLP++lvr7dxHk
+	/ww7jCwmO9Lv7z4puteu9gpGar4uLjmMGs4UNCv6gndD1zy5x9rV5u4+xFXRKj6C4b9/
+	joqfmjjoWffvmxfNXTb9xSY3QfiKb5v+SIjM/N6i9JT064Hl95GKUFGls1IS3Wlm4Iqn
+	cbvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=4QJAKMG35WCP89uk6inOrmHbwWbQ/R3OI7PHQfB9/Ik=;
-	b=S7SPU7WQ90+SCNKPOWH2Ml9EACQCfLEX6vnRTV/IP6wKMrb1kDfoojsVbj0exwUkqy
-	UxxpHNpcxsYTl7s39N6WU/AaoQVPpbdukPmxOe+5Jp6/n1X5JEIBj0mXbQb0ZjgK0gXz
-	54lqGqSUTAD11NP+JvpCDotMgwhc/OK/4ryuAN7v+j/HSebrgU/vM9siyuDZphUwE2mh
-	b2gwz7zaH2Qv2VIvXP6jF+VBzUPgqhI+vgnJZGJcyVEXWNcdIhtf/TT02bdleeE6JVUS
-	4fxxdTF9S4Q14HDgt3HFp3uINTyQdURb0+hQzYWeKzpyKX9/MtxknnuTt7SS8ZHTgtHM
-	Qh2g==
-X-Gm-Message-State: APjAAAXTGtbtSZqUfYLP87qruppP0+x+6pyAWCDraUCJaGxJ4BmOCNl9
-	2g/P5TCJzxC7cvyYR0dYNImqUqR9JpZQwMjpRHc=
-X-Google-Smtp-Source: APXvYqx9ppnVGCxiTonBG8xpiMptbmAqz5mV8Gjmn2WNtmRfDe6EvkFZyyqw7TJTfSsuLSlmIQn7wFCXnoAyhP4fYe0=
-X-Received: by 2002:a92:5cce:: with SMTP id d75mr4988604ilg.299.1573771837345; 
-	Thu, 14 Nov 2019 14:50:37 -0800 (PST)
+	bh=oXOVAlB8OF4EpDogWjmVdYhNeiUQ+/1UBtrcA64XPcI=;
+	b=LbZ6LiuQ2O4SMzHRiutU3NGR6fSUuBGHai02EpPhTEp2GX+Gsomn3nfPav2Qa4dnne
+	2MJbEjyZSh9r8BawZPmpb1o22suTJdodpLMs5orNuzf+6wC3FSkNuweCGim/oNO/e/V+
+	1Tonqn+USOVPkZ7K6Iv+ugMBSeFzm07IPQgSHTZGejQSpeVTwIGEPf/bZC8o8gXrJQtG
+	aSD8VM4gy9DGdhiPoFRjVIwzRM/2R7mj4g47Djm18O+jMS/zaZEzqN6sV14QBWONZkjM
+	wKp5zFxCd+yEJW58sTc24ZvvcSj/zGp5DsOhvPehZA6ygkp/Ftq70fJjHr8aW6tBYJUX
+	cbPw==
+X-Gm-Message-State: APjAAAVe2Tegi8QAlIQHlDxv4q2/FAxGLw8ygmh+AvwngGlZqlGIGjp+
+	3x3fKZWQjVHj2r0LUo7ATcd62uiSoov1kCSyFyrBRQ==
+X-Google-Smtp-Source: APXvYqyj1dOZ0E3ZEM4+pzAR1KeGhOdvnEJDiUP0E8Z2v5N76pKRbSlnQ2Oe4rk0W/uEy/Oleq7JXIAnpsqUq6WMw7Q=
+X-Received: by 2002:a92:8983:: with SMTP id w3mr13690785ilk.108.1573771912748; 
+	Thu, 14 Nov 2019 14:51:52 -0800 (PST)
 MIME-Version: 1.0
 References: <20191114194930.2786-1-schnitzeltony@gmail.com>
-	<20191114194930.2786-16-schnitzeltony@gmail.com>
-	<CAMKF1soTKvJ=uYgm-Q51yq8xGcissdwf4nKzR3qxXKwPTUXrgA@mail.gmail.com>
-In-Reply-To: <CAMKF1soTKvJ=uYgm-Q51yq8xGcissdwf4nKzR3qxXKwPTUXrgA@mail.gmail.com>
+	<20191114194930.2786-14-schnitzeltony@gmail.com>
+	<CAMKF1sru3JvSpMvHHzrL1+D1Qkm4Orec8r0FcwrrKn=38gm5sg@mail.gmail.com>
+In-Reply-To: <CAMKF1sru3JvSpMvHHzrL1+D1Qkm4Orec8r0FcwrrKn=38gm5sg@mail.gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 14 Nov 2019 23:50:25 +0100
-Message-ID: <CALbNGRRL8f1RFYqO5Eb7BHEN=K12vRWxjoSmi1ReFiHT-6Adag@mail.gmail.com>
+Date: Thu, 14 Nov 2019 23:51:40 +0100
+Message-ID: <CALbNGRQZE0ScPCq973vQsWttB4-rPxU7_ZKCvtvSpnAYUffnPg@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 15/16] libwacom: initial add 0.33
+Subject: Re: [PATCH 13/16] geocode-glib: initial add 3.26.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Nov 2019 22:50:36 -0000
+X-List-Received-Date: Thu, 14 Nov 2019 22:51:51 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
- On Thu, Nov 14, 2019 at 10:39 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Thu, Nov 14, 2019 at 11:13 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
 > On Thu, Nov 14, 2019 at 11:51 AM Andreas M=C3=BCller <schnitzeltony@gmail=
 .com> wrote:
 > >
-> > * it is a dependency for upcoming gnome-settings-daemon
-> > * there are later versions of libwacom availabvle but due to genaration=
- of
-> >   udev-rule at build time these versions open nasty native dependencies=
-:
-> >   libgudev-native -> udev-native
+> > It is a dependency for upcoming gnome-settings-daemon
 > >
 > > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 > > ---
-> >  .../recipes-support/libwacom/libwacom_0.33.bb      | 14 ++++++++++++++
+> >  .../geocode-glib/geocode-glib_3.26.1.bb       | 20 +++++++++++++++++++
+> >  1 file changed, 20 insertions(+)
+> >  create mode 100644 meta-gnome/recipes-gnome/geocode-glib/geocode-glib_=
+3.26.1.bb
+> >
+> > diff --git a/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.1.=
+bb b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.1.bb
+> > new file mode 100644
+> > index 000000000..dc218f3a3
+> > --- /dev/null
+> > +++ b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.1.bb
+> > @@ -0,0 +1,20 @@
+> > +SUMMARY =3D "A convenience library for the geocoding"
+> > +
+> > +LICENSE =3D "LGPLv2"
 >
-> the latest release is 1.1, any specific reasons to not use that ?
-Same: long time ago: The only thing I remember is that libwacom was
-not my friend exactly (anybody out there with wacom devices - gnome
-seems to rely on them..)
+> still at 2.0 and not 2.1 interesting.
 
-Will look into and why I chose to use old version. Maybe there is a
-chance to disable wacom in gnome-settings-daemon these days so we
-don't need it at all..
+will check
 
 Andreas
 
