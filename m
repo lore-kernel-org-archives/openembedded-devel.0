@@ -1,50 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C2BFD7FA28
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-il1-f196.google.com (mail-il1-f196.google.com
+	[209.85.166.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B0A57FA33
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 22:45:07 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id y10so8706353qto.3
+	Thu, 14 Nov 2019 22:50:36 +0000 (UTC)
+Received: by mail-il1-f196.google.com with SMTP id a7so6910443ild.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 14:45:09 -0800 (PST)
+	Thu, 14 Nov 2019 14:50:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=VVb5DAKrDpRmpXtmU0oBSdOEEHjfOF9eOsAWD78dr3c=;
-	b=F8mNcYHFXOkGNg4B3gaRCnnfB+5S5rvPLVEJeNDGisqgNutmKKnXUTs5mIFhsjqgUz
-	FnjamUWnhffgLg1U8NBz6Q0p4oNmPOVCyfwzEj6qrryX+opSVyV0ZDE4qTNuvARKmFhP
-	NDzqhsQT10hhuYYNxdtE8z+nNMNZoDVjtav0aHAxz9xDsb2oi2VK3sd3Ek9+WfrL6fSr
-	cwYZsrK/txO8vs93EnPGw1ANTIqGvlsol6py/G2l224qcLH3kvctGQdKeXHEScpI14bV
-	hrbkVPxh7M45BW2/0Qhxwsqr9goj6O1L85+xR4/gUVj7aFOE7uiFqXeDm2ESRqn2gpeA
-	EE0g==
+	bh=4QJAKMG35WCP89uk6inOrmHbwWbQ/R3OI7PHQfB9/Ik=;
+	b=rRiUEwuWZK+hUAKzPQ+s64WFIkBduc4QzE9peIiwGk0VZF70Wb7ud59mMrvNtzs1DU
+	T/Ee72h9w0s+y6vgbDXmOLZ1IGgkLYtm8+Ww3KsY4JHfEHcszP0841+sTw0RQJ+gZKdH
+	tZOiaHF7w6EH7NHglx71CMnGmYtw37YEUOjDL6AVSZctGkGgBNLqj4I/aEbveeM4W01F
+	MtIEu2VjRtevTzjq1uFg7D4df8bC7CYlhomYlHePEa/PfWthMsCUWOGD8aG0YtjlkOri
+	Scf9ISYhFLUi0U4+Tf+vRRXMx32Ck8KCBxvblhVM/JcNEzX1xRDwkda0Ltx7xS9yfFxu
+	o+WQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=VVb5DAKrDpRmpXtmU0oBSdOEEHjfOF9eOsAWD78dr3c=;
-	b=bnapf6916uoQG5j/ZrkmW+atxI9AMyMJi4AzX+RnfLIR2tllfmCFpQkHUkZZCJ4BGo
-	aLzCIUBaH/fPR7QcH6iP3HSOEl1ONNJ04/B4dWETQ+hO/AxRPlR9YeH+r8Gscr1SOSfx
-	0kpk2ObRkHgS0DhwhS0jaLEzhmE9fBv2pgnVy6M6rs+hB7npvWHuFbsqGWTV7kglNOev
-	xuSMpnHZiL5r4nA5AywSi1OkbP2gyCWtEfe7Zr/TWqRWro+1sacnfX7g25tOw03TNM62
-	fv2OLpdbsG45U21Os8+vV681/qF7zec8XPxuH1uiH1+OpjVQewNZC/P0mv6zXobTV/XG
-	CYBA==
-X-Gm-Message-State: APjAAAUkJXElnXY+mmT0vD2wDZZ91uxtbCiyYyil7c3eVyPoKFMSXoWg
-	ULLu60/yy/7NywK6f3FQJUr5p7tcUFGllJJrFxI=
-X-Google-Smtp-Source: APXvYqyLPj73TkZcRFBAXtBClXaPiRkOOLVQ2EtzyVBIjaSsorv2XERZ1GKRHNnaCK+cB3lac0L2OhkZd5sX1Lb4gFw=
-X-Received: by 2002:ac8:5557:: with SMTP id o23mr4960960qtr.378.1573771508209; 
-	Thu, 14 Nov 2019 14:45:08 -0800 (PST)
+	bh=4QJAKMG35WCP89uk6inOrmHbwWbQ/R3OI7PHQfB9/Ik=;
+	b=S7SPU7WQ90+SCNKPOWH2Ml9EACQCfLEX6vnRTV/IP6wKMrb1kDfoojsVbj0exwUkqy
+	UxxpHNpcxsYTl7s39N6WU/AaoQVPpbdukPmxOe+5Jp6/n1X5JEIBj0mXbQb0ZjgK0gXz
+	54lqGqSUTAD11NP+JvpCDotMgwhc/OK/4ryuAN7v+j/HSebrgU/vM9siyuDZphUwE2mh
+	b2gwz7zaH2Qv2VIvXP6jF+VBzUPgqhI+vgnJZGJcyVEXWNcdIhtf/TT02bdleeE6JVUS
+	4fxxdTF9S4Q14HDgt3HFp3uINTyQdURb0+hQzYWeKzpyKX9/MtxknnuTt7SS8ZHTgtHM
+	Qh2g==
+X-Gm-Message-State: APjAAAXTGtbtSZqUfYLP87qruppP0+x+6pyAWCDraUCJaGxJ4BmOCNl9
+	2g/P5TCJzxC7cvyYR0dYNImqUqR9JpZQwMjpRHc=
+X-Google-Smtp-Source: APXvYqx9ppnVGCxiTonBG8xpiMptbmAqz5mV8Gjmn2WNtmRfDe6EvkFZyyqw7TJTfSsuLSlmIQn7wFCXnoAyhP4fYe0=
+X-Received: by 2002:a92:5cce:: with SMTP id d75mr4988604ilg.299.1573771837345; 
+	Thu, 14 Nov 2019 14:50:37 -0800 (PST)
 MIME-Version: 1.0
 References: <20191114194930.2786-1-schnitzeltony@gmail.com>
-	<20191114194930.2786-5-schnitzeltony@gmail.com>
-	<CAMKF1sqekHs4t7b6pa=uN6_kCvS0eOJCaDupYXz5SjrnZvACbg@mail.gmail.com>
-	<CALbNGRR7UPfkK1mO-Pz1W=bX0b0Bqs+XAb1f0hDwizE9MM1dDw@mail.gmail.com>
-In-Reply-To: <CALbNGRR7UPfkK1mO-Pz1W=bX0b0Bqs+XAb1f0hDwizE9MM1dDw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 14 Nov 2019 14:44:41 -0800
-Message-ID: <CAMKF1sqsxg2Jy8eu7ibR9rPhXeYDeDGJ5g2k6v4auCk50Pdxeg@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+	<20191114194930.2786-16-schnitzeltony@gmail.com>
+	<CAMKF1soTKvJ=uYgm-Q51yq8xGcissdwf4nKzR3qxXKwPTUXrgA@mail.gmail.com>
+In-Reply-To: <CAMKF1soTKvJ=uYgm-Q51yq8xGcissdwf4nKzR3qxXKwPTUXrgA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 14 Nov 2019 23:50:25 +0100
+Message-ID: <CALbNGRRL8f1RFYqO5Eb7BHEN=K12vRWxjoSmi1ReFiHT-6Adag@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 04/16] evolution-data-server: upgrade 3.26.6 -> 3.34.1 and rework
+Subject: Re: [PATCH 15/16] libwacom: initial add 0.33
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,34 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Nov 2019 22:45:07 -0000
+X-List-Received-Date: Thu, 14 Nov 2019 22:50:36 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 14, 2019 at 2:38 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
+ On Thu, Nov 14, 2019 at 10:39 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> On Thu, Nov 14, 2019 at 11:10 PM Khem Raj <raj.khem@gmail.com> wrote:
+> On Thu, Nov 14, 2019 at 11:51 AM Andreas M=C3=BCller <schnitzeltony@gmail=
+.com> wrote:
 > >
-> > this patch was needed for musl build, and it was marked not upstream
-> > worthy, so I wonder
-> > if we drop it then will it fail musl build.
-> Thanks for review
+> > * it is a dependency for upcoming gnome-settings-daemon
+> > * there are later versions of libwacom availabvle but due to genaration=
+ of
+> >   udev-rule at build time these versions open nasty native dependencies=
+:
+> >   libgudev-native -> udev-native
+> >
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > ---
+> >  .../recipes-support/libwacom/libwacom_0.33.bb      | 14 ++++++++++++++
 >
-> Honestly: I don't remember exactly -  base of this patch was May this yea=
-r...
->
-> But I think musl-patch did not apply any more and at that time I was a
-> good boy and tested musl (and in case I am still :)...
->
-> Whatever - could you give autobuilder a try because the story is
-> simple: A 'it works for me' is not enough. In case of fallout: I'll
-> take care - remember gnome related dances we had recently...
->
+> the latest release is 1.1, any specific reasons to not use that ?
+Same: long time ago: The only thing I remember is that libwacom was
+not my friend exactly (anybody out there with wacom devices - gnome
+seems to rely on them..)
 
-No problems, I am patient, and thanks for GNOME 3 recipe
-contributions, I can then use gnome3 images instead of xfce for my
-tests.
+Will look into and why I chose to use old version. Maybe there is a
+chance to disable wacom in gnome-settings-daemon these days so we
+don't need it at all..
 
-> Andreas
+Andreas
 
