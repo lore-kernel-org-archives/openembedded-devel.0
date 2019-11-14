@@ -1,51 +1,33 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
-	[209.85.210.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 740557F8A4
+Return-Path: <leon.anavi@konsulko.com>
+X-Greylist: delayed 2623 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 14 Nov 2019 18:04:04 UTC
+Received: from anavi.org (anavi.technology [91.215.217.29])
+	by mail.openembedded.org (Postfix) with ESMTP id 139F87F8BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 14:27:04 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id n19so1192312otk.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 06:27:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=TYkagoS5o3iLHRC22t1b/Mh0ldSxm8jJ8FXKcDVin0Q=;
-	b=YtQ88oORD7Z8Qz2LyC7tjd2taXKnmWUhHMRP6L07KIHD6opajq1Fnzpf11GIn/3BA6
-	45nZ4gYVMkgzd5nuPyaDzd9E2zbfPLycqeNx8idggx0mHlqds3hm5cPladtYmEsFs1IC
-	mp7YTcC/4Z0SQadmoAIImH/MCFGqleLTfQUxouBx//Fx7OHoDeT+ua22eI/PsTGhP1Ag
-	unzdC59P7XJbYwXsza8duPVaM/rRrcSa9exi5M5ZM5cSki0GZxOPoDsYv5C1UzLPAc5t
-	+WnSwoUXDoGf/N+x99OjDGWT1+1i1E8Jf4yzEzdAHbZmOD007cIJgUI/cPalL8xYrlrR
-	ARPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=TYkagoS5o3iLHRC22t1b/Mh0ldSxm8jJ8FXKcDVin0Q=;
-	b=le869JP4YLPX2ZquiIsjUBDD015K+g/jtK+CP/Hvdkor6+AUr1i0NyTAO/VYRVM00S
-	yDtZDniwzhWg0WG49QSz5lQZiLY+zkwFw95+J3NcW4YfQMdeSwNKOZce2WenRRC1XaT3
-	lyJ+XOtmMzy+LL6YaPtaii4H9huUmH42jND9Qs9I5oWYvS1+qHIG73RB9wk4XSgDYcdo
-	2XXC1VcY3dJR9hEpw/4xIn013QZInZBiW+wYrgu2WKOJ9T1erkjizwiLA7QbAr6y/wHQ
-	ghNizbGUOCAytfsyqDWqj9H/LY+etWVyLlJGm2P7MeauRis4Ln9SdFGxAo1tXw9Ysnuj
-	CE5Q==
-X-Gm-Message-State: APjAAAXwnDTkInXJGPiXkwVaWhm+hbcnrpI9CtV6+mor9AtwLPERpiMf
-	WewrEJrha+WC+SvKVX1TQEADGqkEs6c=
-X-Google-Smtp-Source: APXvYqwagIugg0aLH3XsAZPBppj+k7rhaLfSQmt1GpLxT/txWWlBL4UmA4VPS69MoVNN1T+YkRcF0g==
-X-Received: by 2002:a9d:6289:: with SMTP id x9mr8051431otk.34.1573741624827;
-	Thu, 14 Nov 2019 06:27:04 -0800 (PST)
-Received: from nick-bbestie.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	h22sm1747894otr.36.2019.11.14.06.27.03
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 14 Nov 2019 06:27:04 -0800 (PST)
-From: Nicola Lunghi <nick83ola@gmail.com>
+	Thu, 14 Nov 2019 18:04:04 +0000 (UTC)
+Received: from [78.130.245.67] (port=59926 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1iVIn3-0008B9-JD; Thu, 14 Nov 2019 19:20:21 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Nov 2019 14:26:43 +0000
-Message-Id: <20191114142641.17385-1-nick83ola@gmail.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Subject: [meta-python][PATCH] python-dbus-next: fix recipe position
+Date: Thu, 14 Nov 2019 19:20:10 +0200
+Message-Id: <1573752010-26608-1-git-send-email-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.7.4
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [meta-oe][PATCH] surf: Add simple web browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,23 +40,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Nov 2019 14:27:04 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 14 Nov 2019 18:04:05 -0000
 
-the previous patch:
- 903bfb78a0 python3-dbus-next: first commit of dbus-next 0.1.2
+Add a recipe for surf, a simple web browser based on WebKit2/GTK+.
 
-was put in the wrong folder. This fixed that.
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- .../python/{python3-dbus-next => }/python3-dbus-next_0.1.2.bb     | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-dbus-next => }/python3-dbus-next_0.1.2.bb (100%)
+ .../0001-config.mk-Fix-compiler-and-linker.patch   | 36 ++++++++++++++++++++++
+ meta-oe/recipes-graphics/surf/surf_2.0.bb          | 30 ++++++++++++++++++
+ 2 files changed, 66 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+ create mode 100644 meta-oe/recipes-graphics/surf/surf_2.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-dbus-next/python3-dbus-next_0.1.2.bb b/meta-python/recipes-devtools/python/python3-dbus-next_0.1.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-dbus-next/python3-dbus-next_0.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-dbus-next_0.1.2.bb
+diff --git a/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+new file mode 100644
+index 0000000..a3e33ea
+--- /dev/null
++++ b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+@@ -0,0 +1,36 @@
++From df199f82752398f86d2332dce53f52e2cfb50c87 Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Thu, 14 Nov 2019 14:28:39 +0000
++Subject: [PATCH] config.mk: Fix compiler and linker
++
++Do not set explicitly compiler and linker.
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ config.mk | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/config.mk b/config.mk
++index df6e812..bf07406 100644
++--- a/config.mk
+++++ b/config.mk
++@@ -15,8 +15,8 @@ GTKINC = `pkg-config --cflags gtk+-3.0 webkit2gtk-4.0`
++ GTKLIB = `pkg-config --libs gtk+-3.0 webkit2gtk-4.0`
++ 
++ # includes and libs
++-INCS = -I. -I/usr/include -I${X11INC} ${GTKINC}
++-LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 ${GTKLIB} -lgthread-2.0
+++INCS = ${GTKINC}
+++LIBS = -lc -lX11 ${GTKLIB} -lgthread-2.0
++ 
++ # flags
++ CPPFLAGS = -DVERSION=\"${VERSION}\" -DWEBEXTDIR=\"${LIBPREFIX}\" -D_DEFAULT_SOURCE
++@@ -28,4 +28,4 @@ LDFLAGS = -s ${LIBS}
++ #LDFLAGS = ${LIBS}
++ 
++ # compiler and linker
++-CC = cc
+++#CC = cc
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-graphics/surf/surf_2.0.bb b/meta-oe/recipes-graphics/surf/surf_2.0.bb
+new file mode 100644
+index 0000000..98d3b23
+--- /dev/null
++++ b/meta-oe/recipes-graphics/surf/surf_2.0.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Simple web browser"
++DESCRIPTION = "Simple open source web browser based on WebKit2/GTK"
++HOMEPAGE = "https://surf.suckless.org/"
++SECTION = "x11/graphics"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b57e7f7720307a02d5a6598b00fe3afa"
++
++DEPENDS = "webkitgtk gtk+ gtk+3 glib-2.0 xserver-nodm-init"
++
++REQUIRED_DISTRO_FEATURES = "x11"
++
++SRC_URI = "git://git.suckless.org/surf;branch=surf-webkit2 \
++           file://0001-config.mk-Fix-compiler-and-linker.patch \
++"
++SRCREV = "b814567e2bf8bda07cea8de1c7a062f4aa437b65"
++
++S = "${WORKDIR}/git"
++
++inherit pkgconfig
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++do_install () {
++	install -d ${D}${bindir}
++	install -m 0644 ${S}/surf ${D}${bindir}
++	chmod +x ${D}${bindir}/surf
++}
++
++INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
++INHIBIT_PACKAGE_STRIP = "1"
 -- 
-2.20.1
+2.7.4
 
 
