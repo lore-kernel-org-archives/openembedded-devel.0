@@ -1,30 +1,50 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D6C17D72F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0FF787F6CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 05:41:08 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.68,302,1569254400"; d="scan'208";a="78438740"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 14 Nov 2019 13:41:08 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 214864CE1BE4
+	Thu, 14 Nov 2019 06:10:14 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id q22so3034767pgk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 13:32:53 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 14 Nov 2019 13:41:03 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Nov 2019 13:41:36 +0800
-Message-ID: <20191114054136.9597-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Wed, 13 Nov 2019 22:10:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ku4W+bh+KwKwhlC1EC4bZUwaB0j6S4PFdYhtjqV38jo=;
+	b=jw983nZubHKXjRq7E0UteH71HObdq57iTai9m+gg/SF9RTEEu2fDXcGW9dnA/D6Su8
+	nx6zDiop4cBtsZGeqmGl4dbMueWP9CeZ3KuN5X5ksYYFBswrtZoO4YSPgjirDwc3IngU
+	txZLSOVefRymNOGZQS+lPB5TTMHguAYMQ9XZ6KxuMgxwv31g46eSzeeN8Jrl21qZ3ESs
+	L25H1QBmMDXIAlzwphwEVUYfml3yqeLtVAa2tTNJVcqESph5tEJJVQdSZ6YX2OU0mWkV
+	XmlOpbmfcjZ5OntIagW9E/vn704sLBmw2xTZlV7zWpo2YGnfHbU4dZ8ziAPlxf45QQR3
+	ZruA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ku4W+bh+KwKwhlC1EC4bZUwaB0j6S4PFdYhtjqV38jo=;
+	b=CaquP/glVLzPel59ce/XaTKQ2L4MglRGv0YD08/cQDMzQiSnbYbBClagJAMurGxRc8
+	4F3WeWpWdrURySgrX7K7eH+mkYkykXUpNtrACFTtgbX5yZUp16HFiG/+5VV2p6fBWa/m
+	4RZosjLPNOgXHc95oEmhJWsWDFjQU4zTuGivaEjSRyuNa6rnUwa5+ipq1Cnu0pL3RWcb
+	ONBlC4C4aSjyoF6nnZs4DH0yewdP9M9AlwJctfpuX/5ILzzvx7xu9jKUSv67AFKAntuC
+	xOfCwiEtdhLfJegrNDf2CsaDr/z5Xas+dC4NVzAjxBw28mU38HhBSh53SKy+ZMNPLEDQ
+	VQyQ==
+X-Gm-Message-State: APjAAAUPMzKdnNzQlvf8qWTXKEErSmeurWC7DuOm7ACG0Q29lfqcY07S
+	hyc8Z3Kgn5AMI9Eyl1vYBdPBL4INZ8o=
+X-Google-Smtp-Source: APXvYqwJASS38fvYq6EMl1obsYdcRxSbc44v71Jb80Uuv022mBPGV9wTco0I9sMpvGytAm1nwhcgvg==
+X-Received: by 2002:a63:4961:: with SMTP id y33mr8395858pgk.264.1573711815326; 
+	Wed, 13 Nov 2019 22:10:15 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::30e8])
+	by smtp.gmail.com with ESMTPSA id
+	v15sm4735093pfe.44.2019.11.13.22.10.14
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 13 Nov 2019 22:10:14 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 Nov 2019 22:10:01 -0800
+Message-Id: <20191114061001.3605114-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 214864CE1BE4.AD0E4
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-tqdm: upgrade 4.31.1 -> 4.38.0
+Subject: [meta-oe][PATCH] python-six: Update to 1.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,44 +57,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Nov 2019 05:41:09 -0000
+X-List-Received-Date: Thu, 14 Nov 2019 06:10:15 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-tqdm.inc           | 4 ++--
- .../python/{python-tqdm_4.31.1.bb => python-tqdm_4.38.0.bb}   | 0
- .../python/{python3-tqdm_4.31.1.bb => python3-tqdm_4.38.0.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-tqdm_4.31.1.bb => python-tqdm_4.38.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-tqdm_4.31.1.bb => python3-tqdm_4.38.0.bb} (100%)
+ .../python/{python-six_1.12.0.bb => python-six_1.13.0.bb}         | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-devtools/python/{python-six_1.12.0.bb => python-six_1.13.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-tqdm.inc b/meta-python/recipes-devtools/python/python-tqdm.inc
-index 967a80c20..1e410f402 100644
---- a/meta-python/recipes-devtools/python/python-tqdm.inc
-+++ b/meta-python/recipes-devtools/python/python-tqdm.inc
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=054ef7105cba050017d1368262a1623c"
- 
- inherit pypi
- 
--SRC_URI[md5sum] = "807e8c13e16e3660ac88e05d711daeb0"
--SRC_URI[sha256sum] = "e22977e3ebe961f72362f6ddfb9197cc531c9737aaf5f607ef09740c849ecd05"
-+SRC_URI[md5sum] = "9a092a5878090996bbb0ed92bf572a8a"
-+SRC_URI[sha256sum] = "c1d677f3a85fa291b34bdf8f770f877119b9754b32673699653556f85e2c2f13"
- 
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-tqdm_4.31.1.bb b/meta-python/recipes-devtools/python/python-tqdm_4.38.0.bb
+diff --git a/meta-oe/recipes-devtools/python/python-six_1.12.0.bb b/meta-oe/recipes-devtools/python/python-six_1.13.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-tqdm_4.31.1.bb
-rename to meta-python/recipes-devtools/python/python-tqdm_4.38.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.31.1.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.38.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-tqdm_4.31.1.bb
-rename to meta-python/recipes-devtools/python/python3-tqdm_4.38.0.bb
+rename from meta-oe/recipes-devtools/python/python-six_1.12.0.bb
+rename to meta-oe/recipes-devtools/python/python-six_1.13.0.bb
 -- 
-2.20.1
-
-
+2.24.0
 
 
