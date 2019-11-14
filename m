@@ -1,52 +1,51 @@
 Return-Path: <nick83ola@gmail.com>
-Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com
-	[209.85.167.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E7C46C4D8
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+	[209.85.210.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 740557F8A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 12:49:24 +0000 (UTC)
-Received: by mail-oi1-f195.google.com with SMTP id n16so5152680oig.2
+	Thu, 14 Nov 2019 14:27:04 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id n19so1192312otk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Nov 2019 04:49:26 -0800 (PST)
+	Thu, 14 Nov 2019 06:27:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=OIkojVY+hPkBkuC07CBoJXwrxUQiQSmo/w4daAwrpxc=;
-	b=Xe6xBQrNfXqFxg7iyezxn2dU0Wvas54cVWAFJp18O6ccx3kRWYuOLhuc7h/kNya4Db
-	0egzAFJZJRo0CmmWAX0wUccTOWPxbUGJ1MuL+M6eO4anxLrgDOgrCJfYs+4oQkcUrttW
-	m6olvYHbMwPTW7FfpRk2qsMuX9s8z7UhaYBPrnKfDrimWdx4zH9CMouiRwKcP3otg1qA
-	vnAHGuhkW3HKTq9H6bLrVuraLdK7qIvyNUoMJWP4sv658D6BeLfDv6IgJGDTkLEEi/HQ
-	1VzQHgfPANbBk8ql3epVbIIZJeMKJcXfC+7RwRuxOriHdpVr31qVwqy3dG7BlQVgGBOE
-	kbuQ==
+	bh=TYkagoS5o3iLHRC22t1b/Mh0ldSxm8jJ8FXKcDVin0Q=;
+	b=YtQ88oORD7Z8Qz2LyC7tjd2taXKnmWUhHMRP6L07KIHD6opajq1Fnzpf11GIn/3BA6
+	45nZ4gYVMkgzd5nuPyaDzd9E2zbfPLycqeNx8idggx0mHlqds3hm5cPladtYmEsFs1IC
+	mp7YTcC/4Z0SQadmoAIImH/MCFGqleLTfQUxouBx//Fx7OHoDeT+ua22eI/PsTGhP1Ag
+	unzdC59P7XJbYwXsza8duPVaM/rRrcSa9exi5M5ZM5cSki0GZxOPoDsYv5C1UzLPAc5t
+	+WnSwoUXDoGf/N+x99OjDGWT1+1i1E8Jf4yzEzdAHbZmOD007cIJgUI/cPalL8xYrlrR
+	ARPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=OIkojVY+hPkBkuC07CBoJXwrxUQiQSmo/w4daAwrpxc=;
-	b=o5qnqi6Q0kEn5HN/BkQnfnphmsOFEMyXfnTXMc9KKrj2r5Nu6hXHinAHPeJZVtopK8
-	xFOTzFXCEJZsGGfxqygFnA6EljbyQfw/I0sg0dVcUD09v7vx7hWQYrSPwRjffF17dize
-	1oeR712r7y9reXkhpKXMUYo32MkB/+ar4xW6pbLvCOoCrLYqMtzlc7mVCZUTbYM9nILP
-	5+KPBndIzNxskzr8qfR9grRf+rD+3ZWd4Hymg0WChi8UBoQt0Gw0Lz4ldrma0KPrKE9E
-	Xv6/jGe6GjGAPwDzWUWpKFxnX2y3ZHtPfQ4fETYANe/jylsqmALXUHdSkUNS5B6besUV
-	M61g==
-X-Gm-Message-State: APjAAAWCOvUDo4rr+Tv40+AWdSvBt4GSkGYVnfEWIT8ud1UbGbEGycFY
-	g61OwYP4+EiDLnA9DfR9kogpkH3pgEY=
-X-Google-Smtp-Source: APXvYqzmGHOQbLepfpDDkW0nUzt1Wuu5BKSSSInXIe50jU8nuaCAwhvSrWvHJNRHyEMgD/EKFBfmpg==
-X-Received: by 2002:a05:6808:495:: with SMTP id
-	z21mr3426005oid.18.1573735765497; 
-	Thu, 14 Nov 2019 04:49:25 -0800 (PST)
+	bh=TYkagoS5o3iLHRC22t1b/Mh0ldSxm8jJ8FXKcDVin0Q=;
+	b=le869JP4YLPX2ZquiIsjUBDD015K+g/jtK+CP/Hvdkor6+AUr1i0NyTAO/VYRVM00S
+	yDtZDniwzhWg0WG49QSz5lQZiLY+zkwFw95+J3NcW4YfQMdeSwNKOZce2WenRRC1XaT3
+	lyJ+XOtmMzy+LL6YaPtaii4H9huUmH42jND9Qs9I5oWYvS1+qHIG73RB9wk4XSgDYcdo
+	2XXC1VcY3dJR9hEpw/4xIn013QZInZBiW+wYrgu2WKOJ9T1erkjizwiLA7QbAr6y/wHQ
+	ghNizbGUOCAytfsyqDWqj9H/LY+etWVyLlJGm2P7MeauRis4Ln9SdFGxAo1tXw9Ysnuj
+	CE5Q==
+X-Gm-Message-State: APjAAAXwnDTkInXJGPiXkwVaWhm+hbcnrpI9CtV6+mor9AtwLPERpiMf
+	WewrEJrha+WC+SvKVX1TQEADGqkEs6c=
+X-Google-Smtp-Source: APXvYqwagIugg0aLH3XsAZPBppj+k7rhaLfSQmt1GpLxT/txWWlBL4UmA4VPS69MoVNN1T+YkRcF0g==
+X-Received: by 2002:a9d:6289:: with SMTP id x9mr8051431otk.34.1573741624827;
+	Thu, 14 Nov 2019 06:27:04 -0800 (PST)
 Received: from nick-bbestie.garage.tyco.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	k135sm1781247oih.54.2019.11.14.04.49.24
+	h22sm1747894otr.36.2019.11.14.06.27.03
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 14 Nov 2019 04:49:24 -0800 (PST)
+	Thu, 14 Nov 2019 06:27:04 -0800 (PST)
 From: Nicola Lunghi <nick83ola@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Nov 2019 12:48:52 +0000
-Message-Id: <20191114124851.9868-1-nick83ola@gmail.com>
+Date: Thu, 14 Nov 2019 14:26:43 +0000
+Message-Id: <20191114142641.17385-1-nick83ola@gmail.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python-rfc3986-validator: add recipe
+Subject: [meta-python][PATCH] python-dbus-next: fix recipe position
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,108 +58,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Nov 2019 12:49:25 -0000
+X-List-Received-Date: Thu, 14 Nov 2019 14:27:04 -0000
 Content-Transfer-Encoding: 8bit
 
-This is an optional dependency for python-jsonschema
+the previous patch:
+ 903bfb78a0 python3-dbus-next: first commit of dbus-next 0.1.2
 
-Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+was put in the wrong folder. This fixed that.
 ---
- .../python/python-rfc3986-validator.inc       | 23 +++++++++++++
- ...e-pytest-runner-to-test_requirements.patch | 32 +++++++++++++++++++
- .../python/python-rfc3986-validator_0.1.1.bb  |  2 ++
- .../python/python3-rfc3986-validator_0.1.1.bb |  2 ++
- 4 files changed, 59 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-rfc3986-validator.inc
- create mode 100644 meta-python/recipes-devtools/python/python-rfc3986-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
- create mode 100644 meta-python/recipes-devtools/python/python-rfc3986-validator_0.1.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-rfc3986-validator_0.1.1.bb
+ .../python/{python3-dbus-next => }/python3-dbus-next_0.1.2.bb     | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-dbus-next => }/python3-dbus-next_0.1.2.bb (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-rfc3986-validator.inc b/meta-python/recipes-devtools/python/python-rfc3986-validator.inc
-new file mode 100644
-index 0000000000..71f7a7904f
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-rfc3986-validator.inc
-@@ -0,0 +1,23 @@
-+SUMMARY = "Pure python rfc3986 validator"
-+HOMEPAGE = "https://github.com/naimetti/rfc3986-validator"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a21b13b5a996f08f7e0b088aa38ce9c6"
-+
-+FILESEXTRAPATHS_prepend := "${THISDIR}/python-rfc3986-validator:"
-+
-+SRC_URI[md5sum] = "47f7657b790aaf6011a1ab3d86c6be95"
-+SRC_URI[sha256sum] = "3d44bde7921b3b9ec3ae4e3adca370438eccebc676456449b145d533b240d055"
-+
-+PYPI_PACKAGE = "rfc3986_validator"
-+
-+inherit pypi
-+
-+SRC_URI_append = " \
-+    file://0001-setup.py-move-pytest-runner-to-test_requirements.patch \
-+"
-+
-+RDEPENDS_${PN} += "\
-+    python3-core \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-rfc3986-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch b/meta-python/recipes-devtools/python/python-rfc3986-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
-new file mode 100644
-index 0000000000..8a646874e8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-rfc3986-validator/0001-setup.py-move-pytest-runner-to-test_requirements.patch
-@@ -0,0 +1,32 @@
-+From 3531ff73631a0d59234eb4713e7b3a7f5ea57bbb Mon Sep 17 00:00:00 2001
-+From: Nicola Lunghi <nicola.lunghi@jci.com>
-+Date: Thu, 14 Nov 2019 12:17:51 +0000
-+Subject: [PATCH] setup.py: move pytest-runner to test_requirements
-+
-+This fixes an issue with yocto build.
-+pytest-runner is only needed when running tests.
-+
-+Upstream-Status: Pending
-+---
-+ setup.py | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 53ebea7..ebb0de2 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -10,9 +10,9 @@ with open('README.md') as readme_file:
-+ 
-+ requirements = []
-+ 
-+-setup_requirements = ['pytest-runner', ]
-++setup_requirements = []
-+ 
-+-test_requirements = ['pytest>=3', ]
-++test_requirements = ['pytest>=3', 'pytest-runner']
-+ 
-+ setup(
-+     author="Nicolas Aimetti",
-+-- 
-+2.20.1
-+
-diff --git a/meta-python/recipes-devtools/python/python-rfc3986-validator_0.1.1.bb b/meta-python/recipes-devtools/python/python-rfc3986-validator_0.1.1.bb
-new file mode 100644
-index 0000000000..9dddbb4a99
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-rfc3986-validator_0.1.1.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools
-+require python-rfc3986-validator.inc
-\ No newline at end of file
-diff --git a/meta-python/recipes-devtools/python/python3-rfc3986-validator_0.1.1.bb b/meta-python/recipes-devtools/python/python3-rfc3986-validator_0.1.1.bb
-new file mode 100644
-index 0000000000..6491308cbb
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-rfc3986-validator_0.1.1.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-rfc3986-validator.inc
-\ No newline at end of file
+diff --git a/meta-python/recipes-devtools/python/python3-dbus-next/python3-dbus-next_0.1.2.bb b/meta-python/recipes-devtools/python/python3-dbus-next_0.1.2.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-dbus-next/python3-dbus-next_0.1.2.bb
+rename to meta-python/recipes-devtools/python/python3-dbus-next_0.1.2.bb
 -- 
 2.20.1
 
