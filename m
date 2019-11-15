@@ -1,48 +1,51 @@
 Return-Path: <nick83ola@gmail.com>
-Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com
-	[209.85.167.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BBDE7F7A1
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+	[209.85.128.49])
+	by mail.openembedded.org (Postfix) with ESMTP id DF1CE7F990
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2019 16:29:37 +0000 (UTC)
-Received: by mail-lf1-f67.google.com with SMTP id j14so8470242lfk.6
+	Fri, 15 Nov 2019 16:46:28 +0000 (UTC)
+Received: by mail-wm1-f49.google.com with SMTP id t26so11150332wmi.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2019 08:29:39 -0800 (PST)
+	Fri, 15 Nov 2019 08:46:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=brkGbgqWGvA9bvH6Y94VY+Mj7rT2JWqbdisSFm3l2BM=;
-	b=o1K4OipE/3A0pzsLJBlppfwcNs2S94w8goh2LQoick6cvVSKnxAe0q7ywMFICsWIwB
-	LRd4wBVkvfK3DpOh64JQG9sB9IZji11M+NZDiko4dN0IKvcoIwD7VrcWzit6aTamZjIq
-	hXlFFyTkuyCJeaM+ijEkdYdTvrpoGQ1g9YtKBw4NLntR1YK4Vt+muK2TIFHCJyIYp7MA
-	w/afh3YR2Lo0Re0HVUGT7Ew6/zo+xcI+tYZdErShp8haFdwbPfp3Z2muzSuubtyUtuYp
-	KPU/YX4vRq/HqswKXelt2vaMABcKLHPsyIi1moeXlNCgmiuLoq/QOZj7w0duisravAm1
-	23jw==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=9+LheZNh7AXL4GpjX7QQ6R50ZsBowM+e2UIM3+MLc9Y=;
+	b=qJnC+BgrliI/RzFdforN+3Sf0chdRVfOGx509YH3vNCynr4e5sxMwg0olY5ybPl24Q
+	SIEaSA81+fnvVIvsksTF9GIWmOdi9QWwuSmObefw1M3rQZa3JxNpZ5kTWvkB+WRdiNEn
+	NnKsk5j5O8aoQNKZFGzzl3NV8G7NdACMGyQ19xWR5c2yUPJ6yYEHJpBZzlIFpwFLGmt1
+	WCI47mjAvtuT2gmXLoIxmisX9DEkEsG4PYP4hL6ptx7Gdyln303U1z6G1eFlWlWo1+S8
+	LYIVlQA05XmKl5mbnawA7xXZxI+RR27YLCmufEqN5Deavic6NB1bN+KmLzYZ+i/YU637
+	W2UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=brkGbgqWGvA9bvH6Y94VY+Mj7rT2JWqbdisSFm3l2BM=;
-	b=claI/Nkmblb/ig8yYGqK1qbWuJqbkWpJQ/0b7eC6ivtGp/0A2kxUHMiAIFQYb4LJ0U
-	0xU3J2Uj+oE4OkATz6P0sEAMxZ1OY+Mu+TK2uBuuDXfion51YZgl/jhqYAr9ft4QrYCs
-	3kQsGimupHCCIDR+jvDC8FGXuHJJLm2GqPba3hb/ghW4P1aUQtKw+W/pPX+doOhAZkch
-	qGT6U8dtkuIoVWgnRSxEzNahSfb7SwQpayEX9nN+8JTlkymg+X/3Pbvrx427JymqqXLV
-	GLT6ASVgkZyhdlaeWkRAxHVC0Obz94z0L/dFITpKMweE1eEutozp65bpM5kKKJsK/VHO
-	5cbw==
-X-Gm-Message-State: APjAAAWOtDsU+R5ZxTHavwDsNJLUSb/lbjSnIqcvBiHbjU2KUF5K6YdG
-	UcnGdYlCpdPKpGRRp6KgR8t8zbrdohPi7Yt1edQ=
-X-Google-Smtp-Source: APXvYqynHvQrtwwteErS6zC7MoW9dkw5aFenJKYZYTOcQpj6jbU3z/hY+ZpZ1FQjyXj1KXJ+/jUp3o94v5icHlLirtQ=
-X-Received: by 2002:ac2:4469:: with SMTP id y9mr12071894lfl.33.1573835378083; 
-	Fri, 15 Nov 2019 08:29:38 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=9+LheZNh7AXL4GpjX7QQ6R50ZsBowM+e2UIM3+MLc9Y=;
+	b=AcmhWpNs9jyw8S/lNzkDI4Ez7G7rjNMmuTVE17O7b9vdj2mKsghYmvrQWT9WATuVHq
+	1vZ57ZfxoBESwP68ox31RgMwkkwfkNbdx+xfIuwPQLyx1OSAmeDBQklIi7ldntgeAQ6e
+	9v7dulMHs+VM1pBKtaCe18IQwIxuOwHhUlasGgAKVLOZfbaa0XUJabhHa9bb0Kmj9wak
+	SDogYWNxOmvZQWY24OJaZUsQT6DKI5WWAe8eUeeaRJtyrZcrVo7DFzo1MxSidOrsCIJw
+	jB0tp4jFxjBI7XV5+Rh/ghFpR61P/HbDePX0hqWoWnI3RTSyJrj22U+w487JhWonbLWr
+	XE6Q==
+X-Gm-Message-State: APjAAAUM5wv/BhPfdAj/mr5dv0pXXGFiJSUt0gzvoG18WrfayWsY6RMt
+	JtGy+dlmbYWu9O6yRA1a0cqCUwrnFJ4=
+X-Google-Smtp-Source: APXvYqwbxg2nTzDMfJHCQTCRT0OC/wnBWNfWujmTgh1yaAliU7JZqjvwWc7zs5f2yTxZOvxz7QtcxQ==
+X-Received: by 2002:a1c:bc89:: with SMTP id m131mr16516826wmf.14.1573836388848;
+	Fri, 15 Nov 2019 08:46:28 -0800 (PST)
+Received: from nick-bbestie.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	b8sm11702210wrt.39.2019.11.15.08.46.27
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 15 Nov 2019 08:46:27 -0800 (PST)
+From: Nicola Lunghi <nick83ola@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 15 Nov 2019 16:46:11 +0000
+Message-Id: <20191115164610.32167-1-nick83ola@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20191114142641.17385-1-nick83ola@gmail.com>
-	<CAMKF1spCmkONVx3TRKEU9hKXjbkN7w51K0T69h67OWuHRPLhSQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spCmkONVx3TRKEU9hKXjbkN7w51K0T69h67OWuHRPLhSQ@mail.gmail.com>
-From: nick83ola <nick83ola@gmail.com>
-Date: Fri, 15 Nov 2019 16:29:26 +0000
-Message-ID: <CABPh3UMAtC_cP8AMtjyO=BH7w=5b_tLM4HrbT47ZshrGPXxZMg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-dbus-next: fix recipe position
+Subject: [meta-python][PATCH v2] python-jsonschema: multiple fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,47 +58,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Nov 2019 16:29:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 15 Nov 2019 16:46:29 -0000
+Content-Transfer-Encoding: 8bit
 
-Thanks
-(sorry about this)
+- add second license file to LIC_FILES_CHKSUM for json module
+- add missing dependencies: six, datetime, importlib-metadata
+- add HOMEPAGE field
 
-On Thu, 14 Nov 2019 at 19:00, Khem Raj <raj.khem@gmail.com> wrote:
+Also:
+- add RDEPENDS for PACKAGECONFIG[format] for optional modules that are
+  not always needed. In particular rfc3987 and strict-rfc3339 are GPLv3
+  modules.
+- add missing idna and jsonpointer modules for PACKAGECONFIG[format]
 
-> Now that its building, its failing see
-> http://errors.yoctoproject.org/Errors/Details/275777/
->
-> perhaps its needing
->
-> PYPI_PACKAGE = "dbus_next"
->
-> On Thu, Nov 14, 2019 at 6:27 AM Nicola Lunghi <nick83ola@gmail.com> wrote:
-> >
-> > the previous patch:
-> >  903bfb78a0 python3-dbus-next: first commit of dbus-next 0.1.2
-> >
-> > was put in the wrong folder. This fixed that.
-> > ---
-> >  .../python/{python3-dbus-next => }/python3-dbus-next_0.1.2.bb     | 0
-> >  1 file changed, 0 insertions(+), 0 deletions(-)
-> >  rename meta-python/recipes-devtools/python/{python3-dbus-next => }/
-> python3-dbus-next_0.1.2.bb (100%)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python3-dbus-next/
-> python3-dbus-next_0.1.2.bb b/meta-python/recipes-devtools/python/
-> python3-dbus-next_0.1.2.bb
-> > similarity index 100%
-> > rename from meta-python/recipes-devtools/python/python3-dbus-next/
-> python3-dbus-next_0.1.2.bb
-> > rename to meta-python/recipes-devtools/python/python3-dbus-next_0.1.2.bb
-> > --
-> > 2.20.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+---
+ .../python/python-jsonschema.inc              | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
+
+diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
+index d9ccf1cad..c1b11a2cc 100644
+--- a/meta-python/recipes-devtools/python/python-jsonschema.inc
++++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
+@@ -1,15 +1,27 @@
+ SUMMARY = "An implementation of JSON Schema validation for Python"
++HOMEPAGE = "https://github.com/Julian/jsonschema"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8"
++LIC_FILES_CHKSUM = "file://COPYING;md5=7a60a81c146ec25599a3e1dabb8610a8 \
++                    file://json/LICENSE;md5=9d4de43111d33570c8fe49b4cb0e01af"
++DEPENDS += "${PYTHON_PN}-vcversioner-native ${PYTHON_PN}-setuptools-scm-native"
+ 
+ SRC_URI[md5sum] = "a802ab85600074a726ef6acc4e6a8148"
+ SRC_URI[sha256sum] = "2fa0684276b6333ff3c0b1b27081f4b2305f0a36cf702a23db50edb141893c3f"
+ 
+-DEPENDS += "${PYTHON_PN}-vcversioner-native ${PYTHON_PN}-setuptools-scm-native"
++PACKAGECONFIG ??= "format"
++PACKAGECONFIG[format] = ",,,\
++    ${PYTHON_PN}-idna \
++    ${PYTHON_PN}-jsonpointer \
++    ${PYTHON_PN}-webcolors \
++    ${PYTHON_PN}-rfc3987 \
++    ${PYTHON_PN}-strict-rfc3339 \
++"
+ 
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-attrs \
+     ${PYTHON_PN}-core \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-importlib-metadata \
+     ${PYTHON_PN}-io \
+     ${PYTHON_PN}-json \
+     ${PYTHON_PN}-netclient \
+@@ -17,9 +29,8 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-pkgutil \
+     ${PYTHON_PN}-pprint \
+     ${PYTHON_PN}-pyrsistent \
+-    ${PYTHON_PN}-rfc3987 \
+     ${PYTHON_PN}-shell \
+-    ${PYTHON_PN}-strict-rfc3339 \
++    ${PYTHON_PN}-six \
+     ${PYTHON_PN}-unittest \
+     ${PYTHON_PN}-setuptools-scm \
+ "
+-- 
+2.20.1
+
 
