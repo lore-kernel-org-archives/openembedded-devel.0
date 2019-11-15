@@ -1,50 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id B3B6C7C446
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F8727C326
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2019 20:47:34 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id j12so5451102plt.9
+	Fri, 15 Nov 2019 20:49:48 +0000 (UTC)
+Received: by mail-qt1-f179.google.com with SMTP id r20so12155342qtp.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2019 12:47:36 -0800 (PST)
+	Fri, 15 Nov 2019 12:49:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Cj23QssI4EFyrwZP+lOSgqo7Y6OCtMcE5mj6QHUiF6g=;
-	b=AE+meRMdjP+tejlohHYLzcV6SohW3fDOjpUhhYsTU7m5x8d55beFXZo2EAM0Ekyab9
-	ETHUl6zjIoiEZBZvhA4zwFJE/xzQK1Nude6ovzSTxUhRXPVs5trOhYEzynT9iwt1Uted
-	3sR2xcApMGjFuCyYix9kC2xphRp4GCBiNlEhAx0ddiGrAlmQynPfEsVZylKHNKE/0lDR
-	wc3nhePzZAMPajefpUMuzQMA4FAWdUbMybe62w0NZklHoutMkNlXUKbFNW0DaF/yaVFA
-	e15O2R/zoFwrnh/iIBhju8/iyxXTKQuIbSJw1cn/9xkuBfNc16nr/9/C1sxPX4N3uYq0
-	SI6w==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Nrr25VZK57srV0C9bNjb4dSOVECGgg5jj8yVCZ9Tyto=;
+	b=DTbGlrrUDrhYllHGC3USD3EUrYPmH0dWOvj/YuRQKxvuj8Oocps0FP/fgL+jYmX0eb
+	H+fO10/oTYBwJWkuFGogz7Ho0vgoMjc2oqtQ6XG3TqSl86efCFBjeYNikSGkNNxWlE46
+	gobJR/ERtGeWsr/bGEfTESwygW4191cZ9jh77ETHaT/DH+fUaCawgSWyTZpRMXKRfMiE
+	A0Dz7BUTbVNGmfMtvk3hGGdG3GKVUmQmo82Gmig+gfueKLf1Ej2ObtdAVo6hFb8BWP5Z
+	LernLYoXdPo8fRKcmeBuy5ybhSyxIkcsEtr/A5SwrUzjfBJLniIxT+/a5wYfHMATG58Z
+	lPPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Cj23QssI4EFyrwZP+lOSgqo7Y6OCtMcE5mj6QHUiF6g=;
-	b=AxPbILj6u+dulteChPxCmygU3aDjxi4rj0aokHu5Zegxj0yplXwfhF0DDWiTEafSxC
-	Oj/nbG8Rzk/6FQjuQZRdcZaH4a7sgJlzzPwGC/oLMkfo/Cq9ptww+7H1Inh29kIb0cwA
-	EXd4EUoKcMBx8ceAChotat/bG+o9xhGWDdQoE7wZgl7ZGojbneUx/bBS8P44HzCAc+yr
-	VH1WRBi6v2OqdK3Omo1cB2UIz4CtWSsIqsJYD2JfLoVbnJves4VtGnBEwMkDU77U9Ngh
-	H22Gz00NtxZfbJ2Oixydzh37SM/Mr/rbE2RBJsPepjSRK9cdPgBZ9QYswhUghnIt9Sdh
-	RIGQ==
-X-Gm-Message-State: APjAAAXKBCrlj0SZIiybulARaz+MvNPL0IDSKxV72iOyOwGIz8XWGv4P
-	xCeRwHH1N7i+cpQN0tUb4POOhLHadoo=
-X-Google-Smtp-Source: APXvYqxelxlBa0vcaNwyOHqZ9Impc4N1F1WYcXiXnxEXcmT19WbiA1bHDXhtNY8etYP+H4lCe9PBmA==
-X-Received: by 2002:a17:902:6b01:: with SMTP id
-	o1mr1857508plk.24.1573850855139; 
-	Fri, 15 Nov 2019 12:47:35 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::30e8])
-	by smtp.gmail.com with ESMTPSA id s15sm6524246pjp.3.2019.11.15.12.47.33
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 15 Nov 2019 12:47:34 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Nov 2019 12:47:20 -0800
-Message-Id: <20191115204720.1294151-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Nrr25VZK57srV0C9bNjb4dSOVECGgg5jj8yVCZ9Tyto=;
+	b=p3NT+e4hotucLUS5g1mezDCWYpTVVm4Xu1hjSs8gTR+9wiu55c953lv9q9PSgtxWvf
+	FZoXfZ9omReDBHBe16w0M26UpxUUYsn2uwrHJoBpu1tBkesPuESBcauZ7c8Mu4OUZR9j
+	G2srPeNWZk4D+BWGHSjVMdO6QTSP3uBkYCLo4NumqhwIKllB4TR2KqDx/pey3iq1alhC
+	UZIodF9326fmSvj+fVO9MxmotPsu/cWqBoB4VfUAd/LPHiBRHS7HenX75rUruPwGEA0d
+	hVAW5IxidkFqRNAN10XMFZoAN25Sl0cViPF7uQCxwTnkYN1Q//UUzFMrPVCFf13DPKCK
+	GHHw==
+X-Gm-Message-State: APjAAAWaq11hIbQdYu5s/8KWSfv9xO96kZt2CTHwgOf0t50QXs1Ug4sm
+	Xp/N4t/Qg9q2420MtyRh7XngbuvW2xkSahnJ6p8=
+X-Google-Smtp-Source: APXvYqxtSWk150kTix9FCtt+nS1y/DEFyywNUt8x/+gsoUxRhDpolUsaxeSmtwCRXZhyFqvSqpQa7vCuzZLGGGcr8uY=
+X-Received: by 2002:ac8:1415:: with SMTP id k21mr15566103qtj.80.1573850988352; 
+	Fri, 15 Nov 2019 12:49:48 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH] evince: Fix build with clang
+References: <1573752010-26608-1-git-send-email-leon.anavi@konsulko.com>
+	<dbae500e-b459-005e-ec2b-5d4f5ef66f18@gmail.com>
+	<2feeb01f-2110-e266-3bdb-635c38577c39@mailbox.org>
+	<30fccbf16335d228013fb5d59b0ae1cc18c25a38.camel@gmail.com>
+	<ea1acf07-73d8-0e08-8979-2e89c6552bbb@intel.com>
+In-Reply-To: <ea1acf07-73d8-0e08-8979-2e89c6552bbb@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 15 Nov 2019 12:49:21 -0800
+Message-ID: <CAMKF1sob3Znp-dXkpnr-avGtA=-t=yKtbU6ckW-w_zgmb8VeNg@mail.gmail.com>
+To: Ross Burton <ross.burton@intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] surf: Add simple web browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,132 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Nov 2019 20:47:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 15 Nov 2019 20:49:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Enhance the patch for printf format checking to make clang work as well
+On Fri, Nov 15, 2019 at 11:25 AM Ross Burton <ross.burton@intel.com> wrote:
+>
+> On 15/11/2019 17:30, Khem Raj wrote:
+> > On Fri, 2019-11-15 at 16:09 +0100, Carlos Rafael Giani wrote:
+> >> meta-browser would be more appropriate.
+> >
+> > I was contemplating that as well. but these layer has more chromium and
+> > firefox lineage
+>
+> But it's called meta-browser and not meta-firefox-and-chromium. :)
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
----
- ...002-add-a-formatting-attribute-check.patch | 96 ++++++++++++++++++-
- 1 file changed, 92 insertions(+), 4 deletions(-)
+certainly, worth proposing there.
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince/0002-add-a-formatting-attribute-check.patch b/meta-gnome/recipes-gnome/evince/evince/0002-add-a-formatting-attribute-check.patch
-index e87da90bce..c374fc9430 100644
---- a/meta-gnome/recipes-gnome/evince/evince/0002-add-a-formatting-attribute-check.patch
-+++ b/meta-gnome/recipes-gnome/evince/evince/0002-add-a-formatting-attribute-check.patch
-@@ -19,16 +19,104 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  cut-n-paste/unarr/common/unarr.c | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
--diff --git a/cut-n-paste/unarr/common/unarr.c b/cut-n-paste/unarr/common/unarr.c
--index 97ec92a..9e6e3ad 100644
- --- a/cut-n-paste/unarr/common/unarr.c
- +++ b/cut-n-paste/unarr/common/unarr.c
--@@ -92,7 +92,7 @@ size_t ar_get_global_comment(ar_archive *ar, void *buffer, size_t count)
-+@@ -92,7 +92,7 @@ size_t ar_get_global_comment(ar_archive
-      return ar->get_comment(ar, buffer, count);
-  }
-  
- -void ar_log(const char *prefix, const char *file, int line, const char *msg, ...)
--+void __attribute__((__format__ (__printf__, 4, 0))) ar_log(const char *prefix, const char *file, int line, const char *msg, ...)
-++void __attribute__((__format__ (__printf__, 4, 5))) ar_log(const char *prefix, const char *file, int line, const char *msg, ...)
-  {
-      va_list args;
-      va_start(args, msg);
-+--- a/cut-n-paste/synctex/synctex_parser_utils.c
-++++ b/cut-n-paste/synctex/synctex_parser_utils.c
-+@@ -87,11 +87,11 @@ void _synctex_free(void * ptr) {
-+ #   include <syslog.h>
-+ #endif
-+ 
-+-int _synctex_error(const char * reason, ...) __attribute__((__format__ (__printf__, 1, 2)));
-+-int _synctex_log(int level, const char * prompt, const char * reason, va_list arg) __attribute__((__format__ (__printf__, 3, 0)));
-+-
-+-int _synctex_log(int level, const char * prompt, const char * reason,va_list arg) {
-++static int _synctex_log(int level, const char * prompt, const char * reason, ...) SYNCTEX_PRINTF_FORMAT(3, 0);
-++static int _synctex_log(int level, const char * prompt, const char * reason, ...) {
-++	va_list arg;
-+ 	int result;
-++	va_start(arg, reason);
-+ #	ifdef SYNCTEX_RECENT_WINDOWS
-+ 	{/*	This code is contributed by William Blum.
-+         As it does not work on some older computers,
-+@@ -133,10 +133,10 @@ int _synctex_log(int level, const char *
-+     result += vfprintf(where, reason, arg);
-+     result += fprintf(where,"\n");
-+ #   endif
-++    va_end(arg);
-+ 	return result;
-+ }
-+ 
-+-__attribute__((__format__ (__printf__, 1, 0)))
-+ int _synctex_error(const char * reason,...) {
-+     va_list arg;
-+     int result;
-+@@ -355,6 +355,7 @@ char * _synctex_merge_strings(const char
-+ 		size_t len = strlen(temp);
-+ 		if(UINT_MAX-len<size) {
-+ 			_synctex_error("!  _synctex_merge_strings: Capacity exceeded.");
-++			va_end(arg);
-+ 			return NULL;
-+ 		}
-+ 		size+=len;
-+@@ -374,6 +375,7 @@ char * _synctex_merge_strings(const char
-+ 					if(dest != strncpy(dest,temp,size)) {
-+ 						_synctex_error("!  _synctex_merge_strings: Copy problem");
-+ 						free(result);
-++						va_end(arg);
-+ 						result = NULL;
-+ 						return NULL;
-+ 					}
-+--- a/cut-n-paste/synctex/synctex_parser.c
-++++ b/cut-n-paste/synctex/synctex_parser.c
-+@@ -8411,6 +8411,7 @@ struct synctex_updater_t {
-+     int length;             /*  the number of chars appended */
-+ };
-+ 
-++static int _synctex_updater_print(synctex_updater_p updater, const char * format, ...) SYNCTEX_PRINTF_FORMAT(2, 3);
-+ static int _synctex_updater_print(synctex_updater_p updater, const char * format, ...) {
-+     int result = 0;
-+     if (updater) {
-+@@ -8447,6 +8448,7 @@ static int vasprintf(char **ret,
-+ /**
-+  *  gzvprintf is not available until OSX 10.10
-+  */
-++static int _synctex_updater_print_gz(synctex_updater_p updater, const char * format, ...) SYNCTEX_PRINTF_FORMAT(2, 3);
-+ static int _synctex_updater_print_gz(synctex_updater_p updater, const char * format, ...) {
-+     int result = 0;
-+     if (updater) {
-+--- a/cut-n-paste/synctex/synctex_parser_utils.h
-++++ b/cut-n-paste/synctex/synctex_parser_utils.h
-+@@ -85,7 +85,11 @@ extern "C" {
-+ #	else
-+ #		define SYNCTEX_ARE_PATH_CHARACTERS_EQUAL(left,right) (toupper(left) != toupper(right))
-+ #	endif
-+-    
-++#	ifdef __GNUC__
-++#		define SYNCTEX_PRINTF_FORMAT(si, ftc) __attribute__ ((format (printf, si, ftc)))
-++#	else
-++#		define SYNCTEX_PRINTF_FORMAT(si, ftc)
-++#	endif    
-+ /*  This custom malloc functions initializes to 0 the newly allocated memory.
-+  *  There is no bzero function on windows. */
-+ void *_synctex_malloc(size_t size);
-+@@ -97,8 +101,8 @@ void _synctex_free(void * ptr);
-+ /*  This is used to log some informational message to the standard error stream.
-+  *  On Windows, the stderr stream is not exposed and another method is used.
-+  *	The return value is the number of characters printed.	*/
-+-    int _synctex_error(const char * reason,...);
-+-    int _synctex_debug(const char * reason,...);
-++    int _synctex_error(const char * reason,...) SYNCTEX_PRINTF_FORMAT(1, 2);
-++    int _synctex_debug(const char * reason,...) SYNCTEX_PRINTF_FORMAT(1, 2);
-+ 
-+ /*  strip the last extension of the given string, this string is modified!
-+  *  This function depends on the OS because the path separator may differ.
--- 
-2.24.0
-
+> Ross
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
