@@ -1,50 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
-	[209.85.160.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F8727C326
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 62ECD7F7E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2019 20:49:48 +0000 (UTC)
-Received: by mail-qt1-f179.google.com with SMTP id r20so12155342qtp.13
+	Sat, 16 Nov 2019 10:21:13 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id i13so13303241ioj.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2019 12:49:49 -0800 (PST)
+	Sat, 16 Nov 2019 02:21:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Nrr25VZK57srV0C9bNjb4dSOVECGgg5jj8yVCZ9Tyto=;
-	b=DTbGlrrUDrhYllHGC3USD3EUrYPmH0dWOvj/YuRQKxvuj8Oocps0FP/fgL+jYmX0eb
-	H+fO10/oTYBwJWkuFGogz7Ho0vgoMjc2oqtQ6XG3TqSl86efCFBjeYNikSGkNNxWlE46
-	gobJR/ERtGeWsr/bGEfTESwygW4191cZ9jh77ETHaT/DH+fUaCawgSWyTZpRMXKRfMiE
-	A0Dz7BUTbVNGmfMtvk3hGGdG3GKVUmQmo82Gmig+gfueKLf1Ej2ObtdAVo6hFb8BWP5Z
-	LernLYoXdPo8fRKcmeBuy5ybhSyxIkcsEtr/A5SwrUzjfBJLniIxT+/a5wYfHMATG58Z
-	lPPQ==
+	:cc; bh=i4z4L/uGJ9/usF9zSnLTXaUvRiv0b23YrD5KWzqpR/Q=;
+	b=uFnb/webszNmRhHdLVJmuwz9px2X6wCvSf5tI10ugU2hckUfNkpSOmKuMz6hqLFrn3
+	vS+B/qH3hS4qrtIWdgMNXk0o5i/FSK+L9inQ0upVYy/T027d7NIN19/96xVFGtHhnqYe
+	Hbj5D4AOfvOqWiIJLBTcWLROuOJI0TwzOHNZFCi93U3+P9hdEjQ3GodlLhMtVMyBoKkP
+	GvWxLBhPFVtk+GfH4sDfMvIZRRe0mag377yCscS/wLgRx0+N6inx89ZnS9WaNQHzjE/Y
+	NPyzZPx8v4AtVogN6gNIk0e5JnaKMaNxSMAK4hlvJWj/41sn9d9Bten+HyQgBDkkHJuE
+	m0Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=Nrr25VZK57srV0C9bNjb4dSOVECGgg5jj8yVCZ9Tyto=;
-	b=p3NT+e4hotucLUS5g1mezDCWYpTVVm4Xu1hjSs8gTR+9wiu55c953lv9q9PSgtxWvf
-	FZoXfZ9omReDBHBe16w0M26UpxUUYsn2uwrHJoBpu1tBkesPuESBcauZ7c8Mu4OUZR9j
-	G2srPeNWZk4D+BWGHSjVMdO6QTSP3uBkYCLo4NumqhwIKllB4TR2KqDx/pey3iq1alhC
-	UZIodF9326fmSvj+fVO9MxmotPsu/cWqBoB4VfUAd/LPHiBRHS7HenX75rUruPwGEA0d
-	hVAW5IxidkFqRNAN10XMFZoAN25Sl0cViPF7uQCxwTnkYN1Q//UUzFMrPVCFf13DPKCK
-	GHHw==
-X-Gm-Message-State: APjAAAWaq11hIbQdYu5s/8KWSfv9xO96kZt2CTHwgOf0t50QXs1Ug4sm
-	Xp/N4t/Qg9q2420MtyRh7XngbuvW2xkSahnJ6p8=
-X-Google-Smtp-Source: APXvYqxtSWk150kTix9FCtt+nS1y/DEFyywNUt8x/+gsoUxRhDpolUsaxeSmtwCRXZhyFqvSqpQa7vCuzZLGGGcr8uY=
-X-Received: by 2002:ac8:1415:: with SMTP id k21mr15566103qtj.80.1573850988352; 
-	Fri, 15 Nov 2019 12:49:48 -0800 (PST)
+	bh=i4z4L/uGJ9/usF9zSnLTXaUvRiv0b23YrD5KWzqpR/Q=;
+	b=hgqf6Bcqw5mU+1IGP5UC8HbJufrR27cIks65jUILpZR0xp8veI4fxcLgMrxwdad1mD
+	aas+qvAKxMjaOLbuXEiCQOT8V0ntmFon/3++kWK+Nx20F99U2uLBrtW4BOUent55W/1H
+	e8Gw+ZkdPJ5uBquWleXmZKHxtDQyiSBfQ5VgjReyuMHIl5r6Cs5iT6dtgY0hCDGNpXIM
+	j8OTQg9Anmb/tU0wiPD1pjl8Ygh0nvaAxvryrJF5uwCaAGdtIOHnzKGl9593jpL/Smc/
+	PVY/lJ+WONwPyqjCpBdwuL6SrOuAY3P/r0VFLmxf65kp+6BdT4dFz1xV2qd69DA1yxZ/
+	KQ5Q==
+X-Gm-Message-State: APjAAAU+w7dWQHWFMa8sMIPP2KPdoaUAv0JV8UDlrdDOVhPFxufBod9O
+	F68q/SAUDKRHpPMWnN+Wy64nypMl4lxGEWnA854=
+X-Google-Smtp-Source: APXvYqwMdH+9o3A3nEwcuOM/RLFYMu85bqdVxTI8PsOTg3stw18bolM0qYb+EMD1ImLpeIKbXx741jmnG2FNAFmx4W8=
+X-Received: by 2002:a6b:c916:: with SMTP id z22mr2169411iof.267.1573899674216; 
+	Sat, 16 Nov 2019 02:21:14 -0800 (PST)
 MIME-Version: 1.0
-References: <1573752010-26608-1-git-send-email-leon.anavi@konsulko.com>
-	<dbae500e-b459-005e-ec2b-5d4f5ef66f18@gmail.com>
-	<2feeb01f-2110-e266-3bdb-635c38577c39@mailbox.org>
-	<30fccbf16335d228013fb5d59b0ae1cc18c25a38.camel@gmail.com>
-	<ea1acf07-73d8-0e08-8979-2e89c6552bbb@intel.com>
-In-Reply-To: <ea1acf07-73d8-0e08-8979-2e89c6552bbb@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 15 Nov 2019 12:49:21 -0800
-Message-ID: <CAMKF1sob3Znp-dXkpnr-avGtA=-t=yKtbU6ckW-w_zgmb8VeNg@mail.gmail.com>
-To: Ross Burton <ross.burton@intel.com>
+References: <20191115204720.1294151-1-raj.khem@gmail.com>
+In-Reply-To: <20191115204720.1294151-1-raj.khem@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 16 Nov 2019 11:21:02 +0100
+Message-ID: <CALbNGRSFN3mFfrwg1wtOde2z4BFYBYv8=xUei6Vvyy3CnLa_dg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] surf: Add simple web browser
+Subject: Re: [meta-gnome][PATCH] evince: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +53,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Nov 2019 20:49:48 -0000
+X-List-Received-Date: Sat, 16 Nov 2019 10:21:13 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Nov 15, 2019 at 11:25 AM Ross Burton <ross.burton@intel.com> wrote:
+On Fri, Nov 15, 2019 at 9:47 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> On 15/11/2019 17:30, Khem Raj wrote:
-> > On Fri, 2019-11-15 at 16:09 +0100, Carlos Rafael Giani wrote:
-> >> meta-browser would be more appropriate.
-> >
-> > I was contemplating that as well. but these layer has more chromium and
-> > firefox lineage
->
-> But it's called meta-browser and not meta-firefox-and-chromium. :)
->
+> Enhance the patch for printf format checking to make clang work as well
+Thanks for taking care - time to mention that you do a fantastic job :)
 
-certainly, worth proposing there.
+Hope I'll find some time to fix the other issues you reported during
+this weekend.
 
-> Ross
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Andreas
 
