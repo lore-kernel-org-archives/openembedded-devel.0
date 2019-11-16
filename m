@@ -1,45 +1,56 @@
-Return-Path: <alistair23@gmail.com>
-Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
-	[209.85.208.195])
-	by mail.openembedded.org (Postfix) with ESMTP id EC87C7FA0E
+Return-Path: <leon.anavi@konsulko.com>
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
+	[209.85.208.180])
+	by mail.openembedded.org (Postfix) with ESMTP id D3D987F7AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Nov 2019 03:19:50 +0000 (UTC)
-Received: by mail-lj1-f195.google.com with SMTP id g3so12709561ljl.11
+	Sat, 16 Nov 2019 17:17:02 +0000 (UTC)
+Received: by mail-lj1-f180.google.com with SMTP id q2so14091936ljg.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Nov 2019 19:19:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=X5UbttyEYhiUdogbNrrDLOVIpqgGvJg1FfFLn9ir/sA=;
-	b=C3UZbvr9USSBL/Lgz/IvegDn66ORaK4Ix06h5bO2ZijEkVyiFhEs+YVtklbjzPHWar
-	kbhTNiTRfTrSAwv4ftjR2FG98fHbJcafSp6XHyMCzaVUnlXraNKjqpHVKNeUlLhrYGmB
-	RNo+h0ZVqAYJd8lUfheeKbs5e2vpkHPO2OV+bQwrWktnBEDb5BUiSrL67B/LYC1BpHyX
-	hwRMlgDGTzmJ70AcOuXpZc8QiADxg2nMvHFmwZzE3H/nX4N+vK6Qc6um44SZb7pwg6bZ
-	ueOBvDtRwu2kEEBJqCrjAvWJxbkjClr7AdQaZlWlojrcfYBLV7ccJzUOwXeJqAH7MwTa
-	ib2g==
+	Sat, 16 Nov 2019 09:17:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=eahf85VREXMcnANqlbaZswfqIBAHNMCKT7Se+RAenA0=;
+	b=iGa8JUvL5+j9MMZg87UBRErVTxfZxoCRB4DPUFwTg1WUojG4vBIPEM3cZnx/Yuq4qh
+	VH6DNf7LQdKAScF9S0/EYGDyBWa8oAD6up8zIML5AzDPA6GwT6rDzgIcEdhh9aRlSwoW
+	DHuYDvJDlW3TKO3h7aeQJGcGkxQiSvI/xvAPk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=X5UbttyEYhiUdogbNrrDLOVIpqgGvJg1FfFLn9ir/sA=;
-	b=jM4qH2+qFe2FlCiJp+iK+PZLWnoCXF24stvngLTTHR5/Nc1TXg5yy8plVufxne/jUD
-	0/AEwupzncghK2wUvkgbwAbFT6mS56yGTmhDsqsHHhtwZB5YrG5pmjaMtUoUEhc44q5l
-	hlR0FaYoWlCFCkt+pVMZha9ivPu1JK9zYFsVEeXIGuc2i7BJaKmZvXwzfxtlMWJysifp
-	jNQGAX1frG2/tzooSpAjRUYca7C+2N9FXOh+69aKtQfDa8f25NH/zlvdRdjqmBG0ng/G
-	ppC271ia+09t+iLAYe6TCdAOoDgDjagJEvt6rg7IX6M2aUt8TCAtADK4H2lm9zXwMlUe
-	xCaA==
-X-Gm-Message-State: APjAAAWTPitvIJJUismH4xvqT7bT//OobZwD4etv0jQxoR/qr+5FRr+5
-	61DTUJE+2C/wfZ3SPPiOW4poS8GI+63o26rdsrg=
-X-Google-Smtp-Source: APXvYqzrho7Bd0IFFoIbu9geUW4znYch8/+aUazMfsT79k7hUMcz+YibIhkZo5Ox1yPGHM+2gAXfeq7lmnmyG6E66CE=
-X-Received: by 2002:a2e:b54d:: with SMTP id a13mr7670934ljn.4.1573874391299;
-	Fri, 15 Nov 2019 19:19:51 -0800 (PST)
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=eahf85VREXMcnANqlbaZswfqIBAHNMCKT7Se+RAenA0=;
+	b=hfzafcrdSI6QAwrLt1mzH37CTvQK8Fa0oPLMg46YHYA7TZBK/LobcNvdMwV3w3L6ka
+	A3orVbVoKcelECekfSB5ecIl17g2u/f3wB94T9Ll5e9adAJqBbUo0zVJFbBosW4E2YPk
+	wUBTXvry25aym0BGGmPMZYPUiAE1MJh5U7UvkQWGjwnT+7tfIXsIv289NHXjntL1apUy
+	c0qqWyBkKqtprrVE2WQroCXzKQWdqMpxHiRqISOlR9ClJZtQWqWdPPmjxvmUOIz1n5ko
+	mxQYI8wUSapMYe0R52Z4V0BF5E5LSS9nihXoZV/4PBTW/HzWNJodZCxqiDLqXZWCdJYO
+	0qbQ==
+X-Gm-Message-State: APjAAAXIL3yCB9u0KSRv8teAT5qM+DujqvELbwWWc7ilPDVSBMI0OLx4
+	s6I6KBazPW4YNovXefHuB89QGgq/50o=
+X-Google-Smtp-Source: APXvYqzt8JSM1r0kJwogerCQzNJGjovdxLPD8X/aOxnGmJt6Z0VlOdQ2dg77rwntQEnOKriq0dH8Og==
+X-Received: by 2002:a2e:9841:: with SMTP id e1mr15296168ljj.19.1573924622988; 
+	Sat, 16 Nov 2019 09:17:02 -0800 (PST)
+Received: from [192.168.4.166] ([78.130.245.67])
+	by smtp.gmail.com with ESMTPSA id k8sm6364931lfm.41.2019.11.16.09.17.01
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 16 Nov 2019 09:17:02 -0800 (PST)
+To: Khem Raj <raj.khem@gmail.com>, Ross Burton <ross.burton@intel.com>
+References: <1573752010-26608-1-git-send-email-leon.anavi@konsulko.com>
+	<dbae500e-b459-005e-ec2b-5d4f5ef66f18@gmail.com>
+	<2feeb01f-2110-e266-3bdb-635c38577c39@mailbox.org>
+	<30fccbf16335d228013fb5d59b0ae1cc18c25a38.camel@gmail.com>
+	<ea1acf07-73d8-0e08-8979-2e89c6552bbb@intel.com>
+	<CAMKF1sob3Znp-dXkpnr-avGtA=-t=yKtbU6ckW-w_zgmb8VeNg@mail.gmail.com>
+From: Leon Anavi <leon.anavi@konsulko.com>
+Message-ID: <0eeb54b2-c3b9-c78d-4ccb-121c0429e5d8@konsulko.com>
+Date: Sat, 16 Nov 2019 19:17:01 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
 MIME-Version: 1.0
-From: Alistair Francis <alistair23@gmail.com>
-Date: Fri, 15 Nov 2019 22:19:22 -0500
-Message-ID: <CAKmqyKOFhocfnVfrW2htR65fKtHq65NqZDKhKaiYRKhJFhyzDg@mail.gmail.com>
-To: undisclosed-recipients:;
-X-Mailman-Approved-At: Sat, 16 Nov 2019 11:52:12 +0000
-Subject: Open ISA (RISC-V, OpenPOWER, etc) Miniconf at LCA 2020
+In-Reply-To: <CAMKF1sob3Znp-dXkpnr-avGtA=-t=yKtbU6ckW-w_zgmb8VeNg@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] surf: Add simple web browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,51 +63,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Nov 2019 03:19:51 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 16 Nov 2019 17:17:03 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Hi All,
+Hi Khem, Ross,
 
-We=E2=80=99re pleased to announce the first Open ISA miniconf at linux.conf=
-.au
+On 15.11.19 г. 22:49 ч., Khem Raj wrote:
+> On Fri, Nov 15, 2019 at 11:25 AM Ross Burton <ross.burton@intel.com> wrote:
+>> On 15/11/2019 17:30, Khem Raj wrote:
+>>> On Fri, 2019-11-15 at 16:09 +0100, Carlos Rafael Giani wrote:
+>>>> meta-browser would be more appropriate.
+>>> I was contemplating that as well. but these layer has more chromium and
+>>> firefox lineage
+>> But it's called meta-browser and not meta-firefox-and-chromium. :)
+>>
+> certainly, worth proposing there.
+Layer meta-browser was on my radar before submitting the patch to 
+meta-oe. I also thought that this layer is more about chromium and 
+firefox. Links, another lightweight browser, is in meta-oe.
 
-Open Instruction Set Architectures like RISC-V, OpenPOWER and others are
-the next step in the evolution of Open Hardware.  The mini-conference
-will commence with a brief overview of Open ISAs in general.
+In the mean time I've fixed the configurations so that surf recipe 
+doesn't need INHIBIT_PACKAGE_DEBUG_SPLIT or INHIBIT_PACKAGE_STRIP anymore.
 
-It will then introduce the two most common open ISAs, RISC-V and
-OpenPOWER. This will include an overview of the ISAs, how they are
-supported and why people should use them. Finally we will delve straight
-into a set of curated presentations from across the Open ISA ecosystem.
+Best regards,
+Leon
+>
+>> Ross
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-The miniconf organisers, Alistair Francis and Hugh Blemings along with
-the LCA 2020 team invite proposals for sessions in the Open ISA miniconf
-of either 15 or 30 minutes duration.  Suggested topics include Linux
-kernel support for open ISAs, RISC-V, Open POWER and any other Open ISA
-related topics.  As befits LCA, sessions should have a strong technical
-emphasis rather than marketing/sales focus.
+-- 
+Leon Anavi
+Software Engineer
+konsulko.com
 
-Places are limited in the miniconf schedule and early submission of your
-proposal will assist our planning.  The Call for Sessions formally
-closes on December 8th.
-
-For attendees - the miniconf promises a great deal of technical depth
-and breadth across this relatively new aspect of the open technical
-commons, we look forward to seeing you!
-
-As an extra plus it's on the beautiful Gold Coast in the middle of Summer :=
-)
-
-Registration and details are available at:
-https://linux.conf.au/programme/miniconfs/open-isa/
-
-And don't forget there's a bunch of other awesome miniconfs scheduled
-for LCA 2020 - the complete list is available here -
-https://linux.conf.au/programme/miniconfs/
-
-We look forward to seeing you!
-
-Regards,
-Hugh Blemings & Alistair Francis
 
