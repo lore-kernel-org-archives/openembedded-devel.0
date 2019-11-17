@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 889C57F959
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com
+	[209.85.128.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B0FE7F8B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Nov 2019 21:13:18 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id s5so17137798wrw.2
+	Sun, 17 Nov 2019 21:13:19 +0000 (UTC)
+Received: by mail-wm1-f48.google.com with SMTP id q70so15271301wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Nov 2019 13:13:19 -0800 (PST)
+	Sun, 17 Nov 2019 13:13:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=KWKjgYG3jSKGII3lVqxi8jitlVkcJn055XyaLuw1iHE=;
-	b=Oe6WPeXxexbiyDI8vOEPfAZm26jyR+bM2GAvK5Tb3fh+pFo+b1umTUuyAgkhRKHJvj
-	5zbTooBCXqAh5O4cjnehIYNEvGok15WQc+nHfk7OVYnszDp4jqekHP/91ToK44KWd1zZ
-	rWp6WOtJ950Rtuj7iMZVdVVXbtCthueYlLy/f0MYuTFib5h3YRBm1nZ5UdFX/OiD/p5b
-	aOIqudQBYJHyVMOTt/b4PrioQcCwIcSX6+fb7xNWGbA3UznT9Gi8EWerwesCf0qtRoem
-	PVdHt+ZuU7liLqdr1nQUPv9IrmccHgbd75/MddNcyA7Wzk8XWeWXulto9RAiHlTS0tw1
-	FQsQ==
+	bh=8luiLi8w/q/Bpfo5PNYoDnkztbQJysZUEHS3TN6+0I0=;
+	b=st2C91n8qx+4m+W7mJefS5QcXFJOOfoZSTeoPXk0o7qCaPZGCq6l+hRrN2DiKP07sR
+	1IyYmS/s3UOMYl4GNpIkH+lcmRJymayJ7vyxOFnkiobIaQeZZSxoyHEu5jEIljZLsJ4u
+	rKFIyY63jiPuHY9cOaIsPOYFSBOXwKTnfGYperHlApaFSqGDVv8bEzB0rQqJVGvz52n3
+	L8jqdScCAN7rcBk+Q6wfdZ7c8idTZsIrmyLJbtyNrYXF4bUpbAqNTMjbr8456x8DqxkK
+	9xRB5y4M3S/C3ALo9bU5lBrtW+qsvX2ojOJUwTqLzd0EcjMll7q8VBIAtVEBXUYcVMMT
+	JuYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=KWKjgYG3jSKGII3lVqxi8jitlVkcJn055XyaLuw1iHE=;
-	b=YINqHmtRFtePnxpxM8XgkFZySPtDy6sySrtN/6guSk84sTfQGNE4/tqHZRGA+cuu0T
-	abw1zJK1A9cZ1rImZnOqH2Chn2qdl7vaBU895BEyRdivOVT4rLAK6f21dZmupH+j+lfV
-	jTdJHqrqMAlBrbwtTHzCUGyeXfgwBDlJFd86/eZy6529vX6WmKm1HqmmkjxoLvY1lFWG
-	4p+qmSVVSsE9kb38ZHh3K58/BM7hm4U5E/HTB7UVWjHpeZmujPv33LawqQ00CwVm8HWo
-	Koh+ctySmxEc6o8wpuCsiG/3v+zajwbmSCjpH4OMPMAQcP25r/dX57P/xanzUrGFhV59
-	avNA==
-X-Gm-Message-State: APjAAAU+WXpkGZhGxkw55SpXw/GDF4ICCQZEpmJ+FUUYz5ee/6+pFK3B
-	kOE6RelkR0wvSii8q3VlGABhnB0N
-X-Google-Smtp-Source: APXvYqyvwxeR4ny+j16FC0JnYbIPbpGx+R6W/ZsMKM4cfhQcDZVRCc4kKlOJPa1U4J9ayMRjqMED+g==
-X-Received: by 2002:adf:f987:: with SMTP id f7mr26435508wrr.284.1574025199073; 
+	bh=8luiLi8w/q/Bpfo5PNYoDnkztbQJysZUEHS3TN6+0I0=;
+	b=nSzv9AQhu95XbJTheWQ7CfOQiMZ+RhZqDDnFLnd9n37wAgsHPQ8WxMHTFH+3AzgBMc
+	lwOauitrdYy8WnjqzYpJd/pIi3IPtQV+zn47DH+TeAPvHFpKH6c+jH1s39++LS5AYE8i
+	3+yir7tAAnBm+FdYhtBhoSfadJpYMoxapzNLIKYWpl+owQJ7f7tYYIQPjFt85KUOcado
+	WtT1VTxUhZO8397pUjfZlUIorWGYekq79sdR+EPIPzLXAR3X+KkxkIV/Ims1wNsL/J60
+	Yo50QGUzrcCK7wq9O64y50QuGhEutf4zKh0ldYQZqTCN9IPt8PfEN3aNl4MG5RdUjtD8
+	J24Q==
+X-Gm-Message-State: APjAAAVtrT7+hA6chAclMbx7RXRVhnCrfoXGigaXa+o3zm+x6iGCGg2P
+	FBnoUKDVGSezr0NkhBAsCTEI85XZ
+X-Google-Smtp-Source: APXvYqyFx3f9Gf4/n9TbfWM0Tr1H3a5S1OFkcpHzzDprTbu8n2QVwtZrp9Eae5tgVfBr99FEc5hwMA==
+X-Received: by 2002:a7b:cbd9:: with SMTP id n25mr27351173wmi.64.1574025199995; 
 	Sun, 17 Nov 2019 13:13:19 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F081983E6CF71012ACD6C9A.dip0.t-ipconnect.de.
 	[2003:f0:7f08:1983:e6cf:7101:2acd:6c9a])
 	by smtp.gmail.com with ESMTPSA id
-	g5sm18564687wma.43.2019.11.17.13.13.18
+	g5sm18564687wma.43.2019.11.17.13.13.19
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 17 Nov 2019 13:13:18 -0800 (PST)
+	Sun, 17 Nov 2019 13:13:19 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Nov 2019 22:13:05 +0100
-Message-Id: <20191117211306.27233-5-schnitzeltony@gmail.com>
+Date: Sun, 17 Nov 2019 22:13:06 +0100
+Message-Id: <20191117211306.27233-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191117211306.27233-1-schnitzeltony@gmail.com>
 References: <20191117211306.27233-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 5/6] gmime: upgrade 3.2.4 -> 3.2.5
+Subject: [PATCH 6/6] evolution-data-server: add upstream-version-is-even & gsettings to inherit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,52 +62,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Nov 2019 21:13:18 -0000
+X-List-Received-Date: Sun, 17 Nov 2019 21:13:19 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From gmime-3.2.5.news [1]:
-*  Modified GMimeParser to prevent stack overflows when parsing deeply nested messages.
-
-     GMimeParser now has a limit on how deep multipart and/or message/rfc822 MIME part
-     nesting is allowed to go before the parser will take action to prevent a stack
-     overflow. If the max level is reached at a message/rfc822 part, then that part
-     will be consumed by the parser as a generic GMimePart rather than a
-     GMimeMessagePart. Likewise, if the max level is reached at any type of multipart,
-     then the content of said multipart will be packed into the GMimeMultipart's
-     preface and not parsed any further.
-
-* g_mime_multipart_foreach has been rewritten to avoid recursion, thereby avoiding potential
-  stack overflows.
-
-* The gmime-port-2-6-to-3-0.sh script has been fixed to use proper sed syntax.
-
-[1] http://ftp.gnome.org/pub/gnome/sources/gmime/3.2/gmime-3.2.5.news
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-gnome/gmime/{gmime_3.2.4.bb => gmime_3.2.5.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-gnome/gmime/{gmime_3.2.4.bb => gmime_3.2.5.bb} (72%)
+ .../evolution-data-server/evolution-data-server.bb              | 2 +-
+ .../evolution-data-server/evolution-data-server.inc             | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-gnome/gmime/gmime_3.2.4.bb b/meta-oe/recipes-gnome/gmime/gmime_3.2.5.bb
-similarity index 72%
-rename from meta-oe/recipes-gnome/gmime/gmime_3.2.4.bb
-rename to meta-oe/recipes-gnome/gmime/gmime_3.2.5.bb
-index 205868eec..568083bf3 100644
---- a/meta-oe/recipes-gnome/gmime/gmime_3.2.4.bb
-+++ b/meta-oe/recipes-gnome/gmime/gmime_3.2.5.bb
-@@ -9,8 +9,8 @@ inherit gnomebase gobject-introspection
- SRC_URI += "file://iconv-detect.h \
-             file://nodolt.patch"
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+index a8bb69f00..82160b1ed 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.bb
+@@ -6,7 +6,7 @@ DEPENDS = " \
+     dbus db virtual/libiconv zlib libsoup-2.4 libical nss libsecret \
+ "
  
--SRC_URI[archive.md5sum] = "b6b4e9fdc8f3336551d23872c83b539a"
--SRC_URI[archive.sha256sum] = "249ea7c0e080b067aa9669162c36b181b402f6cf6cebc4999d838c6f1e81d024"
-+SRC_URI[archive.md5sum] = "98970e3995e67ac3f23827ff52308f9e"
-+SRC_URI[archive.sha256sum] = "fb7556501f85c3bf3e65fdd82697cbc4fa4b55dccd33ad14239ce0197e78ba59"
+-inherit distro_features_check cmake gtk-doc gettext gobject-introspection perlnative pythonnative
++inherit gsettings gobject-introspection distro_features_check cmake gtk-doc gettext perlnative pythonnative
  
- export ac_cv_have_iconv_detect_h="yes"
- do_configure_append = "cp ${WORKDIR}/iconv-detect.h ${S}"
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
+index 2e5176ce7..0893f8e92 100644
+--- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
++++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
+                     file://src/camel/camel.h;endline=24;md5=342fc5e9357254bc30c24e43ae47d9a1 \
+                     file://src/libedataserver/e-data-server-util.h;endline=20;md5=8f21a9c80ea82a4fb80b5f959f672543"
+ 
+-inherit gnomebase
++inherit gnomebase upstream-version-is-even
+ 
+ SRC_URI[archive.md5sum] = "d1701875bbac80d6d62e9acfc6c43bea"
+ SRC_URI[archive.sha256sum] = "6ff56ba04cb639e627fe9d6e0ada106a10cadd68a0d53b8ec72b4e285df53abe"
 -- 
 2.21.0
 
