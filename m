@@ -1,51 +1,31 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E07F6B50B
+Return-Path: <leon.anavi@konsulko.com>
+Received: from anavi.org (anavi.technology [91.215.217.29])
+	by mail.openembedded.org (Postfix) with ESMTP id 75B8D6D545
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Nov 2019 18:16:47 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id 71so12508748qkl.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Nov 2019 10:16:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=oSKyWdL7s4HuywJ67i4GBZfORdrlJKxnFJLt/1KleN0=;
-	b=K3uMvQwtd0DMogEtNFAxxWh3ZrZdcTHTpZUDsYt6tKu9VqWz4dGWh4nowzGrDZLRSp
-	Ruw84Dj27FIvRuZc8SEMWlG6rrOyGSmUp4Y9wX68oX3011Mlzo5RYGEgondpeh53X5yA
-	xVIOjO5rds1QAcHeZYDaoezjGBB4rRjZsJ2D3bA8tkNIECKRadmxPlJ1C6wG1cbR34Zf
-	3S+op8aZLi8T3CbWoRsqTCI3kXP7Cn1Hu0vafBFNJVBkR0eEJLs1Hk8bkvnvHCd7/ype
-	WxDPSpMwLnM0dvFEDh+Wv05/+wt5gZ3GgFNsFXyMNYnq12p8v2AjPkmMr2z+zwZR749l
-	8D2A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=oSKyWdL7s4HuywJ67i4GBZfORdrlJKxnFJLt/1KleN0=;
-	b=cqx399AOYulL7OwUUxKdf0Ce6K8BK8gaqDX7izIpkLMempPUZrsLnoATN/qHJU6z3V
-	3E294+oKKDtCFqTCUZLWvfXB02LkS8g/9Noz/CJPgRBbQwXT/bpVUR8camPIAW/c3Ljc
-	Xc+mAmT7tjYpR1ackaF4PauXJHfs59LpCQkUf57bEND8riSkCbSR9OKMVRX88BrZLSt9
-	l1WF2YlEpWLvVT/uHfsU+UNsYG8ahqvGwtGVZcXj8qRhOMdVGRdWoKdRsWH93Q6Jtpfq
-	GYQjGHE+VzZ0oqrY/xUmXcAivtKLYQw7irsAvfomAVYFCgo2v76Pif+sdwXwdnP8f9KB
-	W2jg==
-X-Gm-Message-State: APjAAAWtvuiXDMAyDaff3g4oQbriTrVXb8gc6xxKMzHDfZxXKQv5B0Nu
-	zMucOL7PwdcpGnnqP8UcDPf6J/Ycg+HqmtxplJs=
-X-Google-Smtp-Source: APXvYqwZ7ZRnM/ECXdKnIXpVGs3HqdKXATa+J7W1n5hHn/4aUE2XXWvhUsMs1CB10bKrIsS8NY3GokeAAJD5/CwsqWE=
-X-Received: by 2002:a37:4bc2:: with SMTP id y185mr9105426qka.474.1574014607737;
-	Sun, 17 Nov 2019 10:16:47 -0800 (PST)
-MIME-Version: 1.0
-References: <20191114194930.2786-1-schnitzeltony@gmail.com>
-	<20191114194930.2786-14-schnitzeltony@gmail.com>
-	<CAMKF1sru3JvSpMvHHzrL1+D1Qkm4Orec8r0FcwrrKn=38gm5sg@mail.gmail.com>
-	<CALbNGRQZE0ScPCq973vQsWttB4-rPxU7_ZKCvtvSpnAYUffnPg@mail.gmail.com>
-	<CALbNGRThTpUgqGfNR5EqLnPVjhB8raVpQ8Gz-H2VUtdjYpbwtg@mail.gmail.com>
-In-Reply-To: <CALbNGRThTpUgqGfNR5EqLnPVjhB8raVpQ8Gz-H2VUtdjYpbwtg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 17 Nov 2019 10:16:36 -0800
-Message-ID: <CAMKF1soQkfQJRUNkvA8SZRZwWSNFHR=h-kiw9CMapgLjdiV_3w@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 13/16] geocode-glib: initial add 3.26.1
+	Sun, 17 Nov 2019 18:28:35 +0000 (UTC)
+Received: from [78.130.245.67] (port=57840 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1iWPHk-0006Ig-2z; Sun, 17 Nov 2019 20:28:36 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 17 Nov 2019 20:28:11 +0200
+Message-Id: <1574015291-12573-1-git-send-email-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.7.4
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [meta-oe][PATCHv4] surf: Add a simple web browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,58 +38,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Nov 2019 18:16:47 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 17 Nov 2019 18:28:35 -0000
 
-On Sun, Nov 17, 2019 at 7:18 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m>
-wrote:
+Add a recipe for surf, a simple web browser based on WebKit2/GTK+.
 
-> On Thu, Nov 14, 2019 at 11:51 PM Andreas M=C3=BCller <schnitzeltony@gmail=
-.com>
-> wrote:
-> >
-> > On Thu, Nov 14, 2019 at 11:13 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > >
-> > > On Thu, Nov 14, 2019 at 11:51 AM Andreas M=C3=BCller <
-> schnitzeltony@gmail.com> wrote:
-> > > >
-> > > > It is a dependency for upcoming gnome-settings-daemon
-> > > >
-> > > > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > > > ---
-> > > >  .../geocode-glib/geocode-glib_3.26.1.bb       | 20
-> +++++++++++++++++++
-> > > >  1 file changed, 20 insertions(+)
-> > > >  create mode 100644 meta-gnome/recipes-gnome/geocode-glib/
-> geocode-glib_3.26.1.bb
-> > > >
-> > > > diff --git a/meta-gnome/recipes-gnome/geocode-glib/
-> geocode-glib_3.26.1.bb b/meta-gnome/recipes-gnome/geocode-glib/
-> geocode-glib_3.26.1.bb
-> > > > new file mode 100644
-> > > > index 000000000..dc218f3a3
-> > > > --- /dev/null
-> > > > +++ b/meta-gnome/recipes-gnome/geocode-glib/geocode-glib_3.26.1.bb
-> > > > @@ -0,0 +1,20 @@
-> > > > +SUMMARY =3D "A convenience library for the geocoding"
-> > > > +
-> > > > +LICENSE =3D "LGPLv2"
-> > >
-> > > still at 2.0 and not 2.1 interesting.
-> >
-> > will check
->           GNU LIBRARY GENERAL PUBLIC LICENSE
->                Version 2, June 1991
->
-> That is LGPLv2 - right?
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../0001-config.mk-Fix-compiler-and-linker.patch   | 41 ++++++++++++++++++++++
+ meta-oe/recipes-graphics/surf/surf_2.0.bb          | 26 ++++++++++++++
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+ create mode 100644 meta-oe/recipes-graphics/surf/surf_2.0.bb
 
+diff --git a/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+new file mode 100644
+index 0000000..fb90432
+--- /dev/null
++++ b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+@@ -0,0 +1,41 @@
++From e97bb73851f5bbd94260da553a222526485cdfb1 Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Fri, 15 Nov 2019 18:24:42 +0000
++Subject: [PATCH] config.mk: Fix compiler and linker
++
++Do not set explicitly compiler and linker.
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ config.mk | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/config.mk b/config.mk
++index df6e812..5deb991 100644
++--- a/config.mk
+++++ b/config.mk
++@@ -15,17 +15,17 @@ GTKINC = `pkg-config --cflags gtk+-3.0 webkit2gtk-4.0`
++ GTKLIB = `pkg-config --libs gtk+-3.0 webkit2gtk-4.0`
++ 
++ # includes and libs
++-INCS = -I. -I/usr/include -I${X11INC} ${GTKINC}
++-LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 ${GTKLIB} -lgthread-2.0
+++INCS = ${GTKINC}
+++LIBS = -lc -lX11 ${GTKLIB} -lgthread-2.0
++ 
++ # flags
++ CPPFLAGS = -DVERSION=\"${VERSION}\" -DWEBEXTDIR=\"${LIBPREFIX}\" -D_DEFAULT_SOURCE
++ CFLAGS = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
++-LDFLAGS = -s ${LIBS}
+++LDFLAGS = ${LIBS}
++ 
++ # Solaris
++ #CFLAGS = -fast ${INCS} -DVERSION=\"${VERSION}\"
++ #LDFLAGS = ${LIBS}
++ 
++ # compiler and linker
++-CC = cc
+++CC ?= cc
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-graphics/surf/surf_2.0.bb b/meta-oe/recipes-graphics/surf/surf_2.0.bb
+new file mode 100644
+index 0000000..39c0f5e
+--- /dev/null
++++ b/meta-oe/recipes-graphics/surf/surf_2.0.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "Simple web browser"
++DESCRIPTION = "Simple open source web browser based on WebKit2/GTK"
++HOMEPAGE = "https://surf.suckless.org/"
++SECTION = "x11/graphics"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b57e7f7720307a02d5a6598b00fe3afa"
++
++DEPENDS = "webkitgtk gtk+3 glib-2.0"
++
++REQUIRED_DISTRO_FEATURES = "x11"
++
++SRC_URI = "git://git.suckless.org/surf;branch=surf-webkit2 \
++           file://0001-config.mk-Fix-compiler-and-linker.patch \
++"
++SRCREV = "b814567e2bf8bda07cea8de1c7a062f4aa437b65"
++
++S = "${WORKDIR}/git"
++
++inherit pkgconfig distro_features_check
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++do_install () {
++	install -d ${D}${bindir}
++	install -m 0755 ${S}/surf ${D}${bindir}
++}
+-- 
+2.7.4
 
-Yes
-
-
->
-> Andreas
->
 
