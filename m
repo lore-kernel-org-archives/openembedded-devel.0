@@ -1,52 +1,31 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id EEBDC7F98C
+Return-Path: <leon.anavi@konsulko.com>
+Received: from anavi.org (anavi.technology [91.215.217.29])
+	by mail.openembedded.org (Postfix) with ESMTP id 47D6F7F404
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Nov 2019 03:49:44 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id 193so8589491pfc.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Nov 2019 19:49:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=p8bxrPfPme51fqfqFuK9mshkdwoKRwZZEgdx7tVdIxI=;
-	b=jtrr4n+ot24cr/gqq6+gWbkrFqnfa/nS42Gtowk/G1u36lZ9+ICx/mE4MLj6hDvpkG
-	wY/+3X58jwIQjPRhzFfPQfElBxfU48kXBnVlksdeyQj+b2XPkOAKb4b5gt5WFQLez/tc
-	3PdrbXMr2CAaL+fAeddwBzpZt0FcZ8la2bFPNXgaohB4JgZW32loywT07a0OVQITBSaV
-	mQACLj4Wl0qI26P4sQAAp3DYBeFplfwkHowvX4nS5fBLi+kC5ZXQpLOY5/d+U00BQ4Zi
-	Q1MXOT4FwQOtZlPmVmihKTYkOtDVI0GEW6f+J1l1m8hnuGHOP+31eDMY7jDDN8Phcsg/
-	20ag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=p8bxrPfPme51fqfqFuK9mshkdwoKRwZZEgdx7tVdIxI=;
-	b=XbLwzb0WjpVphgjBi1loFNVztp4vOoHwKA9BhXmmp0j0QF2HEJUiJBcsumlJ/Gv9xm
-	hfe6n4H17oHSvgDGOqKWcQg1cRPwVZlUZiQ5aZyENmYKn7hL4Lg2+XauZB5n7o6gYyjd
-	PPy80Mpxuvx+1Ra4DtTN2oQOKDZUb7D+hQqj9g+578yu18vcxLHxYwpReNslTmtlRm/Y
-	JUes8/kahOMypidfTcgmlFZx/cl8VkxhrdZXvzs28lVRfduGnrISAmzYf2f8WseiAgNj
-	yK8QwTBxPVJS/X1H/ZdgjwFk1K2UIklgBrWpIL45WEDwg75KlYOdJtlAlvvxsiP+vXM3
-	n+tQ==
-X-Gm-Message-State: APjAAAXeV2/s9qZSonssd5sToYKhiENkjJJtRjDtRdO1g4QUWwlC+CJs
-	PQJH5upVYT5kV4XlEiqx4xNs6nnnk4s=
-X-Google-Smtp-Source: APXvYqxKBwEpFDN8ffowKFSe9ojSQC02Bxyayd8zVjUuIdTXRAQb0K+x4i+sua1p2XEKn9LBzFliww==
-X-Received: by 2002:aa7:9189:: with SMTP id x9mr15902587pfa.41.1573962585580; 
-	Sat, 16 Nov 2019 19:49:45 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::30e8])
-	by smtp.gmail.com with ESMTPSA id
-	w15sm14881103pfn.13.2019.11.16.19.49.44
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 16 Nov 2019 19:49:45 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Sun, 17 Nov 2019 13:25:21 +0000 (UTC)
+Received: from [78.130.245.67] (port=50588 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1iWKYJ-0004Os-IO; Sun, 17 Nov 2019 15:25:22 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Nov 2019 19:49:29 -0800
-Message-Id: <20191117034929.3298760-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
-In-Reply-To: <20191117034929.3298760-1-raj.khem@gmail.com>
-References: <20191117034929.3298760-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/3] gperftools: Convert static and libunwind support to packageconfig
+Date: Sun, 17 Nov 2019 15:25:12 +0200
+Message-Id: <1573997112-20833-1-git-send-email-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.7.4
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [meta-oe][PATCHv3] surf: Add a simple web browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,44 +38,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Nov 2019 03:49:45 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 17 Nov 2019 13:25:22 -0000
 
-Disable libunwind on musl/arm
+Add a recipe for surf, a simple web browser based on WebKit2/GTK+.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-oe/recipes-support/gperftools/gperftools_2.7.bb | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ .../0001-config.mk-Fix-compiler-and-linker.patch   | 41 ++++++++++++++++++++++
+ meta-oe/recipes-graphics/surf/surf_2.0.bb          | 26 ++++++++++++++
+ 2 files changed, 67 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+ create mode 100644 meta-oe/recipes-graphics/surf/surf_2.0.bb
 
-diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.7.bb b/meta-oe/recipes-support/gperftools/gperftools_2.7.bb
-index fdb82519bc..2cdb2e2740 100644
---- a/meta-oe/recipes-support/gperftools/gperftools_2.7.bb
-+++ b/meta-oe/recipes-support/gperftools/gperftools_2.7.bb
-@@ -2,7 +2,6 @@ SUMMARY = "Fast, multi-threaded malloc() and nifty performance analysis tools"
- HOMEPAGE = "https://github.com/gperftools/gperftools"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
--DEPENDS += "libunwind"
- 
- SRCREV = "9608fa3bcf8020d35f59fbf70cd3cbe4b015b972"
- SRC_URI = "git://github.com/gperftools/gperftools \
-@@ -28,9 +27,11 @@ COMPATIBLE_HOST_mipsarch_libc-glibc = "null"
- ARM_INSTRUCTION_SET_armv5 = "arm"
- ARM_INSTRUCTION_SET_toolchain-clang_arm = "arm"
- 
--# Ensure static libs are always enabled, as they seem to be not produced by
--# default at least on ARM.
--EXTRA_OECONF_append += " --enable-static"
-+PACKAGECONFIG ?= "libunwind static"
-+PACKAGECONFIG_remove_arm_libc-musl = "libunwind"
+diff --git a/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+new file mode 100644
+index 0000000..fb90432
+--- /dev/null
++++ b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
+@@ -0,0 +1,41 @@
++From e97bb73851f5bbd94260da553a222526485cdfb1 Mon Sep 17 00:00:00 2001
++From: Leon Anavi <leon.anavi@konsulko.com>
++Date: Fri, 15 Nov 2019 18:24:42 +0000
++Subject: [PATCH] config.mk: Fix compiler and linker
 +
-+PACKAGECONFIG[libunwind] = "--enable-libunwind,--disable-libunwind,libunwind"
-+PACKAGECONFIG[static] = "--enable-static,--disable-static,"
- 
- PACKAGE_BEFORE_PN += "libtcmalloc-minimal"
- FILES_libtcmalloc-minimal = "${libdir}/libtcmalloc_minimal*${SOLIBS} ${libdir}/libtcmalloc_minimal_debug*${SOLIBS}"
++Do not set explicitly compiler and linker.
++
++Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
++---
++ config.mk | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/config.mk b/config.mk
++index df6e812..5deb991 100644
++--- a/config.mk
+++++ b/config.mk
++@@ -15,17 +15,17 @@ GTKINC = `pkg-config --cflags gtk+-3.0 webkit2gtk-4.0`
++ GTKLIB = `pkg-config --libs gtk+-3.0 webkit2gtk-4.0`
++ 
++ # includes and libs
++-INCS = -I. -I/usr/include -I${X11INC} ${GTKINC}
++-LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 ${GTKLIB} -lgthread-2.0
+++INCS = ${GTKINC}
+++LIBS = -lc -lX11 ${GTKLIB} -lgthread-2.0
++ 
++ # flags
++ CPPFLAGS = -DVERSION=\"${VERSION}\" -DWEBEXTDIR=\"${LIBPREFIX}\" -D_DEFAULT_SOURCE
++ CFLAGS = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
++-LDFLAGS = -s ${LIBS}
+++LDFLAGS = ${LIBS}
++ 
++ # Solaris
++ #CFLAGS = -fast ${INCS} -DVERSION=\"${VERSION}\"
++ #LDFLAGS = ${LIBS}
++ 
++ # compiler and linker
++-CC = cc
+++CC ?= cc
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-graphics/surf/surf_2.0.bb b/meta-oe/recipes-graphics/surf/surf_2.0.bb
+new file mode 100644
+index 0000000..d57efa6
+--- /dev/null
++++ b/meta-oe/recipes-graphics/surf/surf_2.0.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "Simple web browser"
++DESCRIPTION = "Simple open source web browser based on WebKit2/GTK"
++HOMEPAGE = "https://surf.suckless.org/"
++SECTION = "x11/graphics"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b57e7f7720307a02d5a6598b00fe3afa"
++
++DEPENDS = "webkitgtk gtk+ gtk+3 glib-2.0"
++
++REQUIRED_DISTRO_FEATURES = "x11"
++
++SRC_URI = "git://git.suckless.org/surf;branch=surf-webkit2 \
++           file://0001-config.mk-Fix-compiler-and-linker.patch \
++"
++SRCREV = "b814567e2bf8bda07cea8de1c7a062f4aa437b65"
++
++S = "${WORKDIR}/git"
++
++inherit pkgconfig distro_features_check
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++do_install () {
++	install -d ${D}${bindir}
++	install -m 0755 ${S}/surf ${D}${bindir}
++}
 -- 
-2.24.0
+2.7.4
 
 
