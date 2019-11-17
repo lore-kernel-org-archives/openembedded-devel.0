@@ -1,52 +1,53 @@
-Return-Path: <leon.anavi@konsulko.com>
-Received: from mail-lj1-f182.google.com (mail-lj1-f182.google.com
-	[209.85.208.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 422837F8AE
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D9F87F939
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Nov 2019 19:04:45 +0000 (UTC)
-Received: by mail-lj1-f182.google.com with SMTP id 139so16297666ljf.1
+	Sun, 17 Nov 2019 21:13:14 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id n1so17085931wra.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Nov 2019 11:04:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=rAph9q1z4pK5tGbhaHmvbu4yV5+4aMm2BUcuvEKvCbc=;
-	b=FNKOXT3Wi5i+kKmHPAmYyr31XQyFtvBVep45WNkh8p5hSHoo6xqHgE4IhFpcefb7MG
-	JjyKTDd/8Pn17WxKp/huF1X92jHrcCKg6r/PWyH3KD4CMrY8Y4DAzddOrWv3vShNGU5x
-	VmbWAj4Wkei7HMFUGU9qkDC/PWozIIdrjhFNg=
+	Sun, 17 Nov 2019 13:13:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qrEEjq5xERJsA7Ui40QPtAQ9gLbZpAT0F4BoVMmPktA=;
+	b=aNpuzeLKZAIZ0CJGx51q/xe2+LK0rAC4UN3gL2ifmmNmk2E2XLgcANrfmWsDbRjn5j
+	SNqVKsdm+631xD1sACPTskwU0WU+2RfTjV4WGosXI5dVYoCtQKxHD1HiYLp5LsApF0Ks
+	6PZZZraOjYbxRkeDYWO+nR/rzI24DvAgXHEvlYK9q0fj1GlFCD1Gzcd1MAZbpzap/ign
+	TvrAWysaetC5Qp1MnrVO1CEnyBMycaxHnYar2xq5OdeW4rPboeiHF4vKINRDr0eBaMwQ
+	bjDE66+oRdHe1u4W1Lw8E2DY/AegMsjKO3L1MGHcWposkHV87JVXyrhZK0qQz/Ej9aH7
+	GedA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=rAph9q1z4pK5tGbhaHmvbu4yV5+4aMm2BUcuvEKvCbc=;
-	b=CEdOmwIjULw42P0OmWtTLbAqqeszEUQRFaMOdiOlh6YZ9y/UKMEs3LsRN/y2JRp55H
-	xGPnbKVFTgYEbRHVAP/Mdji+XcWSiD1v1yIYT20P/MjIgukm9z7FfAF4gG3BtsskISH1
-	DuEhjr1PfN445y5KGZUHkIb+c8a4cevTrfUJClnNmdwC3ceWqP6A68AA4M/EQTxQJBlU
-	sfOYgL0IfYtcSzswadGzj14Z1EqMUDMVp5PYIMFeROjR/gKgGPds/e57/27iR0cbxQi4
-	UW5J7mmwJuPUouAiRK+VjVXGmWuNNo3wgW7p9w8GtCdwI0I1JL90wKd+wjzlfqZotVtc
-	ovhw==
-X-Gm-Message-State: APjAAAX7s4ljYuyiQkdsFED3j6Kc+OGNLPbUI7E8LLvX95gGgncKhkah
-	4fMMHuTc65RG5GVkUf0kGt0OGWQmwQY=
-X-Google-Smtp-Source: APXvYqxfA+QduI0TJ9DbApaxHbH1yGRshVSFDuBL1ccfE7qEO1oJ8i9JQcaD3S7uWG077dZdjyT5YQ==
-X-Received: by 2002:a2e:9947:: with SMTP id r7mr18415627ljj.104.1574017485331; 
-	Sun, 17 Nov 2019 11:04:45 -0800 (PST)
-Received: from [192.168.4.166] ([78.130.245.67])
-	by smtp.gmail.com with ESMTPSA id b4sm7319845ljp.84.2019.11.17.11.04.44
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 17 Nov 2019 11:04:44 -0800 (PST)
-To: Khem Raj <raj.khem@gmail.com>
-References: <1574015291-12573-1-git-send-email-leon.anavi@konsulko.com>
-	<CAMKF1spa+oa376cdaPddWZdqxAXgEhoDF0rdAJNx71UZ5ez9hA@mail.gmail.com>
-From: Leon Anavi <leon.anavi@konsulko.com>
-Message-ID: <fd4741b0-6651-03fd-e769-6a9913b91502@konsulko.com>
-Date: Sun, 17 Nov 2019 21:04:43 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qrEEjq5xERJsA7Ui40QPtAQ9gLbZpAT0F4BoVMmPktA=;
+	b=j2dpiKyVyrhvWPb/989qdCQqHS0GpEuYxw1exyQs9eeuuYrUhxIiRLZXyz/RqSNeNw
+	2qdFlm+kY9eVyPnhj1eRFe3b2zvlkZSSG+4Xtvt0dWDg9VO8Bw53mAD31Pdt96P6V9bd
+	jlxL7SnHd3cLJnhd8bJQXSYoiPUL5m909rN/XKDEIiAyOcBbKsQMEej0J7TXQOhFNlPa
+	H6LPMaoPVKQA1AVqjBi2x26/jqcZ6/fieKO2UUy37Kl3UlYpriKtZGlUH59TfcWpZyL9
+	NTx70IR3lcKoSXNfAAuYOWGNiU2E2lhMjD2kwSNm6tVG9E+eWPURYUHwoZBhazkEk8Lk
+	t5YA==
+X-Gm-Message-State: APjAAAWJzcQU5DgP8j2xLzjMcFEw7/jVMvhbXN0C3hqyTc+1Vs18TU5i
+	YvqMjPA1rBlX+4C/nk34idr9ZD7N
+X-Google-Smtp-Source: APXvYqzc5FdNRNZwhaKtST1OpYUT5EHIPXXU7pidXBlUQViJrWlBtZbV6d7gh7yEPR0zzg2enzLZzQ==
+X-Received: by 2002:a5d:4d42:: with SMTP id a2mr6250849wru.31.1574025195212;
+	Sun, 17 Nov 2019 13:13:15 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F081983E6CF71012ACD6C9A.dip0.t-ipconnect.de.
+	[2003:f0:7f08:1983:e6cf:7101:2acd:6c9a])
+	by smtp.gmail.com with ESMTPSA id
+	g5sm18564687wma.43.2019.11.17.13.13.14
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 17 Nov 2019 13:13:14 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 17 Nov 2019 22:13:01 +0100
+Message-Id: <20191117211306.27233-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spa+oa376cdaPddWZdqxAXgEhoDF0rdAJNx71UZ5ez9hA@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCHv4] surf: Add a simple web browser
+Subject: [PATCH 1/6] fluidsynth: upgrade 2.0.7 -> 2.0.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,127 +60,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Nov 2019 19:04:45 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-List-Received-Date: Sun, 17 Nov 2019 21:13:15 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
-Hi Khem,
+From announcement 2.0.9:
+* an implicitly declared function caused a pointer to int truncation in CoreAudio driver (#591)
+* fix a stack-based overflow in CoreAudio driver (#594, thanks to @fkmclane)
 
-On 17.11.19 г. 20:54 ч., Khem Raj wrote:
-> On Sun, Nov 17, 2019 at 10:28 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
->> Add a recipe for surf, a simple web browser based on WebKit2/GTK+.
->>
->> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->> ---
->>   .../0001-config.mk-Fix-compiler-and-linker.patch   | 41 ++++++++++++++++++++++
->>   meta-oe/recipes-graphics/surf/surf_2.0.bb          | 26 ++++++++++++++
->>   2 files changed, 67 insertions(+)
->>   create mode 100644 meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
->>   create mode 100644 meta-oe/recipes-graphics/surf/surf_2.0.bb
->>
->> diff --git a/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
->> new file mode 100644
->> index 0000000..fb90432
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/surf/surf/0001-config.mk-Fix-compiler-and-linker.patch
->> @@ -0,0 +1,41 @@
->> +From e97bb73851f5bbd94260da553a222526485cdfb1 Mon Sep 17 00:00:00 2001
->> +From: Leon Anavi <leon.anavi@konsulko.com>
->> +Date: Fri, 15 Nov 2019 18:24:42 +0000
->> +Subject: [PATCH] config.mk: Fix compiler and linker
->> +
->> +Do not set explicitly compiler and linker.
->> +
->> +Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->> +---
->> + config.mk | 8 ++++----
->> + 1 file changed, 4 insertions(+), 4 deletions(-)
->> +
->> +diff --git a/config.mk b/config.mk
->> +index df6e812..5deb991 100644
->> +--- a/config.mk
->> ++++ b/config.mk
->> +@@ -15,17 +15,17 @@ GTKINC = `pkg-config --cflags gtk+-3.0 webkit2gtk-4.0`
->> + GTKLIB = `pkg-config --libs gtk+-3.0 webkit2gtk-4.0`
->> +
->> + # includes and libs
->> +-INCS = -I. -I/usr/include -I${X11INC} ${GTKINC}
->> +-LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 ${GTKLIB} -lgthread-2.0
->> ++INCS = ${GTKINC}
->> ++LIBS = -lc -lX11 ${GTKLIB} -lgthread-2.0
->> +
->> + # flags
->> + CPPFLAGS = -DVERSION=\"${VERSION}\" -DWEBEXTDIR=\"${LIBPREFIX}\" -D_DEFAULT_SOURCE
->> + CFLAGS = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
->> +-LDFLAGS = -s ${LIBS}
->> ++LDFLAGS = ${LIBS}
->> +
->> + # Solaris
->> + #CFLAGS = -fast ${INCS} -DVERSION=\"${VERSION}\"
->> + #LDFLAGS = ${LIBS}
->> +
->> + # compiler and linker
->> +-CC = cc
->> ++CC ?= cc
->> +--
->> +2.7.4
->> +
->> diff --git a/meta-oe/recipes-graphics/surf/surf_2.0.bb b/meta-oe/recipes-graphics/surf/surf_2.0.bb
->> new file mode 100644
->> index 0000000..39c0f5e
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/surf/surf_2.0.bb
->> @@ -0,0 +1,26 @@
->> +SUMMARY = "Simple web browser"
->> +DESCRIPTION = "Simple open source web browser based on WebKit2/GTK"
->> +HOMEPAGE = "https://surf.suckless.org/"
->> +SECTION = "x11/graphics"
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b57e7f7720307a02d5a6598b00fe3afa"
->> +
->> +DEPENDS = "webkitgtk gtk+3 glib-2.0"
->> +
->> +REQUIRED_DISTRO_FEATURES = "x11"
->> +
->> +SRC_URI = "git://git.suckless.org/surf;branch=surf-webkit2 \
->> +           file://0001-config.mk-Fix-compiler-and-linker.patch \
->> +"
->> +SRCREV = "b814567e2bf8bda07cea8de1c7a062f4aa437b65"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +inherit pkgconfig distro_features_check
->> +
->> +TARGET_CC_ARCH += "${LDFLAGS}"
->> +
->> +do_install () {
->> +       install -d ${D}${bindir}
->> +       install -m 0755 ${S}/surf ${D}${bindir}
-> you could do it with one liner
->
-> do_install () {
->      install -D -m 0755 ${S}/surf ${D}${bindir}/surf
-> }
-OK, let's do it with one liner. I've updated the patch again.
+From announcement 2.0.8:
+* fix incorrect behavior of fluid_sample_set_sound_data() (#576, thanks to @swesterfeld)
+* fix voices being mixed incorrectly, causing audible crackle esp. at sample-rates >48kHz (#580)
+* make sure that defining NDEBUG disables assertions
 
-Thanks,
-Leon
->> +}
->
->
->> --
->> 2.7.4
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../recipes-multimedia/fluidsynth/fluidsynth.inc            | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+index c4c623ad9..764ed375e 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
+@@ -4,9 +4,9 @@ SECTION = "libs/multimedia"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
+ 
+-SRC_URI = "git://github.com/FluidSynth/fluidsynth.git"
+-SRCREV = "62b38b1c66aec606f83b322bb03bd84810bbda41"
++SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=2.0.x"
++SRCREV = "c2f4683bf57f61451d14d219fdb25cf9f29cb7fe"
+ S = "${WORKDIR}/git"
+-PV = "2.0.7"
++PV = "2.0.9"
+ 
+ inherit cmake pkgconfig lib_package
 -- 
-Leon Anavi
-Software Engineer
-konsulko.com
+2.21.0
 
 
