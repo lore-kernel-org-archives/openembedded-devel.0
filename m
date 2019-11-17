@@ -1,56 +1,51 @@
-Return-Path: <leon.anavi@konsulko.com>
-Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com
-	[209.85.208.180])
-	by mail.openembedded.org (Postfix) with ESMTP id D3D987F7AD
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com
+	[209.85.214.174])
+	by mail.openembedded.org (Postfix) with ESMTP id ADE187F969
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Nov 2019 17:17:02 +0000 (UTC)
-Received: by mail-lj1-f180.google.com with SMTP id q2so14091936ljg.7
+	Sun, 17 Nov 2019 03:49:43 +0000 (UTC)
+Received: by mail-pl1-f174.google.com with SMTP id a18so7535795plm.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Nov 2019 09:17:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=eahf85VREXMcnANqlbaZswfqIBAHNMCKT7Se+RAenA0=;
-	b=iGa8JUvL5+j9MMZg87UBRErVTxfZxoCRB4DPUFwTg1WUojG4vBIPEM3cZnx/Yuq4qh
-	VH6DNf7LQdKAScF9S0/EYGDyBWa8oAD6up8zIML5AzDPA6GwT6rDzgIcEdhh9aRlSwoW
-	DHuYDvJDlW3TKO3h7aeQJGcGkxQiSvI/xvAPk=
+	Sat, 16 Nov 2019 19:49:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7DxEYFwcJ8X3YhrMIVKvYi+D8aju4LbeTwOURUrzocg=;
+	b=dYkb/imHJSVaTbCAUQX0JgMojSqukSQpB577Y+h0qI6ZlurStq0hy4Bv0MNDjHwprU
+	55Xc0cUs741mU/mAQF1ITx+9vV3ELjg83kWPqJzLZ6dIj8RhYJtwFytQC6RB8CikOCZI
+	UY8ZkDoxg5mwlMaMiVgWAf/icOqmjpBAPVo9qriceWJWT7j5LR25MH7I0mNVhPm2rOAY
+	qJCRCQ229mXPwgNNEGfuEeS4dyarbYO+qJeOMkRXOzh1cENJopcDxDrys28YsHSc7J3c
+	jELNbmPB3MU6z9oQwBtPVaIYFacLwz6KHWGNO4t+KSmRti3ls30gxgNwg/AbQpZexnpp
+	bFmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=eahf85VREXMcnANqlbaZswfqIBAHNMCKT7Se+RAenA0=;
-	b=hfzafcrdSI6QAwrLt1mzH37CTvQK8Fa0oPLMg46YHYA7TZBK/LobcNvdMwV3w3L6ka
-	A3orVbVoKcelECekfSB5ecIl17g2u/f3wB94T9Ll5e9adAJqBbUo0zVJFbBosW4E2YPk
-	wUBTXvry25aym0BGGmPMZYPUiAE1MJh5U7UvkQWGjwnT+7tfIXsIv289NHXjntL1apUy
-	c0qqWyBkKqtprrVE2WQroCXzKQWdqMpxHiRqISOlR9ClJZtQWqWdPPmjxvmUOIz1n5ko
-	mxQYI8wUSapMYe0R52Z4V0BF5E5LSS9nihXoZV/4PBTW/HzWNJodZCxqiDLqXZWCdJYO
-	0qbQ==
-X-Gm-Message-State: APjAAAXIL3yCB9u0KSRv8teAT5qM+DujqvELbwWWc7ilPDVSBMI0OLx4
-	s6I6KBazPW4YNovXefHuB89QGgq/50o=
-X-Google-Smtp-Source: APXvYqzt8JSM1r0kJwogerCQzNJGjovdxLPD8X/aOxnGmJt6Z0VlOdQ2dg77rwntQEnOKriq0dH8Og==
-X-Received: by 2002:a2e:9841:: with SMTP id e1mr15296168ljj.19.1573924622988; 
-	Sat, 16 Nov 2019 09:17:02 -0800 (PST)
-Received: from [192.168.4.166] ([78.130.245.67])
-	by smtp.gmail.com with ESMTPSA id k8sm6364931lfm.41.2019.11.16.09.17.01
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 16 Nov 2019 09:17:02 -0800 (PST)
-To: Khem Raj <raj.khem@gmail.com>, Ross Burton <ross.burton@intel.com>
-References: <1573752010-26608-1-git-send-email-leon.anavi@konsulko.com>
-	<dbae500e-b459-005e-ec2b-5d4f5ef66f18@gmail.com>
-	<2feeb01f-2110-e266-3bdb-635c38577c39@mailbox.org>
-	<30fccbf16335d228013fb5d59b0ae1cc18c25a38.camel@gmail.com>
-	<ea1acf07-73d8-0e08-8979-2e89c6552bbb@intel.com>
-	<CAMKF1sob3Znp-dXkpnr-avGtA=-t=yKtbU6ckW-w_zgmb8VeNg@mail.gmail.com>
-From: Leon Anavi <leon.anavi@konsulko.com>
-Message-ID: <0eeb54b2-c3b9-c78d-4ccb-121c0429e5d8@konsulko.com>
-Date: Sat, 16 Nov 2019 19:17:01 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7DxEYFwcJ8X3YhrMIVKvYi+D8aju4LbeTwOURUrzocg=;
+	b=doVkgc7nMc/DJJmlmHggPajYCD5rC++PVza777mDILwiVHoBb0QswRkXUoPzp9UIL2
+	0HG+e9K8F376swinW+ReywSP4GpZCfJYq+HMV5VyrXYsEg3NC3GZk47IMBgpBDyImDpC
+	Y2RNngW4KQzpS+V0q/MH0JP0voAR+BZjfChPBkDj4f1FQTmq9X3GjRDkfzB6U9vWLAx8
+	27eyl5YRTpEAHnMmnk6axYGYR6IzdsyU/n+4deM/t6oChvBPMV3K1kgt+vhIXTTnnzQ4
+	LPc2Nz4T2dDz73L8qZCorzoO5KRSyuCLSivQgrwo6AJtO4jj3VHrJjhW/ftaqPeZ81eS
+	xCnw==
+X-Gm-Message-State: APjAAAXfG+5BcGlH4MtCm6KdE+m9PeUFo5eyHy1rvz67WA8pNG+PXzSo
+	GcRPFgyHxGx3ovQPW/AehXsCS7OxE2A=
+X-Google-Smtp-Source: APXvYqwD290H6vdpsTipA57bGNWjJBczPvHx1916eYrV/4iphVwGg1aaOtC44oAggDeRARz0a2v04g==
+X-Received: by 2002:a17:90a:ec07:: with SMTP id
+	l7mr30004539pjy.68.1573962583880; 
+	Sat, 16 Nov 2019 19:49:43 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::30e8])
+	by smtp.gmail.com with ESMTPSA id
+	w15sm14881103pfn.13.2019.11.16.19.49.41
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 16 Nov 2019 19:49:42 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 16 Nov 2019 19:49:27 -0800
+Message-Id: <20191117034929.3298760-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sob3Znp-dXkpnr-avGtA=-t=yKtbU6ckW-w_zgmb8VeNg@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] surf: Add simple web browser
+Subject: [meta-oe][PATCH 1/3] poppler: Extend the c/c++ flags fix to cover clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,43 +58,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Nov 2019 17:17:03 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-List-Received-Date: Sun, 17 Nov 2019 03:49:43 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
-Hi Khem, Ross,
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...Do-not-overwrite-all-our-build-flags.patch | 24 +++++++++++++++----
+ 1 file changed, 19 insertions(+), 5 deletions(-)
 
-On 15.11.19 г. 22:49 ч., Khem Raj wrote:
-> On Fri, Nov 15, 2019 at 11:25 AM Ross Burton <ross.burton@intel.com> wrote:
->> On 15/11/2019 17:30, Khem Raj wrote:
->>> On Fri, 2019-11-15 at 16:09 +0100, Carlos Rafael Giani wrote:
->>>> meta-browser would be more appropriate.
->>> I was contemplating that as well. but these layer has more chromium and
->>> firefox lineage
->> But it's called meta-browser and not meta-firefox-and-chromium. :)
->>
-> certainly, worth proposing there.
-Layer meta-browser was on my radar before submitting the patch to 
-meta-oe. I also thought that this layer is more about chromium and 
-firefox. Links, another lightweight browser, is in meta-oe.
-
-In the mean time I've fixed the configurations so that surf recipe 
-doesn't need INHIBIT_PACKAGE_DEBUG_SPLIT or INHIBIT_PACKAGE_STRIP anymore.
-
-Best regards,
-Leon
->
->> Ross
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+diff --git a/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch b/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch
+index 18f508519e..05e0abede6 100644
+--- a/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch
++++ b/meta-oe/recipes-support/poppler/poppler/0001-Do-not-overwrite-all-our-build-flags.patch
+@@ -13,11 +13,9 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+  cmake/modules/PopplerMacros.cmake | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+ 
+-diff --git a/cmake/modules/PopplerMacros.cmake b/cmake/modules/PopplerMacros.cmake
+-index ccb2790..0f392cb 100644
+ --- a/cmake/modules/PopplerMacros.cmake
+ +++ b/cmake/modules/PopplerMacros.cmake
+-@@ -125,14 +125,14 @@ if(CMAKE_COMPILER_IS_GNUCXX)
++@@ -123,14 +123,14 @@ if(CMAKE_COMPILER_IS_GNUCXX)
+    set(DEFAULT_COMPILE_WARNINGS_EXTRA "${_warn} ${_warnx}")
+  
+    set(_save_cxxflags "${CMAKE_CXX_FLAGS}")
+@@ -34,5 +32,21 @@ index ccb2790..0f392cb 100644
+    set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-O2 -g ${_save_cflags}")
+    set(CMAKE_C_FLAGS_RELEASE          "-O2 -DNDEBUG ${_save_cflags}")
+    set(CMAKE_C_FLAGS_DEBUG            "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline ${_save_cflags}")
+--- 
+-2.14.3
++@@ -167,7 +167,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL
++   set(DEFAULT_COMPILE_WARNINGS_EXTRA "${_warn} ${_warnx}")
++ 
++   set(_save_cxxflags "${CMAKE_CXX_FLAGS}")
++-  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -fno-common -D_DEFAULT_SOURCE")
+++  set(CMAKE_CXX_FLAGS                "-fno-exceptions -fno-check-new -fno-common -D_DEFAULT_SOURCE ${_save_cxxflags}")
++   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g ${_save_cxxflags}")
++   set(CMAKE_CXX_FLAGS_RELEASE        "-O2 -DNDEBUG ${_save_cxxflags}")
++   # clang does not support -fno-reorder-blocks -fno-schedule-insns, so do not use -O2
++@@ -175,7 +175,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL
++   set(CMAKE_CXX_FLAGS_DEBUGFULL      "-g3 -fno-inline ${_save_cxxflags}")
++   set(CMAKE_CXX_FLAGS_PROFILE        "-g3 -fno-inline -ftest-coverage -fprofile-arcs ${_save_cxxflags}")
++   set(_save_cflags "${CMAKE_C_FLAGS}")
++-  set(CMAKE_C_FLAGS                  "-std=c99 -D_DEFAULT_SOURCE")
+++  set(CMAKE_C_FLAGS                  "-std=c99 -D_DEFAULT_SOURCE ${_save_cflags}")
++   set(CMAKE_C_FLAGS_RELWITHDEBINFO   "-O2 -g ${_save_cflags}")
++   set(CMAKE_C_FLAGS_RELEASE          "-O2 -DNDEBUG ${_save_cflags}")
++   # clang does not support -fno-reorder-blocks -fno-schedule-insns, so do not use -O2
 -- 
-Leon Anavi
-Software Engineer
-konsulko.com
+2.24.0
 
 
