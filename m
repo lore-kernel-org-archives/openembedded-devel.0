@@ -1,51 +1,57 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
-	[209.85.221.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 812E97F953
+Return-Path: <prvs=218492722=Mikko.Rapeli@bmw.de>
+X-Greylist: delayed 427 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 18 Nov 2019 11:47:53 UTC
+Received: from esa9.bmw.c3s2.iphmx.com (esa9.bmw.c3s2.iphmx.com
+	[68.232.133.110])
+	by mail.openembedded.org (Postfix) with ESMTP id BAFA67D1E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Nov 2019 11:23:15 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id t1so18981793wrv.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Nov 2019 03:23:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qMdbYOhmKVi4upxqEYYXb3yE4Xr6lFQs8RUW1pa+a5Y=;
-	b=UXUoRy/ry+Izh3vmTFJtzy67BepUT6BCTIiM3dE/x9ZrrAFBPTDPXkk6diCqZeX1D7
-	o41/40S1fwXuCSVxL8us/bkSGjrn6qTtIuIU4zgQupu48Nt5SyovN2n28j4uPLVPvkHz
-	YVkAJDdYOyLYJOW16cRq76NFogi1pFi1isLXQ5iHLbwcrL919Wd5kEeUWyHrzLI67QLS
-	ccRJjn+x9MGgTJwxltEQvUCKrCufUkUL28yWeAzrrNxIRFNpOw2S1v7/Y21en23ZrIyR
-	r89u2b7KldXmNpN02L6GMEUdLyU0xdNCuELrTrMHRQKqhIsx9KcFl54/3QuFDBGemwAw
-	+6Ng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qMdbYOhmKVi4upxqEYYXb3yE4Xr6lFQs8RUW1pa+a5Y=;
-	b=ezURhofAh6owZ+iqCa+fzWvGRbLaxGgw3upNFqxohVi8fk9PmYR9xCAa6tj7XhmXIk
-	uxPwEALbA1OlJIt5n4gQvi1hjz2xNGiCnvyMrx0plySF7roKsPPpwABp+rW8kBjwqTi7
-	Enpu+WzAFptwQYLViBYVoWYj1KLvHaZy5uoa8RFWDA4fIuqn7ef1Et1LkeQQkpCRu97a
-	3DIBInNySlfPeQTHmwF5GtOWMsZK4UAteJ6YpfQ96Ku+UeIZOQ3N9rx7wBD9gyYrjN8r
-	LC4ukc1cxoFJo10NPdNlyKq1elieqmqQR0ze8orBjz5nkvH+f3myyESqL1+1NdLRCoZ6
-	wVMA==
-X-Gm-Message-State: APjAAAXUnbdxbOLXL9jD6CMdtb3cccDYpjPqqn5jrUtSAXWuzXIaEoxE
-	pR9OIesGv6UzxUtCsBhhlvKw4qGwHEQ=
-X-Google-Smtp-Source: APXvYqyKswifv6D2U6ib68RKGY76UlMZwLK28PkofSnRJRsnPan45ro1tVOm6g6bxDtxAnoJLhUAhA==
-X-Received: by 2002:a5d:6350:: with SMTP id b16mr20629449wrw.357.1574076195790;
-	Mon, 18 Nov 2019 03:23:15 -0800 (PST)
-Received: from nick-bbestie.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	n23sm19688866wmc.18.2019.11.18.03.23.15
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 18 Nov 2019 03:23:15 -0800 (PST)
-From: Nicola Lunghi <nick83ola@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Nov 2019 11:22:58 +0000
-Message-Id: <20191118112257.40935-1-nick83ola@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	Mon, 18 Nov 2019 11:47:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bmw.de; i=@bmw.de; q=dns/txt; s=mailing1;
+	t=1574077675; x=1605613675;
+	h=from:to:cc:subject:date:message-id:references:
+	in-reply-to:content-id:content-transfer-encoding: mime-version;
+	bh=eAwy0uG49MMXp108chAweufCf9rgXY08rSC/cAjEw/s=;
+	b=W8iND1+2vkNNaC+NTOLJYdmvlj7rpmHp1kwx9nwf3BaG1rsH/vY4FmWb
+	ax+KUO/ZyphFDrssizkMnTS4JGiNTF0QDNBo6eIusigeJum72aZRVM+P0
+	ZVKP7mpYrw29j7g+aiCw8MfaqRdE2BNhKXCRjfns9pfbY+b5mvfMrHGhj 8=;
+IronPort-SDR: GTX9FjqcYbkxrBANLYt1BR3Jp1LSQ64b+pSd73QU7FzyFJgMTYndQi0VmN6x/Oqr3ipTlDerRY
+	b4dFbcJzN5FPfQaVh7PNiSu6NF1ooGFIimX1aYCT0L5Ib20NE5/f16JFCku9KRXjJMYMR2bLTZ
+	MusqAhDnJNkdSKhExzFbXy/kkgIKr6dEj3sTnMxnJLsr8sQ1JMUlUrOQdjTNEM27SR4VI4Obfz
+	kPiwekcos/nGLFrnh7V8UXDC/rltdwRtH5H93iQUX3HDFzyeurIEUEHY1VUZDpYbXtbvgzkK62
+	m68=
+Received: from esagw3.bmwgroup.com (HELO esagw3.muc) ([160.46.252.35]) by
+	esa9.bmw.c3s2.iphmx.com with ESMTP/TLS; 18 Nov 2019 12:40:48 +0100
+Received: from esabb5.muc ([160.50.100.47])  by esagw3.muc with ESMTP/TLS;
+	18 Nov 2019 12:40:28 +0100
+Received: from smucm10l.bmwgroup.net (HELO smucm10l.europe.bmw.corp)
+	([160.48.96.48])
+	by esabb5.muc with ESMTP/TLS; 18 Nov 2019 12:40:28 +0100
+Received: from smucm10k.europe.bmw.corp (160.48.96.47) by
+	smucm10l.europe.bmw.corp
+	(160.48.96.48) with Microsoft SMTP Server (TLS;
+	Mon, 18 Nov 2019 12:40:27 +0100
+Received: from smucm10k.europe.bmw.corp ([160.48.96.47]) by
+	smucm10k.europe.bmw.corp ([160.48.96.47]) with mapi id 15.00.1473.005;
+	Mon, 18 Nov 2019 12:40:27 +0100
+From: <Mikko.Rapeli@bmw.de>
+To: <jhofstee@victronenergy.com>
+Thread-Topic: [oe] [meta-qt4][PATCH 0/2] fix qt4 for zeus
+Thread-Index: AQHVnZA1pOVfbe9HvE2w/5DckYGk1KeQMEEAgABkoICAAB4xgIAACvuA
+Date: Mon, 18 Nov 2019 11:40:27 +0000
+Message-ID: <20191118114027.GG3527@hiutale>
+References: <20191117214427.20073-1-jhofstee@victronenergy.com>
+	<314811743.THUKncEJB5@shodan> <20191118091305.GE3527@hiutale>
+	<e5beec9d-74a7-d60d-af9f-71f4c4d527aa@victronenergy.com>
+In-Reply-To: <e5beec9d-74a7-d60d-af9f-71f4c4d527aa@victronenergy.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python3-jsonrpcserver: add recipe
+Cc: paul.eggleton@linux.intel.com, openembedded-devel@lists.openembedded.org,
+	bunk@stusta.de
+Subject: Re: [meta-qt4][PATCH 0/2] fix qt4 for zeus
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,46 +64,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Nov 2019 11:23:15 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 18 Nov 2019 11:47:54 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <63D7A1B17895304C889DF1CDFEA6405C@bmwmail.corp>
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
----
- .../python/python3-jsonrpcserver_4.0.5.bb     | 23 +++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-jsonrpcserver_4.0.5.bb
+On Mon, Nov 18, 2019 at 11:01:09AM +0000, Jeroen Hofstee wrote:
+> Hello Mikko,
+>=20
+> On 11/18/19 10:13 AM, Mikko.Rapeli@bmw.de wrote:
+> > On Mon, Nov 18, 2019 at 04:12:56PM +1300, Paul Eggleton wrote:
+> >> Hi Jeroen
+> >>
+> >> On Monday, 18 November 2019 10:44:37 AM NZDT Jeroen Hofstee wrote:
+> >>> Gcc 9.2 miscompiles the foreach resulting in broken applications.
+> >>> This backports a fix from qt5 to make it work again. The fix is
+> >>> not written for this issue, but it does solve it.
+> >>>
+> >>> As a prepartion it includes some whitespace fixes, so the patches
+> >>> are aligned in the SRC_URI.
+> >>>
+> >>> Jeroen Hofstee (2):
+> >>>    qt4: fix whitespace so it aligns
+> >>>    qt4: updates for gcc 9.2
+> >> I've merged both of these. I've also created zeus and warrior branches=
+. (For
+> >> now I have assumed these two should not be on warrior - let me know if=
+ that's
+> >> not correct.)
+> > It this ok from licensing point of view since LICENSE =3D "LGPLv2.1 | G=
+PLv3"?
+> >
+> > I suspect the LGPLv2.1 is not correct if GPLv3 licensed patches from qt=
+5 are there too.
+> >
+>=20
+> Since the license of the file this patch is coming from is the same
+> as in qt4, I don't understand how you suspect that it conflicts.
 
-diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.0.5.bb b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.0.5.bb
-new file mode 100644
-index 0000000000..bf9eb0a1cc
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.0.5.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "Library to process JSON-RPC requests"
-+HOMEPAGE = "https://github.com/bcb/jsonrpcserver"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=c89120516900f96f4c60d35fdc4c3f15"
-+
-+SRC_URI[md5sum] = "d41e9f6b310cb29b0d8f213ff9d57567"
-+SRC_URI[sha256sum] = "240c517f49b0fdd3bfa428c9a7cc581126a0c43eca60d29762da124017d9d9f4"
-+
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += "\
-+    python3-apply-defaults \
-+    python3-asyncio \
-+    python3-core \
-+    python3-json \
-+    python3-jsonschema \
-+    python3-logging \
-+    python3-netclient \
-+    python3-pkgutil \
-+    python3-typing \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
-\ No newline at end of file
--- 
-2.20.1
+Ok, that's great then!
 
+As you know, licensing of qt5 is different, e.g. in meta-qt5/recipes-qt/qt5=
+/qt5.inc says
+LICENSE =3D "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 =
+| The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Comm=
+ercial )"
+which does not include LGPLv2.1.
+
+Thus one needs to be very careful when backporting patches, or change the l=
+icensing to be
+compatible. If qt4 would not include LGPLv2.1 in LICENSE, then backporting =
+GPLv3 licensed
+changes from qt5 could be more straight forward.
+
+-Mikko=
 
