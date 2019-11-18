@@ -1,34 +1,38 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
-	by mail.openembedded.org (Postfix) with ESMTP id 121317F81A
+Return-Path: <michael.davis@essvote.com>
+X-Greylist: delayed 304 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 18 Nov 2019 14:55:07 UTC
+Received: from us-smtp-delivery-164.mimecast.com
+	(us-smtp-delivery-164.mimecast.com [216.205.24.164])
+	by mail.openembedded.org (Postfix) with ESMTP id 976597F98A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Nov 2019 14:13:14 +0000 (UTC)
-IronPort-SDR: 2r58a9eYX1UOZWjBqMdHODq8p0+j9yeZBZlrtokbj48lDSo9FG04tFZip7UwOPYobHjG9fm4rT
-	RN4aKATV/Y6wuwtWD6WKSovm7fbNwEiMX0QOp2NoqvzXX/7fA9vxSxKh3z7Ze/k53LjOZIm9T2
-	NdywS4cXLKFO9OaE9FOHEwN4H/1hDhSY7X59GWaIhyKFTkWkFRxgoyhUyqBY/+jjkY/B4QxYti
-	vDDl3cBZBIheu5rMJk9Kt5+//1d+dYmd0nyjJYFewkbdpu5ORl5uwuiux5APlzPJRutUfijNRN
-	F/Y=
-X-IronPort-AV: E=Sophos;i="5.68,320,1569276000"; 
-   d="scan'208";a="2546160"
-X-Axis-User: NO
-X-Axis-NonUser: YES
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Armin Kuster <akuster808@gmail.com>
-Thread-Topic: [oe] [meta-networking][PATCH] samba: fix installation for
-	minimal build
-Thread-Index: AdWeGk99wKVaHw+1QnWbVW6MoGYt2w==
-Date: Mon, 18 Nov 2019 14:13:13 +0000
-Message-ID: <bbc3ae41b78c4a208c664e2ce6f683aa@XBOX03.axis.com>
+	Mon, 18 Nov 2019 14:55:07 +0000 (UTC)
+Received: from webmail.essvote.com (40.142.57.162 [40.142.57.162]) (Using
+	TLS) by relay.mimecast.com with ESMTP id
+	us-mta-332-vmYdnXzaOSeq8jQnOnq-iQ-1; Mon, 18 Nov 2019 09:48:57 -0500
+Received: from ESS-EX02.essvote.corp.local (172.16.130.13) by
+	ESS-EX02.essvote.corp.local (172.16.130.13) with Microsoft SMTP Server
+	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+	15.1.1591.10; Mon, 18 Nov 2019 09:48:56 -0500
+Received: from ESS-EX02.essvote.corp.local ([fe80::4d14:423b:3668:f6f5]) by
+	ESS-EX02.essvote.corp.local ([fe80::4d14:423b:3668:f6f5%3]) with mapi
+	id 15.01.1591.017; Mon, 18 Nov 2019 09:48:56 -0500
+From: "Davis, Michael" <michael.davis@essvote.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-java] merged changes to master
+Thread-Index: AQHVm5ot5HuU48xqf0KJs1Tt8ETx8aeRA85g
+Date: Mon, 18 Nov 2019 14:48:56 +0000
+Message-ID: <c62671a8324949a786b64e3dfc53a6b4@essvote.com>
+References: <cb700209-e8fa-ea77-0127-0f1669a2c452@skidata.com>
+In-Reply-To: <cb700209-e8fa-ea77-0127-0f1669a2c452@skidata.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+x-originating-ip: [10.1.8.79]
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] samba: fix installation for minimal build
+X-MC-Unique: vmYdnXzaOSeq8jQnOnq-iQ-1
+X-Mimecast-Spam-Score: 0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-java] merged changes to master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,72 +45,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Nov 2019 14:13:15 -0000
+X-List-Received-Date: Mon, 18 Nov 2019 14:55:08 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Please cherry-pick this to Zeus.
+Two I would like to see backported.
 
-//Peter
+This one fixes a build break in at least thud and probably warrior.
+openjdk-8: disable stringop-overflow compiler errors
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org <openembedded-dev=
-el-bounces@lists.openembedded.org> On Behalf Of Andreas Oberritter
-> Sent: den 7 november 2019 21:37
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [meta-networking][PATCH] samba: fix installation for minima=
-l build
->=20
-> | chmod: cannot access '.../image/etc/sudoers.d': No such file or directo=
-ry
-> | sed: can't read .../image/usr/bin/samba-tool: No such file or directory
->=20
-> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
-> ---
->  .../recipes-connectivity/samba/samba_4.10.8.bb   | 16 +++++++++-------
->  1 file changed, 9 insertions(+), 7 deletions(-)
->=20
-> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb b=
-/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-> index d824eacf9e..4ab8b26c31 100644
-> --- a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-> +++ b/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-> @@ -189,15 +189,17 @@ do_install_append() {
->          sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
->      fi
->=20
-> -    chmod 0750 ${D}${sysconfdir}/sudoers.d
-> +    chmod 0750 ${D}${sysconfdir}/sudoers.d || true
->      rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
->=20
-> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
--gpupdate
-> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
-_upgradedns
-> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
-_spnupdate
-> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
-_kcc
-> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
-_dnsupdate
-> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${bindir}/samba-=
-tool
-> +    for f in samba-gpupdate samba_upgradedns samba_spnupdate samba_kcc s=
-amba_dnsupdate; do
-> +        if [ -f "${D}${sbindir}/$f" ]; then
-> +            sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindi=
-r}/$f
-> +        fi
-> +    done
-> +    if [ -f "${D}${bindir}/samba-tool" ]; then
-> +        sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${bindir}/sa=
-mba-tool
-> +    fi
->=20
->  }
->=20
-> --
-> 2.17.1
+This one fixes multi-lib builds in thud and warrior.
+Revert "base-files: Define JAVA_HOME by default"
 
+
+From: openembedded-devel-bounces@lists.openembedded.org <openembedded-devel=
+-bounces@lists.openembedded.org> On Behalf Of Richard Leitner
+Sent: Friday, November 15, 2019 3:51 AM
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Cc: Ricardo Ribalda Delgado <ricardo@ribalda.com>
+Subject: [oe] [meta-java] merged changes to master
+
+Hi,
+this is a note to let you know that I've just merged the following
+patches from master-next to the master branch of the meta-java
+repository at git://git.yoctoproject.org/meta-java<git://git.yoctoproject.o=
+rg/meta-java>.
+
+If any of them should be backported to any stable branches please get in
+contact with us by replying to this email. Thanks.
+
+
+Alistair Francis (1):
+layer.conf: Mark as compatible with zeus
+
+Chris Laplante (2):
+classpath: add patch to fix BigDecimal.compareTo()
+classpath: add patch to fix BigDecimal.stripTrailingZeros()'s
+handling of 0.
+
+Fang Jia (1):
+Revert "base-files: Define JAVA_HOME by default"
+
+Nicola Lunghi (1):
+openjdk-8: Enable HotSpot builds on 5.x Linux kernels
+
+Ricardo Ribalda Delgado (23):
+icedtea7: Add missing DEPENDS
+openjdk7: Make kerberos optional through PACKAGECONFIG
+openjdk8: Make kerberos optional through PACKAGECONFIG
+classpath: Fix build with targets aarch64
+jamvm: Do not build for aarch64 targets
+cacao: Do not build for aarch64 targets
+javasqlite: Create cc tool to make libtool happy
+jdon: Fix location of S
+rxtx: Fix path of javac
+jamvm: Fix binary name for javac
+cup: Do not use all as PACKAGE_ARCH
+dbus-java: Do not use all as PACKAGE_ARCH
+rhino: Do not use all as PACKAGE_ARCH
+ca-certificates: Cannot be an allarch package
+xalan-j: Do not use all as PACKAGE_ARCH
+xom: Do not use all as PACKAGE_ARCH
+jaxen: Do not build an all PACKAGE_ARCH
+jlex: Do not build as an all PACKAGE_ARCH
+bsf: Do not build as all PACKAGE_ARCH
+poi: Do not build as all PACKAGE_ARCH
+xom: Allow re-running do_compile
+jdom: Do not use all as PACKAGE_ARCH
+dom4j: Do not use all as PACKAGE_ARCH
+
+Richard Leitner (7):
+README: mention new TESTIMAGE_AUTO variable
+oeqa: runtime: java: Drop OETestID
+cacao: update to latest staging tip 2d6f6c14daf9
+README: rewrite build host dependencies
+icedtea7-native: disable new compiler warnings
+openjdk-8: disable stringop-overflow compiler errors
+layer.conf: remove compatibility with thud and warrior
+
+
+If you have any questions, please let me know.
+regards;Richard.L
+--
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists.o=
+penembedded.org>
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel<http://li=
+sts.openembedded.org/mailman/listinfo/openembedded-devel>
+
+Disclaimer
+
+The information contained in this communication from the sender is confiden=
+tial. It is intended solely for use by the recipient and others authorized =
+to receive it. If you are not the recipient, you are hereby notified that a=
+ny disclosure, copying, distribution or taking action in relation of the co=
+ntents of this information is strictly prohibited and may be unlawful.
+
+This email has been scanned for viruses and malware, and may have been auto=
+matically archived by Mimecast Ltd, an innovator in Software as a Service (=
+SaaS) for business. Providing a safer and more useful place for your human =
+generated data. Specializing in; Security, archiving and compliance. To fin=
+d out more visit the Mimecast website.
 
