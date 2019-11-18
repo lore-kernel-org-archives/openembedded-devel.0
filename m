@@ -1,27 +1,34 @@
 Return-Path: <peter.kjellerstedt@axis.com>
-X-Greylist: delayed 429 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 18 Nov 2019 13:38:51 UTC
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
-	by mail.openembedded.org (Postfix) with ESMTP id A1D9B7F968
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+	by mail.openembedded.org (Postfix) with ESMTP id 121317F81A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Nov 2019 13:38:51 +0000 (UTC)
-IronPort-SDR: G8O6TJVHdg3lGn5XUlTEYFv+++FVDAEzTbLMIbEZWJhG40lNL+9jZTf/jpbj+bbg6dXgvrpOcW
-	mTS/X8tptZYCHh1LA8SO9f/Pgnm2uxp3Ywtghy8usVCM5KIg97IOyPhV8oSZ3vIGxJrhsrqUNO
-	qTMHLHHBoZTqjjxDodvBMSMfsuStToi+eCuP2XVfKL4uTDtttAp5kiO6nfZKma/BAcyJXCvNCH
-	U/X9aFBu7R/HtvbwFkKxKItDEma6EuXcfZjtB4v4y/CAc7AdGptWIznaSRVu3z/MAdOL7LVqml
-	1gY=
+	Mon, 18 Nov 2019 14:13:14 +0000 (UTC)
+IronPort-SDR: 2r58a9eYX1UOZWjBqMdHODq8p0+j9yeZBZlrtokbj48lDSo9FG04tFZip7UwOPYobHjG9fm4rT
+	RN4aKATV/Y6wuwtWD6WKSovm7fbNwEiMX0QOp2NoqvzXX/7fA9vxSxKh3z7Ze/k53LjOZIm9T2
+	NdywS4cXLKFO9OaE9FOHEwN4H/1hDhSY7X59GWaIhyKFTkWkFRxgoyhUyqBY/+jjkY/B4QxYti
+	vDDl3cBZBIheu5rMJk9Kt5+//1d+dYmd0nyjJYFewkbdpu5ORl5uwuiux5APlzPJRutUfijNRN
+	F/Y=
 X-IronPort-AV: E=Sophos;i="5.68,320,1569276000"; 
-   d="scan'208";a="2634156"
+   d="scan'208";a="2546160"
 X-Axis-User: NO
 X-Axis-NonUser: YES
 X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
 From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Nov 2019 14:31:39 +0100
-Message-Id: <20191118133139.21612-1-pkj@axis.com>
-X-Mailer: git-send-email 2.21.0
+To: Armin Kuster <akuster808@gmail.com>
+Thread-Topic: [oe] [meta-networking][PATCH] samba: fix installation for
+	minimal build
+Thread-Index: AdWeGk99wKVaHw+1QnWbVW6MoGYt2w==
+Date: Mon, 18 Nov 2019 14:13:13 +0000
+Message-ID: <bbc3ae41b78c4a208c664e2ce6f683aa@XBOX03.axis.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-Subject: [meta-oe][master][zeus][PATCH] libldb: Do not require the "pam" distro feature to be enabled
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] samba: fix installation for minimal build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,34 +41,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Nov 2019 13:38:53 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 18 Nov 2019 14:13:15 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-It was only added because samba was a dependency, but was not removed
-again when the dependency on samba was removed in commit 6207331f.
+Please cherry-pick this to Zeus.
 
-This effectively reverts commit a190c2e3.
+//Peter
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
----
- meta-networking/recipes-support/libldb/libldb_1.5.6.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
-
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.6.bb b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-index 99eb6f9ce..cc24863c6 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-@@ -36,8 +36,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
- SRC_URI[md5sum] = "fc58ef432c1fcb03fc3bb6cccce08977"
- SRC_URI[sha256sum] = "ff82474d0bf109e415a2d50334bde5715f486a53ff4bb8c7f74459dd229e975b"
- 
--inherit waf-samba distro_features_check
--REQUIRED_DISTRO_FEATURES = "pam"
-+inherit waf-samba
- 
- S = "${WORKDIR}/ldb-${PV}"
- 
--- 
-2.21.0
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org <openembedded-dev=
+el-bounces@lists.openembedded.org> On Behalf Of Andreas Oberritter
+> Sent: den 7 november 2019 21:37
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-networking][PATCH] samba: fix installation for minima=
+l build
+>=20
+> | chmod: cannot access '.../image/etc/sudoers.d': No such file or directo=
+ry
+> | sed: can't read .../image/usr/bin/samba-tool: No such file or directory
+>=20
+> Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+> ---
+>  .../recipes-connectivity/samba/samba_4.10.8.bb   | 16 +++++++++-------
+>  1 file changed, 9 insertions(+), 7 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb b=
+/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
+> index d824eacf9e..4ab8b26c31 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
+> @@ -189,15 +189,17 @@ do_install_append() {
+>          sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
+>      fi
+>=20
+> -    chmod 0750 ${D}${sysconfdir}/sudoers.d
+> +    chmod 0750 ${D}${sysconfdir}/sudoers.d || true
+>      rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
+>=20
+> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
+-gpupdate
+> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
+_upgradedns
+> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
+_spnupdate
+> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
+_kcc
+> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba=
+_dnsupdate
+> -    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${bindir}/samba-=
+tool
+> +    for f in samba-gpupdate samba_upgradedns samba_spnupdate samba_kcc s=
+amba_dnsupdate; do
+> +        if [ -f "${D}${sbindir}/$f" ]; then
+> +            sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindi=
+r}/$f
+> +        fi
+> +    done
+> +    if [ -f "${D}${bindir}/samba-tool" ]; then
+> +        sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${bindir}/sa=
+mba-tool
+> +    fi
+>=20
+>  }
+>=20
+> --
+> 2.17.1
 
 
