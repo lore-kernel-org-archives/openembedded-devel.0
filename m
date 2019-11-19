@@ -1,30 +1,50 @@
-Return-Path: <paul.eggleton@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 21CFF7F8C8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com
+	[209.85.216.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D95796C132
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Nov 2019 19:38:43 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	18 Nov 2019 11:38:44 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.68,321,1569308400"; d="scan'208";a="406197376"
-Received: from ppatil-mobl1.amr.corp.intel.com (HELO shodan.localnet)
-	([10.255.162.6])
-	by fmsmga005.fm.intel.com with ESMTP; 18 Nov 2019 11:38:41 -0800
-From: Paul Eggleton <paul.eggleton@linux.intel.com>
-To: Mikko.Rapeli@bmw.de
-Date: Tue, 19 Nov 2019 08:38:18 +1300
-Message-ID: <7534400.j1Xr5d304z@shodan>
-Organization: Intel Corporation
-In-Reply-To: <20191118114027.GG3527@hiutale>
-References: <20191117214427.20073-1-jhofstee@victronenergy.com>
-	<e5beec9d-74a7-d60d-af9f-71f4c4d527aa@victronenergy.com>
-	<20191118114027.GG3527@hiutale>
+	Tue, 19 Nov 2019 01:16:42 +0000 (UTC)
+Received: by mail-pj1-f67.google.com with SMTP id bo14so2036196pjb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Nov 2019 17:16:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=sNYkX76fj+CYjMoiAInB5NGZD2HHRoULZrp9v3l9CxE=;
+	b=jN8MifEI9igiPOegQCNloRBbrCy/igcYm6hi0xYqYQ05NoyP9QjWuZ7P6+ly2hwLjs
+	i8g5dVrzXa+RW9HkRjZjoMJpI05yXxZIDun9OHse47lpxhajNGmz32ADC0KunqLJLhNy
+	1Zx9IrjHXy+1GyQpJCz4dv4kVeildKVNfDhwzXig/RePmDsI1a1yNvhTY0Gy6ErZADI3
+	QZ2O/wqNrBaJIhdX5m+zSlWIDV+2Ocy+8t36HSGiD6grsSQ2qyPTytbYHeM0Dxly3R8Q
+	tVWTAHlJ7au1GKhMowwCHOS95i0KfMii6keMAe6u9ttTBqKHY41SdB4sz6Ih08HMRI5u
+	PfVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=sNYkX76fj+CYjMoiAInB5NGZD2HHRoULZrp9v3l9CxE=;
+	b=QsVMSA/tl8oVTeOE5IcGfd+Hox6jqRYZ6/Fh0kcfxmLiOWeVj1tQm5kZRd3Sfo8dXO
+	ge/ldd0ec/L9UpW4qlNhqUt/OEFLlP3FoVeyEytnmZb0EVeN0v/YDjdlSse4cZV2XFG5
+	LUsaQQjWGkMnqtz1ZVxWBVFBBlTQTDvoTdHV+5c9fUBEQeno+173w6FLnBVpwOmbSpvj
+	DFdlCozuad+Fy58/H59qKt0JiW408ZfXb9kDeYODhp7fr7Eeaht8A49L1m0IUX8UPxjF
+	s9TeBwErXfjLUjNYvRpGH0s1HRXHF/PXWmQfLKXNgXMzMlG9HNmF9U+esw5hDfFsv66a
+	Dxmg==
+X-Gm-Message-State: APjAAAUDbwPaP/tWJ1FYQKH5Z0aJvMrhHAofumzk1TvuGubsg5d9J2k0
+	bukfbZzgw6mnLpwIJyUf1RKGmLH3DII=
+X-Google-Smtp-Source: APXvYqxgUkQW8QWAzvN9JGIikOHl0yo2w/6oHHWYNOeMlN8a/o0+NwE9VxD2lWBfV88j5sCyoPKeNg==
+X-Received: by 2002:a17:902:d708:: with SMTP id
+	w8mr427866ply.280.1574126202956; 
+	Mon, 18 Nov 2019 17:16:42 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::30e8])
+	by smtp.gmail.com with ESMTPSA id y8sm22021106pfl.8.2019.11.18.17.16.41
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 18 Nov 2019 17:16:42 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 Nov 2019 17:16:28 -0800
+Message-Id: <20191119011629.3835732-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org, bunk@stusta.de
-Subject: Re: [meta-qt4][PATCH 0/2] fix qt4 for zeus
+Subject: [meta-networking][PATCH 1/2] grpc: Link with libatomic on clang/x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,61 +57,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Nov 2019 19:38:44 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Tue, 19 Nov 2019 01:16:43 -0000
+Content-Transfer-Encoding: 8bit
 
-Hi Mikko,
+clang does delegate the atomic<double> calls to libatomic on x86 where
+as gcc tries to use intrinsics, its debatable who is right, but it does
+seem that clang is safe in case pointer is unaligned
 
-On Tuesday, 19 November 2019 12:40:27 AM NZDT Mikko.Rapeli@bmw.de wrote:
-> On Mon, Nov 18, 2019 at 11:01:09AM +0000, Jeroen Hofstee wrote:
-> > On 11/18/19 10:13 AM, Mikko.Rapeli@bmw.de wrote:
-> > > On Mon, Nov 18, 2019 at 04:12:56PM +1300, Paul Eggleton wrote:
-> > >> On Monday, 18 November 2019 10:44:37 AM NZDT Jeroen Hofstee wrote:
-> > >>> Gcc 9.2 miscompiles the foreach resulting in broken applications.
-> > >>> This backports a fix from qt5 to make it work again. The fix is
-> > >>> not written for this issue, but it does solve it.
-> > >>>
-> > >>> As a prepartion it includes some whitespace fixes, so the patches
-> > >>> are aligned in the SRC_URI.
-> > >>>
-> > >>> Jeroen Hofstee (2):
-> > >>>    qt4: fix whitespace so it aligns
-> > >>>    qt4: updates for gcc 9.2
-> > >> I've merged both of these. I've also created zeus and warrior branches. (For
-> > >> now I have assumed these two should not be on warrior - let me know if that's
-> > >> not correct.)
-> > > It this ok from licensing point of view since LICENSE = "LGPLv2.1 | GPLv3"?
-> > >
-> > > I suspect the LGPLv2.1 is not correct if GPLv3 licensed patches from qt5 are there too.
-> > 
-> > Since the license of the file this patch is coming from is the same
-> > as in qt4, I don't understand how you suspect that it conflicts.
-> 
-> Ok, that's great then!
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-devtools/grpc/grpc_1.24.3.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-FYI the patch that was backported [1] [2] first appeared in qtbase in v5.4.0-alpha1 in 2014 which was prior to the re-licensing that happened in 5.6.
-
-> As you know, licensing of qt5 is different, e.g. in meta-qt5/recipes-qt/qt5/qt5.inc says
-> LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
-> which does not include LGPLv2.1.
-> 
-> Thus one needs to be very careful when backporting patches, or change the licensing to be
-> compatible. If qt4 would not include LGPLv2.1 in LICENSE, then backporting GPLv3 licensed
-> changes from qt5 could be more straight forward.
-
-Indeed, thanks for the reminder. I think we probably want to leave qt4's LICENSE as-is though, since the upstream code is available under LGPLv2.1 and I think it would be odd if we were to remove that just for the sake of a few patches.
-
-Cheers
-Paul
-
-[1] https://salsa.debian.org/qt-kde-team/qt/qt4-x11/commit/0d4a3dd61ccb156dee556c214dbe91c04d44a717
-[2] https://github.com/qt/qtbase/commit/c35a3f519007af44c3b364b9af86f6a336f6411b
-
+diff --git a/meta-networking/recipes-devtools/grpc/grpc_1.24.3.bb b/meta-networking/recipes-devtools/grpc/grpc_1.24.3.bb
+index ecc575bcfb..24072c0832 100644
+--- a/meta-networking/recipes-devtools/grpc/grpc_1.24.3.bb
++++ b/meta-networking/recipes-devtools/grpc/grpc_1.24.3.bb
+@@ -42,6 +42,10 @@ do_configure_prepend_mipsarch() {
+     sed -i -e "s/set(_gRPC_ALLTARGETS_LIBRARIES \${CMAKE_DL_LIBS} rt m pthread)/set(_gRPC_ALLTARGETS_LIBRARIES \${CMAKE_DL_LIBS} atomic rt m pthread)/g" ${S}/CMakeLists.txt
+ }
+ 
++do_configure_prepend_toolchain-clang_x86() {
++    sed -i -e "s/set(_gRPC_ALLTARGETS_LIBRARIES \${CMAKE_DL_LIBS} rt m pthread)/set(_gRPC_ALLTARGETS_LIBRARIES \${CMAKE_DL_LIBS} atomic rt m pthread)/g" ${S}/CMakeLists.txt
++}
++
+ BBCLASSEXTEND = "native nativesdk"
+ 
+ SYSROOT_DIRS_BLACKLIST_append_class-target = "${libdir}/cmake/grpc"
 -- 
-
-Paul Eggleton
-Intel System Software Products
-
+2.24.0
 
 
