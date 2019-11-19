@@ -1,38 +1,38 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
-	[209.85.128.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 7349F7CE5F
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 759177CE5F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Nov 2019 07:17:47 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id z26so1929191wmi.4
+	Tue, 19 Nov 2019 07:17:48 +0000 (UTC)
+Received: by mail-wm1-f51.google.com with SMTP id c22so2199742wmd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Nov 2019 23:17:48 -0800 (PST)
+	Mon, 18 Nov 2019 23:17:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=/y596nlKeIodhMp23+hqCjhmYOa5+W7/ql4U/lrgWXQ=;
-	b=LkexfCIbX8OQScV0JF7JT+julSevpo92Vp2lCUHqWcbYXMeyy/9yudJ9DGnzyanlLg
-	SWM4NeLa2vPJMGPpZH7v0UzuPtkRQoR7/ZOJLilHY56/M1Df2e5Z04Zq4bPSHjfOPL1N
-	hVbhjIfIRUPtI87B9RErpHYgGzd5z2J/JdqpUcqsjTMJEZ/OtiQi2lbV1+a1wcUs2Teh
-	vM4UN3YdKMu+puK+HYhHxusc5d39DmiaJvKJ6fIHBU2aVWri63FosBf90HrhIVQa6EzX
-	+YrrUsvez1a1Y/iq1yF2Pi6ag+w7vdyNR+ovBH8kgtsIDalgRTAH0Av9U0qUpUyMRcla
-	AUbg==
+	bh=50PdqbetXPThelNo+hEkATlbYLO93y6kf/K0slr8De4=;
+	b=IRn1n7qx1mvMcsp6/BfMQw7c7sbd0oWAKNB0PgbqjOsKyVchQSv8YNMLoLMUMRVgFm
+	gvvM/0luUXKk0d7HZPR49FdG6No2LBZqJH0ed2xvmY7EWjQSCCRJeaagrAN7qdqadEKT
+	OsEWq2VZ/YmgvOZHZQ75fA1rMPP74oIH/xtxYXwL4ZED5XTzhgtCtXYayxX3Q/qePxMs
+	wh2qvMxzZoMrBJ6eCg/ElaNWv/gcbW2RZDkHul8wQs7J8FS9lhuXOizDPN8+/SwKxZUK
+	eKe9tzjxhLM0gwSSx81zYJ4yVK2MRDvHpvAcPSu7q5QyDXpYZAYf6uuzRHhkBs/MI3bO
+	Cy9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=/y596nlKeIodhMp23+hqCjhmYOa5+W7/ql4U/lrgWXQ=;
-	b=sOeNAtUQ6YlIxZASF/aezCxznSaJDIjeNqgA68bssGczR2We7dvR3ZosTkSGPRdkAm
-	/CEfz/VccS0WAKJVIzfXP1Eu4bz5HWwxrGus1OYrdR1/Vi9lAHKmAYCAL3E3pFpaLHBy
-	KwJq+6teyBlgAN72zARE9PctcGEEmZtBalMKCSVxaHLaO2occ0kXOwzKn4wWS0CkkCBO
-	DpWd8kQ+zzt/LJcCQmYv3iBCu44oiNdVQzkp+roicVtc+Y8IUgPEGwjzp+Q/MACFq6dq
-	ZslnjDnFzkKW4hWgdNGECJN4zF/+ykEgVxlxJxy3n6vSAU4I542I4dtTMneesFt7nDWd
-	75sQ==
-X-Gm-Message-State: APjAAAX7uhh+dJTMtr7Ci5ZUOmyRp4kerPvXbi6uXsv0Y5frSt1EWy3k
-	NpIhzG4p4qHbnbaKIr3ST0Kn5koE
-X-Google-Smtp-Source: APXvYqyFeGFdEO7PftdsAzzU8hG9EHGrpwXwQ/0BhKcC7X31+GSALhr1NlVN8xQcMYJqEOJ5sEnq8Q==
-X-Received: by 2002:a7b:cae2:: with SMTP id t2mr3442322wml.161.1574147867928; 
-	Mon, 18 Nov 2019 23:17:47 -0800 (PST)
+	bh=50PdqbetXPThelNo+hEkATlbYLO93y6kf/K0slr8De4=;
+	b=Tuvadp66yfPZNHGL3mja46WmqegY3OzgLvcmy7AscnFZKQfySMsHdOOxFi8+6XHsZA
+	6enl371SDgi7qGd+u/DASnlGKQlrEBSlcV/q8J8//u+67/MgDiVLj1dKiINt/6MUmpN7
+	gve617G2HBDYVw6Vw8cAPMkHU8WWrBrUp8XAa5YH1FOA/c4FSp1kGEXrxx+K8hJNskCJ
+	TxDirM8z4VhTP/H5ldJss8CmKjLTWvX40S5gE/DihMdP2emWYd9XHOwMjxEiP3QkoMFD
+	OeZXIzG6Mc0Mpn4m16+FSh7iP82FyMdvc5wfrfehj5Lkcnr8c4kgGA+HaGAIAX/ZsMKz
+	aQWA==
+X-Gm-Message-State: APjAAAX/Tn9Ajf/wHjql9af+n93PKPkwm96ElNlWYSgXfWvmvnZ9m+Ea
+	IvBLCRAqAV6TFGyNJGPpq67JODNX
+X-Google-Smtp-Source: APXvYqxIT/1uEhxf7PKqYoQ45zAe2ulqk/kp0dA8qgyw5pTmpHMMFkj/VnNdGUC0a6GRzEJJNZMPGw==
+X-Received: by 2002:a7b:c7c7:: with SMTP id z7mr3454779wmk.133.1574147868942; 
+	Mon, 18 Nov 2019 23:17:48 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0CB657F29A81DEDF319DFC.dip0.t-ipconnect.de.
 	[2003:f0:7f0c:b657:f29a:81de:df31:9dfc])
@@ -40,16 +40,16 @@ Received: from superandy.speedport.ip
 	b1sm24480182wrs.74.2019.11.18.23.17.47
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 18 Nov 2019 23:17:47 -0800 (PST)
+	Mon, 18 Nov 2019 23:17:48 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Nov 2019 08:17:29 +0100
-Message-Id: <20191119071730.2682-9-schnitzeltony@gmail.com>
+Date: Tue, 19 Nov 2019 08:17:30 +0100
+Message-Id: <20191119071730.2682-10-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191119071730.2682-1-schnitzeltony@gmail.com>
 References: <20191119071730.2682-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 8/9] gnome-terminal: add gsettings to inherit
+Subject: [PATCH 9/9] gedit: add gsettings to inherit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,28 +62,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Nov 2019 07:17:47 -0000
+X-List-Received-Date: Tue, 19 Nov 2019 07:17:48 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-gnome/gnome-terminal/gnome-terminal_3.34.2.bb       | 2 +-
+ meta-gnome/recipes-gnome/gedit/gedit_3.34.0.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.34.2.bb b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.34.2.bb
-index ffbabbf88..ba9a79d89 100644
---- a/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.34.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-terminal/gnome-terminal_3.34.2.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = " \
-     file://COPYING.GFDL;md5=a22d0be1ce2284b67950a4d1673dd1b0 \
+diff --git a/meta-gnome/recipes-gnome/gedit/gedit_3.34.0.bb b/meta-gnome/recipes-gnome/gedit/gedit_3.34.0.bb
+index 9679a1ce6..a4a863962 100644
+--- a/meta-gnome/recipes-gnome/gedit/gedit_3.34.0.bb
++++ b/meta-gnome/recipes-gnome/gedit/gedit_3.34.0.bb
+@@ -19,7 +19,7 @@ DEPENDS = " \
+     gtksourceview4 \
  "
  
--inherit gnomebase gnome-help gettext itstool upstream-version-is-even
-+inherit gnomebase gsettings gnome-help gettext itstool upstream-version-is-even
+-inherit gnomebase itstool gnome-help gobject-introspection gtk-doc vala gettext distro_features_check upstream-version-is-even
++inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc vala gettext distro_features_check upstream-version-is-even
  
- DEPENDS = " \
-     glib-2.0-native \
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
 -- 
 2.21.0
 
