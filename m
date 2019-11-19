@@ -1,50 +1,27 @@
-Return-Path: <pdmorrow@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A0397F7DD
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 323F07F829
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Nov 2019 15:45:49 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id 8so4256872wmo.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Nov 2019 07:45:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=CBkGn3OYr/+Qw45eAZJbo0bnJig3GCu+i8LpnzL+MrU=;
-	b=af6ZjED8QMiiFIKQaGrpdUXLpskV9SLCGAqYgzndqes/jQXjMx+y190ECIaZk3MiCO
-	djVgtwANYoDEP9BdShTGrR8S31ugQCDq6hlJfP12SL7/oDQkGhfeKdeDb6xMrgyOkwTv
-	hM1lgLLCWHaijoQWsVQPkC+VwSImgNCdLvQwGkeX82/HgMqzwYccF47rTHZdsf4Fmg5e
-	EeMrwFzRY1PSTqYwHsUVjY3hHJmOn4IqpJYMAOmwlfnKPK36kltywyrlbp3q1QgdKg1O
-	snEMlRnmIlGhVuj3z8dYqUXOXMt6epKdKi15TyUx/HFUaHStqVCHHiJO/N0dAuDgX1JH
-	qbwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=CBkGn3OYr/+Qw45eAZJbo0bnJig3GCu+i8LpnzL+MrU=;
-	b=avYyPsjBxQCEuLe1o0V7ut7yJEa3seJ7U/JNLm7FFjVtfkjr2Jy4GoqohzulX7LaDy
-	DOErLWkj+ww8Qnka1EJDoZAP6O6xRQPGsWEvkb+JVLjZlXpIGfjO6BKkxdSUjZ5g0z1r
-	VFbLkcpxW7K9zYBQLxZpTQdFqmsRC/cpwpt4WLJwtnTHx9imi5cdqXaHMcpLyvXP9MOZ
-	bYNYnuIXCeCTbFkNh5mVwxdSNej2jhb1Ns3/GboCyDAIfdAMcBWSX0f/h2gCiF8Vc5gy
-	onno7oUueeDQiKLR4ZFZ3MglwmmkQAejR7GBVFzpGiPyt4gzqQ2InqH2L8+euDIdPzLE
-	W+tQ==
-X-Gm-Message-State: APjAAAWsC/oUDIG1vm7P1M1jPh2Hg1JkMnJgPKy9stFUlWylrxW4MLhU
-	sZQ1NL3hHJlKd5xAoMyNJ2V9B6X4ut0=
-X-Google-Smtp-Source: APXvYqyzhqXRS8572NukY93QECPb9aVL5y9A2XdYneTWQWV+Vv8NaPGStZVeG9HoKQ7uUEKjThN+Vw==
-X-Received: by 2002:a1c:9e10:: with SMTP id h16mr6322787wme.91.1574178349719; 
-	Tue, 19 Nov 2019 07:45:49 -0800 (PST)
-Received: from localhost ([88.215.3.59]) by smtp.gmail.com with ESMTPSA id
-	x9sm26828831wru.32.2019.11.19.07.45.48
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 19 Nov 2019 07:45:49 -0800 (PST)
-From: pdmorrow@gmail.com
+	Tue, 19 Nov 2019 17:24:37 +0000 (UTC)
+Received: from localhost.localdomain (31-10-206-124.static.upc.ch
+	[31.10.206.124])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id A316C5C2A2C;
+	Tue, 19 Nov 2019 18:24:37 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1574184277;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:content-type:content-transfer-encoding:
+	in-reply-to:references; bh=elNM31Q+Mla9Z+QFkJl37cUblGsExmfpkEPTZafGN9s=;
+	b=rUzv+pOTSm5LnTOJ9K8USF/2+0hK/FTZ6Y+N3dnCgoZ955DVlgz5EjO0tU4ehEKyY8CDjv
+	m9FTtPHdmERoIqFDcJlsTN0U1SXHfohWUi4Ru0JefLOoe12WOS/fOINCliBIkkZ/M/3eBf
+	y3Dv0fT1TChcoI5/k69Qqef+vke/G58=
+From: Stefan Agner <stefan@agner.ch>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Nov 2019 15:45:39 +0000
-Message-Id: <20191119154539.22200-1-pdmorrow@gmail.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Cc: Peter Morrow <peter.morrow@microsoft.com>
-Subject: [meta-networking][PATCH] chrony: install chrony-wait.service
+Date: Tue, 19 Nov 2019 17:24:34 +0000
+Message-Id: <20191119172434.19600-1-stefan@agner.ch>
+X-Mailer: git-send-email 2.17.1
+Cc: Stefan Agner <stefan.agner@toradex.com>, bunk@stusta.de
+Subject: [PATCH v2] networkmanager: do not deploy unnecessary udev rule file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,38 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Nov 2019 15:45:49 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 19 Nov 2019 17:24:38 -0000
 
-From: Peter Morrow <peter.morrow@microsoft.com>
+From: Stefan Agner <stefan.agner@toradex.com>
 
-Any systemd service which needs to wait on ntp synchronization before
-starting can order themselves after chrony-wait.service.  It's useful
-to install this service as part of the recipe as it saves needing to
-install it via a bbappend file.  Note that even if the service is
-installed no start up delay is introduced unless another service
-orders itself after the systemd target time-sync.target.
+The 84-nm-drivers.rules is not required for systemd-udevd versions
+v210 and later. The file has been split into a separate file so
+distributions with a new enough systemd version can drop it. See
+also:
+https://github.com/NetworkManager/NetworkManager/commit/1e0375826252abf9aab2aef273a2a24cd08c9f42
 
-Signed-off-by: Peter Morrow <peter.morrow@microsoft.com>
+I noticed this while investigating into a warning show during
+bootup:
+  /usr/lib/udev/rules.d/84-nm-drivers.rules:10 Invalid value "/bin/sh -c
+  'ethtool -i $1 | sed -n s/^driver:\ //p' -- $env{INTERFACE}" for PROGRAM
+  (char 24: invalid substitution type), ignoring, but please fix it.
+
+Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
 ---
- meta-networking/recipes-support/chrony/chrony_3.5.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../networkmanager/networkmanager_1.18.4.bb                  | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/chrony/chrony_3.5.bb b/meta-networking/recipes-support/chrony/chrony_3.5.bb
-index 7c6356d26..fa11c443e 100644
---- a/meta-networking/recipes-support/chrony/chrony_3.5.bb
-+++ b/meta-networking/recipes-support/chrony/chrony_3.5.bb
-@@ -103,6 +103,9 @@ do_install() {
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${S}/examples/chronyd.service ${D}${systemd_unitdir}/system/
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
+index 085807c4c..27508c4d9 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
+@@ -141,8 +141,11 @@ do_install_append() {
  
-+    # systemd chronyd synchronization unit configuration file
-+    install -m 0644 ${S}/examples/chrony-wait.service ${D}${systemd_unitdir}/system/
+     rm -rf ${D}/run ${D}${localstatedir}/run
+ 
+-    # For read-only filesystem, do not create links during bootup
+     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        # For read-only filesystem, do not create links during bootup
+         ln -sf ../run/NetworkManager/resolv.conf ${D}${sysconfdir}/resolv-conf.NetworkManager
 +
-     # Variable data (for drift and/or rtc file)
-     install -d ${D}${localstatedir}/lib/chrony
- 
++        # systemd v210 and newer do not need this rule file
++        rm ${D}/${nonarch_base_libdir}/udev/rules.d/84-nm-drivers.rules
+     fi
+ }
 -- 
-2.20.1
+2.17.1
 
 
