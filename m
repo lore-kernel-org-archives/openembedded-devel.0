@@ -1,48 +1,50 @@
 Return-Path: <nick83ola@gmail.com>
-Received: from mail-lf1-f65.google.com (mail-lf1-f65.google.com
-	[209.85.167.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 9745E7F813
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com
+	[209.85.208.178])
+	by mail.openembedded.org (Postfix) with ESMTP id E1A777F7C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Nov 2019 13:32:32 +0000 (UTC)
-Received: by mail-lf1-f65.google.com with SMTP id r14so10433200lff.3
+	Tue, 19 Nov 2019 14:15:46 +0000 (UTC)
+Received: by mail-lj1-f178.google.com with SMTP id d5so23509119ljl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Nov 2019 05:32:34 -0800 (PST)
+	Tue, 19 Nov 2019 06:15:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Hjz4ujLAp6wkPNt1teeM+HVE6pDf1QlX5KbuWpCgjeI=;
-	b=LKAwD47LsTMag9QFI1doi8LAw/BNVeV+tHuc0yQGbqvfpCSOAHEBbGgaORSxN7mvaW
-	CKEx019/Dsc3xS8CQlyhkjUC4ZX1pJ5crdw/LRVo1Cxhx2aD3WUnU0RAaI/cVo2rvXgP
-	9Fuy8tqs7bgMz4uAA4a33cElrww6sbg95+hvdpEiCrHeZVAK/1XgmKXvzI3VwlrzKRsL
-	531lCEBZWZQDQtev9CrkIK2BMqHu80FMwz2Av5m0f/wORGixN0TlCsGx7euMxqbABtRC
-	KpobkdXerwmxaVv/xFFLUt06HtZiGfT9C5OTL8nqCjzGFrcWK0G1FCb8J7skF6YGRhn+
-	SHng==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=pSi5XDohncQgciTrHKt7ftb1ObvOiTMVJqsn7lFZbNU=;
+	b=m9rGGDYXiq7ev0h8bK8ll5UNKSZsm8DHO/B94HcR1c5EjVradGMNnAzg5SUVW5LNHR
+	fN9QyvxUd269QDiTPFMqP/r2k6S4LSEvhvC/+r9PMKPj2r1RQHT7NfNUVb/OPngWTFMz
+	uPoh87lAEMmXALE5/L95MJfoshfX5QJdrx2TGPiQOrWUoXYLkQFDB4IL+jGsouaUwOio
+	YAMlsneb/eOuOM+Q/lO/9keWxXvXooltgikosle7Ar/dwxuRqPTbtjHgCQClPJp0HqDB
+	u0lGS6c5Jv+PFfHLNnulk6/ml3bqykFhORi1IXXJ59DnVlkxJfKDmHcHlFWsu4WR88HM
+	Z5cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Hjz4ujLAp6wkPNt1teeM+HVE6pDf1QlX5KbuWpCgjeI=;
-	b=eap764HYtrm6ODhCIDhjA1YyHGqMYLb5ehvHerjhtljnZvOt+JLiArnBorIZEXogQY
-	RSmhtcODTP4aoxW75hVwpw5HRo/N4qJWNi8sYdBOwBY28FwFZ0kuru7EgU+Vf6RUx+4H
-	2TSc5DA0d59zdY1cCDoVm4thAi4yfBRpVtPWBAdGBHSHGiRWd5sPgrWLxWouGtOYSOVT
-	iqp1PWwLAgtJAQjgfz5h/pMu/bxzp3JFHHO/romFLFYrQoIEPh/jvWjWNVAqzdAAv6Gj
-	O8wstRd2KVJ9VquOfhS9b0uojeOscTem6JqWODbnYmQkUGgoRCAPI6SDE+98PoCLkBXM
-	7M2Q==
-X-Gm-Message-State: APjAAAU0u5tISbwg+/Xx8dhHSz/ypnZ2jMR3oTlpUqST0Ub+1uHPW4RV
-	W8huk9VhUephsb+9qgTjao+Jn/EJAD50sxyRG54=
-X-Google-Smtp-Source: APXvYqw71OOmQudjSFaMV10Llyj65YX7PM3/e9KO1rooUEIuisb6jwdWWhjkcyeMLSfSHWFrbbHx7uiZ0T/KQqMFT9E=
-X-Received: by 2002:a19:fc08:: with SMTP id a8mr3899591lfi.168.1574170353036; 
-	Tue, 19 Nov 2019 05:32:33 -0800 (PST)
+	:message-id:subject:to;
+	bh=pSi5XDohncQgciTrHKt7ftb1ObvOiTMVJqsn7lFZbNU=;
+	b=JvhsZEas6UPr1SuHryrAT6tfU56XDtCg3ZAZ+JslmWucBciEDZf1qfWGKyVSWz9TeA
+	kwRTKZ5HEyctfeRB+IxbM+Z+NnFJVZHu4RYWWi+15S91qYT8ZIyqRKzp+88GwEyznHzL
+	hBsp5OvIz+Kwlbws7kr+G3NPxLYbDhf1s3v3NdCTVJT3kwqdJ3L/sDqUNigLcE+ktj4j
+	TA9op9inc0o4oDBTynVlqq7kdc2Gr1N6K+epgZTE9oRaJUtgisAeZXT0iMtdzbTy3zkY
+	JUBr6FuYnlPdOqRjmvsITB5kyKs+m6e1jZdwpFTNf5RBNinTOmYC4AX/arUbcDBcN2+u
+	nLeA==
+X-Gm-Message-State: APjAAAVeycH1NlKt/xyyot1CVbn7GBXu4v5+a3RGSTB7FkK0B5umW/R9
+	5/xMZek93Da+CHtCmfGES5vHnx6nmGdb8IxpswQ2Fw==
+X-Google-Smtp-Source: APXvYqzF9k+LIPadY6v9WZ21sXr3eUi2QxpMvvow2nHhLG6hKokWR+u8IKK9tKxK7gt3WBfTbm9jIADAG/LKLdUaFnI=
+X-Received: by 2002:a2e:575c:: with SMTP id r28mr4040481ljd.245.1574172946903; 
+	Tue, 19 Nov 2019 06:15:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20191119121609.19869-1-nick83ola@gmail.com>
 	<1d110b29-23c2-12ea-68cb-32f465be8be9@intel.com>
-In-Reply-To: <1d110b29-23c2-12ea-68cb-32f465be8be9@intel.com>
+	<CABPh3UORbPCPd55aGFBO2WwfN0gGdaZHZk2Ei1jPu+PqUyV-UA@mail.gmail.com>
+	<CABPh3UMNoSXmW1FFtvM_j=w1L5Pq7==qg-jfgCAAKyPcsasGVg@mail.gmail.com>
+	<0ce7b7c9-2965-1587-0530-acbb9f57fe92@intel.com>
+In-Reply-To: <0ce7b7c9-2965-1587-0530-acbb9f57fe92@intel.com>
 From: nick83ola <nick83ola@gmail.com>
-Date: Tue, 19 Nov 2019 13:32:21 +0000
-Message-ID: <CABPh3UORbPCPd55aGFBO2WwfN0gGdaZHZk2Ei1jPu+PqUyV-UA@mail.gmail.com>
-To: Ross Burton <ross.burton@intel.com>
+Date: Tue, 19 Nov 2019 14:15:35 +0000
+Message-ID: <CABPh3UNr0YaMyuuthCWQWrohnJm=XsEnGBMqYxB5MHg4JbW-PA@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python3-importlib-metadata: fix class-target overriding default dependencies
+Subject: [meta-python][PATCH] python3-importlib-metadata: fix class-target overriding default dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,62 +57,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Nov 2019 13:32:32 -0000
+X-List-Received-Date: Tue, 19 Nov 2019 14:15:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Ross,
+Forwarded
 
-if they are redundant then I can simply revert this patch??
+---------- Forwarded message ---------
+From: Ross Burton <ross.burton@intel.com>
+Date: Tue, 19 Nov 2019 at 13:46
+Subject: Re: [oe] [meta-python][PATCH] python3-importlib-metadata: fix
+class-target overriding default dependencies
+To: nick83ola <nick83ola@gmail.com>
 
-commit fcda3fb1a3fbfac075325482074898dfb7138da7
-Author: Fabio Berton <fabio.berton@ossystems.com.br>
-Date:   Wed Nov 13 09:09:44 2019 -0300
 
-    python3-importlib-metadata: RDEPEND python3-misc only for target and
-nativesdk
+On 19/11/2019 13:35, nick83ola wrote:
+> Hi Ross,
+>
+> no the patch is right
+>
+> If I do:
+> bitbake python3-importlib-metadata-native
+>
+> Loading cache: 100%
+>
+|##########################################################################################################################################################################################################|
 
-    Python3 recipe rprovides python3-misc only for target and nativesdk,
-    but if we have some recipe that rdepends python3-misc and has native
-    in BBCLASSEXTEND bitbake raises an error showing that nothing rprovides
-    python3-misc-native.
-
-    Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-    Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-diff --git a/meta-python/recipes-devtools/python/
-python3-importlib-metadata_0.23.bb b/meta-python/recipes-devtools/python/
+> Time: 0:00:01
+> Loaded 4359 entries from dependency cache.
+> NOTE: Resolving any missing task queue dependencies
+> ERROR: Nothing RPROVIDES 'python3-misc-native' (but
+> virtual:native:/yocto/meta-openembedded/recipes-devtools/python/
 python3-importlib-metadata_0.23.bb
-index 4c53d5fbb..851d703c9 100644
---- a/meta-python/recipes-devtools/python/python3-importlib-metadata_0.23.bb
-+++ b/meta-python/recipes-devtools/python/python3-importlib-metadata_0.23.bb
-@@ -1,4 +1,5 @@
- inherit pypi setuptools3
- require python-importlib-metadata.inc
-
--RDEPENDS_${PN} += "python3-misc"
-+RDEPENDS_${PN}_class-target += "python3-misc"
-+RDEPENDS_${PN}_class-nativesdk += "python3-misc"
-
-
-
-
-On Tue, 19 Nov 2019 at 12:41, Ross Burton <ross.burton@intel.com> wrote:
-
-> On 19/11/2019 12:16, Nicola Lunghi wrote:
-> > -RDEPENDS_${PN}_class-target += "python3-misc"
-> > -RDEPENDS_${PN}_class-nativesdk += "python3-misc"
-> > +RDEPENDS_${PN}_append_class-target = " python3-misc"
-> > +RDEPENDS_${PN}_append_class-nativesdk = " python3-misc"
+> <http://python3-importlib-metadata_0.23.bb> RDEPENDS on or otherwise
+> requires it)
+> NOTE: Runtime target 'python3-misc-native' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['python3-misc-native']
+> ERROR: Required build target 'python3-importlib-metadata-native' has no
+> buildable providers.
+> Missing or unbuildable dependency chain was:
+> ['python3-importlib-metadata-native', 'python3-misc-native']
 >
-> I believe all of the overrides are redundant now.  Try just
-> RDEPENDS_${PN} += "python3-misc" and check the native build is still
-> successful.
+> Summary: There were 2 ERROR messages shown, returning a non-zero exit
+code.
 >
-> Ross
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> There's a way to provide ${PYTHON_PN}-misc-native?
+
+Looks like a bug in python3.bb, the block of code starting '# First set
+RPROVIDES for -native case' should add python3-misc-native explicitly as
+that package isn't in the manifest.
+
+A better fix would be to remove the misc package from the recipe itself
+and define it entirely in the manifest file so it is no longer 'special'.
+
+Ross
 
