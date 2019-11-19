@@ -1,29 +1,27 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 15D417F87A
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id C9B6D7F894
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Nov 2019 12:41:27 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	19 Nov 2019 04:41:29 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.68,322,1569308400"; d="scan'208";a="196485893"
-Received: from unknown (HELO blackadder.local) ([10.252.49.82])
-	by orsmga007.jf.intel.com with ESMTP; 19 Nov 2019 04:41:27 -0800
+	Tue, 19 Nov 2019 13:12:06 +0000 (UTC)
+Received: from localhost.localdomain (31-10-206-124.static.upc.ch
+	[31.10.206.124])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 490B45C35B5;
+	Tue, 19 Nov 2019 14:12:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1574169125;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:content-type:content-transfer-encoding:
+	in-reply-to:references; bh=mR1DNt69PANxSpaVil0Ejtqne+GaaAKYeQ9vV50qOgA=;
+	b=ARxL1jrIRUFMgBBcDrAYKjwGaJffE5icim70a+jk05IMBJXlrcZL07upMn0s7M1e+AlV44
+	vnRULGFbjhmmN1ToB1uaeeiewgg4axnbx+vNt9b4kC3E75VYu5bC4M9Yln0Bw+B0ywyKP3
+	6e7XfXMZ6Iels2iRVTsCmWjZeqzpNvY=
+From: Stefan Agner <stefan@agner.ch>
 To: openembedded-devel@lists.openembedded.org
-References: <20191119121609.19869-1-nick83ola@gmail.com>
-From: Ross Burton <ross.burton@intel.com>
-Organization: Intel Corporation (UK) Ltd. - Co. Reg. #1134945 - Pipers Way,
-	Swindon SN3 1RJ
-Message-ID: <1d110b29-23c2-12ea-68cb-32f465be8be9@intel.com>
-Date: Tue, 19 Nov 2019 12:41:27 +0000
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:60.0)
-	Gecko/20100101 Thunderbird/60.9.1
-MIME-Version: 1.0
-In-Reply-To: <20191119121609.19869-1-nick83ola@gmail.com>
-Subject: Re: [meta-python][PATCH] python3-importlib-metadata: fix class-target overriding default dependencies
+Date: Tue, 19 Nov 2019 13:12:01 +0000
+Message-Id: <20191119131201.17013-1-stefan@agner.ch>
+X-Mailer: git-send-email 2.17.1
+Cc: Stefan Agner <stefan.agner@toradex.com>, bunk@stusta.de
+Subject: [meta-oe][PATCH] networkmanager: do not deploy unnecessary udev rule file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,20 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Nov 2019 12:41:28 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 19 Nov 2019 13:12:07 -0000
 
-On 19/11/2019 12:16, Nicola Lunghi wrote:
-> -RDEPENDS_${PN}_class-target += "python3-misc"
-> -RDEPENDS_${PN}_class-nativesdk += "python3-misc"
-> +RDEPENDS_${PN}_append_class-target = " python3-misc"
-> +RDEPENDS_${PN}_append_class-nativesdk = " python3-misc"
+From: Stefan Agner <stefan.agner@toradex.com>
 
-I believe all of the overrides are redundant now.  Try just 
-RDEPENDS_${PN} += "python3-misc" and check the native build is still 
-successful.
+The 84-nm-drivers.rules is not required for systemd-udevd versions
+v210 and later. The file has been split into a separate file so
+distributions with a new enough systemd version can drop it. See
+also:
+https://github.com/NetworkManager/NetworkManager/commit/1e0375826252abf9aab2aef273a2a24cd08c9f42
 
-Ross
+I noticed this while investigating into a warning show during
+bootup:
+  /usr/lib/udev/rules.d/84-nm-drivers.rules:10 Invalid value "/bin/sh -c
+  'ethtool -i $1 | sed -n s/^driver:\ //p' -- $env{INTERFACE}" for PROGRAM
+  (char 24: invalid substitution type), ignoring, but please fix it.
+
+Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
+---
+ .../networkmanager/networkmanager_1.18.4.bb                  | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
+index 085807c4c..d2209a632 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
+@@ -141,8 +141,11 @@ do_install_append() {
+ 
+     rm -rf ${D}/run ${D}${localstatedir}/run
+ 
+-    # For read-only filesystem, do not create links during bootup
+     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++        # For read-only filesystem, do not create links during bootup
+         ln -sf ../run/NetworkManager/resolv.conf ${D}${sysconfdir}/resolv-conf.NetworkManager
++
++        # systemd v210 and newer do not need this rule file
++        rm -rf ${D}/${nonarch_base_libdir}/udev/84-nm-drivers.rules
+     fi
+ }
+-- 
+2.17.1
+
 
