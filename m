@@ -1,50 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B545C7F859
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id F36DC7F7DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 19:45:26 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id f9so262063plr.7
+	Wed, 20 Nov 2019 21:26:07 +0000 (UTC)
+Received: by mail-pg1-f169.google.com with SMTP id 15so373450pgh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 11:45:28 -0800 (PST)
+	Wed, 20 Nov 2019 13:26:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=rv4gkUdazSGDrxx94gQewqSnNy1KxpFuWtdci7MG/G8=;
-	b=lv2GPdyXuKi7TWqPB/tMGksayD2QsNMAD7ol2ZNVRDHx9sqhRRpdOwVZ2PoImc825g
-	2+IR9mLDD+YXY158W120ZPsNQFsL8BinYhLkbyxmmJduN1At/6JNLoAkRBcwxvh3xvTg
-	rBgBA9JZyEmVt70ieVHiIvME186U8ISTRxo20l9JcUkE9pHDZ0F8s6fNRz4eJdtguQU6
-	1PY9+/s7RkSuAuaruXCk1gkD+xSvtwlsZossC/tI7tR53agC4+m/3r9WlG9lkjdubwUZ
-	OvEg+8cRfp19YdlI6f3vZupw4TaSdHU8FbMaJ20FFT8OTcBENNUFMRhDacNFmvM67L1M
-	CoWw==
+	bh=AWk50x/wDaFcqGPidrcbGMhg6OBx+Y9luU+GaZUJkaY=;
+	b=X9CMRsCirouko8e39GaAphUWM9WQjWAXrsV3nrHiwqKOVW8NEwHQFArNOluH0oK7ZX
+	KyXgfHMz0/6chv2F1kdEvYkUGIlahg+mp4DTY8aj3dbzvOx8bxAnc00XdDU1MQduGZum
+	d/jBh1J06cF1K0+KF8THWI5u7XLYG6YI5OSuV/RU2kvcUE/Uz6tGCMCk9+nyXfRl4Wue
+	RL2aunK2i0r5GBlvjMUXcAZTD2QXqEjNXmO5aWGMrT2eq2HGlPh+wMB0sfIRH52oxNqj
+	DOFZA9qyKnTgVblkj5MOx90Vu+LLM2SjiyAc9ukfN84uB3zQut6vLAMWPpixSbuMK4tV
+	vWxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=rv4gkUdazSGDrxx94gQewqSnNy1KxpFuWtdci7MG/G8=;
-	b=H4yrChcKA3uR2V/LBjDBUdahoWpvFBjsa8y1rP3dU9zXzTk0JM+PqPiIlPyjVe4Tuh
-	dyslSMpoykp6k3z24Jnp33F7lfFXVzpZg+j0OXE2IgTaeLyQrkfAd6WhBnSr5cB3Uyl+
-	E2BMexgIewncuPc+FeuCdHDuGIAJC2j8MK3yEAGenNMUFs9PPU1LMXC3rIzgC74qjyM3
-	O+mlTdtDCE9zs5uTNO1o858X+ZXvLBP2H8BurY18phYEnq8GZI4jupAixl/rUPW+YCFP
-	l1DbQJaSvkyLwgzbwwM2f2yso8UhVAyIa0qqPDqg6kL7vsE5wiXAtA/0wTsvHHiWtOpM
-	VM3Q==
-X-Gm-Message-State: APjAAAUp0TwY8tbEwBeO3OK2L9X3fPKUciWZkeAUo/UhaUhP0tPf77XD
-	PMzJRgIQzwQILM8I38XTNoVTRYS5j6E=
-X-Google-Smtp-Source: APXvYqxUWK9izbQZzf+koU7bxWtYd26ULj3NDgXVWz3btc5o2CLfuWwiczkAlfauxlyL/apjC1+w0g==
-X-Received: by 2002:a17:902:7206:: with SMTP id
-	ba6mr4754487plb.129.1574279127059; 
-	Wed, 20 Nov 2019 11:45:27 -0800 (PST)
+	bh=AWk50x/wDaFcqGPidrcbGMhg6OBx+Y9luU+GaZUJkaY=;
+	b=EuInomM4FCehNuQ5Vz2dCQ7cEsAmJElnsHcXjyfoyBFEUNpVBffz33JBmshwwN40rn
+	GSz2fMvOCQZeAj7zZFqCbwXYslyzlxhCw52/cOFzlJsbklB2WLgxo93CrgQDDIBDZvCb
+	2KdDP9li5AyYNtG7Rh1bO8TK6fjx1Nrk8fwlAi3EZ1Ea5ytA/L3DX6l8hvSuYOYj9L9G
+	+IwVI07m0SuwZAjNxUD8Id2b3TUo2X77iMqzS6zH6AllQtCVsPdjlsnRUnuik0UqtJHi
+	0Na5iPuK+/fxCNONfNCAPf2lmzSHQCrOvpH4Lwdpy8VOJy4JJ2fst7k7Yico5SPoLRDZ
+	izdw==
+X-Gm-Message-State: APjAAAU5/N2i9UdfilgzUUZv78n0QjyKxApJBv9Oi4EmpBn99sFixTyV
+	e6WoU/LuawoppV6iHpKiNZLxPUmDV/M=
+X-Google-Smtp-Source: APXvYqy7zPYzb13+25v7jcIL4Y5lNHkNw6hXJfQnmqACwmnw+faB4k9nx3WR9qVkiE8YQMSd+moS4w==
+X-Received: by 2002:a65:6249:: with SMTP id q9mr5749955pgv.340.1574285168234; 
+	Wed, 20 Nov 2019 13:26:08 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::d61])
-	by smtp.gmail.com with ESMTPSA id s22sm86389pjr.5.2019.11.20.11.45.26
+	by smtp.gmail.com with ESMTPSA id
+	w138sm340135pfc.68.2019.11.20.13.26.07
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 20 Nov 2019 11:45:26 -0800 (PST)
+	Wed, 20 Nov 2019 13:26:07 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Nov 2019 11:45:13 -0800
-Message-Id: <20191120194513.3371078-1-raj.khem@gmail.com>
+Date: Wed, 20 Nov 2019 13:25:56 -0800
+Message-Id: <20191120212556.1443911-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] ruli: Fix install step and build samples too
+Subject: [meta-oe][PATCH] libkcapi: Update patch to upstream submitted one
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,236 +57,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 19:45:26 -0000
+X-List-Received-Date: Wed, 20 Nov 2019 21:26:08 -0000
 Content-Transfer-Encoding: 8bit
-
-do_install never executed as a result it was empty install
-Create ruli-bin package for utilities, so libraries can be packages
-granularily
-
-Drop the makefile patch which is no longer needed, set the make
-variables to get the needed bits set
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-Fix-build-with-format-string-checks.patch |  29 ++++-
- .../recipes-support/ruli/files/Makefile.patch | 122 ------------------
- .../recipes-support/ruli/ruli_0.36.bb         |  22 +++-
- 3 files changed, 38 insertions(+), 135 deletions(-)
- delete mode 100644 meta-networking/recipes-support/ruli/files/Makefile.patch
+ .../0001-kcapi-kdf-Move-code-to-fix.patch     | 24 ++++++++++---------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
 
-diff --git a/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch b/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch
-index f8eb3ae67a..8ca26b51bb 100644
---- a/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch
-+++ b/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch
-@@ -15,11 +15,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  src/ruli_addr.c | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch
+index 3dd7ea7f9b..7ed9caf096 100644
+--- a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch
+@@ -1,4 +1,4 @@
+-From 00c1654e368f728b213c4e3782045d54098edb25 Mon Sep 17 00:00:00 2001
++From 8f961521add49278b48c9721fc53e05ee3543b74 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Sat, 16 Nov 2019 23:03:51 -0800
+ Subject: [PATCH] kcapi-kdf: Move code to fix
+@@ -6,13 +6,14 @@ Subject: [PATCH] kcapi-kdf: Move code to fix
+ Fixes clang build
+ unused function '_bswap32' [-Werror,-Wunused-function]
  
--diff --git a/src/ruli_addr.c b/src/ruli_addr.c
--index 00d5d0d..f1eabae 100644
- --- a/src/ruli_addr.c
- +++ b/src/ruli_addr.c
--@@ -415,7 +415,7 @@ int ruli_in_print(FILE *out, const _ruli_addr *addr, int family)
-+@@ -415,7 +415,7 @@ int ruli_in_print(FILE *out, const _ruli
++Upstream-Status: Submitted [https://github.com/smuellerDD/libkcapi/pull/83]
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+- lib/kcapi-kdf.c | 36 ++++++++++++++++--------------------
+- 1 file changed, 16 insertions(+), 20 deletions(-)
++ lib/kcapi-kdf.c | 37 +++++++++++++++++--------------------
++ 1 file changed, 17 insertions(+), 20 deletions(-)
+ 
+ diff --git a/lib/kcapi-kdf.c b/lib/kcapi-kdf.c
+-index ea39846..8e4a636 100644
++index ea39846..9e53a0b 100644
+ --- a/lib/kcapi-kdf.c
+ +++ b/lib/kcapi-kdf.c
+ @@ -54,6 +54,20 @@
+@@ -26,17 +27,17 @@ index ea39846..8e4a636 100644
+ +# define __HAVE_BUILTIN_BSWAP32__
+ +#endif
+ +
+-+#ifdef __HAVE_BUILTIN_BSWAP32__
+-+# define be_bswap32(x) (uint32_t)__builtin_bswap32((uint32_t)(x))
+ +/* Endian dependent byte swap operations.  */
+-+#elif  __BYTE_ORDER__ ==  __ORDER_BIG_ENDIAN__
+++#if  __BYTE_ORDER__ ==  __ORDER_BIG_ENDIAN__
+ +# define be_bswap32(x) ((uint32_t)(x))
+ +#elif __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+-+
+++# ifdef __HAVE_BUILTIN_BSWAP32__
+++#  define be_bswap32(x) (uint32_t)__builtin_bswap32((uint32_t)(x))
+++# else
+  static inline uint32_t rol32(uint32_t x, int n)
   {
-    switch (family) {
-    case PF_INET:
-@@ -28,6 +26,25 @@ index 00d5d0d..f1eabae 100644
+  	return ( (x << (n&(32-1))) | (x >> ((32-n)&(32-1))) );
+-@@ -68,27 +82,9 @@ static inline uint32_t _bswap32(uint32_t x)
++@@ -68,27 +82,10 @@ static inline uint32_t _bswap32(uint32_t x)
+  {
+  	return ((rol32(x, 8) & 0x00ff00ffL) | (ror32(x, 8) & 0xff00ff00L));
+  }
+@@ -59,10 +60,11 @@ index ea39846..8e4a636 100644
+ -# define be_bswap32(x) ((uint32_t)(x))
+ -#elif __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+ -# define be_bswap32(x) _swap32(x)
+-+# define be_bswap32(x) _bswap32(x)
+++#  define be_bswap32(x) _bswap32(x)
+++# endif
+  #else
+ -#error "Endianess not defined"
+-+# error "Neither builtin_bswap32 nor endianess defined"
+++# error "endianess not defined"
+  #endif
   
-    case PF_INET6:
-      return ruli_inet6_print(out, &addr->ipv6);
---- 
--2.13.1
--
-+--- a/sample/getaddrinfo.c
-++++ b/sample/getaddrinfo.c
-+@@ -174,7 +174,7 @@ static void solve(const char *fullname)
-+ 
-+       for (ai = ai_res; ai; ai = ai->ai_next) {
-+ 
-+-	printf(fullname);
-++	printf("%s", fullname);
-+ 
-+ 	switch (ai->ai_family) {
-+ 	case PF_INET:
-+--- a/sample/ruli-getaddrinfo.c
-++++ b/sample/ruli-getaddrinfo.c
-+@@ -176,7 +176,7 @@ static void solve(const char *fullname)
-+ 
-+       for (ai = ai_res; ai; ai = ai->ai_next) {
-+ 
-+-	printf(fullname);
-++	printf("%s", fullname);
-+ 
-+ 	switch (ai->ai_family) {
-+ 	case PF_INET:
-diff --git a/meta-networking/recipes-support/ruli/files/Makefile.patch b/meta-networking/recipes-support/ruli/files/Makefile.patch
-deleted file mode 100644
-index 60789a3d56..0000000000
---- a/meta-networking/recipes-support/ruli/files/Makefile.patch
-+++ /dev/null
-@@ -1,122 +0,0 @@
--diff -Naur patch.org/ruli-0.36/Makefile patch.new/ruli-0.36/Makefile 
----- ruli-0.36/Makefile	2015-09-10 15:14:13.952262350 -0400
--+++ ruli-0.36/Makefile	2015-09-10 15:14:38.628261620 -0400
--@@ -7,17 +7,17 @@
-- .PHONY: default
-- default:
-- 	$(MAKE) -C src   
---	$(MAKE) -C sample 
--+#	$(MAKE) -C sample 
-- 
-- .PHONY: clean
-- clean:
-- 	$(MAKE) -C src    clean
---	$(MAKE) -C sample clean
--+#	$(MAKE) -C sample clean
-- 
-- .PHONY: install
-- install:
-- 	$(MAKE) -C src    install
---	$(MAKE) -C sample install
--+#	$(MAKE) -C sample install
-- 
-- .PHONY: dpkg
-- dpkg:
--
--=====================================================================
--
--diff -Naur patch.org/git/src/Makefile patch.new/git/src/Makefile 
----- ruli-0.36/src/Makefile	2005-06-13 12:34:53.000000000 -0400
--+++ ruli-0.36/src/Makefile	2015-09-11 09:46:06.290287347 -0400
--@@ -18,9 +18,9 @@
-- #
-- # Debian packaging likes this: OOP_BASE_DIR = /usr
-- #
---OOP_BASE_DIR    = /usr/local/oop
---OOP_INCLUDE_DIR = $(OOP_BASE_DIR)/include
---OOP_LIB_DIR     = $(OOP_BASE_DIR)/lib
--+#OOP_BASE_DIR    = /usr/local/oop
--+OOP_INCLUDE_DIR = ${PKG_CONFIG_SYSROOT_DIR}/$(includedir)/
--+#OOP_LIB_DIR     = $(OOP_BASE_DIR)/lib
-- 
-- #
-- # INSTALL_BASE_DIR indicates where RULI
--@@ -30,11 +30,11 @@
-- #
-- # Debian packaging likes this: INSTALL_BASE_DIR = $(DESTDIR)/usr
-- #
---INSTALL_BASE_DIR     = ../install/ruli
---INSTALL_INCLUDE_DIR  = $(INSTALL_BASE_DIR)/include
---INSTALL_LIB_DIR      = $(INSTALL_BASE_DIR)/lib
---INSTALL_MAN_DIR      = $(INSTALL_BASE_DIR)/share/man
---INSTALL_MAN3_DIR     = $(INSTALL_MAN_DIR)/man3
--+#INSTALL_BASE_DIR     = ../install/ruli
--+#INSTALL_INCLUDE_DIR  = $(INSTALL_BASE_DIR)/include
--+#INSTALL_LIB_DIR      = $(INSTALL_BASE_DIR)/lib
--+#INSTALL_MAN_DIR      = $(INSTALL_BASE_DIR)/share/man
--+#INSTALL_MAN3_DIR     = $(INSTALL_MAN_DIR)/man3
-- 
-- # SunOS, Linux
-- PLATFORM=$(shell uname)
--@@ -45,7 +45,7 @@
-- 
-- WARN = -pedantic -ansi -Wshadow -Wpointer-arith -Wcast-qual \
-- 	-Wcast-align -Wwrite-strings -Wredundant-decls
---CC = gcc
--+#CC = gcc
-- 
-- # gcc-specific options (not valid for g++)
-- ifeq ($(CC),gcc)
--@@ -58,7 +58,7 @@
-- FLAGS = $(DEBUG) -O2 -pipe -Wall -g -shared -D_REENTRANT \
--         $(DEFINE_SOLARIS) -I. -I$(OOP_INCLUDE_DIR)
-- SOFT_CFLAGS = $(WARN) $(FLAGS)
---CFLAGS = $(WARN) -Werror $(FLAGS)
--+CFLAGS = $(WARN) $(FLAGS)
-- LIBOBJ = ruli_isaac.o ruli_mem.o ruli_rand.o ruli_util.o ruli_list.o \
-- 	ruli_addr.o ruli_sock.o ruli_txt.o ruli_msg.o ruli_fsm.o \
-- 	ruli_res.o ruli_parse.o ruli_host.o ruli_srv.o ruli_conf.o \
--@@ -66,7 +66,7 @@
-- 	ruli_getaddrinfo.o
-- SHAREDOBJ = $(LIBOBJ:%.o=%.os)
-- SONAME = libruli.so.4
---LDFLAGS = -L$(OOP_LIB_DIR)
--+#LDFLAGS = -L$(OOP_LIB_DIR)
-- 
-- COMPILE = $(CC) $(ARCH) $(CPPFLAGS) $(CFLAGS) -c
-- SHARED_COMPILE = $(CC) $(ARCH) $(CPPFLAGS) $(SHARED) $(CFLAGS) -o $@ -c
--@@ -89,19 +89,19 @@
-- strip: ruli
-- 	strip $(SONAME) libruli.a
-- 
---.PHONY: install
---install: ruli
---	mkdir -p $(INSTALL_LIB_DIR) $(INSTALL_INCLUDE_DIR) $(INSTALL_MAN3_DIR)
---	cp $(SONAME) libruli.a $(INSTALL_LIB_DIR)
---	cp *.h $(INSTALL_INCLUDE_DIR)
---	cp ../doc/man/*.3 $(INSTALL_MAN3_DIR)
---	cd $(INSTALL_LIB_DIR) && ln -s $(SONAME) libruli.so
---	@echo
---	@echo "REMINDER:"
---	@echo "Add $(INSTALL_LIB_DIR) to your dynamic loader path:"
---	@echo "# echo $(INSTALL_LIB_DIR) >> /etc/ld.so.conf"
---	@echo "# ldconfig"
---	@echo
--+#.PHONY: install
--+#install: ruli
--+#	mkdir -p $(INSTALL_LIB_DIR) $(INSTALL_INCLUDE_DIR) $(INSTALL_MAN3_DIR)
--+#	cp $(SONAME) libruli.a $(INSTALL_LIB_DIR)
--+#	cp *.h $(INSTALL_INCLUDE_DIR)
--+#	cp ../doc/man/*.3 $(INSTALL_MAN3_DIR)
--+#	cd $(INSTALL_LIB_DIR) && ln -s $(SONAME) libruli.so
--+#	@echo
--+#	@echo "REMINDER:"
--+#	@echo "Add $(INSTALL_LIB_DIR) to your dynamic loader path:"
--+#	@echo "# echo $(INSTALL_LIB_DIR) >> /etc/ld.so.conf"
--+#	@echo "# ldconfig"
--+#	@echo
-- 
-- .PHONY: ruli
-- ruli: $(SONAME) libruli.a
--
--
-diff --git a/meta-networking/recipes-support/ruli/ruli_0.36.bb b/meta-networking/recipes-support/ruli/ruli_0.36.bb
-index 885796d2a5..a56ce45f93 100644
---- a/meta-networking/recipes-support/ruli/ruli_0.36.bb
-+++ b/meta-networking/recipes-support/ruli/ruli_0.36.bb
-@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- DEPENDS = "liboop"
- 
- SRC_URI = "http://download.savannah.gnu.org/releases/ruli/ruli_${PV}.orig.tar.gz \
--           file://Makefile.patch \
-            file://0001-Fix-build-with-format-string-checks.patch \
-            file://0001-src-ruli_addr.c-Add-missing-format-string.patch \
-            "
-@@ -16,10 +15,19 @@ SRC_URI = "http://download.savannah.gnu.org/releases/ruli/ruli_${PV}.orig.tar.gz
- SRC_URI[md5sum] = "e73fbfdeadddb68a703a70cea5271468"
- SRC_URI[sha256sum] = "11d32def5b514748fbd9ea8c88049ae99e1bb358efc74eb91a4d268a3999dbfa"
- 
--do_install1() {
--    install -d ${D}${includedir}/ruli
--    install -d ${D}${libdir}
--    install -m 0644 ${S}/src/ruli*.h ${D}${includedir}/ruli
--    install -m 0644 ${S}/src/libruli.so ${D}${libdir}
--    install -m 0644 ${S}/src/libruli.so.4 ${D}${libdir}
-+B = "${S}"
-+
-+EXTRA_OEMAKE = 'CC="${CC}" OOP_BASE_DIR="${STAGING_EXECPREFIXDIR}" INSTALL_BASE_DIR="${D}${exec_prefix}"'
-+
-+do_configure() {
-+    touch configure-stamp
-+}
-+
-+do_install() {
-+    oe_runmake install
- }
-+
-+PACKAGES =+ "${PN}-bin"
-+
-+FILES_${PN} =+ "${bindir}"
-+
+  DSO_PUBLIC
 -- 
 2.24.0
 
