@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 843B46C1CA
+	by mail.openembedded.org (Postfix) with ESMTP id 093847F7C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 08:07:29 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,221,1571673600"; d="scan'208";a="78784124"
+	Wed, 20 Nov 2019 08:32:23 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,221,1571673600"; d="scan'208";a="78785424"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 20 Nov 2019 16:07:29 +0800
+	by heian.cn.fujitsu.com with ESMTP; 20 Nov 2019 16:32:23 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 25D784CE1BE7
+	by cn.fujitsu.com (Postfix) with ESMTP id 8D7974CE1C07
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 15:59:10 +0800 (CST)
+	Wed, 20 Nov 2019 16:24:07 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 20 Nov 2019 16:07:25 +0800
+	Server (TLS) id 14.3.439.0; Wed, 20 Nov 2019 16:32:23 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Nov 2019 16:08:01 +0800
-Message-ID: <20191120080801.2635-1-zangrc.fnst@cn.fujitsu.com>
+Date: Wed, 20 Nov 2019 16:32:55 +0800
+Message-ID: <20191120083255.4812-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 25D784CE1BE7.A9068
+X-yoursite-MailScanner-ID: 8D7974CE1C07.A90B8
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-twisted: upgrade 19.7.0 -> 19.10.0
+Subject: [meta-python] [PATCH] python3-meh: upgrade 0.47 -> 0.48
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,42 +37,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 08:07:30 -0000
+X-List-Received-Date: Wed, 20 Nov 2019 08:32:24 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-twisted.inc        | 4 ++--
- .../{python-twisted_19.7.0.bb => python-twisted_19.10.0.bb}   | 0
- .../{python3-twisted_19.7.0.bb => python3-twisted_19.10.0.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-twisted_19.7.0.bb => python-twisted_19.10.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-twisted_19.7.0.bb => python3-twisted_19.10.0.bb} (100%)
+ .../python-meh/{python3-meh_0.47.bb => python3-meh_0.48.bb}     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-python/recipes-extended/python-meh/{python3-meh_0.47.bb => python3-meh_0.48.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
-index d70104dc2..34f8846b0 100644
---- a/meta-python/recipes-devtools/python/python-twisted.inc
-+++ b/meta-python/recipes-devtools/python/python-twisted.inc
-@@ -7,8 +7,8 @@ HOMEPAGE = "http://www.twistedmatrix.com"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1743f12d8b8f5aec625c0569a058f0a6"
+diff --git a/meta-python/recipes-extended/python-meh/python3-meh_0.47.bb b/meta-python/recipes-extended/python-meh/python3-meh_0.48.bb
+similarity index 90%
+rename from meta-python/recipes-extended/python-meh/python3-meh_0.47.bb
+rename to meta-python/recipes-extended/python-meh/python3-meh_0.48.bb
+index 95d6d183c..9ca7a56bd 100644
+--- a/meta-python/recipes-extended/python-meh/python3-meh_0.47.bb
++++ b/meta-python/recipes-extended/python-meh/python3-meh_0.48.bb
+@@ -10,7 +10,7 @@ S = "${WORKDIR}/git"
  
--SRC_URI[sha256sum] = "d5db93026568f60cacdc0615fcd21d46f694a6bfad0ef3ff53cde2b4bb85a39d"
--SRC_URI[md5sum] = "5e9296a952430d288cdcdc6ad9eb5ee8"
-+SRC_URI[sha256sum] = "7394ba7f272ae722a74f3d969dcf599bc4ef093bc392038748a490f1724a515d"
-+SRC_URI[md5sum] = "f2d70f7a66ecdf54152310164cceadfe"
+ SRC_URI = "git://github.com/rhinstaller/python-meh.git;protocol=https;branch=master \
+ "
+-SRCREV = "78d868d99104317ce8820f39f61d207566e61a55"
++SRCREV = "760f78a634ecf0e2380abcbd751bc233d29300ef"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- PYPI_PACKAGE = "Twisted"
- PYPI_PACKAGE_EXT = "tar.bz2"
-diff --git a/meta-python/recipes-devtools/python/python-twisted_19.7.0.bb b/meta-python/recipes-devtools/python/python-twisted_19.10.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-twisted_19.7.0.bb
-rename to meta-python/recipes-devtools/python/python-twisted_19.10.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_19.7.0.bb b/meta-python/recipes-devtools/python/python3-twisted_19.10.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-twisted_19.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-twisted_19.10.0.bb
+ FILES_${PN} += "${datadir}/*"
 -- 
 2.20.1
 
