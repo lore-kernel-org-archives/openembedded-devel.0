@@ -1,51 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
-	[209.85.216.46])
-	by mail.openembedded.org (Postfix) with ESMTP id BAA547C9C5
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D6A476C3B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 21:50:23 +0000 (UTC)
-Received: by mail-pj1-f46.google.com with SMTP id a16so405181pjs.13
+	Wed, 20 Nov 2019 23:38:14 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id c22so1641765wmd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 13:50:25 -0800 (PST)
+	Wed, 20 Nov 2019 15:38:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=j32Pg0sEMbXlvZeWB38v6UD931dXRGGFOoKFRXDuA9E=;
-	b=fAYXJnziRyR1pXuPYcv1ZESs8Lw8ZVqFXbGtXzn7KM/vFQCFPDIAQKAFxiU5d7dH2F
-	3zLEaG7wAZ+l2LzUZF7vmap0lS3DpJ8P+aZTSJnKeeh1BT4Lpcip3h/ghLkuVCWyAgRQ
-	71iXx2mbQSJ/DNdrSJyd3LRnjTTRhgTHoGz8IBM22s+KTRX8MDrsRkkq2BgxV3bF+yVR
-	BBVueOGlOeRBs1eQeQgOPOrZL7txs4Ft52Lkfr91olc+GH+rzLwhbVEAYMelFBVX538R
-	qJ74+YTqkpe9Q8qGrGZA7L968V6B8RR8SIjE0/kkyA+DGYzcE20PfRyBXCEQdCq9c4xS
-	o6KA==
+	bh=4qQoxjQ2z/X41Be/0tTh4PQop9SzqdpEY37Z33cTOJE=;
+	b=oWPESgZfq+YnIm8bVl4qtSrZXUt/QKZ7dGT8ARDMMmyhJnp8n88dgNLymyu8DH8Q6E
+	CGyIudIhpmDOpsSWCsOa/Gq28XgZQRM62kfQZNg735JWAQ8aqlGMoGshNX2KiBU0G2+l
+	azQjBnD4rkNDZK9htMfNx3lcjrBZUlCgF0AdvZRFKdi2znHFgWvaB5C4EkC5k9GkODAP
+	JyXQsofn/6BZSbEeffGO8suJZ3j8zRffN+wiXvN6G17uMqjB3iT36VjuYnsg5+MJMYnp
+	t6cRw4tfr3de2+jiKYTAs9HOsMEXYnWh7LqH8WIvEJ1uvhdxt+sqdPE/c34+RKuzZI1J
+	nopg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=j32Pg0sEMbXlvZeWB38v6UD931dXRGGFOoKFRXDuA9E=;
-	b=hCJnbGp83nTHKvDwB47Myqd8EwLpIH3/jA9c8v6cZAbyo0jQEx38441QDds1pa4Cir
-	B/Mts2tuK81tHGJPloVymXgnPhEWggOWoO8o9IctXxMmrG/CRphGt3v3v65YudVVz/Sk
-	zFjv6izMOCdUPzE4FnEWLIe9JxYbOYLmy1iJCMga3OvzgP35LwwdJQyHWSbF2yQpIqR/
-	3y08qdut10hTyPjxdxeLO4CTtINo6CKNf7mrALoX2Eimw6W7rKQbBknW729xEoDoZQV/
-	1pxodDhiKUTzuPJI0o3YPH3WM+H8ayAP/Mo/wULsHuRLC7a/ANZu/qX7yKQ9V3GA/WCm
-	JI9A==
-X-Gm-Message-State: APjAAAUfsjzMAsS6bcv5q36dNfggp37I9gc8C9sgg/XxEJEw08zFdPie
-	wI6YYmWL94g5W4twJGNxKh9k5OTc4/8=
-X-Google-Smtp-Source: APXvYqxEvovDKvnorpV7jKY5vJ5N28D4GD/pNVfka+Z+ARgN4isRtnTVOCzfkt54GbkLHNkwBsc+2A==
-X-Received: by 2002:a17:90a:8a11:: with SMTP id
-	w17mr6785805pjn.136.1574286624014; 
-	Wed, 20 Nov 2019 13:50:24 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::d61])
+	bh=4qQoxjQ2z/X41Be/0tTh4PQop9SzqdpEY37Z33cTOJE=;
+	b=IFK4Lqp7vnxU6ZaZmsmECNxmWKrtcgqSQvA6+rDN9qbZUU98/3rHoLSi3HMgPc0Wgm
+	PZh4OYqSTu9nLTvKKgTkOem1bQ8h9r4zowOguG2LQ7mkvRUnYFWDyHBQEELTuHDKZHas
+	RrSsiGo7u4HggvaBHBaYdJw6NULPr654Qc2ByggZtVMdcSJQoWTZTQhOWf33SXYRy5vJ
+	vWlR6LBY7UVkMJ3YsAGxxlepU1p/P+6LMSEnDXsjnXn6pB6n9GeRAiBY5/4zCA2RbcBk
+	dNm+QD78K/KR4UWv8eXaDYMseir8TN/H5x4WIThdT2xLT9OhAq6yMOpdHYSARu7DhUrH
+	4V+g==
+X-Gm-Message-State: APjAAAV9mNSz6R5POobBPE2Y7oxhEACg1nqW9vGZPGxy1c4pccbJgObO
+	mAe1Ohi0yTuoVgBS/9+9WPbz5LR0
+X-Google-Smtp-Source: APXvYqyM62Tq1a0s5zVaEV4CMe6ywCP8CRW/aMjqjw8kS2sutNG8CahnediLJ0Pxgksr/9YekruvHA==
+X-Received: by 2002:a1c:8086:: with SMTP id b128mr6414306wmd.104.1574293095088;
+	Wed, 20 Nov 2019 15:38:15 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F0CB687FD2CB83E858114E3.dip0.t-ipconnect.de.
+	[2003:f0:7f0c:b687:fd2c:b83e:8581:14e3])
 	by smtp.gmail.com with ESMTPSA id
-	k84sm349105pfd.157.2019.11.20.13.50.22
+	x10sm1014074wrv.60.2019.11.20.15.38.14
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 20 Nov 2019 13:50:23 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Nov 2019 13:50:09 -0800
-Message-Id: <20191120215009.1723062-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
+	Wed, 20 Nov 2019 15:38:14 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	kai.kang@windriver.com
+Date: Thu, 21 Nov 2019 00:38:05 +0100
+Message-Id: <20191120233806.31207-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2] libkcapi: Update patch to upstream submitted one
+Subject: [meta-xfce][PATCH 1/2] exo: upgrade 0.12.8 -> 0.12.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,137 +60,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 21:50:23 -0000
+X-List-Received-Date: Wed, 20 Nov 2019 23:38:15 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Use builtin_bswap32 with clang if available
+Release notes for 0.12.9
+========================
+Bug Fixes:
+- Explicitly depend on gio-unix-2.0 (Xfce #15825)
+- Fix alignment of multi-line filenames when text beside icons (Xfce
+- Fix cursor missing in search popup widget (Xfce #16068)
+- Fix desktop item creation on symbolic link directories
+- Fix excess clickable area of multiline filenames (Xfce #16075)
+- Fix issues with displaying icon view contents (Xfce #14737)
+- Fix prelight deactivation (Xfce #11806)
+- Hide search widget when doing a fullscreen resize (Xfce #15106)
+- Make user-created launchers executable by default
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
-v2: Use builtin_bswap32 with clang if available
+ meta-xfce/recipes-xfce/exo/{exo_0.12.8.bb => exo_0.12.9.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/exo/{exo_0.12.8.bb => exo_0.12.9.bb} (88%)
 
- ...uiltin_bswap32-on-Clang-if-supported.patch | 32 +++++++++++++++++++
- .../0001-kcapi-kdf-Move-code-to-fix.patch     | 24 +++++++-------
- .../recipes-crypto/libkcapi/libkcapi_git.bb   |  1 +
- 3 files changed, 46 insertions(+), 11 deletions(-)
- create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Use-__builtin_bswap32-on-Clang-if-supported.patch
-
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Use-__builtin_bswap32-on-Clang-if-supported.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Use-__builtin_bswap32-on-Clang-if-supported.patch
-new file mode 100644
-index 0000000000..83b16f2e2f
---- /dev/null
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Use-__builtin_bswap32-on-Clang-if-supported.patch
-@@ -0,0 +1,32 @@
-+From 36637cd802fac9402be76f2a9358a26b7f6aa530 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 20 Nov 2019 13:41:39 -0800
-+Subject: [PATCH] Use __builtin_bswap32 on Clang if supported
-+
-+clang pretends to be gcc 4.2.1 so GCC_VERSION macro will decide that
-+__builtin_bswap32 is not supported on clang, whereas in reality it might
-+so its better to add a check for enquiring clang if it supports
-+__builtin_bswap32 or not
-+
-+Upstream-Status: Submitted [https://github.com/smuellerDD/libkcapi/pull/83]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ lib/kcapi-kdf.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/lib/kcapi-kdf.c b/lib/kcapi-kdf.c
-+index 9e53a0b..428ecaf 100644
-+--- a/lib/kcapi-kdf.c
-++++ b/lib/kcapi-kdf.c
-+@@ -57,7 +57,7 @@
-+ #define GCC_VERSION (__GNUC__ * 10000		\
-+ 		     + __GNUC_MINOR__ * 100	\
-+ 		     + __GNUC_PATCHLEVEL__)
-+-#if GCC_VERSION >= 40400
-++#if GCC_VERSION >= 40400 || (defined(__clang__) && __has_builtin(__builtin_bswap32))
-+ # define __HAVE_BUILTIN_BSWAP32__
-+ #endif
-+ 
-+-- 
-+2.24.0
-+
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch
-index 3dd7ea7f9b..7ed9caf096 100644
---- a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch
-@@ -1,4 +1,4 @@
--From 00c1654e368f728b213c4e3782045d54098edb25 Mon Sep 17 00:00:00 2001
-+From 8f961521add49278b48c9721fc53e05ee3543b74 Mon Sep 17 00:00:00 2001
- From: Khem Raj <raj.khem@gmail.com>
- Date: Sat, 16 Nov 2019 23:03:51 -0800
- Subject: [PATCH] kcapi-kdf: Move code to fix
-@@ -6,13 +6,14 @@ Subject: [PATCH] kcapi-kdf: Move code to fix
- Fixes clang build
- unused function '_bswap32' [-Werror,-Wunused-function]
- 
-+Upstream-Status: Submitted [https://github.com/smuellerDD/libkcapi/pull/83]
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- lib/kcapi-kdf.c | 36 ++++++++++++++++--------------------
-- 1 file changed, 16 insertions(+), 20 deletions(-)
-+ lib/kcapi-kdf.c | 37 +++++++++++++++++--------------------
-+ 1 file changed, 17 insertions(+), 20 deletions(-)
- 
- diff --git a/lib/kcapi-kdf.c b/lib/kcapi-kdf.c
--index ea39846..8e4a636 100644
-+index ea39846..9e53a0b 100644
- --- a/lib/kcapi-kdf.c
- +++ b/lib/kcapi-kdf.c
- @@ -54,6 +54,20 @@
-@@ -26,17 +27,17 @@ index ea39846..8e4a636 100644
- +# define __HAVE_BUILTIN_BSWAP32__
- +#endif
- +
--+#ifdef __HAVE_BUILTIN_BSWAP32__
--+# define be_bswap32(x) (uint32_t)__builtin_bswap32((uint32_t)(x))
- +/* Endian dependent byte swap operations.  */
--+#elif  __BYTE_ORDER__ ==  __ORDER_BIG_ENDIAN__
-++#if  __BYTE_ORDER__ ==  __ORDER_BIG_ENDIAN__
- +# define be_bswap32(x) ((uint32_t)(x))
- +#elif __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
--+
-++# ifdef __HAVE_BUILTIN_BSWAP32__
-++#  define be_bswap32(x) (uint32_t)__builtin_bswap32((uint32_t)(x))
-++# else
-  static inline uint32_t rol32(uint32_t x, int n)
-  {
-  	return ( (x << (n&(32-1))) | (x >> ((32-n)&(32-1))) );
--@@ -68,27 +82,9 @@ static inline uint32_t _bswap32(uint32_t x)
-+@@ -68,27 +82,10 @@ static inline uint32_t _bswap32(uint32_t x)
-  {
-  	return ((rol32(x, 8) & 0x00ff00ffL) | (ror32(x, 8) & 0xff00ff00L));
-  }
-@@ -59,10 +60,11 @@ index ea39846..8e4a636 100644
- -# define be_bswap32(x) ((uint32_t)(x))
- -#elif __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
- -# define be_bswap32(x) _swap32(x)
--+# define be_bswap32(x) _bswap32(x)
-++#  define be_bswap32(x) _bswap32(x)
-++# endif
-  #else
- -#error "Endianess not defined"
--+# error "Neither builtin_bswap32 nor endianess defined"
-++# error "endianess not defined"
-  #endif
-  
-  DSO_PUBLIC
-diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
-index aa438e5859..4e217a351d 100644
---- a/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
-+++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
-@@ -11,6 +11,7 @@ PV = "1.1.5"
- SRC_URI = " \
-     git://github.com/smuellerDD/libkcapi.git \
-     file://0001-kcapi-kdf-Move-code-to-fix.patch \
-+    file://0001-Use-__builtin_bswap32-on-Clang-if-supported.patch \
+diff --git a/meta-xfce/recipes-xfce/exo/exo_0.12.8.bb b/meta-xfce/recipes-xfce/exo/exo_0.12.9.bb
+similarity index 88%
+rename from meta-xfce/recipes-xfce/exo/exo_0.12.8.bb
+rename to meta-xfce/recipes-xfce/exo/exo_0.12.9.bb
+index fdd50d435..a12520417 100644
+--- a/meta-xfce/recipes-xfce/exo/exo_0.12.8.bb
++++ b/meta-xfce/recipes-xfce/exo/exo_0.12.9.bb
+@@ -20,8 +20,8 @@ SRC_URI_append_class-native = " \
+     file://reduce-build-to-exo-csource-only.patch \
  "
  
- inherit autotools
+-SRC_URI[md5sum] = "e618ce760a12ac7427a48a44c69f3d31"
+-SRC_URI[sha256sum] = "3400a2e64aa41ede25bedaca4909bde7ea4f8698d9598d1b80f02a40ac89fcde"
++SRC_URI[md5sum] = "9730f9d270b4968a8bbebe73e6de934f"
++SRC_URI[sha256sum] = "9ba0bf0fd59aeb1cd32ae3863e7a78222655eb15eb675ba08f3b3fb933b6fbfe"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG_class-target ??= "gtk"
 -- 
-2.24.0
+2.21.0
 
 
