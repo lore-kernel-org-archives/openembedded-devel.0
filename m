@@ -1,49 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f66.google.com (mail-qv1-f66.google.com
-	[209.85.219.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 455CA7F88D
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B545C7F859
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 16:11:59 +0000 (UTC)
-Received: by mail-qv1-f66.google.com with SMTP id q19so118891qvs.5
+	Wed, 20 Nov 2019 19:45:26 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id f9so262063plr.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 08:12:01 -0800 (PST)
+	Wed, 20 Nov 2019 11:45:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=SRyDj0irOJW6N21QvcmnAaUw7BpDkPWfUjzR36t0mvg=;
-	b=OjLI3COMUIyDO+/EpclmwtfkG35mlguIRL4zqcER6WM4SKZuXdhuBTLS83LGKm3zUL
-	QL1Ev6pwPBelroktqfXuX8mlVyqz8XS9c4jQz+lOjGvDBhUSO++Ikue2Qi4vrU0Zg6gO
-	63IaWMydqh3U/NlYnkSGPNOD4xDJRfspI4JeOtlhwlUYMYMHdCE/Wctpqx6Mnkpsi1gu
-	pw9ks5nVRMbeytdi7zb8EfsilzbmMmxNvegeQD9dpwcB3oCTJgRtFT1Bv9oTuXUzzEGC
-	o5DNG80v+ExC9tPrG5BdvDjL2cRji5NZAd+YdFdqEpBZih3ADwApfY6dj0v16OUUWJpt
-	DjHA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=rv4gkUdazSGDrxx94gQewqSnNy1KxpFuWtdci7MG/G8=;
+	b=lv2GPdyXuKi7TWqPB/tMGksayD2QsNMAD7ol2ZNVRDHx9sqhRRpdOwVZ2PoImc825g
+	2+IR9mLDD+YXY158W120ZPsNQFsL8BinYhLkbyxmmJduN1At/6JNLoAkRBcwxvh3xvTg
+	rBgBA9JZyEmVt70ieVHiIvME186U8ISTRxo20l9JcUkE9pHDZ0F8s6fNRz4eJdtguQU6
+	1PY9+/s7RkSuAuaruXCk1gkD+xSvtwlsZossC/tI7tR53agC4+m/3r9WlG9lkjdubwUZ
+	OvEg+8cRfp19YdlI6f3vZupw4TaSdHU8FbMaJ20FFT8OTcBENNUFMRhDacNFmvM67L1M
+	CoWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=SRyDj0irOJW6N21QvcmnAaUw7BpDkPWfUjzR36t0mvg=;
-	b=TpXe2CZfnJCuVBy5k1l2T7xkIjVGHah/CXVGumYufshAJuQbkIRtB+HA+n2A/Q7xFp
-	6FFBVKGsBMHM0Cfr8hc1pauQAPgabbOV0HMbjlm6GrhgjEiutcLUNcSqbxfJ8z0Qs1ft
-	t6azvPDP5NfOeMZuX+Q4Ebfb8egrW4bnkAMML4i0yheD7WPOnX3EUqka5WOfGHWNx7sU
-	Z41msNKRXTZQfVgE56BK8jzouFp1xSmVacHkETI5t44vdYHq3ZEiZ4XZHJtvNXNkMD3n
-	yWLsa9n1ZDuIInNcsQ9k4VSmfm1TAvXBZhZ3OCmeHs6YzSMwfbdebsZgPUMVZkaVP4Jm
-	qMhg==
-X-Gm-Message-State: APjAAAUAsHUNQJ6S4ch8M0kT6BwvrJ8BRhpEgiULuoAYkNZaXZnJT3sw
-	1Jy8K9KFwCeOTk1QDE4gwW3g03i08B2PWAwMwKo=
-X-Google-Smtp-Source: APXvYqzOaUKwy+8WCDc6TZRX5FYkOBClOpUmF613QXBX9g1W6V4FiuPVcqiIVWBQoW46wygVFaHO5P02sWeXJOQlwxs=
-X-Received: by 2002:a0c:fe69:: with SMTP id b9mr3299572qvv.206.1574266320080; 
-	Wed, 20 Nov 2019 08:12:00 -0800 (PST)
-MIME-Version: 1.0
-References: <20191119154539.22200-1-pdmorrow@gmail.com>
-	<CAMKF1sqkHJK9gv-=TrCV=HSTwbdS7WC1G6jSReVxQtj_ZHyZuA@mail.gmail.com>
-	<CAFcZKTyvjHeoJHDN_wj0M0bSRt9ns6ZgM7Yj6FWncH-qs5TTig@mail.gmail.com>
-In-Reply-To: <CAFcZKTyvjHeoJHDN_wj0M0bSRt9ns6ZgM7Yj6FWncH-qs5TTig@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=rv4gkUdazSGDrxx94gQewqSnNy1KxpFuWtdci7MG/G8=;
+	b=H4yrChcKA3uR2V/LBjDBUdahoWpvFBjsa8y1rP3dU9zXzTk0JM+PqPiIlPyjVe4Tuh
+	dyslSMpoykp6k3z24Jnp33F7lfFXVzpZg+j0OXE2IgTaeLyQrkfAd6WhBnSr5cB3Uyl+
+	E2BMexgIewncuPc+FeuCdHDuGIAJC2j8MK3yEAGenNMUFs9PPU1LMXC3rIzgC74qjyM3
+	O+mlTdtDCE9zs5uTNO1o858X+ZXvLBP2H8BurY18phYEnq8GZI4jupAixl/rUPW+YCFP
+	l1DbQJaSvkyLwgzbwwM2f2yso8UhVAyIa0qqPDqg6kL7vsE5wiXAtA/0wTsvHHiWtOpM
+	VM3Q==
+X-Gm-Message-State: APjAAAUp0TwY8tbEwBeO3OK2L9X3fPKUciWZkeAUo/UhaUhP0tPf77XD
+	PMzJRgIQzwQILM8I38XTNoVTRYS5j6E=
+X-Google-Smtp-Source: APXvYqxUWK9izbQZzf+koU7bxWtYd26ULj3NDgXVWz3btc5o2CLfuWwiczkAlfauxlyL/apjC1+w0g==
+X-Received: by 2002:a17:902:7206:: with SMTP id
+	ba6mr4754487plb.129.1574279127059; 
+	Wed, 20 Nov 2019 11:45:27 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::d61])
+	by smtp.gmail.com with ESMTPSA id s22sm86389pjr.5.2019.11.20.11.45.26
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 20 Nov 2019 11:45:26 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 20 Nov 2019 08:11:33 -0800
-Message-ID: <CAMKF1spy56crTMXsqDodLjqn7=BzOqmZtMGAGrsP+M+yChr9Fg@mail.gmail.com>
-To: Peter Morrow <pdmorrow@gmail.com>
-Cc: Peter Morrow <peter.morrow@microsoft.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] chrony: install chrony-wait.service
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 20 Nov 2019 11:45:13 -0800
+Message-Id: <20191120194513.3371078-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] ruli: Fix install step and build samples too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,62 +57,237 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 16:12:01 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 20 Nov 2019 19:45:26 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Nov 20, 2019 at 8:03 AM Peter Morrow <pdmorrow@gmail.com> wrote:
->
-> On Wed, 20 Nov 2019 at 14:39, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > On Tue, Nov 19, 2019 at 7:46 AM <pdmorrow@gmail.com> wrote:
-> > >
-> > > From: Peter Morrow <peter.morrow@microsoft.com>
-> > >
-> > > Any systemd service which needs to wait on ntp synchronization before
-> > > starting can order themselves after chrony-wait.service.  It's useful
-> > > to install this service as part of the recipe as it saves needing to
-> > > install it via a bbappend file.  Note that even if the service is
-> > > installed no start up delay is introduced unless another service
-> > > orders itself after the systemd target time-sync.target.
-> > >
-> > > Signed-off-by: Peter Morrow <peter.morrow@microsoft.com>
-> > > ---
-> > >  meta-networking/recipes-support/chrony/chrony_3.5.bb | 3 +++
-> > >  1 file changed, 3 insertions(+)
-> > >
-> > > diff --git a/meta-networking/recipes-support/chrony/chrony_3.5.bb b/meta-networking/recipes-support/chrony/chrony_3.5.bb
-> > > index 7c6356d26..fa11c443e 100644
-> > > --- a/meta-networking/recipes-support/chrony/chrony_3.5.bb
-> > > +++ b/meta-networking/recipes-support/chrony/chrony_3.5.bb
-> > > @@ -103,6 +103,9 @@ do_install() {
-> > >      install -d ${D}${systemd_unitdir}/system
-> > >      install -m 0644 ${S}/examples/chronyd.service ${D}${systemd_unitdir}/system/
-> > >
-> > > +    # systemd chronyd synchronization unit configuration file
-> > > +    install -m 0644 ${S}/examples/chrony-wait.service ${D}${systemd_unitdir}/system/
-> > > +
-> >
-> > thiis needs to be packages as well something like
-> >
-> > FILES_${PN} = "${systemd_unitdir}/system/"
->
-> Thanks Khem.  Strange my build did not show this up, I'll do some more
-> testing and re-submit.
+do_install never executed as a result it was empty install
+Create ruli-bin package for utilities, so libraries can be packages
+granularily
 
-I also wonder, how this was tested as well if it never showed up on
-image. Please describe the testing part as well.
+Drop the makefile patch which is no longer needed, set the make
+variables to get the needed bits set
 
->
-> > > +
-> > >      # Variable data (for drift and/or rtc file)
-> > >      install -d ${D}${localstatedir}/lib/chrony
-> > >
-> > > --
-> > > 2.20.1
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...-Fix-build-with-format-string-checks.patch |  29 ++++-
+ .../recipes-support/ruli/files/Makefile.patch | 122 ------------------
+ .../recipes-support/ruli/ruli_0.36.bb         |  22 +++-
+ 3 files changed, 38 insertions(+), 135 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/ruli/files/Makefile.patch
+
+diff --git a/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch b/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch
+index f8eb3ae67a..8ca26b51bb 100644
+--- a/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch
++++ b/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch
+@@ -15,11 +15,9 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  src/ruli_addr.c | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+-diff --git a/src/ruli_addr.c b/src/ruli_addr.c
+-index 00d5d0d..f1eabae 100644
+ --- a/src/ruli_addr.c
+ +++ b/src/ruli_addr.c
+-@@ -415,7 +415,7 @@ int ruli_in_print(FILE *out, const _ruli_addr *addr, int family)
++@@ -415,7 +415,7 @@ int ruli_in_print(FILE *out, const _ruli
+  {
+    switch (family) {
+    case PF_INET:
+@@ -28,6 +26,25 @@ index 00d5d0d..f1eabae 100644
+  
+    case PF_INET6:
+      return ruli_inet6_print(out, &addr->ipv6);
+--- 
+-2.13.1
+-
++--- a/sample/getaddrinfo.c
+++++ b/sample/getaddrinfo.c
++@@ -174,7 +174,7 @@ static void solve(const char *fullname)
++ 
++       for (ai = ai_res; ai; ai = ai->ai_next) {
++ 
++-	printf(fullname);
+++	printf("%s", fullname);
++ 
++ 	switch (ai->ai_family) {
++ 	case PF_INET:
++--- a/sample/ruli-getaddrinfo.c
+++++ b/sample/ruli-getaddrinfo.c
++@@ -176,7 +176,7 @@ static void solve(const char *fullname)
++ 
++       for (ai = ai_res; ai; ai = ai->ai_next) {
++ 
++-	printf(fullname);
+++	printf("%s", fullname);
++ 
++ 	switch (ai->ai_family) {
++ 	case PF_INET:
+diff --git a/meta-networking/recipes-support/ruli/files/Makefile.patch b/meta-networking/recipes-support/ruli/files/Makefile.patch
+deleted file mode 100644
+index 60789a3d56..0000000000
+--- a/meta-networking/recipes-support/ruli/files/Makefile.patch
++++ /dev/null
+@@ -1,122 +0,0 @@
+-diff -Naur patch.org/ruli-0.36/Makefile patch.new/ruli-0.36/Makefile 
+---- ruli-0.36/Makefile	2015-09-10 15:14:13.952262350 -0400
+-+++ ruli-0.36/Makefile	2015-09-10 15:14:38.628261620 -0400
+-@@ -7,17 +7,17 @@
+- .PHONY: default
+- default:
+- 	$(MAKE) -C src   
+--	$(MAKE) -C sample 
+-+#	$(MAKE) -C sample 
+- 
+- .PHONY: clean
+- clean:
+- 	$(MAKE) -C src    clean
+--	$(MAKE) -C sample clean
+-+#	$(MAKE) -C sample clean
+- 
+- .PHONY: install
+- install:
+- 	$(MAKE) -C src    install
+--	$(MAKE) -C sample install
+-+#	$(MAKE) -C sample install
+- 
+- .PHONY: dpkg
+- dpkg:
+-
+-=====================================================================
+-
+-diff -Naur patch.org/git/src/Makefile patch.new/git/src/Makefile 
+---- ruli-0.36/src/Makefile	2005-06-13 12:34:53.000000000 -0400
+-+++ ruli-0.36/src/Makefile	2015-09-11 09:46:06.290287347 -0400
+-@@ -18,9 +18,9 @@
+- #
+- # Debian packaging likes this: OOP_BASE_DIR = /usr
+- #
+--OOP_BASE_DIR    = /usr/local/oop
+--OOP_INCLUDE_DIR = $(OOP_BASE_DIR)/include
+--OOP_LIB_DIR     = $(OOP_BASE_DIR)/lib
+-+#OOP_BASE_DIR    = /usr/local/oop
+-+OOP_INCLUDE_DIR = ${PKG_CONFIG_SYSROOT_DIR}/$(includedir)/
+-+#OOP_LIB_DIR     = $(OOP_BASE_DIR)/lib
+- 
+- #
+- # INSTALL_BASE_DIR indicates where RULI
+-@@ -30,11 +30,11 @@
+- #
+- # Debian packaging likes this: INSTALL_BASE_DIR = $(DESTDIR)/usr
+- #
+--INSTALL_BASE_DIR     = ../install/ruli
+--INSTALL_INCLUDE_DIR  = $(INSTALL_BASE_DIR)/include
+--INSTALL_LIB_DIR      = $(INSTALL_BASE_DIR)/lib
+--INSTALL_MAN_DIR      = $(INSTALL_BASE_DIR)/share/man
+--INSTALL_MAN3_DIR     = $(INSTALL_MAN_DIR)/man3
+-+#INSTALL_BASE_DIR     = ../install/ruli
+-+#INSTALL_INCLUDE_DIR  = $(INSTALL_BASE_DIR)/include
+-+#INSTALL_LIB_DIR      = $(INSTALL_BASE_DIR)/lib
+-+#INSTALL_MAN_DIR      = $(INSTALL_BASE_DIR)/share/man
+-+#INSTALL_MAN3_DIR     = $(INSTALL_MAN_DIR)/man3
+- 
+- # SunOS, Linux
+- PLATFORM=$(shell uname)
+-@@ -45,7 +45,7 @@
+- 
+- WARN = -pedantic -ansi -Wshadow -Wpointer-arith -Wcast-qual \
+- 	-Wcast-align -Wwrite-strings -Wredundant-decls
+--CC = gcc
+-+#CC = gcc
+- 
+- # gcc-specific options (not valid for g++)
+- ifeq ($(CC),gcc)
+-@@ -58,7 +58,7 @@
+- FLAGS = $(DEBUG) -O2 -pipe -Wall -g -shared -D_REENTRANT \
+-         $(DEFINE_SOLARIS) -I. -I$(OOP_INCLUDE_DIR)
+- SOFT_CFLAGS = $(WARN) $(FLAGS)
+--CFLAGS = $(WARN) -Werror $(FLAGS)
+-+CFLAGS = $(WARN) $(FLAGS)
+- LIBOBJ = ruli_isaac.o ruli_mem.o ruli_rand.o ruli_util.o ruli_list.o \
+- 	ruli_addr.o ruli_sock.o ruli_txt.o ruli_msg.o ruli_fsm.o \
+- 	ruli_res.o ruli_parse.o ruli_host.o ruli_srv.o ruli_conf.o \
+-@@ -66,7 +66,7 @@
+- 	ruli_getaddrinfo.o
+- SHAREDOBJ = $(LIBOBJ:%.o=%.os)
+- SONAME = libruli.so.4
+--LDFLAGS = -L$(OOP_LIB_DIR)
+-+#LDFLAGS = -L$(OOP_LIB_DIR)
+- 
+- COMPILE = $(CC) $(ARCH) $(CPPFLAGS) $(CFLAGS) -c
+- SHARED_COMPILE = $(CC) $(ARCH) $(CPPFLAGS) $(SHARED) $(CFLAGS) -o $@ -c
+-@@ -89,19 +89,19 @@
+- strip: ruli
+- 	strip $(SONAME) libruli.a
+- 
+--.PHONY: install
+--install: ruli
+--	mkdir -p $(INSTALL_LIB_DIR) $(INSTALL_INCLUDE_DIR) $(INSTALL_MAN3_DIR)
+--	cp $(SONAME) libruli.a $(INSTALL_LIB_DIR)
+--	cp *.h $(INSTALL_INCLUDE_DIR)
+--	cp ../doc/man/*.3 $(INSTALL_MAN3_DIR)
+--	cd $(INSTALL_LIB_DIR) && ln -s $(SONAME) libruli.so
+--	@echo
+--	@echo "REMINDER:"
+--	@echo "Add $(INSTALL_LIB_DIR) to your dynamic loader path:"
+--	@echo "# echo $(INSTALL_LIB_DIR) >> /etc/ld.so.conf"
+--	@echo "# ldconfig"
+--	@echo
+-+#.PHONY: install
+-+#install: ruli
+-+#	mkdir -p $(INSTALL_LIB_DIR) $(INSTALL_INCLUDE_DIR) $(INSTALL_MAN3_DIR)
+-+#	cp $(SONAME) libruli.a $(INSTALL_LIB_DIR)
+-+#	cp *.h $(INSTALL_INCLUDE_DIR)
+-+#	cp ../doc/man/*.3 $(INSTALL_MAN3_DIR)
+-+#	cd $(INSTALL_LIB_DIR) && ln -s $(SONAME) libruli.so
+-+#	@echo
+-+#	@echo "REMINDER:"
+-+#	@echo "Add $(INSTALL_LIB_DIR) to your dynamic loader path:"
+-+#	@echo "# echo $(INSTALL_LIB_DIR) >> /etc/ld.so.conf"
+-+#	@echo "# ldconfig"
+-+#	@echo
+- 
+- .PHONY: ruli
+- ruli: $(SONAME) libruli.a
+-
+-
+diff --git a/meta-networking/recipes-support/ruli/ruli_0.36.bb b/meta-networking/recipes-support/ruli/ruli_0.36.bb
+index 885796d2a5..a56ce45f93 100644
+--- a/meta-networking/recipes-support/ruli/ruli_0.36.bb
++++ b/meta-networking/recipes-support/ruli/ruli_0.36.bb
+@@ -8,7 +8,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ DEPENDS = "liboop"
+ 
+ SRC_URI = "http://download.savannah.gnu.org/releases/ruli/ruli_${PV}.orig.tar.gz \
+-           file://Makefile.patch \
+            file://0001-Fix-build-with-format-string-checks.patch \
+            file://0001-src-ruli_addr.c-Add-missing-format-string.patch \
+            "
+@@ -16,10 +15,19 @@ SRC_URI = "http://download.savannah.gnu.org/releases/ruli/ruli_${PV}.orig.tar.gz
+ SRC_URI[md5sum] = "e73fbfdeadddb68a703a70cea5271468"
+ SRC_URI[sha256sum] = "11d32def5b514748fbd9ea8c88049ae99e1bb358efc74eb91a4d268a3999dbfa"
+ 
+-do_install1() {
+-    install -d ${D}${includedir}/ruli
+-    install -d ${D}${libdir}
+-    install -m 0644 ${S}/src/ruli*.h ${D}${includedir}/ruli
+-    install -m 0644 ${S}/src/libruli.so ${D}${libdir}
+-    install -m 0644 ${S}/src/libruli.so.4 ${D}${libdir}
++B = "${S}"
++
++EXTRA_OEMAKE = 'CC="${CC}" OOP_BASE_DIR="${STAGING_EXECPREFIXDIR}" INSTALL_BASE_DIR="${D}${exec_prefix}"'
++
++do_configure() {
++    touch configure-stamp
++}
++
++do_install() {
++    oe_runmake install
+ }
++
++PACKAGES =+ "${PN}-bin"
++
++FILES_${PN} =+ "${bindir}"
++
+-- 
+2.24.0
+
 
