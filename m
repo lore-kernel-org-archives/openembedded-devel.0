@@ -1,50 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id F36DC7F7DD
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
+	[209.85.216.46])
+	by mail.openembedded.org (Postfix) with ESMTP id BAA547C9C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 21:26:07 +0000 (UTC)
-Received: by mail-pg1-f169.google.com with SMTP id 15so373450pgh.5
+	Wed, 20 Nov 2019 21:50:23 +0000 (UTC)
+Received: by mail-pj1-f46.google.com with SMTP id a16so405181pjs.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 13:26:09 -0800 (PST)
+	Wed, 20 Nov 2019 13:50:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=AWk50x/wDaFcqGPidrcbGMhg6OBx+Y9luU+GaZUJkaY=;
-	b=X9CMRsCirouko8e39GaAphUWM9WQjWAXrsV3nrHiwqKOVW8NEwHQFArNOluH0oK7ZX
-	KyXgfHMz0/6chv2F1kdEvYkUGIlahg+mp4DTY8aj3dbzvOx8bxAnc00XdDU1MQduGZum
-	d/jBh1J06cF1K0+KF8THWI5u7XLYG6YI5OSuV/RU2kvcUE/Uz6tGCMCk9+nyXfRl4Wue
-	RL2aunK2i0r5GBlvjMUXcAZTD2QXqEjNXmO5aWGMrT2eq2HGlPh+wMB0sfIRH52oxNqj
-	DOFZA9qyKnTgVblkj5MOx90Vu+LLM2SjiyAc9ukfN84uB3zQut6vLAMWPpixSbuMK4tV
-	vWxg==
+	bh=j32Pg0sEMbXlvZeWB38v6UD931dXRGGFOoKFRXDuA9E=;
+	b=fAYXJnziRyR1pXuPYcv1ZESs8Lw8ZVqFXbGtXzn7KM/vFQCFPDIAQKAFxiU5d7dH2F
+	3zLEaG7wAZ+l2LzUZF7vmap0lS3DpJ8P+aZTSJnKeeh1BT4Lpcip3h/ghLkuVCWyAgRQ
+	71iXx2mbQSJ/DNdrSJyd3LRnjTTRhgTHoGz8IBM22s+KTRX8MDrsRkkq2BgxV3bF+yVR
+	BBVueOGlOeRBs1eQeQgOPOrZL7txs4Ft52Lkfr91olc+GH+rzLwhbVEAYMelFBVX538R
+	qJ74+YTqkpe9Q8qGrGZA7L968V6B8RR8SIjE0/kkyA+DGYzcE20PfRyBXCEQdCq9c4xS
+	o6KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=AWk50x/wDaFcqGPidrcbGMhg6OBx+Y9luU+GaZUJkaY=;
-	b=EuInomM4FCehNuQ5Vz2dCQ7cEsAmJElnsHcXjyfoyBFEUNpVBffz33JBmshwwN40rn
-	GSz2fMvOCQZeAj7zZFqCbwXYslyzlxhCw52/cOFzlJsbklB2WLgxo93CrgQDDIBDZvCb
-	2KdDP9li5AyYNtG7Rh1bO8TK6fjx1Nrk8fwlAi3EZ1Ea5ytA/L3DX6l8hvSuYOYj9L9G
-	+IwVI07m0SuwZAjNxUD8Id2b3TUo2X77iMqzS6zH6AllQtCVsPdjlsnRUnuik0UqtJHi
-	0Na5iPuK+/fxCNONfNCAPf2lmzSHQCrOvpH4Lwdpy8VOJy4JJ2fst7k7Yico5SPoLRDZ
-	izdw==
-X-Gm-Message-State: APjAAAU5/N2i9UdfilgzUUZv78n0QjyKxApJBv9Oi4EmpBn99sFixTyV
-	e6WoU/LuawoppV6iHpKiNZLxPUmDV/M=
-X-Google-Smtp-Source: APXvYqy7zPYzb13+25v7jcIL4Y5lNHkNw6hXJfQnmqACwmnw+faB4k9nx3WR9qVkiE8YQMSd+moS4w==
-X-Received: by 2002:a65:6249:: with SMTP id q9mr5749955pgv.340.1574285168234; 
-	Wed, 20 Nov 2019 13:26:08 -0800 (PST)
+	bh=j32Pg0sEMbXlvZeWB38v6UD931dXRGGFOoKFRXDuA9E=;
+	b=hCJnbGp83nTHKvDwB47Myqd8EwLpIH3/jA9c8v6cZAbyo0jQEx38441QDds1pa4Cir
+	B/Mts2tuK81tHGJPloVymXgnPhEWggOWoO8o9IctXxMmrG/CRphGt3v3v65YudVVz/Sk
+	zFjv6izMOCdUPzE4FnEWLIe9JxYbOYLmy1iJCMga3OvzgP35LwwdJQyHWSbF2yQpIqR/
+	3y08qdut10hTyPjxdxeLO4CTtINo6CKNf7mrALoX2Eimw6W7rKQbBknW729xEoDoZQV/
+	1pxodDhiKUTzuPJI0o3YPH3WM+H8ayAP/Mo/wULsHuRLC7a/ANZu/qX7yKQ9V3GA/WCm
+	JI9A==
+X-Gm-Message-State: APjAAAUfsjzMAsS6bcv5q36dNfggp37I9gc8C9sgg/XxEJEw08zFdPie
+	wI6YYmWL94g5W4twJGNxKh9k5OTc4/8=
+X-Google-Smtp-Source: APXvYqxEvovDKvnorpV7jKY5vJ5N28D4GD/pNVfka+Z+ARgN4isRtnTVOCzfkt54GbkLHNkwBsc+2A==
+X-Received: by 2002:a17:90a:8a11:: with SMTP id
+	w17mr6785805pjn.136.1574286624014; 
+	Wed, 20 Nov 2019 13:50:24 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::d61])
 	by smtp.gmail.com with ESMTPSA id
-	w138sm340135pfc.68.2019.11.20.13.26.07
+	k84sm349105pfd.157.2019.11.20.13.50.22
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 20 Nov 2019 13:26:07 -0800 (PST)
+	Wed, 20 Nov 2019 13:50:23 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Nov 2019 13:25:56 -0800
-Message-Id: <20191120212556.1443911-1-raj.khem@gmail.com>
+Date: Wed, 20 Nov 2019 13:50:09 -0800
+Message-Id: <20191120215009.1723062-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libkcapi: Update patch to upstream submitted one
+Subject: [meta-oe][PATCH V2] libkcapi: Update patch to upstream submitted one
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,14 +58,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 21:26:08 -0000
+X-List-Received-Date: Wed, 20 Nov 2019 21:50:23 -0000
 Content-Transfer-Encoding: 8bit
+
+Use builtin_bswap32 with clang if available
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-kcapi-kdf-Move-code-to-fix.patch     | 24 ++++++++++---------
- 1 file changed, 13 insertions(+), 11 deletions(-)
+v2: Use builtin_bswap32 with clang if available
 
+ ...uiltin_bswap32-on-Clang-if-supported.patch | 32 +++++++++++++++++++
+ .../0001-kcapi-kdf-Move-code-to-fix.patch     | 24 +++++++-------
+ .../recipes-crypto/libkcapi/libkcapi_git.bb   |  1 +
+ 3 files changed, 46 insertions(+), 11 deletions(-)
+ create mode 100644 meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Use-__builtin_bswap32-on-Clang-if-supported.patch
+
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Use-__builtin_bswap32-on-Clang-if-supported.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Use-__builtin_bswap32-on-Clang-if-supported.patch
+new file mode 100644
+index 0000000000..83b16f2e2f
+--- /dev/null
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-Use-__builtin_bswap32-on-Clang-if-supported.patch
+@@ -0,0 +1,32 @@
++From 36637cd802fac9402be76f2a9358a26b7f6aa530 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 20 Nov 2019 13:41:39 -0800
++Subject: [PATCH] Use __builtin_bswap32 on Clang if supported
++
++clang pretends to be gcc 4.2.1 so GCC_VERSION macro will decide that
++__builtin_bswap32 is not supported on clang, whereas in reality it might
++so its better to add a check for enquiring clang if it supports
++__builtin_bswap32 or not
++
++Upstream-Status: Submitted [https://github.com/smuellerDD/libkcapi/pull/83]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ lib/kcapi-kdf.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/lib/kcapi-kdf.c b/lib/kcapi-kdf.c
++index 9e53a0b..428ecaf 100644
++--- a/lib/kcapi-kdf.c
+++++ b/lib/kcapi-kdf.c
++@@ -57,7 +57,7 @@
++ #define GCC_VERSION (__GNUC__ * 10000		\
++ 		     + __GNUC_MINOR__ * 100	\
++ 		     + __GNUC_PATCHLEVEL__)
++-#if GCC_VERSION >= 40400
+++#if GCC_VERSION >= 40400 || (defined(__clang__) && __has_builtin(__builtin_bswap32))
++ # define __HAVE_BUILTIN_BSWAP32__
++ #endif
++ 
++-- 
++2.24.0
++
 diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch b/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch
 index 3dd7ea7f9b..7ed9caf096 100644
 --- a/meta-oe/recipes-crypto/libkcapi/libkcapi/0001-kcapi-kdf-Move-code-to-fix.patch
@@ -130,6 +176,18 @@ index 3dd7ea7f9b..7ed9caf096 100644
   #endif
   
   DSO_PUBLIC
+diff --git a/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
+index aa438e5859..4e217a351d 100644
+--- a/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
++++ b/meta-oe/recipes-crypto/libkcapi/libkcapi_git.bb
+@@ -11,6 +11,7 @@ PV = "1.1.5"
+ SRC_URI = " \
+     git://github.com/smuellerDD/libkcapi.git \
+     file://0001-kcapi-kdf-Move-code-to-fix.patch \
++    file://0001-Use-__builtin_bswap32-on-Clang-if-supported.patch \
+ "
+ 
+ inherit autotools
 -- 
 2.24.0
 
