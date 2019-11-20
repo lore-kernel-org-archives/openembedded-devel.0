@@ -1,49 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-il1-f179.google.com (mail-il1-f179.google.com
-	[209.85.166.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 050B86C1CA
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 843B46C1CA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 08:04:14 +0000 (UTC)
-Received: by mail-il1-f179.google.com with SMTP id s75so22570558ilc.3
+	Wed, 20 Nov 2019 08:07:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,221,1571673600"; d="scan'208";a="78784124"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 20 Nov 2019 16:07:29 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 25D784CE1BE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 00:04:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=ne7o58EAYJBdpO5zvEXL0CXwUMyhoIIiVHbpCUguZCY=;
-	b=RnVbb8wyuj/PAwCEkgwjsSoElorYyvj++lpiguTQ6twxw3cScoJU9ivxbaALii5wvT
-	rA/stg378YaT7xBG913yH6OadzSf72nxgkI2dRGFA/7b20NrIrk9ZB5Vf+njFm+9UBUh
-	YCKvvc7s0a095icmcGRygKA96O9BwUnOp6zhGfa91cWBLpY6GtknaKHx9gWYdNoonjAU
-	1YoMa0FIZy6M8o/epSGFXulyma76PJzrR2oX8mwtk+iLWTiaoypli+g4otVf/asiZd63
-	qj/KcNUk9ljoYVy6ANI++zovfHXZ2+C+HDyIsXpTdgd/rgj6U5q3iDOrZWiE0AQ2JIl5
-	8I7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=ne7o58EAYJBdpO5zvEXL0CXwUMyhoIIiVHbpCUguZCY=;
-	b=kSMLhiOh8mbkQQI1yzuWBaB2VAHlhr/S2Ch1mf6KUXJ2c5+JHUHRok/+jiiBfiPljg
-	+f/eEL29CacJxS/M76lyJD0mg5SNEKNjKD2CiZg/DMhkAc1pN8vpNbMyQC6OJwcCNXv2
-	GVSum/onwLG4j1C8J/UPoeYaVUEHeyLuXrKkbDs6ZT/3/jmj5JnynTPWd7L3uSQArykO
-	3QUGSAotVjeg1hFuUMMtevzSBv+1Qbtgr1PNc8TGLUj0EYaGnst48VK2rKLXhBwsODHI
-	nyG6BW/7UMdBWGcuUw+c0+baQYSMc0xJnAHFUZnzwk3by3fV9c1j+AY/CZXT7LAZb/01
-	03fQ==
-X-Gm-Message-State: APjAAAXelJQeLaHBXkGfJGqpBhXFqubGeLG7V/c0sQZ1H3/SarUkkdZl
-	6Od41HvGDgjhRDs1yjZ4PiG1UgRDaShrKLLNECk=
-X-Google-Smtp-Source: APXvYqzwXVC/eOoZ42dLGEbZ6g/6VMmH3718hySnbNnwTM25OhU9w2c9dZtGA1tH2KRJ74CT08MMrhsP9iZU6aMzqQc=
-X-Received: by 2002:a92:d80e:: with SMTP id y14mr2167168ilm.267.1574237056066; 
-	Wed, 20 Nov 2019 00:04:16 -0800 (PST)
+	Wed, 20 Nov 2019 15:59:10 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 20 Nov 2019 16:07:25 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 20 Nov 2019 16:08:01 +0800
+Message-ID: <20191120080801.2635-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20191119071730.2682-1-schnitzeltony@gmail.com>
-	<20191119071730.2682-4-schnitzeltony@gmail.com>
-	<CAMKF1sp-CsNE6A0MPBYCgbD0cXXHU89zQyeCTSjP83UtTh6krA@mail.gmail.com>
-In-Reply-To: <CAMKF1sp-CsNE6A0MPBYCgbD0cXXHU89zQyeCTSjP83UtTh6krA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Wed, 20 Nov 2019 09:04:04 +0100
-Message-ID: <CALbNGRRAw_57dRRufUzWK6KEu6qTjG4deM_UwvswQFUnJLFesw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/9] tracker-miners: initial add 2.3.1
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 25D784CE1BE7.A9068
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-twisted: upgrade 19.7.0 -> 19.10.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,23 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 08:04:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 20 Nov 2019 08:07:30 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Wed, Nov 20, 2019 at 5:35 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Mon, Nov 18, 2019 at 11:18 PM Andreas M=C3=BCller <schnitzeltony@gmail=
-.com> wrote:
-> >
-> > tracker-miners is a mandatory runtime-dependency for nautilus
-> >
->
-> fails to build on x86
->
-> https://errors.yoctoproject.org/Errors/Details/277884/
->
-Same procedure - hope V2 coming soon...
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ meta-python/recipes-devtools/python/python-twisted.inc        | 4 ++--
+ .../{python-twisted_19.7.0.bb => python-twisted_19.10.0.bb}   | 0
+ .../{python3-twisted_19.7.0.bb => python3-twisted_19.10.0.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-twisted_19.7.0.bb => python-twisted_19.10.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-twisted_19.7.0.bb => python3-twisted_19.10.0.bb} (100%)
 
-Andreas
+diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
+index d70104dc2..34f8846b0 100644
+--- a/meta-python/recipes-devtools/python/python-twisted.inc
++++ b/meta-python/recipes-devtools/python/python-twisted.inc
+@@ -7,8 +7,8 @@ HOMEPAGE = "http://www.twistedmatrix.com"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1743f12d8b8f5aec625c0569a058f0a6"
+ 
+-SRC_URI[sha256sum] = "d5db93026568f60cacdc0615fcd21d46f694a6bfad0ef3ff53cde2b4bb85a39d"
+-SRC_URI[md5sum] = "5e9296a952430d288cdcdc6ad9eb5ee8"
++SRC_URI[sha256sum] = "7394ba7f272ae722a74f3d969dcf599bc4ef093bc392038748a490f1724a515d"
++SRC_URI[md5sum] = "f2d70f7a66ecdf54152310164cceadfe"
+ 
+ PYPI_PACKAGE = "Twisted"
+ PYPI_PACKAGE_EXT = "tar.bz2"
+diff --git a/meta-python/recipes-devtools/python/python-twisted_19.7.0.bb b/meta-python/recipes-devtools/python/python-twisted_19.10.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-twisted_19.7.0.bb
+rename to meta-python/recipes-devtools/python/python-twisted_19.10.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-twisted_19.7.0.bb b/meta-python/recipes-devtools/python/python3-twisted_19.10.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-twisted_19.7.0.bb
+rename to meta-python/recipes-devtools/python/python3-twisted_19.10.0.bb
+-- 
+2.20.1
+
+
+
 
