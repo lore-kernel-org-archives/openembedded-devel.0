@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 399167E08E
+	by mail.openembedded.org (Postfix) with ESMTP id 6E87E7CBD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 07:22:43 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,220,1571673600"; d="scan'208";a="78782219"
+	Wed, 20 Nov 2019 07:29:13 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,220,1571673600"; d="scan'208";a="78782458"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 20 Nov 2019 15:22:43 +0800
+	by heian.cn.fujitsu.com with ESMTP; 20 Nov 2019 15:29:13 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id A581F4CE1BE4
+	by cn.fujitsu.com (Postfix) with ESMTP id 2C3934CE1BE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 15:14:23 +0800 (CST)
+	Wed, 20 Nov 2019 15:20:53 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 20 Nov 2019 15:22:40 +0800
+	Server (TLS) id 14.3.439.0; Wed, 20 Nov 2019 15:29:10 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Nov 2019 15:23:09 +0800
-Message-ID: <20191120072309.28623-1-zangrc.fnst@cn.fujitsu.com>
+Date: Wed, 20 Nov 2019 15:29:39 +0800
+Message-ID: <20191120072939.29856-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: A581F4CE1BE4.A9588
+X-yoursite-MailScanner-ID: 2C3934CE1BE4.A9179
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-urllib3: upgrade 1.25.6 -> 1.25.7
+Subject: [meta-python] [PATCH] python-tzlocal: upgrade 1.5.1 -> 2.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,42 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 07:22:44 -0000
+X-List-Received-Date: Wed, 20 Nov 2019 07:29:13 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-urllib3.inc        | 4 ++--
- .../{python-urllib3_1.25.6.bb => python-urllib3_1.25.7.bb}    | 0
- .../{python3-urllib3_1.25.6.bb => python3-urllib3_1.25.7.bb}  | 0
+ meta-python/recipes-devtools/python/python-tzlocal.inc        | 4 ++--
+ .../{python-tzlocal_1.5.1.bb => python-tzlocal_2.0.0.bb}      | 0
+ .../{python3-tzlocal_1.5.1.bb => python3-tzlocal_2.0.0.bb}    | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-urllib3_1.25.6.bb => python-urllib3_1.25.7.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.6.bb => python3-urllib3_1.25.7.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-tzlocal_1.5.1.bb => python-tzlocal_2.0.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-tzlocal_1.5.1.bb => python3-tzlocal_2.0.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-urllib3.inc b/meta-python/recipes-devtools/python/python-urllib3.inc
-index 398b5f2ac..b7edc03f0 100644
---- a/meta-python/recipes-devtools/python/python-urllib3.inc
-+++ b/meta-python/recipes-devtools/python/python-urllib3.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+diff --git a/meta-python/recipes-devtools/python/python-tzlocal.inc b/meta-python/recipes-devtools/python/python-tzlocal.inc
+index 42f93e6a5..7c2ad2471 100644
+--- a/meta-python/recipes-devtools/python/python-tzlocal.inc
++++ b/meta-python/recipes-devtools/python/python-tzlocal.inc
+@@ -3,6 +3,6 @@ HOMEPAGE = "https://pypi.org/project/tzlocal/"
  LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
  
--SRC_URI[md5sum] = "a7504a9fcb7ed4ffa482fe098c80b6d4"
--SRC_URI[sha256sum] = "9a107b99a5393caf59c7aa3c1249c16e6879447533d0887f4336dde834c7be86"
-+SRC_URI[md5sum] = "85e1e3925f8c1095172bff343f3312ed"
-+SRC_URI[sha256sum] = "f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e48b0745"
+-SRC_URI[md5sum] = "4553be891efa0812c4adfb0c6e818eec"                            
+-SRC_URI[sha256sum] = "4ebeb848845ac898da6519b9b31879cf13b6626f7184c496037b818e238f2c4e" 
++SRC_URI[md5sum] = "b14262cecca16ec9220ca8dff2ca7c5d"                            
++SRC_URI[sha256sum] = "949b9dd5ba4be17190a80c0268167d7e6c92c62b30026cf9764caf3e308e5590" 
  
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-certifi \
-diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python-urllib3_1.25.7.bb
+diff --git a/meta-python/recipes-devtools/python/python-tzlocal_1.5.1.bb b/meta-python/recipes-devtools/python/python-tzlocal_2.0.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
-rename to meta-python/recipes-devtools/python/python-urllib3_1.25.7.bb
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
+rename from meta-python/recipes-devtools/python/python-tzlocal_1.5.1.bb
+rename to meta-python/recipes-devtools/python/python-tzlocal_2.0.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-tzlocal_1.5.1.bb b/meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
-rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
+rename from meta-python/recipes-devtools/python/python3-tzlocal_1.5.1.bb
+rename to meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb
 -- 
 2.20.1
 
