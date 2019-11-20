@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 81A517F771
+	by mail.openembedded.org (Postfix) with ESMTP id 399167E08E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 06:58:42 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,220,1571673600"; d="scan'208";a="78781227"
+	Wed, 20 Nov 2019 07:22:43 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,220,1571673600"; d="scan'208";a="78782219"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 20 Nov 2019 14:58:43 +0800
+	by heian.cn.fujitsu.com with ESMTP; 20 Nov 2019 15:22:43 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 193604CE1672
+	by cn.fujitsu.com (Postfix) with ESMTP id A581F4CE1BE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 14:50:27 +0800 (CST)
+	Wed, 20 Nov 2019 15:14:23 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 20 Nov 2019 14:58:43 +0800
+	Server (TLS) id 14.3.439.0; Wed, 20 Nov 2019 15:22:40 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Nov 2019 14:59:16 +0800
-Message-ID: <20191120065916.16065-1-zangrc.fnst@cn.fujitsu.com>
+Date: Wed, 20 Nov 2019 15:23:09 +0800
+Message-ID: <20191120072309.28623-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 193604CE1672.A3D16
+X-yoursite-MailScanner-ID: A581F4CE1BE4.A9588
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-xlrd: upgrade 1.1.0 -> 1.2.0
+Subject: [meta-python] [PATCH] python-urllib3: upgrade 1.25.6 -> 1.25.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,47 +37,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 06:58:43 -0000
+X-List-Received-Date: Wed, 20 Nov 2019 07:22:44 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--License-Update: Update PKG-INFO.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-xlrd.inc         | 6 +++---
- .../python/{python-xlrd_1.1.0.bb => python-xlrd_1.2.0.bb}   | 0
- .../python/{python3-xlrd_1.1.0.bb => python3-xlrd_1.2.0.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-xlrd_1.1.0.bb => python-xlrd_1.2.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-xlrd_1.1.0.bb => python3-xlrd_1.2.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-urllib3.inc        | 4 ++--
+ .../{python-urllib3_1.25.6.bb => python-urllib3_1.25.7.bb}    | 0
+ .../{python3-urllib3_1.25.6.bb => python3-urllib3_1.25.7.bb}  | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-urllib3_1.25.6.bb => python-urllib3_1.25.7.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-urllib3_1.25.6.bb => python3-urllib3_1.25.7.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-xlrd.inc b/meta-python/recipes-devtools/python/python-xlrd.inc
-index 1478a474b..f87d2ab7c 100644
---- a/meta-python/recipes-devtools/python/python-xlrd.inc
-+++ b/meta-python/recipes-devtools/python/python-xlrd.inc
-@@ -4,10 +4,10 @@ DESCRIPTION = "Extract data from Excel spreadsheets (.xls and .xlsx,\
- Strong support for Excel dates. Unicode-aware."
- HOMEPAGE = "http://www.python-excel.org/"
- LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=08bd814936237b6e1355e6370b24b2c1"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5f4244d51fcc1e7cc2d43e96891b2f80"
+diff --git a/meta-python/recipes-devtools/python/python-urllib3.inc b/meta-python/recipes-devtools/python/python-urllib3.inc
+index 398b5f2ac..b7edc03f0 100644
+--- a/meta-python/recipes-devtools/python/python-urllib3.inc
++++ b/meta-python/recipes-devtools/python/python-urllib3.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=65715c2eb961313d71b297dd5a04f85e"
  
--SRC_URI[md5sum] = "b85c9916ac755cad489a9005f5a0d390"
--SRC_URI[sha256sum] = "8a21885513e6d915fe33a8ee5fdfa675433b61405ba13e2a69e62ee36828d7e2"
-+SRC_URI[md5sum] = "e5d5b96924d791b22898b622eb3e918e"
-+SRC_URI[sha256sum] = "546eb36cee8db40c3eaa46c351e67ffee6eeb5fa2650b71bc4c758a29a1b29b2"
+-SRC_URI[md5sum] = "a7504a9fcb7ed4ffa482fe098c80b6d4"
+-SRC_URI[sha256sum] = "9a107b99a5393caf59c7aa3c1249c16e6879447533d0887f4336dde834c7be86"
++SRC_URI[md5sum] = "85e1e3925f8c1095172bff343f3312ed"
++SRC_URI[sha256sum] = "f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e48b0745"
  
- RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell"
- 
-diff --git a/meta-python/recipes-devtools/python/python-xlrd_1.1.0.bb b/meta-python/recipes-devtools/python/python-xlrd_1.2.0.bb
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-certifi \
+diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python-urllib3_1.25.7.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-xlrd_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python-xlrd_1.2.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-xlrd_1.1.0.bb b/meta-python/recipes-devtools/python/python3-xlrd_1.2.0.bb
+rename from meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
+rename to meta-python/recipes-devtools/python/python-urllib3_1.25.7.bb
+diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-xlrd_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-xlrd_1.2.0.bb
+rename from meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
+rename to meta-python/recipes-devtools/python/python3-urllib3_1.25.7.bb
 -- 
 2.20.1
 
