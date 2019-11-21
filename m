@@ -1,55 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id AC37E6C3B2
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 43C576BBE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 23:38:15 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id x26so1348819wmk.4
+	Thu, 21 Nov 2019 02:14:18 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,224,1571673600"; d="scan'208";a="78819096"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2019 10:14:19 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 3B79A4CE1646
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 15:38:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=EfHYsnAjzdZOdTDJ5ARKhFFlNSimrItMyiMF1Pt9Kh0=;
-	b=ccw69g8pZvIixW/h7KNMBzP4iesh0n/NR6SP6e0dldUXpl7xN1/xfiiilZ0bKUcaao
-	sWpjAdlRWbw2Wml8mbAcwKk/wwj0xyeGqkyPJOhIb1NZVaMiMbOArzYwFqCSqTN5oo98
-	Muq4JvqMiaz3V732gwzGcgrU9XK9wCquLjZMMljCMsYDgWRhLugLb2Xqb2+6cLQM1u4X
-	yBjCJfabgPv47SQUcDZeBVMwfVdupdLXteMZKZMgmRObEWzKRFPMgQfDTajFQQOSDpk+
-	6zrsXbnYYpaumBxyg4xVxumMpShdnHuRzKEVQSJc7RLFkzvcKY3djeCLdU+ojtVPogkq
-	d5Zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=EfHYsnAjzdZOdTDJ5ARKhFFlNSimrItMyiMF1Pt9Kh0=;
-	b=XkbJJFo+HfL49r1jCLyqrrwo9Gka14wiftqcsLXaUXwDTUUoBrrrOqZMLQZqG8iISn
-	LtVruaXxp5ctQapBXqGLNRJhdA7uHfJd/fT+ZRjzRqtfhFMvpgb2laz0noPiZaHQQ94F
-	xlIJEs8nQQHGE5er2L9B9jhyDvwVApZh9i0AGNsnhYayq05h3nKlw4BppDTbow6BQq0+
-	FKn/S/TS2ICNiDofHIKAW5grfnA03ndhgBYtr1Q7MXSabNAUMEZw0GL53gioW/0Ir57L
-	t/aBbqFwskWX94Buhy5xjNp3DcCcRtBYRxkCMLmtN8Mx+wnfIU5UBXZMiD7YdscBVJv8
-	309A==
-X-Gm-Message-State: APjAAAWvUnsNE9BXG5XwvWFVYtCRjowL0GOvD+JHVdp1pP2/5mlcgd3U
-	o7yCB1y1eEga5bwbCq5PZD88w6um
-X-Google-Smtp-Source: APXvYqxV7MTMhMx7ScPo7F0XsFWANAZ+zlWbynzBFAWzu95u3ghfJ1SqJbQ2ORAZJqBrKBUTUYxqKA==
-X-Received: by 2002:a7b:ce92:: with SMTP id q18mr6408221wmj.164.1574293096263; 
-	Wed, 20 Nov 2019 15:38:16 -0800 (PST)
-Received: from superandy.speedport.ip
-	(p200300F07F0CB687FD2CB83E858114E3.dip0.t-ipconnect.de.
-	[2003:f0:7f0c:b687:fd2c:b83e:8581:14e3])
-	by smtp.gmail.com with ESMTPSA id
-	x10sm1014074wrv.60.2019.11.20.15.38.15
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 20 Nov 2019 15:38:15 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org,
-	kai.kang@windriver.com
-Date: Thu, 21 Nov 2019 00:38:06 +0100
-Message-Id: <20191120233806.31207-2-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191120233806.31207-1-schnitzeltony@gmail.com>
-References: <20191120233806.31207-1-schnitzeltony@gmail.com>
+	Thu, 21 Nov 2019 10:06:00 +0800 (CST)
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 21 Nov 2019 10:14:20 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 21 Nov 2019 10:14:49 +0800
+Message-ID: <20191121021449.8990-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 2/2] parole: upgrade 1.0.4 -> 1.0.5
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 3B79A4CE1646.A7FC8
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python3-pykickstart: upgrade 3.20 -> 3.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,42 +37,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Nov 2019 23:38:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 21 Nov 2019 02:14:19 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Release notes for 1.0.5
-=======================
-Bug Fixes:
-- Fix creation and cleanup of thumbnails (Xfce #16026)
-- Fix volume hotkeys in fullscreen (Xfce #16005)
-- Fix compiler warnings
+-Refresh the following patch:
+ 0003-comment-out-sections-shutdown-and-environment-in-gen.patch
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../parole/{parole_1.0.4.bb => parole_1.0.5.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-multimedia/parole/{parole_1.0.4.bb => parole_1.0.5.bb} (84%)
+ ...-out-sections-shutdown-and-environment-in-gen.patch | 10 +++++-----
+ ...pykickstart_3.20.bb => python3-pykickstart_3.22.bb} |  2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ rename meta-python/recipes-extended/python-pykickstart/{python3-pykickstart_3.20.bb => python3-pykickstart_3.22.bb} (94%)
 
-diff --git a/meta-xfce/recipes-multimedia/parole/parole_1.0.4.bb b/meta-xfce/recipes-multimedia/parole/parole_1.0.5.bb
-similarity index 84%
-rename from meta-xfce/recipes-multimedia/parole/parole_1.0.4.bb
-rename to meta-xfce/recipes-multimedia/parole/parole_1.0.5.bb
-index 68556a2ab..efee1aa93 100644
---- a/meta-xfce/recipes-multimedia/parole/parole_1.0.4.bb
-+++ b/meta-xfce/recipes-multimedia/parole/parole_1.0.5.bb
-@@ -16,8 +16,8 @@ DEPENDS += " \
-     taglib \
- "
+diff --git a/meta-python/recipes-extended/python-pykickstart/files/0003-comment-out-sections-shutdown-and-environment-in-gen.patch b/meta-python/recipes-extended/python-pykickstart/files/0003-comment-out-sections-shutdown-and-environment-in-gen.patch
+index 81e351b11..7ab734686 100644
+--- a/meta-python/recipes-extended/python-pykickstart/files/0003-comment-out-sections-shutdown-and-environment-in-gen.patch
++++ b/meta-python/recipes-extended/python-pykickstart/files/0003-comment-out-sections-shutdown-and-environment-in-gen.patch
+@@ -17,7 +17,7 @@ fixup! add comments of shutdown for user
+  2 files changed, 4 insertions(+), 1 deletion(-)
  
--SRC_URI[md5sum] = "c23621eb44df292f828e86074d4e719d"
--SRC_URI[sha256sum] = "e92b8ec369e53d921b47d2473c2e2a1e9e04d3c5d536d419abdff40e5e136dc1"
-+SRC_URI[md5sum] = "74fcde5da018c011e5febd9649817c05"
-+SRC_URI[sha256sum] = "1adb4bd96c4cc4b4a79eeafe1316e170f506426e3737e8ba8898f7ea6bec572a"
+ diff --git a/pykickstart/commands/reboot.py b/pykickstart/commands/reboot.py
+-index 2c1b1c0..b3ec717 100644
++index 75a6d916..edfe83ff 100644
+ --- a/pykickstart/commands/reboot.py
+ +++ b/pykickstart/commands/reboot.py
+ @@ -43,6 +43,9 @@ class FC3_Reboot(KickstartCommand):
+@@ -31,18 +31,18 @@ index 2c1b1c0..b3ec717 100644
+          return retval
+  
+ diff --git a/pykickstart/parser.py b/pykickstart/parser.py
+-index e68174d..efd78a6 100644
++index bc59131b..b2d09d45 100644
+ --- a/pykickstart/parser.py
+ +++ b/pykickstart/parser.py
+-@@ -385,7 +385,7 @@ class Packages(KickstartObject):
++@@ -428,7 +428,7 @@ class Packages(KickstartObject):
+  
+          if not self.default:
+              if self.environment:
+ -                pkgs += "@^%s\n" % self.environment
+ +                pkgs += "#@^%s\n" % self.environment
+  
+-             grps = self.groupList
+-             grps.sort()
++         grps = self.groupList
++         grps.sort()
+ -- 
+ 2.7.4
  
- RDEPENDS_${PN} += "gstreamer1.0-plugins-good"
+diff --git a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.20.bb b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.22.bb
+similarity index 94%
+rename from meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.20.bb
+rename to meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.22.bb
+index ed10ce958..041abd3e8 100644
+--- a/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.20.bb
++++ b/meta-python/recipes-extended/python-pykickstart/python3-pykickstart_3.22.bb
+@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/rhinstaller/pykickstart.git;protocol=https;branch=ma
+            file://0003-comment-out-sections-shutdown-and-environment-in-gen.patch \
+            file://0004-load.py-retry-to-invoke-request-with-timeout.patch \
+            "
+-SRCREV = "487edfded19d5969db0673b200ee4272b7dc6697"
++SRCREV = "674c17b1e231f56a0d8a5ced4a204cdbc4c1edf3"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "r(?P<pver>\d+(\.\d+)+(-\d+)*)"
  
 -- 
-2.21.0
+2.20.1
+
+
 
 
