@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C5F37997D
+	by mail.openembedded.org (Postfix) with ESMTP id 260737F238
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 05:12:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,224,1571673600"; d="scan'208";a="78829690"
+	Thu, 21 Nov 2019 05:30:38 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,224,1571673600"; d="scan'208";a="78830311"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2019 13:12:46 +0800
+	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2019 13:30:38 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 50DBF4CE14FF
+	by cn.fujitsu.com (Postfix) with ESMTP id E37844CE14FF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 13:04:24 +0800 (CST)
+	Thu, 21 Nov 2019 13:22:16 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 21 Nov 2019 13:12:42 +0800
+	Server (TLS) id 14.3.439.0; Thu, 21 Nov 2019 13:30:33 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Nov 2019 13:13:16 +0800
-Message-ID: <20191121051316.12844-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 21 Nov 2019 13:31:08 +0800
+Message-ID: <20191121053108.15446-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 50DBF4CE14FF.AA32E
+X-yoursite-MailScanner-ID: E37844CE14FF.A81A5
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-perl] [PATCH] librole-tiny-perl: upgrade 2.000006 -> 2.001004
+Subject: [meta-perl] [PATCH] libmoo-perl: upgrade 2.003004 -> 2.003006
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,37 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2019 05:12:45 -0000
+X-List-Received-Date: Thu, 21 Nov 2019 05:30:39 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
+-License-Update: Change the LICENSE URL from http to https.
+
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...-tiny-perl_2.000006.bb => librole-tiny-perl_2.001004.bb} | 6 +++---
+ .../{libmoo-perl_2.003004.bb => libmoo-perl_2.003006.bb}    | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-perl/recipes-perl/librole/{librole-tiny-perl_2.000006.bb => librole-tiny-perl_2.001004.bb} (77%)
+ rename meta-perl/recipes-perl/libmoo/{libmoo-perl_2.003004.bb => libmoo-perl_2.003006.bb} (85%)
 
-diff --git a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.000006.bb b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.001004.bb
-similarity index 77%
-rename from meta-perl/recipes-perl/librole/librole-tiny-perl_2.000006.bb
-rename to meta-perl/recipes-perl/librole/librole-tiny-perl_2.001004.bb
-index c2755ea0f..41743d508 100644
---- a/meta-perl/recipes-perl/librole/librole-tiny-perl_2.000006.bb
-+++ b/meta-perl/recipes-perl/librole/librole-tiny-perl_2.001004.bb
-@@ -6,11 +6,11 @@ SECTION = "libs"
- HOMEPAGE = "https://metacpan.org/pod/Role::Tiny"
+diff --git a/meta-perl/recipes-perl/libmoo/libmoo-perl_2.003004.bb b/meta-perl/recipes-perl/libmoo/libmoo-perl_2.003006.bb
+similarity index 85%
+rename from meta-perl/recipes-perl/libmoo/libmoo-perl_2.003004.bb
+rename to meta-perl/recipes-perl/libmoo/libmoo-perl_2.003006.bb
+index a260ab87d..0bd0eae92 100644
+--- a/meta-perl/recipes-perl/libmoo/libmoo-perl_2.003004.bb
++++ b/meta-perl/recipes-perl/libmoo/libmoo-perl_2.003006.bb
+@@ -7,11 +7,11 @@ SECTION = "libs"
+ HOMEPAGE = "http://metapan.org/release/Moo/"
  
  LICENSE = "Artistic-1.0 | GPL-1.0+"
--LIC_FILES_CHKSUM = "file://README;beginline=177;endline=214;md5=26df7e7c20551fb1906e2286624f0b71"
-+LIC_FILES_CHKSUM = "file://README;beginline=182;endline=219;md5=26df7e7c20551fb1906e2286624f0b71"
+-LIC_FILES_CHKSUM = "file://README;beginline=731;endline=776;md5=27efedd175eeaddbd18f4e3572bd72a8"
++LIC_FILES_CHKSUM = "file://README;beginline=742;endline=787;md5=2ee6a628a04af08d75bc73a86da86d4a"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Role-Tiny-${PV}.tar.gz"
--SRC_URI[md5sum] = "7c277728a7e090f64b495857cadfed08"
--SRC_URI[sha256sum] = "cc73418c904a0286ecd8915eac11f5be2a8d1e17ea9cb54c9116b0340cd3e382"
-+SRC_URI[md5sum] = "98446826608b1e943e65c1f6e35942fe"
-+SRC_URI[sha256sum] = "92ba5712850a74102c93c942eb6e7f62f7a4f8f483734ed289d08b324c281687"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/H/HA/HAARG/Moo-${PV}.tar.gz"
+-SRC_URI[md5sum] = "d4fcd0f240033198571fcc81ce7c5f15"
+-SRC_URI[sha256sum] = "f8bbb625f8e963eabe05cff9048fdd72bdd26777404ff2c40bc690f558be91e1"
++SRC_URI[md5sum] = "53af7e7849492a8e3994ee379d12e348"
++SRC_URI[sha256sum] = "bcb2092ab18a45005b5e2e84465ebf3a4999d8e82a43a09f5a94d859ae7f2472"
  
- S = "${WORKDIR}/Role-Tiny-${PV}"
+ S = "${WORKDIR}/Moo-${PV}"
  
 -- 
 2.20.1
