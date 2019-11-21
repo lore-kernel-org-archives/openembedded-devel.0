@@ -1,30 +1,24 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1629B6B07E
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EBBA606B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 02:21:10 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,224,1571673600"; d="scan'208";a="78819416"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2019 10:21:10 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7D1FC4CE1A05
+	Thu, 21 Nov 2019 02:34:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xAL2YgB7015189
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 10:12:51 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 21 Nov 2019 10:21:11 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+	Wed, 20 Nov 2019 18:34:42 -0800
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Wed, 20 Nov 2019 18:34:41 -0800
+From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Nov 2019 10:21:44 +0800
-Message-ID: <20191121022144.24601-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+Date: Thu, 21 Nov 2019 10:34:40 +0800
+Message-ID: <20191121023440.36149-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 7D1FC4CE1A05.A921E
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pyparted: upgrade 3.11.2 -> 3.11.3
+Subject: [meta-python][PATCH] python-jsonschemea: add missing dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,43 +31,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2019 02:21:11 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 21 Nov 2019 02:34:41 -0000
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-extended/python-pyparted/python-pyparted.inc        | 2 +-
- .../{python-pyparted_3.11.2.bb => python-pyparted_3.11.3.bb}    | 0
- .../{python3-pyparted_3.11.2.bb => python3-pyparted_3.11.3.bb}  | 0
- 3 files changed, 1 insertion(+), 1 deletion(-)
- rename meta-python/recipes-extended/python-pyparted/{python-pyparted_3.11.2.bb => python-pyparted_3.11.3.bb} (100%)
- rename meta-python/recipes-extended/python-pyparted/{python3-pyparted_3.11.2.bb => python3-pyparted_3.11.3.bb} (100%)
+ meta-python/recipes-devtools/python/python-jsonschema.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted.inc b/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
-index f769f95a0..97054487f 100644
---- a/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
-+++ b/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
-@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "\
- DEPENDS += "parted"
+diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-jsonschema.inc
+index 1841b5893..5599cc6f4 100644
+--- a/meta-python/recipes-devtools/python/python-jsonschema.inc
++++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
+@@ -23,6 +23,7 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-strict-rfc3339 \
+     ${PYTHON_PN}-unittest \
+     ${PYTHON_PN}-setuptools-scm \
++    ${PYTHON_PN}-zipp \
+ "
  
- # upstream only publishes releases in github archives which are discouraged
--SRCREV = "2396ba7df56de277b4999bdd5f7d1a1706a6388a"
-+SRCREV = "481510c10866851844b19f3d2ffcdaa37efc0cf8"
- SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https"
- 
- S = "${WORKDIR}/git"
-diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.11.2.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.11.3.bb
-similarity index 100%
-rename from meta-python/recipes-extended/python-pyparted/python-pyparted_3.11.2.bb
-rename to meta-python/recipes-extended/python-pyparted/python-pyparted_3.11.3.bb
-diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.2.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.3.bb
-similarity index 100%
-rename from meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.2.bb
-rename to meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.3.bb
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.20.1
-
-
+2.17.1
 
 
