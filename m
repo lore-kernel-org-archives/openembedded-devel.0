@@ -1,43 +1,31 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 4ADA77F931
+Return-Path: <rcz@pengutronix.de>
+X-Greylist: delayed 925 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 21 Nov 2019 08:43:43 UTC
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+	[85.220.165.71])
+	by mail.openembedded.org (Postfix) with ESMTP id EFF027F8AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 06:51:16 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id t1so2968024wrv.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Nov 2019 22:51:17 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:user-agent:mime-version:content-transfer-encoding;
-	bh=dXNEBsA3If8qtuUkQsEBtzrspz3UcTnmE6S3Xyzax3M=;
-	b=si/pQGj/zrBRr4HfUCGAQR+9mzEZYqWcL/fV8vJSfI+KfYW0RzJ0S08g5exteRbF85
-	0aXe3/gN4+2Bypw3y+TXMtF1AS0y27X5Qy78WhRrDCE1Fb1nGgagVtGbUHkMPEHMC6aq
-	XrK/CQQba1K2NlilbZNWTwkf7/AaO5La/Pei9sVvY61QZXV9zE4n3pt5GYrMZnO/U+wV
-	OoB1f84yTjId5YcRhxzxuvojSsI985e51T0kCMhSIsEG1X7kO8G+FTdi8FRoE1/dPe7e
-	PPli2z7JUN7zlinju9xcEJiYMPQQTfuWsjfe2SypbUUYE0bpKjdCbSHeOavZ1bsv0aVT
-	/ssg==
-X-Gm-Message-State: APjAAAU+atr0RUDgPnkSiuaPDszOE/3lyc5uJaSRQvIh02YBg2oiiS2V
-	qn3un2Qn1DQz1/z+ZM5+snre8Ucq
-X-Google-Smtp-Source: APXvYqxW9Hy+vDWstljv0WNkPPtmxYwFdcq54UEcLKyf3XPOFAIrZ8KQC2yjRGsqATHcHyLngTqycA==
-X-Received: by 2002:a5d:490c:: with SMTP id x12mr9004927wrq.301.1574319076694; 
-	Wed, 20 Nov 2019 22:51:16 -0800 (PST)
-Received: from tfsielt31850.fritz.box ([79.97.20.138])
-	by smtp.gmail.com with ESMTPSA id
-	k125sm1986743wmf.2.2019.11.20.22.51.15
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 20 Nov 2019 22:51:16 -0800 (PST)
-Message-ID: <94f0644e0fcbcfbaf226d4d25cf28e64170e5c86.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+	Thu, 21 Nov 2019 08:43:43 +0000 (UTC)
+Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
+	by metis.ext.pengutronix.de with esmtps
+	(TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+	(envelope-from <rcz@pengutronix.de>)
+	id 1iXhp4-00064R-CV; Thu, 21 Nov 2019 09:28:18 +0100
+Received: from rcz by dude.hi.pengutronix.de with local (Exim 4.92)
+	(envelope-from <rcz@pengutronix.de>)
+	id 1iXhp4-0004D1-53; Thu, 21 Nov 2019 09:28:18 +0100
+From: Rouven Czerwinski <r.czerwinski@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Nov 2019 06:51:15 +0000
-In-Reply-To: <20191121023440.36149-1-Qi.Chen@windriver.com>
-References: <20191121023440.36149-1-Qi.Chen@windriver.com>
-User-Agent: Evolution 3.30.5-1.1 
+Date: Thu, 21 Nov 2019 09:27:52 +0100
+Message-Id: <20191121082750.4688-1-r.czerwinski@pengutronix.de>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Subject: Re: [meta-python][PATCH] python-jsonschemea: add missing dependency
+X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
+X-SA-Exim-Mail-From: rcz@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+	SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python-pyelftools: add recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,37 +38,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2019 06:51:16 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Nov 2019 08:43:44 -0000
+Content-Transfer-Encoding: 8bit
 
-there's a typo in the subject line
+pyelftools is a pure-Python library for parsing and analyzing ELF files
+and DWARF debugging information.
 
-jsonschemea -> jsonschema
+Signed-off-by: Rouven Czerwinski <r.czerwinski@pengutronix.de>
+---
+ .../recipes-devtools/python/python-pyelftools.inc  | 14 ++++++++++++++
+ .../python/python-pyelftools_0.25.bb               |  2 ++
+ .../python/python3-pyelftools_0.25.bb              |  2 ++
+ 3 files changed, 18 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyelftools.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pyelftools_0.25.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
 
-A.
-
-On Thu, 2019-11-21 at 10:34 +0800, Chen Qi wrote:
-> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-> ---
->  meta-python/recipes-devtools/python/python-jsonschema.inc | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/meta-python/recipes-devtools/python/python-jsonschema.inc b/meta-python/recipes-devtools/python/python-
-> jsonschema.inc
-> index 1841b5893..5599cc6f4 100644
-> --- a/meta-python/recipes-devtools/python/python-jsonschema.inc
-> +++ b/meta-python/recipes-devtools/python/python-jsonschema.inc
-> @@ -23,6 +23,7 @@ RDEPENDS_${PN} += " \
->      ${PYTHON_PN}-strict-rfc3339 \
->      ${PYTHON_PN}-unittest \
->      ${PYTHON_PN}-setuptools-scm \
-> +    ${PYTHON_PN}-zipp \
->  "
->  
->  BBCLASSEXTEND = "native nativesdk"
-> -- 
-> 2.17.1
-> 
+diff --git a/meta-python/recipes-devtools/python/python-pyelftools.inc b/meta-python/recipes-devtools/python/python-pyelftools.inc
+new file mode 100644
+index 000000000..7d4f763ff
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyelftools.inc
+@@ -0,0 +1,14 @@
++DESCRIPTION = "pyelftools is a pure-Python library for parsing and analyzing ELF files and DWARF debugging information"
++HOMEPAGE = "https://github.com/eliben/pyelftools"
++SECTION = "devel/python"
++LICENSE = "PD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5ce2a2b07fca326bc7c146d10105ccfc"
++
++SRC_URI[md5sum] = "c5629b9a5d19c82107a946cce52eeec2"
++SRC_URI[sha256sum] = "89c6da6f56280c37a5ff33468591ba9a124e17d71fe42de971818cbff46c1b24"
++
++PYPI_PACKAGE = "pyelftools"
++
++inherit pypi
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-pyelftools_0.25.bb b/meta-python/recipes-devtools/python/python-pyelftools_0.25.bb
+new file mode 100644
+index 000000000..de4202506
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyelftools_0.25.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-pyelftools.inc
+diff --git a/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb b/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
+new file mode 100644
+index 000000000..56eb8c4cd
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-pyelftools.inc
+-- 
+2.24.0
 
 
