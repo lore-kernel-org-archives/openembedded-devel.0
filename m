@@ -1,30 +1,30 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CE717F8BD
+	by mail.openembedded.org (Postfix) with ESMTP id CB3E87F69B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 05:54:37 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,224,1571673600"; d="scan'208";a="78831521"
+	Thu, 21 Nov 2019 06:06:03 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,224,1571673600"; d="scan'208";a="78832078"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2019 13:54:37 +0800
+	by heian.cn.fujitsu.com with ESMTP; 21 Nov 2019 14:06:03 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id CD5674CE1BE8
+	by cn.fujitsu.com (Postfix) with ESMTP id AF4494CE1BF2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 13:46:15 +0800 (CST)
+	Thu, 21 Nov 2019 13:57:46 +0800 (CST)
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 21 Nov 2019 13:54:33 +0800
+	Server (TLS) id 14.3.439.0; Thu, 21 Nov 2019 14:06:04 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Nov 2019 13:55:04 +0800
-Message-ID: <20191121055504.19928-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 21 Nov 2019 14:06:34 +0800
+Message-ID: <20191121060634.20904-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: CD5674CE1BE8.AA011
+X-yoursite-MailScanner-ID: AF4494CE1BF2.AB3E8
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-perl] [PATCH] libdbd-sqlite-perl: upgrade 1.62 -> 1.64
+Subject: [meta-perl] [PATCH] libclass-method-modifiers-perl: upgrade 2.12 -> 2.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,33 +37,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2019 05:54:37 -0000
+X-List-Received-Date: Thu, 21 Nov 2019 06:06:04 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...{libdbd-sqlite-perl_1.62.bb => libdbd-sqlite-perl_1.64.bb} | 4 ++--
+ ...rs-perl_2.12.bb => libclass-method-modifiers-perl_2.13.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libdb/{libdbd-sqlite-perl_1.62.bb => libdbd-sqlite-perl_1.64.bb} (90%)
+ rename meta-perl/recipes-perl/libclass/{libclass-method-modifiers-perl_2.12.bb => libclass-method-modifiers-perl_2.13.bb} (84%)
 
-diff --git a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.62.bb b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.64.bb
-similarity index 90%
-rename from meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.62.bb
-rename to meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.64.bb
-index 4af9d3c5c..468add972 100644
---- a/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.62.bb
-+++ b/meta-perl/recipes-perl/libdb/libdbd-sqlite-perl_1.64.bb
-@@ -14,8 +14,8 @@ SRC_URI = "${CPAN_MIRROR}/authors/id/I/IS/ISHIGAKI/DBD-SQLite-${PV}.tar.gz \
-            file://sqlite-perl-test.pl \
- "
+diff --git a/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.12.bb b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.13.bb
+similarity index 84%
+rename from meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.12.bb
+rename to meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.13.bb
+index 3979b3142..58ed37ca8 100644
+--- a/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.12.bb
++++ b/meta-perl/recipes-perl/libclass/libclass-method-modifiers-perl_2.13.bb
+@@ -10,8 +10,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=16fd0ec7b73c0e158426f753943f1058"
  
--SRC_URI[md5sum] = "f2e11a2bea6bd864404c0363d7eddaf8"
--SRC_URI[sha256sum] = "bd82ef322a9e5469a7a62d845c32fad1188b76ccb49a88520cec768343cce85c"
-+SRC_URI[md5sum] = "10796495b52927eb2e1df34c86924027"
-+SRC_URI[sha256sum] = "f4ae8f7b50842305566aadd90f7bfd12a9e32b6c603a9b1c1529e73eb82aff01"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETHER/Class-Method-Modifiers-${PV}.tar.gz"
+-SRC_URI[md5sum] = "f55400c7a8134acf3657f8af89bdd7af"
+-SRC_URI[sha256sum] = "e44c1073020bf55b8c97975ed77235fd7e2a6a56f29b5c702301721184e27ac8"
++SRC_URI[md5sum] = "b1398e3682aa2e075b913b9f9000b596"
++SRC_URI[sha256sum] = "ab5807f71018a842de6b7a4826d6c1f24b8d5b09fcce5005a3309cf6ea40fd63"
  
- UPSTREAM_CHECK_REGEX = "DBD\-SQLite\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
+ S = "${WORKDIR}/Class-Method-Modifiers-${PV}"
  
 -- 
 2.20.1
