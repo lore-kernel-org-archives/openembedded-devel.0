@@ -1,21 +1,21 @@
 Return-Path: <jlu@pengutronix.de>
 Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
 	[85.220.165.71])
-	by mail.openembedded.org (Postfix) with ESMTP id 15D167E507
+	by mail.openembedded.org (Postfix) with ESMTP id 00B3B7F7D5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 12:28:49 +0000 (UTC)
+	Thu, 21 Nov 2019 12:28:50 +0000 (UTC)
 Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
 	by metis.ext.pengutronix.de with esmtps
 	(TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
 	(envelope-from <jlu@pengutronix.de>)
-	id 1iXlGx-0005Vg-9Y; Thu, 21 Nov 2019 13:09:19 +0100
+	id 1iXlGx-0005Vf-9G; Thu, 21 Nov 2019 13:09:19 +0100
 Received: from jlu by dude.hi.pengutronix.de with local (Exim 4.92)
 	(envelope-from <jlu@pengutronix.de>)
-	id 1iXlGx-0007I9-0Z; Thu, 21 Nov 2019 13:09:19 +0100
+	id 1iXlGx-0007Hr-04; Thu, 21 Nov 2019 13:09:19 +0100
 From: Jan Luebbe <jlu@pengutronix.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Nov 2019 13:09:13 +0100
-Message-Id: <20191121120913.23013-6-jlu@pengutronix.de>
+Date: Thu, 21 Nov 2019 13:09:12 +0100
+Message-Id: <20191121120913.23013-5-jlu@pengutronix.de>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <20191121120913.23013-1-jlu@pengutronix.de>
 References: <20191121120913.23013-1-jlu@pengutronix.de>
@@ -25,7 +25,7 @@ X-SA-Exim-Mail-From: jlu@pengutronix.de
 X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
 	SAEximRunCond expanded to false
 X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 6/6] softhsm: add recipe
+Subject: [meta-oe][PATCH 5/6] libp11: add support for native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,44 +38,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2019 12:28:49 -0000
+X-List-Received-Date: Thu, 21 Nov 2019 12:28:50 -0000
 Content-Transfer-Encoding: 8bit
 
-This is useful for consolidation of code-signing interfaces when
-building an image with verified boot mechanisms or signed update
-artifacts. It can also be used on the target as a backend for software
-which uses the PKCS#11 API to access private key material.
+This is needed as a dependency when using SoftHSM from the PKCS#11
+OpenSSL engine for code singing.
 
 Signed-off-by: Jan Luebbe <jlu@pengutronix.de>
 ---
- .../recipes-security/softhsm/softhsm_git.bb    | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-security/softhsm/softhsm_git.bb
+ meta-oe/recipes-support/libp11/libp11_0.4.10.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-security/softhsm/softhsm_git.bb b/meta-oe/recipes-security/softhsm/softhsm_git.bb
-new file mode 100644
-index 000000000000..3236cb9a6097
---- /dev/null
-+++ b/meta-oe/recipes-security/softhsm/softhsm_git.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "PKCS#11 HSM/Token Emulator"
-+HOMEPAGE = "https://www.opendnssec.org/softhsm/"
-+LICENSE = "BSD-2-Clause & ISC"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=ef3f77a3507c3d91e75b9f2bdaee4210"
-+DEPENDS = "openssl"
-+PV = "2.5.0"
+diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb b/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
+index b40223e8abcb..fc2ec9935f56 100644
+--- a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
++++ b/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
+@@ -24,3 +24,5 @@ do_install_append () {
+ 
+ FILES_${PN} += "${libdir}/engines*/pkcs11.so"
+ FILES_${PN}-dev += "${libdir}/engines*/libpkcs11${SOLIBSDEV}"
 +
-+SRC_URI = "git://github.com/opendnssec/SoftHSMv2.git;branch=master"
-+SRCREV = "369df0383d101bc8952692c2a368ac8bc887d1b4"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools pkgconfig
-+
-+# EdDSA requires OpenSSL >= 1.1.1
-+EXTRA_OECONF = "--enable-eddsa --disable-gost"
-+
-+BBCLASSEXTEND = "native"
++BBCLASSEXTEND="native"
 -- 
 2.24.0
 
