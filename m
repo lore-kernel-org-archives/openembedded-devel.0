@@ -1,46 +1,27 @@
-Return-Path: <jdmason@kudzu.us>
-Received: from mail-io1-f52.google.com (mail-io1-f52.google.com
-	[209.85.166.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 679837FA6F
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EE6497FA3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 21:12:33 +0000 (UTC)
-Received: by mail-io1-f52.google.com with SMTP id v17so5155963iol.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Nov 2019 13:12:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=4AxkGGDxxb7RYWiHIV4hncmsl4uxfC4y5TN3+tEPWLk=;
-	b=Kq8ZEqLNLpkqjjVjOxoQcSptguYYD43lEJyH3PfeLzWNe9wZxeMwDhLReh9RMw6aT+
-	Faw9jwAmsK7WOEF1Xlm9zCt7kYKWuQQxqYFr+lf5KODDpKLNWvW4Jk7GndLQmfx03LiB
-	eyqtZGV32A1mW+NmbcpzIUknJdwVc5LMMGzeO+pivQ8z2NxGy9gusYWQBr8Qn2Z+C4H/
-	1Thbp2M2pnCI8fZguKKTMiTWLYcuXs523Y5KYAMeOntRENEDbbzWZSAthJlfD1/5NXF8
-	6H5nDIZz6CKfAPCZ+FL6FQkpjV3LB7pesIH49sV5tIBtu3QaMZhid5ZJFmqJq1yDoSg3
-	1pJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=4AxkGGDxxb7RYWiHIV4hncmsl4uxfC4y5TN3+tEPWLk=;
-	b=P7YMyp9BsL7eYDeXuhAJZFtl7Hv5VnV9/hOo2Y4iobKKT+PPshmRa26PwF0Tf+Zkoi
-	Pz/7iX8SHYpeyb7zFlSX8QKucr2CxOZt3kqIN40haaD8Cf4xCiWhaQYKQ7RHbuywDXnL
-	a/5XYIjcbXmuDzc9I1fWM5QiII/N6NlbNDsdSnpFnJTIKhPxGJ9aiM3JYZISLwVpMN9B
-	vh9BcpK63kbRt61ifOPej/0Y+C/OuB06EtL29a7MDiopCIF+/rsKUxpSF8G8gtxFl6sx
-	o558vq2+wJOR94PCeFnclTXqKBZB3LxK50uNYcc1obIm5LMAD1J30sw7k0d49iXMkn3F
-	wbBQ==
-X-Gm-Message-State: APjAAAVFCev1gmZsh5DH3EUOommC3Bnd+A5rRKvUwifh7lRAi+yUloEa
-	Kg3GtlIsM2eYqjcLclElNURvewiArpXPOP9+nzU6WHOkS5FPrw==
-X-Google-Smtp-Source: APXvYqwyoCZW0aYbq56D+4jB2d2IhUN31eytSj5J9ShgnJFGeKpwUX98/DxC05IUgKpyKjUjMV2hgBoa8TFH1W+p0Ek=
-X-Received: by 2002:a5e:8a04:: with SMTP id d4mr9957320iok.42.1574370754203;
-	Thu, 21 Nov 2019 13:12:34 -0800 (PST)
+	Fri, 22 Nov 2019 00:43:37 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id xAM0haRm007244
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 21 Nov 2019 16:43:36 -0800 (PST)
+Received: from [128.224.158.176] (128.224.158.176) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 21 Nov 2019 16:43:35 -0800
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20191120233806.31207-1-schnitzeltony@gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <bd0da757-4ac9-1ec2-fc0e-c60a30575b05@windriver.com>
+Date: Fri, 22 Nov 2019 08:43:22 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
 MIME-Version: 1.0
-From: Jon Mason <jdmason@kudzu.us>
-Date: Thu, 21 Nov 2019 16:12:23 -0500
-Message-ID: <CAPoiz9w9qWwEqMipK7iF-VLP5dFH21nZdTCpeLNncsqHHpFJxQ@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	Yocto discussion list <yocto@yoctoproject.org>
-Subject: OpenEmbedded Workshop at FOSDEM20 CFP
+In-Reply-To: <20191120233806.31207-1-schnitzeltony@gmail.com>
+Subject: Re: [meta-xfce][PATCH 1/2] exo: upgrade 0.12.8 -> 0.12.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,18 +34,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Nov 2019 21:12:33 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 22 Nov 2019 00:43:38 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-We are proud to announce the inaugural OpenEmbedded Workshop. It is
-being held on 03 February 2020 in Brussels, Belgium. The day after
-FOSDEM.
+On 2019/11/21 上午7:38, Andreas Müller wrote:
+> Release notes for 0.12.9
+> ========================
+> Bug Fixes:
+> - Explicitly depend on gio-unix-2.0 (Xfce #15825)
+> - Fix alignment of multi-line filenames when text beside icons (Xfce
+> - Fix cursor missing in search popup widget (Xfce #16068)
+> - Fix desktop item creation on symbolic link directories
+> - Fix excess clickable area of multiline filenames (Xfce #16075)
+> - Fix issues with displaying icon view contents (Xfce #14737)
+> - Fix prelight deactivation (Xfce #11806)
+> - Hide search widget when doing a fullscreen resize (Xfce #15106)
+> - Make user-created launchers executable by default
+>
+> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 
-The Call for Participation is open now. For more information, go to
-https://pretalx.com/oe-workshop-2020/cfp
 
-Early-bird tickets coming soon!
+Acked-by: Kai Kang <kai.kang@windriver.com>
 
-Thank you,
-The OpenEmbedded Board
+Regards,
+Kai
+
+
+> ---
+>   meta-xfce/recipes-xfce/exo/{exo_0.12.8.bb => exo_0.12.9.bb} | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-xfce/recipes-xfce/exo/{exo_0.12.8.bb => exo_0.12.9.bb} (88%)
+>
+> diff --git a/meta-xfce/recipes-xfce/exo/exo_0.12.8.bb b/meta-xfce/recipes-xfce/exo/exo_0.12.9.bb
+> similarity index 88%
+> rename from meta-xfce/recipes-xfce/exo/exo_0.12.8.bb
+> rename to meta-xfce/recipes-xfce/exo/exo_0.12.9.bb
+> index fdd50d435..a12520417 100644
+> --- a/meta-xfce/recipes-xfce/exo/exo_0.12.8.bb
+> +++ b/meta-xfce/recipes-xfce/exo/exo_0.12.9.bb
+> @@ -20,8 +20,8 @@ SRC_URI_append_class-native = " \
+>       file://reduce-build-to-exo-csource-only.patch \
+>   "
+>   
+> -SRC_URI[md5sum] = "e618ce760a12ac7427a48a44c69f3d31"
+> -SRC_URI[sha256sum] = "3400a2e64aa41ede25bedaca4909bde7ea4f8698d9598d1b80f02a40ac89fcde"
+> +SRC_URI[md5sum] = "9730f9d270b4968a8bbebe73e6de934f"
+> +SRC_URI[sha256sum] = "9ba0bf0fd59aeb1cd32ae3863e7a78222655eb15eb675ba08f3b3fb933b6fbfe"
+>   
+>   PACKAGECONFIG ??= ""
+>   PACKAGECONFIG_class-target ??= "gtk"
+
+
+-- 
+Kai Kang
+
 
