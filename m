@@ -1,49 +1,62 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 23E307FCF5
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Nov 2019 17:49:23 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id 14so8744216qtf.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Nov 2019 09:49:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Bbp1ZbH1b903ILbwqQ57vQOZaTAjDXprvHKTTeWGaGY=;
-	b=Wj1ar8jZKdfPM+oxqAwUY3ynDkDc0fBcm0hlYaMYfRctEN8u8es8Y6nsL62I3frVhU
-	e4YssPBL4UlkzLUDTOiUCINwbinPwsewWfRq99LMMji+fYYM/i94pdMdqp/wEtB2rNb7
-	Sdjqx0a9/bEe2QYXglEWowrl+Y5s9SmI6fomGRC8+5HyND5cBy4rHIFjWEi5PmYwxE6c
-	k4/o4zvVAyJTAZG5ICzeBIzdC8YtaLUw/uHC9dqnFM+aPN6YRtCfy/KBPmfk3+9H/xHv
-	QsuhXqIXR0bbzC6gxgpISCWNI5rTfr9EIwPxEEzkJkBbh4LzF10M17NUevjPNJo7ZCxt
-	52mw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Bbp1ZbH1b903ILbwqQ57vQOZaTAjDXprvHKTTeWGaGY=;
-	b=fpoT9L4LCpA8AgfMA/3rlv7JDbubQaZjCwMxE6h1IP5yoqKV1H1xktUJslXmtjQyzB
-	KLbt2KZyoWwDJ55Tv9V7bu0qWwqdwy6H8K1vibWiCbbnIwolFgfscVV4KlbMZdvp9XZF
-	Y5peBFa7hU85uxirElBwoQNoOd9Awuo5JDHQHNqDopJmebAj5MvJL5w3YEdlAPQBmd6s
-	vGPI/NwxItm2Ja4Rq0uukZvgFeeOzdLocO6l9dtY878cVEdpbO1Gif4OSpzfsV6R9mJN
-	ry7xVyCPQjps+TErPmTeYMBPE1zpZBT+CPmdMxejGVDKnL6fETGnUhRehwbTJVXZ34RC
-	+Atg==
-X-Gm-Message-State: APjAAAWO0uLud8vVXMueNmDMpLg14/ziCk7ls+A2GF4tejnL2CCxSmrL
-	iun+RskIPmDJ89RrUDWfT8Lt/ea7QvOO0T4p3odB+VCE
-X-Google-Smtp-Source: APXvYqxnUahmC73HyXoQFSkfpij1WyeCYtjCamDkJJDiAeeiOkkuQQChGx/GreIXoez3qTDFsdFJ/i0Pdfa/P6d9xTY=
-X-Received: by 2002:ac8:1415:: with SMTP id k21mr5536716qtj.80.1574444964362; 
-	Fri, 22 Nov 2019 09:49:24 -0800 (PST)
-MIME-Version: 1.0
-References: <20191119011629.3835732-1-raj.khem@gmail.com>
-	<20191119011629.3835732-2-raj.khem@gmail.com>
-	<71efcebe3de17b855452a5e0082afe393bbebef8.camel@andred.net>
-In-Reply-To: <71efcebe3de17b855452a5e0082afe393bbebef8.camel@andred.net>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 22 Nov 2019 09:48:53 -0800
-Message-ID: <CAMKF1srD0moTN8c5-KKhyhUjFJdZ35q4DiK42ujoADZtOxvUyA@mail.gmail.com>
-To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/2] upm: Link with libatomic on clang/x86
+Return-Path: <paul@betafive.co.uk>
+Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
+	[66.111.4.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F0AA7F87A;
+	Fri, 22 Nov 2019 21:29:33 +0000 (UTC)
+Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
+	by mailout.nyi.internal (Postfix) with ESMTP id 209C821B1B;
+	Fri, 22 Nov 2019 16:29:35 -0500 (EST)
+Received: from imap2 ([10.202.2.52])
+	by compute1.internal (MEProxy); Fri, 22 Nov 2019 16:29:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=betafive.co.uk;
+	h=mime-version:message-id:in-reply-to:references:date:from:to
+	:subject:content-type; s=fm3; bh=OvthrnmdoYredcNPvWB82Mx3lUnnuIR
+	4eajCX4LthEs=; b=nZ72Q7N+e6D75vNZRhirdZJcUpQ/H+82VmsWTb6FPx+8AhO
+	mxsBCUWi0Prg6C7IyznZmKvVfqYJ01Y7khqE85NEAz3nbc7It366xO7ObkSGJQk/
+	ToVqOEJuoDGYfnsvoZ8a0vWkOq/ZLxoqAlteKhRk0KHFEKgjoApV14fTkEqmCHBm
+	SOGRoMl5sO9Om+5v6VLiSzfvzeJsG93kj3YYlRhh46QxsiRdBYgF1p7S4Gfdma0w
+	Kt/m8W7B/zvdOSLNIO7YH+Hc91mKc8yHJeSLMmXQl5DmTzfefKnuO2kulnOdCux6
+	HpcKeR9EPONeRdXjCaEh878058bfNDmWRUfJLtQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to:x-me-proxy
+	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=Ovthrn
+	mdoYredcNPvWB82Mx3lUnnuIR4eajCX4LthEs=; b=y1EvyNFenEMpkgYkq5LyLf
+	kP6LxSRe9+n7PWAX8AbXJvQcqVnaA9mio5XED6IYGtQ0JPlX2c2DFtMiDaVairfe
+	VejaQIx58QYEujyuXENl/JA9c6XG7EwOK4bPvPUZlPQs4sor3Ozxt2w+YJv6ieTI
+	5v8qFXInE78yzrmHPIuSKCulj+r5snh10twEH6EdEz2XZAGUQK7TF07JDVgy2B2y
+	azvJsx2OLQRPaQleSlLfLAhUKmkb7S8drhkNQH3YjF4r3I8HCqqoQGJbFfdOotvC
+	1QCgT73o65UY56DqBfcHa+qtScFH7up+des79uC+tO6T0rALr/gsKDsdEVEQ4mfw
+	==
+X-ME-Sender: <xms:PlPYXfiM8uJjDriEQEAaijALssDiBxEL_PngkViXX8JYIr8KnDvqQw>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedufedrudehgedgudehtdcutefuodetggdotefrod
+	ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+	necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+	enogfuuhhsphgvtghtffhomhgrihhnucdlgeelmdenucfjughrpefofgggkfgjfhffhffv
+	ufgtsehttdertderredtnecuhfhrohhmpedfrfgruhhluceurghrkhgvrhdfuceophgruh
+	hlsegsvghtrghfihhvvgdrtghordhukheqnecuffhomhgrihhnpehgohhoghhlvgdrtgho
+	mhdpghhithhlrggsrdgtohhmpdihohgtthhophhrohhjvggtthdrohhrghdpohhpvghnvg
+	hmsggvugguvggurdhorhhgrdhimhdpohhpvghnvghmsggvugguvggurdhorhhgnecurfgr
+	rhgrmhepmhgrihhlfhhrohhmpehprghulhessggvthgrfhhivhgvrdgtohdruhhknecuve
+	hluhhsthgvrhfuihiivgeptd
+X-ME-Proxy: <xmx:PlPYXaj_IR7A3wHWu0PsyeAoWwIbreOfAIuuiH6RRdLuKT1p0ik6uw>
+	<xmx:PlPYXZ7xesJG9Xx9sZ5nJjHhTfdXgY7XFTnKwtq5y9zpDL9OxVoEvQ>
+	<xmx:PlPYXSdgi-rtxskqHJbyDjFu0kpvW6py_jwIFU5NFdaAq5YweLWfQA>
+	<xmx:P1PYXVEsIuyH62QYpnQ184XmDtcNpu8UrS8MCgkKHy6mZtDz6oS7gA>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+	id 6357CE00A5; Fri, 22 Nov 2019 16:29:34 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.1.7-578-g826f590-fmstable-20191119v1
+Mime-Version: 1.0
+Message-Id: <06de5f95-8a07-48cc-b4a3-eac13708ea93@www.fastmail.com>
+In-Reply-To: <ab96ec4a-5dcb-4d01-8519-13c00094a44c@www.fastmail.com>
+References: <ab96ec4a-5dcb-4d01-8519-13c00094a44c@www.fastmail.com>
+Date: Fri, 22 Nov 2019 21:29:15 +0000
+From: "Paul Barker" <paul@betafive.co.uk>
+To: "Yocto discussion list" <yocto@yoctoproject.org>,
+	"OE Devel" <openembedded-devel@lists.openembedded.org>,
+	"OE Architecture" <openembedded-architecture@lists.openembedded.org>
+Subject: Re: [yocto] Using GitLab for OE/Yocto layers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,138 +69,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2019 17:49:24 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 22 Nov 2019 21:29:34 -0000
+Content-Type: text/plain
 
-On Thu, Nov 21, 2019 at 11:06 PM Andr=C3=A9 Draszik <git@andred.net> wrote:
->
-> On Mon, 2019-11-18 at 17:16 -0800, Khem Raj wrote:
-> > This is needed for atomic<double> which clang does not use intrinsic
-> > function for on 32bit x86
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  .../upm/0001-nmea_gps-Link-with-latomic.patch | 27 +++++++++++++++++++
-> >  meta-oe/recipes-extended/upm/upm_git.bb       |  2 ++
-> >  2 files changed, 29 insertions(+)
-> >  create mode 100644 meta-oe/recipes-extended/upm/upm/0001-nmea_gps-Link=
--with-latomic.patch
-> >
-> > diff --git a/meta-oe/recipes-extended/upm/upm/0001-nmea_gps-Link-with-l=
-atomic.patch b/meta-oe/recipes-
-> > extended/upm/upm/0001-nmea_gps-Link-with-latomic.patch
-> > new file mode 100644
-> > index 0000000000..c16b8dbc5a
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-extended/upm/upm/0001-nmea_gps-Link-with-latomic.=
-patch
-> > @@ -0,0 +1,27 @@
-> > +From 996d37fc0b7177ee57788399b9140032d5de2765 Mon Sep 17 00:00:00 2001
-> > +From: Khem Raj <raj.khem@gmail.com>
-> > +Date: Mon, 18 Nov 2019 15:50:02 -0800
-> > +Subject: [PATCH] nmea_gps: Link with latomic
-> > +
-> > +clang/x86 ends up with missing symbols for atomics due to atomic<doubl=
-e>
-> > +with libstdc++, it works ok with libc++
-> > +
-> > +Upstream-Status: Pending
-> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > +---
-> > + src/nmea_gps/CMakeLists.txt | 2 +-
-> > + 1 file changed, 1 insertion(+), 1 deletion(-)
-> > +
-> > +diff --git a/src/nmea_gps/CMakeLists.txt b/src/nmea_gps/CMakeLists.txt
-> > +index b3fb6591..5280bfed 100644
-> > +--- a/src/nmea_gps/CMakeLists.txt
-> > ++++ b/src/nmea_gps/CMakeLists.txt
-> > +@@ -6,4 +6,4 @@ upm_mixed_module_init (NAME nmea_gps
-> > +     CPP_SRC nmea_gps.cxx
-> > +     FTI_SRC nmea_gps_fti.c
-> > +     CPP_WRAPS_C
-> > +-    REQUIRES mraa utilities-c ${CMAKE_THREAD_LIBS_INIT})
-> > ++    REQUIRES mraa utilities-c atomic ${CMAKE_THREAD_LIBS_INIT})
-> > +--
-> > +2.24.0
-> > +
-> > diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-=
-extended/upm/upm_git.bb
-> > index fb22e83359..dbe97370d5 100644
-> > --- a/meta-oe/recipes-extended/upm/upm_git.bb
-> > +++ b/meta-oe/recipes-extended/upm/upm_git.bb
-> > @@ -15,6 +15,8 @@ SRC_URI =3D "git://github.com/intel-iot-devkit/${BPN}=
-.git;protocol=3Dhttp \
-> >             file://0001-Use-stdint-types.patch \
-> >             "
-> >
-> > +SRC_URI_append_toolchain-clang_x86 =3D " file://0001-nmea_gps-Link-wit=
-h-latomic.patch "
-> > +
-> >  S =3D "${WORKDIR}/git"
-> >
-> >  # Depends on mraa which only supports x86 and ARM for now
-> > --
-> > 2.24.0
-> >
->
-> If you're planning to upstream this, I normally use something like this i=
-n CMake:
->
+Following up on the email below, I've created a "community" subgroup to the OpenEmbedded group on GitLab: https://gitlab.com/openembedded/community. This should help to avoid any confusion with the repositories at the top level of https://gitlab.com/openembedded which mirror those at git.openembedded.org.
 
-this is certainly a better fix. I do not plan to work on upstreaming it.
+I'm going to use this for one or two layers I'm currently developing. If anyone else would like to setup a new layer here or transfer/mirror a repository from elsewhere then let me know and I'll get you set up.
 
-> set(ATOMIC_TEST_C_SOURCE "
-> #include <stdatomic.h>
-> #include <stdint.h>
-> atomic_uint_fast64_t x;
-> atomic_uint_fast64_t y;
-
-the real problem is double atomic types which gcc uses intrinsics on
-x86/32bit but clang decides to defer it to libatomic
-so something like this
-
-atomic<double> x
-
-would be needed as well check
-
-> int main() {
->     return (int)(x + y);
-> }")
->
->
->     # libatomic check - some arches need to link against libatomic.so, so=
-me don't
->     include(CheckCSourceCompiles)
->     include(CMakePushCheckState)
->     include(CheckLibraryExists)
->     cmake_push_check_state()
->     check_c_source_compiles("${ATOMIC_TEST_C_SOURCE}" HAVE_ATOMICS_WITHOU=
-T_LIBATOMIC)
->     if(NOT HAVE_ATOMICS_WITHOUT_LIBATOMIC)
->         check_library_exists(atomic __atomic_load_8 "" LIBATOMIC_EXISTS)
->         if(LIBATOMIC_EXISTS)
->             set(CMAKE_REQUIRED_LIBRARIES atomic)
->             check_c_source_compiles("${ATOMIC_TEST_C_SOURCE}" HAVE_ATOMIC=
-S_WITH_LIBATOMIC)
->         endif()
->         if(HAVE_ATOMICS_WITH_LIBATOMIC)
->             list(APPEND EXTRA_LIBRARIES atomic)
->         else()
->             message(FATAL_ERROR "Could not determine support for atomic o=
-perations.")
->         endif()
->     endif()
->     cmake_pop_check_state()
->
->
-> Cheers,
-> A.
->
->
-> --
+On Wed, 6 Nov 2019, at 16:01, Paul Barker wrote:
+> Hey folks,
+> 
+> We had some initial discussion at OEDEM about the patch submission 
+> process and how repositories are hosted (see 
+> https://docs.google.com/document/d/1Qm1mJ6xLozWW9NgBnokue7TmhwgFP8b2HR8TUlaQwNs/edit#heading=h.o4qtddy8bh9i).
+> 
+> Patch submission via mailing list still has some key features (such as 
+> ability to compose a patch response offline) and I don't expect that 
+> the core OE/Yocto repositories will be changing their workflow in the 
+> short term. However, lots of tools and non-core layers already use a 
+> pull request model for patch submission, typically via GitHub or GitLab.
+> 
+> I'd like to propose that we set up a common place for OE/Yocto 
+> repositories which want to use this pull request model and start to 
+> collaborate on some of the tooling. As discussed in OEDEM, GitLab has a 
+> few major advantages over GitHub, BitBucket, etc here as they've got a 
+> track record of working well with open source projects and we can run 
+> the software on our own infrastructure if desired. We can use something 
+> like https://gitlab.com/openembedded at first to trial things and then 
+> maybe move to https://gitlab.openembedded.org (or 
+> gitlab.yoctoproject.org) if things look good.
+> 
+> I see the following advantages to this approach:
+> 
+> * Increased bus factor for repository administration - several layers 
+> currently have only one admin or live in someone's personal GitHub 
+> account, we risk losing access to these if the person in question 
+> disappears.
+> 
+> * Integrated issue tracking - we can standardise on a few issue labels 
+> and use milestones in GitLab to correspond to Yocto release branches. 
+> As the repositories would be in the same group we would be able to make 
+> use of group-level issue lists and boards to show issues across several 
+> layers.
+> 
+> * Integrated merge request tracking - Similar to issues, we would be 
+> able to see a combined group-level list of open merge requests. This is 
+> a good view to use to help out other layer maintainers as you can 
+> easily see new merge requests across all repositories and pick a few to 
+> review.
+> 
+> * Separation of patches to different repositories/branches - Where one 
+> mailing list takes patches for many repositories it's often confusing 
+> which repository or branch is the target for a given patch.
+> 
+> * Easier contribution from behind corporate firewalls or buggy email 
+> servers - contribution is via ssh/https.
+> 
+> * Subgroups - GitLab supports more than one layer of grouping so we can 
+> organise repositories even within the top level "openembedded" group.
+> 
+> * Ability to enable/disable merge requests per-repository - With GitHub 
+> you can't disable pull requests. If your repository takes patches by 
+> another method you have to manually watch out for pull requests and 
+> comment on each one to tell the contributor how to submit patches. With 
+> GitLab this isn't necessary as you can just turn off merge requests for 
+> that repository.
+> 
+> * Ability to standardise on automated testing - we can integrate 
+> patchtest and yocto-check-layer with GitLab CI and run these scripts on 
+> each merge request. This requires a bit of work in both test scripts to 
+> allow configuration as not all tests will be appropriate for all 
+> layers. However it's much easier than integrating these scripts with 
+> several incompatible repository hosts and CI systems.
+> 
+> * Ability to standardise on security - If we want to we can enforce 
+> two-factor authentication (2FA) for logins, make use of the merge 
+> request approvals feature in GitLab, etc. We don't need to do that 
+> initially but it may be useful in the future.
+> 
+> At the risk of bikeshedding I'd like to get some feedback on these 
+> ideas at this stage. Have I missed any advantages/disadvantages? Is 
+> anyone interested in helping to guinea pig this with a couple of 
+> layers/repositories to see how it works in practice?
+> 
+> -- 
+> Paul Barker
+> -- 
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> yocto mailing list
+> yocto@yoctoproject.org
+> https://lists.yoctoproject.org/listinfo/yocto
+>
+
+-- 
+Paul Barker
+Managing Director & Principal Engineer
+Beta Five Ltd
 
