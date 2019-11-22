@@ -1,62 +1,50 @@
-Return-Path: <paul@betafive.co.uk>
-Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
-	[66.111.4.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F0AA7F87A;
-	Fri, 22 Nov 2019 21:29:33 +0000 (UTC)
-Received: from compute1.internal (compute1.nyi.internal [10.202.2.41])
-	by mailout.nyi.internal (Postfix) with ESMTP id 209C821B1B;
-	Fri, 22 Nov 2019 16:29:35 -0500 (EST)
-Received: from imap2 ([10.202.2.52])
-	by compute1.internal (MEProxy); Fri, 22 Nov 2019 16:29:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=betafive.co.uk;
-	h=mime-version:message-id:in-reply-to:references:date:from:to
-	:subject:content-type; s=fm3; bh=OvthrnmdoYredcNPvWB82Mx3lUnnuIR
-	4eajCX4LthEs=; b=nZ72Q7N+e6D75vNZRhirdZJcUpQ/H+82VmsWTb6FPx+8AhO
-	mxsBCUWi0Prg6C7IyznZmKvVfqYJ01Y7khqE85NEAz3nbc7It366xO7ObkSGJQk/
-	ToVqOEJuoDGYfnsvoZ8a0vWkOq/ZLxoqAlteKhRk0KHFEKgjoApV14fTkEqmCHBm
-	SOGRoMl5sO9Om+5v6VLiSzfvzeJsG93kj3YYlRhh46QxsiRdBYgF1p7S4Gfdma0w
-	Kt/m8W7B/zvdOSLNIO7YH+Hc91mKc8yHJeSLMmXQl5DmTzfefKnuO2kulnOdCux6
-	HpcKeR9EPONeRdXjCaEh878058bfNDmWRUfJLtQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to:x-me-proxy
-	:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=Ovthrn
-	mdoYredcNPvWB82Mx3lUnnuIR4eajCX4LthEs=; b=y1EvyNFenEMpkgYkq5LyLf
-	kP6LxSRe9+n7PWAX8AbXJvQcqVnaA9mio5XED6IYGtQ0JPlX2c2DFtMiDaVairfe
-	VejaQIx58QYEujyuXENl/JA9c6XG7EwOK4bPvPUZlPQs4sor3Ozxt2w+YJv6ieTI
-	5v8qFXInE78yzrmHPIuSKCulj+r5snh10twEH6EdEz2XZAGUQK7TF07JDVgy2B2y
-	azvJsx2OLQRPaQleSlLfLAhUKmkb7S8drhkNQH3YjF4r3I8HCqqoQGJbFfdOotvC
-	1QCgT73o65UY56DqBfcHa+qtScFH7up+des79uC+tO6T0rALr/gsKDsdEVEQ4mfw
-	==
-X-ME-Sender: <xms:PlPYXfiM8uJjDriEQEAaijALssDiBxEL_PngkViXX8JYIr8KnDvqQw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedufedrudehgedgudehtdcutefuodetggdotefrod
-	ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-	necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
-	enogfuuhhsphgvtghtffhomhgrihhnucdlgeelmdenucfjughrpefofgggkfgjfhffhffv
-	ufgtsehttdertderredtnecuhfhrohhmpedfrfgruhhluceurghrkhgvrhdfuceophgruh
-	hlsegsvghtrghfihhvvgdrtghordhukheqnecuffhomhgrihhnpehgohhoghhlvgdrtgho
-	mhdpghhithhlrggsrdgtohhmpdihohgtthhophhrohhjvggtthdrohhrghdpohhpvghnvg
-	hmsggvugguvggurdhorhhgrdhimhdpohhpvghnvghmsggvugguvggurdhorhhgnecurfgr
-	rhgrmhepmhgrihhlfhhrohhmpehprghulhessggvthgrfhhivhgvrdgtohdruhhknecuve
-	hluhhsthgvrhfuihiivgeptd
-X-ME-Proxy: <xmx:PlPYXaj_IR7A3wHWu0PsyeAoWwIbreOfAIuuiH6RRdLuKT1p0ik6uw>
-	<xmx:PlPYXZ7xesJG9Xx9sZ5nJjHhTfdXgY7XFTnKwtq5y9zpDL9OxVoEvQ>
-	<xmx:PlPYXSdgi-rtxskqHJbyDjFu0kpvW6py_jwIFU5NFdaAq5YweLWfQA>
-	<xmx:P1PYXVEsIuyH62QYpnQ184XmDtcNpu8UrS8MCgkKHy6mZtDz6oS7gA>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-	id 6357CE00A5; Fri, 22 Nov 2019 16:29:34 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.1.7-578-g826f590-fmstable-20191119v1
-Mime-Version: 1.0
-Message-Id: <06de5f95-8a07-48cc-b4a3-eac13708ea93@www.fastmail.com>
-In-Reply-To: <ab96ec4a-5dcb-4d01-8519-13c00094a44c@www.fastmail.com>
-References: <ab96ec4a-5dcb-4d01-8519-13c00094a44c@www.fastmail.com>
-Date: Fri, 22 Nov 2019 21:29:15 +0000
-From: "Paul Barker" <paul@betafive.co.uk>
-To: "Yocto discussion list" <yocto@yoctoproject.org>,
-	"OE Devel" <openembedded-devel@lists.openembedded.org>,
-	"OE Architecture" <openembedded-architecture@lists.openembedded.org>
-Subject: Re: [yocto] Using GitLab for OE/Yocto layers
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-il1-f193.google.com (mail-il1-f193.google.com
+	[209.85.166.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 289C07FCCE
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Nov 2019 21:49:52 +0000 (UTC)
+Received: by mail-il1-f193.google.com with SMTP id p6so8407918ilp.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Nov 2019 13:49:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=UyH1Ptt/tTjtZiiy4+cVcNxaLwHmcrUutXVEL8HlVv0=;
+	b=XaOgJH0H3+nDv/+NuDHpkQezD0BGZpdtFIID34pkr6wm0LuW1OzQu1xQ/891p3w1Qm
+	Vg9IaB+D61K1+w1usIrKP9lkjr8dge/DNUJOBt71nX3aB877vhzlWzItpRwjt4Jsox5L
+	sj2HTsUzfCbyp0Vi93jUdEVt24vno2zh7Rx45/1Qpb5YUjQhuC68p+22ZP4uzCicLUoX
+	dKwNKRsNaYNXzLD/4Y+Zodk5DrIuJlKZzg8lbRV5P0yfQ2YpaP0AjNsnvZHk8yycv6ux
+	N9toaPAvlX9o1fCAlf+LCrX7cz/AyEevYogG8eketmiErlVvF8xGqdAxxPtpIn8U7hmV
+	C/lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=UyH1Ptt/tTjtZiiy4+cVcNxaLwHmcrUutXVEL8HlVv0=;
+	b=GtsYn5GUZPhG+PtQFtYC8bIb17DVubPIG4Ju5WGPLPxvj6WjoPRKPqEvP7O1t0hCDn
+	+0k/Yze5eAkRi4C+z0DUbXTHAHnNKTGSP0q/gv7sLUljinAPlUDqybQj/3gRVwOKN4Gx
+	QnicsEj7fCj9ajwr7q2Sas919+UQaD5Sev0J+BGsgQFtNtgfnzj9DdNk0eAXfGsloRnX
+	P/5Yu9VwAjXcgnrsqlwE5CjByh8yiW/mkjAZ+ZVVpTYFzrzcTN9z/Y0JXTXFzuX0VQRc
+	D8gDysC3+9N4nTrpGi6L9rnmI67xtF7eUR39nUBn+d/CWv7IhU+vEPBmW88A/4Z14Ceb
+	vHIQ==
+X-Gm-Message-State: APjAAAVWZgFiQLBRi3gQAxalWc/llEZ3kXPjtlroAr3OL9DYOHaVNx8c
+	AVMK3S+kLB7KzjAHO8IjonyLdHu0i3Zx0uNb3fw=
+X-Google-Smtp-Source: APXvYqzLuF/H7810gTAMWXtX/FHHETGutG/jWwlGDtfmSM/vr3Hbmw8aFyVqhyUIpc6Efy1LoMPpv5RoG2gpqqDnyNo=
+X-Received: by 2002:a92:5cce:: with SMTP id d75mr19346103ilg.299.1574459393796;
+	Fri, 22 Nov 2019 13:49:53 -0800 (PST)
+MIME-Version: 1.0
+References: <20191119071730.2682-1-schnitzeltony@gmail.com>
+	<20191119071730.2682-4-schnitzeltony@gmail.com>
+	<CAMKF1sp-CsNE6A0MPBYCgbD0cXXHU89zQyeCTSjP83UtTh6krA@mail.gmail.com>
+	<CALbNGRRAw_57dRRufUzWK6KEu6qTjG4deM_UwvswQFUnJLFesw@mail.gmail.com>
+In-Reply-To: <CALbNGRRAw_57dRRufUzWK6KEu6qTjG4deM_UwvswQFUnJLFesw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 22 Nov 2019 22:49:42 +0100
+Message-ID: <CALbNGRQPRqVcsApRiESjm53+Sr7DyOvf-ZMagYd=cPBmzTxnXA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 3/9] tracker-miners: initial add 2.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,100 +57,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2019 21:29:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 22 Nov 2019 21:49:53 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Following up on the email below, I've created a "community" subgroup to the OpenEmbedded group on GitLab: https://gitlab.com/openembedded/community. This should help to avoid any confusion with the repositories at the top level of https://gitlab.com/openembedded which mirror those at git.openembedded.org.
+On Wed, Nov 20, 2019 at 9:04 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+> > fails to build on x86
+> >
+> > https://errors.yoctoproject.org/Errors/Details/277884/
+> >
+This turns tricky so I first try explain the issue and then ask for
+suggestions/discussion:
 
-I'm going to use this for one or two layers I'm currently developing. If anyone else would like to setup a new layer here or transfer/mirror a repository from elsewhere then let me know and I'll get you set up.
+1.
+meson.build contains:
 
-On Wed, 6 Nov 2019, at 16:01, Paul Barker wrote:
-> Hey folks,
-> 
-> We had some initial discussion at OEDEM about the patch submission 
-> process and how repositories are hosted (see 
-> https://docs.google.com/document/d/1Qm1mJ6xLozWW9NgBnokue7TmhwgFP8b2HR8TUlaQwNs/edit#heading=h.o4qtddy8bh9i).
-> 
-> Patch submission via mailing list still has some key features (such as 
-> ability to compose a patch response offline) and I don't expect that 
-> the core OE/Yocto repositories will be changing their workflow in the 
-> short term. However, lots of tools and non-core layers already use a 
-> pull request model for patch submission, typically via GitHub or GitLab.
-> 
-> I'd like to propose that we set up a common place for OE/Yocto 
-> repositories which want to use this pull request model and start to 
-> collaborate on some of the tooling. As discussed in OEDEM, GitLab has a 
-> few major advantages over GitHub, BitBucket, etc here as they've got a 
-> track record of working well with open source projects and we can run 
-> the software on our own infrastructure if desired. We can use something 
-> like https://gitlab.com/openembedded at first to trial things and then 
-> maybe move to https://gitlab.openembedded.org (or 
-> gitlab.yoctoproject.org) if things look good.
-> 
-> I see the following advantages to this approach:
-> 
-> * Increased bus factor for repository administration - several layers 
-> currently have only one admin or live in someone's personal GitHub 
-> account, we risk losing access to these if the person in question 
-> disappears.
-> 
-> * Integrated issue tracking - we can standardise on a few issue labels 
-> and use milestones in GitLab to correspond to Yocto release branches. 
-> As the repositories would be in the same group we would be able to make 
-> use of group-level issue lists and boards to show issues across several 
-> layers.
-> 
-> * Integrated merge request tracking - Similar to issues, we would be 
-> able to see a combined group-level list of open merge requests. This is 
-> a good view to use to help out other layer maintainers as you can 
-> easily see new merge requests across all repositories and pick a few to 
-> review.
-> 
-> * Separation of patches to different repositories/branches - Where one 
-> mailing list takes patches for many repositories it's often confusing 
-> which repository or branch is the target for a given patch.
-> 
-> * Easier contribution from behind corporate firewalls or buggy email 
-> servers - contribution is via ssh/https.
-> 
-> * Subgroups - GitLab supports more than one layer of grouping so we can 
-> organise repositories even within the top level "openembedded" group.
-> 
-> * Ability to enable/disable merge requests per-repository - With GitHub 
-> you can't disable pull requests. If your repository takes patches by 
-> another method you have to manually watch out for pull requests and 
-> comment on each one to tell the contributor how to submit patches. With 
-> GitLab this isn't necessary as you can just turn off merge requests for 
-> that repository.
-> 
-> * Ability to standardise on automated testing - we can integrate 
-> patchtest and yocto-check-layer with GitLab CI and run these scripts on 
-> each merge request. This requires a bit of work in both test scripts to 
-> allow configuration as not all tests will be appropriate for all 
-> layers. However it's much easier than integrating these scripts with 
-> several incompatible repository hosts and CI systems.
-> 
-> * Ability to standardise on security - If we want to we can enforce 
-> two-factor authentication (2FA) for logins, make use of the merge 
-> request approvals feature in GitLab, etc. We don't need to do that 
-> initially but it may be useful in the future.
-> 
-> At the risk of bikeshedding I'd like to get some feedback on these 
-> ideas at this stage. Have I missed any advantages/disadvantages? Is 
-> anyone interested in helping to guinea pig this with a couple of 
-> layers/repositories to see how it works in practice?
-> 
-> -- 
-> Paul Barker
-> -- 
-> _______________________________________________
-> yocto mailing list
-> yocto@yoctoproject.org
-> https://lists.yoctoproject.org/listinfo/yocto
->
+| libseccomp =3D dependency('libseccomp', version: '>=3D 2.0', required: fa=
+lse)
+| ...
+| host_system =3D host_machine.system()
+| host_cpu =3D host_machine.cpu()
 
--- 
-Paul Barker
-Managing Director & Principal Engineer
-Beta Five Ltd
+| # You can find a list of architectures that seccomp supports in the secco=
+mp
+| # project README. See: https://github.com/seccomp/libseccomp/
+| unsupported_cpus =3D [
+|  'alpha',
+|  'ia64',
+|  'm68k',
+|  'parisc',
+|  'parisc64',
+|  'sh4',
+|  'sparc',
+|  'sparc64',
+|]
+|
+| system_supports_seccomp =3D host_system =3D=3D 'linux'
+| cpu_supports_seccomp =3D not unsupported_cpus.contains(host_cpu)
+| seccomp_required =3D system_supports_seccomp and cpu_supports_seccomp
+|
+|if not libseccomp.found() and seccomp_required
+|  error('Libseccomp is mandatory for sandboxed metadata extraction')
+| endif
+
+That means:
+* tracker-miners' developers make libseccom a _mandatory_ dependency-
+except for those arches not supported by libseccomp
+* my test build passed accidentally because host_machine.system()
+reports 'linux-gnueabi' and that is not detected as 'linux'
+
+2.
+I see the following ways to go:
+a. Patch the check away and add a comment in the recipe like: "For
+security reasons it is strongly recommended to set add meta-security
+in your layers and 'libseccomp' to PACKAGECONFIG".
+b. Move libseccomp form meta-security -> meta-oe. That would need some
+COMPATIBLE_HOST dance (at leas for riscv) in libseccomp and
+tracker-miners
+c. Give up nautilus because it crashes without tracke-miners
+
+After looking into e.g [1] I
+* don't think that riscv support will ever come to libseccomp
+* am afraid that libseccomp can cause strange effects with very
+old/new kernel versions
+* prefer a.
+
+OK - long talk: What do others think?
+
+Cheers
+
+Andreas
+
+[1] https://github.com/seccomp/libseccomp/blob/master/src/arch-arm-syscalls=
+.c
 
