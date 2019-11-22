@@ -1,30 +1,24 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 94A4D6BC19
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B8837F8C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Nov 2019 03:42:29 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,228,1571673600"; d="scan'208";a="78894128"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 22 Nov 2019 11:42:29 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 3C8324CE1BE7
+	Fri, 22 Nov 2019 06:04:00 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xAM641pj025127
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Nov 2019 11:34:07 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 22 Nov 2019 11:42:28 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
+	Thu, 21 Nov 2019 22:04:01 -0800
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.468.0; Thu, 21 Nov 2019 22:03:54 -0800
+From: <changqing.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 22 Nov 2019 02:49:18 -0800
-Message-ID: <1574419758-23572-1-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Date: Fri, 22 Nov 2019 14:03:53 +0800
+Message-ID: <1574402633-254634-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 3C8324CE1BE7.A958D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] mcelog: upgrade 1.65 -> 1.66
+Subject: [meta-networking][PATCH] dnsmasq.conf: fix dnsmasq path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,33 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2019 03:42:30 -0000
+X-List-Received-Date: Fri, 22 Nov 2019 06:04:00 -0000
 Content-Type: text/plain
 
----
- meta-oe/recipes-support/mcelog/{mcelog_165.bb => mcelog_166.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/mcelog/{mcelog_165.bb => mcelog_166.bb} (95%)
+From: Changqing Li <changqing.li@windriver.com>
 
-diff --git a/meta-oe/recipes-support/mcelog/mcelog_165.bb b/meta-oe/recipes-support/mcelog/mcelog_166.bb
-similarity index 95%
-rename from meta-oe/recipes-support/mcelog/mcelog_165.bb
-rename to meta-oe/recipes-support/mcelog/mcelog_166.bb
-index 8af919f..3b4ea1f 100644
---- a/meta-oe/recipes-support/mcelog/mcelog_165.bb
-+++ b/meta-oe/recipes-support/mcelog/mcelog_166.bb
-@@ -9,7 +9,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http;
-     file://run-ptest \
- "
+we install dnsmasq under /usr/bin by default, correct
+the path in comments.
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf
+index 9e5ab9f..2897b90 100755
+--- a/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf
++++ b/meta-networking/recipes-support/dnsmasq/files/dnsmasq.conf
+@@ -2,7 +2,7 @@
+ #
+ # Format is one option per line, legal options are the same
+ # as the long options legal on the command line. See
+-# "/usr/sbin/dnsmasq --help" or "man 8 dnsmasq" for details.
++# "/usr/bin/dnsmasq --help" or "man 8 dnsmasq" for details.
  
--SRCREV = "6b6a8a571b5b0967cadbee770bf444f4e8634cca"
-+SRCREV = "ee90ff20ce6a4d5e016aa249ce8b37f359f9fda4"
- 
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://README.md;md5=74bb47b9a68850cb398665cf78b31de6"
+ # Listen on this specific port instead of the standard DNS port
+ # (53). Setting this to zero completely disables DNS function,
 -- 
 2.7.4
-
-
 
 
