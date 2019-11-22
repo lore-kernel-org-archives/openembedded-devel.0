@@ -1,35 +1,33 @@
-Return-Path: <jlu@pengutronix.de>
-Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
-	[85.220.165.71])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A3437F896
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id A51907FCDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Nov 2019 12:28:54 +0000 (UTC)
-Received: from rettich.hi.pengutronix.de ([2001:67c:670:100:1d::c3]
-	helo=rettich) by metis.ext.pengutronix.de with esmtps
-	(TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1iY83S-00016J-TJ; Fri, 22 Nov 2019 13:28:54 +0100
-Received: from jlu by rettich with local (Exim 4.92)
-	(envelope-from <jlu@pengutronix.de>)
-	id 1iY83S-0000YG-Do; Fri, 22 Nov 2019 13:28:54 +0100
-Message-ID: <5ac6d881cb97b2c4faf0f209793d5409d3d45222.camel@pengutronix.de>
-From: Jan =?ISO-8859-1?Q?L=FCbbe?= <jlu@pengutronix.de>
-To: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 22 Nov 2019 13:28:54 +0100
-In-Reply-To: <CAMKF1spBXDw5R42U0JT-kmQhFZvFUQp9vLvSXaJtV7gfvdST4A@mail.gmail.com>
-References: <20191121120913.23013-1-jlu@pengutronix.de>
-	<20191121120913.23013-5-jlu@pengutronix.de>
-	<CAMKF1spBXDw5R42U0JT-kmQhFZvFUQp9vLvSXaJtV7gfvdST4A@mail.gmail.com>
-Organization: Pengutronix
-User-Agent: Evolution 3.30.5-1.1 
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::c3
-X-SA-Exim-Mail-From: jlu@pengutronix.de
-X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
-	SAEximRunCond expanded to false
-X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 5/6] libp11: add support for native builds
+	Fri, 22 Nov 2019 16:25:51 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47KMHL4sNkz4Y
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Nov 2019 17:25:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1574439950;
+	bh=yStH2HvSUimLzYZPzr5ugLXkL/aGl1+tTVwHqsC6DDE=;
+	h=From:To:Subject:Date:From;
+	b=eg4t56yJnMFth+tr6PIa1II1wvepGBzGdZA6xqxpAWb/FfR6rBND9TISwp5PP/x7q
+	rh3X93Ted7R0zg41JVl5L9EfkK1keaiU6LviZKxy1rUvRyCmJA6y1Y705YQQhQOxK7
+	F/v7LbAygB29nTQBlTMGqq5K6CeHKDv6FvO+LfHnYn5kLzGxAQBtTCunkwtUh6+/Vg
+	PJXwSeoUeh8X7py4p//gILGIDxjM9JQec838fMFZmqASd1ADcaVeE5pgNzjW+mWbsj
+	VrPDMCYxQacaLkHrW9NJzzATIEOUWsHL+eLUHk8IiLvR2pAX7plrjC8zAbpREV5DZe
+	2DmuSmSNNUWo4tNk/uHtUmJ8ETiN6OebzoTojVlhb/zyu92bKibkYK6hp0g9voYx0x
+	QdRo6Sk4K+mksReV6R0dikfLpg5AbnJgiVwCvFDWBXHosNgpYZcgUi5QGsTLMEwvv9
+	AJ3dWhjNp9tk45AasB3THI7ee3zaowmRNK2iQb7Ti0MyNKcHy6J1tn1loK9/2k2+zq
+	uCug/AosF9oyhAsAtee+HY4cBxq8TMmJFf91l1we9K3pFNcbv7nOGNTox5+lxmCn1W
+	/uJ8Yn+PpHUN4T4myg9+K7BB0IhFPccYreTB8X6uYP+/7udhuliTmlnFqwOLSmGD6G
+	I9zOrwrluN4qiHY7IslNGpOQ=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 22 Nov 2019 18:25:49 +0200
+Message-Id: <20191122162549.31863-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][zeus][PATCH] modemmanager: Upgrade 1.10.6 -> 1.10.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,25 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Nov 2019 12:28:54 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 22 Nov 2019 16:25:51 -0000
 
-On Thu, 2019-11-21 at 10:49 -0800, Khem Raj wrote:
-> > +
-> > +BBCLASSEXTEND=3D"native"
->=20
-> nitpick but space around =3D is preferred in such assignments
+From: Michael Scott <mike@foundries.io>
 
-Of course. If there are no further issues, do you want to fix-up that
-while applying or should I resend (this patch or the series)?
+This is a bugfix release on the 1.10 branch.
 
-Regards,
-Jan
---=20
-Pengutronix e.K.                        | Dipl.-Inform. Jan L=C3=BCbbe     =
-|
-Steuerwalder Str. 21                    | https://www.pengutronix.de/ |
-31137 Hildesheim, Germany               | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686        | Fax:   +49-5121-206917-5555 |
+Includes: Fix for an issue presenting after 1.10.6 update where modem
+would enter status denied state.
+
+See:
+https://cgit.freedesktop.org/ModemManager/ModemManager/commit/?h=1.10.8&id=47fd8a1e55cac0b0b45812e1dda826f38c264d1b
+
+Signed-off-by: Michael Scott <mike@foundries.io>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ .../{modemmanager_1.10.6.bb => modemmanager_1.10.8.bb}        | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.10.6.bb => modemmanager_1.10.8.bb} (92%)
+
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.6.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.8.bb
+similarity index 92%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.6.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.8.bb
+index 92d4fe0f4..3cd21cc0d 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.6.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.8.bb
+@@ -14,8 +14,8 @@ DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
+ SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
+            "
+ 
+-SRC_URI[md5sum] = "7452a94f0d1ca361ae51ff1d287c53f5"
+-SRC_URI[sha256sum] = "3c2ca73782215664141042422759899ca9846440fc26d6223c7cf7ea4dd3c996"
++SRC_URI[md5sum] = "c05ac4246c81cc15d617c4a129232988"
++SRC_URI[sha256sum] = "cbe174078dbdf3f746a55f0004353d3c27da2a31da553036d90fc7dc34a0169a"
+ 
+ S = "${WORKDIR}/ModemManager-${PV}"
+ 
+-- 
+2.17.1
+
 
