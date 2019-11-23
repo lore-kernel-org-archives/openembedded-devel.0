@@ -1,37 +1,37 @@
 Return-Path: <niko.mauno@iki.fi>
-Received: from sirokuusama2.dnainternet.net (sirokuusama2.dnainternet.net
-	[83.102.40.153])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A87D7FCB1
+Received: from tulikuusama2.dnainternet.net (tulikuusama3.dnainternet.net
+	[83.102.40.155])
+	by mail.openembedded.org (Postfix) with ESMTP id 571AE7FCAE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Nov 2019 13:51:46 +0000 (UTC)
+	Sat, 23 Nov 2019 13:53:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by sirokuusama2.dnainternet.net (Postfix) with ESMTP id 0715311DE1;
-	Sat, 23 Nov 2019 15:43:46 +0200 (EET)
+	by tulikuusama2.dnainternet.net (Postfix) with ESMTP id 7CE6528B70;
+	Sat, 23 Nov 2019 15:46:50 +0200 (EET)
 X-Virus-Scanned: DNA Internet at dnainternet.net
 X-Spam-Flag: NO
 X-Spam-Score: 0.653
 X-Spam-Level: 
 X-Spam-Status: No, score=0.653 tagged_above=-9999 required=6
 	tests=[SPF_HELO_NONE=0.001, SPF_NEUTRAL=0.652] autolearn=disabled
-Received: from sirokuusama2.dnainternet.net ([83.102.40.153])
-	by localhost (sirokuusama2.dnainternet.net [127.0.0.1]) (DNA Internet,
+Received: from tulikuusama2.dnainternet.net ([83.102.40.155])
+	by localhost (tulikuusama2.dnainternet.net [127.0.0.1]) (DNA Internet,
 	port 10041)
-	with ESMTP id EU5Bq18ujOgW; Sat, 23 Nov 2019 15:43:45 +0200 (EET)
+	with ESMTP id 5CIZQzdOrjTa; Sat, 23 Nov 2019 15:46:50 +0200 (EET)
 Received: from luumupuu2.dnainternet.net (luumupuu2.dnainternet.net
 	[83.102.40.55])
-	by sirokuusama2.dnainternet.net (Postfix) with ESMTP id 8DE2111EE5;
-	Sat, 23 Nov 2019 15:43:45 +0200 (EET)
+	by tulikuusama2.dnainternet.net (Postfix) with ESMTP id 13C77288B6;
+	Sat, 23 Nov 2019 15:46:50 +0200 (EET)
 Received: from localhost.localdomain (62-78-161-185.bb.dnainternet.fi
 	[62.78.161.185])
-	by luumupuu2.dnainternet.net (Postfix) with ESMTP id C1D5C74;
-	Sat, 23 Nov 2019 15:43:41 +0200 (EET)
+	by luumupuu2.dnainternet.net (Postfix) with ESMTP id 381088F;
+	Sat, 23 Nov 2019 15:46:45 +0200 (EET)
 From: Niko Mauno <niko.mauno@iki.fi>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Nov 2019 15:43:21 +0200
-Message-Id: <20191123134322.80858-1-niko.mauno@iki.fi>
+Date: Sat, 23 Nov 2019 15:46:30 +0200
+Message-Id: <20191123134631.81271-1-niko.mauno@iki.fi>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][zeus][PATCH 1/2] gitpkgv.bbclass: Use --git-dir option
+Subject: [meta-oe][warrior][PATCH 1/2] gitpkgv.bbclass: Use --git-dir option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,7 +44,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Nov 2019 13:51:47 -0000
+X-List-Received-Date: Sat, 23 Nov 2019 13:53:37 -0000
 Content-Transfer-Encoding: 8bit
 
 From: "niko.mauno@vaisala.com" <niko.mauno@vaisala.com>
