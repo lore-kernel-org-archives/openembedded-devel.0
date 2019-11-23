@@ -1,31 +1,41 @@
-Return-Path: <leon.anavi@konsulko.com>
-Received: from anavi.org (anavi.technology [91.215.217.29])
-	by mail.openembedded.org (Postfix) with ESMTP id 1CAC27FC4A
+Return-Path: <niko.mauno@iki.fi>
+X-Greylist: delayed 480 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 23 Nov 2019 13:51:46 UTC
+Received: from sirokuusama2.dnainternet.net (sirokuusama2.dnainternet.net
+	[83.102.40.153])
+	by mail.openembedded.org (Postfix) with ESMTP id 494D97FCAE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Nov 2019 13:05:52 +0000 (UTC)
-Received: from [78.130.245.67] (port=48302 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa
-	(TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1iYV6m-0001WN-BM; Sat, 23 Nov 2019 15:05:52 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
+	Sat, 23 Nov 2019 13:51:46 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by sirokuusama2.dnainternet.net (Postfix) with ESMTP id C841411F59;
+	Sat, 23 Nov 2019 15:43:56 +0200 (EET)
+X-Virus-Scanned: DNA Internet at dnainternet.net
+X-Spam-Flag: NO
+X-Spam-Score: 0.653
+X-Spam-Level: 
+X-Spam-Status: No, score=0.653 tagged_above=-9999 required=6
+	tests=[SPF_HELO_NONE=0.001, SPF_NEUTRAL=0.652] autolearn=disabled
+Received: from sirokuusama2.dnainternet.net ([83.102.40.153])
+	by localhost (sirokuusama2.dnainternet.net [127.0.0.1]) (DNA Internet,
+	port 10041)
+	with ESMTP id JY_lwE8FRi9I; Sat, 23 Nov 2019 15:43:56 +0200 (EET)
+Received: from luumupuu2.dnainternet.net (luumupuu2.dnainternet.net
+	[83.102.40.55])
+	by sirokuusama2.dnainternet.net (Postfix) with ESMTP id 55AEF11F6B;
+	Sat, 23 Nov 2019 15:43:56 +0200 (EET)
+Received: from localhost.localdomain (62-78-161-185.bb.dnainternet.fi
+	[62.78.161.185])
+	by luumupuu2.dnainternet.net (Postfix) with ESMTP id 8F6F82C61;
+	Sat, 23 Nov 2019 15:43:51 +0200 (EET)
+From: Niko Mauno <niko.mauno@iki.fi>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Nov 2019 15:05:41 +0200
-Message-Id: <1574514341-32435-1-git-send-email-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.7.4
-X-OutGoing-Spam-Status: No, score=-1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: [meta-oe][PATCH] stalonetray: Add a simple stand-alone system tray
+Date: Sat, 23 Nov 2019 15:43:22 +0200
+Message-Id: <20191123134322.80858-2-niko.mauno@iki.fi>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20191123134322.80858-1-niko.mauno@iki.fi>
+References: <20191123134322.80858-1-niko.mauno@iki.fi>
+MIME-Version: 1.0
+Subject: [meta-oe][zeus][PATCH 2/2] gitpkgv.bbclass: Support also lightweight tags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,38 +48,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Nov 2019 13:05:53 -0000
+X-List-Received-Date: Sat, 23 Nov 2019 13:51:47 -0000
+Content-Transfer-Encoding: 8bit
 
-Stalonetray is a simple and convenient stand-alone freedesktop.org
-and KDE system tray for X11 with minimal dependencies.
+From: "niko.mauno@vaisala.com" <niko.mauno@vaisala.com>
 
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+When checking for commit specific tags during GITPKGVTAG resolution, use
+additional '--tags' and '--exact-match' options for 'git describe'
+command.
+
+This changes the behaviour so that in case an annotated tag does not
+exist for the particular commit, then the latest lightweight
+(non-annotated) tag is used instead, in case that commit has at least
+one such tag.
+
+Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb
+ meta-oe/classes/gitpkgv.bbclass | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb b/meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb
-new file mode 100644
-index 0000000..8851729
---- /dev/null
-+++ b/meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Stand-alone system tray"
-+DESCRIPTION = "Stalonetray is a stand-alone freedesktop.org and KDE system tray"
-+SECTION = "x11/graphics"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+
-+DEPENDS = "virtual/libx11"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
-+
-+SRC_URI[md5sum] = "ae95dbbacc2620e032acea8abab8c9ef"
-+SRC_URI[sha256sum] = "36548a588b2d466913423245dda6ffb6313132cd0cec635a117d37b3dab5fd4c"
-+
-+inherit autotools
+diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
+index 22609f584..ab591bd45 100644
+--- a/meta-oe/classes/gitpkgv.bbclass
++++ b/meta-oe/classes/gitpkgv.bbclass
+@@ -7,8 +7,8 @@
+ #   NN equals the total number of revs up to SRCREV
+ #   GITHASH is SRCREV's (full) hash
+ #
+-# - GITPKGVTAG which is the output of 'git describe' allowing for
+-#   automatic versioning
++# - GITPKGVTAG which is the output of 'git describe --tags --exact-match'
++#   allowing for automatic versioning
+ #
+ # gitpkgv.bbclass assumes the git repository has been cloned, and
+ # contains SRCREV. So ${GITPKGV} and ${GITPKGVTAG} should never be
+@@ -103,7 +103,7 @@ def get_git_pkgv(d, use_tags):
+                 if use_tags:
+                     try:
+                         output = bb.fetch2.runfetchcmd(
+-                            "git --git-dir=%(repodir)s describe %(rev)s 2>/dev/null"
++                            "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
+                             % vars, d, quiet=True).strip()
+                         ver = gitpkgv_drop_tag_prefix(output)
+                     except Exception:
 -- 
-2.7.4
+2.20.1
 
 
