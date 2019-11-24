@@ -1,47 +1,48 @@
 Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
-	[209.85.221.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 9737E7FC08
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 945706069C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Nov 2019 02:58:53 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id a15so13233861wrf.9
+	Sun, 24 Nov 2019 09:34:29 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id b11so12007255wmb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Nov 2019 18:58:54 -0800 (PST)
+	Sun, 24 Nov 2019 01:34:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=DWGWQE90ypkKfPGwJVEzQpJcu7kexKvYD4SWDqDLyrY=;
-	b=exwp9LNBzxNUqoJkKebqaF8jJrwjFhpUMzTkqj+IGw6isjVJBaurulKdgJ15QAKts5
-	xOBbNdNszszGltq1Ico/EDgkwtrAO59j5muqsUmOj1p07eYNhjZO7VzYhsu0yOO7tMJo
-	IFGOEY7MixzORVx4PECNDrqQ3FmROl+8VOg8x787TTyCkfbCFBnk+I5mLLUp6KdkQ7DY
-	WCbQ9A/pLBxgUWRUsd5UgcCO5bI+qxjfwfVIF26w/SYbM9dl0kB6PovdV63PSdl4Ec/Q
-	c5p8goC12rg21dLTmwkl1k7dEsi4Tdeo3iIy4UYsaZtvU1x50AnBhKdU8/xPkSdiRhZd
-	7e9Q==
+	bh=Y8ZxohYp+iOyy7t8YzfWMt8jGlV8SHnjxpV2XQsWJac=;
+	b=OgYhJYo7aZVZnZL9jeB+d3sFvNfxl6ayH1EOdbAAz03kKDcbnCJVswnZKJrpFSNtkX
+	UHp9yyemNi65b/9I7jYcP+eikxynskglGOAAMRIW4/M/ucEaM7yPAe+FTa/dTKY+a5mq
+	XJ/T6IR2jRJLgcKyHfm2w7SIFlCb00rZIVISprimaezLItPtUrB27Yp6Fz+hppPdOibs
+	FJFieH5mUkMjXyvXLusno9e9RJOHd2zdT5SVONYnzqn6IpwVjBZMR865qzjQ8xLZOIph
+	BvgzCe14U+R9Lr02EYjqn7rXNXHp6Y8Q7jMYv6i0W6i6GACJ1PezDOQ3WryyfEl2+nz1
+	bC+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=DWGWQE90ypkKfPGwJVEzQpJcu7kexKvYD4SWDqDLyrY=;
-	b=f0r0LcBiimEOrdhyL4mMTQGk7volfLNtjiCdQD0R7kvB0khTZ4hbnkD3ws9Gk7YLfv
-	5kOM17wn2Vas/JjKbcKZeZD3vlCFlznyPm/8zzdj1NQvTdLYvg9wBnEoBErltb8PQ22t
-	9r0EtsjRKBoWVYLegRg3HXEnRSaJT2gy8cSQr3W2zi+H9aR7KUkKMVk9x3rRMHDIGlIZ
-	ZRChQYXAowW+BQGi2Q1x4EoYX3oKLL6J2r15G6nJkmrE0TViUGoCcXaHyem0IowbiZaL
-	TLA8oWGGJ2Bomh1SZ/NLyhxWkYyXWFiHGfUAf5V9ToRCi4rBcMpoqLDBdegJreinolH4
-	loeg==
-X-Gm-Message-State: APjAAAUDMnMe0k0Jyd6Skdnu148L8LT+HUqhOcSYQubE1BTrZzWHuwwG
-	K2tlz0VXTYDFmp0ame1P5uQZnWAi
-X-Google-Smtp-Source: APXvYqy7wg7VNfZlyfWJxDfi1R7O55ibWIH3bkML6dKG4TK8uquOcYlGzsDxgG69+Q2M4dKZMBJKbg==
-X-Received: by 2002:a5d:640d:: with SMTP id z13mr6206378wru.181.1574564333646; 
-	Sat, 23 Nov 2019 18:58:53 -0800 (PST)
+	bh=Y8ZxohYp+iOyy7t8YzfWMt8jGlV8SHnjxpV2XQsWJac=;
+	b=l3BlLtZOOAq9GYAKEAITJ/LroEOPES3yD80JEyGo3V0u7Ev5JY10Ld6RIjT7nncnaK
+	sAIShJzb7xmkdPtgS0ViKiultuThKuOMThQ4Z1P1TDDFYlapkf9PyRT0rz/0aTYQGw7G
+	q6hbErYVcfpUQHyePzfKzrHJ6P7ugaUyykw5Snsm+1TydHSkuy6HLuNAT/ttKakGTUnO
+	P6+hniZ8E3lHW0yhVYY7a6U+oo7E6ocsoJxktCFk3abvR+5SSi6qqz7ZyKdIPUFQetF6
+	xgL4lengx9VkDvEjKYp63aLb0+evaM/VE+l2ozTYY3VtiK1LRMrl+lHiSUTXPGy8HU0r
+	GHlw==
+X-Gm-Message-State: APjAAAXHuVWirR9FZJmBgGHYKvVwbtQHZ3Dhgj3W1AKEa/trzhaIM/cQ
+	PmrBSEqD4PoL4UBdqitU//NR8ZpO
+X-Google-Smtp-Source: APXvYqw2nBWUeopYH69bMQXesP3+VjhFdH0iLIsTta9YTameGW2wGVVYUuicNokIV7jwEAlYXKKUGA==
+X-Received: by 2002:a1c:9986:: with SMTP id
+	b128mr17932335wme.154.1574588069759; 
+	Sun, 24 Nov 2019 01:34:29 -0800 (PST)
 Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
 	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
-	j10sm4394994wrx.30.2019.11.23.18.58.51
+	v20sm4758233wmj.32.2019.11.24.01.34.28
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 23 Nov 2019 18:58:52 -0800 (PST)
+	Sun, 24 Nov 2019 01:34:29 -0800 (PST)
 From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 24 Nov 2019 02:58:39 +0000
-Message-Id: <20191124025839.116448-1-alex.kiernan@gmail.com>
+Date: Sun, 24 Nov 2019 09:34:22 +0000
+Message-Id: <20191124093422.40161-1-alex.kiernan@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] leveldb: Upgrade 1.20 -> 1.22
+Subject: [meta-oe][PATCH v2] leveldb: Upgrade 1.20 -> 1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,13 +55,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Nov 2019 02:58:53 -0000
+X-List-Received-Date: Sun, 24 Nov 2019 09:34:30 -0000
 
 Upstream has moved to cmake, so drop the build patches which are no
 longer relevant. Add run-ptest and PACKAGECONFIG support.
 
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
+
+Changes in v2:
+- Add CMAKE_BUILD_TYPE=RelWithDebInfo
 
  .../0001-Makefile-Fix-parallel-build.patch    | 34 ---------------
  ...detect_platform-Check-for-__SSE4_2__.patch | 37 ----------------
@@ -226,7 +230,7 @@ index 000000000000..9ae70c1284d1
 +
 diff --git a/meta-oe/recipes-dbs/leveldb/leveldb_1.22.bb b/meta-oe/recipes-dbs/leveldb/leveldb_1.22.bb
 new file mode 100644
-index 000000000000..484d7bd0d9cf
+index 000000000000..b597ef1ea845
 --- /dev/null
 +++ b/meta-oe/recipes-dbs/leveldb/leveldb_1.22.bb
 @@ -0,0 +1,33 @@
@@ -249,7 +253,7 @@ index 000000000000..484d7bd0d9cf
 +PACKAGECONFIG[snappy] = ",,snappy"
 +PACKAGECONFIG[tcmalloc] = ",,gperftools"
 +
-+EXTRA_OECMAKE = "-DBUILD_SHARED_LIBS=ON -DCMAKE_SKIP_RPATH=ON \
++EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_SHARED_LIBS=ON -DCMAKE_SKIP_RPATH=ON \
 +                 -DLEVELDB_BUILD_TESTS=${@bb.utils.contains('DISTRO_FEATURES', 'ptest', 'ON', 'OFF', d)}"
 +
 +do_install_append() {
