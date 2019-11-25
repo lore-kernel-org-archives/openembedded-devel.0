@@ -1,32 +1,32 @@
 Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1AA5C7FC86
+	by mail.openembedded.org (Postfix) with ESMTP id EE8587FC8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2019 06:05:42 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,240,1571673600"; d="scan'208";a="79031519"
+	Mon, 25 Nov 2019 06:06:30 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,240,1571673600"; d="scan'208";a="79031549"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2019 14:05:42 +0800
+	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2019 14:06:31 +0800
 Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id E4A1A4CE1BEC
+	by cn.fujitsu.com (Postfix) with ESMTP id 7F9944CE1C93
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2019 13:57:18 +0800 (CST)
+	Mon, 25 Nov 2019 13:58:07 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.35) by
 	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Mon, 25 Nov 2019 14:05:39 +0800
+	Server (TLS) id 15.0.1395.4; Mon, 25 Nov 2019 14:06:27 +0800
 From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Nov 2019 15:11:01 +0800
-Message-ID: <1574665861-27875-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Date: Mon, 25 Nov 2019 15:11:59 +0800
+Message-ID: <1574665919-27970-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
 	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: E4A1A4CE1BEC.ABE77
+X-yoursite-MailScanner-ID: 7F9944CE1C93.A8F71
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][zeus][PATCH] libsdl: Refresh patch
+Subject: [meta-oe][PATCH] libsdl: Refresh patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,7 +39,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Nov 2019 06:05:43 -0000
+X-List-Received-Date: Mon, 25 Nov 2019 06:06:32 -0000
 Content-Type: text/plain
 
 Refresh CVE-2019-7577.patch as it can't be applyed when using PATCHTOOL = "patch".
