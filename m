@@ -1,32 +1,34 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id EE8587FC8B
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 673C57F29D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2019 06:06:30 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,240,1571673600"; d="scan'208";a="79031549"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2019 14:06:31 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7F9944CE1C93
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2019 13:58:07 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Mon, 25 Nov 2019 14:06:27 +0800
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 25 Nov 2019 15:11:59 +0800
-Message-ID: <1574665919-27970-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 25 Nov 2019 13:59:32 +0000 (UTC)
+IronPort-SDR: zHw+s27Uxdy5gXZ7SQJpsdU10eoZW1PSEOrbRsOvDMutdfOt70s++8AHUpUII2jBqJ9bn4atbU
+	4Aq0I/oTs4QlvgDHT15hofHs46IpMZnlFNMn1Y0c1MYBapkVz0UPzPWEfPNVFxYfNafPe9Od1I
+	fOD8I8jQUrcS7TPOB/1gz29taVZupH+UdjRp6ayNglutW9jYJRddqSALlOkD3xQKWSD/3WJIve
+	lEt2fgEdVcfmbWa0fV5C6qQbH4xkmTKAvS0exWY3big5hJcHJevx7T++a+CMngUU/7gLXW0+cb
+	Rrs=
+X-IronPort-AV: E=Sophos;i="5.69,241,1571695200"; 
+   d="scan'208";a="2891080"
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: akuster808 <akuster808@gmail.com>, Niko Mauno <niko.mauno@iki.fi>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][warrior][PATCH 1/2] gitpkgv.bbclass: Use
+	--git-dir option
+Thread-Index: AQHVoua9nXe2wv9id0yBcw/6rp4sxaeb6rvQ
+Date: Mon, 25 Nov 2019 13:59:31 +0000
+Message-ID: <66640d95f6224fdda2e71556a3a44588@XBOX03.axis.com>
+References: <20191123134631.81271-1-niko.mauno@iki.fi>
+	<2c4e2cac-ff7b-d598-b0a8-f2d8de2d1201@gmail.com>
+In-Reply-To: <2c4e2cac-ff7b-d598-b0a8-f2d8de2d1201@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: 7F9944CE1C93.A8F71
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] libsdl: Refresh patch
+Subject: Re: [meta-oe][warrior][PATCH 1/2] gitpkgv.bbclass: Use --git-dir option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,124 +41,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Nov 2019 06:06:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 25 Nov 2019 13:59:32 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Refresh CVE-2019-7577.patch as it can't be applyed when using PATCHTOOL = "patch".
+Uhm, what do you mean with "wrong ml"? Given that the=20
+gitpkgpv.bbclass is in meta-oe, this should be the correct=20
+mailing list for at patch to it...
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../libsdl/libsdl-1.2.15/CVE-2019-7577.patch       | 55 ++++++++++------------
- 1 file changed, 25 insertions(+), 30 deletions(-)
+//Peter
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7577.patch b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7577.patch
-index 92e40ae..63680b8 100644
---- a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7577.patch
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7577.patch
-@@ -47,10 +47,17 @@ CVE: CVE-2019-7577
- Upstream-Status: Backport
- Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
- 
--diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
----- a/src/audio/SDL_wave.c	Mon Jun 10 08:50:59 2019 -0700
--+++ b/src/audio/SDL_wave.c	Mon Jun 10 08:54:11 2019 -0700
--@@ -115,7 +115,7 @@
-+Refresh CVE-2019-7577.patch as it can't be applyed when using PATCHTOOL = "patch".
-+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-+---
-+ src/audio/SDL_wave.c | 17 ++++++++++++++++-
-+ 1 file changed, 16 insertions(+), 1 deletion(-)
-+
-+diff --git a/src/audio/SDL_wave.c b/src/audio/SDL_wave.c
-+index b4ad6c7..0bcf7e2 100644
-+--- a/src/audio/SDL_wave.c
-++++ b/src/audio/SDL_wave.c
-+@@ -115,7 +115,7 @@ static Sint32 MS_ADPCM_nibble(struct MS_ADPCM_decodestate *state,
-  static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
-  {
-  	struct MS_ADPCM_decodestate *state[2];
-@@ -59,7 +66,7 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
-  	Sint32 encoded_len, samplesleft;
-  	Sint8 nybble, stereo;
-  	Sint16 *coeff[2];
--@@ -124,6 +124,7 @@
-+@@ -124,6 +124,7 @@ static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
-  	/* Allocate the proper sized output buffer */
-  	encoded_len = *audio_len;
-  	encoded = *audio_buf;
-@@ -67,7 +74,7 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
-  	freeable = *audio_buf;
-  	*audio_len = (encoded_len/MS_ADPCM_state.wavefmt.blockalign) * 
-  				MS_ADPCM_state.wSamplesPerBlock*
--@@ -141,6 +142,7 @@
-+@@ -141,10 +142,14 @@ static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
-  	state[1] = &MS_ADPCM_state.state[stereo];
-  	while ( encoded_len >= MS_ADPCM_state.wavefmt.blockalign ) {
-  		/* Grab the initial information for this block */
-@@ -75,7 +82,14 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
-  		state[0]->hPredictor = *encoded++;
-  		if ( stereo ) {
-  			state[1]->hPredictor = *encoded++;
--@@ -188,6 +190,8 @@
-+ 		}
-++		if (state[0]->hPredictor >= 7 || state[1]->hPredictor >= 7) {
-++			goto invalid_predictor;
-++		}
-+ 		state[0]->iDelta = ((encoded[1]<<8)|encoded[0]);
-+ 		encoded += sizeof(Sint16);
-+ 		if ( stereo ) {
-+@@ -188,6 +193,8 @@ static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
-  		samplesleft = (MS_ADPCM_state.wSamplesPerBlock-2)*
-  					MS_ADPCM_state.wavefmt.channels;
-  		while ( samplesleft > 0 ) {
-@@ -84,7 +98,7 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
-  			nybble = (*encoded)>>4;
-  			new_sample = MS_ADPCM_nibble(state[0],nybble,coeff[0]);
-  			decoded[0] = new_sample&0xFF;
--@@ -209,6 +213,10 @@
-+@@ -209,6 +216,14 @@ static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
-  	}
-  	SDL_free(freeable);
-  	return(0);
-@@ -92,28 +106,6 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
- +	SDL_SetError("Too short chunk for a MS ADPCM decoder");
- +	SDL_free(freeable);
- +	return(-1);
-- }
-- 
-- struct IMA_ADPCM_decodestate {
--
--
--diff -r 416136310b88 -r faf9abbcfb5f src/audio/SDL_wave.c
----- a/src/audio/SDL_wave.c	Mon Jun 10 08:54:11 2019 -0700
--+++ b/src/audio/SDL_wave.c	Mon Jun 10 08:54:29 2019 -0700
--@@ -147,6 +147,9 @@
-- 		if ( stereo ) {
-- 			state[1]->hPredictor = *encoded++;
-- 		}
--+		if (state[0]->hPredictor >= 7 || state[1]->hPredictor >= 7) {
--+			goto invalid_predictor;
--+		}
-- 		state[0]->iDelta = ((encoded[1]<<8)|encoded[0]);
-- 		encoded += sizeof(Sint16);
-- 		if ( stereo ) {
--@@ -217,6 +220,10 @@
-- 	SDL_SetError("Too short chunk for a MS ADPCM decoder");
-- 	SDL_free(freeable);
-- 	return(-1);
- +invalid_predictor:
- +	SDL_SetError("Invalid predictor value for a MS ADPCM decoder");
- +	SDL_free(freeable);
-@@ -121,3 +113,6 @@ diff -r 416136310b88 -r faf9abbcfb5f src/audio/SDL_wave.c
-  }
-  
-  struct IMA_ADPCM_decodestate {
-+-- 
-+2.7.4
-+
--- 
-2.7.4
-
-
-
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org <openembedded-
+> devel-bounces@lists.openembedded.org> On Behalf Of akuster808
+> Sent: den 24 november 2019 17:46
+> To: Niko Mauno <niko.mauno@iki.fi>; openembedded-
+> devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-oe][warrior][PATCH 1/2] gitpkgv.bbclass: Use --
+> git-dir option
+>=20
+> wrong ml
+>=20
+> On 11/23/19 5:46 AM, Niko Mauno wrote:
+> > From: "niko.mauno@vaisala.com" <niko.mauno@vaisala.com>
+> >
+> > Avoid redundant shell working directory change by resorting to
+> > '--git-dir' option for git command instead.
+> >
+> > Signed-off-by: Niko Mauno <niko.mauno@vaisala.com>
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  meta-oe/classes/gitpkgv.bbclass | 11 ++++-------
+> >  1 file changed, 4 insertions(+), 7 deletions(-)
+> >
+> > diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-
+> oe/classes/gitpkgv.bbclass
+> > index 2d9680a35..22609f584 100644
+> > --- a/meta-oe/classes/gitpkgv.bbclass
+> > +++ b/meta-oe/classes/gitpkgv.bbclass
+> > @@ -87,10 +87,8 @@ def get_git_pkgv(d, use_tags):
+> >
+> >                  if not os.path.exists(rev_file) or
+> os.path.getsize(rev_file)=3D=3D0:
+> >                      commits =3D bb.fetch2.runfetchcmd(
+> > -                        "cd %(repodir)s && "
+> > -                        "git rev-list %(rev)s -- 2> /dev/null "
+> > -                        "| wc -l" % vars,
+> > -                        d, quiet=3DTrue).strip().lstrip('0')
+> > +                        "git --git-dir=3D%(repodir)s rev-list %(rev)s =
+--
+> 2>/dev/null | wc -l"
+> > +                        % vars, d, quiet=3DTrue).strip().lstrip('0')
+> >
+> >                      if commits !=3D "":
+> >                          oe.path.remove(rev_file, recurse=3DFalse)
+> > @@ -105,9 +103,8 @@ def get_git_pkgv(d, use_tags):
+> >                  if use_tags:
+> >                      try:
+> >                          output =3D bb.fetch2.runfetchcmd(
+> > -                            "cd %(repodir)s && "
+> > -                            "git describe %(rev)s 2>/dev/null" % vars,
+> > -                            d, quiet=3DTrue).strip()
+> > +                            "git --git-dir=3D%(repodir)s describe %(re=
+v)s
+> 2>/dev/null"
+> > +                            % vars, d, quiet=3DTrue).strip()
+> >                          ver =3D gitpkgv_drop_tag_prefix(output)
+> >                      except Exception:
+> >                          ver =3D "0.0-%s-g%s" % (commits, vars['rev'][:=
+7])
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
