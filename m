@@ -1,50 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
-	[209.85.219.67])
-	by mail.openembedded.org (Postfix) with ESMTP id DA3067FC52
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AA5C7FC86
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2019 05:03:52 +0000 (UTC)
-Received: by mail-qv1-f67.google.com with SMTP id n4so5176090qvq.9
+	Mon, 25 Nov 2019 06:05:42 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,240,1571673600"; d="scan'208";a="79031519"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 Nov 2019 14:05:42 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id E4A1A4CE1BEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Nov 2019 21:03:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZL50BjTYwl0VF6eWDXy86EJrzUyrTHZOwdnvK3JMQCU=;
-	b=R9IjyNOv34R5eqAFtpsylQwscIfxS2LKSn3ULQEJPBjVBrPphaMTWy+KCJJ6bGmhDJ
-	rQveO1WYGa6tsau8vzrywoEV66ZUkkBbmw2/WLD/++wWI2PZQsvCj7ragps9TFvbRIEy
-	feP/6N9npnD4nFBew2oaJcRLVWYAOIOkP3vP1iqdi/mRkoLXoFO1IJNqDBHO2EoZOlfU
-	f1NI2x0OkoAztTeipGXaQcSmXZlJmvWC9UyoL65uBcvcXA/7ORL35YdB5lRdFrKBccAX
-	Au4LoO9f+EPuqihzpZREM6uTzE00z7l4FEWXya9FKa9KkUU37yGVDVv2/5T+Cgr9oORe
-	DpPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ZL50BjTYwl0VF6eWDXy86EJrzUyrTHZOwdnvK3JMQCU=;
-	b=Ig+RdeD9C9t9oj52vjD98qRghH6mCKcyS3A+rObaP8zxPJsrZNfQS4JDmRh8DFVZV+
-	kuE8yLQBSLHDAA3qh0rdiY7J8E9ZHi3IbMqQflVYrf4u6iT0hLHQI//gZeYB24FvLiA4
-	Wj+xZ96qbZ9IottW76s0UKcEBEeP/02S1F+N2ChxEARfsY8iQWLwXyHD5QzGLdDr2jYw
-	qOQVPGAemiVJAjSiDlcRK1fZc0LfWyLq8ON4TB+L+fMTecDqYNR7rDORqkMsmMJUpBg9
-	sEheRQrftsNTzr3xxNv1YoETbtNdlu/LPi2AmxmeOEOAa4SOJWHF4jA7HOdvNZG9pByA
-	JMPg==
-X-Gm-Message-State: APjAAAWVMq0uJMcyJbuO3dF+4jGBH/M8TIUrH3ijUf2p0eQY7J56mXoQ
-	lWXH4AwJnIKi+/dqZpoO/3GEqwvsJWZtZm/VMk8=
-X-Google-Smtp-Source: APXvYqxK0A4Nk2IkFTte6cz/K4SgvzCk4FOekhQJ6gCIOWSt1BsPzAY8vnX0m5zczZg4o3E5KUJlUe8T/16O7oYThgc=
-X-Received: by 2002:ad4:4dce:: with SMTP id
-	cw14mr25793762qvb.185.1574658233666; 
-	Sun, 24 Nov 2019 21:03:53 -0800 (PST)
+	Mon, 25 Nov 2019 13:57:18 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Mon, 25 Nov 2019 14:05:39 +0800
+From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 25 Nov 2019 15:11:01 +0800
+Message-ID: <1574665861-27875-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <1574315133-73046-1-git-send-email-mine260309@gmail.com>
-	<20191125030831.GA16252@localhost>
-	<CAARXrtkhU3UhmQ8kTv6w5TVfBLT0QxoZDK-0P0VqgQhguD=MxA@mail.gmail.com>
-In-Reply-To: <CAARXrtkhU3UhmQ8kTv6w5TVfBLT0QxoZDK-0P0VqgQhguD=MxA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 24 Nov 2019 21:03:27 -0800
-Message-ID: <CAMKF1so86g6hCzATiFO5UcWFoRTxO8WVg-tQeimAj2YXgcRqZg@mail.gmail.com>
-To: Lei YU <mine260309@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
-Subject: Re: [meta-oe][PATCH] googletest: move to release 1.10.0
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD04.g08.fujitsu.local (10.167.33.200) To
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: E4A1A4CE1BEC.ABE77
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][zeus][PATCH] libsdl: Refresh patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +39,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Nov 2019 05:03:54 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 25 Nov 2019 06:05:43 -0000
+Content-Type: text/plain
 
-On Sun, Nov 24, 2019 at 7:41 PM Lei YU <mine260309@gmail.com> wrote:
->
-> On Mon, Nov 25, 2019 at 11:08 AM Adrian Bunk <bunk@stusta.de> wrote:
-> >
-> > On Thu, Nov 21, 2019 at 01:45:33PM +0800, Lei YU wrote:
-> > > The googletest recipe was using 1.8.1 tag, and in the recipe it was
-> > > using the git revision instead of the tag release.
-> > >
-> > > Rename it to googletest_git.bb and use the 1.10.0 release revision to
-> > > get the latest release.
-> > >...
-> >
-> > When removing the version from the recipe name you have to set PV manually.
->
-> Fixed and sent v2 patch.
+Refresh CVE-2019-7577.patch as it can't be applyed when using PATCHTOOL = "patch".
 
-Thanks, I have rebased this one on top of v1, as v1 was already merged.
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ .../libsdl/libsdl-1.2.15/CVE-2019-7577.patch       | 55 ++++++++++------------
+ 1 file changed, 25 insertions(+), 30 deletions(-)
 
-> Thanks.
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7577.patch b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7577.patch
+index 92e40ae..63680b8 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7577.patch
++++ b/meta-oe/recipes-graphics/libsdl/libsdl-1.2.15/CVE-2019-7577.patch
+@@ -47,10 +47,17 @@ CVE: CVE-2019-7577
+ Upstream-Status: Backport
+ Signed-off-by: Anuj Mittal <anuj.mittal@intel.com>
+ 
+-diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
+---- a/src/audio/SDL_wave.c	Mon Jun 10 08:50:59 2019 -0700
+-+++ b/src/audio/SDL_wave.c	Mon Jun 10 08:54:11 2019 -0700
+-@@ -115,7 +115,7 @@
++Refresh CVE-2019-7577.patch as it can't be applyed when using PATCHTOOL = "patch".
++Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
++---
++ src/audio/SDL_wave.c | 17 ++++++++++++++++-
++ 1 file changed, 16 insertions(+), 1 deletion(-)
++
++diff --git a/src/audio/SDL_wave.c b/src/audio/SDL_wave.c
++index b4ad6c7..0bcf7e2 100644
++--- a/src/audio/SDL_wave.c
+++++ b/src/audio/SDL_wave.c
++@@ -115,7 +115,7 @@ static Sint32 MS_ADPCM_nibble(struct MS_ADPCM_decodestate *state,
+  static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
+  {
+  	struct MS_ADPCM_decodestate *state[2];
+@@ -59,7 +66,7 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
+  	Sint32 encoded_len, samplesleft;
+  	Sint8 nybble, stereo;
+  	Sint16 *coeff[2];
+-@@ -124,6 +124,7 @@
++@@ -124,6 +124,7 @@ static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
+  	/* Allocate the proper sized output buffer */
+  	encoded_len = *audio_len;
+  	encoded = *audio_buf;
+@@ -67,7 +74,7 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
+  	freeable = *audio_buf;
+  	*audio_len = (encoded_len/MS_ADPCM_state.wavefmt.blockalign) * 
+  				MS_ADPCM_state.wSamplesPerBlock*
+-@@ -141,6 +142,7 @@
++@@ -141,10 +142,14 @@ static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
+  	state[1] = &MS_ADPCM_state.state[stereo];
+  	while ( encoded_len >= MS_ADPCM_state.wavefmt.blockalign ) {
+  		/* Grab the initial information for this block */
+@@ -75,7 +82,14 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
+  		state[0]->hPredictor = *encoded++;
+  		if ( stereo ) {
+  			state[1]->hPredictor = *encoded++;
+-@@ -188,6 +190,8 @@
++ 		}
+++		if (state[0]->hPredictor >= 7 || state[1]->hPredictor >= 7) {
+++			goto invalid_predictor;
+++		}
++ 		state[0]->iDelta = ((encoded[1]<<8)|encoded[0]);
++ 		encoded += sizeof(Sint16);
++ 		if ( stereo ) {
++@@ -188,6 +193,8 @@ static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
+  		samplesleft = (MS_ADPCM_state.wSamplesPerBlock-2)*
+  					MS_ADPCM_state.wavefmt.channels;
+  		while ( samplesleft > 0 ) {
+@@ -84,7 +98,7 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
+  			nybble = (*encoded)>>4;
+  			new_sample = MS_ADPCM_nibble(state[0],nybble,coeff[0]);
+  			decoded[0] = new_sample&0xFF;
+-@@ -209,6 +213,10 @@
++@@ -209,6 +216,14 @@ static int MS_ADPCM_decode(Uint8 **audio_buf, Uint32 *audio_len)
+  	}
+  	SDL_free(freeable);
+  	return(0);
+@@ -92,28 +106,6 @@ diff -r a6e3d2f5183e -r 416136310b88 src/audio/SDL_wave.c
+ +	SDL_SetError("Too short chunk for a MS ADPCM decoder");
+ +	SDL_free(freeable);
+ +	return(-1);
+- }
+- 
+- struct IMA_ADPCM_decodestate {
+-
+-
+-diff -r 416136310b88 -r faf9abbcfb5f src/audio/SDL_wave.c
+---- a/src/audio/SDL_wave.c	Mon Jun 10 08:54:11 2019 -0700
+-+++ b/src/audio/SDL_wave.c	Mon Jun 10 08:54:29 2019 -0700
+-@@ -147,6 +147,9 @@
+- 		if ( stereo ) {
+- 			state[1]->hPredictor = *encoded++;
+- 		}
+-+		if (state[0]->hPredictor >= 7 || state[1]->hPredictor >= 7) {
+-+			goto invalid_predictor;
+-+		}
+- 		state[0]->iDelta = ((encoded[1]<<8)|encoded[0]);
+- 		encoded += sizeof(Sint16);
+- 		if ( stereo ) {
+-@@ -217,6 +220,10 @@
+- 	SDL_SetError("Too short chunk for a MS ADPCM decoder");
+- 	SDL_free(freeable);
+- 	return(-1);
+ +invalid_predictor:
+ +	SDL_SetError("Invalid predictor value for a MS ADPCM decoder");
+ +	SDL_free(freeable);
+@@ -121,3 +113,6 @@ diff -r 416136310b88 -r faf9abbcfb5f src/audio/SDL_wave.c
+  }
+  
+  struct IMA_ADPCM_decodestate {
++-- 
++2.7.4
++
+-- 
+2.7.4
+
+
+
 
