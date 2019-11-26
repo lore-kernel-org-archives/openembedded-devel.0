@@ -1,53 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 717727FC7A
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
+	[209.85.216.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 3599F7FC93
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2019 19:49:10 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id j12so8595143plt.9
+	Tue, 26 Nov 2019 19:49:11 +0000 (UTC)
+Received: by mail-pj1-f49.google.com with SMTP id a10so8755816pju.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2019 11:49:11 -0800 (PST)
+	Tue, 26 Nov 2019 11:49:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=dC4TYWx6M8/nxdRa1gbZh+ccoyYZ88PItguXxTLlVSA=;
-	b=UkqC51g3121UUp/3hgx8AZZU9zAyv6k5e8IrTii5aTiHbDO2PB3xc79m3iZ5LIOaOm
-	QbTAbQFdiuO+o+RIbXRLCgGfbe+W67tJ4UDDi64nWB9ugyjinEQ36qqJRAPPr7yF5SMc
-	jpjaFmGmgeZA4gdpXT5N0z3kypiz0kAHP3QCoFx6T8iC4KpDm2T9posU3ab8tZLtBkNt
-	ilKXKx2bwIRmMGF8k8kqRyTzsIgr65GyBr5Q9GGADMA/YPHKEXLw8B6UNwybdTKAm6IM
-	v4WPvWM/mmc9eVwUW6x91TIPNI2Qv9ZV8LNSGFnWb5MMO00prUwM5N1WOmtt5LcquRIz
-	4Rjw==
+	bh=dQ3LdSTVglWa2umfDwdzLZsnfNNaVMLn8PmH23CizPw=;
+	b=O806L5xV5qEoqM8PQGQ4IaMLiqmlCRO2fVmh/VZm9rFrbePLXXghNTvZ6iIHRwpiXo
+	zVPmY5UG0bXxsKpFghReyFknHpuQhC7szNiDVofOglFdc0aqGg7Tnr9tD4t38SyPK2Mi
+	Q7Ut8lwd3Y8D13vMfW/id//zaa19H1VqrnBBK8gofXgB8mHfZ6Cc1MZOqkjM4ybuRUm+
+	vODhIDDZOsjGUuTrPKj8IMmpbV2l5nVNM5XcoTmfiOu98c2WEeIMWISwRreb7Zugufcb
+	JbM1NK7D6WyMK5DD2HLZl0iCWLecehGO2d5H7MJNAoQIoQF9KwnMTSyqi/fM6J614uC5
+	LLrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=dC4TYWx6M8/nxdRa1gbZh+ccoyYZ88PItguXxTLlVSA=;
-	b=c37TCe+/vzkQo5Dd1aBiCc6aBOZeGXVJ9/Pm4a9Q5fubc2X4J/mLinmHVsq37Rut1g
-	kpbtK4yplFj6EKKbCqAot8PuKJ07zQLUejw7R6fSrMj/nfhUnihmuyXFftH1NwtGjh5k
-	0wWxp1G1Fqo0Dbwa3QRnz5y1pgVsVdLQ15ujSmT1oGwtL/Q+a+LpY+iF/RW3YWcO+gys
-	kiA+jtsTRDo2esiMFo9bzHbQCknMu+aQ90PcVxC6Yi+Yj+NuQn5RlKkq7WnCsvVW2tIm
-	Vb737ebxVNdp0WCGhDhsX8aoSfS9bxNSh5fYNzEnCWQXFNUr8TayT/hLebiiqqljXYb5
-	Xzew==
-X-Gm-Message-State: APjAAAXvQzHe7F4HzDOE7jOzdF5OVPpSaKAnJv51hul4rizLN3V9rUkj
-	mH7q5AMSmN8YFczaaNWFu/acvlFxFhU=
-X-Google-Smtp-Source: APXvYqyxB6QuCFR5u0TWr4EZd/SOZLdidnZZc4ewHtqqM44N/OdWXEcNuCaEWX2FzpTAFE4w6rkItA==
-X-Received: by 2002:a17:90a:d352:: with SMTP id
-	i18mr1127296pjx.42.1574797751040; 
+	bh=dQ3LdSTVglWa2umfDwdzLZsnfNNaVMLn8PmH23CizPw=;
+	b=HKZJ0Fh2t7X3xlMqCIjovVnZAx6UW6q/ZRFeY7uOLZiWNafwo6jtJJHmg+d23uPjwv
+	ok3xabqMYOFZCp4U2wog0w3BfqyFa8f2NHHUTCYIpdnaUXbmMAiBtfNQfYmywXvNI8lj
+	mp0yzDYCwSaPuPdDPjSJNtlm8Weu3l7ZAcy8F2S2t3nX3+8n/X1vpqW2AAN+QfdkElEe
+	zA5mDyWcG4DXS1Cm+6qXEf9VYRXc/FutF2zKM+a2fDHGHpdVXa9inHriacG0QC4psukZ
+	nvTdujANfKoal5NGipmvNDH4UBAvYXNKOi9f4DAmdmO4Mka1Fjqz4nBb6ERH8J6mIkI/
+	eL8A==
+X-Gm-Message-State: APjAAAUoHyq9GBBsKBL0/hGO6Cd3V5Rxe0i2pX9BAhq6+il/0C7rCN5m
+	95RZKJVppMQYnN1qL6tEM3k86k/VcTg=
+X-Google-Smtp-Source: APXvYqy7jIGk7U4JupPn2NKoJw9s1EzUcRVDi5s9xu0P575Njc5Xb1XiTXzfTZHYSqYq19+4FW6AfQ==
+X-Received: by 2002:a17:90a:868b:: with SMTP id
+	p11mr1090416pjn.60.1574797751785; 
 	Tue, 26 Nov 2019 11:49:11 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::e439])
 	by smtp.gmail.com with ESMTPSA id
-	b17sm13971474pfr.17.2019.11.26.11.49.10
+	b17sm13971474pfr.17.2019.11.26.11.49.11
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 26 Nov 2019 11:49:10 -0800 (PST)
+	Tue, 26 Nov 2019 11:49:11 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Nov 2019 11:48:57 -0800
-Message-Id: <20191126194858.2002923-2-raj.khem@gmail.com>
+Date: Tue, 26 Nov 2019 11:48:58 -0800
+Message-Id: <20191126194858.2002923-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <20191126194858.2002923-1-raj.khem@gmail.com>
 References: <20191126194858.2002923-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/3] pidgin: Use python3
+Subject: [meta-oe][PATCH 3/3] jack: Replace using python2 with python3 during build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,35 +60,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Nov 2019 19:49:10 -0000
+X-List-Received-Date: Tue, 26 Nov 2019 19:49:11 -0000
 Content-Transfer-Encoding: 8bit
-
-Fixes python-sipe build failures e.g.
-../../../pidgin-sipe-1.25.0/src/purple/purple-dbus.h:33:10: fatal error: dbus-server.h: No such file or directory
-| #include "dbus-server.h"
-|          ^~~~~~~~~~~~~~~
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...waf-Use-Python-3-instead-of-Python-2.patch | 24 +++++++++++++++++++
+ meta-oe/recipes-multimedia/jack/jack_git.bb   |  4 +++-
+ 2 files changed, 27 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-multimedia/jack/jack/0001-waf-Use-Python-3-instead-of-Python-2.patch
 
-diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb b/meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb
-index b094ba25e4..b4944258fa 100644
---- a/meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb
-+++ b/meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb
-@@ -2,9 +2,9 @@ SUMMARY = "multi-protocol instant messaging client"
- SECTION = "x11/network"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
--DEPENDS = "python virtual/libintl intltool-native libxml2 gconf glib-2.0-native"
-+DEPENDS = "python3 virtual/libintl intltool-native libxml2 gconf glib-2.0-native"
+diff --git a/meta-oe/recipes-multimedia/jack/jack/0001-waf-Use-Python-3-instead-of-Python-2.patch b/meta-oe/recipes-multimedia/jack/jack/0001-waf-Use-Python-3-instead-of-Python-2.patch
+new file mode 100644
+index 0000000000..9a2f07d3be
+--- /dev/null
++++ b/meta-oe/recipes-multimedia/jack/jack/0001-waf-Use-Python-3-instead-of-Python-2.patch
+@@ -0,0 +1,24 @@
++From fac214660ba173043fc19a5e81f9312e0466c0e2 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 26 Nov 2019 11:44:50 -0800
++Subject: [PATCH] waf: Use Python 3 instead of Python 2
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ waf | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/waf b/waf
++index a2efc852..037d20b1 100755
++--- a/waf
+++++ b/waf
++@@ -1,4 +1,4 @@
++-#!/usr/bin/env python
+++#!/usr/bin/env python3
++ # encoding: latin-1
++ # Thomas Nagy, 2005-2018
++ #
++-- 
++2.24.0
++
+diff --git a/meta-oe/recipes-multimedia/jack/jack_git.bb b/meta-oe/recipes-multimedia/jack/jack_git.bb
+index 9f7d5b0b61..dc30ceb461 100644
+--- a/meta-oe/recipes-multimedia/jack/jack_git.bb
++++ b/meta-oe/recipes-multimedia/jack/jack_git.bb
+@@ -14,7 +14,9 @@ LIC_FILES_CHKSUM = " \
  
--inherit autotools gettext pkgconfig gconf perlnative
-+inherit autotools gettext pkgconfig gconf perlnative python3native
+ DEPENDS = "libsamplerate0 libsndfile1 readline"
  
- SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
+-SRC_URI = "git://github.com/jackaudio/jack2.git"
++SRC_URI = "git://github.com/jackaudio/jack2.git \
++           file://0001-waf-Use-Python-3-instead-of-Python-2.patch \
++"
+ SRCREV = "37250ff470277f9947fbf3ba738f943053e30525"
+ PV = "1.9.13"
+ S = "${WORKDIR}/git"
 -- 
 2.24.0
 
