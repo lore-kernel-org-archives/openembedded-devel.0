@@ -1,24 +1,31 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D28A47FCE1
+Return-Path: <uol@pengutronix.de>
+X-Greylist: delayed 1003 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 26 Nov 2019 08:43:46 UTC
+Received: from metis.ext.pengutronix.de (metis.ext.pengutronix.de
+	[85.220.165.71])
+	by mail.openembedded.org (Postfix) with ESMTP id AD65E7EE86
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2019 07:41:46 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xAQ7fldi029505
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2019 23:41:47 -0800 (PST)
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Mon, 25 Nov 2019 23:41:47 -0800
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Nov 2019 15:41:46 +0800
-Message-ID: <20191126074146.7184-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Tue, 26 Nov 2019 08:43:46 +0000 (UTC)
+Received: from dude.hi.pengutronix.de ([2001:67c:670:100:1d::7])
+	by metis.ext.pengutronix.de with esmtps
+	(TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.92)
+	(envelope-from <uol@pengutronix.de>)
+	id 1iZWBb-0003z6-ST; Tue, 26 Nov 2019 09:27:03 +0100
+Received: from uol by dude.hi.pengutronix.de with local (Exim 4.92)
+	(envelope-from <uol@pengutronix.de>)
+	id 1iZWBb-0001ei-Gw; Tue, 26 Nov 2019 09:27:03 +0100
+From: =?UTF-8?q?Ulrich=20=C3=96lmann?= <u.oelmann@pengutronix.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 26 Nov 2019 09:26:56 +0100
+Message-Id: <20191126082656.6303-1-u.oelmann@pengutronix.de>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Subject: [meta-python][PATCH V2] python3-pid: upgrade to 2.2.5
+X-SA-Exim-Connect-IP: 2001:67c:670:100:1d::7
+X-SA-Exim-Mail-From: uol@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.ext.pengutronix.de);
+	SAEximRunCond expanded to false
+X-PTX-Original-Recipient: openembedded-devel@lists.openembedded.org
+Subject: [PATCH] python3-yarl: add missing dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,77 +38,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Nov 2019 07:41:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 26 Nov 2019 08:43:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-0001-remove-requirement-of-nose.patch is removed as new version
-has also removed such dependency.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Ulrich Ölmann <u.oelmann@pengutronix.de>
 ---
- .../0001-remove-requirement-of-nose.patch     | 29 -------------------
- ...hon3-pid_2.2.0.bb => python3-pid_2.2.5.bb} |  8 ++---
- 2 files changed, 2 insertions(+), 35 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
- rename meta-python/recipes-devtools/python/{python3-pid_2.2.0.bb => python3-pid_2.2.5.bb} (57%)
+ meta-python/recipes-devtools/python/python-yarl.inc | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch b/meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
-deleted file mode 100644
-index 3beef0700..000000000
---- a/meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 04d04a8fa1ef3d8dbdaebbaac9ae936e1c8234c1 Mon Sep 17 00:00:00 2001
--From: Hongxu Jia <hongxu.jia@windriver.com>
--Date: Wed, 28 Jun 2017 21:17:43 -0400
--Subject: [PATCH] remove requirement of nose
--
--The nose extends unittest to make testing easier.
--Do not need the test suite, so remove requirement of nose.
--
--Upstream-Status: Inappropriate [oe specific]
--
--Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-----
-- setup.py | 2 --
-- 1 file changed, 2 deletions(-)
--
--diff --git a/setup.py b/setup.py
--index 3f7c7cb..c42a546 100644
----- a/setup.py
--+++ b/setup.py
--@@ -53,6 +53,4 @@ setup(
--     keywords='pid pidfile context manager decorator',
--     packages=["pid"],
--     install_requires=[],
---    test_suite='nose.collector',
---    setup_requires=['nose>=1.0'],
-- )
---- 
--2.8.1
--
-diff --git a/meta-python/recipes-devtools/python/python3-pid_2.2.0.bb b/meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
-similarity index 57%
-rename from meta-python/recipes-devtools/python/python3-pid_2.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
-index e43831989..b8dd0d747 100644
---- a/meta-python/recipes-devtools/python/python3-pid_2.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
-@@ -4,11 +4,7 @@ HOMEPAGE = "https://github.com/trbs/pid/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=83d53cbd3105063f20305bc313464e29"
+diff --git a/meta-python/recipes-devtools/python/python-yarl.inc b/meta-python/recipes-devtools/python/python-yarl.inc
+index 49b5a607b557..ea555418a2e7 100644
+--- a/meta-python/recipes-devtools/python/python-yarl.inc
++++ b/meta-python/recipes-devtools/python/python-yarl.inc
+@@ -8,3 +8,7 @@ SRC_URI[sha256sum] = "024ecdc12bc02b321bc66b41327f930d1c2c543fa9a561b39861da9388
  
--SRC_URI[md5sum] = "04d30308013d16aa882b3806feda8ab2"
--SRC_URI[sha256sum] = "d8bb2ceec21a4ae84be6e9d320db1f56934b30e676e31c6f098ca7218b3d67d4"
-+SRC_URI[md5sum] = "ad352ee1dc28b9746a15451c0c53e9d7"
-+SRC_URI[sha256sum] = "96eb7dba326b88f5164bc1afdc986c7793e0d32d7f62366256a3903c7b0614ef"
- 
- inherit pypi setuptools3
--
--SRC_URI += " \
--    file://0001-remove-requirement-of-nose.patch \
--"
+ PYPI_PACKAGE = "yarl"
+ inherit pypi
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-multidict \
++    ${PYTHON_PN}-idna \
++"
 -- 
-2.17.1
+2.24.0
 
 
