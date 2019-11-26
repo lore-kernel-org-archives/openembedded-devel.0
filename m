@@ -1,46 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E39CE7FBCD
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+	[209.85.210.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E22E7FAAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2019 22:38:36 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id d13so17745692qko.3
+	Tue, 26 Nov 2019 23:30:03 +0000 (UTC)
+Received: by mail-pf1-f174.google.com with SMTP id q13so9982812pff.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2019 14:38:38 -0800 (PST)
+	Tue, 26 Nov 2019 15:30:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=fTx5rBMjhVjLi7d2yIEn8rTubcC5h3T1hNKvRsVfWDs=;
-	b=ZTqfAo13fc138X95b023LcY3IRKfROGcbVN0lfZ9uusHw7sx83ZtPXH4+xTgBJwHXm
-	G6h2spNH2FB5ANzrCH/Go4dgeC3KjSYyoULh4D6ub6f25vBizgZWO9h9YBYswzQhlNDs
-	pItWyEn4acRvRW5EHbdhsiAYEJRzfGDiU0lLodxVANi2Gq89BGwbwH5R7l60SgK7nvwk
-	KTzX7qouXMG/MvoNPlYjIGyKSyilzsQGEpEOH/eZOu8sfyl4rWCxYGPvoV6Ft7CDl+vP
-	b9DPEIdf66UQdNl0KlZVDT13DlRG3ZGrPXyQntWss5Y6/ifH+gggNvvpY2mN40SKpfjN
-	PtxA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=IgI8O8od0hH8X5AiueNMOMgdUh95tvm39NqVNlCxZCc=;
+	b=OSZxh2v43kH1iHI/jbK6OO7e4N/aPotHXpe/8Dp5Q3EDvJYFvpgvUolNCotdrKKHwP
+	rJmE7bZJSeecCfLlFRCYwvWvnNZZhTKVTnl5Lv8t7d4wlWoaUp5Fgfv9oQZeRzz+RBi4
+	NES3b/ZS8ikmB3VQ6GIkXKwiZht6HIndfrFni3JWEu3wBGLaSnHZhyzrSv6871MEVzco
+	/t2ZCJq6mMOkT5VxACzJZfQISiCrAYLnolbdViD3OUd6jEN9jjjVgmQs40y3OaV73j9O
+	3QnLa5ETYulD/pXNXO4B69Ply5R2FG7zbSaWXKQi4L1+HQRWAA/LVNKwndWauDS9LUxG
+	Zi7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=fTx5rBMjhVjLi7d2yIEn8rTubcC5h3T1hNKvRsVfWDs=;
-	b=i56TpXvbvbGr8vvTvi3VWoWmo9QQLDT3KlbGqebeTtw3tFe+O8MqNScKj3rpKH8UXc
-	TG7dJvMrg++n9k/1rGZV3ikeoDt/8n6gtTtV3fMVWbV2Rz63wHmGrfVgek8iJQ06cNxs
-	4DE1z3ekZptl1fYTevHGLa2je17YP0OMt0BI93A3f2LuHPvOuZ8Rqaen1RVc1K+DvYqd
-	3haaPi247t4JGykHn9SjsNtN23AznITRZ1dFRi29+/J8cx7eIz9YRKkYwVHJMRXpc2Q1
-	Ml56SKh9A95eXJlZUUhENX+DKUwvjVkdQe05Lz0QcT/vRRmbbGdwwhtZ6LBrJHcLM6h2
-	qfJg==
-X-Gm-Message-State: APjAAAUR3YctMxO3so5AQ4PU6biu05oiwpJKJmP1NXwgv8FxycoVlzw0
-	SJZUtK1HFbpYrgX/RDHiZxGw/xVKjLMp1bbksKg=
-X-Google-Smtp-Source: APXvYqxk2SaVvVnmPYBHe0LaoVfDXDgdQqy3Re/ueTY3DrIcYRUwD1rRLDsDA90lQtwR1vaosk6GMDFLDp2LY5u4/Zs=
-X-Received: by 2002:a37:bf82:: with SMTP id p124mr900799qkf.337.1574807917533; 
-	Tue, 26 Nov 2019 14:38:37 -0800 (PST)
-MIME-Version: 1.0
-References: <20191126210206.15650-1-ross.burton@intel.com>
-In-Reply-To: <20191126210206.15650-1-ross.burton@intel.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=IgI8O8od0hH8X5AiueNMOMgdUh95tvm39NqVNlCxZCc=;
+	b=CJ9zSs+LJtPMP+tdqxEwnYEk4v7SoZlYUnWZodgPq6KzezfUyyCpnpUEWQf0gBuCQR
+	sLSnV+yOlvymLWr67poetIWcOhq3NcAKXNQ1qRHPqO55pwk8orxgva2CcvyKHzz2iwUx
+	NdMB8SRpV4H75UY2y92XdA4mpkduuB6+lJrPjwDqh9sjDV3dblFZnTeNtDYoUaS+ZcUQ
+	yUBrRjqyQ7DGr0PmXoghKfwAKo+Vs2Vd+TIxHQj72S2vrUY7V28hwFLm0SvjGnj0bM28
+	f0TH+1OE00gAizYBUkB0F8+4G/eNqIpFOW0AimtChOqZ/fU1XMhNqMCcCe3vZMGZ4AYJ
+	vauQ==
+X-Gm-Message-State: APjAAAW0WOAGNDdtROkJbgBU2FFR+G4zOqaNGGaWodi6dbs0U6Iy3jG8
+	H7uzl8qiQ2zokM5KC6zUoKIjN1GmyUI=
+X-Google-Smtp-Source: APXvYqy9yc6Naneubb2wVem91rtwFv22cMj4vXcHQpLhx95Ir5JwJetHBWq9ra8ycu2J67JNEgE1SA==
+X-Received: by 2002:a63:1013:: with SMTP id f19mr1188954pgl.289.1574811003600; 
+	Tue, 26 Nov 2019 15:30:03 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::e439])
+	by smtp.gmail.com with ESMTPSA id
+	d38sm13524267pgd.59.2019.11.26.15.30.02
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 26 Nov 2019 15:30:03 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 26 Nov 2019 14:38:10 -0800
-Message-ID: <CAMKF1srh--y6WWUA+LoW0gK2nFR6tjAaWc1Qz93uupaPX5ZV+g@mail.gmail.com>
-To: Ross Burton <ross.burton@intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] htop: use Python 3
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 26 Nov 2019 15:29:52 -0800
+Message-Id: <20191126232952.3723066-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH v2] mercurial: Upgrade to 5.2 and switch to py3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,61 +57,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Nov 2019 22:38:38 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 26 Nov 2019 23:30:03 -0000
+Content-Transfer-Encoding: 8bit
 
-I had similar fix staged
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+v2: Fix python path during target build
 
-On Tue, Nov 26, 2019 at 1:02 PM Ross Burton <ross.burton@intel.com> wrote:
->
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
-> ---
->  meta-oe/recipes-support/htop/files/py3.patch | 15 +++++++++++++++
->  meta-oe/recipes-support/htop/htop_2.2.0.bb   |  3 ++-
->  2 files changed, 17 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-support/htop/files/py3.patch
->
-> diff --git a/meta-oe/recipes-support/htop/files/py3.patch b/meta-oe/recipes-support/htop/files/py3.patch
-> new file mode 100644
-> index 0000000000..fd28d51d5c
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/htop/files/py3.patch
-> @@ -0,0 +1,15 @@
-> +Use Python 3 explicitly instead of python, which we don't export to HOSTTOOL.
-> +
-> +Upstream-Status: Pending
-> +Signed-off-by: Ross Burton <ross.burton@intel.com>
-> +
-> +diff --git a/scripts/MakeHeader.py b/scripts/MakeHeader.py
-> +index 349531b..3336dea 100755
-> +--- a/scripts/MakeHeader.py
-> ++++ b/scripts/MakeHeader.py
-> +@@ -1,4 +1,4 @@
-> +-#!/usr/bin/env python
-> ++#!/usr/bin/env python3
-> + import os, sys, string, io
-> + try:
-> +    from StringIO import StringIO
-> diff --git a/meta-oe/recipes-support/htop/htop_2.2.0.bb b/meta-oe/recipes-support/htop/htop_2.2.0.bb
-> index 01c856d123..5724c5b8c6 100644
-> --- a/meta-oe/recipes-support/htop/htop_2.2.0.bb
-> +++ b/meta-oe/recipes-support/htop/htop_2.2.0.bb
-> @@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
->  DEPENDS = "ncurses"
->
->  SRC_URI = "http://hisham.hm/htop/releases/${PV}/${BP}.tar.gz \
-> -           file://0001-Use-pkg-config.patch"
-> +           file://0001-Use-pkg-config.patch \
-> +           file://py3.patch"
->  SRC_URI[md5sum] = "0d816b6beed31edc75babcfbf863ffa8"
->  SRC_URI[sha256sum] = "d9d6826f10ce3887950d709b53ee1d8c1849a70fa38e91d5896ad8cbc6ba3c57"
->
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+ .../{mercurial_4.6.1.bb => mercurial_5.2.bb}   | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+ rename meta-oe/recipes-devtools/mercurial/{mercurial_4.6.1.bb => mercurial_5.2.bb} (56%)
+
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial_5.2.bb
+similarity index 56%
+rename from meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
+rename to meta-oe/recipes-devtools/mercurial/mercurial_5.2.bb
+index 13710aaea3..713685d0f7 100644
+--- a/meta-oe/recipes-devtools/mercurial/mercurial_4.6.1.bb
++++ b/meta-oe/recipes-devtools/mercurial/mercurial_5.2.bb
+@@ -3,29 +3,33 @@ HOMEPAGE = "http://mercurial.selenic.com/"
+ SECTION = "console/utils"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-DEPENDS = "python python-native"
+-DEPENDS_class-native = "python-native"
+-RDEPENDS_${PN} = "python python-modules"
+ 
+-inherit python-dir
++DEPENDS = "python3 python3-native"
++RDEPENDS_${PN} = "python3 python3-modules"
++
++inherit python3native
+ 
+ SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
+-SRC_URI[md5sum] = "f9b2e4a3b5901ef744fa3abe4196e97e"
+-SRC_URI[sha256sum] = "89fa8ecbc8aa6e48e98f9803a1683ba91367124295dba2407b28c34ca621108d"
++SRC_URI[md5sum] = "9ba9d59157c002db8d8cab680de08eb5"
++SRC_URI[sha256sum] = "ff030e923f03ee15c91191996fcb099bfcfa60c7df263be227f67b6a65d36194"
+ 
+ S = "${WORKDIR}/mercurial-${PV}"
+ 
+ BBCLASSEXTEND = "native"
+ 
++export LDSHARED="${CCLD} -shared"
++
+ EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
+     PREFIX=${prefix}"
+ 
+ do_configure_append () {
+-    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
++    sed -i -e 's:PYTHON?=python:PYTHON?=python3:g' ${S}/Makefile
+ }
+ 
+ do_install () {
+     oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
++    sed -i -e 's:${STAGING_BINDIR_NATIVE}/python3-native/python3:${USRBINPATH}/env python3:g' ${D}${bindir}/hg
+ }
+ 
+ FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
++
+-- 
+2.24.0
+
 
