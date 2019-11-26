@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
-	[209.85.214.178])
-	by mail.openembedded.org (Postfix) with ESMTP id E54E97FC7A
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 717727FC7A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2019 19:49:09 +0000 (UTC)
-Received: by mail-pl1-f178.google.com with SMTP id h13so8619659plr.1
+	Tue, 26 Nov 2019 19:49:10 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id j12so8595143plt.9
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 26 Nov 2019 11:49:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=u8hN8OugfamKtFktGLpDziEPFv710F1KqIXYMG/3S0M=;
-	b=ZMxlKCkTg9kg5W6zZqwv6JivwEk+i6slHAOKboFaGUxHYylhK+PAVNEtjVGlu4Zgfk
-	JYhTfccr+MJt2aMpv6yzfz+P6HIaLNrcwwaizYWhFFEfLIXhXmXHKEf2xAgeLUtwXm6r
-	g+cpz7q/oNCAliWCl8UI/EZtR1xTS0ws+IHRxO4hvE+NLSxGC4xrQ1xw/KOdb1eK/KM1
-	+n4Q+csCT22Ccm14Jvyh0a85QUphrb7aNl9vb/nvkHEOdHFCj1PpJfWn6uIRQX12gvhf
-	hpzan3Ehxo8qEdEH7DNLy3OX+MQ/huJWBKW3xeTyBh3xgPPhf2Rgw1gkQZMCHSfM2F0j
-	dyig==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=dC4TYWx6M8/nxdRa1gbZh+ccoyYZ88PItguXxTLlVSA=;
+	b=UkqC51g3121UUp/3hgx8AZZU9zAyv6k5e8IrTii5aTiHbDO2PB3xc79m3iZ5LIOaOm
+	QbTAbQFdiuO+o+RIbXRLCgGfbe+W67tJ4UDDi64nWB9ugyjinEQ36qqJRAPPr7yF5SMc
+	jpjaFmGmgeZA4gdpXT5N0z3kypiz0kAHP3QCoFx6T8iC4KpDm2T9posU3ab8tZLtBkNt
+	ilKXKx2bwIRmMGF8k8kqRyTzsIgr65GyBr5Q9GGADMA/YPHKEXLw8B6UNwybdTKAm6IM
+	v4WPvWM/mmc9eVwUW6x91TIPNI2Qv9ZV8LNSGFnWb5MMO00prUwM5N1WOmtt5LcquRIz
+	4Rjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=u8hN8OugfamKtFktGLpDziEPFv710F1KqIXYMG/3S0M=;
-	b=RGUoyHS8Mh5A17PRjgqjlB5lD0l/6rj92PKobZ8Yib7/wCadOQNusSsq381gSYgrgB
-	pww2UZVUxFuOsAZQ/5S0kY1eVTolGHea19vB88mGn6C/xXpKaivK2EJuPRN6u85vsxUf
-	TYxlrpNMMMYPtKdV4Fp9ZJwZ4jwcREewFiFwlMd93y7n5N5Z63TwBZSTRpOAwz2NQ3Je
-	R6OUk1luL1oMPvsncZ9z/w87eIywBTT2NJmkOZyCI1ez5Wsg94b4M9gKzR2Z8IOhJIDB
-	LIct/bIlCRtMGRPrksc5rFjPchMcLWBFrKmpDrB3y6kNgz+4hiLdAr5V//B15iG8Kymb
-	U9uA==
-X-Gm-Message-State: APjAAAX5nxF+7lYR5wLygQ3qk1+1KngoO6UNoZfN2v7MVlL8g6Gym6yk
-	XOBFP9eH+w3josqBzl0Jna/wPH0nMP8=
-X-Google-Smtp-Source: APXvYqzIQ1ja3ElnZX+uhgnv9rcDZkNRlawgncR+6CyAahmCn/EtERqO1P1dco1qxgvauMX0aMoUBw==
-X-Received: by 2002:a17:90a:3663:: with SMTP id
-	s90mr1058170pjb.1.1574797750380; 
-	Tue, 26 Nov 2019 11:49:10 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=dC4TYWx6M8/nxdRa1gbZh+ccoyYZ88PItguXxTLlVSA=;
+	b=c37TCe+/vzkQo5Dd1aBiCc6aBOZeGXVJ9/Pm4a9Q5fubc2X4J/mLinmHVsq37Rut1g
+	kpbtK4yplFj6EKKbCqAot8PuKJ07zQLUejw7R6fSrMj/nfhUnihmuyXFftH1NwtGjh5k
+	0wWxp1G1Fqo0Dbwa3QRnz5y1pgVsVdLQ15ujSmT1oGwtL/Q+a+LpY+iF/RW3YWcO+gys
+	kiA+jtsTRDo2esiMFo9bzHbQCknMu+aQ90PcVxC6Yi+Yj+NuQn5RlKkq7WnCsvVW2tIm
+	Vb737ebxVNdp0WCGhDhsX8aoSfS9bxNSh5fYNzEnCWQXFNUr8TayT/hLebiiqqljXYb5
+	Xzew==
+X-Gm-Message-State: APjAAAXvQzHe7F4HzDOE7jOzdF5OVPpSaKAnJv51hul4rizLN3V9rUkj
+	mH7q5AMSmN8YFczaaNWFu/acvlFxFhU=
+X-Google-Smtp-Source: APXvYqyxB6QuCFR5u0TWr4EZd/SOZLdidnZZc4ewHtqqM44N/OdWXEcNuCaEWX2FzpTAFE4w6rkItA==
+X-Received: by 2002:a17:90a:d352:: with SMTP id
+	i18mr1127296pjx.42.1574797751040; 
+	Tue, 26 Nov 2019 11:49:11 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::e439])
 	by smtp.gmail.com with ESMTPSA id
-	b17sm13971474pfr.17.2019.11.26.11.49.09
+	b17sm13971474pfr.17.2019.11.26.11.49.10
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 26 Nov 2019 11:49:09 -0800 (PST)
+	Tue, 26 Nov 2019 11:49:10 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Nov 2019 11:48:56 -0800
-Message-Id: <20191126194858.2002923-1-raj.khem@gmail.com>
+Date: Tue, 26 Nov 2019 11:48:57 -0800
+Message-Id: <20191126194858.2002923-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.0
+In-Reply-To: <20191126194858.2002923-1-raj.khem@gmail.com>
+References: <20191126194858.2002923-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/3] htop: Use python3
+Subject: [meta-oe][PATCH 2/3] pidgin: Use python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,68 +61,34 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 26 Nov 2019 19:49:10 -0000
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Fixes
-| ../htop-2.2.0/scripts/MakeHeader.py ../htop-2.2.0/CategoriesPanel.c
-| ../htop-2.2.0/scripts/MakeHeader.py ../htop-2.2.0/MainPanel.c
-| /usr/bin/env: ‘python’: No such file or directory
+Fixes python-sipe build failures e.g.
+../../../pidgin-sipe-1.25.0/src/purple/purple-dbus.h:33:10: fatal error: dbus-server.h: No such file or directory
+| #include "dbus-server.h"
+|          ^~~~~~~~~~~~~~~
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Ask-for-python3-specifically.patch   | 26 +++++++++++++++++++
- meta-oe/recipes-support/htop/htop_2.2.0.bb    |  4 ++-
- 2 files changed, 29 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/htop/files/0001-Ask-for-python3-specifically.patch
+ meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/htop/files/0001-Ask-for-python3-specifically.patch b/meta-oe/recipes-support/htop/files/0001-Ask-for-python3-specifically.patch
-new file mode 100644
-index 0000000000..6153bdedbe
---- /dev/null
-+++ b/meta-oe/recipes-support/htop/files/0001-Ask-for-python3-specifically.patch
-@@ -0,0 +1,26 @@
-+From 08aca4816cc798fce58b6235c26585a0063fa8af Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 26 Nov 2019 10:43:49 -0800
-+Subject: [PATCH] Ask for python3 specifically
-+
-+python2 is on its way out
-+
-+Upstream-Status: Submitted [https://github.com/hishamhm/htop/pull/968]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ scripts/MakeHeader.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/scripts/MakeHeader.py b/scripts/MakeHeader.py
-+index 7c48fdd..7a7586d 100755
-+--- a/scripts/MakeHeader.py
-++++ b/scripts/MakeHeader.py
-+@@ -1,4 +1,4 @@
-+-#!/usr/bin/env python
-++#!/usr/bin/env python3
-+ import os, sys, string, io
-+ try:
-+    from StringIO import StringIO
-+-- 
-+2.24.0
-+
-diff --git a/meta-oe/recipes-support/htop/htop_2.2.0.bb b/meta-oe/recipes-support/htop/htop_2.2.0.bb
-index 01c856d123..64eb0c571f 100644
---- a/meta-oe/recipes-support/htop/htop_2.2.0.bb
-+++ b/meta-oe/recipes-support/htop/htop_2.2.0.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
- DEPENDS = "ncurses"
+diff --git a/meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb b/meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb
+index b094ba25e4..b4944258fa 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb
++++ b/meta-oe/recipes-support/pidgin/pidgin_2.13.0.bb
+@@ -2,9 +2,9 @@ SUMMARY = "multi-protocol instant messaging client"
+ SECTION = "x11/network"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-DEPENDS = "python virtual/libintl intltool-native libxml2 gconf glib-2.0-native"
++DEPENDS = "python3 virtual/libintl intltool-native libxml2 gconf glib-2.0-native"
  
- SRC_URI = "http://hisham.hm/htop/releases/${PV}/${BP}.tar.gz \
--           file://0001-Use-pkg-config.patch"
-+           file://0001-Use-pkg-config.patch \
-+           file://0001-Ask-for-python3-specifically.patch \
-+           "
- SRC_URI[md5sum] = "0d816b6beed31edc75babcfbf863ffa8"
- SRC_URI[sha256sum] = "d9d6826f10ce3887950d709b53ee1d8c1849a70fa38e91d5896ad8cbc6ba3c57"
+-inherit autotools gettext pkgconfig gconf perlnative
++inherit autotools gettext pkgconfig gconf perlnative python3native
  
+ SRC_URI = "\
+     ${SOURCEFORGE_MIRROR}/pidgin/pidgin-${PV}.tar.bz2 \
 -- 
 2.24.0
 
