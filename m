@@ -1,50 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
-	[209.85.216.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C8607FCF9
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6935E7F587
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2019 22:21:31 +0000 (UTC)
-Received: by mail-pj1-f68.google.com with SMTP id o14so7278193pjr.0
+	Tue, 26 Nov 2019 05:42:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xAQ5g8Kn028380
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2019 14:21:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=O0kYbktuV9swadEJI+46bTs87dsTHKIWXg4FTvRE5gE=;
-	b=Z0d/82FQWsQ5oy1OSUoB4XSY0VbnbgTkmM6r8/nwHj2Hh5T2j0CoKYUDHc2WcklgPj
-	N+OWXcny56qWlz78JogW9cuxFimj8fXj9ts49oXvhH1yB3vnjt5g4IpVgtVsIL9ObXK6
-	LuqL7Fea8mhO2R8c2w4vjvlv5dqwZHvl1i58HJ+cvxk+mb9oW7184jCR2tyd8vM3EJ66
-	X5NDJZGJg4dVWuzL3QgjjMZTOaG89z/RRZ/jdiqysIQ8K4G/rf6Nps4/QC3xu+NEdPVw
-	1gAt5carJHlzJRgv4OwLfCBSJQGuGIdXgXL2nfUrjiVKtfsUEP9TMZQYukgmH12RYIUr
-	G4XQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=O0kYbktuV9swadEJI+46bTs87dsTHKIWXg4FTvRE5gE=;
-	b=VbGx0d2NB3tdWnO4sMlzMZE/sOQLX+SSUxaLFgQQtaSwJpuooVPGOHNz02A8RQuXac
-	DffMc6rM8By0ClqQZ6gMmfSluyeS1By2yxfX/TYHNL55UtlbM2jhSxTu+8Pmq8JSe3ci
-	K6vV55J0VE7bQvS4N37OaN5FzIgaYL+EosIEkjMPkuCQJF4wKWdf9EDAmeDBfNiHAhU9
-	ELS+G6tYY07nkax/5vjqNevgDZztJ1SzLZ624JY0d7LfPlhTVlhByg0JceSR6xe28O4b
-	pihs4itM9k2vhkbaJoSXuL53TiJru5bR1WkTYukca5A70BMitq8OfDMVRT8+yZCM9iH8
-	0/Vw==
-X-Gm-Message-State: APjAAAWxU7g2g6LabWvVTtEsPTydO0tUTHtbpaigfmRB2LIqBEocCR+X
-	5qgpB5l8V4n8T9zHpJSLRy8u7hApL6c=
-X-Google-Smtp-Source: APXvYqyTiEHtT1lsj4T/LkrYstA2sr2I2FdPb3bJIuAOv0NhD6agoFCwYWjoX+w5QaiWFa5rdWUs+Q==
-X-Received: by 2002:a17:902:8d8a:: with SMTP id
-	v10mr28145776plo.282.1574720491705; 
-	Mon, 25 Nov 2019 14:21:31 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::d61])
-	by smtp.gmail.com with ESMTPSA id 9sm9432637pfn.113.2019.11.25.14.21.30
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 25 Nov 2019 14:21:31 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Nov 2019 14:21:20 -0800
-Message-Id: <20191125222120.648324-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
+	Mon, 25 Nov 2019 21:42:09 -0800 (PST)
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Mon, 25 Nov 2019 21:42:08 -0800
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 26 Nov 2019 13:42:07 +0800
+Message-ID: <20191126054207.22420-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] packagegroup-meta-oe: Drop gperftools for mips/musl as well
+Subject: [meta-python][PATCH] python3-pid: upgrade to 2.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,33 +31,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Nov 2019 22:21:31 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 26 Nov 2019 05:42:11 -0000
+Content-Type: text/plain
 
-with [1], we now do not build gperftools for musl/mips combo as well,
-which means it should be dropped for all kind of mips builds
+0001-remove-requirement-of-nose.patch is removed as new version
+has also removed such dependency.
 
-[1] https://git.openembedded.org/meta-openembedded/commit/?id=b192e792cd0c72c19bf8f18217accf419d66b41e
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../0001-remove-requirement-of-nose.patch     | 29 -------------------
+ ...hon3-pid_2.2.0.bb => python3-pid_2.2.5.bb} |  9 ++----
+ 2 files changed, 3 insertions(+), 35 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
+ rename meta-python/recipes-devtools/python/{python3-pid_2.2.0.bb => python3-pid_2.2.5.bb} (57%)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 1f0a7b9470..310de53726 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -257,7 +257,7 @@ RDEPENDS_packagegroup-meta-oe-support ="\
-     "
+diff --git a/meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch b/meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
+deleted file mode 100644
+index 3beef0700..000000000
+--- a/meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 04d04a8fa1ef3d8dbdaebbaac9ae936e1c8234c1 Mon Sep 17 00:00:00 2001
+-From: Hongxu Jia <hongxu.jia@windriver.com>
+-Date: Wed, 28 Jun 2017 21:17:43 -0400
+-Subject: [PATCH] remove requirement of nose
+-
+-The nose extends unittest to make testing easier.
+-Do not need the test suite, so remove requirement of nose.
+-
+-Upstream-Status: Inappropriate [oe specific]
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- setup.py | 2 --
+- 1 file changed, 2 deletions(-)
+-
+-diff --git a/setup.py b/setup.py
+-index 3f7c7cb..c42a546 100644
+---- a/setup.py
+-+++ b/setup.py
+-@@ -53,6 +53,4 @@ setup(
+-     keywords='pid pidfile context manager decorator',
+-     packages=["pid"],
+-     install_requires=[],
+--    test_suite='nose.collector',
+--    setup_requires=['nose>=1.0'],
+- )
+--- 
+-2.8.1
+-
+diff --git a/meta-python/recipes-devtools/python/python3-pid_2.2.0.bb b/meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
+similarity index 57%
+rename from meta-python/recipes-devtools/python/python3-pid_2.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
+index e43831989..56fc2ad85 100644
+--- a/meta-python/recipes-devtools/python/python3-pid_2.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
+@@ -4,11 +4,8 @@ HOMEPAGE = "https://github.com/trbs/pid/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=83d53cbd3105063f20305bc313464e29"
  
- RDEPENDS_packagegroup-meta-oe-support_remove_arm ="numactl"
--RDEPENDS_packagegroup-meta-oe-support_remove_mipsarch_libc-glibc = "gperftools"
-+RDEPENDS_packagegroup-meta-oe-support_remove_mipsarch = "gperftools"
+-SRC_URI[md5sum] = "04d30308013d16aa882b3806feda8ab2"
+-SRC_URI[sha256sum] = "d8bb2ceec21a4ae84be6e9d320db1f56934b30e676e31c6f098ca7218b3d67d4"
++SRC_URI += " file://0001-remove-requirement-of-nose.patch"
++SRC_URI[md5sum] = "ad352ee1dc28b9746a15451c0c53e9d7"
++SRC_URI[sha256sum] = "96eb7dba326b88f5164bc1afdc986c7793e0d32d7f62366256a3903c7b0614ef"
  
- RDEPENDS_packagegroup-meta-oe-support-egl ="\
-     freerdp libnice opencv \
+ inherit pypi setuptools3
+-
+-SRC_URI += " \
+-    file://0001-remove-requirement-of-nose.patch \
+-"
 -- 
-2.24.0
+2.17.1
 
 
