@@ -1,24 +1,24 @@
 Return-Path: <Qi.Chen@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6935E7F587
+	by mail.openembedded.org (Postfix) with ESMTP id D28A47FCE1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2019 05:42:11 +0000 (UTC)
+	Tue, 26 Nov 2019 07:41:46 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xAQ5g8Kn028380
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xAQ7fldi029505
 	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Nov 2019 21:42:09 -0800 (PST)
+	Mon, 25 Nov 2019 23:41:47 -0800 (PST)
 Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Mon, 25 Nov 2019 21:42:08 -0800
+	14.3.468.0; Mon, 25 Nov 2019 23:41:47 -0800
 From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 26 Nov 2019 13:42:07 +0800
-Message-ID: <20191126054207.22420-1-Qi.Chen@windriver.com>
+Date: Tue, 26 Nov 2019 15:41:46 +0800
+Message-ID: <20191126074146.7184-1-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python3-pid: upgrade to 2.2.5
+Subject: [meta-python][PATCH V2] python3-pid: upgrade to 2.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Nov 2019 05:42:11 -0000
+X-List-Received-Date: Tue, 26 Nov 2019 07:41:47 -0000
 Content-Type: text/plain
 
 0001-remove-requirement-of-nose.patch is removed as new version
@@ -40,8 +40,8 @@ has also removed such dependency.
 Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
  .../0001-remove-requirement-of-nose.patch     | 29 -------------------
- ...hon3-pid_2.2.0.bb => python3-pid_2.2.5.bb} |  9 ++----
- 2 files changed, 3 insertions(+), 35 deletions(-)
+ ...hon3-pid_2.2.0.bb => python3-pid_2.2.5.bb} |  8 ++---
+ 2 files changed, 2 insertions(+), 35 deletions(-)
  delete mode 100644 meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
  rename meta-python/recipes-devtools/python/{python3-pid_2.2.0.bb => python3-pid_2.2.5.bb} (57%)
 
@@ -84,16 +84,15 @@ diff --git a/meta-python/recipes-devtools/python/python3-pid_2.2.0.bb b/meta-pyt
 similarity index 57%
 rename from meta-python/recipes-devtools/python/python3-pid_2.2.0.bb
 rename to meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
-index e43831989..56fc2ad85 100644
+index e43831989..b8dd0d747 100644
 --- a/meta-python/recipes-devtools/python/python3-pid_2.2.0.bb
 +++ b/meta-python/recipes-devtools/python/python3-pid_2.2.5.bb
-@@ -4,11 +4,8 @@ HOMEPAGE = "https://github.com/trbs/pid/"
+@@ -4,11 +4,7 @@ HOMEPAGE = "https://github.com/trbs/pid/"
  LICENSE = "Apache-2.0"
  LIC_FILES_CHKSUM = "file://LICENSE;md5=83d53cbd3105063f20305bc313464e29"
  
 -SRC_URI[md5sum] = "04d30308013d16aa882b3806feda8ab2"
 -SRC_URI[sha256sum] = "d8bb2ceec21a4ae84be6e9d320db1f56934b30e676e31c6f098ca7218b3d67d4"
-+SRC_URI += " file://0001-remove-requirement-of-nose.patch"
 +SRC_URI[md5sum] = "ad352ee1dc28b9746a15451c0c53e9d7"
 +SRC_URI[sha256sum] = "96eb7dba326b88f5164bc1afdc986c7793e0d32d7f62366256a3903c7b0614ef"
  
