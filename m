@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 580547FACA
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E39CE7FBCD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2019 22:38:17 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id p14so17715341qkm.10
+	Tue, 26 Nov 2019 22:38:36 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id d13so17745692qko.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Nov 2019 14:38:18 -0800 (PST)
+	Tue, 26 Nov 2019 14:38:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eoIBHSYNsS7ofnRSB98CvlDvOL3nvg50ZBbn9Ho0c1M=;
-	b=uErc+KvxP6EcVVHGjAeAC5LsWCONfUaYQ35MIWmV0jd4B+tbepU1D4mDurV85Fww5s
-	nomUPpHyJFwhYdvYjLuSDuRINH6EXOoosE7dj6EYPwnTj1/+Eql0IvPRXgOV7HYtec9n
-	mSsKZ2/MiR+594twwegh2V8pEVGI2QDa/OEgEqo5M/LuaTwRq8XKEg+dpstOPyDOztI7
-	9bF52+sLLyxpRKUSkdSx+s7+R3t856hTr12HJrSuL5qh6Ny36FxKBWToVXoOgtJomebR
-	MBHlBmUTI4ilRlzjYY5FvHViK3eTCUFRrGQTtVNiP+piovrdvRLmxe7eWbWRQMaaz+dN
-	CgqA==
+	:cc; bh=fTx5rBMjhVjLi7d2yIEn8rTubcC5h3T1hNKvRsVfWDs=;
+	b=ZTqfAo13fc138X95b023LcY3IRKfROGcbVN0lfZ9uusHw7sx83ZtPXH4+xTgBJwHXm
+	G6h2spNH2FB5ANzrCH/Go4dgeC3KjSYyoULh4D6ub6f25vBizgZWO9h9YBYswzQhlNDs
+	pItWyEn4acRvRW5EHbdhsiAYEJRzfGDiU0lLodxVANi2Gq89BGwbwH5R7l60SgK7nvwk
+	KTzX7qouXMG/MvoNPlYjIGyKSyilzsQGEpEOH/eZOu8sfyl4rWCxYGPvoV6Ft7CDl+vP
+	b9DPEIdf66UQdNl0KlZVDT13DlRG3ZGrPXyQntWss5Y6/ifH+gggNvvpY2mN40SKpfjN
+	PtxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=eoIBHSYNsS7ofnRSB98CvlDvOL3nvg50ZBbn9Ho0c1M=;
-	b=VXqYly/CNDAqIVZtzf1sK3uyAilouIJYG8FuOvgtk5kjtAUBpM0P9+IQ+AiEOEs8a8
-	t4/MWJhBZKhx/K3q4TCilDSWXC+JYYyj9IFNpxp1Evi+PZ4UjsxgWISll/xTyGzU+yl1
-	UBg9uUZIOxujkwZffK3bau+D1Xt8xTKx312GV3W2rDjFCM46uSbalx/SsbligPc3rqsz
-	C5vGMKN7YqyDmn/zjYJ78NyM6H5BP2xlSdGmb5cXgDZhIJSQG+4zQGpnJCU7veLcTKVe
-	DDqFm7OeVIkEDYg20C+LZY6RZVbEbKwKq3lk5lVzO0avkDoMSTfAgoBNnyQTGYLFmzJo
-	u2lQ==
-X-Gm-Message-State: APjAAAVIYtd4QbqBHosUbDh//MmF61yDEjS7ClWCMxOOSCfF+a6APqma
-	cN+4Ztr4Np+BtLKpAYKKg1Y4RFe8FMbl9cAtXH0Se+LW
-X-Google-Smtp-Source: APXvYqx5Uy1bk0Gkedj4OgHfdnZDokoFkrhNXjB0ka/kNrVuZt7qknOWdyB4aq49LVqGdN1LK5ybWIi+Gn/8McxyYeA=
-X-Received: by 2002:ae9:ef50:: with SMTP id d77mr911191qkg.71.1574807897657;
-	Tue, 26 Nov 2019 14:38:17 -0800 (PST)
+	bh=fTx5rBMjhVjLi7d2yIEn8rTubcC5h3T1hNKvRsVfWDs=;
+	b=i56TpXvbvbGr8vvTvi3VWoWmo9QQLDT3KlbGqebeTtw3tFe+O8MqNScKj3rpKH8UXc
+	TG7dJvMrg++n9k/1rGZV3ikeoDt/8n6gtTtV3fMVWbV2Rz63wHmGrfVgek8iJQ06cNxs
+	4DE1z3ekZptl1fYTevHGLa2je17YP0OMt0BI93A3f2LuHPvOuZ8Rqaen1RVc1K+DvYqd
+	3haaPi247t4JGykHn9SjsNtN23AznITRZ1dFRi29+/J8cx7eIz9YRKkYwVHJMRXpc2Q1
+	Ml56SKh9A95eXJlZUUhENX+DKUwvjVkdQe05Lz0QcT/vRRmbbGdwwhtZ6LBrJHcLM6h2
+	qfJg==
+X-Gm-Message-State: APjAAAUR3YctMxO3so5AQ4PU6biu05oiwpJKJmP1NXwgv8FxycoVlzw0
+	SJZUtK1HFbpYrgX/RDHiZxGw/xVKjLMp1bbksKg=
+X-Google-Smtp-Source: APXvYqxk2SaVvVnmPYBHe0LaoVfDXDgdQqy3Re/ueTY3DrIcYRUwD1rRLDsDA90lQtwR1vaosk6GMDFLDp2LY5u4/Zs=
+X-Received: by 2002:a37:bf82:: with SMTP id p124mr900799qkf.337.1574807917533; 
+	Tue, 26 Nov 2019 14:38:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20191126210332.15738-1-ross.burton@intel.com>
-In-Reply-To: <20191126210332.15738-1-ross.burton@intel.com>
+References: <20191126210206.15650-1-ross.burton@intel.com>
+In-Reply-To: <20191126210206.15650-1-ross.burton@intel.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 26 Nov 2019 14:37:51 -0800
-Message-ID: <CAMKF1spPt_2fHiKSFS217dKARgsuFgr6QoKbX4mo=d-it02GVg@mail.gmail.com>
+Date: Tue, 26 Nov 2019 14:38:10 -0800
+Message-ID: <CAMKF1srh--y6WWUA+LoW0gK2nFR6tjAaWc1Qz93uupaPX5ZV+g@mail.gmail.com>
 To: Ross Burton <ross.burton@intel.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] jack: upgrade to 1.19.14
+Subject: Re: [PATCH] htop: use Python 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,61 +53,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Nov 2019 22:38:17 -0000
+X-List-Received-Date: Tue, 26 Nov 2019 22:38:38 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-thanks this is better than what I had staged, I will take this one.
+I had similar fix staged
 
-On Tue, Nov 26, 2019 at 1:03 PM Ross Burton <ross.burton@intel.com> wrote:
->
-> Notable because it uses Python 3 for the Waf scripts.
->
-> Delete jack_control if DBus isn't enabled, as this tool uses DBus to communicate
-> with the server and shouldn't be installed.
+On Tue, Nov 26, 2019 at 1:02 PM Ross Burton <ross.burton@intel.com> wrote:
 >
 > Signed-off-by: Ross Burton <ross.burton@intel.com>
 > ---
->  .../jack/{jack_git.bb => jack_1.19.14.bb}            | 12 +++++++++---
->  1 file changed, 9 insertions(+), 3 deletions(-)
->  rename meta-oe/recipes-multimedia/jack/{jack_git.bb => jack_1.19.14.bb} (87%)
+>  meta-oe/recipes-support/htop/files/py3.patch | 15 +++++++++++++++
+>  meta-oe/recipes-support/htop/htop_2.2.0.bb   |  3 ++-
+>  2 files changed, 17 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-oe/recipes-support/htop/files/py3.patch
 >
-> diff --git a/meta-oe/recipes-multimedia/jack/jack_git.bb b/meta-oe/recipes-multimedia/jack/jack_1.19.14.bb
-> similarity index 87%
-> rename from meta-oe/recipes-multimedia/jack/jack_git.bb
-> rename to meta-oe/recipes-multimedia/jack/jack_1.19.14.bb
-> index 9f7d5b0b61..cebc952661 100644
-> --- a/meta-oe/recipes-multimedia/jack/jack_git.bb
-> +++ b/meta-oe/recipes-multimedia/jack/jack_1.19.14.bb
-> @@ -15,8 +15,8 @@ LIC_FILES_CHKSUM = " \
->  DEPENDS = "libsamplerate0 libsndfile1 readline"
->
->  SRC_URI = "git://github.com/jackaudio/jack2.git"
-> -SRCREV = "37250ff470277f9947fbf3ba738f943053e30525"
-> -PV = "1.9.13"
-> +SRCREV = "b54a09bf7ef760d81fdb8544ad10e45575394624"
+> diff --git a/meta-oe/recipes-support/htop/files/py3.patch b/meta-oe/recipes-support/htop/files/py3.patch
+> new file mode 100644
+> index 0000000000..fd28d51d5c
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/htop/files/py3.patch
+> @@ -0,0 +1,15 @@
+> +Use Python 3 explicitly instead of python, which we don't export to HOSTTOOL.
 > +
->  S = "${WORKDIR}/git"
->
->  inherit waf pkgconfig
-> @@ -30,6 +30,12 @@ PACKAGECONFIG[opus] = "--opus=yes,--opus=no,libopus"
->  # portaudio is for windows builds only
->  EXTRA_OECONF = "--portaudio=no"
->
-> +do_install_append() {
-> +       if ! ${@bb.utils.contains('PACKAGECONFIG', 'dbus', True, False, d)}; then
-> +               rm -f ${D}${bindir}/jack_control
-> +       fi
-> +}
+> +Upstream-Status: Pending
+> +Signed-off-by: Ross Burton <ross.burton@intel.com>
 > +
->  PACKAGES =+ "libjack jack-server jack-utils"
+> +diff --git a/scripts/MakeHeader.py b/scripts/MakeHeader.py
+> +index 349531b..3336dea 100755
+> +--- a/scripts/MakeHeader.py
+> ++++ b/scripts/MakeHeader.py
+> +@@ -1,4 +1,4 @@
+> +-#!/usr/bin/env python
+> ++#!/usr/bin/env python3
+> + import os, sys, string, io
+> + try:
+> +    from StringIO import StringIO
+> diff --git a/meta-oe/recipes-support/htop/htop_2.2.0.bb b/meta-oe/recipes-support/htop/htop_2.2.0.bb
+> index 01c856d123..5724c5b8c6 100644
+> --- a/meta-oe/recipes-support/htop/htop_2.2.0.bb
+> +++ b/meta-oe/recipes-support/htop/htop_2.2.0.bb
+> @@ -7,7 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=c312653532e8e669f30e5ec8bdc23be3"
+>  DEPENDS = "ncurses"
 >
->  RDEPENDS_jack-dev_remove = "${PN} (= ${EXTENDPKGV})"
-> @@ -42,4 +48,4 @@ FILES_jack-server = " \
->  "
->  FILES_jack-utils = "${bindir}/*"
+>  SRC_URI = "http://hisham.hm/htop/releases/${PV}/${BP}.tar.gz \
+> -           file://0001-Use-pkg-config.patch"
+> +           file://0001-Use-pkg-config.patch \
+> +           file://py3.patch"
+>  SRC_URI[md5sum] = "0d816b6beed31edc75babcfbf863ffa8"
+>  SRC_URI[sha256sum] = "d9d6826f10ce3887950d709b53ee1d8c1849a70fa38e91d5896ad8cbc6ba3c57"
 >
-> -FILES_${PN}-doc += " ${datadir}/jack-audio-connection-kit/reference/html/* "
-> +FILES_${PN}-doc += " ${datadir}/jack-audio-connection-kit/reference/html/*"
 > --
 > 2.20.1
 >
