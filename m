@@ -1,30 +1,36 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id F310D7F978
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 9247F7FA2B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2019 08:26:59 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,248,1571673600"; d="scan'208";a="79144830"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Nov 2019 16:26:59 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 9DAA04B6EC86
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2019 16:18:33 +0800 (CST)
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 27 Nov 2019 16:26:57 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 27 Nov 2019 16:27:42 +0800
-Message-ID: <20191127082742.9771-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Wed, 27 Nov 2019 09:10:53 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47NFP64Mbnz4J;
+	Wed, 27 Nov 2019 10:10:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1574845850;
+	bh=wfGub8RA5GCPHSp1gf0QWkmUhCZFK5o9GZgRU0sChkU=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=CvbKPBrHVfyDCI4DafKF3nvxRYiNhYOuiXu2DjZWZxmGbQeSTYZxjZDzrQq45g+Dw
+	IP27XF+PgBCzRiRdTJU/Dpg2DKZV33Zz/F2PROLpnV6UnzPVu6bC8Fek7nLjQMMqoK
+	XH/p0sXtzKXc9Nszj10EEb7qhqkRoVsM2j72FwQfnQ35fKcLfN+szFIAfQPD/ROz/D
+	U+wxvdQBD/2s0BQVKxxdmfLnB728VrxFxqAwcPvokAjA2fk57TazUjo7isUW5gwd/b
+	x3Fim0m9XiP79kU5o75z7KfuFhHm4oQ1bGGT24RG0ufSMNEtfRTXTPEyuhfdwX0kax
+	tA9KsplTrZwSsXv0WDhZJKxjgnzRfRw03Uyh9wTY7s2kgcEPbER2Lw9+279nxinUO8
+	uurWoy+X5b4zQ2WZqerx0vvD0gvFvNAxCo2QCcpiB/s2Bt1ANqGf7Gz5TYUO+qXK4a
+	Dy0h+NoOn0L2cd5yEKdOVEJoNYkabPtdsLR6Hol2DbBDKf4tM3ZXSYYtgiOhUKnfLM
+	R0SaFPDTV1Fb1TQtwMpTgl83RQP4uKTTiJLgmQzBDJRfDHK01qCEKkpwZLHDqibM65
+	lJUjsYtCwLnpjbV0ko4gm7ih8I9dPqBsEsVT+hHr1hbOs5Y2bt7WCW+4EOheU6ggZc
+	FeKLyJPsJYKGwsWYVSEMU8So=
+Date: Wed, 27 Nov 2019 11:10:48 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20191127091048.GB31353@localhost>
+References: <20191127080028.823495-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 9DAA04B6EC86.A91CE
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] libmicrohttpd: upgrade 0.9.67 -> 0.9.68
+In-Reply-To: <20191127080028.823495-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] pidgin: Use python3 during build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,37 +43,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2019 08:27:00 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Wed, 27 Nov 2019 09:10:54 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- .../{libmicrohttpd_0.9.67.bb => libmicrohttpd_0.9.68.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libmicrohttpd/{libmicrohttpd_0.9.67.bb => libmicrohttpd_0.9.68.bb} (86%)
+On Wed, Nov 27, 2019 at 12:00:28AM -0800, Khem Raj wrote:
+>...
+> +@@ -1568,7 +1568,7 @@ dnl Check for Python headers (currently
+> + dnl (Thanks to XChat)
+> + if test "x$enable_consoleui" = "xyes" -a ! -z "$PYTHON" -a x"$PYTHON" != x"no" ; then
+> +         AC_MSG_CHECKING(for Python compile flags)
+> +-        PKG_CHECK_MODULES(PY, python, [
+> ++        PKG_CHECK_MODULES(PY, python3, [
+> +                 AC_SUBST(PY_CFLAGS)
+> +                 AC_SUBST(PY_LIBS)
+> +         ], [
+>...
 
-diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.67.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.68.bb
-similarity index 86%
-rename from meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.67.bb
-rename to meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.68.bb
-index c400462e0..f5569de9f 100644
---- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.67.bb
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.68.bb
-@@ -8,8 +8,8 @@ DEPENDS = "file"
- 
- SRC_URI = "${GNU_MIRROR}/libmicrohttpd/${BPN}-${PV}.tar.gz \
- "
--SRC_URI[md5sum] = "e28e04e3d3eca62f5754efb844d17812"
--SRC_URI[sha256sum] = "7e1f852723d099d4827d7ebde4d02dd00fd8da62149526fdb9fae058c5a60495"
-+SRC_URI[md5sum] = "1c3ca3bf92dfc680538b4186c58a9bd0"
-+SRC_URI[sha256sum] = "c5716e2a2899abc9e16c8fa7a1a58da88f81aca96a0b7e68a5d4d89e21610b61"
- 
- inherit autotools lib_package pkgconfig gettext
- 
--- 
-2.20.1
+This one also wants
+https://bitbucket.org/pidgin/main/pull-requests/357/gnt-fix-use-after-free-memory-violation/diff
 
+Not sure whether there are more fixes that need backporting for Python3.
 
-
+cu
+Adrian
 
