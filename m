@@ -1,54 +1,54 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
-	[209.85.221.48])
-	by mail.openembedded.org (Postfix) with ESMTP id CB96E7ED3D
+Return-Path: <Arturo.Buzarra@digi.com>
+X-Greylist: delayed 779 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 27 Nov 2019 16:42:24 UTC
+Received: from mail1.bemta24.messagelabs.com (mail1.bemta24.messagelabs.com
+	[67.219.250.210])
+	by mail.openembedded.org (Postfix) with ESMTP id F26BD7FC06
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2019 14:41:24 +0000 (UTC)
-Received: by mail-wr1-f48.google.com with SMTP id b18so26969396wrj.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2019 06:41:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=Dy8h99jNr+ykBbIOl81+LsyLWuyUEyLqEYBALJ7C1xc=;
-	b=INgqBSqovO2EIm6nbarB3oKKB/ATRsBrXyj1sYqkCUGFLJlZN9PD+m4ZSdbIypzm9G
-	tNjC3tCFUGWQ5fgNwCzqM3N/AN+AKzzAStcPPm8TfevQO7pU9O4iO2BcK3RjbdfPmC4G
-	PHwXU6svkpTXfZrjAO2O3vbMQdkK4UNcWn+TDr6wvRe3CAEFKV8qPG2f81/H7WP0l9xQ
-	v8XlwTeH+QmDI1wwFCAj4YQKqREbqMz+kOOxtakKU9ov/l+nWMdgDDfE35M2EbcqwPG9
-	0onpzKzLkVKdwfu6OPYMqAEUPTMrz34tLkYhBNeigVuKjqgV4H/PpulYtaTu6Ql2wwW3
-	Ou0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=Dy8h99jNr+ykBbIOl81+LsyLWuyUEyLqEYBALJ7C1xc=;
-	b=EHh9Omq+UzgFoTKwCQgwZjz63TkhpsTqVtxd9Peg6DB9+bYfk3CXyXHIX3FjocBxb0
-	0FXG6HE1oJL4UN6qdUmxxyyWqf0aihYaXAgWqbyV8mAemBj+PhUEXs0eTGqfAzbMFrgl
-	s9iAYbw6Fw8BbZ8yqw1AbLYiso+pTQAUVMyTCmydg5Yv30BcTgOiimJttg4atj74qfSM
-	mTTRiqQ331wSklEtBN4SOGbqH71u4Q2DqRbPH0MF4ezsUwGI7gCSgtASKM/GYLj3dl9O
-	1eCm9AYPFjc+cWCSD83dTd85WJVOJitkXhUnZte8tiipGhMUQ0uZ11O8RGnQQ/GIC+WZ
-	2BGQ==
-X-Gm-Message-State: APjAAAVv4H48bkG9Y5wCyXl65e3eh2fE2FAsMhufG9JvbmEz0EePfBR6
-	EeLaBo9WJjJIl1zk/nXYgfeOPI8+
-X-Google-Smtp-Source: APXvYqw5IYh7r8SG1uo+fv5fk/h/PbnWf7+ZLOl0+k0Ng8FnDCFWprXgOdKE0KrIhn94oEEGVqWejQ==
-X-Received: by 2002:a05:6000:12ce:: with SMTP id
-	l14mr29710931wrx.342.1574865685301; 
-	Wed, 27 Nov 2019 06:41:25 -0800 (PST)
-Received: from mueller-a-nb-linux.zera.local ([195.50.169.54])
-	by smtp.gmail.com with ESMTPSA id
-	q15sm19454409wrs.91.2019.11.27.06.41.24
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 27 Nov 2019 06:41:24 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Nov 2019 15:41:16 +0100
-Message-Id: <20191127144116.18751-2-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191127144116.18751-1-schnitzeltony@gmail.com>
-References: <20191127144116.18751-1-schnitzeltony@gmail.com>
+	Wed, 27 Nov 2019 16:42:24 +0000 (UTC)
+Received: from [67.219.251.53] (using TLSv1.2 with cipher
+	DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta.az-c.us-west-2.aws.symcld.net id A0/A9-12330-664AEDD5;
+	Wed, 27 Nov 2019 16:29:26 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrNIsWRWlGSWpSXmKPExsXi5LtOQDdtyb1
+	Yg85pbBYXDy9ldmD0OLdxBWMAYxRrZl5SfkUCa0bP0cXsBXu5KnYuyWpgnMPZxcjJISSwilFi
+	w/14CHsjo0TTW2UQm01AT+Lbl1nMILaIgL7E0tl7wGxhASeJjpWtYDaLgKrE1JYONhCbV8BG4
+	ve6c0A2B4eEgLzEnLcaEGFBiZMzn7CA2MxA4eats5khbAmJgy9eMIOUCwmoSDx/YgsSlhBQkL
+	j2fjH7BEbeWUi6ZyHpnoWkewEj8ypGi6SizPSMktzEzBxdQwMDXUNDI11DY3Mg20IvsUo3Wa+
+	0WLc8tbhE10gvsbxYr7gyNzknRS8vtWQTIzDcUgo6c3Yw7vn6Vu8QoyQHk5Ior5/XvVghvqT8
+	lMqMxOKM+KLSnNTiQ4wyHBxKEry1C4FygkWp6akVaZk5wNCHSUtw8CiJ8AYtAkrzFhck5hZnp
+	kOkTjHqcjztaFvCLMSSl5+XKiXOexCkSACkKKM0D24ELA4vMcpKCfMyMjAwCPEUpBblZpagyr
+	9iFOdgVBLmrQWZwpOZVwK36RXQEUxAR+zrAzuiJBEhJdXA1LJ36eWF6ifvFAjO2S5tzVS7/Fd
+	bsKPnojaHYn/zug1b7BsLat2zJv9o4n7BPNvU7MXZooylUyZM+C/AENAjYrk6VPr6Uq0JIgq9
+	ee98zRY+2tj4Z927ZXwRT1l8VnnNvVWze0bvIZVox5V8kvc6X+bzR791nX7qdtnmrRbPOWvyK
+	1R+PpXjWrPjtfFOg0kBHgd9J00PCzp/3fR3nJH5XjkPu5Nadr/ORf6S3Vn50oPNXWGh7IzKzt
+	M+zxsvJ5RfZPw85f7UiRI9c1uvqHTLuU7mWaa51elv3maLd8XCS6ZcSvAI+5nHYb1kM++Ggnk
+	XX+XqyUttvVJ66pvLt61q9/evXrHm4V3rA+I70t7k3FViKc5INNRiLipOBADEPUG5PgMAAA==
+X-Env-Sender: Arturo.Buzarra@digi.com
+X-Msg-Ref: server-11.tower-365.messagelabs.com!1574872165!362212!1
+X-Originating-IP: [66.77.174.16]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.44.22; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 29296 invoked from network); 27 Nov 2019 16:29:26 -0000
+Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
+	by server-11.tower-365.messagelabs.com with ECDHE-RSA-AES256-SHA384
+	encrypted SMTP; 27 Nov 2019 16:29:26 -0000
+Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Wed, 27 Nov 2019 10:29:24 -0600
+Received: from LOG-CLN-ABUZARRA2.digi.com (10.101.2.112) by
+	dor-sms-xch01.digi.com (10.49.8.99) with Microsoft SMTP Server (TLS) id
+	14.3.468.0; Wed, 27 Nov 2019 17:29:21 +0100
+From: Arturo Buzarra <arturo.buzarra@digi.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 27 Nov 2019 17:29:13 +0100
+Message-ID: <20191127162913.30498-1-arturo.buzarra@digi.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Subject: [zeus][PATCH 2/2] networkmanager: do not deploy unnecessary udev rule file
+X-Originating-IP: [10.101.2.112]
+Subject: [thud][PATCH] lvm2: Fix RDEPEND on lvm2 to lvm2-udevrules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,48 +61,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2019 14:41:25 -0000
+X-List-Received-Date: Wed, 27 Nov 2019 16:42:25 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Stefan Agner <stefan.agner@toradex.com>
+Commit c6e963f ("lvm2: Add RDEPEND on lvm2 to lvm2-udevrules") added
+a package dependency due to lvm2-udevrules needs dmsetup, however
+dmsetup was moved to libdevmapper in commit 269d009 ("lvm2:
+libdevicemapper package needs udev rules and dmsetup"), so this
+dependency should be only for libdevmapper instead of the full package.
 
-The 84-nm-drivers.rules is not required for systemd-udevd versions
-v210 and later. The file has been split into a separate file so
-distributions with a new enough systemd version can drop it. See
-also:
-https://github.com/NetworkManager/NetworkManager/commit/1e0375826252abf9aab2aef273a2a24cd08c9f42
+With the current implementation, a package that has a dependency with
+lvm2-udev rules will include also many unnecessary packages like lvm2,
+lvm2-scripts, etc. and their dependencies.
 
-I noticed this while investigating into a warning show during
-bootup:
-  /usr/lib/udev/rules.d/84-nm-drivers.rules:10 Invalid value "/bin/sh -c
-  'ethtool -i $1 | sed -n s/^driver:\ //p' -- $env{INTERFACE}" for PROGRAM
-  (char 24: invalid substitution type), ignoring, but please fix it.
-
-Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 82ecc0e69fe3920360d1ba8bd1b5e6ede164de42)
+Signed-off-by: Arturo Buzarra <arturo.buzarra@digi.com>
 ---
- .../networkmanager/networkmanager_1.18.4.bb                  | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
-index 085807c4c..27508c4d9 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
-@@ -141,8 +141,11 @@ do_install_append() {
+diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb b/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
+index 7bd7b09d8..08287e358 100644
+--- a/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
++++ b/meta-oe/recipes-support/lvm2/lvm2_2.02.180.bb
+@@ -50,7 +50,7 @@ FILES_${PN}-scripts = " \
+ # Specified explicitly for the udev rules, just in case that it does not get picked
+ # up automatically:
+ FILES_${PN}-udevrules = "${nonarch_base_libdir}/udev/rules.d"
+-RDEPENDS_${PN}-udevrules = "${PN}"
++RDEPENDS_${PN}-udevrules = "libdevmapper"
+ RDEPENDS_${PN}_append_class-target = " libdevmapper"
+ RDEPENDS_${PN}_append_class-nativesdk = " libdevmapper"
  
-     rm -rf ${D}/run ${D}${localstatedir}/run
- 
--    # For read-only filesystem, do not create links during bootup
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        # For read-only filesystem, do not create links during bootup
-         ln -sf ../run/NetworkManager/resolv.conf ${D}${sysconfdir}/resolv-conf.NetworkManager
-+
-+        # systemd v210 and newer do not need this rule file
-+        rm ${D}/${nonarch_base_libdir}/udev/rules.d/84-nm-drivers.rules
-     fi
- }
 -- 
-2.21.0
+2.24.0
 
 
