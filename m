@@ -1,36 +1,24 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 9247F7FA2B
+Return-Path: <xiao.zhang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 271937F9A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2019 09:10:53 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47NFP64Mbnz4J;
-	Wed, 27 Nov 2019 10:10:50 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1574845850;
-	bh=wfGub8RA5GCPHSp1gf0QWkmUhCZFK5o9GZgRU0sChkU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=CvbKPBrHVfyDCI4DafKF3nvxRYiNhYOuiXu2DjZWZxmGbQeSTYZxjZDzrQq45g+Dw
-	IP27XF+PgBCzRiRdTJU/Dpg2DKZV33Zz/F2PROLpnV6UnzPVu6bC8Fek7nLjQMMqoK
-	XH/p0sXtzKXc9Nszj10EEb7qhqkRoVsM2j72FwQfnQ35fKcLfN+szFIAfQPD/ROz/D
-	U+wxvdQBD/2s0BQVKxxdmfLnB728VrxFxqAwcPvokAjA2fk57TazUjo7isUW5gwd/b
-	x3Fim0m9XiP79kU5o75z7KfuFhHm4oQ1bGGT24RG0ufSMNEtfRTXTPEyuhfdwX0kax
-	tA9KsplTrZwSsXv0WDhZJKxjgnzRfRw03Uyh9wTY7s2kgcEPbER2Lw9+279nxinUO8
-	uurWoy+X5b4zQ2WZqerx0vvD0gvFvNAxCo2QCcpiB/s2Bt1ANqGf7Gz5TYUO+qXK4a
-	Dy0h+NoOn0L2cd5yEKdOVEJoNYkabPtdsLR6Hol2DbBDKf4tM3ZXSYYtgiOhUKnfLM
-	R0SaFPDTV1Fb1TQtwMpTgl83RQP4uKTTiJLgmQzBDJRfDHK01qCEKkpwZLHDqibM65
-	lJUjsYtCwLnpjbV0ko4gm7ih8I9dPqBsEsVT+hHr1hbOs5Y2bt7WCW+4EOheU6ggZc
-	FeKLyJPsJYKGwsWYVSEMU8So=
-Date: Wed, 27 Nov 2019 11:10:48 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20191127091048.GB31353@localhost>
-References: <20191127080028.823495-1-raj.khem@gmail.com>
+	Wed, 27 Nov 2019 09:31:42 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xAR9VhOJ018287
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 27 Nov 2019 01:31:44 -0800 (PST)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.468.0;
+	Wed, 27 Nov 2019 01:31:43 -0800
+From: Zhang Xiao <xiao.zhang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 27 Nov 2019 01:31:42 -0800
+Message-ID: <20191127093142.108012-1-xiao.zhang@windriver.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <20191127080028.823495-1-raj.khem@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] pidgin: Use python3 during build
+Subject: [meta-oe][PATCH] syslog-ng: Fix multilib header conflict - syslog-ng-config.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,28 +31,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2019 09:10:54 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 27 Nov 2019 09:31:43 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Wed, Nov 27, 2019 at 12:00:28AM -0800, Khem Raj wrote:
->...
-> +@@ -1568,7 +1568,7 @@ dnl Check for Python headers (currently
-> + dnl (Thanks to XChat)
-> + if test "x$enable_consoleui" = "xyes" -a ! -z "$PYTHON" -a x"$PYTHON" != x"no" ; then
-> +         AC_MSG_CHECKING(for Python compile flags)
-> +-        PKG_CHECK_MODULES(PY, python, [
-> ++        PKG_CHECK_MODULES(PY, python3, [
-> +                 AC_SUBST(PY_CFLAGS)
-> +                 AC_SUBST(PY_LIBS)
-> +         ], [
->...
+Header file conflict between 32-bit and 64-bit versions.
 
-This one also wants
-https://bitbucket.org/pidgin/main/pull-requests/357/gnt-fix-use-after-free-memory-violation/diff
+Signed-off-by: Zhang Xiao <xiao.zhang@windriver.com>
+---
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Not sure whether there are more fixes that need backporting for Python3.
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+index 3aba4473d..8e5368953 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+@@ -27,7 +27,7 @@ SRC_URI = "https://github.com/balabit/syslog-ng/releases/download/${BP}/${BP}.ta
+ 
+ UPSTREAM_CHECK_URI = "https://github.com/balabit/syslog-ng/releases"
+ 
+-inherit autotools gettext systemd pkgconfig update-rc.d
++inherit autotools gettext systemd pkgconfig update-rc.d multilib_header
+ 
+ EXTRA_OECONF = " \
+     --enable-dynamic-linking \
+@@ -103,6 +103,8 @@ do_install_append() {
+     else
+         install ${WORKDIR}/syslog-ng.conf.sysvinit ${D}${sysconfdir}/${BPN}/${BPN}.conf
+     fi
++
++    oe_multilib_header syslog-ng/syslog-ng-config.h
+ }
+ 
+ FILES_${PN} += "${datadir}/include/scl/ ${datadir}/xsd ${datadir}/tools ${systemd_unitdir}/system/multi-user.target.wants/*"
+-- 
+2.23.0
 
-cu
-Adrian
 
