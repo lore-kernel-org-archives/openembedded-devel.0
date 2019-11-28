@@ -1,32 +1,49 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E9927FC16
+Return-Path: <jdmason@kudzu.us>
+Received: from mail-il1-f179.google.com (mail-il1-f179.google.com
+	[209.85.166.179])
+	by mail.openembedded.org (Postfix) with ESMTP id C82EF7FC4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2019 02:30:10 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,251,1571673600"; d="scan'208";a="79196037"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 28 Nov 2019 10:30:10 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id BDC5E4CE1BF0
+	Thu, 28 Nov 2019 02:40:38 +0000 (UTC)
+Received: by mail-il1-f179.google.com with SMTP id g12so13423021ild.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Nov 2019 10:21:42 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 28 Nov 2019 10:30:07 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 28 Nov 2019 01:14:29 -0800
-Message-ID: <1574932470-14682-4-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1574932470-14682-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1574932470-14682-1-git-send-email-wangmy@cn.fujitsu.com>
+	Wed, 27 Nov 2019 18:40:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=ufIwhoTkrpyxZykUmq2pmvPbPe6VuyVkxwdu0fD04oY=;
+	b=a+ySI2ImKZbuZsPSjzB8pyS1HHwnPxYYRocJJYKWDAmccO2JKnCy/OnlJcjjfYSpop
+	2cgEsWh+Sz7EbqkiH6SiNYVm9Q/+npWW0UJRuP+jeBlroEu9T+fGN1If7jCQpjAprZNV
+	l9q4kgaymif8tatA42ornw4FJP90NbfDN3ThXccOflp2gxO7x9e+qjYELtsQ7igKDYYP
+	FelJtiKlDWlKKndT8boRnwbN8Vewr7owfLT1yGtBlzn7Fd20DcLpHhhQGZLXO81NHRFW
+	iK/csfX18OedxTodDCU+xqkP/Wj8BpMQUQxLN2h+JJU/Y/m66aEbKcHZUkLHprTGC5Ym
+	0d6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=ufIwhoTkrpyxZykUmq2pmvPbPe6VuyVkxwdu0fD04oY=;
+	b=dFF6hG8cly8NGass8d/EVJ1//KSRKKYNfjflqfB6drz2hbD2kmo4I8cJeTBhMsylI5
+	H82bdWGxYY6aSMIzW8cmpslI5GnPQrs+z/DyAuygJWPDmE3ow4D6ogin4/1z0wicY0Ca
+	8CcAF7qOCAr5+fLpEEpvGSdYNP54Ciuh7IY1jT/I994jHNS0Y0bmpjaQy54mr8vT8gWv
+	SrBiMTkxJulb//xyWM507mAsnnDBSqWymjD3sBjyPTw6tqqMnGDv2CPIGoYeI/VwED8J
+	FjvgYR2I25d1RcxJwGJrsVx0SBJEsDauBjhkOf8xovwPuGz7W8QDBEOnJALWCUoQh9W8
+	Jdtg==
+X-Gm-Message-State: APjAAAUOtFMrgoce1qPL6mU70+RvZrY7KBImszzinnbtB83tfSLtSCuy
+	8+JD2aLuPdOY/HV3lWTlIREKtbBsab0YmSFPXbvbQmYfBvhaVg==
+X-Google-Smtp-Source: APXvYqz+i8KpXd753hb94eNGiHvyr4+kMeGPm2RiCguxbsGvd2ixMpsVmq7kBzobQbhEtvMFWFqMZM3JU/BfOiNExQs=
+X-Received: by 2002:a92:cf46:: with SMTP id c6mr28097876ilr.159.1574908839616; 
+	Wed, 27 Nov 2019 18:40:39 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: BDC5E4CE1BF0.AA864
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] python-pluggy: upgrade 0.13.0 -> 0.13.1
+References: <CAPoiz9w9qWwEqMipK7iF-VLP5dFH21nZdTCpeLNncsqHHpFJxQ@mail.gmail.com>
+In-Reply-To: <CAPoiz9w9qWwEqMipK7iF-VLP5dFH21nZdTCpeLNncsqHHpFJxQ@mail.gmail.com>
+From: Jon Mason <jdmason@kudzu.us>
+Date: Wed, 27 Nov 2019 21:40:27 -0500
+Message-ID: <CAPoiz9yEp0xESQQYjBqAOoQTbv+CtkY+uw50_bBtV+ntQL2xPw@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	Yocto discussion list <yocto@yoctoproject.org>
+Subject: Re: OpenEmbedded Workshop at FOSDEM20 CFP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,38 +56,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Nov 2019 02:30:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 28 Nov 2019 02:40:39 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- meta-python/recipes-devtools/python/python-pluggy.inc                 | 4 ++--
- .../python/{python-pluggy_0.13.0.bb => python-pluggy_0.13.1.bb}       | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pluggy_0.13.0.bb => python-pluggy_0.13.1.bb} (100%)
+On Thu, Nov 21, 2019 at 4:12 PM Jon Mason <jdmason@kudzu.us> wrote:
+>
+> We are proud to announce the inaugural OpenEmbedded Workshop. It is
+> being held on 03 February 2020 in Brussels, Belgium. The day after
+> FOSDEM.
+>
+> The Call for Participation is open now. For more information, go to
+> https://pretalx.com/oe-workshop-2020/cfp
+>
+> Early-bird tickets coming soon!
+>
+> Thank you,
+> The OpenEmbedded Board
 
-diff --git a/meta-python/recipes-devtools/python/python-pluggy.inc b/meta-python/recipes-devtools/python/python-pluggy.inc
-index 1931532..7585984 100644
---- a/meta-python/recipes-devtools/python/python-pluggy.inc
-+++ b/meta-python/recipes-devtools/python/python-pluggy.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/pytest-dev/pluggy"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1c8206d16fd5cc02fa9b0bb98955e5c2"
- 
--SRC_URI[md5sum] = "4b8384b69cddbc2e104fdd3ff5631788"
--SRC_URI[sha256sum] = "fa5fa1622fa6dd5c030e9cad086fa19ef6a0cf6d7a2d12318e10cb49d6d68f34"
-+SRC_URI[md5sum] = "7f610e28b8b34487336b585a3dfb803d"
-+SRC_URI[sha256sum] = "15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"
- 
- DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
- RDEPENDS_${PN} += "${PYTHON_PN}-importlib-metadata \
-diff --git a/meta-python/recipes-devtools/python/python-pluggy_0.13.0.bb b/meta-python/recipes-devtools/python/python-pluggy_0.13.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pluggy_0.13.0.bb
-rename to meta-python/recipes-devtools/python/python-pluggy_0.13.1.bb
--- 
-2.7.4
+We forgot to mention that the deadline for the CFP is December 15th.
+Please get your topic in before the deadline.
 
-
-
+Also, look for early-bird tickets next week!
 
