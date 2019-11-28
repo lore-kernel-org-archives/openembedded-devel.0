@@ -1,50 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id C1DCA7F872
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A087B7F700
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2019 23:25:38 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id z188so11813411pgb.1
+	Thu, 28 Nov 2019 01:14:44 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id m125so21301100qkd.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Nov 2019 15:25:40 -0800 (PST)
+	Wed, 27 Nov 2019 17:14:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qgsAilzsIaXbJ9jKwcXfSGSkIwx+gErOySha9Em7O6c=;
-	b=Z/mD4JII19PJZ7YvjMCAUlMdnAMhH0QOJ9VpSkbsAfpqhJyKv5sWoXT6t+tbqIlNvW
-	KIF10vVlnWmGVSXiCFLOftzZmGStvEU88J1YD/NeiSNLFpIl3bRQUXUdBZzmVf5GC3ZT
-	wXA9iQkQv/pA/Y7OS/0qsSr6Vii/QCbXYg0o3f/wKAhD7uTpEgzdB/zfawpDDVoabpla
-	v5l+K+uOWxjP4Swuory8sryJED16lIosPxddubhdL2dypcjIpFlSFvlZG5NI1nhvvNri
-	Vm9dHEhPw8Z1z6MOPngRRhxWlaK6pV1k5LcAEq2wNJJ7eB/4OMIxT9m2tMxEDQx+iOc8
-	kxtw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=b+32V4QhBsxbII+0nsWDEYtIN9nx93VBjHq9VMGiCyk=;
+	b=LM0RM+9amGluihvt4Lbl1gOaHR9K4SidtT03+UhsH3jNG9hc5n24rvLea8fjEa9DDO
+	8HSLot4KqCO7UJ280jIISUJe9o4qWVN9kz17kBOZkZS1Qz1A0L33kVy1xrpKoO5bdvPf
+	lR6Ox2hRIfUviHnUybwcmGdcPd0SWqlFlB1d319qlVq/qUpIc1uO30bj1vWZR50/ZSCZ
+	oH31bjUHq2AT+p0Nz7Rj7ShYhXAjrcTUDhluFKGOjCT7SM7fJk9746Tg5zMgXVOgD3Gx
+	ViGAmwxyNM+0W0uyajfLsMWRQ6aqnYYqo5kyto552JrAq3JRxMGIXXXn6GUC0smjvaRF
+	jHUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qgsAilzsIaXbJ9jKwcXfSGSkIwx+gErOySha9Em7O6c=;
-	b=U6vHaKrYTOgBCqRCTW3+k8qgMGupUdsFvgxxUpJI/OucTSJuGtKfiJgkgb5dhvZloD
-	dvo8RA+xM6L6qEhnWAoXeZ02NB7RKKrDFWxir6ro1FUFVv7TA/0jqJ8/bv69dGIgVDcb
-	8CWTDJ6JYEJgM8yeFzxyqjqe6plyXLpyRRXbYxdqiBTrkeKCLm0Hmx9PSAUXkT1WfTcD
-	IdYoc6oIdnFXFy2iNKgxP0UWYfWW7DH7MMBfziqN3C95cyi3jLNd62KgSRNvW22GhBGz
-	YVphj7aTci/gOZcY9n4S4xKiBXtT4DnmVqEgvaq2bmjBEZm3zkX6TMczawEAsItPxnDw
-	fQCA==
-X-Gm-Message-State: APjAAAV1bZkLEUwMsDYQQqxS0vPkQ6tx08rxme0hq6DFnv+ISkuDeZCT
-	qctFaSzC3PTaLXSjGVQ3tmgtLzXl8QU=
-X-Google-Smtp-Source: APXvYqxyQ/pMdgCkVYA+Yrsr1iZMJhjbDiwSH6aXq4R4yk7WfpeOoNHg6KSx8qxsv/sSKj1aJWl2Ag==
-X-Received: by 2002:a63:c5e:: with SMTP id 30mr6266790pgm.93.1574897138943;
-	Wed, 27 Nov 2019 15:25:38 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::e439])
-	by smtp.gmail.com with ESMTPSA id
-	y11sm18642993pfq.1.2019.11.27.15.25.38
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 27 Nov 2019 15:25:38 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Nov 2019 15:25:27 -0800
-Message-Id: <20191127232527.2171217-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=b+32V4QhBsxbII+0nsWDEYtIN9nx93VBjHq9VMGiCyk=;
+	b=XCDZTuqoYLzL0hctj7HboZBIMp6BqIzVa6RLa6JMZxuzoJcHe5btur6gZEYAfdrRvw
+	j5WabC4YWwf/o1C1sO3Lu9ozUVAflRzfBhzgJlcepGdPLax9tADC1YRqXdpfgm6y0VxV
+	s2VAkksLCz8/vih7JJ/ZqlmUxBSLslq/Gzcx8Q+xesVj6+GCNX4WgnfynPZMzS8xBsU8
+	igjILr5kkg34Qm+baGc0vas9pfg3DkBKKsS0Mmn7FzTn2mYCH1i3K4B+ibGIdroycoxN
+	CwJhJmpjsXoHorPY4b0yU1zZ75dUa2g+zoRC3oMgubvb5YMONaZtuYD6azYTPFJzrr++
+	A8BQ==
+X-Gm-Message-State: APjAAAW03yQVLvzo+2rgjAxZ7ei9N/u2APxGiAHz+ef4dUiYi8Odow+z
+	e5P/E7vKuJvIKX9h9jsKfoNk/mSU31tXj5kMg0jio+K2kgw=
+X-Google-Smtp-Source: APXvYqxPl4ELCu3p3MX4XEiG9IXGU74+CcEO6/UcZ4S9s9sAnecayDG7tj5mTTrVb8ksmnWrtVXjddUAtIZVaTm4veU=
+X-Received: by 2002:a37:a348:: with SMTP id m69mr5099283qke.474.1574903684832; 
+	Wed, 27 Nov 2019 17:14:44 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH] tvheadend: Demand use of py3 during build
+References: <20191127080028.823495-1-raj.khem@gmail.com>
+	<20191127091048.GB31353@localhost>
+In-Reply-To: <20191127091048.GB31353@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 27 Nov 2019 17:14:18 -0800
+Message-ID: <CAMKF1soC4NN9tradMXDnLYr0qgQyEqz3t7cENiHeU7Mbqefd4Q@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] pidgin: Use python3 during build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +54,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Nov 2019 23:25:38 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 28 Nov 2019 01:14:44 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+On Wed, Nov 27, 2019 at 1:10 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> On Wed, Nov 27, 2019 at 12:00:28AM -0800, Khem Raj wrote:
+> >...
+> > +@@ -1568,7 +1568,7 @@ dnl Check for Python headers (currently
+> > + dnl (Thanks to XChat)
+> > + if test "x$enable_consoleui" = "xyes" -a ! -z "$PYTHON" -a x"$PYTHON" != x"no" ; then
+> > +         AC_MSG_CHECKING(for Python compile flags)
+> > +-        PKG_CHECK_MODULES(PY, python, [
+> > ++        PKG_CHECK_MODULES(PY, python3, [
+> > +                 AC_SUBST(PY_CFLAGS)
+> > +                 AC_SUBST(PY_LIBS)
+> > +         ], [
+> >...
+>
+> This one also wants
+> https://bitbucket.org/pidgin/main/pull-requests/357/gnt-fix-use-after-free-memory-violation/diff
+>
+> Not sure whether there are more fixes that need backporting for Python3.
+>
 
-diff --git a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-index e31fc6bb85..a818a961f3 100644
---- a/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-+++ b/meta-multimedia/recipes-dvb/tvheadend/tvheadend_git.bb
-@@ -22,6 +22,7 @@ EXTRA_OECONF += "--arch=${TARGET_ARCH} \
-                  --disable-hdhomerun_static \
-                  --disable-ffmpeg_static \
-                  --disable-libav \
-+                 --python=python3 \
-                  "
- 
- CLEANBROKEN = "1"
--- 
-2.24.0
+Good question. So I checked the plugins which generate .c files using
+these python scripts for dbus bindings
+dbus-bindings.c  dbus-signals.c  dbus-types.c  purple-client-bindings.c
 
+and I regenerated manually using py2 and compared with py3 generated
+ones. They are identical.
+
+> cu
+> Adrian
 
