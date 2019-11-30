@@ -1,51 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
-	[209.85.215.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 2AD837F899
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+	[209.85.210.174])
+	by mail.openembedded.org (Postfix) with ESMTP id D17BB7F89B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2019 18:10:54 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id b10so16034614pgd.4
+	Sat, 30 Nov 2019 18:10:55 +0000 (UTC)
+Received: by mail-pf1-f174.google.com with SMTP id x28so16187933pfo.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2019 10:10:56 -0800 (PST)
+	Sat, 30 Nov 2019 10:10:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=nMNloLatl2sUvxTXHykZO3O7CCOCcpLO8NJiab7qcU0=;
-	b=U6zCwgjjT4pb6+9ZLFpSzPn9hC5Fbg/3WACltj1f2OV7PNjjj2z/ZQ93GGM1c7EeuT
-	b8WnnTXKizm0o2HFBxmEy8/Km+VCeIXrDf/sY+9hkiDn2GcR/zROqjPI6oYYL0gvglR6
-	XsKPEWGW+R0/owBz7TdP2iTmBaOjf16EARqm3MTreGIQyt8yUrDDuk4IBdp3OiErL3ud
-	9N+8WMCCfIq5XJNsq+0yn6eS2geHkSXww94keia8SKXhK7rxSQK2NZJ+o+AiZ8SVNaSt
-	Ale4gu9PaWUF1ezolJMiuK7gQmUjhV8Tl0HaHRtHjYTQZf0fcuRuWORgEXmxUwuyGkXt
-	ZmYA==
+	bh=0Kt/GBRuYtMFGpVlExr4WAb2MAKmxQV1L45lJvfrHFc=;
+	b=fjRr1mzC6ODime0biwuhbLR+quyzQsd48OBfvmHAduTh/WD00jqy5VDVRrlTKRG1QF
+	yUkjUgGWJ4wUPbW9miikQqChsTvSNCfYtUbV+rMXhfRmeHue3rn9pax8lBccBgi3WEOM
+	q19TuxtxrgsVRI1E6TpIHK0ucbN3Nl1vO/Yaa5jqgZZ+fX5ntJ6+dfhoWwLwCS0cZ702
+	wWwsywJlIOveKD/PaTEjH0lS3M5IKQhcGl3EWlxIcgkgE+FzuPkVWnH/sjvpc1ii68Ck
+	L3mnc3bVT2L6hpYOw7fhvhR3zvfYj6RE8LiyGTExEMRPAAAEoFmtXC8BpsRsVFKQW2Ms
+	N5yA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=nMNloLatl2sUvxTXHykZO3O7CCOCcpLO8NJiab7qcU0=;
-	b=fIT0cxQ7buj2aJxWmdt85MCK7MJqhK9t8/0i1+M3V3sbzsRjAANLVsDFubG69x3P68
-	pPvoU1KDD1tOTAkE0RN1zV8PUBT0bBK/KBDtOy0magE0bktopNer0f21XZrAH8wvgUhz
-	CCgwZwEuQ4N+FyQf70lmP8wJZi8rwVLi1IO2r/cPqt4noO14Nb0Y3OUZCQOpQZHBKR79
-	k3Pe3rWL8o+xxiGbM3Vx9IF/P6Uriq/1GIB1PAi4pusfNJBwp35EtnZav8oG2vNpnhVo
-	VFmUpWYwSLwapTtcf8B7caEgnV444BLYpwsNQnMLDY4IghJboKnmkTpYJH9f/u9aMxbR
-	AFQw==
-X-Gm-Message-State: APjAAAXIvraHbfPvvblyWbp4KRVTzYOHqc+qqGDvAfuD4c+YDAlBsr9/
-	8OHYJdFl+DETlgjp6zXBhgRXzzI9
-X-Google-Smtp-Source: APXvYqze+ckX3r0u5ssszlxOHU0fOOEfqE5ypi1hOtJdLw58wQvAPnVlBKMov526DmgHcPE+4buntw==
-X-Received: by 2002:a63:fc1d:: with SMTP id j29mr18013751pgi.343.1575137455982;
-	Sat, 30 Nov 2019 10:10:55 -0800 (PST)
+	bh=0Kt/GBRuYtMFGpVlExr4WAb2MAKmxQV1L45lJvfrHFc=;
+	b=fK1jqSn+ZLXA4Mc4jhORcUBYRpT4hXf9CuGELSH+yThQnh9ASDWHVBoltdsELRXe3X
+	IiEpyC1yA5bD9FjBPqemdyRkxSOnSQUxZip5Qq1f41crzF2xFst6suPagY9RTAo6/Sdj
+	UmHYnlFqtDv7aYG6PHP+iKbunqydqKdnvnsUpaRltzLneaBtrDDJVcTDOjIUVswWUG2g
+	z6eodH326QKTm8f37CY8V73O/pMgEA5dVyICT3Pq/IUEIgMJoemyEyuBM/L1jTdOXuk/
+	iSWqiOBzsxspQZFfZltbRc0fRAAWmuiUYgkgkckQ9H0fFltcugM5nrLbiE3IILYuhrd8
+	n2Fg==
+X-Gm-Message-State: APjAAAWmFgIskp+AWtsdPAYs1wQeUQNVHLrHk8dxL3hNNWYxpD7zCmnF
+	NtICJeIT8qaQI50fCvBPNjvw+jOS
+X-Google-Smtp-Source: APXvYqwHx/Dv/IN0z2F19gnHEhKp1DKRzcxGRvfL38hyGm26V3cxLio5loRoNJHLW2Rv+jGsC/QjqA==
+X-Received: by 2002:a63:df09:: with SMTP id u9mr22931580pgg.20.1575137456792; 
+	Sat, 30 Nov 2019 10:10:56 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4180:a5c0:c050:b516:8fc6:8cbf])
-	by smtp.gmail.com with ESMTPSA id d6sm490762pju.8.2019.11.30.10.10.55
+	by smtp.gmail.com with ESMTPSA id d6sm490762pju.8.2019.11.30.10.10.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 30 Nov 2019 10:10:55 -0800 (PST)
+	Sat, 30 Nov 2019 10:10:56 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 30 Nov 2019 10:10:37 -0800
-Message-Id: <b6d1134bc84b909d91fdbd6313699d6ba4c4ec98.1575137343.git.akuster808@gmail.com>
+Date: Sat, 30 Nov 2019 10:10:38 -0800
+Message-Id: <ee5aa6911b2e93b89e67ae6167ee7d9a029b9262.1575137343.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <cover.1575137343.git.akuster808@gmail.com>
 References: <cover.1575137343.git.akuster808@gmail.com>
-Subject: [PATCH 07/15] samba: fix installation for minimal build
+Subject: [PATCH 08/15] samba: upgrade 4.10.8 -> 4.10.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,48 +58,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Nov 2019 18:10:55 -0000
+X-List-Received-Date: Sat, 30 Nov 2019 18:10:56 -0000
 
-From: Andreas Oberritter <obi@opendreambox.org>
+From: Yi Zhao <yi.zhao@windriver.com>
 
-| chmod: cannot access '.../image/etc/sudoers.d': No such file or directory
-| sed: can't read .../image/usr/bin/samba-tool: No such file or directory
+Security fixes:
 
-Signed-off-by: Andreas Oberritter <obi@opendreambox.org>
+CVE-2019-10218: Client code can return filenames containing path
+                separators.
+CVE-2019-14833: Samba AD DC check password script does not receive the
+                full password.
+CVE-2019-14847: User with "get changes" permission can crash AD DC LDAP
+                server via dirsync.
+
+See: https://www.samba.org/samba/history/samba-4.10.10.html
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-connectivity/samba/samba_4.10.8.bb           | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
+ .../recipes-connectivity/samba/{samba_4.10.8.bb => samba_4.10.10.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/samba/{samba_4.10.8.bb => samba_4.10.10.bb} (98%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-index d824eac..4ab8b26 100644
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
+similarity index 98%
+rename from meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
+rename to meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
+index 4ab8b26..e002a9d 100644
 --- a/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.10.8.bb
-@@ -189,15 +189,17 @@ do_install_append() {
-         sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
-     fi
++++ b/meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
+@@ -34,8 +34,8 @@ SRC_URI_append_libc-musl = " \
+            file://0001-samba-fix-musl-lib-without-innetgr.patch \
+           "
  
--    chmod 0750 ${D}${sysconfdir}/sudoers.d
-+    chmod 0750 ${D}${sysconfdir}/sudoers.d || true
-     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
-     
--    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba-gpupdate
--    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_upgradedns 
--    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_spnupdate
--    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_kcc
--    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/samba_dnsupdate
--    sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${bindir}/samba-tool
-+    for f in samba-gpupdate samba_upgradedns samba_spnupdate samba_kcc samba_dnsupdate; do
-+        if [ -f "${D}${sbindir}/$f" ]; then
-+            sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${sbindir}/$f
-+        fi
-+    done
-+    if [ -f "${D}${bindir}/samba-tool" ]; then
-+        sed -i -e 's,${PYTHON},/usr/bin/env python3/,g' ${D}${bindir}/samba-tool
-+    fi
-     
- }
+-SRC_URI[md5sum] = "f3c722bbcd903479008fa1b529f56365"
+-SRC_URI[sha256sum] = "c41f05fb567f7359998b451543501c7690a2bf6551d658a76bd6916316a410f4"
++SRC_URI[md5sum] = "dde27447f39d124efe18f719ccf956dd"
++SRC_URI[sha256sum] = "700c734b51610e2feaa0d6744f9bec0c0d8917bca8cc78d5b63a4591f32866a5"
+ 
+ UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
  
 -- 
 2.7.4
