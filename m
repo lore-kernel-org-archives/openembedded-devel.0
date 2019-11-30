@@ -1,52 +1,37 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
-	[209.85.214.182])
-	by mail.openembedded.org (Postfix) with ESMTP id C13427F8C8
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id D6CB97F7B1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2019 18:11:01 +0000 (UTC)
-Received: by mail-pl1-f182.google.com with SMTP id h13so14257393plr.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2019 10:11:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Z0SyzHXvYQJ8ZLCHyyKcoKcq5AHCPwPSQXdq5qoKtjU=;
-	b=tsKFT8xaTUtSws5pfAGNy6BuMIdpKdqDgYj5i7LzUi6oeNhp0nqvJ6egzfiJiPiEST
-	+AvDguiutDsFBYu14c21fXEX5lNKcH/vY+u2P4P0Q7dxegWA1TyOcv6kE4ng6INlKisQ
-	+XMpA8wC/Ku90zFkg5fvSC4lw+xyiou4XbMgDQxRS1AGA0r8FPcWOMVxcNuJcV2PqyrZ
-	22qKR0P6pWIVYZjqSoVLaHo+xTxLve8VVJflpw8+v3idNW32SM+jFiBG0qZFYyrwCKbh
-	dK/qXeklCxIufY48v56ZVOl0pN54u+OBcvdw7SYIG3D1+y8rGoVE0GACwwCyciDeqJT+
-	Ak9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=Z0SyzHXvYQJ8ZLCHyyKcoKcq5AHCPwPSQXdq5qoKtjU=;
-	b=d/TpETzujNM/MvRIkHNnbiz27sM6wy9eO8DccVI3ggYrQi4Dhn4c1+jTvSYJ9ieedw
-	3u91PIeSHxZvO47vtH723oRk+0MbRj6h3CN+EqVTWfjaNYVkOoF73mDKw/X8BGoCosDS
-	NTKNEkIP5zOQMC80QrQ/FZs3kIbncf/UpCUk2IEqHNgdriukGyB7KUlakDYsAxAoDYCf
-	XZOzxE4tNlDMnEcRooIx32LYYIwEu6aKA4I63L6gisT/KnPkXgR34ljAP45AFPwtV/ok
-	eZeRVHliBGTVWh8pPGiMOD3EJ6WVTTDc5tf1zt6wJTGrTiBQcWVWApYOvcrjPOQ7uLgr
-	xNPw==
-X-Gm-Message-State: APjAAAWBd+8bvVLo6yZjTVJTXi5Uvh+fqQKSraxXH4H/0uHHyJnS4V1a
-	0eS/a42Mk3RP3c+7byCMsjylsjJX
-X-Google-Smtp-Source: APXvYqzbnbVmNqCxXFNqsSrQhC5tnlekgc/KT6Hdz9T6UF6sE0YoX5pt13wi9pXEJLA45JGB9PSbaw==
-X-Received: by 2002:a17:902:b702:: with SMTP id
-	d2mr19984117pls.104.1575137462598; 
-	Sat, 30 Nov 2019 10:11:02 -0800 (PST)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
-	([2601:202:4180:a5c0:c050:b516:8fc6:8cbf])
-	by smtp.gmail.com with ESMTPSA id d6sm490762pju.8.2019.11.30.10.11.01
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 30 Nov 2019 10:11:02 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 30 Nov 2019 10:10:45 -0800
-Message-Id: <c53a33030b3ff9172867cb23ff40e2a9694882fe.1575137343.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1575137343.git.akuster808@gmail.com>
+	Sat, 30 Nov 2019 18:22:40 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47QKVR0cz7z4M;
+	Sat, 30 Nov 2019 19:22:38 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1575138159;
+	bh=scrD7dKURPCTP5J6SBq13KeALSlC2uBo2P+qnyYrZhc=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=pi4kD92FywSBS+b5oYBadChTAzeT1SAEY5/zm/wk1A7g+NNqXUIdEDygN3Uhvluq6
+	MgCuoqAtB6ejuBy60MMp8cemVD9luxlLkAZnhxkAeRCJV3Wb7FZahq7rKpuChY2PDq
+	ZF0KcghjA/S8h7GCiuGg7OQb0rzhU4udo5h0/vMaZkQNYyA8iQ5qLDsqC7khAcY03M
+	R3a4OqbVbUTO21kEvvHBgCaEu3FfgXosQJNXZiT+adXDmREEUYQEQNQz9GiwVMVotB
+	9oNSl3TR61McPf8iwZ1h2jsnVX09Ry/z454GmxCHfQyp5vuzP6TDjFlixNzn9o5tCf
+	b+btdXFg872FV617+YRDlboESzdNX67Hw4IlPda4Hf97ys03CSK4VPcc/fLLDaMmqO
+	LE2HE6WaRJQNUOF5dn0HR4hlOibBryXNj2+ws2A8thB/HfgynERuir0PYhjw4FhwNi
+	rp+Cb+KpZBnyPDTvDFA5R9oug6u6Zg8yhuraXE35hiwvq5E48KrRD603iIXM+n4x03
+	qLCr65w4lcSB9P1zhv23+iagGLYS6SYLyCwbnMkOznPaSNJEkC0+K4DH0N/yiWzPQf
+	ekLU9PrlsFM3igkNSLH2YTccvx6kYvQjrdcqiCufbwz2JspXodFcvOE27KWaiAehmV
+	i8y3Vf/AB0/7Gw737yLk0KJ8=
+Date: Sat, 30 Nov 2019 20:22:30 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Armin Kuster <akuster808@gmail.com>
+Message-ID: <20191130182230.GB4526@localhost>
 References: <cover.1575137343.git.akuster808@gmail.com>
-Subject: [PATCH 15/15] nvme-cli: defer host ID generation to post installation
+	<3eb4c7a0825bd750dfb71fc5ff1e738daf9adcdf.1575137343.git.akuster808@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <3eb4c7a0825bd750dfb71fc5ff1e738daf9adcdf.1575137343.git.akuster808@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 03/15] python-more-itertools.inc: fix python2 package not incorrectly generated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,45 +44,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Nov 2019 18:11:01 -0000
+X-List-Received-Date: Sat, 30 Nov 2019 18:22:41 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
+This needs two more patches, see
+http://lists.openembedded.org/pipermail/openembedded-devel/2019-November/203247.html
 
-Signed-off-by: Stefan Wiehler <stefan.wiehler@missinglinkelectronics.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb
-index 6133b3a..92c902b 100644
---- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb
-+++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb
-@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/linux-nvme/nvme-cli"
- SECTION = "console/utils"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
--DEPENDS = "util-linux util-linux-native"
-+DEPENDS = "util-linux"
- PV .= "+git${SRCPV}"
- 
- SRC_URI = "git://github.com/linux-nvme/nvme-cli.git"
-@@ -21,6 +21,7 @@ do_install() {
- 
- pkg_postinst_ontarget_${PN}() {
-     ${sbindir}/nvme gen-hostnqn > ${sysconfdir}/nvme/hostnqn
-+    ${bindir}/uuidgen > ${sysconfdir}/nvme/hostid
- }
- 
- PACKAGES =+ "${PN}-dracut ${PN}-zsh-completion"
-@@ -28,3 +29,5 @@ PACKAGES =+ "${PN}-dracut ${PN}-zsh-completion"
- FILES_${PN} += "${systemd_system_unitdir}"
- FILES_${PN}-dracut = "${libdir}/dracut/dracut.conf.d"
- FILES_${PN}-zsh-completion = "${datadir}/zsh/site-functions"
-+
-+RDEPENDS_${PN} = "util-linux-uuidgen"
--- 
-2.7.4
-
+Thanks
+Adrian
 
