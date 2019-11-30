@@ -1,46 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
-	[209.85.222.182])
-	by mail.openembedded.org (Postfix) with ESMTP id DD4A460879
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
+	[209.85.215.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 548407F7BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2019 08:10:53 +0000 (UTC)
-Received: by mail-qk1-f182.google.com with SMTP id v23so19858085qkg.2
+	Sat, 30 Nov 2019 18:10:48 +0000 (UTC)
+Received: by mail-pg1-f176.google.com with SMTP id k25so193493pgt.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2019 00:10:55 -0800 (PST)
+	Sat, 30 Nov 2019 10:10:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=al449eSy5YYIiDHBrYel2d1G+Kd/OVOY/8+i6SjMb/o=;
-	b=iUjudgw3dJfUpWEccd2ZnRK5uIJb/hkMx6GtNKetxbbImAlOf5ymcKn1xc0CveemMd
-	3Cmk4Iif3tsLd49tG0dNbHT6GVQ1yFJSzM5RPfaaNO/UiIVzpuq5koP/vMkm5UGq69Zw
-	0vmfNrAzJnwUIjx7t9//dfOcRo1WXhWskuDJseWDb6mADo44BBh2BA56DLDKJ6jpqOOL
-	RBI2qlwtsJddVcqmAFtIaL0bbGQLrLgMgFKFRPPYCNPt0FBu23UhB8SQYWK/ICDOfqhG
-	vK/QSfETHbOco9/II0+x7Q053fYi2pp/q0eS6Nsr4MePbX2TJ9L8iJSBeovbuhNZYrCT
-	Cnhg==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NGcdrlzWEQcB8nVQtvOPVMcZ+XeBSl+mvXEnGoZwH1I=;
+	b=L1C44ClXuMfGZ5Rl3ZwS9jy/O1RNvMBVpxQc5E0WOp17TA5ZGusKblTr/UZKnyOqr4
+	N5Hu5Reekd4ipXvWEX5zBzMYU9Z/7S3IazMit411BHN0wVEzjaTmWSkAaFBCqaDWy3qV
+	NM1DgZrrr2wD2NtncsI/MGmee5+R0wXT7QTyPfMZvza8rciTJEEKdJpGUr1Hlx2P/1OS
+	04X19YdaVip1oExjOLjTFRs3Ku88Pfxjgh92MGqiar+nGZIuwfP95aon+Bmrif59Ba+B
+	1Jt2NcXkQQb7mHy9xdFtMO/P54bcylx8StXHCty1jhg8XZHrqt/WOthvwSbN5tObZmLS
+	8WRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=al449eSy5YYIiDHBrYel2d1G+Kd/OVOY/8+i6SjMb/o=;
-	b=iLftf1oPNRaZ5N80CD2FDc+Hr/jWv4Csc7KGZlXCMmRxviQFCACcJpWIPr31M2Bz8J
-	pI6oN5DNO/Ya3WTQmjXaWljsW0tLbTUOwumbrEJVxOI/lyfe5qOvKE36a7BXuG06W14E
-	R2K4PQp6x83CkllEVJy1mCT4tREPAL6KV25iMxp6LmVYtJVWvlgCjfVBfYfdBQsiMXOX
-	GwlPBzBEnML7iRbGgtRoY3ms3xKaYKGVFEnPR2bLJWClMF3Z5VV+B2llJTp4wuZBDVBd
-	xU6fuN31Jhiz4qtYwAFrEr6EffFlO6LFMOSXbQUTPqOA4tg93D/hC6V9jQOGotW7tZWJ
-	wH3w==
-X-Gm-Message-State: APjAAAULqXhQnChBs7J3aEpnWM3QkUDmkTiqtSQVM3KeISDJIOJK+lM5
-	vo7vBO6os8e/k1ddN2RyhCslqf6Tx9I7j5OZ7fXUILzk3H8=
-X-Google-Smtp-Source: APXvYqw97/3aBQGE6XgHhZIlpuo1w0hDE3QOVa1P8WJDfVK4sxheIv38S2T0VMz44ShXA333EKwIKraUWLaFy/oiBv8=
-X-Received: by 2002:ae9:ef50:: with SMTP id d77mr5786522qkg.71.1575101454275; 
-	Sat, 30 Nov 2019 00:10:54 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=NGcdrlzWEQcB8nVQtvOPVMcZ+XeBSl+mvXEnGoZwH1I=;
+	b=mqw/a+5Ukbmfekwbv4sRb6PIKsJMwunQxmxV4Fsw4O6dvyfQvkRohtvscJrzJ3eLdA
+	5Gp2aPVTEmZIYegVa/XmubDi7DTraAcKpl6jDvBsqI+hiAjgR/Hvt7QLjwOuk1QrMjkY
+	Gr4fewerdvtdVIKmBhynGEJPMNLhyDBoQHpFwH64D3WM6RE7QObThaQPm6chWa4T9iP5
+	XkB+wzAOWeXTxaxT1lb1NDvD8OT748OquVBtIj5/PRCSPGrejMKyQ/6tSUTSDTneNRod
+	HSUo2v+M665nUkVToaD5Ed0xqsf/GRD7hxQEATejcH1drOvMoFC8FTMKJRbaie7NIzfK
+	N0RQ==
+X-Gm-Message-State: APjAAAUeiuCN25LDzyis+rbnZb3Kzh8d4Pbhn81dWCioRZy88oXECnkG
+	FgAc7bD4wqz1mUztWQQZ0Lq1R3dy
+X-Google-Smtp-Source: APXvYqzTaogTgRcgWD6tv0LRGekAbeDG1VhWs3eE2yCRlIcP5SrUF5+keG9aljsRE/esFiEdvgJBOQ==
+X-Received: by 2002:a63:e648:: with SMTP id p8mr22885065pgj.259.1575137449024; 
+	Sat, 30 Nov 2019 10:10:49 -0800 (PST)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4180:a5c0:c050:b516:8fc6:8cbf])
+	by smtp.gmail.com with ESMTPSA id d6sm490762pju.8.2019.11.30.10.10.48
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 30 Nov 2019 10:10:48 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 30 Nov 2019 10:10:30 -0800
+Message-Id: <cover.1575137343.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <1575033276-1496-1-git-send-email-jacopo.dallaglio@kynetics.com>
-In-Reply-To: <1575033276-1496-1-git-send-email-jacopo.dallaglio@kynetics.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 30 Nov 2019 00:10:28 -0800
-Message-ID: <CAMKF1sq7svb+GBsnsnxJTs5bfOdpRS2uOh7qQQcADvMm1m8Pxg@mail.gmail.com>
-To: "Jacopo Dall'Aglio" <jacopo.dallaglio@kynetics.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] netplan: add recipe
+Subject: [PATCH 00/15] Zeus patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,95 +58,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Nov 2019 08:10:54 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 30 Nov 2019 18:10:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Fails to build on mips/sysvinit/glibc
+Please have comments back by Tuesday
 
-https://errors.yoctoproject.org/Errors/Details/289626/
+The following changes since commit aad5b3d070cd8c58828b0975cf861d8ebc90f460:
 
-On Fri, Nov 29, 2019 at 5:14 AM Jacopo Dall'Aglio
-<jacopo.dallaglio@kynetics.com> wrote:
->
-> Canonical's Netplan is a network configuration abstraction renderer written in
-> Python. It's compatible with NetworkManager and systemd-networkd.
->
-> Signed-off-by: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
-> ---
-> Resending patch to correct mailing-list. This patch depends on
-> "[meta-python][PATCH] python-netifaces: add recipes".
-> ---
->  .../recipes-connectivity/netplan/netplan_0.98.bb   | 55 ++++++++++++++++++++++
->  1 file changed, 55 insertions(+)
->  create mode 100644 meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
->
-> diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-> new file mode 100644
-> index 0000000..1251de3
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-> @@ -0,0 +1,55 @@
-> +SUMMARY = "The network configuration abstraction renderer"
-> +DESCRIPTION = "Netplan is a utility for easily configuring networking on a \
-> +linux system. You simply create a YAML description of the required network \
-> +interfaces and what each should be configured to do. From this description \
-> +Netplan will generate all the necessary configuration for your chosen renderer \
-> +tool."
-> +HOMEPAGE = "https://netplan.io"
-> +SECTION = "net/misc"
-> +
-> +LICENSE = "GPLv3"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-> +
-> +S = "${WORKDIR}/git"
-> +SRCREV = "5d22e9d22c4a3724d27b80b0cd9b898ae8f59d2b"
-> +PV = "0.98+git${SRCPV}"
-> +
-> +SRC_URI = " \
-> +        git://github.com/CanonicalLtd/netplan.git \
-> +"
-> +
-> +DEPENDS = "glib-2.0 libyaml"
-> +RDEPENDS_${PN} = "python3 python3-core python3-pyyaml python3-netifaces python3-nose python3-coverage python3-pycodestyle python-pyflakes util-linux-libuuid"
-> +
-> +inherit pkgconfig systemd
-> +
-> +TARGET_CC_ARCH += "${LDFLAGS}"
-> +
-> +EXTRA_OEMAKE = "generate netplan-dbus dbus/io.netplan.Netplan.service"
-> +
-> +do_install() {
-> +       install -d ${D}${sbindir} ${D}${base_libdir}/netplan ${D}${datadir}/netplan/netplan/cli/commands ${D}${sysconfdir}/netplan
-> +       install -m 755 ${S}/generate ${D}${base_libdir}/netplan/
-> +       install -m 644 ${S}/netplan/*.py ${D}${datadir}/netplan/netplan
-> +       install -m 644 ${S}/netplan/cli/*.py ${D}${datadir}/netplan/netplan/cli
-> +       install -m 644 ${S}/netplan/cli/commands/*.py ${D}${datadir}/netplan/netplan/cli/commands
-> +       install -m 755 ${S}/src/netplan.script ${D}${datadir}/netplan/
-> +       ln -srf ${D}${datadir}/netplan/netplan.script ${D}${sbindir}/netplan
-> +
-> +       install -d ${D}/${systemd_unitdir}/system ${D}${systemd_unitdir}/system-generators
-> +       install -m 644 ${S}/src/netplan-wpa@.service ${D}${systemd_unitdir}/system/
-> +       ln -srf ${D}/${base_libdir}/netplan/generate ${D}${systemd_unitdir}/system-generators
-> +
-> +       install -d ${D}${datadir}/dbus-1/system.d ${D}${datadir}/dbus-1/system-services
-> +       install -m 755 ${S}/netplan-dbus ${D}${base_libdir}/netplan
-> +       install -m 644 ${S}/dbus/io.netplan.Netplan.conf ${D}${datadir}/dbus-1/system.d
-> +       install -m 644 ${S}/dbus/io.netplan.Netplan.service ${D}${datadir}/dbus-1/system-services
-> +}
-> +
-> +SYSTEMD_SERVICE_${PN} = "netplan-wpa@.service"
-> +SYSTEMD_AUTO_ENABLE = "disable"
-> +
-> +PACKAGES += "${PN}-dbus"
-> +
-> +FILES_${PN} = "${sbindir} ${base_libdir}/netplan/generate ${datadir}/netplan ${sysconfdir}/netplan ${systemd_unitdir}"
-> +FILES_${PN}-dbus = "${base_libdir}/netplan/netplan-dbus ${datadir}/dbus-1"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+  README: updated Maintainers list for Zeus (2019-10-30 14:16:04 -0700)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
+
+Andreas Oberritter (1):
+  samba: fix installation for minimal build
+
+Hongxu Jia (1):
+  python-more-itertools.inc: fix python2 package not incorrectly
+    generated
+
+Khem Raj (1):
+  rsyslog: Dont force enable atomic builtins on mips
+
+Michael Scott (1):
+  modemmanager: Upgrade 1.10.6 -> 1.10.8
+
+Slater, Joseph (1):
+  php: fix CVE-2019-11043
+
+Stefan Wiehler (1):
+  nvme-cli: defer host ID generation to post installation
+
+Trevor Gamblin (3):
+  rsyslog: fix CVE-2019-17041
+  rsyslog: upgrade from v8.1908.0 to v8.1910.0
+  quagga: fix PIDFile path for service files
+
+Yi Zhao (2):
+  samba: upgrade 4.10.8 -> 4.10.10
+  freeradius: fix CVE-2019-10143
+
+Zheng Ruoqin (2):
+  mariadb: upgrade 10.3.16 -> 10.3.18
+  wireshark: upgrade 3.0.3 -> 3.0.6
+
+niko.mauno@vaisala.com (2):
+  gitpkgv.bbclass: Use --git-dir option
+  gitpkgv.bbclass: Support also lightweight tags
+
+ ...-to-radiusd-user-group-when-rotating-logs.patch | 104 +++++++++++++++++++++
+ .../freeradius/freeradius_3.0.19.bb                |   1 +
+ .../samba/{samba_4.10.8.bb => samba_4.10.10.bb}    |  20 ++--
+ .../recipes-protocols/quagga/files/bgpd.service    |   4 +-
+ .../recipes-protocols/quagga/files/ospf6d.service  |   4 +-
+ .../recipes-protocols/quagga/files/ospfd.service   |   4 +-
+ .../recipes-protocols/quagga/files/ripd.service    |   4 +-
+ .../recipes-protocols/quagga/files/ripngd.service  |   4 +-
+ .../recipes-protocols/quagga/files/zebra.service   |   4 +-
+ .../{wireshark_3.0.3.bb => wireshark_3.0.6.bb}     |   4 +-
+ meta-oe/classes/gitpkgv.bbclass                    |  15 ++-
+ meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb       |   5 +-
+ ...demmanager_1.10.6.bb => modemmanager_1.10.8.bb} |   4 +-
+ ...native_10.3.16.bb => mariadb-native_10.3.18.bb} |   0
+ meta-oe/recipes-dbs/mysql/mariadb.inc              |   4 +-
+ .../{mariadb_10.3.16.bb => mariadb_10.3.18.bb}     |   0
+ .../recipes-devtools/php/php/CVE-2019-11043.patch  |  38 ++++++++
+ meta-oe/recipes-devtools/php/php_7.3.9.bb          |   1 +
+ .../rsyslog/rsyslog/0001-Out-of-bounds-issue.patch |  31 ------
+ .../{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb}   |   6 +-
+ .../python/python-more-itertools.inc               |   2 -
+ 21 files changed, 186 insertions(+), 73 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
+ rename meta-networking/recipes-connectivity/samba/{samba_4.10.8.bb => samba_4.10.10.bb} (95%)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.0.3.bb => wireshark_3.0.6.bb} (95%)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.10.6.bb => modemmanager_1.10.8.bb} (92%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.16.bb => mariadb-native_10.3.18.bb} (100%)
+ rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.16.bb => mariadb_10.3.18.bb} (100%)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11043.patch
+ delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-Out-of-bounds-issue.patch
+ rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb} (97%)
+
+-- 
+2.7.4
+
 
