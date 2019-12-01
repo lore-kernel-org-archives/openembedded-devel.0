@@ -1,52 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 334167C85D
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 05E427C85D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Dec 2019 16:51:32 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id u8so4826970wmu.0
+	Sun,  1 Dec 2019 16:51:33 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id s14so13608812wmh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Dec 2019 08:51:34 -0800 (PST)
+	Sun, 01 Dec 2019 08:51:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=x+wOdDgHh6Qp7ZTIMCoU19TnNJH1KWK2PieajxjdzI0=;
-	b=froitcEGabkCfaBLaNMWQK5V+zCvKyhSTsaFWDl6Ojp0+7b9qCAYnKcDjBgFA1rhsf
-	+67dOqT6wCHM2++sWsyvYaI4Ij1nokXd4JovVyuccZdE65DMTqrQKUvkS3TNMmhY/Cxp
-	J2vXDxFRE2fNKAJaQPyotJdr01SpkpkUK7vYXlvx7BpVLKY9Sh5BQRI1kGrT/ufIwudN
-	ZPyhaO3CDQ+Ubr5lbkS/k0vulKXl6Ybf4q1y/yK+6rcARIM17fyaHeK5pv2ZP9xjfnzu
-	IJt8VnBg/LD9QNTK1pv6O25EVEzZPHXvCx1bk1lMnnE8/qgivUO/IOAzhflhcB+4cuSH
-	VOpw==
+	bh=Txh3EKOhvy2x/vEgoGyRVEpmN+uEx6uX5m7dUDa1hF8=;
+	b=c9ZG/Fca9Ds3R3pTuoWqnWmPkuAybvET+SPxe62NrzGYPiaYb/4UMf0UsvRoagGoBO
+	p15MliW+iSN71dNe88FUmvJEXyfH5wouvwUMc4CQwQsm3IH0LUVDH7qf2aPcu7OgiTKb
+	NL1Fj56lkHafahoTuGaMbx/ZI9eXavbG49K/qgdUqKhuSliNK6PLdfZ5b6k4S5NZ5KQr
+	VZvj1g4ANJ4ZOZokJ1cBjEEPLxqL11ZIe1OUoFkIUaUv+GnA4EeXxR1neRDf7LjZJSt5
+	kNtehP40poQOmcrgfcvv5e/wkshs4cxNGkm7ygHzd/PJLG/WVbwJ922JwkT3oxydQRSA
+	KChA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=x+wOdDgHh6Qp7ZTIMCoU19TnNJH1KWK2PieajxjdzI0=;
-	b=qMrm31Gqt3LdwIbJbie18bfUkjlRKzVKKdybKmwhzzKer8hE+Jw1L9h9AmnOc73xHS
-	6LNSjNS21s7ny2gxb+qtcvoEJuBkwoXHGe3VBKPpgKwBUCg1GUhQlYfbeLT7DQACTJ7J
-	9FLo4yIGTOD0gk4W45DZTo1rcSBz/tsEx3Yse5hMgouGxkdYGY2N9tLnlJQ8OZoUUrFM
-	bQNkxQnrEVKFo9+MhxU94npXQGI3v4NTKaVADMbs8/TKA/jzsUCwddPnkfdQTzlotYNf
-	SAOVNeZGSBAFbkAbOfweRRVj8D/NR8/HaWzdb0GeThSoxpVRv0J7WKZEwkeaUUOA+Der
-	UnxA==
-X-Gm-Message-State: APjAAAU1ohOCUno2ybyXIElw8Hu+G//+OKnTzKcyi1G5vSrmKuiWeg3J
-	/DVPO77IbwypHQWI/qSdELU2oLGw
-X-Google-Smtp-Source: APXvYqyQQRAxUUV092lSbnyCXxJTHL/hGc6X4DgwcsGc3Nt2WEcbSTlW7j3Eg5+e4c59PMFKnn/MRQ==
-X-Received: by 2002:a05:600c:249:: with SMTP id 9mr23609044wmj.2.1575219093247;
-	Sun, 01 Dec 2019 08:51:33 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=Txh3EKOhvy2x/vEgoGyRVEpmN+uEx6uX5m7dUDa1hF8=;
+	b=DS1H6r3+2JqNq8uieG0qnjmdrggobGqDaNxAtYn0SA/seWXhiZiEJaNvBGgUTymQjR
+	3TkXrjNh5yAgW5/UGbj88Grawn98FFU2JRtLsiHjwTgH7uCjQJURyUzcEXlcrP9Aodc8
+	kQwX3DWnJDvDsYajT1rKeIz/bDR3FfHwh1ke++lYFRodPZEz4/xtqJX0Rhyeo6x9OxLR
+	dvJjF7jmI05i0UonqjK8Jl+gYax5EPo+5eURdp6Ipc92L2hqdnf9ArxwE8Pvl0O7rLCG
+	QnYul67yeMHwv2qpqiGAVGdytuXip7LVPwgDZetJeMP2OFGJ9srC5KjgUmDWfDTXo+Xj
+	7wBA==
+X-Gm-Message-State: APjAAAXbWCAMcH8YwHqsVFT9XnBQzNlpVzJJX2ArrK592EaxlHAS+W5b
+	2IhBpjbrG1EuTw6p5hEwseddn1Re
+X-Google-Smtp-Source: APXvYqyHMIikVB7/zkjC38JoCeavctktfIHAAdnpP+AlCQOygV5XQtiK827KdH8/dSagadnkf+JvwA==
+X-Received: by 2002:a1c:ed09:: with SMTP id l9mr25042935wmh.101.1575219094522; 
+	Sun, 01 Dec 2019 08:51:34 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F3CDB845ACDC091B17366D2.dip0.t-ipconnect.de.
 	[2003:f0:7f3c:db84:5acd:c091:b173:66d2])
-	by smtp.gmail.com with ESMTPSA id g7sm6228088wrq.21.2019.12.01.08.51.32
+	by smtp.gmail.com with ESMTPSA id g7sm6228088wrq.21.2019.12.01.08.51.33
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 01 Dec 2019 08:51:32 -0800 (PST)
+	Sun, 01 Dec 2019 08:51:33 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  1 Dec 2019 17:51:17 +0100
-Message-Id: <20191201165123.12699-1-schnitzeltony@gmail.com>
+Date: Sun,  1 Dec 2019 17:51:18 +0100
+Message-Id: <20191201165123.12699-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20191201165123.12699-1-schnitzeltony@gmail.com>
+References: <20191201165123.12699-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/7] libgnomekbd: cleanup DEPENDS inherit gsettings / remove unused config
+Subject: [PATCH 2/7] gnome-system-monitor: add gsettings to inherit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,39 +61,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Dec 2019 16:51:33 -0000
+X-List-Received-Date: Sun, 01 Dec 2019 16:51:34 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* DEPENDS: gconf and intltool-native are not required / gtk+3 pulls glib-2.0
-* --disable-schemas-install is leftover from times gconf was used
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ .../gnome-system-monitor/gnome-system-monitor_3.32.1.bb         | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
-index d3b3bde43..52d6eeb13 100644
---- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
-+++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.26.1.bb
-@@ -4,14 +4,11 @@ LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
+diff --git a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.1.bb b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.1.bb
+index a3583d1de..f30edee68 100644
+--- a/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-system-monitor/gnome-system-monitor_3.32.1.bb
+@@ -14,7 +14,7 @@ DEPENDS = " \
  
- SECTION = "x11/gnome/libs"
+ GNOMEBASEBUILDCLASS = "meson"
  
--DEPENDS = "gconf glib-2.0 libxklavier gtk+3 intltool-native"
-+DEPENDS = "gtk+3 libxklavier"
+-inherit gnomebase gnome-help itstool gtk-icon-cache features_check gettext upstream-version-is-even
++inherit gnomebase gsettings gnome-help itstool gtk-icon-cache features_check gettext upstream-version-is-even
  
--inherit features_check gnomebase gobject-introspection gettext
-+inherit features_check gnomebase gobject-introspection gsettings gettext
+ REQUIRED_DISTRO_FEATURES = "x11 polkit"
  
- REQUIRED_DISTRO_FEATURES = "x11"
- 
- SRC_URI[archive.md5sum] = "98040022484406e7ebe25f82cef93344"
- SRC_URI[archive.sha256sum] = "f7ca02631576e9b88aee1b1bae37ac1488b80ee7975f20a97f29e761a7172679"
--
--EXTRA_OECONF_remove = "--disable-schemas-install"
--
 -- 
 2.21.0
 
