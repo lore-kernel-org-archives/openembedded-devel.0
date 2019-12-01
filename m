@@ -1,52 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
-	[209.85.210.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 728107F523
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 9FB547F57B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Dec 2019 18:46:39 +0000 (UTC)
-Received: by mail-pf1-f196.google.com with SMTP id b19so17349437pfd.3
+	Sun,  1 Dec 2019 18:46:40 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id j12so15221481plt.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Dec 2019 10:46:40 -0800 (PST)
+	Sun, 01 Dec 2019 10:46:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=s1wGg1ABmVHYUJYOMvx7z7SgxEsWstciWRaAOmdlEgE=;
-	b=oB33C037H2Q+pGBrST6zf2/L4zFHx/3z7NEy9Il7tdy3wb3kN2dzUBLnu/WavXLaJf
-	e77x6/0nw+38VDHLjFcE7WUJCDx7CtoGZU82R9J5PnFJSeS0tHYW83EUd81SyQbWfOLc
-	J2X8pM92KxyDwSFWT92wB5eEa6lqdfFAw4uYqmLXMflJqMDw/B5tvAc/u3JP2oxjgAkL
-	deqBiLdAvR6gxoDkO6r83y/BpYuzOO4fETzFYzrtVWk/uBPVaPPWpmBi4aj3EJfWB3kx
-	mY15a1Qn3cAgOMqPboD92phnZ+jfi5UzmTWmng9Nh7XSfJVq1ISK2kPuN+UTeVbdOPlp
-	i2mA==
+	bh=8M+EWRZegpJRFAZsRz87fEgbHc9sIlJGj4IsRZHrkzg=;
+	b=EKKvvKCDgwUroYHrnU9WNtB6jvc4oUdcyysi0tKChBndrI43x3a+gAPQZhkzJihyzw
+	kAU8dzNIkfceI//H/uyKU00ePTjJ9tNnk+7bIXljA7cY5SMlKJ0vU/uDrX7ht3XxpATg
+	UlL6m/j/ZoPRBQx/fZrvs67VHj/HEJhx5CEQiyArOIwCveqWXjIy1/HzKvdUZTJNnerd
+	8aFDdoY1DLbIvvC8El0kPq4saP3pBI5JgjEiS14marZjcIXwP8HJuwIkWaifPW1oE7Zi
+	2O4qXXQR/mW4X1T+M7UYTs5ZQQ9a1secMIiqcrmndBz9bmvhkFCAb6CowZwfpHP5LHzA
+	riLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=s1wGg1ABmVHYUJYOMvx7z7SgxEsWstciWRaAOmdlEgE=;
-	b=mL9BfgACB9tiYMFe/n2dV7uz1RkskMhxAYumVS0McfQyodfh5aTNra5l8osKpGJG3x
-	TC4essjMYIwgN8cl5n+C/F6RLS+/pwfntDj+pyv38Y4fgFXxaAk8iiZykv2V1fntAre2
-	TwaTPJEIFnfUKPl5vH2AnUxqO/0kPA5TezboRI7Qh7Q94AbnG3dDsZKE65GlEwUFO8/U
-	6dDx8WO1+YAl5aKAqAOp+9+cvGRuq08TKUE1O2/CRrWAwDEw6+b3lBUXHWw48aj1faL7
-	lY+2BDfSYFxxZGjvRr4e/0X7CD4v9/8qQpp+LjQofjA0J+ME0GvRaXuYdhut2AuLvZcB
-	CV/g==
-X-Gm-Message-State: APjAAAUUWEDAhx67PC6rHMrCytGrJ+rknpKHAthc392oRK9MFGWFGubl
-	yzEKgi9j+M7RBHQPjAS/IK6gPmXD8ig=
-X-Google-Smtp-Source: APXvYqyCEu97Ln23ZZAfX7eJIU0B2HrIRqz9i1re2fHxmZ2tLidvofdbkCc7zIjmnR1l0fiA1WyxfA==
-X-Received: by 2002:a63:d406:: with SMTP id a6mr7607365pgh.264.1575226000010; 
-	Sun, 01 Dec 2019 10:46:40 -0800 (PST)
+	bh=8M+EWRZegpJRFAZsRz87fEgbHc9sIlJGj4IsRZHrkzg=;
+	b=HPfHqQYlyVksb8gjtyadJz6az5fAs50LQ4MB5kwTuZRpWUHNm1Pk9R/pVuHUld/1V1
+	k+xIaQygpss6WW/a9aU/DNLiUn0LEWx85crl4HE/TbwGCSpEMSaNzBwwZ1s/cLupsRp6
+	BMspFaOmdkeXZUXaPBjLiXqFd2l9yJEpMSwa8KTJYBFTTgFU6mFA9v/tZ9KFpta5B1Kw
+	jn994duQ3XorCxBzMndmMj2XdSlsGPdSSBpOkPy/QJ9cw00SdF0Hc2GtIgqdRBtZzbHX
+	2HeKrqXaebtRLIJanyVW2iYkRqt/1cqAULA+29OqBcMvL0YoikOdb50u/TGnWX6BQzp3
+	DzRA==
+X-Gm-Message-State: APjAAAVqUzwlnALQnMvgtpN+4ZUIx3wFGu4wrfN6jo4dZVe3S1HIMh3R
+	5s2nlaZOyKIje+ooW9kTQ1ibL3qdk4g=
+X-Google-Smtp-Source: APXvYqy7rJEEkPkuBnOOr8rvvEQvC8YkDfPhgPev9Sj38RvsquodnjrM4oV4ZAWepkmepM+CKCq/NQ==
+X-Received: by 2002:a17:90a:c795:: with SMTP id
+	gn21mr2160409pjb.95.1575226001142; 
+	Sun, 01 Dec 2019 10:46:41 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:8500:1c20:55f2:e19b:8d5e:a884])
 	by smtp.gmail.com with ESMTPSA id
-	y24sm33916800pfr.116.2019.12.01.10.46.39
+	y24sm33916800pfr.116.2019.12.01.10.46.40
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 01 Dec 2019 10:46:39 -0800 (PST)
+	Sun, 01 Dec 2019 10:46:40 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  1 Dec 2019 10:46:20 -0800
-Message-Id: <20191201184622.889513-7-raj.khem@gmail.com>
+Date: Sun,  1 Dec 2019 10:46:21 -0800
+Message-Id: <20191201184622.889513-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <20191201184622.889513-1-raj.khem@gmail.com>
 References: <20191201184622.889513-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 7/9] utouch-evemu, utouch-frame: Fix build for 32bit arches with 64bit time_t
+Subject: [meta-oe][PATCH 8/9] directfb: Fix build for 32bit arches with 64bit time_t
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,131 +60,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Dec 2019 18:46:39 -0000
+X-List-Received-Date: Sun, 01 Dec 2019 18:46:40 -0000
 Content-Transfer-Encoding: 8bit
-
-Move patches from files/ directory into PN folders to avoid conflicts
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ld-on-32bit-arches-with-64bit-time_t.patch | 76 +++++++++++++++++++
- .../utouch/utouch-evemu_git.bb                |  4 +-
- ...ld-on-32bit-arches-with-64bit-time_t.patch | 41 ++++++++++
- ...tat.h-for-fixing-build-issue-on-musl.patch |  0
- .../remove-man-page-creation.patch            |  0
- .../utouch/utouch-frame_git.bb                |  1 +
- 6 files changed, 121 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/utouch/utouch-evemu/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
- create mode 100644 meta-oe/recipes-support/utouch/utouch-frame/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
- rename meta-oe/recipes-support/utouch/{files => utouch-frame}/0001-include-sys-stat.h-for-fixing-build-issue-on-musl.patch (100%)
- rename meta-oe/recipes-support/utouch/{files => utouch-frame}/remove-man-page-creation.patch (100%)
+ .../recipes-graphics/directfb/directfb.inc    |   3 +-
+ ...ld-on-32bit-arches-with-64bit-time_t.patch | 139 ++++++++++++++++++
+ 2 files changed, 141 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
 
-diff --git a/meta-oe/recipes-support/utouch/utouch-evemu/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch b/meta-oe/recipes-support/utouch/utouch-evemu/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
-new file mode 100644
-index 0000000000..71bf572699
---- /dev/null
-+++ b/meta-oe/recipes-support/utouch/utouch-evemu/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
-@@ -0,0 +1,76 @@
-+From 60987a1df8eb8c9196222375574dcd7bc0ad2daa Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 30 Nov 2019 20:23:27 -0800
-+Subject: [PATCH] Fix build on 32bit arches with 64bit time_t
-+
-+time element is deprecated on new input_event structure in kernel's
-+input.h [1]
-+
-+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit?id=152194fe9c3f
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/evemu-impl.h |  5 +++++
-+ src/evemu.c      | 16 +++++++++-------
-+ 2 files changed, 14 insertions(+), 7 deletions(-)
-+
-+diff --git a/src/evemu-impl.h b/src/evemu-impl.h
-+index acf2976..c08d861 100644
-+--- a/src/evemu-impl.h
-++++ b/src/evemu-impl.h
-+@@ -21,6 +21,11 @@
-+ #include <evemu.h>
-+ #include <linux/uinput.h>
-+ 
-++#ifndef input_event_sec
-++#define input_event_sec time.tv_sec
-++#define input_event_usec time.tv_usec
-++#endif
-++
-+ #define EVPLAY_NBITS	KEY_CNT
-+ #define EVPLAY_NBYTES	((EVPLAY_NBITS + 7) / 8)
-+ 
-+diff --git a/src/evemu.c b/src/evemu.c
-+index 21187af..160c915 100644
-+--- a/src/evemu.c
-++++ b/src/evemu.c
-+@@ -363,7 +363,7 @@ int evemu_read(struct evemu_device *dev, FILE *fp)
-+ int evemu_write_event(FILE *fp, const struct input_event *ev)
-+ {
-+ 	return fprintf(fp, "E: %lu.%06u %04x %04x %d\n",
-+-		       ev->time.tv_sec, (unsigned)ev->time.tv_usec,
-++		       ev->input_event_sec, (unsigned)ev->input_event_usec,
-+ 		       ev->type, ev->code, ev->value);
-+ }
-+ 
-+@@ -391,8 +391,8 @@ int evemu_read_event(FILE *fp, struct input_event *ev)
-+ 	int value;
-+ 	int ret = fscanf(fp, "E: %lu.%06u %04x %04x %d\n",
-+ 			 &sec, &usec, &type, &code, &value);
-+-	ev->time.tv_sec = sec;
-+-	ev->time.tv_usec = usec;
-++	ev->input_event_sec = sec;
-++	ev->input_event_usec = usec;
-+ 	ev->type = type;
-+ 	ev->code = code;
-+ 	ev->value = value;
-+@@ -411,12 +411,14 @@ int evemu_read_event_realtime(FILE *fp, struct input_event *ev,
-+ 
-+ 	if (evtime) {
-+ 		if (!evtime->tv_sec)
-+-			*evtime = ev->time;
-+-		usec = 1000000L * (ev->time.tv_sec - evtime->tv_sec);
-+-		usec += ev->time.tv_usec - evtime->tv_usec;
-++			evtime->tv_sec = ev->input_event_sec;
-++			evtime->tv_usec = ev->input_event_usec;
-++		usec = 1000000L * (ev->input_event_sec - evtime->tv_sec);
-++		usec += ev->input_event_usec - evtime->tv_usec;
-+ 		if (usec > 500) {
-+ 			usleep(usec);
-+-			*evtime = ev->time;
-++			evtime->tv_sec = ev->input_event_sec;
-++			evtime->tv_usec = ev->input_event_usec;
-+ 		}
-+ 	}
-+ 
-diff --git a/meta-oe/recipes-support/utouch/utouch-evemu_git.bb b/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
-index 1dd5a86d50..41d1cbfd97 100644
---- a/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
-+++ b/meta-oe/recipes-support/utouch/utouch-evemu_git.bb
-@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
- 
- inherit autotools
- 
--SRC_URI = "git://bitmath.org/git/evemu.git;protocol=http"
-+SRC_URI = "git://bitmath.org/git/evemu.git;protocol=http \
+diff --git a/meta-oe/recipes-graphics/directfb/directfb.inc b/meta-oe/recipes-graphics/directfb/directfb.inc
+index 96aa31117f..65fd89e6fe 100644
+--- a/meta-oe/recipes-graphics/directfb/directfb.inc
++++ b/meta-oe/recipes-graphics/directfb/directfb.inc
+@@ -21,7 +21,8 @@ SRC_URI = "http://downloads.yoctoproject.org/mirror/sources/DirectFB-${PV}.tar.g
+            file://use-PTHREAD_MUTEX_RECURSIVE.patch \
+            file://fix-client-gfx_state-initialisation.patch \
+            file://fix-tslib-version-check.patch \
+-          "
 +           file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
 +           "
- SRCREV = "9752b50e922572e4cd214ac45ed95e4ee410fe24"
  
- PV = "1.0.5+git${SRCPV}"
-diff --git a/meta-oe/recipes-support/utouch/utouch-frame/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch b/meta-oe/recipes-support/utouch/utouch-frame/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+ S = "${WORKDIR}/DirectFB-${PV}"
+ 
+diff --git a/meta-oe/recipes-graphics/directfb/directfb/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch b/meta-oe/recipes-graphics/directfb/directfb/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
 new file mode 100644
-index 0000000000..d405d43f14
+index 0000000000..2f766465e1
 --- /dev/null
-+++ b/meta-oe/recipes-support/utouch/utouch-frame/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
-@@ -0,0 +1,41 @@
-+From 895b6996e232700fb2a428838feaef418cc64b70 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/directfb/directfb/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+@@ -0,0 +1,139 @@
++From 0b66557f2e924023b12006b58d8e86149c745aed Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 30 Nov 2019 22:52:13 -0800
++Date: Sat, 30 Nov 2019 20:34:33 -0800
 +Subject: [PATCH] Fix build on 32bit arches with 64bit time_t
 +
 +time element is deprecated on new input_event structure in kernel's
@@ -194,54 +103,132 @@ index 0000000000..d405d43f14
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/frame-mtdev.c | 7 ++++++-
-+ 1 file changed, 6 insertions(+), 1 deletion(-)
++ inputdrivers/linux_input/linux_input.c | 36 ++++++++++++++++++--------
++ 1 file changed, 25 insertions(+), 11 deletions(-)
 +
-+diff --git a/src/frame-mtdev.c b/src/frame-mtdev.c
-+index c0f15d8..42ad380 100644
-+--- a/src/frame-mtdev.c
-++++ b/src/frame-mtdev.c
-+@@ -25,6 +25,11 @@
-+ #include <errno.h>
-+ #include <math.h>
++diff --git a/inputdrivers/linux_input/linux_input.c b/inputdrivers/linux_input/linux_input.c
++index 7e9a6ad..03deebc 100644
++--- a/inputdrivers/linux_input/linux_input.c
+++++ b/inputdrivers/linux_input/linux_input.c
++@@ -42,6 +42,11 @@ typedef unsigned long kernel_ulong_t;
++ 
++ #include <linux/input.h>
 + 
 ++#ifndef input_event_sec
 ++#define input_event_sec time.tv_sec
 ++#define input_event_usec time.tv_usec
 ++#endif
 ++
-+ static int is_pointer(const struct evemu_device *dev)
++ #ifndef KEY_OK
++ /* Linux kernel 2.5.42+ defines additional keys in linux/input.h */
++ #include "input_fake.h"
++@@ -754,7 +759,8 @@ translate_event( const LinuxInputData     *data,
++                  DFBInputEvent            *devt )
 + {
-+ 	return evemu_has_event(dev, EV_REL, REL_X) ||
-+@@ -200,7 +205,7 @@ static int handle_abs_event(utouch_frame_handle fh,
-+ static utouch_frame_time_t get_evtime_ms(const struct input_event *syn)
-+ {
-+ 	static const utouch_frame_time_t ms = 1000;
-+-	return syn->time.tv_usec / ms + syn->time.tv_sec * ms;
-++	return syn->input_event_usec / ms + syn->input_event_sec * ms;
-+ }
++      devt->flags     = DIEF_TIMESTAMP;
++-     devt->timestamp = levt->time;
+++     devt->timestamp.tv_sec = levt->input_event_sec;
+++     devt->timestamp.tv_usec = levt->input_event_usec;
 + 
-+ const struct utouch_frame *
-diff --git a/meta-oe/recipes-support/utouch/files/0001-include-sys-stat.h-for-fixing-build-issue-on-musl.patch b/meta-oe/recipes-support/utouch/utouch-frame/0001-include-sys-stat.h-for-fixing-build-issue-on-musl.patch
-similarity index 100%
-rename from meta-oe/recipes-support/utouch/files/0001-include-sys-stat.h-for-fixing-build-issue-on-musl.patch
-rename to meta-oe/recipes-support/utouch/utouch-frame/0001-include-sys-stat.h-for-fixing-build-issue-on-musl.patch
-diff --git a/meta-oe/recipes-support/utouch/files/remove-man-page-creation.patch b/meta-oe/recipes-support/utouch/utouch-frame/remove-man-page-creation.patch
-similarity index 100%
-rename from meta-oe/recipes-support/utouch/files/remove-man-page-creation.patch
-rename to meta-oe/recipes-support/utouch/utouch-frame/remove-man-page-creation.patch
-diff --git a/meta-oe/recipes-support/utouch/utouch-frame_git.bb b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
-index 39d46af8e9..1ebebfa9f5 100644
---- a/meta-oe/recipes-support/utouch/utouch-frame_git.bb
-+++ b/meta-oe/recipes-support/utouch/utouch-frame_git.bb
-@@ -12,6 +12,7 @@ inherit autotools pkgconfig
- SRC_URI = "git://bitmath.org/git/frame.git;protocol=http \
-            file://remove-man-page-creation.patch \
-            file://0001-include-sys-stat.h-for-fixing-build-issue-on-musl.patch \
-+           file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
-            "
- SRCREV = "95363d5a1f7394d71144bf3b408ef4e6db4350fc"
- 
++      switch (levt->type) {
++           case EV_KEY:
++@@ -2139,7 +2145,8 @@ touchpad_translate( struct touchpad_fsm_state *state,
++      int abs, rel;
++ 
++      devt->flags     = DIEF_TIMESTAMP | (dfb_config->linux_input_touch_abs ? DIEF_AXISABS : DIEF_AXISREL);
++-     devt->timestamp = levt->time;
+++     devt->timestamp.tv_sec = levt->input_event_sec;
+++     devt->timestamp.tv_usec = levt->input_event_usec;
++      devt->type      = DIET_AXISMOTION;
++ 
++      switch (levt->code) {
++@@ -2204,7 +2211,7 @@ touchpad_fsm( struct touchpad_fsm_state *state,
++               DFBInputEvent             *devt )
++ {
++      struct timeval timeout = { 0, 125000 };
++-
+++     struct timeval tval;
++      /* select() timeout? */
++      if (!levt) {
++           /* Check if button release is due. */
++@@ -2223,6 +2230,8 @@ touchpad_fsm( struct touchpad_fsm_state *state,
++           return 0;
++      }
++ 
+++     tval.tv_sec = levt->input_event_sec;
+++     tval.tv_usec = levt->input_event_usec;
++      /* More or less ignore these events for now */
++      if ((levt->type == EV_SYN && levt->code == SYN_REPORT) ||
++          (levt->type == EV_ABS && levt->code == ABS_PRESSURE) ||
++@@ -2233,7 +2242,7 @@ touchpad_fsm( struct touchpad_fsm_state *state,
++ 
++           /* Check if button release is due. */
++           if (state->fsm_state == TOUCHPAD_FSM_DRAG_START &&
++-              timeout_passed( &state->timeout, &levt->time )) {
+++              timeout_passed( &state->timeout, &tval )) {
++                devt->flags     = DIEF_TIMESTAMP;
++                devt->timestamp = state->timeout; /* timeout of levt->time? */
++                devt->type      = DIET_BUTTONRELEASE;
++@@ -2255,7 +2264,8 @@ touchpad_fsm( struct touchpad_fsm_state *state,
++      case TOUCHPAD_FSM_START:
++           if (touchpad_finger_landing( levt )) {
++                state->fsm_state = TOUCHPAD_FSM_MAIN;
++-               state->timeout = levt->time;
+++               state->timeout.tv_sec = levt->input_event_sec;
+++               state->timeout.tv_usec = levt->input_event_usec;
++                timeout_add( &state->timeout, &timeout );
++           }
++           return 0;
++@@ -2268,15 +2278,17 @@ touchpad_fsm( struct touchpad_fsm_state *state,
++                }
++           }
++           else if (touchpad_finger_leaving( levt )) {
++-               if (!timeout_passed( &state->timeout, &levt->time )) {
+++               if (!timeout_passed( &state->timeout, &tval )) {
++                     devt->flags     = DIEF_TIMESTAMP;
++-                    devt->timestamp = levt->time;
+++                    devt->timestamp.tv_sec = levt->input_event_sec;
+++                    devt->timestamp.tv_usec = levt->input_event_usec;
++                     devt->type      = DIET_BUTTONPRESS;
++                     devt->button    = DIBI_FIRST;
++ 
++                     touchpad_fsm_init( state );
++                     state->fsm_state = TOUCHPAD_FSM_DRAG_START;
++-                    state->timeout = levt->time;
+++                    state->timeout.tv_sec = levt->input_event_sec;
+++                    state->timeout.tv_usec = levt->input_event_usec;
++                     timeout_add( &state->timeout, &timeout );
++                     return 1;
++                }
++@@ -2287,7 +2299,7 @@ touchpad_fsm( struct touchpad_fsm_state *state,
++           return 0;
++ 
++      case TOUCHPAD_FSM_DRAG_START:
++-          if (timeout_passed( &state->timeout, &levt->time )){
+++          if (timeout_passed( &state->timeout, &tval )){
++                devt->flags     = DIEF_TIMESTAMP;
++                devt->timestamp = state->timeout; /* timeout of levt->time? */
++                devt->type      = DIET_BUTTONRELEASE;
++@@ -2299,7 +2311,8 @@ touchpad_fsm( struct touchpad_fsm_state *state,
++           else {
++                if (touchpad_finger_landing( levt )) {
++                     state->fsm_state = TOUCHPAD_FSM_DRAG_MAIN;
++-                    state->timeout = levt->time;
+++                    state->timeout.tv_sec = levt->input_event_sec;
+++                    state->timeout.tv_usec = levt->input_event_usec;
++                     timeout_add( &state->timeout, &timeout );
++                }
++           }
++@@ -2314,7 +2327,8 @@ touchpad_fsm( struct touchpad_fsm_state *state,
++           }
++           else if (touchpad_finger_leaving( levt )) {
++                devt->flags     = DIEF_TIMESTAMP;
++-               devt->timestamp = levt->time;
+++               devt->timestamp.tv_sec = levt->input_event_sec;
+++               devt->timestamp.tv_usec = levt->input_event_usec;
++                devt->type      = DIET_BUTTONRELEASE;
++                devt->button    = DIBI_FIRST;
++ 
 -- 
 2.24.0
 
