@@ -1,50 +1,48 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
-	[209.85.166.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A8E3C7DD6A
+Received: from mail-il1-f195.google.com (mail-il1-f195.google.com
+	[209.85.166.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DD917DD6A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Dec 2019 06:41:27 +0000 (UTC)
-Received: by mail-io1-f66.google.com with SMTP id s2so1136019iog.10
+	Sun,  1 Dec 2019 06:42:14 +0000 (UTC)
+Received: by mail-il1-f195.google.com with SMTP id u16so4378877ilg.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2019 22:41:29 -0800 (PST)
+	Sat, 30 Nov 2019 22:42:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=NkzOiwzS204axWFNqr2QNWaumwoPW38dyTl1lHvWhXE=;
-	b=cu0BLjVefQL5pmi7kxUy7BWxgsY+RKAxNcyzzEGqPpwrgOh81IEw/yg90sX1q/suX0
-	RvUChbDfxNQLQ6u/XT0yy78WK44CP+vucUJbxxqxwMFLANx9x2TW7LBEMm4NVn6J2YmP
-	UJNWhQhT+urZHkUejXdcvoVZT41lWg6s2PbkB9Ya1AdillWAvetdrQ3IQ1/LA9QwRLII
-	Z2EIKvL23MZf1yNGWp475436vqbqpeMTIi0cuzitTNqoP+/DY+mAakcKXE/hZYp6SvMD
-	2aaT8rnnhuuIbBWEu3ucHNbGs/Um5aHAFmVCriIl4+cYpEdDQflnUXQqIToJkcZX6qO4
-	aHug==
+	:cc; bh=iXgPbiF11rcVzVQq+MjPTywIqdb2FapRaWu3QIjsneQ=;
+	b=PAd99bs4c/mBv5fgDFzpbYTDYznUBph+qDDZ+cgP0J6XoEf8BKOgkjsp8gggRKM0SS
+	t2SpASBP9bY48ZpukV3NintWNCgoTvten8NV7BjZ2JoDkRx+NAQz9hoWauLU/Ia8KCHj
+	UWr7Bw/Qk5no/dWyhRV7M3UeorUwMJx3H2UqPESAA4QdXCdc0dA4sIhyhqQSlZCqGp03
+	LlOsyDKh4l1Bio88BWz3ELpRWGPGoeVJ+OEFOknCNo3umnFU2HYtgTDaQe9HJNF5R2NW
+	sYQwT0bqTC07XWWjfy1IDoGOtdkCyEGY28MNNWWN131wNTPyD3/Nec04Te5x5guxGl7c
+	4cnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=NkzOiwzS204axWFNqr2QNWaumwoPW38dyTl1lHvWhXE=;
-	b=gz+axuOkJxornma20cgKQ945cm0VkVrBZ4EbtN/kGw5pmVaA1AX4ouZVXC9o2lDOOK
-	KSyJuO4LH6FxD+D4uUwylmdwSs+CCJLa7MwHHJfzYNnDw89QaCXaRxSIW6WzpdjabgjZ
-	wJ6t1TDDfs0CpWGo5Rqtzo6rh0QaOlLOZMliBkjlDsJMH0f1BYDheU2scuGFg6590Yr2
-	Ck1XOT9g4aeThReLTAI9dpJAz2qFs5Z5E76u4ZMOwLlWy1LXmLfSGVaea6W4x1VfqJB+
-	IwJ9W45GKS/IlWAIJJMF7Vt+SpNQRilmHNm6r9ypPXMm3Igg1DxI64RUDXxJfdJs4nxq
-	/T+Q==
-X-Gm-Message-State: APjAAAWtsAbcjy2DEjvC0SQ9G95Sq+LRStLrGrpGZLVBzprFruCgPcsQ
-	u7CGkJxtUnk6JllnD1G1MA5XJLYC4zckZUKsx47Qw3DL
-X-Google-Smtp-Source: APXvYqyEio0lID5G/zjog4xL/vKWPEscPA2GcohVg42DCdpV9tXHMntmXzwug33OrP0IfGv+UPcZ12ar6kwD3hhPuEs=
-X-Received: by 2002:a05:6638:35d:: with SMTP id
-	x29mr15039613jap.46.1575182488579; 
-	Sat, 30 Nov 2019 22:41:28 -0800 (PST)
+	bh=iXgPbiF11rcVzVQq+MjPTywIqdb2FapRaWu3QIjsneQ=;
+	b=LJ1Yt5vCQxnabU4d/djc78o1KaXuQU277P49maVAPbOpDq2t1IjMEzEWe+g4E54g9t
+	NQDZfzXR1Fw1g4mlIe7X6TgFCUl7HniwTEcX+ux6OB1FNEPRF2NZdO1oZ5uPYyW/GXuH
+	jQ7+5nSbkKhAYgRW5exV7mudQjGKH3SG24R054uSPAL17Qsw3BdvCEvD8mFf6ZgAMAKd
+	CMJywqENfxMUShd7o7pZqChJjYdImDKqwFtWMee3ZioCS5XcxNyx8UUKuTRMdpvG6OFQ
+	GKEG0znoQ0EZ0RaoVl/+Qml1m5YeCvXmI8b8tBp2sGcgsQbvdLa+vRhUjAtQeblgaT3/
+	uwjA==
+X-Gm-Message-State: APjAAAV/znLZ6Oa92Wp1O0evidIfX9NJahZ2rbv9Kt8fAqr6Oopc/tNK
+	glZOCd8ZWGQv0/KBakSFowKonx/dLobbDlgqjO8ujLvZwXg=
+X-Google-Smtp-Source: APXvYqwIA8kb6/HotTwLVm2VbKCjUy+IEhyMFjR0Vjv+Totf2tORhAEAYaoOupve0O/0NHVDgMezdfPTbuPh/nBnIlg=
+X-Received: by 2002:a92:1092:: with SMTP id 18mr13861307ilq.198.1575182535406; 
+	Sat, 30 Nov 2019 22:42:15 -0800 (PST)
 MIME-Version: 1.0
 References: <1574932470-14682-1-git-send-email-wangmy@cn.fujitsu.com>
-	<1574932470-14682-5-git-send-email-wangmy@cn.fujitsu.com>
-	<CAMKF1so-mGHLhpebFOGC+4Qn7M9_99MrNq8uM7d6ieWmcA3k0w@mail.gmail.com>
-In-Reply-To: <CAMKF1so-mGHLhpebFOGC+4Qn7M9_99MrNq8uM7d6ieWmcA3k0w@mail.gmail.com>
+	<CAMKF1spgSzLNDKqZiVLfg3E2R3KKAT_JaEaoSg6ew0jq8iWZDg@mail.gmail.com>
+In-Reply-To: <CAMKF1spgSzLNDKqZiVLfg3E2R3KKAT_JaEaoSg6ew0jq8iWZDg@mail.gmail.com>
 From: Tim Orling <ticotimo@gmail.com>
-Date: Sat, 30 Nov 2019 22:41:17 -0800
-Message-ID: <CANx9H-Ceb07rnb1Z8q3avFsHHpkJSaX3Nj2+ObPqj4wF9k8Sow@mail.gmail.com>
+Date: Sat, 30 Nov 2019 22:42:03 -0800
+Message-ID: <CANx9H-Bnma31n4LcwHCHkThCh7X8QMZqdhKgzdGByyKXBxxy=g@mail.gmail.com>
 To: Wang Mingyu <wangmy@cn.fujitsu.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] python-cmd2: upgrade 0.9.19 -> 0.9.20
+Subject: Re: [meta-oe][PATCH] python-simplejson: upgrade 3.16.0 -> 3.17.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,51 +55,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Dec 2019 06:41:27 -0000
+X-List-Received-Date: Sun, 01 Dec 2019 06:42:14 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 Also, please use the correct subject line [meta-python] NOT [meta-oe]. This
 makes it much harder to automate patch review.
 
-On Fri, Nov 29, 2019 at 4:36 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Fri, Nov 29, 2019 at 4:34 PM Khem Raj <raj.khem@gmail.com> wrote:
 
-> please upgrade both py2 and py3 versions together
+> there is a py2 variant as well. So please upgrade both in tandem.
 >
 > On Wed, Nov 27, 2019 at 6:30 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
 > >
 > > Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 > > ---
-> >  meta-python/recipes-devtools/python/python-cmd2.inc                   |
+> >  meta-python/recipes-devtools/python/python-simplejson.inc             |
 > 4 ++--
-> >  .../python/{python-cmd2_0.9.19.bb => python-cmd2_0.9.20.bb}
->  | 0
+> >  .../{python-simplejson_3.16.0.bb => python-simplejson_3.17.0.bb}
+> | 0
 > >  2 files changed, 2 insertions(+), 2 deletions(-)
-> >  rename meta-python/recipes-devtools/python/{python-cmd2_0.9.19.bb =>
-> python-cmd2_0.9.20.bb} (100%)
+> >  rename meta-python/recipes-devtools/python/{python-simplejson_3.16.0.bb
+> => python-simplejson_3.17.0.bb} (100%)
 > >
-> > diff --git a/meta-python/recipes-devtools/python/python-cmd2.inc
-> b/meta-python/recipes-devtools/python/python-cmd2.inc
-> > index 3a6bf54..1a4249d 100644
-> > --- a/meta-python/recipes-devtools/python/python-cmd2.inc
-> > +++ b/meta-python/recipes-devtools/python/python-cmd2.inc
-> > @@ -3,8 +3,8 @@ HOMEPAGE = "http://packages.python.org/cmd2/"
+> > diff --git a/meta-python/recipes-devtools/python/python-simplejson.inc
+> b/meta-python/recipes-devtools/python/python-simplejson.inc
+> > index 5592eaf..1a8d390 100644
+> > --- a/meta-python/recipes-devtools/python/python-simplejson.inc
+> > +++ b/meta-python/recipes-devtools/python/python-simplejson.inc
+> > @@ -4,8 +4,8 @@ HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson
+> "
 > >  LICENSE = "MIT"
-> >  LIC_FILES_CHKSUM = "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
+> >  LIC_FILES_CHKSUM =
+> "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"
 > >
-> > -SRC_URI[md5sum] = "20f3f76b2aaf36a17372717b469ca969"
+> > -SRC_URI[md5sum] = "744fa99aed207478f8fbf9dd9f04fad3"
 > > -SRC_URI[sha256sum] =
-> "c81284083d993af18b8fef57d89d854d49d051d4c2c8a8e12d0281e369ac3682"
-> > +SRC_URI[md5sum] = "38e573f0b1d868f21068b726c285e52b"
+> "b1f329139ba647a9548aa05fb95d046b4a677643070dc2afc05fa2e975d09ca5"
+> > +SRC_URI[md5sum] = "8a5ed75c367b90fedc3d685742e2a1c7"
 > > +SRC_URI[sha256sum] =
-> "1ba349af127f9052363972adcbcfb921f9ca5e90f2bcbfba11b117500f11a845"
+> "2b4b2b738b3b99819a17feaf118265d0753d5536049ea570b3c43b51c4701e81"
 > >
 > >  inherit pypi
 > >
-> > diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.9.19.bb
-> b/meta-python/recipes-devtools/python/python-cmd2_0.9.20.bb
+> > diff --git a/meta-python/recipes-devtools/python/
+> python-simplejson_3.16.0.bb b/meta-python/recipes-devtools/python/
+> python-simplejson_3.17.0.bb
 > > similarity index 100%
-> > rename from meta-python/recipes-devtools/python/python-cmd2_0.9.19.bb
-> > rename to meta-python/recipes-devtools/python/python-cmd2_0.9.20.bb
+> > rename from meta-python/recipes-devtools/python/
+> python-simplejson_3.16.0.bb
+> > rename to meta-python/recipes-devtools/python/
+> python-simplejson_3.17.0.bb
 > > --
 > > 2.7.4
 > >
