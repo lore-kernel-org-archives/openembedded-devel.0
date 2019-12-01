@@ -1,46 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f170.google.com (mail-qk1-f170.google.com
-	[209.85.222.170])
-	by mail.openembedded.org (Postfix) with ESMTP id EFEE27F821
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A8E3C7DD6A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2019 18:22:44 +0000 (UTC)
-Received: by mail-qk1-f170.google.com with SMTP id d124so13381803qke.6
+	Sun,  1 Dec 2019 06:41:27 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id s2so1136019iog.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 30 Nov 2019 10:22:46 -0800 (PST)
+	Sat, 30 Nov 2019 22:41:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eUHlUjKSD8YQ/Vp7w/vQhsOOskHHatoO0itFHe/taU4=;
-	b=ALkq3ObUFKAL5LpdAkQOn3m/g5klxy70QErZ6+W3cVlrvwXIqTgs142E5+EsJnOHxf
-	xjfcvAiK1hDvXaHnaBtPwf1IOfcEwKtpxaiXezYh7qCUQqYKESDMoTRwVqocEk1HFaM9
-	QP126me3s35q4cO6En8HnCxC19VD0M5Yerjdldn0gIeteyQQ46H4U8I21jdWrT8Hdlyb
-	9ft9Xh0fBIXPvo1HGvutn7Es5zyalaV1WnKS3g2yUohaUh8zDQGZ9JyA8iyQ2+9x6u3/
-	8+K2I8podtrHqCWyh49ozC8c7pGgrH0OwckImOw8RMtodbuA8YdbhHPKbfSiSf62Q2bz
-	HTLQ==
+	:cc; bh=NkzOiwzS204axWFNqr2QNWaumwoPW38dyTl1lHvWhXE=;
+	b=cu0BLjVefQL5pmi7kxUy7BWxgsY+RKAxNcyzzEGqPpwrgOh81IEw/yg90sX1q/suX0
+	RvUChbDfxNQLQ6u/XT0yy78WK44CP+vucUJbxxqxwMFLANx9x2TW7LBEMm4NVn6J2YmP
+	UJNWhQhT+urZHkUejXdcvoVZT41lWg6s2PbkB9Ya1AdillWAvetdrQ3IQ1/LA9QwRLII
+	Z2EIKvL23MZf1yNGWp475436vqbqpeMTIi0cuzitTNqoP+/DY+mAakcKXE/hZYp6SvMD
+	2aaT8rnnhuuIbBWEu3ucHNbGs/Um5aHAFmVCriIl4+cYpEdDQflnUXQqIToJkcZX6qO4
+	aHug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=eUHlUjKSD8YQ/Vp7w/vQhsOOskHHatoO0itFHe/taU4=;
-	b=F7vqRZlxpNZtDgYp0zVKzW+h6DvNk2ghAI5DnDbBQJTOr5+YwpESDai8NhTmf/uosd
-	lVC7+rNHdZmudTorgroIohU+MMwWecavhArKV6+us9BIW4rE8AUG1jae3VMeglBcUdj0
-	XiYOYQNatEavIEHMbUunxuy7K7enrUSBlXkGdyffPRKA3rwgd6RdJHro1dlSODQvnlgF
-	lf7IH+v6iJILYycd9ql/6ae5g2+jMz0orFspuUuVSQEi+G1MibzIMhDt331uHSoWg6b6
-	8IPIPWkcuVMFEiujTIOtCQcMk47Q6VLgd6pg8KN1shzvApUbO8nFyFbDdtAr8RdY8Cdc
-	zj9g==
-X-Gm-Message-State: APjAAAUBZo7M6PRkArcW0gbY311ruI699uDJd1486mEDFAWL2kSE9w3+
-	85MU6jTzleKqEcpvDuhkDOmjAj2jq6f8ORLkgtk=
-X-Google-Smtp-Source: APXvYqyQmtANlOoTJxNVCdUpxSz8DfXZ7EpYghBnkfjAd3jA9M6oPuq7YIRW0VlF7Sw3eKOGohtuNwtO5sQ7XhIkQDk=
-X-Received: by 2002:a37:a348:: with SMTP id m69mr21551797qke.474.1575138165323;
-	Sat, 30 Nov 2019 10:22:45 -0800 (PST)
+	bh=NkzOiwzS204axWFNqr2QNWaumwoPW38dyTl1lHvWhXE=;
+	b=gz+axuOkJxornma20cgKQ945cm0VkVrBZ4EbtN/kGw5pmVaA1AX4ouZVXC9o2lDOOK
+	KSyJuO4LH6FxD+D4uUwylmdwSs+CCJLa7MwHHJfzYNnDw89QaCXaRxSIW6WzpdjabgjZ
+	wJ6t1TDDfs0CpWGo5Rqtzo6rh0QaOlLOZMliBkjlDsJMH0f1BYDheU2scuGFg6590Yr2
+	Ck1XOT9g4aeThReLTAI9dpJAz2qFs5Z5E76u4ZMOwLlWy1LXmLfSGVaea6W4x1VfqJB+
+	IwJ9W45GKS/IlWAIJJMF7Vt+SpNQRilmHNm6r9ypPXMm3Igg1DxI64RUDXxJfdJs4nxq
+	/T+Q==
+X-Gm-Message-State: APjAAAWtsAbcjy2DEjvC0SQ9G95Sq+LRStLrGrpGZLVBzprFruCgPcsQ
+	u7CGkJxtUnk6JllnD1G1MA5XJLYC4zckZUKsx47Qw3DL
+X-Google-Smtp-Source: APXvYqyEio0lID5G/zjog4xL/vKWPEscPA2GcohVg42DCdpV9tXHMntmXzwug33OrP0IfGv+UPcZ12ar6kwD3hhPuEs=
+X-Received: by 2002:a05:6638:35d:: with SMTP id
+	x29mr15039613jap.46.1575182488579; 
+	Sat, 30 Nov 2019 22:41:28 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1575137343.git.akuster808@gmail.com>
-In-Reply-To: <cover.1575137343.git.akuster808@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 30 Nov 2019 10:22:18 -0800
-Message-ID: <CAMKF1spELhX7gHHXJd88bS9n9ezCrsh+b7ZM+pn+5zcjXBDkvQ@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
+References: <1574932470-14682-1-git-send-email-wangmy@cn.fujitsu.com>
+	<1574932470-14682-5-git-send-email-wangmy@cn.fujitsu.com>
+	<CAMKF1so-mGHLhpebFOGC+4Qn7M9_99MrNq8uM7d6ieWmcA3k0w@mail.gmail.com>
+In-Reply-To: <CAMKF1so-mGHLhpebFOGC+4Qn7M9_99MrNq8uM7d6ieWmcA3k0w@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Sat, 30 Nov 2019 22:41:17 -0800
+Message-ID: <CANx9H-Ceb07rnb1Z8q3avFsHHpkJSaX3Nj2+ObPqj4wF9k8Sow@mail.gmail.com>
+To: Wang Mingyu <wangmy@cn.fujitsu.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/15] Zeus patch review
+Subject: Re: [meta-oe][PATCH] python-cmd2: upgrade 0.9.19 -> 0.9.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,99 +57,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 30 Nov 2019 18:22:45 -0000
+X-List-Received-Date: Sun, 01 Dec 2019 06:41:27 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Nov 30, 2019 at 10:11 AM Armin Kuster <akuster808@gmail.com> wrote:
->
-> Please have comments back by Tuesday
->
-> The following changes since commit aad5b3d070cd8c58828b0975cf861d8ebc90f460:
->
->   README: updated Maintainers list for Zeus (2019-10-30 14:16:04 -0700)
->
-> are available in the git repository at:
->
->   git://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
->   http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
->
-> Andreas Oberritter (1):
->   samba: fix installation for minimal build
->
-> Hongxu Jia (1):
->   python-more-itertools.inc: fix python2 package not incorrectly
->     generated
->
-> Khem Raj (1):
->   rsyslog: Dont force enable atomic builtins on mips
->
-> Michael Scott (1):
->   modemmanager: Upgrade 1.10.6 -> 1.10.8
->
-> Slater, Joseph (1):
->   php: fix CVE-2019-11043
->
-> Stefan Wiehler (1):
->   nvme-cli: defer host ID generation to post installation
->
-> Trevor Gamblin (3):
->   rsyslog: fix CVE-2019-17041
->   rsyslog: upgrade from v8.1908.0 to v8.1910.0
->   quagga: fix PIDFile path for service files
->
-> Yi Zhao (2):
->   samba: upgrade 4.10.8 -> 4.10.10
->   freeradius: fix CVE-2019-10143
->
-> Zheng Ruoqin (2):
->   mariadb: upgrade 10.3.16 -> 10.3.18
->   wireshark: upgrade 3.0.3 -> 3.0.6
->
-> niko.mauno@vaisala.com (2):
->   gitpkgv.bbclass: Use --git-dir option
->   gitpkgv.bbclass: Support also lightweight tags
->
+Also, please use the correct subject line [meta-python] NOT [meta-oe]. This
+makes it much harder to automate patch review.
 
-this list looks good to me.
+On Fri, Nov 29, 2019 at 4:36 PM Khem Raj <raj.khem@gmail.com> wrote:
 
->  ...-to-radiusd-user-group-when-rotating-logs.patch | 104 +++++++++++++++++++++
->  .../freeradius/freeradius_3.0.19.bb                |   1 +
->  .../samba/{samba_4.10.8.bb => samba_4.10.10.bb}    |  20 ++--
->  .../recipes-protocols/quagga/files/bgpd.service    |   4 +-
->  .../recipes-protocols/quagga/files/ospf6d.service  |   4 +-
->  .../recipes-protocols/quagga/files/ospfd.service   |   4 +-
->  .../recipes-protocols/quagga/files/ripd.service    |   4 +-
->  .../recipes-protocols/quagga/files/ripngd.service  |   4 +-
->  .../recipes-protocols/quagga/files/zebra.service   |   4 +-
->  .../{wireshark_3.0.3.bb => wireshark_3.0.6.bb}     |   4 +-
->  meta-oe/classes/gitpkgv.bbclass                    |  15 ++-
->  meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb       |   5 +-
->  ...demmanager_1.10.6.bb => modemmanager_1.10.8.bb} |   4 +-
->  ...native_10.3.16.bb => mariadb-native_10.3.18.bb} |   0
->  meta-oe/recipes-dbs/mysql/mariadb.inc              |   4 +-
->  .../{mariadb_10.3.16.bb => mariadb_10.3.18.bb}     |   0
->  .../recipes-devtools/php/php/CVE-2019-11043.patch  |  38 ++++++++
->  meta-oe/recipes-devtools/php/php_7.3.9.bb          |   1 +
->  .../rsyslog/rsyslog/0001-Out-of-bounds-issue.patch |  31 ------
->  .../{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb}   |   6 +-
->  .../python/python-more-itertools.inc               |   2 -
->  21 files changed, 186 insertions(+), 73 deletions(-)
->  create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
->  rename meta-networking/recipes-connectivity/samba/{samba_4.10.8.bb => samba_4.10.10.bb} (95%)
->  rename meta-networking/recipes-support/wireshark/{wireshark_3.0.3.bb => wireshark_3.0.6.bb} (95%)
->  rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.10.6.bb => modemmanager_1.10.8.bb} (92%)
->  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.16.bb => mariadb-native_10.3.18.bb} (100%)
->  rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.16.bb => mariadb_10.3.18.bb} (100%)
->  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11043.patch
->  delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-Out-of-bounds-issue.patch
->  rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb} (97%)
+> please upgrade both py2 and py3 versions together
 >
-> --
-> 2.7.4
->
+> On Wed, Nov 27, 2019 at 6:30 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
+> >
+> > Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+> > ---
+> >  meta-python/recipes-devtools/python/python-cmd2.inc                   |
+> 4 ++--
+> >  .../python/{python-cmd2_0.9.19.bb => python-cmd2_0.9.20.bb}
+>  | 0
+> >  2 files changed, 2 insertions(+), 2 deletions(-)
+> >  rename meta-python/recipes-devtools/python/{python-cmd2_0.9.19.bb =>
+> python-cmd2_0.9.20.bb} (100%)
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python-cmd2.inc
+> b/meta-python/recipes-devtools/python/python-cmd2.inc
+> > index 3a6bf54..1a4249d 100644
+> > --- a/meta-python/recipes-devtools/python/python-cmd2.inc
+> > +++ b/meta-python/recipes-devtools/python/python-cmd2.inc
+> > @@ -3,8 +3,8 @@ HOMEPAGE = "http://packages.python.org/cmd2/"
+> >  LICENSE = "MIT"
+> >  LIC_FILES_CHKSUM = "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
+> >
+> > -SRC_URI[md5sum] = "20f3f76b2aaf36a17372717b469ca969"
+> > -SRC_URI[sha256sum] =
+> "c81284083d993af18b8fef57d89d854d49d051d4c2c8a8e12d0281e369ac3682"
+> > +SRC_URI[md5sum] = "38e573f0b1d868f21068b726c285e52b"
+> > +SRC_URI[sha256sum] =
+> "1ba349af127f9052363972adcbcfb921f9ca5e90f2bcbfba11b117500f11a845"
+> >
+> >  inherit pypi
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.9.19.bb
+> b/meta-python/recipes-devtools/python/python-cmd2_0.9.20.bb
+> > similarity index 100%
+> > rename from meta-python/recipes-devtools/python/python-cmd2_0.9.19.bb
+> > rename to meta-python/recipes-devtools/python/python-cmd2_0.9.20.bb
+> > --
+> > 2.7.4
+> >
+> >
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
