@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id CD00B6BE2A
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
+	[209.85.215.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F5246BE2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Dec 2019 18:46:35 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id h14so7142076pfe.10
+	Sun,  1 Dec 2019 18:46:36 +0000 (UTC)
+Received: by mail-pg1-f179.google.com with SMTP id q127so305526pga.4
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 01 Dec 2019 10:46:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=DKzpBKto+y5qke9BVQ46RJGj5KykD/d49l7RpIbPLzw=;
-	b=OZEr+DKEv0x7HuNdNhKMxE3faGTYKLTNk3CvPov9ZcVgJZlQc33uAyxfb8ftjSCtm1
-	ag1e8EwC9L8L9uKMOpJnH/H+Q7j8MQ7BSEIU4fkOKfDT29VqYW1O8fIMF1cHF0CRa/kg
-	4nFZ6F52Z5SXqlQEoz5ulM99LbEf0Rqa08xb3UAlO0QZDO+fTQioCn7T/XL0r8XnXtvG
-	HWHVtuRWkj0JkqQZIo0yQ+TKy3WGH+ZegjiUs7OMNb3gr9uY3Ob4+wtWGaXkQsJDOC2B
-	og3U357Ft/TplBOsQniJKVgcjW8xn/wNuFTLiNwbIbUGJ15VpOak8rDFAbAspPyn0Jvq
-	gZhA==
+	bh=gpmGgSZId9grtLS1rkVkOIcYrBthBHRDUMoiIcuZOvs=;
+	b=SCNuMRRR2TRltqIUUuXq+NGRAEC1u1Vz5AAmhb0hNH9UgBjhH3T+ENYWTrGMVzBASo
+	f3EHdxfHRJ938eDuzmeneoswga6L0NelLnIy8bUnF87QdfMn/YHTnDdqFR234QkG4rof
+	MjmyrmHeikpGg/3wVw0+54lUkge4vVsUl+oPd+d5B7uVw2IfDSOBfGVEDvElvvdc/AoR
+	RcDjOaVH6HKrkJefiUXwmHkJlQfA4Uia0Ycj6nucK8txIS9NZm4Kx9RgtPlOmBxV3t5e
+	Nea30og23rW0RaOIoFO1CT2mdUMvIx1wg6JxvEvzR41oYKsxaKUpAGac4P5QzI/m5Zar
+	6hQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=DKzpBKto+y5qke9BVQ46RJGj5KykD/d49l7RpIbPLzw=;
-	b=a3nLwH2KcHmY1DiM2KO6zQ6kLffqo7iWQq0BFKLPiAJ3FAz4EqT91gKoP6exwShA0C
-	b+O0yJFFYhimFR9Y4CletH4hvNXBnX2xVoUw53BUkUEwQvHocKv3xvL5EHjDBkmvlZLx
-	TciUOCh7f1p/QmysuYIZPg9xExbxh4PHHtrO7BDOUDy6QIhe+Ro9oSieiNcxnX/Llums
-	wn8cxk3hdIJUjMuLZ26T7MCW4wUI3bbhNCwOddannKpY/iRsJURv8lVqGfhiY4d/VXoc
-	O+EY32TuaQj5DC3imztJyVRVkjLU2mRmPu2Yv8CyncNNWr7z0ysl8NfA27JRDru2rUFJ
-	T8yQ==
-X-Gm-Message-State: APjAAAXB89tTQzSlzZ6v9q32W9XQ0mIXD7W5w2GqyS4q0GD0TwwVVqXv
-	S3u0Polt1UnQAqqEh7JhNcQehBSEUfg=
-X-Google-Smtp-Source: APXvYqyooEak7yXVnelFwvlAv2ixh7rANBS8nYBR/Rx0+F0guodn3SorBu2BDs7Kg3gz3D1uViBk4g==
-X-Received: by 2002:a63:a511:: with SMTP id n17mr27337132pgf.338.1575225996403;
-	Sun, 01 Dec 2019 10:46:36 -0800 (PST)
+	bh=gpmGgSZId9grtLS1rkVkOIcYrBthBHRDUMoiIcuZOvs=;
+	b=lRR3TBCZHS3JdPMj9APDw1L5BCAJWtOBDk7EAhn8Y4Y1S19wPbBg937dHk3hONqDOy
+	ZXPZtC6RE9/8LnKmOecAtYvdl0jfSjnK+4+pOi0hdqDTUCHmvUTQFiqkJZbz/31SqN1/
+	vHOJjldDy3n9StfScBDrVT57rmzZo9agxGwk+NHvmxMdh0W6Zcs76lqciOuk1giSZjny
+	Ll6QOvw1alrTw0wbaWdvssGEjjLZpOASZ0sJdToOpigRk9/EprtYjSjrh/eBIhRE9cHk
+	ZoLy1JaUELzi7RZWFgRfwYFuYimrkpdQLXMa0KTH62ZBULGiZCCDi64hfgi9AESgrjxE
+	0YLg==
+X-Gm-Message-State: APjAAAW7Tc0lbqXuyZVBxMPFj9WHRWz1SLqRf1t20qBl9F4VVgWDzYD7
+	XMuhlthrNNDq+oxjubq707YJ2Am/pfk=
+X-Google-Smtp-Source: APXvYqxsKwbYzREkOmMy2JqKWp63lU9zK8Y19Rx/umj4KuNKdLa3qmAGwF8pct1AslmxCqCgQFym4w==
+X-Received: by 2002:a62:e105:: with SMTP id q5mr67909070pfh.105.1575225997081; 
+	Sun, 01 Dec 2019 10:46:37 -0800 (PST)
 Received: from apollo.localdomain ([2601:646:8500:1c20:55f2:e19b:8d5e:a884])
 	by smtp.gmail.com with ESMTPSA id
-	y24sm33916800pfr.116.2019.12.01.10.46.35
+	y24sm33916800pfr.116.2019.12.01.10.46.36
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 01 Dec 2019 10:46:35 -0800 (PST)
+	Sun, 01 Dec 2019 10:46:36 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  1 Dec 2019 10:46:16 -0800
-Message-Id: <20191201184622.889513-3-raj.khem@gmail.com>
+Date: Sun,  1 Dec 2019 10:46:17 -0800
+Message-Id: <20191201184622.889513-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.0
 In-Reply-To: <20191201184622.889513-1-raj.khem@gmail.com>
 References: <20191201184622.889513-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/9] evtest: Fix build for 32bit arches with 64bit time_t
+Subject: [meta-oe][PATCH 4/9] lirc: Fix build for 32bit arches with 64bit time_t
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,25 +59,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Dec 2019 18:46:35 -0000
+X-List-Received-Date: Sun, 01 Dec 2019 18:46:36 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ld-on-32bit-arches-with-64bit-time_t.patch | 41 +++++++++++++++++++
- meta-oe/recipes-test/evtest/evtest_1.34.bb    |  6 ++-
- 2 files changed, 45 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+ ...ld-on-32bit-arches-with-64bit-time_t.patch | 40 +++++++++++++++++++
+ .../recipes-connectivity/lirc/lirc_0.9.4d.bb  |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/lirc/lirc/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
 
-diff --git a/meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch b/meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch b/meta-oe/recipes-connectivity/lirc/lirc/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
 new file mode 100644
-index 0000000000..706322d565
+index 0000000000..0e38f7d8ec
 --- /dev/null
-+++ b/meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
-@@ -0,0 +1,41 @@
-+From fa57c78c33d26084f85f1a6b4c29378631dc9395 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-connectivity/lirc/lirc/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+@@ -0,0 +1,40 @@
++From 50a48a7bd8d65a165ce2aac4ba0c1e02bded04aa Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 30 Nov 2019 11:58:58 -0800
++Date: Sat, 30 Nov 2019 12:21:31 -0800
 +Subject: [PATCH] Fix build on 32bit arches with 64bit time_t
 +
 +time element is deprecated on new input_event structure in kernel's
@@ -85,54 +85,48 @@ index 0000000000..706322d565
 +
 +[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit?id=152194fe9c3f
 +
-+Upstream-Status: Submitted [https://gitlab.freedesktop.org/libevdev/evtest/merge_requests/6]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ evtest.c | 7 ++++++-
++ plugins/devinput.c | 7 ++++++-
 + 1 file changed, 6 insertions(+), 1 deletion(-)
 +
-+diff --git a/evtest.c b/evtest.c
-+index 548c203..93063cd 100644
-+--- a/evtest.c
-++++ b/evtest.c
-+@@ -61,6 +61,11 @@
-+ #include <sys/types.h>
-+ #include <unistd.h>
++diff --git a/plugins/devinput.c b/plugins/devinput.c
++index d4d733a..feb4a61 100644
++--- a/plugins/devinput.c
+++++ b/plugins/devinput.c
++@@ -34,6 +34,11 @@
++ #include <linux/uinput.h>
++ #include <sys/stat.h>
 + 
 ++#ifndef input_event_sec
 ++#define input_event_sec time.tv_sec
 ++#define input_event_usec time.tv_usec
 ++#endif
 ++
-+ #define BITS_PER_LONG (sizeof(long) * 8)
-+ #define NBITS(x) ((((x)-1)/BITS_PER_LONG)+1)
-+ #define OFF(x)  ((x)%BITS_PER_LONG)
-+@@ -1140,7 +1145,7 @@ static int print_events(int fd)
-+ 			type = ev[i].type;
-+ 			code = ev[i].code;
++ #ifndef EV_SYN
++ /* previous name */
++ #define EV_SYN EV_RST
++@@ -459,7 +464,7 @@ char* devinput_rec(struct ir_remote* remotes)
++ 		return 0;
++ 	}
 + 
-+-			printf("Event: time %ld.%06ld, ", ev[i].time.tv_sec, ev[i].time.tv_usec);
-++			printf("Event: time %ld.%06ld, ", ev[i].input_event_sec, ev[i].input_event_sec);
++-	log_trace("time %ld.%06ld  type %d  code %d  value %d", event.time.tv_sec, event.time.tv_usec, event.type,
+++	log_trace("time %ld.%06ld  type %d  code %d  value %d", event.input_event_sec, event.input_event_usec, event.type,
++ 		  event.code, event.value);
 + 
-+ 			if (type == EV_SYN) {
-+ 				if (code == SYN_MT_REPORT)
-diff --git a/meta-oe/recipes-test/evtest/evtest_1.34.bb b/meta-oe/recipes-test/evtest/evtest_1.34.bb
-index 3b6dc61408..a3a23c8951 100644
---- a/meta-oe/recipes-test/evtest/evtest_1.34.bb
-+++ b/meta-oe/recipes-test/evtest/evtest_1.34.bb
-@@ -8,8 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- DEPENDS = "libxml2"
++ 	value = (unsigned)event.value;
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb b/meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb
+index b13163debb..606caee892 100644
+--- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb
++++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb
+@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- SRCREV = "16e5104127a620686bdddc4a9ad62881134d6c69"
--SRC_URI = "git://anongit.freedesktop.org/evtest;protocol=git \
--           file://add_missing_limits_h_include.patch"
-+SRC_URI = "git://gitlab.freedesktop.org/libevdev/evtest.git;protocol=https \
-+           file://add_missing_limits_h_include.patch \
-+           file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
-+           "
- 
- S = "${WORKDIR}/git"
- 
+ SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2 \
+     file://pollfd.patch \
++    file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
+     file://lircd.service \
+     file://lircd.init \
+     file://lircexec.init \
 -- 
 2.24.0
 
