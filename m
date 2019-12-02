@@ -1,52 +1,101 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
-	[209.85.221.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 68B917F7AC
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Dec 2019 19:33:56 +0000 (UTC)
-Received: by mail-wr1-f52.google.com with SMTP id b6so718454wrq.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Dec 2019 11:33:57 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
+	[209.85.215.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 97CE87F4FE
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Dec 2019 21:49:09 +0000 (UTC)
+Received: by mail-pg1-f176.google.com with SMTP id k1so392984pgg.12
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Dec 2019 13:49:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=CBI24tTauirbQP5/79t7L1MinBNBQnPy7VDAu04xtAo=;
-	b=G4sHPYX/yuVDj1lFQ2WFFBfYly/++GsgfWWcbpx8yAK0VwjnPQA2jbURRgsnAD0q5O
-	UK+U3y49sEFCFl+tmDm+efC/3HOzehqgfDORKWPzQZeT1oDvm7Jst3793hNqbuFQNLSx
-	B0/q4eTYjuu81SMb8aqCv9nc568ivgYnSK/hUPOVH+BHAqLSwlq0syAmka+tvgiW6CN1
-	/OFQtJHakV8zA3bbt0SLN5GM3R6/04+oT+5QXIa+CXd04ffDJ0hhFLTuwHrUY9QUe54U
-	e84p++UcN5IlzA5FLq7u/Da6YwhWbxQ7ZaQedvWGZgFJTgRqp9RjbGuT6BhjMhsnl+k/
-	iNYg==
+	h=subject:to:references:from:openpgp:autocrypt:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=QEWHPodp1rfTs77cjHQYvpx6NIKDBJuI2S95bZ5t6Qk=;
+	b=EW9PEDJ4U0UIuwYmLU3SEZx4lcErQg5rogwwgV4E13gWRIYlWhwhr6EDrDptwZZwJS
+	UX2I+5IH/RtaCG/+RnSSwdYhIKaS+W2OlJqnBVv1QVaLscasT7jWslziW/H4AnwoBxMa
+	WYdHaKed+CFCl6F8o08kHfhGlh4s1K12VIK6m+Amdh2GxpYyno8arrrRCV9fotx9X/kM
+	b/W0Hf4mH19s8XxrvvnWg56D9ZAMbuNx6t0Vsf9Xs29NS8R5KVEjdLdZVarux4heKogL
+	glkxZrX3EnnwpDpkdvxBM//STc5oqrweqj6QnLxFAGDpqov9RPzQbOLotmxMrlca4Zyv
+	vq0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=CBI24tTauirbQP5/79t7L1MinBNBQnPy7VDAu04xtAo=;
-	b=SJxQ1001zn9s5JBpeFwIo5Uv8c+qqBvPMIJD1z60QishP8/XCvq2KVHFVPmSPZA/we
-	0AoYBaa56WepOddw8rHLkGhzmd0xIKniPuxAdHyIw6xvD3dgyKa22lR/gtWbLIXGog8y
-	AoGsmB9yhKDu81WvH+eoYMBW05ttVKaSzeQ4Avd6KXPEuenDeFJ3yJ5R68FFNNbi3HMW
-	KS3tUoRtnRv38si40YAdPkj4aNSKQdgGt7FsIO690gorXrREHYe+DPiREHQSlKPGE2GN
-	YhWVvpgFXhzJleFiV65KRNoSFdcghgKeS4b+Ivnd47kRAlCJWCbT3CLp3PJzh+1MElDY
-	RiTA==
-X-Gm-Message-State: APjAAAV2U3jEhlUnIYTcEyWHHiXdB0okOckqROADRyDDQdduNacE2/tC
-	00UHqGYQ0rFtGNQshaaIEYrcTINd
-X-Google-Smtp-Source: APXvYqw9v4tjuhmF/OlvuVTI80UG+6hAjUdmW73rnkVauN79OVt2qwpuYfbPJKfhgPOZIQO54WGeMA==
-X-Received: by 2002:adf:fd07:: with SMTP id e7mr675096wrr.21.1575315236863;
-	Mon, 02 Dec 2019 11:33:56 -0800 (PST)
-Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
-	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
-	y139sm465420wmd.24.2019.12.02.11.33.55
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 02 Dec 2019 11:33:56 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Dec 2019 19:33:43 +0000
-Message-Id: <20191202193343.12298-5-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191202193343.12298-1-alex.kiernan@gmail.com>
-References: <20191202193343.12298-1-alex.kiernan@gmail.com>
+	h=x-gm-message-state:subject:to:references:from:openpgp:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=QEWHPodp1rfTs77cjHQYvpx6NIKDBJuI2S95bZ5t6Qk=;
+	b=BGQDdLa3yaxP2mfmw4QzeTxflWSjfzGxOB0WLM9Co5csZMMkVi8FqRaoq/eHcuV1jp
+	nt5iqC/E5OIgBxhybXXoJbm3oe+98X279y0T58jICzIbC9tB7ZcHOZYg+5Grc+AIleCA
+	OfAx0Ot3DIUK+PwwnNrQ8a4rVpNp9QjQjfgulyB+GjoXTF/fU6556o2MJ4VPp5Dpy2zv
+	5WXKcxekovcI9zlbQYWrk1DiQDB8VjakEYZBDwdre4kOHMLjskEbO8FUhJggi9epCa67
+	Vsm02YlWXXllWx7r3cokwizdvQZPJhxesyY421AKiAbnLaLnfTT6fvQw8S/s+t3b6Vah
+	ANpQ==
+X-Gm-Message-State: APjAAAUgf4Uz+xXgPY0W0NMtR9SW2mjlIh5WX2wZrDD33UUa71yt6+to
+	gaS6MuzR/BCe0JyrZ0L2d/ai2LUm
+X-Google-Smtp-Source: APXvYqzgZ2NP5CrfSaK24BPNQ3dZRI1HgpFTiwnwLsP7njLB5JPxAtEA9NK0ZBDSAzk+6o/H6+7ttQ==
+X-Received: by 2002:a63:ec4e:: with SMTP id r14mr1388664pgj.235.1575323350330; 
+	Mon, 02 Dec 2019 13:49:10 -0800 (PST)
+Received: from ?IPv6:2601:202:4180:a5c0:51a5:502e:8fc:9836?
+	([2601:202:4180:a5c0:51a5:502e:8fc:9836])
+	by smtp.gmail.com with ESMTPSA id a2sm480114pfg.90.2019.12.02.13.49.09
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 02 Dec 2019 13:49:09 -0800 (PST)
+To: Tim Orling <ticotimo@gmail.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<Openembedded-devel@lists.openembedded.org>
+References: <CANx9H-Am-T-LMMr+oWpR0KM70k0TYHF2v=GdqTem4Rj1ud6srA@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Openpgp: preference=signencrypt
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <c61b511b-c927-c794-e208-6997e3d99ace@gmail.com>
+Date: Mon, 2 Dec 2019 13:49:08 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 5/5] ostree: Backport build/test fixes from upstream
+In-Reply-To: <CANx9H-Am-T-LMMr+oWpR0KM70k0TYHF2v=GdqTem4Rj1ud6srA@mail.gmail.com>
+Subject: Re: ANNOUNCEMENT: meta-python2 has been created
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,198 +108,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Dec 2019 19:33:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 02 Dec 2019 21:49:09 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-US
 
-Pick upstream fixes:
+Tim,
 
-77b27c07df2b Avoid race condition when building outside of source tree
-16bb294384bb tests/repo-finder: Run realpath() on /tmp
-de8e0765a4a5 Makefile: declare ostree_boot_SCRIPTS and append values
+On 12/2/19 7:56 AM, Tim Orling wrote:
+> Why?
+> =3D=3D=3D=3D
+> With the pending EOL (end-of-life) of Python 2 in a month [1], it is ti=
+me
+> to move python2 recipes to a new home. For that reason, meta-python2 [2=
+]
+> has been created as the home for legacy python2 recipes.
 
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
----
+Thanks for putting in the time to get this sorted out.
+>
+> How?
+> =3D=3D=3D=3D
+> It was a design goal to keep the original history of meta-python, but o=
+nly
+> the python2 parts. In order to accomplish this git-filter-repo was used=
 
- ...tion-when-building-outside-of-source.patch | 33 ++++++++++
- ...-ostree_boot_SCRIPTS-and-append-valu.patch | 60 +++++++++++++++++++
- ...ests-repo-finder-Run-realpath-on-tmp.patch | 44 ++++++++++++++
- .../recipes-extended/ostree/ostree_2019.5.bb  |  3 +
- 4 files changed, 140 insertions(+)
- create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-Avoid-race-condition-when-building-outside-of-source.patch
- create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-Makefile-declare-ostree_boot_SCRIPTS-and-append-valu.patch
- create mode 100644 meta-oe/recipes-extended/ostree/ostree/0001-tests-repo-finder-Run-realpath-on-tmp.patch
+> [3]. The exact steps used can be seen in a gist [4]. After that script =
+was
+> run, manual merging of *.inc and *.bb files was performed to make recip=
+e
+> maintenance with AUH (auto upgrade helper) and devtool easier. Since th=
+is
+> layer does not have to support two python versions, the reason for the =
+*.bb
+> and *.inc split has been eliminated. Commits that upgraded recipes to
+> python2-incompatible versions were reverted. Changes to make the recipe=
+s
+> build and ptests be runnable were also made (to master branch). The sta=
+ble
+> branches were also kept, to make it easier to refer back to prior histo=
+ry
+> and allow developers to use meta-python2 only in their workflow. NOTE: =
+The
+> stable branches may require work to make them usable, this was outside =
+the
+> scope of the immediate effort.
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-Avoid-race-condition-when-building-outside-of-source.patch b/meta-oe/recipes-extended/ostree/ostree/0001-Avoid-race-condition-when-building-outside-of-source.patch
-new file mode 100644
-index 000000000000..c926965de560
---- /dev/null
-+++ b/meta-oe/recipes-extended/ostree/ostree/0001-Avoid-race-condition-when-building-outside-of-source.patch
-@@ -0,0 +1,33 @@
-+From 77b27c07df2bdff86945766a4728b6012062535c Mon Sep 17 00:00:00 2001
-+From: Stefan Agner <stefan@agner.ch>
-+Date: Tue, 26 Nov 2019 09:20:30 +0100
-+Subject: [PATCH] Avoid race condition when building outside of source tree
-+
-+When building outside of source tree it can happen that src/ostree/
-+does not exist (yet) when bison is called. This leads to an build
-+error like so:
-+  bison: src/ostree/parse-datetime.c: cannot open: No such file or directory
-+
-+Make sure that src/ostree/ exists when parse-datetime.c is built.
-+
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+Upstream-Status: Backport
-+---
-+ Makefile-ostree.am | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/Makefile-ostree.am b/Makefile-ostree.am
-+index 76f39cad4b74..f861afe42168 100644
-+--- a/Makefile-ostree.am
-++++ b/Makefile-ostree.am
-+@@ -123,6 +123,7 @@ ostree_SOURCES += src/ostree/ot-remote-builtin-add-cookie.c \
-+ endif
-+ 
-+ src/ostree/parse-datetime.c: src/ostree/parse-datetime.y Makefile
-++	mkdir -p src/ostree/
-+ 	$(AM_V_GEN) $(YACC) $< -o $@
-+ 
-+ EXTRA_DIST += src/ostree/parse-datetime.y
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-Makefile-declare-ostree_boot_SCRIPTS-and-append-valu.patch b/meta-oe/recipes-extended/ostree/ostree/0001-Makefile-declare-ostree_boot_SCRIPTS-and-append-valu.patch
-new file mode 100644
-index 000000000000..4b1c02a62e72
---- /dev/null
-+++ b/meta-oe/recipes-extended/ostree/ostree/0001-Makefile-declare-ostree_boot_SCRIPTS-and-append-valu.patch
-@@ -0,0 +1,60 @@
-+From de8e0765a4a54f0367999f682ce4cc53bfaa60b0 Mon Sep 17 00:00:00 2001
-+From: Ricardo Salveti <ricardo@foundries.io>
-+Date: Tue, 5 Nov 2019 21:16:07 -0300
-+Subject: [PATCH] Makefile: declare ostree_boot_SCRIPTS and append values
-+
-+ostree_boot_SCRIPTS was being set on both Makefile-boot.am and
-+Makefile-switchroot.am, causing the first one to be replaced by the
-+other at the final Makefile, so declare as empty and append on both
-+places instead.
-+
-+Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+Upstream-Status: Backport
-+---
-+ Makefile-boot.am       | 2 +-
-+ Makefile-decls.am      | 1 +
-+ Makefile-switchroot.am | 2 +-
-+ 3 files changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/Makefile-boot.am b/Makefile-boot.am
-+index b4d4a1af670e..b51928f08d7c 100644
-+--- a/Makefile-boot.am
-++++ b/Makefile-boot.am
-+@@ -60,7 +60,7 @@ grub2configdir = $(sysconfdir)/grub.d
-+ INSTALL_DATA_HOOKS += install-grub2-config-hook
-+ else
-+ # We're using our internal generator
-+-ostree_boot_SCRIPTS = src/boot/grub2/ostree-grub-generator
-++ostree_boot_SCRIPTS += src/boot/grub2/ostree-grub-generator
-+ endif
-+ 
-+ EXTRA_DIST += src/boot/dracut/module-setup.sh \
-+diff --git a/Makefile-decls.am b/Makefile-decls.am
-+index 115c19fb663f..086ee1384a0b 100644
-+--- a/Makefile-decls.am
-++++ b/Makefile-decls.am
-+@@ -47,6 +47,7 @@ typelibdir = $(libdir)/girepository-1.0
-+ typelib_DATA =
-+ gsettings_SCHEMAS =
-+ ostree_bootdir = $(prefix)/lib/ostree
-++ostree_boot_SCRIPTS =
-+ ostree_boot_PROGRAMS =
-+ 
-+ # This initializes some more variables
-+diff --git a/Makefile-switchroot.am b/Makefile-switchroot.am
-+index ff44d4bc3981..b81b843febbc 100644
-+--- a/Makefile-switchroot.am
-++++ b/Makefile-switchroot.am
-+@@ -42,7 +42,7 @@ if BUILDOPT_USE_STATIC_COMPILER
-+ # to get autotools to install this as an executable but without generating rules
-+ # to make it itself which we have specified manually.  See
-+ # https://lists.gnu.org/archive/html/help-gnu-utils/2007-01/msg00007.html
-+-ostree_boot_SCRIPTS = ostree-prepare-root
-++ostree_boot_SCRIPTS += ostree-prepare-root
-+ 
-+ ostree-prepare-root : $(ostree_prepare_root_SOURCES)
-+ 	$(STATIC_COMPILER) -o $@ -static $(top_srcdir)/src/switchroot/ostree-prepare-root.c $(ostree_prepare_root_CPPFLAGS) $(AM_CFLAGS) $(DEFAULT_INCLUDES) -DOSTREE_PREPARE_ROOT_STATIC=1
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/ostree/ostree/0001-tests-repo-finder-Run-realpath-on-tmp.patch b/meta-oe/recipes-extended/ostree/ostree/0001-tests-repo-finder-Run-realpath-on-tmp.patch
-new file mode 100644
-index 000000000000..ba116a9efebb
---- /dev/null
-+++ b/meta-oe/recipes-extended/ostree/ostree/0001-tests-repo-finder-Run-realpath-on-tmp.patch
-@@ -0,0 +1,44 @@
-+From 16bb294384bb4ae4ba83af51fbb64fdd14d02838 Mon Sep 17 00:00:00 2001
-+From: Colin Walters <walters@verbum.org>
-+Date: Thu, 21 Nov 2019 18:37:48 +0000
-+Subject: [PATCH] tests/repo-finder: Run realpath() on /tmp
-+
-+This fixes running this test case inside
-+https://github.com/cgwalters/coretoolbox
-+
-+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-+Upstream-Status: Backport
-+---
-+ tests/test-repo-finder-mount.c | 9 +++++----
-+ 1 file changed, 5 insertions(+), 4 deletions(-)
-+
-+diff --git a/tests/test-repo-finder-mount.c b/tests/test-repo-finder-mount.c
-+index 847f4becd1c6..af2f5e085f68 100644
-+--- a/tests/test-repo-finder-mount.c
-++++ b/tests/test-repo-finder-mount.c
-+@@ -62,7 +62,9 @@ setup (Fixture       *fixture,
-+     g_clear_error (&error);
-+   g_assert_no_error (error);
-+ 
-+-  fixture->working_dir = g_file_new_for_path (fixture->tmpdir.path);
-++  /* Realpath since at least coretoolbox makes /tmp a symlink to /host/tmp */
-++  g_autofree char *tmpdir_real_path = realpath (fixture->tmpdir.path, NULL);
-++  fixture->working_dir = g_file_new_for_path (tmpdir_real_path);
-+ 
-+   fixture->parent_repo = ot_test_setup_repo (NULL, &error);
-+   g_assert_no_error (error);
-+@@ -443,9 +445,8 @@ test_repo_finder_mount_mixed_mounts (Fixture       *fixture,
-+         }
-+       else
-+         {
-+-          g_test_message ("Unknown result ‘%s’ with keyring ‘%s’.",
-+-                          result->remote->name, result->remote->keyring);
-+-          g_assert_not_reached ();
-++          g_error ("Unknown result ‘%s’ with keyring ‘%s’",
-++                   result->remote->name, result->remote->keyring);
-+         }
-+     }
-+ 
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-index 7c1ed9c6b7a2..4f437f348025 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-@@ -31,6 +31,9 @@ SRC_URI = " \
-     file://0002-tests-core-Assume-C.UTF-8-if-locale-isn-t-found.patch \
-     file://0003-tests-Avoid-musl-failure-with-cp-a.patch \
-     file://0001-build-create-tests-directory-for-split-builds.patch \
-+    file://0001-Makefile-declare-ostree_boot_SCRIPTS-and-append-valu.patch \
-+    file://0001-Avoid-race-condition-when-building-outside-of-source.patch \
-+    file://0001-tests-repo-finder-Run-realpath-on-tmp.patch \
- "
- SRCREV = "980ca07b03b3aa7e0012729dd6c84b0878775d93"
- 
--- 
-2.17.1
+
+Should we have a separate patch work for this layer?
+
+If the normal Stable branch format is used for patches, it should be
+easy to sort out so we can see how it goes and make adjustments as we go.=
+
+
+The volume for stable meta-python patches tends to be low so I don't
+mind sorting things out from master to zeus between the two branches.
+
+
+- armin
+>
+> What next?
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Python2 recipes from meta-python will be dropped via patches sent to th=
+e
+> mailing list. Python2 recipes from meta-oe and meta-networking, which h=
+ave
+> already been added to meta-python2, will be dropped via patches to the
+> mailing list. Other layers are welcome to do the same.
+>
+> Recipe upgrades to meta-python2 will also be coming, for instance Djang=
+o
+> 1.11.x LTS is the last version to support Python 2, but we are not at t=
+he
+> latest release of that series.
+>
+> The original meta-python will become Python3-only and patches for pytho=
+n2
+> support will be nacked and redirected to meta-python2.
+>
+> python2 itself will likely be moved from oe-core into meta-python2
+>
+> [1] https://www.python.org/doc/sunset-python-2/
+> [2] https://git.openembedded.org/meta-python2/
+> [3] https://github.com/newren/git-filter-repo
+> [4] https://gist.github.com/moto-timo/ab70ab96ddbaf5fd1226bd21dbbfec9b
+
 
 
