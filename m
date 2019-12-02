@@ -1,50 +1,48 @@
-Return-Path: <jacopo.dallaglio@kynetics.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 119167F367
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 48A157DD6A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Dec 2019 10:20:07 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id p17so16645282wma.1
+	Mon,  2 Dec 2019 12:17:13 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id j13so40271908ioe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Dec 2019 02:20:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kynetics-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=bHQiMVke7TZ4vJu6UkSpbZHshKOPJ5mSPGg0pTNatiQ=;
-	b=qgZpV7EVT8Y6ZcozCEbJHmK58sbohmhbz+CtlwAuKRo4DeCKfH5XpiA2W1aynTYUId
-	yYvgbcLIa6V2s8p3ColusbcILhBuKavLt4jA7UNaUxHY2OIwiXzYs/z8JvMWhZIS18UT
-	FkxbdwyTPAjFcxl79TfTczoUYg5f4kL3ABOYOxWb459RPHwYUjSomidmcHY5/lZROQL5
-	9Mto1O2KL5abRQATfI7j4XILF96wYSFQ2TYaGpFcCyvlLzaNoZDBAV4vUrlzsjnHO24R
-	VK1wDQbxoDbsRMK7RpHTg3VyYEKveJLUYpYR7C9yqIY9G3XjAEz4ptmZXqdojjbqgRxF
-	Vbqg==
+	Mon, 02 Dec 2019 04:17:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=twb9rH8G63/vbutMpWwbxtXCyTu9WPqCYt7K5RZSzkc=;
+	b=Itk0jVLDtQ1AFxA4UyneEvT+peF7AFWAzKuWV4Zl2yps1oFugX++NG0c8J9+I3WqMD
+	/zMlQ8m5omTlJ70+nmxZYDqUt9YjqrsYfB/b6Ae8LI9DffGLkwWg9NQ/A5anK1vIjqAS
+	RVsAewWqsVPfgTlnaUsiogT0/yvsY1oPudlvNx9iVPN4aLguDzwMLA4LZYNlmtcmbviV
+	07UxVdfJCfSXMuLno8S75sw2VwhlP/IeckjdGq1UeS3crFh3k+Dz6I6WaGjFxrDKBrM1
+	i+H5ied6rk4jW+CQPLDgIlkzucKEIzsMtFpoyeL4T0AyrMnsKk1vsEvo35TsO4KWBboS
+	+SUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=bHQiMVke7TZ4vJu6UkSpbZHshKOPJ5mSPGg0pTNatiQ=;
-	b=CRg3MajTPZZD8+ITR5GcWUUN1ltsVBFwdqEMUTcjNTq1yn17nOAcMofJV791e0TnYh
-	5lCxLPBhgwB6+CEmCmkn7lMgApxd9TH3c9LIeL401GUjkuA/iZEs9SQRE7f6uCH42AGT
-	autDflmXflblA52TgY71Ye9MjK0QcRC0rYkF2p19Dx+XZdTr5XuIRCUqrd7prGSrC9iR
-	ak9Ft74cJmH+fXYaeNOAyx84A3kavPG1ofoybote6I0f9D9JnczBvaOZl0iIk5PE85IZ
-	PTB5l7jElOht5crSVi/3Xjt9GzIH/REiJb8KB0tqZ0+n7ku5NWMlPj9xyLm1yBa7Oa1q
-	Bjeg==
-X-Gm-Message-State: APjAAAXhCK2Mi4irBUW3RkQtk0NDbhuUo25b3usObYl8aaX8CnSQSVCa
-	2c3xv5qx46qWWKciqdSJ/5B/pDEOR49LKlw=
-X-Google-Smtp-Source: APXvYqwdENoLtJd421slPgQktGhnaYcCbvpgZmmeWFdwxq60ez9uCOjol8D4w9dcaCAauzc5tejcXA==
-X-Received: by 2002:a1c:964f:: with SMTP id y76mr24540216wmd.62.1575282008442; 
-	Mon, 02 Dec 2019 02:20:08 -0800 (PST)
-Received: from ip-172-31-10-74.eu-west-1.compute.internal
-	(ec2-34-254-186-126.eu-west-1.compute.amazonaws.com.
-	[34.254.186.126]) by smtp.gmail.com with ESMTPSA id
-	f67sm23579349wme.16.2019.12.02.02.20.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 02 Dec 2019 02:20:07 -0800 (PST)
-From: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Dec 2019 10:20:03 +0000
-Message-Id: <1575282003-22023-1-git-send-email-jacopo.dallaglio@kynetics.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
-Subject: [meta-networking][v2] netplan: add recipe
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=twb9rH8G63/vbutMpWwbxtXCyTu9WPqCYt7K5RZSzkc=;
+	b=OtuAvYaQhE/c2Yh1XShQirZUFiggTS2tTtaccsyNwznW9lVKjiGZ/8Rd8rZ87GqTD7
+	4wzMTGdl+ePy/0iw4GbrIeCKO4ipyXXWp07xr/5muium9yX+nRBgXqnIimEvgmhGzuI0
+	9hBrH6AP4Qys56sawEreSDGsUg17H6agFCWvEfypZrEwD+VvAVg1PiSn9fRXVBt19Miy
+	RZpsuVf9J+65Rw1SFRESfDt21B8lnUDE8OorIRNkgIr8x4RdptD12BkFmZh9xHyxmNQ9
+	6xdc9I+TfQvc4swuHJZovB0ARjJRYQ8SGKiLxv3c8EISb3VN5Q8PIZCfPdZr9158gd5Q
+	n6Ww==
+X-Gm-Message-State: APjAAAW8mZGUOqvZYG45NPjOShWFZmwMovjShfli/iKMq9y4tyOVOYgq
+	qI60fpTLZxqo78jnrMIkpE7uudQPgsf4Bu78SHU=
+X-Google-Smtp-Source: APXvYqxyVow9stzywAuM7kZGiZqUZmoYTnqqvxYtrx5DPFdLJcAeMj5y8NhO9pvjMJ/iXcXMrSZ2FSadPN1hryYp/wQ=
+X-Received: by 2002:a5d:9ecc:: with SMTP id a12mr2891641ioe.267.1575289034297; 
+	Mon, 02 Dec 2019 04:17:14 -0800 (PST)
+MIME-Version: 1.0
+References: <20191127144116.18751-1-schnitzeltony@gmail.com>
+	<4c895365-4d8a-ea0d-d56c-8d12f03d3241@gmail.com>
+In-Reply-To: <4c895365-4d8a-ea0d-d56c-8d12f03d3241@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 2 Dec 2019 13:17:02 +0100
+Message-ID: <CALbNGRTCYXNn3pPmYnHjJqsuuSh+FjvnCoBCZ_fLCvR24NF0ig@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [zeus][PATCH 1/2] networkmanager: Upgrade 1.18.2 -> 1.18.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,82 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Dec 2019 10:20:08 -0000
+X-List-Received-Date: Mon, 02 Dec 2019 12:17:13 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Canonical's Netplan is a network configuration abstraction renderer written in
-Python. It's compatible with NetworkManager and systemd-networkd.
+On Wed, Nov 27, 2019 at 11:53 PM akuster808 <akuster808@gmail.com> wrote:
+>
+>
+>
+> On 11/27/19 6:41 AM, Andreas M=C3=BCller wrote:
+> > From: Adrian Bunk <bunk@stusta.de>
+> >
+> > Signed-off-by: Adrian Bunk <bunk@stusta.de>
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > (cherry picked from commit 1db745db41e31c61448743842104d92a61e7ddfb)
+>
+> Why?
+>
+> is this a bug fix only?
+>
+Did cherry-pick original patch which did not mention anything about
+it. So yes it is a bugfix-only release. From [1]
 
-Signed-off-by: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
----
- .../recipes-connectivity/netplan/netplan_0.98.bb   | 58 ++++++++++++++++++++++
- 1 file changed, 58 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+NetworkManager-1.18.4
+Overview of changes since NetworkManager-1.18.2
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-new file mode 100644
-index 0000000..860762c
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-@@ -0,0 +1,58 @@
-+SUMMARY = "The network configuration abstraction renderer"
-+DESCRIPTION = "Netplan is a utility for easily configuring networking on a \
-+linux system. You simply create a YAML description of the required network \
-+interfaces and what each should be configured to do. From this description \
-+Netplan will generate all the necessary configuration for your chosen renderer \
-+tool."
-+HOMEPAGE = "https://netplan.io"
-+SECTION = "net/misc"
-+
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+
-+S = "${WORKDIR}/git"
-+SRCREV = "5d22e9d22c4a3724d27b80b0cd9b898ae8f59d2b"
-+PV = "0.98+git${SRCPV}"
-+
-+SRC_URI = " \
-+        git://github.com/CanonicalLtd/netplan.git \
-+"
-+
-+DEPENDS = "glib-2.0 libyaml"
-+RDEPENDS_${PN} = "python3 python3-core python3-pyyaml python3-netifaces python3-nose python3-coverage python3-pycodestyle python-pyflakes util-linux-libuuid"
-+
-+inherit pkgconfig systemd
-+
-+TARGET_CC_ARCH += "${LDFLAGS}"
-+
-+EXTRA_OEMAKE = "generate"
-+EXTRA_OEMAKE =+ "${@bb.utils.contains('DISTRO_FEATURES','systemd','netplan-dbus dbus/io.netplan.Netplan.service','',d)}"
-+
-+do_install() {
-+	install -d ${D}${sbindir} ${D}${base_libdir}/netplan ${D}${datadir}/netplan/netplan/cli/commands ${D}${sysconfdir}/netplan
-+	install -m 755 ${S}/generate ${D}${base_libdir}/netplan/
-+	install -m 644 ${S}/netplan/*.py ${D}${datadir}/netplan/netplan
-+	install -m 644 ${S}/netplan/cli/*.py ${D}${datadir}/netplan/netplan/cli
-+	install -m 644 ${S}/netplan/cli/commands/*.py ${D}${datadir}/netplan/netplan/cli/commands
-+	install -m 755 ${S}/src/netplan.script ${D}${datadir}/netplan/
-+	ln -srf ${D}${datadir}/netplan/netplan.script ${D}${sbindir}/netplan
-+
-+	install -d ${D}/${systemd_unitdir}/system ${D}${systemd_unitdir}/system-generators
-+	install -m 644 ${S}/src/netplan-wpa@.service ${D}${systemd_unitdir}/system/
-+	ln -srf ${D}/${base_libdir}/netplan/generate ${D}${systemd_unitdir}/system-generators
-+
-+	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+		install -d ${D}${datadir}/dbus-1/system.d ${D}${datadir}/dbus-1/system-services
-+		install -m 755 ${S}/netplan-dbus ${D}${base_libdir}/netplan
-+		install -m 644 ${S}/dbus/io.netplan.Netplan.conf ${D}${datadir}/dbus-1/system.d
-+		install -m 644 ${S}/dbus/io.netplan.Netplan.service ${D}${datadir}/dbus-1/system-services
-+	fi
-+}
-+
-+SYSTEMD_SERVICE_${PN} = "netplan-wpa@.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
-+PACKAGES += "${PN}-dbus"
-+
-+FILES_${PN} = "${sbindir} ${base_libdir}/netplan/generate ${datadir}/netplan ${sysconfdir}/netplan ${systemd_unitdir}"
-+FILES_${PN}-dbus = "${base_libdir}/netplan/netplan-dbus ${datadir}/dbus-1"
--- 
-2.7.4
+This is a new stable release of NetworkManager.  Notable changes include:
 
+* Improve handling of externally added policy routing rules and for rules
+  that are taken over after a restart of NetworkManager service.
+* Fix taking over OVS devices after restart of NetworkManager.
+* Bugfix reapplying IP configuration while activating.
+* Allow reapplying Wi-Fi profile when seen-bssids changes.
+* Various other bugfixes for minor issues and memory leaks.
+* Various build and test fixes.
+
+[1] http://ftp.gnome.org/pub/gnome/sources/NetworkManager/1.18/NetworkManag=
+er-1.18.4.news
+
+Andreas
 
