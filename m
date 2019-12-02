@@ -1,48 +1,51 @@
 Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CDD87EC47
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 525DE7EC47
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Dec 2019 19:33:52 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id n1so604084wra.10
+	Mon,  2 Dec 2019 19:33:53 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id c14so632406wrn.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Dec 2019 11:33:53 -0800 (PST)
+	Mon, 02 Dec 2019 11:33:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=BRBqcACxYYDc8U1PUZRnn36hpqS67x2dr9N5o90uPGQ=;
-	b=HuWPF/kHT0CKYdxNkb+t6SpgEdzS6CkxTVvW3cW5VcF1zZhaGtzfk4/O49OR0cyq/z
-	NKCx/X8MHLG4M2bY6CehS9DW3YvvjfzM5YyPu1iPTitCPj7qFjyWP3cGN1Irv9XmcBuN
-	7LQyaD7rXwo5f4Wob8F872pgc+tkhwfVWkoJxNhNhiot6buaH5rt2OCpjHwQmVGG6NXi
-	S5f9nj7jbQz2WMWzIPKn2AFcYeZkXBqrZG61d2Pb/I7NdP4wb2476mApKqbKFKwgsJ4e
-	rvNoYFSxeYG3L3N2gvonsGtcVfE4mL2bWM5T7xOf0QxsAjeMUhbzkd3qre7AcZaCB3r8
-	G3bA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=G0cNAmnAmBRPKNIV2lRD9D/1BR/Z4xMDwz6oSaJ9gd4=;
+	b=npM4h788kEc/GpU/AB8fBaupp6xP1nZPwbpPCPXa6Uefw/oc+Go++0G56iWmvg8plp
+	1j8pjcEkIkH8oGXkcXT6zGwt9Gq28FiytnA6Yq/dFWQ9WqPxASRVl0em5ZV32jmmtR+v
+	Z35LjLRJaGHPO5oWmWvhCSB9/aAWo4onD66S/Jcz6K4Bm5zVNNuK8z4gCSHn8vpMFEyp
+	M7wl4IU4E6hDMxlXQx/F+UieuEVEpS9TgsKrpkAqboI108u3dv+mlFmgwKNbJgR2pMcG
+	aBQhHNXYdn/vhtbdYrvnjDyLiH6ML5HjGpU41hrPKu+1NjA2LAdZoknlQ7aIxqPezgbZ
+	ZBuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=BRBqcACxYYDc8U1PUZRnn36hpqS67x2dr9N5o90uPGQ=;
-	b=DAXIjkgXrPqjCZ2rB0Ie5PvmxejzjAto7NZCCkdl+WJd7qAA7vIG4lnfYtp3fGjVFY
-	yQ1kQRzHWIOKrsN4qG5yR+9+FHYytFNOCvLjFroDjI9agzgz98bdrKR7Ugy83b4RMrGU
-	VvGh+FKLVnXL/JUNpGT5DD28IArUoG+tYw+LXjQ9xzqGouXPvpe7NlssG9tP5VDWiL9H
-	0XFKDDi8/Gwx4LoB7cMOJk7ivwMKW7+AEIKwqLGj2VVGZS6yqzRMn/X+8/VhJBW8Ae/G
-	xwlQivrb1xvdqhw1+9OX1X5tlFUu0Pbrd5justM+tH95fcqgdRGp+VD92jNQkMBbqIsj
-	RD/Q==
-X-Gm-Message-State: APjAAAWJPNizNNE96AGF2BENBhmhRk2UDkPb0vqZ3yAF+KRJmkLyXAEU
-	QGwGObgaKyP7CJVtznydDA0jAI3K
-X-Google-Smtp-Source: APXvYqw4vXF9OlgtgSijsVBNgvslDZLwhOwjyoopklWJ9lHdDcZSVAIpOKwgR3B6eRZ18+RWGvaszQ==
-X-Received: by 2002:a5d:4a84:: with SMTP id o4mr685039wrq.396.1575315232823;
-	Mon, 02 Dec 2019 11:33:52 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=G0cNAmnAmBRPKNIV2lRD9D/1BR/Z4xMDwz6oSaJ9gd4=;
+	b=RygR+KkRkNz/Gm5WQeUx2txxpBfRK+8nCXNqUNnyI+UZ6BmAf7vF0GHYQ4Z678mOPu
+	iC2sd8GcVIeXK2p4cWSc4rz8UlVUV8NUv/VLbbxm5ai2RUnueczxo/GGEuvXS2IJPGW+
+	Sh5N1W91HMmiucadopq1/WQA/3pNUZDDF5T2N3zu2MNBxX/qFHN6XztU3q9iJeIs1gEH
+	X6mFTWpuTxnJ7mTvRQ0tcVVRl0f7R/rbT0GaQ5AfTtuVotfZhpKE34lqpfrOpVb96rkL
+	bo2UlIaS3dwVMGyvztA893uszLeOZg/jqF2pIkAQjaRzNKHJ63JKh4dl+HdICNAZ3NOL
+	OApw==
+X-Gm-Message-State: APjAAAXP5zCUphNLshNc4cUfHJyyMDUdAXDWQp+bbKSfQ12jjvmESkeG
+	FXnnkWTI3btNCHajOVESaG9keqxy
+X-Google-Smtp-Source: APXvYqz5GcYRop4mzkc1rLFB/DihO5WcjxQYoH2k5aJamurMI98pjnxWz2uiEPEOkye2iKBPgeJUQA==
+X-Received: by 2002:a5d:5403:: with SMTP id g3mr714089wrv.302.1575315233844;
+	Mon, 02 Dec 2019 11:33:53 -0800 (PST)
 Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
 	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
-	y139sm465420wmd.24.2019.12.02.11.33.51
+	y139sm465420wmd.24.2019.12.02.11.33.52
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 02 Dec 2019 11:33:52 -0800 (PST)
+	Mon, 02 Dec 2019 11:33:53 -0800 (PST)
 From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Dec 2019 19:33:39 +0000
-Message-Id: <20191202193343.12298-1-alex.kiernan@gmail.com>
+Date: Mon,  2 Dec 2019 19:33:40 +0000
+Message-Id: <20191202193343.12298-2-alex.kiernan@gmail.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20191202193343.12298-1-alex.kiernan@gmail.com>
+References: <20191202193343.12298-1-alex.kiernan@gmail.com>
 Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe][PATCH 1/5] ostree: Fix DISTRO_FEATURES with ptest but w/o xattr
+Subject: [meta-oe][PATCH 2/5] ostree: Drop tests for soup/xattr with ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +58,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Dec 2019 19:33:52 -0000
+X-List-Received-Date: Mon, 02 Dec 2019 19:33:53 -0000
 
-Fix the test for PTEST_ENABLED so it only fires when it's actually enabled, as
-opposed to everytime. This allows the tautological test for native to be
-removed as PTEST_ENABLED isn't set there.
+When ptest is enabled, both soup (for trivial-httpd) and xattr must be
+enabled for all tests to pass. Rather than forcing everyone to enable
+these, just document this and remove the tests since a subset of the
+tests are still useful.
 
 Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
 
- meta-oe/recipes-extended/ostree/ostree_2019.5.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/ostree/ostree_2019.5.bb | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
 diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-index b3b34a15e694..b2bfaaf0514b 100644
+index b2bfaaf0514b..ac1e49048098 100644
 --- a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
 +++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-@@ -182,8 +182,8 @@ SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
- BBCLASSEXTEND = "native"
+@@ -42,6 +42,8 @@ inherit autotools bash-completion gobject-introspection gtk-doc pkgconfig ptest-
  
- python __anonymous() {
--    if not bb.data.inherits_class('native', d) and bb.utils.contains('PTEST_ENABLED', '1', 'True', 'False', d):
--        if not bb.utils.contains_any('BBFILE_COLLECTIONS', 'meta-python', 'True', 'False', d):
-+    if bb.utils.contains('PTEST_ENABLED', '1', 'True', '', d):
-+        if not bb.utils.contains_any('BBFILE_COLLECTIONS', 'meta-python', 'True', '', d):
+ # Package configuration - match ostree defaults, but without rofiles-fuse
+ # otherwise we introduce a dependendency on meta-filesystems
++#
++# If running with ptest, both soup (for trivial-httpd) and xattr are required
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
+@@ -185,8 +187,4 @@ python __anonymous() {
+     if bb.utils.contains('PTEST_ENABLED', '1', 'True', '', d):
+         if not bb.utils.contains_any('BBFILE_COLLECTIONS', 'meta-python', 'True', '', d):
              raise bb.parse.SkipRecipe('ptest requires meta-python to be present.')
-         elif not bb.utils.contains_any('PACKAGECONFIG', 'soup curl', 'True', 'False', d):
-             raise bb.parse.SkipRecipe('ptest requires soup enabled in PACKAGECONFIG.')
+-        elif not bb.utils.contains_any('PACKAGECONFIG', 'soup curl', 'True', 'False', d):
+-            raise bb.parse.SkipRecipe('ptest requires soup enabled in PACKAGECONFIG.')
+-        elif not oe.utils.any_distro_features(d, "xattr"):
+-            raise bb.parse.SkipRecipe('ptest requires xattr enabled in DISTRO_FEATURES.')
+ }
 -- 
 2.17.1
 
