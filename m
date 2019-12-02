@@ -1,49 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f49.google.com (mail-ed1-f49.google.com
-	[209.85.208.49])
-	by mail.openembedded.org (Postfix) with ESMTP id E711D7BD72
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Dec 2019 16:07:26 +0000 (UTC)
-Received: by mail-ed1-f49.google.com with SMTP id m8so9972158edi.13
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Dec 2019 08:07:28 -0800 (PST)
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 11D7C7EC47
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  2 Dec 2019 19:32:23 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id j42so579220wrj.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Dec 2019 11:32:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=K95funaNolkKZchjhcVXK8c2oEUQbskjdbZ2faV5i5U=;
-	b=qt1qC7rD+Hwgp+bRezhpn1bxBL57sZFy6B4brMcK0AMAjPZyMtDOYVxvXgBTt7hsy+
-	1aUCzgZLpipDOb3gtV+UFuH/1dx9ApurU0/zQ0aaMQ3SIbmiJV6jJtXM8wnvECe3ygXl
-	uO7T2naJLN6Sh1DS3fizWA8X953M6Ek9pdqlNie60wn/BRGPDZvSxyUqjVc++3N3/BOs
-	SeQmopfp6L3FAmn0yFrBacFCBYn1QgnDmBz+5mO865GshxSFylZcN6FSN756YzX2kvD3
-	zLHtAmly+ROKsl+HUFOnXD4QBBfBoCroX3cqANsbkb9naMEud+K5PKoSe9EXcH+S/RgO
-	/jnA==
+	h=from:to:cc:subject:date:message-id;
+	bh=bTC0rxeppXhu/AiSF5tlHEQ/g6Skb10//93TabKCaWo=;
+	b=CVj0tRxlg0FG0QUZ0hi09ExLhMOxIA3LVHN6QThJ0Rmw83xPOMtqUYf3OVTbCHPjJN
+	D1hMVaSIsCN5ScfAcKh94PLEio9CQU/1uMyKpNnfR7bRPEBGW9io9PiUPegesV7KpQEP
+	aAB7GxwaF5ghp6YAf9oR/meCwk4m3wsvzb4qSm/fhAvTzrW0PxmFy3Gsn3zuAygz6dFz
+	QB1PeBD/o8pnwz6xtvUFhArmzhJHceEOfIpV16ldVFlNO3dR3aGCy1G3FekVDFfv9Wx+
+	uCNQF2MT14HAJzY8VZfqPJjf/TX7KX8DDtOwyeIjm0R4IUTlBQkG2Fr/zs81yWM4CX6z
+	xHIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=K95funaNolkKZchjhcVXK8c2oEUQbskjdbZ2faV5i5U=;
-	b=igvBVbzHh9A5ohFrNHhmR2dtLRxirmu0Gc+kUYPEfwmotvnKpP8ma5Q9wA8AJeiop4
-	axqtY5/UgL5tLbc5LYVBzyzxzr1C4zr0ATb5lWcxSLT6/50l0VslsG+MWoAGzTJPyqo9
-	ewCwz32UgRMQPqovwPjiZ4o/HvHpQ2Rn8+0MG4m5zE5EPV4AZfQSS1u+B9pGOxtVzisQ
-	VMFaOsCq95guJ4sQHQV/WHjvbvbMxWHykCmVEfsC7616+ENtn3dV6Ih0fnaVz2sb8xX0
-	rNyo55xCkOe5d87Wztvcq7yJCR9UyvPUBAlJkIUZLvQaaT2mY3tgZf+bYb7TK7OZCenY
-	koXA==
-X-Gm-Message-State: APjAAAVCJr32+U6AOvsXcVAsPVV0AD39f+3ydervv/eu8saUsoBmIi9N
-	5DmMztIDkZMhVVUoePhqzjMnzNin1DIJZOLOeOo=
-X-Google-Smtp-Source: APXvYqw1OePHEcUQS6IIZ8sJaKutskKqEZmRy++pai4NRFh0sYZYhb4aN/caHY3RmMNfLfDx0QOlrDbJPcW/GQZ5RIw=
-X-Received: by 2002:a17:906:1f94:: with SMTP id
-	t20mr12171210ejr.5.1575302847549; 
-	Mon, 02 Dec 2019 08:07:27 -0800 (PST)
-MIME-Version: 1.0
-References: <CANx9H-Am-T-LMMr+oWpR0KM70k0TYHF2v=GdqTem4Rj1ud6srA@mail.gmail.com>
-In-Reply-To: <CANx9H-Am-T-LMMr+oWpR0KM70k0TYHF2v=GdqTem4Rj1ud6srA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 2 Dec 2019 17:07:15 +0100
-Message-ID: <CA+chaQeKxzeXzhzS5g3YcBcR7Tz6YYEj0bmBT=HF_2xQXu3UFg@mail.gmail.com>
-To: Tim Orling <ticotimo@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<Openembedded-devel@lists.openembedded.org>
-Subject: Re: ANNOUNCEMENT: meta-python2 has been created
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=bTC0rxeppXhu/AiSF5tlHEQ/g6Skb10//93TabKCaWo=;
+	b=m8zabOLnPv/e3SqTq5PR8Q53rQi9ESqOG6scj9luZ+9idkAYVw8YKnVcKrXeXNao7D
+	EfvqMHSQ/TIv5AKCpu/L/RHN2ELP0colfw7A4RWCxjuZplx2aaqq+ijfYks5p5xbop4J
+	0VK0aeJ9odWTpCsDP0SdOQCeBGm9Ss3LnncJ5zghfnw6+rANvIxmK8cZ4v1Jp99HO9l1
+	8qAX/7tNPWjdYIzPu1CYDQKSKy06Jy4K2GR/7nVI75HgZCEksyIJ1GCYpujfFDhd0ByG
+	xQa7o7uAyjfwAYabCSCdpYlyweN3GnqFaFhtytC0GANEt3ApdQIRL7Fxtc6PUBZw/QgV
+	JvPw==
+X-Gm-Message-State: APjAAAXzAIwqMIbOyguJdeEswGOhV1cNi6ngIVr93bBSPw81ttp8UiUu
+	cJ3k5NdkVkekqY+cNAlDG0K74D9Z
+X-Google-Smtp-Source: APXvYqzZ7DEyTCNf/ouaW3Zbro5sgabT5vM5rHEPZ5DxDWEHMuS42NUkmb4NSRG+TUM6AIKh1fdPuw==
+X-Received: by 2002:adf:da4d:: with SMTP id r13mr635610wrl.307.1575315144516; 
+	Mon, 02 Dec 2019 11:32:24 -0800 (PST)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+	[91.135.6.246])
+	by smtp.gmail.com with ESMTPSA id n3sm447007wmc.27.2019.12.02.11.32.23
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 02 Dec 2019 11:32:23 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  2 Dec 2019 19:32:16 +0000
+Message-Id: <20191202193216.12156-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] nftables: Fix documentation generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,62 +54,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Dec 2019 16:07:27 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 02 Dec 2019 19:32:24 -0000
 
-Thanks
+Switch PACKAGECONFIG from man to manpages so we are included when
+api-documentation is set. Ensure correct tools are available to build
+the documentation and avoid unsupported option failures by not passing
+`--enable-man-doc`.
 
-It would be nice to delete all branches except master. Only master branch
-makes sense now for meta-python2, right?
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
 
-On Mon, Dec 2, 2019 at 4:57 PM Tim Orling <ticotimo@gmail.com> wrote:
+ meta-networking/recipes-filter/nftables/nftables_0.9.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Why?
-> ====
-> With the pending EOL (end-of-life) of Python 2 in a month [1], it is time
-> to move python2 recipes to a new home. For that reason, meta-python2 [2]
-> has been created as the home for legacy python2 recipes.
->
-> How?
-> ====
-> It was a design goal to keep the original history of meta-python, but only
-> the python2 parts. In order to accomplish this git-filter-repo was used
-> [3]. The exact steps used can be seen in a gist [4]. After that script was
-> run, manual merging of *.inc and *.bb files was performed to make recipe
-> maintenance with AUH (auto upgrade helper) and devtool easier. Since this
-> layer does not have to support two python versions, the reason for the *.bb
-> and *.inc split has been eliminated. Commits that upgraded recipes to
-> python2-incompatible versions were reverted. Changes to make the recipes
-> build and ptests be runnable were also made (to master branch). The stable
-> branches were also kept, to make it easier to refer back to prior history
-> and allow developers to use meta-python2 only in their workflow. NOTE: The
-> stable branches may require work to make them usable, this was outside the
-> scope of the immediate effort.
->
-> What next?
-> =========
-> Python2 recipes from meta-python will be dropped via patches sent to the
-> mailing list. Python2 recipes from meta-oe and meta-networking, which have
-> already been added to meta-python2, will be dropped via patches to the
-> mailing list. Other layers are welcome to do the same.
->
-> Recipe upgrades to meta-python2 will also be coming, for instance Django
-> 1.11.x LTS is the last version to support Python 2, but we are not at the
-> latest release of that series.
->
-> The original meta-python will become Python3-only and patches for python2
-> support will be nacked and redirected to meta-python2.
->
-> python2 itself will likely be moved from oe-core into meta-python2
->
-> [1] https://www.python.org/doc/sunset-python-2/
-> [2] https://git.openembedded.org/meta-python2/
-> [3] https://github.com/newren/git-filter-repo
-> [4] https://gist.github.com/moto-timo/ab70ab96ddbaf5fd1226bd21dbbfec9b
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-networking/recipes-filter/nftables/nftables_0.9.2.bb b/meta-networking/recipes-filter/nftables/nftables_0.9.2.bb
+index 98e8050b814c..0c57e7255eaf 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_0.9.2.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_0.9.2.bb
+@@ -14,7 +14,7 @@ SRC_URI[sha256sum] = "5cb66180143e6bfc774f4eb316206d40ac1cb6df269a90882404cbf716
+ inherit autotools manpages pkgconfig
+ 
+ PACKAGECONFIG ?= "python"
+-PACKAGECONFIG[man] = "--enable--man-doc, --disable-man-doc"
++PACKAGECONFIG[manpages] = ", --disable-man-doc, asciidoc-native"
+ PACKAGECONFIG[python] = "--with-python-bin=${PYTHON}, --with-python-bin="", python3"
+ 
+ inherit ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3native', '', d)}
+-- 
+2.17.1
+
 
