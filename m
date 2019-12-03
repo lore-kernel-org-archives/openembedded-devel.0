@@ -1,51 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
-	[209.85.210.169])
-	by mail.openembedded.org (Postfix) with ESMTP id CDB3B7F266
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
+	[209.85.219.67])
+	by mail.openembedded.org (Postfix) with ESMTP id ED2397E98A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Dec 2019 17:31:24 +0000 (UTC)
-Received: by mail-pf1-f169.google.com with SMTP id d199so2173413pfd.11
+	Tue,  3 Dec 2019 20:17:30 +0000 (UTC)
+Received: by mail-qv1-f67.google.com with SMTP id t5so2120651qvs.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Dec 2019 09:31:26 -0800 (PST)
+	Tue, 03 Dec 2019 12:17:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=uStQQ3F5oVozYMfwRTHcjp0CN/bERyX1Bn23jot+E/4=;
-	b=Ixl83C5yStpWDEIOEdQZRxY+AJNr7wxRRywdBPyAdwMaR8P68h1A1IlVr8ofITs5M3
-	qOH3NGKmSswRr9I5wcD8DbO+XiJ2gM8g2Robt7xRWp2miwND/GXGcu5N4txGPkIy14Tm
-	m1tC9QHvKN6g+9K28zGk/gD7GM5RxV7zfEaLFH5I1ZW91wHkyaK0vUtKtR9bZ84So4ov
-	zMpjVZZaq04ar0hu9bGsGeI7FcZU6eVNOxlQ/QG7yPicYD7zWBAi9O8uZrJHVmF7bPJH
-	X81P3Ni/w2/l1CKQoXg6+5Nh9Ej6Ae/YCr/drAFnh3qwN5Ic9r8aH2PmF6WtAWLi3gPl
-	fLew==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=gmAq7luUu4W7h0bk6BqDLXjWZksaMT4yDqvSvLBMzj0=;
+	b=hZ4AicbTyxn3zEC4+XlBj/dcZ9yge7OprvwzfCurhGxIjZviX/ycao0wVIeUZ3zunx
+	HNAem7M8/T7/vJ78sZeyJk6IK3nQjKIh0SrlN6RW39k8aQoy8q6gceEE3UC81pzuRa7i
+	+fxIkez4Vy/KKa/eYa6YGAfW+Q9RD9ITs6BjGbnIpxeSjWNLw66elzE2YIrzLHxhzmEk
+	6xViBoH06NYsEVOLJcXMckgjY5KBJ3cGRwfsZPOZ+jZWMr3CbCUWzAPQ0xaSYlTW0jXK
+	IMv0vCS+jeQaNJR7ictFp5Jn3tDdYyWpwVVzVMq0ZTkrKk+eKKILW63waTuWZgaXbWgn
+	2cVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=uStQQ3F5oVozYMfwRTHcjp0CN/bERyX1Bn23jot+E/4=;
-	b=PD8SokYHCCxk1930WYwzVeCgATCDcuAg9qjIFz55HPhnBd53hSPSJpCiHc2im5xPxb
-	Lkz3qp6R7sPjyoFWeECqUVYpsKf2lk+nL1Lqk+8Lsq/v5jJv9jtc7sjMoJWTTx7UHLpx
-	WOSYkgsvetaDICqRoeiNJoBwmY8yWHTZNb6qnj7GfGKCZRquYjGWzMmm65psLNKAzrKh
-	RvDU2v7TZZPv3DOL4tpHIzmAMe/ERaJKPVhrsgtlXgD1LUyfuLXm+ORmUTWgeZW6AZFn
-	RJnBNE8r8jPns1f/9nE2rTeoJVIiSg3rd/emTN7Tn7CEG4iGVIzVvaIbM44S5tdiQs2A
-	OT6w==
-X-Gm-Message-State: APjAAAVuy0aSXwzNzivTPZzim0axRtxluzw9SzwnS4XNcdWtw09jtLzf
-	FO49HPvHzdvWHpf3FDBA3b8/MXKKFMg=
-X-Google-Smtp-Source: APXvYqyA4TSmWYt8/x1cEAFLA8D1h0+UbWITDHuSFTij8hNMjz6SljKwlV8bgVJwtpDun+R+9VZwPQ==
-X-Received: by 2002:a63:a24:: with SMTP id 36mr6311310pgk.94.1575394285270;
-	Tue, 03 Dec 2019 09:31:25 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:8500:1c20::2797])
-	by smtp.gmail.com with ESMTPSA id k4sm4229507pfa.25.2019.12.03.09.31.24
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 03 Dec 2019 09:31:24 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Dec 2019 09:31:08 -0800
-Message-Id: <20191203173108.87041-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
-In-Reply-To: <20191203173108.87041-1-raj.khem@gmail.com>
-References: <20191203173108.87041-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=gmAq7luUu4W7h0bk6BqDLXjWZksaMT4yDqvSvLBMzj0=;
+	b=Jp7DetwGYDiK8Zm7uuQnLSqooOGJmXYne/Dl20xWoibvF2/bqCADX1X1wUaRvhNwq6
+	6KsLYWPfbDslJ5SPkGGYJF24zMlY8kXNlx/sNiotJAbvZEnxpRVUVLVYQxcYfuXVGE30
+	QpPZIXDyZyd99hqj2gCVSrNdfw2PTon1eWc7p6CNVk5P7ACpMSBoqFSYxx4yi/UvxBIY
+	vYU+DtlO8XxqiQ38z0J+Xd+I+ZDz/A8HSRxglTwuoT76/6fAVDWnR8CTocrI7al5xL79
+	PX+aXboFSVjoZhAUHemqGzrlZY/4xmvY7zLEOre72+Rz6YCsZQVlzwJS7ipigkH8eVL0
+	gvUw==
+X-Gm-Message-State: APjAAAU5Hx7kq+ZX2pwr6bkbtWDXP/ZHMRwQndYSKi5MvKB2s0JeZe+H
+	pntCh6fNOFsFuJRb6t8O74N5Y/YtV2tAojHKwt4=
+X-Google-Smtp-Source: APXvYqz32gB2AskrTyp4I10lJtpKaI4F1WJazrqm5gT0ZU05oF+Ev6yq+gC26njb/qOf4bsaVrSo3F+AurZatDCjqV8=
+X-Received: by 2002:a0c:f513:: with SMTP id j19mr7111467qvm.206.1575404251351; 
+	Tue, 03 Dec 2019 12:17:31 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] emlog: Use RRECOMMEND instead of RDEPEND
+References: <20191203134454.320616-1-pespin@sysmocom.de>
+In-Reply-To: <20191203134454.320616-1-pespin@sysmocom.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 3 Dec 2019 12:17:04 -0800
+Message-ID: <CAMKF1sqsVesrd0PvS3N=8RPvZDdLaZV+-nBLuXifsybrebrX+g@mail.gmail.com>
+To: Pau Espin Pedrol <pespin@sysmocom.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] lksctp-tools: Add RRECOMENDS kernel-module-sctp for pkg lksctp-tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +53,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Dec 2019 17:31:24 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 03 Dec 2019 20:17:31 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This helps with re-using sstate tasks when machines are similar
+On Tue, Dec 3, 2019 at 5:45 AM Pau Espin Pedrol <pespin@sysmocom.de> wrote:
+>
+> Previously the kernel module was only pulled in for ${PN}-utils and
+> ${PN}-ptest, but not for the library itself. As a result, appsexternal
+> to this recipe  using only the library fail because kernel module is
+> not installed in the image.
+> ---
+>  .../recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb         | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+> index 70cea6c7b..25270016d 100644
+> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
+> @@ -12,6 +12,7 @@ SRCREV = "1b077af62d83d53c34b1bde8bad6648149d5edf9"
+>
+>  PV .= "+git${SRCPV}"
+>  LK_REL = "1.0.18"
+> +PR = "r1"
 
-Fixes
-Hash for dependent task emlog/kernel-module-emlog_git.bb:do_packagedata changed from a70b22026e418998e61d08b0b0ab64a3e26fd0da41a1d12f4356554b6b043794 to 7817106c7626c3c4b238f03771fc32dc8f3dc5e7496ff98cf8a812039939f915
+drop setting PR manually.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-core/emlog/emlog_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-core/emlog/emlog_git.bb b/meta-oe/recipes-core/emlog/emlog_git.bb
-index 63d12477bf..22308d7e85 100644
---- a/meta-oe/recipes-core/emlog/emlog_git.bb
-+++ b/meta-oe/recipes-core/emlog/emlog_git.bb
-@@ -19,4 +19,4 @@ do_install() {
-    install -Dm 0755 ${S}/mkemlog ${D}${bindir}/mkemlog
- }
- 
--RDEPENDS_${PN} += "kernel-module-emlog"
-+RRECOMMENDS_${PN} += "kernel-module-emlog"
--- 
-2.24.0
-
+>
+>  SRC_URI = " \
+>      git://github.com/sctp/lksctp-tools.git \
+> @@ -65,5 +66,6 @@ FILES_${PN}-dev += " \
+>
+>  FILES_${PN}-utils = "${bindir}/*"
+>
+> +RRECOMMENDS_${PN} += "kernel-module-sctp"
+>  RRECOMMENDS_${PN}-utils += "kernel-module-sctp"
+>  RRECOMMENDS_${PN}-ptest += "kernel-module-sctp"
+> --
+> 2.24.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
