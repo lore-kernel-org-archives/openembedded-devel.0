@@ -1,52 +1,34 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com
-	[209.85.216.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 3931A7CFE3
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.openembedded.org (Postfix) with ESMTP id B74177D27B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Dec 2019 15:40:28 +0000 (UTC)
-Received: by mail-pj1-f67.google.com with SMTP id r67so1685097pjb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Dec 2019 07:40:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5b1HJXN3ivpXyHSja92k4hPJuH9aQj+YqgAXF68JptM=;
-	b=ZBe+S9T2Z4N7DXC104LExTyM1YYqWWJwIcx7YNlApK0XVDNngTL20LNZHWYXNKXK4m
-	astZ0sWhNxdShVrf9i5AwcgxNx6n+h65TfBUPVFEs4uBWlnN8A8DnYHcTukWsJPNdXbq
-	/eNYhvkq6OiPdx/+N1FMEn6LDUQ/5dhOG/DPqgJZno7Btd7rW2sxMRvwsQW11uoEaeZW
-	rxxexJ4X+u5wP1SIPVgPVmJjqxQ+EgDd9/BD1y0b7EfdfNzFztMOE47E1pglOAxSvNJ/
-	EbndFDTJH1QIsH0l+yDyAjl4Nzn2QGs5daVWzHsal4NOvRuQELPN+vPDdKKXRtMnk1i+
-	v0bA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5b1HJXN3ivpXyHSja92k4hPJuH9aQj+YqgAXF68JptM=;
-	b=OUsIxC7TDu/bYjos1NwVplWpgMW9irIZH44NNHddqtjx7VYIc1QUHVIGW0zhC/nHHW
-	wFLIKY6yM0n58Tl/1iCazjvAbX7bubZKJBCI9wn+50zjtJDutC5g5rxgzp+DLjNSFhmJ
-	NwYZuooVhWipUq6RoO9bYmMaimhFZCh5WbNf2uiI8nxbsPRYfGm+2CoVVxt2W09DKyLa
-	7GytALPGuuvUmsFg0FQHC5kv7ajU8WOJxUwr8pccz/EdvmTq8s8/TWoHt8jSMiEJRR54
-	A5e0IGlVfo4MOrpH83pIXdqksl/n/woav7vfigUX0rDQFn0MeUOiMg9e6t5Gc1uhMMT8
-	t6zg==
-X-Gm-Message-State: APjAAAVoItfEchP9K5R9NZGeAIYScp9cZyc9vO0Fi+rTglYNo/YCgUKN
-	0qwwNzrJRa/Y1wipoUdj0ge02StD5nY=
-X-Google-Smtp-Source: APXvYqxchDbMp4Wa2FtWR44u4jT30jSYYxuaXm+dISDAClSNT2FoMkrZY1Qxwmfp2Yl1BW9rJ9M2OQ==
-X-Received: by 2002:a17:90b:941:: with SMTP id
-	dw1mr6116607pjb.21.1575387628846; 
-	Tue, 03 Dec 2019 07:40:28 -0800 (PST)
-Received: from thetis.hsd1.or.comcast.net
-	([2601:1c0:6080:4500:a470:42fc:1110:b615])
-	by smtp.gmail.com with ESMTPSA id
-	s11sm3951439pgo.85.2019.12.03.07.40.28
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 03 Dec 2019 07:40:28 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Dec 2019 07:40:16 -0800
-Message-Id: <20191203154016.24251-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.24.0
+	Tue,  3 Dec 2019 17:21:38 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 9DF5E40C4C;
+	Tue,  3 Dec 2019 17:21:39 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id dz8pLUrwu9Ny; Tue,  3 Dec 2019 17:21:39 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 64C2240C49;
+	Tue,  3 Dec 2019 17:21:37 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 0C0BB174336; Tue,  3 Dec 2019 12:21:37 -0500 (EST)
+Date: Tue, 3 Dec 2019 12:21:36 -0500
+From: Denys Dmytriyenko <denis@denix.org>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20191203172136.GS4735@denix.org>
+References: <cover.1575137343.git.akuster808@gmail.com>
+	<CAMKF1spELhX7gHHXJd88bS9n9ezCrsh+b7ZM+pn+5zcjXBDkvQ@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python2][zeus][PATCH] python-backports-init: Add helper class and recipe
+In-Reply-To: <CAMKF1spELhX7gHHXJd88bS9n9ezCrsh+b7ZM+pn+5zcjXBDkvQ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 00/15] Zeus patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,123 +41,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Dec 2019 15:40:28 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 03 Dec 2019 17:21:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Recipes that install in the backports namespace have
-a tendency to conflict in the installation of
-.../site-packages/backports/__init__.py
+On Sat, Nov 30, 2019 at 10:22:18AM -0800, Khem Raj wrote:
+> On Sat, Nov 30, 2019 at 10:11 AM Armin Kuster <akuster808@gmail.com> wrote:
+> >
+> > Please have comments back by Tuesday
+> >
+> > The following changes since commit aad5b3d070cd8c58828b0975cf861d8ebc90f460:
+> >
+> >   README: updated Maintainers list for Zeus (2019-10-30 14:16:04 -0700)
+> >
+> > are available in the git repository at:
+> >
+> >   git://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
+> >   http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
+> >
+> > Andreas Oberritter (1):
+> >   samba: fix installation for minimal build
+> >
+> > Hongxu Jia (1):
+> >   python-more-itertools.inc: fix python2 package not incorrectly
+> >     generated
+> >
+> > Khem Raj (1):
+> >   rsyslog: Dont force enable atomic builtins on mips
+> >
+> > Michael Scott (1):
+> >   modemmanager: Upgrade 1.10.6 -> 1.10.8
+> >
+> > Slater, Joseph (1):
+> >   php: fix CVE-2019-11043
+> >
+> > Stefan Wiehler (1):
+> >   nvme-cli: defer host ID generation to post installation
+> >
+> > Trevor Gamblin (3):
+> >   rsyslog: fix CVE-2019-17041
+> >   rsyslog: upgrade from v8.1908.0 to v8.1910.0
+> >   quagga: fix PIDFile path for service files
+> >
+> > Yi Zhao (2):
+> >   samba: upgrade 4.10.8 -> 4.10.10
+> >   freeradius: fix CVE-2019-10143
+> >
+> > Zheng Ruoqin (2):
+> >   mariadb: upgrade 10.3.16 -> 10.3.18
+> >   wireshark: upgrade 3.0.3 -> 3.0.6
+> >
+> > niko.mauno@vaisala.com (2):
+> >   gitpkgv.bbclass: Use --git-dir option
+> >   gitpkgv.bbclass: Support also lightweight tags
+> >
+> 
+> this list looks good to me.
 
-Add a class and recipe to help avoid the conflict.
+Also missed mbedtls for armv5te breakage.
 
-Modify recipes that are affected:
-  - python-backports-functools-lru-cache
-  - python-backports-ssl
-  - python-configparser
+Denys
 
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
----
- classes/python-backports-init.bbclass         |  7 ++++++
- ...ython-backports-functools-lru-cache_1.5.bb |  2 +-
- .../backports/__init__.py                     |  5 ++++
- .../python/python-backports-init_1.0.bb       | 25 +++++++++++++++++++
- .../python/python-backports-ssl_3.5.0.1.bb    |  3 ++-
- .../python/python-configparser_3.8.1.bb       |  2 +-
- 6 files changed, 41 insertions(+), 3 deletions(-)
- create mode 100644 classes/python-backports-init.bbclass
- create mode 100644 recipes-devtools/python/python-backports-init/backports/__init__.py
- create mode 100644 recipes-devtools/python/python-backports-init_1.0.bb
 
-diff --git a/classes/python-backports-init.bbclass b/classes/python-backports-init.bbclass
-new file mode 100644
-index 00000000..727bc4a8
---- /dev/null
-+++ b/classes/python-backports-init.bbclass
-@@ -0,0 +1,7 @@
-+inherit python-dir
-+
-+RDEPENDS_${PN} += "python-backports-init"
-+
-+do_install_prepend() {
-+    rm -rf $(find . -path "*/backports/__init__.py" -type f)
-+}
-diff --git a/recipes-devtools/python/python-backports-functools-lru-cache_1.5.bb b/recipes-devtools/python/python-backports-functools-lru-cache_1.5.bb
-index 825444ff..11c15338 100644
---- a/recipes-devtools/python/python-backports-functools-lru-cache_1.5.bb
-+++ b/recipes-devtools/python/python-backports-functools-lru-cache_1.5.bb
-@@ -11,7 +11,7 @@ SRC_URI[sha256sum] = "9d98697f088eb1b0fa451391f91afb5e3ebde16bbdb272819fd091151f
- 
- DEPENDS += "python-setuptools-scm-native"
- 
--inherit setuptools pypi
-+inherit setuptools pypi python-backports-init
- 
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-pickle \
-diff --git a/recipes-devtools/python/python-backports-init/backports/__init__.py b/recipes-devtools/python/python-backports-init/backports/__init__.py
-new file mode 100644
-index 00000000..febdb2f8
---- /dev/null
-+++ b/recipes-devtools/python/python-backports-init/backports/__init__.py
-@@ -0,0 +1,5 @@
-+# A Python "namespace package" http://www.python.org/dev/peps/pep-0382/
-+# This always goes inside of a namespace package's __init__.py
-+
-+from pkgutil import extend_path
-+__path__ = extend_path(__path__, __name__)
-diff --git a/recipes-devtools/python/python-backports-init_1.0.bb b/recipes-devtools/python/python-backports-init_1.0.bb
-new file mode 100644
-index 00000000..29e712a6
---- /dev/null
-+++ b/recipes-devtools/python/python-backports-init_1.0.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Helper package to avoid backports/__init__.py conflicts"
-+DETAIL = "backports packages in python2 suffer from a flaw in the namespace \
-+implementation and can conflict with each other. For OE purposes, at least \
-+fix the conflicting install of .../site-packages/backports/__init__.py"
-+AUTHOR = "Tim Orling <ticotimo@gmail.com>"
-+SECTION = "devel/python"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-+
-+SRC_URI = "file://backports/__init__.py"
-+
-+inherit python-dir
-+
-+# provide to avoid warnings
-+do_compile() {
-+    :
-+}
-+
-+do_install() {
-+    install -d ${D}${PYTHON_SITEPACKAGES_DIR}/backports
-+    install ${WORKDIR}/backports/__init__.py ${D}${PYTHON_SITEPACKAGES_DIR}/backports/
-+}
-+
-+FILES_${PN} = "${PYTHON_SITEPACKAGES_DIR}/backports/__init__.py"
-diff --git a/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb b/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb
-index 45492daa..8be16039 100644
---- a/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb
-+++ b/recipes-devtools/python/python-backports-ssl_3.5.0.1.bb
-@@ -13,6 +13,7 @@ SRC_URI[md5sum] = "c03fc5e2c7b3da46b81acf5cbacfe1e6"
- SRC_URI[sha256sum] = "502ad98707319f4a51fa2ca1c677bd659008d27ded9f6380c79e8932e38dcdf2"
- 
- PYPI_PACKAGE = "backports.ssl_match_hostname"
--inherit pypi setuptools
-+
-+inherit pypi setuptools python-backports-init
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-pkgutil"
-diff --git a/recipes-devtools/python/python-configparser_3.8.1.bb b/recipes-devtools/python/python-configparser_3.8.1.bb
-index 69f045db..859dbd78 100644
---- a/recipes-devtools/python/python-configparser_3.8.1.bb
-+++ b/recipes-devtools/python/python-configparser_3.8.1.bb
-@@ -1,2 +1,2 @@
--inherit setuptools
-+inherit setuptools python-backports-init
- require python-configparser.inc
--- 
-2.24.0
-
+> >  ...-to-radiusd-user-group-when-rotating-logs.patch | 104 +++++++++++++++++++++
+> >  .../freeradius/freeradius_3.0.19.bb                |   1 +
+> >  .../samba/{samba_4.10.8.bb => samba_4.10.10.bb}    |  20 ++--
+> >  .../recipes-protocols/quagga/files/bgpd.service    |   4 +-
+> >  .../recipes-protocols/quagga/files/ospf6d.service  |   4 +-
+> >  .../recipes-protocols/quagga/files/ospfd.service   |   4 +-
+> >  .../recipes-protocols/quagga/files/ripd.service    |   4 +-
+> >  .../recipes-protocols/quagga/files/ripngd.service  |   4 +-
+> >  .../recipes-protocols/quagga/files/zebra.service   |   4 +-
+> >  .../{wireshark_3.0.3.bb => wireshark_3.0.6.bb}     |   4 +-
+> >  meta-oe/classes/gitpkgv.bbclass                    |  15 ++-
+> >  meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb       |   5 +-
+> >  ...demmanager_1.10.6.bb => modemmanager_1.10.8.bb} |   4 +-
+> >  ...native_10.3.16.bb => mariadb-native_10.3.18.bb} |   0
+> >  meta-oe/recipes-dbs/mysql/mariadb.inc              |   4 +-
+> >  .../{mariadb_10.3.16.bb => mariadb_10.3.18.bb}     |   0
+> >  .../recipes-devtools/php/php/CVE-2019-11043.patch  |  38 ++++++++
+> >  meta-oe/recipes-devtools/php/php_7.3.9.bb          |   1 +
+> >  .../rsyslog/rsyslog/0001-Out-of-bounds-issue.patch |  31 ------
+> >  .../{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb}   |   6 +-
+> >  .../python/python-more-itertools.inc               |   2 -
+> >  21 files changed, 186 insertions(+), 73 deletions(-)
+> >  create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
+> >  rename meta-networking/recipes-connectivity/samba/{samba_4.10.8.bb => samba_4.10.10.bb} (95%)
+> >  rename meta-networking/recipes-support/wireshark/{wireshark_3.0.3.bb => wireshark_3.0.6.bb} (95%)
+> >  rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.10.6.bb => modemmanager_1.10.8.bb} (92%)
+> >  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.16.bb => mariadb-native_10.3.18.bb} (100%)
+> >  rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.16.bb => mariadb_10.3.18.bb} (100%)
+> >  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11043.patch
+> >  delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-Out-of-bounds-issue.patch
+> >  rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb} (97%)
+> >
+> > --
+> > 2.7.4
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
