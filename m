@@ -1,46 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
-	[209.85.219.67])
-	by mail.openembedded.org (Postfix) with ESMTP id ED2397E98A
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 15B627ED5C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Dec 2019 20:17:30 +0000 (UTC)
-Received: by mail-qv1-f67.google.com with SMTP id t5so2120651qvs.5
+	Wed,  4 Dec 2019 08:41:24 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,276,1571673600"; d="scan'208";a="79573706"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 04 Dec 2019 16:41:24 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 4759B4CE1C86
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Dec 2019 12:17:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=gmAq7luUu4W7h0bk6BqDLXjWZksaMT4yDqvSvLBMzj0=;
-	b=hZ4AicbTyxn3zEC4+XlBj/dcZ9yge7OprvwzfCurhGxIjZviX/ycao0wVIeUZ3zunx
-	HNAem7M8/T7/vJ78sZeyJk6IK3nQjKIh0SrlN6RW39k8aQoy8q6gceEE3UC81pzuRa7i
-	+fxIkez4Vy/KKa/eYa6YGAfW+Q9RD9ITs6BjGbnIpxeSjWNLw66elzE2YIrzLHxhzmEk
-	6xViBoH06NYsEVOLJcXMckgjY5KBJ3cGRwfsZPOZ+jZWMr3CbCUWzAPQ0xaSYlTW0jXK
-	IMv0vCS+jeQaNJR7ictFp5Jn3tDdYyWpwVVzVMq0ZTkrKk+eKKILW63waTuWZgaXbWgn
-	2cVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=gmAq7luUu4W7h0bk6BqDLXjWZksaMT4yDqvSvLBMzj0=;
-	b=Jp7DetwGYDiK8Zm7uuQnLSqooOGJmXYne/Dl20xWoibvF2/bqCADX1X1wUaRvhNwq6
-	6KsLYWPfbDslJ5SPkGGYJF24zMlY8kXNlx/sNiotJAbvZEnxpRVUVLVYQxcYfuXVGE30
-	QpPZIXDyZyd99hqj2gCVSrNdfw2PTon1eWc7p6CNVk5P7ACpMSBoqFSYxx4yi/UvxBIY
-	vYU+DtlO8XxqiQ38z0J+Xd+I+ZDz/A8HSRxglTwuoT76/6fAVDWnR8CTocrI7al5xL79
-	PX+aXboFSVjoZhAUHemqGzrlZY/4xmvY7zLEOre72+Rz6YCsZQVlzwJS7ipigkH8eVL0
-	gvUw==
-X-Gm-Message-State: APjAAAU5Hx7kq+ZX2pwr6bkbtWDXP/ZHMRwQndYSKi5MvKB2s0JeZe+H
-	pntCh6fNOFsFuJRb6t8O74N5Y/YtV2tAojHKwt4=
-X-Google-Smtp-Source: APXvYqz32gB2AskrTyp4I10lJtpKaI4F1WJazrqm5gT0ZU05oF+Ev6yq+gC26njb/qOf4bsaVrSo3F+AurZatDCjqV8=
-X-Received: by 2002:a0c:f513:: with SMTP id j19mr7111467qvm.206.1575404251351; 
-	Tue, 03 Dec 2019 12:17:31 -0800 (PST)
+	Wed,  4 Dec 2019 16:32:53 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 4 Dec 2019 16:41:22 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 4 Dec 2019 07:02:18 -0800
+Message-ID: <1575471738-11717-2-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1575471738-11717-1-git-send-email-wangmy@cn.fujitsu.com>
+References: <1575471738-11717-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
-References: <20191203134454.320616-1-pespin@sysmocom.de>
-In-Reply-To: <20191203134454.320616-1-pespin@sysmocom.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 3 Dec 2019 12:17:04 -0800
-Message-ID: <CAMKF1sqsVesrd0PvS3N=8RPvZDdLaZV+-nBLuXifsybrebrX+g@mail.gmail.com>
-To: Pau Espin Pedrol <pespin@sysmocom.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] lksctp-tools: Add RRECOMENDS kernel-module-sctp for pkg lksctp-tools
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: 4759B4CE1C86.A812C
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] postgresql: 12.0 -> 12.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,47 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Dec 2019 20:17:31 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 04 Dec 2019 08:41:25 -0000
+Content-Type: text/plain
 
-On Tue, Dec 3, 2019 at 5:45 AM Pau Espin Pedrol <pespin@sysmocom.de> wrote:
->
-> Previously the kernel module was only pulled in for ${PN}-utils and
-> ${PN}-ptest, but not for the library itself. As a result, appsexternal
-> to this recipe  using only the library fail because kernel module is
-> not installed in the image.
-> ---
->  .../recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb         | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
-> index 70cea6c7b..25270016d 100644
-> --- a/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
-> +++ b/meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.18.bb
-> @@ -12,6 +12,7 @@ SRCREV = "1b077af62d83d53c34b1bde8bad6648149d5edf9"
->
->  PV .= "+git${SRCPV}"
->  LK_REL = "1.0.18"
-> +PR = "r1"
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ .../recipes-dbs/postgresql/{postgresql_12.0.bb => postgresql_12.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-dbs/postgresql/{postgresql_12.0.bb => postgresql_12.1.bb} (63%)
 
-drop setting PR manually.
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_12.0.bb b/meta-oe/recipes-dbs/postgresql/postgresql_12.1.bb
+similarity index 63%
+rename from meta-oe/recipes-dbs/postgresql/postgresql_12.0.bb
+rename to meta-oe/recipes-dbs/postgresql/postgresql_12.1.bb
+index d5b1ebd..4868519 100644
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_12.0.bb
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_12.1.bb
+@@ -8,5 +8,5 @@ SRC_URI += "\
+    file://0001-Improve-reproducibility.patch \
+ "
+ 
+-SRC_URI[md5sum] = "87545416ef021eee8621d31a93fcc899"
+-SRC_URI[sha256sum] = "cda2397215f758b793f741c86be05468257b0e6bcb1a6113882ab5d0df0855c6"
++SRC_URI[md5sum] = "2ee1bd4ec5f49363a3f456f07e599b41"
++SRC_URI[sha256sum] = "a09bf3abbaf6763980d0f8acbb943b7629a8b20073de18d867aecdb7988483ed"
+-- 
+2.7.4
 
->
->  SRC_URI = " \
->      git://github.com/sctp/lksctp-tools.git \
-> @@ -65,5 +66,6 @@ FILES_${PN}-dev += " \
->
->  FILES_${PN}-utils = "${bindir}/*"
->
-> +RRECOMMENDS_${PN} += "kernel-module-sctp"
->  RRECOMMENDS_${PN}-utils += "kernel-module-sctp"
->  RRECOMMENDS_${PN}-ptest += "kernel-module-sctp"
-> --
-> 2.24.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
 
