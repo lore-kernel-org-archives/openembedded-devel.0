@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
-	[209.85.222.169])
-	by mail.openembedded.org (Postfix) with ESMTP id CDFAE7F883
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D4C717F89C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Dec 2019 16:48:05 +0000 (UTC)
-Received: by mail-qk1-f169.google.com with SMTP id a137so3885427qkc.7
+	Thu,  5 Dec 2019 17:02:19 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id x1so3892992qkl.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Dec 2019 08:48:06 -0800 (PST)
+	Thu, 05 Dec 2019 09:02:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=1lJOOPjubdMiXtQSqsf7rMDrjLzGQRYwi9O6ynsAu9Q=;
-	b=OmpByQXvBrqOSOlWnUWL33q5632b9oxp0vyfvdQedGL6301PHWCH1T3QA+KuZvxUV2
-	OgeEOnyOCbNBoa0pTOVNooiHD3cFo5Z4VyLEfZtXgiHHDi7inN1lp7IkcazFpzn3Ktj5
-	gxHHWithUPXcgYdxgxVqRhXRevRVhO+zUgUimu2gG1EpRfp6/rjnsw8B6IASD4kRPBlD
-	6YdabYBCLzbJEtqc0Xo+f/DApWnkOMGBfej1NwejdR8tyZnpU1DSFV24tPI0Ux70dME1
-	/TYHLmaoFZzPq/K1HV7egINd5/Z2HIoNa3KGYAHgSU0DrBWj4xbS+vtM243hk4oxOzbw
-	+29Q==
+	:cc; bh=kJCCJDteMUstGUhzfUrf6Gb7tFFDLAZUwRr6AMaNqdQ=;
+	b=aKeZAaF++0EOdYWGAe2KBXDlbLPFs8wB/1d6zBjCPHrI6J1CL7dkjSzOcwSxNzDOL7
+	wKi+pKI/55g+H9SVWCe/uaxNKZ4Jv92DWOPVDD3+ByyTf2E8yxicelQ+t+omJKziAL61
+	vAvTyVz8nbY25uPUO03EDsXBi5O4gCpSETnp78skYR+c7pH2bGzEJe+lllFYVkN+Yhc/
+	QHA8ihRSMUwPhtRxZ7YiqF6qb83vtwz3siPEzMRe1fP6JC01afxF7kSAjbaDKiu0TbIV
+	E8axqsLuEiFIFQr2Ka7+HF8XkCfx9BvKVNfWtJKI8+lbYU6sbrI4sSIXM4SCnjAwkcw1
+	b6bA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=1lJOOPjubdMiXtQSqsf7rMDrjLzGQRYwi9O6ynsAu9Q=;
-	b=UHUI5sUVXNYGSb0VgeomVUSIHaZxFoymHebmtYo6zdWPN+nTCDKkgGDMeF9pVM48UO
-	4BB8Q0plefrioUEj9HkQfPRiHlOmN5FM1bC1UlCFFy4SqitgA/FdLAkG8dAYxpop4npw
-	frqqw41BtEMiXGs2FjqQJbzazR+YIRFz2EYQ/V+QhsboApmaeviqduoHW+zKyzCx/oSD
-	TNqgcNO0gL0ceKZicBufQ3pKx7WdvyOjBLICvJkairsPExTL4EJc3BgxNuQIAuDmWXeN
-	I5MBZ4pdYaAZp7Yt0hb+CxRlFCfsv80WmLW3rXVMTLzwgnJlM3n7p0kg0HbD46j+oOAG
-	uiLw==
-X-Gm-Message-State: APjAAAUHUDdbEfDEEiOICy5wuAdCu8t+XOpMIu3OfE8+trIFSY5b6ZLQ
-	ILg3RttPio95xXJ9KBpvLU7oVNmK//D516mNrpY=
-X-Google-Smtp-Source: APXvYqxd2uN2gRLr0IAQ1w8+yhXfEj40iQHHiFPVkopa9sJkqrQXVfPKNH97zqDFQBskZ8bx2Cl/yhATVLp04lWwoeg=
-X-Received: by 2002:a37:a0cf:: with SMTP id j198mr9580119qke.9.1575564484916; 
-	Thu, 05 Dec 2019 08:48:04 -0800 (PST)
+	bh=kJCCJDteMUstGUhzfUrf6Gb7tFFDLAZUwRr6AMaNqdQ=;
+	b=a4Hvk0UDfcPi1ru7MRnHgud4fu49vpks1W5jbmJR3gTjCqUWSfAxj9d8uACx0HXu94
+	jGTo5NmNyABcfgDqTqCOJ3oP1sMQz2fRrbOPIAlmmG1C1VK73ZZGOYVXIFNlRs1P/LEp
+	gnqF7CqQWoBrW/7FgG6uivkF2gQKHdAED7AKyJUkuS802MPn97Z+XZpYxh6qNF78su7u
+	BDggOeXhBwFdHPxh8jN3Jpayv3cX5EjYXl4ejV+EneCksW2hjXHWVRZxLt502FESHnsK
+	OFDoff0+YtYulUwHkyQZT8/33nfz7TPscjNcbReUsUgBpVxiql9N+wJCAfOxtbSP+ySi
+	YxRw==
+X-Gm-Message-State: APjAAAWAbMnlhQ0kVqqXCtcZYeUSeaxrJIj4upBLFJ8X/GyT0T/ICsjJ
+	OSpelQQgyS1K4rJLz/7UhDWk+1xClMgPgYcLQVY=
+X-Google-Smtp-Source: APXvYqymC+8kPcPR532Uy5sApevEv++OOxuf9nczHu9DX6Cf6E41JuVTNzpxHX/hpW2n0ABkEG/IKy/p1YOEh878ULg=
+X-Received: by 2002:a37:a0cf:: with SMTP id j198mr9653629qke.9.1575565340394; 
+	Thu, 05 Dec 2019 09:02:20 -0800 (PST)
 MIME-Version: 1.0
-References: <1575562475-1830-1-git-send-email-jacopo.dallaglio@kynetics.com>
-In-Reply-To: <1575562475-1830-1-git-send-email-jacopo.dallaglio@kynetics.com>
+References: <1575555909-31614-1-git-send-email-wangmy@cn.fujitsu.com>
+In-Reply-To: <1575555909-31614-1-git-send-email-wangmy@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 5 Dec 2019 08:47:35 -0800
-Message-ID: <CAMKF1srGhF7HHCn0r8BVV3MRXrQkD7cJAKreVBAz91yG3y_Fjw@mail.gmail.com>
-To: "Jacopo Dall'Aglio" <jacopo.dallaglio@kynetics.com>
+Date: Thu, 5 Dec 2019 09:01:51 -0800
+Message-ID: <CAMKF1sq5Rjv=VO+FkZ9he8V8QxZ6Mgr1sgm4c=NqVXBmfNKaqw@mail.gmail.com>
+To: Wang Mingyu <wangmy@cn.fujitsu.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v2] netplan: add recipe
+Subject: Re: [meta-filesystems][PATCH] xfsprogs: 5.2.1 -> 5.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,94 +53,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2019 16:48:06 -0000
+X-List-Received-Date: Thu, 05 Dec 2019 17:02:20 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Dec 5, 2019 at 8:15 AM Jacopo Dall'Aglio
-<jacopo.dallaglio@kynetics.com> wrote:
->
-> Canonical's Netplan is a network configuration abstraction renderer written in
-> Python. It's compatible with NetworkManager and systemd-networkd.
->
-> Signed-off-by: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
-> ---
-> Resending patch with correct header and with correction applied for building
-> with sysV init manager. This patch depends on "[meta-python][PATCH]
-> python-netifaces: add recipes".
-> ---
->  .../recipes-connectivity/netplan/netplan_0.98.bb   | 58 ++++++++++++++++++++++
->  1 file changed, 58 insertions(+)
->  create mode 100644 meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
->
-> diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-> new file mode 100644
-> index 0000000..860762c
-> --- /dev/null
-> +++ b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
-> @@ -0,0 +1,58 @@
-> +SUMMARY = "The network configuration abstraction renderer"
-> +DESCRIPTION = "Netplan is a utility for easily configuring networking on a \
-> +linux system. You simply create a YAML description of the required network \
-> +interfaces and what each should be configured to do. From this description \
-> +Netplan will generate all the necessary configuration for your chosen renderer \
-> +tool."
-> +HOMEPAGE = "https://netplan.io"
-> +SECTION = "net/misc"
-> +
-> +LICENSE = "GPLv3"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-> +
-> +S = "${WORKDIR}/git"
-> +SRCREV = "5d22e9d22c4a3724d27b80b0cd9b898ae8f59d2b"
-> +PV = "0.98+git${SRCPV}"
-> +
-> +SRC_URI = " \
-> +        git://github.com/CanonicalLtd/netplan.git \
-> +"
-> +
-> +DEPENDS = "glib-2.0 libyaml"
-> +RDEPENDS_${PN} = "python3 python3-core python3-pyyaml python3-netifaces python3-nose python3-coverage python3-pycodestyle python-pyflakes util-linux-libuuid"
-> +
-> +inherit pkgconfig systemd
-> +
-> +TARGET_CC_ARCH += "${LDFLAGS}"
+It seems to cause xfsdump failure
 
-why is this needed ? Can we fix it in sourcecode itself
 
-> +
-> +EXTRA_OEMAKE = "generate"
-> +EXTRA_OEMAKE =+ "${@bb.utils.contains('DISTRO_FEATURES','systemd','netplan-dbus dbus/io.netplan.Netplan.service','',d)}"
-> +
-> +do_install() {
-> +       install -d ${D}${sbindir} ${D}${base_libdir}/netplan ${D}${datadir}/netplan/netplan/cli/commands ${D}${sysconfdir}/netplan
-> +       install -m 755 ${S}/generate ${D}${base_libdir}/netplan/
-> +       install -m 644 ${S}/netplan/*.py ${D}${datadir}/netplan/netplan
-> +       install -m 644 ${S}/netplan/cli/*.py ${D}${datadir}/netplan/netplan/cli
-> +       install -m 644 ${S}/netplan/cli/commands/*.py ${D}${datadir}/netplan/netplan/cli/commands
-> +       install -m 755 ${S}/src/netplan.script ${D}${datadir}/netplan/
-> +       ln -srf ${D}${datadir}/netplan/netplan.script ${D}${sbindir}/netplan
-> +
-> +       install -d ${D}/${systemd_unitdir}/system ${D}${systemd_unitdir}/system-generators
-> +       install -m 644 ${S}/src/netplan-wpa@.service ${D}${systemd_unitdir}/system/
-> +       ln -srf ${D}/${base_libdir}/netplan/generate ${D}${systemd_unitdir}/system-generators
-> +
-> +       if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-> +               install -d ${D}${datadir}/dbus-1/system.d ${D}${datadir}/dbus-1/system-services
-> +               install -m 755 ${S}/netplan-dbus ${D}${base_libdir}/netplan
-> +               install -m 644 ${S}/dbus/io.netplan.Netplan.conf ${D}${datadir}/dbus-1/system.d
-> +               install -m 644 ${S}/dbus/io.netplan.Netplan.service ${D}${datadir}/dbus-1/system-services
-> +       fi
-> +}
-> +
-> +SYSTEMD_SERVICE_${PN} = "netplan-wpa@.service"
-> +SYSTEMD_AUTO_ENABLE = "disable"
-> +
-> +PACKAGES += "${PN}-dbus"
-> +
-> +FILES_${PN} = "${sbindir} ${base_libdir}/netplan/generate ${datadir}/netplan ${sysconfdir}/netplan ${systemd_unitdir}"
-> +FILES_${PN}-dbus = "${base_libdir}/netplan/netplan-dbus ${datadir}/dbus-1"
+https://errors.yoctoproject.org/Errors/Details/290437/
+
+On Thu, Dec 5, 2019 at 12:08 AM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
+>
+> spdx information is added in GPL-2.0
+>
+> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+> ---
+>  .../recipes-utils/xfsprogs/{xfsprogs_5.2.1.bb => xfsprogs_5.3.0.bb} | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_5.2.1.bb => xfsprogs_5.3.0.bb} (91%)
+>
+> diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.1.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.3.0.bb
+> similarity index 91%
+> rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.1.bb
+> rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.3.0.bb
+> index 5ab1d02..9a4b6b8 100644
+> --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.2.1.bb
+> +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_5.3.0.bb
+> @@ -3,7 +3,7 @@ HOMEPAGE = "http://oss.sgi.com/projects/xfs"
+>  SECTION = "base"
+>  LICENSE = "GPLv2 & LGPLv2.1"
+>  LICENSE_libhandle = "LGPLv2.1"
+> -LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=74274e8a218423e49eefdea80bc55038 \
+> +LIC_FILES_CHKSUM = "file://LICENSES/GPL-2.0;md5=e6a75371ba4d16749254a51215d13f97 \
+>                      file://LICENSES/LGPL-2.1;md5=b370887980db5dd40659b50909238dbd"
+>  DEPENDS = "util-linux util-linux-native"
+>  SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
+> @@ -13,8 +13,8 @@ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
+>             file://0002-include-include-xfs-linux.h-after-sys-mman.h.patch \
+>             file://0001-support-usrmerge.patch \
+>             "
+> -SRC_URI[md5sum] = "5ca3f79e76e3fb984a03d1b42a2e60ba"
+> -SRC_URI[sha256sum] = "7b500e148cebd08f99e37cf744c7843817b37e7be2a32c4dc57d6ea16e3019ae"
+> +SRC_URI[md5sum] = "ff4a505a9ff6e952399337cf3d2cc883"
+> +SRC_URI[sha256sum] = "b29a64d04ad81f1f121d4683deae0bbb928abd1c891fe766b2c4bcdf61ab09c1"
+>
+>  inherit autotools-brokensep
+>
 > --
 > 2.7.4
+>
+>
 >
 > --
 > _______________________________________________
