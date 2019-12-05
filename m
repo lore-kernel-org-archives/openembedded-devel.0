@@ -1,24 +1,45 @@
-Return-Path: <mohamad.noor.alim.hussin@intel.com>
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
-	by mail.openembedded.org (Postfix) with ESMTP id 02ADA7CDE4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Dec 2019 02:44:46 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-	by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	04 Dec 2019 18:44:48 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.69,279,1571727600"; d="scan'208";a="201624732"
-Received: from hussinmo-desk.png.intel.com ([172.30.199.124])
-	by orsmga007.jf.intel.com with ESMTP; 04 Dec 2019 18:44:46 -0800
-From: mohamad.noor.alim.hussin@intel.com
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Dec 2019 10:43:15 +0800
-Message-Id: <20191205024315.20529-1-mohamad.noor.alim.hussin@intel.com>
-X-Mailer: git-send-email 2.19.1
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-io1-f45.google.com (mail-io1-f45.google.com
+	[209.85.166.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 1807F7C346
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Dec 2019 05:00:30 +0000 (UTC)
+Received: by mail-io1-f45.google.com with SMTP id l17so2259337ioj.3
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Dec 2019 21:00:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=PnYBOosKb+KUF5vvrACnJaz6wPQDEvowonvuhHX2kxs=;
+	b=HbLbkLo9MELvOjoqgRjBQn5YhC8dxbJiNQJYYtmBFFUJ4wGiyHY/RE1zC2XCwogV58
+	QlJDZRDAgx2u+IRsNMe4yC3c4CHUfZcWSuCBfuXMAfEInI+TuV+bL/WtaLWm0vst4UZl
+	Cpp0lamJK2xoT85juie6zvn8+VZgkdbHRYUjWyJ7r4mnjKuvv/8gJ2NYbDZVnmV+qV2o
+	eUQzsBiBQaSJA0LHS8fsFXr16P6RfSQzkF9U9jbgt2MZZO6BuyhtQLLUwHpZZAOytUgb
+	XL1WCQTVyJ7VdG545+bLZib4uYvvkiXBd2bB8jLB8vOiI6PbXmXpm+6Zjm1IIGKwB24q
+	OLJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=PnYBOosKb+KUF5vvrACnJaz6wPQDEvowonvuhHX2kxs=;
+	b=EWYd/aomweep2BOnJ5nXAVdmRG/3w+UIu9KW6CEk1Cy8GTJc+TcR+cVaemcqz3tOP0
+	Ym0d4G28Mym63JMkgNwyQxRi5+uFMtlguusKGuKJGtpKnsC1um2nduh5pCMvdvC+5VUJ
+	87lmy7tjvSSJwKGwCmyVKwJak9ebj0GyAaZFrtDuaI4pHiWy1ZgpjVo5xpQr+RbPiwaW
+	5rd5zT828/UeT67pTMQbXIXUtBAUeIDvb+5wMCjFs+/4sTsNKka9pJmVvO386M20A3I4
+	xscq1PeCElI54d6ZgVowQ6iYMPQ13G3IYkUE/dYq1YVD7X2QkzRDl4CFkKR5PoUptpj2
+	WUTQ==
+X-Gm-Message-State: APjAAAV1YZgTbm0k+xkBqT71PfMLEQLH8V4W5j/rHMSDNyi+HI2FUwgR
+	4Cx9GTzYLrGXURlKLQI2iWt44GaGnklfKxdREhzuGVTSW8s=
+X-Google-Smtp-Source: APXvYqyfwK5EmfbGN3gCjdxNAj9QhaWXPMxG1+SL0vxBluojw6GuzyBfGBdGMzwBWPcAVb2S5FDDYbCTahkfe7PWFSQ=
+X-Received: by 2002:a05:6638:5a6:: with SMTP id
+	b6mr6650398jar.22.1575522031786; 
+	Wed, 04 Dec 2019 21:00:31 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-java][PATCH] icedtea7-native: Fix compilation error due to format-overflow
+From: Tim Orling <ticotimo@gmail.com>
+Date: Wed, 4 Dec 2019 21:00:20 -0800
+Message-ID: <CANx9H-CNHDMVz4pNz=T1FpmsQ3hDcF=_nWM_a2PhM+KD3JWAPw@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<Openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [thud, warrior, zeus][meta-python] Conundrum: python-pycrypto and python-pycryptodome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,33 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2019 02:44:47 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 05 Dec 2019 05:00:31 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Mohamad Noor Alim Hussin <mohamad.noor.alim.hussin@intel.com>
+python-pycrypto [1] is rather old and un-maintained [2].
+python-pycryptodome [3] is more modern and is basically a drop in
+replacement. However, the two cannot be installed at the same time.
+Instead, one would install python-pycryptodomex which does not conflict
+with the paths of python-pycrypto [4].
 
-Getting a compilaton error due to format-overflow. Workaround
-to suppress the error message by ignore the warning.
+In an effort to enable packagegroup-meta-python [5] and meta-python-image
+[6], one runs into the existing python-pycrypto and python-pycryptodome
+recipes attempting to install the same files to the same locations (no
+surprise, they are providing the same libraries).
 
-Signed-off-by: Mohamad Noor Alim Hussin <mohamad.noor.alim.hussin@intel.com>
----
- recipes-core/icedtea/icedtea7-native.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+For the stable branches, should we rename python-pycryptodome to
+python-cryptodomex and PROVIDES python-pycryptodome?
 
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index b578cb2..0329d71 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
-@@ -26,7 +26,7 @@ CXXFLAGS_append = " -fno-tree-dse"
- CXX_append = " -std=gnu++98"
- 
- # WORKAROUND: ignore errors from new compilers
--CFLAGS_append = " -Wno-error=stringop-overflow -Wno-error=return-type"
-+CFLAGS_append = " -Wno-error=stringop-overflow -Wno-error=return-type -Wno-error=format-overflow"
- 
- inherit native java autotools pkgconfig
- inherit openjdk-build-helper
--- 
-2.19.1
-
+[1]
+https://git.openembedded.org/meta-openembedded/tree/meta-python/recipes-devtools/python/python-pycrypto_2.6.1.bb?h=zeus
+[2] https://github.com/dlitz/pycrypto/issues/285
+[3]
+https://git.openembedded.org/meta-openembedded/tree/meta-python/recipes-devtools/python/python-pycryptodome_3.4.11.bb?h=zeus
+[4]
+https://stackoverflow.com/questions/48155294/what-is-pycryptodomex-and-how-does-it-differ-from-pycryptodome
+[5]
+https://git.openembedded.org/meta-openembedded/tree/meta-python/recipes-core/packagegroups/packagegroup-meta-python.bb?h=zeus#n21
+[6]
+https://git.openembedded.org/meta-openembedded/tree/meta-python/recipes-core/images/meta-python-image.bb?h=zeus
 
