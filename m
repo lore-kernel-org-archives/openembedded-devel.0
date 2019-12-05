@@ -1,52 +1,52 @@
 Return-Path: <maxime.roussinbelanger@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 53B5C6C44A
+Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
+	[209.85.219.67])
+	by mail.openembedded.org (Postfix) with ESMTP id E5E5D7F87F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Dec 2019 19:34:26 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id 5so4695527qtz.1
+	Thu,  5 Dec 2019 19:44:17 +0000 (UTC)
+Received: by mail-qv1-f67.google.com with SMTP id t7so1760923qve.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Dec 2019 11:34:27 -0800 (PST)
+	Thu, 05 Dec 2019 11:44:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=WBHAMxKkZZcTak3GQBQHARWJ2O7an9TA4+90kwRF9Ao=;
-	b=VqnqnnpwgEhJn8k2dpwJSJlfYwm2GnEjqJT+3a86KCPd7UyPR2ZlFyuBkwVDvXG/60
-	3X6lUvshNz/Y0WisW2u2FOl9CQDA+m2OTZvREMYmYSuX3BII72thReolpj5Dfj1rafkZ
-	kCPNTKUWTChjGFo3nMyl7SBJyk0RM49iGQ+vhd2ou0oHHg7TIqUa7R7M/szdn+hC5+oY
-	9R6Nc3B0BNBnbYgQTdrn6aD4S7UZDNXCs8i/NHQPh//RPYdcOaVUmmJuwOkzBNlWZZNa
-	/UwWB4NyCSXt4tzNVu2Q16/A8DfelIztkiKE3wtegKDAKPOwn6uwGW9t6cItFHx/uxzV
-	ZsFA==
+	bh=EjLmz/fwIj819GLMPZyUe1Vyhp+o1YY+4iGyTklkni0=;
+	b=WH5XUCRbBaC7evXvgN42eJcTIsXp7YHb+RIpShl1kTTxFx8KBrLgeXbcIXVVTpfGc4
+	2mGn26f4n4mg4JbYlupGfeiFkLfShe3AEuTlTK8dsCDmww9UWc1C7JkhGKowMhhFa2XY
+	4ycJ1XpBk0VEcyMNlJMSURnr6MZY674hcul4rx/9LzcNNhgzlcXGQnXs8NJXlkW+0Pz5
+	4UM0M7l76/jj8mFcWJZst7T+UbXawadk/B9kqVA0ylp32m8j6yuiQx+fhHqTS7zdz9yY
+	uNt5218/6q3WeqhvTlABEWBS/ZlIav9v74uRdqc4hunKCuPVFUfBJq6K7UcBv+gsJOPt
+	tofQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=WBHAMxKkZZcTak3GQBQHARWJ2O7an9TA4+90kwRF9Ao=;
-	b=tssxaOybEaFA+zYFvOpyn7BJ8tfC1cOXlzusYzd5XcHDd25Lde2csHpWXt+NKkVOch
-	gACtwLVyuqgb5S8Yzcfj8/jScI4QeLnCIfXDOcaKsRjTBZVzqTluq4vtmacGik/TvZzX
-	Id7BTxq0xqTzq+CCuzVkXBdu29JpkJkYxu6yUW3KjAmygwwntjrc0Ve2saavw6glYq1w
-	zjBMM6So3zT8DFCjEZ2UuSCiv9ia67EtWSX9C6Gf0SnUlGJyqbhOxNzEs5et4tEbShod
-	mZrADZQB73G8NMnrXVuFRhCJ76LkwBbJyK1DTMxFM1tkYLuAvJBNz8DkENzh7ic+eEOa
-	ZCTQ==
-X-Gm-Message-State: APjAAAWXUkLHQXV7M8cKGF2DUBToWGDLYEGWImqIsJWOwGcEw1pHdrWU
-	597LA5EbxMeLwVsIRKYZEuuZDuM83Lc=
-X-Google-Smtp-Source: APXvYqz5e1XwVl0POHLX1+yvyZvZ3oAbRU+SZZFCHxz4ocwP0EZPL14NppCtxzxYD1RW7v/DhGIzKg==
-X-Received: by 2002:ac8:60d3:: with SMTP id i19mr9182872qtm.391.1575574467067; 
-	Thu, 05 Dec 2019 11:34:27 -0800 (PST)
+	bh=EjLmz/fwIj819GLMPZyUe1Vyhp+o1YY+4iGyTklkni0=;
+	b=LDxhzPqSbkNm5vkH4BfWDiZu9K1WU5AmSP5Fr+s3GatTpMsUoTK3oFeeIv1dPt+3Pc
+	GnjTT9DEIwFlJ+uEWNYW+xOi/DRUDw9Woa77aReAlsh6SKk7nyHYtxD428z9ZR4ajRzv
+	3YtVCzcAxJyTCvibxenJn1Q49WE2if+SszlI78vVyQ/JEPna0qF9CJ6PCZpsym5rxq+I
+	x0I8a+p4cpzeLQl67JLH6SQnzO4fd6r6OPaKz1C2j73SkBN5E/Gindkmh2PL0d15gaya
+	Zr1tAnJrwVw0wE2K4rMlVcTWbktJ0qzJ1c0CDJGATlAgs+W+anq65bgoUJzGvFHFMb1v
+	YeXw==
+X-Gm-Message-State: APjAAAVaz9jJy6OIrXVP43TAjv4g11tPyJCo1Pp5H9t5ftiEM56ncq9X
+	77/2/w5d/g5gHYR4g1P8OK+Fy4kpCvY=
+X-Google-Smtp-Source: APXvYqwAR2mfu6b60jzO/goSVgSDQi0uf+dOknB6o1cGy6cuKLK5trsD8mdbH0/gcU2P5nwaAbFISQ==
+X-Received: by 2002:a0c:b0fa:: with SMTP id p55mr9459578qvc.239.1575575058136; 
+	Thu, 05 Dec 2019 11:44:18 -0800 (PST)
 Received: from mbedesk.Sonatest.net
 	(ipagstaticip-d73c7528-4de5-0861-800b-03d8b15e3869.sdsl.bell.ca.
-	[174.94.156.236]) by smtp.gmail.com with ESMTPSA id
-	h28sm5728710qte.54.2019.12.05.11.34.26
+	[174.94.156.236])
+	by smtp.gmail.com with ESMTPSA id o3sm5202855qkc.77.2019.12.05.11.44.17
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 05 Dec 2019 11:34:26 -0800 (PST)
+	Thu, 05 Dec 2019 11:44:17 -0800 (PST)
 From: =?UTF-8?q?Maxime=20Roussin-B=C3=A9langer?=
 	<maxime.roussinbelanger@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Dec 2019 14:34:15 -0500
-Message-Id: <20191205193415.5928-1-maxime.roussinbelanger@gmail.com>
+Date: Thu,  5 Dec 2019 14:44:08 -0500
+Message-Id: <20191205194408.10866-1-maxime.roussinbelanger@gmail.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libvncserver: add missing cmake configration option to packageconfig
+Subject: [meta-oe][PATCH v2] libvncserver: add missing cmake configration option to packageconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,17 +59,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2019 19:34:26 -0000
+X-List-Received-Date: Thu, 05 Dec 2019 19:44:18 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Maxime Roussin-Bélanger <maxime.roussinbelanger@gmail.com>
 ---
- .../libvncserver/libvncserver_0.9.12.bb           | 15 +++++++++++++++
+v2:
+	- Fixed double `-` on ipv6 cmake configuration
+
+.../libvncserver/libvncserver_0.9.12.bb           | 15 +++++++++++++++
  1 file changed, 15 insertions(+)
 
 diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
-index 4e4acb835c..94a4cf7a83 100644
+index 4e4acb835c..74aa7de076 100644
 --- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
 +++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
 @@ -6,23 +6,38 @@ LICENSE = "GPLv2"
@@ -99,7 +102,7 @@ index 4e4acb835c..94a4cf7a83 100644
  PACKAGECONFIG[gcrypt] = "-DWITH_GCRYPT=ON,-DWITH_GCRYPT=OFF,libgcrypt,libgcrypt"
  PACKAGECONFIG[gnutls] = "-DWITH_GNUTLS=ON,-DWITH_GNUTLS=OFF,gnutls"
  PACKAGECONFIG[jpeg] = "-DWITH_JPEG=ON,-DWITH_JPEG=OFF,jpeg"
-+PACKAGECONFIG[ipv6] = "-DWITH_IPv6=ON,--DWITH_IPv6=OFF,"
++PACKAGECONFIG[ipv6] = "-DWITH_IPv6=ON,-DWITH_IPv6=OFF,"
  PACKAGECONFIG[lzo] = "-DWITH_LZO=ON,-DWITH_LZO=OFF,lzo"
  PACKAGECONFIG[openssl] = "-DWITH_OPENSSL=ON,-DWITH_OPENSSL=OFF,openssl"
  PACKAGECONFIG[png] = "-DWITH_PNG=ON,-DWITH_PNG=OFF,libpng,libpng"
