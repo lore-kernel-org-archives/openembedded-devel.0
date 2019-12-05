@@ -1,39 +1,50 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C5266C10B
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Dec 2019 14:58:53 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47TJl0467Tz40;
-	Thu,  5 Dec 2019 15:58:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1575557932;
-	bh=l8eR9G6dUg3gJKK0exk74MnzudINsZiW1cYPWbXB+8g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=Suqi8g/OPOPc2C5U+q6g0Q3Qlrqi+gfxGwUXJE7SAtaD404cviyIlOU3OH3z3JkuZ
-	uPKD0QhpEfE4e0V2YFSO0AJWNS6vr+NiA1g2WdhyyaQ/Z+jTUrfQ9if0Sl0WUjLPTK
-	rb9Tkq3Fas+00IoP+XGHLGFhjzF952zkOCE0okBSREonLK7d7qnYmhT++m2MCgwAtA
-	jld/IZQL36nFd/mnZ1M7sZDjMci2qSWuWYGt1sButRqkKwJtdjAmXz4HIaQ0IGDoHx
-	ruhzAX8wPUxl23bYa2mIhlL+dazPWFpGPPg000p2tQJJu69vkJssT2g9JkT1OEh1dA
-	Yri2PWU7bXQJqeB5iT4uxwd9W41c/op4BvkIdhV9gStXNjRo5YhMRTumxnGILoI/0i
-	jaw6+HtoXEQ58yzW/b6XELOIZI0hvoAY29+Rq+Mc8oLhpSPej3+nS8h1Uv+4DBiSjb
-	Iy2SRBVDnwotp678WfU5+Bt13de/IcYCvKHZcDRhp0iCyYBCqRgCxtLJGSjBYW6Is+
-	AQLBH5MhWLlbICku2ttoK2gvC9xZyuMHvKj6irJH/UYqvZnSYxM3IVSCDAoA4Janpw
-	/IIWhXLO9uMI/GyLzJBUwrrtXnhHuSq3oGEIwow9ZmDta+VU3SemA2Dnqhxcq37f9b
-	Yq9dDuAhAkZOpl4O8QK85/CE=
-Date: Thu, 5 Dec 2019 16:58:50 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Tim Orling <ticotimo@gmail.com>
-Message-ID: <20191205145850.GC3151@localhost>
-References: <CANx9H-CNHDMVz4pNz=T1FpmsQ3hDcF=_nWM_a2PhM+KD3JWAPw@mail.gmail.com>
-	<20191205123915.GA3151@localhost>
-	<CANx9H-CLX8q67Xbz4ve24m_rQkLEuUOOE410JEOLo8h7dXnS0g@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CANx9H-CLX8q67Xbz4ve24m_rQkLEuUOOE410JEOLo8h7dXnS0g@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<Openembedded-devel@lists.openembedded.org>
-Subject: Re: [thud, warrior, zeus][meta-python] Conundrum: python-pycrypto and python-pycryptodome
+Return-Path: <jacopo.dallaglio@kynetics.com>
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E7B9C7F88D
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Dec 2019 16:14:47 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id y23so7715305wma.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Dec 2019 08:14:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kynetics-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=q4pdypClNDKGUZysZ4fZUE1ZATEfESO4W0H7eCgYC3s=;
+	b=oqoRSbQJi90H4Boeijp2gn/U5b8BUjlH+aJOFzRoIiKui8paYEPkcXx4nluOFfvthz
+	hkRCddxqdxNyjAkyHezGNAh9DV9xnNGmcchrR17w7v72ajG5ZynYrOXQ28j53PYF94CX
+	NZ8Y9hwLwAw1w9KDyZJmkF+HpSh8ZyWyQVaVwqbNEtwgMm99Qfs6mvxewPLcuOpw8Joj
+	cjw/Aw3rtD1zk5jrv2KDj6anGwVijgK+9dyuD8OC4qCNJuleTD592UboQz81Oe3j/msw
+	iwxAg3DHEfMe5CLpFJc8+4r5OCMoTvn9rHJubqV5AQYERrAXjfXBL4ReJN55scx8F7HC
+	a4Jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=q4pdypClNDKGUZysZ4fZUE1ZATEfESO4W0H7eCgYC3s=;
+	b=H4yfO11qbCbG1JchYpnT8FruMbMwhQ0FHbr7ZyBMapsCK8RJE/ycsi70PRRSV4bXaV
+	a6HkZ8Od3hhckBYdFr3izyViNh/VHXlV+1mgOhinpTFvFis/xKH8rbjCBK7jMub8f23z
+	bixuyI4o9+PF8KJEdNGxZqxYeTwJBXo/QKCccSVHsfRKRxQk3RCV+RBUBmGqDzpQYyIz
+	wyi+0jQNgcUC7JJtkFfZ+ZGytk0Xd5VKxhfIrU0ORRm/ukGqDb1oGjXosHdhgWpEMch6
+	97X0f9DyL0NH8TvXO41UFSvAA/j7jKrXmr7DOz5Ybt/x0B3TiMsSZJTs8y18VG8juiSB
+	nRpA==
+X-Gm-Message-State: APjAAAXaWepZipruxSdIzEVb+4OQX529Qf7jkNf0kaw4+PM4cheCIASn
+	kkLrafFmzD3e6/o+SDw21lcMw7TbQzU0uDc=
+X-Google-Smtp-Source: APXvYqwzikCHtAtKqDi+6aiSAr8CHZc+tRnRYctczp8aBiGDihpQkEYqHjPHUlfkqEQ+IxVlgxCzpw==
+X-Received: by 2002:a7b:cb46:: with SMTP id v6mr6065362wmj.117.1575562487933; 
+	Thu, 05 Dec 2019 08:14:47 -0800 (PST)
+Received: from ip-172-31-10-74.eu-west-1.compute.internal
+	(ec2-54-171-197-126.eu-west-1.compute.amazonaws.com.
+	[54.171.197.126])
+	by smtp.gmail.com with ESMTPSA id 5sm13189717wrh.5.2019.12.05.08.14.47
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 05 Dec 2019 08:14:47 -0800 (PST)
+From: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  5 Dec 2019 16:14:35 +0000
+Message-Id: <1575562475-1830-1-git-send-email-jacopo.dallaglio@kynetics.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
+Subject: [meta-networking][PATCH v2] netplan: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,37 +57,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Dec 2019 14:58:54 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Dec 2019 16:14:48 -0000
 
-On Thu, Dec 05, 2019 at 06:33:15AM -0800, Tim Orling wrote:
-> On Thu, Dec 5, 2019 at 4:39 AM Adrian Bunk <bunk@stusta.de> wrote:
-> > On Wed, Dec 04, 2019 at 09:00:20PM -0800, Tim Orling wrote:
-> > > python-pycrypto [1] is rather old and un-maintained [2].
-> > > python-pycryptodome [3] is more modern and is basically a drop in
-> > > replacement. However, the two cannot be installed at the same time.
-> > > Instead, one would install python-pycryptodomex which does not conflict
-> > > with the paths of python-pycrypto [4].
-> > >
-> > > In an effort to enable packagegroup-meta-python [5] and meta-python-image
-> > > [6], one runs into the existing python-pycrypto and python-pycryptodome
-> > > recipes attempting to install the same files to the same locations (no
-> > > surprise, they are providing the same libraries).
-> > >
-> > > For the stable branches, should we rename python-pycryptodome to
-> > > python-cryptodomex and PROVIDES python-pycryptodome?
-> > >...
-> >
-> > The minimal change for stable branches would be to add RCONFLICTS
-> > on python{,3}-pycryptodome to python{,3}-pycrypto.
-> 
-> this is only a python 2 issue.
->...
+Canonical's Netplan is a network configuration abstraction renderer written in
+Python. It's compatible with NetworkManager and systemd-networkd.
 
-Adding both python3-pycryptodome and python3-pycrypto to an image failed 
-for me in master with the same error.
+Signed-off-by: Jacopo Dall'Aglio <jacopo.dallaglio@kynetics.com>
+---
+Resending patch with correct header and with correction applied for building
+with sysV init manager. This patch depends on "[meta-python][PATCH]
+python-netifaces: add recipes".
+---
+ .../recipes-connectivity/netplan/netplan_0.98.bb   | 58 ++++++++++++++++++++++
+ 1 file changed, 58 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
 
-cu
-Adrian
+diff --git a/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+new file mode 100644
+index 0000000..860762c
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb
+@@ -0,0 +1,58 @@
++SUMMARY = "The network configuration abstraction renderer"
++DESCRIPTION = "Netplan is a utility for easily configuring networking on a \
++linux system. You simply create a YAML description of the required network \
++interfaces and what each should be configured to do. From this description \
++Netplan will generate all the necessary configuration for your chosen renderer \
++tool."
++HOMEPAGE = "https://netplan.io"
++SECTION = "net/misc"
++
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++S = "${WORKDIR}/git"
++SRCREV = "5d22e9d22c4a3724d27b80b0cd9b898ae8f59d2b"
++PV = "0.98+git${SRCPV}"
++
++SRC_URI = " \
++        git://github.com/CanonicalLtd/netplan.git \
++"
++
++DEPENDS = "glib-2.0 libyaml"
++RDEPENDS_${PN} = "python3 python3-core python3-pyyaml python3-netifaces python3-nose python3-coverage python3-pycodestyle python-pyflakes util-linux-libuuid"
++
++inherit pkgconfig systemd
++
++TARGET_CC_ARCH += "${LDFLAGS}"
++
++EXTRA_OEMAKE = "generate"
++EXTRA_OEMAKE =+ "${@bb.utils.contains('DISTRO_FEATURES','systemd','netplan-dbus dbus/io.netplan.Netplan.service','',d)}"
++
++do_install() {
++	install -d ${D}${sbindir} ${D}${base_libdir}/netplan ${D}${datadir}/netplan/netplan/cli/commands ${D}${sysconfdir}/netplan
++	install -m 755 ${S}/generate ${D}${base_libdir}/netplan/
++	install -m 644 ${S}/netplan/*.py ${D}${datadir}/netplan/netplan
++	install -m 644 ${S}/netplan/cli/*.py ${D}${datadir}/netplan/netplan/cli
++	install -m 644 ${S}/netplan/cli/commands/*.py ${D}${datadir}/netplan/netplan/cli/commands
++	install -m 755 ${S}/src/netplan.script ${D}${datadir}/netplan/
++	ln -srf ${D}${datadir}/netplan/netplan.script ${D}${sbindir}/netplan
++
++	install -d ${D}/${systemd_unitdir}/system ${D}${systemd_unitdir}/system-generators
++	install -m 644 ${S}/src/netplan-wpa@.service ${D}${systemd_unitdir}/system/
++	ln -srf ${D}/${base_libdir}/netplan/generate ${D}${systemd_unitdir}/system-generators
++
++	if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
++		install -d ${D}${datadir}/dbus-1/system.d ${D}${datadir}/dbus-1/system-services
++		install -m 755 ${S}/netplan-dbus ${D}${base_libdir}/netplan
++		install -m 644 ${S}/dbus/io.netplan.Netplan.conf ${D}${datadir}/dbus-1/system.d
++		install -m 644 ${S}/dbus/io.netplan.Netplan.service ${D}${datadir}/dbus-1/system-services
++	fi
++}
++
++SYSTEMD_SERVICE_${PN} = "netplan-wpa@.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++PACKAGES += "${PN}-dbus"
++
++FILES_${PN} = "${sbindir} ${base_libdir}/netplan/generate ${datadir}/netplan ${sysconfdir}/netplan ${systemd_unitdir}"
++FILES_${PN}-dbus = "${base_libdir}/netplan/netplan-dbus ${datadir}/dbus-1"
+-- 
+2.7.4
+
 
