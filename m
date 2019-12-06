@@ -1,56 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
-	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 93C097F977
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id B34CE7F95C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Dec 2019 00:09:26 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id g17so5870070wro.2
+	Fri,  6 Dec 2019 00:09:27 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id q10so5800258wrm.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Dec 2019 16:09:28 -0800 (PST)
+	Thu, 05 Dec 2019 16:09:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=n5XYcKa1B+1qo5jOqfhdTv45bzw3pBplgcMOwvLSRbs=;
-	b=q3fOp1QLAdKpbB2u0FZvGZdvLtZ29vGis8v7l5njWf60PL0BJD8ODmECTLUKfG8Axy
-	CIK1ogg2IRnTJXwMWwoldZL+FihxRIUbQ2Kx2jdpDSmo3ThS88CzNF3h5cN/UNASOz7z
-	O7So4M6rQYFB5bVB5YgyenoF9UBtmBEE7ewoME6ZTRTnUtOh6zm7JN4ajkYW5RxtLTOi
-	83uPidBdyfnijoAsx321mY78XgMl1lVSmRmZu7WAsB9OlNngMscZ3AiCLaUzgwBPkMU2
-	bidYdSPgr6x37D4LaoWxeJzWs1bFPJV1mgIasZpSVu12Qb4hrm4Ut1cN8lJLRpQOTbau
-	MZVA==
+	bh=4blzWhC+Fmp88G0DRUrmGFAMsrNfvzU+MIxWS3voJfY=;
+	b=DQ8R/FMcjSMSgYKwZ4U3CgHiJJxA32ZfNuV2wC9xPxAYNXpMuZdn5tMq+kH4HyXVsn
+	YQed8qnIqYL5Ehh6gmZoMJ7rmBQzqS8IzLLjCkt1F6RRIT0Gh8hpLSd2pWmSClKxsGVA
+	9WB6DJbZhcZJfJcZd9VloJaC3kFOXR7qBmx+VCcIaZhobjQt8OE0lQvM3ORH0VDWZRET
+	HDG8bg7D53Y/k+LscnUdG/gtGOy8CYyo9DHTf1LR76HuRAeHNH/xUq2PwhrGT5CRw1lG
+	iyWlQ8cTxukwyyZiyfwJZXP4cKXJY51Kzsby9c1+bA7szJV9gbfGUNa4Z/AvaarEElyA
+	QCZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=n5XYcKa1B+1qo5jOqfhdTv45bzw3pBplgcMOwvLSRbs=;
-	b=kgRyCtTehSxHVB48X3codSn2HyKrSzek76GptbB5HGPpSB5taTr2fGQLAM1BaJZuw6
-	n31otGwpWgTh0aHIxRrHfbywMSnt45/OS3a2uU4IaaeS8igDhiqZvwNpftSIlEEZEx/U
-	DvsZK6dUm2/4s6AFt2SNmELaMYfEE91LSpKRDj40kGmAI+FtySlcKmJxVJgp112cUMKM
-	sieea6yKYG2JHtLWdOG+aKiS8X8ZCuEtCKujUCuH7bpw3/HHMKB6DtwbSD6FJOLUQlyj
-	zWqJSaxSEJ4oqPbulDjnUfxpBCZTUzVRrQzsOhuJcCPcNjU5HQa6ed31tEFIDGuug8PH
-	9LDQ==
-X-Gm-Message-State: APjAAAVS1NodhTi7H5O+/0pz7lYzj+nL5Q4IImJn5XMwp32GKaQkNF8g
-	zrxkB3x1cCscbOnCCDCvM8vC7n0L
-X-Google-Smtp-Source: APXvYqxecaVWJ4YvooqkASSMSSBEM2te3MTQt8v8wSjz/zU6K34CT0Eq10T/bcnKdYGQErScznuGrg==
-X-Received: by 2002:a05:6000:cf:: with SMTP id
-	q15mr12354692wrx.393.1575590967090; 
-	Thu, 05 Dec 2019 16:09:27 -0800 (PST)
+	bh=4blzWhC+Fmp88G0DRUrmGFAMsrNfvzU+MIxWS3voJfY=;
+	b=C6SkXdMysb49pg79IhSa9JVcOIZqj8fXuSB5Dj70uSwCHEY0v8mKCtgMG4tWWMIa4M
+	MC+yTxwk9OxRMlh3QyVS8H4AjpAM2jY1vbXmJS5fCci+2IK3ylFn7w2YpgkT6Mjozv1p
+	v6s6e+XzO5DsAz0THGtGWKUTOpss8hxGB4gjXr4fU8w7jffuOuIi/fbhQ1F+2WDeSl9P
+	TARanW39sEhs8wKvHf+6MIrSkEOShdCmHIPM3f7P2Z100WuBfoDCo79R9wYFgM58yxT0
+	D5HZQQOy7UCM+5toCJXDtNUVbOCnxu7NxgeJ4sNqHhCiQUMyznszoCQmS2lffOxuPv3x
+	FxNw==
+X-Gm-Message-State: APjAAAVDpk6wjDgLEsjyxwF4VgDmrBTuO6CyltwrprhpEExdfdVTTIUx
+	E1tIcKqY6RXwk7M7rbL+gTJpgdV/
+X-Google-Smtp-Source: APXvYqz8KSVLsPgFvs8iYJ22HtTMVX/kFL6bs8CbUss7z/tqftH6lI79JwjPXjkZEk1mEobmstC8xQ==
+X-Received: by 2002:a5d:4cc9:: with SMTP id c9mr12241261wrt.70.1575590968169; 
+	Thu, 05 Dec 2019 16:09:28 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0A9017AA4DD0060EAA1509.dip0.t-ipconnect.de.
 	[2003:f0:7f0a:9017:aa4d:d006:eaa:1509])
 	by smtp.gmail.com with ESMTPSA id
-	b10sm14252762wrt.90.2019.12.05.16.09.26
+	b10sm14252762wrt.90.2019.12.05.16.09.27
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 05 Dec 2019 16:09:26 -0800 (PST)
+	Thu, 05 Dec 2019 16:09:27 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Dec 2019 01:08:54 +0100
-Message-Id: <20191206000912.19841-4-schnitzeltony@gmail.com>
+Date: Fri,  6 Dec 2019 01:08:55 +0100
+Message-Id: <20191206000912.19841-5-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191206000912.19841-1-schnitzeltony@gmail.com>
 References: <20191206000912.19841-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 03/21] libgsf: upgrade 1.14.45 -> 1.14.46
+Subject: [PATCH 04/21] libgnome-keyring: remove
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,60 +62,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Dec 2019 00:09:26 -0000
+X-List-Received-Date: Fri, 06 Dec 2019 00:09:28 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* there have been no traces that gconf is still necessary
-' while at it cleanup recipe
+* with recent changes nothing requires it anymore
+* development stopped in 2014
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ....ac-drop-a-copy-paste-of-introspection.m4-m.patch |  0
- .../libgsf/{libgsf_1.14.45.bb => libgsf_1.14.46.bb}  | 12 ++++--------
- 2 files changed, 4 insertions(+), 8 deletions(-)
- rename meta-gnome/recipes-gnome/libgsf/{files => libgsf}/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch (100%)
- rename meta-gnome/recipes-gnome/libgsf/{libgsf_1.14.45.bb => libgsf_1.14.46.bb} (59%)
+ .../gnome-keyring/libgnome-keyring_3.12.0.bb  | 29 -------------------
+ 1 file changed, 29 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_3.12.0.bb
 
-diff --git a/meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch b/meta-gnome/recipes-gnome/libgsf/libgsf/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
-similarity index 100%
-rename from meta-gnome/recipes-gnome/libgsf/files/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
-rename to meta-gnome/recipes-gnome/libgsf/libgsf/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
-diff --git a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.46.bb
-similarity index 59%
-rename from meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb
-rename to meta-gnome/recipes-gnome/libgsf/libgsf_1.14.46.bb
-index ac36ceb04..049320afc 100644
---- a/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.45.bb
-+++ b/meta-gnome/recipes-gnome/libgsf/libgsf_1.14.46.bb
-@@ -5,23 +5,19 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=dc7371b50816c96e145fa0f8ade8e24d \
- 
- SECTION = "libs"
- 
--DEPENDS= "libxml2 bzip2 glib-2.0 zlib intltool-native gnome-common-native"
-+DEPENDS= "libxml2 bzip2 glib-2.0 zlib gnome-common-native"
- 
--inherit autotools pkgconfig gnomebase gobject-introspection
-+inherit gnomebase gobject-introspection gettext gtk-doc
- 
-+SRC_URI[archive.md5sum] = "5bc6d1d6394f0ed5a58e8f2e5e4ead7f"
-+SRC_URI[archive.sha256sum] = "ea36959b1421fc8e72caa222f30ec3234d0ed95990e2bf28943a85f33eadad2d"
- SRC_URI += "file://0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch"
- 
--SRC_URI[archive.md5sum] = "e45cc8aa9c49516d540b7d7307f755f1"
--SRC_URI[archive.sha256sum] = "5cbc2c0f1dc44d202fa0c6e3a51e9f17b0c2deb8711ba650432bfde3180b69fa"
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_3.12.0.bb b/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_3.12.0.bb
+deleted file mode 100644
+index ba69e2e0c..000000000
+--- a/meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyring_3.12.0.bb
++++ /dev/null
+@@ -1,29 +0,0 @@
+-SUMMARY = "Compatibility library for accessing secrets"
+-HOMEPAGE = "http://www.gnome.org/"
+-BUGTRACKER = "https://bugzilla.gnome.org/"
 -
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[gdk-pixbuf] = "--with-gdk-pixbuf,--without-gdk-pixbuf,gdk-pixbuf"
- 
- EXTRA_OECONF = "\
--    --disable-gtk-doc \
-     --with-bz2 \
- "
- 
--RDEPENDS_${PN} = "gconf"
+-LICENSE = "GPLv2 & LGPLv2"
+-LIC_FILES_CHKSUM = " \
+-    file://COPYING;md5=0914b9d3ebaba41ef2e3e0ae16f296cf \
+-    file://COPYING.GPL;md5=94d55d512a9ba36caa9b7df079bae19f \
+-"
+-SECTION = "x11/gnome/libs"
 -
- FILES_${PN} += "${datadir}/thumbnailers"
+-inherit gnomebase gtk-doc gobject-introspection
+-
+-DEPENDS = "dbus libgcrypt glib-2.0 glib-2.0-native intltool-native"
+-
+-SRC_URI[archive.md5sum] = "6696e4f2e9aed4625cdc3af30bd8c238"
+-SRC_URI[archive.sha256sum] = "c4c178fbb05f72acc484d22ddb0568f7532c409b0a13e06513ff54b91e947783"
+-
+-
+-# Fails to build with thumb-1 (qemuarm)
+-#| {standard input}: Assembler messages:
+-#| {standard input}:823: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#3'
+-#| {standard input}:823: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#13'
+-#| {standard input}:824: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#29'
+-#| {standard input}:824: Error: shifts in CMP/MOV instructions are only supported in unified syntax -- `mov r12,r12,ror#19'
+-#| {standard input}:825: Error: lo register required -- `orr r10,r10,r10'
+-ARM_INSTRUCTION_SET_armv5 = "arm"
+-ARM_INSTRUCTION_SET_armv4 = "arm"
+-
 -- 
 2.21.0
 
