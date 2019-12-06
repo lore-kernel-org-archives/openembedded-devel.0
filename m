@@ -1,56 +1,56 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
-	[209.85.128.44])
-	by mail.openembedded.org (Postfix) with ESMTP id EC0717F95C
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 190DD7F8DB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Dec 2019 00:09:39 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id t14so5624866wmi.5
+	Fri,  6 Dec 2019 00:09:41 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id j42so5778772wrj.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Dec 2019 16:09:41 -0800 (PST)
+	Thu, 05 Dec 2019 16:09:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=AAQD+qcLjKcVjBLxZQP9efNbG8SDRgVu2Z/6VcTevF8=;
-	b=C6vEFBneVkt6LvHvImevHN67uuqx/B9XOWpiLlv7/VhOLdI/zkwBI2DxCgAVEfBqA6
-	o5h6lklIiPF1xaHbQLCEwfg//dELJonkJU1HaxyF5/HGjnVdb1UYzwvKHN+fPbqms8Mo
-	p+7YTvlJ7M2SNkq/EY1GDKd2h3KT2+PKTPkN+sDFVOvUOewh2fWzzPU4kl/UZyqfIdA1
-	KLxLpouX3p/gjvBtmMUAUqTAMwIoB3fFGsopDQbnG0NyM9DULiMNJSWPIV79ohYVYzHg
-	N+HRrNd611ZMwqgVkvAK8U1YBVZ3uJvhBmpj38wkeFsmSD8KxRgl/yL7Eoi0YkVXuSW0
-	WnkA==
+	bh=axl5s9h/WEQP8x+cIY1OeB0kxjwY2joxYdtuc9mDjMg=;
+	b=sLakHE3MGrGqgqZzT2yqWxScsX3p6XNgbx9lQZfrf1NwvY3iLcV1fa9g1InqZs1wmT
+	u/jVvNATy4z2NPgx7VhQBwfwnGAhY7PyKqCDA+mrXmgMONOKy7V32m8YtGxWj/3QKyqF
+	vjsqcEo2+/tmB5vT4Id7957M8bLDybRAvCPb8eR6l7Qvhz64GDrNtNAHW6MllcfszsyD
+	nVkc7Egv6btVBzEE4EkAvD3f/rDiVg62Lki91hw/UXrKPwNbivpf11V2URhcd8flKwwC
+	uQBFOOBbE6dMX/p/qBuBr1FtK3pOKU5XukcQACAnCLge6kiJB1ASowHjFd+6fssDvxd8
+	19Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=AAQD+qcLjKcVjBLxZQP9efNbG8SDRgVu2Z/6VcTevF8=;
-	b=RO6T8GauRAEyHicOW7N7DHQqPvjCG/jR4tj/Ok4ExuvLnLnr//4d4GD9dtF1sAxCK/
-	cuIeRZG+55vyeU3clI1EO8gIC+4V4vISJlpSVzdbvrhuA8djI85lmGUrkHIj/kmrT2rN
-	zd1hxkLhRqGWpdD4sin/RBZzuEeeoTTnMwt+A6N6RuiEdP4l5i3cdJaDWo34hqr6DIWG
-	kJGXlRGWMw7eAq6sCg2ZLA7mjp8TXiw8hVcrj/xLZ4vKVmPWfKezCPn7En8O8P+DiwK7
-	O/8IO3YwEcnn96MRGnf3iLlA9ZpTiIK+Le1TnEXomX0+QpN6bdujDWC/wSo6es0h/vQ+
-	DK4Q==
-X-Gm-Message-State: APjAAAXTZZNViqHlJfcCzyeQuuP9B4PFn0Fgp3SehY4+iQc+iB0mPuLS
-	+Z8ArOcfTpsyGFiO0gTfJaPO8ELK
-X-Google-Smtp-Source: APXvYqwQcKfV02lQqbpP2oxFRJ7CMuIns5jmrDmOz0lJo7z7DUHpDvPsNSO9OUGWTTkPvcd8JnHI4Q==
-X-Received: by 2002:a05:600c:204c:: with SMTP id
-	p12mr7678774wmg.61.1575590980532; 
-	Thu, 05 Dec 2019 16:09:40 -0800 (PST)
+	bh=axl5s9h/WEQP8x+cIY1OeB0kxjwY2joxYdtuc9mDjMg=;
+	b=pOACVNkffB7AmcqTpH6PsJQSbzhdnEMF3j6ATxYIlyW7nL82iGZ5WpK754VzRS05QY
+	18NtEB6CCenGZBvV9QvnrsDdwAv8v3pHl5GqDxTWpjKbGcXOPaTFaoMUz8FRj2qAUjsi
+	68nejkogwAdjU/nOz0mOKvGHpSJPVskaHkvBlsLitD+ZS74/yE9FWooOvds0eY2LJ1Cj
+	IUWXvFYsQcd6k1TPP9SJzglGC2idpCLp4vgat3fHmp6X24F6pJz626NK88KTK4g6xKGl
+	v6MJ24VokGIubN7DOt1Tvz3nnGtkJlNEuDboH7/l/mpd80lpbIJQShPXOT3hXxtifxcJ
+	4byg==
+X-Gm-Message-State: APjAAAW4/kltzJFg1R+DhFkqWmOb2TJRk4RHZHxI949azCGVTiOYKMV5
+	5SPDi+PgP6guCkroRkVe6HDXGEBs
+X-Google-Smtp-Source: APXvYqw2tda2X1YryPPU7J3VPHnALwlsqEuYXhDht7kCP+FOk8Bj9yedrJwpzPmdAJkMEADFV14IDA==
+X-Received: by 2002:a05:6000:12:: with SMTP id
+	h18mr11962062wrx.87.1575590981543; 
+	Thu, 05 Dec 2019 16:09:41 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0A9017AA4DD0060EAA1509.dip0.t-ipconnect.de.
 	[2003:f0:7f0a:9017:aa4d:d006:eaa:1509])
 	by smtp.gmail.com with ESMTPSA id
-	b10sm14252762wrt.90.2019.12.05.16.09.39
+	b10sm14252762wrt.90.2019.12.05.16.09.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 05 Dec 2019 16:09:39 -0800 (PST)
+	Thu, 05 Dec 2019 16:09:40 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Dec 2019 01:09:07 +0100
-Message-Id: <20191206000912.19841-17-schnitzeltony@gmail.com>
+Date: Fri,  6 Dec 2019 01:09:08 +0100
+Message-Id: <20191206000912.19841-18-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191206000912.19841-1-schnitzeltony@gmail.com>
 References: <20191206000912.19841-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 16/21] gnome-session: inital add 3.34.1
+Subject: [PATCH 17/21] gnome-backgrounds: initial add 3.34.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,61 +63,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Dec 2019 00:09:40 -0000
+X-List-Received-Date: Fri, 06 Dec 2019 00:09:41 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gnome-session/gnome-session_3.34.1.bb     | 39 +++++++++++++++++++
- 1 file changed, 39 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome-session/gnome-session_3.34.1.bb
+ .../gnome-backgrounds_3.34.0.bb                 | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_3.34.0.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-session/gnome-session_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-session/gnome-session_3.34.1.bb
+diff --git a/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_3.34.0.bb b/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_3.34.0.bb
 new file mode 100644
-index 000000000..dba03b928
+index 000000000..2350a7df3
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-session/gnome-session_3.34.1.bb
-@@ -0,0 +1,39 @@
-+SUMMARY = "GNOME session"
++++ b/meta-gnome/recipes-gnome/gnome-backgrounds/gnome-backgrounds_3.34.0.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "GNOME wallpapers"
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
 +
-+DEPENDS = " \
-+    glib-2.0-native \
-+    libxslt-native \
-+    xmlto-native \
-+    xtrans \
-+    libice \
-+    libsm \
-+    virtual/libx11 \
-+    gtk+3 \
-+    gnome-desktop3 \
-+    gsettings-desktop-schemas \
-+    json-glib \
-+"
++SECTION = "x11/gnome"
 +
 +GNOMEBASEBUILDCLASS = "meson"
 +
-+inherit gnomebase gettext gsettings upstream-version-is-even features_check
++inherit gnomebase allarch gettext upstream-version-is-even allarch
 +
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+SRC_URI[archive.md5sum] = "1a9c10d5468b3ba8abee94653692fe0d"
-+SRC_URI[archive.sha256sum] = "d7801fe2d5a751b19cb58081771316a76aabd5c550cd58d4e4c6a5a4ed356660"
-+
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', 'consolekit',d)}"
-+
-+PACKAGECONFIG[consolekit] = "-Dconsolekit=true, -Dconsolekit=false, consolekit"
-+PACKAGECONFIG[systemd] = "-Dsystemd=true -Dsystemd_journal=true, -Dsystemd=false -Dsystemd_journal=false, systemd"
++SRC_URI[archive.md5sum] = "f350804df16cdc9ef5306087157cf31b"
++SRC_URI[archive.sha256sum] = "c2b7fb6db98c05e205053daaa7f58c7f06ff91b45c4006052af17c578ae7b47f"
 +
 +FILES_${PN} += " \
-+    ${datadir}/xsessions \
-+    ${datadir}/wayland-sessions \
-+    ${systemd_user_unitdir} \
++    ${datadir}/backgrounds \
++    ${datadir}/gnome-background-properties \
 +"
-+
-+RDEPENDS_${PN} += "gnome-shell gnome-settings-daemon gsettings-desktop-schemas"
 -- 
 2.21.0
 
