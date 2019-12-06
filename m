@@ -1,38 +1,24 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 3AB457F97A
+Return-Path: <Trevor.Gamblin@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DA0227F979
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Dec 2019 16:14:30 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47TyMn4b8Xz3L;
-	Fri,  6 Dec 2019 17:14:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1575648870;
-	bh=iK7QFb+ixu8uHOZf7616F/6yqKH0IRgnv/J+UF+dtoI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=pYs/c4ZYy/p+yNY52mW9HSxfT7Zo7e7LRvw1/0Y1AOHejVM/1F6PRr0Rj2IaoNUm3
-	keZHEJ7zOrWavaX9qeXXmVQjLrTemStUA4eTd1NKBtUQ34hPH7052o/6zw0XE+Y5hu
-	k8v2CEx/s8f2L8EcRYfoqbAaK8RlGUzTNPf/kvtP/yBA6S1vx630nCr1ie8Pj9qHdt
-	bgQYIH9CHGW1imaNB8jFMilXyxhxBmz7+Lk4fwUVoXF9OJvelhREjdZ8Is8H4bSJPJ
-	eOScn1JWerQMI1COSe7AN+5u3FCuOOUX3kz7f7KSDL+t3FoMPSTvCfppY1d9AAgLzi
-	r5SntC11iShjvoA5J2VkILqpUf1QaF1QZ6g6CgWYJDsE+UFfCuDKZsHHLUrJajkAbU
-	tVtVOwU++gghSFXgsvcZJXFTOmJYL699HwJWq0uxa4V6yO/OuarnaDxC/hyQvClvbb
-	CKGZjdO70q/HAo5QIHbn170FznmcpSOQz7vXttLzQpbtVWoT2bhq3AsZvLJPkefH1M
-	gCDt5Z083X73bdRXsvym1e1uTwj1/dap/grkJZnJmZBnolE+4ySobAKrIRcMnejPtj
-	SkmQUugU6WdHH5/3MK6cuDtt0u6Dcmm/c2ZhrZTn+DJCNlZApTQqFocRkvf2RhcPNl
-	fGRC9DC41dZ7k/96g2YoVX0w=
-Date: Fri, 6 Dec 2019 18:14:27 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20191206161427.GA7565@localhost>
-References: <20191206000912.19841-1-schnitzeltony@gmail.com>
-	<20191206000912.19841-11-schnitzeltony@gmail.com>
-	<CAMKF1soqrjdjLMipGuumZAAouowsrK4RvNn+65Pv69yvYsmMUQ@mail.gmail.com>
+	Fri,  6 Dec 2019 18:08:10 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xB6I8BjI023931
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 6 Dec 2019 10:08:11 -0800 (PST)
+Received: from yow-tgamblin-fedora1.wrs.com (128.224.56.206) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.468.0; Fri, 6 Dec 2019 10:08:11 -0800
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 6 Dec 2019 13:08:10 -0500
+Message-ID: <20191206180810.2423062-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1soqrjdjLMipGuumZAAouowsrK4RvNn+65Pv69yvYsmMUQ@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 10/21] rest: initial add 0.8.1
+Subject: [meta-python][PATCH] python-twisted: add python3-pyserial to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,15 +31,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Dec 2019 16:14:30 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Fri, 06 Dec 2019 18:08:11 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Fri, Dec 06, 2019 at 07:17:02AM -0800, Khem Raj wrote:
-> http://errors.yoctoproject.org/Errors/Details/290481/
+twisted's internet submodule has serial port functionality that relies
+on python3-pyserial to be available, but this isn't in twisted's RDEPENDS
+list, so imports of the serial port functionality will fail:
 
-So either at/after upstream commit 8f904a8e or configure --without-gnome.
+|root@qemux86-64:~# python3
+|Python 3.7.5 (default, Dec  5 2019, 23:01:22)
+|[GCC 9.2.0] on linux
+|Type "help", "copyright", "credits" or "license" for more information.
+|>>> import twisted.internet.serialport
+|Traceback (most recent call last):
+|  File "<stdin>", line 1, in <module>
+|  File "/usr/lib/python3.7/site-packages/twisted/internet/serialport.py", line 21, in <module>
+|    import serial
+|ModuleNotFoundError: No module named 'serial'
+|>>>
 
-cu
-Adrian
+Since the internet submodule is part of the twisted-core split, add
+python3-pyserial to RDEPENDS for that part of the recipe.
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ meta-python/recipes-devtools/python/python-twisted.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
+index 34f8846b0..67c90e32a 100644
+--- a/meta-python/recipes-devtools/python/python-twisted.inc
++++ b/meta-python/recipes-devtools/python/python-twisted.inc
+@@ -56,7 +56,7 @@ RDEPENDS_${PN} = "\
+     ${PN}-zsh \
+ "
+ 
+-RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink ${PYTHON_PN}-automat"
++RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink ${PYTHON_PN}-automat ${PYTHON_PN}-pyserial"
+ RDEPENDS_${PN}-test = "${PN}"
+ RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
+ RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
+-- 
+2.23.0
+
 
