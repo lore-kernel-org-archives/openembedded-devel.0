@@ -1,46 +1,38 @@
-Return-Path: <jdmason@kudzu.us>
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
-	[209.85.221.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 04C7C7FA47
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 3AB457F97A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Dec 2019 16:10:21 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id t2so8400725wrr.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Dec 2019 08:10:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=MFB0taAlSkRDCeSxOAK7yjV1QxH96CVr2KWPeXEWOkc=;
-	b=H77XQkwzisOBbwyM3zRfmZjjByR8AHvyBVlLg2EQTOVcVYB7xwX4PKFzrAVNQFe7hD
-	fTqOfVGcIVSx0JWNYhgKiKj8o+Kzy+lDkAgIJxky2/OAPVTJVDtLs3mcXIgyNu3OXizk
-	zeuQUA4cbBAFTPdNK7rVSVb4N3HvLwKQxpFCCgTE2M6Wqai7eJYbvm+9soU4AqwzRimT
-	xYjLfYS0nIWMMKXIZZ1F+d5fCaAJZWDkMbdZnJOm2qMesOW2Op3HSVb4K7A8fa1NvXb9
-	RztqneWWl/SsV9G3bcmJF34HYlFdRVii3nGQT7rQcBanWtlsRvvD3ZMzDC3nSGRsyzSc
-	IRDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=MFB0taAlSkRDCeSxOAK7yjV1QxH96CVr2KWPeXEWOkc=;
-	b=mgA2ne6DubRVyI0/B+zqFVGs/T7ZRBAfPJsEEl5ea/mckP2tH53ZjNYxHOJ19w8ghl
-	bgORH3hgQ5zr0kQ0IEEVjcvwUZkE7Qlx5SYAt9/nqUdSlQ5M4v+lPEd9lgn43RNnDMQF
-	xfTmlkBEcDPsFiIWU9wTI1B0Er8+uRDL+VWrZQNGNBmbz+UQwO3uPlrTxk1jv4Mv+/ka
-	l7jvZgw/2DM7B0LMXGci0xi4HjNs87IA+AAzvD3fOxREJrSzxJChhqyvWfa9GWUt8o3H
-	cXbz8MUCP3GvJdJdiTdzYfEvumvhbGWxxiqVT6LhvL5Hz8adFetkMBJJcWDUReZlKnxO
-	QO5Q==
-X-Gm-Message-State: APjAAAVVvOGuqYA4whq7yf0ECk7DwBWLeFPgKlBDFRLDxvk/Sx3CW1LZ
-	0KKa9QowY3dgoRbNfiFLaXD3s72DdHUPup6xei3krsxVlpI=
-X-Google-Smtp-Source: APXvYqyKTrY7FL4SpCxSo93oXHcO06KJZ3QB1FlNZ28SiZu7Jxbiy2ldACl7K32vSi7e7K2Cp1ck2lyD0KtJ5gPoHgc=
-X-Received: by 2002:a5d:68cf:: with SMTP id p15mr16664925wrw.31.1575648621395; 
-	Fri, 06 Dec 2019 08:10:21 -0800 (PST)
+	Fri,  6 Dec 2019 16:14:30 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47TyMn4b8Xz3L;
+	Fri,  6 Dec 2019 17:14:29 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1575648870;
+	bh=iK7QFb+ixu8uHOZf7616F/6yqKH0IRgnv/J+UF+dtoI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=pYs/c4ZYy/p+yNY52mW9HSxfT7Zo7e7LRvw1/0Y1AOHejVM/1F6PRr0Rj2IaoNUm3
+	keZHEJ7zOrWavaX9qeXXmVQjLrTemStUA4eTd1NKBtUQ34hPH7052o/6zw0XE+Y5hu
+	k8v2CEx/s8f2L8EcRYfoqbAaK8RlGUzTNPf/kvtP/yBA6S1vx630nCr1ie8Pj9qHdt
+	bgQYIH9CHGW1imaNB8jFMilXyxhxBmz7+Lk4fwUVoXF9OJvelhREjdZ8Is8H4bSJPJ
+	eOScn1JWerQMI1COSe7AN+5u3FCuOOUX3kz7f7KSDL+t3FoMPSTvCfppY1d9AAgLzi
+	r5SntC11iShjvoA5J2VkILqpUf1QaF1QZ6g6CgWYJDsE+UFfCuDKZsHHLUrJajkAbU
+	tVtVOwU++gghSFXgsvcZJXFTOmJYL699HwJWq0uxa4V6yO/OuarnaDxC/hyQvClvbb
+	CKGZjdO70q/HAo5QIHbn170FznmcpSOQz7vXttLzQpbtVWoT2bhq3AsZvLJPkefH1M
+	gCDt5Z083X73bdRXsvym1e1uTwj1/dap/grkJZnJmZBnolE+4ySobAKrIRcMnejPtj
+	SkmQUugU6WdHH5/3MK6cuDtt0u6Dcmm/c2ZhrZTn+DJCNlZApTQqFocRkvf2RhcPNl
+	fGRC9DC41dZ7k/96g2YoVX0w=
+Date: Fri, 6 Dec 2019 18:14:27 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20191206161427.GA7565@localhost>
+References: <20191206000912.19841-1-schnitzeltony@gmail.com>
+	<20191206000912.19841-11-schnitzeltony@gmail.com>
+	<CAMKF1soqrjdjLMipGuumZAAouowsrK4RvNn+65Pv69yvYsmMUQ@mail.gmail.com>
 MIME-Version: 1.0
-From: Jon Mason <jdmason@kudzu.us>
-Date: Fri, 6 Dec 2019 11:10:10 -0500
-Message-ID: <CAPoiz9ysfd7NogxVWL1ZYHGESDdpcHkCp5koMKOUfzK=rSOR=Q@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	Yocto discussion list <yocto@yoctoproject.org>
-Subject: OpenEmbedded Workshop at FOSDEM20 tickets
+In-Reply-To: <CAMKF1soqrjdjLMipGuumZAAouowsrK4RvNn+65Pv69yvYsmMUQ@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 10/21] rest: initial add 0.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,29 +45,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Dec 2019 16:10:21 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 06 Dec 2019 16:14:30 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-We are happy to inform everyone that tickets to the inaugural
-OpenEmbedded Workshop are now on sale.  Early bird tickets are
-available for 1/3rd off regular price.  Also, we are offering a
-"Supporter Ticket".  This is for those who are able to contribute more
-to help support OpenEmbedded, and/or would like to see more events
-similar to this in the future.
-Both of these can be purchased at
-https://pretix.eu/OpenEmbedded/oe-workshop-2020/
+On Fri, Dec 06, 2019 at 07:17:02AM -0800, Khem Raj wrote:
+> http://errors.yoctoproject.org/Errors/Details/290481/
 
-Get your tickets now, as we expect these to sellout quickly.  Also,
-early bird pricing ends on December 31st.
+So either at/after upstream commit 8f904a8e or configure --without-gnome.
 
-Finally, there are still a few slots open for Speakers.  If you have a
-talk you would like to give, go to
-https://pretalx.com/oe-workshop-2020/cfp
-CFP deadline is December 15th.
-
-More information on the OpenEmbedded Workshop can be found at
-https://pretalx.com/oe-workshop-2020/
-
-Thank you,
-The OpenEmbedded Board
+cu
+Adrian
 
