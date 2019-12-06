@@ -1,48 +1,58 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f175.google.com (mail-qk1-f175.google.com
-	[209.85.222.175])
-	by mail.openembedded.org (Postfix) with ESMTP id E31A27FA13
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 90E9F7F849
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Dec 2019 03:10:55 +0000 (UTC)
-Received: by mail-qk1-f175.google.com with SMTP id m188so5330918qkc.4
+	Fri,  6 Dec 2019 05:25:35 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id i11so6055050iol.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Dec 2019 19:10:57 -0800 (PST)
+	Thu, 05 Dec 2019 21:25:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=dMO7nk8ku4ZmtRzl5YVHjke1wOOqAvQamjyTTx/JnvY=;
-	b=ZvYFk0aJbQkgdqBkEWuulhoPewELECLcqDv91aayN+DIQFOPoXjYzt2T/xxMCNOjMd
-	Ghw2vGeiv/FHxsCByw/b54WhM+5NXGZHdAZo6j2VfON0fu4i2K5hsvIXSs3FWVCtfggC
-	GDraMx+OSWwIphjaE8tLwBx2YMJb6Haq5YPYQqHP3YBCnvVD09BQ7J8lJ0ujZXZldesl
-	Bv9CgcG+WoR+mItilP5PUnDP93/pPLip7kCMlQIPogf9coNoFQ4Mu35oJhXB8M3D1IPF
-	X07qNrLlvxnFHyXC0cGNSnePKALrBwBRZ7zqrMkSON7nIG6y3TE9TOibXeoJJq86mdF8
-	vOKA==
+	h=subject:to:references:from:organization:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=69VWZcJN14/hG+Glj8WM/vHP9Mq49RjZ3I8xU4OEq+g=;
+	b=RuQbHHuPqxCQhyh4ZBAmWz+vuBLWLt6Hy46MsfL2gu2PgNi1PgeRXkWKGBkNsQIOUT
+	vTx7bsaiUO4IWc/NMvs/mXpwDvJkU62ThqjUJTpotHBzVVMTA8Ig/1Qy+jELL2rKU5J1
+	BS5kyMB0UR0HZwkghUxvgtezxdGu5Fc29J6/rYifYqhF5JEl866nb7L8wBsaF2FlzD8S
+	bJ2IDdSadLf/eeVDlFv4xDW/h5bGjZkklLogLR4OwkfMcZe1Zjh1GHok9tuHuKlWx7CY
+	HXmUPsMuY7PKV+4y7PnKBhKgCEjqoDwKt+R8C1kEMFEWIU606WudKTgMjEYqGxyueOdi
+	ybEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=dMO7nk8ku4ZmtRzl5YVHjke1wOOqAvQamjyTTx/JnvY=;
-	b=JrAcnLdTj7+41bfzFJPL86yBcQ2vM4Way/Ub4cDrHM89E/+l462wCojrOl19USC8Qz
-	MlurBDOqecYlINXR72l6YTsO2sqQrtz5zL4jT4GfZokHKvyt4ENNmJC3L438WpBltuiE
-	Z0v2mwlSXsO/u5o3ryBOaLcPf2ctyAC2HjEgqXRTFRWmSsERgR8ET7mTxWKr/U6xE16a
-	s3/8HIWvAvq97lFUEEeeuvAMP++7rJuCQdj1tao2vQLf3KPCcbZvbLMd5eA32VHDPk3S
-	0CzPImp0W+O6aB/U/YMztopvhXWRDeR4wIIe9FScteWFN8d+cHh2oUGWXk0BneQ1t542
-	PVxQ==
-X-Gm-Message-State: APjAAAVcNJayV21CbFoM0mqPMRK2s01QTXvlq22yJD2AVTMHyeIwzYzz
-	9fbykO5AJFa2vuQNZzOISn/iib+pc08ZS7efizQ=
-X-Google-Smtp-Source: APXvYqzn5AgHBHvJLT8K0GEdN3HJYy0nFIrWi9LNT06PcX6cW2iziejKPLFf5Eun4VGDSwlKIg8ECc5AZ1EK2E9zX/o=
-X-Received: by 2002:a37:4cd3:: with SMTP id
-	z202mr12075286qka.212.1575601856192; 
-	Thu, 05 Dec 2019 19:10:56 -0800 (PST)
-MIME-Version: 1.0
+	h=x-gm-message-state:subject:to:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=69VWZcJN14/hG+Glj8WM/vHP9Mq49RjZ3I8xU4OEq+g=;
+	b=kzTz/bVJX6zUimmib8QL3g0WB44fnI7+EWg8zR5Dt7WU9/2Q0q/QK2JNvTwLtEFBWf
+	QnZtlVzka/zwosxNm4luRyyPtRrRxX0EqdoAqiO2ZnooxprPqboipSmmQF7FPTkryiJD
+	fA1OxmNMsVqCTQ9hhG6/7R3g99qcU1cMyN9FtfON5KnxpVwiYNr3/Q3kPkdSFPEVfeyV
+	gYYmf4afOk1DbWwrORRL9+sKV59puRS50Pv1Xp58z7yK3ewfhM+OQR81CH25vGXxo4DJ
+	1EsmM6RxPFsUx7K6z6WlAeICjp8MZsZuD/1HqShSGDx72KRy4oIKkKe7R+EnA+kXnkjD
+	75hQ==
+X-Gm-Message-State: APjAAAWpzYBJIGZNnTVXH3OnJp8yG7Nz/NyV6DKkOz+yIN1I6shH2WXO
+	4Y1ahc5b4itI3Kg2eK5HrCqVrwJAlL4=
+X-Google-Smtp-Source: APXvYqzHJYFUvKh/ySjW9cw+cUsYly98si2zk+ZV3ip6pzex9VfY4Fd/IB31+w6ABzzcUkL5Vjofdw==
+X-Received: by 2002:a5d:89d8:: with SMTP id a24mr9495341iot.70.1575609935592; 
+	Thu, 05 Dec 2019 21:25:35 -0800 (PST)
+Received: from ?IPv6:2601:646:8500:1c20:f522:3e2a:85ae:c5d2?
+	([2601:646:8500:1c20:f522:3e2a:85ae:c5d2])
+	by smtp.gmail.com with ESMTPSA id
+	o11sm2887809ioo.55.2019.12.05.21.25.34
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Thu, 05 Dec 2019 21:25:34 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org
 References: <20191206000912.19841-1-schnitzeltony@gmail.com>
-In-Reply-To: <20191206000912.19841-1-schnitzeltony@gmail.com>
+	<20191206000912.19841-13-schnitzeltony@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 5 Dec 2019 19:10:45 -0800
-Message-ID: <CAMKF1sp1MgymCXa_3UXydMTL6Novf0PjnLYVn3+TyaAMe+=woQ@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 00/21] Gnome cleanups & desktop patches
+Organization: HIMVIS LLC
+Message-ID: <67cde0e0-152a-ec39-66a6-0940fcfad0e2@gmail.com>
+Date: Thu, 5 Dec 2019 21:25:33 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+	Gecko/20100101 Thunderbird/68.3.0
+MIME-Version: 1.0
+In-Reply-To: <20191206000912.19841-13-schnitzeltony@gmail.com>
+Subject: Re: [PATCH 12/21] gvfs: upgrade 1.41.2 -> 1.42.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,158 +65,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Dec 2019 03:10:56 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 06 Dec 2019 05:25:35 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Thu, Dec 5, 2019 at 4:09 PM Andreas M=C3=BCller <schnitzeltony@gmail.com=
->
-wrote:
+On 12/5/19 4:09 PM, Andreas Müller wrote:
+> * 1.42.1 is latest stable release (and I don't understand how 1.41.2 got through upstream-version-is-even)
+> * @world builders: x11 in DISTRO_FEATURES is requred with gsettings-desktop-schemas added to DEPENDS
+> * gconf support was removed ages ago
+> 
 
-> Once passed Khem's autobuilder there are the following desktop session
-> available (yes tested - they work for me)
->
-> * gnome-x11
-> * gnome-wayland
-> * gnome-classic (gnome2 experience: gnome-shell based)
-> * gnome-flashback (gnome2 experience: gnome-flashback/metacity based / no
->   graphics acceleration required)
->
+https://github.com/openembedded/meta-openembedded/commit/9f607e4ba6ea6c6ffb977b1f9a8bb117396aa9ec
 
-This is really good and fantastic job Andreas I have staged them in my
-yoe/mut branch will let you know how it all goes
+and I checked jenkins logs during that time, it does not appear in there 
+as well, so I cant remember more, but its an oversight. This also means
+that when this commit is in master it should go into zeus too.
 
+> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+> ---
+>   .../gvfs/{gvfs_1.41.2.bb => gvfs_1.42.1.bb}           | 11 ++++++-----
+>   1 file changed, 6 insertions(+), 5 deletions(-)
+>   rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.41.2.bb => gvfs_1.42.1.bb} (87%)
+> 
+> diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.41.2.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.42.1.bb
+> similarity index 87%
+> rename from meta-gnome/recipes-gnome/gvfs/gvfs_1.41.2.bb
+> rename to meta-gnome/recipes-gnome/gvfs/gvfs_1.42.1.bb
+> index 27e3f92cc..6888eff8c 100644
+> --- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.41.2.bb
+> +++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.42.1.bb
+> @@ -3,15 +3,16 @@ LICENSE = "LGPLv2"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
+>   
+>   GNOMEBASEBUILDCLASS = "meson"
+> -inherit gnomebase bash-completion gettext upstream-version-is-even
+> +inherit gnomebase gsettings bash-completion gettext upstream-version-is-even features_check
+>   
+> -DEPENDS += "libsecret glib-2.0 glib-2.0-native gconf libgudev shadow-native"
+> +DEPENDS += "libsecret glib-2.0 glib-2.0-native libgudev shadow-native gsettings-desktop-schemas"
+>   
+>   SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+> +SRC_URI[archive.md5sum] = "93592535508322548d44fa036b635a0a"
+> +SRC_URI[archive.sha256sum] = "9d06071b4a1d83671f76d0e3c32b66631671669d330fe21702f60a8611c37730"
+>   
+> -SRC_URI[archive.md5sum] = "9a9a97a63bb9e87258d48086a6bdacaa"
+> -SRC_URI[archive.sha256sum] = "f311b7c5f855ebe259960c00c7d03c812e040928ecb0ec093b50a4f16b3bcf26"
+> -
+> +# depends on gsettings-desktop-schemas->gcr->gtk+3-> x11
+> +REQUIRED_DISTRO_FEATURES = "x11"
+>   
+>   EXTRA_OEMESON = " \
+>       -Dbluray=false \
+> 
 
-
-> currently there the following known issues:
->
-> * GDM does not display background image - have no idea if this is a bug
-> * Acivities does not display application icons for png
->
-> Ahh and all this was tested with gdm and alternate / non gnome
-> display-manager
-> sddm because gdm does not match my needs as desktop environment collector=
-.
->
-> Andreas M=C3=BCller (21):
->   pinpoint: remove dead project
->   gnome-keyring: upgrade 3.28.2 -> 3.34.0
->   libgsf: upgrade 1.14.45 -> 1.14.46
->   libgnome-keyring: remove
->   gjs: initial add 1.58.1
->   gdm: re-add 3.34.1
->   gnome-shell: initial add 3.34.1
->   gnome-shell-extensions: initial add 3.34.1
->   accountsservice: initial add 0.6.55
->   rest: initial add 0.8.1
->   gnome-online-accounts: initial add 3.34.1
->   gvfs: upgrade 1.41.2 -> 1.42.1
->   grilo: initial add 0.3.10
->   gsound: initial add 1.0.2
->   gnome-control-center: re-add 3.34.1
->   gnome-session: inital add 3.34.1
->   gnome-backgrounds: initial add 3.34.0
->   metacity: upgrade 3.32.0 -> 3.34.1
->   gnome-panel: (re)add 3.34.1
->   gnome-flashback: initial add 3.34.1
->   Add: packagegroup-gnome-apps / packagegroup-gnome-desktop
->
->  .../recipes-apps/pinpoint/pinpoint_git.bb     | 24 -------
->  .../0001-Ensure-pam-file-installation.patch   | 48 ++++++++++++++
->  meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb    | 56 ++++++++++++++++
->  .../gjs/gjs/0001-Disable-tests-on-host.patch  | 33 ++++++++++
->  meta-gnome/recipes-gnome/gjs/gjs_1.58.1.bb    | 37 +++++++++++
->  .../gnome-backgrounds_3.34.0.bb               | 17 +++++
->  ...001-Add-meson-option-to-pass-sysroot.patch | 45 +++++++++++++
->  .../gnome-control-center_3.34.1.bb            | 55 ++++++++++++++++
->  .../gnome-flashback/gnome-flashback_3.34.1.bb | 34 ++++++++++
->  ...-agent-and-ssh-add-by-configure-opti.patch | 42 ++++++++++++
->  .../gnome-keyring/gnome-keyring_3.28.2.bb     | 44 -------------
->  .../gnome-keyring/gnome-keyring_3.34.0.bb     | 51 +++++++++++++++
->  .../gnome-keyring/libgnome-keyring_3.12.0.bb  | 29 ---------
->  .../gnome-online-accounts_3.34.1.bb           | 32 ++++++++++
->  ...nd-ZONEINFO-it-tries-to-run-compiled.patch | 37 +++++++++++
->  .../gnome-panel/gnome-panel_3.34.1.bb         | 28 ++++++++
->  .../gnome-session/gnome-session_3.34.1.bb     | 39 +++++++++++
->  .../gnome-shell-extensions_3.34.1.bb          | 27 ++++++++
->  .../gnome-shell/gnome-shell_3.34.1.bb         | 64 +++++++++++++++++++
->  .../recipes-gnome/grilo/grilo_0.3.10.bb       | 29 +++++++++
->  .../recipes-gnome/gsound/gsound_1.0.2.bb      | 13 ++++
->  .../gvfs/{gvfs_1.41.2.bb =3D> gvfs_1.42.1.bb}   | 11 ++--
->  ...p-a-copy-paste-of-introspection.m4-m.patch |  0
->  .../{libgsf_1.14.45.bb =3D> libgsf_1.14.46.bb}  | 12 ++--
->  .../recipes-gnome/metacity/metacity_3.32.0.bb | 41 ------------
->  .../recipes-gnome/metacity/metacity_3.34.1.bb | 38 +++++++++++
->  meta-gnome/recipes-gnome/rest/rest_0.8.1.bb   | 28 ++++++++
->  .../accountsservice/accountsservice_0.6.55.bb | 29 +++++++++
->  .../packagegroups/packagegroup-gnome-apps.bb  | 20 ++++++
->  .../packagegroup-gnome-desktop.bb             | 26 ++++++++
->  30 files changed, 838 insertions(+), 151 deletions(-)
->  delete mode 100644 meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
->  create mode 100644
-> meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file-installation.patch
->  create mode 100644 meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
->  create mode 100644
-> meta-gnome/recipes-gnome/gjs/gjs/0001-Disable-tests-on-host.patch
->  create mode 100644 meta-gnome/recipes-gnome/gjs/gjs_1.58.1.bb
->  create mode 100644 meta-gnome/recipes-gnome/gnome-backgrounds/
-> gnome-backgrounds_3.34.0.bb
->  create mode 100644
-> meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-A=
-dd-meson-option-to-pass-sysroot.patch
->  create mode 100644 meta-gnome/recipes-gnome/gnome-control-center/
-> gnome-control-center_3.34.1.bb
->  create mode 100644 meta-gnome/recipes-gnome/gnome-flashback/
-> gnome-flashback_3.34.1.bb
->  create mode 100644
-> meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/0001-Set-paths-to-ss=
-h-agent-and-ssh-add-by-configure-opti.patch
->  delete mode 100644 meta-gnome/recipes-gnome/gnome-keyring/
-> gnome-keyring_3.28.2.bb
->  create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/
-> gnome-keyring_3.34.0.bb
->  delete mode 100644 meta-gnome/recipes-gnome/gnome-keyring/
-> libgnome-keyring_3.12.0.bb
->  create mode 100644 meta-gnome/recipes-gnome/gnome-online-accounts/
-> gnome-online-accounts_3.34.1.bb
->  create mode 100644
-> meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001-Do-not-try-to-find-=
-ZONEINFO-it-tries-to-run-compiled.patch
->  create mode 100644 meta-gnome/recipes-gnome/gnome-panel/
-> gnome-panel_3.34.1.bb
->  create mode 100644 meta-gnome/recipes-gnome/gnome-session/
-> gnome-session_3.34.1.bb
->  create mode 100644 meta-gnome/recipes-gnome/gnome-shell/
-> gnome-shell-extensions_3.34.1.bb
->  create mode 100644 meta-gnome/recipes-gnome/gnome-shell/
-> gnome-shell_3.34.1.bb
->  create mode 100644 meta-gnome/recipes-gnome/grilo/grilo_0.3.10.bb
->  create mode 100644 meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
->  rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.41.2.bb =3D> gvfs_1.42.1.bb=
-}
-> (87%)
->  rename meta-gnome/recipes-gnome/libgsf/{files =3D>
-> libgsf}/0001-configure.ac-drop-a-copy-paste-of-introspection.m4-m.patch
-> (100%)
->  rename meta-gnome/recipes-gnome/libgsf/{libgsf_1.14.45.bb =3D>
-> libgsf_1.14.46.bb} (59%)
->  delete mode 100644 meta-gnome/recipes-gnome/metacity/metacity_3.32.0.bb
->  create mode 100644 meta-gnome/recipes-gnome/metacity/metacity_3.34.1.bb
->  create mode 100644 meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
->  create mode 100644 meta-gnome/recipes-support/accountsservice/
-> accountsservice_0.6.55.bb
->  create mode 100644 meta-gnome/recipes-support/packagegroups/
-> packagegroup-gnome-apps.bb
->  create mode 100644 meta-gnome/recipes-support/packagegroups/
-> packagegroup-gnome-desktop.bb
->
-> --
-> 2.21.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
