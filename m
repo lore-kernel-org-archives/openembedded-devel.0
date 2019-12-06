@@ -1,50 +1,49 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
-	[209.85.166.68])
-	by mail.openembedded.org (Postfix) with ESMTP id D77FC7FBEF
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
+	[209.85.166.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A8F777FBFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Dec 2019 09:08:11 +0000 (UTC)
-Received: by mail-io1-f68.google.com with SMTP id x1so6608027iop.7
+	Fri,  6 Dec 2019 09:28:46 +0000 (UTC)
+Received: by mail-il1-f194.google.com with SMTP id u17so5703060ilq.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Dec 2019 01:08:13 -0800 (PST)
+	Fri, 06 Dec 2019 01:28:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=hcp+TPvaEs7lN0mkwmLb1/IFlDDP0+PSzttaqLXUeKQ=;
-	b=FG21auVIua8cdYrWxOnIITPvnmrax2r2pAlv1L3r4SWOp9VrV6HoTE+MF3Zk7xHhRN
-	upckPGNuzp0HpprV1QQ8UU0h/qaOXZtjo71mJLqVa8+rd7vGk8wlDSaPc3JstTYmYFNc
-	NgRy0SR9cYjS8Z1bEhR1OICpj8oovNoYUJSQTC1cV/axPHATUhO3xf70K/js3q/Lrd9u
-	wd9F8imBBPdIKw29qX/Um20Qmvg+eMuvutyWwjhH22XYaqG7ugnGy3DBvP/FIRIVDWAU
-	ELTo/q46v/myxf0G9J61xtKMab6bHZI0xDA369OCgxnub3Chhkr2OpWL3C0VPwAB3kVn
-	AAlg==
+	bh=zp1BNRnGEADOPjknh19jC8akvw07pwNFJYEhGDgURx4=;
+	b=Ch/I2lYIAGOJkj1sNNfcj2+YXAMFUvzEFeaxOEn0+lToAvgDVi5Yhn9tkD7pnnI1E+
+	+00dFRWBSVCZrUHmOsuX+zsLyRjxMTJWWbFuDy0U3E1FJNLA3OlZfJwTrG+mxWn/6ls3
+	sCMFaen1zifWPyTx7ST8tEW7lRShXtpNqXWyfVLtaHwybg5CEe6fwWfkOVpn2ufdmKtn
+	T2IVASAOp+iAO9S4Kvh0UEt3O0gWbHJpW/ufNqZgaHQPlSaF/2U7FA7GIhYw4TCopHYJ
+	HY145Xl6u/s8xTAesw9cltc8rj9vVOWftMWtGFQOvMNI2cMadp7wQtz5+rbOh3exDNn5
+	BmkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=hcp+TPvaEs7lN0mkwmLb1/IFlDDP0+PSzttaqLXUeKQ=;
-	b=RY2KMKtejV/kBTS0McHwJ0GgoPZCpQDKAsaT0qg2jBpoXn+FIyW1EA3cNG57lAT0LW
-	3DC6yXIJnwRZaxNCOoeIlzGJk/y9apmnoZCzVXiIdEC/TEVyjROW1+4YyQVv7556ooz6
-	d40njGXubeRBdFSY2KhZIUPSX/4AfZGJAuQFU3zogOKxL8t9FuY1+m8ct4cY8cnz3e/h
-	hkM3uo41r2AqrBLhzBTXQWiwDqVSEiJ4UxLSSM+cd/yde1+NbMWmA40jVx/UPTSdg+WP
-	E+R18xslBQfurTshsLLLXZiH7nXJ1UzwZzzcNI7TePoQvjHlSh+W61YqpklHyYWKZP6J
-	iwuA==
-X-Gm-Message-State: APjAAAVLgC39fam8kK5lEDmY7+P/4473ew/1RLXRpdevqhpBD/j5S/rA
-	+SnDC4xy2uIbrcsXZPv4nRCGYzr4ogy+L0ZxrKQ=
-X-Google-Smtp-Source: APXvYqxDVAsMBteF1wOHcoV0ZiFi8Fxa8G0mlCVKQPTGWK9+cr/SdRYlPWZ93rwT1QHwUN/TQj79ZDHn3aSd9YGvt58=
-X-Received: by 2002:a6b:f60e:: with SMTP id n14mr9262800ioh.147.1575623292888; 
-	Fri, 06 Dec 2019 01:08:12 -0800 (PST)
+	bh=zp1BNRnGEADOPjknh19jC8akvw07pwNFJYEhGDgURx4=;
+	b=H1d/Tk5ZXCYvugGzI1XN6xuMAT/Ev6+h5Lf+wGHxRZd8B2q3sr2FOE9RP/EVxsofGf
+	Lx80P4pr+Bm9VeffQfqad2xoyLy+86TXSOQxJZ4nkEkuGzAxIojqfS880Exa23P/i72B
+	EhC8amoX9jvOmsY6zpjLqiaxn5ygp5cih5HiffYV+gboSPuS6CctcemI2Knlq40zCEM2
+	DqgcCasPjG5/MSjKSIHdnaL20G1GJHC23/OVwZdpQYRpEJNUo6HSc5y2nggd4/6fhgvS
+	UMcFCTwa0uOfkdH1gr0j49MUaePCP4mg71fMGV2q/+sqhdK1TggXUgK83HsnfbKieVCC
+	3zyw==
+X-Gm-Message-State: APjAAAVzl/lNxwjIAS7LYvbCwWXv78OKvUnnu7A3y4f1HQ9Lp9Fa5Ft1
+	xKZ1aLro6Y9GniTW/zXWYVHPsBACneq4ieou0bQ=
+X-Google-Smtp-Source: APXvYqyG1TsLbo5cko9iiJQSjCiivCp5R4K1JBtrSq/wZWy96WnbMe86Qmf8hmRqOFYHpzzqF5J2MCoWZTftmRG+eXA=
+X-Received: by 2002:a92:405a:: with SMTP id n87mr13417951ila.299.1575624527560;
+	Fri, 06 Dec 2019 01:28:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20191206000912.19841-1-schnitzeltony@gmail.com>
-	<CAMKF1sp1MgymCXa_3UXydMTL6Novf0PjnLYVn3+TyaAMe+=woQ@mail.gmail.com>
-	<CAMKF1sqrhYHQAeFPmbh=smyU=uqJxGOhYeCup3Nteyqk6guwXg@mail.gmail.com>
-	<CALbNGRQAEhJbUdVw3Z69rU7jTLoY-=W9yUdDuxDSRNdRQfNH0Q@mail.gmail.com>
-In-Reply-To: <CALbNGRQAEhJbUdVw3Z69rU7jTLoY-=W9yUdDuxDSRNdRQfNH0Q@mail.gmail.com>
+	<20191206000912.19841-22-schnitzeltony@gmail.com>
+	<CAMKF1sroq9=eexVrX0QHH2-287rXQkg48pAVqCNjiyL5MA3GWw@mail.gmail.com>
+In-Reply-To: <CAMKF1sroq9=eexVrX0QHH2-287rXQkg48pAVqCNjiyL5MA3GWw@mail.gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 6 Dec 2019 10:08:01 +0100
-Message-ID: <CALbNGRTHzHsA-u36MAcBtkhMjdF6TJBv+O7uMg1ASVO8K53gQA@mail.gmail.com>
+Date: Fri, 6 Dec 2019 10:28:36 +0100
+Message-ID: <CALbNGRRy1-DBAGPS1K7UiidugsP7Kwctn8P-NGiosTYMosZ1dw@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/21] Gnome cleanups & desktop patches
+Subject: Re: [PATCH 21/21] Add: packagegroup-gnome-apps / packagegroup-gnome-desktop
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,25 +56,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Dec 2019 09:08:12 -0000
+X-List-Received-Date: Fri, 06 Dec 2019 09:28:46 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 6, 2019 at 10:05 AM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
+On Fri, Dec 6, 2019 at 9:01 AM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> On Fri, Dec 6, 2019 at 8:12 AM Khem Raj <raj.khem@gmail.com> wrote:
+> On Thu, Dec 5, 2019 at 4:12 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om> wrote:
 > >
-> > Seeing below parsing errors
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > ---
+> >  .../packagegroups/packagegroup-gnome-apps.bb  | 20 ++++++++++++++
+> >  .../packagegroup-gnome-desktop.bb             | 26 +++++++++++++++++++
+> >  2 files changed, 46 insertions(+)
+> >  create mode 100644 meta-gnome/recipes-support/packagegroups/packagegro=
+up-gnome-apps.bb
+> >  create mode 100644 meta-gnome/recipes-support/packagegroups/packagegro=
+up-gnome-desktop.bb
 > >
-> > 20:27:29 ERROR: Nothing PROVIDES 'gdm' (but
-> > /mnt/jenkins/workspace/Yocto-world-clang/sources/meta-openembedded/meta=
--gnome/recipes-gnome/gnome-panel/gnome-panel_3.34.1.bb
-> > DEPENDS on or otherwise requires it)
-> OOps - I have written much about gdm but the patch adding it her is
-> missing. Will send soon
-No gdm was part of the series - need to look into x11 (distro)features more
+> > diff --git a/meta-gnome/recipes-support/packagegroups/packagegroup-gnom=
+e-apps.bb b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-app=
+s.bb
+> > new file mode 100644
+> > index 000000000..d7f1df8f2
+> > --- /dev/null
+> > +++ b/meta-gnome/recipes-support/packagegroups/packagegroup-gnome-apps.=
+bb
+> > @@ -0,0 +1,20 @@
+> > +SUMMARY =3D "GNOME applications"
+> > +LICENSE =3D "MIT"
+> > +LIC_FILES_CHKSUM =3D "file://${COMMON_LICENSE_DIR}/MIT;md5=3D0835ade69=
+8e0bcf8506ecda2f7b4f302"
+> > +
+> > +inherit packagegroup features_check
+> > +
+> > +REQUIRED_DISTRO_FEATURES =3D "x11"
+> > +
+> > +RDEPENDS_${PN} =3D " \
+> > +    evolution-data-server \
+> > +    evince \
+> > +    file-roller \
+> > +    gedit \
+> > +    gnome-font-viewer \
+> > +    gnome-system-monitor \
+> > +    gnome-terminal \
+> > +    libwnck3 \
+> > +    nautilus \
+> > +    wv \
+>
+> wv provider recipe is missing,
+Oops - it is in meta-office - will move it here because that's what I
+have tested the series with
 
->
-> Andreas
+Andreas
 
