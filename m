@@ -1,50 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com
-	[209.85.210.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 07D187FA0E
+Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
+	[209.85.216.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 82E227FA0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Dec 2019 23:45:38 +0000 (UTC)
-Received: by mail-pf1-f178.google.com with SMTP id h14so5266657pfe.10
+	Sat,  7 Dec 2019 23:45:39 +0000 (UTC)
+Received: by mail-pj1-f51.google.com with SMTP id g4so4269757pjs.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Dec 2019 15:45:40 -0800 (PST)
+	Sat, 07 Dec 2019 15:45:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=aPj9HZnkoUEp7i/5DX1+B7MSyJhpSlQn/Y6ptIlIAz0=;
-	b=fTgQBGrywcwY4+023ELzYNWuXoPPbGOD4QdcpxCKIK3aYwHVcmcRxcWl4qaCPM13f0
-	uaNCBNqDV5N6Ownl8UXqHRgZHVzc0HOC4xRUQPxqCJYEI8JtO3PiK9LW+KV+qZmwoyKl
-	KBzeEZleKk3MNnKCJ2VjI+N9Yw5ihF/Moj8yyYTUwSAvF92Wki9SmQm2UHXQxd3Ztvad
-	3TR/ff092/AG0PiCCY2TMPtR0hEHxmDXpJxc+z5D1tcbkr7oEitBSf6vwO8tAqx4lH7+
-	wpz/CHKgwprEALPiGAmnDe7eT2BbeZUREhaYavrEjpkKS0vZ+lFBZoD4qKSkytYHkJBa
-	5bTg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=P8eXD4Qb9Wy33lxFZmDkufCqB6Xd9VKtYr2H2TcxYmQ=;
+	b=NU0ryUoOplJrAYIKc53Otdvcb2ZKemxhMUfH9WiTJ4RL5AJMioDA7/ijsDIntVOdGH
+	uoGwIf2eoSincp1evQ4+UFjlym0rY9wOsZFVb2N1ODpUh2PoVfaS9rBD25+AQVh8X11G
+	Ue5H7MqujvMlx5nKD+tr2csZXi1T8JbIaWkDyzpd0YCayFxGmLabWPBS7oteZe/1V3q3
+	XiJQLYMZYdgcplFI4buWbE4WuSaduIL+y+oVqqyhw4DScyfatTozIBNAHbdcpheir0sq
+	bFE+nVpRv4DUY0FxVY/nRtbkn4jHyRb44TWTjJ4GfiSZiT/mRy2ewGQ31QMEj9uo5l+/
+	gcew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=aPj9HZnkoUEp7i/5DX1+B7MSyJhpSlQn/Y6ptIlIAz0=;
-	b=axIM4PZnTHoxBv64Dk9Ggohf1WCAcA3qL86hWgxWKEI6lxNRlg+PToNpSq6fkL2PSR
-	Jj4MI3r8QTDjBEEjk3vwthjQDTpDG5XaYtyP5YdImuNlZTXblmdi5L4Lo9gUvjXAtmad
-	FhtQj+ViNrKVQa2LTpkHvS6E/lXVpGUzaGACABA5te+6BGFRrTgltmq0f8HOTe1I1c6W
-	+Qyj2WbOd+HsDe6YcQjgKSJYAA8ImZa8weYjoOugJjTxU5Yq9YfyOLXCcsVwdSZT6uF1
-	OQlNouBbbBoucrHF4rgbay9Ml4sLv1TbsScTIE3Cc5y1UmNhxnnZ61jF+LYIpcngm4n9
-	/dFg==
-X-Gm-Message-State: APjAAAVYygxn4Ocm2+7bII1pz1Zgow6iPomAL+coeoy9cqPPcf56lHfc
-	+CsFnXWJ5wZ9GkD1yeF1S0FXdFTN6gY=
-X-Google-Smtp-Source: APXvYqyXvH8bJuzXk7Q+fj9qwg18adzziPwggTRPNhQyQlucmSDvoQ7vHQYNSL3Ig9H4zpCQs7lSpA==
-X-Received: by 2002:a65:4345:: with SMTP id k5mr11484094pgq.252.1575762339239; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=P8eXD4Qb9Wy33lxFZmDkufCqB6Xd9VKtYr2H2TcxYmQ=;
+	b=qSvTTf1W5kUlhuMlgLg7JNry0izSpYgQRp8Vw9efgtXQdP1M0J4T/qjIKLPr0dVg/C
+	sENdA2bh2s/Zm8OxpqmIYG/CzF76h8Oiva+79vPYtxKib2Fx6SxE4UbERKOBCpG0RChG
+	UXAyeOg2c9sJwUSg4WBsECmmWqF7YL6E4t7P9qk165EHRRd3vgvhgz7DXH8l7iVb0i1v
+	XKy3OQyTYwTyN4hsTD1lK10thz0wZN6f5PLx41lCGijdjLaD+esDAVecrrO2sa656nVs
+	7PBjIY3Yf+ptUdr0be2xVWlbWQuPF0cKoPiyFPw//XEzaIcn/dLdjmkSX++AADzlmoA6
+	ejaQ==
+X-Gm-Message-State: APjAAAVvUCU7joe50+W90hq5s7N2Xw+P2xe8rVY4J12OT6yJ3Px5Q34g
+	4s/pHIEPz55PI/YYzKj+VLtg5gOZ5dI=
+X-Google-Smtp-Source: APXvYqwR5ytmhsKnVn5uzgbfqFV20X+2c1XTIq9iEJ4+DY8Y5zydQ3ShrBkto+mSFyRU/ZaKbtDHsw==
+X-Received: by 2002:a17:90a:c301:: with SMTP id
+	g1mr22865874pjt.67.1575762339963; 
 	Sat, 07 Dec 2019 15:45:39 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::afb7])
 	by smtp.gmail.com with ESMTPSA id
-	h6sm19601553pgq.61.2019.12.07.15.45.38
+	h6sm19601553pgq.61.2019.12.07.15.45.39
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 07 Dec 2019 15:45:38 -0800 (PST)
+	Sat, 07 Dec 2019 15:45:39 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Dec 2019 15:45:26 -0800
-Message-Id: <20191207234529.1222139-1-raj.khem@gmail.com>
+Date: Sat,  7 Dec 2019 15:45:27 -0800
+Message-Id: <20191207234529.1222139-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.0
+In-Reply-To: <20191207234529.1222139-1-raj.khem@gmail.com>
+References: <20191207234529.1222139-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/4] liblockdev: Loosen the regexp for py3
+Subject: [meta-oe][PATCH 2/4] sigrok-cli: Update to 0.7.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +63,28 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sat, 07 Dec 2019 23:45:39 -0000
 Content-Transfer-Encoding: 8bit
 
-Fixes packaging with py 3.8
-
-ERROR: libblockdev-2.23-r0 do_package: QA Issue: libblockdev: Files/directories were installed but not shipped in any package:
-/usr/lib/python3.8
-/usr/lib/python3.8/site-packages
-/usr/lib/python3.8/site-packages/gi
-/usr/lib/python3.8/site-packages/gi/overrides
-/usr/lib/python3.8/site-packages/gi/overrides/BlockDev.py
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../sigrok/{sigrok-cli_0.7.0.bb => sigrok-cli_0.7.1.bb}      | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-extended/sigrok/{sigrok-cli_0.7.0.bb => sigrok-cli_0.7.1.bb} (76%)
 
-diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
-index 761619d9af..3f4eec274f 100644
---- a/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
-+++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.23.bb
-@@ -17,7 +17,7 @@ SRC_URI = " \
+diff --git a/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.1.bb
+similarity index 76%
+rename from meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
+rename to meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.1.bb
+index d31bcd282f..521d91204e 100644
+--- a/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
++++ b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.1.bb
+@@ -13,6 +13,5 @@ PACKAGECONFIG ??= "decode"
+ inherit autotools pkgconfig
  
- S = "${WORKDIR}/git"
- 
--FILES_${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.7/site-packages"
-+FILES_${PN} += "${libdir}/python2.7/dist-packages ${libdir}/python3.*/site-packages"
- 
- PACKAGECONFIG ??= "python3 lvm dm kmod parted fs escrow btrfs crypto mdraid kbd mpath nvdimm"
- PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
+ SRC_URI = "http://sigrok.org/download/source/sigrok-cli/sigrok-cli-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "77cb745e2fa239c7bd1ea81e2d67ede9"
+-SRC_URI[sha256sum] = "5669d968c2de3dfc6adfda76e83789b6ba76368407c832438cef5e7099a65e1c"
++SRC_URI[md5sum] = "3f45ce664bad529d8b3f78a61b017d75"
++SRC_URI[sha256sum] = "f52413429f47d457c333db0fd068416ab7a3f9e35ca76de8624dc5ac6fb07797"
 -- 
 2.24.0
 
