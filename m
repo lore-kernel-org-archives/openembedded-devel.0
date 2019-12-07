@@ -1,34 +1,49 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by mail.openembedded.org (Postfix) with ESMTP id CCB7B7F7EF
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-lj1-f194.google.com (mail-lj1-f194.google.com
+	[209.85.208.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D9BDC7F3BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Dec 2019 23:57:26 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id BCFEC40C27;
-	Fri,  6 Dec 2019 23:57:27 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id H6O6Oah0wr5Z; Fri,  6 Dec 2019 23:57:27 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 9D87140BE5;
-	Fri,  6 Dec 2019 23:57:26 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id E7748174341; Fri,  6 Dec 2019 18:57:25 -0500 (EST)
-Date: Fri, 6 Dec 2019 18:57:25 -0500
-From: Denys Dmytriyenko <denis@denix.org>
-To: Armin Kuster <akuster808@gmail.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Message-ID: <20191206235725.GA4735@denix.org>
-References: <cover.1575137343.git.akuster808@gmail.com>
-	<CAMKF1spELhX7gHHXJd88bS9n9ezCrsh+b7ZM+pn+5zcjXBDkvQ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1spELhX7gHHXJd88bS9n9ezCrsh+b7ZM+pn+5zcjXBDkvQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [PATCH 00/15] Zeus patch review
+	Sat,  7 Dec 2019 13:04:00 +0000 (UTC)
+Received: by mail-lj1-f194.google.com with SMTP id s22so10599556ljs.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 07 Dec 2019 05:04:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=mFmwapeVDOpZceyrBK9XR0qZ/klSxHgXVg7VSeW7SVQ=;
+	b=CV3R8QlB69qYc4/3i8xzLwG5toIzvEBIlWiUFleL9XboOu85sffBaF73OfeO1XxLw2
+	3weQAddW9kv20Zyu2wDnOWNRDraDnkIX/LJ4XHCKJbBSTZ0RQN51qCAVHQItNr0CEsXn
+	lBXBVhzVtFc3l9Adv08Bz71gGNT+jE8+z1f+Dv1Tq7aynefZqhIBBdSB8iINZsfQkGPY
+	xZnsAXH8g4l3uE9WL66kEbrSpdefwMzZS8ztvw0m3HJ+N1kTxE2F7/RJX8uvQJPrZCqH
+	0t3zQPH9njKnmjafKSmluQH1QaHpWhZHfA4Wyf0P/fwx3aQMNh6Hc4YVGdgNZ25p01Sz
+	7DKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=mFmwapeVDOpZceyrBK9XR0qZ/klSxHgXVg7VSeW7SVQ=;
+	b=prfMKgxZcIHIjmyYkXT1WldNvjbD+l6ZYqbVSvJxyO74vGgE4DPtMbtwCpPJzx487z
+	Ptf4686NCtVkgA5hGEJTE2ze7JI9B9bgvreZ14fmowu2C2qUq5pPBHZ1FkENB7tdoa2a
+	f+U6OIPKhG0Zji3tKn0Vxv2jPKhFSbsOuwG7irNLyX+7ScchOLYMz/gSNSAkL3kmuQpt
+	tDYjuNG/U1Q1wWGZOauRCq8+fja+PcobpoaNBoK/8AOIWOMO4oNScU9ib4YgoUvHf5Av
+	5Tf/NyP/O2P7AOZUeAR7TkvtIaXxEcAY1x0hNU9F6hlaJ99tFSO/pvNiHRQMvhMVc602
+	92sQ==
+X-Gm-Message-State: APjAAAUjGBVA6YiXFtPdTwAEzf2dMpp0YzPf3G7DQJWb2mdBn4YUf5N2
+	0tQs2Zgdro965sVeIlHTOGk+qF5qQ28=
+X-Google-Smtp-Source: APXvYqxrpPB178pBZCAdDVhtIDs/xY0e3wRFEBIiVgvOJLqr9Oj8uCVu+EaQR30y1jHFwvGZ+Ze2tg==
+X-Received: by 2002:a2e:6c06:: with SMTP id h6mr10917126ljc.246.1575723840734; 
+	Sat, 07 Dec 2019 05:04:00 -0800 (PST)
+Received: from peterliu-Precision-7530.lan
+	(c-75fd72d5.022-417-73746f13.bbcust.telenor.se. [213.114.253.117])
+	by smtp.gmail.com with ESMTPSA id q8sm8000668lfk.33.2019.12.07.05.03.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 07 Dec 2019 05:03:59 -0800 (PST)
+From: liu.ming50@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  7 Dec 2019 14:03:54 +0100
+Message-Id: <1575723834-22763-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <liu.ming50@gmail.com>, stefan.agner@toradex.com,
+	simon.bueler@toradex.com
+Subject: [meta-oe] [PATCH] ostree: introduce OSTREE_PULL_TRANSPORT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,113 +56,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Dec 2019 23:57:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 07 Dec 2019 13:04:01 -0000
 
-On Sat, Nov 30, 2019 at 10:22:18AM -0800, Khem Raj wrote:
-> On Sat, Nov 30, 2019 at 10:11 AM Armin Kuster <akuster808@gmail.com> wrote:
-> >
-> > Please have comments back by Tuesday
-> >
-> > The following changes since commit aad5b3d070cd8c58828b0975cf861d8ebc90f460:
-> >
-> >   README: updated Maintainers list for Zeus (2019-10-30 14:16:04 -0700)
-> >
-> > are available in the git repository at:
-> >
-> >   git://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
-> >   http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
-> >
-> > Andreas Oberritter (1):
-> >   samba: fix installation for minimal build
-> >
-> > Hongxu Jia (1):
-> >   python-more-itertools.inc: fix python2 package not incorrectly
-> >     generated
-> >
-> > Khem Raj (1):
-> >   rsyslog: Dont force enable atomic builtins on mips
-> >
-> > Michael Scott (1):
-> >   modemmanager: Upgrade 1.10.6 -> 1.10.8
-> >
-> > Slater, Joseph (1):
-> >   php: fix CVE-2019-11043
-> >
-> > Stefan Wiehler (1):
-> >   nvme-cli: defer host ID generation to post installation
-> >
-> > Trevor Gamblin (3):
-> >   rsyslog: fix CVE-2019-17041
-> >   rsyslog: upgrade from v8.1908.0 to v8.1910.0
-> >   quagga: fix PIDFile path for service files
-> >
-> > Yi Zhao (2):
-> >   samba: upgrade 4.10.8 -> 4.10.10
-> >   freeradius: fix CVE-2019-10143
-> >
-> > Zheng Ruoqin (2):
-> >   mariadb: upgrade 10.3.16 -> 10.3.18
-> >   wireshark: upgrade 3.0.3 -> 3.0.6
-> >
-> > niko.mauno@vaisala.com (2):
-> >   gitpkgv.bbclass: Use --git-dir option
-> >   gitpkgv.bbclass: Support also lightweight tags
-> >
-> 
-> this list looks good to me.
+From: Ming Liu <liu.ming50@gmail.com>
 
-Ping again - would you be able to pick up mbedtls update to unbreak armv5te 
-machines:
-http://lists.openembedded.org/pipermail/openembedded-devel/2019-November/203065.html
+It could be soup or curl, for convenience to be overridden by other
+meta layers, like in meta-updater, it is choosing curl as the pull
+transport.
 
-Denys
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+---
+ meta-oe/recipes-extended/ostree/ostree_2019.5.bb | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+index 4f437f3..c3e3a12 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
+@@ -43,6 +43,11 @@ S = "${WORKDIR}/git"
+ 
+ inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
+ 
++# Value: soup or curl
++# We include soup because ostree can't (currently) be built without
++# soup or curl - https://github.com/ostreedev/ostree/issues/1897
++OSTREE_PULL_TRANSPORT ??= "soup"
++
+ # Package configuration - match ostree defaults, but without rofiles-fuse
+ # otherwise we introduce a dependendency on meta-filesystems
+ #
+@@ -50,15 +55,13 @@ inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconf
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
+-    soup \
++    ${OSTREE_PULL_TRANSPORT} \
+ "
+ 
+-# We include soup because ostree can't (currently) be built without
+-# soup or curl - https://github.com/ostreedev/ostree/issues/1897
+ PACKAGECONFIG_class-native ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+     builtin-grub2-mkconfig \
+-    soup \
++    ${OSTREE_PULL_TRANSPORT} \
+ "
+ 
+ PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
+-- 
+2.7.4
 
-> >  ...-to-radiusd-user-group-when-rotating-logs.patch | 104 +++++++++++++++++++++
-> >  .../freeradius/freeradius_3.0.19.bb                |   1 +
-> >  .../samba/{samba_4.10.8.bb => samba_4.10.10.bb}    |  20 ++--
-> >  .../recipes-protocols/quagga/files/bgpd.service    |   4 +-
-> >  .../recipes-protocols/quagga/files/ospf6d.service  |   4 +-
-> >  .../recipes-protocols/quagga/files/ospfd.service   |   4 +-
-> >  .../recipes-protocols/quagga/files/ripd.service    |   4 +-
-> >  .../recipes-protocols/quagga/files/ripngd.service  |   4 +-
-> >  .../recipes-protocols/quagga/files/zebra.service   |   4 +-
-> >  .../{wireshark_3.0.3.bb => wireshark_3.0.6.bb}     |   4 +-
-> >  meta-oe/classes/gitpkgv.bbclass                    |  15 ++-
-> >  meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb       |   5 +-
-> >  ...demmanager_1.10.6.bb => modemmanager_1.10.8.bb} |   4 +-
-> >  ...native_10.3.16.bb => mariadb-native_10.3.18.bb} |   0
-> >  meta-oe/recipes-dbs/mysql/mariadb.inc              |   4 +-
-> >  .../{mariadb_10.3.16.bb => mariadb_10.3.18.bb}     |   0
-> >  .../recipes-devtools/php/php/CVE-2019-11043.patch  |  38 ++++++++
-> >  meta-oe/recipes-devtools/php/php_7.3.9.bb          |   1 +
-> >  .../rsyslog/rsyslog/0001-Out-of-bounds-issue.patch |  31 ------
-> >  .../{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb}   |   6 +-
-> >  .../python/python-more-itertools.inc               |   2 -
-> >  21 files changed, 186 insertions(+), 73 deletions(-)
-> >  create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
-> >  rename meta-networking/recipes-connectivity/samba/{samba_4.10.8.bb => samba_4.10.10.bb} (95%)
-> >  rename meta-networking/recipes-support/wireshark/{wireshark_3.0.3.bb => wireshark_3.0.6.bb} (95%)
-> >  rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.10.6.bb => modemmanager_1.10.8.bb} (92%)
-> >  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.16.bb => mariadb-native_10.3.18.bb} (100%)
-> >  rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.16.bb => mariadb_10.3.18.bb} (100%)
-> >  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11043.patch
-> >  delete mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-Out-of-bounds-issue.patch
-> >  rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb} (97%)
-> >
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
