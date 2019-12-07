@@ -1,47 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f67.google.com (mail-qv1-f67.google.com
-	[209.85.219.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D689A7FA33
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id D429E7CBE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Dec 2019 15:24:35 +0000 (UTC)
-Received: by mail-qv1-f67.google.com with SMTP id z3so1076664qvn.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Dec 2019 07:24:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=EZShJhc0FCXviAnizl/ANLVik2mJiqluftwZ9IuLReM=;
-	b=fCBBARzg5KEsYaYoZKVPd+3041y7RSmd6TbuhiXAIF8s9NC32BJxxp3sGSPS78brR1
-	GT6yu9oBGbJQB7fQWP9y+fJgLewqkynoi3eBOJVdpj/ak4GPJZ3Aoi/Ka+B2SRhm4yV9
-	3EiT1PvEhLoXEPP1EeeZk2ey3uv4r3NTA5J0sUp+KOKtL6lQIhspcUj0mBsSGI6hIA+K
-	PmXmzDyEM76Qq/KkPo7a58HoJv0FhM1SalXwdqor57C50ysXL49sVp9wWGYfvzhHvEvN
-	Iyb7Ud0C4185LwNtPqkhVUTrboI8jiBEAtM6egn0IftSo1K0laJT/Wu8xdaGkvBcFOBI
-	j50A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=EZShJhc0FCXviAnizl/ANLVik2mJiqluftwZ9IuLReM=;
-	b=s1fUH4rB8Fa9jY5neWc3XzQ/8+NvMvj5NYulKBIBLZmtdYllcV+VTlPB9Xkw0DOWCL
-	o+JjCAjvvSmI7kcaCYUJydNJ7zF+FG6uzYTwumFASfNRFrGXwL+/GKYppmWCFJ+EZCMK
-	1UGVmNkglnNSIF1LPSl5TYMKD5nG+owUTcVerZNLFK9Ezf+Skztxfhf2zc8uKuRfR72f
-	WNX4FGDFdIbpctXkjnwqxl+brGxdRT2aU5n48ezo9IcVPQvCPPdpZc7vWDYGm0TFjQUp
-	HP2/gZn0QKcIGF0w+X+08k6BmtHUE5xONRErzc+Czxb9CG8rGVr6ywFz/4zLawRLpSr3
-	r7xA==
-X-Gm-Message-State: APjAAAWuNFzjmnwxXZ6pQY+cGwAAmdq90L9jg0YQpY080H898Bf8G51+
-	hfGwSwbN+coUK0dL3KB5hzBJEIkylD2fs5s9biE=
-X-Google-Smtp-Source: APXvYqxGIbVDOZWpWPTAXWfsDMfGERRyX3FqRSMn9BhkuP6I872fRCvb9eITnHYD+T0rzhhRNExmj12cx5jJZO5JrXc=
-X-Received: by 2002:a0c:f513:: with SMTP id j19mr17266926qvm.206.1575732276298;
-	Sat, 07 Dec 2019 07:24:36 -0800 (PST)
-MIME-Version: 1.0
-References: <1575723834-22763-1-git-send-email-liu.ming50@gmail.com>
-In-Reply-To: <1575723834-22763-1-git-send-email-liu.ming50@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 7 Dec 2019 07:24:09 -0800
-Message-ID: <CAMKF1sphbUBWh3BTpoYcCyzH05dhm8yP+oOsh-wCdDAqXx7wpA@mail.gmail.com>
-To: Ming Liu <liu.ming50@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Stefan Agner <stefan.agner@toradex.com>, simon.bueler@toradex.com
-Subject: Re: [meta-oe] [PATCH] ostree: introduce OSTREE_PULL_TRANSPORT
+	Sat,  7 Dec 2019 16:16:45 +0000 (UTC)
+Received: from localhost.localdomain (31-10-206-124.static.upc.ch
+	[31.10.206.124])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 0DC325C2A56;
+	Sat,  7 Dec 2019 17:16:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1575735406;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:content-type:content-transfer-encoding:
+	in-reply-to:references; bh=tR86tZlJIPfGNoutlYcCbKfc67T9E9DF8YfHfY6muPU=;
+	b=oTbdipgjVJY1jBAXz4hj5ETKUggmjUzHi4lQZ1Io3iOcU/6DCFAlnSKnG1YcLwsXDj4RCf
+	n6MBGPO5IoR+Sy0MpDgtQBO71f/Ra2PRjbkF2ffkc9otUrAqD/bkofJ02HEZMpMRZZ/W2A
+	nKSFVb799ApB93Ct1DXul90o1UfEg5c=
+From: Stefan Agner <stefan@agner.ch>
+To: openembedded-devel@lists.openembedded.org,
+	raj.khem@gmail.com
+Date: Sat,  7 Dec 2019 16:16:35 +0000
+Message-Id: <20191207161635.21691-1-stefan@agner.ch>
+X-Mailer: git-send-email 2.17.1
+Cc: Stefan Agner <stefan.agner@toradex.com>
+Subject: [meta-oe][PATCH] Revert "zstd: move recipe to oe-core"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,66 +35,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Dec 2019 15:24:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 07 Dec 2019 16:16:47 -0000
 
-On Sat, Dec 7, 2019 at 5:04 AM <liu.ming50@gmail.com> wrote:
->
-> From: Ming Liu <liu.ming50@gmail.com>
->
-> It could be soup or curl, for convenience to be overridden by other
-> meta layers, like in meta-updater, it is choosing curl as the pull
-> transport.
->
-> Signed-off-by: Ming Liu <liu.ming50@gmail.com>
-> ---
->  meta-oe/recipes-extended/ostree/ostree_2019.5.bb | 11 +++++++----
->  1 file changed, 7 insertions(+), 4 deletions(-)
->
-> diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-> index 4f437f3..c3e3a12 100644
-> --- a/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-> +++ b/meta-oe/recipes-extended/ostree/ostree_2019.5.bb
-> @@ -43,6 +43,11 @@ S = "${WORKDIR}/git"
->
->  inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconfig ptest-gnome systemd
->
-> +# Value: soup or curl
-> +# We include soup because ostree can't (currently) be built without
-> +# soup or curl - https://github.com/ostreedev/ostree/issues/1897
-> +OSTREE_PULL_TRANSPORT ??= "soup"
+From: Stefan Agner <stefan.agner@toradex.com>
 
-are these options exclusive? then we need a check as well to ensure
-both are not used
+The recipe has not been accepted in oe-core. So readd the recipe to
+meta-openembedded.
 
-> +
->  # Package configuration - match ostree defaults, but without rofiles-fuse
->  # otherwise we introduce a dependendency on meta-filesystems
->  #
-> @@ -50,15 +55,13 @@ inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconf
->  PACKAGECONFIG ??= " \
->      ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
-> -    soup \
-> +    ${OSTREE_PULL_TRANSPORT} \
->  "
->
-> -# We include soup because ostree can't (currently) be built without
-> -# soup or curl - https://github.com/ostreedev/ostree/issues/1897
->  PACKAGECONFIG_class-native ??= " \
->      ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
->      builtin-grub2-mkconfig \
-> -    soup \
-> +    ${OSTREE_PULL_TRANSPORT} \
->  "
->
->  PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+This reverts commit b0b9cebc72a7f6e4451b64e54701709cee30fded.
+
+Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
+---
+ meta-oe/recipes-extended/zstd/zstd_1.4.4.bb | 35 +++++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
+
+diff --git a/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb b/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
+new file mode 100644
+index 000000000..eb201f413
+--- /dev/null
++++ b/meta-oe/recipes-extended/zstd/zstd_1.4.4.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "Zstandard - Fast real-time compression algorithm"
++DESCRIPTION = "Zstandard is a fast lossless compression algorithm, targeting \
++real-time compression scenarios at zlib-level and better compression ratios. \
++It's backed by a very fast entropy stage, provided by Huff0 and FSE library."
++HOMEPAGE = "http://www.zstd.net/"
++SECTION = "console/utils"
++
++LICENSE = "BSD-3-Clause & GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c7f0b161edbe52f5f345a3d1311d0b32 \
++                    file://COPYING;md5=39bba7d2cf0ba1036f2a6e2be52fe3f0"
++
++SRC_URI = "git://github.com/facebook/zstd.git;nobranch=1"
++
++SRCREV = "10f0e6993f9d2f682da6d04aa2385b7d53cbb4ee"
++UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
++
++S = "${WORKDIR}/git"
++
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[lz4] = "HAVE_LZ4=1,HAVE_LZ4=0,lz4"
++PACKAGECONFIG[lzma] = "HAVE_LZMA=1,HAVE_LZMA=0,xz"
++PACKAGECONFIG[zlib] = "HAVE_ZLIB=1,HAVE_ZLIB=0,zlib"
++
++# See programs/README.md for how to use this
++ZSTD_LEGACY_SUPPORT ??= "4"
++
++do_compile () {
++    oe_runmake ${PACKAGECONFIG_CONFARGS} ZSTD_LEGACY_SUPPORT=${ZSTD_LEGACY_SUPPORT}
++}
++
++do_install () {
++    oe_runmake install 'DESTDIR=${D}'
++}
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.17.1
+
 
