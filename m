@@ -1,50 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f51.google.com (mail-pj1-f51.google.com
-	[209.85.216.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 145DC7FA0E
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+	[209.85.214.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 99B3A7FA0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Dec 2019 06:30:28 +0000 (UTC)
-Received: by mail-pj1-f51.google.com with SMTP id ep17so4483107pjb.4
+	Sun,  8 Dec 2019 06:30:29 +0000 (UTC)
+Received: by mail-pl1-f179.google.com with SMTP id s10so4458002plp.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Dec 2019 22:30:30 -0800 (PST)
+	Sat, 07 Dec 2019 22:30:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=AxUJJE4uj8iDu83VvqCxCpek0+Qd2f9ADy0Y04OynjA=;
-	b=f/reZvOvgVQ21NU6W9VIro8+mHtOMZg1tsCkpSptiwIxuei5JP5V9ugaM/Ithin+yF
-	7fT3hu44SYbIhsWrr7OcSteDlUBoM0A0qx+DMPvBQL1UrkOrk0W/PicMJXT4LSGeEGJk
-	tWxwk2Ob3BuiKG2UG6N0JoA/dVPZ9o2ZR5HTdXo0C3SaPQ7UgXJny8jc/Fy/5gHgcDat
-	PbdngCO40BAIUsOG1j7rQWYvDCSt4w9A+CxUynrCL3DciHYasjXtCr+5OBFth2nzvi73
-	zu6u4Kh+DNd9MKMp3OKl1pTIa5hmjnzM1DQuDj5qun0JVFT4VDPvnnoZUeo7yBTzrRAl
-	8pmg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=jRHEpO+79kWrHjSwrTEftOL8CKPQNOoDGtsMfZzOgE8=;
+	b=Kmsq7lpacl2mn8xc8udWzZgIrFAmGxoobjNbh5g8DxcgzcDXaBGIOqGATkk9AJ9L1v
+	dJD54/+mFruYDyt43l1iZdK7G/RL3ydffo4FF2daApOvhncMh6I1xGTq5aUtguEYwNEB
+	R2bXs0r54bn3R4VanSsxgfnJoNBe5Uwv9SbXwLiR6UVXXxWOcamObKczdIqz/MmGm8Ka
+	bbyPdIfiMtCihJbTXXSlTO0u3guKpKruiMlmCyyNz1FLNEP/BCDEVbCX+CgsdKoUBP7A
+	4jpfGnA4BCB202rmjb2GKPXpyeBhE78LPLkutP57RabsscXJoaFFG5/2BcM1Oj7EPJ5d
+	IYLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=AxUJJE4uj8iDu83VvqCxCpek0+Qd2f9ADy0Y04OynjA=;
-	b=IaYY4YFNDO3vgxInDuaa07zj6fKele7EtHVyhdCuf6JahehhTqBZlZzFHdwx9CvGSg
-	edB/b54niZ7dBRDGXH1E13yd4heHvBR3eH8H0BRQi6GEJ9oBU+8p/GYtQ52/Ue278ctD
-	pEUZBXGlpVAwgU5zFnhbpgR4JsSvJbZSL00xE2/ebionYN389xb5Q56w01EfcwVTXKVm
-	7iVOPMNhW+9oT6XAaAr1ZtGwMxqQM8SOhGPdH98WI5zICawLATN96rNTi+UbWgzFWEuV
-	yxMpQfI5AprVfZJeWTloJOL+IFrlBENOOPQpfi7XlJjlA8YcApzQKEOMTQBxMcWP5HHf
-	XnIQ==
-X-Gm-Message-State: APjAAAW2TjvGdxPFdDaQ9e/KlZMZZaUL6Jz1zilwHMsi6vhYoqPsWTfi
-	KH8s3Qeooc/g/OsX14cljzW6RAHGp7g=
-X-Google-Smtp-Source: APXvYqykMDzMnLfnL7vvTiHRmu+W6/J8pgD5JlbuG+Hxby2Kq4qpDPERKhRxOKkMvtalxzJj8hSJdA==
-X-Received: by 2002:a17:902:7e4a:: with SMTP id
-	a10mr23775207pln.200.1575786629406; 
-	Sat, 07 Dec 2019 22:30:29 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=jRHEpO+79kWrHjSwrTEftOL8CKPQNOoDGtsMfZzOgE8=;
+	b=Oi+s1nFyEL8ShObcKEx9MtUOvgS+HCgHNXOsOmIc+j4QPdhRmCxYGiSyezTa409KXm
+	hc11dFhf2i6s/B7uol8SZJeBLarebgw+JTVYnFPZ5Y9WyQc31eClIU+lId3PQs0TupI7
+	b/gCGNVNc+fDEhT2dlFHKLOjNUm8m0fCiird75QzrcrB7HJWVSHNR++5+cZynb/bArBQ
+	aYtt1lslV4AQ9TXydE/a+Nmv89wRhrIxbsF/FjcTcXq7JbS9CVuMC4O0s7AbybaZoVYs
+	+5NSlZdYylqeFoX6ldF0dlqRE92I0WFRhOaf6hqGQ6YVX7Oq0Uu8XNWP9hd2dlKHv61b
+	sAmA==
+X-Gm-Message-State: APjAAAXMueE41hLZWL1bQ/yPsX2/8rSJIpymmxk7DD+/X9hakGbwg+m4
+	UJ6SB2MBZx6BBubHh879JA1M5AqKKEc=
+X-Google-Smtp-Source: APXvYqx+NsR/JxvbKhFISzr5IlJIEmh/2LqbJPWK8mS+frBcBB7a0DEjpon5m+G1lzcjlNFBdZZZbA==
+X-Received: by 2002:a17:902:8c90:: with SMTP id
+	t16mr5595554plo.186.1575786630213; 
+	Sat, 07 Dec 2019 22:30:30 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::afb7])
-	by smtp.gmail.com with ESMTPSA id v16sm8408309pje.1.2019.12.07.22.30.28
+	by smtp.gmail.com with ESMTPSA id v16sm8408309pje.1.2019.12.07.22.30.29
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 07 Dec 2019 22:30:28 -0800 (PST)
+	Sat, 07 Dec 2019 22:30:29 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  7 Dec 2019 22:30:18 -0800
-Message-Id: <20191208063020.3592797-1-raj.khem@gmail.com>
+Date: Sat,  7 Dec 2019 22:30:19 -0800
+Message-Id: <20191208063020.3592797-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.0
+In-Reply-To: <20191208063020.3592797-1-raj.khem@gmail.com>
+References: <20191208063020.3592797-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 1/3] sigrok-cli: Update to 0.7.1
+Subject: [meta-python][PATCH v2 2/3] python-pywbem: Update to 0.15.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +62,51 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sun, 08 Dec 2019 06:30:29 -0000
 Content-Transfer-Encoding: 8bit
 
-Package /usr/share/icons/hicolor/scalable/apps/sigrok-cli.svg
+* LICENSE.txt move to toplevel
+* Use github for SRC_UTI, pypi source does not build
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Package missing svg file
+v2: Change SRC_URI to github and license pointer
 
- .../sigrok/{sigrok-cli_0.7.0.bb => sigrok-cli_0.7.1.bb}      | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/sigrok/{sigrok-cli_0.7.0.bb => sigrok-cli_0.7.1.bb} (71%)
+ meta-python/recipes-extended/pywbem/python-pywbem.inc    | 9 ++++++---
+ .../{python-pywbem_0.11.0.bb => python-pywbem_0.15.0.bb} | 0
+ ...python3-pywbem_0.11.0.bb => python3-pywbem_0.15.0.bb} | 0
+ 3 files changed, 6 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-extended/pywbem/{python-pywbem_0.11.0.bb => python-pywbem_0.15.0.bb} (100%)
+ rename meta-python/recipes-extended/pywbem/{python3-pywbem_0.11.0.bb => python3-pywbem_0.15.0.bb} (100%)
 
-diff --git a/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.1.bb
-similarity index 71%
-rename from meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
-rename to meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.1.bb
-index d31bcd282f..2293f142b3 100644
---- a/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.0.bb
-+++ b/meta-oe/recipes-extended/sigrok/sigrok-cli_0.7.1.bb
-@@ -13,6 +13,7 @@ PACKAGECONFIG ??= "decode"
- inherit autotools pkgconfig
+diff --git a/meta-python/recipes-extended/pywbem/python-pywbem.inc b/meta-python/recipes-extended/pywbem/python-pywbem.inc
+index 5151c33ea9..98508b0c30 100644
+--- a/meta-python/recipes-extended/pywbem/python-pywbem.inc
++++ b/meta-python/recipes-extended/pywbem/python-pywbem.inc
+@@ -14,12 +14,15 @@ It also provides a Python provider interface, and is the fastest and easiest \
+ way to write providers on the planet."
+ HOMEPAGE = "http://pywbem.github.io"
+ LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+-SRC_URI[md5sum] = "1465dfa92e4cbe558c773838b9b00711"
+-SRC_URI[sha256sum] = "2a05f2c1a6ab4b08560a6da55fdaabd0f52f4d1e6df6e288b9ed927bf5c289ed"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
  
- SRC_URI = "http://sigrok.org/download/source/sigrok-cli/sigrok-cli-${PV}.tar.gz"
-+SRC_URI[md5sum] = "3f45ce664bad529d8b3f78a61b017d75"
-+SRC_URI[sha256sum] = "f52413429f47d457c333db0fd068416ab7a3f9e35ca76de8624dc5ac6fb07797"
+ inherit pypi 
  
--SRC_URI[md5sum] = "77cb745e2fa239c7bd1ea81e2d67ede9"
--SRC_URI[sha256sum] = "5669d968c2de3dfc6adfda76e83789b6ba76368407c832438cef5e7099a65e1c"
-+FILES_${PN} += "${datadir}/icons/hicolor"
++SRCREV = "b3386b3bee8876d15f0745147c0b08937d8ab18e"
++PYPI_SRC_URI = "git://github.com/pywbem/pywbem;protocol=https;branch=stable_0.15"
++
++S = "${WORKDIR}/git"
++
+ DEPENDS += " \
+     ${PYTHON_PN}-ply-native \
+     ${PYTHON_PN}-pyyaml-native \
+diff --git a/meta-python/recipes-extended/pywbem/python-pywbem_0.11.0.bb b/meta-python/recipes-extended/pywbem/python-pywbem_0.15.0.bb
+similarity index 100%
+rename from meta-python/recipes-extended/pywbem/python-pywbem_0.11.0.bb
+rename to meta-python/recipes-extended/pywbem/python-pywbem_0.15.0.bb
+diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_0.11.0.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_0.15.0.bb
+similarity index 100%
+rename from meta-python/recipes-extended/pywbem/python3-pywbem_0.11.0.bb
+rename to meta-python/recipes-extended/pywbem/python3-pywbem_0.15.0.bb
 -- 
 2.24.0
 
