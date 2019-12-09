@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
 Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
 	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C6D17FBB3
+	by mail.openembedded.org (Postfix) with ESMTP id 7B9E77FAAE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 00:39:00 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id a15so14077976wrf.9
+	Mon,  9 Dec 2019 00:39:01 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id c9so14116172wrw.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Dec 2019 16:39:01 -0800 (PST)
+	Sun, 08 Dec 2019 16:39:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=FKcHi7VerrnD3lNshaizC0YqN3RmPkvfSlY4bAUaFQE=;
-	b=h+VM43+z2qcpSDmLEiW8rU1kstnULyleLO/Iu3t8UHXtgYKV/pF8V4z/XiabnaSuS9
-	5DiBiX/QJod2LcbAtxpFM5FXwgl+b1XsZs9d570WfjvpTMFlZHVqZo6L17YhzD1uUBCB
-	FoclfGcZ6t5CaI6wTfZQU5sR+YCRqlqmCzXNFW/cY/HfbUFRVlVWaf5OSXLftQnOeD27
-	3gENGDUVpUo6jXxTn8d6op/nRszZPbvmodVS+kWn1X6l6jRyv9uNkiOdk+e4f/Z/xHFG
-	pQuZdRCfV+vHKyBJ+fVY0R1WAEjUyvLp3rsfIMP92DR1QyvOFbqhOQiuHnqMN9ljWChP
-	5rKg==
+	bh=bQechx1ePY/QmX980OOK8kPA5u4uYThb65b7WIKgcAQ=;
+	b=f/QO2szqtZGR9lDI4cBHuOjBWDhmYHbcyKKrYCfCz+E6AorHKdQs49FRzsMLsAjM/N
+	dyrzEFft6sxM7U6u2q4S9DayZRuOFOVdAGVsLfZy5MQBSIJIDQHbQ6CRHsSQbB95xcl+
+	QwyAn4HJqJ2nvS8cInxo+AjJxknBxHqCbfyaplw91WJs2P+k2SDe3XoNZuk3/oLa+e8U
+	2LKLB8XThb9M8ZtrWvr2A3cMBTSMxC1moDjju0PJHQBzQYLRsOiV8iz8IvRBfX/uQOpd
+	ABoM5bc+y9msKaqdPiefySR5kObRRomiiqOAmU55aveCQaYg8w8dOOkU1y0qdybTAlP7
+	LcPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=FKcHi7VerrnD3lNshaizC0YqN3RmPkvfSlY4bAUaFQE=;
-	b=s20pVZO/yzP9JxmsugVrOQzL8JW1NdsrP2twTR5k1xsxoT5G254l9dUhAoB/VH83sb
-	AOwwg2jLpQc6S7k5C+gCUDeV034tNrC90ZXimW+QalLTuvuAIDS14ThQxoFCaqUg49F8
-	5dzCX5W8QdGSkq8mleG3Aa5JRfAWuGVxAZYUF5BymaV8Ps1qmjA35hAC499dTR09KFTM
-	+Wm3CcjPE+pL+JfeakFj5w7cuWMEhOr/puY8riOL9WahJ/uBFZHdyuF18JoTKqqxpT+b
-	75GinpijbGjMm/87pDztifeEksDhUuoRoSkUtcIwwLPQVDIOl/NLhkRnv6u1BwDfw1qP
-	dB5Q==
-X-Gm-Message-State: APjAAAV6GkDuXWbIp8UCPNGj4ponWQleiotIlTZMDU2wSK5S7/wm30rS
-	bFr4YbZ4xvHI8WGnk/+F5rO/e6Io
-X-Google-Smtp-Source: APXvYqxiYD/p3713IVr9ucNFNU+bdG0+G/Dw1srglK7CD1doQsIuSTru+YB8/d0m/9hBU2lBsXqYPA==
-X-Received: by 2002:adf:e74f:: with SMTP id c15mr23241877wrn.274.1575851940854;
-	Sun, 08 Dec 2019 16:39:00 -0800 (PST)
+	bh=bQechx1ePY/QmX980OOK8kPA5u4uYThb65b7WIKgcAQ=;
+	b=LQj4dmpDCGoCAdIqq4pBJ+fMvepMFBHqVN6oNL2G7hOwfT/bQW4jc/Rv7gDfXycR7O
+	mtph/IeXRq97zk9ocO9r4GNSJLTbA1Z+41n9YZCIaX4sSSCP/46emYsF6+acJ/uBRhU3
+	W4jJlieNyC+r/fFIBGP010Wf/UvDtGgxttq/dwZFvZ/Vo6uFlaYZkv4hddz4QRtXoHhY
+	Hq2w3VmMZWg/8fjuQctM5DpHGBGF3I5x8nxgtusWAaR6kypJLC9Yi9sc/4q2awhzFQKJ
+	T2Prnp5cs94MqbVRhIVHN2GTr1TqnDKrMXBRP+kb2umKyTNMgyBZeI6sTYy9NVIuj7Nz
+	ycxw==
+X-Gm-Message-State: APjAAAXpf7JIGn/iaOJa14MdT2bUGPQexRLirwA3oX2gznt/MPwVnw8q
+	TN7Ymf664eGywJANNInkKRpdxIzY
+X-Google-Smtp-Source: APXvYqxd5Xb6tbExYjuYn4iytXtkDHlGePZRzCixGzhIawQpcSVsi/6LPkBT4NMjN9h5Uq/qdEd/Nw==
+X-Received: by 2002:adf:ff8a:: with SMTP id j10mr28364685wrr.312.1575851941765;
+	Sun, 08 Dec 2019 16:39:01 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0A9021072C1E15EE839E10.dip0.t-ipconnect.de.
 	[2003:f0:7f0a:9021:72c:1e15:ee83:9e10])
 	by smtp.gmail.com with ESMTPSA id
-	n30sm11403575wmd.3.2019.12.08.16.38.59
+	n30sm11403575wmd.3.2019.12.08.16.39.00
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 08 Dec 2019 16:39:00 -0800 (PST)
+	Sun, 08 Dec 2019 16:39:01 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 01:38:21 +0100
-Message-Id: <20191209003840.3383-11-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 01:38:22 +0100
+Message-Id: <20191209003840.3383-12-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209003840.3383-1-schnitzeltony@gmail.com>
 References: <20191209003840.3383-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 10/29] rest: initial add 0.8.1
+Subject: [PATCH 11/29] gnome-online-accounts: initial add 3.34.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,57 +62,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 00:39:00 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 00:39:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It is an optional dependency for upcoming gnome-online-accounts
+It is a mandatory dependency for upcoming gnome-control-center
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gnome/rest/rest_0.8.1.bb | 33 +++++++++++++++++++++
- 1 file changed, 33 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
+ .../gnome-online-accounts_3.34.1.bb           | 35 +++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.34.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb b/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
+diff --git a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.34.1.bb
 new file mode 100644
-index 000000000..33b8744eb
+index 000000000..74d71ec81
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
-@@ -0,0 +1,33 @@
-+SUMMARY = "library to access web services that claim to be "RESTful""
-+HOMPAGE = "https://wiki.gnome.org/Projects/Librest"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
++++ b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.34.1.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "GNOME Online Accounts - Single sign-on framework for GNOME"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=34c88b124db5fb2762c1676be7dadd36"
 +
 +GNOMEBASEBUILDCLASS = "autotools"
 +
-+DEPENDS = " \
-+    libxml2-native \
-+    glib-2.0-native \
-+    glib-2.0 \
-+    libsoup-2.4 \
++inherit gnomebase gsettings gobject-introspection gsettings gtk-doc vala gettext upstream-version-is-even features_check
++
++# for webkitgtk
++REQUIRED_DISTRO_FEATURES = "x11"
++
++DEPENDS = "glib-2.0"
++
++SRC_URI[archive.md5sum] = "aa94d1dd07ca53729a036b5df1c78c05"
++SRC_URI[archive.sha256sum] = "4832ca8e48d3a497fc676e7b6f146009ab4206995362977b9805aa39f164783a"
++
++# backend is required for gnome-control-center
++PACKAGECONFIG = "backend other"
++
++PACKAGECONFIG[backend] = "--enable-backend,--disable-backend,gtk+3 webkitgtk libsoup-2.4 json-glib libsecret rest libxml2"
++PACKAGECONFIG[krb5] = "--enable-kerberos, --disable-kerberos , krb5 gcr"
++
++# no extra dependencies!
++PACKAGECONFIG[other] = " \
++    --enable-facebook  --enable-foursquare  --enable-exchange  --enable-flickr  --enable-google  --enable-imap-smtp  --enable-owncloud  --enable-windows-live,\
++    --disable-facebook --disable-foursquare --disable-exchange --disable-flickr --disable-google --disable-imap-smtp --disable-owncloud --disable-windows-live, \
 +"
 +
-+inherit gnomebase gobject-introspection gtk-doc vala
++FILES_${PN} += " \
++    ${datadir}/dbus-1 \
++    ${libdir}/goa-1.0/web-extensions/*.so \
++"
 +
-+SRC_URI[archive.md5sum] = "ece4547298a81105f307369d73c21b9d"
-+SRC_URI[archive.sha256sum] = "0513aad38e5d3cedd4ae3c551634e3be1b9baaa79775e53b2dba9456f15b01c9"
-+
-+# * gnome environment requires libsoup build with in gnome PACKAGECONFIG
-+# * libsoup-gnome support was removed upstream three years ago [1]
-+# [1] https://gitlab.gnome.org/GNOME/librest/commit/8f904a8e2bb38a7bf72245cdf2f1ecad17e9a720
-+EXTRA_OECONF = "--without-gnome"
-+
-+do_configure_prepend() {
-+    # rest expects introspection.m4 at custom location (see aclocal.m4).
-+    cp -f ${STAGING_DIR_TARGET}/${datadir}/aclocal/introspection.m4 ${S}/build
-+}
-+
-+do_compile_prepend() {
-+    export GIR_EXTRA_LIBS_PATH="${B}/rest/.libs"
-+}
-+
++# looked into pkg-config file: it is not a bug - they mean it
++FILES_${PN}-dev += "${libdir}/goa-1.0/include"
 -- 
 2.21.0
 
