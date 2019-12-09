@@ -1,56 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
-	[209.85.128.43])
-	by mail.openembedded.org (Postfix) with ESMTP id D307F7F79D
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
+	[209.85.128.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 984D57FC0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 08:36:23 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id p17so13901303wma.1
+	Mon,  9 Dec 2019 08:36:24 +0000 (UTC)
+Received: by mail-wm1-f50.google.com with SMTP id g206so14463453wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 00:36:25 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=TqpPl2n2CkdbYUp4LR/EsrYfAHVLVf9ObYG5dZdBqIc=;
-	b=qEzVJo0me8uYuJF8EdcF5yVcEqrMGkeZEumBEzDmwKqr9ao3Uoc70cIFdjEKMBRtkh
-	ClgHHGRS5A/MkeXMsz5zJaTmNpnzAHu45uQR/yzm/KsfnWKommhhkwZ3H5mjCCYnEc2e
-	DdEvxgVDIo14FlDZCHD/pBIG5M0nr0711pUFVipRpvzKg7YiiU2+Un6mjIXqPu3yzWHk
-	GOE4Bnqwup+y0F3a4g9mvI8BcGW29vP35is2yGRbW12o/1usg6geUejCPi7oZrIFKh9Q
-	HxQuP0uKn8UmraQDub+QR3+czmSujGbvKWkpm6eueTNK41OhXFKI2C5NEZnmDkomkpxk
-	1U8g==
+	bh=z/wXa70H8Ft3Om29k8uMlBRWGvXRBbjLSs4Hg+bm7qg=;
+	b=UOEwCxACKIS5TW9M0lwIg0x8Ppib2m3blRqRgV9CkWEDeDleeaZ/n/i7jaHjWa0pcQ
+	INVXfyHQPEbygcAEO6o/We/aTMYvgXgNlpvHR8cqIUt3769HubwJ8eJGBBEn3fOalnbw
+	YA9XxSMgu18mmeYi+a3gcB9rzo80MwJq9vZz7Pk3LxqcMZQAVzCmhpfHO5Xx7rK8vEmI
+	3WMckxwFfvps+mEFdpZZvkIMoNmGsmGiqX/LsQgzTvUjY6S9UHN2T3vswD51qSbSs+kj
+	Rhr5BT1Si5fgRoo1uT49fh0NxF/M7vkOSK/TuMEud7LrtCtSaCoSfrJWsbkwUhek5sHz
+	2UPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=TqpPl2n2CkdbYUp4LR/EsrYfAHVLVf9ObYG5dZdBqIc=;
-	b=Vyynux6KyNorqAyDnsX9Ze3rpkBvTdGJ7pErLaYCyOHRhJWJSszO9zIPClxQwT4Bqt
-	+ZcCd2EB6IWrCAu1MvZh+sDq7Bp6MiqHHr5n0aQ9bM9wBhRehbjqRsPZcBO6fBb9uGqr
-	10z8WurKpmUqaecsWGeFNV933Ub/ca2GUEESd1DQPuKPD5CiPc94vZ8M8dMKY1EPkUau
-	juyV3UbxPgNxCAvro5BDmOgPadwrBcn7+PzSrmul1SieEUuGUD+k7h/ObGZptO3EI1IZ
-	exlzZkTdw58rf9OCcFkjqrw4OWskcKGs9s8x7uur8hIVIISkHzh59ze+W7ugMeMdCxge
-	sXlQ==
-X-Gm-Message-State: APjAAAX+8IsfjEY1xok0USJryix69V24jbZZMZsgct4RWDUu6HZ2HtmH
-	KWMnX9+C7LlmlNq216V65TRVZ7l3
-X-Google-Smtp-Source: APXvYqzqdlG3tkyHlsN4ST8cvJfH2p8WbTtV4YXr1XhsyHpvE4OKcdC8o2xgMYGj5GEsR4lBoQ14rw==
-X-Received: by 2002:a05:600c:a:: with SMTP id
-	g10mr22887776wmc.69.1575880584146; 
-	Mon, 09 Dec 2019 00:36:24 -0800 (PST)
+	bh=z/wXa70H8Ft3Om29k8uMlBRWGvXRBbjLSs4Hg+bm7qg=;
+	b=lNUEF/LOCkOIvg/uc1lMUbI3USAvczKVbcKa7TTZZF2buPQqq2vC/smRbxSS9iRJSA
+	hgG0JJ1nhx7bWDFyk3R0hMH4yxPUFxLO8I7a133lQbolx3Xch16PoQOLFsu2dbeT668C
+	s97WRKjc7Ldi0lyz7dlYxuOVfURw65xUKSA3/gUf3i5XF7wZbsWzXr3/+vB3QFAT4mld
+	W3BqMGKG3xNrOEtgVK6DGFqhEhdchSquEnNXWOvoDa2HV/qcZsKvRLNo4NxNcNChBkR8
+	X52feBB7qqRnj4WCAL7IKjZmNukPNMa2bI0gs/WtoqCXFCOOA4yJ9Un0zx9QFw+sfncL
+	j4fA==
+X-Gm-Message-State: APjAAAXzBXlxLwDZ41MC/JrWq5/OlvV4LnkE4IkYJWxlFj9CT8gTn7Ek
+	vQNVcVWfjz8C+3IlfjLgJ24gFQDG
+X-Google-Smtp-Source: APXvYqx8kqZWivSvj0uSfPVJq9yp8Oqzc5LY+8JuBG/lf996z6tYptOD55msa3UdgzG/31TasgilMg==
+X-Received: by 2002:a1c:9e0d:: with SMTP id h13mr23579693wme.110.1575880585129;
+	Mon, 09 Dec 2019 00:36:25 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F05A251D39764436B44384E.dip0.t-ipconnect.de.
 	[2003:f0:7f05:a251:d397:6443:6b44:384e])
 	by smtp.gmail.com with ESMTPSA id
-	e18sm29450149wrw.70.2019.12.09.00.36.23
+	e18sm29450149wrw.70.2019.12.09.00.36.24
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 00:36:23 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:24 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 09:35:54 +0100
-Message-Id: <20191209083612.23922-3-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 09:35:55 +0100
+Message-Id: <20191209083612.23922-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209083612.23922-1-schnitzeltony@gmail.com>
 References: <20191209083612.23922-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH][v3 02/20] gdm: re-add 3.34.1
+Subject: [PATCH][v3 03/20] gnome-shell: initial add 3.34.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,134 +66,81 @@ X-List-Received-Date: Mon, 09 Dec 2019 08:36:24 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-GDM is a mandatory component for all types of gnome sessions. To give users the
-choice to build images with gnome-session using different display-manager
-without changing systemd service configuration,, mandatory parts were split
-into gdm-base package.
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../0001-Ensure-pam-file-installation.patch   | 48 ++++++++++++++++
- meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb    | 56 +++++++++++++++++++
- 2 files changed, 104 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file-installation.patch
- create mode 100644 meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
+ .../gnome-shell/gnome-shell_3.34.1.bb         | 64 +++++++++++++++++++
+ 1 file changed, 64 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file-installation.patch b/meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file-installation.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.1.bb
 new file mode 100644
-index 000000000..6362d5ee6
+index 000000000..d0b3af83d
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file-installation.patch
-@@ -0,0 +1,48 @@
-+From f7bba53adf8a26f900442a05bb98326747c392b4 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Tue, 3 Dec 2019 00:24:27 +0100
-+Subject: [PATCH] Ensure pam-file installation
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+All the detection magic does not work for us
-+
-+Upstream-Status: Inappropriate [OE-specific]
-+
-+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-+---
-+ data/Makefile.am | 12 +-----------
-+ 1 file changed, 1 insertion(+), 11 deletions(-)
-+
-+diff --git a/data/Makefile.am b/data/Makefile.am
-+index bda9160..dbc3ea3 100644
-+--- a/data/Makefile.am
-++++ b/data/Makefile.am
-+@@ -296,22 +296,12 @@ endif
-+ 		chown root:root $(DESTDIR)$(logdir) || : ; \
-+ 	fi
-+ 
-+-	system=`uname`; \
-+-	if test -f /usr/include/security/pam_appl.h; then \
-+-	  if test '!' -d $(DESTDIR)$(PAM_PREFIX)/pam.d; then \
-+ 		$(mkinstalldirs) $(DESTDIR)$(PAM_PREFIX)/pam.d; \
-+ 		chmod 755 $(DESTDIR)$(PAM_PREFIX)/pam.d; \
-+-	   fi; \
-+-	   if test $$system = Linux; then \
-+ 	     for pamfile in $(pam_files); do \
-+ 	       bn=$$(basename $$pamfile .pam); \
-+ 	       $(INSTALL_DATA) $(srcdir)/$$pamfile $(DESTDIR)$(PAM_PREFIX)/pam.d/$$bn; \
-+-	     done; \
-+-	   fi; \
-+-	   if test $$system = SunOS; then \
-+-		echo "Please add PAM authentication for gdm, gdm-autologin and gdm-welcome in $(PAM_PREFIX)/pam.conf!"; \
-+-	   fi; \
-+-	fi
-++	     done;
-+ 
-+ 	if test '!' -d $(DESTDIR)$(xauthdir); then \
-+ 		$(mkinstalldirs) $(DESTDIR)$(xauthdir); \
-+-- 
-+2.21.0
-+
-diff --git a/meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb b/meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
-new file mode 100644
-index 000000000..a47bf6fcf
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
-@@ -0,0 +1,56 @@
-+SUMMARY = "GNOME Display Manager"
-+LICENSE="GPLv2"
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34.1.bb
+@@ -0,0 +1,64 @@
++SUMMARY = "GNOME Shell is the graphical shell of the GNOME desktop environment"
++LICENSE = "GPLv2"
 +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 +
++GNOMEBASEBUILDCLASS = "meson"
++
++inherit gnomebase gsettings gettext gobject-introspection features_check upstream-version-is-even bash-completion
++
++REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam"
++
 +DEPENDS = " \
-+    dconf-native \
++    libxml2-native \
++    sassc-native \
 +    gtk+3 \
-+    accountsservice \
-+    libcanberra \
-+    libpam \
++    mutter \
++    evolution-data-server \
++    gcr \
++    gjs \
++    gnome-autoar \
++    polkit \
++    libcroco \
++    startup-notification \
++    ibus \
++    gsettings-desktop-schemas \
 +"
 +
-+REQUIRED_DISTRO_FEATURES = "x11 systemd pam"
++GTKDOC_MESON_OPTION = "gtk_doc"
 +
-+inherit gnomebase gsettings gobject-introspection gettext systemd useradd upstream-version-is-even features_check
++# gobject-introspection is mandatory and cannot be configured
++REQUIRED_DISTRO_FEATURES += "gobject-introspection-data"
++UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
 +
-+SRC_URI[archive.md5sum] = "65d1fd4bb85e8b133d1cbffb80ecf62e"
-+SRC_URI[archive.sha256sum] = "e85df657aa8d9361af4fb122014d8f123a93bfe45a7662fba2b373d839dbd8d3"
-+SRC_URI += "file://0001-Ensure-pam-file-installation.patch"
++SRC_URI[archive.md5sum] = "2e00c22673d069d6b919b2ca1b225d89"
++SRC_URI[archive.sha256sum] = "ccd86559b9c897c219d2d2ebfdb8413efa4c1bee846427c750cb8a301b3f6d1e"
 +
-+EXTRA_OECONF = " \
-+    --without-plymouth \
-+    --with-default-pam-config=openembedded \
-+    --with-pam-mod-dir=${base_libdir}/security \
++PACKAGECONFIG ??= "bluetooth nm ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG[bluetooth] = ",,gnome-bluetooth"
++PACKAGECONFIG[nm] = "-Dnetworkmanager=true, -Dnetworkmanager=false, networkmanager"
++PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
++
++EXTRA_OEMESON = " \
++    -Dman=false \
 +"
 +
 +do_install_append() {
-+    rm -rf ${D}/run ${D}${localstatedir}/run
++    # fix shebangs
++    for tool in `find ${D}${bindir} -name '*-tool'`; do
++        sed -i 's:#!${PYTHON}:#!${bindir}/${PYTHON_PN}:' $tool
++    done
 +}
 +
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM_${PN} = "--system --no-create-home --home ${localstatedir}/lib/gdm --user-group gdm"
-+
-+SYSTEMD_SERVICE_${PN} = "${BPN}.service"
-+
-+# Some gnome components - as gnome-panel and gnome-shell (!!) - require gdm
-+# components. To allow gnome-images using different display-manager, split them
-+# out into a seperate package.
-+PACKAGE_BEFORE_PN = "${PN}-base"
-+FILES_${PN}-base = " \
-+    ${datadir}/glib-2.0 \
-+    ${datadir}/gnome-session \
-+    ${libdir}/lib*${SOLIBS} \
-+    ${libdir}/girepository-1.0 \
-+"
-+
-+CONFFILES_${PN} += "${sysconfdir}/gdm/custom.conf"
 +FILES_${PN} += " \
-+    ${datadir}/dconf \
-+    ${base_libdir}/security/pam_gdm.so \
-+    ${localstatedir} \
-+    ${systemd_unitdir} \
++    ${datadir}/dbus-1 \
++    ${datadir}/gnome-control-center \
++    ${datadir}/xdg-desktop-portal \
++    ${systemd_user_unitdir} \
 +"
 +
-+RDEPENDS_${PN} += "${PN}-base"
++RDEPENDS_${PN} += "gsettings-desktop-schemas gdm-base librsvg-gtk"
++
++PACKAGES =+ "${PN}-tools"
++FILES_${PN}-tools = "${bindir}/*-tool"
++RDEPENDS_${PN}-tools = "python3-core"
 +
 -- 
 2.21.0
