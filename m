@@ -1,57 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
-	[209.85.214.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 148697FC38
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+	[209.85.214.172])
+	by mail.openembedded.org (Postfix) with ESMTP id CA2267FC38
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 21:40:48 +0000 (UTC)
-Received: by mail-pl1-f178.google.com with SMTP id x13so6332067plr.9
+	Mon,  9 Dec 2019 21:43:15 +0000 (UTC)
+Received: by mail-pl1-f172.google.com with SMTP id s10so6352603plp.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 13:40:50 -0800 (PST)
+	Mon, 09 Dec 2019 13:43:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:organization:user-agent:mime-version:content-transfer-encoding;
-	bh=OTPMhp1BdUCYJFZjOC1woZSpUz+OrWJFYbjy5HTy6pI=;
-	b=Q9XDxwzXGBQ//tIxbv/HeOt65BGAvVw+XoPTDA2qDg7zGu1dv0U8BagMEfDM2QL11M
-	xi/kG3qYHN1+jh9gQnITbU8tUZM/6IKzlmOcFqUBRIfK71fj3o89z4CmfUQSEb3MB7Kj
-	mzVo0nMXc03cs2GIZEM+QFAEWN5bFIhWIHCUjCmuaGnSiUqs9z0pibU8HQIGgG/Uk1WL
-	VMvTQJZQyejPXVcQy+mIStjPRmkgAvhp+v2OsOIr5/2bibi5EFT7fw2esZu8yNcEaaRV
-	Jv7Gk1uzRcAbKSC6AjuTvJLLtjy+xNIccUPj/eEoQM7jwKxi27+CB+fvY4Mx8JoT8qIQ
-	EFBg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=n66HVtkaqp3sRsPPaTiwIk5t7z4TqBMHUvd/RFx0ImY=;
+	b=Op7F4F0w6Wgs+X4BkZznfIWlYs4+Kc0CNa3UyC1n6fQ7Uqabv8HnwRWT0UJMvJ4KZy
+	hZS8c8v+epMa8DbaXYSo2t5qbLjb+pRAD3w+AISHkjPziuSamGdHXcVSPTOnJEgrbaK6
+	eW2JJ7styEtboYP0sB8CtxmTrc/lIJuhUilSQN4RK053Yq3y4NSYKqPqbYDKvKwUt+7q
+	0KfnsusHsxKPCR20nG+3vN78Ey1UvOZkjnAbeNjxt0sDMSDK7W+ZwNc2HGGrHp5vvAoM
+	zSIgtevSX9i9gde35aST78huFHXj2h9RyNb01jgJtqr45sbXHrNp4TPUB+Lw41qS/8PZ
+	dpSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:organization:user-agent:mime-version
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=OTPMhp1BdUCYJFZjOC1woZSpUz+OrWJFYbjy5HTy6pI=;
-	b=uIxjlV3cNA5SeuWCsVkrNwyS2Gq2rx8swFK38P8BNXBxj6lwKPFnPDoHevDoWegFoO
-	nxDMpBjvRAuRn5QZ2IZh7cnHDaSEjgf0x43P9rV/NJiePsDXkzPLQOerWsBbD8qyp1V9
-	RPGKfQBPWAHJM8vdRghl+4tbWtdOIJQq5FCoihnc5RSDy4teAB772aaceRKqZoePT7nQ
-	UrIU3/Udrf4FqyyVche/oFM+Q05RojeTEUtRlTBpSOK7VN5260HN2xA1we9QlMPkw6lW
-	1bbpmi8HTz4pai3MOAZWMohJDkD8O8YmbxKrsHOldYPpmDfVjBcPh2mIqCpnxnrSCXp9
-	x5IQ==
-X-Gm-Message-State: APjAAAVuWoopwf0bk1X5ynYadITus/oxwCYbi1gT8P7wRm76mpjwUqwS
-	+GFSXXjX24xXE5I4O6NtBxI=
-X-Google-Smtp-Source: APXvYqzUdObcZDNsIJIJrOk7CtWjwjl8Y8ftq0hVWrp1trxKgLhPHGk0V0dHL4++ktddMXkHhU5/Dw==
-X-Received: by 2002:a17:90a:f84:: with SMTP id 4mr1387610pjz.74.1575927649831; 
-	Mon, 09 Dec 2019 13:40:49 -0800 (PST)
-Received: from apollo ([2601:646:9200:4e0::afb7])
-	by smtp.gmail.com with ESMTPSA id d13sm295867pjx.21.2019.12.09.13.40.48
+	bh=n66HVtkaqp3sRsPPaTiwIk5t7z4TqBMHUvd/RFx0ImY=;
+	b=a05D8dfRnV13zXkk1xXSyHZhCbad/JYj9ahl97ETPNjqq9gNFeVopSjuF1VRX/pw5h
+	yj+GnxzZdLXBWFLRvPtQ2DAFGPWiAku50SPLiC3qOHdhEsFabee25+POxPQx51DlkfKu
+	JscEo9kD1G4X0QvEyTAkfz74/GG64z/Jug6kWdRNJb97SBeXCJ/zcy03ct7dWBy6J4XH
+	gT1tIzP2KEqXBYucLLDJXcS8oCFdic45PHfbLNeiD+kkTaxpgO4joWs6U+MrgQdouwLy
+	srix3y8QYbYqHjp/5FW8veHvak47yc32+JteIRF4koIlkXPh1hU6qNigVQe9Es/6SRmc
+	VxlQ==
+X-Gm-Message-State: APjAAAUDjzjFC5XNCuCRaz6CwYbMgVUPnHWwseZcXDP6PaV3WWku3WGh
+	X9Gpi91sepy7cgAjkzLgJ8dCqkvX3I0=
+X-Google-Smtp-Source: APXvYqxfJPWk3q9usEFbR/91iLWtrsPyZNFJK7Diznd48uFK8jJ/nmCD2Ng1ZGe9NzTmOyfpOBrpWw==
+X-Received: by 2002:a17:902:ff04:: with SMTP id
+	f4mr29489662plj.275.1575927796361; 
+	Mon, 09 Dec 2019 13:43:16 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::afb7])
+	by smtp.gmail.com with ESMTPSA id i4sm481861pgc.51.2019.12.09.13.43.15
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 13:40:49 -0800 (PST)
-Message-ID: <25ba6b79a3667c119d8aee93a2796d08534158b6.camel@gmail.com>
+	Mon, 09 Dec 2019 13:43:15 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@gmail.com>, Kang Kai
-	<kai.kang@windriver.com>
-Date: Mon, 09 Dec 2019 13:40:47 -0800
-In-Reply-To: <CALbNGRS=Nzkq9V9xxHt8HxPzGKwc9oAOYnhOY6WtEojtN+YsPg@mail.gmail.com>
-References: <20191118014035.15189-1-kai.kang@windriver.com>
-	<CALbNGRT=hGkyD+ht3DfhAKooTo-g9w6v23cyyVJm=HX8XA1zxA@mail.gmail.com>
-	<CALbNGRS=Nzkq9V9xxHt8HxPzGKwc9oAOYnhOY6WtEojtN+YsPg@mail.gmail.com>
-Organization: HIMVIS LLC
-User-Agent: Evolution 3.34.2 
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  9 Dec 2019 13:43:00 -0800
+Message-Id: <20191209214300.3928337-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][Patch] thunar: 1.8.9 -> 1.8.10
+Subject: [meta-oe][PATCH] libsmi: Use right name for tcl license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,30 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 21:40:49 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 09 Dec 2019 21:43:15 -0000
 Content-Transfer-Encoding: 8bit
 
-On Mon, 2019-12-09 at 09:40 +0100, Andreas Müller wrote:
-> On Tue, Nov 19, 2019 at 8:55 AM Andreas Müller <
-> schnitzeltony@gmail.com> wrote:
-> > On Mon, Nov 18, 2019 at 2:40 AM <kai.kang@windriver.com> wrote:
-> > > From: Kai Kang <kai.kang@windriver.com>
-> > > 
-> > > The tarball name uses all lower case now, so SRC_URI and S are
-> > > not
-> > > needded to be set in the recipe which have been configured in
-> > > xfce.bbclass already.
-> > > 
-> > > Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> > This one seems to have missed patchwork. Nevertheless
-> > 
-> > Acked-by: Andreas Müller <schnitzeltony@gmail.com>
-> Does this need a resend?
-> 
+Fixes
+WARNING: libsmi-0.5.0-r0 do_populate_lic: libsmi: No generic license file exists for: TCL in any provider
 
-no, I have staged it. Patchwork missed it and so did I.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Andreas
+diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
+index 3685c4aca0..98cc63eb3b 100644
+--- a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
++++ b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "A Library to Access SMI MIB Information"
+ HOMEPAGE = "https://www.ibr.cs.tu-bs.de/projects/libsmi"
+ 
+-LICENSE = "BSD-3-Clause & TCL"
++LICENSE = "BSD-3-Clause & tcl"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3ad3076f9332343a21636cfd351f05b7"
+ 
+ SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
+-- 
+2.24.0
 
 
