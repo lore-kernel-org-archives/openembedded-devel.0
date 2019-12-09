@@ -1,55 +1,56 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
-	[209.85.128.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 14DE27FA49
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BDE67E6EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 00:39:03 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id s14so12995157wmh.4
+	Mon,  9 Dec 2019 00:39:04 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id p9so13597154wmg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Dec 2019 16:39:05 -0800 (PST)
+	Sun, 08 Dec 2019 16:39:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=h909LFPf/jZ4ftxLnI5Zu+UIJUWnSFdRaAB6XPhXhFU=;
-	b=Ol/iVo/n6u8CmIguSEI7DzkS16Mb1sJ7eDwZbfoILdMYobs6BDBbtc7CSOXU0zTuld
-	bRGaFAiZQp7i2kAA8RNKBeP9sp1rGqSlojSfGKwlYAiisKf+0+sr9DC3K+7mT7OjTvSl
-	t/IftBMvo0kRRTVBhzyhmmH2dfQzgquhqtAjdN7IfcK4pJTt+APTYCrNZx0LIa2b6tZs
-	sj6eo6tkJqTwGSMoPZV5u+vTu8kz4MdT3tjX+fdQh+NJL2oi3UFd0Gox5qINH+TJiOTV
-	1SNf0oSHfCsR5mHc+2lpa6f/JIKMW20UpAlMSuZpglGQUeiFfS9oDPPqJNWk5RgK2tEE
-	VrVg==
+	bh=RRppTIk91pPG0b/VdfZSMY59rk2qmKdPT8s0HJBaj94=;
+	b=mhsyStVLGZG1rTo4M4c9PubM/J2Q8CHL49bFc/ZJyC3M9QJhP3XNffxCrrxsrPSQ+F
+	UKJLqKn20LQaqBmWkdsuIhsa6k21FAQTX3cRI+scdMMYoHSPeaNN24ClC7bVc9ixi+N3
+	Sxp15+RpjBedGFwAyhOFvholiLa3x2dI9U2fGxBzOVIACL4uvGflygcYkPMQUfmLJQ7L
+	1Hwj3qfJh6BcV79FbJtOPv5z1lQZL2yrbiFmWGhppjpL4Eoi7v06ORM3GEyi10uOxVua
+	b+L/bHg5QyZuMKzfV/ssNmGxwUw73+m5E9/kd0NW4k1N6+98EUDHwI88QUKbF659SyVt
+	cpsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=h909LFPf/jZ4ftxLnI5Zu+UIJUWnSFdRaAB6XPhXhFU=;
-	b=Kg2B2U88ltXkKTAG3uyCSPGSwftyx7GX4F2tJ2WYurJkUmLnjukKYb/ejD1oJ3TFtS
-	hTOLweHYl8MFlGE+6SlLX0ZxgjsXadAoElH3OQ1LrBfz5QKo8EpSJpBl286oVF1D6WDZ
-	kPwc2Xc28UHS9CwUNSrHJG/eyQDRDVuvbDARW33nMDK3DhDsdinjD3sNRivZLJU1KCg/
-	GTzek0YQE+/6xSEuh+gc2o0KQCOKXJWvISTNCuhi7LxJHZ64NDPOdJ7NV+m9SkGx+zzC
-	GybzOSiqnlfDjs/rmTI1WezQzeaKLdASH5sQwESequRteF5F2C6zkwVSb/FCQnk22Q8E
-	lB0A==
-X-Gm-Message-State: APjAAAW7m6LUPly0qRtlZ3l2e3EPPnoinuswjx1nIH5wF4CKMdSQ2afE
-	15qT4lXmV9B03G/oWeSFHvMeeFuN
-X-Google-Smtp-Source: APXvYqyvhBYJt/i73nWY3SIh9lwYc5I1c/PBNVLz3Oj/DPt+D4Jyte+AFQSNS651jQ0LsjL2xU4HZg==
-X-Received: by 2002:a1c:7205:: with SMTP id n5mr22266369wmc.9.1575851944588;
-	Sun, 08 Dec 2019 16:39:04 -0800 (PST)
+	bh=RRppTIk91pPG0b/VdfZSMY59rk2qmKdPT8s0HJBaj94=;
+	b=eCqDuH1zeDgH9w3TDcaQa8VmunHRcwvh9BQ3ewG53oeF8aUlKeRDPPnCLsF15dNC9W
+	k/0ZjkXBFmr/k16QYHQmf6YEvnV5lyt+W61lfH652519BsQMMwo+kYPM/Pdcxbae0HhG
+	LxFM1ORvTD4kvbJgg/vXlgKmsNmKSy1EEVkheUEWT5/zWz+AvvFp9l2UMu9CBWhUu6gs
+	yyB4pgRWuS/kZYUy2okZTdcDkBoQVcEpLfnE/UcI+bH/cb7zrO4owiovJHZpK2cz64q2
+	j512TZyLzxOKDSJkIM8LUB+2OEi3RE3qO1BjJGhbAPILM5TtywPnm6v7dEQmlqf26vgq
+	cVMg==
+X-Gm-Message-State: APjAAAX83JNjrj7vgNQp/tLel69E6JFWVsaeH/jjcG7j8lvaniATVjAM
+	N1zjjVyGeZNmUQkxpbhZ7KvZBao+
+X-Google-Smtp-Source: APXvYqwbqXBIZjShLfXBhB+QZ8kSVG4o4g4zarAxGP1+hacEvupfQlkIzZXJmasBS+lPPE3VmIt0dg==
+X-Received: by 2002:a05:600c:204c:: with SMTP id
+	p12mr21759834wmg.61.1575851945505; 
+	Sun, 08 Dec 2019 16:39:05 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0A9021072C1E15EE839E10.dip0.t-ipconnect.de.
 	[2003:f0:7f0a:9021:72c:1e15:ee83:9e10])
 	by smtp.gmail.com with ESMTPSA id
-	n30sm11403575wmd.3.2019.12.08.16.39.03
+	n30sm11403575wmd.3.2019.12.08.16.39.04
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 08 Dec 2019 16:39:03 -0800 (PST)
+	Sun, 08 Dec 2019 16:39:04 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 01:38:24 +0100
-Message-Id: <20191209003840.3383-14-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 01:38:25 +0100
+Message-Id: <20191209003840.3383-15-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209003840.3383-1-schnitzeltony@gmail.com>
 References: <20191209003840.3383-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 13/29] grilo: initial add 0.3.10
+Subject: [PATCH 14/29] gsound: initial add 1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,53 +63,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 00:39:04 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 00:39:05 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It is an unconditional dependency for upcoming gnome-control-center
+yet another dependency for gnome-control-center
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-gnome/grilo/grilo_0.3.10.bb       | 29 +++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/grilo/grilo_0.3.10.bb
+ meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
 
-diff --git a/meta-gnome/recipes-gnome/grilo/grilo_0.3.10.bb b/meta-gnome/recipes-gnome/grilo/grilo_0.3.10.bb
+diff --git a/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb b/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
 new file mode 100644
-index 000000000..e3fd67172
+index 000000000..e4478e14a
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/grilo/grilo_0.3.10.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "Grilo is a framework forsearching media content from various sources"
++++ b/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "Small gobject library for playing system sounds"
 +LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
++LIC_FILES_CHKSUM = "file://COPYING;md5=447b837ae57f08b7060593ac6256163f"
 +
 +DEPENDS = " \
-+    libxml2 \
 +    glib-2.0 \
++    libcanberra \
 +"
 +
-+GNOMEBASEBUILDCLASS = "meson"
++inherit gnomebase gettext gobject-introspection vala
 +
-+inherit gnomebase gobject-introspection gtk-doc gettext vala
-+
-+SRC_URI[archive.md5sum] = "f02bf585d1a48dc65be8b90ae3b08330"
-+SRC_URI[archive.sha256sum] = "7e44b2e74c31ed24eb97e43265a9e41effe8660287b02295111805c7bda7f1e8"
-+
-+GIR_MESON_OPTION = "enable-introspection"
-+GTKDOC_MESON_OPTION = "enable-gtk-doc"
-+
-+# Note: removing 'net' from PACKAGECONFIG causes
-+# | bindings/vala/meson.build:15:0: ERROR: Unknown variable "grlnet_gir".
-+PACKAGECONFIG ??= "net"
-+
-+PACKAGECONFIG[net] = "-Denable-grl-net=true, -Denable-grl-net=false, libsoup-2.4"
-+PACKAGECONFIG[test-ui] = "-Denable-test-ui=true, -Denable-test-ui=false, gtk+3 liboauth"
-+
-+# Once we have a recipe for 'totem-plparser' this can turn into a PACKAGECONFIG
-+EXTRA_OEMESON = "-Denable-grl-pls=false"
-+
++SRC_URI[archive.md5sum] = "c26fd21c21b9ef6533a202a73fab21db"
++SRC_URI[archive.sha256sum] = "bba8ff30eea815037e53bee727bbd5f0b6a2e74d452a7711b819a7c444e78e53"
 -- 
 2.21.0
 
