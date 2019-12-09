@@ -1,55 +1,56 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 6DB467FC56
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 60D977FC5B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 08:36:40 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id w15so15209970wru.4
+	Mon,  9 Dec 2019 08:36:41 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id f4so14848212wmj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 00:36:41 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=E3E2QMVe9iGuXGHa2x6HkpaAdGVAaWJV8yfFoWR0ozw=;
-	b=Eh9hHTX4AnS0Ywo53+Wu0+wtJcPM0Eucqj1A2HKSf21RqhKZCmvQ+ujo/dB+RdfjFt
-	Ebw84i+oGrI8DbaS9rK9WX4QKOO9Hc756ZfMQMtByoNSE3og+Bbvo88gQFI3+twXp+7N
-	h11lUm0c+FJKVqiBtA8ZLJKlMN8gkFwRehencyJO12P7s0Prjvg49ml1FzHbeqaV/J0H
-	CfS7aRruxVE67bL1eTeZQKAcy2BK7MErzIMgbUTN8Nj6rvxVceP00i/aNE7yr46St12X
-	Uou3ab7ZSHPZEh8I4cW+k0KE9pwxiFIQ7avLlCtjs6xzTO92V2N8R1pqWu27nyyJSRpz
-	WDTg==
+	bh=AvHMMVIKaK5emFmTG+f52P8NI1+LSxkRyrKOq/XTuwI=;
+	b=n96ObA/fjcsaQ58EWlBYRQvK28Y0g22K+e7GfDJtBRSy3obL2CwrbDrSMm57GG6B+F
+	TklUOiY5RdgcQUbhZix3m9zrVhdURQqomLcTA1WV7hjyWaokNmg8NaDUp4Qd8SkUMULE
+	RikHxiByCx5FCTIcNsrRIbiTlnaYOsq5/3fiefzVMEsf0qyFVR4QyKoKszwQrxqXjRVY
+	uUDGPj5PLzLt1BPeyKsgwiFjYl1XJv5Rqn9lvQF2eZ9ccPshJc9a3fCGKMF9FeBl2U7R
+	hWZ++5R+zhjfFbTYrHh9nMrfRg3Zwy2aL/xMhOm09KDKNDpQClxJSS/w81DqoBssluYf
+	F0tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=E3E2QMVe9iGuXGHa2x6HkpaAdGVAaWJV8yfFoWR0ozw=;
-	b=TYX1CkpXBQEBsO0IelGqGvtEq4/ia5Wz8CuQWTUGbkwJOo3T/EZOtS488AOKQrwtH7
-	ZDRq07Q+SbNx2LxoW/UZHcqPn3CQYjmBfpsCNs4K/lGD50wGyckBsekIm89hHPh4shB/
-	3DUUUwGKe0ovZ6lX+OW1vtStGqFhyRNkCUZ0OKAM4skNDiDhmp+uUfWfopq0/u+rTjmw
-	RnI1yJ6HsnjY5a1lbU4RABJxNMneSE72GXwhukJ1t+SNZ1sD9+/OIVHf4L1n44ZDrpbp
-	i5oOBe08kM2Jr/OnLwBr/qjj4IM3z8OHcjSCKeSXoE5Zxt1bnJ6TWKlR1MDxUlJI07Kt
-	sOZw==
-X-Gm-Message-State: APjAAAW2JTwMxbmkiUZnJs/T4G2kAusUuYauT+HSCByC1ZZdL2CSsgEu
-	Zyq/ZpXhp9S6Renl4zkTdKjpjvJF
-X-Google-Smtp-Source: APXvYqwS4Dejpes4VBGiG6sCavPTe8tuMnRU4VTpofAwWAYwpX8TZkZkyc2XcZ8FzXSF/f1P9+CaPA==
-X-Received: by 2002:a5d:534b:: with SMTP id t11mr747171wrv.120.1575880601038; 
+	bh=AvHMMVIKaK5emFmTG+f52P8NI1+LSxkRyrKOq/XTuwI=;
+	b=D3jf07cvDL5nrFpa1uWOwhFT/Qzi6q9hnO8AmHfBEUPs9c6nkVxgdq/yc7eeD0yE22
+	1QVcYSq4JAEzY7Bz+iQr8d7nU7j43UnXXeeSqQk1VtKsnoQ/7+5YcDE2Sb+HXRguHgEg
+	QUOMqKQEQp+KSYZoWr91ONAHOIdRltQiLdhd8F8sJNmFdZwLLQtcXaJBbbVsacucULjy
+	OprikKFV4OY+tot9hvyyCoLOwbqSe9noq8ma7OqEFbEBwAt1X8aIsE1IZnWNIWuwwpsC
+	aEhb4jf1nlcupXL50+i7rlORiEJ0nW2j1FpbiG4I6HQowxgGgYInAKX1L3WrwGcdr7Ih
+	bmkg==
+X-Gm-Message-State: APjAAAU5/vT1hbpZxRx0+/yb4JG+DOAVSYhi70t3BiEid47BeBmx4kct
+	kdsNv+TusLE5v5sHugBuN6iacMp5
+X-Google-Smtp-Source: APXvYqzW5FsIFmgXfnX1Vb40AQPbs7Ph1ySqf7M7Uhvxp7Kti3+M7o0P0xbdO+O+02NG3zjg7xXN0g==
+X-Received: by 2002:a05:600c:a:: with SMTP id
+	g10mr22889099wmc.69.1575880601937; 
 	Mon, 09 Dec 2019 00:36:41 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F05A251D39764436B44384E.dip0.t-ipconnect.de.
 	[2003:f0:7f05:a251:d397:6443:6b44:384e])
 	by smtp.gmail.com with ESMTPSA id
-	e18sm29450149wrw.70.2019.12.09.00.36.39
+	e18sm29450149wrw.70.2019.12.09.00.36.41
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 00:36:40 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:41 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 09:36:10 +0100
-Message-Id: <20191209083612.23922-19-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 09:36:11 +0100
+Message-Id: <20191209083612.23922-20-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209083612.23922-1-schnitzeltony@gmail.com>
 References: <20191209083612.23922-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH][v3 18/20] file-roller: remove nautilus from DEPENDS
+Subject: [PATCH][v3 19/20] libgdata: add x11 to required distro features
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,29 +63,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 08:36:41 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 08:36:42 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-nautilus is added by PACKAGECONFIG[nautilus] conditionally
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gnome/file-roller/file-roller_3.32.2.bb | 1 -
- 1 file changed, 1 deletion(-)
+ meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.2.bb b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.2.bb
-index 7dcf3e9ec..54acb6039 100644
---- a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.2.bb
-+++ b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.2.bb
-@@ -7,7 +7,6 @@ GNOMEBASEBUILDCLASS = "meson"
- DEPENDS = " \
-     glib-2.0-native \
-     gtk+3 \
--    nautilus \
-     libarchive \
-     libnotify \
- "
+diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb
+index 7bedd87ad..8e8e12b38 100644
+--- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb
++++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb
+@@ -12,7 +12,10 @@ DEPENDS = "libxml2 glib-2.0 libsoup-2.4 intltool-native liboauth gcr json-glib"
+ GTKDOC_MESON_OPTION = "gtk_doc"
+ GNOMEBASEBUILDCLASS = "meson"
+ 
+-inherit gnomebase pkgconfig gettext gtk-doc vala gobject-introspection manpages
++inherit gnomebase pkgconfig gettext gtk-doc vala gobject-introspection manpages features_check
++
++# gcr
++REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ do_compile_prepend() {
+     export GIR_EXTRA_LIBS_PATH="${B}/gdata/.libs"
 -- 
 2.21.0
 
