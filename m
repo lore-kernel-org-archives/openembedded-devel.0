@@ -1,55 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
-	[209.85.221.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 26F207FC03
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f169.google.com (mail-qk1-f169.google.com
+	[209.85.222.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 124207F931
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 00:39:20 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id q10so14092838wrm.11
+	Mon,  9 Dec 2019 03:44:01 +0000 (UTC)
+Received: by mail-qk1-f169.google.com with SMTP id v23so11899133qkg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Dec 2019 16:39:22 -0800 (PST)
+	Sun, 08 Dec 2019 19:44:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=ShD4XvX4GK0wnaAXCUEgc0oJQmmjZC9OK0wfxYAIwKk=;
-	b=L9tOgIDybK5bVaFxPtFQFrxzXkcAtHutxqU23dpfXJXgjwdmJFFUR3kBaRHHRvpRxl
-	u29EvHCbMz7sLzuROAk2xr49a/9Kgi9Xaw4EAJgzg2gWv3gSUK85BCb242jFcJX8lA1P
-	STJZw8+/7SPFEbZp2Y1rEWK43w4COC17YPjuLllBG2PO56vK32jaVV/51kwH5jU/p3wH
-	3ONzXL1hmhvom2ON6Pof2KZabA4Ocy0LvZ27LHTwJlOW2GrrbY+n/AEHphpFYN1m2baq
-	fLfhavW/lS6v+JkcsWqypGKeRgVKJIBc+jMAlOfxgDC7SRJPFDRTbbiVzvpkd5EynqtV
-	bf1g==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=eygKfI7966aLpUB1Jg+ceYF80QVVF9AdtEpWmwkREIc=;
+	b=E0Qh9/aFg20n7O7FCw8AkqQDfMX0reomdm+lB9roOXoDBPXh0yzCeFIr0qR/3SC4QI
+	i1qjpw1oaQx5a0t6R1A2c5jYeVyy62EJmtODVm1nVcD7R8iIyDSHcRhm1/XB6rhoV/lt
+	+ZakyFKE02YYQedYC8z8MbbERpu/EDDMNzvxyt7P8Lh9J/cohCYrwLKWTXvtnL/GFGH8
+	qKH2VqwU1TAFJDtbnO0MwazmtcOUFkdoZJhq+Qbb0l5k8k0tjUa+id2KC/tU9eelnJTz
+	zmKuumrzWRP105wqOFhw+midddN3GCoejKybj/ICayygBAWlIaef4096kcCAg37eYTBw
+	h7fQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=ShD4XvX4GK0wnaAXCUEgc0oJQmmjZC9OK0wfxYAIwKk=;
-	b=Ie3ePozock2XZN+NfNIrNcKdwVpVCvlOh3qtLq2pBbkpn025dT3vwrtOin/PTIbOIc
-	xuDlx2SG1W6jcBUX2aIdu399S7dr8CXp1XSKnoI+dka15k+6DiOAjHVSFLAF2yjFN2ZF
-	W0ZmHdMPkCC49Jy/3yfse7JfjMVW/sL/O4eL27wSq3tVgX0BIV1J88OtdoS6TagqO0Cf
-	JJTL22uI8BOcT5mMK68tUwD6aGAvRr+TpGvGvHQ9nkeYsviJ1dKQQCjYLjveWrnpKHep
-	7MhKjArpZkPazyb3IpYWc4N7AaiWTOwfv8PjqSFNL6ey92WiQkabvYwpTHGQYmOhYYc9
-	lbHA==
-X-Gm-Message-State: APjAAAUJQmZiltiFpAHLf9agSdpHIUHiAwmzFzWIT+bdUGOQH8Frklp/
-	QNtj1p0GTyR4FkFFu/MiuzmbzSjO
-X-Google-Smtp-Source: APXvYqxEuk4b46x8sVU4rnXugJYPSKTl5/MupvfiD7RHU93tpvDp/wssumY/PSCubsEMwH7AgPj44g==
-X-Received: by 2002:a5d:62d1:: with SMTP id o17mr28312120wrv.9.1575851961497; 
-	Sun, 08 Dec 2019 16:39:21 -0800 (PST)
-Received: from superandy.speedport.ip
-	(p200300F07F0A9021072C1E15EE839E10.dip0.t-ipconnect.de.
-	[2003:f0:7f0a:9021:72c:1e15:ee83:9e10])
-	by smtp.gmail.com with ESMTPSA id
-	n30sm11403575wmd.3.2019.12.08.16.39.20
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 08 Dec 2019 16:39:20 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 01:38:40 +0100
-Message-Id: <20191209003840.3383-30-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191209003840.3383-1-schnitzeltony@gmail.com>
-References: <20191209003840.3383-1-schnitzeltony@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=eygKfI7966aLpUB1Jg+ceYF80QVVF9AdtEpWmwkREIc=;
+	b=AiZ0NCElpwBVSKve/ttW4Hwm+f4hM0u9NOgyVSiqA9qh/dFseHMFxMGTwWsBavgicx
+	9Wb9wk6fp6eEZii5HTBdF4iYKDFHiAOvqO7evobdgblbyuOnFOCQE1AmiN9eWqFuTtyM
+	R6qu0tw7ZmyNOAxAqxstmYGwYP4+M11691A3wnnXXbWE4nAhFiUKb0TvewpgYHZunG+S
+	/2N1cTjatrz/SppUl9iVoutZlZntraHgrd6Dry6AKLjq3Jn3+E/piwxyhVD+gud7mNfF
+	avkl3cGv/dZQKTluZI1qHJlR7hy6oKA/Aun8mz5e94wZOFm9Ygbe7JitaoKzmySK0Bia
+	Hjpg==
+X-Gm-Message-State: APjAAAVslLAblPpyKqVyzUGJx+BlFU0VOmXtg6yiixHrzOMDZZP7KMwA
+	95i27PARswNfmt7DklAVgAduSgXZU1gA4iVtw/w=
+X-Google-Smtp-Source: APXvYqzqtlrAft+1UcJHt3Kv3rb09JoIlswpJQIYZetc54xOLqBAW4QF/9b/SR1oZFBNImn/J7Eyfr5xGkY3qvz1BMw=
+X-Received: by 2002:a37:bf82:: with SMTP id
+	p124mr25756762qkf.337.1575863042326; 
+	Sun, 08 Dec 2019 19:44:02 -0800 (PST)
 MIME-Version: 1.0
-Subject: [PATCH 29/29] accountsservice: Hack musl build fix
+References: <20191209003840.3383-1-schnitzeltony@gmail.com>
+In-Reply-To: <20191209003840.3383-1-schnitzeltony@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 8 Dec 2019 19:43:35 -0800
+Message-ID: <CAMKF1spMaEKSYuz-YZGnbY1RBM3LKwvvEUUfSBHj+m_q-tjPgA@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][v2 00/29] Gnome cleanups & desktop patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,129 +55,176 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 00:39:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Dec 2019 03:44:02 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../0001-musl-Hack-to-fix-build.patch         | 36 +++++++++++++++
- .../0002-musl-add-missing-fgetspent_r.patch   | 46 +++++++++++++++++++
- .../accountsservice/accountsservice_0.6.55.bb |  4 ++
- 3 files changed, 86 insertions(+)
- create mode 100644 meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch
- create mode 100644 meta-gnome/recipes-support/accountsservice/accountsservice/0002-musl-add-missing-fgetspent_r.patch
+can you rebase on master-next since some of these parches are already there
 
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch b/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch
-new file mode 100644
-index 000000000..c2310fe46
---- /dev/null
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice/0001-musl-Hack-to-fix-build.patch
-@@ -0,0 +1,36 @@
-+From 2a1c7103839c20df5ca9ce2fa863535d802f8f3a Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Sun, 8 Dec 2019 23:42:00 +0100
-+Subject: [PATCH] musl: Hack to fix configure
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+---
-+ meson.build | 10 ++++++++--
-+ 1 file changed, 8 insertions(+), 2 deletions(-)
-+
-+diff --git a/meson.build b/meson.build
-+index 4465a26..726c9fe 100644
-+--- a/meson.build
-++++ b/meson.build
-+@@ -82,8 +82,14 @@ if cc.has_header_symbol('utmpx.h', 'WTMPX_FILENAME', prefix: '#define _GNU_SOURC
-+ elif cc.has_header_symbol('paths.h', '_PATH_WTMPX')
-+   config_h.set('PATH_WTMP', '_PATH_WTMPX')
-+ else
-+-  assert(run_command('test', '-e', '/var/log/utx.log').returncode() == 0, 'Do not know which filename to watch for wtmp changes')
-+-  config_h.set_quoted('PATH_WTMP', '/var/log/utx.log')
-++  # musl: This is just a build fix hack.
-++  # As usual they know better, consider all other projects crap and offer zero
-++  # alternatives: So wtmp is a dead stub only [1] (= /dev/null/wtmp - taken
-++  # from musl sources).
-++  # Maybe a hero comes along and adds utmps [2] to make accountsservice useful for musl
-++  # [1] https://wiki.musl-libc.org/faq.html#Q:-Why-is-the-utmp/wtmp-functionality-only-implemented-as-stubs?
-++  # [2] https://github.com/skarnet/utmps
-++  config_h.set_quoted('PATH_WTMP', '/dev/null/wtmp')
-+ endif
-+ 
-+ # compiler flags
-+-- 
-+2.21.0
-+
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice/0002-musl-add-missing-fgetspent_r.patch b/meta-gnome/recipes-support/accountsservice/accountsservice/0002-musl-add-missing-fgetspent_r.patch
-new file mode 100644
-index 000000000..14161804e
---- /dev/null
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice/0002-musl-add-missing-fgetspent_r.patch
-@@ -0,0 +1,46 @@
-+From 820249ea8e38c568e6a36fbd9c852718c7665b56 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Mon, 9 Dec 2019 00:12:08 +0100
-+Subject: [PATCH] musl: add missing fgetspent_r
-+
-+Stolen from void-linux
-+
-+Upstream-Status: Inappropriate [musl-specific]
-+---
-+ src/daemon.c | 20 ++++++++++++++++++++
-+ 1 file changed, 20 insertions(+)
-+
-+diff --git a/src/daemon.c b/src/daemon.c
-+index c52bda3..a7676fe 100644
-+--- a/src/daemon.c
-++++ b/src/daemon.c
-+@@ -164,6 +164,26 @@ remove_cache_files (const gchar *user_name)
-+         g_remove (icon_filename);
-+ }
-+ 
-++/* Musl libc does not support fgetspent_r(), write own
-++ * wrapper
-++ */
-++static int fgetspent_r(FILE *fp, struct spwd *spbuf, char *buf, size_t buflen, struct spwd **spbufp) {
-++       struct spwd *shadow_entry = fgetspent(fp);
-++       if(!shadow_entry)
-++               return -1;
-++       size_t namplen = strlen(shadow_entry->sp_namp);
-++       size_t pwdplen = strlen(shadow_entry->sp_pwdp);
-++
-++       if(namplen + pwdplen + 2 > buflen)
-++               return -1;
-++
-++       *spbufp = memcpy(spbuf, shadow_entry, sizeof(struct spwd));
-++       spbuf->sp_namp = strncpy(buf, shadow_entry->sp_namp, namplen + 1);
-++       spbuf->sp_pwdp = strncpy(buf + namplen + 1, shadow_entry->sp_pwdp, pwdplen + 1);
-++
-++       return 0;
-++}
-++
-+ static struct passwd *
-+ entry_generator_fgetpwent (Daemon       *daemon,
-+                            GHashTable   *users,
-+-- 
-+2.21.0
-+
-diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb b/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
-index bf603b3bc..36fecfe11 100644
---- a/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
-+++ b/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
-@@ -13,6 +13,10 @@ inherit meson gobject-introspection gtk-doc features_check systemd
- REQUIRED_DISTRO_FEATURES = "polkit"
- 
- SRC_URI = "https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
-+SRC_URI_append_libc-musl = " \
-+    file://0001-musl-Hack-to-fix-build.patch \
-+    file://0002-musl-add-missing-fgetspent_r.patch \
-+"
- SRC_URI[md5sum] = "6e4c6fbd490260cfe17de2e76f5d803a"
- SRC_URI[sha256sum] = "ff2b2419a7e06bd9cb335ffe391c7409b49a0f0130b890bd54692a3986699c9b"
- 
--- 
-2.21.0
-
+On Sun, Dec 8, 2019 at 4:39 PM Andreas M=C3=BCller <schnitzeltony@gmail.com=
+> wrote:
+>
+> V1 -> V2:
+> * gjs 1.58.1 -> 1.58.3 (desperate attempt to fix mips/gobject-introspecti=
+on/qemu)
+> * gnome-control-center: distro-features + systemd
+> * gnome-flashback: distro-features + systemd/pam
+> * gnome-online-accounts: distro-features + x11
+> * gnome-panel: distro-features + systemd/pam
+> * gnome-session: distro-features + polkit systemd pam gobject-introspecti=
+on-data
+> * gnome-shell-extensions: distro-features + x11 polkit systemd pam / upst=
+ream-version-is-even
+> * gnome-shell distro-features + systemd pam
+> * rest: --without-gnome
+> * accountsservice: musl build fix
+> * packagegroup-gnome-apps: add gnome-system-monitor only if polkit in dis=
+tro feature
+> * packagegroup-gnome-desktop: + polkit systemd pam gobject-introspection-=
+data
+> * some patches added to adjust required distro features (they popped up d=
+uring tests)
+>
+> Andreas M=C3=BCller (29):
+>   pinpoint: remove dead project
+>   gnome-keyring: upgrade 3.28.2 -> 3.34.0
+>   libgsf: upgrade 1.14.45 -> 1.14.46
+>   libgnome-keyring: remove
+>   gjs: initial add 1.58.3
+>   gdm: re-add 3.34.1
+>   gnome-shell: initial add 3.34.1
+>   gnome-shell-extensions: initial add 3.34.1
+>   accountsservice: initial add 0.6.55
+>   rest: initial add 0.8.1
+>   gnome-online-accounts: initial add 3.34.1
+>   gvfs: upgrade 1.41.2 -> 1.42.1
+>   grilo: initial add 0.3.10
+>   gsound: initial add 1.0.2
+>   gnome-control-center: re-add 3.34.1
+>   gnome-session: inital add 3.34.1
+>   gnome-backgrounds: initial add 3.34.0
+>   metacity: upgrade 3.32.0 -> 3.34.1
+>   gnome-panel: (re)add 3.34.1
+>   gnome-flashback: initial add 3.34.1
+>   Add: packagegroup-gnome-apps / packagegroup-gnome-desktop
+>   glfw: add features_check to inherit
+>   stalonetray: Add x11 to required distro feature
+>   projucer: add x11 to required distro features
+>   colord-gtk: add polkit to required distro features
+>   yelp: add x11 to required distro features
+>   file-roller: remove nautilus from DEPENDS
+>   libgdata: add x11 to required distro features
+>   accountsservice: Hack musl build fix
+>
+> Kai Kang (1):
+>   thunar: 1.8.9 -> 1.8.10
+>
+>  .../recipes-apps/pinpoint/pinpoint_git.bb     | 24 -------
+>  .../file-roller/file-roller_3.32.2.bb         |  1 -
+>  .../0001-Ensure-pam-file-installation.patch   | 48 ++++++++++++++
+>  meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb    | 56 ++++++++++++++++
+>  .../gjs/gjs/0001-Disable-tests-on-host.patch  | 33 ++++++++++
+>  meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb    | 37 +++++++++++
+>  .../gnome-backgrounds_3.34.0.bb               | 17 +++++
+>  ...001-Add-meson-option-to-pass-sysroot.patch | 45 +++++++++++++
+>  .../gnome-control-center_3.34.1.bb            | 55 ++++++++++++++++
+>  .../gnome-flashback/gnome-flashback_3.34.1.bb | 34 ++++++++++
+>  ...-agent-and-ssh-add-by-configure-opti.patch | 42 ++++++++++++
+>  .../gnome-keyring/gnome-keyring_3.28.2.bb     | 44 -------------
+>  .../gnome-keyring/gnome-keyring_3.34.0.bb     | 51 +++++++++++++++
+>  .../gnome-keyring/libgnome-keyring_3.12.0.bb  | 29 ---------
+>  .../gnome-online-accounts_3.34.1.bb           | 35 ++++++++++
+>  ...nd-ZONEINFO-it-tries-to-run-compiled.patch | 37 +++++++++++
+>  .../gnome-panel/gnome-panel_3.34.1.bb         | 28 ++++++++
+>  .../gnome-session/gnome-session_3.34.1.bb     | 39 +++++++++++
+>  .../gnome-shell-extensions_3.34.1.bb          | 29 +++++++++
+>  .../gnome-shell/gnome-shell_3.34.1.bb         | 64 +++++++++++++++++++
+>  .../recipes-gnome/grilo/grilo_0.3.10.bb       | 29 +++++++++
+>  .../recipes-gnome/gsound/gsound_1.0.2.bb      | 13 ++++
+>  .../gvfs/{gvfs_1.41.2.bb =3D> gvfs_1.42.1.bb}   | 11 ++--
+>  .../libgdata/libgdata_0.17.10.bb              |  5 +-
+>  ...p-a-copy-paste-of-introspection.m4-m.patch |  0
+>  .../{libgsf_1.14.45.bb =3D> libgsf_1.14.46.bb}  | 12 ++--
+>  .../recipes-gnome/metacity/metacity_3.32.0.bb | 41 ------------
+>  .../recipes-gnome/metacity/metacity_3.34.1.bb | 38 +++++++++++
+>  meta-gnome/recipes-gnome/rest/rest_0.8.1.bb   | 33 ++++++++++
+>  meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb  |  5 +-
+>  .../0001-musl-Hack-to-fix-build.patch         | 36 +++++++++++
+>  .../0002-musl-add-missing-fgetspent_r.patch   | 46 +++++++++++++
+>  .../accountsservice/accountsservice_0.6.55.bb | 33 ++++++++++
+>  .../colord-gtk/colord-gtk_0.2.0.bb            |  4 ++
+>  .../packagegroups/packagegroup-gnome-apps.bb  | 19 ++++++
+>  .../packagegroup-gnome-desktop.bb             | 26 ++++++++
+>  .../recipes-multimedia/juce/projucer.inc      |  4 +-
+>  meta-oe/recipes-core/glfw/glfw_3.3.bb         |  2 +-
+>  .../stalonetray/stalonetray_0.8.3.bb          |  4 +-
+>  .../{thunar_1.8.9.bb =3D> thunar_1.8.10.bb}     |  7 +-
+>  40 files changed, 954 insertions(+), 162 deletions(-)
+>  delete mode 100644 meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file=
+-installation.patch
+>  create mode 100644 meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gjs/gjs/0001-Disable-tests-o=
+n-host.patch
+>  create mode 100644 meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-backgrounds/gnome-back=
+grounds_3.34.0.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-control-center/gnome-c=
+ontrol-center/0001-Add-meson-option-to-pass-sysroot.patch
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-control-center/gnome-c=
+ontrol-center_3.34.1.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-flashback/gnome-flashb=
+ack_3.34.1.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/=
+0001-Set-paths-to-ssh-agent-and-ssh-add-by-configure-opti.patch
+>  delete mode 100644 meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_=
+3.28.2.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_=
+3.34.0.bb
+>  delete mode 100644 meta-gnome/recipes-gnome/gnome-keyring/libgnome-keyri=
+ng_3.12.0.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-online-accounts/gnome-=
+online-accounts_3.34.1.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-panel/gnome-panel/0001=
+-Do-not-try-to-find-ZONEINFO-it-tries-to-run-compiled.patch
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-panel/gnome-panel_3.34=
+.1.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-session/gnome-session_=
+3.34.1.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell-exte=
+nsions_3.34.1.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell_3.34=
+.1.bb
+>  create mode 100644 meta-gnome/recipes-gnome/grilo/grilo_0.3.10.bb
+>  create mode 100644 meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
+>  rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.41.2.bb =3D> gvfs_1.42.1.bb=
+} (87%)
+>  rename meta-gnome/recipes-gnome/libgsf/{files =3D> libgsf}/0001-configur=
+e.ac-drop-a-copy-paste-of-introspection.m4-m.patch (100%)
+>  rename meta-gnome/recipes-gnome/libgsf/{libgsf_1.14.45.bb =3D> libgsf_1.=
+14.46.bb} (59%)
+>  delete mode 100644 meta-gnome/recipes-gnome/metacity/metacity_3.32.0.bb
+>  create mode 100644 meta-gnome/recipes-gnome/metacity/metacity_3.34.1.bb
+>  create mode 100644 meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
+>  create mode 100644 meta-gnome/recipes-support/accountsservice/accountsse=
+rvice/0001-musl-Hack-to-fix-build.patch
+>  create mode 100644 meta-gnome/recipes-support/accountsservice/accountsse=
+rvice/0002-musl-add-missing-fgetspent_r.patch
+>  create mode 100644 meta-gnome/recipes-support/accountsservice/accountsse=
+rvice_0.6.55.bb
+>  create mode 100644 meta-gnome/recipes-support/packagegroups/packagegroup=
+-gnome-apps.bb
+>  create mode 100644 meta-gnome/recipes-support/packagegroups/packagegroup=
+-gnome-desktop.bb
+>  rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.9.bb =3D> thunar_1.8.10=
+.bb} (74%)
+>
+> --
+> 2.21.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
