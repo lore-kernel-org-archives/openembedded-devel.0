@@ -1,32 +1,53 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EF5B7FC39
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 313477F9A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 08:56:14 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,294,1571673600"; d="scan'208";a="79868671"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Dec 2019 16:56:16 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id E44CA4CE1A05
+	Mon,  9 Dec 2019 14:45:28 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id f129so15247087wmf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 16:47:39 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 9 Dec 2019 16:56:15 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 9 Dec 2019 06:58:03 -0800
-Message-ID: <1575903483-113548-3-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1575903483-113548-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1575903483-113548-1-git-send-email-wangmy@cn.fujitsu.com>
+	Mon, 09 Dec 2019 06:45:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=9cj9BctQTxDA1ijnWT3pOlmIPzNXx2BB/t5dMiQioiY=;
+	b=OUmsVMV5wi/fX1vlF6LNNTdmZDW7u10XqXI0pnnTSmDNzRt8cLOTG/jR7Lwlh/JCd6
+	TriQxvqC80FwT9sdkyGnNuhnluGqAkPSw/REE9UsQBMOnmbfFfJQ/xiOnG3o1K+oUJXf
+	pvi5Sb1At/OllC1ua86CLr803VjKj+Y1OubvpSeW1otyubue3raCAKmsWclxK78l04N8
+	z75gAgu6gYfsImO1ZRdDElOXEkFnumZ0BmxyeW54feZXKWEuxcGpEmT2/U1QTmXQ6oGr
+	ItSFVpca3I4f8h8g7T1J5XQUbAl+zdvFtcisJcjNLW9gcLkV7zgoIYrnxIC1YvX0M/xw
+	OcOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=9cj9BctQTxDA1ijnWT3pOlmIPzNXx2BB/t5dMiQioiY=;
+	b=CE0A+r5IO0cN8F0aSWqWa7iSLk2bQWl2dZX2JK1sY2H6FFMweiqupGiZe3R7FI69eQ
+	VYxnzdGsvIfuf8x7OB73N4sXWxU1CAPaKEGLF5IzMGpehdAmj8vtQnN6akVjVRjX9Ty/
+	ooWjnw4mzf0WhaKxCH2YL72oKP3qkauhoEIiqBJDyyquyEBNN2DmtMNJwGX6Fwaz2I+z
+	NIVjqgKuuufLrYlDW4NiMi2R1N9McDmgYHKkVdCWLOfFTO1HyOU04dq3ls86HJdaXNlR
+	7UqTbQHM53/tNxH047K31Wg8heDAecCPBwTRk9uKSCT/8wjGSmR5BzITRMrCRL8/Pglg
+	M2VQ==
+X-Gm-Message-State: APjAAAU0StlYt7N+X01DadVtEN+ZvJgq50hYbGI8uWb7aljLMGjLDrid
+	dTsYpGhdHsu2GMaL48TUZkUnEw==
+X-Google-Smtp-Source: APXvYqz/ORlOxxPuqGadv0NeT71Fp9kZ0IAMV0lXcr3A/rVfVLhFOfOOkEQ2yKcL+cCR9eiSJJyFmg==
+X-Received: by 2002:a7b:c8c5:: with SMTP id f5mr23613990wml.155.1575902728923; 
+	Mon, 09 Dec 2019 06:45:28 -0800 (PST)
+Received: from localhost.localdomain (lfbn-1-7161-157.w90-116.abo.wanadoo.fr.
+	[90.116.92.157])
+	by smtp.gmail.com with ESMTPSA id t81sm2082wmg.6.2019.12.09.06.45.27
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 09 Dec 2019 06:45:28 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Mon,  9 Dec 2019 15:45:25 +0100
+Message-Id: <20191209144525.21752-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: E44CA4CE1A05.A8DFE
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python][PATCH] python3-xxhash: upgrade 1.4.2 -> 1.4.3
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [PATCH] librsync: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,35 +60,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 08:56:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 09 Dec 2019 14:45:28 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+
+rdiff is a popular tool for calculating binary delta patches. It's
+provided by the librsync package (unrelated to rsync already available
+in poky).
+
+This recipe adds new packages for librsync and rdiff.
+
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
- meta-python/recipes-devtools/python/python-xxhash.inc                 | 4 ++--
- .../python/{python3-xxhash_1.4.2.bb => python3-xxhash_1.4.3.bb}       | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-xxhash_1.4.2.bb => python3-xxhash_1.4.3.bb} (100%)
+ .../recipes-support/librsync/librsync_2.2.1.bb | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-support/librsync/librsync_2.2.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-xxhash.inc b/meta-python/recipes-devtools/python/python-xxhash.inc
-index 1ec3937..80f5e9c 100644
---- a/meta-python/recipes-devtools/python/python-xxhash.inc
-+++ b/meta-python/recipes-devtools/python/python-xxhash.inc
-@@ -3,5 +3,5 @@ SECTION = "devel/python"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5a8d76283514a1b7e6a414aba38629b5"
- 
--SRC_URI[md5sum] = "80461eff10ac62214fa788a6045aab43"
--SRC_URI[sha256sum] = "82cdc67b41da904aa2921107e9877814079d9b067a99f19852b5d85e8a40555d"
-+SRC_URI[md5sum] = "ce9cbbcc89620fd47a2468badd08dcf0"
-+SRC_URI[sha256sum] = "8b6b1afe7731d7d9cbb0398b4a811ebb5e6be5c174f72c68abf81f919a435de9"
-diff --git a/meta-python/recipes-devtools/python/python3-xxhash_1.4.2.bb b/meta-python/recipes-devtools/python/python3-xxhash_1.4.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-xxhash_1.4.2.bb
-rename to meta-python/recipes-devtools/python/python3-xxhash_1.4.3.bb
+diff --git a/meta-oe/recipes-support/librsync/librsync_2.2.1.bb b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+new file mode 100644
+index 000000000..9d224767c
+--- /dev/null
++++ b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Remote delta-compression library."
++AUTHOR = "Martin Pool, Andrew Tridgell, Donovan Baarda, Adam Schubert"
++
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
++
++SRC_URI = "git://github.com/librsync/librsync.git"
++SRCREV = "5917692418657dc78c9cbde3a8db4c85f25b9c8d"
++S = "${WORKDIR}/git"
++
++DEPENDS = "popt"
++
++inherit cmake
++
++BBCLASSEXTEND = "native nativesdk"
++
++PACKAGES =+ "rdiff"
++FILES_rdiff = "/usr/bin/rdiff"
 -- 
-2.7.4
-
-
+2.23.0
 
 
