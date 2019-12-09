@@ -1,42 +1,41 @@
 Return-Path: <sbabic@denx.de>
-X-Greylist: delayed 566 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 09 Dec 2019 15:03:03 UTC
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
-	by mail.openembedded.org (Postfix) with ESMTP id B478F7FCAA
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F6DD7FCAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 15:03:03 +0000 (UTC)
+	Mon,  9 Dec 2019 15:06:13 +0000 (UTC)
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 47WmR629rYz1rh8j;
-	Mon,  9 Dec 2019 15:53:38 +0100 (CET)
+	by mail-out.m-online.net (Postfix) with ESMTP id 47Wmjf0htYz1rD93;
+	Mon,  9 Dec 2019 16:06:14 +0100 (CET)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 47WmR61hJMz1rhB4;
-	Mon,  9 Dec 2019 15:53:38 +0100 (CET)
+	by mail.m-online.net (Postfix) with ESMTP id 47Wmjd74jrz1qqkp;
+	Mon,  9 Dec 2019 16:06:13 +0100 (CET)
 X-Virus-Scanned: amavisd-new at mnet-online.de
 Received: from mail.mnet-online.de ([192.168.8.182])
 	by localhost (dynscan1.mail.m-online.net [192.168.6.70]) (amavisd-new,
 	port 10024)
-	with ESMTP id SveVVNomUm9k; Mon,  9 Dec 2019 15:53:36 +0100 (CET)
+	with ESMTP id sG9qxr9o5icR; Mon,  9 Dec 2019 16:06:12 +0100 (CET)
 Received: from babic.homelinux.org (host-88-217-136-221.customer.m-online.net
 	[88.217.136.221])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
 	by mail.mnet-online.de (Postfix) with ESMTPS;
-	Mon,  9 Dec 2019 15:53:36 +0100 (CET)
+	Mon,  9 Dec 2019 16:06:12 +0100 (CET)
 Received: from localhost (mail.babic.homelinux.org [127.0.0.1])
-	by babic.homelinux.org (Postfix) with ESMTP id 7EAE34540415;
-	Mon,  9 Dec 2019 15:53:36 +0100 (CET)
+	by babic.homelinux.org (Postfix) with ESMTP id 2C16B4540415;
+	Mon,  9 Dec 2019 16:06:12 +0100 (CET)
 X-Virus-Scanned: Debian amavisd-new at babic.homelinux.org
 Received: from babic.homelinux.org ([IPv6:::1])
 	by localhost (mail.babic.homelinux.org [IPv6:::1]) (amavisd-new,
 	port 10024)
-	with ESMTP id YnvfKCVBdOtA; Mon,  9 Dec 2019 15:53:33 +0100 (CET)
+	with ESMTP id aTdSpcxg3zZ5; Mon,  9 Dec 2019 16:06:09 +0100 (CET)
 Received: from [192.168.178.132] (papero.fritz.box [192.168.178.132])
-	by babic.homelinux.org (Postfix) with ESMTP id 5279145400CA;
-	Mon,  9 Dec 2019 15:53:33 +0100 (CET)
-To: Bartosz Golaszewski <brgl@bgdev.pl>, Khem Raj <raj.khem@gmail.com>,
-	Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
+	by babic.homelinux.org (Postfix) with ESMTP id 0740F45400CA;
+	Mon,  9 Dec 2019 16:06:09 +0100 (CET)
+To: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	Stefano Babic <sbabic@denx.de>
 References: <20191209144601.21938-1-brgl@bgdev.pl>
+	<c8092805-82d6-9cbf-83de-d7a8b8bc0062@denx.de>
+	<CAMpxmJXDQh1vi7Eo-ZZZsyZ82n_X+n+-R2aGaxrYK1-TZ-5VbQ@mail.gmail.com>
 From: Stefano Babic <sbabic@denx.de>
 Autocrypt: addr=sbabic@denx.de; prefer-encrypt=mutual; keydata=
 	xsDiBEfdB5IRBADkpYcnh2BoAkGD5p186ysEkWlcp5DU07m7BKzvkEMRhFjeFUOU0klKNmh0
@@ -61,13 +60,13 @@ Autocrypt: addr=sbabic@denx.de; prefer-encrypt=mutual; keydata=
 	bYz37orRbA72M2bxK76e9QKn0mVu+d/YCd8wRcvvJbGsozpzcxPvD5Wy5RNJCES8McPtAseU
 	tMfCSQQYEQIACQUCR90HmAIbDAAKCRD09WXkmmjvpv+3AJ9RakBsH1j0X/Kxp6t2lf0VUfS2
 	qACfZ+J6ktk8PKNuyHf0J/I0mbCrhV4=
-Message-ID: <c8092805-82d6-9cbf-83de-d7a8b8bc0062@denx.de>
-Date: Mon, 9 Dec 2019 15:53:33 +0100
+Message-ID: <d54aa838-7441-25f1-0d2b-2a0a857f46be@denx.de>
+Date: Mon, 9 Dec 2019 16:06:08 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.2.1
 MIME-Version: 1.0
-In-Reply-To: <20191209144601.21938-1-brgl@bgdev.pl>
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+In-Reply-To: <CAMpxmJXDQh1vi7Eo-ZZZsyZ82n_X+n+-R2aGaxrYK1-TZ-5VbQ@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH] librsync: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -81,64 +80,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 15:03:04 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 15:06:14 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
-Content-Transfer-Encoding: 7bit
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
 Hi Bartosz,
 
-On 09/12/19 15:46, Bartosz Golaszewski wrote:
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On 09/12/19 15:56, Bartosz Golaszewski wrote:
+> pon., 9 gru 2019 o 15:53 Stefano Babic <sbabic@denx.de> napisał(a):
+>>
+>> Hi Bartosz,
+>>
+>> On 09/12/19 15:46, Bartosz Golaszewski wrote:
+>>> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+>>>
+>>> rdiff is a popular tool for calculating binary delta patches. It's
+>>> provided by the librsync package (unrelated to rsync already available
+>>> in poky).
+>>>
+>>
+>> Nice, I added it (really, 2.1) to my public layer, but this definetely
+>> belongs to OE:
+>>
+>> https://github.com/sbabic/meta-swupdate/blob/master/recipes-support/librsync/librsync_2.1.0.bb
+>>
 > 
-> rdiff is a popular tool for calculating binary delta patches. It's
-> provided by the librsync package (unrelated to rsync already available
-> in poky).
+> Ha! Somehow it didn't pop up in google search. If you want you can
+> send your own patch instead of this one.
+
+I am fine with yours, too ;-)
+
 > 
+> We probably have the same idea for updates - I'm using it in my
+> binary-delta update module for mender.
 
-Nice, I added it (really, 2.1) to my public layer, but this definetely
-belongs to OE:
+Exactly the same idea: I am using it for binary-delta update in SWUpdate ;-)
 
-https://github.com/sbabic/meta-swupdate/blob/master/recipes-support/librsync/librsync_2.1.0.bb
-
-
-> This recipe adds new packages for librsync and rdiff.
 > 
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> ---
->  .../recipes-support/librsync/librsync_2.2.1.bb | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
->  create mode 100644 meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+>>
+>>> This recipe adds new packages for librsync and rdiff.
+>>>
+>>> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+>>> ---
+>>>  .../recipes-support/librsync/librsync_2.2.1.bb | 18 ++++++++++++++++++
+>>>  1 file changed, 18 insertions(+)
+>>>  create mode 100644 meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+>>>
+>>> diff --git a/meta-oe/recipes-support/librsync/librsync_2.2.1.bb b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+>>> new file mode 100644
+>>> index 000000000..9d224767c
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+>>> @@ -0,0 +1,18 @@
+>>> +SUMMARY = "Remote delta-compression library."
+>>> +AUTHOR = "Martin Pool, Andrew Tridgell, Donovan Baarda, Adam Schubert"
+>>> +
+>>> +LICENSE = "LGPLv2.1+"
+>>> +LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
+>>> +
+>>> +SRC_URI = "git://github.com/librsync/librsync.git"
+>>> +SRCREV = "5917692418657dc78c9cbde3a8db4c85f25b9c8d"
+>>> +S = "${WORKDIR}/git"
+>>> +
+>>> +DEPENDS = "popt"
+>>
+>> Don't you have any depends from zlib / bzip ? cmake tests it, if you do
+>> not add it, build will be fine but without support.
+>>
 > 
-> diff --git a/meta-oe/recipes-support/librsync/librsync_2.2.1.bb b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
-> new file mode 100644
-> index 000000000..9d224767c
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
-> @@ -0,0 +1,18 @@
-> +SUMMARY = "Remote delta-compression library."
-> +AUTHOR = "Martin Pool, Andrew Tridgell, Donovan Baarda, Adam Schubert"
-> +
-> +LICENSE = "LGPLv2.1+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
-> +
-> +SRC_URI = "git://github.com/librsync/librsync.git"
-> +SRCREV = "5917692418657dc78c9cbde3a8db4c85f25b9c8d"
-> +S = "${WORKDIR}/git"
-> +
-> +DEPENDS = "popt"
+> Sure - it probably should become a PACKAGECONFIG option.
 
-Don't you have any depends from zlib / bzip ? cmake tests it, if you do
-not add it, build will be fine but without support.
-
-> +
-> +inherit cmake
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> +
-> +PACKAGES =+ "rdiff"
-> +FILES_rdiff = "/usr/bin/rdiff"
-> 
+Well, anyway the library without compression support loses most of its
+meaning... But a PACKAGECONFIG with default as on for both compression
+libraries is fine.
 
 Best regards,
 Stefano
