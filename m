@@ -1,51 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id C7B067FC99
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id C33547FA42
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 18:55:41 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id c23so882666plz.4
+	Mon,  9 Dec 2019 19:24:35 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id z14so3813231qkg.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 10:55:43 -0800 (PST)
+	Mon, 09 Dec 2019 11:24:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qr3g1aZ/1lhoWPqQ9dNsuZUpuxyrQ85eaWtlb72cYvc=;
-	b=K5ocq8SpFNd6LH6l0EH1KlnCgdFkLfq8UtT9n4CW1ZEVhw4DsOfSYE+FDVllOzDCTF
-	DyMlyZyP6ezuNQg7+UXU+n6xDtGWyQzYTMCXCKo2zBFCElZumr5Muzn/lAcybpXQaEVh
-	69wlTEN5uq6Butrp4Xo45m3Nu1k2cCHijuWRb6+av09Kw6Qhlmhr+hYyXYHZxBr22WQi
-	q3IPvKj9Emg4jwf/HJdVzhzgZjTbUc2IJA5hWfEHD6Zg/whCLL3jfPhz7fcKGNBNxbk2
-	WF8Nkj0ecrtI2FZFVFP0AYbRVBTMSHKvh2DcXkZsaaeuf6CFE+xlwFL1VZ/DMPxTpsZq
-	FIqg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=KSQcWe7wdL7drTSF54295+hzOuQ9vvhaZ3fFya0jPTo=;
+	b=CRRde5bo7f3Dx76WJ1AnevOmK1gFPEBzyslgjPJW4rNPcUFp8OA7HXaNvWhMe6RjzM
+	owgMJOEx528Ee86UNNvL4xXOtLC9WLVFVZVNYzaTyumy9YbILjVkL8nb5sAQsH4qdhmm
+	QKL74rsaH7OoZgQ+3dspgrUO4a59f7iw0VCEaGEARSCclYkzZm0sWaouF+cJpLb41Ikv
+	dgsrzO3yFwiU2b98E14VOoI6iLF6hhJ799+N+Bt7prc1sMrZqs/ECHDKHUG6tC5Sz4xZ
+	C3kmZkVTGpwCPBFofDQO/nmYFBPsBE4UCav6CBkrimKhqxSjHyr3LURDbOCFEj40WPRX
+	WunA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qr3g1aZ/1lhoWPqQ9dNsuZUpuxyrQ85eaWtlb72cYvc=;
-	b=BAaZjzmhss1F46Bma53/7SiP0oBKdeZcEUghCUctWSGzPLBlvj6N2ZGoadHtty/WFu
-	14W7aSmE+uRoOpi+WZcee1infUswBrfxeO3+4leVWbonr85BwLcKQPLxZwK/HNs7XUl5
-	EL8kw6hKI7jmgd/+afm634JXkHZinoy3U2aysm61GYFVSzcQPfZsVnnaCLg3lhf/xe74
-	5tP/TsKeYk9Q6QBLJP60hoMzvKXRClvF1l87cpNLQ8BtDRbxLiq0ZDCCtt91dgMbMHwl
-	fGj6BWB0vtHrTn+iv6Pqof6f8fHqJgY3BRbm3XEhp7YiVdi5KoGU6Cn1ndebX01/SFA2
-	JiLw==
-X-Gm-Message-State: APjAAAWQtiA7mfzpifsbW5B9azVY5MXXEXxXT3wM7DRwmTS7aslcB+vK
-	e0nXELxzpbvqS0a0p2vxTXBmGwdMC4M=
-X-Google-Smtp-Source: APXvYqz3loIh5Xw3R7LyEZiQKOXQyxm38W2viAME83rXtOFgjyvH1U/ad2Vz+ZSMYTVjuMvU4TnnaA==
-X-Received: by 2002:a17:90a:fe02:: with SMTP id
-	ck2mr590181pjb.10.1575917741944; 
-	Mon, 09 Dec 2019 10:55:41 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::afb7])
-	by smtp.gmail.com with ESMTPSA id j14sm279360pgs.57.2019.12.09.10.55.40
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 10:55:41 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 10:55:27 -0800
-Message-Id: <20191209185527.208054-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=KSQcWe7wdL7drTSF54295+hzOuQ9vvhaZ3fFya0jPTo=;
+	b=jakBBpeJHif909aJSIX5ohNhtVyEdh6oI5GsLfzPtUqHDKTVDIpu41/F30nza2c3aT
+	axZ2iYBq3jGuWP7Z1lLm3WAJrzwJ4QhlxMi2R5AuJEKOkcECXuWot+Wgw7E053ckwHUM
+	Tz56Amw/3jgfhq+OANjy+PX8edIZ0BvtJCrVpC5CPm3woceFPW1nnWTTw4fsWzSOr836
+	VfXfSgfB5VKkV1eLKX5mMxWKAA6fhraH/9UCgS03mRwsKu0HgZt/qFOJhaH/4bHFGD6u
+	myhnFrWUN8dTOS+rarSH3FWlvG3pP+wvH0daPNO1+CR9VS0lYnikyubn34/vrJOJ3O8A
+	cOKg==
+X-Gm-Message-State: APjAAAVoWbRbd7JZhyaXLyAqf07cORNfXl+qQQPJ4/MfXqsDejo7YTR0
+	FNtnY+ynu3U65X+6E7hc7XhNjITi4qz82w2BMgM=
+X-Google-Smtp-Source: APXvYqxibat0kOmJL8HsGCNw6IWbsB1E5TT7pu+AQvyQBM57wrXcuzqlYQ0MXsPDv0RfsrQH8EXjpfn89O1eZ+EWhcU=
+X-Received: by 2002:ae9:ef50:: with SMTP id d77mr504598qkg.71.1575919475947;
+	Mon, 09 Dec 2019 11:24:35 -0800 (PST)
 MIME-Version: 1.0
-Cc: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-Subject: [meta-multimedia][PATCH] libdc1394: Update to 2.2.6 release
+References: <20191209144525.21752-1-brgl@bgdev.pl>
+In-Reply-To: <20191209144525.21752-1-brgl@bgdev.pl>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 9 Dec 2019 11:24:07 -0800
+Message-ID: <CAMKF1spX0HCZ-pcth0t80VSHMVvSN2BTyLb1jXg6h4LQG-XGOw@mail.gmail.com>
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] librsync: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,48 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 18:55:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Dec 2019 19:24:36 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Use tarball fetcher and drop autotools-brokensep
+On Mon, Dec 9, 2019 at 6:45 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+>
+> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+>
+> rdiff is a popular tool for calculating binary delta patches. It's
+> provided by the librsync package (unrelated to rsync already available
+> in poky).
+>
+> This recipe adds new packages for librsync and rdiff.
+>
+> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> ---
+>  .../recipes-support/librsync/librsync_2.2.1.bb | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+>
+> diff --git a/meta-oe/recipes-support/librsync/librsync_2.2.1.bb b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+> new file mode 100644
+> index 000000000..9d224767c
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY = "Remote delta-compression library."
+> +AUTHOR = "Martin Pool, Andrew Tridgell, Donovan Baarda, Adam Schubert"
+> +
+> +LICENSE = "LGPLv2.1+"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
+> +
+> +SRC_URI = "git://github.com/librsync/librsync.git"
+> +SRCREV = "5917692418657dc78c9cbde3a8db4c85f25b9c8d"
+> +S = "${WORKDIR}/git"
+> +
+> +DEPENDS = "popt"
+> +
+> +inherit cmake
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> +
+> +PACKAGES =+ "rdiff"
+> +FILES_rdiff = "/usr/bin/rdiff"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../{libdc1394_git.bb => libdc1394_2.2.6.bb}        | 13 ++++---------
- 1 file changed, 4 insertions(+), 9 deletions(-)
- rename meta-multimedia/recipes-multimedia/libdc1394/{libdc1394_git.bb => libdc1394_2.2.6.bb} (75%)
+Please use ${bindir} instead of /usr/bin
 
-diff --git a/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb b/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_2.2.6.bb
-similarity index 75%
-rename from meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb
-rename to meta-multimedia/recipes-multimedia/libdc1394/libdc1394_2.2.6.bb
-index 3b3ac83e25..c9ade4ac99 100755
---- a/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb
-+++ b/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_2.2.6.bb
-@@ -11,16 +11,11 @@ DEPENDS += "libusb1 libraw1394 libsdl \
-             ${@bb.utils.contains('DISTRO_FEATURES', 'opengl x11', 'libglu', '', d)} \
- "
- 
--PV = "2.2.5+gitr${SRCPV}"
--
--SRCREV = "5e78f51936fd09db0c0f742c7d2c0e5bdbbeed56"
--
--SRC_URI = "git://git.code.sf.net/p/libdc1394/code;branch=master;protocol=git \
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://install_examples.patch \
-           "
--
--S = "${WORKDIR}/git/${BPN}"
--
--inherit autotools-brokensep pkgconfig
-+SRC_URI[md5sum] = "9fad67bbff08fe2818d5ec81802ec89f"
-+SRC_URI[sha256sum] = "2b905fc9aa4eec6bdcf6a2ae5f5ba021232739f5be047dec8fe8dd6049c10fed"
-+inherit autotools pkgconfig
- 
- EXTRA_OECONF += "--disable-doxygen-doc --disable-examples"
--- 
-2.24.0
-
+> --
+> 2.23.0
+>
 
