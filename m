@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
-	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 7AF4B7F691
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C68B7FC0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 08:36:25 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id z7so15058757wrl.13
+	Mon,  9 Dec 2019 08:36:26 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id c9so15149640wrw.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 00:36:26 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=lG+HzPiGtPAJi8A9RIWaD1988EHdlwRnRmOLQ1ugYqQ=;
-	b=BoP9r8LXBdV6dWK/x61u+Kjf2GtDas9waX0NbFqC/tem1YT7LteGfS9r6gh1osUoWk
-	f+JeHNpCdNVIvPO4EPyqGyXchr6M79bWo+uHwqqW77bsK3yUTuDCDDIQzbVeV2dGMKLc
-	gxiUEqTekAenZ1xPIZSv9brm64/+zoT2VkH91JMM4XMCG0YfrrJP5K0wMEFvFm/B09za
-	IEHeJpsZmGoJ7YjUrxjHbH93YZYGJFJbcr9iLoXR12qB1+NGMVfEOLnRG2KEnb9TFRIC
-	JyoO39yfAQpTtebYnXK/DiB5InGCyKt9VoYJ9+BrOOToEbqWPXUnKMP0OfdFv/z8ZqO8
-	4Hgw==
+	bh=8aM9O7piSnU5/flB4yZs0J3aB51sQxU/gxA52WqifzE=;
+	b=Hlajlxr8N0qtVqSLWpBETrzlP+9NlNNAmX134FK913qixPkP6OMQ1AsfixCbYLcPUW
+	0mS2jhyXCb7r84FY2twK8Jp3wTSB9slfEv+im3NXbBJZBcmTgOEa3y0G8cLa44X/ZURi
+	DAMw9R6HU8oBPe4/fZRJw3EZLIQLVIwo+y2B8eYeOPYDKq/+gVfROPxETvbmwfoAXHln
+	sZsCcOXt6Mx+CPS52Dqyw7LNIeOs0S4xLS9VJ1sCXyoovmtg11/GoeD9eAT7bnwwqvKB
+	VRhH4N3CtK5J6Z2fOSketnKmru+DOuNwI0qB+vUXlQWpncFLw655bS9DzdzS5OrP+BAC
+	AstQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=lG+HzPiGtPAJi8A9RIWaD1988EHdlwRnRmOLQ1ugYqQ=;
-	b=nwL7A2dsPCc91koIZQKInGdsFISK0GuhoTuIKwoZAZiHDVL31x3NTsZk0JaQZ6ywA/
-	rlq5wQ3MtfuzgH/KBvUzmCHP4a5wCykud92Tt3RmoHSbkuzMRFlU4fzB3jcStvUFp/Hs
-	L4arwooAOdheGNdhyheI2nfcMsQt4G/82tobCsK7xTpH3N4FwYSUKNWpm99GpzMonLcD
-	bV5ll+rZquZc9mpBCtEOgJCitj2CGOF/0nclpSIQhF2V6v6i/FiBmrb94HQeBwyQTf/M
-	N0p2ZrtLz8fZFVZigy9tRW/jgJeRyeO3EbDMnQWtT/jCaKkBOBpRftMFwZaJn/pTGOcP
-	LsFA==
-X-Gm-Message-State: APjAAAXO4fINukxefkrGSrN4WjShoV5JY6EFbt7FicgnRqG5QkXCjMR1
-	U89F88lA1KTl/SP1mgmGAm/nXeIu
-X-Google-Smtp-Source: APXvYqzokdzCT3p++LIUMXsfojoIxjBPo1JRHmOO426zRBJ6gCu5TXTBRqSLUrJjAek00Hun/ETrSQ==
-X-Received: by 2002:a5d:6652:: with SMTP id f18mr739584wrw.246.1575880586065; 
-	Mon, 09 Dec 2019 00:36:26 -0800 (PST)
+	bh=8aM9O7piSnU5/flB4yZs0J3aB51sQxU/gxA52WqifzE=;
+	b=SceTQXMTOA0PX2DV4BiYb0+EXvx4PSc/BOnoQFN7by6Bahvd73YxuiZKQU11rgYD9A
+	0naBu1aHHKX4OmcKrDG8Tum9hHEfe32Ly6Y9ucW2U6PxIOD4E3TVu7oACU6N8DiaVzf1
+	/rmyU02Y1dZ/RXdh3hw8aT+ZYNiFqrLwRgzGg/pO01rD03IsFfYkWzNGS9QkBbuWHC0y
+	A+ZyBlDe3FDNks0rvaP/dPt/hwCO3VGiNqhbYwxAn+ivUPQPxE2J2X0+l7shXPEkzLDm
+	LZ1Tt7twWoDumeGVYcCIlNKwdXgFCRWGBjdZ293azdQexRtvo7jefWYefKOb6PyqINst
+	8VWA==
+X-Gm-Message-State: APjAAAWOYv7c+7IMYTpCpbS91L1NFP3l+E8Tw3SEWrfEnV+K6qFmdRDA
+	s9JCN0B2BpMmPDXct/Ev9XrFf/2s
+X-Google-Smtp-Source: APXvYqz6M6m7SHGEZCa6d1jvi/jgNsQ3x9I4hEaCDMYGFfk/ZXvww6M6Sp+gacPYan4hFSpqUxz/dw==
+X-Received: by 2002:adf:90e1:: with SMTP id i88mr659692wri.95.1575880587014;
+	Mon, 09 Dec 2019 00:36:27 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F05A251D39764436B44384E.dip0.t-ipconnect.de.
 	[2003:f0:7f05:a251:d397:6443:6b44:384e])
 	by smtp.gmail.com with ESMTPSA id
-	e18sm29450149wrw.70.2019.12.09.00.36.25
+	e18sm29450149wrw.70.2019.12.09.00.36.26
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 00:36:25 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:26 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 09:35:56 +0100
-Message-Id: <20191209083612.23922-5-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 09:35:57 +0100
+Message-Id: <20191209083612.23922-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209083612.23922-1-schnitzeltony@gmail.com>
 References: <20191209083612.23922-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH][v3 04/20] gnome-shell-extensions: initial add 3.34.1
+Subject: [PATCH][v3 05/20] accountsservice: initial add 0.6.55
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,50 +62,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 08:36:25 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 08:36:26 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+It is a dependency for upcoming gnome-control-center
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gnome-shell-extensions_3.34.1.bb          | 29 +++++++++++++++++++
+ .../accountsservice/accountsservice_0.6.55.bb | 29 +++++++++++++++++++
  1 file changed, 29 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.1.bb
+ create mode 100644 meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
 
-diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.1.bb
+diff --git a/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb b/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
 new file mode 100644
-index 000000000..8625a7b32
+index 000000000..bf603b3bc
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.1.bb
++++ b/meta-gnome/recipes-support/accountsservice/accountsservice_0.6.55.bb
 @@ -0,0 +1,29 @@
-+SUMMARY = "GNOME Shell Extensions"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4cb3a392cbf81a9e685ec13b88c4c101"
++DESCRIPTION = "D-Bus interfaces for querying and manipulating user account information"
++HOMEPAGE = "https://www.freedesktop.org/wiki/Software/AccountsService/"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 +
-+GNOMEBASEBUILDCLASS = "meson"
-+
-+inherit gnomebase gettext gsettings features_check upstream-version-is-even
-+
-+REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam gobject-introspection-data"
-+
-+SRC_URI[archive.md5sum] = "09e64640bbf0e978171d581e2086a0c6"
-+SRC_URI[archive.sha256sum] = "b0ad51143b1bf40def4a10f8fd0ab0ffb47218304800794e62cadd29d0acc75b"
-+
-+DEPENDS += " \
-+    sassc-native \
++DEPENDS = " \
++    dbus \
++    polkit \
 +"
 +
-+EXTRA_OEMESON += " \
-+    -Dextension_set=all \
-+    -Dclassic_mode=true \
-+"
++inherit meson gobject-introspection gtk-doc features_check systemd
 +
-+RDEPENDS_${PN} += "gnome-shell"
++REQUIRED_DISTRO_FEATURES = "polkit"
++
++SRC_URI = "https://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
++SRC_URI[md5sum] = "6e4c6fbd490260cfe17de2e76f5d803a"
++SRC_URI[sha256sum] = "ff2b2419a7e06bd9cb335ffe391c7409b49a0f0130b890bd54692a3986699c9b"
++
++GTKDOC_MESON_OPTION = "gtk_doc"
++
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG[systemd] = "-Dsystemd=true, -Dsystemd=false, systemd"
++
++SYSTEMD_SERVICE_${PN} = "accounts-daemon.service"
 +
 +FILES_${PN} += " \
-+    ${datadir}/gnome-shell \
-+    ${datadir}/gnome-session \
-+    ${datadir}/xsessions \
++    ${datadir}/dbus-1 \
++    ${datadir}/polkit-1 \
 +"
 -- 
 2.21.0
