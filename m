@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
-	[209.85.221.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 958747FAAA
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+	[209.85.221.48])
+	by mail.openembedded.org (Postfix) with ESMTP id D43D17FAC4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 00:38:55 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id w15so14169450wru.4
+	Mon,  9 Dec 2019 00:38:56 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id c9so14116069wrw.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Dec 2019 16:38:57 -0800 (PST)
+	Sun, 08 Dec 2019 16:38:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=c1RA5pNuF89djl7JRoT9K56j/fmXR+o7Gq+MwiJ5Oys=;
-	b=W3bov0svGPHVmvEtUB/Wg2DOEexU6enoKI9/gwvMuva52/S9WRMUI819seF5aIa/b1
-	3fMgB7DSuIgeeW+xfRndIK1AZxbo8Le5qjMfuJJPk9c64pj6HCSThSd+oLXNb0gX235e
-	z4PKVWVSH0Zp3jHJKODS0LE4y/JxLB0qhnpvPpbKrMNV5EPzuExM3v0IEp/rLhyUbZj/
-	2n4bDu7NcjKe+QHT2ovAPYJpte7hECzxc+VBTdpfh+pNCFV9MTRU+ilvrfdhuc3W2VfZ
-	ecC/MqhAoEd/lsZ0KqDyqcqbxm93jH6Jn/xndYmGv+wMQVo/RKCpNwnNFNm7tanamGuD
-	deGw==
+	bh=0zAqtRfSW+wV+d97qB/8IDqYBLTsbh7YBIAO6gTL6pw=;
+	b=FdZNrQPyl8Xloy+HFjaBZMbIf4iJSnjUtR0pZdNBmY//2U7aOkoSwk+jBTcsuVVlot
+	RAQ7cH3W+XadLDce9WJrRR8EUMu0V1OtQnlbMaHJOqS7NOx49cNI99lCw7MVwLSWJh8J
+	YC2fREtleDWMTWIRBIZO5qDtPoyV/3CzxLwa2ClcP3+6N/C+I/DrzUj+sIA8Me3avpzt
+	wkte5g89GLpfo0d6RFLPvBVru8lSA5OCqr8XbwaQYQBqrjXGyL1dd7zP1Y6LqUpSCGZv
+	zTA+UEALVRr6L0k+mLOEOtS3QnahMLIHW64m3I4GhiFRwnmstNU4VgooV9R4v6vmODqQ
+	lG/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=c1RA5pNuF89djl7JRoT9K56j/fmXR+o7Gq+MwiJ5Oys=;
-	b=qB3hgNqSByduvg/UBFqpibgMxJhAzdi/CDQ5Nf1cVW/toKs7KEqFFlNNZcBDDDqnTe
-	WXCcFpCQG5pqpKCi2BH8fSa6hqCCBMSSK5DLL0dWM2dxyEPm/FD2AqSkF16ThCsVCtQg
-	eJnMM6zvYN7yW7HrhIwVSS7cXYk5OPWGg98w5NAWdmvPNVrvwS9Gwb0/mZX1O0Jqs3M5
-	NouWV1cKfSUwniWnYnP4qiN9eQoAlRQMlfEK/xny5886jt0eECu5FxGycGlaCvBQz1y8
-	sYgD3NgnCyZ5vRxbdXSqTbaAuKFXsuI/VC2Cq6vqS4WglmiN6AylWkrPMMgMHDc1qf7m
-	sdcw==
-X-Gm-Message-State: APjAAAUDz0K9niSRnR/aY/dDHh3pqblUo4uKbP3/K9+jbwaoxtfzOV/z
-	D6qjkeaMUFVok1nJZ7pvARhEcrle
-X-Google-Smtp-Source: APXvYqzjjaidhMFDLTx2CZCu5P8kdMpY97u6s1YYT/ekGPTkObj/h3Goj20pVWf7ZhMDYf9kU/HnLg==
-X-Received: by 2002:adf:f58a:: with SMTP id f10mr28720730wro.105.1575851936189;
-	Sun, 08 Dec 2019 16:38:56 -0800 (PST)
+	bh=0zAqtRfSW+wV+d97qB/8IDqYBLTsbh7YBIAO6gTL6pw=;
+	b=GUhEkPWlmyUqQcK4RCZmjcunCwbOZAGmzoBX9ep/WMVwL1EvabTQA38VA2YjmAlCFc
+	JnxeTyK/wCXzzU0gBgwy9vn/uY27P0RDsh/XOZDfJxy3A7Yy6oScXHojAKhSnC1ZQV2T
+	yOeo8+aqETcSWdZT92Fm7n8sicbrXbHr5qh9PPm/iTPRL9XuIruhwtnINziOhK0ioBJZ
+	HfVfk88jP/LfclT2XAerYQtjA3IyS9r5MAvkEBubEZIqLbfMdY6zXAqvbEU7RlOjI1Wu
+	54w7HRUxsHyeAdkMyL5JgjlFFiLoZ3UmWK6fs4ma24Zn/ongKbgcGkPF/UFS8InesrNm
+	VdBw==
+X-Gm-Message-State: APjAAAX5xnIDB8QQ4dHbr8eeP1Xh1aTxypoSHVl9/xmQlGrWdejrl5Q3
+	ykSYwY9BO+nRiBR/y39KHz7R4VFy
+X-Google-Smtp-Source: APXvYqxhd203ASo4cFNeM1WVKScptST+d3eNqOPR5ZJyd4DcsAlFnqtP0wEW8uAY7FVUPHnT0/bC7A==
+X-Received: by 2002:adf:b648:: with SMTP id i8mr16250876wre.91.1575851937228; 
+	Sun, 08 Dec 2019 16:38:57 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0A9021072C1E15EE839E10.dip0.t-ipconnect.de.
 	[2003:f0:7f0a:9021:72c:1e15:ee83:9e10])
 	by smtp.gmail.com with ESMTPSA id
-	n30sm11403575wmd.3.2019.12.08.16.38.55
+	n30sm11403575wmd.3.2019.12.08.16.38.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 08 Dec 2019 16:38:55 -0800 (PST)
+	Sun, 08 Dec 2019 16:38:56 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 01:38:16 +0100
-Message-Id: <20191209003840.3383-6-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 01:38:17 +0100
+Message-Id: <20191209003840.3383-7-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209003840.3383-1-schnitzeltony@gmail.com>
 References: <20191209003840.3383-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 05/29] gjs: initial add 1.58.3
+Subject: [PATCH 06/29] gdm: re-add 3.34.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,105 +62,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 00:38:55 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 00:38:57 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* it is a dependency for upcoming gnome shell
-* this is the latest stable version currently [1]
-
-[1] http://ftp.gnome.org/pub/gnome/sources/gjs/1.63/gjs-1.63.1.news
+GDM is a mandatory component for all types of gnome sessions. To give users the
+choice to build images with gnome-session using different display-manager
+without changing systemd service configuration, mandatory parts were split
+into gdm-base package.
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../gjs/gjs/0001-Disable-tests-on-host.patch  | 33 +++++++++++++++++
- meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb    | 37 +++++++++++++++++++
- 2 files changed, 70 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gjs/gjs/0001-Disable-tests-on-host.patch
- create mode 100644 meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb
+ .../0001-Ensure-pam-file-installation.patch   | 48 ++++++++++++++++
+ meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb    | 56 +++++++++++++++++++
+ 2 files changed, 104 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file-installation.patch
+ create mode 100644 meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs/0001-Disable-tests-on-host.patch b/meta-gnome/recipes-gnome/gjs/gjs/0001-Disable-tests-on-host.patch
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file-installation.patch b/meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file-installation.patch
 new file mode 100644
-index 000000000..0953214fb
+index 000000000..6362d5ee6
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gjs/gjs/0001-Disable-tests-on-host.patch
-@@ -0,0 +1,33 @@
-+From 95379de2132786f855e8caec1fd5869225774d02 Mon Sep 17 00:00:00 2001
++++ b/meta-gnome/recipes-gnome/gdm/gdm/0001-Ensure-pam-file-installation.patch
+@@ -0,0 +1,48 @@
++From f7bba53adf8a26f900442a05bb98326747c392b4 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-+Date: Sat, 18 May 2019 01:14:07 +0200
-+Subject: [PATCH] Disable tests on host
++Date: Tue, 3 Dec 2019 00:24:27 +0100
++Subject: [PATCH] Ensure pam-file installation
 +MIME-Version: 1.0
 +Content-Type: text/plain; charset=UTF-8
 +Content-Transfer-Encoding: 8bit
++
++All the detection magic does not work for us
 +
 +Upstream-Status: Inappropriate [OE-specific]
 +
 +Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 +---
-+ configure.ac | 4 +---
-+ 1 file changed, 1 insertion(+), 3 deletions(-)
++ data/Makefile.am | 12 +-----------
++ 1 file changed, 1 insertion(+), 11 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index fa4e136..056e96e 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -335,9 +335,7 @@ AS_IF([test "x$with_dbus_tests" != "xno"], [
-+ ])
-+ AM_CONDITIONAL([DBUS_TESTS], [test "x$with_dbus_tests" != "xno"])
++diff --git a/data/Makefile.am b/data/Makefile.am
++index bda9160..dbc3ea3 100644
++--- a/data/Makefile.am
+++++ b/data/Makefile.am
++@@ -296,22 +296,12 @@ endif
++ 		chown root:root $(DESTDIR)$(logdir) || : ; \
++ 	fi
 + 
-+-AC_MSG_CHECKING([for a suitable UTF-8 locale to run the tests in])
-+-TESTS_LOCALE=$($srcdir/build/choose-tests-locale.sh)
-+-AC_MSG_RESULT([$TESTS_LOCALE])
-++TESTS_LOCALE=C
-+ AC_SUBST([TESTS_LOCALE])
++-	system=`uname`; \
++-	if test -f /usr/include/security/pam_appl.h; then \
++-	  if test '!' -d $(DESTDIR)$(PAM_PREFIX)/pam.d; then \
++ 		$(mkinstalldirs) $(DESTDIR)$(PAM_PREFIX)/pam.d; \
++ 		chmod 755 $(DESTDIR)$(PAM_PREFIX)/pam.d; \
++-	   fi; \
++-	   if test $$system = Linux; then \
++ 	     for pamfile in $(pam_files); do \
++ 	       bn=$$(basename $$pamfile .pam); \
++ 	       $(INSTALL_DATA) $(srcdir)/$$pamfile $(DESTDIR)$(PAM_PREFIX)/pam.d/$$bn; \
++-	     done; \
++-	   fi; \
++-	   if test $$system = SunOS; then \
++-		echo "Please add PAM authentication for gdm, gdm-autologin and gdm-welcome in $(PAM_PREFIX)/pam.conf!"; \
++-	   fi; \
++-	fi
+++	     done;
 + 
-+ AC_SUBST([gjsjsdir], [\${datadir}/gjs-1.0])
++ 	if test '!' -d $(DESTDIR)$(xauthdir); then \
++ 		$(mkinstalldirs) $(DESTDIR)$(xauthdir); \
 +-- 
-+2.20.1
++2.21.0
 +
-diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb b/meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb
+diff --git a/meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb b/meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
 new file mode 100644
-index 000000000..ddd5196b2
+index 000000000..a47bf6fcf
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb
-@@ -0,0 +1,37 @@
-+SUMMARY = "Javascript bindings for GNOME"
-+LICENSE = "MIT & LGPLv2+"
-+LIC_FILES_CHKSUM = " \
-+    file://COPYING;md5=beb29cf17fabe736f0639b09ee6e76fa \
-+    file://COPYING.LGPL;md5=3bf50002aefd002f49e7bb854063f7e7 \
++++ b/meta-gnome/recipes-gnome/gdm/gdm_3.34.1.bb
+@@ -0,0 +1,56 @@
++SUMMARY = "GNOME Display Manager"
++LICENSE="GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++DEPENDS = " \
++    dconf-native \
++    gtk+3 \
++    accountsservice \
++    libcanberra \
++    libpam \
 +"
 +
-+GNOMEBASEBUILDCLASS = "autotools"
++REQUIRED_DISTRO_FEATURES = "x11 systemd pam"
 +
-+DEPENDS = "mozjs gtk+3"
++inherit gnomebase gsettings gobject-introspection gettext systemd useradd upstream-version-is-even features_check
 +
-+inherit gnomebase gsettings gobject-introspection vala gettext features_check upstream-version-is-even
-+
-+SRC_URI[archive.md5sum] = "bce6dea9a6583a8b3c6af5854df76aaf"
-+SRC_URI[archive.sha256sum] = "ca9fcd47b95ab0fc445301b2595e51fcea24d6f3cd87c190fe07006146d773ae"
-+SRC_URI += "file://0001-Disable-tests-on-host.patch"
-+
-+# gobject-introspection is mandatory and cannot be configured
-+REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
-+UNKNOWN_CONFIGURE_WHITELIST_append = " --enable-introspection --disable-introspection"
++SRC_URI[archive.md5sum] = "65d1fd4bb85e8b133d1cbffb80ecf62e"
++SRC_URI[archive.sha256sum] = "e85df657aa8d9361af4fb122014d8f123a93bfe45a7662fba2b373d839dbd8d3"
++SRC_URI += "file://0001-Ensure-pam-file-installation.patch"
 +
 +EXTRA_OECONF = " \
-+    --without-dbus-tests \
-+    --disable-installed-tests \
++    --without-plymouth \
++    --with-default-pam-config=openembedded \
++    --with-pam-mod-dir=${base_libdir}/security \
 +"
 +
-+do_configure_prepend() {
-+    # make configure find gobject-introspection test code. Although we set
-+    # --disable-installed-tests gjs builds them
-+    sed -i 's|:$GI_DATADIR|:${STAGING_DIR_NATIVE}$GI_DATADIR|g' ${S}/configure.ac
++do_install_append() {
++    rm -rf ${D}/run ${D}${localstatedir}/run
 +}
 +
-+FILES_${PN} += "${datadir}/gjs-1.0/lsan"
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = "--system --no-create-home --home ${localstatedir}/lib/gdm --user-group gdm"
 +
-+PACKAGES =+ "${PN}-valgrind"
-+FILES_${PN}-valgrind = "${datadir}/gjs-1.0/valgrind"
-+RSEPENDS_${PN}-valgrind += "valgrind"
++SYSTEMD_SERVICE_${PN} = "${BPN}.service"
++
++# Some gnome components - as gnome-panel and gnome-shell (!!) - require gdm
++# components. To allow gnome-images using different display-manager, split them
++# out into a seperate package.
++PACKAGE_BEFORE_PN = "${PN}-base"
++FILES_${PN}-base = " \
++    ${datadir}/glib-2.0 \
++    ${datadir}/gnome-session \
++    ${libdir}/lib*${SOLIBS} \
++    ${libdir}/girepository-1.0 \
++"
++
++CONFFILES_${PN} += "${sysconfdir}/gdm/custom.conf"
++FILES_${PN} += " \
++    ${datadir}/dconf \
++    ${base_libdir}/security/pam_gdm.so \
++    ${localstatedir} \
++    ${systemd_unitdir} \
++"
++
++RDEPENDS_${PN} += "${PN}-base"
++
 -- 
 2.21.0
 
