@@ -1,53 +1,53 @@
 Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 313477F9A4
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 149A57F9A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 14:45:28 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id f129so15247087wmf.2
+	Mon,  9 Dec 2019 14:46:02 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id p17so15227452wmi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 06:45:29 -0800 (PST)
+	Mon, 09 Dec 2019 06:46:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
 	bh=9cj9BctQTxDA1ijnWT3pOlmIPzNXx2BB/t5dMiQioiY=;
-	b=OUmsVMV5wi/fX1vlF6LNNTdmZDW7u10XqXI0pnnTSmDNzRt8cLOTG/jR7Lwlh/JCd6
-	TriQxvqC80FwT9sdkyGnNuhnluGqAkPSw/REE9UsQBMOnmbfFfJQ/xiOnG3o1K+oUJXf
-	pvi5Sb1At/OllC1ua86CLr803VjKj+Y1OubvpSeW1otyubue3raCAKmsWclxK78l04N8
-	z75gAgu6gYfsImO1ZRdDElOXEkFnumZ0BmxyeW54feZXKWEuxcGpEmT2/U1QTmXQ6oGr
-	ItSFVpca3I4f8h8g7T1J5XQUbAl+zdvFtcisJcjNLW9gcLkV7zgoIYrnxIC1YvX0M/xw
-	OcOw==
+	b=BB9hvSFJThfK3Eyyk5D4/hlNCLiEcfroZAXNSTVO4ZXQc2tCp9dsYZ2tM37nKCu9pr
+	FLqoXzJs188bWUxVMyLVe3Zpdl3dWOJmMAqSUSAbi4QrHf+NtXgtnoxfwdGEzvyuZfKv
+	Imiefcoo99r5rtACOEUAGbD18CzGOTgSMBh6KFjLs7h0pHseTyKiyKA4JnIVjqRZo9yT
+	V1lIEKqH8nJ6xk1rY3kL6hepvG2MQGjM/Q4lshKGpHvynnB4kZO6VRZKy5xYgVh8aPTr
+	bXJ+MUDSZZB8O4/QFTx9ZEmojgjJQ/NFUduEqs0HxpgofdyXrogkcLsFsdurKkEfK+SI
+	AhyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
 	bh=9cj9BctQTxDA1ijnWT3pOlmIPzNXx2BB/t5dMiQioiY=;
-	b=CE0A+r5IO0cN8F0aSWqWa7iSLk2bQWl2dZX2JK1sY2H6FFMweiqupGiZe3R7FI69eQ
-	VYxnzdGsvIfuf8x7OB73N4sXWxU1CAPaKEGLF5IzMGpehdAmj8vtQnN6akVjVRjX9Ty/
-	ooWjnw4mzf0WhaKxCH2YL72oKP3qkauhoEIiqBJDyyquyEBNN2DmtMNJwGX6Fwaz2I+z
-	NIVjqgKuuufLrYlDW4NiMi2R1N9McDmgYHKkVdCWLOfFTO1HyOU04dq3ls86HJdaXNlR
-	7UqTbQHM53/tNxH047K31Wg8heDAecCPBwTRk9uKSCT/8wjGSmR5BzITRMrCRL8/Pglg
-	M2VQ==
-X-Gm-Message-State: APjAAAU0StlYt7N+X01DadVtEN+ZvJgq50hYbGI8uWb7aljLMGjLDrid
-	dTsYpGhdHsu2GMaL48TUZkUnEw==
-X-Google-Smtp-Source: APXvYqz/ORlOxxPuqGadv0NeT71Fp9kZ0IAMV0lXcr3A/rVfVLhFOfOOkEQ2yKcL+cCR9eiSJJyFmg==
-X-Received: by 2002:a7b:c8c5:: with SMTP id f5mr23613990wml.155.1575902728923; 
-	Mon, 09 Dec 2019 06:45:28 -0800 (PST)
+	b=Ap8CRF0W6ceP2Hzs0eYdNF+9wU/0lOVs27+ZcopR8vJR8ebISRGsaMxRKABZUebYMf
+	92UmOOGXrGJnfExjgg8f7i4WXpQIMDm1NJcWW5xQNhmWkVZMKJ+zeGicBCATgYAe+65C
+	RqKt3LiLAC0H0m4baJU9Gdn4jwBvT590wia+VCu5K3q7DiXrkAfWqBwugxtUGC3zzBgV
+	CJZbwhYooRHytHHnxMd/ClFpM7DztqR7LNXjbkljqcd6nXxN0ZCPeiv6YVqey0vaiFDC
+	BcRoKdNcak3vvmy4fM3gNYYHXR2ij69cj42sF0RBDTryFy4G81KmtRBkHjh+RmyL3Ubp
+	hW/A==
+X-Gm-Message-State: APjAAAXfYBH5qHfn9gEvfHrPr/2XPQgLg7GyZEqjSGsxQJbRyOn/8lg1
+	648HElwQb9UNkCnitZOhTqhoMw==
+X-Google-Smtp-Source: APXvYqz0652xuljCkK+gVzNyGbqo0ZmprFwUmqjI6ymX0XQ7OHhYn6glFpiCsmWESUX/Pprdrn9IHg==
+X-Received: by 2002:a1c:41c4:: with SMTP id o187mr3955910wma.24.1575902763680; 
+	Mon, 09 Dec 2019 06:46:03 -0800 (PST)
 Received: from localhost.localdomain (lfbn-1-7161-157.w90-116.abo.wanadoo.fr.
-	[90.116.92.157])
-	by smtp.gmail.com with ESMTPSA id t81sm2082wmg.6.2019.12.09.06.45.27
+	[90.116.92.157]) by smtp.gmail.com with ESMTPSA id
+	y6sm26633782wrl.17.2019.12.09.06.46.02
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 06:45:28 -0800 (PST)
+	Mon, 09 Dec 2019 06:46:03 -0800 (PST)
 From: Bartosz Golaszewski <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>,
 	openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 15:45:25 +0100
-Message-Id: <20191209144525.21752-1-brgl@bgdev.pl>
+Date: Mon,  9 Dec 2019 15:46:01 +0100
+Message-Id: <20191209144601.21938-1-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
 Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH] librsync: new package
+Subject: [meta-oe][PATCH] librsync: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,7 +60,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 14:45:28 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 14:46:03 -0000
 Content-Transfer-Encoding: 8bit
 
 From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
