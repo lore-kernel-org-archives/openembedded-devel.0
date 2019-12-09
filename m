@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 925977FC38
+	by mail.openembedded.org (Postfix) with ESMTP id 8F2207FC38
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 21:34:58 +0000 (UTC)
+	Mon,  9 Dec 2019 21:38:16 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47WxL96gyyz3H
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47WxQ13zGlz3H
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 22:34:57 +0100 (CET)
+	Mon,  9 Dec 2019 22:38:17 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1575927298;
-	bh=y8BvOuf8B+XNgrH0S5P593H0Zn5c0/j5gh6WdS3tLHM=;
+	s=default; t=1575927497;
+	bh=MIB0opSz0XFS0h3EQ9SMYRnveoXcxYdEnb7BipAP0XY=;
 	h=From:To:Subject:Date:From;
-	b=PLF2TO3LAj7quDIOTOAOMg0oh6ocJ4PJd4Je3+9+EDuMvjWm19MKisjFWgwGnm68x
-	cJ2ExNJFgBsVd/LqQ/MpOF4kiZ9qX1RJzV+jB6VKAKTwCtHaGwEp/KZR3VCwHJODq9
-	ZIfYLipSXVjCNOUv3/XaPu21TJ2LzbxgGGcyVshY9Agw95puZX0ZRvdMPIT/GX8Z5+
-	AeDRSVHQsrvfakQe8j9v+njUFmRpPVW1jMUeWC/86c2PdATrjJg/YEta5Bz2QciPMM
-	pbvRCjgdJvqk/DGqKajOzsBwOXk0jyfEeylTMp36aRpPmNz/UT/b2uI+FCjUsGED2V
-	/73IF1V/JshEQwgG42TOLoKGAIgmIl01BF8+pfwkpL3POXbiH4+LxazA7hFKTWvTNw
-	519R1/ukql7ljiAUQEQx4cOCzWWvGse5UPoYabDf4SQk2YcJNvRjWHX66MaAZOK1vJ
-	pUYVJgDPY38z92hW/6sN01H8O8TsZuGfhwEfyrhodJlUOowd0ifIzjDj/5AM2VDZX1
-	iIABW/GH0CyOXf0AiaMq3ozkKZSmcJZkTOaN1/NHbJ4NVeOPGogb3dETU58SaZkeCs
-	O55PugEroR1wVBB675ZecqpVo9OTm2nmxX+KaXyRSpZZV39pGqPj3CfGkXioLE44+p
-	WJ6f2vGuzMxj6g4qPonIAEIw=
+	b=b6zYVZn7p/+aXZUuWKVeZcnqINXbbrdKfhkEgngXPUFrV/YrcYLRcy/tvo+aJbifd
+	Z2IGBiFp/oOyykMojckx7DGI3+r+rw7DgxwIUgzby8ffb9GPyIR3E9eHFX+UdJyGKi
+	xhxW5gF+mMHLLypnsvfsz6Z9vThXfR7u0ZKgoAkGbIKtCqjfPl5zxmgnEbXqvjrECv
+	M2jtuuorHsT684lslKOimYWNszL0e3vkapUiIOStIEPYUeqa4SRx9iR7pZ/ny7ynDS
+	eewknWeHnAv0kOld+mcWoDv1QDqU8/ZlUhTXTBGLWMtH6NPetVNQv9u8TwJMBpboRc
+	yvZBu1VMewcKEmG3UsuxSZbMB5PvJqREGmR2XCtdzpUo6puV/FsPoPt3Ge22Ek7Cco
+	SesdnTq2JNY8YqqaKYgg4twi28guY/0V04kYP07b5Z49Z2X+FUbqdT7MzLbYabPoHD
+	02rePI4R6q21gUJMAZ85e5PJOhQgEXVrISwdMviTHUqk/dfRPmVrYhJJ6JjO7nNAlq
+	TZJ8WrFwt0VYOFg1RErgZ239UIEPzvpKDV4/3DweCJlvQKtXvgFS5zyJMBfzQnpske
+	bJRzU+VPUQnvpIOUKOliD8x1OdaI58yndp5Yve61ANqbHnK4+BNfWCF/6QafD166Hc
+	gDdjnaqdsqMC01wlq/Xw2S/Y=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 23:34:56 +0200
-Message-Id: <20191209213456.9593-1-bunk@stusta.de>
+Date: Mon,  9 Dec 2019 23:38:16 +0200
+Message-Id: <20191209213816.15612-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][zeus][PATCH v2] gpsd: Backport a memory leak fix
+Subject: [meta-python][zeus][PATCH v2] python-more-itertools: downgrade 7.2.0 -> 5.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,71 +40,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 21:34:58 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 21:38:17 -0000
 
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+
+Python 2.7 is no longer supported. The 5.0.0 release will be the last
+version targeting Python 2.7. [1]
+
+[1] https://github.com/erikrose/more-itertools/commit/560b045b430e8292c18cf5283de4fdc3e13e56f7
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../0001-gps_shm_close-Free-privdata.patch    | 37 +++++++++++++++++++
- meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb  |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+ .../recipes-devtools/python/python-more-itertools.inc      | 3 ---
+ .../recipes-devtools/python/python-more-itertools_5.0.0.bb | 7 +++++++
+ .../recipes-devtools/python/python-more-itertools_7.2.0.bb | 2 --
+ .../python/python3-more-itertools_7.2.0.bb                 | 3 +++
+ 4 files changed, 10 insertions(+), 5 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+diff --git a/meta-python/recipes-devtools/python/python-more-itertools.inc b/meta-python/recipes-devtools/python/python-more-itertools.inc
+index 8d814a6f0..33095b3d3 100644
+--- a/meta-python/recipes-devtools/python/python-more-itertools.inc
++++ b/meta-python/recipes-devtools/python/python-more-itertools.inc
+@@ -2,6 +2,3 @@ DESCRIPTION = "More routines for operating on iterables, beyond itertools"
+ HOMEPAGE = "https://github.com/erikrose/more-itertools"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=3396ea30f9d21389d7857719816f83b5"
+-
+-SRC_URI[md5sum] = "f647bfd27243a7bebe53b5ddb6a3b1c4"
+-SRC_URI[sha256sum] = "409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f832"
+diff --git a/meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb b/meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
 new file mode 100644
-index 000000000..9b3801580
+index 000000000..6c44df40a
 --- /dev/null
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
-@@ -0,0 +1,37 @@
-+From 2a4b3bcde0d73a3a4a6644d5f944ac9d16023ba9 Mon Sep 17 00:00:00 2001
-+From: Adrian Bunk <bunk@stusta.de>
-+Date: Mon, 21 Oct 2019 13:53:25 +0300
-+Subject: gps_shm_close: Free privdata
++++ b/meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
+@@ -0,0 +1,7 @@
++inherit pypi setuptools
++require python-more-itertools.inc
 +
-+Previously every open/close cycle leaked privdata.
++SRC_URI[md5sum] = "f2ea58aa336ce6c13b7b225b3bbe305d"
++SRC_URI[sha256sum] = "38a936c0a6d98a38bcc2d03fdaaedaba9f412879461dd2ceff8d37564d6522e4"
 +
-+Signed-off-by: Adrian Bunk <bunk@stusta.de>
-+Signed-off-by: Gary E. Miller <gem@rellim.com>
++PE = "1"
+diff --git a/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb b/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
+deleted file mode 100644
+index 0702aad4e..000000000
+--- a/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit pypi setuptools
+-require python-more-itertools.inc
+diff --git a/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb b/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
+index 28ddf88fb..06d45ce54 100644
+--- a/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
++++ b/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
+@@ -1,2 +1,5 @@
+ inherit pypi setuptools3
+ require python-more-itertools.inc
 +
-+Upstream-Status: Backport
-+---
-+ libgps_shm.c | 8 ++++++--
-+ 1 file changed, 6 insertions(+), 2 deletions(-)
-+
-+diff --git a/libgps_shm.c b/libgps_shm.c
-+index d93972bba..12bb3760b 100644
-+--- a/libgps_shm.c
-++++ b/libgps_shm.c
-+@@ -163,8 +163,12 @@ int gps_shm_read(struct gps_data_t *gpsdata)
-+ 
-+ void gps_shm_close(struct gps_data_t *gpsdata)
-+ {
-+-    if (PRIVATE(gpsdata) && PRIVATE(gpsdata)->shmseg != NULL)
-+-	(void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
-++    if (PRIVATE(gpsdata)) {
-++        if (PRIVATE(gpsdata)->shmseg != NULL)
-++	    (void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
-++        free(PRIVATE(gpsdata));
-++        gpsdata->privdata = NULL;
-++    }
-+ }
-+ 
-+ int gps_shm_mainloop(struct gps_data_t *gpsdata, int timeout,
-+-- 
-+2.20.1
-+
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-index a28d59dce..054af4082 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-@@ -9,6 +9,7 @@ EXTRANATIVEPATH += "chrpath-native"
- 
- SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
-+    file://0001-gps_shm_close-Free-privdata.patch \
- "
- SRC_URI[md5sum] = "b3bf88706794eb8e5f2c2543bf7ba87b"
- SRC_URI[sha256sum] = "27dd24d45b2ac69baab7933da2bf6ae5fb0be90130f67e753c110a3477155f39"
++SRC_URI[md5sum] = "f647bfd27243a7bebe53b5ddb6a3b1c4"
++SRC_URI[sha256sum] = "409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f832"
 -- 
 2.17.1
 
