@@ -1,33 +1,57 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F2207FC38
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+	[209.85.214.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 148697FC38
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 21:38:16 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47WxQ13zGlz3H
+	Mon,  9 Dec 2019 21:40:48 +0000 (UTC)
+Received: by mail-pl1-f178.google.com with SMTP id x13so6332067plr.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 22:38:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1575927497;
-	bh=MIB0opSz0XFS0h3EQ9SMYRnveoXcxYdEnb7BipAP0XY=;
-	h=From:To:Subject:Date:From;
-	b=b6zYVZn7p/+aXZUuWKVeZcnqINXbbrdKfhkEgngXPUFrV/YrcYLRcy/tvo+aJbifd
-	Z2IGBiFp/oOyykMojckx7DGI3+r+rw7DgxwIUgzby8ffb9GPyIR3E9eHFX+UdJyGKi
-	xhxW5gF+mMHLLypnsvfsz6Z9vThXfR7u0ZKgoAkGbIKtCqjfPl5zxmgnEbXqvjrECv
-	M2jtuuorHsT684lslKOimYWNszL0e3vkapUiIOStIEPYUeqa4SRx9iR7pZ/ny7ynDS
-	eewknWeHnAv0kOld+mcWoDv1QDqU8/ZlUhTXTBGLWMtH6NPetVNQv9u8TwJMBpboRc
-	yvZBu1VMewcKEmG3UsuxSZbMB5PvJqREGmR2XCtdzpUo6puV/FsPoPt3Ge22Ek7Cco
-	SesdnTq2JNY8YqqaKYgg4twi28guY/0V04kYP07b5Z49Z2X+FUbqdT7MzLbYabPoHD
-	02rePI4R6q21gUJMAZ85e5PJOhQgEXVrISwdMviTHUqk/dfRPmVrYhJJ6JjO7nNAlq
-	TZJ8WrFwt0VYOFg1RErgZ239UIEPzvpKDV4/3DweCJlvQKtXvgFS5zyJMBfzQnpske
-	bJRzU+VPUQnvpIOUKOliD8x1OdaI58yndp5Yve61ANqbHnK4+BNfWCF/6QafD166Hc
-	gDdjnaqdsqMC01wlq/Xw2S/Y=
-From: Adrian Bunk <bunk@stusta.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 23:38:16 +0200
-Message-Id: <20191209213816.15612-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][zeus][PATCH v2] python-more-itertools: downgrade 7.2.0 -> 5.0.0
+	Mon, 09 Dec 2019 13:40:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:organization:user-agent:mime-version:content-transfer-encoding;
+	bh=OTPMhp1BdUCYJFZjOC1woZSpUz+OrWJFYbjy5HTy6pI=;
+	b=Q9XDxwzXGBQ//tIxbv/HeOt65BGAvVw+XoPTDA2qDg7zGu1dv0U8BagMEfDM2QL11M
+	xi/kG3qYHN1+jh9gQnITbU8tUZM/6IKzlmOcFqUBRIfK71fj3o89z4CmfUQSEb3MB7Kj
+	mzVo0nMXc03cs2GIZEM+QFAEWN5bFIhWIHCUjCmuaGnSiUqs9z0pibU8HQIGgG/Uk1WL
+	VMvTQJZQyejPXVcQy+mIStjPRmkgAvhp+v2OsOIr5/2bibi5EFT7fw2esZu8yNcEaaRV
+	Jv7Gk1uzRcAbKSC6AjuTvJLLtjy+xNIccUPj/eEoQM7jwKxi27+CB+fvY4Mx8JoT8qIQ
+	EFBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:organization:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=OTPMhp1BdUCYJFZjOC1woZSpUz+OrWJFYbjy5HTy6pI=;
+	b=uIxjlV3cNA5SeuWCsVkrNwyS2Gq2rx8swFK38P8BNXBxj6lwKPFnPDoHevDoWegFoO
+	nxDMpBjvRAuRn5QZ2IZh7cnHDaSEjgf0x43P9rV/NJiePsDXkzPLQOerWsBbD8qyp1V9
+	RPGKfQBPWAHJM8vdRghl+4tbWtdOIJQq5FCoihnc5RSDy4teAB772aaceRKqZoePT7nQ
+	UrIU3/Udrf4FqyyVche/oFM+Q05RojeTEUtRlTBpSOK7VN5260HN2xA1we9QlMPkw6lW
+	1bbpmi8HTz4pai3MOAZWMohJDkD8O8YmbxKrsHOldYPpmDfVjBcPh2mIqCpnxnrSCXp9
+	x5IQ==
+X-Gm-Message-State: APjAAAVuWoopwf0bk1X5ynYadITus/oxwCYbi1gT8P7wRm76mpjwUqwS
+	+GFSXXjX24xXE5I4O6NtBxI=
+X-Google-Smtp-Source: APXvYqzUdObcZDNsIJIJrOk7CtWjwjl8Y8ftq0hVWrp1trxKgLhPHGk0V0dHL4++ktddMXkHhU5/Dw==
+X-Received: by 2002:a17:90a:f84:: with SMTP id 4mr1387610pjz.74.1575927649831; 
+	Mon, 09 Dec 2019 13:40:49 -0800 (PST)
+Received: from apollo ([2601:646:9200:4e0::afb7])
+	by smtp.gmail.com with ESMTPSA id d13sm295867pjx.21.2019.12.09.13.40.48
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 09 Dec 2019 13:40:49 -0800 (PST)
+Message-ID: <25ba6b79a3667c119d8aee93a2796d08534158b6.camel@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@gmail.com>, Kang Kai
+	<kai.kang@windriver.com>
+Date: Mon, 09 Dec 2019 13:40:47 -0800
+In-Reply-To: <CALbNGRS=Nzkq9V9xxHt8HxPzGKwc9oAOYnhOY6WtEojtN+YsPg@mail.gmail.com>
+References: <20191118014035.15189-1-kai.kang@windriver.com>
+	<CALbNGRT=hGkyD+ht3DfhAKooTo-g9w6v23cyyVJm=HX8XA1zxA@mail.gmail.com>
+	<CALbNGRS=Nzkq9V9xxHt8HxPzGKwc9oAOYnhOY6WtEojtN+YsPg@mail.gmail.com>
+Organization: HIMVIS LLC
+User-Agent: Evolution 3.34.2 
+MIME-Version: 1.0
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][Patch] thunar: 1.8.9 -> 1.8.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,70 +64,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 21:38:17 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 21:40:49 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-From: Hongxu Jia <hongxu.jia@windriver.com>
+On Mon, 2019-12-09 at 09:40 +0100, Andreas Müller wrote:
+> On Tue, Nov 19, 2019 at 8:55 AM Andreas Müller <
+> schnitzeltony@gmail.com> wrote:
+> > On Mon, Nov 18, 2019 at 2:40 AM <kai.kang@windriver.com> wrote:
+> > > From: Kai Kang <kai.kang@windriver.com>
+> > > 
+> > > The tarball name uses all lower case now, so SRC_URI and S are
+> > > not
+> > > needded to be set in the recipe which have been configured in
+> > > xfce.bbclass already.
+> > > 
+> > > Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> > This one seems to have missed patchwork. Nevertheless
+> > 
+> > Acked-by: Andreas Müller <schnitzeltony@gmail.com>
+> Does this need a resend?
+> 
 
-Python 2.7 is no longer supported. The 5.0.0 release will be the last
-version targeting Python 2.7. [1]
+no, I have staged it. Patchwork missed it and so did I.
 
-[1] https://github.com/erikrose/more-itertools/commit/560b045b430e8292c18cf5283de4fdc3e13e56f7
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
----
- .../recipes-devtools/python/python-more-itertools.inc      | 3 ---
- .../recipes-devtools/python/python-more-itertools_5.0.0.bb | 7 +++++++
- .../recipes-devtools/python/python-more-itertools_7.2.0.bb | 2 --
- .../python/python3-more-itertools_7.2.0.bb                 | 3 +++
- 4 files changed, 10 insertions(+), 5 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
- delete mode 100644 meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
-
-diff --git a/meta-python/recipes-devtools/python/python-more-itertools.inc b/meta-python/recipes-devtools/python/python-more-itertools.inc
-index 8d814a6f0..33095b3d3 100644
---- a/meta-python/recipes-devtools/python/python-more-itertools.inc
-+++ b/meta-python/recipes-devtools/python/python-more-itertools.inc
-@@ -2,6 +2,3 @@ DESCRIPTION = "More routines for operating on iterables, beyond itertools"
- HOMEPAGE = "https://github.com/erikrose/more-itertools"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3396ea30f9d21389d7857719816f83b5"
--
--SRC_URI[md5sum] = "f647bfd27243a7bebe53b5ddb6a3b1c4"
--SRC_URI[sha256sum] = "409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f832"
-diff --git a/meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb b/meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
-new file mode 100644
-index 000000000..6c44df40a
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
-@@ -0,0 +1,7 @@
-+inherit pypi setuptools
-+require python-more-itertools.inc
-+
-+SRC_URI[md5sum] = "f2ea58aa336ce6c13b7b225b3bbe305d"
-+SRC_URI[sha256sum] = "38a936c0a6d98a38bcc2d03fdaaedaba9f412879461dd2ceff8d37564d6522e4"
-+
-+PE = "1"
-diff --git a/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb b/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
-deleted file mode 100644
-index 0702aad4e..000000000
---- a/meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
-+++ /dev/null
-@@ -1,2 +0,0 @@
--inherit pypi setuptools
--require python-more-itertools.inc
-diff --git a/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb b/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
-index 28ddf88fb..06d45ce54 100644
---- a/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
-@@ -1,2 +1,5 @@
- inherit pypi setuptools3
- require python-more-itertools.inc
-+
-+SRC_URI[md5sum] = "f647bfd27243a7bebe53b5ddb6a3b1c4"
-+SRC_URI[sha256sum] = "409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f832"
--- 
-2.17.1
+> Andreas
 
 
