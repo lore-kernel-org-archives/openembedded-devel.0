@@ -1,56 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
-	[209.85.128.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 791FC7FC37
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+	[209.85.221.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 547DC7FC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 08:36:38 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id b11so14446012wmj.4
+	Mon,  9 Dec 2019 08:36:39 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id z7so15059508wrl.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 00:36:39 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=a3sD9MLyrQgCFNPnxiX0hWItEF/Xaexw0jZb3NPedcw=;
-	b=GUj87R2Aj5l0CsDArmDRR/Vqi9oiiNP061slUv97kPkD2uBFb7plhn/Bk1NS3VtlZG
-	tPTUog1Vmvne3YWovoJbzlglsBDcxekB2RM68j8R8Ugghm1cLO130nzxXqS6WUKU84fH
-	lKhTjvvE52RTS3upJMB56KKU1d/ECg10drI9bv7Z7r43PFg1KSpX2c1cAy2VBAVob0zi
-	Xw6htmPb6IhfnidEflMA6Eazz8f52ex/muZXI6/CnK3FPucLo8dny/EFLXstBVjnx42k
-	ElSiwSP/ip6914vT25y0idWUBLZoyHeEpUmZLF4UM5i7A0BXjSbrHPJxgf2TrwgaGnuM
-	7TTA==
+	bh=WuWascXObrxwxONnQc4ULQBtC2B+rEXMTYYx1XBtEys=;
+	b=YMYkzeRTqACUduKdcKxog4Uz+mBBDTaF3Hq+WTRIoEEazws9YyFvumsJ5XFTLVj1Fo
+	35nuT4eH9pvWjA344q8UBIOYSIzc1viB/EBZ230jbRkp5eiRpX6UjvtDylmazL4keeiD
+	UrRix2FHtIBQbSklz7F3In+7xVVoG508R8Nk2ij8/W+llpwg6oNsu+2JdUey7nH66YRt
+	xBi3TFoW/W3vZwxW23E+hNot1HIbhG1EbhMx+OMCKfyAD57ZCRi+MB2N8iJMzPOmX0pi
+	aIqqRAAEfohmXJ1/84G0Fp3SBj9UMQs7pzxnNS9FkuhIrMud+dP1DcTil0dx3kVmVpvy
+	NxWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=a3sD9MLyrQgCFNPnxiX0hWItEF/Xaexw0jZb3NPedcw=;
-	b=a6VF2yIEmUb8M3FRSMnMSNYriv+kJmkda52lxvrtayxDC8DYwx0Pv2Gl2yteLoFXGq
-	EyKdYp2Wy1n21uPiaKzR6k+G3euYe8PaVyTW4tB7QYkbciPV8dp9P7GmBfAkAkRGpf3p
-	tyksWjglE0bLIrf53VxhX99k6U3/Dlsdr+QyPFjBdy+lfMmKvptWPJeAn0tQexDAikk3
-	N5NKKkW3/cYquB9QoGGnuf8CTqzCzJs+oCq1kSSGTrp8B9Q1cipmTTS+VVcT1qr6nwCa
-	ELiIYFuBAnbKIap0wl+R4QPBm2Hw1TE4lEBeIxlBJ/04CmTiYV6CbyQGPA8XgRAZs8i2
-	UaNg==
-X-Gm-Message-State: APjAAAVzLCDZgMsssXdV8HtzMaHmSnRgYKttwt5skwcQyUSzlJZY4Ufz
-	WOlra2m5DB1r6G7v6rSIhpXxpohX
-X-Google-Smtp-Source: APXvYqwILZSEfoSHL2s+uM/2Kbtjs6eHMmoi/XkxZCbMfN4LbLONAYLx0QEbHZEKAgZ4rs0kiGoQNw==
-X-Received: by 2002:a1c:ba89:: with SMTP id
-	k131mr23735990wmf.108.1575880599062; 
+	bh=WuWascXObrxwxONnQc4ULQBtC2B+rEXMTYYx1XBtEys=;
+	b=hHQAd+Kfa3nrD9zunI0PAYvus5bIYiJKCDrYNGSvf3a7FCC/5vT6fAMLP8s2/xLO9Q
+	MT1sX/xAKYnxoi9ots7HGEaV1u632dVyNISVocZIIcf8qhj4WvUYKxtXsL1acGHubg72
+	yzMVtq9Bgvj1kX9pKZbNxm8T712NfgCxCz+N9DedM/kFAHRsMa+ePc2F+1ep7fIAAyt7
+	ifAEv2pl7W+IKB3M/P5C+iWEfDJcOdElXpQu97hIxBqbhB3AgmlZ77hv0cges9tTtSX+
+	J4W0c82aGXQR/dAN+6NJLw1iY7ekkMWwYlwCUdjGtnSNGvL5neQyRGF7IAF6E167/FS5
+	iofw==
+X-Gm-Message-State: APjAAAVpa+PNWkUh9UaUjIWPeSar8UEnaHGRSWsp9qln1fMpjvDYr873
+	E3aV42V9OFdVpCpEwy6esqsUeh1H
+X-Google-Smtp-Source: APXvYqzH7QdvG6gG15b3kQWdoOVViye9xchAvPcPVdN5TfRqHS+OsZtfRy8sIUexNDEIlUNaTen4Fg==
+X-Received: by 2002:adf:dc4b:: with SMTP id m11mr701370wrj.344.1575880599896; 
 	Mon, 09 Dec 2019 00:36:39 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F05A251D39764436B44384E.dip0.t-ipconnect.de.
 	[2003:f0:7f05:a251:d397:6443:6b44:384e])
 	by smtp.gmail.com with ESMTPSA id
-	e18sm29450149wrw.70.2019.12.09.00.36.38
+	e18sm29450149wrw.70.2019.12.09.00.36.39
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 00:36:38 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:39 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 09:36:08 +0100
-Message-Id: <20191209083612.23922-17-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 09:36:09 +0100
+Message-Id: <20191209083612.23922-18-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209083612.23922-1-schnitzeltony@gmail.com>
 References: <20191209083612.23922-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH][v3 16/20] colord-gtk: add polkit to required distro features
+Subject: [PATCH][v3 17/20] yelp: add x11 to required distro features
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,22 +68,25 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb b/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb
-index 8f6cd0431..7845509ba 100644
---- a/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb
-+++ b/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb
-@@ -18,4 +18,8 @@ EXTRA_OEMESON = "-Dman=false"
+diff --git a/meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb b/meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb
+index f6311965e..348727e44 100644
+--- a/meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb
++++ b/meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb
+@@ -4,7 +4,10 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING;md5=6e1b9cb787e76d7e6946887a65caa754 \
+ "
  
- # gobject-introspection is mandatory and cannot be configured
- REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+-inherit gnomebase itstool autotools-brokensep gsettings gettext gtk-doc
++inherit gnomebase itstool autotools-brokensep gsettings gettext gtk-doc features_check
 +
-+# colord
-+REQUIRED_DISTRO_FEATURES += "polkit"
-+
- UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
++# for webkitgtk
++REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ SRC_URI[archive.md5sum] = "776e29bd16424c8712cbf340cfe6429b"
+ SRC_URI[archive.sha256sum] = "e3d6527c5963d73206891b32f1f23363164be57de248555513bd0be77a7bd045"
 -- 
 2.21.0
 
