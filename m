@@ -1,56 +1,56 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
-	[209.85.128.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BDE67E6EF
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 5646F7FAB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 00:39:04 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id p9so13597154wmg.0
+	Mon,  9 Dec 2019 00:39:06 +0000 (UTC)
+Received: by mail-wm1-f51.google.com with SMTP id f4so14188339wmj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Dec 2019 16:39:06 -0800 (PST)
+	Sun, 08 Dec 2019 16:39:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=RRppTIk91pPG0b/VdfZSMY59rk2qmKdPT8s0HJBaj94=;
-	b=mhsyStVLGZG1rTo4M4c9PubM/J2Q8CHL49bFc/ZJyC3M9QJhP3XNffxCrrxsrPSQ+F
-	UKJLqKn20LQaqBmWkdsuIhsa6k21FAQTX3cRI+scdMMYoHSPeaNN24ClC7bVc9ixi+N3
-	Sxp15+RpjBedGFwAyhOFvholiLa3x2dI9U2fGxBzOVIACL4uvGflygcYkPMQUfmLJQ7L
-	1Hwj3qfJh6BcV79FbJtOPv5z1lQZL2yrbiFmWGhppjpL4Eoi7v06ORM3GEyi10uOxVua
-	b+L/bHg5QyZuMKzfV/ssNmGxwUw73+m5E9/kd0NW4k1N6+98EUDHwI88QUKbF659SyVt
-	cpsg==
+	bh=ZqcJvf+L6HbaWzjg614Ofib+hZ33Wu018rM6jdSHNzs=;
+	b=YsRAUCVkkOEwDfIdVoS6pXflzxqYbVDlBPJEOjBz8/g6qWGujPscsUtdp5C2fgmxJA
+	hcdjd/KUfEV9bxkeO0Ap5/ieWofU4BB/CKgHfY+svmZ0WSSYfAiOPAVsjyAO5ILymwaZ
+	N4rpM8RyFqv8qY+98pKX879zhZmjTYCefn6GA13nDHU00m2fy5pU6Ak2zaKhozxQEfU8
+	E+wP6SLoOv69PZvUkOHtoxQc0xUxllNRmsz5/bsRwSrJHx4w/8FXwLa9nAqQ3y8G7Kyi
+	PuaRYgyABrFH3pnuAf+zL0cCB0vKFhnL8FXCwHAiXmLLBRMB5j1uoma5hTIuaJunOQpY
+	0/1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=RRppTIk91pPG0b/VdfZSMY59rk2qmKdPT8s0HJBaj94=;
-	b=eCqDuH1zeDgH9w3TDcaQa8VmunHRcwvh9BQ3ewG53oeF8aUlKeRDPPnCLsF15dNC9W
-	k/0ZjkXBFmr/k16QYHQmf6YEvnV5lyt+W61lfH652519BsQMMwo+kYPM/Pdcxbae0HhG
-	LxFM1ORvTD4kvbJgg/vXlgKmsNmKSy1EEVkheUEWT5/zWz+AvvFp9l2UMu9CBWhUu6gs
-	yyB4pgRWuS/kZYUy2okZTdcDkBoQVcEpLfnE/UcI+bH/cb7zrO4owiovJHZpK2cz64q2
-	j512TZyLzxOKDSJkIM8LUB+2OEi3RE3qO1BjJGhbAPILM5TtywPnm6v7dEQmlqf26vgq
-	cVMg==
-X-Gm-Message-State: APjAAAX83JNjrj7vgNQp/tLel69E6JFWVsaeH/jjcG7j8lvaniATVjAM
-	N1zjjVyGeZNmUQkxpbhZ7KvZBao+
-X-Google-Smtp-Source: APXvYqwbqXBIZjShLfXBhB+QZ8kSVG4o4g4zarAxGP1+hacEvupfQlkIzZXJmasBS+lPPE3VmIt0dg==
-X-Received: by 2002:a05:600c:204c:: with SMTP id
-	p12mr21759834wmg.61.1575851945505; 
-	Sun, 08 Dec 2019 16:39:05 -0800 (PST)
+	bh=ZqcJvf+L6HbaWzjg614Ofib+hZ33Wu018rM6jdSHNzs=;
+	b=MvV89ZXrcmCRVhTK03OHEJHV4hyAOoJyslS/Rfr8uWL0PRAnm05RNQkggBEcgN/OHK
+	G2W2fYCsDJSQoOvJvD8G5D99RjXkzxPQeovvVGaJzRrIwj6KNT+sCqYnvFmA+3iLkkh+
+	w1URHAm9Bm66hqvPsMD9o22yJcqPBrsMWWd2pOvN/6hnMPoJaAIFUljNWJjcS12ucQRT
+	ejrBGlBVO0xElwIiKCwKHet4ptHkn97hMfG2A4AmXG1UU/WBv2SQrZxxG/jX8M6+HLmH
+	P/I9WEftcbx5q8cZg+zvm9YYAxY68jlNAb+JTC1bCm6sqMQ+ABIzBjTlDN0hjlXajYqu
+	DRzw==
+X-Gm-Message-State: APjAAAXaMs9dxFnG8/CUnX1dWjuv83K5bSeDlCeLYtEedRCAcNfobWLi
+	JnQX8Pc+vPUNPaKD7SPpdiKp2DPk
+X-Google-Smtp-Source: APXvYqzeKPHGEu7OlPsfoi8/O9hbHF5epbso7ER14/XGTyCy+HL/xxzDAtOU5D0SXOw2n6togE54Sw==
+X-Received: by 2002:a1c:238c:: with SMTP id
+	j134mr22230715wmj.151.1575851946615; 
+	Sun, 08 Dec 2019 16:39:06 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0A9021072C1E15EE839E10.dip0.t-ipconnect.de.
 	[2003:f0:7f0a:9021:72c:1e15:ee83:9e10])
 	by smtp.gmail.com with ESMTPSA id
-	n30sm11403575wmd.3.2019.12.08.16.39.04
+	n30sm11403575wmd.3.2019.12.08.16.39.05
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 08 Dec 2019 16:39:04 -0800 (PST)
+	Sun, 08 Dec 2019 16:39:05 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 01:38:25 +0100
-Message-Id: <20191209003840.3383-15-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 01:38:26 +0100
+Message-Id: <20191209003840.3383-16-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209003840.3383-1-schnitzeltony@gmail.com>
 References: <20191209003840.3383-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 14/29] gsound: initial add 1.0.2
+Subject: [PATCH 15/29] gnome-control-center: re-add 3.34.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,37 +63,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 00:39:05 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 00:39:06 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-yet another dependency for gnome-control-center
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
+ ...001-Add-meson-option-to-pass-sysroot.patch | 45 +++++++++++++++
+ .../gnome-control-center_3.34.1.bb            | 55 +++++++++++++++++++
+ 2 files changed, 100 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch
+ create mode 100644 meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb b/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch
 new file mode 100644
-index 000000000..e4478e14a
+index 000000000..7f82a152c
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/gsound/gsound_1.0.2.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Small gobject library for playing system sounds"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=447b837ae57f08b7060593ac6256163f"
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center/0001-Add-meson-option-to-pass-sysroot.patch
+@@ -0,0 +1,45 @@
++From ba8aebe1259ae3f7f5a4827e5a47bb95c568b218 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
++Date: Tue, 21 May 2019 16:07:46 +0200
++Subject: [PATCH] Add meson option to pass sysroot
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++We need to pass this to meson to help it finding gdesktop-enums.h:
++
++| panels/background/meson.build:38:0: ERROR: File /usr/include/gsettings-desktop-schemas/gdesktop-enums.h does not exist.
++
++Upstream-Status: Inappropriate [OE specific]
++
++Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
++---
++ meson_options.txt             | 1 +
++ panels/background/meson.build | 2 +-
++ 2 files changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/meson_options.txt b/meson_options.txt
++index a347168..2cd8121 100644
++--- a/meson_options.txt
+++++ b/meson_options.txt
++@@ -1,3 +1,4 @@
+++option('oe_sysroot', type: 'string', value: '', description: 'Directory for OE-sysroot')
++ option('cheese', type: 'boolean', value: true, description: 'build with cheese webcam support')
++ option('documentation', type: 'boolean', value: false, description: 'build documentation')
++ option('gnome_session_libexecdir', type: 'string', value: '', description: 'Directory for gnome-session\'s libexecdir')
++diff --git a/panels/background/meson.build b/panels/background/meson.build
++index bb34b69..f22722e 100644
++--- a/panels/background/meson.build
+++++ b/panels/background/meson.build
++@@ -36,7 +36,7 @@ common_sources = []
++ 
++ enums = 'gdesktop-enums-types'
++ enums_header = files(
++-  gsettings_desktop_dep.get_pkgconfig_variable('prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
+++  get_option('oe_sysroot') + gsettings_desktop_dep.get_pkgconfig_variable('prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
++   'cc-background-item.h'
++ )
++ 
++-- 
++2.20.1
++
+diff --git a/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.1.bb
+new file mode 100644
+index 000000000..5d58879c5
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-control-center/gnome-control-center_3.34.1.bb
+@@ -0,0 +1,55 @@
++SUMMARY = "GNOME Settings"
++DESCRIPTION = "GNOME Settings is GNOME's main interface for configuration of various aspects of your desktop"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
++
++GNOMEBASEBUILDCLASS = "meson"
++
++inherit gnomebase gsettings gettext vala upstream-version-is-even bash-completion features_check
 +
 +DEPENDS = " \
-+    glib-2.0 \
-+    libcanberra \
++    gdk-pixbuf-native \
++    colord-gtk \
++    udisks2 \
++    upower \
++    polkit \
++    pulseaudio \
++    accountsservice \
++    samba \
++    gsettings-desktop-schemas \
++    gnome-settings-daemon \
++    gnome-desktop3 \
++    gnome-online-accounts \
++    network-manager-applet \
++    gnome-bluetooth \
++    grilo \
++    libgtop \
++    gsound \
++    libpwquality \
 +"
 +
-+inherit gnomebase gettext gobject-introspection vala
++REQUIRED_DISTRO_FEATURES += "polkit pulseaudio systemd x11"
 +
-+SRC_URI[archive.md5sum] = "c26fd21c21b9ef6533a202a73fab21db"
-+SRC_URI[archive.sha256sum] = "bba8ff30eea815037e53bee727bbd5f0b6a2e74d452a7711b819a7c444e78e53"
++SRC_URI[archive.md5sum] = "8b0f0baea34fbe937efd0ad1be4b451b"
++SRC_URI[archive.sha256sum] = "5f82ecd5554136c462248ec5363b82d95358b39dfd6787006d8307b4504e515e"
++SRC_URI += "file://0001-Add-meson-option-to-pass-sysroot.patch"
++
++PACKAGECONFIG ??= "ibus ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)}"
++PACKAGECONFIG[ibus] = "-Dibus=true, -Dibus=false, ibus"
++PACKAGECONFIG[wayland] = "-Dwayland=true, -Dwayland=false, wayland"
++
++# Once we have (lib)cheese we can make cheese a PACKAGECONFIG
++EXTRA_OEMESON = " \
++    -Doe_sysroot=${STAGING_DIR_HOST} \
++    -Dcheese=false \
++"
++
++FILES_${PN} += " \
++    ${datadir}/dbus-1 \
++    ${datadir}/gnome-shell \
++    ${datadir}/metainfo \
++"
++
++FILES_${PN}-dev += "${datadir}/gettext"
++
++RDEPENDS_${PN} += "gsettings-desktop-schemas"
 -- 
 2.21.0
 
