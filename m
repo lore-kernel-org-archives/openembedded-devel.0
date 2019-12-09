@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A6607FC1A
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
+	[209.85.128.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 951DA7F691
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 08:36:27 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id z3so15175584wru.3
+	Mon,  9 Dec 2019 08:36:28 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id f129so13914790wmf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 00:36:28 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=FKcHi7VerrnD3lNshaizC0YqN3RmPkvfSlY4bAUaFQE=;
-	b=kI9YB2tP1ZM2ADavpkjlBoCLKzegCFr40iRfyW27R/iF+FkGMtvrmQCZzlAn5cQK4X
-	jLGmsaSG6Ne5WnDGTGYggkfQwUBIHPKgA34Te6HEhQnN+0jhtinycpDk9qUKSC6wB6nY
-	EY4MdyVdGys2EROyvv4mJQA3LuwKEVqgw1KcLZ8lW5kimum8dgUfymD/9vE5mdqi7pnT
-	EBn9HcZniIfR2ZsGlZ+8vrEtg4Cx7AOwIxDEuV/V24cYoRg3Gqc2U0cG6YOlNvLQO00N
-	jMOG4DbFD9ifJCynCK1PuRkKXc2qROOYLb6TtNzeRZkxHq2WW+RypoBUaG7SbV4CjePW
-	OlMg==
+	bh=bQechx1ePY/QmX980OOK8kPA5u4uYThb65b7WIKgcAQ=;
+	b=F1Dd5kYdY5TE1jVgsHLOBbO9l86YdbpCRzwUYCyjo/cW60EDDvuC6N9VfCdOalDsIN
+	C5NidP1dUBjq6dYDu0Kb4Vx5yfIR8QEROE1DqjzDBLUox85xG/PY4m1qlHgin0VyynuY
+	cE4Vo8ODLfTEKk0D2misg/3p76zZN6oQ2hvPHP5MejSTA8SsfhGmnAk7s5iMGUH8cQf/
+	O4bTFieRXuqXXykB5B8lISoToaodjr0+iqmK7U0vKY+Bd268Q8pAp4QzH+YNI0FdqLFQ
+	pjPE1qZsk77YzdSEW8tsRix/ac3ZFOgWndB4/ZkqcBZJHgyWox9vh41/0hvEoqzTm0Bc
+	aH8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=FKcHi7VerrnD3lNshaizC0YqN3RmPkvfSlY4bAUaFQE=;
-	b=KdTRuEYG6i8JTeYLZBSdqua9Uk3WtAmubNBTqGDag8muRZu+ulOtWy9DFdjmLVMHWQ
-	SLxS/YyN98pyzbecNy6Ychu2Cf8rF1eQpHuz3aIWtBEy8GiPtOHKQOZXYpf6y2va+Rgo
-	PZZgjTIMqHH3Fwd1pyu+NTprAq/9Ov3JyfEkFYspk5JmxeX7v3TwUZ+HXJeEIx+AmKsT
-	zHVKvY/0kfsOwyKmTznThdPIG5HeecaQLV+IJtlEDPoWGrw3jJU3f5Bnv/SDHZ9XHZd7
-	uU1IpbwEDhqiWiOhp6NXHB34ckyQweT+Ab/Zit28BPeuFreT8KZA5Cx5W4MOSB2VG7dq
-	fixQ==
-X-Gm-Message-State: APjAAAWNMMoupZP7740W/Ni6j0qyYKYnc9yqGsE7tsjGdPbQE/NK8Vbf
-	dNuyuHzb9Cy4aP/oCGy+h8eFys54
-X-Google-Smtp-Source: APXvYqypHCRNzCLX2NDa6d7Rl59S+IPD8n7MRlt1DaEzZG4iftWK2oeedGZ1X4pg5QilfZEuMce5VA==
-X-Received: by 2002:adf:fd07:: with SMTP id e7mr681788wrr.21.1575880587960;
-	Mon, 09 Dec 2019 00:36:27 -0800 (PST)
+	bh=bQechx1ePY/QmX980OOK8kPA5u4uYThb65b7WIKgcAQ=;
+	b=jI/3fKBgBTAYTXypSiRJl+ceCK0PEcxT/eXzTawrvBT4kaZqTcgbaTQHtc2WLDVz1Q
+	FCAx4wFffnLJ351L6Zr7qJiJcMUTCKNTXgVCXcdCtC8AVcEfKfNKPS9KIScmcMaQNM4S
+	DEHxZf9rYbdoNli3jC9xbjT/x0aJyqikUtUk54+VWhw5JOYUC4sVo3JxpVJIqj0UPRUd
+	Bh40BdleXpJbg7AXB/SR7535NG0wdWjI7n0Sz/FMuMCnZcZhoqH00ZWfqmxuuyC6QFYo
+	DCEYrCDy6I7OY2WW4rD5FF209wFPNZh+WidsODSwckxhknXRipRDnVQbSqt92e2vWQel
+	t3vQ==
+X-Gm-Message-State: APjAAAX3HZT3j8HoW6Swi9SuzYZBntTiiyuHWC3Z9rAm/TWLDO2YmQ9c
+	BAi9X873dRtipdWSAeXwtKVxI5XU
+X-Google-Smtp-Source: APXvYqwcCZntxnI5ldvDXhAhFd1vvuBeSKDIUJ1WjsoLHg5UzGc76vhOVjIkESGtHXB5aDWZ7jJ2Lg==
+X-Received: by 2002:a1c:731a:: with SMTP id d26mr22146680wmb.130.1575880589040;
+	Mon, 09 Dec 2019 00:36:29 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F05A251D39764436B44384E.dip0.t-ipconnect.de.
 	[2003:f0:7f05:a251:d397:6443:6b44:384e])
 	by smtp.gmail.com with ESMTPSA id
-	e18sm29450149wrw.70.2019.12.09.00.36.27
+	e18sm29450149wrw.70.2019.12.09.00.36.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 00:36:27 -0800 (PST)
+	Mon, 09 Dec 2019 00:36:28 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 09:35:58 +0100
-Message-Id: <20191209083612.23922-7-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 09:35:59 +0100
+Message-Id: <20191209083612.23922-8-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209083612.23922-1-schnitzeltony@gmail.com>
 References: <20191209083612.23922-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH][v3 06/20] rest: initial add 0.8.1
+Subject: [PATCH][v3 07/20] gnome-online-accounts: initial add 3.34.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,57 +62,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 08:36:28 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 08:36:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It is an optional dependency for upcoming gnome-online-accounts
+It is a mandatory dependency for upcoming gnome-control-center
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-gnome/rest/rest_0.8.1.bb | 33 +++++++++++++++++++++
- 1 file changed, 33 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
+ .../gnome-online-accounts_3.34.1.bb           | 35 +++++++++++++++++++
+ 1 file changed, 35 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.34.1.bb
 
-diff --git a/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb b/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
+diff --git a/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.34.1.bb
 new file mode 100644
-index 000000000..33b8744eb
+index 000000000..74d71ec81
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/rest/rest_0.8.1.bb
-@@ -0,0 +1,33 @@
-+SUMMARY = "library to access web services that claim to be "RESTful""
-+HOMPAGE = "https://wiki.gnome.org/Projects/Librest"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
++++ b/meta-gnome/recipes-gnome/gnome-online-accounts/gnome-online-accounts_3.34.1.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "GNOME Online Accounts - Single sign-on framework for GNOME"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=34c88b124db5fb2762c1676be7dadd36"
 +
 +GNOMEBASEBUILDCLASS = "autotools"
 +
-+DEPENDS = " \
-+    libxml2-native \
-+    glib-2.0-native \
-+    glib-2.0 \
-+    libsoup-2.4 \
++inherit gnomebase gsettings gobject-introspection gsettings gtk-doc vala gettext upstream-version-is-even features_check
++
++# for webkitgtk
++REQUIRED_DISTRO_FEATURES = "x11"
++
++DEPENDS = "glib-2.0"
++
++SRC_URI[archive.md5sum] = "aa94d1dd07ca53729a036b5df1c78c05"
++SRC_URI[archive.sha256sum] = "4832ca8e48d3a497fc676e7b6f146009ab4206995362977b9805aa39f164783a"
++
++# backend is required for gnome-control-center
++PACKAGECONFIG = "backend other"
++
++PACKAGECONFIG[backend] = "--enable-backend,--disable-backend,gtk+3 webkitgtk libsoup-2.4 json-glib libsecret rest libxml2"
++PACKAGECONFIG[krb5] = "--enable-kerberos, --disable-kerberos , krb5 gcr"
++
++# no extra dependencies!
++PACKAGECONFIG[other] = " \
++    --enable-facebook  --enable-foursquare  --enable-exchange  --enable-flickr  --enable-google  --enable-imap-smtp  --enable-owncloud  --enable-windows-live,\
++    --disable-facebook --disable-foursquare --disable-exchange --disable-flickr --disable-google --disable-imap-smtp --disable-owncloud --disable-windows-live, \
 +"
 +
-+inherit gnomebase gobject-introspection gtk-doc vala
++FILES_${PN} += " \
++    ${datadir}/dbus-1 \
++    ${libdir}/goa-1.0/web-extensions/*.so \
++"
 +
-+SRC_URI[archive.md5sum] = "ece4547298a81105f307369d73c21b9d"
-+SRC_URI[archive.sha256sum] = "0513aad38e5d3cedd4ae3c551634e3be1b9baaa79775e53b2dba9456f15b01c9"
-+
-+# * gnome environment requires libsoup build with in gnome PACKAGECONFIG
-+# * libsoup-gnome support was removed upstream three years ago [1]
-+# [1] https://gitlab.gnome.org/GNOME/librest/commit/8f904a8e2bb38a7bf72245cdf2f1ecad17e9a720
-+EXTRA_OECONF = "--without-gnome"
-+
-+do_configure_prepend() {
-+    # rest expects introspection.m4 at custom location (see aclocal.m4).
-+    cp -f ${STAGING_DIR_TARGET}/${datadir}/aclocal/introspection.m4 ${S}/build
-+}
-+
-+do_compile_prepend() {
-+    export GIR_EXTRA_LIBS_PATH="${B}/rest/.libs"
-+}
-+
++# looked into pkg-config file: it is not a bug - they mean it
++FILES_${PN}-dev += "${libdir}/goa-1.0/include"
 -- 
 2.21.0
 
