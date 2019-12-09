@@ -1,54 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
-	[209.85.210.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 15D917FBC1
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 925977FC38
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 21:32:13 +0000 (UTC)
-Received: by mail-pf1-f181.google.com with SMTP id q8so7874429pfh.7
+	Mon,  9 Dec 2019 21:34:58 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47WxL96gyyz3H
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 13:32:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=message-id:subject:from:to:date:in-reply-to:references:organization
-	:user-agent:mime-version:content-transfer-encoding;
-	bh=j39la+gdJ5W32A/A0S265xyYl4KpQqe0z8MInyb3suE=;
-	b=XjNdsfy6SLBGfs0dBd2tCYMQxn/rN6YRfTv5uid9UT+QIP1FMcHySC9KBJecnvChKX
-	lpF2ucdoo85wfnJs3xiCQny9Zb75cvJQN+PujaOZ6bLf1ohSYkyiXEMctI8nhDQqRxmm
-	bNmj2UCUiE/d9BBLYbbw3i6hL+nxGLkzxrq0vW9a9MXDGAh4hGN1leZMJLyWkDduk8EY
-	w0WjeLXrzBgAYEPje2+omigkKLMXzo+X7Fn+89dlr9siu9L/xsczAu+iiHMlcFKtijhJ
-	i7MD1f7C9ZXT9w5isV1S3BBaVBMQDtbm3/bwFRcd4j5GUqa76gtAZDdgCudDyywloVtl
-	O/aw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:organization:user-agent:mime-version
-	:content-transfer-encoding;
-	bh=j39la+gdJ5W32A/A0S265xyYl4KpQqe0z8MInyb3suE=;
-	b=S6cWJuzmpU17hwQaDlsOmni5V6H2Rn97KgiZIJYKg31+08QtxIEmnlowoB5kYih4OW
-	tUlYPayANH+K/b/T4f4NhgS1Q8ZHpbWUQCIHu9K1daHYvXUzYksA7vhNf/UTN8pyoqX2
-	Nbe3p/8tyq2ZZh8tEbFloRJF3RrvoZMRh/B9YvhlWWOgCHmEeB1TpdjZvXHwJ7eQM07t
-	OTVbB1ZxecJRcKIw0BVeOWeT+2IYNQ2f73+buzmt1Yab2P4tPN2WHlHl/RdVUvBByn3T
-	pwJ3hNJUFZDC0vcPagaZui17/cXMHUguzqnxtq2ygF8i3864xlPF9vd5IOqJs9325bic
-	AfFg==
-X-Gm-Message-State: APjAAAXTyPrZLSlc1YPsAzANkScZpfHBAnaYAxR80RoVBMDlprN0ROMp
-	myi6dSTkWoyG6FPZ/Be9STo=
-X-Google-Smtp-Source: APXvYqw9urWhXTrXeulmyLPqUK5iVFYeVA4jlqZPY/S7Ii35zaekTGVLrcTRELdNZTayMA4zq9cb3w==
-X-Received: by 2002:a05:6a00:3:: with SMTP id h3mr30505977pfk.78.1575927134771;
-	Mon, 09 Dec 2019 13:32:14 -0800 (PST)
-Received: from apollo ([2601:646:9200:4e0::afb7])
-	by smtp.gmail.com with ESMTPSA id v4sm280713pjb.24.2019.12.09.13.32.13
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 13:32:14 -0800 (PST)
-Message-ID: <5c9072493324957f4b7a995f04e9bca549614db3.camel@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: akuster808 <akuster808@gmail.com>, OpenEmbedded Devel List
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 09 Dec 2019 13:32:12 -0800
-In-Reply-To: <7dec2178-6a36-d62a-4add-7308c4cd146c@gmail.com>
-References: <7dec2178-6a36-d62a-4add-7308c4cd146c@gmail.com>
-Organization: HIMVIS LLC
-User-Agent: Evolution 3.34.2 
-MIME-Version: 1.0
-Subject: Re: zeus pull request
+	Mon,  9 Dec 2019 22:34:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1575927298;
+	bh=y8BvOuf8B+XNgrH0S5P593H0Zn5c0/j5gh6WdS3tLHM=;
+	h=From:To:Subject:Date:From;
+	b=PLF2TO3LAj7quDIOTOAOMg0oh6ocJ4PJd4Je3+9+EDuMvjWm19MKisjFWgwGnm68x
+	cJ2ExNJFgBsVd/LqQ/MpOF4kiZ9qX1RJzV+jB6VKAKTwCtHaGwEp/KZR3VCwHJODq9
+	ZIfYLipSXVjCNOUv3/XaPu21TJ2LzbxgGGcyVshY9Agw95puZX0ZRvdMPIT/GX8Z5+
+	AeDRSVHQsrvfakQe8j9v+njUFmRpPVW1jMUeWC/86c2PdATrjJg/YEta5Bz2QciPMM
+	pbvRCjgdJvqk/DGqKajOzsBwOXk0jyfEeylTMp36aRpPmNz/UT/b2uI+FCjUsGED2V
+	/73IF1V/JshEQwgG42TOLoKGAIgmIl01BF8+pfwkpL3POXbiH4+LxazA7hFKTWvTNw
+	519R1/ukql7ljiAUQEQx4cOCzWWvGse5UPoYabDf4SQk2YcJNvRjWHX66MaAZOK1vJ
+	pUYVJgDPY38z92hW/6sN01H8O8TsZuGfhwEfyrhodJlUOowd0ifIzjDj/5AM2VDZX1
+	iIABW/GH0CyOXf0AiaMq3ozkKZSmcJZkTOaN1/NHbJ4NVeOPGogb3dETU58SaZkeCs
+	O55PugEroR1wVBB675ZecqpVo9OTm2nmxX+KaXyRSpZZV39pGqPj3CfGkXioLE44+p
+	WJ6f2vGuzMxj6g4qPonIAEIw=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  9 Dec 2019 23:34:56 +0200
+Message-Id: <20191209213456.9593-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][zeus][PATCH v2] gpsd: Backport a memory leak fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,119 +40,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 21:32:14 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Dec 2019 21:34:58 -0000
 
-On Sun, 2019-12-08 at 08:28 -0800, akuster808 wrote:
-> The following changes since commit
-> aad5b3d070cd8c58828b0975cf861d8ebc90f460:
-> 
->   README: updated Maintainers list for Zeus (2019-10-30 14:16:04
-> -0700)
-> 
-> are available in the git repository at:
-> 
->   git://git.openembedded.org/meta-openembedded zeus-next
-> 
-> for you to fetch changes up to
-> 0d16b31c3d96e0797d3335d44545412996c48c9a:
-> 
->   mbedtls: upgrade 2.16.2 -> 2.16.3 (2019-12-08 08:12:43 -0800)
-> 
-> ----------------------------------------------------------------
-> Andreas Oberritter (1):
->       samba: fix installation for minimal build
-> 
-> Denys Dmytriyenko (1):
->       mbedtls: upgrade 2.16.2 -> 2.16.3
-> 
-> Hongxu Jia (1):
->       python-more-itertools.inc: fix python2 package not incorrectly
-> generated
-> 
-> Khem Raj (1):
->       rsyslog: Dont force enable atomic builtins on mips
-> 
-> Michael Scott (1):
->       modemmanager: Upgrade 1.10.6 -> 1.10.8
-> 
-> Slater, Joseph (1):
->       php: fix CVE-2019-11043
-> 
-> Stefan Wiehler (1):
->       nvme-cli: defer host ID generation to post installation
-> 
-> Trevor Gamblin (3):
->       rsyslog: fix CVE-2019-17041
->       rsyslog: upgrade from v8.1908.0 to v8.1910.0
->       quagga: fix PIDFile path for service files
-> 
-> Yi Zhao (2):
->       samba: upgrade 4.10.8 -> 4.10.10
->       freeradius: fix CVE-2019-10143
-> 
-> Zheng Ruoqin (2):
->       mariadb: upgrade 10.3.16 -> 10.3.18
->       wireshark: upgrade 3.0.3 -> 3.0.6
-> 
-> niko.mauno@vaisala.com (2):
->       gitpkgv.bbclass: Use --git-dir option
->       gitpkgv.bbclass: Support also lightweight tags
-> 
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-gps_shm_close-Free-privdata.patch    | 37 +++++++++++++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb  |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
 
-merged thanks
-
->  ...-to-radiusd-user-group-when-rotating-logs.patch | 104
-> +++++++++++++++++++++
->  .../freeradius/freeradius_3.0.19.bb                |   1 +
->  .../{mbedtls_2.16.2.bb => mbedtls_2.16.3.bb}       |   4 +-
->  .../samba/{samba_4.10.8.bb => samba_4.10.10.bb}    |  20 ++--
->  .../recipes-protocols/quagga/files/bgpd.service    |   4 +-
->  .../recipes-protocols/quagga/files/ospf6d.service  |   4 +-
->  .../recipes-protocols/quagga/files/ospfd.service   |   4 +-
->  .../recipes-protocols/quagga/files/ripd.service    |   4 +-
->  .../recipes-protocols/quagga/files/ripngd.service  |   4 +-
->  .../recipes-protocols/quagga/files/zebra.service   |   4 +-
->  .../{wireshark_3.0.3.bb => wireshark_3.0.6.bb}     |   4 +-
->  meta-oe/classes/gitpkgv.bbclass                    |  15 ++-
->  meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb       |   5 +-
->  ...demmanager_1.10.6.bb => modemmanager_1.10.8.bb} |   4 +-
->  ...native_10.3.16.bb => mariadb-native_10.3.18.bb} |   0
->  meta-oe/recipes-dbs/mysql/mariadb.inc              |   4 +-
->  .../{mariadb_10.3.16.bb => mariadb_10.3.18.bb}     |   0
->  .../recipes-devtools/php/php/CVE-2019-11043.patch  |  38 ++++++++
->  meta-oe/recipes-devtools/php/php_7.3.9.bb          |   1 +
->  .../rsyslog/rsyslog/0001-Out-of-bounds-issue.patch |  31 ------
->  .../{rsyslog_8.1908.0.bb => rsyslog_8.1910.0.bb}   |   6 +-
->  .../python/python-more-itertools.inc               |   2 -
->  22 files changed, 188 insertions(+), 75 deletions(-)
->  create mode 100644
-> meta-networking/recipes-connectivity/freeradius/files/0001-su-to-
-> radiusd-user-group-when-rotating-logs.patch
->  rename meta-networking/recipes-
-> connectivity/mbedtls/{mbedtls_2.16.2.bb
-> => mbedtls_2.16.3.bb} (92%)
->  rename meta-networking/recipes-connectivity/samba/{samba_4.10.8.bb
-> =>
-> samba_4.10.10.bb} (95%)
->  rename meta-networking/recipes-support/wireshark/{wireshark_3.0.3.bb 
-> =>
-> wireshark_3.0.6.bb} (95%)
->  rename
-> meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.10.6.bb =>
-> modemmanager_1.10.8.bb} (92%)
->  rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.16.bb =>
-> mariadb-native_10.3.18.bb} (100%)
->  rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.16.bb =>
-> mariadb_10.3.18.bb} (100%)
->  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-
-> 11043.patch
->  delete mode 100644
-> meta-oe/recipes-extended/rsyslog/rsyslog/0001-Out-of-bounds-
-> issue.patch
->  rename meta-oe/recipes-extended/rsyslog/{rsyslog_8.1908.0.bb =>
-> rsyslog_8.1910.0.bb} (97%)
-> 
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+new file mode 100644
+index 000000000..9b3801580
+--- /dev/null
++++ b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+@@ -0,0 +1,37 @@
++From 2a4b3bcde0d73a3a4a6644d5f944ac9d16023ba9 Mon Sep 17 00:00:00 2001
++From: Adrian Bunk <bunk@stusta.de>
++Date: Mon, 21 Oct 2019 13:53:25 +0300
++Subject: gps_shm_close: Free privdata
++
++Previously every open/close cycle leaked privdata.
++
++Signed-off-by: Adrian Bunk <bunk@stusta.de>
++Signed-off-by: Gary E. Miller <gem@rellim.com>
++
++Upstream-Status: Backport
++---
++ libgps_shm.c | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
++
++diff --git a/libgps_shm.c b/libgps_shm.c
++index d93972bba..12bb3760b 100644
++--- a/libgps_shm.c
+++++ b/libgps_shm.c
++@@ -163,8 +163,12 @@ int gps_shm_read(struct gps_data_t *gpsdata)
++ 
++ void gps_shm_close(struct gps_data_t *gpsdata)
++ {
++-    if (PRIVATE(gpsdata) && PRIVATE(gpsdata)->shmseg != NULL)
++-	(void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
+++    if (PRIVATE(gpsdata)) {
+++        if (PRIVATE(gpsdata)->shmseg != NULL)
+++	    (void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
+++        free(PRIVATE(gpsdata));
+++        gpsdata->privdata = NULL;
+++    }
++ }
++ 
++ int gps_shm_mainloop(struct gps_data_t *gpsdata, int timeout,
++-- 
++2.20.1
++
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+index a28d59dce..054af4082 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+@@ -9,6 +9,7 @@ EXTRANATIVEPATH += "chrpath-native"
+ 
+ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
++    file://0001-gps_shm_close-Free-privdata.patch \
+ "
+ SRC_URI[md5sum] = "b3bf88706794eb8e5f2c2543bf7ba87b"
+ SRC_URI[sha256sum] = "27dd24d45b2ac69baab7933da2bf6ae5fb0be90130f67e753c110a3477155f39"
+-- 
+2.17.1
 
 
