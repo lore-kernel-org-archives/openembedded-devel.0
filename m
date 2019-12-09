@@ -1,39 +1,38 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
-	[209.85.128.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 3899F7FBE4
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
+	[209.85.128.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 172CA7E6EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 00:39:15 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id p9so13597340wmg.0
+	Mon,  9 Dec 2019 00:39:16 +0000 (UTC)
+Received: by mail-wm1-f45.google.com with SMTP id p17so13008807wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Dec 2019 16:39:16 -0800 (PST)
+	Sun, 08 Dec 2019 16:39:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=4xL3895dUTt7xkHJhm6NECB3ld1h8X2nUoixraR8t50=;
-	b=qjbkIZed7UBGFgYYtNvDA+SkxrSPulprdPddhaYi5FR+VWuvoZn2h/kS6t+meENFgn
-	R+fbuYM9RypDV9s416kgtlWN1J1/gXLz9IqdIO64AbfYfPjoa7GnDmmD5KprRaBxvODP
-	BFmhALiwc39M7vSB6AT+Hap7ID6DKKH5LuN8ibG8lfxqoz5HH//nMS7Hhrx7ZND+X8/t
-	HvbIvr3eimEVUqscx7C49RmLCNw1A99HfozvpWm9Ft/f6wv2pIrZdFgEnrb7lcheXTd0
-	Cw/f85jYRpykSt7BLBbJMw0UuWY8GYyuVBXzGU2UjBBQF665dK74xoc6RExa29IK+1Tk
-	roVA==
+	bh=Gfa2rxgKlKvYMpAahWKRe2oX5dqrBn+SRbs81Eawe9c=;
+	b=GepQKz9eAR8AR4+Lr+9EAlgweBpnEKOrZUc/nDVA0dDew8MHVdUr/1m/QYpv24r1ZI
+	4s1SBfXm+fmglUZN5VrekvQJonnXT4cqgzQJwY/KjSc2bc+Ly7y6sqiNCuvsw7kW+z2c
+	R3JWz5Ea0HWRqRfjQ3qLXAFSxLlmtBEDtJwcKuW3+uVr7VhPagwRdt9DIOwEHqtG2awn
+	FZ9NglGgiCsIw7S4E8cmrLyDAuQMO2IYalNdGWQfZ5Nu5waee6Yx0NtH2nFki7LNW+LV
+	AFCYL2x3AWmvY3nnsJQKyO45Hu2mRp09LlRrwoWQdYIxeNbqgaxJyMfvKsqK1swlK4Tu
+	GvtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=4xL3895dUTt7xkHJhm6NECB3ld1h8X2nUoixraR8t50=;
-	b=H7DoF0cWRhx53Hbpl9cVgxFSMSkqjVuvZjmlAaT6xNHKAEZMYNpCCMx7RdEZcdWznV
-	NxhAY+oX6AW3W+OHE+nfoTbW2gjTRD5a/Q+ikTa5lDQHZstkjjgb2BjpedX4m5/UblXs
-	WRx17HtTAzj/81elZDAots4nlqpn/otC5QDZ6LSBmPGmAAyPTCZu92f/fxH6CQmfdxCB
-	UwqlJlwFRzb62cOtnCgU9NTqz4554nYtw5xtoIBAv2kWZO+xSk74iyehF4t1RL8vJuCM
-	HPOxr1gaOl69cfIDIogFmw/PQ9H+/dtj+A2KGDbFopHKqJt/qnZJfk6WfWUtxDzSeZeJ
-	s/bA==
-X-Gm-Message-State: APjAAAV56B7jZ0YZXj2NbmHNoj8Nn8pcKikcB/YSr+eE2CiGdrpwakKp
-	EKY8w7vuYqjJL63rybzR4eCGcNkO
-X-Google-Smtp-Source: APXvYqxjJAuYdamh86zxsPzNUZlg6Rzzw1ro0oqZRhdZWKdwbltHGg0a1w08hkiwAczxRcw9zUJ15Q==
-X-Received: by 2002:a05:600c:2254:: with SMTP id
-	a20mr21880762wmm.97.1575851955907; 
-	Sun, 08 Dec 2019 16:39:15 -0800 (PST)
+	bh=Gfa2rxgKlKvYMpAahWKRe2oX5dqrBn+SRbs81Eawe9c=;
+	b=m1gk71JgPjn0N3ArZYMpZ3wzy9kOiekS78b+Ii5coKP1akgUvQVUHu1MuDkEOMO/H6
+	3wUtNO2B1lYnqJNtP+OevCgBpGR+ZuqcqETgirt4oJK7x2YQkzOq1YLIM0TWwgn519Lz
+	Il0RoSecRZplzAsNeBPZX/ggbI5FQdtu9em4iiv0GaSFuhaCUl6gKXWY2v0LIkkMmPmu
+	xRt5+jer4PH5UyTypl7I2iisul0Lc47GTTp3em7f9EVNFXLLyvcAlm5BKxbzwSxTYRwM
+	7vlXzwVi6swNEFMf9qTxPM6MS+4BlmwVuRk1Rtk71GjIyF60t9Fx/M5epO3jxRu0EmXU
+	1Y3w==
+X-Gm-Message-State: APjAAAXNImhDnXhdCXovprttNJEGgh1acY0NmagbxXAb4dmuFIsiwj8S
+	l3CweYMGsua7FrkrHyBCrLyOE/BL
+X-Google-Smtp-Source: APXvYqwPugZl/toWZlRXtesIte32LLtwo4MunToOlf0LG/IgPm2DbHbQgjFhM4dV4wtEcYHHYeR5BA==
+X-Received: by 2002:a1c:4454:: with SMTP id r81mr21907286wma.143.1575851956738;
+	Sun, 08 Dec 2019 16:39:16 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0A9021072C1E15EE839E10.dip0.t-ipconnect.de.
 	[2003:f0:7f0a:9021:72c:1e15:ee83:9e10])
@@ -41,16 +40,16 @@ Received: from superandy.speedport.ip
 	n30sm11403575wmd.3.2019.12.08.16.39.15
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 08 Dec 2019 16:39:15 -0800 (PST)
+	Sun, 08 Dec 2019 16:39:16 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 01:38:34 +0100
-Message-Id: <20191209003840.3383-24-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 01:38:35 +0100
+Message-Id: <20191209003840.3383-25-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209003840.3383-1-schnitzeltony@gmail.com>
 References: <20191209003840.3383-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 23/29] stalonetray: Add x11 to required distro feature
+Subject: [PATCH 24/29] projucer: add x11 to required distro features
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,29 +62,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 00:39:15 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 00:39:16 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-It depends on virtual/libx11
+It depends on many X11-libs
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb | 4 +++-
+ meta-multimedia/recipes-multimedia/juce/projucer.inc | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb b/meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb
-index 8851729f5..7db70ec96 100644
---- a/meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb
-+++ b/meta-oe/recipes-graphics/stalonetray/stalonetray_0.8.3.bb
-@@ -11,4 +11,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "ae95dbbacc2620e032acea8abab8c9ef"
- SRC_URI[sha256sum] = "36548a588b2d466913423245dda6ffb6313132cd0cec635a117d37b3dab5fd4c"
+diff --git a/meta-multimedia/recipes-multimedia/juce/projucer.inc b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+index 60bd0e24b..fc8baa45b 100644
+--- a/meta-multimedia/recipes-multimedia/juce/projucer.inc
++++ b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+@@ -6,7 +6,9 @@ HOMEPAGE = "http://juce.com/"
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a20f91622a47d4e4af9340d5d3f1a2d8"
  
--inherit autotools
-+inherit autotools features_check
+-inherit pkgconfig
++inherit pkgconfig features_check
 +
 +REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ DEPENDS = "libx11 libxext libxinerama libxrandr libxcursor freetype alsa-lib curl bzip2 libpng harfbuzz glib-2.0 libpcre"
+ DEPENDS_append_libc-musl = " libexecinfo"
 -- 
 2.21.0
 
