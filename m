@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
-	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id F34AC7FC00
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+	[209.85.128.53])
+	by mail.openembedded.org (Postfix) with ESMTP id DCB857E6EF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 00:39:16 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id z3so14142980wru.3
+	Mon,  9 Dec 2019 00:39:17 +0000 (UTC)
+Received: by mail-wm1-f53.google.com with SMTP id s14so12995363wmh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Dec 2019 16:39:18 -0800 (PST)
+	Sun, 08 Dec 2019 16:39:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=a3sD9MLyrQgCFNPnxiX0hWItEF/Xaexw0jZb3NPedcw=;
-	b=sJkDIebEhl5I7LS9OhkF9PaefqsZrwz/x37OFxGaGbdGm7j+AXmVvJSYbXKXfLJcyJ
-	+XCkyUoj6Y1CiEPqG+Bx/yv152DH0Shmv2C9u3IiH9IgWzAlXq9D07iCyPez86S7dFqw
-	9VHuz5Qe7c+EcE305dbtWZrLCFsY0AeS5if1Iekpr0X+f6EMRpGngNZoZ/ORPdb0F5BT
-	zK4P5edLhkDztdzCu3oZsOjsW2QWZNcha187ddFmT+/SEopHf45lFewtt+iWDNdEw56U
-	117up9IAy8aK4ekBsmbtJPc2J1kbOjZKRVXUyBSBpJQEfhDl9jDz4H5hUxtDLCb7AQQA
-	apiw==
+	bh=WuWascXObrxwxONnQc4ULQBtC2B+rEXMTYYx1XBtEys=;
+	b=QPEuN0tgN9RfCHQgskV4EFbixeEaIyQpBeE8oKN8RH+FopHleqTZEBgANV8p9mMsqS
+	/9CN/JXtV/bpuC0R7P+4hqg+ZyHXzusZq4j04Yuc+oLsMQ4RGBxdX0N6e0DH1cpBJHSJ
+	Qm5MTZxMteuIXkCfgJ/IFxJ498585eYwJwkLgD8heCu0lUYZZrvnK3T6xR13W3xXYMem
+	RG8uDwVE0UBXiv7AAPgxA7PaBk+R/I51FDOo2N3kFLidYDC0B3jA1F4UrN1UVLXpg9za
+	WL6HncKBdIQ6YwbJYEQZa/xe2jVDA/IzkVCP1Yg/rHB6H78wWoEZHrdrocAoY6/c7lOL
+	2rVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=a3sD9MLyrQgCFNPnxiX0hWItEF/Xaexw0jZb3NPedcw=;
-	b=RCRC/INpEQkgA9HCKhGgiCjyZYPaYY4B3/hgeKllIP4TCn+m2t8o7Zkuxdn1X7Rx1Q
-	DOyyB2OUog4ATGLXy3r9YiAK/kQhs9tGZcDhVCxfmWS9xu0NawmsDSpphQ7gceIxkroL
-	H+zMrJ8L0q6QXCDP8PJunlSpbvmtFGkjX8mcxtdGG+nkiDLgzt14vUDMYf7Ep0mqzLV1
-	LRABu9IqG2pr/tGqGvLfEpcOzKr2Wpc62rCNBy64w637PJ5sPuQmDDs2YuNy+RaaiDyH
-	zpzsXwpLmRRhQtUfkafH11lzsuUp+/aBizid3UZaAM9T6qyGT/jbfn71onFUuHhncSDL
-	roCA==
-X-Gm-Message-State: APjAAAVlUwseSCu4x/4YjADmNSo51/f0dW+GGQnEKCHT2lhQTSggDfss
-	z0stGFD9b30+CNNQAlj3k6om8XxD
-X-Google-Smtp-Source: APXvYqxfkhMnH60fL0/M1Wq8sga2LPqoesPHLCQVb4nVRsU6OlXWHlI3k5UKfy2oxyyoAZKw+NvpOA==
-X-Received: by 2002:a5d:4b8f:: with SMTP id b15mr29021635wrt.100.1575851957684;
-	Sun, 08 Dec 2019 16:39:17 -0800 (PST)
+	bh=WuWascXObrxwxONnQc4ULQBtC2B+rEXMTYYx1XBtEys=;
+	b=HVhco7J0VFAIf44IJa10drC+5jkLNs7z3LJYcDyrusxkGD8zr7lZBXm+ccOa30bQkR
+	NTa3QdDJNpjFLcAgfxcquTK27S9rEPYW3nSS7XzBElqmHIT3rq9uXTU1W5cCXWegeMUV
+	zAxqTy9aPKVqJxAZ8qvj3czVFzyNFX9zrz930iCGrlAaAZDHNdz94qazIh0MO6mhYqYe
+	poSvqJfI9yeY+C6EAev2x2jSLRvkk+KshgLg3N/oP2hA/DIwP3L8O/wJjoYO/KZAoK5F
+	pO8GOFdOJLJkq3+HFpx/jOpgcsDRzD4t/oFcQZhDQ4nN4dBvXKm7Dq8DQfTnxoRIgK8D
+	SZ5Q==
+X-Gm-Message-State: APjAAAWCWsmh/10nJazkApVvIxsCmVeuW/DOj1JiE3kr0OS4fFoGRMPy
+	LCIlFW6g5FfLoyD0JZT3Z7FRjBNC
+X-Google-Smtp-Source: APXvYqxwjPE6SgbjH/tcEb47lwEbw+7qV/N/jWbS9XqIEbqlS7gfnXdFqVUnCbMYpYU4NlATm9tLgQ==
+X-Received: by 2002:a7b:cc13:: with SMTP id f19mr22289727wmh.81.1575851958474; 
+	Sun, 08 Dec 2019 16:39:18 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0A9021072C1E15EE839E10.dip0.t-ipconnect.de.
 	[2003:f0:7f0a:9021:72c:1e15:ee83:9e10])
 	by smtp.gmail.com with ESMTPSA id
-	n30sm11403575wmd.3.2019.12.08.16.39.16
+	n30sm11403575wmd.3.2019.12.08.16.39.17
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
 	Sun, 08 Dec 2019 16:39:17 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 01:38:36 +0100
-Message-Id: <20191209003840.3383-26-schnitzeltony@gmail.com>
+Date: Mon,  9 Dec 2019 01:38:37 +0100
+Message-Id: <20191209003840.3383-27-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191209003840.3383-1-schnitzeltony@gmail.com>
 References: <20191209003840.3383-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 25/29] colord-gtk: add polkit to required distro features
+Subject: [PATCH 26/29] yelp: add x11 to required distro features
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,28 +62,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 00:39:17 -0000
+X-List-Received-Date: Mon, 09 Dec 2019 00:39:18 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb b/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb
-index 8f6cd0431..7845509ba 100644
---- a/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb
-+++ b/meta-gnome/recipes-support/colord-gtk/colord-gtk_0.2.0.bb
-@@ -18,4 +18,8 @@ EXTRA_OEMESON = "-Dman=false"
+diff --git a/meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb b/meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb
+index f6311965e..348727e44 100644
+--- a/meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb
++++ b/meta-gnome/recipes-gnome/yelp/yelp_3.34.0.bb
+@@ -4,7 +4,10 @@ LIC_FILES_CHKSUM = " \
+     file://COPYING;md5=6e1b9cb787e76d7e6946887a65caa754 \
+ "
  
- # gobject-introspection is mandatory and cannot be configured
- REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
+-inherit gnomebase itstool autotools-brokensep gsettings gettext gtk-doc
++inherit gnomebase itstool autotools-brokensep gsettings gettext gtk-doc features_check
 +
-+# colord
-+REQUIRED_DISTRO_FEATURES += "polkit"
-+
- UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
++# for webkitgtk
++REQUIRED_DISTRO_FEATURES = "x11"
+ 
+ SRC_URI[archive.md5sum] = "776e29bd16424c8712cbf340cfe6429b"
+ SRC_URI[archive.sha256sum] = "e3d6527c5963d73206891b32f1f23363164be57de248555513bd0be77a7bd045"
 -- 
 2.21.0
 
