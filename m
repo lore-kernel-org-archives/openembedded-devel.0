@@ -1,53 +1,53 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
-	[209.85.128.43])
-	by mail.openembedded.org (Postfix) with ESMTP id E8DC67FC8E
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com
+	[209.85.166.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 802187FC8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 15:26:40 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id f4so144642wmj.1
+	Mon,  9 Dec 2019 15:33:33 +0000 (UTC)
+Received: by mail-io1-f66.google.com with SMTP id z26so15176835iot.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 07:26:42 -0800 (PST)
+	Mon, 09 Dec 2019 07:33:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=pTr8/b5Sit9ewAc6BUpPCRGErR+pF3P0gIAQZ4VQqyw=;
-	b=fmwFnrdqTUvZJoPGCLvciBF1MkhqUKcBNL2n29hk+wKYNy4k6oU3sAYkXtcYm9W+9D
-	+IE8oWGZ4DweFyKgG1NvYHq/MhcKKys8n0vc8lipwVkUvtOGMRVL1VgmgleVEhLBUlDz
-	Osd1SPyvlNkifn5njEbHC1AhOCyRYBh/iCpVRowHe9RIuOiYSydoGed/Ay3m/tFmWPZY
-	IK7QjjXaUcFHbdmib4HqFUQoFBUdnhnSooF5B4kctPI8QG8dDkeEk+1OsiX4j0JDNQeU
-	KI2jbnzLY+hXN4y81vH7DWw5RCUnpBGVusLsQSNW9zjIrs7xMVKG7XLUpOVt4OkvsewF
-	PEsQ==
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=AAffzjFWfTHwr5yNTCKLw272XPdhkBEtRuey1VAet+A=;
+	b=RssxGDLGiAkD+Z6PQdUPmler0zPBi4NfAVPe/IXDF1ngtIbgk3k5jm/jkqUJB7T8SX
+	9ifyuhOwzf8rABVwu6wX51zQu66P+U0kURLfLq3F5GRKa4XoQKbFyFIhrM6mFtaDVrCS
+	3J5aIHpp6mUsig23G6qUvDBgdlxiySZheSpE37fsNXLdVjdRMvBYdwY/BNAnZt9Cs7Wb
+	H0U2J4l6DVzk0ebw1uGRRamGaAXG1Z50tBby/aRIWLuF4itn3pRebQCWhj1Z44oQmSd5
+	SbP73jsRHB82NKwnpyQoDzs9rpmetT9CB9T7UK4xNg5hVMpFWIc9o/kdu95LDVBDOQ51
+	JGoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=pTr8/b5Sit9ewAc6BUpPCRGErR+pF3P0gIAQZ4VQqyw=;
-	b=DBDvXcTscce3M8FqAtIXk551Y4b9arv2QIV35jkKX+XMddsmcX5x8a9jNCbC1UVmCD
-	H1xDyGiKvRLLdOxNs09h15tW+s5RrIo4gd+Q5dhuJ1xStN6WYL3MickrCxhXjbIyvYvp
-	FqGkSiMdpkIh+ToLBgP0WG7+Hxwd5bQ9wLLQ3zx2Aa2x70o7nuVEOTU8oGR6m0eVoprZ
-	729PdY50P/BCguzUcsaKbVGOCxzrM3AvZ3I8Z02hmvgMwegMZIeaG3486OekcKVFDcaR
-	ygu04wkCJHf00SGOuwJjzCSTLsNqZ0vZMxv5fv4wmBrnAQkPuv+dTe62XggpsTI07Di8
-	vtnA==
-X-Gm-Message-State: APjAAAUlj/JMQUsc3V2aK8Pm7+fl6n7+A0Yls89hKK4es5qU8xxZVKFh
-	y9e8hBykNfn8RlMoSW7KOW9JD5rbSVo=
-X-Google-Smtp-Source: APXvYqyM7ZUTwHKCYlIKMrZvBfX1YDq0Q7lbtFAt4Ef3o0ucipMzcO1XKnTbC5yaXPu3gcZkIt+KoQ==
-X-Received: by 2002:a1c:ba89:: with SMTP id
-	k131mr25802129wmf.108.1575905201480; 
-	Mon, 09 Dec 2019 07:26:41 -0800 (PST)
-Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
-	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
-	z3sm27375600wrs.94.2019.12.09.07.26.39
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 07:26:40 -0800 (PST)
-From: Ross Burton <ross.burton@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 15:26:36 +0000
-Message-Id: <20191209152636.25746-1-ross.burton@intel.com>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=AAffzjFWfTHwr5yNTCKLw272XPdhkBEtRuey1VAet+A=;
+	b=X9xPc05D1yx71UjYkz7B0Swtbs2UvHqccbECDb4qs8Y6his9dWvjYEN/1RyP4FjG6R
+	Z5Au6UXnJxxseLqgVz2wycmV0EJ07I51odBMCaxBojVP/I9sqI+Rz0e4VA9ht4HmUsgp
+	9odWKy8r8Phqtej63kukYozcAQwgXCL1UpOj16vEmgVrgZPM1xA8Ij6Vh4QKr2KVoWP7
+	SQbKvOKwcPRwGEE6kCBj5HIChgu91dc/VgHf/Sj0glmCMPmI4kihq644o7soGs5JxK52
+	EA180peB1WVT0OwxJY2sZNzJGFjtVOq1JHyb0xQ2G9f1ljI0fcqjERd2BAylntCJXgwP
+	+NLA==
+X-Gm-Message-State: APjAAAUinuquKDDIzqi9UmgGOa5L3FUjTWYjoMarZEGB3EZ5qE7ao0FZ
+	HmVynnMkxgA+Rx919kxgfWsSdAjYQs1MWAub4jTWLw==
+X-Google-Smtp-Source: APXvYqyK06VK+P/B2WSS+ivevOl8QbNG+UkqWcwpufKjQKUx4IXRQuBH7NF+AQI28utscwHHUna9/P7PB/DHidauP+w=
+X-Received: by 2002:a02:cca4:: with SMTP id t4mr26839238jap.57.1575905614444; 
+	Mon, 09 Dec 2019 07:33:34 -0800 (PST)
 MIME-Version: 1.0
-Subject: [PATCH][meta-python] python-jsonpointer: enable native/nativesdk
+References: <20191209144601.21938-1-brgl@bgdev.pl>
+	<c8092805-82d6-9cbf-83de-d7a8b8bc0062@denx.de>
+	<20191209151451.GC5701@localhost>
+	<e2b8239f-8d8e-c200-c072-eaa69c819f7e@denx.de>
+In-Reply-To: <e2b8239f-8d8e-c200-c072-eaa69c819f7e@denx.de>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Mon, 9 Dec 2019 16:33:23 +0100
+Message-ID: <CAMRc=McHkSoWOMnJbUA-kCiMynHqtQq5a_OYeAX=5JqCpNqQBw@mail.gmail.com>
+To: Stefano Babic <sbabic@denx.de>
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
+Subject: Re: [meta-oe][PATCH] librsync: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,25 +60,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 15:26:42 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Dec 2019 15:33:33 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- meta-python/recipes-devtools/python/python-jsonpointer.inc | 2 ++
- 1 file changed, 2 insertions(+)
+pon., 9 gru 2019 o 16:22 Stefano Babic <sbabic@denx.de> napisa=C5=82(a):
+>
+> On 09/12/19 16:14, Adrian Bunk wrote:
+> > On Mon, Dec 09, 2019 at 03:53:33PM +0100, Stefano Babic wrote:
+> >> ...
+> >> Don't you have any depends from zlib / bzip ? cmake tests it, if you d=
+o
+> >> not add it, build will be fine but without support.
+> >> ...
+> >
+> > Is it also working for you?
+> > https://github.com/librsync/librsync/blob/master/CMakeLists.txt#L53-L57
+> > https://github.com/librsync/librsync/issues/8
+>
+> Oh, good catch, I was not aware of it. I guess not, because I saw the
+> dependencies when I wrote the recipe, but I *never* set ENABLE_COMPRESSIO=
+N..
+>
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonpointer.inc b/meta-python/recipes-devtools/python/python-jsonpointer.inc
-index d36f0294a8..b6e4836ef2 100644
---- a/meta-python/recipes-devtools/python/python-jsonpointer.inc
-+++ b/meta-python/recipes-devtools/python/python-jsonpointer.inc
-@@ -11,3 +11,5 @@ SRC_URI[sha256sum] = "c192ba86648e05fdae4f08a17ec25180a9aef5008d973407b581798a83
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-json \
- "
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.20.1
+Is this really something that needs to be provided by rdiff? We can
+just pipe the output to a compressor of your choice.
 
+Bart
+
+> Stefano
+>
+>
+> --
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
