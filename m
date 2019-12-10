@@ -1,50 +1,52 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 18DC76C102
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
+	[209.85.221.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 86E9F7F8C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 16:19:04 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id d71so8917982qkc.0
+	Tue, 10 Dec 2019 17:06:22 +0000 (UTC)
+Received: by mail-wr1-f51.google.com with SMTP id q10so20956580wrm.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 08:19:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=HVc5/jjck8CKMsLKZJaclITp/p89f8uEL8wUMUWJW8A=;
-	b=gwUCyiy3SPHmGrY72TD6i1lKCtI449VFkJHic3OiBpCrPhzsTedz2L8vEpnxgImZzd
-	cwH5O+JAR/KKmwC5jAIeJWrH5WsP0Age63ggypgXoMXGIaud+JOiEHG12oHkEM956Z8u
-	JKF/hyO9S3CjxfdaZFIXqWplU3AsFNtfPp8W3XeoRyVLcOOduRBKxcaWt+h1y3uZ6Wau
-	MnwNIkfjFiNNBwNjTUYEJqqklbufAGdbGJqHzj2Si5yH83cEdX5xC+Ns2LySiOVRjzXc
-	qSbBUUIKx9g1ZkbbEQ5aCN6+pSvsrCMdPODUyrus1gD8wmZ1Io+OwhMkOK++vIQbc0zj
-	vI4w==
+	Tue, 10 Dec 2019 09:06:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=870osHHpTNh7FRA9QnLOis5y/beoai3w3NLqpWJobCw=;
+	b=Jdj338gpuRyj0asSZLqvNmkGpkksyaN1gHo1rhoJILGMKTpt+T2QznNOqvsc2U4j/Y
+	LlMbTxgeCGsVjMdB2MO5kosiHW8YqqdO8YusVCOeYtXTedHM6pBuG64jRb13AlFfNJSl
+	7qwrd20XhIzyhan2LQSmsDVjC24K5SCFdYRLhEc9a2lnGy/D0xX1RIYO6lKTYgEh1D9I
+	MLrltydbm3m9ePUS/uTthzQ8nIdrcn9JrYGqINwhuTm5Fwa48M2G6zTNfeCuVEEGQGbQ
+	3tjfhiYKT82rT3WABuVwHcXqakTvg5iVa6GJr4O2lHuPmCH1RBCfmSYkrYksILL9Dsdd
+	On6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=HVc5/jjck8CKMsLKZJaclITp/p89f8uEL8wUMUWJW8A=;
-	b=RL4hszsG4FhBdxLFBZWd0LXeyqcx1LmlfJA6XhWuHaQmyMsh9B5UMnXjlGlWUegVdI
-	cwHepiXJ23nCrPuEyO32zV/OY4QAFGasbfNFVepdirRRKMcK8ImmaVNlEb8dCxqaEwQA
-	THQ9RYseSAH/VRPqPT/X79AxGdRD1zPMwZ+rgksK0J5/2o59CPQkRrwl74Qs2l2bjITD
-	qJ6mqs8SR1Nb151mDynK24R+zMOQ43wnckZB6HcJEKRhuTm2Pa9wErY9FQeMFZhM2R4T
-	DK7gNe6lN1zLg9ErcPI5pkaHgLO+31ZddQb5miFSx7HSqhXESYsIfRW1T/UAvZxp1OkZ
-	fdsQ==
-X-Gm-Message-State: APjAAAVSMxhAVOOO+uzBzPYPdTob6bVsxCzKTYdmwDd92CiSsJZ3zmRb
-	Xz6fQtTFdwZPXJZ1b1gVod4ERRA9ZqI23rQYF8o=
-X-Google-Smtp-Source: APXvYqxMar1ReuFG6Rz6EDDuTCUPlYSVkAsjyAa4gbCT9IUQ2U3vDsLMnxTpFDQwGoZcF0Ug9ewamUlxW9ppnJh2O1I=
-X-Received: by 2002:a37:51d4:: with SMTP id f203mr1759195qkb.212.1575994745323;
-	Tue, 10 Dec 2019 08:19:05 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=870osHHpTNh7FRA9QnLOis5y/beoai3w3NLqpWJobCw=;
+	b=Kw2qN4bqdgi5Sp45BH+hh1Iyt4R2QrfkZe2reB/KjyzkxOAL53GBZgwsYQVm3ijVzB
+	7e0FcL4h92w3aMWWT+n+7ftHD37LuuFr/1WDthiDoeHzmrYZKyJCb02EfgV7CRgtv2jV
+	XxlqjRZ5Exd/HIK5XIFBoqs3Srmu21mNg7mEajwwrPufuyHHfkodTbM12xQV8pW5YumA
+	mcsyTEcfAirOfONqK2am3iN+GZHzWS8gl8x6Kk3G/7G5lrUueBQXeDFPY8g0xM0X1Ia6
+	N4g3x2cCGVCIy+CLkdO9KT1rZklExfsYFyR6fcEf3M6JZQVEMJfU5yPcNZTr4oaqxrs5
+	cZGQ==
+X-Gm-Message-State: APjAAAXY0fy7gp57gHnIWG1drZEKU65+WqKOnVgz81dGecW5aKLjnqrS
+	rhYr/KaGC98UVy4iQnMN/uBIwWbmkyY=
+X-Google-Smtp-Source: APXvYqxKSP/dce3/gBC/mDWWAKTWz829M5sr3o8CYGvvlYhrc22AFldbupz7xEWV3a/6xp+JXKIolw==
+X-Received: by 2002:adf:ea0f:: with SMTP id q15mr4275011wrm.324.1575997582914; 
+	Tue, 10 Dec 2019 09:06:22 -0800 (PST)
+Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
+	[81.2.106.35])
+	by smtp.gmail.com with ESMTPSA id q3sm3998443wrn.33.2019.12.10.09.06.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 10 Dec 2019 09:06:21 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Dec 2019 17:06:14 +0000
+Message-Id: <20191210170618.29764-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20191209144525.21752-1-brgl@bgdev.pl>
-	<CAMKF1spX0HCZ-pcth0t80VSHMVvSN2BTyLb1jXg6h4LQG-XGOw@mail.gmail.com>
-	<CAMRc=Mfgfmp8vKufxQdtZ7ojL1GAWeXhh8KbpCr96CUThbsKYg@mail.gmail.com>
-In-Reply-To: <CAMRc=Mfgfmp8vKufxQdtZ7ojL1GAWeXhh8KbpCr96CUThbsKYg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Dec 2019 08:18:53 -0800
-Message-ID: <CAMKF1soOi9SMGJqjTbNEOpvVfdiYRqAgQ4MC_D73oDfLcZ9XvA@mail.gmail.com>
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] librsync: new package
+Subject: [PATCH][meta-python 1/5] python-slip-dbus: don't use relative paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,87 +59,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 16:19:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 10 Dec 2019 17:06:22 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, Dec 10, 2019 at 7:50 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta-python/recipes-devtools/python/python-slip-dbus.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> pon., 9 gru 2019 o 20:24 Khem Raj <raj.khem@gmail.com> napisa=C5=82(a):
-> >
-> > On Mon, Dec 9, 2019 at 6:45 AM Bartosz Golaszewski <brgl@bgdev.pl>
-> wrote:
-> > >
-> > > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> > >
-> > > rdiff is a popular tool for calculating binary delta patches. It's
-> > > provided by the librsync package (unrelated to rsync already availabl=
-e
-> > > in poky).
-> > >
-> > > This recipe adds new packages for librsync and rdiff.
-> > >
-> > > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> > > ---
-> > >  .../recipes-support/librsync/librsync_2.2.1.bb | 18
-> ++++++++++++++++++
-> > >  1 file changed, 18 insertions(+)
-> > >  create mode 100644 meta-oe/recipes-support/librsync/librsync_2.2.1.b=
-b
-> > >
-> > > diff --git a/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
-> b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
-> > > new file mode 100644
-> > > index 000000000..9d224767c
-> > > --- /dev/null
-> > > +++ b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
-> > > @@ -0,0 +1,18 @@
-> > > +SUMMARY =3D "Remote delta-compression library."
-> > > +AUTHOR =3D "Martin Pool, Andrew Tridgell, Donovan Baarda, Adam Schub=
-ert"
-> > > +
-> > > +LICENSE =3D "LGPLv2.1+"
-> > > +LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3Dd8045f3b8f929c1cb29a1e3fd737b499"
-> > > +
-> > > +SRC_URI =3D "git://github.com/librsync/librsync.git"
-> > > +SRCREV =3D "5917692418657dc78c9cbde3a8db4c85f25b9c8d"
-> > > +S =3D "${WORKDIR}/git"
-> > > +
-> > > +DEPENDS =3D "popt"
-> > > +
-> > > +inherit cmake
-> > > +
-> > > +BBCLASSEXTEND =3D "native nativesdk"
-> > > +
-> > > +PACKAGES =3D+ "rdiff"
-> > > +FILES_rdiff =3D "/usr/bin/rdiff"
-> >
-> > Please use ${bindir} instead of /usr/bin
-> >
->
-> Will do.
->
-> While at it: I noticed another problem and I'm not sure how to
-> approach it: the recipe provides the librsync package as well as
-> librsync-native by using BBCLASSEXTEND =3D "native". We also use
-> PACKAGES =3D "rdiff" to provide the rdiff executable in a separate
-> package, but it doesn't seem to provide the native package for rdiff
-> automatically. What is the right way to provide librsync,
-> librsync-native, rdiff and rdiff-native here?
->
-> This is needed as native rdiff will be used to actually create the
-> delta update images in the system I'm working on.
->
+diff --git a/meta-python/recipes-devtools/python/python-slip-dbus.inc b/meta-python/recipes-devtools/python/python-slip-dbus.inc
+index 9e726b5b92..ab7b1bb06c 100644
+--- a/meta-python/recipes-devtools/python/python-slip-dbus.inc
++++ b/meta-python/recipes-devtools/python/python-slip-dbus.inc
+@@ -21,7 +21,7 @@ SRC_URI[md5sum] = "28ae5f93853466c44ec96706ba2a1eb4"
+ SRC_URI[sha256sum] = "c726c086f0dd93a0ac7a0176f383a12af91b6657b78a301e3f5b25d9f8d4d10b"
+ 
+ do_compile_prepend() {
+-    sed -e 's/@VERSION@/${PV}/g' setup.py.in > setup.py
++    sed -e 's/@VERSION@/${PV}/g' ${S}/setup.py.in > ${S}/setup.py
+ }
+ 
+ RDEPENDS_${PN} += "\
+-- 
+2.20.1
 
-Use librsync-native
-
->
-> Thanks in advance,
-> Bartosz Golaszewski
->
-> > > --
-> > > 2.23.0
-> > >
->
 
