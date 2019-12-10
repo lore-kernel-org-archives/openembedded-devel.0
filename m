@@ -1,44 +1,31 @@
-Return-Path: <kamelghalgaoui7@gmail.com>
-Received: from mail-io1-f41.google.com (mail-io1-f41.google.com
-	[209.85.166.41])
-	by mail.openembedded.org (Postfix) with ESMTP id B9AC47FC5B
+Return-Path: <ross.burton@intel.com>
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by mail.openembedded.org (Postfix) with ESMTP id 352D57F899
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 10:12:23 +0000 (UTC)
-Received: by mail-io1-f41.google.com with SMTP id z26so18171445iot.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 02:12:25 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=Wp4K8ZzRwTX80SWJroSecWm4OzFEJ/3ICdx+maNgQ/g=;
-	b=mWqmmKVCZjLMhf9eDrUbgA7a+L13Q2VGFjzaDJZV0RvU+h3TjF4iCycN+onH/kSxVL
-	LretJDJbhf08nRj7RIUYCOe1UjOkHPhAWQubpEYZ45rXiVf5Br/rXXzU3QkYWueqserr
-	jPZr60zcVobT+yPvqjsbFmLgys0h8bgH1/EseXxYtnZiXiCBvpiXhjpzJYD1jzuKN9I9
-	+x/QIdl7eCOMe4CsZX4uAht8vdt9s+C3C/vNbdLAyHvstrI8L+I7+cPkHAHEqUCNuNfP
-	cJ+EWP8Ia0mvmGIBV8XV1ME73A0OJUg/73yOyX0nmRx+Oi+Rw1AlaIgXQ2BKj6uvvI76
-	nfdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=Wp4K8ZzRwTX80SWJroSecWm4OzFEJ/3ICdx+maNgQ/g=;
-	b=mh69IJVdnJTJP1tfmhND9O0BSIMjzWedH+DFH1IVmz8oeKfzBc/l1FYGf7fb15qklq
-	fjo6TID560oenvv7gltdoPrTrWjgpaVOilNqpJpk0bDGfr/YRkIvZH88/pbwMShjyk78
-	0XBLjGBMPmNI47y+C1Ja0DCMCHqmWzXScjk//9R8Z5oAoDJOAEqPlA7y/+kfEbtN00uI
-	1CmumObs5CU80sQwunbnXMLmtaFPnxaDHrQIJqEl/nqfaTZUsgeVNND7kRHVIPLx+3C6
-	5rtL2SuH1ARM9IRMsXfLVDabWm2IFLrwv+Uc/Tq0plcsZ6HobE19shlbdPEw/fgjSZRi
-	Udxg==
-X-Gm-Message-State: APjAAAUu1b/k8mDUMPC6IrVrtI7Q7H0htj1X0f9ED6h2yUSf3taSBcAS
-	DmHZseEt6uiVcMjhynmVFf9AD920Z+yn6DyCJtUNMJi1
-X-Google-Smtp-Source: APXvYqyXr55Is2pSft9gzg17iVcX0HIaPfH0h96ATHruKB81OSiaiUFGj5Xd6IMZpJgSSx9ns6M6iPmk+DLzv8656ck=
-X-Received: by 2002:a05:6602:2541:: with SMTP id
-	j1mr24735810ioe.239.1575972744249; 
-	Tue, 10 Dec 2019 02:12:24 -0800 (PST)
+	Tue, 10 Dec 2019 11:03:25 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	10 Dec 2019 03:03:26 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.69,299,1571727600"; d="scan'208";a="207245595"
+Received: from pozo-mobl.ger.corp.intel.com (HELO blackadder.local)
+	([10.252.33.212])
+	by orsmga008.jf.intel.com with ESMTP; 10 Dec 2019 03:03:24 -0800
+To: Kamel Ghalgaoui <kamelghalgaoui7@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <CANSQD5+CcEbaHxdfR8cjqdc6maXhrCgXy3eXrGD0dMgpiM_0LQ@mail.gmail.com>
+From: Ross Burton <ross.burton@intel.com>
+Organization: Intel Corporation (UK) Ltd. - Co. Reg. #1134945 - Pipers Way,
+	Swindon SN3 1RJ
+Message-ID: <7e5b400c-9c07-ff0d-df4b-9ca0329bfdbc@intel.com>
+Date: Tue, 10 Dec 2019 11:03:24 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:60.0)
+	Gecko/20100101 Thunderbird/60.9.1
 MIME-Version: 1.0
-From: Kamel Ghalgaoui <kamelghalgaoui7@gmail.com>
-Date: Tue, 10 Dec 2019 11:12:13 +0100
-Message-ID: <CANSQD5+CcEbaHxdfR8cjqdc6maXhrCgXy3eXrGD0dMgpiM_0LQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Building Linux Error
+In-Reply-To: <CANSQD5+CcEbaHxdfR8cjqdc6maXhrCgXy3eXrGD0dMgpiM_0LQ@mail.gmail.com>
+Subject: Re: Building Linux Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,45 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 10:12:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 10 Dec 2019 11:03:25 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On 10/12/2019 10:12, Kamel Ghalgaoui wrote:
+> kamel@ThinkPad-E590:/opt/yocto/poky/build$ bitbake core-image-minimal
+> Parsing recipes: 100%
+> |########################################################################################################|
+> Time: 0:00:33 Parsing of 1499 .bb files complete (0 cached, 1499 parsed).
+> 2061 targets, 132 skipped, 0 masked, 0 errors. NOTE: Resolving any missing
+> task queue dependencies Build Configuration: BB_VERSION = "1.32.0"
+> BUILD_SYS = "x86_64-linux" NATIVELSBSTRING = "universal" TARGET_SYS =
+> "arm-poky-linux-gnueabi" MACHINE = "raspberrypi3" DISTRO = "poky"
+> DISTRO_VERSION = "2.2.4" TUNE_FEATURES = "arm armv7ve vfp thumb neon vfpv4
+> callconvention-hard cortexa7" TARGET_FPU = "hard" meta meta-poky
+> meta-yocto-bsp = "fido:e56be3cee517c5262486136dbd6d649b68c3a8b7" meta-oe =
+> "fido:997caf9146cd3797cd054e2adebd1fbb4df91911" meta-raspberrypi =
+> "fido:2a192261a914892019f4f428d7462bb3c585ebac" Initialising tasks: 100%
+> |#####################################################################################################|
+> Time: 0:00:06 NOTE: Executing SetScene Tasks NOTE: Executing RunQueue Tasks
+> **ERROR:** *quilt-native-0.64-r0 do_populate_lic: Error executing a python
+> function in exec_python_func() autogenerated: The stack trace of python
+> calls that resulted in this exception/failure was: File:
+> 'exec_python_func() autogenerated', lineno: 2, function: <module>*
 
-I try to build an embedded linux system for my raspberrypi3 board using
-yocto on Ubuntu 16.04 I use stable branch fido. But I got this error:
+You stopped including the message at the point that the actual error was 
+shown.
 
-kamel@ThinkPad-E590:/opt/yocto/poky/build$ bitbake core-image-minimal
-Parsing recipes: 100%
-|########################################################################################################|
-Time: 0:00:33 Parsing of 1499 .bb files complete (0 cached, 1499 parsed).
-2061 targets, 132 skipped, 0 masked, 0 errors. NOTE: Resolving any missing
-task queue dependencies Build Configuration: BB_VERSION = "1.32.0"
-BUILD_SYS = "x86_64-linux" NATIVELSBSTRING = "universal" TARGET_SYS =
-"arm-poky-linux-gnueabi" MACHINE = "raspberrypi3" DISTRO = "poky"
-DISTRO_VERSION = "2.2.4" TUNE_FEATURES = "arm armv7ve vfp thumb neon vfpv4
-callconvention-hard cortexa7" TARGET_FPU = "hard" meta meta-poky
-meta-yocto-bsp = "fido:e56be3cee517c5262486136dbd6d649b68c3a8b7" meta-oe =
-"fido:997caf9146cd3797cd054e2adebd1fbb4df91911" meta-raspberrypi =
-"fido:2a192261a914892019f4f428d7462bb3c585ebac" Initialising tasks: 100%
-|#####################################################################################################|
-Time: 0:00:06 NOTE: Executing SetScene Tasks NOTE: Executing RunQueue Tasks
-**ERROR:** *quilt-native-0.64-r0 do_populate_lic: Error executing a python
-function in exec_python_func() autogenerated: The stack trace of python
-calls that resulted in this exception/failure was: File:
-'exec_python_func() autogenerated', lineno: 2, function: <module>*
+That's Fido which is *very* old.  Please use Zeus if possible, Warrior 
+if not (as you said that release already), and include the entire output.
 
-Note:
-- I have install all pre-requisites:
-$ sudo apt-get install gawk wget git-core diffstat unzip texinfo
-gcc-multilib build-essential chrpath socat make xsltproc docbook-utils fop
-dblatex xmlto libsdl1.2-dev xterm install python-git
+Immediate hunch is that you don't have sufficient permissions in your 
+build dir.
 
-- I tried with warrior and thud branch, but I got the same error
-
-How do I resolve these ?
-
-Thank you
-
-KAMEL.
+Ross
 
