@@ -1,54 +1,54 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
-	[209.85.128.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E3E67F8C6
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 72CF57FC59
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 17:06:23 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id d5so2506249wmb.4
+	Tue, 10 Dec 2019 17:06:24 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id y17so20977888wrh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 09:06:24 -0800 (PST)
+	Tue, 10 Dec 2019 09:06:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=GF9oVoG9W6UKnpd07tMFtjZvaW55mLMFwGd2NZUvAGk=;
-	b=QoN6Ik/qIZyfWTG+/7EL1u8jjQ5Zcq+TI3r1F6hKk/BBlRrFpt8ImHpETlUVPQTrJn
-	rYQf/tbo62Dl9dPw2eSvKvrc1AuQvrUZF8nnoX3lrezybkT0sJwJZeYL60CImdgJjYzv
-	LQnBTfYBfmJUA69s3qydyVrYUO7WYCCy9fRvZE/6aYonR8cbB7EMNj1JHU0B0mrJ18W0
-	sd5vhHyFb+VpcQ8FoGr5P0nNfBf3q1tXtW3iIgDivY3mIs6G47nOZfUSEyG4+L5fD7kY
-	LK5rl3cUl9TApq36eS/6ThgpDGLoUWLHJ91V39RCwocm7VSXOOJaZksUY2QccewvZiwR
-	gUuA==
+	bh=KDu+95KJCvJPeTioAFQsYbbnjhc0pO16CeDpFuq7X5w=;
+	b=zbgnQ/gkcxjYPnWoO82jKo3iuHvdU2RPd4qUmW8VYhhyVEMKNKJi/kDJFvkLj2uGMK
+	A10lWvfovLS2p13+PIjeepSfAYnEDVOW1ZwUoMqI1rEvLF9Ukr64bGB1OJbcIDdxdxyD
+	7tWr19YlP8oMsvRvs160rU8c0EIkD8k/5IciLFOdRiqUujKSxB4DkwmWubZUTypjQGvu
+	6X2PkOnf4vP2zSey0zigyEYuZaawYI+ebwZK+ql4dGbhQnTwNyTE/iDsrylGkbr1zc4c
+	WnEWJlEnyv/E+5RR8PaygAW7Fks6UpVaokYgxg/aaCGVKGAzKDNO/+W2lvwmn+G8z5bN
+	Hxrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=GF9oVoG9W6UKnpd07tMFtjZvaW55mLMFwGd2NZUvAGk=;
-	b=ZXvHaym48fpMfVvYP6vgtSpSiRQ7/ncgtS1MWJwWc4OeH1lEogDt/b3DxP06bRPCI7
-	maaOjUfowWI8CtfuWslzZUvpNVfryU4vkWDuZBA4i+K7nH7agcnKQkliCkftzqqOyQlE
-	zA5cjQvXnC2r9v9I53JIbcS0eh5QjQPGEKHvVMIXz6QBl0NhKh4XY/sD1J9ym7XdzSfo
-	W8YD50nERbugJheQRh5ORoprEVjmjs+boEPP8QUyxq8GfDc/gpsTtORLC7SBHpKIvrHo
-	+dRIxtvTDDHFdsB3S2XgawvgVtH+daC44QLPJuwrMGRMsk2NArD/+lQrKQO8vkSjwFL1
-	ViOg==
-X-Gm-Message-State: APjAAAVwi/LHIA2YJUfrvRQSafaClZAPMqf55RmubaBSK/XDFY8WoKux
-	LbcBoEfOwIq0XCgBgpqewebe/CWM7j8=
-X-Google-Smtp-Source: APXvYqzxRH1zqhrxLIgeW285YJZxZ7n8YIfW+OowQii42IBPmzjbnyxHD+mEfPZk1YGvEhMxQ/7eew==
-X-Received: by 2002:a1c:23ca:: with SMTP id j193mr6019140wmj.83.1575997583954; 
-	Tue, 10 Dec 2019 09:06:23 -0800 (PST)
+	bh=KDu+95KJCvJPeTioAFQsYbbnjhc0pO16CeDpFuq7X5w=;
+	b=PD1wH5tAgFssGT980p7FPRDb78V4U9ZFeCKxysrHg0og+ovfMX17sznSKSLXfgaaqS
+	zaPH3anbqtwRH5asQwJJDCNCB+tC4QgNIzAnTeQArSv5tcqBujJF3HKVg7lHdK4/LKw+
+	KQR2+oC/3CckErOmrK3TBv42x2sXyjnya6W4sw/dtzq50GdHVmUYtTPmNBvJduolIl3V
+	78DJGCTN1FsLkM7sVE3OinuMMQxjiW03Qj4hUE6mjTjrZliVzZGHp+D9MgsatRIXYLNu
+	zHXIgdX6yuja0ekEXpyYaC9Os3fofrSpFE4n2fKPcT3nkRPg8/7EOjBGC7Zj8giV9NK7
+	Cqog==
+X-Gm-Message-State: APjAAAW6jTw2zjROdiF56zRru7rQfpBr6GNnsDfpSjbY7dcHM+NMlm2d
+	IPGjoKcfFfmzmy5TH8RFjhY10f2fbWA=
+X-Google-Smtp-Source: APXvYqxI1l/h4v9WWrcwUbalmU0IptDWgV33Olj/PoFD5BvZrxJGSARtZ5OOxtKSxqPNxUVWznuTGg==
+X-Received: by 2002:adf:f802:: with SMTP id s2mr4448449wrp.201.1575997584766; 
+	Tue, 10 Dec 2019 09:06:24 -0800 (PST)
 Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
 	[81.2.106.35])
 	by smtp.gmail.com with ESMTPSA id q3sm3998443wrn.33.2019.12.10.09.06.23
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 10 Dec 2019 09:06:23 -0800 (PST)
+	Tue, 10 Dec 2019 09:06:24 -0800 (PST)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Dec 2019 17:06:15 +0000
-Message-Id: <20191210170618.29764-2-ross.burton@intel.com>
+Date: Tue, 10 Dec 2019 17:06:16 +0000
+Message-Id: <20191210170618.29764-3-ross.burton@intel.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20191210170618.29764-1-ross.burton@intel.com>
 References: <20191210170618.29764-1-ross.burton@intel.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-python 2/5] python-m2crypto: don't use relative paths
+Subject: [PATCH][meta-python 3/5] python-coloredlogs: don't use relative paths
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,41 +61,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 17:06:23 -0000
+X-List-Received-Date: Tue, 10 Dec 2019 17:06:24 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-python/recipes-devtools/python/python-m2crypto.inc | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-python/recipes-devtools/python/python-coloredlogs.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
-index a36ab8a7fa..5f5444f37e 100644
---- a/meta-python/recipes-devtools/python/python-m2crypto.inc
-+++ b/meta-python/recipes-devtools/python/python-m2crypto.inc
-@@ -32,7 +32,7 @@ export SWIG_FEATURES
- #
- do_configure_prepend() {
-     ${CPP} -dM - < /dev/null | grep -v '__\(STDC\|REGISTER_PREFIX\|GNUC\|STDC_HOSTED\)__' \
--    | sed 's/^\(#define \([^ ]*\) .*\)$/#undef \2\n\1/' > SWIG/gcc_macros.h
-+    | sed 's/^\(#define \([^ ]*\) .*\)$/#undef \2\n\1/' > ${S}/SWIG/gcc_macros.h
+diff --git a/meta-python/recipes-devtools/python/python-coloredlogs.inc b/meta-python/recipes-devtools/python/python-coloredlogs.inc
+index f43bea1f74..bdb1d752c5 100644
+--- a/meta-python/recipes-devtools/python/python-coloredlogs.inc
++++ b/meta-python/recipes-devtools/python/python-coloredlogs.inc
+@@ -10,7 +10,7 @@ SRC_URI[sha256sum] = "b869a2dda3fa88154b9dd850e27828d8755bfab5a838a1c97fbc850c6e
+ inherit pypi
  
-     if [ "${SITEINFO_BITS}" = "64" ];then
-         bit="64"
-@@ -42,11 +42,11 @@ do_configure_prepend() {
- 
-     if [ -e ${STAGING_INCDIR}/openssl/opensslconf-${bit}.h ] ;then
-         for i in SWIG/_ec.i SWIG/_evp.i; do
--            sed -i -e "s/opensslconf.*\./opensslconf-${bit}\./" "$i"
-+            sed -i -e "s/opensslconf.*\./opensslconf-${bit}\./" "${S}/$i"
-         done
-     elif [ -e ${STAGING_INCDIR}/openssl/opensslconf-n${bit}.h ] ;then
-         for i in SWIG/_ec.i SWIG/_evp.i; do
--            sed -i -e "s/opensslconf.*\./opensslconf-n${bit}\./" "$i"
-+            sed -i -e "s/opensslconf.*\./opensslconf-n${bit}\./" "${S}/$i"
-         done
-     fi
+ do_compile_prepend() {
+-    sed -ie "s/find_pth_directory(),/'',/g" setup.py
++    sed -ie "s/find_pth_directory(),/'',/g" ${S}/setup.py
  }
+ 
+ do_install_append() {
 -- 
 2.20.1
 
