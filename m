@@ -1,50 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f180.google.com (mail-qk1-f180.google.com
-	[209.85.222.180])
-	by mail.openembedded.org (Postfix) with ESMTP id C177F7F69B
+Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com
+	[209.85.219.65])
+	by mail.openembedded.org (Postfix) with ESMTP id CA94D7FC0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 23:47:54 +0000 (UTC)
-Received: by mail-qk1-f180.google.com with SMTP id w127so6293691qkb.11
+	Tue, 10 Dec 2019 23:49:23 +0000 (UTC)
+Received: by mail-qv1-f65.google.com with SMTP id o18so4985577qvf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 15:47:56 -0800 (PST)
+	Tue, 10 Dec 2019 15:49:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=wuE+n19jCcxOtzU7Mfbr5V0dN9BfDHxxT2FFed2hPpQ=;
-	b=u3gBwDzWTa7IQulyBeCCAy0PSGgYe/DkAgNnrFBeiDBZZ90VF/Mjidz2k8XDC6Xqg6
-	m7POPz5bipl6PMAZTKd/KfAp+Jn1u5zfkthIYiPx5UlMDTAHIWe+q98r+ieVJ3LlbrN8
-	8ssuWnAzqgA2ycRh/FukrZp1LG3Y/RSN1Pa0rEL2HKAQ8bPSA0RPG4bmw7V7emIFcW75
-	rva4K9Zu/ASmY+s+T4k0JoizJ5xYhPJJrYG1gH+0a4tUPEXP7IFF+/CjWuZX/3aXoAu9
-	U4L/MRnLMNIN5FoDoeMPIjHAidIkdDCm/zjjHUgPLu5zX6m4VZg6kCnuAua3VnayePQs
-	c1Xw==
+	bh=Uluy35ilFScnCpcxJOtGu8MMIf1BSAmOOL5F8QJlemU=;
+	b=SpmjEHf+4E0hu7itArC/qykTnfyDk4nLgSun5796LDYJjN4kNAil/769h8osQ+XMTm
+	vXgYAfToP/qQsBwY2NFciuyRQ3wNR+xjQnTG2USFZiHuAcKIVUx3iaLkLZNHD1s5kPUf
+	0xBbkty6IGUaehpxuktEVZRSGsrVzDd3gFKQ+j2I/VmWjf3v5bKMB35JgZz6KJJl+pCq
+	J2LSrWJDkAU4OechTqlZzimX1+ZIbxy7xq4TmClFORiHmn5vq6LcdFnBNk72a1GSMJfs
+	6hQSwXR6azNn3kak6XZDmfaS/bgyoL6m/v2TWPCFuwG4OTPgPf4gC+7BfZoUB5H6F0S2
+	HWCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=wuE+n19jCcxOtzU7Mfbr5V0dN9BfDHxxT2FFed2hPpQ=;
-	b=M7V4J6PcJyd12k3ztBO5y+qzwMMDsU7jnAOLMpQaRfljqZQ2QP2q6KeqkOoPCXTQyL
-	ZxdwTD/LssJLlNQVmyUfBS+R3kV9dCa7fZfnd4xH3k4grHxq4phxQQlWmLHhn8B5ckO7
-	893ABhroXhYIna+lXSzFWD3aDoq0Hy0mwxWOP/RRfN7FaXlHEnyK4r+QQLKDYVmAPZnj
-	yagps7/6sxdvXRtoySbblQe4BQCFDxTH3N/3IYZArAzHrUDpUgbl7tP2qMdZUpV05cfi
-	nM4kEHbA5dHtULhyouYFasc08ig/oTZluOI25ulcDHjWh3VyoXm537L46M+Q7l7MUZaJ
-	f+Nw==
-X-Gm-Message-State: APjAAAVVqudN1mO+Xlrm2DHBot79g7deGEzCDMfwGpDIB7+VfkxmWKFO
-	xxkgSBPEk+bBN/Jt0goxW2hkua206JwGXTgfDx0=
-X-Google-Smtp-Source: APXvYqwbbCjXNGrMJxjGyjYGAnsTe/C8JLzcCjBU7Om4RNXbuLcm8G19kfKmSe0lha1WFh5UQ31udlOBy8vkzogNI8c=
-X-Received: by 2002:a37:de05:: with SMTP id h5mr356497qkj.474.1576021675368;
-	Tue, 10 Dec 2019 15:47:55 -0800 (PST)
+	bh=Uluy35ilFScnCpcxJOtGu8MMIf1BSAmOOL5F8QJlemU=;
+	b=oId6i3LUeTlmzWVw6VpeX4n44gjRFmMnlyCAULTaYFepKFsQWw0Bm1nnNvVzSRwwcx
+	1lND+Xx0beatofaKTBnI7I50CxKOjR3xg5X6zeSFTDXFZauSh656eU38xBGDSW3P/63V
+	JnTr6ODPDMDm18ETsUZfoX/5SgsUp+pQAndJ2/aFGj7SrzALJ/mNM/1HA+6EUVkW2I98
+	5X/NIOLhpnKsWDxLMIWjfH/nRw6F6++AyPxK9XwNG1HdyVRma0Rd979wlk6hPyxFke79
+	d9zCKHNTLr2spNHLHXPYwL7zccj8FeQNfmxodQhIaXAeKdaM/1e4KDZsAz/QGqu9jkKs
+	NqKQ==
+X-Gm-Message-State: APjAAAUu4Q+EULkplqvr2tIaUYms74pg4vd74B5VFCqj7sgIIMv89/HG
+	H/OE/kJ8e1/Bp952JN/03KEGIBIVaQ0LgygWfXk=
+X-Google-Smtp-Source: APXvYqxaRm5v13EWtTlV6bUknPc6mJ1rtSCc8MiFbG92HWdVMNQqajwK+K8x0V4ifsuCqygCAYkFSvzVsbico6Erjjo=
+X-Received: by 2002:a0c:8605:: with SMTP id p5mr442340qva.109.1576021764344;
+	Tue, 10 Dec 2019 15:49:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20191209083612.23922-1-schnitzeltony@gmail.com>
-	<20191209083612.23922-6-schnitzeltony@gmail.com>
-	<CAMKF1spG5KPsiw7PkDG0JwPVGwJudMFduieEcmf73trCUMSG-g@mail.gmail.com>
-	<CALbNGRRdspaYTVH_0Zmbrs-fUJBtJOjpVSiy24kBN_bHmR1yXA@mail.gmail.com>
-In-Reply-To: <CALbNGRRdspaYTVH_0Zmbrs-fUJBtJOjpVSiy24kBN_bHmR1yXA@mail.gmail.com>
+References: <1576014699-29663-1-git-send-email-denis@denix.org>
+In-Reply-To: <1576014699-29663-1-git-send-email-denis@denix.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Dec 2019 15:47:29 -0800
-Message-ID: <CAMKF1spq0EWDJg8gL14SQoGZRu7e_PTV9YcEiqQ_jEQ4BnqK_Q@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][v3 05/20] accountsservice: initial add 0.6.55
+Date: Tue, 10 Dec 2019 15:48:58 -0800
+Message-ID: <CAMKF1sov90kwh_dy8UD-qob7UXTkeD2iL6=X2T+PHanFvVy7Pw@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-networking][PATCH] netperf: add "intervals" and "histogram" PACKAGECONFIGs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,43 +55,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 23:47:55 -0000
+X-List-Received-Date: Tue, 10 Dec 2019 23:49:23 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 10, 2019 at 1:53 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
+On Tue, Dec 10, 2019 at 1:52 PM Denys Dmytriyenko <denis@denix.org> wrote:
 >
-> On Tue, Dec 10, 2019 at 8:57 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > On Mon, Dec 9, 2019 at 12:37 AM Andreas M=C3=BCller <schnitzeltony@gmai=
-l.com> wrote:
-> > >
-> > > It is a dependency for upcoming gnome-control-center
-> > >
-> >
-> > This seems to have hard dependency on systemd ? or can it be
-> > configured without systemd as well see
-> >
-> > https://errors.yoctoproject.org/Errors/Details/296904/
-> >
-> > in case it can not, then we need to exclude it from parsing when
-> > systemd is not in DISTRO_FEATURES
-> For systemd not in PACKAGECONFIG it needs
-> -Dsystemd_system_unit_dir=3D'no' to avoid this error.
+> From: Denys Dmytriyenko <denys@ti.com>
 >
-> Test would take some hours so my question: oe-core's master has
-> already removed python2 from hosttools and to be honest I expect huge
-> fallout all over. So my question: How much time do I still have for
-> tests?
-
-The python2 removal code is in my tree for few weeks, so your patches
-should be testing against that already.
-
-I have already built an image with gnome3 packagegrroups for
-qemuarm64 it went fine. So its looking to be making good progress
-thus far.
-
+> From https://hewlettpackard.github.io/netperf/doc/netperf.html:
 >
-> Andreas
+> Other optional configure-time settings include --enable-intervals=3Dyes t=
+o give
+> netperf the ability to =E2=80=9Cpace=E2=80=9D its _STREAM tests and --ena=
+ble-histogram=3Dyes to
+> have netperf keep a histogram of interesting times.
+>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  meta-networking/recipes-support/netperf/netperf_git.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-networking/recipes-support/netperf/netperf_git.bb b/met=
+a-networking/recipes-support/netperf/netperf_git.bb
+> index 8921ea7..f1f62df 100644
+> --- a/meta-networking/recipes-support/netperf/netperf_git.bb
+> +++ b/meta-networking/recipes-support/netperf/netperf_git.bb
+> @@ -31,6 +31,8 @@ CFLAGS_append =3D "${@bb.utils.contains('DISTRO_FEATURE=
+S', 'largefile', \
+>
+>  PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[sctp] =3D "--enable-sctp,--disable-sctp,lksctp-tools,"
+> +PACKAGECONFIG[intervals] =3D "--enable-intervals,--disable-intervals,,"
+> +PACKAGECONFIG[histogram] =3D "--enable-histogram,--disable-histogram,,"
+>
+
+now that they are explicitly disabled, Does it change the defaults ?
+
+
+>  # autotools.bbclass attends to include m4 files with path depth <=3D 2 b=
+y
+>  # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
