@@ -1,48 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com
-	[209.85.219.65])
-	by mail.openembedded.org (Postfix) with ESMTP id CA94D7FC0B
+Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com
+	[209.85.222.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 372587FC0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 23:49:23 +0000 (UTC)
-Received: by mail-qv1-f65.google.com with SMTP id o18so4985577qvf.1
+	Tue, 10 Dec 2019 23:50:46 +0000 (UTC)
+Received: by mail-qk1-f182.google.com with SMTP id x1so18035571qkl.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 15:49:25 -0800 (PST)
+	Tue, 10 Dec 2019 15:50:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Uluy35ilFScnCpcxJOtGu8MMIf1BSAmOOL5F8QJlemU=;
-	b=SpmjEHf+4E0hu7itArC/qykTnfyDk4nLgSun5796LDYJjN4kNAil/769h8osQ+XMTm
-	vXgYAfToP/qQsBwY2NFciuyRQ3wNR+xjQnTG2USFZiHuAcKIVUx3iaLkLZNHD1s5kPUf
-	0xBbkty6IGUaehpxuktEVZRSGsrVzDd3gFKQ+j2I/VmWjf3v5bKMB35JgZz6KJJl+pCq
-	J2LSrWJDkAU4OechTqlZzimX1+ZIbxy7xq4TmClFORiHmn5vq6LcdFnBNk72a1GSMJfs
-	6hQSwXR6azNn3kak6XZDmfaS/bgyoL6m/v2TWPCFuwG4OTPgPf4gC+7BfZoUB5H6F0S2
-	HWCA==
+	:cc; bh=8QYO6TS13HHqJ6fKKyZC9tMq7bwsMQJ/zcgXXey/cUo=;
+	b=OeiqvwWFP5ZBbsZtRhM0zm3S2i5lr7jB7bXdlwfDduw0tlHq53JqJQcuO1ZB38nSzZ
+	4jv//uCQJRuLKsBclVqv1FCCWGEfHqo3eaTXLjB8tzUkgVDrNK4bhuGDdTiBK9+xVP1u
+	ZrW8PQFv84ZaF7nIqhX/6ZrLHzQS+P+MG5gNtWSdMYf0gQIZNAlSNZQsKubDmmeBZShx
+	jZ08cw7liqPnNYeA72zDwQ2Bb59TQaWBQ4UGbVYYVNY50Eubvn6+RTmRqrxCP/MvSsjD
+	/xsTx265+UgM6Wl/MHe1FQU4pIiQp0ldN4vWhOUsPiW4JcyAPAPSERhtCh2BAZI8XQjb
+	IcYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Uluy35ilFScnCpcxJOtGu8MMIf1BSAmOOL5F8QJlemU=;
-	b=oId6i3LUeTlmzWVw6VpeX4n44gjRFmMnlyCAULTaYFepKFsQWw0Bm1nnNvVzSRwwcx
-	1lND+Xx0beatofaKTBnI7I50CxKOjR3xg5X6zeSFTDXFZauSh656eU38xBGDSW3P/63V
-	JnTr6ODPDMDm18ETsUZfoX/5SgsUp+pQAndJ2/aFGj7SrzALJ/mNM/1HA+6EUVkW2I98
-	5X/NIOLhpnKsWDxLMIWjfH/nRw6F6++AyPxK9XwNG1HdyVRma0Rd979wlk6hPyxFke79
-	d9zCKHNTLr2spNHLHXPYwL7zccj8FeQNfmxodQhIaXAeKdaM/1e4KDZsAz/QGqu9jkKs
-	NqKQ==
-X-Gm-Message-State: APjAAAUu4Q+EULkplqvr2tIaUYms74pg4vd74B5VFCqj7sgIIMv89/HG
-	H/OE/kJ8e1/Bp952JN/03KEGIBIVaQ0LgygWfXk=
-X-Google-Smtp-Source: APXvYqxaRm5v13EWtTlV6bUknPc6mJ1rtSCc8MiFbG92HWdVMNQqajwK+K8x0V4ifsuCqygCAYkFSvzVsbico6Erjjo=
-X-Received: by 2002:a0c:8605:: with SMTP id p5mr442340qva.109.1576021764344;
-	Tue, 10 Dec 2019 15:49:24 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=8QYO6TS13HHqJ6fKKyZC9tMq7bwsMQJ/zcgXXey/cUo=;
+	b=nbDfP6HQdNUEIcEMVPUgh+gk2DR97ZuyXz6M4Wd0/SiZ2gRftbxfYM/K5o/CbOtMeV
+	2qW9kloI6xWSNgGACCJ3E72CAiTuus9MBg118U7OkakuEDHI8ZqS1b1u35izwa0z5uiH
+	K+07o2LRL5cpgnQEez9zXfujtd9APOQICTRyGJSklrxU9ehLwBx/6WIWEWdKFk7RIUbQ
+	RaYDGM0E5sINGpUL8f6yd8rWv5ZKVSJ8bt97oEv5TiGnqkt3GwqM7zamyAa9Yb3zn7fe
+	0SQW5/UBEP1e4i/8Zojn5HvuqmU98t4fcf5sdvaFRSR4XsnUrklwJSMzKJil6oarlRW+
+	7MvA==
+X-Gm-Message-State: APjAAAXQ1DeSSuSDHn3S/9RcMy/x67NxPKp/V9zhmNsEdT/1cCEANwIY
+	8+KPyLLp3KGEuFkfOAXuSna9X+AzWJG+n/NZXn4=
+X-Google-Smtp-Source: APXvYqzklQYUi4V21Y3bCoNwxsSbwwzQkcD9jSl5DJO9y2+SFkqWVbppN9UKxXj5mLA0TW4LjaJwo9HBRGNsLGSvsPc=
+X-Received: by 2002:a37:51d4:: with SMTP id f203mr376502qkb.212.1576021846718; 
+	Tue, 10 Dec 2019 15:50:46 -0800 (PST)
 MIME-Version: 1.0
-References: <1576014699-29663-1-git-send-email-denis@denix.org>
-In-Reply-To: <1576014699-29663-1-git-send-email-denis@denix.org>
+References: <CANSQD5+CcEbaHxdfR8cjqdc6maXhrCgXy3eXrGD0dMgpiM_0LQ@mail.gmail.com>
+	<7e5b400c-9c07-ff0d-df4b-9ca0329bfdbc@intel.com>
+	<CANSQD5+e24bohovGjVgagiFrizqu2sj0SwzJWn+17tUJCthO_Q@mail.gmail.com>
+	<CAHtQpK4zNtju4Own7yx+bTZsmyycW2dXoB0JOA=566X=h89wMw@mail.gmail.com>
+	<20191210205704.wkwzy2kpgq2nqam2@vctlabs.com>
+	<CANSQD5Ju4ZN7gW7GGm6ELdG63LQDAe-gbn1aFXK4oO1Ta5NhZQ@mail.gmail.com>
+In-Reply-To: <CANSQD5Ju4ZN7gW7GGm6ELdG63LQDAe-gbn1aFXK4oO1Ta5NhZQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Dec 2019 15:48:58 -0800
-Message-ID: <CAMKF1sov90kwh_dy8UD-qob7UXTkeD2iL6=X2T+PHanFvVy7Pw@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-networking][PATCH] netperf: add "intervals" and "histogram" PACKAGECONFIGs
+Date: Tue, 10 Dec 2019 15:50:20 -0800
+Message-ID: <CAMKF1sqnj-iczhgfww+J6=3pWKf6KLn4UWkuSz9cAhQCSqwmcg@mail.gmail.com>
+To: Kamel Ghalgaoui <kamelghalgaoui7@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Building Linux Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,50 +58,179 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 23:49:23 -0000
+X-List-Received-Date: Tue, 10 Dec 2019 23:50:46 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Dec 10, 2019 at 1:52 PM Denys Dmytriyenko <denis@denix.org> wrote:
+On Tue, Dec 10, 2019 at 12:57 PM Kamel Ghalgaoui
+<kamelghalgaoui7@gmail.com> wrote:
 >
-> From: Denys Dmytriyenko <denys@ti.com>
->
-> From https://hewlettpackard.github.io/netperf/doc/netperf.html:
->
-> Other optional configure-time settings include --enable-intervals=3Dyes t=
-o give
-> netperf the ability to =E2=80=9Cpace=E2=80=9D its _STREAM tests and --ena=
-ble-histogram=3Dyes to
-> have netperf keep a histogram of interesting times.
->
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> ---
->  meta-networking/recipes-support/netperf/netperf_git.bb | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/meta-networking/recipes-support/netperf/netperf_git.bb b/met=
-a-networking/recipes-support/netperf/netperf_git.bb
-> index 8921ea7..f1f62df 100644
-> --- a/meta-networking/recipes-support/netperf/netperf_git.bb
-> +++ b/meta-networking/recipes-support/netperf/netperf_git.bb
-> @@ -31,6 +31,8 @@ CFLAGS_append =3D "${@bb.utils.contains('DISTRO_FEATURE=
-S', 'largefile', \
->
->  PACKAGECONFIG ??=3D ""
->  PACKAGECONFIG[sctp] =3D "--enable-sctp,--disable-sctp,lksctp-tools,"
-> +PACKAGECONFIG[intervals] =3D "--enable-intervals,--disable-intervals,,"
-> +PACKAGECONFIG[histogram] =3D "--enable-histogram,--disable-histogram,,"
+> For information, I my kernel version is 5.3.11 and I have tar version: 1.26
+> $ which tar
+> /usr/local/bin/tar
 >
 
-now that they are explicitly disabled, Does it change the defaults ?
+Interesting. I wonder if we should poison /usr/local for hosttools.
 
-
->  # autotools.bbclass attends to include m4 files with path depth <=3D 2 b=
-y
->  # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
-> --
-> 2.7.4
+> Thank you
 >
+> On Tue, Dec 10, 2019 at 9:54 PM S. Lockwood-Childs <sjl@vctlabs.com> wrote:
+>
+> > On Tue, Dec 10, 2019 at 09:17:42PM +0100, Andrey Zhizhikin wrote:
+> > > On Tue, Dec 10, 2019 at 8:13 PM Kamel Ghalgaoui
+> > > <kamelghalgaoui7@gmail.com> wrote:
+> > > >
+> > > > I try with zeus, but I got the same error:
+> > > >
+> > > > kamel@ThinkPad-E590:/opt/yocto/poky/build$ git branch
+> > > >   fido
+> > > >   morty
+> > > >   thud
+> > > >   warrior
+> > > > * zeus
+> > > > kamel@ThinkPad-E590:/opt/yocto/poky/build$
+> > > > kamel@ThinkPad-E590:/opt/yocto/poky/build$ bitbake core-image-minimal
+> > > > Loading cache: 100%
+> > > >
+> > |##########################################################################################################|
+> > > > Time: 0:00:00
+> > > > Loaded 2061 entries from dependency cache.
+> > > > NOTE: Resolving any missing task queue dependencies
+> > > >
+> > > > Build Configuration:
+> > > > BB_VERSION        = "1.32.0"
+> > > > BUILD_SYS         = "x86_64-linux"
+> > > > NATIVELSBSTRING   = "universal"
+> > > > TARGET_SYS        = "arm-poky-linux-gnueabi"
+> > > > MACHINE           = "raspberrypi3"
+> > > > DISTRO            = "poky"
+> > > > DISTRO_VERSION    = "2.2.4"
+> > > > TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4
+> > callconvention-hard
+> > > > cortexa7"
+> > > > TARGET_FPU        = "hard"
+> > > > meta
+> > > > meta-poky
+> > > > meta-yocto-bsp    = "zeus:e56be3cee517c5262486136dbd6d649b68c3a8b7"
+> > > > meta-oe           = "zeus:997caf9146cd3797cd054e2adebd1fbb4df91911"
+> > > > meta-raspberrypi  = "zeus:2a192261a914892019f4f428d7462bb3c585ebac"
+> > > >
+> > > > Initialising tasks: 100%
+> > > >
+> > |#####################################################################################################|
+> > > > Time: 0:00:04
+> > > > NOTE: Executing SetScene Tasks
+> > > > NOTE: Executing RunQueue Tasks
+> > > > ERROR: quilt-native-0.64-r0 do_populate_lic: Error executing a python
+> > > > function in exec_python_func() autogenerated:
+> > > >
+> > > > The stack trace of python calls that resulted in this
+> > exception/failure was:
+> > > > File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
+> > > >      0001:
+> > > >  *** 0002:sstate_task_postfunc(d)
+> > > >      0003:
+> > > > File: '/opt/yocto/poky/meta/classes/sstate.bbclass', lineno: 670,
+> > function:
+> > > > sstate_task_postfunc
+> > > >      0666:
+> > > >      0667:python sstate_task_postfunc () {
+> > > >      0668:    shared_state = sstate_state_fromvars(d)
+> > > >      0669:
+> > > >  *** 0670:    sstate_install(shared_state, d)
+> > > >      0671:    for intercept in shared_state['interceptfuncs']:
+> > > >      0672:        bb.build.exec_func(intercept, d, (d.getVar("WORKDIR",
+> > > > True),))
+> > > >      0673:    omask = os.umask(0o002)
+> > > >      0674:    if omask != 0o002:
+> > > > File: '/opt/yocto/poky/meta/classes/sstate.bbclass', lineno: 274,
+> > function:
+> > > > sstate_install
+> > > >      0270:
+> > > >      0271:    # Run the actual file install
+> > > >      0272:    for state in ss['dirs']:
+> > > >      0273:        if os.path.exists(state[1]):
+> > > >  *** 0274:            oe.path.copyhardlinktree(state[1], state[2])
+> > > >      0275:
+> > > >      0276:    for postinst in (d.getVar('SSTATEPOSTINSTFUNCS', True) or
+> > > > '').split():
+> > > >      0277:        # All hooks should run in the SSTATE_INSTDIR
+> > > >      0278:        bb.build.exec_func(postinst, d, (sstateinst,))
+> > > > File: '/opt/yocto/poky/meta/lib/oe/path.py', lineno: 81, function:
+> > > > copyhardlinktree
+> > > >      0077:    if (os.stat(src).st_dev ==  os.stat(dst).st_dev):
+> > > >      0078:        # Need to copy directories only with tar first since
+> > cp
+> > > > will error if two
+> > > >      0079:        # writers try and create a directory at the same time
+> > > >      0080:        cmd = "cd %s; find . -type d -print | tar --xattrs
+> > > > --xattrs-include='*' -cf - -C %s -p --no-recursion --files-from - | tar
+> > > > --xattrs --xattrs-include='*' -xf - -C %s" % (src, src, dst)
+> > > >  *** 0081:        subprocess.check_output(cmd, shell=True,
+> > > > stderr=subprocess.STDOUT)
+> > > >      0082:        source = ''
+> > > >      0083:        if os.path.isdir(src):
+> > > >      0084:            import glob
+> > > >      0085:            if len(glob.glob('%s/.??*' % src)) > 0:
+> > > > File: '/usr/lib/python3.5/subprocess.py', lineno: 626, function:
+> > > > check_output
+> > > >      0622:        # empty string. That is maintained here for backwards
+> > > > compatibility.
+> > > >      0623:        kwargs['input'] = '' if
+> > kwargs.get('universal_newlines',
+> > > > False) else b''
+> > > >      0624:
+> > > >      0625:    return run(*popenargs, stdout=PIPE, timeout=timeout,
+> > > > check=True,
+> > > >  *** 0626:               **kwargs).stdout
+> > > >      0627:
+> > > >      0628:
+> > > >      0629:class CompletedProcess(object):
+> > > >      0630:    """A process that has finished running.
+> > > > File: '/usr/lib/python3.5/subprocess.py', lineno: 708, function: run
+> > > >      0704:            raise
+> > > >      0705:        retcode = process.poll()
+> > > >      0706:        if check and retcode:
+> > > >      0707:            raise CalledProcessError(retcode, process.args,
+> > > >  *** 0708:                                     output=stdout,
+> > stderr=stderr)
+> > > >      0709:    return CompletedProcess(process.args, retcode, stdout,
+> > stderr)
+> > > >      0710:
+> > > >      0711:
+> > > >      0712:def list2cmdline(seq):
+> > > > Exception: subprocess.CalledProcessError: Command 'cd
+> > > >
+> > /opt/yocto/poky/build/tmp/work/x86_64-linux/quilt-native/0.64-r0/license-destdir;
+> > > > find . -type d -print | tar --xattrs --xattrs-include='*' -cf - -C
+> > > >
+> > /opt/yocto/poky/build/tmp/work/x86_64-linux/quilt-native/0.64-r0/license-destdir
+> > > > -p --no-recursion --files-from - | tar --xattrs --xattrs-include='*'
+> > -xf -
+> > > > -C /opt/yocto/poky/build/tmp/deploy/licenses' returned non-zero exit
+> > status
+> > > > 64
+> > > >
+> > > > Subprocess output:
+> > > > tar: unrecognized option '--xattrs'
+> > > > Try `tar --help' or `tar --usage' for more information.
+> > > > tar: unrecognized option '--xattrs'
+> > > > Try `tar --help' or `tar --usage' for more information.
+> > >
+> > > My best guess would be: this error (and you would see much more of
+> > > those) is comming from the tar version which is included in Ubuntu
+> > > 16.04 as this version is relatively old. I believe the next error with
+> > > that host distro would be from git: something with --set-upstream-to
+> > > would be an unrecognized option (modern git has changed syntax to
+> > > --set-upstream).
+> > >
+> > > If you have any possibility to upgrade host distro - I would strongl
+> > > suggest you to do that. Otherwise - Docker with a bit newer distro
+> > > would be a good choice.
+> >
+> > Actually 16.04 does support --xattrs, so more likely is that there is
+> > a 'tar' executable coming from somewhere else. What does 'which tar'
+> > have to say?
+> >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
