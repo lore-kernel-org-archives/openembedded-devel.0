@@ -1,32 +1,49 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
-	by mail.openembedded.org (Postfix) with ESMTP id DB2786010B
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-il1-f171.google.com (mail-il1-f171.google.com
+	[209.85.166.171])
+	by mail.openembedded.org (Postfix) with ESMTP id B9F997FC1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 21:51:44 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id CD1EC40C06;
-	Tue, 10 Dec 2019 21:51:45 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id HOB406Aj0Nsf; Tue, 10 Dec 2019 21:51:45 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
-	[100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B5F1740BC4;
-	Tue, 10 Dec 2019 21:51:44 +0000 (UTC)
-Received: from gimli.denix (unknown [192.168.30.6])
-	by mail.denix.org (Postfix) with ESMTP id 762DE17434E;
-	Tue, 10 Dec 2019 16:51:44 -0500 (EST)
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Dec 2019 16:51:39 -0500
-Message-Id: <1576014699-29663-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 2.7.4
+	Tue, 10 Dec 2019 21:53:11 +0000 (UTC)
+Received: by mail-il1-f171.google.com with SMTP id g12so17573852ild.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Dec 2019 13:53:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=O+0ZHByn8idODxUA2wUjUd1WRv6UWkmPpvXIhlxLbXg=;
+	b=unCwhURVNwaB5V3YS8BSb/uK6P6zwP9IW5EdjxxAAFWTpsEILHHtpWAKoMDBCj4mrK
+	IQfBBSTP6AE3Xw9+o7h07Lfw7ZLy08zvDvWihr6bfw7HOem/9HoE/hGNEXVXROTYChQm
+	+USQDOJ7yAplEj+gTuiBjmGpgIphFo4Y4QzuHZuEVOy0WfnHtsmvF+c6jQdYFnBR03oa
+	tKUzrf2lCMfZ8EElMCNuE0K1okaZEk3DntRF5i066PBuJwmAUvacnf1APpxoq5uw1BTK
+	JDKpzD3t6dW+wcEVmAXZz9idn+L70DlBUAe5Bd+bi6UNjjfVKKyCRHiHiLXhe2GYY+BX
+	gSuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=O+0ZHByn8idODxUA2wUjUd1WRv6UWkmPpvXIhlxLbXg=;
+	b=JpExIJHB6iCXeUCVrMuQJjJ3Hgrt/u2uS1gteJ1h7m7gU3TXj98zsmjTswSSx2Eoa1
+	4aUXBVYfJi78l+4bOW8ie/AfOKdseGID3FdALzlYb5awzKUNbzQSHpcKYiC5GZChEH6j
+	wZFZwud3T0yCoYH6VN38l/R9BLsLYSSDp4IqBd01PfvkICm/NwVQ5y1FMA1Xjduy89cN
+	RqUtM4RinIAUOB4XImvVKXLi1dAoSCSMj7VKMC2kmOj1bPzPNdRTF0YFr/trLCdnZ4m/
+	y3FEMjvJl26dwHScD54TjA5D3eBqdUWBXl/AOAMMsf4WQZdY/ZFNOJ5Z+TyuGgFokxOH
+	+YwA==
+X-Gm-Message-State: APjAAAW1EuDtL1jEWxsUqWMueKtqRf3kyzNvjRdMa7YPRqPFu4yR1+M1
+	uxy1RpkNHex6tFLUlBRdRq8+wk0DzMwA6nbdy+0=
+X-Google-Smtp-Source: APXvYqyABtfqKF29htTmBl17ygj469FFpqusL6f8hALLaiL9ZC+UXcQX6Eg9gzcztdG3Ns/LTgDWB3BunsD1tKj/V3s=
+X-Received: by 2002:a92:1d53:: with SMTP id d80mr37660095ild.224.1576014792688;
+	Tue, 10 Dec 2019 13:53:12 -0800 (PST)
 MIME-Version: 1.0
-Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-networking][PATCH] netperf: add "intervals" and "histogram" PACKAGECONFIGs
+References: <20191209083612.23922-1-schnitzeltony@gmail.com>
+	<20191209083612.23922-6-schnitzeltony@gmail.com>
+	<CAMKF1spG5KPsiw7PkDG0JwPVGwJudMFduieEcmf73trCUMSG-g@mail.gmail.com>
+In-Reply-To: <CAMKF1spG5KPsiw7PkDG0JwPVGwJudMFduieEcmf73trCUMSG-g@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Tue, 10 Dec 2019 22:53:01 +0100
+Message-ID: <CALbNGRRdspaYTVH_0Zmbrs-fUJBtJOjpVSiy24kBN_bHmR1yXA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][v3 05/20] accountsservice: initial add 0.6.55
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,37 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 21:51:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 10 Dec 2019 21:53:11 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Denys Dmytriyenko <denys@ti.com>
+On Tue, Dec 10, 2019 at 8:57 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Mon, Dec 9, 2019 at 12:37 AM Andreas M=C3=BCller <schnitzeltony@gmail.=
+com> wrote:
+> >
+> > It is a dependency for upcoming gnome-control-center
+> >
+>
+> This seems to have hard dependency on systemd ? or can it be
+> configured without systemd as well see
+>
+> https://errors.yoctoproject.org/Errors/Details/296904/
+>
+> in case it can not, then we need to exclude it from parsing when
+> systemd is not in DISTRO_FEATURES
+For systemd not in PACKAGECONFIG it needs
+-Dsystemd_system_unit_dir=3D'no' to avoid this error.
 
-From https://hewlettpackard.github.io/netperf/doc/netperf.html:
+Test would take some hours so my question: oe-core's master has
+already removed python2 from hosttools and to be honest I expect huge
+fallout all over. So my question: How much time do I still have for
+tests?
 
-Other optional configure-time settings include --enable-intervals=yes to give
-netperf the ability to “pace” its _STREAM tests and --enable-histogram=yes to
-have netperf keep a histogram of interesting times.
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
----
- meta-networking/recipes-support/netperf/netperf_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-networking/recipes-support/netperf/netperf_git.bb b/meta-networking/recipes-support/netperf/netperf_git.bb
-index 8921ea7..f1f62df 100644
---- a/meta-networking/recipes-support/netperf/netperf_git.bb
-+++ b/meta-networking/recipes-support/netperf/netperf_git.bb
-@@ -31,6 +31,8 @@ CFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', \
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,"
-+PACKAGECONFIG[intervals] = "--enable-intervals,--disable-intervals,,"
-+PACKAGECONFIG[histogram] = "--enable-histogram,--disable-histogram,,"
- 
- # autotools.bbclass attends to include m4 files with path depth <= 2 by
- # "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
--- 
-2.7.4
-
+Andreas
 
