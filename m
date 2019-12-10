@@ -1,53 +1,46 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
-	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 349787FC4E
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com
+	[209.85.208.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 10DEA7F95D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 17:27:00 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id p9so4177186wmg.0
+	Tue, 10 Dec 2019 18:24:39 +0000 (UTC)
+Received: by mail-ed1-f41.google.com with SMTP id v28so16797284edw.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 09:27:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=t1s4QhTs8H5IAwiH/SsUzw4f2MIMhNOaPgdX2YQXXt0=;
-	b=H+gtjCNBX78EkItRrotfc1LolzYsaA5mmSlJTyoZtgtt/m65JsVDPkcO1crTRPYwxm
-	4tWaw7qFRwHr8rEY4mXkvfJn3wh6UQu78Efj7KwIgX9tUppY1VX7OT9jI/onoYUMJCqP
-	FVOKKNvryvDnZ52ysc7/AZ0g6efb2Gc4xHloGHT9yzE9k5UOaAu0YAOHylboAXXaol4e
-	DIao3iGqQ3d2ICDN4yzLN+0PNZwSRLyHoIQ90JKEBYwYOs1ar3IjCQRtHvXzdu5H4STp
-	yOMN9kQpuEbP7ZMY/vpDwE2V0OnKuJB5sl8c2uJJgZg2V9HNJnCjuEGfLOxZB5Otf9ig
-	jOXQ==
+	Tue, 10 Dec 2019 10:24:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=bvCCIlBkIRJxqr2Ft0KR6ZFbehsXs8t3pA7gFFZXc/A=;
+	b=P744O7dCBx+pVK71ThJn6v940BOSHXYsRXzJM1ZPxLZahQ/iwxrmXMpJodr8Slx4yM
+	wCBkrn5PVt4qaQaZrUkVuwgVehWKcLujAfg0DF6dxJWB3NV2E+Gor+G9Kscbde0u9chP
+	wANOC2iabhRsohA7iEuovvTRvZuf9rxsMLTDA+MZAB3bDWtPF3iAbyQR6Wt2ewsko3yC
+	sJEnlph0w8ZTT35ADmp0G8gpfFM8tzP+avMkJrDQkTYweAQXMEY8SaDTZKW8DQK9lU2H
+	kEWtwzgQ6vNCH7bIXbmlIz2MEAD8E3MVRxO1+BcXtR7D+Hxp6j+zyvUQfigLibv9Vf4V
+	WWIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=t1s4QhTs8H5IAwiH/SsUzw4f2MIMhNOaPgdX2YQXXt0=;
-	b=n60p2oBlCGTe2rzQQHxeAjbQew/cOyDM86uXExYtBKKhAD2ntkvbmd5MrfZDp58HrC
-	MbSaw+gR+mq67yIezqkLKEReolnYQ/lOhJXEgolIPNMOV9rI/tjIF9OhyPa367Fc1b0S
-	zjReZjjwjNLgmqVTeVZTy+WX5ct+o7huQVOaDNLD+KCDBk8ifaQrdyXjj0jLQolqT1+U
-	n5RHGvfSkD80EFS5kpDkCWpqZXCRyfeL1lQbWBSu2k8k+s3mwBB+hbu0gEVQSfy9GZ04
-	810rwpEKXQtkiFMcp5psoWt6HswrhpUU6NfAnAxYho1UuZnReO6ptYmjzPHgKr1XduUv
-	EsEA==
-X-Gm-Message-State: APjAAAUKd5siwdIlMyuhP5OWBlUgAhYKEqwcDgA0rzgGPL/vHntr2bym
-	Nsxm1hQrurFWn/UxmFrak9iZTw==
-X-Google-Smtp-Source: APXvYqxjbHcn1vMyUASp7snOGkIBTtJvWMr1QZTfSNdtf3DCrgxe4AXGA+vPQMNHkldSIV93HtWUpg==
-X-Received: by 2002:a7b:cc13:: with SMTP id f19mr6624280wmh.81.1575998820843; 
-	Tue, 10 Dec 2019 09:27:00 -0800 (PST)
-Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
-	by smtp.gmail.com with ESMTPSA id
-	d16sm4250401wrg.27.2019.12.10.09.26.59
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 10 Dec 2019 09:27:00 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Dec 2019 18:26:56 +0100
-Message-Id: <20191210172656.14831-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.23.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=bvCCIlBkIRJxqr2Ft0KR6ZFbehsXs8t3pA7gFFZXc/A=;
+	b=V9Mrq0G5jOvMUlAvZKrje2xcZnz65TXVgA7xHNs3U7cC1Yzc175gNoiy9fl3Unw0sH
+	RX0mGFslscjdGGzTGqSA4n2y7WuI2PHOeqQk6WLCbRZ/iV+82kEbAxgeO5u5GJ1JcizY
+	g63OdG9b0jI9vV+QdON/31RbblNy4HFiSfi0r2F7nHIkSMWJuqc1+XHXyxda8zEulREu
+	vYB7BFl6qOtIo+pg1KLIwzJsZ0nRLGalggVXDOjOZGUSZYncSs1mhywwbL/AvT945uck
+	QkT2+yn3maWispdmMim/C2jgfOK82/zFHkDvfo2yh24zGMBWpbKeOH6itV+Akgi8kmCT
+	PIGg==
+X-Gm-Message-State: APjAAAXsFPx/8yQiA7QkUI2/ErkSHjtQF9snj7rCXoWoL35C0DN1ClU+
+	fdTiDdS7JQ2xSMYVghP6Q+VOvjANmU6mQoImxXQxWXxb
+X-Google-Smtp-Source: APXvYqy4eCX1O5hjyRNaTDXKKjfF+6C5wcP8y6E6cA93GqJEVhSOchMshyQ6KjfivIV8pX1DzwzB2zw/p/gOUgxBBEQ=
+X-Received: by 2002:a50:ac06:: with SMTP id v6mr39910487edc.4.1576002280258;
+	Tue, 10 Dec 2019 10:24:40 -0800 (PST)
 MIME-Version: 1.0
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [meta-oe][PATCH v2] librsync: new package
+References: <1574350178-22957-1-git-send-email-marek.belisko@open-nandra.com>
+In-Reply-To: <1574350178-22957-1-git-send-email-marek.belisko@open-nandra.com>
+From: Belisko Marek <marek.belisko@gmail.com>
+Date: Tue, 10 Dec 2019 19:24:29 +0100
+Message-ID: <CAAfyv36j-iyxtdvjFL0kLpJ-KhpEFXfxiJri54=snjSm2xjRrg@mail.gmail.com>
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe][PATCH] multimedia: janus-gateway: Added new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,51 +53,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 17:27:00 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 10 Dec 2019 18:24:40 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Forwarded to correct ML.
 
-rdiff is a popular tool for calculating binary delta patches. It's
-provided by the librsync package (unrelated to rsync already available
-in poky).
-
-This recipe adds new packages for librsync and rdiff.
-
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
+Signed-off-by: Jake Withecombe <jake@ruggednetworks.co.uk>
 ---
-v1 -> v2:
-- use ${bindir} where applicable
+ .../janus-gateway/files/janus-gateway.service      | 14 +++++++
+ .../janus-gateway/janus-gateway_0.7.4.bb           | 48 ++++++++++++++++++++++
+ 2 files changed, 62 insertions(+)
+ create mode 100644
+meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
+ create mode 100644
+meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
 
- .../recipes-support/librsync/librsync_2.2.1.bb | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-support/librsync/librsync_2.2.1.bb
-
-diff --git a/meta-oe/recipes-support/librsync/librsync_2.2.1.bb b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
+diff --git a/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
+b/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
 new file mode 100644
-index 000000000..c2f28fed2
+index 0000000..5b4d4f2
 --- /dev/null
-+++ b/meta-oe/recipes-support/librsync/librsync_2.2.1.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Remote delta-compression library."
-+AUTHOR = "Martin Pool, Andrew Tridgell, Donovan Baarda, Adam Schubert"
++++ b/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
+@@ -0,0 +1,14 @@
++[Unit]
++Description=Janus WebRTC Server
++After=network.target network-online.target
++Wants=network-online.target
 +
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
++[Service]
++Type=simple
++ExecStart=/usr/bin/janus -o
++Restart=always
++RestartSec=60
++LimitNOFILE=65536
 +
-+SRC_URI = "git://github.com/librsync/librsync.git"
-+SRCREV = "5917692418657dc78c9cbde3a8db4c85f25b9c8d"
-+S = "${WORKDIR}/git"
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
+b/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
+new file mode 100644
+index 0000000..bca716f
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
+@@ -0,0 +1,48 @@
++DESCRIPTION = "Janus is an open source, general purpose, WebRTC
+server designed and developed by Meetecho"
++HOMEPAGE = "https://janus.conf.meetecho.com/"
++SECTION = "libs/multimedia"
 +
-+DEPENDS = "popt"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=c9e0a79f2244c2f79cda22ea5fed9135"
 +
-+inherit cmake
++SRC_URI = "https://github.com/meetecho/janus-gateway/archive/v${PV}.tar.gz \
++          file://janus-gateway.service \
++"
 +
-+PACKAGES =+ "rdiff"
-+FILES_rdiff = "${bindir}/rdiff"
++SRC_URI[md5sum] = "b068ac2b40ae800d83f471b8189bc87c"
++SRC_URI[sha256sum] =
+"01ddaf204203a1219dd46a5ce70b548bab75bc494c9ba05429f8fb1e786b2995"
 +
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.23.0
-
++inherit autotools-brokensep pkgconfig systemd
++
++DEPENDS = "libsrtp jansson libconfig libnice openssl glib-2.0 gengetopt-native"
++
++PACKAGECONFIG ?= "rest_api rest"
++#PACKAGECONFIG[disablewarnings] = "--disable-warnings-as-errors,,"
++#PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,"
++#PACKAGECONFIG[inet6] = "--enable-inet6,--disable-inet6,"
++PACKAGECONFIG[rest_api] = "--enable-turn-rest-api,--disable-turn-rest-api,curl"
++PACKAGECONFIG[rest] = "--enable-rest,--disable-rest,libmicrohttpd"
++PACKAGECONFIG[unix_sockets] = "--enable-unix-sockets,--disable-unix-sockets,"
++PACKAGECONFIG[post_processing] =
+"--enable-post-processing,--disable-post-processing,"
++PACKAGECONFIG[plugin_echo] =
+"--enable-plugin-echotest,--disable-plugin-echotest,"
++PACKAGECONFIG[plugin_videocall] =
+"--enable-plugin-videocall,--disable-plugin-videocall,"
++PACKAGECONFIG[plugin_nosip] = "--enable-plugin-nosip,--disable-plugin-nosip,"
++PACKAGECONFIG[plugin_videoroom] =
+"--enable-plugin-videoroom,--disable-plugin-videoroom,"
++PACKAGECONFIG[plugin_voicemail] =
+"--enable-plugin-voicemail,--disable-plugin-voicemail,"
++PACKAGECONFIG[plugin_recordplay] =
+"--enable-plugin-recordplay,--disable-plugin-recordplay,"
++PACKAGECONFIG[plugin_textroom] =
+"--enable-plugin-textroom,--disable-plugin-textroom,"
++
++FILES_${PN}_append = " ${libdir}/janus/plugins/*
+${libdir}/janus/transports/* ${libdir}/janus/events"
++FILES_${PN}-demo = "${datadir}/janus/*"
++
++PACKAGES_append = " ${PN}-demo"
++
++INSANE_SKIP_${PN} = "dev-so"
++
++SYSTEMD_SERVICE_${PN} = "janus-gateway.service"
++
++do_install_append() {
++       # Install the systemd service so we can kick start on boot
++       install -d ${D}${systemd_unitdir}/system
++       install -m 644 ${WORKDIR}/janus-gateway.service
+${D}${systemd_unitdir}/system/
++}
+--
+2.7.4
 
