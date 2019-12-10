@@ -1,46 +1,48 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-ed1-f41.google.com (mail-ed1-f41.google.com
-	[209.85.208.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 10DEA7F95D
+Return-Path: <kamelghalgaoui7@gmail.com>
+Received: from mail-io1-f52.google.com (mail-io1-f52.google.com
+	[209.85.166.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 792CB7FC5D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 18:24:39 +0000 (UTC)
-Received: by mail-ed1-f41.google.com with SMTP id v28so16797284edw.12
+	Tue, 10 Dec 2019 19:13:07 +0000 (UTC)
+Received: by mail-io1-f52.google.com with SMTP id k24so20004777ioc.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 10:24:41 -0800 (PST)
+	Tue, 10 Dec 2019 11:13:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=bvCCIlBkIRJxqr2Ft0KR6ZFbehsXs8t3pA7gFFZXc/A=;
-	b=P744O7dCBx+pVK71ThJn6v940BOSHXYsRXzJM1ZPxLZahQ/iwxrmXMpJodr8Slx4yM
-	wCBkrn5PVt4qaQaZrUkVuwgVehWKcLujAfg0DF6dxJWB3NV2E+Gor+G9Kscbde0u9chP
-	wANOC2iabhRsohA7iEuovvTRvZuf9rxsMLTDA+MZAB3bDWtPF3iAbyQR6Wt2ewsko3yC
-	sJEnlph0w8ZTT35ADmp0G8gpfFM8tzP+avMkJrDQkTYweAQXMEY8SaDTZKW8DQK9lU2H
-	kEWtwzgQ6vNCH7bIXbmlIz2MEAD8E3MVRxO1+BcXtR7D+Hxp6j+zyvUQfigLibv9Vf4V
-	WWIQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=N04jURPhwmjYPxdrvO6Pjp7zfFmq6rzq2BmENk/PnBs=;
+	b=i1fHR7gYbQuty8sHHyMZBWlFj4yUZP9BKrm/9H4h0HGaZrHJU7V2AWNKQsXa6f4C1h
+	5SdeYRXB7isJ7QF5DsQi/VpgA+hvGFzDOJHt6rsAXjGHjqThwvdeXICb1qOd8sil9mBO
+	PNyuYw0X7XujldDGGz/7gqRgHX+6e2YNspNb/ykqpyIWUPBHVSPVNGvnoPWUvIAfPj4p
+	1VeQX+WDxp4Pn+x+tTk+aveZr40C2zTnOdmscpm7VSt08PokB4+qYPk1GW82kL5hlbOB
+	Khf+PCysLUBsByklwgrkN3Nol5bjnwSkKnSmEbBiYyYfEHqhXXte2agadHf9ptfRgPLN
+	wP9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=bvCCIlBkIRJxqr2Ft0KR6ZFbehsXs8t3pA7gFFZXc/A=;
-	b=V9Mrq0G5jOvMUlAvZKrje2xcZnz65TXVgA7xHNs3U7cC1Yzc175gNoiy9fl3Unw0sH
-	RX0mGFslscjdGGzTGqSA4n2y7WuI2PHOeqQk6WLCbRZ/iV+82kEbAxgeO5u5GJ1JcizY
-	g63OdG9b0jI9vV+QdON/31RbblNy4HFiSfi0r2F7nHIkSMWJuqc1+XHXyxda8zEulREu
-	vYB7BFl6qOtIo+pg1KLIwzJsZ0nRLGalggVXDOjOZGUSZYncSs1mhywwbL/AvT945uck
-	QkT2+yn3maWispdmMim/C2jgfOK82/zFHkDvfo2yh24zGMBWpbKeOH6itV+Akgi8kmCT
-	PIGg==
-X-Gm-Message-State: APjAAAXsFPx/8yQiA7QkUI2/ErkSHjtQF9snj7rCXoWoL35C0DN1ClU+
-	fdTiDdS7JQ2xSMYVghP6Q+VOvjANmU6mQoImxXQxWXxb
-X-Google-Smtp-Source: APXvYqy4eCX1O5hjyRNaTDXKKjfF+6C5wcP8y6E6cA93GqJEVhSOchMshyQ6KjfivIV8pX1DzwzB2zw/p/gOUgxBBEQ=
-X-Received: by 2002:a50:ac06:: with SMTP id v6mr39910487edc.4.1576002280258;
-	Tue, 10 Dec 2019 10:24:40 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=N04jURPhwmjYPxdrvO6Pjp7zfFmq6rzq2BmENk/PnBs=;
+	b=mvch5ZLOMdrin9yx0fGY13XUBrTPX+QkEHA4CJX5ybhOJfhWEXGbsIdKzkJgxYcdb3
+	gDD6lryF8S84NDDmBMnZYCXSENyMXMomS/OjsbROvzSDa5eE0QII34mRCs0zee9deCYo
+	33gyUeRe35cL8PhUAbmDBibbsQHKlWW6xgnpcyOB5w0NBZPV8NzrnIwLQ3KXKDNpVPsp
+	m51VeASytqUaVkUSxfezdIhB6+HivVCgnx8frSrxvmti/4qOa3o/x0Uzh32LrQIWgFla
+	WRsUFc8lsIAX2guKWSyn9/kPAdp9EoTpmIjf/j9HSMi+tYn6Bdc6UO180aa9qi14osZn
+	vg7g==
+X-Gm-Message-State: APjAAAW/DPEiOPH/IU2k4UYyj1N9pHvUvGNxnYhJ5HMOJs79Obum1F47
+	30fSJnlCRdeABGXA7bZjz+VdY8zzysAnk40yWqoPnZ4t
+X-Google-Smtp-Source: APXvYqzXjJnAloSgvdPeoNfh7vikz73xbgKPfmbtPFVYnmdnxwcAwT+MU5eHJYeD/t3MIEuPpO06iLzyWo4AW/WlKaU=
+X-Received: by 2002:a5d:80d9:: with SMTP id h25mr12219610ior.97.1576005188222; 
+	Tue, 10 Dec 2019 11:13:08 -0800 (PST)
 MIME-Version: 1.0
-References: <1574350178-22957-1-git-send-email-marek.belisko@open-nandra.com>
-In-Reply-To: <1574350178-22957-1-git-send-email-marek.belisko@open-nandra.com>
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Tue, 10 Dec 2019 19:24:29 +0100
-Message-ID: <CAAfyv36j-iyxtdvjFL0kLpJ-KhpEFXfxiJri54=snjSm2xjRrg@mail.gmail.com>
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Subject: [meta-oe][PATCH] multimedia: janus-gateway: Added new recipe
+References: <CANSQD5+CcEbaHxdfR8cjqdc6maXhrCgXy3eXrGD0dMgpiM_0LQ@mail.gmail.com>
+	<7e5b400c-9c07-ff0d-df4b-9ca0329bfdbc@intel.com>
+In-Reply-To: <7e5b400c-9c07-ff0d-df4b-9ca0329bfdbc@intel.com>
+From: Kamel Ghalgaoui <kamelghalgaoui7@gmail.com>
+Date: Tue, 10 Dec 2019 20:12:57 +0100
+Message-ID: <CANSQD5+e24bohovGjVgagiFrizqu2sj0SwzJWn+17tUJCthO_Q@mail.gmail.com>
+To: Ross Burton <ross.burton@intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Building Linux Error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,109 +55,281 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 18:24:40 -0000
+X-List-Received-Date: Tue, 10 Dec 2019 19:13:08 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Forwarded to correct ML.
+I try with zeus, but I got the same error:
 
-Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
-Signed-off-by: Jake Withecombe <jake@ruggednetworks.co.uk>
----
- .../janus-gateway/files/janus-gateway.service      | 14 +++++++
- .../janus-gateway/janus-gateway_0.7.4.bb           | 48 ++++++++++++++++++++++
- 2 files changed, 62 insertions(+)
- create mode 100644
-meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
- create mode 100644
-meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
+kamel@ThinkPad-E590:/opt/yocto/poky/build$ git branch
+  fido
+  morty
+  thud
+  warrior
+* zeus
+kamel@ThinkPad-E590:/opt/yocto/poky/build$
+kamel@ThinkPad-E590:/opt/yocto/poky/build$ bitbake core-image-minimal
+Loading cache: 100%
+|##########################################################################################################|
+Time: 0:00:00
+Loaded 2061 entries from dependency cache.
+NOTE: Resolving any missing task queue dependencies
 
-diff --git a/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
-b/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
-new file mode 100644
-index 0000000..5b4d4f2
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=Janus WebRTC Server
-+After=network.target network-online.target
-+Wants=network-online.target
-+
-+[Service]
-+Type=simple
-+ExecStart=/usr/bin/janus -o
-+Restart=always
-+RestartSec=60
-+LimitNOFILE=65536
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
-b/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
-new file mode 100644
-index 0000000..bca716f
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
-@@ -0,0 +1,48 @@
-+DESCRIPTION = "Janus is an open source, general purpose, WebRTC
-server designed and developed by Meetecho"
-+HOMEPAGE = "https://janus.conf.meetecho.com/"
-+SECTION = "libs/multimedia"
-+
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=c9e0a79f2244c2f79cda22ea5fed9135"
-+
-+SRC_URI = "https://github.com/meetecho/janus-gateway/archive/v${PV}.tar.gz \
-+          file://janus-gateway.service \
-+"
-+
-+SRC_URI[md5sum] = "b068ac2b40ae800d83f471b8189bc87c"
-+SRC_URI[sha256sum] =
-"01ddaf204203a1219dd46a5ce70b548bab75bc494c9ba05429f8fb1e786b2995"
-+
-+inherit autotools-brokensep pkgconfig systemd
-+
-+DEPENDS = "libsrtp jansson libconfig libnice openssl glib-2.0 gengetopt-native"
-+
-+PACKAGECONFIG ?= "rest_api rest"
-+#PACKAGECONFIG[disablewarnings] = "--disable-warnings-as-errors,,"
-+#PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,"
-+#PACKAGECONFIG[inet6] = "--enable-inet6,--disable-inet6,"
-+PACKAGECONFIG[rest_api] = "--enable-turn-rest-api,--disable-turn-rest-api,curl"
-+PACKAGECONFIG[rest] = "--enable-rest,--disable-rest,libmicrohttpd"
-+PACKAGECONFIG[unix_sockets] = "--enable-unix-sockets,--disable-unix-sockets,"
-+PACKAGECONFIG[post_processing] =
-"--enable-post-processing,--disable-post-processing,"
-+PACKAGECONFIG[plugin_echo] =
-"--enable-plugin-echotest,--disable-plugin-echotest,"
-+PACKAGECONFIG[plugin_videocall] =
-"--enable-plugin-videocall,--disable-plugin-videocall,"
-+PACKAGECONFIG[plugin_nosip] = "--enable-plugin-nosip,--disable-plugin-nosip,"
-+PACKAGECONFIG[plugin_videoroom] =
-"--enable-plugin-videoroom,--disable-plugin-videoroom,"
-+PACKAGECONFIG[plugin_voicemail] =
-"--enable-plugin-voicemail,--disable-plugin-voicemail,"
-+PACKAGECONFIG[plugin_recordplay] =
-"--enable-plugin-recordplay,--disable-plugin-recordplay,"
-+PACKAGECONFIG[plugin_textroom] =
-"--enable-plugin-textroom,--disable-plugin-textroom,"
-+
-+FILES_${PN}_append = " ${libdir}/janus/plugins/*
-${libdir}/janus/transports/* ${libdir}/janus/events"
-+FILES_${PN}-demo = "${datadir}/janus/*"
-+
-+PACKAGES_append = " ${PN}-demo"
-+
-+INSANE_SKIP_${PN} = "dev-so"
-+
-+SYSTEMD_SERVICE_${PN} = "janus-gateway.service"
-+
-+do_install_append() {
-+       # Install the systemd service so we can kick start on boot
-+       install -d ${D}${systemd_unitdir}/system
-+       install -m 644 ${WORKDIR}/janus-gateway.service
-${D}${systemd_unitdir}/system/
-+}
---
-2.7.4
+Build Configuration:
+BB_VERSION        = "1.32.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "universal"
+TARGET_SYS        = "arm-poky-linux-gnueabi"
+MACHINE           = "raspberrypi3"
+DISTRO            = "poky"
+DISTRO_VERSION    = "2.2.4"
+TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard
+cortexa7"
+TARGET_FPU        = "hard"
+meta
+meta-poky
+meta-yocto-bsp    = "zeus:e56be3cee517c5262486136dbd6d649b68c3a8b7"
+meta-oe           = "zeus:997caf9146cd3797cd054e2adebd1fbb4df91911"
+meta-raspberrypi  = "zeus:2a192261a914892019f4f428d7462bb3c585ebac"
+
+Initialising tasks: 100%
+|#####################################################################################################|
+Time: 0:00:04
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+ERROR: quilt-native-0.64-r0 do_populate_lic: Error executing a python
+function in exec_python_func() autogenerated:
+
+The stack trace of python calls that resulted in this exception/failure was:
+File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
+     0001:
+ *** 0002:sstate_task_postfunc(d)
+     0003:
+File: '/opt/yocto/poky/meta/classes/sstate.bbclass', lineno: 670, function:
+sstate_task_postfunc
+     0666:
+     0667:python sstate_task_postfunc () {
+     0668:    shared_state = sstate_state_fromvars(d)
+     0669:
+ *** 0670:    sstate_install(shared_state, d)
+     0671:    for intercept in shared_state['interceptfuncs']:
+     0672:        bb.build.exec_func(intercept, d, (d.getVar("WORKDIR",
+True),))
+     0673:    omask = os.umask(0o002)
+     0674:    if omask != 0o002:
+File: '/opt/yocto/poky/meta/classes/sstate.bbclass', lineno: 274, function:
+sstate_install
+     0270:
+     0271:    # Run the actual file install
+     0272:    for state in ss['dirs']:
+     0273:        if os.path.exists(state[1]):
+ *** 0274:            oe.path.copyhardlinktree(state[1], state[2])
+     0275:
+     0276:    for postinst in (d.getVar('SSTATEPOSTINSTFUNCS', True) or
+'').split():
+     0277:        # All hooks should run in the SSTATE_INSTDIR
+     0278:        bb.build.exec_func(postinst, d, (sstateinst,))
+File: '/opt/yocto/poky/meta/lib/oe/path.py', lineno: 81, function:
+copyhardlinktree
+     0077:    if (os.stat(src).st_dev ==  os.stat(dst).st_dev):
+     0078:        # Need to copy directories only with tar first since cp
+will error if two
+     0079:        # writers try and create a directory at the same time
+     0080:        cmd = "cd %s; find . -type d -print | tar --xattrs
+--xattrs-include='*' -cf - -C %s -p --no-recursion --files-from - | tar
+--xattrs --xattrs-include='*' -xf - -C %s" % (src, src, dst)
+ *** 0081:        subprocess.check_output(cmd, shell=True,
+stderr=subprocess.STDOUT)
+     0082:        source = ''
+     0083:        if os.path.isdir(src):
+     0084:            import glob
+     0085:            if len(glob.glob('%s/.??*' % src)) > 0:
+File: '/usr/lib/python3.5/subprocess.py', lineno: 626, function:
+check_output
+     0622:        # empty string. That is maintained here for backwards
+compatibility.
+     0623:        kwargs['input'] = '' if kwargs.get('universal_newlines',
+False) else b''
+     0624:
+     0625:    return run(*popenargs, stdout=PIPE, timeout=timeout,
+check=True,
+ *** 0626:               **kwargs).stdout
+     0627:
+     0628:
+     0629:class CompletedProcess(object):
+     0630:    """A process that has finished running.
+File: '/usr/lib/python3.5/subprocess.py', lineno: 708, function: run
+     0704:            raise
+     0705:        retcode = process.poll()
+     0706:        if check and retcode:
+     0707:            raise CalledProcessError(retcode, process.args,
+ *** 0708:                                     output=stdout, stderr=stderr)
+     0709:    return CompletedProcess(process.args, retcode, stdout, stderr)
+     0710:
+     0711:
+     0712:def list2cmdline(seq):
+Exception: subprocess.CalledProcessError: Command 'cd
+/opt/yocto/poky/build/tmp/work/x86_64-linux/quilt-native/0.64-r0/license-destdir;
+find . -type d -print | tar --xattrs --xattrs-include='*' -cf - -C
+/opt/yocto/poky/build/tmp/work/x86_64-linux/quilt-native/0.64-r0/license-destdir
+-p --no-recursion --files-from - | tar --xattrs --xattrs-include='*' -xf -
+-C /opt/yocto/poky/build/tmp/deploy/licenses' returned non-zero exit status
+64
+
+Subprocess output:
+tar: unrecognized option '--xattrs'
+Try `tar --help' or `tar --usage' for more information.
+tar: unrecognized option '--xattrs'
+Try `tar --help' or `tar --usage' for more information.
+
+ERROR: quilt-native-0.64-r0 do_populate_lic: Function failed:
+sstate_task_postfunc
+ERROR: Logfile of failure stored in:
+/opt/yocto/poky/build/tmp/work/x86_64-linux/quilt-native/0.64-r0/temp/log.do_populate_lic.4692
+ERROR: Task
+(/opt/yocto/poky/meta/recipes-devtools/quilt/quilt-native_0.64.bb:do_populate_lic)
+failed with exit code '1'
+ERROR: quilt-native-0.64-r0 do_populate_sysroot: Error executing a python
+function in exec_python_func() autogenerated:
+
+The stack trace of python calls that resulted in this exception/failure was:
+File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
+     0001:
+ *** 0002:sstate_task_postfunc(d)
+     0003:
+File: '/opt/yocto/poky/meta/classes/sstate.bbclass', lineno: 670, function:
+sstate_task_postfunc
+     0666:
+     0667:python sstate_task_postfunc () {
+     0668:    shared_state = sstate_state_fromvars(d)
+     0669:
+ *** 0670:    sstate_install(shared_state, d)
+     0671:    for intercept in shared_state['interceptfuncs']:
+     0672:        bb.build.exec_func(intercept, d, (d.getVar("WORKDIR",
+True),))
+     0673:    omask = os.umask(0o002)
+     0674:    if omask != 0o002:
+File: '/opt/yocto/poky/meta/classes/sstate.bbclass', lineno: 274, function:
+sstate_install
+     0270:
+     0271:    # Run the actual file install
+     0272:    for state in ss['dirs']:
+     0273:        if os.path.exists(state[1]):
+ *** 0274:            oe.path.copyhardlinktree(state[1], state[2])
+     0275:
+     0276:    for postinst in (d.getVar('SSTATEPOSTINSTFUNCS', True) or
+'').split():
+     0277:        # All hooks should run in the SSTATE_INSTDIR
+     0278:        bb.build.exec_func(postinst, d, (sstateinst,))
+File: '/opt/yocto/poky/meta/lib/oe/path.py', lineno: 81, function:
+copyhardlinktree
+     0077:    if (os.stat(src).st_dev ==  os.stat(dst).st_dev):
+     0078:        # Need to copy directories only with tar first since cp
+will error if two
+     0079:        # writers try and create a directory at the same time
+     0080:        cmd = "cd %s; find . -type d -print | tar --xattrs
+--xattrs-include='*' -cf - -C %s -p --no-recursion --files-from - | tar
+--xattrs --xattrs-include='*' -xf - -C %s" % (src, src, dst)
+ *** 0081:        subprocess.check_output(cmd, shell=True,
+stderr=subprocess.STDOUT)
+     0082:        source = ''
+     0083:        if os.path.isdir(src):
+     0084:            import glob
+     0085:            if len(glob.glob('%s/.??*' % src)) > 0:
+File: '/usr/lib/python3.5/subprocess.py', lineno: 626, function:
+check_output
+     0622:        # empty string. That is maintained here for backwards
+compatibility.
+     0623:        kwargs['input'] = '' if kwargs.get('universal_newlines',
+False) else b''
+     0624:
+     0625:    return run(*popenargs, stdout=PIPE, timeout=timeout,
+check=True,
+ *** 0626:               **kwargs).stdout
+     0627:
+     0628:
+     0629:class CompletedProcess(object):
+     0630:    """A process that has finished running.
+File: '/usr/lib/python3.5/subprocess.py', lineno: 708, function: run
+     0704:            raise
+     0705:        retcode = process.poll()
+     0706:        if check and retcode:
+     0707:            raise CalledProcessError(retcode, process.args,
+ *** 0708:                                     output=stdout, stderr=stderr)
+     0709:    return CompletedProcess(process.args, retcode, stdout, stderr)
+     0710:
+     0711:
+     0712:def list2cmdline(seq):
+Exception: subprocess.CalledProcessError: Command 'cd
+/opt/yocto/poky/build/tmp/work/x86_64-linux/quilt-native/0.64-r0/sysroot-destdir/opt/yocto/poky/build/tmp/sysroots/x86_64-linux;
+find . -type d -print | tar --xattrs --xattrs-include='*' -cf - -C
+/opt/yocto/poky/build/tmp/work/x86_64-linux/quilt-native/0.64-r0/sysroot-destdir/opt/yocto/poky/build/tmp/sysroots/x86_64-linux
+-p --no-recursion --files-from - | tar --xattrs --xattrs-include='*' -xf -
+-C /opt/yocto/poky/build/tmp/sysroots/x86_64-linux' returned non-zero exit
+status 64
+
+Subprocess output:
+tar: unrecognized option '--xattrs'
+Try `tar --help' or `tar --usage' for more information.
+tar: unrecognized option '--xattrs'
+Try `tar --help' or `tar --usage' for more information.
+
+ERROR: quilt-native-0.64-r0 do_populate_sysroot: Function failed:
+sstate_task_postfunc
+ERROR: Logfile of failure stored in:
+/opt/yocto/poky/build/tmp/work/x86_64-linux/quilt-native/0.64-r0/temp/log.do_populate_sysroot.4691
+ERROR: Task
+(/opt/yocto/poky/meta/recipes-devtools/quilt/quilt-native_0.64.bb:do_populate_sysroot)
+failed with exit code '1'
+
+Second Keyboard Interrupt, stopping...
+
+
+Summary: 2 tasks failed:
+  /opt/yocto/poky/meta/recipes-devtools/quilt/quilt-native_0.64.bb:
+do_populate_lic
+  /opt/yocto/poky/meta/recipes-devtools/quilt/quilt-native_0.64.bb:
+do_populate_sysroot
+Summary: There were 4 ERROR messages shown, returning a non-zero exit code.
+
+On Tue, Dec 10, 2019 at 12:03 PM Ross Burton <ross.burton@intel.com> wrote:
+
+> On 10/12/2019 10:12, Kamel Ghalgaoui wrote:
+> > kamel@ThinkPad-E590:/opt/yocto/poky/build$ bitbake core-image-minimal
+> > Parsing recipes: 100%
+> >
+> |########################################################################################################|
+> > Time: 0:00:33 Parsing of 1499 .bb files complete (0 cached, 1499 parsed).
+> > 2061 targets, 132 skipped, 0 masked, 0 errors. NOTE: Resolving any
+> missing
+> > task queue dependencies Build Configuration: BB_VERSION = "1.32.0"
+> > BUILD_SYS = "x86_64-linux" NATIVELSBSTRING = "universal" TARGET_SYS =
+> > "arm-poky-linux-gnueabi" MACHINE = "raspberrypi3" DISTRO = "poky"
+> > DISTRO_VERSION = "2.2.4" TUNE_FEATURES = "arm armv7ve vfp thumb neon
+> vfpv4
+> > callconvention-hard cortexa7" TARGET_FPU = "hard" meta meta-poky
+> > meta-yocto-bsp = "fido:e56be3cee517c5262486136dbd6d649b68c3a8b7" meta-oe
+> =
+> > "fido:997caf9146cd3797cd054e2adebd1fbb4df91911" meta-raspberrypi =
+> > "fido:2a192261a914892019f4f428d7462bb3c585ebac" Initialising tasks: 100%
+> >
+> |#####################################################################################################|
+> > Time: 0:00:06 NOTE: Executing SetScene Tasks NOTE: Executing RunQueue
+> Tasks
+> > **ERROR:** *quilt-native-0.64-r0 do_populate_lic: Error executing a
+> python
+> > function in exec_python_func() autogenerated: The stack trace of python
+> > calls that resulted in this exception/failure was: File:
+> > 'exec_python_func() autogenerated', lineno: 2, function: <module>*
+>
+> You stopped including the message at the point that the actual error was
+> shown.
+>
+> That's Fido which is *very* old.  Please use Zeus if possible, Warrior
+> if not (as you said that release already), and include the entire output.
+>
+> Immediate hunch is that you don't have sufficient permissions in your
+> build dir.
+>
+> Ross
+>
 
