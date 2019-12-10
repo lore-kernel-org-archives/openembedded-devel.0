@@ -1,24 +1,47 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 61F5F6D6F5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com
+	[209.85.219.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F7437F965
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 22:22:59 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xBAMN0ml028053
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 10 Dec 2019 22:54:36 +0000 (UTC)
+Received: by mail-qv1-f65.google.com with SMTP id z3so4948245qvn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 14:23:00 -0800 (PST)
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Tue, 10 Dec 2019 14:22:59 -0800
-From: Trevor Gamblin <Trevor.Gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Dec 2019 17:22:59 -0500
-Message-ID: <20191210222259.22811-1-Trevor.Gamblin@windriver.com>
-X-Mailer: git-send-email 2.24.0
+	Tue, 10 Dec 2019 14:54:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=0tc2fRHiGBJPRJfark220nYwO7gVUHT5qV3xKI/laSs=;
+	b=JJjkVSm6An8euDYCcTSlQVXjRvJmXS2lJ7XwnP+oyQlFknd3HQmCn2cM4kCIDw3lMV
+	LnNf9hsiWLaXE+gNkP5deYraCZf0eXJ47qF343EAOa2wHWj+Ln3ftUd03h0BK2UVNT9N
+	utdRD/8PNXHp+UHYDlB+bYFVTuZ7ljz0OpFQuwLx2u46poQEqEl63OhVns2Lngj6r0rn
+	DpM6H24wZi395l6O0C9+0n7dzeIKgVLVR54jgjam7HptJQu0rUgIDZ3FGBgRI9/LbWZ1
+	LDftQfEwAa+zFJXfkTCAaHu+Ul2wGwfEXm5ahhJb6Sre75ePmjbof9/fd2G08LMYcNRb
+	h9YA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=0tc2fRHiGBJPRJfark220nYwO7gVUHT5qV3xKI/laSs=;
+	b=ZsaDMLUpjIa9y2SRuGF7UaqNIKoLLxq3XWl54ZN99qP2jbJw6JT9N2nVbci04idzKA
+	018FJAG9gByOiMemupvplaChJpcOVwjK27AuTbDQyx/9LT+TEeGq8cf2ALqPs98jHxc7
+	gzeHUPLoBUyVA4KYwG4sfEfouFiguV4ehA1Hta7eooUALWPNkg1A8AWVMuy2fI5i3aYb
+	qZznwJxJGKvpb83KJv/7Yt4SY0FB7M9jtNKEQjuXon0VUX/og9dMZQK5b3P+CXTPaYD7
+	/b/38BU5ZXo+pWzj+yIYQ6P+Nh3XH2GeiJUWo5tCgWsnSErKNwA7qwAaz4HEP9kd6yLy
+	nTbA==
+X-Gm-Message-State: APjAAAWSmrfoJs1w1F4QqCIc/NkAwVcuLILvczLlAf0JK0eYb5tPPhRQ
+	xrARBJRpGufKpVqkN+/3WZzZvI9nibbcqd3qkYI=
+X-Google-Smtp-Source: APXvYqwF00FxRLoZZJuLh64IfSTqAcWspGaB3A58+meCVN3bnYD+KuUslji2YGgaNPXErUKTbVGOiE+W3tvxvEp6BDA=
+X-Received: by 2002:a0c:ada3:: with SMTP id w32mr266839qvc.99.1576018476443;
+	Tue, 10 Dec 2019 14:54:36 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python-twisted: add missing RDEPENDS for conch
+References: <20191210093850.6292-1-costamagnagianfranco@yahoo.it>
+In-Reply-To: <20191210093850.6292-1-costamagnagianfranco@yahoo.it>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 10 Dec 2019 14:54:10 -0800
+Message-ID: <CAMKF1spvn+Uqi2q4QsxajLcY0wjPN6dG3vSW-gS4=qmu2dcrbQ@mail.gmail.com>
+To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] vboxguestdrivers: update to version 6.0.14 and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,52 +54,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Dec 2019 22:22:59 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Dec 2019 22:54:36 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
+Fails with clang http://errors.yoctoproject.org/Errors/Details/296908/
+I guess it needs to use KERNEL_AR
 
-import twisted.conch.checkers outputs error messages like the
-following for multiple modules:
-
-|Python 3.7.4 (default, Oct 28 2019, 02:05:50)
-|[GCC 9.2.0] on linux
-|Type "help", "copyright", "credits" or "license" for more information.
-|>>> import twisted.conch.checkers
-|
-|Error message :
-|File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
-|File "/usr/lib64/python3.7/site-packages/twisted/conch/checkers.py", line 32, in
-|<module>
-|from twisted.conch.ssh import keys
-|File "/usr/lib64/python3.7/site-packages/twisted/conch/ssh/keys.py", line 18, in
-|<module>
-|import bcrypt
-|No module named 'bcrypt'
-
-Add the missing RDEPENDS so that it works (bcrypt, cryptography, pyasn1,
-pickle).
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
----
- meta-python/recipes-devtools/python/python-twisted.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
-index 67c90e32a..084123b97 100644
---- a/meta-python/recipes-devtools/python/python-twisted.inc
-+++ b/meta-python/recipes-devtools/python/python-twisted.inc
-@@ -58,7 +58,7 @@ RDEPENDS_${PN} = "\
- 
- RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink ${PYTHON_PN}-automat ${PYTHON_PN}-pyserial"
- RDEPENDS_${PN}-test = "${PN}"
--RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
-+RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols ${PYTHON_PN}-bcrypt ${PYTHON_PN}-cryptography ${PYTHON_PN}-pyasn1 ${PYTHON_PN}-pickle"
- RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
- RDEPENDS_${PN}-names = "${PN}-core"
- RDEPENDS_${PN}-news = "${PN}-core ${PN}-protocols"
--- 
-2.24.0
-
+On Tue, Dec 10, 2019 at 1:39 AM Gianfranco Costamagna
+<costamagna.gianfranco@gmail.com> wrote:
+>
+> ---
+>  ...oxguestdrivers_5.2.22.bb => vboxguestdrivers_6.0.14.bb} | 7 ++-----
+>  1 file changed, 2 insertions(+), 5 deletions(-)
+>  rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_5.2.22.bb => vboxguestdrivers_6.0.14.bb} (92%)
+>
+> diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.0.14.bb
+> similarity index 92%
+> rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
+> rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.0.14.bb
+> index 0f8d7af3f..bd7339e1a 100644
+> --- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
+> +++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.0.14.bb
+> @@ -14,8 +14,8 @@ VBOX_NAME = "VirtualBox-${PV}"
+>  SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+>      file://Makefile.utils \
+>  "
+> -SRC_URI[md5sum] = "c9c2f162ac5f99d28d8c0ca43b19ed01"
+> -SRC_URI[sha256sum] = "5580e875349341a1aabc6d5d2f697d242f277487316faaf1fbe68d9014f788d4"
+> +SRC_URI[md5sum] = "2766d6f628dcd8f0bc216d0f8a2abc8e"
+> +SRC_URI[sha256sum] = "5e12b14f0c38bf195d9592d76a9e0a128df2d38cd77c26ce5b5488397715dd0c"
+>
+>  S = "${WORKDIR}/vbox_module"
+>
+> @@ -78,6 +78,3 @@ FILES_${PN} = "${base_sbindir}"
+>
+>  # autoload if installed
+>  KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
+> -
+> -PNBLACKLIST[vboxguestdrivers] = "Needs forward porting to kernel 5.2+"
+> -
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
