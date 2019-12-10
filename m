@@ -1,50 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
-	[209.85.214.172])
-	by mail.openembedded.org (Postfix) with ESMTP id CA2267FC38
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B5A47FC8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Dec 2019 21:43:15 +0000 (UTC)
-Received: by mail-pl1-f172.google.com with SMTP id s10so6352603plp.2
+	Tue, 10 Dec 2019 09:38:53 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id y11so19181065wrt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Dec 2019 13:43:17 -0800 (PST)
+	Tue, 10 Dec 2019 01:38:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=n66HVtkaqp3sRsPPaTiwIk5t7z4TqBMHUvd/RFx0ImY=;
-	b=Op7F4F0w6Wgs+X4BkZznfIWlYs4+Kc0CNa3UyC1n6fQ7Uqabv8HnwRWT0UJMvJ4KZy
-	hZS8c8v+epMa8DbaXYSo2t5qbLjb+pRAD3w+AISHkjPziuSamGdHXcVSPTOnJEgrbaK6
-	eW2JJ7styEtboYP0sB8CtxmTrc/lIJuhUilSQN4RK053Yq3y4NSYKqPqbYDKvKwUt+7q
-	0KfnsusHsxKPCR20nG+3vN78Ey1UvOZkjnAbeNjxt0sDMSDK7W+ZwNc2HGGrHp5vvAoM
-	zSIgtevSX9i9gde35aST78huFHXj2h9RyNb01jgJtqr45sbXHrNp4TPUB+Lw41qS/8PZ
-	dpSA==
+	h=from:to:cc:subject:date:message-id;
+	bh=KJ5ZS3QRdx4n3IPyGgVChztfbrUI6p9pusfPsrw5MV0=;
+	b=PZNT1uu5bj0xfEQ+Quc0NjTkD7Z/3YAu1r6PpxctLipuaDUQbgFA0NRoSjY81kLdtp
+	Bvsd59RnemDeMcv6pskU1v/N7AHzqoGBGKVyUdx7FWVDfNkoib+L6ZicmTWjKzyhHS+t
+	ThFu8X7IXc6TyIPt9IWOZj9dqTsoTIcy84EjtqG+L40UzgszKFbiyqwcmnZRytVYoupv
+	H68qUgrK/eu/UrG7+73Jqo415AMUFnrhYaIhfx498aQSDcZ5kdMex0SB80IQcaeVj8UB
+	5unf3p/CdolYY6FidhIAT2C2EWcIMLjbTeQJgJUpyCldMvfmsk84M6BBK6BaWUtJhL4m
+	/ygw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=n66HVtkaqp3sRsPPaTiwIk5t7z4TqBMHUvd/RFx0ImY=;
-	b=a05D8dfRnV13zXkk1xXSyHZhCbad/JYj9ahl97ETPNjqq9gNFeVopSjuF1VRX/pw5h
-	yj+GnxzZdLXBWFLRvPtQ2DAFGPWiAku50SPLiC3qOHdhEsFabee25+POxPQx51DlkfKu
-	JscEo9kD1G4X0QvEyTAkfz74/GG64z/Jug6kWdRNJb97SBeXCJ/zcy03ct7dWBy6J4XH
-	gT1tIzP2KEqXBYucLLDJXcS8oCFdic45PHfbLNeiD+kkTaxpgO4joWs6U+MrgQdouwLy
-	srix3y8QYbYqHjp/5FW8veHvak47yc32+JteIRF4koIlkXPh1hU6qNigVQe9Es/6SRmc
-	VxlQ==
-X-Gm-Message-State: APjAAAUDjzjFC5XNCuCRaz6CwYbMgVUPnHWwseZcXDP6PaV3WWku3WGh
-	X9Gpi91sepy7cgAjkzLgJ8dCqkvX3I0=
-X-Google-Smtp-Source: APXvYqxfJPWk3q9usEFbR/91iLWtrsPyZNFJK7Diznd48uFK8jJ/nmCD2Ng1ZGe9NzTmOyfpOBrpWw==
-X-Received: by 2002:a17:902:ff04:: with SMTP id
-	f4mr29489662plj.275.1575927796361; 
-	Mon, 09 Dec 2019 13:43:16 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::afb7])
-	by smtp.gmail.com with ESMTPSA id i4sm481861pgc.51.2019.12.09.13.43.15
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=KJ5ZS3QRdx4n3IPyGgVChztfbrUI6p9pusfPsrw5MV0=;
+	b=Bi6orjkRj0pGSkceYi/N8U5p5GpmQRVDwuQJv7DMgGFqmj5cN027WZYs39TZFiL3fp
+	8GLjrK4Ed+lkfst7G+EpaMX+17GBjrYCr54vvT5RbHGW/3l+41Vy0+3/S8sXe6cpilYs
+	xgsN1GG9nwq260IrkuEJXbBejU1irPN6rJDzd0yizXX2FVmFeaCIrdxZkm2MsKz6VwG0
+	QtslgeTLsNFH1jnrHkZL6a39kyZW6tiI1jfZpKkWGHufoPDIhrstYGuG2ADtQ5rKeFG8
+	EjgrRa6W097T+7OYaRJdDZso3Q0Hg2Fqmj9eNWRqDZir1Sn0IsHwCAkqHnn46M0LvM4r
+	dFiQ==
+X-Gm-Message-State: APjAAAWSG6Yg4Z7YjhubgveQCuS8P176lrVGntSTVyLHHALD7zA+IbDB
+	YvdZLzokD5oHtIDhDZ1vkiI6REv5
+X-Google-Smtp-Source: APXvYqzYC49RJEAHIMRWaqgnpOTZinDqUKTQ+aeJeTp2G/cajqcfRfcrdsXmsJBlwaQfpLbboSJjpg==
+X-Received: by 2002:adf:e641:: with SMTP id b1mr2088962wrn.34.1575970733580;
+	Tue, 10 Dec 2019 01:38:53 -0800 (PST)
+Received: from Unimatrix05-Bionic.lan
+	([2001:b07:5d32:c012:3da3:ea06:8aaf:c536])
+	by smtp.gmail.com with ESMTPSA id
+	z18sm2388379wmf.21.2019.12.10.01.38.52
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Dec 2019 13:43:15 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 10 Dec 2019 01:38:52 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Dec 2019 13:43:00 -0800
-Message-Id: <20191209214300.3928337-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.0
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libsmi: Use right name for tcl license
+Date: Tue, 10 Dec 2019 10:38:50 +0100
+Message-Id: <20191210093850.6292-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] vboxguestdrivers: update to version 6.0.14 and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +57,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Dec 2019 21:43:15 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 10 Dec 2019 09:38:53 -0000
 
-Fixes
-WARNING: libsmi-0.5.0-r0 do_populate_lic: libsmi: No generic license file exists for: TCL in any provider
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...oxguestdrivers_5.2.22.bb => vboxguestdrivers_6.0.14.bb} | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_5.2.22.bb => vboxguestdrivers_6.0.14.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-index 3685c4aca0..98cc63eb3b 100644
---- a/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-+++ b/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "A Library to Access SMI MIB Information"
- HOMEPAGE = "https://www.ibr.cs.tu-bs.de/projects/libsmi"
+diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.0.14.bb
+similarity index 92%
+rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
+rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.0.14.bb
+index 0f8d7af3f..bd7339e1a 100644
+--- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
++++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.0.14.bb
+@@ -14,8 +14,8 @@ VBOX_NAME = "VirtualBox-${PV}"
+ SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
+     file://Makefile.utils \
+ "
+-SRC_URI[md5sum] = "c9c2f162ac5f99d28d8c0ca43b19ed01"
+-SRC_URI[sha256sum] = "5580e875349341a1aabc6d5d2f697d242f277487316faaf1fbe68d9014f788d4"
++SRC_URI[md5sum] = "2766d6f628dcd8f0bc216d0f8a2abc8e"
++SRC_URI[sha256sum] = "5e12b14f0c38bf195d9592d76a9e0a128df2d38cd77c26ce5b5488397715dd0c"
  
--LICENSE = "BSD-3-Clause & TCL"
-+LICENSE = "BSD-3-Clause & tcl"
- LIC_FILES_CHKSUM = "file://COPYING;md5=3ad3076f9332343a21636cfd351f05b7"
+ S = "${WORKDIR}/vbox_module"
  
- SRC_URI = "https://www.ibr.cs.tu-bs.de/projects/${BPN}/download/${BP}.tar.gz \
+@@ -78,6 +78,3 @@ FILES_${PN} = "${base_sbindir}"
+ 
+ # autoload if installed
+ KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
+-
+-PNBLACKLIST[vboxguestdrivers] = "Needs forward porting to kernel 5.2+"
+-
 -- 
-2.24.0
+2.17.1
 
 
