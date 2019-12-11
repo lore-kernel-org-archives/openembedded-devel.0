@@ -1,52 +1,47 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
-	[209.85.128.54])
-	by mail.openembedded.org (Postfix) with ESMTP id E0E9F7FC10
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 6EAE47F8BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 12:47:58 +0000 (UTC)
-Received: by mail-wm1-f54.google.com with SMTP id n9so6946500wmd.3
+	Wed, 11 Dec 2019 15:40:27 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id v2so6598499qtv.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 04:48:00 -0800 (PST)
+	Wed, 11 Dec 2019 07:40:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=dhQ3SQBtsSMxscr9tE72oTZaotU92/iKZqur5PivruE=;
-	b=CAg/ZdW54Y5RlPI3o8mRnASzOrb1/YorgWI/eBFM1EVLh3gsZ17nsA4SKCmRVtgys+
-	hg+bE5xs+47frd6/7Xk/OmXewsBh4atNNqflNXy0RDWeuaI2OdXO7kvB+/t7uiQTK0IT
-	fW/2BqOsPiasP4sNKDeJoLmhTUi5H6e1TZdjWlMYzWhxiffmauFTe2g6QZjCaw7DOcM8
-	j8O04wwrkBPNNQwx5AuAdo2wxcTu5TYprEKO4BBXVWu7giEuj2SRjZvRVNRZxD8C32Sx
-	MMonfdiSxBqPnTV+s024rZabmy931igFZuN8jLrPZ4vxYiHOAiEXuKBOsQbWWWMflQfa
-	lbeA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=NYUuYo+MRcm7WFT67A6QmxtuF1eu8BO9R82ZnK77b5M=;
+	b=RNV6ULcNRqtvbHkVDXQ9GzG9FYBWsG9ZGZ1qDsrfddvsUcDNB+AMdhkqqf9yNSQ/FC
+	ROZrpiB9wPhd2+GvdE3sDvAWdFIAp+eQ3Ro6XVDiBJ9LiHrwHH+2kir3VzgSgprtDvYI
+	wp08VYnrfanw0dm2xZIfpSQmgww/mrWEYQhTx9Zaco0VckT6xOuJNwOi6X88NeNjpnyA
+	kvM5NiactUHvh+o+xygAQCDREU5rZU1V9SILiytiPMQ97dNG3VkDODxhWsNfJRwpesaO
+	Eo/yqYjze9322YuhwQPpxjoSopFbVnd02JoS1lQgG2a1aPJTUBI/F6V00m1J8jJVRVnj
+	uTSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=dhQ3SQBtsSMxscr9tE72oTZaotU92/iKZqur5PivruE=;
-	b=GC+6rWozifjX0LC+REOD8dIhUY0eV3EiIzAcWC+pLxXWV6HBDKIXvsDXVDIu7u+Kx2
-	c84DOqVJrkJWMZyl7JSF0W08y9CnNVNapz0gtwTii27kRjEelFlgYIEbaQ9eFZtnz5sF
-	61SCOhq1xm/mMbPohYF2Yw11+BK9TG9ObqLwgOXr1GGoSUoH0XTNhG60eg61SC/sTmLt
-	1qa0DHx75YUk/8Dz3hceQRWqTYqec7HSvL06kyIbNedxIfL7MbyoerynZvv6RMWeibzr
-	++KjUh9LHXbhKeOU05PPl6hutB0QhN7Vs53F5JzyjOt2lWECAA8FJBC3DeNzcAEJ/9PF
-	h2IA==
-X-Gm-Message-State: APjAAAVIqQ4xuHAwBV6PG80dTMXT27yWeQDg7nicfldkRtaOtc/dwPUb
-	HCewQB6RpJ0o1CEmfrFGoOOpWg+x
-X-Google-Smtp-Source: APXvYqzalQgRrhrBLa3PL3BdAcgy1Q9nXi3KqX72g9HTw0s6JhpbhgG3HGXy51I3T7JreSRUzczHxg==
-X-Received: by 2002:a7b:cf2d:: with SMTP id m13mr3506059wmg.163.1576068479390; 
-	Wed, 11 Dec 2019 04:47:59 -0800 (PST)
-Received: from linuxdev2.toradex.int (31-10-206-124.static.upc.ch.
-	[31.10.206.124]) by smtp.gmail.com with ESMTPSA id
-	w20sm2170038wmk.34.2019.12.11.04.47.58
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 11 Dec 2019 04:47:58 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Dec 2019 13:46:58 +0100
-Message-Id: <20191211124658.54391-1-max.krummenacher@toradex.com>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=NYUuYo+MRcm7WFT67A6QmxtuF1eu8BO9R82ZnK77b5M=;
+	b=TobbEHWiVmZaQeI8YRbDGQaxb6eu+2KFmJt+RtvM7Q0F8o3tqtQbkVWYT0uEVOsjMf
+	GTQ2il5KILuxOghIjpLXYwt3+kjby1IqlWVYsxObTOBAwxciWrPL524/AXyrWt9+52fo
+	/kdvsQvsULURf844TVhGVTWRj7KAW1YrnB0O6sXA2v7MxHY2JJWkrQM1ImJCUXh9Yy/8
+	iwWzFvq+Y0nB6oAX5gvUXXGfTCLlyXGO/kEBHhYSfUfe+NUZRhIFkfcnk66ON8xmB6Ye
+	Cls8owvINgNhuVJrrng2Fc0dLiw2r8lVdq/Jp5TTqQNMDyHZKbFzhzlUW+y2KdmH6E1x
+	n4zg==
+X-Gm-Message-State: APjAAAVzXxCYYK9vXqxvHRz7XsqBOm+u8fTLFLu2oApQIDqVsHEr2Ie5
+	xlkcsrya+76cLGo0KWehxKGwl2q8j2dOPdxKupGI+RImsNM=
+X-Google-Smtp-Source: APXvYqyxmq5Md7xgNZbeUI/Q82q25xrWTGiUlhCnw6+Urz7zCqTi/XuxWcWkIpobcC36DmYnWtCXkpMdTt2qaCNgb+M=
+X-Received: by 2002:ac8:145:: with SMTP id f5mr3253102qtg.194.1576078827846;
+	Wed, 11 Dec 2019 07:40:27 -0800 (PST)
 MIME-Version: 1.0
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-oe][PATCH] libsoc: use python3 for python bindings
+References: <1576010126-10738-1-git-send-email-marek.belisko@open-nandra.com>
+In-Reply-To: <1576010126-10738-1-git-send-email-marek.belisko@open-nandra.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Dec 2019 07:40:01 -0800
+Message-ID: <CAMKF1soG7eMOapj95JrMQobJj3vxZTL8i=55iMKbu+KhixXUxA@mail.gmail.com>
+To: Marek Belisko <marek.belisko@open-nandra.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Jake Withecombe <jake@ruggednetworks.co.uk>
+Subject: Re: [PATCH] multimedia: janus-gateway: Added new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,44 +54,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Dec 2019 12:47:59 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 Dec 2019 15:40:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-With python in PACKAGECONFIGS and with the removal of python2 from
-host tools the recipe fails to build. Change the recipe to use python3.
+On Tue, Dec 10, 2019 at 12:36 PM Marek Belisko
+<marek.belisko@open-nandra.com> wrote:
+>
+> Added recipe for janus-gateway
+>
+>
+> Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
+> Signed-off-by: Jake Withecombe <jake@ruggednetworks.co.uk>
+> ---
+>  .../janus-gateway/files/janus-gateway.service      | 14 +++++++
+>  .../janus-gateway/janus-gateway_0.7.4.bb           | 48 ++++++++++++++++++++++
+>  2 files changed, 62 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
+>  create mode 100644 meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
+>
+> diff --git a/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service b/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
+> new file mode 100644
+> index 0000000..5b4d4f2
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
+> @@ -0,0 +1,14 @@
+> +[Unit]
+> +Description=Janus WebRTC Server
+> +After=network.target network-online.target
+> +Wants=network-online.target
+> +
+> +[Service]
+> +Type=simple
+> +ExecStart=/usr/bin/janus -o
+> +Restart=always
+> +RestartSec=60
+> +LimitNOFILE=65536
+> +
+> +[Install]
+> +WantedBy=multi-user.target
+> diff --git a/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb b/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
+> new file mode 100644
+> index 0000000..bca716f
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
+> @@ -0,0 +1,48 @@
+> +DESCRIPTION = "Janus is an open source, general purpose, WebRTC server designed and developed by Meetecho"
+> +HOMEPAGE = "https://janus.conf.meetecho.com/"
+> +SECTION = "libs/multimedia"
+> +
+> +LICENSE = "GPLv3"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=c9e0a79f2244c2f79cda22ea5fed9135"
+> +
+> +SRC_URI = "https://github.com/meetecho/janus-gateway/archive/v${PV}.tar.gz \
+> +          file://janus-gateway.service \
+> +"
+> +
+> +SRC_URI[md5sum] = "b068ac2b40ae800d83f471b8189bc87c"
+> +SRC_URI[sha256sum] = "01ddaf204203a1219dd46a5ce70b548bab75bc494c9ba05429f8fb1e786b2995"
+> +
+> +inherit autotools-brokensep pkgconfig systemd
+> +
+> +DEPENDS = "libsrtp jansson libconfig libnice openssl glib-2.0 gengetopt-native"
 
-libsoc configure uses the host python to detect the used version,
-install and use the python3-native package to have the same version
-for host and target.
+gengetopt-native provider is not anywhere in meta-openembedded. So
+either make it a packageconfig
+and keep it disabled or remove the dependency,
 
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
----
- meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +PACKAGECONFIG ?= "rest_api rest"
+> +#PACKAGECONFIG[disablewarnings] = "--disable-warnings-as-errors,,"
+> +#PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,"
+> +#PACKAGECONFIG[inet6] = "--enable-inet6,--disable-inet6,"
+> +PACKAGECONFIG[rest_api] = "--enable-turn-rest-api,--disable-turn-rest-api,curl"
+> +PACKAGECONFIG[rest] = "--enable-rest,--disable-rest,libmicrohttpd"
+> +PACKAGECONFIG[unix_sockets] = "--enable-unix-sockets,--disable-unix-sockets,"
+> +PACKAGECONFIG[post_processing] = "--enable-post-processing,--disable-post-processing,"
+> +PACKAGECONFIG[plugin_echo] = "--enable-plugin-echotest,--disable-plugin-echotest,"
+> +PACKAGECONFIG[plugin_videocall] = "--enable-plugin-videocall,--disable-plugin-videocall,"
+> +PACKAGECONFIG[plugin_nosip] = "--enable-plugin-nosip,--disable-plugin-nosip,"
+> +PACKAGECONFIG[plugin_videoroom] = "--enable-plugin-videoroom,--disable-plugin-videoroom,"
+> +PACKAGECONFIG[plugin_voicemail] = "--enable-plugin-voicemail,--disable-plugin-voicemail,"
+> +PACKAGECONFIG[plugin_recordplay] = "--enable-plugin-recordplay,--disable-plugin-recordplay,"
+> +PACKAGECONFIG[plugin_textroom] = "--enable-plugin-textroom,--disable-plugin-textroom,"
+> +
+> +FILES_${PN}_append = " ${libdir}/janus/plugins/* ${libdir}/janus/transports/* ${libdir}/janus/events"
+> +FILES_${PN}-demo = "${datadir}/janus/*"
+> +
+> +PACKAGES_append = " ${PN}-demo"
 
-diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb b/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
-index 01708df35..8b773aefa 100644
---- a/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
-+++ b/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
-@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/jackmitch/libsoc"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENCE;md5=e0bfebea12a718922225ba987b2126a5"
- 
--inherit autotools pkgconfig python-dir
-+inherit autotools pkgconfig python3-dir
- 
- SRCREV = "fd1ad6e7823fa76d8db0d3c5884faffa8ffddafb"
- SRC_URI = "git://github.com/jackmitch/libsoc.git"
-@@ -21,7 +21,7 @@ PACKAGECONFIG ?= ""
- PACKAGECONFIG[disabledebug] = "--disable-debug,,"
- PACKAGECONFIG[allboardconfigs] = "--with-board-configs,,"
- PACKAGECONFIG[enableboardconfig] = "--enable-board=${BOARD},,"
--PACKAGECONFIG[python] = "--enable-python=${PYTHON_PN},,${PYTHON_PN}"
-+PACKAGECONFIG[python] = "--enable-python=${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN},,${PYTHON_PN} ${PYTHON_PN}-native"
- 
- PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'python', \
-     '${PYTHON_PN}-libsoc-staticdev ${PYTHON_PN}-libsoc', '', d)}"
--- 
-2.20.1
+you could use PACKAGES += "..."
 
+> +
+> +INSANE_SKIP_${PN} = "dev-so"
+
+why is this needed.
+
+> +
+> +SYSTEMD_SERVICE_${PN} = "janus-gateway.service"
+> +
+> +do_install_append() {
+> +       # Install the systemd service so we can kick start on boot
+> +       install -d ${D}${systemd_unitdir}/system
+> +       install -m 644 ${WORKDIR}/janus-gateway.service ${D}${systemd_unitdir}/system/
+> +}
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
