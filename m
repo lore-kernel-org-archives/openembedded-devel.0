@@ -1,24 +1,52 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 86D0E7FA3F
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com
+	[209.85.128.54])
+	by mail.openembedded.org (Postfix) with ESMTP id E0E9F7FC10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 09:10:51 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id xBB9AqLj007910
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Wed, 11 Dec 2019 12:47:58 +0000 (UTC)
+Received: by mail-wm1-f54.google.com with SMTP id n9so6946500wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 01:10:52 -0800 (PST)
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.468.0; Wed, 11 Dec 2019 01:10:39 -0800
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 11 Dec 2019 17:10:36 +0800
-Message-ID: <20191211091036.6601-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Wed, 11 Dec 2019 04:48:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=dhQ3SQBtsSMxscr9tE72oTZaotU92/iKZqur5PivruE=;
+	b=CAg/ZdW54Y5RlPI3o8mRnASzOrb1/YorgWI/eBFM1EVLh3gsZ17nsA4SKCmRVtgys+
+	hg+bE5xs+47frd6/7Xk/OmXewsBh4atNNqflNXy0RDWeuaI2OdXO7kvB+/t7uiQTK0IT
+	fW/2BqOsPiasP4sNKDeJoLmhTUi5H6e1TZdjWlMYzWhxiffmauFTe2g6QZjCaw7DOcM8
+	j8O04wwrkBPNNQwx5AuAdo2wxcTu5TYprEKO4BBXVWu7giEuj2SRjZvRVNRZxD8C32Sx
+	MMonfdiSxBqPnTV+s024rZabmy931igFZuN8jLrPZ4vxYiHOAiEXuKBOsQbWWWMflQfa
+	lbeA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=dhQ3SQBtsSMxscr9tE72oTZaotU92/iKZqur5PivruE=;
+	b=GC+6rWozifjX0LC+REOD8dIhUY0eV3EiIzAcWC+pLxXWV6HBDKIXvsDXVDIu7u+Kx2
+	c84DOqVJrkJWMZyl7JSF0W08y9CnNVNapz0gtwTii27kRjEelFlgYIEbaQ9eFZtnz5sF
+	61SCOhq1xm/mMbPohYF2Yw11+BK9TG9ObqLwgOXr1GGoSUoH0XTNhG60eg61SC/sTmLt
+	1qa0DHx75YUk/8Dz3hceQRWqTYqec7HSvL06kyIbNedxIfL7MbyoerynZvv6RMWeibzr
+	++KjUh9LHXbhKeOU05PPl6hutB0QhN7Vs53F5JzyjOt2lWECAA8FJBC3DeNzcAEJ/9PF
+	h2IA==
+X-Gm-Message-State: APjAAAVIqQ4xuHAwBV6PG80dTMXT27yWeQDg7nicfldkRtaOtc/dwPUb
+	HCewQB6RpJ0o1CEmfrFGoOOpWg+x
+X-Google-Smtp-Source: APXvYqzalQgRrhrBLa3PL3BdAcgy1Q9nXi3KqX72g9HTw0s6JhpbhgG3HGXy51I3T7JreSRUzczHxg==
+X-Received: by 2002:a7b:cf2d:: with SMTP id m13mr3506059wmg.163.1576068479390; 
+	Wed, 11 Dec 2019 04:47:59 -0800 (PST)
+Received: from linuxdev2.toradex.int (31-10-206-124.static.upc.ch.
+	[31.10.206.124]) by smtp.gmail.com with ESMTPSA id
+	w20sm2170038wmk.34.2019.12.11.04.47.58
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 11 Dec 2019 04:47:58 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Dec 2019 13:46:58 +0100
+Message-Id: <20191211124658.54391-1-max.krummenacher@toradex.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][Patch] fltk: fix build error when enable package config examples
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-oe][PATCH] libsoc: use python3 for python bindings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,238 +59,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Dec 2019 09:10:52 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 11 Dec 2019 12:47:59 -0000
+Content-Transfer-Encoding: 8bit
 
-From: Kai Kang <kai.kang@windriver.com>
+With python in PACKAGECONFIGS and with the removal of python2 from
+host tools the recipe fails to build. Change the recipe to use python3.
 
-Backport patch to fix fltk build error when enable package config
-'examples'. Drop the useless parts such as .gitignore and Makefile
-from the patch.
+libsoc configure uses the host python to detect the used version,
+install and use the python3-native package to have the same version
+for host and target.
 
-fltk-native is also required by package config 'examples'.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
- meta-oe/recipes-support/fltk/fltk.bb          |   7 +-
- ...-when-enable-package-config-examples.patch | 182 ++++++++++++++++++
- 2 files changed, 187 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch
+ meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/fltk/fltk.bb b/meta-oe/recipes-support/fltk/fltk.bb
-index 7ad4ac70a..0d033f361 100644
---- a/meta-oe/recipes-support/fltk/fltk.bb
-+++ b/meta-oe/recipes-support/fltk/fltk.bb
-@@ -5,7 +5,10 @@ DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
- inherit features_check binconfig lib_package gtk-icon-cache mime
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb b/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
+index 01708df35..8b773aefa 100644
+--- a/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
++++ b/meta-oe/recipes-support/libsoc/libsoc_0.8.2.bb
+@@ -7,7 +7,7 @@ HOMEPAGE = "https://github.com/jackmitch/libsoc"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=e0bfebea12a718922225ba987b2126a5"
  
--SRC_URI += "file://0003-CMake-build-Force-shared-libs-with-unsuffixed-names.patch"
-+SRC_URI += " \
-+    file://0003-CMake-build-Force-shared-libs-with-unsuffixed-names.patch \
-+    file://0004-Fix-build-error-when-enable-package-config-examples.patch \
-+"
+-inherit autotools pkgconfig python-dir
++inherit autotools pkgconfig python3-dir
  
- EXTRA_OECMAKE = " \
-     -DOPTION_BUILD_SHARED_LIBS=ON \
-@@ -17,7 +20,7 @@ EXTRA_OECMAKE = " \
+ SRCREV = "fd1ad6e7823fa76d8db0d3c5884faffa8ffddafb"
+ SRC_URI = "git://github.com/jackmitch/libsoc.git"
+@@ -21,7 +21,7 @@ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[disabledebug] = "--disable-debug,,"
+ PACKAGECONFIG[allboardconfigs] = "--with-board-configs,,"
+ PACKAGECONFIG[enableboardconfig] = "--enable-board=${BOARD},,"
+-PACKAGECONFIG[python] = "--enable-python=${PYTHON_PN},,${PYTHON_PN}"
++PACKAGECONFIG[python] = "--enable-python=${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN},,${PYTHON_PN} ${PYTHON_PN}-native"
  
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
- 
--PACKAGECONFIG[examples] = "-DOPTION_BUILD_EXAMPLES=ON,-DOPTION_BUILD_EXAMPLES=OFF,"
-+PACKAGECONFIG[examples] = "-DOPTION_BUILD_EXAMPLES=ON,-DOPTION_BUILD_EXAMPLES=OFF,fltk-native"
- PACKAGECONFIG[cairo] = "-DOPTION_CAIRO=ON,-DOPTION_CAIRO=OFF,cairo"
- PACKAGECONFIG[opengl] = "-DOPTION_USE_GL=ON,-DOPTION_USE_GL=OFF,virtual/libgl"
- PACKAGECONFIG[xinerama] = "-DOPTION_USE_XINERAMA=ON,-DOPTION_USE_XINERAMA=OFF,libxinerama"
-diff --git a/meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch b/meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch
-new file mode 100644
-index 000000000..974c02fe6
---- /dev/null
-+++ b/meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch
-@@ -0,0 +1,182 @@
-+Fix build error when enable package config examples.
-+
-+Upstream-Status: Backport [https://github.com/fltk/fltk/commit/16774dd]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+
-+
-+From 16774ddc4e000c89e560fde0ced8be9814ef041e Mon Sep 17 00:00:00 2001
-+From: Albrecht Schlosser <albrechts.fltk@online.de>
-+Date: Wed, 8 Feb 2017 02:06:52 +0000
-+Subject: [PATCH] Rename test/help demo program to test/help_dialog.
-+
-+This change avoids a name conflict with CMake's auto-generated target 'help'
-+for "Unix Makefiles", "Ninja", and supposedly other generators as well.
-+
-+
-+git-svn-id: file:///fltk/svn/fltk/branches/branch-1.4@12171 ea41ed52-d2ee-0310-a9c1-e6b18d33e121
-+---
-+ CMake/macros.cmake                        |  5 -----
-+ documentation/src/examples.dox            |  8 +++----
-+ test/CMakeLists.txt                       | 27 +++++++++++++++++++----
-+ test/demo.menu                            |  2 +-
-+ test/{help.cxx => help_dialog.cxx}        |  6 ++---
-+ test/{help-test.html => help_dialog.html} |  0
-+ 6 files changed, 31 insertions(+), 17 deletions(-)
-+ rename test/{help.cxx => help_dialog.cxx} (88%)
-+ rename test/{help-test.html => help_dialog.html} (100%)
-+
-+diff --git a/CMake/macros.cmake b/CMake/macros.cmake
-+index 5b0d0fa..7134fcb 100644
-+--- a/CMake/macros.cmake
-++++ b/CMake/macros.cmake
-+@@ -90,11 +90,6 @@ function(CREATE_EXAMPLE NAME SOURCES LIBRARIES)
-+ 
-+     set (tname ${NAME})		# target name
-+ 
-+-    # rename reserved target name "help" (CMake 2.8.12 and later)
-+-    if (${tname} MATCHES "^help$")
-+-        set (tname "test_help")
-+-    endif (${tname} MATCHES "^help$")
-+-
-+     foreach(src ${SOURCES})
-+         if ("${src}" MATCHES "\\.fl$")
-+             list(APPEND flsrcs ${src})
-+diff --git a/documentation/src/examples.dox b/documentation/src/examples.dox
-+index 5105b7b..7961b02 100644
-+--- a/documentation/src/examples.dox
-++++ b/documentation/src/examples.dox
-+@@ -60,7 +60,7 @@ you build FLTK, unlike those in the 'test' directory shown below.
-+ </tr>
-+ <tr>
-+ <td> \ref examples_hello           </td>
-+-<td> \ref examples_help            </td>
-++<td> \ref examples_help_dialog     </td>
-+ <td> \ref examples_iconize         </td>
-+ <td> \ref examples_image           </td>
-+ <td> \ref examples_inactive        </td>
-+@@ -326,13 +326,13 @@ easily under FLTK.
-+ tiny demo shows how little is needed to get a functioning application
-+ running with FLTK. Quite impressive, I'd say.
-+ 
-+-\subsection examples_help help
-++\subsection examples_help_dialog help_dialog
-+ 
-+ \par
-+-\c help displays the built-in FLTK help browser. The 
-++\c help_dialog displays the built-in FLTK help browser. The
-+ Fl_Help_Dialog understands a subset of html and renders
-+ various image formats. This widget makes it easy to provide help
-+-pages to the user without depending on the operating system's 
-++pages to the user without depending on the operating system's
-+ html browser.
-+ 
-+ \subsection examples_iconize iconize
-+diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
-+index 22ec9ab..4caffa5 100644
-+--- a/test/CMakeLists.txt
-++++ b/test/CMakeLists.txt
-+@@ -1,3 +1,22 @@
-++#
-++# "$Id$"
-++#
-++# CMakeLists.txt used to build test and demo apps by the CMake build system
-++#
-++# Copyright 2004-2017 by Bill Spitzak and others.
-++#
-++# This library is free software. Distribution and use rights are outlined in
-++# the file "COPYING" which should have been included with this file.  If this
-++# file is missing or damaged, see the license at:
-++#
-++#     http://www.fltk.org/COPYING.php
-++#
-++# Please report all bugs and problems on the following page:
-++#
-++#     http://www.fltk.org/str.php
-++#
-++#######################################################################
-++
-+ set(EXECUTABLE_OUTPUT_PATH ${FLTK_BINARY_DIR}/bin/examples)
-+ 
-+ #######################################################################
-+@@ -64,7 +83,7 @@ CREATE_EXAMPLE(file_chooser file_chooser.cxx "fltk;fltk_images")
-+ CREATE_EXAMPLE(fonts fonts.cxx fltk)
-+ CREATE_EXAMPLE(forms forms.cxx "fltk;fltk_forms")
-+ CREATE_EXAMPLE(hello hello.cxx fltk)
-+-CREATE_EXAMPLE(help help.cxx "fltk;fltk_images")
-++CREATE_EXAMPLE(help_dialog help_dialog.cxx "fltk;fltk_images")
-+ CREATE_EXAMPLE(icon icon.cxx fltk)
-+ CREATE_EXAMPLE(iconize iconize.cxx fltk)
-+ CREATE_EXAMPLE(image image.cxx fltk)
-+@@ -134,7 +153,7 @@ endif(FLTK_HAVE_CAIRO)
-+ # Note: this is incomplete as of 11 Feb 2015
-+ # Todo: currently all files are copied, but some of them need configuration:
-+ # - demo.menu: fluid can't be started (wrong path)
-+-# - demo.menu: help (help-test.html) can't find its images (not copied)
-++# - demo.menu: help_dialog (help_dialog.html) can't find its images (not copied)
-+ # - maybe more ...
-+ 
-+ # prepare for a "better" test file installation path
-+@@ -149,11 +168,11 @@ configure_file(demo.menu ${TESTFILE_PATH}/demo.menu COPYONLY)
-+ 
-+ # use target directory only to avoid redundancy
-+ configure_file(rgb.txt ${TESTFILE_PATH} COPYONLY)
-+-configure_file(help-test.html ${TESTFILE_PATH} COPYONLY)
-++configure_file(help_dialog.html ${TESTFILE_PATH} COPYONLY)
-+ configure_file(browser.cxx ${TESTFILE_PATH} COPYONLY)
-+ configure_file(editor.cxx ${TESTFILE_PATH} COPYONLY)
-+ if(APPLE AND NOT OPTION_APPLE_X11)
-+     configure_file(browser.cxx "${TESTFILE_PATH}/browser.app/Contents/Resources/browser.cxx" COPYONLY)
-+     configure_file(rgb.txt ${TESTFILE_PATH}/colbrowser.app/Contents/Resources/rgb.txt COPYONLY)
-+-    configure_file(help-test.html ${TESTFILE_PATH}/help.app/Contents/Resources/help-test.html COPYONLY)
-++    configure_file(help_dialog.html ${TESTFILE_PATH}/help_dialog.app/Contents/Resources/help_dialog.html COPYONLY)
-+ endif(APPLE AND NOT OPTION_APPLE_X11)
-+diff --git a/test/demo.menu b/test/demo.menu
-+index 337a71c..97e522a 100644
-+--- a/test/demo.menu
-++++ b/test/demo.menu
-+@@ -77,7 +77,7 @@
-+ 	@o:Font Tests...:@of
-+ 		@of:Fonts:fonts
-+ 		@of:UTF-8:utf8
-+-	@o:HelpDialog:help
-++	@o:HelpDialog:help_dialog
-+ 	@o:Input Choice:input_choice
-+ 	@o:Preferences:preferences
-+ 	@o:Threading:threads
-+diff --git a/test/help.cxx b/test/help_dialog.cxx
-+similarity index 88%
-+rename from test/help.cxx
-+rename to test/help_dialog.cxx
-+index f5c51d6..7866641 100644
-+--- a/test/help.cxx
-++++ b/test/help_dialog.cxx
-+@@ -3,7 +3,7 @@
-+ //
-+ // Fl_Help_Dialog test program.
-+ //
-+-// Copyright 1999-2010 by Easy Software Products.
-++// Copyright 2011-2017 by Bill Spitzak and others.
-+ //
-+ // This library is free software. Distribution and use rights are outlined in
-+ // the file "COPYING" which should have been included with this file.  If this
-+@@ -46,13 +46,13 @@ main(int  argc,			// I - Number of command-line arguments
-+     strcpy(buf, argv[0]);
-+     char *slash = strrchr(buf, '/');
-+     if (slash)
-+-      strcpy(slash, "/../Resources/help-test.html");
-++      strcpy(slash, "/../Resources/help_dialog.html");
-+     help->load(buf);
-+   
-+ #else
-+   
-+   if (argc <= 1)
-+-    help->load("help-test.html");
-++    help->load("help_dialog.html");
-+   else
-+     help->load(argv[1]);
-+   
-+diff --git a/test/help-test.html b/test/help_dialog.html
-+similarity index 100%
-+rename from test/help-test.html
-+rename to test/help_dialog.html
+ PACKAGES =+ "${@bb.utils.contains('PACKAGECONFIG', 'python', \
+     '${PYTHON_PN}-libsoc-staticdev ${PYTHON_PN}-libsoc', '', d)}"
 -- 
-2.17.1
+2.20.1
 
 
