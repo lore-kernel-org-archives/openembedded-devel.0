@@ -1,47 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
-	[209.85.160.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 6EAE47F8BB
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B7EE7FA30
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 15:40:27 +0000 (UTC)
-Received: by mail-qt1-f175.google.com with SMTP id v2so6598499qtv.8
+	Wed, 11 Dec 2019 16:03:35 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id n9so7707367wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 07:40:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=NYUuYo+MRcm7WFT67A6QmxtuF1eu8BO9R82ZnK77b5M=;
-	b=RNV6ULcNRqtvbHkVDXQ9GzG9FYBWsG9ZGZ1qDsrfddvsUcDNB+AMdhkqqf9yNSQ/FC
-	ROZrpiB9wPhd2+GvdE3sDvAWdFIAp+eQ3Ro6XVDiBJ9LiHrwHH+2kir3VzgSgprtDvYI
-	wp08VYnrfanw0dm2xZIfpSQmgww/mrWEYQhTx9Zaco0VckT6xOuJNwOi6X88NeNjpnyA
-	kvM5NiactUHvh+o+xygAQCDREU5rZU1V9SILiytiPMQ97dNG3VkDODxhWsNfJRwpesaO
-	Eo/yqYjze9322YuhwQPpxjoSopFbVnd02JoS1lQgG2a1aPJTUBI/F6V00m1J8jJVRVnj
-	uTSA==
+	Wed, 11 Dec 2019 08:03:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=sMe2+PTbX19sUaidDtOZb4z9rrF3l3rBlWi62T4XiQ8=;
+	b=WwJrVDjJGR6gD1MFmdrMPl1Q+XzGWQ1yfoiMrB1N63pJ3U/0e4LqCuHM7GAEchPlNa
+	YCPRqEpmIzn8W0Et+p6YsjiBLkYCYFzCt4dLzZPwAdU2Tw/A8h/M+p9ILoTuYHfeivPT
+	ONpgUEUlc/DRsbtznbiChZ5mTCMI0h9ugr5Q48wpokrdTAVtq1uIpPvdt4yslIJQjQgw
+	YfjfXzzKZe4iGszCY9qtbjIcpFs61mEzW49zY4YLiZbQSFG0LGBBQhxGiegYrEIrklqN
+	hg8GQrRwjN4POHDJxOPuFB8zccwvBRXrdo3ORqYHFybbwYNV72IZR8e0vKi5QoZKlWGM
+	gH+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=NYUuYo+MRcm7WFT67A6QmxtuF1eu8BO9R82ZnK77b5M=;
-	b=TobbEHWiVmZaQeI8YRbDGQaxb6eu+2KFmJt+RtvM7Q0F8o3tqtQbkVWYT0uEVOsjMf
-	GTQ2il5KILuxOghIjpLXYwt3+kjby1IqlWVYsxObTOBAwxciWrPL524/AXyrWt9+52fo
-	/kdvsQvsULURf844TVhGVTWRj7KAW1YrnB0O6sXA2v7MxHY2JJWkrQM1ImJCUXh9Yy/8
-	iwWzFvq+Y0nB6oAX5gvUXXGfTCLlyXGO/kEBHhYSfUfe+NUZRhIFkfcnk66ON8xmB6Ye
-	Cls8owvINgNhuVJrrng2Fc0dLiw2r8lVdq/Jp5TTqQNMDyHZKbFzhzlUW+y2KdmH6E1x
-	n4zg==
-X-Gm-Message-State: APjAAAVzXxCYYK9vXqxvHRz7XsqBOm+u8fTLFLu2oApQIDqVsHEr2Ie5
-	xlkcsrya+76cLGo0KWehxKGwl2q8j2dOPdxKupGI+RImsNM=
-X-Google-Smtp-Source: APXvYqyxmq5Md7xgNZbeUI/Q82q25xrWTGiUlhCnw6+Urz7zCqTi/XuxWcWkIpobcC36DmYnWtCXkpMdTt2qaCNgb+M=
-X-Received: by 2002:ac8:145:: with SMTP id f5mr3253102qtg.194.1576078827846;
-	Wed, 11 Dec 2019 07:40:27 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=sMe2+PTbX19sUaidDtOZb4z9rrF3l3rBlWi62T4XiQ8=;
+	b=apmEPYYyUDGrKI2XylE/CMREoI9U5zi7zhMRVZi/iuQCFbX4Bz0rcbwiDP1LNPlzZD
+	7u5NHPOM9LGdze6PIxs77VskQ1SoxIS7j1NYTGkTft2y2ZCkrbeT5xRCl6ZC5h/mF45K
+	XKv/dOeKcqwvyXPTxYKbqK8SgbUV+F/aKLnhk+PUC7O/seBW7sAdArk138NY0HBXGxPp
+	T6NHoJAH104Vbamqn8xVxPkKlpseD04koU7C9cgBZ22B7IHsYICDrMwBuFFpI+frftAd
+	a3UTUr8hyuUbUAMPIJQRi8LxyaSBwmY8MzpmLa5x7DpL4OTbLQpwJXpQZ93mUWdLbkXs
+	Yx3A==
+X-Gm-Message-State: APjAAAU1otWV/mgHfFUOBQGAgUPkjAodUj4eVKcnm759q4bMFEdaDAaK
+	lqUZsMvcADWGk5kWrcbEjjRUdA==
+X-Google-Smtp-Source: APXvYqxXyLTr6QtzwnTZdS23NXCAkGqu0L5KHYYmrHpihRqmR94ZnD1yajZltaBmdHFDTQvCnCXXwg==
+X-Received: by 2002:a1c:49c2:: with SMTP id w185mr573845wma.138.1576080215906; 
+	Wed, 11 Dec 2019 08:03:35 -0800 (PST)
+Received: from localhost.localdomain (lfbn-1-7161-157.w90-116.abo.wanadoo.fr.
+	[90.116.92.157])
+	by smtp.gmail.com with ESMTPSA id h8sm2855940wrx.63.2019.12.11.08.03.34
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 11 Dec 2019 08:03:35 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Dec 2019 17:03:31 +0100
+Message-Id: <20191211160332.1182-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-References: <1576010126-10738-1-git-send-email-marek.belisko@open-nandra.com>
-In-Reply-To: <1576010126-10738-1-git-send-email-marek.belisko@open-nandra.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 11 Dec 2019 07:40:01 -0800
-Message-ID: <CAMKF1soG7eMOapj95JrMQobJj3vxZTL8i=55iMKbu+KhixXUxA@mail.gmail.com>
-To: Marek Belisko <marek.belisko@open-nandra.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Jake Withecombe <jake@ruggednetworks.co.uk>
-Subject: Re: [PATCH] multimedia: janus-gateway: Added new recipe
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH 1/2] xdelta3: update to v3.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,115 +60,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Dec 2019 15:40:27 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 11 Dec 2019 16:03:35 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, Dec 10, 2019 at 12:36 PM Marek Belisko
-<marek.belisko@open-nandra.com> wrote:
->
-> Added recipe for janus-gateway
->
->
-> Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
-> Signed-off-by: Jake Withecombe <jake@ruggednetworks.co.uk>
-> ---
->  .../janus-gateway/files/janus-gateway.service      | 14 +++++++
->  .../janus-gateway/janus-gateway_0.7.4.bb           | 48 ++++++++++++++++++++++
->  2 files changed, 62 insertions(+)
->  create mode 100644 meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
->  create mode 100644 meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
->
-> diff --git a/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service b/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
-> new file mode 100644
-> index 0000000..5b4d4f2
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/janus-gateway/files/janus-gateway.service
-> @@ -0,0 +1,14 @@
-> +[Unit]
-> +Description=Janus WebRTC Server
-> +After=network.target network-online.target
-> +Wants=network-online.target
-> +
-> +[Service]
-> +Type=simple
-> +ExecStart=/usr/bin/janus -o
-> +Restart=always
-> +RestartSec=60
-> +LimitNOFILE=65536
-> +
-> +[Install]
-> +WantedBy=multi-user.target
-> diff --git a/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb b/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
-> new file mode 100644
-> index 0000000..bca716f
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-multimedia/janus-gateway/janus-gateway_0.7.4.bb
-> @@ -0,0 +1,48 @@
-> +DESCRIPTION = "Janus is an open source, general purpose, WebRTC server designed and developed by Meetecho"
-> +HOMEPAGE = "https://janus.conf.meetecho.com/"
-> +SECTION = "libs/multimedia"
-> +
-> +LICENSE = "GPLv3"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=c9e0a79f2244c2f79cda22ea5fed9135"
-> +
-> +SRC_URI = "https://github.com/meetecho/janus-gateway/archive/v${PV}.tar.gz \
-> +          file://janus-gateway.service \
-> +"
-> +
-> +SRC_URI[md5sum] = "b068ac2b40ae800d83f471b8189bc87c"
-> +SRC_URI[sha256sum] = "01ddaf204203a1219dd46a5ce70b548bab75bc494c9ba05429f8fb1e786b2995"
-> +
-> +inherit autotools-brokensep pkgconfig systemd
-> +
-> +DEPENDS = "libsrtp jansson libconfig libnice openssl glib-2.0 gengetopt-native"
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-gengetopt-native provider is not anywhere in meta-openembedded. So
-either make it a packageconfig
-and keep it disabled or remove the dependency,
+The repository now lives under a different address. Let's use git
+directly to fetch sources as there are no proper release tarballs.
 
-> +
-> +PACKAGECONFIG ?= "rest_api rest"
-> +#PACKAGECONFIG[disablewarnings] = "--disable-warnings-as-errors,,"
-> +#PACKAGECONFIG[inet] = "--enable-inet,--disable-inet,"
-> +#PACKAGECONFIG[inet6] = "--enable-inet6,--disable-inet6,"
-> +PACKAGECONFIG[rest_api] = "--enable-turn-rest-api,--disable-turn-rest-api,curl"
-> +PACKAGECONFIG[rest] = "--enable-rest,--disable-rest,libmicrohttpd"
-> +PACKAGECONFIG[unix_sockets] = "--enable-unix-sockets,--disable-unix-sockets,"
-> +PACKAGECONFIG[post_processing] = "--enable-post-processing,--disable-post-processing,"
-> +PACKAGECONFIG[plugin_echo] = "--enable-plugin-echotest,--disable-plugin-echotest,"
-> +PACKAGECONFIG[plugin_videocall] = "--enable-plugin-videocall,--disable-plugin-videocall,"
-> +PACKAGECONFIG[plugin_nosip] = "--enable-plugin-nosip,--disable-plugin-nosip,"
-> +PACKAGECONFIG[plugin_videoroom] = "--enable-plugin-videoroom,--disable-plugin-videoroom,"
-> +PACKAGECONFIG[plugin_voicemail] = "--enable-plugin-voicemail,--disable-plugin-voicemail,"
-> +PACKAGECONFIG[plugin_recordplay] = "--enable-plugin-recordplay,--disable-plugin-recordplay,"
-> +PACKAGECONFIG[plugin_textroom] = "--enable-plugin-textroom,--disable-plugin-textroom,"
-> +
-> +FILES_${PN}_append = " ${libdir}/janus/plugins/* ${libdir}/janus/transports/* ${libdir}/janus/events"
-> +FILES_${PN}-demo = "${datadir}/janus/*"
-> +
-> +PACKAGES_append = " ${PN}-demo"
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+---
+ .../xdelta/{xdelta3_3.0.11.bb => xdelta3_3.1.0.bb}        | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-oe/recipes-support/xdelta/{xdelta3_3.0.11.bb => xdelta3_3.1.0.bb} (65%)
 
-you could use PACKAGES += "..."
+diff --git a/meta-oe/recipes-support/xdelta/xdelta3_3.0.11.bb b/meta-oe/recipes-support/xdelta/xdelta3_3.1.0.bb
+similarity index 65%
+rename from meta-oe/recipes-support/xdelta/xdelta3_3.0.11.bb
+rename to meta-oe/recipes-support/xdelta/xdelta3_3.1.0.bb
+index 9669d9bbb..9bf136391 100644
+--- a/meta-oe/recipes-support/xdelta/xdelta3_3.0.11.bb
++++ b/meta-oe/recipes-support/xdelta/xdelta3_3.1.0.bb
+@@ -6,10 +6,10 @@ SECTION = "console/utils"
+ 
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
+-SRC_URI = "https://github.com/jmacd/xdelta-devel/releases/download/v${PV}/${BPN}-${PV}.tar.gz  \
+-          "
+-SRC_URI[md5sum] = "445d8be2ac512113d5ca601ae8359626"
+-SRC_URI[sha256sum] = "0ccc9751ceaa4d90d6b06938a4deddb481816f5d9284bd07d2e728609cb300aa"
++
++SRC_URI = "git://github.com/jmacd/xdelta.git;branch=release3_1_apl"
++SRCREV = "4b4aed71a959fe11852e45242bb6524be85d3709"
++S = "${WORKDIR}/git/xdelta3"
+ 
+ inherit autotools
+ 
+-- 
+2.23.0
 
-> +
-> +INSANE_SKIP_${PN} = "dev-so"
-
-why is this needed.
-
-> +
-> +SYSTEMD_SERVICE_${PN} = "janus-gateway.service"
-> +
-> +do_install_append() {
-> +       # Install the systemd service so we can kick start on boot
-> +       install -d ${D}${systemd_unitdir}/system
-> +       install -m 644 ${WORKDIR}/janus-gateway.service ${D}${systemd_unitdir}/system/
-> +}
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
