@@ -1,42 +1,25 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-io1-f45.google.com (mail-io1-f45.google.com
-	[209.85.166.45])
-	by mail.openembedded.org (Postfix) with ESMTP id E55D07FC02
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C5F66BBE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 05:31:24 +0000 (UTC)
-Received: by mail-io1-f45.google.com with SMTP id v18so21414092iol.2
+	Wed, 11 Dec 2019 05:51:13 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xBB5pBjs002002
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 21:31:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=dh+VLnW/g+ppqdVzhdZYBKm9ewxz3tlBxDj3AC0YNBU=;
-	b=kwPrzjhJ69gI6C4AcI/S/0tDuCZuboci5z/zXkUgO65JyQxTuk5+1AgFBAlqscCSdz
-	4a3IA81XX6nqPWDHNpbFTp7Rb4XoPGp59FE+1nWhRXmOiqYueRuNFqBGHcGtrig/EAAl
-	AW+fEmmqsG9OrIGL5X4dMNOqUgKYeD1z+D34ziYVAcDLsvFxrvRfFD1mkEKFriT3pomw
-	dNCO9vcGQ4chYVMC3lQ/odI1DKYmiFSNiedqE4MQH9RJgijh6d749YbSuUF4njQ8YMo6
-	psGaEBr+IfdFcsCXV/4OtGlfbrEiY0rLe+qobRHCChhWt38ZN09nfTOxJywtCQKIw2eo
-	mV5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=dh+VLnW/g+ppqdVzhdZYBKm9ewxz3tlBxDj3AC0YNBU=;
-	b=uXU+eKcdeLpwAVoVq6mAmkzA9JS/ww+lYlzLgo7ioaPUCoxaMRKNvTTmsHQVYfJybS
-	WYOxOo4MiiS+Skl9qweMxtA2C7uC04SZPnYO+WppdNNahocrrEtWzUc8SM2JlgFiqNmA
-	B6KTVNee2PgmEfWnsmrAW57+hKJMdMmFzFGVJZ9JH7G3gAIRsb7OnFVDU+BW450WL5KC
-	cKNSr07FL3/Mzrs9cFIQbtZ0gmx8hA72cCSvYoo2EXplNV7VKWAbQ4n9q/MpHTlKnl22
-	1ihrMCsWnMnZzl7b4R6BNpKXtozH3Wftzy1AIy48rkzLQYQSyOrtCozfu9tfjJwphnv3
-	cp3Q==
-X-Gm-Message-State: APjAAAXZDXISlZcd7yz2od7Q762JMBiRPS5z27cs4XuuK/SEt/kKHyhv
-	OHOIT8z8CibiOxIcvYD2iW2gcM7DhEBrMVxzdjz2UWeN
-X-Google-Smtp-Source: APXvYqxtTXQMljHUVStCPiid/K7PtAQKN5gjFUxazGJUiB4P8eek43S4W3DIdYlzx6TsHrM1KRDY6Wjqx+Xa87tq1Vs=
-X-Received: by 2002:a02:b91a:: with SMTP id v26mr1381529jan.144.1576042285560; 
-	Tue, 10 Dec 2019 21:31:25 -0800 (PST)
+	Tue, 10 Dec 2019 21:51:11 -0800 (PST)
+Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Tue, 10 Dec 2019 21:51:10 -0800
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 11 Dec 2019 13:51:08 +0800
+Message-ID: <20191211055108.23477-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Wed, 11 Dec 2019 05:31:14 +0000
-Message-ID: <CAO5Uq5TEZH_VTN9EpWTDjhqMCgkVEGRB2bi5oXpCXamFMEkv+Q@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Build looping with "Checking sstate mirror object availability...done"?
+X-Originating-IP: [128.224.162.174]
+Subject: [meta-webserver][PATCH] phpmyadmin: upgrade 4.9.1 -> 4.9.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,40 +32,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Dec 2019 05:31:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 11 Dec 2019 05:51:14 -0000
+Content-Type: text/plain
 
-Our local master jenkins build looks like it's started looping with:
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../phpmyadmin/{phpmyadmin_4.9.1.bb => phpmyadmin_4.9.2.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.9.1.bb => phpmyadmin_4.9.2.bb} (91%)
 
-00:56:28.368  Checking sstate mirror object availability...done.
-00:56:28.368  Checking sstate mirror object availability...done.
-00:56:28.368  Checking sstate mirror object availability...done.
-00:56:28.752  Checking sstate mirror object availability...done.
-00:56:28.752  Checking sstate mirror object availability...done.
-00:56:29.136  Checking sstate mirror object availability...done.
-00:56:29.136  Checking sstate mirror object availability...done.
-00:56:29.136  Checking sstate mirror object availability...done.
-00:56:29.520  Checking sstate mirror object availability...done.
-00:56:29.520  Checking sstate mirror object availability...done.
-00:56:29.904  Checking sstate mirror object availability...done.
-00:56:29.904  Checking sstate mirror object availability...done.
-00:56:29.904  Checking sstate mirror object availability...done.
-00:56:30.288  Checking sstate mirror object availability...done.
-00:56:30.288  Checking sstate mirror object availability...done.
-
-The only changes from it's previous build are these two:
-
-Layers Update: poky
-* poky 9d606cf...f48ef0b (2):
- > build-appliance-image: Update to master head revision
- > sstate: Ensure SSTATE_PKG is reloaded when handling siginfo
-
-Its sstate-cache is on NFS (well AWS EFS) if that's relevant?
-
-At the point I killed it, it was just over an hour in, but was only a
-100 tasks into the 7392 - a full rebuild is normally ~3.5 hours, but
-this didn't seem to really be making any meaningful progress.
-
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.1.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.2.bb
+similarity index 91%
+rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.1.bb
+rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.2.bb
+index 3da2d9ba2..34943de30 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.1.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.9.2.bb
+@@ -11,8 +11,8 @@ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-la
+            file://apache.conf \
+ "
+ 
+-SRC_URI[md5sum] = "a165109629731f5311ec3171cce50972"
+-SRC_URI[sha256sum] = "8f89dd62e3fdddabca187b092eeb5af4a4fb956189564c56038970519d0496c5"
++SRC_URI[md5sum] = "5b5d1d84a05624430ac659e36af00f4e"
++SRC_URI[sha256sum] = "3bc3e37fefbdfcaf12fd59d6d7fdbf11ffcffe3e211155bf5b822b54a3c2043e"
+ 
+ UPSTREAM_CHECK_URI = "https://www.phpmyadmin.net/downloads/"
+ UPSTREAM_CHECK_REGEX = "phpMyAdmin-(?P<pver>\d+(\.\d+)+)-all-languages.tar.xz"
 -- 
-Alex Kiernan
+2.17.1
+
 
