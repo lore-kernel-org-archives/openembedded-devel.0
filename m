@@ -1,48 +1,42 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
-	[209.85.219.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C04997FC84
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-io1-f45.google.com (mail-io1-f45.google.com
+	[209.85.166.45])
+	by mail.openembedded.org (Postfix) with ESMTP id E55D07FC02
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 04:20:22 +0000 (UTC)
-Received: by mail-qv1-f68.google.com with SMTP id q19so5175320qvy.9
+	Wed, 11 Dec 2019 05:31:24 +0000 (UTC)
+Received: by mail-io1-f45.google.com with SMTP id v18so21414092iol.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Dec 2019 20:20:24 -0800 (PST)
+	Tue, 10 Dec 2019 21:31:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=KZkSZZtzy38cyTGrrl/xMXXd39mvTUOR2Ce7pq0JceQ=;
-	b=TgBWUDvIAN7wZCNgNtLB7aVRtK7MFK+SGtAzq8dgzO220tZvollnPk9NFfP3M4hbvZ
-	CNqDkiA+lufkwWav02IRGCQE3cDvHhF8pv9wc8wAYhFxrFjD9UsaPORYSCIToDjWPhYy
-	FVym1mif6dgVZw0OrvHhF3v+vNlHI84/zG7emcJdR3YGdCDv80o1XJ3IDbswDLW5uKPa
-	HZQhYh27MObRXEQMa/8//2URtekodHumg1xLenBzGak/K/up4k7QnzQeQBgV7+ZcXRA8
-	J8Ir5E3U/Ud5CaPQQy+wK1OvCSZqAxEbx5txHkvdw3KaSOx2OBJvHXrkUqfqasBWpc0h
-	mTag==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=dh+VLnW/g+ppqdVzhdZYBKm9ewxz3tlBxDj3AC0YNBU=;
+	b=kwPrzjhJ69gI6C4AcI/S/0tDuCZuboci5z/zXkUgO65JyQxTuk5+1AgFBAlqscCSdz
+	4a3IA81XX6nqPWDHNpbFTp7Rb4XoPGp59FE+1nWhRXmOiqYueRuNFqBGHcGtrig/EAAl
+	AW+fEmmqsG9OrIGL5X4dMNOqUgKYeD1z+D34ziYVAcDLsvFxrvRfFD1mkEKFriT3pomw
+	dNCO9vcGQ4chYVMC3lQ/odI1DKYmiFSNiedqE4MQH9RJgijh6d749YbSuUF4njQ8YMo6
+	psGaEBr+IfdFcsCXV/4OtGlfbrEiY0rLe+qobRHCChhWt38ZN09nfTOxJywtCQKIw2eo
+	mV5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=KZkSZZtzy38cyTGrrl/xMXXd39mvTUOR2Ce7pq0JceQ=;
-	b=ZdUuyEeFLo5/zERk3awqo+dLZpLRZdrteg0fVlWcqu29mfNuIjPZnttEX0OhAlzBxT
-	1KdbsHV6Hj4gHi/RLs6EnJKwQ10ZU1i3ZPXXgWZ5BEGcM9NaVvikHF0XV3emUFb9/id0
-	S02td360vE+aWDbg4XY0WrBR7O2uJ8+/OWTWVMdDP+ZJUwfXKe1KPtAqBPVPKjgyAusf
-	+zR55cyCrr8gJQPIK7YjiPUs91wS1yzNuxPF8kN5AdAOwYPRdLjvX3VcKq5lCIiO3A6J
-	/pdWfVH3RlYtUfujntx4V1sCJNX8R2HDnXiBv1MwHVN2IIXd7ncYRf+SLpP2zO/mRJeC
-	GlAA==
-X-Gm-Message-State: APjAAAV6sKZb+rnjR8Q1ds5l+/z/wmTNmMHVn1fUOH7uUTSQMvscPPzg
-	ieD8c4exwf7tJ6aTvYDx9ztDDGfzOxxSqTqLUrk=
-X-Google-Smtp-Source: APXvYqyYTxZ0NY48Hprkr3Lwgp7cqGBDWcdGS6n6nYsE8lg2qcMczibBXZ1eZUoXLrtnYEG+eu3F4EPwUAQT+fun+qY=
-X-Received: by 2002:a0c:f513:: with SMTP id j19mr1197374qvm.206.1576038023361; 
-	Tue, 10 Dec 2019 20:20:23 -0800 (PST)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=dh+VLnW/g+ppqdVzhdZYBKm9ewxz3tlBxDj3AC0YNBU=;
+	b=uXU+eKcdeLpwAVoVq6mAmkzA9JS/ww+lYlzLgo7ioaPUCoxaMRKNvTTmsHQVYfJybS
+	WYOxOo4MiiS+Skl9qweMxtA2C7uC04SZPnYO+WppdNNahocrrEtWzUc8SM2JlgFiqNmA
+	B6KTVNee2PgmEfWnsmrAW57+hKJMdMmFzFGVJZ9JH7G3gAIRsb7OnFVDU+BW450WL5KC
+	cKNSr07FL3/Mzrs9cFIQbtZ0gmx8hA72cCSvYoo2EXplNV7VKWAbQ4n9q/MpHTlKnl22
+	1ihrMCsWnMnZzl7b4R6BNpKXtozH3Wftzy1AIy48rkzLQYQSyOrtCozfu9tfjJwphnv3
+	cp3Q==
+X-Gm-Message-State: APjAAAXZDXISlZcd7yz2od7Q762JMBiRPS5z27cs4XuuK/SEt/kKHyhv
+	OHOIT8z8CibiOxIcvYD2iW2gcM7DhEBrMVxzdjz2UWeN
+X-Google-Smtp-Source: APXvYqxtTXQMljHUVStCPiid/K7PtAQKN5gjFUxazGJUiB4P8eek43S4W3DIdYlzx6TsHrM1KRDY6Wjqx+Xa87tq1Vs=
+X-Received: by 2002:a02:b91a:: with SMTP id v26mr1381529jan.144.1576042285560; 
+	Tue, 10 Dec 2019 21:31:25 -0800 (PST)
 MIME-Version: 1.0
-References: <20191210093850.6292-1-costamagnagianfranco@yahoo.it>
-	<CAMKF1spvn+Uqi2q4QsxajLcY0wjPN6dG3vSW-gS4=qmu2dcrbQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spvn+Uqi2q4QsxajLcY0wjPN6dG3vSW-gS4=qmu2dcrbQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Dec 2019 20:19:57 -0800
-Message-ID: <CAMKF1sovYLH8_eMN6V9n2ZwqA4G2pzMFd_O_ToqVAgAca19stQ@mail.gmail.com>
-To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] vboxguestdrivers: update to version 6.0.14 and unblacklist
+From: Alex Kiernan <alex.kiernan@gmail.com>
+Date: Wed, 11 Dec 2019 05:31:14 +0000
+Message-ID: <CAO5Uq5TEZH_VTN9EpWTDjhqMCgkVEGRB2bi5oXpCXamFMEkv+Q@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Build looping with "Checking sstate mirror object availability...done"?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,58 +49,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Dec 2019 04:20:23 -0000
+X-List-Received-Date: Wed, 11 Dec 2019 05:31:25 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Dec 10, 2019 at 2:54 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Fails with clang http://errors.yoctoproject.org/Errors/Details/296908/
-> I guess it needs to use KERNEL_AR
->
+Our local master jenkins build looks like it's started looping with:
 
-It really is generic issue fails with gcc too
-http://errors.yoctoproject.org/Errors/Details/296946/
+00:56:28.368  Checking sstate mirror object availability...done.
+00:56:28.368  Checking sstate mirror object availability...done.
+00:56:28.368  Checking sstate mirror object availability...done.
+00:56:28.752  Checking sstate mirror object availability...done.
+00:56:28.752  Checking sstate mirror object availability...done.
+00:56:29.136  Checking sstate mirror object availability...done.
+00:56:29.136  Checking sstate mirror object availability...done.
+00:56:29.136  Checking sstate mirror object availability...done.
+00:56:29.520  Checking sstate mirror object availability...done.
+00:56:29.520  Checking sstate mirror object availability...done.
+00:56:29.904  Checking sstate mirror object availability...done.
+00:56:29.904  Checking sstate mirror object availability...done.
+00:56:29.904  Checking sstate mirror object availability...done.
+00:56:30.288  Checking sstate mirror object availability...done.
+00:56:30.288  Checking sstate mirror object availability...done.
 
+The only changes from it's previous build are these two:
 
-> On Tue, Dec 10, 2019 at 1:39 AM Gianfranco Costamagna
-> <costamagna.gianfranco@gmail.com> wrote:
-> >
-> > ---
-> >  ...oxguestdrivers_5.2.22.bb => vboxguestdrivers_6.0.14.bb} | 7 ++-----
-> >  1 file changed, 2 insertions(+), 5 deletions(-)
-> >  rename meta-oe/recipes-support/vboxguestdrivers/{vboxguestdrivers_5.2.22.bb => vboxguestdrivers_6.0.14.bb} (92%)
-> >
-> > diff --git a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.0.14.bb
-> > similarity index 92%
-> > rename from meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
-> > rename to meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.0.14.bb
-> > index 0f8d7af3f..bd7339e1a 100644
-> > --- a/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.2.22.bb
-> > +++ b/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_6.0.14.bb
-> > @@ -14,8 +14,8 @@ VBOX_NAME = "VirtualBox-${PV}"
-> >  SRC_URI = "http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-> >      file://Makefile.utils \
-> >  "
-> > -SRC_URI[md5sum] = "c9c2f162ac5f99d28d8c0ca43b19ed01"
-> > -SRC_URI[sha256sum] = "5580e875349341a1aabc6d5d2f697d242f277487316faaf1fbe68d9014f788d4"
-> > +SRC_URI[md5sum] = "2766d6f628dcd8f0bc216d0f8a2abc8e"
-> > +SRC_URI[sha256sum] = "5e12b14f0c38bf195d9592d76a9e0a128df2d38cd77c26ce5b5488397715dd0c"
-> >
-> >  S = "${WORKDIR}/vbox_module"
-> >
-> > @@ -78,6 +78,3 @@ FILES_${PN} = "${base_sbindir}"
-> >
-> >  # autoload if installed
-> >  KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
-> > -
-> > -PNBLACKLIST[vboxguestdrivers] = "Needs forward porting to kernel 5.2+"
-> > -
-> > --
-> > 2.17.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Layers Update: poky
+* poky 9d606cf...f48ef0b (2):
+ > build-appliance-image: Update to master head revision
+ > sstate: Ensure SSTATE_PKG is reloaded when handling siginfo
+
+Its sstate-cache is on NFS (well AWS EFS) if that's relevant?
+
+At the point I killed it, it was just over an hour in, but was only a
+100 tasks into the 7392 - a full rebuild is normally ~3.5 hours, but
+this didn't seem to really be making any meaningful progress.
+
+-- 
+Alex Kiernan
 
