@@ -1,25 +1,45 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id DA0687F98A
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-il1-f178.google.com (mail-il1-f178.google.com
+	[209.85.166.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 146366D458
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Dec 2019 05:56:16 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xBC5uIbO018654
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Thu, 12 Dec 2019 06:53:12 +0000 (UTC)
+Received: by mail-il1-f178.google.com with SMTP id t9so1104371iln.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 21:56:18 -0800 (PST)
-Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Wed, 11 Dec 2019 21:56:17 -0800
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 12 Dec 2019 13:56:15 +0800
-Message-ID: <20191212055615.15788-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Wed, 11 Dec 2019 22:53:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=6AJjRtKJXQVMEda6bviRHondYup5OtGjGGrwn55L6Ps=;
+	b=Z0LEuXmsPsPGtiZCau5igOSCukka5bZFbexJP0KIAgMezV25mBA0aHlgxakUTLlHgP
+	QNYuklXaDFgGNk14mbr9RijHNmq3KLiSjU9F4PEu5IlXzriSj0z8PSO4loISUzFwmG4L
+	emk0SQH/+ootHyPy/hfcl/j3BEwJIMppyb9Ch6fF1ZrsS8u7gFSX+lDidl8JA1eFxULV
+	Z7xG0uZvAxoNuwkzPVzcNIsvXnlI2mAMdkWqrvhKnnloON8756pKgBeHED/+Kt+utGe4
+	CtsHhUh7K3i2SJsroXqLDTj2m5PTkzJxmSULT3LaJ1bZA74uUL/XM+fAuTtIc2/QVSlE
+	Vm8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=6AJjRtKJXQVMEda6bviRHondYup5OtGjGGrwn55L6Ps=;
+	b=Xe2NiugA9eg3Ms6ehFYbyjrvKZBW0/4iRBSdQQJWAfJrXE7j8Pz4tS8cEmJjWbBJVy
+	FzQOLktVZBqgkNxx1Se0oPK8SjpeIvTIcwmmEc68Nxd5XGJiRQv0kyG+ZHBlZXpDhKDa
+	XMGbGsXRUilWW8rrO8ju5FUuiJs9VFUM4exCHe9KNxoA1ahsPMLSH4lrYfls201COV4i
+	6ERtbma30GTvJc8cr93JlNedV7SMhgjRATaBwjAwKhKxupKtoNYgxiJNJ58TJ++P0ynW
+	6vHrrlTjQvwKZBkuMFCboInHhGToVz5jpq42XdobJ/X1dEFnSKmNkRD1uuENfYHRYJm9
+	jxsg==
+X-Gm-Message-State: APjAAAXKyXjvxiy1RTrIJDLZTh2o7Z/AdTFiTWQxUy6ekS0aZ+WTQt4L
+	bfwHrcgCzSWNSoNpFk051QF4pp5Lav4otelQ4k4/Pw==
+X-Google-Smtp-Source: APXvYqx08+YiUP1rnvByZRs0H5ZcyfyYUDb3F+az11OnSgKLQ8D1vM8cbL7mf69biE3mVEjSScvj/8dwYrrsZ1wJTJA=
+X-Received: by 2002:a92:1a0a:: with SMTP id a10mr6952538ila.295.1576133593695; 
+	Wed, 11 Dec 2019 22:53:13 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.174]
-Subject: [meta-oe][PATCH] tk: upgrade 8.6.9 -> 8.6.10
+References: <CAO5Uq5TEZH_VTN9EpWTDjhqMCgkVEGRB2bi5oXpCXamFMEkv+Q@mail.gmail.com>
+In-Reply-To: <CAO5Uq5TEZH_VTN9EpWTDjhqMCgkVEGRB2bi5oXpCXamFMEkv+Q@mail.gmail.com>
+From: Alex Kiernan <alex.kiernan@gmail.com>
+Date: Thu, 12 Dec 2019 06:53:02 +0000
+Message-ID: <CAO5Uq5S+pDYrdYbtFxMXY3jvHZn25aLDPip7O-ghzqv9=Bd+sA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Build looping with "Checking sstate mirror object availability...done"?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,195 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Dec 2019 05:56:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 12 Dec 2019 06:53:13 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Drop patches that were merged upstream:
-  configure.use.fontconfig.with.xft.patch
-  non-linux.diff
-  tklibrary.diff
+On Wed, Dec 11, 2019 at 5:31 AM Alex Kiernan <alex.kiernan@gmail.com> wrote:
+>
+> Our local master jenkins build looks like it's started looping with:
+>
+> 00:56:28.368  Checking sstate mirror object availability...done.
+> 00:56:28.368  Checking sstate mirror object availability...done.
+> 00:56:28.368  Checking sstate mirror object availability...done.
+> 00:56:28.752  Checking sstate mirror object availability...done.
+> 00:56:28.752  Checking sstate mirror object availability...done.
+> 00:56:29.136  Checking sstate mirror object availability...done.
+> 00:56:29.136  Checking sstate mirror object availability...done.
+> 00:56:29.136  Checking sstate mirror object availability...done.
+> 00:56:29.520  Checking sstate mirror object availability...done.
+> 00:56:29.520  Checking sstate mirror object availability...done.
+> 00:56:29.904  Checking sstate mirror object availability...done.
+> 00:56:29.904  Checking sstate mirror object availability...done.
+> 00:56:29.904  Checking sstate mirror object availability...done.
+> 00:56:30.288  Checking sstate mirror object availability...done.
+> 00:56:30.288  Checking sstate mirror object availability...done.
+>
+> The only changes from it's previous build are these two:
+>
+> Layers Update: poky
+> * poky 9d606cf...f48ef0b (2):
+>  > build-appliance-image: Update to master head revision
+>  > sstate: Ensure SSTATE_PKG is reloaded when handling siginfo
+>
+> Its sstate-cache is on NFS (well AWS EFS) if that's relevant?
+>
+> At the point I killed it, it was just over an hour in, but was only a
+> 100 tasks into the 7392 - a full rebuild is normally ~3.5 hours, but
+> this didn't seem to really be making any meaningful progress.
+>
 
-Refresh patches:
-  confsearch.diff
-  fix-xft.diff
+Just to fill this back in, it completed after ~8 hours, looks like it
+was something like a mass read/modify/write (which over NFS I'm not
+surprised was awful) and we're now back where we were in terms of
+build times.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../configure.use.fontconfig.with.xft.patch   | 13 ---------
- .../recipes-devtools/tcltk/tk/confsearch.diff | 14 +++++-----
- .../recipes-devtools/tcltk/tk/fix-xft.diff    |  4 +--
- .../recipes-devtools/tcltk/tk/non-linux.diff  | 27 -------------------
- .../recipes-devtools/tcltk/tk/tklibrary.diff  | 22 ---------------
- .../tcltk/{tk_8.6.9.bb => tk_8.6.10.bb}       |  7 ++---
- 6 files changed, 11 insertions(+), 76 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/tcltk/tk/configure.use.fontconfig.with.xft.patch
- delete mode 100644 meta-oe/recipes-devtools/tcltk/tk/non-linux.diff
- delete mode 100644 meta-oe/recipes-devtools/tcltk/tk/tklibrary.diff
- rename meta-oe/recipes-devtools/tcltk/{tk_8.6.9.bb => tk_8.6.10.bb} (91%)
-
-diff --git a/meta-oe/recipes-devtools/tcltk/tk/configure.use.fontconfig.with.xft.patch b/meta-oe/recipes-devtools/tcltk/tk/configure.use.fontconfig.with.xft.patch
-deleted file mode 100644
-index a0c157f5a..000000000
---- a/meta-oe/recipes-devtools/tcltk/tk/configure.use.fontconfig.with.xft.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
----- a/configure.in.orig	2014-05-10 14:35:39.859147385 +0000
--+++ b/configure.in	2014-05-10 14:36:20.282925184 +0000
--@@ -554,8 +554,8 @@
-- 	dnl make sure package configurator (xft-config or pkg-config
-- 	dnl says that xft is present.
-- 	    found_xft=yes
---	    XFT_CFLAGS=`pkg-config --cflags xft 2>/dev/null` || found_xft="no"
---	    XFT_LIBS=`pkg-config --libs xft 2>/dev/null` || found_xft="no"
--+	    XFT_CFLAGS=`pkg-config --cflags xft fontconfig 2>/dev/null` || found_xft="no"
--+	    XFT_LIBS=`pkg-config --libs xft fontconfig 2>/dev/null` || found_xft="no"
-- 	AC_MSG_RESULT([$found_xft])
-- 	dnl make sure that compiling against Xft header file doesn't bomb
-- 	if test "$found_xft" = "yes" ; then
-diff --git a/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff b/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff
-index 8cc07bcfa..229acf3e7 100644
---- a/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff
-+++ b/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff
-@@ -16,31 +16,31 @@ Index: a/unix/configure
- ===================================================================
- --- a/unix/configure.orig
- +++ b/unix/configure
--@@ -1432,6 +1432,7 @@ echo "$as_me: error: ${with_tclconfig} d
-+@@ -1431,6 +1431,7 @@ echo "$as_me: error: ${with_tclconfig} d
-  			`ls -d /usr/local/lib 2>/dev/null` \
-  			`ls -d /usr/contrib/lib 2>/dev/null` \
-  			`ls -d /usr/pkg/lib 2>/dev/null` \
- +			`ls -d /usr/share/tcltk/tcl8.6 2>/dev/null` \
-+ 			`ls -d /usr/lib/tcl8.6 2>/dev/null` \
-  			`ls -d /usr/lib 2>/dev/null` \
-  			`ls -d /usr/lib64 2>/dev/null` \
-- 			`ls -d /usr/local/lib/tcl8.6 2>/dev/null` \
- Index: a/unix/tcl.m4
- ===================================================================
- --- a/unix/tcl.m4.orig
- +++ b/unix/tcl.m4
--@@ -94,6 +94,7 @@ AC_DEFUN([SC_PATH_TCLCONFIG], [
-+@@ -93,6 +93,7 @@ AC_DEFUN([SC_PATH_TCLCONFIG], [
-  			`ls -d /usr/local/lib 2>/dev/null` \
-  			`ls -d /usr/contrib/lib 2>/dev/null` \
-  			`ls -d /usr/pkg/lib 2>/dev/null` \
- +			`ls -d /usr/share/tcltk/tcl8.6 2>/dev/null` \
-+ 			`ls -d /usr/lib/tcl8.6 2>/dev/null` \
-  			`ls -d /usr/lib 2>/dev/null` \
-  			`ls -d /usr/lib64 2>/dev/null` \
-- 			`ls -d /usr/local/lib/tcl8.6 2>/dev/null` \
--@@ -227,6 +228,7 @@ AC_DEFUN([SC_PATH_TKCONFIG], [
-+@@ -226,6 +227,7 @@ AC_DEFUN([SC_PATH_TKCONFIG], [
-  			`ls -d /usr/local/lib 2>/dev/null` \
-  			`ls -d /usr/contrib/lib 2>/dev/null` \
-  			`ls -d /usr/pkg/lib 2>/dev/null` \
--+			`ls -d /usr/share/tcltk/tk8.6 2>/dev/null` \
-++			`ls -d /usr/share/tcltk/tcl8.6 2>/dev/null` \
-+ 			`ls -d /usr/lib/tk8.6 2>/dev/null` \
-  			`ls -d /usr/lib 2>/dev/null` \
-  			`ls -d /usr/lib64 2>/dev/null` \
-- 			`ls -d /usr/local/lib/tk8.6 2>/dev/null` \
-diff --git a/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff b/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
-index d1bb7105c..4aa5d6b89 100644
---- a/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
-+++ b/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
-@@ -8,8 +8,8 @@
- -	XFT_LIBS=`xft-config --libs 2>/dev/null` || found_xft="no"
- -	if test "$found_xft" = "no" ; then
-  	    found_xft=yes
-- 	    XFT_CFLAGS=`pkg-config --cflags xft 2>/dev/null` || found_xft="no"
-- 	    XFT_LIBS=`pkg-config --libs xft 2>/dev/null` || found_xft="no"
-+ 	    XFT_CFLAGS=`pkg-config --cflags xft fontconfig 2>/dev/null` || found_xft="no"
-+ 	    XFT_LIBS=`pkg-config --libs xft fontconfig 2>/dev/null` || found_xft="no"
- -	fi
-  	AC_MSG_RESULT([$found_xft])
-  	dnl make sure that compiling against Xft header file doesn't bomb
-diff --git a/meta-oe/recipes-devtools/tcltk/tk/non-linux.diff b/meta-oe/recipes-devtools/tcltk/tk/non-linux.diff
-deleted file mode 100644
-index 7d31f9fdc..000000000
---- a/meta-oe/recipes-devtools/tcltk/tk/non-linux.diff
-+++ /dev/null
-@@ -1,27 +0,0 @@
--Patch by Sergei Golovan (originally by Mike Markley and Chris Waters) fixes
--building on non-linux Debian architectures.
--
----- tk8.5-8.5.8.orig/unix/configure
--+++ tk8.5-8.5.8/unix/configure
--@@ -4447,6 +4447,9 @@
-- 		if test "`uname -s`" = "AIX" ; then
-- 		    tcl_cv_sys_version=AIX-`uname -v`.`uname -r`
-- 		fi
--+		if test "`uname -s`" = "NetBSD" -a -f /etc/debian_version ; then
--+		    tcl_cv_sys_version=NetBSD-Debian
--+		fi
-- 	    fi
-- 	fi
--
----- tk8.5-8.5.8.orig/unix/tcl.m4
--+++ tk8.5-8.5.8/unix/tcl.m4
--@@ -962,6 +962,9 @@
-- 		if test "`uname -s`" = "AIX" ; then
-- 		    tcl_cv_sys_version=AIX-`uname -v`.`uname -r`
-- 		fi
--+		if test "`uname -s`" = "NetBSD" -a -f /etc/debian_version ; then
--+		    tcl_cv_sys_version=NetBSD-Debian
--+		fi
-- 	    fi
-- 	fi
--     ])
-diff --git a/meta-oe/recipes-devtools/tcltk/tk/tklibrary.diff b/meta-oe/recipes-devtools/tcltk/tk/tklibrary.diff
-deleted file mode 100644
-index ee38c2a1a..000000000
---- a/meta-oe/recipes-devtools/tcltk/tk/tklibrary.diff
-+++ /dev/null
-@@ -1,22 +0,0 @@
----- tk8.5-8.5.8.orig/unix/configure
--+++ tk8.5-8.5.8/unix/configure
--@@ -11070,7 +11070,7 @@
--     TCL_STUB_FLAGS="-DUSE_TCL_STUBS"
-- fi
-- 
---TK_LIBRARY='$(prefix)/lib/tk$(VERSION)'
--+test -z "$TK_LIBRARY" && TK_LIBRARY='$(prefix)/lib/tk$(VERSION)'
-- PRIVATE_INCLUDE_DIR='$(includedir)'
-- HTML_DIR='$(DISTDIR)/html'
-- TK_PKG_DIR='tk$(VERSION)'
----- tk8.5-8.5.8.orig/unix/configure.in
--+++ tk8.5-8.5.8/unix/configure.in
--@@ -607,7 +607,7 @@
--     TCL_STUB_FLAGS="-DUSE_TCL_STUBS"
-- fi
-- 
---TK_LIBRARY='$(prefix)/lib/tk$(VERSION)'
--+test -z "$TK_LIBRARY" && TK_LIBRARY='$(prefix)/lib/tk$(VERSION)'
-- PRIVATE_INCLUDE_DIR='$(includedir)'
-- HTML_DIR='$(DISTDIR)/html'
-- TK_PKG_DIR='tk$(VERSION)'
-diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb b/meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb
-similarity index 91%
-rename from meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
-rename to meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb
-index 3d7767074..b564e1260 100644
---- a/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
-+++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb
-@@ -20,14 +20,11 @@ DEPENDS = "tcl virtual/libx11 libxt"
- SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
-     file://confsearch.diff;striplevel=2 \
--    file://non-linux.diff;striplevel=2 \
--    file://tklibrary.diff;striplevel=2 \
-     file://tkprivate.diff;striplevel=2 \
-     file://fix-xft.diff \
--    file://configure.use.fontconfig.with.xft.patch \
- "
--SRC_URI[md5sum] = "e3cf6290999ee30651d75864eccfec63"
--SRC_URI[sha256sum] = "d3f9161e8ba0f107fe8d4df1f6d3a14c30cc3512dfc12a795daa367a27660dac"
-+SRC_URI[md5sum] = "602a47ad9ecac7bf655ada729d140a94"
-+SRC_URI[sha256sum] = "63df418a859d0a463347f95ded5cd88a3dd3aaa1ceecaeee362194bc30f3e386"
- 
- S = "${WORKDIR}/${BPN}${PV}/unix"
- 
 -- 
-2.17.1
-
+Alex Kiernan
 
