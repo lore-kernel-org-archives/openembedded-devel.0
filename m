@@ -1,51 +1,47 @@
-Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
-	[209.85.208.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 2CB117C127
+Return-Path: <george.mccollister@gmail.com>
+Received: from mail-yw1-f65.google.com (mail-yw1-f65.google.com
+	[209.85.161.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D14186C3B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Dec 2019 12:01:11 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id a13so1959842ljm.10
+	Thu, 12 Dec 2019 14:25:44 +0000 (UTC)
+Received: by mail-yw1-f65.google.com with SMTP id w11so802778ywj.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Dec 2019 04:01:12 -0800 (PST)
+	Thu, 12 Dec 2019 06:25:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=pBW8tjSvFVc0kCKbmjZ8zdUGlw9oxU7JZ+l8O2MjH7s=;
-	b=p45NgLqT79xc3Q35y33Qy3ETrO4Drpii5H7PpJEwptmB0mpdZ94CuD4RBjLw/Afjb4
-	hJF1PQrUPJyvcEwu0+4MLPVNEdyqWepvFn8nEFT3DfNV5IjhMoCW8P1qRd5oN9mNkKLx
-	y7J/i8ojvn2OOXQklWi7CC8EEdCVvnkX9wZ4aOTPwfpfbCf0XzpLCXl6yXb4FWShghOV
-	kC64sl+sGKJT5V1qxkFB3pFuTrpO9Ak0EOKSKFoOGiWSEXvded5dFy4PT6g32tMRQijv
-	eY0Bv7/jpNXHtMtfKyGTNQpW37DbDMCh6o04qp6n9PbWmLS/tWmcFV93jUSGjDgGMy31
-	X10Q==
+	h=from:to:cc:subject:date:message-id;
+	bh=jYd/kyAPgbPmXhK8qw69aV8F33JUhMxMnW0PuluV2bI=;
+	b=HCWg7siNQzrY68Hxl8zj9vY8CiN7rDZwdanAUkW5PF0Y7wG0mBGRlb8zO0klQfZb/S
+	QAa9THHDaeE5Sj18CkUaW/GuX9P+BIjAciBpItLhr7mIjCBaac3n1DHg3sd7h/tDz+T2
+	jJuDtCe5Ctw59tmYE/Ft7QlpWkVfsra0V0XWRRUnnGMOvr8fcuYOFziC17c3mp9oBDLs
+	Sq9z8hP/vFZmJUm2q3H8C5An0K/UILSrLSgRgxDaLKkW0lWoxmw6cQ3eqsRMcdWDuQJd
+	kvpHY3FCiJwStAtBuzqH3kFJ1wb2VLcKBMDWU6M2pKUpYcDeTMeXJmmO7Qud9NvLjplx
+	OWNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=pBW8tjSvFVc0kCKbmjZ8zdUGlw9oxU7JZ+l8O2MjH7s=;
-	b=NXC91KaVAMPUSELnY1Zaut9yM24E7gUv7JNOpTOhmrNlYuQP73DzCMHy7+KZ7kLBGL
-	InZG7omTmuaOwhn9rnTdqEJXTQGBUgqlgxrHPG+2R/rRqqg0lTR50CMbHsc83cR8dEQe
-	LfRM0DeyXu2nuwizJ0Pa9jwXdY1JR8qfhQMWJ27u2AvxzM0W5wPR8uTQbFTeb7rdUQMB
-	53nQ0mRkZek0nWU17IlpWXFgExXT6RUFjeRug5P3exjp5ve3tN4EukJywET8sVsjjqRJ
-	/WsIlF1ey3V91SUaW1wT6jWp3TdXNh1Lw8I1wY1RS65iMcHnQ/fKs1tnFt4uAY8Esbg6
-	JF8Q==
-X-Gm-Message-State: APjAAAWSIGbic5z8B/S0VpU5l4pUl5Hmio7GVbfFrkkLqC6WfEMXSrwi
-	YN7U47jPnJlOjLvSRq0kUaaz9A/0
-X-Google-Smtp-Source: APXvYqzgkpZUfLycbZjMSCsJnFyoGuzsi2f2DMiCuPhC6Q7BxWp/AMrrVv8SkwUcRCLWV4C4rmucvw==
-X-Received: by 2002:a2e:9095:: with SMTP id l21mr5447030ljg.175.1576152071292; 
-	Thu, 12 Dec 2019 04:01:11 -0800 (PST)
-Received: from localhost.localdomain (37-247-29-68.customers.ownit.se.
-	[37.247.29.68])
-	by smtp.gmail.com with ESMTPSA id d9sm2883026lja.73.2019.12.12.04.01.09
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Dec 2019 04:01:10 -0800 (PST)
-From: Jacob Kroon <jacob.kroon@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=jYd/kyAPgbPmXhK8qw69aV8F33JUhMxMnW0PuluV2bI=;
+	b=Q7aou6bYRbwTCSiBTqL/PazsuJMzMz4iBG4xw6KMDjOcU3ZvMXNbQPpMgc5VF2RQUu
+	CFePrb2gnxxUO52f+Vl4gte6l2od8RjHrAqMslygmnRcZgc8INBMUNvcbxa+HbIhnRo/
+	GqrdtV1I/t3TzOZcg145sg+iJ4CMZhVYBqPUp5v8T/VUzIyIYMzqq1JLWAa+L/CdtnzL
+	ZAtUjx4MBim7br8qX5DlDy3jYXUt87a4zjC75LAe7q3AZfEcQGxgGXEm3yB7bJ+9Im4d
+	pRCJCIqRrzRrOcikqBBrziPgtVJdsHR+lpGqBEPmdvlicRuCHvFVUvvZLg1QRmY/oP+i
+	kCWA==
+X-Gm-Message-State: APjAAAUePhFIVgvkn36jXY/A+9xetl0QoodQPAPRnfqXuaPMBsSXs2J4
+	ig4o4cnkjyi6XhUAMM8eJpJM07U=
+X-Google-Smtp-Source: APXvYqwYZbMGObsYkJ6XLQNqxZ39cG+KofjtnjiGtUTNd0EU3MYi/rOU7+T3gFyciCIAQxk9dFffZg==
+X-Received: by 2002:a81:1289:: with SMTP id 131mr4582270yws.74.1576160745419; 
+	Thu, 12 Dec 2019 06:25:45 -0800 (PST)
+Received: from threadripper.novatech-llc.local ([216.21.169.52])
+	by smtp.gmail.com with ESMTPSA id
+	k23sm2604487ywa.69.2019.12.12.06.25.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Dec 2019 06:25:44 -0800 (PST)
+From: George McCollister <george.mccollister@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Dec 2019 13:00:54 +0100
-Message-Id: <20191212120054.3736-1-jacob.kroon@gmail.com>
-X-Mailer: git-send-email 2.23.0
-MIME-Version: 1.0
-Subject: [meta-java][PATCH] cacao: Use python3 in java wrapper script
+Date: Thu, 12 Dec 2019 08:25:13 -0600
+Message-Id: <20191212142513.112829-1-george.mccollister@gmail.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [warrior][meta-networking][PATCH] wireshark: fix qt5 build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,32 +54,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Dec 2019 12:01:11 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 12 Dec 2019 14:25:45 -0000
 
-OE-Core has dropped python2 so switch to using python3.
+Add qttools-native to PACKAGECONFIG[qt5] DEPENDS to resolve missing
+Qt5LinguistTools build error.
 
-Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
+Add qtmultimedia to PACKAGECONFIG[qt5] DEPENDS to resolve missing
+Qt5Multimedia build error.
+
+Add qtsvg to PACKAGECONFIG[qt5] DEPENDS to resolve missing Qt5Svg build
+error.
+
+Inherit cmake_qt5 when qt5 is in PACKAGECONFIG to resolve
+get_target_property() called with non-existent target "Qt5::qmake"
+build error.
+
+Automatically add qt5 to PACKAGECONFIG when meta-qt5 is in the build
+since adding qt5 via a .bbappend won't satisfy the conditional inherit
+cmake_qt5. The poppler recipe does exactly this.
+
+Signed-off-by: George McCollister <george.mccollister@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+(cherry-picked from b750c405c7d291a885b8ceb197fe59b2ce125d11, already in
+zeus)
+Signed-off-by: George McCollister <george.mccollister@gmail.com>
 ---
- .../cacao-1.6.1-do-not-rely-on-absolute-paths.patch           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch b/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
-index 2b046cf..665377b 100644
---- a/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
-+++ b/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
-@@ -27,8 +27,8 @@ index 0790f02..2118de7 100644
- +
- +# if this shell script is invoked through symlink, we get invalid paths. As getting the real path to this file is
- +# very painful using only /bin/sh, python is used instead.
--+PYTHON_STR="import os; print os.path.dirname(os.path.realpath(os.readlink(\"${CURRENT_DIR}/java\"))) if os.path.islink(\"${CURRENT_DIR}/java\") else \"${CURRENT_DIR}\""
--+REAL_DIR=`python -c "${PYTHON_STR}"`
-++PYTHON_STR="import os; print(os.path.dirname(os.path.realpath(os.readlink(\"${CURRENT_DIR}/java\"))) if os.path.islink(\"${CURRENT_DIR}/java\") else \"${CURRENT_DIR}\")"
-++REAL_DIR=`python3 -c "${PYTHON_STR}"`
- +
- +PARENT_DIR=`dirname ${REAL_DIR}`
- +
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
+index efcd5e42e..7bb9e23c3 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.3.bb
+@@ -21,7 +21,7 @@ inherit cmake pkgconfig python3native perlnative upstream-version-is-even
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
+-PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc"
++PACKAGECONFIG ?= "libpcap gnutls libnl libcap sbc ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5', '', d)}"
+ 
+ PACKAGECONFIG_class-native = "libpcap gnutls ssl libssh"
+ 
+@@ -43,7 +43,9 @@ PACKAGECONFIG[lz4] = "-DENABLE_LZ4=ON,-DENABLE_LZ4=OFF, lz4"
+ 
+ # these next two options require addional layers
+ PACKAGECONFIG[c-ares] = "-DENABLE_CARES=ON,-DENABLE_CARES=OFF, c-ares"
+-PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON -DBUILD_wireshark=ON, -DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qtbase"
++PACKAGECONFIG[qt5] = "-DENABLE_QT5=ON -DBUILD_wireshark=ON, -DENABLE_QT5=OFF -DBUILD_wireshark=OFF, qttools-native qtmultimedia qtsvg"
++
++inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt5', 'cmake_qt5', '', d)}
+ 
+ EXTRA_OECMAKE += "-DENABLE_NETLINK=ON \
+                   -DBUILD_mmdbresolve=OFF \
 -- 
-2.23.0
+2.11.0
 
 
