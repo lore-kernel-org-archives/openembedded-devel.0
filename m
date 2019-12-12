@@ -1,45 +1,51 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-il1-f178.google.com (mail-il1-f178.google.com
-	[209.85.166.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 146366D458
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CB117C127
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Dec 2019 06:53:12 +0000 (UTC)
-Received: by mail-il1-f178.google.com with SMTP id t9so1104371iln.4
+	Thu, 12 Dec 2019 12:01:11 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id a13so1959842ljm.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Dec 2019 22:53:14 -0800 (PST)
+	Thu, 12 Dec 2019 04:01:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=6AJjRtKJXQVMEda6bviRHondYup5OtGjGGrwn55L6Ps=;
-	b=Z0LEuXmsPsPGtiZCau5igOSCukka5bZFbexJP0KIAgMezV25mBA0aHlgxakUTLlHgP
-	QNYuklXaDFgGNk14mbr9RijHNmq3KLiSjU9F4PEu5IlXzriSj0z8PSO4loISUzFwmG4L
-	emk0SQH/+ootHyPy/hfcl/j3BEwJIMppyb9Ch6fF1ZrsS8u7gFSX+lDidl8JA1eFxULV
-	Z7xG0uZvAxoNuwkzPVzcNIsvXnlI2mAMdkWqrvhKnnloON8756pKgBeHED/+Kt+utGe4
-	CtsHhUh7K3i2SJsroXqLDTj2m5PTkzJxmSULT3LaJ1bZA74uUL/XM+fAuTtIc2/QVSlE
-	Vm8g==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pBW8tjSvFVc0kCKbmjZ8zdUGlw9oxU7JZ+l8O2MjH7s=;
+	b=p45NgLqT79xc3Q35y33Qy3ETrO4Drpii5H7PpJEwptmB0mpdZ94CuD4RBjLw/Afjb4
+	hJF1PQrUPJyvcEwu0+4MLPVNEdyqWepvFn8nEFT3DfNV5IjhMoCW8P1qRd5oN9mNkKLx
+	y7J/i8ojvn2OOXQklWi7CC8EEdCVvnkX9wZ4aOTPwfpfbCf0XzpLCXl6yXb4FWShghOV
+	kC64sl+sGKJT5V1qxkFB3pFuTrpO9Ak0EOKSKFoOGiWSEXvded5dFy4PT6g32tMRQijv
+	eY0Bv7/jpNXHtMtfKyGTNQpW37DbDMCh6o04qp6n9PbWmLS/tWmcFV93jUSGjDgGMy31
+	X10Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=6AJjRtKJXQVMEda6bviRHondYup5OtGjGGrwn55L6Ps=;
-	b=Xe2NiugA9eg3Ms6ehFYbyjrvKZBW0/4iRBSdQQJWAfJrXE7j8Pz4tS8cEmJjWbBJVy
-	FzQOLktVZBqgkNxx1Se0oPK8SjpeIvTIcwmmEc68Nxd5XGJiRQv0kyG+ZHBlZXpDhKDa
-	XMGbGsXRUilWW8rrO8ju5FUuiJs9VFUM4exCHe9KNxoA1ahsPMLSH4lrYfls201COV4i
-	6ERtbma30GTvJc8cr93JlNedV7SMhgjRATaBwjAwKhKxupKtoNYgxiJNJ58TJ++P0ynW
-	6vHrrlTjQvwKZBkuMFCboInHhGToVz5jpq42XdobJ/X1dEFnSKmNkRD1uuENfYHRYJm9
-	jxsg==
-X-Gm-Message-State: APjAAAXKyXjvxiy1RTrIJDLZTh2o7Z/AdTFiTWQxUy6ekS0aZ+WTQt4L
-	bfwHrcgCzSWNSoNpFk051QF4pp5Lav4otelQ4k4/Pw==
-X-Google-Smtp-Source: APXvYqx08+YiUP1rnvByZRs0H5ZcyfyYUDb3F+az11OnSgKLQ8D1vM8cbL7mf69biE3mVEjSScvj/8dwYrrsZ1wJTJA=
-X-Received: by 2002:a92:1a0a:: with SMTP id a10mr6952538ila.295.1576133593695; 
-	Wed, 11 Dec 2019 22:53:13 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pBW8tjSvFVc0kCKbmjZ8zdUGlw9oxU7JZ+l8O2MjH7s=;
+	b=NXC91KaVAMPUSELnY1Zaut9yM24E7gUv7JNOpTOhmrNlYuQP73DzCMHy7+KZ7kLBGL
+	InZG7omTmuaOwhn9rnTdqEJXTQGBUgqlgxrHPG+2R/rRqqg0lTR50CMbHsc83cR8dEQe
+	LfRM0DeyXu2nuwizJ0Pa9jwXdY1JR8qfhQMWJ27u2AvxzM0W5wPR8uTQbFTeb7rdUQMB
+	53nQ0mRkZek0nWU17IlpWXFgExXT6RUFjeRug5P3exjp5ve3tN4EukJywET8sVsjjqRJ
+	/WsIlF1ey3V91SUaW1wT6jWp3TdXNh1Lw8I1wY1RS65iMcHnQ/fKs1tnFt4uAY8Esbg6
+	JF8Q==
+X-Gm-Message-State: APjAAAWSIGbic5z8B/S0VpU5l4pUl5Hmio7GVbfFrkkLqC6WfEMXSrwi
+	YN7U47jPnJlOjLvSRq0kUaaz9A/0
+X-Google-Smtp-Source: APXvYqzgkpZUfLycbZjMSCsJnFyoGuzsi2f2DMiCuPhC6Q7BxWp/AMrrVv8SkwUcRCLWV4C4rmucvw==
+X-Received: by 2002:a2e:9095:: with SMTP id l21mr5447030ljg.175.1576152071292; 
+	Thu, 12 Dec 2019 04:01:11 -0800 (PST)
+Received: from localhost.localdomain (37-247-29-68.customers.ownit.se.
+	[37.247.29.68])
+	by smtp.gmail.com with ESMTPSA id d9sm2883026lja.73.2019.12.12.04.01.09
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 12 Dec 2019 04:01:10 -0800 (PST)
+From: Jacob Kroon <jacob.kroon@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Dec 2019 13:00:54 +0100
+Message-Id: <20191212120054.3736-1-jacob.kroon@gmail.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-References: <CAO5Uq5TEZH_VTN9EpWTDjhqMCgkVEGRB2bi5oXpCXamFMEkv+Q@mail.gmail.com>
-In-Reply-To: <CAO5Uq5TEZH_VTN9EpWTDjhqMCgkVEGRB2bi5oXpCXamFMEkv+Q@mail.gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Thu, 12 Dec 2019 06:53:02 +0000
-Message-ID: <CAO5Uq5S+pDYrdYbtFxMXY3jvHZn25aLDPip7O-ghzqv9=Bd+sA@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: Build looping with "Checking sstate mirror object availability...done"?
+Subject: [meta-java][PATCH] cacao: Use python3 in java wrapper script
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,48 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Dec 2019 06:53:13 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 12 Dec 2019 12:01:11 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Dec 11, 2019 at 5:31 AM Alex Kiernan <alex.kiernan@gmail.com> wrote:
->
-> Our local master jenkins build looks like it's started looping with:
->
-> 00:56:28.368  Checking sstate mirror object availability...done.
-> 00:56:28.368  Checking sstate mirror object availability...done.
-> 00:56:28.368  Checking sstate mirror object availability...done.
-> 00:56:28.752  Checking sstate mirror object availability...done.
-> 00:56:28.752  Checking sstate mirror object availability...done.
-> 00:56:29.136  Checking sstate mirror object availability...done.
-> 00:56:29.136  Checking sstate mirror object availability...done.
-> 00:56:29.136  Checking sstate mirror object availability...done.
-> 00:56:29.520  Checking sstate mirror object availability...done.
-> 00:56:29.520  Checking sstate mirror object availability...done.
-> 00:56:29.904  Checking sstate mirror object availability...done.
-> 00:56:29.904  Checking sstate mirror object availability...done.
-> 00:56:29.904  Checking sstate mirror object availability...done.
-> 00:56:30.288  Checking sstate mirror object availability...done.
-> 00:56:30.288  Checking sstate mirror object availability...done.
->
-> The only changes from it's previous build are these two:
->
-> Layers Update: poky
-> * poky 9d606cf...f48ef0b (2):
->  > build-appliance-image: Update to master head revision
->  > sstate: Ensure SSTATE_PKG is reloaded when handling siginfo
->
-> Its sstate-cache is on NFS (well AWS EFS) if that's relevant?
->
-> At the point I killed it, it was just over an hour in, but was only a
-> 100 tasks into the 7392 - a full rebuild is normally ~3.5 hours, but
-> this didn't seem to really be making any meaningful progress.
->
+OE-Core has dropped python2 so switch to using python3.
 
-Just to fill this back in, it completed after ~8 hours, looks like it
-was something like a mass read/modify/write (which over NFS I'm not
-surprised was awful) and we're now back where we were in terms of
-build times.
+Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
+---
+ .../cacao-1.6.1-do-not-rely-on-absolute-paths.patch           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch b/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
+index 2b046cf..665377b 100644
+--- a/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
++++ b/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
+@@ -27,8 +27,8 @@ index 0790f02..2118de7 100644
+ +
+ +# if this shell script is invoked through symlink, we get invalid paths. As getting the real path to this file is
+ +# very painful using only /bin/sh, python is used instead.
+-+PYTHON_STR="import os; print os.path.dirname(os.path.realpath(os.readlink(\"${CURRENT_DIR}/java\"))) if os.path.islink(\"${CURRENT_DIR}/java\") else \"${CURRENT_DIR}\""
+-+REAL_DIR=`python -c "${PYTHON_STR}"`
+++PYTHON_STR="import os; print(os.path.dirname(os.path.realpath(os.readlink(\"${CURRENT_DIR}/java\"))) if os.path.islink(\"${CURRENT_DIR}/java\") else \"${CURRENT_DIR}\")"
+++REAL_DIR=`python3 -c "${PYTHON_STR}"`
+ +
+ +PARENT_DIR=`dirname ${REAL_DIR}`
+ +
 -- 
-Alex Kiernan
+2.23.0
+
 
