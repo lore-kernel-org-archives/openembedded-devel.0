@@ -1,29 +1,25 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id EB2FA7F48D
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DA0687F98A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Dec 2019 00:35:22 +0000 (UTC)
+	Thu, 12 Dec 2019 05:56:16 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xBC0ZLUI019957
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Wed, 11 Dec 2019 16:35:21 -0800
-Received: from [128.224.162.183] (128.224.162.183) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Wed, 11 Dec 2019 16:35:20 -0800
-From: Kang Kai <Kai.Kang@windriver.com>
-To: Khem Raj <raj.khem@gmail.com>, <mhalstead@linuxfoundation.org>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20191211091036.6601-1-kai.kang@windriver.com>
-	<6fa9685b-e063-a70e-4046-0985e61e82ec@gmail.com>
-	<a3513b64-0701-0d55-b623-b5b6e99b73f7@windriver.com>
-Message-ID: <7358b3f1-2f30-556e-7eac-8a19bf8b234d@windriver.com>
-Date: Thu, 12 Dec 2019 08:34:27 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.2.1
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xBC5uIbO018654
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Dec 2019 21:56:18 -0800 (PST)
+Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Wed, 11 Dec 2019 21:56:17 -0800
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 12 Dec 2019 13:56:15 +0800
+Message-ID: <20191212055615.15788-1-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <a3513b64-0701-0d55-b623-b5b6e99b73f7@windriver.com>
-Subject: Re: [meta-oe][Patch] fltk: fix build error when enable package config examples
+X-Originating-IP: [128.224.162.174]
+Subject: [meta-oe][PATCH] tk: upgrade 8.6.9 -> 8.6.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,303 +32,195 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Dec 2019 00:35:23 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Thu, 12 Dec 2019 05:56:17 -0000
+Content-Type: text/plain
 
-On 2019/12/12 上午8:24, Kang Kai wrote:
-> On 2019/12/12 上午2:52, Khem Raj wrote:
->> somehow patches from you never get into patchwork. I wonder why ?
->> adding Michael as well
->
-> I have no idea that I just git format-patch and sent patch by git 
-> send-email.
+Drop patches that were merged upstream:
+  configure.use.fontconfig.with.xft.patch
+  non-linux.diff
+  tklibrary.diff
 
-Maybe I used 'Patch' rather than 'PATCH' when call git format-patch
+Refresh patches:
+  confsearch.diff
+  fix-xft.diff
 
-git format-patch -1 --subject-prefix=meta-oe][Patch
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../configure.use.fontconfig.with.xft.patch   | 13 ---------
+ .../recipes-devtools/tcltk/tk/confsearch.diff | 14 +++++-----
+ .../recipes-devtools/tcltk/tk/fix-xft.diff    |  4 +--
+ .../recipes-devtools/tcltk/tk/non-linux.diff  | 27 -------------------
+ .../recipes-devtools/tcltk/tk/tklibrary.diff  | 22 ---------------
+ .../tcltk/{tk_8.6.9.bb => tk_8.6.10.bb}       |  7 ++---
+ 6 files changed, 11 insertions(+), 76 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/tcltk/tk/configure.use.fontconfig.with.xft.patch
+ delete mode 100644 meta-oe/recipes-devtools/tcltk/tk/non-linux.diff
+ delete mode 100644 meta-oe/recipes-devtools/tcltk/tk/tklibrary.diff
+ rename meta-oe/recipes-devtools/tcltk/{tk_8.6.9.bb => tk_8.6.10.bb} (91%)
 
-I'll try 'PATCH' in subject next time.
-
-Kai
-
->
-> Regards,
-> Kai
->
->
->>
->> On 12/11/19 1:10 AM, kai.kang@windriver.com wrote:
->>> From: Kai Kang <kai.kang@windriver.com>
->>>
->>> Backport patch to fix fltk build error when enable package config
->>> 'examples'. Drop the useless parts such as .gitignore and Makefile
->>> from the patch.
->>>
->>> fltk-native is also required by package config 'examples'.
->>>
->>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>> ---
->>>   meta-oe/recipes-support/fltk/fltk.bb          |   7 +-
->>>   ...-when-enable-package-config-examples.patch | 182 
->>> ++++++++++++++++++
->>>   2 files changed, 187 insertions(+), 2 deletions(-)
->>>   create mode 100644 
->>> meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch
->>>
->>> diff --git a/meta-oe/recipes-support/fltk/fltk.bb 
->>> b/meta-oe/recipes-support/fltk/fltk.bb
->>> index 7ad4ac70a..0d033f361 100644
->>> --- a/meta-oe/recipes-support/fltk/fltk.bb
->>> +++ b/meta-oe/recipes-support/fltk/fltk.bb
->>> @@ -5,7 +5,10 @@ DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
->>>   inherit features_check binconfig lib_package gtk-icon-cache mime
->>>   REQUIRED_DISTRO_FEATURES = "x11"
->>>   -SRC_URI += 
->>> "file://0003-CMake-build-Force-shared-libs-with-unsuffixed-names.patch"
->>> +SRC_URI += " \
->>> + 
->>> file://0003-CMake-build-Force-shared-libs-with-unsuffixed-names.patch \
->>> + 
->>> file://0004-Fix-build-error-when-enable-package-config-examples.patch \
->>> +"
->>>     EXTRA_OECMAKE = " \
->>>       -DOPTION_BUILD_SHARED_LIBS=ON \
->>> @@ -17,7 +20,7 @@ EXTRA_OECMAKE = " \
->>>     PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 
->>> 'opengl', d)}"
->>>   -PACKAGECONFIG[examples] = 
->>> "-DOPTION_BUILD_EXAMPLES=ON,-DOPTION_BUILD_EXAMPLES=OFF,"
->>> +PACKAGECONFIG[examples] = 
->>> "-DOPTION_BUILD_EXAMPLES=ON,-DOPTION_BUILD_EXAMPLES=OFF,fltk-native"
->>>   PACKAGECONFIG[cairo] = "-DOPTION_CAIRO=ON,-DOPTION_CAIRO=OFF,cairo"
->>>   PACKAGECONFIG[opengl] = 
->>> "-DOPTION_USE_GL=ON,-DOPTION_USE_GL=OFF,virtual/libgl"
->>>   PACKAGECONFIG[xinerama] = 
->>> "-DOPTION_USE_XINERAMA=ON,-DOPTION_USE_XINERAMA=OFF,libxinerama"
->>> diff --git 
->>> a/meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch 
->>> b/meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch 
->>>
->>> new file mode 100644
->>> index 000000000..974c02fe6
->>> --- /dev/null
->>> +++ 
->>> b/meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch
->>> @@ -0,0 +1,182 @@
->>> +Fix build error when enable package config examples.
->>> +
->>> +Upstream-Status: Backport 
->>> [https://github.com/fltk/fltk/commit/16774dd]
->>> +
->>> +Signed-off-by: Kai Kang <kai.kang@windriver.com>
->>> +
->>> +
->>> +From 16774ddc4e000c89e560fde0ced8be9814ef041e Mon Sep 17 00:00:00 2001
->>> +From: Albrecht Schlosser <albrechts.fltk@online.de>
->>> +Date: Wed, 8 Feb 2017 02:06:52 +0000
->>> +Subject: [PATCH] Rename test/help demo program to test/help_dialog.
->>> +
->>> +This change avoids a name conflict with CMake's auto-generated 
->>> target 'help'
->>> +for "Unix Makefiles", "Ninja", and supposedly other generators as 
->>> well.
->>> +
->>> +
->>> +git-svn-id: file:///fltk/svn/fltk/branches/branch-1.4@12171 
->>> ea41ed52-d2ee-0310-a9c1-e6b18d33e121
->>> +---
->>> + CMake/macros.cmake                        |  5 -----
->>> + documentation/src/examples.dox            |  8 +++----
->>> + test/CMakeLists.txt                       | 27 
->>> +++++++++++++++++++----
->>> + test/demo.menu                            |  2 +-
->>> + test/{help.cxx => help_dialog.cxx}        |  6 ++---
->>> + test/{help-test.html => help_dialog.html} |  0
->>> + 6 files changed, 31 insertions(+), 17 deletions(-)
->>> + rename test/{help.cxx => help_dialog.cxx} (88%)
->>> + rename test/{help-test.html => help_dialog.html} (100%)
->>> +
->>> +diff --git a/CMake/macros.cmake b/CMake/macros.cmake
->>> +index 5b0d0fa..7134fcb 100644
->>> +--- a/CMake/macros.cmake
->>> ++++ b/CMake/macros.cmake
->>> +@@ -90,11 +90,6 @@ function(CREATE_EXAMPLE NAME SOURCES LIBRARIES)
->>> +
->>> +     set (tname ${NAME})        # target name
->>> +
->>> +-    # rename reserved target name "help" (CMake 2.8.12 and later)
->>> +-    if (${tname} MATCHES "^help$")
->>> +-        set (tname "test_help")
->>> +-    endif (${tname} MATCHES "^help$")
->>> +-
->>> +     foreach(src ${SOURCES})
->>> +         if ("${src}" MATCHES "\\.fl$")
->>> +             list(APPEND flsrcs ${src})
->>> +diff --git a/documentation/src/examples.dox 
->>> b/documentation/src/examples.dox
->>> +index 5105b7b..7961b02 100644
->>> +--- a/documentation/src/examples.dox
->>> ++++ b/documentation/src/examples.dox
->>> +@@ -60,7 +60,7 @@ you build FLTK, unlike those in the 'test' 
->>> directory shown below.
->>> + </tr>
->>> + <tr>
->>> + <td> \ref examples_hello           </td>
->>> +-<td> \ref examples_help            </td>
->>> ++<td> \ref examples_help_dialog     </td>
->>> + <td> \ref examples_iconize         </td>
->>> + <td> \ref examples_image           </td>
->>> + <td> \ref examples_inactive        </td>
->>> +@@ -326,13 +326,13 @@ easily under FLTK.
->>> + tiny demo shows how little is needed to get a functioning application
->>> + running with FLTK. Quite impressive, I'd say.
->>> +
->>> +-\subsection examples_help help
->>> ++\subsection examples_help_dialog help_dialog
->>> +
->>> + \par
->>> +-\c help displays the built-in FLTK help browser. The
->>> ++\c help_dialog displays the built-in FLTK help browser. The
->>> + Fl_Help_Dialog understands a subset of html and renders
->>> + various image formats. This widget makes it easy to provide help
->>> +-pages to the user without depending on the operating system's
->>> ++pages to the user without depending on the operating system's
->>> + html browser.
->>> +
->>> + \subsection examples_iconize iconize
->>> +diff --git a/test/CMakeLists.txt b/test/CMakeLists.txt
->>> +index 22ec9ab..4caffa5 100644
->>> +--- a/test/CMakeLists.txt
->>> ++++ b/test/CMakeLists.txt
->>> +@@ -1,3 +1,22 @@
->>> ++#
->>> ++# "$Id$"
->>> ++#
->>> ++# CMakeLists.txt used to build test and demo apps by the CMake 
->>> build system
->>> ++#
->>> ++# Copyright 2004-2017 by Bill Spitzak and others.
->>> ++#
->>> ++# This library is free software. Distribution and use rights are 
->>> outlined in
->>> ++# the file "COPYING" which should have been included with this 
->>> file.  If this
->>> ++# file is missing or damaged, see the license at:
->>> ++#
->>> ++#     http://www.fltk.org/COPYING.php
->>> ++#
->>> ++# Please report all bugs and problems on the following page:
->>> ++#
->>> ++#     http://www.fltk.org/str.php
->>> ++#
->>> ++####################################################################### 
->>>
->>> ++
->>> + set(EXECUTABLE_OUTPUT_PATH ${FLTK_BINARY_DIR}/bin/examples)
->>> +
->>> + 
->>> #######################################################################
->>> +@@ -64,7 +83,7 @@ CREATE_EXAMPLE(file_chooser file_chooser.cxx 
->>> "fltk;fltk_images")
->>> + CREATE_EXAMPLE(fonts fonts.cxx fltk)
->>> + CREATE_EXAMPLE(forms forms.cxx "fltk;fltk_forms")
->>> + CREATE_EXAMPLE(hello hello.cxx fltk)
->>> +-CREATE_EXAMPLE(help help.cxx "fltk;fltk_images")
->>> ++CREATE_EXAMPLE(help_dialog help_dialog.cxx "fltk;fltk_images")
->>> + CREATE_EXAMPLE(icon icon.cxx fltk)
->>> + CREATE_EXAMPLE(iconize iconize.cxx fltk)
->>> + CREATE_EXAMPLE(image image.cxx fltk)
->>> +@@ -134,7 +153,7 @@ endif(FLTK_HAVE_CAIRO)
->>> + # Note: this is incomplete as of 11 Feb 2015
->>> + # Todo: currently all files are copied, but some of them need 
->>> configuration:
->>> + # - demo.menu: fluid can't be started (wrong path)
->>> +-# - demo.menu: help (help-test.html) can't find its images (not 
->>> copied)
->>> ++# - demo.menu: help_dialog (help_dialog.html) can't find its 
->>> images (not copied)
->>> + # - maybe more ...
->>> +
->>> + # prepare for a "better" test file installation path
->>> +@@ -149,11 +168,11 @@ configure_file(demo.menu 
->>> ${TESTFILE_PATH}/demo.menu COPYONLY)
->>> +
->>> + # use target directory only to avoid redundancy
->>> + configure_file(rgb.txt ${TESTFILE_PATH} COPYONLY)
->>> +-configure_file(help-test.html ${TESTFILE_PATH} COPYONLY)
->>> ++configure_file(help_dialog.html ${TESTFILE_PATH} COPYONLY)
->>> + configure_file(browser.cxx ${TESTFILE_PATH} COPYONLY)
->>> + configure_file(editor.cxx ${TESTFILE_PATH} COPYONLY)
->>> + if(APPLE AND NOT OPTION_APPLE_X11)
->>> +     configure_file(browser.cxx 
->>> "${TESTFILE_PATH}/browser.app/Contents/Resources/browser.cxx" COPYONLY)
->>> +     configure_file(rgb.txt 
->>> ${TESTFILE_PATH}/colbrowser.app/Contents/Resources/rgb.txt COPYONLY)
->>> +-    configure_file(help-test.html 
->>> ${TESTFILE_PATH}/help.app/Contents/Resources/help-test.html COPYONLY)
->>> ++    configure_file(help_dialog.html 
->>> ${TESTFILE_PATH}/help_dialog.app/Contents/Resources/help_dialog.html 
->>> COPYONLY)
->>> + endif(APPLE AND NOT OPTION_APPLE_X11)
->>> +diff --git a/test/demo.menu b/test/demo.menu
->>> +index 337a71c..97e522a 100644
->>> +--- a/test/demo.menu
->>> ++++ b/test/demo.menu
->>> +@@ -77,7 +77,7 @@
->>> +     @o:Font Tests...:@of
->>> +         @of:Fonts:fonts
->>> +         @of:UTF-8:utf8
->>> +-    @o:HelpDialog:help
->>> ++    @o:HelpDialog:help_dialog
->>> +     @o:Input Choice:input_choice
->>> +     @o:Preferences:preferences
->>> +     @o:Threading:threads
->>> +diff --git a/test/help.cxx b/test/help_dialog.cxx
->>> +similarity index 88%
->>> +rename from test/help.cxx
->>> +rename to test/help_dialog.cxx
->>> +index f5c51d6..7866641 100644
->>> +--- a/test/help.cxx
->>> ++++ b/test/help_dialog.cxx
->>> +@@ -3,7 +3,7 @@
->>> + //
->>> + // Fl_Help_Dialog test program.
->>> + //
->>> +-// Copyright 1999-2010 by Easy Software Products.
->>> ++// Copyright 2011-2017 by Bill Spitzak and others.
->>> + //
->>> + // This library is free software. Distribution and use rights are 
->>> outlined in
->>> + // the file "COPYING" which should have been included with this 
->>> file.  If this
->>> +@@ -46,13 +46,13 @@ main(int  argc,            // I - Number of 
->>> command-line arguments
->>> +     strcpy(buf, argv[0]);
->>> +     char *slash = strrchr(buf, '/');
->>> +     if (slash)
->>> +-      strcpy(slash, "/../Resources/help-test.html");
->>> ++      strcpy(slash, "/../Resources/help_dialog.html");
->>> +     help->load(buf);
->>> +
->>> + #else
->>> +
->>> +   if (argc <= 1)
->>> +-    help->load("help-test.html");
->>> ++    help->load("help_dialog.html");
->>> +   else
->>> +     help->load(argv[1]);
->>> +
->>> +diff --git a/test/help-test.html b/test/help_dialog.html
->>> +similarity index 100%
->>> +rename from test/help-test.html
->>> +rename to test/help_dialog.html
->>>
->>
->
-
+diff --git a/meta-oe/recipes-devtools/tcltk/tk/configure.use.fontconfig.with.xft.patch b/meta-oe/recipes-devtools/tcltk/tk/configure.use.fontconfig.with.xft.patch
+deleted file mode 100644
+index a0c157f5a..000000000
+--- a/meta-oe/recipes-devtools/tcltk/tk/configure.use.fontconfig.with.xft.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+---- a/configure.in.orig	2014-05-10 14:35:39.859147385 +0000
+-+++ b/configure.in	2014-05-10 14:36:20.282925184 +0000
+-@@ -554,8 +554,8 @@
+- 	dnl make sure package configurator (xft-config or pkg-config
+- 	dnl says that xft is present.
+- 	    found_xft=yes
+--	    XFT_CFLAGS=`pkg-config --cflags xft 2>/dev/null` || found_xft="no"
+--	    XFT_LIBS=`pkg-config --libs xft 2>/dev/null` || found_xft="no"
+-+	    XFT_CFLAGS=`pkg-config --cflags xft fontconfig 2>/dev/null` || found_xft="no"
+-+	    XFT_LIBS=`pkg-config --libs xft fontconfig 2>/dev/null` || found_xft="no"
+- 	AC_MSG_RESULT([$found_xft])
+- 	dnl make sure that compiling against Xft header file doesn't bomb
+- 	if test "$found_xft" = "yes" ; then
+diff --git a/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff b/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff
+index 8cc07bcfa..229acf3e7 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff
++++ b/meta-oe/recipes-devtools/tcltk/tk/confsearch.diff
+@@ -16,31 +16,31 @@ Index: a/unix/configure
+ ===================================================================
+ --- a/unix/configure.orig
+ +++ b/unix/configure
+-@@ -1432,6 +1432,7 @@ echo "$as_me: error: ${with_tclconfig} d
++@@ -1431,6 +1431,7 @@ echo "$as_me: error: ${with_tclconfig} d
+  			`ls -d /usr/local/lib 2>/dev/null` \
+  			`ls -d /usr/contrib/lib 2>/dev/null` \
+  			`ls -d /usr/pkg/lib 2>/dev/null` \
+ +			`ls -d /usr/share/tcltk/tcl8.6 2>/dev/null` \
++ 			`ls -d /usr/lib/tcl8.6 2>/dev/null` \
+  			`ls -d /usr/lib 2>/dev/null` \
+  			`ls -d /usr/lib64 2>/dev/null` \
+- 			`ls -d /usr/local/lib/tcl8.6 2>/dev/null` \
+ Index: a/unix/tcl.m4
+ ===================================================================
+ --- a/unix/tcl.m4.orig
+ +++ b/unix/tcl.m4
+-@@ -94,6 +94,7 @@ AC_DEFUN([SC_PATH_TCLCONFIG], [
++@@ -93,6 +93,7 @@ AC_DEFUN([SC_PATH_TCLCONFIG], [
+  			`ls -d /usr/local/lib 2>/dev/null` \
+  			`ls -d /usr/contrib/lib 2>/dev/null` \
+  			`ls -d /usr/pkg/lib 2>/dev/null` \
+ +			`ls -d /usr/share/tcltk/tcl8.6 2>/dev/null` \
++ 			`ls -d /usr/lib/tcl8.6 2>/dev/null` \
+  			`ls -d /usr/lib 2>/dev/null` \
+  			`ls -d /usr/lib64 2>/dev/null` \
+- 			`ls -d /usr/local/lib/tcl8.6 2>/dev/null` \
+-@@ -227,6 +228,7 @@ AC_DEFUN([SC_PATH_TKCONFIG], [
++@@ -226,6 +227,7 @@ AC_DEFUN([SC_PATH_TKCONFIG], [
+  			`ls -d /usr/local/lib 2>/dev/null` \
+  			`ls -d /usr/contrib/lib 2>/dev/null` \
+  			`ls -d /usr/pkg/lib 2>/dev/null` \
+-+			`ls -d /usr/share/tcltk/tk8.6 2>/dev/null` \
+++			`ls -d /usr/share/tcltk/tcl8.6 2>/dev/null` \
++ 			`ls -d /usr/lib/tk8.6 2>/dev/null` \
+  			`ls -d /usr/lib 2>/dev/null` \
+  			`ls -d /usr/lib64 2>/dev/null` \
+- 			`ls -d /usr/local/lib/tk8.6 2>/dev/null` \
+diff --git a/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff b/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
+index d1bb7105c..4aa5d6b89 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
++++ b/meta-oe/recipes-devtools/tcltk/tk/fix-xft.diff
+@@ -8,8 +8,8 @@
+ -	XFT_LIBS=`xft-config --libs 2>/dev/null` || found_xft="no"
+ -	if test "$found_xft" = "no" ; then
+  	    found_xft=yes
+- 	    XFT_CFLAGS=`pkg-config --cflags xft 2>/dev/null` || found_xft="no"
+- 	    XFT_LIBS=`pkg-config --libs xft 2>/dev/null` || found_xft="no"
++ 	    XFT_CFLAGS=`pkg-config --cflags xft fontconfig 2>/dev/null` || found_xft="no"
++ 	    XFT_LIBS=`pkg-config --libs xft fontconfig 2>/dev/null` || found_xft="no"
+ -	fi
+  	AC_MSG_RESULT([$found_xft])
+  	dnl make sure that compiling against Xft header file doesn't bomb
+diff --git a/meta-oe/recipes-devtools/tcltk/tk/non-linux.diff b/meta-oe/recipes-devtools/tcltk/tk/non-linux.diff
+deleted file mode 100644
+index 7d31f9fdc..000000000
+--- a/meta-oe/recipes-devtools/tcltk/tk/non-linux.diff
++++ /dev/null
+@@ -1,27 +0,0 @@
+-Patch by Sergei Golovan (originally by Mike Markley and Chris Waters) fixes
+-building on non-linux Debian architectures.
+-
+---- tk8.5-8.5.8.orig/unix/configure
+-+++ tk8.5-8.5.8/unix/configure
+-@@ -4447,6 +4447,9 @@
+- 		if test "`uname -s`" = "AIX" ; then
+- 		    tcl_cv_sys_version=AIX-`uname -v`.`uname -r`
+- 		fi
+-+		if test "`uname -s`" = "NetBSD" -a -f /etc/debian_version ; then
+-+		    tcl_cv_sys_version=NetBSD-Debian
+-+		fi
+- 	    fi
+- 	fi
+-
+---- tk8.5-8.5.8.orig/unix/tcl.m4
+-+++ tk8.5-8.5.8/unix/tcl.m4
+-@@ -962,6 +962,9 @@
+- 		if test "`uname -s`" = "AIX" ; then
+- 		    tcl_cv_sys_version=AIX-`uname -v`.`uname -r`
+- 		fi
+-+		if test "`uname -s`" = "NetBSD" -a -f /etc/debian_version ; then
+-+		    tcl_cv_sys_version=NetBSD-Debian
+-+		fi
+- 	    fi
+- 	fi
+-     ])
+diff --git a/meta-oe/recipes-devtools/tcltk/tk/tklibrary.diff b/meta-oe/recipes-devtools/tcltk/tk/tklibrary.diff
+deleted file mode 100644
+index ee38c2a1a..000000000
+--- a/meta-oe/recipes-devtools/tcltk/tk/tklibrary.diff
++++ /dev/null
+@@ -1,22 +0,0 @@
+---- tk8.5-8.5.8.orig/unix/configure
+-+++ tk8.5-8.5.8/unix/configure
+-@@ -11070,7 +11070,7 @@
+-     TCL_STUB_FLAGS="-DUSE_TCL_STUBS"
+- fi
+- 
+--TK_LIBRARY='$(prefix)/lib/tk$(VERSION)'
+-+test -z "$TK_LIBRARY" && TK_LIBRARY='$(prefix)/lib/tk$(VERSION)'
+- PRIVATE_INCLUDE_DIR='$(includedir)'
+- HTML_DIR='$(DISTDIR)/html'
+- TK_PKG_DIR='tk$(VERSION)'
+---- tk8.5-8.5.8.orig/unix/configure.in
+-+++ tk8.5-8.5.8/unix/configure.in
+-@@ -607,7 +607,7 @@
+-     TCL_STUB_FLAGS="-DUSE_TCL_STUBS"
+- fi
+- 
+--TK_LIBRARY='$(prefix)/lib/tk$(VERSION)'
+-+test -z "$TK_LIBRARY" && TK_LIBRARY='$(prefix)/lib/tk$(VERSION)'
+- PRIVATE_INCLUDE_DIR='$(includedir)'
+- HTML_DIR='$(DISTDIR)/html'
+- TK_PKG_DIR='tk$(VERSION)'
+diff --git a/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb b/meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb
+similarity index 91%
+rename from meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
+rename to meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb
+index 3d7767074..b564e1260 100644
+--- a/meta-oe/recipes-devtools/tcltk/tk_8.6.9.bb
++++ b/meta-oe/recipes-devtools/tcltk/tk_8.6.10.bb
+@@ -20,14 +20,11 @@ DEPENDS = "tcl virtual/libx11 libxt"
+ SRC_URI = "\
+     ${SOURCEFORGE_MIRROR}/tcl/${BPN}${PV}-src.tar.gz \
+     file://confsearch.diff;striplevel=2 \
+-    file://non-linux.diff;striplevel=2 \
+-    file://tklibrary.diff;striplevel=2 \
+     file://tkprivate.diff;striplevel=2 \
+     file://fix-xft.diff \
+-    file://configure.use.fontconfig.with.xft.patch \
+ "
+-SRC_URI[md5sum] = "e3cf6290999ee30651d75864eccfec63"
+-SRC_URI[sha256sum] = "d3f9161e8ba0f107fe8d4df1f6d3a14c30cc3512dfc12a795daa367a27660dac"
++SRC_URI[md5sum] = "602a47ad9ecac7bf655ada729d140a94"
++SRC_URI[sha256sum] = "63df418a859d0a463347f95ded5cd88a3dd3aaa1ceecaeee362194bc30f3e386"
+ 
+ S = "${WORKDIR}/${BPN}${PV}/unix"
+ 
 -- 
-Kai Kang
+2.17.1
 
 
