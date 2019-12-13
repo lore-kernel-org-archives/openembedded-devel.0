@@ -1,24 +1,46 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 30EF17F96F
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D74D7D25F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Dec 2019 08:45:44 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xBD8jjN6006983
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Fri, 13 Dec 2019 09:27:21 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id c16so1688986ioh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Dec 2019 00:45:45 -0800 (PST)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.468.0; Fri, 13 Dec 2019 00:45:44 -0800
-From: <changqing.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 13 Dec 2019 16:45:43 +0800
-Message-ID: <1576226743-346140-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Fri, 13 Dec 2019 01:27:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=x1JRK4pH50EIcJPqayB3WdKnUkFLAvMWoZS+IbtuLlU=;
+	b=IqnjKsTFFHnX0jHJoP/aMrymHdevYUhM/dLCHzFG9JlOXRwyjwTXKu2M0zoi4iCO1L
+	r+giQgmsFVUtVM77vnn2rzEFQrEmuqtfLYNNIevgL0HFT4K4r1zxfEYQzYSLaWBAuRCz
+	EuYKGROeQzfzH2/hilmxF/SF7MO2lc2UjcX08SptF6PTz3FJzzIXNCb0azpNj3Vsyo5q
+	md4DGQhOY2E6Syj6d0LG30Qe091+bbiKzQaMIxC9lj9VxJbelEEC1o6cxFCihpE9Y29a
+	0aG/kKrrK7duxFET3a5SnI866aP6ykL5W5UMrISi51lm9+GBwz+vouEbqlryi2zUQnY3
+	tUQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=x1JRK4pH50EIcJPqayB3WdKnUkFLAvMWoZS+IbtuLlU=;
+	b=Vb+zXGSY6Q/Gl6vAQaFz0s7jDcmbaZNqC576Fp+6Hd0blSwrT0Z96IiE3TgCJY+8BJ
+	sfhdTzS1hv4CQvgGiWeGO+emUUqJX6x+s7MnOUX8htraMZ4x3QMV0d/xtWno9fOSl8AB
+	2+7UHPgsG9Dk2aE5lhQwQ+Zz98QNWNU43aUxvssKSwZ7UTHvjh7f45i4WfflbA+MV+/K
+	qyHt/JZ6BJt4eAL2kOr0DJ81II6FA6+1qg10gUK70Oh7RkXRplOVEIkXb5Zs2Bqm8YYW
+	eqeLIYBSJ+1wjKZQRIJDBjvf7v0euMEj9so1cLE6S1CJIA+U2YspDbrG+gjvq/PL4mDf
+	N8gg==
+X-Gm-Message-State: APjAAAWOkEmxUoDfySA4O4/GGS20eI3ox4EVk2caRFxYbm7HqYP2nGCq
+	zBdTJ8Po+unY63RVIxKzXdLTLoUbyagC20P393M=
+X-Google-Smtp-Source: APXvYqzATJjTQcpsFHn741A5O/+fsbiHoIwJscbhIVAOJe4WBXmds0vKgWFjznfAemvhD3VSOyw6LebRV3yLad9cs2c=
+X-Received: by 2002:a5d:9f55:: with SMTP id u21mr7010954iot.224.1576229242821; 
+	Fri, 13 Dec 2019 01:27:22 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH] gtk-xfce-engine: remove this recipe
+References: <1576226743-346140-1-git-send-email-changqing.li@windriver.com>
+In-Reply-To: <1576226743-346140-1-git-send-email-changqing.li@windriver.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 13 Dec 2019 10:27:11 +0100
+Message-ID: <CALbNGRTaVVnL6qPcnSqV6w+_o-ad3=GT3D=cWOLGGDUsuYJ0Rw@mail.gmail.com>
+To: Changqing Li <changqing.li@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][PATCH] gtk-xfce-engine: remove this recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,109 +53,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Dec 2019 08:45:44 -0000
+X-List-Received-Date: Fri, 13 Dec 2019 09:27:22 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
 
-From: Changqing Li <changqing.li@windriver.com>
+On Fri, Dec 13, 2019 at 9:45 AM <changqing.li@windriver.com> wrote:
+>
+> From: Changqing Li <changqing.li@windriver.com>
+>
+> * Part of xfce 4.14 changelog
+>   Theme Engine (gtk-xfce-engine)
+>       The gtk-xfce-engine has been deprecated and archived.
+>
+> * repo have been remove from upstream
+>   https://archive.xfce.org/src/xfce/
+>   no gtk-xfce-engine now
+>
+> so remove this recipe
+>
+> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Think this is a good thing and wanted to test it. Unfortunately it did
+not make it into patchwork - similar as Kai's patches sent recently.
+Who can look into patchwork?
 
-* Part of xfce 4.14 changelog
-  Theme Engine (gtk-xfce-engine)
-      The gtk-xfce-engine has been deprecated and archived.
 
-* repo have been remove from upstream
-  https://archive.xfce.org/src/xfce/
-  no gtk-xfce-engine now
-
-so remove this recipe
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
----
- .../gtk-xfce-engine/glib-2.54-ftbfs.patch          | 23 -----------------
- .../gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb       | 30 ----------------------
- .../packagegroups/packagegroup-xfce-base.bb        |  1 -
- 3 files changed, 54 deletions(-)
- delete mode 100644 meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine/glib-2.54-ftbfs.patch
- delete mode 100644 meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb
-
-diff --git a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine/glib-2.54-ftbfs.patch b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine/glib-2.54-ftbfs.patch
-deleted file mode 100644
-index fb89102..0000000
---- a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine/glib-2.54-ftbfs.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--Description: Fix FTBFS with glib 2.54
-- glib-mkenums now expects input files to be UTF-8,
-- fix the encoding of libgnomeui/gnome-scores.h
--Author: Adrian Bunk <bunk@debian.org>
--
--ported from: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=870738
--
--Upstream-Status: Pending
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Index: gtk-xfce-engine-3.2.0/gtk-3.0/xfce_style_types.h
--===================================================================
----- gtk-xfce-engine-3.2.0.orig/gtk-3.0/xfce_style_types.h
--+++ gtk-xfce-engine-3.2.0/gtk-3.0/xfce_style_types.h
--@@ -19,7 +19,7 @@
--  *
--  *  Portions based Thinice port by 
--  *                       Tim Gerla <timg@rrv.net>,
--- *                       Tomas Ögren <stric@ing.umu.se,
--+ *                       Tomas Ã–gren <stric@ing.umu.se>,
--  *                       Richard Hult <rhult@codefactory.se>
--  *  Portions based on Smooth theme by
--  *                       Andrew Johnson <ajgenius@ajgenius.us>
-diff --git a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb
-deleted file mode 100644
-index 0dd4a4c..0000000
---- a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--SUMMARY = "XFCE theme for GTK"
--SECTION = "x11/libs"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
--DEPENDS = "gtk+ xfce4-dev-tools-native"
--
--inherit xfce features_check
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
--SRC_URI += "file://glib-2.54-ftbfs.patch"
--
--SRC_URI[md5sum] = "363d6c16a48a00e26d45c45c2e1fd739"
--SRC_URI[sha256sum] = "875c9c3bda96faf050a2224649cc42129ffb662c4de33add8c0fd1fb860b47ed"
--
--PACKAGECONFIG ??= "gtk3"
--PACKAGECONFIG[gtk3] = "--enable-gtk3,--disable-gtk3, gtk+3, gtk3-xfce-engine"
--
--PACKAGES += "${PN}-themes gtk3-xfce-engine"
--FILES_${PN} += "${libdir}/gtk-2.0/*/engines/*.so"
--FILES_gtk3-xfce-engine += "${libdir}/gtk-3.0/*/theming-engines/*.so"
--FILES_${PN}-themes += "${datadir}/themes"
--
--FILES_${PN}-dev += " \
--    ${libdir}/gtk-2.0/*/engines/*.la \
--    ${libdir}/gtk-3.0/*/theming-engines/*.la \
--"
--
--RDEPENDS_${PN} += "${PN}-themes"
--RDEPENDS_gtk3-xfce-engine += "${PN}-themes"
-diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-index 412c6ae..70ef909 100644
---- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-+++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-base.bb
-@@ -13,7 +13,6 @@ RDEPENDS_${PN} = " \
-     xfdesktop \
-     xfce4-panel \
-     \
--    gtk-xfce-engine \
-     librsvg-gtk \
-     \
-     xfce4-panel-plugin-actions \
--- 
-2.7.4
-
+Andreas
 
