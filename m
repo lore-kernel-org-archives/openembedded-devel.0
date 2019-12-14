@@ -1,48 +1,61 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 01A2A78F72
+Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com
+	[209.85.216.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 63D597F8B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Dec 2019 02:36:49 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id j5so758569qtq.9
+	Sat, 14 Dec 2019 05:40:13 +0000 (UTC)
+Received: by mail-pj1-f67.google.com with SMTP id g4so620969pjs.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Dec 2019 18:36:51 -0800 (PST)
+	Fri, 13 Dec 2019 21:40:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=OGP2VZ1aS02Ty7HeRPbMreQOD+FI8NmFkKEukyf1sQA=;
-	b=keA/pbhMoTZeE8Tk5s1006hz/CDMbCo9wWAYSf+1GfTOnydG75x4A/z78oXBJfGP77
-	WUiEyiNfqXdP23JBUgx3qz5t++kGYyJi5CCFwTlOdC8k++W665tS50IPRBu3XeVf5Si3
-	zXCrWrc9vdoGp+JgirD93lfjTWmFfN2pSzS8x8Rz6Wzb2o/0fQa4L6JIZ+Y/NC7s1k4C
-	3MD3guCdW4G23Cd78NyvK082iIFhJaqclVPTkaRhNhphoHUknbu0xLW4MJmMTS5zpucs
-	XtkgueShs9AZeLUjHy6nU6/1rAPeTqYQ1wdFeowDtaEy0etWhnYvAxtcv3T6zZenFVCs
-	GOQg==
+	h=subject:to:cc:references:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=Dv2LzSKi8rXl69zvi4BfyrfQJhL//3hVxRkxJHroqE4=;
+	b=YVWM27TsDkbZjJMB5DtFt1kY9f7QLQTQUUNqIoCOrFadtPlQuVimKi7oJFW96GnMgz
+	6W032vZ02tXpvG/bn5+g0sGdd3YS8p/WLuD7HDwDTP4J55B/+95XAYmY8x380vW9hK6g
+	hdf6SbfzUC11EAEZ/SVZRO4q+F688m6HqRtMh4JpVL3VBtIk2xtGgbDOIqJefdDsRT9F
+	GDbtWA0EBnI9gBG1ctCMc89KtUUHInWihML8W/dOIyFxkkqHi1ImLF6RqmUXLrOvEaoJ
+	FaiKx6somgmNxCTM1uheH62oWmTB+Bms8rIuFP2wpbJqdUCwYgcy/gL2qgyW9V+w3fFH
+	uJuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=OGP2VZ1aS02Ty7HeRPbMreQOD+FI8NmFkKEukyf1sQA=;
-	b=VfuL2M6K88zVsxLU6x7a5I51xzAPc1you7ZrdhVIkReVnRezNyVHGHWlZ7bIcA+8W5
-	hsp0S3+cuGvNCIYbtu5itjmTT/qzC+wDkFabYgIJuwM/UFac0CYcowR1Vj18XMn5tg/u
-	zgRJS5ytj8mtrPwpSCkMggLkgG1f62rRtqoCpDiHJRKhfJEGzTmi9eAxIYHveOnuijkM
-	rvoEPjEsoxcu85LZKhYmATnqbk15z5iDpb0KAlKshmWmQFrVLI5tiPh+oqmximHE5mgH
-	OH9HECab3QKwES/hxfUCjUo8D8Y/0GGiJI/tN/eowDMF2v6uE17I/CDSIpG8/Ge3LvYP
-	2D0Q==
-X-Gm-Message-State: APjAAAUmjTKhtaw6GyHqosW9c7sGs7FVBJ+I6aLeau/PIs1mq8ND6mPL
-	MM42aigAV431X3wk3CAH7DxOaTIMQod5UFHRD+w=
-X-Google-Smtp-Source: APXvYqw9OS4gY1hSWvHu336f8JF4MpurzSOzojCKdAVcJmPLUwQndQT+GopqQqIOFBJc8sCJaIcWBDxTwtywzqb2QLE=
-X-Received: by 2002:ac8:544f:: with SMTP id d15mr15329877qtq.53.1576291010669; 
-	Fri, 13 Dec 2019 18:36:50 -0800 (PST)
-MIME-Version: 1.0
-References: <20191211000845.13166-1-schnitzeltony@gmail.com>
-	<20191211000845.13166-3-schnitzeltony@gmail.com>
-In-Reply-To: <20191211000845.13166-3-schnitzeltony@gmail.com>
+	h=x-gm-message-state:subject:to:cc:references:from:organization
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-language:content-transfer-encoding;
+	bh=Dv2LzSKi8rXl69zvi4BfyrfQJhL//3hVxRkxJHroqE4=;
+	b=nAj9szS5g+TMPSooLxgk6GBZuRHpAH3Dt5WxDM537MK8Esky4MDNJR2SrfRAHFX9/G
+	zK8+LlC5UZylkLZTm7yxQEPFLL6B/opMsgf27khwtYUw26CztgxYxZmvqhvHtFTp8y10
+	r8SKo7IL2RuVasDA/KOj7zBxS4/4qm7cMcD3vjFdegsQEdWF9BsgxXp4wCBorDqLb008
+	9R01VRoOWzLYIfp/ZvqIq0dkSshYzu8hDjm0iBiO8mm2eZSrsPmK53HzFdA5zVHCgtvJ
+	k+k7z1tZYS1gnYr8oECwBV/uASrY71n0gqyZpqeXNA/vlOsD4+kFUcrGgU9nQsgTX2wp
+	f4hQ==
+X-Gm-Message-State: APjAAAWYMNj5NqjIrehWD5nLYIAQ0dy5qa6OwyGKK0zCHf0Yp1GgrfdO
+	jogs9NqWfI6I+/aEfaAn9Z9L4xsvXLU=
+X-Google-Smtp-Source: APXvYqwXufbTrxJq5U/xb4JPquv/I7wapuUdj9MUxqMdANAaWbZr6EeLCJsIYpiEK+aHgwHZUheSlQ==
+X-Received: by 2002:a17:90a:2409:: with SMTP id
+	h9mr3801167pje.110.1576302013986; 
+	Fri, 13 Dec 2019 21:40:13 -0800 (PST)
+Received: from ?IPv6:2601:646:9200:4e0:15c5:f71b:d732:763f?
+	([2601:646:9200:4e0:15c5:f71b:d732:763f])
+	by smtp.gmail.com with ESMTPSA id
+	g17sm14144942pfb.180.2019.12.13.21.40.12
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Fri, 13 Dec 2019 21:40:13 -0800 (PST)
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+	Changqing Li <changqing.li@windriver.com>
+References: <1576226743-346140-1-git-send-email-changqing.li@windriver.com>
+	<CALbNGRTaVVnL6qPcnSqV6w+_o-ad3=GT3D=cWOLGGDUsuYJ0Rw@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Dec 2019 18:36:24 -0800
-Message-ID: <CAMKF1sqDizC0FHRpoTB-BB8gEDyqu8zTa9OX7UMqh3x74M-18Q@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Organization: HIMVIS LLC
+Message-ID: <8789eb25-d588-8333-c510-09df13f9067b@gmail.com>
+Date: Fri, 13 Dec 2019 21:40:11 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+	Gecko/20100101 Thunderbird/68.3.0
+MIME-Version: 1.0
+In-Reply-To: <CALbNGRTaVVnL6qPcnSqV6w+_o-ad3=GT3D=cWOLGGDUsuYJ0Rw@mail.gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/3] gjs: exclude mips build
+Subject: Re: [meta-xfce][PATCH] gtk-xfce-engine: remove this recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,48 +68,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Dec 2019 02:36:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 14 Dec 2019 05:40:13 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-I sent another patch to fix mozjs which inturn fixes this problem
-so we really do not need to exclude gjs for mips anymore.
+On 12/13/19 1:27 AM, Andreas Müller wrote:
+> On Fri, Dec 13, 2019 at 9:45 AM <changqing.li@windriver.com> wrote:
+>>
+>> From: Changqing Li <changqing.li@windriver.com>
+>>
+>> * Part of xfce 4.14 changelog
+>>    Theme Engine (gtk-xfce-engine)
+>>        The gtk-xfce-engine has been deprecated and archived.
+>>
+>> * repo have been remove from upstream
+>>    https://archive.xfce.org/src/xfce/
+>>    no gtk-xfce-engine now
+>>
+>> so remove this recipe
+>>
+>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+> Think this is a good thing and wanted to test it. Unfortunately it did
+> not make it into patchwork - similar as Kai's patches sent recently.
+> Who can look into patchwork?
+> 
 
-see
+I have staged it into master-next as well. In case you want to try
 
-https://patchwork.openembedded.org/patch/168002/
+> 
+> Andreas
+> 
 
-On Tue, Dec 10, 2019 at 4:09 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb b/meta-gnome/reci=
-pes-gnome/gjs/gjs_1.58.3.bb
-> index ddd5196b2..02e3e75cc 100644
-> --- a/meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb
-> +++ b/meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb
-> @@ -19,6 +19,10 @@ SRC_URI +=3D "file://0001-Disable-tests-on-host.patch"
->  REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
->  UNKNOWN_CONFIGURE_WHITELIST_append =3D " --enable-introspection --disabl=
-e-introspection"
->
-> +# for mips qemu crashes compiling girs
-> +# see https://errors.yoctoproject.org/Errors/Details/296905/
-> +COMPATIBLE_HOST_mipsarch =3D "null"
-> +
->  EXTRA_OECONF =3D " \
->      --without-dbus-tests \
->      --disable-installed-tests \
-> --
-> 2.21.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
