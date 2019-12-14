@@ -1,39 +1,50 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id D8F116C1F6
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DF1478F72
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Dec 2019 22:58:25 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47ZR0b0nrKz4q;
-	Fri, 13 Dec 2019 23:58:23 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1576277904;
-	bh=mBlO4msUnw20LBhY1EURyeZcY1eSBkm42K50tdMhUjw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=DG4dZfi2Rgoiy0T9yo3P0N5LKuTdb/Amj9nK7yy5S8on42KYjxhcr5eNNMBuKazMQ
-	2i/XoobOIi1f85heyG2DvsHurZRwbrxlc/JbGixpUgcaC6+pvNywolpC25mzB+XZfM
-	AIv4g8pLEfYwQ9SFAe1yvHD4gTA1PDLbS6bKq6aN1lauZTdzCtHsxj1guqkMuDwZw/
-	58q0PJtCcEZdVom0S4yAJT8VaX7EPzxOy09iconz5kiVskEncotS8e5t7ObJxfq69G
-	3264LZg71MxzHPaAQtPn/c4UU9ghzf+ZRKKwoGvMYUQsyKHKE43BGo732mIu2xM8+O
-	svf4H+9QwSL4hx3DCwvTbpZheQFXdRQrcSPIrfczXNLB+jn+yeoOeMUQjCxK3ipJii
-	IGVCbHWZTjT7eWPCT4GKIq/zFxWuzprv/sC67x8QKMS4f64TYD7p5/0Ia8W8yWSM1k
-	h+c/WHI7yvqA+3s2nl2Tejc3B2R63bzGAPe3KuHX/+dBshpqFqiOddJ4sQbDe35lGA
-	zBTxP7RhFdoF960AVuDwZxfw/oBtZ29XNz+/rmfYY3oTVItU+DBnck8kC2SX9sLSp5
-	y+7gAJooGY0XPtg6YeThPGZiyj1/36mDfRtGVyTiy2p0WijBYXzghjfK8Zt1gl3QtX
-	y9Ce3vfW9XJSDM2L0gfkSHHA=
-Date: Sat, 14 Dec 2019 00:58:15 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20191213225815.GA8776@localhost>
-References: <20191212202252.2786262-1-raj.khem@gmail.com>
-	<20191212202252.2786262-3-raj.khem@gmail.com>
-	<20191213043716.GA30893@localhost>
-	<CAMKF1so-nxHanPu6Nv3arQmSNoMyHwVj43+Myd6ZNeY=qVHU6A@mail.gmail.com>
+	Sat, 14 Dec 2019 02:30:31 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id x7so380355pgl.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Dec 2019 18:30:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=84dpquysXvAv3b1RpoGIxLAOn+gGdS1kMKgr2odPGgM=;
+	b=enC35JV08HuK227FyOynVQ6pLZHZCecTbCYf0IkPgsjTbFsX3MKoB3vk3MJ6LQaIIc
+	xoJse3bVRZR0a6gt+pgpbC8YgfHWubvudhz6gXqtC7UTAt4ltAX0gOvj9lfBZX2wZjl3
+	hsiCLFz2i7oPp7XLz1QxGpHgdnzNl+qdiWEeFb/J6rVFe676F6RWcVIisVzy0d5co1QA
+	XPA4fvvrHtHzUzpPv/ow+nERCZVfuk9RCCyHstMzgH3O+K9QCFkX5LJ/eX0Z7S7EvCID
+	B8LDci6ed6HnEJTW5ew/r/Z7YgDZdHQU+f0YFaCRbvffpoZcy3YXAL41Gk4z5IzS8h4W
+	jIXA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=84dpquysXvAv3b1RpoGIxLAOn+gGdS1kMKgr2odPGgM=;
+	b=U4sHW3e2kcGkG/A1TxnfusoYBGd0UKHhGvaar8LigmP4DcVuly139cDg2Le8cewjWh
+	BTocT1dRy50qQL4jwNAPhYQWJFSj4uMm+6i0zTnlnQC/JfyojJwy0LxxBRg8LZCYmaYx
+	L4QxGcHDVuyoiN5KxCQBJknzOY1yRFYV9lPvCbbOk9/mxIPIFuzTXQ41hUSO+RENOOnd
+	QIGgmycUtNQyAkBCAZDAYxxUtruIPKC9qxHlj4R7nMbnfdKspBDTsHWTEWNmhN4w/lJF
+	88OIGIc5PdskJYISzJzq3i1oHVkVt7k5+NceXwGnTxSX1Pbat6gGmfTBsm4oRQe4Nn4h
+	DwMg==
+X-Gm-Message-State: APjAAAWxOJ51YMUtxriXtFs7BBnuAE9naCO4PFt9bdAcvfMdx5JzT8SX
+	kAueSTNYn55LdbBTYeJ2eaA+g/J1hm8=
+X-Google-Smtp-Source: APXvYqxbEimbW/0O/VxQ55AmwcqGtFXcj9x5TK7qBD+KsSXMupIMpIzRPb2RdQ6bpgFpYa/g+mKXrA==
+X-Received: by 2002:a63:fc01:: with SMTP id j1mr3278718pgi.220.1576290631632; 
+	Fri, 13 Dec 2019 18:30:31 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6d2c])
+	by smtp.gmail.com with ESMTPSA id
+	m45sm10849838pje.32.2019.12.13.18.30.30
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 13 Dec 2019 18:30:31 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Dec 2019 18:30:15 -0800
+Message-Id: <20191214023015.632747-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1so-nxHanPu6Nv3arQmSNoMyHwVj43+Myd6ZNeY=qVHU6A@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] xterm: Fix latent issue found with musl
+Subject: [meta-oe][PATCH] mozjs: extend --with-intl-api=build to all mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,42 +57,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Dec 2019 22:58:26 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Sat, 14 Dec 2019 02:30:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Dec 13, 2019 at 01:55:33PM -0800, Khem Raj wrote:
-> On Thu, Dec 12, 2019 at 8:37 PM Adrian Bunk <bunk@stusta.de> wrote:
-> > On Thu, Dec 12, 2019 at 12:22:52PM -0800, Khem Raj wrote:
->...
-> > > +_POSIX_SOURCE is app-defined not system
-> >
-> > This is true for musl, not for glibc.
-> >
-> > The handling of _POSIX_SOURCE and _POSIX_VERSION differs between musl
-> > and glibc due to glibc supporting older POSIX versions, and glibc also
-> > supporting developers of portable code to select some specific older
-> > POSIX version.
-> >
-> No thats not right.
-> _POSIX_SOURCE (like all FTMs) is
-> defined by the application to request a feature/standards profile
-> it's not libc telling you "this is posix" or anything like that.
+This fixes mozjs crash, in launching js in qemu during gjs build
 
-It is also defined when _POSIX_C_SOURCE is defined, or _GNU_SOURCE,
-or when the default non-strict gcc mode is used.
+Fixes
+|
+| (process:606857): Gjs-ERROR **: 02:02:06.039: Could not initialize Javascript
 
-The latter means that it is in practice nearly always defined when the 
-libc supports applications written against older versions of POSIX.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> _POSIX_VERSION tells you that
->...
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
+index 41a79daf4c..f52bcca735 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
+@@ -56,7 +56,7 @@ EXTRA_OECONF = " \
+ "
+ 
+ # Without this, JS_Init() will fail for mips64.
+-EXTRA_OECONF_append_mips64 = " --with-intl-api=build"
++EXTRA_OECONF_append_mipsarch = " --with-intl-api=build"
+ 
+ EXTRA_OECONF_append_mipsarch = " --disable-ion"
+ EXTRA_OECONF_append_riscv64 = " --disable-ion"
+-- 
+2.24.1
 
-_POSIX_VERSION being defined tells you that you have unistd.h included.
-
-With glibc the value of _POSIX_VERSION depends on what feature/standards 
-profile the application has requested.
-
-cu
-Adrian
 
