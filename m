@@ -1,50 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DF1478F72
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 01A2A78F72
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Dec 2019 02:30:31 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id x7so380355pgl.11
+	Sat, 14 Dec 2019 02:36:49 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id j5so758569qtq.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Dec 2019 18:30:32 -0800 (PST)
+	Fri, 13 Dec 2019 18:36:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=84dpquysXvAv3b1RpoGIxLAOn+gGdS1kMKgr2odPGgM=;
-	b=enC35JV08HuK227FyOynVQ6pLZHZCecTbCYf0IkPgsjTbFsX3MKoB3vk3MJ6LQaIIc
-	xoJse3bVRZR0a6gt+pgpbC8YgfHWubvudhz6gXqtC7UTAt4ltAX0gOvj9lfBZX2wZjl3
-	hsiCLFz2i7oPp7XLz1QxGpHgdnzNl+qdiWEeFb/J6rVFe676F6RWcVIisVzy0d5co1QA
-	XPA4fvvrHtHzUzpPv/ow+nERCZVfuk9RCCyHstMzgH3O+K9QCFkX5LJ/eX0Z7S7EvCID
-	B8LDci6ed6HnEJTW5ew/r/Z7YgDZdHQU+f0YFaCRbvffpoZcy3YXAL41Gk4z5IzS8h4W
-	jIXA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=OGP2VZ1aS02Ty7HeRPbMreQOD+FI8NmFkKEukyf1sQA=;
+	b=keA/pbhMoTZeE8Tk5s1006hz/CDMbCo9wWAYSf+1GfTOnydG75x4A/z78oXBJfGP77
+	WUiEyiNfqXdP23JBUgx3qz5t++kGYyJi5CCFwTlOdC8k++W665tS50IPRBu3XeVf5Si3
+	zXCrWrc9vdoGp+JgirD93lfjTWmFfN2pSzS8x8Rz6Wzb2o/0fQa4L6JIZ+Y/NC7s1k4C
+	3MD3guCdW4G23Cd78NyvK082iIFhJaqclVPTkaRhNhphoHUknbu0xLW4MJmMTS5zpucs
+	XtkgueShs9AZeLUjHy6nU6/1rAPeTqYQ1wdFeowDtaEy0etWhnYvAxtcv3T6zZenFVCs
+	GOQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=84dpquysXvAv3b1RpoGIxLAOn+gGdS1kMKgr2odPGgM=;
-	b=U4sHW3e2kcGkG/A1TxnfusoYBGd0UKHhGvaar8LigmP4DcVuly139cDg2Le8cewjWh
-	BTocT1dRy50qQL4jwNAPhYQWJFSj4uMm+6i0zTnlnQC/JfyojJwy0LxxBRg8LZCYmaYx
-	L4QxGcHDVuyoiN5KxCQBJknzOY1yRFYV9lPvCbbOk9/mxIPIFuzTXQ41hUSO+RENOOnd
-	QIGgmycUtNQyAkBCAZDAYxxUtruIPKC9qxHlj4R7nMbnfdKspBDTsHWTEWNmhN4w/lJF
-	88OIGIc5PdskJYISzJzq3i1oHVkVt7k5+NceXwGnTxSX1Pbat6gGmfTBsm4oRQe4Nn4h
-	DwMg==
-X-Gm-Message-State: APjAAAWxOJ51YMUtxriXtFs7BBnuAE9naCO4PFt9bdAcvfMdx5JzT8SX
-	kAueSTNYn55LdbBTYeJ2eaA+g/J1hm8=
-X-Google-Smtp-Source: APXvYqxbEimbW/0O/VxQ55AmwcqGtFXcj9x5TK7qBD+KsSXMupIMpIzRPb2RdQ6bpgFpYa/g+mKXrA==
-X-Received: by 2002:a63:fc01:: with SMTP id j1mr3278718pgi.220.1576290631632; 
-	Fri, 13 Dec 2019 18:30:31 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6d2c])
-	by smtp.gmail.com with ESMTPSA id
-	m45sm10849838pje.32.2019.12.13.18.30.30
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 13 Dec 2019 18:30:31 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Dec 2019 18:30:15 -0800
-Message-Id: <20191214023015.632747-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=OGP2VZ1aS02Ty7HeRPbMreQOD+FI8NmFkKEukyf1sQA=;
+	b=VfuL2M6K88zVsxLU6x7a5I51xzAPc1you7ZrdhVIkReVnRezNyVHGHWlZ7bIcA+8W5
+	hsp0S3+cuGvNCIYbtu5itjmTT/qzC+wDkFabYgIJuwM/UFac0CYcowR1Vj18XMn5tg/u
+	zgRJS5ytj8mtrPwpSCkMggLkgG1f62rRtqoCpDiHJRKhfJEGzTmi9eAxIYHveOnuijkM
+	rvoEPjEsoxcu85LZKhYmATnqbk15z5iDpb0KAlKshmWmQFrVLI5tiPh+oqmximHE5mgH
+	OH9HECab3QKwES/hxfUCjUo8D8Y/0GGiJI/tN/eowDMF2v6uE17I/CDSIpG8/Ge3LvYP
+	2D0Q==
+X-Gm-Message-State: APjAAAUmjTKhtaw6GyHqosW9c7sGs7FVBJ+I6aLeau/PIs1mq8ND6mPL
+	MM42aigAV431X3wk3CAH7DxOaTIMQod5UFHRD+w=
+X-Google-Smtp-Source: APXvYqw9OS4gY1hSWvHu336f8JF4MpurzSOzojCKdAVcJmPLUwQndQT+GopqQqIOFBJc8sCJaIcWBDxTwtywzqb2QLE=
+X-Received: by 2002:ac8:544f:: with SMTP id d15mr15329877qtq.53.1576291010669; 
+	Fri, 13 Dec 2019 18:36:50 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mozjs: extend --with-intl-api=build to all mips
+References: <20191211000845.13166-1-schnitzeltony@gmail.com>
+	<20191211000845.13166-3-schnitzeltony@gmail.com>
+In-Reply-To: <20191211000845.13166-3-schnitzeltony@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 13 Dec 2019 18:36:24 -0800
+Message-ID: <CAMKF1sqDizC0FHRpoTB-BB8gEDyqu8zTa9OX7UMqh3x74M-18Q@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 2/3] gjs: exclude mips build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,36 +55,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Dec 2019 02:30:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 14 Dec 2019 02:36:50 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This fixes mozjs crash, in launching js in qemu during gjs build
+I sent another patch to fix mozjs which inturn fixes this problem
+so we really do not need to exclude gjs for mips anymore.
 
-Fixes
-|
-| (process:606857): Gjs-ERROR **: 02:02:06.039: Could not initialize Javascript
+see
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
----
- meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+https://patchwork.openembedded.org/patch/168002/
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb b/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
-index 41a79daf4c..f52bcca735 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_60.5.2.bb
-@@ -56,7 +56,7 @@ EXTRA_OECONF = " \
- "
- 
- # Without this, JS_Init() will fail for mips64.
--EXTRA_OECONF_append_mips64 = " --with-intl-api=build"
-+EXTRA_OECONF_append_mipsarch = " --with-intl-api=build"
- 
- EXTRA_OECONF_append_mipsarch = " --disable-ion"
- EXTRA_OECONF_append_riscv64 = " --disable-ion"
--- 
-2.24.1
-
+On Tue, Dec 10, 2019 at 4:09 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb b/meta-gnome/reci=
+pes-gnome/gjs/gjs_1.58.3.bb
+> index ddd5196b2..02e3e75cc 100644
+> --- a/meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb
+> +++ b/meta-gnome/recipes-gnome/gjs/gjs_1.58.3.bb
+> @@ -19,6 +19,10 @@ SRC_URI +=3D "file://0001-Disable-tests-on-host.patch"
+>  REQUIRED_DISTRO_FEATURES =3D "gobject-introspection-data"
+>  UNKNOWN_CONFIGURE_WHITELIST_append =3D " --enable-introspection --disabl=
+e-introspection"
+>
+> +# for mips qemu crashes compiling girs
+> +# see https://errors.yoctoproject.org/Errors/Details/296905/
+> +COMPATIBLE_HOST_mipsarch =3D "null"
+> +
+>  EXTRA_OECONF =3D " \
+>      --without-dbus-tests \
+>      --disable-installed-tests \
+> --
+> 2.21.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
