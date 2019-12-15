@@ -1,49 +1,50 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0BD057DE74
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
+	[209.85.216.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 889607D71A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Dec 2019 20:43:03 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id p27so2709561pli.10
+	Sun, 15 Dec 2019 05:09:47 +0000 (UTC)
+Received: by mail-pj1-f48.google.com with SMTP id r67so1532578pjb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Dec 2019 12:43:05 -0800 (PST)
+	Sat, 14 Dec 2019 21:09:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=5FwgZbDjj/93JNojMgX4fh5ExLpdvlpj9vA8y3jCHaY=;
-	b=FwEINCKEKS37r+gukShhetRKEjNeYU25kcC7dcEbvDwsA0AAneJL0PeuswpUAde0sn
-	z8HzGPu/4+QaVotINXX4IUesi3vAlYAwC3bXX2ZJOYjG9XwQr9Oq/4of5QrmM94ZnfAd
-	QC/EvVOKOjSzRRoOqHXRMTXdSxXEhTUCeK+vqA7LvNsVbSx2NsWaxae4wFYb0oO6cwp+
-	+FO5nVw1uFs1/C7QXaczl8CuWJq4z13zSo+zsQmktnEDcOJo24282TDUHc3dMaeymWHK
-	+nU5ypYlCHGg17lZqRJe5YuD4xrFuHgwR8GWnuEA4bZJai7y4nQjPCRvRLIN/YmI/Om5
-	/Ocg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ruBLTwxuHk7kZsIF54tRBq0+TYUZdwCxdiCK6iwOeAE=;
+	b=J5tpd6sH3e3W+HyxjcNm+S0oF36yRUfK/IiunJqzI9QbrnzCXKw/3Hfp+ynEzIWZ6j
+	1QgscvQvAf1KW+4z5NhzXXRr0Iql1UUvGmG3+8QAGEDYtoryBKrMiSpsfjZWxjRGoDIw
+	Syahum9lwQlGlaec0tJfyhbMYjHlJ2v+v98c4DqaFw4zjEV9S7crnCFL+05naBQwfqDd
+	1BmxZmtebUqh006K3Ucv8gMSU9EqUKqp1neg3ao1zhSeGPkkXgbB9e8bdnMYj0gzzBZO
+	I8fJyKCHhEOrvyqMsv8RfWpb6VnGYSG4rWXIJnUaeLxSDWL9bj5TyC4139c3oRKzYwmx
+	8frg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=5FwgZbDjj/93JNojMgX4fh5ExLpdvlpj9vA8y3jCHaY=;
-	b=SKOROorIbCZ5PEz6t+tbEuXWJ3EdZh3PAKjV2xHnPvoPPt+ySzMTomGMuXQ7BmE0lk
-	keur9foft1ItmB/n/TPhS2I4ACe8f4y0RU7oj1HO91qwKRZyM0PbQ37dvMgxhvjMGEfe
-	xYE8yVvDrzs9x0/TE6K2y1U3ZaCH2PwdMFC9PpEehvHxLji5jFVFhsaTFqVFvL+G9TOp
-	4wtI6MH9YK7/6ezRoicDs2gWske1QON/NLoAZwNHWkY7UyyJzZ6VssUVr/gR3bqKjaQV
-	lLe/NPjfToOL5GKeudQOLd+xfQOG7xiY0VXylAnzVmvx8IyTkKuWZpMPlxlUDWGT7jel
-	EFSQ==
-X-Gm-Message-State: APjAAAXzHQ3prWdxZ9tBJMmpqdwV2K5RThcjzJqYsa6nxybXS0xCNyb6
-	PRP2NVdy7b0CWP8uFswy8iNGep58FqQ=
-X-Google-Smtp-Source: APXvYqx5dSuVVhZDLHCvThx8U3lq8bfSNvc7e00MOBz8SThGfJYtJ4q70sXrV2JwSBB/MrM+zPO0nw==
-X-Received: by 2002:a17:902:bd46:: with SMTP id
-	b6mr2604732plx.239.1576356184747; 
-	Sat, 14 Dec 2019 12:43:04 -0800 (PST)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
-	([2601:202:4180:a5c0:5d00:41dd:14a4:c696])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ruBLTwxuHk7kZsIF54tRBq0+TYUZdwCxdiCK6iwOeAE=;
+	b=VUehaObZ5NabLlGTBSou+Ql+ymbobxDA6TaOgCA4hbEnhLFOef5i3x9U3YH5TNo2oA
+	1RamyHFRI/DvMLsl6xldeB+A/rLkhqfWJ0yCeaK+Orehmr55KkPbLZhQK7gHyMeLMbNI
+	uVu/M+UP1aoZVwwgOk0BamNemPF/vBDpkilTTt6qTx4bAt+CtOC/RlhL0EUj+SfFdgLQ
+	rJM3/FkE217bhYw1qG0MUuvUcM91XETyPmnZeoqHwgl/D6YIcGfYglKnpRr2b8ywKP8x
+	tpjakw6W7QXl/VVabgI7GPil25mzQyQC/8xlAjOHi2qfSgh2PAqcID9eU78/j9rpspgm
+	15Rw==
+X-Gm-Message-State: APjAAAWEdcgwtp7nVurCtko6kxOn4IwGILCouRr1xYLT20E1ym3H9vpT
+	gwZiDbY/YFmMOBerdtq/m7HfLnDa6Q4=
+X-Google-Smtp-Source: APXvYqx/qeN/Y87vAFknPp09m4ckCYR3JAA9PDeuiXhcqX5lJ9uXH0fOYAAcWybUB3BH1HMYhdvscw==
+X-Received: by 2002:a17:902:442:: with SMTP id 60mr9334826ple.0.1576386587856; 
+	Sat, 14 Dec 2019 21:09:47 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6563])
 	by smtp.gmail.com with ESMTPSA id
-	z30sm16814688pff.131.2019.12.14.12.43.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 14 Dec 2019 12:43:03 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
+	c8sm16835575pfj.106.2019.12.14.21.09.47
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 14 Dec 2019 21:09:47 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 14 Dec 2019 12:43:02 -0800
-Message-Id: <1576356182-16473-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [zeus][PATCH] gtkwave: add the libtirpc dependence and config
+Date: Sat, 14 Dec 2019 21:09:35 -0800
+Message-Id: <20191215050936.25027-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.1
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 1/2] rdma-core: Replace pthread_yield with sched_yield
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,44 +57,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Dec 2019 20:43:04 -0000
+X-List-Received-Date: Sun, 15 Dec 2019 05:09:47 -0000
+Content-Transfer-Encoding: 8bit
 
-From: Zhixiong Chi <zhixiong.chi@windriver.com>
+Fixes
 
-Since the oe-core commit "libtirpc: create the symbol link for rpc
-header files" create the symbol link of header files, so during
-checking it will find the related header files, then it will use
-the old PRC_LDADD value "-lrpc" other than "-ltirpc".
-So we add the option "--with-tirpc" to the configure command and
-add the dependence.
+/usr/src/debug/rdma-core/26.1-r0/git/librdmacm/rsocket.c:3041: undefined reference to `pthread_yield'
+collect2: error: ld returned 1 exit status
 
-Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 26fdb6f16869744b9e9ce717dffd2f89170d51e9)
-
-Fixes build issue:
-
-TOPDIR/tmp/work/core2-64-poky-linux/gtkwave/3.3.98-r0/recipe-sysroot-native/usr/bin/x86_64-poky-linux/../../libexec/x86_64-poky-linux/gcc/x86_64-poky-linux/9.2.0/ld: vzt_write.o: in function `vzt_wr_emit_value_double':
-/usr/src/debug/gtkwave/3.3.98-r0/build/src/helpers/../../../gtkwave-3.3.98/src/helpers/vzt_write.c:1637: undefined reference to `xdrmem_create'
-
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Cc: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ ...sched_yield-instead-of-pthread_yield.patch | 30 +++++++++++++++++++
+ .../rdma-core/rdma-core_26.1.bb               |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-networking/recipes-support/rdma-core/rdma-core/0001-librdmacm-Use-sched_yield-instead-of-pthread_yield.patch
 
-diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-index 310c410..68b5ad8 100644
---- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-+++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.98.bb
-@@ -18,6 +18,6 @@ RDEPENDS_${PN} = "tk-lib"
- inherit distro_features_check
- ANY_OF_DISTRO_FEATURES = "${GTK2DISTROFEATURES}"
- 
--EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS}"
-+EXTRA_OECONF = "--with-tcl=${STAGING_BINDIR_CROSS} --with-tk=${STAGING_BINDIR_CROSS} --with-tirpc"
- 
- FILES_${PN} = "${bindir} ${datadir}"
+diff --git a/meta-networking/recipes-support/rdma-core/rdma-core/0001-librdmacm-Use-sched_yield-instead-of-pthread_yield.patch b/meta-networking/recipes-support/rdma-core/rdma-core/0001-librdmacm-Use-sched_yield-instead-of-pthread_yield.patch
+new file mode 100644
+index 0000000000..80abd33139
+--- /dev/null
++++ b/meta-networking/recipes-support/rdma-core/rdma-core/0001-librdmacm-Use-sched_yield-instead-of-pthread_yield.patch
+@@ -0,0 +1,30 @@
++From 6ac9562d756d42592994aeaac7a5e7b2bbce5cab Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 14 Dec 2019 14:07:57 -0800
++Subject: [PATCH] librdmacm: Use sched_yield instead of pthread_yield
++
++glibc redirects pthread_yield to sched_yield additionally we get it
++working with musl on linux
++
++Upstream-Status: Submitted [https://github.com/linux-rdma/rdma-core/pull/635]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ librdmacm/rsocket.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/librdmacm/rsocket.c b/librdmacm/rsocket.c
++index 89ae2139..7fc5b266 100644
++--- a/librdmacm/rsocket.c
+++++ b/librdmacm/rsocket.c
++@@ -3038,7 +3038,7 @@ static int rs_poll_enter(void)
++ 	pthread_mutex_lock(&mut);
++ 	if (suspendpoll) {
++ 		pthread_mutex_unlock(&mut);
++-		pthread_yield();
+++		sched_yield();
++ 		return -EBUSY;
++ 	}
++ 
++-- 
++2.24.1
++
+diff --git a/meta-networking/recipes-support/rdma-core/rdma-core_26.1.bb b/meta-networking/recipes-support/rdma-core/rdma-core_26.1.bb
+index 1afe496c5a..87710bcf14 100644
+--- a/meta-networking/recipes-support/rdma-core/rdma-core_26.1.bb
++++ b/meta-networking/recipes-support/rdma-core/rdma-core_26.1.bb
+@@ -8,6 +8,7 @@ RDEPENDS_${PN} = "bash perl"
+ BRANCH = "stable-v${@d.getVar('PV').split('.')[0]}"
+ SRC_URI = "git://github.com/linux-rdma/rdma-core.git;branch=${BRANCH} \
+            file://0001-Remove-man-files-which-cant-be-built.patch \
++           file://0001-librdmacm-Use-sched_yield-instead-of-pthread_yield.patch \
+            "
+ SRCREV = "9f820de9ca7d6e315be92bc830d354afad3e7960"
+ S = "${WORKDIR}/git"
 -- 
-2.7.4
+2.24.1
 
 
