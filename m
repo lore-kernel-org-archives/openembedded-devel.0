@@ -1,50 +1,31 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-il1-f181.google.com (mail-il1-f181.google.com
-	[209.85.166.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B80A7E553
+Return-Path: <leon.anavi@konsulko.com>
+Received: from anavi.org (anavi.technology [91.215.217.29])
+	by mail.openembedded.org (Postfix) with ESMTP id 287D06C108
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Dec 2019 21:05:07 +0000 (UTC)
-Received: by mail-il1-f181.google.com with SMTP id g12so3812551ild.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Dec 2019 13:05:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=5iZJ9upEMGxWJiL4Ba3UhlFaisISIRieWoBkdR7TGy0=;
-	b=r5W++q2sNQKMowDboul+NYMTNRL/h/Tz++wH8yL54EuIqFSt/KKlHz9CjUke1w4cAs
-	B++sLX1F2W/hfyFxfNHmdQQPPJyn56ApuTwoD/KF78U3HG7sup6ovHyUfx4lPf1hrceP
-	Z0UXAzV5rF9kgM731rdk9boUb84faML+CU5kNX+hLOqojboHNoxdPq2dHdEnCD2+/xjP
-	b74uaFVbopn3FesNyfCXVFqM8qH6d7nUKkLDYFI1EU36NiXPJoY5oGxQ95613SeGHEJW
-	Jaix/5MniUMTj2jy/tsy6NqI6bq59RhpxTINzo7/smdtMnnwgYc5Rz4BlZRsMl3wZTz+
-	oOug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=5iZJ9upEMGxWJiL4Ba3UhlFaisISIRieWoBkdR7TGy0=;
-	b=IkfqkeVh8cBunzawsV9LZym65RwSmt01Rla5RgRHRsCrakQnbf4gKhvIYIAQz9Py8k
-	7Of6UKRHfvYbFpiiapDFDuQak6r0qSbkwCHIEduywSN+c340cQs3iAeZMlGDVGnLF3fK
-	Y6Fs52yRiBfIgLWHXcsutXJjnCNeYmCQlmxB5sTXacmqOyozyJlmyRNFmwt2ucmSp9ut
-	10Pf/WBMuRayLR1Duq95jzUBvSZOvHcqcd/0S57qyrj7iaY9kR5ktJbsNExBM9gDYM6W
-	uYYw16Ui+XjQZmc3wJZYTnt4hNNqNegAWS5GIOM2CraAQeIbZi8IzBzPmaXf2aZxOWOY
-	RvlQ==
-X-Gm-Message-State: APjAAAXpn/+QaTlu0FbXcxiK+HuFU2SowTxWdVPpQTh5Y20nwVyaSjr9
-	OWcRxNL0StmSdwgEEylMCozM43of7BEatiRGA5E=
-X-Google-Smtp-Source: APXvYqxsrL88eaZQd4BI5vl4I9pYHkzLnjSZgMYgfJexjIFBQs+nk+PjIdLDSWduNCgoGca6IiFEHvFGh8/T/XRvqGQ=
-X-Received: by 2002:a05:6e02:8a1:: with SMTP id
-	a1mr981780ilt.108.1576443908409; 
-	Sun, 15 Dec 2019 13:05:08 -0800 (PST)
-MIME-Version: 1.0
-References: <20191206000912.19841-1-schnitzeltony@gmail.com>
-	<CAMKF1sq=oFvgEtCbSOtpgLsZZow669uqadeXmf4x3ydrPBVODg@mail.gmail.com>
-	<CALbNGRQwTv_GmgwjB_J7vrfQPgTsU+aGE=E8KrzfDYs9-2T-vw@mail.gmail.com>
-	<CAMKF1soZmy20ojdv4_zmaThH4dsW8X5qin_A=XHH4VjVoazbJA@mail.gmail.com>
-In-Reply-To: <CAMKF1soZmy20ojdv4_zmaThH4dsW8X5qin_A=XHH4VjVoazbJA@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sun, 15 Dec 2019 22:04:57 +0100
-Message-ID: <CALbNGRRKQrcF5FdtLDc578Ztk+yA41RA9Lnqc6790WJZJviX9Q@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/21] Gnome cleanups & desktop patches
+	Sun, 15 Dec 2019 21:32:41 +0000 (UTC)
+Received: from [78.130.245.67] (port=57536 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1igbVI-0006cg-Cl; Sun, 15 Dec 2019 23:32:41 +0200
+From: Leon Anavi <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 15 Dec 2019 23:32:28 +0200
+Message-Id: <1576445548-5596-1-git-send-email-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.7.4
+X-OutGoing-Spam-Status: No, score=-0.5
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: [meta-networking][PATCH] mosquitto: update to 1.6.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,26 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Dec 2019 21:05:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 15 Dec 2019 21:32:42 -0000
 
->>
->> Since they include other images from within meta-mortsgna and
->> lightweight (=missing important) is not target of mortsgna, transfer
->> is not straight forward . See if I can put something together. Maybe
->> something like core-image-minimal-xfce + some wayland bits would do.
->
->
-> Right that would be cool
->>
-Played around with this but don't get it to start gdm.
+Bugfix release. For details, see:
 
-* Even if I would manage to start gdm I cannot not guarantee that it
-works for others because - as said - I use meta-mortsgna which changes
-defaults.
-* I would never use such image
+  https://mosquitto.org/blog/2019/11/version-1-6-8-released/
 
-So if this is something wanted I ask others to add it - sorry
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+---
+ .../mosquitto/{mosquitto_1.6.7.bb => mosquitto_1.6.8.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_1.6.7.bb => mosquitto_1.6.8.bb} (96%)
 
-Andreas
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.7.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
+similarity index 96%
+rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.7.bb
+rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
+index 340f643..ea533d8 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.7.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
+@@ -18,8 +18,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://mosquitto.init \
+ "
+ 
+-SRC_URI[md5sum] = "ec9074c4f337f64eaa9a4320c6dab020"
+-SRC_URI[sha256sum] = "bcd31a8fbbd053fee328986fadd8666d3058357ded56b9782f7d4f19931d178e"
++SRC_URI[md5sum] = "24a0e567c845b3e41b75e237d200edf8"
++SRC_URI[sha256sum] = "7df23c81ca37f0e070574fe74414403cf25183016433d07add6134366fb45df6"
+ 
+ inherit systemd update-rc.d useradd
+ 
+-- 
+2.7.4
+
 
