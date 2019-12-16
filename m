@@ -1,53 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
-	[209.85.216.41])
-	by mail.openembedded.org (Postfix) with ESMTP id E51D77F817
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id E8EAB7F36E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Dec 2019 03:42:13 +0000 (UTC)
-Received: by mail-pj1-f41.google.com with SMTP id r11so2339453pjp.12
+	Mon, 16 Dec 2019 05:04:16 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id k40so1050841qtk.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Dec 2019 19:42:15 -0800 (PST)
+	Sun, 15 Dec 2019 21:04:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=Zd/eDzVCau/hG0MdVrW9gA1WO9Os06OpI6jvBnwgm6I=;
-	b=fGyi+eah+BgvwLGChDsUPQ9uw86skDrdSxzo9BeebI6s/Xj1WVlPBQ/G1V55/FNhfX
-	YVEWjReN/WyQpwQadKgqW6JE6I9yQMJecP5dzpOnnlBkHZSZKlJVTVSkPt+J+iZ/SrND
-	AsIUgL97dRxOtlVApXekRti6HPH0lXexrmjw+D/8zB9IOf7LwordZcH4OPmG4NsdNOzU
-	DOjFLP+X+bLjrvb+hVcYXJJwU8EGEfPK3s0MxfIby56WhomV/bFiMMX224HBDAjQHk8C
-	exz/cLY6AE2RKCROdibFmygEj+m7qCGPwwNA9au/q3qmkyayoMsinFRE1yeTnoR6YzI1
-	tztQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=fQBkExi6eJwVGjwtvcxwO3GSvcTk6wiiTnAruQiFa1E=;
+	b=TbjgWPpzIpbgnzCKkScQyI4EGmaigsR+w8NYyzGypmUyoxDMmmSQyzsV4SkjHIX+d0
+	UL4a9r9bwOxy+WBKhLQ2O2khMzs8RbY4EaNZ/LnRAGpsmckYiMvNp30Ds+h0pa18SLZ6
+	HYzDiEWzm2QnUUgjXSsupDCDsol+5jpf94yH/YR0ZCn7Tmzmm5M8OmLiD0njHnmOvuLI
+	mhQxzfJhJwHGL9590dYAvaRg1w7F5Ah9r7PMPF6HnGRRy0vL0ZvUskyUfQYdMOyHaygj
+	Ye0mHVyDGRLM+m0QkOsc03ZWsoT+2nkMJjg2ki5RBfaFHHXbI45lLU/Tjb0V+bCVPF3u
+	1IeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=Zd/eDzVCau/hG0MdVrW9gA1WO9Os06OpI6jvBnwgm6I=;
-	b=B2rD4VfcEA8fZ5A2NuTzBnudOBf8i1ZZsOP/TT6aVn+FfAPhjAYuzf2abC93xJPUro
-	XA9VqMoiL1l97p2RrNHp2w7mLbOgNlY3zTNiKoTg/annUjLcXS2SDd1qW9PYjUuNBWCg
-	EsXvnLKPwkyRsHKgDjvXESfabMVuUQD9xL16WG4iSY4kd2+fqlEhPFRGJZA2FOXHX1wH
-	E+4sVksGBHLXuoPVrVAXNUJKnRx9Ax+wIRCENPwbQbBXTrG4QRhzwD1Wfz4p1N+160/o
-	gd6owsadMz5PaXSK+JpbF0MTH3XIiGQydowIikdFv6gcDM7KU1jqoWtfsweZlMf0xXhS
-	VFvQ==
-X-Gm-Message-State: APjAAAVtslE/W01S/rE01bdjhemcoccQuHjciJcte5XjXcKC/tTKnAoj
-	Kc3Bt0YwdlmCcxGCz9zKhASD11XgTMU=
-X-Google-Smtp-Source: APXvYqz0b98bq6Ue0S9r0WZGYooPN8iNyG0NUjRAWs6NLuz+xBCNgHsfE+cgttNzE1xOo5Y3/vMk8w==
-X-Received: by 2002:a17:90a:230b:: with SMTP id
-	f11mr15265503pje.124.1576467734512; 
-	Sun, 15 Dec 2019 19:42:14 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6563])
-	by smtp.gmail.com with ESMTPSA id
-	a22sm21336106pfk.108.2019.12.15.19.42.12
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 15 Dec 2019 19:42:13 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Dec 2019 19:41:55 -0800
-Message-Id: <20191216034155.2675900-5-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20191216034155.2675900-1-raj.khem@gmail.com>
-References: <20191216034155.2675900-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=fQBkExi6eJwVGjwtvcxwO3GSvcTk6wiiTnAruQiFa1E=;
+	b=fds8PPBaY/RcEr+KMfIcVo6sDUNyWvyUq+JiClQElulU8RwuMXrm/oxQC54epSJ5Sz
+	ehUFzyj2MUmVp7Hw7CUpqiGrs79jtDT0xkBavpTsiheQK3RJ2CC+9xhpFlsBmIqJi8hY
+	E8kfL01qnXMZhMU0vVQ8c7yJ1/mzvshE2tuM4J86qe//PT5XJxwlUNi2+bEWh1EsnMNp
+	VczncKSwcYvJclUScoo6xwOQ06GjUp9tg4vgeXmMlXL4qHDmHynxLAB8uRFQkFfnYdRW
+	whmK4frCd3edkyz+rZm32KpDGbPyWNbYIZ0hoRnb4kQw/cyianDb560cs9ryorHdhlVP
+	FwuA==
+X-Gm-Message-State: APjAAAW83sppRZdYueaSpImJzAiRJiVSxROGCyKcyCetm/cLc3XjH7hm
+	8PXiJPRfhAVaP0pxHn3g7+22lSaWRsn9YG2KgPg=
+X-Google-Smtp-Source: APXvYqxQQoJcuxTMcsHWua5ZBQutBdMRZLQdXQ8pBrttpmxbUf52uZs7Xr05mn7tckqaSUOujGGcqumJHgSWZF+hkto=
+X-Received: by 2002:ac8:6ca:: with SMTP id j10mr19614046qth.378.1576472657557; 
+	Sun, 15 Dec 2019 21:04:17 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 5/5] libpfm4: Moved here from oe-core
+References: <20191216012047.17312-1-schnitzeltony@gmail.com>
+	<20191216012047.17312-5-schnitzeltony@gmail.com>
+In-Reply-To: <20191216012047.17312-5-schnitzeltony@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 15 Dec 2019 21:03:51 -0800
+Message-ID: <CAMKF1spwVcF1tiY7bf3FUGSdsLb7nLBtfSzLYxsARq1kDy7veQ@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 5/6] libhandy: initial add 0.0.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,150 +55,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Dec 2019 03:42:14 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 Dec 2019 05:04:17 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Upgrade to 4.10.1 while here
-oprofile/ppc64 still depends on it
+On Sun, Dec 15, 2019 at 5:22 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+>
+> libhandy is required by upcoming gnome-tweaks
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  .../recipes-support/libhandy/libhandy_git.bb  | 21 +++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+>  create mode 100644 meta-gnome/recipes-support/libhandy/libhandy_git.bb
+>
+> diff --git a/meta-gnome/recipes-support/libhandy/libhandy_git.bb b/meta-g=
+nome/recipes-support/libhandy/libhandy_git.bb
+> new file mode 100644
+> index 000000000..0fbbfdc5d
+> --- /dev/null
+> +++ b/meta-gnome/recipes-support/libhandy/libhandy_git.bb
+> @@ -0,0 +1,21 @@
+> +SUMMARY =3D "A library full of GTK+ widgets for mobile phones"
+> +LICENSE =3D "LGPLv2.1"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D4fbd65380cdd255951079008b3645=
+16c"
+> +
+> +SRC_URI =3D "git://source.puri.sm/Librem5/${BPN}.git"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...Include-poll.h-instead-of-sys-poll.h.patch | 86 +++++++++++++++++++
- .../recipes-kernel/libpfm/libpfm4_4.10.1.bb   | 31 +++++++
- 2 files changed, 117 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/libpfm/libpfm4/0001-Include-poll.h-instead-of-sys-poll.h.patch
- create mode 100644 meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb
+I am seeing this
 
-diff --git a/meta-oe/recipes-kernel/libpfm/libpfm4/0001-Include-poll.h-instead-of-sys-poll.h.patch b/meta-oe/recipes-kernel/libpfm/libpfm4/0001-Include-poll.h-instead-of-sys-poll.h.patch
-new file mode 100644
-index 0000000000..fe13df2b53
---- /dev/null
-+++ b/meta-oe/recipes-kernel/libpfm/libpfm4/0001-Include-poll.h-instead-of-sys-poll.h.patch
-@@ -0,0 +1,86 @@
-+From f62b629c1e1e968f90aafbc0cf9116b49eea9d8e Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 15 Dec 2019 16:24:37 -0800
-+Subject: [PATCH] Include poll.h instead of sys/poll.h
-+
-+Fixes
-+error: redirecting incorrect #include <sys/poll.h> to <poll.h> [-Werror,-W#warnings]
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ perf_examples/branch_smpl.c         | 2 +-
-+ perf_examples/syst_smpl.c           | 2 +-
-+ perf_examples/task_attach_timeout.c | 2 +-
-+ perf_examples/task_smpl.c           | 2 +-
-+ perf_examples/x86/bts_smpl.c        | 2 +-
-+ 5 files changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/perf_examples/branch_smpl.c b/perf_examples/branch_smpl.c
-+index 87cd303..4d16b04 100644
-+--- a/perf_examples/branch_smpl.c
-++++ b/perf_examples/branch_smpl.c
-+@@ -32,7 +32,7 @@
-+ #include <getopt.h>
-+ #include <setjmp.h>
-+ #include <sys/wait.h>
-+-#include <sys/poll.h>
-++#include <poll.h>
-+ #include <sys/mman.h>
-+ #include <locale.h>
-+ #include <sys/ioctl.h>
-+diff --git a/perf_examples/syst_smpl.c b/perf_examples/syst_smpl.c
-+index 04580fd..d059c08 100755
-+--- a/perf_examples/syst_smpl.c
-++++ b/perf_examples/syst_smpl.c
-+@@ -33,7 +33,7 @@
-+ #include <setjmp.h>
-+ #include <sys/ptrace.h>
-+ #include <sys/wait.h>
-+-#include <sys/poll.h>
-++#include <poll.h>
-+ #include <sys/ioctl.h>
-+ #include <sys/mman.h>
-+ #include <fcntl.h>
-+diff --git a/perf_examples/task_attach_timeout.c b/perf_examples/task_attach_timeout.c
-+index 7fc5524..a0367c8 100644
-+--- a/perf_examples/task_attach_timeout.c
-++++ b/perf_examples/task_attach_timeout.c
-+@@ -36,7 +36,7 @@
-+ #include <stdarg.h>
-+ #include <sys/wait.h>
-+ #include <err.h>
-+-#include <sys/poll.h>
-++#include <poll.h>
-+ 
-+ #include "perf_util.h"
-+ 
-+diff --git a/perf_examples/task_smpl.c b/perf_examples/task_smpl.c
-+index dcb7481..95c432c 100644
-+--- a/perf_examples/task_smpl.c
-++++ b/perf_examples/task_smpl.c
-+@@ -37,7 +37,7 @@
-+ #include <getopt.h>
-+ #include <setjmp.h>
-+ #include <sys/wait.h>
-+-#include <sys/poll.h>
-++#include <poll.h>
-+ #include <sys/mman.h>
-+ #include <locale.h>
-+ #include <sys/ioctl.h>
-+diff --git a/perf_examples/x86/bts_smpl.c b/perf_examples/x86/bts_smpl.c
-+index 6498776..d66d5e6 100644
-+--- a/perf_examples/x86/bts_smpl.c
-++++ b/perf_examples/x86/bts_smpl.c
-+@@ -41,7 +41,7 @@
-+ #include <sys/time.h>
-+ #include <sys/ptrace.h>
-+ #include <sys/wait.h>
-+-#include <sys/poll.h>
-++#include <poll.h>
-+ #include <sys/mman.h>
-+ #include <sys/resource.h>
-+ #include <err.h>
-+-- 
-+2.24.1
-+
-diff --git a/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb b/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb
-new file mode 100644
-index 0000000000..9b43b4a975
---- /dev/null
-+++ b/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "Monitoring tools exploiting the performance monitoring events"
-+DESCRIPTION = "This package provides a library, called libpfm4 which is used to develop \
-+monitoring tools exploiting the performance monitoring events such as those \
-+provided by the Performance Monitoring Unit (PMU) of modern processors."
-+HOMEPAGE = "http://perfmon2.sourceforge.net/"
-+BUGTRACKER = "http://sourceforge.net/tracker/?group_id=144822&atid=759953&source=navbar"
-+
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=0de488f3bd4424e308e2e399cb99c788"
-+
-+SECTION = "devel"
-+
-+COMPATIBLE_HOST = "powerpc64"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/perfmon2/${BPN}/libpfm-${PV}.tar.gz \
-+           file://0001-Include-poll.h-instead-of-sys-poll.h.patch \
-+          "
-+SRC_URI[md5sum] = "d8f66cb9bfa7e1434434e0de6409db5b"
-+SRC_URI[sha256sum] = "c61c575378b5c17ccfc5806761e4038828610de76e2e34fac9f7fa73ba844b49"
-+
-+UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/perfmon2/files/libpfm4/"
-+
-+EXTRA_OEMAKE = "DESTDIR=\"${D}\" PREFIX=\"${prefix}\" LIBDIR=\"${libdir}\" LDCONFIG=\"true\""
-+EXTRA_OEMAKE_append_powerpc = " ARCH=\"powerpc\""
-+EXTRA_OEMAKE_append_powerpc64 = " ARCH=\"powerpc\" BITMODE=\"64\""
-+
-+S = "${WORKDIR}/libpfm-${PV}"
-+
-+do_install () {
-+	oe_runmake install
-+}
--- 
-2.24.1
+WARNING: libhandy-0.0.12-r0 do_fetch: Failed to fetch URL
+git://source.puri.sm/Librem5/libhandy.git, attempting MIRRORS if
+available
 
+I think we need to use https protocol in fetcher.
+
+SRC_URI =3D "git://source.puri.sm/Librem5/${BPN}.git;protocol=3Dhttps"
+
+might work.
+
+> +SRCREV =3D "ef7c4bf75ae239495141ada83d2fbaf034315563"
+> +S =3D "${WORKDIR}/git"
+> +PV =3D "0.0.12"
+> +
+> +GIR_MESON_ENABLE_FLAG =3D 'enabled'
+> +GIR_MESON_DISABLE_FLAG =3D 'disabled'
+> +GTKDOC_MESON_OPTION =3D 'gtk_doc'
+> +
+> +inherit meson gobject-introspection vala gettext gtk-doc features_check
+> +
+> +ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
+> +
+> +DEPENDS +=3D "gtk+3"
+> +
+> +PACKAGES =3D+ "${PN}-examples"
+> +FILES_${PN}-examples =3D "${bindir}"
+> --
+> 2.21.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
