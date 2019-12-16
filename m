@@ -1,52 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
-	[209.85.222.177])
-	by mail.openembedded.org (Postfix) with ESMTP id B47E97E98A
+Received: from mail-qt1-f175.google.com (mail-qt1-f175.google.com
+	[209.85.160.175])
+	by mail.openembedded.org (Postfix) with ESMTP id D97837F7D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Dec 2019 02:27:41 +0000 (UTC)
-Received: by mail-qk1-f177.google.com with SMTP id x1so4033445qkl.12
+	Mon, 16 Dec 2019 02:38:53 +0000 (UTC)
+Received: by mail-qt1-f175.google.com with SMTP id w47so4620208qtk.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Dec 2019 18:27:43 -0800 (PST)
+	Sun, 15 Dec 2019 18:38:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=QKKWFlF5ZrFO7uHqpOUQu69FCkquIxVwZhreFfkoIk8=;
-	b=C6DrQpS5YrYyCwH1Wb6mdo2Ypk4V6I085Bn0DZlKeJJvpMaknhHpZHzeoUEnKubAN/
-	S0NyW2nme683SrEpWOZJkOQqGkeqEj1m5rxHkKJ2TktSe4T4WUBcNYu1g3/gyW3P4VPl
-	uwBBgohfD+rpKyMaxM6MK9QJuO+h9C2gasPHjMkQoIuxu8I5xWsdGdOBf0D74F5iDzTJ
-	8kIb6e1RrPVZ5wmgL8pp0A3KmHR/qs6o7w82lNMkuaGReUKB2rLNpC0GKVhgJ+FI+eyU
-	dOSpZCHcdpAQk15FU4gciDSGygMpdUGlpesJ7UL2O1Fk+QEC07W09Qp/jI61DdndRqSG
-	H3hw==
+	:cc; bh=dQWm0KGZ1JrbIVoZdhgbVDxr5O9kXy5L0lA2nOU20GA=;
+	b=jml+SPIm2uehoxP2jF2P2f9lShofQKjHeHSWSzFQfbv+gSwdhym5D9SkepZLQq4cL1
+	X79ZCQBFZK43+YFalZj77lqlIlclZ6AoAWN7r9S6iIDzrGLxNoJRacFigxR0qkr24GjO
+	lkHRiFlLM1dFi2XtL98zHnlmWnfxoeXQUFZXW50A1jDVhKh03qhcHPbjxcqW6HFxbKUx
+	ONwIHaauZxj2ySmuhlh55Cgso71EYRpsUSNauN+FGap02eaFU2gATx82cN2VrYwaAbqK
+	LC9noSbpuGaUqS6FoFwP6cOBotykBfV2AwK7AwTgBekLRkeU1Ukx/500cxcwFcMLMAY0
+	ukWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=QKKWFlF5ZrFO7uHqpOUQu69FCkquIxVwZhreFfkoIk8=;
-	b=hgK1i4NwtmgKZHOVrw14HY4cfPopiVcahbO7t2g+bsED+yMIR8Ti9bgcXUOhvQGgNM
-	0wUjuI+7vVAG0B+DvWRuvw8ts+TMQED2CwE1guwiTczFDZfQ3ARW0YERYxv4bEHuZ8yb
-	SN7KB4YAzRSmzblxIn/t/6lLe7rrtIUKUpVr1HLrFt0CjtXC8M2z8vP9AXh+uh4QP5i1
-	KRYgnFcq3hXGXMMlz2ag1owx6rDnlxHWVWmyTM6woMetncIPFa71hwpKopXyVqUG40mf
-	1DrbRKxrUKLQfLMGS9LleSQ0D+kfrjAyjmZJPGgKtxVUDRYxuy4S4q+KtzNj0weHR2DS
-	ERog==
-X-Gm-Message-State: APjAAAWebHFgYW2UlPW4latcLUEoGUH2T8yFk0Q2NbcRWQyNgLypdtlK
-	BwCIfgYdQ1GxnzWLFBCsrUjakLPiDdyaxNa/tf8=
-X-Google-Smtp-Source: APXvYqzKJ9bQNORH8aSI55DpFKHvHSlfUS3Gn4zlhj+yg28J6ID51Siz3ZpPbvGqBsqf7vHh2oPtDPxijn1twS5w7Pk=
-X-Received: by 2002:a37:a3c7:: with SMTP id
-	m190mr12822708qke.212.1576463262367; 
-	Sun, 15 Dec 2019 18:27:42 -0800 (PST)
+	bh=dQWm0KGZ1JrbIVoZdhgbVDxr5O9kXy5L0lA2nOU20GA=;
+	b=DjMubcPZgAKTH4w4vqsTr7/kU7MtkWgN43djHDmEtSgtBkePU6gID++QmxMPDCGySk
+	3y1ZmD4HLPnW2mbAy1E6ybXCDYuHCrZGeZ3gNrrA4i5kw/a9j2+s0CYNXhmXnT1gxTAW
+	TuHxmXo0OafU2aeddRvgq0LZnsPVA1Ng2p7gVFbMRvG/GHrdyvkKSABqtqRJu8PXDyEp
+	cNpN7ANiBvWz0B4KDPGnfVyDeQDEUlA2Gn/6LkQvAjkHMFRUcNA14tt8zdCMtXuGNIgf
+	bgKa9fPopRIJLB6fxV8YPf+jq5/iKfkAdNdppwzodQSvuUhqNZd9JJflnGGZIayEEIlY
+	fU9g==
+X-Gm-Message-State: APjAAAVRGWWi6JjV6uyhH+c3/qEf20wjskZzGhyHSd/mUnKR9o/UG9Yk
+	Tlvj2p20t500s8k6g9LNDKRK8+J9+txpTzrNxeo=
+X-Google-Smtp-Source: APXvYqxLP/gBgbmw9Rl0nuqemxQ6EJrLtAYuw8D20OWH82ehf6Tj3c27SL3IwmE6hxCIh+eiNU/PqXoLEnRRJT01mVk=
+X-Received: by 2002:ac8:6ca:: with SMTP id j10mr19338571qth.378.1576463934569; 
+	Sun, 15 Dec 2019 18:38:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20191206000912.19841-1-schnitzeltony@gmail.com>
-	<CAMKF1sq=oFvgEtCbSOtpgLsZZow669uqadeXmf4x3ydrPBVODg@mail.gmail.com>
-	<CALbNGRQwTv_GmgwjB_J7vrfQPgTsU+aGE=E8KrzfDYs9-2T-vw@mail.gmail.com>
-	<CAMKF1soZmy20ojdv4_zmaThH4dsW8X5qin_A=XHH4VjVoazbJA@mail.gmail.com>
-	<CALbNGRRKQrcF5FdtLDc578Ztk+yA41RA9Lnqc6790WJZJviX9Q@mail.gmail.com>
-In-Reply-To: <CALbNGRRKQrcF5FdtLDc578Ztk+yA41RA9Lnqc6790WJZJviX9Q@mail.gmail.com>
+References: <20191216012047.17312-1-schnitzeltony@gmail.com>
+In-Reply-To: <20191216012047.17312-1-schnitzeltony@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 15 Dec 2019 18:27:31 -0800
-Message-ID: <CAMKF1sq0HrBUHLjexjbj93JHysjwD6o7TZiLCFK8S2KvUr6Jqg@mail.gmail.com>
+Date: Sun, 15 Dec 2019 18:38:44 -0800
+Message-ID: <CAMKF1srCPLK1a-230PZ-m_pQO0rOa8GiXNfVwihGJ8yAtU1AQA@mail.gmail.com>
 To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/21] Gnome cleanups & desktop patches
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 1/6] libxfce4ui: give up glade3 (=glade for gtk2) support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,40 +54,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Dec 2019 02:27:41 -0000
+X-List-Received-Date: Mon, 16 Dec 2019 02:38:54 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Dec 15, 2019 at 1:05 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+On Sun, Dec 15, 2019 at 5:21 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
 m>
 wrote:
 
-> >>
-> >> Since they include other images from within meta-mortsgna and
-> >> lightweight (=3Dmissing important) is not target of mortsgna, transfer
-> >> is not straight forward . See if I can put something together. Maybe
-> >> something like core-image-minimal-xfce + some wayland bits would do.
-> >
-> >
-> > Right that would be cool
-> >>
-> Played around with this but don't get it to start gdm.
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> ---
+>  meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb | 3 ---
+>  1 file changed, 3 deletions(-)
 >
-> * Even if I would manage to start gdm I cannot not guarantee that it
-> works for others because - as said - I use meta-mortsgna which changes
-> defaults.
-> * I would never use such image
+> diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
+> b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
+> index 053eb201b..348b685be 100644
+> --- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
+> +++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
+> @@ -17,7 +17,6 @@ SRC_URI[sha256sum] =3D
+> "c449075eaeae4d1138d22eeed3d2ad7032b87fb8878eada9b770325bed
+>  EXTRA_OECONF +=3D "--with-vendor-info=3D${DISTRO}"
+>
+>  PACKAGECONFIG ??=3D ""
+> -PACKAGECONFIG[gladeui] =3D "--enable-gladeui,--disable-gladeui,glade3"
 
 
-I think a base reference image would be better in gnome layer then folks
-can create fully featured complex images using this as base
+Here it would now use defaults and since glade3 is gone from deps it will
+disable it I guess
+But could you explain why we want to remove this
 
-It would be fine to see what works and then take it from there
-
 >
+>  PACKAGECONFIG[gladeui2] =3D "--enable-gladeui2,--disable-gladeui2,glade"
+>  PACKAGECONFIG[startup-notification] =3D
+> "--enable-startup-notification,--disable-startup-notification,startup-not=
+ification"
 >
-> So if this is something wanted I ask others to add it - sorry
+> @@ -28,9 +27,7 @@ FILES_${PN}-gtk3 +=3D "${libdir}/libxfce4ui-2.so.*
+> ${libdir}/libxfce4kbd-private-3
+>  PACKAGES +=3D "${PN}-glade"
+>  FILES_${PN}-glade =3D " \
+>      ${libdir}/glade \
+> -    ${libdir}/glade3 \
+>      ${datadir}/glade \
+> -    ${datadir}/glade3 \
+>  "
 >
-> Andreas
+>  RDEPENDS_${PN}-gtk2 =3D "${PN}"
+> --
+> 2.21.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
