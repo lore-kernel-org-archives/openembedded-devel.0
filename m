@@ -1,27 +1,52 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C251E7F838
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+	[209.85.221.47])
+	by mail.openembedded.org (Postfix) with ESMTP id EF27A6058C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Dec 2019 07:11:57 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xBG7BwXo024378
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Mon, 16 Dec 2019 12:39:05 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id t2so7073915wrr.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Dec 2019 23:11:58 -0800 (PST)
-Received: from [128.224.162.183] (128.224.162.183) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Sun, 15 Dec 2019 23:11:57 -0800
-To: <changqing.li@windriver.com>, <openembedded-devel@lists.openembedded.org>
-References: <1576475203-260422-1-git-send-email-changqing.li@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <eb19cfb1-e3a3-3410-c007-862b1bae157b@windriver.com>
-Date: Mon, 16 Dec 2019 15:10:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.2.2
+	Mon, 16 Dec 2019 04:39:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=lOm8k6/H9eA7pBUM3bTVvMIOw3vzG/PaS33F11KSIK0=;
+	b=Gmalfm+AOYa7kED81Nqgpol4dtj6mWh+50bEet87MzoWTgeJemn5z68jtIoDbKq3M7
+	2pNm2ioskR9T3JsiLdP6n+jvYOHVMzY38+4wsIRE8lDj8jCQsHw8q/h3m/L4O1IU6/3A
+	U99HLIgq4vp8z14mzf3EgTQqMabxaR735OKAD/XMR9TkPDl9+3AEgdGafV58vv9ch6Xy
+	e3HoAk9G3BTwrGa5s1ykezp7h7PUp/D7ZCkuc7o14LY/7EGi2WAzJi8mpQPqrb8cO7eb
+	RbikWfV4p/kdcrrGN/kWHkhfkOWHx47FXZMMQHDXe2gQwaOUd3BO0fOWbeVvilsQR3Lj
+	yVUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=lOm8k6/H9eA7pBUM3bTVvMIOw3vzG/PaS33F11KSIK0=;
+	b=b8IvX2zJq5IIrAMzThqpu9UqKKQgIBWPWFG/SRaZlN8o8bHuAEaPJyNbPfLgplgc2U
+	d6mjQ9hCooIuNzuitnwc2uP9tTi6/qEskGgHBTzRS8jfHHQCuCEqCS5m1MoNEqixqKdI
+	HOcci6gqy/l8/NNib2vI12/G7dcFi2mTykF5SL+texXTjZs8iNXJHOqJnC5PDXpTEE7k
+	+LMunOhLo+fnCrzKS0zECKSZe/bCq/1m77qF0QeUpesA7uF19JtYxNmIoC4EcArV7Iv2
+	jKLDhjVHtA4ePFQgtF/EiepexHu1CQMalmS0udGIebYCVTuqTyA89d5ZVICmtTqtOPpO
+	de3A==
+X-Gm-Message-State: APjAAAWvk5WnZI+Iit6ucsZPW3AmsTPSJ1Au8rGpmBAQgr+2Ovjm1X4n
+	4qI9imjvCxi5nX+UrxNtn3snLWqJ
+X-Google-Smtp-Source: APXvYqwA+nTXXDT93VNmovty81op96mduvzw7zsGr9FYWu1hGOqi9/xIv2V7psd1vwYW7Kl8lHMdug==
+X-Received: by 2002:a5d:6a52:: with SMTP id t18mr28946102wrw.391.1576499946416;
+	Mon, 16 Dec 2019 04:39:06 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F06A30403E1B31F51E88EBB.dip0.t-ipconnect.de.
+	[2003:f0:7f06:a304:3e1:b31f:51e8:8ebb])
+	by smtp.gmail.com with ESMTPSA id c5sm12545301wmb.9.2019.12.16.04.39.05
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 16 Dec 2019 04:39:05 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 Dec 2019 13:38:58 +0100
+Message-Id: <20191216123858.30402-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-In-Reply-To: <1576475203-260422-1-git-send-email-changqing.li@windriver.com>
-Subject: Re: [meta-xfce][PATCH] xfce-dusk-gtk3: correct invalid SRC_URI
+Subject: [PATCH v2] libhandy: initial add 0.0.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,52 +59,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Dec 2019 07:11:57 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Mon, 16 Dec 2019 12:39:06 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 
-On 2019/12/16 下午1:46, changqing.li@windriver.com wrote:
-> From: Changqing Li <changqing.li@windriver.com>
->
-> original SRC_URI is invalid now, and current upstream address
-> is such a long address(see below), and this package has not been
-> updated since 2011, so use http://sources.openembedded.org/.
->
-> https://dllb2.pling.com/api/files/download/id/1460766718/s/938c137c59bf7f1a6a6cc100c940feafd6904dc6478d5f96d09f3a631f9708e559055433db9e97654b196881fecbae445f094347befba0a5e477e961a73a7434/t/1576230019/c/a3f98e1fd43cfd072d46d7bedf6646191f5a020476297e0da678723a0078b9b8d284736bb34c4e876389b4e518777dc6a23c8666bb6bd42ceb1b893c9c264cce/lt/download/141404-xfce_dusk_gtk3-1_3.tar.gz
->
-> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+libhandy is required by upcoming gnome-tweaks
 
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+V1 -> V2: Add protocol=https to SRC_URI
+ .../recipes-support/libhandy/libhandy_git.bb  | 21 +++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-gnome/recipes-support/libhandy/libhandy_git.bb
 
-Fine with me. And there is another recipe
-meta-xfce/recipes-art/cursor-themes/openzone_1.2.3.bb
-which may need similar fix too.
-
-Acked-by: Kai Kang <kai.kang@windriver.com>
-
-Regards,
-Kai
-
-> ---
->   meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb b/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
-> index b05c748..89dab49 100644
-> --- a/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
-> +++ b/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
-> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f0e2cd40e05189ec81232da84bd6e1a"
->   
->   inherit allarch
->   
-> -SRC_URI = "http://xfce-look.org/CONTENT/content-files/141404-xfce_dusk_gtk3-1_3.tar.gz;subdir=${BPN}-${PV}"
-> +SRC_URI = "http://sources.openembedded.org/141404-xfce_dusk_gtk3-1_3.tar.gz;subdir=${BPN}-${PV}"
->   SRC_URI[md5sum] = "b3ad37ad8173b14ec090e60a80e65d8f"
->   SRC_URI[sha256sum] = "bfa8a88607d1a1da5bd0b9e4e075767c54400a3c5a0fae88b619ed71532f30b4"
->   
-
-
+diff --git a/meta-gnome/recipes-support/libhandy/libhandy_git.bb b/meta-gnome/recipes-support/libhandy/libhandy_git.bb
+new file mode 100644
+index 000000000..8c6159f99
+--- /dev/null
++++ b/meta-gnome/recipes-support/libhandy/libhandy_git.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "A library full of GTK+ widgets for mobile phones"
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++SRC_URI = "git://source.puri.sm/Librem5/${BPN}.git;protocol=https"
++SRCREV = "ef7c4bf75ae239495141ada83d2fbaf034315563"
++S = "${WORKDIR}/git"
++PV = "0.0.12"
++
++GIR_MESON_ENABLE_FLAG = 'enabled'
++GIR_MESON_DISABLE_FLAG = 'disabled'
++GTKDOC_MESON_OPTION = 'gtk_doc'
++
++inherit meson gobject-introspection vala gettext gtk-doc features_check
++
++ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
++
++DEPENDS += "gtk+3"
++
++PACKAGES =+ "${PN}-examples"
++FILES_${PN}-examples = "${bindir}"
 -- 
-Kai Kang
+2.21.0
 
 
