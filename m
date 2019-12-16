@@ -1,56 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
-	[209.85.128.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 937E87F7E2
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 556837F81E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Dec 2019 01:21:00 +0000 (UTC)
-Received: by mail-wm1-f50.google.com with SMTP id q9so4934439wmj.5
+	Mon, 16 Dec 2019 01:21:01 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id q10so5232914wrm.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Dec 2019 17:21:01 -0800 (PST)
+	Sun, 15 Dec 2019 17:21:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=1IIDjdwB5hPzbVWjx4x1dyNXdwHogL66nNfEOvd9FzY=;
-	b=J+lBFRefSWxXQ133pH99Gb1wWONU1y7CJDsrM4xZ2WSCm6KXyscXdBadAuSiuFuGEe
-	1hyDGtGZB6+LHdDVMogvrMm4GA4YoBPqfrSI8s30J+R/Zs12tFpLQ65ENYwunHkamQLv
-	6FfyTZqA9iDruPn4IhE+O9GJGD+QOsTXkpHfFkG+DzAu+WEyL9DmtmhBaTo26j8osFg/
-	8w8EUAF9bq+fCPu9G7nNSWapJbjXbmCnvoKTywM3EKCuoqqlgwAdYswYclYd/h94rdvw
-	hCybnilL7PpdXHsfb8eAec1NcMmRfF48S+ZnebbbCOAkc3O3MDCODsVMwzOJz8yYAEkG
-	bDUQ==
+	bh=H7S9wkmwMjBR2K4MKLqPxHju9KwCiTryYC4PjL83is8=;
+	b=NpkXUJBYiTcQO1qimrJUJ8BRvyBGBnBP2e9wV59xTADzX6CO7xPMRbpL6tgI2dWmK5
+	YKqbXY/sRvN3NLPW6jDlwibDN5KDY9EPU95gvMTnG4W0FXs0dpyq1QzaovWRIBYubg4J
+	bbfKUkrKVhc0EFXTXVoez5See96j93oWNMcCIDxsIB+CifgpCu9xRw3fUMuAP8byAZjM
+	KZM2hex4VI68frTNZlzrQBJ5JS2GadFQPOMx9B92S4IJdBFtns/3egDki6ppUoPxpi6i
+	Ekn4Df9ziR3gC0iTbPoJ+I01kHYG/BQOdS8ngPZ3VuXKPAcJ6O2oZdX3WLoe3KqCeCGN
+	S33A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=1IIDjdwB5hPzbVWjx4x1dyNXdwHogL66nNfEOvd9FzY=;
-	b=lzjl+h/PEiLpDwlCLdfauShg0E4W0c7LMERBYwLFydzr9lzF39KZOlho5nyXt6kaqT
-	2DSmWRb3W97DsbgKMu1OlD++l6d+JH2Y5DpZSHOAaHcOUIRUPQdwYUye/RU23Iz0dn8f
-	am2g5s5H21WDkYjC52ILMcV8Ji1qFyCdgtxzxn7BrZTzaB9hXxCwP/RCZxY4OEHpoJR0
-	YxKvwsAvt++266Fr/KIYJ96Pdh2vMe9G1n8CxRBCDjr8vR9i2R0tUo82PZErUxiAhzgf
-	MdjfC/UBsNkTU545FHHHc6NZKe6ikUEetP4d3sY7DLUPWsjP0MvvaZbBbtoEVW4dbafr
-	z7Sg==
-X-Gm-Message-State: APjAAAXqCkICm3Bw0jTNY2298Yo5zEDay+TkBiSHFuGJUD0SUd2uyjlJ
-	h0TaElk9qguXNBtROWUHQX4oYG9h
-X-Google-Smtp-Source: APXvYqxIZgKp5e2tYIANtxR3ACYxJX1tW73TypX2cblFROKXBz+kvv07AOCpVNHFTrtr4kLaNkLVmg==
-X-Received: by 2002:a05:600c:214f:: with SMTP id
-	v15mr21111694wml.110.1576459260960; 
-	Sun, 15 Dec 2019 17:21:00 -0800 (PST)
+	bh=H7S9wkmwMjBR2K4MKLqPxHju9KwCiTryYC4PjL83is8=;
+	b=LAfqN3lrmLzd4e4lycpTIRI/S2Ck88GG63ujZbOfODadcTFkcAZicIU8BAyjOsWW1d
+	W/N2x0PtaCLajuWLACF0IE4c9M1urdVudApsghKtCe5SprOk5IA7KiYBV+Zvrz+BGgsL
+	i6bsIodVgyWxTWubXiu0X1FYeSMl4peSdLgLMN4ZeCAElXWaE+8TOwjMeWrnvfaVmGxb
+	1h1yFitdc18uC2kZNmbGALBzXvqq1Eco6Xef0aU6kFl+qtDMk8AsWbNIfBQL5fH5MoHb
+	IWIXTxkP6+cyA3l3kK0RGHuSUZwKpWzAi97mNILi685C01Rw1Z4lPO6r5u4cZ8jQNco/
+	anEA==
+X-Gm-Message-State: APjAAAWd3Fr/D28T1axL6WS5MS37rr0AmIoZbz6blmni+mNh+fA5ULHn
+	SqsofiC5GhOihroZDrxkYkgIOkxE
+X-Google-Smtp-Source: APXvYqy+WXsc6/2SWhAJ8ISHEhCAwsreTt2h0Kf0vsIRs4yuBcbiKzWbzJ+IgYT3rUetNQUGLSOd8A==
+X-Received: by 2002:adf:eb46:: with SMTP id u6mr27513868wrn.239.1576459261751; 
+	Sun, 15 Dec 2019 17:21:01 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F06A307CB3B21B8240595DD.dip0.t-ipconnect.de.
 	[2003:f0:7f06:a307:cb3b:21b8:2405:95dd])
 	by smtp.gmail.com with ESMTPSA id
-	t190sm10877063wmt.44.2019.12.15.17.20.59
+	t190sm10877063wmt.44.2019.12.15.17.21.00
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 15 Dec 2019 17:21:00 -0800 (PST)
+	Sun, 15 Dec 2019 17:21:01 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Dec 2019 02:20:44 +0100
-Message-Id: <20191216012047.17312-3-schnitzeltony@gmail.com>
+Date: Mon, 16 Dec 2019 02:20:45 +0100
+Message-Id: <20191216012047.17312-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191216012047.17312-1-schnitzeltony@gmail.com>
 References: <20191216012047.17312-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/6] exo: remove pythonnative from inherit
+Subject: [PATCH 4/6] geany: remove pythonnative from inherit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -72,22 +71,22 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-xfce/recipes-xfce/exo/exo_0.12.10.bb | 2 +-
+ meta-oe/recipes-devtools/geany/geany_1.36.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-xfce/exo/exo_0.12.10.bb b/meta-xfce/recipes-xfce/exo/exo_0.12.10.bb
-index 246504b6d..4deedbfbc 100644
---- a/meta-xfce/recipes-xfce/exo/exo_0.12.10.bb
-+++ b/meta-xfce/recipes-xfce/exo/exo_0.12.10.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "gtk+3 libxfce4ui virtual/libx11 liburi-perl-native cairo"
- DEPENDS_class-native = "glib-2.0-native xfce4-dev-tools-native intltool-native"
+diff --git a/meta-oe/recipes-devtools/geany/geany_1.36.bb b/meta-oe/recipes-devtools/geany/geany_1.36.bb
+index 0d29b138a..17e16bf56 100644
+--- a/meta-oe/recipes-devtools/geany/geany_1.36.bb
++++ b/meta-oe/recipes-devtools/geany/geany_1.36.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bd7b2c994af21d318bd2cd3b3f80c2d5"
  
--inherit xfce pythonnative perlnative gtk-doc features_check
-+inherit xfce perlnative gtk-doc features_check
+ DEPENDS = "gtk+3 libxml-parser-perl-native python3-docutils-native intltool-native"
+ 
+-inherit features_check autotools pkgconfig perlnative pythonnative gettext
++inherit features_check autotools pkgconfig perlnative gettext
  
  REQUIRED_DISTRO_FEATURES = "x11"
- REQUIRED_DISTRO_FEATURES_class-native = ""
+ 
 -- 
 2.21.0
 
