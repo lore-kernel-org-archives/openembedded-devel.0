@@ -1,31 +1,53 @@
-Return-Path: <leon.anavi@konsulko.com>
-Received: from anavi.org (anavi.technology [91.215.217.29])
-	by mail.openembedded.org (Postfix) with ESMTP id 287D06C108
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 56A5E7F7D8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Dec 2019 21:32:41 +0000 (UTC)
-Received: from [78.130.245.67] (port=57536 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa
-	(TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1igbVI-0006cg-Cl; Sun, 15 Dec 2019 23:32:41 +0200
-From: Leon Anavi <leon.anavi@konsulko.com>
+	Mon, 16 Dec 2019 01:20:58 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id c9so5259952wrw.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Dec 2019 17:20:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XBaVvMANME2p8bQAiiXDtyUsZy3gsWfGpx4wEb8fjqw=;
+	b=ap5neLrkTsFktvFn6xRL5nkhkUMq1k2SliS0DqeQIXlkjmLfqRqaPxYO5dsCet3qu3
+	cvoiJR3I4XeGZeUxXmi3v+4GG6tODHYtQpEop/ZIUFGiA/F0yJki6dNNNoSqeNba+ufj
+	BkaFstvKO7AMU6zrTMLlNVgzn7wJ1U55PGV0LCZfvh/tw1VeOC3vCseqDXsZ+0o5Kbmt
+	SkWwRIhImgfDo285De2ROmHNQAz+UMVkBs14E8/ZVOo1F1js15COqnzp2CwuT1HKouSc
+	Tpcw5FEQeGURjMjWOjgMqywwrU0KhncHZYC8dQ3Mv5X22RwMIdA4x9wJ5z3+TQv9BKug
+	m1YA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=XBaVvMANME2p8bQAiiXDtyUsZy3gsWfGpx4wEb8fjqw=;
+	b=tBQTBfDME9seKSvaZGvahUE4/5S9aXe8BJFaXnYgww5w+MzXcu2k1Ui/MPpY02qz30
+	w4+RqUP5229zDsGViSHtgeU3CxBjs5DV53mQQuC7bFigag5jm6TM9jiTov8MtmjZ1dDv
+	/1YqlqW+vjCBCdIMexuIYHZwHdxjjVe4pLnxU9jIbj6SZrRyU71ZwCOdGpa+0vCeCzEO
+	dk6+EDy5lYhAuPmRKdcts0s+fuOtC16QHNHYvueqq1b8gKA7Fe8oDAkdzyFSXe3fTyFz
+	jPxyiKnLgv9cIV4C4+BnBzT/f/wzeetczGF3l9qOpD5KSfSMqdULngUizGb+7MGe9FUB
+	kPqg==
+X-Gm-Message-State: APjAAAWUubIttvwj5efLbHTUHb8wZCBuEizPocKbJGDV3RtnDueEyGr9
+	2yrw9fc3BvhNDSCwPYx9M1z44+Ou
+X-Google-Smtp-Source: APXvYqz7QxZ8LFXADDNPuN93ZAf0UdjMQJUU3S+I2THr+zf7Y5IfPkQOpax6xSrBtwxsbXyVNNJKZA==
+X-Received: by 2002:a5d:5708:: with SMTP id a8mr28271795wrv.79.1576459258453; 
+	Sun, 15 Dec 2019 17:20:58 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F06A307CB3B21B8240595DD.dip0.t-ipconnect.de.
+	[2003:f0:7f06:a307:cb3b:21b8:2405:95dd])
+	by smtp.gmail.com with ESMTPSA id
+	t190sm10877063wmt.44.2019.12.15.17.20.57
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 15 Dec 2019 17:20:57 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Dec 2019 23:32:28 +0200
-Message-Id: <1576445548-5596-1-git-send-email-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.7.4
-X-OutGoing-Spam-Status: No, score=-0.5
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: [meta-networking][PATCH] mosquitto: update to 1.6.8
+Date: Mon, 16 Dec 2019 02:20:42 +0100
+Message-Id: <20191216012047.17312-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Subject: [PATCH 1/6] libxfce4ui: give up glade3 (=glade for gtk2) support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,37 +60,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Dec 2019 21:32:42 -0000
+X-List-Received-Date: Mon, 16 Dec 2019 01:20:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Bugfix release. For details, see:
-
-  https://mosquitto.org/blog/2019/11/version-1-6-8-released/
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../mosquitto/{mosquitto_1.6.7.bb => mosquitto_1.6.8.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/mosquitto/{mosquitto_1.6.7.bb => mosquitto_1.6.8.bb} (96%)
+ meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.7.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
-similarity index 96%
-rename from meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.7.bb
-rename to meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
-index 340f643..ea533d8 100644
---- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.7.bb
-+++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
-@@ -18,8 +18,8 @@ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
-            file://mosquitto.init \
+diff --git a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
+index 053eb201b..348b685be 100644
+--- a/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
++++ b/meta-xfce/recipes-xfce/libxfce4ui/libxfce4ui_4.14.1.bb
+@@ -17,7 +17,6 @@ SRC_URI[sha256sum] = "c449075eaeae4d1138d22eeed3d2ad7032b87fb8878eada9b770325bed
+ EXTRA_OECONF += "--with-vendor-info=${DISTRO}"
+ 
+ PACKAGECONFIG ??= ""
+-PACKAGECONFIG[gladeui] = "--enable-gladeui,--disable-gladeui,glade3"
+ PACKAGECONFIG[gladeui2] = "--enable-gladeui2,--disable-gladeui2,glade"
+ PACKAGECONFIG[startup-notification] = "--enable-startup-notification,--disable-startup-notification,startup-notification"
+ 
+@@ -28,9 +27,7 @@ FILES_${PN}-gtk3 += "${libdir}/libxfce4ui-2.so.* ${libdir}/libxfce4kbd-private-3
+ PACKAGES += "${PN}-glade"
+ FILES_${PN}-glade = " \
+     ${libdir}/glade \
+-    ${libdir}/glade3 \
+     ${datadir}/glade \
+-    ${datadir}/glade3 \
  "
  
--SRC_URI[md5sum] = "ec9074c4f337f64eaa9a4320c6dab020"
--SRC_URI[sha256sum] = "bcd31a8fbbd053fee328986fadd8666d3058357ded56b9782f7d4f19931d178e"
-+SRC_URI[md5sum] = "24a0e567c845b3e41b75e237d200edf8"
-+SRC_URI[sha256sum] = "7df23c81ca37f0e070574fe74414403cf25183016433d07add6134366fb45df6"
- 
- inherit systemd update-rc.d useradd
- 
+ RDEPENDS_${PN}-gtk2 = "${PN}"
 -- 
-2.7.4
+2.21.0
 
 
