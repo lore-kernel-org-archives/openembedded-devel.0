@@ -1,47 +1,55 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
-	[209.85.128.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B4B37FD72
+Return-Path: <prvs=2476bd972=alistair.francis@wdc.com>
+X-Greylist: delayed 425 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 17 Dec 2019 17:57:22 UTC
+Received: from esa6.hgst.iphmx.com (esa6.hgst.iphmx.com [216.71.154.45])
+	by mail.openembedded.org (Postfix) with ESMTP id F05427FDD2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Dec 2019 06:56:58 +0000 (UTC)
-Received: by mail-wm1-f67.google.com with SMTP id b19so1722243wmj.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Dec 2019 22:56:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=6tQGjo879uxswS4z1Emrj5d3/mODETBhcUZmkxtqGNY=;
-	b=safRWjyFhHUXi9C+Qx6ntb0rNnz3Mn0fcrEW2u6hUX078He4D05qSX4Mir6V6rHiuj
-	+HnXyBsNKRcFVt6FUbcFxyVLRT7PiqtJ9PLz3F4VFikcsY0KCrKYxVCZuwFXfq4wFr/4
-	j0HIeTaQ4m/D49yNQWlk4Wfg6KQPx71dNwFPdFXoU+SZTXJeIHJ1E72tL7et7bi0dVCq
-	ioF1Kl+GBgia8F+xOEANR4Jkp5oLZiJ5+i5QUSdHszGBw6/EkhrE/lKAfN4C/pevEMMh
-	09kh+OFKe0mW5HZI9qiG4lvu9u9tRMMcc9k+3jL+kvUDb0nD2GkFc22guTPjD/uxVBBH
-	ROhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6tQGjo879uxswS4z1Emrj5d3/mODETBhcUZmkxtqGNY=;
-	b=F3I8fNIL+38bqYC7dkTtnYcKBQGBvFCdmDSeJRG5Pnc4M6Q2f0bzU6S1E0eZ0L7efH
-	pmNcpnGNpFI4AK6FUScOFAo5xNnSZ1eIpoNeNOV1zdMbkZtJOev7Sxwh6E4jmXihOgZe
-	1cazt4gSHDqTgFNnFgn8t8HHfWm5nLnFdJwMd5ldFsxfC15zDyQNPRfkFsx77aHIj1sq
-	X5z5g8nB+yrNsCfZMOznNrK5iFGo5VPPr8MDgK7qdwXhi0u2sfsusKw5DPcbuNNQ358+
-	eSP2jZk7cwwDKYQ70ulQAPJfGGgk6jE+odib2pdutMXLyO5ER2JGx3K+5uvXKHKVVWd3
-	Z+SA==
-X-Gm-Message-State: APjAAAUDXbDj/xAAWOArz39sGqDpReDCUdTmXQ6WLZ3eYGilQ1K5Giqo
-	9N+st53zgpuBONIrOquj9vRVg7fH
-X-Google-Smtp-Source: APXvYqx+DK3rPHbonLAhLcFPxuYOH/UYyEyEX5YEojVVzMLh5Or/bsthMPhZtCcpvO2jVg5vBxgmfg==
-X-Received: by 2002:a1c:cc06:: with SMTP id h6mr3334076wmb.118.1576565818812; 
-	Mon, 16 Dec 2019 22:56:58 -0800 (PST)
-Received: from localhost.localdomain ([213.205.242.13])
-	by smtp.gmail.com with ESMTPSA id
-	w13sm24547798wru.38.2019.12.16.22.56.57
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 16 Dec 2019 22:56:58 -0800 (PST)
-From: Alex Kiernan <alex.kiernan@gmail.com>
+	Tue, 17 Dec 2019 17:57:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1576605445; x=1608141445;
+	h=from:to:cc:subject:date:message-id:mime-version:
+	content-transfer-encoding;
+	bh=UO+7GVGFd1d23nPLVcr3/mghonSkZRmZup9sF3pO1Qo=;
+	b=VWM0Y8agJ0wa9BPwOiR2EYkrEh+RWXBxSzF2D02g8sM84sy3i1ox7T06
+	qxTG66RwcKDHTSWMUATyhmT8OeHe8epLvbaelo6BtaBr7lU/UX1lCycsT
+	B4K8dhZrLv6XsNniBfK2b+P5XCJqP6YF7EX7D053+gaSoKj8epDD3YvRw
+	PsylFV/vMsstsZig/6HO3bZg/YEj0AAlkbBi2P1y1S0zLNrcri/AWQUap
+	XHpnwONWJRo6sjWbdfQ6cVckFAHLm863LfFoYzS2GqU/UKCycRr2khgpt
+	5470kgrt1JHjMd8f+6QNKt68gtSiC9FpLhB0OQ+jouKDV98HGq+e49nFw Q==;
+IronPort-SDR: 4MwAGWJPtF1HXMtMQYS+nZg6VnYSziZFSgkX8lINxdIjMGb5qjo0q28IBhlrHbe3B4gG2STOXX
+	HivpYJuDTHGB82smyO40Q6bs0iQya4LNMB9KPzOgerIsnBLCp9IUqCScRYBSAFOVEH1INVQZDh
+	/LI9FrubYbIhNcuwb/jO3ZgvAIp10M8eT8+c3OUEunsplqpPYdD76NtVbLW8MeQtREFDv42Lxl
+	wsPGOXt7aOBkXo1OZkaKPxA5N0HUxrXKQxhsDj/TjjX/t8ONjpx26nMO2T54I2yWwPrc6+cVK5
+	Ga8=
+X-IronPort-AV: E=Sophos;i="5.69,326,1571673600"; d="scan'208";a="127176242"
+Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
+	([199.255.45.15])
+	by ob1.hgst.iphmx.com with ESMTP; 18 Dec 2019 01:50:19 +0800
+IronPort-SDR: aLV4AvKKVpVPuJag3w8JjZ5aGr4KVoSYKpGCa/huutg7vLJJLLI8LzVWivRXjRW4+cHz1TelxT
+	vmlD8u1uDEpRw9gzpP/G0xYCqe8L5Oc0Trf66OzSaCBEfWOGiEaz7iZANH6n8hQLgIlI700seG
+	JbW/LnVGapY7KX+FzY1rT88hxzwL9fjtUNPx96AM1WIlqVJogrXZYCsdxmHHV5ekwi1zMx94JO
+	nDBhuDingXWajZl+lzPbgZP5rpqrK78upp8UqZQ5Eur/QEaObgMuxmEpJ/QMZAzpAQ0Wx9OkZR
+	LsWJTH5twHIIH2TurUceC3sZ
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+	17 Dec 2019 09:44:21 -0800
+IronPort-SDR: aN3/4qnB1n9PJDDiIuWCc743ZhuAuFlBC7WSLvqcVf7K7/bS15XJmvP7MX9B+pipbpJYanJExg
+	S6VqoMHL3QOkNgtRaZOQjmPms3bogzH7mURk6rowymZ3Z4pmRWfuDJEASJBKfVAiIbEq1aH9xr
+	sp/hv1vFGPWbGHP/ksA7maDLhihuBxpBc31fSQQPx0wVd9bBiue3vfBcETSBEXczH2tnzE0b0T
+	0KB66nwq7Y0vbcJ6eis0AvSxo4lTZzVOcRax97U2VNcoaR9W8I2qOG73gLOLN2xY8jKWrFDjP7
+	3qM=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+	risc6-mainframe.int.fusionio.com) ([10.196.158.235])
+	by uls-op-cesaip02.wdc.com with ESMTP; 17 Dec 2019 09:50:19 -0800
+From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Dec 2019 06:56:36 +0000
-Message-Id: <20191217065636.127826-1-alex.kiernan@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] nftables: Expand PACKAGECONFIG, cleanup build
+Date: Tue, 17 Dec 2019 09:44:27 -0800
+Message-Id: <20191217174427.4001-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.24.0
+MIME-Version: 1.0
+Subject: [meta-multimedia][PATCH] mycroft: RDEPENDS on mpg123 to allow singing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,71 +62,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Dec 2019 06:56:58 -0000
+X-List-Received-Date: Tue, 17 Dec 2019 17:57:23 -0000
+Content-Transfer-Encoding: 8bit
 
-Fill out PACKAGECONFIG options for json, mini-gmp, readline and xtables
-whilst matching existing behaviour. Drop PACKAGECONFIG to weak default.
-
-Fix upstream version matching so the very old 0.099 is rejected as the
-newest version.
-
-Drop seemingly redundant ASNEEDED which was added in 5477d5bcb727
-("nftables: Upgrade to 0.7") without explanation.
-
-Package python files from libdir not libdir_native; whilst they're the
-same thing, building a target package with native variables is odd.
-
-Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
-Requires 906efee42764 ("nftables: upgrade 0.9.2 -> 0.9.3")
+ meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- .../recipes-filter/nftables/nftables_0.9.3.bb | 20 +++++++++++--------
- 1 file changed, 12 insertions(+), 8 deletions(-)
-
-diff --git a/meta-networking/recipes-filter/nftables/nftables_0.9.3.bb b/meta-networking/recipes-filter/nftables/nftables_0.9.3.bb
-index 7302626165cd..dc04326bc926 100644
---- a/meta-networking/recipes-filter/nftables/nftables_0.9.3.bb
-+++ b/meta-networking/recipes-filter/nftables/nftables_0.9.3.bb
-@@ -3,9 +3,11 @@ SECTION = "net"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d1a78fdd879a263a5e0b42d1fc565e79"
+diff --git a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
+index 3c7bd8963..62d1ad7f7 100644
+--- a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
++++ b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
+@@ -79,7 +79,7 @@ RDEPENDS_${PN} += "python3-requests python3-pillow \
+ # Mycroft uses Alsa, PulseAudio and Flac
+ RDEPENDS_${PN} += "alsa-utils alsa-plugins alsa-tools"
+ RDEPENDS_${PN} += "pulseaudio pulseaudio-misc pulseaudio-server"
+-RDEPENDS_${PN} += "flac"
++RDEPENDS_${PN} += "flac mpg123"
  
--DEPENDS = "libmnl libnftnl readline gmp bison-native"
-+DEPENDS = "libmnl libnftnl bison-native \
-+           ${@bb.utils.contains('PACKAGECONFIG', 'mini-gmp', '', 'gmp', d)}"
- 
--UPSTREAM_CHECK_URI = "https://www.netfilter.org/projects/nftables/files/"
-+# Ensure we reject the 0.099 version by matching at least two dots
-+UPSTREAM_CHECK_REGEX = "nftables-(?P<pver>\d+(\.\d+){2,}).tar.bz2"
- 
- SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
-            file://0001-update-python3-nftables-reference.patch"
-@@ -14,16 +16,18 @@ SRC_URI[sha256sum] = "956b915ce2a7aeaff123e49006be7a0690a0964e96c062703181a36e2e
- 
- inherit autotools manpages pkgconfig
- 
--PACKAGECONFIG ?= "python"
--PACKAGECONFIG[manpages] = ", --disable-man-doc, asciidoc-native"
--PACKAGECONFIG[python] = "--with-python-bin=${PYTHON}, --with-python-bin="", python3"
-+PACKAGECONFIG ??= "python readline"
-+PACKAGECONFIG[json] = "--with-json, --without-json, jansson"
-+PACKAGECONFIG[manpages] = "--enable-man-doc, --disable-man-doc, asciidoc-native"
-+PACKAGECONFIG[mini-gmp] = "--with-mini-gmp, --without-mini-gmp"
-+PACKAGECONFIG[python] = "--enable-python --with-python-bin=${PYTHON}, --with-python-bin="", python3"
-+PACKAGECONFIG[readline] = "--with-cli=readline, --without-cli, readline"
-+PACKAGECONFIG[xtables] = "--with-xtables, --without-xtables, iptables"
- 
- inherit ${@bb.utils.contains('PACKAGECONFIG', 'python', 'python3native', '', d)}
- 
--ASNEEDED = ""
--
- RRECOMMENDS_${PN} += "kernel-module-nf-tables"
- 
- PACKAGES =+ "${PN}-python"
--FILES_${PN}-python = "${libdir_native}/${PYTHON_DIR}"
-+FILES_${PN}-python = "${libdir}/${PYTHON_DIR}"
- RDEPENDS_${PN}-python = "python3-core python3-json"
+ # Mycroft can do this itself on the target, but it's quicker to do it here
+ RDEPENDS_${PN} += "mimic"
 -- 
-2.17.1
+2.24.0
 
 
