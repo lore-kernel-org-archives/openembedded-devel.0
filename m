@@ -1,52 +1,33 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
-	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id EF27A6058C
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2EE537FE30
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Dec 2019 12:39:05 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id t2so7073915wrr.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Dec 2019 04:39:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=lOm8k6/H9eA7pBUM3bTVvMIOw3vzG/PaS33F11KSIK0=;
-	b=Gmalfm+AOYa7kED81Nqgpol4dtj6mWh+50bEet87MzoWTgeJemn5z68jtIoDbKq3M7
-	2pNm2ioskR9T3JsiLdP6n+jvYOHVMzY38+4wsIRE8lDj8jCQsHw8q/h3m/L4O1IU6/3A
-	U99HLIgq4vp8z14mzf3EgTQqMabxaR735OKAD/XMR9TkPDl9+3AEgdGafV58vv9ch6Xy
-	e3HoAk9G3BTwrGa5s1ykezp7h7PUp/D7ZCkuc7o14LY/7EGi2WAzJi8mpQPqrb8cO7eb
-	RbikWfV4p/kdcrrGN/kWHkhfkOWHx47FXZMMQHDXe2gQwaOUd3BO0fOWbeVvilsQR3Lj
-	yVUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=lOm8k6/H9eA7pBUM3bTVvMIOw3vzG/PaS33F11KSIK0=;
-	b=b8IvX2zJq5IIrAMzThqpu9UqKKQgIBWPWFG/SRaZlN8o8bHuAEaPJyNbPfLgplgc2U
-	d6mjQ9hCooIuNzuitnwc2uP9tTi6/qEskGgHBTzRS8jfHHQCuCEqCS5m1MoNEqixqKdI
-	HOcci6gqy/l8/NNib2vI12/G7dcFi2mTykF5SL+texXTjZs8iNXJHOqJnC5PDXpTEE7k
-	+LMunOhLo+fnCrzKS0zECKSZe/bCq/1m77qF0QeUpesA7uF19JtYxNmIoC4EcArV7Iv2
-	jKLDhjVHtA4ePFQgtF/EiepexHu1CQMalmS0udGIebYCVTuqTyA89d5ZVICmtTqtOPpO
-	de3A==
-X-Gm-Message-State: APjAAAWvk5WnZI+Iit6ucsZPW3AmsTPSJ1Au8rGpmBAQgr+2Ovjm1X4n
-	4qI9imjvCxi5nX+UrxNtn3snLWqJ
-X-Google-Smtp-Source: APXvYqwA+nTXXDT93VNmovty81op96mduvzw7zsGr9FYWu1hGOqi9/xIv2V7psd1vwYW7Kl8lHMdug==
-X-Received: by 2002:a5d:6a52:: with SMTP id t18mr28946102wrw.391.1576499946416;
-	Mon, 16 Dec 2019 04:39:06 -0800 (PST)
-Received: from superandy.speedport.ip
-	(p200300F07F06A30403E1B31F51E88EBB.dip0.t-ipconnect.de.
-	[2003:f0:7f06:a304:3e1:b31f:51e8:8ebb])
-	by smtp.gmail.com with ESMTPSA id c5sm12545301wmb.9.2019.12.16.04.39.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 16 Dec 2019 04:39:05 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Dec 2019 13:38:58 +0100
-Message-Id: <20191216123858.30402-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
+	Tue, 17 Dec 2019 02:44:36 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id xBH2iYtI006144
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Mon, 16 Dec 2019 18:44:35 -0800 (PST)
+Received: from [128.224.162.189] (128.224.162.189) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Mon, 16 Dec 2019 18:44:34 -0800
+To: Kang Kai <Kai.Kang@windriver.com>, =?UTF-8?Q?Andreas_M=c3=bcller?=
+	<schnitzeltony@gmail.com>,
+	Michael Halstead <mhalstead@linuxfoundation.org>,
+	Khem Raj <raj.khem@gmail.com>
+References: <1576226743-346140-1-git-send-email-changqing.li@windriver.com>
+	<CALbNGRTaVVnL6qPcnSqV6w+_o-ad3=GT3D=cWOLGGDUsuYJ0Rw@mail.gmail.com>
+	<4959ba0d-54ff-eff0-4a24-b516e86aad9c@windriver.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <524c1c2a-1475-df8d-5be1-05e9d3359d21@windriver.com>
+Date: Tue, 17 Dec 2019 10:44:30 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.0
 MIME-Version: 1.0
-Subject: [PATCH v2] libhandy: initial add 0.0.12
+In-Reply-To: <4959ba0d-54ff-eff0-4a24-b516e86aad9c@windriver.com>
+X-Originating-IP: [128.224.162.189]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][PATCH] gtk-xfce-engine: remove this recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,47 +40,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Dec 2019 12:39:06 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 17 Dec 2019 02:44:36 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-libhandy is required by upcoming gnome-tweaks
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
-V1 -> V2: Add protocol=https to SRC_URI
- .../recipes-support/libhandy/libhandy_git.bb  | 21 +++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-gnome/recipes-support/libhandy/libhandy_git.bb
+On 12/13/19 5:36 PM, Kang Kai wrote:
+> On 2019/12/13 下午5:27, Andreas Müller wrote:
+>> On Fri, Dec 13, 2019 at 9:45 AM <changqing.li@windriver.com> wrote:
+>>> From: Changqing Li <changqing.li@windriver.com>
+>>>
+>>> * Part of xfce 4.14 changelog
+>>>    Theme Engine (gtk-xfce-engine)
+>>>        The gtk-xfce-engine has been deprecated and archived.
+>>>
+>>> * repo have been remove from upstream
+>>>    https://archive.xfce.org/src/xfce/
+>>>    no gtk-xfce-engine now
+>>>
+>>> so remove this recipe
+>>>
+>>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
+>> Think this is a good thing and wanted to test it. Unfortunately it did
+>> not make it into patchwork - similar as Kai's patches sent recently.
+>> Who can look into patchwork?
+>
+> I once thought it because I used 'Patch' rather than 'PATCH' in 
+> subject. And it did in patchwork today with that change.
+> But I don't know why Changqing's patch doesn't in patchwork either.
+>
+> Regards,
+> Kai
+>
+I guess maybe the maintainer of patchwork can receive mail (title as 
+"[Django] ERROR: Error when parsing incoming email")
 
-diff --git a/meta-gnome/recipes-support/libhandy/libhandy_git.bb b/meta-gnome/recipes-support/libhandy/libhandy_git.bb
-new file mode 100644
-index 000000000..8c6159f99
---- /dev/null
-+++ b/meta-gnome/recipes-support/libhandy/libhandy_git.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "A library full of GTK+ widgets for mobile phones"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
-+
-+SRC_URI = "git://source.puri.sm/Librem5/${BPN}.git;protocol=https"
-+SRCREV = "ef7c4bf75ae239495141ada83d2fbaf034315563"
-+S = "${WORKDIR}/git"
-+PV = "0.0.12"
-+
-+GIR_MESON_ENABLE_FLAG = 'enabled'
-+GIR_MESON_DISABLE_FLAG = 'disabled'
-+GTKDOC_MESON_OPTION = 'gtk_doc'
-+
-+inherit meson gobject-introspection vala gettext gtk-doc features_check
-+
-+ANY_OF_DISTRO_FEATURES = "${GTK3DISTROFEATURES}"
-+
-+DEPENDS += "gtk+3"
-+
-+PACKAGES =+ "${PN}-examples"
-+FILES_${PN}-examples = "${bindir}"
--- 
-2.21.0
+about why the patch is not accepted by patchwork.  Maybe caused by 
+reason like codec problem or other reason.
 
+Maybe Michael can receive the mail,  so add him.
+
+>
+>>
+>>
+>> Andreas
+>
+>
 
