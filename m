@@ -1,48 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C0CB77FEB5
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id D62B27FEB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2019 06:20:41 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id w127so640430qkb.11
+	Wed, 18 Dec 2019 07:58:33 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,328,1571673600"; d="scan'208";a="80458757"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 Dec 2019 15:58:32 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 3A48E4CE1C9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Dec 2019 22:20:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=S8h+BMKfUvKwXUeFSeIuRdIL54evZTlfxs2Tw66jo7w=;
-	b=PF/aObTDa5F72Y3mfOxIxH1O2jL8Y6lr2uwVAmUBDUCjZbQhWmO24U3+ZUq2Yu2t1Y
-	/5/FH98WtEAAk2aNbHsCEwQD1ZEQcBU9d0qoVboH7itXKYF443zdlbn0zMptEdxaN3yd
-	wa7caUOtrIv7GY1/n14PClC2cbcaUVmFzOk/DyDnEgg6hpHgbSFXhKUQHIKyNU1Dfv2G
-	n9S+MvrSOSG3rmy/qNHdAq8p+Mtp5iaMJ57gJKJSIvQFo1VKJjM3k8anHKqn1catp7OP
-	ADFfLAJp2CVWm6hJLgkTN1+L8L17jr9CVbp7Fb9IZFc75l3BjinbMrRvX7DHmCDECjMP
-	O3qQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=S8h+BMKfUvKwXUeFSeIuRdIL54evZTlfxs2Tw66jo7w=;
-	b=LLYNPJQccsMl0YKPY28aalj5oPJPl4zAKNqMftB5273DP/2ymWGfsiwUe8j9LVsRql
-	0bfApUwlgbdiUwiiIvS1iBryaUo3P7/fO3hVVgLhjKMJv51VPqY2VbTXLrKB9udYxCOH
-	I49EomhDbp+1y0MhCDey4RJAzUNYiNT9IvWBQjKEcD6PxjiVqjXv5ERKaSmI+Ew2b+/p
-	ttlnpwlHol/0wSg/Y3jiOrpt8nWicd1ni1a6FHYwFI3SKiM2wDXBm66Yi6G6eJ9k7tAC
-	cOm1wKPUWi/d+JJ5rd906wWvYTkY43XnxVWPdTQP5YsgMtLMyoU6sF2+jCtQ47RWU5Ou
-	9gKw==
-X-Gm-Message-State: APjAAAVxlMi1RjpLabTibjSbs7Hfz8YKCqwKj3PUNLWuHeuCeouv7ema
-	Y/5UeZ7y3anmg7QMYS2ytg99n+rMIeVUDPC5bTftHTYQTvI=
-X-Google-Smtp-Source: APXvYqzy3krl4HiCWcHivXmncg3FwAW1Kytl/Jsy7sHGNWrzG5vIMxABgdxTDZwU6cP6GQl8IN+q13xuPu6SbAnquSM=
-X-Received: by 2002:ae9:ef50:: with SMTP id d77mr853706qkg.71.1576650042004;
-	Tue, 17 Dec 2019 22:20:42 -0800 (PST)
+	Wed, 18 Dec 2019 15:49:51 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 18 Dec 2019 15:58:32 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 18 Dec 2019 05:27:36 -0800
+Message-ID: <1576675656-32410-2-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1576675656-32410-1-git-send-email-wangmy@cn.fujitsu.com>
+References: <1576675656-32410-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
-References: <20191218024810.2874990-1-raj.khem@gmail.com>
-	<20191218024810.2874990-2-raj.khem@gmail.com>
-	<20191218032342.GB1997@localhost>
-In-Reply-To: <20191218032342.GB1997@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 17 Dec 2019 22:20:15 -0800
-Message-ID: <CAMKF1soWkJoDVVw6cuAYvxppP0ZjurtX72KTgqS5xfDKPETsKA@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/3] libqb: Add --enable-nosection-fallback with mips64/clang
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: 3A48E4CE1C9E.A89F4
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] kea: upgrade 1.7.0 -> 1.7.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,41 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2019 06:20:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 18 Dec 2019 07:58:34 -0000
+Content-Type: text/plain
 
-On Tue, Dec 17, 2019 at 7:23 PM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Tue, Dec 17, 2019 at 06:48:09PM -0800, Khem Raj wrote:
-> > Same issue happens with clang/mips64 so extend the gold fix to cover for
-> > this case
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  meta-oe/recipes-extended/libqb/libqb_1.0.5.bb | 6 +++++-
-> >  1 file changed, 5 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb b/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
-> > index b205186e0b..82503a168b 100644
-> > --- a/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
-> > +++ b/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
-> > @@ -22,9 +22,13 @@ S = "${WORKDIR}/git"
-> >  # WORKDIR/libqb/1.0.3+gitAUTOINC+c235284b5f-r0/recipe-sysroot-native/usr/bin/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/8.1.0/ld: error: conftest.ld: SECTIONS seen after other input files; try -T/--script
-> >  # WORKDIR/libqb/1.0.3+gitAUTOINC+c235284b5f-r0/recipe-sysroot-native/usr/bin/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/8.1.0/ld: internal error in write_sections, at ../../gold/reloc.cc:791
-> >  # collect2: error: ld returned 1 exit status
-> > -EXTRA_OECONF_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' --enable-nosection-fallback', '', d)}"
-> > +NOSECTION_FALLBACK = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', '--enable-nosection-fallback', '', d)}"
-> > +NOSECTION_FALLBACK_toolchain-clang_mips64 = "--enable-nosection-fallback"
-> >...
->
-> Removing these fragile linker tricks is the main change in the 1.9.0
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ .../recipes-connectivity/kea/{kea_1.7.0.bb => kea_1.7.2.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/kea/{kea_1.7.0.bb => kea_1.7.2.bb} (93%)
 
-its lot more than that and I am not planning to do major upgrade
-https://github.com/ClusterLabs/libqb/releases/tag/1.9.0
+diff --git a/meta-networking/recipes-connectivity/kea/kea_1.7.0.bb b/meta-networking/recipes-connectivity/kea/kea_1.7.2.bb
+similarity index 93%
+rename from meta-networking/recipes-connectivity/kea/kea_1.7.0.bb
+rename to meta-networking/recipes-connectivity/kea/kea_1.7.2.bb
+index 105ba10d7..6f0a7c9cf 100644
+--- a/meta-networking/recipes-connectivity/kea/kea_1.7.0.bb
++++ b/meta-networking/recipes-connectivity/kea/kea_1.7.2.bb
+@@ -14,8 +14,8 @@ SRC_URI = "\
+     file://kea-dhcp6.service \
+     file://kea-dhcp-ddns.service \
+ "
+-SRC_URI[md5sum] = "c6406ac3d160161056d2fc36557ebd89"
+-SRC_URI[sha256sum] = "173c8e893690a611bc1d1c6fbe54a5c20fcd54429399a8dc3a0d7d2eb01bf8cc"
++SRC_URI[md5sum] = "38ed9af438a79ce4584b0ffea6813d26"
++SRC_URI[sha256sum] = "e43fb0079cb344ae4dec7cafb8d85f75440a228ff88d742a0033315cc8a7b0ca"
+ 
+ inherit autotools systemd
+ 
+-- 
+2.17.1
 
-> (pre-)release, upgrading might be a better option than collecting more
-> cases where the removed code broke.
->
 
-Certain when upgrade to 2.0 is done this will/should be reviewed.
+
 
