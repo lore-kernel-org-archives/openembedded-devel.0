@@ -1,30 +1,47 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C1C837FEB5
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-il1-f193.google.com (mail-il1-f193.google.com
+	[209.85.166.193])
+	by mail.openembedded.org (Postfix) with ESMTP id DC3357FE45
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2019 07:58:34 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,328,1571673600"; d="scan'208";a="80458759"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Dec 2019 15:58:32 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 454754CE1C97
+	Wed, 18 Dec 2019 10:13:30 +0000 (UTC)
+Received: by mail-il1-f193.google.com with SMTP id v15so1231013iln.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2019 15:49:47 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 18 Dec 2019 15:58:28 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Dec 2019 05:27:35 -0800
-Message-ID: <1576675656-32410-1-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Wed, 18 Dec 2019 02:13:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=XYnUaz72hqa1gUdA6e7Gv8oIjcrTmHSiO4dNNByuQzs=;
+	b=DmCeFEUIWGVmNqZx5Nl/+tm2YWdoH3h15ZIxOXbI8GGH9052rU9xIprfdVXTvJuCX0
+	1ORBbFH5C9+tkjgh7B+X2Mn8jS4VEVv34GF/a70YYeGyTwKkoAGSYoY1f1BbKSKvLLuq
+	Qsd5lk5s/x0xTbIGyZHs3NL5EKXnk7meCJFxNlDLoXXC9ky9b/YAbt7xrYheUE+HDSHk
+	fMU7Da3spOgTYIlHGpvQv9PucQyHfSrL0HTxLPGzeecHP5EMptRCdCIGOItL9PZx32gj
+	oMKz7YPkzABztfJ20JxddCT1qWzSQRA3DIjD52em/jirAE++/ASkqzGyPnXZS6GNgDfR
+	ragw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=XYnUaz72hqa1gUdA6e7Gv8oIjcrTmHSiO4dNNByuQzs=;
+	b=J1vzwgSugXXfaSZE4xw8HdmFGXgBgUR/mRT9ZdcZeH08/otJ+c/0uVP6pGo9nsJhGZ
+	Y4TE+8WPpR9Q7cJ/fUaB6CSeQM27ftLpxc8Jx7DJP+05Y34hF6TrKxlBlQy7450whOAt
+	asWsuP+XG93XMWJytwtGr97QkBka5edLvvQ4QZUgmwmhsLKDKl30MYtW8782RKsYANwh
+	hpAJJ4T+5Q/nzpoNWJIGc4vlcjSZtJ7H7uUQZa1dajthfTSWMxwQrVISIPg6XPm++HS0
+	ouwyln+5Kz02Gv3nVbj9DXU0/PH+5IfboBBFOkxqROYHXSTv2VUwYYc22iOycM688EQG
+	qw7w==
+X-Gm-Message-State: APjAAAVXI/J1Wh0AedRKzhDB3UU+S2F8h2fzijINHIo7MUdO/z53NaoK
+	Z22Lu0IZpEsedD0oIdWa811zaO3eY5xrXojOlls=
+X-Google-Smtp-Source: APXvYqxS2lF5v9LDKMit8+Hpq9wE1DiI7zGKYiumnkLWclwDV0LQLCIf9XujRLSgseGXLv2496Rl4qsw0Nny4j+PGlA=
+X-Received: by 2002:a92:4781:: with SMTP id e1mr1051852ilk.147.1576664011828; 
+	Wed, 18 Dec 2019 02:13:31 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 454754CE1C97.A71B8
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] fuse3: upgrade 3.8.0 -> 3.9.0
+References: <20191218024810.2874990-1-raj.khem@gmail.com>
+In-Reply-To: <20191218024810.2874990-1-raj.khem@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 18 Dec 2019 11:13:20 +0100
+Message-ID: <CALbNGRQZvCmx=2Z3OR3QfakVfzjcNLNgJ2BoCqO0ON+FJjpzjA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH 1/3] tinyalsa: fix installation libdir path to match multilibs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,36 +54,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2019 07:58:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 18 Dec 2019 10:13:31 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- .../recipes-support/fuse/{fuse3_3.8.0.bb => fuse3_3.9.0.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-filesystems/recipes-support/fuse/{fuse3_3.8.0.bb => fuse3_3.9.0.bb} (91%)
+On Wed, Dec 18, 2019 at 3:48 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> Fixes
+> ERROR: tinyalsa-1.1.1+gitAUTOINC+8449529c7e-r0 do_package: QA Issue: tiny=
+alsa: Files/directories were installed but not shipped in any package:
+>   /usr/lib
+>   /usr/lib/libtinyalsa.a
+> Please set FILES such that these items are packaged. Alternatively if the=
+y are unneeded, avoid installing them or delete them within do_install.
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
 
-diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.8.0.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.9.0.bb
-similarity index 91%
-rename from meta-filesystems/recipes-support/fuse/fuse3_3.8.0.bb
-rename to meta-filesystems/recipes-support/fuse/fuse3_3.9.0.bb
-index b5bbe042a..19a3499a1 100644
---- a/meta-filesystems/recipes-support/fuse/fuse3_3.8.0.bb
-+++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.0.bb
-@@ -13,8 +13,8 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
- 
- SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
- "
--SRC_URI[md5sum] = "f184004cd3724f579cd602fa5232681b"
--SRC_URI[sha256sum] = "4a464f6df782a1dca1f7e85bf64ff6ece9547b389557aae4160371cb1c898d61"
-+SRC_URI[md5sum] = "5dc2be21c0d06c7eace340996e8a37e2"
-+SRC_URI[sha256sum] = "fcb7079a1bb4e510377b427d1c5c37c349281d498e249ae0c2379b4cf50059c2"
- 
- S = "${WORKDIR}/fuse-${PV}"
- 
--- 
-2.17.1
-
-
-
+Acked-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
 
