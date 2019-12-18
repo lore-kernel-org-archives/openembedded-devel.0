@@ -1,47 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B2977FFCE
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 080667F811
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2019 03:17:58 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id c16so388996qko.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Dec 2019 19:17:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6LmX1A68RW9hMZw1Tyn2fPAHfW9YAvoBkYU8mlynnNs=;
-	b=UN10ZYdkfZt/ZYjlZruA+RsA0kyAZBLZopmCeg3VfN7sI/ZqOr9ZS9kTIxg0FWWJEo
-	ATVWPXP4Zr/s388mWsmPc7WnF7ylfBBxHd9mma0LUka0l1m3BFsCh6C9tf3lvxnJsWl4
-	tcadwXU0559C6KXR/YVHaG51oZpmDdDRTa38bUtmBMpiHsjUxeGFCsF2MzrSlRz5fgps
-	CibCxc/mA8UfCkVTog8gDfjk4SlvbUKSp+nCJutLh+UTQ05lrZ9A9E7HNGz2yBaQeOye
-	vfozPchx4r07buMSmviQzZHY//rf496uORIm/v8eQ1gnmYXKY5XKrffp171TfzBHXjX6
-	y+qQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=6LmX1A68RW9hMZw1Tyn2fPAHfW9YAvoBkYU8mlynnNs=;
-	b=OvJ6cB6nMYVg9pip6i737PpGJPh/NPFPnMEtMbKnOJiwPHAQ0ySDEG5EPr24ckpSDG
-	0mmfvyPLhifsTcYcQOmS0tyOQWdlWWdoz1JjT+flR3uUdMbFqAszRZmf/56OnkCjKsz8
-	4MakvKM5xsfClc9goF2swvDujQqgJaSuCjN5c00yySeTrR5Z1TmtTxj/CnL+dpunSJ35
-	7bnje/zxZG+9D6QudsOSPMhNls3PfiUvnfJvR8kM/DEBjNeivre1ssi7x+2ENhnbWLTD
-	E1ujn6Ud0NBMpZhFBEOG2cd012qqBGW1c3QuB9VYWOqhL1gBVK2JZdgQQvyUJJtv5FSK
-	sxPg==
-X-Gm-Message-State: APjAAAUKQJlG9QKcJpfQlHl8HPqRRholqBCzvhbdKPFKrRYdJ/JibeL3
-	0YPC8TUXWd7E2I38hHWLOHJOrrPSgN2xEo8o10I=
-X-Google-Smtp-Source: APXvYqyeQ4CtQZ9p9Q323Ul+eIOpwRPwFMn2A3H9pZnhySXiox+gNJinnRGJuJ2jm17f00ubwS2Q4FNEaUaKDNCj6DA=
-X-Received: by 2002:a05:620a:6b8:: with SMTP id i24mr323238qkh.9.1576639078885;
-	Tue, 17 Dec 2019 19:17:58 -0800 (PST)
+	Wed, 18 Dec 2019 03:23:43 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47d0hw3tGqzQ3;
+	Wed, 18 Dec 2019 04:23:44 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1576639424;
+	bh=PmePCxfXjTQ2jWiZM0xKGVWV4If0QKUO0071YQ2k3Ws=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=r9PN3ENJbAO8kL8ow8i2CkdjYfCYEhpz1Sqb6uQxmQnGqF07f7pYpcvm17PjChhjn
+	biZncZc+E/6OduAU2vfQxJmYPyWoxOqCx6W1tXTf7V+WaTf195snalDahLceF4UOZM
+	gS7kqlXefnYhmh7z9QF7LpxdtIdq0zDUtx1cluFE1RN66OasjX9KXlxryo1yxcokdp
+	BlRwXpV2WUPb/XbDy8eycqFmg4mA73JTGRn/FtA3Uttsk2kTZwY7bRqYV8A0FY8bXQ
+	temOX7RYP+Od3tFDIKiWHO3rcKN9ki9JLCehc1gzriRrVUCR/HIBjDlmDz+KSKa3zq
+	QxMGIIP/O4fiWHEijinBvip5HeZ8X270OE80DZCUqEvmMfc0IpXFHOS3u27EtJ6SAj
+	RNp45z4wm5Dd3rXerrXDUD7QIvuUzw1wFH8bh7v6g+O8wMDD8n4MVcOVmryQAbk5Ym
+	lqKodWZNx55DRfBq5NXdSVOZarpl1u377dLtAVs16tA7A45gbXAgM7/MrwHWNO4L/W
+	FQfVjpJxKcNFJQcG3ahVgKk5bN/70vTlObyWNZNHCOSJ6NwOodEA4X+qAyPhqJuu2c
+	Gi9qQFsw9loCgBOlz4As9A0/8NGO16Je4DsgE1R4gQ/JC6M1Lez0n4CQySh9iqDWx1
+	9hTCA9TaU5mZSWS+X1KtBuYA=
+Date: Wed, 18 Dec 2019 05:23:42 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20191218032342.GB1997@localhost>
+References: <20191218024810.2874990-1-raj.khem@gmail.com>
+	<20191218024810.2874990-2-raj.khem@gmail.com>
 MIME-Version: 1.0
-References: <20191218011113.4072000-1-trevor.gamblin@windriver.com>
-	<20191218031409.GA1997@localhost>
-In-Reply-To: <20191218031409.GA1997@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 17 Dec 2019 19:17:32 -0800
-Message-ID: <CAMKF1sp3J1tKBSJT2ATzXmmTmmM0B6iLWTGVb241rSmWbsSTLA@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] net-snmp: update default community string
+In-Reply-To: <20191218024810.2874990-2-raj.khem@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 2/3] libqb: Add --enable-nosection-fallback with mips64/clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +44,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2019 03:17:58 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 18 Dec 2019 03:23:44 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Tue, Dec 17, 2019 at 7:14 PM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Tue, Dec 17, 2019 at 08:11:13PM -0500, Trevor Gamblin wrote:
-> > snmpd.conf, by default, lists the string "public" as the community string. As
-> > a consequence, any build incorporating net-snmp implicitly enables a
-> > vulnerability (CVE-1999-0517) where an attacker could obtain information about
-> > (and potential control of) the device and its network. This issue is picked up
-> > by common security scan tools, and given the age of the vulnerability, some
-> > minimum mitigation steps should be taken. While the conf file itself
-> > recommends setting the community string to a value known only within the
-> > user's organization, changing this string's default value for Yocto builds is
-> > a minimum step to help mitigate this issue.
-> >...
-> > -com2sec paranoid  default         public
-> > +com2sec paranoid  default         yocto-snmp-community
-> >...
->
-> Instead of mitigation this might do more bad than good.
->
-> Attackers and security scan tools will just start to also
-> scan for the known alternative "yocto-snmp-community".
->
-> The problem is that attackers tend to be faster with that,
-> so the actual change would be that security scan tools might
-> no longer report a vulnerability attackers will still use.
->
+On Tue, Dec 17, 2019 at 06:48:09PM -0800, Khem Raj wrote:
+> Same issue happens with clang/mips64 so extend the gold fix to cover for
+> this case
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  meta-oe/recipes-extended/libqb/libqb_1.0.5.bb | 6 +++++-
+>  1 file changed, 5 insertions(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb b/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
+> index b205186e0b..82503a168b 100644
+> --- a/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
+> +++ b/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
+> @@ -22,9 +22,13 @@ S = "${WORKDIR}/git"
+>  # WORKDIR/libqb/1.0.3+gitAUTOINC+c235284b5f-r0/recipe-sysroot-native/usr/bin/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/8.1.0/ld: error: conftest.ld: SECTIONS seen after other input files; try -T/--script
+>  # WORKDIR/libqb/1.0.3+gitAUTOINC+c235284b5f-r0/recipe-sysroot-native/usr/bin/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/8.1.0/ld: internal error in write_sections, at ../../gold/reloc.cc:791
+>  # collect2: error: ld returned 1 exit status
+> -EXTRA_OECONF_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' --enable-nosection-fallback', '', d)}"
+> +NOSECTION_FALLBACK = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', '--enable-nosection-fallback', '', d)}"
+> +NOSECTION_FALLBACK_toolchain-clang_mips64 = "--enable-nosection-fallback"
+>...
 
-I tend to agree. Perhaps describe mitigation in wiki and let users
-chose a string of their choice
-and let defaults be as they are.
+Removing these fragile linker tricks is the main change in the 1.9.0 
+(pre-)release, upgrading might be a better option than collecting more
+cases where the removed code broke.
 
-> cu
-> Adrian
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+cu
+Adrian
 
