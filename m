@@ -1,55 +1,24 @@
-Return-Path: <prvs=2476bd972=alistair.francis@wdc.com>
-X-Greylist: delayed 425 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 17 Dec 2019 17:57:22 UTC
-Received: from esa6.hgst.iphmx.com (esa6.hgst.iphmx.com [216.71.154.45])
-	by mail.openembedded.org (Postfix) with ESMTP id F05427FDD2
+Return-Path: <Trevor.Gamblin@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BD3747FFA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Dec 2019 17:57:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
-	t=1576605445; x=1608141445;
-	h=from:to:cc:subject:date:message-id:mime-version:
-	content-transfer-encoding;
-	bh=UO+7GVGFd1d23nPLVcr3/mghonSkZRmZup9sF3pO1Qo=;
-	b=VWM0Y8agJ0wa9BPwOiR2EYkrEh+RWXBxSzF2D02g8sM84sy3i1ox7T06
-	qxTG66RwcKDHTSWMUATyhmT8OeHe8epLvbaelo6BtaBr7lU/UX1lCycsT
-	B4K8dhZrLv6XsNniBfK2b+P5XCJqP6YF7EX7D053+gaSoKj8epDD3YvRw
-	PsylFV/vMsstsZig/6HO3bZg/YEj0AAlkbBi2P1y1S0zLNrcri/AWQUap
-	XHpnwONWJRo6sjWbdfQ6cVckFAHLm863LfFoYzS2GqU/UKCycRr2khgpt
-	5470kgrt1JHjMd8f+6QNKt68gtSiC9FpLhB0OQ+jouKDV98HGq+e49nFw Q==;
-IronPort-SDR: 4MwAGWJPtF1HXMtMQYS+nZg6VnYSziZFSgkX8lINxdIjMGb5qjo0q28IBhlrHbe3B4gG2STOXX
-	HivpYJuDTHGB82smyO40Q6bs0iQya4LNMB9KPzOgerIsnBLCp9IUqCScRYBSAFOVEH1INVQZDh
-	/LI9FrubYbIhNcuwb/jO3ZgvAIp10M8eT8+c3OUEunsplqpPYdD76NtVbLW8MeQtREFDv42Lxl
-	wsPGOXt7aOBkXo1OZkaKPxA5N0HUxrXKQxhsDj/TjjX/t8ONjpx26nMO2T54I2yWwPrc6+cVK5
-	Ga8=
-X-IronPort-AV: E=Sophos;i="5.69,326,1571673600"; d="scan'208";a="127176242"
-Received: from uls-op-cesaip02.wdc.com (HELO uls-op-cesaep02.wdc.com)
-	([199.255.45.15])
-	by ob1.hgst.iphmx.com with ESMTP; 18 Dec 2019 01:50:19 +0800
-IronPort-SDR: aLV4AvKKVpVPuJag3w8JjZ5aGr4KVoSYKpGCa/huutg7vLJJLLI8LzVWivRXjRW4+cHz1TelxT
-	vmlD8u1uDEpRw9gzpP/G0xYCqe8L5Oc0Trf66OzSaCBEfWOGiEaz7iZANH6n8hQLgIlI700seG
-	JbW/LnVGapY7KX+FzY1rT88hxzwL9fjtUNPx96AM1WIlqVJogrXZYCsdxmHHV5ekwi1zMx94JO
-	nDBhuDingXWajZl+lzPbgZP5rpqrK78upp8UqZQ5Eur/QEaObgMuxmEpJ/QMZAzpAQ0Wx9OkZR
-	LsWJTH5twHIIH2TurUceC3sZ
-Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
-	by uls-op-cesaep02.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
-	17 Dec 2019 09:44:21 -0800
-IronPort-SDR: aN3/4qnB1n9PJDDiIuWCc743ZhuAuFlBC7WSLvqcVf7K7/bS15XJmvP7MX9B+pipbpJYanJExg
-	S6VqoMHL3QOkNgtRaZOQjmPms3bogzH7mURk6rowymZ3Z4pmRWfuDJEASJBKfVAiIbEq1aH9xr
-	sp/hv1vFGPWbGHP/ksA7maDLhihuBxpBc31fSQQPx0wVd9bBiue3vfBcETSBEXczH2tnzE0b0T
-	0KB66nwq7Y0vbcJ6eis0AvSxo4lTZzVOcRax97U2VNcoaR9W8I2qOG73gLOLN2xY8jKWrFDjP7
-	3qM=
-WDCIronportException: Internal
-Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
-	risc6-mainframe.int.fusionio.com) ([10.196.158.235])
-	by uls-op-cesaip02.wdc.com with ESMTP; 17 Dec 2019 09:50:19 -0800
-From: Alistair Francis <alistair.francis@wdc.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Dec 2019 09:44:27 -0800
-Message-Id: <20191217174427.4001-1-alistair.francis@wdc.com>
-X-Mailer: git-send-email 2.24.0
+	Wed, 18 Dec 2019 01:11:13 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id xBI1BED4024436
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Dec 2019 17:11:14 -0800 (PST)
+Received: from yow-tgamblin-fedora1.wrs.com (128.224.56.206) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.468.0; Tue, 17 Dec 2019 17:11:14 -0800
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 17 Dec 2019 20:11:13 -0500
+Message-ID: <20191218011113.4072000-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH] mycroft: RDEPENDS on mpg123 to allow singing
+Subject: [meta-networking][PATCH] net-snmp: update default community string
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,28 +31,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Dec 2019 17:57:23 -0000
+X-List-Received-Date: Wed, 18 Dec 2019 01:11:13 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
+snmpd.conf, by default, lists the string "public" as the community string. As
+a consequence, any build incorporating net-snmp implicitly enables a
+vulnerability (CVE-1999-0517) where an attacker could obtain information about
+(and potential control of) the device and its network. This issue is picked up
+by common security scan tools, and given the age of the vulnerability, some
+minimum mitigation steps should be taken. While the conf file itself
+recommends setting the community string to a value known only within the
+user's organization, changing this string's default value for Yocto builds is
+a minimum step to help mitigate this issue. Superior solutions that can be
+implemented by the end developer/user include replacing the default community
+string with a complex string unique to the network and/or filtering
+UDP packets on the appropriate ports.
+
+There's no formal fix for the above CVE, so I've avoided labeling this as if
+it were a CVE fix. Also note that if you want to test this to check the change,
+net-snmp-server needs to be included in the build (not just net-snmp).
+
+More info can be found at https://www.tenable.com/plugins/nessus/41028.
+
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb | 2 +-
+ meta-networking/recipes-protocols/net-snmp/files/snmpd.conf | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
-index 3c7bd8963..62d1ad7f7 100644
---- a/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
-+++ b/meta-multimedia/recipes-multimedia/mycroft/mycroft_19.8.1.bb
-@@ -79,7 +79,7 @@ RDEPENDS_${PN} += "python3-requests python3-pillow \
- # Mycroft uses Alsa, PulseAudio and Flac
- RDEPENDS_${PN} += "alsa-utils alsa-plugins alsa-tools"
- RDEPENDS_${PN} += "pulseaudio pulseaudio-misc pulseaudio-server"
--RDEPENDS_${PN} += "flac"
-+RDEPENDS_${PN} += "flac mpg123"
+diff --git a/meta-networking/recipes-protocols/net-snmp/files/snmpd.conf b/meta-networking/recipes-protocols/net-snmp/files/snmpd.conf
+index 728171c42..5a5c40bb0 100644
+--- a/meta-networking/recipes-protocols/net-snmp/files/snmpd.conf
++++ b/meta-networking/recipes-protocols/net-snmp/files/snmpd.conf
+@@ -58,7 +58,7 @@
+ # from):
  
- # Mycroft can do this itself on the target, but it's quicker to do it here
- RDEPENDS_${PN} += "mimic"
+ #       sec.name  source          community
+-com2sec paranoid  default         public
++com2sec paranoid  default         yocto-snmp-community
+ #com2sec readonly  default         public
+ #com2sec readwrite default         private
+ 
 -- 
-2.24.0
+2.23.0
 
 
