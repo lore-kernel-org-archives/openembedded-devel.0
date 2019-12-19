@@ -1,24 +1,25 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id BBD397FC36
+Return-Path: <Li.Zhou@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DCDE7FCD6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2019 04:58:21 +0000 (UTC)
+	Thu, 19 Dec 2019 09:00:16 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xBJ4wLko013368
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Wed, 18 Dec 2019 20:58:21 -0800 (PST)
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Wed, 18 Dec 2019 20:58:20 -0800
-From: <kai.kang@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Thu, 19 Dec 2019 12:58:16 +0800
-Message-ID: <20191219045816.34085-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xBJ8xlYG024497
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Dec 2019 01:00:07 -0800
+Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Thu, 19 Dec 2019 00:59:39 -0800
+From: Li Zhou <li.zhou@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 19 Dec 2019 16:59:12 +0800
+Message-ID: <20191219085912.139105-1-li.zhou@windriver.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH v2] openl2tp: update systemd service file
+X-Originating-IP: [128.224.153.75]
+Subject: [meta-networking][PATCH] openl2tp: Update SRC_URI for "Failed to fetch URL" warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,44 +32,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Dec 2019 04:58:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 19 Dec 2019 09:00:16 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+Update SRC_URI for solving below warning:
+WARNING: openl2tp-1.8-r0 do_fetch: Failed to fetch URL
+ftp://ftp.openl2tp.org/releases/openl2tp-1.8/openl2tp-1.8.tar.gz,
+attempting MIRRORS if available
 
-It shows an warning of openl2tp in systemd log:
-
-| /lib/systemd/system/openl2tpd.service:8: PIDFile= references a path
-| below legacy directory /var/run/, updating /var/run/openl2tpd.pid →
-| /run/openl2tpd.pid; please update the unit file accordingly.
-
-Update the systemd service file to fix the warning.
-
-Update SRC_URI as well that the homepage openl2tp.org has been closed.
-Use archived file on sourceforge instead.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Li Zhou <li.zhou@windriver.com>
 ---
- .../recipes-protocols/openl2tp/openl2tp/openl2tpd.service       | 2 +-
- meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb      | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/openl2tpd.service b/meta-networking/recipes-protocols/openl2tp/openl2tp/openl2tpd.service
-index 7b3faf672..d02d0ff7e 100644
---- a/meta-networking/recipes-protocols/openl2tp/openl2tp/openl2tpd.service
-+++ b/meta-networking/recipes-protocols/openl2tp/openl2tp/openl2tpd.service
-@@ -5,7 +5,7 @@ Requires=rpcbind.service
- 
- [Service]
- Type=forking
--PIDFile=@STATEDIR@/run/openl2tpd.pid
-+PIDFile=/run/openl2tpd.pid
- EnvironmentFile=@SYSCONFDIR@/default/openl2tpd
- ExecStartPre=@BASE_BINDIR@/sh -c "@BASE_SBINDIR@/modprobe -sq l2tp_ppp || @BASE_SBINDIR@/modprobe -sq pppol2tp"
- ExecStart=@SBINDIR@/openl2tpd $OPENL2TPDARGS
 diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-index 90e8b111d..9c0c28e19 100644
+index 90e8b111d..38d0554e1 100644
 --- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
 +++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
 @@ -18,7 +18,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9d9259cbbf00945adc25a470c1d3585 \
@@ -76,11 +55,11 @@ index 90e8b111d..9c0c28e19 100644
  DEPENDS = "popt flex readline rpcsvc-proto-native bison-native"
  
 -SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${PV}/${BP}.tar.gz \
++SRC_URI = "https://sourceforge.net/projects/openl2tp/files/openl2tp/${PV}/${BP}.tar.gz \
             file://Makefile-modify-CFLAGS-to-aviod-build-error.patch \
             file://openl2tp-simplify-gcc-warning-hack.patch \
             file://Makefile-obey-LDFLAGS.patch \
 -- 
-2.17.1
+2.23.0
 
 
