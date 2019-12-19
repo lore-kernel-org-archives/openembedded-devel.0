@@ -1,51 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
-	[209.85.214.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 680D77FD6B
+Return-Path: <prvs=2494fb295=alistair.francis@wdc.com>
+Received: from esa4.hgst.iphmx.com (esa4.hgst.iphmx.com [216.71.154.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 041656C0B7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2019 18:59:39 +0000 (UTC)
-Received: by mail-pl1-f180.google.com with SMTP id az3so2962046plb.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2019 10:59:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5L2GNRlvCsuf7Wuql/DPYhaZXE82+7PJS6BEVcKqL/8=;
-	b=T4GIkRZsZpXNhvhfYDsV7n6eEmggAaPXaeeC3sYK+2xg4IFaiMUsUn9Zya/S6Px5U1
-	whsSTak5JJT+O61PzD+fKVLP6B4rq9I75B0U2uF0dM2aeMvnp9JB5r4pUjaTQo2TaNE6
-	KFplF8YJZIBuRWD6spZYifFlQPqx2aFc9n4SAwnya9RnB7Gh4H/wAyn9L/8asCDwpqS8
-	M1PGqGrSEp9EfPV2TAfXOkQmlV6U9yj9pQg3iWmBkqBKAE6ze+j/BXIdOScfDANNLRwf
-	cufTdLnTluBMyey1m2U0bwBaR6jVb2bAtkHuKCeUIN8lxdgYq8ebCvaDAH+3glqCznzL
-	UWSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=5L2GNRlvCsuf7Wuql/DPYhaZXE82+7PJS6BEVcKqL/8=;
-	b=O8QhMZgay/5lF5rfjSO4QUof98DL4QV68NkTkAg9bSEOuVDZuCk0R/PVv9v38yjYFW
-	eRmIvSJhSCi4zq4QdGheX5t6X740YMKIxmdtstxR3ct/3iP0AZcsemqlYWIAIR5CjQ4N
-	QhdEHaRLQ9owolC0qwfYG5aGYz9tHdN0FXLAfDH4vEOSBuOR8DFkMJXvOT7XCcbzyvHk
-	23Jr4ikLnmrMAZ/WacRFjG36TE0MtqCU5yzQhxvwzns1MaUOgoDyIGVibT4QWPwxgGa/
-	yh2XaUsFWaU6rnW0RV5oUhAjAI+UKkU8rgjnhZCySPyjkxY+75rb19F3VBGWHUZMB3Bl
-	TSjw==
-X-Gm-Message-State: APjAAAUUeKbnrVmwKys70nJoH7IWsuDY7CKE6sYMch4JlHb60rY859/x
-	Nlg9zGVEy2rgp6Pn4PbL7JbzBx/bgYg=
-X-Google-Smtp-Source: APXvYqxNebFZmRRlq4r9i7kidJ086m5ElO32EAdsdBLFQgarnFr0eNDCac+mCltMcwWzv6X8gk1Dbw==
-X-Received: by 2002:a17:90b:4391:: with SMTP id
-	in17mr11255321pjb.33.1576781979856; 
-	Thu, 19 Dec 2019 10:59:39 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4b])
-	by smtp.gmail.com with ESMTPSA id
-	o184sm8129200pgo.62.2019.12.19.10.59.39
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 19 Dec 2019 10:59:39 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Thu, 19 Dec 2019 21:00:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+	t=1576789249; x=1608325249;
+	h=from:to:cc:subject:date:message-id:mime-version:
+	content-transfer-encoding;
+	bh=NvfZJodpzrzuFSFOwwQRc96g0eFzZaSthQATwGtieIs=;
+	b=fnQxp9pL7sF9UcI1x1Yq1yLNWjPpx9wsgOqlYujjVaTUob/1Ma7nJIxD
+	gq0BT1ctoBc3itVGQGIyx+/lUfABlDIbgljSWLsdTp3/+gMhaf14NYnTQ
+	TL/Gz6wSiqJtP1JHQkHLY8BgJMZ+Qi1S2ft+Rmp4m0jNFFoV4Oe1Slg7z
+	aqWq+2gt3E9LyBvSAJfZw3M85R2VveKjoRs4MAJpn+j37FPztpwB0pvGG
+	xgiSI9MpxO5TH86w0g/XAHK+tCw8VDLUOBHtZjl2Yjee9c7WmVKZ/oKnH
+	vsM8m62dYV5EHfSrNWdJithU08NFwTSlMZPkacThmdcOj+x2c37q3eT6i A==;
+IronPort-SDR: CppBAVRvZo1QdJ7l+A9RCFU29jOqRftLg7eKTUEGQfn+seW4OCHkoDHSY2kRXBrCGp4aJmmTh/
+	KMutgE8qXw5ASD7vRoQM8outdmFBuVn57W33f45N21vM8d647rUjgx+pImU8XBGL6Onb+3Wmw7
+	qI2bas10LDOP+9/fKQUtzj12BfSpLDH7/6KCOnRuDBKYMsUqdFMBx7YOG70vkolcLYvq67Ebp4
+	ykarAYj4MLXqpaTgzB/rfhiYcWUXnlSlqAdLPA815h3iahb6GYLrxr0KAANHuptyuVjhlQTCMi
+	C0k=
+X-IronPort-AV: E=Sophos;i="5.69,333,1571673600"; d="scan'208";a="125752341"
+Received: from h199-255-45-14.hgst.com (HELO uls-op-cesaep01.wdc.com)
+	([199.255.45.14])
+	by ob1.hgst.iphmx.com with ESMTP; 20 Dec 2019 05:00:48 +0800
+IronPort-SDR: /nLocSdcfhO/DEtjG+c5rndSFKPkirgdwxqOwSl78ac21LUvQ3d/kXHPNYBsETuyiBQki8HnNb
+	YlsdzrvB8Faam01HlUzufzJJIcSdRF9U8bT6EVSJywF5M4VvwJseYDBkffGwywYIlLawBiSiEv
+	q/U33uy16AEEU+yrAkRoy6qAtvsWu3oaSf0bAlAA4U8oFvg3lbUDyFUU93TpZzFLxPxSCkc88B
+	rTRB5oNqi+D4xnxcPze7NOisMGKoAukzNB3m2u98lebthLsCcBppnvy7TJKH6vOj354pXAfJu2
+	WWSrRRypg7W3xrcnvXhSyOHA
+Received: from uls-op-cesaip02.wdc.com ([10.248.3.37])
+	by uls-op-cesaep01.wdc.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+	19 Dec 2019 12:55:10 -0800
+IronPort-SDR: GtACMcJRbg4iGPZ1GuCTA1bxnBB52rtQfaf46w2+CcxgkOuj5JLeydQqw/Qm94T+DiIT/YIe5Z
+	xbgRmxQhXNO4+5M/d0UPGMqEF7SdSqoycLKcwgFp/NU2CugaoSDMdwwKhU42R7UlJ4oIVLnzWZ
+	kti+N1JhhQ7PKVzwnlWPm5aQmnLNjGZoHaqs3fb8xjQiLiFJqQQ5pE/xvuaSZxbmvsUkm2WZ6/
+	0Z14j5/Yh6KJyJxHtVtZm/mgiFqPMn+75cyz9mDe2EISOvQANomBYY8cJY6A89d78DBK7cMwo6
+	g9s=
+WDCIronportException: Internal
+Received: from risc6-mainframe.sdcorp.global.sandisk.com (HELO
+	risc6-mainframe.int.fusionio.com) ([10.196.158.235])
+	by uls-op-cesaip02.wdc.com with ESMTP; 19 Dec 2019 13:00:50 -0800
+From: Alistair Francis <alistair.francis@wdc.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Dec 2019 10:59:31 -0800
-Message-Id: <20191219185931.1325337-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.1
+Date: Thu, 19 Dec 2019 12:54:57 -0800
+Message-Id: <20191219205457.28136-1-alistair.francis@wdc.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] dfu-util-native, sjf2410-linux-native: Fix Deploy in multimachine builds
+Subject: [meta-oe][PATCH] openocd: Enable remote-bitbang build option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,73 +60,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Dec 2019 18:59:39 -0000
+X-List-Received-Date: Thu, 19 Dec 2019 21:00:48 -0000
 Content-Transfer-Encoding: 8bit
 
-When more than two machine are built using same tmpdir and happen to use
-these tools the builds fail
+Enable the remote-bitbang via PACKAGECONFIG to allow connecting to
+verilator instances.
 
-Fixes
-ERROR: The recipe dfu-util-native is trying to install files into a shared area when those files already exist. Those files and their manifest location are:
-  TOPDIR/build/tmp/deploy/tools/dfu-util-0.9
-    (matched in manifest-qemumips-dfu-util-native.deploy)
-Please verify which recipe should provide the above files.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Alistair Francis <alistair.francis@wdc.com>
 ---
- meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb  | 9 ++++++++-
- .../samsung-soc-utils/sjf2410-linux-native_svn.bb        | 9 ++++++++-
- 2 files changed, 16 insertions(+), 2 deletions(-)
+ meta-oe/recipes-devtools/openocd/openocd_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb
-index 76faefefbb..feb16fa730 100644
---- a/meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb
-+++ b/meta-oe/recipes-support/dfu-util/dfu-util-native_0.9.bb
-@@ -8,7 +8,6 @@ PACKAGECONFIG ??= ""
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+index 9ec77fdc4..e95f1cfa5 100644
+--- a/meta-oe/recipes-devtools/openocd/openocd_git.bb
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -53,4 +53,5 @@ FILES_${PN} = " \
+   "
  
- PACKAGECONFIG[static] = "CFLAGS='${CFLAGS} -pthread -static',,"
- 
--do_deploy[sstate-outputdirs] = "${DEPLOY_DIR_TOOLS}"
- do_deploy() {
-     install -m 0755 src/dfu-util ${DEPLOYDIR}/dfu-util-${PV}
-     rm -f ${DEPLOYDIR}/dfu-util
-@@ -16,3 +15,11 @@ do_deploy() {
- }
- 
- addtask deploy before do_package after do_install
-+
-+do_deploy[sstate-outputdirs] = "${DEPLOY_DIR_TOOLS}"
-+# cleandirs should possibly be in deploy.bbclass but we need it
-+do_deploy[cleandirs] = "${DEPLOYDIR}"
-+# clear stamp-extra-info since MACHINE_ARCH is normally put there by
-+# deploy.bbclass
-+do_deploy[stamp-extra-info] = ""
-+
-diff --git a/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_svn.bb b/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_svn.bb
-index 9e609c4dd8..3a5172eecc 100644
---- a/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_svn.bb
-+++ b/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_svn.bb
-@@ -13,7 +13,6 @@ SRC_URI = "svn://svn.openmoko.org/trunk/src/host/;module=sjf2410-linux;protocol=
- S = "${WORKDIR}/sjf2410-linux"
- 
- inherit native deploy
--do_deploy[sstate-outputdirs] = "${DEPLOY_DIR_TOOLS}"
- 
- CFLAGS += "-DLINUX_PPDEV"
- 
-@@ -31,3 +30,11 @@ do_deploy() {
- }
- 
- addtask deploy before do_build after do_install
-+
-+do_deploy[sstate-outputdirs] = "${DEPLOY_DIR_TOOLS}"
-+# cleandirs should possibly be in deploy.bbclass but we need it
-+do_deploy[cleandirs] = "${DEPLOYDIR}"
-+# clear stamp-extra-info since MACHINE_ARCH is normally put there by
-+# deploy.bbclass
-+do_deploy[stamp-extra-info] = ""
-+
+ PACKAGECONFIG[sysfsgpio] = "--enable-sysfsgpio,--disable-sysfsgpio"
+-PACKAGECONFIG ??= "sysfsgpio"
++PACKAGECONFIG[remote-bitbang] = "--enable-remote-bitbang,--disable-remote-bitbang"
++PACKAGECONFIG ??= "sysfsgpio remote-bitbang"
 -- 
-2.24.1
+2.24.0
 
 
