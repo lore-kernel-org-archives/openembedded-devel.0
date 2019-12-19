@@ -1,50 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id E3ED36079F
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A8A27D3CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2019 22:33:30 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id l12so3274327qtq.12
+	Thu, 19 Dec 2019 03:16:22 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id xBJ3GNV7016646
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Dec 2019 14:33:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=E/MR3YeDUr6+E7ZqUTkTWZHtCOdX+3ay6/P8E+9DqA4=;
-	b=X0ecHRHYcXcKDcc/ImWyJLxgRAzIzlVJ7CTkw4i6yOtE7QysYWdhLVanii7Dz78K1+
-	B7V1XWCETijbDW/iIurzoWyYysJWCGfy8gZLvVkXl4Yb5ChK/43BCF1yBA0qd41t5to9
-	eLQtZ5ZJ4q9I8G76z+VRBpudwv9RQtY3cEyDzQQUeyb4Bbd9iyH/9IMQhHY4XVPhi7Bs
-	i5ZkKjt2G3X985kjsLmSvL9JOGj60t2HkoWxmO8P1SnihZQ8dDF8CGYOmeBbOZ9PZMW7
-	gweunIrosz8QOrtMbPRAsJR5FyIwQKkYR/V+4/6oZTjxvCprUVLyMLXsyxxrq/NnN21S
-	L/sg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=E/MR3YeDUr6+E7ZqUTkTWZHtCOdX+3ay6/P8E+9DqA4=;
-	b=OiV2GQu3ZQ5vu45RT8maajVQpnhdavJClAynNR9dQzyje6gZj4Ge2GVIHzAbeibIVq
-	1oVSJSAkf8bX4lnWsLdlRDuHeeHg3oSqqTCq0E4tQb1Lf44SySvni2KiYpVViDLLw+CJ
-	qAQJeAeH0zsCmPhuN2CsdO1Ze1cM0PXXsc4vRtm9hweG/lRopMBNIhWwIPcY7pGOEmiz
-	VOPLbvtrqr138MpjWWCkZm3pGOVC0f1FCvbu35i8W0ZwpZVbhPf+4ueTEP36X4UXnb75
-	BlrXj7+Tp4DrKJ1MGpGKyR27TxLBruT/QgGFimbzwDzEORVyn+V8UPBe8wLMz/9Hfhi6
-	gMiA==
-X-Gm-Message-State: APjAAAW4+8V6qTaTlIfEoqXqNtoKoL5K8NwA8Gfrjs7uA+vgypiVrMEt
-	PUJjx27clPblMbOMu524X7B7QsugjgyZuL+9wVE=
-X-Google-Smtp-Source: APXvYqylk0lCUXmucabYEW5p5W7m4gKXMsIrNbtINIiiOGFDpWnrx0i1IpoG8y9GgMie5AU+duKGIO4sDCZPDQGAUC8=
-X-Received: by 2002:ac8:145:: with SMTP id f5mr4366169qtg.194.1576708410854;
-	Wed, 18 Dec 2019 14:33:30 -0800 (PST)
+	Wed, 18 Dec 2019 19:16:23 -0800 (PST)
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Wed, 18 Dec 2019 19:16:22 -0800
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 19 Dec 2019 11:16:17 +0800
+Message-ID: <20191219031617.8339-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20191218143106.128574-1-alex.kanavin@gmail.com>
-	<20191218143106.128574-2-alex.kanavin@gmail.com>
-	<CALbNGRTvSNapgjBavAE7S4N0ETWpthMG3XPv=g7_sekCE3vnmw@mail.gmail.com>
-	<CANNYZj8ir8Btnhx_Fthd-5O9455aqSEHpRarPTfG+ZHHa+Lqng@mail.gmail.com>
-In-Reply-To: <CANNYZj8ir8Btnhx_Fthd-5O9455aqSEHpRarPTfG+ZHHa+Lqng@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Dec 2019 14:33:04 -0800
-Message-ID: <CAMKF1spUERVV_MxunrwmD1=3-7bHickd4Fim3EuxOPrcO+KOWQ@mail.gmail.com>
-To: Alexander Kanavin <alex.kanavin@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 2/2] sysprof: update to 3.34.1
+Subject: [meta-networking][PATCH] openl2tp: update systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,47 +31,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Dec 2019 22:33:32 -0000
+X-List-Received-Date: Thu, 19 Dec 2019 03:16:22 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-this fails to build
+From: Kai Kang <kai.kang@windriver.com>
 
-https://errors.yoctoproject.org/Errors/Details/298857/
+It shows an warning of openl2tp in systemd log:
 
-and I think moving to meta-gnome is good
+| /lib/systemd/system/openl2tpd.service:8: PIDFile= references a path
+| below legacy directory /var/run/, updating /var/run/openl2tpd.pid →
+| /run/openl2tpd.pid; please update the unit file accordingly.
 
+Update the systemd service file to fix the warning.
 
-On Wed, Dec 18, 2019 at 9:01 AM Alexander Kanavin
-<alex.kanavin@gmail.com> wrote:
->
-> On Wed, 18 Dec 2019 at 16:01, Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m>
-> wrote:
->
-> >
-> > > +On uclibc elf.h does not have GNU extentions but we need this define
-> > > +so we define it locally if its not getting it from elf.h
-> > uclibc is long gone. Is this stlll necessary for musl?
-> >
->
-> Actually it altogether fails to build on musl. I think we should leave th=
-e
-> fixing up to the interested parties, or mark the recipe as incompatible.
->
->
-> > >
-> > Maybe I missed something but the only (optional) dependency left is
-> > mutter. Shouldn't sysprof go into meta-gnome?
-> >
->
-> This decision I leave up to you :-)
->
->
-> Alex
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Update SRC_URI as well that the homepage openl2tp.org has been closed.
+Use archived file on sourceforge instead.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../recipes-protocols/openl2tp/openl2tp/openl2tpd.service       | 2 +-
+ meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb      | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp/openl2tpd.service b/meta-networking/recipes-protocols/openl2tp/openl2tp/openl2tpd.service
+index 7b3faf672..d02d0ff7e 100644
+--- a/meta-networking/recipes-protocols/openl2tp/openl2tp/openl2tpd.service
++++ b/meta-networking/recipes-protocols/openl2tp/openl2tp/openl2tpd.service
+@@ -5,7 +5,7 @@ Requires=rpcbind.service
+ 
+ [Service]
+ Type=forking
+-PIDFile=@STATEDIR@/run/openl2tpd.pid
++PIDFile=/run/openl2tpd.pid
+ EnvironmentFile=@SYSCONFDIR@/default/openl2tpd
+ ExecStartPre=@BASE_BINDIR@/sh -c "@BASE_SBINDIR@/modprobe -sq l2tp_ppp || @BASE_SBINDIR@/modprobe -sq pppol2tp"
+ ExecStart=@SBINDIR@/openl2tpd $OPENL2TPDARGS
+diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+index 90e8b111d..38d0554e1 100644
+--- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
++++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
+@@ -18,7 +18,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9d9259cbbf00945adc25a470c1d3585 \
+ 
+ DEPENDS = "popt flex readline rpcsvc-proto-native bison-native"
+ 
+-SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
++SRC_URI = "https://sourceforge.net/projects/openl2tp/files/openl2tp/${PV}/${BP}.tar.gz \
+            file://Makefile-modify-CFLAGS-to-aviod-build-error.patch \
+            file://openl2tp-simplify-gcc-warning-hack.patch \
+            file://Makefile-obey-LDFLAGS.patch \
+-- 
+2.17.1
+
 
