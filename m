@@ -1,53 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
-	[209.85.214.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 66A8A7FD8B
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D15B7FD87
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2019 15:25:42 +0000 (UTC)
-Received: by mail-pl1-f171.google.com with SMTP id c23so2707622plz.4
+	Thu, 19 Dec 2019 15:25:44 +0000 (UTC)
+Received: by mail-pg1-f178.google.com with SMTP id b137so3290897pga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2019 07:25:43 -0800 (PST)
+	Thu, 19 Dec 2019 07:25:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=n1/ZYhQY2UGWzRRD97l1dGthAdcVHaWk9Zn6nNyZP0E=;
-	b=g+37gmXf4jeCx2QANa9vHu1X1sKKv/sOiElibsYaxQiqHVbk+EVcLKYq0baHtM0w7C
-	gEPZy73DGraKhqmvjjxVBt0ipcdhX0a95G/L5a5JEmZZY1DYbcGBFg4p63Nr8PsALA+1
-	v+GAb+Xf/kS7BlWx7rJOciPmcU5xA5YFWaMzSYtEwQBiuyO+aG0wNKc01j7QdLeWGJZW
-	831bHyuL71nTdPknj9AcoMuqyKQn3xJXwPJj5u6yGb9yvgSWQmbTLHdVn5uSna/Bscrl
-	HJFutJXPxUxOqWOLSCI6g48kf/0Vj5ncS2f40LjIWHGNHeLNCvkxqTtdRvNUMrNMDaPk
-	kpVw==
+	bh=oBVRsaGhpXfYxxRbBRUTkS4xJZe3Dp6maLRxDev3II4=;
+	b=PkDHrV6249hZhgPe9QDjdRNbsAeiVRg7C8mr7i/lPDaUISqVOdBCFlP5R+aHeJ1pJh
+	87u42iH1Hxl9xg+EQ0jnOmIxpKVzpyvJmuDvSzhdwEb0PfyYo4a183AinkiJ6Fzn7XIq
+	s8Sj+7NMdhNcTrz9vT4NBZX6grxvCLYa2mPIFdr7uYTQQ36JcWtNuxzM0ARDhnjRuIDW
+	wm6VqkacblALauqQqVj160a2hrdjTRoWQ1o/4dj9dlDi28abamN5PlEgedRZG9/IUHw1
+	vhEM54wJq1xjov9A+qvfDV+2yva+VPmzCHxlJraOos+S9MH3gqSeubZntEfdnPfEN2bN
+	VyyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=n1/ZYhQY2UGWzRRD97l1dGthAdcVHaWk9Zn6nNyZP0E=;
-	b=ZL6MhJuNGnpRJBYUveNkMDqvla7mcsOUNPKn25OKyvK7hNhVBulxlE2/JKiP0cQvrH
-	9+1R4Xt7j8tdY5WnuI5gr0qt7b4+SBekOG6wsNUu+yXqtjyw/C8G61weYU8iD5sIQYqI
-	ouRtRPKKTgZMUUbXJvZcdvLQo6kWjIT80Dc42zhoJPXIiF0vB+fTnp12+PfyhDzcREe6
-	OBaUzx1KjGcURaC5c2f0n+PvGN+ycNoOWOjqoETY7pNCBdfXnawYKWtnItWqsZsYJREN
-	RoT+NeKi62tCxWsqnJp17ckdVB1Go+TU1ecDFu7Gr3eGNiC9DY+9oFoBls9A746Kyjp2
-	xksA==
-X-Gm-Message-State: APjAAAVHgscik1LFLqMbYLvpgrzQeeR+GEAkEuzrwOzZ+TaR27FdQPrL
-	q7lFNdcc0aAcIdvF9JSlJF4Kmt+n94A=
-X-Google-Smtp-Source: APXvYqwOmNQzMeiv5uW1bgjJVcAfLQZOYnBvkYiL9+8jf0b7kOUm0Jxr6vLFuB63H6Q6xoDb/kQOmg==
-X-Received: by 2002:a17:902:541:: with SMTP id
-	59mr9628842plf.190.1576769142799; 
-	Thu, 19 Dec 2019 07:25:42 -0800 (PST)
+	bh=oBVRsaGhpXfYxxRbBRUTkS4xJZe3Dp6maLRxDev3II4=;
+	b=qadg+0Leazh98rPSsxsIiMX92xAtzbKQ7ufBmlKRLvRbHlg3QyFoo5QdJGy5KNcFGx
+	PqD7oW64rSBa4HEMUsy3GiTTPzEJ8lCEob/tE51s5bplljzZxnTT9KlW3cFdwu4Etk9j
+	Rg0G8SqBA5IJfz/I5bqEBFSLH6CsUuNAMpPyy/hqM2YQdPMzg/O8aj2aod9wZCEBKZVm
+	2x9X3cn0JQJPpiU5d+fjxzL9KKcQTWp9hJBlaa6oosCRBdo3Mxuh+Gm8NdeXKJe/BP2k
+	lFDSEulscTMMG+hipQJZCPqGwV5eCJopSGh6K+KREE32Oo7nqKytYvowttAaEsd/BLqq
+	v/mA==
+X-Gm-Message-State: APjAAAVZSZix4PaJewvecdBXbXja9bAp943vm9qJinvuC6uBfSAKhfl8
+	0Ee1GkNSTTwjT2ChYg1Shdp+eTTo9bM=
+X-Google-Smtp-Source: APXvYqysIhuvZJBrJkTj3Q0cYPZ/5K3sZuhXOA13LvQiiSkpH0DvAaFhPKhroFVTrrlWD50HAvpWEw==
+X-Received: by 2002:a65:4206:: with SMTP id c6mr9685963pgq.46.1576769145225;
+	Thu, 19 Dec 2019 07:25:45 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4b])
 	by smtp.gmail.com with ESMTPSA id
 	s18sm8840470pfs.20.2019.12.19.07.25.42
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 19 Dec 2019 07:25:42 -0800 (PST)
+	Thu, 19 Dec 2019 07:25:43 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Dec 2019 07:25:28 -0800
-Message-Id: <20191219152529.725879-7-raj.khem@gmail.com>
+Date: Thu, 19 Dec 2019 07:25:29 -0800
+Message-Id: <20191219152529.725879-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20191219152529.725879-1-raj.khem@gmail.com>
 References: <20191219152529.725879-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 7/8] poco: Define LIB_SUFFIX per OE multilibs
+Subject: [meta-oe][PATCH 8/8] libcec: Fix multilib build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,26 +59,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Dec 2019 15:25:42 -0000
+X-List-Received-Date: Thu, 19 Dec 2019 15:25:44 -0000
 Content-Transfer-Encoding: 8bit
+
+Fixes
+ERROR: libcec-4.0.4-r0 do_package: QA Issue: libcec: Files/directories were installed but not shipped in any package:
+  /usr/lib/python3.7/site-packages/_cec.so
+  /usr/lib/python3.7/site-packages/cec.py
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/poco/poco_1.9.4.bb | 1 +
- 1 file changed, 1 insertion(+)
+ ...pport.cmake-Do-not-hardcode-lib-path.patch | 42 +++++++++++++++++++
+ meta-oe/recipes-extended/libcec/libcec_git.bb |  3 +-
+ 2 files changed, 44 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/libcec/libcec/0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-path.patch
 
-diff --git a/meta-oe/recipes-support/poco/poco_1.9.4.bb b/meta-oe/recipes-support/poco/poco_1.9.4.bb
-index c854481de3..f1dabcd012 100644
---- a/meta-oe/recipes-support/poco/poco_1.9.4.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.9.4.bb
-@@ -52,6 +52,7 @@ PACKAGECONFIG[SevenZip] = "-DENABLE_SEVENZIP=ON,-DENABLE_SEVENZIP=OFF"
+diff --git a/meta-oe/recipes-extended/libcec/libcec/0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-path.patch b/meta-oe/recipes-extended/libcec/libcec/0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-path.patch
+new file mode 100644
+index 0000000000..3ecbfce250
+--- /dev/null
++++ b/meta-oe/recipes-extended/libcec/libcec/0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-path.patch
+@@ -0,0 +1,42 @@
++From 95d4df3b713925e2c4894a2e4d50b06df861d9ef Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 18 Dec 2019 23:37:40 -0800
++Subject: [PATCH] CheckPlatformSupport.cmake: Do not hardcode lib path
++
++Using CMAKE_INSTALL_LIBDIR ensures that we can build for multilib env
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/libcec/cmake/CheckPlatformSupport.cmake | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/src/libcec/cmake/CheckPlatformSupport.cmake b/src/libcec/cmake/CheckPlatformSupport.cmake
++index 2d7102f..55e78f8 100644
++--- a/src/libcec/cmake/CheckPlatformSupport.cmake
+++++ b/src/libcec/cmake/CheckPlatformSupport.cmake
++@@ -224,16 +224,16 @@ else()
++ 
++       if (${PYTHON_MAJOR_VERSION} EQUAL 2)
++         install(TARGETS     ${SWIG_MODULE_cec_REAL_NAME}
++-                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DIR}/${PYTHON_LIB_INSTALL_PATH}/cec)
+++                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERSION}/${PYTHON_PKG_DIR}/${PYTHON_LIB_INSTALL_PATH}/cec)
++         install(FILES       ${CMAKE_BINARY_DIR}/src/libcec/cec.py
++-                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DIR})
+++                DESTINATION l${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERSION}/${PYTHON_PKG_DIR})
++         install(FILES ${CMAKE_SOURCE_DIR}/src/libcec/cmake/__init__.py
++-                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DIR}/cec)
+++                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERSION}/${PYTHON_PKG_DIR}/cec)
++       else()
++         install(TARGETS     ${SWIG_MODULE_cec_REAL_NAME}
++-                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DIR}/${PYTHON_LIB_INSTALL_PATH})
+++                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERSION}/${PYTHON_PKG_DIR}/${PYTHON_LIB_INSTALL_PATH})
++         install(FILES       ${CMAKE_BINARY_DIR}/src/libcec/cec.py
++-                DESTINATION lib/python${PYTHON_VERSION}/${PYTHON_PKG_DIR})
+++                DESTINATION ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERSION}/${PYTHON_PKG_DIR})
++       endif()
++     endif()
++   endif()
++-- 
++2.24.1
++
+diff --git a/meta-oe/recipes-extended/libcec/libcec_git.bb b/meta-oe/recipes-extended/libcec/libcec_git.bb
+index eaf6b9b437..8d5a82455b 100644
+--- a/meta-oe/recipes-extended/libcec/libcec_git.bb
++++ b/meta-oe/recipes-extended/libcec/libcec_git.bb
+@@ -13,7 +13,8 @@ PV = "4.0.4"
  
- EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPOCO_UNBUNDLED=ON \
-                   -DZLIB_LIBRARY_RELEASE:STRING=z -DPCRE_LIBRARY:STRING=pcre \
-+                  -DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')} \
-                  ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON ', '', d)}"
+ SRCREV = "3bbd4321618503d14008387a72fabb6743878831"
+ SRC_URI = "git://github.com/Pulse-Eight/libcec.git \
+-"
++           file://0001-CheckPlatformSupport.cmake-Do-not-hardcode-lib-path.patch \
++          "
  
- # For the native build we want to use the bundled version
+ S = "${WORKDIR}/git"
+ 
 -- 
 2.24.1
 
