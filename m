@@ -1,25 +1,24 @@
-Return-Path: <Li.Zhou@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DCDE7FCD6
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id AC7537FD18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2019 09:00:16 +0000 (UTC)
+	Thu, 19 Dec 2019 10:02:21 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xBJ8xlYG024497
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2019 01:00:07 -0800
-Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Thu, 19 Dec 2019 00:59:39 -0800
-From: Li Zhou <li.zhou@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 19 Dec 2019 16:59:12 +0800
-Message-ID: <20191219085912.139105-1-li.zhou@windriver.com>
-X-Mailer: git-send-email 2.23.0
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id xBJA2LV1016263
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Thu, 19 Dec 2019 02:02:21 -0800 (PST)
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.468.0; Thu, 19 Dec 2019 02:02:20 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Thu, 19 Dec 2019 18:02:19 +0800
+Message-ID: <1576749739-23235-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [128.224.153.75]
-Subject: [meta-networking][PATCH] openl2tp: Update SRC_URI for "Failed to fetch URL" warning
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-gnome][PATCH] gvfs: add user polkitd and missing depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,34 +31,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Dec 2019 09:00:16 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 19 Dec 2019 10:02:21 -0000
 Content-Type: text/plain
 
-Update SRC_URI for solving below warning:
-WARNING: openl2tp-1.8-r0 do_fetch: Failed to fetch URL
-ftp://ftp.openl2tp.org/releases/openl2tp-1.8/openl2tp-1.8.tar.gz,
-attempting MIRRORS if available
+1. Since commit [664e550 gvfs: Fix build regression from uprev]
+   applied, it chmod polkitd but missed to useradd polkitd at do_rootfs
 
-Signed-off-by: Li Zhou <li.zhou@windriver.com>
+2. Add dbus to DEPENDS
+...
+| Run-time dependency dbus-1 found: NO (tried pkgconfig)
+|
+| meson.build:254:0: ERROR: Dependency "dbus-1" not found, tried pkgconfig
+...
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-gnome/recipes-gnome/gvfs/gvfs_1.42.1.bb | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-index 90e8b111d..38d0554e1 100644
---- a/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-+++ b/meta-networking/recipes-protocols/openl2tp/openl2tp_1.8.bb
-@@ -18,7 +18,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=e9d9259cbbf00945adc25a470c1d3585 \
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.42.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.42.1.bb
+index 6888eff..e5d23b0 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.42.1.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.42.1.bb
+@@ -3,9 +3,10 @@ LICENSE = "LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=05df38dd77c35ec8431f212410a3329e"
  
- DEPENDS = "popt flex readline rpcsvc-proto-native bison-native"
+ GNOMEBASEBUILDCLASS = "meson"
+-inherit gnomebase gsettings bash-completion gettext upstream-version-is-even features_check
++inherit gnomebase gsettings bash-completion gettext upstream-version-is-even features_check useradd
  
--SRC_URI = "ftp://ftp.openl2tp.org/releases/${BP}/${BP}.tar.gz \
-+SRC_URI = "https://sourceforge.net/projects/openl2tp/files/openl2tp/${PV}/${BP}.tar.gz \
-            file://Makefile-modify-CFLAGS-to-aviod-build-error.patch \
-            file://openl2tp-simplify-gcc-warning-hack.patch \
-            file://Makefile-obey-LDFLAGS.patch \
+-DEPENDS += "libsecret glib-2.0 glib-2.0-native libgudev shadow-native gsettings-desktop-schemas"
++DEPENDS += "libsecret glib-2.0 glib-2.0-native libgudev shadow-native \
++            gsettings-desktop-schemas dbus"
+ 
+ SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+ SRC_URI[archive.md5sum] = "93592535508322548d44fa036b635a0a"
+@@ -66,6 +67,9 @@ PACKAGECONFIG[fuse] = "-Dfuse=true, -Dfuse=false, fuse"
+ # libcdio-paranoia recipe doesn't exist yet
+ PACKAGECONFIG[cdda] = "-Dcdda=true, -Dcdda=false, libcdio-paranoia"
+ 
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = "--system --no-create-home --user-group --home-dir ${sysconfdir}/${BPN}-1 polkitd"
++
+ do_install_append() {
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'polkit', 'true', 'false', d)}; then
+         # Fix up permissions on polkit rules.d to work with rpm4 constraints
 -- 
-2.23.0
+2.7.4
 
 
