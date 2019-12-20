@@ -1,113 +1,54 @@
-Return-Path: <Peter.Kolbus@garmin.com>
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
-	(mail-bn7nam10on2114.outbound.protection.outlook.com [40.107.92.114])
-	by mail.openembedded.org (Postfix) with ESMTP id B28BF7FD29
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by mail.openembedded.org (Postfix) with ESMTP id CD86C7DB51
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Dec 2019 19:06:12 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=hryA9oeGXThQ9Zs98yxHPQ9NDfcE9BRvRySCWQvBgQKxukpXYOVOVbEqdkzyGHrDowjiQ1ymwhvoF5mPj/UKIPQ/VAiZDg6xljWOL7LNn762jNUcDTQ6bw465uIh/3QRnAK7ts5Yj51iICv3J/xUUnGEpESuBTTVixEekCdDFYCVs0Lw3tLR0d2fz8mnTdHTx503ulV+jcx0P83JF5i0E01ALnd10TlWmZGH/jeKja6KEB4rDSrPXk+KzXN//2kHzVcZX1Nye6TKjX03vKnCHpKrrXqs9ZLg40Gl55HubhN7HiYKeAyTq9NWmKmP+BwuIfn6PAnKv59UM4X3soARDg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=mNMAWp6aS3SfAVcRbxl8wo8jXFJEv/J6ML4OwSG6GeQ=;
-	b=flXwv4tfgcVOURPL4lhjGaY5hKe4tmDyRfNLx1EJaz652fNXgR4wNVWcY5LYx1sziAX4V2wEqDu3+Aw/G+ANX5BZ2tErWHFf/GYRAsOgGlbpWlkCsNNK5YGsQFBejC9lTB2MWpf8mM8wJ5CDz5wh2N8V07NrdM2+Sg2BHfnkF9fatQzBnL6pcLdwbl14iumBmG1Dk6QTVAWD6FkeyU0JqV4ChN8iPfEul7a/ndHc1eIs2rjmUtWP/FktT52dptczhs6GGNqZt3nW9i76RwQixz22Er+Wk+1iguSxnFVsB6HokUJBgOHfMozU9/kk5uvXCn6uFOowwiru35zWdNJJIg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
-	204.77.163.244) smtp.rcpttodomain=intel.com smtp.mailfrom=garmin.com;
-	dmarc=pass (p=none sp=none pct=100) action=none header.from=garmin.com; 
-	dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garmin.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=mNMAWp6aS3SfAVcRbxl8wo8jXFJEv/J6ML4OwSG6GeQ=;
-	b=RnXJ30VUETTQ4ZG5vae2kFlKxVO1qAVIJa0PNoFDiz0+hKKQjxaMSL2d6AMKXXgGNXV4K9wFGIKMiuHBIeDHyidqEtla8f6RdSy4glolkpwk7D3aR1XBalrxkq1hZbdkaJT83Nkfu5Juy92zWKdTzfqK0DPaK6tjcoTuMmodh+8=
-Received: from MWHPR04CA0032.namprd04.prod.outlook.com (2603:10b6:300:ee::18)
-	by DM5PR04MB0746.namprd04.prod.outlook.com (2603:10b6:3:ff::9) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2538.18; Fri, 20 Dec 2019 19:06:12 +0000
-Received: from BN7NAM10FT021.eop-nam10.prod.protection.outlook.com
-	(2a01:111:f400:7e8a::202) by MWHPR04CA0032.outlook.office365.com
-	(2603:10b6:300:ee::18) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2559.14 via
-	Frontend Transport; Fri, 20 Dec 2019 19:06:12 +0000
-Authentication-Results: spf=pass (sender IP is 204.77.163.244)
-	smtp.mailfrom=garmin.com; intel.com; dkim=none (message not signed)
-	header.d=none; intel.com; dmarc=pass action=none header.from=garmin.com;
-Received-SPF: Pass (protection.outlook.com: domain of garmin.com designates
-	204.77.163.244 as permitted sender) receiver=protection.outlook.com;
-	client-ip=204.77.163.244; helo=edgetransport.garmin.com;
-Received: from edgetransport.garmin.com (204.77.163.244) by
-	BN7NAM10FT021.mail.protection.outlook.com (10.13.157.29) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2559.14 via Frontend Transport; Fri, 20 Dec 2019 19:06:11 +0000
-Received: from OLAWPA-EXMB1.ad.garmin.com (10.5.144.23) by
-	olawpa-edge5.garmin.com (10.60.4.229) with Microsoft SMTP Server
-	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
-	15.1.1466.3; Fri, 20 Dec 2019 13:06:08 -0600
-Received: from OLAWPA-EXMB4.ad.garmin.com (10.5.144.25) by
-	OLAWPA-EXMB1.ad.garmin.com (10.5.144.23) with Microsoft SMTP Server
-	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
-	15.1.1779.2; Fri, 20 Dec 2019 13:06:10 -0600
-Received: from OLAWPA-EXMB4.ad.garmin.com ([fe80::d9c:e89c:1ef1:23c]) by
-	OLAWPA-EXMB4.ad.garmin.com ([fe80::d9c:e89c:1ef1:23c%23]) with mapi id
-	15.01.1779.002; Fri, 20 Dec 2019 13:06:10 -0600
-From: "Kolbus, Peter" <Peter.Kolbus@garmin.com>
-To: Ross Burton <ross.burton@intel.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-python][PATCH] python(3)-requests: add
-	DEPENDS_class-native
-Thread-Index: AQHVtd+lockCXb6k3k69Qy88kECguqfBtu2AgAGpYSA=
-Date: Fri, 20 Dec 2019 19:06:10 +0000
-Message-ID: <4c5f479c8e2b458fa68e61333433ee60@garmin.com>
-References: <20191218201337.78070-1-peter.kolbus@garmin.com>
-	<c7378418-7972-1ef4-a52f-735e02ee2851@intel.com>
-In-Reply-To: <c7378418-7972-1ef4-a52f-735e02ee2851@intel.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.50.4.6]
+	Fri, 20 Dec 2019 20:35:26 +0000 (UTC)
+Received: by mail-pl1-f195.google.com with SMTP id s21so1847966plr.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Dec 2019 12:35:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id:mime-version:organization
+	:content-transfer-encoding;
+	bh=Q2fwA9tWXW79or9uLGDKmbTbV5TNl2wEYmDlFzrejUk=;
+	b=j+VKP/aytqzu5lU9YQwT1ePK/9H68Gp+WynCtxn4zjJLRIiu6m9EIXi72bBjE/v6D6
+	l0SeSUwFRVIFMslCkYSICARKC9IyNCqfxc0+7vbK+a4/FQFuGkYltKoxTdWAkBThBF2B
+	Ym80hNtDyE/LPQECnSmfq14u6F9YqfQv/O8zj+ZigvsTLfsrUKFudrycxm+dE5GHpxhU
+	1mqyzZY8faD4nFuJAYYFuix3uqZ02GmKjcR0vHE5hYkR9TFor5rdFLufJSPA7T/2bhxC
+	ywhnoTIPaPjmGzc6lnE5F5Q0pmDtAdPCNn+mDHVK8fIqqYWeSBMDZvvjG//JeC3kiRGA
+	M35A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:organization:content-transfer-encoding;
+	bh=Q2fwA9tWXW79or9uLGDKmbTbV5TNl2wEYmDlFzrejUk=;
+	b=cIIwzqRLvVAg44AE/Zvws+w8oVg+xsf8ZkRKhqVHNsK6Un57fFR+CCJW/HnfIleG2t
+	+kMdDPiB+K4RJ0tBW4BuU2Vh8o8AqxsufdMINcFGczI8JK1r5v7rhBvCxP0dS43ChIsr
+	hP10r1T5C9IzsnZo6URWx4yxf/1A4WAFTIZfi5dcbcpod3hkUilWpYTIExDfovahA82a
+	41iB+IgPluKdZcwvVbzCAmbcZi3yZ1C1xSJfRgZEqqZbL+iHjvRRb4ZFP2dLCooHbVbd
+	hFT5ySqNb9J4ETL49r16X+gGj5fP8S1vSg8v2aO1W/ID8vvXKHQJg8s71AENZ6gouJzK
+	tWUQ==
+X-Gm-Message-State: APjAAAVXNeZKrVmxdN30gxR3za/O61urB46GlnJCKT6QwaYUYboxDI1K
+	qtHuTB+Ahk8o9eTSIhIZXTPFe964OpVQQg==
+X-Google-Smtp-Source: APXvYqxLIyKKJeLN22tWQj9KSpnEqcsUU75kC5oDqougHli3StnbHQ4cMjG23clSaxVfUFK+ejna2g==
+X-Received: by 2002:a17:902:7102:: with SMTP id
+	a2mr17251474pll.301.1576874127759; 
+	Fri, 20 Dec 2019 12:35:27 -0800 (PST)
+Received: from centrium.lab.ossystems ([189.103.49.163])
+	by smtp.gmail.com with ESMTPSA id
+	k23sm11794975pgg.7.2019.12.20.12.35.26
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 20 Dec 2019 12:35:27 -0800 (PST)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 20 Dec 2019 17:35:14 -0300
+Message-Id: <20191220203515.27189-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-TM-AS-Product-Ver: SMEX-12.5.0.1300-8.5.1010-25116.002
-X-TM-AS-Result: No-21.002800-8.000000-10
-X-TMASE-MatchedRID: WMT2WRIkHPM4HKI/yaqRm8zWN98iBBeGgvr7ECxWof21eX0jEQ9c6vLX
-	3qoNbEngNUeVodu4FwkL9uygyOduDqhWorwwQWMCqa6SJk58+LYDU7iFmd8/xT07m5a3Vf0jW8b
-	gdD1o+YFF5W+7mYqoUeR1c6lEEK2JLYpNE9jp28b2b09s2KGDsH4yToAKzDgmSvQhBUOr9yss8m
-	1alsmNjQm5Y2LgY2Wnb3EUqONGQAHfwcu78111GfSG/+sPtZVkS6mvV++TKmlQKAQSutQYXH5Cz
-	uF6I4V0ZRcP7LSftg5EfrsFWGTzMkQXu2820icGQCg+244PxtoGchEhVwJY3xv2iroWthDcECqm
-	KiRotDHc3ODX0dLAE+DcAHv31uCX/Ly3VILoo9xTnbANo5id2GeKMm8nChkmM/dZg2GSzOXDBDv
-	GLyiq4n0tCKdnhB58pvI8UZOf47hXaDn6DhA2Ao2j49Ftap9Eymsk/wUE4hoD/dHyT/Xh7Q==
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--21.002800-8.000000
-X-TMASE-Version: SMEX-12.5.0.1300-8.5.1010-25116.002
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-HT: Tenant
-X-Forefront-Antispam-Report: CIP:204.77.163.244; IPV:CAL; SCL:-1; CTRY:US;
-	EFV:NLI; SFV:NSPM;
-	SFS:(10019020)(396003)(39860400002)(346002)(376002)(136003)(199004)(13464003)(189003)(51914003)(7696005)(336012)(356004)(24736004)(26826003)(316002)(108616005)(5660300002)(36756003)(8676002)(76130400001)(70586007)(110136005)(8936002)(86362001)(53546011)(246002)(70206006)(478600001)(426003)(2616005)(186003)(966005)(7636002)(26005)(2906002);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:DM5PR04MB0746;
-	H:edgetransport.garmin.com; FPR:; SPF:Pass; LANG:en;
-	PTR:extedge.garmin.com; A:1; MX:1; 
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 8a1760bb-f64b-46a2-652e-08d7857fad8f
-X-MS-TrafficTypeDiagnostic: DM5PR04MB0746:
-X-Microsoft-Antispam-PRVS: <DM5PR04MB0746D879E4F6BC915DC633D4FF2D0@DM5PR04MB0746.namprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
-X-Forefront-PRVS: 025796F161
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2uwXD1YmlWG/F5ZgStj0zbPqCmdoQY3L4DpG/PzXFw/JO+A82o+UZCYb3BmB2LM9Tmfo2NiHn3PMYdrfRjZExfMt9p5qamGqTB4zN64tKCCsjUYvpudZS7CXRrWVEldVWv6lDuDrZ0flOCstyRfKSt5k3J7mIaKDBTXxk0u8i9+1mfbMxDM4Clc7iQE4PFNyhXtLVX/CyK1CM5+x4BiFaMHr/vwxpzReXwsGG3W50JJ9XBJnA6izlcxDrDUb+B5Q8lYRMbsR4xHrg+SHU4I6Vk457uIWgulGBHt14MBgTNAh2FknyIkojjsXy/YmTBaBlmSWaGr1yq1i3GNMHF/c4AqDBiNM19+n/HdLXIyOe/84BOxrSVp9/yioRJnoJ4E4Le2XKlHJfiedSmWbb9cEQ32Bbse7cOkxQ0upPs7wtqgffWTbQEFJz9VTrk+jADPFJd6L3GZ6Gvs4wtfwOOPtwYqn3OK1tpizrSUqZ+kZHfStS0Svuwud4keZNr7qCQAsyFrE/PB2sJfQgiq+MW01HGj8hdPpX8PptPo5qiUvlEUm4TBph/5hdO8BeZoGmJtr
-X-OriginatorOrg: garmin.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Dec 2019 19:06:11.4290 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a1760bb-f64b-46a2-652e-08d7857fad8f
-X-MS-Exchange-CrossTenant-Id: 38d0d425-ba52-4c0a-a03e-2a65c8e82e2d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=38d0d425-ba52-4c0a-a03e-2a65c8e82e2d;
-	Ip=[204.77.163.244]; Helo=[edgetransport.garmin.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR04MB0746
-Subject: Re: [meta-python][PATCH] python(3)-requests: add DEPENDS_class-native
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-oe][PATCH] nanopb: Add recipe for version 0.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -120,72 +61,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Dec 2019 19:06:13 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 20 Dec 2019 20:35:27 -0000
+Content-Transfer-Encoding: 8bit
 
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ .../recipes-devtools/nanopb/nanopb_0.4.0.bb   | 28 +++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
 
-
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> <openembedded-devel-bounces@lists.openembedded.org> On Behalf Of Ross
-> Burton
-> Sent: Thursday, December 19, 2019 5:26 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-python][PATCH] python(3)-requests: add
-> DEPENDS_class-native
->=20
-> CAUTION - EXTERNAL EMAIL: Do not click any links or open any attachments
-> unless you trust the sender and know the content is safe.
->=20
->=20
-> On 18/12/2019 20:13, Peter Kolbus wrote:
-> > Change-Id: Ie8bd80d56da599b29430da65b303d69bba43fdda
-> > ---
-> >   .../recipes-devtools/python/python-requests.inc        | 10 +++++++++=
+diff --git a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+new file mode 100644
+index 000000000..aedd53a7a
+--- /dev/null
++++ b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION="Protocol Buffers with small code size"
++LICENSE="Zlib"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9db4b73a55a3994384112efcdb37c01f"
 +
-> >   1 file changed, 10 insertions(+)
-> >
-> > diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/=
-meta-
-> python/recipes-devtools/python/python-requests.inc
-> > index 5fe5dc21f..ea2983821 100644
-> > --- a/meta-python/recipes-devtools/python/python-requests.inc
-> > +++ b/meta-python/recipes-devtools/python/python-requests.inc
-> > @@ -23,6 +23,16 @@ RDEPENDS_${PN} +=3D " \
-> >       ${PYTHON_PN}-idna \
-> >   "
-> >
-> > +DEPENDS_class-native +=3D " \
-> > +    ${PYTHON_PN}-ndg-httpsclient-native \
-> > +    ${PYTHON_PN}-pyasn1-native \
-> > +    ${PYTHON_PN}-pyopenssl-native \
-> > +    ${PYTHON_PN}-pysocks-native \
-> > +    ${PYTHON_PN}-urllib3-native \
-> > +    ${PYTHON_PN}-chardet-native \
-> > +    ${PYTHON_PN}-idna-native \
->=20
-> Why would you ned to do this?=20
++DEPENDS = "protobuf-native"
++
++SRC_URI = "git://github.com/nanopb/nanopb.git"
++SRCREV = "70f0de9877b1ce12abc0229d5df84db6349fcbfc"
++
++S = "${WORKDIR}/git"
++
++inherit cmake pythonnative
++
++do_install_append() {
++    install -Dm 0755 ${S}/generator/nanopb_generator.py ${D}${bindir}/nanopb_generator.py
++    install -Dm 0755 ${S}/generator/protoc-gen-nanopb ${D}${bindir}/protoc-gen-nanopb
++    install -Dm 0755 ${S}/generator/proto/__init__.py ${D}${PYTHON_SITEPACKAGES_DIR}/proto/__init__.py
++}
++
++FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
++FILES_${PN}-dev += "${libdir}/cmake/${BPN}"
++
++RDEPENDS_${PN} += "\
++   ${PYTHON_PN}-protobuf \
++   protobuf-compiler \
++"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.20.1
 
-Thanks for the check. My objective here was to ensure all dependencies are =
-in the sysroot, but after more careful retesting, I'm not seeing a need for=
- this particular patch. From what I can tell, it looks like Richard Purdie =
-actually addressed the root cause back in February, in native.bbclass.
-
-(When first tested my patches on master, I dropped a similar patch for pyth=
-on(3)-beautifulsoup4, but that recipe actually has class-native issues of a=
- slightly different root cause. And in doing so, confused myself about what=
- is truly needed.)
-
-Consider this patch withdrawn. I'll clean up the rest of my patches and sen=
-d -- including a better change for beautifulsoup4.
-
->=20
-> Ross
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
