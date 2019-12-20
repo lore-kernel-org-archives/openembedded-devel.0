@@ -1,51 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
-	[209.85.215.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C00AA7D075
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D58C57E091
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2019 21:57:53 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id x8so3839475pgk.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Dec 2019 13:57:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=tOWiDJulbF1erDUibJCIkFnw+IEymepOJiEjQUgXj6I=;
-	b=iqX1GSuy4MGEbs/JuXur5gp/j+upQsjqJogc7QzoxHJkB5B3UasvYbkohErlq89MID
-	1g5wugaUpW8oSzhft/8bHAWQRO6OUDWFoh/ZPUi01EjjsZrplr6FE6fh4MBSOKkiVIjX
-	df46PiS4OmBtzbRNgdxpraCoswXl4/+mq7xvNfHZL1NGxzo6RG6g37rimO0R3iqwFCWT
-	0Sa7kCBlhoKdYgvDLndznVawxjG7hBKWSu+bHUQ91tvw69NSIUJUGqYAJXVAY6opv4MF
-	augfkeYPTiXkGe0yLZC3nAokoQiDuhtiDUrHG/8KwO8YoojuDJcpDArt1ZMDpeRY8YiN
-	PMAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=tOWiDJulbF1erDUibJCIkFnw+IEymepOJiEjQUgXj6I=;
-	b=q8+Nzwv6S8ae1pXkatrYHcuYd6d23dKKpV5mELLceZgSUcEghsvQHPOnsvgBJjU6nk
-	vL4oN9yjQErMgbS3ZdJul4rQSC+P9rj9mKPZQyRMN5R3XC402UTCXMcYKBFVz2EXCw3y
-	JNwmpjsC9NneIeMq/YNTcVTtiNRyXFfeaMt2orW2VVtR4/OLC3cAIctEx17TmeU6PfFu
-	FIZDSQ4LpWm8BuO60cRe1gXV9DoV3pQfZIE+4dRfaQtI9gkiZnZhDqsedTo1UL18jWA2
-	WAQt4sBPD1eRMIyV8ysOMy3B3Ndcz4F24RVtXfivtSM7hrWcbuzbwcLINpNQD0tYoiOL
-	2RVg==
-X-Gm-Message-State: APjAAAVPebBOnzl6Wri8wqvvFgxiVYVGE3Z3iVMxMpODx1FUVOL37xUT
-	BRYaYxqfK5Q/e6FyqNLKrwzgipQd8D0=
-X-Google-Smtp-Source: APXvYqwc/1foMssy+CHfO+1lbW+xbfQkZ4GFSjlwv2vtgXbTYhlmEKnfOPS0RJ5zY8ecx5czCvuwkw==
-X-Received: by 2002:a63:7985:: with SMTP id
-	u127mr11090546pgc.169.1576792674328; 
-	Thu, 19 Dec 2019 13:57:54 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::4b])
-	by smtp.gmail.com with ESMTPSA id
-	w11sm4196191pfi.77.2019.12.19.13.57.53
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 19 Dec 2019 13:57:53 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Dec 2019 13:57:46 -0800
-Message-Id: <20191219215746.2317472-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.1
+	Fri, 20 Dec 2019 01:41:14 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id xBK1ecQw017533
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Thu, 19 Dec 2019 17:40:48 -0800
+Received: from [128.224.162.183] (128.224.162.183) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 19 Dec 2019 17:40:27 -0800
+To: Jon Mason <jdmason@kudzu.us>, OpenEmbedded Devel List
+	<openembedded-devel@lists.openembedded.org>
+References: <CAPoiz9yiD_BHeqZ_M42vyf7bcs9RLM-91Ba=+iX87_nqnMffQg@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <92e7af67-ff33-3704-5da3-55af37ec6835@windriver.com>
+Date: Fri, 20 Dec 2019 09:40:23 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.2.2
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mpv: Remove luajit dependency for ppc64
+In-Reply-To: <CAPoiz9yiD_BHeqZ_M42vyf7bcs9RLM-91Ba=+iX87_nqnMffQg@mail.gmail.com>
+Subject: Re: lmsensors recipe broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +34,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Dec 2019 21:57:53 -0000
+X-List-Received-Date: Fri, 20 Dec 2019 01:41:15 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-luajit is not available on ppc64
+On 2019/12/20 上午1:21, Jon Mason wrote:
+> I'm seeing the following when I add lmsensors to my build
+> --> Finished dependency resolution
+> Error:
+>   Problem: conflicting requests
+>    - nothing provides lmsensors-isatools needed by lmsensors-3.5.0-r0.aarch64
+> (try to add '--skip-broken' to skip uninstallable packages or
+> '--nobest' to use not only best candidate packages)
+>
+> I have not been able to find anything that provides that (and if not,
+> should it be a dep?).  I simply removed the line, and it built and
+> worked (for my limited testing).  Am I missing something or should I
+> just send a patch to remove that line?
+>
+> Thanks,
+> Jon
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Hi Jon,
 
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
-index 1ba9f0f6c8..29bcfe49f5 100644
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
-@@ -29,6 +29,8 @@ inherit waf pkgconfig pythonnative features_check
- LUA ?= "lua"
- LUA_mips64  = ""
- LUA_aarch64  = ""
-+LUA_powerpc64  = ""
-+
- # Note: both lua and libass are required to get on-screen-display (controls)
- PACKAGECONFIG ??= " \
-     ${LUA} \
+How did you add lmsensors to build? Because lmsensors-isatools is a 
+sub-package of recipe lmsensors, it should not have dependency issue.
+Did you see any warning when build lmsensors?
+
+Regards,
+Kai
+
 -- 
-2.24.1
+Kai Kang
 
 
