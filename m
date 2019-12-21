@@ -1,54 +1,51 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id CD86C7DB51
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com
+	[209.85.214.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 288A660291
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Dec 2019 20:35:26 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id s21so1847966plr.7
+	Sat, 21 Dec 2019 00:06:46 +0000 (UTC)
+Received: by mail-pl1-f180.google.com with SMTP id bd4so4778795plb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Dec 2019 12:35:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:mime-version:organization
+	Fri, 20 Dec 2019 16:06:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=Q2fwA9tWXW79or9uLGDKmbTbV5TNl2wEYmDlFzrejUk=;
-	b=j+VKP/aytqzu5lU9YQwT1ePK/9H68Gp+WynCtxn4zjJLRIiu6m9EIXi72bBjE/v6D6
-	l0SeSUwFRVIFMslCkYSICARKC9IyNCqfxc0+7vbK+a4/FQFuGkYltKoxTdWAkBThBF2B
-	Ym80hNtDyE/LPQECnSmfq14u6F9YqfQv/O8zj+ZigvsTLfsrUKFudrycxm+dE5GHpxhU
-	1mqyzZY8faD4nFuJAYYFuix3uqZ02GmKjcR0vHE5hYkR9TFor5rdFLufJSPA7T/2bhxC
-	ywhnoTIPaPjmGzc6lnE5F5Q0pmDtAdPCNn+mDHVK8fIqqYWeSBMDZvvjG//JeC3kiRGA
-	M35A==
+	bh=eITfT+2bO5yuExdp64u5nMp5AT7m8Y6jMD3QAIXdeHU=;
+	b=oN7qIgPbU9l8VzRweadXq3JwBtcrC5U6eGcgGG2rLqIGDbe3jJYwF9UaDxOJPDYPxi
+	J03MyJuBC28EuySieopl8L8s1LqifQtzJfIiTwgCbcDvqn/dcWV42FVQnOBB6UOi+X/d
+	l/zliGwqU4po9iwXzbjVYMEVypwTuXemxOBElGb2ZQbg5A4wQgJd+Qqj/00x+0xLMV8N
+	8QTMfM5PkG4FVFF9MXXjlDzoOzFkrWFTxrE1khMTOIDnciBsARXo8T9pkAAu77xBYEH7
+	qqRyuu00dDJOGrnqHaNoU6QC5G086eUdY2cCqulLeTfgGIvvv48Tohp7WUC5+SfQUOsJ
+	Hh7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:organization:content-transfer-encoding;
-	bh=Q2fwA9tWXW79or9uLGDKmbTbV5TNl2wEYmDlFzrejUk=;
-	b=cIIwzqRLvVAg44AE/Zvws+w8oVg+xsf8ZkRKhqVHNsK6Un57fFR+CCJW/HnfIleG2t
-	+kMdDPiB+K4RJ0tBW4BuU2Vh8o8AqxsufdMINcFGczI8JK1r5v7rhBvCxP0dS43ChIsr
-	hP10r1T5C9IzsnZo6URWx4yxf/1A4WAFTIZfi5dcbcpod3hkUilWpYTIExDfovahA82a
-	41iB+IgPluKdZcwvVbzCAmbcZi3yZ1C1xSJfRgZEqqZbL+iHjvRRb4ZFP2dLCooHbVbd
-	hFT5ySqNb9J4ETL49r16X+gGj5fP8S1vSg8v2aO1W/ID8vvXKHQJg8s71AENZ6gouJzK
-	tWUQ==
-X-Gm-Message-State: APjAAAVXNeZKrVmxdN30gxR3za/O61urB46GlnJCKT6QwaYUYboxDI1K
-	qtHuTB+Ahk8o9eTSIhIZXTPFe964OpVQQg==
-X-Google-Smtp-Source: APXvYqxLIyKKJeLN22tWQj9KSpnEqcsUU75kC5oDqougHli3StnbHQ4cMjG23clSaxVfUFK+ejna2g==
-X-Received: by 2002:a17:902:7102:: with SMTP id
-	a2mr17251474pll.301.1576874127759; 
-	Fri, 20 Dec 2019 12:35:27 -0800 (PST)
-Received: from centrium.lab.ossystems ([189.103.49.163])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=eITfT+2bO5yuExdp64u5nMp5AT7m8Y6jMD3QAIXdeHU=;
+	b=l+aRHmSJ9+CdoXD8WPS10a9XwOPWnBiyATKi8FTr2yNUX6xhEOw4mfOPemcgRBJWOr
+	rdfgHqdOnKCS/XswDq4RKCFgYu5j/QaZr1NUxqtTAJn18X38w/n8S1x7UZgrEj0SWlMM
+	yTRRp9HJEFa1Jz+KHXOfsfql+AZoOFaj/i0ErpXKpYDy/tJcf/XBTo6VNccYgj8kandN
+	zkaE4tNNe1z2wZyinLUqMomrhtSdTSkXQWxZdFWkjFSKcs5uaOzCoHJ1WsGrVEtMQ5YG
+	WpIoNGjHIt1WH/SN2DYraugj2ari/hlfaAGqnl+SeUKwE+WFvfdt5laZEGsz9dZqLBGS
+	LJEA==
+X-Gm-Message-State: APjAAAVfWPhHOJgk26lCsGmHHp8IOsK9XmOhBi6J2jPdSJ/gIiWACKXF
+	FmwJmpHxySmD755wy88YUKC0Kf5VOVE=
+X-Google-Smtp-Source: APXvYqx9SP2xc3nYb+gqb8as87AIL5sMmmJtH23rTW3z5jqFD6PfSiijtaI9PWQ+p8/UqAx8erJ3nQ==
+X-Received: by 2002:a17:90a:c583:: with SMTP id
+	l3mr17297040pjt.58.1576886806624; 
+	Fri, 20 Dec 2019 16:06:46 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::36e9])
 	by smtp.gmail.com with ESMTPSA id
-	k23sm11794975pgg.7.2019.12.20.12.35.26
-	for <openembedded-devel@lists.openembedded.org>
+	d4sm11701624pjz.12.2019.12.20.16.06.45
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 20 Dec 2019 12:35:27 -0800 (PST)
-From: Fabio Berton <fabio.berton@ossystems.com.br>
+	Fri, 20 Dec 2019 16:06:46 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Dec 2019 17:35:14 -0300
-Message-Id: <20191220203515.27189-1-fabio.berton@ossystems.com.br>
-X-Mailer: git-send-email 2.20.1
+Date: Fri, 20 Dec 2019 16:06:13 -0800
+Message-Id: <20191221000635.1573390-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-Organization: O.S. Systems Software LTDA.
-Subject: [meta-oe][PATCH] nanopb: Add recipe for version 0.4.0
+Subject: [meta-networking][PATCH 01/23] cannelloni: Update to latest and fix multilib builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,50 +58,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Dec 2019 20:35:27 -0000
+X-List-Received-Date: Sat, 21 Dec 2019 00:06:46 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/nanopb/nanopb_0.4.0.bb   | 28 +++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+ ...allDirs-instead-of-hard-coding-paths.patch | 43 +++++++++++++++++++
+ .../cannelloni/cannelloni_git.bb              |  6 ++-
+ 2 files changed, 47 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-Use-GNUInstallDirs-instead-of-hard-coding-paths.patch
 
-diff --git a/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
+diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-Use-GNUInstallDirs-instead-of-hard-coding-paths.patch b/meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-Use-GNUInstallDirs-instead-of-hard-coding-paths.patch
 new file mode 100644
-index 000000000..aedd53a7a
+index 0000000000..b78f0b3291
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb
-@@ -0,0 +1,28 @@
-+DESCRIPTION="Protocol Buffers with small code size"
-+LICENSE="Zlib"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9db4b73a55a3994384112efcdb37c01f"
++++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni/0001-Use-GNUInstallDirs-instead-of-hard-coding-paths.patch
+@@ -0,0 +1,43 @@
++From c74f04dbab4d586287347b1d5517f36e2f0c3d8e Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 19 Dec 2019 15:52:34 -0800
++Subject: [PATCH] Use GNUInstallDirs instead of hard-coding paths
 +
-+DEPENDS = "protobuf-native"
++Bump minimum cmake version to be >= 3.1
 +
-+SRC_URI = "git://github.com/nanopb/nanopb.git"
-+SRCREV = "70f0de9877b1ce12abc0229d5df84db6349fcbfc"
++Upstream-Status: Submitted [https://github.com/mguentner/cannelloni/pull/22]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ CMakeLists.txt | 8 +++++---
++ 1 file changed, 5 insertions(+), 3 deletions(-)
 +
-+S = "${WORKDIR}/git"
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 51b354f..958e0eb 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -1,4 +1,4 @@
++-cmake_minimum_required(VERSION 2.6)
+++cmake_minimum_required(VERSION 3.1)
++ project(cannelloni)
++ 
++ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
++@@ -60,6 +60,8 @@ set_target_properties ( cannelloni-common
++   SOVERSION 0
++ )
++ 
+++include(GNUInstallDirs)
+++
++ if(SCTP_SUPPORT)
++     add_library(sctpthread STATIC sctpthread.cpp)
++     target_link_libraries(sctpthread addsources sctp)
++@@ -68,5 +70,5 @@ endif(SCTP_SUPPORT)
++ set_target_properties(addsources PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
++ target_link_libraries(cannelloni addsources cannelloni-common pthread)
++ 
++-install(TARGETS cannelloni DESTINATION bin)
++-install(TARGETS cannelloni-common DESTINATION lib)
+++install(TARGETS cannelloni DESTINATION ${CMAKE_INSTALL_BINDIR})
+++install(TARGETS cannelloni-common DESTINATION ${CMAKE_INSTALL_LIBDIR})
++-- 
++2.24.1
 +
-+inherit cmake pythonnative
-+
-+do_install_append() {
-+    install -Dm 0755 ${S}/generator/nanopb_generator.py ${D}${bindir}/nanopb_generator.py
-+    install -Dm 0755 ${S}/generator/protoc-gen-nanopb ${D}${bindir}/protoc-gen-nanopb
-+    install -Dm 0755 ${S}/generator/proto/__init__.py ${D}${PYTHON_SITEPACKAGES_DIR}/proto/__init__.py
-+}
-+
-+FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
-+FILES_${PN}-dev += "${libdir}/cmake/${BPN}"
-+
-+RDEPENDS_${PN} += "\
-+   ${PYTHON_PN}-protobuf \
-+   protobuf-compiler \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-networking/recipes-connectivity/cannelloni/cannelloni_git.bb b/meta-networking/recipes-connectivity/cannelloni/cannelloni_git.bb
+index df75e6342e..cd893afb37 100644
+--- a/meta-networking/recipes-connectivity/cannelloni/cannelloni_git.bb
++++ b/meta-networking/recipes-connectivity/cannelloni/cannelloni_git.bb
+@@ -2,8 +2,10 @@ SUMMARY = "a SocketCAN over Ethernet tunnel"
+ HOMEPAGE = "https://github.com/mguentner/cannelloni"
+ LICENSE = "GPLv2"
+ 
+-SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https"
+-SRCREV = "44080bb021d1a143e6906f2ec4610513c4e1cece"
++SRC_URI = "git://github.com/mguentner/cannelloni.git;protocol=https \
++           file://0001-Use-GNUInstallDirs-instead-of-hard-coding-paths.patch \
++          "
++SRCREV = "82aa49b417b96fe46bb3f017ae1bfea928f20f9a"
+ 
+ PV = "20160414+${SRCPV}"
+ 
 -- 
-2.20.1
+2.24.1
 
 
