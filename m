@@ -1,38 +1,38 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
-	[209.85.210.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DAF87FC74
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
+	[209.85.210.179])
+	by mail.openembedded.org (Postfix) with ESMTP id B29BB60291
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Dec 2019 00:06:54 +0000 (UTC)
-Received: by mail-pf1-f181.google.com with SMTP id l127so6097618pfl.1
+	Sat, 21 Dec 2019 00:06:55 +0000 (UTC)
+Received: by mail-pf1-f179.google.com with SMTP id y14so6070108pfm.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Dec 2019 16:06:56 -0800 (PST)
+	Fri, 20 Dec 2019 16:06:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=V2F+9twDBAioV7Yqz6QjEgmepXXAhP8StRVxqA/NxOI=;
-	b=ZexcRV4uU3//8aITcoqx1JQ4ZhNlQ3ezLj1ZHnQcC7mAkQcDQOEKz9nGLlPSSejyl2
-	h+aqQcoG4RtkoTmtz1C6Y0vIKidFu4AXdh3NpLkp0FurcXozFd/obh7HUTSzbRL+KOfC
-	eid0XQjpva1h08plGj6W1TCjZemxct6YmcqVGSuNADG5uy5NMhEz6JfwHHO1urMEGCnX
-	o+zSirvI3cPpII3d8pdkD6kHI0/A33SPAfED2hCdyn4wPPUMr7YG6tdUdcX7O4C2gxB3
-	XDb4s77xUiAUp63Wv9EqctlKhjGbu0g+vvp+OFIn1qonsHxNRuo1rymTC8ZqixGNnLav
-	+nyw==
+	bh=vM1ojXi/WpAsbJ3KZXIDDjMz4ccY4FMYToLnmdypUGQ=;
+	b=dN+0iO87FLHKgrtBGNMdxw/QpoWOJZoEsvFGn1FXko4xnidufR1R6cbftN5Xfxi9o8
+	V+jXJn2akbDrsrW9gYblWRt+xs8Htr1bSTwlli2HjkMDj73uFlJgY3NiGXjj41VjPFQU
+	mCpCk7q+lJUzhTIrx44P/MSH9NHI5CXxI+8yO0T89H2D5WxoYvFl2pMzLKsvu5iLMW1i
+	WA5LoDSI3e737Y2W00G3GPGbEI0iC19Co9yotQh8oCKadB7+5/QSkg6jWqlc+0ZoXAXh
+	TMJLMeakCJkPtsRC2n8jxIPdx6Aony3NvT8ikNHJnWW7S85pHAVDwS/r18v4C/jhkLor
+	v2+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=V2F+9twDBAioV7Yqz6QjEgmepXXAhP8StRVxqA/NxOI=;
-	b=CWy1e/ok2au8jZai+JwpNklvjI6RSq/Ft882w9Ixn1bVAaugCvIrfKaJ03OWUt1jhL
-	KGnqOsVxOCA9TXCIeC7neS7lCBuTTnbySlFMdjW8Nys3/ggBR2nqjCKQXGxRI4KGulZy
-	lPkM1EFRLhoTaThBmQVR1/BFG3R581FAPpNRJR1YxMpGi8Jtbn8GpNrLrykHZ+M/QEau
-	RqskUOxAAv5YorKHrTs6DOFrIB3xYoGfFj5Ow7SRA6U79K5wrOpnn0m99lsLMuXQEYWm
-	YZtMtsSww+HlwEpyrDIOdID1vPizEp1/tvd4u8sdXJtSqKZDU/MUDEfDaF6rN2wETQxW
-	SSlQ==
-X-Gm-Message-State: APjAAAXGIMA0FobPONKkkKYj8h9FTPfQnURxgT6K229Ygu15u/qukj6e
-	wRK5m3gmYgvu5oKiW2An1PeA/xjnalI=
-X-Google-Smtp-Source: APXvYqxSSY2bo4Qvva5qjIlOdZh3hlDLPFRFgFQxwFvK3vX40gopAXHRdj5MRZ2xy+ufUhFq0EGUaw==
-X-Received: by 2002:a65:5788:: with SMTP id b8mr17670682pgr.324.1576886815559; 
-	Fri, 20 Dec 2019 16:06:55 -0800 (PST)
+	bh=vM1ojXi/WpAsbJ3KZXIDDjMz4ccY4FMYToLnmdypUGQ=;
+	b=GxEPDgZ0mbZBSyCEUR4pX5huUH42ERz18TZhxhhyRS5e4vjTc07GVkacf7i6azvq4B
+	gwJn2eIs/t5ACIwqduCcXFiq09oJuOXcypSDNSQ4F76lR56pWCREvuLXM7oi923ej75w
+	guEDZbibctOlTVQEfmn7gUrbDUw81eC3H5xYbwqS3RvOtkmzagJXQ3q1vZ/h7v4BV2EI
+	UQoQV/rrynOdMGTyJsZNkT3ENwhKxRzcMyHcB45sD5TZz9WCSfwDh9H32+mFLWojzl8K
+	q1BCN8x64UsG0vN+End6ER25Vl7m2/48A2J/ygeR46IocVeApO9Uzh5is1P3rVaSDApT
+	2Q9Q==
+X-Gm-Message-State: APjAAAWaT7YagAnLM7sxra6MrID6l5j5OugkWjnE2Gdtz2e2quv9+YRL
+	WprHnsiBoBY1nGlQBtFqrrME/HbDk3Y=
+X-Google-Smtp-Source: APXvYqxPIs3xme5j2QaHRxV7m+uRW/Jz51709mIgbY7Hpqbk3SzRkvJw/awSzOrmcyFv2JWlBNlCIQ==
+X-Received: by 2002:a63:6e0e:: with SMTP id j14mr17409476pgc.361.1576886816260;
+	Fri, 20 Dec 2019 16:06:56 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::36e9])
 	by smtp.gmail.com with ESMTPSA id
 	d4sm11701624pjz.12.2019.12.20.16.06.55
@@ -40,13 +40,13 @@ Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::36e9])
 	Fri, 20 Dec 2019 16:06:55 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Dec 2019 16:06:24 -0800
-Message-Id: <20191221000635.1573390-12-raj.khem@gmail.com>
+Date: Fri, 20 Dec 2019 16:06:25 -0800
+Message-Id: <20191221000635.1573390-13-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20191221000635.1573390-1-raj.khem@gmail.com>
 References: <20191221000635.1573390-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 12/23] ade: Fix install paths in multilib builds
+Subject: [meta-oe][PATCH 13/23] thrift: Upgrade to 0.13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,75 +62,100 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sat, 21 Dec 2019 00:06:55 -0000
 Content-Transfer-Encoding: 8bit
 
-Fixes
-ERROR: ade-0.1.1f-r0 do_package: QA Issue: ade: Files/directories were installed but not shipped in any package:
-  /usr/lib
-  /usr/lib/libade.a
+License-Update: Copyright years changed
+
+Fix build for multilib
+Use python3 during build
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...tallDirs-for-detecting-install-paths.patch | 39 +++++++++++++++++++
- meta-oe/recipes-support/opencv/ade_0.1.1f.bb  |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-oe/recipes-support/opencv/ade/0001-use-GNUInstallDirs-for-detecting-install-paths.patch
+ ...onPaths.cmake-Define-libdir-in-terms.patch | 42 +++++++++++++++++++
+ .../{thrift_0.12.0.bb => thrift_0.13.0.bb}    | 13 +++---
+ 2 files changed, 49 insertions(+), 6 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
+ rename meta-oe/recipes-connectivity/thrift/{thrift_0.12.0.bb => thrift_0.13.0.bb} (83%)
 
-diff --git a/meta-oe/recipes-support/opencv/ade/0001-use-GNUInstallDirs-for-detecting-install-paths.patch b/meta-oe/recipes-support/opencv/ade/0001-use-GNUInstallDirs-for-detecting-install-paths.patch
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch b/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
 new file mode 100644
-index 0000000000..f038b0aa91
+index 0000000000..485d7a4b0b
 --- /dev/null
-+++ b/meta-oe/recipes-support/opencv/ade/0001-use-GNUInstallDirs-for-detecting-install-paths.patch
-@@ -0,0 +1,39 @@
-+From 67ccf77d97b76e8260c9d793ab172577e2393dbc Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-connectivity/thrift/thrift/0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch
+@@ -0,0 +1,42 @@
++From a07e56e1a2e70a9b81eb0a65f345cf45a7a93a81 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 19 Dec 2019 21:33:46 -0800
-+Subject: [PATCH] use GNUInstallDirs for detecting install paths
++Date: Thu, 19 Dec 2019 21:56:23 -0800
++Subject: [PATCH] DefineInstallationPaths.cmake: Define libdir in terms of
++ LIB_SUFFIX
 +
-+This helps with multilib builds
-+
-+Upstream-Status: Submitted [https://github.com/opencv/ade/pull/19]
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ sources/ade/CMakeLists.txt | 10 ++++++----
-+ 1 file changed, 6 insertions(+), 4 deletions(-)
++ build/cmake/DefineInstallationPaths.cmake | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/sources/ade/CMakeLists.txt b/sources/ade/CMakeLists.txt
-+index 2d1dd20..46415d1 100644
-+--- a/sources/ade/CMakeLists.txt
-++++ b/sources/ade/CMakeLists.txt
-+@@ -47,12 +47,14 @@ if(BUILD_ADE_DOCUMENTATION)
-+                       VERBATIM)
-+ endif()
++--- a/build/cmake/DefineInstallationPaths.cmake
+++++ b/build/cmake/DefineInstallationPaths.cmake
++@@ -22,11 +22,11 @@
++ set(BIN_INSTALL_DIR "bin" CACHE PATH "The binary install dir (default: bin)")
++ set(LIB_INSTALL_DIR "lib${LIB_SUFFIX}" CACHE PATH "The library install dir (default: lib${LIB_SUFFIX})")
++ set(INCLUDE_INSTALL_DIR "include" CACHE PATH "The library install dir (default: include)")
++-set(CMAKE_INSTALL_DIR "lib/cmake" CACHE PATH "The subdirectory to install cmake config files (default: cmake)")
++-set(PKGCONFIG_INSTALL_DIR "lib/pkgconfig" CACHE PATH "The subdirectory to install pkgconfig config files (default: lib/pkgconfig)")
+++set(CMAKE_INSTALL_DIR "lib${LIB_SUFFIX}/cmake" CACHE PATH "The subdirectory to install cmake config files (default: cmake)")
+++set(PKGCONFIG_INSTALL_DIR "lib${LIB_SUFFIX}/pkgconfig" CACHE PATH "The subdirectory to install pkgconfig config files (default: lib/pkgconfig)")
++ set(DOC_INSTALL_DIR "share/doc" CACHE PATH "The subdirectory to install documentation files (default: share/doc)")
++ set(prefix "${CMAKE_INSTALL_PREFIX}")
++ set(exec_prefix "${CMAKE_INSTALL_PREFIX}/bin")
++-set(libdir "${CMAKE_INSTALL_PREFIX}/lib")
+++set(libdir "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}")
++ set(includedir "${CMAKE_INSTALL_PREFIX}/include")
++ set(cmakedir "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DIR}")
++--- a/build/cmake/DefineCMakeDefaults.cmake
+++++ b/build/cmake/DefineCMakeDefaults.cmake
++@@ -44,8 +44,8 @@ include(BuildType)
++ # top of the build tree rather than in hard-to-find leaf
++ # directories. This simplifies manual testing and the use of the build
++ # tree rather than installed thrift libraries.
++-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
++-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+++set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX})
+++set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX})
++ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 + 
-++include(GNUInstallDirs)
-++
-+ install(TARGETS ade COMPONENT dev
-+         EXPORT adeTargets
-+-        ARCHIVE DESTINATION lib
-+-        LIBRARY DESTINATION lib
-+-        RUNTIME DESTINATION lib
-+-        INCLUDES DESTINATION include)
-++	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-++        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-++        RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
-++	INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-+ 
-+ install(EXPORT adeTargets DESTINATION share/ade COMPONENT dev)
-+ 
-+-- 
-+2.24.1
-+
-diff --git a/meta-oe/recipes-support/opencv/ade_0.1.1f.bb b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
-index 332820d149..3861802158 100644
---- a/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
-+++ b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
-@@ -5,6 +5,7 @@ organizing data flow processing and execution."
- HOMEPAGE = "https://github.com/opencv/ade"
++ #
+diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.12.0.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
+similarity index 83%
+rename from meta-oe/recipes-connectivity/thrift/thrift_0.12.0.bb
+rename to meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
+index 1c69951bf9..92bcb21bf1 100644
+--- a/meta-oe/recipes-connectivity/thrift/thrift_0.12.0.bb
++++ b/meta-oe/recipes-connectivity/thrift/thrift_0.13.0.bb
+@@ -4,18 +4,19 @@ HOMEPAGE = "https://thrift.apache.org/"
  
- SRC_URI = "git://github.com/opencv/ade.git \
-+           file://0001-use-GNUInstallDirs-for-detecting-install-paths.patch \
-            "
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=394465e125cffc0f133695ed43f14047 \
+-                    file://NOTICE;md5=42748ae4646b45fbfa5182807321fb6c"
++                    file://NOTICE;md5=2659b43daca219f99a2f2626ea128f73"
  
- SRCREV = "58b2595a1a95cc807be8bf6222f266a9a1f393a9"
+ DEPENDS = "thrift-native boost flex-native bison-native openssl"
+ 
+-SRC_URI = "https://www-eu.apache.org/dist/thrift//${PV}/${BPN}-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "3deebbb4d1ca77dd9c9e009a1ea02183"
+-SRC_URI[sha256sum] = "c336099532b765a6815173f62df0ed897528a9d551837d627c1f87fadad90428"
++SRC_URI = "https://www-eu.apache.org/dist/thrift//${PV}/${BPN}-${PV}.tar.gz \
++           file://0001-DefineInstallationPaths.cmake-Define-libdir-in-terms.patch \
++          "
++SRC_URI[md5sum] = "38a27d391a2b03214b444cb13d5664f1"
++SRC_URI[sha256sum] = "7ad348b88033af46ce49148097afe354d513c1fca7c607b59c33ebb6064b5179"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+ 
+-inherit pkgconfig cmake pythonnative
++inherit pkgconfig cmake python3native
+ 
+ export STAGING_INCDIR
+ export STAGING_LIBDIR
 -- 
 2.24.1
 
