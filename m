@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id CC1EC7FA32
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 7579E7FA32
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Dec 2019 00:07:02 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id k197so5722668pga.10
+	Sat, 21 Dec 2019 00:07:03 +0000 (UTC)
+Received: by mail-pg1-f178.google.com with SMTP id k3so5739008pgc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Dec 2019 16:07:04 -0800 (PST)
+	Fri, 20 Dec 2019 16:07:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=i83G0Pg51tA8fZKULLY3jFYbATjFob2EDx7u7lXfVGY=;
-	b=qpkKnElY1B/TXTyuC0ZmQJ1T4tFxPwKV4X1yM5W+vKEPOgNmBPO4CjnsI1hUD4vtm+
-	+xtGLH+Oozy2ODbxRln2G9IS/daTwu0d/pW2wFdVIr8kwVWYs8UVBkh4r+MQZXsMd5+b
-	NpCEESmhuvbn3dFdiM2ZgDwJ9Yvd7CfhS3xmybzBw5C1w49n1YCZdA72A6mXEQGLlGXU
-	vtHQm+9ryYtDstXWXUl6CA3PWOl0GJFSqLAjJ5SXTD3d68Knxopo6RTNjlYuoN35ZGU6
-	BVeYxHItM8gzvlz1f2l5KVJg8wwCXXij6JQhC5cy+GnvxpQ1712botjroRp0PU9jnujL
-	rSjg==
+	bh=D+XdUknhIN7HCRH6jN76vO/7O+h2pxcH3EeuQG5ESEc=;
+	b=Y6umoeOC/7xFW70BsooQ4YS0QbJOmWm9fK35Hkcum7nws3r5BoyOpTR/zjVOk6ib1p
+	nNEAZ0GEamPXkurdM/P7kVOZrimE28FS8srmuYyPxjPcFgBdEkGc2VOCEv+ZrE8RwTs3
+	A5xV3DLa/64h8Z9nISh0Xn5f8BHhl79wtNoNUyLQWlv6r+snNVMAsUp6Mo2yXTW9aPzB
+	BMArR5TdqbESfGmSOJuYvWOwL6iYBjqIVy/AJPX/3DlETeKfmMwbXHulYjrifl1xmrmO
+	RwHHag8p6CcV0iLi8EUYiuJfS5zV/l96wKEnRX5b06meLPh/RzC9OojVyBfsg0l7uGUL
+	TtGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=i83G0Pg51tA8fZKULLY3jFYbATjFob2EDx7u7lXfVGY=;
-	b=pNMxRO7ycA6P3Qxtg1jEsBUF+HQd+sBbQWI4RKeo7QJv1zH5RaAHNJaZixzDGL8i67
-	OHj4hOLknkvCAhksu200nQLKt+SI5kgLx7u1McfhO/IvotNObLbo2WTRXu8J64JR2QSo
-	Lm4n6uUyO0yEhXPxaIOncwEQyo+Qbax0+cOc59ezO6Yq14gajmJqS9sKxQES0QWvKQ6E
-	hEMiI9mlIAOhBQuvPxB4BK6kDbUh2VmEWlMX1fRNGJuP/2X5+HJVYWG+HhhOji+4nWmk
-	nMR9UmUOPwLUZgA/xiEL1OKB1g3xA2Z8Xwk7Wrf7YglHuSWkgj1YQ7/nxJqyNApTN9UB
-	o3Dw==
-X-Gm-Message-State: APjAAAWXiE0ONJ40VH3XCjK4sKnPq+PXEESvlTlUpbSIAUIOx12qfFj+
-	95aEpzp0vQPs0mZihqEuBdQ/9hEuXCY=
-X-Google-Smtp-Source: APXvYqzi3R1WeUZkF7qjbdpMf28JxbYc/jO2sDwY3p9Cz6/TZKFFG31EwPeADCtsu5prVx0WinSViQ==
-X-Received: by 2002:a63:de47:: with SMTP id y7mr17425677pgi.270.1576886823437; 
-	Fri, 20 Dec 2019 16:07:03 -0800 (PST)
+	bh=D+XdUknhIN7HCRH6jN76vO/7O+h2pxcH3EeuQG5ESEc=;
+	b=hgokmL/9Qn36nT2D3+b15ObCHGUIC+uEV3lTr5CFaUPC+qtiTs6TCJJI8clrUDm/Zi
+	ETbxyPhPm+FSv28lM+LGFU5sutH38BR/iF0CoxDFGxxJFkjvHeSNaVVoppt7NHNjBbRY
+	FoozralW/KBVvOzkdHn1sk/2PndiaDVNNYNEEE3TR1lZ0+Xp2taxEgKguVviWUtVuymp
+	UrEB36fC3Ho/OPnrKwlNBOSueiJQVK0kJYVfPpXyxGuXCcMaEJXqRL6+9er1dUumVKY1
+	9LmzccQ5zQLw4QI9LRahHbux68oU0BFA4EWDX0NXW5iSX5GPcsa95g0vbvEuQqoyrXa5
+	cZHg==
+X-Gm-Message-State: APjAAAVtzm7ltdGg/jj+aP/w+GWdiOddUdROyuMcFcgROfz20P3byxmW
+	r5XEtGrpvE0SH4+VSIW35KpSsv2R4mI=
+X-Google-Smtp-Source: APXvYqz3+0Vt21xjqLm51jYeL+kNaaqK9aAKGNSpVqXjTEfJbzf4AqnL4RLUI3X6wBM4O6BxvwoXGw==
+X-Received: by 2002:a63:8041:: with SMTP id j62mr17802618pgd.41.1576886824157; 
+	Fri, 20 Dec 2019 16:07:04 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::36e9])
 	by smtp.gmail.com with ESMTPSA id
-	d4sm11701624pjz.12.2019.12.20.16.07.02
+	d4sm11701624pjz.12.2019.12.20.16.07.03
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
 	Fri, 20 Dec 2019 16:07:03 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Dec 2019 16:06:33 -0800
-Message-Id: <20191221000635.1573390-21-raj.khem@gmail.com>
+Date: Fri, 20 Dec 2019 16:06:34 -0800
+Message-Id: <20191221000635.1573390-22-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20191221000635.1573390-1-raj.khem@gmail.com>
 References: <20191221000635.1573390-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 21/23] ostree: Fix packaging errors when using lib64 libdir
+Subject: [meta-oe][PATCH 22/23] boinc-client: Use nonarch_libdir for systemd_units
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,46 +62,34 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sat, 21 Dec 2019 00:07:03 -0000
 Content-Transfer-Encoding: 8bit
 
-Fixes
-ERROR: ostree-2019.6-r0 do_package: QA Issue: ostree: Files/directories were installed but not shipped in any package:
-  /usr/lib/ostree/ostree-prepare-root
-  /usr/lib/ostree/ostree-remount
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/ostree/ostree_2019.6.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/boinc/boinc-client_7.16.bb | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.6.bb b/meta-oe/recipes-extended/ostree/ostree_2019.6.bb
-index a40cc52757..19955e973a 100644
---- a/meta-oe/recipes-extended/ostree/ostree_2019.6.bb
-+++ b/meta-oe/recipes-extended/ostree/ostree_2019.6.bb
-@@ -117,7 +117,7 @@ FILES_${PN} = " \
-     ${bindir}/rofiles-fuse \
-     ${datadir}/${BPN} \
-     ${datadir}/gir-1.0 \
--    ${libdir}/${BPN}/ostree-remount \
-+    ${nonarch_libdir}/${BPN}/ostree-remount \
-     ${libdir}/girepository-1.0 \
-     ${libdir}/lib*${SOLIBS} \
-     ${libdir}/ostree/ostree-grub-generator \
-@@ -127,6 +127,7 @@ FILES_${PN} = " \
-     ${systemd_unitdir}/system/ostree-finalize-staged.path \
-     ${systemd_unitdir}/system/ostree-finalize-staged.service \
-     ${systemd_unitdir}/system/ostree-remount.service \
-+    ${nonarch_libdir}/tmpfiles.d \
- "
- FILES_${PN}-dracut = " \
-     ${sysconfdir}/dracut.conf.d \
-@@ -141,7 +142,7 @@ FILES_${PN}-mkinitcpio = " \
-     ${libdir}/initcpio \
- "
- FILES_${PN}-switchroot = " \
--    ${libdir}/ostree/ostree-prepare-root \
-+    ${nonarch_libdir}/ostree/ostree-prepare-root \
-     ${systemd_unitdir}/system/ostree-prepare-root.service \
- "
- FILES_${PN}-trivial-httpd = " \
+diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.16.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.16.bb
+index ce3f691b2c..1b0af5549a 100644
+--- a/meta-oe/recipes-extended/boinc/boinc-client_7.16.bb
++++ b/meta-oe/recipes-extended/boinc/boinc-client_7.16.bb
+@@ -74,11 +74,14 @@ do_compile_prepend () {
+ 	sed -i -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' ${B}/${TARGET_SYS}-libtool
+ }
+ do_install_append() {
+-	if [ -e ${D}${libdir}/systemd/system/boinc-client.service ]; then
+-		install -D -m 0644 \
+-		${D}${libdir}/systemd/system/boinc-client.service \
++	if [ -e ${D}${nonarch_libdir}/systemd/system/boinc-client.service ]; then
++                install -d ${D}${systemd_system_unitdir}
++		mv \
++		${D}${nonarch_libdir}/systemd/system/boinc-client.service \
+ 		${D}${systemd_system_unitdir}/boinc-client.service
+-		rm -rf ${D}${libdir}/systemd
++		rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}/systemd/system \
++                ${D}${nonarch_libdir}/systemd \
++                ${D}${nonarch_libdir}
+ 	fi
+ }
+ 
 -- 
 2.24.1
 
