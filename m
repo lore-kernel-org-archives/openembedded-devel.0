@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
-	[209.85.210.174])
-	by mail.openembedded.org (Postfix) with ESMTP id E2A137FC4A
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+	[209.85.210.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 8E6E37FCB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Dec 2019 00:06:52 +0000 (UTC)
-Received: by mail-pf1-f174.google.com with SMTP id x185so6089942pfc.5
+	Sat, 21 Dec 2019 00:06:53 +0000 (UTC)
+Received: by mail-pf1-f172.google.com with SMTP id x6so4996654pfo.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Dec 2019 16:06:54 -0800 (PST)
+	Fri, 20 Dec 2019 16:06:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=l8sd7JxQ95LPC1jE1te+y/rASYuSf8lty3kwgPHK2Lg=;
-	b=EfKUmk3qJLY+j2hDJnhsbl38wU/YGyopL9GwVxwZMHJlluaiOeqlSgVXlk3XV7AsgY
-	Tl+5HSa/mp4SO2cqTrvUB6ev7tah2qWGbWew7L8yWrOGgayzfPlW0tEz8z8Zb9Z/lsgD
-	SLh8e52xb6oDu36w2XxacOa6+h75LR5fMgFFv0L4Cho6OIIDBIUcj8Ksf3d8LOKRJNqb
-	XWtE9yszlngJsCqF5gMvx15IP3r9COxs0rlnsro7cm0KnoJaRKh9mBgui3VWgXAPjNsJ
-	p8OspAC5oVfTgy2shUwKBtLJuJ5YbQMgOn9vo+oV/R6OoL6pgAqPE/rWoa0PXdNe94Iy
-	D3ng==
+	bh=e8iAxZZK0NOUmbqoG7JD9t8BI+yLXM6+3+UgUuQQtJk=;
+	b=YsMwXGyMDSj2HksFM7pHljMVZtBqaNsJNDEX1yI/B30m9DD/VI1B5PjJwySMXjUwzR
+	X2+cfE2l4G0RA6eii2vOvZriZm4EpPnjfqOT9/min22wwBCcXyRwsujka+qk1ngnsu6M
+	XOzul5A6O/kLrN5HEBG7oTsMiXIrth4I0I8/ITE+Ucf2SR3IP23gWxuiQP1SBJIqWd6e
+	KXIAt4pwX44eam4LmQeJP+2DuA1ajCletZGeeGdxJAmt5ymX4T+z4Vap2oamE/PHC32m
+	EtG43+oNYR9HxZ/Dilb95LHGs2S6KrhMoCOCrREXNrc0reYMzw94QaYSEqpOPcH3sUPD
+	opLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=l8sd7JxQ95LPC1jE1te+y/rASYuSf8lty3kwgPHK2Lg=;
-	b=hTc5SPdZIvVCgSNpzgA87Qe/28B1OPOqrOSdilC6Rn5zAE6Kzs4XOmo2DcS9dYp49M
-	46ZTKgyt6yKkygtTsLBt1RL7aZoGhYhUEdkQiZW/WoMYhVoZ4Dnl4Y/6ksW73LRhLv79
-	ngP4xpGcsfcCthiCDHJ4j5eE+jYhuIetV3VuyTR/udQLm3hGIXPTgw9IhoWdiU374Lg0
-	WzPgzWtKoeQQlVbIzFd+ZB7vu/c8/S7Wib4VTctBR7HVRsBvja6UmbDw5iD7YXXYf3pi
-	Iqy3MV/43CBe/63oHSAvkpVaMEqpekqnsU0timVkX0dv95C9mWSzSPNVecGPb3Ub4exH
-	WM/A==
-X-Gm-Message-State: APjAAAV/7/wueh9wyuIwZKpZkKcO8bgQ8TaneukVvGBQcCq/5Z0TsRRE
-	0DaLd+HEk4BfdtUO2xVzOqabUjyRGfM=
-X-Google-Smtp-Source: APXvYqwQ1RdTd+Gg9EhmY1w3tkIC4KjeRNsJwCnAHgE1mKOw6DZeSL6hi9jM9Kk2GjONKkQ7f6DDUg==
-X-Received: by 2002:a63:9d0f:: with SMTP id i15mr9564805pgd.240.1576886813488; 
-	Fri, 20 Dec 2019 16:06:53 -0800 (PST)
+	bh=e8iAxZZK0NOUmbqoG7JD9t8BI+yLXM6+3+UgUuQQtJk=;
+	b=Q8APw4ugFLjjzTZJheJuUUn4cqxsChSmctcXbLTe8ovWZccOOIGuG6JmSUTVryjZNv
+	oVwY5YctLdHpIR0h1G8TnnqoI7LOkzMmPfMvKceu3sdPT58HqlNHCDxAHiF3AlAPfAx8
+	vdO+eG6SvrcyqzSNDsFD8LPOPVLeEgvN/BYDuqoTv2pOETNLdTudAWV2WilWiqEjrcLZ
+	cRCpzdEdPjWExlqais/ySPNtGZ3eUP4R707o2CPD0SoykCGoTbzt0UVkltLHc6VZUNt9
+	xXklOI9tPkI7kbAl3ijFcdPvXersv1Ej2nYtZC21MefSfDzmEhEdT0vdI/Rmv8Qip4gi
+	UXMw==
+X-Gm-Message-State: APjAAAW7nxzNxhOxcVHaFIr+xkal45dGOb6TTB8TykF1LGHoO1fBamt9
+	5yD2GfhcO1eqzCQLlzST7eQUVUGcCKk=
+X-Google-Smtp-Source: APXvYqz9H2b7AQpwNoXcJnt7Q1BPtSHVLhmFRZQ8ysditFX3/mY6q7BpzgZgOxssKmesUH0kWx2c2Q==
+X-Received: by 2002:a63:d802:: with SMTP id b2mr17706439pgh.414.1576886814251; 
+	Fri, 20 Dec 2019 16:06:54 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::36e9])
 	by smtp.gmail.com with ESMTPSA id
-	d4sm11701624pjz.12.2019.12.20.16.06.51
+	d4sm11701624pjz.12.2019.12.20.16.06.53
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 20 Dec 2019 16:06:51 -0800 (PST)
+	Fri, 20 Dec 2019 16:06:53 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Dec 2019 16:06:21 -0800
-Message-Id: <20191221000635.1573390-9-raj.khem@gmail.com>
+Date: Fri, 20 Dec 2019 16:06:22 -0800
+Message-Id: <20191221000635.1573390-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20191221000635.1573390-1-raj.khem@gmail.com>
 References: <20191221000635.1573390-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 09/23] dcadec: Define BASELIB as a knob
+Subject: [meta-oe][PATCH 10/23] dbus-broker: Use nonarch_libdir for systemd catalog files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,86 +62,31 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sat, 21 Dec 2019 00:06:53 -0000
 Content-Transfer-Encoding: 8bit
 
-Use https protocol in fetcher
-
 Fixes
-
-ERROR: dcadec-0.2.0-r0 do_package: QA Issue: dcadec: Files/directories were installed but not shipped in any package:
-/usr/lib
-/usr/lib/libdcadec.so.0
-/usr/lib/libdcadec.so.0.1.0
-/usr/lib/libdcadec.so
-/usr/lib/pkgconfig
-/usr/lib/pkgconfig/dcadec.pc
+ERROR: dbus-broker-21-r0 do_package: QA Issue: dbus-broker: Files/directories were installed but not shipped in any package:
+/usr/lib/systemd/catalog
+/usr/lib/systemd/catalog/dbus-broker.catalog
+/usr/lib/systemd/catalog/dbus-broker-launch.catalog
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-define-BASELIB-make-variable.patch   | 31 +++++++++++++++++++
- .../recipes-multimedia/dca/dcadec_0.2.0.bb    |  8 +++--
- 2 files changed, 36 insertions(+), 3 deletions(-)
- create mode 100644 meta-multimedia/recipes-multimedia/dca/dcadec/0001-define-BASELIB-make-variable.patch
+ meta-oe/recipes-core/dbus/dbus-broker_21.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/dca/dcadec/0001-define-BASELIB-make-variable.patch b/meta-multimedia/recipes-multimedia/dca/dcadec/0001-define-BASELIB-make-variable.patch
-new file mode 100644
-index 0000000000..adce802bc8
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/dca/dcadec/0001-define-BASELIB-make-variable.patch
-@@ -0,0 +1,31 @@
-+From 18cc69460d2a0c756880bd54fda36afb0173ea02 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 19 Dec 2019 19:47:36 -0800
-+Subject: [PATCH] define BASELIB make variable
+diff --git a/meta-oe/recipes-core/dbus/dbus-broker_21.bb b/meta-oe/recipes-core/dbus/dbus-broker_21.bb
+index 98c50c4b21..8b4101aaf3 100644
+--- a/meta-oe/recipes-core/dbus/dbus-broker_21.bb
++++ b/meta-oe/recipes-core/dbus/dbus-broker_21.bb
+@@ -26,7 +26,8 @@ SYSTEMD_SERVICE_${PN} = "${BPN}.service"
+ 
+ FILES_${PN} += "${systemd_system_unitdir}"
+ FILES_${PN} += "${systemd_user_unitdir}"
+-FILES_${PN} += "${libdir}/systemd/catalog"
++FILES_${PN} += "${nonarch_libdir}/systemd/catalog"
+ 
+ EXTRA_OEMESON += " -Dselinux=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'true', 'false', d)}"
+ EXTRA_OEMESON += " -Daudit=${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'true', 'false', d)}"
 +
-+This helps to override the default libdir from environment
-+
-+Upstream-Status: Submitted [https://github.com/foo86/dcadec/pull/61]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index a503698..8f323be 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -7,8 +7,9 @@ API_PATCH = 0
-+ CFLAGS := -std=gnu99 -D_FILE_OFFSET_BITS=64 -Wall -Wextra -O3 -ffast-math -g -MMD $(CFLAGS)
-+ 
-+ PREFIX ?= /usr/local
-++BASELIB ?= lib
-+ BINDIR ?= $(PREFIX)/bin
-+-LIBDIR ?= $(PREFIX)/lib
-++LIBDIR ?= $(PREFIX)/$(BASELIB)
-+ INCLUDEDIR ?= $(PREFIX)/include
-+ 
-+ SRC_DIR := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-+-- 
-+2.24.1
-+
-diff --git a/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb b/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
-index 45b53c1191..1a51abc360 100644
---- a/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
-+++ b/meta-multimedia/recipes-multimedia/dca/dcadec_0.2.0.bb
-@@ -4,14 +4,16 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING.LGPLv2.1;md5=4fbd65380cdd255951079008b364516c"
- 
- SRCREV = "b93deed1a231dd6dd7e39b9fe7d2abe05aa00158"
--SRC_URI = "git://github.com/foo86/dcadec.git;protocol=http"
-+SRC_URI = "git://github.com/foo86/dcadec.git;protocol=https \
-+           file://0001-define-BASELIB-make-variable.patch \
-+          "
- 
- S = "${WORKDIR}/git"
- 
- inherit lib_package
- 
--EXTRA_OEMAKE = "CONFIG_SHARED=1"
-+EXTRA_OEMAKE = "CONFIG_SHARED=1 PREFIX=${prefix} BASELIB=${baselib}"
- 
- do_install() {
--	oe_runmake install DESTDIR="${D}" PREFIX="${prefix}"
-+	oe_runmake install DESTDIR="${D}"
- }
 -- 
 2.24.1
 
