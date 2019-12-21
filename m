@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FFB17FCB6
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+	[209.85.210.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F2D67FCB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Dec 2019 00:06:58 +0000 (UTC)
-Received: by mail-pg1-f170.google.com with SMTP id l24so5744555pgk.2
+	Sat, 21 Dec 2019 00:06:59 +0000 (UTC)
+Received: by mail-pf1-f176.google.com with SMTP id q8so6083326pfh.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Dec 2019 16:06:59 -0800 (PST)
+	Fri, 20 Dec 2019 16:07:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=ZWwP+Jy4vrhHtxndJWEZIsNNIVvvw2IdXuLrDdq32ss=;
-	b=t5UdL6+pHWTYBKuUC9iFnUFW36mn5qGtxK/EsUSeJzg4uhiJ/8f1ZEM22JKvQXRyfL
-	T7HMT+0OWMsZO/prqbJ6rLgXh3cytqlrjmcQmTHJE0FfdxebU88dedzBuzQTsY9ZG3ah
-	HkUecLlq7miApFWsb9iF0XHVfNv4M48rprhHY94TDWOGjpQeKvnqECN8P0R5ykrv1xnF
-	2ye6lnSIen5OoYSq+5Sb+Uut4pIlYVcmSc04xyG39luIT2plt7iYbqr2b+pTS8RWbtFj
-	fIY1DoqwMqgJPtAVyVm7uWfsqxr72ag7EZs+o1v4yj3oD8paIrDPbvhtJQNtK4lL76Si
-	SpUA==
+	bh=a81hi4g6pjGbyhZ/cx6LwGevAF1KTrwekTJiuY2QgHw=;
+	b=mlLbqWQD15TROI9knD4JjRXAqG2CT+LpMYgvZehISxXq8HjdyanZ/t/ly6T0TeVXMC
+	ht/qFKp5joroy8mMb8R5Jmcul3gi7LPGFpCXpO6Icov3UMK+HTvukH/3EHqcEY6chbIA
+	eTSGoznYQRpWtcz1FfnKurmmLanU+kL+b3lwZsabjp1MeQvhc99ujUJC+A/mnRTzI4mx
+	v0n5+uGvj/U/A/utjXUQo3s2PYuTpYuujPdWHZ4os4Nd0mWSUFtYLx2ZyOptpPHw1l+P
+	5dDXKPWTePkrbcAqcLC6C0ywhn6aLMe5BgjDm4H/Qh38FRcbawgHylYrMG1BWDzQ8P+Y
+	l+ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=ZWwP+Jy4vrhHtxndJWEZIsNNIVvvw2IdXuLrDdq32ss=;
-	b=gcPEmmC5R1LzGlySF12QUEvlFZYimw8bBZzWE2k8k0/ZOsq7vnNSIV0zYjApTmBSw9
-	T9erRAEnXRnMvlMNeUp/nAKlLcByghCLRuQBxunirXUV6jROHMd2AL4NSdtusBOc0/aC
-	/2jvvrFm/IrSR0TDXybxzlbqFjxLz1ihv9x1bXr1HNp1GcSEUQ5VzGP+3BRjAff6AXj3
-	T22khvb4L5US5HFt8JXMpN/WO/u/BcPSeX1RL0dvnMBuxNb4LWXySvZ8SCmJVThqLk1w
-	oH2o8eG5m6AVkTj+NmCLbEhrpFqhuYNhZGMOt74hbT+MohGi2+AXzHfQ+9eYbmLQliTf
-	DDug==
-X-Gm-Message-State: APjAAAWL1HC6zwA/NHfdOv9Lne/xWi2W0x/hWZIEYxpL5Wqg0ldHO4On
-	sWX7t6icq/QIDQfA55qpFktDDTxj6bw=
-X-Google-Smtp-Source: APXvYqzxciH5HCAb82FGGwiuV5eckGDGVPZm3YEQTaQsTcfBm4SEA0Owr3RFFOT6aWqlwtIh7/6B8g==
-X-Received: by 2002:a63:1204:: with SMTP id h4mr17369339pgl.288.1576886818991; 
-	Fri, 20 Dec 2019 16:06:58 -0800 (PST)
+	bh=a81hi4g6pjGbyhZ/cx6LwGevAF1KTrwekTJiuY2QgHw=;
+	b=c3NMYhxp861utoMt2i95gX1IT2796qj+VFcfGCSEWo6IczHFRUU+o+KKlYXpDtkfOK
+	qfUDZL0xWciS21finSrc4Ar0HCsurPxR39SxbtDOWWgpExst4OT+v9mDekYQqsDMRYTF
+	pd+EiI2mfc6IVr2yfNpUgkqRpzngW2JS3h2/5VLZmVA11p4vKJ82tSqPXymV1PVbpeYH
+	Ldv6UWnPO86bcHi0VtU8elSoL4Dd5mz2iFt6NZ4fu9+nduygpTWDAb0SEYo38KqASMbp
+	jlqIeL2L9lzKZG05CftI246NR2aW+raGcUifCao6hMrbyV0pHC2UUD0eVkhLToZy6TzB
+	l2og==
+X-Gm-Message-State: APjAAAXWE1Y1IX+JAjMhHP/nPd985C/K6qbMTkqdAYI2v/POYCZwOun9
+	CrHJk2XX/A9rNhvk1PAZOIER1XrOyo8=
+X-Google-Smtp-Source: APXvYqxpgdlLuf7RRIATG1amDQWdeuX6yyUAORBbyidp4mvXaA55hRDw5yjBGnuEBBAUwDFDPWI44w==
+X-Received: by 2002:a63:1b54:: with SMTP id b20mr17609684pgm.312.1576886819777;
+	Fri, 20 Dec 2019 16:06:59 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::36e9])
 	by smtp.gmail.com with ESMTPSA id
-	d4sm11701624pjz.12.2019.12.20.16.06.58
+	d4sm11701624pjz.12.2019.12.20.16.06.59
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 20 Dec 2019 16:06:58 -0800 (PST)
+	Fri, 20 Dec 2019 16:06:59 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Dec 2019 16:06:27 -0800
-Message-Id: <20191221000635.1573390-15-raj.khem@gmail.com>
+Date: Fri, 20 Dec 2019 16:06:28 -0800
+Message-Id: <20191221000635.1573390-16-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20191221000635.1573390-1-raj.khem@gmail.com>
 References: <20191221000635.1573390-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 15/23] rygel: Use nonarch_libdir for systemd units
+Subject: [meta-networking][PATCH 16/23] firewalld: Package firewalld files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,34 +59,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Dec 2019 00:06:58 -0000
+X-List-Received-Date: Sat, 21 Dec 2019 00:06:59 -0000
 Content-Transfer-Encoding: 8bit
+
+ERROR: firewalld-0.7.2-r0 do_package: QA Issue: firewalld: Files/directories were installed but not shipped in any package:
+  /usr/lib
+  /usr/lib/firewalld
+  /usr/lib/firewalld/zones
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-connectivity/rygel/rygel_0.37.0.bb            | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ .../recipes-connectivity/firewalld/firewalld_0.7.2.bb            | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb
-index 0adc721d8d..6ee02fcc04 100644
---- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb
-+++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.37.0.bb
-@@ -37,10 +37,12 @@ do_install_append() {
-        # Remove .la files for loadable modules
-        rm -f ${D}/${libdir}/rygel-${LIBV}/engines/*.la
-        rm -f ${D}/${libdir}/rygel-${LIBV}/plugins/*.la
--       if [ -e ${D}${libdir}/systemd/user/rygel.service ]; then
-+       if [ -e ${D}${nonarch_libdir}/systemd/user/rygel.service ]; then
-                mkdir -p ${D}${systemd_unitdir}/system
--               mv ${D}${libdir}/systemd/user/rygel.service ${D}${systemd_unitdir}/system
--               rmdir ${D}${libdir}/systemd/user ${D}${libdir}/systemd
-+               mv ${D}${nonarch_libdir}/systemd/user/rygel.service ${D}${systemd_unitdir}/system
-+               rmdir --ignore-fail-on-non-empty ${D}${nonarch_libdir}/systemd/user \
-+               ${D}${nonarch_libdir}/systemd \
-+               ${D}${nonarch_libdir}
-        fi
- }
+diff --git a/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.2.bb b/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.2.bb
+index 7d80a632d1..97c7bd6420 100644
+--- a/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.2.bb
++++ b/meta-networking/recipes-connectivity/firewalld/firewalld_0.7.2.bb
+@@ -66,6 +66,7 @@ do_install_append() {
  
+ FILES_${PN} += "\
+     ${PYTHON_SITEPACKAGES_DIR}/firewall \
++    ${nonarch_libdir}/firewalld \
+     ${datadir}/dbus-1 \
+     ${datadir}/polkit-1 \
+     ${datadir}/metainfo \
 -- 
 2.24.1
 
