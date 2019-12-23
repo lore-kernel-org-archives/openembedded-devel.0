@@ -1,53 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
-	[209.85.214.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 53DD760291
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id CBA367FAB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Dec 2019 00:07:04 +0000 (UTC)
-Received: by mail-pl1-f176.google.com with SMTP id az3so4769623plb.11
+	Mon, 23 Dec 2019 01:04:38 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,345,1571673600"; d="scan'208";a="80607017"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 23 Dec 2019 09:04:38 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id A905A4CE1C93
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Dec 2019 16:07:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=VaUOH27HEY9bE668oi8LtBJsOdJTbcvTFFN5lrmilYU=;
-	b=TxqgKHV+Dheh3k6DMfmwoORDGd1UttZT0g1K9MhGQXUIpfeJcpSws5ptVVdNf/2xg6
-	eTC5pQHC7Zo41qXVPTZg5snxJS17//8Er1B7vRWKVfOhJjUFYsK3OrmOHyOM1RI/l0/R
-	59V7dCgS4RAESN0BMODBWxt8SR9OaLgWf3BMIzgxwcZ7jKqAhQWr5hg+beDbW+ZTBGfF
-	0Q4Q+qK634PsH0BluHwwrEtH7WPrS1+2N+LXtPfOx5lnd53u6bWBiIeYgL77Zym+cAGD
-	OtP+wAccWwL7x5PPmlDZAkMQMTBiPqUm/n20pP4dhcxQ1pmoRZ2CBL12U7X9aWA9/jhk
-	supw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=VaUOH27HEY9bE668oi8LtBJsOdJTbcvTFFN5lrmilYU=;
-	b=ZOJxzRw3MAbtdLu6w1tsXf1hNTcuI2/8+C/Vtp/AJp1snPF/5cpviB1aksAPgyt0By
-	eQUNzvsMOE1C8EtqDiU332BDhbhE2lG6UO0h5uWckFsGpsOUXM9W/OhPj/pD2e88h6Oe
-	cgcuYqq7VXuS5YkZm1ySh6oocbh7d3wjhqkoi1ixjqQq9aZ4C3wAHmLSAf/bBUczDLih
-	ev+keBaEediySjHyyYOSZUQuJnBVxlBZeYRGfBtrh5vckEJY+d1Vto4mrWrKK4l/lJhg
-	B0vv3GYcN7U13o2G6CK2MI9YeUipoJ8wZQ9Fgc44HhbOObYzDiIedtd3cbIbA9NKHMnL
-	jgtA==
-X-Gm-Message-State: APjAAAXJvO7yDDDIBG+VypFReJgilul5LI6btdlvqmILtiRp3kb2iVkM
-	0+xCfnwszWtuPO2y79nxHK4J9JtDQdw=
-X-Google-Smtp-Source: APXvYqyUiBKJ4YIv+AvAuFZCplZWIK4swRyDcapeWT+3h5QWBqu2UJ3pn5asXAxP6YIb88aJMGShHg==
-X-Received: by 2002:a17:90a:d804:: with SMTP id
-	a4mr13932644pjv.11.1576886824855; 
-	Fri, 20 Dec 2019 16:07:04 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::36e9])
-	by smtp.gmail.com with ESMTPSA id
-	d4sm11701624pjz.12.2019.12.20.16.07.04
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 20 Dec 2019 16:07:04 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 20 Dec 2019 16:06:35 -0800
-Message-Id: <20191221000635.1573390-23-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20191221000635.1573390-1-raj.khem@gmail.com>
-References: <20191221000635.1573390-1-raj.khem@gmail.com>
+	Mon, 23 Dec 2019 08:55:52 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 23 Dec 2019 09:04:41 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 22 Dec 2019 22:16:01 -0800
+Message-ID: <1577081761-126944-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 23/23] spirv-tools: Fix multilib builds
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: A905A4CE1C93.A7120
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] krb5: upgrade 1.17 -> 1.17.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,76 +37,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Dec 2019 00:07:04 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 23 Dec 2019 01:04:39 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- ...STALL_LIBDIR-in-installed-CMake-file.patch | 35 +++++++++++++++++++
- .../recipes-graphics/spir/spirv-tools_git.bb  |  3 +-
- 2 files changed, 37 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-graphics/spir/files/0001-Respect-CMAKE_INSTALL_LIBDIR-in-installed-CMake-file.patch
+ .../krb5/{krb5_1.17.bb => krb5_1.17.1.bb}                     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/krb5/{krb5_1.17.bb => krb5_1.17.1.bb} (98%)
 
-diff --git a/meta-oe/recipes-graphics/spir/files/0001-Respect-CMAKE_INSTALL_LIBDIR-in-installed-CMake-file.patch b/meta-oe/recipes-graphics/spir/files/0001-Respect-CMAKE_INSTALL_LIBDIR-in-installed-CMake-file.patch
-new file mode 100644
-index 0000000000..5d37da8fe0
---- /dev/null
-+++ b/meta-oe/recipes-graphics/spir/files/0001-Respect-CMAKE_INSTALL_LIBDIR-in-installed-CMake-file.patch
-@@ -0,0 +1,35 @@
-+From caf59c46ea5dc49e4dbf756c642b03e52c1b5468 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 20 Dec 2019 07:02:24 -0800
-+Subject: [PATCH] Respect CMAKE_INSTALL_LIBDIR in installed CMake files
-+
-+Upstream-Status: Submitted [https://github.com/google/effcee/pull/36]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ CMakeLists.txt        | 1 +
-+ effcee/CMakeLists.txt | 4 ++--
-+ 2 files changed, 3 insertions(+), 2 deletions(-)
-+
-+--- a/external/effcee/CMakeLists.txt
-++++ b/external/effcee/CMakeLists.txt
-+@@ -27,6 +27,7 @@ endif()
-+ 
-+ include(cmake/setup_build.cmake)
-+ include(cmake/utils.cmake)
-++include(GNUInstallDirs)
-+ 
-+ add_subdirectory(third_party)
-+ add_subdirectory(effcee)
-+--- a/external/effcee/effcee/CMakeLists.txt
-++++ b/external/effcee/effcee/CMakeLists.txt
-+@@ -14,8 +14,8 @@ install(
-+   DESTINATION
-+     include/effcee)
-+ install(TARGETS effcee
-+-  LIBRARY DESTINATION lib
-+-  ARCHIVE DESTINATION lib)
-++  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-++  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-+ 
-+ if(EFFCEE_BUILD_TESTING)
-+   add_executable(effcee-test
-diff --git a/meta-oe/recipes-graphics/spir/spirv-tools_git.bb b/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
-index aae11dffcd..49a91b0053 100644
---- a/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
-+++ b/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
-@@ -9,11 +9,12 @@ SECTION = "graphics"
- S = "${WORKDIR}/git"
- DEST_DIR = "${S}/external" 
- SRC_URI = "git://github.com/KhronosGroup/SPIRV-Tools.git;name=spirv-tools \
--	file://0001-tools-lesspipe-Allow-generic-shell.patch \
- 	git://github.com/KhronosGroup/SPIRV-Headers.git;name=spirv-headers;destsuffix=${DEST_DIR}/spirv-headers \
- 	git://github.com/google/effcee.git;name=effcee;destsuffix=${DEST_DIR}/effcee \
- 	git://github.com/google/re2.git;name=re2;destsuffix=${DEST_DIR}/re2 \
- 	git://github.com/google/googletest.git;name=googletest;destsuffix=${DEST_DIR}/googletest \
-+	file://0001-tools-lesspipe-Allow-generic-shell.patch \
-+        file://0001-Respect-CMAKE_INSTALL_LIBDIR-in-installed-CMake-file.patch \
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.17.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.17.1.bb
+similarity index 98%
+rename from meta-oe/recipes-connectivity/krb5/krb5_1.17.bb
+rename to meta-oe/recipes-connectivity/krb5/krb5_1.17.1.bb
+index e27a4ae07..6164c8248 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.17.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.17.1.bb
+@@ -31,8 +31,8 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
+            file://krb5-kdc.service \
+            file://krb5-admin-server.service \
  "
- SRCREV_spirv-tools = "167f1270a9ee641b17c016a545741e4aadfabe86"
- SRCREV_spirv-headers = "4618b86e9e4b027a22040732dfee35e399cd2c47"
+-SRC_URI[md5sum] = "3b729d89eb441150e146780c4138481b"
+-SRC_URI[sha256sum] = "5a6e2284a53de5702d3dc2be3b9339c963f9b5397d3fbbc53beb249380a781f5"
++SRC_URI[md5sum] = "417d654c72526ac51466e7fe84608878"
++SRC_URI[sha256sum] = "3706d7ec2eaa773e0e32d3a87bf742ebaecae7d064e190443a3acddfd8afb181"
+ 
+ CVE_PRODUCT = "kerberos"
+ CVE_VERSION = "5-${PV}"
 -- 
-2.24.1
+2.17.1
+
+
 
 
