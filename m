@@ -1,48 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com
-	[209.85.210.181])
-	by mail.openembedded.org (Postfix) with ESMTP id AFD017F2A2
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com
+	[209.85.214.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F5F97F2A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Dec 2019 18:34:45 +0000 (UTC)
-Received: by mail-pf1-f181.google.com with SMTP id x184so9576641pfb.3
+	Mon, 23 Dec 2019 18:34:46 +0000 (UTC)
+Received: by mail-pl1-f182.google.com with SMTP id x17so7505783pln.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 23 Dec 2019 10:34:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=VsTWID8K4jORoH+btAKKoCniBKmjkR0o3RJNAlpFGIs=;
-	b=tPA7q4iUyV64URs9SlM14V/MhtADNEoVjnbxDE/qh2UvJtl1lvHNi7QvJijsxXu1b3
-	WYQl1efw4S/fqPWBY/sGS8aYN5h/+88evHCxbaZxQkYYxDs2wlOniOB/0upHFBjUXvcc
-	NMnHPgswpUjya/C6zEQki2Bj/+3q8022PSRr64bLkI6IVfL8bYhQnL3hriER60NE7a+e
-	oF9caKrzeaF8S2Lm+0UUBcvBAAw9k4zhPZ6WN57l/HPU8a9cAElCsQXIiAwlILhzXEsx
-	PkkzBSDQGTMt6HWeQ7+b6yOSgsRVsFL4IAQNTpNCFvdSWz7plxZrqKvyP/bww+aQi/q8
-	jWmw==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=yYhub/84Tte14i+MtPUBeuYfTxUa7IhAJ095oTOcP8o=;
+	b=pVd3JkvLHNN5tFjLSQBQvauHCyZPigPugEfgrk6kkjmZ/N431XE8bVUhok5iYIHEfX
+	JekL8DmKaTt1k/3aEznkmXfiHZhL8pohi9hBV/mdyJNZpuyxJv5gA8DSj8I8dfGaktg5
+	RhVJTVd2F8bfHgRecFy40M3SpDdGdlYWligQeJgmR9MgLs5kpkVs64/6GPLcMEpHpm+a
+	A1xdU3rHrfuvRet/2aN6JElqJmoETf5kLkk4okzci0TXsUXIDuOp6arU3hkoBdXLFjsV
+	SIk2CiWk8PErSayNIXs30ytUUDL8o3xsfZSdGO+ARjiVrs8qsMX6cH/KyOYkHjezhYDP
+	KY5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=VsTWID8K4jORoH+btAKKoCniBKmjkR0o3RJNAlpFGIs=;
-	b=ffM1Fb/un3ZtnaYBC+Ky5gFZgxwaisaZlKcgpriIztPGquCI9ouS5QYSFUOyCl4D3q
-	Sc6yztboaVtqdLxuhr+87mThJr6geEYIWMboD9xBwLBQgsiuAAKi+JiygNTf04Oh6SuT
-	vvZoJA47Kcz+IUIw1FfmSBX+/5BVGkKgnZMJ0RgUauL3zm3y+iq5EUtRdtgq54Di+jd/
-	3M8uAFWYE4dTD5sof4+OvbsXP6Ft6TRQ0sHYwHyEzU3m0SpYbQGbop15+niyCgCCMjJU
-	Pp4hh6XBGCMVziquTLklCpwKL1L8EgQgHpL5RlZ3nQF5TCfk17lLOjoSFIwgIyu65wb3
-	yBoQ==
-X-Gm-Message-State: APjAAAXc16A1k98/TN6w0D7CB0PI9b+EVgrS2tGmKk31M5OdWwI0lMIy
-	558W5GrD60+Q9CVTL4SCbCYpEwx37tI=
-X-Google-Smtp-Source: APXvYqxB2Cx87MAkv/rikaBLQQc2LlI9C6avr1JJFLM5mJXkWPdknb9ja7GYmF366BCfbQM1JCm7nA==
-X-Received: by 2002:aa7:9510:: with SMTP id b16mr33360869pfp.65.1577126086393; 
-	Mon, 23 Dec 2019 10:34:46 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=yYhub/84Tte14i+MtPUBeuYfTxUa7IhAJ095oTOcP8o=;
+	b=bXK8vdFqLt7WSvljSsOCrE0gZJ8+gmUTe/XjWj+jCmDIXD5qkzM+WmwqH5ixWxIrBI
+	vHvQ1xTvU/YgMoLJYQtrSkjV70sf/2wlpWQi9haD5QuB7V5hdpnK8y8i1Tynb8PmukU1
+	TduhxTT0dYoHUXzEZiv33STikUiSjdIDoidl+t1M2k4JX0f2lMhm6zeCBRHisjqf+37m
+	ZZnSCBKT47TozYHeNs9aQ9yya3cuqWAJBO/Tc4x5wSQqXi35kLu2+NfmlfUJCunO2vzm
+	pYoCAhFtsckQvBwrWEYmCRD188QW/1fzPlYz1npws1geGkjiL9WD0UOsbr+oN1tsFeFM
+	hOfA==
+X-Gm-Message-State: APjAAAVp0H1nfSpAorg0tfqNfppHJ+f+sB10iBX+qdpPyOpDRy2z5zE+
+	9cdCAW31BGJgLLbWo1rgtQoQrc4r7CE=
+X-Google-Smtp-Source: APXvYqy0mtOUsp0m6d0V3BsWYnOqxiRvOKLwLM61M0iivurWWnWlaA7Xh+z7NsnJnnAErPuXR5yAVA==
+X-Received: by 2002:a17:90a:2763:: with SMTP id
+	o90mr528674pje.110.1577126087034; 
+	Mon, 23 Dec 2019 10:34:47 -0800 (PST)
 Received: from localhost.localdomain (c-67-181-203-136.hsd1.ca.comcast.net.
 	[67.181.203.136]) by smtp.gmail.com with ESMTPSA id
-	r1sm22970782pgp.15.2019.12.23.10.34.45
+	r1sm22970782pgp.15.2019.12.23.10.34.46
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 23 Dec 2019 10:34:45 -0800 (PST)
+	Mon, 23 Dec 2019 10:34:46 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Dec 2019 18:34:42 +0000
-Message-Id: <20191223183444.420-1-akuster808@gmail.com>
+Date: Mon, 23 Dec 2019 18:34:43 +0000
+Message-Id: <20191223183444.420-2-akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH 1/3] glfw: missing feature check.
+In-Reply-To: <20191223183444.420-1-akuster808@gmail.com>
+References: <20191223183444.420-1-akuster808@gmail.com>
+Subject: [meta-oe][PATCH 2/3] libvncserver: fix build depends issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,28 +59,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Dec 2019 18:34:45 -0000
+X-List-Received-Date: Mon, 23 Dec 2019 18:34:46 -0000
 
-glfw depends on libglu which wont build if "opengl" is not
-in DISTRO_FEATURES
+only include ffmpeg if correct license is defined
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-core/glfw/glfw_3.3.bb | 2 +-
+ meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/glfw/glfw_3.3.bb b/meta-oe/recipes-core/glfw/glfw_3.3.bb
-index da2bae37a5..0ceeba1f19 100644
---- a/meta-oe/recipes-core/glfw/glfw_3.3.bb
-+++ b/meta-oe/recipes-core/glfw/glfw_3.3.bb
-@@ -17,6 +17,6 @@ SRCREV = "d25248343e248337284dfbe5ecd1eddbd37ae66d"
- EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
- 
- DEPENDS = "libpng libglu zlib libxrandr libxinerama libxi libxcursor"
--REQUIRED_DISTRO_FEATURES = "x11"
-+REQUIRED_DISTRO_FEATURES = "x11 opengl"
- 
- COMPATIBLE_HOST_libc-musl = "null"
+diff --git a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
+index 74aa7de076..22fc83a64f 100644
+--- a/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
++++ b/meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.12.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=361b6b837cad26c6900a926b62aada5f"
+ PACKAGECONFIG ??= " \
+     24bpp \
+     filetransfer \
+-    ffmpeg \
++    ${@bb.utils.contains('LICENSE_FLAGS_WHITELIST','commercial','ffmpeg','',d)} \
+     gcrypt \
+     gnutls \
+     jpeg \
 -- 
 2.17.1
 
