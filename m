@@ -1,53 +1,33 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
-	[209.85.128.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 901557F9B9
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E6A87F95C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Dec 2019 01:29:04 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id p17so1260778wma.1
+	Tue, 24 Dec 2019 05:19:27 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47hkzf1ppPz5b
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Dec 2019 17:29:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=4B/2qiWKAJiIvjVUF6aBxo3cfz2kP/CUwV23U81z1bc=;
-	b=SGU/hik5PAUlJuAqEeMIxks/ryn3vozpraeLRtg6dHbPKKig+voo5tXZ1fwb9dQ6mr
-	Rbhfyi71NhRCbCXnYF1ncrZfxpnvRak3gG9hK42L+18ERr3IWG/c8Pc98ft0jpu3e4YK
-	egxnN1GnDxwupTMlL7esAqgctf3u1zkgcbTmvx5NN9F1ySnv/wtCk85DNkG744txw/Yd
-	s7iZh/GSI/HR+XEEmvWZyRrUkAHJOq40lJAoS0L6vL7QxPprAZn2lBeNf18PAcvHFabZ
-	fKp3KARuFEPH0OBlqpjREZgeh4Z1mWl3krXjX4tU/4HD0sb+3u6RIgMXtwpHJQGQsAM0
-	sjdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=4B/2qiWKAJiIvjVUF6aBxo3cfz2kP/CUwV23U81z1bc=;
-	b=KbqWUu9wYPHB14ivzPnRxf9XaTX5DpT+yBWpHASSCfjRNKjAxy9HDp0TMUPK3PGJuI
-	qiNhpl1qMKnJVxUZEos4qy4/4KCPo3OESuVdsBpmjw0vXjQKBZf3yeBYrVuqc/2RNwwm
-	2EfAnhLhS6W9sB1rODI11j+lONGqjdKz7+wxJ/gFjQFFQcX8/9GwxBk1Aa6eJ8wV7TV1
-	uJEGZ4sVNcEaZO12cxCMoNfP3MGxMudxLxdLyCSYCCbVeVmFCKKwbNZbmor44GKxAggx
-	MEjD9yqLpii3IWuPtVJam8YvEGHP3SArQbdMcPuN/ISnohavR1dqyJokzOrs0+9w/uJt
-	3KLg==
-X-Gm-Message-State: APjAAAUR+Hkp14AfWklwv+nPXdLQIx5ulgBcpQYRbdUP2NgIktB16BXR
-	oVjRneMAJW0fWzJVEV3JGULKx8fm
-X-Google-Smtp-Source: APXvYqwhL1hPwNnFjX2BAYR1cjwC//vdRipzXOsn6xdrp3McQfq55wbmJU5XnxXZ4tUuiBOQoxS4ZA==
-X-Received: by 2002:a7b:cfc9:: with SMTP id f9mr1470067wmm.1.1577150945248;
-	Mon, 23 Dec 2019 17:29:05 -0800 (PST)
-Received: from superandy.speedport.ip
-	(p200300F07F2F7C330A6AB734136EA216.dip0.t-ipconnect.de.
-	[2003:f0:7f2f:7c33:a6a:b734:136e:a216])
-	by smtp.gmail.com with ESMTPSA id
-	i10sm22386924wru.16.2019.12.23.17.29.04
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 23 Dec 2019 17:29:04 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+	Tue, 24 Dec 2019 06:19:26 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1577164766;
+	bh=P16U8RVPylvTucap/0C1Z1a9bTmx6cV8QvSQbx0LuwM=;
+	h=From:To:Subject:Date:From;
+	b=RwKwFzghgt6TSpOFjNs+aC1TSOTETiX+3fsm+mkBpYoqTP+2aARd6BtYICeKkvcly
+	uUVr4VOwDayPjPGKOuvVKNQqQf7OB+n5HOIk6kP+FmQ8OKSYbcZHscQwjUUpi1LfXl
+	FfyXWnLqt7beglYt3/dZJrQr5WELJalwMKiewOsjO9xQek7TRxwROb+tVrR8ecOSsT
+	UJA94N0VOX97VV1CCS27G3ZsDSQ6woSJqZhx76bLUe6pu/Qa3A7OSphUL5F7KCYA4z
+	f3ovVhcHaFLoLJryuzJKoedTuFFTqbZKggmDdL0BrXPq9c7x6Bf3RI4W6q2sLl2CNt
+	6u/u/k3SBF7VZ0jciTb9eFQC8jRnYeVCEHfDY9d2+WTEGA6R4WITSN6J1ZXkxADWCv
+	B/CYH/zo0Yq46wPK1FWDEojqzoFD+4eu0tnJeWbJBnAGM7aiB4ZvNmY7IyKMpYqJ1x
+	Zb8mc6y3fQkB6/QtgAVWXFNb1rBWLrnqWZ+pQ8FcA1Nhca+VGq+LOtu3wby+mpXNMU
+	DzKkqJXesXFkYdjxGRogwaf/q95e0E5oI5RBOhlW328lHIwykzKOx7GCafTZL+2RJs
+	+fdRc/eVQ+jAnHXnkBZ0AJwB9zlSfK4JnmIWVJUzvrFGO3vpImbh9esJgzeWk66zsF
+	QyCnfzTRip9MTvXcmurjD70M=
+From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Dec 2019 02:28:57 +0100
-Message-Id: <20191224012857.10323-1-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-Subject: [PATCH] fluidsynth: upgrade 2.0.9 -> 2.1.0
+Date: Tue, 24 Dec 2019 07:19:25 +0200
+Message-Id: <20191224051925.28555-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][zeus][PATCH] libqmi: Upgrade 1.24.0 -> 1.24.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,54 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Dec 2019 01:29:05 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 24 Dec 2019 05:19:28 -0000
 
-As the version number suggests this is largely a feature upgrade:
+This is a bugfix release on the 1.24 stable branch.
 
-From annoucement:
-
-New features
-    new, less "ringing" reverb engine (#380, thanks to @jjceresa)
-    new, stereophonic chorus engine (#548, thanks to @jjceresa)
-    support for Downloadable Sounds (DLS) files was added (#320, requires libinstpatch)
-    improved integrity checking of SoundFont modulators (#467, thanks to @jjceresa)
-    rendering to stdout is now possible (#553, thanks to @mawe42)
-    the following Audio Drivers have been added:
-        Oboe (#464, tested on Android, thanks to @atsushieno)
-        OpenSLES (#464, tested on Android, thanks to @atsushieno)
-        SDL2 (#478, thanks to @carlo-bramini)
-        WaveOut (#466, tested on Win98, WinNT4.0, WinXP, thanks to @carlo-bramini)
-    various performance improvements (#543, #545, #547, #569, #573)
-
-Bug fixes
-    generator modEnvAttack now has a convex shape according to SoundFont spec (#153)
-    the default MIDI Pitch Wheel to Initial Pitch modulator now uses Fine Tune as destination generator, allowing it to be overridden by the soundfont designer (#154, thanks to @jjceresa)
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-multimedia/fluidsynth/fluidsynth.inc            | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../libqmi/{libqmi_1.24.0.bb => libqmi_1.24.2.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.24.0.bb => libqmi_1.24.2.bb} (85%)
 
-diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-index 764ed375e..9ce65064d 100644
---- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-+++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth.inc
-@@ -4,9 +4,9 @@ SECTION = "libs/multimedia"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
+diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.0.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.2.bb
+similarity index 85%
+rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.24.0.bb
+rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.24.2.bb
+index 9b89e1dd8..35a58d2f1 100644
+--- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.0.bb
++++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.2.bb
+@@ -14,8 +14,8 @@ inherit autotools pkgconfig bash-completion
+ SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
+            "
  
--SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=2.0.x"
--SRCREV = "c2f4683bf57f61451d14d219fdb25cf9f29cb7fe"
-+SRC_URI = "git://github.com/FluidSynth/fluidsynth.git"
-+SRCREV = "37c9ae2bf431a764032f023b3b2c0c0b86b7c272"
- S = "${WORKDIR}/git"
--PV = "2.0.9"
-+PV = "2.1.0"
+-SRC_URI[md5sum] = "4b181c0a8b933226ce3dce09565fe8f8"
+-SRC_URI[sha256sum] = "aeb69f90c273467cce246176cba0967c6413f1995a976992770a597c4fe28c79"
++SRC_URI[md5sum] = "e49c419112d708b5301af7ccc2c090ff"
++SRC_URI[sha256sum] = "4ae4e476f960dbc0d04b1c0368776eb78edffd4421f3e4c074bb2bfb6375b282"
  
- inherit cmake pkgconfig lib_package
+ PACKAGECONFIG ??= "udev mbim"
+ PACKAGECONFIG[udev] = ",--without-udev,libgudev"
 -- 
-2.21.0
+2.17.1
 
 
