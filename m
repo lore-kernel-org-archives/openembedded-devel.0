@@ -1,53 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com
-	[209.85.216.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 412CC7DDA5
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id BFC2B7F7C9
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 25 Dec 2019 16:57:17 +0000 (UTC)
-Received: by mail-pj1-f67.google.com with SMTP id m13so2493201pjb.2
+Received: by mail-pl1-f193.google.com with SMTP id b22so9583973pls.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Dec 2019 08:57:18 -0800 (PST)
+	Wed, 25 Dec 2019 08:57:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=sHN0f8lbq9dnCSGBqnpGVMz7s52/TLbRdbVAIEoYWI8=;
-	b=l9pRYa+ZVEQndeJcYe9MJIIH2eJwzU7A1yYjV8zy4zJfUU1HKCNr8XykKrNFX+ndiQ
-	iL8rExX4wnK/dQ9fmpMAMtwsaJg7JSRYT0V7y2weCcck7Ym8qQlfOLdo6TIRk6n6tbj2
-	thpyYNE0zJQtGt8mYubJ/OTIeymYynpSTPp8Df2AxtSR5afhUpU53ckDgDzej14yu6+Q
-	PaR1E5s/lta5GXLelnq7iIYXtoML/tf5kYMqimT95p/XSFYKym0HWw5gNkLYfjnA+Xuk
-	bMh2Acd4CJtg76WvckXaWg43sXHDgLgquVaGJuw3Mozne2vZbMo3uUuJBU7RPbP4xrYy
-	oq4A==
+	bh=mYMO/oF2EpPom3cZicRsqxO+BueouJ9+AS47VjSCke0=;
+	b=p14dPsd4pBq+yRr9a62H/iXEE33UMVxO6ecPDl6WtnwpNTaHp2QFa6fC36Etb6v70r
+	niaOVDxZDWr3yFU1sRyRvaQH+eUAGzRe/uLQArEhzOd4QZ+k2c6r0Sr6PUImW3ZNMyQ5
+	Fiei2dSe0nXVpo3uW3T/ZPKzENKnRfCWRoPaUNz62HLAPHKMN5SviucAl5pr9MuKQbIG
+	GmESSB1fG6ZiWsvFkTpdaOOozRjsZX+jYMoq/h/CKapUtQ9ukkQGxtC0A/ihYIPH9Kpi
+	shfW48WnPiwurEOsRVat/zHibtEDTcIXofNKWeWeb7e+BUh523r2yoCY5NzX7BdVFnBC
+	iDAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=sHN0f8lbq9dnCSGBqnpGVMz7s52/TLbRdbVAIEoYWI8=;
-	b=SJcebJ+ZnOXp+HDHwD4ZB7NhbkRYWu0g90xxesCrm3QDw+NMU5XOiPe4qVi1RaIAZp
-	tV04IEO7xvXRsbNfuxiHUKBW5eCrn6lGazqeiQ4sPVhFjYTkQ0OXKI4ZJNYJeRshNeE4
-	qWOQ3PqVgH8Op58ywMQQRFe6LwHkSeeGhdMm/SROQmL6FFwYdPUEndV9/DbSdW80Or+k
-	r9dzQflBZT0w0Z1sfPsGauulboycN6XTlc+ZxQFfSgtzlNPqr1ovVeyNvknxFTts5RiG
-	fl1VAeosfaeySrHEFjznZ1RNVY8W3+LQxJRECfJDaGj8vV0cio53js4Bx5vNF/STtkYQ
-	zlNA==
-X-Gm-Message-State: APjAAAVJctVcP3/6NKMQAJmQpe+hL0zvGXZnJao5DpvMU+gLILF4NeJl
-	RdsO1YTVlI9CRBUrXBMp7XcwSzAdMns=
-X-Google-Smtp-Source: APXvYqwxEU0On3dqqzJbb1qnvfxi+poN9R3v3uxq1RTLEaYR19sH3UTCqWXMsS0Ly7ufiqVYhGr4ww==
-X-Received: by 2002:a17:90a:c588:: with SMTP id
-	l8mr13647777pjt.69.1577293037842; 
-	Wed, 25 Dec 2019 08:57:17 -0800 (PST)
+	bh=mYMO/oF2EpPom3cZicRsqxO+BueouJ9+AS47VjSCke0=;
+	b=c5TRz/+tpWC0FclTfyYnd81EhCI4bHpSb26HMxDuyBuKikpYjBJy011WCtlWpdsqdy
+	cB6Wt5gDky5sc4l3VCSB8IYHFR7of8pccF1M8dpCNoG2CSLYIAelkrKcpSv3vD5IMr1T
+	SgjcsbztfBQ5WqtiVYQfprzirp/B7nSeNVoNu6PFT+1yCoS5pvKAhOhkcSCywE9Alvtg
+	Eoq6p0UQrExoU8oiQhWJvGWnmcBLViOZ++heiPDaGiMKJ4t3ksXieHlzFxZKAOIuNT01
+	ozX22OAK+D8BecZ5Sd+7O/kGoeih1rSmvS93cyOytYFj1JC3xN8/zk4QP/JqYhKD+m7K
+	GAfw==
+X-Gm-Message-State: APjAAAX+YM6zqwW8OML1Yqsux+UDcM47ce5nIptp19GnesLlBZM6izDF
+	YeWSJD4VDhx3pTHXLmgxQ6bUHH72va8=
+X-Google-Smtp-Source: APXvYqw0o3hreAmH0eI00fTItXhU60QYZXl8ACSn8lyPJuhBQSXW8SzEvfHbP+YehmJDSGfmg99Ezg==
+X-Received: by 2002:a17:90a:8545:: with SMTP id
+	a5mr13521144pjw.3.1577293038466; 
+	Wed, 25 Dec 2019 08:57:18 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::36e9])
 	by smtp.gmail.com with ESMTPSA id
 	p23sm30380829pgh.83.2019.12.25.08.57.17
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 25 Dec 2019 08:57:17 -0800 (PST)
+	Wed, 25 Dec 2019 08:57:18 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Dec 2019 08:57:08 -0800
-Message-Id: <20191225165709.2123137-2-raj.khem@gmail.com>
+Date: Wed, 25 Dec 2019 08:57:09 -0800
+Message-Id: <20191225165709.2123137-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20191225165709.2123137-1-raj.khem@gmail.com>
 References: <20191225165709.2123137-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 2/3] memcached: upgrade to 1.5.20
+Subject: [meta-oe][PATCH 3/3] ltrace: Fix build with gcc10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +60,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Dec 2019 16:57:17 -0000
+X-List-Received-Date: Wed, 25 Dec 2019 16:57:18 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../memcached/{memcached_1.5.10.bb => memcached_1.5.20.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/memcached/{memcached_1.5.10.bb => memcached_1.5.20.bb} (92%)
+ ...-struct-pointers-are-null-initilized.patch | 46 +++++++++++++++++++
+ ...hook-Do-not-append-int-to-std-string.patch |  2 +-
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb |  1 +
+ 3 files changed, 48 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ensure-the-struct-pointers-are-null-initilized.patch
 
-diff --git a/meta-networking/recipes-support/memcached/memcached_1.5.10.bb b/meta-networking/recipes-support/memcached/memcached_1.5.20.bb
-similarity index 92%
-rename from meta-networking/recipes-support/memcached/memcached_1.5.10.bb
-rename to meta-networking/recipes-support/memcached/memcached_1.5.20.bb
-index d2cafc9f6d..37a77c3648 100644
---- a/meta-networking/recipes-support/memcached/memcached_1.5.10.bb
-+++ b/meta-networking/recipes-support/memcached/memcached_1.5.20.bb
-@@ -22,8 +22,8 @@ RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader \
- SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
-            file://memcached-add-hugetlbfs-check.patch \
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ensure-the-struct-pointers-are-null-initilized.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ensure-the-struct-pointers-are-null-initilized.patch
+new file mode 100644
+index 0000000000..9def41ca60
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ensure-the-struct-pointers-are-null-initilized.patch
+@@ -0,0 +1,46 @@
++From 67a8fa478a4484bc4dbfb3ac74e11be1dd5af594 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 23 Dec 2019 19:35:48 -0800
++Subject: [PATCH] ensure the struct pointers are null initilized
++
++Do not delete if pointer is already null
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ expr.c | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/expr.c b/expr.c
++index 4059a32..5ffd0ad 100644
++--- a/expr.c
+++++ b/expr.c
++@@ -189,10 +189,8 @@ int
++ expr_clone(struct expr_node *retp, const struct expr_node *node)
++ {
++ 	*retp = *node;
++-
+++	struct expr_node *nlhs = 0, *nrhs = 0;
++ 	switch (node->kind) {
++-		struct expr_node *nlhs;
++-		struct expr_node *nrhs;
++ 
++ 	case EXPR_OP_ARGNO:
++ 	case EXPR_OP_SELF:
++@@ -236,8 +234,10 @@ expr_clone(struct expr_node *retp, const struct expr_node *node)
++ 		if (expr_alloc_and_clone(&nlhs, node->lhs, node->own_lhs) < 0) {
++ 			if (node->kind == EXPR_OP_CALL2
++ 			    && node->u.call.own_rhs) {
++-				expr_destroy(nrhs);
++-				free(nrhs);
+++				if (nrhs) {
+++					expr_destroy(nrhs);
+++					free(nrhs);
+++				}
++ 				return -1;
++ 			}
++ 		}
++-- 
++2.24.1
++
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-hook-Do-not-append-int-to-std-string.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-hook-Do-not-append-int-to-std-string.patch
+index 8f1c4b9b9b..2890373821 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace/0001-hook-Do-not-append-int-to-std-string.patch
++++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-hook-Do-not-append-int-to-std-string.patch
+@@ -23,7 +23,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  	if (sysconfdir != NULL && *sysconfdir != '\0') {
+  		/* No +1, we skip the initial period.  */
+ -		syspath = malloc(strlen(sysconfdir) + sizeof FN);
+-+		syspath = malloc(strlen(sysconfdir) + sizeof FN + 1);
+++		syspath = malloc(strlen(sysconfdir) + sizeof FN + 2);
+ +		syspath[strlen(sysconfdir) + sizeof FN + 1] = '\0';
+  		if (syspath == NULL
+ -		    || sprintf(syspath, "%s/%s", sysconfdir, FN + 1) < 0)
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index bb21cbca8a..6b66c25297 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -28,6 +28,7 @@ SRC_URI = "git://github.com/sparkleholic/ltrace.git;branch=master;protocol=http
+            file://0001-hook-Do-not-append-int-to-std-string.patch \
+            file://include_unistd_nr.patch \
+            file://0001-Bug-fix-for-data-type-length-judgment.patch \
++           file://0001-ensure-the-struct-pointers-are-null-initilized.patch \
             "
--SRC_URI[md5sum] = "8462616b554183a75845b03c56837cca"
--SRC_URI[sha256sum] = "494c060dbd96d546c74ab85a3cc3984d009b4423767ac33e05dd2340c01f1c4b"
-+SRC_URI[md5sum] = "4b64296ea0eeccdee9168c035e0488ab"
-+SRC_URI[sha256sum] = "cfd7b023a9cefe7ae8a67184f51d841dbbf97994ed0e8a55e31ee092320ea1e4"
+ S = "${WORKDIR}/git"
  
- # set the same COMPATIBLE_HOST as libhugetlbfs
- COMPATIBLE_HOST = '(i.86|x86_64|powerpc|powerpc64|arm).*-linux'
 -- 
 2.24.1
 
