@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D8C3C7CED3
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 7825D7CB4F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 21:31:42 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id j42so27219913wrj.12
+	Fri, 27 Dec 2019 21:31:43 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id y17so27289591wrh.5
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 27 Dec 2019 13:31:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=a38ulyJOsE/gf7djj+cGnX/WbBHxOGmvHWHNiZUgTtY=;
-	b=sjaQDbvVWXD8qAAXjWIJ+2Ro028fXtgH23qo4cHGmriNuqMh35kNMP/ISSwji9dd91
-	t2ahIGQm3XuqVp6dUdvPAmfFwhRzblP0jmWFhWXbY/jBsG/rXwAm+9as7y4LxzKimiA0
-	5HBhUURqAXXZ5V9G+cje6sWGbS40ftv+NYOekMJGL9CxpJIKBfbOJwkhdc2/oYh56phh
-	ntuCzdnAUJtg23P5KFM23DDy+9lVj5KWQdojpPnJxIOpi6Hgvxv9TwUhlMY1xLP4xl+t
-	15igeRnXuPr/e6NSQkUfBk5sI/gm2wrgHzt3NLam8kOMiyhDiRjj9KQRdbYh7YICgoRw
-	3xLg==
+	bh=EWFNoJDRUmzLyzloKcYnwVY0GuV39KwnU8S2LtJ0RKs=;
+	b=kpL8wToZ91+I6sHRvMHggN1e7Vf0NQVBbMRibbld/4nTJWq6cJMwp4UK363Zp2shxH
+	hqyxHg/ukdvEjjcz8iAU4u98/UasFDYzjkhxjXGa3ytc14dwUHB7XIe2CSth0EPuv15a
+	jsOrHHArWaOtqgaeX2VQ9db2wl16cM2ZmK62KS3HveHkERCyx39fxFvA/DwLGD4KeFRf
+	sxHaK/R7n2iqNlgOfXcrkE5cP+t5Ef//Jp6deXnMPxx866LXosDuRQkoWwF82RvcCLIh
+	cyVxXN+YpYYTKqAjjUHGYFZuveg45/zhcebFo5vzFr4kpARUwxoan2iJ+Y6tpmxCZiZV
+	cY8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=a38ulyJOsE/gf7djj+cGnX/WbBHxOGmvHWHNiZUgTtY=;
-	b=CFiONzqq/I7Qztbvcz07MgLiR+PKjKXTMbpmCI3Bz420wnooe+e0lmvVVWO16OpYl0
-	mYci64RP0wOuzGzp6NIqskGiTtyG4myyuf3/v1i3Q5md9v0CZw55mWAvCkrEdruEMUkM
-	hslBaLZY+4RuuHp00Yec59GJuELWnHYUktjV0i1t9La1JAYRdkK/Zx5gB+k9iVPvG+pV
-	wYrc13PxC6j0Tv1oOZMCeaLG2jZEz2jkq0FZOaJZ00cbGm1X3EJuRQJPyyGMKtKLOge5
-	RKEEUYNLpJyYoxtFVXmAwlAd04Go3fk3WFu8SmJev0NutfOk1ScWrsKQ65jealzRdH1E
-	lMDA==
-X-Gm-Message-State: APjAAAUiI89zeWdTMQuxOlnEHl0gcifPllhkCszInr8lvtU/fUNCAUsv
-	PqZaHBW5KFYyVEcsVXxJVPFyXaDxQHQ=
-X-Google-Smtp-Source: APXvYqzEyIBc3XE5t70qP/yho2KNbFtv03lEMl0DUzoT+K3VtG23HyDoAi5Mj8cVIzOKyNBBYZPxcw==
-X-Received: by 2002:a5d:6748:: with SMTP id l8mr53690994wrw.188.1577482303414; 
-	Fri, 27 Dec 2019 13:31:43 -0800 (PST)
+	bh=EWFNoJDRUmzLyzloKcYnwVY0GuV39KwnU8S2LtJ0RKs=;
+	b=gF78VMUG2TvHLBPwpczg+2n+VgY3wZboa+cYI2Rqs1gKNzcXlbMMo4uFPUCftCXMcK
+	a+s6kEanhlS2OOYpRK1Cgc7i9jeXrCTJW/wa9GqmRiWuzNRllS6uy+gHY4+QKF8tDAnu
+	8Z10KbaISZOW3UjldFiEKG/8kWRZy7r0RTb8bib1XJCjlYeREbHvmrmYVUGcDVJzzSnr
+	h1Hi+ba4YXQYAcyp/FPNVHAW5Tcye6oS1OlEe0+V6AjUF8FWPRVUKvlh7amsu3h/TMO7
+	L8D0uZ8jEpokHA/xiGBUFDTjA85rfD/WA1lWsiUAINQu4Okpb4EmuHblZM1IyaHWiQCt
+	nHGw==
+X-Gm-Message-State: APjAAAVg/XfaiY77MpCMx47kXS7CGN14BLgc6eSwx71tWorx4Ak7s7Zu
+	cpNG+MSzprTChnstDRMIiihxAJhEGpk=
+X-Google-Smtp-Source: APXvYqyyaUhiwXzzqhATZZ3RHXYgOff2kqSJn95i0wGbRn/wCKN4CineIxFQIjIeKdS/rlIk/NdntA==
+X-Received: by 2002:adf:f28c:: with SMTP id k12mr51515074wro.360.1577482304142;
+	Fri, 27 Dec 2019 13:31:44 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F052B8722A751F738295925.dip0.t-ipconnect.de.
 	[2003:f0:7f05:2b87:22a7:51f7:3829:5925])
 	by smtp.gmail.com with ESMTPSA id
-	m7sm11915929wma.39.2019.12.27.13.31.42
+	m7sm11915929wma.39.2019.12.27.13.31.43
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 27 Dec 2019 13:31:42 -0800 (PST)
+	Fri, 27 Dec 2019 13:31:43 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Dec 2019 22:31:17 +0100
-Message-Id: <20191227213120.3930-20-schnitzeltony@gmail.com>
+Date: Fri, 27 Dec 2019 22:31:18 +0100
+Message-Id: <20191227213120.3930-21-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191227213120.3930-1-schnitzeltony@gmail.com>
 References: <20191227213120.3930-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 20/23] libgdata: upgrade 0.17.10 -> 0.17.11
+Subject: [PATCH 21/23] mutter: upgrade 3.34.1 -> 3.34.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,62 +68,67 @@ Content-Transfer-Encoding: 8bit
 
 From [1]:
 
-Overview of changes from libgdata 0.17.10 to libgdata 0.17.11
-=============================================================
+3.34.2
+======
+* Fix immediate screen blank after releasing inhibitor [Tim; #573]
+* Respond to frame callbacks regardless of damage [Jonas Ã….; !839]
+* Translate well-known selection atoms to mimetypes [Carlos; !842]
+* Fix Night Light on wayland [Jonas Ã….; !840]
+* Fix various copy+paste/DND regressions [Carlos; !848, #789, #842,
+  #793, #845, #854]
+* Don't emit focus event after desctruction [Marco; gnome-shell#1704, !860]
+* Fix hang when opening not-responding dialog on Xorg [Carlos; !876]
+* Fix frozen grabs on Xorg after weeks of inactivity [Jonas Ã….; !886]
+* Fix triggering popups from stylus devices on wayland [Carlos; #886]
+* Support shadow framebuffers for offscreen rendering [Olivier; !917]
+* Fix hang after interacting with desktop icons on X11 [Marco; !909]
+* Don't double scale when getting absolute surface coordinates [Xiang; !915]
+* Kill window effects on destroy [Robert; !924]
+* Use partial damage for dma-buf and EGLImage buffers on wayland [Robert; #947]
+* Do not stack transients underneath their always-on-top parent [Florian; #587]
+* Fix KMS freeze after pageflip [Pekka; !953]
+* Fixed crashes [Robert, Jonas Ã…., Marco, Hans, Carlos, Tim; !856, !912, !895,
+  !928, #591, !823, !960]
+* Plugged memory leaks [Niels, Robert, Carlos; !847, !868, !873]
+* Misc. bug fixes and cleanups [Daniel, Marco, Jonas Ã…., Georges, Cosimo,
+  Florian, Hans, Robert, Jonas D.; !841, !764, !837, !846, !673, !811, !893,
+  !925, !927, !940, !832]
 
-* Various fixes to the Meson port, including a soversion fix (#30, #32, #35, !9, !10)
+Contributors:
+  Marco Trevisan (TreviÃ±o), Cosimo Cecchi, Tim Crawford, Jonas DreÃŸler,
+  Xiang Fan, Olivier Fourdan, Carlos Garnacho, Hans de Goede, Niels De Graef,
+  Tim Klocke, Robert Mader, Florian MÃ¼llner, Georges Basile Stavracas Neto,
+  Pekka Paalanen, Daniel van Vugt, Jonas Ã…dahl
 
-* Add support for user-specified properties of documents in Drive (!7)
+Translators:
+  Bruce Cowan [en_GB]
 
-* Bugs fixed:
- - #30 meson: debug messages of libgdata don't come from correct log domain - "libgdata"
- - #31 gdata_entry_get_id should not free current value if not changed
- - #32 Build failure on Continuous
- - #33 en_GBism in a string
- - #35 Installed tests fails with an assert in gdata_oauth2_authorizer_request_authorization
- - !7 Drive v2 Properties API
- - !9 Meson fixes
- - !10 meson minor fixes
- - !13 docs: Drop use of `<!-- -->` to delimit plurals
- - !16 Minor revision of italian translation (after >2ys)
-
-* Translation updates:
- - Basque
- - Czech
- - English (United Kingdom)
- - German
- - Indonesian
- - Italian
- - Lithuanian
- - Polish
- - Portuguese (Brazil)
- - Romanian
- - Spanish
- - Swedish
-
-[1] http://ftp.gnome.org/pub/gnome/sources/libgdata/0.17/libgdata-0.17.11.news
+[1] http://ftp.gnome.org/pub/gnome/sources/mutter/3.34/mutter-3.34.2.news
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../libgdata/{libgdata_0.17.10.bb => libgdata_0.17.11.bb}     | 4 ++--
+ .../mutter/{mutter_3.34.1.bb => mutter_3.34.2.bb}             | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/libgdata/{libgdata_0.17.10.bb => libgdata_0.17.11.bb} (87%)
+ rename meta-gnome/recipes-gnome/mutter/{mutter_3.34.1.bb => mutter_3.34.2.bb} (95%)
 
-diff --git a/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb b/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.11.bb
-similarity index 87%
-rename from meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb
-rename to meta-gnome/recipes-gnome/libgdata/libgdata_0.17.11.bb
-index 8e8e12b38..197a05d37 100644
---- a/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.10.bb
-+++ b/meta-gnome/recipes-gnome/libgdata/libgdata_0.17.11.bb
-@@ -29,5 +29,5 @@ PACKAGECONFIG[vala] = "-Dvapi=true,-Dvapi=false"
+diff --git a/meta-gnome/recipes-gnome/mutter/mutter_3.34.1.bb b/meta-gnome/recipes-gnome/mutter/mutter_3.34.2.bb
+similarity index 95%
+rename from meta-gnome/recipes-gnome/mutter/mutter_3.34.1.bb
+rename to meta-gnome/recipes-gnome/mutter/mutter_3.34.2.bb
+index 2d84bfc2f..992915bb7 100644
+--- a/meta-gnome/recipes-gnome/mutter/mutter_3.34.1.bb
++++ b/meta-gnome/recipes-gnome/mutter/mutter_3.34.2.bb
+@@ -22,8 +22,8 @@ GNOMEBASEBUILDCLASS = "meson"
  
- EXTRA_OEMESON = "-Dalways_build_tests=false"
+ inherit gnomebase gsettings gobject-introspection gettext upstream-version-is-even features_check
  
--SRC_URI[archive.md5sum] = "d858d411ad394c275643b14993dfeed4"
--SRC_URI[archive.sha256sum] = "c1d3d1f303f6a0416a0dac355a195276c31157a74bb1d040772d46d1cb15b012"
-+SRC_URI[archive.md5sum] = "7b98e9059255d8a2fb147c4e727230a8"
-+SRC_URI[archive.sha256sum] = "6b9917122e4def6e6f78bcb660e49e146540832e296abcb5cde99829a04ea986"
+-SRC_URI[archive.md5sum] = "4d7b67471fa4177e5ff0357e1f1736fb"
+-SRC_URI[archive.sha256sum] = "ba1826cf88bdb81e63943cac014a8e8bcf35ec178c53264401f9c72fdeab758e"
++SRC_URI[archive.md5sum] = "4515ccdb762a243d65757f5ab073d206"
++SRC_URI[archive.sha256sum] = "2d6f7763193766d4652d43d0d0de2e49e60ca571eca0a7f1e6341fbd67f90b2d"
+ SRC_URI += "file://0001-cogl-Fix-GLES2-fallback.patch"
+ 
+ # x11 is still manadatory - see meson.build
 -- 
 2.21.0
 
