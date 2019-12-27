@@ -1,48 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C5B8D6025E
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-il1-f195.google.com (mail-il1-f195.google.com
+	[209.85.166.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A37C7C410
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 23:19:45 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id x129so22524740qke.8
+	Fri, 27 Dec 2019 23:48:35 +0000 (UTC)
+Received: by mail-il1-f195.google.com with SMTP id v69so23468513ili.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 15:19:46 -0800 (PST)
+	Fri, 27 Dec 2019 15:48:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=R+7QeqN1DvDvtD8ik57KFpxVvVkuaxh4tu7S8hVWL34=;
-	b=V+ELfhh+uovrMxRD+w5U8cIykcqDYFQJhnpd5kfyVweCv0EbeF5ufEar+3BGtH48LW
-	laIa6++n3kpiky+S8dkMp2MGAlfHwAVqd+45TzlMmuUw0YNj8f2Pryh5XCSaaKg439XF
-	m2INTwXbFYgmtUtQGRldj1EYhhqXE/+6kMBi0taRCpCJcH5ELsjExfG6a1RA71bVQnxQ
-	cPYmUwDOpEdRBfGzZWIrW6tGO2Ce4QMeumfHMRSS3yNPgpkORXioBSsbUQkwgDhLB4Q4
-	Y+cjeGqTX0loPVx1OCgw35qJwfv/jrsvG6lTx+7ZBt5kYHPElPyrIdPv48yycg0nrasy
-	ICiw==
+	:cc; bh=H2J0v5vgf+ebGNReJKodx2xnaKbMIdUM2+66tnbRoLU=;
+	b=rT5kpg1CgWNQr2r6DAlNnmNMNOY+trkQdtsVLHuHnFoBtt46sGKIS3i+rG28hRQqdT
+	krGK58M3ecRPsZ+6zc0sdgLR234vCXmK5k23nVsVR24Il2dc4qFm107/hNyEDyXZnKSe
+	IO+LjgcnputPDuyQ00GkA+9QDUgoqKoMuM9PyfaQkr6bNpibDzxHn+qgtXgR9Bp8FpZp
+	7baK3SV1Rqi5/ADoWI9MlpiPdnmohrHVigAtSCFIMZsiKfPyWQgw6Ntsl6F/6Hbb4DXr
+	xWvrn1hqWgl/pVFjpKIaCL6mFDXh3gsGjrtgCQeZdOBXZFntjT8l9Cndp5KZGyjvPR5p
+	1B8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=R+7QeqN1DvDvtD8ik57KFpxVvVkuaxh4tu7S8hVWL34=;
-	b=bl54rIP9hhj8BWRTMX6ArvH8Dj8k5w76Biy7NymAOBnVo+JbYyd71HxXQIbIlq0LCU
-	2GvBWTkA2gJL9VU37owsWRmmXbPL+MGUu6AFxz1NtZFySPdBrdJ2p7ukUjkhwnQ07Jxo
-	5/1/MWhuoX5fqd3nCEWiGmi6Y3aFEuTjqZmcEcbRji/D4ig9UB5GMqHs50n29FgZN0iK
-	O/7NS5UCJuzEDYBv5qil4mNFOdnyeRgDlhFgv1dTBGwb8H/pPfEtyWq7Fmc1xFfppD10
-	LkY7ufTRBsXgDuI2TWaBIoQ0dyo2FaWDVZ1sn/tQTZq8eKyXDqjF4H/lkpSSg3O+6DBJ
-	1WmQ==
-X-Gm-Message-State: APjAAAXDrOBLhpEGnJPIaJOpXrIF78xv8F0C3xgv14K/tuILVvLDB0xP
-	oTAIjXLm81XouBSFVzIDpasuAplGiPULXEdXfw4=
-X-Google-Smtp-Source: APXvYqysKrqcokmMJ1hoyxYTfVd1CHH6Ej7cFSQEkhDjoknTDFM3AQb0eSfZeWKUwHUl/I0rmXQb4cDm7b3wfsm9nfc=
-X-Received: by 2002:a37:bf82:: with SMTP id
-	p124mr46008816qkf.337.1577488785773; 
-	Fri, 27 Dec 2019 15:19:45 -0800 (PST)
+	bh=H2J0v5vgf+ebGNReJKodx2xnaKbMIdUM2+66tnbRoLU=;
+	b=iu2yKU4pbCZARMZFJ6+HRisG6ozExiw4uv6XMWnegxVU2pFt7bWnHy2cRz8UTAnPP+
+	XtgZMIZslxG7LjvdVKUGvi8m7orhjooC1z2V34iDKi5uqfZuJEpAZjVEI/MupLWZDxuR
+	9JFC2zirK8R7S/giNWjz+hiscoLMtRQ11yOzE6sabaf8B++1oKVCYgu+0dLhTUNGadWF
+	Z4WAVKueDWbnrOcKP64Qc01tk/iwKnG5RAxZC7xlcevmoZO0yzAFK87KOPKGjlmaLBvU
+	6eUaBeaq9I9gwwOeS9F3BXN/jQ+/6ptHbq+BI3A2m6yU4+oxRU6LIxLAe9IsQxMqzrmm
+	v6qg==
+X-Gm-Message-State: APjAAAUUZ/+ALvRyFpj/mBpvSFwakva6ug76cWphYFbGvVIsj3zzRxNc
+	11qq/PXnLDU8ET4kzDnBbLpMNkn0m2/1mq7NfUQ=
+X-Google-Smtp-Source: APXvYqx11s33hdJ+I9OG3aL7ycEoImn/UE0Qf4MZx/wGgelgnbq57lCO6eu/BNHaOmx5r4kNaG1XVa1SA7X3354bxhU=
+X-Received: by 2002:a92:cb09:: with SMTP id s9mr49592697ilo.224.1577490516211; 
+	Fri, 27 Dec 2019 15:48:36 -0800 (PST)
 MIME-Version: 1.0
 References: <20191227213120.3930-1-schnitzeltony@gmail.com>
 	<20191227213120.3930-9-schnitzeltony@gmail.com>
-In-Reply-To: <20191227213120.3930-9-schnitzeltony@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 27 Dec 2019 15:19:34 -0800
-Message-ID: <CAMKF1srAOXoEzu=0i0yyM8dZn3rLt4B1d-_9FRPTTEfexDZDqw@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
+	<CAMKF1srAOXoEzu=0i0yyM8dZn3rLt4B1d-_9FRPTTEfexDZDqw@mail.gmail.com>
+In-Reply-To: <CAMKF1srAOXoEzu=0i0yyM8dZn3rLt4B1d-_9FRPTTEfexDZDqw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 28 Dec 2019 00:48:25 +0100
+Message-ID: <CALbNGRTeSi6X-osFwzjm1y8fj46Bmsmayemdscn8-f=+=-srqQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 09/23] evolution-data-server: upgrade 3.34.1 -> 3.34.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -56,92 +55,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Dec 2019 23:19:47 -0000
+X-List-Received-Date: Fri, 27 Dec 2019 23:48:35 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 27, 2019 at 1:33 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m>
-wrote:
+On Sat, Dec 28, 2019 at 12:19 AM Khem Raj <raj.khem@gmail.com> wrote:
+> I think version specific information should be in bb file not inc
+we have a native build and it just builds some tools required. Both
+native/target share same version which is set in
+evolution-data-server.inc. So maybe I missed something but what kind
+of change do you suggest?
 
-> From [1]:
->
-> Evolution-Data-Server 3.34.2 2019-11-22
-> ---------------------------------------
->
-> Bug Fixes:
->         I#156 - EBook/CalMetaBackend: Automatic refresh not always setup
-> ][ (Milan Crha)
->         I#159 - LDAP: Fails to read userCertificate from the server (Mila=
-n
-> Crha)
->         I#162 - e-cal-recur: Ignores recurrence exceptions (Milan Crha)
->         I#164 - HSTS (RFC 6797) support for "On The Web" calendars (Milan
-> Crha)
->         I#169 - Detached instances shown as with floating time (Milan Crh=
-a)
->         I#173 - ESoupSession: Accept also compressed responses (Milan Crh=
-a)
->
-> Miscellaneous:
->         EWeatherSource: Use g_signal_connect_object() in
-> e_weather_source_parse() (Milan Crha)
->         Correct runtime warning from camel_network_service_can_reach()
-> (Milan Crha)
->         ESoupSession: Do not presend credentials on insecure connections
-> (Milan Crha)
->         EBackend: Slightly enhance g_warning() messages with an ESource
-> identification (Milan Crha)
->         ESource: Required signals not connected after EDBusObject is
-> replaced (Milan Crha)
->         LDAP: Change how LDAP query is constructed (Milan Crha)
->
-> [1]
-> http://ftp.gnome.org/pub/gnome/sources/evolution-data-server/3.34/evoluti=
-on-data-server-3.34.2.news
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  .../evolution-data-server/evolution-data-server.inc         | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git
-> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.in=
-c
-> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.in=
-c
-> index 0893f8e92..0e58b0cc2 100644
-> ---
-> a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.in=
-c
-> +++
-> b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.in=
-c
-> @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM =3D
-> "file://COPYING;md5=3D6a6e689d19255cf0557f3fe7d7068212 \
->
->  inherit gnomebase upstream-version-is-even
->
-> -SRC_URI[archive.md5sum] =3D "d1701875bbac80d6d62e9acfc6c43bea"
-> -SRC_URI[archive.sha256sum] =3D
-> "6ff56ba04cb639e627fe9d6e0ada106a10cadd68a0d53b8ec72b4e285df53abe"
-> -PV =3D "3.34.1"
-> +SRC_URI[archive.md5sum] =3D "7a0571ac358664c6e96accd3ac4cd245"
-> +SRC_URI[archive.sha256sum] =3D
-> "3eb89f82eee042884a8d65737564fe48829c3ae187f067cbcdec2b088d2fe89b"
-> +PV =3D "3.34.2"
->
-
-I think version specific information should be in bb file not inc
-
->
-> --
-> 2.21.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Andreas
 
