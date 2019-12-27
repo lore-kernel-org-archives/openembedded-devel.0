@@ -1,47 +1,51 @@
-Return-Path: <andrey.z@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id F239B7D27B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
+	[209.85.214.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 979F27CE27
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Dec 2019 21:13:02 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id j42so24510446wrj.12
+	Fri, 27 Dec 2019 03:56:46 +0000 (UTC)
+Received: by mail-pl1-f178.google.com with SMTP id y8so11208572pll.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Dec 2019 13:13:03 -0800 (PST)
+	Thu, 26 Dec 2019 19:56:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=BC059ghwrWUJl/lW8csqOCxNN0NFS5uIDWlrAMvGDjw=;
-	b=IbfoOzSKidieQUXl8e5lGC2RUpn2DasiGAhmQbXQWgNbSicrK5etKVIYqc8MKvu4OG
-	jGmAVKUnjljMXev3V6CFBLhd1mORwRasLIx/xOmAv5SbhNx3agbMNoMd+Bv7m8Vey6Av
-	UMfNcgFcPtPhhtovKcesDrLHEZBs6GkltpDmy6sxyPmUW6/SnKz1hkV//UxpkvKK8BWj
-	cIDrp2MotZhNqmjum3aKrRRRcoo7Pkq/d1yc9MmusGoYAXx1VSn3+LXRpDE49+y3tD4Z
-	D1NjKN1403GSjPoNGKoavHN1Z8eh9HKJ6lLaGUAdab1t60AuNeOQTTOyyWQ5pXuCx7kA
-	ctDQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Kjtoqs7if9pvaCMt0JJo8AVdzu4bQOQuAl3qn4s3ab0=;
+	b=lItkXR24PuaLZ/Wmj3t/2QP8lVqE6NiQQ6aORvKpO1AflGwRrpR/Q9KFQYOjHA7wz7
+	xsEOo3KlWuvig/98QD3tXEnfWuaAuYSxvTWlTYfmJ4k9HkP14SCXDHxzFjXACPfOoR/3
+	gBpqBq4PeCswCBx5ZN/h3nLa/zOWLlv2oy+RO6sZgUTPnH9XrG7gRZ+OZF1W+8G9DA79
+	/RuNfSpCFzdgfiyafuqpBZcBFqDFyItAw/NmohwQ+/UqRFVFpbcaM7vZyVP+I5EchKah
+	6WV/sVKHJ6GXGE3Zs+S/kPW2kKC+EE4atcPoMvTescmMZHDEpv7a9rbqB/lebIPUMBF6
+	hlug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=BC059ghwrWUJl/lW8csqOCxNN0NFS5uIDWlrAMvGDjw=;
-	b=Q0yX4iIQH5z6uh/V28v011wqTYa33/M9NupltIekOWjC8w1002XEjRL2xubfstCshQ
-	cg53Z/6OBCU28Np8IG1VFQH1SqoD8Ma9WmBAiFCZgoPycZVdiGCyOe8FYqv+/i5ardWr
-	Fs9lqbqI17Jcue1R4PZozoAzYakp6zwdcojOzdWIeeu8ctmyWyeyclDeK0QlCvGPYTCj
-	lj5hYl4hAzwcOJC9QPrBRQtfT0U5XI0X5MsC7w0OvvhDesHNZcOqYNL27IS8BuY2TZ98
-	Ivt4kjWrSeVsV6PM/H9kWwyY8auSagd5HOKeqRZ3ZvsKd8eL1ug+ifeehz17sAHqp21/
-	wbxA==
-X-Gm-Message-State: APjAAAV93PAPWIdyQVGIHNviAQlabSAP71oUr5W0q4hVRiXmuRbR6x4M
-	b3pRpc3LtrPTeCQxGX0vr0hhXxOD
-X-Google-Smtp-Source: APXvYqzayfUgvlQ6WegmqH4cMKHdR9yo3FIkHFTnFgqjtZgeZDJ4NptG4Xr/az12mHZVaaEznptSXQ==
-X-Received: by 2002:adf:e5cb:: with SMTP id a11mr45206890wrn.28.1577394782608; 
-	Thu, 26 Dec 2019 13:13:02 -0800 (PST)
-Received: from lab-linux-pc.tendawifi.com (cable-static2-2-7.rsnweb.ch.
-	[146.185.2.7]) by smtp.gmail.com with ESMTPSA id
-	y139sm9920853wmd.24.2019.12.26.13.13.02
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Kjtoqs7if9pvaCMt0JJo8AVdzu4bQOQuAl3qn4s3ab0=;
+	b=Bad3nGifW7rpUWHoOEtAJI/6A5v3cuZRbHsXTr2acu5EH831lotLDHO01eKd8ZgZHR
+	2mR51IobgsDhJ+GqP69ecOgbe/iI7SkpaQ6sTvb5AOu6JLV5fBAb4R2iwZZjkb1rQRiD
+	hjW3VlXWVdEGpU9a0PaIaM72rN0hLisyb8zOL/7mZOuAMHnmcNnl3kIpb0eV9IciS7nu
+	6LIlls0GnsIRUNJK6O8Mgi8fHzgY5yuGhFoNSCIYha7W/PrOBCi42NcM8s3t/mzFAkNT
+	+8SJ8ZcWzuhzEO/07alSAXlQBzCpAQZNZb3hCs0Uk/bd8gCuBZPMP1ZCUFDXFUBgHY9D
+	y/HQ==
+X-Gm-Message-State: APjAAAVSaut/A4+Yw0N+0S4h8QrcvnvRmFxOTO3BnRiGJwsTRKNE6X0j
+	b00vLYHY+f8xI4F9+VND0Dcgo33U5M8=
+X-Google-Smtp-Source: APXvYqzG4MzrxqEW78TF+bTJbKlAFj7Oq6WhBPzIFUDtOFgUlJ7Ey8X8aEikkbGiNwnQMhs5ARmaAg==
+X-Received: by 2002:a17:902:a614:: with SMTP id
+	u20mr50261851plq.107.1577419007021; 
+	Thu, 26 Dec 2019 19:56:47 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::2f83])
+	by smtp.gmail.com with ESMTPSA id
+	r30sm36673613pfl.162.2019.12.26.19.56.46
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 26 Dec 2019 13:13:02 -0800 (PST)
-From: Andrey Zhizhikin <andrey.z@gmail.com>
+	Thu, 26 Dec 2019 19:56:46 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Dec 2019 21:13:00 +0000
-Message-Id: <20191226211300.7350-1-andrey.z@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] flatbuffers: add PIC compiler flag required for aarch64
+Date: Thu, 26 Dec 2019 19:56:35 -0800
+Message-Id: <20191227035639.303716-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.1
+MIME-Version: 1.0
+Subject: [meta-multimedia][PATCH 1/5] mpd: Fix build with gcc10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,39 +58,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Dec 2019 21:13:03 -0000
+X-List-Received-Date: Fri, 27 Dec 2019 03:56:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Add PIC flag to CXXFLAGS in order to solve the issue with linking
-against the library for aarch64.
-
-Without PIC enabled, linking against this library fails with
-following messages:
-
-relocation R_AARCH64_ADR_PREL_PG_HI21 against symbol `[snap]'
-which may bind externally can not be used when making a
-shared object; recompile with -fPIC
-
-Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ ...ingBuffer-Include-cstddef-for-size_t.patch | 27 +++++++++++++
+ ...-Include-stdexcept-for-runtime_error.patch | 38 +++++++++++++++++++
+ .../recipes-multimedia/musicpd/mpd_0.20.22.bb |  2 +
+ 3 files changed, 67 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch
+ create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb
-index bd6dcef4e..529441de1 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.11.0.bb
-@@ -17,8 +17,8 @@ SRC_URI = "git://github.com/google/flatbuffers.git \
-           "
- 
- # Make sure C++11 is used, required for example for GCC 4.9
--CXXFLAGS += "-std=c++11"
--BUILD_CXXFLAGS += "-std=c++11"
-+CXXFLAGS += "-std=c++11 -fPIC"
-+BUILD_CXXFLAGS += "-std=c++11 -fPIC"
- 
- # BUILD_TYPE=Release is required, otherwise flatc is not installed
- EXTRA_OECMAKE += "\
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch b/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch
+new file mode 100644
+index 0000000000..1d869aa833
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch
+@@ -0,0 +1,27 @@
++From c14877071f14b218835f7fb034dea11bd1ba56f5 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 25 Dec 2019 09:40:16 -0800
++Subject: [PATCH] StringBuffer: Include cstddef for size_t
++
++Fixes
++a.cpp:3:1: error: 'size_t' does not name a type
++    3 | size_t s;
++      | ^~~~~~
++a.cpp:2:1: note: 'size_t' is defined in header '<cstddef>'; did you forget to '#include <cstddef>'?
++
++Upstream-Status: Submitted [https://github.com/MusicPlayerDaemon/MPD/pull/697]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/util/StringBuffer.hxx | 1 +
++ 1 file changed, 1 insertion(+)
++
++--- a/src/util/StringBuffer.hxx
+++++ b/src/util/StringBuffer.hxx
++@@ -31,6 +31,7 @@
++ #define STRING_BUFFER_HPP
++ 
++ #include <array>
+++#include <cstddef>
++ 
++ /**
++  * A statically allocated string buffer.
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch b/meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch
+new file mode 100644
+index 0000000000..1f11867191
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch
+@@ -0,0 +1,38 @@
++From 06f78ced45f6622a2e02cd09e6a2c0c22a98b89e Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 25 Dec 2019 09:41:55 -0800
++Subject: [PATCH 2/2] Include <stdexcept> for runtime_error
++
++Fixes
++
++../git/src/LocateUri.cxx:65:14: error: 'runtime_error' is not a member of 'std'
++   65 |   throw std::runtime_error("Unsupported URI scheme");
++      |              ^~~~~~~~~~~~~
++
++Upstream-Status: Inappropriate [ Fixed differently upstream ]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/LocateUri.cxx      | 1 +
++ src/pcm/PcmConvert.cxx | 1 +
++ 2 files changed, 2 insertions(+)
++
++--- a/src/LocateUri.cxx
+++++ b/src/LocateUri.cxx
++@@ -17,6 +17,7 @@
++  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++  */
++ 
+++#include <stdexcept>
++ #include "config.h"
++ #include "LocateUri.hxx"
++ #include "client/Client.hxx"
++--- a/src/pcm/PcmConvert.cxx
+++++ b/src/pcm/PcmConvert.cxx
++@@ -17,6 +17,7 @@
++  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
++  */
++ 
+++#include <stdexcept>
++ #include "config.h"
++ #include "PcmConvert.hxx"
++ #include "ConfiguredResampler.hxx"
+diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+index 6c6ad42375..133ee6e792 100644
+--- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
++++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
+@@ -19,6 +19,8 @@ DEPENDS += " \
+ SRC_URI = " \
+     git://github.com/MusicPlayerDaemon/MPD;branch=v0.20.x \
+     file://mpd.conf.in \
++    file://0001-StringBuffer-Include-cstddef-for-size_t.patch \
++    file://0002-Include-stdexcept-for-runtime_error.patch \
+ "
+ SRCREV = "9274bc15bc41bbe490fde847f8422468cc20375d"
+ S = "${WORKDIR}/git"
 -- 
-2.17.1
+2.24.1
 
 
