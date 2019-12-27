@@ -1,103 +1,54 @@
-Return-Path: <Peter.Kolbus@garmin.com>
-Received: from NAM02-BL2-obe.outbound.protection.outlook.com
-	(mail-eopbgr750127.outbound.protection.outlook.com [40.107.75.127])
-	by mail.openembedded.org (Postfix) with ESMTP id D12B67CE79
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 001BF6C1C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 17:26:49 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=Y3wHJIAF6kCdeCzYKKeqISdxKBURFsAPWwr74iZ8wENE1GTrwiE7oBsmb56HA4cfoua82M4qQ8mUCT3vw2mPK96UKu5vZ906BiM5mRSv/ULEQzdg9wRflCdkkSLDtxa8p7/auhhxhiM2wt/8HExG+EZ5wJsUlXCgFqeySazO71O8ooYTDV/FGTuNZ7WLZKd8nZ4cGl3uCwrOTfd3RZ46MJOgVV6otyvoxOjWjNlrziS/8ElExIuWkL/hOiOaYLVoLe8WL+y7stT/6LQK5iXD/yu+65rsvBuwvnlNmT/8Qyg93ZRtuwTmJreTEPz9MoT3t1yGus4Zm4DbeNu3s7rm7w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=k8WN/LrD6MivK+sRSL2vArTIHU0fD5ADZ6zoJjl4OeY=;
-	b=DrNzxG9Lxhla461qqmI+gf6sgsJJSg8mSQpAtkn82eZEwsFVy3pbOuz844ovyZ3Av49L/Xt5mgAZ3YBWRGlXJwha34I05YbUfDAhPOvpHfWJWVO4u04zY9lWXMRdU29D3RAyqU5hiYuLTZ/Q3VkTpDrO2NBmtfLG0xNeDXTXn41UsVdpBAyAk1xtfUp76+0MEBAE1jMMVSF0b2Arw2B4btVusSBaMaK2J9b1WQkE0jU6h5o0LuDKJivyDc7RbAyR4Ve1kd95jsvY0T5+89vESx2EL8TYdQxhJ6Hus3pg17pI2HMOQla9PYY0FUL6lnd1+x07JAL25szYY+DHx2PTsg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
-	204.77.163.244) smtp.rcpttodomain=lists.openembedded.org
-	smtp.mailfrom=garmin.com;
-	dmarc=pass (p=none sp=none pct=100) action=none
-	header.from=garmin.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garmin.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=k8WN/LrD6MivK+sRSL2vArTIHU0fD5ADZ6zoJjl4OeY=;
-	b=p2msDq85ofSB8xL3sMFxVbw2mK/577vOidaafFPLnfwIl7PG/FdJ0UcrnWDp2kDXkt1pycD/+0vTj6EpODSTfq42DJAjRo1Sf8edFUm1lq2ntWGdkHZqT06VKd9LkbLla9LHNunUdrk3L1jIU6uT/ksh+M6w8F1BzqdUMnZHbPU=
-Received: from SN4PR0401CA0017.namprd04.prod.outlook.com
-	(2603:10b6:803:21::27) by SN6PR04MB4480.namprd04.prod.outlook.com
-	(2603:10b6:805:b2::25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2581.12;
-	Fri, 27 Dec 2019 17:26:46 +0000
-Received: from MW2NAM10FT034.eop-nam10.prod.protection.outlook.com
-	(2a01:111:f400:7e89::200) by SN4PR0401CA0017.outlook.office365.com
-	(2603:10b6:803:21::27) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2581.11 via
-	Frontend Transport; Fri, 27 Dec 2019 17:26:46 +0000
-Authentication-Results: spf=pass (sender IP is 204.77.163.244)
-	smtp.mailfrom=garmin.com; lists.openembedded.org; dkim=none (message not
-	signed) header.d=none;lists.openembedded.org; dmarc=pass action=none
-	header.from=garmin.com;
-Received-SPF: Pass (protection.outlook.com: domain of garmin.com designates
-	204.77.163.244 as permitted sender) receiver=protection.outlook.com;
-	client-ip=204.77.163.244; helo=edgetransport.garmin.com;
-Received: from edgetransport.garmin.com (204.77.163.244) by
-	MW2NAM10FT034.mail.protection.outlook.com (10.13.154.231) with
-	Microsoft SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2581.11 via Frontend Transport; Fri, 27 Dec 2019 17:26:45 +0000
-Received: from OLAWPA-EXMB10.ad.garmin.com (10.5.144.12) by
-	olawpa-edge3.garmin.com (10.60.4.226) with Microsoft SMTP Server
-	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
-	15.1.1466.3; Fri, 27 Dec 2019 11:26:42 -0600
-Received: from OLAWPA-EXMB3.ad.garmin.com (10.5.144.15) by
-	OLAWPA-EXMB10.ad.garmin.com (10.5.144.12) with Microsoft SMTP Server
-	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
-	15.1.1779.2; Fri, 27 Dec 2019 11:26:41 -0600
-Received: from ola-brr76y2.garmin.com (10.5.84.15) by smtp.garmin.com
-	(10.5.144.15) with Microsoft SMTP Server id 15.1.1779.2 via Frontend
-	Transport; Fri, 27 Dec 2019 11:26:40 -0600
-From: Peter Kolbus <peter.kolbus@garmin.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Dec 2019 11:23:40 -0600
-Message-ID: <20191227172339.10885-4-peter.kolbus@garmin.com>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20191227172339.10885-3-peter.kolbus@garmin.com>
-References: <20191227172339.10885-3-peter.kolbus@garmin.com>
+	Fri, 27 Dec 2019 21:31:27 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id p17so9325698wmb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Dec 2019 13:31:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=SVUjXW1+HvgYYXhB1yravDD2hdrBpID9mcgLFU8D4xY=;
+	b=Hi5I+TYXiuPvEefeunnwGcUYSqVDovFjO5XvIgX8I4Q5VRxOLpr8mDEZbPZ/pz+CpQ
+	3jhHEu0CKdcaDlVud8XT3aHBUUY3zSUGPlEXqxcI+G12/CBqCU2xXttu2dF0FLe0ZFG/
+	Iqp5Suci4CqxblhjyY0lf6MCWACPkGrh0E4ge2nbG+9Yb8+FNnkTJM4tobwmxjwQ5L8x
+	2FFkM6JirFp9y2mqjO/CKIxXwu1SxfjuljixewasJdcLbZrP9cXuZl2bayRBtENrCs/B
+	A6OtKPXp5KJgBmzKDD2wL5Pyw0AcuHtjxrkNWnAhKKHAuHUO3WoQKr3RhqxurzokaaVQ
+	pavA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=SVUjXW1+HvgYYXhB1yravDD2hdrBpID9mcgLFU8D4xY=;
+	b=M6BK1/3SNP+rsMipeHlFZZDuYgZ/iFsJ9fwgWxC3yKrf2+9aFx3PlEsASHjqpdlEO7
+	xQdVGlfPtCTkarvTq3xqkMHRHhT/34aWoqkmpja5CQcE4vpfLd8+jxiYwP7BIy0L7mp/
+	jz42D1iqUXiS5f6YPD0Tx11afBGeyY1XbBAelmBOuslGo3Oig0RoRCZnfHYgqBdo2Psa
+	N8tlC8WzM2jJi/+X/v7wpcJLhVbpZdGkvpjbfUtIn6y//sy8iAqxG+l+TECPtVuVnQDU
+	B0jrUYf+hv8rurCMpJuuM9UemCppzskdJ6rsuFyLl2Brc0zMqpgQ1hK72hHoR0t28MLN
+	JUwQ==
+X-Gm-Message-State: APjAAAXELYNoUg0KLSr7Op+rOPcrN9hm7N8B/NKMtwO3lKM3Ieh+yZfA
+	AQgjGUKsGVOoA2xfhzkPkhw2a4SSvG0=
+X-Google-Smtp-Source: APXvYqxvy6uAatVw1qks87Sh66PEGLMjVIGfXyh3/DCss5LhQyttR695ZMfa3NNd3dNK1+SoerZ2pg==
+X-Received: by 2002:a05:600c:248:: with SMTP id
+	8mr21531909wmj.175.1577482288188; 
+	Fri, 27 Dec 2019 13:31:28 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F052B8722A751F738295925.dip0.t-ipconnect.de.
+	[2003:f0:7f05:2b87:22a7:51f7:3829:5925])
+	by smtp.gmail.com with ESMTPSA id
+	m7sm11915929wma.39.2019.12.27.13.31.27
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 27 Dec 2019 13:31:27 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 27 Dec 2019 22:30:58 +0100
+Message-Id: <20191227213120.3930-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-TM-AS-Product-Ver: SMEX-12.5.0.1300-8.5.1010-25132.001
-X-TM-AS-Result: No-2.729300-8.000000-10
-X-TMASE-MatchedRID: iOIDnuBW4h5SQAJO4/Vvl7HcAAwD045wTBkzBfi0S2oLBZEuqIL9SkAc
-	6DyoS2rIzmFEl8/fT3abKItl61J/yfJvocwUrWp7FBpuM64i9KELbigRnpKlKTpcQTtiHDgWdXf
-	iwkNYqStW1OWo1Elfc0oGzgmPagu/afRMFbSp/1IGTVvaW+cJ+Yyvzzcqpc9rOqfTzZbXfQOkJJ
-	Tbtt4TTq7zQ5cqhAEIRSFCLi6kLLCQy+lMrBKGwJeqBS9/VV9cyZDK+esyepJjhRK9S+H8Wg==
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--2.729300-8.000000
-X-TMASE-Version: SMEX-12.5.0.1300-8.5.1010-25132.001
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-HT: Tenant
-X-Forefront-Antispam-Report: CIP:204.77.163.244; IPV:CAL; SCL:-1; CTRY:US;
-	EFV:NLI; SFV:NSPM;
-	SFS:(10019020)(376002)(346002)(136003)(39860400002)(396003)(189003)(199004)(26005)(70206006)(316002)(76130400001)(70586007)(186003)(36756003)(4744005)(1076003)(5660300002)(336012)(426003)(2616005)(356004)(44832011)(6916009)(26826003)(7696005)(107886003)(2906002)(478600001)(8676002)(7636002)(86362001)(8936002)(246002)(4326008);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:SN6PR04MB4480;
-	H:edgetransport.garmin.com; FPR:; SPF:Pass; LANG:en;
-	PTR:extedge.garmin.com; MX:1; A:1; 
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 02b16c80-4c96-47ff-9394-08d78af1f2bf
-X-MS-TrafficTypeDiagnostic: SN6PR04MB4480:
-X-Microsoft-Antispam-PRVS: <SN6PR04MB4480A6A76839E5D325355B89FF2A0@SN6PR04MB4480.namprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2201;
-X-Forefront-PRVS: 0264FEA5C3
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: UD6t4bAJsqGdNx3HAlEY37dk+KX/ASHEJUVx7t+HZRmYIljpbMiHiuxmgAivMxUCOBOVvU3DeOxwIg57RGl6kQzPosCf9zoIZz215GsAgffIcqJYY0qXQFTp/h1kxfnhDKWqD2LQNB0vSd3/An2408xtT9D6O4iWLwCHkPOrjIHXcoleqyB9Fi3mKusJ+BdkINUvnWXeGYZpEMYnbm74tipgJjD3bKRFo5RZhpOrCHHjhaNgsImx2Y0n2lg7HVDfG+0Uo51vF2T8Y6C5GV8yOPHOvYqWpNaiRlfgZituylQdU8j4vNDrcRLkE5PBx/OzMBziQs+jKBhQCC9bQyf3j/uGAow81s8WxFRtK8HRyWkh0cKJMNaJCMABU9/cI4G8DI8rZ9jvwLVpaaX3HE0AKYfY881Vr1dCQa0LRKMvUvTnLCFZJv+VHLrjSviuOTWP
-X-OriginatorOrg: garmin.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Dec 2019 17:26:45.9236 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 02b16c80-4c96-47ff-9394-08d78af1f2bf
-X-MS-Exchange-CrossTenant-Id: 38d0d425-ba52-4c0a-a03e-2a65c8e82e2d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=38d0d425-ba52-4c0a-a03e-2a65c8e82e2d;
-	Ip=[204.77.163.244]; Helo=[edgetransport.garmin.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR04MB4480
-Subject: [meta-python][PATCH 4/4] python(3)-beautifulsoup4: add soupsieve to RDEPENDS
+Subject: [PATCH 01/23] exo: upgrade 0.12.10 -> 0.12.11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -110,31 +61,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Dec 2019 17:26:50 -0000
+X-List-Received-Date: Fri, 27 Dec 2019 21:31:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Since version 4.7.0, beautifulsoup4 uses soupsieve for CSS selectors.
-Add to RDEPENDS to address this oversight.
+Looks like a mini-bugfix:
 
-Signed-off-by: Peter Kolbus <peter.kolbus@garmin.com>
+Release notes for 0.12.11
+=========================
+General:
+- Bump documentation dates
+- Add *.mo to .gitignore
+
+Bug Fixes:
+- Revert padding patches that add too much padding in the Thunar compact
+view (Xfce #16196)
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-beautifulsoup4.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-xfce/recipes-xfce/exo/{exo_0.12.10.bb => exo_0.12.11.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/exo/{exo_0.12.10.bb => exo_0.12.11.bb} (88%)
 
-diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
-index a52c96487..8c9dbfc68 100644
---- a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
-+++ b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
-@@ -11,6 +11,7 @@ inherit pypi
- RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-html5lib \
-     ${PYTHON_PN}-lxml \
-+    ${PYTHON_PN}-soupsieve \
+diff --git a/meta-xfce/recipes-xfce/exo/exo_0.12.10.bb b/meta-xfce/recipes-xfce/exo/exo_0.12.11.bb
+similarity index 88%
+rename from meta-xfce/recipes-xfce/exo/exo_0.12.10.bb
+rename to meta-xfce/recipes-xfce/exo/exo_0.12.11.bb
+index 4deedbfbc..4c16689d3 100644
+--- a/meta-xfce/recipes-xfce/exo/exo_0.12.10.bb
++++ b/meta-xfce/recipes-xfce/exo/exo_0.12.11.bb
+@@ -20,8 +20,8 @@ SRC_URI_append_class-native = " \
+     file://reduce-build-to-exo-csource-only.patch \
  "
  
- BBCLASSEXTEND = "native nativesdk"
+-SRC_URI[md5sum] = "ef1db71eb24cf24f6870444ccfc2345d"
+-SRC_URI[sha256sum] = "848fd65175118786e994fcf8b28f8c804f58d21cc9d961e00897cd97dc257cac"
++SRC_URI[md5sum] = "efeb039d64b3257e39a1a38e75eb19b1"
++SRC_URI[sha256sum] = "ec892519c08a67f3e0a1f0f8d43446e26871183e5aa6be7f82e214f388d1e5b6"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG_class-target ??= "gtk"
 -- 
-2.24.1
+2.21.0
 
 
