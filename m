@@ -1,41 +1,40 @@
 Return-Path: <prvs=2577514f3=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id CCCD371B99
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AE857C85D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 10:55:28 +0000 (UTC)
+	Fri, 27 Dec 2019 10:59:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1577444130; x=1608980130;
+	t=1577444357; x=1608980357;
 	h=subject:to:references:from:message-id:date:mime-version:
 	in-reply-to:content-transfer-encoding;
-	bh=RTelF+bMdVi+AViEeG/3wR2BPH26hV+F+BbSitsQFvs=;
-	b=ombF5GmmrID0hABwIH1Pp17ve61E4xH1zKGUIHwPTqCNTQyC+FwrHBRo
-	my0L8XtYEpcs7gZQ4vh15bOdxKiO2gazRSj9WAjgw9hG071EZoT1zlSkh
-	F2wEss7KhYLiYhAvnvNn1kxziIWVxtvqI20yUSzDK7kDTBqoQopJ5TAT0
-	BfzHyT/TrBVBD1u57+GLthzRaYXaXXtzi5U3l2fLWa0gDzg6gKwvLBsWw
-	uHBOc1yXo4O3b1z7x82rS7xP07YT14gHC4kYcpbu0vh9bRlmXXsIJh/TI
-	nMBG19GkhY29L97RbhJQThG5rqiaJuWE3bi0U87m/4qiXKApWs3Q65UHi Q==;
-IronPort-SDR: rRvGWJCwOjCg7LXkEua7ZeC6t35tLa1adPFdphnx0QrzMAfpHxP1SCY9xx3oB+/ZNTt/G4ll4s
-	/LNSUfWdBAst3N8MkZBKMH/7Y5uHJEkwzse3UoKzwLA1k/OX2H7vtlJjC/mPRM+88S03Lyxdyk
-	zrzLKJsa+hHmZTVtoggF4CYi/+DiwCbhHV/iGyvlHcnkhX9PEryyKG6PgPJnJ8Z3cWTqW9H52c
-	S3xeyNURU0CT5owmUfIZsQ509crsT8SGoCxM6hHPI8dQcx8HHwEx7oDtlBFkjQeT4ooI5ietZF
-	Oj0=
-X-IronPort-AV: E=Sophos;i="5.69,362,1571695200"; 
-   d="scan'208";a="2472755"
-To: Jacob Kroon <jacob.kroon@gmail.com>,
+	bh=7JgQkGb5jg6Ko/AMlLq73Z72LMbuXT2Wx4F4/xB2P1I=;
+	b=fIgOPsu8C2ax6cbsGZjwzq9LQZiob9RYgyIflGhlvTfL7Ct1cJMnaxEI
+	L6jPHQa9XaJ1UjBjWVR36Lh1224rQVEXlBr7pDE1MlKQqIDhi/WocLRzJ
+	qsCEaZokARjUQW3MAaxeadYZv2knswLwDYOYmLJNCA+unQqNt9FCFysWk
+	3JHaTsG6c4b8EAlqgy3TNc4ttj0eQYREbAB1wQeTcOsUvN/+CGspr3zQ7
+	nTo5V81HUefeRe/CY1ouMR3fBYIvNersk/LL0ZxVG8KDM4e6hK0ozNlC7
+	CJMDqYqFiwALRxR4ghgN4Tzjwoi+zIXjR2mQ03rNrejwr1dkT+gRfz0Ht A==;
+IronPort-SDR: Ct/dxenw0EI239chRbdHdH/+183zxFgMyDkp8MsBkqvzj0Ovhohixs4C5KfWMY5gaNzKVy6jS/
+	YKURtG3r6jjKjH2uLHW2S6zAcTSpb+MWa6JL23846Nv2K89t+pDq0jIwdAtW5PX/t9J15932AW
+	jedYuTyEfzXFO6GMC+Du++rgJuVjSn6pRxDPjpmvGRId9quowlwxALNY3SwdPHdQ8v2VHQ4Lwy
+	jLOn3aVBgbUDbi4/hDFmP6kzXQmCb2xizJyALIY1Vm1ag9qgjGocDP8v+y4Q+J89IDPjtkMs3e
+	Jy8=
+X-IronPort-AV: E=Sophos;i="5.69,362,1571695200"; d="scan'208";a="21733075"
+To: <mohamad.noor.alim.hussin@intel.com>,
 	<openembedded-devel@lists.openembedded.org>
-References: <20191212120054.3736-1-jacob.kroon@gmail.com>
+References: <20191206013306.12326-1-mohamad.noor.alim.hussin@intel.com>
 From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <8c0a31d6-7612-8599-199f-6b209aed4ceb@skidata.com>
-Date: Fri, 27 Dec 2019 11:55:28 +0100
+Message-ID: <bc02e873-b28a-6104-8cd6-8d87b46d1417@skidata.com>
+Date: Fri, 27 Dec 2019 11:59:15 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.3.1
 MIME-Version: 1.0
-In-Reply-To: <20191212120054.3736-1-jacob.kroon@gmail.com>
+In-Reply-To: <20191206013306.12326-1-mohamad.noor.alim.hussin@intel.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex5srv.skidata.net (192.168.111.83) To
 	sdex5srv.skidata.net (192.168.111.83)
-Subject: Re: [meta-java][PATCH] cacao: Use python3 in java wrapper script
+Subject: Re: [meta-java][PATCH] openjdk-8: Fix compilation error due to format-overflow
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,45 +47,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Dec 2019 10:55:29 -0000
+X-List-Received-Date: Fri, 27 Dec 2019 10:59:15 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-Hi,
-this is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-      git://git.yoctoproject.org/meta-java
+Hi Mohamad,
+thanks for your patches!
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+On 06/12/2019 02:33, mohamad.noor.alim.hussin@intel.com wrote:
+> From: Mohamad Noor Alim Hussin <mohamad.noor.alim.hussin@intel.com>
+> 
+> Getting a compilation error when compiling openjdk-8 due
+> to format-overflow. Suppress the error message by ignoring
+> warning messages of format-overflow.
 
-If you have any questions, please let me know.
+Under what conditions are you getting a format-overflow warning?
+
+AFAIK they should be fixed for openjdk-8 in 
+recipes-core/openjdk/patches-openjdk-8/hotspot-handle-gcc7-format-overflow.patch
 
 regards;Richard.L
 
-On 12/12/2019 13:00, Jacob Kroon wrote:
-> OE-Core has dropped python2 so switch to using python3.
 > 
-> Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
+> Signed-off-by: Mohamad Noor Alim Hussin <mohamad.noor.alim.hussin@intel.com>
 > ---
->   .../cacao-1.6.1-do-not-rely-on-absolute-paths.patch           | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+>   recipes-core/openjdk/openjdk-8-common.inc | 3 +++
+>   1 file changed, 3 insertions(+)
 > 
-> diff --git a/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch b/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
-> index 2b046cf..665377b 100644
-> --- a/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
-> +++ b/recipes-core/cacao/cacao-2d6f6c14daf9/cacao-1.6.1-do-not-rely-on-absolute-paths.patch
-> @@ -27,8 +27,8 @@ index 0790f02..2118de7 100644
->   +
->   +# if this shell script is invoked through symlink, we get invalid paths. As getting the real path to this file is
->   +# very painful using only /bin/sh, python is used instead.
-> -+PYTHON_STR="import os; print os.path.dirname(os.path.realpath(os.readlink(\"${CURRENT_DIR}/java\"))) if os.path.islink(\"${CURRENT_DIR}/java\") else \"${CURRENT_DIR}\""
-> -+REAL_DIR=`python -c "${PYTHON_STR}"`
-> ++PYTHON_STR="import os; print(os.path.dirname(os.path.realpath(os.readlink(\"${CURRENT_DIR}/java\"))) if os.path.islink(\"${CURRENT_DIR}/java\") else \"${CURRENT_DIR}\")"
-> ++REAL_DIR=`python3 -c "${PYTHON_STR}"`
->   +
->   +PARENT_DIR=`dirname ${REAL_DIR}`
->   +
+> diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+> index 4d8f935..566d7e7 100644
+> --- a/recipes-core/openjdk/openjdk-8-common.inc
+> +++ b/recipes-core/openjdk/openjdk-8-common.inc
+> @@ -177,6 +177,9 @@ FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+>   FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+>   FLAGS_GCC8 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+>   
+> +# WORKAROUND: ignore errors from new compilers
+> +CFLAGS_append = " -Wno-error=format-overflow"
+> +
+>   # flags for -native, and for bits that need a host-tool during -cross
+>   BUILD_CFLAGS_append = " ${@openjdk_build_helper_get_build_cflags(d)}"
+>   BUILD_CXXFLAGS_append = " ${@openjdk_build_helper_get_build_cflags(d)}"
 > 
 
