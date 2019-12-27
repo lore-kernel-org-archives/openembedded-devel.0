@@ -1,56 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
-	[209.85.128.45])
-	by mail.openembedded.org (Postfix) with ESMTP id E59757CBDF
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
+	[209.85.221.46])
+	by mail.openembedded.org (Postfix) with ESMTP id B669D7C89C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 21:31:33 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id m24so9126050wmc.3
+	Fri, 27 Dec 2019 21:31:34 +0000 (UTC)
+Received: by mail-wr1-f46.google.com with SMTP id d16so27250568wre.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 13:31:34 -0800 (PST)
+	Fri, 27 Dec 2019 13:31:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=DTD4alk8qIsQC1HQR4SPSiIuAdnAqv7Wrc3PCr+ZXZQ=;
-	b=ncm/0hjtqugU3uoDHxCv7UZciNIbNF0ImbtFewWoNjdOoz2QlDJlYJGnShkhJqPk7M
-	nERPFxuGI6OnanZUA9Nne3Z5mqT0ixS6g2m1yze4TyBCyRV33JQI0iCxmY8J0hwNJmmc
-	8bAkMESJPpN6tl/Lmm/Fj0KKTr75LgLKuh1w2aacXUC1yg9VNkwEJOCiTVGFiXuXrWM+
-	qA4qNgjxsTfZWrliBzFE+NbCeSRqbXh3QtVlStMdA4z1okRVCW1qEsEfvETQq/i6OKZg
-	qRObkC9UkQUXkapupKs1yuNQ0z8wHCPtiaph+zGY5RHfqy2/bVXWWNwfOTUkhuEgioGB
-	R7KQ==
+	bh=Xvrz4bpC6buvMtXwhMk7QA6cg/w/1cxxII4f2q24ZHA=;
+	b=r9vRxkN8O5FzqtJUSlq5Cj9vvmEFO6g944x5PAjCct/nX8fQHEON10/buHHvfb8gJ1
+	WX00DPL2BJMKYv9J/AtsklaUWoOiwICsrO0+TIET0AZCRAKQQ5Ygnw2JldIGFJe1jIj2
+	8HQvWb5s9oSOxo0dPWEi/AuQu82tGWL2YR2GXgKYVO4rsPC0JSICcII/8xegJMnTQKzo
+	x/ox2TTXCBMZ6CaHSEUoTNvYAX9c37imavYsZSUcriogz5WjS84xhN/2spJkKmx1WR4o
+	TGEODdgPMZD+4hDGoyjXrxwbBFaTwfmOO0yhrliUU+a+jP1SPMhmcxlN2G3vWBNQGG+r
+	Q8hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=DTD4alk8qIsQC1HQR4SPSiIuAdnAqv7Wrc3PCr+ZXZQ=;
-	b=r6ZFzB6AI1+is4j61Egzb5J4GJgIpJtP7e2N+JWvEUuC/srE+oaCa3gKrWhwHkD7dT
-	ZYUnxQagyaSWWC4StmHWphGmjokNpEETCGsESDfm0UXEt2Qehhf4F9kMMVUfp+YgLvPt
-	jUOGWcnsWmIkCwUjaqcAJ9+oqSRSAlc3gguRCMX8vHlbKFMTItCxSdBKa6ZqfyBzeRGg
-	U0ySV2VmRsdVhcdr4BTHgTD4Vp9xklfNWdBByzJwOWvark0axbU6QVE/EqCekkjcNtOn
-	ann9jE3S/obusZuxX3yluSYt+pr25QwI7w2I2hBGHRWD6hqSnAb9yfJfEGVOaRq9TFMX
-	slzA==
-X-Gm-Message-State: APjAAAX2pUvgC1weh/1aF/3rxU9ziladfEREfiOvVN7z7rdmLIl4LDAv
-	Sw0nZ/e4mXDoWZ9i9cVvC+q3NkJsc6U=
-X-Google-Smtp-Source: APXvYqy1KnWhBwshPjR8UkbfUo6oNnzxiCCtXvB62cbCJlN9yHOWaJhSiyKLeEt+TqkTUmXmzkg88Q==
-X-Received: by 2002:a1c:a982:: with SMTP id
-	s124mr20308713wme.132.1577482293666; 
-	Fri, 27 Dec 2019 13:31:33 -0800 (PST)
+	bh=Xvrz4bpC6buvMtXwhMk7QA6cg/w/1cxxII4f2q24ZHA=;
+	b=RlPPH3iTmxTpXXcUFa7s7gdphM14JJpHlY/fwi11Wg4h951uIiLwOvEBMOhBsT9GzL
+	xTnpaNbPvNZIi05BSR2TTB+vaXnDm6yShuL8kbdJrsrDJz5yAbqZ0lGNNcQlKhP3R4Yb
+	+FzTOnoTLeok7NOqUGR9YHmVbNCVJ3EzO2/glOF7gkmMXrXVnYI8+Hog8wP40Mlvg/Fj
+	D58jxZy5vYAj7uf38hA77Lv6GkxyY10M4+YBuPrz/dCK+v9/CVp13ESQWxWPt0Q1Re5G
+	DzUYRNvAaLcF2MPgtUU18cyK8upkenQlqYmZYpMlQUrPkMU4mG7rE7K0BLpGu2NJqUzQ
+	y2Ig==
+X-Gm-Message-State: APjAAAU1ZgPvSInB7Y93aOO2XeEb7HRcAAH2vmmcdJTcOIMSRcs65UQl
+	JnypaaqUKB4GaBjzUGiaRV82j/5cD8M=
+X-Google-Smtp-Source: APXvYqzjCmB2Om869rZh/wyyDSKzCL0pCH3SuQP0WVnd9xUm8gxjOLyNUwlqK2MyyV3WXrwhGt/sgA==
+X-Received: by 2002:adf:df03:: with SMTP id y3mr56600170wrl.260.1577482295187; 
+	Fri, 27 Dec 2019 13:31:35 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F052B8722A751F738295925.dip0.t-ipconnect.de.
 	[2003:f0:7f05:2b87:22a7:51f7:3829:5925])
 	by smtp.gmail.com with ESMTPSA id
-	m7sm11915929wma.39.2019.12.27.13.31.32
+	m7sm11915929wma.39.2019.12.27.13.31.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 27 Dec 2019 13:31:33 -0800 (PST)
+	Fri, 27 Dec 2019 13:31:34 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Dec 2019 22:31:05 +0100
-Message-Id: <20191227213120.3930-8-schnitzeltony@gmail.com>
+Date: Fri, 27 Dec 2019 22:31:07 +0100
+Message-Id: <20191227213120.3930-10-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191227213120.3930-1-schnitzeltony@gmail.com>
 References: <20191227213120.3930-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 08/23] file-roller: upgrade 3.32.2 -> 3.32.3
+Subject: [PATCH 10/23] gedit: upgrade 3.34.0 -> 3.34.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,45 +62,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Dec 2019 21:31:34 -0000
+X-List-Received-Date: Fri, 27 Dec 2019 21:31:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From [1] - just translations
+From [1]:
 
-version 3.32.3
---------------
+News in 3.34.1, 2019-11-21
+--------------------------
+* A few bug fixes.
+* Updates to the Snap and Flatpak packages.
+* Translation updates.
 
- New or updated application translations:
-
-  * Basque (Asier Sarasua Garmendia)
-  * Japanese (Ryuta Fujii)
-
-[1] http://ftp.gnome.org/pub/gnome/sources/file-roller/3.32/file-roller-3.32.3.news
+[1] http://ftp.gnome.org/pub/gnome/sources/gedit/3.34/gedit-3.34.1.news
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{file-roller_3.32.2.bb => file-roller_3.32.3.bb}          | 4 ++--
+ .../recipes-gnome/gedit/{gedit_3.34.0.bb => gedit_3.34.1.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/file-roller/{file-roller_3.32.2.bb => file-roller_3.32.3.bb} (77%)
+ rename meta-gnome/recipes-gnome/gedit/{gedit_3.34.0.bb => gedit_3.34.1.bb} (84%)
 
-diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.2.bb b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.3.bb
-similarity index 77%
-rename from meta-gnome/recipes-gnome/file-roller/file-roller_3.32.2.bb
-rename to meta-gnome/recipes-gnome/file-roller/file-roller_3.32.3.bb
-index 54acb6039..3ab9668ec 100644
---- a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.2.bb
-+++ b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.3.bb
-@@ -13,8 +13,8 @@ DEPENDS = " \
+diff --git a/meta-gnome/recipes-gnome/gedit/gedit_3.34.0.bb b/meta-gnome/recipes-gnome/gedit/gedit_3.34.1.bb
+similarity index 84%
+rename from meta-gnome/recipes-gnome/gedit/gedit_3.34.0.bb
+rename to meta-gnome/recipes-gnome/gedit/gedit_3.34.1.bb
+index e9cdd8a6e..20806bd59 100644
+--- a/meta-gnome/recipes-gnome/gedit/gedit_3.34.0.bb
++++ b/meta-gnome/recipes-gnome/gedit/gedit_3.34.1.bb
+@@ -23,8 +23,8 @@ inherit gnomebase gsettings itstool gnome-help gobject-introspection gtk-doc val
  
- inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI[archive.md5sum] = "e79715bb2400df83c0f67cc0cce2b655"
--SRC_URI[archive.sha256sum] = "c60a79e0baf74cb1c09a1c8f5ffe0d6e311227ca14ecc5b1156beb3715341a71"
-+SRC_URI[archive.md5sum] = "5e098bb254d34f48a9b5761b468f4240"
-+SRC_URI[archive.sha256sum] = "be111fb877dc1eb487ec5d6e2b72ba5defe1ab8033a6a6b9b9044a2a7787e22a"
+-SRC_URI[archive.md5sum] = "ec6632fa73d9ea6c817e74a98d16eab6"
+-SRC_URI[archive.sha256sum] = "3e95e51d3ccb495a9ac95aa3ed7fe8fe37ccde7c678f37fa3cea684bc71d507e"
++SRC_URI[archive.md5sum] = "4bca1d0a13db186cd84619b4bff42238"
++SRC_URI[archive.sha256sum] = "ebf9ef4e19831699d26bb93ce029edfed65416d7c11147835fc370d73428d5c6"
  
- PACKAGECONFIG[nautilus] = "-Dnautilus-actions=true,-Dnautilus-actions=false,nautilus"
+ GTKDOC_MESON_OPTION = "documentation"
  
 -- 
 2.21.0
