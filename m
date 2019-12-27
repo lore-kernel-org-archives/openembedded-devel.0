@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C2CE7C7A5
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+	[209.85.221.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F4427C377
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 21:31:39 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id c14so27244517wrn.7
+	Fri, 27 Dec 2019 21:31:40 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id y11so27259418wrt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 13:31:40 -0800 (PST)
+	Fri, 27 Dec 2019 13:31:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=3eTnjZj5mmxQqzhkacN7Undgw6YHJuv6TNm55Ta2Z50=;
-	b=WwtBVmURAfE81IIPIYglQe8TDYoG7lDLmMvyFRiCLvuT/tdCFDbnFDZN9RJSBPlNbo
-	LdnboEt9jmANUQEDxhpqd30KuQ3v1zpQ7HOYXEToFuNH2f1GAIVLyLrZ16Z0BS4Ca8ez
-	kkyVOF/b7pW5AYmw2xYRXloA1oRY864eLu/YuD8nlGkoGSOtMxx29zIZfRpm5zN6SAES
-	iszucKZ6nZ1kX/sLcwLE/cZEay0jb76u0LhXrqQH0jO5HCNBQgK4sKA6RPtNTJTEkTQU
-	JzSa2fa4BFhBnxdXvDZwy4HNw872iKKSHIuoxsBP9yQkiIZBDSt71ysa3pXn0hzZ3XYT
-	CgNA==
+	bh=pmNXQ8I+VsAbu1siGsncxdANDjG7wGWw86RI/ogu/DU=;
+	b=cQ2P3AEEmnWpDWtgSvAnA0yyVPMZrixEj5ijyO1B7UZSzsyQrgyFa7Fn5IorSmjUhP
+	2dsTLj0fCkr7Wlj1Z1ptUAfxbqApsrgIeJaXqGjsTBOMs7ggZRqc9yENVayyXRfxEmeP
+	dFEALAoDFVJ+Ab/vK+HOesD8W3JY1amQtq7R+bDC7+nyje9cXyC+epcJb98I262a3ftQ
+	Rn2K6oA/z3uJSjeKm0topwJJ2SsKFlRNypXLtZSyFDwzV8jTX2oo5eQ/k6gfTq4k1fS3
+	/SDDci1Sbll0aixKrVjA8PgXT2J94hyTf/pzm8BtxWbJxuc9TDdLck7atEXrlDnf3fbh
+	GJMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=3eTnjZj5mmxQqzhkacN7Undgw6YHJuv6TNm55Ta2Z50=;
-	b=AyvPjB2PNQVTLmetTHrkDuecU3S0UPrz1OL5pGvp4tHziSWypMIXrWD2LMFnocCWCu
-	yzRgJerViGx3Ip41e1qo+9nGzJ7iib0Gf81kuaayncVprEM25ZwdGO1/UD0oqSoVWsTt
-	MjashAXU17DD38SLKx4BpUY5VkJlTY4t85oXl9qI+Bpk2byuAk/OtPcH1Zg+Z0OICsrC
-	pF0zeaQ3Eu675IxuKqZaGDCavOAHg53GyMl1V84ctwv6d1kUIrot4l1Dn/15Ewrwf1Ux
-	FDOBkfg8R+SFUX3w/Z282YCj5rSThBww2J8P0X5MlOctCZkb5AOw/g9l2t3XRutrJ/fc
-	5/8g==
-X-Gm-Message-State: APjAAAVM/XJsFAhquN0+oCJKbI8M1yYvcxBqoepv+AuK78qEwRn79iSJ
-	XbT/6nMtSksXFfaKT8Iqz88A9Y9/57U=
-X-Google-Smtp-Source: APXvYqxpT96eMMd1e9XxDqqQdOaoOfW9xfnN69LByzsajX5CstONHjBQ1ZWigYdeCAZHTzfdQjfb2A==
-X-Received: by 2002:adf:f091:: with SMTP id n17mr53791378wro.387.1577482300110;
+	bh=pmNXQ8I+VsAbu1siGsncxdANDjG7wGWw86RI/ogu/DU=;
+	b=qszs9BRs/rwoHwWQ9RENATCcnHdMt8dtYZQIPap+Z7TwrOi6VO1gpRMAPwhsv9BISU
+	mb+0rAXAPzMDcY9yDXr3OlVjtjONToQpNGpYYZb3fiJMwIaQHsHCD1pfHwR5x0DFTRhG
+	zb3diMiQu4idarglZ3mjhRc/1TrrP1RbzfcIVuOsrxaqwtH45jbHHEMZ+Bbm8IZHvosi
+	mBl+td+qP4aHqTjNFJsSeyZp0Gh037E14iOF3WXw0M955+jMXgR5epGle7epR2WsrsTW
+	w1zqUiAnrsTmbxws9kF0JpEQle45Fqq/Y87xuP6XJ3ya7fgFmj6p7eo9FUrfoHAVgOAQ
+	7r7g==
+X-Gm-Message-State: APjAAAWuHWBV2wUU0tbBKdkxz0oiHy8XAnXydgT8kLZmuJsJSrlSeGJv
+	Q/JAOoebo/JGDXuzpVGaneMRnaxerIQ=
+X-Google-Smtp-Source: APXvYqwvvBuY9hNR3GyDyI8fSoyzu9yMsGAzs9V5YTg//+fBoRUGn34pPuc/fJCWdmre1MK35eSAPQ==
+X-Received: by 2002:a5d:6390:: with SMTP id p16mr12806786wru.170.1577482300942;
 	Fri, 27 Dec 2019 13:31:40 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F052B8722A751F738295925.dip0.t-ipconnect.de.
 	[2003:f0:7f05:2b87:22a7:51f7:3829:5925])
 	by smtp.gmail.com with ESMTPSA id
-	m7sm11915929wma.39.2019.12.27.13.31.39
+	m7sm11915929wma.39.2019.12.27.13.31.40
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 27 Dec 2019 13:31:39 -0800 (PST)
+	Fri, 27 Dec 2019 13:31:40 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Dec 2019 22:31:13 +0100
-Message-Id: <20191227213120.3930-16-schnitzeltony@gmail.com>
+Date: Fri, 27 Dec 2019 22:31:14 +0100
+Message-Id: <20191227213120.3930-17-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20191227213120.3930-1-schnitzeltony@gmail.com>
 References: <20191227213120.3930-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 16/23] gnome-settings-daemon: upgrade 3.34.1 -> 3.34.2
+Subject: [PATCH 17/23] gnome-shell-extensions: upgrade 3.34.1 -> 3.34.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,49 +68,43 @@ Content-Transfer-Encoding: 8bit
 
 From [1]:
 
-==============
-Version 3.34.2
-==============
-Media-keys:
-- Place spawned processes into a systemd scope.
-  For this to work, gnome-settings-daemon needs to be build with
-  libgnome-desktop >= 3.34.2.1, as the API was added in that release.
-- Fixed saving screenshots to clipboard on wayland.
-  For 3.34, this feature was fixed by using the X11 clipboard,
-  saving to clipboard will indefinitely raise Xwayland
-  if the Xwayland-on-demand experimental feature was enabled,
-  and will not work at all if --no-x11 is passed to gnome-shell.
-- Fix crash on keybinding migration
+3.34.2
+======
+* window-list, workspace-indicator: Exclude DESKTOP windows from previews [Florian; !93]
+* screenshot-window-sizer: Fix cycling through all valid sizes [Willy; !97]
 
-Smartcard:
-- Initialize pointer before use
+Contributors:
+  Florian MÃ¼llner, Willy Stadnick
 
-[1] http://ftp.gnome.org/pub/gnome/sources/gnome-settings-daemon/3.34/gnome-settings-daemon-3.34.2.news
+Translators:
+  Stas Solovey [ru], Umarzuki Bin Mochlis Moktar [ms]
+
+[1] http://ftp.gnome.org/pub/gnome/sources/gnome-shell-extensions/3.34/gnome-shell-extensions-3.34.2.news
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...tings-daemon_3.34.1.bb => gnome-settings-daemon_3.34.2.bb} | 4 ++--
+ ...-extensions_3.34.1.bb => gnome-shell-extensions_3.34.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-settings-daemon/{gnome-settings-daemon_3.34.1.bb => gnome-settings-daemon_3.34.2.bb} (91%)
+ rename meta-gnome/recipes-gnome/gnome-shell/{gnome-shell-extensions_3.34.1.bb => gnome-shell-extensions_3.34.2.bb} (78%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb
-similarity index 91%
-rename from meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.1.bb
-rename to meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb
-index 65f669349..0b6865d29 100644
---- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.1.bb
-+++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_3.34.2.bb
-@@ -28,8 +28,8 @@ DEPENDS = " \
- REQUIRED_DISTRO_FEATURES = "x11 polkit pulseaudio systemd gobject-introspection-data"
- UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+diff --git a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.1.bb b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.2.bb
+similarity index 78%
+rename from meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.1.bb
+rename to meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.2.bb
+index 8625a7b32..52e50705e 100644
+--- a/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-shell/gnome-shell-extensions_3.34.2.bb
+@@ -8,8 +8,8 @@ inherit gnomebase gettext gsettings features_check upstream-version-is-even
  
--SRC_URI[archive.md5sum] = "cdd0d0c8664056deb78aa40c88ec24d1"
--SRC_URI[archive.sha256sum] = "9981a20babf8da7744b7fbe175b9e36078bf08f3bf65fe5aedeb82cfe27ac11f"
-+SRC_URI[archive.md5sum] = "493332fa0f36645188468fed41c0060b"
-+SRC_URI[archive.sha256sum] = "9fbae67e217e53b99e4f9e7d392c91ffbe31253941c9b136ef09c2d9db7ad7ed"
+ REQUIRED_DISTRO_FEATURES = "x11 polkit systemd pam gobject-introspection-data"
  
- # allow cross build mixed with build of native tools
- do_write_config_append() {
+-SRC_URI[archive.md5sum] = "09e64640bbf0e978171d581e2086a0c6"
+-SRC_URI[archive.sha256sum] = "b0ad51143b1bf40def4a10f8fd0ab0ffb47218304800794e62cadd29d0acc75b"
++SRC_URI[archive.md5sum] = "d3a69cde0c3e3dc0b0c243af026c4b7a"
++SRC_URI[archive.sha256sum] = "a1e16e75a06ea511435a6f7478de92aff21d02d4e1d59ec8ce7fb6396819b4b8"
+ 
+ DEPENDS += " \
+     sassc-native \
 -- 
 2.21.0
 
