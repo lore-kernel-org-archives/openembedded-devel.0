@@ -1,51 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
-	[209.85.214.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 979F27CE27
+Received: from mail-pf1-f169.google.com (mail-pf1-f169.google.com
+	[209.85.210.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 21FCC7CE27
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 27 Dec 2019 03:56:46 +0000 (UTC)
-Received: by mail-pl1-f178.google.com with SMTP id y8so11208572pll.13
+Received: by mail-pf1-f169.google.com with SMTP id i6so7287630pfc.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 26 Dec 2019 19:56:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Kjtoqs7if9pvaCMt0JJo8AVdzu4bQOQuAl3qn4s3ab0=;
-	b=lItkXR24PuaLZ/Wmj3t/2QP8lVqE6NiQQ6aORvKpO1AflGwRrpR/Q9KFQYOjHA7wz7
-	xsEOo3KlWuvig/98QD3tXEnfWuaAuYSxvTWlTYfmJ4k9HkP14SCXDHxzFjXACPfOoR/3
-	gBpqBq4PeCswCBx5ZN/h3nLa/zOWLlv2oy+RO6sZgUTPnH9XrG7gRZ+OZF1W+8G9DA79
-	/RuNfSpCFzdgfiyafuqpBZcBFqDFyItAw/NmohwQ+/UqRFVFpbcaM7vZyVP+I5EchKah
-	6WV/sVKHJ6GXGE3Zs+S/kPW2kKC+EE4atcPoMvTescmMZHDEpv7a9rbqB/lebIPUMBF6
-	hlug==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=cLNtGP39qbYu7zE/K2AJ3jsZfewzjvQsxVwBR5ou47I=;
+	b=n0yJLEBhF2CZNnVz04yWIdY+eKTaKp9v5GLkcvcGBB1XkbqKXJwhaAqvV++rfGIMFg
+	0WVI8RgmL30prSFI9IeVip3Mu2rCO6PsbXtIylZgWKYyeru81c2LDeErWgsMGOWi24pW
+	o73r3Oc8pyH4FQuQkqx16J/e9kgNcxf526XQBrRhv1Xy2Mrv664/bint5Iisfh7ITF00
+	o2Vfz6JFVrzqXLvJYIowvQMfqKt3P6xQBM0WNvGoHUASz0kAoEqHHapdwXV0s3FQGuD8
+	rIAe0v/ls6RCL6KOXtJDh770mxJJkgldJ31tKv6Y9GCd7KXXIWBl9KBRFuyi7hmqo2Y8
+	VXfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Kjtoqs7if9pvaCMt0JJo8AVdzu4bQOQuAl3qn4s3ab0=;
-	b=Bad3nGifW7rpUWHoOEtAJI/6A5v3cuZRbHsXTr2acu5EH831lotLDHO01eKd8ZgZHR
-	2mR51IobgsDhJ+GqP69ecOgbe/iI7SkpaQ6sTvb5AOu6JLV5fBAb4R2iwZZjkb1rQRiD
-	hjW3VlXWVdEGpU9a0PaIaM72rN0hLisyb8zOL/7mZOuAMHnmcNnl3kIpb0eV9IciS7nu
-	6LIlls0GnsIRUNJK6O8Mgi8fHzgY5yuGhFoNSCIYha7W/PrOBCi42NcM8s3t/mzFAkNT
-	+8SJ8ZcWzuhzEO/07alSAXlQBzCpAQZNZb3hCs0Uk/bd8gCuBZPMP1ZCUFDXFUBgHY9D
-	y/HQ==
-X-Gm-Message-State: APjAAAVSaut/A4+Yw0N+0S4h8QrcvnvRmFxOTO3BnRiGJwsTRKNE6X0j
-	b00vLYHY+f8xI4F9+VND0Dcgo33U5M8=
-X-Google-Smtp-Source: APXvYqzG4MzrxqEW78TF+bTJbKlAFj7Oq6WhBPzIFUDtOFgUlJ7Ey8X8aEikkbGiNwnQMhs5ARmaAg==
-X-Received: by 2002:a17:902:a614:: with SMTP id
-	u20mr50261851plq.107.1577419007021; 
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=cLNtGP39qbYu7zE/K2AJ3jsZfewzjvQsxVwBR5ou47I=;
+	b=Vryde85y9peiy3agunKl0G4UGziSCcnk3WBODXeVJt8wzOWuvyEWwj4Pg4WPVEl3jj
+	Bnx6ZyobLHSfkuGY4kDmosGsVPmn4KDyeTstXWWuO2vMGJwHbUiibik7fkBKTeFWTDpf
+	OKQX8i1XG1QTTfxgooZzrSG0jHabcycrhNbprn1ScCPiuZ1MrNZ191kp2egK/AkBI4AC
+	B0FSpygn03Qz+z/muxjegflDQWCZTCo6/7OfXbb5kmwqVYEslEP7yRFgVPXP9OyCmkSv
+	bcDZEE1NJnxyVjcgm75VGXg6Ur8DI/Dqtkt2Q8u2g0ZKYKPtwU0xmATZIrIr3IKfmYx6
+	tQGg==
+X-Gm-Message-State: APjAAAWcNPanVfAEZ1BfyfQJLFMIXlDMlil2H3hhO18Q5bHoH8BjxDH0
+	svXlMn9sA6JUUopy87s60cv8YGhggQY=
+X-Google-Smtp-Source: APXvYqwcCooRtPRwe/dyJkxxWNL3JKZxaLeBsc6Qsok7DLi8wR4HHMDrAjAaXa/vMxmxhqUNAH1PTg==
+X-Received: by 2002:a62:1548:: with SMTP id 69mr53473129pfv.239.1577419007704; 
 	Thu, 26 Dec 2019 19:56:47 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::2f83])
 	by smtp.gmail.com with ESMTPSA id
-	r30sm36673613pfl.162.2019.12.26.19.56.46
+	r30sm36673613pfl.162.2019.12.26.19.56.47
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 26 Dec 2019 19:56:46 -0800 (PST)
+	Thu, 26 Dec 2019 19:56:47 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Dec 2019 19:56:35 -0800
-Message-Id: <20191227035639.303716-1-raj.khem@gmail.com>
+Date: Thu, 26 Dec 2019 19:56:36 -0800
+Message-Id: <20191227035639.303716-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
+In-Reply-To: <20191227035639.303716-1-raj.khem@gmail.com>
+References: <20191227035639.303716-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 1/5] mpd: Fix build with gcc10
+Subject: [meta-oe][PATCH 2/5] wvstreams: Fix build with gcc10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,110 +59,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Dec 2019 03:56:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 27 Dec 2019 03:56:47 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...ingBuffer-Include-cstddef-for-size_t.patch | 27 +++++++++++++
- ...-Include-stdexcept-for-runtime_error.patch | 38 +++++++++++++++++++
- .../recipes-multimedia/musicpd/mpd_0.20.22.bb |  2 +
- 3 files changed, 67 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch
- create mode 100644 meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch
+ .../0001-Fix-narrowing-conversion-error.patch | 29 +++++++++++++++++++
+ .../wvdial/wvstreams_4.6.1.bb                 |  1 +
+ 2 files changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Fix-narrowing-conversion-error.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch b/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Fix-narrowing-conversion-error.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Fix-narrowing-conversion-error.patch
 new file mode 100644
-index 0000000000..1d869aa833
+index 0000000000..fc9abd8e63
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd/0001-StringBuffer-Include-cstddef-for-size_t.patch
-@@ -0,0 +1,27 @@
-+From c14877071f14b218835f7fb034dea11bd1ba56f5 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Fix-narrowing-conversion-error.patch
+@@ -0,0 +1,29 @@
++From c86c524f951f6e973473bfee76fd5366368b2cbc Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 25 Dec 2019 09:40:16 -0800
-+Subject: [PATCH] StringBuffer: Include cstddef for size_t
++Date: Wed, 25 Dec 2019 09:32:41 -0800
++Subject: [PATCH] Fix narrowing conversion error
 +
-+Fixes
-+a.cpp:3:1: error: 'size_t' does not name a type
-+    3 | size_t s;
-+      | ^~~~~~
-+a.cpp:2:1: note: 'size_t' is defined in header '<cstddef>'; did you forget to '#include <cstddef>'?
++xplc/moduleloader.cc: In static member function 'static Module* Module::loadModule(const char*)':                                                                                                                                             xplc/moduleloader.cc:67:14: error: narrowing conversion of '-1' from 'int' to 'unsigned int' [-Wnarrowing]                                                                                                                                       67 |   case (int)-1:                                                                                                                                                                                                                             |              ^
 +
-+Upstream-Status: Submitted [https://github.com/MusicPlayerDaemon/MPD/pull/697]
++Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/util/StringBuffer.hxx | 1 +
-+ 1 file changed, 1 insertion(+)
++ xplc/moduleloader.cc | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+--- a/src/util/StringBuffer.hxx
-++++ b/src/util/StringBuffer.hxx
-+@@ -31,6 +31,7 @@
-+ #define STRING_BUFFER_HPP
++diff --git a/xplc/moduleloader.cc b/xplc/moduleloader.cc
++index 02dd9a4..c53f5d2 100644
++--- a/xplc/moduleloader.cc
+++++ b/xplc/moduleloader.cc
++@@ -62,7 +62,7 @@ Module* Module::loadModule(const char* modulename) {
++     return NULL;
++   }
 + 
-+ #include <array>
-++#include <cstddef>
-+ 
-+ /**
-+  * A statically allocated string buffer.
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch b/meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch
-new file mode 100644
-index 0000000000..1f11867191
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd/0002-Include-stdexcept-for-runtime_error.patch
-@@ -0,0 +1,38 @@
-+From 06f78ced45f6622a2e02cd09e6a2c0c22a98b89e Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 25 Dec 2019 09:41:55 -0800
-+Subject: [PATCH 2/2] Include <stdexcept> for runtime_error
++-  switch(moduleinfo->version_major) {
+++  switch((int)moduleinfo->version_major) {
++ #ifdef UNSTABLE
++   case -1:
++     /* nothing to do */
++-- 
++2.24.1
 +
-+Fixes
-+
-+../git/src/LocateUri.cxx:65:14: error: 'runtime_error' is not a member of 'std'
-+   65 |   throw std::runtime_error("Unsupported URI scheme");
-+      |              ^~~~~~~~~~~~~
-+
-+Upstream-Status: Inappropriate [ Fixed differently upstream ]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/LocateUri.cxx      | 1 +
-+ src/pcm/PcmConvert.cxx | 1 +
-+ 2 files changed, 2 insertions(+)
-+
-+--- a/src/LocateUri.cxx
-++++ b/src/LocateUri.cxx
-+@@ -17,6 +17,7 @@
-+  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-+  */
-+ 
-++#include <stdexcept>
-+ #include "config.h"
-+ #include "LocateUri.hxx"
-+ #include "client/Client.hxx"
-+--- a/src/pcm/PcmConvert.cxx
-++++ b/src/pcm/PcmConvert.cxx
-+@@ -17,6 +17,7 @@
-+  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-+  */
-+ 
-++#include <stdexcept>
-+ #include "config.h"
-+ #include "PcmConvert.hxx"
-+ #include "ConfiguredResampler.hxx"
-diff --git a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
-index 6c6ad42375..133ee6e792 100644
---- a/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
-+++ b/meta-multimedia/recipes-multimedia/musicpd/mpd_0.20.22.bb
-@@ -19,6 +19,8 @@ DEPENDS += " \
- SRC_URI = " \
-     git://github.com/MusicPlayerDaemon/MPD;branch=v0.20.x \
-     file://mpd.conf.in \
-+    file://0001-StringBuffer-Include-cstddef-for-size_t.patch \
-+    file://0002-Include-stdexcept-for-runtime_error.patch \
- "
- SRCREV = "9274bc15bc41bbe490fde847f8422468cc20375d"
- S = "${WORKDIR}/git"
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+index b220f9c1bc..20becaf57d 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+@@ -22,6 +22,7 @@ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
+            file://0002-wvrules.mk-Use-_DEFAULT_SOURCE.patch \
+            file://openssl-buildfix.patch \
+            file://0001-Forward-port-to-OpenSSL-1.1.x.patch \
++           file://0001-Fix-narrowing-conversion-error.patch \
+            "
+ 
+ SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
 -- 
 2.24.1
 
