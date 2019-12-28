@@ -1,53 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D62B76004D
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 599C06025E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Dec 2019 08:07:48 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id x184so15828925pfb.3
+	Sat, 28 Dec 2019 08:07:49 +0000 (UTC)
+Received: by mail-pf1-f177.google.com with SMTP id p14so15818918pfn.4
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 28 Dec 2019 00:07:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=+RGBaWMGDM8vqP+Twk9VIT+CiLV8vMVB031Rho+zXDw=;
-	b=Evg06Wv6o1B6uWG5cZy2r6Mcj+Dka5TUD1358+AumStSAZVXh8lYtry0Io2BxlVA8u
-	5Q5MYeNekmmOLg3X5hGJwnG6RVqKqARiX7UtKjGJLYc1m8golMdiPjuDwMQvxmysKl7y
-	OlTlcte7wXuujQBTdDO/4Qh826wWx8vMK80C1+l/4wa24EqyVSYZ/pG6eCAF+5NGWETF
-	O0HnhQeXuQxYb0mNta4nmkC7CM/xTN0wBO/5JFC2mb6DHCkUfzSO9Cz8ZlfWw9h6dIhm
-	1K0daVhJdyr44LcuMAsBvJ0RjtOR/cwXNlRqca0+KyKygtMDGkS6k2353sa5kf+57tsM
-	VPyA==
+	bh=ZJpXXNOWhkpp95BqV+r2fl+EVIDcrQI+XmQ0cgZJA9o=;
+	b=BS2VKazTewXE65xOHuX3H3M4I3AGAnzvjgegHaSV7OwwrvNSTNSwFdhin2LQK2EIsw
+	TEce723a7pQNXm8fflA4mGZP+eTs4OtVTkk9pS81Q6W4lnxpKjAX7IXKlzc+ehY8b80C
+	fygLxHnvi8lzT6kGov3xd2NuDv/xxtWCPxkUPJRCPWgpoxPYMim4+2HH/RmAJHzmGQFy
+	qaVo+ggsLlQmbjxa1hCD1jowRFEy6SzQLgWeUBwKdhESQ3Gxow/zmW8O1R7Yqi73e9J6
+	3AZ6peD4/JZHaWLP1hIA6ul7Z8KRbywScuRGh2J8tezTCBxkH4RQEaQF4Q3Dir5H9Gxz
+	4PJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=+RGBaWMGDM8vqP+Twk9VIT+CiLV8vMVB031Rho+zXDw=;
-	b=IiCvVmJsQWwT9I4KZwdmYxaP1NZf9N0oC8d6cw6+0OrnAQR7qrt4bhq/eSgyhkrsGX
-	oU7ChCBybiMw7gbMJKi3LA5cTTuqB3ZhYSLtr6Fi3uOOxQ+o/eekH184k46mLYUAN6Pg
-	0gafHXLr8/ib4K+kFJOmpAGKjqdAvYCcpkDVe31QuMX6DZS7D5NHQA/BblTviAc+8K1t
-	18wPKdZws8J5JCVQDJcYj5FAOQcISlksmZGPsbvIdyKk5St6Wgcd1rmbymmGq0A4mULP
-	PZk2F1f+lAGpyU2AZED3/7owJ8GzQlJfz6+/TZvmpNaKqQnGC49yFipKOU1M7FKk7SGi
-	aTaQ==
-X-Gm-Message-State: APjAAAVrar/2tRIr9ZGpOPO8ZCKS+2ZZnHr1J0l7NVPSsv3lm2wMgNXw
-	vmBhONvz4iICkCPxqppFR3zpAIKVdrY=
-X-Google-Smtp-Source: APXvYqzIxKu0zgjtNhrM7OWtI6+UCQegEKOtq2BSkYsfO1EuiBpXNP7fes4BAJtpb9tLkXVQYpBDBQ==
-X-Received: by 2002:a62:a209:: with SMTP id m9mr49547969pff.16.1577520469413; 
-	Sat, 28 Dec 2019 00:07:49 -0800 (PST)
+	bh=ZJpXXNOWhkpp95BqV+r2fl+EVIDcrQI+XmQ0cgZJA9o=;
+	b=TcLSQwm0obIhNMm2mBockZLW1B1Ckr77m8yH1Cmxn3uLCOFE1qIDw4fohMxYASdzp/
+	V6uqed7Fk11OZ1a30F4IQaZIlanx7YDBVhp2trZG95LLLl8OgCcSQNRf7MOwhkfITN/b
+	nbPAB80o2w+Mm/vpl7xn31fPcPosgKBMKL0eVKYi7V2HgzF2PfDtuwpTsY/DlKyZj0Sv
+	u4fwCyxPulivbqpdzMz3EOuuW3wVfoyCIbY+1zufJYwt3R1c06QAyS61mFn5ZPfjoaxg
+	ugPHdlOP9em94DBz2TKMubLjtAZB9ulAINZGBcuVIV5GkbXQ1d/8PSvIeQLXh98BPDg6
+	FhXQ==
+X-Gm-Message-State: APjAAAUk6Wm3h01PLg8HGpbjYl0i/iaoftjHsD34hxvEH3X8dXV9eCkf
+	AoXoSvODb3VHhPOEpI78u4LkIBSp9zU=
+X-Google-Smtp-Source: APXvYqxQ7ENBEkht4vAc2Ive7V2AbPZISy0CSbH6D8+aAqfWUNgQsNM9Ri0iOIOxF2Cf9dOcJMMZFw==
+X-Received: by 2002:a62:f251:: with SMTP id y17mr60467851pfl.204.1577520470065;
+	Sat, 28 Dec 2019 00:07:50 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::2f83])
 	by smtp.gmail.com with ESMTPSA id
-	r66sm44135124pfc.74.2019.12.28.00.07.48
+	r66sm44135124pfc.74.2019.12.28.00.07.49
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
 	Sat, 28 Dec 2019 00:07:49 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 28 Dec 2019 00:07:37 -0800
-Message-Id: <20191228080740.63169-2-raj.khem@gmail.com>
+Date: Sat, 28 Dec 2019 00:07:38 -0800
+Message-Id: <20191228080740.63169-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20191228080740.63169-1-raj.khem@gmail.com>
 References: <20191228080740.63169-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Cc: Adrian Bunk <bunk@stusta.de>
-Subject: [meta-networking][PATCH V2 2/5] ippool: Fix strncpy -Wformat-truncation warning
+Subject: [meta-oe][PATCH 3/5] opensc: Fix misaligned indentation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,70 +63,99 @@ X-List-Received-Date: Sat, 28 Dec 2019 08:07:49 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Adrian Bunk <bunk@stusta.de>
 ---
- .../ippool/ippool/strncpy-truncation.patch    | 39 +++++++++++++++++++
- .../recipes-daemons/ippool/ippool_1.3.bb      |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/ippool/ippool/strncpy-truncation.patch
+ ...0001-Fix-misleading-code-indentation.patch | 69 +++++++++++++++++++
+ .../recipes-support/opensc/opensc_0.19.0.bb   |  1 +
+ 2 files changed, 70 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opensc/opensc/0001-Fix-misleading-code-indentation.patch
 
-diff --git a/meta-networking/recipes-daemons/ippool/ippool/strncpy-truncation.patch b/meta-networking/recipes-daemons/ippool/ippool/strncpy-truncation.patch
+diff --git a/meta-oe/recipes-support/opensc/opensc/0001-Fix-misleading-code-indentation.patch b/meta-oe/recipes-support/opensc/opensc/0001-Fix-misleading-code-indentation.patch
 new file mode 100644
-index 0000000000..01e1da8703
+index 0000000000..eb71b9d766
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/ippool/ippool/strncpy-truncation.patch
-@@ -0,0 +1,39 @@
-+Replace strncpy with memcpy 
++++ b/meta-oe/recipes-support/opensc/opensc/0001-Fix-misleading-code-indentation.patch
+@@ -0,0 +1,69 @@
++From 283578519ec83a8792b026c10322789784d629de Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 27 Dec 2019 11:33:57 -0800
++Subject: [PATCH] Fix misleading code indentation
 +
-+since the length of data to 
-+be copied has already been determined with strlen(). Replace strncpy()
-+with memcpy() to address the warning and optimize the code a little.
-+
-+| ippool_config.c:112:2: note: 'snprintf' output between 8 and 55 bytes into a destination of size 48
-+|   112 |  snprintf(prompt, sizeof(prompt), "ippool-%s", server_name);
-+|       |  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+Upstream-Status: Pending
++Fixes
++error: misleading indentation; statement is not part of the previous 'if' [-Werror,-Wmisleading-indentation]
++         if(cipher)
++         ^
++../../../git/src/libopensc/card-entersafe.c:369:2: note: previous statement is here
++        if(sbuf)
++        ^
++Upstream-Status: Submitted [https://github.com/OpenSC/OpenSC/pull/1894]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/cli/cli_readline.c
-++++ b/cli/cli_readline.c
-+@@ -257,10 +257,15 @@ static void cli_rl_display_wrapped_text(
-+ 	int pos;
-+ 	int in_ws;
-+ 	int i;
-++	int bufsize = sizeof(text_buf)/sizeof(text_buf[0]);
++---
++ src/libopensc/card-entersafe.c | 12 ++++++------
++ src/tools/pkcs15-init.c        |  4 ++--
++ 2 files changed, 8 insertions(+), 8 deletions(-)
++
++diff --git a/src/libopensc/card-entersafe.c b/src/libopensc/card-entersafe.c
++index 3e42c11f..abb9fd81 100644
++--- a/src/libopensc/card-entersafe.c
+++++ b/src/libopensc/card-entersafe.c
++@@ -352,10 +352,10 @@ static int entersafe_transmit_apdu(sc_card_t *card, sc_apdu_t *apdu,
++ 	 size_t cipher_data_size,mac_data_size;
++ 	 int blocks;
++ 	 int r=SC_SUCCESS;
++-	u8 *sbuf=NULL;
++-	size_t ssize=0;
+++	 u8 *sbuf=NULL;
+++	 size_t ssize=0;
 + 
-+ 	if (left_margin == 0) {
-+ 		left_margin = 3;
-+ 	}
-++	if (left_margin > bufsize) {
-++		left_margin = bufsize;
-++	}
-++
-+ 	if (right_margin == 0) {
-+ 		right_margin = 78;;
-+ 	}
-+@@ -271,7 +276,7 @@ static void cli_rl_display_wrapped_text(
-+ 	/* First copy the text heading to the buffer and add a "-", accounting for
-+ 	 * the specified left margin.
-+ 	 */
-+-	strncpy(&text_buf[0], text1, left_margin - 3);
-++	memcpy(&text_buf[0], text1, left_margin - 3);
-+ 	for (pos = strlen(text1); pos < left_margin - 3; pos++) {
-+ 		text_buf[pos] = ' ';
-+ 	}
-diff --git a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
-index 6fa46904b3..3554e688ab 100644
---- a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
-+++ b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
-@@ -26,6 +26,7 @@ SRC_URI = "https://sourceforge.net/projects/openl2tp/files/${BPN}/${PV}/${BPN}-$
-            file://0003-cli-Mark-return-of-strtol-as-long-int.patch \
-            file://0002-link-with-libtirpc.patch \
-            file://0003-musl-fixes.patch \
-+           file://strncpy-truncation.patch \
-            "
++-	SC_FUNC_CALLED(card->ctx, SC_LOG_DEBUG_VERBOSE);
+++	 SC_FUNC_CALLED(card->ctx, SC_LOG_DEBUG_VERBOSE);
++ 
++ 	 assert(card);
++ 	 assert(apdu);
++@@ -363,10 +363,10 @@ static int entersafe_transmit_apdu(sc_card_t *card, sc_apdu_t *apdu,
++ 	 if((cipher||mac) && (!key||(keylen!=8 && keylen!=16)))
++ 		  SC_FUNC_RETURN(card->ctx, SC_LOG_DEBUG_VERBOSE, SC_ERROR_INVALID_ARGUMENTS);
++ 
++-	r = sc_apdu_get_octets(card->ctx, apdu, &sbuf, &ssize, SC_PROTO_RAW);
++-	if (r == SC_SUCCESS)
+++	 r = sc_apdu_get_octets(card->ctx, apdu, &sbuf, &ssize, SC_PROTO_RAW);
+++	 if (r == SC_SUCCESS)
++ 		sc_apdu_log(card->ctx, SC_LOG_DEBUG_VERBOSE, sbuf, ssize, 1);
++-	if(sbuf)
+++	 if(sbuf)
++ 		free(sbuf);
++ 
++ 	 if(cipher)
++diff --git a/src/tools/pkcs15-init.c b/src/tools/pkcs15-init.c
++index 1ce79f45..9a73121c 100644
++--- a/src/tools/pkcs15-init.c
+++++ b/src/tools/pkcs15-init.c
++@@ -2311,8 +2311,8 @@ do_read_private_key(const char *filename, const char *format,
++ 			r = util_getpass(&passphrase, &len, stdin);
++ 			if (r < 0 || !passphrase)
++ 				return SC_ERROR_INTERNAL;
++- 			r = do_read_pkcs12_private_key(filename,
++- 					passphrase, pk, certs, max_certs);
+++			r = do_read_pkcs12_private_key(filename,
+++					passphrase, pk, certs, max_certs);
++ 		}
++ 	} else {
++ 		util_error("Error when reading private key. "
++-- 
++2.24.1
++
+diff --git a/meta-oe/recipes-support/opensc/opensc_0.19.0.bb b/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
+index 006a1b6b29..0d744e213b 100644
+--- a/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
++++ b/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
+@@ -15,6 +15,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+ SRCREV = "f1691fc91fc113191c3a8aaf5facd6983334ec47"
+ SRC_URI = "git://github.com/OpenSC/OpenSC \
+            file://0001-Remove-redundant-logging.patch \
++           file://0001-Fix-misleading-code-indentation.patch \
+           "
+ DEPENDS = "virtual/libiconv openssl"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4c59283b82fc2b166455e0fc23c71c6f"
 -- 
 2.24.1
 
