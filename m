@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
-	[209.85.219.41])
-	by mail.openembedded.org (Postfix) with ESMTP id E10F57DF23
+Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
+	[209.85.219.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BD807DE36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Dec 2019 18:18:23 +0000 (UTC)
-Received: by mail-qv1-f41.google.com with SMTP id u1so10257665qvk.13
+	Sat, 28 Dec 2019 18:19:17 +0000 (UTC)
+Received: by mail-qv1-f68.google.com with SMTP id o18so11107045qvf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Dec 2019 10:18:25 -0800 (PST)
+	Sat, 28 Dec 2019 10:19:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=FLKwxv2zl+NL+wNwv8B7QCLnLOEg/pwgJKhLqC8L3ec=;
-	b=g08Y0JJOH/+7M6rok1mn75Ih4zAlGw04eSs6VGcfJ0S/ypQxOck03I7kXVbZzOShL1
-	1ywPOJz6Hy+ScdTU+4sVRb9pNbJQG1rgHDS1dLrqF7t/MPwN2kXOd67gAl65xMB8OjDT
-	/S4MKetdqKwNhx5BdUe6HvdieYET52qOKZIcglpz4+iaENGKaa9RWulrvvTStUSJ9/Fz
-	hm4bL29xTDPjeQnHiKGBy0klL14rEbXxMkslhsIVnz74efJIYN3DYce69hCCf61uco+O
-	+/WwPykf5DK41F93KmIeNpGZET29QrV7pKvypevC3YUie7KPfKApuPy4WYjg8dFyd/3I
-	E5YA==
+	:cc; bh=av8q4x2VuXyTcj8CZGvwmDxhkFlD6M0DLPZe0AL4IJM=;
+	b=vBjXG2UMT1cvKVCLqG+YPwIMEYVgC0mySoOaXXxvUWhxZzfgmZ095yzoPwGFCuw3JM
+	V5Q6cZ9u6acdJe5uRekCOfg9aAPWuEXmetiFvxQ8wZl18Hei4c4ukWvTg/uIGKtI1tHb
+	APgg/F2qf+It8v/5sYqb/pmOiYrAo7k+66o5fk6Yo5LnOjYThdtxRsOmexBAdKzoFhsp
+	AS0Gpm5D5SpmnmIO2xn8MKWbt3QHycMikqYS5ZbWRkbr58MXOHvF30L51Pv6EYmLJ+Q3
+	itqw0KNU/V5/w6u3l7FFmclISC8Fnm86ruZ9aAaZoDw3hDFR0syPmJ3FEF1hNRWxYsp9
+	BF5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=FLKwxv2zl+NL+wNwv8B7QCLnLOEg/pwgJKhLqC8L3ec=;
-	b=gDgal99m/Q3A6iL0V3Jz7qXjkBmlKxRK5ikcH1QjkF84LYXg9kLgbTMEAXWq8kVkp/
-	9urm8UeaxOBP2299R5ZeNJrKXLxL/lc4AkdNTArr4rJE5J9dXOWP3m61Re2GIbXk8U5/
-	4XjDeElQAU9oMDRz0DRTL6XMgFuDcf30Ctq1TiEJ62PN1CCMw8hAG8fCmzPBmgXs7qkU
-	DXkBpct+UN/Irg0S32wR+h1dFnkqOzbKp4b5+4fUCeR771MwUeUy7KbJm59Kca2hREXt
-	PPM++1WmYodLHMnQMiqlK+kX0i8OQ0GWMoKTMG4L3/GbU72Wz3a84jljvgaSxTW2DgpX
-	hurg==
-X-Gm-Message-State: APjAAAWGIkF8Poq563qXoivBbU7kTkgyy7t8sDJPecu3f34PUsPz8jnf
-	wCAVO/VVbXWLU+9BCCBUYOGTeNtD6EiUeBZO93Y=
-X-Google-Smtp-Source: APXvYqxGRkjM1XZyRujF4/M2j5bxlGQUrBi8uMs/lDU8nMQ4/OrQU0JGMFTwXK5F22yD1tgVDt8TKL7zUKsOfe6PVvM=
-X-Received: by 2002:ad4:478b:: with SMTP id z11mr44973497qvy.185.1577557104555;
-	Sat, 28 Dec 2019 10:18:24 -0800 (PST)
+	bh=av8q4x2VuXyTcj8CZGvwmDxhkFlD6M0DLPZe0AL4IJM=;
+	b=O060C0ABFjzkDwdmg13LMEUQUOTesFDWOQpumhNgKUDNZujOLXjiuh0otYaiQutP21
+	ocAc4ChU0fZWs+yndmVF2U7IA8Mtsmt+Vbd5RA0mKQ3UwC9eaXx8hVlhgNYo5ktVLswo
+	MSdggC+MZJCv6SVs5D02N3Q+oedm/MlMOGxJjz16ypXsrI8sR/7JJG0S9ef+/bCKzKtr
+	z173ryd7EG2eHiP811e0Mxd9MEiA1H8CBq5PTuHsQg5cc/TawBitR5eoox6BRdcSSwKq
+	isO1kgWwxgIE/wcZqoZW4H7StnxzXd+vkCzFuCt9onvb9a6pCD+bzVR57F41rS3nXB2B
+	bSGA==
+X-Gm-Message-State: APjAAAXnJjwbHUh3czmkTinOfYutWbYMWtV6zjcgD4vv0nWYxvBCuUKj
+	UODn2DDWiYAzMGSgwIJjCmADPDcs2Q1vVfW4KiY=
+X-Google-Smtp-Source: APXvYqwoCbt1r6Bc+HtRFZ3tLuIDHjF6MCI0oa5nTvapgj+keBtgBYSoC3n0xKyxpoetezMI57XW4KxMKlQRt9KUBKY=
+X-Received: by 2002:a0c:8605:: with SMTP id p5mr44780663qva.109.1577557157835; 
+	Sat, 28 Dec 2019 10:19:17 -0800 (PST)
 MIME-Version: 1.0
-References: <20191227171145.10366-1-peter.kolbus@garmin.com>
-In-Reply-To: <20191227171145.10366-1-peter.kolbus@garmin.com>
+References: <20191227172339.10885-3-peter.kolbus@garmin.com>
+In-Reply-To: <20191227172339.10885-3-peter.kolbus@garmin.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 28 Dec 2019 10:17:58 -0800
-Message-ID: <CAMKF1spUFzHw12C3stJvGYyFM5isFM-jnobBWOR4tRaTKzm-EA@mail.gmail.com>
+Date: Sat, 28 Dec 2019 10:18:51 -0800
+Message-ID: <CAMKF1srxGU_XQQjF5G-5df1kfcoYxRzHVTtEU2qk3ycF_wJ2UA@mail.gmail.com>
 To: Peter Kolbus <peter.kolbus@garmin.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python3-html2text: add recipe
+Subject: Re: [meta-python][PATCH 3/4] python-soupsieve: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,52 +53,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Dec 2019 18:18:24 -0000
+X-List-Received-Date: Sat, 28 Dec 2019 18:19:17 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-http://errors.yoctoproject.org/Errors/Details/300492/
+http://errors.yoctoproject.org/Errors/Details/300494/
 
-On Fri, Dec 27, 2019 at 9:12 AM Peter Kolbus <peter.kolbus@garmin.com> wrote:
+On Fri, Dec 27, 2019 at 9:26 AM Peter Kolbus <peter.kolbus@garmin.com> wrote:
 >
-> python3-html2text converts HTML to Markdown-formatted text.
+> Backport python3-soupsieve to python2; this enables use in
+> python-beautifulsoup4.
 >
 > Signed-off-by: Peter Kolbus <peter.kolbus@garmin.com>
 > ---
->  .../recipes-devtools/python/python-html2text.inc     | 12 ++++++++++++
->  .../python/python3-html2text_2019.8.11.bb            |  2 ++
->  2 files changed, 14 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python-html2text.inc
->  create mode 100644 meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb
+>  meta-python/recipes-devtools/python/python-soupsieve_1.9.4.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python-soupsieve_1.9.4.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python-html2text.inc b/meta-python/recipes-devtools/python/python-html2text.inc
+> diff --git a/meta-python/recipes-devtools/python/python-soupsieve_1.9.4.bb b/meta-python/recipes-devtools/python/python-soupsieve_1.9.4.bb
 > new file mode 100644
-> index 000000000..f5e208729
+> index 000000000..55a673ecc
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-html2text.inc
-> @@ -0,0 +1,12 @@
-> +SUMMARY = "Convert HTML to Markdown-formatted text"
-> +HOMEPAGE = "https://github.com/Alir3z4/html2text"
+> +++ b/meta-python/recipes-devtools/python/python-soupsieve_1.9.4.bb
+> @@ -0,0 +1,4 @@
+> +inherit setuptools
+> +require python-soupsieve.inc
 > +
-> +LICENSE = "GPL-3.0"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=7f538584cc3407bf76042def7168548a"
-> +
-> +SRC_URI[md5sum] = "21aad7ec95b70606024b783c8253899c"
-> +SRC_URI[sha256sum] = "f516b9c10284174e2a974d86f91cab02b3cf983a17752075da751af0e895ef5e"
-> +
-> +inherit pypi
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb b/meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb
-> new file mode 100644
-> index 000000000..9cb5b01eb
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-html2text_2019.8.11.bb
-> @@ -0,0 +1,2 @@
-> +inherit setuptools3
-> +require python-html2text.inc
+> +RDEPENDS_${PN} += "${PYTHON_PN}-backports-functools-lru-cache"
 > --
 > 2.24.1
 >
+> Note- I recognize python2 support is ending. Nacking this patch and
+> accepting the next may cause python-beautifulsoup4 breakage; will leave
+> it to your discretion how to handle this.
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
