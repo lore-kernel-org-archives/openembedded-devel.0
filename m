@@ -1,46 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E3B357D6D0
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 584207DE3D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Dec 2019 18:17:13 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id l12so26889927qtq.12
+	Sat, 28 Dec 2019 18:17:47 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id a203so24080380qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Dec 2019 10:17:15 -0800 (PST)
+	Sat, 28 Dec 2019 10:17:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7oWkLc4gKCyicjtpgP+3zf0BMB4nZMMWg7+WxRBFHWs=;
-	b=b4lWHKPuG/a4psZWN3IPa1Y8TT7Do7lBX6E+Nz+3SlgBDRbnBXbj466pIw2gCTCKID
-	wUtlsJ7duh77IRw+Gyk/C4bX06H8IiPCp7lGySIKwshMxnWFWPVtG94JjP9ukeH4VxtW
-	23BPuXGn0NKRi4LYtG7cG+scs1JWot64UJVjObuZ+0x/uJ3bOx/2IbTHj2oyr9lYcA6U
-	LzalaRoqw9crqhYM+YoYOh1a+6i8uThny7h67Bqn5bi7l27LbIM8DGL4ZNsrtpcG+mK0
-	PppR0axRCffBZor+WZuhYHiFeImgkqIr66+j13UAly33+/gQgT+gmFQoliWZnsSYVumo
-	8QNg==
+	:cc; bh=ub9k4puC44UO7L3RIhOB/F0vdvRLNOnvLC6MeJsLMz0=;
+	b=uh2p+nWsv2VeY5tjqrt/L8PznoOrz1hYRQyUw5+uJINqtAMTDmHz2ZPxUzUUuKwkxk
+	d+UamVyWefGSaKTMD7serErvMQhxzxCAhjne7ReJWtaKJI7upRjjP6HYBthgYjRfbfCZ
+	5kgihsFKbIqmNbqvP0k6zsZoGqnHVLvaYrHK97pG3iYVlcBc5bjKI/DUBlJsw2W+x/23
+	rvx6L7gHikqIjRGIUg1CZyTJUuPWCTvubULBUt3a31agobNAu9ir4DZyctcjTu2Nlmrl
+	f3SJGZQe6HVtN4VlbDVA80Q8r0/vpyNIuh7i3OZg1NBqckUZpVJmD5qgsvA9sEKKwhPi
+	caYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=7oWkLc4gKCyicjtpgP+3zf0BMB4nZMMWg7+WxRBFHWs=;
-	b=bWNk7XF7TYeaaXEyxPi68YEmqSA1/rp+mDp4ljR7wzBJD/jhJgY5mo7PsovFFtEEjC
-	mWu4qKtzIWCemkFDLzVItbS6yIJIPWqd06lRRHQVt1t+1tDH7C34PSdDWr0ZRj8oIumt
-	VRFc42NHSjRiCCY9DnUicBvedMM7BL52a/LlJKUKwROMJc7VyU+HDNfIkDjqvVOXSmIA
-	iwmbrvMkv30admN/VBa+xIoz0563o3Bwo9cn+dgNtwKqmwoxljXzCssp2+OJrgxgjNem
-	xRRLujtnFVHIbZjVm64TfH3BeBwwXMJgihaUKZqxTSctblLVmz0gyazcPESvnK0bvSUR
-	3SvA==
-X-Gm-Message-State: APjAAAWbPQh2NrxcqgzfIrYZPVaNLr9FFyQ1m+gyFrQK3HnSpqQ1Ny2h
-	6HO8eqriOFtAUgiIT8a/HLxW3/fc4huXvn9ztUM=
-X-Google-Smtp-Source: APXvYqy6KRUQzR5/GLQCRWX5BPbG4BUsUfbF0TU096+RKDglUKLMOE7Sszf+sXa+9F2QiPvgjXAQa7OLzQ8dyRCdZwE=
-X-Received: by 2002:aed:2c03:: with SMTP id f3mr27352024qtd.80.1577557034399; 
-	Sat, 28 Dec 2019 10:17:14 -0800 (PST)
+	bh=ub9k4puC44UO7L3RIhOB/F0vdvRLNOnvLC6MeJsLMz0=;
+	b=CzwcASCbuXVe8WlCwHY7JCdJd6HcTD9vKKnSs83cYupU0NpjBBgB/FGoXwCSRpOc+P
+	qEpAZP8rNFnyiMyzsSQttovPpVgiUhWrUqpKF1a2KVZkXW6//Ox/8oFHFcdx3jg3FSm4
+	ZXIc4aFUgSZhdAzOsLutkqIzocNXYTbN0fZZdQsiaQDpoLep8lOpLjPkoEwMvpITJxKp
+	ubs42esZdkpM9Rf9uiyycu7Zbi5ENfi+VPinN7I0Yup2WD4vQSd0An+/7zGsj7sFYXd/
+	iKDwmZqLlljai/Vp94RBlI9TB2l3BOkfiSIWfO5q+gGSO2VBlnAOzr03Mc+Y5wp28peY
+	qXrg==
+X-Gm-Message-State: APjAAAXBDjpmRkhrI7nDvchP2cNzWTVHrPE9nci8/5PKWDZbDVjKUInX
+	7eDpCXgP0mDiKBW6NgLzDoCoErqT1ydaqsKL5Tg=
+X-Google-Smtp-Source: APXvYqxp9grEFobTSjGOKehfFEmhWKF7byrbPvKkIMel4q9xT8D6+1A86fXd90i9F7nPuYvSPwss2mBQ/swFg2Eauu4=
+X-Received: by 2002:a37:a3c7:: with SMTP id
+	m190mr48414002qke.212.1577557067960; 
+	Sat, 28 Dec 2019 10:17:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20191227171120.10253-1-peter.kolbus@garmin.com>
-In-Reply-To: <20191227171120.10253-1-peter.kolbus@garmin.com>
+	<20191227171120.10253-2-peter.kolbus@garmin.com>
+In-Reply-To: <20191227171120.10253-2-peter.kolbus@garmin.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 28 Dec 2019 10:16:48 -0800
-Message-ID: <CAMKF1sqqEY+vNtoApKjyExfAajfW89KLf5uaA9QgkPCq8YBWMg@mail.gmail.com>
+Date: Sat, 28 Dec 2019 10:17:21 -0800
+Message-ID: <CAMKF1sojj2e4Pvc9tGN_qvJZC-nBQQtamHyiRZr0UtspAFhLsg@mail.gmail.com>
 To: Peter Kolbus <peter.kolbus@garmin.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH 1/2] python3-booleanpy: add recipe
+Subject: Re: [meta-python][PATCH 2/2] python3-license-expression: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,55 +55,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Dec 2019 18:17:14 -0000
+X-List-Received-Date: Sat, 28 Dec 2019 18:17:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-license checksum fails
+License checksum fails
+http://errors.yoctoproject.org/Errors/Details/300493/
 
-http://errors.yoctoproject.org/Errors/Details/300491/
-
-
-On Fri, Dec 27, 2019 at 9:11 AM Peter Kolbus <peter.kolbus@garmin.com> wrote:
+On Fri, Dec 27, 2019 at 9:12 AM Peter Kolbus <peter.kolbus@garmin.com> wrote:
 >
-> boolean.py is a library to define and parse boolean algebras. It is
-> used by python3-license-expression.
+> python3-license-expression is a utility library to parse and work with
+> license expressions.
 >
 > Signed-off-by: Peter Kolbus <peter.kolbus@garmin.com>
 > ---
->  .../recipes-devtools/python/python-booleanpy.inc   | 14 ++++++++++++++
->  .../python/python3-booleanpy_3.7.bb                |  2 ++
->  2 files changed, 16 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python-booleanpy.inc
->  create mode 100644 meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
+>  .../python/python-license-expression.inc         | 16 ++++++++++++++++
+>  .../python/python3-license-expression_1.0.bb     |  2 ++
+>  2 files changed, 18 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python-license-expression.inc
+>  create mode 100644 meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python-booleanpy.inc b/meta-python/recipes-devtools/python/python-booleanpy.inc
+> diff --git a/meta-python/recipes-devtools/python/python-license-expression.inc b/meta-python/recipes-devtools/python/python-license-expression.inc
 > new file mode 100644
-> index 000000000..4484af29b
+> index 000000000..5b18f2e96
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-booleanpy.inc
-> @@ -0,0 +1,14 @@
-> +SUMMARY = "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL"
-> +HOMEPAGE = "https://github.com/bastikr/boolean.py"
+> +++ b/meta-python/recipes-devtools/python/python-license-expression.inc
+> @@ -0,0 +1,16 @@
+> +SUMMARY = "Utility library to parse, compare, simplify and normalize license expressions"
+> +HOMEPAGE = "https://github.com/nexB/license-expression"
 > +
-> +LICENSE = "BSD-2-Clause"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=7f538584cc3407bf76042def7168548a"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://apache-2.0.LICENSE;md5=7f538584cc3407bf76042def7168548a"
 > +
-> +SRC_URI[md5sum] = "1189d115a38f84f5df743014926a9159"
-> +SRC_URI[sha256sum] = "bd19b412435611ecc712603d0fd7d0e280e24698e7a6e3d5f610473870c5dd1e"
-> +
-> +PYPI_PACKAGE = "boolean.py"
+> +SRC_URI[md5sum] = "81477f779099f55071c6a7b88a29bb01"
+> +SRC_URI[sha256sum] = "8aaa455c5b97c4f2174090178b19792b2a1c620e80591aafd4e0a99b713f9e8d"
 > +
 > +inherit pypi
 > +
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-booleanpy \
+> +    "
+> +
 > +BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb b/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
+> diff --git a/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb b/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
 > new file mode 100644
-> index 000000000..5f8602d18
+> index 000000000..10a702ca4
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
+> +++ b/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
 > @@ -0,0 +1,2 @@
 > +inherit setuptools3
-> +require python-booleanpy.inc
+> +require python-license-expression.inc
 > --
 > 2.24.1
 >
