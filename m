@@ -1,46 +1,48 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-il1-f195.google.com (mail-il1-f195.google.com
-	[209.85.166.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A37C7C410
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CE97A6BD08
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 23:48:35 +0000 (UTC)
-Received: by mail-il1-f195.google.com with SMTP id v69so23468513ili.10
+	Sat, 28 Dec 2019 03:22:45 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id e12so25895005qto.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Dec 2019 15:48:36 -0800 (PST)
+	Fri, 27 Dec 2019 19:22:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=H2J0v5vgf+ebGNReJKodx2xnaKbMIdUM2+66tnbRoLU=;
-	b=rT5kpg1CgWNQr2r6DAlNnmNMNOY+trkQdtsVLHuHnFoBtt46sGKIS3i+rG28hRQqdT
-	krGK58M3ecRPsZ+6zc0sdgLR234vCXmK5k23nVsVR24Il2dc4qFm107/hNyEDyXZnKSe
-	IO+LjgcnputPDuyQ00GkA+9QDUgoqKoMuM9PyfaQkr6bNpibDzxHn+qgtXgR9Bp8FpZp
-	7baK3SV1Rqi5/ADoWI9MlpiPdnmohrHVigAtSCFIMZsiKfPyWQgw6Ntsl6F/6Hbb4DXr
-	xWvrn1hqWgl/pVFjpKIaCL6mFDXh3gsGjrtgCQeZdOBXZFntjT8l9Cndp5KZGyjvPR5p
-	1B8w==
+	:cc:content-transfer-encoding;
+	bh=oRsLr+BiSqBwKc0SzUw1jEYBE3q4P1lktNfIz9aDg6s=;
+	b=GR50VyC4uZlacY6jrSx4+1j5zQxqu1dSuYgpCSyjO3R2uIaYc/xdykqw1bMTaErEZg
+	pgqs2QGldJn/jhuEKcU8ekkg6ep7uRI4aagLrV1e5avkS9fE8X/L76TCRtFlj1PSBq6w
+	Cp/OziYrFqJrafdyy5jwYJ/wH9fK2zAWJETYqzuKEfBzT4p891rp2795hkDeaqvGSh4z
+	pL62N65ko/sBbr0UpFAP2Vv608vVwwyUJ3tC8/bS6KrQMTqrv5w6KXx0vS5E3OqrhH9T
+	rsLALlsYOEhdbSwa5Ye5fcpSDKR6m5XR/MNM8GZrewLS9vSITQPhDAZ65MhV4AZ8JODi
+	Q48A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=H2J0v5vgf+ebGNReJKodx2xnaKbMIdUM2+66tnbRoLU=;
-	b=iu2yKU4pbCZARMZFJ6+HRisG6ozExiw4uv6XMWnegxVU2pFt7bWnHy2cRz8UTAnPP+
-	XtgZMIZslxG7LjvdVKUGvi8m7orhjooC1z2V34iDKi5uqfZuJEpAZjVEI/MupLWZDxuR
-	9JFC2zirK8R7S/giNWjz+hiscoLMtRQ11yOzE6sabaf8B++1oKVCYgu+0dLhTUNGadWF
-	Z4WAVKueDWbnrOcKP64Qc01tk/iwKnG5RAxZC7xlcevmoZO0yzAFK87KOPKGjlmaLBvU
-	6eUaBeaq9I9gwwOeS9F3BXN/jQ+/6ptHbq+BI3A2m6yU4+oxRU6LIxLAe9IsQxMqzrmm
-	v6qg==
-X-Gm-Message-State: APjAAAUUZ/+ALvRyFpj/mBpvSFwakva6ug76cWphYFbGvVIsj3zzRxNc
-	11qq/PXnLDU8ET4kzDnBbLpMNkn0m2/1mq7NfUQ=
-X-Google-Smtp-Source: APXvYqx11s33hdJ+I9OG3aL7ycEoImn/UE0Qf4MZx/wGgelgnbq57lCO6eu/BNHaOmx5r4kNaG1XVa1SA7X3354bxhU=
-X-Received: by 2002:a92:cb09:: with SMTP id s9mr49592697ilo.224.1577490516211; 
-	Fri, 27 Dec 2019 15:48:36 -0800 (PST)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=oRsLr+BiSqBwKc0SzUw1jEYBE3q4P1lktNfIz9aDg6s=;
+	b=aEIl5j8GOAVxJPSkQbdw3iQ4PittcdhpndIAQygyKq2qi0YoPCn+gtwc++d5zX8PaE
+	SQWqNTGNT9I8EsBFVTY/FkRYrFPQMX9gEBXv0DJEkBJ6hKtAwFauWhCBhGaBN3gdgz91
+	0ZXAOcf2nsdHHqJpGvxnbpY2c6iRrzUNCL9636vDH5yMjS1DlRGuvL72WpmOtxA9c5PT
+	FCxpeHgbdYMLwGZWwC0gvIJ5E01SGRAQcMd4HuAY5Pm4VQg+IhaiL6/I7mE3rdJx3N7k
+	VOdZ9ZcPtRu2DAhvUUMbog5PC2Ya89bcAjsQxmipT9z/wvcjJHfsORfLRwOwGU9Dgaat
+	QaAw==
+X-Gm-Message-State: APjAAAX1BDuXmDb89RjuL36EkIL2sAC5Nja9ko+vbwlpFMJKQR09gZAB
+	enMHVUNy7J25L08QEKLahxxMYZBSgFBLMpSgQL0=
+X-Google-Smtp-Source: APXvYqxLUm8vwVdtg2PM4XBunSkjxt6FQvrGKnKyPvfk17ISRrqzT2Mt9PHkIbhMpP2rJ5HxAIVX6EX38EzyS4u7efk=
+X-Received: by 2002:ac8:7592:: with SMTP id s18mr30816963qtq.378.1577503366273;
+	Fri, 27 Dec 2019 19:22:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20191227213120.3930-1-schnitzeltony@gmail.com>
 	<20191227213120.3930-9-schnitzeltony@gmail.com>
 	<CAMKF1srAOXoEzu=0i0yyM8dZn3rLt4B1d-_9FRPTTEfexDZDqw@mail.gmail.com>
-In-Reply-To: <CAMKF1srAOXoEzu=0i0yyM8dZn3rLt4B1d-_9FRPTTEfexDZDqw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sat, 28 Dec 2019 00:48:25 +0100
-Message-ID: <CALbNGRTeSi6X-osFwzjm1y8fj46Bmsmayemdscn8-f=+=-srqQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+	<CALbNGRTeSi6X-osFwzjm1y8fj46Bmsmayemdscn8-f=+=-srqQ@mail.gmail.com>
+In-Reply-To: <CALbNGRTeSi6X-osFwzjm1y8fj46Bmsmayemdscn8-f=+=-srqQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 27 Dec 2019 19:22:20 -0800
+Message-ID: <CAMKF1srcYxzH3J960mj8ggfQoZOyj=aO=ky9QjSTpNrEW5Asiw@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 09/23] evolution-data-server: upgrade 3.34.1 -> 3.34.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -55,15 +57,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Dec 2019 23:48:35 -0000
+X-List-Received-Date: Sat, 28 Dec 2019 03:22:46 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Dec 28, 2019 at 12:19 AM Khem Raj <raj.khem@gmail.com> wrote:
-> I think version specific information should be in bb file not inc
-we have a native build and it just builds some tools required. Both
-native/target share same version which is set in
-evolution-data-server.inc. So maybe I missed something but what kind
-of change do you suggest?
+On Fri, Dec 27, 2019 at 3:48 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+>
+> On Sat, Dec 28, 2019 at 12:19 AM Khem Raj <raj.khem@gmail.com> wrote:
+> > I think version specific information should be in bb file not inc
+> we have a native build and it just builds some tools required. Both
+> native/target share same version which is set in
+> evolution-data-server.inc. So maybe I missed something but what kind
+> of change do you suggest?
+>
 
-Andreas
+hmm if it shares with native/nativesdk that might be fine
+why dont we use bbclassextend for the native version ?
+
+> Andreas
 
