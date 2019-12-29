@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com
-	[209.85.216.48])
-	by mail.openembedded.org (Postfix) with ESMTP id E16F47F7E4
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 63CC27F7E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Dec 2019 18:25:49 +0000 (UTC)
-Received: by mail-pj1-f48.google.com with SMTP id n96so6935900pjc.3
+	Sun, 29 Dec 2019 18:25:50 +0000 (UTC)
+Received: by mail-pf1-f177.google.com with SMTP id x6so16159650pfo.10
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 29 Dec 2019 10:25:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ZanRSj8LG8uCOYnz0mLwudpJj7KhfBAGX2d0nNdUnNI=;
-	b=AVbrRC+/wSUX9smLkgYOQFj/xErF7sO/VSmZ8nwDMY9uyWqvzTu1kZE63MlBG+GBah
-	XcPm+X5I0O3xdciPuZo2j5zO5Cmmumtkd/+kU4VbJxleIvFMnVt1acgdcjKfwRDUbeBX
-	4FTfdDNeAtapOYV9Rz+JWHxYPseIbx1ken2Cp+3JsKxdeBb6oa4UJC1qK2/JM2Xfmlvc
-	xnVIiPMr5940Q0zHqvrMSoa82GgjZBRYabzUQHV1UBU6qoCQGG+M8g4VMfjktC4d41f1
-	Fzeq5RVOQVdevfxuwJ9aRNr8qImqgQ2RqzJeYJvZUF3qwdObBe/TBgF7oKI1lWPFVElV
-	8Ygg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=qfJjHi0z7GonyYM5Q8j4zwvokOYNEzkljIgCglcB0VE=;
+	b=cG+AKM07Ds0T3u0IwB9fyLWfzJjNP5lOjI6ZF/ZoGjmHt/GGjKNimZ+KNFo+9AMdln
+	vedH7AMh50pMSsz+Ri9vns8MuD2s6RHXjWYeonCWcB5nZwjpYRs2iEMaNwdahKNaIyBq
+	aWy6+4OZbGE6HKF55qLzcorCxwFiWtMuXZG9qMcMRgiRXgCn0QB99PbcQd54uLyAsqRW
+	x7f5j2Iy489007tewMQS3DbUzKz7VONN0v2VNPXhvWehluT5+O0O74EU8OXgVHSwQLyv
+	62QHscG3tRC6P20RTp3GNuUbFZLfTJaQ5trbq6D/kg/M54j7ZT4csJ46Z8PFIqPBIJ/t
+	7G1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ZanRSj8LG8uCOYnz0mLwudpJj7KhfBAGX2d0nNdUnNI=;
-	b=j2F9camu5LLKOiFwisM4t+4tCNIEQhaA8CaehpVxFDukiGpmCilAybuRVSTgHOinQl
-	XRXBSjGeR48tmkr5TrjVizKf7SJVPPW1aFGSxRILOi2SrS+Eu7WS8IkumZcJ+Q50d9fX
-	rhBiZmptlDkyxFmiMQO3roTeUJEqds77Qp6ecssgWsWIzFm4hX21rOMWqa6eA9a9vxA5
-	q79SsPq9AiuucvFUz4eVuZ28g3I0HPZy1fa1i4sh6Bnlt+lw4YI2q39VdeQG0W1/1HQ1
-	J16XL5SX2b5m9Mt+TU2Afphm/AXsL8HLDAOeg+O/Jnr8m0w6lnwDzqOdpAKfYzKmPwoY
-	M1EQ==
-X-Gm-Message-State: APjAAAXJDk95GPmaFaEn4MtB8LcU9avPIiWycZKhdlnTgdDeIAaLzR84
-	j463fhzM3K0b5Vl1ZyEm3cDV1KBr4E0=
-X-Google-Smtp-Source: APXvYqxep8KpzicOaF0VHpy+WDXFei196E74mNeW+BjN1cMnttQRVZcBviLrjIZIFev6Y+D0kP6JjA==
-X-Received: by 2002:a17:902:9b86:: with SMTP id
-	y6mr60156298plp.253.1577643950311; 
-	Sun, 29 Dec 2019 10:25:50 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=qfJjHi0z7GonyYM5Q8j4zwvokOYNEzkljIgCglcB0VE=;
+	b=pN+RMuX7mSbm3tV+pHAIHEtIm61gqQ9gs5MUqmg2QtZbv9+Km8V4k9U3xzXh/RpAcP
+	jzXXjoRCPUx4+W/bENKY/86WsjroMsYanMLQRQmYk6/wVFNmRW0OZw3RK/Rldgw/ZAUi
+	28Fa+eN5NKtioWZp5T+g/01GdZcmpOVdUVpoDXoPEu2+iw2aBXLllQUNYtIhHVnuzEC+
+	CEVWnK3BK3DBfRvid5h5yEOjyrqbAJ8OxoHMnYGgDjM1PN1oJjhUvZ417E1DkKFXHh16
+	nHtfs8iJFUf8O8xLeJvYe/gsTydlpRymtg+FxYRG/eNHqCAEURoIou9R6qPuZW+A/ImG
+	ZgJA==
+X-Gm-Message-State: APjAAAXFUpfgML0zdYUfdN8WCOwK8yWrHGS4SqA8YTE3+1a2+SUCZgZO
+	gvNkh24Rq9C/9eN9hNOOd/PQwKF1qbo=
+X-Google-Smtp-Source: APXvYqyl6lfbx0m0TLB1OUA5MxgDqDQ2UQb8ME9o1M24cBwbh7QWgqgLRarHDFaFV0mJyF39pteipg==
+X-Received: by 2002:a62:1cd6:: with SMTP id
+	c205mr66811616pfc.179.1577643951028; 
+	Sun, 29 Dec 2019 10:25:51 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::2f83])
 	by smtp.gmail.com with ESMTPSA id
-	gc1sm21395010pjb.20.2019.12.29.10.25.49
+	gc1sm21395010pjb.20.2019.12.29.10.25.50
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 29 Dec 2019 10:25:49 -0800 (PST)
+	Sun, 29 Dec 2019 10:25:50 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Dec 2019 10:25:40 -0800
-Message-Id: <20191229182544.16104-1-raj.khem@gmail.com>
+Date: Sun, 29 Dec 2019 10:25:41 -0800
+Message-Id: <20191229182544.16104-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
+In-Reply-To: <20191229182544.16104-1-raj.khem@gmail.com>
+References: <20191229182544.16104-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2 1/5] glm: Upgrade to 0.9.9.6
+Subject: [meta-oe][PATCH 2/5] rocksdb: Upgrade to 6.5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,463 +63,328 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Sun, 29 Dec 2019 18:25:50 -0000
 Content-Transfer-Encoding: 8bit
 
-License-Update: Use copying.txt for checksum, no change in licenses as
-such
-
-Fix type conversion warnings
-
-Upstream conveniently deleted cmake install/uninstall pieces, therefore
-apply the bandaids as needed see [1]
-
-[1] https://github.com/g-truc/glm/issues/947
+Backport an upstream patch to fix build
+Delete patches which are either upstreamed or not required
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-v2: Fix the cmake install/uninstall removal
+ ...ake-has-stock-FindZLIB-in-upper-case.patch | 29 -------
+ ...and-do-not-mark-default-copy-constru.patch | 57 -------------
+ ...-breakage-from-lock_guard-error-6161.patch | 36 +++++++++
+ .../rocksdb/files/0001-fix-Issue-5303.patch   | 80 -------------------
+ ...ild-failure-with-Werror-maybe-uninit.patch | 35 --------
+ meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb    | 17 ++--
+ 6 files changed, 43 insertions(+), 211 deletions(-)
+ delete mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch
+ delete mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch
+ create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
+ delete mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-fix-Issue-5303.patch
+ delete mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch
 
- ...t-float-conversion-warnings-with-cla.patch | 158 ++++++++++++++++++
- meta-oe/recipes-graphics/glm/glm/glm.pc.in    |   7 +
- .../glm/glm/glmConfig.cmake.in                |  20 +++
- .../glm/glm/glmConfigVersion.cmake.in         |  31 ++++
- .../recipes-graphics/glm/glm/glmTargets.cmake | 107 ++++++++++++
- meta-oe/recipes-graphics/glm/glm_0.9.9.5.bb   |  23 ---
- meta-oe/recipes-graphics/glm/glm_0.9.9.6.bb   |  39 +++++
- 7 files changed, 362 insertions(+), 23 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/glm/glm/0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch
- create mode 100644 meta-oe/recipes-graphics/glm/glm/glm.pc.in
- create mode 100644 meta-oe/recipes-graphics/glm/glm/glmConfig.cmake.in
- create mode 100644 meta-oe/recipes-graphics/glm/glm/glmConfigVersion.cmake.in
- create mode 100644 meta-oe/recipes-graphics/glm/glm/glmTargets.cmake
- delete mode 100644 meta-oe/recipes-graphics/glm/glm_0.9.9.5.bb
- create mode 100644 meta-oe/recipes-graphics/glm/glm_0.9.9.6.bb
-
-diff --git a/meta-oe/recipes-graphics/glm/glm/0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch b/meta-oe/recipes-graphics/glm/glm/0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch
+deleted file mode 100644
+index 9682f8ad40..0000000000
+--- a/meta-oe/recipes-dbs/rocksdb/files/0001-CMake-has-stock-FindZLIB-in-upper-case.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 38146a5d803a1fb9b10f011aa857872b6f20cd02 Mon Sep 17 00:00:00 2001
+-From: Tongliang Liao <xkszltl@gmail.com>
+-Date: Mon, 29 Apr 2019 03:51:51 -0700
+-Subject: [PATCH] CMake has stock FindZLIB in upper case. More details in
+- https://cmake.org/cmake/help/v3.14/module/FindZLIB.html
+-
+-
+-Upstream-Status: Backport https://github.com/facebook/rocksdb/pull/5261
+-
+----
+- CMakeLists.txt | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 40cdd26bb..355686566 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -92,7 +92,7 @@ else()
+-   endif()
+-
+-   if(WITH_ZLIB)
+--    find_package(zlib REQUIRED)
+-+    find_package(ZLIB REQUIRED)
+-     add_definitions(-DZLIB)
+-     if(ZLIB_INCLUDE_DIRS)
+-       # CMake 3
+---
+-2.11.0
+-
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch
+deleted file mode 100644
+index eccaa3a37a..0000000000
+--- a/meta-oe/recipes-dbs/rocksdb/files/0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch
++++ /dev/null
+@@ -1,57 +0,0 @@
+-From ee728434124b9b7d17abbd060a62aac79a9b79c0 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 12 Feb 2019 14:31:24 -0800
+-Subject: [PATCH] Disable -Wshadow and do not mark default copy constructors
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- CMakeLists.txt                                     | 2 +-
+- utilities/persistent_cache/block_cache_tier.h      | 4 ++--
+- utilities/persistent_cache/block_cache_tier_file.h | 2 +-
+- 3 files changed, 4 insertions(+), 4 deletions(-)
+-
+-diff --git a/CMakeLists.txt b/CMakeLists.txt
+-index 98e2e1973..3a24a075b 100644
+---- a/CMakeLists.txt
+-+++ b/CMakeLists.txt
+-@@ -254,7 +254,7 @@ if(FAIL_ON_WARNINGS)
+-   if(MSVC)
+-     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX")
+-   else() # assume GCC
+--    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
+-+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wno-error=shadow")
+-   endif()
+- endif()
+- 
+-diff --git a/utilities/persistent_cache/block_cache_tier.h b/utilities/persistent_cache/block_cache_tier.h
+-index 2b2c0ef4f..96d0540a4 100644
+---- a/utilities/persistent_cache/block_cache_tier.h
+-+++ b/utilities/persistent_cache/block_cache_tier.h
+-@@ -91,9 +91,9 @@ class BlockCacheTier : public PersistentCacheTier {
+-         : key_(std::move(key)), data_(data) {}
+-     ~InsertOp() {}
+- 
+--    InsertOp() = delete;
+-+    InsertOp() = default;
+-     InsertOp(InsertOp&& /*rhs*/) = default;
+--    InsertOp& operator=(InsertOp&& rhs) = default;
+-+    InsertOp& operator=(InsertOp&& rhs) = delete;
+- 
+-     // used for estimating size by bounded queue
+-     size_t Size() { return data_.size() + key_.size(); }
+-diff --git a/utilities/persistent_cache/block_cache_tier_file.h b/utilities/persistent_cache/block_cache_tier_file.h
+-index e38b6c9a1..d9b89a4f7 100644
+---- a/utilities/persistent_cache/block_cache_tier_file.h
+-+++ b/utilities/persistent_cache/block_cache_tier_file.h
+-@@ -262,7 +262,7 @@ class ThreadedWriter : public Writer {
+-         : file_(file), buf_(buf), file_off_(file_off), callback_(callback) {}
+- 
+-     IO(const IO&) = default;
+--    IO& operator=(const IO&) = default;
+-+    IO& operator=(const IO&) = delete;
+-     size_t Size() const { return sizeof(IO); }
+- 
+-     WritableFile* file_ = nullptr;           // File to write to
+--- 
+-2.20.1
+-
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-from-lock_guard-error-6161.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
 new file mode 100644
-index 0000000000..2eb50a5a3a
+index 0000000000..ac87d0c60d
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/glm/glm/0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch
-@@ -0,0 +1,158 @@
-+From 461861cd2e34294830b121db834c05ff39424f6f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 27 Dec 2019 18:42:51 -0800
-+Subject: [PATCH] Fix Wimplicit-int-float-conversion warnings with clang 10+
++++ b/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
+@@ -0,0 +1,36 @@
++From b626703de7ece507f360507e49d3ecb448b12e07 Mon Sep 17 00:00:00 2001
++From: Maysam Yabandeh <myabandeh@fb.com>
++Date: Thu, 12 Dec 2019 13:48:50 -0800
++Subject: [PATCH] Fix build breakage from lock_guard error (#6161)
 +
-+This is a new warning in clang which will be available in clang 10
-+onwards
++Summary:
++This change fixes a source issue that caused compile time error which breaks build for many fbcode services in that setup. The size() member function of channel is a const member, so member variables accessed within it are implicitly const as well. This caused error when clang fails to resolve to a constructor that takes std::mutex because the suitable constructor got rejected due to loss of constness for its argument. The fix is to add mutable modifier to the lock_ member of channel.
++Pull Request resolved: https://github.com/facebook/rocksdb/pull/6161
 +
-+Fixes
-+error: implicit conversion from 'const int' to 'float' may lose precision [-Werror,-Wimplicit-int-float-conversion]
++Differential Revision: D18967685
 +
-+Upstream-Status: Submitted [https://github.com/g-truc/glm/pull/986]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Pulled By: maysamyabandeh
++
++Upstream-Status: Backport
++
++fbshipit-source-id: 698b6a5153c3c92eeacb842c467aa28cc350d432
 +---
-+ glm/gtx/scalar_multiplication.hpp  |  2 +-
-+ test/gtx/gtx_fast_trigonometry.cpp | 32 +++++++++++++++---------------
-+ 2 files changed, 17 insertions(+), 17 deletions(-)
++ util/channel.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/glm/gtx/scalar_multiplication.hpp b/glm/gtx/scalar_multiplication.hpp
-+index f391f8de..496ba193 100644
-+--- a/glm/gtx/scalar_multiplication.hpp
-++++ b/glm/gtx/scalar_multiplication.hpp
-+@@ -54,7 +54,7 @@ namespace glm
-+ 	template<typename T> \
-+ 	return_type_scalar_multiplication<T, Vec> \
-+ 	operator/(Vec lh, T const& s){ \
-+-		return lh *= 1.0f / s; \
-++		return lh *= 1.0f / static_cast<float>(s); \
-+ 	}
++diff --git a/util/channel.h b/util/channel.h
++index 0225482c0..a8a47680a 100644
++--- a/util/channel.h
+++++ b/util/channel.h
++@@ -60,7 +60,7 @@ class channel {
 + 
-+ GLM_IMPLEMENT_SCAL_MULT(vec2)
-+diff --git a/test/gtx/gtx_fast_trigonometry.cpp b/test/gtx/gtx_fast_trigonometry.cpp
-+index f3bf17bf..f3c4e957 100644
-+--- a/test/gtx/gtx_fast_trigonometry.cpp
-++++ b/test/gtx/gtx_fast_trigonometry.cpp
-+@@ -239,12 +239,12 @@ namespace taylorCos
-+ 		std::vector<glm::vec4> Results;
-+ 		Results.resize(Samples);
-+ 
-+-		float Steps = (End - Begin) / Samples;
-++		float Steps = (End - Begin) / float(Samples);
-+ 
-+ 		std::clock_t const TimeStampBegin = std::clock();
-+ 
-+ 		for(std::size_t i = 0; i < Samples; ++i)
-+-			Results[i] = fastCosNew(AngleShift + glm::vec4(Begin + Steps * i));
-++			Results[i] = fastCosNew(AngleShift + glm::vec4(Begin + Steps * float(i)));
-+ 
-+ 		std::clock_t const TimeStampEnd = std::clock();
-+ 
-+@@ -280,12 +280,12 @@ namespace taylorCos
-+ 		std::vector<glm::vec4> Results;
-+ 		Results.resize(Samples);
-+ 
-+-		float Steps = (End - Begin) / Samples;
-++		float Steps = (End - Begin) / float(Samples);
-+ 
-+ 		std::clock_t const TimeStampBegin = std::clock();
-+ 
-+ 		for(std::size_t i = 0; i < Samples; ++i)
-+-			Results[i] = taylorCos::fastCosDeterminisctic(AngleShift + glm::vec4(Begin + Steps * i));
-++			Results[i] = taylorCos::fastCosDeterminisctic(AngleShift + glm::vec4(Begin + Steps * float(i)));
-+ 
-+ 		std::clock_t const TimeStampEnd = std::clock();
-+ 
-+@@ -327,12 +327,12 @@ namespace taylorCos
-+ 		std::vector<glm::vec4> Results;
-+ 		Results.resize(Samples);
-+ 
-+-		float Steps = (End - Begin) / Samples;
-++		float Steps = (End - Begin) / float(Samples);
-+ 
-+ 		std::clock_t const TimeStampBegin = std::clock();
-+ 
-+ 		for(std::size_t i = 0; i < Samples; ++i)
-+-			Results[i] = taylorCos::fastRefCos(AngleShift + glm::vec4(Begin + Steps * i));
-++			Results[i] = taylorCos::fastRefCos(AngleShift + glm::vec4(Begin + Steps * float(i)));
-+ 
-+ 		std::clock_t const TimeStampEnd = std::clock();
-+ 
-+@@ -349,12 +349,12 @@ namespace taylorCos
-+ 		std::vector<glm::vec4> Results;
-+ 		Results.resize(Samples);
-+ 
-+-		float Steps = (End - Begin) / Samples;
-++		float Steps = (End - Begin) / float(Samples);
-+ 
-+ 		std::clock_t const TimeStampBegin = std::clock();
-+ 
-+ 		for(std::size_t i = 0; i < Samples; ++i)
-+-			Results[i] = glm::fastCos(AngleShift + glm::vec4(Begin + Steps * i));
-++			Results[i] = glm::fastCos(AngleShift + glm::vec4(Begin + Steps * float(i)));
-+ 
-+ 		std::clock_t const TimeStampEnd = std::clock();
-+ 
-+@@ -371,12 +371,12 @@ namespace taylorCos
-+ 		std::vector<glm::vec4> Results;
-+ 		Results.resize(Samples);
-+ 
-+-		float Steps = (End - Begin) / Samples;
-++		float Steps = (End - Begin) / float(Samples);
-+ 
-+ 		std::clock_t const TimeStampBegin = std::clock();
-+ 
-+ 		for(std::size_t i = 0; i < Samples; ++i)
-+-			Results[i] = glm::cos(AngleShift + glm::vec4(Begin + Steps * i));
-++			Results[i] = glm::cos(AngleShift + glm::vec4(Begin + Steps * float(i)));
-+ 
-+ 		std::clock_t const TimeStampEnd = std::clock();
-+ 
-+@@ -466,12 +466,12 @@ namespace taylor2
-+ 		std::vector<float> Results;
-+ 		Results.resize(Samples);
-+ 
-+-		float Steps = (End - Begin) / Samples;
-++		float Steps = (End - Begin) / float(Samples);
-+ 
-+ 		std::clock_t const TimeStampBegin = std::clock();
-+ 
-+ 		for(std::size_t i = 0; i < Samples; ++i)
-+-			Results[i] = taylorCosA(AngleShift.x + Begin + Steps * i);
-++			Results[i] = taylorCosA(AngleShift.x + Begin + Steps * float(i));
-+ 
-+ 		std::clock_t const TimeStampEnd = std::clock();
-+ 
-+@@ -488,12 +488,12 @@ namespace taylor2
-+ 		std::vector<float> Results;
-+ 		Results.resize(Samples);
-+ 
-+-		float Steps = (End - Begin) / Samples;
-++		float Steps = (End - Begin) / float(Samples);
-+ 
-+ 		std::clock_t const TimeStampBegin = std::clock();
-+ 
-+ 		for(std::size_t i = 0; i < Samples; ++i)
-+-			Results[i] = taylorCosB(AngleShift.x + Begin + Steps * i);
-++			Results[i] = taylorCosB(AngleShift.x + Begin + Steps * float(i));
-+ 
-+ 		std::clock_t const TimeStampEnd = std::clock();
-+ 
-+@@ -510,12 +510,12 @@ namespace taylor2
-+ 		std::vector<float> Results;
-+ 		Results.resize(Samples);
-+ 
-+-		float Steps = (End - Begin) / Samples;
-++		float Steps = (End - Begin) / float(Samples);
-+ 
-+ 		std::clock_t const TimeStampBegin = std::clock();
-+ 
-+ 		for(std::size_t i = 0; i < Samples; ++i)
-+-			Results[i] = taylorCosC(AngleShift.x + Begin + Steps * i);
-++			Results[i] = taylorCosC(AngleShift.x + Begin + Steps * float(i));
-+ 
-+ 		std::clock_t const TimeStampEnd = std::clock();
-+ 
++  private:
++   std::condition_variable cv_;
++-  std::mutex lock_;
+++  mutable std::mutex lock_;
++   std::queue<T> buffer_;
++   bool eof_;
++ };
 +-- 
 +2.24.1
 +
-diff --git a/meta-oe/recipes-graphics/glm/glm/glm.pc.in b/meta-oe/recipes-graphics/glm/glm/glm.pc.in
-new file mode 100644
-index 0000000000..54052e287d
---- /dev/null
-+++ b/meta-oe/recipes-graphics/glm/glm/glm.pc.in
-@@ -0,0 +1,7 @@
-+prefix=/usr
-+includedir=${prefix}/include
-+
-+Name: GLM
-+Description: OpenGL Mathematics
-+Version: @VERSION@
-+Cflags: -I${includedir}
-diff --git a/meta-oe/recipes-graphics/glm/glm/glmConfig.cmake.in b/meta-oe/recipes-graphics/glm/glm/glmConfig.cmake.in
-new file mode 100644
-index 0000000000..8ab23a18d7
---- /dev/null
-+++ b/meta-oe/recipes-graphics/glm/glm/glmConfig.cmake.in
-@@ -0,0 +1,20 @@
-+set(GLM_VERSION "@VERSION@")
-+
-+
-+####### Expanded from @PACKAGE_INIT@ by configure_package_config_file() #######
-+get_filename_component(PACKAGE_PREFIX_DIR "${CMAKE_CURRENT_LIST_DIR}/../../../" ABSOLUTE)
-+
-+macro(set_and_check _var _file)
-+  set(${_var} "${_file}")
-+  if(NOT EXISTS "${_file}")
-+    message(FATAL_ERROR "File or directory ${_file} referenced by variable ${_var} does not exist !")
-+  endif()
-+endmacro()
-+
-+####################################################################################
-+
-+set_and_check(GLM_INCLUDE_DIRS "${PACKAGE_PREFIX_DIR}/include")
-+
-+if (NOT CMAKE_VERSION VERSION_LESS "3.0")
-+    include("${CMAKE_CURRENT_LIST_DIR}/glmTargets.cmake")
-+endif()
-diff --git a/meta-oe/recipes-graphics/glm/glm/glmConfigVersion.cmake.in b/meta-oe/recipes-graphics/glm/glm/glmConfigVersion.cmake.in
-new file mode 100644
-index 0000000000..561a0db61f
---- /dev/null
-+++ b/meta-oe/recipes-graphics/glm/glm/glmConfigVersion.cmake.in
-@@ -0,0 +1,31 @@
-+# This is a basic version file for the Config-mode of find_package().
-+# It is used by write_basic_package_version_file() as input file for configure_file()
-+# to create a version-file which can be installed along a config.cmake file.
-+#
-+# The created file sets PACKAGE_VERSION_EXACT if the current version string and
-+# the requested version string are exactly the same and it sets
-+# PACKAGE_VERSION_COMPATIBLE if the current version is >= requested version.
-+# The variable CVF_VERSION must be set before calling configure_file().
-+
-+set(PACKAGE_VERSION "@VERSION@")
-+
-+if(PACKAGE_VERSION VERSION_LESS PACKAGE_FIND_VERSION)
-+  set(PACKAGE_VERSION_COMPATIBLE FALSE)
-+else()
-+  set(PACKAGE_VERSION_COMPATIBLE TRUE)
-+  if(PACKAGE_FIND_VERSION STREQUAL PACKAGE_VERSION)
-+    set(PACKAGE_VERSION_EXACT TRUE)
-+  endif()
-+endif()
-+
-+# if the installed or the using project don't have CMAKE_SIZEOF_VOID_P set, ignore it:
-+if("${CMAKE_SIZEOF_VOID_P}" STREQUAL "" OR "8" STREQUAL "")
-+   return()
-+endif()
-+
-+# check that the installed version has the same 32/64bit-ness as the one which is currently searching:
-+if(NOT CMAKE_SIZEOF_VOID_P STREQUAL "8")
-+   math(EXPR installedBits "8 * 8")
-+   set(PACKAGE_VERSION "${PACKAGE_VERSION} (${installedBits}bit)")
-+   set(PACKAGE_VERSION_UNSUITABLE FALSE)
-+endif()
-diff --git a/meta-oe/recipes-graphics/glm/glm/glmTargets.cmake b/meta-oe/recipes-graphics/glm/glm/glmTargets.cmake
-new file mode 100644
-index 0000000000..905b67731b
---- /dev/null
-+++ b/meta-oe/recipes-graphics/glm/glm/glmTargets.cmake
-@@ -0,0 +1,107 @@
-+# Generated by CMake
-+
-+if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.5)
-+   message(FATAL_ERROR "CMake >= 2.6.0 required")
-+endif()
-+cmake_policy(PUSH)
-+cmake_policy(VERSION 2.6)
-+#----------------------------------------------------------------
-+# Generated CMake target import file.
-+#----------------------------------------------------------------
-+
-+# Commands may need to know the format version.
-+set(CMAKE_IMPORT_FILE_VERSION 1)
-+
-+# Protect against multiple inclusion, which would fail when already imported targets are added once more.
-+set(_targetsDefined)
-+set(_targetsNotDefined)
-+set(_expectedTargets)
-+foreach(_expectedTarget glm)
-+  list(APPEND _expectedTargets ${_expectedTarget})
-+  if(NOT TARGET ${_expectedTarget})
-+    list(APPEND _targetsNotDefined ${_expectedTarget})
-+  endif()
-+  if(TARGET ${_expectedTarget})
-+    list(APPEND _targetsDefined ${_expectedTarget})
-+  endif()
-+endforeach()
-+if("${_targetsDefined}" STREQUAL "${_expectedTargets}")
-+  unset(_targetsDefined)
-+  unset(_targetsNotDefined)
-+  unset(_expectedTargets)
-+  set(CMAKE_IMPORT_FILE_VERSION)
-+  cmake_policy(POP)
-+  return()
-+endif()
-+if(NOT "${_targetsDefined}" STREQUAL "")
-+  message(FATAL_ERROR "Some (but not all) targets in this export set were already defined.\nTargets Defined: ${_targetsDefined}\nTargets not yet defined: ${_targetsNotDefined}\n")
-+endif()
-+unset(_targetsDefined)
-+unset(_targetsNotDefined)
-+unset(_expectedTargets)
-+
-+
-+# Compute the installation prefix relative to this file.
-+get_filename_component(_IMPORT_PREFIX "${CMAKE_CURRENT_LIST_FILE}" PATH)
-+# Use original install prefix when loaded through a
-+# cross-prefix symbolic link such as /lib -> /usr/lib.
-+get_filename_component(_realCurr "${_IMPORT_PREFIX}" REALPATH)
-+get_filename_component(_realOrig "/usr/lib/cmake/glm" REALPATH)
-+if(_realCurr STREQUAL _realOrig)
-+  set(_IMPORT_PREFIX "/usr/lib/cmake/glm")
-+endif()
-+unset(_realOrig)
-+unset(_realCurr)
-+get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
-+get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
-+get_filename_component(_IMPORT_PREFIX "${_IMPORT_PREFIX}" PATH)
-+if(_IMPORT_PREFIX STREQUAL "/")
-+  set(_IMPORT_PREFIX "")
-+endif()
-+
-+# Create imported target glm
-+add_library(glm INTERFACE IMPORTED)
-+
-+set_target_properties(glm PROPERTIES
-+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
-+)
-+
-+if(CMAKE_VERSION VERSION_LESS 3.0.0)
-+  message(FATAL_ERROR "This file relies on consumers using CMake 3.0.0 or greater.")
-+endif()
-+
-+# Load information for each installed configuration.
-+get_filename_component(_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
-+file(GLOB CONFIG_FILES "${_DIR}/glmTargets-*.cmake")
-+foreach(f ${CONFIG_FILES})
-+  include(${f})
-+endforeach()
-+
-+# Cleanup temporary variables.
-+set(_IMPORT_PREFIX)
-+
-+# Loop over all imported files and verify that they actually exist
-+foreach(target ${_IMPORT_CHECK_TARGETS} )
-+  foreach(file ${_IMPORT_CHECK_FILES_FOR_${target}} )
-+    if(NOT EXISTS "${file}" )
-+      message(FATAL_ERROR "The imported target \"${target}\" references the file
-+   \"${file}\"
-+but this file does not exist.  Possible reasons include:
-+* The file was deleted, renamed, or moved to another location.
-+* An install or uninstall procedure did not complete successfully.
-+* The installation package was faulty and contained
-+   \"${CMAKE_CURRENT_LIST_FILE}\"
-+but not all the files it references.
-+")
-+    endif()
-+  endforeach()
-+  unset(_IMPORT_CHECK_FILES_FOR_${target})
-+endforeach()
-+unset(_IMPORT_CHECK_TARGETS)
-+
-+# This file does not depend on other imported targets which have
-+# been exported from the same project but in a separate export set.
-+
-+# Commands beyond this point should not need to know the version.
-+set(CMAKE_IMPORT_FILE_VERSION)
-+cmake_policy(POP)
-diff --git a/meta-oe/recipes-graphics/glm/glm_0.9.9.5.bb b/meta-oe/recipes-graphics/glm/glm_0.9.9.5.bb
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-fix-Issue-5303.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-fix-Issue-5303.patch
 deleted file mode 100644
-index f367e4eae0..0000000000
---- a/meta-oe/recipes-graphics/glm/glm_0.9.9.5.bb
+index ba9834dfef..0000000000
+--- a/meta-oe/recipes-dbs/rocksdb/files/0001-fix-Issue-5303.patch
 +++ /dev/null
-@@ -1,23 +0,0 @@
--SUMMARY = "OpenGL Mathematics Library"
--DESCRIPTION = "OpenGL Mathematics (GLM) is a header only C++ \
--mathematics library for graphics software based on the OpenGL \
--Shading Language (GLSL) specifications."
--HOMEPAGE = "https://glm.g-truc.net"
--BUGTRACKER = "https://github.com/g-truc/glm/issues"
--SECTION = "libs"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://readme.md;beginline=21;endline=22;md5=3075b5727d36f29edccf97b93e72b790"
+@@ -1,80 +0,0 @@
+-From 512aaf3d833973f6146c6f1235b590901876175e Mon Sep 17 00:00:00 2001
+-From: biocodz <biocodz@protonmail.com>
+-Date: Fri, 7 Jun 2019 09:49:37 -0400
+-Subject: [PATCH] fix Issue 5303
 -
--SRC_URI = " \
--    git://github.com/g-truc/glm;branch=master \
--"
--# v0.9.9.5
--SRCREV = "d162eee1e6f7c317a09229fe6ceab8ec6ab9a4b4"
+-Upstream-Status: Submitted [https://github.com/facebook/rocksdb/pull/5426]
 -
--S = "${WORKDIR}/git"
+----
+- db/internal_stats.h                                | 21 +++++++++++++++++++++
+- db/version_edit.h                                  |  8 ++++++++
+- utilities/persistent_cache/persistent_cache_util.h |  2 +-
+- 3 files changed, 30 insertions(+), 1 deletion(-)
 -
--inherit cmake
+-diff --git a/db/internal_stats.h b/db/internal_stats.h
+-index 6fa8727a4..09447644d 100644
+---- a/db/internal_stats.h
+-+++ b/db/internal_stats.h
+-@@ -236,6 +236,27 @@ class InternalStats {
+-       }
+-     }
 -
--RDEPENDS_${PN}-dev = ""
+-+	CompactionStats & operator=(const CompactionStats& c) {
+-+	  count = c.count;
+-+	  micros = c.micros;
+-+	  cpu_micros = c.cpu_micros;
+-+	  bytes_read_non_output_levels = c.bytes_read_non_output_levels;
+-+	  bytes_read_output_level = c.bytes_read_output_level;
+-+	  bytes_written = c.bytes_written;
+-+	  bytes_moved = c.bytes_moved;
+-+	  num_input_files_in_non_output_levels =
+-+	      c.num_input_files_in_non_output_levels;
+-+	  num_input_files_in_output_level = c.num_input_files_in_output_level;
+-+	  num_output_files = c.num_output_files;
+-+	  num_input_records = c.num_input_records;
+-+	  num_dropped_records = c.num_dropped_records;
+-+	  int num_of_reasons = static_cast<int>(CompactionReason::kNumOfReasons);
+-+	  for (int i = 0; i < num_of_reasons; i++) {
+-+	  	counts[i] = c.counts[i];
+-+	  }
+-+	  return *this;
+-+	}
+-+
+-     void Clear() {
+-       this->micros = 0;
+-       this->cpu_micros = 0;
+-diff --git a/db/version_edit.h b/db/version_edit.h
+-index 229531792..5c50ef552 100644
+---- a/db/version_edit.h
+-+++ b/db/version_edit.h
+-@@ -52,6 +52,14 @@ struct FileDescriptor {
+-         smallest_seqno(_smallest_seqno),
+-         largest_seqno(_largest_seqno) {}
 -
--BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-graphics/glm/glm_0.9.9.6.bb b/meta-oe/recipes-graphics/glm/glm_0.9.9.6.bb
-new file mode 100644
-index 0000000000..e2f4dbebc5
---- /dev/null
-+++ b/meta-oe/recipes-graphics/glm/glm_0.9.9.6.bb
-@@ -0,0 +1,39 @@
-+SUMMARY = "OpenGL Mathematics Library"
-+DESCRIPTION = "OpenGL Mathematics (GLM) is a header only C++ \
-+mathematics library for graphics software based on the OpenGL \
-+Shading Language (GLSL) specifications."
-+HOMEPAGE = "https://glm.g-truc.net"
-+BUGTRACKER = "https://github.com/g-truc/glm/issues"
-+SECTION = "libs"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://copying.txt;md5=4a735e33f271f57404fda17e80085411"
-+
-+SRC_URI = " \
-+    git://github.com/g-truc/glm;branch=master \
-+    file://0001-Fix-Wimplicit-int-float-conversion-warnings-with-cla.patch \
-+    file://glmConfig.cmake.in \
-+    file://glmConfigVersion.cmake.in \
-+    file://glm.pc.in \
-+    file://glmTargets.cmake \
-+"
-+SRCREV = "4db8f89aace8f04c839b606e15b39fb8383ec732"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+do_install() {
-+    install -d ${D}${includedir} ${D}${docdir}/glm ${D}${libdir}/pkgconfig ${D}${libdir}/cmake/glm
-+    cp -R --no-dereference --preserve=mode,links ${S}/glm ${D}${includedir}
-+    cp -R --no-dereference --preserve=mode,links ${S}/doc ${D}${docdir}/glm
-+    rm ${D}${includedir}/glm/CMakeLists.txt
-+    sed "s/@VERSION@/${PV}/" ${WORKDIR}/glmConfigVersion.cmake.in > ${D}${libdir}/cmake/glm/glmConfigVersion.cmake
-+    sed "s/@VERSION@/${PV}/" ${WORKDIR}/glmConfig.cmake.in > ${D}${libdir}/cmake/glm/glmConfig.cmake
-+    sed "s/@VERSION@/${PV}/" ${WORKDIR}/glm.pc.in > ${D}${libdir}/pkgconfig/glm.pc
-+    install -Dm644 ${WORKDIR}/glmTargets.cmake ${D}${libdir}/cmake/glm/glmTargets.cmake
-+
-+}
-+
-+RDEPENDS_${PN}-dev = ""
-+
-+BBCLASSEXTEND = "native"
+-+  FileDescriptor(const FileDescriptor& fd) {
+-+    table_reader = fd.table_reader;
+-+    packed_number_and_path_id = fd.packed_number_and_path_id;
+-+    file_size = fd.file_size;
+-+    smallest_seqno = fd.smallest_seqno;
+-+    largest_seqno = fd.largest_seqno;
+-+  }
+-+
+-   FileDescriptor& operator=(const FileDescriptor& fd) {
+-     table_reader = fd.table_reader;
+-     packed_number_and_path_id = fd.packed_number_and_path_id;
+-diff --git a/utilities/persistent_cache/persistent_cache_util.h b/utilities/persistent_cache/persistent_cache_util.h
+-index 214bb5875..254c038f9 100644
+---- a/utilities/persistent_cache/persistent_cache_util.h
+-+++ b/utilities/persistent_cache/persistent_cache_util.h
+-@@ -48,7 +48,7 @@ class BoundedQueue {
+-     T t = std::move(q_.front());
+-     size_ -= t.Size();
+-     q_.pop_front();
+--    return std::move(t);
+-+    return t;
+-   }
+-
+-   size_t Size() const {
+---
+-2.11.0
+-
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch
+deleted file mode 100644
+index ef0429a3c8..0000000000
+--- a/meta-oe/recipes-dbs/rocksdb/files/0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From 8996f075e64da0e6ffeda57632ef31f8710defcc Mon Sep 17 00:00:00 2001
+-From: He Zhe <zhe.he@windriver.com>
+-Date: Fri, 15 Mar 2019 16:47:03 +0800
+-Subject: [PATCH] utilities: Fix build failure with -Werror=maybe-uninitialized
+-
+-Summary:
+-Initialize magic_number to zero to avoid such failure.
+-utilities/blob_db/blob_log_format.cc:91:3: error: 'magic_number' may be used
+-uninitialized in this function [-Werror=maybe-uninitialized]
+-   if (magic_number != kMagicNumber) {
+-   ^~
+-
+-Upstream-Status: Accepted [expected version 5.19]
+-
+-Signed-off-by: He Zhe <zhe.he@windriver.com>
+----
+- utilities/blob_db/blob_log_format.cc | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/utilities/blob_db/blob_log_format.cc b/utilities/blob_db/blob_log_format.cc
+-index 2bf7028..8726cb8 100644
+---- a/utilities/blob_db/blob_log_format.cc
+-+++ b/utilities/blob_db/blob_log_format.cc
+-@@ -82,7 +82,7 @@ Status BlobLogFooter::DecodeFrom(Slice src) {
+-   uint32_t src_crc = 0;
+-   src_crc = crc32c::Value(src.data(), BlobLogFooter::kSize - sizeof(uint32_t));
+-   src_crc = crc32c::Mask(src_crc);
+--  uint32_t magic_number;
+-+  uint32_t magic_number = 0;
+-   if (!GetFixed32(&src, &magic_number) || !GetFixed64(&src, &blob_count) ||
+-       !GetFixed64(&src, &expiration_range.first) ||
+-       !GetFixed64(&src, &expiration_range.second) || !GetFixed32(&src, &crc)) {
+--- 
+-2.7.4
+-
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+index 9fd5ee15be..68c6bc2ffa 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+@@ -6,15 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
+ 
+-SRCREV = "628a7fd74b5611657106c57f724f1682b114684c"
+-SRCBRANCH = "6.0.fb"
+-PV = "6.0.2"
++SRCREV = "4cfbd87afd08a16df28436fb990ef6b154ee6114"
++SRCBRANCH = "6.5.fb"
++PV = "6.5.2"
+ 
+ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+-           file://0001-CMake-has-stock-FindZLIB-in-upper-case.patch \
+-           file://0001-Disable-Wshadow-and-do-not-mark-default-copy-constru.patch \
+-           file://0001-utilities-Fix-build-failure-with-Werror-maybe-uninit.patch \
+-           file://0001-fix-Issue-5303.patch \
++           file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
+@@ -22,9 +19,9 @@ S = "${WORKDIR}/git"
+ inherit cmake
+ 
+ PACKAGECONFIG ??= "bzip2 zlib lz4 gflags"
+-PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON -DBZIP2_LIBRARIES:STRING=bz2,-DWITH_BZ2=OFF,bzip2"
+-PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON -DLZ4_LIBRARIES:STRING=lz4,-DWITH_LZ4=OFF,lz4"
+-PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON -DZLIB_LIBRARY:STRING=z,-DWITH_ZLIB=OFF,zlib"
++PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON,-DWITH_BZ2=OFF,bzip2"
++PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON,-DWITH_LZ4=OFF,lz4"
++PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
+ PACKAGECONFIG[zstd] = "-DWITH_ZSTD=ON,-DWITH_ZSTD=OFF,zstd"
+ PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
+ PACKAGECONFIG[gflags] = "-DWITH_GFLAGS=ON,-DWITH_GFLAGS=OFF,gflags"
 -- 
 2.24.1
 
