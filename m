@@ -1,35 +1,46 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id E845E7CE22
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D339D7EC64
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2019 09:24:48 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47n85V5gGYzRj;
-	Tue, 31 Dec 2019 10:24:46 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1577784287;
-	bh=8UK9tVS3FiCBz2mPAXqIEAYsXwNObzeAuxpCTmc2Cfc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=s8gbcJQT3vKumIzz1dzGhSBkzpKepMw395MCNfTGVRKc21QJ6frZXAi92aeVogTtE
-	VELvSwtVopEaGaw0Bxg0JGAoH2jxncgUTITbUyfgRjKUxMxeoELsExASbcT8pcwgtP
-	FI98iEkHQFrtyyyKX0dvpuLeUqfTzVwLTq9lQpvj8iqOmQ2LFBtcKp+XMCL1UhOlkh
-	586t1pSUMYH6gwmZnvQg6F8fSXjakxXMwvQPQt7Im/qoM2D7FtYQLbE0MeTf+gNsoq
-	l2Ac9oL2Vj+ove4XqAmzrT9QbhuZ4W/M1Prvedm04QPleLfTrNYXcU9EgUlVan6Qb4
-	Uqo113aAlRjfxJA0hd31wgOFrkpjVxKtIgHrXQXB4xD3ggoYMGEPb1ExcywMxotJ4c
-	M+Zu0dVK5eAi+vFOlfjAvKRHIGLsusSgA6whaZGeNiNbKnianzSl/TpaXOHBgL2Rq4
-	KKG0QR03z2A32tetzkeJDoVXPOH4PU29qsPR2BBEYoxqTbaWF9KWwldVnYWwxB+VTk
-	JZEdsDX+zLCRv/WSRdpABv/8FMUvDaM5OG0J+gWerYfMOH+36xWd7xxIK7lvAhcGHt
-	LXe8FvlFylpa0v4U8ZwgYsgwWFwkP3LpD2o9NFC50pk9LEveK9uoXU65MuJZMrBcbZ
-	1OsMXese1ZEYBqubxsjvX8Sw=
-Date: Tue, 31 Dec 2019 11:24:44 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20191231092444.GD934@localhost>
-References: <20191231010652.3206534-1-raj.khem@gmail.com>
+	Tue, 31 Dec 2019 19:02:29 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id j5so32068128qtq.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Dec 2019 11:02:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=b+Qo054VwSASjhpwCQbvp2Lp15UAk2UmcBCqfAp0Rpo=;
+	b=e+c06yQmIzxIgcVm6NcZQJI5rXxjMCfeLSzNPSZy5DzHIy1x2tYRzokFXdazhZRBIp
+	cA10djU3qncmOp0Rmuku+UmiRqu2MhaGrJSRnKr1q8Kl06a6JRZ57096mGcsa0SPbi90
+	9D3NP8xIXgzcDgBOO3W2VoXlEi6qpVXXRaWJu0hrLiTeyqnyQsfbDJe29OEakmY6r76A
+	JPTBBEeh1rR4S2oKX0YtcNEWplBSWZosw5h95oxSrJr9D9ECoRHeRquFXnyGaW9oyskn
+	CGW+uhhqaW9TSqwgJoa45HAza/TxOy8XGDDhUl+BqODD9muaX+O2UDn6VehvZeoeJxpc
+	yavw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=b+Qo054VwSASjhpwCQbvp2Lp15UAk2UmcBCqfAp0Rpo=;
+	b=VR2iT5AJaKl7UFMO0NiDCbVjMltz+W4uyjiUBaqNNE4oUQuhmss9wZ5ge2OgAgBN7m
+	5LFM06Tx2XW4loddSNaRU3NIctzH2b4Tnuk1soYVuOLh3pI9lnlhuHMcaMyKe6zptX/H
+	CCv26Qs7iln2YnvFclw3VDEjJRUkNVAJ3WT/C24zfVOmpfh+R2scKU18aZt972KMQY2Q
+	SzOgUFiYmWeanr9E4mchjWVqf4ZBOXsOewuxegKbPwk8ALky/+ME6PpmaJGqgkaZGFKF
+	Ec7blJDddYgKMVEGytaMJ9G/aXwIYVsDXGKCd2ZrN9HWcwNBYEYWZdX0gs/uJDaqZgqe
+	7VLw==
+X-Gm-Message-State: APjAAAV2y28Z9dIFdUM1Yrya3wUSSd6ybVzm+9zaRaw0hbtUG++3mJom
+	rX63WjbBpl9RI6fbrIHg2crGsDsV2F7JYbtx0dMcAR0XGIA=
+X-Google-Smtp-Source: APXvYqzJ5gX5KNsZVMI3zUYN8+ABRnq1D2RyWwWhzwjZNmekOzHtB+RWyLPFOwxTeiKQgnMcM5El9hSrJVQ0bpUMOUY=
+X-Received: by 2002:ac8:544f:: with SMTP id d15mr54174345qtq.53.1577818950386; 
+	Tue, 31 Dec 2019 11:02:30 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20191231010652.3206534-1-raj.khem@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
+References: <20191231010652.3206534-1-raj.khem@gmail.com>
+	<20191231092444.GD934@localhost>
+In-Reply-To: <20191231092444.GD934@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 31 Dec 2019 11:02:07 -0800
+Message-ID: <CAMKF1spurUq6kzjEPWA+Q2wS3KLfDbSTqKOFkT4+cmf2t9gyTA@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 1/8] glfw: Update to latest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -43,24 +54,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Dec 2019 09:24:49 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Tue, 31 Dec 2019 19:02:30 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Dec 30, 2019 at 05:06:46PM -0800, Khem Raj wrote:
->...
-> FPIC in static archives is needed for arches like aarch64
+On Tue, Dec 31, 2019 at 1:24 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> On Mon, Dec 30, 2019 at 05:06:46PM -0800, Khem Raj wrote:
+> >...
+> > FPIC in static archives is needed for arches like aarch64
+>
+> This is not true.
 
-This is not true.
+I should have said shared objects see
+http://errors.yoctoproject.org/Errors/Details/301233/
 
-What is the problem you were trying to fix?
-
->...
-> +PV .= "git${SRCPV}"
->...
-
-This should be +git${SRCPV}
-
-cu
-Adrian
+>
+> What is the problem you were trying to fix?
+>
+> >...
+> > +PV .= "git${SRCPV}"
+> >...
+>
+> This should be +git${SRCPV}
+>
+> cu
+> Adrian
 
