@@ -1,33 +1,24 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 973337F220
+Return-Path: <mohamad.noor.alim.hussin@intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id 205297CED7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2019 06:52:57 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,378,1571673600"; d="scan'208";a="81050459"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 31 Dec 2019 14:52:56 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 660BE4CE1CA7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2019 14:44:02 +0800 (CST)
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Tue, 31 Dec 2019 14:52:53 +0800
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 31 Dec 2019 14:52:53 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 31 Dec 2019 14:54:07 +0800
-Message-ID: <20191231065407.31084-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Tue, 31 Dec 2019 07:21:42 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	30 Dec 2019 23:21:44 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.69,378,1571727600"; d="scan'208";a="213554978"
+Received: from hussinmo-desk.png.intel.com ([172.30.199.124])
+	by orsmga008.jf.intel.com with ESMTP; 30 Dec 2019 23:21:42 -0800
+From: mohamad.noor.alim.hussin@intel.com
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 31 Dec 2019 15:19:46 +0800
+Message-Id: <20191231071948.28950-1-mohamad.noor.alim.hussin@intel.com>
+X-Mailer: git-send-email 2.19.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 660BE4CE1CA7.AC124
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-alembic: upgrade 1.3.1 -> 1.3.2
+Subject: [meta-java][PATCH v3 0/2] Add openjdk-12 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,45 +31,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Dec 2019 06:52:58 -0000
+X-List-Received-Date: Tue, 31 Dec 2019 07:21:43 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- meta-python/recipes-devtools/python/python-alembic.inc        | 4 ++--
- .../{python-alembic_1.3.1.bb => python-alembic_1.3.2.bb}      | 0
- .../{python3-alembic_1.3.1.bb => python3-alembic_1.3.2.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-alembic_1.3.1.bb => python-alembic_1.3.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-alembic_1.3.1.bb => python3-alembic_1.3.2.bb} (100%)
+From: Mohamad Noor Alim Hussin <mohamad.noor.alim.hussin@intel.com>
 
-diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
-index 7b4b08c4d..c94c142dd 100644
---- a/meta-python/recipes-devtools/python/python-alembic.inc
-+++ b/meta-python/recipes-devtools/python/python-alembic.inc
-@@ -2,8 +2,8 @@ DESCRIPTION = "A database migration tool for SQLAlchemy"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=28aaf14a6592d14dbfb2f4abd597aa27"
- 
--SRC_URI[md5sum] = "6ac9edfb0b3951fef3b356d2761ebb3f"
--SRC_URI[sha256sum] = "49277bb7242192bbb9eac58fed4fe02ec6c3a2a4b4345d2171197459266482b2"
-+SRC_URI[md5sum] = "3d7584a8fb0203ec82b90baa726d2bd9"
-+SRC_URI[sha256sum] = "3b0cb1948833e062f4048992fbc97ecfaaaac24aaa0d83a1202a99fb58af8c6d"
- 
- PYPI_PACKAGE = "alembic"
- 
-diff --git a/meta-python/recipes-devtools/python/python-alembic_1.3.1.bb b/meta-python/recipes-devtools/python/python-alembic_1.3.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-alembic_1.3.1.bb
-rename to meta-python/recipes-devtools/python/python-alembic_1.3.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.3.1.bb b/meta-python/recipes-devtools/python/python3-alembic_1.3.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-alembic_1.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-alembic_1.3.2.bb
+This patch series contain new openjdk-12 recipe and
+addtitonal 2 test cases to test openjdk-12. See each
+patch for detail commit message.
+
+Mohamad Noor Alim Hussin (2):
+  openjdk-12: Add new recipe
+  openjdk-12: Add test cases for openjdk-12
+
+ lib/oeqa/files/hello.java                     |   5 +
+ lib/oeqa/runtime/cases/java.py                |  15 ++
+ lib/oeqa/runtime/cases/javac.py               |  27 +++-
+ recipes-core/openjdk/openjdk-12-common.inc    | 151 ++++++++++++++++++
+ recipes-core/openjdk/openjdk-12-cross.inc     | 145 +++++++++++++++++
+ recipes-core/openjdk/openjdk-12-native.inc    |  86 ++++++++++
+ .../openjdk/openjdk-12-native_2+10.bb         |   2 +
+ .../openjdk-12-release-2+10-aarch32.inc       |  15 ++
+ .../openjdk-12-release-2+10-aarch64.inc       |  12 ++
+ .../openjdk-12-release-2+10-common.inc        |  35 ++++
+ .../openjdk/openjdk-12-release-2+10.inc       |  11 ++
+ recipes-core/openjdk/openjdk-12_2+10.bb       |  57 +++++++
+ recipes-core/openjdk/openjre-12_2+10.bb       |  54 +++++++
+ .../0001-fix-stringop-truncate-gcc8.patch     |  11 ++
+ .../0002-fix-stringop-truncate-gcc8.patch     |  38 +++++
+ .../filter-aclocal-copy-too.patch             |  10 ++
+ .../openjdk/patches-openjdk-12/jvm.cfg        |  41 +++++
+ ...njdk12-find-compiler-fix-env-respect.patch |  11 ++
+ ...move-shell-variables-from-autoheader.patch |  28 ++++
+ .../images/openjdk-12-test-image.bb           |   3 +
+ .../images/openjre-12-test-image.bb           |   3 +
+ 21 files changed, 756 insertions(+), 4 deletions(-)
+ create mode 100644 lib/oeqa/files/hello.java
+ create mode 100644 recipes-core/openjdk/openjdk-12-common.inc
+ create mode 100644 recipes-core/openjdk/openjdk-12-cross.inc
+ create mode 100644 recipes-core/openjdk/openjdk-12-native.inc
+ create mode 100644 recipes-core/openjdk/openjdk-12-native_2+10.bb
+ create mode 100644 recipes-core/openjdk/openjdk-12-release-2+10-aarch32.inc
+ create mode 100644 recipes-core/openjdk/openjdk-12-release-2+10-aarch64.inc
+ create mode 100644 recipes-core/openjdk/openjdk-12-release-2+10-common.inc
+ create mode 100644 recipes-core/openjdk/openjdk-12-release-2+10.inc
+ create mode 100644 recipes-core/openjdk/openjdk-12_2+10.bb
+ create mode 100644 recipes-core/openjdk/openjre-12_2+10.bb
+ create mode 100644 recipes-core/openjdk/patches-openjdk-12/0001-fix-stringop-truncate-gcc8.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-12/0002-fix-stringop-truncate-gcc8.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-12/filter-aclocal-copy-too.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-12/jvm.cfg
+ create mode 100644 recipes-core/openjdk/patches-openjdk-12/openjdk12-find-compiler-fix-env-respect.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-12/remove-shell-variables-from-autoheader.patch
+ create mode 100644 recipes-images/images/openjdk-12-test-image.bb
+ create mode 100644 recipes-images/images/openjre-12-test-image.bb
+
 -- 
-2.20.1
-
-
+2.19.1
 
 
