@@ -1,54 +1,53 @@
 Return-Path: <rehsack@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id CEDAB7F9A7
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 56C797F9A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 21:27:35 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id c14so40615091wrn.7
+	Thu,  2 Jan 2020 21:29:48 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id t14so6926944wmi.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jan 2020 13:27:37 -0800 (PST)
+	Thu, 02 Jan 2020 13:29:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:message-id:mime-version:subject:date:in-reply-to:cc:to
-	:references; bh=g0hZB+nXi2mL5fYSruPAxGNe2de7bnsBIO5cwWs+6GY=;
-	b=Q6ifLNodLw7W5zpEdI63XdCLltTn0RE/ccMDEZqZjwyddWNBRnR8mX2tCySz4x8GT4
-	Rlfrj8OqXHH35O8uxVLwXbBToS4DbuJ5kRUdiNtvqag52UntkV9CbbCAtLcBQXFoCbqE
-	6mpXB/lSFkQPCBLnGzVYdhTZNA6+ilQqOzZBg7KQLQ7sExlajv7bbKt//rYS0+VEYfOj
-	rzTPKvTtaHKdLKi+zpRO4vgHSJ22NaoOYOCLtB0TYEtkSAqzb1JFnxsBc+yBPY4XQR0N
-	VNPtfNfAiLgcUplk/VIh0k1rVovXre2HlBb6wx59/EMIzXJGhpr/FcSZWR7Kd/K69riU
-	jIyg==
+	:references; bh=ZZw4RzEqknU2BNYZ1WWHzVTdQu9xO5vmR6nYrfQwFEk=;
+	b=UqOFHTUZ667HCKctYysjTxtXt+VDjROPVxpHI7FNJnkdfqO3MWQp7Mzw/izVDrPxg9
+	z9PfBNOVUgOqajFu/8hzwPOSHr/srlKq6KeB0x8okhXHhsTXS127Q2ze+X9v/+0xvO3H
+	64kdy0WhtWQOgE2f5gdm3BGMfxFcRqAF1bvEuGM8JKT7S2F6Sa+pN5MsG2YHyjbVoc6i
+	4LgJD1b/E5g96NSNLHlAJ+ujRvPNbfEVkOnxSy8uJwGQtnoo9e8ikJPVgajx7uVMP3Yu
+	+cU/+h6kySR96cz1Vg2kBzcxfIBdrP9iJpjUoeI10m3oI1hYM2Vprx9vIbbF99WWcvV4
+	WlFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:message-id:mime-version:subject:date
 	:in-reply-to:cc:to:references;
-	bh=g0hZB+nXi2mL5fYSruPAxGNe2de7bnsBIO5cwWs+6GY=;
-	b=qJBZ8e/GLg3UqqElC0OT3/uixyxNBuzhHX5CMMVTJ2SiOsB5tpYSn2jLSUQO71zcQ6
-	PebcZJrnUVxCusHdrlaMVa8jNKTVadvs9q41g0iCvP01R1Ww8EgmdL8BTT/fqYoioCt0
-	ysJId/MSHhcKAc98PAhhaPmMJemCM6G1eJs7iB1O6cQV2G36ZUj1SB4Z6+vKSO9sf+m2
-	oDJ+NRt339hT2eZeNuTY7JlmDH3ppkWnO58S71h0Dyoo5H49dIhLFkDke+VtPvM5hyNa
-	LnM824o3KfRtO7FBI0qj29XRgMyIe4EIml1N9ZyoZPDIHVf9DVh5WvoJI5xqzAuErXVW
-	5YZg==
-X-Gm-Message-State: APjAAAX3InHrbI0hMGpoXXlS6D7dIhAv+xMQaXXBYCWZZfXKbcVcpfcC
-	LY7+Ff0z1LqT7rCUAKErwZk=
-X-Google-Smtp-Source: APXvYqw6e04fqQWHhLkJ7g+ysR8/zuYQP7Rsu0NrRpSB+ZwS1axsY+G4duVukcV+vN7dwfNLEo3UVA==
-X-Received: by 2002:a5d:458d:: with SMTP id p13mr37200790wrq.314.1578000456695;
-	Thu, 02 Jan 2020 13:27:36 -0800 (PST)
+	bh=ZZw4RzEqknU2BNYZ1WWHzVTdQu9xO5vmR6nYrfQwFEk=;
+	b=qLmxrq/GlA4uOuKFd9u3aKZidHuPffntDmQDmD2UEJOw5IVZi3PbNAostFASAAXq4F
+	YY9qgIBaadyf5dLfB6+fM2tYIwoCNgI2FKdRIjfBC4HHzz4qlWNoEk7WSRiDSrGlVE48
+	MnllsBXlgbrj3VKDkgykoX0fqLndONQ/1bzHMW+11t1JOYBBi2VCkRxVYRHRbUPa+EzT
+	gsHcQP2Z/05whFEaESm8Z8z4AFwVUX7HtX+sIRyQOBoAfYjBPsTzo7tCbk8vEMv9ARRK
+	kMIvW4Euq2jZ8Lv0yIhjguR28FIcav/Ec9jItz0b3ibKIGbl1IcrvURx34MtU0or3b7Q
+	OZWQ==
+X-Gm-Message-State: APjAAAUl4RcnKnNUP8J544AOAECQer5tH4GmBH2F58bhUtOEC4aUm7Fp
+	H0fKfFeVeNW4UOPrwvWA2ew=
+X-Google-Smtp-Source: APXvYqwnuzchs5NhL0Ep12DPqEB2ETNRjN8jaLG0eopgKySln4i1c6a6epRplvwnmSESY4H2zGdwkQ==
+X-Received: by 2002:a7b:cbd6:: with SMTP id n22mr15455354wmi.118.1578000589072;
+	Thu, 02 Jan 2020 13:29:49 -0800 (PST)
 Received: from ernie.muppets.liwing.de (p5B25B970.dip0.t-ipconnect.de.
 	[91.37.185.112]) by smtp.gmail.com with ESMTPSA id
-	w13sm58079950wru.38.2020.01.02.13.27.35
+	r6sm57370590wrq.92.2020.01.02.13.29.47
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 02 Jan 2020 13:27:35 -0800 (PST)
+	Thu, 02 Jan 2020 13:29:48 -0800 (PST)
 Sender: Jens Rehsack <rehsack@gmail.com>
 From: Jens Rehsack <sno@netbsd.org>
-Message-Id: <867024C9-4645-4B2F-86C4-75E250A894E7@netbsd.org>
+Message-Id: <D2F21018-F908-4E42-8CF5-BCFE22EAA9DB@netbsd.org>
 Mime-Version: 1.0 (Mac OS X Mail 13.0 \(3608.40.2.2.4\))
-Date: Thu, 2 Jan 2020 22:27:34 +0100
-In-Reply-To: <CAMKF1srjDzrfhWgdnV2i0M=xxFFjKxbjgeFxrGu3r4pFB+F94A@mail.gmail.com>
+Date: Thu, 2 Jan 2020 22:29:47 +0100
+In-Reply-To: <20200102133724.1383-1-sno@netbsd.org>
 To: Khem Raj <raj.khem@gmail.com>
-References: <20200102133915.1516-1-sno@netbsd.org>
-	<CAMKF1srjDzrfhWgdnV2i0M=xxFFjKxbjgeFxrGu3r4pFB+F94A@mail.gmail.com>
+References: <20200102133724.1383-1-sno@netbsd.org>
 X-Mailer: Apple Mail (2.3608.40.2.2.4)
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-perl][PATCH] libunix-statgrab: add recipe
+Subject: Re: [meta-perl][PATCH] libconfig-autoconf-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,119 +60,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 21:27:37 -0000
-X-Groupsio-MsgNum: 81876
+X-List-Received-Date: Thu, 02 Jan 2020 21:29:48 -0000
+X-Groupsio-MsgNum: 81877
 Content-Type: multipart/signed;
-	boundary="Apple-Mail=_0EDF4A45-2CB5-4ABA-AC1F-AFA5F63E1251";
+	boundary="Apple-Mail=_775525FB-93CE-40CC-85AD-6EF860A39866";
 	protocol="application/pgp-signature"; micalg=pgp-sha512
 
---Apple-Mail=_0EDF4A45-2CB5-4ABA-AC1F-AFA5F63E1251
+--Apple-Mail=_775525FB-93CE-40CC-85AD-6EF860A39866
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain;
 	charset=us-ascii
 
+I uploaded 0.318 today to PAUSE.
+Sending new patch for that or an update - depending whether this is in =
+master tomorrow morning or not ;)
 
-
-> Am 02.01.2020 um 19:30 schrieb Khem Raj <raj.khem@gmail.com>:
+> Am 02.01.2020 um 14:37 schrieb Jens Rehsack <sno@NetBSD.org>:
 >=20
-> This seems to fail
-> https://errors.yoctoproject.org/Errors/Details/301385/
-> https://errors.yoctoproject.org/Errors/Details/301387/
-
-Weird. pkg_config_prog should be provided by
-
-DEPENDS +=3D "libconfig-autoconf-perl-native"
-
-Can you find the "config.log" of one of those builds?
-Maybe pkg-config itself is missing and I have to add this dependency =
-somehow ...
-
-> On Thu, Jan 2, 2020 at 5:39 AM Jens Rehsack <sno@netbsd.org> wrote:
->>=20
->> Add recipe for Unix::Statgrab perl module, a sane language binding =
-for
->> libstatgrab.
->>=20
->> Signed-off-by: Jens Rehsack <sno@netbsd.org>
->> ---
->> .../libstatgrab/libunix-statgrab_0.112.bb     | 38 =
-+++++++++++++++++++
->> 1 file changed, 38 insertions(+)
->> create mode 100644 =
-meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
->>=20
->> diff --git =
-a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb =
-b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
->> new file mode 100644
->> index 000000000..7402eb879
->> --- /dev/null
->> +++ b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
->> @@ -0,0 +1,38 @@
->> +SUMMARY =3D "Perl interface to the libstatgrab library"
->> +DESCRIPTION =3D "Unix::Statgrab is a wrapper for libstatgrab as =
-available from \
->> +<http://www.i-scream.org/libstatgrab/>. It is a reasonably portable =
-attempt \
->> +to query interesting stats about your computer. It covers =
-information on \
->> +the operating system, CPU, memory usage, network interfaces, =
-hard-disks \
->> +etc."
->> +
->> +HOMEPAGE =3D "https://metacpan.org/release/Unix-Statgrab"
->> +SECTION =3D "libs"
->> +LICENSE =3D "Artistic-1.0 | GPL-1.0+ | LGPL-2.1+"
->> +DEPENDS +=3D "libcapture-tiny-perl-native"
->> +DEPENDS +=3D "libconfig-autoconf-perl-native"
->> +DEPENDS +=3D "libstatgrab"
->> +RDEPENDS_${PN} +=3D "\
->> +    libstatgrab \
->> +    perl-module-autoloader \
->> +    perl-module-carp \
->> +    perl-module-dynaloader \
->> +    perl-module-exporter \
->> +    perl-module-strict \
->> +    perl-module-vars \
->> +    perl-module-warnings \
->> +"
->> +
->> +SRC_URI =3D =
-"${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Unix-Statgrab-${PV}.tar.gz"
->> +LIC_FILES_CHKSUM =3D =
+> Introduce Config::Autoconf module to meta-perl which will allow some
+> probes can be run without leaving perl5 context.
+>=20
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+> ---
+> .../libconfig-autoconf-perl_0.317.bb          | 41 +++++++++++++++++++
+> 1 file changed, 41 insertions(+)
+> create mode 100644 =
+meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.317.bb
+>=20
+> diff --git =
+a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.317.bb =
+b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.317.bb
+> new file mode 100644
+> index 000000000..62983764f
+> --- /dev/null
+> +++ =
+b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.317.bb
+> @@ -0,0 +1,41 @@
+> +# Copyright (C) 2020 Jens Rehsack <sno@netbsd.org>
+> +# Released under the MIT license (see COPYING.MIT for the terms)
+> +
+> +SUMMARY =3D "A module to implement some of AutoConf macros in pure =
+perl"
+> +DESCRIPTION =3D "Config::AutoConf is intended to provide the same =
+opportunities to Perl \
+> +developers as GNU Autoconf <http://www.gnu.org/software/autoconf/> =
+does for \
+> +Shell developers."
+> +
+> +HOMEPAGE=3D       "https://metacpan.org/release/Config-AutoConf"
+> +
+> +SECTION =3D "libs"
+> +LICENSE =3D "Artistic-1.0 | GPL-1.0+"
+> +
+> +LIC_FILES_CHKSUM =3D =
 "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=3Dcda03bbdc3c1951996392b872=
 397b798 \
->> +    =
-file://${COMMON_LICENSE_DIR}/GPL-1.0;md5=3De9e36a9de734199567a4d769498f743=
-d \
->> +    =
-file://${COMMON_LICENSE_DIR}/LGPL-2.1;md5=3D1a6d268fd218675ffea8be556788b7=
-80 \
->> +"
->> +
->> +SRC_URI[md5sum] =3D "a6bc06b3f7749f7d77a2b1bd13402821"
->> +SRC_URI[sha256sum] =3D =
-"16a29f7acaeec081bf0e7303ba5ee24fda1d21a1104669b837745f3ea61d6afa"
->> +
->> +S =3D "${WORKDIR}/Unix-Statgrab-${PV}"
->> +
->> +inherit cpan ptest-perl
->> +
->> +BBCLASSEXTEND =3D "native"
->> --
->> 2.17.1
->>=20
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> =
++file://${COMMON_LICENSE_DIR}/GPL-1.0;md5=3De9e36a9de734199567a4d769498f74=
+3d"
+> +
+> +SRC_URI =3D =
+"${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Config-AutoConf-0.317.tar.gz"
+> +
+> +SRC_URI[md5sum] =3D "29f87fc7803f1725f6daafcf416089ce"
+> +SRC_URI[sha256sum] =3D =
+"01e4b22d2fecb7cfd3cc1f4dabe95cd137cf249cc5e38184f88556e5c98a9ce1"
+> +RDEPENDS_${PN} +=3D "libcapture-tiny-perl"
+> +RDEPENDS_${PN} +=3D "perl-module-base"
+> +RDEPENDS_${PN} +=3D "perl-module-carp"
+> +RDEPENDS_${PN} +=3D "perl-module-config"
+> +RDEPENDS_${PN} +=3D "perl-module-constant"
+> +RDEPENDS_${PN} +=3D "perl-module-file-basename"
+> +RDEPENDS_${PN} +=3D "perl-module-file-spec"
+> +RDEPENDS_${PN} +=3D "perl-module-file-temp"
+> +RDEPENDS_${PN} +=3D "perl-module-extutils-cbuilder"
+> +RDEPENDS_${PN} +=3D "perl-module-extutils-cbuilder-unix"
+> +RDEPENDS_${PN} +=3D "perl-module-scalar-util"
+> +RDEPENDS_${PN} +=3D "perl-module-strict"
+> +RDEPENDS_${PN} +=3D "perl-module-text-parsewords"
+> +RDEPENDS_${PN} +=3D "perl-module-warnings"
+> +RRECOMMENDS_${PN} +=3D "libfile-slurper-perl"
+> +
+> +S =3D "${WORKDIR}/Config-AutoConf-${PV}"
+> +
+> +inherit cpan ptest-perl allarch
+> +
+> +BBCLASSEXTEND =3D "native nativesdk"
+> --
+> 2.17.1
+>=20
 
 --
 Jens Rehsack - rehsack@gmail.com
 
 
---Apple-Mail=_0EDF4A45-2CB5-4ABA-AC1F-AFA5F63E1251
+--Apple-Mail=_775525FB-93CE-40CC-85AD-6EF860A39866
 Content-Transfer-Encoding: 7bit
 Content-Disposition: attachment;
 	filename=signature.asc
@@ -183,19 +164,19 @@ Content-Description: Message signed with OpenPGP
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEGutaqWUYV+tvC/mCRJmWrtzlCp0FAl4OYEYACgkQRJmWrtzl
-Cp2a0g/6AzjozyK4MQoS6LWjEMcCRjvM6f9OKiZzdtlvxdK3eMgRR5dqU+t4gB5h
-ptPl5BVLr0hrH1IdbV3Vm8fVmmGC2FL3SzuREo0s1kZLSTF0hAXbIxkwrv4mNOuB
-XrJmp1YiYeesgZAP789Y7KqFDxIKyUQAED55ZwLME2kNEEHAuiteFgcybWgvOh2o
-F7Xxupis1n3ftuaQ0Tzc4/Y48eS6muqRV6bt2vvTiaMhEm2BBgrNJeg26s1s5/Zd
-1ALh5QBadSsQbJ1BOzIL/8MpHx91KQL/eawSo++VBzltqFTgjOiTxiqa1I8S5nUs
-6y0q29TpuoRe+frmyAceEO3V0CdG5Hq38xfIE2fWhsRE2kylw9+4oM4Pc95VlEKu
-wj86HrrAzc7spVNKVMnO32hJ7ao/NpDOpFvTCbS1Rr4AtpvZ+0T38iwbBQfMgiWQ
-mNVtwfwuMgNUpJ36CUkmB3u9vHJk6cYPu5a6WNlCMgpA+XlU1nQQLukXfl560C4i
-oKs6pm9xiJ/1yHGPoIGJpaMzSXd8PC6+3hfCnO7DSrIhHRsdhMKct5mh68aYM15u
-FCn5ckduxpFRQ+kOhs5fjGk3LjozTTVUemofU+W7EAmFUZNYXwckWTGoquHhB81H
-kY3xFnGcz0LwjVPVksfYjfxbS9sLktpgu/++rmKmISs5DvRSW/c=
-=6m87
+iQIzBAEBCgAdFiEEGutaqWUYV+tvC/mCRJmWrtzlCp0FAl4OYMsACgkQRJmWrtzl
+Cp3w5g//djMnrxJv97HFpFSz2BL0AKUagIXEd+J/KKAZ0J0dA+JNmPzocYfssCm4
+YeM7mcZTZP7Foh5a1e532Dz67UDuIVkvdMrz9apazSr2dfSzI7a+Q3PxszZF7SI8
+y/75Zc+t3ZBUCK5HRsK6I6Ryz6E+xGVg+hBqu1cP2mvK0AbdwTVfz6P66Uuuxz4G
+IFgfTb5qNYWa9dT71cGvIYqc24zRv8xQnVpgQ9ts07VZNtgC+QWUXY8l5xav0DhJ
+w3hBJ3MPKil9AZYo5GefNcy7VsJHbhoW58H1gZs1y60R8cx3RYnoGTpiyq0aAJfi
+melRWAQrrNm4IF9FONNQv/XO96y/xYFGRUnyc5fU+YaXR2hK9cgIM1y5yXIevgIq
+BiJKeUygJQx5Az2dsdWaGs1sLVUVDQtMTWHlfEFwQiZH3Wrx4I0jq2NmCKbPgfMs
+ZB0/ob4ANf5RN1KwXo0i3rqLDkVUTEMbsaIF59AbOMSjdgQpcr/2INDqz0s2Lbcj
+jHaNiuwS+ALHHC2gQmKx2r4lIZnaCuPQXv0v6Hg0ecRYiEfylHdQVm0d+4u1t4N6
+CcrpMr7c11y8R72PqbOMsYCM2k/v4oNAYJfip5eOvbQhTNlBFuPdSX+iHPq9Ke11
+SeXQMyudiR0M1vDMQv2Rpue07xQMX9RiwA2zj4ngYOUhtiymBA4=
+=eaQW
 -----END PGP SIGNATURE-----
 
---Apple-Mail=_0EDF4A45-2CB5-4ABA-AC1F-AFA5F63E1251--
+--Apple-Mail=_775525FB-93CE-40CC-85AD-6EF860A39866--
