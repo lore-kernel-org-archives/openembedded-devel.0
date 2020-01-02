@@ -1,104 +1,54 @@
-Return-Path: <Peter.Kolbus@garmin.com>
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
-	(mail-mw2nam12on2131.outbound.protection.outlook.com
-	[40.107.244.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 60BC37FC88
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id CEDAB7F9A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 18:38:20 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=Os3NgOUsC8wQhlVWKiUrGYfRxxwCm+0rgouavbjt+JALl+ZXcubPi50YRMYWxfBE3NNQyfFtQnzaRwZ3K/0jNAGAMNiAR6j5olm2ad77Lmut6P/JXcZI5GzpQF5Xnelyx46Cn5ByvqfZIIAScCzJ2ttCX2fYUbG18yXkcHwMrbOxEJ6HaC+kDFpoZ9Qy7pVxX2VHrXMFZXh+xKdZC+iQLiSaiYM/nssRrnLo6nl9eiqRSRBHGUhL2jZ2cX04hbhXy2DXf4S3ayohBDO4O/OZU68V7dV6EtasdPf4CxI8FtD5yc9RZ+yCR0YjEVuF43D3TPcxmPKKKVp59ltGFL5brA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=JnpY5Vh1SapT9FR8HchxG493ovzdXuba20+NpB1ilBQ=;
-	b=WwLBJREZUawnwahCS2anL9CKZgPlAF9IAz5uycIS0CL4xNj3qKW4e8z1e81+QyTXM6Ibv95HPn8FJ+bDe14hZzP5VRlDPZveuOjK9R+ooNDvkiXzRpa6i07k6krVAmZGqTx96yoCM+L5A6jp7YmC7G3XYffgSB7J23nXZqcNaSdYwQIgDK0+1zi4ANUdMn4MB1yu5npKs2Ugg/Mfl73I8G7aVxHfBcFXf8tPWrPyltKruBc86aUBI5g8Cj4SOmFnzHK6LfjP+fWJWCEAcksH2GbY79vHmP+IlCNkhuAPR+D1TkU1sWS7LVNkvn1TAlyJXUjb2MVloRZ/lasmNVpn0A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
-	204.77.163.244) smtp.rcpttodomain=lists.openembedded.org
-	smtp.mailfrom=garmin.com;
-	dmarc=pass (p=none sp=none pct=100) action=none
-	header.from=garmin.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garmin.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=JnpY5Vh1SapT9FR8HchxG493ovzdXuba20+NpB1ilBQ=;
-	b=dua9Ox1PB3XHa6ZVGsKM26aOzuNioyiod459wzeDF929/da8mVGfhAEPgvwEoarL2j6I5D2mAh6d7JD7RyTX2ornGSanrw+wXgyoOwAbkU8B/ppfUS/FdIf6xIlrg8XeXUTCQJiddbM456f1Smo32OXCwegchoiKQCeqpDiYzVM=
-Received: from BN6PR04CA0071.namprd04.prod.outlook.com (2603:10b6:404:8d::21)
-	by BN3PR04MB2161.namprd04.prod.outlook.com (2a01:111:e400:c5f0::8)
-	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2602.12;
-	Thu, 2 Jan 2020 18:38:20 +0000
-Received: from BN7NAM10FT027.eop-nam10.prod.protection.outlook.com
-	(2a01:111:f400:7e8a::206) by BN6PR04CA0071.outlook.office365.com
-	(2603:10b6:404:8d::21) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2602.10 via
-	Frontend Transport; Thu, 2 Jan 2020 18:38:20 +0000
-Authentication-Results: spf=pass (sender IP is 204.77.163.244)
-	smtp.mailfrom=garmin.com; lists.openembedded.org; dkim=none (message not
-	signed) header.d=none;lists.openembedded.org; dmarc=pass action=none
-	header.from=garmin.com;
-Received-SPF: Pass (protection.outlook.com: domain of garmin.com designates
-	204.77.163.244 as permitted sender) receiver=protection.outlook.com;
-	client-ip=204.77.163.244; helo=edgetransport.garmin.com;
-Received: from edgetransport.garmin.com (204.77.163.244) by
-	BN7NAM10FT027.mail.protection.outlook.com (10.13.157.131) with
-	Microsoft SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2602.11 via Frontend Transport; Thu, 2 Jan 2020 18:38:19 +0000
-Received: from OLAWPA-EXMB4.ad.garmin.com (10.5.144.25) by
-	olawpa-edge3.garmin.com (10.60.4.226) with Microsoft SMTP Server
-	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
-	15.1.1466.3; Thu, 2 Jan 2020 12:38:18 -0600
-Received: from OLAWPA-EXMB1.ad.garmin.com (10.5.144.23) by
-	OLAWPA-EXMB4.ad.garmin.com (10.5.144.25) with Microsoft SMTP Server
-	(version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
-	15.1.1779.2; Thu, 2 Jan 2020 12:38:15 -0600
-Received: from localhost.localdomain (10.5.84.15) by smtp.garmin.com
-	(10.5.144.23) with Microsoft SMTP Server id 15.1.1779.2 via Frontend
-	Transport; Thu, 2 Jan 2020 12:38:15 -0600
-From: Peter Kolbus <peter.kolbus@garmin.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Jan 2020 12:37:43 -0600
-Message-ID: <20200102183743.119160-2-peter.kolbus@garmin.com>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200102183743.119160-1-peter.kolbus@garmin.com>
-References: <20200102183743.119160-1-peter.kolbus@garmin.com>
-MIME-Version: 1.0
-X-TM-AS-Product-Ver: SMEX-12.5.0.1300-8.5.1010-25144.001
-X-TM-AS-Result: No-9.095500-8.000000-10
-X-TMASE-MatchedRID: KH0UlMEvP5MPv5/+N9RjElXXOFXDx25iZAGtCJE23Yi8ag7Kgesih4Cu
-	qghmtWfX5RngtX2fL50Hq/7mBVbccoyEjCdqw8f7PwKTD1v8YV6i8D/o42y/Sm933pK2DkkPbIp
-	Dlh4PtV1lUt35CvYsdEXxZ0IsVsHpGAdnzrnkM48URSScn+QSXt0H8LFZNFG7hqz53n/yPnoM7Y
-	b8F9fYZUkGBX9wDa1oFBDrU9jIW2i4k6LRwOphaGcjFnImzvyS
-X-TM-AS-User-Approved-Sender: No
-X-TM-AS-User-Blocked-Sender: No
-X-TMASE-Result: 10--9.095500-8.000000
-X-TMASE-Version: SMEX-12.5.0.1300-8.5.1010-25144.001
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-HT: Tenant
-X-Forefront-Antispam-Report: CIP:204.77.163.244; IPV:CAL; SCL:-1; CTRY:US;
-	EFV:NLI; SFV:NSPM;
-	SFS:(10019020)(396003)(136003)(39860400002)(376002)(346002)(199004)(189003)(6666004)(6916009)(7636002)(356004)(36756003)(2906002)(44832011)(8936002)(70586007)(336012)(8676002)(70206006)(1076003)(186003)(76130400001)(26005)(107886003)(4326008)(5660300002)(426003)(246002)(2616005)(316002)(86362001)(26826003)(478600001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:BN3PR04MB2161;
-	H:edgetransport.garmin.com; FPR:; SPF:Pass; LANG:en;
-	PTR:extedge.garmin.com; A:1; MX:1; 
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 959ca0b3-cb17-4232-0418-08d78fb2f0aa
-X-MS-TrafficTypeDiagnostic: BN3PR04MB2161:
-X-Microsoft-Antispam-PRVS: <BN3PR04MB2161A7CCA8795752439626BDFF200@BN3PR04MB2161.namprd04.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:418;
-X-Forefront-PRVS: 0270ED2845
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /03/b/MJsEEM+sS1ynDMPfLjqlIO5Nx6ebTPlTqns2FNSI2jqo8EQ2Vddo1P6OzOhssKYV72Y93uA+SoxRgno31praAO01HeLp5tjHrc9SPAXXn/gdJTgSoIfnKrmglclR4DemKfnNEUpXZpmtqfkkFBfRaVIhqXXn9VKTXqsjugvEFGD4bFijVZXLkEziWmYu3HJ0N7KteC24cb/8N0ePY4ljLOJCiIrsHe+JJY+p+cyKFyMWSkqorhhQWXPs4cQomu5ECI+aMg7md/FpKA+YSS46rL7AXEFHezWH/UlNooEHijtA+yDc5SgltC+HLuypfYP3dRG26W+HrVZmtyUHVsvwItYarnfp5/gS3wJamPeRDdprxu0TG+SvQ5ym3YyDqQUA6Psb3bSrdVDIFuXq2KOrhNRgJwSc3jze2HZUYZxJF8SiKNXPvNE/WRMifAzmBhJzAECJXv3QttE4CqN/zPbu/y27hGkLOXTyHUx2k=
-X-OriginatorOrg: garmin.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Jan 2020 18:38:19.9738 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 959ca0b3-cb17-4232-0418-08d78fb2f0aa
-X-MS-Exchange-CrossTenant-Id: 38d0d425-ba52-4c0a-a03e-2a65c8e82e2d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=38d0d425-ba52-4c0a-a03e-2a65c8e82e2d;
-	Ip=[204.77.163.244]; Helo=[edgetransport.garmin.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN3PR04MB2161
-Subject: [meta-python][PATCH v2 2/2] python3-license-expression: add recipe
+	Thu,  2 Jan 2020 21:27:35 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id c14so40615091wrn.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Jan 2020 13:27:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:message-id:mime-version:subject:date:in-reply-to:cc:to
+	:references; bh=g0hZB+nXi2mL5fYSruPAxGNe2de7bnsBIO5cwWs+6GY=;
+	b=Q6ifLNodLw7W5zpEdI63XdCLltTn0RE/ccMDEZqZjwyddWNBRnR8mX2tCySz4x8GT4
+	Rlfrj8OqXHH35O8uxVLwXbBToS4DbuJ5kRUdiNtvqag52UntkV9CbbCAtLcBQXFoCbqE
+	6mpXB/lSFkQPCBLnGzVYdhTZNA6+ilQqOzZBg7KQLQ7sExlajv7bbKt//rYS0+VEYfOj
+	rzTPKvTtaHKdLKi+zpRO4vgHSJ22NaoOYOCLtB0TYEtkSAqzb1JFnxsBc+yBPY4XQR0N
+	VNPtfNfAiLgcUplk/VIh0k1rVovXre2HlBb6wx59/EMIzXJGhpr/FcSZWR7Kd/K69riU
+	jIyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:from:message-id:mime-version:subject:date
+	:in-reply-to:cc:to:references;
+	bh=g0hZB+nXi2mL5fYSruPAxGNe2de7bnsBIO5cwWs+6GY=;
+	b=qJBZ8e/GLg3UqqElC0OT3/uixyxNBuzhHX5CMMVTJ2SiOsB5tpYSn2jLSUQO71zcQ6
+	PebcZJrnUVxCusHdrlaMVa8jNKTVadvs9q41g0iCvP01R1Ww8EgmdL8BTT/fqYoioCt0
+	ysJId/MSHhcKAc98PAhhaPmMJemCM6G1eJs7iB1O6cQV2G36ZUj1SB4Z6+vKSO9sf+m2
+	oDJ+NRt339hT2eZeNuTY7JlmDH3ppkWnO58S71h0Dyoo5H49dIhLFkDke+VtPvM5hyNa
+	LnM824o3KfRtO7FBI0qj29XRgMyIe4EIml1N9ZyoZPDIHVf9DVh5WvoJI5xqzAuErXVW
+	5YZg==
+X-Gm-Message-State: APjAAAX3InHrbI0hMGpoXXlS6D7dIhAv+xMQaXXBYCWZZfXKbcVcpfcC
+	LY7+Ff0z1LqT7rCUAKErwZk=
+X-Google-Smtp-Source: APXvYqw6e04fqQWHhLkJ7g+ysR8/zuYQP7Rsu0NrRpSB+ZwS1axsY+G4duVukcV+vN7dwfNLEo3UVA==
+X-Received: by 2002:a5d:458d:: with SMTP id p13mr37200790wrq.314.1578000456695;
+	Thu, 02 Jan 2020 13:27:36 -0800 (PST)
+Received: from ernie.muppets.liwing.de (p5B25B970.dip0.t-ipconnect.de.
+	[91.37.185.112]) by smtp.gmail.com with ESMTPSA id
+	w13sm58079950wru.38.2020.01.02.13.27.35
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 02 Jan 2020 13:27:35 -0800 (PST)
+Sender: Jens Rehsack <rehsack@gmail.com>
+From: Jens Rehsack <sno@netbsd.org>
+Message-Id: <867024C9-4645-4B2F-86C4-75E250A894E7@netbsd.org>
+Mime-Version: 1.0 (Mac OS X Mail 13.0 \(3608.40.2.2.4\))
+Date: Thu, 2 Jan 2020 22:27:34 +0100
+In-Reply-To: <CAMKF1srjDzrfhWgdnV2i0M=xxFFjKxbjgeFxrGu3r4pFB+F94A@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+References: <20200102133915.1516-1-sno@netbsd.org>
+	<CAMKF1srjDzrfhWgdnV2i0M=xxFFjKxbjgeFxrGu3r4pFB+F94A@mail.gmail.com>
+X-Mailer: Apple Mail (2.3608.40.2.2.4)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-perl][PATCH] libunix-statgrab: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -111,52 +61,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 18:38:20 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 02 Jan 2020 21:27:37 -0000
+X-Groupsio-MsgNum: 81876
+Content-Type: multipart/signed;
+	boundary="Apple-Mail=_0EDF4A45-2CB5-4ABA-AC1F-AFA5F63E1251";
+	protocol="application/pgp-signature"; micalg=pgp-sha512
 
-python3-license-expression is a utility library to parse and work with
-license expressions.
-
-Signed-off-by: Peter Kolbus <peter.kolbus@garmin.com>
----
- .../python/python-license-expression.inc         | 16 ++++++++++++++++
- .../python/python3-license-expression_1.0.bb     |  2 ++
- 2 files changed, 18 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-license-expression.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
-
-diff --git a/meta-python/recipes-devtools/python/python-license-expression.inc b/meta-python/recipes-devtools/python/python-license-expression.inc
-new file mode 100644
-index 000000000..4c35e8dd7
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-license-expression.inc
-@@ -0,0 +1,16 @@
-+SUMMARY = "Utility library to parse, compare, simplify and normalize license expressions"
-+HOMEPAGE = "https://github.com/nexB/license-expression"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://apache-2.0.LICENSE;md5=e23fadd6ceef8c618fc1c65191d846fa"
-+
-+SRC_URI[md5sum] = "81477f779099f55071c6a7b88a29bb01"
-+SRC_URI[sha256sum] = "8aaa455c5b97c4f2174090178b19792b2a1c620e80591aafd4e0a99b713f9e8d"
-+
-+inherit pypi
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-booleanpy \
-+    "
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb b/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
-new file mode 100644
-index 000000000..10a702ca4
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-license-expression_1.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-license-expression.inc
--- 
-2.24.1
+--Apple-Mail=_0EDF4A45-2CB5-4ABA-AC1F-AFA5F63E1251
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain;
+	charset=us-ascii
 
 
+
+> Am 02.01.2020 um 19:30 schrieb Khem Raj <raj.khem@gmail.com>:
+>=20
+> This seems to fail
+> https://errors.yoctoproject.org/Errors/Details/301385/
+> https://errors.yoctoproject.org/Errors/Details/301387/
+
+Weird. pkg_config_prog should be provided by
+
+DEPENDS +=3D "libconfig-autoconf-perl-native"
+
+Can you find the "config.log" of one of those builds?
+Maybe pkg-config itself is missing and I have to add this dependency =
+somehow ...
+
+> On Thu, Jan 2, 2020 at 5:39 AM Jens Rehsack <sno@netbsd.org> wrote:
+>>=20
+>> Add recipe for Unix::Statgrab perl module, a sane language binding =
+for
+>> libstatgrab.
+>>=20
+>> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+>> ---
+>> .../libstatgrab/libunix-statgrab_0.112.bb     | 38 =
++++++++++++++++++++
+>> 1 file changed, 38 insertions(+)
+>> create mode 100644 =
+meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+>>=20
+>> diff --git =
+a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb =
+b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+>> new file mode 100644
+>> index 000000000..7402eb879
+>> --- /dev/null
+>> +++ b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+>> @@ -0,0 +1,38 @@
+>> +SUMMARY =3D "Perl interface to the libstatgrab library"
+>> +DESCRIPTION =3D "Unix::Statgrab is a wrapper for libstatgrab as =
+available from \
+>> +<http://www.i-scream.org/libstatgrab/>. It is a reasonably portable =
+attempt \
+>> +to query interesting stats about your computer. It covers =
+information on \
+>> +the operating system, CPU, memory usage, network interfaces, =
+hard-disks \
+>> +etc."
+>> +
+>> +HOMEPAGE =3D "https://metacpan.org/release/Unix-Statgrab"
+>> +SECTION =3D "libs"
+>> +LICENSE =3D "Artistic-1.0 | GPL-1.0+ | LGPL-2.1+"
+>> +DEPENDS +=3D "libcapture-tiny-perl-native"
+>> +DEPENDS +=3D "libconfig-autoconf-perl-native"
+>> +DEPENDS +=3D "libstatgrab"
+>> +RDEPENDS_${PN} +=3D "\
+>> +    libstatgrab \
+>> +    perl-module-autoloader \
+>> +    perl-module-carp \
+>> +    perl-module-dynaloader \
+>> +    perl-module-exporter \
+>> +    perl-module-strict \
+>> +    perl-module-vars \
+>> +    perl-module-warnings \
+>> +"
+>> +
+>> +SRC_URI =3D =
+"${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Unix-Statgrab-${PV}.tar.gz"
+>> +LIC_FILES_CHKSUM =3D =
+"file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=3Dcda03bbdc3c1951996392b872=
+397b798 \
+>> +    =
+file://${COMMON_LICENSE_DIR}/GPL-1.0;md5=3De9e36a9de734199567a4d769498f743=
+d \
+>> +    =
+file://${COMMON_LICENSE_DIR}/LGPL-2.1;md5=3D1a6d268fd218675ffea8be556788b7=
+80 \
+>> +"
+>> +
+>> +SRC_URI[md5sum] =3D "a6bc06b3f7749f7d77a2b1bd13402821"
+>> +SRC_URI[sha256sum] =3D =
+"16a29f7acaeec081bf0e7303ba5ee24fda1d21a1104669b837745f3ea61d6afa"
+>> +
+>> +S =3D "${WORKDIR}/Unix-Statgrab-${PV}"
+>> +
+>> +inherit cpan ptest-perl
+>> +
+>> +BBCLASSEXTEND =3D "native"
+>> --
+>> 2.17.1
+>>=20
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+--
+Jens Rehsack - rehsack@gmail.com
+
+
+--Apple-Mail=_0EDF4A45-2CB5-4ABA-AC1F-AFA5F63E1251
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+	filename=signature.asc
+Content-Type: application/pgp-signature;
+	name=signature.asc
+Content-Description: Message signed with OpenPGP
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEGutaqWUYV+tvC/mCRJmWrtzlCp0FAl4OYEYACgkQRJmWrtzl
+Cp2a0g/6AzjozyK4MQoS6LWjEMcCRjvM6f9OKiZzdtlvxdK3eMgRR5dqU+t4gB5h
+ptPl5BVLr0hrH1IdbV3Vm8fVmmGC2FL3SzuREo0s1kZLSTF0hAXbIxkwrv4mNOuB
+XrJmp1YiYeesgZAP789Y7KqFDxIKyUQAED55ZwLME2kNEEHAuiteFgcybWgvOh2o
+F7Xxupis1n3ftuaQ0Tzc4/Y48eS6muqRV6bt2vvTiaMhEm2BBgrNJeg26s1s5/Zd
+1ALh5QBadSsQbJ1BOzIL/8MpHx91KQL/eawSo++VBzltqFTgjOiTxiqa1I8S5nUs
+6y0q29TpuoRe+frmyAceEO3V0CdG5Hq38xfIE2fWhsRE2kylw9+4oM4Pc95VlEKu
+wj86HrrAzc7spVNKVMnO32hJ7ao/NpDOpFvTCbS1Rr4AtpvZ+0T38iwbBQfMgiWQ
+mNVtwfwuMgNUpJ36CUkmB3u9vHJk6cYPu5a6WNlCMgpA+XlU1nQQLukXfl560C4i
+oKs6pm9xiJ/1yHGPoIGJpaMzSXd8PC6+3hfCnO7DSrIhHRsdhMKct5mh68aYM15u
+FCn5ckduxpFRQ+kOhs5fjGk3LjozTTVUemofU+W7EAmFUZNYXwckWTGoquHhB81H
+kY3xFnGcz0LwjVPVksfYjfxbS9sLktpgu/++rmKmISs5DvRSW/c=
+=6m87
+-----END PGP SIGNATURE-----
+
+--Apple-Mail=_0EDF4A45-2CB5-4ABA-AC1F-AFA5F63E1251--
