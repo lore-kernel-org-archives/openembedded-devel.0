@@ -1,51 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
-	[209.85.216.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F0317F7BA
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id C575E7F441
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2019 19:07:45 +0000 (UTC)
-Received: by mail-pj1-f43.google.com with SMTP id bg7so1502033pjb.5
+	Thu,  2 Jan 2020 03:19:17 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,385,1571673600"; d="scan'208";a="81227088"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 02 Jan 2020 11:19:17 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id AA98D406AB15
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Dec 2019 11:07:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Fjtovnl8QmfDi0CLcL4ZHYkcn8gCi2EW6+XcAquvU8I=;
-	b=V3D26kXjYhdAkukFMoexh/m3V0Y6eE6wm/D5QTkv5raVsFFyCutJaDjfHq1cs/HwFl
-	y93HHorYda6ojnmM6J+e5/J/rGa7cSaCiInQTkX4oH0X7e3WC64bSQGjHdDKzxqbZipp
-	1Whwlu+o8fIgxw04C1xxvzwFGw3a27l/AuWneTmwyGlBHonTeGGLv5lwi+odbKgBqzIa
-	DgGOkU166OYez137fxy5ccTBIrho1btvHI3uI2RUP12iynQe7SnjnvqR7JQFE8mtKh0L
-	BtNFBcdXT+dVyggLYi+Cv/FW+YtvFo7SCKPKWtVhkBpC9sWIH8xZpdf2ZQqdSXi9uebJ
-	H6FA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Fjtovnl8QmfDi0CLcL4ZHYkcn8gCi2EW6+XcAquvU8I=;
-	b=ens7rYxmxVLwRRyW+sN+tnnqiD5Uof5h11i04InWdbnCAuxq2y/X6I87W9JrE1Ty82
-	JqrdA9S0X2FmrPjJHYrnvlpiUq3JEQe4xPg5Vb7b2WmZEoCLdH90yuJMz7JAACq5inz9
-	a0cu+Zqu4PV0L2sS+Kjtk6y1t0AWynuR3nHx0+WcsXJb1Cn7b+20EL2V0k+31NmJPtkx
-	8Xs6gAkYjVeOO/ytN2HAKFgesh6TIfz9ub1Eyv6BRc2XyIpXCNP4OHEkgKjx03iLnMh3
-	fWTCLp+7nOEh/ph6HCibKXEkx0TZ9weeYgWbeyibvZP+jA39IbK2a6DtotoX7BEYmyuo
-	VOog==
-X-Gm-Message-State: APjAAAV8+byDCildHO6omVmaaXztP+OUfurTnKmdTdwH0zDS/3sLzPrr
-	ZkUY9DgxK0sDRse52c80aLAE3VEo1vc=
-X-Google-Smtp-Source: APXvYqyBu7xdygEq8Zc7gQMbwnKgJNL4C/8REBLN5+fbpAskqd7/V5bXNOF5G4ILWxt7BcPe0oAZ8g==
-X-Received: by 2002:a17:902:bf0c:: with SMTP id
-	bi12mr48865966plb.208.1577819265819; 
-	Tue, 31 Dec 2019 11:07:45 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::fa4b])
-	by smtp.gmail.com with ESMTPSA id
-	c18sm32283997pfr.40.2019.12.31.11.07.45
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 31 Dec 2019 11:07:45 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Dec 2019 11:07:39 -0800
-Message-Id: <20191231190739.1277128-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.1
+	Thu,  2 Jan 2020 11:10:23 +0800 (CST)
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 2 Jan 2020 11:19:17 +0800
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 2 Jan 2020 11:19:17 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Jan 2020 11:20:31 +0800
+Message-ID: <20200102032031.27344-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH v2] glfw: Update to latest
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: AA98D406AB15.AA392
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python-beautifulsoup4: upgrade 4.8.1 -> 4.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,43 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Dec 2019 19:07:45 -0000
+X-List-Received-Date: Thu, 02 Jan 2020 03:19:18 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Disable docs which needs doxygen
-FPIC is needed for arches like aarch64 when building shared objects
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
-v2: Fix commit msg and PV append
+ meta-python/recipes-devtools/python/python-beautifulsoup4.inc | 4 ++--
+ ...beautifulsoup4_4.8.1.bb => python-beautifulsoup4_4.8.2.bb} | 0
+ ...eautifulsoup4_4.8.1.bb => python3-beautifulsoup4_4.8.2.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-beautifulsoup4_4.8.1.bb => python-beautifulsoup4_4.8.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-beautifulsoup4_4.8.1.bb => python3-beautifulsoup4_4.8.2.bb} (100%)
 
- meta-oe/recipes-core/glfw/glfw_3.3.bb | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
-
-diff --git a/meta-oe/recipes-core/glfw/glfw_3.3.bb b/meta-oe/recipes-core/glfw/glfw_3.3.bb
-index 0ceeba1f19..0fcf716c8e 100644
---- a/meta-oe/recipes-core/glfw/glfw_3.3.bb
-+++ b/meta-oe/recipes-core/glfw/glfw_3.3.bb
-@@ -10,11 +10,15 @@ SECTION = "lib"
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+index 8c9dbfc68..3e95bb7f2 100644
+--- a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
++++ b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
  
- inherit pkgconfig cmake features_check
+-SRC_URI[md5sum] = "be03d778cf61cf6734a480e2010d6657"
+-SRC_URI[sha256sum] = "6135db2ba678168c07950f9a16c4031822c6f4aec75a65e0a97bc5ca09789931"
++SRC_URI[md5sum] = "5dbdb56c009e4632bae7bed1b385804b"
++SRC_URI[sha256sum] = "05fd825eb01c290877657a56df4c6e4c311b3965bda790c613a3d6fb01a5462a"
  
--S = "${WORKDIR}/git"
-+PV .= "+git${SRCPV}"
-+SRCREV = "781fbbadb0bccc749058177b1385c82da9ace880"
- SRC_URI = "git://github.com/glfw/glfw.git"
--SRCREV = "d25248343e248337284dfbe5ecd1eddbd37ae66d"
+ inherit pypi
  
--EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON"
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OECMAKE += "-DBUILD_SHARED_LIBS=ON -DGLFW_BUILD_DOCS=OFF"
-+
-+CFLAGS += "-fPIC"
- 
- DEPENDS = "libpng libglu zlib libxrandr libxinerama libxi libxcursor"
- REQUIRED_DISTRO_FEATURES = "x11 opengl"
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb b/meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.2.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb
+rename to meta-python/recipes-devtools/python/python-beautifulsoup4_4.8.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.1.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.1.bb
+rename to meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
 -- 
-2.24.1
+2.20.1
+
+
 
 
