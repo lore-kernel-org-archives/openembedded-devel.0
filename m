@@ -1,37 +1,49 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id A5F347FC42
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 316157F8CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 11:08:04 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47pQHn2WYbzQJ;
-	Thu,  2 Jan 2020 12:08:05 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1577963285;
-	bh=VjxvMV0svpUVPVLMxBrmjx5PyEQqQscLttbFerFuYgc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=h2VqluynMwtgiQKjSZyKc2rPQ2kihqQvzIHcZEGQ13Tqi16zeCj2sLodgAPcCSFh1
-	a8qNSd/t6w6sSJbcxWwhRluc+h6bt2L2K923mFgxLa/76q7w4mWKe7Eij4XNofO5nc
-	59buIQIkULmrTVmBG4liMAPQ3r5UUrOiXTdX1TuDJg27uatRTKlTN8guEzFFZax27n
-	ulpqKOBp4N4oBhNTZdPHl3UVA5ET8yHAIJic6dC8Nm/GTD6DHJ5jjsf/eB10Lo6aIp
-	++g0xUGbvpHxofX6xYgsP5n9OC7LeHt/yuZO+ZaV87Pydf7hvCRppYrs5evaYKMJJl
-	mHE1iU0pMYmtSKFUPodUtUnc+f8c2iOykkiRTr5sI/3Wyd9gtn2PxaQobIBp87GeeK
-	i8n0lzGz/7U1YaDZCc+OWcyXJiwgGVr+Bbg4NRV6yjkz7yVo3D0RUqLh4gF5jHXjIc
-	SkAJoQkoarVW1JgB1CTyFo07Vor91a/OPkygwAStpvM25itKsf8XgmINlIrMzhG04f
-	hFhRN3998t7l3IpYbvbSz4dZI/843Urhm44dpcsHF4Q6TUQl+0qykJsU44U5mvxXtK
-	0kr8Dh5GCApqyMMlYSvTytAOd8DucfiHRyfONHpSepI71SEZMLGnyCpyeL/DwFvE3t
-	8zXLaw6TBkcLEmBrMQt5zyD0=
-Date: Thu, 2 Jan 2020 13:08:03 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20200102110803.GB11760@localhost>
-References: <20200102061330.480482-1-raj.khem@gmail.com>
-	<20200102061330.480482-4-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <20200102061330.480482-4-raj.khem@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 4/6] hddtemp: Fix build with latest gettext 0.20.x
+	Thu,  2 Jan 2020 13:31:22 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id j42so39180864wrj.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Jan 2020 05:31:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=c9qdUap5+tb4eJbZ+jmGhBNY1E9zhYV7At1kKq+n8k0=;
+	b=IsAs2c5XLKYGTLwIaH9FScLAE0xs3OVSktpJ35L2Qn6hCFP+5K5Y23wZtFmyESxcWC
+	yiOBcJNGjhzCnfiicD4iUVEqeLx4DPAW3QsaZ3Srz7y4+J8cVemRSAaWQGET3I+SI5m1
+	4AMr+DSWwFAEMfDuRuMoxNdPevctXjdyrAQY68KGPyj+wt9k9bxwvxvUscaR41g0eWXK
+	+EKdQlkjTxaOanhC6+C1gZ3ACLKQmgcBrNuv1FIL6eShgOQmbcdU91MlaxMnXvoxq4ht
+	cs7vBDvTNimYYTVTxJwbaZY1Ym6Cjg38daCrKrAXtWFPNYPSw+8bmLrImlCgOrh7LOh0
+	0Gfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=c9qdUap5+tb4eJbZ+jmGhBNY1E9zhYV7At1kKq+n8k0=;
+	b=roiwuVIIA88DgNBvGLE4nOqqxb6Nk5snIZKpafMrpOYB5R7oLLAsCV1Gb2L3ZFYLPg
+	sfR61AOjIc8+ICv+c4Zyij4Z/ci7siXXJ0JJ65scbdwdsGxmOE2DWTyXVx5yy+wmW/Pm
+	/gSKHxYbOrXaQRXPHav+eKyo0gUO6r30yj90Q06C/6bJxAteRiqS+M+a9wGoOhmEKNRC
+	sczgl/NQfffO6b7zS+C1gQWOwVgQPower3erTpeSIhsptA+xKkbMk7v2X6G8zgiRC+ir
+	3YdLvB1BvevIgqArAE3JbSFi7ajio/dNh4RwBgDYux69UsM7kelJN337mHZExMYR06MQ
+	t97g==
+X-Gm-Message-State: APjAAAU/LuMCIWu/AiS3X6CFKKyii6wrO07grvu/tJiHWk6FFqFv+dZK
+	2QXOWmR5qodVyYrbetKcaRA7cyhZs8E=
+X-Google-Smtp-Source: APXvYqyvWpYSdtqkr3MnmJh8nw5rlvOFgoctCJdaAKStR5L5NrDbqc73ur34mYFODEKgzKGYtyAD/w==
+X-Received: by 2002:a5d:4f8e:: with SMTP id d14mr43553441wru.112.1577971882487;
+	Thu, 02 Jan 2020 05:31:22 -0800 (PST)
+Received: from beaker.muppets.liwing.de (p5B25B970.dip0.t-ipconnect.de.
+	[91.37.185.112])
+	by smtp.gmail.com with ESMTPSA id i5sm8523487wml.31.2020.01.02.05.31.21
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 02 Jan 2020 05:31:21 -0800 (PST)
+Sender: Jens Rehsack <rehsack@gmail.com>
+From: Jens Rehsack <sno@netbsd.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  2 Jan 2020 14:31:02 +0100
+Message-Id: <20200102133102.545-1-sno@netbsd.org>
+X-Mailer: git-send-email 2.17.1
+Cc: Jens Rehsack <sno@netbsd.org>
+Subject: [meta-perl][PATCH] libtest-warnings-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,19 +56,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 11:08:06 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 02 Jan 2020 13:31:22 -0000
 
-On Wed, Jan 01, 2020 at 10:13:28PM -0800, Khem Raj wrote:
->...
->  ...ame-to-configure.ac-and-use-external.patch | 14743 ++++++++++++++++
+Add recipe for Test::Warnings modulem widely used by Kwalitee tests
+is modern perl5 module distributions.
 
-It should not be necessary to remove intl/ in the diff.
+Signed-off-by: Jens Rehsack <sno@netbsd.org>
+---
+ .../libtest/libtest-warnings-perl_0.028.bb    | 29 +++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.028.bb
 
-Removing intl from SUBDIRS and AC_CONFIG_FILES should be sufficient and
-keep the patch at a readable size.
+diff --git a/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.028.bb b/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.028.bb
+new file mode 100644
+index 000000000..b40a5456e
+--- /dev/null
++++ b/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.028.bb
+@@ -0,0 +1,29 @@
++# Copyright (C) 2020 Jens Rehsack <sno@netbsd.org>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++DESCRIPTION = "If you've ever tried to use Test::NoWarnings to confirm there are no \
++warnings generated by your tests, combined with the convenience of \
++\\"done_testing\\" to not have to declare a test count, you'll have discovered \
++that these two features do not play well together, as the test count will \
++be calculated *before* the warnings test is run, resulting in a TAP error. \
++(See "examples/test_nowarnings.pl" in this distribution for a \
++demonstration.)"
++
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPL-1.0+"
++
++HOMEPAGE=       "https://metacpan.org/release/Test-Warnings"
++
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
++file://${COMMON_LICENSE_DIR}/GPL-1.0;md5=e9e36a9de734199567a4d769498f743d"
++
++SRC_URI = "https://cpan.metacpan.org/authors/id/E/ET/ETHER/Test-Warnings-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "cd007342017fedfb02d6fde75602e473"
++SRC_URI[sha256sum] = "26fda9f8d279e943d27e43a4a3a5cea8a6592cd36e7308695f8dc6602262c0e0"
++
++S = "${WORKDIR}/Test-Warnings-${PV}"
++
++inherit cpan allarch ptest-perl
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.17.1
 
-cu
-Adrian
 
