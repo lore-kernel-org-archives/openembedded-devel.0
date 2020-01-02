@@ -1,24 +1,49 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BA1B47FBE4
+Return-Path: <rehsack@gmail.com>
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+	[209.85.128.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 724ED7F961
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 08:52:44 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 0028qipT018773
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Thu, 2 Jan 2020 00:52:44 -0800 (PST)
-Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 2 Jan 2020 00:52:43 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-Date: Thu, 2 Jan 2020 00:52:43 -0800
-Message-ID: <20200102085243.341-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.21.0
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-python][PATCH] python3-astor: fix VERSION file not found
+	Thu,  2 Jan 2020 09:10:30 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id d139so4558942wmd.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Jan 2020 01:10:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=q0yaT9uYJSphKGu1tPcDyeP8ZX+DhqAnaKt2WrX54Mw=;
+	b=OGysLKenTb18KFJLb52O6SI746fAIiqazH0t53ayizhdN00ZsNn5d/dIvSNgYDY/W/
+	pMsXHJJPPBTEgAj0lwlosYuriz+zObYqpd7clYrfKyf91fYfWG8JPyFtQRX1SbbiReU7
+	Dm0d4PSEL27JBnYvKj0tfozvH0DpzIKhbn3YM4C/fYycfbWyR+5dy/Tsw05LW4RxsUCY
+	5NJKWthuPUbZafCSScHN7fWmvh3s5nLrv0NnSnozpvHP/c8NPBD7DsOw49oewMDtse2j
+	krZT3jCJ8+7M5ys+OvW7nhDkoG1q6zldfz/JV13HxgWgBpN1Qs7rWC5wv+M/8kr2JX7o
+	HR2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=q0yaT9uYJSphKGu1tPcDyeP8ZX+DhqAnaKt2WrX54Mw=;
+	b=H7QTJ2b2tPqVB1YXtp2eGqcABSrkcrwL/wrkKZB4JVi+fvW9v9oPMFuLGo8N6jYhla
+	hqDmB3XqozPuMmWIxCjdyLIVUFjQqkAGevwSLuiTuG9X/T55WaJNJYoe1/fibPQxInCm
+	y4pmdh8Vv7wCAMseQeq1oGqLEMb0J+gcHbJ+so/zw0Wixrp0EV43yt8AwjH2/6LG+aEZ
+	lOulmI+VSUbpfmsWJDqNjp3aS6obHm87ZtoSkBEEiRR4F9LVWUyurM6Z8k8e3yk15OVE
+	+lUhcdqwmsdyVwW5D8MQf6GzRnBr/RD+XI7LNeRYJtz02L4m9aB9DDEJksMT3QzgZHaO
+	Sjpg==
+X-Gm-Message-State: APjAAAXC2JRlaaxo54Lw2apOoQlqAR66kxDu6X2DefTQxVXVqu/L9Snw
+	QiCDXYQszyBZGx37seqHX/FPpVA/9Ds=
+X-Google-Smtp-Source: APXvYqwaM6WHnZz0FBcJ5PbBpNAIwGmAyPQSX+fOnntN4gPYKWS/mUIFP2LZGXVx+3UJBHG6SzE+yA==
+X-Received: by 2002:a7b:c74c:: with SMTP id w12mr13369455wmk.1.1577956230596; 
+	Thu, 02 Jan 2020 01:10:30 -0800 (PST)
+Received: from beaker.muppets.liwing.de (p5B25B970.dip0.t-ipconnect.de.
+	[91.37.185.112])
+	by smtp.gmail.com with ESMTPSA id t1sm7919076wma.43.2020.01.02.01.10.29
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 02 Jan 2020 01:10:29 -0800 (PST)
+Sender: Jens Rehsack <rehsack@gmail.com>
+From: Jens Rehsack <sno@netbsd.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  2 Jan 2020 10:07:27 +0100
+Message-Id: <20200102090727.7333-1-sno@netbsd.org>
+X-Mailer: git-send-email 2.17.1
+Cc: Jens Rehsack <sno@netbsd.org>
+Subject: [meta-oe][PATCH] log4cplus: update to 2.0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,88 +56,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 08:52:44 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 02 Jan 2020 09:10:30 -0000
 
-...
-import astor
-  File "/usr/lib/python3.7/site-packages/astor/__init__.py", line 24, in <module>
-    with open(os.path.join(ROOT, 'VERSION')) as version_file:
-FileNotFoundError: [Errno 2] No such file or directory: '/usr/lib/python3.7/site-packages/astor/VERSION'
-...
+Update log4cplus library to 2019-12-23 released version containing (relevant
+for *nix)
+* Modernized CMake build.
+* Fix issue with std::va_list value reuse.
+* Fix parsing of include in configuration when included file path
+  contains =. (Patch by Peter Pei)
+* Change of default behaviour: Instantiate thread pool with only 4 threads
 
-Place the value in a simple VERSION text file and have both setup.py and the
-project code read it. With this approach you must make sure that the VERSION
-file is included in all your source and binary distributions (e.g. add include
-VERSION to your MANIFEST.in). [1]
-
-[1] https://packaging.python.org/guides/single-sourcing-package-version/
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Jens Rehsack <sno@netbsd.org>
 ---
- ...f3ff7ad8818475b6e107e63aa9a54252d2a9.patch | 22 ++++++++++++++++---
- 1 file changed, 19 insertions(+), 3 deletions(-)
+ ...-version-entry-from-ELF-.comment-sec.patch | 40 -------------------
+ ...{log4cplus_2.0.4.bb => log4cplus_2.0.5.bb} |  5 +--
+ 2 files changed, 2 insertions(+), 43 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/log4cplus/log4cplus/0001-Remove-log4cplus-version-entry-from-ELF-.comment-sec.patch
+ rename meta-oe/recipes-devtools/log4cplus/{log4cplus_2.0.4.bb => log4cplus_2.0.5.bb} (73%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch b/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
-index 823699339..6d71be992 100644
---- a/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
-+++ b/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
-@@ -3,14 +3,27 @@ From: Jonathan Ringer <jonringer117@gmail.com>
- Date: Thu, 17 Oct 2019 16:54:16 -0700
- Subject: [PATCH] Fix packaging for setuptools>=41.4
+diff --git a/meta-oe/recipes-devtools/log4cplus/log4cplus/0001-Remove-log4cplus-version-entry-from-ELF-.comment-sec.patch b/meta-oe/recipes-devtools/log4cplus/log4cplus/0001-Remove-log4cplus-version-entry-from-ELF-.comment-sec.patch
+deleted file mode 100644
+index 44a835c35..000000000
+--- a/meta-oe/recipes-devtools/log4cplus/log4cplus/0001-Remove-log4cplus-version-entry-from-ELF-.comment-sec.patch
++++ /dev/null
+@@ -1,40 +0,0 @@
+-From da5338e68f146efadab7c221291ba4c949d8f12f Mon Sep 17 00:00:00 2001
+-From: Vaclav Haisman <vhaisman@gmail.com>
+-Date: Sun, 21 Jul 2019 23:23:16 -0700
+-Subject: [PATCH] Remove log4cplus version entry from ELF .comment section
+-
+-Reverts
+-https://github.com/log4cplus/log4cplus/commit/9cb0d4ade619da4e40628c9b95ff51de3df29f1b
+-
+-Upstream-Status: Backport [https://github.com/log4cplus/log4cplus/commit/7e6addc70dffd2e30e902efd18eb845c5d5dd7bb]
+-
+-Suggested-by: Adrian Bunk <bunk@stusta.de>
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/version.cxx | 12 ------------
+- 1 file changed, 12 deletions(-)
+-
+-diff --git a/src/version.cxx b/src/version.cxx
+-index ce18212..e002de9 100644
+---- a/src/version.cxx
+-+++ b/src/version.cxx
+-@@ -34,16 +34,4 @@ namespace log4cplus
+- unsigned const version = LOG4CPLUS_VERSION;
+- char const versionStr[] = LOG4CPLUS_VERSION_STR LOG4CPLUS_VERSION_STR_SUFFIX;
+- 
+--namespace
+--{
+--
+--#if defined (__ELF__) && (defined (__GNUC__) || defined (__clang__))
+--char const versionStrComment[]
+--    __attribute__ ((__used__, __section__ ((".comment"))))
+--    = "log4cplus " LOG4CPLUS_VERSION_STR LOG4CPLUS_VERSION_STR_SUFFIX;
+--#endif
+--
+--
+--} // namespace
+--
+- } // namespace log4cplus
+--- 
+-2.22.0
+-
+diff --git a/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.4.bb b/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.5.bb
+similarity index 73%
+rename from meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.4.bb
+rename to meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.5.bb
+index 566de2853..967ac7623 100644
+--- a/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.4.bb
++++ b/meta-oe/recipes-devtools/log4cplus/log4cplus_2.0.5.bb
+@@ -7,10 +7,9 @@ LICENSE = "Apache-2.0 & BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=41e8e060c26822886b592ab4765c756b"
  
-+Upstream-Status: Pending
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
- ---
-+ MANIFEST.in       |  1 +
-  astor/VERSION     |  1 +
-  astor/__init__.py |  5 ++++-
-  setup.cfg         |  3 ++-
-  setup.py          | 16 +---------------
-- 4 files changed, 8 insertions(+), 17 deletions(-)
-+ 5 files changed, 9 insertions(+), 17 deletions(-)
-  create mode 100644 astor/VERSION
+ SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BPN}-stable/${PV}/${BP}.tar.gz \
+-           file://0001-Remove-log4cplus-version-entry-from-ELF-.comment-sec.patch \
+           "
+-SRC_URI[md5sum] = "2b5b7bc294698bf30a315a259ef9eec2"
+-SRC_URI[sha256sum] = "196eedbc7f2dd792dae721b1159c7ac132255bb368226353c24d4d5fa7c7797a"
++SRC_URI[md5sum] = "71dd956bf686195127559671f1426cff"
++SRC_URI[sha256sum] = "c07115c23219390633798def30b7b51a0f79fdeb857e4b49632f17746d0ceb97"
  
-+diff --git a/MANIFEST.in b/MANIFEST.in
-+index b12a6fe..81e72d5 100644
-+--- a/MANIFEST.in
-++++ b/MANIFEST.in
-+@@ -1,3 +1,4 @@
-+ include README.rst AUTHORS LICENSE CHANGES
-+ include setuputils.py
-++include astor/VERSION
-+ recursive-include tests *.py
- diff --git a/astor/VERSION b/astor/VERSION
- new file mode 100644
- index 0000000..a3df0a6
-@@ -22,7 +35,7 @@ diff --git a/astor/__init__.py b/astor/__init__.py
- index 3b02983..8dfcdb1 100644
- --- a/astor/__init__.py
- +++ b/astor/__init__.py
--@@ -9,6 +9,7 @@
-+@@ -9,6 +9,7 @@ Copyright 2013 (c) Berker Peksag
-  
-  """
-  
-@@ -30,7 +43,7 @@ index 3b02983..8dfcdb1 100644
-  import warnings
-  
-  from .code_gen import SourceGenerator, to_source  # NOQA
--@@ -19,7 +20,9 @@
-+@@ -19,7 +20,9 @@ from .op_util import get_op_symbol, get_op_precedence  # NOQA
-  from .op_util import symbol_data  # NOQA
-  from .tree_walk import TreeWalk  # NOQA
-  
-@@ -85,3 +98,6 @@ index 4a111b5..6068493 100644
-  
- -setup(**config['options'])
- +setup()
-+-- 
-+2.21.0
-+
+ UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/log4cplus/files/log4cplus-stable/"
+ UPSTREAM_CHECK_REGEX = "log4cplus-stable/(?P<pver>\d+(\.\d+)+)/"
 -- 
-2.21.0
+2.17.1
 
 
