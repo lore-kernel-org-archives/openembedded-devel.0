@@ -1,53 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
-	[209.85.214.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 3271F7FBFA
+Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
+	[209.85.219.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BCF17FCA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 17:47:50 +0000 (UTC)
-Received: by mail-pl1-f171.google.com with SMTP id a6so17342374plm.3
+	Thu,  2 Jan 2020 18:30:52 +0000 (UTC)
+Received: by mail-qv1-f68.google.com with SMTP id f16so15329855qvi.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jan 2020 09:47:51 -0800 (PST)
+	Thu, 02 Jan 2020 10:30:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=OfeWCoFvMIPbaubS8Jq9XqgvGN5Pt4nXgjaSzwNxmeE=;
-	b=DI4HrSI+f4+KSPxi/UcrVHTczv5/yOsAjZgynxCsh1uzMQKmzMKxneO+fy2kNNNt2M
-	zIc0UvVJWhSDB3IalyTCbte6jyodvrfrIMy+z0T+S9QCBfUQcGUKnj9ohR0CLwd970Ld
-	Rql1pRLuRr8OP8TlhKWJNzr3607h1Q+8c7VqHWzXVD6gQTM7Zi9IngYwa6gYVuM8d0FM
-	UpV+/jGxBJTIvRARtp9+z3nrv8RA3H1S4Izz3qKJpRzrCFYVGlYZ1U+JDADCQgHA1i1u
-	vz7jo+ptgEX31VfS1W2zHArgJDfF8zPRjtlR9PnQjdq115vjGVLUxpUxk5aD9Ivnjesr
-	y/yQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=7OmGJ+Vm2lUlIXDE6ep6H7MHfoKDAIiKZ0mBBMFehbg=;
+	b=A4K+3VsO95Ni2YZqNRvtTBOxwvZJMBkBhNduE0aICsE0i6J6ZHu+2ckTcwA2UYD+sp
+	FlmTUQ1jXJkwN8+mkDTRkdO6WkMjDi+hPKO7AqQWzn/gVKTrsyw7SE7nX9blT32ySQ1C
+	uChtgtrCIlZN7wuIf7EInja5vA/r4Iz7jtSAk2f4s+xpqRPPz0j+lqmhZdEgEmRJZCUR
+	EGx/OUYuJHsVz7rj2pUJdm8mXtML6vcDht0PEPELnyi1xiAxcZ9f4yqKvZn7XWvUjcYz
+	tj90z4fsM3qhLrmCnJEdrKKoe8oRGqcNzrvjO2dRLaWU5EiSynJSnTDfkbWoS/Bv5oHu
+	elyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=OfeWCoFvMIPbaubS8Jq9XqgvGN5Pt4nXgjaSzwNxmeE=;
-	b=Ega82BvYBxPRSF0+ViNOH70lyuq9JLAMn5j/IUmjcr/8DKCdojYVjK/ZasrQc3l6bn
-	OG8rE9r0tGFZ6VCcXXqoQM5rPXQIG/2mPXBPmwqQiv/yYKWoufJXDXdG8brfsu3nHY9m
-	o8octMrWXxYw1KcNm5/TAwSqKySLXhebJXQwhLuTs4Tjc5bnYzNnFFI8KraITMFT/FHD
-	2emuUbYm31jRN01FfyQXEww8gwAtJKZ6DXCmqANJmM216kDqMvRTlsZ5cfnRHYQH+TfY
-	ndJR47Ph6O+A9ag+Mpr9Qv/y3phP5t13e9uDE0Fg6XXqpKkc+rQG0hzaOrNYTLCeuyPw
-	JhwQ==
-X-Gm-Message-State: APjAAAXtBGqla5UTpYFUaqBqX1tQ3vD1lCxMD6ju4kt3Hcv/3K+f7Sv4
-	Eo0VXXKkXu4XiYfcTeXuFXdHgQH0k8U=
-X-Google-Smtp-Source: APXvYqyyaIi9PIgZ1EUCpfjCqWlIOM5x3ipAm8ZcdoEuvHiGsutHuV4RTZUMuVqQKmYz6Uy/rcB8+w==
-X-Received: by 2002:a17:902:8e87:: with SMTP id
-	bg7mr60607677plb.279.1577987270879; 
-	Thu, 02 Jan 2020 09:47:50 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::fa4b])
-	by smtp.gmail.com with ESMTPSA id
-	l14sm58566815pgt.42.2020.01.02.09.47.50
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 02 Jan 2020 09:47:50 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Jan 2020 09:47:42 -0800
-Message-Id: <20200102174742.2228874-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200102174742.2228874-1-raj.khem@gmail.com>
-References: <20200102174742.2228874-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=7OmGJ+Vm2lUlIXDE6ep6H7MHfoKDAIiKZ0mBBMFehbg=;
+	b=bE7sd6s2GC7exp7VjSOTBOQuoCqEy7SsKIxgKad7VT8EmWaKaD7BEQGq+rrikRjPyp
+	JFSftsaH9EesiG0V7QF1VvCTiMBnnZ4SW10rEuVkHagKLFr8BeOyEH/Ozr2zNs5B6Iao
+	9ZvIBAzDjmwHOkhAKfn4FsihPk7gsgTDWWS7pkzP8IYucnf2jyCv15A5R5ppEZBdlPIa
+	w845Gpd20y+u86/jzIhEMSg8qqsvT5bdYM3AchFE68aQM/+tbGINz9moDz7U1bfYfxBm
+	UJWGHCIK7tk68YpBQhd7BH/gKRL3EGwn5+bFZkHmoAqlmYA8eJJ1GeTgh3mWNo7BmxpX
+	URLQ==
+X-Gm-Message-State: APjAAAVNLUgrK/gUewvHIrX0QVm7cwCP5EsVgwcE7qviggnGf7S014X1
+	I4wUZfp4inkm3n2gnVbKFoDKWfe1dNiqEGoJAUDvvbHe+is=
+X-Google-Smtp-Source: APXvYqy9HM2lI4h8KeacExcP5hCy2UP9FQwWefd5BaV53+Z/kaqohC4OhCJCXnZXvDZ1qYau1nu8yh6wyBdLuRIUJ1c=
+X-Received: by 2002:a0c:fa4b:: with SMTP id k11mr63800874qvo.55.1577989853611; 
+	Thu, 02 Jan 2020 10:30:53 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH v2 4/4] vorbis-tools: Use external gettext
+References: <20200102133915.1516-1-sno@netbsd.org>
+In-Reply-To: <20200102133915.1516-1-sno@netbsd.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 2 Jan 2020 10:30:25 -0800
+Message-ID: <CAMKF1srjDzrfhWgdnV2i0M=xxFFjKxbjgeFxrGu3r4pFB+F94A@mail.gmail.com>
+To: Jens Rehsack <sno@netbsd.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-perl][PATCH] libunix-statgrab: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,76 +53,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 17:47:50 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 02 Jan 2020 18:30:53 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Fixes build with gettext 0.20.x
+This seems to fail
+https://errors.yoctoproject.org/Errors/Details/301385/
+https://errors.yoctoproject.org/Errors/Details/301387/
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v2: Do not remove intl/ directory
-
- .../vorbis-tools/vorbis-tools/gettext.patch   | 37 +++++++++++++++++++
- .../vorbis-tools/vorbis-tools_1.4.0.bb        |  1 +
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch
-
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch
-new file mode 100644
-index 0000000000..b61ce7c184
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch
-@@ -0,0 +1,37 @@
-+Fix build with gettext 0.20.x
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -2,8 +2,8 @@
-+ 
-+ AUTOMAKE_OPTIONS = foreign dist-zip
-+ 
-+-SUBDIRS = po intl include share debian win32 @OPT_SUBDIRS@
-+-DIST_SUBDIRS = po intl include share debian win32 ogg123 oggenc oggdec ogginfo \
-++SUBDIRS = po include share debian win32 @OPT_SUBDIRS@
-++DIST_SUBDIRS = po include share debian win32 ogg123 oggenc oggdec ogginfo \
-+ 	vcut vorbiscomment m4
-+ 
-+ EXTRA_DIST = config.rpath README AUTHORS COPYING CHANGES vorbis-tools.spec config.h mkinstalldirs
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -31,7 +31,7 @@ CFLAGS="$cflags_save"
-+ AC_PROG_LIBTOOL
-+ 
-+ ALL_LINGUAS="be cs da en_GB eo es fr hr hu nl pl ro ru sk sv uk vi"
-+-AM_GNU_GETTEXT
-++AM_GNU_GETTEXT([external])
-+ 
-+ dnl --------------------------------------------------
-+ dnl System checks
-+@@ -383,7 +383,6 @@ AC_OUTPUT([
-+ Makefile
-+ m4/Makefile
-+ po/Makefile.in
-+-intl/Makefile
-+ include/Makefile
-+ share/Makefile
-+ win32/Makefile
-diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
-index 8e9914b498..89e66528ac 100644
---- a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
-+++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
-@@ -13,6 +13,7 @@ DEPENDS = "libogg libvorbis"
- SRC_URI = "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz \
-            file://0001-oggenc-Fix-large-alloca-on-bad-AIFF-input.patch \
-            file://0004-Fix-format-error-blocking-compilation-with-hardening.patch \
-+           file://gettext.patch \
-           "
- 
- SRC_URI[md5sum] = "567e0fb8d321b2cd7124f8208b8b90e6"
--- 
-2.24.1
-
+On Thu, Jan 2, 2020 at 5:39 AM Jens Rehsack <sno@netbsd.org> wrote:
+>
+> Add recipe for Unix::Statgrab perl module, a sane language binding for
+> libstatgrab.
+>
+> Signed-off-by: Jens Rehsack <sno@netbsd.org>
+> ---
+>  .../libstatgrab/libunix-statgrab_0.112.bb     | 38 +++++++++++++++++++
+>  1 file changed, 38 insertions(+)
+>  create mode 100644 meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+>
+> diff --git a/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+> new file mode 100644
+> index 000000000..7402eb879
+> --- /dev/null
+> +++ b/meta-perl/recipes-perl/libstatgrab/libunix-statgrab_0.112.bb
+> @@ -0,0 +1,38 @@
+> +SUMMARY = "Perl interface to the libstatgrab library"
+> +DESCRIPTION = "Unix::Statgrab is a wrapper for libstatgrab as available from \
+> +<http://www.i-scream.org/libstatgrab/>. It is a reasonably portable attempt \
+> +to query interesting stats about your computer. It covers information on \
+> +the operating system, CPU, memory usage, network interfaces, hard-disks \
+> +etc."
+> +
+> +HOMEPAGE = "https://metacpan.org/release/Unix-Statgrab"
+> +SECTION = "libs"
+> +LICENSE = "Artistic-1.0 | GPL-1.0+ | LGPL-2.1+"
+> +DEPENDS += "libcapture-tiny-perl-native"
+> +DEPENDS += "libconfig-autoconf-perl-native"
+> +DEPENDS += "libstatgrab"
+> +RDEPENDS_${PN} += "\
+> +    libstatgrab \
+> +    perl-module-autoloader \
+> +    perl-module-carp \
+> +    perl-module-dynaloader \
+> +    perl-module-exporter \
+> +    perl-module-strict \
+> +    perl-module-vars \
+> +    perl-module-warnings \
+> +"
+> +
+> +SRC_URI = "${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Unix-Statgrab-${PV}.tar.gz"
+> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
+> +    file://${COMMON_LICENSE_DIR}/GPL-1.0;md5=e9e36a9de734199567a4d769498f743d \
+> +    file://${COMMON_LICENSE_DIR}/LGPL-2.1;md5=1a6d268fd218675ffea8be556788b780 \
+> +"
+> +
+> +SRC_URI[md5sum] = "a6bc06b3f7749f7d77a2b1bd13402821"
+> +SRC_URI[sha256sum] = "16a29f7acaeec081bf0e7303ba5ee24fda1d21a1104669b837745f3ea61d6afa"
+> +
+> +S = "${WORKDIR}/Unix-Statgrab-${PV}"
+> +
+> +inherit cpan ptest-perl
+> +
+> +BBCLASSEXTEND = "native"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
