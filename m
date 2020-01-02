@@ -1,49 +1,49 @@
 Return-Path: <rehsack@gmail.com>
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
-	[209.85.221.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 316157F8CB
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 28F267FC0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 13:31:22 +0000 (UTC)
-Received: by mail-wr1-f42.google.com with SMTP id j42so39180864wrj.12
+	Thu,  2 Jan 2020 13:34:18 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id w15so26621743wru.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jan 2020 05:31:23 -0800 (PST)
+	Thu, 02 Jan 2020 05:34:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id;
-	bh=c9qdUap5+tb4eJbZ+jmGhBNY1E9zhYV7At1kKq+n8k0=;
-	b=IsAs2c5XLKYGTLwIaH9FScLAE0xs3OVSktpJ35L2Qn6hCFP+5K5Y23wZtFmyESxcWC
-	yiOBcJNGjhzCnfiicD4iUVEqeLx4DPAW3QsaZ3Srz7y4+J8cVemRSAaWQGET3I+SI5m1
-	4AMr+DSWwFAEMfDuRuMoxNdPevctXjdyrAQY68KGPyj+wt9k9bxwvxvUscaR41g0eWXK
-	+EKdQlkjTxaOanhC6+C1gZ3ACLKQmgcBrNuv1FIL6eShgOQmbcdU91MlaxMnXvoxq4ht
-	cs7vBDvTNimYYTVTxJwbaZY1Ym6Cjg38daCrKrAXtWFPNYPSw+8bmLrImlCgOrh7LOh0
-	0Gfg==
+	bh=cJoym7Kd0bpD+FTUHKU0KhpyuGwahiP+IVsIvDqHTQU=;
+	b=Ofa09ACRm4C9TEafpJ77MZ3wecPo1LM210TSsmoEIbJwNFbX2NRsndPvGtDwUuYaJD
+	rhYI2iHp5e+r14FvrKLxxSFJH7CZF3AaaHeyvtjqwCke3w6pNu0bc1GyrpNHeLTXl/8q
+	zvtCCw/lAcy/Tns39nZKHVO9WNB5j7sVYz827CzkmmlEgsq9rTUAJKhC5nUJGa40HsG3
+	u/B7VLy4aFnIkE2lqjya9TNc1B5wWqF63+Ae50FrLKuCqKosKxu/HwY9/mJuhbPSp3sO
+	3nTUR7fq/QD0sntIY1K7r9mxKfwGM/m3NN5EroMyXPsscAzeQWVVSC2+0Po/bgmvbzPJ
+	/R0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=c9qdUap5+tb4eJbZ+jmGhBNY1E9zhYV7At1kKq+n8k0=;
-	b=roiwuVIIA88DgNBvGLE4nOqqxb6Nk5snIZKpafMrpOYB5R7oLLAsCV1Gb2L3ZFYLPg
-	sfR61AOjIc8+ICv+c4Zyij4Z/ci7siXXJ0JJ65scbdwdsGxmOE2DWTyXVx5yy+wmW/Pm
-	/gSKHxYbOrXaQRXPHav+eKyo0gUO6r30yj90Q06C/6bJxAteRiqS+M+a9wGoOhmEKNRC
-	sczgl/NQfffO6b7zS+C1gQWOwVgQPower3erTpeSIhsptA+xKkbMk7v2X6G8zgiRC+ir
-	3YdLvB1BvevIgqArAE3JbSFi7ajio/dNh4RwBgDYux69UsM7kelJN337mHZExMYR06MQ
-	t97g==
-X-Gm-Message-State: APjAAAU/LuMCIWu/AiS3X6CFKKyii6wrO07grvu/tJiHWk6FFqFv+dZK
-	2QXOWmR5qodVyYrbetKcaRA7cyhZs8E=
-X-Google-Smtp-Source: APXvYqyvWpYSdtqkr3MnmJh8nw5rlvOFgoctCJdaAKStR5L5NrDbqc73ur34mYFODEKgzKGYtyAD/w==
-X-Received: by 2002:a5d:4f8e:: with SMTP id d14mr43553441wru.112.1577971882487;
-	Thu, 02 Jan 2020 05:31:22 -0800 (PST)
+	bh=cJoym7Kd0bpD+FTUHKU0KhpyuGwahiP+IVsIvDqHTQU=;
+	b=rlEVaERxB9vDBn8UgURxyl/XjkKJMt/MXF3vGwXnwzeYrQoDuioA4E5lO4dodW3kQD
+	9V+1pSbzhLWJHcUkpsO5NFCQ47LoNIN+JBsWsr4FqY4uBf/QcxdDLaIxsR+Lcl46Prck
+	N48cSYihNcUX5lkRBuPcYSl0fRqjdj5Jgwz46tWzsDnZgMV/VcZ27WU/6E5QmtCYaNM0
+	d/huov21fiXN0wzh7Q4RTGyYYn3SCDt/KezZx3saKHDVrsS+iWhBR6Qpq24jhPuoTGGU
+	qKBrtTboMEReLGRNYGWNTFOYVkay94gEiIIVqb1sj59TjgQdpFYSzQaC3ibnIwWYVlmL
+	J3ZQ==
+X-Gm-Message-State: APjAAAWfdyUy5qze9dH+9Q/kkV6ckJve1kQUaVATNjbJxEcl6SUSpy4a
+	7ocDSQS8oNjci2cOKQ2DVtlml/RkaJM=
+X-Google-Smtp-Source: APXvYqxzDjw3+nlcmDn2MG9M0rmhLlDliDtV7B9RVwdl2p9QO9KRoqu6bk8haZafxATAnRylcasV/A==
+X-Received: by 2002:adf:e6c5:: with SMTP id y5mr80427654wrm.210.1577972058491; 
+	Thu, 02 Jan 2020 05:34:18 -0800 (PST)
 Received: from beaker.muppets.liwing.de (p5B25B970.dip0.t-ipconnect.de.
-	[91.37.185.112])
-	by smtp.gmail.com with ESMTPSA id i5sm8523487wml.31.2020.01.02.05.31.21
+	[91.37.185.112]) by smtp.gmail.com with ESMTPSA id
+	s128sm8664174wme.39.2020.01.02.05.34.17
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 02 Jan 2020 05:31:21 -0800 (PST)
+	Thu, 02 Jan 2020 05:34:17 -0800 (PST)
 Sender: Jens Rehsack <rehsack@gmail.com>
 From: Jens Rehsack <sno@netbsd.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Jan 2020 14:31:02 +0100
-Message-Id: <20200102133102.545-1-sno@netbsd.org>
+Date: Thu,  2 Jan 2020 14:34:04 +0100
+Message-Id: <20200102133404.1274-1-sno@netbsd.org>
 X-Mailer: git-send-email 2.17.1
 Cc: Jens Rehsack <sno@netbsd.org>
-Subject: [meta-perl][PATCH] libtest-warnings-perl: add recipe
+Subject: [meta-perl][PATCH] libfile-slurper-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,52 +56,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 13:31:22 -0000
+X-List-Received-Date: Thu, 02 Jan 2020 13:34:18 -0000
 
-Add recipe for Test::Warnings modulem widely used by Kwalitee tests
-is modern perl5 module distributions.
+Since File::Slurp is broken since ages and File::Slurp::Tiny discouraged
+for some years, newer perl5 module distributions often rely on File::Slurper.
 
 Signed-off-by: Jens Rehsack <sno@netbsd.org>
 ---
- .../libtest/libtest-warnings-perl_0.028.bb    | 29 +++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.028.bb
+ .../libfile/libfile-slurper-perl_0.012.bb     | 36 +++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.012.bb
 
-diff --git a/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.028.bb b/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.028.bb
+diff --git a/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.012.bb b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.012.bb
 new file mode 100644
-index 000000000..b40a5456e
+index 000000000..b684abd4b
 --- /dev/null
-+++ b/meta-perl/recipes-perl/libtest/libtest-warnings-perl_0.028.bb
-@@ -0,0 +1,29 @@
-+# Copyright (C) 2020 Jens Rehsack <sno@netbsd.org>
-+# Released under the MIT license (see COPYING.MIT for the terms)
-+
-+DESCRIPTION = "If you've ever tried to use Test::NoWarnings to confirm there are no \
-+warnings generated by your tests, combined with the convenience of \
-+\\"done_testing\\" to not have to declare a test count, you'll have discovered \
-+that these two features do not play well together, as the test count will \
-+be calculated *before* the warnings test is run, resulting in a TAP error. \
-+(See "examples/test_nowarnings.pl" in this distribution for a \
-+demonstration.)"
++++ b/meta-perl/recipes-perl/libfile/libfile-slurper-perl_0.012.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "A simple, sane and efficient module to slurp a file"
++DESCRIPTION = "This module provides functions for fast and correct slurping and spewing. \
++All functions are optionally exported. All functions throw exceptions on \
++errors, write functions don't return any meaningful value."
 +
 +SECTION = "libs"
 +LICENSE = "Artistic-1.0 | GPL-1.0+"
 +
-+HOMEPAGE=       "https://metacpan.org/release/Test-Warnings"
++HOMEPAGE=       "https://metacpan.org/release/File-Slurper"
 +
 +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
 +file://${COMMON_LICENSE_DIR}/GPL-1.0;md5=e9e36a9de734199567a4d769498f743d"
 +
-+SRC_URI = "https://cpan.metacpan.org/authors/id/E/ET/ETHER/Test-Warnings-${PV}.tar.gz"
++SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/File-Slurper-${PV}.tar.gz"
 +
-+SRC_URI[md5sum] = "cd007342017fedfb02d6fde75602e473"
-+SRC_URI[sha256sum] = "26fda9f8d279e943d27e43a4a3a5cea8a6592cd36e7308695f8dc6602262c0e0"
++SRC_URI[md5sum] = "5742c63096392dfee50b8db314bcca18"
++SRC_URI[sha256sum] = "4efb2ea416b110a1bda6f8133549cc6ea3676402e3caf7529fce0313250aa578"
++RDEPENDS_${PN} = " \
++    perl-module-carp \
++    perl-module-encode \
++    perl-module-exporter \
++    perl-module-perlio \
++    perl-module-perlio-encoding \
++    perl-module-strict \
++    perl-module-warnings \
++"
 +
-+S = "${WORKDIR}/Test-Warnings-${PV}"
++RDEPENDS_${PN}-ptest += "libtest-warnings-perl \
++    perl-module-test-more \
++    "
++
++S = "${WORKDIR}/File-Slurper-${PV}"
 +
 +inherit cpan allarch ptest-perl
 +
-+BBCLASSEXTEND = "native nativesdk"
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
