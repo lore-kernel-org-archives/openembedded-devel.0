@@ -1,52 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com
-	[209.85.215.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B8E77F9AE
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D4597FC40
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 06:13:47 +0000 (UTC)
-Received: by mail-pg1-f174.google.com with SMTP id b137so21423316pga.6
+	Thu,  2 Jan 2020 06:13:49 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id s64so21414593pgb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Jan 2020 22:13:48 -0800 (PST)
+	Wed, 01 Jan 2020 22:13:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=/SIpIgS3Bx3smM+seKKxg3sRegUlK+1P3FgUiP80gDQ=;
-	b=aJ+R2QYXdvTRmgbp/YlwMFaJIZ0Tr+lQhi4VA9vw0hC4BGBPelCu4q5AZfAAnmGyGJ
-	cWa4cCBWdI8b7Ka0rbAc6WLFYt34Pydy438KJr37bewL4SA2Qi1R9c6R0pLHB/eP+11c
-	AYdIEDsmIAUtS+GYC5eMTX/W+hRdJR4ox+GNX46NKjvtmctx0pxZ89YiG79jLDK9PiZU
-	pcTcTsp+XnSif2pJvG2uItPj15KJwdlddbwUsc7FAFyq99S0Lkxk+qhMJoYZGpQyeMgn
-	esCzZU8D9zD0XxQiJIWFKjGs5X27XoFvTn91GWWZ2P16iT2r5i8AaK7fUJrfu6+anmOg
-	GzNw==
+	bh=YMOjMgFmTn8T47c47+BUsav3dxsKWC7NNkRwEp2f6G0=;
+	b=NWeFehl2H13KB3aIviSsmdMMi3TOEhfXer+pnGv5f909Y70g3ngaPL+D6fjF7q2ovs
+	JlX8XTPR2vt9pstM1DJIQzmI4NUivrcENa5j3/gDDdvjAMw34Xr4d6pxzGB11cQdEA6l
+	BbBnaoy5r6pmTlaxa5LjVkyQz/VYvYWltT3J9sQcNk0J7Tg7n/GxGQm0mjtvzfRkWydL
+	mHE+9+4gdKUwaKHY2KSEcTzr1Hte6O8rey3EamX4adznY2Eye54NE2GdMCeyF180wqbx
+	nBpcMb/bqLDt9pTZfMDIX61Bl2y3VTZdWG72mU4f3Wr4uF4IVSGKig6v+5jcpgh0cobH
+	86TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=/SIpIgS3Bx3smM+seKKxg3sRegUlK+1P3FgUiP80gDQ=;
-	b=nuc++un4td4ifaKuQS7wnkWy1o5okcMjJ7Ymuv8EnAY4cUw2P3HM73im8kYqZmRNwA
-	69H5pYqbduom1+/zDPtYIKaUoBJmeRbvb7b+6Cs92+cQwrrIcSbmSOHemzdC1ZWkJ4Tu
-	tATxfQXadjS0tPQx0Pp8MKEBDJtzN+tsrqGTAKohn83LxvZWZDzO49r7qb7IQnne2t5w
-	UEHfTnj5QAlA5d81ulmzCA6Guvji5adwT5VZ1MR8E4FuwYSNThUgCjBBYoX75QHw58cd
-	0vrHEzaj+GMwegDD7FGqbcwsxVAt7rQnEQ8jX9D/DkY+E981ga0ksoYhmeZRViGzCZkk
-	Wxlg==
-X-Gm-Message-State: APjAAAUQVS2mzIgy/ROO5A7hRDbC9a5CCxb5ORrBl2BajKcOxC8MCoMg
-	/9UcCtVKTzl15bxPIFfpLRoRhcnVh8E=
-X-Google-Smtp-Source: APXvYqxKYHxfzvElFp9MO+ImDKpw7CDtwVtxUFzcTV216T0mJNtAkXaeRzQZr7fNmPC8oBe8hfeA/g==
-X-Received: by 2002:a63:1418:: with SMTP id u24mr84908581pgl.279.1577945624457;
-	Wed, 01 Jan 2020 22:13:44 -0800 (PST)
+	bh=YMOjMgFmTn8T47c47+BUsav3dxsKWC7NNkRwEp2f6G0=;
+	b=WLZRVyyoEyLLp1dNW3tTcC+tWAQ5HdV66VgbpGqXvx6SCpwTiwG1IKXaWxgv+ka5wf
+	u4t06kHhRNyG2FL2pMBDsd1ynV13a+GpnAIXpWNUfrvl0OEZf7miVTMloKpzSYP19NUC
+	uoUlMkKXu9EDEagHLXL52nNrVnfMCdljfTTvdffO1t4vQKisqoR8XOeXge1zEc6mAOjL
+	ijE17BjfEq3FNTsUWCLGQLZdigFqU7htUwsUtbjDVndoRB/Fz6GzerCCj9k3iqo5UQcu
+	Q4agtaPSpBNQc/4/eXcHLSEn7KNMXPH92RYDNjsYylBfns4q0xjsBgLtANhU4jX47+jc
+	TuSA==
+X-Gm-Message-State: APjAAAVvo3CXz+wOfrzbMH+jRsnQCGAe5BYgduQ6OT3vd61hN7seqMWe
+	E+zF5uS1QvOptV7qxXaPOvI2cM7b62Y=
+X-Google-Smtp-Source: APXvYqwV++3svqHG890Zl7eeIcD4Zcvagfy1vjehUp7/afyqV/TNivWIG9NIHFfGDuQ/lOJPuH3mDQ==
+X-Received: by 2002:a05:6a00:11:: with SMTP id
+	h17mr85815470pfk.209.1577945626765; 
+	Wed, 01 Jan 2020 22:13:46 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::fa4b])
 	by smtp.gmail.com with ESMTPSA id
-	e19sm9369149pjr.10.2020.01.01.22.13.42
+	e19sm9369149pjr.10.2020.01.01.22.13.44
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 01 Jan 2020 22:13:43 -0800 (PST)
+	Wed, 01 Jan 2020 22:13:45 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Jan 2020 22:13:28 -0800
-Message-Id: <20200102061330.480482-4-raj.khem@gmail.com>
+Date: Wed,  1 Jan 2020 22:13:29 -0800
+Message-Id: <20200102061330.480482-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20200102061330.480482-1-raj.khem@gmail.com>
 References: <20200102061330.480482-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 4/6] hddtemp: Fix build with latest gettext 0.20.x
+Subject: [meta-multimedia][PATCH 5/6] vorbis-tools: Use external gettext
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,228 +60,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 06:13:48 -0000
+X-List-Received-Date: Thu, 02 Jan 2020 06:13:50 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Fixes build with gettext 0.20.x
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ame-to-configure.ac-and-use-external.patch | 14743 ++++++++++++++++
- .../hddtemp/hddtemp_0.3-beta15.bb             |     1 +
- 2 files changed, 14744 insertions(+)
- create mode 100644 meta-oe/recipes-support/hddtemp/hddtemp/0001-configure.ac-Rename-to-configure.ac-and-use-external.patch
+ .../vorbis-tools/vorbis-tools/gettext.patch   | 22857 ++++++++++++++++
+ .../vorbis-tools/vorbis-tools_1.4.0.bb        |     1 +
+ 2 files changed, 22858 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch
 
-diff --git a/meta-oe/recipes-support/hddtemp/hddtemp/0001-configure.ac-Rename-to-configure.ac-and-use-external.patch b/meta-oe/recipes-support/hddtemp/hddtemp/0001-configure.ac-Rename-to-configure.ac-and-use-external.patch
+diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch
 new file mode 100644
-index 0000000000..a06dbad1ea
+index 0000000000..cba9278012
 --- /dev/null
-+++ b/meta-oe/recipes-support/hddtemp/hddtemp/0001-configure.ac-Rename-to-configure.ac-and-use-external.patch
-@@ -0,0 +1,14743 @@
-+From d7e6fe2ac69333c2d943a4b8eb139373d1fb2ce2 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 31 Dec 2019 18:08:09 -0800
-+Subject: [PATCH] configure.ac: Rename to configure.ac and use external gettext
++++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools/gettext.patch
+@@ -0,0 +1,22857 @@
++Fix build with gettext 0.20.x
 +
 +Upstream-Status: Pending
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 81 ++++++++++++++++++++++++++++++++++++++++++++++++++++
-+ 1 file changed, 81 insertions(+)
-+ create mode 100644 configure.ac
 +
-+--- /dev/null
-++++ b/configure.ac
-+@@ -0,0 +1,81 @@
-++dnl Process this file with autoconf to produce a configure script.
-++
-++# Initialization
-++AC_INIT
-++AC_CONFIG_SRCDIR([Makefile.am])
-++AC_CONFIG_HEADERS([config.h])
-++
-++# Determine the host and build type. The target is always a PIC.
-++AC_CANONICAL_HOST
-++
-++AM_INIT_AUTOMAKE(hddtemp, 0.3-beta15)
-++
-++dnl Checks for programs.
-++AC_PROG_CC
-++AC_PROG_INSTALL
-++
-++# append the host alias to the tools for cross compiling
-++AC_HEADER_STDC
-++AC_CHECK_HEADERS(fcntl.h)
-++AC_CHECK_HEADERS(iconv.h)
-++AC_CHECK_HEADERS(netinet/in.h)
-++AC_CHECK_TYPE(in_addr_t, ,[AC_DEFINE_UNQUOTED([in_addr_t], [uint32_t], [Define to 'uint32_t' if <netinet/in.h> does not define.])], [#include <netinet/in.h>])
-++
-++# Checks for typedefs, structures, and compiler characteristics.
-++AC_C_CONST
-++AC_STRUCT_TM
-++
-++dnl internationalization macros
-++AM_GNU_GETTEXT([external])
-++
-++AC_CHECK_FUNCS([bindtextdomain textdomain iconv])
-++
-++dnl reasonable guesses for where stuff is installed
-++dnl if we don't do that now, the config.h will use ${prefix}
-++dnl for DEFAULT_DATABASE_PATH.
-++if test "x$prefix" = "xNONE"; then
-++   prefix="/usr/local"
-++fi
-++if test "x$exec_prefix" = "xNONE"; then
-++   exec_prefix=$prefix
-++fi
-++
-++AC_MSG_CHECKING([Location of hddtemp.db])
-++DEFAULT_DATABASE_PATH=
-++#db_path=\"`eval echo ${datadir}`/misc/hddtemp.db\"
-++db_path=\"/usr/share/misc/hddtemp.db\"
-++AC_ARG_WITH(db_path,
-++               [  --with-db-path=PATH \
-++                Default location of hddtemp.db file [/usr/share/misc/hddtemp.db]],
-++               [  if test -d "$withval"; then
-++                     AC_MSG_FAILURE([new file name for db-path])
-++                  fi
-++                  DEFAULT_DATABASE_PATH="\"$withval\""
-++               ],
-++               [  DEFAULT_DATABASE_PATH="$db_path" ])
-++AC_MSG_RESULT($DEFAULT_DATABASE_PATH)
-++AC_DEFINE_UNQUOTED([DEFAULT_DATABASE_PATH], [$DEFAULT_DATABASE_PATH], [Default location of drive info database])
-++
-++#CFLAGS="$CFLAGS -Wall -fomit-frame-pointer -Wcast-align"
-++CFLAGS="$CFLAGS -Wall -W -Wcast-align"
-++
-++# Substitute configuration variables
-++AC_CONFIG_FILES([Makefile \
-++po/Makefile.in \
-++m4/Makefile \
-++src/Makefile \
-++doc/Makefile \
-++])
-++AC_OUTPUT
-++
-++AC_MSG_RESULT([
-++
-++hddtemp-$VERSION is now configured for $canonical_host_type
-++
-++  Build:                $build
-++  Host:                 $host
-++  Source directory:     $srcdir
-++  Installation prefix:  $prefix
-++  C compiler:           $CC $CFLAGS
-++
-++])
 +--- a/Makefile.am
 ++++ b/Makefile.am
-+@@ -12,7 +12,7 @@ EXTRA_DIST = config.rpath  autogen.sh \
-+              README \
-+              TODO
-+ 	     
-+-SUBDIRS = intl po m4 src doc
-++SUBDIRS = po m4 src doc
++@@ -2,8 +2,8 @@
 + 
-+ CLEANFILES = *~
++ AUTOMAKE_OPTIONS = foreign dist-zip
 + 
-+--- a/configure.in
-++++ /dev/null
-+@@ -1,83 +0,0 @@
-+-dnl Process this file with autoconf to produce a configure script.
-+-
-+-# Initialization
-+-AC_INIT
-+-AC_CONFIG_SRCDIR([Makefile.am])
-+-AC_CONFIG_HEADERS([config.h])
-+-
-+-# Determine the host and build type. The target is always a PIC.
-+-AC_CANONICAL_HOST
-+-
-+-AM_INIT_AUTOMAKE(hddtemp, 0.3-beta15)
-+-
-+-dnl Checks for programs.
-+-AC_PROG_CC
-+-AC_PROG_INSTALL
-+-
-+-# append the host alias to the tools for cross compiling
-+-AC_HEADER_STDC
-+-AC_CHECK_HEADERS(fcntl.h)
-+-AC_CHECK_HEADERS(iconv.h)
-+-AC_CHECK_HEADERS(netinet/in.h)
-+-AC_CHECK_TYPE(in_addr_t, ,[AC_DEFINE_UNQUOTED([in_addr_t], [uint32_t], [Define to 'uint32_t' if <netinet/in.h> does not define.])], [#include <netinet/in.h>])
-+-
-+-# Checks for typedefs, structures, and compiler characteristics.
-+-AC_C_CONST
-+-AC_STRUCT_TM
-+-
-+-dnl internationalization macros
-+-AM_GNU_GETTEXT_VERSION
++-SUBDIRS = po intl include share debian win32 @OPT_SUBDIRS@
++-DIST_SUBDIRS = po intl include share debian win32 ogg123 oggenc oggdec ogginfo \
+++SUBDIRS = po include share debian win32 @OPT_SUBDIRS@
+++DIST_SUBDIRS = po include share debian win32 ogg123 oggenc oggdec ogginfo \
++ 	vcut vorbiscomment m4
++ 
++ EXTRA_DIST = config.rpath README AUTHORS COPYING CHANGES vorbis-tools.spec config.h mkinstalldirs
++--- a/configure.ac
+++++ b/configure.ac
++@@ -31,7 +31,7 @@ CFLAGS="$cflags_save"
++ AC_PROG_LIBTOOL
++ 
++ ALL_LINGUAS="be cs da en_GB eo es fr hr hu nl pl ro ru sk sv uk vi"
 +-AM_GNU_GETTEXT
-+-#AM_GNU_GETTEXT([external])
-+-
-+-AC_CHECK_FUNCS([bindtextdomain textdomain iconv])
-+-
-+-dnl reasonable guesses for where stuff is installed
-+-dnl if we don't do that now, the config.h will use ${prefix}
-+-dnl for DEFAULT_DATABASE_PATH.
-+-if test "x$prefix" = "xNONE"; then
-+-   prefix="/usr/local"
-+-fi
-+-if test "x$exec_prefix" = "xNONE"; then
-+-   exec_prefix=$prefix
-+-fi
-+-
-+-AC_MSG_CHECKING([Location of hddtemp.db])
-+-DEFAULT_DATABASE_PATH=
-+-#db_path=\"`eval echo ${datadir}`/misc/hddtemp.db\"
-+-db_path=\"/usr/share/misc/hddtemp.db\"
-+-AC_ARG_WITH(db_path,
-+-               [  --with-db-path=PATH \
-+-                Default location of hddtemp.db file [/usr/share/misc/hddtemp.db]],
-+-               [  if test -d "$withval"; then
-+-                     AC_MSG_FAILURE([new file name for db-path])
-+-                  fi
-+-                  DEFAULT_DATABASE_PATH="\"$withval\"" 
-+-               ],
-+-               [  DEFAULT_DATABASE_PATH="$db_path" ])
-+-AC_MSG_RESULT($DEFAULT_DATABASE_PATH)
-+-AC_DEFINE_UNQUOTED([DEFAULT_DATABASE_PATH], [$DEFAULT_DATABASE_PATH], [Default location of drive info database])
-+-
-+-#CFLAGS="$CFLAGS -Wall -fomit-frame-pointer -Wcast-align"
-+-CFLAGS="$CFLAGS -Wall -W -Wcast-align"
-+-
-+-# Substitute configuration variables
-+-AC_CONFIG_FILES([Makefile  intl/Makefile \
-+-po/Makefile.in \
-+-m4/Makefile \
-+-src/Makefile \
-+-doc/Makefile \
-+-])
-+-AC_OUTPUT
-+-
-+-AC_MSG_RESULT([
-+-
-+-hddtemp-$VERSION is now configured for $canonical_host_type
-+-
-+-  Build:                $build
-+-  Host:                 $host
-+-  Source directory:     $srcdir
-+-  Installation prefix:  $prefix
-+-  C compiler:           $CC $CFLAGS
-+-  
-+-])
+++AM_GNU_GETTEXT([external])
++ 
++ dnl --------------------------------------------------
++ dnl System checks
++@@ -383,7 +383,6 @@ AC_OUTPUT([
++ Makefile
++ m4/Makefile
++ po/Makefile.in
++-intl/Makefile
++ include/Makefile
++ share/Makefile
++ win32/Makefile
 +--- a/intl/ChangeLog
 ++++ /dev/null
 +@@ -1,4 +0,0 @@
-+-2005-02-24  GNU  <bug-gnu-gettext@gnu.org>
++-2007-11-07  GNU  <bug-gnu-gettext@gnu.org>
 +-
-+-	* Version 0.14.2 released.
++-	* Version 0.17 released.
 +-
 +--- a/intl/Makefile.in
 ++++ /dev/null
-+@@ -1,500 +0,0 @@
++@@ -1,587 +0,0 @@
 +-# Makefile for directory with message catalog handling library of GNU gettext
-+-# Copyright (C) 1995-1998, 2000-2005 Free Software Foundation, Inc.
++-# Copyright (C) 1995-1998, 2000-2007 Free Software Foundation, Inc.
 +-#
 +-# This program is free software; you can redistribute it and/or modify it
 +-# under the terms of the GNU Library General Public License as published
@@ -294,7 +141,7 @@ index 0000000000..a06dbad1ea
 +-#
 +-# You should have received a copy of the GNU Library General Public
 +-# License along with this program; if not, write to the Free Software
-+-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-# USA.
 +-
 +-PACKAGE = @PACKAGE@
@@ -305,6 +152,17 @@ index 0000000000..a06dbad1ea
 +-srcdir = @srcdir@
 +-top_srcdir = @top_srcdir@
 +-top_builddir = ..
++-
++-# The VPATH variables allows builds with $builddir != $srcdir, assuming a
++-# 'make' program that supports VPATH (such as GNU make). This line is removed
++-# by autoconf automatically when "$(srcdir)" = ".".
++-# In this directory, the VPATH handling is particular:
++-# 1. If INTL_LIBTOOL_SUFFIX_PREFIX is 'l' (indicating a build with libtool),
++-#    the .c -> .lo rules carefully use $(srcdir), so that VPATH can be omitted.
++-# 2. If PACKAGE = gettext-tools, VPATH _must_ be omitted, because otherwise
++-#    'make' does the wrong thing if GNU gettext was configured with
++-#    "./configure --srcdir=`pwd`", namely it gets confused by the .lo and .la
++-#    files it finds in srcdir = ../../gettext-runtime/intl.
 +-VPATH = $(srcdir)
 +-
 +-prefix = @prefix@
@@ -312,6 +170,7 @@ index 0000000000..a06dbad1ea
 +-transform = @program_transform_name@
 +-libdir = @libdir@
 +-includedir = @includedir@
++-datarootdir = @datarootdir@
 +-datadir = @datadir@
 +-localedir = $(datadir)/locale
 +-gettextsrcdir = $(datadir)/gettext/intl
@@ -320,8 +179,18 @@ index 0000000000..a06dbad1ea
 +-
 +-INSTALL = @INSTALL@
 +-INSTALL_DATA = @INSTALL_DATA@
-+-MKINSTALLDIRS = @MKINSTALLDIRS@
-+-mkinstalldirs = $(SHELL) $(MKINSTALLDIRS)
++-
++-# We use $(mkdir_p).
++-# In automake <= 1.9.x, $(mkdir_p) is defined either as "mkdir -p --" or as
++-# "$(mkinstalldirs)" or as "$(install_sh) -d". For these automake versions,
++-# @install_sh@ does not start with $(SHELL), so we add it.
++-# In automake >= 1.10, @mkdir_p@ is derived from ${MKDIR_P}, which is defined
++-# either as "/path/to/mkdir -p" or ".../install-sh -c -d". For these automake
++-# versions, $(mkinstalldirs) and $(install_sh) are unused.
++-mkinstalldirs = $(SHELL) @install_sh@ -d
++-install_sh = $(SHELL) @install_sh@
++-MKDIR_P = @MKDIR_P@
++-mkdir_p = @mkdir_p@
 +-
 +-l = @INTL_LIBTOOL_SUFFIX_PREFIX@
 +-
@@ -331,16 +200,21 @@ index 0000000000..a06dbad1ea
 +-RANLIB = @RANLIB@
 +-YACC = @INTLBISON@ -y -d
 +-YFLAGS = --name-prefix=__gettext
++-WINDRES = @WINDRES@
 +-
++-# -DBUILDING_LIBINTL: Change expansion of LIBINTL_DLL_EXPORTED macro.
++-# -DBUILDING_DLL: Change expansion of RELOCATABLE_DLL_EXPORTED macro.
 +-DEFS = -DLOCALEDIR=\"$(localedir)\" -DLOCALE_ALIAS_PATH=\"$(aliaspath)\" \
-+--DLIBDIR=\"$(libdir)\" -DIN_LIBINTL \
++--DLIBDIR=\"$(libdir)\" -DBUILDING_LIBINTL -DBUILDING_DLL -DIN_LIBINTL \
 +--DENABLE_RELOCATABLE=1 -DIN_LIBRARY -DINSTALLDIR=\"$(libdir)\" -DNO_XMALLOC \
 +--Dset_relocation_prefix=libintl_set_relocation_prefix \
 +--Drelocate=libintl_relocate \
 +--DDEPENDS_ON_LIBICONV=1 @DEFS@
 +-CPPFLAGS = @CPPFLAGS@
-+-CFLAGS = @CFLAGS@
-+-LDFLAGS = @LDFLAGS@
++-CFLAGS = @CFLAGS@ @CFLAG_VISIBILITY@
++-LDFLAGS = @LDFLAGS@ $(LDFLAGS_@WOE32DLL@)
++-LDFLAGS_yes = -Wl,--export-all-symbols
++-LDFLAGS_no =
 +-LIBS = @LIBS@
 +-
 +-COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS) $(XCFLAGS)
@@ -353,7 +227,9 @@ index 0000000000..a06dbad1ea
 +-  plural-exp.h \
 +-  eval-plural.h \
 +-  localcharset.h \
++-  lock.h \
 +-  relocatable.h \
++-  tsearch.h tsearch.c \
 +-  xsize.h \
 +-  printf-args.h printf-args.c \
 +-  printf-parse.h wprintf-parse.h printf-parse.c \
@@ -366,6 +242,7 @@ index 0000000000..a06dbad1ea
 +-  dgettext.c \
 +-  gettext.c \
 +-  finddomain.c \
++-  hash-string.c \
 +-  loadmsgcat.c \
 +-  localealias.c \
 +-  textdomain.c \
@@ -378,13 +255,16 @@ index 0000000000..a06dbad1ea
 +-  plural.y \
 +-  plural-exp.c \
 +-  localcharset.c \
++-  lock.c \
 +-  relocatable.c \
 +-  langprefs.c \
 +-  localename.c \
 +-  log.c \
 +-  printf.c \
++-  version.c \
 +-  osdep.c \
 +-  os2compat.c \
++-  intl-exports.c \
 +-  intl-compat.c
 +-OBJECTS = \
 +-  bindtextdom.$lo \
@@ -392,6 +272,7 @@ index 0000000000..a06dbad1ea
 +-  dgettext.$lo \
 +-  gettext.$lo \
 +-  finddomain.$lo \
++-  hash-string.$lo \
 +-  loadmsgcat.$lo \
 +-  localealias.$lo \
 +-  textdomain.$lo \
@@ -404,22 +285,27 @@ index 0000000000..a06dbad1ea
 +-  plural.$lo \
 +-  plural-exp.$lo \
 +-  localcharset.$lo \
++-  lock.$lo \
 +-  relocatable.$lo \
 +-  langprefs.$lo \
 +-  localename.$lo \
 +-  log.$lo \
 +-  printf.$lo \
++-  version.$lo \
 +-  osdep.$lo \
 +-  intl-compat.$lo
++-OBJECTS_RES_yes = libintl.res
++-OBJECTS_RES_no =
 +-DISTFILES.common = Makefile.in \
-+-config.charset locale.alias ref-add.sin ref-del.sin $(HEADERS) $(SOURCES)
++-config.charset locale.alias ref-add.sin ref-del.sin export.h libintl.rc \
++-$(HEADERS) $(SOURCES)
 +-DISTFILES.generated = plural.c
 +-DISTFILES.normal = VERSION
-+-DISTFILES.gettext = COPYING.LIB-2.0 COPYING.LIB-2.1 libintl.glibc \
-+-libgnuintl.h_vms Makefile.vms \
-+-libgnuintl.h.msvc-static libgnuintl.h.msvc-shared README.woe32 Makefile.msvc
++-DISTFILES.gettext = COPYING.LIB-2.0 COPYING.LIB-2.1 libintl.glibc README.woe32
 +-DISTFILES.obsolete = xopen-msg.sed linux-msg.sed po2tbl.sed.in cat-compat.c \
-+-COPYING.LIB-2 gettext.h libgettext.h plural-eval.c libgnuintl.h
++-COPYING.LIB-2 gettext.h libgettext.h plural-eval.c libgnuintl.h \
++-libgnuintl.h_vms Makefile.vms libgnuintl.h.msvc-static \
++-libgnuintl.h.msvc-shared Makefile.msvc
 +-
 +-all: all-@USE_INCLUDED_LIBINTL@
 +-all-yes: libintl.$la libintl.h charset.alias ref-add.sed ref-del.sed
@@ -432,10 +318,11 @@ index 0000000000..a06dbad1ea
 +-	$(AR) cru $@ $(OBJECTS)
 +-	$(RANLIB) $@
 +-
-+-libintl.la libgnuintl.la: $(OBJECTS)
++-libintl.la libgnuintl.la: $(OBJECTS) $(OBJECTS_RES_@WOE32@)
 +-	$(LIBTOOL) --mode=link \
 +-	  $(CC) $(CPPFLAGS) $(CFLAGS) $(XCFLAGS) $(LDFLAGS) -o $@ \
-+-	  $(OBJECTS) @LTLIBICONV@ @INTL_MACOSX_LIBS@ $(LIBS) -lc \
++-	  $(OBJECTS) @LTLIBICONV@ @INTL_MACOSX_LIBS@ $(LIBS) @LTLIBTHREAD@ @LTLIBC@ \
++-	  $(OBJECTS_RES_@WOE32@) \
 +-	  -version-info $(LTV_CURRENT):$(LTV_REVISION):$(LTV_AGE) \
 +-	  -rpath $(libdir) \
 +-	  -no-undefined
@@ -445,9 +332,9 @@ index 0000000000..a06dbad1ea
 +-# according to the libtool documentation, section "Library interface versions".
 +-# Maintainers of other packages that include the intl directory must *not*
 +-# change these values.
-+-LTV_CURRENT=7
-+-LTV_REVISION=1
-+-LTV_AGE=4
++-LTV_CURRENT=8
++-LTV_REVISION=2
++-LTV_AGE=0
 +-
 +-.SUFFIXES:
 +-.SUFFIXES: .c .y .o .lo .sin .sed
@@ -469,6 +356,8 @@ index 0000000000..a06dbad1ea
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/gettext.c
 +-finddomain.lo: $(srcdir)/finddomain.c
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/finddomain.c
++-hash-string.lo: $(srcdir)/hash-string.c
++-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/hash-string.c
 +-loadmsgcat.lo: $(srcdir)/loadmsgcat.c
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/loadmsgcat.c
 +-localealias.lo: $(srcdir)/localealias.c
@@ -493,6 +382,8 @@ index 0000000000..a06dbad1ea
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/plural-exp.c
 +-localcharset.lo: $(srcdir)/localcharset.c
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/localcharset.c
++-lock.lo: $(srcdir)/lock.c
++-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/lock.c
 +-relocatable.lo: $(srcdir)/relocatable.c
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/relocatable.c
 +-langprefs.lo: $(srcdir)/langprefs.c
@@ -503,10 +394,30 @@ index 0000000000..a06dbad1ea
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/log.c
 +-printf.lo: $(srcdir)/printf.c
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/printf.c
++-version.lo: $(srcdir)/version.c
++-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/version.c
 +-osdep.lo: $(srcdir)/osdep.c
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/osdep.c
 +-intl-compat.lo: $(srcdir)/intl-compat.c
 +-	$(LIBTOOL) --mode=compile $(COMPILE) $(srcdir)/intl-compat.c
++-
++-# This rule is executed only on Woe32 systems.
++-# The following sed expressions come from the windres-options script. They are
++-# inlined here, so that they can be written in a Makefile without requiring a
++-# temporary file. They must contain literal newlines rather than semicolons,
++-# so that they work with the sed-3.02 that is shipped with MSYS. We can use
++-# GNU bash's $'\n' syntax to obtain such a newline.
++-libintl.res: $(srcdir)/libintl.rc
++-	nl=$$'\n'; \
++-	sed_extract_major='/^[0-9]/{'$${nl}'s/^\([0-9]*\).*/\1/p'$${nl}q$${nl}'}'$${nl}'c\'$${nl}0$${nl}q; \
++-	sed_extract_minor='/^[0-9][0-9]*[.][0-9]/{'$${nl}'s/^[0-9]*[.]\([0-9]*\).*/\1/p'$${nl}q$${nl}'}'$${nl}'c\'$${nl}0$${nl}q; \
++-	sed_extract_subminor='/^[0-9][0-9]*[.][0-9][0-9]*[.][0-9]/{'$${nl}'s/^[0-9]*[.][0-9]*[.]\([0-9]*\).*/\1/p'$${nl}q$${nl}'}'$${nl}'c\'$${nl}0$${nl}q; \
++-	$(WINDRES) \
++-	  "-DPACKAGE_VERSION_STRING=\\\"$(VERSION)\\\"" \
++-	  "-DPACKAGE_VERSION_MAJOR="`echo '$(VERSION)' | sed -n -e "$$sed_extract_major"` \
++-	  "-DPACKAGE_VERSION_MINOR="`echo '$(VERSION)' | sed -n -e "$$sed_extract_minor"` \
++-	  "-DPACKAGE_VERSION_SUBMINOR="`echo '$(VERSION)' | sed -n -e "$$sed_extract_subminor"` \
++-	  -i $(srcdir)/libintl.rc -o libintl.res --output-format=coff
 +-
 +-ref-add.sed: $(srcdir)/ref-add.sin
 +-	sed -e '/^#/d' -e 's/@''PACKAGE''@/@PACKAGE@/g' $(srcdir)/ref-add.sin > t-ref-add.sed
@@ -518,14 +429,29 @@ index 0000000000..a06dbad1ea
 +-INCLUDES = -I. -I$(srcdir) -I..
 +-
 +-libgnuintl.h: $(srcdir)/libgnuintl.h.in
-+-	sed -e 's,@''HAVE_POSIX_PRINTF''@,@HAVE_POSIX_PRINTF@,g' \
++-	sed -e '/IN_LIBGLOCALE/d' \
++-	    -e 's,@''HAVE_POSIX_PRINTF''@,@HAVE_POSIX_PRINTF@,g' \
 +-	    -e 's,@''HAVE_ASPRINTF''@,@HAVE_ASPRINTF@,g' \
 +-	    -e 's,@''HAVE_SNPRINTF''@,@HAVE_SNPRINTF@,g' \
 +-	    -e 's,@''HAVE_WPRINTF''@,@HAVE_WPRINTF@,g' \
-+-	  < $(srcdir)/libgnuintl.h.in > libgnuintl.h
++-	  < $(srcdir)/libgnuintl.h.in \
++-	| if test '@WOE32DLL@' = yes; then \
++-	    sed -e 's/extern \([^()]*\);/extern __declspec (dllimport) \1;/'; \
++-	  else \
++-	    cat; \
++-	  fi \
++-	| sed -e 's/extern \([^"]\)/extern LIBINTL_DLL_EXPORTED \1/' \
++-	      -e "/#define _LIBINTL_H/r $(srcdir)/export.h" \
++-	| sed -e 's,@''HAVE_VISIBILITY''@,@HAVE_VISIBILITY@,g' \
++-	  > libgnuintl.h
 +-
-+-libintl.h: libgnuintl.h
-+-	cp libgnuintl.h libintl.h
++-libintl.h: $(srcdir)/libgnuintl.h.in
++-	sed -e '/IN_LIBGLOCALE/d' \
++-	    -e 's,@''HAVE_POSIX_PRINTF''@,@HAVE_POSIX_PRINTF@,g' \
++-	    -e 's,@''HAVE_ASPRINTF''@,@HAVE_ASPRINTF@,g' \
++-	    -e 's,@''HAVE_SNPRINTF''@,@HAVE_SNPRINTF@,g' \
++-	    -e 's,@''HAVE_WPRINTF''@,@HAVE_WPRINTF@,g' \
++-	  < $(srcdir)/libgnuintl.h.in > libintl.h
 +-
 +-charset.alias: $(srcdir)/config.charset
 +-	$(SHELL) $(srcdir)/config.charset '@host@' > t-$@
@@ -542,7 +468,7 @@ index 0000000000..a06dbad1ea
 +-install-exec: all
 +-	if { test "$(PACKAGE)" = "gettext-runtime" || test "$(PACKAGE)" = "gettext-tools"; } \
 +-	   && test '@USE_INCLUDED_LIBINTL@' = yes; then \
-+-	  $(mkinstalldirs) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir); \
++-	  $(mkdir_p) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir); \
 +-	  $(INSTALL_DATA) libintl.h $(DESTDIR)$(includedir)/libintl.h; \
 +-	  $(LIBTOOL) --mode=install \
 +-	    $(INSTALL_DATA) libintl.$la $(DESTDIR)$(libdir)/libintl.$la; \
@@ -558,7 +484,7 @@ index 0000000000..a06dbad1ea
 +-	if test "$(PACKAGE)" = "gettext-tools" \
 +-	   && test '@USE_INCLUDED_LIBINTL@' = no \
 +-	   && test @GLIBC2@ != no; then \
-+-	  $(mkinstalldirs) $(DESTDIR)$(libdir); \
++-	  $(mkdir_p) $(DESTDIR)$(libdir); \
 +-	  $(LIBTOOL) --mode=install \
 +-	    $(INSTALL_DATA) libgnuintl.$la $(DESTDIR)$(libdir)/libgnuintl.$la; \
 +-	  rm -f $(DESTDIR)$(libdir)/preloadable_libintl.so; \
@@ -569,7 +495,7 @@ index 0000000000..a06dbad1ea
 +-	  : ; \
 +-	fi
 +-	if test '@USE_INCLUDED_LIBINTL@' = yes; then \
-+-	  test @GLIBC21@ != no || $(mkinstalldirs) $(DESTDIR)$(libdir); \
++-	  test @GLIBC21@ != no || $(mkdir_p) $(DESTDIR)$(libdir); \
 +-	  temp=$(DESTDIR)$(libdir)/t-charset.alias; \
 +-	  dest=$(DESTDIR)$(libdir)/charset.alias; \
 +-	  if test -f $(DESTDIR)$(libdir)/charset.alias; then \
@@ -585,7 +511,7 @@ index 0000000000..a06dbad1ea
 +-	      rm -f $$temp; \
 +-	    fi; \
 +-	  fi; \
-+-	  $(mkinstalldirs) $(DESTDIR)$(localedir); \
++-	  $(mkdir_p) $(DESTDIR)$(localedir); \
 +-	  test -f $(DESTDIR)$(localedir)/locale.alias \
 +-	    && orig=$(DESTDIR)$(localedir)/locale.alias \
 +-	    || orig=$(srcdir)/locale.alias; \
@@ -599,7 +525,7 @@ index 0000000000..a06dbad1ea
 +-	fi
 +-install-data: all
 +-	if test "$(PACKAGE)" = "gettext-tools"; then \
-+-	  $(mkinstalldirs) $(DESTDIR)$(gettextsrcdir); \
++-	  $(mkdir_p) $(DESTDIR)$(gettextsrcdir); \
 +-	  $(INSTALL_DATA) VERSION $(DESTDIR)$(gettextsrcdir)/VERSION; \
 +-	  $(INSTALL_DATA) ChangeLog.inst $(DESTDIR)$(gettextsrcdir)/ChangeLog; \
 +-	  dists="COPYING.LIB-2.0 COPYING.LIB-2.1 $(DISTFILES.common)"; \
@@ -624,28 +550,30 @@ index 0000000000..a06dbad1ea
 +-
 +-install-strip: install
 +-
++-install-dvi install-html install-info install-ps install-pdf:
++-
 +-installdirs:
 +-	if { test "$(PACKAGE)" = "gettext-runtime" || test "$(PACKAGE)" = "gettext-tools"; } \
 +-	   && test '@USE_INCLUDED_LIBINTL@' = yes; then \
-+-	  $(mkinstalldirs) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir); \
++-	  $(mkdir_p) $(DESTDIR)$(libdir) $(DESTDIR)$(includedir); \
 +-	else \
 +-	  : ; \
 +-	fi
 +-	if test "$(PACKAGE)" = "gettext-tools" \
 +-	   && test '@USE_INCLUDED_LIBINTL@' = no \
 +-	   && test @GLIBC2@ != no; then \
-+-	  $(mkinstalldirs) $(DESTDIR)$(libdir); \
++-	  $(mkdir_p) $(DESTDIR)$(libdir); \
 +-	else \
 +-	  : ; \
 +-	fi
 +-	if test '@USE_INCLUDED_LIBINTL@' = yes; then \
-+-	  test @GLIBC21@ != no || $(mkinstalldirs) $(DESTDIR)$(libdir); \
-+-	  $(mkinstalldirs) $(DESTDIR)$(localedir); \
++-	  test @GLIBC21@ != no || $(mkdir_p) $(DESTDIR)$(libdir); \
++-	  $(mkdir_p) $(DESTDIR)$(localedir); \
 +-	else \
 +-	  : ; \
 +-	fi
 +-	if test "$(PACKAGE)" = "gettext-tools"; then \
-+-	  $(mkinstalldirs) $(DESTDIR)$(gettextsrcdir); \
++-	  $(mkdir_p) $(DESTDIR)$(gettextsrcdir); \
 +-	else \
 +-	  : ; \
 +-	fi
@@ -707,13 +635,19 @@ index 0000000000..a06dbad1ea
 +-
 +-$(OBJECTS): ../config.h libgnuintl.h
 +-bindtextdom.$lo dcgettext.$lo dcigettext.$lo dcngettext.$lo dgettext.$lo dngettext.$lo finddomain.$lo gettext.$lo intl-compat.$lo loadmsgcat.$lo localealias.$lo ngettext.$lo textdomain.$lo: $(srcdir)/gettextP.h $(srcdir)/gmo.h $(srcdir)/loadinfo.h
-+-dcigettext.$lo loadmsgcat.$lo: $(srcdir)/hash-string.h
++-hash-string.$lo dcigettext.$lo loadmsgcat.$lo: $(srcdir)/hash-string.h
 +-explodename.$lo l10nflist.$lo: $(srcdir)/loadinfo.h
 +-dcigettext.$lo loadmsgcat.$lo plural.$lo plural-exp.$lo: $(srcdir)/plural-exp.h
 +-dcigettext.$lo: $(srcdir)/eval-plural.h
 +-localcharset.$lo: $(srcdir)/localcharset.h
++-bindtextdom.$lo dcigettext.$lo finddomain.$lo loadmsgcat.$lo localealias.$lo lock.$lo log.$lo: $(srcdir)/lock.h
 +-localealias.$lo localcharset.$lo relocatable.$lo: $(srcdir)/relocatable.h
 +-printf.$lo: $(srcdir)/printf-args.h $(srcdir)/printf-args.c $(srcdir)/printf-parse.h $(srcdir)/wprintf-parse.h $(srcdir)/xsize.h $(srcdir)/printf-parse.c $(srcdir)/vasnprintf.h $(srcdir)/vasnwprintf.h $(srcdir)/vasnprintf.c
++-
++-# A bison-2.1 generated plural.c includes <libintl.h> if ENABLE_NLS.
++-PLURAL_DEPS_yes = libintl.h
++-PLURAL_DEPS_no =
++-plural.$lo: $(PLURAL_DEPS_@USE_INCLUDED_LIBINTL@)
 +-
 +-tags: TAGS
 +-
@@ -732,7 +666,7 @@ index 0000000000..a06dbad1ea
 +-
 +-
 +-mostlyclean:
-+-	rm -f *.a *.la *.o *.obj *.lo core core.*
++-	rm -f *.a *.la *.o *.obj *.lo libintl.res core core.*
 +-	rm -f libgnuintl.h libintl.h charset.alias ref-add.sed ref-del.sed
 +-	rm -f -r .libs _libs
 +-
@@ -766,7 +700,7 @@ index 0000000000..a06dbad1ea
 +-	  $(MAKE) $(DISTFILES.common) $(DISTFILES.generated) $$additional; \
 +-	  for file in ChangeLog $(DISTFILES.common) $(DISTFILES.generated) $$additional; do \
 +-	    if test -f $$file; then dir=.; else dir=$(srcdir); fi; \
-+-	    cp -p $$dir/$$file $(distdir); \
++-	    cp -p $$dir/$$file $(distdir) || test $$file = Makefile.in || exit 1; \
 +-	  done; \
 +-	fi
 +-
@@ -774,7 +708,7 @@ index 0000000000..a06dbad1ea
 +-	cd $(top_builddir) && $(SHELL) ./config.status
 +-# This would be more efficient, but doesn't work any more with autoconf-2.57,
 +-# when AC_CONFIG_FILES([intl/Makefile:somedir/Makefile.in]) is used.
-+-#	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
++-#	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 +-
 +-# Tell versions [3.59,3.63) of GNU make not to export all variables.
 +-# Otherwise a system limit (for SysV at least) may be exceeded.
@@ -782,12 +716,12 @@ index 0000000000..a06dbad1ea
 +--- a/intl/VERSION
 ++++ /dev/null
 +@@ -1 +0,0 @@
-+-GNU gettext library from gettext-0.14.2
++-GNU gettext library from gettext-0.17
 +--- a/intl/bindtextdom.c
 ++++ /dev/null
-+@@ -1,363 +0,0 @@
++@@ -1,340 +0,0 @@
 +-/* Implementation of the bindtextdomain(3) function
-+-   Copyright (C) 1995-1998, 2000-2003 Free Software Foundation, Inc.
++-   Copyright (C) 1995-1998, 2000-2003, 2005-2006 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -801,7 +735,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -812,29 +746,21 @@ index 0000000000..a06dbad1ea
 +-#include <stdlib.h>
 +-#include <string.h>
 +-
++-#include "gettextP.h"
 +-#ifdef _LIBC
 +-# include <libintl.h>
 +-#else
 +-# include "libgnuintl.h"
 +-#endif
-+-#include "gettextP.h"
 +-
++-/* Handle multi-threaded applications.  */
 +-#ifdef _LIBC
-+-/* We have to handle multi-threaded applications.  */
 +-# include <bits/libc-lock.h>
++-# define gl_rwlock_define __libc_rwlock_define
++-# define gl_rwlock_wrlock __libc_rwlock_wrlock
++-# define gl_rwlock_unlock __libc_rwlock_unlock
 +-#else
-+-/* Provide dummy implementation if this is outside glibc.  */
-+-# define __libc_rwlock_define(CLASS, NAME)
-+-# define __libc_rwlock_wrlock(NAME)
-+-# define __libc_rwlock_unlock(NAME)
-+-#endif
-+-
-+-/* The internal variables in the standalone libintl.a must have different
-+-   names than the internal variables in GNU libc, otherwise programs
-+-   using libintl.a cannot be linked statically.  */
-+-#if !defined _LIBC
-+-# define _nl_default_dirname libintl_nl_default_dirname
-+-# define _nl_domain_bindings libintl_nl_domain_bindings
++-# include "lock.h"
 +-#endif
 +-
 +-/* Some compilers, like SunOS4 cc, don't have offsetof in <stddef.h>.  */
@@ -844,19 +770,8 @@ index 0000000000..a06dbad1ea
 +-
 +-/* @@ end of prolog @@ */
 +-
-+-/* Contains the default location of the message catalogs.  */
-+-extern const char _nl_default_dirname[];
-+-#ifdef _LIBC
-+-extern const char _nl_default_dirname_internal[] attribute_hidden;
-+-#else
-+-# define INTUSE(name) name
-+-#endif
-+-
-+-/* List with bindings of specific domains.  */
-+-extern struct binding *_nl_domain_bindings;
-+-
 +-/* Lock variable to protect the global data in the gettext implementation.  */
-+-__libc_rwlock_define (extern, _nl_state_lock attribute_hidden)
++-gl_rwlock_define (extern, _nl_state_lock attribute_hidden)
 +-
 +-
 +-/* Names for the libintl functions are a problem.  They must not clash
@@ -897,7 +812,7 @@ index 0000000000..a06dbad1ea
 +-      return;
 +-    }
 +-
-+-  __libc_rwlock_wrlock (_nl_state_lock);
++-  gl_rwlock_wrlock (_nl_state_lock);
 +-
 +-  modified = 0;
 +-
@@ -932,8 +847,8 @@ index 0000000000..a06dbad1ea
 +-	      char *result = binding->dirname;
 +-	      if (strcmp (dirname, result) != 0)
 +-		{
-+-		  if (strcmp (dirname, INTUSE(_nl_default_dirname)) == 0)
-+-		    result = (char *) INTUSE(_nl_default_dirname);
++-		  if (strcmp (dirname, _nl_default_dirname) == 0)
++-		    result = (char *) _nl_default_dirname;
 +-		  else
 +-		    {
 +-#if defined _LIBC || defined HAVE_STRDUP
@@ -948,7 +863,7 @@ index 0000000000..a06dbad1ea
 +-
 +-		  if (__builtin_expect (result != NULL, 1))
 +-		    {
-+-		      if (binding->dirname != INTUSE(_nl_default_dirname))
++-		      if (binding->dirname != _nl_default_dirname)
 +-			free (binding->dirname);
 +-
 +-		      binding->dirname = result;
@@ -989,7 +904,6 @@ index 0000000000..a06dbad1ea
 +-			free (binding->codeset);
 +-
 +-		      binding->codeset = result;
-+-		      binding->codeset_cntr++;
 +-		      modified = 1;
 +-		    }
 +-		}
@@ -1002,7 +916,7 @@ index 0000000000..a06dbad1ea
 +-    {
 +-      /* Simply return the default values.  */
 +-      if (dirnamep)
-+-	*dirnamep = INTUSE(_nl_default_dirname);
++-	*dirnamep = _nl_default_dirname;
 +-      if (codesetp)
 +-	*codesetp = NULL;
 +-    }
@@ -1024,11 +938,11 @@ index 0000000000..a06dbad1ea
 +-
 +-	  if (dirname == NULL)
 +-	    /* The default value.  */
-+-	    dirname = INTUSE(_nl_default_dirname);
++-	    dirname = _nl_default_dirname;
 +-	  else
 +-	    {
-+-	      if (strcmp (dirname, INTUSE(_nl_default_dirname)) == 0)
-+-		dirname = INTUSE(_nl_default_dirname);
++-	      if (strcmp (dirname, _nl_default_dirname) == 0)
++-		dirname = _nl_default_dirname;
 +-	      else
 +-		{
 +-		  char *result;
@@ -1051,9 +965,7 @@ index 0000000000..a06dbad1ea
 +-	}
 +-      else
 +-	/* The default value.  */
-+-	new_binding->dirname = (char *) INTUSE(_nl_default_dirname);
-+-
-+-      new_binding->codeset_cntr = 0;
++-	new_binding->dirname = (char *) _nl_default_dirname;
 +-
 +-      if (codesetp)
 +-	{
@@ -1075,7 +987,6 @@ index 0000000000..a06dbad1ea
 +-	      memcpy (result, codeset, len);
 +-#endif
 +-	      codeset = result;
-+-	      new_binding->codeset_cntr++;
 +-	    }
 +-	  *codesetp = codeset;
 +-	  new_binding->codeset = (char *) codeset;
@@ -1107,7 +1018,7 @@ index 0000000000..a06dbad1ea
 +-      if (0)
 +-	{
 +-	failed_codeset:
-+-	  if (new_binding->dirname != INTUSE(_nl_default_dirname))
++-	  if (new_binding->dirname != _nl_default_dirname)
 +-	    free (new_binding->dirname);
 +-	failed_dirname:
 +-	  free (new_binding);
@@ -1123,7 +1034,7 @@ index 0000000000..a06dbad1ea
 +-  if (modified)
 +-    ++_nl_msg_cat_cntr;
 +-
-+-  __libc_rwlock_unlock (_nl_state_lock);
++-  gl_rwlock_unlock (_nl_state_lock);
 +-}
 +-
 +-/* Specify that the DOMAINNAME message catalog will be found
@@ -1151,11 +1062,11 @@ index 0000000000..a06dbad1ea
 +-#endif
 +--- a/intl/config.charset
 ++++ /dev/null
-+@@ -1,638 +0,0 @@
++@@ -1,640 +0,0 @@
 +-#! /bin/sh
 +-# Output a system dependent table of character encoding aliases.
 +-#
-+-#   Copyright (C) 2000-2004 Free Software Foundation, Inc.
++-#   Copyright (C) 2000-2004, 2006 Free Software Foundation, Inc.
 +-#
 +-#   This program is free software; you can redistribute it and/or modify it
 +-#   under the terms of the GNU Library General Public License as published
@@ -1169,7 +1080,7 @@ index 0000000000..a06dbad1ea
 +-#
 +-#   You should have received a copy of the GNU Library General Public
 +-#   License along with this program; if not, write to the Free Software
-+-#   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-#   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-#   USA.
 +-#
 +-# The table consists of lines of the form
@@ -1185,21 +1096,21 @@ index 0000000000..a06dbad1ea
 +-# The current list of GNU canonical charset names is as follows.
 +-#
 +-#       name              MIME?             used by which systems
-+-#   ASCII, ANSI_X3.4-1968       glibc solaris freebsd darwin
-+-#   ISO-8859-1              Y   glibc aix hpux irix osf solaris freebsd darwin
-+-#   ISO-8859-2              Y   glibc aix hpux irix osf solaris freebsd darwin
++-#   ASCII, ANSI_X3.4-1968       glibc solaris freebsd netbsd darwin
++-#   ISO-8859-1              Y   glibc aix hpux irix osf solaris freebsd netbsd darwin
++-#   ISO-8859-2              Y   glibc aix hpux irix osf solaris freebsd netbsd darwin
 +-#   ISO-8859-3              Y   glibc solaris
-+-#   ISO-8859-4              Y   osf solaris freebsd darwin
-+-#   ISO-8859-5              Y   glibc aix hpux irix osf solaris freebsd darwin
++-#   ISO-8859-4              Y   osf solaris freebsd netbsd darwin
++-#   ISO-8859-5              Y   glibc aix hpux irix osf solaris freebsd netbsd darwin
 +-#   ISO-8859-6              Y   glibc aix hpux solaris
-+-#   ISO-8859-7              Y   glibc aix hpux irix osf solaris darwin
++-#   ISO-8859-7              Y   glibc aix hpux irix osf solaris netbsd darwin
 +-#   ISO-8859-8              Y   glibc aix hpux osf solaris
 +-#   ISO-8859-9              Y   glibc aix hpux irix osf solaris darwin
-+-#   ISO-8859-13                 glibc darwin
++-#   ISO-8859-13                 glibc netbsd darwin
 +-#   ISO-8859-14                 glibc
 +-#   ISO-8859-15                 glibc aix osf solaris freebsd darwin
-+-#   KOI8-R                  Y   glibc solaris freebsd darwin
-+-#   KOI8-U                  Y   glibc freebsd darwin
++-#   KOI8-R                  Y   glibc solaris freebsd netbsd darwin
++-#   KOI8-U                  Y   glibc freebsd netbsd darwin
 +-#   KOI8-T                      glibc
 +-#   CP437                       dos
 +-#   CP775                       dos
@@ -1212,7 +1123,7 @@ index 0000000000..a06dbad1ea
 +-#   CP862                       dos
 +-#   CP864                       dos
 +-#   CP865                       dos
-+-#   CP866                       freebsd darwin dos
++-#   CP866                       freebsd netbsd darwin dos
 +-#   CP869                       dos
 +-#   CP874                       woe32 dos
 +-#   CP922                       aix
@@ -1225,22 +1136,22 @@ index 0000000000..a06dbad1ea
 +-#   CP1125                      dos
 +-#   CP1129                      aix
 +-#   CP1250                      woe32
-+-#   CP1251                      glibc solaris darwin woe32
++-#   CP1251                      glibc solaris netbsd darwin woe32
 +-#   CP1252                      aix woe32
 +-#   CP1253                      woe32
 +-#   CP1254                      woe32
 +-#   CP1255                      glibc woe32
 +-#   CP1256                      woe32
 +-#   CP1257                      woe32
-+-#   GB2312                  Y   glibc aix hpux irix solaris freebsd darwin
-+-#   EUC-JP                  Y   glibc aix hpux irix osf solaris freebsd darwin
-+-#   EUC-KR                  Y   glibc aix hpux irix osf solaris freebsd darwin
-+-#   EUC-TW                      glibc aix hpux irix osf solaris
-+-#   BIG5                    Y   glibc aix hpux osf solaris freebsd darwin
++-#   GB2312                  Y   glibc aix hpux irix solaris freebsd netbsd darwin
++-#   EUC-JP                  Y   glibc aix hpux irix osf solaris freebsd netbsd darwin
++-#   EUC-KR                  Y   glibc aix hpux irix osf solaris freebsd netbsd darwin
++-#   EUC-TW                      glibc aix hpux irix osf solaris netbsd
++-#   BIG5                    Y   glibc aix hpux osf solaris freebsd netbsd darwin
 +-#   BIG5-HKSCS                  glibc solaris
 +-#   GBK                         glibc aix osf solaris woe32 dos
-+-#   GB18030                     glibc solaris
-+-#   SHIFT_JIS               Y   hpux osf solaris freebsd darwin
++-#   GB18030                     glibc solaris netbsd
++-#   SHIFT_JIS               Y   hpux osf solaris freebsd netbsd darwin
 +-#   JOHAB                       glibc solaris woe32
 +-#   TIS-620                     glibc aix hpux osf solaris
 +-#   VISCII                  Y   glibc
@@ -1254,7 +1165,7 @@ index 0000000000..a06dbad1ea
 +-#   HP-KANA8                    hpux
 +-#   DEC-KANJI                   osf
 +-#   DEC-HANYU                   osf
-+-#   UTF-8                   Y   glibc aix hpux osf solaris darwin
++-#   UTF-8                   Y   glibc aix hpux osf solaris netbsd darwin
 +-#
 +-# Note: Names which are not marked as being a MIME name should not be used in
 +-# Internet protocols for information interchange (mail, news, etc.).
@@ -1542,6 +1453,8 @@ index 0000000000..a06dbad1ea
 +-	echo "ISO8859-2 ISO-8859-2"
 +-	echo "ISO8859-4 ISO-8859-4"
 +-	echo "ISO8859-5 ISO-8859-5"
++-	echo "ISO8859-7 ISO-8859-7"
++-	echo "ISO8859-13 ISO-8859-13"
 +-	echo "ISO8859-15 ISO-8859-15"
 +-	echo "eucCN GB2312"
 +-	echo "eucJP EUC-JP"
@@ -1634,7 +1547,7 @@ index 0000000000..a06dbad1ea
 +-	echo "# If you find that the encoding given for your language and"
 +-	echo "# country is not the one your DOS machine actually uses, just"
 +-	echo "# correct it in this file, and send a mail to"
-+-	echo "# Juan Manuel Guerrero <st001906@hrz1.hrz.tu-darmstadt.de>"
++-	echo "# Juan Manuel Guerrero <juan.guerrero@gmx.de>"
 +-	echo "# and Bruno Haible <bruno@clisp.org>."
 +-	echo "#"
 +-	echo "C ASCII"
@@ -1808,7 +1721,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -1851,9 +1764,9 @@ index 0000000000..a06dbad1ea
 +-#endif
 +--- a/intl/dcigettext.c
 ++++ /dev/null
-+@@ -1,1258 +0,0 @@
++@@ -1,1689 +0,0 @@
 +-/* Implementation of the internal dcigettext function.
-+-   Copyright (C) 1995-1999, 2000-2005 Free Software Foundation, Inc.
++-   Copyright (C) 1995-1999, 2000-2007 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -1867,7 +1780,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-/* Tell glibc's <string.h> to provide a prototype for mempcpy().
@@ -1880,6 +1793,9 @@ index 0000000000..a06dbad1ea
 +-#ifdef HAVE_CONFIG_H
 +-# include <config.h>
 +-#endif
++-
++-/* NL_LOCALE_NAME does not work in glibc-2.4.  Ignore it.  */
++-#undef HAVE_NL_LOCALE_NAME
 +-
 +-#include <sys/types.h>
 +-
@@ -1941,26 +1857,34 @@ index 0000000000..a06dbad1ea
 +-# include <sys/param.h>
 +-#endif
 +-
++-#if !defined _LIBC
++-# if HAVE_NL_LOCALE_NAME
++-#  include <langinfo.h>
++-# endif
++-# include "localcharset.h"
++-#endif
++-
 +-#include "gettextP.h"
 +-#include "plural-exp.h"
 +-#ifdef _LIBC
 +-# include <libintl.h>
 +-#else
++-# ifdef IN_LIBGLOCALE
++-#  include <libintl.h>
++-# endif
 +-# include "libgnuintl.h"
 +-#endif
 +-#include "hash-string.h"
 +-
-+-/* Thread safetyness.  */
++-/* Handle multi-threaded applications.  */
 +-#ifdef _LIBC
 +-# include <bits/libc-lock.h>
++-# define gl_rwlock_define_initialized __libc_rwlock_define_initialized
++-# define gl_rwlock_rdlock __libc_rwlock_rdlock
++-# define gl_rwlock_wrlock __libc_rwlock_wrlock
++-# define gl_rwlock_unlock __libc_rwlock_unlock
 +-#else
-+-/* Provide dummy implementation if this is outside glibc.  */
-+-# define __libc_lock_define_initialized(CLASS, NAME)
-+-# define __libc_lock_lock(NAME)
-+-# define __libc_lock_unlock(NAME)
-+-# define __libc_rwlock_define_initialized(CLASS, NAME)
-+-# define __libc_rwlock_rdlock(NAME)
-+-# define __libc_rwlock_unlock(NAME)
++-# include "lock.h"
 +-#endif
 +-
 +-/* Alignment of types.  */
@@ -1969,16 +1893,6 @@ index 0000000000..a06dbad1ea
 +-#else
 +-# define alignof(TYPE) \
 +-    ((int) &((struct { char dummy1; TYPE dummy2; } *) 0)->dummy2)
-+-#endif
-+-
-+-/* The internal variables in the standalone libintl.a must have different
-+-   names than the internal variables in GNU libc, otherwise programs
-+-   using libintl.a cannot be linked statically.  */
-+-#if !defined _LIBC
-+-# define _nl_default_default_domain libintl_nl_default_default_domain
-+-# define _nl_current_default_domain libintl_nl_current_default_domain
-+-# define _nl_default_dirname libintl_nl_default_dirname
-+-# define _nl_domain_bindings libintl_nl_domain_bindings
 +-#endif
 +-
 +-/* Some compilers, like SunOS4 cc, don't have offsetof in <stddef.h>.  */
@@ -2014,6 +1928,22 @@ index 0000000000..a06dbad1ea
 +-# ifndef HAVE_MEMPCPY
 +-static void *mempcpy (void *dest, const void *src, size_t n);
 +-# endif
++-#endif
++-
++-/* Use a replacement if the system does not provide the `tsearch' function
++-   family.  */
++-#if HAVE_TSEARCH || defined _LIBC
++-# include <search.h>
++-#else
++-# define tsearch libintl_tsearch
++-# define tfind libintl_tfind
++-# define tdelete libintl_tdelete
++-# define twalk libintl_twalk
++-# include "tsearch.h"
++-#endif
++-
++-#ifdef _LIBC
++-# define tsearch __tsearch
 +-#endif
 +-
 +-/* Amount to increase buffer size by in each try.  */
@@ -2070,15 +2000,30 @@ index 0000000000..a06dbad1ea
 +-# define IS_PATH_WITH_DIR(P) (strchr (P, '/') != NULL)
 +-#endif
 +-
++-/* Whether to support different locales in different threads.  */
++-#if defined _LIBC || HAVE_NL_LOCALE_NAME || (HAVE_STRUCT___LOCALE_STRUCT___NAMES && defined USE_IN_GETTEXT_TESTS) || defined IN_LIBGLOCALE
++-# define HAVE_PER_THREAD_LOCALE
++-#endif
++-
 +-/* This is the type used for the search tree where known translations
 +-   are stored.  */
 +-struct known_translation_t
 +-{
 +-  /* Domain in which to search.  */
-+-  char *domainname;
++-  const char *domainname;
 +-
 +-  /* The category.  */
 +-  int category;
++-
++-#ifdef HAVE_PER_THREAD_LOCALE
++-  /* Name of the relevant locale category, or "" for the global locale.  */
++-  const char *localename;
++-#endif
++-
++-#ifdef IN_LIBGLOCALE
++-  /* The character encoding.  */
++-  const char *encoding;
++-#endif
 +-
 +-  /* State of the catalog counter at the point the string was found.  */
 +-  int counter;
@@ -2094,16 +2039,10 @@ index 0000000000..a06dbad1ea
 +-  char msgid[ZERO];
 +-};
 +-
-+-/* Root of the search tree with known translations.  We can use this
-+-   only if the system provides the `tsearch' function family.  */
-+-#if defined HAVE_TSEARCH || defined _LIBC
-+-# include <search.h>
++-gl_rwlock_define_initialized (static, tree_lock)
 +-
++-/* Root of the search tree with known translations.  */
 +-static void *root;
-+-
-+-# ifdef _LIBC
-+-#  define tsearch __tsearch
-+-# endif
 +-
 +-/* Function to compare two entries in the table of known translations.  */
 +-static int
@@ -2121,56 +2060,84 @@ index 0000000000..a06dbad1ea
 +-    {
 +-      result = strcmp (s1->domainname, s2->domainname);
 +-      if (result == 0)
-+-	/* We compare the category last (though this is the cheapest
-+-	   operation) since it is hopefully always the same (namely
-+-	   LC_MESSAGES).  */
-+-	result = s1->category - s2->category;
++-	{
++-#ifdef HAVE_PER_THREAD_LOCALE
++-	  result = strcmp (s1->localename, s2->localename);
++-	  if (result == 0)
++-#endif
++-	    {
++-#ifdef IN_LIBGLOCALE
++-	      result = strcmp (s1->encoding, s2->encoding);
++-	      if (result == 0)
++-#endif
++-		/* We compare the category last (though this is the cheapest
++-		   operation) since it is hopefully always the same (namely
++-		   LC_MESSAGES).  */
++-		result = s1->category - s2->category;
++-	    }
++-	}
 +-    }
 +-
 +-  return result;
 +-}
-+-#endif
-+-
-+-#ifndef INTVARDEF
-+-# define INTVARDEF(name)
-+-#endif
-+-#ifndef INTUSE
-+-# define INTUSE(name) name
-+-#endif
 +-
 +-/* Name of the default domain used for gettext(3) prior any call to
 +-   textdomain(3).  The default value for this is "messages".  */
 +-const char _nl_default_default_domain[] attribute_hidden = "messages";
 +-
++-#ifndef IN_LIBGLOCALE
 +-/* Value used as the default domain for gettext(3).  */
 +-const char *_nl_current_default_domain attribute_hidden
 +-     = _nl_default_default_domain;
++-#endif
 +-
 +-/* Contains the default location of the message catalogs.  */
 +-#if defined __EMX__
 +-extern const char _nl_default_dirname[];
 +-#else
++-# ifdef _LIBC
++-extern const char _nl_default_dirname[];
++-libc_hidden_proto (_nl_default_dirname)
++-# endif
 +-const char _nl_default_dirname[] = LOCALEDIR;
-+-INTVARDEF (_nl_default_dirname)
++-# ifdef _LIBC
++-libc_hidden_data_def (_nl_default_dirname)
++-# endif
 +-#endif
 +-
++-#ifndef IN_LIBGLOCALE
 +-/* List with bindings of specific domains created by bindtextdomain()
 +-   calls.  */
 +-struct binding *_nl_domain_bindings;
++-#endif
 +-
 +-/* Prototypes for local functions.  */
 +-static char *plural_lookup (struct loaded_l10nfile *domain,
 +-			    unsigned long int n,
 +-			    const char *translation, size_t translation_len)
 +-     internal_function;
++-
++-#ifdef IN_LIBGLOCALE
++-static const char *guess_category_value (int category,
++-					 const char *categoryname,
++-					 const char *localename)
++-     internal_function;
++-#else
 +-static const char *guess_category_value (int category,
 +-					 const char *categoryname)
 +-     internal_function;
++-#endif
++-
 +-#ifdef _LIBC
 +-# include "../locale/localeinfo.h"
-+-# define category_to_name(category)	_nl_category_names[category]
++-# define category_to_name(category) \
++-  _nl_category_names.str + _nl_category_name_idxs[category]
 +-#else
 +-static const char *category_to_name (int category) internal_function;
++-#endif
++-#if (defined _LIBC || HAVE_ICONV) && !defined IN_LIBGLOCALE
++-static const char *get_output_charset (struct binding *domainbinding)
++-     internal_function;
 +-#endif
 +-
 +-
@@ -2237,9 +2204,7 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-
 +-/* Lock variable to protect the global data in the gettext implementation.  */
-+-#ifdef _LIBC
-+-__libc_rwlock_define_initialized (, _nl_state_lock attribute_hidden)
-+-#endif
++-gl_rwlock_define_initialized (, _nl_state_lock attribute_hidden)
 +-
 +-/* Checking whether the binaries runs SUID must be done and glibc provides
 +-   easier methods therefore we make a difference here.  */
@@ -2277,9 +2242,18 @@ index 0000000000..a06dbad1ea
 +-/* Look up MSGID in the DOMAINNAME message catalog for the current
 +-   CATEGORY locale and, if PLURAL is nonzero, search over string
 +-   depending on the plural form determined by N.  */
++-#ifdef IN_LIBGLOCALE
++-char *
++-gl_dcigettext (const char *domainname,
++-	       const char *msgid1, const char *msgid2,
++-	       int plural, unsigned long int n,
++-	       int category,
++-	       const char *localename, const char *encoding)
++-#else
 +-char *
 +-DCIGETTEXT (const char *domainname, const char *msgid1, const char *msgid2,
 +-	    int plural, unsigned long int n, int category)
++-#endif
 +-{
 +-#ifndef HAVE_ALLOCA
 +-  struct block_list *block_list = NULL;
@@ -2288,15 +2262,17 @@ index 0000000000..a06dbad1ea
 +-  struct binding *binding;
 +-  const char *categoryname;
 +-  const char *categoryvalue;
-+-  char *dirname, *xdomainname;
++-  const char *dirname;
++-  char *xdomainname;
 +-  char *single_locale;
 +-  char *retval;
 +-  size_t retlen;
 +-  int saved_errno;
-+-#if defined HAVE_TSEARCH || defined _LIBC
 +-  struct known_translation_t *search;
 +-  struct known_translation_t **foundp = NULL;
 +-  size_t msgid_len;
++-#if defined HAVE_PER_THREAD_LOCALE && !defined IN_LIBGLOCALE
++-  const char *localename;
 +-#endif
 +-  size_t domainname_len;
 +-
@@ -2313,7 +2289,10 @@ index 0000000000..a06dbad1ea
 +-	    : n == 1 ? (char *) msgid1 : (char *) msgid2);
 +-#endif
 +-
-+-  __libc_rwlock_rdlock (_nl_state_lock);
++-  /* Preserve the `errno' value.  */
++-  saved_errno = errno;
++-
++-  gl_rwlock_rdlock (_nl_state_lock);
 +-
 +-  /* If DOMAINNAME is NULL, we are interested in the default domain.  If
 +-     CATEGORY is not LC_MESSAGES this might not make much sense but the
@@ -2327,7 +2306,6 @@ index 0000000000..a06dbad1ea
 +-    category = LC_MESSAGES;
 +-#endif
 +-
-+-#if defined HAVE_TSEARCH || defined _LIBC
 +-  msgid_len = strlen (msgid1) + 1;
 +-
 +-  /* Try to find the translation among those which we found at
@@ -2335,10 +2313,44 @@ index 0000000000..a06dbad1ea
 +-  search = (struct known_translation_t *)
 +-	   alloca (offsetof (struct known_translation_t, msgid) + msgid_len);
 +-  memcpy (search->msgid, msgid1, msgid_len);
-+-  search->domainname = (char *) domainname;
++-  search->domainname = domainname;
 +-  search->category = category;
++-#ifdef HAVE_PER_THREAD_LOCALE
++-# ifndef IN_LIBGLOCALE
++-#  ifdef _LIBC
++-  localename = __current_locale_name (category);
++-#  else
++-#   if HAVE_NL_LOCALE_NAME
++-  /* NL_LOCALE_NAME is public glibc API introduced in glibc-2.4.  */
++-  localename = nl_langinfo (NL_LOCALE_NAME (category));
++-#   else
++-#    if HAVE_STRUCT___LOCALE_STRUCT___NAMES && defined USE_IN_GETTEXT_TESTS
++-  /* The __names field is not public glibc API and must therefore not be used
++-     in code that is installed in public locations.  */
++-  {
++-    locale_t thread_locale = uselocale (NULL);
++-    if (thread_locale != LC_GLOBAL_LOCALE)
++-      localename = thread_locale->__names[category];
++-    else
++-      localename = "";
++-  }
++-#    endif
++-#   endif
++-#  endif
++-# endif
++-  search->localename = localename;
++-# ifdef IN_LIBGLOCALE
++-  search->encoding = encoding;
++-# endif
++-
++-  /* Since tfind/tsearch manage a balanced tree, concurrent tfind and
++-     tsearch calls can be fatal.  */
++-  gl_rwlock_rdlock (tree_lock);
 +-
 +-  foundp = (struct known_translation_t **) tfind (search, &root, transcmp);
++-
++-  gl_rwlock_unlock (tree_lock);
++-
 +-  freea (search);
 +-  if (foundp != NULL && (*foundp)->counter == _nl_msg_cat_cntr)
 +-    {
@@ -2349,18 +2361,22 @@ index 0000000000..a06dbad1ea
 +-      else
 +-	retval = (char *) (*foundp)->translation;
 +-
-+-      __libc_rwlock_unlock (_nl_state_lock);
++-      gl_rwlock_unlock (_nl_state_lock);
++-      __set_errno (saved_errno);
 +-      return retval;
 +-    }
 +-#endif
-+-
-+-  /* Preserve the `errno' value.  */
-+-  saved_errno = errno;
 +-
 +-  /* See whether this is a SUID binary or not.  */
 +-  DETERMINE_SECURE;
 +-
 +-  /* First find matching binding.  */
++-#ifdef IN_LIBGLOCALE
++-  /* We can use a trivial binding, since _nl_find_msg will ignore it anyway,
++-     and _nl_load_domain and _nl_find_domain just pass it through.  */
++-  binding = NULL;
++-  dirname = bindtextdomain (domainname, NULL);
++-#else
 +-  for (binding = _nl_domain_bindings; binding != NULL; binding = binding->next)
 +-    {
 +-      int compare = strcmp (domainname, binding->domainname);
@@ -2376,52 +2392,63 @@ index 0000000000..a06dbad1ea
 +-    }
 +-
 +-  if (binding == NULL)
-+-    dirname = (char *) INTUSE(_nl_default_dirname);
-+-  else if (IS_ABSOLUTE_PATH (binding->dirname))
-+-    dirname = binding->dirname;
++-    dirname = _nl_default_dirname;
 +-  else
 +-    {
-+-      /* We have a relative path.  Make it absolute now.  */
-+-      size_t dirname_len = strlen (binding->dirname) + 1;
-+-      size_t path_max;
-+-      char *ret;
-+-
-+-      path_max = (unsigned int) PATH_MAX;
-+-      path_max += 2;		/* The getcwd docs say to do this.  */
-+-
-+-      for (;;)
++-      dirname = binding->dirname;
++-#endif
++-      if (!IS_ABSOLUTE_PATH (dirname))
 +-	{
-+-	  dirname = (char *) alloca (path_max + dirname_len);
-+-	  ADD_BLOCK (block_list, dirname);
++-	  /* We have a relative path.  Make it absolute now.  */
++-	  size_t dirname_len = strlen (dirname) + 1;
++-	  size_t path_max;
++-	  char *resolved_dirname;
++-	  char *ret;
 +-
-+-	  __set_errno (0);
-+-	  ret = getcwd (dirname, path_max);
-+-	  if (ret != NULL || errno != ERANGE)
-+-	    break;
++-	  path_max = (unsigned int) PATH_MAX;
++-	  path_max += 2;		/* The getcwd docs say to do this.  */
 +-
-+-	  path_max += path_max / 2;
-+-	  path_max += PATH_INCR;
++-	  for (;;)
++-	    {
++-	      resolved_dirname = (char *) alloca (path_max + dirname_len);
++-	      ADD_BLOCK (block_list, tmp_dirname);
++-
++-	      __set_errno (0);
++-	      ret = getcwd (resolved_dirname, path_max);
++-	      if (ret != NULL || errno != ERANGE)
++-		break;
++-
++-	      path_max += path_max / 2;
++-	      path_max += PATH_INCR;
++-	    }
++-
++-	  if (ret == NULL)
++-	    /* We cannot get the current working directory.  Don't signal an
++-	       error but simply return the default string.  */
++-	    goto return_untranslated;
++-
++-	  stpcpy (stpcpy (strchr (resolved_dirname, '\0'), "/"), dirname);
++-	  dirname = resolved_dirname;
 +-	}
-+-
-+-      if (ret == NULL)
-+-	/* We cannot get the current working directory.  Don't signal an
-+-	   error but simply return the default string.  */
-+-	goto return_untranslated;
-+-
-+-      stpcpy (stpcpy (strchr (dirname, '\0'), "/"), binding->dirname);
++-#ifndef IN_LIBGLOCALE
 +-    }
++-#endif
 +-
 +-  /* Now determine the symbolic name of CATEGORY and its value.  */
 +-  categoryname = category_to_name (category);
++-#ifdef IN_LIBGLOCALE
++-  categoryvalue = guess_category_value (category, categoryname, localename);
++-#else
 +-  categoryvalue = guess_category_value (category, categoryname);
++-#endif
 +-
 +-  domainname_len = strlen (domainname);
 +-  xdomainname = (char *) alloca (strlen (categoryname)
 +-				 + domainname_len + 5);
 +-  ADD_BLOCK (block_list, xdomainname);
 +-
-+-  stpcpy (mempcpy (stpcpy (stpcpy (xdomainname, categoryname), "/"),
-+-		  domainname, domainname_len),
++-  stpcpy ((char *) mempcpy (stpcpy (stpcpy (xdomainname, categoryname), "/"),
++-			    domainname, domainname_len),
 +-	  ".mo");
 +-
 +-  /* Creating working area.  */
@@ -2471,7 +2498,11 @@ index 0000000000..a06dbad1ea
 +-
 +-      if (domain != NULL)
 +-	{
-+-	  retval = _nl_find_msg (domain, binding, msgid1, &retlen);
++-#if defined IN_LIBGLOCALE
++-	  retval = _nl_find_msg (domain, binding, encoding, msgid1, &retlen);
++-#else
++-	  retval = _nl_find_msg (domain, binding, msgid1, 1, &retlen);
++-#endif
 +-
 +-	  if (retval == NULL)
 +-	    {
@@ -2479,8 +2510,13 @@ index 0000000000..a06dbad1ea
 +-
 +-	      for (cnt = 0; domain->successor[cnt] != NULL; ++cnt)
 +-		{
++-#if defined IN_LIBGLOCALE
 +-		  retval = _nl_find_msg (domain->successor[cnt], binding,
-+-					 msgid1, &retlen);
++-					 encoding, msgid1, &retlen);
++-#else
++-		  retval = _nl_find_msg (domain->successor[cnt], binding,
++-					 msgid1, 1, &retlen);
++-#endif
 +-
 +-		  if (retval != NULL)
 +-		    {
@@ -2490,34 +2526,64 @@ index 0000000000..a06dbad1ea
 +-		}
 +-	    }
 +-
++-	  /* Returning -1 means that some resource problem exists
++-	     (likely memory) and that the strings could not be
++-	     converted.  Return the original strings.  */
++-	  if (__builtin_expect (retval == (char *) -1, 0))
++-	    break;
++-
 +-	  if (retval != NULL)
 +-	    {
 +-	      /* Found the translation of MSGID1 in domain DOMAIN:
 +-		 starting at RETVAL, RETLEN bytes.  */
 +-	      FREE_BLOCKS (block_list);
-+-#if defined HAVE_TSEARCH || defined _LIBC
 +-	      if (foundp == NULL)
 +-		{
 +-		  /* Create a new entry and add it to the search tree.  */
++-		  size_t size;
 +-		  struct known_translation_t *newp;
 +-
-+-		  newp = (struct known_translation_t *)
-+-		    malloc (offsetof (struct known_translation_t, msgid)
-+-			    + msgid_len + domainname_len + 1);
++-		  size = offsetof (struct known_translation_t, msgid)
++-			 + msgid_len + domainname_len + 1;
++-#ifdef HAVE_PER_THREAD_LOCALE
++-		  size += strlen (localename) + 1;
++-#endif
++-		  newp = (struct known_translation_t *) malloc (size);
 +-		  if (newp != NULL)
 +-		    {
-+-		      newp->domainname =
-+-			mempcpy (newp->msgid, msgid1, msgid_len);
-+-		      memcpy (newp->domainname, domainname, domainname_len + 1);
++-		      char *new_domainname;
++-#ifdef HAVE_PER_THREAD_LOCALE
++-		      char *new_localename;
++-#endif
++-
++-		      new_domainname =
++-			(char *) mempcpy (newp->msgid, msgid1, msgid_len);
++-		      memcpy (new_domainname, domainname, domainname_len + 1);
++-#ifdef HAVE_PER_THREAD_LOCALE
++-		      new_localename = new_domainname + domainname_len + 1;
++-		      strcpy (new_localename, localename);
++-#endif
++-		      newp->domainname = new_domainname;
 +-		      newp->category = category;
++-#ifdef HAVE_PER_THREAD_LOCALE
++-		      newp->localename = new_localename;
++-#endif
++-#ifdef IN_LIBGLOCALE
++-		      newp->encoding = encoding;
++-#endif
 +-		      newp->counter = _nl_msg_cat_cntr;
 +-		      newp->domain = domain;
 +-		      newp->translation = retval;
 +-		      newp->translation_length = retlen;
 +-
++-		      gl_rwlock_wrlock (tree_lock);
++-
 +-		      /* Insert the entry in the search tree.  */
 +-		      foundp = (struct known_translation_t **)
 +-			tsearch (newp, &root, transcmp);
++-
++-		      gl_rwlock_unlock (tree_lock);
++-
 +-		      if (foundp == NULL
 +-			  || __builtin_expect (*foundp != newp, 0))
 +-			/* The insert failed.  */
@@ -2532,14 +2598,14 @@ index 0000000000..a06dbad1ea
 +-		  (*foundp)->translation = retval;
 +-		  (*foundp)->translation_length = retlen;
 +-		}
-+-#endif
++-
 +-	      __set_errno (saved_errno);
 +-
 +-	      /* Now deal with plural.  */
 +-	      if (plural)
 +-		retval = plural_lookup (domain, n, retval, retlen);
 +-
-+-	      __libc_rwlock_unlock (_nl_state_lock);
++-	      gl_rwlock_unlock (_nl_state_lock);
 +-	      return retval;
 +-	    }
 +-	}
@@ -2548,7 +2614,7 @@ index 0000000000..a06dbad1ea
 +- return_untranslated:
 +-  /* Return the untranslated MSGID.  */
 +-  FREE_BLOCKS (block_list);
-+-  __libc_rwlock_unlock (_nl_state_lock);
++-  gl_rwlock_unlock (_nl_state_lock);
 +-#ifndef _LIBC
 +-  if (!ENABLE_SECURE)
 +-    {
@@ -2570,11 +2636,24 @@ index 0000000000..a06dbad1ea
 +-}
 +-
 +-
++-/* Look up the translation of msgid within DOMAIN_FILE and DOMAINBINDING.
++-   Return it if found.  Return NULL if not found or in case of a conversion
++-   failure (problem in the particular message catalog).  Return (char *) -1
++-   in case of a memory allocation failure during conversion (only if
++-   ENCODING != NULL resp. CONVERT == true).  */
 +-char *
 +-internal_function
++-#ifdef IN_LIBGLOCALE
 +-_nl_find_msg (struct loaded_l10nfile *domain_file,
-+-	      struct binding *domainbinding, const char *msgid,
++-	      struct binding *domainbinding, const char *encoding,
++-	      const char *msgid,
 +-	      size_t *lengthp)
++-#else
++-_nl_find_msg (struct loaded_l10nfile *domain_file,
++-	      struct binding *domainbinding,
++-	      const char *msgid, int convert,
++-	      size_t *lengthp)
++-#endif
 +-{
 +-  struct loaded_domain *domain;
 +-  nls_uint32 nstrings;
@@ -2582,7 +2661,7 @@ index 0000000000..a06dbad1ea
 +-  char *result;
 +-  size_t resultlen;
 +-
-+-  if (domain_file->decided == 0)
++-  if (domain_file->decided <= 0)
 +-    _nl_load_domain (domain_file, domainbinding);
 +-
 +-  if (domain_file->data == NULL)
@@ -2597,7 +2676,7 @@ index 0000000000..a06dbad1ea
 +-    {
 +-      /* Use the hashing table.  */
 +-      nls_uint32 len = strlen (msgid);
-+-      nls_uint32 hash_val = hash_string (msgid);
++-      nls_uint32 hash_val = __hash_string (msgid);
 +-      nls_uint32 idx = hash_val % domain->hash_size;
 +-      nls_uint32 incr = 1 + (hash_val % (domain->hash_size - 2));
 +-
@@ -2680,195 +2759,380 @@ index 0000000000..a06dbad1ea
 +-    }
 +-
 +-#if defined _LIBC || HAVE_ICONV
-+-  if (domain->codeset_cntr
-+-      != (domainbinding != NULL ? domainbinding->codeset_cntr : 0))
-+-    {
-+-      /* The domain's codeset has changed through bind_textdomain_codeset()
-+-	 since the message catalog was initialized or last accessed.  We
-+-	 have to reinitialize the converter.  */
-+-      _nl_free_domain_conv (domain);
-+-      _nl_init_domain_conv (domain_file, domain, domainbinding);
-+-    }
-+-
-+-  if (
-+-# ifdef _LIBC
-+-      domain->conv != (__gconv_t) -1
++-# ifdef IN_LIBGLOCALE
++-  if (encoding != NULL)
 +-# else
-+-#  if HAVE_ICONV
-+-      domain->conv != (iconv_t) -1
-+-#  endif
++-  if (convert)
 +-# endif
-+-      )
 +-    {
-+-      /* We are supposed to do a conversion.  First allocate an
-+-	 appropriate table with the same structure as the table
-+-	 of translations in the file, where we can put the pointers
-+-	 to the converted strings in.
-+-	 There is a slight complication with plural entries.  They
-+-	 are represented by consecutive NUL terminated strings.  We
-+-	 handle this case by converting RESULTLEN bytes, including
-+-	 NULs.  */
++-      /* We are supposed to do a conversion.  */
++-# ifndef IN_LIBGLOCALE
++-      const char *encoding = get_output_charset (domainbinding);
++-# endif
++-      size_t nconversions;
++-      struct converted_domain *convd;
++-      size_t i;
 +-
-+-      if (domain->conv_tab == NULL
-+-	  && ((domain->conv_tab =
-+-		 (char **) calloc (nstrings + domain->n_sysdep_strings,
-+-				   sizeof (char *)))
-+-	      == NULL))
-+-	/* Mark that we didn't succeed allocating a table.  */
-+-	domain->conv_tab = (char **) -1;
++-      /* Protect against reallocation of the table.  */
++-      gl_rwlock_rdlock (domain->conversions_lock);
 +-
-+-      if (__builtin_expect (domain->conv_tab == (char **) -1, 0))
-+-	/* Nothing we can do, no more memory.  */
-+-	goto converted;
++-      /* Search whether a table with converted translations for this
++-	 encoding has already been allocated.  */
++-      nconversions = domain->nconversions;
++-      convd = NULL;
 +-
-+-      if (domain->conv_tab[act] == NULL)
++-      for (i = nconversions; i > 0; )
 +-	{
-+-	  /* We haven't used this string so far, so it is not
-+-	     translated yet.  Do this now.  */
-+-	  /* We use a bit more efficient memory handling.
-+-	     We allocate always larger blocks which get used over
-+-	     time.  This is faster than many small allocations.   */
-+-	  __libc_lock_define_initialized (static, lock)
-+-# define INITIAL_BLOCK_SIZE	4080
-+-	  static unsigned char *freemem;
-+-	  static size_t freemem_size;
-+-
-+-	  const unsigned char *inbuf;
-+-	  unsigned char *outbuf;
-+-	  int malloc_count;
-+-# ifndef _LIBC
-+-	  transmem_block_t *transmem_list = NULL;
-+-# endif
-+-
-+-	  __libc_lock_lock (lock);
-+-
-+-	  inbuf = (const unsigned char *) result;
-+-	  outbuf = freemem + sizeof (size_t);
-+-
-+-	  malloc_count = 0;
-+-	  while (1)
++-	  i--;
++-	  if (strcmp (domain->conversions[i].encoding, encoding) == 0)
 +-	    {
-+-	      transmem_block_t *newmem;
-+-# ifdef _LIBC
-+-	      size_t non_reversible;
-+-	      int res;
-+-
-+-	      if (freemem_size < sizeof (size_t))
-+-		goto resize_freemem;
-+-
-+-	      res = __gconv (domain->conv,
-+-			     &inbuf, inbuf + resultlen,
-+-			     &outbuf,
-+-			     outbuf + freemem_size - sizeof (size_t),
-+-			     &non_reversible);
-+-
-+-	      if (res == __GCONV_OK || res == __GCONV_EMPTY_INPUT)
-+-		break;
-+-
-+-	      if (res != __GCONV_FULL_OUTPUT)
-+-		{
-+-		  __libc_lock_unlock (lock);
-+-		  goto converted;
-+-		}
-+-
-+-	      inbuf = result;
-+-# else
-+-#  if HAVE_ICONV
-+-	      const char *inptr = (const char *) inbuf;
-+-	      size_t inleft = resultlen;
-+-	      char *outptr = (char *) outbuf;
-+-	      size_t outleft;
-+-
-+-	      if (freemem_size < sizeof (size_t))
-+-		goto resize_freemem;
-+-
-+-	      outleft = freemem_size - sizeof (size_t);
-+-	      if (iconv (domain->conv,
-+-			 (ICONV_CONST char **) &inptr, &inleft,
-+-			 &outptr, &outleft)
-+-		  != (size_t) (-1))
-+-		{
-+-		  outbuf = (unsigned char *) outptr;
-+-		  break;
-+-		}
-+-	      if (errno != E2BIG)
-+-		{
-+-		  __libc_lock_unlock (lock);
-+-		  goto converted;
-+-		}
-+-#  endif
-+-# endif
-+-
-+-	    resize_freemem:
-+-	      /* We must allocate a new buffer or resize the old one.  */
-+-	      if (malloc_count > 0)
-+-		{
-+-		  ++malloc_count;
-+-		  freemem_size = malloc_count * INITIAL_BLOCK_SIZE;
-+-		  newmem = (transmem_block_t *) realloc (transmem_list,
-+-							 freemem_size);
-+-# ifdef _LIBC
-+-		  if (newmem != NULL)
-+-		    transmem_list = transmem_list->next;
-+-		  else
-+-		    {
-+-		      struct transmem_list *old = transmem_list;
-+-
-+-		      transmem_list = transmem_list->next;
-+-		      free (old);
-+-		    }
-+-# endif
-+-		}
-+-	      else
-+-		{
-+-		  malloc_count = 1;
-+-		  freemem_size = INITIAL_BLOCK_SIZE;
-+-		  newmem = (transmem_block_t *) malloc (freemem_size);
-+-		}
-+-	      if (__builtin_expect (newmem == NULL, 0))
-+-		{
-+-		  freemem = NULL;
-+-		  freemem_size = 0;
-+-		  __libc_lock_unlock (lock);
-+-		  goto converted;
-+-		}
-+-
-+-# ifdef _LIBC
-+-	      /* Add the block to the list of blocks we have to free
-+-                 at some point.  */
-+-	      newmem->next = transmem_list;
-+-	      transmem_list = newmem;
-+-
-+-	      freemem = newmem->data;
-+-	      freemem_size -= offsetof (struct transmem_list, data);
-+-# else
-+-	      transmem_list = newmem;
-+-	      freemem = newmem;
-+-# endif
-+-
-+-	      outbuf = freemem + sizeof (size_t);
++-	      convd = &domain->conversions[i];
++-	      break;
 +-	    }
-+-
-+-	  /* We have now in our buffer a converted string.  Put this
-+-	     into the table of conversions.  */
-+-	  *(size_t *) freemem = outbuf - freemem - sizeof (size_t);
-+-	  domain->conv_tab[act] = (char *) freemem;
-+-	  /* Shrink freemem, but keep it aligned.  */
-+-	  freemem_size -= outbuf - freemem;
-+-	  freemem = outbuf;
-+-	  freemem += freemem_size & (alignof (size_t) - 1);
-+-	  freemem_size = freemem_size & ~ (alignof (size_t) - 1);
-+-
-+-	  __libc_lock_unlock (lock);
 +-	}
 +-
-+-      /* Now domain->conv_tab[act] contains the translation of all
-+-	 the plural variants.  */
-+-      result = domain->conv_tab[act] + sizeof (size_t);
-+-      resultlen = *(size_t *) domain->conv_tab[act];
++-      gl_rwlock_unlock (domain->conversions_lock);
++-
++-      if (convd == NULL)
++-	{
++-	  /* We have to allocate a new conversions table.  */
++-	  gl_rwlock_wrlock (domain->conversions_lock);
++-
++-	  /* Maybe in the meantime somebody added the translation.
++-	     Recheck.  */
++-	  for (i = nconversions; i > 0; )
++-	    {
++-	      i--;
++-	      if (strcmp (domain->conversions[i].encoding, encoding) == 0)
++-		{
++-		  convd = &domain->conversions[i];
++-		  goto found_convd;
++-		}
++-	    }
++-
++-	  {
++-	    /* Allocate a table for the converted translations for this
++-	       encoding.  */
++-	    struct converted_domain *new_conversions =
++-	      (struct converted_domain *)
++-	      (domain->conversions != NULL
++-	       ? realloc (domain->conversions,
++-			  (nconversions + 1) * sizeof (struct converted_domain))
++-	       : malloc ((nconversions + 1) * sizeof (struct converted_domain)));
++-
++-	    if (__builtin_expect (new_conversions == NULL, 0))
++-	      {
++-		/* Nothing we can do, no more memory.  We cannot use the
++-		   translation because it might be encoded incorrectly.  */
++-	      unlock_fail:
++-		gl_rwlock_unlock (domain->conversions_lock);
++-		return (char *) -1;
++-	      }
++-
++-	    domain->conversions = new_conversions;
++-
++-	    /* Copy the 'encoding' string to permanent storage.  */
++-	    encoding = strdup (encoding);
++-	    if (__builtin_expect (encoding == NULL, 0))
++-	      /* Nothing we can do, no more memory.  We cannot use the
++-		 translation because it might be encoded incorrectly.  */
++-	      goto unlock_fail;
++-
++-	    convd = &new_conversions[nconversions];
++-	    convd->encoding = encoding;
++-
++-	    /* Find out about the character set the file is encoded with.
++-	       This can be found (in textual form) in the entry "".  If this
++-	       entry does not exist or if this does not contain the 'charset='
++-	       information, we will assume the charset matches the one the
++-	       current locale and we don't have to perform any conversion.  */
++-# ifdef _LIBC
++-	    convd->conv = (__gconv_t) -1;
++-# else
++-#  if HAVE_ICONV
++-	    convd->conv = (iconv_t) -1;
++-#  endif
++-# endif
++-	    {
++-	      char *nullentry;
++-	      size_t nullentrylen;
++-
++-	      /* Get the header entry.  This is a recursion, but it doesn't
++-		 reallocate domain->conversions because we pass
++-		 encoding = NULL or convert = 0, respectively.  */
++-	      nullentry =
++-# ifdef IN_LIBGLOCALE
++-		_nl_find_msg (domain_file, domainbinding, NULL, "",
++-			      &nullentrylen);
++-# else
++-		_nl_find_msg (domain_file, domainbinding, "", 0, &nullentrylen);
++-# endif
++-
++-	      if (nullentry != NULL)
++-		{
++-		  const char *charsetstr;
++-
++-		  charsetstr = strstr (nullentry, "charset=");
++-		  if (charsetstr != NULL)
++-		    {
++-		      size_t len;
++-		      char *charset;
++-		      const char *outcharset;
++-
++-		      charsetstr += strlen ("charset=");
++-		      len = strcspn (charsetstr, " \t\n");
++-
++-		      charset = (char *) alloca (len + 1);
++-# if defined _LIBC || HAVE_MEMPCPY
++-		      *((char *) mempcpy (charset, charsetstr, len)) = '\0';
++-# else
++-		      memcpy (charset, charsetstr, len);
++-		      charset[len] = '\0';
++-# endif
++-
++-		      outcharset = encoding;
++-
++-# ifdef _LIBC
++-		      /* We always want to use transliteration.  */
++-		      outcharset = norm_add_slashes (outcharset, "TRANSLIT");
++-		      charset = norm_add_slashes (charset, "");
++-		      int r = __gconv_open (outcharset, charset, &convd->conv,
++-					    GCONV_AVOID_NOCONV);
++-		      if (__builtin_expect (r != __GCONV_OK, 0))
++-			{
++-			  /* If the output encoding is the same there is
++-			     nothing to do.  Otherwise do not use the
++-			     translation at all.  */
++-			  if (__builtin_expect (r != __GCONV_NULCONV, 1))
++-			    {
++-			      gl_rwlock_unlock (domain->conversions_lock);
++-			      free ((char *) encoding);
++-			      return NULL;
++-			    }
++-
++-			  convd->conv = (__gconv_t) -1;
++-			}
++-# else
++-#  if HAVE_ICONV
++-		      /* When using GNU libc >= 2.2 or GNU libiconv >= 1.5,
++-			 we want to use transliteration.  */
++-#   if (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 2) || __GLIBC__ > 2 \
++-       || _LIBICONV_VERSION >= 0x0105
++-		      if (strchr (outcharset, '/') == NULL)
++-			{
++-			  char *tmp;
++-
++-			  len = strlen (outcharset);
++-			  tmp = (char *) alloca (len + 10 + 1);
++-			  memcpy (tmp, outcharset, len);
++-			  memcpy (tmp + len, "//TRANSLIT", 10 + 1);
++-			  outcharset = tmp;
++-
++-			  convd->conv = iconv_open (outcharset, charset);
++-
++-			  freea (outcharset);
++-			}
++-		      else
++-#   endif
++-			convd->conv = iconv_open (outcharset, charset);
++-#  endif
++-# endif
++-
++-		      freea (charset);
++-		    }
++-		}
++-	    }
++-	    convd->conv_tab = NULL;
++-	    /* Here domain->conversions is still == new_conversions.  */
++-	    domain->nconversions++;
++-	  }
++-
++-	found_convd:
++-	  gl_rwlock_unlock (domain->conversions_lock);
++-	}
++-
++-      if (
++-# ifdef _LIBC
++-	  convd->conv != (__gconv_t) -1
++-# else
++-#  if HAVE_ICONV
++-	  convd->conv != (iconv_t) -1
++-#  endif
++-# endif
++-	  )
++-	{
++-	  /* We are supposed to do a conversion.  First allocate an
++-	     appropriate table with the same structure as the table
++-	     of translations in the file, where we can put the pointers
++-	     to the converted strings in.
++-	     There is a slight complication with plural entries.  They
++-	     are represented by consecutive NUL terminated strings.  We
++-	     handle this case by converting RESULTLEN bytes, including
++-	     NULs.  */
++-
++-	  if (convd->conv_tab == NULL
++-	      && ((convd->conv_tab =
++-		    (char **) calloc (nstrings + domain->n_sysdep_strings,
++-				      sizeof (char *)))
++-		  == NULL))
++-	    /* Mark that we didn't succeed allocating a table.  */
++-	    convd->conv_tab = (char **) -1;
++-
++-	  if (__builtin_expect (convd->conv_tab == (char **) -1, 0))
++-	    /* Nothing we can do, no more memory.  We cannot use the
++-	       translation because it might be encoded incorrectly.  */
++-	    return (char *) -1;
++-
++-	  if (convd->conv_tab[act] == NULL)
++-	    {
++-	      /* We haven't used this string so far, so it is not
++-		 translated yet.  Do this now.  */
++-	      /* We use a bit more efficient memory handling.
++-		 We allocate always larger blocks which get used over
++-		 time.  This is faster than many small allocations.   */
++-	      __libc_lock_define_initialized (static, lock)
++-# define INITIAL_BLOCK_SIZE	4080
++-	      static unsigned char *freemem;
++-	      static size_t freemem_size;
++-
++-	      const unsigned char *inbuf;
++-	      unsigned char *outbuf;
++-	      int malloc_count;
++-# ifndef _LIBC
++-	      transmem_block_t *transmem_list = NULL;
++-# endif
++-
++-	      __libc_lock_lock (lock);
++-
++-	      inbuf = (const unsigned char *) result;
++-	      outbuf = freemem + sizeof (size_t);
++-
++-	      malloc_count = 0;
++-	      while (1)
++-		{
++-		  transmem_block_t *newmem;
++-# ifdef _LIBC
++-		  size_t non_reversible;
++-		  int res;
++-
++-		  if (freemem_size < sizeof (size_t))
++-		    goto resize_freemem;
++-
++-		  res = __gconv (convd->conv,
++-				 &inbuf, inbuf + resultlen,
++-				 &outbuf,
++-				 outbuf + freemem_size - sizeof (size_t),
++-				 &non_reversible);
++-
++-		  if (res == __GCONV_OK || res == __GCONV_EMPTY_INPUT)
++-		    break;
++-
++-		  if (res != __GCONV_FULL_OUTPUT)
++-		    {
++-		      /* We should not use the translation at all, it
++-			 is incorrectly encoded.  */
++-		      __libc_lock_unlock (lock);
++-		      return NULL;
++-		    }
++-
++-		  inbuf = (const unsigned char *) result;
++-# else
++-#  if HAVE_ICONV
++-		  const char *inptr = (const char *) inbuf;
++-		  size_t inleft = resultlen;
++-		  char *outptr = (char *) outbuf;
++-		  size_t outleft;
++-
++-		  if (freemem_size < sizeof (size_t))
++-		    goto resize_freemem;
++-
++-		  outleft = freemem_size - sizeof (size_t);
++-		  if (iconv (convd->conv,
++-			     (ICONV_CONST char **) &inptr, &inleft,
++-			     &outptr, &outleft)
++-		      != (size_t) (-1))
++-		    {
++-		      outbuf = (unsigned char *) outptr;
++-		      break;
++-		    }
++-		  if (errno != E2BIG)
++-		    {
++-		      __libc_lock_unlock (lock);
++-		      return NULL;
++-		    }
++-#  endif
++-# endif
++-
++-		resize_freemem:
++-		  /* We must allocate a new buffer or resize the old one.  */
++-		  if (malloc_count > 0)
++-		    {
++-		      ++malloc_count;
++-		      freemem_size = malloc_count * INITIAL_BLOCK_SIZE;
++-		      newmem = (transmem_block_t *) realloc (transmem_list,
++-							     freemem_size);
++-# ifdef _LIBC
++-		      if (newmem != NULL)
++-			transmem_list = transmem_list->next;
++-		      else
++-			{
++-			  struct transmem_list *old = transmem_list;
++-
++-			  transmem_list = transmem_list->next;
++-			  free (old);
++-			}
++-# endif
++-		    }
++-		  else
++-		    {
++-		      malloc_count = 1;
++-		      freemem_size = INITIAL_BLOCK_SIZE;
++-		      newmem = (transmem_block_t *) malloc (freemem_size);
++-		    }
++-		  if (__builtin_expect (newmem == NULL, 0))
++-		    {
++-		      freemem = NULL;
++-		      freemem_size = 0;
++-		      __libc_lock_unlock (lock);
++-		      return (char *) -1;
++-		    }
++-
++-# ifdef _LIBC
++-		  /* Add the block to the list of blocks we have to free
++-		     at some point.  */
++-		  newmem->next = transmem_list;
++-		  transmem_list = newmem;
++-
++-		  freemem = (unsigned char *) newmem->data;
++-		  freemem_size -= offsetof (struct transmem_list, data);
++-# else
++-		  transmem_list = newmem;
++-		  freemem = newmem;
++-# endif
++-
++-		  outbuf = freemem + sizeof (size_t);
++-		}
++-
++-	      /* We have now in our buffer a converted string.  Put this
++-		 into the table of conversions.  */
++-	      *(size_t *) freemem = outbuf - freemem - sizeof (size_t);
++-	      convd->conv_tab[act] = (char *) freemem;
++-	      /* Shrink freemem, but keep it aligned.  */
++-	      freemem_size -= outbuf - freemem;
++-	      freemem = outbuf;
++-	      freemem += freemem_size & (alignof (size_t) - 1);
++-	      freemem_size = freemem_size & ~ (alignof (size_t) - 1);
++-
++-	      __libc_lock_unlock (lock);
++-	    }
++-
++-	  /* Now convd->conv_tab[act] contains the translation of all
++-	     the plural variants.  */
++-	  result = convd->conv_tab[act] + sizeof (size_t);
++-	  resultlen = *(size_t *) convd->conv_tab[act];
++-	}
 +-    }
 +-
-+- converted:
 +-  /* The result string is converted.  */
 +-
 +-#endif /* _LIBC || HAVE_ICONV */
@@ -2980,13 +3244,21 @@ index 0000000000..a06dbad1ea
 +-   or system-dependent defaults.  */
 +-static const char *
 +-internal_function
++-#ifdef IN_LIBGLOCALE
++-guess_category_value (int category, const char *categoryname,
++-		      const char *locale)
++-
++-#else
 +-guess_category_value (int category, const char *categoryname)
++-#endif
 +-{
 +-  const char *language;
++-#ifndef IN_LIBGLOCALE
 +-  const char *locale;
-+-#ifndef _LIBC
++-# ifndef _LIBC
 +-  const char *language_default;
 +-  int locale_defaulted;
++-# endif
 +-#endif
 +-
 +-  /* We use the settings in the following order:
@@ -3003,19 +3275,34 @@ index 0000000000..a06dbad1ea
 +-       - If the system provides both a list of languages and a default locale,
 +-         the former is used.  */
 +-
++-#ifndef IN_LIBGLOCALE
 +-  /* Fetch the locale name, through the POSIX method of looking to `LC_ALL',
 +-     `LC_xxx', and `LANG'.  On some systems this can be done by the
 +-     `setlocale' function itself.  */
-+-#ifdef _LIBC
++-# ifdef _LIBC
 +-  locale = __current_locale_name (category);
-+-#else
-+-  locale = _nl_locale_name_posix (category, categoryname);
-+-  locale_defaulted = 0;
-+-  if (locale == NULL)
++-# else
++-#  if HAVE_STRUCT___LOCALE_STRUCT___NAMES && defined USE_IN_GETTEXT_TESTS
++-  /* The __names field is not public glibc API and must therefore not be used
++-     in code that is installed in public locations.  */
++-  locale_t thread_locale = uselocale (NULL);
++-  if (thread_locale != LC_GLOBAL_LOCALE)
 +-    {
-+-      locale = _nl_locale_name_default ();
-+-      locale_defaulted = 1;
++-      locale = thread_locale->__names[category];
++-      locale_defaulted = 0;
 +-    }
++-  else
++-#  endif
++-    {
++-      locale = _nl_locale_name_posix (category, categoryname);
++-      locale_defaulted = 0;
++-      if (locale == NULL)
++-	{
++-	  locale = _nl_locale_name_default ();
++-	  locale_defaulted = 1;
++-	}
++-    }
++-# endif
 +-#endif
 +-
 +-  /* Ignore LANGUAGE and its system-dependent analogon if the locale is set
@@ -3037,7 +3324,7 @@ index 0000000000..a06dbad1ea
 +-  language = getenv ("LANGUAGE");
 +-  if (language != NULL && language[0] != '\0')
 +-    return language;
-+-#ifndef _LIBC
++-#if !defined IN_LIBGLOCALE && !defined _LIBC
 +-  /* The next priority value is the locale name, if not defaulted.  */
 +-  if (locale_defaulted)
 +-    {
@@ -3050,6 +3337,59 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-  return locale;
 +-}
++-
++-#if (defined _LIBC || HAVE_ICONV) && !defined IN_LIBGLOCALE
++-/* Returns the output charset.  */
++-static const char *
++-internal_function
++-get_output_charset (struct binding *domainbinding)
++-{
++-  /* The output charset should normally be determined by the locale.  But
++-     sometimes the locale is not used or not correctly set up, so we provide
++-     a possibility for the user to override this: the OUTPUT_CHARSET
++-     environment variable.  Moreover, the value specified through
++-     bind_textdomain_codeset overrides both.  */
++-  if (domainbinding != NULL && domainbinding->codeset != NULL)
++-    return domainbinding->codeset;
++-  else
++-    {
++-      /* For speed reasons, we look at the value of OUTPUT_CHARSET only
++-	 once.  This is a user variable that is not supposed to change
++-	 during a program run.  */
++-      static char *output_charset_cache;
++-      static int output_charset_cached;
++-
++-      if (!output_charset_cached)
++-	{
++-	  const char *value = getenv ("OUTPUT_CHARSET");
++-
++-	  if (value != NULL && value[0] != '\0')
++-	    {
++-	      size_t len = strlen (value) + 1;
++-	      char *value_copy = (char *) malloc (len);
++-
++-	      if (value_copy != NULL)
++-		memcpy (value_copy, value, len);
++-	      output_charset_cache = value_copy;
++-	    }
++-	  output_charset_cached = 1;
++-	}
++-
++-      if (output_charset_cache != NULL)
++-	return output_charset_cache;
++-      else
++-	{
++-# ifdef _LIBC
++-	  return _NL_CURRENT (LC_CTYPE, CODESET);
++-# else
++-#  if HAVE_ICONV
++-	  return locale_charset ();
++-#  endif
++-# endif
++-	}
++-    }
++-}
++-#endif
 +-
 +-/* @@ begin of epilog @@ */
 +-
@@ -3075,6 +3415,10 @@ index 0000000000..a06dbad1ea
 +-}
 +-#endif
 +-
++-#if !_LIBC && !HAVE_TSEARCH
++-# include "tsearch.c"
++-#endif
++-
 +-
 +-#ifdef _LIBC
 +-/* If we want to free all resources we have to do some work at
@@ -3087,7 +3431,7 @@ index 0000000000..a06dbad1ea
 +-    {
 +-      struct binding *oldp = _nl_domain_bindings;
 +-      _nl_domain_bindings = _nl_domain_bindings->next;
-+-      if (oldp->dirname != INTUSE(_nl_default_dirname))
++-      if (oldp->dirname != _nl_default_dirname)
 +-	/* Yes, this is a pointer comparison.  */
 +-	free (oldp->dirname);
 +-      free (oldp->codeset);
@@ -3128,7 +3472,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -3188,7 +3532,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -3249,7 +3593,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -3297,7 +3641,7 @@ index 0000000000..a06dbad1ea
 ++++ /dev/null
 +@@ -1,108 +0,0 @@
 +-/* Plural expression evaluation.
-+-   Copyright (C) 2000-2003 Free Software Foundation, Inc.
++-   Copyright (C) 2000-2003, 2007 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -3311,7 +3655,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef STATIC
@@ -3322,7 +3666,7 @@ index 0000000000..a06dbad1ea
 +-STATIC
 +-unsigned long int
 +-internal_function
-+-plural_eval (struct expression *pexp, unsigned long int n)
++-plural_eval (const struct expression *pexp, unsigned long int n)
 +-{
 +-  switch (pexp->nargs)
 +-    {
@@ -3406,8 +3750,8 @@ index 0000000000..a06dbad1ea
 +-}
 +--- a/intl/explodename.c
 ++++ /dev/null
-+@@ -1,185 +0,0 @@
-+-/* Copyright (C) 1995-1998, 2000-2001, 2003 Free Software Foundation, Inc.
++@@ -1,135 +0,0 @@
++-/* Copyright (C) 1995-1998, 2000-2001, 2003, 2005, 2007 Free Software Foundation, Inc.
 +-   Contributed by Ulrich Drepper <drepper@gnu.ai.mit.edu>, 1995.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -3422,7 +3766,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -3446,11 +3790,15 @@ index 0000000000..a06dbad1ea
 +-
 +-/* @@ end of prolog @@ */
 +-
-+-char *
++-/* Split a locale name NAME into a leading language part and all the
++-   rest.  Return a pointer to the first character after the language,
++-   i.e. to the first byte of the rest.  */
++-static char *_nl_find_language (const char *name);
++-
++-static char *
 +-_nl_find_language (const char *name)
 +-{
-+-  while (name[0] != '\0' && name[0] != '_' && name[0] != '@'
-+-	 && name[0] != '+' && name[0] != ',')
++-  while (name[0] != '\0' && name[0] != '_' && name[0] != '@' && name[0] != '.')
 +-    ++name;
 +-
 +-  return (char *) name;
@@ -3461,10 +3809,8 @@ index 0000000000..a06dbad1ea
 +-_nl_explode_name (char *name,
 +-		  const char **language, const char **modifier,
 +-		  const char **territory, const char **codeset,
-+-		  const char **normalized_codeset, const char **special,
-+-		  const char **sponsor, const char **revision)
++-		  const char **normalized_codeset)
 +-{
-+-  enum { undecided, xpg, cen } syntax;
 +-  char *cp;
 +-  int mask;
 +-
@@ -3472,15 +3818,10 @@ index 0000000000..a06dbad1ea
 +-  *territory = NULL;
 +-  *codeset = NULL;
 +-  *normalized_codeset = NULL;
-+-  *special = NULL;
-+-  *sponsor = NULL;
-+-  *revision = NULL;
 +-
 +-  /* Now we determine the single parts of the locale name.  First
-+-     look for the language.  Termination symbols are `_' and `@' if
-+-     we use XPG4 style, and `_', `+', and `,' if we use CEN syntax.  */
++-     look for the language.  Termination symbols are `_', '.', and `@'.  */
 +-  mask = 0;
-+-  syntax = undecided;
 +-  *language = cp = name;
 +-  cp = _nl_find_language (*language);
 +-
@@ -3488,22 +3829,23 @@ index 0000000000..a06dbad1ea
 +-    /* This does not make sense: language has to be specified.  Use
 +-       this entry as it is without exploding.  Perhaps it is an alias.  */
 +-    cp = strchr (*language, '\0');
-+-  else if (cp[0] == '_')
++-  else
 +-    {
-+-      /* Next is the territory.  */
-+-      cp[0] = '\0';
-+-      *territory = ++cp;
++-      if (cp[0] == '_')
++-	{
++-	  /* Next is the territory.  */
++-	  cp[0] = '\0';
++-	  *territory = ++cp;
 +-
-+-      while (cp[0] != '\0' && cp[0] != '.' && cp[0] != '@'
-+-	     && cp[0] != '+' && cp[0] != ',' && cp[0] != '_')
-+-	++cp;
++-	  while (cp[0] != '\0' && cp[0] != '.' && cp[0] != '@')
++-	    ++cp;
 +-
-+-      mask |= TERRITORY;
++-	  mask |= XPG_TERRITORY;
++-	}
 +-
 +-      if (cp[0] == '.')
 +-	{
 +-	  /* Next is the codeset.  */
-+-	  syntax = xpg;
 +-	  cp[0] = '\0';
 +-	  *codeset = ++cp;
 +-
@@ -3516,7 +3858,9 @@ index 0000000000..a06dbad1ea
 +-	    {
 +-	      *normalized_codeset = _nl_normalize_codeset (*codeset,
 +-							   cp - *codeset);
-+-	      if (strcmp (*codeset, *normalized_codeset) == 0)
++-	      if (*normalized_codeset == NULL)
++-		return -1;
++-	      else if (strcmp (*codeset, *normalized_codeset) == 0)
 +-		free ((char *) *normalized_codeset);
 +-	      else
 +-		mask |= XPG_NORM_CODESET;
@@ -3524,79 +3868,38 @@ index 0000000000..a06dbad1ea
 +-	}
 +-    }
 +-
-+-  if (cp[0] == '@' || (syntax != xpg && cp[0] == '+'))
++-  if (cp[0] == '@')
 +-    {
 +-      /* Next is the modifier.  */
-+-      syntax = cp[0] == '@' ? xpg : cen;
 +-      cp[0] = '\0';
 +-      *modifier = ++cp;
 +-
-+-      while (syntax == cen && cp[0] != '\0' && cp[0] != '+'
-+-	     && cp[0] != ',' && cp[0] != '_')
-+-	++cp;
-+-
-+-      mask |= XPG_MODIFIER | CEN_AUDIENCE;
++-      if (cp[0] != '\0')
++-	mask |= XPG_MODIFIER;
 +-    }
 +-
-+-  if (syntax != xpg && (cp[0] == '+' || cp[0] == ',' || cp[0] == '_'))
-+-    {
-+-      syntax = cen;
++-  if (*territory != NULL && (*territory)[0] == '\0')
++-    mask &= ~XPG_TERRITORY;
 +-
-+-      if (cp[0] == '+')
-+-	{
-+- 	  /* Next is special application (CEN syntax).  */
-+-	  cp[0] = '\0';
-+-	  *special = ++cp;
-+-
-+-	  while (cp[0] != '\0' && cp[0] != ',' && cp[0] != '_')
-+-	    ++cp;
-+-
-+-	  mask |= CEN_SPECIAL;
-+-	}
-+-
-+-      if (cp[0] == ',')
-+-	{
-+- 	  /* Next is sponsor (CEN syntax).  */
-+-	  cp[0] = '\0';
-+-	  *sponsor = ++cp;
-+-
-+-	  while (cp[0] != '\0' && cp[0] != '_')
-+-	    ++cp;
-+-
-+-	  mask |= CEN_SPONSOR;
-+-	}
-+-
-+-      if (cp[0] == '_')
-+-	{
-+- 	  /* Next is revision (CEN syntax).  */
-+-	  cp[0] = '\0';
-+-	  *revision = ++cp;
-+-
-+-	  mask |= CEN_REVISION;
-+-	}
-+-    }
-+-
-+-  /* For CEN syntax values it might be important to have the
-+-     separator character in the file name, not for XPG syntax.  */
-+-  if (syntax == xpg)
-+-    {
-+-      if (*territory != NULL && (*territory)[0] == '\0')
-+-	mask &= ~TERRITORY;
-+-
-+-      if (*codeset != NULL && (*codeset)[0] == '\0')
-+-	mask &= ~XPG_CODESET;
-+-
-+-      if (*modifier != NULL && (*modifier)[0] == '\0')
-+-	mask &= ~XPG_MODIFIER;
-+-    }
++-  if (*codeset != NULL && (*codeset)[0] == '\0')
++-    mask &= ~XPG_CODESET;
 +-
 +-  return mask;
 +-}
++--- a/intl/export.h
+++++ /dev/null
++@@ -1,6 +0,0 @@
++-
++-#if @HAVE_VISIBILITY@ && BUILDING_LIBINTL
++-#define LIBINTL_DLL_EXPORTED __attribute__((__visibility__("default")))
++-#else
++-#define LIBINTL_DLL_EXPORTED
++-#endif
 +--- a/intl/finddomain.c
 ++++ /dev/null
-+@@ -1,192 +0,0 @@
++@@ -1,212 +0,0 @@
 +-/* Handle list of needed message catalogs
-+-   Copyright (C) 1995-1999, 2000-2001, 2003 Free Software Foundation, Inc.
++-   Copyright (C) 1995-1999, 2000-2001, 2003-2007 Free Software Foundation, Inc.
 +-   Written by Ulrich Drepper <drepper@gnu.org>, 1995.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -3611,7 +3914,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -3634,6 +3937,17 @@ index 0000000000..a06dbad1ea
 +-# include "libgnuintl.h"
 +-#endif
 +-
++-/* Handle multi-threaded applications.  */
++-#ifdef _LIBC
++-# include <bits/libc-lock.h>
++-# define gl_rwlock_define_initialized __libc_rwlock_define_initialized
++-# define gl_rwlock_rdlock __libc_rwlock_rdlock
++-# define gl_rwlock_wrlock __libc_rwlock_wrlock
++-# define gl_rwlock_unlock __libc_rwlock_unlock
++-#else
++-# include "lock.h"
++-#endif
++-
 +-/* @@ end of prolog @@ */
 +-/* List of already loaded domains.  */
 +-static struct loaded_l10nfile *_nl_loaded_domains;
@@ -3653,44 +3967,41 @@ index 0000000000..a06dbad1ea
 +-  const char *territory;
 +-  const char *codeset;
 +-  const char *normalized_codeset;
-+-  const char *special;
-+-  const char *sponsor;
-+-  const char *revision;
 +-  const char *alias_value;
 +-  int mask;
 +-
 +-  /* LOCALE can consist of up to four recognized parts for the XPG syntax:
 +-
-+-		language[_territory[.codeset]][@modifier]
-+-
-+-     and six parts for the CEN syntax:
-+-
-+-	language[_territory][+audience][+special][,[sponsor][_revision]]
++-		language[_territory][.codeset][@modifier]
 +-
 +-     Beside the first part all of them are allowed to be missing.  If
 +-     the full specified locale is not found, the less specific one are
 +-     looked for.  The various parts will be stripped off according to
 +-     the following order:
-+-		(1) revision
-+-		(2) sponsor
-+-		(3) special
-+-		(4) codeset
-+-		(5) normalized codeset
-+-		(6) territory
-+-		(7) audience/modifier
++-		(1) codeset
++-		(2) normalized codeset
++-		(3) territory
++-		(4) modifier
 +-   */
++-
++-  /* We need to protect modifying the _NL_LOADED_DOMAINS data.  */
++-  gl_rwlock_define_initialized (static, lock);
++-  gl_rwlock_rdlock (lock);
 +-
 +-  /* If we have already tested for this locale entry there has to
 +-     be one data set in the list of loaded domains.  */
 +-  retval = _nl_make_l10nflist (&_nl_loaded_domains, dirname,
 +-			       strlen (dirname) + 1, 0, locale, NULL, NULL,
-+-			       NULL, NULL, NULL, NULL, NULL, domainname, 0);
++-			       NULL, NULL, domainname, 0);
++-
++-  gl_rwlock_unlock (lock);
++-
 +-  if (retval != NULL)
 +-    {
 +-      /* We know something about this locale.  */
 +-      int cnt;
 +-
-+-      if (retval->decided == 0)
++-      if (retval->decided <= 0)
 +-	_nl_load_domain (retval, domainbinding);
 +-
 +-      if (retval->data != NULL)
@@ -3698,13 +4009,14 @@ index 0000000000..a06dbad1ea
 +-
 +-      for (cnt = 0; retval->successor[cnt] != NULL; ++cnt)
 +-	{
-+-	  if (retval->successor[cnt]->decided == 0)
++-	  if (retval->successor[cnt]->decided <= 0)
 +-	    _nl_load_domain (retval->successor[cnt], domainbinding);
 +-
 +-	  if (retval->successor[cnt]->data != NULL)
 +-	    break;
 +-	}
-+-      return cnt >= 0 ? retval : NULL;
++-
++-      return retval;
 +-      /* NOTREACHED */
 +-    }
 +-
@@ -3729,30 +4041,37 @@ index 0000000000..a06dbad1ea
 +-    }
 +-
 +-  /* Now we determine the single parts of the locale name.  First
-+-     look for the language.  Termination symbols are `_' and `@' if
-+-     we use XPG4 style, and `_', `+', and `,' if we use CEN syntax.  */
++-     look for the language.  Termination symbols are `_', '.', and `@'.  */
 +-  mask = _nl_explode_name (locale, &language, &modifier, &territory,
-+-			   &codeset, &normalized_codeset, &special,
-+-			   &sponsor, &revision);
++-			   &codeset, &normalized_codeset);
++-  if (mask == -1)
++-    /* This means we are out of core.  */
++-    return NULL;
++-
++-  /* We need to protect modifying the _NL_LOADED_DOMAINS data.  */
++-  gl_rwlock_wrlock (lock);
 +-
 +-  /* Create all possible locale entries which might be interested in
 +-     generalization.  */
 +-  retval = _nl_make_l10nflist (&_nl_loaded_domains, dirname,
 +-			       strlen (dirname) + 1, mask, language, territory,
-+-			       codeset, normalized_codeset, modifier, special,
-+-			       sponsor, revision, domainname, 1);
++-			       codeset, normalized_codeset, modifier,
++-			       domainname, 1);
++-
++-  gl_rwlock_unlock (lock);
++-
 +-  if (retval == NULL)
 +-    /* This means we are out of core.  */
-+-    return NULL;
++-    goto out;
 +-
-+-  if (retval->decided == 0)
++-  if (retval->decided <= 0)
 +-    _nl_load_domain (retval, domainbinding);
 +-  if (retval->data == NULL)
 +-    {
 +-      int cnt;
 +-      for (cnt = 0; retval->successor[cnt] != NULL; ++cnt)
 +-	{
-+-	  if (retval->successor[cnt]->decided == 0)
++-	  if (retval->successor[cnt]->decided <= 0)
 +-	    _nl_load_domain (retval->successor[cnt], domainbinding);
 +-	  if (retval->successor[cnt]->data != NULL)
 +-	    break;
@@ -3763,6 +4082,7 @@ index 0000000000..a06dbad1ea
 +-  if (alias_value != NULL)
 +-    free (locale);
 +-
++-out:
 +-  /* The space for normalized_codeset is dynamically allocated.  Free it.  */
 +-  if (mask & XPG_NORM_CODESET)
 +-    free ((void *) normalized_codeset);
@@ -3772,7 +4092,10 @@ index 0000000000..a06dbad1ea
 +-
 +-
 +-#ifdef _LIBC
-+-libc_freeres_fn (free_mem)
++-/* This is called from iconv/gconv_db.c's free_mem, as locales must
++-   be freed before freeing gconv steps arrays.  */
++-void __libc_freeres_fn_section
++-_nl_finddomain_subfreeres ()
 +-{
 +-  struct loaded_l10nfile *runp = _nl_loaded_domains;
 +-
@@ -3805,7 +4128,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -3855,9 +4178,9 @@ index 0000000000..a06dbad1ea
 +-#endif
 +--- a/intl/gettextP.h
 ++++ /dev/null
-+@@ -1,218 +0,0 @@
++@@ -1,297 +0,0 @@
 +-/* Header describing internals of libintl library.
-+-   Copyright (C) 1995-1999, 2000-2005 Free Software Foundation, Inc.
++-   Copyright (C) 1995-1999, 2000-2007 Free Software Foundation, Inc.
 +-   Written by Ulrich Drepper <drepper@cygnus.com>, 1995.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -3872,7 +4195,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _GETTEXTP_H
@@ -3885,6 +4208,60 @@ index 0000000000..a06dbad1ea
 +-#else
 +-# if HAVE_ICONV
 +-#  include <iconv.h>
++-# endif
++-#endif
++-
++-/* Handle multi-threaded applications.  */
++-#ifdef _LIBC
++-# include <bits/libc-lock.h>
++-# define gl_rwlock_define __libc_rwlock_define
++-#else
++-# include "lock.h"
++-#endif
++-
++-#ifdef _LIBC
++-extern char *__gettext (const char *__msgid);
++-extern char *__dgettext (const char *__domainname, const char *__msgid);
++-extern char *__dcgettext (const char *__domainname, const char *__msgid,
++-			  int __category);
++-extern char *__ngettext (const char *__msgid1, const char *__msgid2,
++-			 unsigned long int __n);
++-extern char *__dngettext (const char *__domainname,
++-			  const char *__msgid1, const char *__msgid2,
++-			  unsigned long int n);
++-extern char *__dcngettext (const char *__domainname,
++-			   const char *__msgid1, const char *__msgid2,
++-			   unsigned long int __n, int __category);
++-extern char *__dcigettext (const char *__domainname,
++-			   const char *__msgid1, const char *__msgid2,
++-			   int __plural, unsigned long int __n,
++-			   int __category);
++-extern char *__textdomain (const char *__domainname);
++-extern char *__bindtextdomain (const char *__domainname,
++-			       const char *__dirname);
++-extern char *__bind_textdomain_codeset (const char *__domainname,
++-					const char *__codeset);
++-extern void _nl_finddomain_subfreeres (void) attribute_hidden;
++-extern void _nl_unload_domain (struct loaded_domain *__domain)
++-     internal_function attribute_hidden;
++-#else
++-/* Declare the exported libintl_* functions, in a way that allows us to
++-   call them under their real name.  */
++-# undef _INTL_REDIRECT_INLINE
++-# undef _INTL_REDIRECT_MACROS
++-# define _INTL_REDIRECT_MACROS
++-# include "libgnuintl.h"
++-# ifdef IN_LIBGLOCALE
++-extern char *gl_dcigettext (const char *__domainname,
++-			    const char *__msgid1, const char *__msgid2,
++-			    int __plural, unsigned long int __n,
++-			    int __category,
++-			    const char *__localename, const char *__encoding);
++-# else
++-extern char *libintl_dcigettext (const char *__domainname,
++-				 const char *__msgid1, const char *__msgid2,
++-				 int __plural, unsigned long int __n,
++-				 int __category);
 +-# endif
 +-#endif
 +-
@@ -3918,8 +4295,12 @@ index 0000000000..a06dbad1ea
 +-# define SWAP(i) bswap_32 (i)
 +-#else
 +-static inline nls_uint32
++-# ifdef __cplusplus
++-SWAP (nls_uint32 i)
++-# else
 +-SWAP (i)
 +-     nls_uint32 i;
++-# endif
 +-{
 +-  return (i << 24) | ((i & 0xff00) << 8) | ((i >> 8) & 0xff00) | (i >> 24);
 +-}
@@ -3933,6 +4314,26 @@ index 0000000000..a06dbad1ea
 +-  size_t length;
 +-  /* Pointer to addressed string.  */
 +-  const char *pointer;
++-};
++-
++-/* Cache of translated strings after charset conversion.
++-   Note: The strings are converted to the target encoding only on an as-needed
++-   basis.  */
++-struct converted_domain
++-{
++-  /* The target encoding name.  */
++-  const char *encoding;
++-  /* The descriptor for conversion from the message catalog's encoding to
++-     this target encoding.  */
++-#ifdef _LIBC
++-  __gconv_t conv;
++-#else
++-# if HAVE_ICONV
++-  iconv_t conv;
++-# endif
++-#endif
++-  /* The table of translated strings after charset conversion.  */
++-  char **conv_tab;
 +-};
 +-
 +-/* The representation of an opened message catalog.  */
@@ -3970,17 +4371,12 @@ index 0000000000..a06dbad1ea
 +-  /* 1 if the hash table uses a different endianness than this machine.  */
 +-  int must_swap_hash_tab;
 +-
-+-  int codeset_cntr;
-+-#ifdef _LIBC
-+-  __gconv_t conv;
-+-#else
-+-# if HAVE_ICONV
-+-  iconv_t conv;
-+-# endif
-+-#endif
-+-  char **conv_tab;
++-  /* Cache of charset conversions of the translated strings.  */
++-  struct converted_domain *conversions;
++-  size_t nconversions;
++-  gl_rwlock_define (, conversions_lock)
 +-
-+-  struct expression *plural;
++-  const struct expression *plural;
 +-  unsigned long int nplurals;
 +-};
 +-
@@ -3998,7 +4394,6 @@ index 0000000000..a06dbad1ea
 +-{
 +-  struct binding *next;
 +-  char *dirname;
-+-  int codeset_cntr;	/* Incremented each time codeset changes.  */
 +-  char *codeset;
 +-  char domainname[ZERO];
 +-};
@@ -4006,13 +4401,24 @@ index 0000000000..a06dbad1ea
 +-/* A counter which is incremented each time some previous translations
 +-   become invalid.
 +-   This variable is part of the external ABI of the GNU libintl.  */
-+-extern int _nl_msg_cat_cntr;
++-#ifdef IN_LIBGLOCALE
++-# include <glocale/config.h>
++-extern LIBGLOCALE_DLL_EXPORTED int _nl_msg_cat_cntr;
++-#else
++-extern LIBINTL_DLL_EXPORTED int _nl_msg_cat_cntr;
++-#endif
 +-
 +-#ifndef _LIBC
-+-const char *_nl_language_preferences_default (void);
-+-const char *_nl_locale_name_posix (int category, const char *categoryname);
-+-const char *_nl_locale_name_default (void);
-+-const char *_nl_locale_name (int category, const char *categoryname);
++-extern const char *_nl_language_preferences_default (void);
++-# define gl_locale_name_canonicalize _nl_locale_name_canonicalize
++-extern void _nl_locale_name_canonicalize (char *name);
++-# define gl_locale_name_posix _nl_locale_name_posix
++-extern const char *_nl_locale_name_posix (int category,
++-					  const char *categoryname);
++-# define gl_locale_name_default _nl_locale_name_default
++-extern const char *_nl_locale_name_default (void);
++-# define gl_locale_name _nl_locale_name
++-extern const char *_nl_locale_name (int category, const char *categoryname);
 +-#endif
 +-
 +-struct loaded_l10nfile *_nl_find_domain (const char *__dirname, char *__locale,
@@ -4022,63 +4428,59 @@ index 0000000000..a06dbad1ea
 +-void _nl_load_domain (struct loaded_l10nfile *__domain,
 +-		      struct binding *__domainbinding)
 +-     internal_function;
-+-void _nl_unload_domain (struct loaded_domain *__domain)
-+-     internal_function;
-+-const char *_nl_init_domain_conv (struct loaded_l10nfile *__domain_file,
-+-				  struct loaded_domain *__domain,
-+-				  struct binding *__domainbinding)
-+-     internal_function;
-+-void _nl_free_domain_conv (struct loaded_domain *__domain)
-+-     internal_function;
 +-
++-#ifdef IN_LIBGLOCALE
 +-char *_nl_find_msg (struct loaded_l10nfile *domain_file,
-+-		    struct binding *domainbinding, const char *msgid,
++-		    struct binding *domainbinding, const char *encoding,
++-		    const char *msgid,
 +-		    size_t *lengthp)
 +-     internal_function;
-+-
-+-#ifdef _LIBC
-+-extern char *__gettext (const char *__msgid);
-+-extern char *__dgettext (const char *__domainname, const char *__msgid);
-+-extern char *__dcgettext (const char *__domainname, const char *__msgid,
-+-			  int __category);
-+-extern char *__ngettext (const char *__msgid1, const char *__msgid2,
-+-			 unsigned long int __n);
-+-extern char *__dngettext (const char *__domainname,
-+-			  const char *__msgid1, const char *__msgid2,
-+-			  unsigned long int n);
-+-extern char *__dcngettext (const char *__domainname,
-+-			   const char *__msgid1, const char *__msgid2,
-+-			   unsigned long int __n, int __category);
-+-extern char *__dcigettext (const char *__domainname,
-+-			   const char *__msgid1, const char *__msgid2,
-+-			   int __plural, unsigned long int __n,
-+-			   int __category);
-+-extern char *__textdomain (const char *__domainname);
-+-extern char *__bindtextdomain (const char *__domainname,
-+-			       const char *__dirname);
-+-extern char *__bind_textdomain_codeset (const char *__domainname,
-+-					const char *__codeset);
 +-#else
-+-/* Declare the exported libintl_* functions, in a way that allows us to
-+-   call them under their real name.  */
-+-# undef _INTL_REDIRECT_INLINE
-+-# undef _INTL_REDIRECT_MACROS
-+-# define _INTL_REDIRECT_MACROS
-+-# include "libgnuintl.h"
-+-extern char *libintl_dcigettext (const char *__domainname,
-+-				 const char *__msgid1, const char *__msgid2,
-+-				 int __plural, unsigned long int __n,
-+-				 int __category);
++-char *_nl_find_msg (struct loaded_l10nfile *domain_file,
++-		    struct binding *domainbinding, const char *msgid,
++-		    int convert, size_t *lengthp)
++-     internal_function;
 +-#endif
++-
++-/* The internal variables in the standalone libintl.a must have different
++-   names than the internal variables in GNU libc, otherwise programs
++-   using libintl.a cannot be linked statically.  */
++-#if !defined _LIBC
++-# define _nl_default_dirname libintl_nl_default_dirname
++-# define _nl_domain_bindings libintl_nl_domain_bindings
++-#endif
++-
++-/* Contains the default location of the message catalogs.  */
++-extern const char _nl_default_dirname[];
++-#ifdef _LIBC
++-libc_hidden_proto (_nl_default_dirname)
++-#endif
++-
++-/* List with bindings of specific domains.  */
++-extern struct binding *_nl_domain_bindings;
++-
++-/* The internal variables in the standalone libintl.a must have different
++-   names than the internal variables in GNU libc, otherwise programs
++-   using libintl.a cannot be linked statically.  */
++-#if !defined _LIBC
++-# define _nl_default_default_domain libintl_nl_default_default_domain
++-# define _nl_current_default_domain libintl_nl_current_default_domain
++-#endif
++-
++-/* Name of the default text domain.  */
++-extern const char _nl_default_default_domain[] attribute_hidden;
++-
++-/* Default text domain in which entries for gettext(3) are to be found.  */
++-extern const char *_nl_current_default_domain attribute_hidden;
 +-
 +-/* @@ begin of epilog @@ */
 +-
 +-#endif /* gettextP.h  */
 +--- a/intl/gmo.h
 ++++ /dev/null
-+@@ -1,149 +0,0 @@
++@@ -1,152 +0,0 @@
 +-/* Description of GNU message catalog format: general file layout.
-+-   Copyright (C) 1995, 1997, 2000-2002, 2004 Free Software Foundation, Inc.
++-   Copyright (C) 1995, 1997, 2000-2002, 2004, 2006 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -4092,7 +4494,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _GETTEXT_H
@@ -4203,6 +4605,15 @@ index 0000000000..a06dbad1ea
 +-  nls_uint32 offset;
 +-};
 +-
++-/* Pair of a static and a system dependent segment, in struct sysdep_string.  */
++-struct segment_pair
++-{
++-  /* Size of static segment.  */
++-  nls_uint32 segsize;
++-  /* Reference to system dependent string segment, or ~0 at the end.  */
++-  nls_uint32 sysdepref;
++-};
++-
 +-/* Descriptor for system dependent string.  */
 +-struct sysdep_string
 +-{
@@ -4210,13 +4621,7 @@ index 0000000000..a06dbad1ea
 +-  nls_uint32 offset;
 +-  /* Alternating sequence of static and system dependent segments.
 +-     The last segment is a static segment, including the trailing NUL.  */
-+-  struct segment_pair
-+-  {
-+-    /* Size of static segment.  */
-+-    nls_uint32 segsize;
-+-    /* Reference to system dependent string segment, or ~0 at the end.  */
-+-    nls_uint32 sysdepref;
-+-  } segments[1];
++-  struct segment_pair segments[1];
 +-};
 +-
 +-/* Marker for the end of the segments[] array.  This has the value 0xFFFFFFFF,
@@ -4226,38 +4631,41 @@ index 0000000000..a06dbad1ea
 +-/* @@ begin of epilog @@ */
 +-
 +-#endif	/* gettext.h  */
-+--- a/intl/hash-string.h
++--- a/intl/hash-string.c
 ++++ /dev/null
-+@@ -1,48 +0,0 @@
-+-/* Description of GNU message catalog format: string hashing function.
-+-   Copyright (C) 1995, 1997-1998, 2000-2003 Free Software Foundation, Inc.
++@@ -1,51 +0,0 @@
++-/* Implements a string hashing function.
++-   Copyright (C) 1995, 1997, 1998, 2000, 2003 Free Software Foundation, Inc.
++-   This file is part of the GNU C Library.
 +-
-+-   This program is free software; you can redistribute it and/or modify it
-+-   under the terms of the GNU Library General Public License as published
-+-   by the Free Software Foundation; either version 2, or (at your option)
-+-   any later version.
++-   The GNU C Library is free software; you can redistribute it and/or
++-   modify it under the terms of the GNU Lesser General Public
++-   License as published by the Free Software Foundation; either
++-   version 2.1 of the License, or (at your option) any later version.
 +-
-+-   This program is distributed in the hope that it will be useful,
++-   The GNU C Library is distributed in the hope that it will be useful,
 +-   but WITHOUT ANY WARRANTY; without even the implied warranty of
 +-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-+-   Library General Public License for more details.
++-   Lesser General Public License for more details.
 +-
-+-   You should have received a copy of the GNU Library General Public
-+-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
-+-   USA.  */
++-   You should have received a copy of the GNU Lesser General Public
++-   License along with the GNU C Library; if not, write to the Free
++-   Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
++-   Boston, MA 02110-1301, USA.  */
 +-
-+-/* @@ end of prolog @@ */
++-#ifdef HAVE_CONFIG_H
++-# include <config.h>
++-#endif
 +-
-+-/* We assume to have `unsigned long int' value with at least 32 bits.  */
-+-#define HASHWORDBITS 32
++-/* Specification.  */
++-#include "hash-string.h"
 +-
 +-
 +-/* Defines the so called `hashpjw' function by P.J. Weinberger
 +-   [see Aho/Sethi/Ullman, COMPILERS: Principles, Techniques and Tools,
 +-   1986, 1987 Bell Telephone Laboratories, Inc.]  */
-+-static inline unsigned long int
-+-hash_string (const char *str_param)
++-unsigned long int
++-__hash_string (const char *str_param)
 +-{
 +-  unsigned long int hval, g;
 +-  const char *str = str_param;
@@ -4277,12 +4685,11 @@ index 0000000000..a06dbad1ea
 +-    }
 +-  return hval;
 +-}
-+--- a/intl/intl-compat.c
++--- a/intl/hash-string.h
 ++++ /dev/null
-+@@ -1,131 +0,0 @@
-+-/* intl-compat.c - Stub functions to call gettext functions from GNU gettext
-+-   Library.
-+-   Copyright (C) 1995, 2000-2003 Software Foundation, Inc.
++@@ -1,36 +0,0 @@
++-/* Description of GNU message catalog format: string hashing function.
++-   Copyright (C) 1995, 1997-1998, 2000-2003, 2005 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -4296,7 +4703,47 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
++-   USA.  */
++-
++-/* @@ end of prolog @@ */
++-
++-/* We assume to have `unsigned long int' value with at least 32 bits.  */
++-#define HASHWORDBITS 32
++-
++-
++-#ifndef _LIBC
++-# ifdef IN_LIBINTL
++-#  define __hash_string libintl_hash_string
++-# else
++-#  define __hash_string hash_string
++-# endif
++-#endif
++-
++-/* Defines the so called `hashpjw' function by P.J. Weinberger
++-   [see Aho/Sethi/Ullman, COMPILERS: Principles, Techniques and Tools,
++-   1986, 1987 Bell Telephone Laboratories, Inc.]  */
++-extern unsigned long int __hash_string (const char *str_param);
++--- a/intl/intl-compat.c
+++++ /dev/null
++@@ -1,133 +0,0 @@
++-/* intl-compat.c - Stub functions to call gettext functions from GNU gettext
++-   Library.
++-   Copyright (C) 1995, 2000-2003, 2005 Software Foundation, Inc.
++-
++-   This program is free software; you can redistribute it and/or modify it
++-   under the terms of the GNU Library General Public License as published
++-   by the Free Software Foundation; either version 2, or (at your option)
++-   any later version.
++-
++-   This program is distributed in the hope that it will be useful,
++-   but WITHOUT ANY WARRANTY; without even the implied warranty of
++-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++-   Library General Public License for more details.
++-
++-   You should have received a copy of the GNU Library General Public
++-   License along with this program; if not, write to the Free Software
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -4331,7 +4778,9 @@ index 0000000000..a06dbad1ea
 +-/* When building a DLL, we must export some functions.  Note that because
 +-   the functions are only defined for binary backward compatibility, we
 +-   don't need to use __declspec(dllimport) in any case.  */
-+-#if defined _MSC_VER && BUILDING_DLL
++-#if HAVE_VISIBILITY && BUILDING_DLL
++-# define DLL_EXPORTED __attribute__((__visibility__("default")))
++-#elif defined _MSC_VER && BUILDING_DLL
 +-# define DLL_EXPORTED __declspec(dllexport)
 +-#else
 +-# define DLL_EXPORTED
@@ -4411,10 +4860,49 @@ index 0000000000..a06dbad1ea
 +-{
 +-  return libintl_bind_textdomain_codeset (domainname, codeset);
 +-}
++--- a/intl/intl-exports.c
+++++ /dev/null
++@@ -1,36 +0,0 @@
++-/* List of exported symbols of libintl on Cygwin.
++-   Copyright (C) 2006 Free Software Foundation, Inc.
++-   Written by Bruno Haible <bruno@clisp.org>, 2006.
++-
++-   This program is free software; you can redistribute it and/or modify it
++-   under the terms of the GNU Library General Public License as published
++-   by the Free Software Foundation; either version 2, or (at your option)
++-   any later version.
++-
++-   This program is distributed in the hope that it will be useful,
++-   but WITHOUT ANY WARRANTY; without even the implied warranty of
++-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++-   Library General Public License for more details.
++-
++-   You should have received a copy of the GNU Library General Public
++-   License along with this program; if not, write to the Free Software
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
++-   USA.  */
++-
++- /* IMP(x) is a symbol that contains the address of x.  */
++-#define IMP(x) _imp__##x
++-
++- /* Ensure that the variable x is exported from the library, and that a
++-    pseudo-variable IMP(x) is available.  */
++-#define VARIABLE(x) \
++- /* Export x without redefining x.  This code was found by compiling a	\
++-    snippet:								\
++-      extern __declspec(dllexport) int x; int x = 42;  */		\
++- asm (".section .drectve\n");						\
++- asm (".ascii \" -export:" #x ",data\"\n");				\
++- asm (".data\n");							\
++- /* Allocate a pseudo-variable IMP(x).  */				\
++- extern int x;								\
++- void * IMP(x) = &x;
++-
++-VARIABLE(libintl_version)
 +--- a/intl/l10nflist.c
 ++++ /dev/null
-+@@ -1,421 +0,0 @@
-+-/* Copyright (C) 1995-1999, 2000-2004 Free Software Foundation, Inc.
++@@ -1,400 +0,0 @@
++-/* Copyright (C) 1995-1999, 2000-2006 Free Software Foundation, Inc.
 +-   Contributed by Ulrich Drepper <drepper@gnu.ai.mit.edu>, 1995.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -4429,7 +4917,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-/* Tell glibc's <string.h> to provide a prototype for stpcpy().
@@ -4498,7 +4986,12 @@ index 0000000000..a06dbad1ea
 +-
 +-/* Define function which are usually not available.  */
 +-
-+-#if !defined _LIBC && !defined HAVE___ARGZ_COUNT
++-#ifdef _LIBC
++-# define __argz_count(argz, len) INTUSE(__argz_count) (argz, len)
++-#elif defined HAVE_ARGZ_COUNT
++-# undef __argz_count
++-# define __argz_count argz_count
++-#else
 +-/* Returns the number of strings in ARGZ.  */
 +-static size_t
 +-argz_count__ (const char *argz, size_t len)
@@ -4515,13 +5008,15 @@ index 0000000000..a06dbad1ea
 +-}
 +-# undef __argz_count
 +-# define __argz_count(argz, len) argz_count__ (argz, len)
-+-#else
-+-# ifdef _LIBC
-+-#  define __argz_count(argz, len) INTUSE(__argz_count) (argz, len)
-+-# endif
-+-#endif	/* !_LIBC && !HAVE___ARGZ_COUNT */
++-#endif	/* !_LIBC && !HAVE_ARGZ_COUNT */
 +-
-+-#if !defined _LIBC && !defined HAVE___ARGZ_STRINGIFY
++-#ifdef _LIBC
++-# define __argz_stringify(argz, len, sep) \
++-  INTUSE(__argz_stringify) (argz, len, sep)
++-#elif defined HAVE_ARGZ_STRINGIFY
++-# undef __argz_stringify
++-# define __argz_stringify argz_stringify
++-#else
 +-/* Make '\0' separated arg vector ARGZ printable by converting all the '\0's
 +-   except the last into the character SEP.  */
 +-static void
@@ -4538,14 +5033,13 @@ index 0000000000..a06dbad1ea
 +-}
 +-# undef __argz_stringify
 +-# define __argz_stringify(argz, len, sep) argz_stringify__ (argz, len, sep)
-+-#else
-+-# ifdef _LIBC
-+-#  define __argz_stringify(argz, len, sep) \
-+-  INTUSE(__argz_stringify) (argz, len, sep)
-+-# endif
-+-#endif	/* !_LIBC && !HAVE___ARGZ_STRINGIFY */
++-#endif	/* !_LIBC && !HAVE_ARGZ_STRINGIFY */
 +-
-+-#if !defined _LIBC && !defined HAVE___ARGZ_NEXT
++-#ifdef _LIBC
++-#elif defined HAVE_ARGZ_NEXT
++-# undef __argz_next
++-# define __argz_next argz_next
++-#else
 +-static char *
 +-argz_next__ (char *argz, size_t argz_len, const char *entry)
 +-{
@@ -4564,7 +5058,7 @@ index 0000000000..a06dbad1ea
 +-}
 +-# undef __argz_next
 +-# define __argz_next(argz, len, entry) argz_next__ (argz, len, entry)
-+-#endif	/* !_LIBC && !HAVE___ARGZ_NEXT */
++-#endif	/* !_LIBC && !HAVE_ARGZ_NEXT */
 +-
 +-
 +-/* Return number of bits set in X.  */
@@ -4586,8 +5080,7 @@ index 0000000000..a06dbad1ea
 +-		    const char *dirlist, size_t dirlist_len,
 +-		    int mask, const char *language, const char *territory,
 +-		    const char *codeset, const char *normalized_codeset,
-+-		    const char *modifier, const char *special,
-+-		    const char *sponsor, const char *revision,
++-		    const char *modifier,
 +-		    const char *filename, int do_allocate)
 +-{
 +-  char *abs_filename;
@@ -4606,23 +5099,14 @@ index 0000000000..a06dbad1ea
 +-  /* Allocate room for the full file name.  */
 +-  abs_filename = (char *) malloc (dirlist_len
 +-				  + strlen (language)
-+-				  + ((mask & TERRITORY) != 0
++-				  + ((mask & XPG_TERRITORY) != 0
 +-				     ? strlen (territory) + 1 : 0)
 +-				  + ((mask & XPG_CODESET) != 0
 +-				     ? strlen (codeset) + 1 : 0)
 +-				  + ((mask & XPG_NORM_CODESET) != 0
 +-				     ? strlen (normalized_codeset) + 1 : 0)
-+-				  + (((mask & XPG_MODIFIER) != 0
-+-				      || (mask & CEN_AUDIENCE) != 0)
++-				  + ((mask & XPG_MODIFIER) != 0
 +-				     ? strlen (modifier) + 1 : 0)
-+-				  + ((mask & CEN_SPECIAL) != 0
-+-				     ? strlen (special) + 1 : 0)
-+-				  + (((mask & CEN_SPONSOR) != 0
-+-				      || (mask & CEN_REVISION) != 0)
-+-				     ? (1 + ((mask & CEN_SPONSOR) != 0
-+-					     ? strlen (sponsor) : 0)
-+-					+ ((mask & CEN_REVISION) != 0
-+-					   ? strlen (revision) + 1 : 0)) : 0)
 +-				  + 1 + strlen (filename) + 1);
 +-
 +-  if (abs_filename == NULL)
@@ -4640,7 +5124,7 @@ index 0000000000..a06dbad1ea
 +-
 +-  cp = stpcpy (cp, language);
 +-
-+-  if ((mask & TERRITORY) != 0)
++-  if ((mask & XPG_TERRITORY) != 0)
 +-    {
 +-      *cp++ = '_';
 +-      cp = stpcpy (cp, territory);
@@ -4655,28 +5139,10 @@ index 0000000000..a06dbad1ea
 +-      *cp++ = '.';
 +-      cp = stpcpy (cp, normalized_codeset);
 +-    }
-+-  if ((mask & (XPG_MODIFIER | CEN_AUDIENCE)) != 0)
++-  if ((mask & XPG_MODIFIER) != 0)
 +-    {
-+-      /* This component can be part of both syntaces but has different
-+-	 leading characters.  For CEN we use `+', else `@'.  */
-+-      *cp++ = (mask & CEN_AUDIENCE) != 0 ? '+' : '@';
++-      *cp++ = '@';
 +-      cp = stpcpy (cp, modifier);
-+-    }
-+-  if ((mask & CEN_SPECIAL) != 0)
-+-    {
-+-      *cp++ = '+';
-+-      cp = stpcpy (cp, special);
-+-    }
-+-  if ((mask & (CEN_SPONSOR | CEN_REVISION)) != 0)
-+-    {
-+-      *cp++ = ',';
-+-      if ((mask & CEN_SPONSOR) != 0)
-+-	cp = stpcpy (cp, sponsor);
-+-      if ((mask & CEN_REVISION) != 0)
-+-	{
-+-	  *cp++ = '_';
-+-	  cp = stpcpy (cp, revision);
-+-	}
 +-    }
 +-
 +-  *cp++ = '/';
@@ -4717,7 +5183,10 @@ index 0000000000..a06dbad1ea
 +-	    + (((dirlist_count << pop (mask)) + (dirlist_count > 1 ? 1 : 0))
 +-	       * sizeof (struct loaded_l10nfile *)));
 +-  if (retval == NULL)
-+-    return NULL;
++-    {
++-      free (abs_filename);
++-      return NULL;
++-    }
 +-
 +-  retval->filename = abs_filename;
 +-
@@ -4748,8 +5217,7 @@ index 0000000000..a06dbad1ea
 +-     normalized_codeset.  */
 +-  for (cnt = dirlist_count > 1 ? mask : mask - 1; cnt >= 0; --cnt)
 +-    if ((cnt & ~mask) == 0
-+-	&& ((cnt & CEN_SPECIFIC) == 0 || (cnt & XPG_SPECIFIC) == 0)
-+-	&& ((cnt & XPG_CODESET) == 0 || (cnt & XPG_NORM_CODESET) == 0))
++-	&& !((cnt & XPG_CODESET) != 0 && (cnt & XPG_NORM_CODESET) != 0))
 +-      {
 +-	if (dirlist_count > 1)
 +-	  {
@@ -4761,15 +5229,14 @@ index 0000000000..a06dbad1ea
 +-	      retval->successor[entries++]
 +-		= _nl_make_l10nflist (l10nfile_list, dir, strlen (dir) + 1,
 +-				      cnt, language, territory, codeset,
-+-				      normalized_codeset, modifier, special,
-+-				      sponsor, revision, filename, 1);
++-				      normalized_codeset, modifier, filename,
++-				      1);
 +-	  }
 +-	else
 +-	  retval->successor[entries++]
 +-	    = _nl_make_l10nflist (l10nfile_list, dirlist, dirlist_len,
 +-				  cnt, language, territory, codeset,
-+-				  normalized_codeset, modifier, special,
-+-				  sponsor, revision, filename, 1);
++-				  normalized_codeset, modifier, filename, 1);
 +-      }
 +-  retval->successor[entries] = NULL;
 +-
@@ -4837,9 +5304,9 @@ index 0000000000..a06dbad1ea
 +-#endif
 +--- a/intl/langprefs.c
 ++++ /dev/null
-+@@ -1,127 +0,0 @@
++@@ -1,130 +0,0 @@
 +-/* Determine the user's language preferences.
-+-   Copyright (C) 2004-2005 Free Software Foundation, Inc.
++-   Copyright (C) 2004-2006 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -4853,7 +5320,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-/* Written by Bruno Haible <bruno@clisp.org>.  */
@@ -4866,15 +5333,16 @@ index 0000000000..a06dbad1ea
 +-
 +-#if HAVE_CFPREFERENCESCOPYAPPVALUE
 +-# include <string.h>
-+-# include <CFPreferences.h>
-+-# include <CFPropertyList.h>
-+-# include <CFArray.h>
-+-# include <CFString.h>
++-# include <CoreFoundation/CFPreferences.h>
++-# include <CoreFoundation/CFPropertyList.h>
++-# include <CoreFoundation/CFArray.h>
++-# include <CoreFoundation/CFString.h>
++-extern void _nl_locale_name_canonicalize (char *name);
 +-#endif
 +-
 +-/* Determine the user's language preferences, as a colon separated list of
 +-   locale names in XPG syntax
-+-     language[_territory[.codeset]][@modifier]
++-     language[_territory][.codeset][@modifier]
 +-   The result must not be freed; it is statically allocated.
 +-   The LANGUAGE environment variable does not need to be considered; it is
 +-   already taken into account by the caller.  */
@@ -4911,6 +5379,7 @@ index 0000000000..a06dbad1ea
 +-					   buf, sizeof (buf),
 +-					   kCFStringEncodingASCII))
 +-		  {
++-		    _nl_locale_name_canonicalize (buf);
 +-		    size += strlen (buf) + 1;
 +-		    /* Most GNU programs use msgids in English and don't ship
 +-		       an en.mo message catalog.  Therefore when we see "en"
@@ -4941,6 +5410,7 @@ index 0000000000..a06dbad1ea
 +-						   buf, sizeof (buf),
 +-						   kCFStringEncodingASCII))
 +-			  {
++-			    _nl_locale_name_canonicalize (buf);
 +-			    strcpy (p, buf);
 +-			    p += strlen (buf);
 +-			    *p++ = ':';
@@ -4967,9 +5437,9 @@ index 0000000000..a06dbad1ea
 +-}
 +--- a/intl/libgnuintl.h.in
 ++++ /dev/null
-+@@ -1,383 +0,0 @@
++@@ -1,419 +0,0 @@
 +-/* Message catalogs for internationalization.
-+-   Copyright (C) 1995-1997, 2000-2004 Free Software Foundation, Inc.
++-   Copyright (C) 1995-1997, 2000-2007 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -4983,7 +5453,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _LIBINTL_H
@@ -5022,6 +5492,11 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-
 +-
++-/* Version number: (major<<16) + (minor<<8) + subminor */
++-#define LIBINTL_VERSION 0x001100
++-extern int libintl_version;
++-
++-
 +-/* We redirect the functions to those prefixed with "libintl_".  This is
 +-   necessary, because some systems define gettext/textdomain/... in the C
 +-   library (namely, Solaris 2.4 and newer, and GNU libc 2.0 and newer).
@@ -5053,7 +5528,7 @@ index 0000000000..a06dbad1ea
 +-   If he doesn't, we choose the method.  A third possible method is
 +-   _INTL_REDIRECT_ASM, supported only by GCC.  */
 +-#if !(defined _INTL_REDIRECT_INLINE || defined _INTL_REDIRECT_MACROS)
-+-# if __GNUC__ >= 2 && !defined __APPLE_CC__ && !defined __MINGW32__ && !(__GNUC__ == 2 && defined _AIX) && (defined __STDC__ || defined __cplusplus)
++-# if __GNUC__ >= 2 && !(__APPLE_CC__ > 1) && !defined __MINGW32__ && !(__GNUC__ == 2 && defined _AIX) && (defined __STDC__ || defined __cplusplus)
 +-#  define _INTL_REDIRECT_ASM
 +-# else
 +-#  ifdef __cplusplus
@@ -5072,11 +5547,21 @@ index 0000000000..a06dbad1ea
 +-# define _INTL_ASM(cname)
 +-#endif
 +-
++-/* _INTL_MAY_RETURN_STRING_ARG(n) declares that the given function may return
++-   its n-th argument literally.  This enables GCC to warn for example about
++-   printf (gettext ("foo %y")).  */
++-#if __GNUC__ >= 3 && !(__APPLE_CC__ > 1 && defined __cplusplus)
++-# define _INTL_MAY_RETURN_STRING_ARG(n) __attribute__ ((__format_arg__ (n)))
++-#else
++-# define _INTL_MAY_RETURN_STRING_ARG(n)
++-#endif
++-
 +-/* Look up MSGID in the current default message catalog for the current
 +-   LC_MESSAGES locale.  If not found, returns MSGID itself (the default
 +-   text).  */
 +-#ifdef _INTL_REDIRECT_INLINE
-+-extern char *libintl_gettext (const char *__msgid);
++-extern char *libintl_gettext (const char *__msgid)
++-       _INTL_MAY_RETURN_STRING_ARG (1);
 +-static inline char *gettext (const char *__msgid)
 +-{
 +-  return libintl_gettext (__msgid);
@@ -5086,13 +5571,15 @@ index 0000000000..a06dbad1ea
 +-# define gettext libintl_gettext
 +-#endif
 +-extern char *gettext (const char *__msgid)
-+-       _INTL_ASM (libintl_gettext);
++-       _INTL_ASM (libintl_gettext)
++-       _INTL_MAY_RETURN_STRING_ARG (1);
 +-#endif
 +-
 +-/* Look up MSGID in the DOMAINNAME message catalog for the current
 +-   LC_MESSAGES locale.  */
 +-#ifdef _INTL_REDIRECT_INLINE
-+-extern char *libintl_dgettext (const char *__domainname, const char *__msgid);
++-extern char *libintl_dgettext (const char *__domainname, const char *__msgid)
++-       _INTL_MAY_RETURN_STRING_ARG (2);
 +-static inline char *dgettext (const char *__domainname, const char *__msgid)
 +-{
 +-  return libintl_dgettext (__domainname, __msgid);
@@ -5102,14 +5589,16 @@ index 0000000000..a06dbad1ea
 +-# define dgettext libintl_dgettext
 +-#endif
 +-extern char *dgettext (const char *__domainname, const char *__msgid)
-+-       _INTL_ASM (libintl_dgettext);
++-       _INTL_ASM (libintl_dgettext)
++-       _INTL_MAY_RETURN_STRING_ARG (2);
 +-#endif
 +-
 +-/* Look up MSGID in the DOMAINNAME message catalog for the current CATEGORY
 +-   locale.  */
 +-#ifdef _INTL_REDIRECT_INLINE
 +-extern char *libintl_dcgettext (const char *__domainname, const char *__msgid,
-+-				int __category);
++-				int __category)
++-       _INTL_MAY_RETURN_STRING_ARG (2);
 +-static inline char *dcgettext (const char *__domainname, const char *__msgid,
 +-			       int __category)
 +-{
@@ -5121,7 +5610,8 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-extern char *dcgettext (const char *__domainname, const char *__msgid,
 +-			int __category)
-+-       _INTL_ASM (libintl_dcgettext);
++-       _INTL_ASM (libintl_dcgettext)
++-       _INTL_MAY_RETURN_STRING_ARG (2);
 +-#endif
 +-
 +-
@@ -5129,7 +5619,8 @@ index 0000000000..a06dbad1ea
 +-   number N.  */
 +-#ifdef _INTL_REDIRECT_INLINE
 +-extern char *libintl_ngettext (const char *__msgid1, const char *__msgid2,
-+-			       unsigned long int __n);
++-			       unsigned long int __n)
++-       _INTL_MAY_RETURN_STRING_ARG (1) _INTL_MAY_RETURN_STRING_ARG (2);
 +-static inline char *ngettext (const char *__msgid1, const char *__msgid2,
 +-			      unsigned long int __n)
 +-{
@@ -5141,14 +5632,16 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-extern char *ngettext (const char *__msgid1, const char *__msgid2,
 +-		       unsigned long int __n)
-+-       _INTL_ASM (libintl_ngettext);
++-       _INTL_ASM (libintl_ngettext)
++-       _INTL_MAY_RETURN_STRING_ARG (1) _INTL_MAY_RETURN_STRING_ARG (2);
 +-#endif
 +-
 +-/* Similar to `dgettext' but select the plural form corresponding to the
 +-   number N.  */
 +-#ifdef _INTL_REDIRECT_INLINE
 +-extern char *libintl_dngettext (const char *__domainname, const char *__msgid1,
-+-				const char *__msgid2, unsigned long int __n);
++-				const char *__msgid2, unsigned long int __n)
++-       _INTL_MAY_RETURN_STRING_ARG (2) _INTL_MAY_RETURN_STRING_ARG (3);
 +-static inline char *dngettext (const char *__domainname, const char *__msgid1,
 +-			       const char *__msgid2, unsigned long int __n)
 +-{
@@ -5161,7 +5654,8 @@ index 0000000000..a06dbad1ea
 +-extern char *dngettext (const char *__domainname,
 +-			const char *__msgid1, const char *__msgid2,
 +-			unsigned long int __n)
-+-       _INTL_ASM (libintl_dngettext);
++-       _INTL_ASM (libintl_dngettext)
++-       _INTL_MAY_RETURN_STRING_ARG (2) _INTL_MAY_RETURN_STRING_ARG (3);
 +-#endif
 +-
 +-/* Similar to `dcgettext' but select the plural form corresponding to the
@@ -5169,7 +5663,8 @@ index 0000000000..a06dbad1ea
 +-#ifdef _INTL_REDIRECT_INLINE
 +-extern char *libintl_dcngettext (const char *__domainname,
 +-				 const char *__msgid1, const char *__msgid2,
-+-				 unsigned long int __n, int __category);
++-				 unsigned long int __n, int __category)
++-       _INTL_MAY_RETURN_STRING_ARG (2) _INTL_MAY_RETURN_STRING_ARG (3);
 +-static inline char *dcngettext (const char *__domainname,
 +-				const char *__msgid1, const char *__msgid2,
 +-				unsigned long int __n, int __category)
@@ -5183,9 +5678,12 @@ index 0000000000..a06dbad1ea
 +-extern char *dcngettext (const char *__domainname,
 +-			 const char *__msgid1, const char *__msgid2,
 +-			 unsigned long int __n, int __category)
-+-       _INTL_ASM (libintl_dcngettext);
++-       _INTL_ASM (libintl_dcngettext)
++-       _INTL_MAY_RETURN_STRING_ARG (2) _INTL_MAY_RETURN_STRING_ARG (3);
 +-#endif
 +-
++-
++-#ifndef IN_LIBGLOCALE
 +-
 +-/* Set the current default message catalog to DOMAINNAME.
 +-   If DOMAINNAME is null, return the current default.
@@ -5241,6 +5739,8 @@ index 0000000000..a06dbad1ea
 +-       _INTL_ASM (libintl_bind_textdomain_codeset);
 +-#endif
 +-
++-#endif /* IN_LIBGLOCALE */
++-
 +-
 +-/* Support for format strings with positions in *printf(), following the
 +-   POSIX/XSI specification.
@@ -5270,6 +5770,12 @@ index 0000000000..a06dbad1ea
 +-extern int vfprintf (FILE *, const char *, va_list);
 +-
 +-#undef printf
++-#if defined __NetBSD__ || defined __BEOS__ || defined __CYGWIN__ || defined __MINGW32__
++-/* Don't break __attribute__((format(printf,M,N))).
++-   This redefinition is only possible because the libc in NetBSD, Cygwin,
++-   mingw does not have a function __printf__.  */
++-# define libintl_printf __printf__
++-#endif
 +-#define printf libintl_printf
 +-extern int printf (const char *, ...);
 +-#undef vprintf
@@ -5351,10 +5857,51 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-
 +-#endif /* libintl.h */
++--- a/intl/libintl.rc
+++++ /dev/null
++@@ -1,38 +0,0 @@
++-/* Resources for intl.dll */
++-
++-#include <winver.h>
++-
++-VS_VERSION_INFO VERSIONINFO
++- FILEVERSION PACKAGE_VERSION_MAJOR,PACKAGE_VERSION_MINOR,PACKAGE_VERSION_SUBMINOR,0
++- PRODUCTVERSION PACKAGE_VERSION_MAJOR,PACKAGE_VERSION_MINOR,PACKAGE_VERSION_SUBMINOR,0
++- FILEFLAGSMASK 0x3fL /* VS_FFI_FILEFLAGSMASK */
++-#ifdef _DEBUG
++- FILEFLAGS 0x1L  /* VS_FF_DEBUG */
++-#else
++- FILEFLAGS 0x0L
++-#endif
++- FILEOS 0x10004L  /* VOS_DOS_WINDOWS32 */
++- FILETYPE 0x2L  /* VFT_DLL */
++- FILESUBTYPE 0x0L  /* VFT2_UNKNOWN */
++-BEGIN
++-    BLOCK "StringFileInfo"
++-    BEGIN
++-        BLOCK "04090000"  /* Lang = US English, Charset = ASCII */
++-        BEGIN
++-            VALUE "Comments", "This library is free software; you can redistribute it and/or modify it under the terms of the GNU Library General Public License. You should have received a copy of the GNU Library General Public License along with this library; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA\0"
++-            VALUE "CompanyName", "Free Software Foundation\0"
++-            VALUE "FileDescription", "LGPLed libintl for Windows NT/2000/XP/Vista and Windows 95/98/ME\0"
++-            VALUE "FileVersion", PACKAGE_VERSION_STRING "\0"
++-            VALUE "InternalName", "intl.dll\0"
++-            VALUE "LegalCopyright", "Copyright (C) 1995-2007\0"
++-            VALUE "LegalTrademarks", "\0"
++-            VALUE "OriginalFilename", "intl.dll\0"
++-            VALUE "ProductName", "libintl: accessing NLS message catalogs\0"
++-            VALUE "ProductVersion", PACKAGE_VERSION_STRING "\0"
++-        END
++-    END
++-    BLOCK "VarFileInfo"
++-    BEGIN
++-        VALUE "Translation", 0x0409, 0  /* US English, ASCII */
++-    END
++-END
 +--- a/intl/loadinfo.h
 ++++ /dev/null
-+@@ -1,145 +0,0 @@
-+-/* Copyright (C) 1996-1999, 2000-2003 Free Software Foundation, Inc.
++@@ -1,132 +0,0 @@
++-/* Copyright (C) 1996-1999, 2000-2003, 2005-2006 Free Software Foundation, Inc.
 +-   This file is part of the GNU C Library.
 +-   Contributed by Ulrich Drepper <drepper@cygnus.com>, 1996.
 +-
@@ -5370,7 +5917,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _LOADINFO_H
@@ -5392,6 +5939,10 @@ index 0000000000..a06dbad1ea
 +-# define internal_function
 +-#endif
 +-
++-#ifndef LIBINTL_DLL_EXPORTED
++-# define LIBINTL_DLL_EXPORTED
++-#endif
++-
 +-/* Tell the compiler when a conditional or integer expression is
 +-   almost always true or almost always false.  */
 +-#ifndef HAVE_BUILTIN_EXPECT
@@ -5399,7 +5950,7 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-
 +-/* Separator in PATH like lists of pathnames.  */
-+-#if defined _WIN32 || defined __WIN32__ || defined __EMX__ || defined __DJGPP__
++-#if ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__) || defined __EMX__ || defined __DJGPP__
 +-  /* Win32, OS/2, DOS */
 +-# define PATH_SEPARATOR ';'
 +-#else
@@ -5408,17 +5959,10 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-
 +-/* Encoding of locale name parts.  */
-+-#define CEN_REVISION		1
-+-#define CEN_SPONSOR		2
-+-#define CEN_SPECIAL		4
-+-#define XPG_NORM_CODESET	8
-+-#define XPG_CODESET		16
-+-#define TERRITORY		32
-+-#define CEN_AUDIENCE		64
-+-#define XPG_MODIFIER		128
-+-
-+-#define CEN_SPECIFIC	(CEN_REVISION|CEN_SPONSOR|CEN_SPECIAL|CEN_AUDIENCE)
-+-#define XPG_SPECIFIC	(XPG_CODESET|XPG_NORM_CODESET|XPG_MODIFIER)
++-#define XPG_NORM_CODESET	1
++-#define XPG_CODESET		2
++-#define XPG_TERRITORY		4
++-#define XPG_MODIFIER		8
 +-
 +-
 +-struct loaded_l10nfile
@@ -5445,9 +5989,9 @@ index 0000000000..a06dbad1ea
 +-   files of the same kind, sorted in decreasing order of ->filename.
 +-   DIRLIST and DIRLIST_LEN are an argz list of directories in which to
 +-   look, containing at least one directory (i.e. DIRLIST_LEN > 0).
-+-   MASK, LANGUAGE, TERRITORY, CODESET, NORMALIZED_CODESET, MODIFIER,
-+-   SPECIAL, SPONSOR, REVISION are the pieces of the locale name, as
-+-   produced by _nl_explode_name().  FILENAME is the filename suffix.
++-   MASK, LANGUAGE, TERRITORY, CODESET, NORMALIZED_CODESET, MODIFIER
++-   are the pieces of the locale name, as produced by _nl_explode_name().
++-   FILENAME is the filename suffix.
 +-   The return value is the lookup result, either found in *L10NFILE_LIST,
 +-   or - if DO_ALLOCATE is nonzero - freshly allocated, or possibly NULL.
 +-   If the return value is non-NULL, it is added to *L10NFILE_LIST, and
@@ -5459,51 +6003,41 @@ index 0000000000..a06dbad1ea
 +-		    const char *dirlist, size_t dirlist_len, int mask,
 +-		    const char *language, const char *territory,
 +-		    const char *codeset, const char *normalized_codeset,
-+-		    const char *modifier, const char *special,
-+-		    const char *sponsor, const char *revision,
++-		    const char *modifier,
 +-		    const char *filename, int do_allocate);
 +-
 +-/* Lookup the real locale name for a locale alias NAME, or NULL if
 +-   NAME is not a locale alias (but possibly a real locale name).
 +-   The return value is statically allocated and must not be freed.  */
-+-extern const char *_nl_expand_alias (const char *name);
++-/* Part of the libintl ABI only for the sake of the gettext.m4 macro.  */
++-extern LIBINTL_DLL_EXPORTED const char *_nl_expand_alias (const char *name);
 +-
 +-/* Split a locale name NAME into its pieces: language, modifier,
-+-   territory, codeset, special, sponsor, revision.
++-   territory, codeset.
 +-   NAME gets destructively modified: NUL bytes are inserted here and
 +-   there.  *LANGUAGE gets assigned NAME.  Each of *MODIFIER, *TERRITORY,
-+-   *CODESET, *SPECIAL, *SPONSOR, *REVISION gets assigned either a
-+-   pointer into the old NAME string, or NULL.  *NORMALIZED_CODESET
-+-   gets assigned the expanded *CODESET, if it is different from *CODESET;
-+-   this one is dynamically allocated and has to be freed by the caller.
++-   *CODESET gets assigned either a pointer into the old NAME string, or
++-   NULL.  *NORMALIZED_CODESET gets assigned the expanded *CODESET, if it
++-   is different from *CODESET; this one is dynamically allocated and has
++-   to be freed by the caller.
 +-   The return value is a bitmask, where each bit corresponds to one
 +-   filled-in value:
-+-     XPG_MODIFIER, CEN_AUDIENCE  for *MODIFIER,
-+-     TERRITORY                   for *TERRITORY,
++-     XPG_MODIFIER                for *MODIFIER,
++-     XPG_TERRITORY               for *TERRITORY,
 +-     XPG_CODESET                 for *CODESET,
-+-     XPG_NORM_CODESET            for *NORMALIZED_CODESET,
-+-     CEN_SPECIAL                 for *SPECIAL,
-+-     CEN_SPONSOR                 for *SPONSOR,
-+-     CEN_REVISION                for *REVISION.
++-     XPG_NORM_CODESET            for *NORMALIZED_CODESET.
 +- */
 +-extern int _nl_explode_name (char *name, const char **language,
 +-			     const char **modifier, const char **territory,
 +-			     const char **codeset,
-+-			     const char **normalized_codeset,
-+-			     const char **special, const char **sponsor,
-+-			     const char **revision);
-+-
-+-/* Split a locale name NAME into a leading language part and all the
-+-   rest.  Return a pointer to the first character after the language,
-+-   i.e. to the first byte of the rest.  */
-+-extern char *_nl_find_language (const char *name);
++-			     const char **normalized_codeset);
 +-
 +-#endif	/* loadinfo.h */
 +--- a/intl/loadmsgcat.c
 ++++ /dev/null
-+@@ -1,1420 +0,0 @@
++@@ -1,1336 +0,0 @@
 +-/* Load needed message catalogs.
-+-   Copyright (C) 1995-1999, 2000-2004 Free Software Foundation, Inc.
++-   Copyright (C) 1995-1999, 2000-2007 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -5517,7 +6051,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-/* Tell glibc's <string.h> to provide a prototype for mempcpy().
@@ -5595,6 +6129,14 @@ index 0000000000..a06dbad1ea
 +-
 +-#ifdef _LIBC
 +-# include "../locale/localeinfo.h"
++-# include <not-cancel.h>
++-#endif
++-
++-/* Handle multi-threaded applications.  */
++-#ifdef _LIBC
++-# include <bits/libc-lock.h>
++-#else
++-# include "lock.h"
 +-#endif
 +-
 +-/* Provide fallback values for macros that ought to be defined in <inttypes.h>.
@@ -5961,11 +6503,12 @@ index 0000000000..a06dbad1ea
 +-/* Rename the non ISO C functions.  This is required by the standard
 +-   because some ISO C functions will require linking with this object
 +-   file and the name space must not be polluted.  */
-+-# define open   __open
-+-# define close  __close
-+-# define read   __read
-+-# define mmap   __mmap
-+-# define munmap __munmap
++-# define open(name, flags)	open_not_cancel_2 (name, flags)
++-# define close(fd)		close_not_cancel_no_status (fd)
++-# define read(fd, buf, n)	read_not_cancel (fd, buf, n)
++-# define mmap(addr, len, prot, flags, fd, offset) \
++-  __mmap (addr, len, prot, flags, fd, offset)
++-# define munmap(addr, len)	__munmap (addr, len)
 +-#endif
 +-
 +-/* For those losing systems which don't have `alloca' we have to add
@@ -6268,144 +6811,6 @@ index 0000000000..a06dbad1ea
 +-  return NULL;
 +-}
 +-
-+-/* Initialize the codeset dependent parts of an opened message catalog.
-+-   Return the header entry.  */
-+-const char *
-+-internal_function
-+-_nl_init_domain_conv (struct loaded_l10nfile *domain_file,
-+-		      struct loaded_domain *domain,
-+-		      struct binding *domainbinding)
-+-{
-+-  /* Find out about the character set the file is encoded with.
-+-     This can be found (in textual form) in the entry "".  If this
-+-     entry does not exist or if this does not contain the `charset='
-+-     information, we will assume the charset matches the one the
-+-     current locale and we don't have to perform any conversion.  */
-+-  char *nullentry;
-+-  size_t nullentrylen;
-+-
-+-  /* Preinitialize fields, to avoid recursion during _nl_find_msg.  */
-+-  domain->codeset_cntr =
-+-    (domainbinding != NULL ? domainbinding->codeset_cntr : 0);
-+-#ifdef _LIBC
-+-  domain->conv = (__gconv_t) -1;
-+-#else
-+-# if HAVE_ICONV
-+-  domain->conv = (iconv_t) -1;
-+-# endif
-+-#endif
-+-  domain->conv_tab = NULL;
-+-
-+-  /* Get the header entry.  */
-+-  nullentry = _nl_find_msg (domain_file, domainbinding, "", &nullentrylen);
-+-
-+-  if (nullentry != NULL)
-+-    {
-+-#if defined _LIBC || HAVE_ICONV
-+-      const char *charsetstr;
-+-
-+-      charsetstr = strstr (nullentry, "charset=");
-+-      if (charsetstr != NULL)
-+-	{
-+-	  size_t len;
-+-	  char *charset;
-+-	  const char *outcharset;
-+-
-+-	  charsetstr += strlen ("charset=");
-+-	  len = strcspn (charsetstr, " \t\n");
-+-
-+-	  charset = (char *) alloca (len + 1);
-+-# if defined _LIBC || HAVE_MEMPCPY
-+-	  *((char *) mempcpy (charset, charsetstr, len)) = '\0';
-+-# else
-+-	  memcpy (charset, charsetstr, len);
-+-	  charset[len] = '\0';
-+-# endif
-+-
-+-	  /* The output charset should normally be determined by the
-+-	     locale.  But sometimes the locale is not used or not correctly
-+-	     set up, so we provide a possibility for the user to override
-+-	     this.  Moreover, the value specified through
-+-	     bind_textdomain_codeset overrides both.  */
-+-	  if (domainbinding != NULL && domainbinding->codeset != NULL)
-+-	    outcharset = domainbinding->codeset;
-+-	  else
-+-	    {
-+-	      outcharset = getenv ("OUTPUT_CHARSET");
-+-	      if (outcharset == NULL || outcharset[0] == '\0')
-+-		{
-+-# ifdef _LIBC
-+-		  outcharset = _NL_CURRENT (LC_CTYPE, CODESET);
-+-# else
-+-#  if HAVE_ICONV
-+-		  extern const char *locale_charset (void);
-+-		  outcharset = locale_charset ();
-+-#  endif
-+-# endif
-+-		}
-+-	    }
-+-
-+-# ifdef _LIBC
-+-	  /* We always want to use transliteration.  */
-+-	  outcharset = norm_add_slashes (outcharset, "TRANSLIT");
-+-	  charset = norm_add_slashes (charset, NULL);
-+-	  if (__gconv_open (outcharset, charset, &domain->conv,
-+-			    GCONV_AVOID_NOCONV)
-+-	      != __GCONV_OK)
-+-	    domain->conv = (__gconv_t) -1;
-+-# else
-+-#  if HAVE_ICONV
-+-	  /* When using GNU libc >= 2.2 or GNU libiconv >= 1.5,
-+-	     we want to use transliteration.  */
-+-#   if (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 2) || __GLIBC__ > 2 \
-+-       || _LIBICONV_VERSION >= 0x0105
-+-	  if (strchr (outcharset, '/') == NULL)
-+-	    {
-+-	      char *tmp;
-+-
-+-	      len = strlen (outcharset);
-+-	      tmp = (char *) alloca (len + 10 + 1);
-+-	      memcpy (tmp, outcharset, len);
-+-	      memcpy (tmp + len, "//TRANSLIT", 10 + 1);
-+-	      outcharset = tmp;
-+-
-+-	      domain->conv = iconv_open (outcharset, charset);
-+-
-+-	      freea (outcharset);
-+-	    }
-+-	  else
-+-#   endif
-+-	    domain->conv = iconv_open (outcharset, charset);
-+-#  endif
-+-# endif
-+-
-+-	  freea (charset);
-+-	}
-+-#endif /* _LIBC || HAVE_ICONV */
-+-    }
-+-
-+-  return nullentry;
-+-}
-+-
-+-/* Frees the codeset dependent parts of an opened message catalog.  */
-+-void
-+-internal_function
-+-_nl_free_domain_conv (struct loaded_domain *domain)
-+-{
-+-  if (domain->conv_tab != NULL && domain->conv_tab != (char **) -1)
-+-    free (domain->conv_tab);
-+-
-+-#ifdef _LIBC
-+-  if (domain->conv != (__gconv_t) -1)
-+-    __gconv_close (domain->conv);
-+-#else
-+-# if HAVE_ICONV
-+-  if (domain->conv != (iconv_t) -1)
-+-    iconv_close (domain->conv);
-+-# endif
-+-#endif
-+-}
-+-
 +-/* Load the message catalogs specified by FILENAME.  If it is no valid
 +-   message catalog do nothing.  */
 +-void
@@ -6413,7 +6818,8 @@ index 0000000000..a06dbad1ea
 +-_nl_load_domain (struct loaded_l10nfile *domain_file,
 +-		 struct binding *domainbinding)
 +-{
-+-  int fd;
++-  __libc_lock_define_initialized_recursive (static, lock)
++-  int fd = -1;
 +-  size_t size;
 +-#ifdef _LIBC
 +-  struct stat64 st;
@@ -6425,8 +6831,24 @@ index 0000000000..a06dbad1ea
 +-  struct loaded_domain *domain;
 +-  int revision;
 +-  const char *nullentry;
++-  size_t nullentrylen;
 +-
-+-  domain_file->decided = 1;
++-  __libc_lock_lock_recursive (lock);
++-  if (domain_file->decided != 0)
++-    {
++-      /* There are two possibilities:
++-
++-	 + this is the same thread calling again during this initialization
++-	   via _nl_find_msg.  We have initialized everything this call needs.
++-
++-	 + this is another thread which tried to initialize this object.
++-	   Not necessary anymore since if the lock is available this
++-	   is finished.
++-      */
++-      goto done;
++-    }
++-
++-  domain_file->decided = -1;
 +-  domain_file->data = NULL;
 +-
 +-  /* Note that it would be useless to store domainbinding in domain_file
@@ -6438,12 +6860,12 @@ index 0000000000..a06dbad1ea
 +-     specification the locale file name is different for XPG and CEN
 +-     syntax.  */
 +-  if (domain_file->filename == NULL)
-+-    return;
++-    goto out;
 +-
 +-  /* Try to open the addressed file.  */
 +-  fd = open (domain_file->filename, O_RDONLY | O_BINARY);
 +-  if (fd == -1)
-+-    return;
++-    goto out;
 +-
 +-  /* We must know about the size of the file.  */
 +-  if (
@@ -6454,11 +6876,8 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-      || __builtin_expect ((size = (size_t) st.st_size) != st.st_size, 0)
 +-      || __builtin_expect (size < sizeof (struct mo_file_header), 0))
-+-    {
-+-      /* Something went wrong.  */
-+-      close (fd);
-+-      return;
-+-    }
++-    /* Something went wrong.  */
++-    goto out;
 +-
 +-#ifdef HAVE_MMAP
 +-  /* Now we are ready to load the file.  If mmap() is available we try
@@ -6470,6 +6889,7 @@ index 0000000000..a06dbad1ea
 +-    {
 +-      /* mmap() call was successful.  */
 +-      close (fd);
++-      fd = -1;
 +-      use_mmap = 1;
 +-    }
 +-#endif
@@ -6483,7 +6903,7 @@ index 0000000000..a06dbad1ea
 +-
 +-      data = (struct mo_file_header *) malloc (size);
 +-      if (data == NULL)
-+-	return;
++-	goto out;
 +-
 +-      to_read = size;
 +-      read_ptr = (char *) data;
@@ -6496,8 +6916,7 @@ index 0000000000..a06dbad1ea
 +-	      if (nb == -1 && errno == EINTR)
 +-		continue;
 +-#endif
-+-	      close (fd);
-+-	      return;
++-	      goto out;
 +-	    }
 +-	  read_ptr += nb;
 +-	  to_read -= nb;
@@ -6505,6 +6924,7 @@ index 0000000000..a06dbad1ea
 +-      while (to_read > 0);
 +-
 +-      close (fd);
++-      fd = -1;
 +-    }
 +-
 +-  /* Using the magic number we can test whether it really is a message
@@ -6519,12 +6939,12 @@ index 0000000000..a06dbad1ea
 +-      else
 +-#endif
 +-	free (data);
-+-      return;
++-      goto out;
 +-    }
 +-
 +-  domain = (struct loaded_domain *) malloc (sizeof (struct loaded_domain));
 +-  if (domain == NULL)
-+-    return;
++-    goto out;
 +-  domain_file->data = domain;
 +-
 +-  domain->data = (char *) data;
@@ -6594,6 +7014,7 @@ index 0000000000..a06dbad1ea
 +-		  ((char *) data
 +-		   + W (domain->must_swap, data->sysdep_segments_offset));
 +-		sysdep_segment_values =
++-		  (const char **)
 +-		  alloca (n_sysdep_segments * sizeof (const char *));
 +-		for (i = 0; i < n_sysdep_segments; i++)
 +-		  {
@@ -6825,7 +7246,7 @@ index 0000000000..a06dbad1ea
 +-		    for (i = 0; i < n_inmem_sysdep_strings; i++)
 +-		      {
 +-			const char *msgid = inmem_orig_sysdep_tab[i].pointer;
-+-			nls_uint32 hash_val = hash_string (msgid);
++-			nls_uint32 hash_val = __hash_string (msgid);
 +-			nls_uint32 idx = hash_val % domain->hash_size;
 +-			nls_uint32 incr =
 +-			  1 + (hash_val % (domain->hash_size - 2));
@@ -6886,28 +7307,57 @@ index 0000000000..a06dbad1ea
 +-	free (data);
 +-      free (domain);
 +-      domain_file->data = NULL;
-+-      return;
++-      goto out;
 +-    }
 +-
-+-  /* Now initialize the character set converter from the character set
-+-     the file is encoded with (found in the header entry) to the domain's
-+-     specified character set or the locale's character set.  */
-+-  nullentry = _nl_init_domain_conv (domain_file, domain, domainbinding);
++-  /* No caches of converted translations so far.  */
++-  domain->conversions = NULL;
++-  domain->nconversions = 0;
++-  gl_rwlock_init (domain->conversions_lock);
 +-
-+-  /* Also look for a plural specification.  */
++-  /* Get the header entry and look for a plural specification.  */
++-#ifdef IN_LIBGLOCALE
++-  nullentry =
++-    _nl_find_msg (domain_file, domainbinding, NULL, "", &nullentrylen);
++-#else
++-  nullentry = _nl_find_msg (domain_file, domainbinding, "", 0, &nullentrylen);
++-#endif
 +-  EXTRACT_PLURAL_EXPRESSION (nullentry, &domain->plural, &domain->nplurals);
++-
++- out:
++-  if (fd != -1)
++-    close (fd);
++-
++-  domain_file->decided = 1;
++-
++- done:
++-  __libc_lock_unlock_recursive (lock);
 +-}
 +-
 +-
 +-#ifdef _LIBC
 +-void
-+-internal_function
++-internal_function __libc_freeres_fn_section
 +-_nl_unload_domain (struct loaded_domain *domain)
 +-{
-+-  if (domain->plural != &__gettext_germanic_plural)
-+-    __gettext_free_exp (domain->plural);
++-  size_t i;
 +-
-+-  _nl_free_domain_conv (domain);
++-  if (domain->plural != &__gettext_germanic_plural)
++-    __gettext_free_exp ((struct expression *) domain->plural);
++-
++-  for (i = 0; i < domain->nconversions; i++)
++-    {
++-      struct converted_domain *convd = &domain->conversions[i];
++-
++-      free (convd->encoding);
++-      if (convd->conv_tab != NULL && convd->conv_tab != (char **) -1)
++-	free (convd->conv_tab);
++-      if (convd->conv != (__gconv_t) -1)
++-	__gconv_close (convd->conv);
++-    }
++-  if (domain->conversions != NULL)
++-    free (domain->conversions);
++-  __libc_rwlock_fini (domain->conversions_lock);
 +-
 +-  if (domain->malloced)
 +-    free (domain->malloced);
@@ -6924,10 +7374,10 @@ index 0000000000..a06dbad1ea
 +-#endif
 +--- a/intl/localcharset.c
 ++++ /dev/null
-+@@ -1,409 +0,0 @@
++@@ -1,461 +0,0 @@
 +-/* Determine a canonical name for the current locale's character encoding.
 +-
-+-   Copyright (C) 2000-2004 Free Software Foundation, Inc.
++-   Copyright (C) 2000-2006 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -6941,35 +7391,23 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-/* Written by Bruno Haible <bruno@clisp.org>.  */
 +-
-+-#ifdef HAVE_CONFIG_H
-+-# include <config.h>
-+-#endif
++-#include <config.h>
 +-
 +-/* Specification.  */
 +-#include "localcharset.h"
 +-
-+-#if HAVE_STDDEF_H
-+-# include <stddef.h>
-+-#endif
-+-
++-#include <stddef.h>
 +-#include <stdio.h>
-+-#if HAVE_STRING_H
-+-# include <string.h>
-+-#else
-+-# include <strings.h>
-+-#endif
-+-#if HAVE_STDLIB_H
-+-# include <stdlib.h>
-+-#endif
++-#include <string.h>
++-#include <stdlib.h>
 +-
 +-#if defined _WIN32 || defined __WIN32__
-+-# undef WIN32   /* avoid warning on mingw32 */
-+-# define WIN32
++-# define WIN32_NATIVE
 +-#endif
 +-
 +-#if defined __EMX__
@@ -6977,15 +7415,19 @@ index 0000000000..a06dbad1ea
 +-# define OS2
 +-#endif
 +-
-+-#if !defined WIN32
++-#if !defined WIN32_NATIVE
 +-# if HAVE_LANGINFO_CODESET
 +-#  include <langinfo.h>
 +-# else
-+-#  if HAVE_SETLOCALE
++-#  if 0 /* see comment below */
 +-#   include <locale.h>
 +-#  endif
 +-# endif
-+-#elif defined WIN32
++-# ifdef __CYGWIN__
++-#  define WIN32_LEAN_AND_MEAN
++-#  include <windows.h>
++-# endif
++-#elif defined WIN32_NATIVE
 +-# define WIN32_LEAN_AND_MEAN
 +-# include <windows.h>
 +-#endif
@@ -6998,6 +7440,11 @@ index 0000000000..a06dbad1ea
 +-# include "relocatable.h"
 +-#else
 +-# define relocate(pathname) (pathname)
++-#endif
++-
++-/* Get LIBDIR.  */
++-#ifndef LIBDIR
++-# include "configmake.h"
 +-#endif
 +-
 +-#if defined _WIN32 || defined __WIN32__ || defined __CYGWIN__ || defined __EMX__ || defined __DJGPP__
@@ -7034,14 +7481,14 @@ index 0000000000..a06dbad1ea
 +-
 +-/* Return a pointer to the contents of the charset.alias file.  */
 +-static const char *
-+-get_charset_aliases ()
++-get_charset_aliases (void)
 +-{
 +-  const char *cp;
 +-
 +-  cp = charset_aliases;
 +-  if (cp == NULL)
 +-    {
-+-#if !(defined VMS || defined WIN32)
++-#if !(defined VMS || defined WIN32_NATIVE || defined __CYGWIN__)
 +-      FILE *fp;
 +-      const char *dir;
 +-      const char *base = "charset.alias";
@@ -7167,7 +7614,7 @@ index 0000000000..a06dbad1ea
 +-	   "DECKOREAN" "\0" "EUC-KR" "\0";
 +-# endif
 +-
-+-# if defined WIN32
++-# if defined WIN32_NATIVE || defined __CYGWIN__
 +-      /* To avoid the troubles of installing a separate file in the same
 +-	 directory as the DLL and of retrieving the DLL's directory at
 +-	 runtime, simply inline the aliases here.  */
@@ -7176,6 +7623,7 @@ index 0000000000..a06dbad1ea
 +-	   "CP1361" "\0" "JOHAB" "\0"
 +-	   "CP20127" "\0" "ASCII" "\0"
 +-	   "CP20866" "\0" "KOI8-R" "\0"
++-	   "CP20936" "\0" "GB2312" "\0"
 +-	   "CP21866" "\0" "KOI8-RU" "\0"
 +-	   "CP28591" "\0" "ISO-8859-1" "\0"
 +-	   "CP28592" "\0" "ISO-8859-2" "\0"
@@ -7186,7 +7634,14 @@ index 0000000000..a06dbad1ea
 +-	   "CP28597" "\0" "ISO-8859-7" "\0"
 +-	   "CP28598" "\0" "ISO-8859-8" "\0"
 +-	   "CP28599" "\0" "ISO-8859-9" "\0"
-+-	   "CP28605" "\0" "ISO-8859-15" "\0";
++-	   "CP28605" "\0" "ISO-8859-15" "\0"
++-	   "CP38598" "\0" "ISO-8859-8" "\0"
++-	   "CP51932" "\0" "EUC-JP" "\0"
++-	   "CP51936" "\0" "GB2312" "\0"
++-	   "CP51949" "\0" "EUC-KR" "\0"
++-	   "CP51950" "\0" "EUC-TW" "\0"
++-	   "CP54936" "\0" "GB18030" "\0"
++-	   "CP65001" "\0" "UTF-8" "\0";
 +-# endif
 +-#endif
 +-
@@ -7206,17 +7661,64 @@ index 0000000000..a06dbad1ea
 +-STATIC
 +-#endif
 +-const char *
-+-locale_charset ()
++-locale_charset (void)
 +-{
 +-  const char *codeset;
 +-  const char *aliases;
 +-
-+-#if !(defined WIN32 || defined OS2)
++-#if !(defined WIN32_NATIVE || defined OS2)
 +-
 +-# if HAVE_LANGINFO_CODESET
 +-
 +-  /* Most systems support nl_langinfo (CODESET) nowadays.  */
 +-  codeset = nl_langinfo (CODESET);
++-
++-#  ifdef __CYGWIN__
++-  /* Cygwin 2006 does not have locales.  nl_langinfo (CODESET) always
++-     returns "US-ASCII".  As long as this is not fixed, return the suffix
++-     of the locale name from the environment variables (if present) or
++-     the codepage as a number.  */
++-  if (codeset != NULL && strcmp (codeset, "US-ASCII") == 0)
++-    {
++-      const char *locale;
++-      static char buf[2 + 10 + 1];
++-
++-      locale = getenv ("LC_ALL");
++-      if (locale == NULL || locale[0] == '\0')
++-	{
++-	  locale = getenv ("LC_CTYPE");
++-	  if (locale == NULL || locale[0] == '\0')
++-	    locale = getenv ("LANG");
++-	}
++-      if (locale != NULL && locale[0] != '\0')
++-	{
++-	  /* If the locale name contains an encoding after the dot, return
++-	     it.  */
++-	  const char *dot = strchr (locale, '.');
++-
++-	  if (dot != NULL)
++-	    {
++-	      const char *modifier;
++-
++-	      dot++;
++-	      /* Look for the possible @... trailer and remove it, if any.  */
++-	      modifier = strchr (dot, '@');
++-	      if (modifier == NULL)
++-		return dot;
++-	      if (modifier - dot < sizeof (buf))
++-		{
++-		  memcpy (buf, dot, modifier - dot);
++-		  buf [modifier - dot] = '\0';
++-		  return buf;
++-		}
++-	    }
++-	}
++-
++-      /* Woe32 has a function returning the locale's codepage as a number.  */
++-      sprintf (buf, "CP%u", GetACP ());
++-      codeset = buf;
++-    }
++-#  endif
 +-
 +-# else
 +-
@@ -7227,7 +7729,7 @@ index 0000000000..a06dbad1ea
 +-     (like SunOS 4 or DJGPP) have only the C locale.  Therefore we don't
 +-     use setlocale here; it would return "C" when it doesn't support the
 +-     locale name the user has set.  */
-+-#  if HAVE_SETLOCALE && 0
++-#  if 0
 +-  locale = setlocale (LC_CTYPE, NULL);
 +-#  endif
 +-  if (locale == NULL || locale[0] == '\0')
@@ -7248,7 +7750,7 @@ index 0000000000..a06dbad1ea
 +-
 +-# endif
 +-
-+-#elif defined WIN32
++-#elif defined WIN32_NATIVE
 +-
 +-  static char buf[2 + 10 + 1];
 +-
@@ -7353,7 +7855,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _LOCALCHARSET_H
@@ -7381,9 +7883,9 @@ index 0000000000..a06dbad1ea
 +-#endif /* _LOCALCHARSET_H */
 +--- a/intl/locale.alias
 ++++ /dev/null
-+@@ -1,78 +0,0 @@
++@@ -1,77 +0,0 @@
 +-# Locale name alias data base.
-+-# Copyright (C) 1996-2001,2003 Free Software Foundation, Inc.
++-# Copyright (C) 1996-2001,2003,2007 Free Software Foundation, Inc.
 +-#
 +-# This program is free software; you can redistribute it and/or modify it
 +-# under the terms of the GNU Library General Public License as published
@@ -7397,7 +7899,7 @@ index 0000000000..a06dbad1ea
 +-#
 +-# You should have received a copy of the GNU Library General Public
 +-# License along with this program; if not, write to the Free Software
-+-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-# USA.
 +-
 +-# The format of this file is the same as for the corresponding file of
@@ -7406,10 +7908,9 @@ index 0000000000..a06dbad1ea
 +-# A single line contains two fields: an alias and a substitution value.
 +-# All entries are case independent.
 +-
-+-# Note: This file is far from being complete.  If you have a value for
-+-# your own site which you think might be useful for others too, share
-+-# it with the rest of us.  Send it using the `glibcbug' script to
-+-# bugs@gnu.org.
++-# Note: This file is obsolete and is kept around for the time being for
++-# backward compatibility.  Nobody should rely on the names defined here.
++-# Locales should always be specified by their full name.
 +-
 +-# Packages using this file: 
 +-
@@ -7462,9 +7963,9 @@ index 0000000000..a06dbad1ea
 +-turkish         tr_TR.ISO-8859-9
 +--- a/intl/localealias.c
 ++++ /dev/null
-+@@ -1,414 +0,0 @@
++@@ -1,439 +0,0 @@
 +-/* Handle aliases for locale names.
-+-   Copyright (C) 1995-1999, 2000-2001, 2003 Free Software Foundation, Inc.
++-   Copyright (C) 1995-1999, 2000-2001, 2003, 2005-2006 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -7478,7 +7979,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-/* Tell glibc's <string.h> to provide a prototype for mempcpy().
@@ -7546,11 +8047,13 @@ index 0000000000..a06dbad1ea
 +-# endif
 +-# define HAVE_MEMPCPY	1
 +-# define HAVE___FSETLOCKING	1
++-#endif
 +-
-+-/* We need locking here since we can be called from different places.  */
++-/* Handle multi-threaded applications.  */
++-#ifdef _LIBC
 +-# include <bits/libc-lock.h>
-+-
-+-__libc_lock_define_initialized (static, lock);
++-#else
++-# include "lock.h"
 +-#endif
 +-
 +-#ifndef internal_function
@@ -7583,6 +8086,9 @@ index 0000000000..a06dbad1ea
 +-# undef feof
 +-# define feof(s) feof_unlocked (s)
 +-#endif
++-
++-
++-__libc_lock_define_initialized (static, lock)
 +-
 +-
 +-struct alias_map
@@ -7620,9 +8126,7 @@ index 0000000000..a06dbad1ea
 +-  const char *result = NULL;
 +-  size_t added;
 +-
-+-#ifdef _LIBC
 +-  __libc_lock_lock (lock);
-+-#endif
 +-
 +-  if (locale_alias_path == NULL)
 +-    locale_alias_path = LOCALE_ALIAS_PATH;
@@ -7669,9 +8173,7 @@ index 0000000000..a06dbad1ea
 +-    }
 +-  while (added != 0);
 +-
-+-#ifdef _LIBC
 +-  __libc_lock_unlock (lock);
-+-#endif
 +-
 +-  return result;
 +-}
@@ -7695,7 +8197,13 @@ index 0000000000..a06dbad1ea
 +-  memcpy (&full_fname[fname_len], aliasfile, sizeof aliasfile);
 +-#endif
 +-
++-#ifdef _LIBC
++-  /* Note the file is opened with cancellation in the I/O functions
++-     disabled.  */
++-  fp = fopen (relocate (full_fname), "rc");
++-#else
 +-  fp = fopen (relocate (full_fname), "r");
++-#endif
 +-  freea (full_fname);
 +-  if (fp == NULL)
 +-    return 0;
@@ -7719,10 +8227,14 @@ index 0000000000..a06dbad1ea
 +-      char *alias;
 +-      char *value;
 +-      char *cp;
++-      int complete_line;
 +-
 +-      if (FGETS (buf, sizeof buf, fp) == NULL)
 +-	/* EOF reached.  */
 +-	break;
++-
++-      /* Determine whether the line is complete.  */
++-      complete_line = strchr (buf, '\n') != NULL;
 +-
 +-      cp = buf;
 +-      /* Ignore leading white space.  */
@@ -7745,9 +8257,6 @@ index 0000000000..a06dbad1ea
 +-
 +-	  if (cp[0] != '\0')
 +-	    {
-+-	      size_t alias_len;
-+-	      size_t value_len;
-+-
 +-	      value = cp++;
 +-	      while (cp[0] != '\0' && !isspace ((unsigned char) cp[0]))
 +-		++cp;
@@ -7763,60 +8272,77 @@ index 0000000000..a06dbad1ea
 +-	      else if (cp[0] != '\0')
 +-		*cp++ = '\0';
 +-
-+-	      if (nmap >= maxmap)
-+-		if (__builtin_expect (extend_alias_table (), 0))
-+-		  return added;
-+-
-+-	      alias_len = strlen (alias) + 1;
-+-	      value_len = strlen (value) + 1;
-+-
-+-	      if (string_space_act + alias_len + value_len > string_space_max)
++-#ifdef IN_LIBGLOCALE
++-	      /* glibc's locale.alias contains entries for ja_JP and ko_KR
++-		 that make it impossible to use a Japanese or Korean UTF-8
++-		 locale under the name "ja_JP" or "ko_KR".  Ignore these
++-		 entries.  */
++-	      if (strchr (alias, '_') == NULL)
++-#endif
 +-		{
-+-		  /* Increase size of memory pool.  */
-+-		  size_t new_size = (string_space_max
-+-				     + (alias_len + value_len > 1024
-+-					? alias_len + value_len : 1024));
-+-		  char *new_pool = (char *) realloc (string_space, new_size);
-+-		  if (new_pool == NULL)
-+-		    return added;
++-		  size_t alias_len;
++-		  size_t value_len;
 +-
-+-		  if (__builtin_expect (string_space != new_pool, 0))
++-		  if (nmap >= maxmap)
++-		    if (__builtin_expect (extend_alias_table (), 0))
++-		      goto out;
++-
++-		  alias_len = strlen (alias) + 1;
++-		  value_len = strlen (value) + 1;
++-
++-		  if (string_space_act + alias_len + value_len > string_space_max)
 +-		    {
-+-		      size_t i;
++-		      /* Increase size of memory pool.  */
++-		      size_t new_size = (string_space_max
++-					 + (alias_len + value_len > 1024
++-					    ? alias_len + value_len : 1024));
++-		      char *new_pool = (char *) realloc (string_space, new_size);
++-		      if (new_pool == NULL)
++-			goto out;
 +-
-+-		      for (i = 0; i < nmap; i++)
++-		      if (__builtin_expect (string_space != new_pool, 0))
 +-			{
-+-			  map[i].alias += new_pool - string_space;
-+-			  map[i].value += new_pool - string_space;
++-			  size_t i;
++-
++-			  for (i = 0; i < nmap; i++)
++-			    {
++-			      map[i].alias += new_pool - string_space;
++-			      map[i].value += new_pool - string_space;
++-			    }
 +-			}
++-
++-		      string_space = new_pool;
++-		      string_space_max = new_size;
 +-		    }
 +-
-+-		  string_space = new_pool;
-+-		  string_space_max = new_size;
++-		  map[nmap].alias =
++-		    (const char *) memcpy (&string_space[string_space_act],
++-					   alias, alias_len);
++-		  string_space_act += alias_len;
++-
++-		  map[nmap].value =
++-		    (const char *) memcpy (&string_space[string_space_act],
++-					   value, value_len);
++-		  string_space_act += value_len;
++-
++-		  ++nmap;
++-		  ++added;
 +-		}
-+-
-+-	      map[nmap].alias = memcpy (&string_space[string_space_act],
-+-					alias, alias_len);
-+-	      string_space_act += alias_len;
-+-
-+-	      map[nmap].value = memcpy (&string_space[string_space_act],
-+-					value, value_len);
-+-	      string_space_act += value_len;
-+-
-+-	      ++nmap;
-+-	      ++added;
 +-	    }
 +-	}
 +-
 +-      /* Possibly not the whole line fits into the buffer.  Ignore
 +-	 the rest of the line.  */
-+-      while (strchr (buf, '\n') == NULL)
-+-	if (FGETS (buf, sizeof buf, fp) == NULL)
-+-	  /* Make sure the inner loop will be left.  The outer loop
-+-	     will exit at the `feof' test.  */
-+-	  break;
++-      if (! complete_line)
++-	do
++-	  if (FGETS (buf, sizeof buf, fp) == NULL)
++-	    /* Make sure the inner loop will be left.  The outer loop
++-	       will exit at the `feof' test.  */
++-	    break;
++-	while (strchr (buf, '\n') == NULL);
 +-    }
 +-
++- out:
 +-  /* Should we test for ferror()?  I think we have to silently ignore
 +-     errors.  --drepper  */
 +-  fclose (fp);
@@ -7879,9 +8405,9 @@ index 0000000000..a06dbad1ea
 +-}
 +--- a/intl/localename.c
 ++++ /dev/null
-+@@ -1,1220 +0,0 @@
-+-/* Determine the current selected locale.
-+-   Copyright (C) 1995-1999, 2000-2005 Free Software Foundation, Inc.
++@@ -1,1507 +0,0 @@
++-/* Determine name of the currently selected locale.
++-   Copyright (C) 1995-1999, 2000-2007 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -7895,15 +8421,20 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-/* Written by Ulrich Drepper <drepper@gnu.org>, 1995.  */
 +-/* Win32 code written by Tor Lillqvist <tml@iki.fi>.  */
 +-/* MacOS X code written by Bruno Haible <bruno@clisp.org>.  */
 +-
-+-#ifdef HAVE_CONFIG_H
-+-# include <config.h>
++-#include <config.h>
++-
++-/* Specification.  */
++-#ifdef IN_LIBINTL
++-# include "gettextP.h"
++-#else
++-# include "localename.h"
 +-#endif
 +-
 +-#include <stdlib.h>
@@ -7911,20 +8442,19 @@ index 0000000000..a06dbad1ea
 +-
 +-#if HAVE_CFLOCALECOPYCURRENT || HAVE_CFPREFERENCESCOPYAPPVALUE
 +-# include <string.h>
-+-# include <CFString.h>
++-# include <CoreFoundation/CFString.h>
 +-# if HAVE_CFLOCALECOPYCURRENT
-+-#  include <CFLocale.h>
++-#  include <CoreFoundation/CFLocale.h>
 +-# elif HAVE_CFPREFERENCESCOPYAPPVALUE
-+-#  include <CFPreferences.h>
++-#  include <CoreFoundation/CFPreferences.h>
 +-# endif
 +-#endif
 +-
 +-#if defined _WIN32 || defined __WIN32__
-+-# undef WIN32   /* avoid warning on mingw32 */
-+-# define WIN32
++-# define WIN32_NATIVE
 +-#endif
 +-
-+-#ifdef WIN32
++-#ifdef WIN32_NATIVE
 +-# define WIN32_LEAN_AND_MEAN
 +-# include <windows.h>
 +-/* List of language codes, sorted by value:
@@ -8377,10 +8907,10 @@ index 0000000000..a06dbad1ea
 +-# define SUBLANG_AZERI_CYRILLIC 0x02
 +-# endif
 +-# ifndef SUBLANG_BENGALI_INDIA
-+-# define SUBLANG_BENGALI_INDIA 0x00
++-# define SUBLANG_BENGALI_INDIA 0x01
 +-# endif
 +-# ifndef SUBLANG_BENGALI_BANGLADESH
-+-# define SUBLANG_BENGALI_BANGLADESH 0x01
++-# define SUBLANG_BENGALI_BANGLADESH 0x02
 +-# endif
 +-# ifndef SUBLANG_CHINESE_MACAU
 +-# define SUBLANG_CHINESE_MACAU 0x05
@@ -8473,16 +9003,16 @@ index 0000000000..a06dbad1ea
 +-# define SUBLANG_NEPALI_INDIA 0x02
 +-# endif
 +-# ifndef SUBLANG_PUNJABI_INDIA
-+-# define SUBLANG_PUNJABI_INDIA 0x00
++-# define SUBLANG_PUNJABI_INDIA 0x01
 +-# endif
 +-# ifndef SUBLANG_PUNJABI_PAKISTAN
-+-# define SUBLANG_PUNJABI_PAKISTAN 0x01
++-# define SUBLANG_PUNJABI_PAKISTAN 0x02
 +-# endif
 +-# ifndef SUBLANG_ROMANIAN_ROMANIA
-+-# define SUBLANG_ROMANIAN_ROMANIA 0x00
++-# define SUBLANG_ROMANIAN_ROMANIA 0x01
 +-# endif
 +-# ifndef SUBLANG_ROMANIAN_MOLDOVA
-+-# define SUBLANG_ROMANIAN_MOLDOVA 0x01
++-# define SUBLANG_ROMANIAN_MOLDOVA 0x02
 +-# endif
 +-# ifndef SUBLANG_SERBIAN_LATIN
 +-# define SUBLANG_SERBIAN_LATIN 0x02
@@ -8490,11 +9020,11 @@ index 0000000000..a06dbad1ea
 +-# ifndef SUBLANG_SERBIAN_CYRILLIC
 +-# define SUBLANG_SERBIAN_CYRILLIC 0x03
 +-# endif
-+-# ifndef SUBLANG_SINDHI_INDIA
-+-# define SUBLANG_SINDHI_INDIA 0x00
-+-# endif
 +-# ifndef SUBLANG_SINDHI_PAKISTAN
 +-# define SUBLANG_SINDHI_PAKISTAN 0x01
++-# endif
++-# ifndef SUBLANG_SINDHI_AFGHANISTAN
++-# define SUBLANG_SINDHI_AFGHANISTAN 0x02
 +-# endif
 +-# ifndef SUBLANG_SPANISH_GUATEMALA
 +-# define SUBLANG_SPANISH_GUATEMALA 0x04
@@ -8553,14 +9083,14 @@ index 0000000000..a06dbad1ea
 +-# ifndef SUBLANG_TAMAZIGHT_ARABIC
 +-# define SUBLANG_TAMAZIGHT_ARABIC 0x01
 +-# endif
-+-# ifndef SUBLANG_TAMAZIGHT_LATIN
-+-# define SUBLANG_TAMAZIGHT_LATIN 0x02
++-# ifndef SUBLANG_TAMAZIGHT_ALGERIA_LATIN
++-# define SUBLANG_TAMAZIGHT_ALGERIA_LATIN 0x02
 +-# endif
 +-# ifndef SUBLANG_TIGRINYA_ETHIOPIA
-+-# define SUBLANG_TIGRINYA_ETHIOPIA 0x00
++-# define SUBLANG_TIGRINYA_ETHIOPIA 0x01
 +-# endif
 +-# ifndef SUBLANG_TIGRINYA_ERITREA
-+-# define SUBLANG_TIGRINYA_ERITREA 0x01
++-# define SUBLANG_TIGRINYA_ERITREA 0x02
 +-# endif
 +-# ifndef SUBLANG_URDU_PAKISTAN
 +-# define SUBLANG_URDU_PAKISTAN 0x01
@@ -8576,24 +9106,301 @@ index 0000000000..a06dbad1ea
 +-# endif
 +-#endif
 +-
++-# if HAVE_CFLOCALECOPYCURRENT || HAVE_CFPREFERENCESCOPYAPPVALUE
++-/* MacOS X 10.2 or newer */
++-
++-/* Canonicalize a MacOS X locale name to a Unix locale name.
++-   NAME is a sufficiently large buffer.
++-   On input, it contains the MacOS X locale name.
++-   On output, it contains the Unix locale name.  */
++-#  if !defined IN_LIBINTL
++-static
++-#  endif
++-void
++-gl_locale_name_canonicalize (char *name)
++-{
++-  /* This conversion is based on a posting by
++-     Deborah GoldSmith <goldsmit@apple.com> on 2005-03-08,
++-     http://lists.apple.com/archives/carbon-dev/2005/Mar/msg00293.html */
++-
++-  /* Convert legacy (NeXTstep inherited) English names to Unix (ISO 639 and
++-     ISO 3166) names.  Prior to MacOS X 10.3, there is no API for doing this.
++-     Therefore we do it ourselves, using a table based on the results of the
++-     MacOS X 10.3.8 function
++-     CFLocaleCreateCanonicalLocaleIdentifierFromString().  */
++-  typedef struct { const char legacy[21+1]; const char unixy[5+1]; }
++-	  legacy_entry;
++-  static const legacy_entry legacy_table[] = {
++-    { "Afrikaans",             "af" },
++-    { "Albanian",              "sq" },
++-    { "Amharic",               "am" },
++-    { "Arabic",                "ar" },
++-    { "Armenian",              "hy" },
++-    { "Assamese",              "as" },
++-    { "Aymara",                "ay" },
++-    { "Azerbaijani",           "az" },
++-    { "Basque",                "eu" },
++-    { "Belarusian",            "be" },
++-    { "Belorussian",           "be" },
++-    { "Bengali",               "bn" },
++-    { "Brazilian Portugese",   "pt_BR" },
++-    { "Brazilian Portuguese",  "pt_BR" },
++-    { "Breton",                "br" },
++-    { "Bulgarian",             "bg" },
++-    { "Burmese",               "my" },
++-    { "Byelorussian",          "be" },
++-    { "Catalan",               "ca" },
++-    { "Chewa",                 "ny" },
++-    { "Chichewa",              "ny" },
++-    { "Chinese",               "zh" },
++-    { "Chinese, Simplified",   "zh_CN" },
++-    { "Chinese, Traditional",  "zh_TW" },
++-    { "Chinese, Tradtional",   "zh_TW" },
++-    { "Croatian",              "hr" },
++-    { "Czech",                 "cs" },
++-    { "Danish",                "da" },
++-    { "Dutch",                 "nl" },
++-    { "Dzongkha",              "dz" },
++-    { "English",               "en" },
++-    { "Esperanto",             "eo" },
++-    { "Estonian",              "et" },
++-    { "Faroese",               "fo" },
++-    { "Farsi",                 "fa" },
++-    { "Finnish",               "fi" },
++-    { "Flemish",               "nl_BE" },
++-    { "French",                "fr" },
++-    { "Galician",              "gl" },
++-    { "Gallegan",              "gl" },
++-    { "Georgian",              "ka" },
++-    { "German",                "de" },
++-    { "Greek",                 "el" },
++-    { "Greenlandic",           "kl" },
++-    { "Guarani",               "gn" },
++-    { "Gujarati",              "gu" },
++-    { "Hawaiian",              "haw" }, /* Yes, "haw", not "cpe".  */
++-    { "Hebrew",                "he" },
++-    { "Hindi",                 "hi" },
++-    { "Hungarian",             "hu" },
++-    { "Icelandic",             "is" },
++-    { "Indonesian",            "id" },
++-    { "Inuktitut",             "iu" },
++-    { "Irish",                 "ga" },
++-    { "Italian",               "it" },
++-    { "Japanese",              "ja" },
++-    { "Javanese",              "jv" },
++-    { "Kalaallisut",           "kl" },
++-    { "Kannada",               "kn" },
++-    { "Kashmiri",              "ks" },
++-    { "Kazakh",                "kk" },
++-    { "Khmer",                 "km" },
++-    { "Kinyarwanda",           "rw" },
++-    { "Kirghiz",               "ky" },
++-    { "Korean",                "ko" },
++-    { "Kurdish",               "ku" },
++-    { "Latin",                 "la" },
++-    { "Latvian",               "lv" },
++-    { "Lithuanian",            "lt" },
++-    { "Macedonian",            "mk" },
++-    { "Malagasy",              "mg" },
++-    { "Malay",                 "ms" },
++-    { "Malayalam",             "ml" },
++-    { "Maltese",               "mt" },
++-    { "Manx",                  "gv" },
++-    { "Marathi",               "mr" },
++-    { "Moldavian",             "mo" },
++-    { "Mongolian",             "mn" },
++-    { "Nepali",                "ne" },
++-    { "Norwegian",             "nb" }, /* Yes, "nb", not the obsolete "no".  */
++-    { "Nyanja",                "ny" },
++-    { "Nynorsk",               "nn" },
++-    { "Oriya",                 "or" },
++-    { "Oromo",                 "om" },
++-    { "Panjabi",               "pa" },
++-    { "Pashto",                "ps" },
++-    { "Persian",               "fa" },
++-    { "Polish",                "pl" },
++-    { "Portuguese",            "pt" },
++-    { "Portuguese, Brazilian", "pt_BR" },
++-    { "Punjabi",               "pa" },
++-    { "Pushto",                "ps" },
++-    { "Quechua",               "qu" },
++-    { "Romanian",              "ro" },
++-    { "Ruanda",                "rw" },
++-    { "Rundi",                 "rn" },
++-    { "Russian",               "ru" },
++-    { "Sami",                  "se_NO" }, /* Not just "se".  */
++-    { "Sanskrit",              "sa" },
++-    { "Scottish",              "gd" },
++-    { "Serbian",               "sr" },
++-    { "Simplified Chinese",    "zh_CN" },
++-    { "Sindhi",                "sd" },
++-    { "Sinhalese",             "si" },
++-    { "Slovak",                "sk" },
++-    { "Slovenian",             "sl" },
++-    { "Somali",                "so" },
++-    { "Spanish",               "es" },
++-    { "Sundanese",             "su" },
++-    { "Swahili",               "sw" },
++-    { "Swedish",               "sv" },
++-    { "Tagalog",               "tl" },
++-    { "Tajik",                 "tg" },
++-    { "Tajiki",                "tg" },
++-    { "Tamil",                 "ta" },
++-    { "Tatar",                 "tt" },
++-    { "Telugu",                "te" },
++-    { "Thai",                  "th" },
++-    { "Tibetan",               "bo" },
++-    { "Tigrinya",              "ti" },
++-    { "Tongan",                "to" },
++-    { "Traditional Chinese",   "zh_TW" },
++-    { "Turkish",               "tr" },
++-    { "Turkmen",               "tk" },
++-    { "Uighur",                "ug" },
++-    { "Ukrainian",             "uk" },
++-    { "Urdu",                  "ur" },
++-    { "Uzbek",                 "uz" },
++-    { "Vietnamese",            "vi" },
++-    { "Welsh",                 "cy" },
++-    { "Yiddish",               "yi" }
++-  };
++-
++-  /* Convert new-style locale names with language tags (ISO 639 and ISO 15924)
++-     to Unix (ISO 639 and ISO 3166) names.  */
++-  typedef struct { const char langtag[7+1]; const char unixy[12+1]; }
++-	  langtag_entry;
++-  static const langtag_entry langtag_table[] = {
++-    /* MacOS X has "az-Arab", "az-Cyrl", "az-Latn".
++-       The default script for az on Unix is Latin.  */
++-    { "az-Latn", "az" },
++-    /* MacOS X has "ga-dots".  Does not yet exist on Unix.  */
++-    { "ga-dots", "ga" },
++-    /* MacOS X has "kk-Cyrl".  Does not yet exist on Unix.  */
++-    /* MacOS X has "mn-Cyrl", "mn-Mong".
++-       The default script for mn on Unix is Cyrillic.  */
++-    { "mn-Cyrl", "mn" },
++-    /* MacOS X has "ms-Arab", "ms-Latn".
++-       The default script for ms on Unix is Latin.  */
++-    { "ms-Latn", "ms" },
++-    /* MacOS X has "tg-Cyrl".
++-       The default script for tg on Unix is Cyrillic.  */
++-    { "tg-Cyrl", "tg" },
++-    /* MacOS X has "tk-Cyrl".  Does not yet exist on Unix.  */
++-    /* MacOS X has "tt-Cyrl".
++-       The default script for tt on Unix is Cyrillic.  */
++-    { "tt-Cyrl", "tt" },
++-    /* MacOS X has "zh-Hans", "zh-Hant".
++-       Country codes are used to distinguish these on Unix.  */
++-    { "zh-Hans", "zh_CN" },
++-    { "zh-Hant", "zh_TW" }
++-  };
++-
++-  /* Convert script names (ISO 15924) to Unix conventions.
++-     See http://www.unicode.org/iso15924/iso15924-codes.html  */
++-  typedef struct { const char script[4+1]; const char unixy[9+1]; }
++-	  script_entry;
++-  static const script_entry script_table[] = {
++-    { "Arab", "arabic" },
++-    { "Cyrl", "cyrillic" },
++-    { "Mong", "mongolian" }
++-  };
++-
++-  /* Step 1: Convert using legacy_table.  */
++-  if (name[0] >= 'A' && name[0] <= 'Z')
++-    {
++-      unsigned int i1, i2;
++-      i1 = 0;
++-      i2 = sizeof (legacy_table) / sizeof (legacy_entry);
++-      while (i2 - i1 > 1)
++-	{
++-	  /* At this point we know that if name occurs in legacy_table,
++-	     its index must be >= i1 and < i2.  */
++-	  unsigned int i = (i1 + i2) >> 1;
++-	  const legacy_entry *p = &legacy_table[i];
++-	  if (strcmp (name, p->legacy) < 0)
++-	    i2 = i;
++-	  else
++-	    i1 = i;
++-	}
++-      if (strcmp (name, legacy_table[i1].legacy) == 0)
++-	{
++-	  strcpy (name, legacy_table[i1].unixy);
++-	  return;
++-	}
++-    }
++-
++-  /* Step 2: Convert using langtag_table and script_table.  */
++-  if (strlen (name) == 7 && name[2] == '-')
++-    {
++-      unsigned int i1, i2;
++-      i1 = 0;
++-      i2 = sizeof (langtag_table) / sizeof (langtag_entry);
++-      while (i2 - i1 > 1)
++-	{
++-	  /* At this point we know that if name occurs in langtag_table,
++-	     its index must be >= i1 and < i2.  */
++-	  unsigned int i = (i1 + i2) >> 1;
++-	  const langtag_entry *p = &langtag_table[i];
++-	  if (strcmp (name, p->langtag) < 0)
++-	    i2 = i;
++-	  else
++-	    i1 = i;
++-	}
++-      if (strcmp (name, langtag_table[i1].langtag) == 0)
++-	{
++-	  strcpy (name, langtag_table[i1].unixy);
++-	  return;
++-	}
++-
++-      i1 = 0;
++-      i2 = sizeof (script_table) / sizeof (script_entry);
++-      while (i2 - i1 > 1)
++-	{
++-	  /* At this point we know that if (name + 3) occurs in script_table,
++-	     its index must be >= i1 and < i2.  */
++-	  unsigned int i = (i1 + i2) >> 1;
++-	  const script_entry *p = &script_table[i];
++-	  if (strcmp (name + 3, p->script) < 0)
++-	    i2 = i;
++-	  else
++-	    i1 = i;
++-	}
++-      if (strcmp (name + 3, script_table[i1].script) == 0)
++-	{
++-	  name[2] = '@';
++-	  strcpy (name + 3, script_table[i1].unixy);
++-	  return;
++-	}
++-    }
++-
++-  /* Step 3: Convert new-style dash to Unix underscore. */
++-  {
++-    char *p;
++-    for (p = name; *p != '\0'; p++)
++-      if (*p == '-')
++-	*p = '_';
++-  }
++-}
++-
++-#endif
++-
 +-/* XPG3 defines the result of 'setlocale (category, NULL)' as:
 +-   "Directs 'setlocale()' to query 'category' and return the current
 +-    setting of 'local'."
 +-   However it does not specify the exact format.  Neither do SUSV2 and
 +-   ISO C 99.  So we can use this feature only on selected systems (e.g.
 +-   those using GNU C Library).  */
-+-#if defined _LIBC || (defined __GNU_LIBRARY__ && __GNU_LIBRARY__ >= 2)
++-#if defined _LIBC || (defined __GLIBC__ && __GLIBC__ >= 2)
 +-# define HAVE_LOCALE_NULL
 +-#endif
 +-
 +-/* Determine the current locale's name, and canonicalize it into XPG syntax
-+-     language[_territory[.codeset]][@modifier]
++-     language[_territory][.codeset][@modifier]
 +-   The codeset part in the result is not reliable; the locale_charset()
 +-   should be used for codeset information instead.
 +-   The result must not be freed; it is statically allocated.  */
 +-
 +-const char *
-+-_nl_locale_name_posix (int category, const char *categoryname)
++-gl_locale_name_posix (int category, const char *categoryname)
 +-{
 +-  /* Use the POSIX methods of looking to 'LC_ALL', 'LC_xxx', and 'LANG'.
 +-     On some systems this can be done by the 'setlocale' function itself.  */
@@ -8620,7 +9427,7 @@ index 0000000000..a06dbad1ea
 +-}
 +-
 +-const char *
-+-_nl_locale_name_default (void)
++-gl_locale_name_default (void)
 +-{
 +-  /* POSIX:2001 says:
 +-     "All implementations shall define a locale as the default locale, to be
@@ -8631,7 +9438,7 @@ index 0000000000..a06dbad1ea
 +-      locale, customizing it for each location.  POSIX:2001 does not require
 +-      such a facility.  */
 +-
-+-#if !(HAVE_CFLOCALECOPYCURRENT || HAVE_CFPREFERENCESCOPYAPPVALUE || defined(WIN32))
++-#if !(HAVE_CFLOCALECOPYCURRENT || HAVE_CFPREFERENCESCOPYAPPVALUE || defined(WIN32_NATIVE))
 +-
 +-  /* The system does not have a way of setting the locale, other than the
 +-     POSIX specified environment variables.  We use C as default locale.  */
@@ -8659,7 +9466,10 @@ index 0000000000..a06dbad1ea
 +-
 +-	if (CFStringGetCString (name, namebuf, sizeof(namebuf),
 +-				kCFStringEncodingASCII))
-+-	  cached_localename = strdup (namebuf);
++-	  {
++-	    gl_locale_name_canonicalize (namebuf);
++-	    cached_localename = strdup (namebuf);
++-	  }
 +-	CFRelease (locale);
 +-#  elif HAVE_CFPREFERENCESCOPYAPPVALUE /* MacOS X 10.2 or newer */
 +-	CFTypeRef value =
@@ -8669,7 +9479,10 @@ index 0000000000..a06dbad1ea
 +-	    && CFGetTypeID (value) == CFStringGetTypeID ()
 +-	    && CFStringGetCString ((CFStringRef)value, namebuf, sizeof(namebuf),
 +-				   kCFStringEncodingASCII))
-+-	  cached_localename = strdup (namebuf);
++-	  {
++-	    gl_locale_name_canonicalize (namebuf);
++-	    cached_localename = strdup (namebuf);
++-	  }
 +-#  endif
 +-	if (cached_localename == NULL)
 +-	  cached_localename = "C";
@@ -8679,7 +9492,7 @@ index 0000000000..a06dbad1ea
 +-
 +-# endif
 +-
-+-# if defined(WIN32) /* WIN32 */
++-# if defined(WIN32_NATIVE) /* WIN32, not Cygwin */
 +-  {
 +-    LCID lcid;
 +-    LANGID langid;
@@ -8981,8 +9794,8 @@ index 0000000000..a06dbad1ea
 +-      case LANG_SINDHI:
 +-	switch (sub)
 +-	  {
-+-	  case SUBLANG_SINDHI_INDIA: return "sd_IN";
 +-	  case SUBLANG_SINDHI_PAKISTAN: return "sd_PK";
++-	  case SUBLANG_SINDHI_AFGHANISTAN: return "sd_AF";
 +-	  }
 +-	return "sd";
 +-      case LANG_SINHALESE: return "si_LK";
@@ -9035,7 +9848,7 @@ index 0000000000..a06dbad1ea
 +-	  {
 +-	  /* FIXME: Adjust this when Tamazight locales appear on Unix.  */
 +-	  case SUBLANG_TAMAZIGHT_ARABIC: return "ber_MA@arabic";
-+-	  case SUBLANG_TAMAZIGHT_LATIN: return "ber_MA@latin";
++-	  case SUBLANG_TAMAZIGHT_ALGERIA_LATIN: return "ber_DZ@latin";
 +-	  }
 +-	return "ber_MA";
 +-      case LANG_TAMIL:
@@ -9090,21 +9903,21 @@ index 0000000000..a06dbad1ea
 +-}
 +-
 +-const char *
-+-_nl_locale_name (int category, const char *categoryname)
++-gl_locale_name (int category, const char *categoryname)
 +-{
 +-  const char *retval;
 +-
-+-  retval = _nl_locale_name_posix (category, categoryname);
++-  retval = gl_locale_name_posix (category, categoryname);
 +-  if (retval != NULL)
 +-    return retval;
 +-
-+-  return _nl_locale_name_default ();
++-  return gl_locale_name_default ();
 +-}
-+--- a/intl/log.c
++--- a/intl/lock.c
 ++++ /dev/null
-+@@ -1,98 +0,0 @@
-+-/* Log file output.
-+-   Copyright (C) 2003 Free Software Foundation, Inc.
++@@ -1,922 +0,0 @@
++-/* Locking in multithreaded situations.
++-   Copyright (C) 2005-2006 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -9118,7 +9931,2040 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
++-   USA.  */
++-
++-/* Written by Bruno Haible <bruno@clisp.org>, 2005.
++-   Based on GCC's gthr-posix.h, gthr-posix95.h, gthr-solaris.h,
++-   gthr-win32.h.  */
++-
++-#include <config.h>
++-
++-#include "lock.h"
++-
++-/* ========================================================================= */
++-
++-#if USE_POSIX_THREADS
++-
++-/* Use the POSIX threads library.  */
++-
++-# if PTHREAD_IN_USE_DETECTION_HARD
++-
++-/* The function to be executed by a dummy thread.  */
++-static void *
++-dummy_thread_func (void *arg)
++-{
++-  return arg;
++-}
++-
++-int
++-glthread_in_use (void)
++-{
++-  static int tested;
++-  static int result; /* 1: linked with -lpthread, 0: only with libc */
++-
++-  if (!tested)
++-    {
++-      pthread_t thread;
++-
++-      if (pthread_create (&thread, NULL, dummy_thread_func, NULL) != 0)
++-	/* Thread creation failed.  */
++-	result = 0;
++-      else
++-	{
++-	  /* Thread creation works.  */
++-	  void *retval;
++-	  if (pthread_join (thread, &retval) != 0)
++-	    abort ();
++-	  result = 1;
++-	}
++-      tested = 1;
++-    }
++-  return result;
++-}
++-
++-# endif
++-
++-/* -------------------------- gl_lock_t datatype -------------------------- */
++-
++-/* ------------------------- gl_rwlock_t datatype ------------------------- */
++-
++-# if HAVE_PTHREAD_RWLOCK
++-
++-#  if !defined PTHREAD_RWLOCK_INITIALIZER
++-
++-void
++-glthread_rwlock_init (gl_rwlock_t *lock)
++-{
++-  if (pthread_rwlock_init (&lock->rwlock, NULL) != 0)
++-    abort ();
++-  lock->initialized = 1;
++-}
++-
++-void
++-glthread_rwlock_rdlock (gl_rwlock_t *lock)
++-{
++-  if (!lock->initialized)
++-    {
++-      if (pthread_mutex_lock (&lock->guard) != 0)
++-	abort ();
++-      if (!lock->initialized)
++-	glthread_rwlock_init (lock);
++-      if (pthread_mutex_unlock (&lock->guard) != 0)
++-	abort ();
++-    }
++-  if (pthread_rwlock_rdlock (&lock->rwlock) != 0)
++-    abort ();
++-}
++-
++-void
++-glthread_rwlock_wrlock (gl_rwlock_t *lock)
++-{
++-  if (!lock->initialized)
++-    {
++-      if (pthread_mutex_lock (&lock->guard) != 0)
++-	abort ();
++-      if (!lock->initialized)
++-	glthread_rwlock_init (lock);
++-      if (pthread_mutex_unlock (&lock->guard) != 0)
++-	abort ();
++-    }
++-  if (pthread_rwlock_wrlock (&lock->rwlock) != 0)
++-    abort ();
++-}
++-
++-void
++-glthread_rwlock_unlock (gl_rwlock_t *lock)
++-{
++-  if (!lock->initialized)
++-    abort ();
++-  if (pthread_rwlock_unlock (&lock->rwlock) != 0)
++-    abort ();
++-}
++-
++-void
++-glthread_rwlock_destroy (gl_rwlock_t *lock)
++-{
++-  if (!lock->initialized)
++-    abort ();
++-  if (pthread_rwlock_destroy (&lock->rwlock) != 0)
++-    abort ();
++-  lock->initialized = 0;
++-}
++-
++-#  endif
++-
++-# else
++-
++-void
++-glthread_rwlock_init (gl_rwlock_t *lock)
++-{
++-  if (pthread_mutex_init (&lock->lock, NULL) != 0)
++-    abort ();
++-  if (pthread_cond_init (&lock->waiting_readers, NULL) != 0)
++-    abort ();
++-  if (pthread_cond_init (&lock->waiting_writers, NULL) != 0)
++-    abort ();
++-  lock->waiting_writers_count = 0;
++-  lock->runcount = 0;
++-}
++-
++-void
++-glthread_rwlock_rdlock (gl_rwlock_t *lock)
++-{
++-  if (pthread_mutex_lock (&lock->lock) != 0)
++-    abort ();
++-  /* Test whether only readers are currently running, and whether the runcount
++-     field will not overflow.  */
++-  /* POSIX says: "It is implementation-defined whether the calling thread
++-     acquires the lock when a writer does not hold the lock and there are
++-     writers blocked on the lock."  Let's say, no: give the writers a higher
++-     priority.  */
++-  while (!(lock->runcount + 1 > 0 && lock->waiting_writers_count == 0))
++-    {
++-      /* This thread has to wait for a while.  Enqueue it among the
++-	 waiting_readers.  */
++-      if (pthread_cond_wait (&lock->waiting_readers, &lock->lock) != 0)
++-	abort ();
++-    }
++-  lock->runcount++;
++-  if (pthread_mutex_unlock (&lock->lock) != 0)
++-    abort ();
++-}
++-
++-void
++-glthread_rwlock_wrlock (gl_rwlock_t *lock)
++-{
++-  if (pthread_mutex_lock (&lock->lock) != 0)
++-    abort ();
++-  /* Test whether no readers or writers are currently running.  */
++-  while (!(lock->runcount == 0))
++-    {
++-      /* This thread has to wait for a while.  Enqueue it among the
++-	 waiting_writers.  */
++-      lock->waiting_writers_count++;
++-      if (pthread_cond_wait (&lock->waiting_writers, &lock->lock) != 0)
++-	abort ();
++-      lock->waiting_writers_count--;
++-    }
++-  lock->runcount--; /* runcount becomes -1 */
++-  if (pthread_mutex_unlock (&lock->lock) != 0)
++-    abort ();
++-}
++-
++-void
++-glthread_rwlock_unlock (gl_rwlock_t *lock)
++-{
++-  if (pthread_mutex_lock (&lock->lock) != 0)
++-    abort ();
++-  if (lock->runcount < 0)
++-    {
++-      /* Drop a writer lock.  */
++-      if (!(lock->runcount == -1))
++-	abort ();
++-      lock->runcount = 0;
++-    }
++-  else
++-    {
++-      /* Drop a reader lock.  */
++-      if (!(lock->runcount > 0))
++-	abort ();
++-      lock->runcount--;
++-    }
++-  if (lock->runcount == 0)
++-    {
++-      /* POSIX recommends that "write locks shall take precedence over read
++-	 locks", to avoid "writer starvation".  */
++-      if (lock->waiting_writers_count > 0)
++-	{
++-	  /* Wake up one of the waiting writers.  */
++-	  if (pthread_cond_signal (&lock->waiting_writers) != 0)
++-	    abort ();
++-	}
++-      else
++-	{
++-	  /* Wake up all waiting readers.  */
++-	  if (pthread_cond_broadcast (&lock->waiting_readers) != 0)
++-	    abort ();
++-	}
++-    }
++-  if (pthread_mutex_unlock (&lock->lock) != 0)
++-    abort ();
++-}
++-
++-void
++-glthread_rwlock_destroy (gl_rwlock_t *lock)
++-{
++-  if (pthread_mutex_destroy (&lock->lock) != 0)
++-    abort ();
++-  if (pthread_cond_destroy (&lock->waiting_readers) != 0)
++-    abort ();
++-  if (pthread_cond_destroy (&lock->waiting_writers) != 0)
++-    abort ();
++-}
++-
++-# endif
++-
++-/* --------------------- gl_recursive_lock_t datatype --------------------- */
++-
++-# if HAVE_PTHREAD_MUTEX_RECURSIVE
++-
++-#  if !(defined PTHREAD_RECURSIVE_MUTEX_INITIALIZER || defined PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP)
++-
++-void
++-glthread_recursive_lock_init (gl_recursive_lock_t *lock)
++-{
++-  pthread_mutexattr_t attributes;
++-
++-  if (pthread_mutexattr_init (&attributes) != 0)
++-    abort ();
++-  if (pthread_mutexattr_settype (&attributes, PTHREAD_MUTEX_RECURSIVE) != 0)
++-    abort ();
++-  if (pthread_mutex_init (&lock->recmutex, &attributes) != 0)
++-    abort ();
++-  if (pthread_mutexattr_destroy (&attributes) != 0)
++-    abort ();
++-  lock->initialized = 1;
++-}
++-
++-void
++-glthread_recursive_lock_lock (gl_recursive_lock_t *lock)
++-{
++-  if (!lock->initialized)
++-    {
++-      if (pthread_mutex_lock (&lock->guard) != 0)
++-	abort ();
++-      if (!lock->initialized)
++-	glthread_recursive_lock_init (lock);
++-      if (pthread_mutex_unlock (&lock->guard) != 0)
++-	abort ();
++-    }
++-  if (pthread_mutex_lock (&lock->recmutex) != 0)
++-    abort ();
++-}
++-
++-void
++-glthread_recursive_lock_unlock (gl_recursive_lock_t *lock)
++-{
++-  if (!lock->initialized)
++-    abort ();
++-  if (pthread_mutex_unlock (&lock->recmutex) != 0)
++-    abort ();
++-}
++-
++-void
++-glthread_recursive_lock_destroy (gl_recursive_lock_t *lock)
++-{
++-  if (!lock->initialized)
++-    abort ();
++-  if (pthread_mutex_destroy (&lock->recmutex) != 0)
++-    abort ();
++-  lock->initialized = 0;
++-}
++-
++-#  endif
++-
++-# else
++-
++-void
++-glthread_recursive_lock_init (gl_recursive_lock_t *lock)
++-{
++-  if (pthread_mutex_init (&lock->mutex, NULL) != 0)
++-    abort ();
++-  lock->owner = (pthread_t) 0;
++-  lock->depth = 0;
++-}
++-
++-void
++-glthread_recursive_lock_lock (gl_recursive_lock_t *lock)
++-{
++-  pthread_t self = pthread_self ();
++-  if (lock->owner != self)
++-    {
++-      if (pthread_mutex_lock (&lock->mutex) != 0)
++-	abort ();
++-      lock->owner = self;
++-    }
++-  if (++(lock->depth) == 0) /* wraparound? */
++-    abort ();
++-}
++-
++-void
++-glthread_recursive_lock_unlock (gl_recursive_lock_t *lock)
++-{
++-  if (lock->owner != pthread_self ())
++-    abort ();
++-  if (lock->depth == 0)
++-    abort ();
++-  if (--(lock->depth) == 0)
++-    {
++-      lock->owner = (pthread_t) 0;
++-      if (pthread_mutex_unlock (&lock->mutex) != 0)
++-	abort ();
++-    }
++-}
++-
++-void
++-glthread_recursive_lock_destroy (gl_recursive_lock_t *lock)
++-{
++-  if (lock->owner != (pthread_t) 0)
++-    abort ();
++-  if (pthread_mutex_destroy (&lock->mutex) != 0)
++-    abort ();
++-}
++-
++-# endif
++-
++-/* -------------------------- gl_once_t datatype -------------------------- */
++-
++-static const pthread_once_t fresh_once = PTHREAD_ONCE_INIT;
++-
++-int
++-glthread_once_singlethreaded (pthread_once_t *once_control)
++-{
++-  /* We don't know whether pthread_once_t is an integer type, a floating-point
++-     type, a pointer type, or a structure type.  */
++-  char *firstbyte = (char *)once_control;
++-  if (*firstbyte == *(const char *)&fresh_once)
++-    {
++-      /* First time use of once_control.  Invert the first byte.  */
++-      *firstbyte = ~ *(const char *)&fresh_once;
++-      return 1;
++-    }
++-  else
++-    return 0;
++-}
++-
++-#endif
++-
++-/* ========================================================================= */
++-
++-#if USE_PTH_THREADS
++-
++-/* Use the GNU Pth threads library.  */
++-
++-/* -------------------------- gl_lock_t datatype -------------------------- */
++-
++-/* ------------------------- gl_rwlock_t datatype ------------------------- */
++-
++-/* --------------------- gl_recursive_lock_t datatype --------------------- */
++-
++-/* -------------------------- gl_once_t datatype -------------------------- */
++-
++-void
++-glthread_once_call (void *arg)
++-{
++-  void (**gl_once_temp_addr) (void) = (void (**) (void)) arg;
++-  void (*initfunction) (void) = *gl_once_temp_addr;
++-  initfunction ();
++-}
++-
++-int
++-glthread_once_singlethreaded (pth_once_t *once_control)
++-{
++-  /* We know that pth_once_t is an integer type.  */
++-  if (*once_control == PTH_ONCE_INIT)
++-    {
++-      /* First time use of once_control.  Invert the marker.  */
++-      *once_control = ~ PTH_ONCE_INIT;
++-      return 1;
++-    }
++-  else
++-    return 0;
++-}
++-
++-#endif
++-
++-/* ========================================================================= */
++-
++-#if USE_SOLARIS_THREADS
++-
++-/* Use the old Solaris threads library.  */
++-
++-/* -------------------------- gl_lock_t datatype -------------------------- */
++-
++-/* ------------------------- gl_rwlock_t datatype ------------------------- */
++-
++-/* --------------------- gl_recursive_lock_t datatype --------------------- */
++-
++-void
++-glthread_recursive_lock_init (gl_recursive_lock_t *lock)
++-{
++-  if (mutex_init (&lock->mutex, USYNC_THREAD, NULL) != 0)
++-    abort ();
++-  lock->owner = (thread_t) 0;
++-  lock->depth = 0;
++-}
++-
++-void
++-glthread_recursive_lock_lock (gl_recursive_lock_t *lock)
++-{
++-  thread_t self = thr_self ();
++-  if (lock->owner != self)
++-    {
++-      if (mutex_lock (&lock->mutex) != 0)
++-	abort ();
++-      lock->owner = self;
++-    }
++-  if (++(lock->depth) == 0) /* wraparound? */
++-    abort ();
++-}
++-
++-void
++-glthread_recursive_lock_unlock (gl_recursive_lock_t *lock)
++-{
++-  if (lock->owner != thr_self ())
++-    abort ();
++-  if (lock->depth == 0)
++-    abort ();
++-  if (--(lock->depth) == 0)
++-    {
++-      lock->owner = (thread_t) 0;
++-      if (mutex_unlock (&lock->mutex) != 0)
++-	abort ();
++-    }
++-}
++-
++-void
++-glthread_recursive_lock_destroy (gl_recursive_lock_t *lock)
++-{
++-  if (lock->owner != (thread_t) 0)
++-    abort ();
++-  if (mutex_destroy (&lock->mutex) != 0)
++-    abort ();
++-}
++-
++-/* -------------------------- gl_once_t datatype -------------------------- */
++-
++-void
++-glthread_once (gl_once_t *once_control, void (*initfunction) (void))
++-{
++-  if (!once_control->inited)
++-    {
++-      /* Use the mutex to guarantee that if another thread is already calling
++-	 the initfunction, this thread waits until it's finished.  */
++-      if (mutex_lock (&once_control->mutex) != 0)
++-	abort ();
++-      if (!once_control->inited)
++-	{
++-	  once_control->inited = 1;
++-	  initfunction ();
++-	}
++-      if (mutex_unlock (&once_control->mutex) != 0)
++-	abort ();
++-    }
++-}
++-
++-int
++-glthread_once_singlethreaded (gl_once_t *once_control)
++-{
++-  /* We know that gl_once_t contains an integer type.  */
++-  if (!once_control->inited)
++-    {
++-      /* First time use of once_control.  Invert the marker.  */
++-      once_control->inited = ~ 0;
++-      return 1;
++-    }
++-  else
++-    return 0;
++-}
++-
++-#endif
++-
++-/* ========================================================================= */
++-
++-#if USE_WIN32_THREADS
++-
++-/* -------------------------- gl_lock_t datatype -------------------------- */
++-
++-void
++-glthread_lock_init (gl_lock_t *lock)
++-{
++-  InitializeCriticalSection (&lock->lock);
++-  lock->guard.done = 1;
++-}
++-
++-void
++-glthread_lock_lock (gl_lock_t *lock)
++-{
++-  if (!lock->guard.done)
++-    {
++-      if (InterlockedIncrement (&lock->guard.started) == 0)
++-	/* This thread is the first one to need this lock.  Initialize it.  */
++-	glthread_lock_init (lock);
++-      else
++-	/* Yield the CPU while waiting for another thread to finish
++-	   initializing this lock.  */
++-	while (!lock->guard.done)
++-	  Sleep (0);
++-    }
++-  EnterCriticalSection (&lock->lock);
++-}
++-
++-void
++-glthread_lock_unlock (gl_lock_t *lock)
++-{
++-  if (!lock->guard.done)
++-    abort ();
++-  LeaveCriticalSection (&lock->lock);
++-}
++-
++-void
++-glthread_lock_destroy (gl_lock_t *lock)
++-{
++-  if (!lock->guard.done)
++-    abort ();
++-  DeleteCriticalSection (&lock->lock);
++-  lock->guard.done = 0;
++-}
++-
++-/* ------------------------- gl_rwlock_t datatype ------------------------- */
++-
++-static inline void
++-gl_waitqueue_init (gl_waitqueue_t *wq)
++-{
++-  wq->array = NULL;
++-  wq->count = 0;
++-  wq->alloc = 0;
++-  wq->offset = 0;
++-}
++-
++-/* Enqueues the current thread, represented by an event, in a wait queue.
++-   Returns INVALID_HANDLE_VALUE if an allocation failure occurs.  */
++-static HANDLE
++-gl_waitqueue_add (gl_waitqueue_t *wq)
++-{
++-  HANDLE event;
++-  unsigned int index;
++-
++-  if (wq->count == wq->alloc)
++-    {
++-      unsigned int new_alloc = 2 * wq->alloc + 1;
++-      HANDLE *new_array =
++-	(HANDLE *) realloc (wq->array, new_alloc * sizeof (HANDLE));
++-      if (new_array == NULL)
++-	/* No more memory.  */
++-	return INVALID_HANDLE_VALUE;
++-      /* Now is a good opportunity to rotate the array so that its contents
++-	 starts at offset 0.  */
++-      if (wq->offset > 0)
++-	{
++-	  unsigned int old_count = wq->count;
++-	  unsigned int old_alloc = wq->alloc;
++-	  unsigned int old_offset = wq->offset;
++-	  unsigned int i;
++-	  if (old_offset + old_count > old_alloc)
++-	    {
++-	      unsigned int limit = old_offset + old_count - old_alloc;
++-	      for (i = 0; i < limit; i++)
++-		new_array[old_alloc + i] = new_array[i];
++-	    }
++-	  for (i = 0; i < old_count; i++)
++-	    new_array[i] = new_array[old_offset + i];
++-	  wq->offset = 0;
++-	}
++-      wq->array = new_array;
++-      wq->alloc = new_alloc;
++-    }
++-  event = CreateEvent (NULL, TRUE, FALSE, NULL);
++-  if (event == INVALID_HANDLE_VALUE)
++-    /* No way to allocate an event.  */
++-    return INVALID_HANDLE_VALUE;
++-  index = wq->offset + wq->count;
++-  if (index >= wq->alloc)
++-    index -= wq->alloc;
++-  wq->array[index] = event;
++-  wq->count++;
++-  return event;
++-}
++-
++-/* Notifies the first thread from a wait queue and dequeues it.  */
++-static inline void
++-gl_waitqueue_notify_first (gl_waitqueue_t *wq)
++-{
++-  SetEvent (wq->array[wq->offset + 0]);
++-  wq->offset++;
++-  wq->count--;
++-  if (wq->count == 0 || wq->offset == wq->alloc)
++-    wq->offset = 0;
++-}
++-
++-/* Notifies all threads from a wait queue and dequeues them all.  */
++-static inline void
++-gl_waitqueue_notify_all (gl_waitqueue_t *wq)
++-{
++-  unsigned int i;
++-
++-  for (i = 0; i < wq->count; i++)
++-    {
++-      unsigned int index = wq->offset + i;
++-      if (index >= wq->alloc)
++-	index -= wq->alloc;
++-      SetEvent (wq->array[index]);
++-    }
++-  wq->count = 0;
++-  wq->offset = 0;
++-}
++-
++-void
++-glthread_rwlock_init (gl_rwlock_t *lock)
++-{
++-  InitializeCriticalSection (&lock->lock);
++-  gl_waitqueue_init (&lock->waiting_readers);
++-  gl_waitqueue_init (&lock->waiting_writers);
++-  lock->runcount = 0;
++-  lock->guard.done = 1;
++-}
++-
++-void
++-glthread_rwlock_rdlock (gl_rwlock_t *lock)
++-{
++-  if (!lock->guard.done)
++-    {
++-      if (InterlockedIncrement (&lock->guard.started) == 0)
++-	/* This thread is the first one to need this lock.  Initialize it.  */
++-	glthread_rwlock_init (lock);
++-      else
++-	/* Yield the CPU while waiting for another thread to finish
++-	   initializing this lock.  */
++-	while (!lock->guard.done)
++-	  Sleep (0);
++-    }
++-  EnterCriticalSection (&lock->lock);
++-  /* Test whether only readers are currently running, and whether the runcount
++-     field will not overflow.  */
++-  if (!(lock->runcount + 1 > 0))
++-    {
++-      /* This thread has to wait for a while.  Enqueue it among the
++-	 waiting_readers.  */
++-      HANDLE event = gl_waitqueue_add (&lock->waiting_readers);
++-      if (event != INVALID_HANDLE_VALUE)
++-	{
++-	  DWORD result;
++-	  LeaveCriticalSection (&lock->lock);
++-	  /* Wait until another thread signals this event.  */
++-	  result = WaitForSingleObject (event, INFINITE);
++-	  if (result == WAIT_FAILED || result == WAIT_TIMEOUT)
++-	    abort ();
++-	  CloseHandle (event);
++-	  /* The thread which signalled the event already did the bookkeeping:
++-	     removed us from the waiting_readers, incremented lock->runcount.  */
++-	  if (!(lock->runcount > 0))
++-	    abort ();
++-	  return;
++-	}
++-      else
++-	{
++-	  /* Allocation failure.  Weird.  */
++-	  do
++-	    {
++-	      LeaveCriticalSection (&lock->lock);
++-	      Sleep (1);
++-	      EnterCriticalSection (&lock->lock);
++-	    }
++-	  while (!(lock->runcount + 1 > 0));
++-	}
++-    }
++-  lock->runcount++;
++-  LeaveCriticalSection (&lock->lock);
++-}
++-
++-void
++-glthread_rwlock_wrlock (gl_rwlock_t *lock)
++-{
++-  if (!lock->guard.done)
++-    {
++-      if (InterlockedIncrement (&lock->guard.started) == 0)
++-	/* This thread is the first one to need this lock.  Initialize it.  */
++-	glthread_rwlock_init (lock);
++-      else
++-	/* Yield the CPU while waiting for another thread to finish
++-	   initializing this lock.  */
++-	while (!lock->guard.done)
++-	  Sleep (0);
++-    }
++-  EnterCriticalSection (&lock->lock);
++-  /* Test whether no readers or writers are currently running.  */
++-  if (!(lock->runcount == 0))
++-    {
++-      /* This thread has to wait for a while.  Enqueue it among the
++-	 waiting_writers.  */
++-      HANDLE event = gl_waitqueue_add (&lock->waiting_writers);
++-      if (event != INVALID_HANDLE_VALUE)
++-	{
++-	  DWORD result;
++-	  LeaveCriticalSection (&lock->lock);
++-	  /* Wait until another thread signals this event.  */
++-	  result = WaitForSingleObject (event, INFINITE);
++-	  if (result == WAIT_FAILED || result == WAIT_TIMEOUT)
++-	    abort ();
++-	  CloseHandle (event);
++-	  /* The thread which signalled the event already did the bookkeeping:
++-	     removed us from the waiting_writers, set lock->runcount = -1.  */
++-	  if (!(lock->runcount == -1))
++-	    abort ();
++-	  return;
++-	}
++-      else
++-	{
++-	  /* Allocation failure.  Weird.  */
++-	  do
++-	    {
++-	      LeaveCriticalSection (&lock->lock);
++-	      Sleep (1);
++-	      EnterCriticalSection (&lock->lock);
++-	    }
++-	  while (!(lock->runcount == 0));
++-	}
++-    }
++-  lock->runcount--; /* runcount becomes -1 */
++-  LeaveCriticalSection (&lock->lock);
++-}
++-
++-void
++-glthread_rwlock_unlock (gl_rwlock_t *lock)
++-{
++-  if (!lock->guard.done)
++-    abort ();
++-  EnterCriticalSection (&lock->lock);
++-  if (lock->runcount < 0)
++-    {
++-      /* Drop a writer lock.  */
++-      if (!(lock->runcount == -1))
++-	abort ();
++-      lock->runcount = 0;
++-    }
++-  else
++-    {
++-      /* Drop a reader lock.  */
++-      if (!(lock->runcount > 0))
++-	abort ();
++-      lock->runcount--;
++-    }
++-  if (lock->runcount == 0)
++-    {
++-      /* POSIX recommends that "write locks shall take precedence over read
++-	 locks", to avoid "writer starvation".  */
++-      if (lock->waiting_writers.count > 0)
++-	{
++-	  /* Wake up one of the waiting writers.  */
++-	  lock->runcount--;
++-	  gl_waitqueue_notify_first (&lock->waiting_writers);
++-	}
++-      else
++-	{
++-	  /* Wake up all waiting readers.  */
++-	  lock->runcount += lock->waiting_readers.count;
++-	  gl_waitqueue_notify_all (&lock->waiting_readers);
++-	}
++-    }
++-  LeaveCriticalSection (&lock->lock);
++-}
++-
++-void
++-glthread_rwlock_destroy (gl_rwlock_t *lock)
++-{
++-  if (!lock->guard.done)
++-    abort ();
++-  if (lock->runcount != 0)
++-    abort ();
++-  DeleteCriticalSection (&lock->lock);
++-  if (lock->waiting_readers.array != NULL)
++-    free (lock->waiting_readers.array);
++-  if (lock->waiting_writers.array != NULL)
++-    free (lock->waiting_writers.array);
++-  lock->guard.done = 0;
++-}
++-
++-/* --------------------- gl_recursive_lock_t datatype --------------------- */
++-
++-void
++-glthread_recursive_lock_init (gl_recursive_lock_t *lock)
++-{
++-  lock->owner = 0;
++-  lock->depth = 0;
++-  InitializeCriticalSection (&lock->lock);
++-  lock->guard.done = 1;
++-}
++-
++-void
++-glthread_recursive_lock_lock (gl_recursive_lock_t *lock)
++-{
++-  if (!lock->guard.done)
++-    {
++-      if (InterlockedIncrement (&lock->guard.started) == 0)
++-	/* This thread is the first one to need this lock.  Initialize it.  */
++-	glthread_recursive_lock_init (lock);
++-      else
++-	/* Yield the CPU while waiting for another thread to finish
++-	   initializing this lock.  */
++-	while (!lock->guard.done)
++-	  Sleep (0);
++-    }
++-  {
++-    DWORD self = GetCurrentThreadId ();
++-    if (lock->owner != self)
++-      {
++-	EnterCriticalSection (&lock->lock);
++-	lock->owner = self;
++-      }
++-    if (++(lock->depth) == 0) /* wraparound? */
++-      abort ();
++-  }
++-}
++-
++-void
++-glthread_recursive_lock_unlock (gl_recursive_lock_t *lock)
++-{
++-  if (lock->owner != GetCurrentThreadId ())
++-    abort ();
++-  if (lock->depth == 0)
++-    abort ();
++-  if (--(lock->depth) == 0)
++-    {
++-      lock->owner = 0;
++-      LeaveCriticalSection (&lock->lock);
++-    }
++-}
++-
++-void
++-glthread_recursive_lock_destroy (gl_recursive_lock_t *lock)
++-{
++-  if (lock->owner != 0)
++-    abort ();
++-  DeleteCriticalSection (&lock->lock);
++-  lock->guard.done = 0;
++-}
++-
++-/* -------------------------- gl_once_t datatype -------------------------- */
++-
++-void
++-glthread_once (gl_once_t *once_control, void (*initfunction) (void))
++-{
++-  if (once_control->inited <= 0)
++-    {
++-      if (InterlockedIncrement (&once_control->started) == 0)
++-	{
++-	  /* This thread is the first one to come to this once_control.  */
++-	  InitializeCriticalSection (&once_control->lock);
++-	  EnterCriticalSection (&once_control->lock);
++-	  once_control->inited = 0;
++-	  initfunction ();
++-	  once_control->inited = 1;
++-	  LeaveCriticalSection (&once_control->lock);
++-	}
++-      else
++-	{
++-	  /* Undo last operation.  */
++-	  InterlockedDecrement (&once_control->started);
++-	  /* Some other thread has already started the initialization.
++-	     Yield the CPU while waiting for the other thread to finish
++-	     initializing and taking the lock.  */
++-	  while (once_control->inited < 0)
++-	    Sleep (0);
++-	  if (once_control->inited <= 0)
++-	    {
++-	      /* Take the lock.  This blocks until the other thread has
++-		 finished calling the initfunction.  */
++-	      EnterCriticalSection (&once_control->lock);
++-	      LeaveCriticalSection (&once_control->lock);
++-	      if (!(once_control->inited > 0))
++-		abort ();
++-	    }
++-	}
++-    }
++-}
++-
++-#endif
++-
++-/* ========================================================================= */
++--- a/intl/lock.h
+++++ /dev/null
++@@ -1,1105 +0,0 @@
++-/* Locking in multithreaded situations.
++-   Copyright (C) 2005-2007 Free Software Foundation, Inc.
++-
++-   This program is free software; you can redistribute it and/or modify it
++-   under the terms of the GNU Library General Public License as published
++-   by the Free Software Foundation; either version 2, or (at your option)
++-   any later version.
++-
++-   This program is distributed in the hope that it will be useful,
++-   but WITHOUT ANY WARRANTY; without even the implied warranty of
++-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++-   Library General Public License for more details.
++-
++-   You should have received a copy of the GNU Library General Public
++-   License along with this program; if not, write to the Free Software
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
++-   USA.  */
++-
++-/* Written by Bruno Haible <bruno@clisp.org>, 2005.
++-   Based on GCC's gthr-posix.h, gthr-posix95.h, gthr-solaris.h,
++-   gthr-win32.h.  */
++-
++-/* This file contains locking primitives for use with a given thread library.
++-   It does not contain primitives for creating threads or for other
++-   synchronization primitives.
++-
++-   Normal (non-recursive) locks:
++-     Type:                gl_lock_t
++-     Declaration:         gl_lock_define(extern, name)
++-     Initializer:         gl_lock_define_initialized(, name)
++-     Initialization:      gl_lock_init (name);
++-     Taking the lock:     gl_lock_lock (name);
++-     Releasing the lock:  gl_lock_unlock (name);
++-     De-initialization:   gl_lock_destroy (name);
++-
++-   Read-Write (non-recursive) locks:
++-     Type:                gl_rwlock_t
++-     Declaration:         gl_rwlock_define(extern, name)
++-     Initializer:         gl_rwlock_define_initialized(, name)
++-     Initialization:      gl_rwlock_init (name);
++-     Taking the lock:     gl_rwlock_rdlock (name);
++-                          gl_rwlock_wrlock (name);
++-     Releasing the lock:  gl_rwlock_unlock (name);
++-     De-initialization:   gl_rwlock_destroy (name);
++-
++-   Recursive locks:
++-     Type:                gl_recursive_lock_t
++-     Declaration:         gl_recursive_lock_define(extern, name)
++-     Initializer:         gl_recursive_lock_define_initialized(, name)
++-     Initialization:      gl_recursive_lock_init (name);
++-     Taking the lock:     gl_recursive_lock_lock (name);
++-     Releasing the lock:  gl_recursive_lock_unlock (name);
++-     De-initialization:   gl_recursive_lock_destroy (name);
++-
++-  Once-only execution:
++-     Type:                gl_once_t
++-     Initializer:         gl_once_define(extern, name)
++-     Execution:           gl_once (name, initfunction);
++-*/
++-
++-
++-#ifndef _LOCK_H
++-#define _LOCK_H
++-
++-/* ========================================================================= */
++-
++-#if USE_POSIX_THREADS
++-
++-/* Use the POSIX threads library.  */
++-
++-# include <pthread.h>
++-# include <stdlib.h>
++-
++-# ifdef __cplusplus
++-extern "C" {
++-# endif
++-
++-# if PTHREAD_IN_USE_DETECTION_HARD
++-
++-/* The pthread_in_use() detection needs to be done at runtime.  */
++-#  define pthread_in_use() \
++-     glthread_in_use ()
++-extern int glthread_in_use (void);
++-
++-# endif
++-
++-# if USE_POSIX_THREADS_WEAK
++-
++-/* Use weak references to the POSIX threads library.  */
++-
++-/* Weak references avoid dragging in external libraries if the other parts
++-   of the program don't use them.  Here we use them, because we don't want
++-   every program that uses libintl to depend on libpthread.  This assumes
++-   that libpthread would not be loaded after libintl; i.e. if libintl is
++-   loaded first, by an executable that does not depend on libpthread, and
++-   then a module is dynamically loaded that depends on libpthread, libintl
++-   will not be multithread-safe.  */
++-
++-/* The way to test at runtime whether libpthread is present is to test
++-   whether a function pointer's value, such as &pthread_mutex_init, is
++-   non-NULL.  However, some versions of GCC have a bug through which, in
++-   PIC mode, &foo != NULL always evaluates to true if there is a direct
++-   call to foo(...) in the same function.  To avoid this, we test the
++-   address of a function in libpthread that we don't use.  */
++-
++-#  pragma weak pthread_mutex_init
++-#  pragma weak pthread_mutex_lock
++-#  pragma weak pthread_mutex_unlock
++-#  pragma weak pthread_mutex_destroy
++-#  pragma weak pthread_rwlock_init
++-#  pragma weak pthread_rwlock_rdlock
++-#  pragma weak pthread_rwlock_wrlock
++-#  pragma weak pthread_rwlock_unlock
++-#  pragma weak pthread_rwlock_destroy
++-#  pragma weak pthread_once
++-#  pragma weak pthread_cond_init
++-#  pragma weak pthread_cond_wait
++-#  pragma weak pthread_cond_signal
++-#  pragma weak pthread_cond_broadcast
++-#  pragma weak pthread_cond_destroy
++-#  pragma weak pthread_mutexattr_init
++-#  pragma weak pthread_mutexattr_settype
++-#  pragma weak pthread_mutexattr_destroy
++-#  ifndef pthread_self
++-#   pragma weak pthread_self
++-#  endif
++-
++-#  if !PTHREAD_IN_USE_DETECTION_HARD
++-#   pragma weak pthread_cancel
++-#   define pthread_in_use() (pthread_cancel != NULL)
++-#  endif
++-
++-# else
++-
++-#  if !PTHREAD_IN_USE_DETECTION_HARD
++-#   define pthread_in_use() 1
++-#  endif
++-
++-# endif
++-
++-/* -------------------------- gl_lock_t datatype -------------------------- */
++-
++-typedef pthread_mutex_t gl_lock_t;
++-# define gl_lock_define(STORAGECLASS, NAME) \
++-    STORAGECLASS pthread_mutex_t NAME;
++-# define gl_lock_define_initialized(STORAGECLASS, NAME) \
++-    STORAGECLASS pthread_mutex_t NAME = gl_lock_initializer;
++-# define gl_lock_initializer \
++-    PTHREAD_MUTEX_INITIALIZER
++-# define gl_lock_init(NAME) \
++-    do                                                                  \
++-      {                                                                 \
++-        if (pthread_in_use () && pthread_mutex_init (&NAME, NULL) != 0) \
++-          abort ();                                                     \
++-      }                                                                 \
++-    while (0)
++-# define gl_lock_lock(NAME) \
++-    do                                                            \
++-      {                                                           \
++-        if (pthread_in_use () && pthread_mutex_lock (&NAME) != 0) \
++-          abort ();                                               \
++-      }                                                           \
++-    while (0)
++-# define gl_lock_unlock(NAME) \
++-    do                                                              \
++-      {                                                             \
++-        if (pthread_in_use () && pthread_mutex_unlock (&NAME) != 0) \
++-          abort ();                                                 \
++-      }                                                             \
++-    while (0)
++-# define gl_lock_destroy(NAME) \
++-    do                                                               \
++-      {                                                              \
++-        if (pthread_in_use () && pthread_mutex_destroy (&NAME) != 0) \
++-          abort ();                                                  \
++-      }                                                              \
++-    while (0)
++-
++-/* ------------------------- gl_rwlock_t datatype ------------------------- */
++-
++-# if HAVE_PTHREAD_RWLOCK
++-
++-#  ifdef PTHREAD_RWLOCK_INITIALIZER
++-
++-typedef pthread_rwlock_t gl_rwlock_t;
++-#   define gl_rwlock_define(STORAGECLASS, NAME) \
++-      STORAGECLASS pthread_rwlock_t NAME;
++-#   define gl_rwlock_define_initialized(STORAGECLASS, NAME) \
++-      STORAGECLASS pthread_rwlock_t NAME = gl_rwlock_initializer;
++-#   define gl_rwlock_initializer \
++-      PTHREAD_RWLOCK_INITIALIZER
++-#   define gl_rwlock_init(NAME) \
++-      do                                                                   \
++-        {                                                                  \
++-          if (pthread_in_use () && pthread_rwlock_init (&NAME, NULL) != 0) \
++-            abort ();                                                      \
++-        }                                                                  \
++-      while (0)
++-#   define gl_rwlock_rdlock(NAME) \
++-      do                                                               \
++-        {                                                              \
++-          if (pthread_in_use () && pthread_rwlock_rdlock (&NAME) != 0) \
++-            abort ();                                                  \
++-        }                                                              \
++-      while (0)
++-#   define gl_rwlock_wrlock(NAME) \
++-      do                                                               \
++-        {                                                              \
++-          if (pthread_in_use () && pthread_rwlock_wrlock (&NAME) != 0) \
++-            abort ();                                                  \
++-        }                                                              \
++-      while (0)
++-#   define gl_rwlock_unlock(NAME) \
++-      do                                                               \
++-        {                                                              \
++-          if (pthread_in_use () && pthread_rwlock_unlock (&NAME) != 0) \
++-            abort ();                                                  \
++-        }                                                              \
++-      while (0)
++-#   define gl_rwlock_destroy(NAME) \
++-      do                                                                \
++-        {                                                               \
++-          if (pthread_in_use () && pthread_rwlock_destroy (&NAME) != 0) \
++-            abort ();                                                   \
++-        }                                                               \
++-      while (0)
++-
++-#  else
++-
++-typedef struct
++-        {
++-          int initialized;
++-          pthread_mutex_t guard;   /* protects the initialization */
++-          pthread_rwlock_t rwlock; /* read-write lock */
++-        }
++-        gl_rwlock_t;
++-#   define gl_rwlock_define(STORAGECLASS, NAME) \
++-      STORAGECLASS gl_rwlock_t NAME;
++-#   define gl_rwlock_define_initialized(STORAGECLASS, NAME) \
++-      STORAGECLASS gl_rwlock_t NAME = gl_rwlock_initializer;
++-#   define gl_rwlock_initializer \
++-      { 0, PTHREAD_MUTEX_INITIALIZER }
++-#   define gl_rwlock_init(NAME) \
++-      do                                  \
++-        {                                 \
++-          if (pthread_in_use ())          \
++-            glthread_rwlock_init (&NAME); \
++-        }                                 \
++-      while (0)
++-#   define gl_rwlock_rdlock(NAME) \
++-      do                                    \
++-        {                                   \
++-          if (pthread_in_use ())            \
++-            glthread_rwlock_rdlock (&NAME); \
++-        }                                   \
++-      while (0)
++-#   define gl_rwlock_wrlock(NAME) \
++-      do                                    \
++-        {                                   \
++-          if (pthread_in_use ())            \
++-            glthread_rwlock_wrlock (&NAME); \
++-        }                                   \
++-      while (0)
++-#   define gl_rwlock_unlock(NAME) \
++-      do                                    \
++-        {                                   \
++-          if (pthread_in_use ())            \
++-            glthread_rwlock_unlock (&NAME); \
++-        }                                   \
++-      while (0)
++-#   define gl_rwlock_destroy(NAME) \
++-      do                                     \
++-        {                                    \
++-          if (pthread_in_use ())             \
++-            glthread_rwlock_destroy (&NAME); \
++-        }                                    \
++-      while (0)
++-extern void glthread_rwlock_init (gl_rwlock_t *lock);
++-extern void glthread_rwlock_rdlock (gl_rwlock_t *lock);
++-extern void glthread_rwlock_wrlock (gl_rwlock_t *lock);
++-extern void glthread_rwlock_unlock (gl_rwlock_t *lock);
++-extern void glthread_rwlock_destroy (gl_rwlock_t *lock);
++-
++-#  endif
++-
++-# else
++-
++-typedef struct
++-        {
++-          pthread_mutex_t lock; /* protects the remaining fields */
++-          pthread_cond_t waiting_readers; /* waiting readers */
++-          pthread_cond_t waiting_writers; /* waiting writers */
++-          unsigned int waiting_writers_count; /* number of waiting writers */
++-          int runcount; /* number of readers running, or -1 when a writer runs */
++-        }
++-        gl_rwlock_t;
++-# define gl_rwlock_define(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_rwlock_t NAME;
++-# define gl_rwlock_define_initialized(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_rwlock_t NAME = gl_rwlock_initializer;
++-# define gl_rwlock_initializer \
++-    { PTHREAD_MUTEX_INITIALIZER, PTHREAD_COND_INITIALIZER, PTHREAD_COND_INITIALIZER, 0, 0 }
++-# define gl_rwlock_init(NAME) \
++-    do                                  \
++-      {                                 \
++-        if (pthread_in_use ())          \
++-          glthread_rwlock_init (&NAME); \
++-      }                                 \
++-    while (0)
++-# define gl_rwlock_rdlock(NAME) \
++-    do                                    \
++-      {                                   \
++-        if (pthread_in_use ())            \
++-          glthread_rwlock_rdlock (&NAME); \
++-      }                                   \
++-    while (0)
++-# define gl_rwlock_wrlock(NAME) \
++-    do                                    \
++-      {                                   \
++-        if (pthread_in_use ())            \
++-          glthread_rwlock_wrlock (&NAME); \
++-      }                                   \
++-    while (0)
++-# define gl_rwlock_unlock(NAME) \
++-    do                                    \
++-      {                                   \
++-        if (pthread_in_use ())            \
++-          glthread_rwlock_unlock (&NAME); \
++-      }                                   \
++-    while (0)
++-# define gl_rwlock_destroy(NAME) \
++-    do                                     \
++-      {                                    \
++-        if (pthread_in_use ())             \
++-          glthread_rwlock_destroy (&NAME); \
++-      }                                    \
++-    while (0)
++-extern void glthread_rwlock_init (gl_rwlock_t *lock);
++-extern void glthread_rwlock_rdlock (gl_rwlock_t *lock);
++-extern void glthread_rwlock_wrlock (gl_rwlock_t *lock);
++-extern void glthread_rwlock_unlock (gl_rwlock_t *lock);
++-extern void glthread_rwlock_destroy (gl_rwlock_t *lock);
++-
++-# endif
++-
++-/* --------------------- gl_recursive_lock_t datatype --------------------- */
++-
++-# if HAVE_PTHREAD_MUTEX_RECURSIVE
++-
++-#  if defined PTHREAD_RECURSIVE_MUTEX_INITIALIZER || defined PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP
++-
++-typedef pthread_mutex_t gl_recursive_lock_t;
++-#   define gl_recursive_lock_define(STORAGECLASS, NAME) \
++-      STORAGECLASS pthread_mutex_t NAME;
++-#   define gl_recursive_lock_define_initialized(STORAGECLASS, NAME) \
++-      STORAGECLASS pthread_mutex_t NAME = gl_recursive_lock_initializer;
++-#   ifdef PTHREAD_RECURSIVE_MUTEX_INITIALIZER
++-#    define gl_recursive_lock_initializer \
++-       PTHREAD_RECURSIVE_MUTEX_INITIALIZER
++-#   else
++-#    define gl_recursive_lock_initializer \
++-       PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP
++-#   endif
++-#   define gl_recursive_lock_init(NAME) \
++-      do                                                                  \
++-        {                                                                 \
++-          if (pthread_in_use () && pthread_mutex_init (&NAME, NULL) != 0) \
++-            abort ();                                                     \
++-        }                                                                 \
++-      while (0)
++-#   define gl_recursive_lock_lock(NAME) \
++-      do                                                            \
++-        {                                                           \
++-          if (pthread_in_use () && pthread_mutex_lock (&NAME) != 0) \
++-            abort ();                                               \
++-        }                                                           \
++-      while (0)
++-#   define gl_recursive_lock_unlock(NAME) \
++-      do                                                              \
++-        {                                                             \
++-          if (pthread_in_use () && pthread_mutex_unlock (&NAME) != 0) \
++-            abort ();                                                 \
++-        }                                                             \
++-      while (0)
++-#   define gl_recursive_lock_destroy(NAME) \
++-      do                                                               \
++-        {                                                              \
++-          if (pthread_in_use () && pthread_mutex_destroy (&NAME) != 0) \
++-            abort ();                                                  \
++-        }                                                              \
++-      while (0)
++-
++-#  else
++-
++-typedef struct
++-        {
++-          pthread_mutex_t recmutex; /* recursive mutex */
++-          pthread_mutex_t guard;    /* protects the initialization */
++-          int initialized;
++-        }
++-        gl_recursive_lock_t;
++-#   define gl_recursive_lock_define(STORAGECLASS, NAME) \
++-      STORAGECLASS gl_recursive_lock_t NAME;
++-#   define gl_recursive_lock_define_initialized(STORAGECLASS, NAME) \
++-      STORAGECLASS gl_recursive_lock_t NAME = gl_recursive_lock_initializer;
++-#   define gl_recursive_lock_initializer \
++-      { PTHREAD_MUTEX_INITIALIZER, PTHREAD_MUTEX_INITIALIZER, 0 }
++-#   define gl_recursive_lock_init(NAME) \
++-      do                                          \
++-        {                                         \
++-          if (pthread_in_use ())                  \
++-            glthread_recursive_lock_init (&NAME); \
++-        }                                         \
++-      while (0)
++-#   define gl_recursive_lock_lock(NAME) \
++-      do                                          \
++-        {                                         \
++-          if (pthread_in_use ())                  \
++-            glthread_recursive_lock_lock (&NAME); \
++-        }                                         \
++-      while (0)
++-#   define gl_recursive_lock_unlock(NAME) \
++-      do                                            \
++-        {                                           \
++-          if (pthread_in_use ())                    \
++-            glthread_recursive_lock_unlock (&NAME); \
++-        }                                           \
++-      while (0)
++-#   define gl_recursive_lock_destroy(NAME) \
++-      do                                             \
++-        {                                            \
++-          if (pthread_in_use ())                     \
++-            glthread_recursive_lock_destroy (&NAME); \
++-        }                                            \
++-      while (0)
++-extern void glthread_recursive_lock_init (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_lock (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_unlock (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_destroy (gl_recursive_lock_t *lock);
++-
++-#  endif
++-
++-# else
++-
++-/* Old versions of POSIX threads on Solaris did not have recursive locks.
++-   We have to implement them ourselves.  */
++-
++-typedef struct
++-        {
++-          pthread_mutex_t mutex;
++-          pthread_t owner;
++-          unsigned long depth;
++-        }
++-        gl_recursive_lock_t;
++-#  define gl_recursive_lock_define(STORAGECLASS, NAME) \
++-     STORAGECLASS gl_recursive_lock_t NAME;
++-#  define gl_recursive_lock_define_initialized(STORAGECLASS, NAME) \
++-     STORAGECLASS gl_recursive_lock_t NAME = gl_recursive_lock_initializer;
++-#  define gl_recursive_lock_initializer \
++-     { PTHREAD_MUTEX_INITIALIZER, (pthread_t) 0, 0 }
++-#  define gl_recursive_lock_init(NAME) \
++-     do                                          \
++-       {                                         \
++-         if (pthread_in_use ())                  \
++-           glthread_recursive_lock_init (&NAME); \
++-       }                                         \
++-     while (0)
++-#  define gl_recursive_lock_lock(NAME) \
++-     do                                          \
++-       {                                         \
++-         if (pthread_in_use ())                  \
++-           glthread_recursive_lock_lock (&NAME); \
++-       }                                         \
++-     while (0)
++-#  define gl_recursive_lock_unlock(NAME) \
++-     do                                            \
++-       {                                           \
++-         if (pthread_in_use ())                    \
++-           glthread_recursive_lock_unlock (&NAME); \
++-       }                                           \
++-     while (0)
++-#  define gl_recursive_lock_destroy(NAME) \
++-     do                                             \
++-       {                                            \
++-         if (pthread_in_use ())                     \
++-           glthread_recursive_lock_destroy (&NAME); \
++-       }                                            \
++-     while (0)
++-extern void glthread_recursive_lock_init (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_lock (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_unlock (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_destroy (gl_recursive_lock_t *lock);
++-
++-# endif
++-
++-/* -------------------------- gl_once_t datatype -------------------------- */
++-
++-typedef pthread_once_t gl_once_t;
++-# define gl_once_define(STORAGECLASS, NAME) \
++-    STORAGECLASS pthread_once_t NAME = PTHREAD_ONCE_INIT;
++-# define gl_once(NAME, INITFUNCTION) \
++-    do                                                   \
++-      {                                                  \
++-        if (pthread_in_use ())                           \
++-          {                                              \
++-            if (pthread_once (&NAME, INITFUNCTION) != 0) \
++-              abort ();                                  \
++-          }                                              \
++-        else                                             \
++-          {                                              \
++-            if (glthread_once_singlethreaded (&NAME))    \
++-              INITFUNCTION ();                           \
++-          }                                              \
++-      }                                                  \
++-    while (0)
++-extern int glthread_once_singlethreaded (pthread_once_t *once_control);
++-
++-# ifdef __cplusplus
++-}
++-# endif
++-
++-#endif
++-
++-/* ========================================================================= */
++-
++-#if USE_PTH_THREADS
++-
++-/* Use the GNU Pth threads library.  */
++-
++-# include <pth.h>
++-# include <stdlib.h>
++-
++-# ifdef __cplusplus
++-extern "C" {
++-# endif
++-
++-# if USE_PTH_THREADS_WEAK
++-
++-/* Use weak references to the GNU Pth threads library.  */
++-
++-#  pragma weak pth_mutex_init
++-#  pragma weak pth_mutex_acquire
++-#  pragma weak pth_mutex_release
++-#  pragma weak pth_rwlock_init
++-#  pragma weak pth_rwlock_acquire
++-#  pragma weak pth_rwlock_release
++-#  pragma weak pth_once
++-
++-#  pragma weak pth_cancel
++-#  define pth_in_use() (pth_cancel != NULL)
++-
++-# else
++-
++-#  define pth_in_use() 1
++-
++-# endif
++-
++-/* -------------------------- gl_lock_t datatype -------------------------- */
++-
++-typedef pth_mutex_t gl_lock_t;
++-# define gl_lock_define(STORAGECLASS, NAME) \
++-    STORAGECLASS pth_mutex_t NAME;
++-# define gl_lock_define_initialized(STORAGECLASS, NAME) \
++-    STORAGECLASS pth_mutex_t NAME = gl_lock_initializer;
++-# define gl_lock_initializer \
++-    PTH_MUTEX_INIT
++-# define gl_lock_init(NAME) \
++-    do                                               \
++-      {                                              \
++-        if (pth_in_use() && !pth_mutex_init (&NAME)) \
++-          abort ();                                  \
++-      }                                              \
++-    while (0)
++-# define gl_lock_lock(NAME) \
++-    do                                                           \
++-      {                                                          \
++-        if (pth_in_use() && !pth_mutex_acquire (&NAME, 0, NULL)) \
++-          abort ();                                              \
++-      }                                                          \
++-    while (0)
++-# define gl_lock_unlock(NAME) \
++-    do                                                  \
++-      {                                                 \
++-        if (pth_in_use() && !pth_mutex_release (&NAME)) \
++-          abort ();                                     \
++-      }                                                 \
++-    while (0)
++-# define gl_lock_destroy(NAME) \
++-    (void)(&NAME)
++-
++-/* ------------------------- gl_rwlock_t datatype ------------------------- */
++-
++-typedef pth_rwlock_t gl_rwlock_t;
++-#  define gl_rwlock_define(STORAGECLASS, NAME) \
++-     STORAGECLASS pth_rwlock_t NAME;
++-#  define gl_rwlock_define_initialized(STORAGECLASS, NAME) \
++-     STORAGECLASS pth_rwlock_t NAME = gl_rwlock_initializer;
++-#  define gl_rwlock_initializer \
++-     PTH_RWLOCK_INIT
++-#  define gl_rwlock_init(NAME) \
++-     do                                                \
++-       {                                               \
++-         if (pth_in_use() && !pth_rwlock_init (&NAME)) \
++-           abort ();                                   \
++-       }                                               \
++-     while (0)
++-#  define gl_rwlock_rdlock(NAME) \
++-     do                                                              \
++-       {                                                             \
++-         if (pth_in_use()                                            \
++-             && !pth_rwlock_acquire (&NAME, PTH_RWLOCK_RD, 0, NULL)) \
++-           abort ();                                                 \
++-       }                                                             \
++-     while (0)
++-#  define gl_rwlock_wrlock(NAME) \
++-     do                                                              \
++-       {                                                             \
++-         if (pth_in_use()                                            \
++-             && !pth_rwlock_acquire (&NAME, PTH_RWLOCK_RW, 0, NULL)) \
++-           abort ();                                                 \
++-       }                                                             \
++-     while (0)
++-#  define gl_rwlock_unlock(NAME) \
++-     do                                                   \
++-       {                                                  \
++-         if (pth_in_use() && !pth_rwlock_release (&NAME)) \
++-           abort ();                                      \
++-       }                                                  \
++-     while (0)
++-#  define gl_rwlock_destroy(NAME) \
++-     (void)(&NAME)
++-
++-/* --------------------- gl_recursive_lock_t datatype --------------------- */
++-
++-/* In Pth, mutexes are recursive by default.  */
++-typedef pth_mutex_t gl_recursive_lock_t;
++-#  define gl_recursive_lock_define(STORAGECLASS, NAME) \
++-     STORAGECLASS pth_mutex_t NAME;
++-#  define gl_recursive_lock_define_initialized(STORAGECLASS, NAME) \
++-     STORAGECLASS pth_mutex_t NAME = gl_recursive_lock_initializer;
++-#  define gl_recursive_lock_initializer \
++-     PTH_MUTEX_INIT
++-#  define gl_recursive_lock_init(NAME) \
++-     do                                               \
++-       {                                              \
++-         if (pth_in_use() && !pth_mutex_init (&NAME)) \
++-           abort ();                                  \
++-       }                                              \
++-     while (0)
++-#  define gl_recursive_lock_lock(NAME) \
++-     do                                                           \
++-       {                                                          \
++-         if (pth_in_use() && !pth_mutex_acquire (&NAME, 0, NULL)) \
++-           abort ();                                              \
++-       }                                                          \
++-     while (0)
++-#  define gl_recursive_lock_unlock(NAME) \
++-     do                                                  \
++-       {                                                 \
++-         if (pth_in_use() && !pth_mutex_release (&NAME)) \
++-           abort ();                                     \
++-       }                                                 \
++-     while (0)
++-#  define gl_recursive_lock_destroy(NAME) \
++-     (void)(&NAME)
++-
++-/* -------------------------- gl_once_t datatype -------------------------- */
++-
++-typedef pth_once_t gl_once_t;
++-# define gl_once_define(STORAGECLASS, NAME) \
++-    STORAGECLASS pth_once_t NAME = PTH_ONCE_INIT;
++-# define gl_once(NAME, INITFUNCTION) \
++-    do                                                                \
++-      {                                                               \
++-        if (pth_in_use ())                                            \
++-          {                                                           \
++-            void (*gl_once_temp) (void) = INITFUNCTION;               \
++-            if (!pth_once (&NAME, glthread_once_call, &gl_once_temp)) \
++-              abort ();                                               \
++-          }                                                           \
++-        else                                                          \
++-          {                                                           \
++-            if (glthread_once_singlethreaded (&NAME))                 \
++-              INITFUNCTION ();                                        \
++-          }                                                           \
++-      }                                                               \
++-    while (0)
++-extern void glthread_once_call (void *arg);
++-extern int glthread_once_singlethreaded (pth_once_t *once_control);
++-
++-# ifdef __cplusplus
++-}
++-# endif
++-
++-#endif
++-
++-/* ========================================================================= */
++-
++-#if USE_SOLARIS_THREADS
++-
++-/* Use the old Solaris threads library.  */
++-
++-# include <thread.h>
++-# include <synch.h>
++-# include <stdlib.h>
++-
++-# ifdef __cplusplus
++-extern "C" {
++-# endif
++-
++-# if USE_SOLARIS_THREADS_WEAK
++-
++-/* Use weak references to the old Solaris threads library.  */
++-
++-#  pragma weak mutex_init
++-#  pragma weak mutex_lock
++-#  pragma weak mutex_unlock
++-#  pragma weak mutex_destroy
++-#  pragma weak rwlock_init
++-#  pragma weak rw_rdlock
++-#  pragma weak rw_wrlock
++-#  pragma weak rw_unlock
++-#  pragma weak rwlock_destroy
++-#  pragma weak thr_self
++-
++-#  pragma weak thr_suspend
++-#  define thread_in_use() (thr_suspend != NULL)
++-
++-# else
++-
++-#  define thread_in_use() 1
++-
++-# endif
++-
++-/* -------------------------- gl_lock_t datatype -------------------------- */
++-
++-typedef mutex_t gl_lock_t;
++-# define gl_lock_define(STORAGECLASS, NAME) \
++-    STORAGECLASS mutex_t NAME;
++-# define gl_lock_define_initialized(STORAGECLASS, NAME) \
++-    STORAGECLASS mutex_t NAME = gl_lock_initializer;
++-# define gl_lock_initializer \
++-    DEFAULTMUTEX
++-# define gl_lock_init(NAME) \
++-    do                                                                       \
++-      {                                                                      \
++-        if (thread_in_use () && mutex_init (&NAME, USYNC_THREAD, NULL) != 0) \
++-          abort ();                                                          \
++-      }                                                                      \
++-    while (0)
++-# define gl_lock_lock(NAME) \
++-    do                                                   \
++-      {                                                  \
++-        if (thread_in_use () && mutex_lock (&NAME) != 0) \
++-          abort ();                                      \
++-      }                                                  \
++-    while (0)
++-# define gl_lock_unlock(NAME) \
++-    do                                                     \
++-      {                                                    \
++-        if (thread_in_use () && mutex_unlock (&NAME) != 0) \
++-          abort ();                                        \
++-      }                                                    \
++-    while (0)
++-# define gl_lock_destroy(NAME) \
++-    do                                                      \
++-      {                                                     \
++-        if (thread_in_use () && mutex_destroy (&NAME) != 0) \
++-          abort ();                                         \
++-      }                                                     \
++-    while (0)
++-
++-/* ------------------------- gl_rwlock_t datatype ------------------------- */
++-
++-typedef rwlock_t gl_rwlock_t;
++-# define gl_rwlock_define(STORAGECLASS, NAME) \
++-    STORAGECLASS rwlock_t NAME;
++-# define gl_rwlock_define_initialized(STORAGECLASS, NAME) \
++-    STORAGECLASS rwlock_t NAME = gl_rwlock_initializer;
++-# define gl_rwlock_initializer \
++-    DEFAULTRWLOCK
++-# define gl_rwlock_init(NAME) \
++-    do                                                                        \
++-      {                                                                       \
++-        if (thread_in_use () && rwlock_init (&NAME, USYNC_THREAD, NULL) != 0) \
++-          abort ();                                                           \
++-      }                                                                       \
++-    while (0)
++-# define gl_rwlock_rdlock(NAME) \
++-    do                                                  \
++-      {                                                 \
++-        if (thread_in_use () && rw_rdlock (&NAME) != 0) \
++-          abort ();                                     \
++-      }                                                 \
++-    while (0)
++-# define gl_rwlock_wrlock(NAME) \
++-    do                                                  \
++-      {                                                 \
++-        if (thread_in_use () && rw_wrlock (&NAME) != 0) \
++-          abort ();                                     \
++-      }                                                 \
++-    while (0)
++-# define gl_rwlock_unlock(NAME) \
++-    do                                                  \
++-      {                                                 \
++-        if (thread_in_use () && rw_unlock (&NAME) != 0) \
++-          abort ();                                     \
++-      }                                                 \
++-    while (0)
++-# define gl_rwlock_destroy(NAME) \
++-    do                                                       \
++-      {                                                      \
++-        if (thread_in_use () && rwlock_destroy (&NAME) != 0) \
++-          abort ();                                          \
++-      }                                                      \
++-    while (0)
++-
++-/* --------------------- gl_recursive_lock_t datatype --------------------- */
++-
++-/* Old Solaris threads did not have recursive locks.
++-   We have to implement them ourselves.  */
++-
++-typedef struct
++-        {
++-          mutex_t mutex;
++-          thread_t owner;
++-          unsigned long depth;
++-        }
++-        gl_recursive_lock_t;
++-# define gl_recursive_lock_define(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_recursive_lock_t NAME;
++-# define gl_recursive_lock_define_initialized(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_recursive_lock_t NAME = gl_recursive_lock_initializer;
++-# define gl_recursive_lock_initializer \
++-    { DEFAULTMUTEX, (thread_t) 0, 0 }
++-# define gl_recursive_lock_init(NAME) \
++-    do                                          \
++-      {                                         \
++-        if (thread_in_use ())                   \
++-          glthread_recursive_lock_init (&NAME); \
++-      }                                         \
++-    while (0)
++-# define gl_recursive_lock_lock(NAME) \
++-    do                                          \
++-      {                                         \
++-        if (thread_in_use ())                   \
++-          glthread_recursive_lock_lock (&NAME); \
++-      }                                         \
++-    while (0)
++-# define gl_recursive_lock_unlock(NAME) \
++-    do                                            \
++-      {                                           \
++-        if (thread_in_use ())                     \
++-          glthread_recursive_lock_unlock (&NAME); \
++-      }                                           \
++-    while (0)
++-# define gl_recursive_lock_destroy(NAME) \
++-    do                                             \
++-      {                                            \
++-        if (thread_in_use ())                      \
++-          glthread_recursive_lock_destroy (&NAME); \
++-      }                                            \
++-    while (0)
++-extern void glthread_recursive_lock_init (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_lock (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_unlock (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_destroy (gl_recursive_lock_t *lock);
++-
++-/* -------------------------- gl_once_t datatype -------------------------- */
++-
++-typedef struct
++-        {
++-          volatile int inited;
++-          mutex_t mutex;
++-        }
++-        gl_once_t;
++-# define gl_once_define(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_once_t NAME = { 0, DEFAULTMUTEX };
++-# define gl_once(NAME, INITFUNCTION) \
++-    do                                                \
++-      {                                               \
++-        if (thread_in_use ())                         \
++-          {                                           \
++-            glthread_once (&NAME, INITFUNCTION);      \
++-          }                                           \
++-        else                                          \
++-          {                                           \
++-            if (glthread_once_singlethreaded (&NAME)) \
++-              INITFUNCTION ();                        \
++-          }                                           \
++-      }                                               \
++-    while (0)
++-extern void glthread_once (gl_once_t *once_control, void (*initfunction) (void));
++-extern int glthread_once_singlethreaded (gl_once_t *once_control);
++-
++-# ifdef __cplusplus
++-}
++-# endif
++-
++-#endif
++-
++-/* ========================================================================= */
++-
++-#if USE_WIN32_THREADS
++-
++-# include <windows.h>
++-
++-# ifdef __cplusplus
++-extern "C" {
++-# endif
++-
++-/* We can use CRITICAL_SECTION directly, rather than the Win32 Event, Mutex,
++-   Semaphore types, because
++-     - we need only to synchronize inside a single process (address space),
++-       not inter-process locking,
++-     - we don't need to support trylock operations.  (TryEnterCriticalSection
++-       does not work on Windows 95/98/ME.  Packages that need trylock usually
++-       define their own mutex type.)  */
++-
++-/* There is no way to statically initialize a CRITICAL_SECTION.  It needs
++-   to be done lazily, once only.  For this we need spinlocks.  */
++-
++-typedef struct { volatile int done; volatile long started; } gl_spinlock_t;
++-
++-/* -------------------------- gl_lock_t datatype -------------------------- */
++-
++-typedef struct
++-        {
++-          gl_spinlock_t guard; /* protects the initialization */
++-          CRITICAL_SECTION lock;
++-        }
++-        gl_lock_t;
++-# define gl_lock_define(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_lock_t NAME;
++-# define gl_lock_define_initialized(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_lock_t NAME = gl_lock_initializer;
++-# define gl_lock_initializer \
++-    { { 0, -1 } }
++-# define gl_lock_init(NAME) \
++-    glthread_lock_init (&NAME)
++-# define gl_lock_lock(NAME) \
++-    glthread_lock_lock (&NAME)
++-# define gl_lock_unlock(NAME) \
++-    glthread_lock_unlock (&NAME)
++-# define gl_lock_destroy(NAME) \
++-    glthread_lock_destroy (&NAME)
++-extern void glthread_lock_init (gl_lock_t *lock);
++-extern void glthread_lock_lock (gl_lock_t *lock);
++-extern void glthread_lock_unlock (gl_lock_t *lock);
++-extern void glthread_lock_destroy (gl_lock_t *lock);
++-
++-/* ------------------------- gl_rwlock_t datatype ------------------------- */
++-
++-/* It is impossible to implement read-write locks using plain locks, without
++-   introducing an extra thread dedicated to managing read-write locks.
++-   Therefore here we need to use the low-level Event type.  */
++-
++-typedef struct
++-        {
++-          HANDLE *array; /* array of waiting threads, each represented by an event */
++-          unsigned int count; /* number of waiting threads */
++-          unsigned int alloc; /* length of allocated array */
++-          unsigned int offset; /* index of first waiting thread in array */
++-        }
++-        gl_waitqueue_t;
++-typedef struct
++-        {
++-          gl_spinlock_t guard; /* protects the initialization */
++-          CRITICAL_SECTION lock; /* protects the remaining fields */
++-          gl_waitqueue_t waiting_readers; /* waiting readers */
++-          gl_waitqueue_t waiting_writers; /* waiting writers */
++-          int runcount; /* number of readers running, or -1 when a writer runs */
++-        }
++-        gl_rwlock_t;
++-# define gl_rwlock_define(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_rwlock_t NAME;
++-# define gl_rwlock_define_initialized(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_rwlock_t NAME = gl_rwlock_initializer;
++-# define gl_rwlock_initializer \
++-    { { 0, -1 } }
++-# define gl_rwlock_init(NAME) \
++-    glthread_rwlock_init (&NAME)
++-# define gl_rwlock_rdlock(NAME) \
++-    glthread_rwlock_rdlock (&NAME)
++-# define gl_rwlock_wrlock(NAME) \
++-    glthread_rwlock_wrlock (&NAME)
++-# define gl_rwlock_unlock(NAME) \
++-    glthread_rwlock_unlock (&NAME)
++-# define gl_rwlock_destroy(NAME) \
++-    glthread_rwlock_destroy (&NAME)
++-extern void glthread_rwlock_init (gl_rwlock_t *lock);
++-extern void glthread_rwlock_rdlock (gl_rwlock_t *lock);
++-extern void glthread_rwlock_wrlock (gl_rwlock_t *lock);
++-extern void glthread_rwlock_unlock (gl_rwlock_t *lock);
++-extern void glthread_rwlock_destroy (gl_rwlock_t *lock);
++-
++-/* --------------------- gl_recursive_lock_t datatype --------------------- */
++-
++-/* The Win32 documentation says that CRITICAL_SECTION already implements a
++-   recursive lock.  But we need not rely on it: It's easy to implement a
++-   recursive lock without this assumption.  */
++-
++-typedef struct
++-        {
++-          gl_spinlock_t guard; /* protects the initialization */
++-          DWORD owner;
++-          unsigned long depth;
++-          CRITICAL_SECTION lock;
++-        }
++-        gl_recursive_lock_t;
++-# define gl_recursive_lock_define(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_recursive_lock_t NAME;
++-# define gl_recursive_lock_define_initialized(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_recursive_lock_t NAME = gl_recursive_lock_initializer;
++-# define gl_recursive_lock_initializer \
++-    { { 0, -1 }, 0, 0 }
++-# define gl_recursive_lock_init(NAME) \
++-    glthread_recursive_lock_init (&NAME)
++-# define gl_recursive_lock_lock(NAME) \
++-    glthread_recursive_lock_lock (&NAME)
++-# define gl_recursive_lock_unlock(NAME) \
++-    glthread_recursive_lock_unlock (&NAME)
++-# define gl_recursive_lock_destroy(NAME) \
++-    glthread_recursive_lock_destroy (&NAME)
++-extern void glthread_recursive_lock_init (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_lock (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_unlock (gl_recursive_lock_t *lock);
++-extern void glthread_recursive_lock_destroy (gl_recursive_lock_t *lock);
++-
++-/* -------------------------- gl_once_t datatype -------------------------- */
++-
++-typedef struct
++-        {
++-          volatile int inited;
++-          volatile long started;
++-          CRITICAL_SECTION lock;
++-        }
++-        gl_once_t;
++-# define gl_once_define(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_once_t NAME = { -1, -1 };
++-# define gl_once(NAME, INITFUNCTION) \
++-    glthread_once (&NAME, INITFUNCTION)
++-extern void glthread_once (gl_once_t *once_control, void (*initfunction) (void));
++-
++-# ifdef __cplusplus
++-}
++-# endif
++-
++-#endif
++-
++-/* ========================================================================= */
++-
++-#if !(USE_POSIX_THREADS || USE_PTH_THREADS || USE_SOLARIS_THREADS || USE_WIN32_THREADS)
++-
++-/* Provide dummy implementation if threads are not supported.  */
++-
++-/* -------------------------- gl_lock_t datatype -------------------------- */
++-
++-typedef int gl_lock_t;
++-# define gl_lock_define(STORAGECLASS, NAME)
++-# define gl_lock_define_initialized(STORAGECLASS, NAME)
++-# define gl_lock_init(NAME)
++-# define gl_lock_lock(NAME)
++-# define gl_lock_unlock(NAME)
++-
++-/* ------------------------- gl_rwlock_t datatype ------------------------- */
++-
++-typedef int gl_rwlock_t;
++-# define gl_rwlock_define(STORAGECLASS, NAME)
++-# define gl_rwlock_define_initialized(STORAGECLASS, NAME)
++-# define gl_rwlock_init(NAME)
++-# define gl_rwlock_rdlock(NAME)
++-# define gl_rwlock_wrlock(NAME)
++-# define gl_rwlock_unlock(NAME)
++-
++-/* --------------------- gl_recursive_lock_t datatype --------------------- */
++-
++-typedef int gl_recursive_lock_t;
++-# define gl_recursive_lock_define(STORAGECLASS, NAME)
++-# define gl_recursive_lock_define_initialized(STORAGECLASS, NAME)
++-# define gl_recursive_lock_init(NAME)
++-# define gl_recursive_lock_lock(NAME)
++-# define gl_recursive_lock_unlock(NAME)
++-
++-/* -------------------------- gl_once_t datatype -------------------------- */
++-
++-typedef int gl_once_t;
++-# define gl_once_define(STORAGECLASS, NAME) \
++-    STORAGECLASS gl_once_t NAME = 0;
++-# define gl_once(NAME, INITFUNCTION) \
++-    do                       \
++-      {                      \
++-        if (NAME == 0)       \
++-          {                  \
++-            NAME = ~ 0;      \
++-            INITFUNCTION (); \
++-          }                  \
++-      }                      \
++-    while (0)
++-
++-#endif
++-
++-/* ========================================================================= */
++-
++-#endif /* _LOCK_H */
++--- a/intl/log.c
+++++ /dev/null
++@@ -1,116 +0,0 @@
++-/* Log file output.
++-   Copyright (C) 2003, 2005 Free Software Foundation, Inc.
++-
++-   This program is free software; you can redistribute it and/or modify it
++-   under the terms of the GNU Library General Public License as published
++-   by the Free Software Foundation; either version 2, or (at your option)
++-   any later version.
++-
++-   This program is distributed in the hope that it will be useful,
++-   but WITHOUT ANY WARRANTY; without even the implied warranty of
++-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++-   Library General Public License for more details.
++-
++-   You should have received a copy of the GNU Library General Public
++-   License along with this program; if not, write to the Free Software
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-/* Written by Bruno Haible <bruno@clisp.org>.  */
@@ -9130,6 +11976,13 @@ index 0000000000..a06dbad1ea
 +-#include <stdio.h>
 +-#include <stdlib.h>
 +-#include <string.h>
++-
++-/* Handle multi-threaded applications.  */
++-#ifdef _LIBC
++-# include <bits/libc-lock.h>
++-#else
++-# include "lock.h"
++-#endif
 +-
 +-/* Print an ASCII string with quotes and escape sequences where needed.  */
 +-static void
@@ -9153,13 +12006,14 @@ index 0000000000..a06dbad1ea
 +-  putc ('"', stream);
 +-}
 +-
-+-/* Add to the log file an entry denoting a failed translation.  */
-+-void
-+-_nl_log_untranslated (const char *logfilename, const char *domainname,
-+-		      const char *msgid1, const char *msgid2, int plural)
++-static char *last_logfilename = NULL;
++-static FILE *last_logfile = NULL;
++-__libc_lock_define_initialized (static, lock)
++-
++-static inline void
++-_nl_log_untranslated_locked (const char *logfilename, const char *domainname,
++-			     const char *msgid1, const char *msgid2, int plural)
 +-{
-+-  static char *last_logfilename = NULL;
-+-  static FILE *last_logfile = NULL;
 +-  FILE *logfile;
 +-
 +-  /* Can we reuse the last opened logfile?  */
@@ -9201,6 +12055,16 @@ index 0000000000..a06dbad1ea
 +-    fprintf (logfile, "\nmsgstr \"\"\n");
 +-  putc ('\n', logfile);
 +-}
++-
++-/* Add to the log file an entry denoting a failed translation.  */
++-void
++-_nl_log_untranslated (const char *logfilename, const char *domainname,
++-		      const char *msgid1, const char *msgid2, int plural)
++-{
++-  __libc_lock_lock (lock);
++-  _nl_log_untranslated_locked (logfilename, domainname, msgid1, msgid2, plural);
++-  __libc_lock_unlock (lock);
++-}
 +--- a/intl/ngettext.c
 ++++ /dev/null
 +@@ -1,65 +0,0 @@
@@ -9219,7 +12083,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -9287,7 +12151,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#define OS2_AWARE
@@ -9389,7 +12253,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-/* When included from os2compat.h we need all the original definitions */
@@ -9421,9 +12285,9 @@ index 0000000000..a06dbad1ea
 +-#define LC_MESSAGES_COMPAT (-1)
 +--- a/intl/osdep.c
 ++++ /dev/null
-+@@ -1,24 +0,0 @@
++@@ -1,26 +0,0 @@
 +-/* OS dependent parts of libintl.
-+-   Copyright (C) 2001-2002 Free Software Foundation, Inc.
++-   Copyright (C) 2001-2002, 2006 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -9437,10 +12301,12 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
-+-#if defined __EMX__
++-#if defined __CYGWIN__
++-# include "intl-exports.c"
++-#elif defined __EMX__
 +-# include "os2compat.c"
 +-#else
 +-/* Avoid AIX compiler warning.  */
@@ -9448,9 +12314,9 @@ index 0000000000..a06dbad1ea
 +-#endif
 +--- a/intl/plural-exp.c
 ++++ /dev/null
-+@@ -1,154 +0,0 @@
++@@ -1,155 +0,0 @@
 +-/* Expression parsing for plural form selection.
-+-   Copyright (C) 2000-2001, 2003 Free Software Foundation, Inc.
++-   Copyright (C) 2000-2001, 2003, 2005-2007 Free Software Foundation, Inc.
 +-   Written by Ulrich Drepper <drepper@cygnus.com>, 2000.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -9465,7 +12331,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -9478,7 +12344,7 @@ index 0000000000..a06dbad1ea
 +-
 +-#include "plural-exp.h"
 +-
-+-#if (defined __GNUC__ && !defined __APPLE_CC__) \
++-#if (defined __GNUC__ && !(__APPLE_CC__ > 1) && !defined __cplusplus) \
 +-    || (defined __STDC_VERSION__ && __STDC_VERSION__ >= 199901L)
 +-
 +-/* These structs are the constant expression for the germanic plural
@@ -9547,7 +12413,8 @@ index 0000000000..a06dbad1ea
 +-
 +-void
 +-internal_function
-+-EXTRACT_PLURAL_EXPRESSION (const char *nullentry, struct expression **pluralp,
++-EXTRACT_PLURAL_EXPRESSION (const char *nullentry,
++-			   const struct expression **pluralp,
 +-			   unsigned long int *npluralsp)
 +-{
 +-  if (nullentry != NULL)
@@ -9605,9 +12472,9 @@ index 0000000000..a06dbad1ea
 +-}
 +--- a/intl/plural-exp.h
 ++++ /dev/null
-+@@ -1,118 +0,0 @@
++@@ -1,129 +0,0 @@
 +-/* Expression parsing and evaluation for plural form selection.
-+-   Copyright (C) 2000-2003 Free Software Foundation, Inc.
++-   Copyright (C) 2000-2003, 2005-2007 Free Software Foundation, Inc.
 +-   Written by Ulrich Drepper <drepper@cygnus.com>, 2000.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -9622,7 +12489,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _PLURAL_EXP_H
@@ -9636,36 +12503,42 @@ index 0000000000..a06dbad1ea
 +-# define attribute_hidden
 +-#endif
 +-
++-#ifdef __cplusplus
++-extern "C" {
++-#endif
++-
++-
++-enum expression_operator
++-{
++-  /* Without arguments:  */
++-  var,				/* The variable "n".  */
++-  num,				/* Decimal number.  */
++-  /* Unary operators:  */
++-  lnot,				/* Logical NOT.  */
++-  /* Binary operators:  */
++-  mult,				/* Multiplication.  */
++-  divide,			/* Division.  */
++-  module,			/* Modulo operation.  */
++-  plus,				/* Addition.  */
++-  minus,			/* Subtraction.  */
++-  less_than,			/* Comparison.  */
++-  greater_than,			/* Comparison.  */
++-  less_or_equal,		/* Comparison.  */
++-  greater_or_equal,		/* Comparison.  */
++-  equal,			/* Comparison for equality.  */
++-  not_equal,			/* Comparison for inequality.  */
++-  land,				/* Logical AND.  */
++-  lor,				/* Logical OR.  */
++-  /* Ternary operators:  */
++-  qmop				/* Question mark operator.  */
++-};
 +-
 +-/* This is the representation of the expressions to determine the
 +-   plural form.  */
 +-struct expression
 +-{
 +-  int nargs;			/* Number of arguments.  */
-+-  enum operator
-+-  {
-+-    /* Without arguments:  */
-+-    var,			/* The variable "n".  */
-+-    num,			/* Decimal number.  */
-+-    /* Unary operators:  */
-+-    lnot,			/* Logical NOT.  */
-+-    /* Binary operators:  */
-+-    mult,			/* Multiplication.  */
-+-    divide,			/* Division.  */
-+-    module,			/* Modulo operation.  */
-+-    plus,			/* Addition.  */
-+-    minus,			/* Subtraction.  */
-+-    less_than,			/* Comparison.  */
-+-    greater_than,		/* Comparison.  */
-+-    less_or_equal,		/* Comparison.  */
-+-    greater_or_equal,		/* Comparison.  */
-+-    equal,			/* Comparison for equality.  */
-+-    not_equal,			/* Comparison for inequality.  */
-+-    land,			/* Logical AND.  */
-+-    lor,			/* Logical OR.  */
-+-    /* Ternary operators:  */
-+-    qmop			/* Question mark operator.  */
-+-  } operation;
++-  enum expression_operator operation;
 +-  union
 +-  {
 +-    unsigned long int num;	/* Number value for `num'.  */
@@ -9714,41 +12587,122 @@ index 0000000000..a06dbad1ea
 +-extern int PLURAL_PARSE (void *arg);
 +-extern struct expression GERMANIC_PLURAL attribute_hidden;
 +-extern void EXTRACT_PLURAL_EXPRESSION (const char *nullentry,
-+-				       struct expression **pluralp,
++-				       const struct expression **pluralp,
 +-				       unsigned long int *npluralsp)
 +-     internal_function;
 +-
-+-#if !defined (_LIBC) && !defined (IN_LIBINTL)
-+-extern unsigned long int plural_eval (struct expression *pexp,
++-#if !defined (_LIBC) && !defined (IN_LIBINTL) && !defined (IN_LIBGLOCALE)
++-extern unsigned long int plural_eval (const struct expression *pexp,
 +-				      unsigned long int n);
++-#endif
++-
++-
++-#ifdef __cplusplus
++-}
 +-#endif
 +-
 +-#endif /* _PLURAL_EXP_H */
 +--- a/intl/plural.c
 ++++ /dev/null
-+@@ -1,1490 +0,0 @@
-+-/* A Bison parser, made from plural.y
-+-   by GNU bison 1.35.  */
++@@ -1,1945 +0,0 @@
++-/* A Bison parser, made by GNU Bison 2.3.  */
 +-
-+-#define YYBISON 1  /* Identify Bison output.  */
++-/* Skeleton implementation for Bison's Yacc-like parsers in C
 +-
++-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
++-   Free Software Foundation, Inc.
++-
++-   This program is free software; you can redistribute it and/or modify
++-   it under the terms of the GNU General Public License as published by
++-   the Free Software Foundation; either version 2, or (at your option)
++-   any later version.
++-
++-   This program is distributed in the hope that it will be useful,
++-   but WITHOUT ANY WARRANTY; without even the implied warranty of
++-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++-   GNU General Public License for more details.
++-
++-   You should have received a copy of the GNU General Public License
++-   along with this program; if not, write to the Free Software
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
++-   Boston, MA 02110-1301, USA.  */
++-
++-/* As a special exception, you may create a larger work that contains
++-   part or all of the Bison parser skeleton and distribute that work
++-   under terms of your choice, so long as that work isn't itself a
++-   parser generator using the skeleton or a modified version thereof
++-   as a parser skeleton.  Alternatively, if you modify or redistribute
++-   the parser skeleton itself, you may (at your option) remove this
++-   special exception, which will cause the skeleton and the resulting
++-   Bison output files to be licensed under the GNU General Public
++-   License without this special exception.
++-
++-   This special exception was added by the Free Software Foundation in
++-   version 2.2 of Bison.  */
++-
++-/* C LALR(1) parser skeleton written by Richard Stallman, by
++-   simplifying the original so-called "semantic" parser.  */
++-
++-/* All symbols defined below should begin with yy or YY, to avoid
++-   infringing on user name space.  This should be done even for local
++-   variables, as they might otherwise be expanded by user macros.
++-   There are some unavoidable exceptions within include files to
++-   define necessary library symbols; they are noted "INFRINGES ON
++-   USER NAME SPACE" below.  */
++-
++-/* Identify Bison output.  */
++-#define YYBISON 1
++-
++-/* Bison version.  */
++-#define YYBISON_VERSION "2.3"
++-
++-/* Skeleton name.  */
++-#define YYSKELETON_NAME "yacc.c"
++-
++-/* Pure parsers.  */
++-#define YYPURE 1
++-
++-/* Using locations.  */
++-#define YYLSP_NEEDED 0
++-
++-/* Substitute the variable and function names.  */
 +-#define yyparse __gettextparse
-+-#define yylex __gettextlex
++-#define yylex   __gettextlex
 +-#define yyerror __gettexterror
-+-#define yylval __gettextlval
-+-#define yychar __gettextchar
++-#define yylval  __gettextlval
++-#define yychar  __gettextchar
 +-#define yydebug __gettextdebug
 +-#define yynerrs __gettextnerrs
-+-# define	EQUOP2	257
-+-# define	CMPOP2	258
-+-# define	ADDOP2	259
-+-# define	MULOP2	260
-+-# define	NUMBER	261
 +-
++-
++-/* Tokens.  */
++-#ifndef YYTOKENTYPE
++-# define YYTOKENTYPE
++-   /* Put the tokens into the symbol table, so that GDB and other debuggers
++-      know about them.  */
++-   enum yytokentype {
++-     EQUOP2 = 258,
++-     CMPOP2 = 259,
++-     ADDOP2 = 260,
++-     MULOP2 = 261,
++-     NUMBER = 262
++-   };
++-#endif
++-/* Tokens.  */
++-#define EQUOP2 258
++-#define CMPOP2 259
++-#define ADDOP2 260
++-#define MULOP2 261
++-#define NUMBER 262
++-
++-
++-
++-
++-/* Copy the first part of user declarations.  */
 +-#line 1 "plural.y"
 +-
 +-/* Expression parsing for plural form selection.
-+-   Copyright (C) 2000-2001, 2003 Free Software Foundation, Inc.
++-   Copyright (C) 2000-2001, 2003, 2005-2006 Free Software Foundation, Inc.
 +-   Written by Ulrich Drepper <drepper@cygnus.com>, 2000.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -9763,13 +12717,14 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
-+-/* The bison generated parser uses alloca.  AIX 3 forces us to put this
-+-   declaration at the beginning of the file.  The declaration in bison's
-+-   skeleton file comes too late.  This must come before <config.h>
-+-   because <config.h> may include arbitrary system headers.  */
++-/* For bison < 2.0, the bison generated parser uses alloca.  AIX 3 forces us
++-   to put this declaration at the beginning of the file.  The declaration in
++-   bison's skeleton file comes too late.  This must come before <config.h>
++-   because <config.h> may include arbitrary system headers.
++-   This can go away once the AM_INTL_SUBDIR macro requires bison >= 2.0.  */
 +-#if defined _AIX && !defined __GNUC__
 +- #pragma alloca
 +-#endif
@@ -9780,6 +12735,7 @@ index 0000000000..a06dbad1ea
 +-
 +-#include <stddef.h>
 +-#include <stdlib.h>
++-#include <string.h>
 +-#include "plural-exp.h"
 +-
 +-/* The main function generated by the parser is called __gettextparse,
@@ -9791,17 +12747,45 @@ index 0000000000..a06dbad1ea
 +-#define YYLEX_PARAM	&((struct parse_args *) arg)->cp
 +-#define YYPARSE_PARAM	arg
 +-
-+-#line 49 "plural.y"
-+-#ifndef YYSTYPE
-+-typedef union {
++-
++-/* Enabling traces.  */
++-#ifndef YYDEBUG
++-# define YYDEBUG 0
++-#endif
++-
++-/* Enabling verbose error messages.  */
++-#ifdef YYERROR_VERBOSE
++-# undef YYERROR_VERBOSE
++-# define YYERROR_VERBOSE 1
++-#else
++-# define YYERROR_VERBOSE 0
++-#endif
++-
++-/* Enabling the token table.  */
++-#ifndef YYTOKEN_TABLE
++-# define YYTOKEN_TABLE 0
++-#endif
++-
++-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
++-typedef union YYSTYPE
++-#line 51 "plural.y"
++-{
 +-  unsigned long int num;
-+-  enum operator op;
++-  enum expression_operator op;
 +-  struct expression *exp;
-+-} yystype;
-+-# define YYSTYPE yystype
++-}
++-/* Line 187 of yacc.c.  */
++-#line 172 "plural.c"
++-	YYSTYPE;
++-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
++-# define YYSTYPE_IS_DECLARED 1
 +-# define YYSTYPE_IS_TRIVIAL 1
 +-#endif
-+-#line 55 "plural.y"
++-
++-
++-
++-/* Copy the second part of user declarations.  */
++-#line 57 "plural.y"
 +-
 +-/* Prototypes for local functions.  */
 +-static int yylex (YYSTYPE *lval, const char **pexp);
@@ -9810,7 +12794,8 @@ index 0000000000..a06dbad1ea
 +-/* Allocation of expressions.  */
 +-
 +-static struct expression *
-+-new_exp (int nargs, enum operator op, struct expression * const *args)
++-new_exp (int nargs, enum expression_operator op,
++-	 struct expression * const *args)
 +-{
 +-  int i;
 +-  struct expression *newp;
@@ -9839,13 +12824,13 @@ index 0000000000..a06dbad1ea
 +-}
 +-
 +-static inline struct expression *
-+-new_exp_0 (enum operator op)
++-new_exp_0 (enum expression_operator op)
 +-{
 +-  return new_exp (0, op, NULL);
 +-}
 +-
 +-static inline struct expression *
-+-new_exp_1 (enum operator op, struct expression *right)
++-new_exp_1 (enum expression_operator op, struct expression *right)
 +-{
 +-  struct expression *args[1];
 +-
@@ -9854,7 +12839,8 @@ index 0000000000..a06dbad1ea
 +-}
 +-
 +-static struct expression *
-+-new_exp_2 (enum operator op, struct expression *left, struct expression *right)
++-new_exp_2 (enum expression_operator op, struct expression *left,
++-	   struct expression *right)
 +-{
 +-  struct expression *args[2];
 +-
@@ -9864,7 +12850,7 @@ index 0000000000..a06dbad1ea
 +-}
 +-
 +-static inline struct expression *
-+-new_exp_3 (enum operator op, struct expression *bexp,
++-new_exp_3 (enum expression_operator op, struct expression *bexp,
 +-	   struct expression *tbranch, struct expression *fbranch)
 +-{
 +-  struct expression *args[3];
@@ -9875,21 +12861,244 @@ index 0000000000..a06dbad1ea
 +-  return new_exp (3, op, args);
 +-}
 +-
-+-#ifndef YYDEBUG
-+-# define YYDEBUG 0
++-
++-
++-/* Line 216 of yacc.c.  */
++-#line 261 "plural.c"
++-
++-#ifdef short
++-# undef short
 +-#endif
 +-
++-#ifdef YYTYPE_UINT8
++-typedef YYTYPE_UINT8 yytype_uint8;
++-#else
++-typedef unsigned char yytype_uint8;
++-#endif
++-
++-#ifdef YYTYPE_INT8
++-typedef YYTYPE_INT8 yytype_int8;
++-#elif (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-typedef signed char yytype_int8;
++-#else
++-typedef short int yytype_int8;
++-#endif
++-
++-#ifdef YYTYPE_UINT16
++-typedef YYTYPE_UINT16 yytype_uint16;
++-#else
++-typedef unsigned short int yytype_uint16;
++-#endif
++-
++-#ifdef YYTYPE_INT16
++-typedef YYTYPE_INT16 yytype_int16;
++-#else
++-typedef short int yytype_int16;
++-#endif
++-
++-#ifndef YYSIZE_T
++-# ifdef __SIZE_TYPE__
++-#  define YYSIZE_T __SIZE_TYPE__
++-# elif defined size_t
++-#  define YYSIZE_T size_t
++-# elif ! defined YYSIZE_T && (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-#  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
++-#  define YYSIZE_T size_t
++-# else
++-#  define YYSIZE_T unsigned int
++-# endif
++-#endif
++-
++-#define YYSIZE_MAXIMUM ((YYSIZE_T) -1)
++-
++-#ifndef YY_
++-# if YYENABLE_NLS
++-#  if ENABLE_NLS
++-#   include <libintl.h> /* INFRINGES ON USER NAME SPACE */
++-#   define YY_(msgid) dgettext ("bison-runtime", msgid)
++-#  endif
++-# endif
++-# ifndef YY_
++-#  define YY_(msgid) msgid
++-# endif
++-#endif
++-
++-/* Suppress unused-variable warnings by "using" E.  */
++-#if ! defined lint || defined __GNUC__
++-# define YYUSE(e) ((void) (e))
++-#else
++-# define YYUSE(e) /* empty */
++-#endif
++-
++-/* Identity function, used to suppress warnings about constant conditions.  */
++-#ifndef lint
++-# define YYID(n) (n)
++-#else
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-static int
++-YYID (int i)
++-#else
++-static int
++-YYID (i)
++-    int i;
++-#endif
++-{
++-  return i;
++-}
++-#endif
++-
++-#if ! defined yyoverflow || YYERROR_VERBOSE
++-
++-/* The parser invokes alloca or malloc; define the necessary symbols.  */
++-
++-# ifdef YYSTACK_USE_ALLOCA
++-#  if YYSTACK_USE_ALLOCA
++-#   ifdef __GNUC__
++-#    define YYSTACK_ALLOC __builtin_alloca
++-#   elif defined __BUILTIN_VA_ARG_INCR
++-#    include <alloca.h> /* INFRINGES ON USER NAME SPACE */
++-#   elif defined _AIX
++-#    define YYSTACK_ALLOC __alloca
++-#   elif defined _MSC_VER
++-#    include <malloc.h> /* INFRINGES ON USER NAME SPACE */
++-#    define alloca _alloca
++-#   else
++-#    define YYSTACK_ALLOC alloca
++-#    if ! defined _ALLOCA_H && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-#     include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
++-#     ifndef _STDLIB_H
++-#      define _STDLIB_H 1
++-#     endif
++-#    endif
++-#   endif
++-#  endif
++-# endif
++-
++-# ifdef YYSTACK_ALLOC
++-   /* Pacify GCC's `empty if-body' warning.  */
++-#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (YYID (0))
++-#  ifndef YYSTACK_ALLOC_MAXIMUM
++-    /* The OS might guarantee only one guard page at the bottom of the stack,
++-       and a page size can be as small as 4096 bytes.  So we cannot safely
++-       invoke alloca (N) if N exceeds 4096.  Use a slightly smaller number
++-       to allow for a few compiler-allocated temporary stack slots.  */
++-#   define YYSTACK_ALLOC_MAXIMUM 4032 /* reasonable circa 2006 */
++-#  endif
++-# else
++-#  define YYSTACK_ALLOC YYMALLOC
++-#  define YYSTACK_FREE YYFREE
++-#  ifndef YYSTACK_ALLOC_MAXIMUM
++-#   define YYSTACK_ALLOC_MAXIMUM YYSIZE_MAXIMUM
++-#  endif
++-#  if (defined __cplusplus && ! defined _STDLIB_H \
++-       && ! ((defined YYMALLOC || defined malloc) \
++-	     && (defined YYFREE || defined free)))
++-#   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
++-#   ifndef _STDLIB_H
++-#    define _STDLIB_H 1
++-#   endif
++-#  endif
++-#  ifndef YYMALLOC
++-#   define YYMALLOC malloc
++-#   if ! defined malloc && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-void *malloc (YYSIZE_T); /* INFRINGES ON USER NAME SPACE */
++-#   endif
++-#  endif
++-#  ifndef YYFREE
++-#   define YYFREE free
++-#   if ! defined free && ! defined _STDLIB_H && (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-void free (void *); /* INFRINGES ON USER NAME SPACE */
++-#   endif
++-#  endif
++-# endif
++-#endif /* ! defined yyoverflow || YYERROR_VERBOSE */
 +-
 +-
-+-#define	YYFINAL		27
-+-#define	YYFLAG		-32768
-+-#define	YYNTBASE	16
++-#if (! defined yyoverflow \
++-     && (! defined __cplusplus \
++-	 || (defined YYSTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
 +-
-+-/* YYTRANSLATE(YYLEX) -- Bison token number corresponding to YYLEX. */
-+-#define YYTRANSLATE(x) ((unsigned)(x) <= 261 ? yytranslate[x] : 18)
++-/* A type that is properly aligned for any stack member.  */
++-union yyalloc
++-{
++-  yytype_int16 yyss;
++-  YYSTYPE yyvs;
++-  };
 +-
-+-/* YYTRANSLATE[YYLEX] -- Bison token number corresponding to YYLEX. */
-+-static const char yytranslate[] =
++-/* The size of the maximum gap between one aligned stack and the next.  */
++-# define YYSTACK_GAP_MAXIMUM (sizeof (union yyalloc) - 1)
++-
++-/* The size of an array large to enough to hold all stacks, each with
++-   N elements.  */
++-# define YYSTACK_BYTES(N) \
++-     ((N) * (sizeof (yytype_int16) + sizeof (YYSTYPE)) \
++-      + YYSTACK_GAP_MAXIMUM)
++-
++-/* Copy COUNT objects from FROM to TO.  The source and destination do
++-   not overlap.  */
++-# ifndef YYCOPY
++-#  if defined __GNUC__ && 1 < __GNUC__
++-#   define YYCOPY(To, From, Count) \
++-      __builtin_memcpy (To, From, (Count) * sizeof (*(From)))
++-#  else
++-#   define YYCOPY(To, From, Count)		\
++-      do					\
++-	{					\
++-	  YYSIZE_T yyi;				\
++-	  for (yyi = 0; yyi < (Count); yyi++)	\
++-	    (To)[yyi] = (From)[yyi];		\
++-	}					\
++-      while (YYID (0))
++-#  endif
++-# endif
++-
++-/* Relocate STACK from its old location to the new one.  The
++-   local variables YYSIZE and YYSTACKSIZE give the old and new number of
++-   elements in the stack, and YYPTR gives the new location of the
++-   stack.  Advance YYPTR to a properly aligned location for the next
++-   stack.  */
++-# define YYSTACK_RELOCATE(Stack)					\
++-    do									\
++-      {									\
++-	YYSIZE_T yynewbytes;						\
++-	YYCOPY (&yyptr->Stack, Stack, yysize);				\
++-	Stack = &yyptr->Stack;						\
++-	yynewbytes = yystacksize * sizeof (*Stack) + YYSTACK_GAP_MAXIMUM; \
++-	yyptr += yynewbytes / sizeof (*yyptr);				\
++-      }									\
++-    while (YYID (0))
++-
++-#endif
++-
++-/* YYFINAL -- State number of the termination state.  */
++-#define YYFINAL  9
++-/* YYLAST -- Last index in YYTABLE.  */
++-#define YYLAST   54
++-
++-/* YYNTOKENS -- Number of terminals.  */
++-#define YYNTOKENS  16
++-/* YYNNTS -- Number of nonterminals.  */
++-#define YYNNTS  3
++-/* YYNRULES -- Number of rules.  */
++-#define YYNRULES  13
++-/* YYNRULES -- Number of states.  */
++-#define YYNSTATES  27
++-
++-/* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
++-#define YYUNDEFTOK  2
++-#define YYMAXUTOK   262
++-
++-#define YYTRANSLATE(YYX)						\
++-  ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
++-
++-/* YYTRANSLATE[YYLEX] -- Bison symbol number corresponding to YYLEX.  */
++-static const yytype_uint8 yytranslate[] =
 +-{
 +-       0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
 +-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -9916,335 +13125,227 @@ index 0000000000..a06dbad1ea
 +-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
 +-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
 +-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-+-       2,     2,     2,     2,     2,     2,     1,     6,     7,     8,
-+-       9,    11
++-       2,     2,     2,     2,     2,     2,     1,     2,     6,     7,
++-       8,     9,    11
 +-};
 +-
 +-#if YYDEBUG
-+-static const short yyprhs[] =
++-/* YYPRHS[YYN] -- Index of the first RHS symbol of rule number YYN in
++-   YYRHS.  */
++-static const yytype_uint8 yyprhs[] =
 +-{
-+-       0,     0,     2,     8,    12,    16,    20,    24,    28,    32,
-+-      35,    37,    39
-+-};
-+-static const short yyrhs[] =
-+-{
-+-      17,     0,    17,     3,    17,    12,    17,     0,    17,     4,
-+-      17,     0,    17,     5,    17,     0,    17,     6,    17,     0,
-+-      17,     7,    17,     0,    17,     8,    17,     0,    17,     9,
-+-      17,     0,    10,    17,     0,    13,     0,    11,     0,    14,
-+-      17,    15,     0
++-       0,     0,     3,     5,    11,    15,    19,    23,    27,    31,
++-      35,    38,    40,    42
 +-};
 +-
++-/* YYRHS -- A `-1'-separated list of the rules' RHS.  */
++-static const yytype_int8 yyrhs[] =
++-{
++-      17,     0,    -1,    18,    -1,    18,     3,    18,    12,    18,
++-      -1,    18,     4,    18,    -1,    18,     5,    18,    -1,    18,
++-       6,    18,    -1,    18,     7,    18,    -1,    18,     8,    18,
++-      -1,    18,     9,    18,    -1,    10,    18,    -1,    13,    -1,
++-      11,    -1,    14,    18,    15,    -1
++-};
++-
++-/* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
++-static const yytype_uint8 yyrline[] =
++-{
++-       0,   154,   154,   162,   166,   170,   174,   178,   182,   186,
++-     190,   194,   198,   203
++-};
 +-#endif
 +-
-+-#if YYDEBUG
-+-/* YYRLINE[YYN] -- source line where rule number YYN was defined. */
-+-static const short yyrline[] =
-+-{
-+-       0,   150,   158,   162,   166,   170,   174,   178,   182,   186,
-+-     190,   194,   199
-+-};
-+-#endif
-+-
-+-
-+-#if (YYDEBUG) || defined YYERROR_VERBOSE
-+-
-+-/* YYTNAME[TOKEN_NUM] -- String name of the token TOKEN_NUM. */
++-#if YYDEBUG || YYERROR_VERBOSE || YYTOKEN_TABLE
++-/* YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
++-   First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 +-static const char *const yytname[] =
 +-{
-+-  "$", "error", "$undefined.", "'?'", "'|'", "'&'", "EQUOP2", "CMPOP2", 
-+-  "ADDOP2", "MULOP2", "'!'", "NUMBER", "':'", "'n'", "'('", "')'", 
-+-  "start", "exp", 0
++-  "$end", "error", "$undefined", "'?'", "'|'", "'&'", "EQUOP2", "CMPOP2",
++-  "ADDOP2", "MULOP2", "'!'", "NUMBER", "':'", "'n'", "'('", "')'",
++-  "$accept", "start", "exp", 0
 +-};
 +-#endif
 +-
-+-/* YYR1[YYN] -- Symbol number of symbol that rule YYN derives. */
-+-static const short yyr1[] =
++-# ifdef YYPRINT
++-/* YYTOKNUM[YYLEX-NUM] -- Internal token number corresponding to
++-   token YYLEX-NUM.  */
++-static const yytype_uint16 yytoknum[] =
 +-{
-+-       0,    16,    17,    17,    17,    17,    17,    17,    17,    17,
-+-      17,    17,    17
++-       0,   256,   257,    63,   124,    38,   258,   259,   260,   261,
++-      33,   262,    58,   110,    40,    41
 +-};
-+-
-+-/* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN. */
-+-static const short yyr2[] =
-+-{
-+-       0,     1,     5,     3,     3,     3,     3,     3,     3,     2,
-+-       1,     1,     3
-+-};
-+-
-+-/* YYDEFACT[S] -- default rule to reduce with in state S when YYTABLE
-+-   doesn't specify something else to do.  Zero means the default is an
-+-   error. */
-+-static const short yydefact[] =
-+-{
-+-       0,     0,    11,    10,     0,     1,     9,     0,     0,     0,
-+-       0,     0,     0,     0,     0,    12,     0,     3,     4,     5,
-+-       6,     7,     8,     0,     2,     0,     0,     0
-+-};
-+-
-+-static const short yydefgoto[] =
-+-{
-+-      25,     5
-+-};
-+-
-+-static const short yypact[] =
-+-{
-+-      -9,    -9,-32768,-32768,    -9,    34,-32768,    11,    -9,    -9,
-+-      -9,    -9,    -9,    -9,    -9,-32768,    24,    39,    43,    16,
-+-      26,    -3,-32768,    -9,    34,    21,    53,-32768
-+-};
-+-
-+-static const short yypgoto[] =
-+-{
-+-  -32768,    -1
-+-};
-+-
-+-
-+-#define	YYLAST		53
-+-
-+-
-+-static const short yytable[] =
-+-{
-+-       6,     1,     2,     7,     3,     4,    14,    16,    17,    18,
-+-      19,    20,    21,    22,     8,     9,    10,    11,    12,    13,
-+-      14,    26,    24,    12,    13,    14,    15,     8,     9,    10,
-+-      11,    12,    13,    14,    13,    14,    23,     8,     9,    10,
-+-      11,    12,    13,    14,    10,    11,    12,    13,    14,    11,
-+-      12,    13,    14,    27
-+-};
-+-
-+-static const short yycheck[] =
-+-{
-+-       1,    10,    11,     4,    13,    14,     9,     8,     9,    10,
-+-      11,    12,    13,    14,     3,     4,     5,     6,     7,     8,
-+-       9,     0,    23,     7,     8,     9,    15,     3,     4,     5,
-+-       6,     7,     8,     9,     8,     9,    12,     3,     4,     5,
-+-       6,     7,     8,     9,     5,     6,     7,     8,     9,     6,
-+-       7,     8,     9,     0
-+-};
-+-#define YYPURE 1
-+-
-+-/* -*-C-*-  Note some compilers choke on comments on `#line' lines.  */
-+-#line 3 "/usr/local/share/bison/bison.simple"
-+-
-+-/* Skeleton output parser for bison,
-+-
-+-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002 Free Software
-+-   Foundation, Inc.
-+-
-+-   This program is free software; you can redistribute it and/or modify
-+-   it under the terms of the GNU General Public License as published by
-+-   the Free Software Foundation; either version 2, or (at your option)
-+-   any later version.
-+-
-+-   This program is distributed in the hope that it will be useful,
-+-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-+-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+-   GNU General Public License for more details.
-+-
-+-   You should have received a copy of the GNU General Public License
-+-   along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330,
-+-   Boston, MA 02111-1307, USA.  */
-+-
-+-/* As a special exception, when this file is copied by Bison into a
-+-   Bison output file, you may use that output file without restriction.
-+-   This special exception was added by the Free Software Foundation
-+-   in version 1.24 of Bison.  */
-+-
-+-/* This is the parser code that is written into each bison parser when
-+-   the %semantic_parser declaration is not specified in the grammar.
-+-   It was written by Richard Stallman by simplifying the hairy parser
-+-   used when %semantic_parser is specified.  */
-+-
-+-/* All symbols defined below should begin with yy or YY, to avoid
-+-   infringing on user name space.  This should be done even for local
-+-   variables, as they might otherwise be expanded by user macros.
-+-   There are some unavoidable exceptions within include files to
-+-   define necessary library symbols; they are noted "INFRINGES ON
-+-   USER NAME SPACE" below.  */
-+-
-+-#if ! defined (yyoverflow) || defined (YYERROR_VERBOSE)
-+-
-+-/* The parser invokes alloca or malloc; define the necessary symbols.  */
-+-
-+-# if YYSTACK_USE_ALLOCA
-+-#  define YYSTACK_ALLOC alloca
-+-# else
-+-#  ifndef YYSTACK_USE_ALLOCA
-+-#   if defined (alloca) || defined (_ALLOCA_H)
-+-#    define YYSTACK_ALLOC alloca
-+-#   else
-+-#    ifdef __GNUC__
-+-#     define YYSTACK_ALLOC __builtin_alloca
-+-#    endif
-+-#   endif
-+-#  endif
 +-# endif
 +-
-+-# ifdef YYSTACK_ALLOC
-+-   /* Pacify GCC's `empty if-body' warning. */
-+-#  define YYSTACK_FREE(Ptr) do { /* empty */; } while (0)
-+-# else
-+-#  if defined (__STDC__) || defined (__cplusplus)
-+-#   include <stdlib.h> /* INFRINGES ON USER NAME SPACE */
-+-#   define YYSIZE_T size_t
-+-#  endif
-+-#  define YYSTACK_ALLOC malloc
-+-#  define YYSTACK_FREE free
-+-# endif
-+-#endif /* ! defined (yyoverflow) || defined (YYERROR_VERBOSE) */
-+-
-+-
-+-#if (! defined (yyoverflow) \
-+-     && (! defined (__cplusplus) \
-+-	 || (YYLTYPE_IS_TRIVIAL && YYSTYPE_IS_TRIVIAL)))
-+-
-+-/* A type that is properly aligned for any stack member.  */
-+-union yyalloc
++-/* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
++-static const yytype_uint8 yyr1[] =
 +-{
-+-  short yyss;
-+-  YYSTYPE yyvs;
-+-# if YYLSP_NEEDED
-+-  YYLTYPE yyls;
-+-# endif
++-       0,    16,    17,    18,    18,    18,    18,    18,    18,    18,
++-      18,    18,    18,    18
 +-};
 +-
-+-/* The size of the maximum gap between one aligned stack and the next.  */
-+-# define YYSTACK_GAP_MAX (sizeof (union yyalloc) - 1)
++-/* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
++-static const yytype_uint8 yyr2[] =
++-{
++-       0,     2,     1,     5,     3,     3,     3,     3,     3,     3,
++-       2,     1,     1,     3
++-};
 +-
-+-/* The size of an array large to enough to hold all stacks, each with
-+-   N elements.  */
-+-# if YYLSP_NEEDED
-+-#  define YYSTACK_BYTES(N) \
-+-     ((N) * (sizeof (short) + sizeof (YYSTYPE) + sizeof (YYLTYPE))	\
-+-      + 2 * YYSTACK_GAP_MAX)
-+-# else
-+-#  define YYSTACK_BYTES(N) \
-+-     ((N) * (sizeof (short) + sizeof (YYSTYPE))				\
-+-      + YYSTACK_GAP_MAX)
-+-# endif
++-/* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
++-   STATE-NUM when YYTABLE doesn't specify something else to do.  Zero
++-   means the default is an error.  */
++-static const yytype_uint8 yydefact[] =
++-{
++-       0,     0,    12,    11,     0,     0,     2,    10,     0,     1,
++-       0,     0,     0,     0,     0,     0,     0,    13,     0,     4,
++-       5,     6,     7,     8,     9,     0,     3
++-};
 +-
-+-/* Copy COUNT objects from FROM to TO.  The source and destination do
-+-   not overlap.  */
-+-# ifndef YYCOPY
-+-#  if 1 < __GNUC__
-+-#   define YYCOPY(To, From, Count) \
-+-      __builtin_memcpy (To, From, (Count) * sizeof (*(From)))
-+-#  else
-+-#   define YYCOPY(To, From, Count)		\
-+-      do					\
-+-	{					\
-+-	  register YYSIZE_T yyi;		\
-+-	  for (yyi = 0; yyi < (Count); yyi++)	\
-+-	    (To)[yyi] = (From)[yyi];		\
-+-	}					\
-+-      while (0)
-+-#  endif
-+-# endif
++-/* YYDEFGOTO[NTERM-NUM].  */
++-static const yytype_int8 yydefgoto[] =
++-{
++-      -1,     5,     6
++-};
 +-
-+-/* Relocate STACK from its old location to the new one.  The
-+-   local variables YYSIZE and YYSTACKSIZE give the old and new number of
-+-   elements in the stack, and YYPTR gives the new location of the
-+-   stack.  Advance YYPTR to a properly aligned location for the next
-+-   stack.  */
-+-# define YYSTACK_RELOCATE(Stack)					\
-+-    do									\
-+-      {									\
-+-	YYSIZE_T yynewbytes;						\
-+-	YYCOPY (&yyptr->Stack, Stack, yysize);				\
-+-	Stack = &yyptr->Stack;						\
-+-	yynewbytes = yystacksize * sizeof (*Stack) + YYSTACK_GAP_MAX;	\
-+-	yyptr += yynewbytes / sizeof (*yyptr);				\
-+-      }									\
-+-    while (0)
++-/* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
++-   STATE-NUM.  */
++-#define YYPACT_NINF -10
++-static const yytype_int8 yypact[] =
++-{
++-      -9,    -9,   -10,   -10,    -9,     8,    36,   -10,    13,   -10,
++-      -9,    -9,    -9,    -9,    -9,    -9,    -9,   -10,    26,    41,
++-      45,    18,    -2,    14,   -10,    -9,    36
++-};
 +-
-+-#endif
++-/* YYPGOTO[NTERM-NUM].  */
++-static const yytype_int8 yypgoto[] =
++-{
++-     -10,   -10,    -1
++-};
 +-
++-/* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
++-   positive, shift that token.  If negative, reduce the rule which
++-   number is the opposite.  If zero, do what YYDEFACT says.
++-   If YYTABLE_NINF, syntax error.  */
++-#define YYTABLE_NINF -1
++-static const yytype_uint8 yytable[] =
++-{
++-       7,     1,     2,     8,     3,     4,    15,    16,     9,    18,
++-      19,    20,    21,    22,    23,    24,    10,    11,    12,    13,
++-      14,    15,    16,    16,    26,    14,    15,    16,    17,    10,
++-      11,    12,    13,    14,    15,    16,     0,     0,    25,    10,
++-      11,    12,    13,    14,    15,    16,    12,    13,    14,    15,
++-      16,    13,    14,    15,    16
++-};
 +-
-+-#if ! defined (YYSIZE_T) && defined (__SIZE_TYPE__)
-+-# define YYSIZE_T __SIZE_TYPE__
-+-#endif
-+-#if ! defined (YYSIZE_T) && defined (size_t)
-+-# define YYSIZE_T size_t
-+-#endif
-+-#if ! defined (YYSIZE_T)
-+-# if defined (__STDC__) || defined (__cplusplus)
-+-#  include <stddef.h> /* INFRINGES ON USER NAME SPACE */
-+-#  define YYSIZE_T size_t
-+-# endif
-+-#endif
-+-#if ! defined (YYSIZE_T)
-+-# define YYSIZE_T unsigned int
-+-#endif
++-static const yytype_int8 yycheck[] =
++-{
++-       1,    10,    11,     4,    13,    14,     8,     9,     0,    10,
++-      11,    12,    13,    14,    15,    16,     3,     4,     5,     6,
++-       7,     8,     9,     9,    25,     7,     8,     9,    15,     3,
++-       4,     5,     6,     7,     8,     9,    -1,    -1,    12,     3,
++-       4,     5,     6,     7,     8,     9,     5,     6,     7,     8,
++-       9,     6,     7,     8,     9
++-};
++-
++-/* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
++-   symbol of state STATE-NUM.  */
++-static const yytype_uint8 yystos[] =
++-{
++-       0,    10,    11,    13,    14,    17,    18,    18,    18,     0,
++-       3,     4,     5,     6,     7,     8,     9,    15,    18,    18,
++-      18,    18,    18,    18,    18,    12,    18
++-};
 +-
 +-#define yyerrok		(yyerrstatus = 0)
 +-#define yyclearin	(yychar = YYEMPTY)
-+-#define YYEMPTY		-2
++-#define YYEMPTY		(-2)
 +-#define YYEOF		0
++-
 +-#define YYACCEPT	goto yyacceptlab
-+-#define YYABORT 	goto yyabortlab
-+-#define YYERROR		goto yyerrlab1
++-#define YYABORT		goto yyabortlab
++-#define YYERROR		goto yyerrorlab
++-
++-
 +-/* Like YYERROR except do call yyerror.  This remains here temporarily
 +-   to ease the transition to the new meaning of YYERROR, for GCC.
 +-   Once GCC version 2 has supplanted version 1, this can go.  */
++-
 +-#define YYFAIL		goto yyerrlab
++-
 +-#define YYRECOVERING()  (!!yyerrstatus)
++-
 +-#define YYBACKUP(Token, Value)					\
 +-do								\
 +-  if (yychar == YYEMPTY && yylen == 1)				\
 +-    {								\
 +-      yychar = (Token);						\
 +-      yylval = (Value);						\
-+-      yychar1 = YYTRANSLATE (yychar);				\
-+-      YYPOPSTACK;						\
++-      yytoken = YYTRANSLATE (yychar);				\
++-      YYPOPSTACK (1);						\
 +-      goto yybackup;						\
 +-    }								\
 +-  else								\
-+-    { 								\
-+-      yyerror ("syntax error: cannot back up");			\
++-    {								\
++-      yyerror (YY_("syntax error: cannot back up")); \
 +-      YYERROR;							\
 +-    }								\
-+-while (0)
++-while (YYID (0))
++-
 +-
 +-#define YYTERROR	1
 +-#define YYERRCODE	256
 +-
 +-
-+-/* YYLLOC_DEFAULT -- Compute the default location (before the actions
-+-   are run).
++-/* YYLLOC_DEFAULT -- Set CURRENT to span from RHS[1] to RHS[N].
++-   If N is 0, then set CURRENT to the empty location which ends
++-   the previous symbol: RHS[0] (always defined).  */
 +-
-+-   When YYLLOC_DEFAULT is run, CURRENT is set the location of the
-+-   first token.  By default, to implement support for ranges, extend
-+-   its range to the last symbol.  */
-+-
++-#define YYRHSLOC(Rhs, K) ((Rhs)[K])
 +-#ifndef YYLLOC_DEFAULT
-+-# define YYLLOC_DEFAULT(Current, Rhs, N)       	\
-+-   Current.last_line   = Rhs[N].last_line;	\
-+-   Current.last_column = Rhs[N].last_column;
++-# define YYLLOC_DEFAULT(Current, Rhs, N)				\
++-    do									\
++-      if (YYID (N))                                                    \
++-	{								\
++-	  (Current).first_line   = YYRHSLOC (Rhs, 1).first_line;	\
++-	  (Current).first_column = YYRHSLOC (Rhs, 1).first_column;	\
++-	  (Current).last_line    = YYRHSLOC (Rhs, N).last_line;		\
++-	  (Current).last_column  = YYRHSLOC (Rhs, N).last_column;	\
++-	}								\
++-      else								\
++-	{								\
++-	  (Current).first_line   = (Current).last_line   =		\
++-	    YYRHSLOC (Rhs, 0).last_line;				\
++-	  (Current).first_column = (Current).last_column =		\
++-	    YYRHSLOC (Rhs, 0).last_column;				\
++-	}								\
++-    while (YYID (0))
++-#endif
++-
++-
++-/* YY_LOCATION_PRINT -- Print the location on the stream.
++-   This macro was not mandated originally: define only if we know
++-   we won't break user code: when these are the locations we know.  */
++-
++-#ifndef YY_LOCATION_PRINT
++-# if YYLTYPE_IS_TRIVIAL
++-#  define YY_LOCATION_PRINT(File, Loc)			\
++-     fprintf (File, "%d.%d-%d.%d",			\
++-	      (Loc).first_line, (Loc).first_column,	\
++-	      (Loc).last_line,  (Loc).last_column)
++-# else
++-#  define YY_LOCATION_PRINT(File, Loc) ((void) 0)
++-# endif
 +-#endif
 +-
 +-
 +-/* YYLEX -- calling `yylex' with the right arguments.  */
 +-
-+-#if YYPURE
-+-# if YYLSP_NEEDED
-+-#  ifdef YYLEX_PARAM
-+-#   define YYLEX		yylex (&yylval, &yylloc, YYLEX_PARAM)
-+-#  else
-+-#   define YYLEX		yylex (&yylval, &yylloc)
-+-#  endif
-+-# else /* !YYLSP_NEEDED */
-+-#  ifdef YYLEX_PARAM
-+-#   define YYLEX		yylex (&yylval, YYLEX_PARAM)
-+-#  else
-+-#   define YYLEX		yylex (&yylval)
-+-#  endif
-+-# endif /* !YYLSP_NEEDED */
-+-#else /* !YYPURE */
-+-# define YYLEX			yylex ()
-+-#endif /* !YYPURE */
-+-
++-#ifdef YYLEX_PARAM
++-# define YYLEX yylex (&yylval, YYLEX_PARAM)
++-#else
++-# define YYLEX yylex (&yylval)
++-#endif
 +-
 +-/* Enable debugging if requested.  */
 +-#if YYDEBUG
@@ -10258,13 +13359,154 @@ index 0000000000..a06dbad1ea
 +-do {						\
 +-  if (yydebug)					\
 +-    YYFPRINTF Args;				\
-+-} while (0)
++-} while (YYID (0))
++-
++-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)			  \
++-do {									  \
++-  if (yydebug)								  \
++-    {									  \
++-      YYFPRINTF (stderr, "%s ", Title);					  \
++-      yy_symbol_print (stderr,						  \
++-		  Type, Value); \
++-      YYFPRINTF (stderr, "\n");						  \
++-    }									  \
++-} while (YYID (0))
++-
++-
++-/*--------------------------------.
++-| Print this symbol on YYOUTPUT.  |
++-`--------------------------------*/
++-
++-/*ARGSUSED*/
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-static void
++-yy_symbol_value_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
++-#else
++-static void
++-yy_symbol_value_print (yyoutput, yytype, yyvaluep)
++-    FILE *yyoutput;
++-    int yytype;
++-    YYSTYPE const * const yyvaluep;
++-#endif
++-{
++-  if (!yyvaluep)
++-    return;
++-# ifdef YYPRINT
++-  if (yytype < YYNTOKENS)
++-    YYPRINT (yyoutput, yytoknum[yytype], *yyvaluep);
++-# else
++-  YYUSE (yyoutput);
++-# endif
++-  switch (yytype)
++-    {
++-      default:
++-	break;
++-    }
++-}
++-
++-
++-/*--------------------------------.
++-| Print this symbol on YYOUTPUT.  |
++-`--------------------------------*/
++-
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-static void
++-yy_symbol_print (FILE *yyoutput, int yytype, YYSTYPE const * const yyvaluep)
++-#else
++-static void
++-yy_symbol_print (yyoutput, yytype, yyvaluep)
++-    FILE *yyoutput;
++-    int yytype;
++-    YYSTYPE const * const yyvaluep;
++-#endif
++-{
++-  if (yytype < YYNTOKENS)
++-    YYFPRINTF (yyoutput, "token %s (", yytname[yytype]);
++-  else
++-    YYFPRINTF (yyoutput, "nterm %s (", yytname[yytype]);
++-
++-  yy_symbol_value_print (yyoutput, yytype, yyvaluep);
++-  YYFPRINTF (yyoutput, ")");
++-}
++-
++-/*------------------------------------------------------------------.
++-| yy_stack_print -- Print the state stack from its BOTTOM up to its |
++-| TOP (included).                                                   |
++-`------------------------------------------------------------------*/
++-
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-static void
++-yy_stack_print (yytype_int16 *bottom, yytype_int16 *top)
++-#else
++-static void
++-yy_stack_print (bottom, top)
++-    yytype_int16 *bottom;
++-    yytype_int16 *top;
++-#endif
++-{
++-  YYFPRINTF (stderr, "Stack now");
++-  for (; bottom <= top; ++bottom)
++-    YYFPRINTF (stderr, " %d", *bottom);
++-  YYFPRINTF (stderr, "\n");
++-}
++-
++-# define YY_STACK_PRINT(Bottom, Top)				\
++-do {								\
++-  if (yydebug)							\
++-    yy_stack_print ((Bottom), (Top));				\
++-} while (YYID (0))
++-
++-
++-/*------------------------------------------------.
++-| Report that the YYRULE is going to be reduced.  |
++-`------------------------------------------------*/
++-
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-static void
++-yy_reduce_print (YYSTYPE *yyvsp, int yyrule)
++-#else
++-static void
++-yy_reduce_print (yyvsp, yyrule)
++-    YYSTYPE *yyvsp;
++-    int yyrule;
++-#endif
++-{
++-  int yynrhs = yyr2[yyrule];
++-  int yyi;
++-  unsigned long int yylno = yyrline[yyrule];
++-  YYFPRINTF (stderr, "Reducing stack by rule %d (line %lu):\n",
++-	     yyrule - 1, yylno);
++-  /* The symbols being reduced.  */
++-  for (yyi = 0; yyi < yynrhs; yyi++)
++-    {
++-      fprintf (stderr, "   $%d = ", yyi + 1);
++-      yy_symbol_print (stderr, yyrhs[yyprhs[yyrule] + yyi],
++-		       &(yyvsp[(yyi + 1) - (yynrhs)])
++-		       		       );
++-      fprintf (stderr, "\n");
++-    }
++-}
++-
++-# define YY_REDUCE_PRINT(Rule)		\
++-do {					\
++-  if (yydebug)				\
++-    yy_reduce_print (yyvsp, Rule); \
++-} while (YYID (0))
++-
 +-/* Nonzero means print parse trace.  It is left uninitialized so that
 +-   multiple parsers can coexist.  */
 +-int yydebug;
 +-#else /* !YYDEBUG */
 +-# define YYDPRINTF(Args)
++-# define YY_SYMBOL_PRINT(Title, Type, Value, Location)
++-# define YY_STACK_PRINT(Bottom, Top)
++-# define YY_REDUCE_PRINT(Rule)
 +-#endif /* !YYDEBUG */
++-
 +-
 +-/* YYINITDEPTH -- initial size of the parser's stacks.  */
 +-#ifndef	YYINITDEPTH
@@ -10275,59 +13517,59 @@ index 0000000000..a06dbad1ea
 +-   if the built-in stack extension method is used).
 +-
 +-   Do not make this value too large; the results are undefined if
-+-   SIZE_MAX < YYSTACK_BYTES (YYMAXDEPTH)
++-   YYSTACK_ALLOC_MAXIMUM < YYSTACK_BYTES (YYMAXDEPTH)
 +-   evaluated with infinite-precision integer arithmetic.  */
-+-
-+-#if YYMAXDEPTH == 0
-+-# undef YYMAXDEPTH
-+-#endif
 +-
 +-#ifndef YYMAXDEPTH
 +-# define YYMAXDEPTH 10000
 +-#endif
++-
 +-
-+-#ifdef YYERROR_VERBOSE
++-
++-#if YYERROR_VERBOSE
 +-
 +-# ifndef yystrlen
-+-#  if defined (__GLIBC__) && defined (_STRING_H)
++-#  if defined __GLIBC__ && defined _STRING_H
 +-#   define yystrlen strlen
 +-#  else
 +-/* Return the length of YYSTR.  */
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
 +-static YYSIZE_T
-+-#   if defined (__STDC__) || defined (__cplusplus)
 +-yystrlen (const char *yystr)
-+-#   else
++-#else
++-static YYSIZE_T
 +-yystrlen (yystr)
-+-     const char *yystr;
-+-#   endif
++-    const char *yystr;
++-#endif
 +-{
-+-  register const char *yys = yystr;
-+-
-+-  while (*yys++ != '\0')
++-  YYSIZE_T yylen;
++-  for (yylen = 0; yystr[yylen]; yylen++)
 +-    continue;
-+-
-+-  return yys - yystr - 1;
++-  return yylen;
 +-}
 +-#  endif
 +-# endif
 +-
 +-# ifndef yystpcpy
-+-#  if defined (__GLIBC__) && defined (_STRING_H) && defined (_GNU_SOURCE)
++-#  if defined __GLIBC__ && defined _STRING_H && defined _GNU_SOURCE
 +-#   define yystpcpy stpcpy
 +-#  else
 +-/* Copy YYSRC to YYDEST, returning the address of the terminating '\0' in
 +-   YYDEST.  */
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
 +-static char *
-+-#   if defined (__STDC__) || defined (__cplusplus)
 +-yystpcpy (char *yydest, const char *yysrc)
-+-#   else
++-#else
++-static char *
 +-yystpcpy (yydest, yysrc)
-+-     char *yydest;
-+-     const char *yysrc;
-+-#   endif
++-    char *yydest;
++-    const char *yysrc;
++-#endif
 +-{
-+-  register char *yyd = yydest;
-+-  register const char *yys = yysrc;
++-  char *yyd = yydest;
++-  const char *yys = yysrc;
 +-
 +-  while ((*yyd++ = *yys++) != '\0')
 +-    continue;
@@ -10336,86 +13578,266 @@ index 0000000000..a06dbad1ea
 +-}
 +-#  endif
 +-# endif
-+-#endif
++-
++-# ifndef yytnamerr
++-/* Copy to YYRES the contents of YYSTR after stripping away unnecessary
++-   quotes and backslashes, so that it's suitable for yyerror.  The
++-   heuristic is that double-quoting is unnecessary unless the string
++-   contains an apostrophe, a comma, or backslash (other than
++-   backslash-backslash).  YYSTR is taken from yytname.  If YYRES is
++-   null, do not copy; instead, return the length of what the result
++-   would have been.  */
++-static YYSIZE_T
++-yytnamerr (char *yyres, const char *yystr)
++-{
++-  if (*yystr == '"')
++-    {
++-      YYSIZE_T yyn = 0;
++-      char const *yyp = yystr;
++-
++-      for (;;)
++-	switch (*++yyp)
++-	  {
++-	  case '\'':
++-	  case ',':
++-	    goto do_not_strip_quotes;
++-
++-	  case '\\':
++-	    if (*++yyp != '\\')
++-	      goto do_not_strip_quotes;
++-	    /* Fall through.  */
++-	  default:
++-	    if (yyres)
++-	      yyres[yyn] = *yyp;
++-	    yyn++;
++-	    break;
++-
++-	  case '"':
++-	    if (yyres)
++-	      yyres[yyn] = '\0';
++-	    return yyn;
++-	  }
++-    do_not_strip_quotes: ;
++-    }
++-
++-  if (! yyres)
++-    return yystrlen (yystr);
++-
++-  return yystpcpy (yyres, yystr) - yyres;
++-}
++-# endif
++-
++-/* Copy into YYRESULT an error message about the unexpected token
++-   YYCHAR while in state YYSTATE.  Return the number of bytes copied,
++-   including the terminating null byte.  If YYRESULT is null, do not
++-   copy anything; just return the number of bytes that would be
++-   copied.  As a special case, return 0 if an ordinary "syntax error"
++-   message will do.  Return YYSIZE_MAXIMUM if overflow occurs during
++-   size calculation.  */
++-static YYSIZE_T
++-yysyntax_error (char *yyresult, int yystate, int yychar)
++-{
++-  int yyn = yypact[yystate];
++-
++-  if (! (YYPACT_NINF < yyn && yyn <= YYLAST))
++-    return 0;
++-  else
++-    {
++-      int yytype = YYTRANSLATE (yychar);
++-      YYSIZE_T yysize0 = yytnamerr (0, yytname[yytype]);
++-      YYSIZE_T yysize = yysize0;
++-      YYSIZE_T yysize1;
++-      int yysize_overflow = 0;
++-      enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
++-      char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
++-      int yyx;
++-
++-# if 0
++-      /* This is so xgettext sees the translatable formats that are
++-	 constructed on the fly.  */
++-      YY_("syntax error, unexpected %s");
++-      YY_("syntax error, unexpected %s, expecting %s");
++-      YY_("syntax error, unexpected %s, expecting %s or %s");
++-      YY_("syntax error, unexpected %s, expecting %s or %s or %s");
++-      YY_("syntax error, unexpected %s, expecting %s or %s or %s or %s");
++-# endif
++-      char *yyfmt;
++-      char const *yyf;
++-      static char const yyunexpected[] = "syntax error, unexpected %s";
++-      static char const yyexpecting[] = ", expecting %s";
++-      static char const yyor[] = " or %s";
++-      char yyformat[sizeof yyunexpected
++-		    + sizeof yyexpecting - 1
++-		    + ((YYERROR_VERBOSE_ARGS_MAXIMUM - 2)
++-		       * (sizeof yyor - 1))];
++-      char const *yyprefix = yyexpecting;
++-
++-      /* Start YYX at -YYN if negative to avoid negative indexes in
++-	 YYCHECK.  */
++-      int yyxbegin = yyn < 0 ? -yyn : 0;
++-
++-      /* Stay within bounds of both yycheck and yytname.  */
++-      int yychecklim = YYLAST - yyn + 1;
++-      int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
++-      int yycount = 1;
++-
++-      yyarg[0] = yytname[yytype];
++-      yyfmt = yystpcpy (yyformat, yyunexpected);
++-
++-      for (yyx = yyxbegin; yyx < yyxend; ++yyx)
++-	if (yycheck[yyx + yyn] == yyx && yyx != YYTERROR)
++-	  {
++-	    if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
++-	      {
++-		yycount = 1;
++-		yysize = yysize0;
++-		yyformat[sizeof yyunexpected - 1] = '\0';
++-		break;
++-	      }
++-	    yyarg[yycount++] = yytname[yyx];
++-	    yysize1 = yysize + yytnamerr (0, yytname[yyx]);
++-	    yysize_overflow |= (yysize1 < yysize);
++-	    yysize = yysize1;
++-	    yyfmt = yystpcpy (yyfmt, yyprefix);
++-	    yyprefix = yyor;
++-	  }
++-
++-      yyf = YY_(yyformat);
++-      yysize1 = yysize + yystrlen (yyf);
++-      yysize_overflow |= (yysize1 < yysize);
++-      yysize = yysize1;
++-
++-      if (yysize_overflow)
++-	return YYSIZE_MAXIMUM;
++-
++-      if (yyresult)
++-	{
++-	  /* Avoid sprintf, as that infringes on the user's name space.
++-	     Don't have undefined behavior even if the translation
++-	     produced a string with the wrong number of "%s"s.  */
++-	  char *yyp = yyresult;
++-	  int yyi = 0;
++-	  while ((*yyp = *yyf) != '\0')
++-	    {
++-	      if (*yyp == '%' && yyf[1] == 's' && yyi < yycount)
++-		{
++-		  yyp += yytnamerr (yyp, yyarg[yyi++]);
++-		  yyf += 2;
++-		}
++-	      else
++-		{
++-		  yyp++;
++-		  yyf++;
++-		}
++-	    }
++-	}
++-      return yysize;
++-    }
++-}
++-#endif /* YYERROR_VERBOSE */
 +-
-+-#line 315 "/usr/local/share/bison/bison.simple"
 +-
++-/*-----------------------------------------------.
++-| Release the memory associated to this symbol.  |
++-`-----------------------------------------------*/
 +-
-+-/* The user can define YYPARSE_PARAM as the name of an argument to be passed
-+-   into yyparse.  The argument should have type void *.
-+-   It should actually point to an object.
-+-   Grammar actions can access the variable by casting it
-+-   to the proper pointer type.  */
++-/*ARGSUSED*/
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-static void
++-yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
++-#else
++-static void
++-yydestruct (yymsg, yytype, yyvaluep)
++-    const char *yymsg;
++-    int yytype;
++-    YYSTYPE *yyvaluep;
++-#endif
++-{
++-  YYUSE (yyvaluep);
++-
++-  if (!yymsg)
++-    yymsg = "Deleting";
++-  YY_SYMBOL_PRINT (yymsg, yytype, yyvaluep, yylocationp);
++-
++-  switch (yytype)
++-    {
++-
++-      default:
++-	break;
++-    }
++-}
++-
++-
++-/* Prevent warnings from -Wmissing-prototypes.  */
 +-
 +-#ifdef YYPARSE_PARAM
-+-# if defined (__STDC__) || defined (__cplusplus)
-+-#  define YYPARSE_PARAM_ARG void *YYPARSE_PARAM
-+-#  define YYPARSE_PARAM_DECL
-+-# else
-+-#  define YYPARSE_PARAM_ARG YYPARSE_PARAM
-+-#  define YYPARSE_PARAM_DECL void *YYPARSE_PARAM;
-+-# endif
-+-#else /* !YYPARSE_PARAM */
-+-# define YYPARSE_PARAM_ARG
-+-# define YYPARSE_PARAM_DECL
-+-#endif /* !YYPARSE_PARAM */
-+-
-+-/* Prevent warning if -Wstrict-prototypes.  */
-+-#ifdef __GNUC__
-+-# ifdef YYPARSE_PARAM
-+-int yyparse (void *);
-+-# else
-+-int yyparse (void);
-+-# endif
++-#if defined __STDC__ || defined __cplusplus
++-int yyparse (void *YYPARSE_PARAM);
++-#else
++-int yyparse ();
 +-#endif
++-#else /* ! YYPARSE_PARAM */
++-#if defined __STDC__ || defined __cplusplus
++-int yyparse (void);
++-#else
++-int yyparse ();
++-#endif
++-#endif /* ! YYPARSE_PARAM */
 +-
-+-/* YY_DECL_VARIABLES -- depending whether we use a pure parser,
-+-   variables are global, or local to YYPARSE.  */
 +-
-+-#define YY_DECL_NON_LSP_VARIABLES			\
-+-/* The lookahead symbol.  */				\
-+-int yychar;						\
-+-							\
-+-/* The semantic value of the lookahead symbol. */	\
-+-YYSTYPE yylval;						\
-+-							\
-+-/* Number of parse errors so far.  */			\
++-
++-
++-
++-
++-/*----------.
++-| yyparse.  |
++-`----------*/
++-
++-#ifdef YYPARSE_PARAM
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-int
++-yyparse (void *YYPARSE_PARAM)
++-#else
++-int
++-yyparse (YYPARSE_PARAM)
++-    void *YYPARSE_PARAM;
++-#endif
++-#else /* ! YYPARSE_PARAM */
++-#if (defined __STDC__ || defined __C99__FUNC__ \
++-     || defined __cplusplus || defined _MSC_VER)
++-int
++-yyparse (void)
++-#else
++-int
++-yyparse ()
++-
++-#endif
++-#endif
++-{
++-  /* The look-ahead symbol.  */
++-int yychar;
++-
++-/* The semantic value of the look-ahead symbol.  */
++-YYSTYPE yylval;
++-
++-/* Number of syntax errors so far.  */
 +-int yynerrs;
 +-
-+-#if YYLSP_NEEDED
-+-# define YY_DECL_VARIABLES			\
-+-YY_DECL_NON_LSP_VARIABLES			\
-+-						\
-+-/* Location data for the lookahead symbol.  */	\
-+-YYLTYPE yylloc;
-+-#else
-+-# define YY_DECL_VARIABLES			\
-+-YY_DECL_NON_LSP_VARIABLES
-+-#endif
-+-
-+-
-+-/* If nonreentrant, generate the variables here. */
-+-
-+-#if !YYPURE
-+-YY_DECL_VARIABLES
-+-#endif  /* !YYPURE */
-+-
-+-int
-+-yyparse (YYPARSE_PARAM_ARG)
-+-     YYPARSE_PARAM_DECL
-+-{
-+-  /* If reentrant, generate the variables here. */
-+-#if YYPURE
-+-  YY_DECL_VARIABLES
-+-#endif  /* !YYPURE */
-+-
-+-  register int yystate;
-+-  register int yyn;
++-  int yystate;
++-  int yyn;
 +-  int yyresult;
 +-  /* Number of tokens to shift before error messages enabled.  */
 +-  int yyerrstatus;
-+-  /* Lookahead token as an internal (translated) token number.  */
-+-  int yychar1 = 0;
++-  /* Look-ahead token as an internal (translated) token number.  */
++-  int yytoken = 0;
++-#if YYERROR_VERBOSE
++-  /* Buffer for error messages, and its allocated size.  */
++-  char yymsgbuf[128];
++-  char *yymsg = yymsgbuf;
++-  YYSIZE_T yymsg_alloc = sizeof yymsgbuf;
++-#endif
 +-
 +-  /* Three stacks and their tools:
 +-     `yyss': related to states,
@@ -10425,42 +13847,30 @@ index 0000000000..a06dbad1ea
 +-     Refer to the stacks thru separate pointers, to allow yyoverflow
 +-     to reallocate them elsewhere.  */
 +-
-+-  /* The state stack. */
-+-  short	yyssa[YYINITDEPTH];
-+-  short *yyss = yyssa;
-+-  register short *yyssp;
++-  /* The state stack.  */
++-  yytype_int16 yyssa[YYINITDEPTH];
++-  yytype_int16 *yyss = yyssa;
++-  yytype_int16 *yyssp;
 +-
 +-  /* The semantic value stack.  */
 +-  YYSTYPE yyvsa[YYINITDEPTH];
 +-  YYSTYPE *yyvs = yyvsa;
-+-  register YYSTYPE *yyvsp;
++-  YYSTYPE *yyvsp;
 +-
-+-#if YYLSP_NEEDED
-+-  /* The location stack.  */
-+-  YYLTYPE yylsa[YYINITDEPTH];
-+-  YYLTYPE *yyls = yylsa;
-+-  YYLTYPE *yylsp;
-+-#endif
 +-
-+-#if YYLSP_NEEDED
-+-# define YYPOPSTACK   (yyvsp--, yyssp--, yylsp--)
-+-#else
-+-# define YYPOPSTACK   (yyvsp--, yyssp--)
-+-#endif
++-
++-#define YYPOPSTACK(N)   (yyvsp -= (N), yyssp -= (N))
 +-
 +-  YYSIZE_T yystacksize = YYINITDEPTH;
-+-
 +-
 +-  /* The variables used to return semantic value and location from the
 +-     action routines.  */
 +-  YYSTYPE yyval;
-+-#if YYLSP_NEEDED
-+-  YYLTYPE yyloc;
-+-#endif
 +-
-+-  /* When reducing, the number of symbols on the RHS of the reduced
-+-     rule. */
-+-  int yylen;
++-
++-  /* The number of symbols on the RHS of the reduced rule.
++-     Keep to zero when no symbol should be popped.  */
++-  int yylen = 0;
 +-
 +-  YYDPRINTF ((stderr, "Starting parse\n"));
 +-
@@ -10476,9 +13886,7 @@ index 0000000000..a06dbad1ea
 +-
 +-  yyssp = yyss;
 +-  yyvsp = yyvs;
-+-#if YYLSP_NEEDED
-+-  yylsp = yyls;
-+-#endif
++-
 +-  goto yysetstate;
 +-
 +-/*------------------------------------------------------------.
@@ -10486,70 +13894,60 @@ index 0000000000..a06dbad1ea
 +-`------------------------------------------------------------*/
 +- yynewstate:
 +-  /* In all cases, when you get here, the value and location stacks
-+-     have just been pushed. so pushing a state here evens the stacks.
-+-     */
++-     have just been pushed.  So pushing a state here evens the stacks.  */
 +-  yyssp++;
 +-
 +- yysetstate:
 +-  *yyssp = yystate;
 +-
-+-  if (yyssp >= yyss + yystacksize - 1)
++-  if (yyss + yystacksize - 1 <= yyssp)
 +-    {
 +-      /* Get the current used size of the three stacks, in elements.  */
 +-      YYSIZE_T yysize = yyssp - yyss + 1;
 +-
 +-#ifdef yyoverflow
 +-      {
-+-	/* Give user a chance to reallocate the stack. Use copies of
++-	/* Give user a chance to reallocate the stack.  Use copies of
 +-	   these so that the &'s don't force the real ones into
 +-	   memory.  */
 +-	YYSTYPE *yyvs1 = yyvs;
-+-	short *yyss1 = yyss;
++-	yytype_int16 *yyss1 = yyss;
++-
 +-
 +-	/* Each stack pointer address is followed by the size of the
-+-	   data in use in that stack, in bytes.  */
-+-# if YYLSP_NEEDED
-+-	YYLTYPE *yyls1 = yyls;
-+-	/* This used to be a conditional around just the two extra args,
-+-	   but that might be undefined if yyoverflow is a macro.  */
-+-	yyoverflow ("parser stack overflow",
++-	   data in use in that stack, in bytes.  This used to be a
++-	   conditional around just the two extra args, but that might
++-	   be undefined if yyoverflow is a macro.  */
++-	yyoverflow (YY_("memory exhausted"),
 +-		    &yyss1, yysize * sizeof (*yyssp),
 +-		    &yyvs1, yysize * sizeof (*yyvsp),
-+-		    &yyls1, yysize * sizeof (*yylsp),
++-
 +-		    &yystacksize);
-+-	yyls = yyls1;
-+-# else
-+-	yyoverflow ("parser stack overflow",
-+-		    &yyss1, yysize * sizeof (*yyssp),
-+-		    &yyvs1, yysize * sizeof (*yyvsp),
-+-		    &yystacksize);
-+-# endif
++-
 +-	yyss = yyss1;
 +-	yyvs = yyvs1;
 +-      }
 +-#else /* no yyoverflow */
 +-# ifndef YYSTACK_RELOCATE
-+-      goto yyoverflowlab;
++-      goto yyexhaustedlab;
 +-# else
 +-      /* Extend the stack our own way.  */
-+-      if (yystacksize >= YYMAXDEPTH)
-+-	goto yyoverflowlab;
++-      if (YYMAXDEPTH <= yystacksize)
++-	goto yyexhaustedlab;
 +-      yystacksize *= 2;
-+-      if (yystacksize > YYMAXDEPTH)
++-      if (YYMAXDEPTH < yystacksize)
 +-	yystacksize = YYMAXDEPTH;
 +-
 +-      {
-+-	short *yyss1 = yyss;
++-	yytype_int16 *yyss1 = yyss;
 +-	union yyalloc *yyptr =
 +-	  (union yyalloc *) YYSTACK_ALLOC (YYSTACK_BYTES (yystacksize));
 +-	if (! yyptr)
-+-	  goto yyoverflowlab;
++-	  goto yyexhaustedlab;
 +-	YYSTACK_RELOCATE (yyss);
 +-	YYSTACK_RELOCATE (yyvs);
-+-# if YYLSP_NEEDED
-+-	YYSTACK_RELOCATE (yyls);
-+-# endif
-+-# undef YYSTACK_RELOCATE
++-
++-#  undef YYSTACK_RELOCATE
 +-	if (yyss1 != yyssa)
 +-	  YYSTACK_FREE (yyss1);
 +-      }
@@ -10558,14 +13956,12 @@ index 0000000000..a06dbad1ea
 +-
 +-      yyssp = yyss + yysize - 1;
 +-      yyvsp = yyvs + yysize - 1;
-+-#if YYLSP_NEEDED
-+-      yylsp = yyls + yysize - 1;
-+-#endif
++-
 +-
 +-      YYDPRINTF ((stderr, "Stack size increased to %lu\n",
 +-		  (unsigned long int) yystacksize));
 +-
-+-      if (yyssp >= yyss + yystacksize - 1)
++-      if (yyss + yystacksize - 1 <= yyssp)
 +-	YYABORT;
 +-    }
 +-
@@ -10573,108 +13969,71 @@ index 0000000000..a06dbad1ea
 +-
 +-  goto yybackup;
 +-
-+-
 +-/*-----------.
 +-| yybackup.  |
 +-`-----------*/
 +-yybackup:
 +-
-+-/* Do appropriate processing given the current state.  */
-+-/* Read a lookahead token if we need one and don't already have one.  */
-+-/* yyresume: */
++-  /* Do appropriate processing given the current state.  Read a
++-     look-ahead token if we need one and don't already have one.  */
 +-
-+-  /* First try to decide what to do without reference to lookahead token.  */
-+-
++-  /* First try to decide what to do without reference to look-ahead token.  */
 +-  yyn = yypact[yystate];
-+-  if (yyn == YYFLAG)
++-  if (yyn == YYPACT_NINF)
 +-    goto yydefault;
 +-
-+-  /* Not known => get a lookahead token if don't already have one.  */
++-  /* Not known => get a look-ahead token if don't already have one.  */
 +-
-+-  /* yychar is either YYEMPTY or YYEOF
-+-     or a valid token in external form.  */
-+-
++-  /* YYCHAR is either YYEMPTY or YYEOF or a valid look-ahead symbol.  */
 +-  if (yychar == YYEMPTY)
 +-    {
 +-      YYDPRINTF ((stderr, "Reading a token: "));
 +-      yychar = YYLEX;
 +-    }
 +-
-+-  /* Convert token to internal form (in yychar1) for indexing tables with */
-+-
-+-  if (yychar <= 0)		/* This means end of input. */
++-  if (yychar <= YYEOF)
 +-    {
-+-      yychar1 = 0;
-+-      yychar = YYEOF;		/* Don't call YYLEX any more */
-+-
++-      yychar = yytoken = YYEOF;
 +-      YYDPRINTF ((stderr, "Now at end of input.\n"));
 +-    }
 +-  else
 +-    {
-+-      yychar1 = YYTRANSLATE (yychar);
-+-
-+-#if YYDEBUG
-+-     /* We have to keep this `#if YYDEBUG', since we use variables
-+-	which are defined only if `YYDEBUG' is set.  */
-+-      if (yydebug)
-+-	{
-+-	  YYFPRINTF (stderr, "Next token is %d (%s",
-+-		     yychar, yytname[yychar1]);
-+-	  /* Give the individual parser a way to print the precise
-+-	     meaning of a token, for further debugging info.  */
-+-# ifdef YYPRINT
-+-	  YYPRINT (stderr, yychar, yylval);
-+-# endif
-+-	  YYFPRINTF (stderr, ")\n");
-+-	}
-+-#endif
++-      yytoken = YYTRANSLATE (yychar);
++-      YY_SYMBOL_PRINT ("Next token is", yytoken, &yylval, &yylloc);
 +-    }
 +-
-+-  yyn += yychar1;
-+-  if (yyn < 0 || yyn > YYLAST || yycheck[yyn] != yychar1)
++-  /* If the proper action on seeing token YYTOKEN is to reduce or to
++-     detect an error, take that action.  */
++-  yyn += yytoken;
++-  if (yyn < 0 || YYLAST < yyn || yycheck[yyn] != yytoken)
 +-    goto yydefault;
-+-
 +-  yyn = yytable[yyn];
-+-
-+-  /* yyn is what to do for this token type in this state.
-+-     Negative => reduce, -yyn is rule number.
-+-     Positive => shift, yyn is new state.
-+-       New state is final state => don't bother to shift,
-+-       just return success.
-+-     0, or most negative number => error.  */
-+-
-+-  if (yyn < 0)
++-  if (yyn <= 0)
 +-    {
-+-      if (yyn == YYFLAG)
++-      if (yyn == 0 || yyn == YYTABLE_NINF)
 +-	goto yyerrlab;
 +-      yyn = -yyn;
 +-      goto yyreduce;
 +-    }
-+-  else if (yyn == 0)
-+-    goto yyerrlab;
 +-
 +-  if (yyn == YYFINAL)
 +-    YYACCEPT;
-+-
-+-  /* Shift the lookahead token.  */
-+-  YYDPRINTF ((stderr, "Shifting token %d (%s), ",
-+-	      yychar, yytname[yychar1]));
-+-
-+-  /* Discard the token being shifted unless it is eof.  */
-+-  if (yychar != YYEOF)
-+-    yychar = YYEMPTY;
-+-
-+-  *++yyvsp = yylval;
-+-#if YYLSP_NEEDED
-+-  *++yylsp = yylloc;
-+-#endif
 +-
 +-  /* Count tokens shifted since error; after three, turn off error
 +-     status.  */
 +-  if (yyerrstatus)
 +-    yyerrstatus--;
 +-
++-  /* Shift the look-ahead token.  */
++-  YY_SYMBOL_PRINT ("Shifting", yytoken, &yylval, &yylloc);
++-
++-  /* Discard the shifted token unless it is eof.  */
++-  if (yychar != YYEOF)
++-    yychar = YYEMPTY;
++-
 +-  yystate = yyn;
++-  *++yyvsp = yylval;
++-
 +-  goto yynewstate;
 +-
 +-
@@ -10698,140 +14057,117 @@ index 0000000000..a06dbad1ea
 +-  /* If YYLEN is nonzero, implement the default value of the action:
 +-     `$$ = $1'.
 +-
-+-     Otherwise, the following line sets YYVAL to the semantic value of
-+-     the lookahead token.  This behavior is undocumented and Bison
++-     Otherwise, the following line sets YYVAL to garbage.
++-     This behavior is undocumented and Bison
 +-     users should not rely upon it.  Assigning to YYVAL
 +-     unconditionally makes the parser a bit smaller, and it avoids a
 +-     GCC warning that YYVAL may be used uninitialized.  */
 +-  yyval = yyvsp[1-yylen];
 +-
-+-#if YYLSP_NEEDED
-+-  /* Similarly for the default location.  Let the user run additional
-+-     commands if for instance locations are ranges.  */
-+-  yyloc = yylsp[1-yylen];
-+-  YYLLOC_DEFAULT (yyloc, (yylsp - yylen), yylen);
-+-#endif
 +-
-+-#if YYDEBUG
-+-  /* We have to keep this `#if YYDEBUG', since we use variables which
-+-     are defined only if `YYDEBUG' is set.  */
-+-  if (yydebug)
++-  YY_REDUCE_PRINT (yyn);
++-  switch (yyn)
 +-    {
-+-      int yyi;
-+-
-+-      YYFPRINTF (stderr, "Reducing via rule %d (line %d), ",
-+-		 yyn, yyrline[yyn]);
-+-
-+-      /* Print the symbols being reduced, and their result.  */
-+-      for (yyi = yyprhs[yyn]; yyrhs[yyi] > 0; yyi++)
-+-	YYFPRINTF (stderr, "%s ", yytname[yyrhs[yyi]]);
-+-      YYFPRINTF (stderr, " -> %s\n", yytname[yyr1[yyn]]);
-+-    }
-+-#endif
-+-
-+-  switch (yyn) {
-+-
-+-case 1:
-+-#line 151 "plural.y"
-+-{
-+-	    if (yyvsp[0].exp == NULL)
++-        case 2:
++-#line 155 "plural.y"
++-    {
++-	    if ((yyvsp[(1) - (1)].exp) == NULL)
 +-	      YYABORT;
-+-	    ((struct parse_args *) arg)->res = yyvsp[0].exp;
++-	    ((struct parse_args *) arg)->res = (yyvsp[(1) - (1)].exp);
 +-	  }
 +-    break;
-+-case 2:
-+-#line 159 "plural.y"
-+-{
-+-	    yyval.exp = new_exp_3 (qmop, yyvsp[-4].exp, yyvsp[-2].exp, yyvsp[0].exp);
-+-	  }
-+-    break;
-+-case 3:
++-
++-  case 3:
 +-#line 163 "plural.y"
-+-{
-+-	    yyval.exp = new_exp_2 (lor, yyvsp[-2].exp, yyvsp[0].exp);
-+-	  }
-+-    break;
-+-case 4:
-+-#line 167 "plural.y"
-+-{
-+-	    yyval.exp = new_exp_2 (land, yyvsp[-2].exp, yyvsp[0].exp);
-+-	  }
-+-    break;
-+-case 5:
-+-#line 171 "plural.y"
-+-{
-+-	    yyval.exp = new_exp_2 (yyvsp[-1].op, yyvsp[-2].exp, yyvsp[0].exp);
-+-	  }
-+-    break;
-+-case 6:
-+-#line 175 "plural.y"
-+-{
-+-	    yyval.exp = new_exp_2 (yyvsp[-1].op, yyvsp[-2].exp, yyvsp[0].exp);
-+-	  }
-+-    break;
-+-case 7:
-+-#line 179 "plural.y"
-+-{
-+-	    yyval.exp = new_exp_2 (yyvsp[-1].op, yyvsp[-2].exp, yyvsp[0].exp);
-+-	  }
-+-    break;
-+-case 8:
-+-#line 183 "plural.y"
-+-{
-+-	    yyval.exp = new_exp_2 (yyvsp[-1].op, yyvsp[-2].exp, yyvsp[0].exp);
-+-	  }
-+-    break;
-+-case 9:
-+-#line 187 "plural.y"
-+-{
-+-	    yyval.exp = new_exp_1 (lnot, yyvsp[0].exp);
-+-	  }
-+-    break;
-+-case 10:
-+-#line 191 "plural.y"
-+-{
-+-	    yyval.exp = new_exp_0 (var);
-+-	  }
-+-    break;
-+-case 11:
-+-#line 195 "plural.y"
-+-{
-+-	    if ((yyval.exp = new_exp_0 (num)) != NULL)
-+-	      yyval.exp->val.num = yyvsp[0].num;
-+-	  }
-+-    break;
-+-case 12:
-+-#line 200 "plural.y"
-+-{
-+-	    yyval.exp = yyvsp[-1].exp;
-+-	  }
-+-    break;
-+-}
-+-
-+-#line 705 "/usr/local/share/bison/bison.simple"
-+-
-+-
-+-  yyvsp -= yylen;
-+-  yyssp -= yylen;
-+-#if YYLSP_NEEDED
-+-  yylsp -= yylen;
-+-#endif
-+-
-+-#if YYDEBUG
-+-  if (yydebug)
 +-    {
-+-      short *yyssp1 = yyss - 1;
-+-      YYFPRINTF (stderr, "state stack now");
-+-      while (yyssp1 != yyssp)
-+-	YYFPRINTF (stderr, " %d", *++yyssp1);
-+-      YYFPRINTF (stderr, "\n");
++-	    (yyval.exp) = new_exp_3 (qmop, (yyvsp[(1) - (5)].exp), (yyvsp[(3) - (5)].exp), (yyvsp[(5) - (5)].exp));
++-	  }
++-    break;
++-
++-  case 4:
++-#line 167 "plural.y"
++-    {
++-	    (yyval.exp) = new_exp_2 (lor, (yyvsp[(1) - (3)].exp), (yyvsp[(3) - (3)].exp));
++-	  }
++-    break;
++-
++-  case 5:
++-#line 171 "plural.y"
++-    {
++-	    (yyval.exp) = new_exp_2 (land, (yyvsp[(1) - (3)].exp), (yyvsp[(3) - (3)].exp));
++-	  }
++-    break;
++-
++-  case 6:
++-#line 175 "plural.y"
++-    {
++-	    (yyval.exp) = new_exp_2 ((yyvsp[(2) - (3)].op), (yyvsp[(1) - (3)].exp), (yyvsp[(3) - (3)].exp));
++-	  }
++-    break;
++-
++-  case 7:
++-#line 179 "plural.y"
++-    {
++-	    (yyval.exp) = new_exp_2 ((yyvsp[(2) - (3)].op), (yyvsp[(1) - (3)].exp), (yyvsp[(3) - (3)].exp));
++-	  }
++-    break;
++-
++-  case 8:
++-#line 183 "plural.y"
++-    {
++-	    (yyval.exp) = new_exp_2 ((yyvsp[(2) - (3)].op), (yyvsp[(1) - (3)].exp), (yyvsp[(3) - (3)].exp));
++-	  }
++-    break;
++-
++-  case 9:
++-#line 187 "plural.y"
++-    {
++-	    (yyval.exp) = new_exp_2 ((yyvsp[(2) - (3)].op), (yyvsp[(1) - (3)].exp), (yyvsp[(3) - (3)].exp));
++-	  }
++-    break;
++-
++-  case 10:
++-#line 191 "plural.y"
++-    {
++-	    (yyval.exp) = new_exp_1 (lnot, (yyvsp[(2) - (2)].exp));
++-	  }
++-    break;
++-
++-  case 11:
++-#line 195 "plural.y"
++-    {
++-	    (yyval.exp) = new_exp_0 (var);
++-	  }
++-    break;
++-
++-  case 12:
++-#line 199 "plural.y"
++-    {
++-	    if (((yyval.exp) = new_exp_0 (num)) != NULL)
++-	      (yyval.exp)->val.num = (yyvsp[(1) - (1)].num);
++-	  }
++-    break;
++-
++-  case 13:
++-#line 204 "plural.y"
++-    {
++-	    (yyval.exp) = (yyvsp[(2) - (3)].exp);
++-	  }
++-    break;
++-
++-
++-/* Line 1267 of yacc.c.  */
++-#line 1554 "plural.c"
++-      default: break;
 +-    }
-+-#endif
++-  YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
++-
++-  YYPOPSTACK (yylen);
++-  yylen = 0;
++-  YY_STACK_PRINT (yyss, yyssp);
 +-
 +-  *++yyvsp = yyval;
-+-#if YYLSP_NEEDED
-+-  *++yylsp = yyloc;
-+-#endif
++-
 +-
 +-  /* Now `shift' the result of the reduction.  Determine what state
 +-     that goes to, based on the state we popped back to and the rule
@@ -10839,11 +14175,11 @@ index 0000000000..a06dbad1ea
 +-
 +-  yyn = yyr1[yyn];
 +-
-+-  yystate = yypgoto[yyn - YYNTBASE] + *yyssp;
-+-  if (yystate >= 0 && yystate <= YYLAST && yycheck[yystate] == *yyssp)
++-  yystate = yypgoto[yyn - YYNTOKENS] + *yyssp;
++-  if (0 <= yystate && yystate <= YYLAST && yycheck[yystate] == *yyssp)
 +-    yystate = yytable[yystate];
 +-  else
-+-    yystate = yydefgoto[yyn - YYNTBASE];
++-    yystate = yydefgoto[yyn - YYNTOKENS];
 +-
 +-  goto yynewstate;
 +-
@@ -10856,155 +14192,129 @@ index 0000000000..a06dbad1ea
 +-  if (!yyerrstatus)
 +-    {
 +-      ++yynerrs;
-+-
-+-#ifdef YYERROR_VERBOSE
-+-      yyn = yypact[yystate];
-+-
-+-      if (yyn > YYFLAG && yyn < YYLAST)
-+-	{
-+-	  YYSIZE_T yysize = 0;
-+-	  char *yymsg;
-+-	  int yyx, yycount;
-+-
-+-	  yycount = 0;
-+-	  /* Start YYX at -YYN if negative to avoid negative indexes in
-+-	     YYCHECK.  */
-+-	  for (yyx = yyn < 0 ? -yyn : 0;
-+-	       yyx < (int) (sizeof (yytname) / sizeof (char *)); yyx++)
-+-	    if (yycheck[yyx + yyn] == yyx)
-+-	      yysize += yystrlen (yytname[yyx]) + 15, yycount++;
-+-	  yysize += yystrlen ("parse error, unexpected ") + 1;
-+-	  yysize += yystrlen (yytname[YYTRANSLATE (yychar)]);
-+-	  yymsg = (char *) YYSTACK_ALLOC (yysize);
-+-	  if (yymsg != 0)
-+-	    {
-+-	      char *yyp = yystpcpy (yymsg, "parse error, unexpected ");
-+-	      yyp = yystpcpy (yyp, yytname[YYTRANSLATE (yychar)]);
-+-
-+-	      if (yycount < 5)
-+-		{
-+-		  yycount = 0;
-+-		  for (yyx = yyn < 0 ? -yyn : 0;
-+-		       yyx < (int) (sizeof (yytname) / sizeof (char *));
-+-		       yyx++)
-+-		    if (yycheck[yyx + yyn] == yyx)
-+-		      {
-+-			const char *yyq = ! yycount ? ", expecting " : " or ";
-+-			yyp = yystpcpy (yyp, yyq);
-+-			yyp = yystpcpy (yyp, yytname[yyx]);
-+-			yycount++;
-+-		      }
-+-		}
-+-	      yyerror (yymsg);
++-#if ! YYERROR_VERBOSE
++-      yyerror (YY_("syntax error"));
++-#else
++-      {
++-	YYSIZE_T yysize = yysyntax_error (0, yystate, yychar);
++-	if (yymsg_alloc < yysize && yymsg_alloc < YYSTACK_ALLOC_MAXIMUM)
++-	  {
++-	    YYSIZE_T yyalloc = 2 * yysize;
++-	    if (! (yysize <= yyalloc && yyalloc <= YYSTACK_ALLOC_MAXIMUM))
++-	      yyalloc = YYSTACK_ALLOC_MAXIMUM;
++-	    if (yymsg != yymsgbuf)
 +-	      YYSTACK_FREE (yymsg);
-+-	    }
-+-	  else
-+-	    yyerror ("parse error; also virtual memory exhausted");
++-	    yymsg = (char *) YYSTACK_ALLOC (yyalloc);
++-	    if (yymsg)
++-	      yymsg_alloc = yyalloc;
++-	    else
++-	      {
++-		yymsg = yymsgbuf;
++-		yymsg_alloc = sizeof yymsgbuf;
++-	      }
++-	  }
++-
++-	if (0 < yysize && yysize <= yymsg_alloc)
++-	  {
++-	    (void) yysyntax_error (yymsg, yystate, yychar);
++-	    yyerror (yymsg);
++-	  }
++-	else
++-	  {
++-	    yyerror (YY_("syntax error"));
++-	    if (yysize != 0)
++-	      goto yyexhaustedlab;
++-	  }
++-      }
++-#endif
++-    }
++-
++-
++-
++-  if (yyerrstatus == 3)
++-    {
++-      /* If just tried and failed to reuse look-ahead token after an
++-	 error, discard it.  */
++-
++-      if (yychar <= YYEOF)
++-	{
++-	  /* Return failure if at end of input.  */
++-	  if (yychar == YYEOF)
++-	    YYABORT;
 +-	}
 +-      else
-+-#endif /* defined (YYERROR_VERBOSE) */
-+-	yyerror ("parse error");
++-	{
++-	  yydestruct ("Error: discarding",
++-		      yytoken, &yylval);
++-	  yychar = YYEMPTY;
++-	}
 +-    }
++-
++-  /* Else will try to reuse look-ahead token after shifting the error
++-     token.  */
 +-  goto yyerrlab1;
 +-
 +-
-+-/*--------------------------------------------------.
-+-| yyerrlab1 -- error raised explicitly by an action |
-+-`--------------------------------------------------*/
++-/*---------------------------------------------------.
++-| yyerrorlab -- error raised explicitly by YYERROR.  |
++-`---------------------------------------------------*/
++-yyerrorlab:
++-
++-  /* Pacify compilers like GCC when the user code never invokes
++-     YYERROR and the label yyerrorlab therefore never appears in user
++-     code.  */
++-  if (/*CONSTCOND*/ 0)
++-     goto yyerrorlab;
++-
++-  /* Do not reclaim the symbols of the rule which action triggered
++-     this YYERROR.  */
++-  YYPOPSTACK (yylen);
++-  yylen = 0;
++-  YY_STACK_PRINT (yyss, yyssp);
++-  yystate = *yyssp;
++-  goto yyerrlab1;
++-
++-
++-/*-------------------------------------------------------------.
++-| yyerrlab1 -- common code for both syntax error and YYERROR.  |
++-`-------------------------------------------------------------*/
 +-yyerrlab1:
-+-  if (yyerrstatus == 3)
-+-    {
-+-      /* If just tried and failed to reuse lookahead token after an
-+-	 error, discard it.  */
++-  yyerrstatus = 3;	/* Each real token shifted decrements this.  */
 +-
-+-      /* return failure if at end of input */
-+-      if (yychar == YYEOF)
++-  for (;;)
++-    {
++-      yyn = yypact[yystate];
++-      if (yyn != YYPACT_NINF)
++-	{
++-	  yyn += YYTERROR;
++-	  if (0 <= yyn && yyn <= YYLAST && yycheck[yyn] == YYTERROR)
++-	    {
++-	      yyn = yytable[yyn];
++-	      if (0 < yyn)
++-		break;
++-	    }
++-	}
++-
++-      /* Pop the current state because it cannot handle the error token.  */
++-      if (yyssp == yyss)
 +-	YYABORT;
-+-      YYDPRINTF ((stderr, "Discarding token %d (%s).\n",
-+-		  yychar, yytname[yychar1]));
-+-      yychar = YYEMPTY;
++-
++-
++-      yydestruct ("Error: popping",
++-		  yystos[yystate], yyvsp);
++-      YYPOPSTACK (1);
++-      yystate = *yyssp;
++-      YY_STACK_PRINT (yyss, yyssp);
 +-    }
-+-
-+-  /* Else will try to reuse lookahead token after shifting the error
-+-     token.  */
-+-
-+-  yyerrstatus = 3;		/* Each real token shifted decrements this */
-+-
-+-  goto yyerrhandle;
-+-
-+-
-+-/*-------------------------------------------------------------------.
-+-| yyerrdefault -- current state does not do anything special for the |
-+-| error token.                                                       |
-+-`-------------------------------------------------------------------*/
-+-yyerrdefault:
-+-#if 0
-+-  /* This is wrong; only states that explicitly want error tokens
-+-     should shift them.  */
-+-
-+-  /* If its default is to accept any token, ok.  Otherwise pop it.  */
-+-  yyn = yydefact[yystate];
-+-  if (yyn)
-+-    goto yydefault;
-+-#endif
-+-
-+-
-+-/*---------------------------------------------------------------.
-+-| yyerrpop -- pop the current state because it cannot handle the |
-+-| error token                                                    |
-+-`---------------------------------------------------------------*/
-+-yyerrpop:
-+-  if (yyssp == yyss)
-+-    YYABORT;
-+-  yyvsp--;
-+-  yystate = *--yyssp;
-+-#if YYLSP_NEEDED
-+-  yylsp--;
-+-#endif
-+-
-+-#if YYDEBUG
-+-  if (yydebug)
-+-    {
-+-      short *yyssp1 = yyss - 1;
-+-      YYFPRINTF (stderr, "Error: state stack now");
-+-      while (yyssp1 != yyssp)
-+-	YYFPRINTF (stderr, " %d", *++yyssp1);
-+-      YYFPRINTF (stderr, "\n");
-+-    }
-+-#endif
-+-
-+-/*--------------.
-+-| yyerrhandle.  |
-+-`--------------*/
-+-yyerrhandle:
-+-  yyn = yypact[yystate];
-+-  if (yyn == YYFLAG)
-+-    goto yyerrdefault;
-+-
-+-  yyn += YYTERROR;
-+-  if (yyn < 0 || yyn > YYLAST || yycheck[yyn] != YYTERROR)
-+-    goto yyerrdefault;
-+-
-+-  yyn = yytable[yyn];
-+-  if (yyn < 0)
-+-    {
-+-      if (yyn == YYFLAG)
-+-	goto yyerrpop;
-+-      yyn = -yyn;
-+-      goto yyreduce;
-+-    }
-+-  else if (yyn == 0)
-+-    goto yyerrpop;
 +-
 +-  if (yyn == YYFINAL)
 +-    YYACCEPT;
 +-
-+-  YYDPRINTF ((stderr, "Shifting error token, "));
-+-
 +-  *++yyvsp = yylval;
-+-#if YYLSP_NEEDED
-+-  *++yylsp = yylloc;
-+-#endif
++-
++-
++-  /* Shift the error token.  */
++-  YY_SYMBOL_PRINT ("Shifting", yystos[yyn], yyvsp, yylsp);
 +-
 +-  yystate = yyn;
 +-  goto yynewstate;
@@ -11024,22 +14334,44 @@ index 0000000000..a06dbad1ea
 +-  yyresult = 1;
 +-  goto yyreturn;
 +-
-+-/*---------------------------------------------.
-+-| yyoverflowab -- parser overflow comes here.  |
-+-`---------------------------------------------*/
-+-yyoverflowlab:
-+-  yyerror ("parser stack overflow");
++-#ifndef yyoverflow
++-/*-------------------------------------------------.
++-| yyexhaustedlab -- memory exhaustion comes here.  |
++-`-------------------------------------------------*/
++-yyexhaustedlab:
++-  yyerror (YY_("memory exhausted"));
 +-  yyresult = 2;
 +-  /* Fall through.  */
++-#endif
 +-
 +-yyreturn:
++-  if (yychar != YYEOF && yychar != YYEMPTY)
++-     yydestruct ("Cleanup: discarding lookahead",
++-		 yytoken, &yylval);
++-  /* Do not reclaim the symbols of the rule which action triggered
++-     this YYABORT or YYACCEPT.  */
++-  YYPOPSTACK (yylen);
++-  YY_STACK_PRINT (yyss, yyssp);
++-  while (yyssp != yyss)
++-    {
++-      yydestruct ("Cleanup: popping",
++-		  yystos[*yyssp], yyvsp);
++-      YYPOPSTACK (1);
++-    }
 +-#ifndef yyoverflow
 +-  if (yyss != yyssa)
 +-    YYSTACK_FREE (yyss);
 +-#endif
-+-  return yyresult;
++-#if YYERROR_VERBOSE
++-  if (yymsg != yymsgbuf)
++-    YYSTACK_FREE (yymsg);
++-#endif
++-  /* Make sure YYID is used.  */
++-  return YYID (yyresult);
 +-}
-+-#line 205 "plural.y"
++-
++-
++-#line 209 "plural.y"
 +-
 +-
 +-void
@@ -11217,12 +14549,13 @@ index 0000000000..a06dbad1ea
 +-{
 +-  /* Do nothing.  We don't print error messages here.  */
 +-}
++-
 +--- a/intl/plural.y
 ++++ /dev/null
-+@@ -1,381 +0,0 @@
++@@ -1,385 +0,0 @@
 +-%{
 +-/* Expression parsing for plural form selection.
-+-   Copyright (C) 2000-2001, 2003 Free Software Foundation, Inc.
++-   Copyright (C) 2000-2001, 2003, 2005-2006 Free Software Foundation, Inc.
 +-   Written by Ulrich Drepper <drepper@cygnus.com>, 2000.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -11237,13 +14570,14 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
-+-/* The bison generated parser uses alloca.  AIX 3 forces us to put this
-+-   declaration at the beginning of the file.  The declaration in bison's
-+-   skeleton file comes too late.  This must come before <config.h>
-+-   because <config.h> may include arbitrary system headers.  */
++-/* For bison < 2.0, the bison generated parser uses alloca.  AIX 3 forces us
++-   to put this declaration at the beginning of the file.  The declaration in
++-   bison's skeleton file comes too late.  This must come before <config.h>
++-   because <config.h> may include arbitrary system headers.
++-   This can go away once the AM_INTL_SUBDIR macro requires bison >= 2.0.  */
 +-#if defined _AIX && !defined __GNUC__
 +- #pragma alloca
 +-#endif
@@ -11254,6 +14588,7 @@ index 0000000000..a06dbad1ea
 +-
 +-#include <stddef.h>
 +-#include <stdlib.h>
++-#include <string.h>
 +-#include "plural-exp.h"
 +-
 +-/* The main function generated by the parser is called __gettextparse,
@@ -11270,7 +14605,7 @@ index 0000000000..a06dbad1ea
 +-
 +-%union {
 +-  unsigned long int num;
-+-  enum operator op;
++-  enum expression_operator op;
 +-  struct expression *exp;
 +-}
 +-
@@ -11282,7 +14617,8 @@ index 0000000000..a06dbad1ea
 +-/* Allocation of expressions.  */
 +-
 +-static struct expression *
-+-new_exp (int nargs, enum operator op, struct expression * const *args)
++-new_exp (int nargs, enum expression_operator op,
++-	 struct expression * const *args)
 +-{
 +-  int i;
 +-  struct expression *newp;
@@ -11311,13 +14647,13 @@ index 0000000000..a06dbad1ea
 +-}
 +-
 +-static inline struct expression *
-+-new_exp_0 (enum operator op)
++-new_exp_0 (enum expression_operator op)
 +-{
 +-  return new_exp (0, op, NULL);
 +-}
 +-
 +-static inline struct expression *
-+-new_exp_1 (enum operator op, struct expression *right)
++-new_exp_1 (enum expression_operator op, struct expression *right)
 +-{
 +-  struct expression *args[1];
 +-
@@ -11326,7 +14662,8 @@ index 0000000000..a06dbad1ea
 +-}
 +-
 +-static struct expression *
-+-new_exp_2 (enum operator op, struct expression *left, struct expression *right)
++-new_exp_2 (enum expression_operator op, struct expression *left,
++-	   struct expression *right)
 +-{
 +-  struct expression *args[2];
 +-
@@ -11336,7 +14673,7 @@ index 0000000000..a06dbad1ea
 +-}
 +-
 +-static inline struct expression *
-+-new_exp_3 (enum operator op, struct expression *bexp,
++-new_exp_3 (enum expression_operator op, struct expression *bexp,
 +-	   struct expression *tbranch, struct expression *fbranch)
 +-{
 +-  struct expression *args[3];
@@ -11603,9 +14940,9 @@ index 0000000000..a06dbad1ea
 +-}
 +--- a/intl/printf-args.c
 ++++ /dev/null
-+@@ -1,119 +0,0 @@
++@@ -1,188 +0,0 @@
 +-/* Decomposed printf argument list.
-+-   Copyright (C) 1999, 2002-2003 Free Software Foundation, Inc.
++-   Copyright (C) 1999, 2002-2003, 2005-2007 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -11619,21 +14956,28 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
-+-#ifdef HAVE_CONFIG_H
++-/* This file can be parametrized with the following macros:
++-     ENABLE_UNISTDIO    Set to 1 to enable the unistdio extensions.
++-     PRINTF_FETCHARGS   Name of the function to be defined.
++-     STATIC             Set to 'static' to declare the function static.  */
++-
++-#ifndef PRINTF_FETCHARGS
 +-# include <config.h>
 +-#endif
 +-
 +-/* Specification.  */
-+-#include "printf-args.h"
++-#ifndef PRINTF_FETCHARGS
++-# include "printf-args.h"
++-#endif
 +-
 +-#ifdef STATIC
 +-STATIC
 +-#endif
 +-int
-+-printf_fetchargs (va_list args, arguments *a)
++-PRINTF_FETCHARGS (va_list args, arguments *a)
 +-{
 +-  size_t i;
 +-  argument *ap;
@@ -11665,7 +15009,7 @@ index 0000000000..a06dbad1ea
 +-      case TYPE_ULONGINT:
 +-	ap->a.a_ulongint = va_arg (args, unsigned long int);
 +-	break;
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
 +-      case TYPE_LONGLONGINT:
 +-	ap->a.a_longlongint = va_arg (args, long long int);
 +-	break;
@@ -11676,25 +15020,48 @@ index 0000000000..a06dbad1ea
 +-      case TYPE_DOUBLE:
 +-	ap->a.a_double = va_arg (args, double);
 +-	break;
-+-#ifdef HAVE_LONG_DOUBLE
 +-      case TYPE_LONGDOUBLE:
 +-	ap->a.a_longdouble = va_arg (args, long double);
 +-	break;
-+-#endif
 +-      case TYPE_CHAR:
 +-	ap->a.a_char = va_arg (args, int);
 +-	break;
-+-#ifdef HAVE_WINT_T
++-#if HAVE_WINT_T
 +-      case TYPE_WIDE_CHAR:
-+-	ap->a.a_wide_char = va_arg (args, wint_t);
++-	/* Although ISO C 99 7.24.1.(2) says that wint_t is "unchanged by
++-	   default argument promotions", this is not the case in mingw32,
++-	   where wint_t is 'unsigned short'.  */
++-	ap->a.a_wide_char =
++-	  (sizeof (wint_t) < sizeof (int)
++-	   ? va_arg (args, int)
++-	   : va_arg (args, wint_t));
 +-	break;
 +-#endif
 +-      case TYPE_STRING:
 +-	ap->a.a_string = va_arg (args, const char *);
++-	/* A null pointer is an invalid argument for "%s", but in practice
++-	   it occurs quite frequently in printf statements that produce
++-	   debug output.  Use a fallback in this case.  */
++-	if (ap->a.a_string == NULL)
++-	  ap->a.a_string = "(NULL)";
 +-	break;
-+-#ifdef HAVE_WCHAR_T
++-#if HAVE_WCHAR_T
 +-      case TYPE_WIDE_STRING:
 +-	ap->a.a_wide_string = va_arg (args, const wchar_t *);
++-	/* A null pointer is an invalid argument for "%ls", but in practice
++-	   it occurs quite frequently in printf statements that produce
++-	   debug output.  Use a fallback in this case.  */
++-	if (ap->a.a_wide_string == NULL)
++-	  {
++-	    static const wchar_t wide_null_string[] =
++-	      {
++-		(wchar_t)'(',
++-		(wchar_t)'N', (wchar_t)'U', (wchar_t)'L', (wchar_t)'L',
++-		(wchar_t)')',
++-		(wchar_t)0
++-	      };
++-	    ap->a.a_wide_string = wide_null_string;
++-	  }
 +-	break;
 +-#endif
 +-      case TYPE_POINTER:
@@ -11712,9 +15079,48 @@ index 0000000000..a06dbad1ea
 +-      case TYPE_COUNT_LONGINT_POINTER:
 +-	ap->a.a_count_longint_pointer = va_arg (args, long int *);
 +-	break;
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
 +-      case TYPE_COUNT_LONGLONGINT_POINTER:
 +-	ap->a.a_count_longlongint_pointer = va_arg (args, long long int *);
++-	break;
++-#endif
++-#if ENABLE_UNISTDIO
++-      /* The unistdio extensions.  */
++-      case TYPE_U8_STRING:
++-	ap->a.a_u8_string = va_arg (args, const uint8_t *);
++-	/* A null pointer is an invalid argument for "%U", but in practice
++-	   it occurs quite frequently in printf statements that produce
++-	   debug output.  Use a fallback in this case.  */
++-	if (ap->a.a_u8_string == NULL)
++-	  {
++-	    static const uint8_t u8_null_string[] =
++-	      { '(', 'N', 'U', 'L', 'L', ')', 0 };
++-	    ap->a.a_u8_string = u8_null_string;
++-	  }
++-	break;
++-      case TYPE_U16_STRING:
++-	ap->a.a_u16_string = va_arg (args, const uint16_t *);
++-	/* A null pointer is an invalid argument for "%lU", but in practice
++-	   it occurs quite frequently in printf statements that produce
++-	   debug output.  Use a fallback in this case.  */
++-	if (ap->a.a_u16_string == NULL)
++-	  {
++-	    static const uint16_t u16_null_string[] =
++-	      { '(', 'N', 'U', 'L', 'L', ')', 0 };
++-	    ap->a.a_u16_string = u16_null_string;
++-	  }
++-	break;
++-      case TYPE_U32_STRING:
++-	ap->a.a_u32_string = va_arg (args, const uint32_t *);
++-	/* A null pointer is an invalid argument for "%llU", but in practice
++-	   it occurs quite frequently in printf statements that produce
++-	   debug output.  Use a fallback in this case.  */
++-	if (ap->a.a_u32_string == NULL)
++-	  {
++-	    static const uint32_t u32_null_string[] =
++-	      { '(', 'N', 'U', 'L', 'L', ')', 0 };
++-	    ap->a.a_u32_string = u32_null_string;
++-	  }
 +-	break;
 +-#endif
 +-      default:
@@ -11725,9 +15131,9 @@ index 0000000000..a06dbad1ea
 +-}
 +--- a/intl/printf-args.h
 ++++ /dev/null
-+@@ -1,137 +0,0 @@
++@@ -1,155 +0,0 @@
 +-/* Decomposed printf argument list.
-+-   Copyright (C) 1999, 2002-2003 Free Software Foundation, Inc.
++-   Copyright (C) 1999, 2002-2003, 2006-2007 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -11741,22 +15147,32 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _PRINTF_ARGS_H
 +-#define _PRINTF_ARGS_H
 +-
++-/* This file can be parametrized with the following macros:
++-     ENABLE_UNISTDIO    Set to 1 to enable the unistdio extensions.
++-     PRINTF_FETCHARGS   Name of the function to be declared.
++-     STATIC             Set to 'static' to declare the function static.  */
++-
++-/* Default parameters.  */
++-#ifndef PRINTF_FETCHARGS
++-# define PRINTF_FETCHARGS printf_fetchargs
++-#endif
++-
 +-/* Get size_t.  */
 +-#include <stddef.h>
 +-
 +-/* Get wchar_t.  */
-+-#ifdef HAVE_WCHAR_T
++-#if HAVE_WCHAR_T
 +-# include <stddef.h>
 +-#endif
 +-
 +-/* Get wint_t.  */
-+-#ifdef HAVE_WINT_T
++-#if HAVE_WINT_T
 +-# include <wchar.h>
 +-#endif
 +-
@@ -11776,20 +15192,18 @@ index 0000000000..a06dbad1ea
 +-  TYPE_UINT,
 +-  TYPE_LONGINT,
 +-  TYPE_ULONGINT,
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
 +-  TYPE_LONGLONGINT,
 +-  TYPE_ULONGLONGINT,
 +-#endif
 +-  TYPE_DOUBLE,
-+-#ifdef HAVE_LONG_DOUBLE
 +-  TYPE_LONGDOUBLE,
-+-#endif
 +-  TYPE_CHAR,
-+-#ifdef HAVE_WINT_T
++-#if HAVE_WINT_T
 +-  TYPE_WIDE_CHAR,
 +-#endif
 +-  TYPE_STRING,
-+-#ifdef HAVE_WCHAR_T
++-#if HAVE_WCHAR_T
 +-  TYPE_WIDE_STRING,
 +-#endif
 +-  TYPE_POINTER,
@@ -11797,8 +15211,14 @@ index 0000000000..a06dbad1ea
 +-  TYPE_COUNT_SHORT_POINTER,
 +-  TYPE_COUNT_INT_POINTER,
 +-  TYPE_COUNT_LONGINT_POINTER
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
 +-, TYPE_COUNT_LONGLONGINT_POINTER
++-#endif
++-#if ENABLE_UNISTDIO
++-  /* The unistdio extensions.  */
++-, TYPE_U8_STRING
++-, TYPE_U16_STRING
++-, TYPE_U32_STRING
 +-#endif
 +-} arg_type;
 +-
@@ -11816,21 +15236,19 @@ index 0000000000..a06dbad1ea
 +-    unsigned int		a_uint;
 +-    long int			a_longint;
 +-    unsigned long int		a_ulongint;
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
 +-    long long int		a_longlongint;
 +-    unsigned long long int	a_ulonglongint;
 +-#endif
 +-    float			a_float;
 +-    double			a_double;
-+-#ifdef HAVE_LONG_DOUBLE
 +-    long double			a_longdouble;
-+-#endif
 +-    int				a_char;
-+-#ifdef HAVE_WINT_T
++-#if HAVE_WINT_T
 +-    wint_t			a_wide_char;
 +-#endif
 +-    const char*			a_string;
-+-#ifdef HAVE_WCHAR_T
++-#if HAVE_WCHAR_T
 +-    const wchar_t*		a_wide_string;
 +-#endif
 +-    void*			a_pointer;
@@ -11838,8 +15256,14 @@ index 0000000000..a06dbad1ea
 +-    short *			a_count_short_pointer;
 +-    int *			a_count_int_pointer;
 +-    long int *			a_count_longint_pointer;
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
 +-    long long int *		a_count_longlongint_pointer;
++-#endif
++-#if ENABLE_UNISTDIO
++-    /* The unistdio extensions.  */
++-    const uint8_t *		a_u8_string;
++-    const uint16_t *		a_u16_string;
++-    const uint32_t *		a_u32_string;
 +-#endif
 +-  }
 +-  a;
@@ -11860,14 +15284,14 @@ index 0000000000..a06dbad1ea
 +-#else
 +-extern
 +-#endif
-+-int printf_fetchargs (va_list args, arguments *a);
++-int PRINTF_FETCHARGS (va_list args, arguments *a);
 +-
 +-#endif /* _PRINTF_ARGS_H */
 +--- a/intl/printf-parse.c
 ++++ /dev/null
-+@@ -1,537 +0,0 @@
++@@ -1,590 +0,0 @@
 +-/* Formatted output to strings.
-+-   Copyright (C) 1999-2000, 2002-2003 Free Software Foundation, Inc.
++-   Copyright (C) 1999-2000, 2002-2003, 2006-2007 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -11881,47 +15305,66 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
-+-#ifdef HAVE_CONFIG_H
++-/* This file can be parametrized with the following macros:
++-     CHAR_T             The element type of the format string.
++-     CHAR_T_ONLY_ASCII  Set to 1 to enable verification that all characters
++-                        in the format string are ASCII.
++-     DIRECTIVE          Structure denoting a format directive.
++-                        Depends on CHAR_T.
++-     DIRECTIVES         Structure denoting the set of format directives of a
++-                        format string.  Depends on CHAR_T.
++-     PRINTF_PARSE       Function that parses a format string.
++-                        Depends on CHAR_T.
++-     STATIC             Set to 'static' to declare the function static.
++-     ENABLE_UNISTDIO    Set to 1 to enable the unistdio extensions.  */
++-
++-#ifndef PRINTF_PARSE
 +-# include <config.h>
 +-#endif
 +-
 +-/* Specification.  */
-+-#if WIDE_CHAR_VERSION
-+-# include "wprintf-parse.h"
-+-#else
++-#ifndef PRINTF_PARSE
 +-# include "printf-parse.h"
++-#endif
++-
++-/* Default parameters.  */
++-#ifndef PRINTF_PARSE
++-# define PRINTF_PARSE printf_parse
++-# define CHAR_T char
++-# define DIRECTIVE char_directive
++-# define DIRECTIVES char_directives
 +-#endif
 +-
 +-/* Get size_t, NULL.  */
 +-#include <stddef.h>
 +-
 +-/* Get intmax_t.  */
-+-#if HAVE_STDINT_H_WITH_UINTMAX
++-#if defined IN_LIBINTL || defined IN_LIBASPRINTF
++-# if HAVE_STDINT_H_WITH_UINTMAX
++-#  include <stdint.h>
++-# endif
++-# if HAVE_INTTYPES_H_WITH_UINTMAX
++-#  include <inttypes.h>
++-# endif
++-#else
 +-# include <stdint.h>
-+-#endif
-+-#if HAVE_INTTYPES_H_WITH_UINTMAX
-+-# include <inttypes.h>
 +-#endif
 +-
 +-/* malloc(), realloc(), free().  */
 +-#include <stdlib.h>
 +-
++-/* errno.  */
++-#include <errno.h>
++-
 +-/* Checked size_t computations.  */
 +-#include "xsize.h"
 +-
-+-#if WIDE_CHAR_VERSION
-+-# define PRINTF_PARSE wprintf_parse
-+-# define CHAR_T wchar_t
-+-# define DIRECTIVE wchar_t_directive
-+-# define DIRECTIVES wchar_t_directives
-+-#else
-+-# define PRINTF_PARSE printf_parse
-+-# define CHAR_T char
-+-# define DIRECTIVE char_directive
-+-# define DIRECTIVES char_directives
++-#if CHAR_T_ONLY_ASCII
++-/* c_isascii().  */
++-# include "c-ctype.h"
 +-#endif
 +-
 +-#ifdef STATIC
@@ -11939,10 +15382,10 @@ index 0000000000..a06dbad1ea
 +-
 +-  d->count = 0;
 +-  d_allocated = 1;
-+-  d->dir = malloc (d_allocated * sizeof (DIRECTIVE));
++-  d->dir = (DIRECTIVE *) malloc (d_allocated * sizeof (DIRECTIVE));
 +-  if (d->dir == NULL)
 +-    /* Out of memory.  */
-+-    return -1;
++-    goto out_of_memory_1;
 +-
 +-  a->count = 0;
 +-  a_allocated = 0;
@@ -11962,13 +15405,13 @@ index 0000000000..a06dbad1ea
 +-	memory_size = xtimes (a_allocated, sizeof (argument));		\
 +-	if (size_overflow_p (memory_size))				\
 +-	  /* Overflow, would lead to out of memory.  */			\
-+-	  goto error;							\
-+-	memory = (a->arg						\
-+-		  ? realloc (a->arg, memory_size)			\
-+-		  : malloc (memory_size));				\
++-	  goto out_of_memory;						\
++-	memory = (argument *) (a->arg					\
++-			       ? realloc (a->arg, memory_size)		\
++-			       : malloc (memory_size));			\
 +-	if (memory == NULL)						\
 +-	  /* Out of memory.  */						\
-+-	  goto error;							\
++-	  goto out_of_memory;						\
 +-	a->arg = memory;						\
 +-      }									\
 +-    while (a->count <= n)						\
@@ -11986,7 +15429,7 @@ index 0000000000..a06dbad1ea
 +-      if (c == '%')
 +-	{
 +-	  size_t arg_index = ARG_NONE;
-+-	  DIRECTIVE *dp = &d->dir[d->count];/* pointer to next directive */
++-	  DIRECTIVE *dp = &d->dir[d->count]; /* pointer to next directive */
 +-
 +-	  /* Initialize the next directive.  */
 +-	  dp->dir_start = cp - 1;
@@ -12197,7 +15640,6 @@ index 0000000000..a06dbad1ea
 +-		      flags += 8;
 +-		      cp++;
 +-		    }
-+-#ifdef HAVE_INTMAX_T
 +-		  else if (*cp == 'j')
 +-		    {
 +-		      if (sizeof (intmax_t) > sizeof (long))
@@ -12212,7 +15654,6 @@ index 0000000000..a06dbad1ea
 +-			}
 +-		      cp++;
 +-		    }
-+-#endif
 +-		  else if (*cp == 'z' || *cp == 'Z')
 +-		    {
 +-		      /* 'z' is standardized in ISO C 99, but glibc uses 'Z'
@@ -12253,11 +15694,14 @@ index 0000000000..a06dbad1ea
 +-	      switch (c)
 +-		{
 +-		case 'd': case 'i':
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
++-		  /* If 'long long' exists and is larger than 'long':  */
 +-		  if (flags >= 16 || (flags & 4))
 +-		    type = TYPE_LONGLONGINT;
 +-		  else
 +-#endif
++-		  /* If 'long long' exists and is the same as 'long', we parse
++-		     "lld" into TYPE_LONGINT.  */
 +-		  if (flags >= 8)
 +-		    type = TYPE_LONGINT;
 +-		  else if (flags & 2)
@@ -12268,11 +15712,14 @@ index 0000000000..a06dbad1ea
 +-		    type = TYPE_INT;
 +-		  break;
 +-		case 'o': case 'u': case 'x': case 'X':
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
++-		  /* If 'long long' exists and is larger than 'long':  */
 +-		  if (flags >= 16 || (flags & 4))
 +-		    type = TYPE_ULONGLONGINT;
 +-		  else
 +-#endif
++-		  /* If 'unsigned long long' exists and is the same as
++-		     'unsigned long', we parse "llu" into TYPE_ULONGINT.  */
 +-		  if (flags >= 8)
 +-		    type = TYPE_ULONGINT;
 +-		  else if (flags & 2)
@@ -12284,16 +15731,14 @@ index 0000000000..a06dbad1ea
 +-		  break;
 +-		case 'f': case 'F': case 'e': case 'E': case 'g': case 'G':
 +-		case 'a': case 'A':
-+-#ifdef HAVE_LONG_DOUBLE
 +-		  if (flags >= 16 || (flags & 4))
 +-		    type = TYPE_LONGDOUBLE;
 +-		  else
-+-#endif
-+-		  type = TYPE_DOUBLE;
++-		    type = TYPE_DOUBLE;
 +-		  break;
 +-		case 'c':
 +-		  if (flags >= 8)
-+-#ifdef HAVE_WINT_T
++-#if HAVE_WINT_T
 +-		    type = TYPE_WIDE_CHAR;
 +-#else
 +-		    goto error;
@@ -12301,7 +15746,7 @@ index 0000000000..a06dbad1ea
 +-		  else
 +-		    type = TYPE_CHAR;
 +-		  break;
-+-#ifdef HAVE_WINT_T
++-#if HAVE_WINT_T
 +-		case 'C':
 +-		  type = TYPE_WIDE_CHAR;
 +-		  c = 'c';
@@ -12309,7 +15754,7 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-		case 's':
 +-		  if (flags >= 8)
-+-#ifdef HAVE_WCHAR_T
++-#if HAVE_WCHAR_T
 +-		    type = TYPE_WIDE_STRING;
 +-#else
 +-		    goto error;
@@ -12317,7 +15762,7 @@ index 0000000000..a06dbad1ea
 +-		  else
 +-		    type = TYPE_STRING;
 +-		  break;
-+-#ifdef HAVE_WCHAR_T
++-#if HAVE_WCHAR_T
 +-		case 'S':
 +-		  type = TYPE_WIDE_STRING;
 +-		  c = 's';
@@ -12327,11 +15772,14 @@ index 0000000000..a06dbad1ea
 +-		  type = TYPE_POINTER;
 +-		  break;
 +-		case 'n':
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
++-		  /* If 'long long' exists and is larger than 'long':  */
 +-		  if (flags >= 16 || (flags & 4))
 +-		    type = TYPE_COUNT_LONGLONGINT_POINTER;
 +-		  else
 +-#endif
++-		  /* If 'long long' exists and is the same as 'long', we parse
++-		     "lln" into TYPE_COUNT_LONGINT_POINTER.  */
 +-		  if (flags >= 8)
 +-		    type = TYPE_COUNT_LONGINT_POINTER;
 +-		  else if (flags & 2)
@@ -12341,6 +15789,17 @@ index 0000000000..a06dbad1ea
 +-		  else
 +-		    type = TYPE_COUNT_INT_POINTER;
 +-		  break;
++-#if ENABLE_UNISTDIO
++-		/* The unistdio extensions.  */
++-		case 'U':
++-		  if (flags >= 16)
++-		    type = TYPE_U32_STRING;
++-		  else if (flags >= 8)
++-		    type = TYPE_U16_STRING;
++-		  else
++-		    type = TYPE_U8_STRING;
++-		  break;
++-#endif
 +-		case '%':
 +-		  type = TYPE_NONE;
 +-		  break;
@@ -12376,14 +15835,21 @@ index 0000000000..a06dbad1ea
 +-	      memory_size = xtimes (d_allocated, sizeof (DIRECTIVE));
 +-	      if (size_overflow_p (memory_size))
 +-		/* Overflow, would lead to out of memory.  */
-+-		goto error;
-+-	      memory = realloc (d->dir, memory_size);
++-		goto out_of_memory;
++-	      memory = (DIRECTIVE *) realloc (d->dir, memory_size);
 +-	      if (memory == NULL)
 +-		/* Out of memory.  */
-+-		goto error;
++-		goto out_of_memory;
 +-	      d->dir = memory;
 +-	    }
 +-	}
++-#if CHAR_T_ONLY_ASCII
++-      else if (!c_isascii (c))
++-	{
++-	  /* Non-ASCII character.  Not supported.  */
++-	  goto error;
++-	}
++-#endif
 +-    }
 +-  d->dir[d->count].dir_start = cp;
 +-
@@ -12396,13 +15862,24 @@ index 0000000000..a06dbad1ea
 +-    free (a->arg);
 +-  if (d->dir)
 +-    free (d->dir);
++-  errno = EINVAL;
++-  return -1;
++-
++-out_of_memory:
++-  if (a->arg)
++-    free (a->arg);
++-  if (d->dir)
++-    free (d->dir);
++-out_of_memory_1:
++-  errno = ENOMEM;
 +-  return -1;
 +-}
 +-
++-#undef PRINTF_PARSE
 +-#undef DIRECTIVES
 +-#undef DIRECTIVE
++-#undef CHAR_T_ONLY_ASCII
 +-#undef CHAR_T
-+-#undef PRINTF_PARSE
 +--- a/intl/printf-parse.h
 ++++ /dev/null
 +@@ -1,75 +0,0 @@
@@ -12421,7 +15898,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _PRINTF_PARSE_H
@@ -12483,9 +15960,9 @@ index 0000000000..a06dbad1ea
 +-#endif /* _PRINTF_PARSE_H */
 +--- a/intl/printf.c
 ++++ /dev/null
-+@@ -1,371 +0,0 @@
++@@ -1,427 +0,0 @@
 +-/* Formatted output to strings, using POSIX/XSI format strings with positions.
-+-   Copyright (C) 2003 Free Software Foundation, Inc.
++-   Copyright (C) 2003, 2006-2007 Free Software Foundation, Inc.
 +-   Written by Bruno Haible <bruno@clisp.org>, 2003.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -12500,7 +15977,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -12533,8 +16010,15 @@ index 0000000000..a06dbad1ea
 +-
 +-#if !HAVE_POSIX_PRINTF
 +-
++-#include <errno.h>
++-#include <limits.h>
 +-#include <stdlib.h>
 +-#include <string.h>
++-
++-/* Some systems, like OSF/1 4.0 and Woe32, don't have EOVERFLOW.  */
++-#ifndef EOVERFLOW
++-# define EOVERFLOW E2BIG
++-#endif
 +-
 +-/* When building a DLL, we must export some functions.  Note that because
 +-   the functions are only defined for binary backward compatibility, we
@@ -12546,6 +16030,14 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-
 +-#define STATIC static
++-
++-/* This needs to be consistent with libgnuintl.h.in.  */
++-#if defined __NetBSD__ || defined __BEOS__ || defined __CYGWIN__ || defined __MINGW32__
++-/* Don't break __attribute__((format(printf,M,N))).
++-   This redefinition is only possible because the libc in NetBSD, Cygwin,
++-   mingw does not have a function __printf__.  */
++-# define libintl_printf __printf__
++-#endif
 +-
 +-/* Define auxiliary functions declared in "printf-args.h".  */
 +-#include "printf-args.c"
@@ -12574,9 +16066,15 @@ index 0000000000..a06dbad1ea
 +-      int retval = -1;
 +-      if (result != NULL)
 +-	{
-+-	  if (fwrite (result, 1, length, stream) == length)
-+-	    retval = length;
++-	  size_t written = fwrite (result, 1, length, stream);
 +-	  free (result);
++-	  if (written == length)
++-	    {
++-	      if (length > INT_MAX)
++-		errno = EOVERFLOW;
++-	      else
++-		retval = length;
++-	    }
 +-	}
 +-      return retval;
 +-    }
@@ -12630,6 +16128,11 @@ index 0000000000..a06dbad1ea
 +-	  free (result);
 +-	  return -1;
 +-	}
++-      if (length > INT_MAX)
++-	{
++-	  errno = EOVERFLOW;
++-	  return -1;
++-	}
 +-      else
 +-	return length;
 +-    }
@@ -12672,12 +16175,16 @@ index 0000000000..a06dbad1ea
 +-	{
 +-	  if (maxlength > 0)
 +-	    {
-+-	      if (length < maxlength)
-+-		abort ();
-+-	      memcpy (resultbuf, result, maxlength - 1);
-+-	      resultbuf[maxlength - 1] = '\0';
++-	      size_t pruned_length =
++-		(length < maxlength ? length : maxlength - 1);
++-	      memcpy (resultbuf, result, pruned_length);
++-	      resultbuf[pruned_length] = '\0';
 +-	    }
 +-	  free (result);
++-	}
++-      if (length > INT_MAX)
++-	{
++-	  errno = EOVERFLOW;
 +-	  return -1;
 +-	}
 +-      else
@@ -12710,6 +16217,12 @@ index 0000000000..a06dbad1ea
 +-  char *result = libintl_vasnprintf (NULL, &length, format, args);
 +-  if (result == NULL)
 +-    return -1;
++-  if (length > INT_MAX)
++-    {
++-      free (result);
++-      errno = EOVERFLOW;
++-      return -1;
++-    }
 +-  *resultp = result;
 +-  return length;
 +-}
@@ -12735,7 +16248,12 @@ index 0000000000..a06dbad1ea
 +-
 +-#define WIDE_CHAR_VERSION 1
 +-
++-#include "wprintf-parse.h"
 +-/* Define auxiliary functions declared in "wprintf-parse.h".  */
++-#define CHAR_T wchar_t
++-#define DIRECTIVE wchar_t_directive
++-#define DIRECTIVES wchar_t_directives
++-#define PRINTF_PARSE wprintf_parse
 +-#include "printf-parse.c"
 +-
 +-/* Define functions declared in "vasnprintf.h".  */
@@ -12771,9 +16289,14 @@ index 0000000000..a06dbad1ea
 +-	  for (i = 0; i < length; i++)
 +-	    if (fputwc (result[i], stream) == WEOF)
 +-	      break;
-+-	  if (i == length)
-+-	    retval = length;
 +-	  free (result);
++-	  if (i == length)
++-	    {
++-	      if (length > INT_MAX)
++-		errno = EOVERFLOW;
++-	      else
++-		retval = length;
++-	    }
 +-	}
 +-      return retval;
 +-    }
@@ -12826,12 +16349,22 @@ index 0000000000..a06dbad1ea
 +-	{
 +-	  if (maxlength > 0)
 +-	    {
-+-	      if (length < maxlength)
-+-		abort ();
-+-	      memcpy (resultbuf, result, (maxlength - 1) * sizeof (wchar_t));
-+-	      resultbuf[maxlength - 1] = 0;
++-	      size_t pruned_length =
++-		(length < maxlength ? length : maxlength - 1);
++-	      memcpy (resultbuf, result, pruned_length * sizeof (wchar_t));
++-	      resultbuf[pruned_length] = 0;
 +-	    }
 +-	  free (result);
++-	  /* Unlike vsnprintf, which has to return the number of character that
++-	     would have been produced if the resultbuf had been sufficiently
++-	     large, the vswprintf function has to return a negative value if
++-	     the resultbuf was not sufficiently large.  */
++-	  if (length >= maxlength)
++-	    return -1;
++-	}
++-      if (length > INT_MAX)
++-	{
++-	  errno = EOVERFLOW;
 +-	  return -1;
 +-	}
 +-      else
@@ -12874,7 +16407,7 @@ index 0000000000..a06dbad1ea
 +-#
 +-#   You should have received a copy of the GNU Library General Public
 +-#   License along with this program; if not, write to the Free Software
-+-#   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-#   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-#   USA.
 +-#
 +-# Written by Bruno Haible <haible@clisp.cons.org>.
@@ -12908,7 +16441,7 @@ index 0000000000..a06dbad1ea
 +-#
 +-#   You should have received a copy of the GNU Library General Public
 +-#   License along with this program; if not, write to the Free Software
-+-#   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-#   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-#   USA.
 +-#
 +-# Written by Bruno Haible <haible@clisp.cons.org>.
@@ -12920,9 +16453,9 @@ index 0000000000..a06dbad1ea
 +-}
 +--- a/intl/relocatable.c
 ++++ /dev/null
-+@@ -1,449 +0,0 @@
++@@ -1,468 +0,0 @@
 +-/* Provide relocatable packages.
-+-   Copyright (C) 2003-2004 Free Software Foundation, Inc.
++-   Copyright (C) 2003-2006 Free Software Foundation, Inc.
 +-   Written by Bruno Haible <bruno@clisp.org>, 2003.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -12937,7 +16470,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-
@@ -12948,9 +16481,7 @@ index 0000000000..a06dbad1ea
 +-# define _GNU_SOURCE	1
 +-#endif
 +-
-+-#ifdef HAVE_CONFIG_H
-+-# include "config.h"
-+-#endif
++-#include <config.h>
 +-
 +-/* Specification.  */
 +-#include "relocatable.h"
@@ -12968,7 +16499,7 @@ index 0000000000..a06dbad1ea
 +-# include "xalloc.h"
 +-#endif
 +-
-+-#if defined _WIN32 || defined __WIN32__
++-#if defined _WIN32 || defined __WIN32__ || defined __CYGWIN__
 +-# define WIN32_LEAN_AND_MEAN
 +-# include <windows.h>
 +-#endif
@@ -13157,6 +16688,9 @@ index 0000000000..a06dbad1ea
 +-		  same = true;
 +-		break;
 +-	      }
++-	    /* Do case-insensitive comparison if the filesystem is always or
++-	       often case-insensitive.  It's better to accept the comparison
++-	       if the difference is only in case, rather than to fail.  */
 +-#if defined _WIN32 || defined __WIN32__ || defined __CYGWIN__ || defined __EMX__ || defined __DJGPP__
 +-	    /* Win32, Cygwin, OS/2, DOS - case insignificant filesystem */
 +-	    if ((*rpi >= 'a' && *rpi <= 'z' ? *rpi - 'a' + 'A' : *rpi)
@@ -13203,7 +16737,7 @@ index 0000000000..a06dbad1ea
 +-/* Full pathname of shared library, or NULL.  */
 +-static char *shared_library_fullname;
 +-
-+-#if defined _WIN32 || defined __WIN32__
++-#if defined _WIN32 || defined __WIN32__ || defined __CYGWIN__
 +-
 +-/* Determine the full pathname of the shared library when it is loaded.  */
 +-
@@ -13225,13 +16759,31 @@ index 0000000000..a06dbad1ea
 +-	/* Shouldn't happen.  */
 +-	return FALSE;
 +-
-+-      shared_library_fullname = strdup (location);
++-      {
++-#if defined __CYGWIN__
++-	/* On Cygwin, we need to convert paths coming from Win32 system calls
++-	   to the Unix-like slashified notation.  */
++-	static char location_as_posix_path[2 * MAX_PATH];
++-	/* There's no error return defined for cygwin_conv_to_posix_path.
++-	   See cygwin-api/func-cygwin-conv-to-posix-path.html.
++-	   Does it overflow the buffer of expected size MAX_PATH or does it
++-	   truncate the path?  I don't know.  Let's catch both.  */
++-	cygwin_conv_to_posix_path (location, location_as_posix_path);
++-	location_as_posix_path[MAX_PATH - 1] = '\0';
++-	if (strlen (location_as_posix_path) >= MAX_PATH - 1)
++-	  /* A sign of buffer overflow or path truncation.  */
++-	  return FALSE;
++-	shared_library_fullname = strdup (location_as_posix_path);
++-#else
++-	shared_library_fullname = strdup (location);
++-#endif
++-      }
 +-    }
 +-
 +-  return TRUE;
 +-}
 +-
-+-#else /* Unix */
++-#else /* Unix except Cygwin */
 +-
 +-static void
 +-find_shared_library_fullname ()
@@ -13282,15 +16834,15 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-}
 +-
-+-#endif /* WIN32 / Unix */
++-#endif /* (WIN32 or Cygwin) / (Unix except Cygwin) */
 +-
 +-/* Return the full pathname of the current shared library.
 +-   Return NULL if unknown.
-+-   Guaranteed to work only on Linux and Woe32.  */
++-   Guaranteed to work only on Linux, Cygwin and Woe32.  */
 +-static char *
 +-get_shared_library_fullname ()
 +-{
-+-#if !(defined _WIN32 || defined __WIN32__)
++-#if !(defined _WIN32 || defined __WIN32__ || defined __CYGWIN__)
 +-  static bool tried_find_shared_library_fullname;
 +-  if (!tried_find_shared_library_fullname)
 +-    {
@@ -13372,9 +16924,9 @@ index 0000000000..a06dbad1ea
 +-#endif
 +--- a/intl/relocatable.h
 ++++ /dev/null
-+@@ -1,77 +0,0 @@
++@@ -1,79 +0,0 @@
 +-/* Provide relocatable packages.
-+-   Copyright (C) 2003 Free Software Foundation, Inc.
++-   Copyright (C) 2003, 2005 Free Software Foundation, Inc.
 +-   Written by Bruno Haible <bruno@clisp.org>, 2003.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
@@ -13389,7 +16941,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _RELOCATABLE_H
@@ -13406,7 +16958,9 @@ index 0000000000..a06dbad1ea
 +-/* When building a DLL, we must export some functions.  Note that because
 +-   this is a private .h file, we don't need to use __declspec(dllimport)
 +-   in any case.  */
-+-#if defined _MSC_VER && BUILDING_DLL
++-#if HAVE_VISIBILITY && BUILDING_DLL
++-# define RELOCATABLE_DLL_EXPORTED __attribute__((__visibility__("default")))
++-#elif defined _MSC_VER && BUILDING_DLL
 +-# define RELOCATABLE_DLL_EXPORTED __declspec(dllexport)
 +-#else
 +-# define RELOCATABLE_DLL_EXPORTED
@@ -13452,9 +17006,9 @@ index 0000000000..a06dbad1ea
 +-#endif /* _RELOCATABLE_H */
 +--- a/intl/textdomain.c
 ++++ /dev/null
-+@@ -1,141 +0,0 @@
++@@ -1,127 +0,0 @@
 +-/* Implementation of the textdomain(3) function.
-+-   Copyright (C) 1995-1998, 2000-2003 Free Software Foundation, Inc.
++-   Copyright (C) 1995-1998, 2000-2003, 2005-2006 Free Software Foundation, Inc.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -13468,7 +17022,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifdef HAVE_CONFIG_H
@@ -13478,38 +17032,24 @@ index 0000000000..a06dbad1ea
 +-#include <stdlib.h>
 +-#include <string.h>
 +-
++-#include "gettextP.h"
 +-#ifdef _LIBC
 +-# include <libintl.h>
 +-#else
 +-# include "libgnuintl.h"
 +-#endif
-+-#include "gettextP.h"
 +-
++-/* Handle multi-threaded applications.  */
 +-#ifdef _LIBC
-+-/* We have to handle multi-threaded applications.  */
 +-# include <bits/libc-lock.h>
++-# define gl_rwlock_define __libc_rwlock_define
++-# define gl_rwlock_wrlock __libc_rwlock_wrlock
++-# define gl_rwlock_unlock __libc_rwlock_unlock
 +-#else
-+-/* Provide dummy implementation if this is outside glibc.  */
-+-# define __libc_rwlock_define(CLASS, NAME)
-+-# define __libc_rwlock_wrlock(NAME)
-+-# define __libc_rwlock_unlock(NAME)
-+-#endif
-+-
-+-/* The internal variables in the standalone libintl.a must have different
-+-   names than the internal variables in GNU libc, otherwise programs
-+-   using libintl.a cannot be linked statically.  */
-+-#if !defined _LIBC
-+-# define _nl_default_default_domain libintl_nl_default_default_domain
-+-# define _nl_current_default_domain libintl_nl_current_default_domain
++-# include "lock.h"
 +-#endif
 +-
 +-/* @@ end of prolog @@ */
-+-
-+-/* Name of the default text domain.  */
-+-extern const char _nl_default_default_domain[] attribute_hidden;
-+-
-+-/* Default text domain in which entries for gettext(3) are to be found.  */
-+-extern const char *_nl_current_default_domain attribute_hidden;
 +-
 +-
 +-/* Names for the libintl functions are a problem.  They must not clash
@@ -13526,7 +17066,7 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-
 +-/* Lock variable to protect the global data in the gettext implementation.  */
-+-__libc_rwlock_define (extern, _nl_state_lock attribute_hidden)
++-gl_rwlock_define (extern, _nl_state_lock attribute_hidden)
 +-
 +-/* Set the current default message catalog to DOMAINNAME.
 +-   If DOMAINNAME is null, return the current default.
@@ -13541,7 +17081,7 @@ index 0000000000..a06dbad1ea
 +-  if (domainname == NULL)
 +-    return (char *) _nl_current_default_domain;
 +-
-+-  __libc_rwlock_wrlock (_nl_state_lock);
++-  gl_rwlock_wrlock (_nl_state_lock);
 +-
 +-  old_domain = (char *) _nl_current_default_domain;
 +-
@@ -13585,7 +17125,7 @@ index 0000000000..a06dbad1ea
 +-	free (old_domain);
 +-    }
 +-
-+-  __libc_rwlock_unlock (_nl_state_lock);
++-  gl_rwlock_unlock (_nl_state_lock);
 +-
 +-  return new_domain;
 +-}
@@ -13594,11 +17134,14 @@ index 0000000000..a06dbad1ea
 +-/* Alias for function name in GNU C Library.  */
 +-weak_alias (__textdomain, textdomain);
 +-#endif
-+--- a/intl/vasnprintf.c
++--- a/intl/tsearch.c
 ++++ /dev/null
-+@@ -1,902 +0,0 @@
-+-/* vsprintf with automatic memory allocation.
-+-   Copyright (C) 1999, 2002-2005 Free Software Foundation, Inc.
++@@ -1,684 +0,0 @@
++-/* Copyright (C) 1995, 1996, 1997, 2000, 2006 Free Software Foundation, Inc.
++-   Contributed by Bernd Schmidt <crux@Pool.Informatik.RWTH-Aachen.DE>, 1997.
++-
++-   NOTE: The canonical source of this file is maintained with the GNU C
++-   Library.  Bugs can be reported to bug-glibc@gnu.org.
 +-
 +-   This program is free software; you can redistribute it and/or modify it
 +-   under the terms of the GNU Library General Public License as published
@@ -13612,8 +17155,807 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
++-
++-/* Tree search for red/black trees.
++-   The algorithm for adding nodes is taken from one of the many "Algorithms"
++-   books by Robert Sedgewick, although the implementation differs.
++-   The algorithm for deleting nodes can probably be found in a book named
++-   "Introduction to Algorithms" by Cormen/Leiserson/Rivest.  At least that's
++-   the book that my professor took most algorithms from during the "Data
++-   Structures" course...
++-
++-   Totally public domain.  */
++-
++-/* Red/black trees are binary trees in which the edges are colored either red
++-   or black.  They have the following properties:
++-   1. The number of black edges on every path from the root to a leaf is
++-      constant.
++-   2. No two red edges are adjacent.
++-   Therefore there is an upper bound on the length of every path, it's
++-   O(log n) where n is the number of nodes in the tree.  No path can be longer
++-   than 1+2*P where P is the length of the shortest path in the tree.
++-   Useful for the implementation:
++-   3. If one of the children of a node is NULL, then the other one is red
++-      (if it exists).
++-
++-   In the implementation, not the edges are colored, but the nodes.  The color
++-   interpreted as the color of the edge leading to this node.  The color is
++-   meaningless for the root node, but we color the root node black for
++-   convenience.  All added nodes are red initially.
++-
++-   Adding to a red/black tree is rather easy.  The right place is searched
++-   with a usual binary tree search.  Additionally, whenever a node N is
++-   reached that has two red successors, the successors are colored black and
++-   the node itself colored red.  This moves red edges up the tree where they
++-   pose less of a problem once we get to really insert the new node.  Changing
++-   N's color to red may violate rule 2, however, so rotations may become
++-   necessary to restore the invariants.  Adding a new red leaf may violate
++-   the same rule, so afterwards an additional check is run and the tree
++-   possibly rotated.
++-
++-   Deleting is hairy.  There are mainly two nodes involved: the node to be
++-   deleted (n1), and another node that is to be unchained from the tree (n2).
++-   If n1 has a successor (the node with a smallest key that is larger than
++-   n1), then the successor becomes n2 and its contents are copied into n1,
++-   otherwise n1 becomes n2.
++-   Unchaining a node may violate rule 1: if n2 is black, one subtree is
++-   missing one black edge afterwards.  The algorithm must try to move this
++-   error upwards towards the root, so that the subtree that does not have
++-   enough black edges becomes the whole tree.  Once that happens, the error
++-   has disappeared.  It may not be necessary to go all the way up, since it
++-   is possible that rotations and recoloring can fix the error before that.
++-
++-   Although the deletion algorithm must walk upwards through the tree, we
++-   do not store parent pointers in the nodes.  Instead, delete allocates a
++-   small array of parent pointers and fills it while descending the tree.
++-   Since we know that the length of a path is O(log n), where n is the number
++-   of nodes, this is likely to use less memory.  */
++-
++-/* Tree rotations look like this:
++-      A                C
++-     / \              / \
++-    B   C            A   G
++-   / \ / \  -->     / \
++-   D E F G         B   F
++-                  / \
++-                 D   E
++-
++-   In this case, A has been rotated left.  This preserves the ordering of the
++-   binary tree.  */
++-
++-#include <config.h>
++-
++-/* Specification.  */
++-#ifdef IN_LIBINTL
++-# include "tsearch.h"
++-#else
++-# include <search.h>
++-#endif
++-
++-#include <stdlib.h>
++-
++-typedef int (*__compar_fn_t) (const void *, const void *);
++-typedef void (*__action_fn_t) (const void *, VISIT, int);
++-
++-#ifndef weak_alias
++-# define __tsearch tsearch
++-# define __tfind tfind
++-# define __tdelete tdelete
++-# define __twalk twalk
++-#endif
++-
++-#ifndef internal_function
++-/* Inside GNU libc we mark some function in a special way.  In other
++-   environments simply ignore the marking.  */
++-# define internal_function
++-#endif
++-
++-typedef struct node_t
++-{
++-  /* Callers expect this to be the first element in the structure - do not
++-     move!  */
++-  const void *key;
++-  struct node_t *left;
++-  struct node_t *right;
++-  unsigned int red:1;
++-} *node;
++-typedef const struct node_t *const_node;
++-
++-#undef DEBUGGING
++-
++-#ifdef DEBUGGING
++-
++-/* Routines to check tree invariants.  */
++-
++-#include <assert.h>
++-
++-#define CHECK_TREE(a) check_tree(a)
++-
++-static void
++-check_tree_recurse (node p, int d_sofar, int d_total)
++-{
++-  if (p == NULL)
++-    {
++-      assert (d_sofar == d_total);
++-      return;
++-    }
++-
++-  check_tree_recurse (p->left, d_sofar + (p->left && !p->left->red), d_total);
++-  check_tree_recurse (p->right, d_sofar + (p->right && !p->right->red), d_total);
++-  if (p->left)
++-    assert (!(p->left->red && p->red));
++-  if (p->right)
++-    assert (!(p->right->red && p->red));
++-}
++-
++-static void
++-check_tree (node root)
++-{
++-  int cnt = 0;
++-  node p;
++-  if (root == NULL)
++-    return;
++-  root->red = 0;
++-  for(p = root->left; p; p = p->left)
++-    cnt += !p->red;
++-  check_tree_recurse (root, 0, cnt);
++-}
++-
++-
++-#else
++-
++-#define CHECK_TREE(a)
++-
++-#endif
++-
++-/* Possibly "split" a node with two red successors, and/or fix up two red
++-   edges in a row.  ROOTP is a pointer to the lowest node we visited, PARENTP
++-   and GPARENTP pointers to its parent/grandparent.  P_R and GP_R contain the
++-   comparison values that determined which way was taken in the tree to reach
++-   ROOTP.  MODE is 1 if we need not do the split, but must check for two red
++-   edges between GPARENTP and ROOTP.  */
++-static void
++-maybe_split_for_insert (node *rootp, node *parentp, node *gparentp,
++-			int p_r, int gp_r, int mode)
++-{
++-  node root = *rootp;
++-  node *rp, *lp;
++-  rp = &(*rootp)->right;
++-  lp = &(*rootp)->left;
++-
++-  /* See if we have to split this node (both successors red).  */
++-  if (mode == 1
++-      || ((*rp) != NULL && (*lp) != NULL && (*rp)->red && (*lp)->red))
++-    {
++-      /* This node becomes red, its successors black.  */
++-      root->red = 1;
++-      if (*rp)
++-	(*rp)->red = 0;
++-      if (*lp)
++-	(*lp)->red = 0;
++-
++-      /* If the parent of this node is also red, we have to do
++-	 rotations.  */
++-      if (parentp != NULL && (*parentp)->red)
++-	{
++-	  node gp = *gparentp;
++-	  node p = *parentp;
++-	  /* There are two main cases:
++-	     1. The edge types (left or right) of the two red edges differ.
++-	     2. Both red edges are of the same type.
++-	     There exist two symmetries of each case, so there is a total of
++-	     4 cases.  */
++-	  if ((p_r > 0) != (gp_r > 0))
++-	    {
++-	      /* Put the child at the top of the tree, with its parent
++-		 and grandparent as successors.  */
++-	      p->red = 1;
++-	      gp->red = 1;
++-	      root->red = 0;
++-	      if (p_r < 0)
++-		{
++-		  /* Child is left of parent.  */
++-		  p->left = *rp;
++-		  *rp = p;
++-		  gp->right = *lp;
++-		  *lp = gp;
++-		}
++-	      else
++-		{
++-		  /* Child is right of parent.  */
++-		  p->right = *lp;
++-		  *lp = p;
++-		  gp->left = *rp;
++-		  *rp = gp;
++-		}
++-	      *gparentp = root;
++-	    }
++-	  else
++-	    {
++-	      *gparentp = *parentp;
++-	      /* Parent becomes the top of the tree, grandparent and
++-		 child are its successors.  */
++-	      p->red = 0;
++-	      gp->red = 1;
++-	      if (p_r < 0)
++-		{
++-		  /* Left edges.  */
++-		  gp->left = p->right;
++-		  p->right = gp;
++-		}
++-	      else
++-		{
++-		  /* Right edges.  */
++-		  gp->right = p->left;
++-		  p->left = gp;
++-		}
++-	    }
++-	}
++-    }
++-}
++-
++-/* Find or insert datum into search tree.
++-   KEY is the key to be located, ROOTP is the address of tree root,
++-   COMPAR the ordering function.  */
++-void *
++-__tsearch (const void *key, void **vrootp, __compar_fn_t compar)
++-{
++-  node q;
++-  node *parentp = NULL, *gparentp = NULL;
++-  node *rootp = (node *) vrootp;
++-  node *nextp;
++-  int r = 0, p_r = 0, gp_r = 0; /* No they might not, Mr Compiler.  */
++-
++-  if (rootp == NULL)
++-    return NULL;
++-
++-  /* This saves some additional tests below.  */
++-  if (*rootp != NULL)
++-    (*rootp)->red = 0;
++-
++-  CHECK_TREE (*rootp);
++-
++-  nextp = rootp;
++-  while (*nextp != NULL)
++-    {
++-      node root = *rootp;
++-      r = (*compar) (key, root->key);
++-      if (r == 0)
++-	return root;
++-
++-      maybe_split_for_insert (rootp, parentp, gparentp, p_r, gp_r, 0);
++-      /* If that did any rotations, parentp and gparentp are now garbage.
++-	 That doesn't matter, because the values they contain are never
++-	 used again in that case.  */
++-
++-      nextp = r < 0 ? &root->left : &root->right;
++-      if (*nextp == NULL)
++-	break;
++-
++-      gparentp = parentp;
++-      parentp = rootp;
++-      rootp = nextp;
++-
++-      gp_r = p_r;
++-      p_r = r;
++-    }
++-
++-  q = (struct node_t *) malloc (sizeof (struct node_t));
++-  if (q != NULL)
++-    {
++-      *nextp = q;			/* link new node to old */
++-      q->key = key;			/* initialize new node */
++-      q->red = 1;
++-      q->left = q->right = NULL;
++-
++-      if (nextp != rootp)
++-	/* There may be two red edges in a row now, which we must avoid by
++-	   rotating the tree.  */
++-	maybe_split_for_insert (nextp, rootp, parentp, r, p_r, 1);
++-    }
++-
++-  return q;
++-}
++-#ifdef weak_alias
++-weak_alias (__tsearch, tsearch)
++-#endif
++-
++-
++-/* Find datum in search tree.
++-   KEY is the key to be located, ROOTP is the address of tree root,
++-   COMPAR the ordering function.  */
++-void *
++-__tfind (key, vrootp, compar)
++-     const void *key;
++-     void *const *vrootp;
++-     __compar_fn_t compar;
++-{
++-  node *rootp = (node *) vrootp;
++-
++-  if (rootp == NULL)
++-    return NULL;
++-
++-  CHECK_TREE (*rootp);
++-
++-  while (*rootp != NULL)
++-    {
++-      node root = *rootp;
++-      int r;
++-
++-      r = (*compar) (key, root->key);
++-      if (r == 0)
++-	return root;
++-
++-      rootp = r < 0 ? &root->left : &root->right;
++-    }
++-  return NULL;
++-}
++-#ifdef weak_alias
++-weak_alias (__tfind, tfind)
++-#endif
++-
++-
++-/* Delete node with given key.
++-   KEY is the key to be deleted, ROOTP is the address of the root of tree,
++-   COMPAR the comparison function.  */
++-void *
++-__tdelete (const void *key, void **vrootp, __compar_fn_t compar)
++-{
++-  node p, q, r, retval;
++-  int cmp;
++-  node *rootp = (node *) vrootp;
++-  node root, unchained;
++-  /* Stack of nodes so we remember the parents without recursion.  It's
++-     _very_ unlikely that there are paths longer than 40 nodes.  The tree
++-     would need to have around 250.000 nodes.  */
++-  int stacksize = 100;
++-  int sp = 0;
++-  node *nodestack[100];
++-
++-  if (rootp == NULL)
++-    return NULL;
++-  p = *rootp;
++-  if (p == NULL)
++-    return NULL;
++-
++-  CHECK_TREE (p);
++-
++-  while ((cmp = (*compar) (key, (*rootp)->key)) != 0)
++-    {
++-      if (sp == stacksize)
++-	abort ();
++-
++-      nodestack[sp++] = rootp;
++-      p = *rootp;
++-      rootp = ((cmp < 0)
++-	       ? &(*rootp)->left
++-	       : &(*rootp)->right);
++-      if (*rootp == NULL)
++-	return NULL;
++-    }
++-
++-  /* This is bogus if the node to be deleted is the root... this routine
++-     really should return an integer with 0 for success, -1 for failure
++-     and errno = ESRCH or something.  */
++-  retval = p;
++-
++-  /* We don't unchain the node we want to delete. Instead, we overwrite
++-     it with its successor and unchain the successor.  If there is no
++-     successor, we really unchain the node to be deleted.  */
++-
++-  root = *rootp;
++-
++-  r = root->right;
++-  q = root->left;
++-
++-  if (q == NULL || r == NULL)
++-    unchained = root;
++-  else
++-    {
++-      node *parent = rootp, *up = &root->right;
++-      for (;;)
++-	{
++-	  if (sp == stacksize)
++-	    abort ();
++-	  nodestack[sp++] = parent;
++-	  parent = up;
++-	  if ((*up)->left == NULL)
++-	    break;
++-	  up = &(*up)->left;
++-	}
++-      unchained = *up;
++-    }
++-
++-  /* We know that either the left or right successor of UNCHAINED is NULL.
++-     R becomes the other one, it is chained into the parent of UNCHAINED.  */
++-  r = unchained->left;
++-  if (r == NULL)
++-    r = unchained->right;
++-  if (sp == 0)
++-    *rootp = r;
++-  else
++-    {
++-      q = *nodestack[sp-1];
++-      if (unchained == q->right)
++-	q->right = r;
++-      else
++-	q->left = r;
++-    }
++-
++-  if (unchained != root)
++-    root->key = unchained->key;
++-  if (!unchained->red)
++-    {
++-      /* Now we lost a black edge, which means that the number of black
++-	 edges on every path is no longer constant.  We must balance the
++-	 tree.  */
++-      /* NODESTACK now contains all parents of R.  R is likely to be NULL
++-	 in the first iteration.  */
++-      /* NULL nodes are considered black throughout - this is necessary for
++-	 correctness.  */
++-      while (sp > 0 && (r == NULL || !r->red))
++-	{
++-	  node *pp = nodestack[sp - 1];
++-	  p = *pp;
++-	  /* Two symmetric cases.  */
++-	  if (r == p->left)
++-	    {
++-	      /* Q is R's brother, P is R's parent.  The subtree with root
++-		 R has one black edge less than the subtree with root Q.  */
++-	      q = p->right;
++-	      if (q->red)
++-		{
++-		  /* If Q is red, we know that P is black. We rotate P left
++-		     so that Q becomes the top node in the tree, with P below
++-		     it.  P is colored red, Q is colored black.
++-		     This action does not change the black edge count for any
++-		     leaf in the tree, but we will be able to recognize one
++-		     of the following situations, which all require that Q
++-		     is black.  */
++-		  q->red = 0;
++-		  p->red = 1;
++-		  /* Left rotate p.  */
++-		  p->right = q->left;
++-		  q->left = p;
++-		  *pp = q;
++-		  /* Make sure pp is right if the case below tries to use
++-		     it.  */
++-		  nodestack[sp++] = pp = &q->left;
++-		  q = p->right;
++-		}
++-	      /* We know that Q can't be NULL here.  We also know that Q is
++-		 black.  */
++-	      if ((q->left == NULL || !q->left->red)
++-		  && (q->right == NULL || !q->right->red))
++-		{
++-		  /* Q has two black successors.  We can simply color Q red.
++-		     The whole subtree with root P is now missing one black
++-		     edge.  Note that this action can temporarily make the
++-		     tree invalid (if P is red).  But we will exit the loop
++-		     in that case and set P black, which both makes the tree
++-		     valid and also makes the black edge count come out
++-		     right.  If P is black, we are at least one step closer
++-		     to the root and we'll try again the next iteration.  */
++-		  q->red = 1;
++-		  r = p;
++-		}
++-	      else
++-		{
++-		  /* Q is black, one of Q's successors is red.  We can
++-		     repair the tree with one operation and will exit the
++-		     loop afterwards.  */
++-		  if (q->right == NULL || !q->right->red)
++-		    {
++-		      /* The left one is red.  We perform the same action as
++-			 in maybe_split_for_insert where two red edges are
++-			 adjacent but point in different directions:
++-			 Q's left successor (let's call it Q2) becomes the
++-			 top of the subtree we are looking at, its parent (Q)
++-			 and grandparent (P) become its successors. The former
++-			 successors of Q2 are placed below P and Q.
++-			 P becomes black, and Q2 gets the color that P had.
++-			 This changes the black edge count only for node R and
++-			 its successors.  */
++-		      node q2 = q->left;
++-		      q2->red = p->red;
++-		      p->right = q2->left;
++-		      q->left = q2->right;
++-		      q2->right = q;
++-		      q2->left = p;
++-		      *pp = q2;
++-		      p->red = 0;
++-		    }
++-		  else
++-		    {
++-		      /* It's the right one.  Rotate P left. P becomes black,
++-			 and Q gets the color that P had.  Q's right successor
++-			 also becomes black.  This changes the black edge
++-			 count only for node R and its successors.  */
++-		      q->red = p->red;
++-		      p->red = 0;
++-
++-		      q->right->red = 0;
++-
++-		      /* left rotate p */
++-		      p->right = q->left;
++-		      q->left = p;
++-		      *pp = q;
++-		    }
++-
++-		  /* We're done.  */
++-		  sp = 1;
++-		  r = NULL;
++-		}
++-	    }
++-	  else
++-	    {
++-	      /* Comments: see above.  */
++-	      q = p->left;
++-	      if (q->red)
++-		{
++-		  q->red = 0;
++-		  p->red = 1;
++-		  p->left = q->right;
++-		  q->right = p;
++-		  *pp = q;
++-		  nodestack[sp++] = pp = &q->right;
++-		  q = p->left;
++-		}
++-	      if ((q->right == NULL || !q->right->red)
++-		       && (q->left == NULL || !q->left->red))
++-		{
++-		  q->red = 1;
++-		  r = p;
++-		}
++-	      else
++-		{
++-		  if (q->left == NULL || !q->left->red)
++-		    {
++-		      node q2 = q->right;
++-		      q2->red = p->red;
++-		      p->left = q2->right;
++-		      q->right = q2->left;
++-		      q2->left = q;
++-		      q2->right = p;
++-		      *pp = q2;
++-		      p->red = 0;
++-		    }
++-		  else
++-		    {
++-		      q->red = p->red;
++-		      p->red = 0;
++-		      q->left->red = 0;
++-		      p->left = q->right;
++-		      q->right = p;
++-		      *pp = q;
++-		    }
++-		  sp = 1;
++-		  r = NULL;
++-		}
++-	    }
++-	  --sp;
++-	}
++-      if (r != NULL)
++-	r->red = 0;
++-    }
++-
++-  free (unchained);
++-  return retval;
++-}
++-#ifdef weak_alias
++-weak_alias (__tdelete, tdelete)
++-#endif
++-
++-
++-/* Walk the nodes of a tree.
++-   ROOT is the root of the tree to be walked, ACTION the function to be
++-   called at each node.  LEVEL is the level of ROOT in the whole tree.  */
++-static void
++-internal_function
++-trecurse (const void *vroot, __action_fn_t action, int level)
++-{
++-  const_node root = (const_node) vroot;
++-
++-  if (root->left == NULL && root->right == NULL)
++-    (*action) (root, leaf, level);
++-  else
++-    {
++-      (*action) (root, preorder, level);
++-      if (root->left != NULL)
++-	trecurse (root->left, action, level + 1);
++-      (*action) (root, postorder, level);
++-      if (root->right != NULL)
++-	trecurse (root->right, action, level + 1);
++-      (*action) (root, endorder, level);
++-    }
++-}
++-
++-
++-/* Walk the nodes of a tree.
++-   ROOT is the root of the tree to be walked, ACTION the function to be
++-   called at each node.  */
++-void
++-__twalk (const void *vroot, __action_fn_t action)
++-{
++-  const_node root = (const_node) vroot;
++-
++-  CHECK_TREE (root);
++-
++-  if (root != NULL && action != NULL)
++-    trecurse (root, action, 0);
++-}
++-#ifdef weak_alias
++-weak_alias (__twalk, twalk)
++-#endif
++-
++-
++-#ifdef _LIBC
++-
++-/* The standardized functions miss an important functionality: the
++-   tree cannot be removed easily.  We provide a function to do this.  */
++-static void
++-internal_function
++-tdestroy_recurse (node root, __free_fn_t freefct)
++-{
++-  if (root->left != NULL)
++-    tdestroy_recurse (root->left, freefct);
++-  if (root->right != NULL)
++-    tdestroy_recurse (root->right, freefct);
++-  (*freefct) ((void *) root->key);
++-  /* Free the node itself.  */
++-  free (root);
++-}
++-
++-void
++-__tdestroy (void *vroot, __free_fn_t freefct)
++-{
++-  node root = (node) vroot;
++-
++-  CHECK_TREE (root);
++-
++-  if (root != NULL)
++-    tdestroy_recurse (root, freefct);
++-}
++-weak_alias (__tdestroy, tdestroy)
++-
++-#endif /* _LIBC */
++--- a/intl/tsearch.h
+++++ /dev/null
++@@ -1,83 +0,0 @@
++-/* Binary tree data structure.
++-   Copyright (C) 2006 Free Software Foundation, Inc.
++-
++-   This program is free software; you can redistribute it and/or modify it
++-   under the terms of the GNU Library General Public License as published
++-   by the Free Software Foundation; either version 2, or (at your option)
++-   any later version.
++-
++-   This program is distributed in the hope that it will be useful,
++-   but WITHOUT ANY WARRANTY; without even the implied warranty of
++-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++-   Library General Public License for more details.
++-
++-   You should have received a copy of the GNU Library General Public
++-   License along with this program; if not, write to the Free Software
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
++-   USA.  */
++-
++-#ifndef _TSEARCH_H
++-#define _TSEARCH_H
++-
++-#if HAVE_TSEARCH
++-
++-/* Get tseach(), tfind(), tdelete(), twalk() declarations.  */
++-#include <search.h>
++-
++-#else
++-
++-#ifdef __cplusplus
++-extern "C" {
++-#endif
++-
++-/* See <http://www.opengroup.org/susv3xbd/search.h.html>,
++-       <http://www.opengroup.org/susv3xsh/tsearch.html>
++-   for details.  */
++-
++-typedef enum
++-{ 
++-  preorder,
++-  postorder, 
++-  endorder,
++-  leaf
++-}
++-VISIT;
++-
++-/* Searches an element in the tree *VROOTP that compares equal to KEY.
++-   If one is found, it is returned.  Otherwise, a new element equal to KEY
++-   is inserted in the tree and is returned.  */
++-extern void * tsearch (const void *key, void **vrootp,
++-		       int (*compar) (const void *, const void *));
++-
++-/* Searches an element in the tree *VROOTP that compares equal to KEY.
++-   If one is found, it is returned.  Otherwise, NULL is returned.  */
++-extern void * tfind (const void *key, void *const *vrootp,
++-		     int (*compar) (const void *, const void *));
++-
++-/* Searches an element in the tree *VROOTP that compares equal to KEY.
++-   If one is found, it is removed from the tree, and its parent node is
++-   returned.  Otherwise, NULL is returned.  */
++-extern void * tdelete (const void *key, void **vrootp,
++-		       int (*compar) (const void *, const void *));
++-
++-/* Perform a depth-first, left-to-right traversal of the tree VROOT.
++-   The ACTION function is called:
++-     - for non-leaf nodes: 3 times, before the left subtree traversal,
++-       after the left subtree traversal but before the right subtree traversal,
++-       and after the right subtree traversal,
++-     - for leaf nodes: once.
++-   The arguments passed to ACTION are:
++-     1. the node; it can be casted to a 'const void * const *', i.e. into a
++-        pointer to the key,
++-     2. an indicator which visit of the node this is,
++-     3. the level of the node in the tree (0 for the root).  */
++-extern void twalk (const void *vroot,
++-		   void (*action) (const void *, VISIT, int));
++-
++-#ifdef __cplusplus
++-}
++-#endif
++-
++-#endif
++-
++-#endif /* _TSEARCH_H */
++--- a/intl/vasnprintf.c
+++++ /dev/null
++@@ -1,4677 +0,0 @@
++-/* vsprintf with automatic memory allocation.
++-   Copyright (C) 1999, 2002-2007 Free Software Foundation, Inc.
++-
++-   This program is free software; you can redistribute it and/or modify it
++-   under the terms of the GNU Library General Public License as published
++-   by the Free Software Foundation; either version 2, or (at your option)
++-   any later version.
++-
++-   This program is distributed in the hope that it will be useful,
++-   but WITHOUT ANY WARRANTY; without even the implied warranty of
++-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++-   Library General Public License for more details.
++-
++-   You should have received a copy of the GNU Library General Public
++-   License along with this program; if not, write to the Free Software
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
++-   USA.  */
++-
++-/* This file can be parametrized with the following macros:
++-     VASNPRINTF         The name of the function being defined.
++-     FCHAR_T            The element type of the format string.
++-     DCHAR_T            The element type of the destination (result) string.
++-     FCHAR_T_ONLY_ASCII Set to 1 to enable verification that all characters
++-                        in the format string are ASCII. MUST be set if
++-                        FCHAR_T and DCHAR_T are not the same type.
++-     DIRECTIVE          Structure denoting a format directive.
++-                        Depends on FCHAR_T.
++-     DIRECTIVES         Structure denoting the set of format directives of a
++-                        format string.  Depends on FCHAR_T.
++-     PRINTF_PARSE       Function that parses a format string.
++-                        Depends on FCHAR_T.
++-     DCHAR_CPY          memcpy like function for DCHAR_T[] arrays.
++-     DCHAR_SET          memset like function for DCHAR_T[] arrays.
++-     DCHAR_MBSNLEN      mbsnlen like function for DCHAR_T[] arrays.
++-     SNPRINTF           The system's snprintf (or similar) function.
++-                        This may be either snprintf or swprintf.
++-     TCHAR_T            The element type of the argument and result string
++-                        of the said SNPRINTF function.  This may be either
++-                        char or wchar_t.  The code exploits that
++-                        sizeof (TCHAR_T) | sizeof (DCHAR_T) and
++-                        alignof (TCHAR_T) <= alignof (DCHAR_T).
++-     DCHAR_IS_TCHAR     Set to 1 if DCHAR_T and TCHAR_T are the same type.
++-     DCHAR_CONV_FROM_ENCODING A function to convert from char[] to DCHAR[].
++-     DCHAR_IS_UINT8_T   Set to 1 if DCHAR_T is uint8_t.
++-     DCHAR_IS_UINT16_T  Set to 1 if DCHAR_T is uint16_t.
++-     DCHAR_IS_UINT32_T  Set to 1 if DCHAR_T is uint32_t.  */
 +-
 +-/* Tell glibc's <stdio.h> to provide a prototype for snprintf().
 +-   This must come before <config.h> because <config.h> may include
@@ -13622,7 +17964,7 @@ index 0000000000..a06dbad1ea
 +-# define _GNU_SOURCE    1
 +-#endif
 +-
-+-#ifdef HAVE_CONFIG_H
++-#ifndef VASNPRINTF
 +-# include <config.h>
 +-#endif
 +-#ifndef IN_LIBINTL
@@ -13630,34 +17972,71 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-
 +-/* Specification.  */
-+-#if WIDE_CHAR_VERSION
-+-# include "vasnwprintf.h"
-+-#else
-+-# include "vasnprintf.h"
++-#ifndef VASNPRINTF
++-# if WIDE_CHAR_VERSION
++-#  include "vasnwprintf.h"
++-# else
++-#  include "vasnprintf.h"
++-# endif
 +-#endif
 +-
++-#include <locale.h>	/* localeconv() */
 +-#include <stdio.h>	/* snprintf(), sprintf() */
 +-#include <stdlib.h>	/* abort(), malloc(), realloc(), free() */
 +-#include <string.h>	/* memcpy(), strlen() */
 +-#include <errno.h>	/* errno */
-+-#include <limits.h>	/* CHAR_BIT, INT_MAX */
++-#include <limits.h>	/* CHAR_BIT */
 +-#include <float.h>	/* DBL_MAX_EXP, LDBL_MAX_EXP */
-+-#if WIDE_CHAR_VERSION
-+-# include "wprintf-parse.h"
-+-#else
-+-# include "printf-parse.h"
++-#if HAVE_NL_LANGINFO
++-# include <langinfo.h>
++-#endif
++-#ifndef VASNPRINTF
++-# if WIDE_CHAR_VERSION
++-#  include "wprintf-parse.h"
++-# else
++-#  include "printf-parse.h"
++-# endif
 +-#endif
 +-
 +-/* Checked size_t computations.  */
 +-#include "xsize.h"
++-
++-#if (NEED_PRINTF_DOUBLE || NEED_PRINTF_LONG_DOUBLE) && !defined IN_LIBINTL
++-# include <math.h>
++-# include "float+.h"
++-#endif
++-
++-#if (NEED_PRINTF_DOUBLE || NEED_PRINTF_INFINITE_DOUBLE) && !defined IN_LIBINTL
++-# include <math.h>
++-# include "isnan.h"
++-#endif
++-
++-#if (NEED_PRINTF_LONG_DOUBLE || NEED_PRINTF_INFINITE_LONG_DOUBLE) && !defined IN_LIBINTL
++-# include <math.h>
++-# include "isnanl-nolibm.h"
++-# include "fpucw.h"
++-#endif
++-
++-#if (NEED_PRINTF_DIRECTIVE_A || NEED_PRINTF_DOUBLE) && !defined IN_LIBINTL
++-# include <math.h>
++-# include "isnan.h"
++-# include "printf-frexp.h"
++-#endif
++-
++-#if (NEED_PRINTF_DIRECTIVE_A || NEED_PRINTF_LONG_DOUBLE) && !defined IN_LIBINTL
++-# include <math.h>
++-# include "isnanl-nolibm.h"
++-# include "printf-frexpl.h"
++-# include "fpucw.h"
++-#endif
 +-
 +-/* Some systems, like OSF/1 4.0 and Woe32, don't have EOVERFLOW.  */
 +-#ifndef EOVERFLOW
 +-# define EOVERFLOW E2BIG
 +-#endif
 +-
-+-#ifdef HAVE_WCHAR_T
-+-# ifdef HAVE_WCSLEN
++-#if HAVE_WCHAR_T
++-# if HAVE_WCSLEN
 +-#  define local_wcslen wcslen
 +-# else
 +-   /* Solaris 2.5.1 has wcslen() in a separate library libw.so. To avoid
@@ -13679,12 +18058,32 @@ index 0000000000..a06dbad1ea
 +-# endif
 +-#endif
 +-
++-/* Default parameters.  */
++-#ifndef VASNPRINTF
++-# if WIDE_CHAR_VERSION
++-#  define VASNPRINTF vasnwprintf
++-#  define FCHAR_T wchar_t
++-#  define DCHAR_T wchar_t
++-#  define TCHAR_T wchar_t
++-#  define DCHAR_IS_TCHAR 1
++-#  define DIRECTIVE wchar_t_directive
++-#  define DIRECTIVES wchar_t_directives
++-#  define PRINTF_PARSE wprintf_parse
++-#  define DCHAR_CPY wmemcpy
++-# else
++-#  define VASNPRINTF vasnprintf
++-#  define FCHAR_T char
++-#  define DCHAR_T char
++-#  define TCHAR_T char
++-#  define DCHAR_IS_TCHAR 1
++-#  define DIRECTIVE char_directive
++-#  define DIRECTIVES char_directives
++-#  define PRINTF_PARSE printf_parse
++-#  define DCHAR_CPY memcpy
++-# endif
++-#endif
 +-#if WIDE_CHAR_VERSION
-+-# define VASNPRINTF vasnwprintf
-+-# define CHAR_T wchar_t
-+-# define DIRECTIVE wchar_t_directive
-+-# define DIRECTIVES wchar_t_directives
-+-# define PRINTF_PARSE wprintf_parse
++-  /* TCHAR_T is wchar_t.  */
 +-# define USE_SNPRINTF 1
 +-# if HAVE_DECL__SNWPRINTF
 +-   /* On Windows, the function swprintf() has a different signature than
@@ -13695,39 +18094,1250 @@ index 0000000000..a06dbad1ea
 +-#  define SNPRINTF swprintf
 +-# endif
 +-#else
-+-# define VASNPRINTF vasnprintf
-+-# define CHAR_T char
-+-# define DIRECTIVE char_directive
-+-# define DIRECTIVES char_directives
-+-# define PRINTF_PARSE printf_parse
-+-# define USE_SNPRINTF (HAVE_DECL__SNPRINTF || HAVE_SNPRINTF)
++-  /* TCHAR_T is char.  */
++-# /* Use snprintf if it exists under the name 'snprintf' or '_snprintf'.
++-     But don't use it on BeOS, since BeOS snprintf produces no output if the
++-     size argument is >= 0x3000000.  */
++-# if (HAVE_DECL__SNPRINTF || HAVE_SNPRINTF) && !defined __BEOS__
++-#  define USE_SNPRINTF 1
++-# else
++-#  define USE_SNPRINTF 0
++-# endif
 +-# if HAVE_DECL__SNPRINTF
 +-   /* Windows.  */
 +-#  define SNPRINTF _snprintf
 +-# else
 +-   /* Unix.  */
 +-#  define SNPRINTF snprintf
++-   /* Here we need to call the native snprintf, not rpl_snprintf.  */
++-#  undef snprintf
++-# endif
++-#endif
++-/* Here we need to call the native sprintf, not rpl_sprintf.  */
++-#undef sprintf
++-
++-#if (NEED_PRINTF_DIRECTIVE_A || NEED_PRINTF_LONG_DOUBLE || NEED_PRINTF_DOUBLE || NEED_PRINTF_INFINITE_DOUBLE) && !defined IN_LIBINTL
++-/* Determine the decimal-point character according to the current locale.  */
++-# ifndef decimal_point_char_defined
++-#  define decimal_point_char_defined 1
++-static char
++-decimal_point_char ()
++-{
++-  const char *point;
++-  /* Determine it in a multithread-safe way.  We know nl_langinfo is
++-     multithread-safe on glibc systems, but is not required to be multithread-
++-     safe by POSIX.  sprintf(), however, is multithread-safe.  localeconv()
++-     is rarely multithread-safe.  */
++-#  if HAVE_NL_LANGINFO && __GLIBC__
++-  point = nl_langinfo (RADIXCHAR);
++-#  elif 1
++-  char pointbuf[5];
++-  sprintf (pointbuf, "%#.0f", 1.0);
++-  point = &pointbuf[1];
++-#  else
++-  point = localeconv () -> decimal_point;
++-#  endif
++-  /* The decimal point is always a single byte: either '.' or ','.  */
++-  return (point[0] != '\0' ? point[0] : '.');
++-}
 +-# endif
 +-#endif
 +-
-+-CHAR_T *
-+-VASNPRINTF (CHAR_T *resultbuf, size_t *lengthp, const CHAR_T *format, va_list args)
++-#if NEED_PRINTF_INFINITE_DOUBLE && !NEED_PRINTF_DOUBLE && !defined IN_LIBINTL
++-
++-/* Equivalent to !isfinite(x) || x == 0, but does not require libm.  */
++-static int
++-is_infinite_or_zero (double x)
++-{
++-  return isnan (x) || x + x == x;
++-}
++-
++-#endif
++-
++-#if NEED_PRINTF_INFINITE_LONG_DOUBLE && !NEED_PRINTF_LONG_DOUBLE && !defined IN_LIBINTL
++-
++-/* Equivalent to !isfinite(x), but does not require libm.  */
++-static int
++-is_infinitel (long double x)
++-{
++-  return isnanl (x) || (x + x == x && x != 0.0L);
++-}
++-
++-#endif
++-
++-#if (NEED_PRINTF_LONG_DOUBLE || NEED_PRINTF_DOUBLE) && !defined IN_LIBINTL
++-
++-/* Converting 'long double' to decimal without rare rounding bugs requires
++-   real bignums.  We use the naming conventions of GNU gmp, but vastly simpler
++-   (and slower) algorithms.  */
++-
++-typedef unsigned int mp_limb_t;
++-# define GMP_LIMB_BITS 32
++-typedef int mp_limb_verify[2 * (sizeof (mp_limb_t) * CHAR_BIT == GMP_LIMB_BITS) - 1];
++-
++-typedef unsigned long long mp_twolimb_t;
++-# define GMP_TWOLIMB_BITS 64
++-typedef int mp_twolimb_verify[2 * (sizeof (mp_twolimb_t) * CHAR_BIT == GMP_TWOLIMB_BITS) - 1];
++-
++-/* Representation of a bignum >= 0.  */
++-typedef struct
++-{
++-  size_t nlimbs;
++-  mp_limb_t *limbs; /* Bits in little-endian order, allocated with malloc().  */
++-} mpn_t;
++-
++-/* Compute the product of two bignums >= 0.
++-   Return the allocated memory in case of success, NULL in case of memory
++-   allocation failure.  */
++-static void *
++-multiply (mpn_t src1, mpn_t src2, mpn_t *dest)
++-{
++-  const mp_limb_t *p1;
++-  const mp_limb_t *p2;
++-  size_t len1;
++-  size_t len2;
++-
++-  if (src1.nlimbs <= src2.nlimbs)
++-    {
++-      len1 = src1.nlimbs;
++-      p1 = src1.limbs;
++-      len2 = src2.nlimbs;
++-      p2 = src2.limbs;
++-    }
++-  else
++-    {
++-      len1 = src2.nlimbs;
++-      p1 = src2.limbs;
++-      len2 = src1.nlimbs;
++-      p2 = src1.limbs;
++-    }
++-  /* Now 0 <= len1 <= len2.  */
++-  if (len1 == 0)
++-    {
++-      /* src1 or src2 is zero.  */
++-      dest->nlimbs = 0;
++-      dest->limbs = (mp_limb_t *) malloc (1);
++-    }
++-  else
++-    {
++-      /* Here 1 <= len1 <= len2.  */
++-      size_t dlen;
++-      mp_limb_t *dp;
++-      size_t k, i, j;
++-
++-      dlen = len1 + len2;
++-      dp = (mp_limb_t *) malloc (dlen * sizeof (mp_limb_t));
++-      if (dp == NULL)
++-	return NULL;
++-      for (k = len2; k > 0; )
++-	dp[--k] = 0;
++-      for (i = 0; i < len1; i++)
++-	{
++-	  mp_limb_t digit1 = p1[i];
++-	  mp_twolimb_t carry = 0;
++-	  for (j = 0; j < len2; j++)
++-	    {
++-	      mp_limb_t digit2 = p2[j];
++-	      carry += (mp_twolimb_t) digit1 * (mp_twolimb_t) digit2;
++-	      carry += dp[i + j];
++-	      dp[i + j] = (mp_limb_t) carry;
++-	      carry = carry >> GMP_LIMB_BITS;
++-	    }
++-	  dp[i + len2] = (mp_limb_t) carry;
++-	}
++-      /* Normalise.  */
++-      while (dlen > 0 && dp[dlen - 1] == 0)
++-	dlen--;
++-      dest->nlimbs = dlen;
++-      dest->limbs = dp;
++-    }
++-  return dest->limbs;
++-}
++-
++-/* Compute the quotient of a bignum a >= 0 and a bignum b > 0.
++-   a is written as  a = q * b + r  with 0 <= r < b.  q is the quotient, r
++-   the remainder.
++-   Finally, round-to-even is performed: If r > b/2 or if r = b/2 and q is odd,
++-   q is incremented.
++-   Return the allocated memory in case of success, NULL in case of memory
++-   allocation failure.  */
++-static void *
++-divide (mpn_t a, mpn_t b, mpn_t *q)
++-{
++-  /* Algorithm:
++-     First normalise a and b: a=[a[m-1],...,a[0]], b=[b[n-1],...,b[0]]
++-     with m>=0 and n>0 (in base beta = 2^GMP_LIMB_BITS).
++-     If m<n, then q:=0 and r:=a.
++-     If m>=n=1, perform a single-precision division:
++-       r:=0, j:=m,
++-       while j>0 do
++-         {Here (q[m-1]*beta^(m-1)+...+q[j]*beta^j) * b[0] + r*beta^j =
++-               = a[m-1]*beta^(m-1)+...+a[j]*beta^j und 0<=r<b[0]<beta}
++-         j:=j-1, r:=r*beta+a[j], q[j]:=floor(r/b[0]), r:=r-b[0]*q[j].
++-       Normalise [q[m-1],...,q[0]], yields q.
++-     If m>=n>1, perform a multiple-precision division:
++-       We have a/b < beta^(m-n+1).
++-       s:=intDsize-1-(hightest bit in b[n-1]), 0<=s<intDsize.
++-       Shift a and b left by s bits, copying them. r:=a.
++-       r=[r[m],...,r[0]], b=[b[n-1],...,b[0]] with b[n-1]>=beta/2.
++-       For j=m-n,...,0: {Here 0 <= r < b*beta^(j+1).}
++-         Compute q* :
++-           q* := floor((r[j+n]*beta+r[j+n-1])/b[n-1]).
++-           In case of overflow (q* >= beta) set q* := beta-1.
++-           Compute c2 := ((r[j+n]*beta+r[j+n-1]) - q* * b[n-1])*beta + r[j+n-2]
++-           and c3 := b[n-2] * q*.
++-           {We have 0 <= c2 < 2*beta^2, even 0 <= c2 < beta^2 if no overflow
++-            occurred.  Furthermore 0 <= c3 < beta^2.
++-            If there was overflow and
++-            r[j+n]*beta+r[j+n-1] - q* * b[n-1] >= beta, i.e. c2 >= beta^2,
++-            the next test can be skipped.}
++-           While c3 > c2, {Here 0 <= c2 < c3 < beta^2}
++-             Put q* := q* - 1, c2 := c2 + b[n-1]*beta, c3 := c3 - b[n-2].
++-           If q* > 0:
++-             Put r := r - b * q* * beta^j. In detail:
++-               [r[n+j],...,r[j]] := [r[n+j],...,r[j]] - q* * [b[n-1],...,b[0]].
++-               hence: u:=0, for i:=0 to n-1 do
++-                              u := u + q* * b[i],
++-                              r[j+i]:=r[j+i]-(u mod beta) (+ beta, if carry),
++-                              u:=u div beta (+ 1, if carry in subtraction)
++-                      r[n+j]:=r[n+j]-u.
++-               {Since always u = (q* * [b[i-1],...,b[0]] div beta^i) + 1
++-                               < q* + 1 <= beta,
++-                the carry u does not overflow.}
++-             If a negative carry occurs, put q* := q* - 1
++-               and [r[n+j],...,r[j]] := [r[n+j],...,r[j]] + [0,b[n-1],...,b[0]].
++-         Set q[j] := q*.
++-       Normalise [q[m-n],..,q[0]]; this yields the quotient q.
++-       Shift [r[n-1],...,r[0]] right by s bits and normalise; this yields the
++-       rest r.
++-       The room for q[j] can be allocated at the memory location of r[n+j].
++-     Finally, round-to-even:
++-       Shift r left by 1 bit.
++-       If r > b or if r = b and q[0] is odd, q := q+1.
++-   */
++-  const mp_limb_t *a_ptr = a.limbs;
++-  size_t a_len = a.nlimbs;
++-  const mp_limb_t *b_ptr = b.limbs;
++-  size_t b_len = b.nlimbs;
++-  mp_limb_t *roomptr;
++-  mp_limb_t *tmp_roomptr = NULL;
++-  mp_limb_t *q_ptr;
++-  size_t q_len;
++-  mp_limb_t *r_ptr;
++-  size_t r_len;
++-
++-  /* Allocate room for a_len+2 digits.
++-     (Need a_len+1 digits for the real division and 1 more digit for the
++-     final rounding of q.)  */
++-  roomptr = (mp_limb_t *) malloc ((a_len + 2) * sizeof (mp_limb_t));
++-  if (roomptr == NULL)
++-    return NULL;
++-
++-  /* Normalise a.  */
++-  while (a_len > 0 && a_ptr[a_len - 1] == 0)
++-    a_len--;
++-
++-  /* Normalise b.  */
++-  for (;;)
++-    {
++-      if (b_len == 0)
++-	/* Division by zero.  */
++-	abort ();
++-      if (b_ptr[b_len - 1] == 0)
++-	b_len--;
++-      else
++-	break;
++-    }
++-
++-  /* Here m = a_len >= 0 and n = b_len > 0.  */
++-
++-  if (a_len < b_len)
++-    {
++-      /* m<n: trivial case.  q=0, r := copy of a.  */
++-      r_ptr = roomptr;
++-      r_len = a_len;
++-      memcpy (r_ptr, a_ptr, a_len * sizeof (mp_limb_t));
++-      q_ptr = roomptr + a_len;
++-      q_len = 0;
++-    }
++-  else if (b_len == 1)
++-    {
++-      /* n=1: single precision division.
++-	 beta^(m-1) <= a < beta^m  ==>  beta^(m-2) <= a/b < beta^m  */
++-      r_ptr = roomptr;
++-      q_ptr = roomptr + 1;
++-      {
++-	mp_limb_t den = b_ptr[0];
++-	mp_limb_t remainder = 0;
++-	const mp_limb_t *sourceptr = a_ptr + a_len;
++-	mp_limb_t *destptr = q_ptr + a_len;
++-	size_t count;
++-	for (count = a_len; count > 0; count--)
++-	  {
++-	    mp_twolimb_t num =
++-	      ((mp_twolimb_t) remainder << GMP_LIMB_BITS) | *--sourceptr;
++-	    *--destptr = num / den;
++-	    remainder = num % den;
++-	  }
++-	/* Normalise and store r.  */
++-	if (remainder > 0)
++-	  {
++-	    r_ptr[0] = remainder;
++-	    r_len = 1;
++-	  }
++-	else
++-	  r_len = 0;
++-	/* Normalise q.  */
++-	q_len = a_len;
++-	if (q_ptr[q_len - 1] == 0)
++-	  q_len--;
++-      }
++-    }
++-  else
++-    {
++-      /* n>1: multiple precision division.
++-	 beta^(m-1) <= a < beta^m, beta^(n-1) <= b < beta^n  ==>
++-	 beta^(m-n-1) <= a/b < beta^(m-n+1).  */
++-      /* Determine s.  */
++-      size_t s;
++-      {
++-	mp_limb_t msd = b_ptr[b_len - 1]; /* = b[n-1], > 0 */
++-	s = 31;
++-	if (msd >= 0x10000)
++-	  {
++-	    msd = msd >> 16;
++-	    s -= 16;
++-	  }
++-	if (msd >= 0x100)
++-	  {
++-	    msd = msd >> 8;
++-	    s -= 8;
++-	  }
++-	if (msd >= 0x10)
++-	  {
++-	    msd = msd >> 4;
++-	    s -= 4;
++-	  }
++-	if (msd >= 0x4)
++-	  {
++-	    msd = msd >> 2;
++-	    s -= 2;
++-	  }
++-	if (msd >= 0x2)
++-	  {
++-	    msd = msd >> 1;
++-	    s -= 1;
++-	  }
++-      }
++-      /* 0 <= s < GMP_LIMB_BITS.
++-	 Copy b, shifting it left by s bits.  */
++-      if (s > 0)
++-	{
++-	  tmp_roomptr = (mp_limb_t *) malloc (b_len * sizeof (mp_limb_t));
++-	  if (tmp_roomptr == NULL)
++-	    {
++-	      free (roomptr);
++-	      return NULL;
++-	    }
++-	  {
++-	    const mp_limb_t *sourceptr = b_ptr;
++-	    mp_limb_t *destptr = tmp_roomptr;
++-	    mp_twolimb_t accu = 0;
++-	    size_t count;
++-	    for (count = b_len; count > 0; count--)
++-	      {
++-		accu += (mp_twolimb_t) *sourceptr++ << s;
++-		*destptr++ = (mp_limb_t) accu;
++-		accu = accu >> GMP_LIMB_BITS;
++-	      }
++-	    /* accu must be zero, since that was how s was determined.  */
++-	    if (accu != 0)
++-	      abort ();
++-	  }
++-	  b_ptr = tmp_roomptr;
++-	}
++-      /* Copy a, shifting it left by s bits, yields r.
++-	 Memory layout:
++-	 At the beginning: r = roomptr[0..a_len],
++-	 at the end: r = roomptr[0..b_len-1], q = roomptr[b_len..a_len]  */
++-      r_ptr = roomptr;
++-      if (s == 0)
++-	{
++-	  memcpy (r_ptr, a_ptr, a_len * sizeof (mp_limb_t));
++-	  r_ptr[a_len] = 0;
++-	}
++-      else
++-	{
++-	  const mp_limb_t *sourceptr = a_ptr;
++-	  mp_limb_t *destptr = r_ptr;
++-	  mp_twolimb_t accu = 0;
++-	  size_t count;
++-	  for (count = a_len; count > 0; count--)
++-	    {
++-	      accu += (mp_twolimb_t) *sourceptr++ << s;
++-	      *destptr++ = (mp_limb_t) accu;
++-	      accu = accu >> GMP_LIMB_BITS;
++-	    }
++-	  *destptr++ = (mp_limb_t) accu;
++-	}
++-      q_ptr = roomptr + b_len;
++-      q_len = a_len - b_len + 1; /* q will have m-n+1 limbs */
++-      {
++-	size_t j = a_len - b_len; /* m-n */
++-	mp_limb_t b_msd = b_ptr[b_len - 1]; /* b[n-1] */
++-	mp_limb_t b_2msd = b_ptr[b_len - 2]; /* b[n-2] */
++-	mp_twolimb_t b_msdd = /* b[n-1]*beta+b[n-2] */
++-	  ((mp_twolimb_t) b_msd << GMP_LIMB_BITS) | b_2msd;
++-	/* Division loop, traversed m-n+1 times.
++-	   j counts down, b is unchanged, beta/2 <= b[n-1] < beta.  */
++-	for (;;)
++-	  {
++-	    mp_limb_t q_star;
++-	    mp_limb_t c1;
++-	    if (r_ptr[j + b_len] < b_msd) /* r[j+n] < b[n-1] ? */
++-	      {
++-		/* Divide r[j+n]*beta+r[j+n-1] by b[n-1], no overflow.  */
++-		mp_twolimb_t num =
++-		  ((mp_twolimb_t) r_ptr[j + b_len] << GMP_LIMB_BITS)
++-		  | r_ptr[j + b_len - 1];
++-		q_star = num / b_msd;
++-		c1 = num % b_msd;
++-	      }
++-	    else
++-	      {
++-		/* Overflow, hence r[j+n]*beta+r[j+n-1] >= beta*b[n-1].  */
++-		q_star = (mp_limb_t)~(mp_limb_t)0; /* q* = beta-1 */
++-		/* Test whether r[j+n]*beta+r[j+n-1] - (beta-1)*b[n-1] >= beta
++-		   <==> r[j+n]*beta+r[j+n-1] + b[n-1] >= beta*b[n-1]+beta
++-		   <==> b[n-1] < floor((r[j+n]*beta+r[j+n-1]+b[n-1])/beta)
++-		        {<= beta !}.
++-		   If yes, jump directly to the subtraction loop.
++-		   (Otherwise, r[j+n]*beta+r[j+n-1] - (beta-1)*b[n-1] < beta
++-		    <==> floor((r[j+n]*beta+r[j+n-1]+b[n-1])/beta) = b[n-1] ) */
++-		if (r_ptr[j + b_len] > b_msd
++-		    || (c1 = r_ptr[j + b_len - 1] + b_msd) < b_msd)
++-		  /* r[j+n] >= b[n-1]+1 or
++-		     r[j+n] = b[n-1] and the addition r[j+n-1]+b[n-1] gives a
++-		     carry.  */
++-		  goto subtract;
++-	      }
++-	    /* q_star = q*,
++-	       c1 = (r[j+n]*beta+r[j+n-1]) - q* * b[n-1] (>=0, <beta).  */
++-	    {
++-	      mp_twolimb_t c2 = /* c1*beta+r[j+n-2] */
++-		((mp_twolimb_t) c1 << GMP_LIMB_BITS) | r_ptr[j + b_len - 2];
++-	      mp_twolimb_t c3 = /* b[n-2] * q* */
++-		(mp_twolimb_t) b_2msd * (mp_twolimb_t) q_star;
++-	      /* While c2 < c3, increase c2 and decrease c3.
++-		 Consider c3-c2.  While it is > 0, decrease it by
++-		 b[n-1]*beta+b[n-2].  Because of b[n-1]*beta+b[n-2] >= beta^2/2
++-		 this can happen only twice.  */
++-	      if (c3 > c2)
++-		{
++-		  q_star = q_star - 1; /* q* := q* - 1 */
++-		  if (c3 - c2 > b_msdd)
++-		    q_star = q_star - 1; /* q* := q* - 1 */
++-		}
++-	    }
++-	    if (q_star > 0)
++-	      subtract:
++-	      {
++-		/* Subtract r := r - b * q* * beta^j.  */
++-		mp_limb_t cr;
++-		{
++-		  const mp_limb_t *sourceptr = b_ptr;
++-		  mp_limb_t *destptr = r_ptr + j;
++-		  mp_twolimb_t carry = 0;
++-		  size_t count;
++-		  for (count = b_len; count > 0; count--)
++-		    {
++-		      /* Here 0 <= carry <= q*.  */
++-		      carry =
++-			carry
++-			+ (mp_twolimb_t) q_star * (mp_twolimb_t) *sourceptr++
++-			+ (mp_limb_t) ~(*destptr);
++-		      /* Here 0 <= carry <= beta*q* + beta-1.  */
++-		      *destptr++ = ~(mp_limb_t) carry;
++-		      carry = carry >> GMP_LIMB_BITS; /* <= q* */
++-		    }
++-		  cr = (mp_limb_t) carry;
++-		}
++-		/* Subtract cr from r_ptr[j + b_len], then forget about
++-		   r_ptr[j + b_len].  */
++-		if (cr > r_ptr[j + b_len])
++-		  {
++-		    /* Subtraction gave a carry.  */
++-		    q_star = q_star - 1; /* q* := q* - 1 */
++-		    /* Add b back.  */
++-		    {
++-		      const mp_limb_t *sourceptr = b_ptr;
++-		      mp_limb_t *destptr = r_ptr + j;
++-		      mp_limb_t carry = 0;
++-		      size_t count;
++-		      for (count = b_len; count > 0; count--)
++-			{
++-			  mp_limb_t source1 = *sourceptr++;
++-			  mp_limb_t source2 = *destptr;
++-			  *destptr++ = source1 + source2 + carry;
++-			  carry =
++-			    (carry
++-			     ? source1 >= (mp_limb_t) ~source2
++-			     : source1 > (mp_limb_t) ~source2);
++-			}
++-		    }
++-		    /* Forget about the carry and about r[j+n].  */
++-		  }
++-	      }
++-	    /* q* is determined.  Store it as q[j].  */
++-	    q_ptr[j] = q_star;
++-	    if (j == 0)
++-	      break;
++-	    j--;
++-	  }
++-      }
++-      r_len = b_len;
++-      /* Normalise q.  */
++-      if (q_ptr[q_len - 1] == 0)
++-	q_len--;
++-# if 0 /* Not needed here, since we need r only to compare it with b/2, and
++-	  b is shifted left by s bits.  */
++-      /* Shift r right by s bits.  */
++-      if (s > 0)
++-	{
++-	  mp_limb_t ptr = r_ptr + r_len;
++-	  mp_twolimb_t accu = 0;
++-	  size_t count;
++-	  for (count = r_len; count > 0; count--)
++-	    {
++-	      accu = (mp_twolimb_t) (mp_limb_t) accu << GMP_LIMB_BITS;
++-	      accu += (mp_twolimb_t) *--ptr << (GMP_LIMB_BITS - s);
++-	      *ptr = (mp_limb_t) (accu >> GMP_LIMB_BITS);
++-	    }
++-	}
++-# endif
++-      /* Normalise r.  */
++-      while (r_len > 0 && r_ptr[r_len - 1] == 0)
++-	r_len--;
++-    }
++-  /* Compare r << 1 with b.  */
++-  if (r_len > b_len)
++-    goto increment_q;
++-  {
++-    size_t i;
++-    for (i = b_len;;)
++-      {
++-	mp_limb_t r_i =
++-	  (i <= r_len && i > 0 ? r_ptr[i - 1] >> (GMP_LIMB_BITS - 1) : 0)
++-	  | (i < r_len ? r_ptr[i] << 1 : 0);
++-	mp_limb_t b_i = (i < b_len ? b_ptr[i] : 0);
++-	if (r_i > b_i)
++-	  goto increment_q;
++-	if (r_i < b_i)
++-	  goto keep_q;
++-	if (i == 0)
++-	  break;
++-	i--;
++-      }
++-  }
++-  if (q_len > 0 && ((q_ptr[0] & 1) != 0))
++-    /* q is odd.  */
++-    increment_q:
++-    {
++-      size_t i;
++-      for (i = 0; i < q_len; i++)
++-	if (++(q_ptr[i]) != 0)
++-	  goto keep_q;
++-      q_ptr[q_len++] = 1;
++-    }
++-  keep_q:
++-  if (tmp_roomptr != NULL)
++-    free (tmp_roomptr);
++-  q->limbs = q_ptr;
++-  q->nlimbs = q_len;
++-  return roomptr;
++-}
++-
++-/* Convert a bignum a >= 0, multiplied with 10^extra_zeroes, to decimal
++-   representation.
++-   Destroys the contents of a.
++-   Return the allocated memory - containing the decimal digits in low-to-high
++-   order, terminated with a NUL character - in case of success, NULL in case
++-   of memory allocation failure.  */
++-static char *
++-convert_to_decimal (mpn_t a, size_t extra_zeroes)
++-{
++-  mp_limb_t *a_ptr = a.limbs;
++-  size_t a_len = a.nlimbs;
++-  /* 0.03345 is slightly larger than log(2)/(9*log(10)).  */
++-  size_t c_len = 9 * ((size_t)(a_len * (GMP_LIMB_BITS * 0.03345f)) + 1);
++-  char *c_ptr = (char *) malloc (xsum (c_len, extra_zeroes));
++-  if (c_ptr != NULL)
++-    {
++-      char *d_ptr = c_ptr;
++-      for (; extra_zeroes > 0; extra_zeroes--)
++-	*d_ptr++ = '0';
++-      while (a_len > 0)
++-	{
++-	  /* Divide a by 10^9, in-place.  */
++-	  mp_limb_t remainder = 0;
++-	  mp_limb_t *ptr = a_ptr + a_len;
++-	  size_t count;
++-	  for (count = a_len; count > 0; count--)
++-	    {
++-	      mp_twolimb_t num =
++-		((mp_twolimb_t) remainder << GMP_LIMB_BITS) | *--ptr;
++-	      *ptr = num / 1000000000;
++-	      remainder = num % 1000000000;
++-	    }
++-	  /* Store the remainder as 9 decimal digits.  */
++-	  for (count = 9; count > 0; count--)
++-	    {
++-	      *d_ptr++ = '0' + (remainder % 10);
++-	      remainder = remainder / 10;
++-	    }
++-	  /* Normalize a.  */
++-	  if (a_ptr[a_len - 1] == 0)
++-	    a_len--;
++-	}
++-      /* Remove leading zeroes.  */
++-      while (d_ptr > c_ptr && d_ptr[-1] == '0')
++-	d_ptr--;
++-      /* But keep at least one zero.  */
++-      if (d_ptr == c_ptr)
++-	*d_ptr++ = '0';
++-      /* Terminate the string.  */
++-      *d_ptr = '\0';
++-    }
++-  return c_ptr;
++-}
++-
++-# if NEED_PRINTF_LONG_DOUBLE
++-
++-/* Assuming x is finite and >= 0:
++-   write x as x = 2^e * m, where m is a bignum.
++-   Return the allocated memory in case of success, NULL in case of memory
++-   allocation failure.  */
++-static void *
++-decode_long_double (long double x, int *ep, mpn_t *mp)
++-{
++-  mpn_t m;
++-  int exp;
++-  long double y;
++-  size_t i;
++-
++-  /* Allocate memory for result.  */
++-  m.nlimbs = (LDBL_MANT_BIT + GMP_LIMB_BITS - 1) / GMP_LIMB_BITS;
++-  m.limbs = (mp_limb_t *) malloc (m.nlimbs * sizeof (mp_limb_t));
++-  if (m.limbs == NULL)
++-    return NULL;
++-  /* Split into exponential part and mantissa.  */
++-  y = frexpl (x, &exp);
++-  if (!(y >= 0.0L && y < 1.0L))
++-    abort ();
++-  /* x = 2^exp * y = 2^(exp - LDBL_MANT_BIT) * (y * LDBL_MANT_BIT), and the
++-     latter is an integer.  */
++-  /* Convert the mantissa (y * LDBL_MANT_BIT) to a sequence of limbs.
++-     I'm not sure whether it's safe to cast a 'long double' value between
++-     2^31 and 2^32 to 'unsigned int', therefore play safe and cast only
++-     'long double' values between 0 and 2^16 (to 'unsigned int' or 'int',
++-     doesn't matter).  */
++-#  if (LDBL_MANT_BIT % GMP_LIMB_BITS) != 0
++-#   if (LDBL_MANT_BIT % GMP_LIMB_BITS) > GMP_LIMB_BITS / 2
++-    {
++-      mp_limb_t hi, lo;
++-      y *= (mp_limb_t) 1 << (LDBL_MANT_BIT % (GMP_LIMB_BITS / 2));
++-      hi = (int) y;
++-      y -= hi;
++-      if (!(y >= 0.0L && y < 1.0L))
++-	abort ();
++-      y *= (mp_limb_t) 1 << (GMP_LIMB_BITS / 2);
++-      lo = (int) y;
++-      y -= lo;
++-      if (!(y >= 0.0L && y < 1.0L))
++-	abort ();
++-      m.limbs[LDBL_MANT_BIT / GMP_LIMB_BITS] = (hi << (GMP_LIMB_BITS / 2)) | lo;
++-    }
++-#   else
++-    {
++-      mp_limb_t d;
++-      y *= (mp_limb_t) 1 << (LDBL_MANT_BIT % GMP_LIMB_BITS);
++-      d = (int) y;
++-      y -= d;
++-      if (!(y >= 0.0L && y < 1.0L))
++-	abort ();
++-      m.limbs[LDBL_MANT_BIT / GMP_LIMB_BITS] = d;
++-    }
++-#   endif
++-#  endif
++-  for (i = LDBL_MANT_BIT / GMP_LIMB_BITS; i > 0; )
++-    {
++-      mp_limb_t hi, lo;
++-      y *= (mp_limb_t) 1 << (GMP_LIMB_BITS / 2);
++-      hi = (int) y;
++-      y -= hi;
++-      if (!(y >= 0.0L && y < 1.0L))
++-	abort ();
++-      y *= (mp_limb_t) 1 << (GMP_LIMB_BITS / 2);
++-      lo = (int) y;
++-      y -= lo;
++-      if (!(y >= 0.0L && y < 1.0L))
++-	abort ();
++-      m.limbs[--i] = (hi << (GMP_LIMB_BITS / 2)) | lo;
++-    }
++-  if (!(y == 0.0L))
++-    abort ();
++-  /* Normalise.  */
++-  while (m.nlimbs > 0 && m.limbs[m.nlimbs - 1] == 0)
++-    m.nlimbs--;
++-  *mp = m;
++-  *ep = exp - LDBL_MANT_BIT;
++-  return m.limbs;
++-}
++-
++-# endif
++-
++-# if NEED_PRINTF_DOUBLE
++-
++-/* Assuming x is finite and >= 0:
++-   write x as x = 2^e * m, where m is a bignum.
++-   Return the allocated memory in case of success, NULL in case of memory
++-   allocation failure.  */
++-static void *
++-decode_double (double x, int *ep, mpn_t *mp)
++-{
++-  mpn_t m;
++-  int exp;
++-  double y;
++-  size_t i;
++-
++-  /* Allocate memory for result.  */
++-  m.nlimbs = (DBL_MANT_BIT + GMP_LIMB_BITS - 1) / GMP_LIMB_BITS;
++-  m.limbs = (mp_limb_t *) malloc (m.nlimbs * sizeof (mp_limb_t));
++-  if (m.limbs == NULL)
++-    return NULL;
++-  /* Split into exponential part and mantissa.  */
++-  y = frexp (x, &exp);
++-  if (!(y >= 0.0 && y < 1.0))
++-    abort ();
++-  /* x = 2^exp * y = 2^(exp - DBL_MANT_BIT) * (y * DBL_MANT_BIT), and the
++-     latter is an integer.  */
++-  /* Convert the mantissa (y * DBL_MANT_BIT) to a sequence of limbs.
++-     I'm not sure whether it's safe to cast a 'double' value between
++-     2^31 and 2^32 to 'unsigned int', therefore play safe and cast only
++-     'double' values between 0 and 2^16 (to 'unsigned int' or 'int',
++-     doesn't matter).  */
++-#  if (DBL_MANT_BIT % GMP_LIMB_BITS) != 0
++-#   if (DBL_MANT_BIT % GMP_LIMB_BITS) > GMP_LIMB_BITS / 2
++-    {
++-      mp_limb_t hi, lo;
++-      y *= (mp_limb_t) 1 << (DBL_MANT_BIT % (GMP_LIMB_BITS / 2));
++-      hi = (int) y;
++-      y -= hi;
++-      if (!(y >= 0.0 && y < 1.0))
++-	abort ();
++-      y *= (mp_limb_t) 1 << (GMP_LIMB_BITS / 2);
++-      lo = (int) y;
++-      y -= lo;
++-      if (!(y >= 0.0 && y < 1.0))
++-	abort ();
++-      m.limbs[DBL_MANT_BIT / GMP_LIMB_BITS] = (hi << (GMP_LIMB_BITS / 2)) | lo;
++-    }
++-#   else
++-    {
++-      mp_limb_t d;
++-      y *= (mp_limb_t) 1 << (DBL_MANT_BIT % GMP_LIMB_BITS);
++-      d = (int) y;
++-      y -= d;
++-      if (!(y >= 0.0 && y < 1.0))
++-	abort ();
++-      m.limbs[DBL_MANT_BIT / GMP_LIMB_BITS] = d;
++-    }
++-#   endif
++-#  endif
++-  for (i = DBL_MANT_BIT / GMP_LIMB_BITS; i > 0; )
++-    {
++-      mp_limb_t hi, lo;
++-      y *= (mp_limb_t) 1 << (GMP_LIMB_BITS / 2);
++-      hi = (int) y;
++-      y -= hi;
++-      if (!(y >= 0.0 && y < 1.0))
++-	abort ();
++-      y *= (mp_limb_t) 1 << (GMP_LIMB_BITS / 2);
++-      lo = (int) y;
++-      y -= lo;
++-      if (!(y >= 0.0 && y < 1.0))
++-	abort ();
++-      m.limbs[--i] = (hi << (GMP_LIMB_BITS / 2)) | lo;
++-    }
++-  if (!(y == 0.0))
++-    abort ();
++-  /* Normalise.  */
++-  while (m.nlimbs > 0 && m.limbs[m.nlimbs - 1] == 0)
++-    m.nlimbs--;
++-  *mp = m;
++-  *ep = exp - DBL_MANT_BIT;
++-  return m.limbs;
++-}
++-
++-# endif
++-
++-/* Assuming x = 2^e * m is finite and >= 0, and n is an integer:
++-   Returns the decimal representation of round (x * 10^n).
++-   Return the allocated memory - containing the decimal digits in low-to-high
++-   order, terminated with a NUL character - in case of success, NULL in case
++-   of memory allocation failure.  */
++-static char *
++-scale10_round_decimal_decoded (int e, mpn_t m, void *memory, int n)
++-{
++-  int s;
++-  size_t extra_zeroes;
++-  unsigned int abs_n;
++-  unsigned int abs_s;
++-  mp_limb_t *pow5_ptr;
++-  size_t pow5_len;
++-  unsigned int s_limbs;
++-  unsigned int s_bits;
++-  mpn_t pow5;
++-  mpn_t z;
++-  void *z_memory;
++-  char *digits;
++-
++-  if (memory == NULL)
++-    return NULL;
++-  /* x = 2^e * m, hence
++-     y = round (2^e * 10^n * m) = round (2^(e+n) * 5^n * m)
++-       = round (2^s * 5^n * m).  */
++-  s = e + n;
++-  extra_zeroes = 0;
++-  /* Factor out a common power of 10 if possible.  */
++-  if (s > 0 && n > 0)
++-    {
++-      extra_zeroes = (s < n ? s : n);
++-      s -= extra_zeroes;
++-      n -= extra_zeroes;
++-    }
++-  /* Here y = round (2^s * 5^n * m) * 10^extra_zeroes.
++-     Before converting to decimal, we need to compute
++-     z = round (2^s * 5^n * m).  */
++-  /* Compute 5^|n|, possibly shifted by |s| bits if n and s have the same
++-     sign.  2.322 is slightly larger than log(5)/log(2).  */
++-  abs_n = (n >= 0 ? n : -n);
++-  abs_s = (s >= 0 ? s : -s);
++-  pow5_ptr = (mp_limb_t *) malloc (((int)(abs_n * (2.322f / GMP_LIMB_BITS)) + 1
++-				    + abs_s / GMP_LIMB_BITS + 1)
++-				   * sizeof (mp_limb_t));
++-  if (pow5_ptr == NULL)
++-    {
++-      free (memory);
++-      return NULL;
++-    }
++-  /* Initialize with 1.  */
++-  pow5_ptr[0] = 1;
++-  pow5_len = 1;
++-  /* Multiply with 5^|n|.  */
++-  if (abs_n > 0)
++-    {
++-      static mp_limb_t const small_pow5[13 + 1] =
++-	{
++-	  1, 5, 25, 125, 625, 3125, 15625, 78125, 390625, 1953125, 9765625,
++-	  48828125, 244140625, 1220703125
++-	};
++-      unsigned int n13;
++-      for (n13 = 0; n13 <= abs_n; n13 += 13)
++-	{
++-	  mp_limb_t digit1 = small_pow5[n13 + 13 <= abs_n ? 13 : abs_n - n13];
++-	  size_t j;
++-	  mp_twolimb_t carry = 0;
++-	  for (j = 0; j < pow5_len; j++)
++-	    {
++-	      mp_limb_t digit2 = pow5_ptr[j];
++-	      carry += (mp_twolimb_t) digit1 * (mp_twolimb_t) digit2;
++-	      pow5_ptr[j] = (mp_limb_t) carry;
++-	      carry = carry >> GMP_LIMB_BITS;
++-	    }
++-	  if (carry > 0)
++-	    pow5_ptr[pow5_len++] = (mp_limb_t) carry;
++-	}
++-    }
++-  s_limbs = abs_s / GMP_LIMB_BITS;
++-  s_bits = abs_s % GMP_LIMB_BITS;
++-  if (n >= 0 ? s >= 0 : s <= 0)
++-    {
++-      /* Multiply with 2^|s|.  */
++-      if (s_bits > 0)
++-	{
++-	  mp_limb_t *ptr = pow5_ptr;
++-	  mp_twolimb_t accu = 0;
++-	  size_t count;
++-	  for (count = pow5_len; count > 0; count--)
++-	    {
++-	      accu += (mp_twolimb_t) *ptr << s_bits;
++-	      *ptr++ = (mp_limb_t) accu;
++-	      accu = accu >> GMP_LIMB_BITS;
++-	    }
++-	  if (accu > 0)
++-	    {
++-	      *ptr = (mp_limb_t) accu;
++-	      pow5_len++;
++-	    }
++-	}
++-      if (s_limbs > 0)
++-	{
++-	  size_t count;
++-	  for (count = pow5_len; count > 0;)
++-	    {
++-	      count--;
++-	      pow5_ptr[s_limbs + count] = pow5_ptr[count];
++-	    }
++-	  for (count = s_limbs; count > 0;)
++-	    {
++-	      count--;
++-	      pow5_ptr[count] = 0;
++-	    }
++-	  pow5_len += s_limbs;
++-	}
++-      pow5.limbs = pow5_ptr;
++-      pow5.nlimbs = pow5_len;
++-      if (n >= 0)
++-	{
++-	  /* Multiply m with pow5.  No division needed.  */
++-	  z_memory = multiply (m, pow5, &z);
++-	}
++-      else
++-	{
++-	  /* Divide m by pow5 and round.  */
++-	  z_memory = divide (m, pow5, &z);
++-	}
++-    }
++-  else
++-    {
++-      pow5.limbs = pow5_ptr;
++-      pow5.nlimbs = pow5_len;
++-      if (n >= 0)
++-	{
++-	  /* n >= 0, s < 0.
++-	     Multiply m with pow5, then divide by 2^|s|.  */
++-	  mpn_t numerator;
++-	  mpn_t denominator;
++-	  void *tmp_memory;
++-	  tmp_memory = multiply (m, pow5, &numerator);
++-	  if (tmp_memory == NULL)
++-	    {
++-	      free (pow5_ptr);
++-	      free (memory);
++-	      return NULL;
++-	    }
++-	  /* Construct 2^|s|.  */
++-	  {
++-	    mp_limb_t *ptr = pow5_ptr + pow5_len;
++-	    size_t i;
++-	    for (i = 0; i < s_limbs; i++)
++-	      ptr[i] = 0;
++-	    ptr[s_limbs] = (mp_limb_t) 1 << s_bits;
++-	    denominator.limbs = ptr;
++-	    denominator.nlimbs = s_limbs + 1;
++-	  }
++-	  z_memory = divide (numerator, denominator, &z);
++-	  free (tmp_memory);
++-	}
++-      else
++-	{
++-	  /* n < 0, s > 0.
++-	     Multiply m with 2^s, then divide by pow5.  */
++-	  mpn_t numerator;
++-	  mp_limb_t *num_ptr;
++-	  num_ptr = (mp_limb_t *) malloc ((m.nlimbs + s_limbs + 1)
++-					  * sizeof (mp_limb_t));
++-	  if (num_ptr == NULL)
++-	    {
++-	      free (pow5_ptr);
++-	      free (memory);
++-	      return NULL;
++-	    }
++-	  {
++-	    mp_limb_t *destptr = num_ptr;
++-	    {
++-	      size_t i;
++-	      for (i = 0; i < s_limbs; i++)
++-		*destptr++ = 0;
++-	    }
++-	    if (s_bits > 0)
++-	      {
++-		const mp_limb_t *sourceptr = m.limbs;
++-		mp_twolimb_t accu = 0;
++-		size_t count;
++-		for (count = m.nlimbs; count > 0; count--)
++-		  {
++-		    accu += (mp_twolimb_t) *sourceptr++ << s_bits;
++-		    *destptr++ = (mp_limb_t) accu;
++-		    accu = accu >> GMP_LIMB_BITS;
++-		  }
++-		if (accu > 0)
++-		  *destptr++ = (mp_limb_t) accu;
++-	      }
++-	    else
++-	      {
++-		const mp_limb_t *sourceptr = m.limbs;
++-		size_t count;
++-		for (count = m.nlimbs; count > 0; count--)
++-		  *destptr++ = *sourceptr++;
++-	      }
++-	    numerator.limbs = num_ptr;
++-	    numerator.nlimbs = destptr - num_ptr;
++-	  }
++-	  z_memory = divide (numerator, pow5, &z);
++-	  free (num_ptr);
++-	}
++-    }
++-  free (pow5_ptr);
++-  free (memory);
++-
++-  /* Here y = round (x * 10^n) = z * 10^extra_zeroes.  */
++-
++-  if (z_memory == NULL)
++-    return NULL;
++-  digits = convert_to_decimal (z, extra_zeroes);
++-  free (z_memory);
++-  return digits;
++-}
++-
++-# if NEED_PRINTF_LONG_DOUBLE
++-
++-/* Assuming x is finite and >= 0, and n is an integer:
++-   Returns the decimal representation of round (x * 10^n).
++-   Return the allocated memory - containing the decimal digits in low-to-high
++-   order, terminated with a NUL character - in case of success, NULL in case
++-   of memory allocation failure.  */
++-static char *
++-scale10_round_decimal_long_double (long double x, int n)
++-{
++-  int e;
++-  mpn_t m;
++-  void *memory = decode_long_double (x, &e, &m);
++-  return scale10_round_decimal_decoded (e, m, memory, n);
++-}
++-
++-# endif
++-
++-# if NEED_PRINTF_DOUBLE
++-
++-/* Assuming x is finite and >= 0, and n is an integer:
++-   Returns the decimal representation of round (x * 10^n).
++-   Return the allocated memory - containing the decimal digits in low-to-high
++-   order, terminated with a NUL character - in case of success, NULL in case
++-   of memory allocation failure.  */
++-static char *
++-scale10_round_decimal_double (double x, int n)
++-{
++-  int e;
++-  mpn_t m;
++-  void *memory = decode_double (x, &e, &m);
++-  return scale10_round_decimal_decoded (e, m, memory, n);
++-}
++-
++-# endif
++-
++-# if NEED_PRINTF_LONG_DOUBLE
++-
++-/* Assuming x is finite and > 0:
++-   Return an approximation for n with 10^n <= x < 10^(n+1).
++-   The approximation is usually the right n, but may be off by 1 sometimes.  */
++-static int
++-floorlog10l (long double x)
++-{
++-  int exp;
++-  long double y;
++-  double z;
++-  double l;
++-
++-  /* Split into exponential part and mantissa.  */
++-  y = frexpl (x, &exp);
++-  if (!(y >= 0.0L && y < 1.0L))
++-    abort ();
++-  if (y == 0.0L)
++-    return INT_MIN;
++-  if (y < 0.5L)
++-    {
++-      while (y < (1.0L / (1 << (GMP_LIMB_BITS / 2)) / (1 << (GMP_LIMB_BITS / 2))))
++-	{
++-	  y *= 1.0L * (1 << (GMP_LIMB_BITS / 2)) * (1 << (GMP_LIMB_BITS / 2));
++-	  exp -= GMP_LIMB_BITS;
++-	}
++-      if (y < (1.0L / (1 << 16)))
++-	{
++-	  y *= 1.0L * (1 << 16);
++-	  exp -= 16;
++-	}
++-      if (y < (1.0L / (1 << 8)))
++-	{
++-	  y *= 1.0L * (1 << 8);
++-	  exp -= 8;
++-	}
++-      if (y < (1.0L / (1 << 4)))
++-	{
++-	  y *= 1.0L * (1 << 4);
++-	  exp -= 4;
++-	}
++-      if (y < (1.0L / (1 << 2)))
++-	{
++-	  y *= 1.0L * (1 << 2);
++-	  exp -= 2;
++-	}
++-      if (y < (1.0L / (1 << 1)))
++-	{
++-	  y *= 1.0L * (1 << 1);
++-	  exp -= 1;
++-	}
++-    }
++-  if (!(y >= 0.5L && y < 1.0L))
++-    abort ();
++-  /* Compute an approximation for l = log2(x) = exp + log2(y).  */
++-  l = exp;
++-  z = y;
++-  if (z < 0.70710678118654752444)
++-    {
++-      z *= 1.4142135623730950488;
++-      l -= 0.5;
++-    }
++-  if (z < 0.8408964152537145431)
++-    {
++-      z *= 1.1892071150027210667;
++-      l -= 0.25;
++-    }
++-  if (z < 0.91700404320467123175)
++-    {
++-      z *= 1.0905077326652576592;
++-      l -= 0.125;
++-    }
++-  if (z < 0.9576032806985736469)
++-    {
++-      z *= 1.0442737824274138403;
++-      l -= 0.0625;
++-    }
++-  /* Now 0.95 <= z <= 1.01.  */
++-  z = 1 - z;
++-  /* log(1-z) = - z - z^2/2 - z^3/3 - z^4/4 - ...
++-     Four terms are enough to get an approximation with error < 10^-7.  */
++-  l -= z * (1.0 + z * (0.5 + z * ((1.0 / 3) + z * 0.25)));
++-  /* Finally multiply with log(2)/log(10), yields an approximation for
++-     log10(x).  */
++-  l *= 0.30102999566398119523;
++-  /* Round down to the next integer.  */
++-  return (int) l + (l < 0 ? -1 : 0);
++-}
++-
++-# endif
++-
++-# if NEED_PRINTF_DOUBLE
++-
++-/* Assuming x is finite and > 0:
++-   Return an approximation for n with 10^n <= x < 10^(n+1).
++-   The approximation is usually the right n, but may be off by 1 sometimes.  */
++-static int
++-floorlog10 (double x)
++-{
++-  int exp;
++-  double y;
++-  double z;
++-  double l;
++-
++-  /* Split into exponential part and mantissa.  */
++-  y = frexp (x, &exp);
++-  if (!(y >= 0.0 && y < 1.0))
++-    abort ();
++-  if (y == 0.0)
++-    return INT_MIN;
++-  if (y < 0.5)
++-    {
++-      while (y < (1.0 / (1 << (GMP_LIMB_BITS / 2)) / (1 << (GMP_LIMB_BITS / 2))))
++-	{
++-	  y *= 1.0 * (1 << (GMP_LIMB_BITS / 2)) * (1 << (GMP_LIMB_BITS / 2));
++-	  exp -= GMP_LIMB_BITS;
++-	}
++-      if (y < (1.0 / (1 << 16)))
++-	{
++-	  y *= 1.0 * (1 << 16);
++-	  exp -= 16;
++-	}
++-      if (y < (1.0 / (1 << 8)))
++-	{
++-	  y *= 1.0 * (1 << 8);
++-	  exp -= 8;
++-	}
++-      if (y < (1.0 / (1 << 4)))
++-	{
++-	  y *= 1.0 * (1 << 4);
++-	  exp -= 4;
++-	}
++-      if (y < (1.0 / (1 << 2)))
++-	{
++-	  y *= 1.0 * (1 << 2);
++-	  exp -= 2;
++-	}
++-      if (y < (1.0 / (1 << 1)))
++-	{
++-	  y *= 1.0 * (1 << 1);
++-	  exp -= 1;
++-	}
++-    }
++-  if (!(y >= 0.5 && y < 1.0))
++-    abort ();
++-  /* Compute an approximation for l = log2(x) = exp + log2(y).  */
++-  l = exp;
++-  z = y;
++-  if (z < 0.70710678118654752444)
++-    {
++-      z *= 1.4142135623730950488;
++-      l -= 0.5;
++-    }
++-  if (z < 0.8408964152537145431)
++-    {
++-      z *= 1.1892071150027210667;
++-      l -= 0.25;
++-    }
++-  if (z < 0.91700404320467123175)
++-    {
++-      z *= 1.0905077326652576592;
++-      l -= 0.125;
++-    }
++-  if (z < 0.9576032806985736469)
++-    {
++-      z *= 1.0442737824274138403;
++-      l -= 0.0625;
++-    }
++-  /* Now 0.95 <= z <= 1.01.  */
++-  z = 1 - z;
++-  /* log(1-z) = - z - z^2/2 - z^3/3 - z^4/4 - ...
++-     Four terms are enough to get an approximation with error < 10^-7.  */
++-  l -= z * (1.0 + z * (0.5 + z * ((1.0 / 3) + z * 0.25)));
++-  /* Finally multiply with log(2)/log(10), yields an approximation for
++-     log10(x).  */
++-  l *= 0.30102999566398119523;
++-  /* Round down to the next integer.  */
++-  return (int) l + (l < 0 ? -1 : 0);
++-}
++-
++-# endif
++-
++-#endif
++-
++-DCHAR_T *
++-VASNPRINTF (DCHAR_T *resultbuf, size_t *lengthp,
++-	    const FCHAR_T *format, va_list args)
 +-{
 +-  DIRECTIVES d;
 +-  arguments a;
 +-
 +-  if (PRINTF_PARSE (format, &d, &a) < 0)
-+-    {
-+-      errno = EINVAL;
-+-      return NULL;
-+-    }
++-    /* errno is already set.  */
++-    return NULL;
 +-
 +-#define CLEANUP() \
 +-  free (d.dir);								\
 +-  if (a.arg)								\
 +-    free (a.arg);
 +-
-+-  if (printf_fetchargs (args, &a) < 0)
++-  if (PRINTF_FETCHARGS (args, &a) < 0)
 +-    {
 +-      CLEANUP ();
 +-      errno = EINVAL;
@@ -13736,13 +19346,13 @@ index 0000000000..a06dbad1ea
 +-
 +-  {
 +-    size_t buf_neededlength;
-+-    CHAR_T *buf;
-+-    CHAR_T *buf_malloced;
-+-    const CHAR_T *cp;
++-    TCHAR_T *buf;
++-    TCHAR_T *buf_malloced;
++-    const FCHAR_T *cp;
 +-    size_t i;
 +-    DIRECTIVE *dp;
 +-    /* Output string accumulator.  */
-+-    CHAR_T *result;
++-    DCHAR_T *result;
 +-    size_t allocated;
 +-    size_t length;
 +-
@@ -13751,18 +19361,18 @@ index 0000000000..a06dbad1ea
 +-    buf_neededlength =
 +-      xsum4 (7, d.max_width_length, d.max_precision_length, 6);
 +-#if HAVE_ALLOCA
-+-    if (buf_neededlength < 4000 / sizeof (CHAR_T))
++-    if (buf_neededlength < 4000 / sizeof (TCHAR_T))
 +-      {
-+-	buf = (CHAR_T *) alloca (buf_neededlength * sizeof (CHAR_T));
++-	buf = (TCHAR_T *) alloca (buf_neededlength * sizeof (TCHAR_T));
 +-	buf_malloced = NULL;
 +-      }
 +-    else
 +-#endif
 +-      {
-+-	size_t buf_memsize = xtimes (buf_neededlength, sizeof (CHAR_T));
++-	size_t buf_memsize = xtimes (buf_neededlength, sizeof (TCHAR_T));
 +-	if (size_overflow_p (buf_memsize))
 +-	  goto out_of_memory_1;
-+-	buf = (CHAR_T *) malloc (buf_memsize);
++-	buf = (TCHAR_T *) malloc (buf_memsize);
 +-	if (buf == NULL)
 +-	  goto out_of_memory_1;
 +-	buf_malloced = buf;
@@ -13789,22 +19399,22 @@ index 0000000000..a06dbad1ea
 +-    if ((needed) > allocated)						     \
 +-      {									     \
 +-	size_t memory_size;						     \
-+-	CHAR_T *memory;							     \
++-	DCHAR_T *memory;						     \
 +-									     \
 +-	allocated = (allocated > 0 ? xtimes (allocated, 2) : 12);	     \
 +-	if ((needed) > allocated)					     \
 +-	  allocated = (needed);						     \
-+-	memory_size = xtimes (allocated, sizeof (CHAR_T));		     \
++-	memory_size = xtimes (allocated, sizeof (DCHAR_T));		     \
 +-	if (size_overflow_p (memory_size))				     \
 +-	  goto out_of_memory;						     \
 +-	if (result == resultbuf || result == NULL)			     \
-+-	  memory = (CHAR_T *) malloc (memory_size);			     \
++-	  memory = (DCHAR_T *) malloc (memory_size);			     \
 +-	else								     \
-+-	  memory = (CHAR_T *) realloc (result, memory_size);		     \
++-	  memory = (DCHAR_T *) realloc (result, memory_size);		     \
 +-	if (memory == NULL)						     \
 +-	  goto out_of_memory;						     \
 +-	if (result == resultbuf && length > 0)				     \
-+-	  memcpy (memory, result, length * sizeof (CHAR_T));		     \
++-	  DCHAR_CPY (memory, result, length);				     \
 +-	result = memory;						     \
 +-      }
 +-
@@ -13816,8 +19426,20 @@ index 0000000000..a06dbad1ea
 +-	    size_t augmented_length = xsum (length, n);
 +-
 +-	    ENSURE_ALLOCATION (augmented_length);
-+-	    memcpy (result + length, cp, n * sizeof (CHAR_T));
-+-	    length = augmented_length;
++-	    /* This copies a piece of FCHAR_T[] into a DCHAR_T[].  Here we
++-	       need that the format string contains only ASCII characters
++-	       if FCHAR_T and DCHAR_T are not the same type.  */
++-	    if (sizeof (FCHAR_T) == sizeof (DCHAR_T))
++-	      {
++-		DCHAR_CPY (result + length, (const DCHAR_T *) cp, n);
++-		length = augmented_length;
++-	      }
++-	    else
++-	      {
++-		do
++-		  result[length++] = (unsigned char) *cp++;
++-		while (--n > 0);
++-	      }
 +-	  }
 +-	if (i == d.count)
 +-	  break;
@@ -13855,7 +19477,7 @@ index 0000000000..a06dbad1ea
 +-		  case TYPE_COUNT_LONGINT_POINTER:
 +-		    *a.arg[dp->arg_index].a.a_count_longint_pointer = length;
 +-		    break;
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
 +-		  case TYPE_COUNT_LONGLONGINT_POINTER:
 +-		    *a.arg[dp->arg_index].a.a_count_longlongint_pointer = length;
 +-		    break;
@@ -13864,109 +19486,2134 @@ index 0000000000..a06dbad1ea
 +-		    abort ();
 +-		  }
 +-	      }
++-#if ENABLE_UNISTDIO
++-	    /* The unistdio extensions.  */
++-	    else if (dp->conversion == 'U')
++-	      {
++-		arg_type type = a.arg[dp->arg_index].type;
++-		int flags = dp->flags;
++-		int has_width;
++-		size_t width;
++-		int has_precision;
++-		size_t precision;
++-
++-		has_width = 0;
++-		width = 0;
++-		if (dp->width_start != dp->width_end)
++-		  {
++-		    if (dp->width_arg_index != ARG_NONE)
++-		      {
++-			int arg;
++-
++-			if (!(a.arg[dp->width_arg_index].type == TYPE_INT))
++-			  abort ();
++-			arg = a.arg[dp->width_arg_index].a.a_int;
++-			if (arg < 0)
++-			  {
++-			    /* "A negative field width is taken as a '-' flag
++-			        followed by a positive field width."  */
++-			    flags |= FLAG_LEFT;
++-			    width = (unsigned int) (-arg);
++-			  }
++-			else
++-			  width = arg;
++-		      }
++-		    else
++-		      {
++-			const FCHAR_T *digitp = dp->width_start;
++-
++-			do
++-			  width = xsum (xtimes (width, 10), *digitp++ - '0');
++-			while (digitp != dp->width_end);
++-		      }
++-		    has_width = 1;
++-		  }
++-
++-		has_precision = 0;
++-		precision = 0;
++-		if (dp->precision_start != dp->precision_end)
++-		  {
++-		    if (dp->precision_arg_index != ARG_NONE)
++-		      {
++-			int arg;
++-
++-			if (!(a.arg[dp->precision_arg_index].type == TYPE_INT))
++-			  abort ();
++-			arg = a.arg[dp->precision_arg_index].a.a_int;
++-			/* "A negative precision is taken as if the precision
++-			    were omitted."  */
++-			if (arg >= 0)
++-			  {
++-			    precision = arg;
++-			    has_precision = 1;
++-			  }
++-		      }
++-		    else
++-		      {
++-			const FCHAR_T *digitp = dp->precision_start + 1;
++-
++-			precision = 0;
++-			while (digitp != dp->precision_end)
++-			  precision = xsum (xtimes (precision, 10), *digitp++ - '0');
++-			has_precision = 1;
++-		      }
++-		  }
++-
++-		switch (type)
++-		  {
++-		  case TYPE_U8_STRING:
++-		    {
++-		      const uint8_t *arg = a.arg[dp->arg_index].a.a_u8_string;
++-		      const uint8_t *arg_end;
++-		      size_t characters;
++-
++-		      if (has_precision)
++-			{
++-			  /* Use only PRECISION characters, from the left.  */
++-			  arg_end = arg;
++-			  characters = 0;
++-			  for (; precision > 0; precision--)
++-			    {
++-			      int count = u8_strmblen (arg_end);
++-			      if (count == 0)
++-				break;
++-			      if (count < 0)
++-				{
++-				  if (!(result == resultbuf || result == NULL))
++-				    free (result);
++-				  if (buf_malloced != NULL)
++-				    free (buf_malloced);
++-				  CLEANUP ();
++-				  errno = EILSEQ;
++-				  return NULL;
++-				}
++-			      arg_end += count;
++-			      characters++;
++-			    }
++-			}
++-		      else if (has_width)
++-			{
++-			  /* Use the entire string, and count the number of
++-			     characters.  */
++-			  arg_end = arg;
++-			  characters = 0;
++-			  for (;;)
++-			    {
++-			      int count = u8_strmblen (arg_end);
++-			      if (count == 0)
++-				break;
++-			      if (count < 0)
++-				{
++-				  if (!(result == resultbuf || result == NULL))
++-				    free (result);
++-				  if (buf_malloced != NULL)
++-				    free (buf_malloced);
++-				  CLEANUP ();
++-				  errno = EILSEQ;
++-				  return NULL;
++-				}
++-			      arg_end += count;
++-			      characters++;
++-			    }
++-			}
++-		      else
++-			{
++-			  /* Use the entire string.  */
++-			  arg_end = arg + u8_strlen (arg);
++-			  /* The number of characters doesn't matter.  */
++-			  characters = 0;
++-			}
++-
++-		      if (has_width && width > characters
++-			  && !(dp->flags & FLAG_LEFT))
++-			{
++-			  size_t n = width - characters;
++-			  ENSURE_ALLOCATION (xsum (length, n));
++-			  DCHAR_SET (result + length, ' ', n);
++-			  length += n;
++-			}
++-
++-# if DCHAR_IS_UINT8_T
++-		      {
++-			size_t n = arg_end - arg;
++-			ENSURE_ALLOCATION (xsum (length, n));
++-			DCHAR_CPY (result + length, arg, n);
++-			length += n;
++-		      }
++-# else
++-		      { /* Convert.  */
++-			DCHAR_T *converted = result + length;
++-			size_t converted_len = allocated - length;
++-#  if DCHAR_IS_TCHAR
++-			/* Convert from UTF-8 to locale encoding.  */
++-			if (u8_conv_to_encoding (locale_charset (),
++-						 iconveh_question_mark,
++-						 arg, arg_end - arg, NULL,
++-						 &converted, &converted_len)
++-			    < 0)
++-#  else
++-			/* Convert from UTF-8 to UTF-16/UTF-32.  */
++-			converted =
++-			  U8_TO_DCHAR (arg, arg_end - arg,
++-				       converted, &converted_len);
++-			if (converted == NULL)
++-#  endif
++-			  {
++-			    int saved_errno = errno;
++-			    if (!(result == resultbuf || result == NULL))
++-			      free (result);
++-			    if (buf_malloced != NULL)
++-			      free (buf_malloced);
++-			    CLEANUP ();
++-			    errno = saved_errno;
++-			    return NULL;
++-			  }
++-			if (converted != result + length)
++-			  {
++-			    ENSURE_ALLOCATION (xsum (length, converted_len));
++-			    DCHAR_CPY (result + length, converted, converted_len);
++-			    free (converted);
++-			  }
++-			length += converted_len;
++-		      }
++-# endif
++-
++-		      if (has_width && width > characters
++-			  && (dp->flags & FLAG_LEFT))
++-			{
++-			  size_t n = width - characters;
++-			  ENSURE_ALLOCATION (xsum (length, n));
++-			  DCHAR_SET (result + length, ' ', n);
++-			  length += n;
++-			}
++-		    }
++-		    break;
++-
++-		  case TYPE_U16_STRING:
++-		    {
++-		      const uint16_t *arg = a.arg[dp->arg_index].a.a_u16_string;
++-		      const uint16_t *arg_end;
++-		      size_t characters;
++-
++-		      if (has_precision)
++-			{
++-			  /* Use only PRECISION characters, from the left.  */
++-			  arg_end = arg;
++-			  characters = 0;
++-			  for (; precision > 0; precision--)
++-			    {
++-			      int count = u16_strmblen (arg_end);
++-			      if (count == 0)
++-				break;
++-			      if (count < 0)
++-				{
++-				  if (!(result == resultbuf || result == NULL))
++-				    free (result);
++-				  if (buf_malloced != NULL)
++-				    free (buf_malloced);
++-				  CLEANUP ();
++-				  errno = EILSEQ;
++-				  return NULL;
++-				}
++-			      arg_end += count;
++-			      characters++;
++-			    }
++-			}
++-		      else if (has_width)
++-			{
++-			  /* Use the entire string, and count the number of
++-			     characters.  */
++-			  arg_end = arg;
++-			  characters = 0;
++-			  for (;;)
++-			    {
++-			      int count = u16_strmblen (arg_end);
++-			      if (count == 0)
++-				break;
++-			      if (count < 0)
++-				{
++-				  if (!(result == resultbuf || result == NULL))
++-				    free (result);
++-				  if (buf_malloced != NULL)
++-				    free (buf_malloced);
++-				  CLEANUP ();
++-				  errno = EILSEQ;
++-				  return NULL;
++-				}
++-			      arg_end += count;
++-			      characters++;
++-			    }
++-			}
++-		      else
++-			{
++-			  /* Use the entire string.  */
++-			  arg_end = arg + u16_strlen (arg);
++-			  /* The number of characters doesn't matter.  */
++-			  characters = 0;
++-			}
++-
++-		      if (has_width && width > characters
++-			  && !(dp->flags & FLAG_LEFT))
++-			{
++-			  size_t n = width - characters;
++-			  ENSURE_ALLOCATION (xsum (length, n));
++-			  DCHAR_SET (result + length, ' ', n);
++-			  length += n;
++-			}
++-
++-# if DCHAR_IS_UINT16_T
++-		      {
++-			size_t n = arg_end - arg;
++-			ENSURE_ALLOCATION (xsum (length, n));
++-			DCHAR_CPY (result + length, arg, n);
++-			length += n;
++-		      }
++-# else
++-		      { /* Convert.  */
++-			DCHAR_T *converted = result + length;
++-			size_t converted_len = allocated - length;
++-#  if DCHAR_IS_TCHAR
++-			/* Convert from UTF-16 to locale encoding.  */
++-			if (u16_conv_to_encoding (locale_charset (),
++-						  iconveh_question_mark,
++-						  arg, arg_end - arg, NULL,
++-						  &converted, &converted_len)
++-			    < 0)
++-#  else
++-			/* Convert from UTF-16 to UTF-8/UTF-32.  */
++-			converted =
++-			  U16_TO_DCHAR (arg, arg_end - arg,
++-					converted, &converted_len);
++-			if (converted == NULL)
++-#  endif
++-			  {
++-			    int saved_errno = errno;
++-			    if (!(result == resultbuf || result == NULL))
++-			      free (result);
++-			    if (buf_malloced != NULL)
++-			      free (buf_malloced);
++-			    CLEANUP ();
++-			    errno = saved_errno;
++-			    return NULL;
++-			  }
++-			if (converted != result + length)
++-			  {
++-			    ENSURE_ALLOCATION (xsum (length, converted_len));
++-			    DCHAR_CPY (result + length, converted, converted_len);
++-			    free (converted);
++-			  }
++-			length += converted_len;
++-		      }
++-# endif
++-
++-		      if (has_width && width > characters
++-			  && (dp->flags & FLAG_LEFT))
++-			{
++-			  size_t n = width - characters;
++-			  ENSURE_ALLOCATION (xsum (length, n));
++-			  DCHAR_SET (result + length, ' ', n);
++-			  length += n;
++-			}
++-		    }
++-		    break;
++-
++-		  case TYPE_U32_STRING:
++-		    {
++-		      const uint32_t *arg = a.arg[dp->arg_index].a.a_u32_string;
++-		      const uint32_t *arg_end;
++-		      size_t characters;
++-
++-		      if (has_precision)
++-			{
++-			  /* Use only PRECISION characters, from the left.  */
++-			  arg_end = arg;
++-			  characters = 0;
++-			  for (; precision > 0; precision--)
++-			    {
++-			      int count = u32_strmblen (arg_end);
++-			      if (count == 0)
++-				break;
++-			      if (count < 0)
++-				{
++-				  if (!(result == resultbuf || result == NULL))
++-				    free (result);
++-				  if (buf_malloced != NULL)
++-				    free (buf_malloced);
++-				  CLEANUP ();
++-				  errno = EILSEQ;
++-				  return NULL;
++-				}
++-			      arg_end += count;
++-			      characters++;
++-			    }
++-			}
++-		      else if (has_width)
++-			{
++-			  /* Use the entire string, and count the number of
++-			     characters.  */
++-			  arg_end = arg;
++-			  characters = 0;
++-			  for (;;)
++-			    {
++-			      int count = u32_strmblen (arg_end);
++-			      if (count == 0)
++-				break;
++-			      if (count < 0)
++-				{
++-				  if (!(result == resultbuf || result == NULL))
++-				    free (result);
++-				  if (buf_malloced != NULL)
++-				    free (buf_malloced);
++-				  CLEANUP ();
++-				  errno = EILSEQ;
++-				  return NULL;
++-				}
++-			      arg_end += count;
++-			      characters++;
++-			    }
++-			}
++-		      else
++-			{
++-			  /* Use the entire string.  */
++-			  arg_end = arg + u32_strlen (arg);
++-			  /* The number of characters doesn't matter.  */
++-			  characters = 0;
++-			}
++-
++-		      if (has_width && width > characters
++-			  && !(dp->flags & FLAG_LEFT))
++-			{
++-			  size_t n = width - characters;
++-			  ENSURE_ALLOCATION (xsum (length, n));
++-			  DCHAR_SET (result + length, ' ', n);
++-			  length += n;
++-			}
++-
++-# if DCHAR_IS_UINT32_T
++-		      {
++-			size_t n = arg_end - arg;
++-			ENSURE_ALLOCATION (xsum (length, n));
++-			DCHAR_CPY (result + length, arg, n);
++-			length += n;
++-		      }
++-# else
++-		      { /* Convert.  */
++-			DCHAR_T *converted = result + length;
++-			size_t converted_len = allocated - length;
++-#  if DCHAR_IS_TCHAR
++-			/* Convert from UTF-32 to locale encoding.  */
++-			if (u32_conv_to_encoding (locale_charset (),
++-						  iconveh_question_mark,
++-						  arg, arg_end - arg, NULL,
++-						  &converted, &converted_len)
++-			    < 0)
++-#  else
++-			/* Convert from UTF-32 to UTF-8/UTF-16.  */
++-			converted =
++-			  U32_TO_DCHAR (arg, arg_end - arg,
++-					converted, &converted_len);
++-			if (converted == NULL)
++-#  endif
++-			  {
++-			    int saved_errno = errno;
++-			    if (!(result == resultbuf || result == NULL))
++-			      free (result);
++-			    if (buf_malloced != NULL)
++-			      free (buf_malloced);
++-			    CLEANUP ();
++-			    errno = saved_errno;
++-			    return NULL;
++-			  }
++-			if (converted != result + length)
++-			  {
++-			    ENSURE_ALLOCATION (xsum (length, converted_len));
++-			    DCHAR_CPY (result + length, converted, converted_len);
++-			    free (converted);
++-			  }
++-			length += converted_len;
++-		      }
++-# endif
++-
++-		      if (has_width && width > characters
++-			  && (dp->flags & FLAG_LEFT))
++-			{
++-			  size_t n = width - characters;
++-			  ENSURE_ALLOCATION (xsum (length, n));
++-			  DCHAR_SET (result + length, ' ', n);
++-			  length += n;
++-			}
++-		    }
++-		    break;
++-
++-		  default:
++-		    abort ();
++-		  }
++-	      }
++-#endif
++-#if (NEED_PRINTF_DIRECTIVE_A || NEED_PRINTF_LONG_DOUBLE || NEED_PRINTF_DOUBLE) && !defined IN_LIBINTL
++-	    else if ((dp->conversion == 'a' || dp->conversion == 'A')
++-# if !(NEED_PRINTF_DIRECTIVE_A || (NEED_PRINTF_LONG_DOUBLE && NEED_PRINTF_DOUBLE))
++-		     && (0
++-#  if NEED_PRINTF_DOUBLE
++-			 || a.arg[dp->arg_index].type == TYPE_DOUBLE
++-#  endif
++-#  if NEED_PRINTF_LONG_DOUBLE
++-			 || a.arg[dp->arg_index].type == TYPE_LONGDOUBLE
++-#  endif
++-			)
++-# endif
++-		    )
++-	      {
++-		arg_type type = a.arg[dp->arg_index].type;
++-		int flags = dp->flags;
++-		int has_width;
++-		size_t width;
++-		int has_precision;
++-		size_t precision;
++-		size_t tmp_length;
++-		DCHAR_T tmpbuf[700];
++-		DCHAR_T *tmp;
++-		DCHAR_T *pad_ptr;
++-		DCHAR_T *p;
++-
++-		has_width = 0;
++-		width = 0;
++-		if (dp->width_start != dp->width_end)
++-		  {
++-		    if (dp->width_arg_index != ARG_NONE)
++-		      {
++-			int arg;
++-
++-			if (!(a.arg[dp->width_arg_index].type == TYPE_INT))
++-			  abort ();
++-			arg = a.arg[dp->width_arg_index].a.a_int;
++-			if (arg < 0)
++-			  {
++-			    /* "A negative field width is taken as a '-' flag
++-			        followed by a positive field width."  */
++-			    flags |= FLAG_LEFT;
++-			    width = (unsigned int) (-arg);
++-			  }
++-			else
++-			  width = arg;
++-		      }
++-		    else
++-		      {
++-			const FCHAR_T *digitp = dp->width_start;
++-
++-			do
++-			  width = xsum (xtimes (width, 10), *digitp++ - '0');
++-			while (digitp != dp->width_end);
++-		      }
++-		    has_width = 1;
++-		  }
++-
++-		has_precision = 0;
++-		precision = 0;
++-		if (dp->precision_start != dp->precision_end)
++-		  {
++-		    if (dp->precision_arg_index != ARG_NONE)
++-		      {
++-			int arg;
++-
++-			if (!(a.arg[dp->precision_arg_index].type == TYPE_INT))
++-			  abort ();
++-			arg = a.arg[dp->precision_arg_index].a.a_int;
++-			/* "A negative precision is taken as if the precision
++-			    were omitted."  */
++-			if (arg >= 0)
++-			  {
++-			    precision = arg;
++-			    has_precision = 1;
++-			  }
++-		      }
++-		    else
++-		      {
++-			const FCHAR_T *digitp = dp->precision_start + 1;
++-
++-			precision = 0;
++-			while (digitp != dp->precision_end)
++-			  precision = xsum (xtimes (precision, 10), *digitp++ - '0');
++-			has_precision = 1;
++-		      }
++-		  }
++-
++-		/* Allocate a temporary buffer of sufficient size.  */
++-		if (type == TYPE_LONGDOUBLE)
++-		  tmp_length =
++-		    (unsigned int) ((LDBL_DIG + 1)
++-				    * 0.831 /* decimal -> hexadecimal */
++-				   )
++-		    + 1; /* turn floor into ceil */
++-		else
++-		  tmp_length =
++-		    (unsigned int) ((DBL_DIG + 1)
++-				    * 0.831 /* decimal -> hexadecimal */
++-				   )
++-		    + 1; /* turn floor into ceil */
++-		if (tmp_length < precision)
++-		  tmp_length = precision;
++-		/* Account for sign, decimal point etc. */
++-		tmp_length = xsum (tmp_length, 12);
++-
++-		if (tmp_length < width)
++-		  tmp_length = width;
++-
++-		tmp_length = xsum (tmp_length, 1); /* account for trailing NUL */
++-
++-		if (tmp_length <= sizeof (tmpbuf) / sizeof (DCHAR_T))
++-		  tmp = tmpbuf;
++-		else
++-		  {
++-		    size_t tmp_memsize = xtimes (tmp_length, sizeof (DCHAR_T));
++-
++-		    if (size_overflow_p (tmp_memsize))
++-		      /* Overflow, would lead to out of memory.  */
++-		      goto out_of_memory;
++-		    tmp = (DCHAR_T *) malloc (tmp_memsize);
++-		    if (tmp == NULL)
++-		      /* Out of memory.  */
++-		      goto out_of_memory;
++-		  }
++-
++-		pad_ptr = NULL;
++-		p = tmp;
++-		if (type == TYPE_LONGDOUBLE)
++-		  {
++-# if NEED_PRINTF_DIRECTIVE_A || NEED_PRINTF_LONG_DOUBLE
++-		    long double arg = a.arg[dp->arg_index].a.a_longdouble;
++-
++-		    if (isnanl (arg))
++-		      {
++-			if (dp->conversion == 'A')
++-			  {
++-			    *p++ = 'N'; *p++ = 'A'; *p++ = 'N';
++-			  }
++-			else
++-			  {
++-			    *p++ = 'n'; *p++ = 'a'; *p++ = 'n';
++-			  }
++-		      }
++-		    else
++-		      {
++-			int sign = 0;
++-			DECL_LONG_DOUBLE_ROUNDING
++-
++-			BEGIN_LONG_DOUBLE_ROUNDING ();
++-
++-			if (signbit (arg)) /* arg < 0.0L or negative zero */
++-			  {
++-			    sign = -1;
++-			    arg = -arg;
++-			  }
++-
++-			if (sign < 0)
++-			  *p++ = '-';
++-			else if (flags & FLAG_SHOWSIGN)
++-			  *p++ = '+';
++-			else if (flags & FLAG_SPACE)
++-			  *p++ = ' ';
++-
++-			if (arg > 0.0L && arg + arg == arg)
++-			  {
++-			    if (dp->conversion == 'A')
++-			      {
++-				*p++ = 'I'; *p++ = 'N'; *p++ = 'F';
++-			      }
++-			    else
++-			      {
++-				*p++ = 'i'; *p++ = 'n'; *p++ = 'f';
++-			      }
++-			  }
++-			else
++-			  {
++-			    int exponent;
++-			    long double mantissa;
++-
++-			    if (arg > 0.0L)
++-			      mantissa = printf_frexpl (arg, &exponent);
++-			    else
++-			      {
++-				exponent = 0;
++-				mantissa = 0.0L;
++-			      }
++-
++-			    if (has_precision
++-				&& precision < (unsigned int) ((LDBL_DIG + 1) * 0.831) + 1)
++-			      {
++-				/* Round the mantissa.  */
++-				long double tail = mantissa;
++-				size_t q;
++-
++-				for (q = precision; ; q--)
++-				  {
++-				    int digit = (int) tail;
++-				    tail -= digit;
++-				    if (q == 0)
++-				      {
++-					if (digit & 1 ? tail >= 0.5L : tail > 0.5L)
++-					  tail = 1 - tail;
++-					else
++-					  tail = - tail;
++-					break;
++-				      }
++-				    tail *= 16.0L;
++-				  }
++-				if (tail != 0.0L)
++-				  for (q = precision; q > 0; q--)
++-				    tail *= 0.0625L;
++-				mantissa += tail;
++-			      }
++-
++-			    *p++ = '0';
++-			    *p++ = dp->conversion - 'A' + 'X';
++-			    pad_ptr = p;
++-			    {
++-			      int digit;
++-
++-			      digit = (int) mantissa;
++-			      mantissa -= digit;
++-			      *p++ = '0' + digit;
++-			      if ((flags & FLAG_ALT)
++-				  || mantissa > 0.0L || precision > 0)
++-				{
++-				  *p++ = decimal_point_char ();
++-				  /* This loop terminates because we assume
++-				     that FLT_RADIX is a power of 2.  */
++-				  while (mantissa > 0.0L)
++-				    {
++-				      mantissa *= 16.0L;
++-				      digit = (int) mantissa;
++-				      mantissa -= digit;
++-				      *p++ = digit
++-					     + (digit < 10
++-						? '0'
++-						: dp->conversion - 10);
++-				      if (precision > 0)
++-					precision--;
++-				    }
++-				  while (precision > 0)
++-				    {
++-				      *p++ = '0';
++-				      precision--;
++-				    }
++-				}
++-			      }
++-			      *p++ = dp->conversion - 'A' + 'P';
++-#  if WIDE_CHAR_VERSION
++-			      {
++-				static const wchar_t decimal_format[] =
++-				  { '%', '+', 'd', '\0' };
++-				SNPRINTF (p, 6 + 1, decimal_format, exponent);
++-			      }
++-			      while (*p != '\0')
++-				p++;
++-#  else
++-			      if (sizeof (DCHAR_T) == 1)
++-				{
++-				  sprintf ((char *) p, "%+d", exponent);
++-				  while (*p != '\0')
++-				    p++;
++-				}
++-			      else
++-				{
++-				  char expbuf[6 + 1];
++-				  const char *ep;
++-				  sprintf (expbuf, "%+d", exponent);
++-				  for (ep = expbuf; (*p = *ep) != '\0'; ep++)
++-				    p++;
++-				}
++-#  endif
++-			  }
++-
++-			END_LONG_DOUBLE_ROUNDING ();
++-		      }
++-# else
++-		    abort ();
++-# endif
++-		  }
++-		else
++-		  {
++-# if NEED_PRINTF_DIRECTIVE_A || NEED_PRINTF_DOUBLE
++-		    double arg = a.arg[dp->arg_index].a.a_double;
++-
++-		    if (isnan (arg))
++-		      {
++-			if (dp->conversion == 'A')
++-			  {
++-			    *p++ = 'N'; *p++ = 'A'; *p++ = 'N';
++-			  }
++-			else
++-			  {
++-			    *p++ = 'n'; *p++ = 'a'; *p++ = 'n';
++-			  }
++-		      }
++-		    else
++-		      {
++-			int sign = 0;
++-
++-			if (signbit (arg)) /* arg < 0.0 or negative zero */
++-			  {
++-			    sign = -1;
++-			    arg = -arg;
++-			  }
++-
++-			if (sign < 0)
++-			  *p++ = '-';
++-			else if (flags & FLAG_SHOWSIGN)
++-			  *p++ = '+';
++-			else if (flags & FLAG_SPACE)
++-			  *p++ = ' ';
++-
++-			if (arg > 0.0 && arg + arg == arg)
++-			  {
++-			    if (dp->conversion == 'A')
++-			      {
++-				*p++ = 'I'; *p++ = 'N'; *p++ = 'F';
++-			      }
++-			    else
++-			      {
++-				*p++ = 'i'; *p++ = 'n'; *p++ = 'f';
++-			      }
++-			  }
++-			else
++-			  {
++-			    int exponent;
++-			    double mantissa;
++-
++-			    if (arg > 0.0)
++-			      mantissa = printf_frexp (arg, &exponent);
++-			    else
++-			      {
++-				exponent = 0;
++-				mantissa = 0.0;
++-			      }
++-
++-			    if (has_precision
++-				&& precision < (unsigned int) ((DBL_DIG + 1) * 0.831) + 1)
++-			      {
++-				/* Round the mantissa.  */
++-				double tail = mantissa;
++-				size_t q;
++-
++-				for (q = precision; ; q--)
++-				  {
++-				    int digit = (int) tail;
++-				    tail -= digit;
++-				    if (q == 0)
++-				      {
++-					if (digit & 1 ? tail >= 0.5 : tail > 0.5)
++-					  tail = 1 - tail;
++-					else
++-					  tail = - tail;
++-					break;
++-				      }
++-				    tail *= 16.0;
++-				  }
++-				if (tail != 0.0)
++-				  for (q = precision; q > 0; q--)
++-				    tail *= 0.0625;
++-				mantissa += tail;
++-			      }
++-
++-			    *p++ = '0';
++-			    *p++ = dp->conversion - 'A' + 'X';
++-			    pad_ptr = p;
++-			    {
++-			      int digit;
++-
++-			      digit = (int) mantissa;
++-			      mantissa -= digit;
++-			      *p++ = '0' + digit;
++-			      if ((flags & FLAG_ALT)
++-				  || mantissa > 0.0 || precision > 0)
++-				{
++-				  *p++ = decimal_point_char ();
++-				  /* This loop terminates because we assume
++-				     that FLT_RADIX is a power of 2.  */
++-				  while (mantissa > 0.0)
++-				    {
++-				      mantissa *= 16.0;
++-				      digit = (int) mantissa;
++-				      mantissa -= digit;
++-				      *p++ = digit
++-					     + (digit < 10
++-						? '0'
++-						: dp->conversion - 10);
++-				      if (precision > 0)
++-					precision--;
++-				    }
++-				  while (precision > 0)
++-				    {
++-				      *p++ = '0';
++-				      precision--;
++-				    }
++-				}
++-			      }
++-			      *p++ = dp->conversion - 'A' + 'P';
++-#  if WIDE_CHAR_VERSION
++-			      {
++-				static const wchar_t decimal_format[] =
++-				  { '%', '+', 'd', '\0' };
++-				SNPRINTF (p, 6 + 1, decimal_format, exponent);
++-			      }
++-			      while (*p != '\0')
++-				p++;
++-#  else
++-			      if (sizeof (DCHAR_T) == 1)
++-				{
++-				  sprintf ((char *) p, "%+d", exponent);
++-				  while (*p != '\0')
++-				    p++;
++-				}
++-			      else
++-				{
++-				  char expbuf[6 + 1];
++-				  const char *ep;
++-				  sprintf (expbuf, "%+d", exponent);
++-				  for (ep = expbuf; (*p = *ep) != '\0'; ep++)
++-				    p++;
++-				}
++-#  endif
++-			  }
++-		      }
++-# else
++-		    abort ();
++-# endif
++-		  }
++-		/* The generated string now extends from tmp to p, with the
++-		   zero padding insertion point being at pad_ptr.  */
++-		if (has_width && p - tmp < width)
++-		  {
++-		    size_t pad = width - (p - tmp);
++-		    DCHAR_T *end = p + pad;
++-
++-		    if (flags & FLAG_LEFT)
++-		      {
++-			/* Pad with spaces on the right.  */
++-			for (; pad > 0; pad--)
++-			  *p++ = ' ';
++-		      }
++-		    else if ((flags & FLAG_ZERO) && pad_ptr != NULL)
++-		      {
++-			/* Pad with zeroes.  */
++-			DCHAR_T *q = end;
++-
++-			while (p > pad_ptr)
++-			  *--q = *--p;
++-			for (; pad > 0; pad--)
++-			  *p++ = '0';
++-		      }
++-		    else
++-		      {
++-			/* Pad with spaces on the left.  */
++-			DCHAR_T *q = end;
++-
++-			while (p > tmp)
++-			  *--q = *--p;
++-			for (; pad > 0; pad--)
++-			  *p++ = ' ';
++-		      }
++-
++-		    p = end;
++-		  }
++-
++-		{
++-		  size_t count = p - tmp;
++-
++-		  if (count >= tmp_length)
++-		    /* tmp_length was incorrectly calculated - fix the
++-		       code above!  */
++-		    abort ();
++-
++-		  /* Make room for the result.  */
++-		  if (count >= allocated - length)
++-		    {
++-		      size_t n = xsum (length, count);
++-
++-		      ENSURE_ALLOCATION (n);
++-		    }
++-
++-		  /* Append the result.  */
++-		  memcpy (result + length, tmp, count * sizeof (DCHAR_T));
++-		  if (tmp != tmpbuf)
++-		    free (tmp);
++-		  length += count;
++-		}
++-	      }
++-#endif
++-#if (NEED_PRINTF_INFINITE_DOUBLE || NEED_PRINTF_DOUBLE || NEED_PRINTF_INFINITE_LONG_DOUBLE || NEED_PRINTF_LONG_DOUBLE) && !defined IN_LIBINTL
++-	    else if ((dp->conversion == 'f' || dp->conversion == 'F'
++-		      || dp->conversion == 'e' || dp->conversion == 'E'
++-		      || dp->conversion == 'g' || dp->conversion == 'G'
++-		      || dp->conversion == 'a' || dp->conversion == 'A')
++-		     && (0
++-# if NEED_PRINTF_DOUBLE
++-			 || a.arg[dp->arg_index].type == TYPE_DOUBLE
++-# elif NEED_PRINTF_INFINITE_DOUBLE
++-			 || (a.arg[dp->arg_index].type == TYPE_DOUBLE
++-			     /* The systems (mingw) which produce wrong output
++-				for Inf, -Inf, and NaN also do so for -0.0.
++-				Therefore we treat this case here as well.  */
++-			     && is_infinite_or_zero (a.arg[dp->arg_index].a.a_double))
++-# endif
++-# if NEED_PRINTF_LONG_DOUBLE
++-			 || a.arg[dp->arg_index].type == TYPE_LONGDOUBLE
++-# elif NEED_PRINTF_INFINITE_LONG_DOUBLE
++-			 || (a.arg[dp->arg_index].type == TYPE_LONGDOUBLE
++-			     /* Some systems produce wrong output for Inf,
++-				-Inf, and NaN.  */
++-			     && is_infinitel (a.arg[dp->arg_index].a.a_longdouble))
++-# endif
++-			))
++-	      {
++-# if (NEED_PRINTF_DOUBLE || NEED_PRINTF_INFINITE_DOUBLE) && (NEED_PRINTF_LONG_DOUBLE || NEED_PRINTF_INFINITE_LONG_DOUBLE)
++-		arg_type type = a.arg[dp->arg_index].type;
++-# endif
++-		int flags = dp->flags;
++-		int has_width;
++-		size_t width;
++-		int has_precision;
++-		size_t precision;
++-		size_t tmp_length;
++-		DCHAR_T tmpbuf[700];
++-		DCHAR_T *tmp;
++-		DCHAR_T *pad_ptr;
++-		DCHAR_T *p;
++-
++-		has_width = 0;
++-		width = 0;
++-		if (dp->width_start != dp->width_end)
++-		  {
++-		    if (dp->width_arg_index != ARG_NONE)
++-		      {
++-			int arg;
++-
++-			if (!(a.arg[dp->width_arg_index].type == TYPE_INT))
++-			  abort ();
++-			arg = a.arg[dp->width_arg_index].a.a_int;
++-			if (arg < 0)
++-			  {
++-			    /* "A negative field width is taken as a '-' flag
++-			        followed by a positive field width."  */
++-			    flags |= FLAG_LEFT;
++-			    width = (unsigned int) (-arg);
++-			  }
++-			else
++-			  width = arg;
++-		      }
++-		    else
++-		      {
++-			const FCHAR_T *digitp = dp->width_start;
++-
++-			do
++-			  width = xsum (xtimes (width, 10), *digitp++ - '0');
++-			while (digitp != dp->width_end);
++-		      }
++-		    has_width = 1;
++-		  }
++-
++-		has_precision = 0;
++-		precision = 0;
++-		if (dp->precision_start != dp->precision_end)
++-		  {
++-		    if (dp->precision_arg_index != ARG_NONE)
++-		      {
++-			int arg;
++-
++-			if (!(a.arg[dp->precision_arg_index].type == TYPE_INT))
++-			  abort ();
++-			arg = a.arg[dp->precision_arg_index].a.a_int;
++-			/* "A negative precision is taken as if the precision
++-			    were omitted."  */
++-			if (arg >= 0)
++-			  {
++-			    precision = arg;
++-			    has_precision = 1;
++-			  }
++-		      }
++-		    else
++-		      {
++-			const FCHAR_T *digitp = dp->precision_start + 1;
++-
++-			precision = 0;
++-			while (digitp != dp->precision_end)
++-			  precision = xsum (xtimes (precision, 10), *digitp++ - '0');
++-			has_precision = 1;
++-		      }
++-		  }
++-
++-		/* POSIX specifies the default precision to be 6 for %f, %F,
++-		   %e, %E, but not for %g, %G.  Implementations appear to use
++-		   the same default precision also for %g, %G.  */
++-		if (!has_precision)
++-		  precision = 6;
++-
++-		/* Allocate a temporary buffer of sufficient size.  */
++-# if NEED_PRINTF_DOUBLE && NEED_PRINTF_LONG_DOUBLE
++-		tmp_length = (type == TYPE_LONGDOUBLE ? LDBL_DIG + 1 : DBL_DIG + 1);
++-# elif NEED_PRINTF_INFINITE_DOUBLE && NEED_PRINTF_LONG_DOUBLE
++-		tmp_length = (type == TYPE_LONGDOUBLE ? LDBL_DIG + 1 : 0);
++-# elif NEED_PRINTF_LONG_DOUBLE
++-		tmp_length = LDBL_DIG + 1;
++-# elif NEED_PRINTF_DOUBLE
++-		tmp_length = DBL_DIG + 1;
++-# else
++-		tmp_length = 0;
++-# endif
++-		if (tmp_length < precision)
++-		  tmp_length = precision;
++-# if NEED_PRINTF_LONG_DOUBLE
++-#  if NEED_PRINTF_DOUBLE || NEED_PRINTF_INFINITE_DOUBLE
++-		if (type == TYPE_LONGDOUBLE)
++-#  endif
++-		  if (dp->conversion == 'f' || dp->conversion == 'F')
++-		    {
++-		      long double arg = a.arg[dp->arg_index].a.a_longdouble;
++-		      if (!(isnanl (arg) || arg + arg == arg))
++-			{
++-			  /* arg is finite and nonzero.  */
++-			  int exponent = floorlog10l (arg < 0 ? -arg : arg);
++-			  if (exponent >= 0 && tmp_length < exponent + precision)
++-			    tmp_length = exponent + precision;
++-			}
++-		    }
++-# endif
++-# if NEED_PRINTF_DOUBLE
++-#  if NEED_PRINTF_LONG_DOUBLE || NEED_PRINTF_INFINITE_LONG_DOUBLE
++-		if (type == TYPE_DOUBLE)
++-#  endif
++-		  if (dp->conversion == 'f' || dp->conversion == 'F')
++-		    {
++-		      double arg = a.arg[dp->arg_index].a.a_double;
++-		      if (!(isnan (arg) || arg + arg == arg))
++-			{
++-			  /* arg is finite and nonzero.  */
++-			  int exponent = floorlog10 (arg < 0 ? -arg : arg);
++-			  if (exponent >= 0 && tmp_length < exponent + precision)
++-			    tmp_length = exponent + precision;
++-			}
++-		    }
++-# endif
++-		/* Account for sign, decimal point etc. */
++-		tmp_length = xsum (tmp_length, 12);
++-
++-		if (tmp_length < width)
++-		  tmp_length = width;
++-
++-		tmp_length = xsum (tmp_length, 1); /* account for trailing NUL */
++-
++-		if (tmp_length <= sizeof (tmpbuf) / sizeof (DCHAR_T))
++-		  tmp = tmpbuf;
++-		else
++-		  {
++-		    size_t tmp_memsize = xtimes (tmp_length, sizeof (DCHAR_T));
++-
++-		    if (size_overflow_p (tmp_memsize))
++-		      /* Overflow, would lead to out of memory.  */
++-		      goto out_of_memory;
++-		    tmp = (DCHAR_T *) malloc (tmp_memsize);
++-		    if (tmp == NULL)
++-		      /* Out of memory.  */
++-		      goto out_of_memory;
++-		  }
++-
++-		pad_ptr = NULL;
++-		p = tmp;
++-
++-# if NEED_PRINTF_LONG_DOUBLE || NEED_PRINTF_INFINITE_LONG_DOUBLE
++-#  if NEED_PRINTF_DOUBLE || NEED_PRINTF_INFINITE_DOUBLE
++-		if (type == TYPE_LONGDOUBLE)
++-#  endif
++-		  {
++-		    long double arg = a.arg[dp->arg_index].a.a_longdouble;
++-
++-		    if (isnanl (arg))
++-		      {
++-			if (dp->conversion >= 'A' && dp->conversion <= 'Z')
++-			  {
++-			    *p++ = 'N'; *p++ = 'A'; *p++ = 'N';
++-			  }
++-			else
++-			  {
++-			    *p++ = 'n'; *p++ = 'a'; *p++ = 'n';
++-			  }
++-		      }
++-		    else
++-		      {
++-			int sign = 0;
++-			DECL_LONG_DOUBLE_ROUNDING
++-
++-			BEGIN_LONG_DOUBLE_ROUNDING ();
++-
++-			if (signbit (arg)) /* arg < 0.0L or negative zero */
++-			  {
++-			    sign = -1;
++-			    arg = -arg;
++-			  }
++-
++-			if (sign < 0)
++-			  *p++ = '-';
++-			else if (flags & FLAG_SHOWSIGN)
++-			  *p++ = '+';
++-			else if (flags & FLAG_SPACE)
++-			  *p++ = ' ';
++-
++-			if (arg > 0.0L && arg + arg == arg)
++-			  {
++-			    if (dp->conversion >= 'A' && dp->conversion <= 'Z')
++-			      {
++-				*p++ = 'I'; *p++ = 'N'; *p++ = 'F';
++-			      }
++-			    else
++-			      {
++-				*p++ = 'i'; *p++ = 'n'; *p++ = 'f';
++-			      }
++-			  }
++-			else
++-			  {
++-#  if NEED_PRINTF_LONG_DOUBLE
++-			    pad_ptr = p;
++-
++-			    if (dp->conversion == 'f' || dp->conversion == 'F')
++-			      {
++-				char *digits;
++-				size_t ndigits;
++-
++-				digits =
++-				  scale10_round_decimal_long_double (arg, precision);
++-				if (digits == NULL)
++-				  {
++-				    END_LONG_DOUBLE_ROUNDING ();
++-				    goto out_of_memory;
++-				  }
++-				ndigits = strlen (digits);
++-
++-				if (ndigits > precision)
++-				  do
++-				    {
++-				      --ndigits;
++-				      *p++ = digits[ndigits];
++-				    }
++-				  while (ndigits > precision);
++-				else
++-				  *p++ = '0';
++-				/* Here ndigits <= precision.  */
++-				if ((flags & FLAG_ALT) || precision > 0)
++-				  {
++-				    *p++ = decimal_point_char ();
++-				    for (; precision > ndigits; precision--)
++-				      *p++ = '0';
++-				    while (ndigits > 0)
++-				      {
++-					--ndigits;
++-					*p++ = digits[ndigits];
++-				      }
++-				  }
++-
++-				free (digits);
++-			      }
++-			    else if (dp->conversion == 'e' || dp->conversion == 'E')
++-			      {
++-				int exponent;
++-
++-				if (arg == 0.0L)
++-				  {
++-				    exponent = 0;
++-				    *p++ = '0';
++-				    if ((flags & FLAG_ALT) || precision > 0)
++-				      {
++-					*p++ = decimal_point_char ();
++-					for (; precision > 0; precision--)
++-					  *p++ = '0';
++-				      }
++-				  }
++-				else
++-				  {
++-				    /* arg > 0.0L.  */
++-				    int adjusted;
++-				    char *digits;
++-				    size_t ndigits;
++-
++-				    exponent = floorlog10l (arg);
++-				    adjusted = 0;
++-				    for (;;)
++-				      {
++-					digits =
++-					  scale10_round_decimal_long_double (arg,
++-									     (int)precision - exponent);
++-					if (digits == NULL)
++-					  {
++-					    END_LONG_DOUBLE_ROUNDING ();
++-					    goto out_of_memory;
++-					  }
++-					ndigits = strlen (digits);
++-
++-					if (ndigits == precision + 1)
++-					  break;
++-					if (ndigits < precision
++-					    || ndigits > precision + 2)
++-					  /* The exponent was not guessed
++-					     precisely enough.  */
++-					  abort ();
++-					if (adjusted)
++-					  /* None of two values of exponent is
++-					     the right one.  Prevent an endless
++-					     loop.  */
++-					  abort ();
++-					free (digits);
++-					if (ndigits == precision)
++-					  exponent -= 1;
++-					else
++-					  exponent += 1;
++-					adjusted = 1;
++-				      }
++-
++-				    /* Here ndigits = precision+1.  */
++-				    *p++ = digits[--ndigits];
++-				    if ((flags & FLAG_ALT) || precision > 0)
++-				      {
++-					*p++ = decimal_point_char ();
++-					while (ndigits > 0)
++-					  {
++-					    --ndigits;
++-					    *p++ = digits[ndigits];
++-					  }
++-				      }
++-
++-				    free (digits);
++-				  }
++-
++-				*p++ = dp->conversion; /* 'e' or 'E' */
++-#   if WIDE_CHAR_VERSION
++-				{
++-				  static const wchar_t decimal_format[] =
++-				    { '%', '+', '.', '2', 'd', '\0' };
++-				  SNPRINTF (p, 6 + 1, decimal_format, exponent);
++-				}
++-				while (*p != '\0')
++-				  p++;
++-#   else
++-				if (sizeof (DCHAR_T) == 1)
++-				  {
++-				    sprintf ((char *) p, "%+.2d", exponent);
++-				    while (*p != '\0')
++-				      p++;
++-				  }
++-				else
++-				  {
++-				    char expbuf[6 + 1];
++-				    const char *ep;
++-				    sprintf (expbuf, "%+.2d", exponent);
++-				    for (ep = expbuf; (*p = *ep) != '\0'; ep++)
++-				      p++;
++-				  }
++-#   endif
++-			      }
++-			    else if (dp->conversion == 'g' || dp->conversion == 'G')
++-			      {
++-				if (precision == 0)
++-				  precision = 1;
++-				/* precision >= 1.  */
++-
++-				if (arg == 0.0L)
++-				  /* The exponent is 0, >= -4, < precision.
++-				     Use fixed-point notation.  */
++-				  {
++-				    size_t ndigits = precision;
++-				    /* Number of trailing zeroes that have to be
++-				       dropped.  */
++-				    size_t nzeroes =
++-				      (flags & FLAG_ALT ? 0 : precision - 1);
++-
++-				    --ndigits;
++-				    *p++ = '0';
++-				    if ((flags & FLAG_ALT) || ndigits > nzeroes)
++-				      {
++-					*p++ = decimal_point_char ();
++-					while (ndigits > nzeroes)
++-					  {
++-					    --ndigits;
++-					    *p++ = '0';
++-					  }
++-				      }
++-				  }
++-				else
++-				  {
++-				    /* arg > 0.0L.  */
++-				    int exponent;
++-				    int adjusted;
++-				    char *digits;
++-				    size_t ndigits;
++-				    size_t nzeroes;
++-
++-				    exponent = floorlog10l (arg);
++-				    adjusted = 0;
++-				    for (;;)
++-				      {
++-					digits =
++-					  scale10_round_decimal_long_double (arg,
++-									     (int)(precision - 1) - exponent);
++-					if (digits == NULL)
++-					  {
++-					    END_LONG_DOUBLE_ROUNDING ();
++-					    goto out_of_memory;
++-					  }
++-					ndigits = strlen (digits);
++-
++-					if (ndigits == precision)
++-					  break;
++-					if (ndigits < precision - 1
++-					    || ndigits > precision + 1)
++-					  /* The exponent was not guessed
++-					     precisely enough.  */
++-					  abort ();
++-					if (adjusted)
++-					  /* None of two values of exponent is
++-					     the right one.  Prevent an endless
++-					     loop.  */
++-					  abort ();
++-					free (digits);
++-					if (ndigits < precision)
++-					  exponent -= 1;
++-					else
++-					  exponent += 1;
++-					adjusted = 1;
++-				      }
++-				    /* Here ndigits = precision.  */
++-
++-				    /* Determine the number of trailing zeroes
++-				       that have to be dropped.  */
++-				    nzeroes = 0;
++-				    if ((flags & FLAG_ALT) == 0)
++-				      while (nzeroes < ndigits
++-					     && digits[nzeroes] == '0')
++-					nzeroes++;
++-
++-				    /* The exponent is now determined.  */
++-				    if (exponent >= -4
++-					&& exponent < (long)precision)
++-				      {
++-					/* Fixed-point notation:
++-					   max(exponent,0)+1 digits, then the
++-					   decimal point, then the remaining
++-					   digits without trailing zeroes.  */
++-					if (exponent >= 0)
++-					  {
++-					    size_t count = exponent + 1;
++-					    /* Note: count <= precision = ndigits.  */
++-					    for (; count > 0; count--)
++-					      *p++ = digits[--ndigits];
++-					    if ((flags & FLAG_ALT) || ndigits > nzeroes)
++-					      {
++-						*p++ = decimal_point_char ();
++-						while (ndigits > nzeroes)
++-						  {
++-						    --ndigits;
++-						    *p++ = digits[ndigits];
++-						  }
++-					      }
++-					  }
++-					else
++-					  {
++-					    size_t count = -exponent - 1;
++-					    *p++ = '0';
++-					    *p++ = decimal_point_char ();
++-					    for (; count > 0; count--)
++-					      *p++ = '0';
++-					    while (ndigits > nzeroes)
++-					      {
++-						--ndigits;
++-						*p++ = digits[ndigits];
++-					      }
++-					  }
++-				      }
++-				    else
++-				      {
++-					/* Exponential notation.  */
++-					*p++ = digits[--ndigits];
++-					if ((flags & FLAG_ALT) || ndigits > nzeroes)
++-					  {
++-					    *p++ = decimal_point_char ();
++-					    while (ndigits > nzeroes)
++-					      {
++-						--ndigits;
++-						*p++ = digits[ndigits];
++-					      }
++-					  }
++-					*p++ = dp->conversion - 'G' + 'E'; /* 'e' or 'E' */
++-#   if WIDE_CHAR_VERSION
++-					{
++-					  static const wchar_t decimal_format[] =
++-					    { '%', '+', '.', '2', 'd', '\0' };
++-					  SNPRINTF (p, 6 + 1, decimal_format, exponent);
++-					}
++-					while (*p != '\0')
++-					  p++;
++-#   else
++-					if (sizeof (DCHAR_T) == 1)
++-					  {
++-					    sprintf ((char *) p, "%+.2d", exponent);
++-					    while (*p != '\0')
++-					      p++;
++-					  }
++-					else
++-					  {
++-					    char expbuf[6 + 1];
++-					    const char *ep;
++-					    sprintf (expbuf, "%+.2d", exponent);
++-					    for (ep = expbuf; (*p = *ep) != '\0'; ep++)
++-					      p++;
++-					  }
++-#   endif
++-				      }
++-
++-				    free (digits);
++-				  }
++-			      }
++-			    else
++-			      abort ();
++-#  else
++-			    /* arg is finite.  */
++-			    abort ();
++-#  endif
++-			  }
++-
++-			END_LONG_DOUBLE_ROUNDING ();
++-		      }
++-		  }
++-#  if NEED_PRINTF_DOUBLE || NEED_PRINTF_INFINITE_DOUBLE
++-		else
++-#  endif
++-# endif
++-# if NEED_PRINTF_DOUBLE || NEED_PRINTF_INFINITE_DOUBLE
++-		  {
++-		    double arg = a.arg[dp->arg_index].a.a_double;
++-
++-		    if (isnan (arg))
++-		      {
++-			if (dp->conversion >= 'A' && dp->conversion <= 'Z')
++-			  {
++-			    *p++ = 'N'; *p++ = 'A'; *p++ = 'N';
++-			  }
++-			else
++-			  {
++-			    *p++ = 'n'; *p++ = 'a'; *p++ = 'n';
++-			  }
++-		      }
++-		    else
++-		      {
++-			int sign = 0;
++-
++-			if (signbit (arg)) /* arg < 0.0 or negative zero */
++-			  {
++-			    sign = -1;
++-			    arg = -arg;
++-			  }
++-
++-			if (sign < 0)
++-			  *p++ = '-';
++-			else if (flags & FLAG_SHOWSIGN)
++-			  *p++ = '+';
++-			else if (flags & FLAG_SPACE)
++-			  *p++ = ' ';
++-
++-			if (arg > 0.0 && arg + arg == arg)
++-			  {
++-			    if (dp->conversion >= 'A' && dp->conversion <= 'Z')
++-			      {
++-				*p++ = 'I'; *p++ = 'N'; *p++ = 'F';
++-			      }
++-			    else
++-			      {
++-				*p++ = 'i'; *p++ = 'n'; *p++ = 'f';
++-			      }
++-			  }
++-			else
++-			  {
++-#  if NEED_PRINTF_DOUBLE
++-			    pad_ptr = p;
++-
++-			    if (dp->conversion == 'f' || dp->conversion == 'F')
++-			      {
++-				char *digits;
++-				size_t ndigits;
++-
++-				digits =
++-				  scale10_round_decimal_double (arg, precision);
++-				if (digits == NULL)
++-				  goto out_of_memory;
++-				ndigits = strlen (digits);
++-
++-				if (ndigits > precision)
++-				  do
++-				    {
++-				      --ndigits;
++-				      *p++ = digits[ndigits];
++-				    }
++-				  while (ndigits > precision);
++-				else
++-				  *p++ = '0';
++-				/* Here ndigits <= precision.  */
++-				if ((flags & FLAG_ALT) || precision > 0)
++-				  {
++-				    *p++ = decimal_point_char ();
++-				    for (; precision > ndigits; precision--)
++-				      *p++ = '0';
++-				    while (ndigits > 0)
++-				      {
++-					--ndigits;
++-					*p++ = digits[ndigits];
++-				      }
++-				  }
++-
++-				free (digits);
++-			      }
++-			    else if (dp->conversion == 'e' || dp->conversion == 'E')
++-			      {
++-				int exponent;
++-
++-				if (arg == 0.0)
++-				  {
++-				    exponent = 0;
++-				    *p++ = '0';
++-				    if ((flags & FLAG_ALT) || precision > 0)
++-				      {
++-					*p++ = decimal_point_char ();
++-					for (; precision > 0; precision--)
++-					  *p++ = '0';
++-				      }
++-				  }
++-				else
++-				  {
++-				    /* arg > 0.0.  */
++-				    int adjusted;
++-				    char *digits;
++-				    size_t ndigits;
++-
++-				    exponent = floorlog10 (arg);
++-				    adjusted = 0;
++-				    for (;;)
++-				      {
++-					digits =
++-					  scale10_round_decimal_double (arg,
++-									(int)precision - exponent);
++-					if (digits == NULL)
++-					  goto out_of_memory;
++-					ndigits = strlen (digits);
++-
++-					if (ndigits == precision + 1)
++-					  break;
++-					if (ndigits < precision
++-					    || ndigits > precision + 2)
++-					  /* The exponent was not guessed
++-					     precisely enough.  */
++-					  abort ();
++-					if (adjusted)
++-					  /* None of two values of exponent is
++-					     the right one.  Prevent an endless
++-					     loop.  */
++-					  abort ();
++-					free (digits);
++-					if (ndigits == precision)
++-					  exponent -= 1;
++-					else
++-					  exponent += 1;
++-					adjusted = 1;
++-				      }
++-
++-				    /* Here ndigits = precision+1.  */
++-				    *p++ = digits[--ndigits];
++-				    if ((flags & FLAG_ALT) || precision > 0)
++-				      {
++-					*p++ = decimal_point_char ();
++-					while (ndigits > 0)
++-					  {
++-					    --ndigits;
++-					    *p++ = digits[ndigits];
++-					  }
++-				      }
++-
++-				    free (digits);
++-				  }
++-
++-				*p++ = dp->conversion; /* 'e' or 'E' */
++-#   if WIDE_CHAR_VERSION
++-				{
++-				  static const wchar_t decimal_format[] =
++-				    /* Produce the same number of exponent digits
++-				       as the native printf implementation.  */
++-#    if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
++-				    { '%', '+', '.', '3', 'd', '\0' };
++-#    else
++-				    { '%', '+', '.', '2', 'd', '\0' };
++-#    endif
++-				  SNPRINTF (p, 6 + 1, decimal_format, exponent);
++-				}
++-				while (*p != '\0')
++-				  p++;
++-#   else
++-				{
++-				  static const char decimal_format[] =
++-				    /* Produce the same number of exponent digits
++-				       as the native printf implementation.  */
++-#    if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
++-				    "%+.3d";
++-#    else
++-				    "%+.2d";
++-#    endif
++-				  if (sizeof (DCHAR_T) == 1)
++-				    {
++-				      sprintf ((char *) p, decimal_format, exponent);
++-				      while (*p != '\0')
++-					p++;
++-				    }
++-				  else
++-				    {
++-				      char expbuf[6 + 1];
++-				      const char *ep;
++-				      sprintf (expbuf, decimal_format, exponent);
++-				      for (ep = expbuf; (*p = *ep) != '\0'; ep++)
++-					p++;
++-				    }
++-				}
++-#   endif
++-			      }
++-			    else if (dp->conversion == 'g' || dp->conversion == 'G')
++-			      {
++-				if (precision == 0)
++-				  precision = 1;
++-				/* precision >= 1.  */
++-
++-				if (arg == 0.0)
++-				  /* The exponent is 0, >= -4, < precision.
++-				     Use fixed-point notation.  */
++-				  {
++-				    size_t ndigits = precision;
++-				    /* Number of trailing zeroes that have to be
++-				       dropped.  */
++-				    size_t nzeroes =
++-				      (flags & FLAG_ALT ? 0 : precision - 1);
++-
++-				    --ndigits;
++-				    *p++ = '0';
++-				    if ((flags & FLAG_ALT) || ndigits > nzeroes)
++-				      {
++-					*p++ = decimal_point_char ();
++-					while (ndigits > nzeroes)
++-					  {
++-					    --ndigits;
++-					    *p++ = '0';
++-					  }
++-				      }
++-				  }
++-				else
++-				  {
++-				    /* arg > 0.0.  */
++-				    int exponent;
++-				    int adjusted;
++-				    char *digits;
++-				    size_t ndigits;
++-				    size_t nzeroes;
++-
++-				    exponent = floorlog10 (arg);
++-				    adjusted = 0;
++-				    for (;;)
++-				      {
++-					digits =
++-					  scale10_round_decimal_double (arg,
++-									(int)(precision - 1) - exponent);
++-					if (digits == NULL)
++-					  goto out_of_memory;
++-					ndigits = strlen (digits);
++-
++-					if (ndigits == precision)
++-					  break;
++-					if (ndigits < precision - 1
++-					    || ndigits > precision + 1)
++-					  /* The exponent was not guessed
++-					     precisely enough.  */
++-					  abort ();
++-					if (adjusted)
++-					  /* None of two values of exponent is
++-					     the right one.  Prevent an endless
++-					     loop.  */
++-					  abort ();
++-					free (digits);
++-					if (ndigits < precision)
++-					  exponent -= 1;
++-					else
++-					  exponent += 1;
++-					adjusted = 1;
++-				      }
++-				    /* Here ndigits = precision.  */
++-
++-				    /* Determine the number of trailing zeroes
++-				       that have to be dropped.  */
++-				    nzeroes = 0;
++-				    if ((flags & FLAG_ALT) == 0)
++-				      while (nzeroes < ndigits
++-					     && digits[nzeroes] == '0')
++-					nzeroes++;
++-
++-				    /* The exponent is now determined.  */
++-				    if (exponent >= -4
++-					&& exponent < (long)precision)
++-				      {
++-					/* Fixed-point notation:
++-					   max(exponent,0)+1 digits, then the
++-					   decimal point, then the remaining
++-					   digits without trailing zeroes.  */
++-					if (exponent >= 0)
++-					  {
++-					    size_t count = exponent + 1;
++-					    /* Note: count <= precision = ndigits.  */
++-					    for (; count > 0; count--)
++-					      *p++ = digits[--ndigits];
++-					    if ((flags & FLAG_ALT) || ndigits > nzeroes)
++-					      {
++-						*p++ = decimal_point_char ();
++-						while (ndigits > nzeroes)
++-						  {
++-						    --ndigits;
++-						    *p++ = digits[ndigits];
++-						  }
++-					      }
++-					  }
++-					else
++-					  {
++-					    size_t count = -exponent - 1;
++-					    *p++ = '0';
++-					    *p++ = decimal_point_char ();
++-					    for (; count > 0; count--)
++-					      *p++ = '0';
++-					    while (ndigits > nzeroes)
++-					      {
++-						--ndigits;
++-						*p++ = digits[ndigits];
++-					      }
++-					  }
++-				      }
++-				    else
++-				      {
++-					/* Exponential notation.  */
++-					*p++ = digits[--ndigits];
++-					if ((flags & FLAG_ALT) || ndigits > nzeroes)
++-					  {
++-					    *p++ = decimal_point_char ();
++-					    while (ndigits > nzeroes)
++-					      {
++-						--ndigits;
++-						*p++ = digits[ndigits];
++-					      }
++-					  }
++-					*p++ = dp->conversion - 'G' + 'E'; /* 'e' or 'E' */
++-#   if WIDE_CHAR_VERSION
++-					{
++-					  static const wchar_t decimal_format[] =
++-					    /* Produce the same number of exponent digits
++-					       as the native printf implementation.  */
++-#    if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
++-					    { '%', '+', '.', '3', 'd', '\0' };
++-#    else
++-					    { '%', '+', '.', '2', 'd', '\0' };
++-#    endif
++-					  SNPRINTF (p, 6 + 1, decimal_format, exponent);
++-					}
++-					while (*p != '\0')
++-					  p++;
++-#   else
++-					{
++-					  static const char decimal_format[] =
++-					    /* Produce the same number of exponent digits
++-					       as the native printf implementation.  */
++-#    if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
++-					    "%+.3d";
++-#    else
++-					    "%+.2d";
++-#    endif
++-					  if (sizeof (DCHAR_T) == 1)
++-					    {
++-					      sprintf ((char *) p, decimal_format, exponent);
++-					      while (*p != '\0')
++-						p++;
++-					    }
++-					  else
++-					    {
++-					      char expbuf[6 + 1];
++-					      const char *ep;
++-					      sprintf (expbuf, decimal_format, exponent);
++-					      for (ep = expbuf; (*p = *ep) != '\0'; ep++)
++-						p++;
++-					    }
++-					}
++-#   endif
++-				      }
++-
++-				    free (digits);
++-				  }
++-			      }
++-			    else
++-			      abort ();
++-#  else
++-			    /* arg is finite.  */
++-			    if (!(arg == 0.0))
++-			      abort ();
++-
++-			    pad_ptr = p;
++-
++-			    if (dp->conversion == 'f' || dp->conversion == 'F')
++-			      {
++-				*p++ = '0';
++-				if ((flags & FLAG_ALT) || precision > 0)
++-				  {
++-				    *p++ = decimal_point_char ();
++-				    for (; precision > 0; precision--)
++-				      *p++ = '0';
++-				  }
++-			      }
++-			    else if (dp->conversion == 'e' || dp->conversion == 'E')
++-			      {
++-				*p++ = '0';
++-				if ((flags & FLAG_ALT) || precision > 0)
++-				  {
++-				    *p++ = decimal_point_char ();
++-				    for (; precision > 0; precision--)
++-				      *p++ = '0';
++-				  }
++-				*p++ = dp->conversion; /* 'e' or 'E' */
++-				*p++ = '+';
++-				/* Produce the same number of exponent digits as
++-				   the native printf implementation.  */
++-#   if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
++-				*p++ = '0';
++-#   endif
++-				*p++ = '0';
++-				*p++ = '0';
++-			      }
++-			    else if (dp->conversion == 'g' || dp->conversion == 'G')
++-			      {
++-				*p++ = '0';
++-				if (flags & FLAG_ALT)
++-				  {
++-				    size_t ndigits =
++-				      (precision > 0 ? precision - 1 : 0);
++-				    *p++ = decimal_point_char ();
++-				    for (; ndigits > 0; --ndigits)
++-				      *p++ = '0';
++-				  }
++-			      }
++-			    else
++-			      abort ();
++-#  endif
++-			  }
++-		      }
++-		  }
++-# endif
++-
++-		/* The generated string now extends from tmp to p, with the
++-		   zero padding insertion point being at pad_ptr.  */
++-		if (has_width && p - tmp < width)
++-		  {
++-		    size_t pad = width - (p - tmp);
++-		    DCHAR_T *end = p + pad;
++-
++-		    if (flags & FLAG_LEFT)
++-		      {
++-			/* Pad with spaces on the right.  */
++-			for (; pad > 0; pad--)
++-			  *p++ = ' ';
++-		      }
++-		    else if ((flags & FLAG_ZERO) && pad_ptr != NULL)
++-		      {
++-			/* Pad with zeroes.  */
++-			DCHAR_T *q = end;
++-
++-			while (p > pad_ptr)
++-			  *--q = *--p;
++-			for (; pad > 0; pad--)
++-			  *p++ = '0';
++-		      }
++-		    else
++-		      {
++-			/* Pad with spaces on the left.  */
++-			DCHAR_T *q = end;
++-
++-			while (p > tmp)
++-			  *--q = *--p;
++-			for (; pad > 0; pad--)
++-			  *p++ = ' ';
++-		      }
++-
++-		    p = end;
++-		  }
++-
++-		{
++-		  size_t count = p - tmp;
++-
++-		  if (count >= tmp_length)
++-		    /* tmp_length was incorrectly calculated - fix the
++-		       code above!  */
++-		    abort ();
++-
++-		  /* Make room for the result.  */
++-		  if (count >= allocated - length)
++-		    {
++-		      size_t n = xsum (length, count);
++-
++-		      ENSURE_ALLOCATION (n);
++-		    }
++-
++-		  /* Append the result.  */
++-		  memcpy (result + length, tmp, count * sizeof (DCHAR_T));
++-		  if (tmp != tmpbuf)
++-		    free (tmp);
++-		  length += count;
++-		}
++-	      }
++-#endif
 +-	    else
 +-	      {
 +-		arg_type type = a.arg[dp->arg_index].type;
-+-		CHAR_T *p;
++-		int flags = dp->flags;
++-#if !USE_SNPRINTF || !DCHAR_IS_TCHAR || ENABLE_UNISTDIO || NEED_PRINTF_FLAG_ZERO || NEED_PRINTF_UNBOUNDED_PRECISION
++-		int has_width;
++-		size_t width;
++-#endif
++-#if !USE_SNPRINTF || NEED_PRINTF_UNBOUNDED_PRECISION
++-		int has_precision;
++-		size_t precision;
++-#endif
++-#if NEED_PRINTF_UNBOUNDED_PRECISION
++-		int prec_ourselves;
++-#else
++-#		define prec_ourselves 0
++-#endif
++-#if !DCHAR_IS_TCHAR || ENABLE_UNISTDIO || NEED_PRINTF_FLAG_ZERO || NEED_PRINTF_UNBOUNDED_PRECISION
++-		int pad_ourselves;
++-#else
++-#		define pad_ourselves 0
++-#endif
++-		TCHAR_T *fbp;
 +-		unsigned int prefix_count;
 +-		int prefixes[2];
 +-#if !USE_SNPRINTF
 +-		size_t tmp_length;
-+-		CHAR_T tmpbuf[700];
-+-		CHAR_T *tmp;
++-		TCHAR_T tmpbuf[700];
++-		TCHAR_T *tmp;
++-#endif
 +-
++-#if !USE_SNPRINTF || !DCHAR_IS_TCHAR || ENABLE_UNISTDIO || NEED_PRINTF_FLAG_ZERO || NEED_PRINTF_UNBOUNDED_PRECISION
++-		has_width = 0;
++-		width = 0;
++-		if (dp->width_start != dp->width_end)
++-		  {
++-		    if (dp->width_arg_index != ARG_NONE)
++-		      {
++-			int arg;
++-
++-			if (!(a.arg[dp->width_arg_index].type == TYPE_INT))
++-			  abort ();
++-			arg = a.arg[dp->width_arg_index].a.a_int;
++-			if (arg < 0)
++-			  {
++-			    /* "A negative field width is taken as a '-' flag
++-			        followed by a positive field width."  */
++-			    flags |= FLAG_LEFT;
++-			    width = (unsigned int) (-arg);
++-			  }
++-			else
++-			  width = arg;
++-		      }
++-		    else
++-		      {
++-			const FCHAR_T *digitp = dp->width_start;
++-
++-			do
++-			  width = xsum (xtimes (width, 10), *digitp++ - '0');
++-			while (digitp != dp->width_end);
++-		      }
++-		    has_width = 1;
++-		  }
++-#endif
++-
++-#if !USE_SNPRINTF || NEED_PRINTF_UNBOUNDED_PRECISION
++-		has_precision = 0;
++-		precision = 6;
++-		if (dp->precision_start != dp->precision_end)
++-		  {
++-		    if (dp->precision_arg_index != ARG_NONE)
++-		      {
++-			int arg;
++-
++-			if (!(a.arg[dp->precision_arg_index].type == TYPE_INT))
++-			  abort ();
++-			arg = a.arg[dp->precision_arg_index].a.a_int;
++-			/* "A negative precision is taken as if the precision
++-			    were omitted."  */
++-			if (arg >= 0)
++-			  {
++-			    precision = arg;
++-			    has_precision = 1;
++-			  }
++-		      }
++-		    else
++-		      {
++-			const FCHAR_T *digitp = dp->precision_start + 1;
++-
++-			precision = 0;
++-			while (digitp != dp->precision_end)
++-			  precision = xsum (xtimes (precision, 10), *digitp++ - '0');
++-			has_precision = 1;
++-		      }
++-		  }
++-#endif
++-
++-#if !USE_SNPRINTF
 +-		/* Allocate a temporary buffer of sufficient size for calling
 +-		   sprintf.  */
 +-		{
-+-		  size_t width;
-+-		  size_t precision;
-+-
-+-		  width = 0;
-+-		  if (dp->width_start != dp->width_end)
-+-		    {
-+-		      if (dp->width_arg_index != ARG_NONE)
-+-			{
-+-			  int arg;
-+-
-+-			  if (!(a.arg[dp->width_arg_index].type == TYPE_INT))
-+-			    abort ();
-+-			  arg = a.arg[dp->width_arg_index].a.a_int;
-+-			  width = (arg < 0 ? (unsigned int) (-arg) : arg);
-+-			}
-+-		      else
-+-			{
-+-			  const CHAR_T *digitp = dp->width_start;
-+-
-+-			  do
-+-			    width = xsum (xtimes (width, 10), *digitp++ - '0');
-+-			  while (digitp != dp->width_end);
-+-			}
-+-		    }
-+-
-+-		  precision = 6;
-+-		  if (dp->precision_start != dp->precision_end)
-+-		    {
-+-		      if (dp->precision_arg_index != ARG_NONE)
-+-			{
-+-			  int arg;
-+-
-+-			  if (!(a.arg[dp->precision_arg_index].type == TYPE_INT))
-+-			    abort ();
-+-			  arg = a.arg[dp->precision_arg_index].a.a_int;
-+-			  precision = (arg < 0 ? 0 : arg);
-+-			}
-+-		      else
-+-			{
-+-			  const CHAR_T *digitp = dp->precision_start + 1;
-+-
-+-			  precision = 0;
-+-			  while (digitp != dp->precision_end)
-+-			    precision = xsum (xtimes (precision, 10), *digitp++ - '0');
-+-			}
-+-		    }
-+-
 +-		  switch (dp->conversion)
 +-		    {
 +-
 +-		    case 'd': case 'i': case 'u':
-+-# ifdef HAVE_LONG_LONG
++-# if HAVE_LONG_LONG_INT
 +-		      if (type == TYPE_LONGLONGINT || type == TYPE_ULONGLONGINT)
 +-			tmp_length =
 +-			  (unsigned int) (sizeof (unsigned long long) * CHAR_BIT
 +-					  * 0.30103 /* binary -> decimal */
-+-					  * 2 /* estimate for FLAG_GROUP */
 +-					 )
-+-			  + 1 /* turn floor into ceil */
-+-			  + 1; /* account for leading sign */
++-			  + 1; /* turn floor into ceil */
 +-		      else
 +-# endif
 +-		      if (type == TYPE_LONGINT || type == TYPE_ULONGINT)
 +-			tmp_length =
 +-			  (unsigned int) (sizeof (unsigned long) * CHAR_BIT
 +-					  * 0.30103 /* binary -> decimal */
-+-					  * 2 /* estimate for FLAG_GROUP */
 +-					 )
-+-			  + 1 /* turn floor into ceil */
-+-			  + 1; /* account for leading sign */
++-			  + 1; /* turn floor into ceil */
 +-		      else
 +-			tmp_length =
 +-			  (unsigned int) (sizeof (unsigned int) * CHAR_BIT
 +-					  * 0.30103 /* binary -> decimal */
-+-					  * 2 /* estimate for FLAG_GROUP */
 +-					 )
-+-			  + 1 /* turn floor into ceil */
-+-			  + 1; /* account for leading sign */
++-			  + 1; /* turn floor into ceil */
++-		      if (tmp_length < precision)
++-			tmp_length = precision;
++-		      /* Multiply by 2, as an estimate for FLAG_GROUP.  */
++-		      tmp_length = xsum (tmp_length, tmp_length);
++-		      /* Add 1, to account for a leading sign.  */
++-		      tmp_length = xsum (tmp_length, 1);
 +-		      break;
 +-
 +-		    case 'o':
-+-# ifdef HAVE_LONG_LONG
++-# if HAVE_LONG_LONG_INT
 +-		      if (type == TYPE_LONGLONGINT || type == TYPE_ULONGLONGINT)
 +-			tmp_length =
 +-			  (unsigned int) (sizeof (unsigned long long) * CHAR_BIT
 +-					  * 0.333334 /* binary -> octal */
 +-					 )
-+-			  + 1 /* turn floor into ceil */
-+-			  + 1; /* account for leading sign */
++-			  + 1; /* turn floor into ceil */
 +-		      else
 +-# endif
 +-		      if (type == TYPE_LONGINT || type == TYPE_ULONGINT)
@@ -13974,26 +21621,27 @@ index 0000000000..a06dbad1ea
 +-			  (unsigned int) (sizeof (unsigned long) * CHAR_BIT
 +-					  * 0.333334 /* binary -> octal */
 +-					 )
-+-			  + 1 /* turn floor into ceil */
-+-			  + 1; /* account for leading sign */
++-			  + 1; /* turn floor into ceil */
 +-		      else
 +-			tmp_length =
 +-			  (unsigned int) (sizeof (unsigned int) * CHAR_BIT
 +-					  * 0.333334 /* binary -> octal */
 +-					 )
-+-			  + 1 /* turn floor into ceil */
-+-			  + 1; /* account for leading sign */
++-			  + 1; /* turn floor into ceil */
++-		      if (tmp_length < precision)
++-			tmp_length = precision;
++-		      /* Add 1, to account for a leading sign.  */
++-		      tmp_length = xsum (tmp_length, 1);
 +-		      break;
 +-
 +-		    case 'x': case 'X':
-+-# ifdef HAVE_LONG_LONG
++-# if HAVE_LONG_LONG_INT
 +-		      if (type == TYPE_LONGLONGINT || type == TYPE_ULONGLONGINT)
 +-			tmp_length =
 +-			  (unsigned int) (sizeof (unsigned long long) * CHAR_BIT
 +-					  * 0.25 /* binary -> hexadecimal */
 +-					 )
-+-			  + 1 /* turn floor into ceil */
-+-			  + 2; /* account for leading sign or alternate form */
++-			  + 1; /* turn floor into ceil */
 +-		      else
 +-# endif
 +-		      if (type == TYPE_LONGINT || type == TYPE_ULONGINT)
@@ -14001,19 +21649,20 @@ index 0000000000..a06dbad1ea
 +-			  (unsigned int) (sizeof (unsigned long) * CHAR_BIT
 +-					  * 0.25 /* binary -> hexadecimal */
 +-					 )
-+-			  + 1 /* turn floor into ceil */
-+-			  + 2; /* account for leading sign or alternate form */
++-			  + 1; /* turn floor into ceil */
 +-		      else
 +-			tmp_length =
 +-			  (unsigned int) (sizeof (unsigned int) * CHAR_BIT
 +-					  * 0.25 /* binary -> hexadecimal */
 +-					 )
-+-			  + 1 /* turn floor into ceil */
-+-			  + 2; /* account for leading sign or alternate form */
++-			  + 1; /* turn floor into ceil */
++-		      if (tmp_length < precision)
++-			tmp_length = precision;
++-		      /* Add 2, to account for a leading sign or alternate form.  */
++-		      tmp_length = xsum (tmp_length, 2);
 +-		      break;
 +-
 +-		    case 'f': case 'F':
-+-# ifdef HAVE_LONG_DOUBLE
 +-		      if (type == TYPE_LONGDOUBLE)
 +-			tmp_length =
 +-			  (unsigned int) (LDBL_MAX_EXP
@@ -14023,7 +21672,6 @@ index 0000000000..a06dbad1ea
 +-			  + 1 /* turn floor into ceil */
 +-			  + 10; /* sign, decimal point etc. */
 +-		      else
-+-# endif
 +-			tmp_length =
 +-			  (unsigned int) (DBL_MAX_EXP
 +-					  * 0.30103 /* binary -> decimal */
@@ -14035,14 +21683,32 @@ index 0000000000..a06dbad1ea
 +-		      break;
 +-
 +-		    case 'e': case 'E': case 'g': case 'G':
-+-		    case 'a': case 'A':
 +-		      tmp_length =
 +-			12; /* sign, decimal point, exponent etc. */
 +-		      tmp_length = xsum (tmp_length, precision);
 +-		      break;
 +-
++-		    case 'a': case 'A':
++-		      if (type == TYPE_LONGDOUBLE)
++-			tmp_length =
++-			  (unsigned int) (LDBL_DIG
++-					  * 0.831 /* decimal -> hexadecimal */
++-					 )
++-			  + 1; /* turn floor into ceil */
++-		      else
++-			tmp_length =
++-			  (unsigned int) (DBL_DIG
++-					  * 0.831 /* decimal -> hexadecimal */
++-					 )
++-			  + 1; /* turn floor into ceil */
++-		      if (tmp_length < precision)
++-			tmp_length = precision;
++-		      /* Account for sign, decimal point etc. */
++-		      tmp_length = xsum (tmp_length, 12);
++-		      break;
++-
 +-		    case 'c':
-+-# if defined HAVE_WINT_T && !WIDE_CHAR_VERSION
++-# if HAVE_WINT_T && !WIDE_CHAR_VERSION
 +-		      if (type == TYPE_WIDE_CHAR)
 +-			tmp_length = MB_CUR_MAX;
 +-		      else
@@ -14051,7 +21717,7 @@ index 0000000000..a06dbad1ea
 +-		      break;
 +-
 +-		    case 's':
-+-# ifdef HAVE_WCHAR_T
++-# if HAVE_WCHAR_T
 +-		      if (type == TYPE_WIDE_STRING)
 +-			{
 +-			  tmp_length =
@@ -14079,95 +21745,201 @@ index 0000000000..a06dbad1ea
 +-		      abort ();
 +-		    }
 +-
++-# if ENABLE_UNISTDIO
++-		  /* Padding considers the number of characters, therefore the
++-		     number of elements after padding may be
++-		       > max (tmp_length, width)
++-		     but is certainly
++-		       <= tmp_length + width.  */
++-		  tmp_length = xsum (tmp_length, width);
++-# else
++-		  /* Padding considers the number of elements, says POSIX.  */
 +-		  if (tmp_length < width)
 +-		    tmp_length = width;
++-# endif
 +-
 +-		  tmp_length = xsum (tmp_length, 1); /* account for trailing NUL */
 +-		}
 +-
-+-		if (tmp_length <= sizeof (tmpbuf) / sizeof (CHAR_T))
++-		if (tmp_length <= sizeof (tmpbuf) / sizeof (TCHAR_T))
 +-		  tmp = tmpbuf;
 +-		else
 +-		  {
-+-		    size_t tmp_memsize = xtimes (tmp_length, sizeof (CHAR_T));
++-		    size_t tmp_memsize = xtimes (tmp_length, sizeof (TCHAR_T));
 +-
 +-		    if (size_overflow_p (tmp_memsize))
 +-		      /* Overflow, would lead to out of memory.  */
 +-		      goto out_of_memory;
-+-		    tmp = (CHAR_T *) malloc (tmp_memsize);
++-		    tmp = (TCHAR_T *) malloc (tmp_memsize);
 +-		    if (tmp == NULL)
 +-		      /* Out of memory.  */
 +-		      goto out_of_memory;
 +-		  }
 +-#endif
 +-
++-		/* Decide whether to handle the precision ourselves.  */
++-#if NEED_PRINTF_UNBOUNDED_PRECISION
++-		switch (dp->conversion)
++-		  {
++-		  case 'd': case 'i': case 'u':
++-		  case 'o':
++-		  case 'x': case 'X': case 'p':
++-		    prec_ourselves = has_precision && (precision > 0);
++-		    break;
++-		  default:
++-		    prec_ourselves = 0;
++-		    break;
++-		  }
++-#endif
++-
++-		/* Decide whether to perform the padding ourselves.  */
++-#if !DCHAR_IS_TCHAR || ENABLE_UNISTDIO || NEED_PRINTF_FLAG_ZERO || NEED_PRINTF_UNBOUNDED_PRECISION
++-		switch (dp->conversion)
++-		  {
++-# if !DCHAR_IS_TCHAR || ENABLE_UNISTDIO
++-		  /* If we need conversion from TCHAR_T[] to DCHAR_T[], we need
++-		     to perform the padding after this conversion.  Functions
++-		     with unistdio extensions perform the padding based on
++-		     character count rather than element count.  */
++-		  case 'c': case 's':
++-# endif
++-# if NEED_PRINTF_FLAG_ZERO
++-		  case 'f': case 'F': case 'e': case 'E': case 'g': case 'G':
++-		  case 'a': case 'A':
++-# endif
++-		    pad_ourselves = 1;
++-		    break;
++-		  default:
++-		    pad_ourselves = prec_ourselves;
++-		    break;
++-		  }
++-#endif
++-
 +-		/* Construct the format string for calling snprintf or
 +-		   sprintf.  */
-+-		p = buf;
-+-		*p++ = '%';
-+-		if (dp->flags & FLAG_GROUP)
-+-		  *p++ = '\'';
-+-		if (dp->flags & FLAG_LEFT)
-+-		  *p++ = '-';
-+-		if (dp->flags & FLAG_SHOWSIGN)
-+-		  *p++ = '+';
-+-		if (dp->flags & FLAG_SPACE)
-+-		  *p++ = ' ';
-+-		if (dp->flags & FLAG_ALT)
-+-		  *p++ = '#';
-+-		if (dp->flags & FLAG_ZERO)
-+-		  *p++ = '0';
-+-		if (dp->width_start != dp->width_end)
++-		fbp = buf;
++-		*fbp++ = '%';
++-#if NEED_PRINTF_FLAG_GROUPING
++-		/* The underlying implementation doesn't support the ' flag.
++-		   Produce no grouping characters in this case; this is
++-		   acceptable because the grouping is locale dependent.  */
++-#else
++-		if (flags & FLAG_GROUP)
++-		  *fbp++ = '\'';
++-#endif
++-		if (flags & FLAG_LEFT)
++-		  *fbp++ = '-';
++-		if (flags & FLAG_SHOWSIGN)
++-		  *fbp++ = '+';
++-		if (flags & FLAG_SPACE)
++-		  *fbp++ = ' ';
++-		if (flags & FLAG_ALT)
++-		  *fbp++ = '#';
++-		if (!pad_ourselves)
 +-		  {
-+-		    size_t n = dp->width_end - dp->width_start;
-+-		    memcpy (p, dp->width_start, n * sizeof (CHAR_T));
-+-		    p += n;
++-		    if (flags & FLAG_ZERO)
++-		      *fbp++ = '0';
++-		    if (dp->width_start != dp->width_end)
++-		      {
++-			size_t n = dp->width_end - dp->width_start;
++-			/* The width specification is known to consist only
++-			   of standard ASCII characters.  */
++-			if (sizeof (FCHAR_T) == sizeof (TCHAR_T))
++-			  {
++-			    memcpy (fbp, dp->width_start, n * sizeof (TCHAR_T));
++-			    fbp += n;
++-			  }
++-			else
++-			  {
++-			    const FCHAR_T *mp = dp->width_start;
++-			    do
++-			      *fbp++ = (unsigned char) *mp++;
++-			    while (--n > 0);
++-			  }
++-		      }
 +-		  }
-+-		if (dp->precision_start != dp->precision_end)
++-		if (!prec_ourselves)
 +-		  {
-+-		    size_t n = dp->precision_end - dp->precision_start;
-+-		    memcpy (p, dp->precision_start, n * sizeof (CHAR_T));
-+-		    p += n;
++-		    if (dp->precision_start != dp->precision_end)
++-		      {
++-			size_t n = dp->precision_end - dp->precision_start;
++-			/* The precision specification is known to consist only
++-			   of standard ASCII characters.  */
++-			if (sizeof (FCHAR_T) == sizeof (TCHAR_T))
++-			  {
++-			    memcpy (fbp, dp->precision_start, n * sizeof (TCHAR_T));
++-			    fbp += n;
++-			  }
++-			else
++-			  {
++-			    const FCHAR_T *mp = dp->precision_start;
++-			    do
++-			      *fbp++ = (unsigned char) *mp++;
++-			    while (--n > 0);
++-			  }
++-		      }
 +-		  }
 +-
 +-		switch (type)
 +-		  {
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
 +-		  case TYPE_LONGLONGINT:
 +-		  case TYPE_ULONGLONGINT:
-+-		    *p++ = 'l';
++-# if (defined _WIN32 || defined __WIN32__) && ! defined __CYGWIN__
++-		    *fbp++ = 'I';
++-		    *fbp++ = '6';
++-		    *fbp++ = '4';
++-		    break;
++-# else
++-		    *fbp++ = 'l';
 +-		    /*FALLTHROUGH*/
++-# endif
 +-#endif
 +-		  case TYPE_LONGINT:
 +-		  case TYPE_ULONGINT:
-+-#ifdef HAVE_WINT_T
++-#if HAVE_WINT_T
 +-		  case TYPE_WIDE_CHAR:
 +-#endif
-+-#ifdef HAVE_WCHAR_T
++-#if HAVE_WCHAR_T
 +-		  case TYPE_WIDE_STRING:
 +-#endif
-+-		    *p++ = 'l';
++-		    *fbp++ = 'l';
 +-		    break;
-+-#ifdef HAVE_LONG_DOUBLE
 +-		  case TYPE_LONGDOUBLE:
-+-		    *p++ = 'L';
++-		    *fbp++ = 'L';
 +-		    break;
-+-#endif
 +-		  default:
 +-		    break;
 +-		  }
-+-		*p = dp->conversion;
++-#if NEED_PRINTF_DIRECTIVE_F
++-		if (dp->conversion == 'F')
++-		  *fbp = 'f';
++-		else
++-#endif
++-		  *fbp = dp->conversion;
 +-#if USE_SNPRINTF
-+-		p[1] = '%';
-+-		p[2] = 'n';
-+-		p[3] = '\0';
++-# if !(__GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ >= 3))
++-		fbp[1] = '%';
++-		fbp[2] = 'n';
++-		fbp[3] = '\0';
++-# else
++-		/* On glibc2 systems from glibc >= 2.3 - probably also older
++-		   ones - we know that snprintf's returns value conforms to
++-		   ISO C 99: the gl_SNPRINTF_DIRECTIVE_N test passes.
++-		   Therefore we can avoid using %n in this situation.
++-		   On glibc2 systems from 2004-10-18 or newer, the use of %n
++-		   in format strings in writable memory may crash the program
++-		   (if compiled with _FORTIFY_SOURCE=2), so we should avoid it
++-		   in this situation.  */
++-		fbp[1] = '\0';
++-# endif
 +-#else
-+-		p[1] = '\0';
++-		fbp[1] = '\0';
 +-#endif
 +-
 +-		/* Construct the arguments for calling snprintf or sprintf.  */
 +-		prefix_count = 0;
-+-		if (dp->width_arg_index != ARG_NONE)
++-		if (!pad_ourselves && dp->width_arg_index != ARG_NONE)
 +-		  {
 +-		    if (!(a.arg[dp->width_arg_index].type == TYPE_INT))
 +-		      abort ();
@@ -14181,36 +21953,46 @@ index 0000000000..a06dbad1ea
 +-		  }
 +-
 +-#if USE_SNPRINTF
++-		/* The SNPRINTF result is appended after result[0..length].
++-		   The latter is an array of DCHAR_T; SNPRINTF appends an
++-		   array of TCHAR_T to it.  This is possible because
++-		   sizeof (TCHAR_T) divides sizeof (DCHAR_T) and
++-		   alignof (TCHAR_T) <= alignof (DCHAR_T).  */
++-# define TCHARS_PER_DCHAR (sizeof (DCHAR_T) / sizeof (TCHAR_T))
 +-		/* Prepare checking whether snprintf returns the count
 +-		   via %n.  */
 +-		ENSURE_ALLOCATION (xsum (length, 1));
-+-		result[length] = '\0';
++-		*(TCHAR_T *) (result + length) = '\0';
 +-#endif
 +-
 +-		for (;;)
 +-		  {
-+-		    size_t maxlen;
-+-		    int count;
-+-		    int retcount;
-+-
-+-		    maxlen = allocated - length;
-+-		    count = -1;
-+-		    retcount = 0;
++-		    int count = -1;
 +-
 +-#if USE_SNPRINTF
++-		    int retcount = 0;
++-		    size_t maxlen = allocated - length;
++-		    /* SNPRINTF can fail if its second argument is
++-		       > INT_MAX.  */
++-		    if (maxlen > INT_MAX / TCHARS_PER_DCHAR)
++-		      maxlen = INT_MAX / TCHARS_PER_DCHAR;
++-		    maxlen = maxlen * TCHARS_PER_DCHAR;
 +-# define SNPRINTF_BUF(arg) \
 +-		    switch (prefix_count)				    \
 +-		      {							    \
 +-		      case 0:						    \
-+-			retcount = SNPRINTF (result + length, maxlen, buf,  \
++-			retcount = SNPRINTF ((TCHAR_T *) (result + length), \
++-					     maxlen, buf,		    \
 +-					     arg, &count);		    \
 +-			break;						    \
 +-		      case 1:						    \
-+-			retcount = SNPRINTF (result + length, maxlen, buf,  \
++-			retcount = SNPRINTF ((TCHAR_T *) (result + length), \
++-					     maxlen, buf,		    \
 +-					     prefixes[0], arg, &count);	    \
 +-			break;						    \
 +-		      case 2:						    \
-+-			retcount = SNPRINTF (result + length, maxlen, buf,  \
++-			retcount = SNPRINTF ((TCHAR_T *) (result + length), \
++-					     maxlen, buf,		    \
 +-					     prefixes[0], prefixes[1], arg, \
 +-					     &count);			    \
 +-			break;						    \
@@ -14286,7 +22068,7 @@ index 0000000000..a06dbad1ea
 +-			  SNPRINTF_BUF (arg);
 +-			}
 +-			break;
-+-#ifdef HAVE_LONG_LONG
++-#if HAVE_LONG_LONG_INT
 +-		      case TYPE_LONGLONGINT:
 +-			{
 +-			  long long int arg = a.arg[dp->arg_index].a.a_longlongint;
@@ -14306,21 +22088,19 @@ index 0000000000..a06dbad1ea
 +-			  SNPRINTF_BUF (arg);
 +-			}
 +-			break;
-+-#ifdef HAVE_LONG_DOUBLE
 +-		      case TYPE_LONGDOUBLE:
 +-			{
 +-			  long double arg = a.arg[dp->arg_index].a.a_longdouble;
 +-			  SNPRINTF_BUF (arg);
 +-			}
 +-			break;
-+-#endif
 +-		      case TYPE_CHAR:
 +-			{
 +-			  int arg = a.arg[dp->arg_index].a.a_char;
 +-			  SNPRINTF_BUF (arg);
 +-			}
 +-			break;
-+-#ifdef HAVE_WINT_T
++-#if HAVE_WINT_T
 +-		      case TYPE_WIDE_CHAR:
 +-			{
 +-			  wint_t arg = a.arg[dp->arg_index].a.a_wide_char;
@@ -14334,7 +22114,7 @@ index 0000000000..a06dbad1ea
 +-			  SNPRINTF_BUF (arg);
 +-			}
 +-			break;
-+-#ifdef HAVE_WCHAR_T
++-#if HAVE_WCHAR_T
 +-		      case TYPE_WIDE_STRING:
 +-			{
 +-			  const wchar_t *arg = a.arg[dp->arg_index].a.a_wide_string;
@@ -14361,7 +22141,8 @@ index 0000000000..a06dbad1ea
 +-		      {
 +-			/* Verify that snprintf() has NUL-terminated its
 +-			   result.  */
-+-			if (count < maxlen && result[length + count] != '\0')
++-			if (count < maxlen
++-			    && ((TCHAR_T *) (result + length)) [count] != '\0')
 +-			  abort ();
 +-			/* Portability hack.  */
 +-			if (retcount > count)
@@ -14371,11 +22152,11 @@ index 0000000000..a06dbad1ea
 +-		      {
 +-			/* snprintf() doesn't understand the '%n'
 +-			   directive.  */
-+-			if (p[1] != '\0')
++-			if (fbp[1] != '\0')
 +-			  {
 +-			    /* Don't use the '%n' directive; instead, look
 +-			       at the snprintf() return value.  */
-+-			    p[1] = '\0';
++-			    fbp[1] = '\0';
 +-			    continue;
 +-			  }
 +-			else
@@ -14411,35 +22192,335 @@ index 0000000000..a06dbad1ea
 +-			return NULL;
 +-		      }
 +-
-+-#if !USE_SNPRINTF
++-#if USE_SNPRINTF
++-		    /* Handle overflow of the allocated buffer.
++-		       If such an overflow occurs, a C99 compliant snprintf()
++-		       returns a count >= maxlen.  However, a non-compliant
++-		       snprintf() function returns only count = maxlen - 1.  To
++-		       cover both cases, test whether count >= maxlen - 1.  */
++-		    if ((unsigned int) count + 1 >= maxlen)
++-		      {
++-			/* If maxlen already has attained its allowed maximum,
++-			   allocating more memory will not increase maxlen.
++-			   Instead of looping, bail out.  */
++-			if (maxlen == INT_MAX / TCHARS_PER_DCHAR)
++-			  goto overflow;
++-			else
++-			  {
++-			    /* Need at least count * sizeof (TCHAR_T) bytes.
++-			       But allocate proportionally, to avoid looping
++-			       eternally if snprintf() reports a too small
++-			       count.  */
++-			    size_t n =
++-			      xmax (xsum (length,
++-					  (count + TCHARS_PER_DCHAR - 1)
++-					  / TCHARS_PER_DCHAR),
++-				    xtimes (allocated, 2));
++-
++-			    ENSURE_ALLOCATION (n);
++-			    continue;
++-			  }
++-		      }
++-#endif
++-
++-#if NEED_PRINTF_UNBOUNDED_PRECISION
++-		    if (prec_ourselves)
++-		      {
++-			/* Handle the precision.  */
++-			TCHAR_T *prec_ptr = 
++-# if USE_SNPRINTF
++-			  (TCHAR_T *) (result + length);
++-# else
++-			  tmp;
++-# endif
++-			size_t prefix_count;
++-			size_t move;
++-
++-			prefix_count = 0;
++-			/* Put the additional zeroes after the sign.  */
++-			if (count >= 1
++-			    && (*prec_ptr == '-' || *prec_ptr == '+'
++-				|| *prec_ptr == ' '))
++-			  prefix_count = 1;
++-			/* Put the additional zeroes after the 0x prefix if
++-			   (flags & FLAG_ALT) || (dp->conversion == 'p').  */
++-			else if (count >= 2
++-				 && prec_ptr[0] == '0'
++-				 && (prec_ptr[1] == 'x' || prec_ptr[1] == 'X'))
++-			  prefix_count = 2;
++-
++-			move = count - prefix_count;
++-			if (precision > move)
++-			  {
++-			    /* Insert zeroes.  */
++-			    size_t insert = precision - move;
++-			    TCHAR_T *prec_end;
++-
++-# if USE_SNPRINTF
++-			    size_t n =
++-			      xsum (length,
++-				    (count + insert + TCHARS_PER_DCHAR - 1)
++-				    / TCHARS_PER_DCHAR);
++-			    length += (count + TCHARS_PER_DCHAR - 1) / TCHARS_PER_DCHAR;
++-			    ENSURE_ALLOCATION (n);
++-			    length -= (count + TCHARS_PER_DCHAR - 1) / TCHARS_PER_DCHAR;
++-			    prec_ptr = (TCHAR_T *) (result + length);
++-# endif
++-
++-			    prec_end = prec_ptr + count;
++-			    prec_ptr += prefix_count;
++-
++-			    while (prec_end > prec_ptr)
++-			      {
++-				prec_end--;
++-				prec_end[insert] = prec_end[0];
++-			      }
++-
++-			    prec_end += insert;
++-			    do
++-			      *--prec_end = '0';
++-			    while (prec_end > prec_ptr);
++-
++-			    count += insert;
++-			  }
++-		      }
++-#endif
++-
++-#if !DCHAR_IS_TCHAR
++-# if !USE_SNPRINTF
++-		    if (count >= tmp_length)
++-		      /* tmp_length was incorrectly calculated - fix the
++-			 code above!  */
++-		      abort ();
++-# endif
++-
++-		    /* Convert from TCHAR_T[] to DCHAR_T[].  */
++-		    if (dp->conversion == 'c' || dp->conversion == 's')
++-		      {
++-			/* type = TYPE_CHAR or TYPE_WIDE_CHAR or TYPE_STRING
++-			   TYPE_WIDE_STRING.
++-			   The result string is not certainly ASCII.  */
++-			const TCHAR_T *tmpsrc;
++-			DCHAR_T *tmpdst;
++-			size_t tmpdst_len;
++-			/* This code assumes that TCHAR_T is 'char'.  */
++-			typedef int TCHAR_T_verify
++-				    [2 * (sizeof (TCHAR_T) == 1) - 1];
++-# if USE_SNPRINTF
++-			tmpsrc = (TCHAR_T *) (result + length);
++-# else
++-			tmpsrc = tmp;
++-# endif
++-			tmpdst = NULL;
++-			tmpdst_len = 0;
++-			if (DCHAR_CONV_FROM_ENCODING (locale_charset (),
++-						      iconveh_question_mark,
++-						      tmpsrc, count,
++-						      NULL,
++-						      &tmpdst, &tmpdst_len)
++-			    < 0)
++-			  {
++-			    int saved_errno = errno;
++-			    if (!(result == resultbuf || result == NULL))
++-			      free (result);
++-			    if (buf_malloced != NULL)
++-			      free (buf_malloced);
++-			    CLEANUP ();
++-			    errno = saved_errno;
++-			    return NULL;
++-			  }
++-			ENSURE_ALLOCATION (xsum (length, tmpdst_len));
++-			DCHAR_CPY (result + length, tmpdst, tmpdst_len);
++-			free (tmpdst);
++-			count = tmpdst_len;
++-		      }
++-		    else
++-		      {
++-			/* The result string is ASCII.
++-			   Simple 1:1 conversion.  */
++-# if USE_SNPRINTF
++-			/* If sizeof (DCHAR_T) == sizeof (TCHAR_T), it's a
++-			   no-op conversion, in-place on the array starting
++-			   at (result + length).  */
++-			if (sizeof (DCHAR_T) != sizeof (TCHAR_T))
++-# endif
++-			  {
++-			    const TCHAR_T *tmpsrc;
++-			    DCHAR_T *tmpdst;
++-			    size_t n;
++-
++-# if USE_SNPRINTF
++-			    if (result == resultbuf)
++-			      {
++-				tmpsrc = (TCHAR_T *) (result + length);
++-				/* ENSURE_ALLOCATION will not move tmpsrc
++-				   (because it's part of resultbuf).  */
++-				ENSURE_ALLOCATION (xsum (length, count));
++-			      }
++-			    else
++-			      {
++-				/* ENSURE_ALLOCATION will move the array
++-				   (because it uses realloc().  */
++-				ENSURE_ALLOCATION (xsum (length, count));
++-				tmpsrc = (TCHAR_T *) (result + length);
++-			      }
++-# else
++-			    tmpsrc = tmp;
++-			    ENSURE_ALLOCATION (xsum (length, count));
++-# endif
++-			    tmpdst = result + length;
++-			    /* Copy backwards, because of overlapping.  */
++-			    tmpsrc += count;
++-			    tmpdst += count;
++-			    for (n = count; n > 0; n--)
++-			      *--tmpdst = (unsigned char) *--tmpsrc;
++-			  }
++-		      }
++-#endif
++-
++-#if DCHAR_IS_TCHAR && !USE_SNPRINTF
++-		    /* Make room for the result.  */
++-		    if (count > allocated - length)
++-		      {
++-			/* Need at least count elements.  But allocate
++-			   proportionally.  */
++-			size_t n =
++-			  xmax (xsum (length, count), xtimes (allocated, 2));
++-
++-			ENSURE_ALLOCATION (n);
++-		      }
++-#endif
++-
++-		    /* Here count <= allocated - length.  */
++-
++-		    /* Perform padding.  */
++-#if !DCHAR_IS_TCHAR || ENABLE_UNISTDIO || NEED_PRINTF_FLAG_ZERO || NEED_PRINTF_UNBOUNDED_PRECISION
++-		    if (pad_ourselves && has_width)
++-		      {
++-			size_t w;
++-# if ENABLE_UNISTDIO
++-			/* Outside POSIX, it's preferrable to compare the width
++-			   against the number of _characters_ of the converted
++-			   value.  */
++-			w = DCHAR_MBSNLEN (result + length, count);
++-# else
++-			/* The width is compared against the number of _bytes_
++-			   of the converted value, says POSIX.  */
++-			w = count;
++-# endif
++-			if (w < width)
++-			  {
++-			    size_t pad = width - w;
++-# if USE_SNPRINTF
++-			    /* Make room for the result.  */
++-			    if (xsum (count, pad) > allocated - length)
++-			      {
++-				/* Need at least count + pad elements.  But
++-				   allocate proportionally.  */
++-				size_t n =
++-				  xmax (xsum3 (length, count, pad),
++-					xtimes (allocated, 2));
++-
++-				length += count;
++-				ENSURE_ALLOCATION (n);
++-				length -= count;
++-			      }
++-			    /* Here count + pad <= allocated - length.  */
++-# endif
++-			    {
++-# if !DCHAR_IS_TCHAR || USE_SNPRINTF
++-			      DCHAR_T * const rp = result + length;
++-# else
++-			      DCHAR_T * const rp = tmp;
++-# endif
++-			      DCHAR_T *p = rp + count;
++-			      DCHAR_T *end = p + pad;
++-# if NEED_PRINTF_FLAG_ZERO
++-			      DCHAR_T *pad_ptr;
++-#  if !DCHAR_IS_TCHAR
++-			      if (dp->conversion == 'c'
++-				  || dp->conversion == 's')
++-				/* No zero-padding for string directives.  */
++-				pad_ptr = NULL;
++-			      else
++-#  endif
++-				{
++-				  pad_ptr = (*rp == '-' ? rp + 1 : rp);
++-				  /* No zero-padding of "inf" and "nan".  */
++-				  if ((*pad_ptr >= 'A' && *pad_ptr <= 'Z')
++-				      || (*pad_ptr >= 'a' && *pad_ptr <= 'z'))
++-				    pad_ptr = NULL;
++-				}
++-# endif
++-			      /* The generated string now extends from rp to p,
++-				 with the zero padding insertion point being at
++-				 pad_ptr.  */
++-
++-			      count = count + pad; /* = end - rp */
++-
++-			      if (flags & FLAG_LEFT)
++-				{
++-				  /* Pad with spaces on the right.  */
++-				  for (; pad > 0; pad--)
++-				    *p++ = ' ';
++-				}
++-# if NEED_PRINTF_FLAG_ZERO
++-			      else if ((flags & FLAG_ZERO) && pad_ptr != NULL)
++-				{
++-				  /* Pad with zeroes.  */
++-				  DCHAR_T *q = end;
++-
++-				  while (p > pad_ptr)
++-				    *--q = *--p;
++-				  for (; pad > 0; pad--)
++-				    *p++ = '0';
++-				}
++-# endif
++-			      else
++-				{
++-				  /* Pad with spaces on the left.  */
++-				  DCHAR_T *q = end;
++-
++-				  while (p > rp)
++-				    *--q = *--p;
++-				  for (; pad > 0; pad--)
++-				    *p++ = ' ';
++-				}
++-			    }
++-			  }
++-		      }
++-#endif
++-
++-#if DCHAR_IS_TCHAR && !USE_SNPRINTF
 +-		    if (count >= tmp_length)
 +-		      /* tmp_length was incorrectly calculated - fix the
 +-			 code above!  */
 +-		      abort ();
 +-#endif
 +-
-+-		    /* Make room for the result.  */
-+-		    if (count >= maxlen)
-+-		      {
-+-			/* Need at least count bytes.  But allocate
-+-			   proportionally, to avoid looping eternally if
-+-			   snprintf() reports a too small count.  */
-+-			size_t n =
-+-			  xmax (xsum (length, count), xtimes (allocated, 2));
++-		    /* Here still count <= allocated - length.  */
 +-
-+-			ENSURE_ALLOCATION (n);
-+-#if USE_SNPRINTF
-+-			continue;
-+-#endif
-+-		      }
-+-
-+-#if USE_SNPRINTF
++-#if !DCHAR_IS_TCHAR || USE_SNPRINTF
 +-		    /* The snprintf() result did fit.  */
 +-#else
 +-		    /* Append the sprintf() result.  */
-+-		    memcpy (result + length, tmp, count * sizeof (CHAR_T));
++-		    memcpy (result + length, tmp, count * sizeof (DCHAR_T));
++-#endif
++-#if !USE_SNPRINTF
 +-		    if (tmp != tmpbuf)
 +-		      free (tmp);
++-#endif
++-
++-#if NEED_PRINTF_DIRECTIVE_F
++-		    if (dp->conversion == 'F')
++-		      {
++-			/* Convert the %f result to upper case for %F.  */
++-			DCHAR_T *rp = result + length;
++-			size_t rc;
++-			for (rc = count; rc > 0; rc--, rp++)
++-			  if (*rp >= 'a' && *rp <= 'z')
++-			    *rp = *rp - 'a' + 'A';
++-		      }
 +-#endif
 +-
 +-		    length += count;
@@ -14456,9 +22537,9 @@ index 0000000000..a06dbad1ea
 +-    if (result != resultbuf && length + 1 < allocated)
 +-      {
 +-	/* Shrink the allocated memory if possible.  */
-+-	CHAR_T *memory;
++-	DCHAR_T *memory;
 +-
-+-	memory = (CHAR_T *) realloc (result, (length + 1) * sizeof (CHAR_T));
++-	memory = (DCHAR_T *) realloc (result, (length + 1) * sizeof (DCHAR_T));
 +-	if (memory != NULL)
 +-	  result = memory;
 +-      }
@@ -14467,16 +22548,18 @@ index 0000000000..a06dbad1ea
 +-      free (buf_malloced);
 +-    CLEANUP ();
 +-    *lengthp = length;
-+-    if (length > INT_MAX)
-+-      goto length_overflow;
++-    /* Note that we can produce a big string of a length > INT_MAX.  POSIX
++-       says that snprintf() fails with errno = EOVERFLOW in this case, but
++-       that's only because snprintf() returns an 'int'.  This function does
++-       not have this limitation.  */
 +-    return result;
 +-
-+-  length_overflow:
-+-    /* We could produce such a big string, but its length doesn't fit into
-+-       an 'int'.  POSIX says that snprintf() fails with errno = EOVERFLOW in
-+-       this case.  */
-+-    if (result != resultbuf)
++-  overflow:
++-    if (!(result == resultbuf || result == NULL))
 +-      free (result);
++-    if (buf_malloced != NULL)
++-      free (buf_malloced);
++-    CLEANUP ();
 +-    errno = EOVERFLOW;
 +-    return NULL;
 +-
@@ -14492,12 +22575,17 @@ index 0000000000..a06dbad1ea
 +-  }
 +-}
 +-
++-#undef TCHARS_PER_DCHAR
 +-#undef SNPRINTF
 +-#undef USE_SNPRINTF
++-#undef DCHAR_CPY
 +-#undef PRINTF_PARSE
 +-#undef DIRECTIVES
 +-#undef DIRECTIVE
-+-#undef CHAR_T
++-#undef DCHAR_IS_TCHAR
++-#undef TCHAR_T
++-#undef DCHAR_T
++-#undef FCHAR_T
 +-#undef VASNPRINTF
 +--- a/intl/vasnprintf.h
 ++++ /dev/null
@@ -14517,7 +22605,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _VASNPRINTF_H
@@ -14542,7 +22630,7 @@ index 0000000000..a06dbad1ea
 +-# endif
 +-#endif
 +-
-+-#ifdef	__cplusplus
++-#ifdef __cplusplus
 +-extern "C" {
 +-#endif
 +-
@@ -14575,7 +22663,7 @@ index 0000000000..a06dbad1ea
 +-extern char * vasnprintf (char *resultbuf, size_t *lengthp, const char *format, va_list args)
 +-       __attribute__ ((__format__ (__printf__, 3, 0)));
 +-
-+-#ifdef	__cplusplus
++-#ifdef __cplusplus
 +-}
 +-#endif
 +-
@@ -14598,7 +22686,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _VASNWPRINTF_H
@@ -14629,6 +22717,35 @@ index 0000000000..a06dbad1ea
 +-#endif
 +-
 +-#endif /* _VASNWPRINTF_H */
++--- a/intl/version.c
+++++ /dev/null
++@@ -1,26 +0,0 @@
++-/* libintl library version.
++-   Copyright (C) 2005 Free Software Foundation, Inc.
++-
++-   This program is free software; you can redistribute it and/or modify it
++-   under the terms of the GNU Library General Public License as published
++-   by the Free Software Foundation; either version 2, or (at your option)
++-   any later version.
++-
++-   This program is distributed in the hope that it will be useful,
++-   but WITHOUT ANY WARRANTY; without even the implied warranty of
++-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++-   Library General Public License for more details.
++-
++-   You should have received a copy of the GNU Library General Public
++-   License along with this program; if not, write to the Free Software
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
++-   USA.  */
++-
++-#ifdef HAVE_CONFIG_H
++-# include <config.h>
++-#endif
++-
++-#include "libgnuintl.h"
++-
++-/* Version number: (major<<16) + (minor<<8) + subminor */
++-int libintl_version = LIBINTL_VERSION;
 +--- a/intl/wprintf-parse.h
 ++++ /dev/null
 +@@ -1,75 +0,0 @@
@@ -14647,7 +22764,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _WPRINTF_PARSE_H
@@ -14726,7 +22843,7 @@ index 0000000000..a06dbad1ea
 +-
 +-   You should have received a copy of the GNU Library General Public
 +-   License along with this program; if not, write to the Free Software
-+-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
++-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
 +-   USA.  */
 +-
 +-#ifndef _XSIZE_H
@@ -14819,18 +22936,18 @@ index 0000000000..a06dbad1ea
 +-  ((SIZE) != SIZE_MAX)
 +-
 +-#endif /* _XSIZE_H */
-diff --git a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
-index 4a871bf4f4..d5da2b688a 100644
---- a/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
-+++ b/meta-oe/recipes-support/hddtemp/hddtemp_0.3-beta15.bb
-@@ -9,6 +9,7 @@ SRC_URI = "${SAVANNAH_NONGNU_MIRROR}/hddtemp/hddtemp-0.3-beta15.tar.bz2 \
-            file://hddtemp_0.3-beta15-52.diff \
-            file://hddtemp-0.3-beta15-autodetect-717479.patch \
-            file://0001-backtrace-Replace-struct-ucontext-with-ucontext_t.patch \
-+           file://0001-configure.ac-Rename-to-configure.ac-and-use-external.patch \
-            file://hddtemp.db \
-            file://init \
- "
+diff --git a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
+index 8e9914b498..89e66528ac 100644
+--- a/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
++++ b/meta-multimedia/recipes-multimedia/vorbis-tools/vorbis-tools_1.4.0.bb
+@@ -13,6 +13,7 @@ DEPENDS = "libogg libvorbis"
+ SRC_URI = "http://downloads.xiph.org/releases/vorbis/${BP}.tar.gz \
+            file://0001-oggenc-Fix-large-alloca-on-bad-AIFF-input.patch \
+            file://0004-Fix-format-error-blocking-compilation-with-hardening.patch \
++           file://gettext.patch \
+           "
+ 
+ SRC_URI[md5sum] = "567e0fb8d321b2cd7124f8208b8b90e6"
 -- 
 2.24.1
 
