@@ -1,33 +1,33 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7ACC67D2E5
+	by mail.openembedded.org (Postfix) with ESMTP id 8B2D57F7BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 03:30:49 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,385,1571673600"; d="scan'208";a="81227365"
+	Thu,  2 Jan 2020 04:45:22 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,385,1571673600"; d="scan'208";a="81228984"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Jan 2020 11:30:47 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 52A3F49E9310
+	by heian.cn.fujitsu.com with ESMTP; 02 Jan 2020 12:45:21 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id 55BF549E9310
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 11:21:52 +0800 (CST)
+	Thu,  2 Jan 2020 12:36:27 +0800 (CST)
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Thu, 2 Jan 2020 11:30:45 +0800
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 2 Jan 2020 12:45:20 +0800
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 2 Jan 2020 11:30:46 +0800
+	Server (TLS) id 14.3.439.0; Thu, 2 Jan 2020 12:45:20 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Jan 2020 11:32:02 +0800
-Message-ID: <20200102033202.28879-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 2 Jan 2020 12:46:33 +0800
+Message-ID: <20200102044633.30390-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 52A3F49E9310.A755A
+X-yoursite-MailScanner-ID: 55BF549E9310.A91BC
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-bitarray: upgrade 1.1.0 -> 1.2.0
+Subject: [meta-python] [PATCH] python-certifi: upgrade 2019.9.11 -> 2019.11.28
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,47 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 03:30:49 -0000
+X-List-Received-Date: Thu, 02 Jan 2020 04:45:23 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
--License-Update: Update PKG-INFO.
-
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-bitarray.inc     | 6 +++---
- .../{python-bitarray_1.1.0.bb => python-bitarray_1.2.0.bb}  | 0
- ...{python3-bitarray_1.1.0.bb => python3-bitarray_1.2.0.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-bitarray_1.1.0.bb => python-bitarray_1.2.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-bitarray_1.1.0.bb => python3-bitarray_1.2.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-certifi.inc        | 4 ++--
+ ...thon-certifi_2019.9.11.bb => python-certifi_2019.11.28.bb} | 0
+ ...on3-certifi_2019.9.11.bb => python3-certifi_2019.11.28.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-certifi_2019.9.11.bb => python-certifi_2019.11.28.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-certifi_2019.9.11.bb => python3-certifi_2019.11.28.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-bitarray.inc b/meta-python/recipes-devtools/python/python-bitarray.inc
-index da5d11f1c..e156bd87e 100644
---- a/meta-python/recipes-devtools/python/python-bitarray.inc
-+++ b/meta-python/recipes-devtools/python/python-bitarray.inc
-@@ -1,10 +1,10 @@
- SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
- HOMEPAGE = "https://github.com/ilanschnell/bitarray"
- LICENSE = "PSF"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=00f0d12ccaf4e6b0b4fe501663621fa3"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=f1c84020645d906bd6569f6bcf071eca"
+diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
+index de02d9a4a..98fa1f288 100644
+--- a/meta-python/recipes-devtools/python/python-certifi.inc
++++ b/meta-python/recipes-devtools/python/python-certifi.inc
+@@ -7,7 +7,7 @@ HOMEPAGE = " http://certifi.io/"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
  
--SRC_URI[md5sum] = "743d396a1012d6f7d791d8a526da302d"
--SRC_URI[sha256sum] = "9f578314c7808eb1416620dc7d7977d4787a65a4f61b4c9685343a860712615b"
-+SRC_URI[md5sum] = "ce21bdfb6d074bd051abd601667b238e"
-+SRC_URI[sha256sum] = "4f8706b651243c9faa981f075bcbdef2fab83e9b9bc9211ed2cb5849f9a68342"
+-SRC_URI[md5sum] = "cadd4e373fc08f649fa39b82aed9ad96"
+-SRC_URI[sha256sum] = "e4f3620cfea4f83eedc95b24abd9cd56f3c4b146dd0177e83a21b4eb49e21e50"
++SRC_URI[md5sum] = "4d5229c4d9f0a4a79106f9e2c2cfd381"
++SRC_URI[sha256sum] = "25b64c7da4cd7479594d035c08c2d809eb4aab3a26e5a990ea98cc450c320f1f"
  
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-bitarray_1.1.0.bb b/meta-python/recipes-devtools/python/python-bitarray_1.2.0.bb
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-certifi_2019.9.11.bb b/meta-python/recipes-devtools/python/python-certifi_2019.11.28.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-bitarray_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python-bitarray_1.2.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.1.0.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.0.bb
+rename from meta-python/recipes-devtools/python/python-certifi_2019.9.11.bb
+rename to meta-python/recipes-devtools/python/python-certifi_2019.11.28.bb
+diff --git a/meta-python/recipes-devtools/python/python3-certifi_2019.9.11.bb b/meta-python/recipes-devtools/python/python3-certifi_2019.11.28.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-bitarray_1.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-bitarray_1.2.0.bb
+rename from meta-python/recipes-devtools/python/python3-certifi_2019.9.11.bb
+rename to meta-python/recipes-devtools/python/python3-certifi_2019.11.28.bb
 -- 
 2.20.1
 
