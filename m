@@ -1,33 +1,24 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 8FA797F9B3
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BA1B47FBE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 08:33:07 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,386,1571673600"; d="scan'208";a="81234304"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Jan 2020 16:33:05 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5E97249E9315
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 16:24:11 +0800 (CST)
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Thu, 2 Jan 2020 16:33:04 +0800
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 2 Jan 2020 16:33:02 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Jan 2020 16:34:21 +0800
-Message-ID: <20200102083421.385-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Thu,  2 Jan 2020 08:52:44 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 0028qipT018773
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Thu, 2 Jan 2020 00:52:44 -0800 (PST)
+Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 2 Jan 2020 00:52:43 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+Date: Thu, 2 Jan 2020 00:52:43 -0800
+Message-ID: <20200102085243.341-1-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 5E97249E9315.A7BED
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-backports-functools-lru-cache: Add python3 version
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-python][PATCH] python3-astor: fix VERSION file not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,81 +31,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 08:33:08 -0000
+X-List-Received-Date: Thu, 02 Jan 2020 08:52:44 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+...
+import astor
+  File "/usr/lib/python3.7/site-packages/astor/__init__.py", line 24, in <module>
+    with open(os.path.join(ROOT, 'VERSION')) as version_file:
+FileNotFoundError: [Errno 2] No such file or directory: '/usr/lib/python3.7/site-packages/astor/VERSION'
+...
+
+Place the value in a simple VERSION text file and have both setup.py and the
+project code read it. With this approach you must make sure that the VERSION
+file is included in all your source and binary distributions (e.g. add include
+VERSION to your MANIFEST.in). [1]
+
+[1] https://packaging.python.org/guides/single-sourcing-package-version/
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../python-backports-functools-lru-cache.inc  | 19 +++++++++++++++++
- ...ython-backports-functools-lru-cache_1.5.bb | 21 ++-----------------
- ...thon3-backports-functools-lru-cache_1.5.bb |  2 ++
- 3 files changed, 23 insertions(+), 19 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-backports-functools-lru-cache.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.5.bb
+ ...f3ff7ad8818475b6e107e63aa9a54252d2a9.patch | 22 ++++++++++++++++---
+ 1 file changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-backports-functools-lru-cache.inc b/meta-python/recipes-devtools/python/python-backports-functools-lru-cache.inc
-new file mode 100644
-index 000000000..bce44a28b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-backports-functools-lru-cache.inc
-@@ -0,0 +1,19 @@
-+SUMMARY = "Backport of functools.lru_cache from Python 3.3"
-+HOMEPAGE = "https://github.com/jaraco/backports.functools_lru_cache"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://setup.py;beginline=57;endline=57;md5=98fc3658e5970d26f6b2109808c766be"
+diff --git a/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch b/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
+index 823699339..6d71be992 100644
+--- a/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
++++ b/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
+@@ -3,14 +3,27 @@ From: Jonathan Ringer <jonringer117@gmail.com>
+ Date: Thu, 17 Oct 2019 16:54:16 -0700
+ Subject: [PATCH] Fix packaging for setuptools>=41.4
+ 
++Upstream-Status: Pending
 +
-+PYPI_PACKAGE = "backports.functools_lru_cache"
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+ ---
++ MANIFEST.in       |  1 +
+  astor/VERSION     |  1 +
+  astor/__init__.py |  5 ++++-
+  setup.cfg         |  3 ++-
+  setup.py          | 16 +---------------
+- 4 files changed, 8 insertions(+), 17 deletions(-)
++ 5 files changed, 9 insertions(+), 17 deletions(-)
+  create mode 100644 astor/VERSION
+ 
++diff --git a/MANIFEST.in b/MANIFEST.in
++index b12a6fe..81e72d5 100644
++--- a/MANIFEST.in
+++++ b/MANIFEST.in
++@@ -1,3 +1,4 @@
++ include README.rst AUTHORS LICENSE CHANGES
++ include setuputils.py
+++include astor/VERSION
++ recursive-include tests *.py
+ diff --git a/astor/VERSION b/astor/VERSION
+ new file mode 100644
+ index 0000000..a3df0a6
+@@ -22,7 +35,7 @@ diff --git a/astor/__init__.py b/astor/__init__.py
+ index 3b02983..8dfcdb1 100644
+ --- a/astor/__init__.py
+ +++ b/astor/__init__.py
+-@@ -9,6 +9,7 @@
++@@ -9,6 +9,7 @@ Copyright 2013 (c) Berker Peksag
+  
+  """
+  
+@@ -30,7 +43,7 @@ index 3b02983..8dfcdb1 100644
+  import warnings
+  
+  from .code_gen import SourceGenerator, to_source  # NOQA
+-@@ -19,7 +20,9 @@
++@@ -19,7 +20,9 @@ from .op_util import get_op_symbol, get_op_precedence  # NOQA
+  from .op_util import symbol_data  # NOQA
+  from .tree_walk import TreeWalk  # NOQA
+  
+@@ -85,3 +98,6 @@ index 4a111b5..6068493 100644
+  
+ -setup(**config['options'])
+ +setup()
++-- 
++2.21.0
 +
-+SRC_URI[md5sum] = "20f53f54cd3f04b3346ce75a54959754"
-+SRC_URI[sha256sum] = "9d98697f088eb1b0fa451391f91afb5e3ebde16bbdb272819fd091151fda4f1a"
-+
-+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-+
-+inherit pypi
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-pickle \
-+    ${PYTHON_PN}-threading \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python-backports-functools-lru-cache_1.5.bb b/meta-python/recipes-devtools/python/python-backports-functools-lru-cache_1.5.bb
-index 825444ff3..5e0f2f1e8 100644
---- a/meta-python/recipes-devtools/python/python-backports-functools-lru-cache_1.5.bb
-+++ b/meta-python/recipes-devtools/python/python-backports-functools-lru-cache_1.5.bb
-@@ -1,19 +1,2 @@
--SUMMARY = "Backport of functools.lru_cache from Python 3.3"
--HOMEPAGE = "https://github.com/jaraco/backports.functools_lru_cache"
--SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://setup.py;beginline=57;endline=57;md5=98fc3658e5970d26f6b2109808c766be"
--
--PYPI_PACKAGE = "backports.functools_lru_cache"
--
--SRC_URI[md5sum] = "20f53f54cd3f04b3346ce75a54959754"
--SRC_URI[sha256sum] = "9d98697f088eb1b0fa451391f91afb5e3ebde16bbdb272819fd091151fda4f1a"
--
--DEPENDS += "python-setuptools-scm-native"
--
--inherit setuptools pypi
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-pickle \
--    ${PYTHON_PN}-threading \
--    "
-+require python-backports-functools-lru-cache.inc
-+inherit setuptools
-diff --git a/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.5.bb b/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.5.bb
-new file mode 100644
-index 000000000..91fcc41fc
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.5.bb
-@@ -0,0 +1,2 @@
-+require python-backports-functools-lru-cache.inc
-+inherit setuptools3
 -- 
-2.20.1
-
-
+2.21.0
 
 
