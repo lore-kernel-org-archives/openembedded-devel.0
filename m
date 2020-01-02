@@ -1,33 +1,33 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 276EB7FC86
+	by mail.openembedded.org (Postfix) with ESMTP id A734A7FC8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 07:13:21 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,385,1571673600"; d="scan'208";a="81232177"
+	Thu,  2 Jan 2020 07:24:47 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,385,1571673600"; d="scan'208";a="81232460"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 02 Jan 2020 15:13:22 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 19C7649E9310
+	by heian.cn.fujitsu.com with ESMTP; 02 Jan 2020 15:24:47 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 8E03749E931A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 15:04:26 +0800 (CST)
+	Thu,  2 Jan 2020 15:15:53 +0800 (CST)
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Thu, 2 Jan 2020 15:13:20 +0800
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 2 Jan 2020 15:24:46 +0800
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 2 Jan 2020 15:13:18 +0800
+	Server (TLS) id 14.3.439.0; Thu, 2 Jan 2020 15:24:45 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Jan 2020 15:14:36 +0800
-Message-ID: <20200102071436.30369-1-zangrc.fnst@cn.fujitsu.com>
+Date: Thu, 2 Jan 2020 15:26:04 +0800
+Message-ID: <20200102072604.31449-1-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 19C7649E9310.A9C08
+X-yoursite-MailScanner-ID: 8E03749E931A.AA01C
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-pymongo: upgrade 3.9.0 -> 3.10.0
+Subject: [meta-python] [PATCH] python-pyparsing: upgrade 2.4.5 -> 2.4.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,42 +40,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 07:13:22 -0000
+X-List-Received-Date: Thu, 02 Jan 2020 07:24:48 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-pymongo.inc        | 4 ++--
- .../{python-pymongo_3.9.0.bb => python-pymongo_3.10.0.bb}     | 0
- .../{python3-pymongo_3.9.0.bb => python3-pymongo_3.10.0.bb}   | 0
+ meta-python/recipes-devtools/python/python-pyparsing.inc      | 4 ++--
+ .../{python-pyparsing_2.4.5.bb => python-pyparsing_2.4.6.bb}  | 0
+ ...{python3-pyparsing_2.4.5.bb => python3-pyparsing_2.4.6.bb} | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pymongo_3.9.0.bb => python-pymongo_3.10.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pymongo_3.9.0.bb => python3-pymongo_3.10.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-pyparsing_2.4.5.bb => python-pyparsing_2.4.6.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyparsing_2.4.5.bb => python3-pyparsing_2.4.6.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pymongo.inc b/meta-python/recipes-devtools/python/python-pymongo.inc
-index cd11d9812..dc78b10f8 100644
---- a/meta-python/recipes-devtools/python/python-pymongo.inc
-+++ b/meta-python/recipes-devtools/python/python-pymongo.inc
-@@ -8,8 +8,8 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+diff --git a/meta-python/recipes-devtools/python/python-pyparsing.inc b/meta-python/recipes-devtools/python/python-pyparsing.inc
+index bf89be662..2b9925f49 100644
+--- a/meta-python/recipes-devtools/python/python-pyparsing.inc
++++ b/meta-python/recipes-devtools/python/python-pyparsing.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pyparsing.wikispaces.com/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=657a566233888513e1f07ba13e2f47f1"
  
--SRC_URI[md5sum] = "531786df7ad98f15c43f1b17edf5f84c"
--SRC_URI[sha256sum] = "4249c6ba45587b959292a727532826c5032d59171f923f7f823788f413c2a5a3"
-+SRC_URI[md5sum] = "fb98d896f0eb14d9b4fe9baac24d772a"
-+SRC_URI[sha256sum] = "c43879fe427ea6aa6e84dae9fbdc5aa14428a4cfe613fe0fee2cc004bf3f307c"
+-SRC_URI[md5sum] = "75dfad250d739efa82c7c0eeaacc5e68"
+-SRC_URI[sha256sum] = "4ca62001be367f01bd3e92ecbb79070272a9d4964dce6a48a82ff0b8bc7e683a"
++SRC_URI[md5sum] = "29733ea8cbee0291aad121c69c6e51a1"
++SRC_URI[sha256sum] = "4c830582a84fb022400b85429791bc551f1f4871c33f23e44f353119e92f969f"
  
- PACKAGES =+ "${PYTHON_PN}-bson"
+ inherit pypi
  
-diff --git a/meta-python/recipes-devtools/python/python-pymongo_3.9.0.bb b/meta-python/recipes-devtools/python/python-pymongo_3.10.0.bb
+diff --git a/meta-python/recipes-devtools/python/python-pyparsing_2.4.5.bb b/meta-python/recipes-devtools/python/python-pyparsing_2.4.6.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pymongo_3.9.0.bb
-rename to meta-python/recipes-devtools/python/python-pymongo_3.10.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.9.0.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.10.0.bb
+rename from meta-python/recipes-devtools/python/python-pyparsing_2.4.5.bb
+rename to meta-python/recipes-devtools/python/python-pyparsing_2.4.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyparsing_2.4.5.bb b/meta-python/recipes-devtools/python/python3-pyparsing_2.4.6.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pymongo_3.9.0.bb
-rename to meta-python/recipes-devtools/python/python3-pymongo_3.10.0.bb
+rename from meta-python/recipes-devtools/python/python3-pyparsing_2.4.5.bb
+rename to meta-python/recipes-devtools/python/python3-pyparsing_2.4.6.bb
 -- 
 2.20.1
 
