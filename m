@@ -1,24 +1,49 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D1CE67F822
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 06EDD7F9A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 17:03:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 002H39fj021979
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Thu,  2 Jan 2020 17:34:21 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id k6so31906655qki.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 2 Jan 2020 09:03:09 -0800 (PST)
-Received: from yow-tgamblin-fedora1.wrs.com (128.224.56.206) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.468.0; Thu, 2 Jan 2020 09:03:09 -0800
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Jan 2020 12:03:09 -0500
-Message-ID: <20200102170309.2187663-1-trevor.gamblin@windriver.com>
-X-Mailer: git-send-email 2.24.1
+	Thu, 02 Jan 2020 09:34:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=6EaGwWn1VVfqThMKoxCXWjVtGf96JKXFMEMRh3xtjeQ=;
+	b=Yn3YEWPHbPo/XjICjcvaXMsUEuDend3P358h3k7ZfdpL4SN0me7JrgiM24H93Q+qpf
+	cilCf00TBjXPEcGO6BR2z9tdrjM2GoFu5wQ/7QaJTnyf9lbfIvECHHbHtcPkn6rbaZ1D
+	LgK8t8tf2Awn6xYEHTTAK7RrLLEsOQ4tbKMVuvS79QKmmxY2jSBe5dT0ymArJiXSPk4F
+	8X7RG4y0+bl6Vt2AK+DkgT0LM1Ailrmx0W2FU+eME5FBSRXcrRIpfj4LTSK6WTDvSLpF
+	oOdd/CeBlzfqYSc3asc+Gll8lTjUus9q9r6F9ZXDD8lvZQzwsxgcFvuVLYLY2+e5nVng
+	dW0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=6EaGwWn1VVfqThMKoxCXWjVtGf96JKXFMEMRh3xtjeQ=;
+	b=IEL00dTlh2AhxO67LkLUo5wLW3VpFxcagauO3c7aaArQHTjn0XbrbsoQhu1O5WTlvT
+	6fAhAF7xRFtTNFAJXr/MM3uYMD/ZM9eaCJxJYrXTWa2I8z/sCibr9GIqwKWMAxEPAV8E
+	+wA+BRKHO6yHsTqo0/3qcdHpxCKxtPJOYQUXbNACGfuA7HHd9RIAH2lbeHlChkbmB8wy
+	WWvA00zaJl/A1wAWQEumoYZPsbO0pVdn1LPYHPuI4HmogN5Cn1Get2Pb1Wx8CrCSZg4L
+	Ld/iFEQMNmfLCQGJY7fH2ASMLZk9YUrOPVlqiljiiSWnvhtX8c44bvTtKFxeLj/AsI7t
+	wCeg==
+X-Gm-Message-State: APjAAAW4kg+OCgIqZXR4syJbh/V/s19Kt2Sf3+LLDt1FZkm+R/+uN1Fl
+	Q8hMAXPmKS9/+z6aKaXOCREii8X5QS9smtD19TjR9tgx
+X-Google-Smtp-Source: APXvYqxfOBmrcBp2zTvp/vVzyUOc72/nh0Lu9U7DGsmz8CUBY6LStg7HjNKV/Yx/ggfY0k1jx0J2AGe4sGroGUHxU9c=
+X-Received: by 2002:a05:620a:6b8:: with SMTP id
+	i24mr69465035qkh.9.1577986462575; 
+	Thu, 02 Jan 2020 09:34:22 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python3-twisted: fix broken MemoryReactor import
+References: <20200102061330.480482-1-raj.khem@gmail.com>
+	<20200102061330.480482-4-raj.khem@gmail.com>
+	<20200102110803.GB11760@localhost>
+In-Reply-To: <20200102110803.GB11760@localhost>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 2 Jan 2020 09:33:54 -0800
+Message-ID: <CAMKF1sqVkpSjeBbctBbjTP45yTuo4xPmJYBPetB2frASw4V=mw@mail.gmail.com>
+To: Adrian Bunk <bunk@stusta.de>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 4/6] hddtemp: Fix build with latest gettext 0.20.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,83 +56,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 17:03:09 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 02 Jan 2020 17:34:22 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Twisted's application/runner/test/test_runner.py was trying to import
-from a deprecated module and failing. The module import has been
-corrected and accepted in Twisted upstream, but there's no release
-with it yet for Yocto to upgrade to, hence the backport.
+On Thu, Jan 2, 2020 at 3:08 AM Adrian Bunk <bunk@stusta.de> wrote:
+>
+> On Wed, Jan 01, 2020 at 10:13:28PM -0800, Khem Raj wrote:
+> >...
+> >  ...ame-to-configure.ac-and-use-external.patch | 14743 ++++++++++++++++
+>
+> It should not be necessary to remove intl/ in the diff.
+>
+> Removing intl from SUBDIRS and AC_CONFIG_FILES should be sufficient and
+> keep the patch at a readable size.
+>
 
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
----
- .../python/python-twisted.inc                 |  5 +++
- ...r-import-in-test_runner-to-be-from-t.patch | 38 +++++++++++++++++++
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-twisted/0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch
+right perhaps better, I was playing with distroclean targets and
+thought it will be better to clean it out
+I will send a v2 for the relevant patches in this series.
 
-diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
-index 084123b97..d005a2ac2 100644
---- a/meta-python/recipes-devtools/python/python-twisted.inc
-+++ b/meta-python/recipes-devtools/python/python-twisted.inc
-@@ -7,6 +7,11 @@ HOMEPAGE = "http://www.twistedmatrix.com"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1743f12d8b8f5aec625c0569a058f0a6"
- 
-+# allow for common patches for python- and python3-twisted
-+FILESEXTRAPATHS_prepend := "${THISDIR}/python-twisted:"
-+
-+SRC_URI += "file://0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch"
-+
- SRC_URI[sha256sum] = "7394ba7f272ae722a74f3d969dcf599bc4ef093bc392038748a490f1724a515d"
- SRC_URI[md5sum] = "f2d70f7a66ecdf54152310164cceadfe"
- 
-diff --git a/meta-python/recipes-devtools/python/python-twisted/0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch b/meta-python/recipes-devtools/python/python-twisted/0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch
-new file mode 100644
-index 000000000..39fc7d43e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-twisted/0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch
-@@ -0,0 +1,38 @@
-+From 754f21282ad2775db8ff501d40bbc497faeb17ba Mon Sep 17 00:00:00 2001
-+From: Trevor Gamblin <trevor.gamblin@windriver.com>
-+Date: Tue, 17 Dec 2019 15:09:22 -0500
-+Subject: [PATCH] fix MemoryReactor import in test_runner to be from
-+ twisted.internet.testing
-+
-+Upstream-Status: Backport [https://github.com/twisted/twisted/commit/754f21282ad2775db8ff501d40bbc497faeb17ba]
-+
-+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-+---
-+ src/twisted/application/newsfragments/9746.misc    | 1 +
-+ src/twisted/application/runner/test/test_runner.py | 2 +-
-+ 2 files changed, 2 insertions(+), 1 deletion(-)
-+ create mode 100644 src/twisted/application/newsfragments/9746.misc
-+
-+diff --git a/src/twisted/application/newsfragments/9746.misc b/src/twisted/application/newsfragments/9746.misc
-+new file mode 100644
-+index 000000000..8b1378917
-+--- /dev/null
-++++ b/src/twisted/application/newsfragments/9746.misc
-+@@ -0,0 +1 @@
-++
-+diff --git a/src/twisted/application/runner/test/test_runner.py b/src/twisted/application/runner/test/test_runner.py
-+index 9abc3449a..cce495b12 100644
-+--- a/src/twisted/application/runner/test/test_runner.py
-++++ b/src/twisted/application/runner/test/test_runner.py
-+@@ -15,7 +15,7 @@ from twisted.logger import (
-+     LogLevel, LogPublisher, LogBeginner,
-+     FileLogObserver, FilteringLogObserver, LogLevelFilterPredicate,
-+ )
-+-from twisted.test.proto_helpers import MemoryReactor
-++from twisted.internet.testing import MemoryReactor
-+ 
-+ from ...runner import _runner
-+ from .._exit import ExitStatus
-+-- 
-+2.24.1
-+
--- 
-2.24.1
-
+> cu
+> Adrian
 
