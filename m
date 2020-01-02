@@ -1,50 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
-	[209.85.222.195])
-	by mail.openembedded.org (Postfix) with ESMTP id F0CF77D3AC
+Return-Path: <Trevor.Gamblin@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D1CE67F822
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Jan 2020 16:22:38 +0000 (UTC)
-Received: by mail-qk1-f195.google.com with SMTP id z76so32083022qka.2
+	Thu,  2 Jan 2020 17:03:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 002H39fj021979
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jan 2020 08:22:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ZRXdtpBEkLAL7EsT9A8V16tYf9kbZiWvewnPiDO2aZI=;
-	b=cSgX+qbSPrvOmM/Ijen6U8cwMZ3vRbsBYJwc7iN0hnvrzg4uTRPQxUDZhuPy7AU4RF
-	LUqyWbrd60YFMN+dgJk+K1Meh6a9zBmpn4UwDRJxumwlR9lhEe1uuhqO1iuIHn2+0amF
-	kPxSHiDzzadt0blj7bOnLaW4si+z8PlIT91G2Fq3REfYIBLJQ0tGpXfba+ozq+B6+9h6
-	XPZTiOMv8wvmE+Ak5xpUDuKXZJ6v8Ry6RDphWvvPccXoQNq3oECooCVaYOWduVix9eHQ
-	zmY1IwgKIemOM2DkN+HA91QIDBw5x5gpYWk7OYVytaDlFTzAzuMJ7rWl+bTFf0HfkYfK
-	MBzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=ZRXdtpBEkLAL7EsT9A8V16tYf9kbZiWvewnPiDO2aZI=;
-	b=umw0pMrDqbPSsHasI49demR9GA3ZCPxzkN1y9aYH88tzrXHYvw68JyodyJdvqkhjL8
-	8VbrdAtV7d0MHFTHfQfHpC4QqtgRu8k/g+gkLz+bZOqmelino6YtIq/f735HEfqGIuk3
-	7znABH9LG3hDtB0YYsJb9RppqYEZJi4r+RqjmISPI75E5mW3T7xYyoPcNWjDeXeNO0tC
-	i39D0d+62k7hergQMf2B1imlutdRsIRPXGL7gqNXQ41EouToxR9ny01kqCprzvT4M0vc
-	MEO/8zV/w7AlFRZ4LH+RDoTTQvvTEgH1Xm6ZHjzgF1TgdvP6u3LaUi0S7+k3TowiNyLu
-	vMSA==
-X-Gm-Message-State: APjAAAVcj5tM7offgRZQhMnspnwlPPNzcc7RXQaa2mYwlY4xD57ofxx3
-	7x4tqhGBwc7I5awyjVfOgm/N0awieFjWifBBt4W5zee0
-X-Google-Smtp-Source: APXvYqxq9RL8COOJcaph+gIQc6yHzccz2Y3lwZHSKVmiPor8xLv5sp68IC/k6+Ig9/a0yyEj9a6ZQv+qkeslk0+kPrE=
-X-Received: by 2002:a37:bf82:: with SMTP id
-	p124mr68287296qkf.337.1577982159482; 
-	Thu, 02 Jan 2020 08:22:39 -0800 (PST)
+	Thu, 2 Jan 2020 09:03:09 -0800 (PST)
+Received: from yow-tgamblin-fedora1.wrs.com (128.224.56.206) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.468.0; Thu, 2 Jan 2020 09:03:09 -0800
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Jan 2020 12:03:09 -0500
+Message-ID: <20200102170309.2187663-1-trevor.gamblin@windriver.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-References: <20200102061330.480482-1-raj.khem@gmail.com>
-	<20200102061330.480482-3-raj.khem@gmail.com>
-	<20200102105520.GA11760@localhost>
-In-Reply-To: <20200102105520.GA11760@localhost>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 2 Jan 2020 08:22:28 -0800
-Message-ID: <CAMKF1srXvYy9QT8DvfbH2Pe1hRn9wCkg5n3__O5cMm1HiRTLcw@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 3/6] gtkperf: Fix build with latest gettext 0.20.x
+Subject: [meta-python][PATCH] python3-twisted: fix broken MemoryReactor import
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,24 +31,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Jan 2020 16:22:39 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Jan 2020 17:03:09 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Thu, Jan 2, 2020 at 2:55 AM Adrian Bunk <bunk@stusta.de> wrote:
+Twisted's application/runner/test/test_runner.py was trying to import
+from a deprecated module and failing. The module import has been
+corrected and accepted in Twisted upstream, but there's no release
+with it yet for Yocto to upgrade to, hence the backport.
 
-> It might be time to remove gtkperf?
->
-> It is a benchmarking tool for the old GTK+2, and with no upstream
-> release in 15 years there is not much chance that gtkperf will get
-> ported to more recent GTK versions
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ .../python/python-twisted.inc                 |  5 +++
+ ...r-import-in-test_runner-to-be-from-t.patch | 38 +++++++++++++++++++
+ 2 files changed, 43 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-twisted/0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch
 
+diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
+index 084123b97..d005a2ac2 100644
+--- a/meta-python/recipes-devtools/python/python-twisted.inc
++++ b/meta-python/recipes-devtools/python/python-twisted.inc
+@@ -7,6 +7,11 @@ HOMEPAGE = "http://www.twistedmatrix.com"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1743f12d8b8f5aec625c0569a058f0a6"
+ 
++# allow for common patches for python- and python3-twisted
++FILESEXTRAPATHS_prepend := "${THISDIR}/python-twisted:"
++
++SRC_URI += "file://0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch"
++
+ SRC_URI[sha256sum] = "7394ba7f272ae722a74f3d969dcf599bc4ef093bc392038748a490f1724a515d"
+ SRC_URI[md5sum] = "f2d70f7a66ecdf54152310164cceadfe"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-twisted/0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch b/meta-python/recipes-devtools/python/python-twisted/0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch
+new file mode 100644
+index 000000000..39fc7d43e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-twisted/0001-fix-MemoryReactor-import-in-test_runner-to-be-from-t.patch
+@@ -0,0 +1,38 @@
++From 754f21282ad2775db8ff501d40bbc497faeb17ba Mon Sep 17 00:00:00 2001
++From: Trevor Gamblin <trevor.gamblin@windriver.com>
++Date: Tue, 17 Dec 2019 15:09:22 -0500
++Subject: [PATCH] fix MemoryReactor import in test_runner to be from
++ twisted.internet.testing
++
++Upstream-Status: Backport [https://github.com/twisted/twisted/commit/754f21282ad2775db8ff501d40bbc497faeb17ba]
++
++Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
++---
++ src/twisted/application/newsfragments/9746.misc    | 1 +
++ src/twisted/application/runner/test/test_runner.py | 2 +-
++ 2 files changed, 2 insertions(+), 1 deletion(-)
++ create mode 100644 src/twisted/application/newsfragments/9746.misc
++
++diff --git a/src/twisted/application/newsfragments/9746.misc b/src/twisted/application/newsfragments/9746.misc
++new file mode 100644
++index 000000000..8b1378917
++--- /dev/null
+++++ b/src/twisted/application/newsfragments/9746.misc
++@@ -0,0 +1 @@
+++
++diff --git a/src/twisted/application/runner/test/test_runner.py b/src/twisted/application/runner/test/test_runner.py
++index 9abc3449a..cce495b12 100644
++--- a/src/twisted/application/runner/test/test_runner.py
+++++ b/src/twisted/application/runner/test/test_runner.py
++@@ -15,7 +15,7 @@ from twisted.logger import (
++     LogLevel, LogPublisher, LogBeginner,
++     FileLogObserver, FilteringLogObserver, LogLevelFilterPredicate,
++ )
++-from twisted.test.proto_helpers import MemoryReactor
+++from twisted.internet.testing import MemoryReactor
++ 
++ from ...runner import _runner
++ from .._exit import ExitStatus
++-- 
++2.24.1
++
+-- 
+2.24.1
 
-I think that=E2=80=99s reasonable. I will perhaps prefer to remove it as we=
-ll
-
-cu
-
-Adrian
->
 
