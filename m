@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com
-	[209.85.219.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 167317F9A3
+Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com
+	[209.85.219.53])
+	by mail.openembedded.org (Postfix) with ESMTP id B7F837F9B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2020 03:29:21 +0000 (UTC)
-Received: by mail-qv1-f65.google.com with SMTP id z3so15779031qvn.0
+	Fri,  3 Jan 2020 03:39:03 +0000 (UTC)
+Received: by mail-qv1-f53.google.com with SMTP id p2so15742421qvo.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jan 2020 19:29:23 -0800 (PST)
+	Thu, 02 Jan 2020 19:39:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=VpbHQntRT8ZiWE6xG7yqFaJhPYPvJoC/V7m4SjXDVc4=;
-	b=rgmsKlMnqGueRj6ASLrtfdI6PeHlzXzsWtEXK1LGo7apQl9vbm8c9xwyH7g4VGkNVR
-	xL7j03XUI5vlPVstb5opIkSGCDEU5/im8HMm8uJgwPQqCgCZK71AGbNGUUcQOSqi1Jl5
-	UJ4ZNIHY3+TRpBUCKeR80eOf+XYjwgFfDVKoiYwqgs1t+td7v46o+RuU6JIFC1xQrMI5
-	JEPLVDZn5ZtndWap3OFub5/EqK7sO8VXqnbmV4JUMNMEqFZny6FzfUBiVrSnHlfbZSsc
-	f1BO44pIXQHl6bYgyxrRvOBJdxFfkGO8CZZB16hOpvyHFwq7bL4weNISHOzwBihQCzG3
-	HPEA==
+	:cc; bh=SvF86g9JA7R58OQ3TYJqpf7gZQ87vo6F6QEbI2yj4zQ=;
+	b=aNUaCvOuJkm9lrzIin53+biSNbktnBL3irXtz7oUbdupytM2llocg08L+/Wi+TfhTS
+	4kLfi+YTdEI4DlrV5tdnZJuWYcFGsj9yLKYcNCgGwlpav5GMmkdcuPauL82/JC0QgeYI
+	L0/lsW966iKdrtTbwV31SNHnDpVGhNXHbZmo0tPMsSDZ6+PY7wbFPnih7dUqC7L7kJ3+
+	rzx8GBMA09w5poOgmm0ICMTpgh5rji6TWQgX4fo7JllFKyi8ncTK9qN1TYZtD8apBDLs
+	nitsHijV5gvXCY9P8DML9jrROa1EwO6qXir71fjyIda98KYCXP7o9/riibOHB6p3sMNP
+	76Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=VpbHQntRT8ZiWE6xG7yqFaJhPYPvJoC/V7m4SjXDVc4=;
-	b=AhIXzbi4EUSW0ysDfRCphphIDbd1i20YDjJnAW4Dh45yxG123xpjVBuHCboDxufNw1
-	w4Og7xXzK5PNySt1slmJ9xV0DTIbt8G2iElfwqgFruzemKifZhuX07VFh3lhqzhE4uPp
-	kpspfjyEkU+zrf4dFMsiSp1KV3cMAY1xHdf1dNXejQo8pbwSsA2sZE2NdLtuGWf6BPDq
-	DQ5jPo+cauD23UzWXfu2JHGY3a5ZcFmvHSWRD/RF7uVemxobdXXHULAi6cyBgehT104P
-	rMbYJrWwI6S5Qg1wi/UK2U/a5yDGXwWfsC1rVRhzjxlbp+bb09RMRXzunOUsOnwDpp1T
-	2EVA==
-X-Gm-Message-State: APjAAAUy8jfgobErX29/bm66YrqkY3QCLRle1Vz9pRL8WoiFpkPwI1ah
-	BZZiiRcI/EKGZzIqnf0QxKC1A6fbNLsZOQd3+H4=
-X-Google-Smtp-Source: APXvYqzXG8CMVTytPOZGn95fd8SvuaMbdsnLc77YwC5H5sxZY9ssZAzkttRHJhocddVIn1WFoCjYlpslJpid5wzMDro=
-X-Received: by 2002:ad4:478b:: with SMTP id z11mr66349164qvy.185.1578022162584;
-	Thu, 02 Jan 2020 19:29:22 -0800 (PST)
+	bh=SvF86g9JA7R58OQ3TYJqpf7gZQ87vo6F6QEbI2yj4zQ=;
+	b=kWl6fr3TUOBWmPGa/g9yUxaqRdh0HysM0I+f6qbc8exRPpnzrHVlgYrhvuh/N0f2Ah
+	h7yizXqHI5KCCCSXvHDF5HNZjUC0IheGFuYj1EmAEQkqx6+Z5HFUVo6pBXQu6iOaoavy
+	0EJIK/f5cKQOEESI7C8QaMzXcrwdh6Dq8ppPXf3RmaLU+2gD2+XYaAwE+gPBSzqGnV/i
+	S9dIEIacyP3f9EtYV1DYWQKm7ed0pXJA2R5lVA0Knh2pAaXSeYZIzBqxLyH6l/rrupVQ
+	TlthTf3rrA/LwpHbkHr2HVmMGo0In50HzFjrsCWtm1S4s3uck5VNmhH5qU7+WkKpmM/3
+	+1kg==
+X-Gm-Message-State: APjAAAVz+Q2ejMyi9wJUtDmNPIGdvuQlYSu/9zA5hog4skrNOYmPpDsS
+	Y3i73b84lU8q7SgYqaqVohKpA8vYFcugzf+gqX4=
+X-Google-Smtp-Source: APXvYqwJfzMHwlI4+0O+E6iNVwpKIDkozRV8hpUUftmYsdbdvzvPRKj8JTbVAwHWuRdnb0yvm640xqafH3jaVS5h0HE=
+X-Received: by 2002:a0c:f513:: with SMTP id j19mr65721156qvm.206.1578022744378;
+	Thu, 02 Jan 2020 19:39:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20200102133724.1383-1-sno@netbsd.org>
-In-Reply-To: <20200102133724.1383-1-sno@netbsd.org>
+References: <cover.1578019547.git.akuster808@gmail.com>
+In-Reply-To: <cover.1578019547.git.akuster808@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 2 Jan 2020 19:28:56 -0800
-Message-ID: <CAMKF1spL-KgeibPDCjK-bJsyPD5LkWxujbiA9Eo2NsrjS-UiUg@mail.gmail.com>
-To: Jens Rehsack <sno@netbsd.org>
+Date: Thu, 2 Jan 2020 19:38:38 -0800
+Message-ID: <CAMKF1spJeTLGUwerZNSjk3W821puo=-wsGaDCUd6B4q6PL5uvw@mail.gmail.com>
+To: Armin Kuster <akuster808@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-perl][PATCH] libconfig-autoconf-perl: add recipe
+Subject: Re: [zeus 00/17] Patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,78 +53,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jan 2020 03:29:22 -0000
+X-List-Received-Date: Fri, 03 Jan 2020 03:39:04 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Jan 2, 2020 at 5:37 AM Jens Rehsack <sno@netbsd.org> wrote:
+On Thu, Jan 2, 2020 at 6:49 PM Armin Kuster <akuster808@gmail.com> wrote:
 >
-> Introduce Config::Autoconf module to meta-perl which will allow some
-> probes can be run without leaving perl5 context.
+> Please have comments back by Saturday.
 >
-> Signed-off-by: Jens Rehsack <sno@netbsd.org>
-> ---
->  .../libconfig-autoconf-perl_0.317.bb          | 41 +++++++++++++++++++
->  1 file changed, 41 insertions(+)
->  create mode 100644 meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.317.bb
+> The following changes since commit fbe4cf8d56eea586c096621e7c913b24bd99c9c6:
 >
-> diff --git a/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.317.bb b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.317.bb
-> new file mode 100644
-> index 000000000..62983764f
-> --- /dev/null
-> +++ b/meta-perl/recipes-perl/libconfig/libconfig-autoconf-perl_0.317.bb
-> @@ -0,0 +1,41 @@
-> +# Copyright (C) 2020 Jens Rehsack <sno@netbsd.org>
-> +# Released under the MIT license (see COPYING.MIT for the terms)
-> +
-> +SUMMARY = "A module to implement some of AutoConf macros in pure perl"
-> +DESCRIPTION = "Config::AutoConf is intended to provide the same opportunities to Perl \
-> +developers as GNU Autoconf <http://www.gnu.org/software/autoconf/> does for \
-> +Shell developers."
-> +
-> +HOMEPAGE=       "https://metacpan.org/release/Config-AutoConf"
-> +
-> +SECTION = "libs"
-> +LICENSE = "Artistic-1.0 | GPL-1.0+"
-> +
-> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Artistic-1.0;md5=cda03bbdc3c1951996392b872397b798 \
-> +file://${COMMON_LICENSE_DIR}/GPL-1.0;md5=e9e36a9de734199567a4d769498f743d"
-> +
-> +SRC_URI = "${CPAN_MIRROR}/authors/id/R/RE/REHSACK/Config-AutoConf-0.317.tar.gz"
-> +
-> +SRC_URI[md5sum] = "29f87fc7803f1725f6daafcf416089ce"
-> +SRC_URI[sha256sum] = "01e4b22d2fecb7cfd3cc1f4dabe95cd137cf249cc5e38184f88556e5c98a9ce1"
-> +RDEPENDS_${PN} += "libcapture-tiny-perl"
-> +RDEPENDS_${PN} += "perl-module-base"
-> +RDEPENDS_${PN} += "perl-module-carp"
-> +RDEPENDS_${PN} += "perl-module-config"
-> +RDEPENDS_${PN} += "perl-module-constant"
-> +RDEPENDS_${PN} += "perl-module-file-basename"
-> +RDEPENDS_${PN} += "perl-module-file-spec"
-> +RDEPENDS_${PN} += "perl-module-file-temp"
-> +RDEPENDS_${PN} += "perl-module-extutils-cbuilder"
-> +RDEPENDS_${PN} += "perl-module-extutils-cbuilder-unix"
+>   gtkwave: add the libtirpc dependence and config (2019-12-17 21:57:51 -0800)
+>
+> are available in the Git repository at:
+>
+>   https://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
+>   http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
+>
+> Adrian Bunk (3):
+>   networkmanager: Upgrade 1.18.2 -> 1.18.4
+>   gpsd: Backport a memory leak fix
+>   libqmi: Upgrade 1.24.0 -> 1.24.2
+>
+> Changqing Li (1):
+>   xfce-dusk-gtk3: correct invalid SRC_URI
+>
+> Hongxu Jia (1):
+>   python-more-itertools: downgrade 7.2.0 -> 5.0.0
+>
+> Kai Kang (1):
+>   fltk: fix build error when enable package config examples
+>
+> Khem Raj (9):
+>   grpc: Define libdir and cmakedir in terms of multilib
+>   tinyalsa: fix installation libdir path to match multilibs
+>   libqb: Add --enable-nosection-fallback with mips64/clang
+>   x11vnc: Fix build for 32bit arches with 64bit time_t
+>   evtest: Fix build for 32bit arches with 64bit time_t
+>   lirc: Fix build for 32bit arches with 64bit time_t
+>   utouch-evemu,utouch-frame: Fix build for 32bit arches with 64bit
+>     time_t
+>   directfb: Fix build for 32bit arches with 64bit time_t
+>   ruli: Fix install step and build samples too
+>
 
-perl-module-extutils-cbuilder-unix seems to be not provided by anyone,
-I am seeing
+64bit time_t fixes are not necessary but are not hurtful either, since the
+C libraries in zeus do not have the needed bits to enable 64bit time_t
+so unless someone else has issues with it, I am fine to bring them to zeus
 
-18:24:25 WARNING: libconfig-autoconf-perl-0.317-r0 do_package_qa: QA
-Issue: libconfig-autoconf-perl rdepends on
-perl-module-extutils-cbuilder-unix, but it isn't a build dependency?
-[build-deps]
-
-perhaps you need to bring this recipe along, from meta-cpan
-
-> +RDEPENDS_${PN} += "perl-module-scalar-util"
-> +RDEPENDS_${PN} += "perl-module-strict"
-> +RDEPENDS_${PN} += "perl-module-text-parsewords"
-> +RDEPENDS_${PN} += "perl-module-warnings"
-> +RRECOMMENDS_${PN} += "libfile-slurper-perl"
-> +
-> +S = "${WORKDIR}/Config-AutoConf-${PV}"
-> +
-> +inherit cpan ptest-perl allarch
-> +
-> +BBCLASSEXTEND = "native nativesdk"
+> Stefan Agner (1):
+>   networkmanager: do not deploy unnecessary udev rule file
+>
+> zhangxiao (1):
+>   syslog-ng: Fix multilib header conflict - syslog-ng-config.h
+>
+>  .../recipes-multimedia/tinyalsa/tinyalsa.bb   |   4 +-
+>  ...L_-path-instead-of-hardcoding-bin-li.patch |  46 +++++
+>  ...ger_1.18.2.bb => networkmanager_1.18.4.bb} |   9 +-
+>  .../recipes-devtools/grpc/grpc_1.24.1.bb      |   4 +-
+>  ...-Fix-build-with-format-string-checks.patch |  29 ++-
+>  ...ake-space-for-flags-from-environment.patch |  95 +++++++++
+>  ...v-Mark-prev_addr_list_size-as-unused.patch |  35 ++++
+>  .../recipes-support/ruli/files/Makefile.patch | 122 ------------
+>  .../recipes-support/ruli/ruli_0.36.bb         |  23 ++-
+>  .../{libqmi_1.24.0.bb => libqmi_1.24.2.bb}    |   4 +-
+>  ...ld-on-32bit-arches-with-64bit-time_t.patch |  40 ++++
+>  .../recipes-connectivity/lirc/lirc_0.9.4d.bb  |   1 +
+>  meta-oe/recipes-extended/libqb/libqb_1.0.5.bb |   6 +-
+>  .../recipes-graphics/directfb/directfb.inc    |   3 +-
+>  ...ld-on-32bit-arches-with-64bit-time_t.patch | 139 +++++++++++++
+>  ...ld-on-32bit-arches-with-64bit-time_t.patch | 111 +++++++++++
+>  .../recipes-graphics/x11vnc/x11vnc_0.9.16.bb  |   5 +-
+>  .../0001-gps_shm_close-Free-privdata.patch    |  37 ++++
+>  meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb  |   1 +
+>  meta-oe/recipes-support/fltk/fltk.bb          |   7 +-
+>  ...-when-enable-package-config-examples.patch | 182 ++++++++++++++++++
+>  .../recipes-support/syslog-ng/syslog-ng.inc   |   4 +-
+>  ...ld-on-32bit-arches-with-64bit-time_t.patch |  76 ++++++++
+>  .../utouch/utouch-evemu_git.bb                |   4 +-
+>  ...ld-on-32bit-arches-with-64bit-time_t.patch |  41 ++++
+>  ...tat.h-for-fixing-build-issue-on-musl.patch |   0
+>  .../remove-man-page-creation.patch            |   0
+>  .../utouch/utouch-frame_git.bb                |   1 +
+>  ...ld-on-32bit-arches-with-64bit-time_t.patch |  41 ++++
+>  meta-oe/recipes-test/evtest/evtest_1.34.bb    |   6 +-
+>  .../python/python-more-itertools.inc          |   3 -
+>  .../python/python-more-itertools_5.0.0.bb     |   7 +
+>  .../python/python-more-itertools_7.2.0.bb     |   2 -
+>  .../python/python3-more-itertools_7.2.0.bb    |   3 +
+>  .../xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb      |   2 +-
+>  35 files changed, 935 insertions(+), 158 deletions(-)
+>  create mode 100644 meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa/0001-Use-CMAKE_INSTALL_-path-instead-of-hardcoding-bin-li.patch
+>  rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.18.2.bb => networkmanager_1.18.4.bb} (94%)
+>  create mode 100644 meta-networking/recipes-support/ruli/files/0001-Make-space-for-flags-from-environment.patch
+>  create mode 100644 meta-networking/recipes-support/ruli/files/0001-ruli_srv-Mark-prev_addr_list_size-as-unused.patch
+>  delete mode 100644 meta-networking/recipes-support/ruli/files/Makefile.patch
+>  rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.24.0.bb => libqmi_1.24.2.bb} (85%)
+>  create mode 100644 meta-oe/recipes-connectivity/lirc/lirc/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+>  create mode 100644 meta-oe/recipes-graphics/directfb/directfb/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+>  create mode 100644 meta-oe/recipes-graphics/x11vnc/files/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+>  create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+>  create mode 100644 meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch
+>  create mode 100644 meta-oe/recipes-support/utouch/utouch-evemu/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+>  create mode 100644 meta-oe/recipes-support/utouch/utouch-frame/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+>  rename meta-oe/recipes-support/utouch/{files => utouch-frame}/0001-include-sys-stat.h-for-fixing-build-issue-on-musl.patch (100%)
+>  rename meta-oe/recipes-support/utouch/{files => utouch-frame}/remove-man-page-creation.patch (100%)
+>  create mode 100644 meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+>  create mode 100644 meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
+>  delete mode 100644 meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
+>
 > --
 > 2.17.1
 >
