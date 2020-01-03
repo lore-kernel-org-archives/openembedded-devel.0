@@ -1,35 +1,37 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 31E8B7FBAC
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id F10616010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2020 08:30:38 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,390,1571673600"; d="scan'208";a="81266698"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 03 Jan 2020 16:30:39 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2A122406AB15
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2020 16:21:41 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Fri, 3 Jan 2020 16:30:35 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 3 Jan 2020 16:30:39 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 3 Jan 2020 04:57:32 -0800
-Message-ID: <1578056252-94410-4-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1578056252-94410-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1578056252-94410-1-git-send-email-wangmy@cn.fujitsu.com>
+	Fri,  3 Jan 2020 08:49:43 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47pz9f2yptzRd;
+	Fri,  3 Jan 2020 09:49:42 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1578041382;
+	bh=0pKbpKNCqcsB00ZD99ns/5TYqcYjvCODdKknHa21HqQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=QvyVmQ5i5v/4t5uZAnwBa0pq570ljyC2CuemdAzALjJJYfx6BojbN+H5KZQUF0z/+
+	Nxe+iRESQJ/VYX6MCXkPCK8uAEitDcBlLs3L4gbSjhb1orXtJxvGjR9vytfI+x7Mf1
+	kYnmP2fIqD18tYBQ2wXCn4yveQJUGKcIv9KS0HmjNETxG4FbLTEdkC1DJivTbHjuG0
+	pfsIWjnARex4NxSPl/x0JGvD+E/LxE4MWxm55xnyzMCcK0KwBYAOd/QMoClZCUvYTZ
+	7dGY0ceDcRGGjNmSkgxFTcuAYXmyuwPZ8OzGEM6yFiOWoWktyuOZwhsbOdVs7XlOtA
+	gl/ZbCH26PMd/A5lWduvhOCfsZfz18p0jbPUOVsNFo6dBCxs1UCm0ACRKiotLSHtKc
+	gS7aVSqnjBKzL8G274l50kZ+P6h1wJkmgap/is2iF8PGLvDfD39NOZF10PK6oyLjNk
+	jkSl7Y39LyODe6gDzHsq5ceBpW0I/oCDr6PnRcW7OeLoZo4htqx0o6vi2iLHOGRMhx
+	LrijwD6E7By2yfsyGrM+VcHszh83IlD1PUpZrIo6fFBafSzks7F5JVbVs74olcw7KX
+	2vbzBWF4yLVOv6xGpEzLpXnsAjsRQ+pvrLNUWYZPzQPODP+i1SaHd1k+W2sL10+Cf1
+	4WU7ENVExRfaVJ/CsGVf7aTY=
+Date: Fri, 3 Jan 2020 10:49:40 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20200103084940.GB19452@localhost>
+References: <cover.1578019547.git.akuster808@gmail.com>
+	<CAMKF1spJeTLGUwerZNSjk3W821puo=-wsGaDCUd6B4q6PL5uvw@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 2A122406AB15.A0202
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python][PATCH] python-pyyaml: upgrade 5.1.2 -> 5.2
+In-Reply-To: <CAMKF1spJeTLGUwerZNSjk3W821puo=-wsGaDCUd6B4q6PL5uvw@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [zeus 00/17] Patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,44 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jan 2020 08:30:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 03 Jan 2020 08:49:44 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- meta-python/recipes-devtools/python/python-pyyaml.inc         | 4 ++--
- .../python/{python-pyyaml_5.1.2.bb => python-pyyaml_5.2.bb}   | 0
- .../python/{python3-pyyaml_5.1.2.bb => python3-pyyaml_5.2.bb} | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyyaml_5.1.2.bb => python-pyyaml_5.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyyaml_5.1.2.bb => python3-pyyaml_5.2.bb} (100%)
+On Thu, Jan 02, 2020 at 07:38:38PM -0800, Khem Raj wrote:
+> On Thu, Jan 2, 2020 at 6:49 PM Armin Kuster <akuster808@gmail.com> wrote:
+>...
+> > Khem Raj (9):
+> >   grpc: Define libdir and cmakedir in terms of multilib
+> >   tinyalsa: fix installation libdir path to match multilibs
+> >   libqb: Add --enable-nosection-fallback with mips64/clang
+> >   x11vnc: Fix build for 32bit arches with 64bit time_t
+> >   evtest: Fix build for 32bit arches with 64bit time_t
+> >   lirc: Fix build for 32bit arches with 64bit time_t
+> >   utouch-evemu,utouch-frame: Fix build for 32bit arches with 64bit
+> >     time_t
+> >   directfb: Fix build for 32bit arches with 64bit time_t
+> >   ruli: Fix install step and build samples too
+> >
+> 
+> 64bit time_t fixes are not necessary but are not hurtful either, since the
+> C libraries in zeus do not have the needed bits to enable 64bit time_t
+> so unless someone else has issues with it, I am fine to bring them to zeus
+>...
 
-diff --git a/meta-python/recipes-devtools/python/python-pyyaml.inc b/meta-python/recipes-devtools/python/python-pyyaml.inc
-index e9ae85eb0..48ebf73c9 100644
---- a/meta-python/recipes-devtools/python/python-pyyaml.inc
-+++ b/meta-python/recipes-devtools/python/python-pyyaml.inc
-@@ -8,8 +8,8 @@ DEPENDS = "libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}"
- PYPI_PACKAGE = "PyYAML"
- inherit pypi
- 
--SRC_URI[md5sum] = "20f87ab421b0271dbf371dc5c1cddb5c"
--SRC_URI[sha256sum] = "01adf0b6c6f61bd11af6e10ca52b7d4057dd0be0343eb9283c878cf3af56aee4"
-+SRC_URI[md5sum] = "d7e45e932d6e6649ac574a1ed77b4269"
-+SRC_URI[sha256sum] = "c0ee8eca2c582d29c3c2ec6e2c4f703d1b7f1fb10bc72317355a746057e7346c"
- 
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-datetime \
-diff --git a/meta-python/recipes-devtools/python/python-pyyaml_5.1.2.bb b/meta-python/recipes-devtools/python/python-pyyaml_5.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyyaml_5.1.2.bb
-rename to meta-python/recipes-devtools/python/python-pyyaml_5.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.1.2.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyyaml_5.1.2.bb
-rename to meta-python/recipes-devtools/python/python3-pyyaml_5.2.bb
--- 
-2.17.1
+There are zero benefits and a non-zero regression risk if backporting them,
+I would recommend against adding them to zeus.
 
-
-
+cu
+Adrian
 
