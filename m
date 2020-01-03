@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 200837F95C
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C02D7F945
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2020 02:49:36 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id q127so22799487pga.4
+	Fri,  3 Jan 2020 02:49:37 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id q8so22913606pfh.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jan 2020 18:49:38 -0800 (PST)
+	Thu, 02 Jan 2020 18:49:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=GjcbhPo2NV21z/XYeAFdf97yjK3dBFx51hh5N9SdLLg=;
-	b=qbhzjxmDHZOublzmtwWzDn2uS6QqnVNV86OEEvk/x1RJvV5cwqig0VveIbWs1XdUet
-	sUZ+ahbJ4qZKvPtGgrHvAVMO6GozU8t0mlylHawIEcAWSRpE8c1hE832MYzxmh+RxUqV
-	3EM6japfPECNsteTrF9MpkN3Tz/wrnKmm6zREOHBVOYsQDgU5Z+4lp+fV2bZOAjhDG/3
-	I5iv3pq9nNJIEquhXdMJvdi1211mzsDacBjyiLkeIevnF+WAUrwp9DnlClCqDqHmjCOF
-	0PfSz2XU4bfkPkEUkZdrLO/X7HtipNP6FS7pnCxFvMaoaqkGavzg9cW0fD2yi1rXsPHm
-	up7w==
+	bh=Kx/LS6dWu6q8k2j0ZN+bJw2bVvLnBzY3v9W4U9id8JY=;
+	b=B9S8pT2eGOqUy0KnYRqHY2apFO7i5earkjN6lLhFOIeb2vfYWu4AxZo+AHSwYfxyGO
+	/W8puluiati6hyXKINvgINyKawk0WuwruEY6HWQqo+1bek050kqkaALOtU5tonTvFYzu
+	1PVqnWc4M8YgaOXWxsfhO29paxLfVk1wxvDuCkmPXa2virukjRTRXb7ZVpw8hYLl3pU6
+	zDafuP9tG86CFjhsxVvV+mAKqp2I2wocYeNL8n9/trBX1JGKTDR7V2Yjg2MI3MZjHDE+
+	OvRdRmXZNMmXCJQzA8GBB8Xr4/px+4Vwcd+B/Yv4wOJF9hHTdNfzQpFeeofwmwCO+12Y
+	tNGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=GjcbhPo2NV21z/XYeAFdf97yjK3dBFx51hh5N9SdLLg=;
-	b=KnGS75CBtDKKMCrBs/Rb519MqZ9gjsFwSP5DpOiNT+IekloVHQHDPlOj0YBjX9q8mc
-	4HDOoE3gLCT8Za7vF6te/b31bY5KoX3QPZ9AFWDKesWfemxhIkfyQNy6uxbh20X8+ov/
-	zHCzOcK1DU/rkjyrUdsMZNZH4NXQBROsyXRbCyRI+fp1616oVBqYdDx9ws5HYmnGqHJY
-	jaA4TgYRhB56YesihANS8QmlKGv/pzpUxRWERNqE6grFJnciDgG5Mpl1YU3smbMdaBeG
-	bsxGGFfdUkXPXRCtTL+tpmJu0huOm+csr4KuR/XmhG5Rcr2gmzQvR7Z1Y4/Szz/8fCxR
-	C8PQ==
-X-Gm-Message-State: APjAAAXTM0ZqC9GrifrcJLmNlamLpE6NAhz5rKHV+ihCcbV8QRxq5j9F
-	4AEj15Va/FbdZALqNLncuUO6N3cWdFI=
-X-Google-Smtp-Source: APXvYqyyvEfb1TwAr5KlDgSzQeWWbY+uZvantwuWmWH5PWGgQ5NfigPqMH3Pb2CCkows9M9Vgx8MYw==
-X-Received: by 2002:a63:338e:: with SMTP id z136mr94261458pgz.60.1578019777675;
-	Thu, 02 Jan 2020 18:49:37 -0800 (PST)
+	bh=Kx/LS6dWu6q8k2j0ZN+bJw2bVvLnBzY3v9W4U9id8JY=;
+	b=RFrJspJiHa/IYLnaUw+y7xQEEwfp+UlAtoB0bJstwqYrlXXVbPHLGAxkUqgw12vVfT
+	ZU3WPKcPBq3MgsRgd5fLhZR2X88uzUCSxd38pK18A1+SbCzAdlEIsNFg/plxmtAsgyvk
+	zNA+G3KZpNQvfC7cat4JzAZXTi5Em5F5jVyQBQ6cNPLg9q5SHP6eUvuhzdYscQhS0WvF
+	3iMGbG/FxjD5G+oEFLUGRrnbdu1HKq4s5NHcIg/TglpcPHP5gP8p2bIYE6qLHM0bOJzn
+	i/vlnnHTqI1PFbYVnWn+jNw/REJOzPoslFft8fw562WC2Re3nA/+4k7hpDCMnyMW/y2m
+	fXmA==
+X-Gm-Message-State: APjAAAUdZcCKq+GxqgM21St+DBhFCEnzYP3u8yd0HgtnEdbr0Y0jVkWr
+	J+ZejnaWOK5iXuubFe4VcQZELnyPFLM=
+X-Google-Smtp-Source: APXvYqyE2I2JalYBGl0twOZPvPfwFFwp8cuqFrnqmYusNYboL9q27u8TRieIhch3fycXr26EcXwXxw==
+X-Received: by 2002:a65:640e:: with SMTP id a14mr86235164pgv.402.1578019778432;
+	Thu, 02 Jan 2020 18:49:38 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:555:ddff:6770:148b])
 	by smtp.gmail.com with ESMTPSA id
-	p5sm61306640pga.69.2020.01.02.18.49.36
+	p5sm61306640pga.69.2020.01.02.18.49.37
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 02 Jan 2020 18:49:37 -0800 (PST)
+	Thu, 02 Jan 2020 18:49:38 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Jan 2020 18:49:04 -0800
-Message-Id: <36fa6edcc7523abe7aa7d0558288d1c969bb077e.1578019547.git.akuster808@gmail.com>
+Date: Thu,  2 Jan 2020 18:49:05 -0800
+Message-Id: <6da4df2ce8106c218bca07bc24c7b10b2d92746f.1578019547.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1578019547.git.akuster808@gmail.com>
 References: <cover.1578019547.git.akuster808@gmail.com>
-Subject: [zeus 07/17] x11vnc: Fix build for 32bit arches with 64bit time_t
+Subject: [zeus 08/17] evtest: Fix build for 32bit arches with 64bit time_t
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,23 +64,23 @@ X-List-Received-Date: Fri, 03 Jan 2020 02:49:37 -0000
 From: Khem Raj <raj.khem@gmail.com>
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit aa86b55286e74e5a6d779a14c526561a091cd21e)
+(cherry picked from commit 64f07ba8528cda14ad552e492dfd2e7f054fbb08)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...ld-on-32bit-arches-with-64bit-time_t.patch | 111 ++++++++++++++++++
- .../recipes-graphics/x11vnc/x11vnc_0.9.16.bb  |   5 +-
- 2 files changed, 114 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/x11vnc/files/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+ ...ld-on-32bit-arches-with-64bit-time_t.patch | 41 +++++++++++++++++++
+ meta-oe/recipes-test/evtest/evtest_1.34.bb    |  6 ++-
+ 2 files changed, 45 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
 
-diff --git a/meta-oe/recipes-graphics/x11vnc/files/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch b/meta-oe/recipes-graphics/x11vnc/files/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+diff --git a/meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch b/meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
 new file mode 100644
-index 00000000000..d44445fa9f5
+index 00000000000..706322d5653
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/x11vnc/files/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
-@@ -0,0 +1,111 @@
-+From 8ab672ccc67b64058cffac2cd19a0d3b75d5aa25 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+@@ -0,0 +1,41 @@
++From fa57c78c33d26084f85f1a6b4c29378631dc9395 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 30 Nov 2019 11:43:32 -0800
++Date: Sat, 30 Nov 2019 11:58:58 -0800
 +Subject: [PATCH] Fix build on 32bit arches with 64bit time_t
 +
 +time element is deprecated on new input_event structure in kernel's
@@ -88,123 +88,54 @@ index 00000000000..d44445fa9f5
 +
 +[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit?id=152194fe9c3f
 +
-+Upstream-Status: Submitted [https://github.com/LibVNC/x11vnc/pull/117]
++Upstream-Status: Submitted [https://gitlab.freedesktop.org/libevdev/evtest/merge_requests/6]
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/uinput.c | 28 ++++++++++++++++++++++++----
-+ 1 file changed, 24 insertions(+), 4 deletions(-)
++ evtest.c | 7 ++++++-
++ 1 file changed, 6 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/uinput.c b/src/uinput.c
-+index 28fbad3..343b7c5 100644
-+--- a/src/uinput.c
-++++ b/src/uinput.c
-+@@ -54,6 +54,11 @@ so, delete this exception statement from your version.
-+ #include <linux/input.h>
-+ #include <linux/uinput.h>
++diff --git a/evtest.c b/evtest.c
++index 548c203..93063cd 100644
++--- a/evtest.c
+++++ b/evtest.c
++@@ -61,6 +61,11 @@
++ #include <sys/types.h>
++ #include <unistd.h>
 + 
 ++#ifndef input_event_sec
 ++#define input_event_sec time.tv_sec
 ++#define input_event_usec time.tv_usec
 ++#endif
 ++
-+ #if !defined(EV_SYN) || !defined(SYN_REPORT)
-+ #undef UINPUT_OK
-+ #endif
-+@@ -710,6 +715,7 @@ void parse_uinput_str(char *in) {
-+ static void ptr_move(int dx, int dy) {
-+ #ifdef UINPUT_OK
-+ 	struct input_event ev;
-++	struct timeval tval;
-+ 	int d = direct_rel_fd < 0 ? fd : direct_rel_fd;
++ #define BITS_PER_LONG (sizeof(long) * 8)
++ #define NBITS(x) ((((x)-1)/BITS_PER_LONG)+1)
++ #define OFF(x)  ((x)%BITS_PER_LONG)
++@@ -1140,7 +1145,7 @@ static int print_events(int fd)
++ 			type = ev[i].type;
++ 			code = ev[i].code;
 + 
-+ 	if (injectable && strchr(injectable, 'M') == NULL) {
-+@@ -720,7 +726,9 @@ static void ptr_move(int dx, int dy) {
++-			printf("Event: time %ld.%06ld, ", ev[i].time.tv_sec, ev[i].time.tv_usec);
+++			printf("Event: time %ld.%06ld, ", ev[i].input_event_sec, ev[i].input_event_sec);
 + 
-+ 	if (db) fprintf(stderr, "ptr_move(%d, %d) fd=%d\n", dx, dy, d);
-+ 
-+-	gettimeofday(&ev.time, NULL);
-++	gettimeofday(&tval, NULL);
-++	ev.input_event_sec = tval.tv_sec;
-++	ev.input_event_usec = tval.tv_usec;
-+ 	ev.type = EV_REL;
-+ 	ev.code = REL_Y;
-+ 	ev.value = dy;
-+@@ -755,6 +763,7 @@ static void apply_tslib(int *x, int *y) {
-+ static void ptr_abs(int x, int y, int p) {
-+ #ifdef UINPUT_OK
-+ 	struct input_event ev;
-++	struct timeval tval;
-+ 	int x0, y0;
-+ 	int d = direct_abs_fd < 0 ? fd : direct_abs_fd;
-+ 
-+@@ -773,7 +782,9 @@ static void ptr_abs(int x, int y, int p) {
-+ 
-+ 	if (db) fprintf(stderr, "ptr_abs(%d, %d => %d %d, p=%d) fd=%d\n", x0, y0, x, y, p, d);
-+ 
-+-	gettimeofday(&ev.time, NULL);
-++	gettimeofday(&tval, NULL);
-++	ev.input_event_sec = tval.tv_sec;
-++	ev.input_event_usec = tval.tv_usec;
-+ 	ev.type = EV_ABS;
-+ 	ev.code = ABS_Y;
-+ 	ev.value = y;
-+@@ -950,6 +961,7 @@ if (0) {usleep(100*1000) ;}
-+ static void button_click(int down, int btn) {
-+ #ifdef UINPUT_OK
-+ 	struct input_event ev;
-++	struct timeval tval;
-+ 	int d = direct_btn_fd < 0 ? fd : direct_btn_fd;
-+ 
-+ 	if (injectable && strchr(injectable, 'B') == NULL) {
-+@@ -959,7 +971,12 @@ static void button_click(int down, int btn) {
-+ 	if (db) fprintf(stderr, "button_click: btn %d %s fd=%d\n", btn, down ? "down" : "up", d);
-+ 
-+ 	memset(&ev, 0, sizeof(ev));
-+-	gettimeofday(&ev.time, NULL);
-++	gettimeofday(&tval, NULL);
-++	gettimeofday(&tval, NULL);
-++	ev.input_event_sec = tval.tv_sec;
-++	ev.input_event_usec = tval.tv_usec;
-++	ev.input_event_sec = tval.tv_sec;
-++	ev.input_event_usec = tval.tv_usec;
-+ 	ev.type = EV_KEY;
-+ 	ev.value = down;
-+ 
-+@@ -1230,6 +1247,7 @@ void uinput_pointer_command(int mask, int x, int y, rfbClientPtr client) {
-+ void uinput_key_command(int down, int keysym, rfbClientPtr client) {
-+ #ifdef UINPUT_OK
-+ 	struct input_event ev;
-++	struct timeval tval;
-+ 	int scancode;
-+ 	allowed_input_t input;
-+ 	int d = direct_key_fd < 0 ? fd : direct_key_fd;
-+@@ -1253,7 +1271,9 @@ void uinput_key_command(int down, int keysym, rfbClientPtr client) {
-+ 	if (db) fprintf(stderr, "uinput_key_command: %d -> %d %s fd=%d\n", keysym, scancode, down ? "down" : "up", d);
-+ 
-+ 	memset(&ev, 0, sizeof(ev));
-+-	gettimeofday(&ev.time, NULL);
-++	gettimeofday(&tval, NULL);
-++	ev.input_event_sec = tval.tv_sec;
-++	ev.input_event_usec = tval.tv_usec;
-+ 	ev.type = EV_KEY;
-+ 	ev.code = (unsigned char) scancode;
-+ 	ev.value = down;
-diff --git a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
-index e4a0321357b..af01fb0fd84 100644
---- a/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
-+++ b/meta-oe/recipes-graphics/x11vnc/x11vnc_0.9.16.bb
-@@ -10,8 +10,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
- SRCREV = "4ca006fed80410bd9b061a1519bd5d9366bb0bc8"
- SRC_URI = "git://github.com/LibVNC/x11vnc \
-            file://starting-fix.patch \
--	   file://0001-misc-Makefile.am-don-t-install-Xdummy-when-configure.patch \
--"
-+           file://0001-misc-Makefile.am-don-t-install-Xdummy-when-configure.patch \
++ 			if (type == EV_SYN) {
++ 				if (code == SYN_MT_REPORT)
+diff --git a/meta-oe/recipes-test/evtest/evtest_1.34.bb b/meta-oe/recipes-test/evtest/evtest_1.34.bb
+index 3b6dc61408c..a3a23c89516 100644
+--- a/meta-oe/recipes-test/evtest/evtest_1.34.bb
++++ b/meta-oe/recipes-test/evtest/evtest_1.34.bb
+@@ -8,8 +8,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "libxml2"
+ 
+ SRCREV = "16e5104127a620686bdddc4a9ad62881134d6c69"
+-SRC_URI = "git://anongit.freedesktop.org/evtest;protocol=git \
+-           file://add_missing_limits_h_include.patch"
++SRC_URI = "git://gitlab.freedesktop.org/libevdev/evtest.git;protocol=https \
++           file://add_missing_limits_h_include.patch \
 +           file://0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch \
 +           "
+ 
  S = "${WORKDIR}/git"
  
- DEPENDS = "\
 -- 
 2.17.1
 
