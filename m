@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 81A567F95C
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+	[209.85.216.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 864197F965
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2020 02:49:33 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id x7so22778752pgl.11
+	Fri,  3 Jan 2020 02:49:34 +0000 (UTC)
+Received: by mail-pj1-f42.google.com with SMTP id a6so4036275pjh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Jan 2020 18:49:35 -0800 (PST)
+	Thu, 02 Jan 2020 18:49:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=H51H9lIdEkbzU2eTpu9llbfow7R0dBkPTVY42ZoNc9k=;
-	b=t3ZoDd6viiPs/qOopXHoYgSnn78zKGATWa5nR8TVFL6zM+UpCsNTPoFClLN9nI5W+Y
-	RTCDxgSNc6lEE/+GdZaF3tzu8tEjr40Gk39TUY2f1F7lTzKuQnCkM2WKsPWY/Wn36+em
-	A1ObaOEJmVVJVgguMrlkEzvgahptVUqFxmA8rFbsFyzq85IdIgXHFNV4EZdnZo0nSRhk
-	Zs8bMVxXLRYCBUUEreyc3k/orAKD6nkVE+KyaORGSQz4do11kuAo3FLDa2bAYxNk7iY+
-	SHrMPGzefBQnb6lDL0XIra8WfprObhm+vHT+Y9vr4B8Bm7RiejrkjcSckAtk4McpBejD
-	d3Vg==
+	bh=TJNPTFmvqzVAiO/gX54KshSm6OQOKVWqaZvz4lAtfUE=;
+	b=FMyRV8IiZz3rDX53spOax/xxNDfit4Fz7chTpvlaOK/A5oxgIyP6AO/l1Ockiq7H+c
+	g9mlEEeqSBJf1zpzKooF1xmghJp8uRIricEoE+T74e3X65Q/oSPbcbgLkOLReHDifeig
+	IinMPgddUsdyRjb/D/LUQ6tCSD+1w7BEuBK8Ct2uVm0GpzhSgBtXRPEu8l+smrPnCYww
+	i37b6ZtOGLDvM2aUMsKK7SxN6UJmabuqAQ1Pqzt/TnLkX9VS9KqYNEH6kpjtKshkgYCK
+	EjNDxCkctk9dzl3tun+WgkBZnEIRIY+/wK7/mid/bDwvZi/GcbbeIDU2P/i6Lt3s5SVY
+	Pnjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=H51H9lIdEkbzU2eTpu9llbfow7R0dBkPTVY42ZoNc9k=;
-	b=d1Nxb3Ofkjk4GLW1d9SqeEwYupWUzJwaHMbNqpw+Tdzibbcp0zWnUm6c0AmDj5wVoK
-	u4Uac8fqxLkqTpjfCq1bcll3QmyLAfXh3A02kOwBL/mkviy+0RCE3dEsinnnNflO35VO
-	166Z7mTJ3UyKx7mPcLf87QqUubPAeliAeADNLkrcOMJ9gFI1oQfWKEpizG98zAP84RdO
-	vCYWZQ/EyxwrKwonJesXP0kQpPRzSenl+RXNgC9lJFBMikXHxh5J52DG51P1hoCLoRoe
-	DfA2pWAHFOoOl4q5OR8npe1wxW5UttV/YGMSZVAf2xgQbk2GqFMjehb4m7ZLkiqmt2br
-	e7UA==
-X-Gm-Message-State: APjAAAXTgYEMJIpBRCjGp5lnHivG28JR+HJfOCVUHV6xrNyonaO/A5C+
-	gH9LuQSaYPMNGhkNSKux52Fs6uW5ws4=
-X-Google-Smtp-Source: APXvYqxu+dc+NoB8GtOIbLlKdBc4/q9Yrpf+k5SoS5NRVU9cVESX7K+Bsc72RxZPE/m5N9Fc27D22Q==
-X-Received: by 2002:a63:26c4:: with SMTP id
-	m187mr94511749pgm.410.1578019774687; 
-	Thu, 02 Jan 2020 18:49:34 -0800 (PST)
+	bh=TJNPTFmvqzVAiO/gX54KshSm6OQOKVWqaZvz4lAtfUE=;
+	b=g2BxyMWaFP7yOeWvx8PHJrRZZWa3VH0NTAP9p2xB9CA1vkJRFVdcfNNP8puURlbIUI
+	Z3M0DTt07JYeS788ua49KAmySth3KIaOoeJLI9v7q96sWi3MOvDcraOShh2lMVsanh4s
+	oqRHQM1FV5DQnU3uhUjyCJRMS/+F2MtwEUaVuLAPtQ6B5ay7zH1eZsTWRB9LIbJRW2Ww
+	ThwrsiqDJE4hi2BNp543OkijQHwgUnoCVFYrMbtu4FaQ33sjq98wkeXYMdYPabe/mg7d
+	yUr3r70Ypyjj7RXmilq6cfoauFx6fgbWdDiXYHLTqDZtuTqRisB5/7XCe06UNjURkM9b
+	BtUg==
+X-Gm-Message-State: APjAAAVVyAs1+SYARZaC7oiS0r5ITFVeZ1WmPqAwD7eZQYY9yV9CRY25
+	UztvnabtEzg6KAQDA36Hfuh5XFJrrXQ=
+X-Google-Smtp-Source: APXvYqwu+k75BIZHsTZwSdd7/M0JvxPTJxFjwXMlKY6m5J+hwOHaiTXr82LFLEJ90JHoukuKf+Tkaw==
+X-Received: by 2002:a17:902:b68c:: with SMTP id
+	c12mr54973931pls.160.1578019775482; 
+	Thu, 02 Jan 2020 18:49:35 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:555:ddff:6770:148b])
 	by smtp.gmail.com with ESMTPSA id
 	p5sm61306640pga.69.2020.01.02.18.49.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 02 Jan 2020 18:49:34 -0800 (PST)
+	Thu, 02 Jan 2020 18:49:35 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Jan 2020 18:49:00 -0800
-Message-Id: <72be883fde3b707ab9bd20039c61c1296933fb28.1578019547.git.akuster808@gmail.com>
+Date: Thu,  2 Jan 2020 18:49:01 -0800
+Message-Id: <9050733437c07fb447c61136f30a66ccce5848e4.1578019547.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1578019547.git.akuster808@gmail.com>
 References: <cover.1578019547.git.akuster808@gmail.com>
-Subject: [zeus 03/17] libqb: Add --enable-nosection-fallback with mips64/clang
+Subject: [zeus 04/17] xfce-dusk-gtk3: correct invalid SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,37 +62,36 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 03 Jan 2020 02:49:34 -0000
 
-From: Khem Raj <raj.khem@gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-Same issue happens with clang/mips64 so extend the gold fix to cover for
-this case
+original SRC_URI is invalid now, and current upstream address
+is such a long address(see below), and this package has not been
+updated since 2011, so use http://sources.openembedded.org/.
 
+https://dllb2.pling.com/api/files/download/id/1460766718/s/938c137c59bf7f1a6a6cc100c940feafd6904dc6478d5f96d09f3a631f9708e559055433db9e97654b196881fecbae445f094347befba0a5e477e961a73a7434/t/1576230019/c/a3f98e1fd43cfd072d46d7bedf6646191f5a020476297e0da678723a0078b9b8d284736bb34c4e876389b4e518777dc6a23c8666bb6bd42ceb1b893c9c264cce/lt/download/141404-xfce_dusk_gtk3-1_3.tar.gz
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Acked-by: Kai Kang <kai.kang@windriver.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit dd69fafd7f2c51fb69df66dbeae7f5a4b092580c)
+(cherry picked from commit f5ec79e25957a9231ba52fd09825ab8da68dc5e7)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-extended/libqb/libqb_1.0.5.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb b/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
-index b205186e0b2..82503a168b5 100644
---- a/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
-+++ b/meta-oe/recipes-extended/libqb/libqb_1.0.5.bb
-@@ -22,9 +22,13 @@ S = "${WORKDIR}/git"
- # WORKDIR/libqb/1.0.3+gitAUTOINC+c235284b5f-r0/recipe-sysroot-native/usr/bin/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/8.1.0/ld: error: conftest.ld: SECTIONS seen after other input files; try -T/--script
- # WORKDIR/libqb/1.0.3+gitAUTOINC+c235284b5f-r0/recipe-sysroot-native/usr/bin/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/8.1.0/ld: internal error in write_sections, at ../../gold/reloc.cc:791
- # collect2: error: ld returned 1 exit status
--EXTRA_OECONF_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' --enable-nosection-fallback', '', d)}"
-+NOSECTION_FALLBACK = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', '--enable-nosection-fallback', '', d)}"
-+NOSECTION_FALLBACK_toolchain-clang_mips64 = "--enable-nosection-fallback"
-+
-+EXTRA_OECONF += "${NOSECTION_FALLBACK}"
+diff --git a/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb b/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
+index b05c7485295..89dab4923f4 100644
+--- a/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
++++ b/meta-xfce/recipes-art/xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f0e2cd40e05189ec81232da84bd6e1a"
  
- CFLAGS += "-pthread -D_REENTRANT"
-+
- do_configure_prepend() {
-     ( cd ${S}
-     ${S}/autogen.sh )
+ inherit allarch
+ 
+-SRC_URI = "http://xfce-look.org/CONTENT/content-files/141404-xfce_dusk_gtk3-1_3.tar.gz;subdir=${BPN}-${PV}"
++SRC_URI = "http://sources.openembedded.org/141404-xfce_dusk_gtk3-1_3.tar.gz;subdir=${BPN}-${PV}"
+ SRC_URI[md5sum] = "b3ad37ad8173b14ec090e60a80e65d8f"
+ SRC_URI[sha256sum] = "bfa8a88607d1a1da5bd0b9e4e075767c54400a3c5a0fae88b619ed71532f30b4"
+ 
 -- 
 2.17.1
 
