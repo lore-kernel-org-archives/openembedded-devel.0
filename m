@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
-	[209.85.215.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F5407F266
+Received: from mail-pf1-f182.google.com (mail-pf1-f182.google.com
+	[209.85.210.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 74F8F7F948
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2020 02:49:32 +0000 (UTC)
-Received: by mail-pg1-f182.google.com with SMTP id 6so22793498pgk.0
+	Fri,  3 Jan 2020 02:49:31 +0000 (UTC)
+Received: by mail-pf1-f182.google.com with SMTP id z16so22926798pfk.0
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 02 Jan 2020 18:49:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=DV941sDWx3/pzUGNQtKao6pF1IH0UxI1Vc5CzwvwmPA=;
-	b=lkMuZcs6OmiUiY1I59MDV9ewEAYyEod05LrUSdTkMcXeaqYuN7ljLnYFYjcDrIXPeB
-	edwBU6UffGOXqb2HKfnWWyCK9QZqjNwSwvD1DzwYySX6xMwJw0q+L49z5tlhcCKi0r6N
-	xcW69fDfakHrDKDPhYXiaFG5MiphNJWVFzio0Yy4k6pPcmKFvFO7RWPpS3Ux9/9akpyy
-	NoGLgAOSAtkxbKbB2vNRspmCWiVnZvwdtK1LioOvrwz7ubwMm65Hhm5SVTzmp5FqlvC3
-	3bQWPTjK2vJIyp4PWYFNwD5PaW8dEXhy1gnapwB7dexXWcju5PjyLkNkg3GWx06RjRQR
-	OqYA==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=S8oPUNYnaVgr9aN+FxLdeNG9K4giTUy9FbREMkStlfU=;
+	b=RXnQrYy2Gmx/q5B72TYeknPe/jHm363nA4LSVK2+cAQr4+E8k+G1YQQw72PetsjQF7
+	pLrYAYBF5W3+Vd93xpmHlebitBqR329LD1J1MNPzlwMTUNdhk3q5GVIxfPY2z+KjzsyJ
+	uZdgIs0Tu/oc/Emx57NO7LpxJJE5OHv1zel9u5XvhIcAxWKVUD1ssND/F87RhbWG68fF
+	0CyKvEa6tZtoFW9aQDLqN4CTrI0n99T4Roa4QmSaTKqjNekqeY6+avi9NuPSBEn1dVZZ
+	uZ14pmloDoR2Mer2clBPYnJuTXb/CJoxhE3BSZBUkuR3nixWR/BQ13/5CwT/pLrOme3Z
+	V6mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=DV941sDWx3/pzUGNQtKao6pF1IH0UxI1Vc5CzwvwmPA=;
-	b=hQiR09sp459U9W6s/smELTibSgN82nmnOu3Ifr3brzXTHll/z1U+WeQs/TV7NnEBlB
-	hlHIlLX65hes/flkaL+hE6v1EhWLTGDh3hzz8g9l0Mi1MCRuQolBFWK50XVz97zwJExO
-	1CC89LZvnsiIEKyAvXw2ihV749Meuu3eT9m4fmONUjplqpRz/bNWicZbClK7XBppWawy
-	QZT1GNo3ETOR9SNiU2/35qKCCBXrEw7fOHcZ5QD0vE2x//h1Z/hBa6758OuaJ+mTqX2g
-	FzcHxfDcnyI+y4XcGIZJFAaYGew3E7fbSVs/CZfY2n3XBeM5ZfYhDCbtWIJxMVPUYMUd
-	359Q==
-X-Gm-Message-State: APjAAAUKfUX0m+zqvhd1crHZ8gziNon78mWjdbz9kpVHgY91aTFGJ5oO
-	Eq4QxIG2J6ux2lVsqIXtMRcPBzKl9Ys=
-X-Google-Smtp-Source: APXvYqx9CxQ/HE5lPEb9nGmZakXx2OWOHw7bHrVSqZdqatLIZUqVn2yE9ACIFswMpgLdX0tSayK1ug==
-X-Received: by 2002:a62:ee11:: with SMTP id e17mr75071453pfi.48.1578019773319; 
-	Thu, 02 Jan 2020 18:49:33 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=S8oPUNYnaVgr9aN+FxLdeNG9K4giTUy9FbREMkStlfU=;
+	b=We4CeaAWFXWy1Ikg4bVwwN+ryUyPXP3CjMBQVrGP0R0RsgLdCLEikD8ea3XWp0Gcpm
+	VNQav35120gLnXSDxsUHQHrihL1Xb5c6h+8TqCM/VJPF+kIZ0bQvZVNfFZxXwF0MYHrr
+	i6Rt5gEFQZpUIv8HVG9zzGYKN3eEJN8Nur2f/kBqiQH9XuOWeeYJZRG7i66V2OmFIxKT
+	9HY+QLaIc9D6aHazq+AQoPx4kx1NrjxHLZ9F5nAQIn1ZXzIKk9tQ7hKvXX9JsrRPclKx
+	ErPHqCpC27eoSiqpUfsQcqz812s9NlaWGsvR2DHAgpz3og4HZWRjZIaqyaZm3P7RbeKn
+	yvSw==
+X-Gm-Message-State: APjAAAX6iz6+bxVQGIPkqOhZ/9xCnwavGPGK+8rreXGM8b0zJfrWGzGq
+	x2gH1G/EZm/ldHOrDJh2haAp3ta1uYU=
+X-Google-Smtp-Source: APXvYqzFRC5ORwAvdpeYecva5J63W/vZWg1Ayf2FePkG/KJ02dWPTMSAdgu4zUSsp1mVdc1u71MkMg==
+X-Received: by 2002:aa7:8e0e:: with SMTP id c14mr70202230pfr.95.1578019772660; 
+	Thu, 02 Jan 2020 18:49:32 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:555:ddff:6770:148b])
 	by smtp.gmail.com with ESMTPSA id
-	p5sm61306640pga.69.2020.01.02.18.49.32
+	p5sm61306640pga.69.2020.01.02.18.49.31
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
 	Thu, 02 Jan 2020 18:49:32 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Jan 2020 18:48:58 -0800
-Message-Id: <1a3b6600a6134430eb87cd7243f35a66634aba7d.1578019547.git.akuster808@gmail.com>
+Date: Thu,  2 Jan 2020 18:48:57 -0800
+Message-Id: <cover.1578019547.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1578019547.git.akuster808@gmail.com>
-References: <cover.1578019547.git.akuster808@gmail.com>
-Subject: [zeus 01/17] grpc: Define libdir and cmakedir in terms of multilib
+MIME-Version: 1.0
+Subject: [zeus 00/17] Patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,54 +60,107 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 03 Jan 2020 02:49:32 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Khem Raj <raj.khem@gmail.com>
+Please have comments back by Saturday.
 
-This helps in avoiding packaging errors seen with distros enabling
-multilib
+The following changes since commit fbe4cf8d56eea586c096621e7c913b24bd99c9c6:
 
-Fixes
+  gtkwave: add the libtirpc dependence and config (2019-12-17 21:57:51 -0800)
 
-ERROR: grpc-1.24.3-r0 do_package: QA Issue: grpc: Files/directories were installed but not shipped in any package:
-  /usr/lib/libgrpc++.so.1.24.3
-  ...
-  /usr/lib/cmake
-  /usr/lib/cmake/grpc
-  /usr/lib/cmake/grpc/gRPCConfigVersion.cmake
-  /usr/lib/cmake/grpc/gRPCConfig.cmake
-  /usr/lib/cmake/grpc/gRPCTargets-noconfig.cmake
-  /usr/lib/cmake/grpc/gRPCTargets.cmake
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or de
-lete them within do_install.
+are available in the Git repository at:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit e18d8c957034908f27350e6ffcae2a3d05a4387b)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
- meta-networking/recipes-devtools/grpc/grpc_1.24.1.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+  https://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
 
-diff --git a/meta-networking/recipes-devtools/grpc/grpc_1.24.1.bb b/meta-networking/recipes-devtools/grpc/grpc_1.24.1.bb
-index 5cfa3aa82e2..8d54dbeff81 100644
---- a/meta-networking/recipes-devtools/grpc/grpc_1.24.1.bb
-+++ b/meta-networking/recipes-devtools/grpc/grpc_1.24.1.bb
-@@ -36,6 +36,8 @@ EXTRA_OECMAKE = " \
-     -DgRPC_INSTALL=ON \
-     -DCMAKE_CROSSCOMPILING=ON \
-     -DBUILD_SHARED_LIBS=ON \
-+    -DgRPC_INSTALL_LIBDIR=${baselib} \
-+    -DgRPC_INSTALL_CMAKEDIR=${baselib}/cmake/${BPN} \
-     "
- 
- do_configure_prepend_mipsarch() {
-@@ -44,6 +46,6 @@ do_configure_prepend_mipsarch() {
- 
- BBCLASSEXTEND = "native nativesdk"
- 
--SYSROOT_DIRS_BLACKLIST_append_class-target = "${libdir}/cmake/grpc"
-+SYSROOT_DIRS_BLACKLIST_append_class-target = "${baselib}/cmake/grpc"
- 
- FILES_${PN}-dev += "${bindir}"
+Adrian Bunk (3):
+  networkmanager: Upgrade 1.18.2 -> 1.18.4
+  gpsd: Backport a memory leak fix
+  libqmi: Upgrade 1.24.0 -> 1.24.2
+
+Changqing Li (1):
+  xfce-dusk-gtk3: correct invalid SRC_URI
+
+Hongxu Jia (1):
+  python-more-itertools: downgrade 7.2.0 -> 5.0.0
+
+Kai Kang (1):
+  fltk: fix build error when enable package config examples
+
+Khem Raj (9):
+  grpc: Define libdir and cmakedir in terms of multilib
+  tinyalsa: fix installation libdir path to match multilibs
+  libqb: Add --enable-nosection-fallback with mips64/clang
+  x11vnc: Fix build for 32bit arches with 64bit time_t
+  evtest: Fix build for 32bit arches with 64bit time_t
+  lirc: Fix build for 32bit arches with 64bit time_t
+  utouch-evemu,utouch-frame: Fix build for 32bit arches with 64bit
+    time_t
+  directfb: Fix build for 32bit arches with 64bit time_t
+  ruli: Fix install step and build samples too
+
+Stefan Agner (1):
+  networkmanager: do not deploy unnecessary udev rule file
+
+zhangxiao (1):
+  syslog-ng: Fix multilib header conflict - syslog-ng-config.h
+
+ .../recipes-multimedia/tinyalsa/tinyalsa.bb   |   4 +-
+ ...L_-path-instead-of-hardcoding-bin-li.patch |  46 +++++
+ ...ger_1.18.2.bb => networkmanager_1.18.4.bb} |   9 +-
+ .../recipes-devtools/grpc/grpc_1.24.1.bb      |   4 +-
+ ...-Fix-build-with-format-string-checks.patch |  29 ++-
+ ...ake-space-for-flags-from-environment.patch |  95 +++++++++
+ ...v-Mark-prev_addr_list_size-as-unused.patch |  35 ++++
+ .../recipes-support/ruli/files/Makefile.patch | 122 ------------
+ .../recipes-support/ruli/ruli_0.36.bb         |  23 ++-
+ .../{libqmi_1.24.0.bb => libqmi_1.24.2.bb}    |   4 +-
+ ...ld-on-32bit-arches-with-64bit-time_t.patch |  40 ++++
+ .../recipes-connectivity/lirc/lirc_0.9.4d.bb  |   1 +
+ meta-oe/recipes-extended/libqb/libqb_1.0.5.bb |   6 +-
+ .../recipes-graphics/directfb/directfb.inc    |   3 +-
+ ...ld-on-32bit-arches-with-64bit-time_t.patch | 139 +++++++++++++
+ ...ld-on-32bit-arches-with-64bit-time_t.patch | 111 +++++++++++
+ .../recipes-graphics/x11vnc/x11vnc_0.9.16.bb  |   5 +-
+ .../0001-gps_shm_close-Free-privdata.patch    |  37 ++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb  |   1 +
+ meta-oe/recipes-support/fltk/fltk.bb          |   7 +-
+ ...-when-enable-package-config-examples.patch | 182 ++++++++++++++++++
+ .../recipes-support/syslog-ng/syslog-ng.inc   |   4 +-
+ ...ld-on-32bit-arches-with-64bit-time_t.patch |  76 ++++++++
+ .../utouch/utouch-evemu_git.bb                |   4 +-
+ ...ld-on-32bit-arches-with-64bit-time_t.patch |  41 ++++
+ ...tat.h-for-fixing-build-issue-on-musl.patch |   0
+ .../remove-man-page-creation.patch            |   0
+ .../utouch/utouch-frame_git.bb                |   1 +
+ ...ld-on-32bit-arches-with-64bit-time_t.patch |  41 ++++
+ meta-oe/recipes-test/evtest/evtest_1.34.bb    |   6 +-
+ .../python/python-more-itertools.inc          |   3 -
+ .../python/python-more-itertools_5.0.0.bb     |   7 +
+ .../python/python-more-itertools_7.2.0.bb     |   2 -
+ .../python/python3-more-itertools_7.2.0.bb    |   3 +
+ .../xfce-dusk-gtk3/xfce-dusk-gtk3_1.3.bb      |   2 +-
+ 35 files changed, 935 insertions(+), 158 deletions(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/tinyalsa/tinyalsa/0001-Use-CMAKE_INSTALL_-path-instead-of-hardcoding-bin-li.patch
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.18.2.bb => networkmanager_1.18.4.bb} (94%)
+ create mode 100644 meta-networking/recipes-support/ruli/files/0001-Make-space-for-flags-from-environment.patch
+ create mode 100644 meta-networking/recipes-support/ruli/files/0001-ruli_srv-Mark-prev_addr_list_size-as-unused.patch
+ delete mode 100644 meta-networking/recipes-support/ruli/files/Makefile.patch
+ rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.24.0.bb => libqmi_1.24.2.bb} (85%)
+ create mode 100644 meta-oe/recipes-connectivity/lirc/lirc/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+ create mode 100644 meta-oe/recipes-graphics/directfb/directfb/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+ create mode 100644 meta-oe/recipes-graphics/x11vnc/files/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+ create mode 100644 meta-oe/recipes-support/fltk/fltk/0004-Fix-build-error-when-enable-package-config-examples.patch
+ create mode 100644 meta-oe/recipes-support/utouch/utouch-evemu/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+ create mode 100644 meta-oe/recipes-support/utouch/utouch-frame/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+ rename meta-oe/recipes-support/utouch/{files => utouch-frame}/0001-include-sys-stat.h-for-fixing-build-issue-on-musl.patch (100%)
+ rename meta-oe/recipes-support/utouch/{files => utouch-frame}/remove-man-page-creation.patch (100%)
+ create mode 100644 meta-oe/recipes-test/evtest/evtest/0001-Fix-build-on-32bit-arches-with-64bit-time_t.patch
+ create mode 100644 meta-python/recipes-devtools/python/python-more-itertools_5.0.0.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python-more-itertools_7.2.0.bb
+
 -- 
 2.17.1
 
