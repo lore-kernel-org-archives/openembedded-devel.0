@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 98E587F95D
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 4967C7F9AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Jan 2020 02:49:42 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id l24so22801589pgk.2
+	Fri,  3 Jan 2020 02:49:43 +0000 (UTC)
+Received: by mail-pg1-f169.google.com with SMTP id k25so22780063pgt.7
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 02 Jan 2020 18:49:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=g0L4LKcqY0IeV1C4QeJKm8GbKbwTftmxFKxnzdI3rRE=;
-	b=FZAII182UEqn1rlzL3Eti71jmlH6ZAz3SB5Gp7fsh09Cpj+X8eec6njKMRhGjLygv2
-	J47Z9tgGTSNuwveL6ii8CGGdeODn7lEIAcDLdHvH17aJuoSUkwwh/4IN6UYU3zsyUPMJ
-	CPBaVY1AGfEdIAZpIOv9ZFi2sCK1Sl2wtVbDiX8gLDTUqBZtmfBTFewR9eYVKH3HSaUs
-	jlJx92+ItRVZKp3IPxBs5zTDjBJjK8dAuGd7gG+cqYGbqz24JA+xLXEUpK2np55Ry15o
-	Ah+Lt7GEOARK8FpSOA8xF7hMwwz+uVrL6o2ErQDR1PUeyTzDMkgVJ8kWBhlbSiqvOa1F
-	1WCg==
+	bh=qkKO+oPehmfwF4fs+EpF58snMtm2XLcD17MTf1L6uYM=;
+	b=CM2mS8CYJh7s1VJaD0Ng3roJm+xdAJes6sWRLO7cF2Le7bLAfp+5LITTx6igNZccWq
+	QKrQxXTke9bE1ff7kq3i/BW0XnKWeQjmCUm9SToxCZatI41zoak3NJzcJJsx90xoNWVC
+	qBpln/M9gwtroX+Hf7zJGNUDllMivVa0v//kVPAPOpkwG1M7K6x+L1ANJwhUB2xOaVQ7
+	EUCq7flBgNbI8VV7+M1o+LBnRMTaXpgXeIVVqRtum1QxZ8RdSrwhfsxwZk4VvrR0m7Og
+	c9G1WWO9n7w2tWCpSYVaXkoZ4iCR4ITfri7Mn0zbzPmZonC7ugG2Uui2RkvPPfGP/O38
+	dvCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=g0L4LKcqY0IeV1C4QeJKm8GbKbwTftmxFKxnzdI3rRE=;
-	b=bItBbmSA2G+a9kE6Tz2eVvHBb00U1dJOJAN3A2yUB91SFJ1YiiT3E6uwe/bIO5aEvx
-	GVcFhasB/x0MaPT503NJVOWmkvBvPF94F0V4tIRkXqR0gkPDKmKCFE4ny05kCG7L/+h4
-	9i2JczbejH3cMhGe6WQ1SMypGoR0l5Hngeh1ziKGFL2oWx9KjYtv98D3vzsxsd1Gry/f
-	JSiFfobrdDQQYSkzISdY822w61XNS32b5qiH8tumb/VyKwbNws7aFhl5B+RKNQelSjiV
-	7NcRl417rotBj2qZwdSQ7kPUydsQ2yeyIxdbtoJTUaYOs9jRQ+owvvz5KJ9c0ewOtA1M
-	EnzA==
-X-Gm-Message-State: APjAAAXfz1icqdXSSKJ3V1HlbK7Q2DmNSvRjGwbu4oIyBDqs2805PQbY
-	0SrRd9kH1RyYwdYRKW/+NtXTw2rNfA4=
-X-Google-Smtp-Source: APXvYqwUAjKzg4qftTb3YWjtvI94Rud+9l9qW6kqCiGFh+aHnNV0N5+RZw0iHdQCYX/oKLYLBGbFtw==
-X-Received: by 2002:aa7:968d:: with SMTP id f13mr89675804pfk.67.1578019783489; 
-	Thu, 02 Jan 2020 18:49:43 -0800 (PST)
+	bh=qkKO+oPehmfwF4fs+EpF58snMtm2XLcD17MTf1L6uYM=;
+	b=omwvgWgeeh2GSLO7XfhsvqdCTDU8hH76efHtbh91gmSfS+3c8zU7aiR8HA5JPy6u8K
+	TtPCowlDSbvgIqjb3hWTN0A3LBcepPpZXLBVH4pMH9dtQAq6yc0h48PekyVG1w7Oxcpk
+	a08v/bjuynsUpNakx81Mau4J+iPWRFp6/tiFeGQvq8Hk544uLDBJTMSXx2OSO/XQ9NaS
+	q5KHyrKQcdlkdvHujrfC2lU5mmhdubCe+w+de+C6nzGftj4hK/QNZugyS0aG9LlkWG3g
+	1YylIer7mJXQKQH95Sd/bESKye2vEMldHhDxnJ9s0OzJwt4hflRsZcWbdqCTJLRxeHvZ
+	I1oA==
+X-Gm-Message-State: APjAAAUB2Sqmzt8GnmyyfwXy9AY0phaOVT+j9MI97KzxleFfejr5KJ8h
+	ILCjs4BjhaQ4YVLpzk6sMMdzxMZNzhk=
+X-Google-Smtp-Source: APXvYqwR9RWcPkx4rRtDKJ9YemXrdWCcQ2bZXHUWpvn5wvEQvaWVpjdcouMQ7/FbGCLtxJ8n3riO4w==
+X-Received: by 2002:a63:c04a:: with SMTP id z10mr85609396pgi.441.1578019784251;
+	Thu, 02 Jan 2020 18:49:44 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:555:ddff:6770:148b])
 	by smtp.gmail.com with ESMTPSA id
-	p5sm61306640pga.69.2020.01.02.18.49.42
+	p5sm61306640pga.69.2020.01.02.18.49.43
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
 	Thu, 02 Jan 2020 18:49:43 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Jan 2020 18:49:11 -0800
-Message-Id: <445495c7b4dcaf1913520d8ec58479e5cfa2e1c6.1578019547.git.akuster808@gmail.com>
+Date: Thu,  2 Jan 2020 18:49:12 -0800
+Message-Id: <698e7d9416d99ada3b6dea115a40f2c283b26610.1578019547.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1578019547.git.akuster808@gmail.com>
 References: <cover.1578019547.git.akuster808@gmail.com>
-Subject: [zeus 14/17] networkmanager: do not deploy unnecessary udev rule file
+Subject: [zeus 15/17] gpsd: Backport a memory leak fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,47 +59,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Jan 2020 02:49:42 -0000
+X-List-Received-Date: Fri, 03 Jan 2020 02:49:43 -0000
 
-From: Stefan Agner <stefan.agner@toradex.com>
+From: Adrian Bunk <bunk@stusta.de>
 
-The 84-nm-drivers.rules is not required for systemd-udevd versions
-v210 and later. The file has been split into a separate file so
-distributions with a new enough systemd version can drop it. See
-also:
-https://github.com/NetworkManager/NetworkManager/commit/1e0375826252abf9aab2aef273a2a24cd08c9f42
-
-I noticed this while investigating into a warning show during
-bootup:
-  /usr/lib/udev/rules.d/84-nm-drivers.rules:10 Invalid value "/bin/sh -c
-  'ethtool -i $1 | sed -n s/^driver:\ //p' -- $env{INTERFACE}" for PROGRAM
-  (char 24: invalid substitution type), ignoring, but please fix it.
-
-Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 82ecc0e69fe3920360d1ba8bd1b5e6ede164de42)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../networkmanager/networkmanager_1.18.4.bb                  | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ .../0001-gps_shm_close-Free-privdata.patch    | 37 +++++++++++++++++++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb  |  1 +
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
 
-diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
-index 085807c4ce9..27508c4d938 100644
---- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
-+++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.18.4.bb
-@@ -141,8 +141,11 @@ do_install_append() {
- 
-     rm -rf ${D}/run ${D}${localstatedir}/run
- 
--    # For read-only filesystem, do not create links during bootup
-     if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        # For read-only filesystem, do not create links during bootup
-         ln -sf ../run/NetworkManager/resolv.conf ${D}${sysconfdir}/resolv-conf.NetworkManager
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+new file mode 100644
+index 00000000000..9b38015800c
+--- /dev/null
++++ b/meta-oe/recipes-navigation/gpsd/gpsd/0001-gps_shm_close-Free-privdata.patch
+@@ -0,0 +1,37 @@
++From 2a4b3bcde0d73a3a4a6644d5f944ac9d16023ba9 Mon Sep 17 00:00:00 2001
++From: Adrian Bunk <bunk@stusta.de>
++Date: Mon, 21 Oct 2019 13:53:25 +0300
++Subject: gps_shm_close: Free privdata
 +
-+        # systemd v210 and newer do not need this rule file
-+        rm ${D}/${nonarch_base_libdir}/udev/rules.d/84-nm-drivers.rules
-     fi
- }
++Previously every open/close cycle leaked privdata.
++
++Signed-off-by: Adrian Bunk <bunk@stusta.de>
++Signed-off-by: Gary E. Miller <gem@rellim.com>
++
++Upstream-Status: Backport
++---
++ libgps_shm.c | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
++
++diff --git a/libgps_shm.c b/libgps_shm.c
++index d93972bba..12bb3760b 100644
++--- a/libgps_shm.c
+++++ b/libgps_shm.c
++@@ -163,8 +163,12 @@ int gps_shm_read(struct gps_data_t *gpsdata)
++ 
++ void gps_shm_close(struct gps_data_t *gpsdata)
++ {
++-    if (PRIVATE(gpsdata) && PRIVATE(gpsdata)->shmseg != NULL)
++-	(void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
+++    if (PRIVATE(gpsdata)) {
+++        if (PRIVATE(gpsdata)->shmseg != NULL)
+++	    (void)shmdt((const void *)PRIVATE(gpsdata)->shmseg);
+++        free(PRIVATE(gpsdata));
+++        gpsdata->privdata = NULL;
+++    }
++ }
++ 
++ int gps_shm_mainloop(struct gps_data_t *gpsdata, int timeout,
++-- 
++2.20.1
++
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+index a28d59dce13..054af40829e 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+@@ -9,6 +9,7 @@ EXTRANATIVEPATH += "chrpath-native"
+ 
+ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+     file://0001-SConstruct-prefix-includepy-with-sysroot-and-drop-sy.patch \
++    file://0001-gps_shm_close-Free-privdata.patch \
+ "
+ SRC_URI[md5sum] = "b3bf88706794eb8e5f2c2543bf7ba87b"
+ SRC_URI[sha256sum] = "27dd24d45b2ac69baab7933da2bf6ae5fb0be90130f67e753c110a3477155f39"
 -- 
 2.17.1
 
