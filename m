@@ -1,53 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
-	[209.85.216.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 93CAC7FC7B
+Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
+	[209.85.215.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 87F147FA0C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jan 2020 16:20:43 +0000 (UTC)
-Received: by mail-pj1-f53.google.com with SMTP id bg7so7963867pjb.5
+	Mon,  6 Jan 2020 16:20:44 +0000 (UTC)
+Received: by mail-pg1-f169.google.com with SMTP id x8so27081643pgk.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Jan 2020 08:20:45 -0800 (PST)
+	Mon, 06 Jan 2020 08:20:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=nRRdQRKmh9ijSCjVPXxTOLx9VYr3CQs/WC+XIihr5XM=;
-	b=jC1ozM8yDdwEzV4EmNXAQaCB3vdZF1hCdUw/CPMhZFHM8OwOUB67/JyDcwZ99Pc4fL
-	uNTxr2sNSrWzWGjD/FfehzTM7rRGhPls3eLHN3xt3ewPZ2WC9+vVgpWAIXy/yjPEb2CQ
-	T6R5A61+6n8oxYvzkDTurUhdRLnZelNLey2MokQmjWfNO7OVT9UhB5WMhTXlJjWh8olt
-	LLs/vb1HK3YR7hSNXZEHQEemuzWvGtZACOUsvHRv7i3bOinbgDfkWWmiKoKGlTJJa4ag
-	q6FQTwco62W2jAxhM6d48xz+zQGGB3Govjt3o/sMh7zyALFC53EZqiDJiU5uQ+Mvi3qm
-	w2Ag==
+	bh=S2V9pTvvMwwDjaApifsadvDyNlY9W74XCGwyO6ZgOjQ=;
+	b=LHuuZHyBmk0S//CFWOzlM2Bzm/bKxWaXVvKYzJs9/XJVW1FEikuLiAcBhiRkgHem8k
+	AepWQ9/XxDqIF+0v7kBLQwKisDZB5H+cwIqpQf89X5TAkYzCVJC7yiefQpC2ui1LYTVQ
+	ZrW/hoYMf6sECSjgYFi+OQ106WznTZEtTCo8tUPM5D3mvoZVt8d3J7mamlLYjZDUMYKs
+	Hnz6lf/SguNpPTuK01PVvJCqAPHbdn8LXrOg7CRJljK/xFHYIkCoK3FKqeNRWwxK+pxB
+	rUkD3oO7wzPe0MQJXa6n2uHKSqp2zHP8y50gH63EvyTL9hN0jBAVWPEufuZjFVe3G0/a
+	7CAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=nRRdQRKmh9ijSCjVPXxTOLx9VYr3CQs/WC+XIihr5XM=;
-	b=Z1v86q5/1qC+NAvLQRV9fd+uhEi9YO/KByrSGtvyH8Sls+DGTuFUkQ8gEST5bTz+fR
-	Icqu4lRj+4i9KE13adk4Ps0ntfPrbNSGMtI8caaFxcQeVw3sZWtjM28FRwNmPcAtlDv9
-	nZGUiHt/5NXCDV53DAXYJltc3JfzoySDZO1H970SUXmyoZnm+933E/N1X8OThJN4o4Qt
-	RbFMHcEoonNiMHx3TFhgyhkZqFltl8pvxO3dVxpLqB50TKiiDpCn0jvI0koP20UY2eKv
-	lndX6fXhyAQgWLUgeP4abGRR3EMfTsZamJ2mii4L/MZZNyV0ZCDowPLYQGkbkbtJoGSe
-	j0BA==
-X-Gm-Message-State: APjAAAVzVr4sOz1XLs1X/6sm5VF6GBYYTQLDD7Ex4W5kAuP9vwDRpIZu
-	9ULGDiJQ8eAzptWDnqhH6EjUxjsS
-X-Google-Smtp-Source: APXvYqzbfjVGPuCwHVyM1oRSonJM4cpHkGDxbekpkW56/7GdfT1qF2HMpi5cC1jiLA4FoBL7e+uJOw==
-X-Received: by 2002:a17:902:a706:: with SMTP id
-	w6mr103880468plq.79.1578327644552; 
-	Mon, 06 Jan 2020 08:20:44 -0800 (PST)
+	bh=S2V9pTvvMwwDjaApifsadvDyNlY9W74XCGwyO6ZgOjQ=;
+	b=I+tgJKm/icKopHMsOVmfOz0TK0VgZt+mDjb4hzehjHn853Ls6lceBFoxAS7JX9Pdgq
+	Xo24FLbNe/JvLfVTDydFXYdlMCYZIpALjZAQFFaS8Th5LYjHt6SPaRFK2NbnuQJB0bJq
+	GaV1CUM09ftbeO9T7GUrYkGm7CYFkoC+99lDzbw1hbsqfEZcpnCyfMu0CfegrD4e+QkT
+	G6Kzl3H1cg0XjuNhBm6X1DLrGUazVaWMVH1UCLlrXi7w1D3M4L3PqiVhX3UKP3nizPJO
+	aI3xWL0mjXKWm4YYIFskx6hk07+ZjpbcvKDocNHGgsL5R2k8xRdGb+fgWrc8WxNZtt8v
+	O73g==
+X-Gm-Message-State: APjAAAVovcu5gmFqH1RRx4l7jV8zcAR+ebUtzrQoFJjZfyFnKs0tobw3
+	SvzmBwHNJpfPQaHbk2l/L3eBzgHF
+X-Google-Smtp-Source: APXvYqwx5i3f/UVl2hsX4jUbRDtQA21/TVfklt+S2CszLMDXvSEUhvreeVx5QYgP9WvSJhFj4czK8A==
+X-Received: by 2002:aa7:8088:: with SMTP id v8mr110712922pff.142.1578327645506;
+	Mon, 06 Jan 2020 08:20:45 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:6832:e19c:36b9:d5e])
 	by smtp.gmail.com with ESMTPSA id
-	g26sm69999588pfo.130.2020.01.06.08.20.43
+	g26sm69999588pfo.130.2020.01.06.08.20.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 06 Jan 2020 08:20:44 -0800 (PST)
+	Mon, 06 Jan 2020 08:20:45 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Jan 2020 08:20:15 -0800
-Message-Id: <a7426c73a8e9fae468414a2c32a533d9c3729405.1578327474.git.akuster808@gmail.com>
+Date: Mon,  6 Jan 2020 08:20:16 -0800
+Message-Id: <5afad266f2ce55db2038c36f2e49a3c80be9bbfc.1578327474.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1578327474.git.akuster808@gmail.com>
 References: <cover.1578327474.git.akuster808@gmail.com>
-Subject: [1.44 07/25] runqueue: Batch scenequeue updates
+Subject: [1.44 08/25] siggen: Fix performance issue in get_unihash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,52 +59,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jan 2020 16:20:43 -0000
+X-List-Received-Date: Mon, 06 Jan 2020 16:20:45 -0000
 
-From: Joshua Watt <jpewhacker@gmail.com>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-Batch all updates to scenequeue data together in a single invocation
-instead of checking each task serially. This allows the checks for
-sstate object to happen in parallel, and also makes sure the log
-statement only happens once (per set of rehashes).
+There is a significant performance issue in get_unihash(). The issue turns out
+to be the lookups of setscene tasks. We can fix this by using a set() instead of
+the current list.
 
-Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-(cherry picked from commit db033a8f8a276d864bdb2e1eef159ab5794a0658)
+(cherry picked from commit 1e561672d039ebfb8cd0e0654a44dcf48513317c)
 ---
- lib/bb/runqueue.py | 11 +++++++----
- 1 file changed, 7 insertions(+), 4 deletions(-)
+ lib/bb/siggen.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/lib/bb/runqueue.py b/lib/bb/runqueue.py
-index 246a9cdb..cb499a1c 100644
---- a/lib/bb/runqueue.py
-+++ b/lib/bb/runqueue.py
-@@ -2320,6 +2320,7 @@ class RunQueueExecute:
-             if tid not in self.pending_migrations:
-                 self.pending_migrations.add(tid)
+diff --git a/lib/bb/siggen.py b/lib/bb/siggen.py
+index dbf51023..2fec8599 100644
+--- a/lib/bb/siggen.py
++++ b/lib/bb/siggen.py
+@@ -44,7 +44,7 @@ class SignatureGenerator(object):
+         self.file_checksum_values = {}
+         self.taints = {}
+         self.unitaskhashes = {}
+-        self.setscenetasks = {}
++        self.setscenetasks = set()
  
-+        update_tasks = []
-         for tid in self.pending_migrations.copy():
-             if tid in self.runq_running or tid in self.sq_live:
-                 # Too late, task already running, not much we can do now
-@@ -2379,11 +2380,13 @@ class RunQueueExecute:
-             if tid in self.build_stamps:
-                 del self.build_stamps[tid]
+     def finalise(self, fn, d, varient):
+         return
+@@ -110,7 +110,7 @@ class SignatureGeneratorBasic(SignatureGenerator):
+         self.taints = {}
+         self.gendeps = {}
+         self.lookupcache = {}
+-        self.setscenetasks = {}
++        self.setscenetasks = set()
+         self.basewhitelist = set((data.getVar("BB_HASHBASE_WHITELIST") or "").split())
+         self.taskwhitelist = None
+         self.init_rundepcheck(data)
+@@ -157,7 +157,7 @@ class SignatureGeneratorBasic(SignatureGenerator):
+         return taskdeps
  
--            origvalid = False
--            if tid in self.sqdata.valid:
--                origvalid = True
-+            update_tasks.append((tid, harddepfail, tid in self.sqdata.valid))
-+
-+        if update_tasks:
-             self.sqdone = False
--            update_scenequeue_data([tid], self.sqdata, self.rqdata, self.rq, self.cooker, self.stampcache, self, summary=False)
-+            update_scenequeue_data([t[0] for t in update_tasks], self.sqdata, self.rqdata, self.rq, self.cooker, self.stampcache, self, summary=False)
-+
-+        for (tid, harddepfail, origvalid) in update_tasks:
-             if tid in self.sqdata.valid and not origvalid:
-                 logger.info("Setscene task %s became valid" % tid)
-             if harddepfail:
+     def set_setscene_tasks(self, setscene_tasks):
+-        self.setscenetasks = setscene_tasks
++        self.setscenetasks = set(setscene_tasks)
+ 
+     def finalise(self, fn, d, variant):
+ 
 -- 
 2.17.1
 
