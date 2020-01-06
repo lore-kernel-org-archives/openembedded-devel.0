@@ -1,52 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com
-	[209.85.215.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A48F7FCA3
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
+	[209.85.210.175])
+	by mail.openembedded.org (Postfix) with ESMTP id BE7507FCA3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jan 2020 16:20:45 +0000 (UTC)
-Received: by mail-pg1-f179.google.com with SMTP id q127so27097778pga.4
+	Mon,  6 Jan 2020 16:20:46 +0000 (UTC)
+Received: by mail-pf1-f175.google.com with SMTP id 4so27166610pfz.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Jan 2020 08:20:47 -0800 (PST)
+	Mon, 06 Jan 2020 08:20:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=2AC/cz9GgoujPhoQ+l1Sr0MEw5HPAPDk9mL7kbmERrg=;
-	b=Q9I1aOId5vslfjJMGmfrFn9PFlfFqAhryiXwDGdAVQFDUnu2/BqH8WGl4izGI5hYkd
-	m5i5Vbvs7bYPZquCsFITm5H3SIjQe6Km/mp+H8DT0ctff0LLCcMGuqlCgZUtOrZpAHA2
-	pej8ldbdYAB/Y8qhcGvK8xruZBHqfKObSEPIvh3Uxdm9UTG7GpnOSdYnpxmCXXB4ByIL
-	EPFy+ASz4HpS5ILyolNi24hDILC396QRbju/yaE1TlYYoA12Ewc1/8EtN61L07ARSwXl
-	Kw3CPVF+DljxT+OTmkgtT/ZavhJmx886Bt84SGrT/pTQnnwsMZQ+pYqSTv8kxf5Qawcg
-	eAZQ==
+	bh=egtj2JNCgGA1/P6JWQPprbElBWgo/PQYNInZEE79R5Y=;
+	b=a4RN3cR3Ye7k8LpHVg8EB23J2tXM5QjXcY7/C3otO9QVHGcPC8hTSeLsqLJBEyeywa
+	xiQM0QCqBuOKIe5WZYLx/t6qDnq2LljjDptGRcMCZuNgUhM6A2jfncCCeg4LQwiiPrOY
+	zZSzDjxzbhs+bEUVRV0YJiOwbLe4fd4rB1nOmS7of6ZjlohgtaZacT0vCkme44ae8Qdy
+	eklqp8Nx9wNqJVlJ/jru72zBjRiflFFfnUnx3yGADEeEqq8Uk3Fp9s0zTWteYnWwzAUM
+	gSV1VJQmdvuTnRpjXS8d8xeLYjvtiy31Me3ghr1xlWe1j2h20XlrMrmM41q/o3h2JZZh
+	R5Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=2AC/cz9GgoujPhoQ+l1Sr0MEw5HPAPDk9mL7kbmERrg=;
-	b=ZGBHUrB1i6obwbig6QbI3C6n+RIt++PAJPEZeWICzekyDxjgwjr/hQAX/aIwiY2JhX
-	kF/fYGZjn8lC1u5VlJPgP+c2PNmVOeK6ZBye5LUIfOtMMj0HUK0iuNF5JAI5I6TQaBFh
-	aUsf7D4QI0kRXVSCyCevf7qYkI1vUR7N77uhbr4k7TRxk1E3EeXGawCJMqSfLDvv7zyD
-	b5JXuCgZMjDRkJqmQZa00M/4TCWOqlY2KrdwbdK2MY1CNtH4CsYZQkkqfayLetdvDimB
-	D/Ze00GRKjY/8Z1lPu8nG5JojiI5AhVR6a+fbJepsGehrcYn3YT/bej3QP0irp5fFrre
-	LEoQ==
-X-Gm-Message-State: APjAAAX8i+nXGWntPruTxCKefZXzfck/eV7jWNW4FmTpKnjUVXC1vn2a
-	Sv2k57BKi9Ce7Z4iPzGQ4KxNjuY6
-X-Google-Smtp-Source: APXvYqwviUPf7K2G/VbnRXmzCKQzL70+e1v0O8tnyJ6RrxdIWZuKzyjOfaR6qqX2xrL8auI5M88vuA==
-X-Received: by 2002:aa7:9290:: with SMTP id j16mr76890214pfa.30.1578327646474; 
-	Mon, 06 Jan 2020 08:20:46 -0800 (PST)
+	bh=egtj2JNCgGA1/P6JWQPprbElBWgo/PQYNInZEE79R5Y=;
+	b=T+CRnAwvMbVJ8IYEY9xAljrGc+nQbYsUVUDwZUuniDGs7ZWy1lEsNUBJwi6kCFgB1b
+	FcuyPa6K6inivjUstOpyg/rcXzTaYx7EwZvWEO6qt4n8qj4e6FPNCZSfmY6ZHiEZPzq2
+	EBWMggGSho7JfNmIzTbsoxvdlbkLdgstJMSblvLU+V+OhawNw3KC5yAH2vW6QJWOSBwa
+	bRCzqEHy0iqORnn8p7SErcD4JvaG1d6SVtM1vz0XA42SuSDNNh70SYFf8KCLMARbqNcE
+	LpcllABEfKsSXewQUwo52FfGPL7JoOG/TMQ6GQ/bthBN+KdDM01kktG7mLOqWhoaA7fQ
+	xPwg==
+X-Gm-Message-State: APjAAAWtquQHgnykPKX8x22fnKRa7yUs6Nb8Omysvw0Qhajzg/d5zk6t
+	y8icJ6Qlnt/14WYr7tObotrB4ULN
+X-Google-Smtp-Source: APXvYqzvRv+s/qkkq0fP25+FIsj21wNaSdybNjjFpXFVARyyiaHtq2F3WxzM53wxLQkAEQtYOzIupg==
+X-Received: by 2002:a63:d157:: with SMTP id
+	c23mr111653857pgj.242.1578327647592; 
+	Mon, 06 Jan 2020 08:20:47 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:6832:e19c:36b9:d5e])
 	by smtp.gmail.com with ESMTPSA id
-	g26sm69999588pfo.130.2020.01.06.08.20.45
+	g26sm69999588pfo.130.2020.01.06.08.20.46
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 06 Jan 2020 08:20:45 -0800 (PST)
+	Mon, 06 Jan 2020 08:20:47 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Jan 2020 08:20:17 -0800
-Message-Id: <81829ab28afae08e02f4a758ec063fc0d90579ea.1578327474.git.akuster808@gmail.com>
+Date: Mon,  6 Jan 2020 08:20:18 -0800
+Message-Id: <c9ab598f6f1ea3ae3a0713dc6692b4c4bafbfb50.1578327474.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1578327474.git.akuster808@gmail.com>
 References: <cover.1578327474.git.akuster808@gmail.com>
-Subject: [1.44 09/25] bb.utils.fileslocked: don't leak files if yield throws
+Subject: [1.44 10/25] runqueue: Rework process_possible_migrations() to improve performance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,43 +60,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jan 2020 16:20:45 -0000
+X-List-Received-Date: Mon, 06 Jan 2020 16:20:46 -0000
 
-From: Chris Laplante via bitbake-devel <bitbake-devel@lists.openembedded.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-Discovered with a recipe under devtool. The ${S}/singletask.lock file (added by
-externalsrc.bbclass) was leaked, giving a warning like:
+The looping over multiple changed hashes causes many calls to get_taskhash
+and get_unihash which are potentially slow and then overwritten.
 
-  WARNING: <PN>+git999-r0 do_populate_lic: /home/laplante/yocto/sources/poky/bitbake/lib/bb/build.py:582: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/laplante/yocto/build/workspace/sources/<PN>/singletask.lock' mode='a+' encoding='UTF-8'>
-    exec_func(task, localdata)
+Instead, batch up all the tasks which have changed unihashes and then
+do one big loop over the changed tasks rather than each in turn.
 
-Signed-off-by: Chris Laplante <chris.laplante@agilent.com>
+This makes worlds of difference to the performance graphs and should speed
+up build where many tasks are being rehashed.
+
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-(cherry picked from commit 6beddf6214e22b4002626761031a9e9d34fb04db)
+(cherry picked from commit c9c68d898985cf0bec6fc95f54c151cc50255cac)
 ---
- lib/bb/utils.py | 9 +++++----
- 1 file changed, 5 insertions(+), 4 deletions(-)
+ lib/bb/runqueue.py | 103 ++++++++++++++++++++++++---------------------
+ 1 file changed, 56 insertions(+), 47 deletions(-)
 
-diff --git a/lib/bb/utils.py b/lib/bb/utils.py
-index 8d40bcdf..d65265c4 100644
---- a/lib/bb/utils.py
-+++ b/lib/bb/utils.py
-@@ -428,10 +428,11 @@ def fileslocked(files):
-         for lockfile in files:
-             locks.append(bb.utils.lockfile(lockfile))
+diff --git a/lib/bb/runqueue.py b/lib/bb/runqueue.py
+index cb499a1c..a45b27ce 100644
+--- a/lib/bb/runqueue.py
++++ b/lib/bb/runqueue.py
+@@ -2248,6 +2248,7 @@ class RunQueueExecute:
+     def process_possible_migrations(self):
  
--    yield
+         changed = set()
++        toprocess = set()
+         for tid, unihash in self.updated_taskhash_queue.copy():
+             if tid in self.runq_running and tid not in self.runq_complete:
+                 continue
+@@ -2258,53 +2259,61 @@ class RunQueueExecute:
+                 logger.info("Task %s unihash changed to %s" % (tid, unihash))
+                 self.rqdata.runtaskentries[tid].unihash = unihash
+                 bb.parse.siggen.set_unihash(tid, unihash)
 -
--    for lock in locks:
--        bb.utils.unlockfile(lock)
-+    try:
-+        yield
-+    finally:
-+        for lock in locks:
-+            bb.utils.unlockfile(lock)
+-                # Work out all tasks which depend on this one
+-                total = set()
+-                next = set(self.rqdata.runtaskentries[tid].revdeps)
+-                while next:
+-                    current = next.copy()
+-                    total = total |next
+-                    next = set()
+-                    for ntid in current:
+-                        next |= self.rqdata.runtaskentries[ntid].revdeps
+-                        next.difference_update(total)
+-
+-                # Now iterate those tasks in dependency order to regenerate their taskhash/unihash
+-                done = set()
+-                next = set(self.rqdata.runtaskentries[tid].revdeps)
+-                while next:
+-                    current = next.copy()
+-                    next = set()
+-                    for tid in current:
+-                        if not self.rqdata.runtaskentries[tid].depends.isdisjoint(total):
+-                            continue
+-                        procdep = []
+-                        for dep in self.rqdata.runtaskentries[tid].depends:
+-                            procdep.append(dep)
+-                        orighash = self.rqdata.runtaskentries[tid].hash
+-                        newhash = bb.parse.siggen.get_taskhash(tid, procdep, self.rqdata.dataCaches[mc_from_tid(tid)])
+-                        origuni = self.rqdata.runtaskentries[tid].unihash
+-                        newuni = bb.parse.siggen.get_unihash(tid)
+-                        # FIXME, need to check it can come from sstate at all for determinism?
+-                        remapped = False
+-                        if newuni == origuni:
+-                            # Nothing to do, we match, skip code below
+-                            remapped = True
+-                        elif tid in self.scenequeue_covered or tid in self.sq_live:
+-                            # Already ran this setscene task or it running. Report the new taskhash
+-                            remapped = bb.parse.siggen.report_unihash_equiv(tid, newhash, origuni, newuni, self.rqdata.dataCaches)
+-                            logger.info("Already covered setscene for %s so ignoring rehash (remap)" % (tid))
+-
+-                        if not remapped:
+-                            logger.debug(1, "Task %s hash changes: %s->%s %s->%s" % (tid, orighash, newhash, origuni, newuni))
+-                            self.rqdata.runtaskentries[tid].hash = newhash
+-                            self.rqdata.runtaskentries[tid].unihash = newuni
+-                            changed.add(tid)
+-
+-                        next |= self.rqdata.runtaskentries[tid].revdeps
+-                        total.remove(tid)
+-                        next.intersection_update(total)
++                toprocess.add(tid)
++
++        # Work out all tasks which depend upon these
++        total = set()
++        for p in toprocess:
++            next = set(self.rqdata.runtaskentries[p].revdeps)
++            while next:
++                current = next.copy()
++                total = total | next
++                next = set()
++                for ntid in current:
++                    next |= self.rqdata.runtaskentries[ntid].revdeps
++                    next.difference_update(total)
++
++        # Now iterate those tasks in dependency order to regenerate their taskhash/unihash
++        next = set()
++        for p in total:
++            if len(self.rqdata.runtaskentries[p].depends) == 0:
++                next.add(p)
++            elif self.rqdata.runtaskentries[p].depends.isdisjoint(total):
++                next.add(p)
++
++        # When an item doesn't have dependencies in total, we can process it. Drop items from total when handled
++        while next:
++            current = next.copy()
++            next = set()
++            for tid in current:
++                if not self.rqdata.runtaskentries[tid].depends.isdisjoint(total):
++                    continue
++                procdep = []
++                for dep in self.rqdata.runtaskentries[tid].depends:
++                    procdep.append(dep)
++                orighash = self.rqdata.runtaskentries[tid].hash
++                newhash = bb.parse.siggen.get_taskhash(tid, procdep, self.rqdata.dataCaches[mc_from_tid(tid)])
++                origuni = self.rqdata.runtaskentries[tid].unihash
++                newuni = bb.parse.siggen.get_unihash(tid)
++                # FIXME, need to check it can come from sstate at all for determinism?
++                remapped = False
++                if newuni == origuni:
++                    # Nothing to do, we match, skip code below
++                    remapped = True
++                elif tid in self.scenequeue_covered or tid in self.sq_live:
++                    # Already ran this setscene task or it running. Report the new taskhash
++                    remapped = bb.parse.siggen.report_unihash_equiv(tid, newhash, origuni, newuni, self.rqdata.dataCaches)
++                    logger.info("Already covered setscene for %s so ignoring rehash (remap)" % (tid))
++
++                if not remapped:
++                    #logger.debug(1, "Task %s hash changes: %s->%s %s->%s" % (tid, orighash, newhash, origuni, newuni))
++                    self.rqdata.runtaskentries[tid].hash = newhash
++                    self.rqdata.runtaskentries[tid].unihash = newuni
++                    changed.add(tid)
++
++                next |= self.rqdata.runtaskentries[tid].revdeps
++                total.remove(tid)
++                next.intersection_update(total)
  
- @contextmanager
- def timeout(seconds):
+         if changed:
+             for mc in self.rq.worker:
 -- 
 2.17.1
 
