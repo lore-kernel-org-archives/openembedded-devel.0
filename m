@@ -1,25 +1,41 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3788C7C4F9
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 256BC7CED3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jan 2020 07:25:13 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0067PDR2012976
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Mon,  6 Jan 2020 09:22:30 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id z3so48852030wru.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 5 Jan 2020 23:25:14 -0800 (PST)
-Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Sun, 5 Jan 2020 23:25:13 -0800
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 6 Jan 2020 15:25:10 +0800
-Message-ID: <20200106072510.25476-1-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Mon, 06 Jan 2020 01:22:31 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=rT9pG3nU7FOSRHQv8iRLVeFketeuWGcO77qpW4UzVzw=;
+	b=r9uxkoIEl27tRE2qAnDWb7Vmhv7YKnIxXvZpZYYZ3M1WAVSZhZWAdnTeG7NNNW5H3C
+	n418TGQe5uT4bZ5XR6ODL35eRVoBkKtH9P0cUfOziGj7Mt84MeOazDxu15XUjytIMX9P
+	U8hxmViDezCpeHh8RMmeGblEtdX9Yj1E8xVwEvBWVH51T3IgMDBybs9bU3leV392+u9o
+	nEP1La7IBZp+YhgwOQMletuht86y8qoCFjl2uNKGQQzeancEAOBVlJp1KN2qBYtDhBIg
+	VPfwTZEAaFDX03U869rC8h6s00LOl9zIv/I6xn20+i6m7e8d+Z1ONHFQE/Lb+PYtwptW
+	XJhA==
+X-Gm-Message-State: APjAAAXLHjn2GUEO1DZfpm5gX0G102VhutNqa6QjmWYjOrnsH9nS0oiR
+	rBInF5PAb82bXHa9bcPH6IP8B7ao
+X-Google-Smtp-Source: APXvYqwprTmz5DKSKk45XoZtoUY2AQCfpXwdipTvnXXQa6sq0h7bBqAijRVHCjcgVdvDtSoMgvMsAg==
+X-Received: by 2002:adf:e3c1:: with SMTP id k1mr98835974wrm.151.1578302550692; 
+	Mon, 06 Jan 2020 01:22:30 -0800 (PST)
+Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	b67sm22519383wmc.38.2020.01.06.01.22.29
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 06 Jan 2020 01:22:30 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  6 Jan 2020 09:22:29 +0000
+Message-Id: <20200106092229.13686-1-git@andred.net>
+X-Mailer: git-send-email 2.23.0.rc1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.174]
-Subject: [meta-networking][PATCH] samba: upgrade 4.10.10 -> 4.10.11
+Subject: [meta-python][PATCH] python3-jsonrpcserver: update to v4.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,43 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jan 2020 07:25:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 06 Jan 2020 09:22:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Security fixes:
-
-CVE-2019-14861: Samba AD DC zone-named record Denial of Service in DNS
-                management server (dnsserver).
-CVE-2019-14870: DelegationNotAllowed not being enforced in protocol transition
-                on Samba AD DC.
-
-See: https://www.samba.org/samba/history/samba-4.10.11.html
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: André Draszik <git@andred.net>
 ---
- .../samba/{samba_4.10.10.bb => samba_4.10.11.bb}              | 4 ++--
+ ...-jsonrpcserver_4.0.5.bb => python3-jsonrpcserver_4.1.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/samba/{samba_4.10.10.bb => samba_4.10.11.bb} (98%)
+ rename meta-python/recipes-devtools/python/{python3-jsonrpcserver_4.0.5.bb => python3-jsonrpcserver_4.1.0.bb} (71%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.10.bb b/meta-networking/recipes-connectivity/samba/samba_4.10.11.bb
-similarity index 98%
-rename from meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
-rename to meta-networking/recipes-connectivity/samba/samba_4.10.11.bb
-index 9eaa13415..ffdc15ac4 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.10.10.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.10.11.bb
-@@ -34,8 +34,8 @@ SRC_URI_append_libc-musl = " \
-            file://0001-samba-fix-musl-lib-without-innetgr.patch \
-           "
+diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.0.5.bb b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb
+similarity index 71%
+rename from meta-python/recipes-devtools/python/python3-jsonrpcserver_4.0.5.bb
+rename to meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb
+index bf9eb0a1c..c0b06b316 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.0.5.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/bcb/jsonrpcserver"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c89120516900f96f4c60d35fdc4c3f15"
  
--SRC_URI[md5sum] = "dde27447f39d124efe18f719ccf956dd"
--SRC_URI[sha256sum] = "700c734b51610e2feaa0d6744f9bec0c0d8917bca8cc78d5b63a4591f32866a5"
-+SRC_URI[md5sum] = "eebd021de840312d7e08959e8a3d0ba1"
-+SRC_URI[sha256sum] = "609f4232e04c6eaad0e3b8e00cd837683a960ebb95c1fe3349e968d1d1dff894"
+-SRC_URI[md5sum] = "d41e9f6b310cb29b0d8f213ff9d57567"
+-SRC_URI[sha256sum] = "240c517f49b0fdd3bfa428c9a7cc581126a0c43eca60d29762da124017d9d9f4"
++SRC_URI[md5sum] = "c1cc652bdeb04b8ce3ad962fbab34daf"
++SRC_URI[sha256sum] = "3a35c0ef21174ca98f995f99688cebadda97053785833fbb31ec862d6b157f6d"
  
- UPSTREAM_CHECK_REGEX = "samba\-(?P<pver>4\.10(\.\d+)+).tar.gz"
+ inherit pypi setuptools3
  
 -- 
-2.17.1
+2.23.0.rc1
 
 
