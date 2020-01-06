@@ -1,52 +1,52 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
-	[209.85.215.180])
-	by mail.openembedded.org (Postfix) with ESMTP id A40B37FA0C
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id A25707FAC4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jan 2020 16:20:48 +0000 (UTC)
-Received: by mail-pg1-f180.google.com with SMTP id q127so27097836pga.4
+	Mon,  6 Jan 2020 16:20:49 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id s64so27075248pgb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Jan 2020 08:20:50 -0800 (PST)
+	Mon, 06 Jan 2020 08:20:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=fKX7d5X/cvw+75ZMjBFcuvTYPTHQ86Z8fEA7fwiH1bg=;
-	b=qRM1uGBgOcZpjxCZIF9epbWh450mLJDb7lmb4nZMb1Z0YHAZ7FvxWsjZ1g9rzC78RQ
-	Fyu355EZuHPo8ei9ZPAeu4WH6TbVh3xJsdrPkOJVQMXEH58Vcxs/L0y5aW7GGEvkDm9c
-	AuXtOKKq0cV+BWDgCAaJFNiEjV18fZOzX4udo6B1i0eizGHe1Uzf2Kyi6ZhMqO84u7d0
-	9msIqZjBwOITEJyIlMOFQLasNRLa8OIWqMiQZ9IRNorc23cWBQo6zfPfM7byXWO7tgsK
-	t4ANVllnNsCepegg0Id7YcocIsY6Bq6EAC1Efid2aL4RmOOYvctsSTLnf6LA1P0kezC7
-	eSGA==
+	bh=Rlc1OF0Phsi+GUzKQVF5KBH54uMrUokL0zzu3ychQow=;
+	b=prIdBdUr5bFhCYvM0HaJx0lXAAlxp52iFhilFPd9mxMBKVGTJ2Hod/4uabV8jhQVO7
+	qapdwJuo896atNF0uOA7nw1E4B1kpMY/q2e/ptnVWStNjdmL3OwbIfdlm/La2CGHYm38
+	vpDUl4bY+YgEa8G+kXSknHSLWkrYnx/EJUIOxCqPy8WzhoLY4cefg7qd2lLBifiN2gMI
+	Jx9p+IrtgG/xbn7M4yp40ennRnsf7UBvAbRfFdH+oIKWPza4uJnkTRsBPg4q/tY/EQQ4
+	KrpdAWAj7FSRwudGT0/KjQ2ryqBYs/3jhkQ9kv8P8ROKp9UOjfjtUGhV97NiuFuVfs/x
+	choA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=fKX7d5X/cvw+75ZMjBFcuvTYPTHQ86Z8fEA7fwiH1bg=;
-	b=mKvJb3Yd/+3hUwOXZcpvE1rLuEtsGOVrTLvJEh3ttHKwLj0qaY0DAL3sTFg4TDUXBb
-	1Ej1YMpc2Lirxd1Vzru7iIg9aiIhhmLup6aftw6DGJlf5aWo/vFEduWuC8iex3s1F2YP
-	krftu6x27PrVQqbyQ1Iu2hQruhWs45IIWPeRtpesl7fvgSgmPScGI8jcGTByNq3iybwa
-	5dNkhTAFDJwORNghDzTC1/aHpS30wKliqtHkDBquDWsqETwqKhEdJcEDTS97bo4bfH2i
-	Ou3pC1Hv2NABfs9HCMxxQZmDe4SxE0gAu/Lm6KZLA6D+kD+WKQdTL948vREzFSZGyjs3
-	23Rw==
-X-Gm-Message-State: APjAAAWLz58MNyAZmZCjjlar6iJ643lVZrf9EtpXXGiCYhTruEB8Pe0q
-	wAZVB+SOYQfaMij/hI/+a2XRdi/W
-X-Google-Smtp-Source: APXvYqzfleBXnTbtVGLEeVp8GwXBGwVCPHoVmQ/AzKgNjhzHpyGgXfnx5VTtmd91CikraTLr9J4SIg==
-X-Received: by 2002:a65:4203:: with SMTP id c3mr110600228pgq.368.1578327649564;
-	Mon, 06 Jan 2020 08:20:49 -0800 (PST)
+	bh=Rlc1OF0Phsi+GUzKQVF5KBH54uMrUokL0zzu3ychQow=;
+	b=UsSmw9leFUFxUwSzoee16Ep+sYPD8r7DTp05WKCpDjDZgLMpyMn+RSAUufzzHtEwU2
+	3A5lvk9lpH88Ez/pLSwznAxK9T5v0HBETiM9GzW08+17RhQjt8TAEqb2I49GxqIktSiU
+	2sJc4mhmLIcdM1kR1NT49+n9702SsdQ4auN0VjJnZNDCzUWoF6cP9x6OqpeNBBcwJoo9
+	90Rtlyp/DzRdG6wwdiz5updGTgQNT+swEghliRSWzwmMK8wxUvJ3Cs4WCxhQTLgdsu9f
+	sKQMlgX8WAtyjjyRPtO9GsQEVxcgbhdZWyXJaCUZO7oOj6L3inkAgoTXgcKIgFsVRrFU
+	nVYg==
+X-Gm-Message-State: APjAAAX7Sioa0F0gbIM3B7rbVth1dvHlCmZf/nBNt78JSHDTxZdBkoIo
+	JAP1BMa1BRNWn4xBmBmMIQfs/Lpl
+X-Google-Smtp-Source: APXvYqzqSuhJ1zl+hbYSugGFf5uMGy0N62yBxV0N5OycnxkK/oPocohzOT8Vjeocl73rL1rHl6O+9Q==
+X-Received: by 2002:aa7:85d3:: with SMTP id z19mr110038472pfn.62.1578327650510;
+	Mon, 06 Jan 2020 08:20:50 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:6832:e19c:36b9:d5e])
 	by smtp.gmail.com with ESMTPSA id
-	g26sm69999588pfo.130.2020.01.06.08.20.48
+	g26sm69999588pfo.130.2020.01.06.08.20.49
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 06 Jan 2020 08:20:49 -0800 (PST)
+	Mon, 06 Jan 2020 08:20:50 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Jan 2020 08:20:20 -0800
-Message-Id: <c4ce216b4c5a1626764752edd21005750d05a0c2.1578327474.git.akuster808@gmail.com>
+Date: Mon,  6 Jan 2020 08:20:21 -0800
+Message-Id: <a80024a4397485f96693c4df108b40f6b1bdf32b.1578327474.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1578327474.git.akuster808@gmail.com>
 References: <cover.1578327474.git.akuster808@gmail.com>
-Subject: [1.44 12/25] siggen: Split get_tashhash for performance
+Subject: [1.44 13/25] runqueue: Fix sstate task iteration performance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,122 +59,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jan 2020 16:20:48 -0000
+X-List-Received-Date: Mon, 06 Jan 2020 16:20:49 -0000
 
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-There are two operations happening in get_taskhash, the building of the
-underlying data and the calculation of the hash.
+Creating a new sorted list of sstate tasks each iteration through runqueue is
+extremely ineffecient and was compounded by the recent change from a list to set.
 
-Split these into two funtions since the preparation part doesn't need
-to rerun when unihash changes, only the calculation does.
-
-This split allows sigificant performance improvements for hashequiv
-in builds where many hashes are equivalent and many hashes are changing.
+Create one sorted list instead of recreating it each time.
 
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-(cherry picked from commit 6a32af2808d748819f4af55c443578c8a63062b3)
+(cherry picked from commit de18824996841c3f35f54ff5ad12f94f6dc20d88)
 ---
- lib/bb/runqueue.py |  1 +
- lib/bb/siggen.py   | 33 ++++++++++++++++++++++++---------
- 2 files changed, 25 insertions(+), 9 deletions(-)
+ lib/bb/runqueue.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/lib/bb/runqueue.py b/lib/bb/runqueue.py
-index b3648ddb..515e9d43 100644
+index 515e9d43..2ba4557f 100644
 --- a/lib/bb/runqueue.py
 +++ b/lib/bb/runqueue.py
-@@ -1185,6 +1185,7 @@ class RunQueueData:
-         procdep = []
-         for dep in self.runtaskentries[tid].depends:
-             procdep.append(dep)
-+        bb.parse.siggen.prep_taskhash(tid, procdep, self.dataCaches[mc_from_tid(tid)])
-         self.runtaskentries[tid].hash = bb.parse.siggen.get_taskhash(tid, procdep, self.dataCaches[mc_from_tid(tid)])
-         self.runtaskentries[tid].unihash = bb.parse.siggen.get_unihash(tid)
+@@ -1965,10 +1965,14 @@ class RunQueueExecute:
+         self.rq.read_workers()
+         self.process_possible_migrations()
  
-diff --git a/lib/bb/siggen.py b/lib/bb/siggen.py
-index 2fec8599..e484e5e3 100644
---- a/lib/bb/siggen.py
-+++ b/lib/bb/siggen.py
-@@ -52,6 +52,9 @@ class SignatureGenerator(object):
-     def get_unihash(self, tid):
-         return self.taskhash[tid]
- 
-+    def prep_taskhash(self, tid, deps, dataCache):
-+        return
++        if not hasattr(self, "sorted_setscene_tids"):
++            # Don't want to sort this set every execution
++            self.sorted_setscene_tids = sorted(self.rqdata.runq_setscene_tids)
 +
-     def get_taskhash(self, tid, deps, dataCache):
-         self.taskhash[tid] = hashlib.sha256(tid.encode("utf-8")).hexdigest()
-         return self.taskhash[tid]
-@@ -198,12 +201,11 @@ class SignatureGeneratorBasic(SignatureGenerator):
-             pass
-         return taint
- 
--    def get_taskhash(self, tid, deps, dataCache):
-+    def prep_taskhash(self, tid, deps, dataCache):
- 
-         (mc, _, task, fn) = bb.runqueue.split_tid_mcfn(tid)
- 
--        data = dataCache.basetaskhash[tid]
--        self.basehash[tid] = data
-+        self.basehash[tid] = dataCache.basetaskhash[tid]
-         self.runtaskdeps[tid] = []
-         self.file_checksum_values[tid] = []
-         recipename = dataCache.pkg_fn[fn]
-@@ -216,7 +218,6 @@ class SignatureGeneratorBasic(SignatureGenerator):
-                 continue
-             if dep not in self.taskhash:
-                 bb.fatal("%s is not in taskhash, caller isn't calling in dependency order?" % dep)
--            data = data + self.get_unihash(dep)
-             self.runtaskdeps[tid].append(dep)
- 
-         if task in dataCache.file_checksums[fn]:
-@@ -226,27 +227,41 @@ class SignatureGeneratorBasic(SignatureGenerator):
-                 checksums = bb.fetch2.get_file_checksums(dataCache.file_checksums[fn][task], recipename)
-             for (f,cs) in checksums:
-                 self.file_checksum_values[tid].append((f,cs))
--                if cs:
--                    data = data + cs
- 
-         taskdep = dataCache.task_deps[fn]
-         if 'nostamp' in taskdep and task in taskdep['nostamp']:
-             # Nostamp tasks need an implicit taint so that they force any dependent tasks to run
-             if tid in self.taints and self.taints[tid].startswith("nostamp:"):
-                 # Don't reset taint value upon every call
--                data = data + self.taints[tid][8:]
-+                pass
-             else:
-                 import uuid
-                 taint = str(uuid.uuid4())
--                data = data + taint
-                 self.taints[tid] = "nostamp:" + taint
- 
-         taint = self.read_taint(fn, task, dataCache.stamp[fn])
-         if taint:
--            data = data + taint
-             self.taints[tid] = taint
-             logger.warning("%s is tainted from a forced run" % tid)
- 
-+        return
-+
-+    def get_taskhash(self, tid, deps, dataCache):
-+
-+        data = self.basehash[tid]
-+        for dep in self.runtaskdeps[tid]:
-+            data = data + self.get_unihash(dep)
-+
-+        for (f, cs) in self.file_checksum_values[tid]:
-+            if cs:
-+                data = data + cs
-+
-+        if tid in self.taints:
-+            if self.taints[tid].startswith("nostamp:"):
-+                data = data + self.taints[tid][8:]
-+            else:
-+                data = data + self.taints[tid]
-+
-         h = hashlib.sha256(data.encode("utf-8")).hexdigest()
-         self.taskhash[tid] = h
-         #d.setVar("BB_TASKHASH_task-%s" % task, taskhash[task])
+         task = None
+         if not self.sqdone and self.can_start_task():
+             # Find the next setscene to run
+-            for nexttask in sorted(self.rqdata.runq_setscene_tids):
++            for nexttask in self.sorted_setscene_tids:
+                 if nexttask in self.sq_buildable and nexttask not in self.sq_running and self.sqdata.stamps[nexttask] not in self.build_stamps.values():
+                     if nexttask not in self.sqdata.unskippable and len(self.sqdata.sq_revdeps[nexttask]) > 0 and self.sqdata.sq_revdeps[nexttask].issubset(self.scenequeue_covered) and self.check_dependencies(nexttask, self.sqdata.sq_revdeps[nexttask]):
+                         if nexttask not in self.rqdata.target_tids:
 -- 
 2.17.1
 
