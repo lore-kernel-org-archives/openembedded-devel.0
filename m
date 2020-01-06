@@ -1,52 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 495867FCC4
+Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
+	[209.85.214.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 51CA07FCB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Jan 2020 16:20:50 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id b137so27085212pga.6
+	Mon,  6 Jan 2020 16:20:51 +0000 (UTC)
+Received: by mail-pl1-f175.google.com with SMTP id c23so22033181plz.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Jan 2020 08:20:51 -0800 (PST)
+	Mon, 06 Jan 2020 08:20:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=sHHC5spCdMcHMA8SiX5GYtNvF19WVafzS8tfmK/YS/4=;
-	b=nDwWasIQHKBsDXkp+zbSqo6Vmv8+4g/0EvF0YlE1GbZLGWoVfwHzASIPJG/+LfJDRk
-	JIJL8J3TtWj8eqi2bArQZrz4f8Lwrn3MJg6xVIpQKcS+vFYT73k9TJ057l71f5ekGe80
-	26D8KAkIAPaDl/61zyJ3bE99L/dAcngRgQF6DZzCSBUsqTr249WMTs6bk0d80oERXicx
-	fTyco+W9jiGhb+J84h969mRtimTmCxbUwYQLSB3qAK48ehecmyvBcAyFiQ9zA0+PO8QE
-	Ad/xOSpa1TPKZdyuUNOSz+ixgK3XGasGbruJ2tkwx4kCe7pNBZ7DDkK9JE44vOLRlHNq
-	zwXg==
+	bh=paei4CsarOQgVjzqiWvlqV27K2XKAO4q3wav2K/ryz8=;
+	b=N0k0PqSv8GXGIKLx+sW+E2tSAGpjJuNXQqdePCGepk/tKHWvXPvKwP0Da/62uuHv0G
+	mHXdNiB3+Rh+aXwzfewRcy1hdT4j+zy9hF+/Ip3SOgmzcZGzOg6bjtSKC62oNFRjH5wG
+	txe59vQrgTJmUmzzcDuZOttcK1J61o68+2AwJW8wsxyFS9fgsbelq/pMGC/xi84evC6Y
+	YDUK8dXQUarfel8NCRa3pHDJHVPTn2UoSGXVbSzrURj5mGy/jlodZcg26NCVTl5CnHub
+	lBkfyh7FFgxLdiTqfe+Ll9H1JfQnVM4t36B1ydJ8zuKvsKZSLsrcaj4OtmlADK4DAd71
+	57AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=sHHC5spCdMcHMA8SiX5GYtNvF19WVafzS8tfmK/YS/4=;
-	b=pQyV7+vsKs5HMOHJgzx40PJVg1iDonqUdhjo9WD74lv6XFd6+c5h6r4kJ20QPkmcp0
-	I2tICFuI1MT435fPeAI9JGU45SpS5j+ELUN/oFQYOI0ScCmGDUi7lpihoO8NURxYzkRb
-	u+q5vF1VDxtZf/sEJoqZAalSgBDKaMKjvZI/wTonQJD0ua9IpY6uVjatrBXZ0h1eeh2A
-	iEOfdGCMqQzxzLhv/l9xk3NBCXVCJSAqBa0OF1/aVphKmxBJZ4FfPHiHdAn4neDm+V3A
-	S6vPqfd0XTTHK3WGcYN7q1wN9fKe7chWBpCGlJq5pFl/R2DIN3WQwcQt+px/HhRq/Op3
-	liGA==
-X-Gm-Message-State: APjAAAUljLZNOxaE8AdTqbeAkGQgO7Ak5jtTH7ma+ADHFQDuUGrIJaOU
-	tBL2hiJF88DEjbJCDX/guvKQ+aqq
-X-Google-Smtp-Source: APXvYqwfAeBBTa/yNtH3GqgG4CJfAEibiBUceDEorQ/W40g7O5ndrvO0WS7yjhz1F7wjcA5/g3MSZA==
-X-Received: by 2002:aa7:9aeb:: with SMTP id y11mr112124177pfp.63.1578327651346;
-	Mon, 06 Jan 2020 08:20:51 -0800 (PST)
+	bh=paei4CsarOQgVjzqiWvlqV27K2XKAO4q3wav2K/ryz8=;
+	b=EfCwBJnYeVnysHukaxuTU45iJ4Fp9ZQrAPLCsKHOD84JJznIARFASVXvVVhw4UmVq3
+	TjeYqBJwyr32nJ/scAt/39oTDX3P0Xlf9kqtVtj8ibJFjd6n4HyeRDFkycHuV76F0ocf
+	0Qz8VPEmBAeskVT6sqTyuGI/ryvAchK0ToWqyF1THtR2nGDIGBCV1X2nsH10AJlq4kYK
+	qtoepHBn+cb3kHk7cF0N6ItSE0jXJVPWR774Or+7qkI+qzVnJ5m2BlwfNDpqeSFD/juE
+	jTGnrqPG5b94GHjl3IOeZqnck4g+35QPcz9YzNSe8w+ggEHvI6+4+B/y0wz04DscpSak
+	LXBA==
+X-Gm-Message-State: APjAAAVfz13u5LrqobWNIlQF3I5HQxFnVquLEoirArUc+4OUxEJ5cSAV
+	P2lDFSHz5f7FpbvCSi7MSNQP7iZC
+X-Google-Smtp-Source: APXvYqxaWoYGQh+zeEruxtrSgqRM4GnYOO+JfWJD/6VLweKWzCPgG+2XU3VhJXgh3mCJo7kfUC2thw==
+X-Received: by 2002:a17:90a:cb0f:: with SMTP id
+	z15mr44362032pjt.131.1578327652335; 
+	Mon, 06 Jan 2020 08:20:52 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:6832:e19c:36b9:d5e])
 	by smtp.gmail.com with ESMTPSA id
-	g26sm69999588pfo.130.2020.01.06.08.20.50
+	g26sm69999588pfo.130.2020.01.06.08.20.51
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 06 Jan 2020 08:20:50 -0800 (PST)
+	Mon, 06 Jan 2020 08:20:51 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Jan 2020 08:20:22 -0800
-Message-Id: <57df7f191755dd887827d51b125d246c1af3e1b6.1578327474.git.akuster808@gmail.com>
+Date: Mon,  6 Jan 2020 08:20:23 -0800
+Message-Id: <14babbf0a32637db640e0494b0331397dcb0f715.1578327474.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1578327474.git.akuster808@gmail.com>
 References: <cover.1578327474.git.akuster808@gmail.com>
-Subject: [1.44 14/25] runqueue: Optimise task migration code slightly
+Subject: [1.44 15/25] runqueue: Optimise out pointless loop iteration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,52 +60,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Jan 2020 16:20:50 -0000
+X-List-Received-Date: Mon, 06 Jan 2020 16:20:51 -0000
 
 From: Richard Purdie <richard.purdie@linuxfoundation.org>
 
-Move the calls to difference_update out a code level which improves efficiency
-significantly.
-
-Also further combine the outer loop for efficiency too.
-
-These two changes remove a bottleneck from the performance charts.
-
 Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-(cherry picked from commit e28ec69356f1797de3e4e3fca0fef710bc4564de)
+(cherry picked from commit 105d1f0748edde7753a4063e6fdc758ffc8a8a9e)
 ---
- lib/bb/runqueue.py | 17 +++++++++--------
- 1 file changed, 9 insertions(+), 8 deletions(-)
+ lib/bb/runqueue.py | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
 
 diff --git a/lib/bb/runqueue.py b/lib/bb/runqueue.py
-index 2ba4557f..6da612b7 100644
+index 6da612b7..73775d97 100644
 --- a/lib/bb/runqueue.py
 +++ b/lib/bb/runqueue.py
-@@ -2268,15 +2268,16 @@ class RunQueueExecute:
+@@ -1182,11 +1182,8 @@ class RunQueueData:
+         return len(self.runtaskentries)
  
-         # Work out all tasks which depend upon these
-         total = set()
-+        next = set()
-         for p in toprocess:
--            next = set(self.rqdata.runtaskentries[p].revdeps)
--            while next:
--                current = next.copy()
--                total = total | next
--                next = set()
--                for ntid in current:
--                    next |= self.rqdata.runtaskentries[ntid].revdeps
--                    next.difference_update(total)
-+            next |= self.rqdata.runtaskentries[p].revdeps
-+        while next:
-+            current = next.copy()
-+            total = total | next
-+            next = set()
-+            for ntid in current:
-+                next |= self.rqdata.runtaskentries[ntid].revdeps
-+            next.difference_update(total)
+     def prepare_task_hash(self, tid):
+-        procdep = []
+-        for dep in self.runtaskentries[tid].depends:
+-            procdep.append(dep)
+-        bb.parse.siggen.prep_taskhash(tid, procdep, self.dataCaches[mc_from_tid(tid)])
+-        self.runtaskentries[tid].hash = bb.parse.siggen.get_taskhash(tid, procdep, self.dataCaches[mc_from_tid(tid)])
++        bb.parse.siggen.prep_taskhash(tid, self.runtaskentries[tid].depends, self.dataCaches[mc_from_tid(tid)])
++        self.runtaskentries[tid].hash = bb.parse.siggen.get_taskhash(tid, self.runtaskentries[tid].depends, self.dataCaches[mc_from_tid(tid)])
+         self.runtaskentries[tid].unihash = bb.parse.siggen.get_unihash(tid)
  
-         # Now iterate those tasks in dependency order to regenerate their taskhash/unihash
-         next = set()
+     def dump_data(self):
+@@ -2294,11 +2291,8 @@ class RunQueueExecute:
+             for tid in current:
+                 if len(self.rqdata.runtaskentries[p].depends) and not self.rqdata.runtaskentries[tid].depends.isdisjoint(total):
+                     continue
+-                procdep = []
+-                for dep in self.rqdata.runtaskentries[tid].depends:
+-                    procdep.append(dep)
+                 orighash = self.rqdata.runtaskentries[tid].hash
+-                newhash = bb.parse.siggen.get_taskhash(tid, procdep, self.rqdata.dataCaches[mc_from_tid(tid)])
++                newhash = bb.parse.siggen.get_taskhash(tid, self.rqdata.runtaskentries[tid].depends, self.rqdata.dataCaches[mc_from_tid(tid)])
+                 origuni = self.rqdata.runtaskentries[tid].unihash
+                 newuni = bb.parse.siggen.get_unihash(tid)
+                 # FIXME, need to check it can come from sstate at all for determinism?
 -- 
 2.17.1
 
