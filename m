@@ -1,35 +1,53 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B8FA7FDB6
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 4515F607E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jan 2020 09:10:15 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,405,1571673600"; d="scan'208";a="81429022"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 07 Jan 2020 17:10:15 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2633549E9338
+	Tue,  7 Jan 2020 12:20:22 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id y11so53686869wrt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jan 2020 17:01:15 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Tue, 7 Jan 2020 17:10:14 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 7 Jan 2020 17:10:21 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Jan 2020 05:23:19 -0800
-Message-ID: <1578403399-45535-10-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1578403399-45535-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1578403399-45535-1-git-send-email-wangmy@cn.fujitsu.com>
+	Tue, 07 Jan 2020 04:20:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=o5p8kV/ySULvP5FidD8onDmvmJyLr1spAzMUVfxiHdg=;
+	b=NUGigse6bQD+W4aN0+nw7dP1YDJSs1hSqw4n0pfbxJsZ04Zd3zTC+GTy94pS89+8N/
+	PI2tDt72StoeXgpGUHC6MpESwq4kIL0tD8f0sZFigF8e6bpSS4CMvZdQzcVm9aIk0Oj3
+	Dml/R+sydBZ5pzqU5UlWya4h9eK02oOqNbu8mz9u7d3CSnwdArYrtgD5dQObcg2oh0vA
+	HtrJISY0SyiOb2Z2EAVxqfyzWCdc87ibxU+76Ddyzj8gkD1F6wpRy0YpgHKk4Dsus0aI
+	dtZRyAgHv9OCqY4W9PrKIsj9zalGGGEer1GUGW4kIdZOQ7nfS6xBcX5p0OjRct5V5T3+
+	Cugw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=o5p8kV/ySULvP5FidD8onDmvmJyLr1spAzMUVfxiHdg=;
+	b=tWLkEemVOjhxHsgtpOVKPqtcb0hbJywH7m7zx4vtQqMZO9Sb/AprTMhXdge0tn6uK9
+	ctDtV/Ndv1LtFe86wkZsn5r47nh4mIRAGkThfrSKfAFy3AQpnNsuLp9BLkWkpT0XZq9p
+	p56qbJbcq6C6Tv34hmeS9/FvSm2xqBaHAYQ+udTNlMZpuUuZFyjVVP1WHYRiF4qGkW2f
+	Q5dFBNghcbbOBR/dY9s6vuWhl3/PO6TdWO7V7BmF6s80O8M/OHe/Cq3CYHev+UUdzrF/
+	+wMih/SM3bCEEEFoBkk/D5y39aNrJHfJNMeBkXqXjL5wwG3XxWeV2b6gSVIv0Cr59oXz
+	iK2w==
+X-Gm-Message-State: APjAAAX7WqLFGQgQqdTiAJWJqgfC4qFBchAqfQwMYfhkk3UK2upzJpjs
+	iWJk78K6dqLRbubjFnNHwX5Ssw==
+X-Google-Smtp-Source: APXvYqzMTu2b7PSk0HY8elSEH70CPKjMtcAVK5+MzzT65THsa4/4IopfQaH0CZ4UZCEcbwzpJdnxNQ==
+X-Received: by 2002:adf:b605:: with SMTP id f5mr105658122wre.383.1578399622996;
+	Tue, 07 Jan 2020 04:20:22 -0800 (PST)
+Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
+	by smtp.gmail.com with ESMTPSA id
+	f16sm75997779wrm.65.2020.01.07.04.20.22
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 07 Jan 2020 04:20:22 -0800 (PST)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+Date: Tue,  7 Jan 2020 13:20:21 +0100
+Message-Id: <20200107122021.19737-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 2633549E9338.A0E47
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] rabbitmq-c: upgrade 0.9.0 -> 0.10.0
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [meta-oe][PATCH] libsigrok: add support for bluetooth integration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,36 +60,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 09:10:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 07 Jan 2020 12:20:22 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+
+libsigrok now supports bluetooth communication using bluez5. Add a new
+packageconfig option that enables building of the bluetooth module.
+
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
- .../rabbitmq-c/{rabbitmq-c_0.9.0.bb => rabbitmq-c_0.10.0.bb}  | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/rabbitmq-c/{rabbitmq-c_0.9.0.bb => rabbitmq-c_0.10.0.bb} (88%)
+ meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.9.0.bb b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.10.0.bb
-similarity index 88%
-rename from meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.9.0.bb
-rename to meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.10.0.bb
-index 5096d6cd3..2ef6b187e 100644
---- a/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.9.0.bb
-+++ b/meta-oe/recipes-connectivity/rabbitmq-c/rabbitmq-c_0.10.0.bb
-@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE-MIT;md5=6b7424f9db80cfb11fdd5c980b583f53"
- LICENSE = "MIT"
+diff --git a/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb b/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb
+index aad8fa56a..09e56e35c 100644
+--- a/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb
++++ b/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb
+@@ -10,6 +10,7 @@ PACKAGECONFIG[serialport] = "--with-libserialport,--without-libserialport,libser
+ PACKAGECONFIG[ftdi] = "--with-libftdi,--without-libftdi,libftdi"
+ PACKAGECONFIG[usb] = "--with-libusb,--without-libusb,libusb"
+ PACKAGECONFIG[cxx] = "--enable-cxx,--disable-cxx,glibmm doxygen-native"
++PACKAGECONFIG[bluez5] = "--with-libbluez,--without-libbluez,bluez5"
  
- SRC_URI = "git://github.com/alanxz/rabbitmq-c.git"
--# v0.9.0-master
--SRCREV = "7e693a23f7fb7120f85995d3c922814495be30db"
-+# v0.10.0-master
-+SRCREV = "ffe918a5fcef72038a88054dca3c56762b1953d4"
- 
- S = "${WORKDIR}/git"
+ PACKAGECONFIG ??= "serialport ftdi usb"
  
 -- 
-2.17.1
-
-
+2.19.1
 
 
