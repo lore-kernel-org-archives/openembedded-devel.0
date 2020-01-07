@@ -1,53 +1,42 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 4515F607E1
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 05B757FDB0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jan 2020 12:20:22 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id y11so53686869wrt.6
+	Tue,  7 Jan 2020 15:29:22 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id t2so54420601wrr.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jan 2020 04:20:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=o5p8kV/ySULvP5FidD8onDmvmJyLr1spAzMUVfxiHdg=;
-	b=NUGigse6bQD+W4aN0+nw7dP1YDJSs1hSqw4n0pfbxJsZ04Zd3zTC+GTy94pS89+8N/
-	PI2tDt72StoeXgpGUHC6MpESwq4kIL0tD8f0sZFigF8e6bpSS4CMvZdQzcVm9aIk0Oj3
-	Dml/R+sydBZ5pzqU5UlWya4h9eK02oOqNbu8mz9u7d3CSnwdArYrtgD5dQObcg2oh0vA
-	HtrJISY0SyiOb2Z2EAVxqfyzWCdc87ibxU+76Ddyzj8gkD1F6wpRy0YpgHKk4Dsus0aI
-	dtZRyAgHv9OCqY4W9PrKIsj9zalGGGEer1GUGW4kIdZOQ7nfS6xBcX5p0OjRct5V5T3+
-	Cugw==
+	Tue, 07 Jan 2020 07:29:24 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=o5p8kV/ySULvP5FidD8onDmvmJyLr1spAzMUVfxiHdg=;
-	b=tWLkEemVOjhxHsgtpOVKPqtcb0hbJywH7m7zx4vtQqMZO9Sb/AprTMhXdge0tn6uK9
-	ctDtV/Ndv1LtFe86wkZsn5r47nh4mIRAGkThfrSKfAFy3AQpnNsuLp9BLkWkpT0XZq9p
-	p56qbJbcq6C6Tv34hmeS9/FvSm2xqBaHAYQ+udTNlMZpuUuZFyjVVP1WHYRiF4qGkW2f
-	Q5dFBNghcbbOBR/dY9s6vuWhl3/PO6TdWO7V7BmF6s80O8M/OHe/Cq3CYHev+UUdzrF/
-	+wMih/SM3bCEEEFoBkk/D5y39aNrJHfJNMeBkXqXjL5wwG3XxWeV2b6gSVIv0Cr59oXz
-	iK2w==
-X-Gm-Message-State: APjAAAX7WqLFGQgQqdTiAJWJqgfC4qFBchAqfQwMYfhkk3UK2upzJpjs
-	iWJk78K6dqLRbubjFnNHwX5Ssw==
-X-Google-Smtp-Source: APXvYqzMTu2b7PSk0HY8elSEH70CPKjMtcAVK5+MzzT65THsa4/4IopfQaH0CZ4UZCEcbwzpJdnxNQ==
-X-Received: by 2002:adf:b605:: with SMTP id f5mr105658122wre.383.1578399622996;
-	Tue, 07 Jan 2020 04:20:22 -0800 (PST)
-Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
+	bh=ZKm96C2s/Y38AbIDcXznaUQkOM8/mk1goC/k5ktXwWM=;
+	b=B1ux+RPRT+NcKy1KEBjFY8jL2cjkTdAOruXa9/vet26l31y0iA23Fp3amnxeLy41rn
+	Ser9KhH0B2VPgZQtEXSUWeROfb/Yujupb81UuWOQKVPDB7rhSWkjHD94HyLhNXSxHuGU
+	ORsEcpWaqkHWvhB+byOz0IyOL5EyhiZEUVZGUQpZ1yiMEKjl/0HccyXq9E6sJ3K1dpAo
+	DMw5G0yQfdCj7qYsHl/Zp3xeXNp0ZOa9x0yqXIAMb2E4Wy+dJBXCcVHUfvW8JE9EWIu9
+	m060iiTlOTFYk2MucJFVXk9fQp7JsPxVYyB9GsgKyRIXBjA4z9TiFz5SI9l9m2/T4mmK
+	kVdQ==
+X-Gm-Message-State: APjAAAVurHw2a1Cx5aE7jd3pmAyzE++WUKixWkd0jywA0xAZOf/0JuEh
+	z32M5xABBqfVhsOkHHlIpymDgzoP
+X-Google-Smtp-Source: APXvYqwY6MWTM6fPY0+aWi/MShMq35js6LOY/SiGNbXUZMX9+NbwUsWKV6amlSAlis7xZ/qyvRExgA==
+X-Received: by 2002:adf:eb8e:: with SMTP id
+	t14mr108727754wrn.384.1578410963445; 
+	Tue, 07 Jan 2020 07:29:23 -0800 (PST)
+Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	f16sm75997779wrm.65.2020.01.07.04.20.22
+	u8sm27236485wmm.15.2020.01.07.07.29.22
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 07 Jan 2020 04:20:22 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Jan 2020 13:20:21 +0100
-Message-Id: <20200107122021.19737-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.23.0
+	Tue, 07 Jan 2020 07:29:22 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  7 Jan 2020 15:29:22 +0000
+Message-Id: <20200107152922.23676-1-git@andred.net>
+X-Mailer: git-send-email 2.23.0.rc1
 MIME-Version: 1.0
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [meta-oe][PATCH] libsigrok: add support for bluetooth integration
+Subject: [meta-python][PATCH] python3-jsonrpcserver: allow to use as non-root
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,32 +49,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 12:20:22 -0000
+X-List-Received-Date: Tue, 07 Jan 2020 15:29:23 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+This version has some file system permission issues, all
+the files are readable by the owner only (in the archive
+from pypi.org). Given all files in the target file system
+will ultimately be owned by root, this means that this
+package can only be used by root.
 
-libsigrok now supports bluetooth communication using bluez5. Add a new
-packageconfig option that enables building of the bluetooth module.
+Fix the permissions, and hopefully the next version will
+have the archive fixed. The version has been hard-coded
+on purpose here so as to remind us to double-check if
+the _append() is still needed after a version upgrade.
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Signed-off-by: André Draszik <git@andred.net>
 ---
- meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb    | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb b/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb
-index aad8fa56a..09e56e35c 100644
---- a/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb
-+++ b/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb
-@@ -10,6 +10,7 @@ PACKAGECONFIG[serialport] = "--with-libserialport,--without-libserialport,libser
- PACKAGECONFIG[ftdi] = "--with-libftdi,--without-libftdi,libftdi"
- PACKAGECONFIG[usb] = "--with-libusb,--without-libusb,libusb"
- PACKAGECONFIG[cxx] = "--enable-cxx,--disable-cxx,glibmm doxygen-native"
-+PACKAGECONFIG[bluez5] = "--with-libbluez,--without-libbluez,bluez5"
+diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb
+index 7d464b16c..ceae6abd8 100644
+--- a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb
+@@ -21,3 +21,7 @@ RDEPENDS_${PN} += "\
+ "
  
- PACKAGECONFIG ??= "serialport ftdi usb"
- 
+ BBCLASSEXTEND = "native nativesdk"
++
++do_install_append() {
++    chmod 0644 ${D}${PYTHON_SITEPACKAGES_DIR}/jsonrpcserver-4.1.0-py3.7.egg-info/*
++}
 -- 
-2.19.1
+2.23.0.rc1
 
 
