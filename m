@@ -1,43 +1,27 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B8EE7F9A5
+Return-Path: <pjtexier@koncepto.io>
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+	by mail.openembedded.org (Postfix) with ESMTP id E002C7FD1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jan 2020 16:04:16 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id q6so54475686wro.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jan 2020 08:04:17 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=84uiZYHZ8GseMeV+AZLnXlTwmeXtR5dZ8aA5DNXpVYo=;
-	b=PB8EXpJXoiFSVgniRU7rz/ExzY4JwTcEp0sZ/CCpsWGNVGg9oYqCsZFkmrxW5eDsL9
-	70ZQ4NcWc3GiciCDxryWHHPTbyqeDHj33Tzt3E21MgAfa4picHiJXgWPUrDgFjrlJvE5
-	mGkt5spKBkVSlpixOKjlmN5u5BJb53c89U4NJghfcvUzAFulEiPb3PryJZEyTMm0fjCL
-	9LTjoBV/bVdzlKEGJ19Vbuuw2kQJGw8UV6B1o+zv7knFsofbetgVQBTydIavTRwT21+a
-	nlsRgL4Mh7PSVP6nM4+d6ql0ouwaAUG4Qqbj+fW2/uZeCBiBslmSG1dh5AkGhzmdQ5g8
-	l2fA==
-X-Gm-Message-State: APjAAAUSRJ6lQdm+UiNi8vAZrEiYQwTg+ADGmDnmTknIipvnIwdv++qk
-	cJlrs2ZRLSlmEjNvQJr6hES+0xUw
-X-Google-Smtp-Source: APXvYqxnWlpdGrXcB30ay5K1fh/RBbsakxUtppIcIM1dMNtXL52XjddG0hgbzvsQ26OimposT/s9Og==
-X-Received: by 2002:a5d:4392:: with SMTP id
-	i18mr115226877wrq.199.1578413056788; 
-	Tue, 07 Jan 2020 08:04:16 -0800 (PST)
-Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id a184sm78872wmf.29.2020.01.07.08.04.16
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 07 Jan 2020 08:04:16 -0800 (PST)
-From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+	Tue,  7 Jan 2020 17:13:08 +0000 (UTC)
+Received: from menoah.home (lfbn-bor-1-1001-35.w90-120.abo.wanadoo.fr
+	[90.120.192.35]) by koncepto.io (Postfix) with ESMTPSA id 7662A60300;
+	Tue,  7 Jan 2020 18:13:06 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1578417186;
+	bh=rAg8ljvZVrvo3EK/Uq5ex37rUWiFERfYPafoTNen5s4=;
+	h=From:To:Cc:Subject:Date:From;
+	b=PytlwpAD4dLFPWN0oxfI9CRanu9BDFlGKzLC7p/L8llxu/7OP17FHwP5WSQfxRozE
+	ERcQcn7zyfTj5E4W1HKznvmlnkiyaMVKqJvdt4bbLuFZm2w/ZoZ2gwvifXT90Oo6XT
+	BarmFXe77sdbqEsCpiCPd9Eg4jNE5+1PCAj0ZIGZkEbH1Ju3S5EwJXmzGe516OyC2T
+	umdJF1Ls24krPheSfM7HvPYorLt5aRFHmDO4Amc7R5N58S8mO6OnxhOJx2wmeNOyxJ
+	uMamG6odZUud9qSLc32vrkSMfo4rfcMR8WKRTl3RbtIo3vPoU+pvKMDhQ+b1RFouwl
+	wDVzu4RKNnkOQ==
+From: Pierre-Jean Texier <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Jan 2020 16:04:15 +0000
-Message-Id: <20200107160415.39721-1-git@andred.net>
-X-Mailer: git-send-email 2.23.0.rc1
-In-Reply-To: <20200107154659.34711-2-git@andred.net>
-References: <20200107154659.34711-2-git@andred.net>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2 v2] onigurama: enable ptest
+Date: Tue,  7 Jan 2020 18:13:02 +0100
+Message-Id: <1578417182-16151-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] libmxml: upgrade 3.0 -> 3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,151 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 16:04:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 07 Jan 2020 17:13:09 -0000
 
-All tests (with 3400 subtests) are passing (on musl+arm).
+See https://github.com/michaelrsweet/mxml/releases/tag/v3.1
 
-Signed-off-by: André Draszik <git@andred.net>
-
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
-v2:
-* remove useless line in run-ptest
-* update commit message
----
- ...rial-tests-automake-option-for-ptest.patch | 36 ++++++++++++++
- meta-oe/recipes-support/onig/onig/run-ptest   | 47 +++++++++++++++++++
- meta-oe/recipes-support/onig/onig_6.9.4.bb    | 12 ++++-
- 3 files changed, 94 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/onig/onig/0001-build-enable-serial-tests-automake-option-for-ptest.patch
- create mode 100755 meta-oe/recipes-support/onig/onig/run-ptest
+ meta-oe/recipes-support/libmxml/{libmxml_3.0.bb => libmxml_3.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libmxml/{libmxml_3.0.bb => libmxml_3.1.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/onig/onig/0001-build-enable-serial-tests-automake-option-for-ptest.patch b/meta-oe/recipes-support/onig/onig/0001-build-enable-serial-tests-automake-option-for-ptest.patch
-new file mode 100644
-index 000000000..587e5ac1b
---- /dev/null
-+++ b/meta-oe/recipes-support/onig/onig/0001-build-enable-serial-tests-automake-option-for-ptest.patch
-@@ -0,0 +1,36 @@
-+From 8bf8189ec4a0d7ee569f66feb0e590e9602c31b6 Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
-+Date: Mon, 6 Jan 2020 15:10:30 +0000
-+Subject: [PATCH] build: enable serial-tests automake option (for ptest)
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+For ptest, we need to be able to compile the tests without
-+running them.
-+
-+Enabling the serial-tests automake option will add
-+buildtest-TESTS and runtest-TESTS makefile targets, the
-+former being what we want.
-+
-+Signed-off-by: André Draszik <git@andred.net>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index ac51e85..48e63ce 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -3,7 +3,7 @@ AC_INIT(onig, 6.9.4)
-+ 
-+ AC_CONFIG_MACRO_DIR([m4])
-+ 
-+-AM_INIT_AUTOMAKE([-Wno-portability])
-++AM_INIT_AUTOMAKE([-Wno-portability serial-tests])
-+ AC_CONFIG_HEADERS([src/config.h])
-+ 
-+ 
-+-- 
-+2.23.0.rc1
-+
-diff --git a/meta-oe/recipes-support/onig/onig/run-ptest b/meta-oe/recipes-support/onig/onig/run-ptest
-new file mode 100755
-index 000000000..2574d7efa
---- /dev/null
-+++ b/meta-oe/recipes-support/onig/onig/run-ptest
-@@ -0,0 +1,47 @@
-+#!/bin/sh -eu
-+
-+my_cleanup() {
-+    [ -n "${workdir:-}" ] && rm -rf "${workdir}"
-+}
-+
-+trap "my_cleanup" EXIT
-+for sig in INT TERM ; do
-+    # We want sig to expand right here and now, as it's
-+    # a loop variable, not when signalled. For $$ it
-+    # doesn't matter.
-+    # shellcheck disable=SC2064
-+    trap "my_cleanup ; trap - EXIT ; trap - ${sig} ; kill -s ${sig} $$" ${sig}
-+done
-+
-+workdir=$(mktemp -d -t onig.ptest.XXXXXX)
-+status="${workdir}/failed"
-+touch "${status}"
-+
-+find tests/ -perm -111 -type f -exec sh -c '
-+    workdir="${1}"
-+    status="${2}"
-+    t="${3}"
-+    t_log="${workdir}/$(basename ${t}).log"
-+
-+    res=0
-+    ./${t} > "${t_log}" 2>&1 \
-+        || res=$?
-+    if [ $res -eq 0 ] ; then
-+        echo "PASS: ${t}"
-+    else
-+        echo "FAIL: ${t}"
-+        echo "$(basename ${t}): ${t_log}" >> "${status}"
-+    fi
-+    ' _ "${workdir}" "${status}" {} \;
-+
-+if [ $(stat -c '%s' "${status}") -ne 0 ] ; then
-+    exec >&2
-+    while IFS=': ' read -r t t_log ; do
-+        printf "\n=========================\n"
-+        printf "ERROR: %s:\n" "${t}"
-+        printf --  "-------------------------\n"
-+        cat "${t_log}"
-+    done < "${status}"
-+fi
-+
-+[ $(stat -c '%s' "${status}") -eq 0 ]
-diff --git a/meta-oe/recipes-support/onig/onig_6.9.4.bb b/meta-oe/recipes-support/onig/onig_6.9.4.bb
-index ce9eab9e8..16a8be5a2 100644
---- a/meta-oe/recipes-support/onig/onig_6.9.4.bb
-+++ b/meta-oe/recipes-support/onig/onig_6.9.4.bb
-@@ -10,6 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=1ee043784bdce7503e619b2d1a85798b"
- SRC_URI = "\
-     https://github.com/kkos/oniguruma/releases/download/v${PV}/${BP}.tar.gz \
-     file://0001-build-don-t-link-against-host-system-libraries.patch \
-+    file://0001-build-enable-serial-tests-automake-option-for-ptest.patch \
-+    file://run-ptest \
- "
+diff --git a/meta-oe/recipes-support/libmxml/libmxml_3.0.bb b/meta-oe/recipes-support/libmxml/libmxml_3.1.bb
+similarity index 95%
+rename from meta-oe/recipes-support/libmxml/libmxml_3.0.bb
+rename to meta-oe/recipes-support/libmxml/libmxml_3.1.bb
+index 5ca2dda..4e77d6c 100644
+--- a/meta-oe/recipes-support/libmxml/libmxml_3.0.bb
++++ b/meta-oe/recipes-support/libmxml/libmxml_3.1.bb
+@@ -5,7 +5,7 @@ HOMEPAGE = "https://www.msweet.org/mxml/"
+ BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
  
- SRC_URI[md5sum] = "a12d2fe997b789bd87cf63799c091879"
-@@ -17,6 +19,14 @@ SRC_URI[sha256sum] = "4669d22ff7e0992a7e93e116161cac9c0949cd8960d1c562982026726f
+ SRC_URI = "git://github.com/michaelrsweet/mxml.git"
+-SRCREV = "c7755b6992a2afdd34dde47fc9be97f1237cfded"
++SRCREV = "e483e5fd8a33386fd46967681521bdd2da2b548f"
+ S = "${WORKDIR}/git"
  
- BINCONFIG = "${bindir}/onig-config"
- 
--inherit autotools binconfig-disabled
-+inherit autotools binconfig-disabled ptest
- 
- BBCLASSEXTEND = "native"
-+
-+do_compile_ptest() {
-+    oe_runmake -C test buildtest-TESTS
-+}
-+
-+do_install_ptest() {
-+    install -Dm0755 -t ${D}${PTEST_PATH}/tests/ ${B}/test/.libs/*
-+}
+ inherit autotools
 -- 
-2.23.0.rc1
+2.7.4
 
 
