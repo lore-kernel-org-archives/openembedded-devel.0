@@ -1,43 +1,35 @@
-Return-Path: <prvs=268147e20=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E37F7FBBD
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 721567FD72
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jan 2020 06:12:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1578377554; x=1609913554;
-	h=subject:to:cc:references:from:message-id:date:
-	mime-version:in-reply-to:content-transfer-encoding;
-	bh=lpyapRzUVZMdLjrPrbt42oPf22YdfuZJneOVnOZILLg=;
-	b=e44R9wC0BBQ6DDenQfPu0cy25eo1vOD/7SAL2kWKepvIIu6xuT73ObOk
-	Fw0V+1QuVCBUP86/DuVZdCdiyufzg1C6m3dktVp84srxP5uNW9P7Nf/A/
-	e1ws7r/8HD5MSS04AL9koipttZSh0mS62TvX97gDrBBSHp1/ggABMUcZ/
-	htmSFueg7jXhdms2j+ULDHTpyApZVtxZNOBT9+5Q4JuH7sdVznzuJHnQS
-	uhp0lAamXbwuwdRXQsJc3bMIpGZLRNT4Mq+9l8fl8bHojyrwzDfTsgF+o
-	e48hfd4JChUEKpY3yFrRV7ZT/E50rkkYx3edXzSKyrwDIntqwjzB0JJ7x A==;
-IronPort-SDR: 4UvRHqGrigFZMademCX3piYpDYog0gtxbgF3IAebQdB9+zhvq5K4IpuQGvmiUWlpjk3aD27QC5
-	ivnN1ihHP8m7zpt8scqIfDruTxV0o7TV6GdHp6hKZA0MJ3LHRS0/908VVHbmxTxXAJ8J3WH8tz
-	BCmzORWAZcOmxGW0nJuwQ6NKIHLI0IWM4JQYDGx/Cln/uTo0rkT+2TSQ+H7nFHIYG0IgrvCPzz
-	aPL3OJQDy2Ro1PvSPPeCNhVtHGORJie+i3h/f0JyWkZQULIbndfHh3G1aOpLdcY4euz2XHNSY7
-	g8Q=
-X-IronPort-AV: E=Sophos;i="5.69,404,1571695200"; 
-   d="scan'208";a="2479263"
-To: Khem Raj <raj.khem@gmail.com>
-References: <e41daa42-7588-c966-9121-1478afd8b869@skidata.com>
-	<CAMKF1sr4dadjU+=qMnc-XT_UQVGutN=ffZP=uMtcfs=J4D3vdA@mail.gmail.com>
-From: Richard Leitner <richard.leitner@skidata.com>
-Message-ID: <c478e005-9d39-9715-f62f-c4019b1ed405@skidata.com>
-Date: Tue, 7 Jan 2020 07:12:24 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.3.1
+	Tue,  7 Jan 2020 09:09:39 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,405,1571673600"; d="scan'208";a="81428992"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 07 Jan 2020 17:09:38 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id EEDB849E9333
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  7 Jan 2020 17:00:36 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Tue, 7 Jan 2020 17:09:34 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 7 Jan 2020 17:09:42 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Jan 2020 05:23:11 -0800
+Message-ID: <1578403399-45535-2-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1578403399-45535-1-git-send-email-wangmy@cn.fujitsu.com>
+References: <1578403399-45535-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sr4dadjU+=qMnc-XT_UQVGutN=ffZP=uMtcfs=J4D3vdA@mail.gmail.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex4srv.skidata.net (192.168.111.82) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: Darcy Watkins <dwatkins@sierrawireless.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][warrior][PATCH] Revert "openjdk-8: disable, stringop-overflow compiler errors"
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: EEDB849E9333.A73A5
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] botan: upgrade 2.11.0 -> 2.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,45 +42,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 06:12:33 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Jan 2020 09:09:39 -0000
+Content-Type: text/plain
 
-Hi,
+-License-Update: Copyright year updated to 2020.
 
-On 04/01/2020 03:29, Khem Raj wrote:
-> On Fri, Jan 3, 2020 at 2:24 PM Richard Leitner
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ .../botan/{botan_2.11.0.bb => botan_2.13.0.bb}              | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-crypto/botan/{botan_2.11.0.bb => botan_2.13.0.bb} (83%)
 
-...
+diff --git a/meta-oe/recipes-crypto/botan/botan_2.11.0.bb b/meta-oe/recipes-crypto/botan/botan_2.13.0.bb
+similarity index 83%
+rename from meta-oe/recipes-crypto/botan/botan_2.11.0.bb
+rename to meta-oe/recipes-crypto/botan/botan_2.13.0.bb
+index c2d644b41..0854bd672 100644
+--- a/meta-oe/recipes-crypto/botan/botan_2.11.0.bb
++++ b/meta-oe/recipes-crypto/botan/botan_2.13.0.bb
+@@ -1,12 +1,12 @@
+ SUMMARY = "Crypto and TLS for C++11"
+ HOMEPAGE = "https://botan.randombit.net"
+ LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://license.txt;md5=f4c145d4d70a3244a053c9f90d4841fc"
++LIC_FILES_CHKSUM = "file://license.txt;md5=a02e03c8fa2c5e7b9b3fcc1b9811fd3b"
+ SECTION = "libs"
+ 
+ SRC_URI = "https://botan.randombit.net/releases/Botan-${PV}.tar.xz"
+-SRC_URI[md5sum] = "2dba13b0d25d0e9d2a6f9867c62c9f2e"
+-SRC_URI[sha256sum] = "f7874da2aeb8c018fd77df40b2137879bf90b66f5589490c991e83fb3e8094be"
++SRC_URI[md5sum] = "9f90c7d523778be5f23f3ce79046ba35"
++SRC_URI[sha256sum] = "f57ae42a41e1091bca58f44f41addebd9a390b651603952c881ec89d50187e90"
+ 
+ S = "${WORKDIR}/Botan-${PV}"
+ 
+-- 
+2.17.1
 
->> -# WORKAROUND: disable the "specified bound depends on the length of the
->> source argument"
->> -# compiler error until we update openjdk8 to a fixed version
->> -BUILD_CFLAGS_append = " -Wno-error=stringop-overflow"
->> -TARGET_CFLAGS_append = " -Wno-error=stringop-overflow"
->> -
-> 
-> perhaps as distro integrator, its better for us to disable all
-> warning-as-error settings
-> which should work across all gcc versions and warnings will still be
-> there if someone
-> is interested in fixing them.
-> 
-> something like below might work.
-> 
-> BUILD_CFLAGS_append = " -Wno-error"
-> TARGET_CFLAGS_append = " -Wno-error"
 
-If that's acceptable for a OE/YP layer I'll gladly do this for meta-java.
-I always wondered why so much effort is put into fixing new warnings in
-"old" versions of software.
 
-Thanks & regards;rl
-
-> 
-> other options is to add -Wno-unknown-warning which will not break
-> build when a warning is not known
-
-...
 
