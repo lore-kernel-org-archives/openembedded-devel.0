@@ -1,42 +1,43 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
-	[209.85.128.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 991407FDAF
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B8EE7F9A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jan 2020 15:47:00 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id p9so19479634wmc.2
+	Tue,  7 Jan 2020 16:04:16 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id q6so54475686wro.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Jan 2020 07:47:02 -0800 (PST)
+	Tue, 07 Jan 2020 08:04:17 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=c9quBk62ZhhBbeOyQ4lUuAe6/Hf3OfXTF0jh4n4fRO0=;
-	b=k7vaiVQMT5VMiXO/hYwwcWPCzotl/rjSmknzuhrQ1D8bruR380jhYTrccduubQnNaF
-	qLBm2BngxNcXhGkv3KvM4VcUaGcvMR1G9fk5b3YG5+j210oRqmSQA7FPwD0A+Own41fY
-	5S9MiTz55TtfhaHD7jjFxFS2zkZHGW7O8p91rfz9IDKztoQDmJokEGO/iPwhudEpT7Zs
-	nHE3dz6trq+F2NPS9X1L773zPWS1ok7NL/Ed8wtlUM6uTzkdEIrcLHY6QjsRESMVHzFc
-	xl16ddMl8GqiA/ID3T1ByWA0Gc4YopJsXGW00QNP/vKsmljbzt1Ot+sPMkeaXoPFc7tT
-	xKuA==
-X-Gm-Message-State: APjAAAVqNVPW/qXN/N2QnJSSFp6DNoOJ4PoD7KNFM8AHtOCkcnUQ8Zn5
-	ScAx5SoxU2DwHrtwI2aGuP3mw4Xh
-X-Google-Smtp-Source: APXvYqyS6unH65KKk+aXDRJpXcDmxcKyZ42MhGuWklfVcCL3dNHKcs2CtVO0mxXkHhgOaMbLaJ2KzQ==
-X-Received: by 2002:a7b:cbc9:: with SMTP id n9mr41133274wmi.89.1578412021122; 
-	Tue, 07 Jan 2020 07:47:01 -0800 (PST)
+	bh=84uiZYHZ8GseMeV+AZLnXlTwmeXtR5dZ8aA5DNXpVYo=;
+	b=PB8EXpJXoiFSVgniRU7rz/ExzY4JwTcEp0sZ/CCpsWGNVGg9oYqCsZFkmrxW5eDsL9
+	70ZQ4NcWc3GiciCDxryWHHPTbyqeDHj33Tzt3E21MgAfa4picHiJXgWPUrDgFjrlJvE5
+	mGkt5spKBkVSlpixOKjlmN5u5BJb53c89U4NJghfcvUzAFulEiPb3PryJZEyTMm0fjCL
+	9LTjoBV/bVdzlKEGJ19Vbuuw2kQJGw8UV6B1o+zv7knFsofbetgVQBTydIavTRwT21+a
+	nlsRgL4Mh7PSVP6nM4+d6ql0ouwaAUG4Qqbj+fW2/uZeCBiBslmSG1dh5AkGhzmdQ5g8
+	l2fA==
+X-Gm-Message-State: APjAAAUSRJ6lQdm+UiNi8vAZrEiYQwTg+ADGmDnmTknIipvnIwdv++qk
+	cJlrs2ZRLSlmEjNvQJr6hES+0xUw
+X-Google-Smtp-Source: APXvYqxnWlpdGrXcB30ay5K1fh/RBbsakxUtppIcIM1dMNtXL52XjddG0hgbzvsQ26OimposT/s9Og==
+X-Received: by 2002:a5d:4392:: with SMTP id
+	i18mr115226877wrq.199.1578413056788; 
+	Tue, 07 Jan 2020 08:04:16 -0800 (PST)
 Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id x17sm229104wrt.74.2020.01.07.07.47.00
+	by smtp.gmail.com with ESMTPSA id a184sm78872wmf.29.2020.01.07.08.04.16
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 07 Jan 2020 07:47:00 -0800 (PST)
+	Tue, 07 Jan 2020 08:04:16 -0800 (PST)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Jan 2020 15:46:59 +0000
-Message-Id: <20200107154659.34711-2-git@andred.net>
+Date: Tue,  7 Jan 2020 16:04:15 +0000
+Message-Id: <20200107160415.39721-1-git@andred.net>
 X-Mailer: git-send-email 2.23.0.rc1
-In-Reply-To: <20200107154659.34711-1-git@andred.net>
-References: <20200107154659.34711-1-git@andred.net>
+In-Reply-To: <20200107154659.34711-2-git@andred.net>
+References: <20200107154659.34711-2-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] onigurama: enable ptest
+Subject: [meta-oe][PATCH 2/2 v2] onigurama: enable ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,16 +50,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 15:47:01 -0000
+X-List-Received-Date: Tue, 07 Jan 2020 16:04:16 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+All tests (with 3400 subtests) are passing (on musl+arm).
+
 Signed-off-by: André Draszik <git@andred.net>
+
+---
+v2:
+* remove useless line in run-ptest
+* update commit message
 ---
  ...rial-tests-automake-option-for-ptest.patch | 36 ++++++++++++++
- meta-oe/recipes-support/onig/onig/run-ptest   | 48 +++++++++++++++++++
+ meta-oe/recipes-support/onig/onig/run-ptest   | 47 +++++++++++++++++++
  meta-oe/recipes-support/onig/onig_6.9.4.bb    | 12 ++++-
- 3 files changed, 95 insertions(+), 1 deletion(-)
+ 3 files changed, 94 insertions(+), 1 deletion(-)
  create mode 100644 meta-oe/recipes-support/onig/onig/0001-build-enable-serial-tests-automake-option-for-ptest.patch
  create mode 100755 meta-oe/recipes-support/onig/onig/run-ptest
 
@@ -106,10 +114,10 @@ index 000000000..587e5ac1b
 +
 diff --git a/meta-oe/recipes-support/onig/onig/run-ptest b/meta-oe/recipes-support/onig/onig/run-ptest
 new file mode 100755
-index 000000000..ffc855d61
+index 000000000..2574d7efa
 --- /dev/null
 +++ b/meta-oe/recipes-support/onig/onig/run-ptest
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,47 @@
 +#!/bin/sh -eu
 +
 +my_cleanup() {
@@ -129,7 +137,6 @@ index 000000000..ffc855d61
 +status="${workdir}/failed"
 +touch "${status}"
 +
-+#find test/.libs -perm -111 -type f -exec sh -c '
 +find tests/ -perm -111 -type f -exec sh -c '
 +    workdir="${1}"
 +    status="${2}"
