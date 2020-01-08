@@ -1,27 +1,24 @@
-Return-Path: <pjtexier@koncepto.io>
-Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id E002C7FD1B
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A0AA67EB92
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Jan 2020 17:13:08 +0000 (UTC)
-Received: from menoah.home (lfbn-bor-1-1001-35.w90-120.abo.wanadoo.fr
-	[90.120.192.35]) by koncepto.io (Postfix) with ESMTPSA id 7662A60300;
-	Tue,  7 Jan 2020 18:13:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1578417186;
-	bh=rAg8ljvZVrvo3EK/Uq5ex37rUWiFERfYPafoTNen5s4=;
-	h=From:To:Cc:Subject:Date:From;
-	b=PytlwpAD4dLFPWN0oxfI9CRanu9BDFlGKzLC7p/L8llxu/7OP17FHwP5WSQfxRozE
-	ERcQcn7zyfTj5E4W1HKznvmlnkiyaMVKqJvdt4bbLuFZm2w/ZoZ2gwvifXT90Oo6XT
-	BarmFXe77sdbqEsCpiCPd9Eg4jNE5+1PCAj0ZIGZkEbH1Ju3S5EwJXmzGe516OyC2T
-	umdJF1Ls24krPheSfM7HvPYorLt5aRFHmDO4Amc7R5N58S8mO6OnxhOJx2wmeNOyxJ
-	uMamG6odZUud9qSLc32vrkSMfo4rfcMR8WKRTl3RbtIo3vPoU+pvKMDhQ+b1RFouwl
-	wDVzu4RKNnkOQ==
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Jan 2020 18:13:02 +0100
-Message-Id: <1578417182-16151-1-git-send-email-pjtexier@koncepto.io>
+	Wed,  8 Jan 2020 06:07:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 00867esk007917
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 7 Jan 2020 22:07:40 -0800 (PST)
+Received: from pek-lpg-core1.wrs.com (128.224.156.132) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.468.0; Tue, 7 Jan 2020 22:07:40 -0800
+From: Robert Yang <liezhi.yang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 8 Jan 2020 14:09:03 +0800
+Message-ID: <1578463743-72832-1-git-send-email-liezhi.yang@windriver.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] libmxml: upgrade 3.0 -> 3.1
+MIME-Version: 1.0
+Subject: [PATCH] rocksdb: Fix compile error for DEBUG_BUILD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +31,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Jan 2020 17:13:09 -0000
+X-List-Received-Date: Wed, 08 Jan 2020 06:07:40 -0000
+Content-Type: text/plain
 
-See https://github.com/michaelrsweet/mxml/releases/tag/v3.1
+Fixed do_compile error when DEBUG_BUILD = "1":
+db/write_thread.cc:183:14: error: 'state' may be used uninitialized in this function [-Werror=maybe-uninitialized]
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- meta-oe/recipes-support/libmxml/{libmxml_3.0.bb => libmxml_3.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libmxml/{libmxml_3.0.bb => libmxml_3.1.bb} (95%)
+ .../0001-db-write_thread.cc-Initialize-state.patch | 31 ++++++++++++++++++++++
+ meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb         |  1 +
+ 2 files changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-db-write_thread.cc-Initialize-state.patch
 
-diff --git a/meta-oe/recipes-support/libmxml/libmxml_3.0.bb b/meta-oe/recipes-support/libmxml/libmxml_3.1.bb
-similarity index 95%
-rename from meta-oe/recipes-support/libmxml/libmxml_3.0.bb
-rename to meta-oe/recipes-support/libmxml/libmxml_3.1.bb
-index 5ca2dda..4e77d6c 100644
---- a/meta-oe/recipes-support/libmxml/libmxml_3.0.bb
-+++ b/meta-oe/recipes-support/libmxml/libmxml_3.1.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "https://www.msweet.org/mxml/"
- BUGTRACKER = "https://github.com/michaelrsweet/mxml/issues"
+diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-db-write_thread.cc-Initialize-state.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-db-write_thread.cc-Initialize-state.patch
+new file mode 100644
+index 0000000..97ddbce
+--- /dev/null
++++ b/meta-oe/recipes-dbs/rocksdb/files/0001-db-write_thread.cc-Initialize-state.patch
+@@ -0,0 +1,31 @@
++From 49dcd22dcf1aae5995c42eac0fda68516fc1cd43 Mon Sep 17 00:00:00 2001
++From: Robert Yang <liezhi.yang@windriver.com>
++Date: Wed, 19 Jun 2019 17:57:24 +0800
++Subject: [PATCH] db/write_thread.cc: Initialize state
++
++Fixed an error when compiled without -O2:
++db/write_thread.cc:183:14: error: 'state' may be used uninitialized in this function [-Werror=maybe-uninitialized]
++
++Upstream-Status: Pending
++
++Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
++---
++ db/write_thread.cc | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/db/write_thread.cc b/db/write_thread.cc
++index 835992c..6f99a11 100644
++--- a/db/write_thread.cc
+++++ b/db/write_thread.cc
++@@ -59,7 +59,7 @@ uint8_t WriteThread::BlockingAwaitState(Writer* w, uint8_t goal_mask) {
++ 
++ uint8_t WriteThread::AwaitState(Writer* w, uint8_t goal_mask,
++                                 AdaptationContext* ctx) {
++-  uint8_t state;
+++  uint8_t state = 0;
++ 
++   // 1. Busy loop using "pause" for 1 micro sec
++   // 2. Else SOMETIMES busy loop using "yield" for 100 micro sec (default)
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+index 68c6bc2..44a451c 100644
+--- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
++++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
+@@ -12,6 +12,7 @@ PV = "6.5.2"
  
- SRC_URI = "git://github.com/michaelrsweet/mxml.git"
--SRCREV = "c7755b6992a2afdd34dde47fc9be97f1237cfded"
-+SRCREV = "e483e5fd8a33386fd46967681521bdd2da2b548f"
+ SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
+            file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
++           file://0001-db-write_thread.cc-Initialize-state.patch \
+           "
+ 
  S = "${WORKDIR}/git"
- 
- inherit autotools
 -- 
 2.7.4
 
