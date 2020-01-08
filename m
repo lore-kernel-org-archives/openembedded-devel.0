@@ -1,50 +1,50 @@
 Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id B8C057FF2B
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+	[209.85.221.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EC807FF54
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jan 2020 14:51:07 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id g17so3704706wro.2
+	Wed,  8 Jan 2020 17:11:27 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id y17so4230705wrh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jan 2020 06:51:09 -0800 (PST)
+	Wed, 08 Jan 2020 09:11:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=2GuQXmORJz1Bt/pTpsP7vF0vJ2niGqqROolriotuCn4=;
-	b=LgoeqjYivFSsshlqJJ4pU7RVMZSTgNdi0+xfYwZmD+BMLO9dYtazLcNM3rCdPKswDq
-	rJUkjRxEVjXwwl/MrzaCNf9X6unb4C2kHpHwRTVfcmrqFVcHVOHyNV5eGnhVn0L1KDFj
-	1ltc/KLbGcqFmJyl7zrGq7jte1Mhq4OsLKWfqIK0cPH77WIp8vxz2GxWSUuHIQU0C9/v
-	kbv8bLARb6lQAazV51qcJ6miGZgn/0yzW8W6MbNoqlhzA4khcdAp4PrBt0jaBuCdh2eR
-	XVMSTHcbgUGSSbcnCMHCSKPVQDywzCsymrnoK44U6rElrmMVfDdwewW6cjM0UzLMuasd
-	wKAA==
+	h=from:to:cc:subject:date:message-id;
+	bh=eI5eRZaUo3dgM8CwI2KqwEjJtbTkdMH6pN5Zz2vxmc4=;
+	b=FeLbNDnVabASMElr0HJMrdd9TAPrIkconBxpx1G7SrAwXBOSWivzEWkyVg4Cel4Hzw
+	rpIZOFQr5nXPuSLhRVqr0QTRkioltEPGeAifBnibxHeOu61jhIsacYItjpRl6K0yMwYf
+	Nwh8Qp23XupymuAbS3bcbNzEp3rVN0kcXXNzHqCPDQBX1f4To8vpvXg9Cc4k3eoMcKyy
+	HQQvSAPzyYgRZl+IzgAUiHolcZLuCo5KRsuRGr/XU7akBx/5SSz8cCwc47tOeWNxRkD+
+	IoDgwI+nNQvSIW2Yeyj2NsBYwvL2CUITN9xQmAtnFRppg7pOp2sXi3J9KmzA0yvVrbZq
+	QXzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=2GuQXmORJz1Bt/pTpsP7vF0vJ2niGqqROolriotuCn4=;
-	b=Df70bk0evz+3r5kNec8Zg5uCvmfXDGGnBEBLpl6ElNCfJXA7tvgdvpMeHX5jhvMaup
-	uYqJUHbqrAZi25PpmB72BuNw9HbjqnLtWS9PPjLW8fMN+bm5+2ogkFd45ae3+1GcLLZA
-	XGAl5Aknt2asAurR8zJkjriZpz7ir5Za8FF1Kj9ZfL7NKDJJ4T0Hg9pwindSiEtrAode
-	pgHKiaWj6jVeXNUdNu6Tw8F8WS1ApNSOadKxyXG+M8yN8CjybZ5vKthaVdHEk/CmJWZy
-	7bPr4DSsBHEC1OwZfrwapr1yCJV+IFh+srBKGg36rNzQNAls5QQ2S8cRW5zNcRj9eM9A
-	TUUg==
-X-Gm-Message-State: APjAAAU4LPSefXZHt7NyzTmkqJF+ttxnBIJHphhmFTu0TMPx/kf85GW+
-	KbzzFSa3L1LEpo11F1H0iRdksVC87Mt5rIViKlN2OVKY
-X-Google-Smtp-Source: APXvYqxWhBX3hJMAV6sQjR696iLvvVYtgfOXqmfIVdZ1+47Tr+mbq3GpB4Lvx0Xn8l86r8k48yeOqmLRDc6JpIQUsCM=
-X-Received: by 2002:adf:81c2:: with SMTP id 60mr4895752wra.8.1578495068498;
-	Wed, 08 Jan 2020 06:51:08 -0800 (PST)
-MIME-Version: 1.0
-References: <20191210093850.6292-1-costamagnagianfranco@yahoo.it>
-	<CAMKF1spvn+Uqi2q4QsxajLcY0wjPN6dG3vSW-gS4=qmu2dcrbQ@mail.gmail.com>
-	<CAMKF1sovYLH8_eMN6V9n2ZwqA4G2pzMFd_O_ToqVAgAca19stQ@mail.gmail.com>
-In-Reply-To: <CAMKF1sovYLH8_eMN6V9n2ZwqA4G2pzMFd_O_ToqVAgAca19stQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=eI5eRZaUo3dgM8CwI2KqwEjJtbTkdMH6pN5Zz2vxmc4=;
+	b=bD61cuEeqFew6cnTT6oRdguLHsAchmD3t1cpv3THFtllw3IVzTFIgDBN2CfrjjUrj4
+	CxICHTAiAL+zk6D4mDBDjVyfC5aKcjW0Sm0bHX/tNqEdyoi7a6EonV9I/mPjj1hpgJx7
+	yV3hjz3wgdRTRnL5GoMnz4+rG1wwEqxm8Rtj4Rv/h7Tb+HdA3pkUAX4ndQ43ilagqhXr
+	wzL/sWFV622F4oANz9cic/1yYloe510OtyxKLCeXgJB5QgNr3P0zNZ+W4fILWeuoPGFT
+	vN5OmBW8oSJW3KJD19mc5IMgXEifhYoza6wUMu3r9QuhkmnM5TAgvEjbh54KK0IEJYit
+	Jxpg==
+X-Gm-Message-State: APjAAAVjeIyKnc9Z79mMpPwv8oVDi9IFFFaHWKJVgL52HMxzEtGPkeZU
+	csM8FDS8K0bzOr8H03UO5snCLRo8TmY=
+X-Google-Smtp-Source: APXvYqzzuCQZHu2X35w8/xb4Aqz54YI83w6fNccct6KNoX7UrpqQMm9tbVgIimeto5Cl0IyzyZ0Wig==
+X-Received: by 2002:a5d:4e0a:: with SMTP id p10mr5648810wrt.229.1578503487446; 
+	Wed, 08 Jan 2020 09:11:27 -0800 (PST)
+Received: from Unimatrix05-Bionic.lan ([2001:b07:5d32:c012:51ed:b4fa:d66:b069])
+	by smtp.gmail.com with ESMTPSA id
+	s10sm4897970wrw.12.2020.01.08.09.11.26
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 08 Jan 2020 09:11:26 -0800 (PST)
 From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-Date: Wed, 8 Jan 2020 15:50:56 +0100
-Message-ID: <CAATN8PXP74UtpU3PygmhQ1y4cvbc77PAqpnA69cOUDPC+ixSTQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] vboxguestdrivers: update to version 6.0.14 and unblacklist
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  8 Jan 2020 18:11:10 +0100
+Message-Id: <20200108171110.24095-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
+Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] websocketpp: add various upstream accepted and proposed patches to fix various issues, including:
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,80 +57,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2020 14:51:08 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 08 Jan 2020 17:11:27 -0000
 
-Hello, I'm submitting a revised patch that now seems to build fine.
+- build failure with boost 1.71
+- bad installation of header files correct version on some OSes.
+- fix version minor number
 
-thanks for the review!
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+---
+ .../websocketpp/websocketpp-0.8.1/771.patch   | 22 ++++++++++++++
+ .../websocketpp/websocketpp-0.8.1/842.patch   | 30 +++++++++++++++++++
+ .../websocketpp/websocketpp-0.8.1/855.patch   | 23 ++++++++++++++
+ .../websocketpp/websocketpp_0.8.1.bb          |  5 ++++
+ 4 files changed, 80 insertions(+)
+ create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch
+ create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch
+ create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch
 
-Gianfranco
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch
+new file mode 100644
+index 000000000..bc65efb7d
+--- /dev/null
++++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch
+@@ -0,0 +1,22 @@
++From 4bccfb04a264704ec9b80ba332ee1cf113ce7f1b Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Wolfgang=20St=C3=B6ggl?= <c72578@yahoo.de>
++Date: Thu, 1 Nov 2018 20:58:10 +0100
++Subject: [PATCH] Update version number in CMakeLists.txt to 0.8.1
++
++---
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 2786aba9..2d13117b 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -24,7 +24,7 @@ endif ()
++ ############ Project name and version
++ set (WEBSOCKETPP_MAJOR_VERSION 0)
++ set (WEBSOCKETPP_MINOR_VERSION 8)
++-set (WEBSOCKETPP_PATCH_VERSION 0)
+++set (WEBSOCKETPP_PATCH_VERSION 1)
++ set (WEBSOCKETPP_VERSION ${WEBSOCKETPP_MAJOR_VERSION}.${WEBSOCKETPP_MINOR_VERSION}.${WEBSOCKETPP_PATCH_VERSION})
++ 
++ if(POLICY CMP0048)
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch
+new file mode 100644
+index 000000000..c3651e94a
+--- /dev/null
++++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch
+@@ -0,0 +1,30 @@
++From 7f7e2be01b4fa6580ce27f668e61adf37853ad67 Mon Sep 17 00:00:00 2001
++From: Schrijvers Luc <begasus@gmail.com>
++Date: Wed, 18 Sep 2019 11:35:43 +0200
++Subject: [PATCH] Fix "include" directory installation. the variable
++ INSTALL_INCLUDE_DIR already exists, and defaults to include if not
++ specificied otherwise. Using it allows people to customize the installation
++ from outside, fixing issues with other OS like Haiku
++
++Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
++---
++ cmake/CMakeHelpers.cmake | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/cmake/CMakeHelpers.cmake b/cmake/CMakeHelpers.cmake
++index 1478f4b..f603632 100644
++--- a/cmake/CMakeHelpers.cmake
+++++ b/cmake/CMakeHelpers.cmake
++@@ -80,7 +80,7 @@ macro (final_target)
++     endif ()
++ 
++     install (DIRECTORY ${CMAKE_SOURCE_DIR}/${TARGET_NAME}
++-             DESTINATION include/
+++             DESTINATION ${INSTALL_INCLUDE_DIR}/
++              FILES_MATCHING PATTERN "*.hpp*")
++ endmacro ()
++ 
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch
+new file mode 100644
+index 000000000..e44a21c9f
+--- /dev/null
++++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch
+@@ -0,0 +1,23 @@
++From 3590d77bb9753fbbf076028e2395182ced6466ba Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Wed, 8 Jan 2020 17:59:48 +0100
++Subject: [PATCH] Fix cmake find boost with version >= 1.71
++
++For some reasons "system;thread;random;unit_test_framework" was seen as a single module, because of the quotes.
++---
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 2d13117b..9a46bc10 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -211,7 +211,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
++     set (Boost_USE_MULTITHREADED TRUE)
++     set (Boost_ADDITIONAL_VERSIONS "1.39.0" "1.40.0" "1.41.0" "1.42.0" "1.43.0" "1.44.0" "1.46.1") # todo: someone who knows better spesify these!
++ 
++-    find_package (Boost 1.39.0 COMPONENTS "${WEBSOCKETPP_BOOST_LIBS}")
+++    find_package (Boost 1.39.0 COMPONENTS ${WEBSOCKETPP_BOOST_LIBS})
++ 
++     if (Boost_FOUND)
++         # Boost is a project wide global dependency.
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
+index 05f14d2f4..ba3b5a1b0 100644
+--- a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
++++ b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
+@@ -9,8 +9,13 @@ SRC_URI = "git://github.com/zaphoyd/websocketpp.git;protocol=https \
+            file://0001-Replace-make_shared-with-new-in-some-cases.patch \
+            file://0002-Fix-missed-entries-fix-testing.patch \
+            file://0001-cmake-Use-GNUInstallDirs.patch \
++           file://842.patch \
++           file://771.patch \
++           file://855.patch \
+           "
+ 
++EXTRA_OECMAKE = "-DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON"
++
+ # tag 0.8.1
+ SRCREV= "c6d7e295bf5a0ab9b5f896720cc1a0e0fdc397a7"
+ 
+-- 
+2.17.1
 
-
-Il giorno mer 11 dic 2019 alle ore 05:20 Khem Raj <raj.khem@gmail.com> ha
-scritto:
-
-> On Tue, Dec 10, 2019 at 2:54 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > Fails with clang http://errors.yoctoproject.org/Errors/Details/296908/
-> > I guess it needs to use KERNEL_AR
-> >
->
-> It really is generic issue fails with gcc too
-> http://errors.yoctoproject.org/Errors/Details/296946/
->
->
-> > On Tue, Dec 10, 2019 at 1:39 AM Gianfranco Costamagna
-> > <costamagna.gianfranco@gmail.com> wrote:
-> > >
-> > > ---
-> > >  ...oxguestdrivers_5.2.22.bb => vboxguestdrivers_6.0.14.bb} | 7
-> ++-----
-> > >  1 file changed, 2 insertions(+), 5 deletions(-)
-> > >  rename meta-oe/recipes-support/vboxguestdrivers/{
-> vboxguestdrivers_5.2.22.bb => vboxguestdrivers_6.0.14.bb} (92%)
-> > >
-> > > diff --git a/meta-oe/recipes-support/vboxguestdrivers/
-> vboxguestdrivers_5.2.22.bb b/meta-oe/recipes-support/vboxguestdrivers/
-> vboxguestdrivers_6.0.14.bb
-> > > similarity index 92%
-> > > rename from meta-oe/recipes-support/vboxguestdrivers/
-> vboxguestdrivers_5.2.22.bb
-> > > rename to meta-oe/recipes-support/vboxguestdrivers/
-> vboxguestdrivers_6.0.14.bb
-> > > index 0f8d7af3f..bd7339e1a 100644
-> > > --- a/meta-oe/recipes-support/vboxguestdrivers/
-> vboxguestdrivers_5.2.22.bb
-> > > +++ b/meta-oe/recipes-support/vboxguestdrivers/
-> vboxguestdrivers_6.0.14.bb
-> > > @@ -14,8 +14,8 @@ VBOX_NAME = "VirtualBox-${PV}"
-> > >  SRC_URI = "
-> http://download.virtualbox.org/virtualbox/${PV}/${VBOX_NAME}.tar.bz2 \
-> > >      file://Makefile.utils \
-> > >  "
-> > > -SRC_URI[md5sum] = "c9c2f162ac5f99d28d8c0ca43b19ed01"
-> > > -SRC_URI[sha256sum] =
-> "5580e875349341a1aabc6d5d2f697d242f277487316faaf1fbe68d9014f788d4"
-> > > +SRC_URI[md5sum] = "2766d6f628dcd8f0bc216d0f8a2abc8e"
-> > > +SRC_URI[sha256sum] =
-> "5e12b14f0c38bf195d9592d76a9e0a128df2d38cd77c26ce5b5488397715dd0c"
-> > >
-> > >  S = "${WORKDIR}/vbox_module"
-> > >
-> > > @@ -78,6 +78,3 @@ FILES_${PN} = "${base_sbindir}"
-> > >
-> > >  # autoload if installed
-> > >  KERNEL_MODULE_AUTOLOAD += "vboxguest vboxsf vboxvideo"
-> > > -
-> > > -PNBLACKLIST[vboxguestdrivers] = "Needs forward porting to kernel 5.2+"
-> > > -
-> > > --
-> > > 2.17.1
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
