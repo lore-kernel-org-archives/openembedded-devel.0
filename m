@@ -1,36 +1,33 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 63FF17FBFD
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E58B7FC8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jan 2020 09:27:05 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47t3mS0N70z4M;
-	Wed,  8 Jan 2020 10:27:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1578475624;
-	bh=FwIXXX53gd8YCCJ5Njdg5erK0bG87dbXM9qFjTs+e8o=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=G+Gnq4KD3mSxh4G7X6kugz2zGacLfPJXT7sQSC1uoDzdNDIbW7PcoBVOgOMrxqr/B
-	Gpb6KY9mqez50vhTqtyUv7rAf+hVOZ0GBFLlHbNeilPiouBd4pm6hEx89JBWKcvlqC
-	+E5XvBykyCWfrtR3WfiVT3E9aBUGxXovHHOyF084fQLcoU+0JSqF1if09uE2H4pnuM
-	fvmEoylwfAeXFVXyfSsDIGV7RY8+euceaYNfum43yTulGQzpcNQMhL7H6jdnqjif9F
-	8oEGYTwJpC3QShp5nKdM++a543Vju2dZ/1D1uBYNRilXExS1YDRX2i+1wgZQ5BLKb0
-	LSwS/0/olBvnSzh78O+JaaAbp7M+DAAKlw3bnZbobBT90G3+mR8NwZOWdRK2LpiVJW
-	pwJS7dN/9fa/w14YQr6nJ8cKptRMSfwUJBzbH3NuD8Xj4IuYpK/blGU5mrr4rnuuaU
-	mhChuyeimvgk6i6DYCsPTZ+hGlasYXlNriYY5IsVoNIV2MAG/vAUugKBSNwUs3MzvJ
-	Tu5lgK0RbqAEraoSVDCUErvFFTwkwp3T1dhrvRsPNgaNB5agcDMcfXUvxW8Xo/sJvg
-	FzGHtYha23jBTx9NynwZjsfw3s5N2o4CptBwGzfkOCU9MBD7EvGPFw9nN5mcYW9EmE
-	P4tl+1DAPzEH+dp9pZlcQBCQ=
-Date: Wed, 8 Jan 2020 11:27:00 +0200
-From: Adrian Bunk <bunk@stusta.de>
-To: Robert Yang <liezhi.yang@windriver.com>
-Message-ID: <20200108092700.GA25926@localhost>
-References: <1578463743-72832-1-git-send-email-liezhi.yang@windriver.com>
+	Wed,  8 Jan 2020 09:31:13 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,409,1571673600"; d="scan'208";a="81480873"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 08 Jan 2020 17:31:13 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id A2E0449E9335
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Jan 2020 17:22:11 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Wed, 8 Jan 2020 17:31:11 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Wed, 8 Jan 2020 17:31:20 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 8 Jan 2020 05:41:07 -0800
+Message-ID: <1578490868-66073-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-In-Reply-To: <1578463743-72832-1-git-send-email-liezhi.yang@windriver.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] rocksdb: Fix compile error for DEBUG_BUILD
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: A2E0449E9335.A2CAB
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] cscope: upgrade 15.8b -> 15.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,20 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2020 09:27:06 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 08 Jan 2020 09:31:14 -0000
+Content-Type: text/plain
 
-On Wed, Jan 08, 2020 at 02:09:03PM +0800, Robert Yang wrote:
-> Fixed do_compile error when DEBUG_BUILD = "1":
-> db/write_thread.cc:183:14: error: 'state' may be used uninitialized in this function [-Werror=maybe-uninitialized]
->...
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ .../cscope/{cscope_15.8b.bb => cscope_15.9.bb}              | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/cscope/{cscope_15.8b.bb => cscope_15.9.bb} (83%)
 
--Og warnings are not 100% reliable, and in general -Werror is
-problematic for distributions.
+diff --git a/meta-oe/recipes-devtools/cscope/cscope_15.8b.bb b/meta-oe/recipes-devtools/cscope/cscope_15.9.bb
+similarity index 83%
+rename from meta-oe/recipes-devtools/cscope/cscope_15.8b.bb
+rename to meta-oe/recipes-devtools/cscope/cscope_15.9.bb
+index 199c31e15..99f3ba85d 100644
+--- a/meta-oe/recipes-devtools/cscope/cscope_15.8b.bb
++++ b/meta-oe/recipes-devtools/cscope/cscope_15.9.bb
+@@ -18,7 +18,7 @@ inherit autotools
+ 
+ DEPENDS += "ncurses"
+ 
+-SRC_URI = "http://downloads.sourceforge.net/project/cscope/cscope/${PV}/${BP}.tar.gz"
++SRC_URI = "http://downloads.sourceforge.net/project/cscope/cscope/v${PV}/${BP}.tar.gz"
+ 
+-SRC_URI[md5sum] = "8f9409a238ee313a96f9f87fe0f3b176"
+-SRC_URI[sha256sum] = "4889d091f05aa0845384b1e4965aa31d2b20911fb2c001b2cdcffbcb7212d3af"
++SRC_URI[md5sum] = "16f3cce078b6c0e42299def4028eea6f"
++SRC_URI[sha256sum] = "c5505ae075a871a9cd8d9801859b0ff1c09782075df281c72c23e72115d9f159"
+-- 
+2.17.1
 
-Does building with -DFAIL_ON_WARNINGS=OFF fix this problem?
 
-cu
-Adrian
+
 
