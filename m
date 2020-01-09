@@ -1,50 +1,46 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id B4DCD7FEF6
+Return-Path: <jdmason@kudzu.us>
+Received: from mail-io1-f46.google.com (mail-io1-f46.google.com
+	[209.85.166.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 28A3D7FEE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 22:24:26 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id t26so8893984ioi.13
+	Thu,  9 Jan 2020 22:28:48 +0000 (UTC)
+Received: by mail-io1-f46.google.com with SMTP id i11so8880497ioi.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jan 2020 14:24:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=PE33tzWuRkymi+mcaeJxqdUceH9vB07yQMN921BU6MM=;
-	b=jvSmmuF/sUqBsAjUGk0g4Rz/SpFcyS9qdoZwgSUWUQ4RbmqPKcmunNc3PBW82FJn6O
-	WoMDyhTjaKQrvkP24OTY/zUbN2HYeb/fgot/Z4CJfRAzzTh9992TJymQxbJHh+djCqag
-	55yYv1KBoaOL/SaWr4tv7Dtisp+MRdJVcB3ZyZat50n9sxquV/gGoq6lYASgUxqvgqj/
-	EUY1zBrbdNIkwF9ZRI1+2qZAXc7OVEzFK/0e92Lub6JBgBLsksKJ52it96TYj/XhcmmO
-	w2xU+SEOIQ7Inzv8hY/8qxVUc+a8DcMfox33Q83J/gRfh1ZkJ48cr0LEXCc2TRZ9MzZA
-	QhPQ==
+	Thu, 09 Jan 2020 14:28:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=IGHBQhIL8ISQq/D0vbQtyYYNelysuCFxSknRUlKilyY=;
+	b=zaDDvONSgAXvJGnHhQR8/YWRQPbCaXWvscAIyITW4t9fAt2iL/CeORJIuB5QtwS2pa
+	FmefBKjS1mVONXwdrQyaMSNmH/sOqpMhTZLw/72l1fLnmak99EY5irv2QBy86tbE/qGz
+	MyMJJnhJPMo9KIz4lzFdRjZs/QxYgbdlGgEL2S1XxctXoYv7J0dnLlx3pv1cPvmLPvCZ
+	mfciGdwnorJcCa+2CG318PYVNiroh/148q9hUf2FoB+D7DzFmE048ORbnFmWKiq+MWpt
+	8kr+v2ZCUJ5eIfnogZ8xbpftKhop4lmROlw++O7a5pehpmTorAwJHbVs+1ER2R9LgT/k
+	U2ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=PE33tzWuRkymi+mcaeJxqdUceH9vB07yQMN921BU6MM=;
-	b=I/tIVmHDCoqNGPnQEXn62TSDV/Hu9h6q/OzajnijlbXUWeF/S2hyBbXqJxe6u70xLG
-	FCOUVBQYKtiwQOtdrgEVVyyxFV2U6jydc3hwCOaKuU1DrBrGLlRqlpiJEneLsO8iTo2/
-	Mf2O4eXRFC4TlIxjnFEuU6xdCo64t6xpzjbQTRKIFuerZTg6oMxWRWhyk8Oglq1wiGJc
-	Nr6nhUojL02rQAn2NIzHDMpXbbnAjrv8VIT9IPqQiuRxa03A2cdV+i/ZfSztfruQZgDs
-	+5EN14EpJezbIp8XtAi6liAKDqqYt6J/vobECWA1ofeqmeCnlcWuEcwrgThRd1ou5JGk
-	rT3A==
-X-Gm-Message-State: APjAAAXa543NYL7Jbwb6D+xIYPAU+ZNjK0c0LEuDix04AJCW9KT/k1wa
-	tgg1CldlI0nd6MaHEHKy6rRE+6ZON1ktT/f1huo=
-X-Google-Smtp-Source: APXvYqyBsILKgSNv2ZCml9frQz2Qn53b72GlMya1zZCu8w6e/AZ1oYDQtfHCciCCCqQGyo/HVXqA1AbIceJFcWaYWZU=
-X-Received: by 2002:a05:6638:41d:: with SMTP id
-	q29mr11072743jap.128.1578608667829; 
-	Thu, 09 Jan 2020 14:24:27 -0800 (PST)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=IGHBQhIL8ISQq/D0vbQtyYYNelysuCFxSknRUlKilyY=;
+	b=NHMq1rfV8EthyWqxdUq2ie7qfHdpRVfyL8wGolStFKE4NcCBUXpZUPSyZUtXBW4EXx
+	/ht8krcbksg7/9eM4rHHZufG7JEwJoTFqG82/hWvgwFzKg+phJV6GqPBSoED1y5XgjYS
+	lCgAAzEX4jlDgoZ+it4/Mr6YUctPKcDvg/4MH6YHM0Gqp1vcWkDRW079UBPmwx3IleNz
+	5/vrYbAw4p35pZcyk518Jwi3qzkTTcss/gXh0nEie1mfThKaPJRn8gC/WR8JnYYxUchw
+	OfXEUAxNnytZtX64VEW+QzjHbEC4vO4F5gZuh8qjgy5MMhVWPTjAsy6qD4+wlc4OZhMA
+	v6Vg==
+X-Gm-Message-State: APjAAAUZabeOGL05E+LwPN+SQiUkH2fDoGzKopbeEbhyZjbPzMMgdcI1
+	JF3UYdvuKk8DVPsn+hMa6dikmy/BV5KmjJav/S1Ocreit+wlGw==
+X-Google-Smtp-Source: APXvYqzjPJvWuj9AcpzuHnKcsusiSHcYWG+Dmv1eKzRTbE4SRYA5zSMZsF7eNySWqOaJPc5BtojlwlTcuuCd7VEgaWw=
+X-Received: by 2002:a6b:6205:: with SMTP id f5mr10077791iog.42.1578608928975; 
+	Thu, 09 Jan 2020 14:28:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20200109210518.22451-1-schnitzeltony@gmail.com>
-	<bc6e63b4-17f5-4d2c-761b-abe8ef476551@windriver.com>
-In-Reply-To: <bc6e63b4-17f5-4d2c-761b-abe8ef476551@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 9 Jan 2020 23:24:16 +0100
-Message-ID: <CALbNGRT-yQLsGTLsSTJzbhU5b6zzLxHmb6A2wi-pDfmZt-4_8A@mail.gmail.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	matthew.zeng@windriver.com
-Subject: Re: [PATCH 1/9] poppler: upgrade 0.82.0 -> 0.84.0
+From: Jon Mason <jdmason@kudzu.us>
+Date: Thu, 9 Jan 2020 17:28:38 -0500
+Message-ID: <CAPoiz9whfiTNqdM4WVLxrFHkhZHLnapPi+56o2sByra2P6USQA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	Yocto discussion list <yocto@yoctoproject.org>
+Subject: OpenEmbedded Workshop at FOSDEM20 schedule
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,71 +53,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 22:24:26 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 22:28:48 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jan 9, 2020 at 11:01 PM Randy MacLeod
-<randy.macleod@windriver.com> wrote:
->
-> On 1/9/20 4:05 PM, Andreas M=C3=BCller wrote:
-> >  From announcements:
-> >
-> > Release 0.84.0:
-> > core:
-> >   * Fix crash when converting from Unicode to ASCII-7
-> >   * Splash::scaleImageYdXu: Protect against crash if srcWidth is too bi=
-g
-> >   * JBIG2Stream: fix potential crash in malformed documents
-> >   * JBIG2Stream: fix leak in reset() if called several times
-> >   * Internal code improvements
-> >
-> > utils:
-> >   * pdfimages: Add error message if first page is larger then number of=
- pages.
-> >   * pdfinfo: Improved paper size recognition
-> >   * pdfsig: Fix exit code when dumping signatures
-> >   * pdftocairo: Error out when even/odd selects 0 pages
-> >   * pdftohtml: Fix memory leak
-> >   * pdftoppm: Add an option to scale before rotate
-> >   * pdftoppm: Add -hide-annotations option
-> >   * pdftoppm: Error out when even/odd selects 0 pages
-> >   * pdftops: Improve -optimizecolorspace
-> >
-> > qt5:
-> >   * Code cleanups
-> >
-> > glib:
-> >   * Fix compiler warnings
-> >
-> > Release 0.83.0:
-> > core:
-> >   * Improve when a file is recognized as Linearized
-> >   * Improve const-ness of the code
-> >   * Make code a bit more readable/maintanable
-> >   * Fix uninitialized memory uses in broken files
-> >
-> > utils:
-> >   * pdffonts: Make code a bit more readable/maintanable
-> >   * pdftohtml: Make code a bit more readable/maintanable
-> >
-> > qt5:
-> >   * Remove a bunch of unused internal functions
-> >   * trUtf8 -> tr (less warnings)
-> >
-> > build system:
-> >   * make-glib-api-docs: switch to python3
->
-> Nice.
->
-> Andreas,
->
-> Have you by chance tried to add ptest coverage for poppler?
-> If not, Matthew may do that.
->
->
-Have not done any ptest on this - just some runtime tests on target with ev=
-ince
+The OpenEmbedded Workshop 2020 schedule is now available
+https://pretalx.com/oe-workshop-2020/schedule/
 
-Andreas
+As you can see, there are some very compelling talks.  Buy your
+tickets now, before we sell out.
+https://pretix.eu/OpenEmbedded/oe-workshop-2020/
+
+Thank you,
+The OpenEmbedded Board
 
