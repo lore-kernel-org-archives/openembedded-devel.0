@@ -1,46 +1,48 @@
-Return-Path: <jdmason@kudzu.us>
-Received: from mail-io1-f46.google.com (mail-io1-f46.google.com
-	[209.85.166.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 28A3D7FEE6
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f68.google.com (mail-io1-f68.google.com
+	[209.85.166.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B5B77FEE6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 22:28:48 +0000 (UTC)
-Received: by mail-io1-f46.google.com with SMTP id i11so8880497ioi.12
+	Thu,  9 Jan 2020 22:33:23 +0000 (UTC)
+Received: by mail-io1-f68.google.com with SMTP id z193so8981900iof.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jan 2020 14:28:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kudzu-us.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=IGHBQhIL8ISQq/D0vbQtyYYNelysuCFxSknRUlKilyY=;
-	b=zaDDvONSgAXvJGnHhQR8/YWRQPbCaXWvscAIyITW4t9fAt2iL/CeORJIuB5QtwS2pa
-	FmefBKjS1mVONXwdrQyaMSNmH/sOqpMhTZLw/72l1fLnmak99EY5irv2QBy86tbE/qGz
-	MyMJJnhJPMo9KIz4lzFdRjZs/QxYgbdlGgEL2S1XxctXoYv7J0dnLlx3pv1cPvmLPvCZ
-	mfciGdwnorJcCa+2CG318PYVNiroh/148q9hUf2FoB+D7DzFmE048ORbnFmWKiq+MWpt
-	8kr+v2ZCUJ5eIfnogZ8xbpftKhop4lmROlw++O7a5pehpmTorAwJHbVs+1ER2R9LgT/k
-	U2ow==
+	Thu, 09 Jan 2020 14:33:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=LFVnXjppc6d2POxdS4754ME436siE9BPF8CWnaA0skU=;
+	b=rzde8SrIUjfhrcKHjaoAZy7sjpy1u1EqwjpYb+emU96hV2PAzijwSzGP6tHgU9sFQd
+	fZHTTQrkQy7I8ULyyIxmocEsSCEmly20ZI9ZmepuxFcG944e0+qoOr2Mgdqtv7gPJ+wK
+	M0/jjFlTvoZPbr2FlxKwJ6fYxsYlycNej00uyx+UtXhCwi3fXqL/PP/AuN6rxMVfMvUT
+	D5birDpPr/BOiOPtNJ9AgHmgYQDw5/i6dAUs0zEtjRnhkwdUcIdAWpUTQUP4Djzh3VyJ
+	xZsyfhb+CQ6rKCONUWDq+PbFjw5y9RVHlkkXgGXw7hR62j91TWiVihO2Rf1V99vDiTRC
+	wwQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=IGHBQhIL8ISQq/D0vbQtyYYNelysuCFxSknRUlKilyY=;
-	b=NHMq1rfV8EthyWqxdUq2ie7qfHdpRVfyL8wGolStFKE4NcCBUXpZUPSyZUtXBW4EXx
-	/ht8krcbksg7/9eM4rHHZufG7JEwJoTFqG82/hWvgwFzKg+phJV6GqPBSoED1y5XgjYS
-	lCgAAzEX4jlDgoZ+it4/Mr6YUctPKcDvg/4MH6YHM0Gqp1vcWkDRW079UBPmwx3IleNz
-	5/vrYbAw4p35pZcyk518Jwi3qzkTTcss/gXh0nEie1mfThKaPJRn8gC/WR8JnYYxUchw
-	OfXEUAxNnytZtX64VEW+QzjHbEC4vO4F5gZuh8qjgy5MMhVWPTjAsy6qD4+wlc4OZhMA
-	v6Vg==
-X-Gm-Message-State: APjAAAUZabeOGL05E+LwPN+SQiUkH2fDoGzKopbeEbhyZjbPzMMgdcI1
-	JF3UYdvuKk8DVPsn+hMa6dikmy/BV5KmjJav/S1Ocreit+wlGw==
-X-Google-Smtp-Source: APXvYqzjPJvWuj9AcpzuHnKcsusiSHcYWG+Dmv1eKzRTbE4SRYA5zSMZsF7eNySWqOaJPc5BtojlwlTcuuCd7VEgaWw=
-X-Received: by 2002:a6b:6205:: with SMTP id f5mr10077791iog.42.1578608928975; 
-	Thu, 09 Jan 2020 14:28:48 -0800 (PST)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=LFVnXjppc6d2POxdS4754ME436siE9BPF8CWnaA0skU=;
+	b=cnot3y33VCtlNFvuSciRxW6yTQvCcw5PsSYyUCEzbtc4sPwT1l0kqlT2M5f/HcyJTJ
+	Zzw8gBr9E04mdVgddRgKRLUbrfzNyS1rJom//W0GhGBBz7QWejknCPgA4ErXfA2zj5MX
+	91eCzD+FJ6SzFlOXUI0mssSSAxJanT2M1YzLn5TVTF2UjAnBvN+mPbCpA50riRwmAGuw
+	8wUBAglPwqhF3IAZ/tL7pQBrBmtPe6B1gzi0ByQPBUPIZkLEqg+G+8BrMrynHVrpy1KE
+	Fcf+WNAX6UD9buyaNtd65bfolBunhq3vZC0CqI+wUNN0HDbd2BzO/l8dMFN7zE9X3omt
+	ATDQ==
+X-Gm-Message-State: APjAAAXlLqzR1qgE1Kry7NGZwA0vVUMMpUuViEGYt1pdzi8iL/iRS+Ok
+	dLSA/ujbydKkSSzklmMUkwAsRD/VlxqaCHuhpEA=
+X-Google-Smtp-Source: APXvYqw2KEZOwt+HUqt3fla5Mu0FAZLVLQE1WiTE9icg0oP8h8qDxpPEbhvG57g9t79CNNeLecOVeFjMwKQlcExD71Q=
+X-Received: by 2002:a5d:9ecc:: with SMTP id a12mr9962855ioe.267.1578609204376; 
+	Thu, 09 Jan 2020 14:33:24 -0800 (PST)
 MIME-Version: 1.0
-From: Jon Mason <jdmason@kudzu.us>
-Date: Thu, 9 Jan 2020 17:28:38 -0500
-Message-ID: <CAPoiz9whfiTNqdM4WVLxrFHkhZHLnapPi+56o2sByra2P6USQA@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	Yocto discussion list <yocto@yoctoproject.org>
-Subject: OpenEmbedded Workshop at FOSDEM20 schedule
+References: <20200109210518.22451-1-schnitzeltony@gmail.com>
+	<20200109210518.22451-8-schnitzeltony@gmail.com>
+	<CAMKF1sru3Jm-AbJJziRycvs7gRCwuiyLsVhX-FmE0rgaj-PrbA@mail.gmail.com>
+In-Reply-To: <CAMKF1sru3Jm-AbJJziRycvs7gRCwuiyLsVhX-FmE0rgaj-PrbA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 9 Jan 2020 23:33:12 +0100
+Message-ID: <CALbNGRRZPGkcO5cZUUqnfYaVHtwWkjwDNpUYwgfqMtLVfvY0uQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 8/9] libsigc++-3: upgrade 3.0.0 -> 3.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,16 +55,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 22:28:48 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 22:33:23 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-The OpenEmbedded Workshop 2020 schedule is now available
-https://pretalx.com/oe-workshop-2020/schedule/
+On Thu, Jan 9, 2020 at 11:07 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> you have good commit msg so I merged this with earlier patch proposed here
+>
+> https://patchwork.openembedded.org/patch/168647/
 
-As you can see, there are some very compelling talks.  Buy your
-tickets now, before we sell out.
-https://pretix.eu/OpenEmbedded/oe-workshop-2020/
+missed that patch - sorry. I fell over this one by GNOME 3.34.3 [1]
+and just cross-checked it against layerindex.
 
-Thank you,
-The OpenEmbedded Board
+[1] https://download.gnome.org/core/3.34/3.34.3/sources/
+
+Andreas
+
+
+Andreas
 
