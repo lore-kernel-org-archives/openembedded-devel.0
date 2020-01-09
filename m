@@ -1,54 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
 Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
 	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 04DC07FE3E
+	by mail.openembedded.org (Postfix) with ESMTP id DBBF37FE2F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 21:05:30 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id p17so4391455wma.1
+	Thu,  9 Jan 2020 21:05:31 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id d139so2918900wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jan 2020 13:05:32 -0800 (PST)
+	Thu, 09 Jan 2020 13:05:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=TKkcYwG7KalV5hhZofI9Fi14FugX2calkCkNyC/pC3E=;
-	b=Lj9XqhgOlO355Z1Ty5mC1veFyCEh6wBEQdx36lRDJx0P0bmW6G68AL2YawJjIZB1N/
-	gwi8Gom75z+qdoGJlaXbYyG2fl8D1UqwyTyCYtlI6iSJygPYlBGgxN23kF2rwJ1BlN5E
-	z5sJI3gEySyHntxQL60e7x/t6dc1s/6dYKOMeaiujXsaBRewEoXbY5p3mgJT8gexpVwt
-	gLHItoHFwdwJnZaMEOLIG34a1rzEdnFcU98EU5O2bL87FGKC2LsGQ4/RZ3T9sMrKgQJa
-	XohsfbOt/uR7ivzZdVMW5sndd30wwXeahJEhhGScaa2r3C573rjhRzEZttzeH2Q282ip
-	vCOQ==
+	bh=oVbOqtkIUIHOe9xUmsBqAVeVEEzpX8Ugij141C2u/zg=;
+	b=ZfU6y7JBaF5eNANjOEj4Q61+RlQto2OsIN8FbyilqizS7yOjB1MI/0fxF7SqIk3unQ
+	+vQXWngL6tX0fk3u+yrkatypiQSodGzNFrMwW6A+HAlOWRXKLgJrFqdl7hpAoIr1RqDb
+	/OeUVgGAJzUUEdfMFF9qFepN8XRoepxBew7vrYBNMOeVHNTumOTDyehqE0OriLq4dFPb
+	r0uHqEDUuQ+1Aqal7k2LtLaTM8rR2j3FrMGnfqxdX5ocmbB+Pf1dPg8ZDYB7vhmyl+Je
+	lezo7mtIA1cxpMGz1+3t+t46EdTHINX8wFf6yrHWi6O87kDV7IJ4FXdd6eIp7q1bVpVc
+	lsUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=TKkcYwG7KalV5hhZofI9Fi14FugX2calkCkNyC/pC3E=;
-	b=JunixXhgJ9ouVSplo5YRxNjXUqf1EQmJXbEB8SFB9dT9TGlnbpvsJZnJWJi5zg4fGC
-	pjKgA7pgONRtSfpyORLoRySk1zIJlB10ddV9noVqd0wdlPXovL+yr7230NpJEojitg/t
-	Y6vDpMxdmgu+huXo813uww1SUv6wZFCtKPQCGNW9qvym2jk0rHX2mh7rBIN+P5+nVK3Z
-	IhuUeU8N7Og8CfZK6imQv/8+JNlftCFzKTIatF10T1fTedNVeTvEFzYM3KV1vcL7R27I
-	HON5YhqKh7BLXBaHujivHkecxqK2AlCgwJ31ogrXE+bA6iMeRcQQpgsTh1tGBnJdis8n
-	Dz5g==
-X-Gm-Message-State: APjAAAXy4BlNKVEHUpHKYA2NweO+htzMAqOUctD4DKHNSrVz3Pwh7+2e
-	11khjlJrZYsKtGWOsMAwzD4QjLC5PSE=
-X-Google-Smtp-Source: APXvYqxz/PsDaejL2aO4NNr47jYTZ5vWOVP3hoCGDzhj5YksKrrQYIkBk2LFdiKISeNTu5/Dyi14bw==
-X-Received: by 2002:a1c:4907:: with SMTP id w7mr6705869wma.106.1578603931533; 
-	Thu, 09 Jan 2020 13:05:31 -0800 (PST)
+	bh=oVbOqtkIUIHOe9xUmsBqAVeVEEzpX8Ugij141C2u/zg=;
+	b=gbtj3klXYVnTFVsMlbGtm3U1xAId6+oI9IqLiuZdSOyjHHm+acG1bGnuitYSxQumSl
+	ENm4AvduWuCKudQ8VgjIBqRcB1berQ6j4Z3KeMc0A39d0xmu3MrxMTGl9enIh6bT9Far
+	jkEeNEtUAIHJSLNs3krK9kg2Om9HFa/YYUcTd3N1ZnmisN9GnwjSEdbCWBJW6mTU0XKd
+	aVyn3hSLlawjVFq5UURdv8Ij98yEfChdRFWqZpGN+fNzLXpwvR8p0vL9OjKOpzBjkSDN
+	mOWmt4MhsP5SEo6PLNzxCL9Y4qMRVkSbpZkjBG2dqqtbivKfOzTKKJJPQxnranidHEmU
+	zXog==
+X-Gm-Message-State: APjAAAUMLzrh1bzStYr7U8zbNrupI7qJNJgQlTdwd2Ef1UUQb9YrKKhZ
+	EZmpL389dfdDHN3RxEw/mver8Vvgw0M=
+X-Google-Smtp-Source: APXvYqxAy9RQHbn25EEDHbpYkUpkQaFlTOuFTNsYTQsZdICdOFR6Xo1zU9ZyY+kmNZuZYLWHwAW00g==
+X-Received: by 2002:a05:600c:251:: with SMTP id
+	17mr6574086wmj.88.1578603932364; 
+	Thu, 09 Jan 2020 13:05:32 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0446528B12EBEBA10192C2.dip0.t-ipconnect.de.
 	[2003:f0:7f04:4652:8b12:ebeb:a101:92c2])
-	by smtp.gmail.com with ESMTPSA id q6sm9825041wrx.72.2020.01.09.13.05.30
+	by smtp.gmail.com with ESMTPSA id q6sm9825041wrx.72.2020.01.09.13.05.31
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 09 Jan 2020 13:05:30 -0800 (PST)
+	Thu, 09 Jan 2020 13:05:31 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Jan 2020 22:05:16 +0100
-Message-Id: <20200109210518.22451-7-schnitzeltony@gmail.com>
+Date: Thu,  9 Jan 2020 22:05:17 +0100
+Message-Id: <20200109210518.22451-8-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20200109210518.22451-1-schnitzeltony@gmail.com>
 References: <20200109210518.22451-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 7/9] gnome-desktop3: upgrade 3.34.2 -> 3.34.3
+Subject: [PATCH 8/9] libsigc++-3: upgrade 3.0.0 -> 3.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,67 +62,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 21:05:31 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 21:05:32 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From [1]:
 
-==============
-Version 3.34.3
-==============
+3.0.2 (stable)
 
-- seccomp is not supported ATM on riscv64 architecture, blacklist it for now (#128)
+* Build: Meson build improvements.
+  (Kjell Ahlstedt, Chun-Wei Fan)
 
-[1] http://ftp.gnome.org/pub/gnome/sources/gnome-desktop/3.34/gnome-desktop-3.34.3.news
+From [2]:
+
+3.0.1 (stable)
+
+* Build:
+  - Add meson build, alongside the existing autotools and CMake builds.
+  (Kjell Ahlstedt, Chun-Wei Fan)
+  - CMake: Fix the MSVC build, enable warnings, and disable unnecessary
+  warnings, with MVSC.
+  (Stuart Dootson)
+* connection: Allow copying of empty connections.
+  (Aigrind)
+* sigc++/adaptors/bind.h: Make bind_functor::bound_ public.
+  (Used by sigc::visitor::do_visit_each().
+  (Kjell Ahlstedt) Bug #26
+* test_limit_reference: Avoid virtual-move-assign warning
+  (seen with g++ 9.2)
+  (Murray Cumming)
+* signal: slot_iterator_buf: Remove unused T_result default type
+  (Murray Cumming)
+* tests: Slight cleanups
+  (Murray Cumming)
+* Remove unused #ifdefed code.
+  (Murray Cumming)
+
+[1] http://ftp.gnome.org/pub/gnome/sources/libsigc++/3.0/libsigc++-3.0.2.news
+[2] http://ftp.gnome.org/pub/gnome/sources/libsigc++/3.0/libsigc++-3.0.1.news
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../0001-meson.build-Disable-libseccomp-for-all-archs.patch | 6 +++---
- .../{gnome-desktop3_3.34.2.bb => gnome-desktop3_3.34.3.bb}  | 4 ++--
- 2 files changed, 5 insertions(+), 5 deletions(-)
- rename meta-gnome/recipes-gnome/gnome-desktop/{gnome-desktop3_3.34.2.bb => gnome-desktop3_3.34.3.bb} (88%)
+ .../{libsigc++-3_3.0.0.bb => libsigc++-3_3.0.2.bb}            | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-core/libsigc++-2.0/{libsigc++-3_3.0.0.bb => libsigc++-3_3.0.2.bb} (77%)
 
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/0001-meson.build-Disable-libseccomp-for-all-archs.patch b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/0001-meson.build-Disable-libseccomp-for-all-archs.patch
-index e93d5b674..4b3894f05 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/0001-meson.build-Disable-libseccomp-for-all-archs.patch
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop/0001-meson.build-Disable-libseccomp-for-all-archs.patch
-@@ -18,14 +18,14 @@ Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
-  1 file changed, 1 insertion(+), 6 deletions(-)
+diff --git a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.0.0.bb b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.0.2.bb
+similarity index 77%
+rename from meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.0.0.bb
+rename to meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.0.2.bb
+index 3c0330f50..0acdb3e98 100644
+--- a/meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.0.0.bb
++++ b/meta-oe/recipes-core/libsigc++-2.0/libsigc++-3_3.0.2.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=959bffe2993816eb32ec4bc1ec1d5875"
+ DEPENDS = "mm-common"
  
- diff --git a/meson.build b/meson.build
--index 83407b4..80eab84 100644
-+index 2e7160d..f83677d 100644
- --- a/meson.build
- +++ b/meson.build
--@@ -53,12 +53,7 @@ udev_dep = dependency('libudev', required: get_option('udev'))
-+@@ -58,12 +58,7 @@ udev_dep = dependency('libudev', required: get_option('udev'))
-  host_os = host_machine.system()
-  host_cpu = host_machine.cpu()
-  supported_os = ['linux']
---unsupported_cpus = ['alpha', 'ia64', 'm68k', 'sh4', 'sparc', 'sparc64']
-+-unsupported_cpus = ['alpha', 'ia64', 'm68k', 'riscv64', 'sh4', 'sparc', 'sparc64']
- -if supported_os.contains(host_os) and not unsupported_cpus.contains(host_cpu)
- -  seccomp_dep = dependency('libseccomp')
- -else
-diff --git a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.2.bb b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.3.bb
-similarity index 88%
-rename from meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.2.bb
-rename to meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.3.bb
-index 19f73a6e5..cdd11aa90 100644
---- a/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.2.bb
-+++ b/meta-gnome/recipes-gnome/gnome-desktop/gnome-desktop3_3.34.3.bb
-@@ -14,8 +14,8 @@ inherit gnomebase itstool pkgconfig upstream-version-is-even gobject-introspecti
- REQUIRED_DISTRO_FEATURES = "gobject-introspection-data"
- UNKNOWN_CONFIGURE_WHITELIST_append = " introspection"
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/libsigc++/3.0/libsigc++-${PV}.tar.xz"
+-SRC_URI[md5sum] = "6ffe924f1d8624b5716468cde67dc03f"
+-SRC_URI[sha256sum] = "50a0855c1eb26e6044ffe888dbe061938ab4241f96d8f3754ea7ead38ab8ed06"
++SRC_URI[md5sum] = "1f93f8ed4ead38e876157834b2c57c21"
++SRC_URI[sha256sum] = "4b77676de1e74774ec456bcc6ac6f04a2791a12cc1fe07f8305d4c3c86e2f339"
  
--SRC_URI[archive.md5sum] = "a0fda8ee9283536e281405e94af15776"
--SRC_URI[archive.sha256sum] = "4081ba619733da33ec6ba98cd52170ee99a90439709df4df333e5c9e631f28ed"
-+SRC_URI[archive.md5sum] = "cdcd3006f55d8c8813315bef6f4f6b71"
-+SRC_URI[archive.sha256sum] = "acc2efc847574fd21d8f200679f111c2b1eb5ae2c041e0034e7c18450a7d9c6d"
+ S = "${WORKDIR}/libsigc++-${PV}"
  
- SRC_URI += " \
-     file://gnome-desktop-thumbnail-don-t-assume-time_t-is-long.patch \
 -- 
 2.21.0
 
