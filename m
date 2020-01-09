@@ -1,35 +1,35 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 16F797D6D0
+	by mail.openembedded.org (Postfix) with ESMTP id B1D317FDDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 09:11:05 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,413,1571673600"; d="scan'208";a="81538183"
+	Thu,  9 Jan 2020 09:12:08 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,413,1571673600"; d="scan'208";a="81538345"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Jan 2020 17:11:06 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id F0DAE4CE1A0C
+	by heian.cn.fujitsu.com with ESMTP; 09 Jan 2020 17:12:09 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id DAFB64CE1CBE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 17:02:01 +0800 (CST)
+	Thu,  9 Jan 2020 17:03:08 +0800 (CST)
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Thu, 9 Jan 2020 17:11:02 +0800
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 9 Jan 2020 17:12:07 +0800
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 9 Jan 2020 17:11:12 +0800
+	Server (TLS) id 14.3.439.0; Thu, 9 Jan 2020 17:12:16 +0800
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Jan 2020 05:16:10 -0800
-Message-ID: <1578575774-86089-2-git-send-email-wangmy@cn.fujitsu.com>
+Date: Thu, 9 Jan 2020 05:16:11 -0800
+Message-ID: <1578575774-86089-3-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1578575774-86089-1-git-send-email-wangmy@cn.fujitsu.com>
 References: <1578575774-86089-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: F0DAE4CE1A0C.A5935
+X-yoursite-MailScanner-ID: DAFB64CE1CBE.A9E9D
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH] gphoto2: upgrade 2.5.14 -> 2.5.23
+Subject: [meta-oe][PATCH] gtkwave: upgrade 3.3.102 -> 3.3.103
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,33 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 09:11:06 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 09:12:09 -0000
 Content-Type: text/plain
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- .../gphoto2/{gphoto2_2.5.14.bb => gphoto2_2.5.23.bb}          | 4 ++--
+ .../gtkwave/{gtkwave_3.3.102.bb => gtkwave_3.3.103.bb}        | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/gphoto2/{gphoto2_2.5.14.bb => gphoto2_2.5.23.bb} (79%)
+ rename meta-oe/recipes-graphics/gtkwave/{gtkwave_3.3.102.bb => gtkwave_3.3.103.bb} (85%)
 
-diff --git a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.14.bb b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.23.bb
-similarity index 79%
-rename from meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.14.bb
-rename to meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.23.bb
-index 75ad7f4f0..ef3100f66 100644
---- a/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.14.bb
-+++ b/meta-oe/recipes-graphics/gphoto2/gphoto2_2.5.23.bb
-@@ -11,8 +11,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/gphoto2-${PV}.tar.bz2;name=gphoto2 \
-            file://0002-Look-for-popt-with-GP_CHECK_LIBRARY-function.patch \
- "
+diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.102.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.103.bb
+similarity index 85%
+rename from meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.102.bb
+rename to meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.103.bb
+index cd3b6629e..286d9aa6a 100644
+--- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.102.bb
++++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.103.bb
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=75859989545e37968a99b631ef42722e"
  
--SRC_URI[gphoto2.md5sum] = "6c6a21b5e879330cdd71ef92dce36399"
--SRC_URI[gphoto2.sha256sum] = "9302d02fb472d4936988382b7277ccdc4edaf7ede56c490278912ffd0627699c"
-+SRC_URI[gphoto2.md5sum] = "0abd5ae8315109ae66bf06ac37902678"
-+SRC_URI[gphoto2.sha256sum] = "df87092100e7766c9d0a4323217c91908a9c891c0d3670ebf40b76903be458d1"
+ SRC_URI = "http://gtkwave.sourceforge.net/${BP}.tar.gz"
  
- inherit autotools pkgconfig gettext
+-SRC_URI[md5sum] = "13da7d4235d4031fde52971830458850"
+-SRC_URI[sha256sum] = "80bb7cb92db45872209f4ca48fc95a0460e0d89b0fe0c310c836d9b04c77fec7"
++SRC_URI[md5sum] = "5a9a5913f9a02a333b2b23626f153fd7"
++SRC_URI[sha256sum] = "c325abf7cf26c53309a67c0ecaaf196774fa982a717a102c599ac8a516eeeaf7"
  
+ inherit pkgconfig autotools gettext texinfo
+ DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
 -- 
 2.17.1
 
