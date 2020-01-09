@@ -1,24 +1,28 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E6A77FE51
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6FDFE7FDF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 06:16:02 +0000 (UTC)
+	Thu,  9 Jan 2020 07:14:48 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 0096G1Pw025036
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Jan 2020 22:16:01 -0800 (PST)
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.468.0; Wed, 8 Jan 2020 22:16:00 -0800
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Jan 2020 14:15:58 +0800
-Message-ID: <20200109061558.19630-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0097Ek0f002379
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Wed, 8 Jan 2020 23:14:48 -0800 (PST)
+Received: from [128.224.162.181] (128.224.162.181) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Wed, 8 Jan 2020 23:14:46 -0800
+To: Adrian Bunk <bunk@stusta.de>
+References: <1578463743-72832-1-git-send-email-liezhi.yang@windriver.com>
+	<20200108092700.GA25926@localhost>
+From: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <133f8cc7-2ef2-cee6-1642-251bd880cdc0@windriver.com>
+Date: Thu, 9 Jan 2020 15:13:57 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
 MIME-Version: 1.0
-Subject: [meta-perl][PATCH] adduser: set default shell with /sbin/nologin
+In-Reply-To: <20200108092700.GA25926@localhost>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] rocksdb: Fix compile error for DEBUG_BUILD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,77 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 06:16:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 09 Jan 2020 07:14:48 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Kai Kang <kai.kang@windriver.com>
 
-Shell nologin whether provided by shadow or util-linux is installed to
-/sbin/nologin in oe-core. But the default shell of adduser is
-/usr/sbin/nologin and will fail to create a new user.
 
-Set the default shell with /sbin/nologin to fix the issue.
+On 1/8/20 5:27 PM, Adrian Bunk wrote:
+> On Wed, Jan 08, 2020 at 02:09:03PM +0800, Robert Yang wrote:
+>> Fixed do_compile error when DEBUG_BUILD = "1":
+>> db/write_thread.cc:183:14: error: 'state' may be used uninitialized in this function [-Werror=maybe-uninitialized]
+>> ...
+> 
+> -Og warnings are not 100% reliable, and in general -Werror is
+> problematic for distributions.
+> 
+> Does building with -DFAIL_ON_WARNINGS=OFF fix this problem?
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../recipes-perl/adduser/adduser_3.118.bb     |  1 +
- ...-set-default-shell-with-sbin-nologin.patch | 34 +++++++++++++++++++
- 2 files changed, 35 insertions(+)
- create mode 100644 meta-perl/recipes-perl/adduser/files/0001-adduser-set-default-shell-with-sbin-nologin.patch
+Yes, it works.
 
-diff --git a/meta-perl/recipes-perl/adduser/adduser_3.118.bb b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
-index e695c5894..80cf14286 100644
---- a/meta-perl/recipes-perl/adduser/adduser_3.118.bb
-+++ b/meta-perl/recipes-perl/adduser/adduser_3.118.bb
-@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://debian/copyright;md5=caed49ab166f22ef31bf1127f558d0ef
- 
- SRC_URI = "https://launchpad.net/debian/+archive/primary/+sourcefiles/adduser/${PV}/${BPN}_${PV}.tar.xz \
-            file://adduser-add-M-option-for-useradd.patch \
-+           file://0001-adduser-set-default-shell-with-sbin-nologin.patch \
- "
- 
- SRC_URI[md5sum] = "44ba2475ebdaafc9613236bdda321c97"
-diff --git a/meta-perl/recipes-perl/adduser/files/0001-adduser-set-default-shell-with-sbin-nologin.patch b/meta-perl/recipes-perl/adduser/files/0001-adduser-set-default-shell-with-sbin-nologin.patch
-new file mode 100644
-index 000000000..91cc6bcba
---- /dev/null
-+++ b/meta-perl/recipes-perl/adduser/files/0001-adduser-set-default-shell-with-sbin-nologin.patch
-@@ -0,0 +1,34 @@
-+From 75e949bf80bf5e3e5bd8f81b258095e662b705c4 Mon Sep 17 00:00:00 2001
-+From: Kai Kang <kai.kang@windriver.com>
-+Date: Thu, 9 Jan 2020 13:51:28 +0800
-+Subject: [PATCH] adduser: set default shell with /sbin/nologin
-+
-+Shell nologin whether provided by shadow or util-linux is installed to
-+/sbin/nologin in oe-core. But the default shell of adduser is
-+/usr/sbin/nologin and will fail to create a new user.
-+
-+Set the default shell with /sbin/nologin to fix the issue.
-+
-+Upstream-Status: Inappropriate [OE specific]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+---
-+ adduser | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/adduser b/adduser
-+index 0f24cc9..ab554d0 100755
-+--- a/adduser
-++++ b/adduser
-+@@ -431,7 +431,7 @@ if ($action eq "addsysuser") {
-+     printf gtx("Adding new user `%s' (UID %d) with group `%s' ...\n"),$new_name,$new_uid,$ingroup_name
-+ 	if $verbose;
-+     $home_dir = $special_home || &homedir($new_name, $ingroup_name);
-+-    $shell = $special_shell || '/usr/sbin/nologin';
-++    $shell = $special_shell || '/sbin/nologin';
-+     $undouser = $new_name;
-+     my $useradd = &which('useradd');
-+     &systemcall($useradd, '-d', $home_dir, '-g', $ingroup_name, '-s',
-+-- 
-+2.17.1
-+
--- 
-2.17.1
+I think that the correct way to fix it is initialize it rather than ignore the 
+error.
 
+// Robert
+
+> 
+> cu
+> Adrian
+> 
 
