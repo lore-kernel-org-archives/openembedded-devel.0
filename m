@@ -1,35 +1,35 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id ED2027FDDA
+	by mail.openembedded.org (Postfix) with ESMTP id DDC877FC3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 09:12:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,413,1571673600"; d="scan'208";a="81538360"
+	Thu,  9 Jan 2020 09:12:32 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,413,1571673600"; d="scan'208";a="81538365"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Jan 2020 17:12:21 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 16E204CE19F6
+	by heian.cn.fujitsu.com with ESMTP; 09 Jan 2020 17:12:33 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id B310749E933F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 17:03:17 +0800 (CST)
+	Thu,  9 Jan 2020 17:03:32 +0800 (CST)
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Thu, 9 Jan 2020 17:12:14 +0800
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 9 Jan 2020 17:12:33 +0800
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 9 Jan 2020 17:12:24 +0800
+	Server (TLS) id 14.3.439.0; Thu, 9 Jan 2020 17:12:43 +0800
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Jan 2020 05:16:12 -0800
-Message-ID: <1578575774-86089-4-git-send-email-wangmy@cn.fujitsu.com>
+Date: Thu, 9 Jan 2020 05:16:13 -0800
+Message-ID: <1578575774-86089-5-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1578575774-86089-1-git-send-email-wangmy@cn.fujitsu.com>
 References: <1578575774-86089-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 16E204CE19F6.A7953
+X-yoursite-MailScanner-ID: B310749E933F.A315A
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH] haveged: upgrade 1.9.6 -> 1.9.8
+Subject: [meta-oe][PATCH] libgphoto2: upgrade 2.5.17 -> 2.5.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,33 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 09:12:21 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 09:12:33 -0000
 Content-Type: text/plain
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- .../haveged/{haveged_1.9.6.bb => haveged_1.9.8.bb}            | 4 ++--
+ .../gphoto2/{libgphoto2_2.5.17.bb => libgphoto2_2.5.23.bb}    | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/haveged/{haveged_1.9.6.bb => haveged_1.9.8.bb} (96%)
+ rename meta-oe/recipes-graphics/gphoto2/{libgphoto2_2.5.17.bb => libgphoto2_2.5.23.bb} (91%)
 
-diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.6.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.8.bb
-similarity index 96%
-rename from meta-oe/recipes-extended/haveged/haveged_1.9.6.bb
-rename to meta-oe/recipes-extended/haveged/haveged_1.9.8.bb
-index e5b9bc947..403956efa 100644
---- a/meta-oe/recipes-extended/haveged/haveged_1.9.6.bb
-+++ b/meta-oe/recipes-extended/haveged/haveged_1.9.8.bb
-@@ -5,8 +5,8 @@ HOMEPAGE = "http://www.issihosts.com/haveged/index.html"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--# v1.9.6
--SRCREV = "1470a82a7f79110c79beea1ca5f2d3b0fd1a4668"
-+# v1.9.8
-+SRCREV = "8cd0266472aff59821718c4410e80f28978310f9"
- SRC_URI = "git://github.com/jirka-h/haveged.git \
+diff --git a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.17.bb b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.23.bb
+similarity index 91%
+rename from meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.17.bb
+rename to meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.23.bb
+index 623037bc3..a3bdf9cea 100644
+--- a/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.17.bb
++++ b/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.23.bb
+@@ -14,8 +14,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/gphoto/libgphoto2-${PV}.tar.bz2;name=libgphoto2
+            file://0001-configure.ac-remove-AM_PO_SUBDIRS.patch \
  "
- S = "${WORKDIR}/git"
+ 
+-SRC_URI[libgphoto2.md5sum] = "ae78e7a7936a6962c3a22b256bee1869"
+-SRC_URI[libgphoto2.sha256sum] = "417464f0a313fa937e8a71cdf18a371cf01e750830195cd63ae31da0d092b555"
++SRC_URI[libgphoto2.md5sum] = "bf052ce815e607dc781c5b0f3c5ca5c0"
++SRC_URI[libgphoto2.sha256sum] = "d8af23364aa40fd8607f7e073df74e7ace05582f4ba13f1724d12d3c97e8852d"
+ 
+ inherit autotools pkgconfig gettext lib_package
+ 
 -- 
 2.17.1
 
