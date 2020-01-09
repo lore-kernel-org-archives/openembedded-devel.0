@@ -1,54 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com
-	[209.85.221.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B0B77EC64
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 49BA77FDDF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 21:05:26 +0000 (UTC)
-Received: by mail-wr1-f52.google.com with SMTP id y11so8925285wrt.6
+	Thu,  9 Jan 2020 21:05:27 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id c14so8923060wrn.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jan 2020 13:05:27 -0800 (PST)
+	Thu, 09 Jan 2020 13:05:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=AS09nT9h0qwIcuXexdM8ACuXaZDgOB+Bl2T+a5zWS5w=;
-	b=m2vbpbgFYfjljIz08voTpslQLdk2Rj2+2pcAzUC3u75QtUybcfTgMkk0U4WvHvBr//
-	dvZAgVYJwFwBJh5egPvV7Os22PdyQ2dusfMZf5qAfTagXBdaXdtvVk8/ERJv7LPF16R/
-	2bNEFisRItJ/arpZItA0tsF3pejzrIRC/eWcPQcOCyWgb6l0ot7hwIm2A5iCeeDmVujV
-	rZ2v/5s1/pvnO3w/mDdB2TzZcU7B6IaHrUAat1hiyGchlBfm8XD/sQO/1G/C8dU01XzZ
-	yBaTMmqTg70MzsG1iTTMNTUqnYwrRkGl3EK/LmGg6gJ9c3TQdM1NpsKSTXNfLsQxZEH6
-	yTIA==
+	bh=wPB9MDQ/VVaAJwTlJ0wxb4akM3fgJQ4Vu5GJk5sDKaY=;
+	b=QSDbcDEg/HNBugavQEoKiarrJP5qqCJVrTqmU2fvNJXm5UjSPtjDMpVoRdMv7ncYhb
+	YQm1I8MHr//gcHMV3kNu6SeWlEfJUPLSMLd6HgdYj3gb7V2shaO8mpcdrr6/XFacIO21
+	z9bCnX9sYB0l9vG+PkTKXafVeiM++gJ+SP3OMaf/h84qX036F3ijHVrIsYEKcFlZAMIL
+	tXuASNh2QbDXx+t6Oe4BL75yZvJU8NS/bJBEw4MF8Yqm3z+QHDv/XH7+2SJpEovuzwwh
+	b32PU7+/cKerDxB76e//RfOz9yCriFBVYxhOUYaGVBMEB7ESC+nUCdoq+1s1QcHTs8zo
+	F0xQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=AS09nT9h0qwIcuXexdM8ACuXaZDgOB+Bl2T+a5zWS5w=;
-	b=Tlfyq0tGGhR1tih2JWED+ltyrQuMflk+avNhM7t9Rfh3FZ+lwbLiM6jNjHhPulkq8F
-	Ezeh2YhIJTBaEAY3uotsQgBs8tm6Uf8Rv3dHCsSnzykgsFoxNZRoc+qaNQv8SX7Oy2Hl
-	josBLgTHWIaUnxA6DDUnAIKQqB/3WPmltpVZS+R0FBviwmF7yEa9FIqQnSMbUCX7UauV
-	Yei/aQr6Kqvsbg0dNBWc1LwBWw7haRoQNGjdaweNgYUUhUY/STL69nhXIQTf5aJpIoCF
-	eTF9s+Mk+Ym9HMnD9atBv+yCXaPVOiJh0V3m95hWNr/14R3GWkIOCSXxMFU7T8DEyaVI
-	fHyw==
-X-Gm-Message-State: APjAAAULlOb+Wnba8iMEIjK4U+7IU0g1Wu0PohSwqxfda22xLTpA+F6r
-	ydfookOUKJNpTLVLz3bS38BH2RtWQUw=
-X-Google-Smtp-Source: APXvYqy5qK7YUvaYEkY/mriWrAX9Y7eNQZOuyGGA5qby9aANJKjPC+H/sPJaBRVrncjK3Rnb3lo3RQ==
-X-Received: by 2002:adf:f604:: with SMTP id t4mr13499904wrp.33.1578603926956; 
-	Thu, 09 Jan 2020 13:05:26 -0800 (PST)
+	bh=wPB9MDQ/VVaAJwTlJ0wxb4akM3fgJQ4Vu5GJk5sDKaY=;
+	b=gG3Q/Zoa2uT2KDuG/4b+qKM3QLXQN5qkYN1fMWf2EFCtjNgWera6PWySl+CvURLJJU
+	iRUq5mvS8gDEmtZRlLsNgJLAMnGeKgMhaPAIjD6ZBRGq10qMWlTx5+ZljtZpqXBl1kf/
+	Vs0OA8NnaS+HoIc5YGKrhmTGbNMuO+gmTTsO5izeByE3c4AQ9QqvZaR19Hwrbm1SvIS9
+	DOwX9Zvy/BvTJEn7lYXSehEqnOGAxqyGBfdMa1L4idxS2uUHWBohIJ0LiCHvUiEzEOor
+	BXBYbvvNo+6qR9wH5OAXMZyIeinfLshTKOSy2GE/KY8sjzDuhRfer1K6Liqhamcq1Aww
+	4O5w==
+X-Gm-Message-State: APjAAAVTO4Z7WktKmhKIenGN3EaXs1c/6GGGbE222NWuXVVoVslVoQB1
+	wLKcMl3H4MQj/kUywqQM7xyc2txrchU=
+X-Google-Smtp-Source: APXvYqzgCBfG7fpmT1fVfrr+M3cH9PaAUWCbKabgZDKgmemiGPmhDV6kKQVA3HwPULFV3X4OoPun2w==
+X-Received: by 2002:adf:d848:: with SMTP id k8mr12357158wrl.328.1578603928008; 
+	Thu, 09 Jan 2020 13:05:28 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0446528B12EBEBA10192C2.dip0.t-ipconnect.de.
 	[2003:f0:7f04:4652:8b12:ebeb:a101:92c2])
 	by smtp.gmail.com with ESMTPSA id q6sm9825041wrx.72.2020.01.09.13.05.26
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 09 Jan 2020 13:05:26 -0800 (PST)
+	Thu, 09 Jan 2020 13:05:27 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Jan 2020 22:05:11 +0100
-Message-Id: <20200109210518.22451-2-schnitzeltony@gmail.com>
+Date: Thu,  9 Jan 2020 22:05:12 +0100
+Message-Id: <20200109210518.22451-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20200109210518.22451-1-schnitzeltony@gmail.com>
 References: <20200109210518.22451-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/9] xfce4-terminal: upgrade 0.8.9 -> 0.8.9.1
+Subject: [PATCH 3/9] mutter: upgrade 3.34.2 -> 3.34.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,44 +61,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 21:05:26 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 21:05:28 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This is a hotfix release for 0.8.9:
+From announcement:
 
-Release notes for 0.8.9.1
-=========================
-This is a bug-fix release featuring only one change.
-
-0.8.9.1
-=======
-- Fix "Open terminal here" functionality that was broken in release
-0.8.9 (bug #16307)
+* Fix window recording on HiDPI [Pascal; !976]
+* Fix top-left pixel being insensitive to clicks [Sebastian; #893]
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{xfce4-terminal_0.8.9.bb => xfce4-terminal_0.8.9.1.bb}    | 4 ++--
+ .../mutter/{mutter_3.34.2.bb => mutter_3.34.3.bb}             | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-terminal/{xfce4-terminal_0.8.9.bb => xfce4-terminal_0.8.9.1.bb} (70%)
+ rename meta-gnome/recipes-gnome/mutter/{mutter_3.34.2.bb => mutter_3.34.3.bb} (95%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.9.bb b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.9.1.bb
-similarity index 70%
-rename from meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.9.bb
-rename to meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.9.1.bb
-index 493758c18..4bdd4cbf2 100644
---- a/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.9.bb
-+++ b/meta-xfce/recipes-apps/xfce4-terminal/xfce4-terminal_0.8.9.1.bb
-@@ -8,7 +8,7 @@ inherit xfce-app
- FILES_${PN} += "${datadir}/xfce4 \
-                 ${datadir}/gnome-control-center"
+diff --git a/meta-gnome/recipes-gnome/mutter/mutter_3.34.2.bb b/meta-gnome/recipes-gnome/mutter/mutter_3.34.3.bb
+similarity index 95%
+rename from meta-gnome/recipes-gnome/mutter/mutter_3.34.2.bb
+rename to meta-gnome/recipes-gnome/mutter/mutter_3.34.3.bb
+index 992915bb7..9afa269ed 100644
+--- a/meta-gnome/recipes-gnome/mutter/mutter_3.34.2.bb
++++ b/meta-gnome/recipes-gnome/mutter/mutter_3.34.3.bb
+@@ -22,8 +22,8 @@ GNOMEBASEBUILDCLASS = "meson"
  
--SRC_URI[md5sum] = "cb40a6cc5b3e35fa4d68f1b702f11027"
--SRC_URI[sha256sum] = "247683a51a964cfaa6b1e92030afe9f782efebfcb550a464170b53eb94216795"
-+SRC_URI[md5sum] = "cb995e4891a3c547bf133b31e4840d01"
-+SRC_URI[sha256sum] = "0deb0d06e50a8a41fb00e2c3773f0793882cb9f073ae16ead887bb9681c514cd"
+ inherit gnomebase gsettings gobject-introspection gettext upstream-version-is-even features_check
  
- RRECOMMENDS_${PN} += "vte-prompt"
+-SRC_URI[archive.md5sum] = "4515ccdb762a243d65757f5ab073d206"
+-SRC_URI[archive.sha256sum] = "2d6f7763193766d4652d43d0d0de2e49e60ca571eca0a7f1e6341fbd67f90b2d"
++SRC_URI[archive.md5sum] = "c3ee46ae7b84d9d0e8dd3f9e04a61ab1"
++SRC_URI[archive.sha256sum] = "cdf57ddd0bc35db952b732b77c796760e65d1ce2f7df31273e5c8d4759ed4a89"
+ SRC_URI += "file://0001-cogl-Fix-GLES2-fallback.patch"
+ 
+ # x11 is still manadatory - see meson.build
 -- 
 2.21.0
 
