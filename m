@@ -1,48 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1040C7FCE7
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 0BFCB7FE9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Jan 2020 19:26:45 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id k40so3727505qtk.8
+	Thu,  9 Jan 2020 03:23:25 +0000 (UTC)
+Received: by mail-pf1-f177.google.com with SMTP id w62so2633103pfw.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jan 2020 11:26:47 -0800 (PST)
+	Wed, 08 Jan 2020 19:23:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=RkdvS03mcar+g9jkwvzHaLu0DvOvE8VdiT1bh/U6LMs=;
-	b=EFevan2MRXDSzwaz6t6Lyta+E7kcpYy6GW4QJnEvq514x/MjymcsxjCSD8X+oROyDl
-	URcFLBO1fFlOWzVLMaz8og3A/28opGQ5Wk1rc8RGhxVHVw4BlUx3QErPWzt+oC2KqOGG
-	lOHo3Uz6GSZW5iYBfbOWMST/Jwk92nAr7Y6O1JaA5QKhrZT5GtEha0tUqG+vxBMHoFiU
-	ODWtNquWEecLmqOSX18p/Eny+Rf9rvGyzT3NfSZHBJVrlaAhONfQP+JGvhgeNBBBkJr9
-	w5Um8XAo9IiAi/r8ROiNfuC/jqmKYwJZ8kh03Zk2esoGuRqamP/zULogkdffBWXhpnpp
-	w6tA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Ta2iq3julvAej9HyxvArxNYDN/mVYh8oBRAtA+b4UsA=;
+	b=qrDkSiXFjHFX/4I8dAflnhQTXwmTnuSbrmzJ3n6AC42QuVYMfkuda/r6JtQRM3y0bZ
+	oKMjqPTta9DeEE6hdxXI45kQrJ6kf5rwJH5Qiob/I5KkHQLeU7UEVxMuqk1pHEwIvgVa
+	PT06SwrJZEOaJiKbjUShvzob8g8NS3XUzMOITBy99zBap936E+d3oZ1o51b8BegqwYEy
+	gbax3ZxjooIzW5Ma5OHnTXFE18T90LDcKObg6cNzAow7e/XEDpEhNZhKUuF/+wm3BLBL
+	qhUCKrbbUOxIwdQ5Z9TDLq2XRkdH1ObMy1bT9sw5bv++aj7b3gqKAf2fJC33yq0RsbcA
+	4hFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=RkdvS03mcar+g9jkwvzHaLu0DvOvE8VdiT1bh/U6LMs=;
-	b=Yz94wKQWOhfWsyLG2sSonKh5YRwdU6enhQNl8c43lvGCJN9gop8otN7DUw5FUeJDpW
-	Hh9evZSUB9S7gao15c6InOTRdx1Len1a7colC5B9KqSjIMAu01yDr3/SxfaPIvSqGyw7
-	LP04RWXNY+23P07utsRr5c2CtRp8lsJjGJQTq6+ASk/AmM1Wj306BreVB3LZhovm4dfB
-	uKy+IXfCJXDN3pBHoXBxpLaYTSu4JAan0JbtDtPzi0/dHYgfrIsgpXRbmoR+pLCSEI2L
-	GpbbKLy9qjys5Dnm5IEGTkBgL+ieiIxX6nyEUszs6EikrHJaqJJaREKq8qUYAx1occHv
-	YqCQ==
-X-Gm-Message-State: APjAAAVSwiM5Sg2xmmoH1UvaHnJHT22Ha30O+WciUTkWevuDIMhodEyO
-	va8xwnf/1R9x1MiiVhK0to+R00aX+tEWQuck1a8=
-X-Google-Smtp-Source: APXvYqwWpgqpqqavnLsUZQ5yRf0VpoCyCBATSmayHg467lVF/OPcdWKVWOK3V75kLjYXj+Phz09idMa6FS9WaGQtquA=
-X-Received: by 2002:aed:2c03:: with SMTP id f3mr4837572qtd.80.1578511606551;
-	Wed, 08 Jan 2020 11:26:46 -0800 (PST)
-MIME-Version: 1.0
-References: <20200108171110.24095-1-costamagnagianfranco@yahoo.it>
-In-Reply-To: <20200108171110.24095-1-costamagnagianfranco@yahoo.it>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Ta2iq3julvAej9HyxvArxNYDN/mVYh8oBRAtA+b4UsA=;
+	b=bqo3GsBUWDs5477Jl1d3VMZXtbunq9U3JEEpjqBOaZL6f7bwe2Iu87CnQGSVHoZMuX
+	Ot0o7oqzZ2gcb92pnNIG7pFY259NCCiLgVrNiOCNoZy5EbBg4bw3O93BNevQGeXwosOP
+	CwpBnP8S2gNbs6lmAjnDQGoXbgpR5s8wQTsgl/+Hrkzl92t99B1qFQCfMTUAQK4wyAVa
+	R7UA3GMez6kznK7xXcYIAjlwH+gQn7KXkztTXKYO6X5nX7+b2HTwOkvLZ83yAPteRkg9
+	xWDbJMU3wSrWUiKmu5xyjdjZ25uZvqz78JUYgKA0a5Pyvtn1/MV8avdQ4D0JPfivahKp
+	tgpw==
+X-Gm-Message-State: APjAAAU7D5SQujmUckMxvOVhMF/k+qts+axImYiIea1DGqLVkcLp+C96
+	YsI22uZwlhHFu9ZWTZpJyo6Vnr9PKGo=
+X-Google-Smtp-Source: APXvYqxJZZNzy76vn4EpiIcwU5ZHpzhidsI1VX9Y1YoXjCKFNfnJnrLbxeMITGGp0E+PQ/WJy1HVvw==
+X-Received: by 2002:a63:1a08:: with SMTP id a8mr8882126pga.425.1578540206498; 
+	Wed, 08 Jan 2020 19:23:26 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::9bd6])
+	by smtp.gmail.com with ESMTPSA id
+	r30sm5657182pfl.162.2020.01.08.19.23.25
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 08 Jan 2020 19:23:25 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 8 Jan 2020 11:26:20 -0800
-Message-ID: <CAMKF1srYoEatSNts-ryt2r0yBJdqC9_+YoDmdceN670g8DJ8Dg@mail.gmail.com>
-To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] websocketpp: add various upstream accepted and proposed patches to fix various issues, including:
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  8 Jan 2020 19:23:15 -0800
+Message-Id: <20200109032319.3645429-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.1
+MIME-Version: 1.0
+Cc: hmenn <hmen.56@gmail.com>
+Subject: [meta-oe][PATCH 1/5] add sqlite-orm v1.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,156 +58,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Jan 2020 19:26:46 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 09 Jan 2020 03:23:26 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jan 8, 2020 at 9:11 AM Gianfranco Costamagna
-<costamagna.gianfranco@gmail.com> wrote:
->
-> - build failure with boost 1.71
-> - bad installation of header files correct version on some OSes.
-> - fix version minor number
->
-> Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-> Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-> ---
->  .../websocketpp/websocketpp-0.8.1/771.patch   | 22 ++++++++++++++
->  .../websocketpp/websocketpp-0.8.1/842.patch   | 30 +++++++++++++++++++
->  .../websocketpp/websocketpp-0.8.1/855.patch   | 23 ++++++++++++++
->  .../websocketpp/websocketpp_0.8.1.bb          |  5 ++++
->  4 files changed, 80 insertions(+)
->  create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch
->  create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch
->  create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch
->
-> diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch
-> new file mode 100644
-> index 000000000..bc65efb7d
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch
-> @@ -0,0 +1,22 @@
-> +From 4bccfb04a264704ec9b80ba332ee1cf113ce7f1b Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Wolfgang=20St=C3=B6ggl?= <c72578@yahoo.de>
-> +Date: Thu, 1 Nov 2018 20:58:10 +0100
-> +Subject: [PATCH] Update version number in CMakeLists.txt to 0.8.1
-> +
-> +---
-> + CMakeLists.txt | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 2786aba9..2d13117b 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -24,7 +24,7 @@ endif ()
-> + ############ Project name and version
-> + set (WEBSOCKETPP_MAJOR_VERSION 0)
-> + set (WEBSOCKETPP_MINOR_VERSION 8)
-> +-set (WEBSOCKETPP_PATCH_VERSION 0)
-> ++set (WEBSOCKETPP_PATCH_VERSION 1)
-> + set (WEBSOCKETPP_VERSION ${WEBSOCKETPP_MAJOR_VERSION}.${WEBSOCKETPP_MINOR_VERSION}.${WEBSOCKETPP_PATCH_VERSION})
-> +
-> + if(POLICY CMP0048)
-> diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch
-> new file mode 100644
-> index 000000000..c3651e94a
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch
-> @@ -0,0 +1,30 @@
-> +From 7f7e2be01b4fa6580ce27f668e61adf37853ad67 Mon Sep 17 00:00:00 2001
-> +From: Schrijvers Luc <begasus@gmail.com>
-> +Date: Wed, 18 Sep 2019 11:35:43 +0200
-> +Subject: [PATCH] Fix "include" directory installation. the variable
-> + INSTALL_INCLUDE_DIR already exists, and defaults to include if not
-> + specificied otherwise. Using it allows people to customize the installation
-> + from outside, fixing issues with other OS like Haiku
-> +
-> +Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-> +Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-> +---
-> + cmake/CMakeHelpers.cmake | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/cmake/CMakeHelpers.cmake b/cmake/CMakeHelpers.cmake
-> +index 1478f4b..f603632 100644
-> +--- a/cmake/CMakeHelpers.cmake
-> ++++ b/cmake/CMakeHelpers.cmake
-> +@@ -80,7 +80,7 @@ macro (final_target)
-> +     endif ()
-> +
-> +     install (DIRECTORY ${CMAKE_SOURCE_DIR}/${TARGET_NAME}
-> +-             DESTINATION include/
-> ++             DESTINATION ${INSTALL_INCLUDE_DIR}/
-> +              FILES_MATCHING PATTERN "*.hpp*")
-> + endmacro ()
-> +
-> +--
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch
-> new file mode 100644
-> index 000000000..e44a21c9f
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch
-> @@ -0,0 +1,23 @@
-> +From 3590d77bb9753fbbf076028e2395182ced6466ba Mon Sep 17 00:00:00 2001
-> +From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-> +Date: Wed, 8 Jan 2020 17:59:48 +0100
-> +Subject: [PATCH] Fix cmake find boost with version >= 1.71
-> +
-> +For some reasons "system;thread;random;unit_test_framework" was seen as a single module, because of the quotes.
-> +---
-> + CMakeLists.txt | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 2d13117b..9a46bc10 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -211,7 +211,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
-> +     set (Boost_USE_MULTITHREADED TRUE)
-> +     set (Boost_ADDITIONAL_VERSIONS "1.39.0" "1.40.0" "1.41.0" "1.42.0" "1.43.0" "1.44.0" "1.46.1") # todo: someone who knows better spesify these!
-> +
-> +-    find_package (Boost 1.39.0 COMPONENTS "${WEBSOCKETPP_BOOST_LIBS}")
-> ++    find_package (Boost 1.39.0 COMPONENTS ${WEBSOCKETPP_BOOST_LIBS})
-> +
-> +     if (Boost_FOUND)
-> +         # Boost is a project wide global dependency.
-> diff --git a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
-> index 05f14d2f4..ba3b5a1b0 100644
-> --- a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
-> +++ b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
-> @@ -9,8 +9,13 @@ SRC_URI = "git://github.com/zaphoyd/websocketpp.git;protocol=https \
->             file://0001-Replace-make_shared-with-new-in-some-cases.patch \
->             file://0002-Fix-missed-entries-fix-testing.patch \
->             file://0001-cmake-Use-GNUInstallDirs.patch \
-> +           file://842.patch \
-> +           file://771.patch \
-> +           file://855.patch \
->            "
->
+From: hmenn <hmen.56@gmail.com>
 
-I think it will be good if the patches were with 'Upstream-Status: 1
-field present in patch header, this helps in tracking them in future.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../sqlite-orm/sqlite-orm_1.5.bb              | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
 
-> +EXTRA_OECMAKE = "-DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON"
-> +
+diff --git a/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
+new file mode 100644
+index 0000000000..4a27e4b2a5
+--- /dev/null
++++ b/meta-oe/recipes-devtools/sqlite-orm/sqlite-orm_1.5.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "SQLite ORM light header only library for modern C++"
++HOMEPAGE = "https://github.com/fnc12/sqlite_orm"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=3b5bf5ee8bb16d8e19359efe11bdc3f2"
++
++inherit cmake
++
++DEPENDS += "sqlite3"
++
++SRCREV = "e8a9e9416f421303f4b8970caab26dadf8bae98b"
++SRC_URI = "git://github.com/fnc12/sqlite_orm;protocol=https"
++S = "${WORKDIR}/git"
++
++EXTRA_OECMAKE += "-DSqliteOrm_BuildTests=OFF"
++
++BBCLASSEXTEND = "native nativesdk"
++
++FILES_${PN}-dev += "${libdir}/cmake/${BPN}"
++
++# Header-only library
++RDEPENDS_${PN}-dev = ""
++RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPKGV})"
+\ No newline at end of file
+-- 
+2.24.1
 
-These options should be better as packageconfigs and we can turn tests
-on when ptest feature is
-enabled.
-
-Also examples, perhaps should be packages into a separate output package.
-
->  # tag 0.8.1
->  SRCREV= "c6d7e295bf5a0ab9b5f896720cc1a0e0fdc397a7"
->
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
