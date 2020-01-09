@@ -1,54 +1,52 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com
-	[209.85.221.50])
-	by mail.openembedded.org (Postfix) with ESMTP id BB9667FE07
+Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com
+	[209.85.221.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 41D617FEF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 16:21:50 +0000 (UTC)
-Received: by mail-wr1-f50.google.com with SMTP id z3so8055613wru.3
+	Thu,  9 Jan 2020 16:24:29 +0000 (UTC)
+Received: by mail-wr1-f48.google.com with SMTP id c9so8029321wrw.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Jan 2020 08:21:52 -0800 (PST)
+	Thu, 09 Jan 2020 08:24:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=F2U/ijBONX50ajLu2z07GmLerwICgnvB/LdOOfeL/c4=;
-	b=1cZ1R0lJk53E9E31gvWnYY6RgDx6QK+Ays4tcfCILcTAaEbiuwYxVOzMHG5mzl1ANc
-	BE1Gc4ngsLqmP5g1nRfZmyAG2Sh31Zu7/ID9lVyf4UYfYHOh0c2T3GL9iO56Rl6R32J/
-	aWd1g+Zt2RInQ/ph7yoJOhgMTthfSTo7N1QlJQEShw2iUQ/MGNEEjKKvgx5R/pj9CYz5
-	v4Vtfb6tJXRKmT54bdZuVfqbKMqeIGtBZ3z4naWfsnEeZ1HjCT0h+4tF+HIISwunL+Wz
-	HjxksM4/JZhrrEkVPyyI+O85hTBw/2p+hBW9YCXlqydhgyJfZohPghQ+X1vfYbh5oPjD
-	6kOg==
+	bh=CUMzc9PdnQnbwpEtrtJZoIcfUr6JKbEeHIP8pyGVG+c=;
+	b=abDcJdu+WT+HX3Zag+e1McmtXWQ0//Zc37OOh3E9FGewCVS8jn97lJQK7ltoLfm/a8
+	5bWDDoFeORQfx/KT15Cx/vVeT7X+HW6ayEhzczwpvYVOAciXix6eYHHV+2IdqrYfXdEb
+	FYuvi9hln/ByVA2D99Fh+DF4w3gUR3/iyuCfRzvR6sIr9vhVBznm3eQEbSg5eDMYvxqI
+	TwCBNm5yMX0d8h7wz02Wa9wOCrMUolAE/971+KJabdaNXKiQeI1Y/ZUQT/TO2lTiIzxP
+	ydxfdLZoztkAaqJWTepayEON8WfkRRRhh2klIjnyOyd43ZecMzZqaIY+ZaRfdr8tAVi4
+	JU9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=F2U/ijBONX50ajLu2z07GmLerwICgnvB/LdOOfeL/c4=;
-	b=Xu82y/DtP6hvwmgIqicIoX79xGOK4wd9Mjfrv/p5yqyWXqymsf+JAIiRqbYLqvxziZ
-	3gk3JBGYvTnt0WYD7VEkfzcJGiDwh08l9i8ZYVt4s4HkJlsdaccGDlQPKwAxx2D5njxP
-	ZSxrWfK4HUeoqZ3ForXOVyeeZodz2EkDsCRjHKwSpQzRk6fwhxRtG65AQ227IyTicvzN
-	ZEbi3Qxc8pGgGjzFdT2SstsOoLxLIY/UIV3Y1+CxJnuvxyVE2UaFmX/oW2wCRVwTqNfn
-	e1/nx+LtCIKtfvG1ukjaHpyaoOjTTBgbQ1qa4BG50EazjjgjovjAX15pb8+hGWqWFIf+
-	sKcw==
-X-Gm-Message-State: APjAAAXzGJZAzirXOuyZzLX42uiCNkZ3bR+dFfILbUOYF2nSX2SvRwvL
-	/x2FmFL5sEiej/XXUJBfqJIpk/hPaEA=
-X-Google-Smtp-Source: APXvYqwB3ptuG0AP88J0wWlw+HectrKFNWUFcg/+ZSN6RwdDfYQwS8SWLGCoMTPg88KutxcjUiyIQA==
-X-Received: by 2002:adf:f3cc:: with SMTP id g12mr11862121wrp.236.1578586911198;
-	Thu, 09 Jan 2020 08:21:51 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=CUMzc9PdnQnbwpEtrtJZoIcfUr6JKbEeHIP8pyGVG+c=;
+	b=cS63OHnGUZsB//sR4cqZdoCi7kzYBH5cW+SHmlpFSTzKb9N8XahSxU6NGHuHI1wtzT
+	cPKIxLwtIsuqdZtdwIW+77KliXXl0KqqYOki8lCy1kdUV32WcF47K9DCLZ3LstGMOTMo
+	tHrIcOhs/G9GmJvfxtUwF+fgm3Z9Wgi4V9b1aDCNz6tevgpT4lAjH2qWUYRveNYRFtVi
+	UAf2vQn/zG72eATJb/sGjAXzCRUtEx47X1q7Ok6LRRq92oGR1ok+3UR3ewsP4AdIytME
+	KEJr8B9+76vbzO8Zj9eQG4BRCLYrDBxyeEYFG6t9DCMc/Q0ZN/uZJe1m2ZETnaH6bmIM
+	LOng==
+X-Gm-Message-State: APjAAAV+83TrdnMoCIGwvuP7i77KdS3mEh/ZeT7TKf4x5WV+RJdu+zuP
+	73bT8uVffimJMVlCBa7xvQRpM8MDcZM=
+X-Google-Smtp-Source: APXvYqwhbLvANrvFA2sfpD8zMF4CUCG8KEH3F6K+3JiPdqAzvXI4NwMV6ctOL2Ov+TjE/kTJo1wRrA==
+X-Received: by 2002:adf:f80b:: with SMTP id s11mr11191347wrp.12.1578587069633; 
+	Thu, 09 Jan 2020 08:24:29 -0800 (PST)
 Received: from flashheart.burtonini.com (35.106.2.81.in-addr.arpa.
-	[81.2.106.35])
-	by smtp.gmail.com with ESMTPSA id d14sm8655010wru.9.2020.01.09.08.21.50
+	[81.2.106.35]) by smtp.gmail.com with ESMTPSA id
+	x14sm3329872wmj.42.2020.01.09.08.24.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 09 Jan 2020 08:21:50 -0800 (PST)
+	Thu, 09 Jan 2020 08:24:29 -0800 (PST)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  9 Jan 2020 16:21:41 +0000
-Message-Id: <20200109162141.20579-4-ross.burton@intel.com>
+Date: Thu,  9 Jan 2020 16:24:24 +0000
+Message-Id: <20200109162424.22107-1-ross.burton@intel.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200109162141.20579-1-ross.burton@intel.com>
-References: <20200109162141.20579-1-ross.burton@intel.com>
 MIME-Version: 1.0
-Subject: [PATCH 4/4] opencv: abort configure if we need to download
+Subject: [PATCH v2] opencv: abort configure if we need to download
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,7 +59,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 16:21:51 -0000
+X-List-Received-Date: Thu, 09 Jan 2020 16:24:30 -0000
 Content-Transfer-Encoding: 8bit
 
 OpenCV's habit of downloading files during do_configure is bad form
@@ -70,9 +68,49 @@ error out if a download would be needed.
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-oe/recipes-support/opencv/opencv_4.1.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../opencv/opencv/download.patch              | 32 +++++++++++++++++++
+ .../recipes-support/opencv/opencv_4.1.0.bb    |  2 ++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/download.patch
 
+diff --git a/meta-oe/recipes-support/opencv/opencv/download.patch b/meta-oe/recipes-support/opencv/opencv/download.patch
+new file mode 100644
+index 0000000000..fa8db88078
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/download.patch
+@@ -0,0 +1,32 @@
++This CMake module will download files during do_configure.  This is bad as it
++means we can't do offline builds.
++
++Add an option to disallow downloads by emitting a fatal error.
++
++Upstream-Status: Pending
++Signed-off-by: Ross Burton <ross.burton@intel.com>
++
++diff --git a/cmake/OpenCVDownload.cmake b/cmake/OpenCVDownload.cmake
++index cdc47ad2cb..74573f45a2 100644
++--- a/cmake/OpenCVDownload.cmake
+++++ b/cmake/OpenCVDownload.cmake
++@@ -14,6 +14,7 @@
++ #    RELATIVE_URL - if set, then URL is treated as a base, and FILENAME will be appended to it
++ #  Note: uses OPENCV_DOWNLOAD_PATH folder as cache, default is <opencv>/.cache
++ 
+++set(OPENCV_ALLOW_DOWNLOADS ON CACHE BOOL "Allow downloads")
++ set(HELP_OPENCV_DOWNLOAD_PATH "Cache directory for downloaded files")
++ if(DEFINED ENV{OPENCV_DOWNLOAD_PATH})
++   set(OPENCV_DOWNLOAD_PATH "$ENV{OPENCV_DOWNLOAD_PATH}" CACHE PATH "${HELP_OPENCV_DOWNLOAD_PATH}")
++@@ -153,6 +154,11 @@ function(ocv_download)
++ 
++   # Download
++   if(NOT EXISTS "${CACHE_CANDIDATE}")
+++    if(NOT OPENCV_ALLOW_DOWNLOADS)
+++      message(FATAL_ERROR "Not going to download ${DL_FILENAME}")
+++      return()
+++    endif()
+++
++     ocv_download_log("#cmake_download \"${CACHE_CANDIDATE}\" \"${DL_URL}\"")
++     file(DOWNLOAD "${DL_URL}" "${CACHE_CANDIDATE}"
++          INACTIVITY_TIMEOUT 60
 diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
 index 03e4f58dca..f679ccb05f 100644
 --- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
