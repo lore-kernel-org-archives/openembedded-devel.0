@@ -1,48 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 35B857FE00
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id EE0157FD4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Jan 2020 07:23:44 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id c17so5103804qkg.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Jan 2020 23:23:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0GPdRJf3bV8wixH+1m+7HRP6NlLJUIP5vOkop5zQ9qI=;
-	b=T9m0C1RIbrmvfdOxtLaRb4XhH7OkLCwuEcFnvpr6brd4ew540ZIjxkLd4IJVzMjkaB
-	fO37ySgOkBmwCSovlqR65KPrx2G3mBFTI/BPbWdtbR4vF7scBsiQAtC8TcHnlppcZarO
-	s7GUle4qLngHR23gwLi+CHjixmaLLRvoLL2O8M2qU7n2hEFXHWbHYKMwzOcvzXd1908s
-	4jIm/QTIrM3btQcLiZy7nzOcg8TwcozO3Nr81p1RpeBQMwx5zXgHH8jU9iWRhNuUYqaQ
-	hiY0C43V7j2IN1uF1TtAsatYb2lSdcF0vbmatZmclP/t00shYUuzyiCDXyPxpfDovkOz
-	9Y3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=0GPdRJf3bV8wixH+1m+7HRP6NlLJUIP5vOkop5zQ9qI=;
-	b=hCL7okFMrm9AbAW8E2n37Ir//1MECXOCe6pqK9AmcoXCc/LYZd6f0/dTBSWqp+pJ38
-	cpi8hRqDa2CWHfUD1NHcjxitla+8fW9RtP6KxJJW1dWju8vnZvDiYfUezle46y34uY/V
-	mPMpq/oES/WOqpvrQcFDRJS5U8BxXxTBAPtDltAg2uta6Po1EaMHv/U64GzD+cpU7w0n
-	U0b2y+u+9Im193QzTKRFD+rZ1GHW2+z8WuinTVEWhSE5KyhrTtqEyBWlqEktZFxlONID
-	o5JxW3OtEAU3g/CqL7M8P38cKNTWp4tefgKKjgzYmY0gNNnQLPPjVcwfweOOJU39gXOv
-	xnmQ==
-X-Gm-Message-State: APjAAAXDjdYJt8YzsFhvAisfIH1XXfrn+mBcBsBKsWKEzuVmc0ncScqv
-	DmD/+/xhoVZbfrdWrAoekGFMMG5ILsYJ4HCzyJ2Z3pee
-X-Google-Smtp-Source: APXvYqw/Aim+myb8n16iCENP1pCtQDAZHt+DCmzLub0Rf/ySFLy5FIVPLyaxjKJDyUpaGO2n/juXotembssKuYqSg4k=
-X-Received: by 2002:a37:a3c7:: with SMTP id m190mr8197976qke.212.1578554624746;
-	Wed, 08 Jan 2020 23:23:44 -0800 (PST)
-MIME-Version: 1.0
+	Thu,  9 Jan 2020 08:14:10 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47tf5s1wpcz4K;
+	Thu,  9 Jan 2020 09:14:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1578557649;
+	bh=nrmBmY+C2uKZzTmg6NbwlT6jVOUJbxNaswPU4JEq3A0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=bgZQ7J/YW8qr3DBCNA8qTnn1omtZ+HQ79vg9p061A/3Nv6gCcabRPPt5jdIm2CDXD
+	LSGCvBdbX5zUfITZZo4As2JCU3zlzJSEPgsxw5kAnAH7p8oPI5NK58DSupOHQLGHve
+	sMHOtH9vtPV0hfgrexM1ppVScS/qG3wK4+he8RpLV35ebNsCRrFfiOFkapxsfq/8HY
+	/Uu+jXCRrGtgpkQSNSutRd14+TvX4M/bDmRZ0e41SZoNluVvLc2Rs+AP/A9o5Xzg7V
+	Y2EXWAuYH17PbwfKCzVyHI72mQfeooMlW8+2dZklK8y6o9QH5E3jbguNOwnSBUHa/j
+	XNoJQW5ADcfUJz5Gi+EVJkGxTqj/LF+pLNaB0gE/FL1Gu7KOhLLbban5DEvG2LXH1z
+	yA+8APCrMQVmeyeAiHk2TxcrbBKVvS7U7Fk2kT9rhSbXM56FXnw+cCGtAc9M2tajfD
+	IaWvVeLqPRI0R+++IP+GRJbllttSuK+wCkmlNSgm5NrZYcEV9SJrsTDQQW4A3oS5nd
+	dhotgid0OrZQI2dGAfESaEJC1Bhns5KURte0VBMaKHVOZEiANIT517XupTiEivNo/J
+	mtgexIGnNhBLZH7TnI9fqxIBAIl2if5AOHjUwHMBh3QHu+Cq0SATKGNFlz6Rmt+o7o
+	KueWKHr/DqKFPFfb2wETY+rM=
+Date: Thu, 9 Jan 2020 10:14:06 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <20200109081406.GA6849@localhost>
 References: <1578463743-72832-1-git-send-email-liezhi.yang@windriver.com>
 	<20200108092700.GA25926@localhost>
 	<133f8cc7-2ef2-cee6-1642-251bd880cdc0@windriver.com>
+MIME-Version: 1.0
 In-Reply-To: <133f8cc7-2ef2-cee6-1642-251bd880cdc0@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 8 Jan 2020 23:23:18 -0800
-Message-ID: <CAMKF1spwmpWX=N_pU5X_GrSrJSc-0xjuUh6Sg=C9YHDZZQLfvw@mail.gmail.com>
-To: Robert Yang <liezhi.yang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Adrian Bunk <bunk@stusta.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [PATCH] rocksdb: Fix compile error for DEBUG_BUILD
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -56,46 +45,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 07:23:44 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 09 Jan 2020 08:14:11 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Wed, Jan 8, 2020 at 11:15 PM Robert Yang <liezhi.yang@windriver.com> wrote:
->
->
->
+On Thu, Jan 09, 2020 at 03:13:57PM +0800, Robert Yang wrote:
+> 
+> 
 > On 1/8/20 5:27 PM, Adrian Bunk wrote:
 > > On Wed, Jan 08, 2020 at 02:09:03PM +0800, Robert Yang wrote:
-> >> Fixed do_compile error when DEBUG_BUILD = "1":
-> >> db/write_thread.cc:183:14: error: 'state' may be used uninitialized in this function [-Werror=maybe-uninitialized]
-> >> ...
-> >
+> > > Fixed do_compile error when DEBUG_BUILD = "1":
+> > > db/write_thread.cc:183:14: error: 'state' may be used uninitialized in this function [-Werror=maybe-uninitialized]
+> > > ...
+> > 
 > > -Og warnings are not 100% reliable, and in general -Werror is
 > > problematic for distributions.
-> >
+> > 
 > > Does building with -DFAIL_ON_WARNINGS=OFF fix this problem?
->
-
-I think this should be used when we have warnings which we have no
-easy control over
-and no good fixes.
-
+> 
 > Yes, it works.
->
-> I think that the correct way to fix it is initialize it rather than ignore the
-> error.
+> 
+> I think that the correct way to fix it is initialize it rather than ignore
+> the error.
 
-Thats fine, Also submit this patch to rocksdb upstream as well.
+Is the error a bug in the code, or is it a bogus warning from the compiler?
 
->
+When the warning happens only with -Og this is a known case of bogus 
+warnings in gcc, and the correct way to fix it is to ignore the bogus
+warning.
+
 > // Robert
->
-> >
-> > cu
-> > Adrian
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+cu
+Adrian
 
