@@ -1,39 +1,50 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 648137FD58
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id C0A327FD23
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jan 2020 14:19:35 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	10 Jan 2020 06:19:35 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.69,417,1571727600"; d="scan'208";a="218674157"
-Received: from pgsmsx103.gar.corp.intel.com ([10.221.44.82])
-	by fmsmga008.fm.intel.com with ESMTP; 10 Jan 2020 06:19:34 -0800
-Received: from pgsmsx101.gar.corp.intel.com ([169.254.1.61]) by
-	PGSMSX103.gar.corp.intel.com ([169.254.2.49]) with mapi id
-	14.03.0439.000; Fri, 10 Jan 2020 22:19:33 +0800
-From: "Mittal, Anuj" <anuj.mittal@intel.com>
-To: "costamagna.gianfranco@gmail.com" <costamagna.gianfranco@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] websocketpp: also install examples in a
-	new -examples subpackage
-Thread-Index: AQHVx8D6c5tfG7RoxkmVEGAMmzeXWA==
-Date: Fri, 10 Jan 2020 14:19:32 +0000
-Message-ID: <38a434af9cccb7b724f1a4f2f97bf9425e695786.camel@intel.com>
-References: <20200110100454.20554-1-costamagnagianfranco@yahoo.it>
-In-Reply-To: <20200110100454.20554-1-costamagnagianfranco@yahoo.it>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.255.135.55]
-MIME-Version: 1.0
-Cc: "locutusofborg@debian.org" <locutusofborg@debian.org>,
-	"costamagnagianfranco@yahoo.it" <costamagnagianfranco@yahoo.it>
-Subject: Re: [meta-oe][PATCH] websocketpp: also install examples in a new -examples subpackage
+	Fri, 10 Jan 2020 14:34:07 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id t2so2044870wrr.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Jan 2020 06:34:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=EkysWsAwtFGvqhIHtJ93bc42lDljG7oPRTWopnnEt4g=;
+	b=oSmoxa9WA2w2xq0e+wOOH6TPkx0bbPRJbwGM2QiKNZRydw8Dw41JjVcTSGfeVx58+9
+	0J+PeM1gxUU5H8+ptKJn0zq6lya7OZZ/Hq/BhMex1hHUsTRgP9HZy3rgexfIHtsIz8N0
+	I8BZ/Ej/5Xd3PoQklxNgDtDkmzkZVXeO0q+ZTHtt7ImBome2AMBDRnn9RusZEVmBm3Gz
+	5NkvlHdX8MHACcEkisqL/jxMBbLFQdUUcgjXMw68hlflo4guhJM4QeuebDzLV2FFj7Pf
+	V/pf9p42+XLypCIcSygppXMh0RrnhSImjBc3b5V2pEWljdhnX9ydWOmiuhT525J34+c5
+	BOWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=EkysWsAwtFGvqhIHtJ93bc42lDljG7oPRTWopnnEt4g=;
+	b=nhGRV8uMsMIXe+lSLEELkwv50t2zDBsGhXTJUZ3ucYZjWX2h6gL4UWtAgXmvPyz80g
+	jl1NbCYieZ7NS9BZ7vcpfUkzmDroxT39dtPtEjF0AGXSfdx1bLfEgye0EEG0QYNd09Fe
+	jDswAlTPTiCSnQRK+8AJBMlHXLl58cDu4H/tK4rKSg2KQonXfkbncPbV3a4yIjNXdtF4
+	A1HWsKLS22rj6w5q5cHAcNzjTKxQ6U8Y8lzgI9+hkcpG8Ewz3F7ecka6w5alM/Eqyybc
+	VJKUk1IujBMQF/2Oq1Mh4anZUfwkB0egsmDEs3vmgDZah0PDGrT7amiOs9FCSpM2hYMi
+	L/ug==
+X-Gm-Message-State: APjAAAWAuAqmjP1UiN2Wpa5xMPxHOBvFvqtoV3REVbbqX7hG9snRi8Ew
+	M4tneTRdCQua2qzSneVisZgs1ItmH0I=
+X-Google-Smtp-Source: APXvYqy7GbSk/bRfPiSVsdK2fX3VLWb3IDh4VHgvuZ8MTSaQLB/kfQSPk6os782LMUAa3K714POSpw==
+X-Received: by 2002:adf:f604:: with SMTP id t4mr4144837wrp.33.1578666848167;
+	Fri, 10 Jan 2020 06:34:08 -0800 (PST)
+Received: from localhost.localdomain ([2001:b07:5d32:c012:51ed:b4fa:d66:b069])
+	by smtp.gmail.com with ESMTPSA id
+	n3sm2428821wmc.27.2020.01.10.06.34.07
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 10 Jan 2020 06:34:07 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 10 Jan 2020 15:33:17 +0100
+Message-Id: <20200110143317.32258-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
+Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
+	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] websocketpp: also install examples in a new -examples subpackage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,15 +57,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jan 2020 14:19:35 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <63DA62272838C14A866202DEAEF2B82D@intel.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 10 Jan 2020 14:34:08 -0000
 
-T24gRnJpLCAyMDIwLTAxLTEwIGF0IDExOjA0ICswMTAwLCBHaWFuZnJhbmNvIENvc3RhbWFnbmEg
-d3JvdGU6DQo+ICtkb19pbnN0YWxsX2FwcGVuZCgpIHsNCj4gKwlpbnN0YWxsIC1kICR7RH0ke2Rv
-Y2Rpcn0vJHtQTn0NCj4gKwljcCAtUiAke1N9L2V4YW1wbGVzICR7RH0ke2RvY2Rpcn0vJHtQTn0N
-Cg0KSSB0aGluayB0aGVzZSBzaG91bGQgYmUgQlBOIGluc3RlYWQgb2YgUE4gc28gdGhpcyB3b3Jr
-cyB3aXRoIG11bHRpbGliLg0KDQpUaGFua3MsDQoNCkFudWoNCg==
+Thanks to Khem Raj for the suggestion, the location is similar to the one used by Debian packaging
+
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+---
+ meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
+index 8a2a3e1b8..4303f2473 100644
+--- a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
++++ b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
+@@ -30,3 +30,12 @@ SRCREV= "c6d7e295bf5a0ab9b5f896720cc1a0e0fdc397a7"
+ S = "${WORKDIR}/git"
+ 
+ inherit cmake
++
++PACKAGES =+ "${PN}-examples"
++
++FILES_${PN}-examples = "${docdir}"
++
++do_install_append() {
++	install -d ${D}${docdir}/${BPN}
++	cp -R ${S}/examples ${D}${docdir}/${BPN}
++}
+-- 
+2.17.1
+
 
