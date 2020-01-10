@@ -1,99 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
-	[209.85.210.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 481897FE3D;
-	Thu,  9 Jan 2020 23:36:52 +0000 (UTC)
-Received: by mail-pf1-f177.google.com with SMTP id 4so163151pfz.9;
-	Thu, 09 Jan 2020 15:36:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:autocrypt:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=ImREuJtFrkPNzZfZyDplDXkFObFLDby/6dMY0KWBarc=;
-	b=fro2mCbDJxZgyQn0n0iuhLliKVuLTulrNq9NLxYCxMYKNf9Ri/3L5t3linWbsQLdbt
-	SSB+q1wnE44XDoN4Tcvq9CKsnt7ae6C+SLhFetdHn1jMRSjf+Lsz+bC+yipKGzLADrLK
-	mQlNBDd1tj65PPLwH0W1xC4saY8bGgwi5gOSfcHIk0Uwet4NdjER5dqutJb5CVVnXNhV
-	mE1JxN5ZIFngPw22XpxKa9lNGxtWzYA57t2sn7iEd80CniUS2WoEgBNbaLci1tGarB63
-	jB/BGDrdodVtT29XavZpQACVZVwD0wkpycFG8EkEaUgt2BJK/KnJZkdL1ikplimjwgFg
-	7O8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=ImREuJtFrkPNzZfZyDplDXkFObFLDby/6dMY0KWBarc=;
-	b=Je9ZxAzTJPqbx2Z7IM6cdUv9y0gdMSojfJDKmceDO4ObdaurDXp3E3PfXaW/WRHm7F
-	q15pRKK+Ttf5OR4xeb8QyGN12QNjRb5uxKFMLJqlxi+EMTX1DjfTwJWDYuOM9uYk6Ibz
-	IdRT65IWHdmBqcsYjLTNlm4umvaLGipI6Wxy5G8AgByKRBPnRA5oY6Qo+S2UNQxEhvlL
-	4NgMFDPm0gec2TwRo7Q3jRhbW/Er3lReaeXDlpmW1Z4GlfsDH50T6i4gbTXWCK5m7w5u
-	cZCB9WdIEyscFEPjh2YG0Eq2aZFRDnohGmrRkCtYTxWJYB0lOINwdo5PFcSOKGWupwq0
-	i/3Q==
-X-Gm-Message-State: APjAAAUHTd56QQGn3nFf+xkie/Zy4+OVRA/TPo3rjNQCI/J7RFyadggb
-	Mufo3Niuv8RxvezkcjDZ/Kw=
-X-Google-Smtp-Source: APXvYqyfA6P7ERmN3+WW2T2vWRkK2vwEg4b2N1dxZvml9wZTF0fpYperrFv8L2lPt9SqpJXxjur6nw==
-X-Received: by 2002:aa7:9edd:: with SMTP id r29mr485596pfq.14.1578613013482;
-	Thu, 09 Jan 2020 15:36:53 -0800 (PST)
-Received: from ?IPv6:2601:202:4180:a5c0:304b:2b9c:bcb7:ff1a?
-	([2601:202:4180:a5c0:304b:2b9c:bcb7:ff1a])
-	by smtp.gmail.com with ESMTPSA id r66sm138921pfc.74.2020.01.09.15.36.52
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Thu, 09 Jan 2020 15:36:52 -0800 (PST)
-To: Jon Mason <jdmason@kudzu.us>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	Yocto discussion list <yocto@yoctoproject.org>
-References: <CAPoiz9whfiTNqdM4WVLxrFHkhZHLnapPi+56o2sByra2P6USQA@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <fb6cfdad-45e5-7cb5-e4a1-f9f62f6b5adf@gmail.com>
-Date: Thu, 9 Jan 2020 15:36:51 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.2.2
+Return-Path: <Zhixiong.Chi@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 021297FDC9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Jan 2020 02:19:15 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 00A2Iugo032115
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 9 Jan 2020 18:19:07 -0800
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Thu, 9 Jan 2020 18:18:45 -0800
+From: Zhixiong Chi <zhixiong.chi@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 9 Jan 2020 18:18:45 -0800
+Message-ID: <20200110021845.126947-1-zhixiong.chi@windriver.com>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <CAPoiz9whfiTNqdM4WVLxrFHkhZHLnapPi+56o2sByra2P6USQA@mail.gmail.com>
-Subject: Re: [OE-core] OpenEmbedded Workshop at FOSDEM20 schedule
+Subject: [PATCH] dnsmasq: CVE-2019-14834
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -106,25 +31,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Jan 2020 23:36:52 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 10 Jan 2020 02:19:16 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
+Backport the CVE patch from the upstream to fix the memory leak.
 
+Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
+---
+ ...-dnsmasq-fix-memory-leak-in-helper-c.patch | 49 +++++++++++++++++++
+ .../recipes-support/dnsmasq/dnsmasq_2.80.bb   |  1 +
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
 
-On 1/9/20 2:28 PM, Jon Mason wrote:
-> The OpenEmbedded Workshop 2020 schedule is now available
-> https://pretalx.com/oe-workshop-2020/schedule/
->
-> As you can see, there are some very compelling talks.  Buy your
-> tickets now, before we sell out.
-> https://pretix.eu/OpenEmbedded/oe-workshop-2020/
-This looks great. Thanks to everyone who is making this happen.
-
-- armin
->
-> Thank you,
-> The OpenEmbedded Board
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
+new file mode 100644
+index 000000000..ccd6f82ae
+--- /dev/null
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
+@@ -0,0 +1,49 @@
++From 69bc94779c2f035a9fffdb5327a54c3aeca73ed5 Mon Sep 17 00:00:00 2001
++From: Simon Kelley <simon@thekelleys.org.uk>
++Date: Wed, 14 Aug 2019 20:44:50 +0100
++Subject: [PATCH] Fix memory leak in helper.c
++
++Thanks to Xu Mingjie <xumingjie1995@outlook.com> for spotting this.
++
++CVE: CVE-2019-14834
++Upstream-Status: Backport
++Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
++---
++ src/helper.c |   12 +++++++++---
++ 1 file changed, 9 insertions(+), 3 deletions(-)
++
++diff --git a/src/helper.c b/src/helper.c
++index 33ba120..c392eec 100644
++--- a/src/helper.c
+++++ b/src/helper.c
++@@ -82,7 +82,8 @@ int create_helper(int event_fd, int err_fd, uid_t uid, gid_t gid, long max_fd)
++   pid_t pid;
++   int i, pipefd[2];
++   struct sigaction sigact;
++-
+++  unsigned char *alloc_buff = NULL;
+++  
++   /* create the pipe through which the main program sends us commands,
++      then fork our process. */
++   if (pipe(pipefd) == -1 || !fix_fd(pipefd[1]) || (pid = fork()) == -1)
++@@ -188,11 +189,16 @@ int create_helper(int event_fd, int err_fd, uid_t uid, gid_t gid, long max_fd)
++       struct script_data data;
++       char *p, *action_str, *hostname = NULL, *domain = NULL;
++       unsigned char *buf = (unsigned char *)daemon->namebuff;
++-      unsigned char *end, *extradata, *alloc_buff = NULL;
+++      unsigned char *end, *extradata;
++       int is6, err = 0;
++       int pipeout[2];
++ 
++-      free(alloc_buff);
+++      /* Free rarely-allocated memory from previous iteration. */
+++      if (alloc_buff)
+++	{
+++	  free(alloc_buff);
+++	  alloc_buff = NULL;
+++	}
++       
++       /* we read zero bytes when pipe closed: this is our signal to exit */ 
++       if (!read_write(pipefd[0], (unsigned char *)&data, sizeof(data), 1))
++-- 
++1.7.10.4
+diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
+index 6f3d5daa6..827565051 100644
+--- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
++++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
+@@ -5,5 +5,6 @@ SRC_URI[dnsmasq-2.80.sha256sum] = "9e4a58f816ce0033ce383c549b7d4058ad9b823968d35
+ SRC_URI += "\
+     file://lua.patch \
+     file://0001-dnsmasq-fix-build-against-5.2-headers.patch \
++    file://0001-dnsmasq-fix-memory-leak-in-helper-c.patch \
+ "
+ 
+-- 
+2.23.0
 
 
