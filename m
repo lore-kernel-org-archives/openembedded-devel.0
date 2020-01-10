@@ -1,24 +1,50 @@
-Return-Path: <Zhixiong.Chi@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 021297FDC9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 866107FD40
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jan 2020 02:19:15 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 00A2Iugo032115
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Fri, 10 Jan 2020 08:50:14 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id x6so792560pfo.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Jan 2020 18:19:07 -0800
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Thu, 9 Jan 2020 18:18:45 -0800
-From: Zhixiong Chi <zhixiong.chi@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Jan 2020 18:18:45 -0800
-Message-ID: <20200110021845.126947-1-zhixiong.chi@windriver.com>
-X-Mailer: git-send-email 2.23.0
+	Fri, 10 Jan 2020 00:50:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qqg/YKo5fM1lMWJBAD8koygJq+NJ6XUGRjI4tPqIV4o=;
+	b=vB66RJM/4l825FWuYUKDgP3t6qgZ0EMzCHcOw5ckslpvPIRzaWzQSAx+YKAJCbE3wl
+	5cwWjoeW7cVYatamB2H75w+sC9tBwxpmORrKZe0S7tM+1NA4nP5Pt+1c0NdMrUpxOCk4
+	QQ5sJEAly7/cbDLYyThHsHuJ5Uv3DLNIXYb9P3+VEZAeoo+ptEIlKQLSY5dRyBwb+wZp
+	zjAVGCIkMaJBJNhk+3YN8S2sWrcBTKp5/GltTgbO+qsZt4pk+uHyq4vh5FkWz5WRlADw
+	VP1u2iGQhn9XERqDD4blBYjRMe9P0T64PTujasHqDjvSm6tqtyZk3qhunBODorYZybkW
+	ifkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qqg/YKo5fM1lMWJBAD8koygJq+NJ6XUGRjI4tPqIV4o=;
+	b=cULbQSc1HHLK59sT60X8zROe2VjW+Ar8r03qAzKR7kgi8EwzWdb/JbVbbcuhQR238k
+	8V5SChNL0KU/OY4sUKC+JxKJwzQIMqeVSh+MVqh5zSBoxp50nYfXuXFs/FwqfxBZnPRe
+	8zEYMk9PapzG0lK6KUOXkp0LwyGEHAjYVh8sBSvLYDy0znjWSXOEiBolD7hRlkVUFN+1
+	7lTiFZm65D1+JAnLV8ffv60MuGS79ZXocC35D3tgET8TyFk0yCtgSiahXTNR/KQ5KVWv
+	tUeSewyzpVnsW33u1i4wxK3SHlmMcKv1vQtBfpzII4tvOoNGVfkWyEVxkvX5Z+Aw0q12
+	YvVg==
+X-Gm-Message-State: APjAAAWZ5JM3BobIeTQoMN7Z7aTIBecrLEdM4BY/lmP9Q/0v5au0JDUr
+	1at3FuHq2bcb0r6nsCyV6IRN3N0wjB8=
+X-Google-Smtp-Source: APXvYqyqcAUQZtCNU8wznFik333tBvjc7VCMCuQmIOCn8pFYjhB9L9HtpOYsE5nqP/qhNI7B3dFmbw==
+X-Received: by 2002:a63:cd16:: with SMTP id i22mr3075119pgg.239.1578646214940; 
+	Fri, 10 Jan 2020 00:50:14 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::6f71])
+	by smtp.gmail.com with ESMTPSA id
+	b15sm1887580pft.58.2020.01.10.00.50.14
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 10 Jan 2020 00:50:14 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 10 Jan 2020 00:50:10 -0800
+Message-Id: <20200110085010.2443416-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-Subject: [PATCH] dnsmasq: CVE-2019-14834
+Subject: [meta-oe][PATCH V2] cmpi-bindings: append PYTHON_ABI suffix to libpython soname
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,86 +57,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Jan 2020 02:19:16 -0000
+X-List-Received-Date: Fri, 10 Jan 2020 08:50:14 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Backport the CVE patch from the upstream to fix the memory leak.
+This makes it independent of python vesion 3.7 or 3.8 where with python
+3.7 has 'm' as abi suffix but 3.8 wont
 
-Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Alexander Kanavin <alex.kanavin@gmail.com>
 ---
- ...-dnsmasq-fix-memory-leak-in-helper-c.patch | 49 +++++++++++++++++++
- .../recipes-support/dnsmasq/dnsmasq_2.80.bb   |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
+v2: Do not hardcode 'm' ABI suffix
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
-new file mode 100644
-index 000000000..ccd6f82ae
---- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
-@@ -0,0 +1,49 @@
-+From 69bc94779c2f035a9fffdb5327a54c3aeca73ed5 Mon Sep 17 00:00:00 2001
-+From: Simon Kelley <simon@thekelleys.org.uk>
-+Date: Wed, 14 Aug 2019 20:44:50 +0100
-+Subject: [PATCH] Fix memory leak in helper.c
-+
-+Thanks to Xu Mingjie <xumingjie1995@outlook.com> for spotting this.
-+
-+CVE: CVE-2019-14834
-+Upstream-Status: Backport
-+Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
-+---
-+ src/helper.c |   12 +++++++++---
-+ 1 file changed, 9 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/helper.c b/src/helper.c
-+index 33ba120..c392eec 100644
-+--- a/src/helper.c
-++++ b/src/helper.c
-+@@ -82,7 +82,8 @@ int create_helper(int event_fd, int err_fd, uid_t uid, gid_t gid, long max_fd)
-+   pid_t pid;
-+   int i, pipefd[2];
-+   struct sigaction sigact;
-+-
-++  unsigned char *alloc_buff = NULL;
-++  
-+   /* create the pipe through which the main program sends us commands,
-+      then fork our process. */
-+   if (pipe(pipefd) == -1 || !fix_fd(pipefd[1]) || (pid = fork()) == -1)
-+@@ -188,11 +189,16 @@ int create_helper(int event_fd, int err_fd, uid_t uid, gid_t gid, long max_fd)
-+       struct script_data data;
-+       char *p, *action_str, *hostname = NULL, *domain = NULL;
-+       unsigned char *buf = (unsigned char *)daemon->namebuff;
-+-      unsigned char *end, *extradata, *alloc_buff = NULL;
-++      unsigned char *end, *extradata;
-+       int is6, err = 0;
-+       int pipeout[2];
-+ 
-+-      free(alloc_buff);
-++      /* Free rarely-allocated memory from previous iteration. */
-++      if (alloc_buff)
-++	{
-++	  free(alloc_buff);
-++	  alloc_buff = NULL;
-++	}
-+       
-+       /* we read zero bytes when pipe closed: this is our signal to exit */ 
-+       if (!read_write(pipefd[0], (unsigned char *)&data, sizeof(data), 1))
-+-- 
-+1.7.10.4
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-index 6f3d5daa6..827565051 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-@@ -5,5 +5,6 @@ SRC_URI[dnsmasq-2.80.sha256sum] = "9e4a58f816ce0033ce383c549b7d4058ad9b823968d35
- SRC_URI += "\
-     file://lua.patch \
-     file://0001-dnsmasq-fix-build-against-5.2-headers.patch \
-+    file://0001-dnsmasq-fix-memory-leak-in-helper-c.patch \
- "
+ ...dd-PYTHON_ABI-suffix-to-the-python-library-name.patch | 9 ++-------
+ .../cmpi-bindings/cmpi-bindings_1.0.1.bb                 | 4 +++-
+ 2 files changed, 5 insertions(+), 8 deletions(-)
+
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Add-PYTHON_ABI-suffix-to-the-python-library-name.patch b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Add-PYTHON_ABI-suffix-to-the-python-library-name.patch
+index b2a149b0f4..fa029da2b8 100644
+--- a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Add-PYTHON_ABI-suffix-to-the-python-library-name.patch
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings/0001-Add-PYTHON_ABI-suffix-to-the-python-library-name.patch
+@@ -9,19 +9,14 @@ Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+  swig/python/CMakeLists.txt | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
  
+-diff --git a/swig/python/CMakeLists.txt b/swig/python/CMakeLists.txt
+-index 128798b..391cef7 100644
+ --- a/swig/python/CMakeLists.txt
+ +++ b/swig/python/CMakeLists.txt
+-@@ -49,7 +49,7 @@ ADD_DEFINITIONS(-DCMPI_PLATFORM_LINUX_GENERIC_GNU -DCMPI_VERSION=200)
++@@ -49,7 +49,7 @@ ADD_DEFINITIONS(-DCMPI_PLATFORM_LINUX_GE
+  SET( NAME pyCmpiProvider )
+  ADD_LIBRARY( ${NAME} SHARED ${SWIG_OUTPUT})
+  #TARGET_LINK_LIBRARIES( ${NAME} ${PYTHON_LIBRARIES} )
+ -TARGET_LINK_LIBRARIES( ${NAME} python${PYTHON_MAJOR_VERSION}.${PYTHON_MINOR_VERSION} )
+-+TARGET_LINK_LIBRARIES( ${NAME} python${PYTHON_MAJOR_VERSION}.${PYTHON_MINOR_VERSION}m )
+++TARGET_LINK_LIBRARIES( ${NAME} python${PYTHON_MAJOR_VERSION}.${PYTHON_MINOR_VERSION}${PYTHON_ABI} )
+  TARGET_LINK_LIBRARIES( ${NAME} pthread )
+  TARGET_LINK_LIBRARIES( ${NAME} dl )
+  TARGET_LINK_LIBRARIES( ${NAME} util )
+--- 
+-2.8.1
+-
+diff --git a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.1.bb b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.1.bb
+index 251c5d0f5a..6c71d534be 100644
+--- a/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.1.bb
++++ b/meta-oe/recipes-extended/cmpi-bindings/cmpi-bindings_1.0.1.bb
+@@ -22,7 +22,9 @@ S = "${WORKDIR}/git"
+ inherit cmake python3native
+ 
+ EXTRA_OECMAKE = "-DLIB='${baselib}' \
+-                 -DPYTHON_INCLUDE_PATH=${STAGING_INCDIR}/python${PYTHON_BASEVERSION}"
++                 -DPYTHON_INCLUDE_PATH=${STAGING_INCDIR}/python${PYTHON_BASEVERSION} \
++                 -DPYTHON_ABI=${PYTHON_ABI} \
++                 "
+ 
+ # With Ninja it fails with:
+ # ninja: error: build.ninja:282: bad $-escape (literal $ must be written as $$)
 -- 
-2.23.0
+2.24.1
 
 
