@@ -1,50 +1,33 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BEA37FFD7
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 376917F8AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jan 2020 12:44:06 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id w15so4292955wru.4
+	Sat, 11 Jan 2020 14:02:04 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 47w1kN1N4xz4q
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jan 2020 04:44:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=w8l0gHi8l3aSC6McmU3ZyZRgiW/AZS3cxdfctswWhlw=;
-	b=Jn7cjATgvBYoiAdm+LXqaBZj1+O9rozyDJLqERdHV/UgOyj3/6SJjsxkCrxsvdTtbi
-	bc2Ij73XX505yoVCyKAc/n8mwqP48ml0lspqRH3hGFj0lDUa4SqhARwXEYd9tDEUZR4O
-	C9ZgDcSi92fsCFmsAUnH7/eYwUoVvSbiA8AUeCt5F7nqoAZW/05HuVlXPsMy0uhXR2EJ
-	FeylvHt0aEi9XpMfU8zJnjCSFGn8OMVYLLiQo1s8ZqX8dxJuk7epbyaNqjIbNLNStlWi
-	EgHJrIpJbifQSNKg9KnGTSSweqA1dEXy+MRgjonm1LcoMj6+OWuQq1wfX4eamhhWeZXX
-	lNcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=w8l0gHi8l3aSC6McmU3ZyZRgiW/AZS3cxdfctswWhlw=;
-	b=K+qbZuYpepbXDqhvDjSccArymDNBCXz7WWJFbY+rn3XCIdosfdHnRO4Gb+MxMVtwoI
-	PKpnzrTs17X7S+hLayAkTOR8uj4vf8xH6keEJkJW7vszgkWjpC//cCLyIdV1DeFC4qvL
-	c2hZNGUUYvFt2xRYS5d5sbncEV6ei32/+N1C3D7n30tX6BLB9i9CRDKBxTIxTPumWuZN
-	xEysEHJWTfJu5/4+bB0XAuoIoXtNVRa3ZXBsJn0Zvvo/7EWrFuTOyncz0J2VT6PmY9Gf
-	Hy6kp+Qyo64TfywFb5pXPCGpI4ez7h2um+HYyI6ryirTEzXjJxaYcSSJ8MWIRcPBXeTG
-	W/SA==
-X-Gm-Message-State: APjAAAVNliqlzOrpja7zVs+7vLmM9dgEcS3fV2hDywDx5He+VgymSRRz
-	eyF+cRBIiH1Vd4Yw8ra4qQ0aYXulOmU=
-X-Google-Smtp-Source: APXvYqwzeP0iiEHZLkSCxHr3hPB6RDhqjxhMd3xXq+uk5uxJe+98a2EUPvaHRh8dkM0615BhNUmQwQ==
-X-Received: by 2002:adf:ebc6:: with SMTP id v6mr8876944wrn.75.1578746646705;
-	Sat, 11 Jan 2020 04:44:06 -0800 (PST)
-Received: from localhost ([109.238.218.228]) by smtp.gmail.com with ESMTPSA id
-	g21sm6060920wmh.17.2020.01.11.04.44.05
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 11 Jan 2020 04:44:05 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Sat, 11 Jan 2020 15:02:04 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1578751324;
+	bh=gsz3oScqHloQmycIevY7LRi9CZXIzPyZu9CeW+US4b4=;
+	h=From:To:Subject:Date:From;
+	b=NI04LR+5j2md+51kXrfIpNQ/pb82IjCrkLm8bScy+kz+cvT/B4yjQZGqYkvCbpiSS
+	PAMLyb8lCejSzRIVHgVTKS6LAbjTGhGKsBVIunrXypZyVLeo1CuHV7ScipTyjvIQos
+	cT8zp95Am3ZTcIXKf7mbG/8ac9f2ERDj5sWCyOeVWZRNMLmNbZQgxi3NJZF4hZQ1mU
+	OhB+z+c2/0tj1CF18vQ53RLoWYkBXdpOQdKMibzMKelOizUc1LlZeoazYTw5Ro4vxj
+	dSLKEtLpJj3ROy7bENdyCSTjI3yc2vskLzB8lABpFE+tH3zCQIZd5kLREiMVJrQHyF
+	IacuYvl8eLq2ugxAoCkfZzACI0aTG7OqseC3lbz/yDKHLWAmp8w9w9Nt/1S/9pY6eE
+	8C0XxHnTQTJBqLUtXWbaJ0jNJgAdeDmxaDf4Bmy81Fzo4FLnofg6qYOg84TYtiRGWx
+	Gj8wZM64P8VkDG9su7kocAtgjExpmd9waBG39VfzdoLWhbVWM1HixLaI+vlHKp+HQB
+	1RnofFGoLu9SqdpjkhXgWneL0F8hSbA4IWBBwOkNrfotIwylCCdgMtAjubd/injeZf
+	ucAgitu54YwbosE+p2yPXaIbEE/8N557fjpLtF83JHeA04GFhk39bRXrs51ijQAjGf
+	UmG4EzJ4JWE/uh5Lo2qGFubo=
+From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Jan 2020 13:44:04 +0100
-Message-Id: <20200111124404.3001-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] proj: upgrade to 6.2.0
+Date: Sat, 11 Jan 2020 16:02:03 +0200
+Message-Id: <20200111140203.9789-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] enchant2: Remove, moved to oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,38 +40,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jan 2020 12:44:06 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 11 Jan 2020 14:02:05 -0000
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../proj/{proj_4.9.3.bb => proj_6.2.0.bb}                 | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-navigation/proj/{proj_4.9.3.bb => proj_6.2.0.bb} (54%)
+ .../recipes-support/enchant/enchant2_2.2.7.bb | 28 -------------------
+ 1 file changed, 28 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/enchant/enchant2_2.2.7.bb
 
-diff --git a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb b/meta-oe/recipes-navigation/proj/proj_6.2.0.bb
-similarity index 54%
-rename from meta-oe/recipes-navigation/proj/proj_4.9.3.bb
-rename to meta-oe/recipes-navigation/proj/proj_6.2.0.bb
-index f45f8948d5..fa269d01b3 100644
---- a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb
-+++ b/meta-oe/recipes-navigation/proj/proj_6.2.0.bb
-@@ -5,9 +5,11 @@ SECTION = "libs"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
- 
--SRC_URI = "http://download.osgeo.org/proj/proj-${PV}.tar.gz"
--SRC_URI[md5sum] = "d598336ca834742735137c5674b214a1"
--SRC_URI[sha256sum] = "6984542fea333488de5c82eea58d699e4aff4b359200a9971537cd7e047185f7"
-+SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
-+SRC_URI[md5sum] = "5cde556545828beaffbe50b1bb038480"
-+SRC_URI[sha256sum] = "b300c0f872f632ad7f8eb60725edbf14f0f8f52db740a3ab23e7b94f1cd22a50"
-+
-+DEPENDS = "sqlite3 sqlite3-native"
- 
- inherit autotools pkgconfig lib_package
- 
+diff --git a/meta-oe/recipes-support/enchant/enchant2_2.2.7.bb b/meta-oe/recipes-support/enchant/enchant2_2.2.7.bb
+deleted file mode 100644
+index b30b2d8e4..000000000
+--- a/meta-oe/recipes-support/enchant/enchant2_2.2.7.bb
++++ /dev/null
+@@ -1,28 +0,0 @@
+-SUMMARY = "Enchant Spell checker API Library v2"
+-SECTION = "libs"
+-HOMEPAGE = "https://abiword.github.io/enchant/"
+-LICENSE = "LGPLv2.1+"
+-LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a916467b91076e631dd8edb7424769c7"
+-
+-DEPENDS = "glib-2.0"
+-
+-inherit autotools pkgconfig
+-
+-SRC_URI = "https://github.com/AbiWord/enchant/releases/download/v${PV}/enchant-${PV}.tar.gz"
+-SRC_URI[md5sum] = "8a6ea1bb143c64e0edf5e49c7e7cb984"
+-SRC_URI[sha256sum] = "1b22976135812b35cb5b8d21a53ad11d5e7c1426c93f51e7a314a2a42cab3a09"
+-
+-UPSTREAM_CHECK_URI = "https://github.com/AbiWord/enchant/releases"
+-
+-S = "${WORKDIR}/enchant-${PV}"
+-
+-EXTRA_OEMAKE = "pkgdatadir=${datadir}/enchant-2"
+-
+-PACKAGECONFIG ??= "hunspell"
+-PACKAGECONFIG[aspell]  = "--with-aspell,--without-aspell,aspell,aspell"
+-PACKAGECONFIG[hunspell]  = "--with-hunspell,--without-hunspell,hunspell,hunspell"
+-
+-FILES_${PN} += " \
+-    ${datadir}/enchant-2 \
+-    ${libdir}/enchant-2 \
+-"
 -- 
-2.20.1
+2.17.1
 
 
