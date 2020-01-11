@@ -1,51 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
-	[209.85.210.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 181387FCFF
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+	[209.85.210.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E53F7FCFF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jan 2020 16:39:11 +0000 (UTC)
-Received: by mail-pf1-f174.google.com with SMTP id q10so2688182pfs.6
+	Sat, 11 Jan 2020 16:39:12 +0000 (UTC)
+Received: by mail-pf1-f176.google.com with SMTP id q10so2688193pfs.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jan 2020 08:39:13 -0800 (PST)
+	Sat, 11 Jan 2020 08:39:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=6hDnSotiiw08eJ7JQDec1Qh6soJbF6Lqup2XKHGR+tU=;
-	b=RNkIkPljG0SW7OBCYe3soARX4FOTMchWLDDbZ0wbfqPYTXmHZEWT9uEd90CWTcUqNh
-	DZf349Tsz+CJwqBSKHB/VYk6wAY2s1eS/YR2kBQnkibr6zFfokZ4fe5sF20Bf07cq13+
-	fhjK5FXqRIdTXVnJa6J5APnLQA2BJXhh+5YHgCRmO+Ds2g+kXriO9kmTw1Gt/1XA60uJ
-	8eoYTLliyaDzIctBSVKsp+a3T00WIANjjadmtoeqvPgtcV+SqIluIU8/5g8qZm5jIAg8
-	MjChjwItE3LyfnmLNsO4+L3sYFHhCOhWHYRcRbvXJkys8UYJWL8E5tQeS4niMIHHUHhO
-	7txQ==
+	bh=xMjVTryRl7+hL3WRBM/4sRnSskYTXvjtNoxCXcVUVE8=;
+	b=ZOGu+htSzVWNB2Ul/WohlHopdmkBSlSiDEbpZsbv1EhiGiTNkAuNEAQVSN85tAF79E
+	liUEkKcweypcrWAf6O9MHVyjC5o+utJLbM61VgsF9IpdRIE/DkCeByrnBPTKRWkw5ZLS
+	k2GvBqEzEA5UfYOhhY8fP2IJyuWnZ1ugSfCc2oen2PYd8I0N7mbHMdUBVj4JGl7oNrIy
+	iKrkZVljmcEBIR9Xy1DDC+xgdywS76/0pb2tm9AC+3tgieY7UBHSBkpZ2jpTspFD3jVK
+	O3bxZAwBvVvmbkI68hvsmp9RcxD8ySvQTT/YQNGlVhqFamQ9PODCT5+zaCELfhnJzMCi
+	WZUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=6hDnSotiiw08eJ7JQDec1Qh6soJbF6Lqup2XKHGR+tU=;
-	b=GQv/AwDSj+/Tn8/tAhsZzjhvexQ1zaULSaQJvJXk6JjLHmIjMJKoO02mfAi51RpmI1
-	M+/DcAaWROF4fCoKEJllWLJyk9u+bwnRHnVCrwEO1MFoahBskJEkOiyjfvfwrXZ7yJuY
-	OpNL4sHYDV8fgp5I51P4D6BaqmCB/VlZEWXLaHg3aAyiB/HAF7+zPHpz/0q//RN6MPey
-	ZXNRlQbiuGuIld+0TwZRAOtORWkI7/zTMhhDfE+3Q515rAqhVyLvAcnxUDKRMvdffLAT
-	skHAZCE5W6ehoGCUG1RLSxSXjT+MTkzPlLW6Lgg0h7/fFG/prwTjT1eOhz4obJGT2NJz
-	GS3Q==
-X-Gm-Message-State: APjAAAXYBK8iq4CBDqfo1RQcbZkI3KSXtVq1xtDtrz/s08Jtfh8ZmYGw
-	6LZUdAaHDcBmcrqNu+A3c9W/iuw0C5o=
-X-Google-Smtp-Source: APXvYqzIEKz+h7y/nohJTc5VV4OMrAiJpbqFPgg3+8yOONGx+8e47KvU4w2t9tfa23Hj4zSl19P1eg==
-X-Received: by 2002:a63:b26:: with SMTP id 38mr11781822pgl.116.1578760752644; 
-	Sat, 11 Jan 2020 08:39:12 -0800 (PST)
+	bh=xMjVTryRl7+hL3WRBM/4sRnSskYTXvjtNoxCXcVUVE8=;
+	b=ISd3SW33Kpd9xgbft6PIAxjwnQAabASGagw+domvj57P2f7IhYgo0hA0MIJ/MyoKLB
+	+nS4c5csndnzrYzHg0umZEyHZxjDrl1JQFU6xF9UbT7b6xKxII4wiWw4fIyP2zUEmdP6
+	eyDnNJvm6vOcVegDt7EgaF71Yotk6d0mCOD4tPTZ6see2F0OPOVTsSCmnYtLgTVgSgAW
+	qt057+zeJMGFk39sNj23FO3FM61aLVTXDflqvAc2DTuBWHrOx/j8ppck17h9gj1/4zH8
+	j70rgsYoHZ5+G7SLJ9LZCcvRmqD0BO9jYx7NQcy3y5vDZK/Ezimo4UrHvUxScPE2W8Y/
+	Nzyw==
+X-Gm-Message-State: APjAAAX3P0S4R3XyVI5itXcbnTjbxz1y6uBEKchOD9jZeP2JwBVTG/J8
+	3dMUtOo9ntpt/R/QGYPVGe0WdqC0eh8=
+X-Google-Smtp-Source: APXvYqzpGIOchhx4xW1DvGi9RsmLJozB+YzMH8uTVVNG7rHj9h9OVpKOO5o7zw77ftZaFaER4POaPA==
+X-Received: by 2002:a63:360a:: with SMTP id d10mr11613798pga.366.1578760753411;
+	Sat, 11 Jan 2020 08:39:13 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::a983])
-	by smtp.gmail.com with ESMTPSA id y6sm7196521pgc.10.2020.01.11.08.39.11
+	by smtp.gmail.com with ESMTPSA id y6sm7196521pgc.10.2020.01.11.08.39.12
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 11 Jan 2020 08:39:12 -0800 (PST)
+	Sat, 11 Jan 2020 08:39:13 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Jan 2020 08:39:05 -0800
-Message-Id: <20200111163906.675731-4-raj.khem@gmail.com>
+Date: Sat, 11 Jan 2020 08:39:06 -0800
+Message-Id: <20200111163906.675731-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20200111163906.675731-1-raj.khem@gmail.com>
 References: <20200111163906.675731-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 4/5] rocksdb: Disable Werror
+Subject: [meta-oe][PATCH 5/5] spirv-tools: Disable Werror
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,21 +66,22 @@ better to disable warning as errors for now
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-graphics/spir/spirv-tools_git.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-index 44a451cd36..713d5bb145 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-@@ -32,6 +32,7 @@ EXTRA_OECMAKE = "\
-     -DPORTABLE=ON \
-     -DWITH_TESTS=OFF \
-     -DWITH_TOOLS=OFF \
-+    -DFAIL_ON_WARNINGS=OFF \
- "
+diff --git a/meta-oe/recipes-graphics/spir/spirv-tools_git.bb b/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
+index c4db017e8c..8e8388e8d4 100644
+--- a/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
++++ b/meta-oe/recipes-graphics/spir/spirv-tools_git.bb
+@@ -24,6 +24,8 @@ SRCREV_googletest = "f2fb48c3b3d79a75a88a99fba6576b25d42ec528"
  
+ inherit cmake python3native
+ 
++EXTRA_OECMAKE += "-DSPIRV_WERROR=OFF"
++
  do_install_append() {
+ 	install -d ${D}/${includedir}/spirv
+ 	install -m 0644 ${DEST_DIR}/spirv-headers/include/spirv/1.2/* ${D}/${includedir}/spirv	
 -- 
 2.24.1
 
