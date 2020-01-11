@@ -1,53 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
-	[209.85.216.53])
-	by mail.openembedded.org (Postfix) with ESMTP id AA77B6D561
+Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
+	[209.85.210.173])
+	by mail.openembedded.org (Postfix) with ESMTP id C7C596D561
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jan 2020 16:39:09 +0000 (UTC)
-Received: by mail-pj1-f53.google.com with SMTP id bg7so2345511pjb.5
+	Sat, 11 Jan 2020 16:39:10 +0000 (UTC)
+Received: by mail-pf1-f173.google.com with SMTP id z16so2704031pfk.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jan 2020 08:39:11 -0800 (PST)
+	Sat, 11 Jan 2020 08:39:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=Gc6jWoC40rVJDHVMxdegs5YdbBDPftb4rkbeUR4TBfI=;
-	b=H28LzldbqR1E0I6WI43Q2ZWWrPBJqhxkZlmxVkjfA+m8Dpva1ffAaYI+rTDkzQz4PV
-	gSOn3fn9c26QBshkaell9EbjTjEuNB8FkmSTamIJgwYY0jbV9k2lvASdTRWFXAQ2pKRi
-	/kgnyTVNvyBg312siQkES7iUvrOLYr4vyp2/0USM+fP7nandhfrC9F6n9qt7vN/npp+q
-	0501uYdWkYd2mf6NfREFs6tQfO84A5tHw66EtHts8/KQFdY13b2Nkz+1EcfTng3b+6mu
-	zZOW/TqIFmarloPhOQKBtoFVSz8SsoIO5gXYIeHyUj6/97fLr/Or//5U62tHUrrnPX7+
-	ZlYg==
+	bh=fRwft9CmSc6GqxTR1HdqWNOw1doLGiO2G6eOT1I3x5k=;
+	b=BQS4BO4OTZx12YxvW7oBZk9NpcIsSaaJb1Hl54MI7Rs/ZI4kyGR+i+KVZaKd94Dfi6
+	9x/mOWKOr0lWJD2AXP8muX8eAD1cmkWcE/ebY8DmvfEhls9Z7ziiruN6SrS/yYxSKvLF
+	GuSiWcVkBAUNpBKDaAgMo6kH5+RRgMZ23AAgpSjHXLEytYnB3YQ/kvzNAlQcDEWnARjH
+	v+lfPpWMHvmTg/hj3+5fNwDEpObrsflY0XD0ilG3zusYaPmr4DDkS1s+I1Ymp3e1+Rbl
+	eI8KmNYx8CXEwphEK3DyCP5fwAwkQiKO7x3WevqdkHSk6kb4vnyzfAiUG5XW8xxEkgsj
+	JHuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=Gc6jWoC40rVJDHVMxdegs5YdbBDPftb4rkbeUR4TBfI=;
-	b=YMYmczWPOZgnsmgRod6IGXNka3x79/yMVCQ0ky+Ja0qW71GdfTlRDJ381LJqMvEHqu
-	3upASbk+8y+yfIQJd7bQ8+5WVPNeVFJRGmh2TJGBYrLq6B5K2ODtlua9oI9bpUgfLOPQ
-	wtgXQJNGwBBOGcLmiFHQE/90/S37QRQkA1H+TburQg2XxrMjwnr317q8w3TuTFMu9aPj
-	xxUJKj4LI9TbXQsaw1nvkS5iZi+v3CFlAKCfMdGO7u3WBoBToVpQNSrfxux1Uwmolb6s
-	sj0CVpCx85FIv6zD+WSyC3oiPefdeDoHvzI2iagSE32q3jmbHp3vR+8KCKrLb/xbdLgD
-	OThA==
-X-Gm-Message-State: APjAAAXGYupo8eDkQosxETZDfCXDG6l1XrAJA8n+bAoI7sC1BcOUm9+f
-	/0bN0zHMSouNG2NtTlwqoBB26Bb221E=
-X-Google-Smtp-Source: APXvYqwCr3/F4OIT/kDoaOf/VBWWAVOybDMOVTfbJxr06n2Pa/DdxYJHqeDZeLvzDWB+WczE0yXU7w==
-X-Received: by 2002:a17:902:547:: with SMTP id
-	65mr11143111plf.50.1578760750217; 
-	Sat, 11 Jan 2020 08:39:10 -0800 (PST)
+	bh=fRwft9CmSc6GqxTR1HdqWNOw1doLGiO2G6eOT1I3x5k=;
+	b=tfkCzER5RT7apJ5+EOHxn85sR7wEgbE++cSrwW6/VuxsEFtcxQzwl5h+hynEt4jy0T
+	cRm3MiK9U7hkRCj56OxzkhqQfpZLln2+T+a2tU7hvHUKTKGSGyf9ZWByGjiGpTT29N+h
+	SdxQbm2/b1sIQOpkezIlbat/k+FRs5XuM4zWOOfX18ZPuAtgLgOr7Xoo50gPhkLXxnqT
+	R5WdCwCmJpwpHd8f1Va7imEXXayqHj+Gx/baNyzBkPqQWDl696JaGFAZuLz5tCQ7RX9n
+	8PoLXcMmXtFuhB+qFMs2+4S7l4mijZ2578F77FqNhW4UFBHWNDT1CyRh6ztZBIL+GO8d
+	gEog==
+X-Gm-Message-State: APjAAAUY9QNfhDTwdKn2XahCUwlRCrl4HYAZUwu9Om43fXvcLMQesMIk
+	55UnhmZCV+qXxtHYT7AwMTC/HCPwL14=
+X-Google-Smtp-Source: APXvYqzyrduIPB86f7hynqCiWHNGvs28ftZRcGRLwoEkO/RgpezmaqxVbvLXDN7YbG06kjqFA1fFQw==
+X-Received: by 2002:a63:1418:: with SMTP id u24mr11493321pgl.279.1578760751534;
+	Sat, 11 Jan 2020 08:39:11 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::a983])
-	by smtp.gmail.com with ESMTPSA id y6sm7196521pgc.10.2020.01.11.08.39.09
+	by smtp.gmail.com with ESMTPSA id y6sm7196521pgc.10.2020.01.11.08.39.10
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 11 Jan 2020 08:39:09 -0800 (PST)
+	Sat, 11 Jan 2020 08:39:10 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Jan 2020 08:39:03 -0800
-Message-Id: <20200111163906.675731-2-raj.khem@gmail.com>
+Date: Sat, 11 Jan 2020 08:39:04 -0800
+Message-Id: <20200111163906.675731-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20200111163906.675731-1-raj.khem@gmail.com>
 References: <20200111163906.675731-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Cc: Stefan Lendl <sll@mission-embedded.com>
-Subject: [meta-networking][PATCH 2/5] tinyproxy: Fix user and group in tinyproxy install
+Subject: [meta-oe][PATCH 3/5] websocketpp: Fix clang specific flags in cmake files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,51 +58,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jan 2020 16:39:09 -0000
+X-List-Received-Date: Sat, 11 Jan 2020 16:39:10 -0000
 Content-Transfer-Encoding: 8bit
 
-From: Stefan Lendl <sll@mission-embedded.com>
-
-Signed-off-by: Stefan Lendl <sll@mission-embedded.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/tinyproxy/tinyproxy/tinyproxy.service   | 6 +++---
- .../recipes-support/tinyproxy/tinyproxy_1.10.0.bb           | 2 +-
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ .../0001-Correct-clang-compiler-flags.patch   | 32 +++++++++++++++++++
+ .../websocketpp/websocketpp_0.8.1.bb          |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
-index df42745731..78df437f68 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
-@@ -3,12 +3,12 @@ Description=Tinyproxy, Lightweight http(s) proxy daemon
- RequiresMountsFor=/var
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
+new file mode 100644
+index 0000000000..4217897284
+--- /dev/null
++++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
+@@ -0,0 +1,32 @@
++From 5ccaff351297bca0e254bbfd66e3f03fef9d9c75 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 10 Jan 2020 21:54:39 -0800
++Subject: [PATCH] Correct clang compiler flags
++
++Fix misplaced quotes, this was leading to spurious ; in compiler cmdline
++Remove demanding libc++, clang can link with both libc++ and libstdc++
++and platforms have their own defaults, user can demand non defaults via
++adding it to cmake flags
++
++Upstream-Status: Submitted [https://github.com/zaphoyd/websocketpp/pull/859]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 2d13117..c17354a 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -148,7 +148,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
++         endif()
++         set (WEBSOCKETPP_PLATFORM_TLS_LIBS ssl crypto)
++         set (WEBSOCKETPP_BOOST_LIBS system thread)
++-        set (CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++0x -stdlib=libc++") # todo: is libc++ really needed here?
+++        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
++         if (NOT APPLE)
++             add_definitions (-DNDEBUG -Wall -Wno-padded) # todo: should we use CMAKE_C_FLAGS for these?
++         endif ()
++-- 
++2.24.1
++
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
+index 4303f24738..af6d30a281 100644
+--- a/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
++++ b/meta-oe/recipes-support/websocketpp/websocketpp_0.8.1.bb
+@@ -14,6 +14,7 @@ SRC_URI = "git://github.com/zaphoyd/websocketpp.git;protocol=https \
+            file://771.patch \
+            file://855.patch \
+            file://857.patch \
++           file://0001-Correct-clang-compiler-flags.patch \
+           "
  
- [Service]
--Group=tinyproxy
- ExecStartPre=/bin/mkdir -p /var/log/tinyproxy
--ExecStartPre=/bin/chown -R nobody.tinyproxy /var/log/tinyproxy
-+ExecStartPre=/bin/chown -R tinyproxy.nogroup /var/log/tinyproxy
- ExecStartPre=/bin/mkdir -p /var/run/tinyproxy
--ExecStartPre=/bin/chown -R nobody.tinyproxy /var/run/tinyproxy
-+ExecStartPre=/bin/chown -R tinyproxy.nogroup /var/run/tinyproxy
- ExecStart=/usr/bin/tinyproxy -d
-+PIDFile=/var/run/tinyproxy/tinyproxy.pid
- 
- [Install]
- WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.10.0.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.10.0.bb
-index 894eaac99a..7d97f52a78 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.10.0.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.10.0.bb
-@@ -25,7 +25,7 @@ inherit autotools systemd useradd
- #User specific
- USERADD_PACKAGES = "${PN}"
- USERADD_PARAM_${PN} = "--system --home /dev/null \
--                       --no-user-group --gid nogroup tinypoxy"
-+                       --no-user-group --gid nogroup tinyproxy"
- 
- SYSTEMD_PACKAGES += "${BPN}"
- SYSTEMD_SERVICE_${PN} = "tinyproxy.service"
+ EXTRA_OECMAKE = "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', '-DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON', '', d)} "
 -- 
 2.24.1
 
