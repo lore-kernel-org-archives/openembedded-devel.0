@@ -1,52 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B0017FFE9
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BEA37FFD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jan 2020 05:40:04 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id j5so4067833qtq.9
+	Sat, 11 Jan 2020 12:44:06 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id w15so4292955wru.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Jan 2020 21:40:05 -0800 (PST)
+	Sat, 11 Jan 2020 04:44:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0yzt7ws5Sg8Wxw37j5I3yHyjMQOJgZAVLefpS82bjZ0=;
-	b=cUr8lF17apkJ7GudQnTJkApvXgacPt0lpjNLiWbghyTVnnutzz9+2/lc3+Jx+vVDRi
-	lePh0Cqge1MS+Hv4qdmJUDt+0eSvpqk+wxW7ftuLkvXMOwZyhC2GalMwrLx8XLwmUKRT
-	NgbiVLmH1p3YJDHsNrauTLujXc6gfcT5VBOXYyrnva4iazbTnlhJhSngGI1xpLma11Cc
-	CA7wKA9WfzoxPaatoiQECdf09xpNJN/USSwMC1DTVaAGgQwxeWEul6qT18HK7MsvyDdu
-	NI7zJtig4loKCWzaByBHcchSoHJNlnNeVBQpqEekQFwuzqjWIRDFz06Mw1u3ZbRCMKb+
-	pprQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=w8l0gHi8l3aSC6McmU3ZyZRgiW/AZS3cxdfctswWhlw=;
+	b=Jn7cjATgvBYoiAdm+LXqaBZj1+O9rozyDJLqERdHV/UgOyj3/6SJjsxkCrxsvdTtbi
+	bc2Ij73XX505yoVCyKAc/n8mwqP48ml0lspqRH3hGFj0lDUa4SqhARwXEYd9tDEUZR4O
+	C9ZgDcSi92fsCFmsAUnH7/eYwUoVvSbiA8AUeCt5F7nqoAZW/05HuVlXPsMy0uhXR2EJ
+	FeylvHt0aEi9XpMfU8zJnjCSFGn8OMVYLLiQo1s8ZqX8dxJuk7epbyaNqjIbNLNStlWi
+	EgHJrIpJbifQSNKg9KnGTSSweqA1dEXy+MRgjonm1LcoMj6+OWuQq1wfX4eamhhWeZXX
+	lNcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=0yzt7ws5Sg8Wxw37j5I3yHyjMQOJgZAVLefpS82bjZ0=;
-	b=XxuM82uB6w4h/XQ6+PRH4tbgzyVDAIMGzh0kMqwLs8W9qTLnE5pHso0QwnlkCXBior
-	Sg6Rt6U0aOjUGEp1BDabGYbI8wxbesz+WCzlIpZKU17XWpuGImt6u7tTMnlplKTOgMCO
-	RnEUfZAkXi04dJJyR4smy57iYD6v/kblg/KlESQTQ4Pb2Cn5Wu0ZkdFFFSIL9/C0cxZJ
-	xir7q9i/y0n3wn8JlgZUHcFc8lUmDTdi9lO28ewxff3Y38mS0q0/qvFOl1NT2BUspUKV
-	+tz4bzPM4Tdrc6fD8ZIAhgmQ8ANf3xGEEFKmDpjyp8G7yyFLi3GLs6lP17OaKpjQ/mVt
-	UrAA==
-X-Gm-Message-State: APjAAAXs/zGhkMYevZMgMgnmvSYxk+tDi0c3CWFi3ZHz6MRJWGaNwrnq
-	0HKF1+lNTQcYWXSd8YjHeLBqEZcOroagE5iGVJU=
-X-Google-Smtp-Source: APXvYqwkWe2ZQCN+YeQnHv3cJBc/zDk8SyrCOpPNYlMj56paZ0XoKqw2lafwTPDJ1omLCoxKqJ5Zcs6Tx+5O5MEjP20=
-X-Received: by 2002:ac8:5257:: with SMTP id y23mr1806657qtn.88.1578721205146; 
-	Fri, 10 Jan 2020 21:40:05 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=w8l0gHi8l3aSC6McmU3ZyZRgiW/AZS3cxdfctswWhlw=;
+	b=K+qbZuYpepbXDqhvDjSccArymDNBCXz7WWJFbY+rn3XCIdosfdHnRO4Gb+MxMVtwoI
+	PKpnzrTs17X7S+hLayAkTOR8uj4vf8xH6keEJkJW7vszgkWjpC//cCLyIdV1DeFC4qvL
+	c2hZNGUUYvFt2xRYS5d5sbncEV6ei32/+N1C3D7n30tX6BLB9i9CRDKBxTIxTPumWuZN
+	xEysEHJWTfJu5/4+bB0XAuoIoXtNVRa3ZXBsJn0Zvvo/7EWrFuTOyncz0J2VT6PmY9Gf
+	Hy6kp+Qyo64TfywFb5pXPCGpI4ez7h2um+HYyI6ryirTEzXjJxaYcSSJ8MWIRcPBXeTG
+	W/SA==
+X-Gm-Message-State: APjAAAVNliqlzOrpja7zVs+7vLmM9dgEcS3fV2hDywDx5He+VgymSRRz
+	eyF+cRBIiH1Vd4Yw8ra4qQ0aYXulOmU=
+X-Google-Smtp-Source: APXvYqwzeP0iiEHZLkSCxHr3hPB6RDhqjxhMd3xXq+uk5uxJe+98a2EUPvaHRh8dkM0615BhNUmQwQ==
+X-Received: by 2002:adf:ebc6:: with SMTP id v6mr8876944wrn.75.1578746646705;
+	Sat, 11 Jan 2020 04:44:06 -0800 (PST)
+Received: from localhost ([109.238.218.228]) by smtp.gmail.com with ESMTPSA id
+	g21sm6060920wmh.17.2020.01.11.04.44.05
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 11 Jan 2020 04:44:05 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 11 Jan 2020 13:44:04 +0100
+Message-Id: <20200111124404.3001-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20200110100454.20554-1-costamagnagianfranco@yahoo.it>
-	<38a434af9cccb7b724f1a4f2f97bf9425e695786.camel@intel.com>
-	<CAMKF1sqkXhJvs_ajfA606_9BX8=_jFLu8t+GSxR1smO5eCy+nA@mail.gmail.com>
-In-Reply-To: <CAMKF1sqkXhJvs_ajfA606_9BX8=_jFLu8t+GSxR1smO5eCy+nA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 10 Jan 2020 21:39:39 -0800
-Message-ID: <CAMKF1sqVthwUzzDNPyOr+pxCzLB+mMJRdY9Qe3O2mE8TvBkfzQ@mail.gmail.com>
-To: "Mittal, Anuj" <anuj.mittal@intel.com>
-Cc: "locutusofborg@debian.org" <locutusofborg@debian.org>,
-	"costamagna.gianfranco@gmail.com" <costamagna.gianfranco@gmail.com>,
-	"costamagnagianfranco@yahoo.it" <costamagnagianfranco@yahoo.it>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] websocketpp: also install examples in a new -examples subpackage
+Subject: [meta-oe][PATCH] proj: upgrade to 6.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,22 +57,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jan 2020 05:40:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 11 Jan 2020 12:44:06 -0000
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jan 10, 2020 at 9:38 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Fri, Jan 10, 2020 at 6:20 AM Mittal, Anuj <anuj.mittal@intel.com> wrote:
-> >
-> > On Fri, 2020-01-10 at 11:04 +0100, Gianfranco Costamagna wrote:
-> > > +do_install_append() {
-> > > +     install -d ${D}${docdir}/${PN}
-> > > +     cp -R ${S}/examples ${D}${docdir}/${PN}
-> >
-> > I think these should be BPN instead of PN so this works with multilib.
->
-> right. Since I have merged this patch, perhaps a new patch addressing
-> this would be good.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../proj/{proj_4.9.3.bb => proj_6.2.0.bb}                 | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-navigation/proj/{proj_4.9.3.bb => proj_6.2.0.bb} (54%)
 
-I never mind, this patch was replaced with v2 eventually so its addressed.
+diff --git a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb b/meta-oe/recipes-navigation/proj/proj_6.2.0.bb
+similarity index 54%
+rename from meta-oe/recipes-navigation/proj/proj_4.9.3.bb
+rename to meta-oe/recipes-navigation/proj/proj_6.2.0.bb
+index f45f8948d5..fa269d01b3 100644
+--- a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb
++++ b/meta-oe/recipes-navigation/proj/proj_6.2.0.bb
+@@ -5,9 +5,11 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
+ 
+-SRC_URI = "http://download.osgeo.org/proj/proj-${PV}.tar.gz"
+-SRC_URI[md5sum] = "d598336ca834742735137c5674b214a1"
+-SRC_URI[sha256sum] = "6984542fea333488de5c82eea58d699e4aff4b359200a9971537cd7e047185f7"
++SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
++SRC_URI[md5sum] = "5cde556545828beaffbe50b1bb038480"
++SRC_URI[sha256sum] = "b300c0f872f632ad7f8eb60725edbf14f0f8f52db740a3ab23e7b94f1cd22a50"
++
++DEPENDS = "sqlite3 sqlite3-native"
+ 
+ inherit autotools pkgconfig lib_package
+ 
+-- 
+2.20.1
+
 
