@@ -1,53 +1,46 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
-	[209.85.128.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 13B1A7FD05
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 65A4E7F513
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jan 2020 18:19:29 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id f129so5286609wmf.2
+	Sun, 12 Jan 2020 16:20:53 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id n15so6984945qtp.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Jan 2020 10:19:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=a7WENy2SafKCLfFtcN7J5MWs920paruw+3iBrjb9u7k=;
-	b=Mm7sgfjsEyDd7LhscTcjLBuuqsumdusWb8voAGwC+t0WWNc8DbWyqw4ZN2+QTYUiLJ
-	FBE4y3X/uOvDX3Yby7efsXrRm29Qm42yjfYsFM9qlSmj6M3Un7SUseE38CR3LtMFFTAB
-	+MIp7oL5BoYRTjOeWWIDf+4j1XigIYN3KqdPZrvrWWX3Jn0+ZU4vp44rArw7HaSQvYJ7
-	lSg8RXGeukRP3yGprJipZ6h+1YZlr+krOj86wyDL3ENmvzwS9VnDajDoBOaTopDZ9fES
-	RYEgk/f3bbp912oXih8N2pWf3Z5dFMjS2VKxYeqfkQKDkkEbV6fgXbCmK9XEuRHYTFaV
-	9mYQ==
+	Sun, 12 Jan 2020 08:20:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Svq8SZzXy3LYTit2T25/TJRcuuvuvfuRdJiwqvJueRM=;
+	b=pR6CfDl/lqKz1DWOfyDBkoSvDo1LCrTNUkbAeNGtWl2TjbkkK2RUTJ4iON//173w0O
+	l1Cy2EtTlM0+9LfUWKXubaiKhjboMrB+b9t5kIt62mB4WBvLjXQj3GzqUOFaSzYsUpmA
+	dkVgipkGRJ/mW+ytYhPL04ydT0TDFC7k1tmOR3t5POWTLxpivl5QfDQx6ygadp+IvZdq
+	OvStMq2TZje9Eyc/qPgQGlphY+a9T5LmTT56Gimr6EQzHDNwt2po9omzfb82EQWuypmZ
+	herIKbg59Y9PNYRQqvTSH+nKTFbou2oIXwRladZOuYbp5IiRBwxyMDYXc6ZCHjzUCucV
+	OUrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=a7WENy2SafKCLfFtcN7J5MWs920paruw+3iBrjb9u7k=;
-	b=eiBPSEhVxjGkfCUKHHEoc8L0WCzFzB2R7nHfsaBfatxvKaGoyvGirDsRmdMWUbiB+Z
-	Fr476ld5luFwHyjVcilav17e9vwnMfQgHaTyiXdBJWWfTl5jCuu6cagdgHMNWXxCOABY
-	fnATHvQN3FDSvjGUa+YyVW3fA1v70TW9JIzpEXfchsZhGa2GJ2oCd5AkIJmzVCbrHHF0
-	d4PXCACMWD1xVPWVd+2ChFcZWF910A/gzOeF/+HEaWuYlLKaQK2tc9FEoCLt/l6lShY8
-	YBJctv5ura3u9rkZynsNCXAkLyM4rw77ltBrRjWw1j5unstV5xsHGtqBqpR1CbzHkdal
-	eqkw==
-X-Gm-Message-State: APjAAAUup8IWaBPLsj7+pKbPjdG0RZzgnMkV7oYxxZI2UArSDwZUAKcm
-	WGGzHNW13MSZOWOaRJ8BkWZdpg==
-X-Google-Smtp-Source: APXvYqwvIqJizqD64h6RQiTtFn7I9WtQ7E79SOLSyqWLmV6vaZKuNFIdaQZSJhkZKxgEw5dpMVJFhg==
-X-Received: by 2002:a1c:4144:: with SMTP id o65mr11358155wma.81.1578766770451; 
-	Sat, 11 Jan 2020 10:19:30 -0800 (PST)
-Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
-	by smtp.gmail.com with ESMTPSA id
-	d12sm7586761wrp.62.2020.01.11.10.19.29
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 11 Jan 2020 10:19:29 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Jan 2020 19:19:22 +0100
-Message-Id: <20200111181922.15956-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.23.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Svq8SZzXy3LYTit2T25/TJRcuuvuvfuRdJiwqvJueRM=;
+	b=Lx5TGpvEPlsJOrj2Yi1pfJ3REBLWxTSXtrbWCumLD1i1OO/GuSldAH5y5+dRVey3C2
+	cR8+HIIz7mbldThyh+1QtDoFEkAzD1CTXDmmqmBHNLdpE2LqAJqI2DPOGEflBpqkTmul
+	BR82aUiSmkhW3egcOLB3SDrMolAqlQaAAwvAaAlyjSfnZjrgOFcev0JLtDToRH3sIjF7
+	e0sRB6uvzMv5sijsqb8YaS8skR8ReCpBIt2nW7y5UEBa4MB1IOMilaqN5cq3i4TJUilf
+	p8VsbLddfPco8xgmokXTd93pKsGt27uJRG6KfEacrUPkZ3mvEPntK3KZRUML4CrHN6aL
+	lllQ==
+X-Gm-Message-State: APjAAAU3+vMFbODayifgs9Xaog3RfK+TGhbYnwUIPyRV+Xihfdu7/L/5
+	1kBBP+y610PJNNwAzACJHkoU8Fn6/LAZL3UUAoA=
+X-Google-Smtp-Source: APXvYqxrsiLG1ogh5pumewD6wKB3QDhRf15+vVF3L3CxhifI1Qf8RU6m6V/eBX89pm3LHdcz10XNSFpti2I7gKMppEg=
+X-Received: by 2002:ac8:145:: with SMTP id f5mr10754377qtg.194.1578846053921; 
+	Sun, 12 Jan 2020 08:20:53 -0800 (PST)
 MIME-Version: 1.0
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [meta-oe][PATCH] cloc: new package
+References: <20200111124404.3001-1-Martin.Jansa@gmail.com>
+In-Reply-To: <20200111124404.3001-1-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 12 Jan 2020 08:20:27 -0800
+Message-ID: <CAMKF1srmyvV-YKkddwO7i=H27VhJDLo+oJwvxMVepaHE4nUrUA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] proj: upgrade to 6.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,46 +53,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Jan 2020 18:19:30 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 12 Jan 2020 16:20:53 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Martin
 
-This adds a recipe for cloc - a command-line tool for counting lines
-of code.
+This seems to break libspatialite
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
----
- meta-oe/recipes-devtools/cloc/cloc_1.84.bb | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/cloc/cloc_1.84.bb
+https://errors.yoctoproject.org/Errors/Details/306125/
 
-diff --git a/meta-oe/recipes-devtools/cloc/cloc_1.84.bb b/meta-oe/recipes-devtools/cloc/cloc_1.84.bb
-new file mode 100644
-index 000000000..f9ecd0ee4
---- /dev/null
-+++ b/meta-oe/recipes-devtools/cloc/cloc_1.84.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Count blank lines, comment lines, and physical lines of source code \
-+in many programming languages."
-+AUTHOR = "Al Danial"
-+
-+LICENSE="GPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2c1c00f9d3ed9e24fa69b932b7e7aff2"
-+
-+SRC_URI = "https://github.com/AlDanial/cloc/releases/download/${PV}/${BP}.tar.gz"
-+SRC_URI[md5sum] = "a52f3843825377cfa4e4b3b30a567ab4"
-+SRC_URI[sha256sum] = "c3f0a6bd2319110418ccb3e55a7a1b6d0edfd7528bfd2ae5d530938abe90f254"
-+
-+do_configure[noexec] = "1"
-+do_compile[noexec] = "1"
-+
-+do_install() {
-+    install -D -m 0755 ${S}/cloc ${D}${bindir}/cloc
-+}
-+
-+RDEPENDS_${PN} = "perl perl-modules"
--- 
-2.23.0
-
+On Sat, Jan 11, 2020 at 4:44 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../proj/{proj_4.9.3.bb => proj_6.2.0.bb}                 | 8 +++++---
+>  1 file changed, 5 insertions(+), 3 deletions(-)
+>  rename meta-oe/recipes-navigation/proj/{proj_4.9.3.bb => proj_6.2.0.bb} (54%)
+>
+> diff --git a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb b/meta-oe/recipes-navigation/proj/proj_6.2.0.bb
+> similarity index 54%
+> rename from meta-oe/recipes-navigation/proj/proj_4.9.3.bb
+> rename to meta-oe/recipes-navigation/proj/proj_6.2.0.bb
+> index f45f8948d5..fa269d01b3 100644
+> --- a/meta-oe/recipes-navigation/proj/proj_4.9.3.bb
+> +++ b/meta-oe/recipes-navigation/proj/proj_6.2.0.bb
+> @@ -5,9 +5,11 @@ SECTION = "libs"
+>  LICENSE = "MIT"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=74d9aaec5fa0cd734341e8c4dc91b608"
+>
+> -SRC_URI = "http://download.osgeo.org/proj/proj-${PV}.tar.gz"
+> -SRC_URI[md5sum] = "d598336ca834742735137c5674b214a1"
+> -SRC_URI[sha256sum] = "6984542fea333488de5c82eea58d699e4aff4b359200a9971537cd7e047185f7"
+> +SRC_URI = "http://download.osgeo.org/${BPN}/${BP}.tar.gz"
+> +SRC_URI[md5sum] = "5cde556545828beaffbe50b1bb038480"
+> +SRC_URI[sha256sum] = "b300c0f872f632ad7f8eb60725edbf14f0f8f52db740a3ab23e7b94f1cd22a50"
+> +
+> +DEPENDS = "sqlite3 sqlite3-native"
+>
+>  inherit autotools pkgconfig lib_package
+>
+> --
+> 2.20.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
