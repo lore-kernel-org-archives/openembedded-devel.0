@@ -1,31 +1,52 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BFA997F87E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 696F27F87E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2020 20:34:05 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 00DKY68L028281
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Mon, 13 Jan 2020 12:34:06 -0800 (PST)
-Received: from [172.25.44.8] (172.25.44.8) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Mon, 13 Jan 2020 12:34:05 -0800
-To: "Mingde (Matthew) Zeng" <matthew.zeng@windriver.com>, openembeded-devel
-	<openembedded-devel@lists.openembedded.org>
-References: <20200109210518.22451-1-schnitzeltony@gmail.com>
-	<bc6e63b4-17f5-4d2c-761b-abe8ef476551@windriver.com>
-	<CALbNGRT-yQLsGTLsSTJzbhU5b6zzLxHmb6A2wi-pDfmZt-4_8A@mail.gmail.com>
-	<87k15vw1jv.fsf@windriver.com>
-From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <2ec962d4-e6de-2ed2-2b4f-436041fccac3@windriver.com>
-Date: Mon, 13 Jan 2020 15:34:03 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.2.2
+	Mon, 13 Jan 2020 20:38:45 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id e5so10343515qtm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Jan 2020 12:38:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Kwme+U+CBvG/A8fgLQFxKUPM5VYKYiGyihCmptJa17s=;
+	b=d9yRxIxVGEsbRUKeyovaaZJcQFNERFZfOYYglOMoWABBG2FPmBtT20zgRTuf0LMXdr
+	JjQ+LwbV3Dq3wylVBf/kv5NXMQ9V37vUpVtM3+xZx7wmXqFDtTw+QVm9UaXCVWBhAvqH
+	0pRys2fEJ37rnL5vscItxolNJrVxMbDgAf5xHcXxsFxrA5MmiySoyfcggtvRp+KSAf27
+	u68O/HHoiu19A3ZATNhSry8ZvxzoUujW1PjPp8szJjZzoUPfFblzjp86dDNIGpT3BI++
+	0RNb2d5mKoEGzqd6p/uGK8F4iTBHRlo1VdMxbZY7IT/IwrBxPMlhoFe/R4EFKSxfPbDg
+	zmSA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Kwme+U+CBvG/A8fgLQFxKUPM5VYKYiGyihCmptJa17s=;
+	b=ru9ODn34nMu82Qa4dlI0wS0CaevNHL8a8o89kFAryS5P7YqNv9j8JkX4GvDoBEcRyJ
+	3rW4+AdxQibl/D38xq8tM4FmI7fhPX9GOkxIGxRS9J38BrEzd+8Dxdg5NlxGkRiVM1yH
+	Rfpw7LOeSMVe+fLbyiy9qF6xL36MvXovrGf9OSxUt0EVNacRMAi0ZZX5axExeKjLQAq/
+	Q0ZVPD9E0Rxw0dvAyJG5myLC4BEo/WLNny2T6+5oCIWtVQIBgVkFL399cjc13s3MDATr
+	aRpCZmpc0/Oq6X6zTKGcOXyB7ko4DT/uqyUi7upNpMEYXVjg5JfpsZFdqcBSQ//P+y1X
+	HPOQ==
+X-Gm-Message-State: APjAAAW+r5p//KqgdRi6FxzOSaecXUJYhtvvVuqMSutc5pxXhZiMQyoL
+	X0zewazyZpHJpEYjRqMNnNfK5mK/PRUf7tUhQHY=
+X-Google-Smtp-Source: APXvYqyWca71bMNMqNGEagI3dk859JBUfjvvtJXWwfY2uSAUOYrbVWAEt+MrqZlYbVVTMEfiNh6Brs0Wss6YSHqhxNA=
+X-Received: by 2002:ac8:4657:: with SMTP id f23mr425203qto.378.1578947925888; 
+	Mon, 13 Jan 2020 12:38:45 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <87k15vw1jv.fsf@windriver.com>
-X-Originating-IP: [172.25.44.8]
-Subject: Re: [PATCH 1/9] poppler: upgrade 0.82.0 -> 0.84.0
+References: <20200113170209.95601-1-alex.kanavin@gmail.com>
+	<20200113170209.95601-3-alex.kanavin@gmail.com>
+	<CA+chaQec=MyVT6a7FkmKPG5izt5UydqhSXqv6-POKh558Y4etA@mail.gmail.com>
+	<CANNYZj-j42s83n9RsWoDpKyTpQUhWMGx9=82zVt0Doa=MDFy9g@mail.gmail.com>
+	<CA+chaQdXtycq=z3+2i2VK7+7TDQKjU3JCcE4nFxcav37z1cOwQ@mail.gmail.com>
+	<CANNYZj_p5cHwcM8BntPOPGC-vSHQRBVpKF5WU8UHssPG=k42jg@mail.gmail.com>
+	<CA+chaQeRLhqmbWvXh5TPokUumfdtfdERkmcs6X1Rd2+AqMZHTQ@mail.gmail.com>
+In-Reply-To: <CA+chaQeRLhqmbWvXh5TPokUumfdtfdERkmcs6X1Rd2+AqMZHTQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 13 Jan 2020 12:38:19 -0800
+Message-ID: <CAMKF1srVEtGfgX9ozygNAqfK0N6BSOW4rOTEEwom0+sOsCuCUw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 3/3] sysprof: move from meta-oe to meta-gnome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,66 +59,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jan 2020 20:34:05 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-CA
+X-List-Received-Date: Mon, 13 Jan 2020 20:38:45 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 1/13/20 3:20 PM, Mingde (Matthew) Zeng wrote:
->>> Have you by chance tried to add ptest coverage for poppler?
->>> If not, Matthew may do that.
->>>
->>>
->> Have not done any ptest on this - just some runtime tests on target with evince
->>
->> Andreas
-> ```
-> $ make test
-> Running tests...
-> Test project /home/mzeng/code/poppler/build
->        Start  1: check_qt5_attachments
->   1/21 Test  #1: check_qt5_attachments ............***Failed    2.47 sec
->        Start  2: check_qt5_dateConversion
->   2/21 Test  #2: check_qt5_dateConversion .........   Passed    0.58 sec
-> ...
-> ```
+I have queued Martin's reworked patches
+
+On Mon, Jan 13, 2020 at 11:18 AM Martin Jansa <martin.jansa@gmail.com> wrote:
 >
-> Poppler's `make test` runs tests from the `/build/qt5/tests` directory, which apparently are relying on qt5.
+> Yo're welcome!
+> Current 2/2 is the same as 3/3 was, I wasn't resolving any conflicts.
 >
-> ```
-> /****************************************************************************
-> ** Meta object code from reading C++ file 'check_attachments.cpp'
-> **
-> ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
-> **
-> ** WARNING! All changes made in this file will be lost!
-> *****************************************************************************/
+> On Mon, Jan 13, 2020 at 8:14 PM Alexander Kanavin <alex.kanavin@gmail.com>
+> wrote:
 >
-> #include <memory>
-> #include <QtCore/qbytearray.h>
-> #include <QtCore/qmetatype.h>
-> ...
-> ```
->
-> Is it worth it to write a ptest and sort out the meta-qt5 layer?
-
-No, we can't have meta-openembedded packages depend
-on meta-qt5 content.
-
-The meta-oe layer only depends on oe-core (aka core):
-
-http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/conf/layer.conf#n30
-
-Thanks for looking into it Matthew,
-
-../Randy
-
->
->      Matthew
-
-
--- 
-# Randy MacLeod
-# Wind River Linux
-
+> > It does not figure out the 2/3, and still forces a conflict resolution.
+> > Thanks for doing it (if you correctly resolved the conflicts), but I still
+> > think it's entirely unnecessary.
+> >
+> > Alex
+> >
+> > On Mon, 13 Jan 2020 at 19:58, Martin Jansa <martin.jansa@gmail.com> wrote:
+> >
+> >> Doing "git mv" in interactive rebase of the first commit should be really
+> >> easy to do and if git doesn't figure out the 2/3 automatically, than you
+> >> can still check that the rebased 2/3 looks like the current 3/3 did (and if
+> >> doesn't then just squash git diff into it), I don't see how this is error
+> >> prone.
+> >>
+> >> On Mon, Jan 13, 2020 at 7:52 PM Alexander Kanavin <alex.kanavin@gmail.com>
+> >> wrote:
+> >>
+> >>> Because I already had the patches ready, and simply added the move
+> >>> between layers on top of them. Placing it to the right layer requires
+> >>> either a patchset do-over from scratch, or resolving a merge conflict with
+> >>> possibility for mistakes.
+> >>>
+> >>> Alex
+> >>>
+> >>> On Mon, 13 Jan 2020 at 19:15, Martin Jansa <martin.jansa@gmail.com>
+> >>> wrote:
+> >>>
+> >>>> Why don't you add it to the right layer in the 1/3 change?
+> >>>>
+> >>>> On Mon, Jan 13, 2020 at 6:03 PM Alexander Kanavin <
+> >>>> alex.kanavin@gmail.com> wrote:
+> >>>>
+> >>>>> Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+> >>>>> ---
+> >>>>>  .../files/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch  | 0
+> >>>>>  {meta-oe => meta-gnome}/recipes-kernel/sysprof/sysprof_3.34.1.bb  | 0
+> >>>>>  2 files changed, 0 insertions(+), 0 deletions(-)
+> >>>>>  rename {meta-oe =>
+> >>>>> meta-gnome}/recipes-kernel/sysprof/files/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch
+> >>>>> (100%)
+> >>>>>  rename {meta-oe => meta-gnome}/recipes-kernel/sysprof/
+> >>>>> sysprof_3.34.1.bb (100%)
+> >>>>>
+> >>>>> diff --git
+> >>>>> a/meta-oe/recipes-kernel/sysprof/files/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch
+> >>>>> b/meta-gnome/recipes-kernel/sysprof/files/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch
+> >>>>> similarity index 100%
+> >>>>> rename from
+> >>>>> meta-oe/recipes-kernel/sysprof/files/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch
+> >>>>> rename to
+> >>>>> meta-gnome/recipes-kernel/sysprof/files/0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch
+> >>>>> diff --git a/meta-oe/recipes-kernel/sysprof/sysprof_3.34.1.bb
+> >>>>> b/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
+> >>>>> similarity index 100%
+> >>>>> rename from meta-oe/recipes-kernel/sysprof/sysprof_3.34.1.bb
+> >>>>> rename to meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
+> >>>>> --
+> >>>>> 2.17.1
+> >>>>>
+> >>>>> --
+> >>>>> _______________________________________________
+> >>>>> Openembedded-devel mailing list
+> >>>>> Openembedded-devel@lists.openembedded.org
+> >>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>>>
+> >>>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
