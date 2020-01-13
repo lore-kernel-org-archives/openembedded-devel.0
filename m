@@ -1,50 +1,33 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DD1B7F2A4
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id D56427FCE3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2020 09:50:14 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id p17so8857147wmb.0
+	Mon, 13 Jan 2020 13:19:11 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,429,1571673600"; d="scan'208";a="81744382"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 13 Jan 2020 21:19:09 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id A23B04CE1CB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2020 01:50:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Q7mK1p0ijAEEwxTSmr4dqc5OyFZrSeUs1V4+OkKsWuw=;
-	b=kyqYsNNhOXTD72QxYTw64UleXyptzbS9I3ESX7bb12KrrSFimG8BWkRQD95Q66mX+x
-	etNWOalm0mfI9kr+F0Pfszo4mh2jcAamDAWsjxo0R968MbDOS/Ze9MY8V8g2u4S63wI6
-	EaXOZJNDr3+6n6kx5j+k4iqHg99J4XYLyir3juc+LyR6/0TJoQyQah6Q29vzSUBRkOyg
-	PIizAv3qOhEUSmpuw7TysH8v/err78/W0cnDX7SZrOPaFwqMa+egvBRH4n49ijGst2ip
-	Px/nl/FcGS0lqZSNmAqDZViC+WqBRApOsqG5xlpGa2ztAq0jlLWDmkPW2OBHSLonXHq5
-	WiKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Q7mK1p0ijAEEwxTSmr4dqc5OyFZrSeUs1V4+OkKsWuw=;
-	b=batdHasyrKrbDtt9c64+eznh3HEuS6YUzbfEdJ6+vU1bwT4LH1UfJdgkoccWIp8ceG
-	MAYrf701zn1mGc4d4OPQo6uZsrGynZuzpqrRNsRUNBzu4ybUt1AJWKOLI5jnl++PHGBB
-	qUnAL9Gws2k53GBOL7SdxL8/tKETNb1eJzKMcORbTi6QDbezJSwi/yG4psizyYf2rLfi
-	bAFrRZrIuqbTeRIJsLNTFyJjcsixQ+3hrbD/WOQBhKSRsh4o2W+I6vW4/j9rokDvdGhq
-	Ox0+ms4lf/5bl2nX0fU95JuMkp1xEpwxQBg6/gOWm/ZnQZup2mArLfitbeeRTCg+XFv5
-	3mfA==
-X-Gm-Message-State: APjAAAXq/w6Swm7Ut5xr8SfgiMudutoh/v9IJ+uPiaNRTl5KT6DiE7YE
-	LRloXYp4ac6iaS5mS1zlfufxqdUW
-X-Google-Smtp-Source: APXvYqzv0tJe1jOiOrPU41Wq4HkhBBzxlElepsfB1o6NLyDcCeBZzTTXnzHW8tqhT3+rvAqX/uxMaw==
-X-Received: by 2002:a7b:cb86:: with SMTP id m6mr18788314wmi.51.1578909014773; 
-	Mon, 13 Jan 2020 01:50:14 -0800 (PST)
-Received: from nick-bbestie.garage.tyco.com ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	e18sm14093973wrw.70.2020.01.13.01.50.13
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 13 Jan 2020 01:50:14 -0800 (PST)
-From: Nicola Lunghi <nick83ola@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Jan 2020 09:50:05 +0000
-Message-Id: <20200113095004.34295-1-nick83ola@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	Mon, 13 Jan 2020 21:10:04 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Mon, 13 Jan 2020 21:19:11 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Mon, 13 Jan 2020 21:19:13 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 13 Jan 2020 09:09:37 -0800
+Message-ID: <1578935381-39920-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python3-jsonrpcserver: update to 4.1.2
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: A23B04CE1CB3.A3E6C
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python][PATCH] python3-astor: 0.8 -> 0.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,43 +40,152 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jan 2020 09:50:14 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 13 Jan 2020 13:19:13 -0000
+Content-Type: text/plain
 
-this release solve the permission issue on the EGG directory
+f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
+Removed since it is included in 0.8.1.
 
-Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- ...onrpcserver_4.1.0.bb => python3-jsonrpcserver_4.1.2.bb} | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-jsonrpcserver_4.1.0.bb => python3-jsonrpcserver_4.1.2.bb} (64%)
+ ...f3ff7ad8818475b6e107e63aa9a54252d2a9.patch | 103 ------------------
+ ...n3-astor_0.8.bb => python3-astor_0.8.1.bb} |   6 +-
+ 2 files changed, 2 insertions(+), 107 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
+ rename meta-python/recipes-devtools/python/{python3-astor_0.8.bb => python3-astor_0.8.1.bb} (62%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.2.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb
-rename to meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.2.bb
-index a6dcef81d..e23720c3e 100644
---- a/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-jsonrpcserver_4.1.2.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/bcb/jsonrpcserver"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c89120516900f96f4c60d35fdc4c3f15"
+diff --git a/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch b/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
+deleted file mode 100644
+index 6d71be992..000000000
+--- a/meta-python/recipes-devtools/python/python3-astor/f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch
++++ /dev/null
+@@ -1,103 +0,0 @@
+-From f820f3ff7ad8818475b6e107e63aa9a54252d2a9 Mon Sep 17 00:00:00 2001
+-From: Jonathan Ringer <jonringer117@gmail.com>
+-Date: Thu, 17 Oct 2019 16:54:16 -0700
+-Subject: [PATCH] Fix packaging for setuptools>=41.4
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+----
+- MANIFEST.in       |  1 +
+- astor/VERSION     |  1 +
+- astor/__init__.py |  5 ++++-
+- setup.cfg         |  3 ++-
+- setup.py          | 16 +---------------
+- 5 files changed, 9 insertions(+), 17 deletions(-)
+- create mode 100644 astor/VERSION
+-
+-diff --git a/MANIFEST.in b/MANIFEST.in
+-index b12a6fe..81e72d5 100644
+---- a/MANIFEST.in
+-+++ b/MANIFEST.in
+-@@ -1,3 +1,4 @@
+- include README.rst AUTHORS LICENSE CHANGES
+- include setuputils.py
+-+include astor/VERSION
+- recursive-include tests *.py
+-diff --git a/astor/VERSION b/astor/VERSION
+-new file mode 100644
+-index 0000000..a3df0a6
+---- /dev/null
+-+++ b/astor/VERSION
+-@@ -0,0 +1 @@
+-+0.8.0
+-diff --git a/astor/__init__.py b/astor/__init__.py
+-index 3b02983..8dfcdb1 100644
+---- a/astor/__init__.py
+-+++ b/astor/__init__.py
+-@@ -9,6 +9,7 @@ Copyright 2013 (c) Berker Peksag
+- 
+- """
+- 
+-+import os
+- import warnings
+- 
+- from .code_gen import SourceGenerator, to_source  # NOQA
+-@@ -19,7 +20,9 @@ from .op_util import get_op_symbol, get_op_precedence  # NOQA
+- from .op_util import symbol_data  # NOQA
+- from .tree_walk import TreeWalk  # NOQA
+- 
+--__version__ = '0.8.0'
+-+ROOT = os.path.dirname(__file__)
+-+with open(os.path.join(ROOT, 'VERSION')) as version_file:
+-+    __version__ = version_file.read().strip
+- 
+- parse_file = code_to_ast.parse_file
+- 
+-diff --git a/setup.cfg b/setup.cfg
+-index 1baf6fc..a43634f 100644
+---- a/setup.cfg
+-+++ b/setup.cfg
+-@@ -2,6 +2,7 @@
+- name = astor
+- description = Read/rewrite/write Python ASTs
+- long_description = file:README.rst
+-+version = file: astor/VERSION
+- author = Patrick Maupin
+- author_email = pmaupin@gmail.com
+- platforms = Independent
+-@@ -40,7 +41,7 @@ test_suite = nose.collector
+- [options.packages.find]
+- exclude = tests
+- 
+--[wheel]
+-+[bdist_wheel]
+- universal = 1
+- 
+- [build-system]
+-diff --git a/setup.py b/setup.py
+-index 4a111b5..6068493 100644
+---- a/setup.py
+-+++ b/setup.py
+-@@ -1,17 +1,3 @@
+--import os
+--import sys
+--
+- from setuptools import setup
+--from setuptools.config import read_configuration
+--
+--from setuputils import find_version
+--
+--
+--def here(*paths):
+--    return os.path.join(os.path.dirname(__file__), *paths)
+--
+--config = read_configuration(here('setup.cfg'))
+--config['metadata']['version'] = find_version(here('astor', '__init__.py'))
+--config['options'].update(config['metadata'])
+- 
+--setup(**config['options'])
+-+setup()
+--- 
+-2.21.0
+-
+diff --git a/meta-python/recipes-devtools/python/python3-astor_0.8.bb b/meta-python/recipes-devtools/python/python3-astor_0.8.1.bb
+similarity index 62%
+rename from meta-python/recipes-devtools/python/python3-astor_0.8.bb
+rename to meta-python/recipes-devtools/python/python3-astor_0.8.1.bb
+index 17cc540f0..125a0236e 100644
+--- a/meta-python/recipes-devtools/python/python3-astor_0.8.bb
++++ b/meta-python/recipes-devtools/python/python3-astor_0.8.1.bb
+@@ -4,10 +4,8 @@ SECTION = "devel/python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=561205fdabc3ec52cae2d30815b8ade7"
  
--SRC_URI[md5sum] = "c1cc652bdeb04b8ce3ad962fbab34daf"
--SRC_URI[sha256sum] = "3a35c0ef21174ca98f995f99688cebadda97053785833fbb31ec862d6b157f6d"
-+SRC_URI[md5sum] = "fd4091bc19eb18579c15b97af70714eb"
-+SRC_URI[sha256sum] = "73db55d1cf245ebdfb96ca05c4cce01c51b61be845a2a981f539ea1e6a4e0c4a"
+-SRC_URI = "git://github.com/berkerpeksag/astor.git \
+-           file://f820f3ff7ad8818475b6e107e63aa9a54252d2a9.patch \
+-          "
+-SRCREV ?= "3a7607e31f0c17e747ded5cfe0b582d99f7caecf"
++SRC_URI = "git://github.com/berkerpeksag/astor.git "
++SRCREV ?= "c7553c79f9222e20783fe9bd8a553f932e918072"
  
- inherit pypi setuptools3
+ inherit setuptools3
  
-@@ -22,6 +22,3 @@ RDEPENDS_${PN} += "\
- 
- BBCLASSEXTEND = "native nativesdk"
- 
--do_install_append() {
--    chmod 0644 ${D}${PYTHON_SITEPACKAGES_DIR}/jsonrpcserver-4.1.0-py${PYTHON_BASEVERSION}.egg-info/*
--}
 -- 
-2.20.1
+2.17.1
+
+
 
 
