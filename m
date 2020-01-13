@@ -1,27 +1,30 @@
-Return-Path: <Matthew.Zeng@windriver.com>
+Return-Path: <Randy.MacLeod@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CF78A7FC1F
+	by mail.openembedded.org (Postfix) with ESMTP id BFA997F87E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2020 20:21:07 +0000 (UTC)
+	Mon, 13 Jan 2020 20:34:05 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 00DKL6f8026840
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 00DKY68L028281
 	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Mon, 13 Jan 2020 12:21:07 -0800 (PST)
-Received: from mzeng (128.224.141.67) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Mon, 13 Jan 2020 12:21:06 -0800
+	Mon, 13 Jan 2020 12:34:06 -0800 (PST)
+Received: from [172.25.44.8] (172.25.44.8) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Mon, 13 Jan 2020 12:34:05 -0800
+To: "Mingde (Matthew) Zeng" <matthew.zeng@windriver.com>, openembeded-devel
+	<openembedded-devel@lists.openembedded.org>
 References: <20200109210518.22451-1-schnitzeltony@gmail.com>
 	<bc6e63b4-17f5-4d2c-761b-abe8ef476551@windriver.com>
 	<CALbNGRT-yQLsGTLsSTJzbhU5b6zzLxHmb6A2wi-pDfmZt-4_8A@mail.gmail.com>
-User-agent: mu4e 1.3.6; emacs 28.0.50
-From: "Mingde (Matthew) Zeng" <matthew.zeng@windriver.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <CALbNGRT-yQLsGTLsSTJzbhU5b6zzLxHmb6A2wi-pDfmZt-4_8A@mail.gmail.com>
-Date: Mon, 13 Jan 2020 15:20:52 -0500
-Message-ID: <87k15vw1jv.fsf@windriver.com>
+	<87k15vw1jv.fsf@windriver.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <2ec962d4-e6de-2ed2-2b4f-436041fccac3@windriver.com>
+Date: Mon, 13 Jan 2020 15:34:03 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.2.2
 MIME-Version: 1.0
-X-Originating-IP: [128.224.141.67]
+In-Reply-To: <87k15vw1jv.fsf@windriver.com>
+X-Originating-IP: [172.25.44.8]
 Subject: Re: [PATCH 1/9] poppler: upgrade 0.82.0 -> 0.84.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -35,47 +38,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jan 2020 20:21:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 13 Jan 2020 20:34:05 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-CA
 
-
->> Have you by chance tried to add ptest coverage for poppler?
->> If not, Matthew may do that.
+On 1/13/20 3:20 PM, Mingde (Matthew) Zeng wrote:
+>>> Have you by chance tried to add ptest coverage for poppler?
+>>> If not, Matthew may do that.
+>>>
+>>>
+>> Have not done any ptest on this - just some runtime tests on target with evince
 >>
->>
-> Have not done any ptest on this - just some runtime tests on target with evince
+>> Andreas
+> ```
+> $ make test
+> Running tests...
+> Test project /home/mzeng/code/poppler/build
+>        Start  1: check_qt5_attachments
+>   1/21 Test  #1: check_qt5_attachments ............***Failed    2.47 sec
+>        Start  2: check_qt5_dateConversion
+>   2/21 Test  #2: check_qt5_dateConversion .........   Passed    0.58 sec
+> ...
+> ```
 >
-> Andreas
+> Poppler's `make test` runs tests from the `/build/qt5/tests` directory, which apparently are relying on qt5.
+>
+> ```
+> /****************************************************************************
+> ** Meta object code from reading C++ file 'check_attachments.cpp'
+> **
+> ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
+> **
+> ** WARNING! All changes made in this file will be lost!
+> *****************************************************************************/
+>
+> #include <memory>
+> #include <QtCore/qbytearray.h>
+> #include <QtCore/qmetatype.h>
+> ...
+> ```
+>
+> Is it worth it to write a ptest and sort out the meta-qt5 layer?
 
-```
-$ make test
-Running tests...
-Test project /home/mzeng/code/poppler/build
-      Start  1: check_qt5_attachments
- 1/21 Test  #1: check_qt5_attachments ............***Failed    2.47 sec
-      Start  2: check_qt5_dateConversion
- 2/21 Test  #2: check_qt5_dateConversion .........   Passed    0.58 sec
-...
-```
+No, we can't have meta-openembedded packages depend
+on meta-qt5 content.
 
-Poppler's `make test` runs tests from the `/build/qt5/tests` directory, which apparently are relying on qt5.
+The meta-oe layer only depends on oe-core (aka core):
 
-```
-/****************************************************************************
-** Meta object code from reading C++ file 'check_attachments.cpp'
-**
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.14.0)
-**
-** WARNING! All changes made in this file will be lost!
-*****************************************************************************/
+http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/conf/layer.conf#n30
 
-#include <memory>
-#include <QtCore/qbytearray.h>
-#include <QtCore/qmetatype.h>
-...
-```
+Thanks for looking into it Matthew,
 
-Is it worth it to write a ptest and sort out the meta-qt5 layer?
+../Randy
 
-    Matthew
+>
+>      Matthew
+
+
+-- 
+# Randy MacLeod
+# Wind River Linux
+
 
