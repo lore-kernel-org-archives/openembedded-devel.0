@@ -1,35 +1,49 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D7FF57FCE9
+Return-Path: <sumit.garg@linaro.org>
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+	[209.85.216.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B9AA7FC93
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2020 13:19:44 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,429,1571673600"; d="scan'208";a="81744434"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 13 Jan 2020 21:19:46 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 92B5F4CE1CBC
+	Mon, 13 Jan 2020 15:34:16 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id d5so4300545pjz.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2020 21:10:36 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Mon, 13 Jan 2020 21:19:44 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 13 Jan 2020 21:19:45 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 13 Jan 2020 09:09:41 -0800
-Message-ID: <1578935381-39920-5-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1578935381-39920-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1578935381-39920-1-git-send-email-wangmy@cn.fujitsu.com>
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 92B5F4CE1CBC.A58D3
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python][PATCH] python-pyconnman: 0.1.0 -> 0.2.0
+	Mon, 13 Jan 2020 07:34:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=SBOJtA4ecAVM5rqONH5boyNW8WjmaUTIK5taycT25XM=;
+	b=yss3HRm3GuL0BBgYFe3OqXyQO/hRuMWPqdf0PECoq45ldzl6pVSoBCcthYP5yj72Yl
+	+8rOuoAPHBDxAfkVK1WKF3/WBglt/mgckzob1BduHeENzeR9u093x/H0HblUBlm4sbil
+	4zWc6HRNWxNw01Bfy/+oyaofLEqrUC54wltt3JSBQo/17qqFBR90yMILGCApQzAcGaI3
+	Z/9ZsBINkDyvIJ6EWKldsiYsUyZsrr3YL1XG95kY7ru3i4iLWYWK2bDzHMYNFTqPpIxy
+	FNwfAK3ujstMeqOJw2GZ+IdOPNzQ1UT+BJ3ZNcI6RepfX2HNvPc5V4QoGT+NmLYWOq7r
+	W61w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=SBOJtA4ecAVM5rqONH5boyNW8WjmaUTIK5taycT25XM=;
+	b=SVgRzC5RvUlcCiapuKuVDV+8b4p98TaSV7pPQPmHzwkxTMtnxRwzI5SbLAQ9bcrtpl
+	B01QpV2gPJRe3b/fMcKjplloJbcmpERAXXd2xQSnuvkLdtnsTHvfdSEuSoyvgDC7UyWm
+	5IoEXILTjq26816XwekkzJn7epFGOr4dUMEMlHrUF2PEnNJXbc3mpCP7G8eaTVNdwWQb
+	GiKkLr60L7nyIkiRyn/mzVqAbc2yen1vaawmAd3OvnCJ9Yubr2e7oV2AWo05J8Fs1Ybi
+	rNVxdDTTRmrZ603hG78UpMpgYhQ1GEFdJT/JgG6qvV3YqzZxThvoPPPUcC+JPVxhpW2a
+	K7yQ==
+X-Gm-Message-State: APjAAAUA7sj6lCV+heKU9hjr4IH42INP9VxGeai6CshWUPUeBB/RB1VF
+	I87i+gOTRURYyUYc80a+muu0tn5YsOY=
+X-Google-Smtp-Source: APXvYqzUygkBH7CLOvA6Dy6tAqKy+Zvv0bNug4HPFfoQ1dRPzqyPIdiw6KqEVd/HSdYZC1c4CosmYQ==
+X-Received: by 2002:a17:90b:3004:: with SMTP id
+	hg4mr23054085pjb.52.1578929656901; 
+	Mon, 13 Jan 2020 07:34:16 -0800 (PST)
+Received: from localhost.localdomain ([117.252.69.227])
+	by smtp.gmail.com with ESMTPSA id
+	d14sm15665211pfq.117.2020.01.13.07.34.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 13 Jan 2020 07:34:16 -0800 (PST)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 Jan 2020 21:03:53 +0530
+Message-Id: <1578929633-22220-1-git-send-email-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.7.4
+Cc: daniel.thompson@linaro.org
+Subject: [meta-oe][PATCH] mariadb: fix library LZ4 lookup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,153 +56,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jan 2020 13:19:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 13 Jan 2020 15:34:16 -0000
 
-0001-Import-local-modules-by-relative-path-for-python3-su.patch
-Removed since it is included in 0.2.0.
+While cross-compiling mariadb package it tries to link lz4 library
+present in the target sysroot and if not found it tries to link host
+lz4 library which is incorrect leading to linker errors. So fix that
+via restricting lz4 library lookup to target sysroot only.
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- .../python-pyconnman/python-pyconnman.inc     |  4 +-
- ...man_0.1.0.bb => python-pyconnman_0.2.0.bb} |  0
- ...ules-by-relative-path-for-python3-su.patch | 74 -------------------
- .../python3-pyconnman_0.1.0.bb                |  9 ---
- .../python3-pyconnman_0.2.0.bb                |  5 ++
- 5 files changed, 7 insertions(+), 85 deletions(-)
- rename meta-python/recipes-connectivity/python-pyconnman/{python-pyconnman_0.1.0.bb => python-pyconnman_0.2.0.bb} (100%)
- delete mode 100644 meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman/0001-Import-local-modules-by-relative-path-for-python3-su.patch
- delete mode 100644 meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman_0.1.0.bb
- create mode 100644 meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman_0.2.0.bb
+ meta-oe/recipes-dbs/mysql/mariadb.inc              |  1 +
+ .../mariadb/0001-Fix-library-LZ4-lookup.patch      | 30 ++++++++++++++++++++++
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
 
-diff --git a/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman.inc b/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman.inc
-index beb2baf83..8517079bf 100644
---- a/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman.inc
-+++ b/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman.inc
-@@ -4,8 +4,8 @@ LICENSE = "Apache-2.0"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
- 
--SRC_URI[md5sum] = "b7fa82034b1c0e1fb1b518ffe3bb4fc0"
--SRC_URI[sha256sum] = "46c64c0692063fd0c9fb0216d49f7884bec9fa9760d8473db4b1e2f8162fab4a"
-+SRC_URI[md5sum] = "d60bdffbd9c920f005fdc5e05a8b94cd"
-+SRC_URI[sha256sum] = "d3a63a039c82b08a1171b003eafa62c6f128aa4eaa1ce7a55a9401b48f9ad926"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb b/meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.2.0.bb
-similarity index 100%
-rename from meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
-rename to meta-python/recipes-connectivity/python-pyconnman/python-pyconnman_0.2.0.bb
-diff --git a/meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman/0001-Import-local-modules-by-relative-path-for-python3-su.patch b/meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman/0001-Import-local-modules-by-relative-path-for-python3-su.patch
-deleted file mode 100644
-index 977b4aacd..000000000
---- a/meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman/0001-Import-local-modules-by-relative-path-for-python3-su.patch
-+++ /dev/null
-@@ -1,74 +0,0 @@
--From 2e84adb042bfb742eb328220b97f79ddb28db44b Mon Sep 17 00:00:00 2001
--From: Haris Okanovic <haris.okanovic@ni.com>
--Date: Tue, 23 Oct 2018 21:39:56 +0000
--Subject: [PATCH] Import local modules by relative path for python3 support
--
--Upstream-Status: Submitted
-----
-- pyconnman/agent.py      | 2 +-
-- pyconnman/interface.py  | 2 +-
-- pyconnman/manager.py    | 2 +-
-- pyconnman/service.py    | 2 +-
-- pyconnman/technology.py | 2 +-
-- 5 files changed, 5 insertions(+), 5 deletions(-)
--
--diff --git a/pyconnman/agent.py b/pyconnman/agent.py
--index f72de8d..453d783 100644
----- a/pyconnman/agent.py
--+++ b/pyconnman/agent.py
--@@ -1,5 +1,5 @@
-- from __future__ import unicode_literals
---from exceptions import ConnCanceledException
--+from .exceptions import ConnCanceledException
-- 
-- import dbus.service
-- 
--diff --git a/pyconnman/interface.py b/pyconnman/interface.py
--index 7d82e04..d540c81 100644
----- a/pyconnman/interface.py
--+++ b/pyconnman/interface.py
--@@ -4,7 +4,7 @@ import dbus
-- import types
-- import pprint
-- 
---from exceptions import ConnSignalNameNotRecognisedException
--+from .exceptions import ConnSignalNameNotRecognisedException
-- 
-- 
-- def translate_to_dbus_type(typeof, value):
--diff --git a/pyconnman/manager.py b/pyconnman/manager.py
--index f6f40a8..03244cc 100644
----- a/pyconnman/manager.py
--+++ b/pyconnman/manager.py
--@@ -1,6 +1,6 @@
-- from __future__ import unicode_literals
-- 
---from interface import ConnInterface
--+from .interface import ConnInterface
-- 
-- 
-- class ConnManager(ConnInterface):
--diff --git a/pyconnman/service.py b/pyconnman/service.py
--index bbccced..c6b9241 100644
----- a/pyconnman/service.py
--+++ b/pyconnman/service.py
--@@ -1,6 +1,6 @@
-- from __future__ import unicode_literals
-- 
---from interface import ConnInterface
--+from .interface import ConnInterface
-- 
-- 
-- class ConnService(ConnInterface):
--diff --git a/pyconnman/technology.py b/pyconnman/technology.py
--index 4777229..d25bad6 100644
----- a/pyconnman/technology.py
--+++ b/pyconnman/technology.py
--@@ -1,6 +1,6 @@
-- from __future__ import unicode_literals
-- 
---from interface import ConnInterface
--+from .interface import ConnInterface
-- 
-- 
-- class ConnTechnology(ConnInterface):
-diff --git a/meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman_0.1.0.bb b/meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman_0.1.0.bb
-deleted file mode 100644
-index 32bbe8b80..000000000
---- a/meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman_0.1.0.bb
-+++ /dev/null
-@@ -1,9 +0,0 @@
--require python-pyconnman.inc
--
--inherit setuptools3
--
--SRC_URI_append = " \
--    file://0001-Import-local-modules-by-relative-path-for-python3-su.patch \
--"
--
--RDEPENDS_${PN} += "python3-dbus python3-pprint"
-diff --git a/meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman_0.2.0.bb b/meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman_0.2.0.bb
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
+index 1c1b8a0..23de69d 100644
+--- a/meta-oe/recipes-dbs/mysql/mariadb.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
+@@ -19,6 +19,7 @@ SRC_URI = "https://downloads.mariadb.org/interstitial/${BP}/source/${BP}.tar.gz
+            file://clang_version_header_conflict.patch \
+            file://fix-arm-atomic.patch \
+            file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
++           file://0001-Fix-library-LZ4-lookup.patch \
+           "
+ SRC_URI[md5sum] = "d0de881ab8ead46928cafb7d558535c1"
+ SRC_URI[sha256sum] = "4c076232b99433b09eb3c6d62f607192b3474d022703699b8f6aef4e79de3fb9"
+diff --git a/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch b/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
 new file mode 100644
-index 000000000..e0f3fdd75
+index 0000000..574dfd3
 --- /dev/null
-+++ b/meta-python/recipes-connectivity/python-pyconnman/python3-pyconnman_0.2.0.bb
-@@ -0,0 +1,5 @@
-+require python-pyconnman.inc
++++ b/meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
+@@ -0,0 +1,30 @@
++From 1d7612b063eb1fc7bf97bc27b13e1de596748aa1 Mon Sep 17 00:00:00 2001
++From: Sumit Garg <sumit.garg@linaro.org>
++Date: Wed, 8 Jan 2020 04:58:30 +0000
++Subject: [PATCH] Fix library LZ4 lookup.
 +
-+inherit setuptools3
++Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
++---
++ cmake/FindLZ4.cmake | 9 +++++++--
++ 1 file changed, 7 insertions(+), 2 deletions(-)
 +
-+RDEPENDS_${PN} += "python3-dbus python3-pprint"
++diff --git a/cmake/FindLZ4.cmake b/cmake/FindLZ4.cmake
++index e97dd63e2b0..2f4694e727c 100644
++--- a/cmake/FindLZ4.cmake
+++++ b/cmake/FindLZ4.cmake
++@@ -1,5 +1,10 @@
++-find_path(LZ4_INCLUDE_DIR NAMES lz4.h)
++-find_library(LZ4_LIBRARY NAMES lz4)
+++find_path(LZ4_INCLUDE_DIR
+++  NAMES	lz4.h
+++  NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
+++
+++find_library(LZ4_LIBRARY
+++  NAMES lz4
+++  NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
++ 
++ include(FindPackageHandleStandardArgs)
++ FIND_PACKAGE_HANDLE_STANDARD_ARGS(
++-- 
++2.17.1
++
 -- 
-2.17.1
-
-
+2.7.4
 
 
