@@ -1,35 +1,35 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1861C7FCE3
+	by mail.openembedded.org (Postfix) with ESMTP id E4F667FD03
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2020 02:09:32 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.69,427,1571673600"; d="scan'208";a="81708570"
+	Mon, 13 Jan 2020 02:09:46 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.69,427,1571673600"; d="scan'208";a="81708609"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 13 Jan 2020 10:09:32 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7CB744CE1CBB
+	by heian.cn.fujitsu.com with ESMTP; 13 Jan 2020 10:09:47 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id 8539C4CE2E60
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Jan 2020 10:00:29 +0800 (CST)
+	Mon, 13 Jan 2020 10:00:39 +0800 (CST)
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Mon, 13 Jan 2020 10:09:33 +0800
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Mon, 13 Jan 2020 10:09:42 +0800
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Mon, 13 Jan 2020 10:09:38 +0800
+	Server (TLS) id 14.3.439.0; Mon, 13 Jan 2020 10:09:45 +0800
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 12 Jan 2020 22:00:58 -0800
-Message-ID: <1578895261-30411-4-git-send-email-wangmy@cn.fujitsu.com>
+Date: Sun, 12 Jan 2020 22:00:59 -0800
+Message-ID: <1578895261-30411-5-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1578895261-30411-1-git-send-email-wangmy@cn.fujitsu.com>
 References: <1578895261-30411-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 7CB744CE1CBB.A6C43
+X-yoursite-MailScanner-ID: 8539C4CE2E60.A51E7
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH] libsdl2-image: upgrade 2.0.3 -> 2.0.5
+Subject: [meta-oe][PATCH] libsdl2-mixer: upgrade 2.0.2 -> 2.0.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,40 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Jan 2020 02:09:33 -0000
+X-List-Received-Date: Mon, 13 Jan 2020 02:09:47 -0000
 Content-Type: text/plain
 
--License-Update: Copyright year updated to 2019.
+-License-Update: Copyright year updated to 2018.
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- .../{libsdl2-image_2.0.3.bb => libsdl2-image_2.0.5.bb}      | 6 +++---
+ .../{libsdl2-mixer_2.0.2.bb => libsdl2-mixer_2.0.4.bb}      | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/libsdl/{libsdl2-image_2.0.3.bb => libsdl2-image_2.0.5.bb} (80%)
+ rename meta-oe/recipes-graphics/libsdl/{libsdl2-mixer_2.0.2.bb => libsdl2-mixer_2.0.4.bb} (77%)
 
-diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-image_2.0.3.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-image_2.0.5.bb
-similarity index 80%
-rename from meta-oe/recipes-graphics/libsdl/libsdl2-image_2.0.3.bb
-rename to meta-oe/recipes-graphics/libsdl/libsdl2-image_2.0.5.bb
-index 6deb352e6..0a346bd9e 100644
---- a/meta-oe/recipes-graphics/libsdl/libsdl2-image_2.0.3.bb
-+++ b/meta-oe/recipes-graphics/libsdl/libsdl2-image_2.0.5.bb
-@@ -2,13 +2,13 @@ SUMMARY = "Simple DirectMedia Layer image library v2"
+diff --git a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.2.bb b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
+similarity index 77%
+rename from meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.2.bb
+rename to meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
+index 718f3f5fd..aa246f999 100644
+--- a/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.2.bb
++++ b/meta-oe/recipes-graphics/libsdl/libsdl2-mixer_2.0.4.bb
+@@ -2,12 +2,12 @@ SUMMARY = "Simple DirectMedia Layer mixer library V2"
  SECTION = "libs"
- 
+ DEPENDS = "virtual/libsdl2 flac libmikmod libvorbis"
  LICENSE = "Zlib"
--LIC_FILES_CHKSUM = "file://COPYING.txt;md5=a855a9eb5507fc556e672080c4b428ca"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=822edb694b20ff16ceef85b27f61c11f"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=95e0c3cf63f71b950911e698a54b7fc5"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=516daf7a177ad4c8874bb9efa1a69c1f"
  
- DEPENDS = "tiff zlib libpng jpeg virtual/libsdl2 libwebp"
+ SRC_URI = "http://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-${PV}.tar.gz"
  
- SRC_URI = "http://www.libsdl.org/projects/SDL_image/release/SDL2_image-${PV}.tar.gz"
--SRC_URI[md5sum] = "c6baf6dfa80fa8a66853661a36a6034e"
--SRC_URI[sha256sum] = "3510c25da735ffcd8ce3b65073150ff4f7f9493b866e85b83738083b556d2368"
-+SRC_URI[md5sum] = "f26f3a153360a8f09ed5220ef7b07aea"
-+SRC_URI[sha256sum] = "bdd5f6e026682f7d7e1be0b6051b209da2f402a2dd8bd1c4bd9c25ad263108d0"
+-SRC_URI[md5sum] = "aaa0551393993c14a13f72b339c0ed6c"
+-SRC_URI[sha256sum] = "4e615e27efca4f439df9af6aa2c6de84150d17cbfd12174b54868c12f19c83bb"
++SRC_URI[md5sum] = "a36e8410cac46b00a4d01752b32c3eb1"
++SRC_URI[sha256sum] = "b4cf5a382c061cd75081cf246c2aa2f9df8db04bdda8dcdc6b6cca55bede2419"
  
- S = "${WORKDIR}/SDL2_image-${PV}"
+ S = "${WORKDIR}/SDL2_mixer-${PV}"
  
 -- 
 2.17.1
