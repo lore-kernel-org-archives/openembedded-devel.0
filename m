@@ -1,60 +1,49 @@
-Return-Path: <Javier.Viguera@digi.com>
-X-Greylist: delayed 841 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 14 Jan 2020 13:08:49 UTC
-Received: from mail1.bemta23.messagelabs.com (mail1.bemta23.messagelabs.com
-	[67.219.246.214])
-	by mail.openembedded.org (Postfix) with ESMTP id 0856D6C108
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 5E0227FA23
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jan 2020 13:08:49 +0000 (UTC)
-Received: from [67.219.246.206] (using TLSv1.2 with cipher
-	DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-2.bemta.az-c.us-east-1.aws.symcld.net id 71/F2-04435-91ABD1E5;
-	Tue, 14 Jan 2020 12:54:49 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBIsWRWlGSWpSXmKPExsXi5LtOQFdyl2y
-	cwapLHBZ7Py1itLh4eCmzA5PHzll32T3ObVzBGMAUxZqZl5RfkcCa8at/N0vBAaaKru0GDYzt
-	TF2MnBxCAqsYJSYeFOli5AKyFzNKXJzzmg0kISzgLdH3+wpYEZuAnsTkS0+YQWwRgVCJe4ubW
-	SCacyUevu0Csjk4eAWsJTZv4QEJswioSvRMncoOYosKhEusXn+WEcTmFRCUODnzCVgrp4CNxP
-	ErK1lBbGYBC4mZ888zQtjiEreezGeCsOUlmrfOZoZYpSJxcOllsBoJoPimzWfZJzAKzEIydha
-	SUbOQjJqFZNQCRpZVjKZJRZnpGSW5iZk5uoYGBrqGhka6ZroWJnqJVbrJeqXFuqmJxSW6hnqJ
-	5cV6xZW5yTkpenmpJZsYgQGeUsAWsoPxy9e3eocYJTmYlER5r4VKxwnxJeWnVGYkFmfEF5Xmp
-	BYfYpTh4FCS4A3dIRsnJFiUmp5akZaZA4w2mLQEB4+SCO8BkDRvcUFibnFmOkTqFKOilDhvEE
-	hCACSRUZoH1waL8EuMslLCvIwMDAxCPAWpRbmZJajyrxjFORiVhHn9QKbwZOaVwE1/BbSYCWg
-	x12VJkMUliQgpqQYm4cT1ny+JPNbfalp4odo/+PLeNiaBK1qV24+Vl6f8mu/dfn1W4eXj24JO
-	ebOG+E7RC2Pg0Xw5L+D9olXB/020cgPV0y+dLej23XteON6j/hl/rFBNTErkxid/5vkwJ73LO
-	DU7fcch9/O7tLfJFeVoM4vuePdbVf1cyVv2bP21RrEbVhjdcVCKiLk4p5XVza9xyuxla9e+7/
-	Y+e9RVP/fAe4uNxWor39g5rdAvqVhue25qu0NFSJH8/S0S515lzu+db/NLS/RwmWzh43XTzb6
-	rMr1ms1ZIu7hjyZr3i9NlrlZ1dJ4/v3DCZRW5bWZ1pvV3Cp5O3a/9eZIKH4+c16FvfJ4zHCZJ
-	ey3vMvbLVzytxFKckWioxVxUnAgAuy8c8WsDAAA=
-X-Env-Sender: Javier.Viguera@digi.com
-X-Msg-Ref: server-29.tower-414.messagelabs.com!1579006488!86257!1
-X-Originating-IP: [66.77.174.16]
-X-SYMC-ESS-Client-Auth: outbound-route-from=pass
-X-StarScan-Received: 
-X-StarScan-Version: 9.44.25; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 16530 invoked from network); 14 Jan 2020 12:54:49 -0000
-Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
-	by server-29.tower-414.messagelabs.com with ECDHE-RSA-AES256-SHA384
-	encrypted SMTP; 14 Jan 2020 12:54:49 -0000
-Received: from DOR-SMS-XCH01.digi.com (10.49.8.99) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Tue, 14 Jan 2020 06:54:47 -0600
-Received: from [10.101.2.54] (10.101.2.54) by dor-sms-xch01.digi.com
-	(10.49.8.99) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Tue, 14 Jan 2020 13:54:44 +0100
-From: Javier Viguera <javier.viguera@digi.com>
-To: <openembedded-devel@lists.openembedded.org>, Armin Kuster
-	<akuster808@gmail.com>
-References: <20191127162913.30498-1-arturo.buzarra@digi.com>
-	<421e63c8-2c54-fe73-5917-fe68ffdefa74@digi.com>
-Message-ID: <53fc113e-c3bd-99d0-b159-45bdeda6093b@digi.com>
-Date: Tue, 14 Jan 2020 13:54:38 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.2.2
-MIME-Version: 1.0
-In-Reply-To: <421e63c8-2c54-fe73-5917-fe68ffdefa74@digi.com>
-X-Originating-IP: [10.101.2.54]
-Subject: Re: [thud][PATCH] lvm2: Fix RDEPEND on lvm2 to lvm2-udevrules
+	Tue, 14 Jan 2020 13:29:47 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id c14so12170746wrn.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Jan 2020 05:29:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=BlAxb+iKPJ8Ye6+uziMpHttktqcu9H407FPEWz0k9U4=;
+	b=srP8/fvEwRniaPNELvtxdMJrGe0EjvDT81o0cmkhjN5BI307j+Du+Knb5VB1WsXth9
+	Yl81s9FgB6SBok6U/Ys7dYFoper++QeExg/Qjb2KYeOt0abucHvR0h5t61ptkUOqKYcp
+	l4sJSd40Yfzz0gFxS05oADukb4OoBAbjckw/Hsq0s+RTrFvveZk67XJCwxzWJrVyAR9q
+	BvwwWuCg2YlKF00SusXdJdx7isXvxP66zqHxQnrRXgysZIBRUrT+4KNDB04d++k1rf9V
+	pV8ldY09TSUDy1suwgD7J5cSZ2U1or0w1ABN0Y+drd4jYAD8yIGCik3P8s6cequHYDqc
+	5+jQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=BlAxb+iKPJ8Ye6+uziMpHttktqcu9H407FPEWz0k9U4=;
+	b=qC+0QBuGsaIV102wQVuNm0UR+g2L2XHPYrrJ4Zs/Uvtc+lX15ltJIU7OdyDTti3xek
+	speunNxs3P5IbCd3R6hXTrk/K7YWPm0Zv2ytBpcvu3bWhf3YGPhaEyTwxuEZ7xxmu5Qq
+	B3+DU4IxmFGyAeqhCTNFNv1+pzzLKER5hPvdXqVlEDjYV2uGTOAlAWTFL/j8FeqbDSMo
+	rxJSC9zsS316STnqiGQP4oUGlpOoQaUiZEnVtPKwz37kYXnTDn/xC6jpJKsQLE9s7IrH
+	1/idECtzv4dXJ+oy7j3ff6zsijIJOouVkQ6ygH7rBreyNaKCeVFo7NED3Xu+XEly9D1C
+	Q/xg==
+X-Gm-Message-State: APjAAAX2Kq1QJ+7KJVEgVKnf0QqgTt2JpYWmbwUeLnU6FYDMrXqFvgD2
+	BrFJFT5veQWUIdudXiEvfnuDvqtD
+X-Google-Smtp-Source: APXvYqwk42PrVhUJcu3scKGiKJf6iw2eCLC7xVHmweCHLTn1gCjw7YSY4Uk619Ve/+q77flxdnUM6g==
+X-Received: by 2002:a5d:428c:: with SMTP id k12mr24809664wrq.57.1579008587380; 
+	Tue, 14 Jan 2020 05:29:47 -0800 (PST)
+Received: from localhost.localdomain ([2001:b07:5d32:c012:e829:5d33:98c5:aa8f])
+	by smtp.gmail.com with ESMTPSA id
+	m3sm19005158wrs.53.2020.01.14.05.29.46
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 14 Jan 2020 05:29:46 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 14 Jan 2020 14:29:44 +0100
+Message-Id: <20200114132944.29964-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Subject: [meta-oe][PATCH] websocketpp: refresh clang patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,29 +56,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jan 2020 13:08:50 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 14 Jan 2020 13:29:47 -0000
 
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+---
+ .../websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 04/12/2019 10:37, Javier Viguera wrote:
-> Hi Armin,
-> 
-> Could you queue this fix for Thud?
-> 
-> Same fix is already merged in master and Zeus.
-> 
-
-Ping.
-
-The patch appears as new in patchwork:
-
-https://patchwork.openembedded.org/patch/167467/
-
+diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
+index 421789728..f1d037fae 100644
+--- a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
++++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
+@@ -18,7 +18,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
+ index 2d13117..c17354a 100644
+ --- a/CMakeLists.txt
+ +++ b/CMakeLists.txt
+-@@ -148,7 +148,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
++@@ -150,7 +150,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
+          endif()
+          set (WEBSOCKETPP_PLATFORM_TLS_LIBS ssl crypto)
+          set (WEBSOCKETPP_BOOST_LIBS system thread)
 -- 
-Javier Viguera
-Software Engineer
+2.17.1
 
-Digi International® Spain S.A.U.
 
