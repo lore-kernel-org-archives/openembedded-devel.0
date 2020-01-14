@@ -1,49 +1,25 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6287E7FA32
+Return-Path: <Matthew.Zeng@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CB0E57F986
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jan 2020 13:30:15 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id p17so13756033wma.1
+	Tue, 14 Jan 2020 21:05:21 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 00EL4pOE009782
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Jan 2020 05:30:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=OOtWfrdZMIxTEuvkItQ/Pl//Gj7Qkl8XsvG6PZSPW7I=;
-	b=XrlSckQvJfT1Nr3XbNlJgzqrqjtSjxjIJjLuYkGmHCU416w3ghiwq+lC5cDx7xMiMd
-	pQ76ULMtVe9IkCgoj+yOQOJknEGnNm2ytpfqm+Log+ZO95gfg3+2ylTLmlOFYSVW3dl5
-	q/JEEb/WEeG72YerofYliQif5HgkFXDWpCZUNdrEgo7FNi2KfdeRauEuAtls2/MRjuoC
-	BTctKoUFiM7LhTdXGILQnWFwnl+Rmcz4AySuK7VX6e12OWu4TEvH57CZTiOrDW/gxd5x
-	5UYozX0qDX12Ouh+mkrkiRGYFgi7WUH24N+yPKXMXcLALZa2P3y8WOQHFKqv7KNJ2YEZ
-	ljlQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OOtWfrdZMIxTEuvkItQ/Pl//Gj7Qkl8XsvG6PZSPW7I=;
-	b=ntdPA+IPeGYQWn7SvUIQ8y1ppnGq9KooPGAp0dYkUcdMa/1YiE/qz4QKI+L8DDrc74
-	JDjL2pezC7fWFsxxt2cHYMsiXLwVumrpPmr7ripn7jI7dChugulclLNC7jQSaB/2Hw1c
-	uNlkjC8Op8ADrlVFrripiGuohm4ey1jkAHxFm2S2WIRVD4NJA02vaaC92kTHjrFtyv1n
-	yImHpvEeUaApSZbYg2vSe3sGDimE8B6VBYOw+Zrc92DpWp0IMc8W0XguNM+TW359CXg5
-	c0YcrO3JZxm3X9EDwH7rZTeyM/Ut9YNnTa16G4yp7OFj+URPpky+CSN8ruvUdUVnXsQ5
-	bUqw==
-X-Gm-Message-State: APjAAAXUQ0UJJgk2BQLU124LFhjay+edI1ypSDVADvPuaWp3MoFbKYqY
-	9WR1mctJPC7B0AfQPK3sYReFkm69
-X-Google-Smtp-Source: APXvYqynyZ4wLMl5v7Jz69tqdFw8DMowMhPaiPTX4C0lk2kfjH1h9myZerky5vqawMuwqy4RKTTQ2Q==
-X-Received: by 2002:a1c:3187:: with SMTP id x129mr27219543wmx.91.1579008615835;
-	Tue, 14 Jan 2020 05:30:15 -0800 (PST)
-Received: from localhost.localdomain ([2001:b07:5d32:c012:e829:5d33:98c5:aa8f])
-	by smtp.gmail.com with ESMTPSA id c4sm18612649wml.7.2020.01.14.05.30.15
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 14 Jan 2020 05:30:15 -0800 (PST)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 14 Jan 2020 14:30:13 +0100
-Message-Id: <20200114133013.30045-1-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.17.1
-Cc: Gianfranco Costamagna <locutusofborg@debian.org>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] websocketpp: refresh clang patch
+	Tue, 14 Jan 2020 13:05:12 -0800
+Received: from mzeng (128.224.141.67) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Tue, 14 Jan 2020 13:05:00 -0800
+User-agent: mu4e 1.3.6; emacs 28.0.50
+From: "Mingde (Matthew) Zeng" <matthew.zeng@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 14 Jan 2020 16:04:59 -0500
+Message-ID: <878sm9kav8.fsf@windriver.com>
+MIME-Version: 1.0
+X-Originating-IP: [128.224.141.67]
+Subject: [meta-oe][PATCH] byacc: upgrade 20191103 -> 20191125
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,28 +32,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Jan 2020 13:30:15 -0000
+X-List-Received-Date: Tue, 14 Jan 2020 21:05:22 -0000
+Content-Type: text/plain
 
-Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
+
+Signed-off-by: Matthew Zeng <Matthew.Zeng@windriver.com>
 ---
- .../websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch   | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../byacc/{byacc_20191103.bb => byacc_20191125.bb}           | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-extended/byacc/{byacc_20191103.bb => byacc_20191125.bb} (74%)
 
-diff --git a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
-index 421789728..f1d037fae 100644
---- a/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
-+++ b/meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
-@@ -18,7 +18,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
- index 2d13117..c17354a 100644
- --- a/CMakeLists.txt
- +++ b/CMakeLists.txt
--@@ -148,7 +148,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
-+@@ -150,7 +150,7 @@ if (BUILD_TESTS OR BUILD_EXAMPLES)
-          endif()
-          set (WEBSOCKETPP_PLATFORM_TLS_LIBS ssl crypto)
-          set (WEBSOCKETPP_BOOST_LIBS system thread)
--- 
-2.17.1
+diff --git a/meta-oe/recipes-extended/byacc/byacc_20191103.bb b/meta-oe/recipes-extended/byacc/byacc_20191125.bb
+similarity index 74%
+rename from meta-oe/recipes-extended/byacc/byacc_20191103.bb
+rename to meta-oe/recipes-extended/byacc/byacc_20191125.bb
+index eae4618e2..a4e57f5c1 100644
+--- a/meta-oe/recipes-extended/byacc/byacc_20191103.bb
++++ b/meta-oe/recipes-extended/byacc/byacc_20191125.bb
+@@ -7,6 +7,5 @@ LICENSE = "PD"
+ LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=3eb7c635434fafe23ef30fc263e63b2f"
+ require byacc.inc
 
+-SRC_URI[md5sum] = "84ffe59166f67bbe147a6f502c7af309"
+-SRC_URI[sha256sum] = "d291fb34816f45079067366b7f7300ffbf9f7e3f1aaf6d509b84442d065d11b9"
+-
++SRC_URI[md5sum] = "6745a4fbf0723c4c9280fc3e568b3d1b"
++SRC_URI[sha256sum] = "071c2ebe36afaa8448b80e893473a681e63a3b8a4ed636c0d675780a02411cde"
+--
+2.24.0
 
