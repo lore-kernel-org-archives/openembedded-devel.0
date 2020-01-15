@@ -1,35 +1,35 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D2507F9BB
+	by mail.openembedded.org (Postfix) with ESMTP id 187547F9BB
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 15 Jan 2020 09:29:30 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,322,1574092800"; d="scan'208";a="81889298"
+X-IronPort-AV: E=Sophos;i="5.70,322,1574092800"; d="scan'208";a="81889299"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
 	by heian.cn.fujitsu.com with ESMTP; 15 Jan 2020 17:29:31 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id DAEAE4CE20ED
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id E130A4CE20E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2020 17:20:24 +0800 (CST)
+	Wed, 15 Jan 2020 17:20:22 +0800 (CST)
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Wed, 15 Jan 2020 17:29:29 +0800
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Wed, 15 Jan 2020 17:29:28 +0800
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 15 Jan 2020 17:29:40 +0800
+	Server (TLS) id 14.3.439.0; Wed, 15 Jan 2020 17:29:38 +0800
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 15 Jan 2020 05:12:30 -0800
-Message-ID: <1579093951-77460-15-git-send-email-wangmy@cn.fujitsu.com>
+Date: Wed, 15 Jan 2020 05:12:29 -0800
+Message-ID: <1579093951-77460-14-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1579093951-77460-1-git-send-email-wangmy@cn.fujitsu.com>
 References: <1579093951-77460-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: DAEAE4CE20ED.A770A
+X-yoursite-MailScanner-ID: E130A4CE20E1.A1E6A
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python][PATCH] python-periphery: 2.0.0 -> 2.0.1
+Subject: [meta-python][PATCH] python-packaging: 19.2 -> 20.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,78 +42,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2020 09:29:30 -0000
+X-List-Received-Date: Wed, 15 Jan 2020 09:29:31 -0000
 Content-Type: text/plain
-
--License-Update: Update PKG-INFO from 2.0.0 to 2.0.1.
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-periphery.inc     | 2 +-
- .../recipes-devtools/python/python-periphery_2.0.0.bb        | 4 ----
- .../recipes-devtools/python/python-periphery_2.0.1.bb        | 5 +++++
- .../recipes-devtools/python/python3-periphery_2.0.0.bb       | 4 ----
- .../recipes-devtools/python/python3-periphery_2.0.1.bb       | 5 +++++
- 5 files changed, 11 insertions(+), 9 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-periphery_2.0.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python-periphery_2.0.1.bb
- delete mode 100644 meta-python/recipes-devtools/python/python3-periphery_2.0.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
+ meta-python/recipes-devtools/python/python-packaging.inc      | 4 ++--
+ .../{python-packaging_19.2.bb => python-packaging_20.0.bb}    | 0
+ .../{python3-packaging_19.2.bb => python3-packaging_20.0.bb}  | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-packaging_19.2.bb => python-packaging_20.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-packaging_19.2.bb => python3-packaging_20.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-periphery.inc b/meta-python/recipes-devtools/python/python-periphery.inc
-index ea43e5fa7..719c63507 100644
---- a/meta-python/recipes-devtools/python/python-periphery.inc
-+++ b/meta-python/recipes-devtools/python/python-periphery.inc
-@@ -2,6 +2,6 @@ DESCRIPTION = "A pure Python 2/3 library for peripheral I/O (GPIO, LED, PWM, SPI
- HOMEPAGE = "http://pythonhosted.org/python-periphery/"
- LICENSE = "MIT"
+diff --git a/meta-python/recipes-devtools/python/python-packaging.inc b/meta-python/recipes-devtools/python/python-packaging.inc
+index c32caaa40..7cedadf69 100644
+--- a/meta-python/recipes-devtools/python/python-packaging.inc
++++ b/meta-python/recipes-devtools/python/python-packaging.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/pypa/packaging"
+ LICENSE = "Apache-2.0 & BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=faadaedca9251a90b205c9167578ce91"
  
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=19f978bd6c8afe3fa9e408b71330512f"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1ecf5c2354c22fb5bfd53eefb8f9e65b"
+-SRC_URI[md5sum] = "867ce70984dc7b89bbbc3cac2a72b171"
+-SRC_URI[sha256sum] = "28b924174df7a2fa32c1953825ff29c61e2f5e082343165438812f00d3a7fc47"
++SRC_URI[md5sum] = "93d6ccbdfcb5b7697b6ecea53ecc294b"
++SRC_URI[sha256sum] = "fe1d8331dfa7cc0a883b49d75fc76380b2ab2734b220fbb87d774e4fd4b851f8"
  
- PYPI_PACKAGE = "python-periphery"
-diff --git a/meta-python/recipes-devtools/python/python-periphery_2.0.0.bb b/meta-python/recipes-devtools/python/python-periphery_2.0.0.bb
-deleted file mode 100644
-index 7069f3fdd..000000000
---- a/meta-python/recipes-devtools/python/python-periphery_2.0.0.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--inherit pypi setuptools
--require python-periphery.inc
--
--SRC_URI[sha256sum] = "2df05528a7668db4fb3faaff516b34ed99e9009ed9610a4efe3ea6c0ea8a3aab"
-diff --git a/meta-python/recipes-devtools/python/python-periphery_2.0.1.bb b/meta-python/recipes-devtools/python/python-periphery_2.0.1.bb
-new file mode 100644
-index 000000000..8d0240ae2
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-periphery_2.0.1.bb
-@@ -0,0 +1,5 @@
-+inherit pypi setuptools
-+require python-periphery.inc
-+
-+SRC_URI[md5sum] = "1d958f02575d4a19734ee2dd92336157"
-+SRC_URI[sha256sum] = "5da4d5f40ff8974cf6c724587baa674d7e0593f07b6f6ee896104f11c1be18ec"
-diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.0.0.bb b/meta-python/recipes-devtools/python/python3-periphery_2.0.0.bb
-deleted file mode 100644
-index d0c8bed26..000000000
---- a/meta-python/recipes-devtools/python/python3-periphery_2.0.0.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--inherit pypi setuptools3
--require python-periphery.inc
--
--SRC_URI[sha256sum] = "2df05528a7668db4fb3faaff516b34ed99e9009ed9610a4efe3ea6c0ea8a3aab"
-diff --git a/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb b/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
-new file mode 100644
-index 000000000..e9944274b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-periphery_2.0.1.bb
-@@ -0,0 +1,5 @@
-+inherit pypi setuptools3
-+require python-periphery.inc
-+
-+SRC_URI[md5sum] = "1d958f02575d4a19734ee2dd92336157"
-+SRC_URI[sha256sum] = "5da4d5f40ff8974cf6c724587baa674d7e0593f07b6f6ee896104f11c1be18ec"
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ RDEPENDS_${PN} += "${PYTHON_PN}-six ${PYTHON_PN}-pyparsing"
+diff --git a/meta-python/recipes-devtools/python/python-packaging_19.2.bb b/meta-python/recipes-devtools/python/python-packaging_20.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-packaging_19.2.bb
+rename to meta-python/recipes-devtools/python/python-packaging_20.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-packaging_19.2.bb b/meta-python/recipes-devtools/python/python3-packaging_20.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-packaging_19.2.bb
+rename to meta-python/recipes-devtools/python/python3-packaging_20.0.bb
 -- 
 2.17.1
 
