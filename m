@@ -1,35 +1,35 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 3646C7F9BB
+	by mail.openembedded.org (Postfix) with ESMTP id CAF097F9BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2020 09:29:19 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,322,1574092800"; d="scan'208";a="81889282"
+	Wed, 15 Jan 2020 09:29:23 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,322,1574092800"; d="scan'208";a="81889290"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Jan 2020 17:29:18 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 57C984CE1C86
+	by heian.cn.fujitsu.com with ESMTP; 15 Jan 2020 17:29:25 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 7F63D4CE20DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2020 17:20:13 +0800 (CST)
+	Wed, 15 Jan 2020 17:20:15 +0800 (CST)
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Wed, 15 Jan 2020 17:29:17 +0800
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Wed, 15 Jan 2020 17:29:21 +0800
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 15 Jan 2020 17:29:27 +0800
+	Server (TLS) id 14.3.439.0; Wed, 15 Jan 2020 17:29:30 +0800
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 15 Jan 2020 05:12:25 -0800
-Message-ID: <1579093951-77460-10-git-send-email-wangmy@cn.fujitsu.com>
+Date: Wed, 15 Jan 2020 05:12:26 -0800
+Message-ID: <1579093951-77460-11-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1579093951-77460-1-git-send-email-wangmy@cn.fujitsu.com>
 References: <1579093951-77460-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 57C984CE1C86.A2588
+X-yoursite-MailScanner-ID: 7F63D4CE20DF.A2E1E
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python][PATCH] python-cmd2: upgrade 0.9.22 -> 0.9.23
+Subject: [meta-python] [PATCH] python-engineio: upgrade 3.11.1 -> 3.11.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,46 +42,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2020 09:29:19 -0000
+X-List-Received-Date: Wed, 15 Jan 2020 09:29:24 -0000
 Content-Type: text/plain
-
--License-Update: Copyright year updated to 2020.
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-cmd2.inc         | 6 +++---
- .../python/{python-cmd2_0.9.22.bb => python-cmd2_0.9.23.bb} | 0
- .../{python3-cmd2_0.9.22.bb => python3-cmd2_0.9.23.bb}      | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cmd2_0.9.22.bb => python-cmd2_0.9.23.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cmd2_0.9.22.bb => python3-cmd2_0.9.23.bb} (100%)
+ meta-python/recipes-devtools/python/python-engineio.inc       | 4 ++--
+ .../{python-engineio_3.11.1.bb => python-engineio_3.11.2.bb}  | 0
+ ...{python3-engineio_3.11.1.bb => python3-engineio_3.11.2.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-engineio_3.11.1.bb => python-engineio_3.11.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-engineio_3.11.1.bb => python3-engineio_3.11.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cmd2.inc b/meta-python/recipes-devtools/python/python-cmd2.inc
-index ceaa181d5..68381ad22 100644
---- a/meta-python/recipes-devtools/python/python-cmd2.inc
-+++ b/meta-python/recipes-devtools/python/python-cmd2.inc
-@@ -1,10 +1,10 @@
- SUMMARY = "Extra features for standard library's cmd module"
- HOMEPAGE = "http://packages.python.org/cmd2/"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9791cd24ca7d1807388ccd55cd066def"
+diff --git a/meta-python/recipes-devtools/python/python-engineio.inc b/meta-python/recipes-devtools/python/python-engineio.inc
+index 57b7b186b..9c067c96d 100644
+--- a/meta-python/recipes-devtools/python/python-engineio.inc
++++ b/meta-python/recipes-devtools/python/python-engineio.inc
+@@ -9,5 +9,5 @@ inherit pypi
  
--SRC_URI[md5sum] = "90dccab3a20106c543ef85d2bee720bb"
--SRC_URI[sha256sum] = "ba244b07c0b465ff54a6838dc61919599141dc92de1bf00bb0a70875189155e6"
-+SRC_URI[md5sum] = "6db66a06210d5f1edb44693b887ed62b"
-+SRC_URI[sha256sum] = "8ad12ef3cc46d03073c545b6e80a3f84a5921f6653073a60e7d9a7ff3b352c9e"
+ PYPI_PACKAGE = "python-engineio"
  
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.9.22.bb b/meta-python/recipes-devtools/python/python-cmd2_0.9.23.bb
+-SRC_URI[md5sum] = "327c16ca05e9b0cc4f994b9d35c7f7d7"
+-SRC_URI[sha256sum] = "50d108fc7feb7f970e6ebc86733752ebd714545bb5622383e6135bdad45fc9fe"
++SRC_URI[md5sum] = "13345452be25c3b63d041f8f89e662d1"
++SRC_URI[sha256sum] = "47ae4a9b3b4f2e8a68929f37a518338838e119f24c9a9121af92c49f8bea55c3"
+diff --git a/meta-python/recipes-devtools/python/python-engineio_3.11.1.bb b/meta-python/recipes-devtools/python/python-engineio_3.11.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cmd2_0.9.22.bb
-rename to meta-python/recipes-devtools/python/python-cmd2_0.9.23.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cmd2_0.9.22.bb b/meta-python/recipes-devtools/python/python3-cmd2_0.9.23.bb
+rename from meta-python/recipes-devtools/python/python-engineio_3.11.1.bb
+rename to meta-python/recipes-devtools/python/python-engineio_3.11.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-engineio_3.11.1.bb b/meta-python/recipes-devtools/python/python3-engineio_3.11.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cmd2_0.9.22.bb
-rename to meta-python/recipes-devtools/python/python3-cmd2_0.9.23.bb
+rename from meta-python/recipes-devtools/python/python3-engineio_3.11.1.bb
+rename to meta-python/recipes-devtools/python/python3-engineio_3.11.2.bb
 -- 
 2.17.1
 
