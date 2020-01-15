@@ -1,35 +1,35 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 568BC7FA13
+	by mail.openembedded.org (Postfix) with ESMTP id 13CB97FA13
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 15 Jan 2020 09:29:11 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,322,1574092800"; d="scan'208";a="81889272"
+X-IronPort-AV: E=Sophos;i="5.70,322,1574092800"; d="scan'208";a="81889273"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
 	by heian.cn.fujitsu.com with ESMTP; 15 Jan 2020 17:29:12 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 3CE984CE26C8
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 751E24CE1CB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2020 17:20:07 +0800 (CST)
+	Wed, 15 Jan 2020 17:20:01 +0800 (CST)
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Wed, 15 Jan 2020 17:29:12 +0800
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Wed, 15 Jan 2020 17:29:05 +0800
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 15 Jan 2020 17:29:22 +0800
+	Server (TLS) id 14.3.439.0; Wed, 15 Jan 2020 17:29:16 +0800
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 15 Jan 2020 05:12:23 -0800
-Message-ID: <1579093951-77460-8-git-send-email-wangmy@cn.fujitsu.com>
+Date: Wed, 15 Jan 2020 05:12:21 -0800
+Message-ID: <1579093951-77460-6-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1579093951-77460-1-git-send-email-wangmy@cn.fujitsu.com>
 References: <1579093951-77460-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 3CE984CE26C8.A2BEB
+X-yoursite-MailScanner-ID: 751E24CE1CB3.A3BE2
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python][PATCH] python3-ordered-set: 3.0.1 -> 3.1.1
+Subject: [meta-python][PATCH] python3-more-itertools: 7.2.0 -> 8.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,33 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Jan 2020 09:29:11 -0000
+X-List-Received-Date: Wed, 15 Jan 2020 09:29:12 -0000
 Content-Type: text/plain
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- ...hon3-ordered-set_3.0.1.bb => python3-ordered-set_3.1.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-ordered-set_3.0.1.bb => python3-ordered-set_3.1.1.bb} (68%)
+ .../recipes-devtools/python/python3-more-itertools_7.2.0.bb  | 5 -----
+ .../recipes-devtools/python/python3-more-itertools_8.1.0.bb  | 5 +++++
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-more-itertools_8.1.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-ordered-set_3.0.1.bb b/meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb
-similarity index 68%
-rename from meta-python/recipes-devtools/python/python3-ordered-set_3.0.1.bb
-rename to meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb
-index 662d3eebb..013a2e755 100644
---- a/meta-python/recipes-devtools/python/python3-ordered-set_3.0.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-ordered-set_3.1.1.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://github.com/LuminosoInsight/ordered-set"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://MIT-LICENSE;md5=2b36be0d99854aa2ae292a800a7c1d4e"
- 
--SRC_URI[md5sum] = "a8059c7b99cde0f8dda01ddee6b43c2c"
--SRC_URI[sha256sum] = "3d6fd7bffbb15f613a9e8a6281bf97c2d67f7bb8677deca8249df2fbdd9cce7b"
-+SRC_URI[md5sum] = "6e12312c8dc4c90fe840e86e8a352644"
-+SRC_URI[sha256sum] = "a7bfa858748c73b096e43db14eb23e2bc714a503f990c89fac8fab9b0ee79724"
- 
- inherit pypi setuptools3
- 
+diff --git a/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb b/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
+deleted file mode 100644
+index 06d45ce54..000000000
+--- a/meta-python/recipes-devtools/python/python3-more-itertools_7.2.0.bb
++++ /dev/null
+@@ -1,5 +0,0 @@
+-inherit pypi setuptools3
+-require python-more-itertools.inc
+-
+-SRC_URI[md5sum] = "f647bfd27243a7bebe53b5ddb6a3b1c4"
+-SRC_URI[sha256sum] = "409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f832"
+diff --git a/meta-python/recipes-devtools/python/python3-more-itertools_8.1.0.bb b/meta-python/recipes-devtools/python/python3-more-itertools_8.1.0.bb
+new file mode 100644
+index 000000000..9a09c10b1
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-more-itertools_8.1.0.bb
+@@ -0,0 +1,5 @@
++inherit pypi setuptools3
++require python-more-itertools.inc
++
++SRC_URI[md5sum] = "a552b06cec1bdf01d60f952dbcc9a021"
++SRC_URI[sha256sum] = "c468adec578380b6281a114cb8a5db34eb1116277da92d7c46f904f0b52d3288"
 -- 
 2.17.1
 
