@@ -1,33 +1,50 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C67496BD08
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
+	[209.85.214.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A0D17F891
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2020 02:38:06 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,323,1574092800"; d="scan'208";a="81932886"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 16 Jan 2020 10:38:07 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id AC8F64CE26C8
+	Thu, 16 Jan 2020 04:42:21 +0000 (UTC)
+Received: by mail-pl1-f176.google.com with SMTP id y8so7780338pll.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2020 10:29:00 +0800 (CST)
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Thu, 16 Jan 2020 10:38:06 +0800
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 16 Jan 2020 10:38:07 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Jan 2020 10:39:35 +0800
-Message-ID: <20200116023935.27512-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Wed, 15 Jan 2020 20:42:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=HQh86ZSVoWklzt+K61qP3zd4tRIw+cK0dcN4bWe72Gw=;
+	b=bxHU3u8+NWjQeaLOdOHG5jODDcg73Ap4TrTpMEZpJlO+paLt4A1TfwmaORgVQOm1fa
+	Bzsql1tam0bb3GuxmZfReT2MIdTWF4X0aWyjXDuxUi6SinXV1B+fOB8FOnSdsjLBf/nb
+	YpkAhnMjNug1UbdUR2C6bmUcOBInCtLxv0XjeN5208gOL1raNU76z0vGwBpdr6Yiu+/i
+	cZtNRLdcRSWahEs0a7vYmfP9ZDTSvgM+nblvnvy8vgtPXOccAC4Py+9Sf7I04gkvmSVH
+	mNb12+xMyOii6oUBCLrPX4g29jCZoJM3QT1ewjq52X81E+AKJCLrkSUMQy0A3gDlKxbD
+	ATtA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=HQh86ZSVoWklzt+K61qP3zd4tRIw+cK0dcN4bWe72Gw=;
+	b=psyJslOyfG80s+y9smFGNcjF1AbUyXJwCep3f+glL5T7R1dREReBDZy+I64RC7hhs1
+	AGj0A7YbiGWBLQNMv/+ONMCGqa7dcjnURZK9ZZC4kR11Is8N/ziaPPkf5ufAyH5xBif5
+	Q/nIDdvqaxQ1VGsNmh80RkKQlP8jx65WQ5gWAAfuKqpNs4anva4vlOZ1teawsYOwuqqD
+	E7uRGII3vQ9LvmWGMOfHu41un8G392bGq29smkoh8kp6c4JKirXmIxNYpKzruYb2Walf
+	dKQJ4I6QHvw9gI8+aFv9P+t4HuEvxTW9SZwNoENlcEM3zgtY90A3aoW3dGfOj9vakDJI
+	lsIQ==
+X-Gm-Message-State: APjAAAW8uWXXHXM+zxNIYbI8x9RUX2W8iGPNh/649XqhUR1/eHOInH3u
+	bodlfNE2TJkopsI/YlFmRiGxvJOCxng=
+X-Google-Smtp-Source: APXvYqyD3j+c9biImo6rSwgsNVs1e943i62xL9WjypE3lqNqEKutsL8QWmpefND4BRk7mKYfgKP6BA==
+X-Received: by 2002:a17:902:9686:: with SMTP id
+	n6mr6351217plp.238.1579149741970; 
+	Wed, 15 Jan 2020 20:42:21 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e77a])
+	by smtp.gmail.com with ESMTPSA id l14sm1425742pjq.5.2020.01.15.20.42.21
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 15 Jan 2020 20:42:21 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Jan 2020 20:42:16 -0800
+Message-Id: <20200116044220.3667460-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: AC8F64CE26C8.AAE5C
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] fio: upgrade 3.16 -> 3.17
+Subject: [meta-gnome][PATCH 1/5] sysprof: avoid namesapace conflict with glibc headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,112 +57,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jan 2020 02:38:07 -0000
+X-List-Received-Date: Thu, 16 Jan 2020 04:42:21 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
--files/0001-arch-arm-Consider-armv7ve-arch-as-well.patch
-Removed since this is included in 3.17.
-
--Refresh the following patch:
-files/0001-update-the-interpreter-paths.patch
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ch-arm-Consider-armv7ve-arch-as-well.patch | 28 -------------------
- .../0001-update-the-interpreter-paths.patch   | 13 +--------
- .../fio/{fio_3.16.bb => fio_3.17.bb}          |  3 +-
- 3 files changed, 2 insertions(+), 42 deletions(-)
- delete mode 100644 meta-oe/recipes-benchmark/fio/files/0001-arch-arm-Consider-armv7ve-arch-as-well.patch
- rename meta-oe/recipes-benchmark/fio/{fio_3.16.bb => fio_3.17.bb} (92%)
+ ...rof-ui-Rename-environ-to-sys_environ.patch | 63 +++++++++++++++++++
+ .../recipes-kernel/sysprof/sysprof_3.34.1.bb  |  5 +-
+ 2 files changed, 66 insertions(+), 2 deletions(-)
+ create mode 100644 meta-gnome/recipes-kernel/sysprof/files/0001-libsysprof-ui-Rename-environ-to-sys_environ.patch
 
-diff --git a/meta-oe/recipes-benchmark/fio/files/0001-arch-arm-Consider-armv7ve-arch-as-well.patch b/meta-oe/recipes-benchmark/fio/files/0001-arch-arm-Consider-armv7ve-arch-as-well.patch
-deleted file mode 100644
-index 983a76fb6..000000000
---- a/meta-oe/recipes-benchmark/fio/files/0001-arch-arm-Consider-armv7ve-arch-as-well.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 2af58909cd9f2862d1dc07836e201361a2cd8d5d Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 5 Oct 2019 08:53:22 -0700
--Subject: [PATCH] arch-arm: Consider armv7ve arch as well
--
--Upstream-Status: Submitted []
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- arch/arch-arm.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/arch/arch-arm.h b/arch/arch-arm.h
--index 78cb2ebe..4f722967 100644
----- a/arch/arch-arm.h
--+++ b/arch/arch-arm.h
--@@ -11,7 +11,7 @@
-- #define nop             __asm__ __volatile__("mov\tr0,r0\t@ nop\n\t")
-- #define read_barrier()	__asm__ __volatile__ ("" : : : "memory")
-- #define write_barrier()	__asm__ __volatile__ ("" : : : "memory")
---#elif defined(__ARM_ARCH_7A__) || defined(__ARM_ARCH_8A__)
--+#elif defined(__ARM_ARCH_7A__) || defined(__ARM_ARCH_8A__) || defined(__ARM_ARCH_7VE__)
-- #define	nop		__asm__ __volatile__ ("nop")
-- #define read_barrier()	__sync_synchronize()
-- #define write_barrier()	__sync_synchronize()
---- 
--2.23.0
--
-diff --git a/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch b/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch
-index 327b9f5b7..c9c3a08df 100644
---- a/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch
-+++ b/meta-oe/recipes-benchmark/fio/files/0001-update-the-interpreter-paths.patch
-@@ -16,8 +16,7 @@ Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
-  tools/hist/fiologparser_hist.py | 2 +-
-  tools/hist/half-bins.py         | 2 +-
-  tools/plot/fio2gnuplot          | 2 +-
-- t/steadystate_tests.py | 2 +-
-- 7 files changed, 7 insertions(+), 7 deletions(-)
-+ 6 files changed, 6 insertions(+), 6 deletions(-)
+diff --git a/meta-gnome/recipes-kernel/sysprof/files/0001-libsysprof-ui-Rename-environ-to-sys_environ.patch b/meta-gnome/recipes-kernel/sysprof/files/0001-libsysprof-ui-Rename-environ-to-sys_environ.patch
+new file mode 100644
+index 0000000000..1e2b3c92b4
+--- /dev/null
++++ b/meta-gnome/recipes-kernel/sysprof/files/0001-libsysprof-ui-Rename-environ-to-sys_environ.patch
+@@ -0,0 +1,63 @@
++From 4bd0d5d5dd6841fbac8385527617d18e7731244d Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 15 Jan 2020 13:17:58 -0800
++Subject: [PATCH] libsysprof-ui: Rename environ to sys_environ
++
++This helps avoid namesapace conflict with glibc headers
++
++Fixes
++/usr/include/unistd.h:545:15: note: previous declaration is here
++
++extern char **environ;
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/libsysprof-ui/sysprof-profiler-assistant.c | 10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++diff --git a/src/libsysprof-ui/sysprof-profiler-assistant.c b/src/libsysprof-ui/sysprof-profiler-assistant.c
++index 22e3e24..c55d551 100644
++--- a/src/libsysprof-ui/sysprof-profiler-assistant.c
+++++ b/src/libsysprof-ui/sysprof-profiler-assistant.c
++@@ -235,7 +235,7 @@ sysprof_profiler_assistant_record_clicked_cb (SysprofProfilerAssistant *self,
++     {
++       g_auto(GStrv) argv = NULL;
++       g_auto(GStrv) env = NULL;
++-      SysprofEnviron *environ;
+++      SysprofEnviron *sys_environ;
++       const gchar *command;
++       gint argc;
++ 
++@@ -245,8 +245,8 @@ sysprof_profiler_assistant_record_clicked_cb (SysprofProfilerAssistant *self,
++       sysprof_profiler_set_spawn (profiler, TRUE);
++       sysprof_profiler_set_spawn_argv (profiler, (const gchar * const *)argv);
++ 
++-      environ = sysprof_environ_editor_get_environ (self->environ_editor);
++-      env = sysprof_environ_get_environ (environ);
+++      sys_environ = sysprof_environ_editor_get_environ (self->environ_editor);
+++      env = sysprof_environ_get_environ (sys_environ);
++       sysprof_profiler_set_spawn_env (profiler, (const gchar * const *)env);
++ 
++       sysprof_profiler_set_spawn_inherit_environ (profiler,
++@@ -405,7 +405,7 @@ sysprof_profiler_assistant_class_init (SysprofProfilerAssistantClass *klass)
++ static void
++ sysprof_profiler_assistant_init (SysprofProfilerAssistant *self)
++ {
++-  g_autoptr(SysprofEnviron) environ = sysprof_environ_new ();
+++  g_autoptr(SysprofEnviron) sys_environ = sysprof_environ_new ();
++ 
++   gtk_widget_init_template (GTK_WIDGET (self));
++ 
++@@ -445,7 +445,7 @@ sysprof_profiler_assistant_init (SysprofProfilerAssistant *self)
++                            self,
++                            G_CONNECT_SWAPPED);
++ 
++-  sysprof_environ_editor_set_environ (self->environ_editor, environ);
+++  sysprof_environ_editor_set_environ (self->environ_editor, sys_environ);
++ }
++ 
++ void
++-- 
++2.25.0
++
+diff --git a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb b/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
+index fd1b77eced..920bf10d65 100644
+--- a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
++++ b/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
+@@ -12,8 +12,9 @@ DEPENDS = "glib-2.0 libxml2-native glib-2.0-native"
+ SRC_URI[archive.md5sum] = "cc32455277b31afb1965d627ae3e3629"
+ SRC_URI[archive.sha256sum] = "844bbb8d8b65071b3bca96f8e921319ceef81f2d2c51fcc9da63a4b355c893d0"
+ SRC_URI += "file://0001-sysprof-Define-NT_GNU_BUILD_ID-if-undefined.patch \
+-           file://0001-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch \
+-           "
++            file://0001-meson.build-do-not-hardcode-linux-as-host_machine-.s.patch \
++            file://0001-libsysprof-ui-Rename-environ-to-sys_environ.patch \
++            "
  
- diff --git a/tools/fio_jsonplus_clat2csv b/tools/fio_jsonplus_clat2csv
- index 78a007e5..0524b6e6 100755
-@@ -79,16 +78,6 @@ index 4d1815cf..509141af 100755
-  # Note: this script is python2 and python3 compatible.
-  #
-  #  Copyright (C) 2013 eNovance SAS <licensing@enovance.com>
--diff --git a/t/steadystate_tests.py b/t/steadystate_tests.py
--index 50254dcc..95e7dfde 100755
----- a/t/steadystate_tests.py
--+++ b/t/steadystate_tests.py
--@@ -1,4 +1,4 @@
---#!/usr/bin/python2.7
--+#!/usr/bin/env python
-- # Note: this script is python2 and python 3 compatible.
-- #
-- # steadystate_tests.py
- -- 
- 2.17.1
- 
-diff --git a/meta-oe/recipes-benchmark/fio/fio_3.16.bb b/meta-oe/recipes-benchmark/fio/fio_3.17.bb
-similarity index 92%
-rename from meta-oe/recipes-benchmark/fio/fio_3.16.bb
-rename to meta-oe/recipes-benchmark/fio/fio_3.17.bb
-index adab61878..e41c21d1e 100644
---- a/meta-oe/recipes-benchmark/fio/fio_3.16.bb
-+++ b/meta-oe/recipes-benchmark/fio/fio_3.17.bb
-@@ -21,10 +21,9 @@ PACKAGECONFIG_NUMA_armeb = ""
- PACKAGECONFIG ??= "${PACKAGECONFIG_NUMA}"
- PACKAGECONFIG[numa] = ",--disable-numa,numactl"
- 
--SRCREV = "92f75708b530989fdb13b50be6604f44b80d038d"
-+SRCREV = "08ce9dc20b8a4e55db7af6d869ddfa49b4a02d03"
- SRC_URI = "git://git.kernel.dk/fio.git \
-           file://0001-update-the-interpreter-paths.patch \
--          file://0001-arch-arm-Consider-armv7ve-arch-as-well.patch \
- "
- 
- S = "${WORKDIR}/git"
+ PACKAGECONFIG ?= "sysprofd libsysprof ${@bb.utils.contains_any('DISTRO_FEATURES', '${GTK3DISTROFEATURES}', 'gtk', '', d)}"
+ PACKAGECONFIG[gtk] = "-Denable_gtk=true,-Denable_gtk=false,gtk+3 libdazzle"
 -- 
-2.20.1
-
-
+2.25.0
 
 
