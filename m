@@ -1,51 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 224677F88D
+Return-Path: <Matthew.Zeng@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CD2147F489
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2020 17:08:10 +0000 (UTC)
-Received: by mail-pg1-f169.google.com with SMTP id a33so10195729pgm.5
+	Thu, 16 Jan 2020 18:43:33 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 00GIh8Vv015147
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Jan 2020 09:08:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=DkVLKwuFncZywTdwoRsQwrG67Ufxr6gb8fZfBfmbtro=;
-	b=t8AhZEGmO1lRwl19B2hEsczl2Pi76AXRBCDEyMmFg8yKFQUX5JpT+sii3IWHZNv5iO
-	xDDdq35Ymhdmi+GXzL7rwC1SjEp06PHaHIcQUmCDoK8hZv5qetwj/YGGrE2/H2WgryTB
-	YhuUapXPtFipWubxvtfr17M5HT0IF8XtY2Nls+E2NFcdaaQ/fxGN3NLc8zGcV2q2KNa9
-	Ro0tAoTq82OuIVystGFV0ieXFfwLM9FPX45CFcQbrFYEvJgnOwQfgzTl3qLrkhZJkfCI
-	LvEFoSE74rrofQXQWudBK0Y0lFYc6jVUsvqV8i0sLYNjTlfX8HbbsC16etCxr5NjEko8
-	tV2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=DkVLKwuFncZywTdwoRsQwrG67Ufxr6gb8fZfBfmbtro=;
-	b=Ox1kaEhE1FaMFofTJAlbwKFp67/ATjfq7bfYx1mZIy5TP7xwl9KEjveVRes76ERN7O
-	QSKmPUN6kgPaRCTkt7sEwkBJdg7lzVr8dAEJbTZhGcOPSQW2Ghu0aHWi6ghapGaYV3bf
-	mlJgxFEOKuo2RLTsTxbBU5UMLrdk3KXnko5ECvAZjg6jikNlzA0Y0U/jbWYhzgiork4P
-	zXubCr5dBeotG7uhMoE6NuVbnoBcs439kgvdCoR6dakMi8qSFPzyjOmZsEjbMyi4WsCV
-	Cx4tGO9AqbZ7qmour5ao7HeIOTKablV5lKiHS8X+O1+d5/BktNw6ESYnur8G9l3rryD3
-	4qSA==
-X-Gm-Message-State: APjAAAWEBihGF+uRDGF2Qplsqyifdf+6N2QaYIxJ2qJ/XjLWklGMYD9j
-	xGP1yG17i78c2iyoqsFNEswq6V3L0hI=
-X-Google-Smtp-Source: APXvYqwSKTUpTUiMC5UxO7UoD7zWupvl5K6hCbCsCS+INIiiWKvTbSZXkR6XpdocqyVMy/vP7r6j0A==
-X-Received: by 2002:a63:4287:: with SMTP id
-	p129mr39799946pga.122.1579194490693; 
-	Thu, 16 Jan 2020 09:08:10 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e77a])
-	by smtp.gmail.com with ESMTPSA id
-	z26sm27146763pfa.90.2020.01.16.09.08.10
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 16 Jan 2020 09:08:10 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Jan 2020 09:08:09 -0800
-Message-Id: <20200116170809.2621066-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.0
+	Thu, 16 Jan 2020 10:43:24 -0800
+Received: from mzeng (128.224.141.67) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Thu, 16 Jan 2020 10:43:10 -0800
+User-agent: mu4e 1.3.6; emacs 28.0.50
+From: "Mingde (Matthew) Zeng" <matthew.zeng@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 16 Jan 2020 13:43:07 -0500
+Message-ID: <874kwvkzt0.fsf@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] opencv: Tend for the compiler --param option rename in gcc10
+X-Originating-IP: [128.224.141.67]
+Subject: [PATCH] openssh: applied upstream fix for "cert not yet valid" test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,90 +32,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Jan 2020 17:08:10 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 16 Jan 2020 18:43:33 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+applied upstream fix for openssh's "cert not yet valid" test
+
+Upstream Status: Backport:
+    https://github.com/openssh/openssh-portable/commit/ff31f15773ee173502eec4d7861ec56f26bba381
+
+Signed-off-by: Mingde (Matthew) Zeng<matthew.zeng@windriver.com>
+
 ---
- ...-ipcp-unit-growth-with-ipa-cp-unit-g.patch | 55 +++++++++++++++++++
- .../recipes-support/opencv/opencv_4.1.0.bb    |  1 +
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-carotene-Replace-ipcp-unit-growth-with-ipa-cp-unit-g.patch
+ ...pplied-upstream-fix-for-openssh-test.patch | 60 +++++++++++++++++++
+ .../openssh/openssh_8.1p1.bb                  |  1 +
+ 2 files changed, 61 insertions(+)
+ create mode 100644 meta/recipes-connectivity/openssh/openssh/0001-Manually-applied-upstream-fix-for-openssh-test.patch
 
-diff --git a/meta-oe/recipes-support/opencv/opencv/0001-carotene-Replace-ipcp-unit-growth-with-ipa-cp-unit-g.patch b/meta-oe/recipes-support/opencv/opencv/0001-carotene-Replace-ipcp-unit-growth-with-ipa-cp-unit-g.patch
+diff --git a/meta/recipes-connectivity/openssh/openssh/0001-Manually-applied-upstream-fix-for-openssh-test.patch b/meta/recipes-connectivity/openssh/openssh/0001-Manually-applied-upstream-fix-for-openssh-test.patch
 new file mode 100644
-index 0000000000..43d32fbc75
+index 0000000000..64cd2fe717
 --- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv/0001-carotene-Replace-ipcp-unit-growth-with-ipa-cp-unit-g.patch
-@@ -0,0 +1,55 @@
-+From 1edc925ecd7fb54d2dc78452069084475fbe2a70 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 16 Jan 2020 08:52:00 -0800
-+Subject: [PATCH] carotene: Replace ipcp-unit-growth with ipa-cp-unit-growth on gcc >= 10
++++ b/meta/recipes-connectivity/openssh/openssh/0001-Manually-applied-upstream-fix-for-openssh-test.patch
+@@ -0,0 +1,60 @@
++From 0a68d6cfe255f8bcdd5f9db0d008a8f0a60b237a Mon Sep 17 00:00:00 2001
++From: "Mingde (Matthew) Zeng" <matthew.zeng@windriver.com>
++Date: Wed, 15 Jan 2020 15:51:42 -0500
++Subject: [PATCH] Manually applied upstream fix for openssh test
 +
-+gcc 10+ has renamed this option, therefore check for gcc version before
-+deciding which name to use for opt parameter
++Upstream Status: Backport:
++    https://github.com/openssh/openssh-portable/commit/ff31f15773ee173502eec4d7861ec56f26bba381
 +
-+Upstream-Status: Submitted [https://github.com/opencv/opencv/pull/16369]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Mingde (Matthew) Zeng<matthew.zeng@windriver.com>
 +---
-+ 3rdparty/carotene/CMakeLists.txt     | 8 ++++++--
-+ 3rdparty/carotene/hal/CMakeLists.txt | 7 ++++++-
-+ 2 files changed, 12 insertions(+), 3 deletions(-)
++ regress/cert-hostkey.sh | 4 ++--
++ regress/cert-userkey.sh | 5 ++---
++ 2 files changed, 4 insertions(+), 5 deletions(-)
 +
-+diff --git a/3rdparty/carotene/CMakeLists.txt b/3rdparty/carotene/CMakeLists.txt
-+index bfa9368d79..1c43b85b28 100644
-+--- a/3rdparty/carotene/CMakeLists.txt
-++++ b/3rdparty/carotene/CMakeLists.txt
-+@@ -20,8 +20,12 @@ if(CMAKE_COMPILER_IS_GNUCC)
-+     # - matchTemplate about 5-10%
-+     # - goodFeaturesToTrack 10-20%
-+     # - cornerHarris 30% for some cases
++diff --git a/regress/cert-hostkey.sh b/regress/cert-hostkey.sh
++index 86ea6250..60e3ec02 100644
++--- a/regress/cert-hostkey.sh
+++++ b/regress/cert-hostkey.sh
++@@ -1,4 +1,4 @@
++-#	$OpenBSD: cert-hostkey.sh,v 1.18 2019/07/25 08:28:15 dtucker Exp $
+++#	$OpenBSD: cert-hostkey.sh,v 1.23 2020/01/03 03:02:26 djm Exp $
++ #	Placed in the Public Domain.
++
++ tid="certified host keys"
++@@ -252,7 +252,7 @@ test_one() {
++ test_one "user-certificate"	failure "-n $HOSTS"
++ test_one "empty principals"	success "-h"
++ test_one "wrong principals"	failure "-h -n foo"
++-test_one "cert not yet valid"	failure "-h -V20200101:20300101"
+++test_one "cert not yet valid"	failure "-h -V20300101:20320101"
++ test_one "cert expired"		failure "-h -V19800101:19900101"
++ test_one "cert valid interval"	success "-h -V-1w:+2w"
++ test_one "cert has constraints"	failure "-h -Oforce-command=false"
++diff --git a/regress/cert-userkey.sh b/regress/cert-userkey.sh
++index 38c14a69..f0e30945 100644
++--- a/regress/cert-userkey.sh
+++++ b/regress/cert-userkey.sh
++@@ -1,4 +1,4 @@
++-#	$OpenBSD: cert-userkey.sh,v 1.21 2019/07/25 08:28:15 dtucker Exp $
+++#	$OpenBSD: cert-userkey.sh,v 1.25 2020/01/03 03:02:26 djm Exp $
++ #	Placed in the Public Domain.
++
++ tid="certified user keys"
++@@ -338,7 +338,7 @@ test_one() {
++ test_one "correct principal"	success "-n ${USER}"
++ test_one "host-certificate"	failure "-n ${USER} -h"
++ test_one "wrong principals"	failure "-n foo"
++-test_one "cert not yet valid"	failure "-n ${USER} -V20200101:20300101"
+++test_one "cert not yet valid"	failure "-n ${USER} -V20300101:20320101"
++ test_one "cert expired"		failure "-n ${USER} -V19800101:19900101"
++ test_one "cert valid interval"	success "-n ${USER} -V-1w:+2w"
++ test_one "wrong source-address"	failure "-n ${USER} -Osource-address=10.0.0.0/8"
++@@ -399,4 +399,3 @@ done
++
++ rm -f $OBJ/authorized_keys_$USER $OBJ/user_ca_key* $OBJ/cert_user_key*
++ rm -f $OBJ/authorized_principals_$USER
 +-
-+-    set_source_files_properties(${carotene_sources} COMPILE_FLAGS "--param ipcp-unit-growth=100000 --param inline-unit-growth=100000 --param large-stack-frame-growth=5000")
-++    set_source_files_properties(${carotene_sources} COMPILE_FLAGS "--param inline-unit-growth=100000 --param large-stack-frame-growth=5000")
-++    if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "10.0.0")
-++	    set_source_files_properties(${carotene_sources} COMPILE_FLAGS "--param ipcp-unit-growth=100000 ${COMPILE_FLAGS}")
-++    else()
-++	    set_source_files_properties(${carotene_sources} COMPILE_FLAGS "--param ipa-cp-unit-growth=100000 ${COMPILE_FLAGS}")
-++    endif()
-+ endif()
-+ 
-+ add_library(carotene_objs OBJECT
-+diff --git a/3rdparty/carotene/hal/CMakeLists.txt b/3rdparty/carotene/hal/CMakeLists.txt
-+index c4b9acaedd..bbc5b11a80 100644
-+--- a/3rdparty/carotene/hal/CMakeLists.txt
-++++ b/3rdparty/carotene/hal/CMakeLists.txt
-+@@ -90,7 +90,12 @@ set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS ${carotene_defs})
-+     #   matchTemplate about 5-10%
-+     #   goodFeaturesToTrack 10-20%
-+     #   cornerHarris 30% for some cases
-+-    set_source_files_properties(impl.cpp $<TARGET_OBJECTS:carotene_objs> COMPILE_FLAGS "--param ipcp-unit-growth=100000 --param inline-unit-growth=100000 --param large-stack-frame-growth=5000")
-++    set_source_files_properties(impl.cpp $<TARGET_OBJECTS:carotene_objs> COMPILE_FLAGS "--param inline-unit-growth=100000 --param large-stack-frame-growth=5000")
-++    if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "10.0.0")
-++      set_source_files_properties(impl.cpp $<TARGET_OBJECTS:carotene_objs> COMPILE_FLAGS "--param ipcp-unit-growth=100000 ${COMPILE_FLAGS}")
-++    else()
-++      set_source_files_properties(impl.cpp $<TARGET_OBJECTS:carotene_objs> COMPILE_FLAGS "--param ipa-cp-unit-growth=100000 ${COMPILE_FLAGS}")
-++    endif()
-+ #    set_source_files_properties(impl.cpp $<TARGET_OBJECTS:carotene_objs> COMPILE_FLAGS "--param ipcp-unit-growth=100000 --param inline-unit-growth=100000 --param large-stack-frame-growth=5000")
-+   endif()
-+ 
-+-- 
-+2.25.0
++--
++2.24.1
 +
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-index f679ccb05f..d781da6005 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-@@ -48,6 +48,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
-            file://0003-To-fix-errors-as-following.patch \
-            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
-            file://0001-Dont-use-isystem.patch \
-+           file://0001-carotene-Replace-ipcp-unit-growth-with-ipa-cp-unit-g.patch \
-            file://download.patch \
+diff --git a/meta/recipes-connectivity/openssh/openssh_8.1p1.bb b/meta/recipes-connectivity/openssh/openssh_8.1p1.bb
+index f8be7ba178..8e7896cf4a 100644
+--- a/meta/recipes-connectivity/openssh/openssh_8.1p1.bb
++++ b/meta/recipes-connectivity/openssh/openssh_8.1p1.bb
+@@ -26,6 +26,7 @@ SRC_URI = "http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${PV}.tar
+            file://add-test-support-for-busybox.patch \
+            file://openssh-8.1p1-seccomp-nanosleep.patch \
+            file://0001-seccomp-Allow-clock_gettime64-in-sandbox.patch \
++           file://0001-Manually-applied-upstream-fix-for-openssh-test.patch \
             "
- PV = "4.1.0"
--- 
-2.25.0
-
+ SRC_URI[md5sum] = "513694343631a99841e815306806edf0"
+ SRC_URI[sha256sum] = "02f5dbef3835d0753556f973cd57b4c19b6b1f6cd24c03445e23ac77ca1b93ff"
+--
+2.24.0
 
