@@ -1,51 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
-	[209.85.210.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 41AFA7F891
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
+	[209.85.214.169])
+	by mail.openembedded.org (Postfix) with ESMTP id DAD587F893
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 16 Jan 2020 04:42:22 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id 4so9590471pfz.9
+Received: by mail-pl1-f169.google.com with SMTP id p27so7783394pli.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Jan 2020 20:42:23 -0800 (PST)
+	Wed, 15 Jan 2020 20:42:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=0Bq/pxHRlA+lrOEGRKWFCNp8xd8Qkfh6GgssY1UZ0d0=;
-	b=Lacx1EgyjC1FlKePcE7cUfG7UecNUcYeAc2r8n8yEgO3CGh2LY4ClhPp2Zzz87e1XM
-	W3QiK2M4mHdAV5icDi25qHi31gBrs3TzbHC17vKlYhLLC/pQqkSmy3MN2lRABC5miUIx
-	kQYftDJUdfi+YCPoVczK718o0SqHXLmqzOdtu3LTU1eeuYKFCUFG7ZVfV+h7u4+LBH2A
-	bL6x2neptZ3NO7IohKdpi0KF6KIdj9Bfs7jsBvEIJQSDWLxNnzcjtZKYeK3Zo7NjjA1t
-	m59COv7V6QUySMsa8sHMn0m1+OUh+7m4UVk2Zzlq2DNg3GfVWVIOofypc9wwzETzfwVD
-	rObA==
+	bh=big7pBJkAeza7+9QlI6BbdEp2Uk6Tt8/bnCxGa+1QTM=;
+	b=Qos8+gCGZEVQ/cSQrHsP0+4w6HlMYHNm1bWemTqKhBMFr5UYUaOZo+mzQzwCJTeLSx
+	YSbhjHhl0TrTzDBFpzY1jhossP4GPlK5FBH2mjNd/9tqkcm0UWLPr3LZiMiEqX8bG0s2
+	J+0rrDiA8DtWRg+28lfFtJDH3Lt9vCDrWpB3GPuzyodwsDwN4KkEj7UBDKybeivcg/Sn
+	O9CxayvLSErDMByTG3sEruU70IRlhPyfEHIePDIMW5qUOZy9Uyg9CSpc5ILQwkGEwXA6
+	bZ81NxSMr4ngjxex1LBeEJurzQPpKMD5R0C8d4QKdj364tbKNgSb/YFbgnm1RlXPUdmX
+	+Fww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=0Bq/pxHRlA+lrOEGRKWFCNp8xd8Qkfh6GgssY1UZ0d0=;
-	b=o+xUGaHptm099LSuU5zpeTWeJ5aeluI7mR+37TcJTZnh+qRzrsAD7xJOjCCbO1ltG9
-	mxoRRdDVzXl7kjWcQVFZX4FlWYqVJHGYBR1onzgl3af3gJjLTGakTfC/X7+Et53hgqFW
-	iCVNpIj6CTnkYW9PIX5Jot9sMnzB8boPVIaaMUfN2/JDqx1yqlC1b+2Ga+Gi7ynXa0SL
-	tflB9eNS2K0VzgavpgIn+Ov3AuDyssAb9DIFcmYqX1d/EHMeZwl0wRE+X2C1u29KLP8V
-	67LGJ9xfZXoCCo5rTr3t38G5fXM4f6yIoce8ggVOdYLW4obK0LteU9//ODQrP3PM1Z9k
-	mKYA==
-X-Gm-Message-State: APjAAAVPZlKDciMSQsiU7aC5cxZSOUUPx7D8qFdpkdWHXebgOaxIxDZJ
-	b/2ZlCpS9zX1rRL/GNnHbTOBcrMVux8=
-X-Google-Smtp-Source: APXvYqwEW1XteifSQnMtHVXkH6mJYjXtxZUN2hfxmHkhHZD6WbTRCZBcmrel678/ARrWwJ+BUBh88A==
-X-Received: by 2002:a63:fd43:: with SMTP id m3mr37286439pgj.164.1579149742685; 
-	Wed, 15 Jan 2020 20:42:22 -0800 (PST)
+	bh=big7pBJkAeza7+9QlI6BbdEp2Uk6Tt8/bnCxGa+1QTM=;
+	b=nsGvgFvDTdPe28Ax1pRuBdFXqRlCjWEucD+0rQbvhecnkuxGYV8aiZu9inG2r5EVbR
+	ued/s/XbsHFj7dRI8nX6VpvvoHMYnlJ+JebVOynDiTfE8514gRegUt6cHzoqtP04xz5a
+	nH3X/nmCziFz8Zgz7FzmCC5A/9LN9gx748fDQJjc588Z97rOihDbBxJHOfQyNUI+4tzi
+	DHPGS7ypzEKsM2vobfPfW94Ic4MxwkDrvoLG14bQ5B8GUtcZ4XkRHTEhDqF+pt+wSEQ8
+	kCS2nQYhy6tsAtZla2zLgboNRYcgLxOYTNI4X5Lr8D2PjubRFNbFfrR/JefLb7V3ObOt
+	aywQ==
+X-Gm-Message-State: APjAAAXMjbmg18OPHdl0jxl6fUsEXMbSkRHuxiCMZJMYOcd4DQZ2I83q
+	UO0LXIig1wEUVQ5n2NpIwPBbPOk+F1w=
+X-Google-Smtp-Source: APXvYqxpGfq6oPCOdogCS2UXf5+GTvhiZRdYCeE2bS32tBRova/OU8g8IO3poxN+/2eT5QxC9jtdSg==
+X-Received: by 2002:a17:902:a706:: with SMTP id
+	w6mr30361464plq.79.1579149743400; 
+	Wed, 15 Jan 2020 20:42:23 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::e77a])
 	by smtp.gmail.com with ESMTPSA id l14sm1425742pjq.5.2020.01.15.20.42.22
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 15 Jan 2020 20:42:22 -0800 (PST)
+	Wed, 15 Jan 2020 20:42:23 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Jan 2020 20:42:17 -0800
-Message-Id: <20200116044220.3667460-2-raj.khem@gmail.com>
+Date: Wed, 15 Jan 2020 20:42:18 -0800
+Message-Id: <20200116044220.3667460-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200116044220.3667460-1-raj.khem@gmail.com>
 References: <20200116044220.3667460-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/5] jack: Use c++ compiler for programs which use c++ source files
+Subject: [meta-oe][PATCH 3/5] iozone3: Do not define prototype for pread64()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,76 +62,67 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Thu, 16 Jan 2020 04:42:22 -0000
 Content-Transfer-Encoding: 8bit
 
+Use the one from system headers
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ts-Use-c-compiler-for-jack_simdtests.patch | 33 +++++++++++++++++++
- .../recipes-multimedia/jack/jack_1.19.14.bb   |  6 +++-
- 2 files changed, 38 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-multimedia/jack/jack/0001-example-clients-Use-c-compiler-for-jack_simdtests.patch
+ ...1-let-system-headers-provide-pread64.patch | 34 +++++++++++++++++++
+ .../recipes-benchmark/iozone3/iozone3_488.bb  |  1 +
+ 2 files changed, 35 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/iozone3/iozone3/0001-let-system-headers-provide-pread64.patch
 
-diff --git a/meta-oe/recipes-multimedia/jack/jack/0001-example-clients-Use-c-compiler-for-jack_simdtests.patch b/meta-oe/recipes-multimedia/jack/jack/0001-example-clients-Use-c-compiler-for-jack_simdtests.patch
+diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3/0001-let-system-headers-provide-pread64.patch b/meta-oe/recipes-benchmark/iozone3/iozone3/0001-let-system-headers-provide-pread64.patch
 new file mode 100644
-index 0000000000..dda21a32d8
+index 0000000000..a61a56a71d
 --- /dev/null
-+++ b/meta-oe/recipes-multimedia/jack/jack/0001-example-clients-Use-c-compiler-for-jack_simdtests.patch
-@@ -0,0 +1,33 @@
-+From 76b8a389268275cc13f3b4e61394d40b24ec56f1 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-benchmark/iozone3/iozone3/0001-let-system-headers-provide-pread64.patch
+@@ -0,0 +1,34 @@
++From 64389a67b93a53b9fb7e9e20e905a5ee4613606b Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 15 Jan 2020 20:21:58 -0800
-+Subject: [PATCH] example-clients: Use c++ compiler for jack_simdtests
++Date: Wed, 15 Jan 2020 17:10:42 -0800
++Subject: [PATCH] let system headers provide pread64()
 +
-+It uses c++ sources and runtime therefore its best to use c++ compiler
-+to build it so it can find the correct runtime, cross compiling with
-+clang fails
++The signature does not match with system headers anyway
 +
-+x86_64-yoe-linux-ld: example-clients/simdtests.cpp.28.o: undefined reference to symbol '__cxa_call_unexpected@@CXXABI_1.3'
++Fixes
 +
-+Upstream-Status: Submitted [https://github.com/jackaudio/jack2/pull/536]
++iozone.c:1270:9: error: redeclaration of 'pread64' must have the 'overloadable' attribute                                                                       ssize_t pread64();                                                                      ^                                                                       /mnt/b/yoe/build/tmp/work/core2-64-yoe-linux/iozone3/488-r0/recipe-sysroot/usr/include/bits/unistd.h:83:1: note: previous overload of function is here          pread64 (int __fd, void *const __clang_pass_object_size0 __buf,                 ^
++1 error generated.
++
++Upstream-Status: Pending
++
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ example-clients/wscript | 2 ++
-+ 1 file changed, 2 insertions(+)
++ iozone.c | 1 -
++ 1 file changed, 1 deletion(-)
 +
-+diff --git a/example-clients/wscript b/example-clients/wscript
-+index a8857aa7..df9435aa 100644
-+--- a/example-clients/wscript
-++++ b/example-clients/wscript
-+@@ -69,6 +69,8 @@ def build(bld):
-+ 
-+         if bld.env['IS_MACOSX']:
-+             prog = bld(features='c cprogram', framework = ['Foundation'])
-++        elif example_program == 'jack_simdtests':
-++            prog = bld(features='cxx cxxprogram')
-+         else:
-+             prog = bld(features='c cprogram')
-+         prog.includes = os_incdir + ['../common/jack', '../common']
++diff --git a/iozone.c b/iozone.c
++index 090dd5f..fdea400 100644
++--- a/iozone.c
+++++ b/iozone.c
++@@ -1267,7 +1267,6 @@ int pit_gettimeofday();
++ #ifdef HAVE_ANSIC_C
++ #if defined (HAVE_PREAD) && defined(_LARGEFILE64_SOURCE)
++ ssize_t pwrite64(); 
++-ssize_t pread64(); 
++ #endif
++ #if !defined(linux)
++ char *getenv();
 +-- 
 +2.25.0
 +
-diff --git a/meta-oe/recipes-multimedia/jack/jack_1.19.14.bb b/meta-oe/recipes-multimedia/jack/jack_1.19.14.bb
-index cebc952661..3f3d53f608 100644
---- a/meta-oe/recipes-multimedia/jack/jack_1.19.14.bb
-+++ b/meta-oe/recipes-multimedia/jack/jack_1.19.14.bb
-@@ -14,7 +14,9 @@ LIC_FILES_CHKSUM = " \
- 
- DEPENDS = "libsamplerate0 libsndfile1 readline"
- 
--SRC_URI = "git://github.com/jackaudio/jack2.git"
-+SRC_URI = "git://github.com/jackaudio/jack2.git \
-+           file://0001-example-clients-Use-c-compiler-for-jack_simdtests.patch \
-+          "
- SRCREV = "b54a09bf7ef760d81fdb8544ad10e45575394624"
- 
- S = "${WORKDIR}/git"
-@@ -30,6 +32,8 @@ PACKAGECONFIG[opus] = "--opus=yes,--opus=no,libopus"
- # portaudio is for windows builds only
- EXTRA_OECONF = "--portaudio=no"
- 
-+export CC = "${CXX}"
-+
- do_install_append() {
- 	if ! ${@bb.utils.contains('PACKAGECONFIG', 'dbus', True, False, d)}; then
- 		rm -f ${D}${bindir}/jack_control
+diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_488.bb b/meta-oe/recipes-benchmark/iozone3/iozone3_488.bb
+index 5885b145e9..4d9e07765f 100644
+--- a/meta-oe/recipes-benchmark/iozone3/iozone3_488.bb
++++ b/meta-oe/recipes-benchmark/iozone3/iozone3_488.bb
+@@ -8,6 +8,7 @@ LIC_FILES_CHKSUM = "file://iozone.c;beginline=37;endline=48;md5=7331260091868dca
+ "
+ SRC_URI = "http://www.iozone.org/src/current/${BPN}_${PV}.tar \
+     file://parallelism.patch \
++    file://0001-let-system-headers-provide-pread64.patch \
+     file://copyright.txt \
+ "
+ SRC_URI[md5sum] = "d60a69e44cda8436f4f94d860958efc2"
 -- 
 2.25.0
 
