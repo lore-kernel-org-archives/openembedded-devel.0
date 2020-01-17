@@ -1,56 +1,59 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BFDD7FC09
+Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com
+	[209.85.216.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D83127FBFD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jan 2020 18:08:05 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id k3so12046359pgc.3
+	Fri, 17 Jan 2020 18:48:52 +0000 (UTC)
+Received: by mail-pj1-f67.google.com with SMTP id m13so3713804pjb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jan 2020 10:08:07 -0800 (PST)
+	Fri, 17 Jan 2020 10:48:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=qZkWIG5ZiY37Q6A/qurfTy/jMMgOJPfOJaUUWTjpee0=;
-	b=F30If2WDbhoWllWJnpP/VVW+RbgWd/GyD2sqfooqJ4gdY76xLuWZyGfxdzC88C9Zk7
-	OgPmvjjZwNflZ2R3OWdDeyjYm8Qe3tfsJzkGbeflWKou3nZ0vdIdJfx5OvJx4fnlfDnF
-	cuOe6RYbUgeinYPltOEFgW4C12BZp0sGvApju/jSVX0xGAqPYgf4BISz4H3F1o9taRbJ
-	Bc/5bCJkv34A6X12Prmn2K4w8RLVR5ZwP72KAtFUEYGZdOuV7OWwtwn9trnDQ2/OVz8i
-	NbWl3PvHFh0roly/RkytlLopkksADY8UYJC/YSLkOVfMStYYqtjMV8kIO9WRb9V998Y3
-	kEdw==
+	h=subject:to:cc:references:from:organization:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=Vc3w+qnYcL1xGRrkRDm+40Hu+kKsN3Qghd3D6KrU+00=;
+	b=OW/wwfZYFPxcWdxwMV9ks7zmgMP4vx2F8vm+z9YfAhjv9LqujO/yB5YPwc6cgJdCKc
+	mAyRNPoPgbH41BE5XqW+dzcBC5tXuQDQTASZn0sr/32Lf82ecjK0CewD0Xxr/NLSdhpd
+	4SP5791/U4WLuKBiDdd0ZLvsL+vqCpHYbFzKipSsaB1edYxhwgVtOcFPY7oThhIK8kRs
+	qf0big64epO06phr9Ntbt/ad0Al2Tqy8594vZuAfiBAHtaWO2U1O7eNzl2WX10XIJCjp
+	UjMdSfrKpLpWo28oU/co6B4giibwBUCEvPAPEtlWvAhWCuA1kAemYQVjKzU3MoyiCrvI
+	Vb1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:organization
+	h=x-gm-message-state:subject:to:cc:references:from:organization
 	:message-id:date:user-agent:mime-version:in-reply-to
 	:content-language:content-transfer-encoding;
-	bh=qZkWIG5ZiY37Q6A/qurfTy/jMMgOJPfOJaUUWTjpee0=;
-	b=ikcNGJ9kCS4+igglfpn+Z4pbtoARXUhD+Az/RY+g0ZMb5J2oyv54JTsFBvkaT4mhZm
-	0HPz63vTJ1vNoX0tWKHin0altS7S3wBEhkRJBaiK0x2S1Lv6ROCyyqC4FmB9D1ONaVqe
-	LNl01/ZKVjTtC/7ByMwzW+jk7M+jFnvpkIRXyqH6rKDD1WDzpgOEEwsgEDezDJUx/1EC
-	zoQLzyRSFCEOc+f1VWinwjrVMLk3Y4HEJuBd97iPMVZjIgCbushGzoApLlB2wZ6nJV5A
-	BjBpFCYPat9enFdu2cUxRp8JXcRT65nbVmW7ghLuIDkgtsoQonmXHo0ogjhMvxFTgERJ
-	8s9A==
-X-Gm-Message-State: APjAAAX3qecCFDhC6Pc7363jKW5Kzk82+ntQgy/+Sid+4YiDjhP33pSc
-	c9CfGqnoYVf90IIRNoDVrmM0lxLhHMQ=
-X-Google-Smtp-Source: APXvYqwPqzJ/Du3I0ITlJEtq2SoX5gBM+JYrw/knsT62zRjGuNBz9Rs9RW5/Sfg4LU0FhVFA2Uzcgw==
-X-Received: by 2002:a62:2cc1:: with SMTP id s184mr4298826pfs.111.1579284486387;
-	Fri, 17 Jan 2020 10:08:06 -0800 (PST)
+	bh=Vc3w+qnYcL1xGRrkRDm+40Hu+kKsN3Qghd3D6KrU+00=;
+	b=cpXBnk1Y/svJb21sA6F9PLTlZWms4Hhbx841DKZe4D7WelEFWysx0rvd1BUp1E6qlT
+	qGuRfbX98bjDmySHm8HcBPS0zEBxme6c2NkMToA8nchKyH4nLau+qhKIErz4HnNHdh7D
+	mPYk/bGI9ZM4GanmLwzlHdztlax20W27Plwz9iy6PaAGvbRYqq+uYFBHQsmmmZRV2KaW
+	iExHzTsdkSJYpjCROh4aUHviz3FXq+9JSkiYOYgYLYpqWRkBxNqdx6gTCC/PHEWLznc4
+	t9XZbV7K0gACmnwrC3ZAgQbtDjXmZbPchoPH5sl3QAXTHbzZEh3JKiO5T438a93ybyBL
+	vqrw==
+X-Gm-Message-State: APjAAAV/cXsgP/EfCrtpJDh1qrD3RGAlWKBWoZZxXu/uaRe5TOyX11Ut
+	V9dDbuPCBIp/wDbwc249xtc=
+X-Google-Smtp-Source: APXvYqymtsVF1UQfmPnVNQdpgk+t+oHUm1vROixASrb5ZMIUV2LEGo9Jc1sj7Uj3IyKX+Nzx7N2RTg==
+X-Received: by 2002:a17:902:524:: with SMTP id 33mr482484plf.241.1579286933711;
+	Fri, 17 Jan 2020 10:48:53 -0800 (PST)
 Received: from ?IPv6:2601:646:9200:4e0:6d1f:200c:159c:4a81?
 	([2601:646:9200:4e0:6d1f:200c:159c:4a81])
-	by smtp.gmail.com with ESMTPSA id h3sm7981090pji.9.2020.01.17.10.08.05
-	for <openembedded-devel@lists.openembedded.org>
+	by smtp.gmail.com with ESMTPSA id
+	x197sm31120740pfc.1.2020.01.17.10.48.52
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 17 Jan 2020 10:08:05 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <20200117060852.246161-1-De.Huo@windriver.com>
+	Fri, 17 Jan 2020 10:48:52 -0800 (PST)
+To: Sumit Garg <sumit.garg@linaro.org>,
+	openembedded-devel@lists.openembedded.org
+References: <1579245551-14394-1-git-send-email-sumit.garg@linaro.org>
 From: Khem Raj <raj.khem@gmail.com>
 Organization: HIMVIS LLC
-Message-ID: <69829913-1a3e-2de6-18e9-d19a0977b824@gmail.com>
-Date: Fri, 17 Jan 2020 10:08:04 -0800
+Message-ID: <8912342c-0c14-9711-164a-f82a1a0eb85f@gmail.com>
+Date: Fri, 17 Jan 2020 10:48:51 -0800
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
 	Gecko/20100101 Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200117060852.246161-1-De.Huo@windriver.com>
-Subject: Re: [meta-oe][zeus][PATCH] bash: Fix CVE-2019-18276
+In-Reply-To: <1579245551-14394-1-git-send-email-sumit.garg@linaro.org>
+Cc: daniel.thompson@linaro.org
+Subject: Re: [meta-networking][PATCH] meta-networking: fix recipes build with external tool-set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,456 +66,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2020 18:08:06 -0000
+X-List-Received-Date: Fri, 17 Jan 2020 18:48:53 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 1/16/20 10:08 PM, De Huo wrote:
-> An issue was discovered in disable_priv_mode in shell.c in GNU Bash through 5.0 patch 11.
-> By default, if Bash is run with its effective UID not equal to its real UID,
-> it will drop privileges by setting its effective UID to its real UID.
-> However, it does so incorrectly. On Linux and other systems that support "saved UID" functionality,
-> the saved UID is not dropped. An attacker with command execution in the shell can use "enable -f" for
-> runtime loading of a new builtin, which can be a shared object that calls setuid() and therefore
-> regains privileges. However, binaries running with an effective UID of 0 are unaffected.
-> 
-> Backport the CVE patche from https://github.com/bminor/bash/commit/
-> 951bdaad7a18cc0dc1036bba86b18b90874d39ff to fix CVE-2019-18276
+On 1/16/20 11:19 PM, Sumit Garg wrote:
+> - drbd-utils: fix native tool dependency which was implicitly met while
+>    building with source GCC tool-set.
+> - unbound: Use HOST_SYS variable instead of TARGET_PREFIX for libtool as
+>    TARGET_PREFIX may vary from source GCC tool-set to external GCC
+>    tool-set. Also, libtool-cross is installed in recipe sysroot using
+>    HOST_SYS variable only.
 > 
 
-Thanks Chet, please send this patch to openembedded-core mailing list. 
-Since this package is part of core layer which has its own development 
-layer.
 
-> Signed-off-by: Chet Ramey <chet.ramey@case.edu>
-> Signed-off-by: De Huo <De.Huo@windriver.com>
+Please divide this into two patches since they seem to solve different 
+problems. Also remove meta-networking from commit summary line and 
+replace it with recipe name.
+
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 > ---
->   .../bash/bash/bash-CVE-2019-18276.patch       | 402 ++++++++++++++++++
->   meta/recipes-extended/bash/bash_5.0.bb        |   1 +
->   2 files changed, 403 insertions(+)
->   create mode 100644 meta/recipes-extended/bash/bash/bash-CVE-2019-18276.patch
+>   meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb | 2 ++
+>   meta-networking/recipes-support/unbound/unbound_1.9.4.bb  | 2 +-
+>   2 files changed, 3 insertions(+), 1 deletion(-)
 > 
-> diff --git a/meta/recipes-extended/bash/bash/bash-CVE-2019-18276.patch b/meta/recipes-extended/bash/bash/bash-CVE-2019-18276.patch
-> new file mode 100644
-> index 0000000000..78dcc1b636
-> --- /dev/null
-> +++ b/meta/recipes-extended/bash/bash/bash-CVE-2019-18276.patch
-> @@ -0,0 +1,402 @@
-> +From 951bdaad7a18cc0dc1036bba86b18b90874d39ff Mon Sep 17 00:00:00 2001
-> +From: Chet Ramey <chet.ramey@case.edu>
-> +Date: Mon, 1 Jul 2019 09:03:53 -0400
-> +Subject: [PATCH] commit bash-20190628 snapshot
-> +
-> +An issue was discovered in disable_priv_mode in shell.c in GNU Bash through 5.0 patch 11.
-> +By default, if Bash is run with its effective UID not equal to its real UID,
-> +it will drop privileges by setting its effective UID to its real UID.
-> +However, it does so incorrectly. On Linux and other systems that support "saved UID" functionality,
-> +the saved UID is not dropped. An attacker with command execution in the shell can use "enable -f" for
-> +runtime loading of a new builtin, which can be a shared object that calls setuid() and therefore
-> +regains privileges. However, binaries running with an effective UID of 0 are unaffected.
-> +
-> +Upstream-Status: Backport [https://github.com/bminor/bash/commit/951bdaad7a18cc0dc1036bba86b18b90874d39ff]
-> +CVE: CVE-2019-18276
-> +Signed-off-by: Chet Ramey <chet.ramey@case.edu>
-> +Signed-off-by: De Huo <De.Huo@windriver.com>
-> +---
-> + MANIFEST          |  2 ++
-> + bashline.c        | 50 +-------------------------------------------------
-> + builtins/help.def |  2 +-
-> + config.h.in       | 10 +++++++++-
-> + configure         | 11 +++++++++++
-> + configure.ac      |  1 +
-> + doc/bash.1        |  3 ++-
-> + doc/bashref.texi  |  3 ++-
-> + lib/glob/glob.c   |  5 ++++-
-> + pathexp.c         | 16 ++++++++++++++--
-> + shell.c           |  8 ++++++++
-> + tests/glob.tests  |  2 ++
-> + tests/glob6.sub   | 54 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
-> + tests/glob7.sub   | 11 +++++++++++
-> + 14 files changed, 122 insertions(+), 56 deletions(-)
-> + create mode 100644 tests/glob6.sub
-> + create mode 100644 tests/glob7.sub
-> +
-> +diff --git a/MANIFEST b/MANIFEST
-> +index 03de221..f9ccad7 100644
-> +--- a/MANIFEST
-> ++++ b/MANIFEST
-> +@@ -1037,6 +1037,8 @@ tests/extglob3.tests	f
-> + tests/extglob3.right	f
-> + tests/extglob4.sub	f
-> + tests/extglob5.sub	f
-> ++tests/glob6.sub		f
-> ++tests/glob7.sub		f
-> + tests/func.tests	f
-> + tests/func.right	f
-> + tests/func1.sub		f
-> +diff --git a/bashline.c b/bashline.c
-> +index 824ea9d..d86b47d 100644
-> +--- a/bashline.c
-> ++++ b/bashline.c
-> +@@ -3718,55 +3718,7 @@ static int
-> + completion_glob_pattern (string)
-> +      char *string;
-> + {
-> +-  register int c;
-> +-  char *send;
-> +-  int open;
-> +-
-> +-  DECLARE_MBSTATE;
-> +-
-> +-  open = 0;
-> +-  send = string + strlen (string);
-> +-
-> +-  while (c = *string++)
-> +-    {
-> +-      switch (c)
-> +-	{
-> +-	case '?':
-> +-	case '*':
-> +-	  return (1);
-> +-
-> +-	case '[':
-> +-	  open++;
-> +-	  continue;
-> +-
-> +-	case ']':
-> +-	  if (open)
-> +-	    return (1);
-> +-	  continue;
-> +-
-> +-	case '+':
-> +-	case '@':
-> +-	case '!':
-> +-	  if (*string == '(')	/*)*/
-> +-	    return (1);
-> +-	  continue;
-> +-
-> +-	case '\\':
-> +-	  if (*string++ == 0)
-> +-	    return (0);	 	
-> +-	}
-> +-
-> +-      /* Advance one fewer byte than an entire multibyte character to
-> +-	 account for the auto-increment in the loop above. */
-> +-#ifdef HANDLE_MULTIBYTE
-> +-      string--;
-> +-      ADVANCE_CHAR_P (string, send - string);
-> +-      string++;
-> +-#else
-> +-      ADVANCE_CHAR_P (string, send - string);
-> +-#endif
-> +-    }
-> +-  return (0);
-> ++  return (glob_pattern_p (string) == 1);
-> + }
-> +
-> + static char *globtext;
-> +diff --git a/builtins/help.def b/builtins/help.def
-> +index 006c4b5..92f9b38 100644
-> +--- a/builtins/help.def
-> ++++ b/builtins/help.def
-> +@@ -128,7 +128,7 @@ help_builtin (list)
-> +
-> +   /* We should consider making `help bash' do something. */
-> +
-> +-  if (glob_pattern_p (list->word->word))
-> ++  if (glob_pattern_p (list->word->word) == 1)
-> +     {
-> +       printf ("%s", ngettext ("Shell commands matching keyword `", "Shell commands matching keywords `", (list->next ? 2 : 1)));
-> +       print_word_list (list, ", ");
-> +diff --git a/config.h.in b/config.h.in
-> +index 8554aec..ad4b1e8 100644
-> +--- a/config.h.in
-> ++++ b/config.h.in
-> +@@ -1,6 +1,6 @@
-> + /* config.h -- Configuration file for bash. */
-> +
-> +-/* Copyright (C) 1987-2009,2011-2012 Free Software Foundation, Inc.
-> ++/* Copyright (C) 1987-2009,2011-2012,2013-2019 Free Software Foundation, Inc.
-> +
-> +    This file is part of GNU Bash, the Bourne Again SHell.
-> +
-> +@@ -807,6 +807,14 @@
-> + #undef HAVE_SETREGID
-> + #undef HAVE_DECL_SETREGID
-> +
-> ++/* Define if you have the setregid function.  */
-> ++#undef HAVE_SETRESGID
-> ++#undef HAVE_DECL_SETRESGID
-> ++
-> ++/* Define if you have the setresuid function.  */
-> ++#undef HAVE_SETRESUID
-> ++#undef HAVE_DECL_SETRESUID
-> ++
-> + /* Define if you have the setvbuf function.  */
-> + #undef HAVE_SETVBUF
-> +
-> +diff --git a/configure b/configure
-> +index 2f62662..b3321c9 100755
-> +--- a/configure
-> ++++ b/configure
-> +@@ -10281,6 +10281,17 @@ cat >>confdefs.h <<_ACEOF
-> + #define HAVE_DECL_SETREGID $ac_have_decl
-> + _ACEOF
-> +
-> ++ac_fn_c_check_decl "$LINENO" "" "ac_cv_have_decl_" "$ac_includes_default"
-> ++if test "x$ac_cv_have_decl_" = xyes; then :
-> ++  ac_have_decl=1
-> ++else
-> ++  ac_have_decl=0
-> ++fi
-> ++
-> ++cat >>confdefs.h <<_ACEOF
-> ++#define HAVE_DECL_ $ac_have_decl
-> ++_ACEOF
-> ++(setresuid, setresgid)
-> + ac_fn_c_check_decl "$LINENO" "strcpy" "ac_cv_have_decl_strcpy" "$ac_includes_default"
-> + if test "x$ac_cv_have_decl_strcpy" = xyes; then :
-> +   ac_have_decl=1
-> +diff --git a/configure.ac b/configure.ac
-> +index 52b4cdb..549adef 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -810,6 +810,7 @@ AC_CHECK_DECLS([confstr])
-> + AC_CHECK_DECLS([printf])
-> + AC_CHECK_DECLS([sbrk])
-> + AC_CHECK_DECLS([setregid])
-> ++AC_CHECK_DECLS[(setresuid, setresgid])
-> + AC_CHECK_DECLS([strcpy])
-> + AC_CHECK_DECLS([strsignal])
-> +
-> +diff --git a/doc/bash.1 b/doc/bash.1
-> +index e6cd08d..9e58a0b 100644
-> +--- a/doc/bash.1
-> ++++ b/doc/bash.1
-> +@@ -4681,7 +4681,8 @@ above).
-> + .PD
-> + .SH "SIMPLE COMMAND EXPANSION"
-> + When a simple command is executed, the shell performs the following
-> +-expansions, assignments, and redirections, from left to right.
-> ++expansions, assignments, and redirections, from left to right, in
-> ++the following order.
-> + .IP 1.
-> + The words that the parser has marked as variable assignments (those
-> + preceding the command name) and redirections are saved for later
-> +diff --git a/doc/bashref.texi b/doc/bashref.texi
-> +index d33cd57..3065126 100644
-> +--- a/doc/bashref.texi
-> ++++ b/doc/bashref.texi
-> +@@ -2964,7 +2964,8 @@ is not specified.  If the file does not exist, it is created.
-> + @cindex command expansion
-> +
-> + When a simple command is executed, the shell performs the following
-> +-expansions, assignments, and redirections, from left to right.
-> ++expansions, assignments, and redirections, from left to right, in
-> ++the following order.
-> +
-> + @enumerate
-> + @item
-> +diff --git a/lib/glob/glob.c b/lib/glob/glob.c
-> +index 398253b..2eaa33e 100644
-> +--- a/lib/glob/glob.c
-> ++++ b/lib/glob/glob.c
-> +@@ -607,6 +607,7 @@ glob_vector (pat, dir, flags)
-> +   register unsigned int i;
-> +   int mflags;		/* Flags passed to strmatch (). */
-> +   int pflags;		/* flags passed to sh_makepath () */
-> ++  int hasglob;		/* return value from glob_pattern_p */
-> +   int nalloca;
-> +   struct globval *firstmalloc, *tmplink;
-> +   char *convfn;
-> +@@ -648,10 +649,12 @@ glob_vector (pat, dir, flags)
-> +   patlen = (pat && *pat) ? strlen (pat) : 0;
-> +
-> +   /* If the filename pattern (PAT) does not contain any globbing characters,
-> ++     or contains a pattern with only backslash escapes (hasglob == 2),
-> +      we can dispense with reading the directory, and just see if there is
-> +      a filename `DIR/PAT'.  If there is, and we can access it, just make the
-> +      vector to return and bail immediately. */
-> +-  if (skip == 0 && glob_pattern_p (pat) == 0)
-> ++  hasglob = 0;
-> ++  if (skip == 0 && (hasglob = glob_pattern_p (pat)) == 0 || hasglob == 2)
-> +     {
-> +       int dirlen;
-> +       struct stat finfo;
-> +diff --git a/pathexp.c b/pathexp.c
-> +index c1bf2d8..e6c5392 100644
-> +--- a/pathexp.c
-> ++++ b/pathexp.c
-> +@@ -58,7 +58,10 @@ int extended_glob = EXTGLOB_DEFAULT;
-> + /* Control enabling special handling of `**' */
-> + int glob_star = 0;
-> +
-> +-/* Return nonzero if STRING has any unquoted special globbing chars in it.  */
-> ++/* Return nonzero if STRING has any unquoted special globbing chars in it.
-> ++   This is supposed to be called when pathname expansion is performed, so
-> ++   it implements the rules in Posix 2.13.3, specifically that an unquoted
-> ++   slash cannot appear in a bracket expression. */
-> + int
-> + unquoted_glob_pattern_p (string)
-> +      register char *string;
-> +@@ -85,10 +88,14 @@ unquoted_glob_pattern_p (string)
-> + 	  continue;
-> +
-> + 	case ']':
-> +-	  if (open)
-> ++	  if (open)		/* XXX - if --open == 0? */
-> + 	    return (1);
-> + 	  continue;
-> +
-> ++	case '/':
-> ++	  if (open)
-> ++	    open = 0;
-> ++
-> + 	case '+':
-> + 	case '@':
-> + 	case '!':
-> +@@ -106,6 +113,11 @@ unquoted_glob_pattern_p (string)
-> + 	      string++;
-> + 	      continue;
-> + 	    }
-> ++	  else if (open && *string == '/')
-> ++	    {
-> ++	      string++;		/* quoted slashes in bracket expressions are ok */
-> ++	      continue;
-> ++	    }
-> + 	  else if (*string == 0)
-> + 	    return (0);
-> + 	 	
-> +diff --git a/shell.c b/shell.c
-> +index a2b2a55..6adabc8 100644
-> +--- a/shell.c
-> ++++ b/shell.c
-> +@@ -1293,7 +1293,11 @@ disable_priv_mode ()
-> + {
-> +   int e;
-> +
-> ++#if HAVE_DECL_SETRESUID
-> ++  if (setresuid (current_user.uid, current_user.uid, current_user.uid) < 0)
-> ++#else
-> +   if (setuid (current_user.uid) < 0)
-> ++#endif
-> +     {
-> +       e = errno;
-> +       sys_error (_("cannot set uid to %d: effective uid %d"), current_user.uid, current_user.euid);
-> +@@ -1302,7 +1306,11 @@ disable_priv_mode ()
-> + 	exit (e);
-> + #endif
-> +     }
-> ++#if HAVE_DECL_SETRESGID
-> ++  if (setresgid (current_user.gid, current_user.gid, current_user.gid) < 0)
-> ++#else
-> +   if (setgid (current_user.gid) < 0)
-> ++#endif
-> +     sys_error (_("cannot set gid to %d: effective gid %d"), current_user.gid, current_user.egid);
-> +
-> +   current_user.euid = current_user.uid;
-> +diff --git a/tests/glob.tests b/tests/glob.tests
-> +index 01913bb..fb012f7 100644
-> +--- a/tests/glob.tests
-> ++++ b/tests/glob.tests
-> +@@ -12,6 +12,8 @@ ${THIS_SH} ./glob1.sub
-> + ${THIS_SH} ./glob2.sub
-> + ${THIS_SH} ./glob3.sub
-> + ${THIS_SH} ./glob4.sub
-> ++${THIS_SH} ./glob6.sub
-> ++${THIS_SH} ./glob7.sub
-> +
-> + MYDIR=$PWD	# save where we are
-> +
-> +diff --git a/tests/glob6.sub b/tests/glob6.sub
-> +new file mode 100644
-> +index 0000000..b099811
-> +--- /dev/null
-> ++++ b/tests/glob6.sub
-> +@@ -0,0 +1,54 @@
-> ++# tests of the backslash-in-glob-patterns discussion on the austin-group ML
-> ++
-> ++: ${TMPDIR:=/var/tmp}
-> ++
-> ++ORIG=$PWD
-> ++GLOBDIR=$TMPDIR/bash-glob-$$
-> ++mkdir $GLOBDIR && cd $GLOBDIR
-> ++
-> ++# does the pattern matcher allow backslashes as escape characters and remove
-> ++# them as part of matching?
-> ++touch abcdefg
-> ++pat='ab\cd*'
-> ++printf '<%s>\n' $pat
-> ++pat='\.'
-> ++printf '<%s>\n' $pat
-> ++rm abcdefg
-> ++
-> ++# how about when escaping pattern characters?
-> ++touch '*abc.c'
-> ++a='\**.c'
-> ++printf '%s\n' $a
-> ++rm -f '*abc.c'
-> ++
-> ++# how about when making the distinction between readable and searchable path
-> ++# components?
-> ++mkdir -m a=x searchable
-> ++mkdir -m a=r readable
-> ++
-> ++p='searchable/\.'
-> ++printf "%s\n" $p
-> ++
-> ++p='searchable/\./.'
-> ++printf "%s\n" $p
-> ++
-> ++p='readable/\.'
-> ++printf "%s\n" $p
-> ++
-> ++p='readable/\./.'
-> ++printf "%s\n" $p
-> ++
-> ++printf "%s\n" 'searchable/\.'
-> ++printf "%s\n" 'readable/\.'
-> ++
-> ++echo */.
-> ++
-> ++p='*/\.'
-> ++echo $p
-> ++
-> ++echo */'.'
-> ++
-> ++rmdir searchable readable
-> ++
-> ++cd $ORIG
-> ++rmdir $GLOBDIR
-> +diff --git a/tests/glob7.sub b/tests/glob7.sub
-> +new file mode 100644
-> +index 0000000..0212b8e
-> +--- /dev/null
-> ++++ b/tests/glob7.sub
-> +@@ -0,0 +1,11 @@
-> ++# according to Posix 2.13.3, a slash in a bracket expression renders that
-> ++# bracket expression invalid
-> ++shopt -s nullglob
-> ++
-> ++echo 1: [qwe/qwe]
-> ++echo 2: [qwe/
-> ++echo 3: [qwe/]
-> ++
-> ++echo 4: [qwe\/qwe]
-> ++echo 5: [qwe\/
-> ++echo 6: [qwe\/]
-> +--
-> +1.9.1
-> diff --git a/meta/recipes-extended/bash/bash_5.0.bb b/meta/recipes-extended/bash/bash_5.0.bb
-> index eadc82279d..1b7058746f 100644
-> --- a/meta/recipes-extended/bash/bash_5.0.bb
-> +++ b/meta/recipes-extended/bash/bash_5.0.bb
-> @@ -19,6 +19,7 @@ SRC_URI = "${GNU_MIRROR}/bash/${BP}.tar.gz;name=tarball \
->              file://run-ptest \
->              file://run-bash-ptests \
->              file://fix-run-builtins.patch \
-> +           file://bash-CVE-2019-18276.patch \
->              "
+> diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb
+> index 286b0f6..01bb16a 100644
+> --- a/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb
+> +++ b/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb
+> @@ -23,6 +23,8 @@ UPSTREAM_CHECK_URI = "https://github.com/LINBIT/drbd-utils/releases"
+>   SYSTEMD_SERVICE_${PN} = "drbd.service"
+>   SYSTEMD_AUTO_ENABLE = "disable"
 >   
->   SRC_URI[tarball.md5sum] = "2b44b47b905be16f45709648f671820b"
+> +DEPENDS = "flex-native"
+> +
+>   inherit autotools-brokensep systemd
+>   
+>   EXTRA_OECONF = " \
+> diff --git a/meta-networking/recipes-support/unbound/unbound_1.9.4.bb b/meta-networking/recipes-support/unbound/unbound_1.9.4.bb
+> index 03eb2fa..6200214 100644
+> --- a/meta-networking/recipes-support/unbound/unbound_1.9.4.bb
+> +++ b/meta-networking/recipes-support/unbound/unbound_1.9.4.bb
+> @@ -23,7 +23,7 @@ S = "${WORKDIR}/git"
+>   
+>   EXTRA_OECONF = "--with-libexpat=${STAGING_EXECPREFIXDIR} \
+>   		--with-ssl=${STAGING_EXECPREFIXDIR} \
+> -		libtool=${TARGET_PREFIX}libtool \
+> +		libtool=${HOST_SYS}-libtool \
+>   "
+>   		
+>   
 > 
 
 
