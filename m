@@ -1,54 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
-	[209.85.221.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 66DA07FC40
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D6A57FC39
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jan 2020 21:26:34 +0000 (UTC)
-Received: by mail-wr1-f67.google.com with SMTP id c14so24036940wrn.7
+	Fri, 17 Jan 2020 21:26:35 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id w15so24105040wru.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jan 2020 13:26:35 -0800 (PST)
+	Fri, 17 Jan 2020 13:26:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=/Up+XN26c9fKEaVQxcKJ3ZA8zG2+YnnjbD0dKQ0Siyc=;
-	b=OJzY70zC+cIAu/iQPdpNA/TLkx/N0xcQz3ttxmJDGZGD7LyVRsGkCvZXw3K/n/Snb5
-	dXIIIj5HTkWCC5NokRkZINVnnQ10Li4XTN2LEUluMiLHpgkOtath4o544IEAnoZCjtQS
-	aC0lkezivA1GqDwsJaxevKlmpTveBASfnONNVaDrWr16Js3ZuwLC+5mSS+BSY87GVT2I
-	V/BiL4+twDTD3l5rtNj5G6OdW/th6PpYLL9OeK+r9R4YhDHLmq8zPpKYvMtq2IhIq3Rh
-	iAXd5PQ6WSYgqetZQX18I3QDdpZYz92IB/zYDhRk7+f3u4zA8mdm7Qb90qPAFlSreAJY
-	uPGg==
+	bh=IOddD+/XiMlKZt64BBDT06yUSgxmB6Dss1y+C6mGbIU=;
+	b=mw0sLOzko2odEmax9ESpil4UrRi2HyHWvKGoLT//Ny69c6VLvfnd0FbaopK4whikIB
+	SWOv6R8LoZp95cgxsNeHpT54Z/lS9VAOwMQCdI3TGHjbUIirlbph1f4FWXL0d9V/wWUW
+	SsmI/pjfDfcCqf/k2XJWeGVvZCLhF6GXAwPe0lzzO19yItMEnMzOFKypa7ED7pntQmJI
+	tsWd4o8mFXkQAJJmw5vuOF8VE3RNbFdpGWFWAB1orPPLMV+LX1u1Hq0nXjg15otNsSPT
+	JZLrHujnuBu5ghwNua8KxrJuwLL5zoLdckk0p1uceXSCAgrnVt4IAWNxVShvAd3iHss/
+	ufXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=/Up+XN26c9fKEaVQxcKJ3ZA8zG2+YnnjbD0dKQ0Siyc=;
-	b=BJj/lo4mUfglotWkg09RFtUSh6Rhtwk9NvOY0y6FXfb4XNUvKcWDCba7o7B7mh+yTU
-	t5AS4aKiNb8aZBjELJcp3gz3i0UXYK84+7+Zlp5mo1tA36flMpc2GvJxY1wzzAjp46pq
-	ZuSKP9zH56Hepf3YVj6Zi+5dDLT0WmJ6CvYbff9WI/5vT40YbNyHlxF6MKQqrKz3sST0
-	U/1XIYiLOYbuCO8Bg2206FhKDO2YN24bXgxhdzC2GkcmqnqYb8Zxr7gBCh5lQ+/GyONJ
-	3lsj3B/v1cvNMetTDPCDw3JXxiPdocZ25AsL7WJZ6lP6bCwm29L2JOfq1rKDECRVhdra
-	THtw==
-X-Gm-Message-State: APjAAAVA24M+T4cDMXsXsnBgqUuBjqxWin+zZrjaUfod5zHqmnlfKnEy
-	N2rJMuHyxP8+bKyQ0q6r8Aag9jx8N7A=
-X-Google-Smtp-Source: APXvYqzZ6KVRgDHYd3wpQv7+cRbmItHv6QqksCUuzqYBDwUZ6MH0C+x1c4traU5ndEwsnD9Siktu/w==
-X-Received: by 2002:adf:eb48:: with SMTP id u8mr5067033wrn.283.1579296395171; 
-	Fri, 17 Jan 2020 13:26:35 -0800 (PST)
+	bh=IOddD+/XiMlKZt64BBDT06yUSgxmB6Dss1y+C6mGbIU=;
+	b=WBP+SfJCY2/xC+2obRNl5Hz1tdTjCYx5eWpaUJd+xqPZF4nRHFo7G8KVRXEdw+55SB
+	9N7X0rd44JalzlhQTxoaUwUY0/4higSmP/uxO5RazPJnLsmhszfW5ni+8xDug0AC05Mh
+	Qe67MN6Qc66NxgF5cy+7nwfbfhhjJBNewpFQGpWDZRqLRdLPWDxT5rACDpvTaF8/1W6p
+	sjPNAXlrwmRQhcb3wqZXzkT683BQM8IY5y/vHcHS+rbyUjytbANARo6Vk4MjrvrSX735
+	IDET3pSVJHXrmtWV/Djeb13zLlbmpgn8F+Cqm3S4bn+hxUSn/wkRbH3oAo2u8X2oGeAB
+	oFlA==
+X-Gm-Message-State: APjAAAWH8lEg7vtMgOJ4X66aofff7KeEFKencXIng2qS0lZEMRzDinhN
+	Y1eZ7iAKKOThRn7bCVdr07BwDJut3tE=
+X-Google-Smtp-Source: APXvYqyPddOiE4N6GjZEdmHXHdrQUs4FZ7Dv/kEdQNK5jZ+wzyRmAvUZl4YbqiO+BiRC+6/VlWNM3Q==
+X-Received: by 2002:adf:f501:: with SMTP id q1mr5206894wro.263.1579296396046; 
+	Fri, 17 Jan 2020 13:26:36 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0BBB19EA1F5BE194E084E5.dip0.t-ipconnect.de.
 	[2003:f0:7f0b:bb19:ea1f:5be1:94e0:84e5])
-	by smtp.gmail.com with ESMTPSA id f127sm701415wma.4.2020.01.17.13.26.34
+	by smtp.gmail.com with ESMTPSA id f127sm701415wma.4.2020.01.17.13.26.35
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 17 Jan 2020 13:26:34 -0800 (PST)
+	Fri, 17 Jan 2020 13:26:35 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: kai.kang@windriver.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Jan 2020 22:26:10 +0100
-Message-Id: <20200117212615.32526-5-schnitzeltony@gmail.com>
+Date: Fri, 17 Jan 2020 22:26:11 +0100
+Message-Id: <20200117212615.32526-6-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20200117212615.32526-1-schnitzeltony@gmail.com>
 References: <20200117212615.32526-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 5/5] xfdesktop: upgrade 4.14.1 -> 4.14.2
+Subject: [PATCH 1/5] xfce4-panel-profiles: upgrade 1.0.9 -> 1.0.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,55 +61,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2020 21:26:34 -0000
+X-List-Received-Date: Fri, 17 Jan 2020 21:26:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 4.14.2
+Release notes for 1.0.10
 ========================
-- Update thumbnail when file changes (Bug #14919)
-- Add DnD support for application/octet-stream (Bug #14919)
-- windowlist: Fix ellipsizing (Bug #15851)
-- Add padding to custom actions without icon (Bug #14628)
-- Fix yet another rubber band DnD issue (Bug #16046)
-- Reintroduce workaround for Bug #11283
-- Show file names in tooltips (Bug #15899)
-- fallback style: Highlight selected icons (Bug #15866)
-- Translation Updates: Albanian, Amharic, Arabic, Armenian (Armenia),
-Asturian, Basque, Belarusian, Bulgarian, Catalan, Chinese (China),
-Chinese (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish, Dutch,
-English (Australia), English (Canada), English (United Kingdom),
-Estonian, Finnish, French, Galician, Georgian, German, Greek, Hebrew,
-Hungarian, Icelandic, Indonesian, Interlingue, Italian, Japanese,
-Kazakh, Korean, Lithuanian, Malay, Norwegian Bokmål, Norwegian Nynorsk,
-Occitan (post 1500), Persian (Iran), Polish, Portuguese, Portuguese
-(Brazil), Romanian, Russian, Serbian, Slovak, Slovenian, Spanish,
-Swedish, Thai, Turkish, Uighur, Ukrainian, Uzbek
+New Features:
+- Add openSUSE profile
+- Add new error for invalid configuration files (Xfce #15983)
+- 'Current Configuration' now pulls the current panel state instead of
+the state cached when the program starts (Xfce #16114)
+- A cancellable warning is now displayed when applying configurations
+(Xfce #14559)
+
+Updated Translations:
+English (United Kingdom), Galician, Hindi, Slovenian, Thai
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../xfdesktop/{xfdesktop_4.14.1.bb => xfdesktop_4.14.2.bb}    | 4 ++--
+ ...panel-profiles_1.0.9.bb => xfce4-panel-profiles_1.0.10.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.14.1.bb => xfdesktop_4.14.2.bb} (74%)
+ rename meta-xfce/recipes-apps/xfce4-panel-profiles/{xfce4-panel-profiles_1.0.9.bb => xfce4-panel-profiles_1.0.10.bb} (82%)
 
-diff --git a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.14.1.bb b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.14.2.bb
-similarity index 74%
-rename from meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.14.1.bb
-rename to meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.14.2.bb
-index fe9f40b38..a512a62ff 100644
---- a/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.14.1.bb
-+++ b/meta-xfce/recipes-xfce/xfdesktop/xfdesktop_4.14.2.bb
-@@ -8,8 +8,8 @@ inherit xfce features_check
+diff --git a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.9.bb b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.10.bb
+similarity index 82%
+rename from meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.9.bb
+rename to meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.10.bb
+index 9c9ae94fc..5b5a286a4 100644
+--- a/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.9.bb
++++ b/meta-xfce/recipes-apps/xfce4-panel-profiles/xfce4-panel-profiles_1.0.10.bb
+@@ -10,8 +10,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ DEPENDS += "intltool-native"
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/1.0/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "bee3e251e45ade0ea349366461d6e200"
+-SRC_URI[sha256sum] = "a8c00af838e85d00600dbf442c8741aa21a332fbceba849e0820560630a6e0ce"
++SRC_URI[md5sum] = "6190678bc701c197babcb2389ba46182"
++SRC_URI[sha256sum] = "a84d5e748d53bc5da269954cc3ad7f5ac0c4f5813acfd3892ea6f9064f17fb68"
  
--SRC_URI[md5sum] = "de4b8f6687862ad46dbe4e1ced453f4d"
--SRC_URI[sha256sum] = "f705a016246ec54ab0c688d1a0577f6c2b45a446690aa8d9e5a7ac23efebf882"
-+SRC_URI[md5sum] = "5db09df39b0808f25bd3a3128f8c9e77"
-+SRC_URI[sha256sum] = "a30534461fea907f969f608a11c84be0b1aaad687c591c32cd56a9d274ea3e74"
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[notify] = "--enable-notifications,--disable-notifications,libnotify"
+ do_configure() {
+     # special configure - no autotools...
 -- 
 2.21.0
 
