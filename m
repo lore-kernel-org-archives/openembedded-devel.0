@@ -1,55 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
-	[209.85.128.43])
-	by mail.openembedded.org (Postfix) with ESMTP id C50A47F89E
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id A7DA87FC3D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jan 2020 21:26:31 +0000 (UTC)
-Received: by mail-wm1-f43.google.com with SMTP id d73so8766358wmd.1
+	Fri, 17 Jan 2020 21:26:32 +0000 (UTC)
+Received: by mail-wm1-f51.google.com with SMTP id u2so8989249wmc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Jan 2020 13:26:33 -0800 (PST)
+	Fri, 17 Jan 2020 13:26:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=68WX9J99YRFLP1UXRp7QWq7yj0sednWncCfUMSiwDac=;
-	b=seUOf536gqPXzLhhMhc6NVhxPGGPKApjYe39r2PQ55225cBHz5ggM2QF4c+txo9YIm
-	RnHOoSlj44wXQ0mDOEuKVcTrO3dj36qxkUPWBzepQKLMWF2kYpMiY19Y+bWYj8/37sRv
-	5uVk0iZkng99i59tC7lBhK7Cw/6BJ4/Z8GW6sBsg83SgKayU6f6vMIBj015eaunXdnmF
-	jhY1LAUXpbNmQqgQFiAYTPhtmbMiRMWpcse/MlEeQQMX73PMMP2z+nk7PChne5kTMeAt
-	BeFh8wWEZ0UJa6xq3fUmSd0p/AfoO4MXhRBfXm222mbkzuxYrLUm4bFKnPr3C3Tc6KyO
-	jZaA==
+	bh=EOK2HPvvbJWRjZJM3U//+KPJYUo9Q4mHm2Tif0LctGk=;
+	b=qkKAEdOgUf60eK9ywTcwGGj+uemvJW31VO8TXjlq2oj8SxbHG44EuzKcesrdwr+a+Y
+	2BCnFVoe0RTvprshapUxcU3kMkXi71f5/jSvnQkV90+CStf3Yzk4ebQ5ynb8yMv7ucru
+	aiGNlvjdGNphdH4KZNnWujQQG75U5N9+SdXb1KgTkmal+ZfhOi4A/c7CHfC9XEbpHRWb
+	nx+iEYt05f3aQu0tuzQzsoPOdzD6DxALkZ/bcRur6MJXOD/zbDcYmTIKpZJQi6ebJY3T
+	IXb8WFScZ1CV4XcBzFofMpXq935dQgCLiQrowYPIgiUbIjRY+9o0T3GcruLkCPGWArWh
+	X81w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=68WX9J99YRFLP1UXRp7QWq7yj0sednWncCfUMSiwDac=;
-	b=OtDAS6xG+0rBwfPjMP+x81PJlnQhuED1Kx0qsqS2EqsyexSHrDRmhSu3/NxrDoyk7I
-	0nLoF9aunrABvedkKrIxnXVAuSwAE8SLrrRYQPiFj5nFK/qa4PFjDV0E7/QTf2AiDfzY
-	125ZblCRa0q870umWW0ZF7z4m9lGLDaGKZsTqk/5wh8WjwMUr12gOBsFQleVBTiGZzhj
-	ZPiCSYUZUKSHQPht+GOlhg1crYhKiWHns/esWjNUgstC8CrjqkB23LlF39RpesgPNOZp
-	g8w0pmPn2LJ6XIlrl6mF6WK5vHdIO8BKpaUKpkLgPpY/qJrH7TV91dzAWsYDBjW+nKxD
-	sRRw==
-X-Gm-Message-State: APjAAAXDz+vqKuYPkNvNd/dsM3ZvU4rbYWh1DbYfFt3m7DgZOgJgSMvc
-	0q1B08PPue0c6AbT2wNFgjg=
-X-Google-Smtp-Source: APXvYqwu49fgo+Jy5VeBMwLsFJlySIxjoQffYzdnsca4ZsoSn6NQv9qT39yfHp6Van1ZjPLPuAzieg==
-X-Received: by 2002:a05:600c:2c53:: with SMTP id
-	r19mr6620749wmg.39.1579296392572; 
-	Fri, 17 Jan 2020 13:26:32 -0800 (PST)
+	bh=EOK2HPvvbJWRjZJM3U//+KPJYUo9Q4mHm2Tif0LctGk=;
+	b=nd9Mnmgi1P6RslHeYNyebDrH9tSc3fTDgoNZ+9kXjflkk6YfrZI42pldnfwrOMrILA
+	vB/pHhldCI3b8tj+tOE5nfVFOeDcmwcWrKHV25TMEIUHrn+xIMI2R5HyLKo8DX91SZ6R
+	549mAowIqabf2SqDaOS+Op/eXqK5Wb0yZrmZ2fYBggIMDOyFRcG4OF3dlBl7X0dM+9/g
+	8rpz9xh8+WBIWJ0pStgkn3HSKZGzH3NzqYIYTlAL17I8Cv1q7Isd9BpDthdfzWmwBoBU
+	qi3vB4Y7wQ8Mr5aKwYIzlZKFC6WZOE9L6NtRMvZD6WkshHo9sqMJGbwmF/u5R7vI7bLA
+	m8Jg==
+X-Gm-Message-State: APjAAAXtPyvZtve5V+Zq9+Hii/lMc9Bkr4vhHI8wJVkZR+v1mVNitjtM
+	yYzJBH5iKF1qtckWHQZTNMUONho3BJE=
+X-Google-Smtp-Source: APXvYqy20eAarIZ75bZBACH8A4AnhWqdkuXBcPZb2Y0r2SVFUWW3sDN7TiC3DBgFjHz0FKFfs/2V1w==
+X-Received: by 2002:a1c:ba89:: with SMTP id k131mr6481767wmf.123.1579296393444;
+	Fri, 17 Jan 2020 13:26:33 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F0BBB19EA1F5BE194E084E5.dip0.t-ipconnect.de.
 	[2003:f0:7f0b:bb19:ea1f:5be1:94e0:84e5])
-	by smtp.gmail.com with ESMTPSA id f127sm701415wma.4.2020.01.17.13.26.31
+	by smtp.gmail.com with ESMTPSA id f127sm701415wma.4.2020.01.17.13.26.32
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 17 Jan 2020 13:26:31 -0800 (PST)
+	Fri, 17 Jan 2020 13:26:32 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: kai.kang@windriver.com,
 	openembedded-devel@lists.openembedded.org
-Date: Fri, 17 Jan 2020 22:26:07 +0100
-Message-Id: <20200117212615.32526-2-schnitzeltony@gmail.com>
+Date: Fri, 17 Jan 2020 22:26:08 +0100
+Message-Id: <20200117212615.32526-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20200117212615.32526-1-schnitzeltony@gmail.com>
 References: <20200117212615.32526-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/5] xfce4-panel: upgrade 4.14.2 -> 4.14.3
+Subject: [PATCH 3/5] xfce4-session: 4.14.0 -> 4.14.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,39 +61,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Jan 2020 21:26:32 -0000
+X-List-Received-Date: Fri, 17 Jan 2020 21:26:33 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 4.14.3
+Release notes for 4.14.1
 ========================
-Please note: This release replaces 4.14.2 (bad release tarball)
-- Fix build: Always provide files for vala binding in dist tarball
+- Fix session crash at logout (Bug #16105)
+- settings: Don't make 'saved sessions' tab reorderable
+- Translation Updates:
+  Albanian, Arabic, Armenian (Armenia), Asturian, Basque,
+  Belarusian, Bengali, Bulgarian, Catalan, Chinese (China),
+  Chinese (Hong Kong), Chinese (Taiwan), Croatian, Czech, Danish,
+  Dutch, English (Australia), English (United Kingdom), Finnish,
+  French, Galician, German, Greek, Hebrew, Hungarian, Icelandic,
+  Indonesian, Interlingue, Italian, Japanese, Kazakh, Korean,
+  Lithuanian, Malay, Norwegian Bokmål, Norwegian Nynorsk,
+  Occitan (post 1500), Polish, Portuguese, Portuguese (Brazil),
+  Romanian, Russian, Serbian, Slovak, Slovenian, Spanish,
+  Swedish, Thai, Turkish, Uighur, Ukrainian, Vietnamese,
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{xfce4-panel_4.14.1.bb => xfce4-panel_4.14.3.bb}          | 4 ++--
+ .../{xfce4-session_4.14.0.bb => xfce4-session_4.14.1.bb}      | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfce4-panel/{xfce4-panel_4.14.1.bb => xfce4-panel_4.14.3.bb} (90%)
+ rename meta-xfce/recipes-xfce/xfce4-session/{xfce4-session_4.14.0.bb => xfce4-session_4.14.1.bb} (87%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.1.bb b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.3.bb
-similarity index 90%
-rename from meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.1.bb
-rename to meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.3.bb
-index 88ce7f46c..76abef054 100644
---- a/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.1.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-panel/xfce4-panel_4.14.3.bb
-@@ -8,8 +8,8 @@ inherit xfce gtk-doc gobject-introspection features_check remove-libtool mime-xd
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[md5sum] = "3323588f1c18f04891e013243da1e355"
--SRC_URI[sha256sum] = "9c3c78b49ddfac7d42a804e6a6ad9d22ad64ec60bbe17d8724bc52d3e3f6d114"
-+SRC_URI[md5sum] = "177818d4a84633c1d489f703fffe905d"
-+SRC_URI[sha256sum] = "ef22324d26e5af735134bb10f85b6e16525ac9f48be8d2f6b634142fbfcabbc9"
+diff --git a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.14.0.bb b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.14.1.bb
+similarity index 87%
+rename from meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.14.0.bb
+rename to meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.14.1.bb
+index 37560c2db..f50a545dc 100644
+--- a/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.14.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-session/xfce4-session_4.14.1.bb
+@@ -15,8 +15,8 @@ PACKAGECONFIG[polkit] = "--enable-polkit, --disable-polkit, polkit"
  SRC_URI += " \
-     file://0001-windowmenu-do-not-display-desktop-icon-when-no-windo.patch \
-     file://0002-use-lxdm-to-replace-dm-tool.patch \
+     file://0001-configure.in-hard-code-path-to-iceauth.patch \
+ "
+-SRC_URI[md5sum] = "635361f99a01b2d26c430a520b6d1314"
+-SRC_URI[sha256sum] = "14fb6db74eb69eb400673856ba307a0e57f577cf77c3561a5910151e3d52043f"
++SRC_URI[md5sum] = "36593207ac0c67c81907a4846f4b604c"
++SRC_URI[sha256sum] = "dc1c90da56b2d8df18fec6c0c30d6bed4e7646d8c8214fc931c952ba86c3b77b"
+ 
+ ALTERNATIVE_${PN} = "x-session-manager"
+ ALTERNATIVE_TARGET[x-session-manager] = "${bindir}/xfce4-session"
 -- 
 2.21.0
 
