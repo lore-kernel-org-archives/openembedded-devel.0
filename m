@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
-	[209.85.221.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D5427FCCA
+Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
+	[209.85.221.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F05F7FCCE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2020 11:28:21 +0000 (UTC)
-Received: by mail-wr1-f49.google.com with SMTP id d16so25050498wre.10
+	Sat, 18 Jan 2020 11:28:22 +0000 (UTC)
+Received: by mail-wr1-f54.google.com with SMTP id d16so25050518wre.10
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat, 18 Jan 2020 03:28:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=sE84qad/i4onRM66f1HmdpL3fPftZMqoWeN+m+CC9aw=;
-	b=siXBXLyLe3DpJfGaCdjezvBI5NhXGQeHGUk/JHzi/AYulqqrG88iwVdrPg6CIb8bmc
-	9P4n05YC8HFvZhiWXIW1UPazl3qii33Yyh3Md4AjldYHwBv1HuiMtDClDi5rVkGv5Jtl
-	K2hp9O/kC4J9cjSaNs8yEQqFxvvvrYjKPIws/+WvM6cT3qu5Rth6yuMGePeY80yCUkll
-	G6tq9Yrt0JEcgLjAGJgORRVJSqQBGGyYBx7PLp9NhYJDBsIjHmyaF6GaYL6GrKmg/BoR
-	HqrWfNsYpHd8eBfKShpnpdS/3PJCQ0+o0E1F67jLs12PdiO1CnPd6sT+Wq8tkKJ/j7ag
-	NHeg==
+	bh=e2o26wxzT2NwX0wQ/b8S0gSC/glT48jrbZS/7wRfne0=;
+	b=r9Yx5nvvdIuDNFIs7qkQPodFA9G+1x/1sfuUokN4ZjZcpDfvoGHsP/zaJpNh7+PPZK
+	W6DR/2rxaZ/8N4X97fiIvcTMFP9zWrK5vwIsCi9AZytaWdVtj5g2xSPbB0o/OVycRO1Q
+	SGhzXQ3W7b0rOFZT6oK3DXaT1JMXEHf7SUBhUxpEFYKksh9D3xH5x1yPy+jGp6B4uo8M
+	HcjFcZIJHNmo5k2DIDf+qAmBdSY+JF84qfDbEBbz8M9G9At8hCNxbQbmcZECebcJyNtd
+	/oNewtHVh0273vk/p59BOmAQZNO0dE4C9Ejw/Qg3dGzIBOom8UCGpMSAngIBlLbn9avK
+	5JwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=sE84qad/i4onRM66f1HmdpL3fPftZMqoWeN+m+CC9aw=;
-	b=e4wg/acjrw3iYBuNsBJocTmY9lnE3Jb9hPB2W4TWhdrtucYKdn03I6cWq0AYfhJivM
-	X/KuUFiUq5PUjUNoiGgOdPF7oy+/KUgBEWenwcjgO9JKfXFoZ9nQlSUAfBXD8h9gMaSh
-	+Vq5fZKJEJ6IM2E86RZ1xF8x+X9JE4X8KOUBOqo7SLMP6yjttY6JGTdgqDvl3bJxF1jF
-	jSIek2z8o2P4i9Dpkei5T06QZ/0BLA+NGu/QdL4Y+bZDP+UsnCFfcSGkSBwhxlywUTiE
-	mjeAgUeTqTfyKfrhUJ9UwFgIPmHGKHW1LwyHjeQnxzBuwDJQWzCaHwAN47KqY8tZILNa
-	VU+A==
-X-Gm-Message-State: APjAAAUyg1Q+Cy0VV+vVq79nv0tytmLjScKIdlx7PmkOPP/cIZsFpGrB
-	eZf5wFV0sAungJjAuBQ/SQdtW6p0d6E=
-X-Google-Smtp-Source: APXvYqzbphAC2+Y/zGVSZIymnbxHpsy9syDksha+BTUgxKcSuMRIQ5LGB2sPp90unCx/CIytJ2ntPw==
-X-Received: by 2002:a5d:6ca1:: with SMTP id a1mr7879859wra.36.1579346902245;
-	Sat, 18 Jan 2020 03:28:22 -0800 (PST)
+	bh=e2o26wxzT2NwX0wQ/b8S0gSC/glT48jrbZS/7wRfne0=;
+	b=PMeueWLfKbvH2fOoz60IzRF115xr5tzr9/ej4rws59fyNdK/UbiAHi/ur8UOjxsyvw
+	Vqka0tikdr3P28A4XD/twndjION49rKSmqzNUzqKDsq8fzpXEGKzUgXinnD780QDdGux
+	bLhixsuuKUCa/pdRX319Ds9i1DNpCyJL6MD5/NsvkH8FkobEa5sNDjcMRKgswWKp5Aqt
+	9kdb/b21PLQ8SNEU5aBnpe01CpTWkvKSxqxejVWGHPqepQfPkAyeZ2qJg2kkpWGuKd7W
+	Pz6aUmBgi032vQMZn+cKf58pnVilJcWxoDgJT7COyAQ9mXOvK6LCdxCZ4SzgZURJSZwL
+	KaOw==
+X-Gm-Message-State: APjAAAXuOoN+CJGfgX3qb8HO2p7jjuHh5YxNBfXzYsfmSEpabzRVnc51
+	2cHObJ02gaem7T4HQHeA3z0z138whYE=
+X-Google-Smtp-Source: APXvYqySNeMRWYzBM/Qn5t4dKFq1es5q30t4ttdlxEPGFtGZ5a7ah5VLqNo9gNL8NgNVrCHuN0//Zg==
+X-Received: by 2002:adf:e641:: with SMTP id b1mr8063980wrn.34.1579346903044;
+	Sat, 18 Jan 2020 03:28:23 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F3CA15804DD3CACFED9DBE9.dip0.t-ipconnect.de.
 	[2003:f0:7f3c:a158:4dd:3cac:fed9:dbe9])
 	by smtp.gmail.com with ESMTPSA id
-	b15sm2965720wmj.13.2020.01.18.03.28.21
+	b15sm2965720wmj.13.2020.01.18.03.28.22
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 18 Jan 2020 03:28:21 -0800 (PST)
+	Sat, 18 Jan 2020 03:28:22 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Jan 2020 12:27:52 +0100
-Message-Id: <20200118112757.5287-19-schnitzeltony@gmail.com>
+Date: Sat, 18 Jan 2020 12:27:53 +0100
+Message-Id: <20200118112757.5287-20-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20200118112757.5287-1-schnitzeltony@gmail.com>
 References: <20200118112757.5287-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 18/23] orage: add mime-xdg to inherit
+Subject: [PATCH 19/23] vlc: add mime-xdg to inherit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,28 +62,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Jan 2020 11:28:22 -0000
+X-List-Received-Date: Sat, 18 Jan 2020 11:28:23 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-xfce/recipes-apps/orage/orage_4.12.1.bb | 2 +-
+ meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-xfce/recipes-apps/orage/orage_4.12.1.bb b/meta-xfce/recipes-apps/orage/orage_4.12.1.bb
-index 9662b614f..ae8180233 100644
---- a/meta-xfce/recipes-apps/orage/orage_4.12.1.bb
-+++ b/meta-xfce/recipes-apps/orage/orage_4.12.1.bb
-@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=9ac2e7cff1ddaf48b6eab6028f23ef88"
- DEPENDS = "gtk+ xfce4-panel libical popt"
+diff --git a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
+index fa7174d32..e29ade65c 100644
+--- a/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
++++ b/meta-multimedia/recipes-multimedia/vlc/vlc_3.0.8.bb
+@@ -24,7 +24,7 @@ SRC_URI = "http://download.videolan.org/pub/videolan/${BPN}/${PV}/${BP}.tar.xz \
+ SRC_URI[md5sum] = "744442ec0c145453ea1d257914c8072e"
+ SRC_URI[sha256sum] = "e0149ef4a20a19b9ecd87309c2d27787ee3f47dfd47c6639644bc1f6fd95bdf6"
  
--inherit xfce-app
-+inherit xfce-app mime-xdg
+-inherit autotools gettext pkgconfig features_check
++inherit autotools gettext pkgconfig features_check mime-xdg
  
- SRC_URI += "file://0001-drop-setting-is_utc-member-of-icaltimetype.patch"
- 
+ ARM_INSTRUCTION_SET = "arm"
+ export BUILDCC = "${BUILD_CC}"
 -- 
 2.21.0
 
