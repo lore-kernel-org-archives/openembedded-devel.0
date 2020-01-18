@@ -1,52 +1,47 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
-	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id F3D847FC42
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+	[209.85.221.47])
+	by mail.openembedded.org (Postfix) with ESMTP id EE2847F2A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2020 08:41:40 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id 20so9841851wmj.4
+	Sat, 18 Jan 2020 11:15:15 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id z3so25042583wru.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2020 00:41:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:user-agent:mime-version:content-transfer-encoding;
-	bh=5cLqdS2ykwY+s0+3V2oMEkUp6SZNVymfVLLOjhhCFt4=;
-	b=cM93nSazA7KdEQdpiGhwL40ntbIwfbmhhE75lTCjYkhLqOozxfcEyRd4g1+8McXMxZ
-	/qjhREEWipUIz9+NZ5mx+MfvhQUZhYcgsKMVXR2OH5HI/iv4YsIkX6pIjwqC2mGLIome
-	jbGeRunqRaM3YFH1RjSkUi2tr/Ps+Ymtl/ho8=
+	Sat, 18 Jan 2020 03:15:17 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=yPzTkodCQxzXs/PTJf6JBMdOko3/ublaI+bQ+PdRTmg=;
+	b=mFDCJSihKsxOEYxS1sgxhGn44KivN5eqsQPIRTxCmxjqlkPsLMRf1v2b5MCB8k4smI
+	Hzbzn2V4vw0nOakCSz2A4KIMB9D9HwSDOV7ynVZs7RWGtVXuvRuEMAbrzEBFjassseaM
+	c0hyLcVB6vvgNa+4HwiOGB+c0HbtkxhWNfdUGKEYpTNo+ScfmI7+XkxklmR8N04DqyOq
+	XzO4+lJ9g/X60wE7zjm6b0T9g1hzH72k9HM4IJNA2/R6BlTDz0fdgTdQTJBb2EjSi7mM
+	5a2NiXx+UDsh5336mxTnVx+0GyvqPN1OzWtYb0ahlVsIWK0nkIgiCWG8pOt3Anz0bFKt
+	FP6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:user-agent:mime-version:content-transfer-encoding;
-	bh=5cLqdS2ykwY+s0+3V2oMEkUp6SZNVymfVLLOjhhCFt4=;
-	b=p9FHQUfTzIV4bXqlIoOfasmCtfJHqQRt4pbKqxn7eDx07Yi0ShcqxhISgBDjBJI8k0
-	ZVeliUsWYwB5ax1/1/nlnePdj/THEc2kMO37l63wF9DZD64qhmdWjImJOC6FT2+3Yi4Z
-	2eTzfl1/VwvPnuYhIkdu2mEGF7+YcCVT8dTs910WCcybnyXbgEyNbGDYOPVSyZY2Oz7p
-	Rp4XL+9WI6Ij0iKEGyudIH5ZTECuXjf7N2HnypNuJVS2YNQOVal+qT2JKwu+n3514CQJ
-	v/E2WyqJWqrmDpi6OJKGr2B+LfQIZt7TkENp7PE+QbQ4w+wOlbMyxwC0dAonyNIXrMZI
-	vJMg==
-X-Gm-Message-State: APjAAAUC55JilIzkCWJ/srvcFIfTGfw/DNs5VjPmHXXGfNfMYPBXLXyF
-	/P7so75qC26fGC1+111SAAIuMQ==
-X-Google-Smtp-Source: APXvYqzNF2bukQXWdwrgiOYqQnKmkmOPegJ951hwayyvddEcwMp/7so0YOmMCOLERb9FLonqIbtXkQ==
-X-Received: by 2002:a7b:c386:: with SMTP id s6mr8639746wmj.105.1579336901523; 
-	Sat, 18 Jan 2020 00:41:41 -0800 (PST)
-Received: from hex (5751f4a1.skybroadband.com. [87.81.244.161])
-	by smtp.gmail.com with ESMTPSA id
-	t25sm12958580wmj.19.2020.01.18.00.41.40
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=yPzTkodCQxzXs/PTJf6JBMdOko3/ublaI+bQ+PdRTmg=;
+	b=hcU+X/jPr21IfnKYIp3ggH3rtGy8zCCMhMIzH4YNlO1wavxt5eyoImIQozrR3UChlN
+	q4IKlpS3eTvam4ySN8tDISAE5bIUqJeI+PdzCLrezldAwUBLwcUUGicNerRkgI5qi3dt
+	T+UUnjHxMRwtmJ6sAnFjVo6z4urCGXNaGpSJeW9Ltp8fJApcrPY3ftyvUe0jr/r2pqkQ
+	wb/GS0oTT7kuVQQRiWnjDUjvUKq/Mg3CKqbixn5atMyiblyncGvc+YxSZrg/1eRhaFJ5
+	FeQ4lmXpr1Kq9VL/8PRklFSI4gQyAyR6fJuMC867TQPI8lGrf4HLRJPQHy3Vxy5Y3G4U
+	bb8g==
+X-Gm-Message-State: APjAAAWSD/c8U1+fdsWR/PJRxhNNGVH7ob07Qs6Gh82bRJWD+4NNo5zq
+	PftcjH59OwdMDEy3OLcXL8Po6uAE
+X-Google-Smtp-Source: APXvYqwb970hw5F4W4Fd6nD85I3RzU6t+P4Lbyq8sJp+hjd7sV9VmBHGP7/jbQjQ2ro18/3lMOrmxQ==
+X-Received: by 2002:adf:f103:: with SMTP id r3mr7914691wro.295.1579346116429; 
+	Sat, 18 Jan 2020 03:15:16 -0800 (PST)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+	[91.135.6.246])
+	by smtp.gmail.com with ESMTPSA id a9sm2719870wmm.15.2020.01.18.03.15.15
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 18 Jan 2020 00:41:40 -0800 (PST)
-Message-ID: <c87a580e6c5d567266026ffc903e9bf3e6e80d99.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Ross Burton <ross.burton@intel.com>, 
-	openembedded-core@lists.openembedded.org
-Date: Sat, 18 Jan 2020 08:41:39 +0000
-In-Reply-To: <20200117141632.3809-1-ross.burton@intel.com>
-References: <20200117141632.3809-1-ross.burton@intel.com>
-User-Agent: Evolution 3.34.1-2 
-MIME-Version: 1.0
-Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC PATCH] python: remove Python 2 and all supporting classes
+	Sat, 18 Jan 2020 03:15:15 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 18 Jan 2020 11:15:13 +0000
+Message-Id: <20200118111513.110709-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-filesystems][PATCH] fatcat: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,34 +54,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Jan 2020 08:41:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 18 Jan 2020 11:15:16 -0000
 
-On Fri, 2020-01-17 at 14:16 +0000, Ross Burton wrote:
-> Python 2 ceased being maintained on the 1st January 2020.  We've
-> already
-> removed all users of it from oe-core so the final step is to move the
-> recipe and supporting classes to meta-python2.
-> 
-> The following are removed in this commit:
-> - python and python-native 2.7.17
-> - python-setuptools
-> - The classes pythonnative, pythondir, distutils, setuptools
-> 
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
+fatcat is a tool designed to manipulate FAT filesystems, in order to
+explore, extract, repair, recover and forensic them. It currently
+supports FAT12, FAT16 and FAT32.
 
-Thanks Ross. I tested this on the autobuilder, only 'surprise' is meta-
-gplv2 fails:
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
 
-https://autobuilder.yoctoproject.org/typhoon/#/builders/75/builds/1458
+ .../recipes-utils/fatcat/fatcat_1.1.0.bb         | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb
 
-(python dependency of mc). Just delete mc from that layer?
-
-Some of the other failures there are from other bits of -next.
-
-Cheers,
-
-Richard
+diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb
+new file mode 100644
+index 000000000000..f78d5d594a21
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "FAT filesystems explore, extract, repair, and forensic tool"
++DESCRIPTION = "This tool is designed to manipulate FAT filesystems, in order to \
++explore, extract, repair, recover and forensic them. It currently supports \
++FAT12, FAT16 and FAT32."
++HOMEPAGE = "https://github.com/Gregwar/fatcat"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=57fbbfebd0dd1d6ff21b8cecb552a03f"
++
++SRC_URI = "git://github.com/Gregwar/fatcat.git"
++
++SRCREV = "b923172d97c578297964c062e3a92799e2a9eca4"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
+-- 
+2.17.1
 
 
