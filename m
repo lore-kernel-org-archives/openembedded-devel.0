@@ -1,46 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
-	[209.85.219.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FB0E7FC38
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 5F5B07F896
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jan 2020 10:20:08 +0000 (UTC)
-Received: by mail-qv1-f68.google.com with SMTP id l14so12740967qvu.12
+	Sun, 19 Jan 2020 17:25:39 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id b9so14261474pgk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jan 2020 02:20:09 -0800 (PST)
+	Sun, 19 Jan 2020 09:25:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=QpGVHo1NC9fM8Lg+T6gwUf1Rb6f0VFWkgPYffVGqKU0=;
-	b=tnMEkD2QEgGuCrvm6xbEGj+g+ZHh296PAAORYi9K258vnD1E3SuZ/JmVvJMm44jgW2
-	GTi1i9UfopTHrlAzApKlYzMRool0lYBXNF3ra8mSa+MFTaeSM/6edY7ZdpBEOEFGrcai
-	IFGaMA3QLxhYmMK7UIbq30Zhl3Fqt/9fN4KD2qcQz0byCIqzn+OPSmMKTm/U53kmxY+G
-	UR2JhGGVdoWVOtywSLnnVG/6w2g3fGa3O8WCG3rOEvWM4W2wfkIsooZThIyTqiNOk5u9
-	YSvmWMURpvNNprPDf1aOlUXisMd0vkGZG+mvHdd/1TD09FDo18p8Oe7PpXZ+mXwExQoz
-	rgwg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=dOMm5CTCCg/nS07eb6dgUL2vZp3b/z6WfEA/IeE32f8=;
+	b=dxU9hUmq90JYh3C0KiKsTdCrcxgPhXlwrgdrqJlPXCyfHpjpoA3HhDzEXuMxCuuPtk
+	2TfLq3j01onAtLearIIcHyfATfhw2A15vwYav6p+L7SqoYLsdo9kyauPYtsjPMcA/yNf
+	M1BX5H0KlScruUzGOshHLVwpgHAM6wxurUoWTlQCZff7lyr14saFXvfgpulIv5CrJWku
+	eJDfc9ZywFNlr296roSmiG2l0kzKULvmSNztyZmBAMryLzSD6DBsb1z4HZCljnrlrAkm
+	QCEruCbaGQEDzkCU0IEFqSsTV4179q/XKDKbalaj9AW5YLBPHb8GZWBHD4C5PUkoyJAQ
+	ZDlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=QpGVHo1NC9fM8Lg+T6gwUf1Rb6f0VFWkgPYffVGqKU0=;
-	b=Yddf9GaMpBMwTN6jkqiEZTCoEwbyZtTny+a1sT8FEOdcr2T+dfEPkINj3wZHBK7OFw
-	vnve62XmsFKWQR5oJEX6ESGVSfpPVNqwvmrRgp1wIihTO7pAZC7xR0T4LcHoFcEobQCa
-	kM6emSKAEqWbVxxvYSzYpQQdmhaOVbN/fnU0sZiF7vzg2ItPpcx4agOxgKoAh4Bb9CmP
-	3DgO9ZI3lCXZVUe886btCFiENxo871Jj90S/peE12mQG7ySdQv5Gfro2kaA8vCHHvEAt
-	Ze5mqpWdPDpbXcy62knhsHhSOjoFHEcsoOJ6huQgC/jLAE2qpudDtocQY799OQdaVfgB
-	mr+A==
-X-Gm-Message-State: APjAAAUe/iTxRHw8kc6q5yWigMf+BVP1kUHdiHpe0yn7IVSOJMvPK0yV
-	KzqSrFU2MOYFTJ+FvheOb+1siAiC8zk4q////wU=
-X-Google-Smtp-Source: APXvYqyHnEkctBI+cvd9hLmeKdttZT4/UfCBxamSwCrINjkam+BXpejeR0nyQ1HoX9Yo4yS0H3ArJOz0hHoSiNJNgHU=
-X-Received: by 2002:a0c:fa4b:: with SMTP id k11mr15581936qvo.55.1579429209232; 
-	Sun, 19 Jan 2020 02:20:09 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=dOMm5CTCCg/nS07eb6dgUL2vZp3b/z6WfEA/IeE32f8=;
+	b=HbTk0PsIX8eV7e2ZS8LHRv2Sq+pSSk+R6rQd71r6GzlvSyRHRi0BtZ1gxRaUgRuaVI
+	p1yjUsJ6yFvUskUE5cRvxOgPBHQ5k/jv4EkoMC/3tsj7Q2rHXCRATojdbyspvT2ZNYcl
+	j+V7+EjP4msbGT4adk+WQlFg27fM9FCPRwveBAlRRhYHGnOtjazgpKIgV4ZLRKS2sqli
+	9GUYu1NAtgI5Z8pAqd9RUmmvCS/6jRkLwIdtkNEDGmPBwEah0kCLN0IuQ0A2/S84Yy+H
+	UOOFvzeV8Xb7h1CFAr74HjMgt6MzV0Mu/XQ0FzZV6ypORvCReTG2a7JpuUdpbGtypYNh
+	aTgQ==
+X-Gm-Message-State: APjAAAW1twigtyhmKE+8KqqP5yoNLRj3024beX1/UYy3g1G3IldU89qB
+	c7HQt8TQ0MkNlgC8OKRG9ik36bLCuCM=
+X-Google-Smtp-Source: APXvYqxq9d4N5nwkGVTgMHk4GdGh7xTMD40Bb7UUwxHXj2c6uTImH6IVaZ3Ewe2hCv98ahDPE/HtKw==
+X-Received: by 2002:a63:1945:: with SMTP id 5mr57690600pgz.310.1579454740115; 
+	Sun, 19 Jan 2020 09:25:40 -0800 (PST)
+Received: from thetis.hsd1.or.comcast.net
+	([2601:1c0:6080:4500:b5c2:b07:e8c5:4266])
+	by smtp.gmail.com with ESMTPSA id
+	g8sm35807933pfh.43.2020.01.19.09.25.39
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 19 Jan 2020 09:25:39 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 19 Jan 2020 09:25:19 -0800
+Message-Id: <20200119172519.26681-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-References: <20200118111513.110709-1-alex.kiernan@gmail.com>
-In-Reply-To: <20200118111513.110709-1-alex.kiernan@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 19 Jan 2020 02:19:42 -0800
-Message-ID: <CAMKF1spuyKJFuHMAb-EVFjLPE_cbqN9jd0TKD9yJffz8tG1O_A@mail.gmail.com>
-To: Alex Kiernan <alex.kiernan@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-filesystems][PATCH] fatcat: Add recipe
+Subject: [meta-python2][PATCH] python-humanfriendly: add missing RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,60 +58,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jan 2020 10:20:08 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 19 Jan 2020 17:25:39 -0000
+Content-Transfer-Encoding: 8bit
 
-On Sat, Jan 18, 2020 at 3:15 AM Alex Kiernan <alex.kiernan@gmail.com> wrote:
->
-> fatcat is a tool designed to manipulate FAT filesystems, in order to
-> explore, extract, repair, recover and forensic them. It currently
-> supports FAT12, FAT16 and FAT32.
->
+Missing run-time dependencies:
+  - python-html (humanfriendly.compat -> html.parsing)
+  - python-multiprocessing
+  - python-unittest (humanfriendly.compat)
 
-Fails musl build
-https://jenkins.ccp.xcal.tv/jenkins/view/YP/job/Yocto-world-musl/903/console
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
+---
+ recipes-devtools/python/python-humanfriendly_4.18.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-it needs to link with libargp on musl so its best to check a argp
-function in libc and then check in libargp as backup see
-https://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-multimedia/v4l2apps/v4l-utils/0002-contrib-test-Link-mc_nextgen_test-with-libargp-if-ne.patch
+diff --git a/recipes-devtools/python/python-humanfriendly_4.18.bb b/recipes-devtools/python/python-humanfriendly_4.18.bb
+index d91fa1c3..96f6f833 100644
+--- a/recipes-devtools/python/python-humanfriendly_4.18.bb
++++ b/recipes-devtools/python/python-humanfriendly_4.18.bb
+@@ -15,12 +15,15 @@ inherit pypi setuptools
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-datetime \
+     ${PYTHON_PN}-fcntl \
++    ${PYTHON_PN}-html \
+     ${PYTHON_PN}-io \
+     ${PYTHON_PN}-logging \
+     ${PYTHON_PN}-math \
++    ${PYTHON_PN}-multiprocessing \
+     ${PYTHON_PN}-numbers \
+     ${PYTHON_PN}-shell \
+     ${PYTHON_PN}-stringold \
++    ${PYTHON_PN}-unittest \
+ "
+ 
+ BBCLASSEXTEND = "native"
+-- 
+2.25.0
 
-also check rng-tools recipes in core
-
-> Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
-> ---
->
->  .../recipes-utils/fatcat/fatcat_1.1.0.bb         | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb
->
-> diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb
-> new file mode 100644
-> index 000000000000..f78d5d594a21
-> --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY = "FAT filesystems explore, extract, repair, and forensic tool"
-> +DESCRIPTION = "This tool is designed to manipulate FAT filesystems, in order to \
-> +explore, extract, repair, recover and forensic them. It currently supports \
-> +FAT12, FAT16 and FAT32."
-> +HOMEPAGE = "https://github.com/Gregwar/fatcat"
-> +
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=57fbbfebd0dd1d6ff21b8cecb552a03f"
-> +
-> +SRC_URI = "git://github.com/Gregwar/fatcat.git"
-> +
-> +SRCREV = "b923172d97c578297964c062e3a92799e2a9eca4"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit cmake
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
