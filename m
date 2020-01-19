@@ -1,33 +1,52 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D8EAA7D208
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com
+	[209.85.216.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D7C57D200
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jan 2020 02:58:03 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,336,1574092800"; d="scan'208";a="82243696"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 19 Jan 2020 10:58:03 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 199B7406AB15
+	Sun, 19 Jan 2020 03:40:23 +0000 (UTC)
+Received: by mail-pj1-f66.google.com with SMTP id a6so5069321pjh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jan 2020 10:48:50 +0800 (CST)
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Sun, 19 Jan 2020 10:58:01 +0800
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Sun, 19 Jan 2020 10:57:59 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 19 Jan 2020 10:59:26 +0800
-Message-ID: <20200119025926.18728-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Sat, 18 Jan 2020 19:40:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=31yL5YEnnJbNGqijyc6DeQXACd+eHXor5XN1W1bBL3Q=;
+	b=Yi3AAoJ8Sq5JeK67+asKi6ocBBkffRjr3FVed9pGskYx7hTc02tD0zdewZyHeNMn9/
+	RAJY51drdyDei3gnX1MqvzD2AdHUB0xlmNn4luW7Cf1IzkOw0LzJ+zQyxJ9QlcLFi8Cd
+	JET5p/maxbIJ2QBmZ4jCoOFpgogtqGWuhMlwg5ketHQ/EOJwIsXTBPn1fkAzvL18DW/3
+	MPujEFMA0GECguEkOXTLxSodBHoPieGjc7gpF1EKRT+Fw1D/Z6jkhVOR/IHkGdOMDmId
+	ezoZbTVQTkzK229uHZWcSsRvaFfZLstGXMcrhwnPghoSF3x5SSSae+kddLqSD38iQYFT
+	jggQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=31yL5YEnnJbNGqijyc6DeQXACd+eHXor5XN1W1bBL3Q=;
+	b=c/hIjmcMY5H2H8r1jkKSpvzl2MOuEEA6yunhbj1qU/Zow2M9LqDHDrvL50bLyn3o97
+	gOWFbdGx564ZvslShOG1PzeUoTa+B1t6QxP5KXVnnKNNZwxAsUeYedMQS9Q2HuIQiJec
+	41fq3trN+e7XmAhMBup5k/pvnYeZwhyWDprm25K9nQQ8WO4AEYoDqLpvPjHZW3pBqoLa
+	nvfECcy4tnCi3BNiSdp+LRDIk6JHb2w2zpfILAD7jiAn9r+1CL6QGsOgWw0DKvUb6oGz
+	Oha2ArwxRylPVGrMJkdvtcLgv5OyGEPc3ncYERiYIhL6gSUrLYTQzNebLJE0dRT/i3WQ
+	Vvog==
+X-Gm-Message-State: APjAAAVA8rDfNGZ+kaDa2VEpCh+Gp8p8GnjH7VlxjUjR9LojfsIM83m/
+	TqOQCugw0OctVotAglsL2V72u/vjomE=
+X-Google-Smtp-Source: APXvYqymM0SDt63wQmgh03WDbO43zVrrxsOGQtGAjjY3qjg2FYzAi4seXbO2YWeOKQtlgXIK3y6/OA==
+X-Received: by 2002:a17:902:bf49:: with SMTP id
+	u9mr8011081pls.199.1579405224992; 
+	Sat, 18 Jan 2020 19:40:24 -0800 (PST)
+Received: from thetis.hsd1.or.comcast.net
+	([2601:1c0:6080:4500:b5c2:b07:e8c5:4266])
+	by smtp.gmail.com with ESMTPSA id
+	144sm36103788pfc.124.2020.01.18.19.40.24
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 18 Jan 2020 19:40:24 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 18 Jan 2020 19:35:58 -0800
+Message-Id: <20200119033558.20923-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 199B7406AB15.A601C
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-python] [PATCH] python-sentry-sdk: upgrade 0.7.14 -> 0.14.0
+Subject: [meta-python2][PATCH] python-slip-dbus: add RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,39 +59,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jan 2020 02:58:04 -0000
+X-List-Received-Date: Sun, 19 Jan 2020 03:40:24 -0000
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+The dependency on python-six as inadvertently missed when
+porting to meta-python2.
+
+The original recipe was missing addtional dependencies on
+python-dbus, python-pygobject, python-decorator
+
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-sentry-sdk.inc     | 4 ++--
- ...hon3-sentry-sdk_0.7.14.bb => python3-sentry-sdk_0.14.0.bb} | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-sentry-sdk_0.7.14.bb => python3-sentry-sdk_0.14.0.bb} (100%)
+ recipes-devtools/python/python-slip-dbus_0.6.5.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-sentry-sdk.inc b/meta-python/recipes-devtools/python/python-sentry-sdk.inc
-index 0c123cef4..3714cd0ff 100644
---- a/meta-python/recipes-devtools/python/python-sentry-sdk.inc
-+++ b/meta-python/recipes-devtools/python/python-sentry-sdk.inc
-@@ -5,8 +5,8 @@ HOMEPAGE = "https://github.com/getsentry/sentry-python"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
+diff --git a/recipes-devtools/python/python-slip-dbus_0.6.5.bb b/recipes-devtools/python/python-slip-dbus_0.6.5.bb
+index 99dc9ce5..0c67fa39 100644
+--- a/recipes-devtools/python/python-slip-dbus_0.6.5.bb
++++ b/recipes-devtools/python/python-slip-dbus_0.6.5.bb
+@@ -28,4 +28,11 @@ do_compile_prepend() {
+ # python-native/python: can't open file 'setup.py': [Errno 2] No such file or directory
+ CLEANBROKEN = "1"
  
--SRC_URI[md5sum] = "fef016d075137c4fb8724559cad28b86"
--SRC_URI[sha256sum] = "5818289868755cfea74e61e532b4b0d11d523901041338d473277db91d4d8173"
-+SRC_URI[md5sum] = "2d5cc43c8a178134b739c77439d1f26b"
-+SRC_URI[sha256sum] = "8e2d38dc58dc992280487e553ec3d97a424e4d179f4fad802ef3b08f64ccf4d8"
- 
- PYPI_PACKAGE = "sentry-sdk"
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.7.14.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.14.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-sentry-sdk_0.7.14.bb
-rename to meta-python/recipes-devtools/python/python3-sentry-sdk_0.14.0.bb
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-dbus \
++    ${PYTHON_PN}-decorator \
++    ${PYTHON_PN}-pygobject \
++    ${PYTHON_PN}-six \
++    "
++
+ inherit setuptools
 -- 
-2.20.1
-
-
+2.25.0
 
 
