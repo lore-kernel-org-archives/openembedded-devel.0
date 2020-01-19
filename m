@@ -1,52 +1,33 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D331A7FAB6
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 524C97FBCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jan 2020 06:25:00 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id p27so11708625pli.10
+	Sun, 19 Jan 2020 06:44:51 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,337,1574092800"; d="scan'208";a="82255606"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 19 Jan 2020 14:44:50 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id AC2AC5010EAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2020 22:25:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0Fpr6BYMTAxv7ptaXK0gTWcYCdhG5OpVqTvlpiuMQOM=;
-	b=ld46KQT4yOVN4z+g6vRckXbZ4eVQRX18SyMsZ2PGkC3hmi6hON2Coyaey7c6fqvkpb
-	0aqu/bhbwL8VuBr44exJwc8IRqYHqAX/ykUsI/XQ+qDnjtfrMcF/Hgr2QJejak1LPrPh
-	Srih7gWUaiSszbmTtGZd7THal7Ag9P0dnzShDR68C2VQbMEwo0p3Ts5q8KC5NfMspdMY
-	XV8hmFUfclFqAVK86YwSZeckOUQp33zg1vQO6KVvdi7DK1YKVDFjZkAmuY0kasj2mThj
-	BByW5bqStZTfiDO5savdFzPVykj3hX9OLK8zeGj887E6TyZVCaksfL0j8L2XIWO4JXGh
-	tXIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=0Fpr6BYMTAxv7ptaXK0gTWcYCdhG5OpVqTvlpiuMQOM=;
-	b=s3M7lTAK3SevCoV7sWn2XCKVurhPsaMhAWiMNNiEfH6vVm1KziIZoMbOnr35paBZHz
-	JTO509xMCQMYHpOLlStY7oKK1+l8QL84PkCy+k8Itfe0A/xJ0r3g2qjj9+S5DCdU3zWu
-	6X+jlar4aaN8L9kHwNKMVik6anWH5/i8JV2ThFeSj5+QCjpIguW8RxuQhWyaVV8vmE5l
-	fAsf4G0Us95kkG+mQ0M3cimhOzBNmyHolJXNRhNr2zeJK6Iiy2hzwV+avYwPbwb8b2TO
-	zbF/cV3a1nn5cW76RiFmIYlklRrji9yHWxXknbZk0dMaKBNs39qOxVPE8cLu2AxO8m8l
-	7mCg==
-X-Gm-Message-State: APjAAAVQQzbS5D3n3q8HbcMxegRecYAZ79Lf93pbEe0HelHpOCciYzIH
-	ZjiWs+bev+mzGO8++CFcTOmGL1fYfKA=
-X-Google-Smtp-Source: APXvYqwuqxaq1hFzC6r6Gngq4IOn/VjBv+qKO1JE2WCmOxVUnpX8z7Ty8KYCADM5QGFPeaS7NcJsyA==
-X-Received: by 2002:a17:90a:d804:: with SMTP id
-	a4mr16297762pjv.11.1579415101747; 
-	Sat, 18 Jan 2020 22:25:01 -0800 (PST)
-Received: from thetis.hsd1.or.comcast.net
-	([2601:1c0:6080:4500:b5c2:b07:e8c5:4266])
-	by smtp.gmail.com with ESMTPSA id
-	s15sm32467023pgq.4.2020.01.18.22.25.00
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 18 Jan 2020 22:25:01 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Jan 2020 22:24:39 -0800
-Message-Id: <20200119062439.17433-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
+	Sun, 19 Jan 2020 14:35:36 +0800 (CST)
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Sun, 19 Jan 2020 14:44:45 +0800
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Sun, 19 Jan 2020 14:44:45 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 19 Jan 2020 14:46:15 +0800
+Message-ID: <20200119064615.5274-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [meta-python2][PATCH] python-pywbem: add missing RDEPENDS
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: AC2AC5010EAD.AA3F7
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python] [PATCH] python3-pychromecast: upgrade 4.0.1 -> 4.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,33 +40,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jan 2020 06:25:01 -0000
+X-List-Received-Date: Sun, 19 Jan 2020 06:44:51 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-* Missing python-logging
-* Missing 'future_builtins', which is only available
-  in python-misc.
-
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- recipes-extended/pywbem/python-pywbem_0.15.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ ...n3-pychromecast_4.0.1.bb => python3-pychromecast_4.1.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-pychromecast_4.0.1.bb => python3-pychromecast_4.1.0.bb} (66%)
 
-diff --git a/recipes-extended/pywbem/python-pywbem_0.15.0.bb b/recipes-extended/pywbem/python-pywbem_0.15.0.bb
-index 8264bd56..2b1e9300 100644
---- a/recipes-extended/pywbem/python-pywbem_0.15.0.bb
-+++ b/recipes-extended/pywbem/python-pywbem_0.15.0.bb
-@@ -44,7 +44,9 @@ RDEPENDS_${PN}_class-target += "\
-     ${PYTHON_PN}-argparse \
-     ${PYTHON_PN}-datetime \
-     ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-logging \
-     ${PYTHON_PN}-m2crypto \
-+    ${PYTHON_PN}-misc \
-     ${PYTHON_PN}-netclient \
-     ${PYTHON_PN}-ply \
-     ${PYTHON_PN}-pyyaml \
+diff --git a/meta-python/recipes-devtools/python/python3-pychromecast_4.0.1.bb b/meta-python/recipes-devtools/python/python3-pychromecast_4.1.0.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python3-pychromecast_4.0.1.bb
+rename to meta-python/recipes-devtools/python/python3-pychromecast_4.1.0.bb
+index 1b9301f96..b79e7954c 100644
+--- a/meta-python/recipes-devtools/python/python3-pychromecast_4.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pychromecast_4.1.0.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/balloob/pychromecast"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b1dbd4e85f47b389bdadee9c694669f5"
+ 
+-SRC_URI[md5sum] = "d6f96d478fd768696a0e440cb0ea903b"
+-SRC_URI[sha256sum] = "d98df28f340bb14a07236846518daad7107b66581512c33da921663df61ac819"
++SRC_URI[md5sum] = "46fbd33212f3869c5dc2d8b4a1d667e5"
++SRC_URI[sha256sum] = "b6979f1ddce1ff8760586aa6b8828290964b38f34c01aa1380ab1740330eeee2"
+ 
+ PYPI_PACKAGE = "PyChromecast"
+ 
 -- 
-2.25.0
+2.20.1
+
+
 
 
