@@ -1,53 +1,55 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 558507F971
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com
+	[209.85.216.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 153607FCA5
 	for <openembedded-devel@openembedded.org>;
 	Sun, 19 Jan 2020 20:50:09 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id y8so12229211pll.13
+Received: by mail-pj1-f50.google.com with SMTP id e11so6059560pjt.4
 	for <openembedded-devel@openembedded.org>;
-	Sun, 19 Jan 2020 12:50:10 -0800 (PST)
+	Sun, 19 Jan 2020 12:50:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=mNV3TAgZXOt2afiVxxwoVMA20bX08AgXerV4+QwAjcU=;
-	b=Ng93ph4kJnZP8CipNr+zlM1VdGmvysJlqrfDLR5qi86lY/LHVV+gQakyvU1t1vAfa0
-	9u5/o36c/XO3ohrCH+wMdvo3lzewqK+t0I8LUZahr5l0ccGbaOx3B5r+HOSuI6EVoslk
-	FBw+/DqsbjbNbE8SQhsrBjjCAweZRzXbMMoGIdno6lSnT7KDiJQS/5WRYGCwljTtd7lW
-	f69OoPvrJndX/9EY8FBun+gE468OXY4TjNOKjxUNdYIndjMscDeMCJTpVKtMZmaKYRhe
-	EDvrRIMnEo3f8/CwNpP6faeeV59cegUONN9uQrkF/MF7QBKuQDRFOrByLBR2etqd/TYH
-	+91A==
+	bh=3QTTqRSWxCQzGhc4dlgGcMtATUO4ydPE5KYu2EizsZU=;
+	b=O/9wcNyxDKoVfhNn7qqs2NcmCnOxdlBhgwRdxtPas/pgx3MB5xvHPl3wwLPWeKrzbU
+	CVNdz3SoWpcUlI3Cbzq6iOWmmAsVXmsELbmYRelr0XREo/Hkn8Ih6qqa2qiSMW+R6rYw
+	D6Nx8I8D9+XyPt8phhwIZCeMLshRudu09QtCFPze5fnUfv1m6IqVC/1U83h8fh4jcUw7
+	ilweBW9X0iOIvbBLmEY5sS4uWtlZS0f+cSGg0qjEk8w1rdwPW2QbNFy16wBNZU4p+P54
+	OmMG0QIAMpbprxvG5LXkqZ7fld6gIJULEqXt0eiUnLQavM3xCyTXSsqWNGG5prGuCqSw
+	cnsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=mNV3TAgZXOt2afiVxxwoVMA20bX08AgXerV4+QwAjcU=;
-	b=WoA3ZdOR0RhHdFtyIpJU1hs6PyUfsSRW5UtPM75bF/+fkdj3rDXLmeDuX3XvztK1Lv
-	QwHQv27BPaQvRLNrhgnr/NhoTFsJTUul+J4ZnLkxLM/S2FD3ORt7wZebysctTMW6OihZ
-	sp4kGIxGEe0rJ73Qb4ajQa3eA7OqHkir/v3Epskzdi0bZl8HO7PVFN+Zsvk3xOs0JQyt
-	oOcVmLnvqm7050x3+ZGKu9qiVRgY4mrZ7g2OcafaGJce1ScOUYKNpm/F50Td9LmCuGU/
-	VhZvIn34A1oTN8B8cfRtH0L2nWGYEXuYgwGyW2muX2pAAbQJiB4caPVDxxba+IcuLe0j
-	HCiQ==
-X-Gm-Message-State: APjAAAVsgQGcuIVS9a8Sx9FeuuOUYip20vCTo3z32c/cqnD5LLmb5zWY
-	/Z2CFpX4GBE8e1SzRUC4cAd1WosV
-X-Google-Smtp-Source: APXvYqzb6NoA+RofyBDWoubGEJLsgX0CPYyRDuaJ3tmjwG5m6xwpkbZKOcBzgwSLdJ5QHOepkbCmtg==
-X-Received: by 2002:a17:902:a702:: with SMTP id
-	w2mr11273562plq.289.1579467010020; 
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=3QTTqRSWxCQzGhc4dlgGcMtATUO4ydPE5KYu2EizsZU=;
+	b=pOJm7Dsty3sBftgFuEV3a0P2bqh+rXRAJgDa7je1nm5fVEI7pYYrL2nv/NwSA6HYWw
+	R85a4niOdni6TapRMXwAVC+8/SXT5sA9pLed1dMw8E0GuOix8XaOBQMjUDXOfI/eInn4
+	vyK8+6dZWzwjf2LYMatlzD7ILDtenrDy6iuIEIQgKfNaXmgQx1RdjSLU4YKyzNbZ7F9G
+	S7LeB0mnhQphgERUj1K7txdDOqS7MTqhgAiivqit9hFgegdczzlu8gixUaXfFuNFTXYg
+	2wnsJzEnz0tnm688VxXaldqrwaWaxUIsiOpO7XYFR08JJZLCXKprVC7SReA51IDt062o
+	CN/w==
+X-Gm-Message-State: APjAAAWVUhjtML4JGGYsqrwcHarVROtI1vIsCLDDm2Sp45oY3sXOBEWF
+	rGCd0HM5Q3zNv33iAz0rUMWgzx3/
+X-Google-Smtp-Source: APXvYqzkUS9UxhQtxkJBdy37cvb/E39sbEUzNmbO5+7zdHvEAbYiNNfksLxyMMAKGxcIwGRl91Tp7Q==
+X-Received: by 2002:a17:902:bd94:: with SMTP id
+	q20mr11378808pls.343.1579467010853; 
 	Sun, 19 Jan 2020 12:50:10 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:450d:e003:9142:f492])
 	by smtp.gmail.com with ESMTPSA id
-	k9sm14701403pjo.19.2020.01.19.12.50.08
+	k9sm14701403pjo.19.2020.01.19.12.50.10
 	for <openembedded-devel@openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 19 Jan 2020 12:50:09 -0800 (PST)
+	Sun, 19 Jan 2020 12:50:10 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@openembedded.org
-Date: Sun, 19 Jan 2020 12:49:58 -0800
-Message-Id: <cover.1579466920.git.akuster808@gmail.com>
+Date: Sun, 19 Jan 2020 12:49:59 -0800
+Message-Id: <ff16275b3f51eb24aa27039b738f74deb914b362.1579466920.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <cover.1579466920.git.akuster808@gmail.com>
+References: <cover.1579466920.git.akuster808@gmail.com>
 MIME-Version: 1.0
-Subject: [zeus 0/8] Patch review
+Subject: [zeus 1/8] nodejs: libatomic patch should be target specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,61 +62,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Jan 2020 20:50:09 -0000
+X-List-Received-Date: Sun, 19 Jan 2020 20:50:10 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Please review and provide feedback by Tuesday.
+From: Khem Raj <raj.khem@gmail.com>
 
-The following changes since commit e855ecc6d35677e79780adc57b2552213c995731:
+host usually are using gcc/x86_64/aarch64 and all of them have gcc which
+can support atomic intrinsics, but not all of them install libatomic by
+default e.g. centos-7, so asking for libatomic unconditionally may not
+work always
 
-  ruli: Fix install step and build samples too (2020-01-05 14:44:11 -0800)
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Acked-by: Andreas Müller <schnitzeltony@gmail.com>
+Acked-by: Tim Orling <timothy.t.orling@linux.intel.com>
+(cherry picked from commit 86d4131dfabdf4bca27d96de6f271565f1a3a5c6)
+[Fixup for zeus context]
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-are available in the Git repository at:
-
-  git://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
-
-Gianfranco Costamagna (3):
-  cpprest: fix cmake installation directory
-  websocketpp: add various upstream accepted and proposed patches to fix
-    various issues, including:
-  websocketpp: refresh clang patch
-
-Kai Kang (1):
-  adduser: set default shell with /sbin/nologin
-
-Khem Raj (3):
-  nodejs: libatomic patch should be target specific
-  websocketapp: Fix multilib build
-  websocketpp: Fix clang specific flags in cmake files
-
-Zhixiong Chi (1):
-  dnsmasq: CVE-2019-14834
-
- ...-dnsmasq-fix-memory-leak-in-helper-c.patch |  49 +++++++
- .../recipes-support/dnsmasq/dnsmasq_2.80.bb   |   1 +
- .../recipes-devtools/nodejs/nodejs_10.16.3.bb |   2 +-
- .../cpprest/cpprest_2.10.14.bb                |   2 +-
- .../0001-Correct-clang-compiler-flags.patch   |  32 +++++
- .../0001-cmake-Use-GNUInstallDirs.patch       |  35 +++++
- .../websocketpp/websocketpp-0.8.1/771.patch   |  22 +++
- .../websocketpp/websocketpp-0.8.1/842.patch   |  30 ++++
- .../websocketpp/websocketpp-0.8.1/855.patch   |  23 +++
- .../websocketpp/websocketpp-0.8.1/857.patch   | 132 ++++++++++++++++++
- .../websocketpp/websocketpp_0.8.1.bb          |  17 ++-
- .../recipes-perl/adduser/adduser_3.118.bb     |   1 +
- ...-set-default-shell-with-sbin-nologin.patch |  34 +++++
- 13 files changed, 377 insertions(+), 3 deletions(-)
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
- create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
- create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-cmake-Use-GNUInstallDirs.patch
- create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch
- create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch
- create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch
- create mode 100644 meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/857.patch
- create mode 100644 meta-perl/recipes-perl/adduser/files/0001-adduser-set-default-shell-with-sbin-nologin.patch
-
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
+index a978eebe47..215d5e7ac0 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb
+@@ -19,10 +19,10 @@ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
+            file://0003-Crypto-reduce-memory-usage-of-SignFinal.patch \
+            file://0004-Make-compatibility-with-gcc-4.8.patch \
+-           file://0005-Link-atomic-library.patch \
+            file://0006-Use-target-ldflags.patch \
+            "
+ SRC_URI_append_class-target = " \
++           file://0005-Link-atomic-library.patch \
+            file://0002-Using-native-torque.patch \
+            "
+ 
 -- 
 2.17.1
 
