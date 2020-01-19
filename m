@@ -1,50 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F9F97FA42
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E1887F8B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2020 22:25:07 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id 62so7129469pfu.11
+	Sun, 19 Jan 2020 02:26:34 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id w62so13938307pfw.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Jan 2020 14:25:09 -0800 (PST)
+	Sat, 18 Jan 2020 18:26:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=wlygmjOrcb6MD05hkOiqhmDHjLofDkpZKN0tyZb6Nr4=;
-	b=stGriEEO4A9mlqAyqoElGW7utglrjGLMl9D09ypgyVuWSP0d3CCOSH1ENeUy3+rYVJ
-	TGeoOSWP1GMeXklmZLm3d8w70xOxGcTBN+5tDXfyWTK6Y9Xe0RitBvtEbZ5jklWSOoz2
-	U0AhgrixMe28D/zJ4jy7ZIEn6jvgcIyFIBASVFOtpx4TX9Ak0PPC7hIUnQG9pmpFN9Hz
-	sEIQ7yY1PYvfdz/dp2t8oRAs3VqkD4445qeLwGP7Tg4zLJfud655E0HE0TrKGGn6CIgu
-	OXhypQWLManFxXKrE7776Ns/YJERwAY+IOncQMNfOOxfIYMiVw8Fo+CYoTFznawhkTKB
-	bu/w==
+	bh=CctZy6jLenOijBVDhUd6yvRcaF/wuARwY/dw2x3CEF8=;
+	b=U1WKp7R1Zb29DpXQQO8UQA4zBWUtBIL51boJLLimMHYnW0Hf6wo0S4MwEhqirNr0F8
+	2zlzbA78a2Q0vWyQxC76rslC4TTRaRNiwSqE/+/mijmuUXTPiP9XuXqQjYPBT2VnQd90
+	yfF9gA5HqJqbZzw7cLbmZ3Nry5v9j3IWzpgsaBrPLK7wMW1iXJYX0GLwUbniGcOrU+DW
+	lW0Mup0QuRoM8PPR6h1aHjxH2aiRCieIA1uqCWtagtfx3X6OyhI2vEBcZ2kWfdPVqwqt
+	DyVx+J+KdlSkO7Dc2nr0UQq+j5STqZbbhPrNejW+p1eoXJWcs6cb5KeeM2zVX+cB30Sn
+	nbng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=wlygmjOrcb6MD05hkOiqhmDHjLofDkpZKN0tyZb6Nr4=;
-	b=ewasRAQSvFpTEOXhQpP2LFGYCLjXxgn0+kq42kTQobbFsFFcp9FKY4MW8o86FPBZ2s
-	92QrnL7IWUml09P6IS8qMsHZI8VImcv6zcSFvcIgnVaBairgU9YFeIR2h3Ku2VjmbjE8
-	bv2UtGPGTvuttZYPm8OEnzSMlRGPlKC/X+EXXaPjpZEmL/VdnTcZ+EEM1GtJCC5yHyF5
-	smWWj6Eatjra6Sl1vj1U/uqNpbPYK5kuIfZ/rX9eMtzczHygNH9L1SUBAC1XH/pBAmt+
-	VFYHripEpptPpVb0/7QiBLFWK3KHb3ik0VxbZNzEfRwrWxZbK3G9j/i9446anOZnQjKS
-	lT8A==
-X-Gm-Message-State: APjAAAWtwXzPY6pZ0cYANkCjpNn7kLKlfHGskfmvm9yTh1SLqgwBgLwg
-	SY2zzLVRVX3EQhfz8u6LyyIFkm+bqRc=
-X-Google-Smtp-Source: APXvYqyaZ4HhTMMj63f5QPWbOHJQbvxarAcOiP9QW4sQupA6K8pXGTyC1K8oN+971XbE5952Q+AQYw==
-X-Received: by 2002:a63:3104:: with SMTP id x4mr51597936pgx.369.1579386308628; 
-	Sat, 18 Jan 2020 14:25:08 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
+	bh=CctZy6jLenOijBVDhUd6yvRcaF/wuARwY/dw2x3CEF8=;
+	b=IlMExxe3yAfrKvwa/tu8ejVDg32kDdjpfHq+l0RyGHbYi+TgOpJ41W9REg4Mr/EybG
+	znvmhLDcLQGcrz/KtkY1KWUmOeR75dLm7n3U6jX665c0JnafynkieQ4xqIknNFCiV4cF
+	ai6m22PcY4D/HMhMTkhHYh79jUqJO7SUAIHJnwjPIoFF6AGS4zP6vrF8QXJ+9Xkih/V5
+	XIM491vJvQaHhqqHORN5H6cqEGc09xAUmb8BoWlxD5rNTPys5zMXQ9+/s7XCIiJLTID1
+	o0Jad78d3Ym/GhwNttG/Mh86L1joMFrBFZdxfreb+4tlFmqfWcsZJ+XBwVxPXenwLlmK
+	2hHw==
+X-Gm-Message-State: APjAAAWAnZFVGBCoYTxb6B764iJP7k2YhwvW54dHPJJFIihvjtBXTz92
+	Ye/OYbJAtnUWam4A0nBUin2MNuTdhFA=
+X-Google-Smtp-Source: APXvYqxovLT7aO05WZrg/7r2dApRXhlR/2qdC/kUBMi979SeVndbNiz+5VD9F44IjH6QmfFnV9AkoQ==
+X-Received: by 2002:a62:be12:: with SMTP id l18mr11005807pff.226.1579400795464;
+	Sat, 18 Jan 2020 18:26:35 -0800 (PST)
+Received: from thetis.hsd1.or.comcast.net
+	([2601:1c0:6080:4500:b5c2:b07:e8c5:4266])
 	by smtp.gmail.com with ESMTPSA id
-	x18sm34569052pfr.26.2020.01.18.14.25.07
+	t187sm34436426pfd.21.2020.01.18.18.26.34
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 18 Jan 2020 14:25:08 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 18 Jan 2020 18:26:34 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Jan 2020 14:25:07 -0800
-Message-Id: <20200118222507.1959461-1-raj.khem@gmail.com>
+Date: Sat, 18 Jan 2020 18:26:28 -0800
+Message-Id: <20200119022628.39901-1-ticotimo@gmail.com>
 X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-Subject: [PATCH] recipes: Make powerpc64le overrides
+Subject: [meta-python2][PATCH] python-pytest: update 4.6.6 -> 4.6.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,153 +58,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Jan 2020 22:25:08 -0000
+X-List-Received-Date: Sun, 19 Jan 2020 02:26:34 -0000
 Content-Transfer-Encoding: 8bit
 
-The existing conditions for ppc64/be are applicable for le as well
+Upstream release notes:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+* pytest 4.6.9 (2020-01-04)
+  - Bug Fixes
+
+    #6301: Fix assertion rewriting for egg-based distributions and editable
+           installs (pip install --editable).
+
+* pytest 4.6.8 (2019-12-19)
+  - Features
+
+    #5471: JUnit XML now includes a timestamp and hostname in the testsuite tag.
+
+  - Bug Fixes
+
+    #5430: junitxml: Logs for failed test are now passed to junit report in
+           case the test fails during call phase.
+
+  - Trivial/Internal Changes
+
+    #6345: Pin colorama to 0.4.1 only for Python 3.4 so newer Python versions
+           can still receive colorama updates.
+
+* pytest 4.6.7 (2019-12-05)
+  - Bug Fixes
+
+    #5477: The XML file produced by --junitxml now correctly contain a
+           <testsuites> root element.
+    #6044: Properly ignore FileNotFoundError (OSError.errno == NOENT in Python
+           2) exceptions when trying to remove old temporary directories, for
+           instance when multiple processes try to remove the same directory
+           (common with pytest-xdist for example).
+
+License-Update: Update license year to include 2020
+
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- meta-initramfs/recipes-devtools/klibc/klibc.inc                  | 1 +
- meta-oe/recipes-benchmark/iozone3/iozone3_488.bb                 | 1 +
- meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb       | 1 +
- meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb                 | 1 +
- .../recipes-devtools/android-tools/android-tools_5.1.1.r37.bb    | 1 +
- meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb    | 1 +
- meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb                  | 1 +
- meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb             | 1 +
- meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb                  | 1 +
- meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb                | 1 +
- meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb                 | 1 +
- 11 files changed, 11 insertions(+)
+ .../{python-pytest_4.6.6.bb => python-pytest_4.6.9.bb}     | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename recipes-devtools/python/{python-pytest_4.6.6.bb => python-pytest_4.6.9.bb} (84%)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 289288d480..54cd3c24bc 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -77,4 +77,5 @@ KLIBC_ARCH_x86 = "i386"
- KLIBC_ARCH_x86-64 = "x86_64"
- KLIBC_ARCH_powerpc = "ppc"
- KLIBC_ARCH_powerpc64 = "ppc64"
-+KLIBC_ARCH_powerpc64le = "ppc64"
- THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
-diff --git a/meta-oe/recipes-benchmark/iozone3/iozone3_488.bb b/meta-oe/recipes-benchmark/iozone3/iozone3_488.bb
-index 4d9e07765f..222a95647e 100644
---- a/meta-oe/recipes-benchmark/iozone3/iozone3_488.bb
-+++ b/meta-oe/recipes-benchmark/iozone3/iozone3_488.bb
-@@ -25,6 +25,7 @@ S = "${WORKDIR}/${BPN}_${PV}/src/current/"
- #
- EXTRA_OEMAKE_powerpc = "linux-powerpc CC='${CC}' GCC='${CC}'"
- EXTRA_OEMAKE_powerpc64 = "linux-powerpc64 CC='${CC}' GCC='${CC}'"
-+EXTRA_OEMAKE_powerpc64le = "linux-powerpc64 CC='${CC}' GCC='${CC}'"
- EXTRA_OEMAKE_x86-64 = "linux-AMD64 CC='${CC}' GCC='${CC}'"
- EXTRA_OEMAKE_arm = "linux-arm CC='${CC}' GCC='${CC}'"
- EXTRA_OEMAKE = "linux CC='${CC}' GCC='${CC}'"
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index e66db1a090..f1a4efba26 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -37,6 +37,7 @@ LIBARGS = "LIB32=${baselib} LIB64=${baselib}"
- LIBHUGETLBFS_ARCH = "${TARGET_ARCH}"
- LIBHUGETLBFS_ARCH_powerpc = "ppc"
- LIBHUGETLBFS_ARCH_powerpc64 = "ppc64"
-+LIBHUGETLBFS_ARCH_powerpc64le = "ppc64"
- EXTRA_OEMAKE = "'ARCH=${LIBHUGETLBFS_ARCH}' 'OPT=${CFLAGS}' 'CC=${CC}' ${LIBARGS} BUILDTYPE=NATIVEONLY V=2"
- PARALLEL_MAKE = ""
- CFLAGS += "-fexpensive-optimizations -frename-registers -fomit-frame-pointer -g0"
-diff --git a/meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb b/meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb
-index 09e7384882..b89fe6771c 100644
---- a/meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb
-+++ b/meta-oe/recipes-bsp/edac-utils/edac-utils_git.bb
-@@ -30,6 +30,7 @@ RDEPENDS_${PN}_arm = "dmidecode"
- RDEPENDS_${PN}_aarch64 = "dmidecode"
- RDEPENDS_${PN}_powerpc = "dmidecode"
- RDEPENDS_${PN}_powerpc64 = "dmidecode"
-+RDEPENDS_${PN}_powerpc64le = "dmidecode"
- RDEPENDS_${PN}_append = " \
-     perl \
-     perl-module-file-basename \
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-index c0d08db174..3555aff3cd 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-@@ -61,6 +61,7 @@ ARM_INSTRUCTION_SET_armv5 = "arm"
+diff --git a/recipes-devtools/python/python-pytest_4.6.6.bb b/recipes-devtools/python/python-pytest_4.6.9.bb
+similarity index 84%
+rename from recipes-devtools/python/python-pytest_4.6.6.bb
+rename to recipes-devtools/python/python-pytest_4.6.9.bb
+index a9b64922..c1cf0ac3 100644
+--- a/recipes-devtools/python/python-pytest_4.6.6.bb
++++ b/recipes-devtools/python/python-pytest_4.6.9.bb
+@@ -1,13 +1,12 @@
+ SUMMARY = "Simple powerful teting with python"
+ HOMEPAGE = "http://pytest.org"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=640061b8cee64b308a4d2f9f556c12f2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
  
- COMPATIBLE_HOST_powerpc = "(null)"
- COMPATIBLE_HOST_powerpc64 = "(null)"
-+COMPATIBLE_HOST_powerpc64le = "(null)"
+ SRC_URI += " file://0001-setup.py-remove-setup_requires-for-setuptools-scm.patch"
  
- inherit systemd
+-SRC_URI[md5sum] = "0cf02e80d916a81a3d4fa425eb8063c5"
+-SRC_URI[sha256sum] = "692d9351353ef709c1126266579edd4fd469dcf6b5f4f583050f72161d6f3592"
+-
++SRC_URI[md5sum] = "d0457c5ddd0438e3b68b7939339d915f"
++SRC_URI[sha256sum] = "19e8f75eac01dd3f211edd465b39efbcbdc8fc5f7866d7dd49fedb30d8adf339"
  
-diff --git a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-index 19767c311e..8c6cf7db20 100644
---- a/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-+++ b/meta-oe/recipes-devtools/concurrencykit/concurrencykit_git.bb
-@@ -21,6 +21,7 @@ COMPATIBLE_HOST = "(i.86|x86_64|powerpc|powerpc64).*-linux*"
- inherit autotools-brokensep
+ inherit update-alternatives pypi setuptools
  
- PLAT_powerpc64 = "ppc64"
-+PLAT_powerpc64le = "ppc64"
- PLAT ?= "${HOST_ARCH}"
- 
- do_configure () {
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-index 08a0470b04..d0dc1c28dd 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-@@ -96,3 +96,4 @@ COMPATIBLE_HOST_mipsarchn32 = "null"
- COMPATIBLE_HOST_mipsarchn64 = "null"
- COMPATIBLE_HOST_powerpc = "null"
- COMPATIBLE_HOST_powerpc64 = "null"
-+COMPATIBLE_HOST_powerpc64le = "null"
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
-index 02ac03eae3..29bba2d9a7 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
-@@ -179,6 +179,7 @@ VALGRIND_linux-gnun32 = ''
- 
- # Disable for powerpc64 with musl
- VALGRIND_libc-musl_powerpc64 = ''
-+VALGRIND_libc-musl_powerpc64le = ''
- 
- # RISC-V support for valgrind is not there yet
- VALGRIND_riscv64 = ""
-diff --git a/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb b/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb
-index 9b43b4a975..ff56d48043 100644
---- a/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb
-+++ b/meta-oe/recipes-kernel/libpfm/libpfm4_4.10.1.bb
-@@ -23,6 +23,7 @@ UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/perfmon2/files/libpfm4/"
- EXTRA_OEMAKE = "DESTDIR=\"${D}\" PREFIX=\"${prefix}\" LIBDIR=\"${libdir}\" LDCONFIG=\"true\""
- EXTRA_OEMAKE_append_powerpc = " ARCH=\"powerpc\""
- EXTRA_OEMAKE_append_powerpc64 = " ARCH=\"powerpc\" BITMODE=\"64\""
-+EXTRA_OEMAKE_append_powerpc64le = " ARCH=\"powerpc\" BITMODE=\"64\""
- 
- S = "${WORKDIR}/libpfm-${PV}"
- 
-diff --git a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-index 4e5b6ca33c..bab38e2509 100644
---- a/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-+++ b/meta-oe/recipes-kernel/oprofile/oprofile_1.3.0.bb
-@@ -1,6 +1,7 @@
- require oprofile.inc
- 
- DEPENDS_append_powerpc64 = " libpfm4"
-+DEPENDS_append_powerpc64le = " libpfm4"
- 
- SRC_URI[md5sum] = "bd998df5521ebedae31e71cd3fb6200b"
- SRC_URI[sha256sum] = "95ded8bde1ec39922f0af015981a67aec63e025a501e4dc04cd65d38f73647e6"
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
-index c327c45e66..245dfe22ca 100644
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
-@@ -30,6 +30,7 @@ LUA ?= "lua"
- LUA_mips64  = ""
- LUA_aarch64  = ""
- LUA_powerpc64  = ""
-+LUA_powerpc64le  = ""
- LUA_powerpc  = ""
- 
- # Note: both lua and libass are required to get on-screen-display (controls)
 -- 
 2.25.0
 
