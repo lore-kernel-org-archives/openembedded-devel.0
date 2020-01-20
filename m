@@ -1,48 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com
-	[209.85.219.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CFEC7FC3E
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-il1-f193.google.com (mail-il1-f193.google.com
+	[209.85.166.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E27A77F93F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 15:37:25 +0000 (UTC)
-Received: by mail-qv1-f65.google.com with SMTP id u10so14143977qvi.2
+	Mon, 20 Jan 2020 15:52:27 +0000 (UTC)
+Received: by mail-il1-f193.google.com with SMTP id f5so27607191ilq.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 07:37:26 -0800 (PST)
+	Mon, 20 Jan 2020 07:52:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=ImkDwyhOdk/p/8tfhO+klhgxQ2k2VfMUMv30xZ9SX0w=;
-	b=k9k+UE48IuMPAoNoOAVLEP5/klH+EhUA1t49zHhm77biynrP2B/iIpGHTMfc6/pkme
-	lNvPeQd0UKZ6nFgVjKjRKmlqTDZHck9aZ++WlnYIzhNrFeuDZ/v5C+kIHyWgH7+ey3ZP
-	Od/Xh7PPVTwj0ZGUCzJj5HueB5sVIOIl6NhedY9W0JQidoaq4WLYbW0h3GaanT7ZFaP3
-	5nCUE4BeLfjBgwE8LeflftZBDLOyfdK8YcupmOT2onmT5ihHpeTYDkb8fvfbmii9NGnn
-	OuGWDBYFg7eXlpGxwyBV/rU98dEc4QuY7PlmduNJ0Xx2gEpR4R0HRjL5vGVAYWpveglj
-	nS2g==
+	:cc; bh=S8Sj4cdDog8rk/f063zEHoJYsqTRvl7sGVrAi87MsF0=;
+	b=qg7Z117PmgNLKR48dZy9q5DJ5J/Injn13hfNHhwMWSh/4Lty6qvOujiTCn2DGNEVrA
+	PufuJYey7pVlSpIUXCaaDeeSrvzWTbgjlLyYH0Tace20XFYotPMDa+OwhIigIMFm/uPV
+	P7WaVSD4Z19KaFHAFSJS/j52q2451y41r0eeQKk5Ea57uNldVOzG84IWXQNj0y7iONXT
+	VszAT+biKMPuhefGwQraptjcqEojfk+yrSdCDMCQExRSVqnPdWiKTsWpUIMDp2LFx1OA
+	owVv2ohEKMCw2VRgAjFw1jeVidwRndrwaO1NxrxCcteylugJhHpCJjdNlFwDj0toTARP
+	BFWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=ImkDwyhOdk/p/8tfhO+klhgxQ2k2VfMUMv30xZ9SX0w=;
-	b=hM/Jz6X9pj9u8RFxQRiYovVkgUHmx6JT7Naj80v/Ds2boOt+U6dbWHa/euPKfe1nkK
-	q3qhOg/GTkTcrDF62qhqB5yuOIdJs3dB2ZL+H1NbY8hsq2m9hcMEa8VaXX24lFba4tEV
-	r7r1h0LjcNc68br5gS3WPvjaZLK87SHwHKF/ZnoUA9bCsy1UtTKSf0Rk7sisdmmBOzUx
-	XgsFhLQAsHVLMwZBI6rQ9FRXh7O0yITnn80G9jcFNX68D41O4QAsKuBi96z4tsIGLfkf
-	A5eQmbLvSeY83lz6BbBLU8JlzjHwjfSzwhZNO/y3pUmHJpBCTuNzcjbe0K9bj663Z0kJ
-	/CuA==
-X-Gm-Message-State: APjAAAXtEncnKKoXksR9MhdpflCip6YilwvhRbM1ucjG5hleErdmttiY
-	EjUWhjwripHuJ2VUk7DmqW1rVyh8M2rQeNnbTVRhypPU
-X-Google-Smtp-Source: APXvYqxqAAj3eGKu9DR0mRUrBBPKLNdPydt8AanpOHBcZoOuTlvwoUt1UVSEwvob1/o8JIGfBk7432+wMqXk2QjktVc=
-X-Received: by 2002:a0c:fa4b:: with SMTP id k11mr275343qvo.55.1579534645861;
-	Mon, 20 Jan 2020 07:37:25 -0800 (PST)
+	bh=S8Sj4cdDog8rk/f063zEHoJYsqTRvl7sGVrAi87MsF0=;
+	b=ix7fZAMqVZov3pbC5W2kMvkhvN33EBICuSKzLUuJWcAnVDeTuCGJkf38aqDu3n1OKA
+	d1njE6oHCJclUxIG1CwMy9aH8KG+9iMx+Xc3kvAjRgDJYRY01d6vhYn1rlh8vcUht9JD
+	U58yOw1dpenElw0lqBi8XL12/IIqcx9vT1iP13E/EUS00Dn3sFpmUn053o7avgSMTckL
+	xZJz9oel5P9/hiWhQHEVwdzWP851z3sRHBky8H2BfnHot0rpHTIcE39eUM/XJExp8+qh
+	l1yWvuZuGgYasNwJKcbyblmhRUxxMaOEfCIDLp4aF2qy/3ORDcEFxFcKQvnSOQt5c7Et
+	ASjQ==
+X-Gm-Message-State: APjAAAV3wtYWALTCPsYzGgsQ5yKT3G7b2hObc40/TF9bDoEHme8hkol6
+	QAxBkJtXGzonbn6x09t51/nLuG2+LuE44SgG+mvq9Acq
+X-Google-Smtp-Source: APXvYqx7LteH07nciA7QRmrciJf7Py7eXeNP4aCkt1g0SaMdSXNk9ZcQfnTyL9aiGGxY83nqVdKEhnXWR4+6/cp1vTM=
+X-Received: by 2002:a92:911b:: with SMTP id t27mr11330738ild.142.1579535548769;
+	Mon, 20 Jan 2020 07:52:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20200120003527.1518697-1-raj.khem@gmail.com>
-	<20200120003527.1518697-4-raj.khem@gmail.com>
-	<20200120142025.7ee3bc42@opendreambox.org>
-In-Reply-To: <20200120142025.7ee3bc42@opendreambox.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 20 Jan 2020 07:36:59 -0800
-Message-ID: <CAMKF1sq_Zqf520iuoLba5dW7_XcZhoRFwzt3yhpnorcSF4sDMw@mail.gmail.com>
-To: Andreas Oberritter <obi@opendreambox.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 4/5] meta-oe: Remove using python2
+References: <20200119232403.12871-1-ticotimo@gmail.com>
+	<2c54d8cc9d1e1763e0f4d17b72c55a3bc995ed6a.camel@andred.net>
+In-Reply-To: <2c54d8cc9d1e1763e0f4d17b72c55a3bc995ed6a.camel@andred.net>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 20 Jan 2020 07:52:17 -0800
+Message-ID: <CANx9H-BhtqWsifCy0vuLQWF029is4+2ZjUsmGi34a6PTe8yhFg@mail.gmail.com>
+To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python2][PATCH] python-beautifulsoup4: fix target RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,76 +55,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2020 15:37:25 -0000
+X-List-Received-Date: Mon, 20 Jan 2020 15:52:28 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 20, 2020 at 5:20 AM Andreas Oberritter <obi@opendreambox.org> wrote:
->
-> Hi Khem,
->
-> On Sun, 19 Jan 2020 16:35:26 -0800
-> Khem Raj <raj.khem@gmail.com> wrote:
->
-> > diff --git a/meta-oe/recipes-devtools/python/python-jsmin_2.2.2.bb b/meta-oe/recipes-devtools/python/python-jsmin_2.2.2.bb
-> > index d00d1e2a08..ab657e6f08 100644
-> > --- a/meta-oe/recipes-devtools/python/python-jsmin_2.2.2.bb
-> > +++ b/meta-oe/recipes-devtools/python/python-jsmin_2.2.2.bb
-> > @@ -4,7 +4,7 @@ SECTION = "devel/python"
-> >  LICENSE = "MIT"
-> >  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3a3301ce2ad647e172f4a1016c67324d"
-> >
-> > -inherit setuptools pypi
-> > +inherit setuptools3 pypi
-> >  SRC_URI[md5sum] = "00e7a3179a4591aab2ee707b3214e2fd"
-> >  SRC_URI[sha256sum] = "b6df99b2cd1c75d9d342e4335b535789b8da9107ec748212706ef7bbe5c2553b"
-> >
->
-> You added python3-jsmin in patch 1/5, so you'd better just remove python-jsmin.
->
+On Mon, Jan 20, 2020 at 2:29 AM Andr=C3=A9 Draszik <git@andred.net> wrote:
 
-yes right.
-
-> > diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.34.0.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.34.0.bb
-> > index 0cbd07f666..af95e327c4 100644
-> > --- a/meta-oe/recipes-devtools/python/python-pygobject_3.34.0.bb
-> > +++ b/meta-oe/recipes-devtools/python/python-pygobject_3.34.0.bb
-> > @@ -5,9 +5,9 @@ LICENSE = "LGPLv2.1"
-> >  LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
-> >
-> >  GNOMEBASEBUILDCLASS = "meson"
-> > -inherit gnomebase gobject-introspection distutils-base upstream-version-is-even
-> > +inherit gnomebase gobject-introspection distutils3-base upstream-version-is-even
-> >
-> > -DEPENDS += "python glib-2.0"
-> > +DEPENDS += "python3 glib-2.0"
-> >
-> >  SRCNAME = "pygobject"
-> >  SRC_URI = " \
+> On Sun, 2020-01-19 at 15:24 -0800, Tim Orling wrote:
+> > * target has run-time dependencies on:
+> >   - python-html
+> >   - python-logging
 >
-> Rename to python3-pygobject?
+> Any reason -native doesn't depend on those?
+
+
+These are part of the package splitting OE does for python. They are
+normally part of a full python installation in distros that don=E2=80=99t c=
+are
+about space. For python-native environment, there is no package splitting
+and these would not exist as -native variants.
+
+>
+>
+> > Unexpectedly, class-target +=3D override is wiping out
+> > RDEPENDS_${PN}, so explicitly add the rest of the
+> > run-time dependencies (python-html5lib, python-lxml,
+> > python-soupsieve).
+>
+> This is expected, you should instead do:
+>
+> RDEPENDS_${PN}_append_class-target =3D "\
+>     ${PYTHON_PN}-html \
+>     ${PYTHON_PN}-logging"
 >
 
-yes
+Facepalm. I had tried it with append after class-target, which clearly
+doesn=E2=80=99t work and my brain was getting tired. I=E2=80=99ll clean it =
+up today. Thank
+you for the catch.
 
-> > diff --git a/meta-oe/recipes-devtools/python/python-which_1.1.0.bb b/meta-oe/recipes-devtools/python/python-which_1.1.0.bb
-> > index 901fdc7637..67488acd33 100644
-> > --- a/meta-oe/recipes-devtools/python/python-which_1.1.0.bb
-> > +++ b/meta-oe/recipes-devtools/python/python-which_1.1.0.bb
-> > @@ -4,7 +4,7 @@ SECTION = "devel/python"
-> >  LICENSE = "MIT"
-> >  LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=030b09798681482b9ad12ac47be496ea"
-> >
-> > -inherit setuptools pypi python-dir
-> > +inherit setuptools3 pypi python3-dir
-> >
-> >  SRCREV = "425bdeeb2d87c36e2313dc4b8d69ff2bb5a02ee9"
-> >  PYPI_SRC_URI = "git://github.com/trentm/which"
+So as to avoid duplication and having to maintain two distinct lists.
 >
-> python3-which?
+> Cheers,
+> Andre'
 >
-
-which is py2 only there is which available in py3 already. I will just delete it
-
-> Best regards,
-> Andreas
+>
+> >
+> > Signed-off-by: Tim Orling <ticotimo@gmail.com>
+> > ---
+> >  recipes-devtools/python/python-beautifulsoup4_4.8.1.bb | 10 ++++++++++
+> >  1 file changed, 10 insertions(+)
+> >
+> > diff --git a/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb
+> b/recipes-devtools/python/python-
+> > beautifulsoup4_4.8.1.bb
+> > index 86482714..8ac9c8c5 100644
+> > --- a/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb
+> > +++ b/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb
+> > @@ -19,4 +19,14 @@ RDEPENDS_${PN} =3D "\
+> >      ${PYTHON_PN}-soupsieve \
+> >
+> > +# class override, which is not
+> > +# inheriting from above (FIXME?)
+> > +RDEPENDS_${PN}_class-target +=3D "\
+> > +    ${PYTHON_PN}-html \
+> > +    ${PYTHON_PN}-html5lib \
+> > +    ${PYTHON_PN}-logging \
+> > +    ${PYTHON_PN}-lxml \
+> > +    ${PYTHON_PN}-soupsieve \
+> > +"
+> > +
+> >  BBCLASSEXTEND =3D "native nativesdk"
+> > --
+> > 2.25.0
+> >
+>
+>
 
