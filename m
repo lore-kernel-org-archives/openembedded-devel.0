@@ -1,42 +1,32 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id D64FA7F225
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 10:29:29 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id y11so28929910wrt.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 02:29:31 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:user-agent:mime-version:content-transfer-encoding;
-	bh=opD1bmKU7VbcGck8ra88a/i19nueM3DQg78xvByLpsw=;
-	b=oN3/+Jov0mEXqN4FFc0op51a3SxP7hMrNLFDIRvYAf2TZadLxM3f+I0QW7QRj02Bvg
-	BGS0eJcOwS28mTQ0m4py7RNUtdcwkYjwtv3lP+kPrPEqcOIqpaHJDRSl5vWt1GRWMtKo
-	fQJZyyicsamBY6eL0s+aYRmwPOPatTKTqQ+j0hOSKqUzcqqahR8HkgUfuRi/1jp+Qti2
-	KbIQiKaNxNXR5WwW+yf23lGjwD4g2e1mwIr1parkOniIPV8qIjmLmXOjb9SkQJ5ka8d2
-	OFteoG6oSYf04WaO+SjT6tVy6kUW/fI9o4YJMOr8ybRYxwl3HjA2Na+7X/FuN2JgXEwk
-	E9kw==
-X-Gm-Message-State: APjAAAVbb7MiB7mRvqeX/tOhD9F8cC4psZkCsTlJmhOadqQgFB/cx+Ol
-	4C6GRg+gcBjHKfaCQqgDJhii0J6a
-X-Google-Smtp-Source: APXvYqwgliIMaZaacUh+MTCbNFLPDJoK8humhG6Pwil+v6PyO/HZkWtUbeZXquCIhZBIn4qoQVa9Tg==
-X-Received: by 2002:a5d:52c4:: with SMTP id r4mr17396198wrv.368.1579516170464; 
-	Mon, 20 Jan 2020 02:29:30 -0800 (PST)
-Received: from tfsielt31850 ([77.107.218.170])
-	by smtp.gmail.com with ESMTPSA id
-	d8sm46003275wrx.71.2020.01.20.02.29.29
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 20 Jan 2020 02:29:30 -0800 (PST)
-Message-ID: <2c54d8cc9d1e1763e0f4d17b72c55a3bc995ed6a.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Jan 2020 10:29:29 +0000
-In-Reply-To: <20200119232403.12871-1-ticotimo@gmail.com>
-References: <20200119232403.12871-1-ticotimo@gmail.com>
-User-Agent: Evolution 3.30.5-1.1 
+Return-Path: <ross.burton@intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CF317FC56;
+	Mon, 20 Jan 2020 11:24:23 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	20 Jan 2020 03:24:24 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,341,1574150400"; d="scan'208";a="228356518"
+Received: from grossi-mobl.ger.corp.intel.com (HELO rburton-mac01.local)
+	([10.252.38.20])
+	by orsmga006.jf.intel.com with ESMTP; 20 Jan 2020 03:24:23 -0800
+To: Andrey Zhizhikin <andrey.z@gmail.com>
+References: <20200117141632.3809-1-ross.burton@intel.com>
+	<CAHtQpK57OxO8z=iBERfc52w72H19XYyygzpL4gt7QxtLHAmfbw@mail.gmail.com>
+From: Ross Burton <ross.burton@intel.com>
+Organization: Intel Corporation (UK) Ltd. - Co. Reg. #1134945 - Pipers Way,
+	Swindon SN3 1RJ
+Message-ID: <c9210040-bd8f-9b1a-f870-f48d40c7d295@intel.com>
+Date: Mon, 20 Jan 2020 11:24:22 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+	Gecko/20100101 Thunderbird/68.4.1
 MIME-Version: 1.0
-Subject: Re: [meta-python2][PATCH] python-beautifulsoup4: fix target RDEPENDS
+In-Reply-To: <CAHtQpK57OxO8z=iBERfc52w72H19XYyygzpL4gt7QxtLHAmfbw@mail.gmail.com>
+Cc: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org,
+	OE Core mailing list <openembedded-core@lists.openembedded.org>
+Subject: Re: [RFC PATCH] python: remove Python 2 and all supporting classes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,61 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2020 10:29:30 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 20 Jan 2020 11:24:24 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2020-01-19 at 15:24 -0800, Tim Orling wrote:
-> * target has run-time dependencies on:
->   - python-html
->   - python-logging
+On 19/01/2020 22:23, Andrey Zhizhikin wrote:
+> I've just realized that this breaks entire
+> [meta-openembedded/meta-python]. I'm now in a process of removing
+> Python2 recipes, and just wanted to check that I'm doing the right
+> thing and this is actually intended. Or am I missing something in my
+> build config that is required to be set that Python2 gets disabled and
+> I would actually not need to eliminate those recipes (some are
+> actually dubbed by python3- versions but some are not)?
 
-Any reason -native doesn't depend on those?
+The python2 recipes are already copied into meta-python2, so the py2 
+recipes in meta-python should be deleted.
 
-> Unexpectedly, class-target += override is wiping out
-> RDEPENDS_${PN}, so explicitly add the rest of the
-> run-time dependencies (python-html5lib, python-lxml,
-> python-soupsieve).
-
-This is expected, you should instead do:
-
-RDEPENDS_${PN}_append_class-target = "\
-    ${PYTHON_PN}-html \
-    ${PYTHON_PN}-logging"
-
-So as to avoid duplication and having to maintain two distinct lists.
-
-Cheers,
-Andre'
-
-
-> 
-> Signed-off-by: Tim Orling <ticotimo@gmail.com>
-> ---
->  recipes-devtools/python/python-beautifulsoup4_4.8.1.bb | 10 ++++++++++
->  1 file changed, 10 insertions(+)
-> 
-> diff --git a/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb b/recipes-devtools/python/python-
-> beautifulsoup4_4.8.1.bb
-> index 86482714..8ac9c8c5 100644
-> --- a/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb
-> +++ b/recipes-devtools/python/python-beautifulsoup4_4.8.1.bb
-> @@ -19,4 +19,14 @@ RDEPENDS_${PN} = "\
->      ${PYTHON_PN}-soupsieve \
->  
-> +# class override, which is not
-> +# inheriting from above (FIXME?)
-> +RDEPENDS_${PN}_class-target += "\
-> +    ${PYTHON_PN}-html \
-> +    ${PYTHON_PN}-html5lib \
-> +    ${PYTHON_PN}-logging \
-> +    ${PYTHON_PN}-lxml \
-> +    ${PYTHON_PN}-soupsieve \
-> +"
-> +
->  BBCLASSEXTEND = "native nativesdk"
-> -- 
-> 2.25.0
-> 
+Ross
 
 
