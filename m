@@ -1,49 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 008A96C3E1
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 005B67FBFA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 02:18:26 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id a203so28749621qkc.3
+	Mon, 20 Jan 2020 04:01:04 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id l24so14853060pgk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jan 2020 18:18:28 -0800 (PST)
+	Sun, 19 Jan 2020 20:01:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=x79bwq0fy2DIIBjl9b3AEHCR18nyAQaxIWTOP05wU+g=;
-	b=NFP+HwrjCqNKbXFwMVHDUHm1wPteKLZhqieLQIGU5T/Q8IvH8Mm37Ce9m/Vfw5aUs1
-	YXSOC9EpNQWSlGid56ZtTOZHya4K5nMbNbPyysKoz1ntQvuYXLW3iLkmEX//73ZGKacW
-	YauP2OMeV0z+drq7AZj1EUbo8PcCsLNaT0ujJh9FzkzJHKomYY6gFK05y1dVQ8oeb1pq
-	Xaxq0o1CbPLnIWkeSU74nxYskVf08eQPzskvxV8blGMo6mw853K8/1Oz9yYQ3O68dJD2
-	dCHqB7TMCmnTMxeg15EhPrrbS8ua0jALlpBmcUEvjQYlSNe2VEZPBGeK22rHB43ceOrR
-	RYQA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=trSDlm7gKhK5lZdAg3Uzemc34fyzhW/D+nGB1L9pFCM=;
+	b=A+qP7aA2zs7TYlT63zHgMCiT4kt1V6x9rGY5OE/qWKrQw6aMKWccV4Em99ix/H030i
+	YraL5d71cFBU9lQ2pN05ieYoEac9KXHNh9ZDxfiJQ4K1XpAoedKU+AUtvY44DNB1OSbk
+	h/C996vFub1E8dTFRJGaXONdl1lflYw4N6apfISHn84vTTP56Qs0N10RTjQ2M7YTQC3f
+	HszQlpvVAuSDcjdaMvtfPWU5xF5Y4Z+jEJF4fRSCD/3+hIzbOvRAmNiS9UMnskaFT7Y5
+	CWLA4R+bqrjbYcDnjpZOCjdRB4J54tkM5s+dgNo0KGXhzuiPbZswQDdBOLb23x3hVlDB
+	lWvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=x79bwq0fy2DIIBjl9b3AEHCR18nyAQaxIWTOP05wU+g=;
-	b=HETKj65yGwrrOvdN1aVRDvg3CgwuKW9QjoePP7c+TYH1WPU0xo1ziT3GNE5MiuZLUH
-	RnTZ5eXVUc/Q64vYoJO1tDVxmaaIjIrDBZdfUPUopTyni3SLvhcHSqm4U+7QZf9kpo2k
-	nXudxxlMEQUB0Dwk2vwMXYI3jJdAChFvYx4zETLuT3Go2T8cEOVt78b00azGJ/rS+WBF
-	zsXlnQf9Ok3Kq/dB/4JUD9kd/4+Iyxe/Z/f/WvctGQHTPfcxqpYAwAh85Mlrkt0P5ufI
-	YiPCqvM6iM0q4bXgNK+ZtVSyOxsyYLU9HOWYW3kBxQG/UsNuVJGErOGd26t/TWxL3n+5
-	k37g==
-X-Gm-Message-State: APjAAAWMRf+mdt6mNPwKX9r+D1YMrYaGnSD0qRGJs2CLBIlAQlhikRy6
-	0/GrcKzI9N/eIo0/7jj/AOWServV24jgmb3tWsg=
-X-Google-Smtp-Source: APXvYqxDWMiXf1ZjMB0tB71977WgvOm7068mvQu5IqVFxLOXImv8pXpaiTed3r9rw1yvES2qUmXeABe9jZ98UqAR5ZE=
-X-Received: by 2002:a05:620a:6b8:: with SMTP id
-	i24mr50681534qkh.9.1579486707546; 
-	Sun, 19 Jan 2020 18:18:27 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=trSDlm7gKhK5lZdAg3Uzemc34fyzhW/D+nGB1L9pFCM=;
+	b=IiPjmmMyVV18kwkbh2JnLeNgNe6jhBAVxKKWbk3TNWnEiVa4IvNOTMsQdbooiZ0kCh
+	DJ1kyioaLISYemH3F/nLW3gSZSswDl8WQHbZHPOkas2NiSbS6DMx2zIQTCV4jtdIsiDD
+	tRc2Mjm6CmmP+4smu+cpwoAeivWVblz0UDkoNLggEezx/gcquxPCYsXBwaMf8JotY1YG
+	EQqsp2YgZ7K6V7UxArQ4oXX6qKg0guBuq1zNOT5xjQYovn3T3jX2JYkiD8jN2agXsT6V
+	GffYUqw1Yv8FBBejjrPHG2mTvfa7CtsXC5+ERcL/cb1Vf55640//k5BqoJm95Hkv0B8j
+	L9lQ==
+X-Gm-Message-State: APjAAAWtvXzuqddtjeVdGCO8CFxw/SM1FQbBH1fftJoME8QqWv+wFNPy
+	tFijVf/TwCwjmMIWv06ZjhOYtaUJYXQ=
+X-Google-Smtp-Source: APXvYqzCpogKREyzoNn2EKWb99PyKBvpdY78xwj5u6H0tO/+7x+0GvX2vfSvfqT23Ww0C8Hh8JHB7w==
+X-Received: by 2002:a63:d047:: with SMTP id s7mr56678620pgi.81.1579492865684; 
+	Sun, 19 Jan 2020 20:01:05 -0800 (PST)
+Received: from thetis.hsd1.or.comcast.net
+	([2601:1c0:6080:4500:f5dc:646c:4755:5ca9])
+	by smtp.gmail.com with ESMTPSA id
+	v13sm38622107pgc.54.2020.01.19.20.01.05
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 19 Jan 2020 20:01:05 -0800 (PST)
+From: Tim Orling <ticotimo@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 19 Jan 2020 20:00:25 -0800
+Message-Id: <20200120040025.22144-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-References: <20200120003527.1518697-1-raj.khem@gmail.com>
-	<CALbNGRTc_pyQHKveimQX7y2jhzXSb+8N=VoOByWrz=XVWCa2Og@mail.gmail.com>
-In-Reply-To: <CALbNGRTc_pyQHKveimQX7y2jhzXSb+8N=VoOByWrz=XVWCa2Og@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 19 Jan 2020 18:18:00 -0800
-Message-ID: <CAMKF1sokWNutzq-ngDUWihSZqXNufjh6YGM2_ykHFgZFZCxj5w@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/5] python3-pytoml,python3-jsmin: Add recipes
+Subject: [meta-python2][PATCH v2] python-cmd2: downgrade to 0.8.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,42 +58,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2020 02:18:27 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 20 Jan 2020 04:01:05 -0000
+Content-Transfer-Encoding: 8bit
 
-On Sun, Jan 19, 2020 at 5:04 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> On Mon, Jan 20, 2020 at 1:35 AM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  .../recipes-devtools/python/python3-pytoml_0.1.21.bb  |  2 ++
-> >  .../recipes-devtools/python/python3-jsmin_2.2.2.bb    | 11 +++++++++++
-> >  2 files changed, 13 insertions(+)
-> >  create mode 100644 meta-oe/recipes-devtools/python/python3-pytoml_0.1.=
-21.bb
-> >  create mode 100644 meta-python/recipes-devtools/python/python3-jsmin_2=
-.2.2.bb
-> >
-> mozjs says thanks :)
->
+* 0.8.9 was the last version with Python 2.7 support
 
-mozjs would need more love though, firefox bugzilla shows that py3
-migration bug was opened
-three years ago and despite being actively worked on has not finished yet.
+* add missing RDEPENDS:
+  - python-argparse
 
-https://bugzilla.mozilla.org/buglist.cgi?short_desc_type=3Dregexp&short_des=
-c=3Dpy(thon)%3F[%20-]%3F3&resolution=3D---&classification=3DClient%20Softwa=
-re&classification=3DDeveloper%20Infrastructure&classification=3DComponents&=
-classification=3DServer%20Software&classification=3DOther&order=3DBug%20Num=
-ber
+FIXME: missing dependency on python-enum, which is not
+       currently packaged by python_2.7
 
-I guess we might have
-to depend on meta-py2 for considerable future, I will see how it goes
-for a few weeks if no patches turn up
-I will simply add a dependency on meta-py2 and move on.
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
+---
+ .../python/{python-cmd2_0.9.21.bb => python-cmd2_0.8.9.bb} | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+ rename recipes-devtools/python/{python-cmd2_0.9.21.bb => python-cmd2_0.8.9.bb} (80%)
 
-> Andreas
+diff --git a/recipes-devtools/python/python-cmd2_0.9.21.bb b/recipes-devtools/python/python-cmd2_0.8.9.bb
+similarity index 80%
+rename from recipes-devtools/python/python-cmd2_0.9.21.bb
+rename to recipes-devtools/python/python-cmd2_0.8.9.bb
+index 992b95ea..74cc5d6f 100644
+--- a/recipes-devtools/python/python-cmd2_0.9.21.bb
++++ b/recipes-devtools/python/python-cmd2_0.8.9.bb
+@@ -8,16 +8,17 @@ eliminates much of the boilerplate code which would be necessary when using cmd.
+ HOMEPAGE = "http://packages.python.org/cmd2/"
+ 
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=01aeabea7ae1529a8e4b674b7107d6bc"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=60bc6842001870a418935bd84570b676"
+ 
+-SRC_URI[md5sum] = "0e1ce6a2fd8846c2a9e0de2ceb1fa461"
+-SRC_URI[sha256sum] = "8880fea501bb45a42e8ddde18023d336ccf72f187c4b03e9ee9f13d719ecbd5f"
++SRC_URI[md5sum] = "878976772c305486dfbca3aff4b4e779"
++SRC_URI[sha256sum] = "145cb677ebd0e3cae546ab81c30f6c25e0b08ba0f1071df854d53707ea792633"
+ 
+ DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+ 
+ inherit pypi setuptools
+ 
+ RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-argparse \
+     ${PYTHON_PN}-doctest \
+     ${PYTHON_PN}-pyparsing \
+     ${PYTHON_PN}-pyperclip \
+-- 
+2.25.0
+
 
