@@ -1,51 +1,49 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C163F7FBA6
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 008A96C3E1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 01:57:21 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id k197so14703956pga.10
+	Mon, 20 Jan 2020 02:18:26 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id a203so28749621qkc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Jan 2020 17:57:23 -0800 (PST)
+	Sun, 19 Jan 2020 18:18:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=IFEU3jN9mt2ODpUjali5XO7IM/0iVI390Oz5NjBxmkw=;
-	b=Sg8WNq8nkmdKf/jXmRBjs0rkjz3F/Ijthz/BZGcq3QwNJbT5JCAsqQ3NJx4v+xuiu9
-	FRkEtJ9rlJ49ZbijTaQ9uuymNUT44p3CgWRUyb9DxGdWT875RMP4JnfzPSVxAyqwLDu7
-	cOXug8lIMpXimKET/1RqvdjO3pv8c44/oz18HN56h3Y8CMsMpZTJbn9BJ8EPt/ee4+ih
-	xXakcfzPRSmHpWzz3UTMkF7GVhXbEXZmEE+U1QTNv4TaeKe+Hk5FcXkkau7iykXVy16k
-	O+lFPZfu5ufaMh7n0676EJXBZVSaoXGOcWcZ+Et/TNIOrsMG+wVHnFMoNE/tAplMt33n
-	vOBg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=x79bwq0fy2DIIBjl9b3AEHCR18nyAQaxIWTOP05wU+g=;
+	b=NFP+HwrjCqNKbXFwMVHDUHm1wPteKLZhqieLQIGU5T/Q8IvH8Mm37Ce9m/Vfw5aUs1
+	YXSOC9EpNQWSlGid56ZtTOZHya4K5nMbNbPyysKoz1ntQvuYXLW3iLkmEX//73ZGKacW
+	YauP2OMeV0z+drq7AZj1EUbo8PcCsLNaT0ujJh9FzkzJHKomYY6gFK05y1dVQ8oeb1pq
+	Xaxq0o1CbPLnIWkeSU74nxYskVf08eQPzskvxV8blGMo6mw853K8/1Oz9yYQ3O68dJD2
+	dCHqB7TMCmnTMxeg15EhPrrbS8ua0jALlpBmcUEvjQYlSNe2VEZPBGeK22rHB43ceOrR
+	RYQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=IFEU3jN9mt2ODpUjali5XO7IM/0iVI390Oz5NjBxmkw=;
-	b=gMRAeN23QnltoZ9OdOCkEsTxWW72/yr3aw1i6xlO0iRlQcdn4DN742wYJwomus9rxd
-	yHFLo6uKmo0mFwNfvmYah4D1RkJiMe7X8RJ2ylEWvSAQpWtAkd27XdUsSBIY7TFNOg/p
-	OXsXw7gGSP7MNewn/Pw2Bqhtd6vgOfYf3bEUjldrn53sciLPmWdYMWPdbSRgLftfckIE
-	jiAHH60fWt/lGP37ReqRH7bi+bPTz5zLTannAlPOAIJ84M9urr2y3vPeIlcXg2DPwAp6
-	A++AJ1o8++DIeDy0qsymoUzdl/owLTWfPyyRfhhts8lG0GiOgha/QrsbhEylKkOtvhqz
-	fUQg==
-X-Gm-Message-State: APjAAAWd7ruIORigMG3e+EYm6Lg6/HvDfUY0MKgC7eIQmql538rZMEDe
-	Ft/9Z9msPYPUv6lhIAKk0ge8Z4NXdHo=
-X-Google-Smtp-Source: APXvYqwup902+WFIuEO9xggpaKCWAU9yAcFjm7OFCV2dwH1A+EVA1/wY4HQghfQA87Yp22HtPwBydQ==
-X-Received: by 2002:a65:5ccc:: with SMTP id b12mr57059875pgt.124.1579485442672;
-	Sun, 19 Jan 2020 17:57:22 -0800 (PST)
-Received: from thetis.hsd1.or.comcast.net
-	([2601:1c0:6080:4500:f5dc:646c:4755:5ca9])
-	by smtp.gmail.com with ESMTPSA id
-	x33sm35274588pga.86.2020.01.19.17.57.22
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 19 Jan 2020 17:57:22 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 19 Jan 2020 17:57:11 -0800
-Message-Id: <20200120015711.32856-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=x79bwq0fy2DIIBjl9b3AEHCR18nyAQaxIWTOP05wU+g=;
+	b=HETKj65yGwrrOvdN1aVRDvg3CgwuKW9QjoePP7c+TYH1WPU0xo1ziT3GNE5MiuZLUH
+	RnTZ5eXVUc/Q64vYoJO1tDVxmaaIjIrDBZdfUPUopTyni3SLvhcHSqm4U+7QZf9kpo2k
+	nXudxxlMEQUB0Dwk2vwMXYI3jJdAChFvYx4zETLuT3Go2T8cEOVt78b00azGJ/rS+WBF
+	zsXlnQf9Ok3Kq/dB/4JUD9kd/4+Iyxe/Z/f/WvctGQHTPfcxqpYAwAh85Mlrkt0P5ufI
+	YiPCqvM6iM0q4bXgNK+ZtVSyOxsyYLU9HOWYW3kBxQG/UsNuVJGErOGd26t/TWxL3n+5
+	k37g==
+X-Gm-Message-State: APjAAAWMRf+mdt6mNPwKX9r+D1YMrYaGnSD0qRGJs2CLBIlAQlhikRy6
+	0/GrcKzI9N/eIo0/7jj/AOWServV24jgmb3tWsg=
+X-Google-Smtp-Source: APXvYqxDWMiXf1ZjMB0tB71977WgvOm7068mvQu5IqVFxLOXImv8pXpaiTed3r9rw1yvES2qUmXeABe9jZ98UqAR5ZE=
+X-Received: by 2002:a05:620a:6b8:: with SMTP id
+	i24mr50681534qkh.9.1579486707546; 
+	Sun, 19 Jan 2020 18:18:27 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-python2][PATCH v2] packagegroup-meta-python2: add python-soupsieve
+References: <20200120003527.1518697-1-raj.khem@gmail.com>
+	<CALbNGRTc_pyQHKveimQX7y2jhzXSb+8N=VoOByWrz=XVWCa2Og@mail.gmail.com>
+In-Reply-To: <CALbNGRTc_pyQHKveimQX7y2jhzXSb+8N=VoOByWrz=XVWCa2Og@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 19 Jan 2020 18:18:00 -0800
+Message-ID: <CAMKF1sokWNutzq-ngDUWihSZqXNufjh6YGM2_ykHFgZFZCxj5w@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/5] python3-pytoml,python3-jsmin: Add recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,28 +56,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2020 01:57:21 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 20 Jan 2020 02:18:27 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
----
- recipes-core/packagegroups/packagegroup-meta-python2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Sun, Jan 19, 2020 at 5:04 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+>
+> On Mon, Jan 20, 2020 at 1:35 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  .../recipes-devtools/python/python3-pytoml_0.1.21.bb  |  2 ++
+> >  .../recipes-devtools/python/python3-jsmin_2.2.2.bb    | 11 +++++++++++
+> >  2 files changed, 13 insertions(+)
+> >  create mode 100644 meta-oe/recipes-devtools/python/python3-pytoml_0.1.=
+21.bb
+> >  create mode 100644 meta-python/recipes-devtools/python/python3-jsmin_2=
+.2.2.bb
+> >
+> mozjs says thanks :)
+>
 
-diff --git a/recipes-core/packagegroups/packagegroup-meta-python2.bb b/recipes-core/packagegroups/packagegroup-meta-python2.bb
-index 8ee9bad9..41ba3abd 100644
---- a/recipes-core/packagegroups/packagegroup-meta-python2.bb
-+++ b/recipes-core/packagegroups/packagegroup-meta-python2.bb
-@@ -57,7 +57,7 @@ RDEPENDS_packagegroup-meta-python2 = "\
-     python-aws-iot-device-sdk-python python-constantly python-bitarray python-flask-wtf \
-     python-parse-type python-ipaddress python-dbus python-cpuset python-distutils-extra \
-     python-futures python-jsmin python-pygobject python-pytoml python-six python-which \
--    python-netifaces python-configargparse python-sqlparse \
-+    python-netifaces python-configargparse python-sqlparse python-soupsieve \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "python-pam pamela", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "python-systemd", "", d)} \
- "
--- 
-2.25.0
+mozjs would need more love though, firefox bugzilla shows that py3
+migration bug was opened
+three years ago and despite being actively worked on has not finished yet.
 
+https://bugzilla.mozilla.org/buglist.cgi?short_desc_type=3Dregexp&short_des=
+c=3Dpy(thon)%3F[%20-]%3F3&resolution=3D---&classification=3DClient%20Softwa=
+re&classification=3DDeveloper%20Infrastructure&classification=3DComponents&=
+classification=3DServer%20Software&classification=3DOther&order=3DBug%20Num=
+ber
+
+I guess we might have
+to depend on meta-py2 for considerable future, I will see how it goes
+for a few weeks if no patches turn up
+I will simply add a dependency on meta-py2 and move on.
+
+> Andreas
 
