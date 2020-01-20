@@ -1,51 +1,53 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D24E87FCED
+Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com
+	[209.85.216.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E91CF7FCFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 19:53:32 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id i23so241737pfo.2
+	Mon, 20 Jan 2020 19:53:35 +0000 (UTC)
+Received: by mail-pj1-f65.google.com with SMTP id e11so243241pjt.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 11:53:34 -0800 (PST)
+	Mon, 20 Jan 2020 11:53:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=YvOlfwSPXev9Idi4IYzKKXyM+G8a+TaEf/97XKxTnRM=;
-	b=GYn+/2cCLb5Ryrb/E0YVu5tNdzuBVhsIGHrH58Hxvx6vQeHTI1LvDWdmNqaEm0pxU+
-	nxiQwKji/mK1uxIz3n7ch3roByJvA4JgYeCnSSLknTs28ySF0lvA5qsLd8JTzqzft7eK
-	OOrfiwfItgyqMMehFnxYN933SJtQ+XFz4yObLs0SbMUplzX2oUwHBJ6hB5crF0PJoocR
-	J6tSjvtdtOXwGDO4g+CPTZfrlRuQkg9FM6/WYngNVegaEdqZaQn3sLL3aMzsikVv7MBU
-	4F3oUrUwiaXqVjkQxlf9oo8ueos573OS6aAOqfnYBdkKUiDuGh3JQld9KhTlFBafDg+Z
-	RElQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=fDk+n9wCZiMcQyS8rgx8J9fZxA7ymGqiflmfLflJyLU=;
+	b=YbKHjeJYlpSOLOo3f6oPuc/hOCay1s82piTUfwsCQZoqX24kDy3mCb9BtV2Xl9rmpZ
+	khFUOhRJbvHCLWV5tDD7bT/S35YfdIX/VUZ8BVDx86B4Ql0d+7nsXr0TFE8zAoxhXqz9
+	VMc2h57ImR1wkCTJ8VlUXOdw8BnNFVqJ+rHiL4kFOwbuMytUhtwmVRK6pxcj4DmBjRH0
+	Z+kM3tLU6qdnPGRWCEdWXTTBYPGB3LB1ITOHB/IJeWRS502O8c2fnHHnfKny8JyY3zsu
+	ZDCDVRlaZXAzMgHodv5Xvd4VhphwGiqltw/OINr1OCygUTlKJWFXnsCEf2v1GAY0yjBV
+	coVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=YvOlfwSPXev9Idi4IYzKKXyM+G8a+TaEf/97XKxTnRM=;
-	b=g4s+yobLE9qLuTwBLigD0JY1FaAKarnpQcDPSQFoDSADWjseEsu8m9xVWuY0bcRYJF
-	Gt7KV4efEcPTwwLKcCxApCYi+G060zNNn9E0lmaazEVLAtRSxdA8WN2ML8VsIdVU2wkG
-	Q/3vL/SYz2bqPBuBc5v5CVdH+ZBqefQvcxbcWVWvLwm+Ihm/3KQiuKP6kYg8qBpvkwK1
-	dq2BSGvc/FREWVIWXnclIbRilooAc0i1pOCYWwgv949cXO73LtP1ljctLQFMQv5/w5LH
-	+54AZqTANTENOW8qCgX0Ch3QhaLf+jBFZQgbsS2HUrXLK1yrhg8m+Yxky7UxChqWH5Ll
-	DF+Q==
-X-Gm-Message-State: APjAAAXB5cYaffgllbA8LlgTkxctnE+7AFfmH57PR5SNtUi0qk8Sb90y
-	0XgkJb9X8YC5Y/+5HAPeCzfNq3trRZE=
-X-Google-Smtp-Source: APXvYqytoZ8rZRG4FVf4fyTIVhmICEQgfZ1C0Hzz66qIb+6lNOaOr0FjT4k35qBuHGIB9upBprGFkA==
-X-Received: by 2002:a63:1b49:: with SMTP id b9mr1365579pgm.258.1579550013532; 
-	Mon, 20 Jan 2020 11:53:33 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=fDk+n9wCZiMcQyS8rgx8J9fZxA7ymGqiflmfLflJyLU=;
+	b=DgNDL3OX1AxKzmTV1qzrXqYmerfPtK3NPmZO18Cae+vNmOzgzJDicbz9BiwrgR4rBC
+	o4nI+es0sFr3Yfjb5wSKmMTyuJGVzHBMOkVuKtsO5ex+ylE/K2ASmW1dZXvGqC6OWOlI
+	U/otMb4F3CidLwm/iKMlS53xD7MrGIPaGJZm6iXzW5mBX78LHckzyiuHyFVkHOYP+F9n
+	oqJeRO6R7/RGY6O3ssEQz4UtyYUqqvpleJW0DTapMvosaz4vL5QQKfMGfhWq/bkNtrTj
+	nsr1dOfuRtYB68Uzr2O+96UVmpm70vWBdFjWjg/cwMGDXoxHMKpIxrYy4sDcMugoG0Po
+	Oe4A==
+X-Gm-Message-State: APjAAAUxXaHexF1iBe7ly35yKxgOs4YDJoFiTgkbHVKiXbJsFBbNhRn4
+	y225gMb+7t/bneLawYUWmfFW9O+E2/c=
+X-Google-Smtp-Source: APXvYqwd0nnM2FdMaItNT6cBBPUQWGyHwndBEO34j7CbuaySpDqYaJbjTVxWW/AREpF4kKBFg07aYQ==
+X-Received: by 2002:a17:90a:cf07:: with SMTP id h7mr735052pju.66.1579550016960;
+	Mon, 20 Jan 2020 11:53:36 -0800 (PST)
 Received: from thetis.hsd1.or.comcast.net
 	([2601:1c0:6080:4500:f5dc:646c:4755:5ca9])
 	by smtp.gmail.com with ESMTPSA id
-	x65sm42189728pfb.171.2020.01.20.11.53.32
+	x65sm42189728pfb.171.2020.01.20.11.53.36
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 20 Jan 2020 11:53:32 -0800 (PST)
+	Mon, 20 Jan 2020 11:53:36 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Jan 2020 11:53:05 -0800
-Message-Id: <20200120195306.10880-1-ticotimo@gmail.com>
+Date: Mon, 20 Jan 2020 11:53:06 -0800
+Message-Id: <20200120195306.10880-2-ticotimo@gmail.com>
 X-Mailer: git-send-email 2.25.0
+In-Reply-To: <20200120195306.10880-1-ticotimo@gmail.com>
+References: <20200120195306.10880-1-ticotimo@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python2][PATCH 1/2] python-beautifulsoup4: fix target RDEPENDS syntax
+Subject: [meta-python2][PATCH 2/2] python-parse: fix target RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,45 +60,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2020 19:53:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 20 Jan 2020 19:53:36 -0000
 Content-Transfer-Encoding: 8bit
 
-Thanks to review by André Draszik, the syntax that
-was eluding me in prior patch is now corrected.
+Missing run-time dependency on:
+  - python-numbers (decimal)
 
-NOTE: -native,-nativesdk recipes have the full build
-of python2 at their disposal, including all modules.
-For target builds, we need to include the packages-split
-modules that are produced by the OE python manifest.
-
-Fixes: 417762c0 python-beautifulsoup4: fix target RDEPENDS
+Move RDEPENDS to _append_class-target in case -native,-nativesdk
+is desired in the future.
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- recipes-devtools/python/python-beautifulsoup4_4.8.2.bb | 7 +------
- 1 file changed, 1 insertion(+), 6 deletions(-)
+ recipes-devtools/python/python-parse_1.14.0.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/recipes-devtools/python/python-beautifulsoup4_4.8.2.bb b/recipes-devtools/python/python-beautifulsoup4_4.8.2.bb
-index 821e5c2c..9f9065e2 100644
---- a/recipes-devtools/python/python-beautifulsoup4_4.8.2.bb
-+++ b/recipes-devtools/python/python-beautifulsoup4_4.8.2.bb
-@@ -19,14 +19,9 @@ RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-soupsieve \
- "
+diff --git a/recipes-devtools/python/python-parse_1.14.0.bb b/recipes-devtools/python/python-parse_1.14.0.bb
+index 6e03d4b8..1fd51163 100644
+--- a/recipes-devtools/python/python-parse_1.14.0.bb
++++ b/recipes-devtools/python/python-parse_1.14.0.bb
+@@ -8,7 +8,8 @@ SRC_URI[sha256sum] = "95a4f4469e37c57b5e924629ac99926f28bee7da59515dc5b8078c4c3e
  
--# class override, which is not
--# inheriting from above (FIXME?)
--RDEPENDS_${PN}_class-target += "\
+ inherit pypi setuptools
+ 
+-RDEPENDS_${PN} += "\
 +RDEPENDS_${PN}_append_class-target = "\
-     ${PYTHON_PN}-html \
--    ${PYTHON_PN}-html5lib \
+     ${PYTHON_PN}-datetime \
      ${PYTHON_PN}-logging \
--    ${PYTHON_PN}-lxml \
--    ${PYTHON_PN}-soupsieve \
- "
- 
- BBCLASSEXTEND = "native nativesdk"
++    ${PYTHON_PN}-numbers \
+     "
 -- 
 2.25.0
 
