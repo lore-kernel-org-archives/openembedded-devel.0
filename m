@@ -1,38 +1,37 @@
 Return-Path: <andrey.z@gmail.com>
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com
-	[209.85.128.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A0BA7F867
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id BA8F67F867
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 20:17:57 +0000 (UTC)
-Received: by mail-wm1-f52.google.com with SMTP id p9so637517wmc.2
+	Mon, 20 Jan 2020 20:17:58 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id z3so851361wru.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 12:17:59 -0800 (PST)
+	Mon, 20 Jan 2020 12:18:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=zXUV5R6tvBvjCnIzVI08uyVnXbk3qfQBAeDTFLXNDQM=;
-	b=hmb3lPkO/ZE4RMDtHKqBimHKfX8XqVwFb8GQfwSHvkNZQPYIYaZm4KdRC+X4nsGnnq
-	79RJTkfwVdqSWISluyNPTwHCOBlOu+Fyjv5fDzxZJNBAKRGd/AF1FOIwXAHvncTEzfKQ
-	y/46cTdpNCTiCBwlhKEi/DhgcRMUdhBZR/JLakIzkUGCTCqOcv6pxCaKZsldcJ565GaW
-	tPuTcCRymF98K9dirvfNLM8p5JM1bXyERd3dAI/SunFzcYvtqi3kCrdZrW7l5ovqETvI
-	MpMQVEX3dYnILD8FQjGSlaso3G0jjZVKdDl96C8ZNP1YCh3HE6YB1ZWU0cZ+KtwiV4Yx
-	JB4g==
+	bh=C0lWpck9/T2EVK2OKLq6S7ER3kGGQR/RmweLdQGjsT8=;
+	b=ZbbO/8vlmPaKiiIU5JzQmR6MzWhGPxVa6eaBKX/nA7IqOKeG9KZLuQYBNqxEJ6FtIC
+	JEPeXXxJl89WXz/EzfOiiKeBK5RFqbwm7zvVhq1Z6/HvVokpws/3TwMleJ83M4ww+/ic
+	CmGaWehTg/5chj5OOkBrH5FvxN8n2NP1SGSCWY6f1jFLTpt+O67Y90hGgADHxcJJGcvF
+	xZK/s+47NW+zkqLfLo4C1QOkqhG8TzlN4zAfQh9Rmen67fE6jsKfT1MPR8SnwcKxqXG0
+	BmaTfwhQZAMkY2n/46RjY+S3v2kepwXPlTjlUFIkpIBap6+M8GzZSZEBousIHWPba8br
+	yLLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=zXUV5R6tvBvjCnIzVI08uyVnXbk3qfQBAeDTFLXNDQM=;
-	b=tdhtpOb+RpWTbADx8J8Q52KyjRWnf6hDE5f6L0/S+QeBtSmZvm5LqtnjG4UQQWOaAq
-	Sdyx2qN5EyqC6797SHcIVMrVfL659iorbO/SWndXkZI9qiPpy//YgH7uXeXYvFXNnE0u
-	ZiAZZLKUR5Za5ueXF66wAC1CqCIDORxTYBbH8FGuF/EerrVT+kMMFjuKpLnl3lOyIkaG
-	+jMtkN0W6+Qv9F/Q6ClMQgM7+h6RE5k/g1MwE2vkzZvgLt8jzr/zG09aC+WmxCbqyLAk
-	++hq5v93HxnvcNMPnuGZiDf2jI2wWLW611+yr9XrRfH/QBG3MWtSjOqni1bHxSd+WCnb
-	rqRg==
-X-Gm-Message-State: APjAAAWXOmYsFYCAYD1kvq+mVqwvT1lflet1d7OdSEZxhGgRUPoFU3+z
-	uK2rSaMh50o/GbtJtLyvXwwl8BNwv2o=
-X-Google-Smtp-Source: APXvYqyIdJr4R7cM+E5cOu/rsrZOHcFIGDmnyhuZgd+hfFiyiFApPR2cfUarIYqZH7YXR96zxHuPhw==
-X-Received: by 2002:a05:600c:1103:: with SMTP id
-	b3mr510462wma.141.1579551478683; 
-	Mon, 20 Jan 2020 12:17:58 -0800 (PST)
+	bh=C0lWpck9/T2EVK2OKLq6S7ER3kGGQR/RmweLdQGjsT8=;
+	b=HYQHjFdTaA2Z55NrJGzWpFUpaeYt+XtLuSfqzc4q4HPcxjp6dNXup8l+msL4xRk2RI
+	AnC7sKsnMRTRkojcRJM9vsDRAB/WK9l/VzUg687NGlqGtuPsmYCpC1W26pEYR5YFWibI
+	1hn7ce5a7Enzg/bhQrdP0crKHP2tdA+HdgpWKKUK5JWFjp0ZqJQJNVa/mCgRTWAX0Esd
+	JjxThpeb8B1THnkn9gdPF+BSQgd3um9TC6sG04SWHUqAgdpuQTu0LzaVjMaqLSEL6Cb4
+	RZyBCuSLY0W6A4Ft8cZQePpQ/+Th1JSgZYr6aDdsNtuJcaecA/VSz5QoD2fsIT8Lmkyy
+	R3IA==
+X-Gm-Message-State: APjAAAX/V3faqE45R716i42ElSw/Qft9ALrvalmFIx0DmmKwKmvswAKq
+	7D24/wjHRuTVNBHO1nSxnk2qbh7vcUQ=
+X-Google-Smtp-Source: APXvYqwdwP9XC8T5QUmUKsWODMp7skzrvkQpnQN2zdVW3lY4vKfLyg5A6debsM9rJBVNY8E5AcwiWg==
+X-Received: by 2002:adf:e641:: with SMTP id b1mr1237303wrn.34.1579551479358;
+	Mon, 20 Jan 2020 12:17:59 -0800 (PST)
 Received: from lab-linux-pc.tendawifi.com (cable-static2-2-7.rsnweb.ch.
 	[146.185.2.7]) by smtp.gmail.com with ESMTPSA id
 	d8sm50174339wre.13.2020.01.20.12.17.58
@@ -40,12 +39,12 @@ Received: from lab-linux-pc.tendawifi.com (cable-static2-2-7.rsnweb.ch.
 	Mon, 20 Jan 2020 12:17:58 -0800 (PST)
 From: Andrey Zhizhikin <andrey.z@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Jan 2020 20:17:49 +0000
-Message-Id: <20200120201750.29842-3-andrey.z@gmail.com>
+Date: Mon, 20 Jan 2020 20:17:50 +0000
+Message-Id: <20200120201750.29842-4-andrey.z@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200120201750.29842-1-andrey.z@gmail.com>
 References: <20200120201750.29842-1-andrey.z@gmail.com>
-Subject: [meta-python][PATCH 2/3] meta-python: rename python2 recipes to python3 eqiuvalent
+Subject: [meta-python][PATCH 3/3] meta-python: update recipes to use python3 classes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,111 +57,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2020 20:17:58 -0000
+X-List-Received-Date: Mon, 20 Jan 2020 20:17:59 -0000
 
-Rename recipes which were previously built with python2 to their python3
-equivalents.
-
-Use new python3 classes (setuptools3) in those recipes.
+Update recipes to use python3 classes instead of deprecated python2
+variants.
 
 Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
 ---
- .../{python-pyro4_4.77.bb => python3-pyro4_4.77.bb}             | 2 +-
- .../{python-thrift_0.13.0.bb => python3-thrift_0.13.0.bb}       | 2 +-
- .../python-txws/{python-txws_0.9.1.bb => python3-txws_0.9.1.bb} | 2 +-
- .../{python-jsonref_0.2.bb => python3-jsonref_0.2.bb}           | 0
- .../python-cson/{python-cson_git.bb => python3-cson_git.bb}     | 2 +-
- .../{python-pyephem_3.7.7.0.bb => python3-pyephem_3.7.7.0.bb}   | 2 +-
- 6 files changed, 5 insertions(+), 5 deletions(-)
- rename meta-python/recipes-connectivity/python-pyro4/{python-pyro4_4.77.bb => python3-pyro4_4.77.bb} (94%)
- rename meta-python/recipes-connectivity/python-thrift/{python-thrift_0.13.0.bb => python3-thrift_0.13.0.bb} (95%)
- rename meta-python/recipes-connectivity/python-txws/{python-txws_0.9.1.bb => python3-txws_0.9.1.bb} (95%)
- rename meta-python/recipes-devtools/python-jsonref/{python-jsonref_0.2.bb => python3-jsonref_0.2.bb} (100%)
- rename meta-python/recipes-extended/python-cson/{python-cson_git.bb => python3-cson_git.bb} (96%)
- rename meta-python/recipes-extended/python-pyephem/{python-pyephem_3.7.7.0.bb => python3-pyephem_3.7.7.0.bb} (94%)
+ meta-python/recipes-connectivity/gateone/gateone_git.bb         | 2 +-
+ .../recipes-connectivity/telepathy/telepathy-python_0.15.19.bb  | 2 +-
+ meta-python/recipes-devtools/python-jsonref/python-jsonref.inc  | 2 +-
+ meta-python/recipes-devtools/python/pamela_0.3.0.bb             | 2 +-
+ meta-python/recipes-devtools/python/pyrtm_0.4.2.bb              | 2 +-
+ meta-python/recipes-devtools/python/python-yappi.inc            | 2 +-
+ .../python/python3-robotframework-seriallibrary_0.3.1.bb        | 2 +-
+ 7 files changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.77.bb b/meta-python/recipes-connectivity/python-pyro4/python3-pyro4_4.77.bb
-similarity index 94%
-rename from meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.77.bb
-rename to meta-python/recipes-connectivity/python-pyro4/python3-pyro4_4.77.bb
-index 738cf8677..f9dd9300b 100644
---- a/meta-python/recipes-connectivity/python-pyro4/python-pyro4_4.77.bb
-+++ b/meta-python/recipes-connectivity/python-pyro4/python3-pyro4_4.77.bb
-@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "2bfe12a22f396474b0e57c898c7e2c561a8f850bf2055d8cf0f7119f0c
- 
- PYPI_PACKAGE = "Pyro4"
- 
--inherit pypi setuptools
-+inherit pypi setuptools3
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-logging \
-diff --git a/meta-python/recipes-connectivity/python-thrift/python-thrift_0.13.0.bb b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.13.0.bb
-similarity index 95%
-rename from meta-python/recipes-connectivity/python-thrift/python-thrift_0.13.0.bb
-rename to meta-python/recipes-connectivity/python-thrift/python3-thrift_0.13.0.bb
-index 2d51619d4..80f1a5017 100644
---- a/meta-python/recipes-connectivity/python-thrift/python-thrift_0.13.0.bb
-+++ b/meta-python/recipes-connectivity/python-thrift/python3-thrift_0.13.0.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;md5=e95cd2f17c70d3180a2b361332319fe0"
- SRC_URI[md5sum] = "c3bc8d9a910d2c9ce26f2ad1f7c96762"
- SRC_URI[sha256sum] = "9af1c86bf73433afc6010ed376a6c6aca2b54099cc0d61895f640870a9ae7d89"
- 
--inherit pypi setuptools
-+inherit pypi setuptools3
- 
- # Use different filename to prevent conflicts with thrift itself
- PYPI_SRC_URI_append = ";downloadfilename=${BP}.${PYPI_PACKAGE_EXT}"
-diff --git a/meta-python/recipes-connectivity/python-txws/python-txws_0.9.1.bb b/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
-similarity index 95%
-rename from meta-python/recipes-connectivity/python-txws/python-txws_0.9.1.bb
-rename to meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
-index f3631cda3..6d1327ac4 100644
---- a/meta-python/recipes-connectivity/python-txws/python-txws_0.9.1.bb
-+++ b/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
-@@ -11,5 +11,5 @@ SRCREV= "88cf6d9b9b685ffa1720644bd53c742afb10a414"
+diff --git a/meta-python/recipes-connectivity/gateone/gateone_git.bb b/meta-python/recipes-connectivity/gateone/gateone_git.bb
+index 5d2ca00ef..37d356452 100644
+--- a/meta-python/recipes-connectivity/gateone/gateone_git.bb
++++ b/meta-python/recipes-connectivity/gateone/gateone_git.bb
+@@ -14,7 +14,7 @@ SRC_URI = "git://github.com/liftoff/GateOne.git;branch=master \
  
  S = "${WORKDIR}/git"
  
--inherit setuptools
-+inherit setuptools3
+-inherit setuptools python-dir systemd update-rc.d
++inherit setuptools3 python3-dir systemd update-rc.d
  
-diff --git a/meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb b/meta-python/recipes-devtools/python-jsonref/python3-jsonref_0.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python-jsonref/python-jsonref_0.2.bb
-rename to meta-python/recipes-devtools/python-jsonref/python3-jsonref_0.2.bb
-diff --git a/meta-python/recipes-extended/python-cson/python-cson_git.bb b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
-similarity index 96%
-rename from meta-python/recipes-extended/python-cson/python-cson_git.bb
-rename to meta-python/recipes-extended/python-cson/python3-cson_git.bb
-index efb338cf2..5c74c7a30 100644
---- a/meta-python/recipes-extended/python-cson/python-cson_git.bb
-+++ b/meta-python/recipes-extended/python-cson/python3-cson_git.bb
-@@ -15,7 +15,7 @@ S = "${WORKDIR}/git"
- RDEPENDS_${PN}_class-native = ""
- DEPENDS_append_class-native = " python-native "
+ DISTUTILS_INSTALL_ARGS += " \
+     --install-data=${PYTHON_SITEPACKAGES_DIR} \
+diff --git a/meta-python/recipes-connectivity/telepathy/telepathy-python_0.15.19.bb b/meta-python/recipes-connectivity/telepathy/telepathy-python_0.15.19.bb
+index b7aea24a7..2e8da0805 100644
+--- a/meta-python/recipes-connectivity/telepathy/telepathy-python_0.15.19.bb
++++ b/meta-python/recipes-connectivity/telepathy/telepathy-python_0.15.19.bb
+@@ -14,7 +14,7 @@ SRC_URI = "http://telepathy.freedesktop.org/releases/${BPN}/${BPN}-${PV}.tar.gz
  
--inherit setuptools
-+inherit setuptools3
+ PR = "r6"
  
- BBCLASSEXTEND = "native"
+-inherit autotools pythonnative
++inherit autotools python3native
  
-diff --git a/meta-python/recipes-extended/python-pyephem/python-pyephem_3.7.7.0.bb b/meta-python/recipes-extended/python-pyephem/python3-pyephem_3.7.7.0.bb
-similarity index 94%
-rename from meta-python/recipes-extended/python-pyephem/python-pyephem_3.7.7.0.bb
-rename to meta-python/recipes-extended/python-pyephem/python3-pyephem_3.7.7.0.bb
-index 422f0dbc4..38b3c0a4f 100644
---- a/meta-python/recipes-extended/python-pyephem/python-pyephem_3.7.7.0.bb
-+++ b/meta-python/recipes-extended/python-pyephem/python3-pyephem_3.7.7.0.bb
-@@ -9,7 +9,7 @@ SRC_URI[sha256sum] = "607148429f85412915e32265779c0cf6d09f73aa97cf1ff0d101ac22c6
+ SRC_URI[md5sum] = "f7ca25ab3c88874015b7e9728f7f3017"
+ SRC_URI[sha256sum] = "244c0e1bf4bbd78ae298ea659fe10bf3a73738db550156767cc2477aedf72376"
+diff --git a/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc b/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc
+index 0e69e4534..45deb09c7 100644
+--- a/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc
++++ b/meta-python/recipes-devtools/python-jsonref/python-jsonref.inc
+@@ -6,6 +6,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a34264f25338d41744dca1abfe4eb18f"
+ SRC_URI[md5sum] = "42b518b9ccd6852d1d709749bc96cb70"
+ SRC_URI[sha256sum] = "f3c45b121cf6257eafabdc3a8008763aed1cd7da06dbabc59a9e4d2a5e4e6697"
  
- PYPI_PACKAGE = "ephem"
+-inherit pypi setuptools
++inherit pypi setuptools3
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/pamela_0.3.0.bb b/meta-python/recipes-devtools/python/pamela_0.3.0.bb
+index 030c22f8f..b6bee0ca2 100644
+--- a/meta-python/recipes-devtools/python/pamela_0.3.0.bb
++++ b/meta-python/recipes-devtools/python/pamela_0.3.0.bb
+@@ -7,7 +7,7 @@ SRC_URI[sha256sum] = "1e198446a6cdd87704aa0def7621d62e7c20b0e6068e2788b9a866a835
+ 
+ PYPI_PACKAGE = "pamela"
+ 
+-inherit pypi setuptools
++inherit pypi setuptools3
+ 
+ RDEPENDS_${PN} = "libpam"
+ 
+diff --git a/meta-python/recipes-devtools/python/pyrtm_0.4.2.bb b/meta-python/recipes-devtools/python/pyrtm_0.4.2.bb
+index 9d851abe3..798daeb21 100644
+--- a/meta-python/recipes-devtools/python/pyrtm_0.4.2.bb
++++ b/meta-python/recipes-devtools/python/pyrtm_0.4.2.bb
+@@ -8,7 +8,7 @@ PYPI_PACKAGE_EXT = "tar.bz2"
+ SRC_URI[md5sum] = "7c87da94656b620dfe532ca63d642eb8"
+ SRC_URI[sha256sum] = "b2d701b25ad3f9a1542057f3eb492c5c1d7dbe2b8d1e8f763043dcc14ee1d933"
+ 
+-inherit pypi setuptools
++inherit pypi setuptools3
+ 
+ PACKAGES =+ "${PN}-tests ${PN}-samples"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-yappi.inc b/meta-python/recipes-devtools/python/python-yappi.inc
+index 54d408742..b3718d7d1 100644
+--- a/meta-python/recipes-devtools/python/python-yappi.inc
++++ b/meta-python/recipes-devtools/python/python-yappi.inc
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9a193c13f346884e597acdcac7fe9ac8"
+ SRC_URI[md5sum] = "a545101aa8a435b0780f06f4723f58c8"
+ SRC_URI[sha256sum] = "7f814131515d51db62b1a3468bcb84de30499124752806a5a6e11caf0b4344bf"
  
 -inherit pypi setuptools
 +inherit pypi setuptools3
  
  RDEPENDS_${PN} += "\
      ${PYTHON_PN}-datetime \
+diff --git a/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.3.1.bb b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.3.1.bb
+index 440f69cbf..d82b7b96a 100644
+--- a/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-robotframework-seriallibrary_0.3.1.bb
+@@ -1,2 +1,2 @@
+-inherit pypi setuptools
++inherit pypi setuptools3
+ require python-robotframework-seriallibrary.inc
 -- 
 2.17.1
 
