@@ -1,44 +1,42 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-il1-f176.google.com (mail-il1-f176.google.com
-	[209.85.166.176])
-	by mail.openembedded.org (Postfix) with ESMTP id EA7DC7FC47;
-	Mon, 20 Jan 2020 16:01:14 +0000 (UTC)
-Received: by mail-il1-f176.google.com with SMTP id f5so27630501ilq.5;
-	Mon, 20 Jan 2020 08:01:16 -0800 (PST)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f50.google.com (mail-io1-f50.google.com
+	[209.85.166.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 65AD37FC03;
+	Mon, 20 Jan 2020 16:41:25 +0000 (UTC)
+Received: by mail-io1-f50.google.com with SMTP id k24so34315069ioc.4;
+	Mon, 20 Jan 2020 08:41:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=VeGQpvCAS4U3ALy7iQzDtPik6nBW1bsQiN1ArGbfFtI=;
-	b=TK1R+Syi/zIfd/C8hQt58YK+C5dnqnriJDKzoteGro5fxbvFiqDJ6uDDsiFbpDysuU
-	kJz7/Osb6ixPgEnaDx7xObWLCLq/ee5WhyekJHcJbk/kiqOGBWtikArcryclOpScqv1Q
-	ogNwh75eRup5PBiyAKaYwwb8G35qRFWeVHr+CdyAwBSQUREyRgKmbLWIb0RZLYoOMolD
-	WcCLatfb6gRTtG5kS1VDsaYJjGiOONmTmUOhPQL/F2PL1KLCEm+zk/GG5ptzSJlMtbMt
-	ObRvIIKbFSiuk87oy4hOojv7Qjw51HtBOv7L1zGGxqkuSDPZwgtTseAk64hDYg5MHDFw
-	zwQg==
+	:cc; bh=q866C3AcBXubVwTqE+Ali5H23eySxcBcusFihIe1TOU=;
+	b=MQ9HpiawHBw7DcIPsI9KWfHIXGXmnLEQ+F94A/Z/pRuXMgtl+FNU4U5ZG6lHbQzxAB
+	q9s5zL6MsBYwpIXR+CjQ8NkKwJLUGhp+ehE21dV5gVFlrWD3u0Ik14myNBROqoxVgC4i
+	xk095OlYhZ80YiVOuPqMYUYAi4gLwzHWQzw/ZN8mfcxAcugnnd5KIRNFvxPBSz9FIbbs
+	WmG0o4CSiR8EYM+TElvozqZY89CCrHuGK/o789Qmvylh3P4zFh5rTq3oBcrsUyNWpTcN
+	+9YDPeKc/uJdZcCg1emIjx/zyvRUFKdh/zruL/fqZZkUKfZEGp/sH4xHC+hspWJG67eF
+	kl5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=VeGQpvCAS4U3ALy7iQzDtPik6nBW1bsQiN1ArGbfFtI=;
-	b=XMnRh0nVAaC0ArvVd1J++X45rLOJS0uMGdQ/dgpUnEhySnoE/pNUC0I9a0EcUWbbRf
-	sszM1YyYvPnXx3uDGpMkiyHK9faNX0zCb+ZIvtvsJcdhxkRj+LBf5wFbzvuor0rv6kxs
-	EPyo+RYldBkjwI0uza2+EBUMXtE4ZsjKHYxw/UqU8AgKQ1plhA863k1I1adbSpORup4W
-	yuCnbeifbNQA0BlLltgZ1rUwiXOtS/kiIwB6NnW9BqsT472oR8FM0DsJCR8TskVrUEYl
-	6ZfTA+9ZESxvjVZb9nsJtZVATMs6+pZZ4su/ew2+0IA4GV7eBPZPtLyz9CEMhfm2jePP
-	Cbyw==
-X-Gm-Message-State: APjAAAX4m6C+vqUbpgPe5nOc8jkl428yllaasEllDnlbm7c1EM4D9Zk7
-	4STl0jF9BLQuArkGtqCpVucu568Aig4PV6lLZZYcEO5m
-X-Google-Smtp-Source: APXvYqyB6jAR9mkUNO7z2ePIYusZalC8OyF6AcRviy9r2FvgxdZVr4xbcINamHwyrb7w+6kiNzQEzWbvNiIs10PvsSs=
-X-Received: by 2002:a05:6e02:10d1:: with SMTP id
-	s17mr11741071ilj.198.1579536075623; 
-	Mon, 20 Jan 2020 08:01:15 -0800 (PST)
+	bh=q866C3AcBXubVwTqE+Ali5H23eySxcBcusFihIe1TOU=;
+	b=p2TQ2sfNyll7ILVwmAais+Zd5NpzWY64NI9cdHEJuf/q+Dgu/zMTQeZ+JAuQJ6RiHT
+	vhKLozu068rPP5qiuIPc40BZ1GJn/A9pZ61QmLKtgcHTf9vMTHWc+d0UZylGaEgG2qsV
+	BhkEY/UxxlAovSL9hZcSFDUHvKnivWlXfQs2DOhY261plOPNlclNYnxs3T8sO4RwRM5V
+	PALORhX6dzvPNtls/+OtwbKS/fq3qAWLBhOReJeqpU/vsm+o0kdtfn0N/3mY0JYWOmv2
+	mH4oLSEh7Np9VEQTPZjKsjDqbDhrUegdD3jaUpii+9qFcTf7V8BSfpTeAmPCMV3vwVUn
+	i51Q==
+X-Gm-Message-State: APjAAAVERy7fJY8nKC23/AH7T2hMsD+S5BJFAI1Vb+b7rfVA43A8kYzC
+	Ebfth16yUlpwlIdb/+sx4ode4suYuATLecZQloI=
+X-Google-Smtp-Source: APXvYqzQQQ8ZCoP5USHkR3WmYXZvSRjMW6Am6FB25FQyOqh/g9cGwOrO4SjR+mV/dc528I+7W80Pf8FR+uqwyqUhXb0=
+X-Received: by 2002:a6b:740c:: with SMTP id s12mr44373992iog.108.1579538486292;
+	Mon, 20 Jan 2020 08:41:26 -0800 (PST)
 MIME-Version: 1.0
 References: <CAMKF1sryUbCcpRxpqi4ytZJ+j+AgksfS8pxd=_O6DtWrkCx+Lg@mail.gmail.com>
 In-Reply-To: <CAMKF1sryUbCcpRxpqi4ytZJ+j+AgksfS8pxd=_O6DtWrkCx+Lg@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 20 Jan 2020 08:01:04 -0800
-Message-ID: <CANx9H-C0cVwTCjiix4mSxZFfJc9iZS0ec4L4kQqXkaGFGn_+VA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 20 Jan 2020 17:41:14 +0100
+Message-ID: <CALbNGRRAJrjThF4RQ-Qa487QmSWdT8aTXBtXYYi_8qgqBfxbFA@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
@@ -55,46 +53,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2020 16:01:15 -0000
+X-List-Received-Date: Mon, 20 Jan 2020 16:41:25 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Jan 20, 2020 at 7:52 AM Khem Raj <raj.khem@gmail.com> wrote:
-
+On Mon, Jan 20, 2020 at 4:52 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
 > Hi all
 >
 > Recently py2 is removed from oe-core, So I did quick patches to get a
-> world build going.
-
-
-Thank you for doing this.
-
-And
+> world build going. And
 > here are initial failures, please help out with recipes your can or
 > care for. Eventually, the remaining
 > ones we can blacklist for 3.1 release.
-
-
-meta-python2 was specifically created to be the home for py2 legacy
-components. Everyone, please help with that migration. But PLEASE make sure
-whatever lands in meta-python2 RUNS, not just builds. We have a window to
-make sure meta-python2 is in good shape, but it will take the efforts of
-many in the community to make sure that happens.
-
-
 >
 > http://errors.yoctoproject.org/Errors/Build/97185/
 >
 > I will post more arches as they become available. If you want to try
 > the same for machines/distros you can try yoe/mut for meta-oe
->
-> https://git.openembedded.org/meta-openembedded-contrib/log/?h=yoe/mut
->
-> Thank you
-> -Khem
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
+Looks less than I expected - (Iknow dependencies are shadowed...) Will
+try to assist...
+
+Andreas
 
