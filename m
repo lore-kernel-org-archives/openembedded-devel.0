@@ -1,43 +1,51 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-il1-f176.google.com (mail-il1-f176.google.com
-	[209.85.166.176])
-	by mail.openembedded.org (Postfix) with ESMTP id D91327FCF5;
-	Mon, 20 Jan 2020 18:08:35 +0000 (UTC)
-Received: by mail-il1-f176.google.com with SMTP id f10so219627ils.8;
-	Mon, 20 Jan 2020 10:08:37 -0800 (PST)
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 85CD97FCDF
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jan 2020 19:22:54 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id x6so186776pfo.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jan 2020 11:22:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=jVqSp12By0KjQYmtdE/M8a7YnTUF9XAzOG72ipXENqo=;
-	b=pzljI8vDPQR2Xfh+LUjSfDF+PST9pm8cN31CKIoq1bLJQ3jxfdwJUFRGHWigsmnKda
-	0S38xrC9n2DwF6d3lrU7eKtC+z2gj8ARq8w6w8wlCr6KXxqv3HEi8SBjIolHvVxeDaHq
-	fr7HdHV937OA/cSON9T8WtYL3wB2uOKF/yEecOtpBcwPUNo0JdkCNita+1I5Gz+t5Mtm
-	jQNW6rQIlMItpx64ztR7H7/G4/OMgyOVtMRAXtSZNF/MlAHLYvQt0Vt3B4UPYCUlELlZ
-	cCcJV3KYID1GudbncbBRW2djGidZXu5Y0IAwo/RHilpmCo7cEYseL2RG1B/gwLjHiUsS
-	AGJg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=LpUluCy+sABYxdhQ7OdKZ47ejaWg6w1pPzbVCUauCgo=;
+	b=r9j9jLmfs6sZ5CvNycRd+869GaVV2+uGnbmGZ/FRsqSBQN4Dz9puIWQP9joKO6cjOv
+	kUFJeMJaRwKlf538LdBi849M0eDxBhFq0hvCD4EIqdB8uSAa+A78pIsWp8bxlMrxuQag
+	gb72IeArpilXbyON410DM+UTZxqW+q9ffgdP9Kt21M9SS8v0Osm2ptF2YcS/qOsXl9aT
+	fTC688HwGQqR++OPPjBnACL3w4mOpTjDSHy4twcqsRpbVotl+eJdm6oZj4lXD3VoG4zc
+	kmPtTsx+gIpy8j5b//n09fyYtx3zNelhAQtEaZIxmy6yQqmB1yDaIpa8VbBvoL8fWiP6
+	iIaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=jVqSp12By0KjQYmtdE/M8a7YnTUF9XAzOG72ipXENqo=;
-	b=ChO+eOnaeop1Hmpq8kjPzq5LmyHD6odl6IfdG8Mklzy+W6vVWJonFEaqbm8T3zXHRU
-	2V2WIK0K6/XFaIPGvtLHWgeHUVq9yf7gYkJOZHJ340So3GSN1W49WT6HGXjE8kjxdQCK
-	sFxudo0nlnAdoiOTqeH0PUWN+WTSjka8YQIIWmr2jBNXlLEAEbXp6fb3QJUC1nbWWQjk
-	wKUnZz9RNFmpCGR/mDzfNXUqoETyGXEl/AMVfJ7gk9kx343GKqZly0qbVns7JWC2VIi0
-	tNhjoLmfX4zdKAoPxfcp5+Q4daWWa7GMxqBfdH2Txf8avfpxaRz00RJBLglmQToYnXMb
-	SvOA==
-X-Gm-Message-State: APjAAAWLWW4skP665NXB63VgpiyT0adCDsBIxSuji53+IvcnRyvrenZ5
-	izBe1sKHwGsGWJ2WPqAMthrNdMNIsQaX8wAR3IGZFu4g2Qc=
-X-Google-Smtp-Source: APXvYqxgPmNF1A7BtPyPAtkgrSbpI1k3zSWncJPmK+vM9aN2RV7Q2bXVzGP6bdTfiZVf9DtQo4rVgfNt6UoTCefeQ04=
-X-Received: by 2002:a92:290a:: with SMTP id l10mr250533ilg.151.1579543716724; 
-	Mon, 20 Jan 2020 10:08:36 -0800 (PST)
-MIME-Version: 1.0
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=LpUluCy+sABYxdhQ7OdKZ47ejaWg6w1pPzbVCUauCgo=;
+	b=YSy4mi0bErLGSna0GFSBJyYHdGI3VblVDAQnW95tt4nOkkdEyFMQGCXoKu/mYFRJ5K
+	2VZb3OZ98s82sAzydiR105MQ2yiaqUhUUDz4CO13L/S36vDg1GTVS8MUVjiirXzZqjBh
+	25FKPYKhb4UalMDtZ+477vcytYABq2yrOSVkzK+wMalQa1+SZzX5YCvQ6zW/194BB6pe
+	pctf3PlFRvAa7en+OcAxM/eYccYv39KeuImvToLIFJ5HO0x/NupXnCHgAowOtJEGrH23
+	p0DbPuAUQoMGTqJ+vZvrKAGbp8bOn7xESyJ6OqBi47AQmclbDvVLaLgqg8iJKYAH7JS5
+	RHMw==
+X-Gm-Message-State: APjAAAUqOsF9wNxdHypaYT1wquaTKVh8t6sYuN7TdO7M06N8hPuGhLLh
+	hdVvdrfc2YFcRtO8fMus2Nnf1V1fGOw=
+X-Google-Smtp-Source: APXvYqxX4nz24CF+aOyqEDp1cgzeWOv5cP9jJ7xx9RC+tbCJdYGMxkw4E1YSXE4M+xp9Si6iMmEk/Q==
+X-Received: by 2002:aa7:9aeb:: with SMTP id y11mr680253pfp.63.1579548175527;
+	Mon, 20 Jan 2020 11:22:55 -0800 (PST)
+Received: from thetis.hsd1.or.comcast.net
+	([2601:1c0:6080:4500:f5dc:646c:4755:5ca9])
+	by smtp.gmail.com with ESMTPSA id
+	a23sm42148392pfg.82.2020.01.20.11.22.54
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 20 Jan 2020 11:22:54 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 20 Jan 2020 10:08:25 -0800
-Message-ID: <CANx9H-BZLFrVCtGtWW5Wh_0mY_1oXBw-UfXsGG0LGn-qrhoMCg@mail.gmail.com>
-To: openembedded-core <openembedded-core@lists.openembedded.org>, 
-	"openembedded-devel@lists.openembedded.org"
-	<Openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Python 2 sunsetting
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 20 Jan 2020 11:22:35 -0800
+Message-Id: <20200120192236.28995-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Subject: [meta-python2][PATCH] python-engineio: add missing RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,26 +58,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Jan 2020 18:08:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 20 Jan 2020 19:22:54 -0000
+Content-Transfer-Encoding: 8bit
 
-CPython has officially announced that there will be one more release
-(2.7.18) in April 2020 [1]. After this date all work on python2 will stop
-as far as the official community is concerned. This means no bug fixes,
-security fixes or vulnerability checks will be done by the official python
-community.
+For target, missing run-time dependencies:
+  - python-compression (gzip)
+  - python-json
+  - python-logging
 
-YOU HAVE BEEN WARNED. Move away from Python 2 immediately. To continue to
-use it will put you and your organization at significant risk.
+For all (including native/nativesdk support when desired), missing:
+  - python-six
 
-To make this transition as smooth as possible, meta-python2 has been
-created [2]. But note that maintenance of that layer will be entirely up to
-the community after Q12020. I have no business nor personal need to
-continue using python2 and will therefore have no motivation to continue to
-maintain that layer. Someone else will have to step up.
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
+---
+ recipes-devtools/python/python-engineio_3.11.1.bb | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
-[1]
-http://pyfound.blogspot.com/2019/12/python-2-sunset.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+PythonSoftwareFoundationNews+%28Python+Software+Foundation+News%29
+diff --git a/recipes-devtools/python/python-engineio_3.11.1.bb b/recipes-devtools/python/python-engineio_3.11.1.bb
+index d642b0f0..3fbba8bf 100644
+--- a/recipes-devtools/python/python-engineio_3.11.1.bb
++++ b/recipes-devtools/python/python-engineio_3.11.1.bb
+@@ -6,9 +6,19 @@ SECTION = "devel/python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=42d0a9e728978f0eeb759c3be91536b8"
+ 
+-SRC_URI[md5sum] = "bec3b06a112a7f09a0a9c92b627282fe"
+-SRC_URI[sha256sum] = "9c9a6035b4b5e5a225f426f846afa14cf627f7571d1ae02167cb703fefd134b7"
++SRC_URI[md5sum] = "327c16ca05e9b0cc4f994b9d35c7f7d7"
++SRC_URI[sha256sum] = "50d108fc7feb7f970e6ebc86733752ebd714545bb5622383e6135bdad45fc9fe"
+ 
+ PYPI_PACKAGE = "python-engineio"
+ 
+ inherit pypi setuptools
++
++RDEPENDS_${PN}_append_class-target = "\
++    ${PYTHON_PN}-compression \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-logging \
++"
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-six \
++"
+-- 
+2.25.0
 
-[2] https://git.openembedded.org/meta-python2/
 
