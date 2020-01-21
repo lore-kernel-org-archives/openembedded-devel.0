@@ -1,39 +1,48 @@
-Return-Path: <prvs=282131db8=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CB977FDC9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 3851A7FD9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 14:47:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1579618062; x=1611154062;
-	h=from:to:cc:subject:date:message-id:in-reply-to:
-	references:mime-version:content-transfer-encoding;
-	bh=0ri59sCPfAcf+wUakw5tsjD/OUbUTjj/o/1Rke85sTI=;
-	b=bPPfvbG0liWIReq8Lyci5QygcIY/SKsC0iXludJb5PaMQxzASA1fT4N1
-	Z8a7wuz7VWCk4YQIVXI1tHeQndjQSjzf3jYCmU5SuPhpHT7fpzlCaAK71
-	fVuBMVup/wBVjnwr+QTkGaNfIGpNRHncPGmZoi4eFDUpZvDoXCQvoAz/g
-	+B7QwVpCG7WZKUFKuiQreOGNzPuf0bq6kVYt8XWXoM3rgiwpyQrKr+kNt
-	qmU6W9miZGeOqct+HcYFpcuSWCtX/3eBAiD6ZT3aRSvxQWklgnCGV6SsZ
-	CvtHnbm7fTw3KHdEbhW4htPHcT7Meh66YeP4idE/Zez0UQEwibxdaIr20 w==;
-IronPort-SDR: y5dnI+v3Qg3btE/pqn++NOXQ99CvkEYCw+ucsl1UMnxr7quAijTu3ONDP+ThhbdJrDI9Az7sGt
-	J7Em4DsivwzHMROaBqP/Upf7bd5XS3wiFe3rdy0yxIxbMInH9AIBgvxcIJGUslZWpP8mbeEsuG
-	FauOu7zcMoOXhCFsEyb2zOtZgSbXhoZL+A1kG4K1MUlD2PMcqRci7DOnpQYDOfeQvqZL9IcSup
-	m2aHACTpqXVCIbJyYlk/RB7aEU2va+zsJlKArQ+8eJM3Q+lXrqmRFENEKnys+Lr62QWKc91vEf
-	Iks=
-X-IronPort-AV: E=Sophos;i="5.70,346,1574118000"; 
-   d="scan'208";a="2495764"
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Jan 2020 15:47:18 +0100
-Message-ID: <20200121144718.652126-2-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200121144718.652126-1-richard.leitner@skidata.com>
-References: <20200121144718.652126-1-richard.leitner@skidata.com>
+	Tue, 21 Jan 2020 15:38:26 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id 5so2959514qtz.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Jan 2020 07:38:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=Y/DUFzYPo6kylgQx3Myko4bffeHL3LjIcDHTjbOeOFE=;
+	b=IubDc/pmZxXYwah/BXcU4+LjZ9YowjuGgyOLi8Z1hbojJtyi+oxzTalX3ScrZ2c0+j
+	nNYQn0dXEs8AUgj45UDGlRR4DTmkgfRyefaPZ7ZrOFdQTA4Oopq1lrZOHnwhDRhMPFSS
+	PRaB9TKgYVij/YP7fy0e21AWqzB5cZ2uTC+hM5ljspOOduBQnRiQ7UtI9cRvt3d+7d0C
+	R7MGDL/6ROY95zPTlysQtAh5vLrK9UPiuVdU6EVbvTQa8kGCKgIyo/TdeTn5sMaIOeON
+	/ftmZd7E8KX30hSgaRdmY7UMfMHt0xdIP3VbOpX0sXR2AOkFzPZmFImNO2YEXssiHfca
+	gbaw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=Y/DUFzYPo6kylgQx3Myko4bffeHL3LjIcDHTjbOeOFE=;
+	b=U3RReR8spxb1Lmnttt0VaSYMmY5aSNEuhaYnaZIqBakA/n15LlXCclXlJT6PjfDQi1
+	49kTPuN4qRa4ApTty/4Vwwp9hH8V3ee9VPQ0K2yKOx8eI9j3g7eVyLlOUy8k5PODSXJw
+	C6Rseb6CNbmNLl+I5o7T+mZpSu9v5cASVJ/CeVxit3TZ7pV3OtUe91Xsl2Dcl2qw4W/o
+	QaFMgbIo5CXP6LZpJnLz9oXPz2Dx+4nSbCzzJM0g3Ul9pSLE+0yIPqhuuaq/GX9aCvSn
+	oNsew8TOXsT1/TriEFeo1MMQ0Tefzl3YeljVWfhTf0Ci2gU4pZR+8fUqhH5U1OQXgkb8
+	2t+g==
+X-Gm-Message-State: APjAAAXSNFZyG3mWazTKqf2rz+A3eJ2tV/cDvmsk4fj2UrhvlqxQgvNL
+	GPkOm9nbtLPIDLFKcTzN+HbwrFAleuFe7qwbit4=
+X-Google-Smtp-Source: APXvYqzrYVKgBDhhe/ElRiyh6P50OYVVG8+YzF+zKs2O2vCQOGlTxjvuXkRuc0mcFd3PkxKhuWu7w6f7Xb1q0+6PA5Y=
+X-Received: by 2002:ac8:5257:: with SMTP id y23mr5040890qtn.88.1579621106557; 
+	Tue, 21 Jan 2020 07:38:26 -0800 (PST)
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-java][PATCH 2/2] openjdk-7: add patch to fix xattr include path
+References: <20200121012416.544541-1-raj.khem@gmail.com>
+	<CALbNGRTgzwTink2p8Ffxr4pnGJfVfpRsyrbbrV1QO68noVVi2g@mail.gmail.com>
+In-Reply-To: <CALbNGRTgzwTink2p8Ffxr4pnGJfVfpRsyrbbrV1QO68noVVi2g@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 21 Jan 2020 07:38:15 -0800
+Message-ID: <CAMKF1sr0JSv1xxWai3sfpmbE8=W2pF6AccMo7vVtVXky6O1bGw@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] mozjs: Upgrade to 60.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,86 +55,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jan 2020 14:47:41 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 21 Jan 2020 15:38:26 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-As attr dropped the <attr/xattr.h> header use <sys/xattr.h> instead.
+On Mon, Jan 20, 2020 at 11:13 PM Andreas M=C3=BCller <schnitzeltony@gmail.c=
+om>
+wrote:
 
-http://git.savannah.nongnu.org/cgit/attr.git/commit/include?id=7921157890d07858d092f4003ca4c6bae9fd2c38
+> On Tue, Jan 21, 2020 at 2:24 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > Use firefox ESR src_uri instead of gentoo pre-generated image
+> > Pre-generate old configure script
+> > Ask for python 2.7 specifically during build
+> ^This is what configure.py already does
+>
+> Although I wanted to finish python3 first (yes there is progress) I
+> sent  out similar with autoconf-2.13 and some clean-up. Are you
+> working on this either?  If yes I can do something else.
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
----
- recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb         |  3 +++
- .../icedtea-jdk-fix-xattr-include.patch               | 11 +++++++++++
- .../icedtea-m4-fix-xattr-include-path.patch           | 11 +++++++++++
- 3 files changed, 25 insertions(+)
- create mode 100644 recipes-core/openjdk/patches-openjdk-7/icedtea-jdk-fix-xattr-include.patch
- create mode 100644 recipes-core/openjdk/patches-openjdk-7/icedtea-m4-fix-xattr-include-path.patch
 
-diff --git a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-index 87de6be..d774cc2 100644
---- a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-+++ b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
-@@ -41,6 +41,7 @@ OEPATCHES = "\
-     file://build-hacks.patch \
-     file://fix_hotspot_crosscompile.patch \
-     file://icedtea-makefile-unzip.patch \
-+    file://icedtea-m4-fix-xattr-include-path.patch \
- "
- 
- ICEDTEAPATCHES = "\
-@@ -50,6 +51,7 @@ ICEDTEAPATCHES = "\
-     file://icedtea-crosscompile-fix.patch;apply=no \
-     file://icedtea-xawt-crosscompile-fix.patch;apply=no \
-     file://icedtea-jdk-unzip.patch;apply=no \
-+    file://icedtea-jdk-fix-xattr-include.patch;apply=no \
-     file://icedtea-dtrace-std_h.patch;apply=no \
-     file://icedtea-hotspot-fix-string-literal-marcos.patch;apply=no \
-     file://icedtea-flags-to-compile-with-GCC-6.patch;apply=no \
-@@ -63,6 +65,7 @@ DISTRIBUTION_PATCHES = "\
-     patches/icedtea-crosscompile-fix.patch \
-     patches/icedtea-xawt-crosscompile-fix.patch \
-     patches/icedtea-jdk-unzip.patch \
-+    patches/icedtea-jdk-fix-xattr-include.patch \
-     patches/icedtea-dtrace-std_h.patch \
-     patches/icedtea-hotspot-fix-string-literal-marcos.patch \
-     patches/icedtea-flags-to-compile-with-GCC-6.patch \
-diff --git a/recipes-core/openjdk/patches-openjdk-7/icedtea-jdk-fix-xattr-include.patch b/recipes-core/openjdk/patches-openjdk-7/icedtea-jdk-fix-xattr-include.patch
-new file mode 100644
-index 0000000..ef44e7e
---- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-7/icedtea-jdk-fix-xattr-include.patch
-@@ -0,0 +1,11 @@
-+--- openjdk/jdk/src/solaris/native/sun/nio/fs/LinuxNativeDispatcher.c
-++++ openjdk/jdk/src/solaris/native/sun/nio/fs/LinuxNativeDispatcher.c
-+@@ -38,7 +38,7 @@
-+ 
-+ #ifdef COMPILE_AGAINST_SYSCALLS
-+ #include <sys/types.h>
-+-#include <attr/xattr.h>
-++#include <sys/xattr.h>
-+ #else
-+ #include <syscalls_fp.h>
-+ #endif
-diff --git a/recipes-core/openjdk/patches-openjdk-7/icedtea-m4-fix-xattr-include-path.patch b/recipes-core/openjdk/patches-openjdk-7/icedtea-m4-fix-xattr-include-path.patch
-new file mode 100644
-index 0000000..f9b526f
---- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-7/icedtea-m4-fix-xattr-include-path.patch
-@@ -0,0 +1,11 @@
-+--- a/acinclude.m4
-++++ b/acinclude.m4
-+@@ -2234,7 +2234,7 @@
-+     dnl Check for syscalls
-+     AC_CHECK_FUNCS([openat64 fstatat64 fgetxattr fsetxattr fremovexattr flistxattr unlinkat renameat futimesat fdopendir epoll_create epoll_ctl epoll_wait],,
-+       [AC_MSG_ERROR([Could not find required syscalls; check config.log and use --disable-compile-against-syscalls if necessary.])])
-+-    AC_CHECK_HEADERS([sys/epoll.h attr/xattr.h],
-++    AC_CHECK_HEADERS([sys/epoll.h sys/xattr.h],
-+       , [AC_MSG_ERROR([Could not find required system headers; install the appropriate files from glibc-headers, libc6-dev and/or libattr-devel, libattr1-dev or use --disable-compile-against-syscalls if necessary.])])
-+     ENABLE_SYSCALL_COMPILATION=true
-+   fi
--- 
-2.24.1
+I am not doing py3 piece so please continue with that
 
+>
+>
+> Andreas
+>
 
