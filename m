@@ -1,23 +1,47 @@
-Return-Path: <richard.leitner@skidata.com>
-X-Greylist: delayed 466 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 21 Jan 2020 07:20:26 UTC
-Received: from mail.bubus.at (bubus.at [81.19.156.191])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A7667FD6D
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id AB6C47FD6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 07:20:26 +0000 (UTC)
-Received: from pcleri (unknown [91.230.2.244])
-	by mail.bubus.at (Postfix) with ESMTPSA id 25CF86C20001;
-	Tue, 21 Jan 2020 08:12:40 +0100 (CET)
-Date: Tue, 21 Jan 2020 08:12:38 +0100
-From: Richard Leitner <richard.leitner@skidata.com>
-To: Jacob Kroon <jacob.kroon@gmail.com>
-Message-ID: <20200121071238.GB1567918@pcleri>
-References: <04a167ee-e63d-c4a3-7808-26ef5e9ed884@gmail.com>
-	<965c6ca2-e7c7-5cfc-36bd-482bd7d49202@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <965c6ca2-e7c7-5cfc-36bd-482bd7d49202@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java] openjre-8: java from master/master-next crashes on startup
+	Tue, 21 Jan 2020 07:22:33 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id g17so1961356wro.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Jan 2020 23:22:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=NVtoRCr+o3JwxhXUFiD9yYnRWGmWr8HvkxSClt055L4=;
+	b=ZRbC94tojezq9xDaTobltVx0BUc3Xk5Slo3H9JRPRtJSUUb2KCZnopYgxUoX9sPHCN
+	CdGX0IHQkgH5HSLOORPO+1ytbsz9LyBWpWCzOvUa3uf3Eplqm0Ngs4MriUQYvU5dCEVV
+	p1Nm0WrMDwLcE6UEWkAHRuFr986ORVsJpq852LlBPhEvBEy1W8YWe3cBbysoPo85DuS5
+	vXqTC1uuYddD5qqipAOTMl28xyd0OyTIgOB95oJFYi3cydOzupfzPun4FsMKqEsYqs4r
+	3XIDuNvVQWOlnNa7Yo9WtSN46gSamWrE8uX66tlCTjL7HKakf8QuFJjb1eqQ+U09RzkC
+	Q/7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=NVtoRCr+o3JwxhXUFiD9yYnRWGmWr8HvkxSClt055L4=;
+	b=O0C/7IagQAcDiDjXsKiUGG2uxd7vwhjH565JvrloJLdaISkOviITrQOd6Al26fZool
+	RXyYVqLWSOeNggd+hq+UFMY0J1rUa2xNoCwhmLbXs85vO/ti9ptyyAGb+Qb+bvgrpxNs
+	YMi8MsrJFF6hb8DClAJ/lCQBcizdy6CGNGaLXOb8P0SvtUzsp1LEgb+gH9sCjVZ7TvCs
+	y3QMtfytwJ5ueOoVvqjs2HzM+YMwJscglS7G3Ou1x6Yu0vNEphEw2L3CTrhCvMtBNTfg
+	I2mYaHO+oOSnBagjPKSsLkJKuI3YeXS/Jb7lqgMcOBApDZ5F88Ud8ijqVbUY0VfL2Rhl
+	Ityg==
+X-Gm-Message-State: APjAAAXVIdn0Y1I5qKwFMVHO/zI0ecmaUGP/2pYJKfyY468Gp8B6RD0h
+	KSgimaHwe7tIpF+SDSEkA2gX+K0Rv04=
+X-Google-Smtp-Source: APXvYqxtdMWVGRvEx9Uyw4jk1c4FTqSVSFF+BvO4ayCa0aFaNfjWGigvvnUnSh3yModKmu2lodiRaA==
+X-Received: by 2002:a5d:53c1:: with SMTP id a1mr3428191wrw.373.1579591354089; 
+	Mon, 20 Jan 2020 23:22:34 -0800 (PST)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
+	a1sm50911880wrr.80.2020.01.20.23.22.33
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 20 Jan 2020 23:22:33 -0800 (PST)
+From: Alex Kiernan <alex.kiernan@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Jan 2020 07:22:31 +0000
+Message-Id: <20200121072231.105967-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH v2] fatcat: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,120 +54,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jan 2020 07:20:27 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 21 Jan 2020 07:22:33 -0000
 
-Hi Jacob,
+fatcat is a tool designed to manipulate FAT filesystems, in order to
+explore, extract, repair, recover and forensic them. It currently
+supports FAT12, FAT16 and FAT32.
 
-On Tue, Jan 21, 2020 at 08:00:48AM +0100, Jacob Kroon wrote:
-> Hi Richard,
-> 
-> I still can't use openjre-8 in either warrior, zeus or master builds, due to
-> the crash below. I wonder, is anyone successfully using openjre-8 in either
-> of these releases ?
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
 
-I'm doing tests for the machine/distro combinations stated in the README
-before pushing to master. Therefore it should have worked back then.
+Changes in v2:
+- fix inclusion of argp.h
 
-Nonetheless I'm currently working on updating openjdk-8 to the latest ga
-and implementing continous (e.g. nightly/weekly) builds/tests on qemu to
-make sure nothing broke over time.
+ ...d.h-not-argp.h-for-all-POSIX-systems.patch | 37 +++++++++++++++++++
+ .../recipes-utils/fatcat/fatcat_1.1.0.bb      | 18 +++++++++
+ 2 files changed, 55 insertions(+)
+ create mode 100644 meta-filesystems/recipes-utils/fatcat/fatcat/0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch
+ create mode 100644 meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb
 
-So maybe I could get something out of this.
+diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat/0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch b/meta-filesystems/recipes-utils/fatcat/fatcat/0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch
+new file mode 100644
+index 000000000000..fd8e22abca2e
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/fatcat/fatcat/0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch
+@@ -0,0 +1,37 @@
++From 14ef83291096e019ebc48040cf63530a2574a26d Mon Sep 17 00:00:00 2001
++From: Alex Kiernan <alex.kiernan@gmail.com>
++Date: Sun, 19 Jan 2020 16:03:21 +0000
++Subject: [PATCH] Use unistd.h not argp.h for all POSIX systems
++
++getopt(3) is found in unistd.h on all POSIX systems and we make no use
++of any of the GNU specific argp extensions. Include unistd.h directly to
++allow building with musl on linux, whilst retaining compatibility with
++glibc and other unices.
++
++Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
++Upstream-status: Pending
++---
++ src/fatcat.cpp | 8 ++------
++ 1 file changed, 2 insertions(+), 6 deletions(-)
++
++diff --git a/src/fatcat.cpp b/src/fatcat.cpp
++index ce23ca07bb99..b4427e465bde 100644
++--- a/src/fatcat.cpp
+++++ b/src/fatcat.cpp
++@@ -1,14 +1,10 @@
++ #include <stdlib.h>
++-#include<string.h>
++-#ifdef __APPLE__
++-#include <unistd.h>
++-#else
+++#include <string.h>
++ #ifdef __WIN__
++ #include <ctype.h>
++ #include "xgetopt/xgetopt.h"
++ #else
++-#include <argp.h>
++-#endif
+++#include <unistd.h>
++ #endif
++ 
++ #include <stdio.h>
+diff --git a/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb
+new file mode 100644
+index 000000000000..c72671739df1
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/fatcat/fatcat_1.1.0.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "FAT filesystems explore, extract, repair, and forensic tool"
++DESCRIPTION = "This tool is designed to manipulate FAT filesystems, in order to \
++explore, extract, repair, recover and forensic them. It currently supports \
++FAT12, FAT16 and FAT32."
++HOMEPAGE = "https://github.com/Gregwar/fatcat"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=57fbbfebd0dd1d6ff21b8cecb552a03f"
++
++SRC_URI = "git://github.com/Gregwar/fatcat.git \
++           file://0001-Use-unistd.h-not-argp.h-for-all-POSIX-systems.patch \
++           "
++
++SRCREV = "b923172d97c578297964c062e3a92799e2a9eca4"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
+-- 
+2.17.1
 
-> 
-> I see the crash both in my custom machine and in qemux86-64. If it makes a
-> difference, I'm using
-> 
-> PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
-> PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
-> 
-> since building with jamvm has always been broken for me.
-> 
-> Any hints ?
-
-Nothing that comes to my mind directly, but I'll take a look into this.
-
-So your "custom machine" is also x86-64?
-
-> 
-> Cheers,
-> Jacob
-> 
-> On 10/13/19 11:33 AM, Jacob Kroon wrote:
-> > Hi,
-> > 
-> > For me, this has been the status for quite a while now. First of all,
-> > openjre-8 from master/master-next doesn't build on my Fedora 30 box,
-> > I've been using the patch attached to this mail to get it to build.
-> >   Secondly, java always crashes on startup here:
-> > 
-> > > #0  Node::Node (this=0x805fa88, req=3)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/node.cpp:327
-> > > #1  0xb7499b63 in RegionNode::RegionNode (required=3, this=0x805fa88)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/cfgnode.hpp:73
-> > > #2  LoopNode::LoopNode (backedge=0x0, entry=0x0, this=0x805fa88)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/loopnode.hpp:88
-> > > #3  RootNode::RootNode (this=0x805fa88)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/rootnode.hpp:37
-> > > #4  Compile::Init (this=0x977feaf8, aliaslevel=0)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/compile.cpp:1079
-> > > #5  0xb74a02c5 in Compile::Compile (this=0x977feaf8,
-> > > ci_env=0x977ff188,     generator=0xb7895270
-> > > <OptoRuntime::new_instance_Type()>, stub_function=0xb7897070
-> > > <OptoRuntime::new_instance_C(Klass*, JavaThread*)>
-> > > "U\211\345WVS\350\245+\237\377\201\303\205\217\062",
-> > > stub_name=0xb7a0a62f "_new_instance_Java", is_fancy_jump=0,
-> > > pass_tls=true,     save_arg_registers=false, return_pc=false)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/compile.cpp:1012
-> > > #6  0xb789587b in OptoRuntime::generate_stub (env=0x977ff188,    
-> > > gen=0xb7895270 <OptoRuntime::new_instance_Type()>,
-> > > C_function=0xb7897070 <OptoRuntime::new_instance_C(Klass*,
-> > > JavaThread*)> "U\211\345WVS\350\245+\237\377\201\303\205\217\062",
-> > > name=0xb7a0a62f "_new_instance_Java",     is_fancy_jump=0,
-> > > pass_tls=true, save_argument_registers=false, return_pc=false)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/runtime.cpp:181
-> > > #7  0xb7895a5f in OptoRuntime::generate (env=0x977ff188)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/runtime.cpp:147
-> > > #8  0xb7417de9 in C2Compiler::init_c2_runtime ()
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/runtime/thread.hpp:1854
-> > > #9  0xb7417e35 in C2Compiler::initialize (this=0xb706b180)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/opto/c2compiler.cpp:102
-> > > #10 0xb74a508c in CompileBroker::init_compiler_runtime ()
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/compiler/compileBroker.cpp:1674
-> > > #11 0xb74ab6ed in CompileBroker::compiler_thread_loop ()
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/compiler/compileBroker.cpp:1772
-> > > #12 0xb79238d5 in compiler_thread_entry (thread=0xb7079400,
-> > > __the_thread__=0xb7079400)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/runtime/thread.cpp:3230
-> > > #13 0xb792d782 in JavaThread::thread_main_inner (this=0xb7079400)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/share/vm/runtime/thread.hpp:1035
-> > > #14 0xb7820ce4 in java_start (thread=0xb7079400)
-> > >     at /usr/src/debug/openjre-8/172b11-r0/jdk8u-33d274a7dda0/hotspot/src/os/linux/vm/os_linux.cpp:790
-> > > #15 0x4121244c in start_thread (arg=<optimized out>) at
-> > > pthread_create.c:479
-> > > #16 0x4113bd56 in clone () at
-> > > ../sysdeps/unix/sysv/linux/i386/clone.S:108
-> > 
-> > The Node::Node() constructor uses an IDX_INIT() macro:
-> > 
-> > > #define IDX_INIT(req) this->Init((req), (Compile*) this->_out)
-> > 
-> > and Node::Init() does:
-> > 
-> > > 297     inline int Node::Init(int req, Compile* C) {
-> > > 298      assert(Compile::current() == C, "must use operator
-> > > new(Compile*)");
-> > > 299      int idx = C->next_unique();
-> > 
-> > and here, this->_out = C = null, which I think leads to a segfault on
-> > line 299.
-> >   I've tried looking at upstream jdk8u but can't find anything. Does
-> > anyone have an idea of whats going on here, or if I should raise the
-> > issue to openjdk ml ?
-> > 
-> > Cheers,
-> > Jacob
 
