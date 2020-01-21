@@ -1,53 +1,40 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F1B37EC40
+Return-Path: <prvs=282131db8=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 775787FD6F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 05:03:22 +0000 (UTC)
-Received: by mail-pg1-f181.google.com with SMTP id k3so810649pgc.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Jan 2020 21:03:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=U/b3DjHigIiXFPtCzK6aa49eWhup4pNAaHDCLAVQTZE=;
-	b=dXhWWU7CA+F9EL4RmnQGhNAGmDZM14J3MQ9dlAhh1Dd1Pw3YevIIWs5OTBawZwIBlm
-	b/tVaU57jLMKpHgzzEc1G8JaCFvlwesor8JbdLNePaWyQHEnW7sn/vyuUn4oncZEkFk4
-	NZps4EpHppqUpX/GaH+sjPfyVZE+GhMXSWm7tFPQr4Yxi8insrUPPGtYQuG/qBo8TkDz
-	LE1FCVGZEn9xk1ANuIZ5YagT8++xYFuzv1RE/+0fQ4/j94bWXVz8CALGelmVlHuwM/tA
-	HinUOKA+B3Aw/GpcAdT7XdFQ3uJqKyA05nuJbZ+soWcJWC2x7uQtB5HbxgpLYvhdMBb8
-	uM2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=U/b3DjHigIiXFPtCzK6aa49eWhup4pNAaHDCLAVQTZE=;
-	b=TP2m7UvOzln+aTZPkHp1drTrMXA4yReuvLeDFpRCnTBEwyMFkQ3xn4LTIYkkBVgVBe
-	Uejmx9Fwf6iuxrMFEvs1SzGw1VkXrMqRbv/ptB4SWz1F1oJZG0XPyzg3+UlAzMmQAmZ+
-	MHRFqwkbOu+Ska09GH6Fyh6qxHV1cr/cvK0yAtjeYxIKAp6avZxk2QPxwdRoPZLqNFvk
-	H6BkB0J7bked05FLp9P5NTOB2GY2NA6A3zXhNNrasNhbtQI/LgEOB0UxU2gv+da6w9dK
-	lHLVisox4gqQm1+4vA3NB6/h4HopbYXDAbsizq+gmTYsnwKk9rNnmiZB+S2iTqZJMVMw
-	ktng==
-X-Gm-Message-State: APjAAAUytTt970uimH+0hC1WiSC4jyBhLPxAdQCqTPG30hEZD96DZFHE
-	f90I0QBqXYIhCQwILgy1xX+lRQuX1ys=
-X-Google-Smtp-Source: APXvYqwEB2IiB4RigxszcPbPO6fOOJKOmN4bN88PmOOobYE5VOgbG9cHcuxihAChbITOt304Rp3tpQ==
-X-Received: by 2002:a62:14cc:: with SMTP id 195mr2652320pfu.160.1579583003163; 
-	Mon, 20 Jan 2020 21:03:23 -0800 (PST)
-Received: from thetis.hsd1.or.comcast.net
-	([2601:1c0:6080:4500:7c96:1b52:3429:d935])
-	by smtp.gmail.com with ESMTPSA id
-	y62sm43387877pfg.45.2020.01.20.21.03.22
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 20 Jan 2020 21:03:22 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Jan 2020 21:02:57 -0800
-Message-Id: <20200121050257.16561-4-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200121050257.16561-1-ticotimo@gmail.com>
-References: <20200121050257.16561-1-ticotimo@gmail.com>
+	Tue, 21 Jan 2020 06:44:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1579589080; x=1611125080;
+	h=date:from:to:cc:subject:message-id:references:
+	mime-version:in-reply-to;
+	bh=hu5FMrDhE9uVXDq2Is5GGBh1bGv7OUixFTNsByny/sA=;
+	b=peZYd4g9yAoN+IvBXFzv8Q8TINAMpGgRn5s5cMjbSJuzdXf3sEegUz8N
+	HmoubAJEIPSpZLy5vkD+Ss6MwjB+v8q7g12UkLLxsTqOxJAwUZvdfvUb1
+	Q9vFY+nYuBQWy9QeXiA0uybY70Mcj2NMxkWGpEQrvpI965Jzd3ZEwys+p
+	VsYJ5/j1l34PPX6sD1EiFTgh+OAPWCZXWcZNBao5jck038YySk08D7a/s
+	dOdsDrdmMyP8Gk5tKT5u1hgJwjUwabC/SypSVtKVgH5TrsmZLc91MFGlz
+	lc7H3bE6WzEZLIPZxmnRA1UbKFBXvwjDV62omLs4zcWqhtNUbmDaDpNuv A==;
+IronPort-SDR: pl2fVEemxbGc3qqgf/amE67lSnKACPw206qPkGkjsUqtB+w4MPXjUId6CMP0FzMFfJkE9K6AKx
+	Mcs74F8oKcrESsnk88ivQv5/SiFAa2Qq4/RosYc2aTmr/Plm9fg7qTakBEI0Wgxtm6E/Dl8lHz
+	jlSCOu9KHb6bzWFHe49ysY848DZN4ZEvLuP6ircgN9+/NJufACWVIZdEYtBp1crK/OxRV1Xrru
+	lor996okBVS++p2DKh8qvQLcti0nH82KOvxVqT7yLsoNkzRoeL1s7QCD1y3ySWaloKJdUVh+pe
+	eO8=
+X-IronPort-AV: E=Sophos;i="5.70,345,1574118000"; 
+   d="scan'208";a="2494735"
+Date: Tue, 21 Jan 2020 07:44:38 +0100
+From: Richard Leitner <richard.leitner@skidata.com>
+To: "Davis, Michael" <michael.davis@essvote.com>
+Message-ID: <20200121064438.GA1567918@pcleri>
+References: <20200120202815.58841-1-michael.davis@essvote.com>
 MIME-Version: 1.0
-Subject: [meta-python2][PATCH 4/4] python-pymisp: add missing RDEPENDS
+In-Reply-To: <20200120202815.58841-1-michael.davis@essvote.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java][PATCH] java.bbclass: oe_makeclasspath does nothing without -s
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,46 +47,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jan 2020 05:03:22 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 21 Jan 2020 06:44:38 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-* differentiate target from -native,-nativesdk RDEPENDS
-  while we are at it (for that day when someone wants it)
+Hi,
+this is a note to let you know that I've just added this patch to the
+master-next branch of the meta-java repository at
+     git://git.yoctoproject.org/meta-java
 
-* Add missing run-time dependies [1]:
-  - python-cachetools
-  - python-deprecated
+As soon as it has gone through some more testing it will likely be
+merged to the master branch.
 
-[1] https://github.com/MISP/PyMISP/blob/fac748dd4c63c9eef4056c5fc5201e811a97be10/setup.py#L44
+If you have any questions, please let me know.
 
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
----
- recipes-devtools/python/python-pymisp_2.4.119.1.bb | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+regards;Richard.L
 
-diff --git a/recipes-devtools/python/python-pymisp_2.4.119.1.bb b/recipes-devtools/python/python-pymisp_2.4.119.1.bb
-index 097328a4..627716b5 100644
---- a/recipes-devtools/python/python-pymisp_2.4.119.1.bb
-+++ b/recipes-devtools/python/python-pymisp_2.4.119.1.bb
-@@ -13,11 +13,15 @@ SRC_URI[sha256sum] = "594ea0a9e150052232425009eac6dd104a80f494d0e273cc48dd114d7e
- 
- inherit pypi setuptools
- 
--RDEPENDS_${PN} += " \
-+RDEPENDS_${PN}_append_class-target = " \
-     ${PYTHON_PN}-dateutil \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-jsonschema \
-+"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-cachetools \
-+    ${PYTHON_PN}-deprecated \
-     ${PYTHON_PN}-requests \
-     ${PYTHON_PN}-six \
- "
--
--- 
-2.25.0
-
+On Mon, Jan 20, 2020 at 08:28:31PM +0000, Davis, Michael wrote:
+> oe_makeclasspath is supposed to output for the target platform by default and the staging platform with -s.
+> However it checks if the file exists even if -s is not defined which is always false.
+> Additionaly remove comment around an error that never occurs.
+> 
+> Signed-off-by: Michael Davis <michael.davis@essvote.com>
+> ---
+>  classes/java.bbclass | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
+> 
+> diff --git a/classes/java.bbclass b/classes/java.bbclass
+> index fc97295..7b9677a 100644
+> --- a/classes/java.bbclass
+> +++ b/classes/java.bbclass
+> @@ -80,8 +80,6 @@ oe_makeclasspath() {
+>    # in variable "bootcp".
+>    # 
+>    # Provide the -s at the beginning otherwise strange things happen.
+> -  # If -s is given the function checks whether the requested jar file exists
+> -  # and exits with an error message if it cannot be found.
+>    #
+>    # Note: In order to encourage usage of the DEPENDS variable, the function
+>    # can accept recipe names. If a recipe has no corresponding Jar file it
+> @@ -91,6 +89,7 @@ oe_makeclasspath() {
+>    classpath=
+>    delimiter=
+>    retval=$1
+> +  staging=false
+>  
+>    shift
+>  
+> @@ -106,6 +105,7 @@ oe_makeclasspath() {
+>                    dir=${STAGING_DATADIR_JAVA}
+>                    ;;
+>                esac
+> +              staging=true
+>                ;;
+>            -*)
+>                bbfatal "oe_makeclasspath: unknown option: $1"
+> @@ -113,9 +113,9 @@ oe_makeclasspath() {
+>            *)
+>                file=$dir/$1.jar
+>  
+> -              if [ -e $file ]; then
+> -                  classpath=$classpath$delimiter$file
+> -                  delimiter=":"
+> +              if [ $staging == false ] || [ -e $file ]; then
+> +                classpath=$classpath$delimiter$file
+> +                delimiter=":"
+>                fi
+>  
+>            ;;
+> -- 
+> 2.24.1
+> 
 
