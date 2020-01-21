@@ -1,49 +1,51 @@
 Return-Path: <sumit.garg@linaro.org>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 49F937FD63
+Received: from mail-pf1-f196.google.com (mail-pf1-f196.google.com
+	[209.85.210.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 013E47FD92
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 08:56:38 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id y8so1034681pll.13
+	Tue, 21 Jan 2020 08:56:41 +0000 (UTC)
+Received: by mail-pf1-f196.google.com with SMTP id i23so1155066pfo.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 00:56:39 -0800 (PST)
+	Tue, 21 Jan 2020 00:56:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=vqYOYE08bTuLLT0TJjOtRLexOufLnbZ0xn7g0ObEUQI=;
-	b=VFXlVOEF7jbxSpbAKcbwQQ9SDX+OGgN1HRQt0moXRfzRZOheRpyBC7Hsaare8oL2PD
-	iCeUOKTU9lRaxCXl7SicbU5R9skLGERtYWBaMWcSOWL+KYuSIgKhAXDy0VY9F5MrSZIB
-	VV/IUDLDPYT41avVK6Ooic8u5kgi6nlDQUbaSDEx5BO/bnd8Xurn/aqdA/JtlD6RW/r3
-	COMjYecrEVax+7wiawPxqaP7VPcRvCAj/0TWJXLw8wXVornzwh2Gy5tV59XnxDCbi0Rr
-	WmM4IdGBn3C71pn9mt4GljpxEUph+roZ2sghvGpB7oE5Dss88TwJ83mZyh75t/koxmKm
-	vyhQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=RtHJ+KT0ceEZgLo5LUpPdfk9GYPjrqHuyJQHBH3dZdM=;
+	b=Jn82LbH9J0f5KS+E5CZz3n/XzmHRbm2tx4WbL/8yMk5Pb2YZ6gj10cD+lWTAUxOg3K
+	jmVQjkAVQasLXn3/7sclspez7LHU6a5iBoKjTGy56LxwVrPz8cbF7wXtlfo1lzXuQ1Kw
+	K/VSGP4kyZ5hmiLOXxc1NwxrtS6BKcNK77Az4BoLm8ktzXmNaS043Y+sA4ifR4QyH3CJ
+	qknC/fYftMAcNCMOCN3lNjsT06MNCxB6mPMqjP3NLIt5Zm84+4fYSPx9FJ9Iv9wbPu6w
+	fhZm6nbr5zgtrqT2JI14aW6ryFcq85xDT1bP2Y03S5TGzyBMLGD0iPKEdx3xkVDRB7/O
+	9V0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=vqYOYE08bTuLLT0TJjOtRLexOufLnbZ0xn7g0ObEUQI=;
-	b=AI1Dqo/Ha49WttZTm5lLElNcMsJeBFLrgcvuEM+kXEMkzs3Tw10Qlk5HKSZRYt99qq
-	8dzdJig4UmHKyyUcvoXaggrX47P2TBWCkuIWkCnlTpDDrYSuzWXwVDVxwUesJ0E4DRvl
-	5QNhq518k80j4QK7NvkFqVgGOmFiydyL/ainp/yWiBQ2amXIv5zlTFRf1Wzt9QZ3vbU9
-	1Jz7bV+kQe+WNmh9TZf2nMK/xL0Lf2TqDThmSVHdloVaP9mcimc824apBFkmT5SKBFr4
-	+RbCNw/8Wgt0KQvNCC0j0QyYM8S3I2LbyzCwgK+nkljQ6nSrcrGVrQzDegMYGC8UG+wX
-	5C4A==
-X-Gm-Message-State: APjAAAWPAylybnsj/THuOdrEkzn/Q7hgX3sMdqURScHWnP8AgkMHgR7h
-	L5UXg4sK06ZLLS/aymmpOHboVBOxve0=
-X-Google-Smtp-Source: APXvYqwJYsKvp0HVTvmUymUiou55oTar4UtgzlvlNzmL+0VDf5UR8G/sFi4/LRG65P/dYe6RukGpkQ==
-X-Received: by 2002:a17:902:708c:: with SMTP id
-	z12mr4197200plk.15.1579596998870; 
-	Tue, 21 Jan 2020 00:56:38 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=RtHJ+KT0ceEZgLo5LUpPdfk9GYPjrqHuyJQHBH3dZdM=;
+	b=PquFaoAHYAPKKX/mmZIZeV7r2bA/z+NwJEiDwO1saBupxS3NMMD50ih6XcjZCpAcYj
+	WrXjBEXNQangucVkaMT7/gurAKlhE5PZ6l4gDV7n+AY7FZJBu+eZX+NsPamOwmG29m7v
+	MoEl3Pk9lc6I8OkHW+j1jiwTW/XcD6/YabzhRi13Q6mQO1mS9YlhrdStXfI++mu1VquR
+	BSj2zXRbqpdIRvWrMG4pXcdrHY+TExXM4zjHsogjeT81TgarlqlB9GZRd1uGnJrUJxJB
+	tNmc9ga3FHzPoRgnyaEVXNSj6V13b0GAv7xfJBEwZt8Kg/kpvJu2EDy6FHlADwVgycWu
+	feJg==
+X-Gm-Message-State: APjAAAUcqY6jeEb0iqjQ3aosZ2Ua95NWGyaqddTF2M08QaWL+jruFDbX
+	s6xpMeyzD+p9u6tg7nqttAkbX5MFiaA=
+X-Google-Smtp-Source: APXvYqz9VNZec9iQLIXg96AcqAcg/1on7HrlaPZxNUgYNZH5zmtRup9H2ctAAeGhAjNSnHWF6uex2w==
+X-Received: by 2002:aa7:9808:: with SMTP id e8mr3593795pfl.32.1579597002735;
+	Tue, 21 Jan 2020 00:56:42 -0800 (PST)
 Received: from localhost.localdomain ([117.252.69.227])
 	by smtp.gmail.com with ESMTPSA id
-	m22sm42546378pgn.8.2020.01.21.00.56.35
+	m22sm42546378pgn.8.2020.01.21.00.56.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 21 Jan 2020 00:56:37 -0800 (PST)
+	Tue, 21 Jan 2020 00:56:42 -0800 (PST)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Jan 2020 14:26:07 +0530
-Message-Id: <1579596971-24752-1-git-send-email-sumit.garg@linaro.org>
+Date: Tue, 21 Jan 2020 14:26:08 +0530
+Message-Id: <1579596971-24752-2-git-send-email-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1579596971-24752-1-git-send-email-sumit.garg@linaro.org>
+References: <1579596971-24752-1-git-send-email-sumit.garg@linaro.org>
 Cc: daniel.thompson@linaro.org
-Subject: [meta-networking][PATCH v2 0/4] Fix some native tools dependencies
+Subject: [meta-networking][PATCH v2 1/4] drbd-utils: fix flex-native tool dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +58,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jan 2020 08:56:38 -0000
+X-List-Received-Date: Tue, 21 Jan 2020 08:56:42 -0000
 
-Some native tools dependency issues were seen while building with
-external GCC tool-set rather than source GCC tool-set. While building
-with source tool-set these dependencies were implicitly met which is not
-the case with external tool-set. So explicitly state these native tools
-dependencies.
+flex-native tool dependency was implicitly met while building with
+source GCC tool-set which isn't the case with external tool-set.
 
-Use HOST_SYS instead of TARGET_PREFIX for libtool in unbound recipe as
-TARGET_PREFIX may vary from source GCC tool-set to external GCC tool-set.
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
+ meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Changes in v2:
-- Split into recipe specific patches.
-- Add native tools dependency fixes for dovecot and ndisc6 recipes.
-
-Sumit Garg (4):
-  drbd-utils: fix flex-native tool dependency
-  unbound: Use HOST_SYS instead of TARGET_PREFIX for libtool
-  dovecot: fix gettext tool dependency
-  ndisc6: fix coreutils-native tool dependency
-
- meta-networking/recipes-support/dovecot/dovecot_2.2.36.4.bb | 2 +-
- meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb   | 2 ++
- meta-networking/recipes-support/ndisc6/ndisc6_git.bb        | 2 ++
- meta-networking/recipes-support/unbound/unbound_1.9.4.bb    | 2 +-
- 4 files changed, 6 insertions(+), 2 deletions(-)
-
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb
+index 286b0f6..01bb16a 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb
+@@ -23,6 +23,8 @@ UPSTREAM_CHECK_URI = "https://github.com/LINBIT/drbd-utils/releases"
+ SYSTEMD_SERVICE_${PN} = "drbd.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+ 
++DEPENDS = "flex-native"
++
+ inherit autotools-brokensep systemd
+ 
+ EXTRA_OECONF = " \
 -- 
 2.7.4
 
