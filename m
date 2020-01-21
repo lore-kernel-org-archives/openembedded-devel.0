@@ -1,37 +1,59 @@
-Return-Path: <prvs=282131db8=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B8457FC2E
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com
+	[209.85.208.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 9618F7FD84
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 12:00:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1579608032; x=1611144032;
-	h=from:to:cc:subject:date:message-id:mime-version:
-	content-transfer-encoding;
-	bh=PzAw6eCtRa77fDmXefWWMJGQIZy2gmKXHxbnmu4hGhE=;
-	b=uCEvDyJN2Ai49j8m/Sq32Z6701YPtJmUva6R0IpzW8TTG8wW7H+aSn0E
-	ftCDglNzHcnGNTLrHjhxiGN309X+BFPXr5DaRQb4nMFf7X+Oon9l0B27C
-	LUuA7gxGTlm4FIGLouzHAgGbDgyEAtiS+oZnNV1ZEOtRPC/OUpZakl3pi
-	t9qFnc5L5ZtVgBknf8EwkXG+qsvYJ17Orw2ijKUHaWDdtRgmQ2whCkYGo
-	XHuM5pHIklnK5U/yxUoIC1M383177beMXy43ZlOlBSDK/ElzrS0U39kzu
-	VNyurYP0MX1eeSqDl+285rZ2OXJ9L/7O4lJLMy9yyTTF791fKfSYUwIS0 Q==;
-IronPort-SDR: xpUHsmvbRL55wzo6BupFipoPWZW9rhqxlVfFtY4wQHzrvc8/fEznE3O5a1CU91qFmjulG/TPUv
-	dMuvKjp7CeN1aM3j3MeaaBW4sxIKhrZRTEUzX9fP+4NG+Nw6ta9JE0eTllK52THxP0dJlvf+qq
-	2yBmoFY/+j3c8TMX6GnA8LokwIGcDqb79XYW414NVDQ0oWfaJu58VHRkW+68khxxj8Y9ApVjqo
-	m2jmYW6gf+/5ZeRQNeey4920vPwUreDF4clifJa23vkPgKn3BXFYJW+L6kbjv8/s7/g3JbgzVv
-	cEU=
-X-IronPort-AV: E=Sophos;i="5.70,345,1574118000"; 
-   d="scan'208";a="2495397"
-From: Richard Leitner <richard.leitner@skidata.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 21 Jan 2020 13:00:16 +0100
-Message-ID: <20200121120016.385617-1-richard.leitner@skidata.com>
-X-Mailer: git-send-email 2.24.1
+	Tue, 21 Jan 2020 12:15:00 +0000 (UTC)
+Received: by mail-lj1-f179.google.com with SMTP id m26so2475881ljc.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Jan 2020 04:15:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=Yo/LjdLX+fFg3PDLRj0zBfrWmA1TLYw0W9+1WbQFpKk=;
+	b=CPBKdiLVwLGhIELpI92DxScpgZwz3YnNK74RTDCFmFTIgHtZoXKQn2bIBaC9QZRvuh
+	9pOkqtV5rWvQr97dTahXvq7eMUyv4h4HsMfXXrK4yXFJz0BjmEM4E5RAhQH7ARbwIkys
+	IBu5piCiyah1oaOgpQnXSDXZiP/3HAsNizPRKdfTZkLD0DirpTvv+/84lyIOa5hhYFd2
+	qCSQgEttvjAcF2qc2sZ5n4m8HQvlX6ol89oOUgwl23N7sOgyBohe27N5QdQrXU7ZDW5g
+	qlhC5d7Y+CmNzW7lE8RcLOYUOVlVKr3qDkJ2A4gUi6viW+XrcSO2t6Cew8xyreRXwbeT
+	19Ag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=Yo/LjdLX+fFg3PDLRj0zBfrWmA1TLYw0W9+1WbQFpKk=;
+	b=CmDiJbffDEXYO+Q/WtWchnw95LpF4ni9OHa3iE6n1GmPZ26RSSs3Nlw73E3R1T828j
+	5HrlpFMd80ybL0OiJLmAuZD9ZEj3CV1zF1FQ/Cbcbyj4ou93FT07TGQba39hshmMZFLI
+	eUoPOQHYXF3LAciFs+F4+Tp7l8bfxzklCP02GqgTZBb4RUVxeFpI1cWcBTUjC0HrpkbB
+	998zBC+kypA95QqWuSX2dgWROqRQ7lHBuxFDctCJJeOiqS1nFXjAveD3ftDa2gZSdW3L
+	aGD/NcKo9w05XTV+jsDAFWDXvKn0T54EeZQl6twzgwMQvSDc9AO9V4yHhBBkubljm7Nq
+	jPDg==
+X-Gm-Message-State: APjAAAXthsXzMyTBOX0D0LuynCI3EnjS4d8kDtf0DjMUZkghvWflIEXT
+	c4JjP2bUTkqJgw5eVD2YpZzJWdwW
+X-Google-Smtp-Source: APXvYqxJX3JFOUlxYXvFaHOj0QZnXf0WyMmH95T8Zfvi3c4/m0GGtPAIXlpghVgzdnsOk0+ENmG1rQ==
+X-Received: by 2002:a2e:9806:: with SMTP id a6mr15850131ljj.178.1579608900404; 
+	Tue, 21 Jan 2020 04:15:00 -0800 (PST)
+Received: from localhost.localdomain ([213.185.29.22])
+	by smtp.gmail.com with ESMTPSA id
+	z13sm18566616ljh.21.2020.01.21.04.14.59
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Tue, 21 Jan 2020 04:14:59 -0800 (PST)
+To: Richard Leitner <richard.leitner@skidata.com>
+References: <04a167ee-e63d-c4a3-7808-26ef5e9ed884@gmail.com>
+	<965c6ca2-e7c7-5cfc-36bd-482bd7d49202@gmail.com>
+	<20200121071238.GB1567918@pcleri>
+	<9067ccd9-2961-217d-15b0-5093a0583972@gmail.com>
+	<20200121113805.GC24847@pcleri>
+From: Jacob Kroon <jacob.kroon@gmail.com>
+Message-ID: <b30ca254-5e79-7610-3941-094f83196df0@gmail.com>
+Date: Tue, 21 Jan 2020 13:14:58 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.4.1
 MIME-Version: 1.0
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Subject: [meta-java][PATCH] README: mention dependency on meta-poky for oeqa image testing
+In-Reply-To: <20200121113805.GC24847@pcleri>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java] openjre-8: java from master/master-next crashes on startup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,46 +66,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Jan 2020 12:00:30 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 21 Jan 2020 12:15:00 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-As the mejate distributions are based on poky we need meta-poky for oeqa
-image testing.
+On 1/21/20 12:38 PM, Richard Leitner wrote:
+> On Tue, Jan 21, 2020 at 09:01:01AM +0100, Jacob Kroon wrote:
+>> On 1/21/20 8:12 AM, Richard Leitner wrote:
+>>> On Tue, Jan 21, 2020 at 08:00:48AM +0100, Jacob Kroon wrote:
+> 
+> ...
+> 
+>>>> I see the crash both in my custom machine and in qemux86-64. If it makes a
+>>>> difference, I'm using
+>>>>
+>>>> PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
+>>>> PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
+>>>>
+>>>> since building with jamvm has always been broken for me.
+>>>>
+>>>> Any hints ?
+>>>
+>>> Nothing that comes to my mind directly, but I'll take a look into this.
+>>>
+>>> So your "custom machine" is also x86-64?
+>>
+>> The custom machine .conf file is just:
+>> ------------------------------------------
+>> require conf/machine/include/tune-i686.inc
+>> require conf/machine/include/x86-base.inc
+>> ------------------------------------------
+>>
+>> So 32bit x86.
+> 
+> Is your JVM crashing in interpreted and mixed mode?
+> 
 
-Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
----
- README | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/README b/README
-index 743418c..d28da02 100644
---- a/README
-+++ b/README
-@@ -11,6 +11,14 @@ branch: master
- revision: HEAD
- 
- URI: git://git.openembedded.org/meta-openembedded
-+sub-layer: meta-oe
-+branch: master
-+revision: HEAD
-+
-+Furthermoe for oeqa runtime testing this layer depends on:
-+
-+URI: git://git.yoctoproject.org/poky
-+sub-layer: meta-poky
- branch: master
- revision: HEAD
- 
-@@ -64,6 +72,7 @@ The meta-java layer may be tested using oeqa's runtime image tests. The easiest
- way is to add the following configuration to your local.conf:
- 
- SANITY_TESTED_DISTROS = ""
-+INHERIT += "testimage"
- TESTIMAGE_AUTO = "1"
- 
- Then you should be able to use the open{jre,jdk}-{7,8}-test-image recipes.
--- 
-2.24.1
-
+It only crashes in mixed mode. If I pass -Xint I don't see any issues.
 
