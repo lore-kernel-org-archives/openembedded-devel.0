@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
-	[209.85.210.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B1EC7FFCA
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
+	[209.85.210.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C0C647FDF8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 00:59:43 +0000 (UTC)
-Received: by mail-pf1-f174.google.com with SMTP id n9so2399152pff.13
+	Wed, 22 Jan 2020 00:59:44 +0000 (UTC)
+Received: by mail-pf1-f175.google.com with SMTP id i6so2424908pfc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 16:59:44 -0800 (PST)
+	Tue, 21 Jan 2020 16:59:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=R1UqSPrekbpXMGl+sYZdGpTuy18EzFXIHZQQq5/ZYhQ=;
-	b=m+LxD4LkH1oItLXC/BY5hEfCkSA2yDT1dQytgxQsOQbElp75ZU9pbsds/YyEzb9QX1
-	c7WcswPEtkKxbzfrFfNUwT1OMaYaQByYR8g4B1PD/NVfSLvgplxUk+Um7WclOVgjuORv
-	/OWWyN/Riymfi+xZ4jvIU2ePxKdIUpF1lcErrrGTM8KLsmJNhAZmFKB/OVv6MgQCwnW0
-	C4MG4nQ8bAZUtIXyNPrBmv3D5G3yiBI7GtfbDdAUfRtPGwoAxSlqMx7nlf6FBvKfi/D6
-	vZHkE4ZeH8rNYeavyZyob6NkGHS3mfMjKLPEGyWIVCRQSJE2F5Op9jgA5osGOETnNIzw
-	jxVQ==
+	bh=A5mUfCtJmuj0MiPRQL5TgqDXfY2MHHQ//LQ1OURbZkc=;
+	b=Yi0rEaJnoVpatyzOlO8yYXr6AD17L54Wf80c+RnMBqGztczhfxCFB31v5mYY0iW34G
+	AUhn3ZwT6ZbgYDcfOo6vBWLEhinN1/Y3eJOaEfW8djYbkY/wuexy3pySNH+m0F/kO5sU
+	bWgSN7IiUfhJlqK4U9Ivep/750l+txB0Yvb9xx+F3O/8JLJTTYs48fDxDp/KkWK2oqsL
+	xgEVan53/YdUPLUdVg1zBvtgad4hFk8Xe0XJjGAF58ia0o/oTc/NC3BOH00l5R2bjT7m
+	x/tUcTbVnohBRKWlFRNyUKx5Gm9x9YQ0qY0s5gJS+a+9ya7L4WjdTfZ2XLIlgk7C8BGe
+	tDQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=R1UqSPrekbpXMGl+sYZdGpTuy18EzFXIHZQQq5/ZYhQ=;
-	b=naPZuAFncoYrw3fTZEX9qE/ES2rjiYGQe3r6t69BpfgByVOCMSh+CIcVdrOfg+MVVJ
-	BxUbart7P7QHMO6g9Oi32hGDOpFdFECWt9HV9O1fse0XbyW1uZNSJg7OFjbPas0Rccrn
-	5G7gn8z/1lHIJS8FBTfzN+VFUYyA3Eft1UsRyjwlYspzCLI/2dx1xUu4UdgXDksNlG3O
-	JBRKWZB+b6kJn68A2lvDLD9DJ+XxdEjg4UEbgAVgeMedNq5dfoRQzspCnhXDGGQu2iuk
-	a+EGE55/nSYRrN5IMxN1SA1vNqunR2+WMTVfdnHd/RJbXn6ka0qhXHRIVNzoEPRH6+oV
-	GHlw==
-X-Gm-Message-State: APjAAAWjHR/BfvoixCRTUN9lg/ambmaOlQeIyYOFIBmLOfd+jgBnmZCH
-	Cg+R5TmZ8Gz8MazsP5eUbdzaV516+cQ=
-X-Google-Smtp-Source: APXvYqyXHbaK9Ay8EdkBNUE5fpk7M6N09VxYXxEn6p4mJP9QHnsCyIdEhAWJFh1QD4JySVE1uitN5A==
-X-Received: by 2002:aa7:8193:: with SMTP id g19mr252366pfi.172.1579654783963; 
-	Tue, 21 Jan 2020 16:59:43 -0800 (PST)
+	bh=A5mUfCtJmuj0MiPRQL5TgqDXfY2MHHQ//LQ1OURbZkc=;
+	b=Z1TtQKbiIR2tx+dkgtfUgXVUoFPZXvZVpb0++04JAOFzhU2+IngIBNkmLmobBgWZ6a
+	NscATnn95r1wSVrQ23kzxoIj8TFwsksK1eTv/X3fCYhda+OsA0tY+/ZWtoljZFv1SaU4
+	r9pdSO7jEJZ2+AP3jkp9j53zUE3htYcm5lR5N43DjAvyHlE3Ieap4zdgHWxVz0/s/g5Z
+	163Fp24Q01VbHWgbN7hjTuV2kgnp3b5iruinpHBIHPAQk4tvFeFk5WuXaiW1XwvnfObo
+	GCN9zwKKr9qhO++EWmLE2wTi6+bPhw+vckRETsxugktFGyAzysUYhxaQnmMZkhZWBMxL
+	Mzyg==
+X-Gm-Message-State: APjAAAWgVB96bBBl9x5AVcqAG61SckDTb9hYQcgDfDb94nMf6asUtkvG
+	wOd2ZrYc/6QAZ74XAaf8ibDbYFIDmIo=
+X-Google-Smtp-Source: APXvYqwg4dgNpX6VUXyA5qgGzd8AOHhGFGl4oJnkd/AWFvioKyLurQOz8ciwwFLk7WZYaiq+7Cdv+g==
+X-Received: by 2002:a63:ce55:: with SMTP id r21mr8167844pgi.156.1579654785546; 
+	Tue, 21 Jan 2020 16:59:45 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
 	by smtp.gmail.com with ESMTPSA id
-	z26sm46107269pfa.90.2020.01.21.16.59.43
+	z26sm46107269pfa.90.2020.01.21.16.59.44
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 21 Jan 2020 16:59:43 -0800 (PST)
+	Tue, 21 Jan 2020 16:59:44 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Jan 2020 16:59:37 -0800
-Message-Id: <20200122005941.3706171-3-raj.khem@gmail.com>
+Date: Tue, 21 Jan 2020 16:59:38 -0800
+Message-Id: <20200122005941.3706171-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200122005941.3706171-1-raj.khem@gmail.com>
 References: <20200122005941.3706171-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 3/7] python3-pyatspi: Upgrade to 2.34.0
+Subject: [meta-python][PATCH 4/7] python3-txws: Fix deps to py3 modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,38 +59,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 00:59:43 -0000
+X-List-Received-Date: Wed, 22 Jan 2020 00:59:44 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...{python3-pyatspi_2.32.1.bb => python3-pyatspi_2.34.0.bb} | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-pyatspi_2.32.1.bb => python3-pyatspi_2.34.0.bb} (83%)
+ .../recipes-connectivity/python-txws/python3-txws_0.9.1.bb      | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb b/meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb
-similarity index 83%
-rename from meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
-rename to meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb
-index 4f52ac70d0..3bdb86b453 100644
---- a/meta-python/recipes-devtools/python/python3-pyatspi_2.32.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyatspi_2.34.0.bb
-@@ -3,12 +3,12 @@ DESCRIPTION = "AT-SPI2 is a protocol over DBus, toolkit widgets use to provide c
- SECTION = "devel/python"
- HOMEPAGE = "https://www.freedesktop.org/wiki/Accessibility/AT-SPI2/"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=e9f288ba982d60518f375b5898283886 \
-+LIC_FILES_CHKSUM = "file://COPYING;md5=db29218e6ba3794c56df7d4987dc7e4d \
-                     file://COPYING.GPL;md5=751419260aa954499f7abaabaa882bbe"
- DEPENDS = "python3-dbus-native glib-2.0 dbus-glib libxml2 atk gtk+ python3-pygobject"
+diff --git a/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb b/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
+index 6d1327ac42..e235682cf4 100644
+--- a/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
++++ b/meta-python/recipes-connectivity/python-txws/python3-txws_0.9.1.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "https://github.com/MostAwesomeDude/txWS"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=76699830db7fa9e897f6a1ad05f98ec8"
  
--SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=gnome-3-32"
--SRCREV = "dc4565208fca00da06b972915a080ad3c63f640d"
-+SRC_URI = "git://github.com/GNOME/pyatspi2.git;protocol=https;branch=mainline"
-+SRCREV = "cc99d68db66174f4499b9b325bc788393b972edd"
- S = "${WORKDIR}/git" 
+-DEPENDS = "python-twisted python-six python-vcversioner python-six-native python-vcversioner-native"
++DEPENDS = "python3-twisted python3-six python3-vcversioner python3-six-native python3-vcversioner-native"
  
- # Same restriction as gtk+
+ SRC_URI = "git://github.com/MostAwesomeDude/txWS.git"
+ SRCREV= "88cf6d9b9b685ffa1720644bd53c742afb10a414"
 -- 
 2.25.0
 
