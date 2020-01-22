@@ -1,53 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com
-	[209.85.214.178])
-	by mail.openembedded.org (Postfix) with ESMTP id E15C67FCF7
+Received: from mail-qv1-f66.google.com (mail-qv1-f66.google.com
+	[209.85.219.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 6534F7EC95
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 19:11:38 +0000 (UTC)
-Received: by mail-pl1-f178.google.com with SMTP id ay11so192433plb.0
+	Wed, 22 Jan 2020 19:17:32 +0000 (UTC)
+Received: by mail-qv1-f66.google.com with SMTP id y8so299261qvk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 11:11:40 -0800 (PST)
+	Wed, 22 Jan 2020 11:17:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=JC2bo5w6Ygn7lXfVq3NVFP/6hwiK1h26T6qZ9TSOACs=;
-	b=gPpa0mSKmUhvgKrnpdI4LRjzex5gSS4GM/tWuuJUdFuwaphSWEjvnrZojD3YX3eUjq
-	vCuxjKAOPFCXPsVz0owzv7oirutffBt0VgwANy0DmjKqrRu+/4eITZscxp8F+Vt1EI+7
-	HhbLb/l7h78Hmmigr2ZVYOqDJ2udU9OEtU8mhIIxDtBRo0y/6HBkRdJzuRLnWr0Q3nbA
-	T0tEc7S3DDnih6eAcAPkvkpdqAWBydZ7wLIaqPomjIlWggqWv5dh5m3pQhgJ5m44j0Es
-	KJyyiCZ5LGltVYK3iX7mcsuOc+fW2AaODLy7brxmEF701YF6TZPKSKGPfpB5wyAoMahq
-	MoqQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=u53o8Cv/eQd56AAa0erjFbOtW/HJOKoh15w8j1geS/Q=;
+	b=ewFQwv5M7Sx8slGolsMFJ9/UDgCx5yIldq495/Mqi7p7ujoilk9YrC409UL7fmieIp
+	mk35X4TJKrh3zOnUqqjtgiabeSZCZquNL1PrcXqPJmjdWTtWQPRj6Q+Cq/rf2tO/3A4T
+	XZgp98harV/snq7ao4eBTG/1vqU0Jy376nV0nW4j1O4lQqocTwNbUus0HZNTn30OSuE0
+	uWWq9eVfSmLNmUt9t1FWtcgJFpPeLZuVnNFw7xsY0YmgE5apY9zvgEQO/McIIY7F5icG
+	TsQZs3niQpnZPpHV74GQGD6Hx6oxqmE+qIbSNMPYtpW+c3eH6mLMGm3rlrINhGVEUT96
+	wJBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=JC2bo5w6Ygn7lXfVq3NVFP/6hwiK1h26T6qZ9TSOACs=;
-	b=Jcf54F8e11ZytZFPO3r2HhHyEzUv3LgbRViZ1dUwusfTTcei7Y6vuocCvPaOUDOH+j
-	V0+ooqOMKzAb8rlzAxutug0JXuesL1dTP5lFY1cWOZ8uVGNoBStxqSW6ZjHMie7i3X7D
-	J3cqJhFb/518uqKTeZUAsnKxVpre2gGkqKl+z6HzuWkOBIwQ9Zp1A6HYxW5XRyYjpbtp
-	z5hzJzFz1UnPXxOw0RZPvMmmCNnx25KUtve6ra2o9JguzadG8qZ1kc9f5vsHtAgjxDBL
-	U4sWnPEMZJl4eB4n/X4iSFnfBuIzFsOAziMJ3x3gNJsRRAVgS4FiavFYykVNyyb7CTNR
-	mAIA==
-X-Gm-Message-State: APjAAAWbYD8XULwHO4K+FpzG7HBIytnQtIgKM3ibVW6NkW9VRB5sMNTM
-	79Sk8MyCG8oenNqM/dK9+kRciV0S7K4=
-X-Google-Smtp-Source: APXvYqwU6lyGJQFpKqdXtNcmUYdQuDdfzCkSgktREwV554YBzC2lLY2N38+uOoxrzZ2JZV0d0lVOKQ==
-X-Received: by 2002:a17:902:b587:: with SMTP id
-	a7mr12435136pls.155.1579720299664; 
-	Wed, 22 Jan 2020 11:11:39 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
-	by smtp.gmail.com with ESMTPSA id
-	c19sm50595184pfc.144.2020.01.22.11.11.38
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 22 Jan 2020 11:11:39 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jan 2020 11:11:34 -0800
-Message-Id: <20200122191134.3307089-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200122191134.3307089-1-raj.khem@gmail.com>
-References: <20200122191134.3307089-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=u53o8Cv/eQd56AAa0erjFbOtW/HJOKoh15w8j1geS/Q=;
+	b=NS5wnKcL7ppGX1CTcPp0WTFimA41jz9SVhsCvOmOJKpdJkAnvX+9eskCTpIJUDWLnF
+	Y6E9uq1i+a7PgtQrMgxLHlXO2ZyNFuxrKUN2wIyfnABjgeo7xp0t3wGi7XYQLgs6LCG1
+	yDIp5Afvhbu7/UITIZKRiuH9THMNKT6u+DRHXPR0oiWLd/m/H1qtSFtVoVTQbw79mx6V
+	ZJp/5PxCEpEg/Y90fayZQhWL7WHMKNGGoGl4o7Mr4vfdHZLKnC6LXrw5G+xN8RWvTvLR
+	SKfwZqpLUqN2CHgU7cRv7XCUdM/w/NX9Vt2nqQZa4nmZK6hw8sb/CpQkIfVpL+v/gZKI
+	bdoQ==
+X-Gm-Message-State: APjAAAX5MBxjv1P0f5ZKZyTBbgnPXiXPdVmUHv9Y4EHUx63zK8w+DWnt
+	9AJBzEqeBF4UBByfngZt5bqr2g9w8+u9ARrPRrw=
+X-Google-Smtp-Source: APXvYqyjTtTHJ3p35yhG1Q9DerqsFr+MEkIJDVVdqgzdW0u+xMW8tCiIxuZ0dnFPWKQ1Q7MVP/lzI0dpQgu1C3zW68s=
+X-Received: by 2002:ad4:478b:: with SMTP id z11mr12409495qvy.185.1579720653213;
+	Wed, 22 Jan 2020 11:17:33 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 4/4] guider: Build only when meta-py2 is in mix
+References: <1579301025-29499-1-git-send-email-pjtexier@koncepto.io>
+	<CAB2nKc_JoM6ASEBQAe1gs74W29VAMLExr4rJJut8knKLFkAMUg@mail.gmail.com>
+	<b0a03674-9188-dc12-9499-45e908420a4b@koncepto.io>
+In-Reply-To: <b0a03674-9188-dc12-9499-45e908420a4b@koncepto.io>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 22 Jan 2020 11:17:22 -0800
+Message-ID: <CAMKF1sq_Wa_qdHE=qeTytuLOTv1-AaMo+qLXYv57nknQzJK+OQ@mail.gmail.com>
+To: Pierre-Jean Texier <pjtexier@koncepto.io>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] cppzmq: bump to version 4.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,40 +56,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 19:11:39 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Jan 2020 19:17:33 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-devtools/guider/guider_3.9.6.bb | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+On Wed, Jan 22, 2020 at 9:36 AM Pierre-Jean Texier <pjtexier@koncepto.io>
+wrote:
 
-diff --git a/meta-oe/recipes-devtools/guider/guider_3.9.6.bb b/meta-oe/recipes-devtools/guider/guider_3.9.6.bb
-index c8ddb15080..397e0cb9a3 100644
---- a/meta-oe/recipes-devtools/guider/guider_3.9.6.bb
-+++ b/meta-oe/recipes-devtools/guider/guider_3.9.6.bb
-@@ -16,7 +16,7 @@ SRCREV = "fef25c41efb9bde0614ea477d0b90bd9565ae0b4"
- S = "${WORKDIR}/git"
- R = "${RECIPE_SYSROOT}"
- 
--inherit distutils3
-+inherit distutils
- 
- GUIDER_OBJ = "guider.pyc"
- GUIDER_SCRIPT = "guider"
-@@ -31,5 +31,9 @@ do_install() {
-     install -v -m 0755 ${STAGING_LIBDIR_NATIVE}/python${PYTHON_BASEVERSION}/site-packages/${BPN}/${GUIDER_OBJ} ${D}${datadir}/${BPN}/${GUIDER_OBJ}
- }
- 
--RDEPENDS_${PN} = "python3-ctypes python3-shell \
--                  python3-json python3-subprocess"
-+RDEPENDS_${PN} = "python-ctypes python-shell \
-+                  python-json python-subprocess"
-+python() {
-+    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
-+        raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
-+}
--- 
-2.25.0
+> Hi Vincent,
+>
+> Le 22/01/2020 =C3=A0 13:17, Vincent Prince a =C3=A9crit :
+> > Hi Team,
+> >
+> > v4.6.0 breaks some namespaces from v4.4.1, maybe we can keep both
+> > versions until people migrates?
+>
+> In fact, before the bump the version was v4.5.0, not v4.4.1.
+> But I think master should contains only the latest version.
 
+
+Right I think this change Looks ok for master unless 4.4 is long term
+release then we can discuss that fact
+
+>
+>
+> Thanks
+>
+> Regards
+> --
+> Pierre-Jean Texier
+> Embedded Linux Engineer
+> https://koncepto.io
+>
 
