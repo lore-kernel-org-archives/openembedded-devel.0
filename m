@@ -1,46 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 208CC7D67C
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
+	[209.85.216.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 527797FD4C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 20:54:15 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id w47so731018qtk.4
+	Wed, 22 Jan 2020 22:19:59 +0000 (UTC)
+Received: by mail-pj1-f47.google.com with SMTP id n96so201156pjc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 12:54:16 -0800 (PST)
+	Wed, 22 Jan 2020 14:20:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7Q9RTicToBoJ5uIQVeMEHfxbIrMzuwnxsi0AsmrvoJk=;
-	b=cjfQ5RTAbQgJ6e+YfU9fssbJpFOHsAk96Vm9Y68axeKJ+ppqWaRKmy/cyqus7F6IbX
-	jdTylXwS38NwnZMemn5VgXxiG4HYZTYSgF+49Ioi2J9+M8NxWt9tSV+7fofBzqy32Atd
-	7Y9Pbyx5TLrzjUhW1lI9ir9oIJkrMCAM2CDPdGtXJzbA0uYZ4QCOX/++F1YjUDcdTtIS
-	8ORfiY2CFitzTlRVxuNBaNWkytqruQM+ZnJRal5QwXzu7/LlngFmThDPIfEcIu7U4YTC
-	Tm8WDDXnwt+rwyfXkjJUEi+XE8wdqhE0XK08PX0zlPAKJVRWfsxPco34zvmoFpK2ku2u
-	sOLA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=sm3kKhB0PSDvXcTwcb5/PlwwzFRfhA9DKN+7KRR/hNs=;
+	b=sinowgag8vVZYLPCylvTRgJNWNrukc0RW4Iaar+OwEQmWXjIjZeJQJvKODXb9+2WgM
+	Pl1w7gl1fjobJOCBOPiHq7yLXeIoiu6toBMwWg8s9oFy8ZtyxIdAnDO8oB9jRgi7ofGX
+	0uL8/cpLTeEd2SIhC5TmTXE5xNqVmH4p+p+cqUB4zn+j+eHrh5N326kmnFDAA5pLAQt7
+	+b1uah/Sd/CGtsS0C45MLFhC+5jGKqoDof54MyU0+sr4DxxfaPJZOHr7JMbUf3bxZdv+
+	cvW0sY7G72MY/+jZyL4J7c5sninm3zDzAPlDQY8+BgtlWVDAQJY9icxnEsR10KxA2Da4
+	SQ9w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=7Q9RTicToBoJ5uIQVeMEHfxbIrMzuwnxsi0AsmrvoJk=;
-	b=iM4BvTeibSOg1t0kDC80BPO74fzoba0hFN0giFS6tPkBSikn/KNN0zmuZaVCZk5EPH
-	82lfwmOhZ1P2oEA8EKxbmTZVhB6MNb4VvQgeIhFZizWYDDAmQHpP1AVDlcRLe2gqDJVH
-	tqS01lS8rdsqR+dxTjZNm9KE01iHeI7kPHiMV9ToJx6bXrnb2sj5+d0k5n6W/Th8I/37
-	bpTjIbLVppy/xAXp1XcEXxZPF8prRBV9ZlTchYac2fsQOcMNN/SgG++U+jV281RhMJva
-	ReL2GXGIt2vJlrRaCRYTy8qhrfjbDrd67uQmGdgV+VlqoGkdHUicyNcNtDwkCtwntsYZ
-	aXgg==
-X-Gm-Message-State: APjAAAVmefH1poenub4L9+3w2DCBK4iN8+xAO4Ozra58Yn1er+5eQobg
-	ORoG8u8fQjXBPlo18o06Y/DLDFzSh4UwyqqDMcg=
-X-Google-Smtp-Source: APXvYqxqc/0Fr61frru9lJZkTw6EwI8Q8L1QcxlnHVlunVkary1stcLY2olJGzxqayHxbNS75259exmSTOPORX5zmus=
-X-Received: by 2002:ac8:145:: with SMTP id f5mr12475044qtg.194.1579726455770; 
-	Wed, 22 Jan 2020 12:54:15 -0800 (PST)
-MIME-Version: 1.0
-References: <20200117065558.19959-1-zangrc.fnst@cn.fujitsu.com>
-In-Reply-To: <20200117065558.19959-1-zangrc.fnst@cn.fujitsu.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=sm3kKhB0PSDvXcTwcb5/PlwwzFRfhA9DKN+7KRR/hNs=;
+	b=KP5XASI1uQb7tvB/pO3Ze7TB4fvxYTfIKOSUytg3SV9xdEIwMR88k0Ip3vnGouLpN4
+	8EveDT7rlhTI0j0LR4PazdpE+BT7Bk9g+ZBFUgsX4GbohXAAydKYgQFNryiT+LmrU4gr
+	914guy+DFkWYIAmG/NSEOwK1Ds332EtH3I8WDYOtgrdrFy9b2vh6qRasc/4gx1JiZgV/
+	Ln2E0GWo1qqn2h5Gcl6yQCl0K3fG0TeygNc1Az8YWJq801Kw/6m8UL5tEyeSN8Uq2JeV
+	7VlT69ULrkyOHejFJ4UKHcDikO2yvaZ7NQInLvbC1T/+Ab3ZzW4DlAWLqBk6sWvPx4lk
+	/A1g==
+X-Gm-Message-State: APjAAAXnzAi+i5F/+dP+MRftG4CeLqeCfevR+w0YjpXiLSWMv/0qp2e6
+	TNS6aKx202zhkgStL8oHCgP4yfabXyg=
+X-Google-Smtp-Source: APXvYqzjbPavE57m435rzipSa+2NDKpptzwxelep7HgyqO3k/QHKt38ucH/Z+UJgMtPZEVMqCrdEiA==
+X-Received: by 2002:a17:90a:d804:: with SMTP id a4mr777965pjv.11.1579731599816;
+	Wed, 22 Jan 2020 14:19:59 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
+	by smtp.gmail.com with ESMTPSA id d14sm8284pjz.12.2020.01.22.14.19.59
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 22 Jan 2020 14:19:59 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 22 Jan 2020 12:53:49 -0800
-Message-ID: <CAMKF1spN_VGujcWwN25za7f+M9Chjgsvrr5cWN=w3voA-_NK+A@mail.gmail.com>
-To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python] [PATCH] python-yappi: upgrade 1.0 -> 1.2.3
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 Jan 2020 14:19:57 -0800
+Message-Id: <20200122221959.1407586-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 1/3] openipmi: Correct the dep to use python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,59 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 20:54:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 22 Jan 2020 22:19:59 -0000
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jan 16, 2020 at 10:54 PM Zang Ruochen
-<zangrc.fnst@cn.fujitsu.com> wrote:
->
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-> ---
->  meta-python/recipes-devtools/python/python-yappi.inc        | 6 +++---
->  .../python/{python-yappi_1.0.bb => python-yappi_1.2.3.bb}   | 0
->  .../python/{python3-yappi_1.0.bb => python3-yappi_1.2.3.bb} | 0
->  3 files changed, 3 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-yappi_1.0.bb => python-yappi_1.2.3.bb} (100%)
->  rename meta-python/recipes-devtools/python/{python3-yappi_1.0.bb => python3-yappi_1.2.3.bb} (100%)
->
-> diff --git a/meta-python/recipes-devtools/python/python-yappi.inc b/meta-python/recipes-devtools/python/python-yappi.inc
-> index 54d408742..e84774f9d 100644
-> --- a/meta-python/recipes-devtools/python/python-yappi.inc
-> +++ b/meta-python/recipes-devtools/python/python-yappi.inc
-> @@ -2,10 +2,10 @@ SUMMARY  = "Yet Another Python Profiler"
->  HOMEPAGE = "http://yappi.googlecode.com/"
->
->  LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9a193c13f346884e597acdcac7fe9ac8"
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=91efaebbca5a9e4db0870636d36e7b98"
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-what changed here? Please mention that in commit msg and also rebase
-it on the latest master
+diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb
+index 7962d44075..126b37f118 100644
+--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb
++++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb
+@@ -11,7 +11,7 @@ DEPENDS = " \
+     net-snmp \
+     openssl \
+     popt \
+-    python \
++    python3 \
+     swig-native \
+     readline \
+     "
+-- 
+2.25.0
 
-> -SRC_URI[md5sum] = "a545101aa8a435b0780f06f4723f58c8"
-> -SRC_URI[sha256sum] = "7f814131515d51db62b1a3468bcb84de30499124752806a5a6e11caf0b4344bf"
-> +SRC_URI[md5sum] = "36474a3e47ad9a2e4605b8e7e30a08fc"
-> +SRC_URI[sha256sum] = "b8db9bc607610d6da4e27e87ec828ebddec4bdaac89ca07ebfe9a153b0641580"
->
->  inherit pypi setuptools
->
-> diff --git a/meta-python/recipes-devtools/python/python-yappi_1.0.bb b/meta-python/recipes-devtools/python/python-yappi_1.2.3.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python-yappi_1.0.bb
-> rename to meta-python/recipes-devtools/python/python-yappi_1.2.3.bb
-> diff --git a/meta-python/recipes-devtools/python/python3-yappi_1.0.bb b/meta-python/recipes-devtools/python/python3-yappi_1.2.3.bb
-> similarity index 100%
-> rename from meta-python/recipes-devtools/python/python3-yappi_1.0.bb
-> rename to meta-python/recipes-devtools/python/python3-yappi_1.2.3.bb
-> --
-> 2.20.1
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
