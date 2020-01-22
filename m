@@ -1,51 +1,50 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C72E97FD75
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id DD8027FEF5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 15:22:54 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id w2so5292pfd.3
+	Wed, 22 Jan 2020 16:20:23 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id 4so3780278pgd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 07:22:56 -0800 (PST)
+	Wed, 22 Jan 2020 08:20:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=Ca7vEZTqBsNcCfpjbMrTB6SySRSmy1XFg5pgNS17dpI=;
-	b=KQ5zNS5k8cDKq72H8Wr3GPZZi53qkgmi21SMqIWI8rekyriNaFfvHiDff1xUOanWPX
-	fuktLrbZup99BhW87ufhl8VKnaceuO8h7ec++OVXhGoGbI6qLX0Q5TXIES4XVkH2tCTl
-	x3RrVOu9XONxNqh8V0OAi4+kLD9Lbe3+oLFu64pVp5kLAAwKLlXZONl5UEcquWZEEyZF
-	JXB0b5hqA7V2iy7dpcRsIDi6nKKIYdFrmIWF9Gx52FKQrZ/dBHBU5vSyBeLO7BBpnRoS
-	b7vnWItvjHf0LM9bmLJB3bQRoMOrP2is1aM5NXJ4Fe5fQ51RbVzZIUfSiw1kPJXQ+lN2
-	IXpw==
+	bh=En7MrMzT4iHGE2xGsqN7BfcvnT+aQejj7grNvt3sQIA=;
+	b=n5zTkVQW+GdFx4ipEDEvkF53kaFByNCbgUv6tApBuvDydjh8oHchlrHpDZ+/Kj4oTf
+	uXSOtunKVmm8jNz7MLwdSyVLqMBwpIAcR/l8VwsEcbc0GtPZpqTu3fAXXLHBpG7JhbM+
+	zGHCmzQJKi9lWYvVHBC7tMQ/Nz9UCrnpRHAGjWKR7tLhO1qTxOsHtsmQYep6fpF0v91N
+	oA2AC+Nl/h+TM6kkmpTqWgmShpGDxDfmDmPNjNLv77R3I3SQg9CrlFPWzOhms4DXxslz
+	MCebimuHeyoABcPWuBhmbp847Fcr/d0v/6lTINgC3oj5zy+UPrWCDV7Kyb3YqT23R3XQ
+	EtVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=Ca7vEZTqBsNcCfpjbMrTB6SySRSmy1XFg5pgNS17dpI=;
-	b=gtqy+RoPFAJ9/zw3q4p5sQ0NJ2hr/bb80zKpFVOAaucxin/gP4xIvo7UIH99ske9TQ
-	YS8Qh0jvvRXvG8QrwrBsYoA26jbwjT1BDMBa2k2n78hT/PuTObdBHgawZ7xzrpmVpCXX
-	eYq89YrEtejihrK7bAcMv4t7ILYVL4s/uOoiOjSdYYukGhLxT21M4Xj0Ag5Gr2r3c6I4
-	YNGTUmZIDBdy68tfMJel2v1rTPSQqiihDbcSd0nDpdVNf1R55kzKav5pGA821ptYeb3Y
-	98FdV+NtyI6w2q9XR5o8FhI2tevnmi0bMIjTD0xBN1ShXytFsi58jXDcBupoZfavBQkl
-	hfVg==
-X-Gm-Message-State: APjAAAUliAFsYkWhRm6fybFnpRCNyfwDZQvcKRDfbdPtpblaE5it6uxn
-	f8GpD0XuRyL7P8dwns24aB1bwhxl/RE=
-X-Google-Smtp-Source: APXvYqz8orQ/caWHD1pDxRv4pmrw6nj1Z47rKgGvoaKfgBvHk88sa0n16Z8GLruYYe4q28pOvi5Tnw==
-X-Received: by 2002:a62:2cc1:: with SMTP id s184mr3164645pfs.111.1579706575681;
-	Wed, 22 Jan 2020 07:22:55 -0800 (PST)
-Received: from thetis.hsd1.or.comcast.net
-	([2601:1c0:6080:4500:b92a:2299:32b4:21fd])
+	bh=En7MrMzT4iHGE2xGsqN7BfcvnT+aQejj7grNvt3sQIA=;
+	b=RQQzULDlQ7WDVpICCW3jOJ6FRy18Koz0fURLZcYp7hah6FGJuC6zivUaX6JyjZq0GG
+	nfTziLSAhGAPxv0aEsjZ46DGXGGwRkMM2nmV5SNDz5R4OJhcodxPp7tPzEqaA6ZRC77Z
+	7jWcLCBAjlVnv5IfR7wYv6zvWQK6WpIRVGa5soFLhPsLgWzduMAZhoPB/L2Czl7P+fgt
+	rK/bayCTJykusuqyhQ+kozPrimuCc+KAKdu9oJfHjHsjah3n1TxE1awY4u4D43n7b4Wz
+	S+9FLXq+qyqp7eleFpH84dXyipMcZfwA8xEkRAiI/fDIG0h8qliIJsPShlwz9QXKfu4f
+	uckg==
+X-Gm-Message-State: APjAAAXUwA8P07HyXeKKTEWWs1rhqLJ1MH9ZonZQx7OSohW2/2W6Vfns
+	NvE5QoRgshaWnxt3CYyQRxPynEiEjzs=
+X-Google-Smtp-Source: APXvYqyYH0tXBBncbv+QBNFZsp4Yc2SKSAiwZgKM8VXbdVDOqLNORh7eIgv5nELsbbBoZXx3eF+9MQ==
+X-Received: by 2002:a62:342:: with SMTP id 63mr3270303pfd.19.1579710024481;
+	Wed, 22 Jan 2020 08:20:24 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
 	by smtp.gmail.com with ESMTPSA id
-	e2sm47792199pfh.84.2020.01.22.07.22.55
+	g21sm49042773pfo.126.2020.01.22.08.20.23
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 22 Jan 2020 07:22:55 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
+	Wed, 22 Jan 2020 08:20:24 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jan 2020 07:22:29 -0800
-Message-Id: <20200122152229.17802-1-ticotimo@gmail.com>
+Date: Wed, 22 Jan 2020 08:20:13 -0800
+Message-Id: <20200122162014.1971652-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-Subject: [meta-python2][PATCH] packagegroup-meta-python2: add -wrapt, -deprecated
+Subject: [meta-networking][PATCH 1/2] openipmi: Use python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,30 +57,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 15:22:54 -0000
+X-List-Received-Date: Wed, 22 Jan 2020 16:20:24 -0000
 Content-Transfer-Encoding: 8bit
 
-Update the packagegroup with newly added recipes
-
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes-core/packagegroups/packagegroup-meta-python2.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-core/packagegroups/packagegroup-meta-python2.bb b/recipes-core/packagegroups/packagegroup-meta-python2.bb
-index 41ba3abd..95f9c02f 100644
---- a/recipes-core/packagegroups/packagegroup-meta-python2.bb
-+++ b/recipes-core/packagegroups/packagegroup-meta-python2.bb
-@@ -57,7 +57,8 @@ RDEPENDS_packagegroup-meta-python2 = "\
-     python-aws-iot-device-sdk-python python-constantly python-bitarray python-flask-wtf \
-     python-parse-type python-ipaddress python-dbus python-cpuset python-distutils-extra \
-     python-futures python-jsmin python-pygobject python-pytoml python-six python-which \
--    python-netifaces python-configargparse python-sqlparse python-soupsieve \
-+    python-netifaces python-configargparse python-sqlparse python-soupsieve python-wrapt \
-+    python-deprecated \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "python-pam pamela", "", d)} \
-     ${@bb.utils.contains("DISTRO_FEATURES", "systemd", "python-systemd", "", d)} \
- "
+diff --git a/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb b/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb
+index 3f3cc20734..7962d44075 100644
+--- a/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb
++++ b/meta-networking/recipes-support/openipmi/openipmi_2.0.27.bb
+@@ -43,7 +43,7 @@ inherit autotools-brokensep pkgconfig python3native perlnative update-rc.d syste
+ 
+ EXTRA_OECONF = "--disable-static \
+                 --with-perl='${STAGING_BINDIR_NATIVE}/perl-native/perl' \
+-                --with-python='${STAGING_BINDIR_NATIVE}/python-native/python' \
++                --with-python='${STAGING_BINDIR_NATIVE}/python3-native/python3' \
+                 --with-pythoninstall='${PYTHON_SITEPACKAGES_DIR}' \
+                 --with-glibver=2.0"
+ 
 -- 
 2.25.0
 
