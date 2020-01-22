@@ -1,52 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 3308A9146D
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id B9D8A7CD73
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 06:38:33 +0000 (UTC)
-Received: by mail-pg1-f177.google.com with SMTP id k3so2931253pgc.3
+	Wed, 22 Jan 2020 12:17:42 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id q6so6985441wro.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 22:38:34 -0800 (PST)
+	Wed, 22 Jan 2020 04:17:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=MZt0Gv4FF5c88aV5wdwnHlr7dr4zEjRDGbXNuR+lBOI=;
-	b=WeyqK9b0nqaPfgCAaUkm7Ed5CnsQe8TAf7bverhOf/CSGszSMEm5pq3dlzrjVYcZmH
-	UMM/bA2d7l3m18Xx8E2MenQqNWNu7IcEBrILH6T42aVpieNINy8TwIX9TeE+x51cAnBO
-	JC+ZIq6HkUblfkscw2nZK5yc5Ehom/4trt/tdNhxkSHcApylGMVYkSI4H8Q+Zy0UhGO0
-	oxz+gYGbmbxcy99nF4h34qYfqW9mc9Aoj8KmMAaIU5FkmYPq/I2y+wi6J6myvDLxJ5Qj
-	yaiGudsNbsjvdO/Q/Qo0jJ0alVylAxR+FCDpWm1uoYvnc3CcpFaKiFpVn4ITxuTjAPID
-	/kGg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=iW2uSRmrssUomTdt2TwYcJIDYIv9lZY5q/cITvnNDPU=;
+	b=S1ydu+PM7nKOvPj8bCBcvNrLejSl5Rr2ps2Zg4k1EOaq4oFOzLHaGNJFAtsvbNInlO
+	4fNx2qVmeVjfnnGS0+VcemB+L3+40OMiA7pRJejapFA8kI4s+AKaY2hJhWggSxzDjD8R
+	OgFw391Ul6crs+Jc0Zm8ILVG/x9EOibpjqvlQsAjEKSWavIzXAyOqdX05OM4k9CChEMG
+	f08D8w7dHGCZ27iCqQ6uXxKVJ/8E4FuZPc3GG2leDjAndYtSSTUuQwAQLmYVsCiSD4U8
+	gwKOLEuIvbXJHUsBOq5bWY9vXWNTzsHumolJ470ObxmUkLiMczFF+M58wvQtgGjz39gE
+	Ks0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=MZt0Gv4FF5c88aV5wdwnHlr7dr4zEjRDGbXNuR+lBOI=;
-	b=R6lEbjQQFQwSIfi1xPSk7Z6uYi+cyhsyhdSorfWKoipalqCIYOY2X3oNE0XZQ6DMZq
-	w4yAStLoH+csDi20Zfbd74pSfn8MIj62Uf/59M26a/gBvfs5jNSD40CFKtam5qFv+uBF
-	9mLa/SEfICLRanlkQ6vzg3N7rFvEngaJhWN5ybwKwm0IFV8TBWMHhmleCJhRMxfKUt6u
-	JiJkEnUNA3W8C5jC4PYn+rgVg1hK/uNEej7Bx4VV0byBLQsSIwSKEKGBNwXNTC3Tatp5
-	ow3On56wMQv94FlkWGTrOhQS51VeYbd6UElknq2MlVM60cQiSEV9rm9g2ae6oe1rdoOa
-	sPsw==
-X-Gm-Message-State: APjAAAXkIqvlMmEAgnhbqZ6HkOppmLZ+exfdNK+0oX6RNrdrWXJ/tgsG
-	r+cGjtc5mCHNAiBr8MFF+xkIhnsoorE=
-X-Google-Smtp-Source: APXvYqzBQ6XycrFDMMjGedcLQNrK/awNWdflcmdcm11+96o5iTOcHeFga7psOXILwDer7Be6v5EFXg==
-X-Received: by 2002:a65:5a8f:: with SMTP id c15mr9353907pgt.259.1579675113937; 
-	Tue, 21 Jan 2020 22:38:33 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
-	by smtp.gmail.com with ESMTPSA id
-	100sm1600283pjo.17.2020.01.21.22.38.33
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 21 Jan 2020 22:38:33 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Jan 2020 22:38:23 -0800
-Message-Id: <20200122063823.242098-12-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200122063823.242098-1-raj.khem@gmail.com>
-References: <20200122063823.242098-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=iW2uSRmrssUomTdt2TwYcJIDYIv9lZY5q/cITvnNDPU=;
+	b=uB0/FTzsfuoAIzTotfElFuIqx8G39YRULH/DKrGESOdd41qdGJTaNYcEjr0GuuHHL4
+	JEEAHT2yupnEwOv2WwUBhxJVk4IPtzWWhd0usPzIQSXO+qC8IalMxEvU4CMIvoTzkKFi
+	h3OMaM026QJCwldk9S1BaotBYrFh0xjzf6Mw07nA5qgE+NXfa+VZsPsD9H3nistd/j8J
+	wTpKu5ruTJrx/bO0RhPzphc2EBygZVQmYOUej1vJGZQgeflY3LavMrEObuEBi0DyaTK9
+	2iagtxcAkAUUCmFuFHm5jinaPA+eSs8+BUexB5rteeJFeBsQpxK+TWwbt6XLAglxnf3H
+	ieHA==
+X-Gm-Message-State: APjAAAWeZz7n2YsiQN6loUwTI6YcAUCIBBwzoTqZrjjx3GhCzM6MZ0Yv
+	ENb9lwLuItWEc9I7X+ryerPsCHMkWOr+EJt96ts=
+X-Google-Smtp-Source: APXvYqwTNSzx+XcC2DIBZ4X0F2OVdK3+3ZSM+gngENQW497PxLKKUVSPJpYwyXOowD3fVUq4q24pZr1zWiG7u0MeqhE=
+X-Received: by 2002:adf:a746:: with SMTP id e6mr10892821wrd.329.1579695463112; 
+	Wed, 22 Jan 2020 04:17:43 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 12/12] sip: Delete python2 version
+References: <1579301025-29499-1-git-send-email-pjtexier@koncepto.io>
+In-Reply-To: <1579301025-29499-1-git-send-email-pjtexier@koncepto.io>
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+Date: Wed, 22 Jan 2020 13:17:32 +0100
+Message-ID: <CAB2nKc_JoM6ASEBQAe1gs74W29VAMLExr4rJJut8knKLFkAMUg@mail.gmail.com>
+To: Pierre-Jean Texier <pjtexier@koncepto.io>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] cppzmq: bump to version 4.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,47 +54,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 06:38:33 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 22 Jan 2020 12:17:43 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../packagegroups/packagegroup-meta-oe.bb             |  2 +-
- meta-oe/recipes-devtools/sip/sip_4.19.19.bb           | 11 -----------
- 2 files changed, 1 insertion(+), 12 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/sip/sip_4.19.19.bb
+Hi Team,
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 60276468fd..e5001c3974 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -117,7 +117,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
-     ipc-run libdbd-mysql-perl libdbi-perl libio-pty-perl php \
-     protobuf protobuf-c python3-distutils-extra \
-     python-cpuset python-distutils-extra python-futures python-pygobject \
--    rapidjson serialcheck sip3 sip tclap uftrace uw-imap valijson \
-+    rapidjson serialcheck sip3 tclap uftrace uw-imap valijson \
-     xmlrpc-c yajl yasm \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany geany-plugins glade tk", "", d)} \
-     ${@bb.utils.contains("BBPATH", "meta-python2", "nodejs", "", d)} \
-diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.19.bb b/meta-oe/recipes-devtools/sip/sip_4.19.19.bb
-deleted file mode 100644
-index 6299de4874..0000000000
---- a/meta-oe/recipes-devtools/sip/sip_4.19.19.bb
-+++ /dev/null
-@@ -1,11 +0,0 @@
--require sip.inc
--
--DEPENDS = "python"
--
--inherit python3-dir python3native
--
--PACKAGES += "python-sip"
--
--FILES_python-sip = "${libdir}/${PYTHON_DIR}/site-packages/"
--FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/.debug"
--
--- 
-2.25.0
+v4.6.0 breaks some namespaces from v4.4.1, maybe we can keep both
+versions until people migrates?
 
+Best regards,
+Vincent
+
+
+Le ven. 17 janv. 2020 =C3=A0 23:44, Pierre-Jean Texier via
+Openembedded-devel <openembedded-devel@lists.openembedded.org> a =C3=A9crit
+:
+>
+> This includes the following changes:
+>
+> 8d5c9a8 Merge pull request #374 from gummif/patch-2
+> ff994d9 Improved comment on workaround
+> 615380b Problem: Invalid 32bit issues when using Conan
+> bd27f24 Merge pull request #373 from gummif/gfa/tostring
+> 4f9c2ea Problem: message_t to string is hard
+> de07119 Merge pull request #370 from gummif/gfa/multipartn
+> 30fdfe0 Simplify code by trusting the compiler
+> 0f8601c Merge pull request #371 from gummif/gfa/move-ctors
+> d3abe06 Problem: Move assigned objects still alive
+> 93e3090 Problem: Missing recv multipart to fixed buffers
+> 5ee8261 Merge pull request #366 from gummif/gfa/detail-in-api
+> 0ef29c1 Problem: Detail namespace used in API
+> 28aecd9 Merge pull request #367 from gummif/gfa/no-tests
+> 76e5fb0 Problem: No multipart tests are begin run
+> a34d2a3 Merge pull request #358 from gummif/gfa/send-recv-multipart
+> d4d3ce3 Suppport for raw arrays in send_multipart
+> 5cc7793 Improve algorithms and documentation
+> 829997d Update version number to 4.6.0 to prepare for next development it=
+eration
+>
+> Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+> ---
+>  meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb b/meta-oe/=
+recipes-connectivity/zeromq/cppzmq_git.bb
+> index 3697129..0b66970 100644
+> --- a/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+> +++ b/meta-oe/recipes-connectivity/zeromq/cppzmq_git.bb
+> @@ -4,8 +4,8 @@ LICENSE =3D "MIT"
+>  LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddb174eaf7b55a34a7c89551197f66=
+e94"
+>  DEPENDS =3D "zeromq"
+>
+> -SRCREV =3D "e67fa0e16d7964876228952f60693f5c03ea0cc1"
+> -PV =3D "4.5.0"
+> +SRCREV =3D "8d5c9a88988dcbebb72939ca0939d432230ffde1"
+> +PV =3D "4.6.0"
+>
+>  SRC_URI =3D "git://github.com/zeromq/cppzmq.git"
+>
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
