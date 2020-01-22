@@ -1,47 +1,50 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
-	[209.85.166.194])
-	by mail.openembedded.org (Postfix) with ESMTP id D3DF47FDD9
+Received: from mail-pf1-f176.google.com (mail-pf1-f176.google.com
+	[209.85.210.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 255687FEFB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 14:15:43 +0000 (UTC)
-Received: by mail-il1-f194.google.com with SMTP id b15so5273622iln.3
+	Wed, 22 Jan 2020 15:04:33 +0000 (UTC)
+Received: by mail-pf1-f176.google.com with SMTP id i6so3557379pfc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 06:15:45 -0800 (PST)
+	Wed, 22 Jan 2020 07:04:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DvMXJyAnN3Ce0liooAmnDkV6acgUb2ModJsrNLgAWyc=;
-	b=EfnsfnE8odMKFB9tr6awOQq2utI6hVQr15V5jY1TyqkUeHVwVZgZgOkSB/E96Eb+ZP
-	k1InXVdtCrRqlnc+jOg+xNFFsZWPBHFMMX9nk4auQIiTcl/E+UiDCh4+46ZIdbtOWSQX
-	YZbR6U1uk5LFfOLS2ZhCKq+EjVAMsY/PYIWMsZ0YY6RaWp/grSn7IzsSNNHNxULuJ+jn
-	7YY7uD22wd8mshqFSLg62vlfgEsiOnTE1WoWqk+mUL+1h6h6h3mXIAOQSyvbqjubSpjc
-	kAScnyHdKHzr+ZuqkmewalUKDOPoxELNKRW4bvS0Pkiuk638p0v4xwCG5aHSDNClVGvL
-	hTAg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2WpiDESSiUjNbv9krrzHRn3OuhUUOVIo0mSF7Ds/fLw=;
+	b=THYDPkYv5b8e0X1N2FHpWxLDiokscByet0EpEBEDantg2rHgvM2496SlLD8TxHqnRK
+	a0+NxTn2zplWwr7CI01MGHjHdWsvtORgbuHXAkkBr2/gT8vVbAqeaV3JTYWy0RvNPoWB
+	EGL38ERzLEDmIcu03ALJQxHiS0/YcGLYgIwcyvCaciAtAtFGj3uE2idCREfA7r2KXPFt
+	YrPCsLmTTGFmEFD7W1dZZK2wl6mzl3gWs/IZHH02qJDXB+bC5dp5p88FGppDb+0fs58p
+	H5GVCeWacVQIQAj9h8UgahvQarClv+2g0JUmaqx/w97fvfDPEOgZT+xIFpMH1bCdcyjI
+	j8Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=DvMXJyAnN3Ce0liooAmnDkV6acgUb2ModJsrNLgAWyc=;
-	b=OKyI5VX5XTjJgNoNw7fOAs1/8UNsUyfoqPxjZN6RU2yzkJapBo9AI/M9VYLYM2HCKq
-	RXIIdVVpaydXi9gbDLNjsR6EUisJ+79Xjeczt/7VNEki2A2VJMqtvcwZ1a5ezb0cUBH8
-	V1zdUsrLwDGPTPx5SX8TXu35wO9bM0tFmkL4zO8nsk4OwnPt6hAXf+Ihu1NU3KPwUyBE
-	c6NCWb6nEHD2ZIV96LcHkEeKlXFymQJ7/wAXlFKgj2vQtW4EDHHdt7ppVCiMsL3yxSEv
-	oHbogZDWcrf71ziuTavjPy9+EMP3EDeBRztzBxswrQC7u/ANjUpoSoguhfXw9F5NnSTX
-	DNJA==
-X-Gm-Message-State: APjAAAWIrGh7JEeFCq1oqOQslVCDc6Xxcb9VqwrQ9YJQRU0GeJJ5i52H
-	r0Zz7oTvL4jshVUD8+bOmrRrmgSCGwZ7KZ5vzRU=
-X-Google-Smtp-Source: APXvYqxzZTY/hMERzkmaV4okjPIKrNcqMZeHn9gVAVLWqkx43RCFgEgbGjLoossLS8mIrhAx0/TSgubgEjYmTzz9Sk4=
-X-Received: by 2002:a92:d30d:: with SMTP id x13mr8708533ila.170.1579702544244; 
-	Wed, 22 Jan 2020 06:15:44 -0800 (PST)
-MIME-Version: 1.0
-References: <20200122063823.242098-1-raj.khem@gmail.com>
-In-Reply-To: <20200122063823.242098-1-raj.khem@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2WpiDESSiUjNbv9krrzHRn3OuhUUOVIo0mSF7Ds/fLw=;
+	b=OGdQIiS/THLirrjdQ68WOqj60WIcBcLRxzpMptEhVNj271Fe86Nqffm8/gnzNVV2l7
+	rfLjOPaQOyPQLIhYxy1TUviBtX2Y0+axx40M6Zkdt5ILRdQR0JIwcfjnAFJwtnw1AnNp
+	rC3FFRfXj1qh7OM1yX1fcKfH9IEhNJzTvnW3usEqUFxQeWXYwvgreGPPJPqtqUhsK73G
+	GXIr2EP3eFWgGSvG2SlFwFzO8jU6O8HVehsoXL8BgLwEcTMEZV2NgqfnIvYYuatjeCGo
+	M7lemi8fcJVdu6tte90/IoBtmzNrMHwqjBlhBYbTP3hY9pnYML0fpg27ZIbElDQAH4Zt
+	Wb7A==
+X-Gm-Message-State: APjAAAWt5lVQDdAuIkSG4aei2yvnElxZp6wkjpfexP5CCL/AoqdVIvz8
+	3I50DJbeAHUBA6j20nOW/GEWUX3orOM=
+X-Google-Smtp-Source: APXvYqwRvU96I9iRBiv1GbKYUT45NafCcC3I3TW2cUG3BCMKe34S7T59cErNckel+8Mzu/LNU3u8/Q==
+X-Received: by 2002:a62:ac08:: with SMTP id v8mr3044629pfe.83.1579705473679;
+	Wed, 22 Jan 2020 07:04:33 -0800 (PST)
+Received: from thetis.hsd1.or.comcast.net
+	([2601:1c0:6080:4500:b92a:2299:32b4:21fd])
+	by smtp.gmail.com with ESMTPSA id o7sm3721235pjs.28.2020.01.22.07.04.32
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 22 Jan 2020 07:04:33 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 22 Jan 2020 06:15:33 -0800
-Message-ID: <CANx9H-AzLAHLqNeTQppafuVFpjZCMWjjt2D7n7SeJxn5mGUzVQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH 01/12] python-m2crypto: Use PYTHON_PN instead of hardcoding python name
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 Jan 2020 07:04:04 -0800
+Message-Id: <20200122150404.37978-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Subject: [meta-python2][PATCH] lib/oeqa/runtime/cases: add python2.py
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,43 +57,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 14:15:44 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 22 Jan 2020 15:04:33 -0000
+Content-Transfer-Encoding: 8bit
 
-We should start merging the inc and bb files now that we do not need to
-support more than one python version.
+Refactor the python3 test from oe-core to do very
+basic acceptance test of python2.
 
-On Tue, Jan 21, 2020 at 10:38 PM Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
+---
+ lib/oeqa/runtime/cases/python2.py | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 lib/oeqa/runtime/cases/python2.py
 
-> Lets this inc file become usable for py3 module as well
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-python/recipes-devtools/python/python-m2crypto.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc
-> b/meta-python/recipes-devtools/python/python-m2crypto.inc
-> index 5f5444f37e..76dd58ce04 100644
-> --- a/meta-python/recipes-devtools/python/python-m2crypto.inc
-> +++ b/meta-python/recipes-devtools/python/python-m2crypto.inc
-> @@ -17,7 +17,7 @@ PYPI_PACKAGE = "M2Crypto"
->  inherit pypi siteinfo
->
->  DEPENDS += "openssl swig-native"
-> -RDEPENDS_${PN} += "python-typing"
-> +RDEPENDS_${PN} += "${PYTHON_PN}-typing"
->
->  DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}
-> -I${STAGING_INCDIR}"
->  DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}"
-> --
-> 2.25.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/lib/oeqa/runtime/cases/python2.py b/lib/oeqa/runtime/cases/python2.py
+new file mode 100644
+index 00000000..8afa2ac9
+--- /dev/null
++++ b/lib/oeqa/runtime/cases/python2.py
+@@ -0,0 +1,20 @@
++#
++# SPDX-License-Identifier: MIT
++#
++
++from oeqa.runtime.case import OERuntimeTestCase
++from oeqa.core.decorator.depends import OETestDepends
++from oeqa.runtime.decorator.package import OEHasPackage
++
++
++class PythonTest(OERuntimeTestCase):
++    @OETestDepends(['ssh.SSHTest.test_ssh'])
++    @OEHasPackage(['python-core'])
++    def test_python(self):
++        cmd = "python -c \"import codecs; print(codecs.encode('Uryyb, jbeyq', 'rot13'))\""
++        status, output = self.target.run(cmd)
++        msg = 'Exit status was not 0. Output: %s' % output
++        self.assertEqual(status, 0, msg=msg)
++
++        msg = 'Incorrect output: %s' % output
++        self.assertEqual(output, "Hello, world", msg=msg)
+-- 
+2.25.0
+
 
