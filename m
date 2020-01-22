@@ -1,51 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
-	[209.85.214.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D7EDB7FCF7
+Received: from mail-pj1-f41.google.com (mail-pj1-f41.google.com
+	[209.85.216.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 729477FCF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 19:11:35 +0000 (UTC)
-Received: by mail-pl1-f196.google.com with SMTP id a6so185940plm.3
+	Wed, 22 Jan 2020 19:11:36 +0000 (UTC)
+Received: by mail-pj1-f41.google.com with SMTP id kx11so340165pjb.4
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 22 Jan 2020 11:11:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=NS0R5YfbD46QGK2dOIYh4PUdIttp1NpiJjsq9qMclD4=;
-	b=WovBcQlEebaP/vxhhUY9WSacP3qD+aqhPr3cd/daijGdTHDSL2Xrnlmfxq/IPEc1CK
-	PJAkG09M4fV4vodVfzGuP+BG+a3bivsfLHq6Px4SH3D8TY+voZ/Qgab2YRf73qdHYcQa
-	Bk6t/d7kD43BMu/Mv3683zHscK38Y4Zil4vFnd3DpMLohb60+sz4aBhWstz+MUJhA5hf
-	b8Sk+y+jpAbprJufzKIUe2Yr8NGcVUciuu/QNKL7j5Vi/SbVT/bFAda2XNd5RaV27I5q
-	99oel56lXY1Z3LkR3JJWQU/uvmryijulwTosfzNEQuoNgBDRuVf2hpvAVAj+hRMlwQTC
-	M4/Q==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=xh6BsK3ehWq6RHt8drD+yWj0oItrFQh73gTSOpdmqCA=;
+	b=bzOHqRtW19J+/ibneAYp6wxMjJSixp+PFFTtBfyisE+kSXQeQBs1km+8z80Cw3Jf3a
+	s3pgRF7mcnaRJCKZf0rSvJQ7ugmwCudhim4Jm78YgE1945lfZV0gmQW0PGmuFQyXIT9A
+	5Qz/gDxNVr8Mq7/MT1C9hEn77ncOB4IG8OujDslZNrJPCJpxNjSax3vwR8neuDPNuKxj
+	sWPKN2SnHEHaDNOUHP0m6TkhzkMdn1QlMSsKFZW1xGrM98xswbP8wmTU3XjsyXORA/LH
+	GKIv85mIxOQXI64ib2J54u66qaL2JTo9d+iQvi8Z47bPuUbABeHKcBh318BNLNgvOC3B
+	mNWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=NS0R5YfbD46QGK2dOIYh4PUdIttp1NpiJjsq9qMclD4=;
-	b=ciKyb+jMHj33p2SSfKPvM7omCfNg7qe/4ZHY4IdLDTcrvVCZDszmBCwJEQ/CRNsljb
-	fx+qHaUdAPT3f60r0LzN1IVOJbiYp4VGQ8wiQalQJ7VvT8YECRp/lRHpMvlPMJSNuUHl
-	xgWI4CwblgIlb5h9Skmv1mUO6F1Yamh7f3l6Dw+AEqa2uRWXQFRPtxxEjgDRjuqSYAAv
-	vR9A0FMXcnOhuf0BZV7L4T+/NNC1rEmtbaB1k8Cv1C31SpOle8xwlZecq+Mbe6HhzkrV
-	Go5DHc6S99xwjb01heaC3zSOJtiC7aGAAmJbtloKsLcebyoNzJ5rFDwQYA0nrMbtZX8z
-	LOrg==
-X-Gm-Message-State: APjAAAXB6eTneZ0v73dVTFPAIfcyjEHHM0hFwqElTG2/R49fBg35wSf8
-	tFyjjDsVpyQBBjOZhhPkc0JOX9rwAjk=
-X-Google-Smtp-Source: APXvYqzmQvGKzdAydkdlgAXdrQkNS8iezZ4sPyKfNn+0gZEwkgiVFAGCoD1OB3SYHe0OArv6Sj5t0A==
-X-Received: by 2002:a17:90a:9d8a:: with SMTP id
-	k10mr4647314pjp.91.1579720296565; 
-	Wed, 22 Jan 2020 11:11:36 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=xh6BsK3ehWq6RHt8drD+yWj0oItrFQh73gTSOpdmqCA=;
+	b=HMOD07rNJw6Q7I3w5rkqySkTNyyvH3lNFXfec3dHZfX0GJXD8S785MMnjmy26OD/Gx
+	fldKkl8qH1l/pmnSMSanIRPScxxxiMYLDX0ytOmvL45aHqkDlNToOmybSWSPj/omkAut
+	n4SzqvS4Xn8X5PBvhvpRWFMxu6fVtIi+n4gHMAFvFajaneaFlz+UQRiRHKi4JJyQZSvn
+	E52xArPZ/vKUmQeM7FhrM88G63U9zDkLuNimTHAgV2nkTFEYbaNhwP4JcuBka++SyORj
+	UAa2ud0b287wr9MjnoFQtVdTLxDtA6qtg81VDIrVdnQkn65LjNKNv/oDV1y3zmdSMyoF
+	51cQ==
+X-Gm-Message-State: APjAAAUvj9A2AoB0QcvBPrMF2MmlhxPxljjAEJ6+/Ifu/ty0WR+zepSj
+	KD6E/w6zrIC0NuQbxBaCKEUJaY9OZYg=
+X-Google-Smtp-Source: APXvYqys6kQlgtr4s3I88shxdPpi3p7f+KcAUZXQMvMIparbnEdh/67hV76pGa19evMNRwwQgHFQnQ==
+X-Received: by 2002:a17:902:be0c:: with SMTP id
+	r12mr347995pls.197.1579720297192; 
+	Wed, 22 Jan 2020 11:11:37 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
 	by smtp.gmail.com with ESMTPSA id
-	c19sm50595184pfc.144.2020.01.22.11.11.35
+	c19sm50595184pfc.144.2020.01.22.11.11.36
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
 	Wed, 22 Jan 2020 11:11:36 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jan 2020 11:11:31 -0800
-Message-Id: <20200122191134.3307089-1-raj.khem@gmail.com>
+Date: Wed, 22 Jan 2020 11:11:32 -0800
+Message-Id: <20200122191134.3307089-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
+In-Reply-To: <20200122191134.3307089-1-raj.khem@gmail.com>
+References: <20200122191134.3307089-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/4] iotop: Switch to using git src_uri
+Subject: [meta-python][PATCH 2/4] python3-pyro4: Remove absent py3 modules from rdeps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,47 +63,24 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 22 Jan 2020 19:11:36 -0000
 Content-Transfer-Encoding: 8bit
 
-Gets python3 support
-Remove python2 specific modules which are absent in py3
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/iotop/iotop_0.6.bb | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ .../recipes-connectivity/python-pyro4/python3-pyro4_4.77.bb     | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/iotop/iotop_0.6.bb b/meta-oe/recipes-extended/iotop/iotop_0.6.bb
-index 68cc352249..3a597218db 100644
---- a/meta-oe/recipes-extended/iotop/iotop_0.6.bb
-+++ b/meta-oe/recipes-extended/iotop/iotop_0.6.bb
-@@ -4,13 +4,15 @@ DESCRIPTION = "iotop does for I/O usage what top(1) does for CPU usage. \
-     a table of current I/O usage by processes on the system."
- HOMEPAGE = "http://guichaz.free.fr/iotop/"
+diff --git a/meta-python/recipes-connectivity/python-pyro4/python3-pyro4_4.77.bb b/meta-python/recipes-connectivity/python-pyro4/python3-pyro4_4.77.bb
+index f9dd9300b0..ffe58ee9ca 100644
+--- a/meta-python/recipes-connectivity/python-pyro4/python3-pyro4_4.77.bb
++++ b/meta-python/recipes-connectivity/python-pyro4/python3-pyro4_4.77.bb
+@@ -11,8 +11,6 @@ inherit pypi setuptools3
  
--
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
- 
--SRC_URI = "http://guichaz.free.fr/iotop/files/${BP}.tar.bz2"
--SRC_URI[md5sum] = "5ef9456b26d7694abf3101a72e1e0d1d"
--SRC_URI[sha256sum] = "3adea2a24eda49bbbaeb4e6ed2042355b441dbd7161e883067a02bfc8dcef75b"
-+PV .= "+git${SRCPV}"
-+
-+SRCREV = "1bfb3bc70febb1ffb95146b6dcd65257228099a3"
-+SRC_URI = "git://repo.or.cz/iotop.git"
-+
-+S = "${WORKDIR}/git"
- 
- UPSTREAM_CHECK_URI = "http://repo.or.cz/iotop.git/tags"
- UPSTREAM_CHECK_REGEX = "iotop-(?P<pver>\d+(\.\d+)+)"
-@@ -22,6 +24,6 @@ do_install_append() {
-     rm -f ${D}${PYTHON_SITEPACKAGES_DIR}/site.py  || true
- }
- 
--RDEPENDS_${PN} = "python3-curses python3-textutils \
-+RDEPENDS_${PN} = "python3-curses \
-                   python3-codecs python3-ctypes python3-pprint \
--                  python3-shell python3-subprocess python3-core"
-+                  python3-shell python3-core"
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-logging \
+-    ${PYTHON_PN}-selectors34 \
+     ${PYTHON_PN}-serpent \
+     ${PYTHON_PN}-threading \
+-    ${PYTHON_PN}-zlib \
+     "
 -- 
 2.25.0
 
