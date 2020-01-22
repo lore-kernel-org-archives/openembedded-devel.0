@@ -1,52 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f180.google.com (mail-pg1-f180.google.com
-	[209.85.215.180])
-	by mail.openembedded.org (Postfix) with ESMTP id E15D17FFC7
+Received: from mail-pg1-f182.google.com (mail-pg1-f182.google.com
+	[209.85.215.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 904DC7FC1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 00:59:47 +0000 (UTC)
-Received: by mail-pg1-f180.google.com with SMTP id 6so2499439pgk.0
+	Wed, 22 Jan 2020 06:38:23 +0000 (UTC)
+Received: by mail-pg1-f182.google.com with SMTP id x7so2910679pgl.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 16:59:49 -0800 (PST)
+	Tue, 21 Jan 2020 22:38:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=9h0S+t1jr+Xi/GQzPpeJn/aWbu1L0TkWKDrK4qVckAg=;
-	b=l97TW10SjOvjldAc+NIbLTK6kZ6ff6zragzIzJXoHiO/iLGINtCP3nOcg/VhS9EPKI
-	7bOBD4YsxpssUOS9v+S4wskgoDGTMObi0zszGY5TaMbCDfm439lneXgclxbkFHQ+1jyl
-	l7JHUx9zcFqEGRQzVWKRSb6HPem0uaa+qdmvDj5jgXo+xSUwKMQSBrEVus6diiKI62lg
-	wTd5PGQuHfEYLZanJIFZyOHim4vn44NslpUUmmomP361XXypqg49FxL5IG8a7NoJPICA
-	zs4A9gtXqTB0XIlw+90mvWV7mJrs0YcxcAvxGQJHFS1waJ7rUwtyiPlbcU//Afg0QqRw
-	VaQQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Zqh2/NiUoir5yixo2I+jGsX/d8QaOsNq8/OUf60Otlo=;
+	b=hvgvcMa5rNVqsLhaHWZknEY5O2Ugx7vJOY5DqKSWn4yAVvq7mtkcFDguXIERyAWXZG
+	rIA9aJWY45f77Oq0K1qQssH+hJTzGzRkbvtWbH+1nxUkDKpZzsXPdovNi6bIhs920hNL
+	Qru18vLjipB/X5/GmWik12aZUvsQe2Uz6n8lV4a6u5Thcslp0XRkx6V+VeHkZzxZKrFs
+	qRxjwAaSjTknHYDNEpwc6/Tahzvp5CnyniMCaQUortLPw2f99Cf/QOo9Yu2xVI+kG/WU
+	9/6QANidWFCjM/yf1d2XstS/peYcOXv6vXvoovO1JQ4GN1gKqiWE1GFl3Z3cN6M6yolf
+	aLyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=9h0S+t1jr+Xi/GQzPpeJn/aWbu1L0TkWKDrK4qVckAg=;
-	b=GFahCKttYgS0b0xjYHlzmaX9uQKrhtrEoqswhSyaKJqSuY7o1k9X6sqiqrnOFW+miz
-	KKBZAvV/drAUQmJwpRibeSylnZZM56cjuzy2rs5yHX15C6rU7mQqHmL3JH9LKMtQn0SU
-	2U6QFyr/FJQtG4bzHspior0b5FUOd5XN4QH0g9MxxWPIvIZBaco785P6Xb4Rtt5sI2Mc
-	9OufMuXSBFInEBpS5VxTiZL9W89blJVSNFZZcYYoTwIe6aE7ZMwn48doZNhRS/q/ruT2
-	BH3cXLUHSNtrqeQAZEF9awJjK5KFICJx2mMZhv8RWD3rfKN+V+ajjT0SCi9RLQO/8cCg
-	Qb1Q==
-X-Gm-Message-State: APjAAAXzkDhcBjemppKvetS4SrdxUaa5oPhkLe7drDy78QUD5nK7ecvj
-	a34yN/colnVMzqmMf4bkWZ50Sv720Bw=
-X-Google-Smtp-Source: APXvYqz/Wh0Ili7ip+WwMkkbkPqwUPsmpkKRzam4m+i6XdnP76XygZygfUaMhbE73R8jtuh90jB28w==
-X-Received: by 2002:aa7:8f3d:: with SMTP id y29mr230051pfr.183.1579654788648; 
-	Tue, 21 Jan 2020 16:59:48 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Zqh2/NiUoir5yixo2I+jGsX/d8QaOsNq8/OUf60Otlo=;
+	b=faEB3FEZzEBjSh0E0aUamN7bXoLILL3yRKbsXtD6gnzbdkQKxIzzOxjwJfzc/55+yo
+	JHeg+B52TRQscQRgOnZytdKCyTBiAUCO2z/d89d3A/hteuop0tywjqP3p8qrkUxS5TEM
+	ucnnOUQapOJ35dQZ4vQJFIxjuIrgqrO3SpDE8Ob+ljIkIiWvaxY3WIQIGKLk6fTlriSx
+	IQrfNH3xtuFE2ng6VPSYeeqqgpvNHAU7JO53vy7lRRYQ2ckdEbLCWcREF19lMLnkjh3u
+	FFZcODhRjaj1tl2NXAgz9NFTb6k8nyhLJxtg1u/ZCRLS8Nq5rsVbJIj5hBIbsmFifFsE
+	mXBQ==
+X-Gm-Message-State: APjAAAVxOpviRj+7gvlpJoD5fnSYHG1q+/09XkldO9C/VrosW6Pk0zA5
+	GcwzwCm7/hk+ArOOUNRG0jxGScVec6g=
+X-Google-Smtp-Source: APXvYqySYE8vVezzByqlYqayh9v19DmDkNkImDxJVEx93D4Q135iV578ItvCRR740plAmvDqY+/+pw==
+X-Received: by 2002:a63:6d05:: with SMTP id i5mr9931443pgc.120.1579675104071; 
+	Tue, 21 Jan 2020 22:38:24 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
 	by smtp.gmail.com with ESMTPSA id
-	z26sm46107269pfa.90.2020.01.21.16.59.47
+	100sm1600283pjo.17.2020.01.21.22.38.23
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 21 Jan 2020 16:59:47 -0800 (PST)
+	Tue, 21 Jan 2020 22:38:23 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Jan 2020 16:59:41 -0800
-Message-Id: <20200122005941.3706171-7-raj.khem@gmail.com>
+Date: Tue, 21 Jan 2020 22:38:12 -0800
+Message-Id: <20200122063823.242098-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200122005941.3706171-1-raj.khem@gmail.com>
-References: <20200122005941.3706171-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 7/7] python3-ldap: Fix build dependencies to use python3
+Subject: [meta-python][PATCH 01/12] python-m2crypto: Use PYTHON_PN instead of hardcoding python name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,40 +57,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 00:59:48 -0000
+X-List-Received-Date: Wed, 22 Jan 2020 06:38:23 -0000
 Content-Transfer-Encoding: 8bit
 
-Address files via ${S}
+Lets this inc file become usable for py3 module as well
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python3-ldap_3.2.0.bb           | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-python/recipes-devtools/python/python-m2crypto.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-devtools/python/python3-ldap_3.2.0.bb b/meta-networking/recipes-devtools/python/python3-ldap_3.2.0.bb
-index 2ad70ace4a..f46ddbf449 100644
---- a/meta-networking/recipes-devtools/python/python3-ldap_3.2.0.bb
-+++ b/meta-networking/recipes-devtools/python/python3-ldap_3.2.0.bb
-@@ -9,7 +9,7 @@ OpenLDAP 2.x libraries. Errors will appear as exceptions."
+diff --git a/meta-python/recipes-devtools/python/python-m2crypto.inc b/meta-python/recipes-devtools/python/python-m2crypto.inc
+index 5f5444f37e..76dd58ce04 100644
+--- a/meta-python/recipes-devtools/python/python-m2crypto.inc
++++ b/meta-python/recipes-devtools/python/python-m2crypto.inc
+@@ -17,7 +17,7 @@ PYPI_PACKAGE = "M2Crypto"
+ inherit pypi siteinfo
  
- LICENSE = "PSF"
- HOMEPAGE = "http://www.python-ldap.org/"
--DEPENDS = "python openldap cyrus-sasl"
-+DEPENDS = "python3 openldap cyrus-sasl"
+ DEPENDS += "openssl swig-native"
+-RDEPENDS_${PN} += "python-typing"
++RDEPENDS_${PN} += "${PYTHON_PN}-typing"
  
- PYPI_PACKAGE = "python-ldap"
- inherit pypi setuptools3
-@@ -19,8 +19,8 @@ SRC_URI[md5sum] = "fe22522208dc9b06d16eb70f8553eaab"
- SRC_URI[sha256sum] = "7d1c4b15375a533564aad3d3deade789221e450052b21ebb9720fb822eccdb8e"
- 
- do_configure_prepend() {
--    sed -i -e 's:^library_dirs =.*::' setup.cfg
--    sed -i -e 's:^include_dirs =.*:include_dirs = =/usr/include/sasl/:' setup.cfg
-+    sed -i -e 's:^library_dirs =.*::' ${S}/setup.cfg
-+    sed -i -e 's:^include_dirs =.*:include_dirs = =/usr/include/sasl/:' ${S}/setup.cfg
- }
- 
- RDEPENDS_${PN} = " \
+ DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR} -I${STAGING_INCDIR}"
+ DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_EXECPREFIXDIR}"
 -- 
 2.25.0
 
