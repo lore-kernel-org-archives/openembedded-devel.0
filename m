@@ -1,33 +1,49 @@
-Return-Path: <pjtexier@koncepto.io>
-Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id 134977FD60
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com
+	[209.85.210.171])
+	by mail.openembedded.org (Postfix) with ESMTP id BB94C7DE74
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 17:36:38 +0000 (UTC)
-Received: from [192.168.1.17] (lfbn-bor-1-1001-35.w90-120.abo.wanadoo.fr
-	[90.120.192.35]) by koncepto.io (Postfix) with ESMTPSA id D39EA6040C;
-	Wed, 22 Jan 2020 18:36:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1579714598;
-	bh=+xw/hsV8Cc1j7qWeqGyw4Xaz0XhebtMNZ4Cre8OcJBI=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=iUU/XmTv9C1tv/ddo+oNXCG79cv6ktbbTV51O3pbYiH/CfOw7UPDGamCrPhRvub8u
-	xgHwvNx8bl2SHjp1UvNtPmF6nbt4X4FlDEtrXPtTKpGONw3Fv2UpqPRM4T1ZfP25I1
-	jY7ii1tMWpuEvd2H7Kl1BTQnlmSUJDWZ+b+5X5Wshvj/xU/6vr/rDZDcB+kN8EOfsJ
-	wOiNcLbSikgH0DrDQ7FQMY8up0OLBdH+KkBIl8QbAkMy8b6SoJnOtYFLGCMqNwc2YV
-	pPu1b+AhJlgjYg3SmBWFusCzFxW7j03HrQ0PNSzADz3ZIlRFkxYkJ3J1tuhP09r4IX
-	1oS9cCiptJemA==
-To: Vincent Prince <vincent.prince.fr@gmail.com>
-References: <1579301025-29499-1-git-send-email-pjtexier@koncepto.io>
-	<CAB2nKc_JoM6ASEBQAe1gs74W29VAMLExr4rJJut8knKLFkAMUg@mail.gmail.com>
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
-Message-ID: <b0a03674-9188-dc12-9499-45e908420a4b@koncepto.io>
-Date: Wed, 22 Jan 2020 18:36:38 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
-	Thunderbird/60.9.0
+	Wed, 22 Jan 2020 18:53:57 +0000 (UTC)
+Received: by mail-pf1-f171.google.com with SMTP id 2so253029pfg.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Jan 2020 10:53:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=dK6O1U3Crhi4oYBTfLPmg5A9+E/AsmT+2KxZMYG4zHM=;
+	b=C/j4bHb/hmhF4PbD4GJYBBP2zyCjt6Isu9rDQfBTk8YlTKLNbMT5O506qdJCLyLYpr
+	0ef28FYGz/LFwkl/GjusTtu6roqSYKMEQKd6S+On8ZDtDxhEVWQncXZu7e3aho774sjE
+	E8DRRd7TGV1XFOaRw5albR7R2Nkbo0ghsDuVPc/2HTyjH5ZczsJqLZExYP3lXfqIQZUx
+	7wNOGs6VryUx8/1hdquwkqlFlTFB9oX8xJVj//qThu2jT2+Ch2ovhHxigrk0NUhoRrws
+	/Px/qvcyxuUaU95XGJh1AB8btJUvwhf3jYsAdLb6ebhdsEBfP32w28zcP0IReyvcEAfe
+	5bkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=dK6O1U3Crhi4oYBTfLPmg5A9+E/AsmT+2KxZMYG4zHM=;
+	b=Py1D3Zuq5/QgYWta9dWFNalKpbytv+PgGQIEYbj9/qrEGtxdLrssik2QDQmLg2K/FG
+	ltc4NT1wdMUpnvGnp7bNJYooSIS03JqEupeI0UOz9PvUTdFks4RxomsqpsSKDK0SskaC
+	1Zl3ckfKr6ZnAOYbk0P5rfxP2UpY4cPLK203dMZglOdWi8yAtkGuLOl4BRIT6uliAzKN
+	o2OmX0OBk1M5z3RFxIz7ohza85YdMXC3OznWn9Xuz4mmZKDOZ44lwjMFlckln5rqQUW6
+	Mk44dl4FrznkHsbwGcLdFf70d6p+dnQRURscutXKFQp8xz9gl/UY5XFkCkASNLT6lqPZ
+	Zq0A==
+X-Gm-Message-State: APjAAAXCHIViih9CpaewP88THYUPj0EVFjxBA43RtR+APlI+qLv0gfLk
+	6S5fLmnx0/g0K1Vx+BKV6blJNEtpEkw=
+X-Google-Smtp-Source: APXvYqz0sfmNxYQ7CTRGGsKF0mohSKvBtLy87wWVIQqkBiT6uv0h+VGR5yAbeZ5EEkzp0dkG4j7PKw==
+X-Received: by 2002:a62:a21e:: with SMTP id m30mr3728613pff.56.1579719238395; 
+	Wed, 22 Jan 2020 10:53:58 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
+	by smtp.gmail.com with ESMTPSA id f1sm4130758pjq.31.2020.01.22.10.53.57
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 22 Jan 2020 10:53:57 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 Jan 2020 10:53:55 -0800
+Message-Id: <20200122185355.3258860-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-In-Reply-To: <CAB2nKc_JoM6ASEBQAe1gs74W29VAMLExr4rJJut8knKLFkAMUg@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] cppzmq: bump to version 4.6.0
+Subject: [meta-python2][PATCH] python-pyconnman: Fix conman -> connman typo in rdeps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,27 +56,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 17:36:39 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+X-List-Received-Date: Wed, 22 Jan 2020 18:53:57 -0000
 Content-Transfer-Encoding: 8bit
 
-Hi Vincent,
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Le 22/01/2020 à 13:17, Vincent Prince a écrit :
-> Hi Team,
-> 
-> v4.6.0 breaks some namespaces from v4.4.1, maybe we can keep both
-> versions until people migrates?
-
-In fact, before the bump the version was v4.5.0, not v4.4.1.
-But I think master should contains only the latest version.
-
-Thanks
-
-Regards
+diff --git a/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb b/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
+index 761ce08..264d2dd 100644
+--- a/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
++++ b/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
+@@ -10,4 +10,4 @@ SRC_URI[sha256sum] = "46c64c0692063fd0c9fb0216d49f7884bec9fa9760d8473db4b1e2f816
+ 
+ inherit pypi setuptools
+ 
+-RDEPENDS_${PN} += "conman python-dbus python-pprint"
++RDEPENDS_${PN} += "connman python-dbus python-pprint"
 -- 
-Pierre-Jean Texier
-Embedded Linux Engineer
-https://koncepto.io
+2.25.0
+
 
