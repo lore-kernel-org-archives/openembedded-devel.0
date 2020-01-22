@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com
-	[209.85.215.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 842FF7FC1B
+Received: from mail-pf1-f178.google.com (mail-pf1-f178.google.com
+	[209.85.210.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 4854B7FD1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 06:38:26 +0000 (UTC)
-Received: by mail-pg1-f181.google.com with SMTP id z124so2893773pgb.13
+	Wed, 22 Jan 2020 06:38:27 +0000 (UTC)
+Received: by mail-pf1-f178.google.com with SMTP id x185so2851085pfc.5
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 21 Jan 2020 22:38:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=bykYlNbRNbqf08+0ErTZG0vAyXmD4AVEJ2R4gP6wi+w=;
-	b=GcpMpD9IIFOt6vyYdmwxo4QD1JS9rPkDV4ad47lvbaK8ztaEwH70r+yGrsG+voQsNo
-	jBoLHHbUVmkRxsOPNfC2/Cq2I/jFKfs2QwDg1nsi+MhnchtW+OoUh3lv02+m+JRQVBJn
-	4gnUFWl+Cxt0EACiCJ7+yxHlhZLl9RxEawZwGy+zsDnfHoTl/CaZVWbFmkL6CNjUzG23
-	7xAKzKJqhx5PXjfV97PZ/6p6cXi+f1mAp8AzZglvJQAfbsSBJc2q+LRpJtB9/0T1PCl4
-	IKmt1j/p1F4ok0HqEOx28bkafcIjnrKKPX/IxxAHB60uMVnCQobTzj4SirhhzaJHMi2u
-	POMw==
+	bh=NFl+xPhOwaetOFOrqwM98PYDRliPbA1JkX+sn9WMH2M=;
+	b=AkJKDOy767GE01lMCktmMSy1yXp58rBMCfZoh1dag+F56pF8MyIgPlxTZBjwqRG5jX
+	29JupBx+tgH1Rz/DQRLP/EREivl6545lKD0miguOezTl1qRDOsXA9wQ22tgXv+U/MR8J
+	+ateEgap4fnp4p6L0MAOU5BZzwI7vu52gTdZOgFrzVeZ5XDHa9DfY45yedE4nzi2VRC5
+	H1zlIZTrcuh2t6oCOlpzWgUys9kb1+FA2UIYF2ZRRwvgfEliKDki26ecOSiBjMqm/f7k
+	IxiN78jaKSez+pQaf4ay1zz1Pc9L+aL/+KilvQfSiVeODnfDgyfMFaIArOOMUiSKn5zC
+	OBTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=bykYlNbRNbqf08+0ErTZG0vAyXmD4AVEJ2R4gP6wi+w=;
-	b=imi88equaiKMdbnbLpi7Cj3Fwl5JuCVm9l+eE/uvSXIiTBKeUK9AygO/PIxan8d9Rn
-	UxYqKqSBtNgkgHqkthxAk1vmpKVuedUvVeCYtrxiXJp+eJ/QyCk+R+ZWdEVCdfTCZ7vx
-	50aVf4OIib03sajjrGiYKZXBNftOzOING41SrGpcQQbvLCYjGQSUwYTWx7PhpkMXZbap
-	fYkbNoaP0jhWPQK1+3uuNakVDqHzI+tzuzClu5J1Zc1JMB8drbK0yg97+fwiV0wjjnMr
-	LfU7/ADNAZsSrvOsJV8ZUwhqNsGTXyYMaR1Yv1EFwtEpSjSq9Kffro7Jc0FhMhsJ5B6H
-	t3Ww==
-X-Gm-Message-State: APjAAAX5a/e5aN4PB5hJz8DdKMuqFgtmWsC9zeeQdMeKQt/JVr7qh5c3
-	sfGZcwY6j6D2NxMxaft5fklEMcPn2eQ=
-X-Google-Smtp-Source: APXvYqzQoXGNxpWGdnpkmi7GLR98rOXp7nwDYiFc8nIaNZCXokWVJcXqXfCDaX6qsuteLSz/ufeXdA==
-X-Received: by 2002:a62:5214:: with SMTP id g20mr1216535pfb.101.1579675107171; 
+	bh=NFl+xPhOwaetOFOrqwM98PYDRliPbA1JkX+sn9WMH2M=;
+	b=mXS+HaeiTPppxthCXpMVSDDZih+OxDem57qLJnbRQ0YlRHcmEAebyyw0IYDRMeLWRk
+	zF1Ibpgb97DYezMnsJ2CkDjGJjU7PjbLd7f4oWm50cNZsH2giZdSFxu5IGHJ203sYJ5g
+	VhEntr/RCO/hEhBvu+2co6LhIUq8wSwz42MKZbD+kJrhmsceG8jhM360y2FrUVrDB1AU
+	RFHvUSDdVc/j8ON0A4eWmWN+Mwio7GyEG24R2+GUoLnvWoMhFg25F6b+xnKI60kLlG7c
+	P/HlUMwPBDGzFYzHpI62khzFucuHTwcAol6hBkJpc1ZQqqMFw59ddNXMcy7YoC/OQwxB
+	tXOw==
+X-Gm-Message-State: APjAAAUZzNPwbPr2qEWAeCtWlCOx9jBdMYEOZ0Qz3vmF/BrmtV6AuBH5
+	hnP6DJ9xI/abP/AQcKUxAzp5FrBrg9s=
+X-Google-Smtp-Source: APXvYqysYsTbtUpJVYYwIfJo+mqfWtZIBJWRbxr7Qmg9Vm6tXL0wJk4fs/k1OrSehPgClt1OLp/e6A==
+X-Received: by 2002:a63:496:: with SMTP id 144mr9852004pge.207.1579675107985; 
 	Tue, 21 Jan 2020 22:38:27 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
 	by smtp.gmail.com with ESMTPSA id
-	100sm1600283pjo.17.2020.01.21.22.38.26
+	100sm1600283pjo.17.2020.01.21.22.38.27
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 21 Jan 2020 22:38:26 -0800 (PST)
+	Tue, 21 Jan 2020 22:38:27 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Jan 2020 22:38:16 -0800
-Message-Id: <20200122063823.242098-5-raj.khem@gmail.com>
+Date: Tue, 21 Jan 2020 22:38:17 -0800
+Message-Id: <20200122063823.242098-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200122063823.242098-1-raj.khem@gmail.com>
 References: <20200122063823.242098-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 05/12] rrdtool: Disable python packageconfig by default
+Subject: [meta-oe][PATCH 06/12] telepathy-idle: Disable when meta-py2 is not present
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,29 +59,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 06:38:26 -0000
+X-List-Received-Date: Wed, 22 Jan 2020 06:38:27 -0000
 Content-Transfer-Encoding: 8bit
-
-This needs python2 which is in another layer
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-connectivity/telepathy/telepathy-idle_0.2.0.bb | 7 ++++++-
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 ++-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-index c7dbb6e39e..d96fe8131f 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
-@@ -24,7 +24,7 @@ SYSTEMD_SERVICE_rrdcached = "rrdcached.socket rrdcached.service"
+diff --git a/meta-oe/recipes-connectivity/telepathy/telepathy-idle_0.2.0.bb b/meta-oe/recipes-connectivity/telepathy/telepathy-idle_0.2.0.bb
+index 5eb00aefbe..42ce3301f5 100644
+--- a/meta-oe/recipes-connectivity/telepathy/telepathy-idle_0.2.0.bb
++++ b/meta-oe/recipes-connectivity/telepathy/telepathy-idle_0.2.0.bb
+@@ -11,7 +11,12 @@ SRC_URI = "http://telepathy.freedesktop.org/releases/${BPN}/${BPN}-${PV}.tar.gz
+ SRC_URI[md5sum] = "92a2de5198284cbd3c430b0d1a971a86"
+ SRC_URI[sha256sum] = "3013ad4b38d14ee630b8cc8ada5e95ccaa849b9a6fe15d2eaf6d0717d76f2fab"
  
- EXTRA_AUTORECONF = "-I m4 --exclude=autopoint"
+-inherit autotools pkgconfig python3native
++inherit autotools pkgconfig pythonnative
  
--PACKAGECONFIG ??= "python perl ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-+PACKAGECONFIG ??= "perl ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ FILES_${PN} += "${datadir}/telepathy \
+                 ${datadir}/dbus-1"
++
++python() {
++    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
++        raise bb.parse.SkipRecipe('Requires meta-python2 to be present.')
++}
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index baf1fa1d61..f045167e8e 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -65,11 +65,12 @@ RDEPENDS_packagegroup-meta-oe-connectivity ="\
+     libuv libwebsockets linuxptp lirc loudmouth \
+     modemmanager mosh  \
+     paho-mqtt-c phonet-utils rabbitmq-c rfkill rtorrent \
+-    ser2net smstools3 telepathy-glib telepathy-idle thrift \
++    ser2net smstools3 telepathy-glib thrift \
+     usbmuxd zabbix zeromq \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "obex-data-server", "", d)} \
+     libmikmod \
+     obexftp openobex libnet \
++    ${@bb.utils.contains("BBPATH", "meta-python2", "telepathy-idle", "", d)} \
+     "
+ RDEPENDS_packagegroup-meta-oe-connectivity_append_libc-glibc = " wvstreams wvdial"
  
- PACKAGECONFIG[python] = "--enable-python=yes \
- am_cv_python_pythondir=${STAGING_LIBDIR}/python${PYTHON_BASEVERSION}/site-packages \
 -- 
 2.25.0
 
