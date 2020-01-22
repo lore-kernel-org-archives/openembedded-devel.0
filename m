@@ -1,52 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f176.google.com (mail-pg1-f176.google.com
-	[209.85.215.176])
-	by mail.openembedded.org (Postfix) with ESMTP id E91589146B
+Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com
+	[209.85.210.179])
+	by mail.openembedded.org (Postfix) with ESMTP id DFB257FF35
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 06:38:31 +0000 (UTC)
-Received: by mail-pg1-f176.google.com with SMTP id s64so2916226pgb.9
+	Wed, 22 Jan 2020 06:38:32 +0000 (UTC)
+Received: by mail-pf1-f179.google.com with SMTP id x184so2862674pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Jan 2020 22:38:33 -0800 (PST)
+	Tue, 21 Jan 2020 22:38:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=OmnZwBB0lc+7smyzvTrjBrnfMBa/eCB/awG0CcDFZlI=;
-	b=FGIREMlMIIy52s0wOyCZS1tR0swMprxqj1zZdpv4YOibUMEaAPOvJCrMcm70YWjmXw
-	G9CzZeUMwtkds3sdLTDQazil+raaukrX+vInIdAiFkE03OlZo6yslJ8GXqAw8WaVu6P6
-	e871tHX0Dj9b0clWdsESZwBxRda2vOvz8kFdYv5YnPfqicLJuhaiR1S/xPVIW2zXSkcW
-	F75PxPVPqh/pNFGbsTpwLqIpTwj2tyg3CWjO17KVLFIlznw1wtxfLeT+bL5ioX8wjlTL
-	jX0EYRjaPOq6Qt3JJS7xS5VEIkGPujLiKCwotjlkNVMp6+GQEFhCzzVIoCAAIWLujWKC
-	Pw8A==
+	bh=NyYBWkw7uLd5G21mwN9XZ/Y5V2sXypRWw1FvGMVtPkY=;
+	b=bIxUG1JlBFx9e2aMH0OWnln28Q5D1hqr0yUUZ7pjhn6y8cyY4CkERGTXrS7ilN+Ovo
+	V3yjOKM7IhKXUGOeX1b3YcOaVCHHhZxyQFwLYMTWk9W7Yb0RMGwUsj+RO4DDz4PkGM9C
+	J9dvJ077YBKrZsnCX1HbyVjFfwZ1ejnYECFTOT+W9QpoP3yFvY/0IMEgRfqC+sbW74rx
+	YlA/gTPjfcf7WFVmM4uZPdMubYlXPhItbjMQutU3iYDtpRNU6+ryguITWm0ClV3wucOU
+	jbGgRCRsk1m/376WaMxtP2EU4Iy2FL+sFJmxkpun5OvZODCuqVP9K4bKrXEP2/V7kj6P
+	tmsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=OmnZwBB0lc+7smyzvTrjBrnfMBa/eCB/awG0CcDFZlI=;
-	b=aogkU4H2hiD3HHKpBA7ZVJDtS2w0XSRd2p63DL4rMSyQJBzv1nzYsp0cMX3Xlc91s3
-	9/x4AsQzp8xrGsorwqkifUmXhLscn4ldyBycGpTEtmlCHDItGMjFSHmsxswnix/jx2xb
-	nC9cYtcXJVLFCM1YSCmyAisDROv7wgGPRs7tsSf0WjCuD0Fqw2NdTA3+x5A47y3nA5/2
-	3w5urXo+YNvyQGgx46hH9k/mIEGzSa50WI2Kw+upPBlQ3yfiA8+KsJiH7nuIenJHu3px
-	eFcSCxn2gt1UTKxEXCUubbI7+UcT7WMNHrX4ZdlcKAnaN6Y4WUe6WHxc/tuVurzwB+9F
-	e6OA==
-X-Gm-Message-State: APjAAAVV6TPiXD3fP5dav4LGXoJDJXOnvTu5vRRZGDUVx3/ZZXUE3zHE
-	BhsCJh9lcV3oiSbhFs+GpCb5hGkz+II=
-X-Google-Smtp-Source: APXvYqyTbKoew2Z8kRHtVUXqMrrplXrp1uMT2sVSzv0Kw062FNrAHi4vfiprSmHtSuDPDJR02Ob5pg==
-X-Received: by 2002:a63:d249:: with SMTP id t9mr9798599pgi.263.1579675112478; 
-	Tue, 21 Jan 2020 22:38:32 -0800 (PST)
+	bh=NyYBWkw7uLd5G21mwN9XZ/Y5V2sXypRWw1FvGMVtPkY=;
+	b=LsaI+YYJVaDlxGGkpCzcuxUJB3Cbwmsi80dHHPNqaa4sQBb6+T+U0+Hgspdxr/eeLs
+	zMaMYV1wvMiaLM//QnWHhTmdy/7Iyo0ABoOmEemP0PdCi+ilRx/ep3BrYCMCq2+3LbnZ
+	Py3D8zlPFptBZOaAniA5yBh63OA/2fRRULXDUruXIMIx9n7CUmQhlsIKtc1XYchEji+L
+	8e5kNToEutsuKqiSuYm+p0Zu/VrOUisBISMKQRMi24qoq9OP31iUTOJh76Ioq9jwkypc
+	B60hn7RUFbmc3zCz+KRWn9RfNt3BtD2oe4ggtt1gxfawI8yGkI9BmjmiYt0VMFh2NXQt
+	JQZQ==
+X-Gm-Message-State: APjAAAWsHlrKpxLzXPG7oEfjdYnTFHdIjAYQEduVBfUP6Ln/itFL7HWi
+	0mTZOj+Jv9QHwvKyHPySyWDLsddHcQw=
+X-Google-Smtp-Source: APXvYqwlwqjfslLDATqJ/pVnE0yTZbs6ScMVRWOyn2leEw29x2dLvlEvf1SgdDGWw8p/2vyK9CnAvw==
+X-Received: by 2002:a05:6a00:2ae:: with SMTP id
+	q14mr1225468pfs.155.1579675113233; 
+	Tue, 21 Jan 2020 22:38:33 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
 	by smtp.gmail.com with ESMTPSA id
-	100sm1600283pjo.17.2020.01.21.22.38.31
+	100sm1600283pjo.17.2020.01.21.22.38.32
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
 	Tue, 21 Jan 2020 22:38:32 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Jan 2020 22:38:21 -0800
-Message-Id: <20200122063823.242098-10-raj.khem@gmail.com>
+Date: Tue, 21 Jan 2020 22:38:22 -0800
+Message-Id: <20200122063823.242098-11-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200122063823.242098-1-raj.khem@gmail.com>
 References: <20200122063823.242098-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 10/12] nodejs: Build only when meta-py2 is included
+Subject: [meta-webserver][PATCH 11/12] cherokee: Only build with meta-py2 is in layermix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,52 +60,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Jan 2020 06:38:32 -0000
+X-List-Received-Date: Wed, 22 Jan 2020 06:38:33 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 3 ++-
- meta-oe/recipes-devtools/nodejs/nodejs_12.14.0.bb          | 7 ++++++-
+ .../packagesgroups/packagegroup-meta-webserver.bb          | 3 ++-
+ meta-webserver/recipes-httpd/cherokee/cherokee_git.bb      | 7 ++++++-
  2 files changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index 6dda3005e7..60276468fd 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -113,13 +113,14 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
-     giflib icon-slicer iptraf-ng jq jsoncpp jsonrpc json-spirit \
-     kconfig-frontends lemon libedit libgee libsombok3 \
-     libubox log4cplus lshw ltrace lua mcpp memstat mercurial \
--    mpich msgpack-c nlohmann-json nodejs openocd pax-utils \
-+    mpich msgpack-c nlohmann-json openocd pax-utils \
-     ipc-run libdbd-mysql-perl libdbi-perl libio-pty-perl php \
-     protobuf protobuf-c python3-distutils-extra \
-     python-cpuset python-distutils-extra python-futures python-pygobject \
-     rapidjson serialcheck sip3 sip tclap uftrace uw-imap valijson \
-     xmlrpc-c yajl yasm \
-     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany geany-plugins glade tk", "", d)} \
-+    ${@bb.utils.contains("BBPATH", "meta-python2", "nodejs", "", d)} \
+diff --git a/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb b/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb
+index fc117850b4..089c325252 100644
+--- a/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb
++++ b/meta-webserver/recipes-core/packagesgroups/packagegroup-meta-webserver.bb
+@@ -19,8 +19,9 @@ RDEPENDS_packagegroup-meta-webserver = "\
+ "
+ 
+ RDEPENDS_packagegroup-meta-webserver-http = "\
+-    nginx monkey cherokee hiawatha nostromo apache-websocket \
++    nginx monkey hiawatha nostromo apache-websocket \
+     apache2 sthttpd \
++    ${@bb.utils.contains("BBPATH", "meta-python2", "cherokee", "", d)} \
      "
  
- RDEPENDS_packagegroup-meta-oe-devtools_remove_armv5 = "uftrace nodejs"
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.0.bb
-index 5c50187253..d87a7513da 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.0.bb
-@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=be4d5107c64dc3d7c57e3797e1a0674b"
- DEPENDS = "openssl"
- DEPENDS_append_class-target = " nodejs-native"
+ RDEPENDS_packagegroup-meta-webserver-php = "\
+diff --git a/meta-webserver/recipes-httpd/cherokee/cherokee_git.bb b/meta-webserver/recipes-httpd/cherokee/cherokee_git.bb
+index d16e04e6b1..81805891a4 100644
+--- a/meta-webserver/recipes-httpd/cherokee/cherokee_git.bb
++++ b/meta-webserver/recipes-httpd/cherokee/cherokee_git.bb
+@@ -20,7 +20,7 @@ SRC_URI = "git://github.com/cherokee/webserver \
  
--inherit pkgconfig python3native
-+inherit pkgconfig pythonnative
+ S = "${WORKDIR}/git"
  
- COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
- COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
-@@ -150,3 +150,8 @@ FILES_${PN}-systemtap = "${datadir}/systemtap"
+-inherit autotools-brokensep pkgconfig binconfig update-rc.d systemd python3native
++inherit autotools-brokensep pkgconfig binconfig update-rc.d systemd pythonnative
  
- 
- BBCLASSEXTEND = "native"
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+ PACKAGECONFIG[ffmpeg] = "--with-ffmpeg,--without-ffmpeg,libav"
+@@ -70,3 +70,8 @@ RPROVIDES_${PN} += "${PN}-systemd"
+ RREPLACES_${PN} += "${PN}-systemd"
+ RCONFLICTS_${PN} += "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN} = "cherokee.service"
 +
 +python() {
 +    if 'meta-python2' not in d.getVar('BBFILE_COLLECTIONS').split():
