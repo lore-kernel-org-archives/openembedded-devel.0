@@ -1,49 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f170.google.com (mail-pf1-f170.google.com
-	[209.85.210.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 05E197FD4E
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E0597FD4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 23:08:11 +0000 (UTC)
-Received: by mail-pf1-f170.google.com with SMTP id w62so545611pfw.8
+	Wed, 22 Jan 2020 23:08:12 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id b9so306322pgk.12
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 22 Jan 2020 15:08:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Tfng5gd2YY/oV62j9aqt6Jj35zD9N33UeYHpbCLRkIg=;
-	b=FgBcaobb8GPUI66afalIXT7+EMe6N7gvqjjF3W2TjQNOZkmCZoKe+83/939mjU1Q5t
-	/RGY6L2zrg1jBljOAbVkCjaSh6dsKx0vfZ9y6D5feoqX6xNuv4N4EBXdqJoHNFQv5J/D
-	5cQbCK3LOqiBAhf8lkywVjUCeD9YfpZpBpvD+5vedvqXgDpTA2IPv53aKzJARHSz5s+R
-	s7QDyO4Fehmt7WdWtyJtLWQYZl7qFJUiv3N686f5Hcr8PIcDWP29Zgr/nNCafRmAlw8O
-	rUzhykR3GfvfKK8VyR8cjF7Y0SJ7K3CRsgKUhK2TFtDAu4YFXJ4OlmjreEVfbpZNZAeZ
-	6Vdg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=a0vkAJ7U64th4QBrAOQNFsL4qYYuPzK/PdgQpp6qNck=;
+	b=Hr2VHFJAmij/T35ZOtX83xPB/kGR/hcS9aXOaHfIIprtWgBUw6ASKV2koSThr2w1ed
+	iBITEmFkPNou7A45aMZZoP69sFXr3TqcZl+HiXBO+gOI/dnuPTs3PjZW3E7obcX0ar/7
+	IUSRrjt2ZvnzuxjgiSXyhvn4nh7Huj6ZZY+V+/zlS9NY8TsWpuuSpqJDObtOfLNJQqHG
+	KZTK1m3Xp0dqvAMIrW7cKx7pP98PB2UE5LAalyr+MPVuk5v2UG4EUUFeuWB7HNjNBqBh
+	QPuqbtrqYSq1AtQb2RfU+ZyMXEr7ct7Rvq3HWq6R0EAg0NE73iOUOR1NCnUWhHcyV0ZU
+	RBUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Tfng5gd2YY/oV62j9aqt6Jj35zD9N33UeYHpbCLRkIg=;
-	b=B5CUr4DLlN2stpp44Tw3+AuaS0Sa0gtJeJ0HNpWuKr6UlumJlduv5nPt6Gwblw6ouc
-	IFL487rAcYrmsbdujIy6IquAfCGapE1Vyhgr+4AxJCGMNVQ1CewEkp8yDf15BeNcP0cx
-	voNS38mW5blVCZmMmTH1iX8OK5QXNI1NAQwcV71gfE4jpqylU1UJlLe2aOH/ksKmvJ7r
-	Mc0FCkHxmUWTO2mjS0NkWP+6nITcQUfdLuTRDDjRefQwuqTAYBNwELxsY2NLUKpcM3PY
-	uLps0nvKO19kwxNxNJlF66DyRA9OGOkjhPF/Y6rNNofz03Gd7Qqq5qd1JJd/+htn6dCG
-	/pnw==
-X-Gm-Message-State: APjAAAW+B0lQmSRn2KDQhqK2ciablZmPpcrbDG9KXLRKPk59+3jUu6Sn
-	5dur8lwYz5aJ7eKrOCPFyXyHhfQiK24=
-X-Google-Smtp-Source: APXvYqwwEm1fWr5plpw8FO/QGgldvRjWofaxbsyTpBHY1yv/3rtVQaA0VUoet35PrixEmANsabB3Dw==
-X-Received: by 2002:aa7:98ca:: with SMTP id e10mr4841338pfm.24.1579734492380; 
-	Wed, 22 Jan 2020 15:08:12 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=a0vkAJ7U64th4QBrAOQNFsL4qYYuPzK/PdgQpp6qNck=;
+	b=lUUecKgG/Lg7iYVmAi9N6gcTL7N6Ks3/OOZOOeptcLmpJq4LRuSCEfPcsFWJHkIOMW
+	54YtYJS+WI+gFWUpuqueKoP04opjdl2s8srUUyuJjr5/NShlIA33RcY6prAzAbvfJtlE
+	Ndf9NjaycLMdlT4FKBnFlFPYDyQkOCGBp47qOA2X5j+xWxGGpDSExwsJyAM3c+rvfeDr
+	zJTcndBiw5BrbZ9Ry5MN+r/m9aUOeAKQBoajG2l3wnBhK0mOQiaNfxfVO0noy/Wr+uJK
+	JWKyln+deu/nvECVKvXvBGzCMGlWRBA0EinapmFlRP6zAvI7dsj3bf/ExHwsYjiDQeo0
+	jexg==
+X-Gm-Message-State: APjAAAV2EUMgwXxBAoUUW25W0a14TVa9BcnFep77OixAPGbXy14M0f82
+	yI30DlyYZpRXA0/m4DugPv9gFWp562A=
+X-Google-Smtp-Source: APXvYqyX5ToYUS8GycnBQizjqS2XnDnnCK3p7X4xTH8nZ40N5Lu9SXDabR9668Z437gVfmz7dD/ODw==
+X-Received: by 2002:a63:cc4f:: with SMTP id q15mr691389pgi.159.1579734493154; 
+	Wed, 22 Jan 2020 15:08:13 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::cab1])
-	by smtp.gmail.com with ESMTPSA id z130sm136892pgz.6.2020.01.22.15.08.11
+	by smtp.gmail.com with ESMTPSA id z130sm136892pgz.6.2020.01.22.15.08.12
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 22 Jan 2020 15:08:11 -0800 (PST)
+	Wed, 22 Jan 2020 15:08:12 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Jan 2020 15:08:10 -0800
-Message-Id: <20200122230812.2223255-1-raj.khem@gmail.com>
+Date: Wed, 22 Jan 2020 15:08:11 -0800
+Message-Id: <20200122230812.2223255-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
+In-Reply-To: <20200122230812.2223255-1-raj.khem@gmail.com>
+References: <20200122230812.2223255-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 1/3] telepathy-python3: Correct rdep to use py3 dbus module
+Subject: [meta-oe][PATCH 2/3] rrdtool: Use py3 as rdep and use py3 setuptools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,26 +63,31 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
-index 11ac0d93a1..d92e6577af 100644
---- a/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
-+++ b/meta-python/recipes-connectivity/telepathy/telepathy-python3_0.15.19.bb
-@@ -5,7 +5,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1 \
-                     file://src/utils.py;beginline=1;endline=17;md5=9a07d1a9791a7429a14e7b25c6c86822"
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
+index d96fe8131f..5662e63474 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.7.2.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://oss.oetiker.ch/rrdtool/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=39df84cfd8a5e18bf988f277f7946676"
  
- DEPENDS = "libxslt-native"
--RDEPENDS_${PN} += "python-dbus"
+-DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python-setuptools-native"
++DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native python3-setuptools-native"
  
- SRC_URI = "http://telepathy.freedesktop.org/releases/telepathy-python/telepathy-python-${PV}.tar.gz \
-            file://parallel_make.patch \
-@@ -32,3 +31,4 @@ do_install_append () {
-     rm -fr ${D}${libdir}/python*/site-packages/telepathy/*/__pycache__
-     rm -fr ${D}${libdir}/python*/site-packages/telepathy/*/__pycache__
- }
-+RDEPENDS_${PN} += "python3-dbus"
+ SRCREV = "56a83f4f52e6745cd4352f9ee008be3183a6dedf"
+ PV = "1.7.2"
+@@ -123,7 +123,7 @@ RDEPENDS_${PN}-perl = "perl perl-module-lib perl-module-getopt-long perl-module-
+ DESCRIPTION_${PN}-python = \
+ "The ${PN}-python package includes RRDtool bindings for python."
+ FILES_${PN}-python = "${libdir}/python${PYTHON_BASEVERSION}/site-packages/*"
+-RDEPENDS_${PN}-python = "python"
++RDEPENDS_${PN}-python = "python3"
+ 
+ FILES_${PN}-dbg += "${libdir}/perl/vendor_perl/*/auto/RRDs/.debug \
+     ${libdir}/python${PYTHON_BASEVERSION}/site-packages/.debug"
 -- 
 2.25.0
 
