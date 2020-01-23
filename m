@@ -1,42 +1,46 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-io1-f51.google.com (mail-io1-f51.google.com
-	[209.85.166.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 581D17FCB1
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f46.google.com (mail-io1-f46.google.com
+	[209.85.166.46])
+	by mail.openembedded.org (Postfix) with ESMTP id A4D3F7FD81
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2020 09:42:57 +0000 (UTC)
-Received: by mail-io1-f51.google.com with SMTP id c16so2311816ioh.6
+	Thu, 23 Jan 2020 10:09:22 +0000 (UTC)
+Received: by mail-io1-f46.google.com with SMTP id n11so2360935iom.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2020 01:42:58 -0800 (PST)
+	Thu, 23 Jan 2020 02:09:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=BPr2S42rtpHXrp8f5V0XdbUhrFbzW2U+zFM2VN3JaUU=;
-	b=lMkuIprKTtlCkeYcGQE6UhypRH78UAygvTSkpEbsaF5seiBceERPN+WBINqxjtc0uI
-	gJNxtYvQYA0VMlK23KD2OMmd9ZJtjY+k0UYAT106wje1Y3TavOKqBgt1jRHOxejVkkUB
-	p+t23SsE62AZ8qBt1ZIDDJak57FkaJBhl2jjeX++dHCG2IlxKb47yLY7JB3XkBDVid18
-	YctMlLFFoP1vi5ouTIVQyGhVRmjUVtWcV5+8p/hYFx2JDEsysSqeAVuUCJijtbje3Smk
-	Tqo/P7TICpeHDB30POsG0OAYnOEOF9gCtuf55L3p2F0R8NaQ46LF/faWkeXVgys4yWWC
-	cGPg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=6aUc1nRxRMgYWF/Ov0VqEZ+Hzc2e8c8pGlTPGJ2oadk=;
+	b=meLMpNSzUwEPenlGZnRej3aPClTg6TtMVtOR2tMYJMNceimZnF3QKU2evLKG6eJeLF
+	z+DOH8yjHxSNCvx6//8zM3JwZ6XHSt0pslks3jnI/xsnrlrAF5Cie5xu6yfYirqnq6E0
+	AEbAapAmeNJiFgqVoLfWtGucXo/kVUV9vQXSX3TlyWPuPNvHuTx0w8JoL2Drlj0WlTZ7
+	qaI7gnNONnAth1iQiaRA53LUqH2caTAfomoUzrrPm95oj2/OWbcnPPOdC2JK1etqznaX
+	OphuSgjYPT6IvQAzB2lCjGV6l2fEsae/lTm+Qhqtu91KxGMz5IMBl78kCzkTBfybH5q8
+	BZ5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=BPr2S42rtpHXrp8f5V0XdbUhrFbzW2U+zFM2VN3JaUU=;
-	b=hfpMGAExvxMpZ0hdaUBoKY4aC5el2XowvXxNHCVFlNSOiHyNlVcsyUaiFzUw66XRhI
-	eHlu7IbsxdrYWeiv1TVmXEePYOdvbYf0sKRLNKw8wVVI3ld5ykvV0LfYdrZlOpav6PDq
-	BLK6fB/NtnZ9G/K4IN7yvJ0niYh1OoK98e2RY7fpJLr3GhEcRmZ/gm7j6g4p9rMBTyco
-	ErQfyGBskNiSeneNvvqDkXc2gp202k+kfy9zipgReeNPt8dr+ZNuJ7GpAZc13S7AwBZz
-	N+hIUDYI1m4DhDFkfSPPnRch8PpuXN72/AwMYUIVW2UK8fjzMAAaP9DuAxjNWCQOk6tj
-	29pA==
-X-Gm-Message-State: APjAAAUv2d8ch4jBa1ORb4G8Hgnj8RLzX7dx6FQqJtiT2tihabscbbXB
-	36X+HdnKKszBCNwCQtp0s0CiUNZUb2yl05mm1M70YXhw
-X-Google-Smtp-Source: APXvYqz/wWTkGaLf1W94dtutA01oPQJVD6UEs0qaSPvVLJHAHxbnaAG4AKtyWSLJ8n1c4qIoRGPM7GvBQrIGiYRWllk=
-X-Received: by 2002:a6b:3845:: with SMTP id f66mr10995022ioa.102.1579772578193;
-	Thu, 23 Jan 2020 01:42:58 -0800 (PST)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=6aUc1nRxRMgYWF/Ov0VqEZ+Hzc2e8c8pGlTPGJ2oadk=;
+	b=qQqcxBqUhMSL5Nw8lZtR2qWSIv31HN7P361PfEHayNZy4Rb9QBhqpPTtJ53ks38MwW
+	MeP4KFF6kCyePQwk/iliHt3B6fSNUm+TjH5tLlg9reLHAAQV9G64lb3OcCSxK5J316cl
+	otlnBosvOOPEVqLc/lbcBTxYoLqfTd6tmyQ0RmnR6HPZahZsevLzMpDLv3I+WGWmbP09
+	SCldMkvvSGQCUNYgMSaRrrrZWUuanuG8X1q9mF4Z/MCZfaZNdXn+BscwxFN1CsX1riay
+	cF2zZPcoYu9ktd1Q6uenRK/CTPitfQpEgdiqP3aOLPNdLkf7GF8T7cXVIEq46j+/5OEc
+	yb2A==
+X-Gm-Message-State: APjAAAWl7f70eUKl/HOaz1J5p8BqNi+/srxtiN+gBgV+ygKUv6FV/ZF5
+	Kk1+BMFEVzYJThchkiHygWBI5w/hG/8mpm1OPWE=
+X-Google-Smtp-Source: APXvYqwGTm5ftuHSnRsSoKQzjfxNZRvzH9RKR6Trh/Waver+IkQ8yCkLrGdavnLH/WH+lbVYKKYC/ebRJ/sWCsSjDZM=
+X-Received: by 2002:a02:c558:: with SMTP id g24mr2482217jaj.81.1579774163668; 
+	Thu, 23 Jan 2020 02:09:23 -0800 (PST)
 MIME-Version: 1.0
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Thu, 23 Jan 2020 09:42:47 +0000
-Message-ID: <CAO5Uq5TV_6f7PXF6Q_TE0ii-W9xG9xgrO8p8OP_vb48HW=DugQ@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: systemd failing in master with Assertion clock_gettime(map_clock_id(clock_id), &ts) failed
+References: <CAO5Uq5TV_6f7PXF6Q_TE0ii-W9xG9xgrO8p8OP_vb48HW=DugQ@mail.gmail.com>
+In-Reply-To: <CAO5Uq5TV_6f7PXF6Q_TE0ii-W9xG9xgrO8p8OP_vb48HW=DugQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 23 Jan 2020 11:09:12 +0100
+Message-ID: <CALbNGRSAYNsQkWMhNAfxVqnq4bYx2=mcqMxQpxvPampLFyKazA@mail.gmail.com>
+To: Alex Kiernan <alex.kiernan@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: systemd failing in master with Assertion clock_gettime(map_clock_id(clock_id), &ts) failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,24 +53,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jan 2020 09:42:57 -0000
+X-List-Received-Date: Thu, 23 Jan 2020 10:09:22 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On the offchance someone's tripped over this already/has pointers:
+On Thu, Jan 23, 2020 at 10:43 AM Alex Kiernan <alex.kiernan@gmail.com> wrote:
+>
+> On the offchance someone's tripped over this already/has pointers:
+>
+> Around the time python2 dropped out, I'm now seeing boot failures with:
+>
+> [  612.151548] systemd-journald[543]: Assertion
+> 'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
+> src/basic/time-util.c:55, function now(). Aborting.
+>
+> I suspect it's unrelated to py2, but that's delayed me getting to the problem.
+>
+> The board I'm targetting is AM335x based, but without an RTC (which I
+> suspect may be relevant).
+>
+> Anyone seen anything similar?
+>
+> --
+> Alex Kiernan
+Hi Alex,
 
-Around the time python2 dropped out, I'm now seeing boot failures with:
+Have not seen that one yet. Will look for it once I can build images
+in current environment (python2/Qt5.14 broke loads for me). What I
+have seen were problems with timedatectl <-> ntp. Changing from local
+time to ntp-sync did not work: Time remained un-synced on recent
+images. Machine was Raspi so no RTC either.
 
-[  612.151548] systemd-journald[543]: Assertion
-'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
-src/basic/time-util.c:55, function now(). Aborting.
+Don't know if this is related to your finding...
 
-I suspect it's unrelated to py2, but that's delayed me getting to the problem.
-
-The board I'm targetting is AM335x based, but without an RTC (which I
-suspect may be relevant).
-
-Anyone seen anything similar?
-
--- 
-Alex Kiernan
+Andreas
 
