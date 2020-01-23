@@ -1,46 +1,50 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f46.google.com (mail-io1-f46.google.com
-	[209.85.166.46])
-	by mail.openembedded.org (Postfix) with ESMTP id A4D3F7FD81
+Return-Path: <vincent.prince.fr@gmail.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id CDF377FD6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2020 10:09:22 +0000 (UTC)
-Received: by mail-io1-f46.google.com with SMTP id n11so2360935iom.9
+	Thu, 23 Jan 2020 13:54:23 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id z7so3115375wrl.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2020 02:09:24 -0800 (PST)
+	Thu, 23 Jan 2020 05:54:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6aUc1nRxRMgYWF/Ov0VqEZ+Hzc2e8c8pGlTPGJ2oadk=;
-	b=meLMpNSzUwEPenlGZnRej3aPClTg6TtMVtOR2tMYJMNceimZnF3QKU2evLKG6eJeLF
-	z+DOH8yjHxSNCvx6//8zM3JwZ6XHSt0pslks3jnI/xsnrlrAF5Cie5xu6yfYirqnq6E0
-	AEbAapAmeNJiFgqVoLfWtGucXo/kVUV9vQXSX3TlyWPuPNvHuTx0w8JoL2Drlj0WlTZ7
-	qaI7gnNONnAth1iQiaRA53LUqH2caTAfomoUzrrPm95oj2/OWbcnPPOdC2JK1etqznaX
-	OphuSgjYPT6IvQAzB2lCjGV6l2fEsae/lTm+Qhqtu91KxGMz5IMBl78kCzkTBfybH5q8
-	BZ5A==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=VJDWRn1lAGvTEuCq01Vr3f/vsftR8B0ws23akyYTvAk=;
+	b=JgMoxQWZ027uO3VVwR+ZA/ffNTP4PbQ5SUg1t2WNAjVYiJ5/2k08AJ/f/T53IHfkB+
+	tjMUA70lcLTEwhwC71YE/rH8wXyF6uv652tLfZV31QjyO8jW7xEon6LU5C8ZbKUPdy/b
+	NvVsxxrCOfEyfWOFN0QdP45QJfhETHo8Lc9I5z2BRbq9fdrSv0lsVKvV3MVX6DcAgVvj
+	32k1kOdbXYsZU42YbY/Wxe6XH0rdrkl5dGBo1k/PjKXP72U8fBCRN1xnum0FWQBH+KP6
+	dTAiuAXiWQ8nz+IOunKCoU1QquKkLS3PoeYxyqY11dukqzF++IqL9vLXKKa+D8W7yw4M
+	bFOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=6aUc1nRxRMgYWF/Ov0VqEZ+Hzc2e8c8pGlTPGJ2oadk=;
-	b=qQqcxBqUhMSL5Nw8lZtR2qWSIv31HN7P361PfEHayNZy4Rb9QBhqpPTtJ53ks38MwW
-	MeP4KFF6kCyePQwk/iliHt3B6fSNUm+TjH5tLlg9reLHAAQV9G64lb3OcCSxK5J316cl
-	otlnBosvOOPEVqLc/lbcBTxYoLqfTd6tmyQ0RmnR6HPZahZsevLzMpDLv3I+WGWmbP09
-	SCldMkvvSGQCUNYgMSaRrrrZWUuanuG8X1q9mF4Z/MCZfaZNdXn+BscwxFN1CsX1riay
-	cF2zZPcoYu9ktd1Q6uenRK/CTPitfQpEgdiqP3aOLPNdLkf7GF8T7cXVIEq46j+/5OEc
-	yb2A==
-X-Gm-Message-State: APjAAAWl7f70eUKl/HOaz1J5p8BqNi+/srxtiN+gBgV+ygKUv6FV/ZF5
-	Kk1+BMFEVzYJThchkiHygWBI5w/hG/8mpm1OPWE=
-X-Google-Smtp-Source: APXvYqwGTm5ftuHSnRsSoKQzjfxNZRvzH9RKR6Trh/Waver+IkQ8yCkLrGdavnLH/WH+lbVYKKYC/ebRJ/sWCsSjDZM=
-X-Received: by 2002:a02:c558:: with SMTP id g24mr2482217jaj.81.1579774163668; 
-	Thu, 23 Jan 2020 02:09:23 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=VJDWRn1lAGvTEuCq01Vr3f/vsftR8B0ws23akyYTvAk=;
+	b=tCowD0xp6oGYkbPD2os02NSwK3h7DYIKt8ioYZAVP6n/nB8VgSgwGEASi1irNHsGWc
+	2kLKlUNr9HWlm5xpS77rC4besGGA7+v4HI6EseZDAexRVVZGPWivNSIz2PWGpp01faoL
+	udYp601RX3fwzcjcEQJOC8t0zNszLKWzNiZ/lEkcXkZLoCkEjT6T2Vo5aBSMto8yS3c1
+	oRArdlFriVO4q613Mo/3Osxn0uTY+oKwLjX/EsHkoV1j8vukSVQCTxQw5cGzs/jG6W94
+	5jBXZZBhpCOCzmt/INrE4AbiGlVlBStS/XKvOooYRVPt/C8oSM+gy+YrudecKqWco/wS
+	4irQ==
+X-Gm-Message-State: APjAAAX6mvJph3GxOxzus4Aw4pulNQMNqpLYlrjZdiyker5x1DbHUCqz
+	uwzGQPcD/9Upb6a7JCJCvYG06VgL
+X-Google-Smtp-Source: APXvYqw9uCzArebHMyvGvJrYaTmvI43y6lt4I0ECTQ8ws8eJ+STFk8FwLqYtLsb3+U93vL7k+hbJ4Q==
+X-Received: by 2002:adf:f20b:: with SMTP id p11mr16699367wro.195.1579787664245;
+	Thu, 23 Jan 2020 05:54:24 -0800 (PST)
+Received: from vpr-vm.corporate.saft.org
+	(mey38-h01-176-145-72-80.dsl.sta.abo.bbox.fr. [176.145.72.80])
+	by smtp.gmail.com with ESMTPSA id 2sm3119045wrq.31.2020.01.23.05.54.21
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 23 Jan 2020 05:54:23 -0800 (PST)
+From: Vincent Prince <vincent.prince.fr@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 23 Jan 2020 14:53:47 +0100
+Message-Id: <20200123135347.24361-1-vincent.prince.fr@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-References: <CAO5Uq5TV_6f7PXF6Q_TE0ii-W9xG9xgrO8p8OP_vb48HW=DugQ@mail.gmail.com>
-In-Reply-To: <CAO5Uq5TV_6f7PXF6Q_TE0ii-W9xG9xgrO8p8OP_vb48HW=DugQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 23 Jan 2020 11:09:12 +0100
-Message-ID: <CALbNGRSAYNsQkWMhNAfxVqnq4bYx2=mcqMxQpxvPampLFyKazA@mail.gmail.com>
-To: Alex Kiernan <alex.kiernan@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: systemd failing in master with Assertion clock_gettime(map_clock_id(clock_id), &ts) failed
+Subject: [meta-oe] [PATCH] mongodb: bump version to r4.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,37 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jan 2020 10:09:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 23 Jan 2020 13:54:24 -0000
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jan 23, 2020 at 10:43 AM Alex Kiernan <alex.kiernan@gmail.com> wrote:
->
-> On the offchance someone's tripped over this already/has pointers:
->
-> Around the time python2 dropped out, I'm now seeing boot failures with:
->
-> [  612.151548] systemd-journald[543]: Assertion
-> 'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
-> src/basic/time-util.c:55, function now(). Aborting.
->
-> I suspect it's unrelated to py2, but that's delayed me getting to the problem.
->
-> The board I'm targetting is AM335x based, but without an RTC (which I
-> suspect may be relevant).
->
-> Anyone seen anything similar?
->
-> --
-> Alex Kiernan
-Hi Alex,
+Signed-off-by: Vincent Prince <vincent.prince.fr@gmail.com>
+---
+ meta-oe/recipes-dbs/mongodb/mongodb_git.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Have not seen that one yet. Will look for it once I can build images
-in current environment (python2/Qt5.14 broke loads for me). What I
-have seen were problems with timedatectl <-> ntp. Changing from local
-time to ntp-sync did not work: Time remained un-synced on recent
-images. Machine was Raspi so no RTC either.
+diff --git a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+index cd8ccdc8a..6f460bf76 100644
+--- a/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
++++ b/meta-oe/recipes-dbs/mongodb/mongodb_git.bb
+@@ -11,9 +11,9 @@ DEPENDS = "openssl libpcap zlib boost curl python3 \
+ 
+ inherit scons dos2unix siteinfo python3native
+ 
+-PV = "4.2.0+git${SRCPV}"
+-#v4.2.0
+-SRCREV = "18ce5c9f56a01f2c933a720d64707f3456f81c8b"
++PV = "4.2.2"
++#v4.2.2
++SRCREV = "a0bbbff6ada159e19298d37946ac8dc4b497eadf"
+ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v4.2 \
+            file://0001-Tell-scons-to-use-build-settings-from-environment-va.patch \
+            file://0001-Use-long-long-instead-of-int64_t.patch \
+-- 
+2.24.0
 
-Don't know if this is related to your finding...
-
-Andreas
 
