@@ -1,49 +1,50 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-il1-f193.google.com (mail-il1-f193.google.com
-	[209.85.166.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 961C27FFAD
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 81D6D7FCC6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Jan 2020 02:39:05 +0000 (UTC)
-Received: by mail-il1-f193.google.com with SMTP id f5so1024888ilq.5
+	Thu, 23 Jan 2020 03:10:02 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id 6so629387pgk.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Jan 2020 18:39:07 -0800 (PST)
+	Wed, 22 Jan 2020 19:10:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6Lxzep3LU6fydNjW99uF57pLLFHdtFQNX/uebPG7cTg=;
-	b=YJqnVn3R/rTVS70tL+zV4ShBVUmRCKbPWXnkyWu8OELEl9AGtDKq26o877cl8r2C3p
-	2X6xwHCbxHfM1x2ySozv0Q0914sN9m17UGt0/6pikK4T4OxrlGD/Qk6PZbWom/VZIgfr
-	It+/+JN99mFJVW7MbrAA/0XQsCQu7khkIr101JyGh/Szypu/7qKKCvhudTPpGBHeFEn4
-	HHY3KE2bDg0OW588m91eXaNjEUBFRDT8mpGtgy6myuQriPHDQYXE/Vhv3ixQhdRLxrjD
-	MnqYPAXwHToy84LuVKeG0oJlvZ7znWexGAQ/6uJQXiKO23r2yTStlqkgj2Fe8U4tmOUK
-	ygsQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=gJyX3w2MBM9+cSvuqAxu2hg+zIJrxo5H+yPmGE82EIc=;
+	b=O6h5dcQ5KbdgIOPKfEAYP7embF1bwPV0Ql4bl0kJ8IGps77Hbf9koG+DLWie88Mz/F
+	K22QFn/Qe5COXm6q2zubp78min2H+8M6FGisaSLRSIK20nuNwlcDjkFlDDcOgY+JqmrD
+	xdJNhejibnE2Tddt4u6PlSkdZTBSG663a74rDYZd2/JyeDjC90jhHnBZle8YNnPu9N60
+	Z7ZHF9ZzQj22d8KsgE9HbiCFjvnk6VZUhqWmApXU+BPC4AY1zvbVn2ThTWC93wN1Ubvd
+	NelBoBIvrw6YA5BJsY2F28fAvrLknEGseofWvYcMypEhBuD6v4eINFo4By6WkplPrSFu
+	j68w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=6Lxzep3LU6fydNjW99uF57pLLFHdtFQNX/uebPG7cTg=;
-	b=hxzXbwX3e0XPhi3tQTBSLCHKdTyVMEwS80zZ8FuhqoMmQXbDJW/dHNVmAEV2HAYkvn
-	sCERy8u7/yVogXDp4kXYHHLm+SvJwfyrLr/LZ4vxFNwXVcP7riqf2BrKnvBJ+UQSMTsS
-	6duXFBZW3zedzUu0ryMajSxMbFUK+PHOG7fJv6fXZHegSNAQZz38RrUV5LLGrHmJh+Xm
-	TWAvPdYd2Zo0tjHoJ4JihZJGxGxlzxKJgicVhMK0iYM2tk8B4mz/X5wJ4Q71CyXeLwT+
-	XNTX7JwNp6B7uSD2AEXW/ncsbJNQ7ruy+ZC/GqhPnVt+soxyJmqPKX5+u2avF45QlZFV
-	oSpw==
-X-Gm-Message-State: APjAAAV5pcO5Z38OhsYqw0FZbY+KMnEefLiBKGn0jbU+Fax/0ApDFFkW
-	H8noNzGTowMfZB3kroJ8W7DD/QUGrDJNyEb2PBU=
-X-Google-Smtp-Source: APXvYqwvUdyjWPnsLAfX5i8D5x6T2S6Ofwoyz/2HOGILjXfzJPNcQbFhuFZeQo26mdzsa8fNFC8CC/aNyBoO90BEySY=
-X-Received: by 2002:a92:911b:: with SMTP id t27mr10673547ild.142.1579747146683;
-	Wed, 22 Jan 2020 18:39:06 -0800 (PST)
-MIME-Version: 1.0
-References: <20200122185355.3258860-1-raj.khem@gmail.com>
-	<CANx9H-A-rJjCOawq09wCp97DcX0N5nJRQq=rgvVUTGK9KmFnYQ@mail.gmail.com>
-In-Reply-To: <CANx9H-A-rJjCOawq09wCp97DcX0N5nJRQq=rgvVUTGK9KmFnYQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=gJyX3w2MBM9+cSvuqAxu2hg+zIJrxo5H+yPmGE82EIc=;
+	b=mYy83wa4vWVNVlBVZrrZuLM5CCbQ8Xma0VCEGzQcVtOgUHg63Itx6wjwchmGjWUtn6
+	wpsW+X0FsQauDHQMUloY7R1SCBzFo3BCAhUqVA6UrhqWDIHZXQ+ADeD7r2cjJ+vHU92K
+	+ikbuvkAoOZd2QdbmVzzC1tUG4oV2/F1SxRQnwCuVtOiyhBnBNIRq+RHInqTsFs0rdy8
+	Q7eIeunIys55FcYCeMhywBm8m116F+y6csY+4Vju9VYa5OFr6KnOzPNqd0bLuwDehONF
+	90d2747LgE1yUCfgR3yOo5X+x5AajL8p7kwI62fZr4+KSfkpka8MYARPKRb68/KbF+DJ
+	W7OA==
+X-Gm-Message-State: APjAAAXWwlwWDcbq///yHLqsy0qhQqC2B4QJdukVre11Mq4irvws7xSN
+	ai2CX6JJAn3AbyvP34gEy48n4hP8ZvQ=
+X-Google-Smtp-Source: APXvYqw4/1so2XBccD44uWM0Bi0PAdCiE7vmDLiZMGI5rzG0dcc2M125N1FRtW5JIsDYdh/23gDiRA==
+X-Received: by 2002:aa7:9306:: with SMTP id 6mr5534520pfj.36.1579749003177;
+	Wed, 22 Jan 2020 19:10:03 -0800 (PST)
+Received: from thetis.hsd1.or.comcast.net
+	([2601:1c0:6080:4500:982e:71f9:9a69:ecbf])
+	by smtp.gmail.com with ESMTPSA id h6sm310284pfo.175.2020.01.22.19.10.02
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 22 Jan 2020 19:10:02 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 22 Jan 2020 18:38:55 -0800
-Message-ID: <CANx9H-DL28TRJ_fCAxbKE7rn8pk6P=ABcyr-ct1zvMdq1MxYKA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python2][PATCH] python-pyconnman: Fix conman -> connman typo in rdeps
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 22 Jan 2020 19:09:46 -0800
+Message-Id: <20200123030946.20787-1-ticotimo@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Subject: [meta-python2][PATCH] python-pyperf: add missing RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,51 +57,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Jan 2020 02:39:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 23 Jan 2020 03:10:02 -0000
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jan 22, 2020 at 6:38 PM Tim Orling <ticotimo@gmail.com> wrote:
+* Missing run-time dependencies:
+    ${PYTHON_PN}-contextlib
+    ${PYTHON_PN}-datetime
+    ${PYTHON_PN}-fcntl
+    ${PYTHON_PN}-math
+    ${PYTHON_PN}-numbers (fractions)
+    ${PYTHON_PN}-six
 
->
->
-> On Wed, Jan 22, 2020 at 10:54 AM Khem Raj <raj.khem@gmail.com> wrote:
->
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>
-> Reviewed-by: Tim Orling <ticotimo@gmail.com>
+Signed-off-by: Tim Orling <ticotimo@gmail.com>
+---
+ recipes-devtools/python/python-pyperf_1.7.0.bb | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-> ---
->>  recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/recipes-connectivity/python-pyconnman/
->> python-pyconnman_0.1.0.bb b/recipes-connectivity/python-pyconnman/
->> python-pyconnman_0.1.0.bb
->> index 761ce08..264d2dd 100644
->> --- a/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
->> +++ b/recipes-connectivity/python-pyconnman/python-pyconnman_0.1.0.bb
->> @@ -10,4 +10,4 @@ SRC_URI[sha256sum] =
->> "46c64c0692063fd0c9fb0216d49f7884bec9fa9760d8473db4b1e2f816
->>
->>  inherit pypi setuptools
->>
->> -RDEPENDS_${PN} += "conman python-dbus python-pprint"
->> +RDEPENDS_${PN} += "connman python-dbus python-pprint"
->>
->
-> Hmmm. Not sure how that happened as it was proper once:
-> commit 646505a63b6903d1328f5e24784bb7bd854eed9d
->
-> Thank you. This will merge tonight.
->
-> --
->> 2.25.0
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
+diff --git a/recipes-devtools/python/python-pyperf_1.7.0.bb b/recipes-devtools/python/python-pyperf_1.7.0.bb
+index 20aa7a31..e722b08d 100644
+--- a/recipes-devtools/python/python-pyperf_1.7.0.bb
++++ b/recipes-devtools/python/python-pyperf_1.7.0.bb
+@@ -23,4 +23,12 @@ PYPI_PACKAGE = "pyperf"
+ 
+ DEPENDS += "${PYTHON_PN}-six-native"
+ 
+-RDEPENDS_${PN} += "${PYTHON_PN}-statistics"
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-contextlib \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-fcntl \
++    ${PYTHON_PN}-math \
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-statistics \
++"
+-- 
+2.25.0
+
 
