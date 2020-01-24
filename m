@@ -1,40 +1,57 @@
-Return-Path: <prvs=285b569e5=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CC987FCE6
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
+	[209.85.208.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D33817FD8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jan 2020 10:37:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1579862272; x=1611398272;
-	h=date:from:to:cc:subject:message-id:references:
-	mime-version:in-reply-to;
-	bh=/xzYuZGywjnWmRMS6JWFPqF2HXPLU5gXoiNCUmTExlM=;
-	b=tDrhYQRGBDKlFpUbnN9mdXXbL18PYpBEM3gyafMRgGPgXOUaukDZMZmC
-	8w5fgXsBnxTof7hCkF3jg7sJyL7jHiIrH/+pbN5FXNPBSmZx9L+JpNoBn
-	5SbKlkVjoYqZ2zZ77jJvDFOde21GTvjz8xYu2CMzgb/6wzlLU33JmmCNs
-	eAFpq8wgY5BsIsCiZKXIJlC7dITfnS753+ocaondg/zR+BUZk9jQJy/YY
-	cHvKGYCUl+HKVinBjwuOdQ10odcfmcLuufjMhllc05vp5FoZ8He3DCqNa
-	THc+P4csYmFYFchsnAKnsyF9NTAjkLJxL/wI0nyLXRXYpNczs08s+kjHi Q==;
-IronPort-SDR: CdseS1edvA8OeEFcvhCy97x5BMXK/E0qKphlC1udg0h/wg7NEoeA3lly0Lh90gRjwfOl+5q6AI
-	snKneAk3PD+/cgJKeJsIzaaZawRx0r7h7DzEN/wXZPbgJYkaigGfcWNff3T/XiQMXtm+A8fNTW
-	dwo/NakKpkaN3Z9alxM/3a8om7O8NtdXkbhPYS+vVgdaezBRaQcEtNZgbeKletmGbcEkb45xMn
-	0BpDXzp9HMnGx5vMkx9/y1mJ1HqEXNZ81qjEdb2s/J0ygTAYn9Ki/rhNiy5SmeoLWhUNI8y96G
-	Ybk=
-X-IronPort-AV: E=Sophos;i="5.70,357,1574118000"; d="scan'208";a="22235197"
-Date: Fri, 24 Jan 2020 11:37:49 +0100
-From: Richard Leitner <richard.leitner@skidata.com>
-To: Jacob Kroon <jacob.kroon@gmail.com>
-Message-ID: <20200124103621.GA10765@brokenbit>
+	Fri, 24 Jan 2020 11:37:59 +0000 (UTC)
+Received: by mail-lj1-f195.google.com with SMTP id w1so2138091ljh.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 24 Jan 2020 03:38:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=jXf8EsSW5wlrndYDhCqJRbj+hacso033CelSXH/pw1c=;
+	b=WfrROi0yJbyA+AfQ2W3CB1i5C5nrTTtYCoS5AUfmJMb2t/5Keevf8hTXTcxpQ9j47m
+	1RBHV226d4JjlqLCusbnHNhW+NKFjcwsRvN9es7mQ1fxgJpWwHyzuCRxcI5T9gs4ZoLC
+	JyYhndNrApzDVShN3oDyKEP5wfoy3UNbdtAy9JxP0eVCtDgKVSWMvERpT3qwljSXzTW8
+	d4pOiy1vkLZHzDdDexite8BPKI5375Nu7gYmgaQ0yYYunJge3WgvvMe72IH+xvjHwtBX
+	DH0fpSGHHfuSBxsl5M8NZNcA+5/mZ+Nn6UrDqQ8L1HU7hm+ISrsUt6rcJq6+SPsSss+y
+	uUVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=jXf8EsSW5wlrndYDhCqJRbj+hacso033CelSXH/pw1c=;
+	b=XxuaLJst+LqT8mx/E2I1WF0Ncf+hKcqhHZmD0i/aVE1pUhKonep3DyTRzYuwgQzjKj
+	zJ2Y5GJpwXE7ujzAFisgfVBlN4RRhu1X/r3c2fefR0iCZuC/x2Q05XK3hwL0QG0e9ne3
+	QE9cujIxZNrPmcgxwvGGDEfRaxCphrrK34Wyjsr+1J1uRzk3SjwhbB/Qer0g1Dnns+mr
+	41pECEMPmzFLMC6xNV9Y/7ciuxuxwqUoiq37C5DDL+q/Zp3BFCfsxbOUykp6XR+vhP9o
+	9qs33t8kIBi9VAsL/nUtHshqq2GxwQKI/MxOTYErsCHmVoKbwejtrp63E0lNaS88mkyI
+	kwBw==
+X-Gm-Message-State: APjAAAUxCz9QCbqu/sxETvATFiSN3pRd8WrmJ7U+3qokPtMHr/yOm+iy
+	hdzixbiCOEheg4081Bw8Lh2FQJ8A
+X-Google-Smtp-Source: APXvYqwYpb4QqbTK/0rt22rsb2e3TeMdDZTT4pPHFDjba5e9nahCGNO8b8OY1Epx3bUBQAoJWKMurQ==
+X-Received: by 2002:a2e:8119:: with SMTP id d25mr2079659ljg.76.1579865880074; 
+	Fri, 24 Jan 2020 03:38:00 -0800 (PST)
+Received: from localhost.localdomain ([213.185.29.22])
+	by smtp.gmail.com with ESMTPSA id
+	c22sm2536648lfc.93.2020.01.24.03.37.58
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Fri, 24 Jan 2020 03:37:59 -0800 (PST)
+To: Richard Leitner <richard.leitner@skidata.com>
 References: <04a167ee-e63d-c4a3-7808-26ef5e9ed884@gmail.com>
 	<965c6ca2-e7c7-5cfc-36bd-482bd7d49202@gmail.com>
 	<20200121071238.GB1567918@pcleri>
 	<9067ccd9-2961-217d-15b0-5093a0583972@gmail.com>
+	<20200124103621.GA10765@brokenbit>
+From: Jacob Kroon <jacob.kroon@gmail.com>
+Message-ID: <538daee7-cba4-8b54-6264-dce44ebcf34c@gmail.com>
+Date: Fri, 24 Jan 2020 12:37:58 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <9067ccd9-2961-217d-15b0-5093a0583972@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
+In-Reply-To: <20200124103621.GA10765@brokenbit>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-java] openjre-8: java from master/master-next crashes on startup
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -49,42 +66,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 10:37:51 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 24 Jan 2020 11:38:01 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Hi Jacob,
+Hi Richard,
 
-On Tue, Jan 21, 2020 at 09:01:01AM +0100, Jacob Kroon wrote:
-> On 1/21/20 8:12 AM, Richard Leitner wrote:
-> > On Tue, Jan 21, 2020 at 08:00:48AM +0100, Jacob Kroon wrote:
-> > > Hi Richard,
-> > > 
-> > > I still can't use openjre-8 in either warrior, zeus or master builds, due to
-> > > the crash below. I wonder, is anyone successfully using openjre-8 in either
-> > > of these releases ?
-> > 
-> > I'm doing tests for the machine/distro combinations stated in the README
-> > before pushing to master. Therefore it should have worked back then.
-> > 
-> > Nonetheless I'm currently working on updating openjdk-8 to the latest ga
-> > and implementing continous (e.g. nightly/weekly) builds/tests on qemu to
-> > make sure nothing broke over time.
-> > 
-> > So maybe I could get something out of this.
-> > 
+On 1/24/20 11:37 AM, Richard Leitner wrote:
+> Hi Jacob,
 > 
-> Thanks for doing this work.
+> On Tue, Jan 21, 2020 at 09:01:01AM +0100, Jacob Kroon wrote:
+>> On 1/21/20 8:12 AM, Richard Leitner wrote:
+>>> On Tue, Jan 21, 2020 at 08:00:48AM +0100, Jacob Kroon wrote:
+>>>> Hi Richard,
+>>>>
+>>>> I still can't use openjre-8 in either warrior, zeus or master builds, due to
+>>>> the crash below. I wonder, is anyone successfully using openjre-8 in either
+>>>> of these releases ?
+>>>
+>>> I'm doing tests for the machine/distro combinations stated in the README
+>>> before pushing to master. Therefore it should have worked back then.
+>>>
+>>> Nonetheless I'm currently working on updating openjdk-8 to the latest ga
+>>> and implementing continous (e.g. nightly/weekly) builds/tests on qemu to
+>>> make sure nothing broke over time.
+>>>
+>>> So maybe I could get something out of this.
+>>>
+>>
+>> Thanks for doing this work.
+> 
+> I've just pushed a temporary branch named "g0hl1n/wip-jdk8u242ga" to
+> the meta-java repository [1]. It contains (as you might have guessed)
+> the update to openjdk 8u242ga.
+> 
+> Can you please give it a try if it works for you?
+> 
 
-I've just pushed a temporary branch named "g0hl1n/wip-jdk8u242ga" to
-the meta-java repository [1]. It contains (as you might have guessed)
-the update to openjdk 8u242ga.
+I tried but I get a linker error during openjre-8_242.bb:do_compile:
 
-Can you please give it a try if it works for you?
+Making adlc
+...
+/tmp/ramdisk/build/hosttools/ld: cannot find -lstdc++
+collect2: error: ld returned 1 exit status
 
-Please note that I might force-push to the branch.
+This is using MACHINE=qemux86-64.
 
-regards;rl
+Gonna try and fix and get the build going.
 
-[1] https://git.yoctoproject.org/cgit/cgit.cgi/meta-java/log/?h=g0hl1n/wip-jdk8u242ga
+Cheers,
+Jacob
 
