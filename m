@@ -1,51 +1,54 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
-	[209.85.215.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A3E467FCC8
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+	[209.85.214.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 82E397FDCF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jan 2020 08:10:52 +0000 (UTC)
-Received: by mail-pg1-f175.google.com with SMTP id u131so613164pgc.10
+	Fri, 24 Jan 2020 08:10:57 +0000 (UTC)
+Received: by mail-pl1-f172.google.com with SMTP id y8so444206pll.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jan 2020 00:10:54 -0800 (PST)
+	Fri, 24 Jan 2020 00:10:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=tLboFKPKQtpbylZ8JKWgAIyaPOI7Vcvy32oJavkdF4s=;
-	b=U//3nhMx8bUz06kt3ds6ZJa+uZ1e1AwrTJANRvy4dgvUDtmj5kcvoyvesT87vTjbXE
-	7MjYpca+HgN1YC9cC+JWAzDpuztc8YzrGjEaNGu4RbeFZYusuURk5ZDkYgdvnzfjV5u1
-	kDSYbYPJaOccdFSIBYHdVqfbwmjOTxlN04RY817ZBf8fw5WXd0ocgo8qf3dAzsxGwNpJ
-	hUVVY/KjQ/fivOi/pp3DNHywSVAJYPQfxBfh1pXKP1V/dOCjiyuQ7gGL8NYCMHurqDhv
-	Qc20prFRx6j5rbGxl3DRv1DlOEgAL03et2Y9Jo+ydcjRihUkZXSQQ80BGsVTAwLiADw+
-	EDIQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=amEf2Z++EgePh4LfHbzctA/azkOhgVHNDxMJXwpv2ds=;
+	b=r0KARFX2rfTD1EA7nB77KIwx6DS73+9e/9CqFveHL2rct0AYPujeC3bf+bieUvv/hy
+	rDfe8o5NvezDFYUkpwwkbSSmK7APwpkbs/f1qrUQ44UvsmCa1OkNTYiJbVFFTdAIRd+I
+	MHnri26SgAn/Rhm9WwKsi4J6Q6NtXk5kpcODPWWQJh1wU6cksUz3SveUDGacyU+A76yI
+	RpVSFSTFtGmLPSGAmfydWG5xiv7nncrUBZp8AT7WaBWff+b6ruDSZK+qbcmleIg/5ruq
+	gjjfmj0xcgwx2BXvwYU/SRgZBrPub8Wy97EcbcTf9gqEUDwRfWkQS7M/CtBZrn78cYNP
+	b7Hg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=tLboFKPKQtpbylZ8JKWgAIyaPOI7Vcvy32oJavkdF4s=;
-	b=glUtVWvbyp/rJcDKTBMrlljoqX3UAkHCwlpiJsFFSsZafB1yaj+7P/lFBKKNOZzMHM
-	sopwZpEYfZw9qMcb8xyvqYu95QfSWIHAH1KGjkIiEifH5azri5faO8uDkJGoM86ySUL6
-	lPZKX75HRg4IO7SoYAdR6mUEArz8DAqcNCTFrx7/UGjCgI01lrWi2Q/9ciMCQFw10UrG
-	KFAC2CsoFLENPy9QQvJyLJhdUWA02KW43NyjJibdmafD5wuRoMg3WjcahiF+fdNYIhD9
-	TFVSjB56ZoMGzmeBEGWyvXdkpS5Wd5howDM4LGsIUtMH36+fYI5DDidNvwTrxnDpbHnv
-	6jWA==
-X-Gm-Message-State: APjAAAXYKFvPJSaGo9CiQapdVGk1Rs02JThq+QUs2d9zy4v2xAwJP8Q+
-	Kgw5WzFNiSl9meRZIpCKOKkYCkUUD0c=
-X-Google-Smtp-Source: APXvYqxj89+50jT89e9oFPhCL9x1kJiznhL6Fb0cQ4duP8Q6WNpDpbEdGtQGpMOVpQXXUGVOLZi41Q==
-X-Received: by 2002:a62:e411:: with SMTP id r17mr2063933pfh.119.1579853453469; 
-	Fri, 24 Jan 2020 00:10:53 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=amEf2Z++EgePh4LfHbzctA/azkOhgVHNDxMJXwpv2ds=;
+	b=nP7TEyOWADliNc0cTuWvqPjUlTxqNCCd3jU8F0/hEgDOSCSeX3kwals648OFfbxVwv
+	O5XNt7ARF4d8V/9V6cWgcHiH/aXgWitbQBL9mOEvFrRE6l7lVcB/nEMSugcyAFTaqE9G
+	AZVnT2lx+oHrPymqYlxdYtcrkbitau2GOa8sJWwbDZu8defB3PMSA39j8lpbbiS1C6q2
+	ThYxBm80o+G9tyMU2BvtuBaHZpSW6khjcvagemmdbPAu6qkA7OUwuEbPUolpHry8lEDV
+	z/1Sea3cEcMGX/ZikUziaMB8pWtkrRmyoYEs5jlfxyNTVIPgugtcFQYmrHszu4e9rDsS
+	bnmw==
+X-Gm-Message-State: APjAAAUZsVDx3ytsayKwHCCih1VDHycfibXvWkzMCwS8/b0Slwxek4yZ
+	KTsBIna1Oq9CjxeXWlZ9Qj8pZycI4rw=
+X-Google-Smtp-Source: APXvYqx+MYM48o0XIO3FKJHBDqu+I6sN/FgvSC6YIcGfdRInizlm4uEDFbuxErSStXApaAKjSPycZQ==
+X-Received: by 2002:a17:90a:d0c5:: with SMTP id
+	y5mr1939878pjw.126.1579853458171; 
+	Fri, 24 Jan 2020 00:10:58 -0800 (PST)
 Received: from thetis.hsd1.or.comcast.net
 	([2601:1c0:6080:4500:3c89:c57:830d:1156])
 	by smtp.gmail.com with ESMTPSA id
-	g24sm5252809pfk.92.2020.01.24.00.10.52
+	g24sm5252809pfk.92.2020.01.24.00.10.57
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 24 Jan 2020 00:10:53 -0800 (PST)
+	Fri, 24 Jan 2020 00:10:57 -0800 (PST)
 From: Tim Orling <ticotimo@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 24 Jan 2020 00:10:25 -0800
-Message-Id: <20200124081026.21969-1-ticotimo@gmail.com>
+Date: Fri, 24 Jan 2020 00:10:26 -0800
+Message-Id: <20200124081026.21969-2-ticotimo@gmail.com>
 X-Mailer: git-send-email 2.25.0
+In-Reply-To: <20200124081026.21969-1-ticotimo@gmail.com>
+References: <20200124081026.21969-1-ticotimo@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python2][PATCH 1/2] python-pyconnman: add target RDEPENDS
+Subject: [meta-python2][PATCH 2/2] python-future: add target RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +61,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 08:10:52 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 08:10:57 -0000
 Content-Transfer-Encoding: 8bit
 
-* Missing run-time dependencies:
-  - python-numbers
-  - python-future
+* Missing run-time dependency:
+  - python-misc (future_builtins)
 
 Signed-off-by: Tim Orling <ticotimo@gmail.com>
 ---
- .../python-pyconnman/python-pyconnman_0.2.0.bb            | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ recipes-devtools/python/python-future_0.18.2.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-connectivity/python-pyconnman/python-pyconnman_0.2.0.bb b/recipes-connectivity/python-pyconnman/python-pyconnman_0.2.0.bb
-index 77ec0f72..770cc4b9 100644
---- a/recipes-connectivity/python-pyconnman/python-pyconnman_0.2.0.bb
-+++ b/recipes-connectivity/python-pyconnman/python-pyconnman_0.2.0.bb
-@@ -10,4 +10,10 @@ SRC_URI[sha256sum] = "d3a63a039c82b08a1171b003eafa62c6f128aa4eaa1ce7a55a9401b48f
+diff --git a/recipes-devtools/python/python-future_0.18.2.bb b/recipes-devtools/python/python-future_0.18.2.bb
+index 2dfcd28a..8fa066db 100644
+--- a/recipes-devtools/python/python-future_0.18.2.bb
++++ b/recipes-devtools/python/python-future_0.18.2.bb
+@@ -13,4 +13,6 @@ PYPI_PACKAGE_HASH = "99abde815842bc6e97d5a7806ad51236630da14ca2f3b1fce94c0bb94d3
  
  inherit pypi setuptools
  
--RDEPENDS_${PN} += "connman python-dbus python-pprint"
-+RDEPENDS_${PN} += "\
-+    connman \
-+    python-dbus \
-+    python-future \
-+    python-numbers \
-+    python-pprint \
-+"
++RDEPENDS_${PN}_append_class-target = " python-misc"
++
+ BBCLASSEXTEND = "native"
 -- 
 2.25.0
 
