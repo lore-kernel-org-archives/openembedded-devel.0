@@ -1,43 +1,43 @@
 Return-Path: <kraaggorim@gmail.com>
-Received: from mail-yb1-f171.google.com (mail-yb1-f171.google.com
-	[209.85.219.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C5377D6B4
+Received: from mail-yb1-f177.google.com (mail-yb1-f177.google.com
+	[209.85.219.177])
+	by mail.openembedded.org (Postfix) with ESMTP id D30E37D6B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jan 2020 15:42:37 +0000 (UTC)
-Received: by mail-yb1-f171.google.com with SMTP id k15so1090023ybd.10
+	Fri, 24 Jan 2020 15:42:39 +0000 (UTC)
+Received: by mail-yb1-f177.google.com with SMTP id o199so1110146ybc.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Jan 2020 07:42:39 -0800 (PST)
+	Fri, 24 Jan 2020 07:42:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:from:date:message-id:subject:to;
-	bh=9Jkt9vgIW+0YIGwDr7gesFROMxO2Hrw0guhPYfYZ+zE=;
-	b=EQbBLYb9HrYHYZbYnY4wmU/VRfwUaELOSAqKd2xaQT6njrJ0NhATo4CRr5ECdbBrcS
-	xJQPVk3Qeoh4MhDCvf5eBWqIvXlczST3cOV72XZUvuxardwDcLTfCdORsZbrmKFjOZNx
-	vRgqQDT3XH0mW8EQxjxKLUnXDwPvNd0MMH0JDPVuJOSQv8QF7JJzxx8+SOUELs3NK3Sr
-	44g2KrlcsfjgPp68sNZaLoEWXKUfqV9ozzfd2DHyA4g2Ky9ECAT8mDVPEEgi9wdc3KBZ
-	t7bRA/zRMluHn5zUdCt068X+8+RIcR3sxaCryr+y894H+Z10ZY363quyR6G1zkH25oh0
-	9XZA==
+	bh=PnVvJsyFfeEHmeBnbZt3CkbaeUR//Tfw5Kt1z76jpso=;
+	b=OA49cwpkPrcbXm79yNKCxngKW85YLVsZgar8G1h2N8QdHWotXjSRCXGz2JKChLVS+U
+	q7mwNd8QQ6yMukpgmOj73PgnqJvtSGkdonJuCzVpwD4z9tdGMEDccAIFSMctozRgb0/7
+	ANrzWInFhsD7m33xts941IvrPRCj/L8Zfl+iJWnEa7FWPZiiMmhefhGEHWgMsoLEtsLJ
+	iYjE4LqCx+N7uGDZrZ9ONbdPvrR2023YZzvUxLwssF3STaeTKKCJeLvbmepGqsw7hWE8
+	RnwXg3RwlsRBp7O60m3ZaYZIXo8AvWmptoH7zLijsVDeNKoiuS+9HXsZ7iuFT6Z2jGvt
+	C1xQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=9Jkt9vgIW+0YIGwDr7gesFROMxO2Hrw0guhPYfYZ+zE=;
-	b=mR9iCqgkzDKDpzEmKwkwQV/L8Q2VyJiSqe7GAIZkignYlMSElqB1ajkJ3PPGPux8Fx
-	zZiBtA7C+TftOgOe2pLgzLSfehb8VBLAn9D3r25gXMrD2+dKn7QkzteZ/4kHACUgGCKp
-	KxkJo2mWvf3GAnKUTviFX5bB8RPVte4Ob3e8duK37bSurIRZ1PvxhHFrqRx8ZARn71yx
-	+x5eUqWsWFWZFLqZy06usWiHyTwSGWxjEGNDrvFwGk6u0xhuUip8frgS5rA2JrLTbKvF
-	9/P+sP5e2Mg1FyUGgKH8yq+DzUNWG7CpE/M8/PBpcRVZJGs2Hpt8/OALQUGqSsrLqsT0
-	OCKQ==
-X-Gm-Message-State: APjAAAUGTEaG/f+bsOrNZo4ZZeaz/Ck0iJjNwS3TvIkl3R02sQqnNNsy
-	Pl3AE7odyPRpmeSLmn9CfoUQ0iQw8a4bpqkNi19XqnEVXuk=
-X-Google-Smtp-Source: APXvYqz6YG0D9GZW9dfrxSWdNG2sxADAvBwUAb9q/3S5RE37WHLRXFV3jHHqDZlAQOXUpYGS9daGxneRZPrnIjV7NTs=
-X-Received: by 2002:a25:d990:: with SMTP id q138mr2890631ybg.114.1579880558799;
-	Fri, 24 Jan 2020 07:42:38 -0800 (PST)
+	bh=PnVvJsyFfeEHmeBnbZt3CkbaeUR//Tfw5Kt1z76jpso=;
+	b=REVLefLiD+HpbLKZc1PNR1OX/sUMsdPCkRQPZ/4mq+1hC/sYyUQm757JP2rQgY5+UA
+	AClu6mCD5bh5IiyqKfZhTunDACZrNMckjSKiNnJpvxYEIo0ZJpquZysCBK9YYPFh7NZx
+	cY7a37yeN9QSNC+ed6rL8pxbvtCEIcL3O4Qvp1/aKbhRBNrl9MzTAmjfyxFboB+SOC8l
+	LpQGFVYUSe/DKF23NnrqtpbQqZs4zSeKRA2z9jK5Xrzr0U8JSLbTSSumngVGW2+Cwmpq
+	6kPJ6dja02IkGmAn+QtNlqaxfvLSDrI0bxu8KlDLxU/c0StIXUJXnWnqt/1npvlyx9YN
+	/uBQ==
+X-Gm-Message-State: APjAAAUR7tdGwPd/BeGW920SGkn3CkZJidxrOwoSGnHwvN4P6hCw2+99
+	jLrj7oJOzUTyIhZZoPnjTqrUKiIPT+ba/oNyArdN5s/4iPg=
+X-Google-Smtp-Source: APXvYqzvclH2XPnJcOpg3+K3VKut2iU+8fotAN1jbmD3XXD2HBwLcfOX0TLQQQCwGl/+VAaqquWV6mRo9ssf3+Ex9A0=
+X-Received: by 2002:a25:aa0a:: with SMTP id s10mr2831176ybi.367.1579880560712; 
+	Fri, 24 Jan 2020 07:42:40 -0800 (PST)
 MIME-Version: 1.0
 From: Kraag Gorim <kraaggorim@gmail.com>
-Date: Fri, 24 Jan 2020 16:42:28 +0100
-Message-ID: <CACc3Zv4pUUEV83nLDom9EzeQh1UmBKqoQRBrUn4iC7o4OZF=WA@mail.gmail.com>
+Date: Fri, 24 Jan 2020 16:42:30 +0100
+Message-ID: <CACc3Zv76egeazQ=aNtU7w=w3-Tn0=2Q7uThehJzHdPJ2mYrYpQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [PATCH 0/2] [meta-java] inherit python native
+Subject: [PATCH 1/2] java-library: inherit python native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,13 +50,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Jan 2020 15:42:38 -0000
+X-List-Received-Date: Fri, 24 Jan 2020 15:42:40 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Building openjdk with python and meta-java on their zeus releases
-revealed some problems regarding python. Multiple package make use of
-python to build or for configuration. Cacao even gets python patched
-into its tools which is late on used by other packages. To avoid
-requring having python set as HOSTTOOL it should be added to the
-corresponding packages.
+Several components make use of python in their build process. To not
+rely on python being part of the HOSTTOOLS python should be inherited.
+
+Signed-off-by: Kraag Gorim <kraaggorim@gmail.com>
+---
+ classes/java-library.bbclass | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+index e0159ba..adc4cb8 100644
+--- a/classes/java-library.bbclass
++++ b/classes/java-library.bbclass
+@@ -17,6 +17,7 @@ PACKAGE_ARCH ?= "all"
+ # Fully expanded - so it applies the overrides as well
+ PACKAGE_ARCH_EXPANDED := "${PACKAGE_ARCH}"
+ inherit ${@oe.utils.ifelse(d.getVar('PACKAGE_ARCH_EXPANDED') == 'all',
+'allarch', '')}
++inherit pythonnative
+
+ # use java_stage for native packages
+ JAVA_NATIVE_STAGE_INSTALL = "1"
+-- 
+2.24.0
 
