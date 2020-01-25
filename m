@@ -1,51 +1,54 @@
 Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 06ADD7F832
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id DA2B37F832
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jan 2020 18:52:22 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id c84so2729492wme.4
+	Sat, 25 Jan 2020 18:52:23 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id p9so2680148wmc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jan 2020 10:52:24 -0800 (PST)
+	Sat, 25 Jan 2020 10:52:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=gY19QXHhJDioryCoW5A/uNo8vNwxB1f8q3RupNAuQEo=;
-	b=FTvT/xUApC6f3ekSc9+gRuWRpOnbcXgIc/D8Gk2s+tcXWAV93FnFPoUrKas9sVBT2w
-	XY/0vaXoY+i79kDKhyEyZW0oOQX7xGfq5uFybF5YzCxFEfhSmIgMWH4H0L6usnMEsI5P
-	c1sOAt9vuIAmtcZNzfT5X2fw1/hzihp1qn0k21lf5WtWw395cTHQqVrBzvbPhBS82z5y
-	rslB/IZxNdH5R18Z5oPOeqdqq8ndTFqZiTjHPOspzS+YyU9cjePccAq3UA1Gp7RuUFNZ
-	ekVWxOsOBcN7wFQvZyR5+olF/2Y1RyY3rWcY0G4OuNftZ7rF6da4YpnvdnhYcnq9nofa
-	W60g==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=bdkwAH5TVJPBYgHbLK8A/Pp09TDfFbw3YOASAtnLMP0=;
+	b=ofdQ4J/wJVlpAMZRDz3g+H7ka9v2ONqDIL/dnSMSJNnjprepOpUaaR4Oh+H5Sjazb+
+	sN32vNrsAQ12b2kcH3H967ZLtJWFUE5iRAS4drinJ51E6OyrlCahiqSToJuhfh1KbCwu
+	zcm19SrGUAeJp8MAoM6iyC+lBO82JLylEGvBCgKcK7LoqDASnWVY+5I0ETDXEg8P03fd
+	NhWg4RZXuBCqgguem88rHCsESUTNXAuQQn5ul/YRuBEFxtwv8P4cRbY+85NMz/D1GZZr
+	WPZLGp9adlRwmPeVp8t/aZ0zdlFx+tRV8kCScpx6egdhgK6kNto1CObxdV1GpO7bK+hB
+	88wQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=gY19QXHhJDioryCoW5A/uNo8vNwxB1f8q3RupNAuQEo=;
-	b=PA6NoqPsJca71JMpO5Wa6cK8VINQGcn/dAfQ9yY96ZgX/PBFemwVkzmvDx3gHK3Xsz
-	EATKXAFpLXLcYy2YLn6+nw9RDBeBnH40BUpuBLotSK0cpjzF7IvlYfPt8SHATpIXUDje
-	FxMaLQyytikHtmyCxy9R85mX/QrlGnlrg5y7jiD/pnTUBs6I/4PWl7J4RH74VO9eq1wy
-	Q50VXNKTBmJguS29gYilHC/khTJolVrFhMv1Z5PQO8DPmnKnUfOns6raLPU5ohbMIAbp
-	j/CmvKHpg9C83jOd48E3/RlK9HCk1pLkhfuAfFmR8v4e89Q6f+mwRCKQVj/4Q/oy4jfk
-	VHwQ==
-X-Gm-Message-State: APjAAAVS3mHD+kB2/hbyqgQ0pPebBvdpuZQqOEuKH2fljCMgfARDgngh
-	+g3a6PJB3fpH7fP+L84QGKIkRETE
-X-Google-Smtp-Source: APXvYqwk8G39aDg20ICZXekkJL/ZuX4OvBSInF4y6arRoLxKauQ+QfA0IyO90wXWIM/z0DYIm0qVuw==
-X-Received: by 2002:a1c:e3c2:: with SMTP id a185mr5221205wmh.27.1579978343164; 
-	Sat, 25 Jan 2020 10:52:23 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=bdkwAH5TVJPBYgHbLK8A/Pp09TDfFbw3YOASAtnLMP0=;
+	b=mbmCmRaCJceY/stqB7AKC1j5dUnpjvHenBklLgLP4zV5q4aGReCufeIz5ZL4qS7stL
+	oFRiwOC2K+jDdtv4V2iB6MgY3SwJiGg7UxbLLs9BXI1N/iYWXepfGiH8/NRR8bXzcBIZ
+	Kb361PMEYpcr29+vovIA+8BhvSuWmcM3VvkN6WT9v1/klvwHJHfnfi/xhCCAlY6tLJn6
+	Sh1AR6emGEmBegFvEAR7L2k+9eB7rNpC622waANOfEcRi7NbVqH2xN85OJXFJA7A44kP
+	nq45WFwD6aQL3mdNNWXgsIHk2OXcCbQNxGWJs6Rmlj+r+Y6LROH+Fa7muvSLyjuAVAXi
+	ToQQ==
+X-Gm-Message-State: APjAAAUMY8zDwt3US+sF5D9GzKoybdAAeAYRLsl3u1LJEGBWY29t1Uky
+	t/rh1eSjfi8C9Xn+JAB4MrXMGXWP
+X-Google-Smtp-Source: APXvYqy9JSGxdOIlJzILhWtMb7ZBydeVMVHCGAJhRn3AzNQlJm6G2Ym6htJk2z5fv+sY4ymkJtcqiw==
+X-Received: by 2002:a7b:c204:: with SMTP id x4mr5309546wmi.20.1579978344306;
+	Sat, 25 Jan 2020 10:52:24 -0800 (PST)
 Received: from localhost.localdomain ([93.68.129.122])
 	by smtp.gmail.com with ESMTPSA id
-	b18sm12051677wru.50.2020.01.25.10.52.21
+	b18sm12051677wru.50.2020.01.25.10.52.23
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 25 Jan 2020 10:52:22 -0800 (PST)
+	Sat, 25 Jan 2020 10:52:23 -0800 (PST)
 From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
 X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Jan 2020 19:52:16 +0100
-Message-Id: <20200125185219.9160-1-costamagnagianfranco@yahoo.it>
+Date: Sat, 25 Jan 2020 19:52:17 +0100
+Message-Id: <20200125185219.9160-2-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200125185219.9160-1-costamagnagianfranco@yahoo.it>
+References: <20200125185219.9160-1-costamagnagianfranco@yahoo.it>
 Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
 	Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
 	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH 1/4] dlt-daemon: Add initial recipe from meta-ivi
+Subject: [meta-oe][PATCH 2/4] mosquitto: apply upstream proposed patches to use cmake build system,
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,379 +61,284 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jan 2020 18:52:23 -0000
+X-List-Received-Date: Sat, 25 Jan 2020 18:52:24 -0000
 
 From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
 
-as of commit 6a5b0d6460028f695c62bd1f0b064207671b2236 with
-added upstream proposed pull request: https://github.com/GENIVI/meta-ivi/pull/118
-
-dlt-daemon is useful on embedded systems as a logging system
+simplifying a lot the build and install process.
 
 Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 Signed-off-by: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
 Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- ...execute-processes-as-a-specific-user.patch |  94 +++++++++++
- ...0004-Modify-systemd-config-directory.patch |  24 +++
- .../dlt-daemon/dlt-daemon/204.patch           | 148 ++++++++++++++++++
- .../dlt-daemon/dlt-daemon_2.18.4.bb           |  60 +++++++
- 4 files changed, 326 insertions(+)
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0002-Don-t-execute-processes-as-a-specific-user.patch
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0004-Modify-systemd-config-directory.patch
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon/204.patch
- create mode 100644 meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
+ .../mosquitto/files/1568.patch                | 67 +++++++++++++++++++
+ .../mosquitto/files/1569.patch                | 25 +++++++
+ .../mosquitto/files/1570.patch                | 39 +++++++++++
+ .../mosquitto/files/1571.patch                | 24 +++++++
+ .../mosquitto/mosquitto_1.6.8.bb              | 45 +++++--------
+ 5 files changed, 173 insertions(+), 27 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/1568.patch
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/1569.patch
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/1570.patch
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/1571.patch
 
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0002-Don-t-execute-processes-as-a-specific-user.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0002-Don-t-execute-processes-as-a-specific-user.patch
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1568.patch b/meta-networking/recipes-connectivity/mosquitto/files/1568.patch
 new file mode 100644
-index 000000000..181be25c7
+index 000000000..15f7a9105
 --- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0002-Don-t-execute-processes-as-a-specific-user.patch
-@@ -0,0 +1,94 @@
-+From bcca4c99394ba422d03a5e76f2a0023ef248824a Mon Sep 17 00:00:00 2001
-+From: Andrei Gherzan <andrei.gherzan@windriver.com>
-+Date: Tue, 18 Nov 2014 15:47:22 +0100
-+Subject: [PATCH 2/4] Don't execute processes as a specific user.
++++ b/meta-networking/recipes-connectivity/mosquitto/files/1568.patch
+@@ -0,0 +1,67 @@
++Upstream-Status: Submitted [https://github.com/eclipse/mosquitto/pull/1568]
++From 50bfc79cae5764a6e513b684a5eb5bef2b35c856 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Wed, 22 Jan 2020 12:30:25 +0100
++Subject: [PATCH] Bugfix: include "deps" directory only if BUNDLED_DEPS has
++ been provided and set to true
 +
-+Upstream-Status: Inappropriate [Configuration Specific]
-+Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
++Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 +---
-+ systemd/dlt-adaptor-udp.service.cmake  | 1 -
-+ systemd/dlt-dbus.service.cmake         | 1 -
-+ systemd/dlt-example-user.service.cmake | 1 -
-+ systemd/dlt-receive.service.cmake      | 1 -
-+ systemd/dlt-system.service.cmake       | 1 -
-+ systemd/dlt.service.cmake              | 1 -
-+ 6 files changed, 6 deletions(-)
++ config.mk          | 5 ++++-
++ lib/CMakeLists.txt | 5 ++++-
++ test/unit/Makefile | 6 +++++-
++ 3 files changed, 13 insertions(+), 3 deletions(-)
 +
-+diff --git a/systemd/dlt-adaptor-udp.service.cmake b/systemd/dlt-adaptor-udp.service.cmake
-+index 8dac1f2..ecf9f9e 100644
-+--- a/systemd/dlt-adaptor-udp.service.cmake
-++++ b/systemd/dlt-adaptor-udp.service.cmake
-+@@ -21,9 +21,8 @@ Wants=dlt.service
++diff --git a/config.mk b/config.mk
++index 51e36e0d0..0ac24b3d4 100644
++--- a/config.mk
+++++ b/config.mk
++@@ -135,7 +135,10 @@ endif
 + 
-+ [Service]
-+ Type=simple
-+-User=@DLT_USER@
-+ ExecStart=@CMAKE_INSTALL_PREFIX@/bin/dlt-adaptor-udp -a @DLT_ADAPTOR_UDP_APPID@ -c @DLT_ADAPTOR_UDP_CTID@ -p @DLT_ADAPTOR_UDP_PORT@
-+ LimitCORE=infinity
++ STATIC_LIB_DEPS:=
 + 
-+ [Install]
-+-WantedBy=multi-user.target
-+\ No newline at end of file
-++WantedBy=multi-user.target
-+diff --git a/systemd/dlt-dbus.service.cmake b/systemd/dlt-dbus.service.cmake
-+index 9baf3e9..74a7eac 100644
-+--- a/systemd/dlt-dbus.service.cmake
-++++ b/systemd/dlt-dbus.service.cmake
-+@@ -20,7 +20,6 @@ Wants=dlt.service
++-LIB_CPPFLAGS=$(CPPFLAGS) -I. -I.. -I../lib -I../src/deps
+++LIB_CPPFLAGS=$(CPPFLAGS) -I. -I.. -I../lib
+++ifeq ($(WITH_BUNDLED_DEPS),yes)
+++	LIB_CPPFLAGS:=$(LIB_CPPFLAGS) -I../src/deps
+++endif
++ LIB_CFLAGS:=$(CFLAGS)
++ LIB_CXXFLAGS:=$(CXXFLAGS)
++ LIB_LDFLAGS:=$(LDFLAGS)
++diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
++index e1521f12a..891046a81 100644
++--- a/lib/CMakeLists.txt
+++++ b/lib/CMakeLists.txt
++@@ -1,11 +1,14 @@
++ add_subdirectory(cpp)
 + 
-+ [Service]
-+ Type=simple
-+-User=@DLT_USER@
-+ ExecStart=@CMAKE_INSTALL_PREFIX@/bin/dlt-dbus
-+ WatchdogSec=@DLT_WatchdogSec@
-+ NotifyAccess=main
-+diff --git a/systemd/dlt-example-user.service.cmake b/systemd/dlt-example-user.service.cmake
-+index b665742..35009b0 100644
-+--- a/systemd/dlt-example-user.service.cmake
-++++ b/systemd/dlt-example-user.service.cmake
-+@@ -21,6 +21,5 @@ Wants=dlt.service
++ include_directories(${mosquitto_SOURCE_DIR} ${mosquitto_SOURCE_DIR}/lib
++-			${mosquitto_SOURCE_DIR}/src/deps
++ 			${STDBOOL_H_PATH} ${STDINT_H_PATH}
++ 			${OPENSSL_INCLUDE_DIR} ${PTHREAD_INCLUDE_DIR})
++ link_directories(${mosquitto_SOURCE_DIR}/lib)
 + 
-+ [Service]
-+ Type=simple
-+-User=@DLT_USER@
-+ ExecStart=@CMAKE_INSTALL_PREFIX@/bin/dlt-example-user "Hallo from GENIVI DLT example user application"
-+-LimitCORE=infinity
-+\ No newline at end of file
-++LimitCORE=infinity
-+diff --git a/systemd/dlt-receive.service.cmake b/systemd/dlt-receive.service.cmake
-+index c07d447..8f88f00 100644
-+--- a/systemd/dlt-receive.service.cmake
-++++ b/systemd/dlt-receive.service.cmake
-+@@ -22,6 +22,5 @@ Wants=dlt.service
+++if (WITH_BUNDLED_DEPS)
+++        include_directories(${mosquitto_SOURCE_DIR} ${mosquitto_SOURCE_DIR}/src/deps)
+++endif (WITH_BUNDLED_DEPS)
+++
++ set(C_SRC
++ 	actions.c
++ 	callbacks.c
++diff --git a/test/unit/Makefile b/test/unit/Makefile
++index 9d422428d..928579492 100644
++--- a/test/unit/Makefile
+++++ b/test/unit/Makefile
++@@ -2,7 +2,11 @@ include ../../config.mk
 + 
-+ [Service]
-+ Type=simple
-+-User=@DLT_USER@
-+ ExecStart=@CMAKE_INSTALL_PREFIX@/bin/dlt-receive -o /tmp/dlt_receive_log.dlt localhost
-+-LimitCORE=infinity
-+\ No newline at end of file
-++LimitCORE=infinity
-+diff --git a/systemd/dlt-system.service.cmake b/systemd/dlt-system.service.cmake
-+index 0e91f42..1a5b913 100755
-+--- a/systemd/dlt-system.service.cmake
-++++ b/systemd/dlt-system.service.cmake
-+@@ -22,7 +22,6 @@ Wants=dlt.service
++ .PHONY: all check test test-broker test-lib clean coverage
 + 
-+ [Service]
-+ Type=simple
-+-User=@DLT_USER@
-+ ExecStart=@CMAKE_INSTALL_PREFIX@/bin/dlt-system
-+ WatchdogSec=@DLT_WatchdogSec@
-+ NotifyAccess=main
-+diff --git a/systemd/dlt.service.cmake b/systemd/dlt.service.cmake
-+index 0b3ee2c..e4753a2 100755
-+--- a/systemd/dlt.service.cmake
-++++ b/systemd/dlt.service.cmake
-+@@ -21,7 +21,6 @@ Documentation=man:dlt-daemon(1) man:dlt.conf(5)
-+ 
-+ [Service]
-+ Type=simple
-+-User=@DLT_USER@
-+ ExecStart=@CMAKE_INSTALL_PREFIX@/bin/dlt-daemon
-+ WatchdogSec=@DLT_WatchdogSec@
-+ NotifyAccess=main
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0004-Modify-systemd-config-directory.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0004-Modify-systemd-config-directory.patch
++-CPPFLAGS:=$(CPPFLAGS) -I../.. -I../../lib -I../../src -I../../src/deps
+++CPPFLAGS:=$(CPPFLAGS) -I../.. -I../../lib -I../../src
+++ifeq ($(WITH_BUNDLED_DEPS),yes)
+++        CPPFLAGS:=$(CPPFLAGS) -I../../src/deps
+++endif
+++
++ CFLAGS:=$(CFLAGS) -coverage -Wall -ggdb
++ LDFLAGS:=$(LDFLAGS) -coverage
++ LDADD:=$(LDADD) -lcunit
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1569.patch b/meta-networking/recipes-connectivity/mosquitto/files/1569.patch
 new file mode 100644
-index 000000000..ce028c0c5
+index 000000000..9718b98c8
 --- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/0004-Modify-systemd-config-directory.patch
-@@ -0,0 +1,24 @@
-+From 9a5e655cf57301008cd61d53c8a410a7f397e650 Mon Sep 17 00:00:00 2001
-+From: Andrei Gherzan <andrei.gherzan@windriver.com>
-+Date: Tue, 18 Nov 2014 15:51:30 +0100
-+Subject: [PATCH 4/4] Modify systemd config directory
++++ b/meta-networking/recipes-connectivity/mosquitto/files/1569.patch
+@@ -0,0 +1,25 @@
++Upstream-Status: Submitted [https://github.com/eclipse/mosquitto/pull/1569]
++From fda932612afce2cead2fd2ca1c8ea543b2892177 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Wed, 22 Jan 2020 12:31:01 +0100
++Subject: [PATCH] Bugfix: enabling DLT was overriding everything else on linker
++ flags because of error in cmake set keyword
 +
-+Upstream-Status: Inappropriate [Configuration Specific]
-+Signed-off-by: Andrei Gherzan <andrei.gherzan@windriver.com>
++Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 +---
-+ systemd/CMakeLists.txt | 2 +-
++ src/CMakeLists.txt | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index e6b44a2..0e885bf 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -201,7 +201,7 @@ if(WITH_SYSTEMD OR WITH_SYSTEMD_WATCHDOG OR WITH_SYSTEMD_JOURNAL)
++diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
++index 7898ff5b1..6dfbba5e6 100644
++--- a/src/CMakeLists.txt
+++++ b/src/CMakeLists.txt
++@@ -130,7 +130,7 @@ add_definitions (-DWITH_BROKER)
++ if (WITH_DLT)
++     message(STATUS "DLT_LIBDIR = ${DLT_LIBDIR}")
++     link_directories(${DLT_LIBDIR})
++-    set (MOSQ_LIBS ${DLT_LIBRARIES})
+++    set (MOSQ_LIBS ${MOSQ_LIBS} ${DLT_LIBRARIES})
++ endif (WITH_DLT)
 + 
-+     set(systemd_SRCS ${PROJECT_SOURCE_DIR}/systemd/3rdparty/sd-daemon.c)
-+ 
-+-    set(SYSTEMD_UNITDIR "${CMAKE_INSTALL_PREFIX}/lib/systemd/system" CACHE PATH
-++    set(SYSTEMD_UNITDIR "/lib/systemd/system" CACHE PATH
-+         "Set directory to install systemd unit files")
-+ 
-+     add_subdirectory(systemd)
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/204.patch b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/204.patch
++ set (MOSQ_LIBS ${MOSQ_LIBS} ${OPENSSL_LIBRARIES})
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1570.patch b/meta-networking/recipes-connectivity/mosquitto/files/1570.patch
 new file mode 100644
-index 000000000..f0fc0bcb2
+index 000000000..f11fc4815
 --- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon/204.patch
-@@ -0,0 +1,148 @@
-+Upstream-Status: Submitted [https://github.com/GENIVI/dlt-daemon/pull/204]
-+From 92830aff6e91041f574753d78da758c62981d9a4 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/mosquitto/files/1570.patch
+@@ -0,0 +1,39 @@
++Upstream-Status: Submitted [https://github.com/eclipse/mosquitto/pull/1570]
++From 775677b05190380c3736bf0dbef002ee7b9bff33 Mon Sep 17 00:00:00 2001
 +From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Date: Sat, 25 Jan 2020 09:08:07 +0100
-+Subject: [PATCH 1/3] dlt_user.h: fix build when musl is the libc
-+ implementation, by adding a missing include for pthread_t reference:
-+
-+see https://errors.yoctoproject.org/Errors/Details/308000/ for details
-+
-+Thanks Khem Raj <raj.khem@gmail.com> for the report
++Date: Wed, 22 Jan 2020 12:29:41 +0100
++Subject: [PATCH] cmake: add ADNS enable/disable dynamic support
 +
 +Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 +---
-+ include/dlt/dlt_user.h | 1 +
-+ 1 file changed, 1 insertion(+)
++ src/CMakeLists.txt | 8 ++++++--
++ 1 file changed, 6 insertions(+), 2 deletions(-)
 +
-+diff --git a/include/dlt/dlt_user.h b/include/dlt/dlt_user.h
-+index 69cb854..766d349 100644
-+--- a/include/dlt/dlt_user.h
-++++ b/include/dlt/dlt_user.h
-+@@ -74,6 +74,7 @@
-+  \{
-+  */
-+ #   include <mqueue.h>
-++#   include <pthread.h>
++diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
++index 7898ff5b1..edae76f32 100644
++--- a/src/CMakeLists.txt
+++++ b/src/CMakeLists.txt
++@@ -105,6 +105,9 @@ if (WITH_SYS_TREE)
++ 	add_definitions("-DWITH_SYS_TREE")
++ endif (WITH_SYS_TREE)
 + 
-+ #   if !defined (__WIN32__)
-+ #      include <semaphore.h>
-+
-+From 5f67aba02c12b7446e63ccc86285c13bc5c7a432 Mon Sep 17 00:00:00 2001
-+From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Date: Sat, 25 Jan 2020 09:16:14 +0100
-+Subject: [PATCH 2/3] dlt-test-init-free: fix build failure with strict
-+ compiler flags, due to uint being undefined. This is actually an "int" type,
-+ looking at the test implementation
-+
-+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-+---
-+ src/tests/dlt-test-init-free.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/tests/dlt-test-init-free.c b/src/tests/dlt-test-init-free.c
-+index 96b5245..35b8803 100644
-+--- a/src/tests/dlt-test-init-free.c
-++++ b/src/tests/dlt-test-init-free.c
-+@@ -32,7 +32,7 @@
+++option(WITH_ADNS
+++	"Include ADNS support?" OFF)
+++
++ if (CMAKE_SYSTEM_NAME STREQUAL Linux)
++ 	option(WITH_SYSTEMD
++ 		"Include systemd support?" OFF)
++@@ -137,10 +140,11 @@ set (MOSQ_LIBS ${MOSQ_LIBS} ${OPENSSL_LIBRARIES})
++ # Check for getaddrinfo_a
++ include(CheckLibraryExists)
++ check_library_exists(anl getaddrinfo_a  "" HAVE_GETADDRINFO_A)
++-if (HAVE_GETADDRINFO_A)
+++if (HAVE_GETADDRINFO_A AND WITH_ADNS)
+++	add_definitions("-DWITH_ADNS")
++ 	add_definitions(-DHAVE_GETADDRINFO_A)
++ 	set (MOSQ_LIBS ${MOSQ_LIBS} anl)
++-endif (HAVE_GETADDRINFO_A)
+++endif (HAVE_GETADDRINFO_A AND WITH_ADNS)
 + 
-+ void exec(const char *cmd, char *buffer, size_t length);
-+ void printMemoryUsage();
-+-char *occupyMemory(uint size);
-++char *occupyMemory(int size);
-+ void do_example_test();
-+ void do_dlt_test();
 + 
-+@@ -131,7 +131,7 @@ void printMemoryUsage()
-+     printf("%s", result);
-+ }
-+ 
-+-char *occupyMemory(uint size)
-++char *occupyMemory(int size)
-+ {
-+     char *buf = (char *)malloc(size * sizeof(char));
-+ 
-+
-+From c790d61fad382e5d3e648ee99904087eb9bc4a77 Mon Sep 17 00:00:00 2001
-+From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Date: Sat, 25 Jan 2020 09:20:48 +0100
-+Subject: [PATCH 3/3] sys/poll.h: deprecate old sys/poll.h include header, now
-+ glibc/musl wants poll.h being included directly. This fixes a build failure
-+ on musl systems with strict c hardening flags
-+
-+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
-+---
-+ src/console/logstorage/dlt-logstorage-ctrl.c | 2 +-
-+ src/daemon/dlt_daemon_event_handler.c        | 2 +-
-+ src/daemon/dlt_daemon_event_handler.h        | 2 +-
-+ src/daemon/dlt_daemon_event_handler_types.h  | 2 +-
-+ src/lib/dlt_user.c                           | 2 +-
-+ 5 files changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/console/logstorage/dlt-logstorage-ctrl.c b/src/console/logstorage/dlt-logstorage-ctrl.c
-+index 525c137..6614f44 100644
-+--- a/src/console/logstorage/dlt-logstorage-ctrl.c
-++++ b/src/console/logstorage/dlt-logstorage-ctrl.c
-+@@ -61,7 +61,7 @@
-+ #include <string.h>
-+ #include <getopt.h>
-+ 
-+-#include <sys/poll.h>
-++#include <poll.h>
-+ 
-+ #if defined(__linux__)
-+ #   include "sd-daemon.h"
-+diff --git a/src/daemon/dlt_daemon_event_handler.c b/src/daemon/dlt_daemon_event_handler.c
-+index 1611f7b..0d463da 100644
-+--- a/src/daemon/dlt_daemon_event_handler.c
-++++ b/src/daemon/dlt_daemon_event_handler.c
-+@@ -30,7 +30,7 @@
-+ #include <string.h>
-+ #include <errno.h>
-+ 
-+-#include <sys/poll.h>
-++#include <poll.h>
-+ #include <syslog.h>
-+ 
-+ #include "dlt_common.h"
-+diff --git a/src/daemon/dlt_daemon_event_handler.h b/src/daemon/dlt_daemon_event_handler.h
-+index eb96101..bd550d3 100644
-+--- a/src/daemon/dlt_daemon_event_handler.h
-++++ b/src/daemon/dlt_daemon_event_handler.h
-+@@ -25,7 +25,7 @@
-+  * \file dlt_daemon_event_handler.h
-+  */
-+ 
-+-#include <sys/poll.h>
-++#include <poll.h>
-+ 
-+ #include "dlt_daemon_connection_types.h"
-+ #include "dlt_daemon_event_handler_types.h"
-+diff --git a/src/daemon/dlt_daemon_event_handler_types.h b/src/daemon/dlt_daemon_event_handler_types.h
-+index 370e503..0b16d08 100644
-+--- a/src/daemon/dlt_daemon_event_handler_types.h
-++++ b/src/daemon/dlt_daemon_event_handler_types.h
-+@@ -25,7 +25,7 @@
-+  * \file dlt_daemon_event_handler_types.h
-+  */
-+ 
-+-#include <sys/poll.h>
-++#include <poll.h>
-+ 
-+ #include "dlt_daemon_connection_types.h"
-+ 
-+#diff --git a/src/lib/dlt_user.c b/src/lib/dlt_user.c
-+#index ffa9b09..511f991 100644
-+#--- a/src/lib/dlt_user.c
-+#+++ b/src/lib/dlt_user.c
-+#@@ -43,7 +43,7 @@
-+# #include <errno.h>
-+# 
-+# #include <sys/uio.h> /* writev() */
-+#-#include <sys/poll.h>
-+#+#include <poll.h>
-+# 
-+# #include <limits.h>
-+# #ifdef linux
-diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
++ if (UNIX)
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1571.patch b/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
 new file mode 100644
-index 000000000..ef4fb6a76
+index 000000000..2cfa48457
 --- /dev/null
-+++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
-@@ -0,0 +1,60 @@
-+SUMMARY = "Diagnostic Log and Trace"
-+DESCRIPTION = "This component provides a standardised log and trace interface, \
-+based on the standardised protocol specified in the AUTOSAR standard 4.0 DLT. \
-+This component can be used by GENIVI components and other applications as \
-+logging facility providing: \
-+- the DLT shared library \
-+- the DLT daemon, including startup scripts \
-+- the DLT daemon adaptors- the DLT client console utilities \
-+- the DLT test applications"
-+HOMEPAGE = "https://www.genivi.org/"
-+SECTION = "console/utils"
-+LICENSE = "MPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8184208060df880fe3137b93eb88aeea"
++++ b/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
+@@ -0,0 +1,24 @@
++Upstream-Status: Submitted [https://github.com/eclipse/mosquitto/pull/1571]
++From 3fe5468f1bdca1bff1d18cf43c9e338f41aa9e32 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Wed, 22 Jan 2020 12:39:49 +0100
++Subject: [PATCH] Add dynamic symbols linking with cmake too
 +
-+DEPENDS = "zlib gzip-native"
++Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++---
++ lib/CMakeLists.txt | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+SRC_URI = "git://github.com/GENIVI/${BPN}.git;protocol=https \
-+    file://0002-Don-t-execute-processes-as-a-specific-user.patch \
-+    file://0004-Modify-systemd-config-directory.patch \
-+    file://204.patch \
-+"
-+SRCREV = "14ea971be7e808b9c5099c7f404ed3cf341873c4"
-+
-+S = "${WORKDIR}/git"
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES','systemd', d)}"
-+# General options
-+PACKAGECONFIG[dlt-examples] = "-DWITH_DLT_EXAMPLES=ON,-DWITH_DLT_EXAMPLES=OFF,,dlt-daemon-systemd"
-+
-+# Linux options
++diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
++index e1521f12a..14ba12739 100644
++--- a/lib/CMakeLists.txt
+++++ b/lib/CMakeLists.txt
++@@ -88,6 +88,8 @@ set_target_properties(libmosquitto PROPERTIES
++ 	OUTPUT_NAME mosquitto
++ 	VERSION ${VERSION}
++ 	SOVERSION 1
+++	LINK_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/linker.version
+++	LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/linker.version"
++ )
++ 
++ install(TARGETS libmosquitto RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
+index ea533d8a0..6079555a0 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
+@@ -16,45 +16,36 @@ DEPENDS = "uthash"
+ 
+ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://mosquitto.init \
++           file://1568.patch \
++           file://1569.patch \
++           file://1570.patch \
++           file://1571.patch \
+ "
+ 
+ SRC_URI[md5sum] = "24a0e567c845b3e41b75e237d200edf8"
+ SRC_URI[sha256sum] = "7df23c81ca37f0e070574fe74414403cf25183016433d07add6134366fb45df6"
+ 
+-inherit systemd update-rc.d useradd
++inherit systemd update-rc.d useradd cmake
+ 
+-PACKAGECONFIG ??= "ssl uuid \
++PACKAGECONFIG ??= "ssl dlt websockets dns-srv\
+                   ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
+                   "
+ 
+-PACKAGECONFIG[dns-srv] = "WITH_SRV=yes,WITH_SRV=no,c-ares"
+-PACKAGECONFIG[ssl] = "WITH_TLS=yes WITH_TLS_PSK=yes,WITH_TLS=no WITH_TLS_PSK=no,openssl"
+-PACKAGECONFIG[uuid] = "WITH_UUID=yes,WITH_UUID=no,util-linux"
+-PACKAGECONFIG[systemd] = "WITH_SYSTEMD=yes,WITH_SYSTEMD=no,systemd"
+-PACKAGECONFIG[websockets] = "WITH_WEBSOCKETS=yes,WITH_WEBSOCKETS=no,libwebsockets"
+-
+-EXTRA_OEMAKE = " \
+-    prefix=${prefix} \
+-    mandir=${mandir} \
+-    localedir=${localedir} \
+-    ${PACKAGECONFIG_CONFARGS} \
+-    STRIP=/bin/true \
+-    WITH_DOCS=no \
+-    WITH_BUNDLED_DEPS=no \
+-"
+-
+-export LIB_SUFFIX = "${@d.getVar('baselib').replace('lib', '')}"
++PACKAGECONFIG[dns-srv] = "-DWITH_SRV=ON,-DWITH_SRV=OFF,c-ares"
++PACKAGECONFIG[ssl] = "-DWITH_TLS=ON -DWITH_TLS_PSK=ON -DWITH_EC=ON,-DWITH_TLS=OFF -DWITH_TLS_PSK=OFF -DWITH_EC_OFF,openssl"
 +PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd"
-+PACKAGECONFIG[systemd-watchdog] = "-DWITH_SYSTEMD_WATCHDOG=ON,-DWITH_SYSTEMD_WATCHDOG=OFF,systemd,libsystemd"
-+PACKAGECONFIG[systemd-journal] = "-DWITH_SYSTEMD_JOURNAL=ON,-DWITH_SYSTEMD_JOURNAL=OFF,systemd,libsystemd"
-+PACKAGECONFIG[dlt-dbus] = "-DWITH_DLT_DBUS=ON,-DWITH_DLT_DBUS=OFF,dbus,dbus-lib"
-+PACKAGECONFIG[udp-connection] = "-DWITH_UDP_CONNECTION=ON,-DWITH_UDP_CONNECTION=OFF"
-+
-+# Command line options
-+PACKAGECONFIG[dlt-system] = "-DWITH_DLT_SYSTEM=ON,-DWITH_DLT_SYSTEM=OFF"
-+PACKAGECONFIG[dlt-adaptor] = "-DWITH_DLT_ADAPTOR=ON,-DWITH_DLT_ADAPTOR=OFF,,dlt-daemon-systemd"
-+PACKAGECONFIG[dlt-console] = "-DWITH_DLT_CONSOLE=ON,-DWITH_DLT_CONSOLE=OFF,,dlt-daemon-systemd"
-+
-+inherit autotools gettext cmake systemd
-+
-+PACKAGES += "${PN}-systemd"
-+SYSTEMD_PACKAGES = "${PN} ${PN}-systemd"
-+SYSTEMD_SERVICE_${PN} = " ${@bb.utils.contains('PACKAGECONFIG', 'systemd', 'dlt.service', '', d)} \
-+                          ${@bb.utils.contains('PACKAGECONFIG', 'dlt-system', 'dlt-system.service', '', d)}"
-+SYSTEMD_AUTO_ENABLE_${PN} = "enable"
-+SYSTEMD_SERVICE_${PN}-systemd = " \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'dlt-adaptor', 'dlt-adaptor-udp.service', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'dlt-examples', 'dlt-example-user.service', '', d)} \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'dlt-examples dlt-console', 'dlt-receive.service', '', d)} \
++PACKAGECONFIG[websockets] = "-DWITH_WEBSOCKETS=ON,-DWITH_WEBSOCKETS=OFF,libwebsockets"
++PACKAGECONFIG[dlt] = "-DWITH_DLT=ON,-DWITH_DLT=OFF,dlt-daemon"
+ 
+-do_install() {
+-    oe_runmake 'DESTDIR=${D}' install
++EXTRA_OECMAKE = " \
++    -DWITH_BUNDLED_DEPS=OFF \
++    -DWITH_ADNS=ON \
 +"
-+SYSTEMD_AUTO_ENABLE_${PN}-systemd = "disable"
-+
-+FILES_${PN}-doc += "${datadir}/dlt-filetransfer"
-+
+ 
 +do_install_append() {
-+    rm -f ${D}${bindir}/dlt-test-*
-+}
+     install -d ${D}${systemd_unitdir}/system/
+     install -m 0644 ${S}/service/systemd/mosquitto.service.notify ${D}${systemd_unitdir}/system/mosquitto.service
+ 
+-    install -d ${D}${sysconfdir}/mosquitto
+-    install -m 0644 ${D}${sysconfdir}/mosquitto/mosquitto.conf.example \
+-                    ${D}${sysconfdir}/mosquitto/mosquitto.conf
+-
+     install -d ${D}${sysconfdir}/init.d/
+     install -m 0755 ${WORKDIR}/mosquitto.init ${D}${sysconfdir}/init.d/mosquitto
+     sed -i -e 's,@SBINDIR@,${sbindir},g' \
+@@ -77,9 +68,9 @@ FILES_${PN} = "${sbindir}/mosquitto \
+ 
+ CONFFILES_${PN} += "${sysconfdir}/mosquitto/mosquitto.conf"
+ 
+-FILES_libmosquitto1 = "${libdir}/libmosquitto.so.1"
++FILES_libmosquitto1 = "${libdir}/libmosquitto.so.*"
+ 
+-FILES_libmosquittopp1 = "${libdir}/libmosquittopp.so.1"
++FILES_libmosquittopp1 = "${libdir}/libmosquittopp.so.*"
+ 
+ FILES_${PN}-clients = "${bindir}/mosquitto_pub \
+                        ${bindir}/mosquitto_sub \
 -- 
 2.17.1
 
