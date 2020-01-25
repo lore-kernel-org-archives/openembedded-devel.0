@@ -1,55 +1,51 @@
 Return-Path: <costamagna.gianfranco@gmail.com>
 Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
 	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E2717FD97
+	by mail.openembedded.org (Postfix) with ESMTP id 0AEA87FD80
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jan 2020 09:00:09 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id t23so1820095wmi.1
+	Sat, 25 Jan 2020 09:10:59 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id c84so1857808wme.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jan 2020 01:00:10 -0800 (PST)
+	Sat, 25 Jan 2020 01:11:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=4/LsiZSvD/UsC7qBFBGZTY5p7+Pg0rOcEo0D7QKLH9I=;
-	b=N3c11gPh5C8v8r4zBWhedhCbKohtPeP2nBje4Axu7ulTwIzsFroytgfhC5sRwJ2Rm2
-	hq3Mg2E4z1sNOItW5PPhOWsRxSQaBR6/ZDLZipOiNkDeqn4GsA8/zswFv0EmSKem5t1U
-	PiTFSiU3NmCJ8GgVNXGMcTP4TOJNgcVanFFmZGadoY1LIDyHepqS2G/Da8JFPg4FLy4F
-	1Ju0prB0CK59r663SsyAIpJ2W7gnjIfuYkR0qvTwhlW8to38iV1mNNinFZ+A3kdzs96+
-	NkTSrngxSrku+iqTrLV7fChGSts78Xg9udN0q484nrIfkOE6cXcrlKANqKfDwm/0NU56
-	e4rA==
+	h=from:to:cc:subject:date:message-id;
+	bh=sKLKM0fWa1ueyy52Ui6NsCB76FCqYPSnGQzmcXUY3Ck=;
+	b=p2L6n0xJme4Z4+Q+2BVIMowN/NrQ2jOtRmLFR7EDAYC81usYHXmJquwDv962B/FgzC
+	1vYe4ISdQQZ4GWXsHbLu+7nTouRfZzPc127BQpjvljTn8byJc5u+A/HZ8cNoFMSxAKik
+	3JXA54dNUIlavF8jkOv+48+/eGblm4tcZGYTzIPaSg/YvKxP/eIbs3j7aHd40VORFmJy
+	F5dgR6P3josX0l7i0esRIw2UpMLwKHkeZAC7UzpLzyLblVTA6/5FRHpJiDBYXmmuiRER
+	a0qH43XsqvPQjvkKT3KmsUwUumff4ZZBkyk6YVKYHLTp+k/hA+RLRTDzjGXgzx6wQ1Gi
+	Dkpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=4/LsiZSvD/UsC7qBFBGZTY5p7+Pg0rOcEo0D7QKLH9I=;
-	b=doGB4ajWzT5Nqa306mXUgkBn1NpIDqI8ct6ZAQjxjkpM+hXxBkuXZj86syT6ViyTT2
-	VH0IBcpbDjWCLb2mWaegv/FiS0L8ITA6rboIKLplv4yJkfZvCm2MoTWdhtNrwl3mc3PN
-	30grRO0Sdf52rWYNTx3Bxo3yI1pYrgyKqDgQogcGM8UYdFzHNAb6swdsL3YOuNSChuWO
-	JmQrWJydar52/b3R04sN7JoZDJzKn4zxFfZI+4vpwtCayyjTsJiQSBj0y+adenuxe4T8
-	xu6goYAal2EBBtxB6CFzTnjDLTktQdrgP5K/gd93hOJcdASplXN2JRYzekS2N80sIfx1
-	fpvA==
-X-Gm-Message-State: APjAAAWT4Vfzt7PAhIwYKCJRhAut2JfyAqQpdObQTqhQj99WWK2ujMpw
-	Or09O1AB2XAnKH4EjFsuupq/rYfZ
-X-Google-Smtp-Source: APXvYqz0DFDPWcOqUhhjpU+I+fM4VSLkUEXMTIpFsVhbZvN6/lqvcX+lMox/7iK1oLHSH3EBNH1VMA==
-X-Received: by 2002:a05:600c:22d2:: with SMTP id
-	18mr3538733wmg.21.1579942808596; 
-	Sat, 25 Jan 2020 01:00:08 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=sKLKM0fWa1ueyy52Ui6NsCB76FCqYPSnGQzmcXUY3Ck=;
+	b=EZbNoWQnse74g9Bo2JiibaMbSAMgi7Bm4lEOxO0Ufu/3dlBawjXDfHCFR5gzNiJe12
+	IVWSujKBpgr8obDLCqQqP+SAAS3F7UZwcTiFg0/vhsavOiJ39TiP2DNwzb1B3iQZKL+u
+	yKNX28k+ULSICba1zg28g/aFYuIcrnxiuTbGDKjWVfW3QPO6WQsqf9CRSbxMWBER0s29
+	f1QsV0oxH3HU6BpyRnuHcz4NyfxwlO85nh6g1KmcGHHWvYbZWa2ORclyKBZEzuedKRN2
+	Pn4qxQkKd14XKd0ywqCUE0xeymhFk4SkXu10gZDfIJWfrGregiyo3VaPNa0Ihs8SP3pm
+	At2g==
+X-Gm-Message-State: APjAAAXtBb4dYxexAwWC6kRaNI8WM3B2vVS9iZFd1jkc2oWMHQ/D8Z99
+	409F7yd7ywhrr9dHJyb3W6K7O6zO
+X-Google-Smtp-Source: APXvYqx7+Xs3+G8WkOCxZwez7VRAa6X4mNUW9dyMQ6Y9vlL/Jv3Cd/ooFqk7S9/R8yzd8qeNH+9gyw==
+X-Received: by 2002:a1c:9913:: with SMTP id b19mr3435766wme.166.1579943460284; 
+	Sat, 25 Jan 2020 01:11:00 -0800 (PST)
 Received: from localhost.localdomain (mob-31-157-190-238.net.vodafone.it.
-	[31.157.190.238]) by smtp.gmail.com with ESMTPSA id
-	b137sm10606946wme.26.2020.01.25.01.00.07
+	[31.157.190.238])
+	by smtp.gmail.com with ESMTPSA id q3sm9852969wmc.47.2020.01.25.01.10.59
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 25 Jan 2020 01:00:07 -0800 (PST)
+	Sat, 25 Jan 2020 01:10:59 -0800 (PST)
 From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
 X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Jan 2020 10:00:02 +0100
-Message-Id: <20200125090002.10399-2-costamagnagianfranco@yahoo.it>
+Date: Sat, 25 Jan 2020 10:10:55 +0100
+Message-Id: <20200125091056.13032-1-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200125090002.10399-1-costamagnagianfranco@yahoo.it>
-References: <20200125090002.10399-1-costamagnagianfranco@yahoo.it>
 Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
 	Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
 	Gianfranco Costamagna <locutusofborg@debian.org>
-Subject: [meta-oe][PATCH 2/2] dlt-daemon: Add initial recipe from meta-ivi, as of commit 6a5b0d6460028f695c62bd1f0b064207671b2236 with added upstream proposed pull request: https://github.com/GENIVI/meta-ivi/pull/118
+Subject: [meta-oe][PATCH 1/2] dlt-daemon: Add initial recipe from meta-ivi, as of commit 6a5b0d6460028f695c62bd1f0b064207671b2236 with added upstream proposed pull request: https://github.com/GENIVI/meta-ivi/pull/118
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,7 +58,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jan 2020 09:00:09 -0000
+X-List-Received-Date: Sat, 25 Jan 2020 09:11:00 -0000
 
 From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
 
@@ -368,7 +364,7 @@ index 000000000..f0fc0bcb2
 +# #ifdef linux
 diff --git a/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
 new file mode 100644
-index 000000000..a3b387a4c
+index 000000000..438febe17
 --- /dev/null
 +++ b/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb
 @@ -0,0 +1,61 @@
@@ -398,7 +394,7 @@ index 000000000..a3b387a4c
 +
 +S = "${WORKDIR}/${PN}-${PV}"
 +
-+PACKAGECONFIG ??= "systemd"
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES','systemd', d)}"
 +# General options
 +PACKAGECONFIG[dlt-examples] = "-DWITH_DLT_EXAMPLES=ON,-DWITH_DLT_EXAMPLES=OFF,,dlt-daemon-systemd"
 +
