@@ -1,51 +1,52 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
-	[209.85.214.175])
-	by mail.openembedded.org (Postfix) with ESMTP id BA53E7E08E
+Return-Path: <costamagna.gianfranco@gmail.com>
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FD566C4DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jan 2020 08:26:07 +0000 (UTC)
-Received: by mail-pl1-f175.google.com with SMTP id q13so1775824pls.1
+	Sat, 25 Jan 2020 09:00:07 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id p17so1859848wmb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jan 2020 00:26:08 -0800 (PST)
+	Sat, 25 Jan 2020 01:00:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=u6l6bYRxP1EowzjLubVZx/q2GD+XvTLGHGi86UbLpD8=;
-	b=QeF2jQgbe7MmllNo4j7TZEh9waMPaKw+EjBwj+S8CobgtTvt/4Buqo5VcURPlRDXoa
-	NPOjBEer4x2b9Xq3Bu/R3mFdpxvI/ITvEaafLdxaGdXjrNxiNzz/tfviHM11+tJaFgpo
-	u2npFe4zBLi6jG3IuHHhKBIc1SgvfteVluvkdxxmI40ZUnYEvDEmjQx8ZnVs+9mDMrfo
-	dwjfDeh8PIP34sXdFOGibeevDCJcJAqN3dFnySjCeRBNpvI2aj0EHqim2EqEVF+nvm3e
-	X6njHlmVOxeINS/CE9UgTSu44AG4oQbRDtT39WSHuEwk47ApNJUOEXnbpcKDmn4UYOaz
-	S1jA==
+	h=from:to:cc:subject:date:message-id;
+	bh=otT7OGUh//qSrICq8pOwUzlKuVhg41K0zMOs8AsY6Do=;
+	b=jqm6NpWwI+tfnAGG1gNigxq9Aob+KoQxfh6EgHKpjFmxWygpAoYx2xCNR7MJxlGbtB
+	sroDavkdSIovzhQxfpSPuS//wYizBTmoHTXcCWRCe7WWsHtq8uvLob2mOTO4IUT6dtVn
+	7PdvF7Ltx1A0L2WyMt/4dJ0xoiUCddpc3hH/iSomBQn8LuR95FSNjoLH9m5Z5rPxvzqZ
+	a7XiyQ7JrJpIMlk3COUucCt5SDdLwpcH59u5WntNTKLRo5wgxxb71pja/vapyMtIE5eB
+	dlO2j381R7ohTEIE+O04u0h2WARSeXQpBxQNn2u7Sxoh1b9D0ZvGy9DAZsbBpFldWBxd
+	189A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=u6l6bYRxP1EowzjLubVZx/q2GD+XvTLGHGi86UbLpD8=;
-	b=XVW9Vi9bxQVNG12g1pykJ6hKzIi7lTlPu59fxjVscVjbYMITemnll7UjvH8R+p9P/C
-	+5CKe8K7hHyllB/ItSTRikyiWSxQBuJadEGZaI518TxESrJWML+SWChBcymFk3H0pXz+
-	x5bimu/U9PtZCQZ6Np6tcKIXeZeNOHj0RXvQdzgTfYL4zRWCZ0xAn2enJBTuTxPsshuX
-	L91aSVn+WzX9+cByZdsBoSWwKOZyXK1DKUxv/f/o33mZzmMj/i5gIQn65V7sj7uCbc1X
-	Kb333UEMWrQNFnDbnjs3u0ySmLqAvlU3ow2WsIhqaclXIKMwgMovqa4ckopIvRzRfZMm
-	Bnlg==
-X-Gm-Message-State: APjAAAUqvSpqSiAJElB2sftvxc4mlrR/swLW51wYPhkyq1iPROkhkuyB
-	qA04yK+UznYcNsGdixSbwG1HXdBzcEw=
-X-Google-Smtp-Source: APXvYqynStQqfW+MyX/UXpFKQm5sNOfuiaAd68EqRpgjmupXYvEtHKWQjxiWNmbpMbWbpC8mlLX0XQ==
-X-Received: by 2002:a17:90a:8685:: with SMTP id
-	p5mr3777757pjn.92.1579940768180; 
-	Sat, 25 Jan 2020 00:26:08 -0800 (PST)
-Received: from thetis.hsd1.or.comcast.net
-	([2601:1c0:6080:4500:ddac:a57d:b60a:6cb7])
-	by smtp.gmail.com with ESMTPSA id i11sm9093426pjg.0.2020.01.25.00.26.07
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=otT7OGUh//qSrICq8pOwUzlKuVhg41K0zMOs8AsY6Do=;
+	b=m+W57oUy/Ea+443NzDxJo2N9pTupRe0r0yJjKH37Y6o80QLVrZMUdy6jfhw0aqMJtu
+	/yuwqtKua2zdjbZO9s5Yqnwf2Ust2UNcjioeGnDCzUdaFk85DIVPAmXl/og+da3KJO0I
+	gJ/o9R5RzUlKo2dKJAdvPZHkBmmWGloDb/jS53Wvr3BJJDHVF79Jk+BG4gCt+GakyKFZ
+	nW4owXXXB1z5J+HpiOWM6cAPJ5KL6MTSEDe9jup2orjEOp1OviZjYBO1kk9Yj4JaUQP+
+	FNwNcHG+Q3E2v+WCbdNt1XHkGmfa7GluQAOy/ncI+g/7u1HLh1Po9NDFB70eDleJPdU+
+	46WQ==
+X-Gm-Message-State: APjAAAUqC1C8KWcdAwMVQwBNPQpW0MIZQs5rlZJ1MnGe1JNTUv5JZUUx
+	Y2w2+6GHfaooniVdgNabUjzwa4SY
+X-Google-Smtp-Source: APXvYqySkF+zPmoTmuioLCU+Pqc7ln9A+fFQTJ0Ahrh5x6dw2fhOn7/p3KMvn2EzdTDU01y/4Sc9pQ==
+X-Received: by 2002:a05:600c:2c50:: with SMTP id
+	r16mr3065739wmg.74.1579942807074; 
+	Sat, 25 Jan 2020 01:00:07 -0800 (PST)
+Received: from localhost.localdomain (mob-31-157-190-238.net.vodafone.it.
+	[31.157.190.238]) by smtp.gmail.com with ESMTPSA id
+	b137sm10606946wme.26.2020.01.25.01.00.05
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 25 Jan 2020 00:26:07 -0800 (PST)
-From: Tim Orling <ticotimo@gmail.com>
+	Sat, 25 Jan 2020 01:00:06 -0800 (PST)
+From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Jan 2020 00:25:48 -0800
-Message-Id: <20200125082548.12976-1-ticotimo@gmail.com>
-X-Mailer: git-send-email 2.25.0
-MIME-Version: 1.0
-Subject: [meta-python2][RFC] lib/oeqa/runtime/cases/python2_module.py: add test
+Date: Sat, 25 Jan 2020 10:00:01 +0100
+Message-Id: <20200125090002.10399-1-costamagnagianfranco@yahoo.it>
+X-Mailer: git-send-email 2.17.1
+Cc: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>,
+	Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
+	Gianfranco Costamagna <locutusofborg@debian.org>
+Subject: [meta-oe][PATCH 1/2] mosquitto: apply upstream proposed patches to use cmake build system, simplifying a lot the build and install process.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,159 +59,273 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jan 2020 08:26:07 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 25 Jan 2020 09:00:07 -0000
 
-This test case is intentionally limited to only tesing one
-python package/recipe at a time, because the use case is to
-determine whether dependencies have been met for a minimal
-image with 'only' the package under test installed. This
-dependency checking must include the packages-split python
-standard library modules that OE/YP creates from the python
-manifest.
+From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
 
-TODO: Be smarter about PYTHON_IMPORTS_UNDER_TEST, as this
-      should be discoverable from /usr/lib/python2.7/site-packages
-      or from the rpm/deb/ipk of the python package itself.
-      What we do NOT want to do is use pkgdata or some other
-      magical Python script that will add dependencies to the
-      test image. We need as pristine and minimalist a test
-      environment as we can get.
-
-TODO: Use a minimal master test image and install the package under
-      test from a package feed using a package manager in the master
-      test image. This would allow for much shorter developement
-      cycles.
-
-TODO: Parse the ImportError and give hints about what dependencies
-      are missing.
-
-Example configuration in local.conf:
-
-IMAGE_CLASSES += " testimage"
-DISTRO_FEAURES_append = " ptest"
-EXTRA_IMAGE_FEATURES = "debug-tweaks"
-TESTIMAGE_AUTO = "1"
-TEST_SUITES = " ping ssh python2 ptest python2_module"
-TEST_QEMUPARAMS += "-smp 4 -m 8192"
-TEST_RUNQEMUPARAMS += "kvm gl"
-IMAGE_ROOTFS_SIZE ?= "8192"
-IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "systemd", " + 4096", "", d)}"
-IMAGE_INSTALL_append = " ptest-runner dropbear procps coreutils iproute2 sysstat"
-PYTHON_PACKAGE_UNDER_TEST = "python-pymongo"
-IMAGE_INSTALL_append = " ${PYTHON_PACKAGE_UNDER_TEST}"
-PYTHON_IMPORTS_UNDER_TEST = "bson gridfs pymongo"
-
-Signed-off-by: Tim Orling <ticotimo@gmail.com>
+Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
+Signed-off-by: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
+Signed-off-by: Gianfranco Costamagna <locutusofborg@debian.org>
 ---
- lib/oeqa/runtime/cases/python2_module.py | 97 ++++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
- create mode 100644 lib/oeqa/runtime/cases/python2_module.py
+ .../mosquitto/files/1568.patch                | 67 +++++++++++++++++++
+ .../mosquitto/files/1569.patch                | 25 +++++++
+ .../mosquitto/files/1570.patch                | 29 ++++++++
+ .../mosquitto/files/1571.patch                | 24 +++++++
+ .../mosquitto/mosquitto_1.6.8.bb              | 45 +++++--------
+ 5 files changed, 163 insertions(+), 27 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/1568.patch
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/1569.patch
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/1570.patch
+ create mode 100644 meta-networking/recipes-connectivity/mosquitto/files/1571.patch
 
-diff --git a/lib/oeqa/runtime/cases/python2_module.py b/lib/oeqa/runtime/cases/python2_module.py
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1568.patch b/meta-networking/recipes-connectivity/mosquitto/files/1568.patch
 new file mode 100644
-index 00000000..59ae00fb
+index 000000000..15f7a9105
 --- /dev/null
-+++ b/lib/oeqa/runtime/cases/python2_module.py
-@@ -0,0 +1,97 @@
-+#
-+# SPDX-License-Identifier: MIT
-+#
++++ b/meta-networking/recipes-connectivity/mosquitto/files/1568.patch
+@@ -0,0 +1,67 @@
++Upstream-Status: Submitted [https://github.com/eclipse/mosquitto/pull/1568]
++From 50bfc79cae5764a6e513b684a5eb5bef2b35c856 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Wed, 22 Jan 2020 12:30:25 +0100
++Subject: [PATCH] Bugfix: include "deps" directory only if BUNDLED_DEPS has
++ been provided and set to true
 +
-+import os
++Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++---
++ config.mk          | 5 ++++-
++ lib/CMakeLists.txt | 5 ++++-
++ test/unit/Makefile | 6 +++++-
++ 3 files changed, 13 insertions(+), 3 deletions(-)
 +
-+from oeqa.runtime.case import OERuntimeTestCase
-+from oeqa.core.decorator.depends import OETestDepends
-+from oeqa.core.decorator.data import OETestDataDepends
-+from oeqa.runtime.decorator.package import OEHasPackage
++diff --git a/config.mk b/config.mk
++index 51e36e0d0..0ac24b3d4 100644
++--- a/config.mk
+++++ b/config.mk
++@@ -135,7 +135,10 @@ endif
++ 
++ STATIC_LIB_DEPS:=
++ 
++-LIB_CPPFLAGS=$(CPPFLAGS) -I. -I.. -I../lib -I../src/deps
+++LIB_CPPFLAGS=$(CPPFLAGS) -I. -I.. -I../lib
+++ifeq ($(WITH_BUNDLED_DEPS),yes)
+++	LIB_CPPFLAGS:=$(LIB_CPPFLAGS) -I../src/deps
+++endif
++ LIB_CFLAGS:=$(CFLAGS)
++ LIB_CXXFLAGS:=$(CXXFLAGS)
++ LIB_LDFLAGS:=$(LDFLAGS)
++diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
++index e1521f12a..891046a81 100644
++--- a/lib/CMakeLists.txt
+++++ b/lib/CMakeLists.txt
++@@ -1,11 +1,14 @@
++ add_subdirectory(cpp)
++ 
++ include_directories(${mosquitto_SOURCE_DIR} ${mosquitto_SOURCE_DIR}/lib
++-			${mosquitto_SOURCE_DIR}/src/deps
++ 			${STDBOOL_H_PATH} ${STDINT_H_PATH}
++ 			${OPENSSL_INCLUDE_DIR} ${PTHREAD_INCLUDE_DIR})
++ link_directories(${mosquitto_SOURCE_DIR}/lib)
++ 
+++if (WITH_BUNDLED_DEPS)
+++        include_directories(${mosquitto_SOURCE_DIR} ${mosquitto_SOURCE_DIR}/src/deps)
+++endif (WITH_BUNDLED_DEPS)
+++
++ set(C_SRC
++ 	actions.c
++ 	callbacks.c
++diff --git a/test/unit/Makefile b/test/unit/Makefile
++index 9d422428d..928579492 100644
++--- a/test/unit/Makefile
+++++ b/test/unit/Makefile
++@@ -2,7 +2,11 @@ include ../../config.mk
++ 
++ .PHONY: all check test test-broker test-lib clean coverage
++ 
++-CPPFLAGS:=$(CPPFLAGS) -I../.. -I../../lib -I../../src -I../../src/deps
+++CPPFLAGS:=$(CPPFLAGS) -I../.. -I../../lib -I../../src
+++ifeq ($(WITH_BUNDLED_DEPS),yes)
+++        CPPFLAGS:=$(CPPFLAGS) -I../../src/deps
+++endif
+++
++ CFLAGS:=$(CFLAGS) -coverage -Wall -ggdb
++ LDFLAGS:=$(LDFLAGS) -coverage
++ LDADD:=$(LDADD) -lcunit
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1569.patch b/meta-networking/recipes-connectivity/mosquitto/files/1569.patch
+new file mode 100644
+index 000000000..9718b98c8
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mosquitto/files/1569.patch
+@@ -0,0 +1,25 @@
++Upstream-Status: Submitted [https://github.com/eclipse/mosquitto/pull/1569]
++From fda932612afce2cead2fd2ca1c8ea543b2892177 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Wed, 22 Jan 2020 12:31:01 +0100
++Subject: [PATCH] Bugfix: enabling DLT was overriding everything else on linker
++ flags because of error in cmake set keyword
 +
++Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++---
++ src/CMakeLists.txt | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+class PythonModuleTest(OERuntimeTestCase):
-+    """This test case is intentionally limited to only tesing one
-+       python package/recipe at a time, because the use case is to
-+       determine whether dependencies have been met for a minimal
-+       image with 'only' the package under test installed. This
-+       dependency checking must include the packages-split python
-+       standard library modules that OE/YP creates from the python
-+       manifest.
++diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
++index 7898ff5b1..6dfbba5e6 100644
++--- a/src/CMakeLists.txt
+++++ b/src/CMakeLists.txt
++@@ -130,7 +130,7 @@ add_definitions (-DWITH_BROKER)
++ if (WITH_DLT)
++     message(STATUS "DLT_LIBDIR = ${DLT_LIBDIR}")
++     link_directories(${DLT_LIBDIR})
++-    set (MOSQ_LIBS ${DLT_LIBRARIES})
+++    set (MOSQ_LIBS ${MOSQ_LIBS} ${DLT_LIBRARIES})
++ endif (WITH_DLT)
++ 
++ set (MOSQ_LIBS ${MOSQ_LIBS} ${OPENSSL_LIBRARIES})
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1570.patch b/meta-networking/recipes-connectivity/mosquitto/files/1570.patch
+new file mode 100644
+index 000000000..109caee01
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mosquitto/files/1570.patch
+@@ -0,0 +1,29 @@
++Upstream-Status: Submitted [https://github.com/eclipse/mosquitto/pull/1570]
++From 9a6470d31d212522a56cab94b81f99a7b6967f76 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Wed, 22 Jan 2020 12:29:41 +0100
++Subject: [PATCH] cmake: add ADNS enable/disable dynamic support
 +
-+       TODO: Be smarter about PYTHON_IMPORTS_UNDER_TEST, as this
-+             should be discoverable from /usr/lib/python2.7/site-packages
-+             or from the rpm/deb/ipk of the python package itself.
-+             What we do NOT want to do is use pkgdata or some other
-+             magical Python script that will add dependencies to the
-+             test image. We need as pristine and minimalist a test
-+             environment as we can get.
++Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++---
++ src/CMakeLists.txt | 7 +++++++
++ 1 file changed, 7 insertions(+)
 +
-+       TODO: Use a minimal master test image and install the package under
-+             test from a package feed using a package manager in the master
-+             test image. This would allow for much shorter developement
-+             cycles.
++diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
++index 7898ff5b1..11c24e2cc 100644
++--- a/src/CMakeLists.txt
+++++ b/src/CMakeLists.txt
++@@ -105,6 +105,13 @@ if (WITH_SYS_TREE)
++ 	add_definitions("-DWITH_SYS_TREE")
++ endif (WITH_SYS_TREE)
++ 
+++option(WITH_ADNS
+++	"Include ADNS support?" OFF)
+++if (WITH_ADNS)
+++	add_definitions("-DWITH_ADNS")
+++	set (MOSQ_LIBS ${MOSQ_LIBS} anl)
+++endif (WITH_ADNS)
+++
++ if (CMAKE_SYSTEM_NAME STREQUAL Linux)
++ 	option(WITH_SYSTEMD
++ 		"Include systemd support?" OFF)
+diff --git a/meta-networking/recipes-connectivity/mosquitto/files/1571.patch b/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
+new file mode 100644
+index 000000000..2cfa48457
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/mosquitto/files/1571.patch
+@@ -0,0 +1,24 @@
++Upstream-Status: Submitted [https://github.com/eclipse/mosquitto/pull/1571]
++From 3fe5468f1bdca1bff1d18cf43c9e338f41aa9e32 Mon Sep 17 00:00:00 2001
++From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++Date: Wed, 22 Jan 2020 12:39:49 +0100
++Subject: [PATCH] Add dynamic symbols linking with cmake too
 +
-+       TODO: Parse the ImportError and give hints about what dependencies
-+             are missing.
++Signed-off-by: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
++---
++ lib/CMakeLists.txt | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+
-+       Example configuration in local.conf:
-+       
-+       IMAGE_CLASSES += " testimage"
-+       DISTRO_FEAURES_append = " ptest"
-+       EXTRA_IMAGE_FEATURES = "debug-tweaks"
-+       TESTIMAGE_AUTO = "1"
-+       TEST_SUITES = " ping ssh python2 ptest python2_module"
-+       TEST_QEMUPARAMS += "-smp 4 -m 8192"
-+       TEST_RUNQEMUPARAMS += "kvm gl"
-+       IMAGE_ROOTFS_SIZE ?= "8192"
-+       IMAGE_ROOTFS_EXTRA_SPACE_append = "${@bb.utils.contains("DISTRO_FEATURES", "systemd", " + 4096", "", d)}"
-+       IMAGE_INSTALL_append = " ptest-runner dropbear procps coreutils iproute2 sysstat"
-+       PYTHON_PACKAGE_UNDER_TEST = "python-engineio"
-+       IMAGE_INSTALL_append = " ${PYTHON_PACKAGE_UNDER_TEST}"
-+       PYTHON_IMPORTS_UNDER_TEST = "engineio"
-+    """
-+
-+    package = ""
-+    imports = []
-+
-+    @classmethod
-+    def setUp(cls):
-+        if 'PYTHON_PACKAGE_UNDER_TEST' in cls.tc.td:
-+            cls.package = cls.tc.td.get('PYTHON_PACKAGE_UNDER_TEST')
-+            cls.logger.debug('Running import test on "%s" recipe' % cls.package)
-+        else:
-+            cls.logger.error('No recipe to test found in configuration.\n'
-+                             'Please set in PYTHON_PACKAGE_UNDER_TEST')
-+        if 'PYTHON_IMPORTS_UNDER_TEST' in cls.tc.td:
-+            cls.imports = cls.tc.td.get('PYTHON_IMPORTS_UNDER_TEST').split()
-+            if isinstance(cls.imports, list) and len(cls.imports) > 0:
-+                cls.logger.info('Importing from %s' % cls.imports)
-+            else:
-+                cls.logger.error("PYTHON_IMPORTS_UNDER_TEST should be a space delimited list")
-+                cls.logger.error("typeof(PYTHON_IMPORTS_UNDER_TEST) is %s" % type(cls.imports))
-+        else:
-+            cls.logger.error("No modules to import found in configuration.\n"
-+                             "Please set in variable PYTHON_IMPORTS_UNDER_TEST")
-+
-+
-+class PythonModuleImportTest(PythonModuleTest):
-+    @OETestDepends(['ssh.SSHTest.test_ssh'])
-+    @OETestDepends(['python2.PythonTest.test_python'])
-+    @OETestDataDepends(['PYTHON_PACKAGE_UNDER_TEST'])
-+    @OETestDataDepends(['PYTHON_IMPORTS_UNDER_TEST'])
-+    def test_python_module(self):
-+        # We can't use the OEHasPackage decorator, because 'package' isn't defined
-+        # until the class has already been instantiated
-+        msg = 'Checking if "%s" is installed' % self.package
-+        self.logger.debug(msg)
-+        if not self.package in self.tc.image_packages:
-+            msg = 'Test requires "%s" to be installed' % self.package
-+            self.skipTest(msg)
-+
-+        for python_import in self.imports:
-+            cmd = 'python -c "import %s"' % python_import
-+            status, output = self.target.run(cmd)
-+            msg = 'Exit status was not 0. Output: %s' % output
-+            self.assertEqual(status, 0, msg=msg)
++diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
++index e1521f12a..14ba12739 100644
++--- a/lib/CMakeLists.txt
+++++ b/lib/CMakeLists.txt
++@@ -88,6 +88,8 @@ set_target_properties(libmosquitto PROPERTIES
++ 	OUTPUT_NAME mosquitto
++ 	VERSION ${VERSION}
++ 	SOVERSION 1
+++	LINK_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/linker.version
+++	LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/linker.version"
++ )
++ 
++ install(TARGETS libmosquitto RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+diff --git a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
+index ea533d8a0..6079555a0 100644
+--- a/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
++++ b/meta-networking/recipes-connectivity/mosquitto/mosquitto_1.6.8.bb
+@@ -16,45 +16,36 @@ DEPENDS = "uthash"
+ 
+ SRC_URI = "http://mosquitto.org/files/source/mosquitto-${PV}.tar.gz \
+            file://mosquitto.init \
++           file://1568.patch \
++           file://1569.patch \
++           file://1570.patch \
++           file://1571.patch \
+ "
+ 
+ SRC_URI[md5sum] = "24a0e567c845b3e41b75e237d200edf8"
+ SRC_URI[sha256sum] = "7df23c81ca37f0e070574fe74414403cf25183016433d07add6134366fb45df6"
+ 
+-inherit systemd update-rc.d useradd
++inherit systemd update-rc.d useradd cmake
+ 
+-PACKAGECONFIG ??= "ssl uuid \
++PACKAGECONFIG ??= "ssl dlt websockets dns-srv\
+                   ${@bb.utils.filter('DISTRO_FEATURES','systemd', d)} \
+                   "
+ 
+-PACKAGECONFIG[dns-srv] = "WITH_SRV=yes,WITH_SRV=no,c-ares"
+-PACKAGECONFIG[ssl] = "WITH_TLS=yes WITH_TLS_PSK=yes,WITH_TLS=no WITH_TLS_PSK=no,openssl"
+-PACKAGECONFIG[uuid] = "WITH_UUID=yes,WITH_UUID=no,util-linux"
+-PACKAGECONFIG[systemd] = "WITH_SYSTEMD=yes,WITH_SYSTEMD=no,systemd"
+-PACKAGECONFIG[websockets] = "WITH_WEBSOCKETS=yes,WITH_WEBSOCKETS=no,libwebsockets"
+-
+-EXTRA_OEMAKE = " \
+-    prefix=${prefix} \
+-    mandir=${mandir} \
+-    localedir=${localedir} \
+-    ${PACKAGECONFIG_CONFARGS} \
+-    STRIP=/bin/true \
+-    WITH_DOCS=no \
+-    WITH_BUNDLED_DEPS=no \
+-"
+-
+-export LIB_SUFFIX = "${@d.getVar('baselib').replace('lib', '')}"
++PACKAGECONFIG[dns-srv] = "-DWITH_SRV=ON,-DWITH_SRV=OFF,c-ares"
++PACKAGECONFIG[ssl] = "-DWITH_TLS=ON -DWITH_TLS_PSK=ON -DWITH_EC=ON,-DWITH_TLS=OFF -DWITH_TLS_PSK=OFF -DWITH_EC_OFF,openssl"
++PACKAGECONFIG[systemd] = "-DWITH_SYSTEMD=ON,-DWITH_SYSTEMD=OFF,systemd"
++PACKAGECONFIG[websockets] = "-DWITH_WEBSOCKETS=ON,-DWITH_WEBSOCKETS=OFF,libwebsockets"
++PACKAGECONFIG[dlt] = "-DWITH_DLT=ON,-DWITH_DLT=OFF,dlt-daemon"
+ 
+-do_install() {
+-    oe_runmake 'DESTDIR=${D}' install
++EXTRA_OECMAKE = " \
++    -DWITH_BUNDLED_DEPS=OFF \
++    -DWITH_ADNS=ON \
++"
+ 
++do_install_append() {
+     install -d ${D}${systemd_unitdir}/system/
+     install -m 0644 ${S}/service/systemd/mosquitto.service.notify ${D}${systemd_unitdir}/system/mosquitto.service
+ 
+-    install -d ${D}${sysconfdir}/mosquitto
+-    install -m 0644 ${D}${sysconfdir}/mosquitto/mosquitto.conf.example \
+-                    ${D}${sysconfdir}/mosquitto/mosquitto.conf
+-
+     install -d ${D}${sysconfdir}/init.d/
+     install -m 0755 ${WORKDIR}/mosquitto.init ${D}${sysconfdir}/init.d/mosquitto
+     sed -i -e 's,@SBINDIR@,${sbindir},g' \
+@@ -77,9 +68,9 @@ FILES_${PN} = "${sbindir}/mosquitto \
+ 
+ CONFFILES_${PN} += "${sysconfdir}/mosquitto/mosquitto.conf"
+ 
+-FILES_libmosquitto1 = "${libdir}/libmosquitto.so.1"
++FILES_libmosquitto1 = "${libdir}/libmosquitto.so.*"
+ 
+-FILES_libmosquittopp1 = "${libdir}/libmosquittopp.so.1"
++FILES_libmosquittopp1 = "${libdir}/libmosquittopp.so.*"
+ 
+ FILES_${PN}-clients = "${bindir}/mosquitto_pub \
+                        ${bindir}/mosquitto_sub \
 -- 
-2.25.0
+2.17.1
 
 
