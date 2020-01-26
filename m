@@ -1,48 +1,51 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-io1-f50.google.com (mail-io1-f50.google.com
-	[209.85.166.50])
-	by mail.openembedded.org (Postfix) with ESMTP id B6F357FD14
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com
+	[209.85.216.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C6B577F891
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jan 2020 20:42:31 +0000 (UTC)
-Received: by mail-io1-f50.google.com with SMTP id x1so5747053iop.7
+	Sun, 26 Jan 2020 07:04:29 +0000 (UTC)
+Received: by mail-pj1-f65.google.com with SMTP id e11so1777525pjt.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jan 2020 12:42:33 -0800 (PST)
+	Sat, 25 Jan 2020 23:04:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=dLEnD1Ry3i/J14QXTs3vxIAqNRzLQq/y9r0VR505N5E=;
-	b=dHpxxwxoEI9GfozRQ541Iw6heMN9edP5Dq8tL95b5OCZvE6q0PQiQ33G8bp+dOOurI
-	gsof31/tl46Kqmrgaef4PncMrS0sNdSMCblTS/oB+5LGMdt2MH5PdY8psWMzOyUrMlNr
-	qRhloFpG+Rf4yUtRmLBPZEatR85x2hs82qlP1wB8RYCJ8ogM/N95MD5KokmTA4T64Hbk
-	bTCQ96PFKTDCGSluDYKk7l5vxd+uBt+0qllAM2ZMwRS1ckyzGVyZxo7PAYwivzrIwKXD
-	NELvS4nr4VY7L1hf3FpYFqYabAGeb2Tqcxl+qBx6SEYfMeRiyk8PrSGwhVjdWwHpiuzU
-	QCtQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=GcrPB1r2o2561KbgTm2xSsIt6ctfaGlIWydjydJ0WVQ=;
+	b=glMB70LK492C0gqiGAJ3K3d0Jl7xOSVUHWPHu6deX2X1pXqt/AakfkjZJ3J7rQxEUz
+	uD1hH4ANswTbcOQdkN0gYhL4nT5xWh5e1UxdD115lL+iuLd/+Np00X8q+TRgrnTmtd0Z
+	qWJ9MxNxgFo+k+hMFOdjrPzfAbALTkmc0QR8ZUQW2nxJGevGapUcwUXMqlrOSxy8XjzO
+	cfRv1pc7KxbsU2Ykp+Ke0RTJIO204BXRpLbKy0ZOLGAn1MUmwzYKQ1fYkoO70i01W+RC
+	Ju0ffWLoKhdO12lBOhuT2Wf4briIpNzH5+a5eAvswNmABr0SUYVDm3smGjf01J2jSxAb
+	qq0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=dLEnD1Ry3i/J14QXTs3vxIAqNRzLQq/y9r0VR505N5E=;
-	b=lpDO5qyMGE2YqC1RIv1CrV+SL4rVUUr8D+ypDynxuBqTZsTIxBsEw10gzJ7U8sTAVL
-	EwjMCpjSeOQAwaoHp0TqhjLwVmpMAAbR3rOUjPxsY5VYxsXC+548nklG6OH0o8uJk3ps
-	i/FJH5jjhVcX/8IeeuoRDx45c1WBRECGBbWVp/1RyUcWBhF3LsSPiC9hDbNszerqUrLL
-	HoyBM74qX1gWwwhjo4RTKYJiWtCnCkGsL1j3Uqr4PZrxvvoIU8pLuy0XYGlNm0QRW/3a
-	DTcfN+H094qLLlzFo0UbbzHfIj1DRlcRXPGz5FgrpGolzzNhenVIh0XzcGwApqILT8NX
-	wFlQ==
-X-Gm-Message-State: APjAAAW9R0ZJAS4u8x7d0cIJOHlz+T2mlg5abJvKWpSRgotbQm+uL5uC
-	UYt6DRLZOBg/Lyk2TjMovxMHmQPVkL4A5fQd5Oo=
-X-Google-Smtp-Source: APXvYqxVrA7s+Vte6JDVI8plNy8JhAb9+lq0yMV4rjQLMYkYT04FGLyj+wPzZLZwFNdLXM3RM7cZcpSWG35ylHN4xJY=
-X-Received: by 2002:a05:6602:210a:: with SMTP id
-	x10mr5610487iox.151.1579984952589; 
-	Sat, 25 Jan 2020 12:42:32 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=GcrPB1r2o2561KbgTm2xSsIt6ctfaGlIWydjydJ0WVQ=;
+	b=MmISy7MxoQvPzx+Y+t0byi84+37S+/hNHjc1qBUjNBI/vaOuW5bR/9DTcSlj2leQzG
+	oy+/Gy2MsWlSeJRbvHGnnKxwghO9ERwgNLt7o0m4bjOxerEqTQE05GD9sM+OZ9HrUHoH
+	IPM6pEbka+J415zhoiH+LMl53GrSa2SLFE0DrRnexGh7aWwueWYI8MQn5cCRRLaWZxrg
+	qWCUXKQdroGoy3X4ogl2rqKaEUbMB4kPwlrdMh8dA7WBjrYfhWmLJScsRlVcDasPIA7N
+	N/L1WDRQ31eiYkMoQR7J2V4irvRkok6aAfaOjTRTkCdb/yjPLzsfMHmqP3WUOyhAoa5A
+	CA6w==
+X-Gm-Message-State: APjAAAV2am4GjmwFRV3bU4lBiW8egbgFh5YEAP8Q+mYTfJue4lvRFllH
+	B6Y/yYdIBRjjhGBJA8niOokfDjsdAxs=
+X-Google-Smtp-Source: APXvYqw5NXGKzslMGI/Gb54bDaoskep6tgFdt78aurwELnGCVo5Mcnfdb+oRojBCI0Q2uSTYgO3Qpg==
+X-Received: by 2002:a17:902:b089:: with SMTP id
+	p9mr12024599plr.34.1580022270514; 
+	Sat, 25 Jan 2020 23:04:30 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::c54b])
+	by smtp.gmail.com with ESMTPSA id
+	t138sm456208pfc.95.2020.01.25.23.04.29
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 25 Jan 2020 23:04:30 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 25 Jan 2020 23:04:32 -0800
+Message-Id: <20200126070432.66275-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-References: <20200125202357.4766-1-Martin.Jansa@gmail.com>
-In-Reply-To: <20200125202357.4766-1-Martin.Jansa@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Sat, 25 Jan 2020 12:42:21 -0800
-Message-ID: <CANx9H-BvkgBQb_NPgJ66LUJvpMDFy7h899MTrnVrqGsm=fDsaQ@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] packagegrop-meta-oe: remove blacklisted mpv
+Subject: [meta-oe][PATCH] luajit: Mark incompatible for riscv64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,48 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Jan 2020 20:42:31 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 26 Jan 2020 07:04:30 -0000
+Content-Transfer-Encoding: 8bit
 
-If someone cares, it has been updated to python3
-https://github.com/mpv-player/mpv/releases/tag/v0.31.0
+rv64 support is not yet available
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-On Sat, Jan 25, 2020 at 12:24 PM Martin Jansa <martin.jansa@gmail.com>
-wrote:
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+index d0dc1c28dd..93128dda83 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+@@ -90,10 +90,11 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
+ "
+ FILES_luajit-common = "${datadir}/${BPN}-${PV}"
+ 
+-# Aarch64/mips64/ppc/ppc64 is not supported in this release
++# Aarch64/mips64/ppc/ppc64/riscv64 is not supported in this release
+ COMPATIBLE_HOST_aarch64 = "null"
+ COMPATIBLE_HOST_mipsarchn32 = "null"
+ COMPATIBLE_HOST_mipsarchn64 = "null"
+ COMPATIBLE_HOST_powerpc = "null"
+ COMPATIBLE_HOST_powerpc64 = "null"
+ COMPATIBLE_HOST_powerpc64le = "null"
++COMPATIBLE_HOST_riscv64 = "null"
+-- 
+2.25.0
 
-> * it's blacklisted with:
->   mpv_0.26.0.bb:PNBLACKLIST[mpv] = "Needs forward porting to use python3"
->
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> index 865cbb0bfc..d5789a758d 100644
-> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> @@ -207,7 +207,7 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
->      sound-theme-freedesktop v4l-utils yavta wavpack libvpx \
->      ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xpext pavucontrol
-> xsp", "", d)} \
->      libmikmod \
-> -    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad
-> faad2 mpv", "", d)} \
-> +    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad
-> faad2", "", d)} \
->      "
->  RDEPENDS_packagegroup-meta-oe-multimedia_remove_libc-musl = "alsa-oss"
->
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
