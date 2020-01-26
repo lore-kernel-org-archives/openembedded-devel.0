@@ -1,63 +1,39 @@
-Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-lj1-f195.google.com (mail-lj1-f195.google.com
-	[209.85.208.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D9F067FA47
+Return-Path: <prvs=2877070d8=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 040237FA47
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Jan 2020 11:16:10 +0000 (UTC)
-Received: by mail-lj1-f195.google.com with SMTP id j26so7569222ljc.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Jan 2020 03:16:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=W7ZwsoodP2X/vDOxr5NsV2+nZBYbK91PPDd8nXU055M=;
-	b=GeqeeP8EX/KorBlezs2Bm6eoTGFmRBMuWwjjboeC0HDsODijjYu7srRUEvrMkSadfk
-	j8zusPJzZDu9eB5DXQ0qx5j1IsrrMeHpLy4wHc92ZN8D2FtDb9kBG8j6rhYhPUp6lODn
-	hJzKxmDEloQGgQY6x+bX01NdS8cDn5jMc/SpScQy04tZt6ZfAE8WrG11y2B+QSQvAsph
-	MVY9BGowKXPUnyxC6/Pn4ohnGkKkE6e8r5MJviAwIGMcjXARsM/qaK8HXSwFDqJdzEyz
-	o0BfOaqQyOgLMeR2hL8EsGdDaL35jHzc8qKTE2C/rEfa7HaV1S+kb56xXUwhWMkOv4Zo
-	5fdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=W7ZwsoodP2X/vDOxr5NsV2+nZBYbK91PPDd8nXU055M=;
-	b=fk+o0Lo3GppCEVLHqEtJOt4+JMUHkQhoDNYLHxix/O+aoEPWTPYppVCnn2Iv4ld1Yg
-	srPXNaquaQqsuC2r6QvWXSuHCXl8Cmff0H79wa93M5mRIrv9c1A7+wUgQJANMwJ+tmCG
-	DtrVkD/pmkNaTHWFk0nHUypIML2hu97ogLbL2MdFHaTEc4IKjW1P9MSsuB0W0Npxc0GT
-	+N3aeBiVk1YSy0jgVpGKxyoKilFOD/Vv8T+Ajb1nanxMs3P/IvczV+iOnJ91k6Jxvm0R
-	I31Y7TWqfDY8WMbDKZJDXkL+yP0YokDkMru9TWkeQNIy29zYkGUNPKyEKg9qZX0M6gNm
-	TNNw==
-X-Gm-Message-State: APjAAAXA2GEi74/GGePW3s2/V8SgxjywRe7J8SRhpI3LxXp+7N4NWjqX
-	aG0H7eRjwtEVOodtOfi8cGIAr/me
-X-Google-Smtp-Source: APXvYqxqPjWv0qiaWLKbi/A10vOzerdMMc5IBg+Q/gMidgTc6WVbG6PvYes8x/aLzFCudieS8tyZdg==
-X-Received: by 2002:a2e:965a:: with SMTP id z26mr7760409ljh.104.1580037370659; 
-	Sun, 26 Jan 2020 03:16:10 -0800 (PST)
-Received: from localhost.localdomain (37-247-29-68.customers.ownit.se.
-	[37.247.29.68]) by smtp.gmail.com with ESMTPSA id
-	n13sm6358820lji.91.2020.01.26.03.16.09
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Sun, 26 Jan 2020 03:16:10 -0800 (PST)
-To: Richard Leitner <richard.leitner@skidata.com>
-References: <04a167ee-e63d-c4a3-7808-26ef5e9ed884@gmail.com>
-	<965c6ca2-e7c7-5cfc-36bd-482bd7d49202@gmail.com>
-	<20200121071238.GB1567918@pcleri>
-	<9067ccd9-2961-217d-15b0-5093a0583972@gmail.com>
-	<20200124103621.GA10765@brokenbit>
-	<538daee7-cba4-8b54-6264-dce44ebcf34c@gmail.com>
-	<20200124114446.GB10765@brokenbit>
-	<95411b04-c9f2-ee4c-6004-110037325976@gmail.com>
-	<20200126111129.GA2043417@pcleri>
-From: Jacob Kroon <jacob.kroon@gmail.com>
-Message-ID: <e3f92009-692b-774f-1785-d2cd363325d1@gmail.com>
-Date: Sun, 26 Jan 2020 12:16:09 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.4.1
+	Sun, 26 Jan 2020 11:21:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1580037709; x=1611573709;
+	h=date:from:to:cc:subject:message-id:references:
+	mime-version:in-reply-to;
+	bh=b3OGX3U6YhfuOTV+qWrZOeu86TCptntiw26lW/H8pPs=;
+	b=hZgaSVKOj66fuOU3cXDAEQoG6kRzPR2MAxJbZDPC2TWdqIC3h2h6rPhh
+	2muwuTTlN+GM4ncYdRjGXCN+kPZtgsudGcK0bfmDoTx/iAbpofc8/oVHz
+	jxzbi+rATpBCWJPZEfgtlNgoUZglPX6yYMPhpz5AqzP+BOzmHDzw8SGKd
+	hwipPAQGvC7oexXd/wUViF/9BblCHCg+mintW+BZmKxJ2aBoIJtDZ71Tx
+	eNY+C+2WUsiKeZRsueUCa0BtLeEIjtlzKibJcNU6bdr3ieqplc35rSLwg
+	LrhPu2Q4g3r6swVd/9J8OMoPvHeE6KHu1sDUabH9f6OSiWTbPezny4xUx w==;
+IronPort-SDR: BfQ5Y0kkpwi+DdwoZkMWviLZ8jWwUOX1KzklqO9+RqvuF9hahtcLMeqO22lHR2/GrlkTpK9Oqx
+	OQqTNQPNb2WacaOb+2eKpa2oEfy4hEaXOFarRhLC1FdwtiA1ZHY3q9j87kBIY/TrJpUBZzvON3
+	Uy1w5Mr4Oe//pC24Wqq1MVtIbL5/DJ3BJoy5zqj3wJmL5SX0s686rqTAWzgC/2TmnrGoqTocwJ
+	SI4HCW9opQ+F75/Jhk4hTFTMPv1gU6TujMCFszo2P03VQUzP2yC/SdAO5LcRxu5Hd3utGfLHa8
+	8e4=
+X-IronPort-AV: E=Sophos;i="5.70,365,1574118000"; 
+   d="scan'208";a="2500516"
+Date: Sun, 26 Jan 2020 12:21:46 +0100
+From: Richard Leitner <richard.leitner@skidata.com>
+To: Jacob Kroon <jacob.kroon@gmail.com>
+Message-ID: <20200126112146.GB2043417@pcleri>
+References: <20200126111035.273501-1-jacob.kroon@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20200126111129.GA2043417@pcleri>
+In-Reply-To: <20200126111035.273501-1-jacob.kroon@gmail.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java] openjre-8: java from master/master-next crashes on startup
+Subject: Re: [meta-java][g0hl1n/wip-jdk8u242ga][PATCH] Fix building openjre-8 242
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,59 +46,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Jan 2020 11:16:11 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 26 Jan 2020 11:21:48 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On 1/26/20 12:11 PM, Richard Leitner wrote:
-> On Fri, Jan 24, 2020 at 01:28:52PM +0100, Jacob Kroon wrote:
->> On 1/24/20 12:44 PM, Richard Leitner wrote:
->>> On Fri, Jan 24, 2020 at 12:37:58PM +0100, Jacob Kroon wrote:
->>>> On 1/24/20 11:37 AM, Richard Leitner wrote:
->>>
->>> ...
->>>
->>>>> I've just pushed a temporary branch named "g0hl1n/wip-jdk8u242ga" to
->>>>> the meta-java repository [1]. It contains (as you might have guessed)
->>>>> the update to openjdk 8u242ga.
->>>>>
->>>>> Can you please give it a try if it works for you?
->>>>>
->>>>
->>>> I tried but I get a linker error during openjre-8_242.bb:do_compile:
->>>>
->>>> Making adlc
->>>> ...
->>>> /tmp/ramdisk/build/hosttools/ld: cannot find -lstdc++
->>>> collect2: error: ld returned 1 exit status
->>>>
->>>> This is using MACHINE=qemux86-64.
->>>>
->>>> Gonna try and fix and get the build going.
->>>
->>> Do you have "libstdc++ static" installed on your buildhost as stated in
->>> the README? ...the error let me suggest you don't have it ;-)
->>>
->>
->> Oops, yeah I missed that. That got me further, but I got a new linking
->> error:
+On Sun, Jan 26, 2020 at 12:10:35PM +0100, Jacob Kroon wrote:
+> Hi Richard,
 > 
-> As this happens in the "native" part of the openjre build:
-> What distribution and gcc version are you using on your host?
+> I need something like this in order to build on my Fedora 31 host.
+> I'm using master branches of bitbake, oe-core, meta-openembedded.
+
+Ok, then please just ignore the mail I sent some minutes ago ;-)
+
 > 
-> For me (Fedora 31) the openjdk build and runtime tests for aarch32,
-> aarch64 and x86_64 work.
+> Good thing is the crash I reported earlier seems to be fixed.
+
+Great!
+
+I'll do some tests on my side and give you feedback afterwards.
+
+Is it OK for you if i rename the "fix-build.patch" to something more
+meaningful?
+
+regards;rl
+
 > 
-
-[cut]
-
-Odd.. I'm on plain Fedora 31, with Fedora's regular gcc 9.2.1.
-I sent a patch to the ml that fixes the build for me, forgot to CC you.
-
-Maybe I have some extra headers installed that triggers something extra 
-to build..
-
-Cheers,
-Jacob
+> Cheers,
+> Jacob
+> 
+> Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
+> ---
+>  recipes-core/openjdk/openjdk-8-release-common.inc   |  1 +
+>  recipes-core/openjdk/openjre-8_242.bb               |  2 +-
+>  .../openjdk/patches-openjdk-8/fix-build.patch       | 13 +++++++++++++
+>  3 files changed, 15 insertions(+), 1 deletion(-)
+>  create mode 100644 recipes-core/openjdk/patches-openjdk-8/fix-build.patch
+> 
+> diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
+> index a8a653b..bd1b9c0 100644
+> --- a/recipes-core/openjdk/openjdk-8-release-common.inc
+> +++ b/recipes-core/openjdk/openjdk-8-release-common.inc
+> @@ -9,6 +9,7 @@ PATCHES_URI = "\
+>      file://0008-autoconf-fix-shark-build-common.patch \
+>      file://0009-prevent-debuginfo-in-favour-of-openembedded-package-.patch \
+>      file://0010-autoconf-remove-shell-variables-from-autoheader.patch \
+> +    file://fix-build.patch \
+>      ${HOTSPOT_UB_PATCH} \
+>      file://2001-jdk-comparison-between-pointer-and-integer.patch \
+>      file://2002-jdk-Allow-using-a-system-installed-libjpeg.patch \
+> diff --git a/recipes-core/openjdk/openjre-8_242.bb b/recipes-core/openjdk/openjre-8_242.bb
+> index 4ed2e6b..2c8a6a5 100644
+> --- a/recipes-core/openjdk/openjre-8_242.bb
+> +++ b/recipes-core/openjdk/openjre-8_242.bb
+> @@ -11,7 +11,7 @@ do_install() {
+>      cp -rp ${B}/images/j2re-image/* ${D}${JRE_HOME}
+>      chown -R root:root ${D}${JRE_HOME}
+>      install -m644 ${WORKDIR}/jvm.cfg  ${D}${JRE_HOME}/lib/${JDK_ARCH}/
+> -    find ${D}${JDK_HOME} -name "*.debuginfo" -exec rm {} \;
+> +    [ -d ${D}${JDK_HOME} ] && find ${D}${JDK_HOME} -name "*.debuginfo" -exec rm {} \;
+>  }
+>  
+>  FILES_${PN}_append = "\
+> diff --git a/recipes-core/openjdk/patches-openjdk-8/fix-build.patch b/recipes-core/openjdk/patches-openjdk-8/fix-build.patch
+> new file mode 100644
+> index 0000000..e35d0eb
+> --- /dev/null
+> +++ b/recipes-core/openjdk/patches-openjdk-8/fix-build.patch
+> @@ -0,0 +1,13 @@
+> +Index: jdk8u-jdk8u242-ga/jdk/make/gensrc/GensrcMisc.gmk
+> +===================================================================
+> +--- jdk8u-jdk8u242-ga.orig/jdk/make/gensrc/GensrcMisc.gmk
+> ++++ jdk8u-jdk8u242-ga/jdk/make/gensrc/GensrcMisc.gmk
+> +@@ -76,7 +76,7 @@ $(eval $(call SetupNativeCompilation,BUI
+> +     INCLUDE_FILES := $(GENSRC_SOR_SRC_FILE), \
+> +     LANG := C, \
+> +     CC := $(BUILD_CC), \
+> +-    LDEXE := $(BUILD_LD), \
+> ++    LDEXE := $(BUILD_CC), \
+> +     OBJECT_DIR := $(GENSRC_SOR_BIN), \
+> +     OUTPUT_DIR := $(GENSRC_SOR_BIN), \
+> +     PROGRAM := genSocketOptionRegistry))
+> -- 
+> 2.24.1
+> 
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
