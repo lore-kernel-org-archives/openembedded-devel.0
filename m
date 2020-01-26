@@ -1,51 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com
-	[209.85.216.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C6B577F891
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
+	[209.85.208.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C041F7F987
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Jan 2020 07:04:29 +0000 (UTC)
-Received: by mail-pj1-f65.google.com with SMTP id e11so1777525pjt.4
+	Sun, 26 Jan 2020 11:10:52 +0000 (UTC)
+Received: by mail-lj1-f193.google.com with SMTP id q8so3481470ljb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Jan 2020 23:04:31 -0800 (PST)
+	Sun, 26 Jan 2020 03:10:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=GcrPB1r2o2561KbgTm2xSsIt6ctfaGlIWydjydJ0WVQ=;
-	b=glMB70LK492C0gqiGAJ3K3d0Jl7xOSVUHWPHu6deX2X1pXqt/AakfkjZJ3J7rQxEUz
-	uD1hH4ANswTbcOQdkN0gYhL4nT5xWh5e1UxdD115lL+iuLd/+Np00X8q+TRgrnTmtd0Z
-	qWJ9MxNxgFo+k+hMFOdjrPzfAbALTkmc0QR8ZUQW2nxJGevGapUcwUXMqlrOSxy8XjzO
-	cfRv1pc7KxbsU2Ykp+Ke0RTJIO204BXRpLbKy0ZOLGAn1MUmwzYKQ1fYkoO70i01W+RC
-	Ju0ffWLoKhdO12lBOhuT2Wf4briIpNzH5+a5eAvswNmABr0SUYVDm3smGjf01J2jSxAb
-	qq0g==
+	bh=Li6X10HGnfQkQpd7ctIuGJe7eAcNixL/iMjnonghhYI=;
+	b=eE7aIidETYH6RS9Z7NnMGLLkQfWsq4XqyZ4pLHxP7BxPIjfa+sdWsyreimIy2zeuH/
+	QcEbnd9dmtToid3Beb4RzIvEYQ3bbNBXqJbL0mWcQ9csnr4pnJB7OO+/f4qVN3BGHgBz
+	FWBZ5UeCJi5QyuQ7LqfyIRtkMtRphjghhLPRzphp6+5e6nsqkyRT8Yu19E6EF//8Jglj
+	+bGJt0uuLzDpNCRdDqIwxd3sr41uMhMQ9Zd+zd9fF9JZAQh8yQsdpM43kvUPjFhhuv1x
+	54IMz0gx4GDd4og7UXevovW9RJawlpdOGioc116vtMYdlp1TE0SjUk7+16ZD1DHH7dZP
+	rnsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=GcrPB1r2o2561KbgTm2xSsIt6ctfaGlIWydjydJ0WVQ=;
-	b=MmISy7MxoQvPzx+Y+t0byi84+37S+/hNHjc1qBUjNBI/vaOuW5bR/9DTcSlj2leQzG
-	oy+/Gy2MsWlSeJRbvHGnnKxwghO9ERwgNLt7o0m4bjOxerEqTQE05GD9sM+OZ9HrUHoH
-	IPM6pEbka+J415zhoiH+LMl53GrSa2SLFE0DrRnexGh7aWwueWYI8MQn5cCRRLaWZxrg
-	qWCUXKQdroGoy3X4ogl2rqKaEUbMB4kPwlrdMh8dA7WBjrYfhWmLJScsRlVcDasPIA7N
-	N/L1WDRQ31eiYkMoQR7J2V4irvRkok6aAfaOjTRTkCdb/yjPLzsfMHmqP3WUOyhAoa5A
-	CA6w==
-X-Gm-Message-State: APjAAAV2am4GjmwFRV3bU4lBiW8egbgFh5YEAP8Q+mYTfJue4lvRFllH
-	B6Y/yYdIBRjjhGBJA8niOokfDjsdAxs=
-X-Google-Smtp-Source: APXvYqw5NXGKzslMGI/Gb54bDaoskep6tgFdt78aurwELnGCVo5Mcnfdb+oRojBCI0Q2uSTYgO3Qpg==
-X-Received: by 2002:a17:902:b089:: with SMTP id
-	p9mr12024599plr.34.1580022270514; 
-	Sat, 25 Jan 2020 23:04:30 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::c54b])
-	by smtp.gmail.com with ESMTPSA id
-	t138sm456208pfc.95.2020.01.25.23.04.29
+	bh=Li6X10HGnfQkQpd7ctIuGJe7eAcNixL/iMjnonghhYI=;
+	b=NPbi/LUUqMrSOD3zgQ0Ujqk28SxCITVDkVmPU3Q7iBu+zb09YbqHhBfumugGO1JU98
+	xkd4P7bh0v6uWt2KPEYbAbDxUeEw/w/hQ+rHrSwRJ2k0Jh0j8vh0TLLJrJRicOwYZ9jT
+	NONKDUcUJbkremrGsXgyXSFtQEVDABhtQPYgWQlvxq+kNFJRZ6Wzy64b+9IiidLr8jjQ
+	nuAA8azxc/DIn0CJpe10MCEilKCvhtS+bzNmooxQj2sH+ij47v61apMmVTV0XYg9q9WY
+	0L2tSBfOXMGq6htSrAo6fun5G8SNMdhJzbjtKcnq2JckaLd09kuD9pYsaHbByYPGG3U0
+	p0HQ==
+X-Gm-Message-State: APjAAAUbIvRE/3o55lBfaTdXe5nil79xe2qc5OGyPKGHC5ibe6h86KYu
+	XmAbjMDjEhJtXIiu3vRX+zNnaY1/
+X-Google-Smtp-Source: APXvYqy4hrrIpQ4YA8tl1qDbOz9aSj4vlfVk0zzduIHGAV6mNGFj5bb+4JKboQMFdXy1oKh8CPYjXQ==
+X-Received: by 2002:a2e:b1d4:: with SMTP id e20mr7515288lja.27.1580037052850; 
+	Sun, 26 Jan 2020 03:10:52 -0800 (PST)
+Received: from localhost.localdomain (37-247-29-68.customers.ownit.se.
+	[37.247.29.68]) by smtp.gmail.com with ESMTPSA id
+	r10sm6520573ljk.99.2020.01.26.03.10.51
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 25 Jan 2020 23:04:30 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Sun, 26 Jan 2020 03:10:52 -0800 (PST)
+From: Jacob Kroon <jacob.kroon@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 25 Jan 2020 23:04:32 -0800
-Message-Id: <20200126070432.66275-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.0
+Date: Sun, 26 Jan 2020 12:10:35 +0100
+Message-Id: <20200126111035.273501-1-jacob.kroon@gmail.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] luajit: Mark incompatible for riscv64
+Subject: [meta-java][g0hl1n/wip-jdk8u242ga][PATCH] Fix building openjre-8 242
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +58,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Jan 2020 07:04:30 -0000
+X-List-Received-Date: Sun, 26 Jan 2020 11:10:53 -0000
 Content-Transfer-Encoding: 8bit
 
-rv64 support is not yet available
+Hi Richard,
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+I need something like this in order to build on my Fedora 31 host.
+I'm using master branches of bitbake, oe-core, meta-openembedded.
+
+Good thing is the crash I reported earlier seems to be fixed.
+
+Cheers,
+Jacob
+
+Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
 ---
- meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ recipes-core/openjdk/openjdk-8-release-common.inc   |  1 +
+ recipes-core/openjdk/openjre-8_242.bb               |  2 +-
+ .../openjdk/patches-openjdk-8/fix-build.patch       | 13 +++++++++++++
+ 3 files changed, 15 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/fix-build.patch
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-index d0dc1c28dd..93128dda83 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-@@ -90,10 +90,11 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
- "
- FILES_luajit-common = "${datadir}/${BPN}-${PV}"
+diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
+index a8a653b..bd1b9c0 100644
+--- a/recipes-core/openjdk/openjdk-8-release-common.inc
++++ b/recipes-core/openjdk/openjdk-8-release-common.inc
+@@ -9,6 +9,7 @@ PATCHES_URI = "\
+     file://0008-autoconf-fix-shark-build-common.patch \
+     file://0009-prevent-debuginfo-in-favour-of-openembedded-package-.patch \
+     file://0010-autoconf-remove-shell-variables-from-autoheader.patch \
++    file://fix-build.patch \
+     ${HOTSPOT_UB_PATCH} \
+     file://2001-jdk-comparison-between-pointer-and-integer.patch \
+     file://2002-jdk-Allow-using-a-system-installed-libjpeg.patch \
+diff --git a/recipes-core/openjdk/openjre-8_242.bb b/recipes-core/openjdk/openjre-8_242.bb
+index 4ed2e6b..2c8a6a5 100644
+--- a/recipes-core/openjdk/openjre-8_242.bb
++++ b/recipes-core/openjdk/openjre-8_242.bb
+@@ -11,7 +11,7 @@ do_install() {
+     cp -rp ${B}/images/j2re-image/* ${D}${JRE_HOME}
+     chown -R root:root ${D}${JRE_HOME}
+     install -m644 ${WORKDIR}/jvm.cfg  ${D}${JRE_HOME}/lib/${JDK_ARCH}/
+-    find ${D}${JDK_HOME} -name "*.debuginfo" -exec rm {} \;
++    [ -d ${D}${JDK_HOME} ] && find ${D}${JDK_HOME} -name "*.debuginfo" -exec rm {} \;
+ }
  
--# Aarch64/mips64/ppc/ppc64 is not supported in this release
-+# Aarch64/mips64/ppc/ppc64/riscv64 is not supported in this release
- COMPATIBLE_HOST_aarch64 = "null"
- COMPATIBLE_HOST_mipsarchn32 = "null"
- COMPATIBLE_HOST_mipsarchn64 = "null"
- COMPATIBLE_HOST_powerpc = "null"
- COMPATIBLE_HOST_powerpc64 = "null"
- COMPATIBLE_HOST_powerpc64le = "null"
-+COMPATIBLE_HOST_riscv64 = "null"
+ FILES_${PN}_append = "\
+diff --git a/recipes-core/openjdk/patches-openjdk-8/fix-build.patch b/recipes-core/openjdk/patches-openjdk-8/fix-build.patch
+new file mode 100644
+index 0000000..e35d0eb
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/fix-build.patch
+@@ -0,0 +1,13 @@
++Index: jdk8u-jdk8u242-ga/jdk/make/gensrc/GensrcMisc.gmk
++===================================================================
++--- jdk8u-jdk8u242-ga.orig/jdk/make/gensrc/GensrcMisc.gmk
+++++ jdk8u-jdk8u242-ga/jdk/make/gensrc/GensrcMisc.gmk
++@@ -76,7 +76,7 @@ $(eval $(call SetupNativeCompilation,BUI
++     INCLUDE_FILES := $(GENSRC_SOR_SRC_FILE), \
++     LANG := C, \
++     CC := $(BUILD_CC), \
++-    LDEXE := $(BUILD_LD), \
+++    LDEXE := $(BUILD_CC), \
++     OBJECT_DIR := $(GENSRC_SOR_BIN), \
++     OUTPUT_DIR := $(GENSRC_SOR_BIN), \
++     PROGRAM := genSocketOptionRegistry))
 -- 
-2.25.0
+2.24.1
 
 
