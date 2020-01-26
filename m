@@ -1,51 +1,46 @@
-Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C041F7F987
+Return-Path: <prvs=2877070d8=Richard.Leitner@skidata.com>
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 549267F987
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Jan 2020 11:10:52 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id q8so3481470ljb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 26 Jan 2020 03:10:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Li6X10HGnfQkQpd7ctIuGJe7eAcNixL/iMjnonghhYI=;
-	b=eE7aIidETYH6RS9Z7NnMGLLkQfWsq4XqyZ4pLHxP7BxPIjfa+sdWsyreimIy2zeuH/
-	QcEbnd9dmtToid3Beb4RzIvEYQ3bbNBXqJbL0mWcQ9csnr4pnJB7OO+/f4qVN3BGHgBz
-	FWBZ5UeCJi5QyuQ7LqfyIRtkMtRphjghhLPRzphp6+5e6nsqkyRT8Yu19E6EF//8Jglj
-	+bGJt0uuLzDpNCRdDqIwxd3sr41uMhMQ9Zd+zd9fF9JZAQh8yQsdpM43kvUPjFhhuv1x
-	54IMz0gx4GDd4og7UXevovW9RJawlpdOGioc116vtMYdlp1TE0SjUk7+16ZD1DHH7dZP
-	rnsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Li6X10HGnfQkQpd7ctIuGJe7eAcNixL/iMjnonghhYI=;
-	b=NPbi/LUUqMrSOD3zgQ0Ujqk28SxCITVDkVmPU3Q7iBu+zb09YbqHhBfumugGO1JU98
-	xkd4P7bh0v6uWt2KPEYbAbDxUeEw/w/hQ+rHrSwRJ2k0Jh0j8vh0TLLJrJRicOwYZ9jT
-	NONKDUcUJbkremrGsXgyXSFtQEVDABhtQPYgWQlvxq+kNFJRZ6Wzy64b+9IiidLr8jjQ
-	nuAA8azxc/DIn0CJpe10MCEilKCvhtS+bzNmooxQj2sH+ij47v61apMmVTV0XYg9q9WY
-	0L2tSBfOXMGq6htSrAo6fun5G8SNMdhJzbjtKcnq2JckaLd09kuD9pYsaHbByYPGG3U0
-	p0HQ==
-X-Gm-Message-State: APjAAAUbIvRE/3o55lBfaTdXe5nil79xe2qc5OGyPKGHC5ibe6h86KYu
-	XmAbjMDjEhJtXIiu3vRX+zNnaY1/
-X-Google-Smtp-Source: APXvYqy4hrrIpQ4YA8tl1qDbOz9aSj4vlfVk0zzduIHGAV6mNGFj5bb+4JKboQMFdXy1oKh8CPYjXQ==
-X-Received: by 2002:a2e:b1d4:: with SMTP id e20mr7515288lja.27.1580037052850; 
-	Sun, 26 Jan 2020 03:10:52 -0800 (PST)
-Received: from localhost.localdomain (37-247-29-68.customers.ownit.se.
-	[37.247.29.68]) by smtp.gmail.com with ESMTPSA id
-	r10sm6520573ljk.99.2020.01.26.03.10.51
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 26 Jan 2020 03:10:52 -0800 (PST)
-From: Jacob Kroon <jacob.kroon@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 26 Jan 2020 12:10:35 +0100
-Message-Id: <20200126111035.273501-1-jacob.kroon@gmail.com>
-X-Mailer: git-send-email 2.24.1
+	Sun, 26 Jan 2020 11:11:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1580037090; x=1611573090;
+	h=date:from:to:cc:subject:message-id:references:
+	mime-version:in-reply-to;
+	bh=qnBkWajC8ZReBkyrd+5pq7RMKjfnZ2ZE5kxkxJh9EdE=;
+	b=gJyofA3C2+VMb8JjhyEwkwF9ypXYXJ2Qfvx2F4UGlycOLhn+lsCvTHly
+	Au++jmwC5GLXT8uQrUGaOnZBDKvo2vgJ/YBFKq8q8rm2nTvkU2ryHIcpY
+	ZJp6pE/8WoNY9F/6l4FwBoNSrIMU7/h9qeP/AqpnnuCfncYiS3Yr9lGum
+	L7Pf4p1GhHETo2hMccyP4rvCGrrKnBreNnvbOLQjYp9svDEZl52/DfU/3
+	r2q37E3tDSTyI2XzADD2/gGStgMVH7dlKMLZaG5VjdPE9EkPVLOS0Q2QX
+	nL39GFzckiBR8oelpvlAc4k+PORZU2clIoh69YC4IU51LrAjGQf1YSksF A==;
+IronPort-SDR: nKPLBRLiie/ubNrds45Pth1Id3IbK2qRzBxxZIkEL1dw+/vXont+Hcen7IGGOaGhzx0/LwoxeF
+	96+Nz5lhdYdGTxEid8kwzsS4vNlXdpennt56FCTxWlkpTI1Vjq5w+uE4r1MRnqRE1+r7XaZXBH
+	XKhsQbZ431BJUWoGSlZRxD+TgsE/xbvxC8HLDbTkftvlLIMjDTCU+y/a3bIHIIFFEU0JCa9Y2r
+	upjxGCVzG6+Sj/iqKmFMXMruy563rqzckgWSigHLT5I5fzRAeAYl0lbONaSMeD6NX5JhOhbBGJ
+	DV8=
+X-IronPort-AV: E=Sophos;i="5.70,365,1574118000"; 
+   d="scan'208";a="2500515"
+Date: Sun, 26 Jan 2020 12:11:29 +0100
+From: Richard Leitner <richard.leitner@skidata.com>
+To: Jacob Kroon <jacob.kroon@gmail.com>
+Message-ID: <20200126111129.GA2043417@pcleri>
+References: <04a167ee-e63d-c4a3-7808-26ef5e9ed884@gmail.com>
+	<965c6ca2-e7c7-5cfc-36bd-482bd7d49202@gmail.com>
+	<20200121071238.GB1567918@pcleri>
+	<9067ccd9-2961-217d-15b0-5093a0583972@gmail.com>
+	<20200124103621.GA10765@brokenbit>
+	<538daee7-cba4-8b54-6264-dce44ebcf34c@gmail.com>
+	<20200124114446.GB10765@brokenbit>
+	<95411b04-c9f2-ee4c-6004-110037325976@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-java][g0hl1n/wip-jdk8u242ga][PATCH] Fix building openjre-8 242
+In-Reply-To: <95411b04-c9f2-ee4c-6004-110037325976@gmail.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java] openjre-8: java from master/master-next crashes on startup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,72 +53,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 26 Jan 2020 11:10:53 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 26 Jan 2020 11:11:29 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-Hi Richard,
+On Fri, Jan 24, 2020 at 01:28:52PM +0100, Jacob Kroon wrote:
+> On 1/24/20 12:44 PM, Richard Leitner wrote:
+> > On Fri, Jan 24, 2020 at 12:37:58PM +0100, Jacob Kroon wrote:
+> > > On 1/24/20 11:37 AM, Richard Leitner wrote:
+> > 
+> > ...
+> > 
+> > > > I've just pushed a temporary branch named "g0hl1n/wip-jdk8u242ga" to
+> > > > the meta-java repository [1]. It contains (as you might have guessed)
+> > > > the update to openjdk 8u242ga.
+> > > > 
+> > > > Can you please give it a try if it works for you?
+> > > > 
+> > > 
+> > > I tried but I get a linker error during openjre-8_242.bb:do_compile:
+> > > 
+> > > Making adlc
+> > > ...
+> > > /tmp/ramdisk/build/hosttools/ld: cannot find -lstdc++
+> > > collect2: error: ld returned 1 exit status
+> > > 
+> > > This is using MACHINE=qemux86-64.
+> > > 
+> > > Gonna try and fix and get the build going.
+> > 
+> > Do you have "libstdc++ static" installed on your buildhost as stated in
+> > the README? ...the error let me suggest you don't have it ;-)
+> > 
+> 
+> Oops, yeah I missed that. That got me further, but I got a new linking
+> error:
 
-I need something like this in order to build on my Fedora 31 host.
-I'm using master branches of bitbake, oe-core, meta-openembedded.
+As this happens in the "native" part of the openjre build:
+What distribution and gcc version are you using on your host?
 
-Good thing is the crash I reported earlier seems to be fixed.
+For me (Fedora 31) the openjdk build and runtime tests for aarch32,
+aarch64 and x86_64 work.
 
-Cheers,
-Jacob
+regards;rl
 
-Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
----
- recipes-core/openjdk/openjdk-8-release-common.inc   |  1 +
- recipes-core/openjdk/openjre-8_242.bb               |  2 +-
- .../openjdk/patches-openjdk-8/fix-build.patch       | 13 +++++++++++++
- 3 files changed, 15 insertions(+), 1 deletion(-)
- create mode 100644 recipes-core/openjdk/patches-openjdk-8/fix-build.patch
-
-diff --git a/recipes-core/openjdk/openjdk-8-release-common.inc b/recipes-core/openjdk/openjdk-8-release-common.inc
-index a8a653b..bd1b9c0 100644
---- a/recipes-core/openjdk/openjdk-8-release-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-release-common.inc
-@@ -9,6 +9,7 @@ PATCHES_URI = "\
-     file://0008-autoconf-fix-shark-build-common.patch \
-     file://0009-prevent-debuginfo-in-favour-of-openembedded-package-.patch \
-     file://0010-autoconf-remove-shell-variables-from-autoheader.patch \
-+    file://fix-build.patch \
-     ${HOTSPOT_UB_PATCH} \
-     file://2001-jdk-comparison-between-pointer-and-integer.patch \
-     file://2002-jdk-Allow-using-a-system-installed-libjpeg.patch \
-diff --git a/recipes-core/openjdk/openjre-8_242.bb b/recipes-core/openjdk/openjre-8_242.bb
-index 4ed2e6b..2c8a6a5 100644
---- a/recipes-core/openjdk/openjre-8_242.bb
-+++ b/recipes-core/openjdk/openjre-8_242.bb
-@@ -11,7 +11,7 @@ do_install() {
-     cp -rp ${B}/images/j2re-image/* ${D}${JRE_HOME}
-     chown -R root:root ${D}${JRE_HOME}
-     install -m644 ${WORKDIR}/jvm.cfg  ${D}${JRE_HOME}/lib/${JDK_ARCH}/
--    find ${D}${JDK_HOME} -name "*.debuginfo" -exec rm {} \;
-+    [ -d ${D}${JDK_HOME} ] && find ${D}${JDK_HOME} -name "*.debuginfo" -exec rm {} \;
- }
- 
- FILES_${PN}_append = "\
-diff --git a/recipes-core/openjdk/patches-openjdk-8/fix-build.patch b/recipes-core/openjdk/patches-openjdk-8/fix-build.patch
-new file mode 100644
-index 0000000..e35d0eb
---- /dev/null
-+++ b/recipes-core/openjdk/patches-openjdk-8/fix-build.patch
-@@ -0,0 +1,13 @@
-+Index: jdk8u-jdk8u242-ga/jdk/make/gensrc/GensrcMisc.gmk
-+===================================================================
-+--- jdk8u-jdk8u242-ga.orig/jdk/make/gensrc/GensrcMisc.gmk
-++++ jdk8u-jdk8u242-ga/jdk/make/gensrc/GensrcMisc.gmk
-+@@ -76,7 +76,7 @@ $(eval $(call SetupNativeCompilation,BUI
-+     INCLUDE_FILES := $(GENSRC_SOR_SRC_FILE), \
-+     LANG := C, \
-+     CC := $(BUILD_CC), \
-+-    LDEXE := $(BUILD_LD), \
-++    LDEXE := $(BUILD_CC), \
-+     OBJECT_DIR := $(GENSRC_SOR_BIN), \
-+     OUTPUT_DIR := $(GENSRC_SOR_BIN), \
-+     PROGRAM := genSocketOptionRegistry))
--- 
-2.24.1
-
+> 
+> > | Linking executable genSocketOptionRegistry
+> > | gensrc/GensrcMisc.gmk:75: Building /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genSocketOptionRegistry/genSocketOptionRegistry  (from /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genSocketOptionRegistry/genSocketOptionRegi
+> > stry.o) (/tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genSocketOptionRegistry/genSocketOptionRegistry.o  newer)
+> > | + /tmp/ramdisk/build/hosttools/gcc /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genUnixConstants/genUnixConstants.o -o /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genUnixConstants/genUnixConstants
+> > | + /tmp/ramdisk/build/hosttools/ld /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genSocketOptionRegistry/genSocketOptionRegistry.o -o /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genSocketOptionRegistry/genSocket
+> > OptionRegistry
+> > | /tmp/ramdisk/build/hosttools/ld: warning: cannot find entry symbol _start; defaulting to 0000000000401000
+> > | /tmp/ramdisk/build/hosttools/ld: /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genSocketOptionRegistry/genSocketOptionRegistry.o: in function `out':
+> > | genSocketOptionRegistry.c:(.text+0x14): undefined reference to `puts'
+> > | /tmp/ramdisk/build/hosttools/ld: /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genSocketOptionRegistry/genSocketOptionRegistry.o: in function `emit':
+> > | genSocketOptionRegistry.c:(.text+0x47): undefined reference to `printf'
+> > | /tmp/ramdisk/build/hosttools/ld: genSocketOptionRegistry.c:(.text+0x5e): undefined reference to `printf'
+> > | make[2]: *** [gensrc/GensrcMisc.gmk:75: /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btnative/genSocketOptionRegistry/genSocketOptionRegistry] Error 1
+> > | make[2]: *** Waiting for unfinished jobs....
+> > | Note: Some input files use unchecked or unsafe operations.
+> > | Note: Recompile with -Xlint:unchecked for details.
+> > | + /tmp/ramdisk/build/hosttools/mv /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btclasses/_the.BUILD_TOOLS_batch.tmp /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/build/jdk/btclasses/_the.BUILD_TOOLS_batch
+> > | make[1]: *** [BuildJdk.gmk:55: gensrc-only] Error 2
+> > | make: *** [/tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/jdk8u-jdk8u242-ga//make/Main.gmk:117: jdk-only] Error 2
+> > | WARNING: /tmp/ramdisk/build/work/core2-64-oe-linux/openjre-8/242-r0/temp/run.do_compile.384980:1 exit 1 from 'exit 1'
+> 
+> 
 
