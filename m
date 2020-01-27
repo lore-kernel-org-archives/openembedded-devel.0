@@ -1,47 +1,40 @@
-Return-Path: <andrey.z@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id CB0E07F98F
+Return-Path: <obi@opendreambox.org>
+Received: from relay.dream-property.net (relay.dream-property.net
+	[178.19.67.222])
+	by mail.openembedded.org (Postfix) with ESMTP id C3B457FA0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 23:12:46 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id b6so13819950wrq.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 15:12:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Fv5I2GB5lnMXhQaITACbXOjD1wH200O+AXOpn6G0N0w=;
-	b=nFSB/vQ6oS9IXbmi9ypCQ6UwRIPs2Obrqai8AHo6D1hXnT/SrPg4r0Ua2nl/JjsKNn
-	6n78YvPf6cCLzK+ze6Ox9z/ll4E3KYEV3I40JiD0jTc1t75n39jGuDOuS7li2+zawvvC
-	OSVtFvnXIGcw6115/4FN5nwtvjttJRA5oRnr9dc5krnDJ/WTXkHDLWD/NhC76bDaDngO
-	o1U/ywq9aYkEYJyD6AWQo+l0Mcpj0RH4cS6iWdcYtHVSetmJBimdL/8ts40FuSpkaw6e
-	6H3fc/kiD+AGjsRHt11WsBGcQ8oPy23ig+ZnPw1EvSjKoCee2uXxs/KGJx3Jr8YWQQF1
-	3jGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Fv5I2GB5lnMXhQaITACbXOjD1wH200O+AXOpn6G0N0w=;
-	b=DRBw8kmLMTL7cPPoiGu2/xy7VUSukLU8V1g7SjPP7pAI5grImyUZvUwdzs16lqZumm
-	65dZ3jX4wgqICR9DxUhSu1OyS388ak2w9Rrjiey/QTExxVUyCpsBygITQZWgqCZG6jlY
-	Emyq6XOhXIwC6chgisnLcTipCxV/5wP2mK2X4p/qMN5u3ZIzMdYAA67F8+cWUO+7RNi8
-	tcvT6qSv/oP4yW3ZZqpx7RI5mdpW0V0kBLGOnI1WfifB2nSV/mJNVWcgvSoeRvLU1gYj
-	EMeeCSrSdXh8MyKStF3dcl1L4JyqxvboVhXCWFCrLC+kh/o55Oe0/njWfRfPgCgyU/nc
-	fzBw==
-X-Gm-Message-State: APjAAAVb382lX7Hi/VVJfkm3BnCXLetmPjMv/znLqNMvdcGvaOWGtusi
-	Xz5NGvFVSTM0wpFj8fAMtK+CTlrdTGA=
-X-Google-Smtp-Source: APXvYqz9pYb5PpXlprXSvnQbp2sALGCzcLZHc0/pD81RdeHfsezC7mqVMZQDff0RxfWAt5qXkBhGDA==
-X-Received: by 2002:a5d:49c3:: with SMTP id t3mr24064515wrs.113.1580166767348; 
-	Mon, 27 Jan 2020 15:12:47 -0800 (PST)
-Received: from lab-linux-pc.tendawifi.com (cable-static2-2-7.rsnweb.ch.
-	[146.185.2.7]) by smtp.gmail.com with ESMTPSA id
-	g2sm22252592wrw.76.2020.01.27.15.12.46
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 27 Jan 2020 15:12:47 -0800 (PST)
-From: Andrey Zhizhikin <andrey.z@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Jan 2020 23:12:34 +0000
-Message-Id: <20200127231234.26090-1-andrey.z@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python2][PATCH] dnssec-conf: move recipe from oe-core to meta-python2
+	Mon, 27 Jan 2020 23:45:10 +0000 (UTC)
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by relay.dream-property.net (Postfix) with ESMTPS id 7401310045D60;
+	Mon, 27 Jan 2020 23:45:11 +0000 (UTC)
+Received: from localhost (ip-176-199-141-47.hsi06.unitymediagroup.de
+	[176.199.141.47])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits)
+	server-digest SHA256) (No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id BD9B4314001C;
+	Tue, 28 Jan 2020 00:45:10 +0100 (CET)
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=opendreambox.org; 
+	s=dkim; t=1580168710;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	content-transfer-encoding:content-transfer-encoding:
+	in-reply-to:in-reply-to:references:references;
+	bh=hRSZSeF3nsTrujlFdA+x9UG95eeTSGllxHRBPbR8aW8=;
+	b=I/CxGGPZvcYS6gkBtHjmIu32SYhPzru1g7eSIwHE9+MlMTtJigxW07/UdI9q9fhAJOtSeu
+	KMylw/b/z6WP3WAg==
+Date: Tue, 28 Jan 2020 00:45:08 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+To: Andrey Zhizhikin <andrey.z@gmail.com>
+Message-ID: <20200128004508.6cb940a3@opendreambox.org>
+In-Reply-To: <CAHtQpK7Owmuf6ks=ysjgTz6qCYyhspJD+wFYuJrzg-D3cM5rXw@mail.gmail.com>
+References: <20200127173608.24874-1-andrey.zhizhikin@leica-geosystems.com>
+	<20200127211618.28e763ec@opendreambox.org>
+	<CAHtQpK7Owmuf6ks=ysjgTz6qCYyhspJD+wFYuJrzg-D3cM5rXw@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [RFC] Manage python symlinks with update-alternatives
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,62 +47,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 23:12:47 -0000
+X-List-Received-Date: Mon, 27 Jan 2020 23:45:11 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-dnssec-conf did not receive any updates since 2010 and relies heavily on
-python2 code base.
+Hi Andrey, everybody,
 
-Move recipe to this layer, since python2 support has been dropped in
-oe-core.
+This was "[meta-oe][PATCH 1/3] pcsc-lite: update recipe to use python3", wh=
+ere I suggested to use update-alternatives for python.
 
-Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
----
- .../dnssec-conf/dnssec-conf_2.02.bb           | 35 +++++++++++++++++++
- 1 file changed, 35 insertions(+)
- create mode 100644 recipes-support/dnssec-conf/dnssec-conf_2.02.bb
+I changed the topic in the hope of gaining a wider audience. Please don't s=
+kip the quoted text:
 
-diff --git a/recipes-support/dnssec-conf/dnssec-conf_2.02.bb b/recipes-support/dnssec-conf/dnssec-conf_2.02.bb
-new file mode 100644
-index 0000000..ca59bd2
---- /dev/null
-+++ b/recipes-support/dnssec-conf/dnssec-conf_2.02.bb
-@@ -0,0 +1,35 @@
-+SUMMARY = "DNSSEC and DLV configuration and priming tool"
-+DESCRIPTION = "\
-+DNSSEC configuration and priming tool. Keys are required until the root \
-+is signed, as well as for local unpublished DNSSEC keys to be preloaded \
-+into the recursive nameserver. These DNSSEC configuration files can be \
-+directly included in the bind or unbound nameserver configuration files. \
-+dnssec-conf includes a commandline configuration client for Bind and \
-+Unbound, known DNSSEC keys, URL's to official publication pages of keys, \
-+and harvested keys, as well a script to harvest DNSKEY's from DNS. \
-+See also: system-config-dnssec"
-+HOMEPAGE = "https://github.com/xelerance/dnssec-conf"
-+SECTION = "net"
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=0636e73ff0215e8d672dc4c32c317bb3"
-+DEPENDS += "xmlto-native docbook-xml-dtd4-native \
-+            docbook-xsl-stylesheets-native libxslt-native"
-+
-+SRC_URI = "git://github.com/xelerance/dnssec-conf.git"
-+SRCREV = "8e799683736b4a7b5e5e78f98fba0a6f48393537"
-+
-+S = "${WORKDIR}/git"
-+
-+do_install () {
-+    rm -rf ${D}
-+    make PREFIX=${prefix} DESTDIR=${D} ETCDIR=${D}${sysconfdir} install
-+    # We no longer ship trust anchors. Most of these are in the DLV Registry now.
-+    # and it prevents the problem of shipping outdated trust anchors.
-+    # For DLV, we ship the ISC DLV Registry key
-+    rm -rf ${D}${sysconfdir}/pki/dnssec-keys/harvest/*
-+    rm -rf ${D}${sysconfdir}/pki/dnssec-keys/production/reverse/*
-+    install -d -m 0755 ${D}${sysconfdir}/sysconfig
-+    install -m 0644 packaging/fedora/dnssec.sysconfig ${D}${sysconfdir}/sysconfig/dnssec
-+}
-+
-+RDEPENDS_${PN} = "python"
--- 
-2.17.1
+On Mon, 27 Jan 2020 23:42:50 +0100
+Andrey Zhizhikin <andrey.z@gmail.com> wrote:
 
+> Hi Andreas,
+>=20
+> On Mon, Jan 27, 2020 at 9:16 PM Andreas Oberritter <obi@opendreambox.org>=
+ wrote:
+> >
+> > Hi Andrey,
+> >
+> > On Mon, 27 Jan 2020 17:36:06 +0000
+> > Andrey Zhizhikin <andrey.z@gmail.com> wrote:
+> > > +--- a/src/spy/pcsc-spy
+> > > ++++ b/src/spy/pcsc-spy
+> > > +@@ -1,4 +1,4 @@
+> > > +-#! /usr/bin/python
+> > > ++#!/usr/bin/env python3
+> > > +
+> > > + """
+> > > + #    Display PC/SC functions arguments
+> > > +@@ -22,12 +22,7 @@ from __future__ import print_function
+> > > + import os
+> > > + import signal
+> > > + import time
+> > > +-try:
+> > > +-    # for Python3
+> > > +-    from queue import Queue
+> > > +-except ImportError:
+> > > +-    # for Python2
+> > > +-    from Queue import Queue
+> > > ++from queue import Queue
+> > > + from threading import Thread
+> > > + from operator import attrgetter
+> > > +
+> > > +--
+> > > +2.17.1
+> > > +
+> >
+> > This patch would not have been necessary if we managed the python symli=
+nk with update-alternatives. I'm doing this in my layer. Maybe that would b=
+e a better way to go? I won't be able to build master in the next days or w=
+eeks, but if you want to try and submit it, here's what I have in my bbappe=
+nds:
+> >
+> > python_%.bbappend:
+> >
+> > inherit update-alternatives
+> >
+> > ALTERNATIVE_${PN}-core =3D "python"
+> > ALTERNATIVE_TARGET[python] =3D "${bindir}/python2"
+> > ALTERNATIVE_PRIORITY =3D "2"
+> >
+> > do_install_append_class-target() {
+> >     rm -f ${D}${bindir}/python
+> > }
+> >
+> > python3_%.bbappend:
+> >
+> > inherit update-alternatives
+> >
+> > ALTERNATIVE_${PN}-core =3D "python"
+> > ALTERNATIVE_TARGET[python] =3D "${bindir}/python3"
+> > ALTERNATIVE_PRIORITY =3D "3"
+>=20
+> That is an interesting suggestion... The only potential problem with
+> this one I see is that when target would require to have both versions
+> (2 and 3) then it might be interpreted wrong. This patch states
+> explicitly that python3 is the interpreter of choice, with
+> update-alternatives I would never be sure what would land up on my
+> device.
+
+In the case of your patch, this would have been no problem, because the pat=
+ched
+file had support for both Pythons.
+
+=46rom a distro owner's point of view, the priorities define which one gets
+preferred.
+
+This should be in line with PEP 394, and I think having a python symlink
+always beats having none. :)
+
+To explain the reasoning behind my approach a litte more: People want to wr=
+ite
+Python scripts compatible with both new and old devices. Many old devices w=
+on't
+ever get a Python 3 interpreter. It's possible to gain full compatibility on
+a source code level, but you can never autodetect whether python2, python3 =
+or
+both are installed in $PATH with a single shebang. Also, people are already
+used to not knowing whether python points to python2 or python3 (see Arch L=
+inux).
+
+Of course, many of you expect to have all scripts under control of OE, but =
+what
+I primarily have in mind are the device owners, who just copy over their sc=
+ripts
+with SSH.
+
+Additionally, every patch that's not present in OE is a win for maintainabi=
+lity.
+
+Best regards,
+Andreas
 
