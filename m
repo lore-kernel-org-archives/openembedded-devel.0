@@ -1,50 +1,49 @@
 Return-Path: <andrey.z@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EBA977FE60
+Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com
+	[209.85.128.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A5EC37FE47
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 21:04:32 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id c9so13344555wrw.8
+	Mon, 27 Jan 2020 21:08:02 +0000 (UTC)
+Received: by mail-wm1-f67.google.com with SMTP id g1so76003wmh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 13:04:34 -0800 (PST)
+	Mon, 27 Jan 2020 13:08:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=M4ZKzN+Hkji8tPgSe0mHY+LyFMjDRWFV82yv1KKEv4E=;
-	b=pBZMRnkyvIAX0LO7nHIYt2RuO/j/VCJzUINhkB/H2TdSQu8ghdVZUH2PPVIo8Uy2V9
-	lWBnPO9RJ4odkI1TDOGaYrJ9Kpd+banzd1z9rHE6VSVKRiynqCx806eoUV2ihFh8E+r/
-	3j3XLIM9qQTyej4+xQPdDXGuW4T+y4kgNd24qkF54FcX0So0lj3ClfS5j7lXqEnwD9Gf
-	UfkWGboRsfKFuywVTrywg1Fu9Qn2NtADQezynaxh4s8J9AaAnaEqGi79vxd0Y30j0698
-	xmVabzrIetCGX8Yta96MMrO/STBXDl0sGe63Jx2uv4vzBO+jgNYOL+s6M9yACUfeNOPN
-	x3Rw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=1t2YWovXMZQUWxjo0oT9A0JOJs7oxnbhmPjkZbLplx0=;
+	b=NdAOMUnYc9Pe7xtCOh9l3bciGvAXw1fs3jARg8cEuxQOaN9Lz1XgUL90IgmCa7Uhtb
+	qFEUedUkP4KTYf7qDCpE8C4UFZ36Gz2CMWC1iKuDv+9vf1ME8qPLBqfGXHtQ8qsuJPWN
+	vPNCo08uDoRSEhQuDttuh4jRWIAVIl0Ja5DbCWKUXOwdohLNg3zpoWodLInWE5oR0/XO
+	/qjg0smOqan+xM2hqzg59SGkdL8teDv9AGht8tBJlit22lvdOBVEouF6xrz/a9x+C5x1
+	mA8ift8A/OeNTz5ZCQlY1S4Du4/MSbCPfAb7pXEwrVTF01o6He+g90Uq/cGZJPhhjOgg
+	KaMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=M4ZKzN+Hkji8tPgSe0mHY+LyFMjDRWFV82yv1KKEv4E=;
-	b=SNqIN34cT0ch31r9Wclj5nTNN2EezFazVqdKb3um29U/S8v2/w9lcZXsssHLFYACqK
-	bcbL3qyFKfHSaNwtHWmXbAHjB7r4kV1u8u+VhFFa82BLsmLUx4dCmLpIfGTT58+LADSK
-	t86bq5nLA75Di0vXjc/yCMENAV8WAAo+xbKnEpGcYmPuP6AeyzFAdEntgXpH/loqPWPf
-	78yMDwgd3KJjy+NvnyWoZhsI7sjbs2Vr8M4byYmX5AUBi92CC6WO7Y2yuiWJN0XPYdeR
-	6Xi8PDmvDDL/SkqCqgUBHZkGQzfvSbBP/nCEKS4LPHsq9xvcpdW1PnIJEGSiqsTGs7JN
-	ikmA==
-X-Gm-Message-State: APjAAAXmHxTW7ZJSube3UgPZBd+giU3z7O+yeLqZsBTAJrc2S6VwPsWw
-	64kAaGdN6Q+UKCUwD5ygJ8KYJjjKAXw=
-X-Google-Smtp-Source: APXvYqyU3wwRw4wc+tW42tfMZyYhXP66LeXuDycluZ0LsF7c1PSLLIhEXI/wOQu0fNnxRg88Obk28Q==
-X-Received: by 2002:a5d:494b:: with SMTP id r11mr23515637wrs.184.1580159073444;
-	Mon, 27 Jan 2020 13:04:33 -0800 (PST)
-Received: from lab-linux-pc.tendawifi.com (cable-static2-2-7.rsnweb.ch.
-	[146.185.2.7]) by smtp.gmail.com with ESMTPSA id
-	m3sm21787004wrs.53.2020.01.27.13.04.32
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 27 Jan 2020 13:04:33 -0800 (PST)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=1t2YWovXMZQUWxjo0oT9A0JOJs7oxnbhmPjkZbLplx0=;
+	b=tFTbMRFt9NBKKoV+JiNSurFbvNMXJacsNfs/pAuEo+oHrpLJ7DMzkXzDEbo7ENWFDr
+	I9DnQt+NgmML9c2bklBrD41NgAd0My1zQtOdQo96JJmdTH5+1MIbag2JH2jQliEs808C
+	BE7Vm9yNC1cs8kosqaqWnsP/T1IG5tAx+zpBN5if3i9ln0fSjDI+wE/B5AOGP5g4Uv3b
+	IC/PXi8uadafRnuQLTPFib9HNbx5713iUyJDQBoxodRbdgyB4x5F9pEwbfPDukL9n4a1
+	0m9/1uAdaOsplILB5AnltMIMr2Ra04A+jLXboP9gL/H4Lis97/lXt5cBzJaXx1jg7Eu8
+	iWOQ==
+X-Gm-Message-State: APjAAAW3PMRpM2OnuVY+g1Kf4oApC/gG7yyI0eDFy+DRaOWMzYiJC5r7
+	Cwroduxydjb2ZwwdfYfwJSm3rgrJWOmtpqyBbus=
+X-Google-Smtp-Source: APXvYqxd8aqs+1sokPzOtGsuXQaoeXWwCp4oDcsAhPih7Gt4tL62ZnEq3X+ABb6MCqPywgTyBYhhAgeqafkRPl3E3YY=
+X-Received: by 2002:a05:600c:2c53:: with SMTP id
+	r19mr567129wmg.39.1580159283293; 
+	Mon, 27 Jan 2020 13:08:03 -0800 (PST)
+MIME-Version: 1.0
+References: <20200127173608.24874-1-andrey.zhizhikin@leica-geosystems.com>
+	<CAHtQpK6ayzqiBn=QzrDRF+XGSA6Y0HB7Shg03N1XUYyWVu-TVw@mail.gmail.com>
+	<CAMKF1sqqUmNz2qa7W-R-1aK-1Jdqp-Grw3dgt1NfiJpOzduMfg@mail.gmail.com>
+In-Reply-To: <CAMKF1sqqUmNz2qa7W-R-1aK-1Jdqp-Grw3dgt1NfiJpOzduMfg@mail.gmail.com>
 From: Andrey Zhizhikin <andrey.z@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Jan 2020 21:04:14 +0000
-Message-Id: <20200127210414.25338-2-andrey.z@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200127210414.25338-1-andrey.z@gmail.com>
-References: <20200127210414.25338-1-andrey.z@gmail.com>
-Subject: [meta-oe][PATCH v2 2/2] libhugetlbfs: update recipe to use python3
+Date: Mon, 27 Jan 2020 22:07:51 +0100
+Message-ID: <CAHtQpK4Oo4iq7xLO2TXZwSyn+pOAxJGcyUKfgXCyj8TWmaq9-A@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/3] pcsc-lite: update recipe to use python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,75 +56,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 21:04:33 -0000
+X-List-Received-Date: Mon, 27 Jan 2020 21:08:03 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Update recipe to use python3 since python2 is EOL and has been dropped
-from OE-Core.
+On Mon, Jan 27, 2020 at 10:04 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Mon, Jan 27, 2020 at 12:59 PM Andrey Zhizhikin <andrey.z@gmail.com> wrote:
+> >
+> > Hello Raj,
+> >
+> > On Mon, Jan 27, 2020 at 6:36 PM Andrey Zhizhikin <andrey.z@gmail.com> wrote:
+> > >
+> > > From: Andrey Zhizhikin <andrey.z@gmail.com>
+> > >
+> > > Update pcsc-lite recipe to target python3 since python2 is EOL and has
+> > > been dropped from OE-Core.
+> > >
+> > > Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+> > > ---
+> > >  .../0001-pcsc-spy-use-python3-only.patch      | 43 +++++++++++++++++++
+> > >  .../pcsc-lite/pcsc-lite_1.8.26.bb             |  7 ++-
+> > >  2 files changed, 48 insertions(+), 2 deletions(-)
+> > >  create mode 100644 meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
+> > >
+> > > diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch b/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
+> > > new file mode 100644
+> > > index 000000000..3e7b0adda
+> > > --- /dev/null
+> > > +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
+> > > @@ -0,0 +1,43 @@
+> > > +From 75dd98876951d86890ceb30be521de57fd31e3c7 Mon Sep 17 00:00:00 2001
+> > > +From: Andrey Zhizhikin <andrey.z@gmail.com>
+> > > +Date: Mon, 27 Jan 2020 13:27:12 +0000
+> > > +Subject: [PATCH] pcsc-spy: use python3 only
+> > > +
+> > > +Python2 has been EOL and most distributions would not provide any
+> > > +support for it anymore. Since Python3 is available in all distributions
+> > > +now, switch pcsc-spy to use it exclusively.
+> > > +
+> > > +Upstream-Status: Pending
+> > > +
+> > > +Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+> > > +---
+> > > + src/spy/pcsc-spy | 9 ++-------
+> > > + 1 file changed, 2 insertions(+), 7 deletions(-)
+> > > +
+> > > +diff --git a/src/spy/pcsc-spy b/src/spy/pcsc-spy
+> > > +index 85222c6..965138e 100755
+> > > +--- a/src/spy/pcsc-spy
+> > > ++++ b/src/spy/pcsc-spy
+> > > +@@ -1,4 +1,4 @@
+> > > +-#! /usr/bin/python
+> > > ++#!/usr/bin/env python3
+> > > +
+> > > + """
+> > > + #    Display PC/SC functions arguments
+> > > +@@ -22,12 +22,7 @@ from __future__ import print_function
+> > > + import os
+> > > + import signal
+> > > + import time
+> >
+> > Please take a note, that this block is different from the patch staged
+> > in the [master-next] (ad388282aa2b6e286fc9f92d37d43cc061a6a753):
+> > ==================
+> > > +-try:
+> > > +-    # for Python3
+> > > +-    from queue import Queue
+> > > +-except ImportError:
+> > > +-    # for Python2
+> > > +-    from Queue import Queue
+> > > ++from queue import Queue
+> > ==================
+> >
+> > In addition to switching the interpreter, it also removes the block
+> > which targets python2 as it does not make sense with explicit python3
+> > interpreter invoked.
+> >
+> > Not that I'm complaining that this patch was not taken :)
+> > It might just be that you haven't seen the difference between this
+> > patch and the one you picked up. Otherwise, if you feel that the
+> > version staged is more correct - discard this patch.
+>
+> I have missed it because this should have been v2 to get my attention.
 
-Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
----
- ...setup_helper-use-python3-interpreter.patch | 29 +++++++++++++++++++
- .../libhugetlbfs/libhugetlbfs_git.bb          |  3 +-
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/0001-huge_page_setup_helper-use-python3-interpreter.patch
+That was still the original version, you must've gotten 2 patches from
+me and another person for the same change. :) And you picked up the
+one not from this series, but a separate patch from Laurent Bonnans
+which has above block missing. :)
 
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-huge_page_setup_helper-use-python3-interpreter.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-huge_page_setup_helper-use-python3-interpreter.patch
-new file mode 100644
-index 000000000..e45f283b3
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-huge_page_setup_helper-use-python3-interpreter.patch
-@@ -0,0 +1,29 @@
-+From b77c61de4d88d2c6e5d31f4f5a5877cc4c61272e Mon Sep 17 00:00:00 2001
-+From: Andrey Zhizhikin <andrey.z@gmail.com>
-+Date: Mon, 27 Jan 2020 17:27:55 +0000
-+Subject: [PATCH] huge_page_setup_helper: use python3 interpreter
-+
-+Setup helper script is already prepared to be used with python3, use the
-+interpreter explicitly. This removes dependency to python2 and will not
-+fail the QA check.
-+
-+Upstream-Status: Inappropriate [OE-specific]
-+
-+Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
-+---
-+ huge_page_setup_helper.py | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/huge_page_setup_helper.py b/huge_page_setup_helper.py
-+index a9ba2bf..7ba0c92 100755
-+--- a/huge_page_setup_helper.py
-++++ b/huge_page_setup_helper.py
-+@@ -1,4 +1,4 @@
-+-#!/usr/bin/python
-++#!/usr/bin/env python3
-+ 
-+ #
-+ # Tool to set up Linux large page support with minimal effort
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-index f1a4efba2..4768d7b63 100644
---- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-+++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-@@ -4,7 +4,7 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
- 
- DEPENDS = "sysfsutils"
--RDEPENDS_${PN} += "bash python python-io python-lang python-subprocess python-resource"
-+RDEPENDS_${PN} += "bash python3-core"
- RDEPENDS_${PN}-tests += "bash python3-core"
- 
- PV = "2.22"
-@@ -25,6 +25,7 @@ SRC_URI = " \
-     file://0005-Include-dirent.h-for-ino_t.patch \
-     file://0006-include-limits.h-for-PATH_MAX.patch \
-     file://0001-tests-add-explicit-permissions-to-open-call.patch \
-+    file://0001-huge_page_setup_helper-use-python3-interpreter.patch \
- "
- 
- UPSTREAM_CHECK_GITTAGREGEX = "(?P<pver>\d+(\.\d+)+)"
+>
+> >
+> > > + from threading import Thread
+> > > + from operator import attrgetter
+> > > +
+> > > +--
+> > > +2.17.1
+> > > +
+> > > diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
+> > > index 5e6084656..fb8c4a202 100644
+> > > --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
+> > > +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
+> > > @@ -10,7 +10,10 @@ LICENSE_${PN}-spy = "GPLv3+"
+> > >  LICENSE_${PN}-spy-dev = "GPLv3+"
+> > >  LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
+> > >
+> > > -SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
+> > > +SRC_URI = "\
+> > > +       https://pcsclite.apdu.fr/files/${BP}.tar.bz2 \
+> > > +       file://0001-pcsc-spy-use-python3-only.patch \
+> > > +"
+> > >  SRC_URI[md5sum] = "9d36882998449daceec267c68a21ff0d"
+> > >  SRC_URI[sha256sum] = "3eb7be7d6ef618c0a444316cf5c1f2f9d7227aedba7a192f389fe3e7c0dfbbd9"
+> > >
+> > > @@ -50,6 +53,6 @@ RPROVIDES_${PN} += "${PN}-systemd"
+> > >  RREPLACES_${PN} += "${PN}-systemd"
+> > >  RCONFLICTS_${PN} += "${PN}-systemd"
+> > >  SYSTEMD_SERVICE_${PN} = "pcscd.socket"
+> > > -RDEPENDS_${PN}-spy +="python"
+> > > +RDEPENDS_${PN}-spy +="python3"
+> > >
+> > >  BBCLASSEXTEND = "native"
+> > > --
+> > > 2.17.1
+> > >
+> >
+> >
+> > --
+> > Regards,
+> > Andrey.
+
+
+
 -- 
-2.17.1
-
+Regards,
+Andrey.
 
