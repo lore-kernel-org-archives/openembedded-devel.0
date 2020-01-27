@@ -1,47 +1,49 @@
 Return-Path: <andrey.z@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DE207FD13
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
+	[209.85.128.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 08ABB7F7E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 17:26:33 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id d16so12368559wre.10
+	Mon, 27 Jan 2020 17:36:18 +0000 (UTC)
+Received: by mail-wm1-f41.google.com with SMTP id f129so7977603wmf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 09:26:35 -0800 (PST)
+	Mon, 27 Jan 2020 09:36:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Dci3cwdgF+Qfe2iMzuLl3s66c4dMFATblfYZq3glc1I=;
-	b=YsJaHk2oGe8S0eFeA4n7/sgWHFD07DV1WE3+1qqEyARc2TO8n0F/sWEor0XvovL0Y6
-	2Fl6CbHaIDGHRIAkbOM9N1P9r2j7bIU9LniewqVBSp51zo8ZUIE264tg/I22bEoMVdeG
-	iQkONORDUxWVJ9BB3EBigxxzuuOZXDC33Du289S02iejmuytPrVzjSrDjMX8f9wPfmhH
-	D7PPzXE5XLE3W+P23pVgJVyR8TRERwgNEq1uuHzw3DJU9nLni8S2LbcWwp3CXH3AP/sY
-	RHiIHIjZRrMNFCG0keUfljpzrX3yns5FSPwVkWt0puOPXAu9jG+Hs7xQRvXLVFDAOE8a
-	ju9g==
+	h=from:to:cc:subject:date:message-id;
+	bh=ngPhRiMzJOdVYWJeUW/0/MhUHkS8ey0dN2gOrXrj1io=;
+	b=rH1ncZcaz7jsOGvHE530LVJsT2pRBsFyk5/aY70aL8kzNIeYnqj2IcWIpXTjYHNHxS
+	CRgemiIQ8LYBhVxVnVSJ1sppON69Uv304v9Q3V4FBOfTGxsOVVxwj//MT7Nn4pNJgDcW
+	OFFS2ALCdf1wYK6/gsV0p/jQIiuIB7r2IlgEgczSrHB8HZmyKGGuAdtySIT9pxMPGpnO
+	pnoEIuJpNqXP2FPhvJEusn48PX3r5MyYR1HyK+xUJ0HqcgrEDKpbzStTad7L2rVX+/8q
+	uQZbK7LvkBgtPHr1Z8LdfReNtf7iSNs1SmIFy2KNm8+T6aiPbbVNQKQquJuB3Ic02nPt
+	IaRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Dci3cwdgF+Qfe2iMzuLl3s66c4dMFATblfYZq3glc1I=;
-	b=fTG7AAyJX5L2EtE2AMHfujd6VPJZi69zUvJgXpd0NDj9t7UCNjUqBEejDw1WsFGURP
-	+ZFL/AObV70/lAFuFogDPCgZ8Shdyu7ytPE8cZ9B03VZx+4gJqvE/qTYFZnaaQZWnC8t
-	7Lt/aQz4ueBkyWhE1jwEO3nnJ1tEkOBtOiBgDUQCIm1jey3pTchds69Z3ecgDdK956PR
-	l+L9DTZDzN963EUQgYF5UeJSDXWQfHNIcjEgJXcV/zoUlkMohcYKhNOMR58UiI5umbmP
-	O61cP8KFsQqgRXOwAgWsb4upvPDTBXeqRufXOMXVZ5VuBZl7xA0PkqsBtWeuu/f+kxXv
-	sYcA==
-X-Gm-Message-State: APjAAAXKuBiWJVETGnGGw17ue5krEtFTBffq+tu+4WJzGXPJB5uFaEqZ
-	zuTQIyigewETW+ya287XdKyzFHnE8sWJX4s1IexyIi/p
-X-Google-Smtp-Source: APXvYqyEbIPWqvc/+eyWffRUV/+SLJ/ychfbsQUixRFJY7mnrvWWrfScXuoI08c8O4OpbFkI8UjJBWGAp97JouCZevU=
-X-Received: by 2002:adf:fcc4:: with SMTP id f4mr24227038wrs.247.1580145994411; 
-	Mon, 27 Jan 2020 09:26:34 -0800 (PST)
-MIME-Version: 1.0
-References: <1572534894-51167-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<CAHtQpK6pqYO5WHh6Lmj61gs1zW32bWVYu5hW0uqDqy2V4PJKnA@mail.gmail.com>
-In-Reply-To: <CAHtQpK6pqYO5WHh6Lmj61gs1zW32bWVYu5hW0uqDqy2V4PJKnA@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ngPhRiMzJOdVYWJeUW/0/MhUHkS8ey0dN2gOrXrj1io=;
+	b=R9fUiAtpUAm4ilaWkMBk94byJdhYsLxbV3tiaqEiQDmbWK3OLy0HN7GTjDkdLG862I
+	pEp3jc3u7FR008T8ZIv65Np44ATS0fUU2sJs294JVzdxLdihaRjP8Five6EiLUQCb4S9
+	A1J+3RwKZ9XdTIZvs0f5gkuwNL5QyoWgaloBeFx9RUnObSb/rg4r8ZWwDB1PyGHj4iIQ
+	XU7YzzHyNtTdJB5xl5mYqFpujNpV9zTDfgYHM02rLPy2Re/JUdAVimmuhaFWQcSPNRUi
+	BB0WLtdPpdst6V++Xdkknl3igmpwiKgyPRttFAAiE8NzFpAh2PrjYr3b2AtKLZXtEGYn
+	M9qg==
+X-Gm-Message-State: APjAAAVi/+y29D8UeVUA9aDG2qymzAH3JpOA9D96bJamws/kxTiRThRl
+	W+PWek9Y35ifDkv4ve27nHH7hU1pQf4=
+X-Google-Smtp-Source: APXvYqzeVCpjImBbgnvQmeq4TBBNLYrdKBU6/0lAYdM+SdYZisb3r0YfHSHUsK85t1rdHjSS0yW5Uw==
+X-Received: by 2002:a1c:5f8a:: with SMTP id t132mr146503wmb.162.1580146579624; 
+	Mon, 27 Jan 2020 09:36:19 -0800 (PST)
+Received: from aherlnxbspsrv01.lgs-net.com ([193.8.40.126])
+	by smtp.gmail.com with ESMTPSA id
+	s10sm21916939wrw.12.2020.01.27.09.36.19
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 27 Jan 2020 09:36:19 -0800 (PST)
 From: Andrey Zhizhikin <andrey.z@gmail.com>
-Date: Mon, 27 Jan 2020 18:26:23 +0100
-Message-ID: <CAHtQpK4Xm1HYjkUi9EP51-htb54-0beo74jfewADX-tg9bcfZg@mail.gmail.com>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libhugetlbfs: upgrade 2.21 -> 2.22
+X-Google-Original-From: Andrey Zhizhikin
+	<andrey.zhizhikin@leica-geosystems.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 27 Jan 2020 17:36:06 +0000
+Message-Id: <20200127173608.24874-1-andrey.zhizhikin@leica-geosystems.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH 1/3] pcsc-lite: update recipe to use python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,149 +56,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 17:26:33 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 27 Jan 2020 17:36:19 -0000
 
-On Mon, Jan 27, 2020 at 6:23 PM Andrey Zhizhikin <andrey.z@gmail.com> wrote:
->
-> Hello Raj,
->
-> Can you pick this one?
->
-> It should solve one of the build issues you've posted in
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/220/steps/8/logs/errors
+From: Andrey Zhizhikin <andrey.z@gmail.com>
 
-Sorry, got confused about the changes in the patch. I see it is
-applied already. Would send the patch against this one as well.
+Update pcsc-lite recipe to target python3 since python2 is EOL and has
+been dropped from OE-Core.
 
->
-> On Thu, Oct 31, 2019 at 8:20 AM Zheng Ruoqin
-> <zhengrq.fnst@cn.fujitsu.com> wrote:
-> >
-> > 1) Upgrade libhugetlbfs from 2.21 to 2.22.
-> >
-> > 2) Update two patches for new version.
-> >    0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
-> >    0005-Include-dirent.h-for-ino_t.patch
-> >
-> > 3) Add RDEPEND python3-core for libhugetlbfs-tests to fix the do_package_qa error as follows:
-> >
-> > ERROR: libhugetlbfs-1_2.22-r0 do_package_qa: QA Issue: /usr/lib/libhugetlbfs/tests/run_tests.py contained in package libhugetlbfs-tests requires /usr/bin/python3, but no providers found in RDEPENDS_libhugetlbfs-tests? [file-rdeps]
-> >
-> > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> > ---
-> >  ...-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch | 13 +++++++++----
-> >  .../files/0005-Include-dirent.h-for-ino_t.patch             |  9 +++++++--
-> >  meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb  |  6 +++---
-> >  3 files changed, 19 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
-> > index 53f35ab..34a6220 100644
-> > --- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
-> > +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
-> > @@ -10,15 +10,17 @@ Upstream-Status: Submitted
-> >
-> >  Signed-off-by: Ting Liu <b28495@freescale.com>
-> >
-> > +Update for 2.22.
-> > +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> >  ---
-> >   tests/run_tests.py | 12 +++++++++++-
-> >   1 file changed, 11 insertions(+), 1 deletion(-)
-> >
-> >  diff --git a/tests/run_tests.py b/tests/run_tests.py
-> > -index 3c95a03..560df6b 100755
-> > +index 018264d..0aabcd1 100755
-> >  --- a/tests/run_tests.py
-> >  +++ b/tests/run_tests.py
-> > -@@ -234,9 +234,19 @@ def get_pagesizes():
-> > +@@ -245,9 +245,19 @@ def get_pagesizes():
-> >       Use libhugetlbfs' hugeadm utility to get a list of page sizes that have
-> >       active mount points and at least one huge page allocated to the pool.
-> >       """
-> > @@ -36,6 +38,9 @@ index 3c95a03..560df6b 100755
-> >  +        return sizes
-> >  +    out = p.stdout.read().strip()
-> >  +
-> > -     if rc != 0 or out == "": return sizes
-> > +     if rc != 0 or out == "":
-> > +         return sizes
-> >
-> > -     for size in out.split("\n"): sizes.add(int(size))
-> > +--
-> > +2.7.4
-> > +
-> > diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
-> > index 0817420..e736cbc 100644
-> > --- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
-> > +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
-> > @@ -8,12 +8,14 @@ error: unknown type name 'ino_t'; did you mean 'int'?
-> >
-> >  Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >
-> > +Update for 2.22.
-> > +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> >  ---
-> >   tests/hugetests.h | 1 +
-> >   1 file changed, 1 insertion(+)
-> >
-> >  diff --git a/tests/hugetests.h b/tests/hugetests.h
-> > -index 8b1d8d9..056042c 100644
-> > +index bc4e16a..fbe4dc0 100644
-> >  --- a/tests/hugetests.h
-> >  +++ b/tests/hugetests.h
-> >  @@ -22,6 +22,7 @@
-> > @@ -21,6 +23,9 @@ index 8b1d8d9..056042c 100644
-> >   #include <errno.h>
-> >   #include <string.h>
-> >  +#include <dirent.h>
-> > + #include <unistd.h>
-> >
-> >   #include "libhugetlbfs_privutils.h"
-> > - #include "libhugetlbfs_testprobes.h"
-> > +--
-> > +2.7.4
-> > +
-> > diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > index 66fd8e2..f258122 100644
-> > --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> > @@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
-> >
-> >  DEPENDS = "sysfsutils"
-> >  RDEPENDS_${PN} += "bash python python-io python-lang python-subprocess python-resource"
-> > -RDEPENDS_${PN}-tests += "bash"
-> > +RDEPENDS_${PN}-tests += "bash python3-core"
-> >
-> > -PV = "2.21"
-> > +PV = "2.22"
-> >  PE = "1"
-> >
-> > -SRCREV = "73d06e69108f231696e9c5c44f4b42690fc5d752"
-> > +SRCREV = "e6499ff92b4a7dcffbd131d1f5d24933e48c3f20"
-> >  SRC_URI = " \
-> >      git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https \
-> >      file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
-> > --
-> > 2.7.4
-> >
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
-> --
-> Regards,
-> Andrey.
+Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+---
+ .../0001-pcsc-spy-use-python3-only.patch      | 43 +++++++++++++++++++
+ .../pcsc-lite/pcsc-lite_1.8.26.bb             |  7 ++-
+ 2 files changed, 48 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
 
-
-
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch b/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
+new file mode 100644
+index 000000000..3e7b0adda
+--- /dev/null
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
+@@ -0,0 +1,43 @@
++From 75dd98876951d86890ceb30be521de57fd31e3c7 Mon Sep 17 00:00:00 2001
++From: Andrey Zhizhikin <andrey.z@gmail.com>
++Date: Mon, 27 Jan 2020 13:27:12 +0000
++Subject: [PATCH] pcsc-spy: use python3 only
++
++Python2 has been EOL and most distributions would not provide any
++support for it anymore. Since Python3 is available in all distributions
++now, switch pcsc-spy to use it exclusively.
++
++Upstream-Status: Pending
++
++Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
++---
++ src/spy/pcsc-spy | 9 ++-------
++ 1 file changed, 2 insertions(+), 7 deletions(-)
++
++diff --git a/src/spy/pcsc-spy b/src/spy/pcsc-spy
++index 85222c6..965138e 100755
++--- a/src/spy/pcsc-spy
+++++ b/src/spy/pcsc-spy
++@@ -1,4 +1,4 @@
++-#! /usr/bin/python
+++#!/usr/bin/env python3
++ 
++ """
++ #    Display PC/SC functions arguments
++@@ -22,12 +22,7 @@ from __future__ import print_function
++ import os
++ import signal
++ import time
++-try:
++-    # for Python3
++-    from queue import Queue
++-except ImportError:
++-    # for Python2
++-    from Queue import Queue
+++from queue import Queue
++ from threading import Thread
++ from operator import attrgetter
++ 
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
+index 5e6084656..fb8c4a202 100644
+--- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
++++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
+@@ -10,7 +10,10 @@ LICENSE_${PN}-spy = "GPLv3+"
+ LICENSE_${PN}-spy-dev = "GPLv3+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
+ 
+-SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
++SRC_URI = "\
++	https://pcsclite.apdu.fr/files/${BP}.tar.bz2 \
++	file://0001-pcsc-spy-use-python3-only.patch \
++"
+ SRC_URI[md5sum] = "9d36882998449daceec267c68a21ff0d"
+ SRC_URI[sha256sum] = "3eb7be7d6ef618c0a444316cf5c1f2f9d7227aedba7a192f389fe3e7c0dfbbd9"
+ 
+@@ -50,6 +53,6 @@ RPROVIDES_${PN} += "${PN}-systemd"
+ RREPLACES_${PN} += "${PN}-systemd"
+ RCONFLICTS_${PN} += "${PN}-systemd"
+ SYSTEMD_SERVICE_${PN} = "pcscd.socket"
+-RDEPENDS_${PN}-spy +="python"
++RDEPENDS_${PN}-spy +="python3"
+ 
+ BBCLASSEXTEND = "native"
 -- 
-Regards,
-Andrey.
+2.17.1
+
 
