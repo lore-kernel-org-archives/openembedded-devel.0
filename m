@@ -1,28 +1,26 @@
 Return-Path: <tgamblin@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 534657FDF0
+	by mail.openembedded.org (Postfix) with ESMTP id 545407FDF5
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 27 Jan 2020 20:43:52 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 00RKhXca024837
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 00RKhXcb024837
 	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 27 Jan 2020 12:43:43 -0800
 Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
 	Mon, 27 Jan 2020 12:43:22 -0800
-Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id 8EC1C900B8B;
+Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id 8B1B4900A7C;
 	Mon, 27 Jan 2020 12:43:22 -0800 (PST)
 From: Trevor Gamblin <trevor.gamblin@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 27 Jan 2020 12:43:22 -0800
-Message-ID: <20200127204322.143707-2-trevor.gamblin@windriver.com>
+Date: Mon, 27 Jan 2020 12:43:21 -0800
+Message-ID: <20200127204322.143707-1-trevor.gamblin@windriver.com>
 X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20200127204322.143707-1-trevor.gamblin@windriver.com>
-References: <20200127204322.143707-1-trevor.gamblin@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][zeus][PATCH 2/2] pyhamcrest: add python3 version of recipe
+Subject: [meta-python][zeus][PATCH 1/2] python-twisted: add required RDEPENDS for twistd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,32 +37,49 @@ X-List-Received-Date: Mon, 27 Jan 2020 20:43:57 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Twisted requires pyhamcrest for /usr/bin/twistd to work, but in zeus
-there is only a python2 recipe for this package, thus the twistd daemon
-won't be able to run properly for python3.
+python-twisted is currently missing some packages for its /usr/bin/twistd
+executable to function. Add these to the RDEPENDS list, and also clean up
+formatting since the list is getting long.
+
+Note that a similar patch has already been submitted for master branch,
+but the python2 version of twisted needs more explicit RDEPENDS than the
+python3 version submitted to master in order for /usr/bin/twistd to work
+properly.
 
 Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- .../python/python3-pyhamcrest_1.9.0.bb                 | 10 ++++++++++
- 1 file changed, 10 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pyhamcrest_1.9.0.bb
+ .../recipes-devtools/python/python-twisted.inc | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pyhamcrest_1.9.0.bb b/meta-python/recipes-devtools/python/python3-pyhamcrest_1.9.0.bb
-new file mode 100644
-index 000000000..04aa9b47f
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyhamcrest_1.9.0.bb
-@@ -0,0 +1,10 @@
-+SUMMARY = "Hamcrest framework for matcher objects"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f6df1318c6071dd1707f5e3b6c11f24f"
+diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
+index d70104dc2..f55bbb033 100644
+--- a/meta-python/recipes-devtools/python/python-twisted.inc
++++ b/meta-python/recipes-devtools/python/python-twisted.inc
+@@ -56,7 +56,23 @@ RDEPENDS_${PN} = "\
+     ${PN}-zsh \
+ "
+ 
+-RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink ${PYTHON_PN}-automat"
++RDEPENDS_${PN}-core = "${PYTHON_PN}-core \ 
++                       ${PYTHON_PN}-zopeinterface \
++                       ${PYTHON_PN}-incremental \
++                       ${PYTHON_PN}-constantly \
++                       ${PYTHON_PN}-hyperlink \
++                       ${PYTHON_PN}-automat \
++                       ${PYTHON_PN}-pyserial \
++                       ${PYTHON_PN}-pyhamcrest \
++                       ${PYTHON_PN}-debugger \
++                       ${PYTHON_PN}-unixadmin \
++                       ${PYTHON_PN}-pkg-resources \
++                       ${PYTHON_PN}-misc \
++                       ${PYTHON_PN}-pkgutil \
++                       ${PYTHON_PN}-plistlib \
++                       ${PYTHON_PN}-setuptools \
++"
 +
-+PYPI_PACKAGE = "PyHamcrest"
-+
-+SRC_URI[md5sum] = "8b833a3fa30197455df79424f30c8c3f"
-+SRC_URI[sha256sum] = "8ffaa0a53da57e89de14ced7185ac746227a8894dbd5a3c718bf05ddbd1d56cd"
-+
-+inherit pypi setuptools3
+ RDEPENDS_${PN}-test = "${PN}"
+ RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
+ RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
 -- 
 2.23.0
 
