@@ -1,50 +1,54 @@
 Return-Path: <andrey.z@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 018337FDC8
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 22:09:06 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id q6so13528942wro.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 14:09:08 -0800 (PST)
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
+	[209.85.128.68])
+	by mail.openembedded.org (Postfix) with ESMTP id ECBF57FC0C;
+	Mon, 27 Jan 2020 22:34:39 +0000 (UTC)
+Received: by mail-wm1-f68.google.com with SMTP id a9so357763wmj.3;
+	Mon, 27 Jan 2020 14:34:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=crpXjxMZQHs9p/b4cC5FMsTg5C3MtIbSqMxuZ3hbRnM=;
-	b=twUwVXSX7YHuLkWS4Nzfqw3rwfZ8sLAMo/mplkQe2jpmN4dJV+Bjg5SP1SAjjKjjwX
-	yA6pAozFfhHW/0uE2OeTowv6jn3vxxRZ6XDXlywWuQqX0yFWgo4zZlyubH+iAr5mpNA+
-	Tk0OcDg7uJOxpOUFkWq8IKVDQr8PQK0mU+rZjqUqDJISgkxnpx8xOYXPpZ1ZbXhciiRM
-	Plz3RET92R7mZfcDXCA0h//opvvtkkuNL1FcCZ3ncUdfL4cdkQWnldQZNOEg8nwCmLwK
-	sdIoO4s9J1bx2YSP6hvFM5zRZReVN3TuV0+XEAOEsX590iLcED+ACW1eziavnDXyfz8X
-	iBKA==
+	:cc:content-transfer-encoding;
+	bh=QsjkZpc7NsofAgVDOIy3hqBAhhWubzJQ9qI95aIZVFw=;
+	b=R8IFCwVc47cZEu5NevbxgvbuQEMgfn73Tuqxb3CczJT1tjSlN/awhbDFUcIhEqLg8s
+	BAayLZT89w9EhOZ/RFIJaA/j+olFQLSpUwFsoq8aQPR74NvIub7d6eNJ5dlklU4RB4S/
+	pIFE0XPXawEaAKUsLqKKR+BQV+e4AllvfKFWrn7KnSugIAU0ec1JvxV/l93b+xKoRbgE
+	//zK9enb5fFsGHJ4uFZn1OJsUzvoO5tKuCi/c8yNBANO+nc/+F1A5ojEaQGJ/LurGTzj
+	mfAvJIkZKZWVnZnMh/dMWk+UfBy6Fbh5toemjycMzGKah7waIS9phLi/chA6xRzvv1th
+	7P1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=crpXjxMZQHs9p/b4cC5FMsTg5C3MtIbSqMxuZ3hbRnM=;
-	b=R9qQihzad2tFwZG+AnAfM+u1BYUBzislyyOki2zKBASjlSNc7k17wDKoG3HPbwXoNq
-	Qr7JjaUB+NF+6/SDxZKl9R4zMrIvbj1tmOY4ju0Colcnrk4j17373lvxVmNED+DMANgK
-	OgETgJYDR2NcVjyG3Cdx6bqCG0jEirB/nknZqcki9pri+lAGWM+DoYXWFZsTspVqdgxk
-	TY59epODM5/+q01R8uZmwrA/CL9JZJzun9yoo18sooDLbA9dsVS+//TW6QvBLMZaon/k
-	Mg93RBjH9RIqxpmU9W0Wuqqff16Dqemlb5TGxO1pLwZB86A7gZKQJ9cb41BQGwlo7bCS
-	AJkA==
-X-Gm-Message-State: APjAAAUkXv7VXn2ybJHzq5Fg41Ef4JBYQzDKQ7SHEngH62GONrk5rxDp
-	bkyoUgoW2x6+onm2udCIHQafPk62pyD028udFKU=
-X-Google-Smtp-Source: APXvYqxppnKib72GydlOaMr4HVc0s6pxdMd/u8jJSMYrsqlvhbgaXyZaNeq5FpxHpEUeULh447j2W5lAC3fklRM3chU=
-X-Received: by 2002:adf:f308:: with SMTP id i8mr24169822wro.42.1580162947537; 
-	Mon, 27 Jan 2020 14:09:07 -0800 (PST)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=QsjkZpc7NsofAgVDOIy3hqBAhhWubzJQ9qI95aIZVFw=;
+	b=NguY7S1tI5W1R1NE8IgxGbpqDaoMWjflHZSWzL4qeR1y5BgRxP0JO/ns/Wf/XvoKjX
+	8KQ81o0+uKp57b/vlC6qsPVipZ8oMrhHQ5MexXvRShJzJhjF+cxpck03+L7gAmxcIvfF
+	0Jho2ZnayJZtjLVEwgQq5unOyPsqHcEKsZ+G5My1PF342LRBq2Bm4RKnRJ3+QFNf7sbP
+	Ch99uUmu8ajkuic6RLoIQfpW0jblXstGPwCxreB1RJPVWt5lm1Ssq0I771cv6cwBKi7m
+	9myxudoZ1tztBVdZRZl9p6JQY9jljkIt9Gdw4bcZMsSOLSuO7lC2C8NXLWOTZOGuAd6u
+	fCJg==
+X-Gm-Message-State: APjAAAVYPK37N8PTHA4GYXmorfEgKktftPU0+0YvANlGllOB5am6oH1l
+	m4qWSbIDYBJNUFtbiAYK0X4e/v+gOvj1iKWpGi4=
+X-Google-Smtp-Source: APXvYqz8G3k/BXlCpf7mabtZIVaBrgw40rdsfk/mjf3ivJHJ2f6ZzidgemSa9EvQPUss1uh6rogEZ21m6rRVcEPdO5g=
+X-Received: by 2002:a05:600c:2c53:: with SMTP id
+	r19mr857102wmg.39.1580164480571; 
+	Mon, 27 Jan 2020 14:34:40 -0800 (PST)
 MIME-Version: 1.0
-References: <20200127173608.24874-1-andrey.zhizhikin@leica-geosystems.com>
-	<CAHtQpK6ayzqiBn=QzrDRF+XGSA6Y0HB7Shg03N1XUYyWVu-TVw@mail.gmail.com>
-	<CAMKF1sqqUmNz2qa7W-R-1aK-1Jdqp-Grw3dgt1NfiJpOzduMfg@mail.gmail.com>
-	<CAHtQpK4Oo4iq7xLO2TXZwSyn+pOAxJGcyUKfgXCyj8TWmaq9-A@mail.gmail.com>
-	<CAMKF1srV5MQ=i6JP6LFLRvs=M0iAqPxDTC+SDXT8_WBkMp_7RA@mail.gmail.com>
-In-Reply-To: <CAMKF1srV5MQ=i6JP6LFLRvs=M0iAqPxDTC+SDXT8_WBkMp_7RA@mail.gmail.com>
+References: <CAMKF1sryUbCcpRxpqi4ytZJ+j+AgksfS8pxd=_O6DtWrkCx+Lg@mail.gmail.com>
+	<CAHtQpK6cp2D3Zb2pkDgYwdKR=AX6AWnwpWEs=qqzNYQ64uL28w@mail.gmail.com>
+	<24c2080a-8465-ee2e-484a-ff817485fbf4@gmail.com>
+	<CAHtQpK4O1eDuq8EcNcFgLasY_PE-_WtzWYA6pOVE9NFQkBbTxg@mail.gmail.com>
+	<CAMKF1sqK8kdDdJry4+fp5bJvbUwwPo0SY8VJtpiDhY3y-e7PJg@mail.gmail.com>
+	<CAHtQpK4P3nxZPhWC0T84016toXJ5SoEnH1xuyw94jQCjXWV7Bg@mail.gmail.com>
+	<CALbNGRQ+B-8uvbNcCS_ySkJLiZe+WhawsZK90Mr4YUN7KGmbNA@mail.gmail.com>
+In-Reply-To: <CALbNGRQ+B-8uvbNcCS_ySkJLiZe+WhawsZK90Mr4YUN7KGmbNA@mail.gmail.com>
 From: Andrey Zhizhikin <andrey.z@gmail.com>
-Date: Mon, 27 Jan 2020 23:08:56 +0100
-Message-ID: <CAHtQpK6Fx31NF+c4hjJZX6NtBn4xRDh1_y=90kOQGey2dZn5QQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/3] pcsc-lite: update recipe to use python3
+Date: Mon, 27 Jan 2020 23:34:29 +0100
+Message-ID: <CAHtQpK4D0WCJXTZ9mLYGAhXQQd5nQ=d5wPm+VEkatSx_RYGf9g@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Cc: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: [OE-core] python2-less meta-openembedded build results
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,144 +61,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 22:09:08 -0000
+X-List-Received-Date: Mon, 27 Jan 2020 22:34:40 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 27, 2020 at 10:14 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Mon, Jan 27, 2020 at 7:01 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
 >
-> On Mon, Jan 27, 2020 at 1:08 PM Andrey Zhizhikin <andrey.z@gmail.com> wrote:
+> On Mon, Jan 27, 2020 at 5:54 PM Andrey Zhizhikin <andrey.z@gmail.com> wro=
+te:
 > >
-> > On Mon, Jan 27, 2020 at 10:04 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > On Mon, Jan 27, 2020 at 4:24 PM Khem Raj <raj.khem@gmail.com> wrote:
 > > >
-> > > On Mon, Jan 27, 2020 at 12:59 PM Andrey Zhizhikin <andrey.z@gmail.com> wrote:
+> > > Awesome, thanks for the help!
+> >
+> > No probs!
+> >
+> > I've actually looked into the list and would have couple of
+> > components, which are sort-of "python2-only":
+> > - dnssec-conf: did not receive any update since 9(!) years, written
+> > totally in python2. Should this be bumped up of bumped out of
+> > [oe-core]?
+> > - mozjs: this one pulls the most of dependencies and produces the most
+> > of errors. It's version is also quite old (60.9.0esr), and there is a
+> > lot of python2-only code inside. Should this one be bumped out? Latest
+> > ESR version available upstream is
+> > 68.4.2esr [1], dated 01/20/2020
+> Problem with mozjs are
+>
+> * some packages ask for certain versions of mozjs. That's why distros
+> have multiple versions.
+> * if I am not mistaken version 68 of mozjs asks for rust/cargo which
+> is (not yet) in a common layer
+>
+> Am working on python3 port. Current situation: Configure is almost
+> done but after
+>
+> | updating cache ./config.cache
+>
+> I see no progress in log file / 100% on one CPU / memory is eaten up.
+> Had a similar situation in earlier stages but fixed that by endless
+> debug sessions and removing parts suggested in [1]
+>
+> Long story short: Haven't lost hope to come up with a working python3
+> port but I cannot promise if I get there and when.
+
+Thanks a lot for the update here!
+
+I see now, it is much deeper than I thought... Not that I'm currently
+using this package; this is rather the one Raj posted earlier in the
+error log and I thought I might've take a look at...
+
+Is there anything to help here?
+
+>
+> [1] https://code.foxkit.us/adelie/packages/blob/f2b5773da19ab397fbe64fd32=
+dacc383cfe4cd77/user/mozjs/python3.patch
+
+This patch is EPIC... :) Hope that current version would not require
+something of this kind.
+
+>
+>
+> Andreas
+> >
+> > For some other recipes I would send out the patch series later today.
+> >
+> > [1]: https://archive.mozilla.org/pub/firefox/releases/68.4.2esr/source/
+> >
+> > >
+> > > On Mon, Jan 27, 2020 at 2:51 AM Andrey Zhizhikin <andrey.z@gmail.com>=
+ wrote:
 > > > >
 > > > > Hello Raj,
 > > > >
-> > > > On Mon, Jan 27, 2020 at 6:36 PM Andrey Zhizhikin <andrey.z@gmail.com> wrote:
+> > > > On Fri, Jan 24, 2020 at 8:27 PM Khem Raj <raj.khem@gmail.com> wrote=
+:
 > > > > >
-> > > > > From: Andrey Zhizhikin <andrey.z@gmail.com>
+> > > > > On 1/20/20 8:51 AM, Andrey Zhizhikin wrote:
+> > > > > > On Mon, Jan 20, 2020 at 4:52 PM Khem Raj <raj.khem@gmail.com> w=
+rote:
+> > > > > >>
+> > > > > >> Hi all
+> > > > > >>
+> > > > > >> Recently py2 is removed from oe-core, So I did quick patches t=
+o get a
+> > > > > >> world build going. And
+> > > > > >> here are initial failures, please help out with recipes your c=
+an or
+> > > > > >> care for. Eventually, the remaining
+> > > > > >> ones we can blacklist for 3.1 release.
+> > > > > >>
+> > > > > >> http://errors.yoctoproject.org/Errors/Build/97185/
+> > > > > >>
+> > > > > >> I will post more arches as they become available. If you want =
+to try
+> > > > > >> the same for machines/distros you can try yoe/mut for meta-oe
+> > > > > >
+> > > > > > I've actually asked Ross about similar failures, specifically i=
+n
+> > > > > > [meta-openembeeded/meta-python] where there is a good mix of Py=
+tho2
+> > > > > > and Python3 still present. I've started to remove those yesterd=
+ay, and
+> > > > > > would continue with that layer further.
+> > > > > >
+> > > > > >>
+> > > > > >> https://git.openembedded.org/meta-openembedded-contrib/log/?h=
+=3Dyoe/mut
+> > > > > >>
 > > > > >
-> > > > > Update pcsc-lite recipe to target python3 since python2 is EOL and has
-> > > > > been dropped from OE-Core.
-> > > > >
-> > > > > Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
-> > > > > ---
-> > > > >  .../0001-pcsc-spy-use-python3-only.patch      | 43 +++++++++++++++++++
-> > > > >  .../pcsc-lite/pcsc-lite_1.8.26.bb             |  7 ++-
-> > > > >  2 files changed, 48 insertions(+), 2 deletions(-)
-> > > > >  create mode 100644 meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
-> > > > >
-> > > > > diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch b/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
-> > > > > new file mode 100644
-> > > > > index 000000000..3e7b0adda
-> > > > > --- /dev/null
-> > > > > +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
-> > > > > @@ -0,0 +1,43 @@
-> > > > > +From 75dd98876951d86890ceb30be521de57fd31e3c7 Mon Sep 17 00:00:00 2001
-> > > > > +From: Andrey Zhizhikin <andrey.z@gmail.com>
-> > > > > +Date: Mon, 27 Jan 2020 13:27:12 +0000
-> > > > > +Subject: [PATCH] pcsc-spy: use python3 only
-> > > > > +
-> > > > > +Python2 has been EOL and most distributions would not provide any
-> > > > > +support for it anymore. Since Python3 is available in all distributions
-> > > > > +now, switch pcsc-spy to use it exclusively.
-> > > > > +
-> > > > > +Upstream-Status: Pending
-> > > > > +
-> > > > > +Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
-> > > > > +---
-> > > > > + src/spy/pcsc-spy | 9 ++-------
-> > > > > + 1 file changed, 2 insertions(+), 7 deletions(-)
-> > > > > +
-> > > > > +diff --git a/src/spy/pcsc-spy b/src/spy/pcsc-spy
-> > > > > +index 85222c6..965138e 100755
-> > > > > +--- a/src/spy/pcsc-spy
-> > > > > ++++ b/src/spy/pcsc-spy
-> > > > > +@@ -1,4 +1,4 @@
-> > > > > +-#! /usr/bin/python
-> > > > > ++#!/usr/bin/env python3
-> > > > > +
-> > > > > + """
-> > > > > + #    Display PC/SC functions arguments
-> > > > > +@@ -22,12 +22,7 @@ from __future__ import print_function
-> > > > > + import os
-> > > > > + import signal
-> > > > > + import time
-> > > >
-> > > > Please take a note, that this block is different from the patch staged
-> > > > in the [master-next] (ad388282aa2b6e286fc9f92d37d43cc061a6a753):
-> > > > ==================
-> > > > > +-try:
-> > > > > +-    # for Python3
-> > > > > +-    from queue import Queue
-> > > > > +-except ImportError:
-> > > > > +-    # for Python2
-> > > > > +-    from Queue import Queue
-> > > > > ++from queue import Queue
-> > > > ==================
-> > > >
-> > > > In addition to switching the interpreter, it also removes the block
-> > > > which targets python2 as it does not make sense with explicit python3
-> > > > interpreter invoked.
-> > > >
-> > > > Not that I'm complaining that this patch was not taken :)
-> > > > It might just be that you haven't seen the difference between this
-> > > > patch and the one you picked up. Otherwise, if you feel that the
-> > > > version staged is more correct - discard this patch.
-> > >
-> > > I have missed it because this should have been v2 to get my attention.
-> >
-> > That was still the original version, you must've gotten 2 patches from
-> > me and another person for the same change. :) And you picked up the
-> > one not from this series, but a separate patch from Laurent Bonnans
-> > which has above block missing. :)
->
-> yes that's, right, I was thinking of asking to rebase this one on top
-> of the first one
-> but then I took the changes in this one and merged them along with
-> prior patch from Laurent
-
-Got it, saw it now in the [master-next]. Thanks a lot!
-
->
->
-> >
-> > >
-> > > >
-> > > > > + from threading import Thread
-> > > > > + from operator import attrgetter
-> > > > > +
-> > > > > +--
-> > > > > +2.17.1
-> > > > > +
-> > > > > diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
-> > > > > index 5e6084656..fb8c4a202 100644
-> > > > > --- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
-> > > > > +++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
-> > > > > @@ -10,7 +10,10 @@ LICENSE_${PN}-spy = "GPLv3+"
-> > > > >  LICENSE_${PN}-spy-dev = "GPLv3+"
-> > > > >  LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
-> > > > >
-> > > > > -SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
-> > > > > +SRC_URI = "\
-> > > > > +       https://pcsclite.apdu.fr/files/${BP}.tar.bz2 \
-> > > > > +       file://0001-pcsc-spy-use-python3-only.patch \
-> > > > > +"
-> > > > >  SRC_URI[md5sum] = "9d36882998449daceec267c68a21ff0d"
-> > > > >  SRC_URI[sha256sum] = "3eb7be7d6ef618c0a444316cf5c1f2f9d7227aedba7a192f389fe3e7c0dfbbd9"
-> > > > >
-> > > > > @@ -50,6 +53,6 @@ RPROVIDES_${PN} += "${PN}-systemd"
-> > > > >  RREPLACES_${PN} += "${PN}-systemd"
-> > > > >  RCONFLICTS_${PN} += "${PN}-systemd"
-> > > > >  SYSTEMD_SERVICE_${PN} = "pcscd.socket"
-> > > > > -RDEPENDS_${PN}-spy +="python"
-> > > > > +RDEPENDS_${PN}-spy +="python3"
-> > > > >
-> > > > >  BBCLASSEXTEND = "native"
-> > > > > --
-> > > > > 2.17.1
+> > > > > All these changes are now in master and its again buildable, with=
+ or
+> > > > > without meta-python2, with meta-python2, its back to where it was=
+ with
+> > > > > everything  building however, without py2 layer we have some work=
+ to do
+> > > > > so if you are interested in this here [1] is initial list of fail=
+ures
+> > > > > I will keep posting more as we go along.
 > > > > >
 > > > >
+> > > > Thanks a lot for the update! I've actually saw this in the master
+> > > > before this mail and went ahead with pulling the latest - my builds
+> > > > for i.MX8M series went fine.
+> > > >
+> > > > I'd also have a look at remaining things and try to fix some of tho=
+se
+> > > > as I'll progress.
+> > > >
+> > > > > [1]
+> > > > > https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds=
+/220/steps/8/logs/errors
 > > > >
 > > > > --
 > > > > Regards,
@@ -205,10 +203,15 @@ Got it, saw it now in the [master-next]. Thanks a lot!
 > > --
 > > Regards,
 > > Andrey.
+> > --
+> > _______________________________________________
+> > Openembedded-core mailing list
+> > Openembedded-core@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-core
 
 
 
--- 
+--=20
 Regards,
 Andrey.
 
