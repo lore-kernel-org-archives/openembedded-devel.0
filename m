@@ -1,50 +1,46 @@
 Return-Path: <andrey.z@gmail.com>
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
-	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 31F287FA19;
-	Mon, 27 Jan 2020 16:54:41 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id f129so7838617wmf.2;
-	Mon, 27 Jan 2020 08:54:43 -0800 (PST)
+Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
+	[209.85.221.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C9EB7F971
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Jan 2020 17:23:52 +0000 (UTC)
+Received: by mail-wr1-f65.google.com with SMTP id c14so12371651wrn.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Jan 2020 09:23:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6MXNPPW624rQ/vRpW91Ew2PfQheTAbFwmfxZH5JKuro=;
-	b=c8gYHBFTD6IQQ0NKk+sEJRYfHiZeWFiSmbs/T+XvOr4M3I4D58EOvps2TbuTWqoCD9
-	gvYa5ruUAGxvDtRKHrzHPzdYrvkay0WPhJX+vq8TntedKiM9zLcjk77HB7ktnFznfEVb
-	aQ0n2OXdpiL92ZXHD5EzEpxpX5BoTLLWTGTnwfDnwtMU9ueK8q1ALzwqMEdQKtdeIPiA
-	epnZg3bQOfKvAkKrGhG+EQtsv7OJB+NMvqrmqTZ1k7eKU9QSoPwvyFqY0YBNXqa0VfZd
-	IMuXiabXLesTeLz47bIN+x/LTvCwTng0FkdhqXnHKMItj7bKvgkTT0rCOSAEzcxjeHrK
-	LjPg==
+	:cc; bh=SrNWU5fKMFPuZTR8Kni9v77c5uCno5bMl6lqeukp+qc=;
+	b=tkTh9HULKksg2IHdaATBK2hXuQ8qVlPk0MjIREzCTRHCkfVRpcDwaCaMw5+Cnfkw+P
+	52zHXq3VmXeD3dTZisNCmCPTdmOJ+gm8z8K8y3xWcRX7NNVgjC96CkNVeH8C1UWQAbIF
+	eHNOeQZBEKXUbbgcrOiIQLozRj/A/nnG3s6ZPdYfpPGaJmHTazTTm/TDm2rMvdm93FSM
+	z1Hh4lY1+abRTgDhumchDW9/nwb7L/74cY3WH+QMuP7PC0omZ25a++eRtKCDCBR49JDt
+	GgcpzmVuamuQD89VV1d33xH64lixMhaBPid/l+LXdC5ElwcZ0+O3jLSQSaGyq+ytX/je
+	JgCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=6MXNPPW624rQ/vRpW91Ew2PfQheTAbFwmfxZH5JKuro=;
-	b=d2q6yOd0WRJdn76YacIGI7CmvxiofcxEZoWcQ2351+n5rWyEY6zW3digouo5075XVO
-	F9vWICHtiBxSnRKy0lAmFrvOkJbrtgjjiX9DPRsLMK/hBcoFalaSNzq26uYzYAkKLxLb
-	QtcKsTyrjnbfbZdWlh8JYMpizgm6p08K2Su5Ud7IcOsmpUhpBVVix0Epq7i64knZtckU
-	h58/CyYzvMgw1BE3UUUnGf7sTdMsz6d6y+Gj+26RzRZ/NHBp3kshYstJfbtrzmlLsLvI
-	HyN49MnvVT4NMeSv622RlGEiv8r+d0++xRsCVMQ+AmXbirZe6KEwjVQRcj0YeQ6WKIY3
-	T4pg==
-X-Gm-Message-State: APjAAAXObNRyZ5JGT7RvKjzvotJlY19TIb0haI+Ji7uep9JJsnUIc4NR
-	C6xQOD8ulEpmX+Tx9RWLtJuxb2D0RYgMaMtILok=
-X-Google-Smtp-Source: APXvYqwZJKyLipxszsLY0pF29sHDRWMwxulOlsh2XQ2P/HtPyFhW821qMk18w+0+yeIfHYXhqWFB/H/1zqj9T94wGaA=
-X-Received: by 2002:a1c:41c4:: with SMTP id o187mr18388wma.24.1580144082492;
-	Mon, 27 Jan 2020 08:54:42 -0800 (PST)
+	bh=SrNWU5fKMFPuZTR8Kni9v77c5uCno5bMl6lqeukp+qc=;
+	b=SuCt77lnlOtOITYwB7sMpvtwZ9jky9xjaHex7TaA1Z/HKOEcdTkfop18gSSHPvH2Gn
+	6DD+eymOi1RnezqehRl9vjR2Vnjv3pXQ2rVBvXA5IYNM63IaG12PBkGAuknWceVWMA2d
+	58NJjBBtd5MM/wavLZpS12Yzq+k9JUk1R6NFI/66EpdObHGB9hJRdtuZ3FYM1lXPH+dR
+	AQS7m+m7eFRsL0dHEOnY69A9NpAru4yJxv+I777lyMsiKQqA2F/dXjCZ1SpwQFxQtywP
+	QhD0DBb9dS3B4wwlu3F3nW0r03w8vDUoh5KKolYdPivQUqRz9w2UZ/ckUiNO7vIh4IE2
+	mGSw==
+X-Gm-Message-State: APjAAAW9Ibr5IGtzbZN10HnY5sOtWEEBSuwJ2qZREA1xzG7n8mYb4IuZ
+	mvcLMRxU1cbytoRL57/9/ouvogO7Q3SFTb7GxtU=
+X-Google-Smtp-Source: APXvYqy6T+XAdDNaek8GB+XBLBzKZ8Ggffc1l4ccE7YT1Mxwyq1lEWJjOS5fvEtBFhJHu1NdD9OjGlhZm31t9+8im1Y=
+X-Received: by 2002:adf:f308:: with SMTP id i8mr22991086wro.42.1580145833626; 
+	Mon, 27 Jan 2020 09:23:53 -0800 (PST)
 MIME-Version: 1.0
-References: <CAMKF1sryUbCcpRxpqi4ytZJ+j+AgksfS8pxd=_O6DtWrkCx+Lg@mail.gmail.com>
-	<CAHtQpK6cp2D3Zb2pkDgYwdKR=AX6AWnwpWEs=qqzNYQ64uL28w@mail.gmail.com>
-	<24c2080a-8465-ee2e-484a-ff817485fbf4@gmail.com>
-	<CAHtQpK4O1eDuq8EcNcFgLasY_PE-_WtzWYA6pOVE9NFQkBbTxg@mail.gmail.com>
-	<CAMKF1sqK8kdDdJry4+fp5bJvbUwwPo0SY8VJtpiDhY3y-e7PJg@mail.gmail.com>
-In-Reply-To: <CAMKF1sqK8kdDdJry4+fp5bJvbUwwPo0SY8VJtpiDhY3y-e7PJg@mail.gmail.com>
+References: <1572534894-51167-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1572534894-51167-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 From: Andrey Zhizhikin <andrey.z@gmail.com>
-Date: Mon, 27 Jan 2020 17:54:31 +0100
-Message-ID: <CAHtQpK4P3nxZPhWC0T84016toXJ5SoEnH1xuyw94jQCjXWV7Bg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] python2-less meta-openembedded build results
+Date: Mon, 27 Jan 2020 18:23:42 +0100
+Message-ID: <CAHtQpK6pqYO5WHh6Lmj61gs1zW32bWVYu5hW0uqDqy2V4PJKnA@mail.gmail.com>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libhugetlbfs: upgrade 2.21 -> 2.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,82 +53,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 16:54:42 -0000
+X-List-Received-Date: Mon, 27 Jan 2020 17:23:53 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Jan 27, 2020 at 4:24 PM Khem Raj <raj.khem@gmail.com> wrote:
+Hello Raj,
+
+Can you pick this one?
+
+It should solve one of the build issues you've posted in
+https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/220/steps/8/logs/errors
+
+On Thu, Oct 31, 2019 at 8:20 AM Zheng Ruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
 >
-> Awesome, thanks for the help!
-
-No probs!
-
-I've actually looked into the list and would have couple of
-components, which are sort-of "python2-only":
-- dnssec-conf: did not receive any update since 9(!) years, written
-totally in python2. Should this be bumped up of bumped out of
-[oe-core]?
-- mozjs: this one pulls the most of dependencies and produces the most
-of errors. It's version is also quite old (60.9.0esr), and there is a
-lot of python2-only code inside. Should this one be bumped out? Latest
-ESR version available upstream is
-68.4.2esr [1], dated 01/20/2020
-
-For some other recipes I would send out the patch series later today.
-
-[1]: https://archive.mozilla.org/pub/firefox/releases/68.4.2esr/source/
-
+> 1) Upgrade libhugetlbfs from 2.21 to 2.22.
 >
-> On Mon, Jan 27, 2020 at 2:51 AM Andrey Zhizhikin <andrey.z@gmail.com> wrote:
-> >
-> > Hello Raj,
-> >
-> > On Fri, Jan 24, 2020 at 8:27 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > >
-> > > On 1/20/20 8:51 AM, Andrey Zhizhikin wrote:
-> > > > On Mon, Jan 20, 2020 at 4:52 PM Khem Raj <raj.khem@gmail.com> wrote:
-> > > >>
-> > > >> Hi all
-> > > >>
-> > > >> Recently py2 is removed from oe-core, So I did quick patches to get a
-> > > >> world build going. And
-> > > >> here are initial failures, please help out with recipes your can or
-> > > >> care for. Eventually, the remaining
-> > > >> ones we can blacklist for 3.1 release.
-> > > >>
-> > > >> http://errors.yoctoproject.org/Errors/Build/97185/
-> > > >>
-> > > >> I will post more arches as they become available. If you want to try
-> > > >> the same for machines/distros you can try yoe/mut for meta-oe
-> > > >
-> > > > I've actually asked Ross about similar failures, specifically in
-> > > > [meta-openembeeded/meta-python] where there is a good mix of Pytho2
-> > > > and Python3 still present. I've started to remove those yesterday, and
-> > > > would continue with that layer further.
-> > > >
-> > > >>
-> > > >> https://git.openembedded.org/meta-openembedded-contrib/log/?h=yoe/mut
-> > > >>
-> > >
-> > > All these changes are now in master and its again buildable, with or
-> > > without meta-python2, with meta-python2, its back to where it was with
-> > > everything  building however, without py2 layer we have some work to do
-> > > so if you are interested in this here [1] is initial list of failures
-> > > I will keep posting more as we go along.
-> > >
-> >
-> > Thanks a lot for the update! I've actually saw this in the master
-> > before this mail and went ahead with pulling the latest - my builds
-> > for i.MX8M series went fine.
-> >
-> > I'd also have a look at remaining things and try to fix some of those
-> > as I'll progress.
-> >
-> > > [1]
-> > > https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/220/steps/8/logs/errors
-> >
-> > --
-> > Regards,
-> > Andrey.
+> 2) Update two patches for new version.
+>    0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
+>    0005-Include-dirent.h-for-ino_t.patch
+>
+> 3) Add RDEPEND python3-core for libhugetlbfs-tests to fix the do_package_qa error as follows:
+>
+> ERROR: libhugetlbfs-1_2.22-r0 do_package_qa: QA Issue: /usr/lib/libhugetlbfs/tests/run_tests.py contained in package libhugetlbfs-tests requires /usr/bin/python3, but no providers found in RDEPENDS_libhugetlbfs-tests? [file-rdeps]
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  ...-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch | 13 +++++++++----
+>  .../files/0005-Include-dirent.h-for-ino_t.patch             |  9 +++++++--
+>  meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb  |  6 +++---
+>  3 files changed, 19 insertions(+), 9 deletions(-)
+>
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
+> index 53f35ab..34a6220 100644
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch
+> @@ -10,15 +10,17 @@ Upstream-Status: Submitted
+>
+>  Signed-off-by: Ting Liu <b28495@freescale.com>
+>
+> +Update for 2.22.
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+>  ---
+>   tests/run_tests.py | 12 +++++++++++-
+>   1 file changed, 11 insertions(+), 1 deletion(-)
+>
+>  diff --git a/tests/run_tests.py b/tests/run_tests.py
+> -index 3c95a03..560df6b 100755
+> +index 018264d..0aabcd1 100755
+>  --- a/tests/run_tests.py
+>  +++ b/tests/run_tests.py
+> -@@ -234,9 +234,19 @@ def get_pagesizes():
+> +@@ -245,9 +245,19 @@ def get_pagesizes():
+>       Use libhugetlbfs' hugeadm utility to get a list of page sizes that have
+>       active mount points and at least one huge page allocated to the pool.
+>       """
+> @@ -36,6 +38,9 @@ index 3c95a03..560df6b 100755
+>  +        return sizes
+>  +    out = p.stdout.read().strip()
+>  +
+> -     if rc != 0 or out == "": return sizes
+> +     if rc != 0 or out == "":
+> +         return sizes
+>
+> -     for size in out.split("\n"): sizes.add(int(size))
+> +--
+> +2.7.4
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
+> index 0817420..e736cbc 100644
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/files/0005-Include-dirent.h-for-ino_t.patch
+> @@ -8,12 +8,14 @@ error: unknown type name 'ino_t'; did you mean 'int'?
+>
+>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+> +Update for 2.22.
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+>  ---
+>   tests/hugetests.h | 1 +
+>   1 file changed, 1 insertion(+)
+>
+>  diff --git a/tests/hugetests.h b/tests/hugetests.h
+> -index 8b1d8d9..056042c 100644
+> +index bc4e16a..fbe4dc0 100644
+>  --- a/tests/hugetests.h
+>  +++ b/tests/hugetests.h
+>  @@ -22,6 +22,7 @@
+> @@ -21,6 +23,9 @@ index 8b1d8d9..056042c 100644
+>   #include <errno.h>
+>   #include <string.h>
+>  +#include <dirent.h>
+> + #include <unistd.h>
+>
+>   #include "libhugetlbfs_privutils.h"
+> - #include "libhugetlbfs_testprobes.h"
+> +--
+> +2.7.4
+> +
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> index 66fd8e2..f258122 100644
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> @@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://LGPL-2.1;md5=2d5025d4aa3495befef8f17206a5b0a1"
+>
+>  DEPENDS = "sysfsutils"
+>  RDEPENDS_${PN} += "bash python python-io python-lang python-subprocess python-resource"
+> -RDEPENDS_${PN}-tests += "bash"
+> +RDEPENDS_${PN}-tests += "bash python3-core"
+>
+> -PV = "2.21"
+> +PV = "2.22"
+>  PE = "1"
+>
+> -SRCREV = "73d06e69108f231696e9c5c44f4b42690fc5d752"
+> +SRCREV = "e6499ff92b4a7dcffbd131d1f5d24933e48c3f20"
+>  SRC_URI = " \
+>      git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https \
+>      file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
 
