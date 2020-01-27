@@ -1,50 +1,49 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B3747FCC0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 15:15:01 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id s24so8834216iog.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 07:15:03 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com
+	[209.85.160.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 5CA687CE21;
+	Mon, 27 Jan 2020 15:24:31 +0000 (UTC)
+Received: by mail-qt1-f172.google.com with SMTP id v25so7630241qto.7;
+	Mon, 27 Jan 2020 07:24:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=HJQQygqOPzRMQBn1C7+roVUeLcpEt5Blk5Z2biYWzhI=;
-	b=rbxAd/Gcw2i7CX+kUSLZqavHqOfr/cTYKyQbTxeM2gqOoxWSDo/1NXBdvm1MiQyc0w
-	+XgOWvnFfKoCxa2jddIhJX64lqFDzhptUk4DANXVJplT5xX7hycMMbEAdON7atwoz4FJ
-	AI13KtX0onvkzA423R44feEYwx482yYosRRH7a6CgnRxSr/6eAFmasEYHG8mVkoUHFk0
-	phEAPuYR7Fcu5my0SLMr8Mm4B0AFZ0jvU5I5oqe+91ShzuR8QX52FXBNxOxyF7X8ZLTp
-	LL8LfhVzRzTK/9fs7fw7dHuRRP4ADxMKhQ0IlxBoxDcQsoVxAS4uJnAghsCF/Hpul+cM
-	2PnA==
+	:cc; bh=h1mouvd9/RJwWfqGWF0+j60MOS84mirMZtzSN+xpesg=;
+	b=qH5NipV5H7hPVm5HGdo6HNSf+YxQO1Qo6Z9pbvvbvYrrUyijh0OMAiNx7uG/MgDo2G
+	nRJJN6f8R0zdsSGvRYPYN0mZC5ma1GUIRhfvUSyIo7CBdV/4PnB5wa+z907wZ/VHA/V8
+	ZEAnHLY8/vGsux6U/qULzd+QKG5ZDea6tXvUi1vTpyooi/s5lJH4HOQVYaMj9iv8xeqr
+	OIeVzkAJ8UmH8EHoXXh/+YaEdN+O+fFMBcJKvvN+kyeIz4bocRFWazHHgPlH2GnFIHmO
+	DTUsnFVy0KjirAOpVB/naTW5KfCoPziwY4uovua0wM0kq0fPm71zPR0SaTgbQ4mex9Tb
+	XmGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=HJQQygqOPzRMQBn1C7+roVUeLcpEt5Blk5Z2biYWzhI=;
-	b=nA3K3qzCMaHKt0DCqB5Ajhc89SWBA7JUKi6cNtkoho+pE5KRpMqVYseqyjm3bXNojs
-	n7cvB8xsv+aXt5WV3UwhBR2abV0WRAz7ImUzkIQNLCI1HVTsgle+zWPxUSoNb/jqzWix
-	lq1+WCdvxDpWoMr59zWp+u+gZ8YaRfhR/I6ZbRF7eqVNQGqwFxp79wRwY56ZDccuP7Eq
-	mCqSJrY8RJGylejQ2sEfRio7ra51ADRI/ObLs7HG4vxVgPNW96hGKUvxHtaFWvbrD5Dr
-	3XXEymSEQodFg32xB/TLH7kLF4ac8kCY2IYRq1xFQgsfxfW/5trWVNq8xBK0i6ro3vba
-	CktA==
-X-Gm-Message-State: APjAAAVPpxOqWtrkep/6ERALaMfHLHjAJngWuqrWs5dB240CPpUAwxKC
-	bL9JqUtWPeqkvdkk97vA42yiY1YLlaYlIotRLiY=
-X-Google-Smtp-Source: APXvYqxZGNY9ywABQZaHck2wPfiKc9Smo9vYOkDyM8u7cNJaNr3eWi706upLOJbut3f0KnpzwXkSd5mMV/VshOxXd2w=
-X-Received: by 2002:a02:c988:: with SMTP id b8mr13760073jap.122.1580138102990; 
-	Mon, 27 Jan 2020 07:15:02 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=h1mouvd9/RJwWfqGWF0+j60MOS84mirMZtzSN+xpesg=;
+	b=UmimnBdTNn2P8SlLf0Ffaw2UcaVcKIMQEBUmfmTeIFa2JPLcV/wppMEy70LSMhdj7e
+	aB/AIQV5hkeuvY1zGxEELMyGT1Wp5pIT+jEU7M/0r/aooKRYshBmPTxNW52aH2mt5Fux
+	zqatXmrqj5amkZP9+cHQ2SpvjYGtWfVVBxpy1RT1TI1V6VODEpTdJhS8AT2qM7S9wjlt
+	QFI/SqGbCL4cibqVB2jp9cgJmox6Z6jsmGkQtECiGT/MMe0NRADCl/aOXrZMQNj5YJQ9
+	dYN/aD7T+sQVXovG//csruS4G7boKKE8W6R6F9WIsE2uf7oux8WilsW6aXbHzgndmNBA
+	dj2w==
+X-Gm-Message-State: APjAAAWcdlrCDPtp6JtK3awPb6/Yc+4DkRucUcMVyP3NAnT83avjPFSC
+	IYJRQ/1+R0m+51Wue/uJs9yxl+FQCSNvkuH4vh4=
+X-Google-Smtp-Source: APXvYqzVZny+m1R27nwsfHX0GZXJYH9NIdR3rsBNxqnIZ+FKAwp51PNvHTaJTfUnJezNExNRZBNxnDyOBejf07gYW3U=
+X-Received: by 2002:ac8:4419:: with SMTP id j25mr15377661qtn.378.1580138671723;
+	Mon, 27 Jan 2020 07:24:31 -0800 (PST)
 MIME-Version: 1.0
-References: <CAO5Uq5TV_6f7PXF6Q_TE0ii-W9xG9xgrO8p8OP_vb48HW=DugQ@mail.gmail.com>
-	<CALbNGRSAYNsQkWMhNAfxVqnq4bYx2=mcqMxQpxvPampLFyKazA@mail.gmail.com>
-	<CAO5Uq5TPW+hePvbEmxgN6cFHx5zcNqM-k9m_zSOOReBrYqU=pA@mail.gmail.com>
-	<92e2dcc5-6107-e05f-87f4-161b8132266e@gmail.com>
-In-Reply-To: <92e2dcc5-6107-e05f-87f4-161b8132266e@gmail.com>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Mon, 27 Jan 2020 15:14:52 +0000
-Message-ID: <CAO5Uq5SQeNGN8FmQjPfv_CWpbrT_rMQCjETvvN7ZukkzPd=BLg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: systemd failing in master with Assertion clock_gettime(map_clock_id(clock_id), &ts) failed
+References: <CAMKF1sryUbCcpRxpqi4ytZJ+j+AgksfS8pxd=_O6DtWrkCx+Lg@mail.gmail.com>
+	<CAHtQpK6cp2D3Zb2pkDgYwdKR=AX6AWnwpWEs=qqzNYQ64uL28w@mail.gmail.com>
+	<24c2080a-8465-ee2e-484a-ff817485fbf4@gmail.com>
+	<CAHtQpK4O1eDuq8EcNcFgLasY_PE-_WtzWYA6pOVE9NFQkBbTxg@mail.gmail.com>
+In-Reply-To: <CAHtQpK4O1eDuq8EcNcFgLasY_PE-_WtzWYA6pOVE9NFQkBbTxg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 27 Jan 2020 07:24:13 -0800
+Message-ID: <CAMKF1sqK8kdDdJry4+fp5bJvbUwwPo0SY8VJtpiDhY3y-e7PJg@mail.gmail.com>
+To: Andrey Zhizhikin <andrey.z@gmail.com>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] python2-less meta-openembedded build results
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,86 +56,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 15:15:02 -0000
+X-List-Received-Date: Mon, 27 Jan 2020 15:24:31 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jan 24, 2020 at 12:22 AM Khem Raj <raj.khem@gmail.com> wrote:
+Awesome, thanks for the help!
+
+On Mon, Jan 27, 2020 at 2:51 AM Andrey Zhizhikin <andrey.z@gmail.com> wrote:
 >
-> On 1/23/20 4:13 PM, Alex Kiernan wrote:
-> > On Thu, Jan 23, 2020 at 10:09 AM Andreas M=C3=BCller <schnitzeltony@gma=
-il.com> wrote:
-> >>
-> >> On Thu, Jan 23, 2020 at 10:43 AM Alex Kiernan <alex.kiernan@gmail.com>=
- wrote:
-> >>>
-> >>> On the offchance someone's tripped over this already/has pointers:
-> >>>
-> >>> Around the time python2 dropped out, I'm now seeing boot failures wit=
-h:
-> >>>
-> >>> [  612.151548] systemd-journald[543]: Assertion
-> >>> 'clock_gettime(map_clock_id(clock_id), &ts) =3D=3D 0' failed at
-> >>> src/basic/time-util.c:55, function now(). Aborting.
-> >>>
-> >>> I suspect it's unrelated to py2, but that's delayed me getting to the=
- problem.
-> >>>
-> >>> The board I'm targetting is AM335x based, but without an RTC (which I
-> >>> suspect may be relevant).
-> >>>
-> >>> Anyone seen anything similar?
-> >>>
-> >>> --
-> >>> Alex Kiernan
-> >> Hi Alex,
-> >>
-> >> Have not seen that one yet. Will look for it once I can build images
-> >> in current environment (python2/Qt5.14 broke loads for me). What I
-> >> have seen were problems with timedatectl <-> ntp. Changing from local
-> >> time to ntp-sync did not work: Time remained un-synced on recent
-> >> images. Machine was Raspi so no RTC either.
-> >>
-> >> Don't know if this is related to your finding...
-> >>
+> Hello Raj,
+>
+> On Fri, Jan 24, 2020 at 8:27 PM Khem Raj <raj.khem@gmail.com> wrote:
 > >
-> > Looks like it's related to the glibc bump - reverting that changeset
-> > gets it booting again. I struggle to figure out which of the myriad
-> > wrappers are actually being used from inspecting the glibc source, but
-> > if it's the one I think it is, there's clearly
-> > clock_gettime/clock_gettime64 changes there which I doubt my kernel
-> > has (we're currently using the TI 4.19.y kernel).
+> > On 1/20/20 8:51 AM, Andrey Zhizhikin wrote:
+> > > On Mon, Jan 20, 2020 at 4:52 PM Khem Raj <raj.khem@gmail.com> wrote:
+> > >>
+> > >> Hi all
+> > >>
+> > >> Recently py2 is removed from oe-core, So I did quick patches to get a
+> > >> world build going. And
+> > >> here are initial failures, please help out with recipes your can or
+> > >> care for. Eventually, the remaining
+> > >> ones we can blacklist for 3.1 release.
+> > >>
+> > >> http://errors.yoctoproject.org/Errors/Build/97185/
+> > >>
+> > >> I will post more arches as they become available. If you want to try
+> > >> the same for machines/distros you can try yoe/mut for meta-oe
+> > >
+> > > I've actually asked Ross about similar failures, specifically in
+> > > [meta-openembeeded/meta-python] where there is a good mix of Pytho2
+> > > and Python3 still present. I've started to remove those yesterday, and
+> > > would continue with that layer further.
+> > >
+> > >>
+> > >> https://git.openembedded.org/meta-openembedded-contrib/log/?h=yoe/mut
+> > >>
+> >
+> > All these changes are now in master and its again buildable, with or
+> > without meta-python2, with meta-python2, its back to where it was with
+> > everything  building however, without py2 layer we have some work to do
+> > so if you are interested in this here [1] is initial list of failures
+> > I will keep posting more as we go along.
+> >
 >
-> Is it possible for you to try 5.x for tests ?
-
-That's where I went first, though I need to bring up the newer TI 5.4
-branch first (which has its own problems as there's some patch which
-was in the 4.9.y hsmmc driver which isn't in the latest which causes
-random timeouts on some of our board samples).
-
-> I know there were 64bit
-> time_t related errors I saw with 4.19/rpi3-32bit but it was with musl,
-> since musl enabled 64bit time_t by default, that might be different
-> issue too
+> Thanks a lot for the update! I've actually saw this in the master
+> before this mail and went ahead with pulling the latest - my builds
+> for i.MX8M series went fine.
 >
-> Try applying [1] to glibc as well, currrently, its only applied to musl
-> case, perhaps that might help.
+> I'd also have a look at remaining things and try to fix some of those
+> as I'll progress.
 >
-> [1]
-> https://git.openembedded.org/openembedded-core/tree/meta/recipes-core/sys=
-temd/systemd/0022-Use-INT_MAX-instead-of-TIME_T_MAX-for-timerfd_settim.patc=
-h
+> > [1]
+> > https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/220/steps/8/logs/errors
 >
-
-It looks like it's something that's now in the call path which is
-tripping the seccomp filter on systemd-journald - if I comment
-SystemCallFilter=3D@system-service then I can boot.
-
-Just trying to figure out what syscall it is we're tripping over. What
-I don't understand is why booting linux-yocto 4.19 inside qemu w/
-systemd doesn't see this problem.
-
-
---
-Alex Kiernan
+> --
+> Regards,
+> Andrey.
 
