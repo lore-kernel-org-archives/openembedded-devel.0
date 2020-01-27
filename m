@@ -1,49 +1,52 @@
 Return-Path: <andrey.z@gmail.com>
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com
-	[209.85.128.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 08ABB7F7E9
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+	[209.85.128.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AFC37F2C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 17:36:18 +0000 (UTC)
-Received: by mail-wm1-f41.google.com with SMTP id f129so7977603wmf.2
+	Mon, 27 Jan 2020 17:36:30 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id s10so4109994wmh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 09:36:20 -0800 (PST)
+	Mon, 27 Jan 2020 09:36:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=ngPhRiMzJOdVYWJeUW/0/MhUHkS8ey0dN2gOrXrj1io=;
-	b=rH1ncZcaz7jsOGvHE530LVJsT2pRBsFyk5/aY70aL8kzNIeYnqj2IcWIpXTjYHNHxS
-	CRgemiIQ8LYBhVxVnVSJ1sppON69Uv304v9Q3V4FBOfTGxsOVVxwj//MT7Nn4pNJgDcW
-	OFFS2ALCdf1wYK6/gsV0p/jQIiuIB7r2IlgEgczSrHB8HZmyKGGuAdtySIT9pxMPGpnO
-	pnoEIuJpNqXP2FPhvJEusn48PX3r5MyYR1HyK+xUJ0HqcgrEDKpbzStTad7L2rVX+/8q
-	uQZbK7LvkBgtPHr1Z8LdfReNtf7iSNs1SmIFy2KNm8+T6aiPbbVNQKQquJuB3Ic02nPt
-	IaRA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=MVEtTe72SAbcC3mqBR/B6/AnxUcIcVSyvUB9wDyLcLg=;
+	b=DFPHDke7+iXKciQ4eweVHOHTKdaHmKXCFn6dbIoDGO4Rff5D5ORiDRg88ND7AtACNs
+	iYMjQZgV23bEtgFWwjoBsk0cT76ZILeBBO0hH7bQXX2b3iIl0PfperL6fAYPJ+qFpJqs
+	cf11666MJ0WyyYHD38NutkfOtpZ9XXQybwTYwHqWT4nscDu6nbE4Xs/FscqJXNXx++0V
+	sjqE+ZtQ+hlc7TTZnfHAFaxTMUDmGapBnuCoxgT5OjhjhjdGWRn8Ro9kg5h9AgdL9ny9
+	HXnV33dL+zFmrRtFBvKrZEm7A/9/DDJTpAljLLKSJMBUxnLifqzGFPbuT3Sp6hDBKgyA
+	5Cvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ngPhRiMzJOdVYWJeUW/0/MhUHkS8ey0dN2gOrXrj1io=;
-	b=R9fUiAtpUAm4ilaWkMBk94byJdhYsLxbV3tiaqEiQDmbWK3OLy0HN7GTjDkdLG862I
-	pEp3jc3u7FR008T8ZIv65Np44ATS0fUU2sJs294JVzdxLdihaRjP8Five6EiLUQCb4S9
-	A1J+3RwKZ9XdTIZvs0f5gkuwNL5QyoWgaloBeFx9RUnObSb/rg4r8ZWwDB1PyGHj4iIQ
-	XU7YzzHyNtTdJB5xl5mYqFpujNpV9zTDfgYHM02rLPy2Re/JUdAVimmuhaFWQcSPNRUi
-	BB0WLtdPpdst6V++Xdkknl3igmpwiKgyPRttFAAiE8NzFpAh2PrjYr3b2AtKLZXtEGYn
-	M9qg==
-X-Gm-Message-State: APjAAAVi/+y29D8UeVUA9aDG2qymzAH3JpOA9D96bJamws/kxTiRThRl
-	W+PWek9Y35ifDkv4ve27nHH7hU1pQf4=
-X-Google-Smtp-Source: APXvYqzeVCpjImBbgnvQmeq4TBBNLYrdKBU6/0lAYdM+SdYZisb3r0YfHSHUsK85t1rdHjSS0yW5Uw==
-X-Received: by 2002:a1c:5f8a:: with SMTP id t132mr146503wmb.162.1580146579624; 
-	Mon, 27 Jan 2020 09:36:19 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=MVEtTe72SAbcC3mqBR/B6/AnxUcIcVSyvUB9wDyLcLg=;
+	b=LwlQgSn6axbqh3NR/Je0JG2fpt4zkko9TpwXGSheF1h+07m+E3YaE07vG/+B94hoZS
+	C+ZdfPpiXRBY0n70BBXve7IZiTckFzA9pC05DEMQsTQc44Nsfq2BbOil8QI4xJdFw9CF
+	pexHoXbOlaiwS2mwe2Ov1qE/qVCWTB5xrkDuGQYTbGKrG7x15jAo+LsyA80L61qbNTP6
+	rnI3+wS22aBrWK95lknsBrAXhuIxFvSRBqge2GuuBjuLOW7aH2bWq+h74vl6RcT84eV6
+	wYaeixSO6l37EqC51JIYmJy/fG85RqsEXoQt93NfZ9k4/+tLlUVYVhA8mmZo+qFKgro5
+	Egxg==
+X-Gm-Message-State: APjAAAXslV2LxBGU8B6QJfnMs/2bd+i2D3NX7kFYLEYD0I2IthIJ2ii1
+	viE7FHOWNGpt6/cCSm8iW7KNOl6XZHE=
+X-Google-Smtp-Source: APXvYqxAuWBcRrSGu08/wn0bbEHRnPKjD7CNzPIkcApy/cPV7SqkibGHto69NkSpwNkLUvPawAj4Dg==
+X-Received: by 2002:a7b:c774:: with SMTP id x20mr126994wmk.67.1580146590861;
+	Mon, 27 Jan 2020 09:36:30 -0800 (PST)
 Received: from aherlnxbspsrv01.lgs-net.com ([193.8.40.126])
 	by smtp.gmail.com with ESMTPSA id
-	s10sm21916939wrw.12.2020.01.27.09.36.19
+	s10sm21916939wrw.12.2020.01.27.09.36.30
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 27 Jan 2020 09:36:19 -0800 (PST)
+	Mon, 27 Jan 2020 09:36:30 -0800 (PST)
 From: Andrey Zhizhikin <andrey.z@gmail.com>
 X-Google-Original-From: Andrey Zhizhikin
 	<andrey.zhizhikin@leica-geosystems.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Jan 2020 17:36:06 +0000
-Message-Id: <20200127173608.24874-1-andrey.zhizhikin@leica-geosystems.com>
+Date: Mon, 27 Jan 2020 17:36:07 +0000
+Message-Id: <20200127173608.24874-2-andrey.zhizhikin@leica-geosystems.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH 1/3] pcsc-lite: update recipe to use python3
+In-Reply-To: <20200127173608.24874-1-andrey.zhizhikin@leica-geosystems.com>
+References: <20200127173608.24874-1-andrey.zhizhikin@leica-geosystems.com>
+Subject: [meta-oe][PATCH 2/3] libteam: update recipe to use python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,93 +59,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 17:36:19 -0000
+X-List-Received-Date: Mon, 27 Jan 2020 17:36:30 -0000
 
 From: Andrey Zhizhikin <andrey.z@gmail.com>
 
-Update pcsc-lite recipe to target python3 since python2 is EOL and has
-been dropped from OE-Core.
+Update recipe to use python3 since python2 is EOL and has been dropped
+from OE-Core.
 
 Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
 ---
- .../0001-pcsc-spy-use-python3-only.patch      | 43 +++++++++++++++++++
- .../pcsc-lite/pcsc-lite_1.8.26.bb             |  7 ++-
- 2 files changed, 48 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
+ ...asic_test.py-use-python3-interpreter.patch | 28 +++++++++++++++++++
+ .../recipes-support/libteam/libteam/run-ptest |  2 +-
+ .../recipes-support/libteam/libteam_1.29.bb   |  3 +-
+ 3 files changed, 31 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch
 
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch b/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
+diff --git a/meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch b/meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch
 new file mode 100644
-index 000000000..3e7b0adda
+index 000000000..e27e4f329
 --- /dev/null
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite/0001-pcsc-spy-use-python3-only.patch
-@@ -0,0 +1,43 @@
-+From 75dd98876951d86890ceb30be521de57fd31e3c7 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/libteam/libteam/0001-team_basic_test.py-use-python3-interpreter.patch
+@@ -0,0 +1,28 @@
++From 571c141b434dff13494c6a3afe621f63a8e610e9 Mon Sep 17 00:00:00 2001
 +From: Andrey Zhizhikin <andrey.z@gmail.com>
-+Date: Mon, 27 Jan 2020 13:27:12 +0000
-+Subject: [PATCH] pcsc-spy: use python3 only
++Date: Mon, 27 Jan 2020 14:29:34 +0000
++Subject: [PATCH] team_basic_test.py: use python3 interpreter
 +
-+Python2 has been EOL and most distributions would not provide any
-+support for it anymore. Since Python3 is available in all distributions
-+now, switch pcsc-spy to use it exclusively.
++Use python3 since python2 is EOL and has been removed from several
++distributions.
 +
 +Upstream-Status: Pending
 +
 +Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
 +---
-+ src/spy/pcsc-spy | 9 ++-------
-+ 1 file changed, 2 insertions(+), 7 deletions(-)
++ scripts/team_basic_test.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/spy/pcsc-spy b/src/spy/pcsc-spy
-+index 85222c6..965138e 100755
-+--- a/src/spy/pcsc-spy
-++++ b/src/spy/pcsc-spy
++diff --git a/scripts/team_basic_test.py b/scripts/team_basic_test.py
++index b05be9e..ad980e8 100755
++--- a/scripts/team_basic_test.py
+++++ b/scripts/team_basic_test.py
 +@@ -1,4 +1,4 @@
-+-#! /usr/bin/python
-++#!/usr/bin/env python3
-+ 
++-#! /usr/bin/env python
+++#! /usr/bin/env python3
 + """
-+ #    Display PC/SC functions arguments
-+@@ -22,12 +22,7 @@ from __future__ import print_function
-+ import os
-+ import signal
-+ import time
-+-try:
-+-    # for Python3
-+-    from queue import Queue
-+-except ImportError:
-+-    # for Python2
-+-    from Queue import Queue
-++from queue import Queue
-+ from threading import Thread
-+ from operator import attrgetter
++ Basic test.
 + 
 +-- 
 +2.17.1
 +
-diff --git a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
-index 5e6084656..fb8c4a202 100644
---- a/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
-+++ b/meta-oe/recipes-support/pcsc-lite/pcsc-lite_1.8.26.bb
-@@ -10,7 +10,10 @@ LICENSE_${PN}-spy = "GPLv3+"
- LICENSE_${PN}-spy-dev = "GPLv3+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
+diff --git a/meta-oe/recipes-support/libteam/libteam/run-ptest b/meta-oe/recipes-support/libteam/libteam/run-ptest
+index 4ba5acf05..b5c6f4ebb 100644
+--- a/meta-oe/recipes-support/libteam/libteam/run-ptest
++++ b/meta-oe/recipes-support/libteam/libteam/run-ptest
+@@ -1,3 +1,3 @@
+ #!/bin/sh
  
--SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
-+SRC_URI = "\
-+	https://pcsclite.apdu.fr/files/${BP}.tar.bz2 \
-+	file://0001-pcsc-spy-use-python3-only.patch \
-+"
- SRC_URI[md5sum] = "9d36882998449daceec267c68a21ff0d"
- SRC_URI[sha256sum] = "3eb7be7d6ef618c0a444316cf5c1f2f9d7227aedba7a192f389fe3e7c0dfbbd9"
+-python $(dirname $0)/team_basic_test.py
++python3 $(dirname $0)/team_basic_test.py
+diff --git a/meta-oe/recipes-support/libteam/libteam_1.29.bb b/meta-oe/recipes-support/libteam/libteam_1.29.bb
+index 821ca1938..26c475053 100644
+--- a/meta-oe/recipes-support/libteam/libteam_1.29.bb
++++ b/meta-oe/recipes-support/libteam/libteam_1.29.bb
+@@ -11,6 +11,7 @@ SRC_URI = "git://github.com/jpirko/libteam \
+            file://0001-include-sys-select.h-for-fd_set-definition.patch \
+            file://0002-teamd-Re-adjust-include-header-order.patch \
+            file://0001-team_basic_test.py-disable-RedHat-specific-test.patch \
++           file://0001-team_basic_test.py-use-python3-interpreter.patch \
+            file://run-ptest \
+            "
+ SRCREV = "e897f02bf2403d4859a99e090e34ea768b4c0540"
+@@ -32,7 +33,7 @@ FILES_${PN}-utils = "${bindir}/bond2team \
+ "
  
-@@ -50,6 +53,6 @@ RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
- RCONFLICTS_${PN} += "${PN}-systemd"
- SYSTEMD_SERVICE_${PN} = "pcscd.socket"
--RDEPENDS_${PN}-spy +="python"
-+RDEPENDS_${PN}-spy +="python3"
+ RDEPENDS_${PN}-utils = "bash"
+-RDEPENDS_${PN}-ptest = "python"
++RDEPENDS_${PN}-ptest = "python3"
  
- BBCLASSEXTEND = "native"
+ do_install_ptest() {
+ 	install ${S}/scripts/team_basic_test.py ${D}${PTEST_PATH}/
 -- 
 2.17.1
 
