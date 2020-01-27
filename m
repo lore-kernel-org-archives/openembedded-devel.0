@@ -1,39 +1,48 @@
-Return-Path: <prvs=288f39d4d=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C3A67FD98
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 10:03:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1580119422; x=1611655422;
-	h=date:from:to:cc:subject:message-id:references:
-	mime-version:in-reply-to;
-	bh=EzdnsQboxhDHQjA1Wyw5X/reyFMpl5Q53TvVxdMvgPk=;
-	b=ig2Zuerp2rurv4lqK3c8iUts6w98PqDRp0eEjebsbt+zoM/ACoPKiGY2
-	IayrG4eNWyZFjczO+azSyrHRGgCqTSyS3TTjGqdpUmQqzUSZLZFc+7GGt
-	wljOw6YFcF4+atux9h5a9P496Q1vsZG0GMWeuctsRIFsya9yB1xdUfOzD
-	5nEkizAGcREBOJBNAeWHCkCxX28IonVu5uiENl7RSffTbfNhtXlStIQ4k
-	THzHkS57UwBSHp8pUlLOpkKnvvYgnJKqmfSTOK2qsWDbZ1s56XWJ1QAK1
-	vO9bSZkdw2zRQAoUF306djOxsb63OBcT17dO/FYdFMeR20GK0bVzE562f w==;
-IronPort-SDR: e85x5cJwi5V3cuAsQMxaQpcQEZTwiHhCb7RgwePZqalbk2uLo3KC3WkvydzIhHCWXR3W8vtPGt
-	0JlOEKdlqqLnM6nBc8A2dssO+XGo8fRXi6xjZ6YsM2HGgM4KCmjYz/e+azvZQdSSft2AQTVXkO
-	MZlnE/givF80r+WPLvkP3HVRWtdwc/WN2t6wOyDJH9PyY8v5AIqzzVMDpACxmbNW29AFk891Pm
-	5gXoymoWkh421g7CV1CRVXgnDRMwcSys9RRQhTRHMjx56AkkXYDCajOetqcq0UlJ4FkcZdIH5l
-	MxI=
-X-IronPort-AV: E=Sophos;i="5.70,369,1574118000"; 
-   d="scan'208";a="2501159"
-Date: Mon, 27 Jan 2020 11:03:42 +0100
-From: Richard Leitner <richard.leitner@skidata.com>
-To: Kraag Gorim <kraaggorim@gmail.com>
-Message-ID: <20200127100342.GD2982185@pcleri>
-References: <CACc3Zv6GF8UTJK4=v22np2vZoSgkBtWr-1VSG22LDkhnky65xA@mail.gmail.com>
+Return-Path: <andrey.z@gmail.com>
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+	[209.85.221.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 421D87F89E;
+	Mon, 27 Jan 2020 10:51:04 +0000 (UTC)
+Received: by mail-wr1-f44.google.com with SMTP id d16so10608874wre.10;
+	Mon, 27 Jan 2020 02:51:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=C/zX55F7tomVjoEa/VWRHeh0ro3NjkvuJ5Vz1TdCuF0=;
+	b=bhGbpz6hBFOzIy+yt/JLsfz9L1742MQZeuSjzAS4LzwkwGNqg7OX+clqbZTTluzd+V
+	uJYfFbOps3CGhrTpWiuJPRWJJK0/bPu5dpZlLV/tB9xJpFRXQR9qcmfQnnysTq2/30sI
+	8lfJ5IPmkgDhqoZi6U13krw/t8oN04KHdeJ/tegAF3Fcz6DnWZEzo2t8yyC+g1EeTQsU
+	+JlSvgG0CeWtH4t+1t7Eqg1h0+ovK9gRXEAm6lPLJ1Q1NusQMpje65QL1kOfMS/JfXL0
+	/xCz4qHfF3dYL3jStiwJhNYCBo+CHQt971f98LFwef1pbYXrLqUSQlE66zS4ybluCHE0
+	tdzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=C/zX55F7tomVjoEa/VWRHeh0ro3NjkvuJ5Vz1TdCuF0=;
+	b=mb471aIxkVWK9GlVsR15EXvGjhi1oKux3tifckuPsliaLDGiaa3O6PX2kO1d0HGWuN
+	hpbTEivaS4gKijO3Un0Ohpvepl0A+MNRdIt3D1YfoxiHsMd4Vo0iR66+fdh5s2AQNrf4
+	wiA0voH6IyL3jeW6mPXhwqQekbd5AF5dmHc4lPCI161uVB3pQErP1ukLymDJgISn5M4K
+	Lr8CEK1rFZjKmQkYlWhRpLO7Bt4rBGvzasBRcnH6Yu63jUNTOFOcptjwFXrBpYxGUbmn
+	zDmswjfP2zYLhqqPnCxpVWOoba2JG0pE6F9BhC9v6OgHIvtwU7tHPAxe7Wd3dfCxaEw/
+	mnPQ==
+X-Gm-Message-State: APjAAAV51txF4kRRyHyx4pxNeN1JElp/cKwkYygJow4JqKcwj9D7OE5n
+	lz6H+I319OVH7cRjaILzl49xsD1JMXuJigms9QPZaQ==
+X-Google-Smtp-Source: APXvYqxZu3n0aY1DKTbAeY6auxuhez/Owj2Q8nD8KnKhTwR8VGvGL9iRweAB0Qj6LqwV1JmpSlmFF4rZvX5ra6Da0Uo=
+X-Received: by 2002:a5d:42c5:: with SMTP id t5mr21937002wrr.73.1580122264911; 
+	Mon, 27 Jan 2020 02:51:04 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CACc3Zv6GF8UTJK4=v22np2vZoSgkBtWr-1VSG22LDkhnky65xA@mail.gmail.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v2 2/2] [meta-java] icedtea7-native: inherit python native
+References: <CAMKF1sryUbCcpRxpqi4ytZJ+j+AgksfS8pxd=_O6DtWrkCx+Lg@mail.gmail.com>
+	<CAHtQpK6cp2D3Zb2pkDgYwdKR=AX6AWnwpWEs=qqzNYQ64uL28w@mail.gmail.com>
+	<24c2080a-8465-ee2e-484a-ff817485fbf4@gmail.com>
+In-Reply-To: <24c2080a-8465-ee2e-484a-ff817485fbf4@gmail.com>
+From: Andrey Zhizhikin <andrey.z@gmail.com>
+Date: Mon, 27 Jan 2020 11:50:54 +0100
+Message-ID: <CAHtQpK4O1eDuq8EcNcFgLasY_PE-_WtzWYA6pOVE9NFQkBbTxg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] python2-less meta-openembedded build results
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,56 +55,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 10:03:43 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 27 Jan 2020 10:51:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi,
-this is a note to let you know that I've just added this patch to the
-master-next branch of the meta-java repository at
-     git://git.yoctoproject.org/meta-java
+Hello Raj,
 
-As soon as it has gone through some more testing it will likely be
-merged to the master branch.
+On Fri, Jan 24, 2020 at 8:27 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On 1/20/20 8:51 AM, Andrey Zhizhikin wrote:
+> > On Mon, Jan 20, 2020 at 4:52 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >>
+> >> Hi all
+> >>
+> >> Recently py2 is removed from oe-core, So I did quick patches to get a
+> >> world build going. And
+> >> here are initial failures, please help out with recipes your can or
+> >> care for. Eventually, the remaining
+> >> ones we can blacklist for 3.1 release.
+> >>
+> >> http://errors.yoctoproject.org/Errors/Build/97185/
+> >>
+> >> I will post more arches as they become available. If you want to try
+> >> the same for machines/distros you can try yoe/mut for meta-oe
+> >
+> > I've actually asked Ross about similar failures, specifically in
+> > [meta-openembeeded/meta-python] where there is a good mix of Pytho2
+> > and Python3 still present. I've started to remove those yesterday, and
+> > would continue with that layer further.
+> >
+> >>
+> >> https://git.openembedded.org/meta-openembedded-contrib/log/?h=yoe/mut
+> >>
+>
+> All these changes are now in master and its again buildable, with or
+> without meta-python2, with meta-python2, its back to where it was with
+> everything  building however, without py2 layer we have some work to do
+> so if you are interested in this here [1] is initial list of failures
+> I will keep posting more as we go along.
+>
 
-If you have any questions, please let me know.
+Thanks a lot for the update! I've actually saw this in the master
+before this mail and went ahead with pulling the latest - my builds
+for i.MX8M series went fine.
 
-Please note that this patch wasn't formatted correctly as some extra
-linebreaks were inserted.
-To avoid this in the future please fix your mail program or use
-git-send-email. Thanks!
+I'd also have a look at remaining things and try to fix some of those
+as I'll progress.
 
-regards;rl
+> [1]
+> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/220/steps/8/logs/errors
 
-On Fri, Jan 24, 2020 at 05:22:18PM +0100, Kraag Gorim wrote:
-> icedtea7-native relys on python to enable building it. Therefor it
-> should inherit python instead of assuming python being part of
-> HOSTTOOLS.
-> 
-> Signed-off-by: Kraag Gorim <kraaggorim@gmail.com>
-> ---
->  recipes-core/icedtea/icedtea7-native.inc | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/recipes-core/icedtea/icedtea7-native.inc
-> b/recipes-core/icedtea/icedtea7-native.inc
-> index b578cb2..41da925 100644
-> --- a/recipes-core/icedtea/icedtea7-native.inc
-> +++ b/recipes-core/icedtea/icedtea7-native.inc
-> @@ -30,6 +30,7 @@ CFLAGS_append = " -Wno-error=stringop-overflow
-> -Wno-error=return-type"
-> 
->  inherit native java autotools pkgconfig
->  inherit openjdk-build-helper
-> +inherit python3native
-> 
->  JAVA_HOME[unexport] = "1"
-> 
-> -- 
-> 2.24.0
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+-- 
+Regards,
+Andrey.
 
