@@ -1,58 +1,55 @@
 Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
-	[209.85.167.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F8967F89A
+Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
+	[209.85.208.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 408187FCB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 13:04:08 +0000 (UTC)
-Received: by mail-lf1-f68.google.com with SMTP id l18so6147652lfc.1
+	Mon, 27 Jan 2020 14:10:06 +0000 (UTC)
+Received: by mail-lj1-f193.google.com with SMTP id y4so10802120ljj.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 05:04:09 -0800 (PST)
+	Mon, 27 Jan 2020 06:10:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:message-id:date:user-agent:mime-version
 	:in-reply-to:content-language:content-transfer-encoding;
-	bh=DVJmgsS/Cpxedh3Fkej6mSNaa3PbF9+V8Dqv71HrUU4=;
-	b=pdZE3xh44goBxCDr3sHLpLrOiRLtlSgxcuWcypVuZvD1A5P9AOscDCMA22eN6B582x
-	SdCN5UBz48+iv02O2NknkhjHy8jJup1PLGrH4fs4PsA6bDOX1PPUgBLQwu5AUhw5BVKz
-	NV+z9DZI24N5MUWNsbAFVC9DHctExatp5x3XmARcWVP8HHD1PtUhi2r+vSk11J0Fze9S
-	0RxGG3uExNyabKFqSY6Qax28nRWVCNz46ZWzgoMY+7FBa0nsbRU3GWUG8KmkRXBpixSo
-	wiRQAFOgpxUo0rZ199p3GgZgA9kxX17WoJF5VcfPojdLxYzn/UkqNipBCs5/ywOUvGge
-	zpbw==
+	bh=iSyvtKkoUTa3/mtCcxXxEwo4Y6KD8rDEfaXMfDf/TIw=;
+	b=k3SC/WYP771wHSCr9Hk6J29Mrn4yYDNhtqDcNspIDJrw7DhfhNftmc74PSmQEDvW1h
+	Psar0INKvgCX0jkHpuRHmLlFuliS2XA4EZbweHQFQhA/vEgYuZUg8bbGP55aNEbojn7V
+	PLNB43eYemtHmyfbaAC8bdyfN9Y1XOaJLugLgQNX795Cfy1R1zqiI2ZN5q0EDCJoI3Hm
+	UO5nE0kaQKGLe+QRHpFlx1n1yBLO0LD+Os3DSaDy1MvJQYBdCOmtKnIHEFKKPeUL6+CL
+	2roJOZ/l/VRwENHmaEyr5TJF8tVsx023jcjMb/9CtbUEMaIzD4NvSv76tUrbYg1Bv2bS
+	6qAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=DVJmgsS/Cpxedh3Fkej6mSNaa3PbF9+V8Dqv71HrUU4=;
-	b=Q/CBxCsJr5Mt0RUksy1D/MVVTqf2g2GP/YXESVJUP3MVRkYmy3HvlEktx+M6Rd4G34
-	thGYzM/InnA3bjjc4TGY5fWST/O7sl7zT4QJPCPzvWycZ+rfcdH86cKMB49MM883So63
-	YehKtbE0P0cvaY/+GMGGP/mgVUVTuzQbK1ZrmmlOYXnrwcft/m5oGrv34bwYe9U2FmFL
-	cyDY0953nwkWUVpd+Yb8NEKllosYXUp3C8bXDJJyFd789pdFpBfAX1VTDi9v0ke7ElAN
-	2B5rKuVjd1TQanLG1GRVEUGj23vAjsN47vTmFSs9/VwAkMwZDha/YT6OWV96P2BOoAzx
-	WHgg==
-X-Gm-Message-State: APjAAAXW5l6ouS7q3soENKm7mct5lmuyWRw3uerMOsdjsYmRvbuFKPVv
-	4rbib3xOrTDK+HkmTZdtMDl5KPRV
-X-Google-Smtp-Source: APXvYqySXJkqynciEPdC18/cU0MRlT9i1gZJIPBP0Rr6KzEnEAOC7VldeGu8WcYTDchRB+c12zfPHQ==
-X-Received: by 2002:a05:6512:407:: with SMTP id
-	u7mr7800119lfk.146.1580130248535; 
-	Mon, 27 Jan 2020 05:04:08 -0800 (PST)
+	bh=iSyvtKkoUTa3/mtCcxXxEwo4Y6KD8rDEfaXMfDf/TIw=;
+	b=GL6YCcBkormL4w7UdjT8jT4GsFla/PMt8RelcUEBhLcxEI5ic9PW3eKMLGEncyfADQ
+	97bVknZiDE4bjl4BCcPG4SwDdsqWGAi6d+qpn8o7hCPEd//Po5cfxXNH2ab6cZRP/Aw0
+	nP7ZYUjqwHvtR2FwZtq6klamU2nYj6NLeLSqe2reDOWQjVxpgLc/ZrURLhAVsFJtMoyb
+	+Cz0Oq6CbvYf4Wtucy/1tG+qeH62Vn2PBIY2HyoBkGY1UuYRzzxU56edvX2duxGYrC8d
+	4S2EnKfzuw5uhaXcmUgOu9gejByyHIvNKjGXp56iAtjEFbRfWtwZ7Qu1U9qnpFey3kgW
+	9LOw==
+X-Gm-Message-State: APjAAAVngYlo1BxuSL5wxsirlJ4bpbiCvbCJBGR7wpUesY4/DeJSOLMU
+	A0K/FBHS7nbE5xs840Irp03yQzBp
+X-Google-Smtp-Source: APXvYqwN3sS8CM+TxM8YkshL9FTcuw1LpVA/6nz4Id5f73Iw+iHrI5zgrqf+tuWXP6or78z6aCwuNg==
+X-Received: by 2002:a2e:97c1:: with SMTP id m1mr10097954ljj.270.1580134206736; 
+	Mon, 27 Jan 2020 06:10:06 -0800 (PST)
 Received: from localhost.localdomain ([213.185.29.22])
 	by smtp.gmail.com with ESMTPSA id
-	126sm8197000lfm.38.2020.01.27.05.04.07
-	for <openembedded-devel@lists.openembedded.org>
+	g15sm8202080ljn.32.2020.01.27.06.10.05
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Mon, 27 Jan 2020 05:04:07 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
+	Mon, 27 Jan 2020 06:10:05 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org,
+	Richard Leitner <richard.leitner@skidata.com>
 References: <20200127112451.165555-1-richard.leitner@skidata.com>
-	<20200127112451.165555-4-richard.leitner@skidata.com>
-	<c5c24b0d8f7b6c1dca8e55d4acb6a050984e9716.camel@andred.net>
 From: Jacob Kroon <jacob.kroon@gmail.com>
-Message-ID: <31b0f3c6-eeca-23c4-7282-61521c2db87b@gmail.com>
-Date: Mon, 27 Jan 2020 14:04:06 +0100
+Message-ID: <c43cf573-d876-8a4a-d978-fc4b2303e747@gmail.com>
+Date: Mon, 27 Jan 2020 15:10:04 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <c5c24b0d8f7b6c1dca8e55d4acb6a050984e9716.camel@andred.net>
-Subject: Re: [meta-java][PATCH 3/4] openjre-8: fix debuginfo fixup in do_install
+In-Reply-To: <20200127112451.165555-1-richard.leitner@skidata.com>
+Subject: Re: [meta-java][PATCH 0/4] openjdk-8: update to jdk8u242ga
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,50 +62,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 13:04:08 -0000
+X-List-Received-Date: Mon, 27 Jan 2020 14:10:06 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 1/27/20 12:37 PM, André Draszik wrote:
-> Hi,
+On 1/27/20 12:24 PM, Richard Leitner wrote:
+> This series updates Openjdk 8 to the latest "ga" release 242.
 > 
-> On Mon, 2020-01-27 at 12:24 +0100, Richard Leitner wrote:
->> Based on a patch sent by Jacob Kroon.
->>
->> Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
->> Cc: Jacob Kroon <jacob.kroon@gmail.com>
->> ---
->>   recipes-core/openjdk/openjre-8_242.bb | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/recipes-core/openjdk/openjre-8_242.bb b/recipes-core/openjdk/openjre-8_242.bb
->> index 4ed2e6b..2c8a6a5 100644
->> --- a/recipes-core/openjdk/openjre-8_242.bb
->> +++ b/recipes-core/openjdk/openjre-8_242.bb
->> @@ -11,7 +11,7 @@ do_install() {
->>       cp -rp ${B}/images/j2re-image/* ${D}${JRE_HOME}
->>       chown -R root:root ${D}${JRE_HOME}
->>       install -m644 ${WORKDIR}/jvm.cfg  ${D}${JRE_HOME}/lib/${JDK_ARCH}/
->> -    find ${D}${JDK_HOME} -name "*.debuginfo" -exec rm {} \;
->> +    [ -d ${D}${JDK_HOME} ] && find ${D}${JDK_HOME} -name "*.debuginfo" -exec rm {} \;
-> 
-> Does this line make sense? The JRE build should not produce any files in the JDK_HOME
-> directory, I think?
-> 
-> So the only 'fix' this is doing is to silence 'find' to not print a warning about a
-> directory it can't find?
+> Successful testing has been done on a fedora-31 build host for
+> qemuarm64, qemux86-64, qemuarm32 and armv7a.
 > 
 
-It wasn't a warning - the build fails.
+<cut>
 
-> Shouldn't the line be dropped completely instead?
-> 
-> Should we worry if the JRE build (sometimes?) places files into JDK_HOME?
-> 
+I don't know if it is related to my setup, but "bitbake openjre-8" 
+insists on rebuilding itself every time I run it, and I don't see any 
+sstate cache being generated for it.
 
-Right, I'm all for removing the line completely if this is the case.
-
-Cheers,
-Jacob
+/Jacob
 
