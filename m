@@ -1,48 +1,36 @@
-Return-Path: <andrey.z@gmail.com>
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
-	[209.85.221.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 421D87F89E;
-	Mon, 27 Jan 2020 10:51:04 +0000 (UTC)
-Received: by mail-wr1-f44.google.com with SMTP id d16so10608874wre.10;
-	Mon, 27 Jan 2020 02:51:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=C/zX55F7tomVjoEa/VWRHeh0ro3NjkvuJ5Vz1TdCuF0=;
-	b=bhGbpz6hBFOzIy+yt/JLsfz9L1742MQZeuSjzAS4LzwkwGNqg7OX+clqbZTTluzd+V
-	uJYfFbOps3CGhrTpWiuJPRWJJK0/bPu5dpZlLV/tB9xJpFRXQR9qcmfQnnysTq2/30sI
-	8lfJ5IPmkgDhqoZi6U13krw/t8oN04KHdeJ/tegAF3Fcz6DnWZEzo2t8yyC+g1EeTQsU
-	+JlSvgG0CeWtH4t+1t7Eqg1h0+ovK9gRXEAm6lPLJ1Q1NusQMpje65QL1kOfMS/JfXL0
-	/xCz4qHfF3dYL3jStiwJhNYCBo+CHQt971f98LFwef1pbYXrLqUSQlE66zS4ybluCHE0
-	tdzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=C/zX55F7tomVjoEa/VWRHeh0ro3NjkvuJ5Vz1TdCuF0=;
-	b=mb471aIxkVWK9GlVsR15EXvGjhi1oKux3tifckuPsliaLDGiaa3O6PX2kO1d0HGWuN
-	hpbTEivaS4gKijO3Un0Ohpvepl0A+MNRdIt3D1YfoxiHsMd4Vo0iR66+fdh5s2AQNrf4
-	wiA0voH6IyL3jeW6mPXhwqQekbd5AF5dmHc4lPCI161uVB3pQErP1ukLymDJgISn5M4K
-	Lr8CEK1rFZjKmQkYlWhRpLO7Bt4rBGvzasBRcnH6Yu63jUNTOFOcptjwFXrBpYxGUbmn
-	zDmswjfP2zYLhqqPnCxpVWOoba2JG0pE6F9BhC9v6OgHIvtwU7tHPAxe7Wd3dfCxaEw/
-	mnPQ==
-X-Gm-Message-State: APjAAAV51txF4kRRyHyx4pxNeN1JElp/cKwkYygJow4JqKcwj9D7OE5n
-	lz6H+I319OVH7cRjaILzl49xsD1JMXuJigms9QPZaQ==
-X-Google-Smtp-Source: APXvYqxZu3n0aY1DKTbAeY6auxuhez/Owj2Q8nD8KnKhTwR8VGvGL9iRweAB0Qj6LqwV1JmpSlmFF4rZvX5ra6Da0Uo=
-X-Received: by 2002:a5d:42c5:: with SMTP id t5mr21937002wrr.73.1580122264911; 
-	Mon, 27 Jan 2020 02:51:04 -0800 (PST)
+Return-Path: <prvs=288f39d4d=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 96BF07FD64
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Jan 2020 11:25:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1580124315; x=1611660315;
+	h=from:to:cc:subject:date:message-id:mime-version:
+	content-transfer-encoding;
+	bh=qlSo7irtWCjR2RyCiwiseE8g4MLcKo0/J71Hi/5GrP0=;
+	b=ZqnoTXoepdW+CZRbkMV9w1M8E/FtGpN68xx2PUjguWQqPJ7hzthyDPB8
+	U1cRNqIDpryH4j6NXhTanY1Q4+skL9htK0gpFfcMOW7t9ags7pibnFO0F
+	Tm6y+dSBuwCLtXbftUr52HpNHBWOudDSRqqi7V9UaMh9iF/XgEsP+AUIk
+	OggECg+qgmm51d53KiZbONIhSpAvYPpPI6XBXhNR7zJkCb9fEdPenF0BQ
+	MCluRNHkd55YQZg6vO4p91feen6l40bkmIyyn6diqUQ6aZht2ExRnYU8a
+	unLOnzfeFfozbmrkrPl9jp4Z64DZdOOBpo+2C/Xjy2nmHESh+YADVanRH w==;
+IronPort-SDR: a5x8H0YAW3hMGRnkYRBHUCnGfm6eQLb/OOY+BJ3mxbYXm0CR+fcgY3TvWF2SkYHBDqYbWx/CUQ
+	WwNu/fYjaBetEnR8iwOXqaEOEnQPXUa+0XBPEV82EHmjwwOxZXQVBoSF8eFfPlevNso9fp1sGR
+	hl8/R9BztdmmYkDudR4x82esnipG4eruu70nWHpRPvavTvdnSEjDyuwRN1c/HwhHTO4pM1e591
+	ehbEE0An6CtJ6ZMoJdCDol6+F3fAx0aONsQ8N+YOJxzvAlzmipeD7UQy+vkSrnYHI2VGWW9+71
+	DQ8=
+X-IronPort-AV: E=Sophos;i="5.70,369,1574118000"; d="scan'208";a="22275559"
+From: Richard Leitner <richard.leitner@skidata.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 27 Jan 2020 12:24:47 +0100
+Message-ID: <20200127112451.165555-1-richard.leitner@skidata.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-References: <CAMKF1sryUbCcpRxpqi4ytZJ+j+AgksfS8pxd=_O6DtWrkCx+Lg@mail.gmail.com>
-	<CAHtQpK6cp2D3Zb2pkDgYwdKR=AX6AWnwpWEs=qqzNYQ64uL28w@mail.gmail.com>
-	<24c2080a-8465-ee2e-484a-ff817485fbf4@gmail.com>
-In-Reply-To: <24c2080a-8465-ee2e-484a-ff817485fbf4@gmail.com>
-From: Andrey Zhizhikin <andrey.z@gmail.com>
-Date: Mon, 27 Jan 2020 11:50:54 +0100
-Message-ID: <CAHtQpK4O1eDuq8EcNcFgLasY_PE-_WtzWYA6pOVE9NFQkBbTxg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] python2-less meta-openembedded build results
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Subject: [meta-java][PATCH 0/4] openjdk-8: update to jdk8u242ga
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,56 +43,160 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 10:51:04 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 27 Jan 2020 11:25:14 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Hello Raj,
+This series updates Openjdk 8 to the latest "ga" release 242.
 
-On Fri, Jan 24, 2020 at 8:27 PM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On 1/20/20 8:51 AM, Andrey Zhizhikin wrote:
-> > On Mon, Jan 20, 2020 at 4:52 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >>
-> >> Hi all
-> >>
-> >> Recently py2 is removed from oe-core, So I did quick patches to get a
-> >> world build going. And
-> >> here are initial failures, please help out with recipes your can or
-> >> care for. Eventually, the remaining
-> >> ones we can blacklist for 3.1 release.
-> >>
-> >> http://errors.yoctoproject.org/Errors/Build/97185/
-> >>
-> >> I will post more arches as they become available. If you want to try
-> >> the same for machines/distros you can try yoe/mut for meta-oe
-> >
-> > I've actually asked Ross about similar failures, specifically in
-> > [meta-openembeeded/meta-python] where there is a good mix of Pytho2
-> > and Python3 still present. I've started to remove those yesterday, and
-> > would continue with that layer further.
-> >
-> >>
-> >> https://git.openembedded.org/meta-openembedded-contrib/log/?h=yoe/mut
-> >>
->
-> All these changes are now in master and its again buildable, with or
-> without meta-python2, with meta-python2, its back to where it was with
-> everything  building however, without py2 layer we have some work to do
-> so if you are interested in this here [1] is initial list of failures
-> I will keep posting more as we go along.
->
+Successful testing has been done on a fedora-31 build host for
+qemuarm64, qemux86-64, qemuarm32 and armv7a.
 
-Thanks a lot for the update! I've actually saw this in the master
-before this mail and went ahead with pulling the latest - my builds
-for i.MX8M series went fine.
+Richard Leitner (4):
+  openjdk-8: update to latest ga version 242
+  docs: add update8checksums.sh and mention it in UPDATING.md
+  openjre-8: fix debuginfo fixup in do_install
+  openjdk-8: fix jdk linking for non aarch architectures
 
-I'd also have a look at remaining things and try to fix some of those
-as I'll progress.
-
-> [1]
-> https://autobuilder.yoctoproject.org/typhoon/#/builders/88/builds/220/steps/8/logs/errors
+ docs/UPDATING.md                              |   16 +
+ docs/update8checksums.sh                      |   64 +
+ recipes-core/openjdk/openjdk-8-common.inc     |   13 +-
+ recipes-core/openjdk/openjdk-8-cross.inc      |   27 +-
+ recipes-core/openjdk/openjdk-8-native.inc     |    5 +-
+ .../openjdk/openjdk-8-native_172b11.bb        |    2 -
+ recipes-core/openjdk/openjdk-8-native_242.bb  |    2 +
+ .../openjdk-8-release-172b11-aarch32.inc      |   58 -
+ .../openjdk-8-release-172b11-aarch64.inc      |   35 -
+ .../openjdk/openjdk-8-release-172b11.inc      |   39 -
+ .../openjdk/openjdk-8-release-aarch32.inc     |   60 +
+ .../openjdk/openjdk-8-release-aarch64.inc     |   37 +
+ ...ommon.inc => openjdk-8-release-common.inc} |  102 +-
+ recipes-core/openjdk/openjdk-8-release.inc    |   39 +
+ .../{openjdk-8_172b11.bb => openjdk-8_242.bb} |    4 +-
+ .../{openjre-8_172b11.bb => openjre-8_242.bb} |    4 +-
+ ...low-using-a-system-installed-libjpeg.patch |   77 +
+ ...llow-using-a-system-installed-libpng.patch |   80 +
+ ...pilation-with-security-flags-enabled.patch |   41 -
+ ...ild-on-as-needed-toolchains-generic.patch} |   12 +-
+ ... => 0004-don-t-expect-fqpn-for-make.patch} |   21 +-
+ ...llow-using-a-system-installed-libpng.patch |  148 -
+ ...005-autoconf-filter-aclocal-copy-too.patch |   25 +
+ ...> 0006-autoconf-handle-extra-output.patch} |   19 +-
+ ...-assembler-flag-handling-in-makefile.patch |   36 +
+ ...0008-autoconf-fix-shark-build-common.patch |   37 +
+ ...-in-favour-of-openembedded-package-.patch} |   98 +-
+ ...ove-shell-variables-from-autoheader.patch} |   25 +-
+ ...conf-fix-CC-with-arguments-detection.patch |   43 +
+ ...onf-NativeCompilation-remove-sysroot.patch |   24 +
+ ...4-fix-undefined-behaviour-gcc-v8-fix.patch |   41 -
+ ...o-fix-undefined-behaviour-gcc-v8-fix.patch |   42 -
+ ...g-build-after-8062808-Turn-on-the-Wr.patch |   47 -
+ ...-HotSpot-builds-on-5.x-Linux-kernels.patch |   43 -
+ ...tspot-fix-crash-on-JNI_CreateJavaVM.patch} |   13 +-
+ ...otspot-use-correct-include-for-poll.patch} |   24 +-
+ ...tspot-don-t-rely-on-old-SysV-SIGCLD.patch} |   12 +-
+ ...patch-to-fix-misuses-of-strncpy-str.patch} |   63 +-
+ ...rn-type-issues-introduced-by-806165.patch} |   21 +-
+ ...ro-build-requires-disabled-warnings.patch} |   36 +-
+ ...eturn-statement-in-__sync_val_compa.patch} |   18 +-
+ ...ot-Turn-on-the-Wreturn-type-warning.patch} |   70 +-
+ ...otspot-handle-format-error-for-GCC-7.patch |   34 +
+ ...atch => 1010-hotspot-fix-adlc-flags.patch} |   33 +-
+ ...1011-hotspot-fix-shark-build-common.patch} |  322 +-
+ ...1012-hotspot-restrict-to-staging-dir.patch |   26 +
+ ...parison-between-pointer-and-integer.patch} |   34 +-
+ ...ow-using-a-system-installed-libjpeg.patch} |   84 +-
+ ...llow-using-a-system-installed-libpng.patch |   83 +
+ ...04-jdk-use-correct-include-for-poll.patch} |   47 +-
+ ...-jdk-use-correct-include-for-signal.patch} |   23 +-
+ ...dk-disable-backtrace-musl-build-fix.patch} |   13 +-
+ .../2007-jdk-no-genx11-in-headless.patch      |   32 +
+ ...ps.patch => 2008-jdk-no-unused-deps.patch} |   66 +-
+ ...f-ld-to-link-genSocketOptionRegistry.patch |   13 +
+ ...2-hotspot-fix-missing-return-values.patch} |    0
+ ...aarch32-hotspot-fix-shark-build-pt2.patch} |    0
+ ...arch32-hotspot-remaining-musl-fixes.patch} |    0
+ ...ix-further-functions-with-a-missing.patch} |    0
+ ...arch64-hotspot-remaining-musl-fixes.patch} |    0
+ .../filter-aclocal-copy-too.patch             |   11 -
+ .../hotspot-handle-gcc7-format-overflow.patch |   25 -
+ .../openjdk8-add-missing-linker-flags.patch   |   57 -
+ ...enjdk8-find-compiler-fix-env-respect.patch |  140 -
+ ...-assembler-flag-handling-in-makefile.patch |   20 -
+ .../openjdk8-fix-libpng-neon-build.patch      |   29 -
+ .../openjdk8-fix-shark-build-pt2.patch        |   35 +-
+ .../openjdk8-fix-shark-stdc++11.patch         | 2631 -----------------
+ .../openjdk8-no-genx11-in-headless.patch      |   17 -
+ .../openjdk8-restrict-to-staging-dir.patch    |   11 -
+ 70 files changed, 1391 insertions(+), 4018 deletions(-)
+ create mode 100644 docs/UPDATING.md
+ create mode 100755 docs/update8checksums.sh
+ delete mode 100644 recipes-core/openjdk/openjdk-8-native_172b11.bb
+ create mode 100644 recipes-core/openjdk/openjdk-8-native_242.bb
+ delete mode 100644 recipes-core/openjdk/openjdk-8-release-172b11-aarch32.inc
+ delete mode 100644 recipes-core/openjdk/openjdk-8-release-172b11-aarch64.inc
+ delete mode 100644 recipes-core/openjdk/openjdk-8-release-172b11.inc
+ create mode 100644 recipes-core/openjdk/openjdk-8-release-aarch32.inc
+ create mode 100644 recipes-core/openjdk/openjdk-8-release-aarch64.inc
+ rename recipes-core/openjdk/{openjdk-8-release-172b11-common.inc => openjdk-8-release-common.inc} (57%)
+ create mode 100644 recipes-core/openjdk/openjdk-8-release.inc
+ rename recipes-core/openjdk/{openjdk-8_172b11.bb => openjdk-8_242.bb} (92%)
+ rename recipes-core/openjdk/{openjre-8_172b11.bb => openjre-8_242.bb} (89%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0001-Allow-using-a-system-installed-libjpeg.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0002-Allow-using-a-system-installed-libpng.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/0002-hotspot-fix-compilation-with-security-flags-enabled.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{0010-build-fix-build-on-as-needed-toolchains-generic.patch => 0003-build-fix-build-on-as-needed-toolchains-generic.patch} (94%)
+ rename recipes-core/openjdk/patches-openjdk-8/{dont-expect-fqpn-for-make.patch => 0004-don-t-expect-fqpn-for-make.patch} (54%)
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/0004-jdk-Allow-using-a-system-installed-libpng.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0005-autoconf-filter-aclocal-copy-too.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{handle_extra_output.patch => 0006-autoconf-handle-extra-output.patch} (57%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0007-fix-assembler-flag-handling-in-makefile.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0008-autoconf-fix-shark-build-common.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{openjdk8-prevent-debuginfo-in-favour-of-openembedded-package-split.patch => 0009-prevent-debuginfo-in-favour-of-openembedded-package-.patch} (51%)
+ rename recipes-core/openjdk/patches-openjdk-8/{remove-shell-variables-from-autoheader.patch => 0010-autoconf-remove-shell-variables-from-autoheader.patch} (69%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0011-autoconf-fix-CC-with-arguments-detection.patch
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/0012-autoconf-NativeCompilation-remove-sysroot.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/0012-hotspot-aarch64-fix-undefined-behaviour-gcc-v8-fix.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/0014-hotspot-zero-fix-undefined-behaviour-gcc-v8-fix.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/0018-hotspot-Fix-debug-build-after-8062808-Turn-on-the-Wr.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/0020-Enable-HotSpot-builds-on-5.x-Linux-kernels.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{0001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch => 1001-hotspot-fix-crash-on-JNI_CreateJavaVM.patch} (80%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0005-hotspot-use-correct-include-for-poll.patch => 1002-hotspot-use-correct-include-for-poll.patch} (81%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0006-hotspot-don-t-rely-on-old-SysV-SIGCLD.patch => 1003-hotspot-don-t-rely-on-old-SysV-SIGCLD.patch} (82%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0011-hotspot-backport-patch-to-fix-misuses-of-strncpy-str.patch => 1004-hotspot-backport-patch-to-fix-misuses-of-strncpy-str.patch} (77%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0015-hotspot-fix-Wreturn-type-issues-introduced-by-806165.patch => 1005-hotspot-fix-Wreturn-type-issues-introduced-by-806165.patch} (82%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0016-hotspot-Zero-build-requires-disabled-warnings.patch => 1006-hotspot-Zero-build-requires-disabled-warnings.patch} (83%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0017-hotspot-Missing-return-statement-in-__sync_val_compa.patch => 1007-hotspot-Missing-return-statement-in-__sync_val_compa.patch} (80%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0019-hotspot-Turn-on-the-Wreturn-type-warning.patch => 1008-hotspot-Turn-on-the-Wreturn-type-warning.patch} (86%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/1009-hotspot-handle-format-error-for-GCC-7.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{openjdk8-fix-adlc-flags.patch => 1010-hotspot-fix-adlc-flags.patch} (55%)
+ rename recipes-core/openjdk/patches-openjdk-8/{openjdk8-fix-shark-build-common.patch => 1011-hotspot-fix-shark-build-common.patch} (65%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/1012-hotspot-restrict-to-staging-dir.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{0001-jdk-comparison-between-pointer-and-integer.patch => 2001-jdk-comparison-between-pointer-and-integer.patch} (86%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0003-jdk-Allow-using-a-system-installed-libjpeg.patch => 2002-jdk-Allow-using-a-system-installed-libjpeg.patch} (77%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/2003-jdk-Allow-using-a-system-installed-libpng.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{0007-jdk-use-correct-include-for-poll.patch => 2004-jdk-use-correct-include-for-poll.patch} (81%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0008-jdk-use-correct-include-for-signal.patch => 2005-jdk-use-correct-include-for-signal.patch} (83%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0009-jdk-disable-backtrace-musl-build-fix.patch => 2006-jdk-disable-backtrace-musl-build-fix.patch} (75%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/2007-jdk-no-genx11-in-headless.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{openjdk8-no-unused-deps.patch => 2008-jdk-no-unused-deps.patch} (58%)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/2009-jdk-use-gcc-instead-of-ld-to-link-genSocketOptionRegistry.patch
+ rename recipes-core/openjdk/patches-openjdk-8/{0001-hotspot-aarch32-fix-missing-return-values.patch => aarch32-hotspot-fix-missing-return-values.patch} (100%)
+ rename recipes-core/openjdk/patches-openjdk-8/{openjdk8-fix-shark-build-pt2-aarch32.patch => aarch32-hotspot-fix-shark-build-pt2.patch} (100%)
+ rename recipes-core/openjdk/patches-openjdk-8/{hotspot-remaining-musl-fixes-aarch32.patch => aarch32-hotspot-remaining-musl-fixes.patch} (100%)
+ rename recipes-core/openjdk/patches-openjdk-8/{0013-hotspot-aarch64-Fix-further-functions-with-a-missing.patch => aarch64-hotspot-Fix-further-functions-with-a-missing.patch} (100%)
+ rename recipes-core/openjdk/patches-openjdk-8/{hotspot-remaining-musl-fixes-aarch64.patch => aarch64-hotspot-remaining-musl-fixes.patch} (100%)
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/filter-aclocal-copy-too.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/hotspot-handle-gcc7-format-overflow.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-add-missing-linker-flags.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-find-compiler-fix-env-respect.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-assembler-flag-handling-in-makefile.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-libpng-neon-build.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-shark-stdc++11.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-no-genx11-in-headless.patch
+ delete mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-restrict-to-staging-dir.patch
 
 -- 
-Regards,
-Andrey.
+2.24.1
+
 
