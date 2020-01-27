@@ -1,38 +1,39 @@
 Return-Path: <prvs=288f39d4d=Richard.Leitner@skidata.com>
-Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D8F87FD37
+Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C3A67FD98
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 10:03:22 +0000 (UTC)
+	Mon, 27 Jan 2020 10:03:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
 	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1580119404; x=1611655404;
+	t=1580119422; x=1611655422;
 	h=date:from:to:cc:subject:message-id:references:
 	mime-version:in-reply-to;
-	bh=I2KqyJpmA7KZGn4fus5lbYaExe3yLfFOxIXR09il3lk=;
-	b=S28wz4lGk8sS24SJfQtZWAe7jK1ZN2iHaWDn7/Tx/MbKCi596o30eudb
-	FbpQgp4pMyaRPdNqd8DUlQtErKdyZzx8ygfPDaUWUExxKDk4AVzvVcT99
-	Yqg9Ke+R932OcAK4NVRuHXIZB/1s4v/6xPQQkcpy1mcJJJ0WFXtLkNYxP
-	Vhf446S2uj+N1InqokOE65yqSj+2yW03YM5UnJygGqnZojDpjCwU1Uvho
-	Rkw+ncEBdMbKV5/k8S/rsAsM2v/Hnuw2pqQcdmLRXVdsJJbkSFfp6Vhi9
-	CkGDS+L5xNvoR92YYGie+dHTSYiJgFjAxR2UCSH/0K24eNuH7YVtNTHam w==;
-IronPort-SDR: Y7ov4CDBAXIyhm2gS1PFBbvbd8M1UQgUSr8YiFh5/Eu3m1fQb+3WY/Xod9Z+3QmuGos2Abu1Gd
-	KkWoGamofabfxnJXxHpCUh9j8o7fL2/FgLKulCPUH7QqHsZONjv0mm2KLPrwgH48877HN1F2R4
-	N96Vjrd1dm4JmLcwSsd1J2TNDvpi4ha986WZXzxNjogRvFyJ+BcXXQdpZad5jQtoLUBCKRYW3f
-	/glAoiS5qYWJM/cZ95cPqXBOw5zrWDTWAAy3ZvzdBke0KfB2Ufsiho3InKdaVNHYeON+5yLt50
-	47s=
-X-IronPort-AV: E=Sophos;i="5.70,369,1574118000"; d="scan'208";a="22273521"
-Date: Mon, 27 Jan 2020 11:03:23 +0100
+	bh=EzdnsQboxhDHQjA1Wyw5X/reyFMpl5Q53TvVxdMvgPk=;
+	b=ig2Zuerp2rurv4lqK3c8iUts6w98PqDRp0eEjebsbt+zoM/ACoPKiGY2
+	IayrG4eNWyZFjczO+azSyrHRGgCqTSyS3TTjGqdpUmQqzUSZLZFc+7GGt
+	wljOw6YFcF4+atux9h5a9P496Q1vsZG0GMWeuctsRIFsya9yB1xdUfOzD
+	5nEkizAGcREBOJBNAeWHCkCxX28IonVu5uiENl7RSffTbfNhtXlStIQ4k
+	THzHkS57UwBSHp8pUlLOpkKnvvYgnJKqmfSTOK2qsWDbZ1s56XWJ1QAK1
+	vO9bSZkdw2zRQAoUF306djOxsb63OBcT17dO/FYdFMeR20GK0bVzE562f w==;
+IronPort-SDR: e85x5cJwi5V3cuAsQMxaQpcQEZTwiHhCb7RgwePZqalbk2uLo3KC3WkvydzIhHCWXR3W8vtPGt
+	0JlOEKdlqqLnM6nBc8A2dssO+XGo8fRXi6xjZ6YsM2HGgM4KCmjYz/e+azvZQdSSft2AQTVXkO
+	MZlnE/givF80r+WPLvkP3HVRWtdwc/WN2t6wOyDJH9PyY8v5AIqzzVMDpACxmbNW29AFk891Pm
+	5gXoymoWkh421g7CV1CRVXgnDRMwcSys9RRQhTRHMjx56AkkXYDCajOetqcq0UlJ4FkcZdIH5l
+	MxI=
+X-IronPort-AV: E=Sophos;i="5.70,369,1574118000"; 
+   d="scan'208";a="2501159"
+Date: Mon, 27 Jan 2020 11:03:42 +0100
 From: Richard Leitner <richard.leitner@skidata.com>
 To: Kraag Gorim <kraaggorim@gmail.com>
-Message-ID: <20200127100323.GC2982185@pcleri>
-References: <CACc3Zv5viBSLrGYNsumrn9xt8Aq+aXHGz0BWH6w5sAs0MMAHjg@mail.gmail.com>
+Message-ID: <20200127100342.GD2982185@pcleri>
+References: <CACc3Zv6GF8UTJK4=v22np2vZoSgkBtWr-1VSG22LDkhnky65xA@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CACc3Zv5viBSLrGYNsumrn9xt8Aq+aXHGz0BWH6w5sAs0MMAHjg@mail.gmail.com>
+In-Reply-To: <CACc3Zv6GF8UTJK4=v22np2vZoSgkBtWr-1VSG22LDkhnky65xA@mail.gmail.com>
 X-Originating-IP: [192.168.111.252]
 X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
 	sdex5srv.skidata.net (192.168.111.83)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH v2 1/2] [meta-java] java-library: inherit python native
+Subject: Re: [PATCH v2 2/2] [meta-java] icedtea7-native: inherit python native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 10:03:23 -0000
+X-List-Received-Date: Mon, 27 Jan 2020 10:03:43 -0000
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
 
@@ -66,28 +67,30 @@ git-send-email. Thanks!
 
 regards;rl
 
-On Fri, Jan 24, 2020 at 05:22:14PM +0100, Kraag Gorim wrote:
-> Several components make use of python in their build process. To not
-> rely on python being part of the HOSTTOOLS python should be inherited.
+On Fri, Jan 24, 2020 at 05:22:18PM +0100, Kraag Gorim wrote:
+> icedtea7-native relys on python to enable building it. Therefor it
+> should inherit python instead of assuming python being part of
+> HOSTTOOLS.
 > 
 > Signed-off-by: Kraag Gorim <kraaggorim@gmail.com>
 > ---
->  classes/java-library.bbclass | 1 +
+>  recipes-core/icedtea/icedtea7-native.inc | 1 +
 >  1 file changed, 1 insertion(+)
 > 
-> diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
-> index e0159ba..496be33 100644
-> --- a/classes/java-library.bbclass
-> +++ b/classes/java-library.bbclass
-> @@ -17,6 +17,7 @@ PACKAGE_ARCH ?= "all"
->  # Fully expanded - so it applies the overrides as well
->  PACKAGE_ARCH_EXPANDED := "${PACKAGE_ARCH}"
->  inherit ${@oe.utils.ifelse(d.getVar('PACKAGE_ARCH_EXPANDED') == 'all',
-> 'allarch', '')}
+> diff --git a/recipes-core/icedtea/icedtea7-native.inc
+> b/recipes-core/icedtea/icedtea7-native.inc
+> index b578cb2..41da925 100644
+> --- a/recipes-core/icedtea/icedtea7-native.inc
+> +++ b/recipes-core/icedtea/icedtea7-native.inc
+> @@ -30,6 +30,7 @@ CFLAGS_append = " -Wno-error=stringop-overflow
+> -Wno-error=return-type"
+> 
+>  inherit native java autotools pkgconfig
+>  inherit openjdk-build-helper
 > +inherit python3native
 > 
->  # use java_stage for native packages
->  JAVA_NATIVE_STAGE_INSTALL = "1"
+>  JAVA_HOME[unexport] = "1"
+> 
 > -- 
 > 2.24.0
 > -- 
