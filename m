@@ -1,40 +1,50 @@
-Return-Path: <prvs=288f39d4d=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id E7BBC7FE55
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B3747FCC0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 14:57:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1580137078; x=1611673078;
-	h=date:from:to:cc:subject:message-id:references:
-	mime-version:in-reply-to;
-	bh=YlXnL0h31Rf7LCUEmvHcFT/HcB6iCra+iIdgO62HiUw=;
-	b=WQCZwzBf8Dh7E6cpy2dxl/HiTE0zbn1zHpYELT18VbQtvltrIL1Tit0d
-	58lrgs1GKjO5nIiXS9GqwKtDCdHWn5LgZkKU8hQK2Ma8rZArII6kdvW07
-	lTIQquYu5oDgH3dkcGMwNqljg7GuAq7h46GpPVW5AEpJoCSbONaTOcMUR
-	v30Ky4yGJTVqWNvDY+Ga8EMkonzvouNEkdVEsaJH9wrI7511fFZWc8QG+
-	pd0teDKqUrZJeDLxs/ZjwF8c34ycE2GCWODed981jFGdD9lJRR91q2fHM
-	fAGJLGRy5Ra3fgw/kEZzyRy9iIfSBPipkVPHGolWt/36igt7H+WyIoOWl w==;
-IronPort-SDR: xJwUmG2UM2jrZ0VT+qZIkIO7D6H/U9lxoexPmKQG9bqkSsD1QOUuwtrmOeImlFtncyqwofqdyf
-	k8ffuXwQTYiZ5DjuinM2ESOYMJz0OF1o+dtmBzmL6+54YRYDpl9K9XN3N5NRiKm8jIN6aZlEJM
-	JPbPRJpXqXjdRIVVFEmcmAQC/gbkeM+sxzIsRKbRDj+vz1Yxd4pvmCcbqrnO+Gghy2XJSEbujy
-	vaZRZTg6F4FtlAnoIc5NQrlXf8OCtxbYYdyxUKqgHjoYH42YywT7gXDaRwqE7+vg/UbmbK5hPm
-	5yc=
-X-IronPort-AV: E=Sophos;i="5.70,370,1574118000"; 
-   d="scan'208";a="2501726"
-Date: Mon, 27 Jan 2020 15:57:58 +0100
-From: Richard Leitner <richard.leitner@skidata.com>
-To: Jacob Kroon <jacob.kroon@gmail.com>
-Message-ID: <20200127145758.GA603314@pcleri>
-References: <20200127112451.165555-1-richard.leitner@skidata.com>
-	<c43cf573-d876-8a4a-d978-fc4b2303e747@gmail.com>
+	Mon, 27 Jan 2020 15:15:01 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id s24so8834216iog.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 27 Jan 2020 07:15:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=HJQQygqOPzRMQBn1C7+roVUeLcpEt5Blk5Z2biYWzhI=;
+	b=rbxAd/Gcw2i7CX+kUSLZqavHqOfr/cTYKyQbTxeM2gqOoxWSDo/1NXBdvm1MiQyc0w
+	+XgOWvnFfKoCxa2jddIhJX64lqFDzhptUk4DANXVJplT5xX7hycMMbEAdON7atwoz4FJ
+	AI13KtX0onvkzA423R44feEYwx482yYosRRH7a6CgnRxSr/6eAFmasEYHG8mVkoUHFk0
+	phEAPuYR7Fcu5my0SLMr8Mm4B0AFZ0jvU5I5oqe+91ShzuR8QX52FXBNxOxyF7X8ZLTp
+	LL8LfhVzRzTK/9fs7fw7dHuRRP4ADxMKhQ0IlxBoxDcQsoVxAS4uJnAghsCF/Hpul+cM
+	2PnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=HJQQygqOPzRMQBn1C7+roVUeLcpEt5Blk5Z2biYWzhI=;
+	b=nA3K3qzCMaHKt0DCqB5Ajhc89SWBA7JUKi6cNtkoho+pE5KRpMqVYseqyjm3bXNojs
+	n7cvB8xsv+aXt5WV3UwhBR2abV0WRAz7ImUzkIQNLCI1HVTsgle+zWPxUSoNb/jqzWix
+	lq1+WCdvxDpWoMr59zWp+u+gZ8YaRfhR/I6ZbRF7eqVNQGqwFxp79wRwY56ZDccuP7Eq
+	mCqSJrY8RJGylejQ2sEfRio7ra51ADRI/ObLs7HG4vxVgPNW96hGKUvxHtaFWvbrD5Dr
+	3XXEymSEQodFg32xB/TLH7kLF4ac8kCY2IYRq1xFQgsfxfW/5trWVNq8xBK0i6ro3vba
+	CktA==
+X-Gm-Message-State: APjAAAVPpxOqWtrkep/6ERALaMfHLHjAJngWuqrWs5dB240CPpUAwxKC
+	bL9JqUtWPeqkvdkk97vA42yiY1YLlaYlIotRLiY=
+X-Google-Smtp-Source: APXvYqxZGNY9ywABQZaHck2wPfiKc9Smo9vYOkDyM8u7cNJaNr3eWi706upLOJbut3f0KnpzwXkSd5mMV/VshOxXd2w=
+X-Received: by 2002:a02:c988:: with SMTP id b8mr13760073jap.122.1580138102990; 
+	Mon, 27 Jan 2020 07:15:02 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <c43cf573-d876-8a4a-d978-fc4b2303e747@gmail.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCH 0/4] openjdk-8: update to jdk8u242ga
+References: <CAO5Uq5TV_6f7PXF6Q_TE0ii-W9xG9xgrO8p8OP_vb48HW=DugQ@mail.gmail.com>
+	<CALbNGRSAYNsQkWMhNAfxVqnq4bYx2=mcqMxQpxvPampLFyKazA@mail.gmail.com>
+	<CAO5Uq5TPW+hePvbEmxgN6cFHx5zcNqM-k9m_zSOOReBrYqU=pA@mail.gmail.com>
+	<92e2dcc5-6107-e05f-87f4-161b8132266e@gmail.com>
+In-Reply-To: <92e2dcc5-6107-e05f-87f4-161b8132266e@gmail.com>
+From: Alex Kiernan <alex.kiernan@gmail.com>
+Date: Mon, 27 Jan 2020 15:14:52 +0000
+Message-ID: <CAO5Uq5SQeNGN8FmQjPfv_CWpbrT_rMQCjETvvN7ZukkzPd=BLg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: systemd failing in master with Assertion clock_gettime(map_clock_id(clock_id), &ts) failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,33 +57,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Jan 2020 14:57:59 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 27 Jan 2020 15:15:02 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 27, 2020 at 03:10:04PM +0100, Jacob Kroon wrote:
-> On 1/27/20 12:24 PM, Richard Leitner wrote:
-> > This series updates Openjdk 8 to the latest "ga" release 242.
-> > 
-> > Successful testing has been done on a fedora-31 build host for
-> > qemuarm64, qemux86-64, qemuarm32 and armv7a.
-> > 
-> 
-> <cut>
-> 
-> I don't know if it is related to my setup, but "bitbake openjre-8" insists
-> on rebuilding itself every time I run it, and I don't see any sstate cache
-> being generated for it.
+On Fri, Jan 24, 2020 at 12:22 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On 1/23/20 4:13 PM, Alex Kiernan wrote:
+> > On Thu, Jan 23, 2020 at 10:09 AM Andreas M=C3=BCller <schnitzeltony@gma=
+il.com> wrote:
+> >>
+> >> On Thu, Jan 23, 2020 at 10:43 AM Alex Kiernan <alex.kiernan@gmail.com>=
+ wrote:
+> >>>
+> >>> On the offchance someone's tripped over this already/has pointers:
+> >>>
+> >>> Around the time python2 dropped out, I'm now seeing boot failures wit=
+h:
+> >>>
+> >>> [  612.151548] systemd-journald[543]: Assertion
+> >>> 'clock_gettime(map_clock_id(clock_id), &ts) =3D=3D 0' failed at
+> >>> src/basic/time-util.c:55, function now(). Aborting.
+> >>>
+> >>> I suspect it's unrelated to py2, but that's delayed me getting to the=
+ problem.
+> >>>
+> >>> The board I'm targetting is AM335x based, but without an RTC (which I
+> >>> suspect may be relevant).
+> >>>
+> >>> Anyone seen anything similar?
+> >>>
+> >>> --
+> >>> Alex Kiernan
+> >> Hi Alex,
+> >>
+> >> Have not seen that one yet. Will look for it once I can build images
+> >> in current environment (python2/Qt5.14 broke loads for me). What I
+> >> have seen were problems with timedatectl <-> ntp. Changing from local
+> >> time to ntp-sync did not work: Time remained un-synced on recent
+> >> images. Machine was Raspi so no RTC either.
+> >>
+> >> Don't know if this is related to your finding...
+> >>
+> >
+> > Looks like it's related to the glibc bump - reverting that changeset
+> > gets it booting again. I struggle to figure out which of the myriad
+> > wrappers are actually being used from inspecting the glibc source, but
+> > if it's the one I think it is, there's clearly
+> > clock_gettime/clock_gettime64 changes there which I doubt my kernel
+> > has (we're currently using the TI 4.19.y kernel).
+>
+> Is it possible for you to try 5.x for tests ?
 
-I just tried to reproduce it, but neither for armv7a nor for aarch64
-openjre-8 is rebuiled on the latest poky/oe-core master when nothing was
-changed in meta-java.
+That's where I went first, though I need to bring up the newer TI 5.4
+branch first (which has its own problems as there's some patch which
+was in the 4.9.y hsmmc driver which isn't in the latest which causes
+random timeouts on some of our board samples).
 
-So in your case it also rebuilds if you call "bitbake openjre-8"
-directly one-after-another without any change to the layers?
+> I know there were 64bit
+> time_t related errors I saw with 4.19/rpi3-32bit but it was with musl,
+> since musl enabled 64bit time_t by default, that might be different
+> issue too
+>
+> Try applying [1] to glibc as well, currrently, its only applied to musl
+> case, perhaps that might help.
+>
+> [1]
+> https://git.openembedded.org/openembedded-core/tree/meta/recipes-core/sys=
+temd/systemd/0022-Use-INT_MAX-instead-of-TIME_T_MAX-for-timerfd_settim.patc=
+h
+>
 
-regards;rl
+It looks like it's something that's now in the call path which is
+tripping the seccomp filter on systemd-journald - if I comment
+SystemCallFilter=3D@system-service then I can boot.
 
-> 
-> /Jacob
+Just trying to figure out what syscall it is we're tripping over. What
+I don't understand is why booting linux-yocto 4.19 inside qemu w/
+systemd doesn't see this problem.
+
+
+--
+Alex Kiernan
 
