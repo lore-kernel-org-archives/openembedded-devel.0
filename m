@@ -1,48 +1,49 @@
-Return-Path: <andrey.z@gmail.com>
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
-	[209.85.128.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 967657FF2F
+Return-Path: <marek.belisko@gmail.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id DEF669203E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 19:32:40 +0000 (UTC)
-Received: by mail-wm1-f44.google.com with SMTP id p9so3799349wmc.2
+	Tue, 28 Jan 2020 19:52:05 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id b6so17532924wrq.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 11:32:42 -0800 (PST)
+	Tue, 28 Jan 2020 11:52:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=IYRAL32lbuJ9nHlGshU2iP5LgmxGXVPOsRHZsC7Ua8U=;
-	b=j8Cfb0Za3/X1t0oFe4M6QSwIWPC9v0uICog54N9BncBMbHsMhTNoO2mAvd3wQ02zBs
-	agEJelW9cUvyzHQS9808+ctRn9FVqM7MKZN4bSdLedkjh2wBXE9tUu04alTjq/i1QCVI
-	WcVfVNkNLvGoMklcRoZuXFOiNMrJcGe9aXUpj+Ii2yAbbrawpc5SXI8X8TJSVYVAksx9
-	6uW81j86sDga1cUDnLAjq7RrfyCbnrhbZHbQJ88CaLWG/6bL4CDSBdL+HcotCaKNzj3s
-	qlNF04yVU2PYl5syqz+Z3X3uC5/KLDpZJW2IN4FZIAfHj0LMy5bmcHlV9nGWvsrkbkzI
-	5vMQ==
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=gevS0PgfA7vzC305h/XLbVlKZiQWCN5tJFXdAotph5c=;
+	b=avw8RtM0w73fhphqvb57nrfsy/VIgu2tbLoBpaJ/h0TY59mU6cmWRXehwX4LUvjDqW
+	Kh9aPBQqAhiExmyf9Hu2N3wd783we70I1LrrzTUTLxnbuUREzGICyIRPypA90Wli8H/6
+	ol+YpNzUgYs92R+pEajxUpdnoI/5XSpSqaoJpBsUWy/42GgvEJ9uTkqyzm2NbbE1I2Q0
+	G5EP/Vy+hp/N/x5+8q1VLyiRruwBMwc1CRMJoU0xRS/qLVhzrWzHkRKUbDVsI7doWyXj
+	NUSrCqyzDmfGgYLXXsR2O7d23M8dj81fvotarb+79Qz/vel0S/GDgvwVFJ3+lqHImR0X
+	Uh8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=IYRAL32lbuJ9nHlGshU2iP5LgmxGXVPOsRHZsC7Ua8U=;
-	b=gHzIsx5xpU7qiiiMUf2eXiKpwXVydzA2lzFsff8YtQKihfFWNCWKKLDbTXkhLsxq49
-	zNgL2Z8Iw65hlb5SdJ+s/zn7NV5GyjmoZVkUVkzCoRv6QVg99rRca05mUUNWtlbGDQ25
-	XbzUcPdaELzI6RwDbeVWYxhYCEMTBFA1yGNnSzXsgC2xVkHE9J6dKi9d6oFDwBrPLfYT
-	RNaQqZC+dljrx+Qdl4COGy2LeKhGksuRmHu/JI7W9DuuNdjweIic1Jt3I/p9GiXxWRaa
-	ax2h2OGvrmIQKmyeNSkX73bknA1QSJLDYthXWoCsoVnDSkOZOHeKIPhUUExzHXEWqRMZ
-	51mQ==
-X-Gm-Message-State: APjAAAUmHOiTqK+MAXQTDrPbH8SkVTTRg8Dkqq61f/hJ/fH+UjjZOPhG
-	mk8AkGQsz0GRoNR3Z7RTmBJaqczziOY=
-X-Google-Smtp-Source: APXvYqw4KD6Pma23f8IJgF0UVFKdPWzfC/FMN8uMQ9MDiw20co+eTT+K//Ud4MquDKwmm7JCbOj26Q==
-X-Received: by 2002:a05:600c:21c5:: with SMTP id
-	x5mr6872527wmj.72.1580239961181; 
-	Tue, 28 Jan 2020 11:32:41 -0800 (PST)
-Received: from lab-linux-pc.tendawifi.com (cable-static2-2-7.rsnweb.ch.
-	[146.185.2.7])
-	by smtp.gmail.com with ESMTPSA id z4sm4191336wma.2.2020.01.28.11.32.40
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 28 Jan 2020 11:32:40 -0800 (PST)
-From: Andrey Zhizhikin <andrey.z@gmail.com>
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=gevS0PgfA7vzC305h/XLbVlKZiQWCN5tJFXdAotph5c=;
+	b=DnRRb/F68uo8w9nfXPL/eWFLFChHm1TveB0mJ+jMVrKFhQqfiyGdxe8hEZ60QEtMqN
+	PJKYCtOiQn11kHJE9vzEolwVUlIbyv+RryRN6odjGYWqGMSkwGi0z2isK9ZYqxa/tflp
+	HjY8c54loNSbQYaxrE+vZsvhVcPq/xfPvAAzflalxBQrgNct9NC3m3II5AzCTgEPjUZq
+	uYfY8UXMJnPDi6FT8mInXfNALcKNBeiHJtfu1UBNY9q5bSNx8NUySeeDJ4Q7v3TSbTUg
+	xX1aOMnsYojYCjEn/+/jd2119xuZPLspPgiqFJfhvwBWTahbWyqfBJxQHNDqWU0WV8NF
+	rwXQ==
+X-Gm-Message-State: APjAAAWfX/YFuh8Ln0t8mDr1/CMnB7T/d8nwbAdh9hrOSCbgMRAo5BNT
+	2WNa5xmuNOq+Rd8aBb7jurxZjIIBSoI=
+X-Google-Smtp-Source: APXvYqzDU15RxRsZze8gjMK9QC3ML3ImmLwqddNTi6cODLgA8FXS+4n92GIhrOcDzFJBKToNQh0+Gw==
+X-Received: by 2002:adf:ee88:: with SMTP id b8mr32213702wro.249.1580241126403; 
+	Tue, 28 Jan 2020 11:52:06 -0800 (PST)
+Received: from localhost.localdomain (adsl-dyn55.78-99-206.t-com.sk.
+	[78.99.206.55])
+	by smtp.gmail.com with ESMTPSA id 18sm4110488wmf.1.2020.01.28.11.52.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 28 Jan 2020 11:52:05 -0800 (PST)
+Sender: Belisko Marek <marek.belisko@gmail.com>
+From: Marek Belisko <marek.belisko@open-nandra.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Jan 2020 19:32:35 +0000
-Message-Id: <20200128193235.19868-1-andrey.z@gmail.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] dstat: update recipe to use python3
+Date: Tue, 28 Jan 2020 20:51:59 +0100
+Message-Id: <1580241119-12734-1-git-send-email-marek.belisko@open-nandra.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Marek Belisko <marek.belisko@open-nandra.com>
+Subject: [meta-oe][PATCH] recipes-support: Added recipe for gengetopt package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,27 +56,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2020 19:32:40 -0000
+X-List-Received-Date: Tue, 28 Jan 2020 19:52:06 -0000
 
-Update recipe to target python3 since python2 is EOL and has been
-dropped from OE-Core.
-
-Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
 ---
- meta-oe/recipes-support/dstat/dstat_0.7.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
 
-diff --git a/meta-oe/recipes-support/dstat/dstat_0.7.4.bb b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
-index 8eb715740..2e37dd72e 100644
---- a/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
-+++ b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
-@@ -19,4 +19,4 @@ do_install() {
-     oe_runmake 'DESTDIR=${D}' install
- }
- 
--RDEPENDS_${PN} += "python-core python-misc python-resource python-shell python-unixadmin"
-+RDEPENDS_${PN} += "python3-core python3-misc python3-resource python3-shell python3-unixadmin"
+diff --git a/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
+new file mode 100644
+index 0000000..a31ad0d
+--- /dev/null
++++ b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "skeleton main.c generator"
++DESCRIPTION = "Gengetopt is a tool to write command line option parsing code for C programs."
++SECTION = "utils"
++HOMEPAGE = "https://www.gnu.org/software/gengetopt/gengetopt.html"
++
++LICENSE = "GPLv3+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=ff95bfe019feaf92f524b73dd79e76eb"
++
++SRC_URI = "${GNU_MIRROR}/gengetopt/${BPN}-${PV}.tar.xz"
++
++SRC_URI[md5sum] = "ea165d618640dbdecb42ae4491337965"
++SRC_URI[sha256sum] = "b941aec9011864978dd7fdeb052b1943535824169d2aa2b0e7eae9ab807584ac"
++
++inherit autotools
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.17.1
+2.7.4
 
 
