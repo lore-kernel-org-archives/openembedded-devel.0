@@ -1,50 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 82BD57FF2F
+Return-Path: <andrey.z@gmail.com>
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+	[209.85.128.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 967657FF2F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 19:31:34 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id d9so5492398plo.11
+	Tue, 28 Jan 2020 19:32:40 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id p9so3799349wmc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 11:31:35 -0800 (PST)
+	Tue, 28 Jan 2020 11:32:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=k1HcN6VuogQUYHN0kKuOuqxD0gGmMMa566q11PxSvpI=;
-	b=FYouvH3R6s8rvIwIeEGaTM59SxoWUjQWsg+LUnSKDNzBAevbb9fN9zRU5ffn7rS1jY
-	KcNWRg5qYsORAlWA9MX+NWan1aNynxnd9r0aC4fW3b6yE/0HHFj2iMFqiEnZopELyuTi
-	EdgbSwqFQWIg3cpgmAM7uHKmybNPo9kklZ6RbEjPzUtL05Nj4uoVMa/g824fi2eiLx3D
-	PGKcIPdjfMXfoV54jJAh2RFjHjob4/XoIAzZ9IamOHG8VE51RReDCE/Av+nbiMpBBgyq
-	5awsMY9U0rbD+14iQuQUbVtZsVv7Oz00qhTwk22m8EACG3tmtt6PE6wVq8vPoxJBRsZb
-	EDmw==
+	h=from:to:cc:subject:date:message-id;
+	bh=IYRAL32lbuJ9nHlGshU2iP5LgmxGXVPOsRHZsC7Ua8U=;
+	b=j8Cfb0Za3/X1t0oFe4M6QSwIWPC9v0uICog54N9BncBMbHsMhTNoO2mAvd3wQ02zBs
+	agEJelW9cUvyzHQS9808+ctRn9FVqM7MKZN4bSdLedkjh2wBXE9tUu04alTjq/i1QCVI
+	WcVfVNkNLvGoMklcRoZuXFOiNMrJcGe9aXUpj+Ii2yAbbrawpc5SXI8X8TJSVYVAksx9
+	6uW81j86sDga1cUDnLAjq7RrfyCbnrhbZHbQJ88CaLWG/6bL4CDSBdL+HcotCaKNzj3s
+	qlNF04yVU2PYl5syqz+Z3X3uC5/KLDpZJW2IN4FZIAfHj0LMy5bmcHlV9nGWvsrkbkzI
+	5vMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=k1HcN6VuogQUYHN0kKuOuqxD0gGmMMa566q11PxSvpI=;
-	b=YI4x6RLd84HIytyPiLx3xW/rRPaREgoMQwZIuSbODfYHVa7NThatKJCw3L3ScCXQ16
-	DcQBr/ORO4O7EfKPsFCqjNKiGGrh4heSTXSz5H5KjO07xl4SoQ0d/d+bjZOcEmUSgCkY
-	liN9tQD9ZeZGWg/mfUWrJn77TEqRSoRlO0Co4SLCsW1obo0XYz+LSVAVUM8QkO9gWHqj
-	eONz6FmXc4i8/o/O0mvryUU7jTKvGvdBKpkCKAToEFMHQQLWimquXTGUOkU9SsAgGC9L
-	lsQ+s8O7n5+b4HS1Vf78Bxuj1GpFEuYYpwrwBovacsG43GNTvwpHp67BqGUBV+z74whp
-	NJYQ==
-X-Gm-Message-State: APjAAAXTrgq3/5cZAs8W0lKB0hp/T2Wccz8EGTEZu3fLtDFD2rLdAaTw
-	4ZcOYWoHFNSS2JvXQwWGCupHKlJrsZE=
-X-Google-Smtp-Source: APXvYqxwmBQHDH7YQCoApqpntItHxeDm85X4ty8b+pbfuT1+RbRnK8KTkBSD1Ci+SlFGPogbvjJTKA==
-X-Received: by 2002:a17:902:8647:: with SMTP id
-	y7mr24395912plt.224.1580239894914; 
-	Tue, 28 Jan 2020 11:31:34 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::c362])
-	by smtp.gmail.com with ESMTPSA id y23sm3840860pjj.3.2020.01.28.11.31.34
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=IYRAL32lbuJ9nHlGshU2iP5LgmxGXVPOsRHZsC7Ua8U=;
+	b=gHzIsx5xpU7qiiiMUf2eXiKpwXVydzA2lzFsff8YtQKihfFWNCWKKLDbTXkhLsxq49
+	zNgL2Z8Iw65hlb5SdJ+s/zn7NV5GyjmoZVkUVkzCoRv6QVg99rRca05mUUNWtlbGDQ25
+	XbzUcPdaELzI6RwDbeVWYxhYCEMTBFA1yGNnSzXsgC2xVkHE9J6dKi9d6oFDwBrPLfYT
+	RNaQqZC+dljrx+Qdl4COGy2LeKhGksuRmHu/JI7W9DuuNdjweIic1Jt3I/p9GiXxWRaa
+	ax2h2OGvrmIQKmyeNSkX73bknA1QSJLDYthXWoCsoVnDSkOZOHeKIPhUUExzHXEWqRMZ
+	51mQ==
+X-Gm-Message-State: APjAAAUmHOiTqK+MAXQTDrPbH8SkVTTRg8Dkqq61f/hJ/fH+UjjZOPhG
+	mk8AkGQsz0GRoNR3Z7RTmBJaqczziOY=
+X-Google-Smtp-Source: APXvYqw4KD6Pma23f8IJgF0UVFKdPWzfC/FMN8uMQ9MDiw20co+eTT+K//Ud4MquDKwmm7JCbOj26Q==
+X-Received: by 2002:a05:600c:21c5:: with SMTP id
+	x5mr6872527wmj.72.1580239961181; 
+	Tue, 28 Jan 2020 11:32:41 -0800 (PST)
+Received: from lab-linux-pc.tendawifi.com (cable-static2-2-7.rsnweb.ch.
+	[146.185.2.7])
+	by smtp.gmail.com with ESMTPSA id z4sm4191336wma.2.2020.01.28.11.32.40
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 28 Jan 2020 11:31:34 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 28 Jan 2020 11:32:40 -0800 (PST)
+From: Andrey Zhizhikin <andrey.z@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Jan 2020 11:31:36 -0800
-Message-Id: <20200128193136.903751-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.0
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] daemontools: Disable the chkshsgr tests
+Date: Tue, 28 Jan 2020 19:32:35 +0000
+Message-Id: <20200128193235.19868-1-andrey.z@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] dstat: update recipe to use python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,38 +55,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2020 19:31:34 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 28 Jan 2020 19:32:40 -0000
 
-Running the chkhsgr test during cross compile fails
+Update recipe to target python3 since python2 is EOL and has been
+dropped from OE-Core.
 
-./chkshsgr || ( cat warn-shsgr; exit 1 )
-Oops. Your getgroups() returned 0, and setgroups() failed; this means
-that I can't reliably do my shsgr test. Please either ``make'' as root
-or ``make'' while you're in one or more supplementary groups.
-
-All OE based targets have working getgroups()/setgroups()
-implementation, so its a safe assumption and therefore make the test
-to be a dummy
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
 ---
- meta-oe/recipes-support/daemontools/daemontools_0.76.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/dstat/dstat_0.7.4.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-index 35251cb8dc..d674e03781 100644
---- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-+++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-@@ -33,6 +33,7 @@ DEPENDS += "daemontools-native"
- DEPENDS_class-native = ""
- 
- do_compile() {
-+    echo "int main() { return 0; }" >${S}/src/chkshsgr.c
-     ./package/compile
+diff --git a/meta-oe/recipes-support/dstat/dstat_0.7.4.bb b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
+index 8eb715740..2e37dd72e 100644
+--- a/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
++++ b/meta-oe/recipes-support/dstat/dstat_0.7.4.bb
+@@ -19,4 +19,4 @@ do_install() {
+     oe_runmake 'DESTDIR=${D}' install
  }
  
+-RDEPENDS_${PN} += "python-core python-misc python-resource python-shell python-unixadmin"
++RDEPENDS_${PN} += "python3-core python3-misc python3-resource python3-shell python3-unixadmin"
 -- 
-2.25.0
+2.17.1
 
 
