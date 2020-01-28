@@ -1,49 +1,29 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id DEF669203E
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A70471BEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 19:52:05 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id b6so17532924wrq.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 11:52:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=gevS0PgfA7vzC305h/XLbVlKZiQWCN5tJFXdAotph5c=;
-	b=avw8RtM0w73fhphqvb57nrfsy/VIgu2tbLoBpaJ/h0TY59mU6cmWRXehwX4LUvjDqW
-	Kh9aPBQqAhiExmyf9Hu2N3wd783we70I1LrrzTUTLxnbuUREzGICyIRPypA90Wli8H/6
-	ol+YpNzUgYs92R+pEajxUpdnoI/5XSpSqaoJpBsUWy/42GgvEJ9uTkqyzm2NbbE1I2Q0
-	G5EP/Vy+hp/N/x5+8q1VLyiRruwBMwc1CRMJoU0xRS/qLVhzrWzHkRKUbDVsI7doWyXj
-	NUSrCqyzDmfGgYLXXsR2O7d23M8dj81fvotarb+79Qz/vel0S/GDgvwVFJ3+lqHImR0X
-	Uh8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=gevS0PgfA7vzC305h/XLbVlKZiQWCN5tJFXdAotph5c=;
-	b=DnRRb/F68uo8w9nfXPL/eWFLFChHm1TveB0mJ+jMVrKFhQqfiyGdxe8hEZ60QEtMqN
-	PJKYCtOiQn11kHJE9vzEolwVUlIbyv+RryRN6odjGYWqGMSkwGi0z2isK9ZYqxa/tflp
-	HjY8c54loNSbQYaxrE+vZsvhVcPq/xfPvAAzflalxBQrgNct9NC3m3II5AzCTgEPjUZq
-	uYfY8UXMJnPDi6FT8mInXfNALcKNBeiHJtfu1UBNY9q5bSNx8NUySeeDJ4Q7v3TSbTUg
-	xX1aOMnsYojYCjEn/+/jd2119xuZPLspPgiqFJfhvwBWTahbWyqfBJxQHNDqWU0WV8NF
-	rwXQ==
-X-Gm-Message-State: APjAAAWfX/YFuh8Ln0t8mDr1/CMnB7T/d8nwbAdh9hrOSCbgMRAo5BNT
-	2WNa5xmuNOq+Rd8aBb7jurxZjIIBSoI=
-X-Google-Smtp-Source: APXvYqzDU15RxRsZze8gjMK9QC3ML3ImmLwqddNTi6cODLgA8FXS+4n92GIhrOcDzFJBKToNQh0+Gw==
-X-Received: by 2002:adf:ee88:: with SMTP id b8mr32213702wro.249.1580241126403; 
-	Tue, 28 Jan 2020 11:52:06 -0800 (PST)
-Received: from localhost.localdomain (adsl-dyn55.78-99-206.t-com.sk.
-	[78.99.206.55])
-	by smtp.gmail.com with ESMTPSA id 18sm4110488wmf.1.2020.01.28.11.52.05
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 28 Jan 2020 11:52:05 -0800 (PST)
-Sender: Belisko Marek <marek.belisko@gmail.com>
-From: Marek Belisko <marek.belisko@open-nandra.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Jan 2020 20:51:59 +0100
-Message-Id: <1580241119-12734-1-git-send-email-marek.belisko@open-nandra.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Marek Belisko <marek.belisko@open-nandra.com>
-Subject: [meta-oe][PATCH] recipes-support: Added recipe for gengetopt package
+	Tue, 28 Jan 2020 21:34:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 00SLY48e007674
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Tue, 28 Jan 2020 13:34:04 -0800 (PST)
+Received: from [172.25.44.8] (172.25.44.8) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
+	Tue, 28 Jan 2020 13:34:04 -0800
+To: Joe Slater <joe.slater@windriver.com>,
+	<openembedded-devel@lists.openembedded.org>, Armin Kuster
+	<akuster808@gmail.com>
+References: <20191107181307.3722-1-joe.slater@windriver.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <7ebd9a64-acd1-6e14-5f4e-c6328d0888aa@windriver.com>
+Date: Tue, 28 Jan 2020 16:34:02 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.4.1
+MIME-Version: 1.0
+In-Reply-To: <20191107181307.3722-1-joe.slater@windriver.com>
+X-Originating-IP: [172.25.44.8]
+Subject: Re: [oe-core][zeus][PATCH 1/1] webkitgtk: fix occasional link error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,37 +36,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2020 19:52:06 -0000
+X-List-Received-Date: Tue, 28 Jan 2020 21:34:05 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-CA
 
-Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
----
- meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
- create mode 100644 meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
+Armin,
 
-diff --git a/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
-new file mode 100644
-index 0000000..a31ad0d
---- /dev/null
-+++ b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
-@@ -0,0 +1,16 @@
-+SUMMARY = "skeleton main.c generator"
-+DESCRIPTION = "Gengetopt is a tool to write command line option parsing code for C programs."
-+SECTION = "utils"
-+HOMEPAGE = "https://www.gnu.org/software/gengetopt/gengetopt.html"
-+
-+LICENSE = "GPLv3+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ff95bfe019feaf92f524b73dd79e76eb"
-+
-+SRC_URI = "${GNU_MIRROR}/gengetopt/${BPN}-${PV}.tar.xz"
-+
-+SRC_URI[md5sum] = "ea165d618640dbdecb42ae4491337965"
-+SRC_URI[sha256sum] = "b941aec9011864978dd7fdeb052b1943535824169d2aa2b0e7eae9ab807584ac"
-+
-+inherit autotools
-+
-+BBCLASSEXTEND = "native nativesdk"
+ping? It's not urgent but it would be nice to fix this build failure.
+
+../Randy
+
+
+On 11/7/19 1:13 PM, Joe Slater wrote:
+> Partial backport from WebKit.git.  See patch for details.
+>
+> Fixed in webkitgtk 2.26.1.
+>
+> Signed-off-by: Joe Slater <joe.slater@windriver.com>
+> ---
+>   .../webkit/webkitgtk/fix-link-error.patch          | 45 ++++++++++++++++++++++
+>   meta/recipes-sato/webkit/webkitgtk_2.24.4.bb       |  1 +
+>   2 files changed, 46 insertions(+)
+>   create mode 100755 meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch
+>
+> diff --git a/meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch b/meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch
+> new file mode 100755
+> index 0000000..9696ddd
+> --- /dev/null
+> +++ b/meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch
+> @@ -0,0 +1,45 @@
+> +webkitgtk: fix an occasional link error
+> +
+> +Part of ae465a4e...  Changelog is not included in the source tarball.
+> +
+> +Upstream-Status:  backport [git://git.webkit.org/WebKit.git]
+> +
+> +commit ae465a4e3b1498b6c4038fc7e596e0e3662d116f
+> +Author: Hironori.Fujii@sony.com <Hironori.Fujii@sony.com@268f45cc-cd09-0410-ab3c-d52691b4dbfc>
+> +Date:   Fri Jun 28 07:38:09 2019 +0000
+> +
+> +    [Win] unresolved external symbol "JSC::JSObject::didBecomePrototype(void)" referenced in function "JSC::Structure::create(...)"
+> +    https://bugs.webkit.org/show_bug.cgi?id=199312
+> +
+> +    Reviewed by Keith Miller.
+> +
+> +    WinCairo port, clang-cl Release builds reported a following linkage error:
+> +
+> +    > WebCore.lib(UnifiedSource-4babe430-10.cpp.obj) : error LNK2019: unresolved external symbol "public: void __cdecl JSC::JSObject::didBecomePrototype(void)" (?didBecomePrototype@JSObject@JSC@@QEAAXXZ) referenced in function "public: static class JSC::Structure * __cdecl JSC::Structure::create(class JSC::VM &,class JSC::JSGlobalObject *,class JSC::JSValue,class JSC::TypeInfo const &,struct JSC::ClassInfo const *,unsigned char,unsigned int)" (?create@Structure@JSC@@SAPEAV12@AEAVVM@2@PEAVJSGlobalObject@2@VJSValue@2@AEBVTypeInfo@2@PEBUClassInfo@2@EI@Z)
+> +
+> +    No new tests because there is no behavior change.
+> +
+> +    * Modules/indexeddb/server/SQLiteIDBBackingStore.cpp: Include <JavaScriptCore/JSCInlines.h>,
+> +    and do not include headers which is included by it.
+> +
+> +    git-svn-id: http://svn.webkit.org/repository/webkit/trunk@246922 268f45cc-cd09-0410-ab3c-d52691b4dbfc
+> +
+> +[ modification of Changelog deleted ]
+> +
+> +diff --git a/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp b/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp
+> +index d1b047c..0899a9a 100644
+> +--- a/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp
+> ++++ b/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp
+> +@@ -49,11 +49,8 @@
+> + #include "SQLiteTransaction.h"
+> + #include "ThreadSafeDataBuffer.h"
+> + #include <JavaScriptCore/AuxiliaryBarrierInlines.h>
+> +-#include <JavaScriptCore/HeapInlines.h>
+> +-#include <JavaScriptCore/JSCJSValueInlines.h>
+> +-#include <JavaScriptCore/JSGlobalObject.h>
+> ++#include <JavaScriptCore/JSCInlines.h>
+> + #include <JavaScriptCore/StrongInlines.h>
+> +-#include <JavaScriptCore/StructureInlines.h>
+> + #include <wtf/FileSystem.h>
+> + #include <wtf/NeverDestroyed.h>
+> + #include <wtf/text/StringConcatenateNumbers.h>
+> diff --git a/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb b/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb
+> index 8c695ce..b04ec82 100644
+> --- a/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb
+> +++ b/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb
+> @@ -23,6 +23,7 @@ SRC_URI = "http://www.webkitgtk.org/releases/${BPN}-${PV}.tar.xz \
+>              file://include_array.patch \
+>              file://narrowing.patch \
+>              file://0001-gstreamer-add-a-missing-format-string.patch \
+> +           file://fix-link-error.patch \
+>              "
+>   
+>   SRC_URI[md5sum] = "c214963d8c0e7d83460da04a0d8dda87"
+
+
 -- 
-2.7.4
+# Randy MacLeod
+# Wind River Linux
 
 
