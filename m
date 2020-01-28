@@ -1,51 +1,50 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
-	[209.85.166.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 38D8F7FE75
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 82BD57FF2F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 15:03:03 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id n21so14563763ioo.10
+	Tue, 28 Jan 2020 19:31:34 +0000 (UTC)
+Received: by mail-pl1-f194.google.com with SMTP id d9so5492398plo.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 07:03:05 -0800 (PST)
+	Tue, 28 Jan 2020 11:31:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=OiJo8psu6S+FGvPUwDt+5LtSMv0jtfkjGzVxXOMOI4o=;
-	b=IztmoCz9J+ZqOeXBTkNljRJgMU67M4qldl7M0CVqL0iCeZ1ao4n0jPH/wH/+XAhsHz
-	+U4eKTx1QwCoJiSlKZPxSVLcvBiMHdX39Dc1amRL7iXKsIYr9/eY3uJhrunBUaBJBKUU
-	Mu7mHpePY08jSnWsbjsTaGPWtUTAnx4E/ESkvrnzXE1YS8CljOLfRNCzUE/tpavJoKRz
-	fHeNRgG+AGZyGQZBZ5iH8CQjqeDz+QYJVYIALYXnb7ze9zo2PYuuOakQQjjcchWHEUGr
-	rjdCnAPox6LGNe+6Qb/y3+CgpoDo0b0Bc12PxPKQAUrC+RGwtBR96cZjDlQvmAunG8NA
-	uLwQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=k1HcN6VuogQUYHN0kKuOuqxD0gGmMMa566q11PxSvpI=;
+	b=FYouvH3R6s8rvIwIeEGaTM59SxoWUjQWsg+LUnSKDNzBAevbb9fN9zRU5ffn7rS1jY
+	KcNWRg5qYsORAlWA9MX+NWan1aNynxnd9r0aC4fW3b6yE/0HHFj2iMFqiEnZopELyuTi
+	EdgbSwqFQWIg3cpgmAM7uHKmybNPo9kklZ6RbEjPzUtL05Nj4uoVMa/g824fi2eiLx3D
+	PGKcIPdjfMXfoV54jJAh2RFjHjob4/XoIAzZ9IamOHG8VE51RReDCE/Av+nbiMpBBgyq
+	5awsMY9U0rbD+14iQuQUbVtZsVv7Oz00qhTwk22m8EACG3tmtt6PE6wVq8vPoxJBRsZb
+	EDmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=OiJo8psu6S+FGvPUwDt+5LtSMv0jtfkjGzVxXOMOI4o=;
-	b=d6FrVNjY0dwlu19mb/Gm7us9IP9AfA3rsWutls9TsJCbNphIYyrg+Wo9mioeKTaL9C
-	V+T9MTgkUcayXazyZ5OG8cJsqemn8rc3RkcAX9jAZ0tWfMNF7weLprnwUpMHkily+vYy
-	JgnsfCgR/7mNd250m4LKDTvj+ZJyPUyehRABXkXZMqxNyvezOPL3L9v/xmEdAbiSLxeU
-	xj/e87RLRMeXWldT39X00LomsdWF+AmFwDLnFRWmtItJhYDEB6bMo8yxganK+RotNK0c
-	xZjNE42u/w1QPdMPhOGfLJnAHrJgCxCwsi8tzN/m5B0j/NmnUb48WRuNkgTYsGyPmJlc
-	D62g==
-X-Gm-Message-State: APjAAAU8nJ6s7lrq+Sr4dmdefTS1R9ormJ9OSbBHVGAXhw60rrxmzem6
-	6WnBse71rbhdhG/5LLkCZCnvZ30TlE+Jb0Q01f0=
-X-Google-Smtp-Source: APXvYqw11zmZTEOIJH/C4197C0dQw1rraroWaZ9Kyj5HpwYqVrXZy9T/ReCRfD6GjinGbcsb7Gt87xg7K1bdteXHO9Q=
-X-Received: by 2002:a02:94a2:: with SMTP id x31mr18510843jah.22.1580223784934; 
-	Tue, 28 Jan 2020 07:03:04 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=k1HcN6VuogQUYHN0kKuOuqxD0gGmMMa566q11PxSvpI=;
+	b=YI4x6RLd84HIytyPiLx3xW/rRPaREgoMQwZIuSbODfYHVa7NThatKJCw3L3ScCXQ16
+	DcQBr/ORO4O7EfKPsFCqjNKiGGrh4heSTXSz5H5KjO07xl4SoQ0d/d+bjZOcEmUSgCkY
+	liN9tQD9ZeZGWg/mfUWrJn77TEqRSoRlO0Co4SLCsW1obo0XYz+LSVAVUM8QkO9gWHqj
+	eONz6FmXc4i8/o/O0mvryUU7jTKvGvdBKpkCKAToEFMHQQLWimquXTGUOkU9SsAgGC9L
+	lsQ+s8O7n5+b4HS1Vf78Bxuj1GpFEuYYpwrwBovacsG43GNTvwpHp67BqGUBV+z74whp
+	NJYQ==
+X-Gm-Message-State: APjAAAXTrgq3/5cZAs8W0lKB0hp/T2Wccz8EGTEZu3fLtDFD2rLdAaTw
+	4ZcOYWoHFNSS2JvXQwWGCupHKlJrsZE=
+X-Google-Smtp-Source: APXvYqxwmBQHDH7YQCoApqpntItHxeDm85X4ty8b+pbfuT1+RbRnK8KTkBSD1Ci+SlFGPogbvjJTKA==
+X-Received: by 2002:a17:902:8647:: with SMTP id
+	y7mr24395912plt.224.1580239894914; 
+	Tue, 28 Jan 2020 11:31:34 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::c362])
+	by smtp.gmail.com with ESMTPSA id y23sm3840860pjj.3.2020.01.28.11.31.34
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 28 Jan 2020 11:31:34 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 Jan 2020 11:31:36 -0800
+Message-Id: <20200128193136.903751-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-References: <20200127231234.26090-1-andrey.z@gmail.com>
-	<CANx9H-CFuV6qACC8avZQUzLLCiDx3iiKWzpFqxSS9mxtnrG_aw@mail.gmail.com>
-	<CANx9H-Aqfjqk+DHEKU6i=cqfwhxrKYxvXj0+iePDxw6LCeBfoA@mail.gmail.com>
-	<CAHtQpK7UsCX4--Zn60p_vGY2be4dbiDwLJZgcV2Sup25rG8UZA@mail.gmail.com>
-In-Reply-To: <CAHtQpK7UsCX4--Zn60p_vGY2be4dbiDwLJZgcV2Sup25rG8UZA@mail.gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Tue, 28 Jan 2020 07:02:53 -0800
-Message-ID: <CANx9H-DFVySGQOhjrY=NxUxTsuASZW4Y1rh8xCGGeTmZf1Hexw@mail.gmail.com>
-To: Andrey Zhizhikin <andrey.z@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python2][PATCH] dnssec-conf: move recipe from oe-core to meta-python2
+Subject: [meta-oe][PATCH] daemontools: Disable the chkshsgr tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,124 +57,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2020 15:03:04 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 28 Jan 2020 19:31:34 -0000
+Content-Transfer-Encoding: 8bit
 
-On Mon, Jan 27, 2020 at 10:42 PM Andrey Zhizhikin <andrey.z@gmail.com>
-wrote:
+Running the chkhsgr test during cross compile fails
 
-> Hello Tim,
->
-> On Tue, Jan 28, 2020 at 5:37 AM Tim Orling <ticotimo@gmail.com> wrote:
-> >
-> >
-> >
-> > On Mon, Jan 27, 2020 at 6:47 PM Tim Orling <ticotimo@gmail.com> wrote:
-> >>
-> >> It's moving from meta-networking, not oe-core. I'll simply change the
-> commit log locally before merging.
-> >>
-> >> On Mon, Jan 27, 2020 at 3:12 PM Andrey Zhizhikin <andrey.z@gmail.com>
-> wrote:
-> >>>
-> >>> dnssec-conf did not receive any updates since 2010 and relies heavily
-> on
-> >>> python2 code base.
-> >>>
-> >>> Move recipe to this layer, since python2 support has been dropped in
-> >>> oe-core.
-> >>>
-> >
-> > There were missing RDEPENDS which I have fixed and sent to ML (already
-> merged). While I was at it I sent the version of this patch that was
-> actually merged. Obviously nobody has been using this since it could not
-> have worked without the RDEPENDS.
->
-> Thanks for taking care of this! Sorry I've missed those RDEPENDS, I
-> had no possibility to test runtime of this package. But it looks like
-> it would not have worked even in the the [meta-networking] layer
-> before (other than people using it would have those packages pulled by
-> IMAGE_INSTALL).
->
->
-No worries. I am trying to make sure "everything" we add to meta-python2 is
-functional, so at least it was "known good" when we branch the next stable
-release. That said, I am sure that due to the volume of recipes merged
-early on there are probably still some land mines.
+./chkshsgr || ( cat warn-shsgr; exit 1 )
+Oops. Your getgroups() returned 0, and setgroups() failed; this means
+that I can't reliably do my shsgr test. Please either ``make'' as root
+or ``make'' while you're in one or more supplementary groups.
 
->
-> >
-> >>> Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
-> >>> ---
-> >>>  .../dnssec-conf/dnssec-conf_2.02.bb           | 35
-> +++++++++++++++++++
-> >>>  1 file changed, 35 insertions(+)
-> >>>  create mode 100644 recipes-support/dnssec-conf/dnssec-conf_2.02.bb
-> >>>
-> >>> diff --git a/recipes-support/dnssec-conf/dnssec-conf_2.02.bb
-> b/recipes-support/dnssec-conf/dnssec-conf_2.02.bb
-> >>> new file mode 100644
-> >>> index 0000000..ca59bd2
-> >>> --- /dev/null
-> >>> +++ b/recipes-support/dnssec-conf/dnssec-conf_2.02.bb
-> >>> @@ -0,0 +1,35 @@
-> >>> +SUMMARY = "DNSSEC and DLV configuration and priming tool"
-> >>> +DESCRIPTION = "\
-> >>> +DNSSEC configuration and priming tool. Keys are required until the
-> root \
-> >>> +is signed, as well as for local unpublished DNSSEC keys to be
-> preloaded \
-> >>> +into the recursive nameserver. These DNSSEC configuration files can
-> be \
-> >>> +directly included in the bind or unbound nameserver configuration
-> files. \
-> >>> +dnssec-conf includes a commandline configuration client for Bind and \
-> >>> +Unbound, known DNSSEC keys, URL's to official publication pages of
-> keys, \
-> >>> +and harvested keys, as well a script to harvest DNSKEY's from DNS. \
-> >>> +See also: system-config-dnssec"
-> >>> +HOMEPAGE = "https://github.com/xelerance/dnssec-conf"
-> >>> +SECTION = "net"
-> >>> +LICENSE = "GPLv2+"
-> >>> +LIC_FILES_CHKSUM =
-> "file://LICENSE;md5=0636e73ff0215e8d672dc4c32c317bb3"
-> >>> +DEPENDS += "xmlto-native docbook-xml-dtd4-native \
-> >>> +            docbook-xsl-stylesheets-native libxslt-native"
-> >>> +
-> >>> +SRC_URI = "git://github.com/xelerance/dnssec-conf.git"
-> >>> +SRCREV = "8e799683736b4a7b5e5e78f98fba0a6f48393537"
-> >>> +
-> >>> +S = "${WORKDIR}/git"
-> >>> +
-> >>> +do_install () {
-> >>> +    rm -rf ${D}
-> >>> +    make PREFIX=${prefix} DESTDIR=${D} ETCDIR=${D}${sysconfdir}
-> install
-> >>> +    # We no longer ship trust anchors. Most of these are in the DLV
-> Registry now.
-> >>> +    # and it prevents the problem of shipping outdated trust anchors.
-> >>> +    # For DLV, we ship the ISC DLV Registry key
-> >>> +    rm -rf ${D}${sysconfdir}/pki/dnssec-keys/harvest/*
-> >>> +    rm -rf ${D}${sysconfdir}/pki/dnssec-keys/production/reverse/*
-> >>> +    install -d -m 0755 ${D}${sysconfdir}/sysconfig
-> >>> +    install -m 0644 packaging/fedora/dnssec.sysconfig
-> ${D}${sysconfdir}/sysconfig/dnssec
-> >>> +}
-> >>> +
-> >>> +RDEPENDS_${PN} = "python"
-> >>> --
-> >>> 2.17.1
-> >>>
-> >>> --
-> >>> _______________________________________________
-> >>> Openembedded-devel mailing list
-> >>> Openembedded-devel@lists.openembedded.org
-> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
->
-> --
-> Regards,
-> Andrey.
->
+All OE based targets have working getgroups()/setgroups()
+implementation, so its a safe assumption and therefore make the test
+to be a dummy
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-support/daemontools/daemontools_0.76.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+index 35251cb8dc..d674e03781 100644
+--- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
++++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+@@ -33,6 +33,7 @@ DEPENDS += "daemontools-native"
+ DEPENDS_class-native = ""
+ 
+ do_compile() {
++    echo "int main() { return 0; }" >${S}/src/chkshsgr.c
+     ./package/compile
+ }
+ 
+-- 
+2.25.0
+
 
