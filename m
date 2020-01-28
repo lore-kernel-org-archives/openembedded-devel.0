@@ -1,58 +1,49 @@
-Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
-	[209.85.208.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 158F27F352
+Return-Path: <andrey.z@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 87E517FD36
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 05:43:51 +0000 (UTC)
-Received: by mail-lj1-f196.google.com with SMTP id v17so13385138ljg.4
+	Tue, 28 Jan 2020 06:42:50 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id d16so14632130wre.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Jan 2020 21:43:53 -0800 (PST)
+	Mon, 27 Jan 2020 22:42:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:from:to:cc:references:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=x6yiSz64DGnjxvuqzVu+flTkUhqdEMgB4TXNe/woxGE=;
-	b=RXpAamZuKKt9fgd8WBl3IWu0slTIvraIhED00MIDSHsnf7csMQqPuNsosaDbdyI6Wk
-	kZIhob+56wc5KZRqBycNY4RNkwJcvOEzpbNW5AjdgATrWW3y2FF0UxyCPCTcPRIdPKen
-	8V27CNr6FyHnaLGcQGzUCLdJ1SqySk2HOnkiQ9ozq7RuCzx6vNs6G7y+WbJaiZHS2mPN
-	YcH1GzXG7oP6geXBsjL+rgilEQevMccCzQgU0vHZrWjZqqGboHmn3gg/SGrAI4fNAEex
-	WjwPgMU0YvLZJIkPgZSA3w9I9UVhRe9p7L7tTPPRw6mA1MGB16Z9J1/wQW7EBTdOtmPJ
-	NVEA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=qm8ouff1jBgtRnFZgKS3CAaeuQfQiTEr5phst+H1R8o=;
+	b=ltBaUC6lbPs3mDBD/CBkCfXTCqTiQlv5ZGXFf6A+OFFrsXC+bg/UhOhr6LOOzzXOEM
+	wr/jKEHqIXs/+arxMOYavN4a5QNLjDtsKd/13dR8wOw1Ygbcuwd75Ja5EOr84tFfqMxK
+	hUs58dulF0i/xIr5rSAHEWe6FsHJhNicjaXor/EmLXbk9VrYLTJd5Lt89NAFHJchlcMu
+	yHvusmRUdicQXGQkQegvFMPzliMTkHZm1gmN8KCchCXph05Pu4zQFccxSNo/4q57NGP1
+	EaDnrpPnhu4Lzlm6CmRTrIxtYZd8rKpkMTlC2MXLv/arx+XhfcnpSOV/iXc5eRT4A2We
+	GMyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:from:to:cc:references:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=x6yiSz64DGnjxvuqzVu+flTkUhqdEMgB4TXNe/woxGE=;
-	b=WXpo54QHVxt3CtiSDl2fCDd7l0ripdLRrR/JTN24z0Z1lCrNcBDREnfuQVnW92E/fv
-	nwhGSnaZQebTYuaJKX+15NCV/qZbwei8tc4OxstzlanJjfW8jxZMyrNX92Fn51JtlpyS
-	TxPHt6hxC6CAQ8SqUvQ5T63W3BkPgRUOy2ta281JPN9XETaoPkCIUcUoWc+WTD+8E8qu
-	cc6Vw+t7aL+FGTHdxaoXvjvWhP1ZBJascVdICaACIlwibHqUdLP+yqUbZ2RtS27tQxkc
-	2VNxQH4u8NBUBUEVAl5laud2Th3fuwXfFCZRqCFjvsIALIrBWp5dZRpGuu4l/4gAQ3Uo
-	FBCw==
-X-Gm-Message-State: APjAAAW5RSqtcMzxBPSisDed+NZ+K9azahfnGwOs5GKuayBK+TrP71gN
-	PKNGrVFc71YwvsxBsrXbC+fb5zxR
-X-Google-Smtp-Source: APXvYqzGcRcxlAjnc613ei28vsmFlj1ysYQ1q88+7ZVhfK1a7U8gwDjyPSxkEjJxCwka+OPoy9YYBw==
-X-Received: by 2002:a2e:8907:: with SMTP id d7mr9122291lji.71.1580190232185;
-	Mon, 27 Jan 2020 21:43:52 -0800 (PST)
-Received: from localhost.localdomain (37-247-29-68.customers.ownit.se.
-	[37.247.29.68]) by smtp.gmail.com with ESMTPSA id
-	n23sm9136341lfa.41.2020.01.27.21.43.51
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Mon, 27 Jan 2020 21:43:51 -0800 (PST)
-From: Jacob Kroon <jacob.kroon@gmail.com>
-To: Richard Leitner <richard.leitner@skidata.com>
-References: <20200127112451.165555-1-richard.leitner@skidata.com>
-	<c43cf573-d876-8a4a-d978-fc4b2303e747@gmail.com>
-	<20200127145758.GA603314@pcleri>
-	<6c208020-0b53-4701-1173-6e59c0f2b5c2@gmail.com>
-Message-ID: <0dad623b-f095-3170-26c9-5a554b509469@gmail.com>
-Date: Tue, 28 Jan 2020 06:43:50 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.4.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=qm8ouff1jBgtRnFZgKS3CAaeuQfQiTEr5phst+H1R8o=;
+	b=nK9gI8KWq0F3yG861k1FU2I1YFUDJlyseCGCkOaKZn1xU4ieInPBTduCD5h2k7MPvD
+	lRsulMge5drSc3SqhjfC36ZtGjnpf3Da5z2gTnufeX9iqySwiZn3KOoCUMp6s0wA/Prf
+	nZge7q9LldoJZ5JdkJYSm4S0aWt2uSwtCXg7ipj0fZ0/JKEYRdvBJABoZnkUGjYHFKUH
+	D1SOgnoidrYdPU2FjJ6qmIQZB1BwUEvO6YIcUozjabWMYJ93+La+4dMhoRhKR3YS1AAK
+	RCZm1sNTXWauq57uJkrh6Ca+drNTwmiQd1LGbJajAiG+bamUWJDlpY+3LdVB1Iv2IvL7
+	P9Wg==
+X-Gm-Message-State: APjAAAXiDlsb2GZIw8BbIR5u5Jpgg/t8lMYEIeDGKTyDsetdzjVCPy7w
+	/6eU2QxSBSZBIwbuADbsrk2YnBXhrz1hSdyMqvg=
+X-Google-Smtp-Source: APXvYqwtdfqSoFVPBUbg25kncKOl6No62M4FSIBS8jsJ6c0/P8ovGM3ivYlL/sS3q8eWCbFNVMSjiBKrXnNh5hn8RnM=
+X-Received: by 2002:adf:fe90:: with SMTP id l16mr26344293wrr.265.1580193771252;
+	Mon, 27 Jan 2020 22:42:51 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <6c208020-0b53-4701-1173-6e59c0f2b5c2@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java][PATCH 0/4] openjdk-8: update to jdk8u242ga
+References: <20200127231234.26090-1-andrey.z@gmail.com>
+	<CANx9H-CFuV6qACC8avZQUzLLCiDx3iiKWzpFqxSS9mxtnrG_aw@mail.gmail.com>
+	<CANx9H-Aqfjqk+DHEKU6i=cqfwhxrKYxvXj0+iePDxw6LCeBfoA@mail.gmail.com>
+In-Reply-To: <CANx9H-Aqfjqk+DHEKU6i=cqfwhxrKYxvXj0+iePDxw6LCeBfoA@mail.gmail.com>
+From: Andrey Zhizhikin <andrey.z@gmail.com>
+Date: Tue, 28 Jan 2020 07:42:40 +0100
+Message-ID: <CAHtQpK7UsCX4--Zn60p_vGY2be4dbiDwLJZgcV2Sup25rG8UZA@mail.gmail.com>
+To: Tim Orling <ticotimo@gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python2][PATCH] dnssec-conf: move recipe from oe-core to meta-python2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,48 +56,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2020 05:43:52 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 28 Jan 2020 06:42:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 1/27/20 5:05 PM, Jacob Kroon wrote:
-> On 1/27/20 3:57 PM, Richard Leitner wrote:
->> On Mon, Jan 27, 2020 at 03:10:04PM +0100, Jacob Kroon wrote:
->>> On 1/27/20 12:24 PM, Richard Leitner wrote:
->>>> This series updates Openjdk 8 to the latest "ga" release 242.
->>>>
->>>> Successful testing has been done on a fedora-31 build host for
->>>> qemuarm64, qemux86-64, qemuarm32 and armv7a.
->>>>
->>>
->>> <cut>
->>>
->>> I don't know if it is related to my setup, but "bitbake openjre-8" 
->>> insists
->>> on rebuilding itself every time I run it, and I don't see any sstate 
->>> cache
->>> being generated for it.
->>
->> I just tried to reproduce it, but neither for armv7a nor for aarch64
->> openjre-8 is rebuiled on the latest poky/oe-core master when nothing was
->> changed in meta-java.
->>
->> So in your case it also rebuilds if you call "bitbake openjre-8"
->> directly one-after-another without any change to the layers?
->>
-> 
-> Yes, precisely.
-> 
-> But.. I think you can ignore this. I suspect I have confused bitbake's 
-> hashequiv database by pruning old cache-files using the 
-> sstate-cache-management.sh script.
-> 
-> Joshua, do you know if that script is supported when using hashequiv ?
-> 
-> Gonna try and remove cache/ aswell, and see if that helps.
-> 
+Hello Tim,
 
-I just retried on a clean build, I wiped everything, and openjre-8 still 
-insists on rebuilding on the second run. I don't know whats going on here..
+On Tue, Jan 28, 2020 at 5:37 AM Tim Orling <ticotimo@gmail.com> wrote:
+>
+>
+>
+> On Mon, Jan 27, 2020 at 6:47 PM Tim Orling <ticotimo@gmail.com> wrote:
+>>
+>> It's moving from meta-networking, not oe-core. I'll simply change the commit log locally before merging.
+>>
+>> On Mon, Jan 27, 2020 at 3:12 PM Andrey Zhizhikin <andrey.z@gmail.com> wrote:
+>>>
+>>> dnssec-conf did not receive any updates since 2010 and relies heavily on
+>>> python2 code base.
+>>>
+>>> Move recipe to this layer, since python2 support has been dropped in
+>>> oe-core.
+>>>
+>
+> There were missing RDEPENDS which I have fixed and sent to ML (already merged). While I was at it I sent the version of this patch that was actually merged. Obviously nobody has been using this since it could not have worked without the RDEPENDS.
+
+Thanks for taking care of this! Sorry I've missed those RDEPENDS, I
+had no possibility to test runtime of this package. But it looks like
+it would not have worked even in the the [meta-networking] layer
+before (other than people using it would have those packages pulled by
+IMAGE_INSTALL).
+
+>
+>
+>>> Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
+>>> ---
+>>>  .../dnssec-conf/dnssec-conf_2.02.bb           | 35 +++++++++++++++++++
+>>>  1 file changed, 35 insertions(+)
+>>>  create mode 100644 recipes-support/dnssec-conf/dnssec-conf_2.02.bb
+>>>
+>>> diff --git a/recipes-support/dnssec-conf/dnssec-conf_2.02.bb b/recipes-support/dnssec-conf/dnssec-conf_2.02.bb
+>>> new file mode 100644
+>>> index 0000000..ca59bd2
+>>> --- /dev/null
+>>> +++ b/recipes-support/dnssec-conf/dnssec-conf_2.02.bb
+>>> @@ -0,0 +1,35 @@
+>>> +SUMMARY = "DNSSEC and DLV configuration and priming tool"
+>>> +DESCRIPTION = "\
+>>> +DNSSEC configuration and priming tool. Keys are required until the root \
+>>> +is signed, as well as for local unpublished DNSSEC keys to be preloaded \
+>>> +into the recursive nameserver. These DNSSEC configuration files can be \
+>>> +directly included in the bind or unbound nameserver configuration files. \
+>>> +dnssec-conf includes a commandline configuration client for Bind and \
+>>> +Unbound, known DNSSEC keys, URL's to official publication pages of keys, \
+>>> +and harvested keys, as well a script to harvest DNSKEY's from DNS. \
+>>> +See also: system-config-dnssec"
+>>> +HOMEPAGE = "https://github.com/xelerance/dnssec-conf"
+>>> +SECTION = "net"
+>>> +LICENSE = "GPLv2+"
+>>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=0636e73ff0215e8d672dc4c32c317bb3"
+>>> +DEPENDS += "xmlto-native docbook-xml-dtd4-native \
+>>> +            docbook-xsl-stylesheets-native libxslt-native"
+>>> +
+>>> +SRC_URI = "git://github.com/xelerance/dnssec-conf.git"
+>>> +SRCREV = "8e799683736b4a7b5e5e78f98fba0a6f48393537"
+>>> +
+>>> +S = "${WORKDIR}/git"
+>>> +
+>>> +do_install () {
+>>> +    rm -rf ${D}
+>>> +    make PREFIX=${prefix} DESTDIR=${D} ETCDIR=${D}${sysconfdir} install
+>>> +    # We no longer ship trust anchors. Most of these are in the DLV Registry now.
+>>> +    # and it prevents the problem of shipping outdated trust anchors.
+>>> +    # For DLV, we ship the ISC DLV Registry key
+>>> +    rm -rf ${D}${sysconfdir}/pki/dnssec-keys/harvest/*
+>>> +    rm -rf ${D}${sysconfdir}/pki/dnssec-keys/production/reverse/*
+>>> +    install -d -m 0755 ${D}${sysconfdir}/sysconfig
+>>> +    install -m 0644 packaging/fedora/dnssec.sysconfig ${D}${sysconfdir}/sysconfig/dnssec
+>>> +}
+>>> +
+>>> +RDEPENDS_${PN} = "python"
+>>> --
+>>> 2.17.1
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+
+-- 
+Regards,
+Andrey.
 
