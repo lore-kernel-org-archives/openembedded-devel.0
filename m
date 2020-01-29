@@ -1,30 +1,49 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 325C37CECE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
+	[209.85.210.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 79B5B7FACA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Jan 2020 22:10:15 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 00SMAFLu008217
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Tue, 28 Jan 2020 14:10:15 -0800 (PST)
-Received: from [172.25.44.8] (172.25.44.8) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.468.0;
-	Tue, 28 Jan 2020 14:10:14 -0800
-From: Randy MacLeod <randy.macleod@windriver.com>
-To: Joe Slater <joe.slater@windriver.com>,
-	<openembedded-devel@lists.openembedded.org>, Armin Kuster
-	<akuster808@gmail.com>
-References: <20191107181307.3722-1-joe.slater@windriver.com>
-	<7ebd9a64-acd1-6e14-5f4e-c6328d0888aa@windriver.com>
-Message-ID: <b22524f9-ef4f-6b1e-dbb5-74191fb3c74f@windriver.com>
-Date: Tue, 28 Jan 2020 17:10:13 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.4.1
+	Wed, 29 Jan 2020 00:42:33 +0000 (UTC)
+Received: by mail-pf1-f193.google.com with SMTP id k29so5031970pfp.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 28 Jan 2020 16:42:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=xy7ZAOmVj8CPxmZL3jp9HgiDyL9+0wp1txiQsDxsJ8c=;
+	b=D47Ge0tyzgB0z63Uu/eiHbvAHQczDAhC38c6zKgTPVIQ7AibVWOY7592qr1EfYxbTb
+	5aMV2h6W66sRwuSvxD1fPgDk/BHIHvSilP7/bg+PlETAA8tx0SlcAVTVbUvcqTeqAJqf
+	FtDCCvtBc3IMSxzP4QnwbIQwwo80SJ9m7WXZZvj+Xww6D7DGqwVOa/+jW/7aE1kxr5AE
+	udPxLePLON/8qQGml+4bbpdRaHydL+YZbhvPBg6KSwmxM9gYUBDDgBow4BCjDqIJec1C
+	05xqJ2CWDDHSsNU6LOtzp+QBvSvL7cCK6doEfoe9EQ1I69jWUOuhrZI0foWVUqqmxttt
+	wmQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=xy7ZAOmVj8CPxmZL3jp9HgiDyL9+0wp1txiQsDxsJ8c=;
+	b=EvxxKu8E/yc9htfQBrorFk5USbut3dZGcuaSxuh5eWaz4ZDGwZZss0KcGoyMTyD40o
+	d5XekhQqWce7Co9t1TjwKNXTH3PPj4x34c4o2mGk7r6F1rzDyBW+mJr2F4t+/DWi1zzD
+	pfHNg2UK36N5IflWQHzLy4xUgR/EIFK353oZNV8HVefJZ75Pt6s/y2BDlXDnBPjiGKO6
+	ZjnXy2WB11rDk8IuORwUsotkIf6MdinG/14Avi+S+6fo4F2pRT2/oB9NTArR8NovatJf
+	Wq9vQUaYaf/Xgg1kanNaXJl+eOhNFVVyqakcnL/vgnGnvYWn83aSKGOcvNehW+exIQcf
+	fULw==
+X-Gm-Message-State: APjAAAWMXvP5veHiq/MjBWGEkhStZAIs0IIPm9c/qH48Zabki26rJ/Kh
+	euqO1WCr3MKn6jmF42xb0woZujnA2io=
+X-Google-Smtp-Source: APXvYqxDEV1TfkkczOMLVESOKDZ1BqNmWN+x3PjzxV5rZteKAZQl1rCG9CK5bZMhK2CSBIdahBbPEA==
+X-Received: by 2002:a63:2d44:: with SMTP id t65mr29473452pgt.112.1580258553872;
+	Tue, 28 Jan 2020 16:42:33 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::c362])
+	by smtp.gmail.com with ESMTPSA id b21sm238793pfp.0.2020.01.28.16.42.33
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 28 Jan 2020 16:42:33 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 Jan 2020 16:42:35 -0800
+Message-Id: <20200129004235.3805982-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-In-Reply-To: <7ebd9a64-acd1-6e14-5f4e-c6328d0888aa@windriver.com>
-X-Originating-IP: [172.25.44.8]
-Subject: Re: [oe-core][zeus][PATCH 1/1] webkitgtk: fix occasional link error
+Subject: [meta-oe][PATCH] fluentbit: Link with libatomic on riscv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,129 +56,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Jan 2020 22:10:15 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Wed, 29 Jan 2020 00:42:33 -0000
 Content-Transfer-Encoding: 8bit
-Content-Language: en-CA
 
-On 1/28/20 4:34 PM, Randy MacLeod wrote:
-> Armin,
->
-> ping? It's not urgent but it would be nice to fix this build failure.
+jemalloc uses libatomic functions
 
+Fixes
+../lib/libjemalloc_pic.a(extent_dss.pic.o): in function `extent_dss_extend
+ing_start':
+| /usr/src/debug/fluentbit/1.3.5-r0/fluent-bit-1.3.5/lib/jemalloc-5.2.1/src/extent_dss.c:75: undefined reference to `__atomic_compare
+_exchange_1'
 
-Ah, it was sent to the wrong list.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Joe,
-
-Could you send this patch to the oe-core list and CC Armin, please?
-
-../Randy
-
->
-> ../Randy
->
->
-> On 11/7/19 1:13 PM, Joe Slater wrote:
->> Partial backport from WebKit.git.  See patch for details.
->>
->> Fixed in webkitgtk 2.26.1.
->>
->> Signed-off-by: Joe Slater <joe.slater@windriver.com>
->> ---
->>   .../webkit/webkitgtk/fix-link-error.patch          | 45 
->> ++++++++++++++++++++++
->>   meta/recipes-sato/webkit/webkitgtk_2.24.4.bb       |  1 +
->>   2 files changed, 46 insertions(+)
->>   create mode 100755 
->> meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch
->>
->> diff --git a/meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch 
->> b/meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch
->> new file mode 100755
->> index 0000000..9696ddd
->> --- /dev/null
->> +++ b/meta/recipes-sato/webkit/webkitgtk/fix-link-error.patch
->> @@ -0,0 +1,45 @@
->> +webkitgtk: fix an occasional link error
->> +
->> +Part of ae465a4e...  Changelog is not included in the source tarball.
->> +
->> +Upstream-Status:  backport [git://git.webkit.org/WebKit.git]
->> +
->> +commit ae465a4e3b1498b6c4038fc7e596e0e3662d116f
->> +Author: Hironori.Fujii@sony.com 
->> <Hironori.Fujii@sony.com@268f45cc-cd09-0410-ab3c-d52691b4dbfc>
->> +Date:   Fri Jun 28 07:38:09 2019 +0000
->> +
->> +    [Win] unresolved external symbol 
->> "JSC::JSObject::didBecomePrototype(void)" referenced in function 
->> "JSC::Structure::create(...)"
->> +    https://bugs.webkit.org/show_bug.cgi?id=199312
->> +
->> +    Reviewed by Keith Miller.
->> +
->> +    WinCairo port, clang-cl Release builds reported a following 
->> linkage error:
->> +
->> +    > WebCore.lib(UnifiedSource-4babe430-10.cpp.obj) : error 
->> LNK2019: unresolved external symbol "public: void __cdecl 
->> JSC::JSObject::didBecomePrototype(void)" 
->> (?didBecomePrototype@JSObject@JSC@@QEAAXXZ) referenced in function 
->> "public: static class JSC::Structure * __cdecl 
->> JSC::Structure::create(class JSC::VM &,class JSC::JSGlobalObject 
->> *,class JSC::JSValue,class JSC::TypeInfo const &,struct 
->> JSC::ClassInfo const *,unsigned char,unsigned int)" 
->> (?create@Structure@JSC@@SAPEAV12@AEAVVM@2@PEAVJSGlobalObject@2@VJSValue@2@AEBVTypeInfo@2@PEBUClassInfo@2@EI@Z)
->> +
->> +    No new tests because there is no behavior change.
->> +
->> +    * Modules/indexeddb/server/SQLiteIDBBackingStore.cpp: Include 
->> <JavaScriptCore/JSCInlines.h>,
->> +    and do not include headers which is included by it.
->> +
->> +    git-svn-id: http://svn.webkit.org/repository/webkit/trunk@246922 
->> 268f45cc-cd09-0410-ab3c-d52691b4dbfc
->> +
->> +[ modification of Changelog deleted ]
->> +
->> +diff --git 
->> a/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp 
->> b/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp
->> +index d1b047c..0899a9a 100644
->> +--- a/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp
->> ++++ b/Source/WebCore/Modules/indexeddb/server/SQLiteIDBBackingStore.cpp
->> +@@ -49,11 +49,8 @@
->> + #include "SQLiteTransaction.h"
->> + #include "ThreadSafeDataBuffer.h"
->> + #include <JavaScriptCore/AuxiliaryBarrierInlines.h>
->> +-#include <JavaScriptCore/HeapInlines.h>
->> +-#include <JavaScriptCore/JSCJSValueInlines.h>
->> +-#include <JavaScriptCore/JSGlobalObject.h>
->> ++#include <JavaScriptCore/JSCInlines.h>
->> + #include <JavaScriptCore/StrongInlines.h>
->> +-#include <JavaScriptCore/StructureInlines.h>
->> + #include <wtf/FileSystem.h>
->> + #include <wtf/NeverDestroyed.h>
->> + #include <wtf/text/StringConcatenateNumbers.h>
->> diff --git a/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb 
->> b/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb
->> index 8c695ce..b04ec82 100644
->> --- a/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb
->> +++ b/meta/recipes-sato/webkit/webkitgtk_2.24.4.bb
->> @@ -23,6 +23,7 @@ SRC_URI = 
->> "http://www.webkitgtk.org/releases/${BPN}-${PV}.tar.xz \
->>              file://include_array.patch \
->>              file://narrowing.patch \
->> file://0001-gstreamer-add-a-missing-format-string.patch \
->> +           file://fix-link-error.patch \
->>              "
->>     SRC_URI[md5sum] = "c214963d8c0e7d83460da04a0d8dda87"
->
->
-
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
+index d8cb8b5e85..06895a03aa 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_1.3.5.bb
+@@ -43,6 +43,8 @@ EXTRA_OECMAKE += "-DFLB_SHARED_LIB=Off -DFLB_EXAMPLES=Off "
+ 
+ EXTRA_OECMAKE += "${@bb.utils.contains('DISTRO_FEATURES','systemd','-DFLB_SYSTEMD=On','',d)}"
+ 
++EXTRA_OECMAKE_append_riscv64 = " -DFLB_DEPS='atomic'"
++
+ # Kafka Output plugin (disabled by default): note that when
+ # enabling Kafka output plugin, the backend library librdkafka
+ # requires 'openssl' as a dependency.
 -- 
-# Randy MacLeod
-# Wind River Linux
+2.25.0
 
 
