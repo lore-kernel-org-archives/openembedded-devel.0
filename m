@@ -1,48 +1,53 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-il1-f174.google.com (mail-il1-f174.google.com
-	[209.85.166.174])
-	by mail.openembedded.org (Postfix) with ESMTP id C0213600A4
+Return-Path: <twoerner@gmail.com>
+Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
+	[209.85.216.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 09A7060155
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 12:29:03 +0000 (UTC)
-Received: by mail-il1-f174.google.com with SMTP id f5so2894777ilq.5
+	Thu, 30 Jan 2020 13:08:57 +0000 (UTC)
+Received: by mail-pj1-f47.google.com with SMTP id ep11so1309413pjb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 04:29:05 -0800 (PST)
+	Thu, 30 Jan 2020 05:08:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=yj94y2p+u1vLcRMbtNjujr5Z6i6XB5aKX/aEUagyXt8=;
-	b=TiS032jVQxrtezO0dD/iSjOJAFvSg1qfqprd2JOkMAkShdoOuYBT6hx9z7FqdLyecn
-	/xIJnC1JVL6oO9NZETbxxmOrlFDrNmraNc5eDYTaZt7eawecydvSHbxFRUrpic/Grhmb
-	74TkWNyTl0tWVBO8h5s+D+Q5hyeTGGF53onfekouZzGxXHoN/h1ZsqsVm+zcQW/OJVfi
-	VxVTECBS1rW+yr7sxPXD0I6l4loZRk89l+8ehCMdNz2EQFtB34k4soN4RTgu2ZxdKCCW
-	rWKjbIrm7IMLi1rkbHgGiETR3RZVJmf6GMGJkAdp+X34h3SBg5zDfiH4T/hRfEvU0Fa0
-	3esw==
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=UKbuoZ6zIpxk4JFHUmCluQisZoLmmMLhVhHMazkXFJw=;
+	b=h7EAL27StWZKvWbHPo2mfGV9xDLCc8yYEty2HTR0DSnmwYNhhKzpSPrrqBTq+ZJiCB
+	w8joN6Hh6JN3FXU4RSXzH5nuJ/2r+3Iqdft4LIlEMS8S5g7fLsi9B76Ku56lpn93GwKP
+	fBZY7x3oDWD7N1+tGyUxwDj9mFdYQVTDwlhOoVshwou6gKuXDMRJtJBw3O1leJ2qfgug
+	BPidJ4kbneZdRt+Z2gR3ge/bpAR2YdTYlOXzJrEYbCv4Ml9JN8TLJqj3IjhooO63nidf
+	3mo+Z7KOB8lib2jqBf9JdtgGnhEhTPka0dFRB424CimynvOByEXTtFqp6yTIkX5rSdpn
+	NhOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=yj94y2p+u1vLcRMbtNjujr5Z6i6XB5aKX/aEUagyXt8=;
-	b=S7ChlkedxrX5T4GkOUHyCI3Ajw0x4C1kj5ew3KukISUoOlWlHP2vWvR1A0mTc/AqoX
-	6YTP3FOhswL8LQREfLdsnIll3FBbasHOH7cMVUWxMkm/eItLASSA2ER2LIOuvfKgqfhS
-	ZxAG8i/imXON3IpNAvOF5U/chXUcCT1fGd9i8Z4R8GwDq5Vq2zc1ilnsLzPOTg+CBbu1
-	k15h8THh08rjYrmFqoK7STcO5SvJyrQe27YKqZbin7BRipdvb0qVqvG5iT9Sox5eEv1F
-	tfbVhu/9/1oQXH5ZvPbYmnHQl7RJbLEqXMdFOs/6PVrQ5g5J/YeMf1I7lpoCENGLVO+C
-	dW4Q==
-X-Gm-Message-State: APjAAAXu1SBBf0twr7dMUhF3mcOjA3AD47AKep3WvWMonwBq3vGxSoK2
-	L7JNbP6EWS1RC8711Uh+YynE57k1bm/Dml4mAgEorJYZ
-X-Google-Smtp-Source: APXvYqyz0rSIHoBGiau/TdxsMVXXjBwt+i0Fj9FcoSggwqOXXwrsKHn+/qrgvQ8pwCI/xqsN8nvSKN1dLQLVODXb4pw=
-X-Received: by 2002:a92:911b:: with SMTP id t27mr2924569ild.142.1580364064033; 
-	Wed, 29 Jan 2020 22:01:04 -0800 (PST)
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=UKbuoZ6zIpxk4JFHUmCluQisZoLmmMLhVhHMazkXFJw=;
+	b=WV480WbfOcK0B8je8JuRqeGdXzc4f3ArTXGAFAtOKJuCBdAFvmYG+9PVd7dVRCa/Uc
+	KTf7wmeYZVgaDBdMJNS6Z0dOposddaUP3P+b1EMRynb5fFP0M4G9Wb+1kbcplwV0u1pi
+	4g+E21GfYhfW8/trfjDNzvp4cTCOBIx7jMhX6n0Yc5PPTRkiQXxjUz2gfSg/3ouKo3M+
+	fILz7Zgz4XqadUYMco+swX06VkL39LKq2f4a2qfMWqbrkSBylJ03IZaVd5jMY1+dqqUL
+	85sdHxGRjI0JCWTJoAEGyEfMuGO0NEg7l168fpRRSZO14QA7pIHSUEQRbdCGQNhX8EKK
+	oYQA==
+X-Gm-Message-State: APjAAAUAOPrJNkTlP3O7ULu9EEvXgrNGTzVTM0/IerEdsHp1ceU3Ardp
+	lwVzrFs5tPqlx8yYMjE8jXCUZwbVfno=
+X-Google-Smtp-Source: APXvYqxn3Z8afJaGeAHr8GZU1aEVspqMsBXkGkOd8GqSMvJCxOOZBitsc9l/d9hbn59HMjjqsBfiNw==
+X-Received: by 2002:a0c:e4c1:: with SMTP id g1mr912615qvm.45.1580329924565;
+	Wed, 29 Jan 2020 12:32:04 -0800 (PST)
+Received: from linux-uys3 ([206.248.190.95]) by smtp.gmail.com with ESMTPSA id
+	g18sm1546418qki.13.2020.01.29.12.32.03
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 29 Jan 2020 12:32:03 -0800 (PST)
+Date: Wed, 29 Jan 2020 15:32:00 -0500
+From: Trevor Woerner <twoerner@gmail.com>
+To: Tim Orling <ticotimo@gmail.com>
+Message-ID: <20200129203200.GA3422@linux-uys3>
+References: <20200125202357.4766-1-Martin.Jansa@gmail.com>
+	<CANx9H-BvkgBQb_NPgJ66LUJvpMDFy7h899MTrnVrqGsm=fDsaQ@mail.gmail.com>
 MIME-Version: 1.0
-References: <20200127204322.143707-1-trevor.gamblin@windriver.com>
-In-Reply-To: <20200127204322.143707-1-trevor.gamblin@windriver.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 29 Jan 2020 22:00:52 -0800
-Message-ID: <CANx9H-CZe5bCG-tv2YVkEiQy=PVPYPHhw6n9AcghP+dZ1yBogg@mail.gmail.com>
-To: Trevor Gamblin <trevor.gamblin@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][zeus][PATCH 1/2] python-twisted: add required RDEPENDS for twistd
+In-Reply-To: <CANx9H-BvkgBQb_NPgJ66LUJvpMDFy7h899MTrnVrqGsm=fDsaQ@mail.gmail.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] packagegrop-meta-oe: remove blacklisted mpv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,70 +60,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jan 2020 12:29:04 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 30 Jan 2020 13:09:10 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Mon, Jan 27, 2020 at 12:44 PM Trevor Gamblin <
-trevor.gamblin@windriver.com> wrote:
+On Sat 2020-01-25 @ 12:42:21 PM, Tim Orling wrote:
+> If someone cares, it has been updated to python3
+> https://github.com/mpv-player/mpv/releases/tag/v0.31.0
 
-> python-twisted is currently missing some packages for its /usr/bin/twistd
-> executable to function. Add these to the RDEPENDS list, and also clean up
-> formatting since the list is getting long.
->
-> Note that a similar patch has already been submitted for master branch,
-> but the python2 version of twisted needs more explicit RDEPENDS than the
-> python3 version submitted to master in order for /usr/bin/twistd to work
-> properly.
->
-> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
-> ---
->  .../recipes-devtools/python/python-twisted.inc | 18 +++++++++++++++++-
->  1 file changed, 17 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python-twisted.inc
-> b/meta-python/recipes-devtools/python/python-twisted.inc
-> index d70104dc2..f55bbb033 100644
-> --- a/meta-python/recipes-devtools/python/python-twisted.inc
-> +++ b/meta-python/recipes-devtools/python/python-twisted.inc
-> @@ -56,7 +56,23 @@ RDEPENDS_${PN} = "\
->      ${PN}-zsh \
->  "
->
-> -RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface
-> ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink
-> ${PYTHON_PN}-automat"
-> +RDEPENDS_${PN}-core = "${PYTHON_PN}-core \
-> +                       ${PYTHON_PN}-zopeinterface \
-> +                       ${PYTHON_PN}-incremental \
-> +                       ${PYTHON_PN}-constantly \
-> +                       ${PYTHON_PN}-hyperlink \
-> +                       ${PYTHON_PN}-automat \
-> +                       ${PYTHON_PN}-pyserial \
-> +                       ${PYTHON_PN}-pyhamcrest \
-> +                       ${PYTHON_PN}-debugger \
-> +                       ${PYTHON_PN}-unixadmin \
-> +                       ${PYTHON_PN}-pkg-resources \
-> +                       ${PYTHON_PN}-misc \
-> +                       ${PYTHON_PN}-pkgutil \
-> +                       ${PYTHON_PN}-plistlib \
-> +                       ${PYTHON_PN}-setuptools \
-> +"
->
+I'm looking into this now. Is anyone else?
+(no point multiple people looking into this)
 
-Please sort this alphabetically. It is MUCH easier to see what is present
-or missing that way.
-
-+
->  RDEPENDS_${PN}-test = "${PN}"
->  RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
->  RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
-> --
-> 2.23.0
->
-> --
+> On Sat, Jan 25, 2020 at 12:24 PM Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> 
+> > * it's blacklisted with:
+> >   mpv_0.26.0.bb:PNBLACKLIST[mpv] = "Needs forward porting to use python3"
+> >
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> > b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> > index 865cbb0bfc..d5789a758d 100644
+> > --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> > +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> > @@ -207,7 +207,7 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
+> >      sound-theme-freedesktop v4l-utils yavta wavpack libvpx \
+> >      ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xpext pavucontrol
+> > xsp", "", d)} \
+> >      libmikmod \
+> > -    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad
+> > faad2 mpv", "", d)} \
+> > +    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad
+> > faad2", "", d)} \
+> >      "
+> >  RDEPENDS_packagegroup-meta-oe-multimedia_remove_libc-musl = "alsa-oss"
+> >
+> > --
+> > 2.20.1
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> -- 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
