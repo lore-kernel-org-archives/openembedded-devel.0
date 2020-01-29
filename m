@@ -1,53 +1,53 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com
-	[209.85.216.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 09A7060155
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com
+	[209.85.167.176])
+	by mail.openembedded.org (Postfix) with ESMTP id BE70560558
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 13:08:57 +0000 (UTC)
-Received: by mail-pj1-f47.google.com with SMTP id ep11so1309413pjb.2
+	Thu, 30 Jan 2020 13:21:07 +0000 (UTC)
+Received: by mail-oi1-f176.google.com with SMTP id q84so3463710oic.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 05:08:59 -0800 (PST)
+	Thu, 30 Jan 2020 05:21:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=UKbuoZ6zIpxk4JFHUmCluQisZoLmmMLhVhHMazkXFJw=;
-	b=h7EAL27StWZKvWbHPo2mfGV9xDLCc8yYEty2HTR0DSnmwYNhhKzpSPrrqBTq+ZJiCB
-	w8joN6Hh6JN3FXU4RSXzH5nuJ/2r+3Iqdft4LIlEMS8S5g7fLsi9B76Ku56lpn93GwKP
-	fBZY7x3oDWD7N1+tGyUxwDj9mFdYQVTDwlhOoVshwou6gKuXDMRJtJBw3O1leJ2qfgug
-	BPidJ4kbneZdRt+Z2gR3ge/bpAR2YdTYlOXzJrEYbCv4Ml9JN8TLJqj3IjhooO63nidf
-	3mo+Z7KOB8lib2jqBf9JdtgGnhEhTPka0dFRB424CimynvOByEXTtFqp6yTIkX5rSdpn
-	NhOw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=fHMidpCKduyEuK+dnl0RDj+kPD4CjApINOlmgODk2Dw=;
+	b=paSuedyU2raEYF2cv4lsbxp3Pn5S9I1fD+IegxgyzUhf25zvddxmp0zBrzo07woSnA
+	YtUwEzTDmu0xa0yu5YOt8M6WN3+U0IqnsxbGXbjj+kZKfwpzY1MEGD4i8iwmeLygMLV5
+	T4Pcfh6QNEC/zvmO4XB9DBtwHGa+BtnYOfL5e/TWv10kOF7l/oL5sJgL5uGLznPMHKDs
+	n65ZZWA+WxXYdVh9mfNzWRSuboDD5JyFvov0th+0ALJ65KTHF2feIx2ar7IdXMlk8SfP
+	pNY9MWTzGylZXUfRrOw3Ou5B4FUeA/kuPmWSprqfgTuyx57dCfTfL3zvlCtOFl9QyR5q
+	4q1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=UKbuoZ6zIpxk4JFHUmCluQisZoLmmMLhVhHMazkXFJw=;
-	b=WV480WbfOcK0B8je8JuRqeGdXzc4f3ArTXGAFAtOKJuCBdAFvmYG+9PVd7dVRCa/Uc
-	KTf7wmeYZVgaDBdMJNS6Z0dOposddaUP3P+b1EMRynb5fFP0M4G9Wb+1kbcplwV0u1pi
-	4g+E21GfYhfW8/trfjDNzvp4cTCOBIx7jMhX6n0Yc5PPTRkiQXxjUz2gfSg/3ouKo3M+
-	fILz7Zgz4XqadUYMco+swX06VkL39LKq2f4a2qfMWqbrkSBylJ03IZaVd5jMY1+dqqUL
-	85sdHxGRjI0JCWTJoAEGyEfMuGO0NEg7l168fpRRSZO14QA7pIHSUEQRbdCGQNhX8EKK
-	oYQA==
-X-Gm-Message-State: APjAAAUAOPrJNkTlP3O7ULu9EEvXgrNGTzVTM0/IerEdsHp1ceU3Ardp
-	lwVzrFs5tPqlx8yYMjE8jXCUZwbVfno=
-X-Google-Smtp-Source: APXvYqxn3Z8afJaGeAHr8GZU1aEVspqMsBXkGkOd8GqSMvJCxOOZBitsc9l/d9hbn59HMjjqsBfiNw==
-X-Received: by 2002:a0c:e4c1:: with SMTP id g1mr912615qvm.45.1580329924565;
-	Wed, 29 Jan 2020 12:32:04 -0800 (PST)
-Received: from linux-uys3 ([206.248.190.95]) by smtp.gmail.com with ESMTPSA id
-	g18sm1546418qki.13.2020.01.29.12.32.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 29 Jan 2020 12:32:03 -0800 (PST)
-Date: Wed, 29 Jan 2020 15:32:00 -0500
-From: Trevor Woerner <twoerner@gmail.com>
-To: Tim Orling <ticotimo@gmail.com>
-Message-ID: <20200129203200.GA3422@linux-uys3>
-References: <20200125202357.4766-1-Martin.Jansa@gmail.com>
-	<CANx9H-BvkgBQb_NPgJ66LUJvpMDFy7h899MTrnVrqGsm=fDsaQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=fHMidpCKduyEuK+dnl0RDj+kPD4CjApINOlmgODk2Dw=;
+	b=fC2N4HAgySEGn6+hTyO0wHiNkL/HiY2NoIEZyxihvxgHFLnbIdbuupwGWr41EJ4/hL
+	ccDTMYVdU2127qJ1rxaR7vxWUYSowKEAjZAtuC8jmwgEnGruP7yfCVHzCYawXJ/03rLC
+	e9B1OBaLwHFb8pnBaX92yrQBWkT400zLmpmoNm4Pe80CN9vJCjPas6aTCYpBN1Z0iaUD
+	JpqxVIm0TFMPyiDJG1qLtUYWa5R28pbpV0tqiQ+pMDNCvo1RXhFMMK0B/FDXKR5MDdqF
+	iBCDV81+N52gpdELZmYif/SkVUXMWz/NGqhsPpRcryZp1JJsGbv2usl1PES9szBMm2lt
+	OMwg==
+X-Gm-Message-State: APjAAAWUMVrkuLW9KGUUGxOVea5ZdJf1Gw6zD50ypFXybxPFcpCLDXsR
+	mDQfSRm3rnp73VbHy4fltA8lF4vLas8=
+X-Google-Smtp-Source: APXvYqxsueRDn1NYsRiGIHD4h4v9yPcFx37Gxl6vB/nBZuOS2RXjlX7R5rIgvF6oIrs9mPOBT2v6hw==
+X-Received: by 2002:a17:90a:cc02:: with SMTP id
+	b2mr9101034pju.137.1580281982380; 
+	Tue, 28 Jan 2020 23:13:02 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::c362])
+	by smtp.gmail.com with ESMTPSA id
+	g9sm1305019pfm.150.2020.01.28.23.13.01
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 28 Jan 2020 23:13:02 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 28 Jan 2020 23:13:02 -0800
+Message-Id: <20200129071303.3328743-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
+In-Reply-To: <20200129071303.3328743-1-raj.khem@gmail.com>
+References: <20200129071303.3328743-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <CANx9H-BvkgBQb_NPgJ66LUJvpMDFy7h899MTrnVrqGsm=fDsaQ@mail.gmail.com>
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] packagegrop-meta-oe: remove blacklisted mpv
+Subject: [meta-oe][PATCH 2/3] recipes: Inherit missing texinfo for makeinfo program
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,57 +60,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jan 2020 13:09:10 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 Jan 2020 13:22:05 -0000
+Content-Transfer-Encoding: 8bit
 
-On Sat 2020-01-25 @ 12:42:21 PM, Tim Orling wrote:
-> If someone cares, it has been updated to python3
-> https://github.com/mpv-player/mpv/releases/tag/v0.31.0
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb         | 2 +-
+ meta-oe/recipes-extended/indent/indent_2.2.12.bb    | 3 +--
+ meta-oe/recipes-extended/nana/nana_2.5.bb           | 2 +-
+ meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb | 2 +-
+ meta-oe/recipes-support/gpm/gpm_git.bb              | 2 +-
+ meta-oe/recipes-support/iksemel/iksemel_1.5.bb      | 2 +-
+ 6 files changed, 6 insertions(+), 7 deletions(-)
 
-I'm looking into this now. Is anyone else?
-(no point multiple people looking into this)
+diff --git a/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb b/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
+index 57e364e1ca..9d373fc989 100644
+--- a/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
++++ b/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+ DEPENDS = "flex-native readline ncurses"
+ 
+-inherit autotools
++inherit autotools texinfo
+ 
+ SRC_URI = "http://cgdb.me/files/${BP}.tar.gz \
+            file://0001-Avoid-use-of-mips-which-is-reserved-on-mips.patch \
+diff --git a/meta-oe/recipes-extended/indent/indent_2.2.12.bb b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
+index f8d63d43ce..0a866574bd 100644
+--- a/meta-oe/recipes-extended/indent/indent_2.2.12.bb
++++ b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
+@@ -9,7 +9,6 @@ Install the indent package if you are developing applications in C and \
+ you want a program to format your code."
+ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+-DEPENDS = "virtual/gettext"
+ 
+ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://0001-src-indent.c-correct-the-check-for-locale.h.patch \
+@@ -19,7 +18,7 @@ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+ SRC_URI[md5sum] = "4764b6ac98f6654a35da117b8e5e8e14"
+ SRC_URI[sha256sum] = "e77d68c0211515459b8812118d606812e300097cfac0b4e9fb3472664263bb8b"
+ 
+-inherit autotools gettext
++inherit autotools gettext texinfo
+ 
+ CFLAGS_class-native += " -Wno-error=unused-value"
+ 
+diff --git a/meta-oe/recipes-extended/nana/nana_2.5.bb b/meta-oe/recipes-extended/nana/nana_2.5.bb
+index 595852a9f6..4235006984 100644
+--- a/meta-oe/recipes-extended/nana/nana_2.5.bb
++++ b/meta-oe/recipes-extended/nana/nana_2.5.bb
+@@ -15,7 +15,7 @@ LICENSE = "BSD-2-Clause"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=16aa57f3b7fdda870cee597275bd5d11"
+ 
+-inherit autotools-brokensep pkgconfig
++inherit autotools-brokensep pkgconfig texinfo
+ 
+ EXTRA_OEMAKE = "DESTDIR=${D}"
+ 
+diff --git a/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
+index a31ad0d676..118e3c50c8 100644
+--- a/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
++++ b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
+@@ -11,6 +11,6 @@ SRC_URI = "${GNU_MIRROR}/gengetopt/${BPN}-${PV}.tar.xz"
+ SRC_URI[md5sum] = "ea165d618640dbdecb42ae4491337965"
+ SRC_URI[sha256sum] = "b941aec9011864978dd7fdeb052b1943535824169d2aa2b0e7eae9ab807584ac"
+ 
+-inherit autotools
++inherit autotools texinfo
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-support/gpm/gpm_git.bb b/meta-oe/recipes-support/gpm/gpm_git.bb
+index 7034d33858..3800d147f9 100644
+--- a/meta-oe/recipes-support/gpm/gpm_git.bb
++++ b/meta-oe/recipes-support/gpm/gpm_git.bb
+@@ -21,7 +21,7 @@ SRC_URI = "git://github.com/telmich/gpm;protocol=git \
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools-brokensep update-rc.d systemd
++inherit autotools-brokensep update-rc.d systemd texinfo
+ 
+ INITSCRIPT_NAME = "gpm"
+ INITSCRIPT_PARAMS = "defaults"
+diff --git a/meta-oe/recipes-support/iksemel/iksemel_1.5.bb b/meta-oe/recipes-support/iksemel/iksemel_1.5.bb
+index 0903e90d7d..986984d1ff 100644
+--- a/meta-oe/recipes-support/iksemel/iksemel_1.5.bb
++++ b/meta-oe/recipes-support/iksemel/iksemel_1.5.bb
+@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/meduketto/iksemel.git;protocol=https \
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit autotools pkgconfig lib_package
++inherit autotools pkgconfig lib_package texinfo
+ 
+ # TLS support requires either openssl or gnutls (if both are enabled openssl will be used).
+ PACKAGECONFIG ?= "gnutls"
+-- 
+2.25.0
 
-> On Sat, Jan 25, 2020 at 12:24 PM Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> 
-> > * it's blacklisted with:
-> >   mpv_0.26.0.bb:PNBLACKLIST[mpv] = "Needs forward porting to use python3"
-> >
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > index 865cbb0bfc..d5789a758d 100644
-> > --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > @@ -207,7 +207,7 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
-> >      sound-theme-freedesktop v4l-utils yavta wavpack libvpx \
-> >      ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xpext pavucontrol
-> > xsp", "", d)} \
-> >      libmikmod \
-> > -    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad
-> > faad2 mpv", "", d)} \
-> > +    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad
-> > faad2", "", d)} \
-> >      "
-> >  RDEPENDS_packagegroup-meta-oe-multimedia_remove_libc-musl = "alsa-oss"
-> >
-> > --
-> > 2.20.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
