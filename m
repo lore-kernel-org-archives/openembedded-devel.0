@@ -1,52 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
-	[209.85.166.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 115ED600A3
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-il1-f174.google.com (mail-il1-f174.google.com
+	[209.85.166.174])
+	by mail.openembedded.org (Postfix) with ESMTP id C0213600A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 12:23:35 +0000 (UTC)
-Received: by mail-il1-f194.google.com with SMTP id t17so2831250ilm.13
+	Thu, 30 Jan 2020 12:29:03 +0000 (UTC)
+Received: by mail-il1-f174.google.com with SMTP id f5so2894777ilq.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 04:23:37 -0800 (PST)
+	Thu, 30 Jan 2020 04:29:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=1w6p78tHo7Kh3caz3Icq2yO0Z/qIwsigoE7kEguI5jI=;
-	b=q8/VX5+m8IIAqWvYdYxTs4k8bOSajK0j8DgbdRZhinGyY6Xtip49ujLmsagANhvgtu
-	1yBAl0a6+EJ+Lw6S9VHWLy665NCP0/EXkz3nCrEQYQYPF73TTOTARDRuzlIoVbVPtsBx
-	SZNIbmzuLNoXfuuhDRNEdZRTQVrReTG72/e7K1mAhGZXTR4xrJ9cevai4EdEH5Vpijvb
-	zRWwXjQ5emoX0NFZzBV1P/racWZiJEikH6pnrN01Z7HOqXMpifh/UhL38xjJKIpvVAUy
-	C8Sb4DPtFlFqVfCshDSDZFzPWUXIp7Tl76WPXo0ss++u0NQ5tACchX7iBzQ0g92/ARun
-	N9TA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=yj94y2p+u1vLcRMbtNjujr5Z6i6XB5aKX/aEUagyXt8=;
+	b=TiS032jVQxrtezO0dD/iSjOJAFvSg1qfqprd2JOkMAkShdoOuYBT6hx9z7FqdLyecn
+	/xIJnC1JVL6oO9NZETbxxmOrlFDrNmraNc5eDYTaZt7eawecydvSHbxFRUrpic/Grhmb
+	74TkWNyTl0tWVBO8h5s+D+Q5hyeTGGF53onfekouZzGxXHoN/h1ZsqsVm+zcQW/OJVfi
+	VxVTECBS1rW+yr7sxPXD0I6l4loZRk89l+8ehCMdNz2EQFtB34k4soN4RTgu2ZxdKCCW
+	rWKjbIrm7IMLi1rkbHgGiETR3RZVJmf6GMGJkAdp+X34h3SBg5zDfiH4T/hRfEvU0Fa0
+	3esw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=1w6p78tHo7Kh3caz3Icq2yO0Z/qIwsigoE7kEguI5jI=;
-	b=qak1l2MCiDpokOzftXJ8NUncdsnov1mz3c8uyxry6w57feCetVowhi+BclAYzTbyn5
-	Y//YKg568fxem3ncyQZq33TdbIwpHaJ7fPNfvBSA23AUbzxOrMFt0sS8Ji979o76KLpN
-	miO+rnfjC1qO6cR9PKw3enU3eF5jXdN8yh9rbuVMvsNczEm10ISqcPDQHLZsOwE4U3Si
-	hbbleoUvybH5MtID5hXJOeYLzETDL0EalpRe0vbNxpKpxlleKHX4ekEbdsfMX98Da3x9
-	Sx9hJNvCFYPzXs8+dLoU0O3iZ2l8eV7T+oJdxDO80nQ72+WWSAn4JtYLoaoc66yyXtSF
-	ntvg==
-X-Gm-Message-State: APjAAAXKS0ETcV/+S/DE81bZtrM1DOaRwwzsP0B0thHjNyN5mCyMwVAp
-	r6mkmybDIOV1UFKFv4GcUdhm/wWBUZQ=
-X-Google-Smtp-Source: APXvYqxgOctAEMzHfPFhk7Bx8lqPcwo18hljE6S5QQTjTtc+pbqOOdgWtRQBq66Gp8woQa8nV/Wbbg==
-X-Received: by 2002:a63:d441:: with SMTP id i1mr11749705pgj.426.1580281983028; 
-	Tue, 28 Jan 2020 23:13:03 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::c362])
-	by smtp.gmail.com with ESMTPSA id
-	g9sm1305019pfm.150.2020.01.28.23.13.02
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 28 Jan 2020 23:13:02 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Jan 2020 23:13:03 -0800
-Message-Id: <20200129071303.3328743-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200129071303.3328743-1-raj.khem@gmail.com>
-References: <20200129071303.3328743-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=yj94y2p+u1vLcRMbtNjujr5Z6i6XB5aKX/aEUagyXt8=;
+	b=S7ChlkedxrX5T4GkOUHyCI3Ajw0x4C1kj5ew3KukISUoOlWlHP2vWvR1A0mTc/AqoX
+	6YTP3FOhswL8LQREfLdsnIll3FBbasHOH7cMVUWxMkm/eItLASSA2ER2LIOuvfKgqfhS
+	ZxAG8i/imXON3IpNAvOF5U/chXUcCT1fGd9i8Z4R8GwDq5Vq2zc1ilnsLzPOTg+CBbu1
+	k15h8THh08rjYrmFqoK7STcO5SvJyrQe27YKqZbin7BRipdvb0qVqvG5iT9Sox5eEv1F
+	tfbVhu/9/1oQXH5ZvPbYmnHQl7RJbLEqXMdFOs/6PVrQ5g5J/YeMf1I7lpoCENGLVO+C
+	dW4Q==
+X-Gm-Message-State: APjAAAXu1SBBf0twr7dMUhF3mcOjA3AD47AKep3WvWMonwBq3vGxSoK2
+	L7JNbP6EWS1RC8711Uh+YynE57k1bm/Dml4mAgEorJYZ
+X-Google-Smtp-Source: APXvYqyz0rSIHoBGiau/TdxsMVXXjBwt+i0Fj9FcoSggwqOXXwrsKHn+/qrgvQ8pwCI/xqsN8nvSKN1dLQLVODXb4pw=
+X-Received: by 2002:a92:911b:: with SMTP id t27mr2924569ild.142.1580364064033; 
+	Wed, 29 Jan 2020 22:01:04 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/3] indent: Do not build docs
+References: <20200127204322.143707-1-trevor.gamblin@windriver.com>
+In-Reply-To: <20200127204322.143707-1-trevor.gamblin@windriver.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Wed, 29 Jan 2020 22:00:52 -0800
+Message-ID: <CANx9H-CZe5bCG-tv2YVkEiQy=PVPYPHhw6n9AcghP+dZ1yBogg@mail.gmail.com>
+To: Trevor Gamblin <trevor.gamblin@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][zeus][PATCH 1/2] python-twisted: add required RDEPENDS for twistd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,80 +55,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jan 2020 12:28:33 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 30 Jan 2020 12:29:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-It fails to build currently, with texinfo-dummy
+On Mon, Jan 27, 2020 at 12:44 PM Trevor Gamblin <
+trevor.gamblin@windriver.com> wrote:
 
-|   File "/mnt/a/tmp-yoe/work/riscv64-yoe-linux-musl/indent/2.2.12-r0/recipe-sysroot-native/usr/bin/makeinfo", line 100, in <module>
-|     stub_msg                                                                  | AssertionError: Don't know how to get default output file name from input file
-!
-| This stand-in version of makeinfo is not yet fully capable of emulating
-| the real version from the GNU texinfo suite. If you see this message, file a
-| bug report with details on the recipe that failed.
-|                                                                               | make[2]: *** [Makefile:814: indent.html] Error 1
+> python-twisted is currently missing some packages for its /usr/bin/twistd
+> executable to function. Add these to the RDEPENDS list, and also clean up
+> formatting since the list is getting long.
+>
+> Note that a similar patch has already been submitted for master branch,
+> but the python2 version of twisted needs more explicit RDEPENDS than the
+> python3 version submitted to master in order for /usr/bin/twistd to work
+> properly.
+>
+> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+> ---
+>  .../recipes-devtools/python/python-twisted.inc | 18 +++++++++++++++++-
+>  1 file changed, 17 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-python/recipes-devtools/python/python-twisted.inc
+> b/meta-python/recipes-devtools/python/python-twisted.inc
+> index d70104dc2..f55bbb033 100644
+> --- a/meta-python/recipes-devtools/python/python-twisted.inc
+> +++ b/meta-python/recipes-devtools/python/python-twisted.inc
+> @@ -56,7 +56,23 @@ RDEPENDS_${PN} = "\
+>      ${PN}-zsh \
+>  "
+>
+> -RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface
+> ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink
+> ${PYTHON_PN}-automat"
+> +RDEPENDS_${PN}-core = "${PYTHON_PN}-core \
+> +                       ${PYTHON_PN}-zopeinterface \
+> +                       ${PYTHON_PN}-incremental \
+> +                       ${PYTHON_PN}-constantly \
+> +                       ${PYTHON_PN}-hyperlink \
+> +                       ${PYTHON_PN}-automat \
+> +                       ${PYTHON_PN}-pyserial \
+> +                       ${PYTHON_PN}-pyhamcrest \
+> +                       ${PYTHON_PN}-debugger \
+> +                       ${PYTHON_PN}-unixadmin \
+> +                       ${PYTHON_PN}-pkg-resources \
+> +                       ${PYTHON_PN}-misc \
+> +                       ${PYTHON_PN}-pkgutil \
+> +                       ${PYTHON_PN}-plistlib \
+> +                       ${PYTHON_PN}-setuptools \
+> +"
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-Fix-builds-with-recent-gettext.patch      | 14 +++++++++++---
- meta-oe/recipes-extended/indent/indent_2.2.12.bb   |  4 +++-
- 2 files changed, 14 insertions(+), 4 deletions(-)
+Please sort this alphabetically. It is MUCH easier to see what is present
+or missing that way.
 
-diff --git a/meta-oe/recipes-extended/indent/indent/0001-Fix-builds-with-recent-gettext.patch b/meta-oe/recipes-extended/indent/indent/0001-Fix-builds-with-recent-gettext.patch
-index e48dfb33c0..e9dadace02 100644
---- a/meta-oe/recipes-extended/indent/indent/0001-Fix-builds-with-recent-gettext.patch
-+++ b/meta-oe/recipes-extended/indent/indent/0001-Fix-builds-with-recent-gettext.patch
-@@ -9,8 +9,6 @@ Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-  Makefile.am | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
--diff --git a/Makefile.am b/Makefile.am
--index 548fea7..cf01c5e 100644
- --- a/Makefile.am
- +++ b/Makefile.am
- @@ -1,7 +1,7 @@
-@@ -18,7 +16,17 @@ index 548fea7..cf01c5e 100644
-  AUTOMAKE_OPTIONS = no-texinfo.tex
-  
- -SUBDIRS = intl src doc po man
--+SUBDIRS = src doc po man
-++SUBDIRS = src po man
-  
-  BUILT_SOURCES = 
-  
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -58,7 +58,6 @@ fi
-+ AC_HEADER_DIRENT
-+ 
-+ AC_OUTPUT([ 
-+-   intl/Makefile
-+    po/Makefile.in
-+    Makefile
-+    src/Makefile
-diff --git a/meta-oe/recipes-extended/indent/indent_2.2.12.bb b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
-index 0a866574bd..0f4f4c2206 100644
---- a/meta-oe/recipes-extended/indent/indent_2.2.12.bb
-+++ b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
-@@ -10,6 +10,8 @@ you want a program to format your code."
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
-+DEPENDS = "virtual/gettext"
 +
- SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://0001-src-indent.c-correct-the-check-for-locale.h.patch \
-            file://0001-Makefile.am-remove-regression-dir.patch \
-@@ -20,7 +22,7 @@ SRC_URI[sha256sum] = "e77d68c0211515459b8812118d606812e300097cfac0b4e9fb34726642
- 
- inherit autotools gettext texinfo
- 
--CFLAGS_class-native += " -Wno-error=unused-value"
-+CFLAGS_append_class-native = " -Wno-error=unused-value"
- 
- FILES_${PN}-doc += "/usr/doc/indent/indent.html"
- 
--- 
-2.25.0
-
+>  RDEPENDS_${PN}-test = "${PN}"
+>  RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
+>  RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
+> --
+> 2.23.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
