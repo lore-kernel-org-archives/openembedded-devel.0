@@ -1,22 +1,24 @@
 Return-Path: <peter.kjellerstedt@axis.com>
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
-	by mail.openembedded.org (Postfix) with ESMTP id 56E1860D32
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AA6960D33
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 21:04:10 +0000 (UTC)
-IronPort-SDR: VK4cCENdgng4YlMQN0OQUrjDWhngrTtVUZpwzMagOIIh+cykUBTfrf//NiqbpvN4JpOfUIALg0
-	WE58457BpQR5s+/CrbKL0YmNn5V/OyC3zyLuRmSXNhYs2t3BBN9+GIwnS/4S9h+87pASbaF3wW
-	uHHZs9resiTkylTyF+GCDBYujbnKN0kT8SldjGtXyrHuP6ELc0Awx82MoKTXiziT2H9M0Kfjwc
-	Iqe456vMvqTZFBgFroD/4p2lQYljGYf1Og/z01JcD+ma/UgeeDkAJmXBRTvd0YCwlUWlum5ZMl
-	twI=
+	Thu, 30 Jan 2020 21:04:11 +0000 (UTC)
+IronPort-SDR: 84KYMUlnZtojOTRqdhFth5H5gY/JrokBW4bpwRBgrkR+0Mfu3aGbGN00Ia6l1sSaCnfOUEwC/h
+	Unb+rcZSE2pxO04Wup7fEkfCvGlVggkodTHewU4cH4GC2lNofV8BUSFeYSVe17Tet2fkSY4I63
+	0ciK16JdBfFPgT4GNe9mBcmdy47CVFJXqKx+DBrjTA4CStmM+IF9nMCV9FrvOyiNTE+jnxNPvT
+	dQBDodExM0eQmnO4BrosGpJOc8JEIBOOFxv9qnIMgnUvc7e+pdCOf+6JRRm6dh6p2noJyueraB
+	07w=
 X-IronPort-AV: E=Sophos;i="5.70,382,1574118000"; 
-   d="scan'208";a="4790768"
+   d="scan'208";a="4921814"
 From: Peter Kjellerstedt <pkj@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 30 Jan 2020 22:04:08 +0100
-Message-ID: <20200130210409.29802-1-pkj@axis.com>
+Date: Thu, 30 Jan 2020 22:04:09 +0100
+Message-ID: <20200130210409.29802-2-pkj@axis.com>
 X-Mailer: git-send-email 2.21.1
+In-Reply-To: <20200130210409.29802-1-pkj@axis.com>
+References: <20200130210409.29802-1-pkj@axis.com>
 MIME-Version: 1.0
-Subject: [meta-oe][zeus][PATCH 1/2] libldb: Do not require the "pam" distro feature to be enabled
+Subject: [meta-oe][zeus][PATCH 2/2] gitpkgv.bbclass: Add support for extending the supported tag formats
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,33 +35,50 @@ X-List-Received-Date: Fri, 31 Jan 2020 09:28:08 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-
-It was only added because samba was a dependency, but was not removed
-again when the dependency on samba was removed in commit 6207331f.
-
-This effectively reverts commit a190c2e3.
+Introduce GITPKGV_TAG_REGEXP (which defaults to "v(\d.*)") to support
+dropping other unwanted parts of the found tags than just a leading
+"v". Any matching groups in the regexp will be concatenated to yield
+the final version.
 
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-support/libldb/libldb_1.5.5.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ meta-oe/classes/gitpkgv.bbclass | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb b/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
-index b19c964d8..9a93e66b6 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
-@@ -36,8 +36,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
- SRC_URI[md5sum] = "339a41ac9efaec680e6d1469dd9aa35b"
- SRC_URI[sha256sum] = "199f5861aa863f538ec66d5fa95ecc13254a2030c53daf0e47363fa9ba235c68"
+diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
+index ab591bd45..180421ed3 100644
+--- a/meta-oe/classes/gitpkgv.bbclass
++++ b/meta-oe/classes/gitpkgv.bbclass
+@@ -40,10 +40,16 @@
+ GITPKGV = "${@get_git_pkgv(d, False)}"
+ GITPKGVTAG = "${@get_git_pkgv(d, True)}"
  
--inherit waf-samba distro_features_check
--REQUIRED_DISTRO_FEATURES = "pam"
-+inherit waf-samba
+-def gitpkgv_drop_tag_prefix(version):
++# This regexp is used to drop unwanted parts of the found tags. Any matching
++# groups will be concatenated to yield the final version.
++GITPKGV_TAG_REGEXP ??= "v(\d.*)"
++
++def gitpkgv_drop_tag_prefix(d, version):
+     import re
+-    if re.match("v\d", version):
+-        return version[1:]
++
++    m = re.match(d.getVar('GITPKGV_TAG_REGEXP'), version)
++    if m:
++        return ''.join(group for group in m.groups() if group)
+     else:
+         return version
  
- S = "${WORKDIR}/ldb-${PV}"
- 
+@@ -105,7 +111,7 @@ def get_git_pkgv(d, use_tags):
+                         output = bb.fetch2.runfetchcmd(
+                             "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
+                             % vars, d, quiet=True).strip()
+-                        ver = gitpkgv_drop_tag_prefix(output)
++                        ver = gitpkgv_drop_tag_prefix(d, output)
+                     except Exception:
+                         ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
+                 else:
 -- 
 2.21.1
 
