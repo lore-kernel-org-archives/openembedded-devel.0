@@ -1,47 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E0DA608DD
+Return-Path: <Trevor.Gamblin@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E804860992
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 15:04:37 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id h23so3246418qkh.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 07:04:39 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=5qhHLQ7o6ZKQjBwk+/9CbFMhV/PUEHSQ6tb5z5XIzco=;
-	b=DpOwstdj1aRyIMXOyZG0SuoVmTciDyVjhdvx8SKKFdaQkqGIkPS+dNUVbWqhB2OgVm
-	qxmSn1WsufbH8iFHIIihbnmdjd3fgQIsWfjzyo2984Z+VwePO/caMRxtYyh+U7Tu+e/F
-	arH4XUE/c4wYYAD6ER1fOWQYTI+T/paB+QuDwa3OnZ+pSkm1JBvvk1kYbpwM9yz1nE/5
-	NmRJ89rY8aTA+DLr7U/t6a+1gfip7ev+vefJ+ELG1dU61NgAAwEzNL4jg3b66SLash0c
-	08QmVkqFCOm5HZxl1B2XGGO7pOk42hCe3FIdC7vxu2swSTXs2h435tFoyq8Jcr5V+aGr
-	Kekw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=5qhHLQ7o6ZKQjBwk+/9CbFMhV/PUEHSQ6tb5z5XIzco=;
-	b=R/A02KO46cYBWq5Pg1xTNg4dowX9GCxW2gV+gURelA34NaOtdJ302OXI2zMOYld26X
-	QiFB3/W5SsiTQt67rYBnKWEJ/xkLoe8ciJlFkpu60iwOWIzcbJ1/fnB66SDmyUa51MNj
-	a4WnOOqJGkh1JuzsjDtJIKd2XfwCFkzfAfC5q31PworEhZJhG+AwDzGHxRnJGpIqL3W4
-	9DMj/4hxEB2t5NqFZRiEf/hFQKro7vbOuXw6V5YzUgxGN/MYJ9NS20+mT66TEJEB34No
-	P4Km8NTcDzjyHFoXhanBqw1u+NsCKPnyT4CW/uapDrs8jO5rclUAIYFAXGu2iKcuTUp8
-	zQNQ==
-X-Gm-Message-State: APjAAAWp2zHUbl+1jZfnJGdFJKKlSgnYYa4g/kFPVCurxDS/uQGWqmgL
-	+AMciEXf4VpVBzk/AC2yzW/R5uPApCbddu5e4Tc+UZXeZgw=
-X-Google-Smtp-Source: APXvYqxw0d0LXORrcPUVyhpI1XgBS5RoZOLqImY/1I6dHHnpAN+T0UyJ9wzI9DInsWuF1Zh77yxEKM9is8G0IladuAY=
-X-Received: by 2002:a37:bf82:: with SMTP id
-	p124mr25893050qkf.337.1580262839773; 
-	Tue, 28 Jan 2020 17:53:59 -0800 (PST)
+	Thu, 30 Jan 2020 15:36:05 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 00UFZUU6029286
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Thu, 30 Jan 2020 07:35:40 -0800
+Received: from [128.224.56.226] (128.224.56.226) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Thu, 30 Jan 2020 07:35:20 -0800
+To: Tim Orling <ticotimo@gmail.com>
+References: <20200127204322.143707-1-trevor.gamblin@windriver.com>
+	<CANx9H-CZe5bCG-tv2YVkEiQy=PVPYPHhw6n9AcghP+dZ1yBogg@mail.gmail.com>
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
+Message-ID: <f18b9364-decd-8316-03dd-626cff3fe2ac@windriver.com>
+Date: Thu, 30 Jan 2020 10:35:19 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <1580241119-12734-1-git-send-email-marek.belisko@open-nandra.com>
-In-Reply-To: <1580241119-12734-1-git-send-email-marek.belisko@open-nandra.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 28 Jan 2020 17:53:32 -0800
-Message-ID: <CAMKF1spU47G4u8-Aa=0x34Oj+45vwFD-SC4bg=Yb0Ko3zCOcZQ@mail.gmail.com>
-To: Marek Belisko <marek.belisko@open-nandra.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] recipes-support: Added recipe for gengetopt package
+In-Reply-To: <CANx9H-CZe5bCG-tv2YVkEiQy=PVPYPHhw6n9AcghP+dZ1yBogg@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][zeus][PATCH 1/2] python-twisted: add required RDEPENDS for twistd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,52 +37,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2020 09:28:01 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 31 Jan 2020 09:28:02 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-fails to build
 
-https://errors.yoctoproject.org/Errors/Details/308428/
-
-perhaps it needs gettext during build.
-
-On Tue, Jan 28, 2020 at 11:52 AM Marek Belisko
-<marek.belisko@open-nandra.com> wrote:
+On 1/30/20 1:00 AM, Tim Orling wrote:
 >
-> Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
-> ---
->  meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
 >
-> diff --git a/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
-> new file mode 100644
-> index 0000000..a31ad0d
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY = "skeleton main.c generator"
-> +DESCRIPTION = "Gengetopt is a tool to write command line option parsing code for C programs."
-> +SECTION = "utils"
-> +HOMEPAGE = "https://www.gnu.org/software/gengetopt/gengetopt.html"
-> +
-> +LICENSE = "GPLv3+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=ff95bfe019feaf92f524b73dd79e76eb"
-> +
-> +SRC_URI = "${GNU_MIRROR}/gengetopt/${BPN}-${PV}.tar.xz"
-> +
-> +SRC_URI[md5sum] = "ea165d618640dbdecb42ae4491337965"
-> +SRC_URI[sha256sum] = "b941aec9011864978dd7fdeb052b1943535824169d2aa2b0e7eae9ab807584ac"
-> +
-> +inherit autotools
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> --
-> 2.7.4
+> On Mon, Jan 27, 2020 at 12:44 PM Trevor Gamblin 
+> <trevor.gamblin@windriver.com <mailto:trevor.gamblin@windriver.com>> 
+> wrote:
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     python-twisted is currently missing some packages for its
+>     /usr/bin/twistd
+>     executable to function. Add these to the RDEPENDS list, and also
+>     clean up
+>     formatting since the list is getting long.
+>
+>     Note that a similar patch has already been submitted for master
+>     branch,
+>     but the python2 version of twisted needs more explicit RDEPENDS
+>     than the
+>     python3 version submitted to master in order for /usr/bin/twistd
+>     to work
+>     properly.
+>
+>     Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com
+>     <mailto:trevor.gamblin@windriver.com>>
+>     ---
+>      .../recipes-devtools/python/python-twisted.inc | 18
+>     +++++++++++++++++-
+>      1 file changed, 17 insertions(+), 1 deletion(-)
+>
+>     diff --git
+>     a/meta-python/recipes-devtools/python/python-twisted.inc
+>     b/meta-python/recipes-devtools/python/python-twisted.inc
+>     index d70104dc2..f55bbb033 100644
+>     --- a/meta-python/recipes-devtools/python/python-twisted.inc
+>     +++ b/meta-python/recipes-devtools/python/python-twisted.inc
+>     @@ -56,7 +56,23 @@ RDEPENDS_${PN} = "\
+>          ${PN}-zsh \
+>      "
+>
+>     -RDEPENDS_${PN}-core = "${PYTHON_PN}-core
+>     ${PYTHON_PN}-zopeinterface ${PYTHON_PN}-incremental
+>     ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink ${PYTHON_PN}-automat"
+>     +RDEPENDS_${PN}-core = "${PYTHON_PN}-core \
+>     +                       ${PYTHON_PN}-zopeinterface \
+>     +                       ${PYTHON_PN}-incremental \
+>     +                       ${PYTHON_PN}-constantly \
+>     +                       ${PYTHON_PN}-hyperlink \
+>     +                       ${PYTHON_PN}-automat \
+>     +                       ${PYTHON_PN}-pyserial \
+>     +                       ${PYTHON_PN}-pyhamcrest \
+>     +                       ${PYTHON_PN}-debugger \
+>     +                       ${PYTHON_PN}-unixadmin \
+>     +                       ${PYTHON_PN}-pkg-resources \
+>     +                       ${PYTHON_PN}-misc \
+>     +                       ${PYTHON_PN}-pkgutil \
+>     +                       ${PYTHON_PN}-plistlib \
+>     +                       ${PYTHON_PN}-setuptools \
+>     +"
+>
+>
+> Please sort this alphabetically. It is MUCH easier to see what is 
+> present or missing that way.
+Done, v2 sent.
+>
+>     +
+>      RDEPENDS_${PN}-test = "${PN}"
+>      RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
+>      RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
+>     -- 
+>     2.23.0
+>
+>     -- 
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
