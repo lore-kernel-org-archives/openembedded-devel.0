@@ -1,53 +1,98 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com
-	[209.85.167.176])
-	by mail.openembedded.org (Postfix) with ESMTP id BE70560558
+Return-Path: <akuster808@gmail.com>
+Received: from mail-il1-f196.google.com (mail-il1-f196.google.com
+	[209.85.166.196])
+	by mail.openembedded.org (Postfix) with ESMTP id CCD78605C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 13:21:07 +0000 (UTC)
-Received: by mail-oi1-f176.google.com with SMTP id q84so3463710oic.4
+	Thu, 30 Jan 2020 13:22:32 +0000 (UTC)
+Received: by mail-il1-f196.google.com with SMTP id f70so3021534ill.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 05:21:09 -0800 (PST)
+	Thu, 30 Jan 2020 05:22:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=fHMidpCKduyEuK+dnl0RDj+kPD4CjApINOlmgODk2Dw=;
-	b=paSuedyU2raEYF2cv4lsbxp3Pn5S9I1fD+IegxgyzUhf25zvddxmp0zBrzo07woSnA
-	YtUwEzTDmu0xa0yu5YOt8M6WN3+U0IqnsxbGXbjj+kZKfwpzY1MEGD4i8iwmeLygMLV5
-	T4Pcfh6QNEC/zvmO4XB9DBtwHGa+BtnYOfL5e/TWv10kOF7l/oL5sJgL5uGLznPMHKDs
-	n65ZZWA+WxXYdVh9mfNzWRSuboDD5JyFvov0th+0ALJ65KTHF2feIx2ar7IdXMlk8SfP
-	pNY9MWTzGylZXUfRrOw3Ou5B4FUeA/kuPmWSprqfgTuyx57dCfTfL3zvlCtOFl9QyR5q
-	4q1Q==
+	h=subject:to:references:from:autocrypt:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=W3yQtpYyYOVnBMqXW+nsVPeZEvPT/PWfVgtF8GTXGDo=;
+	b=BX3hJRek/JZxy89t6cBGUM5kLCV3Vl80BKgOHF/iFeP5PzIWt0U6qkgftlBHmFfMmh
+	/nurKw0A2hjCbvnNTFYOfMQOPU9lxYy+t9hiNPgh5wIeiG4bG3sfNU9PuRfFLkWUbgVs
+	WCqaXxdiymvoO7ofIrt5Ko3mo0l42oxD2ocgawoxCGE+ljPQ+Nh3TtVe4mzFktsDyzZS
+	WuH5+VaEQRWpCGWl6ayOIUQShGe1pr73Aq2iG29/XzqfsVM7VY0BBOyH6awo1xRDg/MI
+	OaB2WFeKMCCK6557nOcZUq2behRwkv4pQTSM9AT9+2pGRusRTLmHOJpsArvSwgoGCQBF
+	JPtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=fHMidpCKduyEuK+dnl0RDj+kPD4CjApINOlmgODk2Dw=;
-	b=fC2N4HAgySEGn6+hTyO0wHiNkL/HiY2NoIEZyxihvxgHFLnbIdbuupwGWr41EJ4/hL
-	ccDTMYVdU2127qJ1rxaR7vxWUYSowKEAjZAtuC8jmwgEnGruP7yfCVHzCYawXJ/03rLC
-	e9B1OBaLwHFb8pnBaX92yrQBWkT400zLmpmoNm4Pe80CN9vJCjPas6aTCYpBN1Z0iaUD
-	JpqxVIm0TFMPyiDJG1qLtUYWa5R28pbpV0tqiQ+pMDNCvo1RXhFMMK0B/FDXKR5MDdqF
-	iBCDV81+N52gpdELZmYif/SkVUXMWz/NGqhsPpRcryZp1JJsGbv2usl1PES9szBMm2lt
-	OMwg==
-X-Gm-Message-State: APjAAAWUMVrkuLW9KGUUGxOVea5ZdJf1Gw6zD50ypFXybxPFcpCLDXsR
-	mDQfSRm3rnp73VbHy4fltA8lF4vLas8=
-X-Google-Smtp-Source: APXvYqxsueRDn1NYsRiGIHD4h4v9yPcFx37Gxl6vB/nBZuOS2RXjlX7R5rIgvF6oIrs9mPOBT2v6hw==
-X-Received: by 2002:a17:90a:cc02:: with SMTP id
-	b2mr9101034pju.137.1580281982380; 
-	Tue, 28 Jan 2020 23:13:02 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::c362])
+	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=W3yQtpYyYOVnBMqXW+nsVPeZEvPT/PWfVgtF8GTXGDo=;
+	b=SpsqBghJeGpFV47Kt1thfhLcPyz2N47YamU7InWCVcSqxHkSFZNuokcnpqYnl2dtvn
+	RFfAYzMYMkOaUmOfUsw0IvsAnZPfQ/8z5NXmXG2fswIwYFKcpUKKRDmVYeTkgAKjzTSf
+	MLH2BUsjOeTnDnv5rAqr5au0Nd/AG4P+lswbWvKMZKVXAPsV2w7JaAhtQG955C7Sevav
+	ZNAwax2w1o7IwXt80wVnMMJR+sbZjp590omDqP0nVy3s8NcTnEmNGk2jKQVLhN6GLOD+
+	C8gXYe7w4ujpaq7x7fwOter/Xp6Opq3iSvdTxYyblgzqEaL3FGSE382CxgdAI+w7cRsd
+	SJ9A==
+X-Gm-Message-State: APjAAAX/5PTYMHkIZUpSwOit2Y+5ZRksEjj4AgUbsif6iEQwPZLvpbkQ
+	4sj3QiWAMGz3wQ/1SsuUzEaWibOM
+X-Google-Smtp-Source: APXvYqwp14y7HrlEUx48phRnM/ayRzqoeCuaGSKQ0s1JKnrxiqWMY6VKucEnWQyrDkJzQAqfUwFGww==
+X-Received: by 2002:a63:3f47:: with SMTP id m68mr2825410pga.411.1580362328097; 
+	Wed, 29 Jan 2020 21:32:08 -0800 (PST)
+Received: from ?IPv6:2601:202:4180:a5c0:25aa:a762:1b4:49d3?
+	([2601:202:4180:a5c0:25aa:a762:1b4:49d3])
 	by smtp.gmail.com with ESMTPSA id
-	g9sm1305019pfm.150.2020.01.28.23.13.01
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 28 Jan 2020 23:13:02 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 28 Jan 2020 23:13:02 -0800
-Message-Id: <20200129071303.3328743-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200129071303.3328743-1-raj.khem@gmail.com>
-References: <20200129071303.3328743-1-raj.khem@gmail.com>
+	t65sm4518407pgb.17.2020.01.29.21.32.06
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Wed, 29 Jan 2020 21:32:07 -0800 (PST)
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+References: <20200128215353.3594210-1-raj.khem@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <fc466017-0803-06e9-ebc5-d8c6867a5229@gmail.com>
+Date: Wed, 29 Jan 2020 21:32:06 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.2.2
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/3] recipes: Inherit missing texinfo for makeinfo program
+In-Reply-To: <20200128215353.3594210-1-raj.khem@gmail.com>
+Subject: Re: [meta-networking][PATCH 1/3] squid: Link with libatomic on riscv
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,105 +105,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Jan 2020 13:22:05 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 30 Jan 2020 13:22:33 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb         | 2 +-
- meta-oe/recipes-extended/indent/indent_2.2.12.bb    | 3 +--
- meta-oe/recipes-extended/nana/nana_2.5.bb           | 2 +-
- meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb | 2 +-
- meta-oe/recipes-support/gpm/gpm_git.bb              | 2 +-
- meta-oe/recipes-support/iksemel/iksemel_1.5.bb      | 2 +-
- 6 files changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb b/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
-index 57e364e1ca..9d373fc989 100644
---- a/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
-+++ b/meta-oe/recipes-devtools/cgdb/cgdb_0.7.1.bb
-@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
- 
- DEPENDS = "flex-native readline ncurses"
- 
--inherit autotools
-+inherit autotools texinfo
- 
- SRC_URI = "http://cgdb.me/files/${BP}.tar.gz \
-            file://0001-Avoid-use-of-mips-which-is-reserved-on-mips.patch \
-diff --git a/meta-oe/recipes-extended/indent/indent_2.2.12.bb b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
-index f8d63d43ce..0a866574bd 100644
---- a/meta-oe/recipes-extended/indent/indent_2.2.12.bb
-+++ b/meta-oe/recipes-extended/indent/indent_2.2.12.bb
-@@ -9,7 +9,6 @@ Install the indent package if you are developing applications in C and \
- you want a program to format your code."
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
--DEPENDS = "virtual/gettext"
- 
- SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-            file://0001-src-indent.c-correct-the-check-for-locale.h.patch \
-@@ -19,7 +18,7 @@ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
- SRC_URI[md5sum] = "4764b6ac98f6654a35da117b8e5e8e14"
- SRC_URI[sha256sum] = "e77d68c0211515459b8812118d606812e300097cfac0b4e9fb3472664263bb8b"
- 
--inherit autotools gettext
-+inherit autotools gettext texinfo
- 
- CFLAGS_class-native += " -Wno-error=unused-value"
- 
-diff --git a/meta-oe/recipes-extended/nana/nana_2.5.bb b/meta-oe/recipes-extended/nana/nana_2.5.bb
-index 595852a9f6..4235006984 100644
---- a/meta-oe/recipes-extended/nana/nana_2.5.bb
-+++ b/meta-oe/recipes-extended/nana/nana_2.5.bb
-@@ -15,7 +15,7 @@ LICENSE = "BSD-2-Clause"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=16aa57f3b7fdda870cee597275bd5d11"
- 
--inherit autotools-brokensep pkgconfig
-+inherit autotools-brokensep pkgconfig texinfo
- 
- EXTRA_OEMAKE = "DESTDIR=${D}"
- 
-diff --git a/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
-index a31ad0d676..118e3c50c8 100644
---- a/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
-+++ b/meta-oe/recipes-support/gengetopt/gengetopt_2.23.bb
-@@ -11,6 +11,6 @@ SRC_URI = "${GNU_MIRROR}/gengetopt/${BPN}-${PV}.tar.xz"
- SRC_URI[md5sum] = "ea165d618640dbdecb42ae4491337965"
- SRC_URI[sha256sum] = "b941aec9011864978dd7fdeb052b1943535824169d2aa2b0e7eae9ab807584ac"
- 
--inherit autotools
-+inherit autotools texinfo
- 
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-oe/recipes-support/gpm/gpm_git.bb b/meta-oe/recipes-support/gpm/gpm_git.bb
-index 7034d33858..3800d147f9 100644
---- a/meta-oe/recipes-support/gpm/gpm_git.bb
-+++ b/meta-oe/recipes-support/gpm/gpm_git.bb
-@@ -21,7 +21,7 @@ SRC_URI = "git://github.com/telmich/gpm;protocol=git \
- 
- S = "${WORKDIR}/git"
- 
--inherit autotools-brokensep update-rc.d systemd
-+inherit autotools-brokensep update-rc.d systemd texinfo
- 
- INITSCRIPT_NAME = "gpm"
- INITSCRIPT_PARAMS = "defaults"
-diff --git a/meta-oe/recipes-support/iksemel/iksemel_1.5.bb b/meta-oe/recipes-support/iksemel/iksemel_1.5.bb
-index 0903e90d7d..986984d1ff 100644
---- a/meta-oe/recipes-support/iksemel/iksemel_1.5.bb
-+++ b/meta-oe/recipes-support/iksemel/iksemel_1.5.bb
-@@ -13,7 +13,7 @@ SRC_URI = "git://github.com/meduketto/iksemel.git;protocol=https \
- 
- S = "${WORKDIR}/git"
- 
--inherit autotools pkgconfig lib_package
-+inherit autotools pkgconfig lib_package texinfo
- 
- # TLS support requires either openssl or gnutls (if both are enabled openssl will be used).
- PACKAGECONFIG ?= "gnutls"
--- 
-2.25.0
+
+On 1/28/20 1:53 PM, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Is this for the same reason as for nodejs Cento7 fix ?
+
+- armin
+> ---
+>  meta-networking/recipes-daemons/squid/squid_4.9.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-networking/recipes-daemons/squid/squid_4.9.bb b/meta-networking/recipes-daemons/squid/squid_4.9.bb
+> index 6f202cf401..19949acd84 100644
+> --- a/meta-networking/recipes-daemons/squid/squid_4.9.bb
+> +++ b/meta-networking/recipes-daemons/squid/squid_4.9.bb
+> @@ -40,6 +40,8 @@ inherit autotools pkgconfig useradd ptest perlnative
+>  
+>  LDFLAGS_append_mipsarch = " -latomic"
+>  LDFLAGS_append_powerpc = " -latomic"
+> +LDFLAGS_append_riscv64 = " -latomic"
+> +LDFLAGS_append_riscv32 = " -latomic"
+>  
+>  USERADD_PACKAGES = "${PN}"
+>  USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
 
 
