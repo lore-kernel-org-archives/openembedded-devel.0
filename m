@@ -1,47 +1,22 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 64463601C7
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+	by mail.openembedded.org (Postfix) with ESMTP id 56E1860D32
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 13:19:10 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id q8so1484650pfh.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Jan 2020 05:19:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Qt1/OBLSVZHLl069TJ3wCy4VRsu/k0DGxLuPUhCj148=;
-	b=LevxkDs3+ekMBAc316X/qjjXuzEJvmt3duaDAb2GhR+7dm2VdwkUGoVrbyZiHjtZ2e
-	nzXimE0mboJY/69Wgsx47cVnV7a7U7Rle5aAtsNgHGXQ4E4694OjIg9RHxRWbSsLy/+n
-	3CIU00URsqA4PLXcfzx084QmP97IXXLMZHE/z643/VYseX93iVlw8r0c/XylWCpPH6XT
-	YRdu/DbOo8c5wGj8ogiMvqyh3OVfhYsyqacEERkcJg5uGG6aSsbdV9kx5V0N1H28Szco
-	p1qOW1HPg+/9nJG6fSTTSwZJNFMm9wpYQI9t+fP6UcaqpT0okYrPhMxAFug4f3nhUsA0
-	DH2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=Qt1/OBLSVZHLl069TJ3wCy4VRsu/k0DGxLuPUhCj148=;
-	b=m2MbBsejapIBU8xLMS0jzrXQD1D7mSrY1NEtbc9oIVtNL2AQ9kj2h3TD5wbSNO+0VI
-	SSCEelhsIM+/206mr/2VR0mKdsScvMBnIi1zZKHxlLJAdp82tk6VGpBizufMUE5X1ctC
-	JxO2fTgAucM2ixF+JXinwf8jyccsN+OBAy3YZPcvy/GnAqLc0P4YkSrb2kGOp7Tjo7Uy
-	T4SeY9mhAB3xm+6vNxlCz2Qg6BK2xOnkwg4V+bq1+5NUGXjU0eLBHjihARbMgT8RlW6A
-	bA4ZBrA3Duv0khCTQ1WOwuH07kZVvMa9zhuMAVLbtYfCvul6JawD1/eaSLEkcq673gwT
-	3qSQ==
-X-Gm-Message-State: APjAAAWVhYMyyngr1tP4V/xtX+Y7VVmheOkGXwja1tkw/j7J5CjcoKk5
-	mispWILK9b6bDMMSIiXz0z/ARXnVpL0psBaqY0kgzjfA
-X-Google-Smtp-Source: APXvYqwbzhUfq/ufPWJh7+0MawgV9zzKDA5Zoa/SjNPAgqdfg6b55IV72e5F0VDJcgBOECk+37QOI7kXxb1PCmgYnQk=
-X-Received: by 2002:a0c:f513:: with SMTP id j19mr3044119qvm.206.1580364883888; 
-	Wed, 29 Jan 2020 22:14:43 -0800 (PST)
+	Thu, 30 Jan 2020 21:04:10 +0000 (UTC)
+IronPort-SDR: VK4cCENdgng4YlMQN0OQUrjDWhngrTtVUZpwzMagOIIh+cykUBTfrf//NiqbpvN4JpOfUIALg0
+	WE58457BpQR5s+/CrbKL0YmNn5V/OyC3zyLuRmSXNhYs2t3BBN9+GIwnS/4S9h+87pASbaF3wW
+	uHHZs9resiTkylTyF+GCDBYujbnKN0kT8SldjGtXyrHuP6ELc0Awx82MoKTXiziT2H9M0Kfjwc
+	Iqe456vMvqTZFBgFroD/4p2lQYljGYf1Og/z01JcD+ma/UgeeDkAJmXBRTvd0YCwlUWlum5ZMl
+	twI=
+X-IronPort-AV: E=Sophos;i="5.70,382,1574118000"; 
+   d="scan'208";a="4790768"
+From: Peter Kjellerstedt <pkj@axis.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 30 Jan 2020 22:04:08 +0100
+Message-ID: <20200130210409.29802-1-pkj@axis.com>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-References: <20200128215353.3594210-1-raj.khem@gmail.com>
-	<fc466017-0803-06e9-ebc5-d8c6867a5229@gmail.com>
-In-Reply-To: <fc466017-0803-06e9-ebc5-d8c6867a5229@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 29 Jan 2020 22:14:17 -0800
-Message-ID: <CAMKF1speJWXaYYMPzTvARDDbAQG=RGv6mRJJ15iO+3acriWR+Q@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 1/3] squid: Link with libatomic on riscv
+Subject: [meta-oe][zeus][PATCH 1/2] libldb: Do not require the "pam" distro feature to be enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,39 +29,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2020 09:28:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 31 Jan 2020 09:28:08 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-On Wed, Jan 29, 2020 at 9:32 PM akuster808 <akuster808@gmail.com> wrote:
->
->
->
-> On 1/28/20 1:53 PM, Khem Raj wrote:
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
->
-> Is this for the same reason as for nodejs Cento7 fix ?
->
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 
-pretty much same problem, although a better fix is to detect it
-during build but every build system has its own nuance.
+It was only added because samba was a dependency, but was not removed
+again when the dependency on samba was removed in commit 6207331f.
 
-> - armin
-> > ---
-> >  meta-networking/recipes-daemons/squid/squid_4.9.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-networking/recipes-daemons/squid/squid_4.9.bb b/meta-networking/recipes-daemons/squid/squid_4.9.bb
-> > index 6f202cf401..19949acd84 100644
-> > --- a/meta-networking/recipes-daemons/squid/squid_4.9.bb
-> > +++ b/meta-networking/recipes-daemons/squid/squid_4.9.bb
-> > @@ -40,6 +40,8 @@ inherit autotools pkgconfig useradd ptest perlnative
-> >
-> >  LDFLAGS_append_mipsarch = " -latomic"
-> >  LDFLAGS_append_powerpc = " -latomic"
-> > +LDFLAGS_append_riscv64 = " -latomic"
-> > +LDFLAGS_append_riscv32 = " -latomic"
-> >
-> >  USERADD_PACKAGES = "${PN}"
-> >  USERADD_PARAM_${PN} = "--system --no-create-home --home-dir /var/run/squid --shell /bin/false --user-group squid"
->
+This effectively reverts commit a190c2e3.
+
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-support/libldb/libldb_1.5.5.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb b/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+index b19c964d8..9a93e66b6 100644
+--- a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
++++ b/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+@@ -36,8 +36,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
+ SRC_URI[md5sum] = "339a41ac9efaec680e6d1469dd9aa35b"
+ SRC_URI[sha256sum] = "199f5861aa863f538ec66d5fa95ecc13254a2030c53daf0e47363fa9ba235c68"
+ 
+-inherit waf-samba distro_features_check
+-REQUIRED_DISTRO_FEATURES = "pam"
++inherit waf-samba
+ 
+ S = "${WORKDIR}/ldb-${PV}"
+ 
+-- 
+2.21.1
+
 
