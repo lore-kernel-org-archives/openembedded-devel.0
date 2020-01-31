@@ -1,44 +1,29 @@
-Return-Path: <krussell7711@gmail.com>
-Received: from mail-oi1-f172.google.com (mail-oi1-f172.google.com
-	[209.85.167.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CEB860283
+Return-Path: <robert.joslyn@redrectangle.org>
+X-Greylist: delayed 1279 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 31 Jan 2020 21:44:59 UTC
+Received: from mslow2.mail.gandi.net (mslow2.mail.gandi.net [217.70.178.242])
+	by mail.openembedded.org (Postfix) with ESMTP id 7961C60592
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2020 21:22:50 +0000 (UTC)
-Received: by mail-oi1-f172.google.com with SMTP id v19so8667106oic.12
+	Fri, 31 Jan 2020 21:44:59 +0000 (UTC)
+Received: from relay8-d.mail.gandi.net (unknown [217.70.183.201])
+	by mslow2.mail.gandi.net (Postfix) with ESMTP id 03C113A39D2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2020 13:22:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to:cc;
-	bh=wBmHGVfT/qIP+5GD3OxlijVeHCy+N6c8SEojYoqVEaM=;
-	b=S+bUbzHyalg8k3yAE8czH517kOB7mbvGIrO/Z5iJ+ZR+4GFdGvTZiB5o5OwregRed+
-	gwCpAMXIBnWe6wq4T2Z4dq/PCrVlV3KXZl8Qe2Ul8KCJaw3bNE/CeM+nTo1xXTzgw2l7
-	f7Qn0G2XL067wW334A/quqZ8WyQNOMGHXoHaNvQjn/aR9Rd1rci+6/YavcmfOaWCiYUE
-	7lPDN0/Bhw728bGvYE/i4GCDgVOMobuEW0+P/xr/JPrMrxQJPw5EBN8n4KTaOZfMZwG5
-	Dq9C/ka7i5AvKJNWzs1dx+1DbtRX/NyM9nz4s7RSDfJvR6HfrnjoVGjF2TvFR7LxVvh/
-	20FA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
-	bh=wBmHGVfT/qIP+5GD3OxlijVeHCy+N6c8SEojYoqVEaM=;
-	b=RUVgOXY+107hh7+9ybHC5CuRCesiuCk6Yfdw4TYd+/S8b+fV4qSAT23B9d9tfIqHAg
-	XXhyy/A8dqteHDYN6r0oD0nuJbl0EwIyqkKs7a3NiG3yeUEprXz9eNi0IfgpcAliq3U4
-	dTKfn9niShJ+2v/0v0M04BU8pnSL6rkYyd2O90dDLBUBMwg5MrtfJM1iOJ71voARcE1i
-	io/RM26XZyKRFEGuOeaSPbSyIrPTaDmiKLT5OuRKq+JBundxMIBe3WB6AFkN0oqGxrAA
-	pziYJmPhB0F//VZSoN5wfgP9YJtxlF7ODptsij65b6O5nFDiAYmmePe7bVpPRqGWDAyW
-	d3Hw==
-X-Gm-Message-State: APjAAAVgomfyhrwqkJwOOYEGV5JjuuhrEnOKYV1kQTu+z4cFyzOh2N6Q
-	lGDD3dmzBjh9OuxwoQX6Kc1Zg3wffdkfovVzEQznTA==
-X-Google-Smtp-Source: APXvYqwu/t6RxSLUzYSNDmrMbhnohhIYgce2Lrx40kyY7MzVvRrlXu/BD8RP8JMe1yDCKO2LBuCrc/Rm8nW4TPv/79Q=
-X-Received: by 2002:a05:6808:1:: with SMTP id u1mr7923116oic.74.1580505771689; 
-	Fri, 31 Jan 2020 13:22:51 -0800 (PST)
+	Fri, 31 Jan 2020 21:21:48 +0000 (UTC)
+X-Originating-IP: 173.197.191.182
+Received: from localhost.localdomain (rrcs-173-197-191-182.west.biz.rr.com
+	[173.197.191.182])
+	(Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay8-d.mail.gandi.net (Postfix) with ESMTPSA id 125121BF204;
+	Fri, 31 Jan 2020 21:21:46 +0000 (UTC)
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 31 Jan 2020 13:20:56 -0800
+Message-Id: <20200131212057.1856967-2-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.24.1
+In-Reply-To: <20200131212057.1856967-1-robert.joslyn@redrectangle.org>
+References: <20200131212057.1856967-1-robert.joslyn@redrectangle.org>
 MIME-Version: 1.0
-From: Kyle Russell <bkylerussell@gmail.com>
-Date: Fri, 31 Jan 2020 16:22:40 -0500
-Message-ID: <CAFrQVPN-BGUPWXvDfdhU+VxY-D-ULVcpM7fYcFnMBVbN9-hNoQ@mail.gmail.com>
-To: richard.leitner@skidata.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-java] OpenJDK11 LTS
+Subject: [meta-oe][PATCH 2/3] iwd: Add PACKAGECONFIG options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,14 +36,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2020 21:22:51 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 31 Jan 2020 21:45:01 -0000
+Content-Transfer-Encoding: 8bit
 
-Has any work been done towards supporting OpenJDK11 with meta-java?  I've
-been using openjdk-8, and would be interested in helping contribute support
-for the next LTS if there's interest.  I wanted to know if anyone is
-actively pursuing this first though, or if anyone has uncovered additional
-dependencies that need to be sorted out first.
+Make it easier to disable optional client, monitor, and man page
+components and their dependencies. A user may want to disable the client
+to avoid the use of GPLv3 readline.
 
-Kyle
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
+---
+ meta-oe/recipes-connectivity/iwd/iwd_1.4.bb | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
+index 49fc45a74..a023c0d28 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+ 
+ inherit autotools pkgconfig systemd python3native
+ 
+-DEPENDS = "ell readline python3-docutils-native"
++DEPENDS = "ell"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
+            file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
+@@ -12,7 +12,15 @@ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
+ SRCREV = "860fa4697f349da7791ecf22ca76f9ac0e5de261"
+ S = "${WORKDIR}/git"
+ 
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG ??= " \
++    client \
++    monitor \
++    manual-pages \
++    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
++"
++PACKAGECONFIG[client] = "--enable-client,--disable-client,readline"
++PACKAGECONFIG[monitor] = "--enable-monitor,--disable-monitor"
++PACKAGECONFIG[manual-pages] = "--enable-manual-pages,--disable-manual-pages,python3-docutils-native"
+ PACKAGECONFIG[wired] = "--enable-wired,--disable-wired"
+ PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono"
+ PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd-service,systemd"
+@@ -26,6 +34,8 @@ do_configure_prepend () {
+ do_install_append() {
+     mkdir --parents ${D}${docdir}/${BPN}
+     install -m644 ${S}/doc/*.txt ${D}${docdir}/${BPN}
++    # If client and monitor are disabled, bindir is empty, causing a QA error
++    rmdir --ignore-fail-on-non-empty ${D}/${bindir}
+ }
+ 
+ FILES_${PN} += "${datadir}/dbus-1 ${nonarch_libdir}/modules-load.d ${systemd_unitdir}/network/"
+-- 
+2.24.1
+
 
