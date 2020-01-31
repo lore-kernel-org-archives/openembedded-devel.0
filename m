@@ -1,50 +1,48 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C62760B92
+Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com
+	[209.85.216.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8362760665
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2020 17:32:20 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id d9so2996273plo.11
+	Fri, 31 Jan 2020 17:34:01 +0000 (UTC)
+Received: by mail-pj1-f65.google.com with SMTP id d5so3138039pjz.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2020 09:32:21 -0800 (PST)
+	Fri, 31 Jan 2020 09:34:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:autocrypt:message-id:date:user-agent
 	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=3+Y0JeAU3vumPXgCh/1NVQl+BwI6RXnS1wPCH9opV7M=;
-	b=k3UucUjWuba0wvKAS07X19OdINAseHvEgYN4T7g8zaPx2q5RgWfA99OnPReChvveRO
-	JakUMDIh1BBDC7VZQWABxMuqw12ihe22p+Gt3lGtHvRmjDxkPHUz1wvseMQQasYcyXMK
-	vUudcL/qJxdt3c77NXzQ1pA8PhP0mv6AX+1EAnC9EHYCFFEciVQdSzPyN/zWbNiiQJfA
-	Lo3K51orOlqnLkktbNirgsuzpgecDltzg5GpIW1Z+qH/I04P8NPDGvMT62qlPtUKZstv
-	VXzah/3sGiu6un894tUitO5E+gvJaJ5+Wjgh11+GygsYuGji2figIRnMctYWulipAP/v
-	xYcQ==
+	bh=oFQrGkMvEf+cmePDiUy2QzMJWAT6YJi/NpbNa8mXflg=;
+	b=k8CEV6WmvW9SmwYkdvxzkIsIdFwvU+/KEulQxXixRXQt581XJPNqIyY/O/ytMhXfJm
+	UJQyeFHmL9wPWHSlEflNE1lDAAfYyLof/3mA4QoIqRaOUFeZkzLzUyLfWPqV9a52lPe6
+	zAiBwtYHpiY70Hig5dx3zsE47MVXg6dqEJHbtktMhEoOAJf+FqwjDC8RUgfSLlu9pqRZ
+	TIbgc+2M5IuUpkz1Sv+Kag7DnJAWdcNz60+ui5+OJuW6xZoLWZvSP4AycCbXplHiqO1k
+	MCC4GBBOqnTe2KlUrieodjotZg9NKaVzxXC8MYBGr0+ITi/79+z6trp9IY3p7k4uS5u1
+	ckdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
 	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=3+Y0JeAU3vumPXgCh/1NVQl+BwI6RXnS1wPCH9opV7M=;
-	b=PAuS3oBiasvwFLc8FICCltwxfBz92xjFzsbfkVDbmKXoMN77bIIBwmykeedmLfSD27
-	53sOXqOW1EjPlf1QzlXHyrNtlKE/fygQbT0LsJKIYqe0Tm+6OWuMNGkd+zToEcMSMMim
-	zEN+IUko/E/fZhFD31ErfIjt21FiF6wPmI2O3xntlFRBXxeqHIggMHrQK5ofnKo4ruvK
-	pMg1CT8ygFPG6n59FTsJB5XCCtrxm6qOBA5xQON4aHY4mvr3lH6OdsImqcoIXc0Gnf39
-	lTerL18dE+3VdRhBCZb5pFXlSXMg+m5/r9X9fNGCFRf7HFD03g9J0uh0jBzYHqJFDFBi
-	M4hQ==
-X-Gm-Message-State: APjAAAXAx2pJzUoj/2XCm2FrkZRBxm95MBMnl5yCbXgYaE00SN5BEwR+
-	IIwALoTVVex9dLv7SN/4gvWxUHsU
-X-Google-Smtp-Source: APXvYqyYDVxA1drnY/+D8LRsxOA569IeYP51AjM5X1A3H486lsZUIB/0+oxfqrwnjxglQvzMpfwQ4g==
-X-Received: by 2002:a17:902:bc88:: with SMTP id
-	bb8mr7332917plb.274.1580491940942; 
-	Fri, 31 Jan 2020 09:32:20 -0800 (PST)
+	bh=oFQrGkMvEf+cmePDiUy2QzMJWAT6YJi/NpbNa8mXflg=;
+	b=ND7rDso3FxVhnInVD+FYH6YHrNVqWTkoCKFJ1OvC71lr2h4UJBbpJrTkLGq/nozBQI
+	qpqS+LcDaL+FVSSQhP6JhJVrwaWV/Joy9myhovkkVBf8Qr8E/q0m3frDZTL2j8jDWZ7q
+	f8pHYQvUhKDg8/kdGpnrr4+kOzYonABHr1PC9UN0Ye8sRTwM2Dh0Ngug63z0weu1e9LK
+	RzJMN46NM3y90DygjWe1YYWIwGeTMNw4aqBRwkL7wA0tHmj186DgPjzopnBANEGbOI6k
+	87B/f/6Y4l3btPAX+SEGKtNrVIPI8uZOqOnacYqhjOGIASvCY8vG5UVi+DObTmRbMN14
+	bEKg==
+X-Gm-Message-State: APjAAAXrQKEIh7X314TBx+zUfttA3dUDLVJksJZFdYfR9qjxOFmdvMbP
+	9dexIzu4wJ0k2Fv+Vx5CieUOwZd+
+X-Google-Smtp-Source: APXvYqzK+0iaHMgaD1jb3OdQgcAq2Gs79pjD3HRbJ3UnKeWwRtGsgHWJBpBDRW2enYjEpEiGNC/HXg==
+X-Received: by 2002:a17:902:8f91:: with SMTP id
+	z17mr11208207plo.234.1580492042504; 
+	Fri, 31 Jan 2020 09:34:02 -0800 (PST)
 Received: from ?IPv6:2601:202:4180:a5c0:9979:cdb6:7624:d076?
 	([2601:202:4180:a5c0:9979:cdb6:7624:d076])
-	by smtp.gmail.com with ESMTPSA id
-	z26sm10673091pgu.80.2020.01.31.09.32.19
+	by smtp.gmail.com with ESMTPSA id u2sm10722855pgj.7.2020.01.31.09.34.01
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 31 Jan 2020 09:32:20 -0800 (PST)
+	Fri, 31 Jan 2020 09:34:02 -0800 (PST)
 To: Peter Kjellerstedt <pkj@axis.com>,
 	openembedded-devel@lists.openembedded.org
 References: <20200130210409.29802-1-pkj@axis.com>
-	<20200130210409.29802-2-pkj@axis.com>
 From: akuster808 <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -89,13 +87,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <892a1dad-0f9e-53f3-2997-e4458d212025@gmail.com>
-Date: Fri, 31 Jan 2020 09:32:18 -0800
+Message-ID: <ea500f22-d505-d82b-b0c8-c264945f6354@gmail.com>
+Date: Fri, 31 Jan 2020 09:34:00 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200130210409.29802-2-pkj@axis.com>
-Subject: Re: [meta-oe][zeus][PATCH 2/2] gitpkgv.bbclass: Add support for extending the supported tag formats
+In-Reply-To: <20200130210409.29802-1-pkj@axis.com>
+Subject: Re: [meta-oe][zeus][PATCH 1/2] libldb: Do not require the "pam" distro feature to be enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,7 +106,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2020 17:32:20 -0000
+X-List-Received-Date: Fri, 31 Jan 2020 17:34:01 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
@@ -116,53 +114,37 @@ Content-Language: en-US
 
 
 On 1/30/20 1:04 PM, Peter Kjellerstedt wrote:
-> Introduce GITPKGV_TAG_REGEXP (which defaults to "v(\d.*)") to support
-> dropping other unwanted parts of the found tags than just a leading
-> "v". Any matching groups in the regexp will be concatenated to yield
-> the final version.
+> From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+>
+> It was only added because samba was a dependency, but was not removed
+> again when the dependency on samba was removed in commit 6207331f.
+>
+> This effectively reverts commit a190c2e3.
+I have an update to this package staged. I apply this on top of that.
 
-I believe I got this one already staged.
+https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/zeus-nut&id=f64c2d691ea597aa6221e3d7706a4d022e07bfea
 
-https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/zeus-nut&id=b95100003df03c22eebe6ae5e4342b5281a2ef64
+- armin
 >
 > Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  meta-oe/classes/gitpkgv.bbclass | 14 ++++++++++----
->  1 file changed, 10 insertions(+), 4 deletions(-)
+>  meta-networking/recipes-support/libldb/libldb_1.5.5.bb | 3 +--
+>  1 file changed, 1 insertion(+), 2 deletions(-)
 >
-> diff --git a/meta-oe/classes/gitpkgv.bbclass b/meta-oe/classes/gitpkgv.bbclass
-> index ab591bd45..180421ed3 100644
-> --- a/meta-oe/classes/gitpkgv.bbclass
-> +++ b/meta-oe/classes/gitpkgv.bbclass
-> @@ -40,10 +40,16 @@
->  GITPKGV = "${@get_git_pkgv(d, False)}"
->  GITPKGVTAG = "${@get_git_pkgv(d, True)}"
+> diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb b/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+> index b19c964d8..9a93e66b6 100644
+> --- a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+> +++ b/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+> @@ -36,8 +36,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
+>  SRC_URI[md5sum] = "339a41ac9efaec680e6d1469dd9aa35b"
+>  SRC_URI[sha256sum] = "199f5861aa863f538ec66d5fa95ecc13254a2030c53daf0e47363fa9ba235c68"
 >  
-> -def gitpkgv_drop_tag_prefix(version):
-> +# This regexp is used to drop unwanted parts of the found tags. Any matching
-> +# groups will be concatenated to yield the final version.
-> +GITPKGV_TAG_REGEXP ??= "v(\d.*)"
-> +
-> +def gitpkgv_drop_tag_prefix(d, version):
->      import re
-> -    if re.match("v\d", version):
-> -        return version[1:]
-> +
-> +    m = re.match(d.getVar('GITPKGV_TAG_REGEXP'), version)
-> +    if m:
-> +        return ''.join(group for group in m.groups() if group)
->      else:
->          return version
+> -inherit waf-samba distro_features_check
+> -REQUIRED_DISTRO_FEATURES = "pam"
+> +inherit waf-samba
 >  
-> @@ -105,7 +111,7 @@ def get_git_pkgv(d, use_tags):
->                          output = bb.fetch2.runfetchcmd(
->                              "git --git-dir=%(repodir)s describe %(rev)s --tags --exact-match 2>/dev/null"
->                              % vars, d, quiet=True).strip()
-> -                        ver = gitpkgv_drop_tag_prefix(output)
-> +                        ver = gitpkgv_drop_tag_prefix(d, output)
->                      except Exception:
->                          ver = "0.0-%s-g%s" % (commits, vars['rev'][:7])
->                  else:
+>  S = "${WORKDIR}/ldb-${PV}"
+>  
 
 
