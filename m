@@ -1,48 +1,28 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
-	[209.85.166.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9818860785
+Return-Path: <michael.haener@siemens.com>
+X-Greylist: delayed 364 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 31 Jan 2020 10:09:06 UTC
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E30360661
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2020 09:36:30 +0000 (UTC)
-Received: by mail-il1-f194.google.com with SMTP id b15so5623601iln.3
+	Fri, 31 Jan 2020 10:09:06 +0000 (UTC)
+Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id 00VA32G8016515
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Jan 2020 01:36:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=wmAXG/XJ/+K7609gj0VWpxqPKvGw6nEqnH5Ub8CSJS0=;
-	b=gXdvcIFFrvvNP6oKl/Q6V8bwdd+Fbu5OhSejKNNqfQuHNGJn3iuzF+C+fhW4P7vrdS
-	L4SncXJFuQtJpuhUDByRqWOaq+P2jRFwlKxO0ErcFvukuJrvzzT6l/b1H4kHscsaei/Y
-	nZHgmgP7vEfdV9PIJ2YSoBlx6yzAzZ8osvP67rbSDvGIxWSWhYEkA6Hihn6sPqcCjjO+
-	2YkdU5GiOOBXW6D/Z8HOVxaRBT4W8hddbiNWyhmQ0e/O3OBJ9NZlS7HymhCXouwex3qa
-	h3vaWHoCUsKf/sxwfv6a5GM7+3yMUG//Xfu+vNx47X0mfDE9x3UI686EFNXzG69pU1qx
-	pOyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=wmAXG/XJ/+K7609gj0VWpxqPKvGw6nEqnH5Ub8CSJS0=;
-	b=URSb8Yb64UBF+Ltu+g40RciNrkkmw69ftxKPAPbwG7AuK1khp8C6DVitNBcyCKXSMY
-	EBkxDYpoGViAydK9JGQy+NHOJ3loI8OMJwmenCwHa883cYC5nmmmcfXYW4GkkLcOP1zq
-	6O3v8X+z41a3+3mq7z+/F+UGKXpfH2knybBa+SRsmRAlVJ9N62eZj88kVVGVHvwdJwsg
-	mExu8U51h1iFInRI29aRHi6VvFn0VlOkreiaCgEFVRppg9vWjbv4gYrspBJ1nRjsbeGW
-	4tS2ocAD0dSExrV++vyywV2/g7r5US+IhjonEQTerami9YffKFT65smTGpjGE21OoUdx
-	AVWA==
-X-Gm-Message-State: APjAAAUGUuXlF9kAXT3jZUBUCbCH6HzctqTbZKEl9ct8Vb3K4IxvQ1Vx
-	7yE3wcJ6OhI35CZWEZSPRRNGFXoCUyGXj8edlwM=
-X-Google-Smtp-Source: APXvYqy8QUteX+58l5h5Ep9ARiWLBxkAmhsgKwntezhdb+vIpEfdECukgTDjgX9uRQCjrUCi2vxC97xuW3ILI2SlJeE=
-X-Received: by 2002:a92:4019:: with SMTP id n25mr569076ila.147.1580463391691; 
-	Fri, 31 Jan 2020 01:36:31 -0800 (PST)
-MIME-Version: 1.0
-References: <20200125202357.4766-1-Martin.Jansa@gmail.com>
-	<CANx9H-BvkgBQb_NPgJ66LUJvpMDFy7h899MTrnVrqGsm=fDsaQ@mail.gmail.com>
-	<20200129203200.GA3422@linux-uys3>
-In-Reply-To: <20200129203200.GA3422@linux-uys3>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 31 Jan 2020 10:36:19 +0100
-Message-ID: <CALbNGRS6dTCn5M9q_yPiGbPG8Q2d++8c_qOggYUAZrU8fA0dGg@mail.gmail.com>
-To: Trevor Woerner <twoerner@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] packagegrop-meta-oe: remove blacklisted mpv
+	Fri, 31 Jan 2020 11:03:02 +0100
+Received: from dev.vm6.ccp.siemens.com (md1quwnc.ad001.siemens.net
+	[139.16.77.74])
+	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id 00VA30UL020620;
+	Fri, 31 Jan 2020 11:03:01 +0100
+Received: from dev.localdomain (localhost [127.0.0.1])
+	by dev.vm6.ccp.siemens.com (Postfix) with ESMTP id D204523B0A87;
+	Fri, 31 Jan 2020 11:03:00 +0100 (CET)
+From: Michael Haener <michael.haener@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 31 Jan 2020 11:02:57 +0100
+Message-Id: <20200131100257.2898-1-michael.haener@siemens.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH] modemmanager: upgrade 1.10.8 -> 1.12.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,18 +35,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Jan 2020 09:36:30 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 31 Jan 2020 10:09:07 -0000
 
-On Fri, Jan 31, 2020 at 10:29 AM Trevor Woerner <twoerner@gmail.com> wrote:
->
-> On Sat 2020-01-25 @ 12:42:21 PM, Tim Orling wrote:
-> > If someone cares, it has been updated to python3
-> > https://github.com/mpv-player/mpv/releases/tag/v0.31.0
->
-> I'm looking into this now. Is anyone else?
-> (no point multiple people looking into this)
-Was on my list - but am happy you jump in to reduce it :)
+Signed-off-by: Michael Haener <michael.haener@siemens.com>
+---
+ .../modemmanager/{modemmanager_1.10.8.bb => modemmanager_1.12.4.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.10.8.bb => modemmanager_1.12.4.bb} (92%)
 
-Andreas
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.8.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.4.bb
+similarity index 92%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.8.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.4.bb
+index 3cd21cc0d..3639f02ca 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.10.8.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.4.bb
+@@ -14,8 +14,8 @@ DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
+ SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
+            "
+ 
+-SRC_URI[md5sum] = "c05ac4246c81cc15d617c4a129232988"
+-SRC_URI[sha256sum] = "cbe174078dbdf3f746a55f0004353d3c27da2a31da553036d90fc7dc34a0169a"
++SRC_URI[md5sum] = "22280110d75c87a89786a317aa9cee04"
++SRC_URI[sha256sum] = "852d61755e0c1a8d0c609b17192d742b324fdd2e513f3ed64b228befb859a95b"
+ 
+ S = "${WORKDIR}/ModemManager-${PV}"
+ 
+-- 
+2.11.0
+
 
