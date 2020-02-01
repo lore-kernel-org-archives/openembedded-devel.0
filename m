@@ -1,47 +1,53 @@
-Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-il1-f196.google.com (mail-il1-f196.google.com
-	[209.85.166.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 91CE960ACB
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 13933608A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Feb 2020 15:25:52 +0000 (UTC)
-Received: by mail-il1-f196.google.com with SMTP id v13so8873056iln.4
+	Sat,  1 Feb 2020 16:37:21 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id y17so12377803wrh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Feb 2020 07:25:53 -0800 (PST)
+	Sat, 01 Feb 2020 08:37:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=G0bYAaBhBAzvv/i2qaX3mKD7PjL05cHdE0fwQwZC0yQ=;
-	b=qNUfkorOmryLDEzVitCZA9d7DraciXbONIj44YG6yxGup34ElDI9oGLbcRUZ2fEuMv
-	4bJFQwEylO4DHwsrdyy5e3K1whu3ul9XD7fi3wQFmNdEuJaFGnr4VDSj8P7ujDcB/8Qt
-	az2+gq+gnWjzBfjEQXTNvPdQaXBK1H7K+8L/jNjCIWwsYcXhQRZMcm2h6fYX3MbhZjCr
-	1Vdp5vGJo8noOvfdEY8aIFQ5Vf5gsv45lPJO5YF98rA3TSmDKAjaEb2Nuz+1th0X4Yyi
-	O74QohQuURVGwdejAvuuD78Ci6tRSnQzFYEspRkSkaLWluBMl6AashpPiLpa4eVXCBR5
-	gDxQ==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=N9+QLXPBBq3N919wVVWaFZ2RiA6HORxbqeB0pxa+Zaw=;
+	b=JKkSnrJQfyaCk5tjaUeI9FJxnVzw+CY4WTOD3QMg7SJ0wlMrIVrISHZO1BJctRxBsZ
+	F0p4X+CKmK8fGikX+dlJxr3zDmKy/97BulkxNBtVbttUTdG+X/9uo+HGvhWCz9wT6hE2
+	jp78HgbRqloxCMs59Wy+g/02Q/escwR2wDWDD94ELI0LICrPTzGlZD+3tNSV+cMbxPNc
+	Y7k0PaycT/IevKxWYWeQsVz4SVL7/oOzTKYscPQIKe5NUosTX5DwHaO+qlN0xBnRTTjw
+	F62vayidVWrm32kdeAkHBk1CaRwK9BUMAnnR5njD162CferDQb9Mn/Kehkp0eSjcejbw
+	rduA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=G0bYAaBhBAzvv/i2qaX3mKD7PjL05cHdE0fwQwZC0yQ=;
-	b=LYS7mFmPgCLjqlzSwmPd5P1BCQ1xt132SrESv8FRbN9XxevwkmD3pT8/kpXlDMfi/f
-	uwRqDc13yPBU+J94/8MGp+UZAuydYbU9l10OxWfk0NCadDWyoOUZ/OwBsno23Ylw2OMa
-	XPYH6hRB9iIOZ5hFGWKJ8OSYxxiGpUO0vwvs+SE8PJmDN5frKZVvL1l5338Yu2+kbNkm
-	riz3h8yUcagWlV4VmAXhzwDU4HSGGalM0IEUQCra1b47vwut3VcmTr15Fns9FRnjYh1z
-	YeD7n89Yx9Qz3nCY3JL1bxeQOnbhkT/ajsi+Zeh/sbn5KDvL59ObWFH40t99TkhfNGFO
-	eJpg==
-X-Gm-Message-State: APjAAAXF1+4u6yN1JzRf+lczEHALCH1Lp/8WdOotVWG5wfGrI2tnJxWY
-	NTWFTQDbj+2Q/xUIHb86YWFfoEK1NxaoX5CiLJWi3KD8
-X-Google-Smtp-Source: APXvYqxbxff5IeFuYfBBv/omdeEWOPZo65CqzFfcENLKvrACJeYUYBWZ2iQxa4mx4a8IR5LvwVY8C1yQieDs6XpeFUU=
-X-Received: by 2002:a92:8f44:: with SMTP id j65mr14098079ild.144.1580570753302;
-	Sat, 01 Feb 2020 07:25:53 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=N9+QLXPBBq3N919wVVWaFZ2RiA6HORxbqeB0pxa+Zaw=;
+	b=SBpY0DC/rrjmyBUeL0NUHqJ/IVkLaNmcgUKcPGSklFMrstINP7pHNIDh+HqlRdYKvX
+	26C6KiM4KL5lP6N3a6FzyFFym66RTi6OQ/A6j/UgnfjII74bBjEft6sNTEe6YlpvbOus
+	nWCavWxOPOnN8pfZiXq09WOJOOq1/WLFyN+Ac0sQ84Sav5Q3FpZctN6ogG4PmQov1YBw
+	CE9TLguux3p3icRNdfB+CwExuAWebOtU9uzKPgvcrlO9J/N4Buog61eGuiaOxDDYZqmB
+	RdGz0G4JC2UAP7igHeRqWu2bAc3dZt7PqidpYLMhTdzDntu6Ol0AXyYxNh4PrCkns6NG
+	5ftg==
+X-Gm-Message-State: APjAAAXGrr/lyy9k83woMnuMhZwksCOMhNdT0xcE/4n45TtLXBrpMgbs
+	P+uKOIyy+tap8u/bAaU+sjOxTnEY
+X-Google-Smtp-Source: APXvYqzuz+VGtno/4I86iZZcTo4Bly8IXZsEzywa5yDaGRXFS0ZP0kMoGI6Zsnv2sij2xGnWEcL6kQ==
+X-Received: by 2002:a05:6000:1289:: with SMTP id
+	f9mr4929289wrx.381.1580575042336; 
+	Sat, 01 Feb 2020 08:37:22 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F01CE208F5D55732A5FC539.dip0.t-ipconnect.de.
+	[2003:f0:7f01:ce20:8f5d:5573:2a5f:c539])
+	by smtp.gmail.com with ESMTPSA id s1sm8594117wro.66.2020.02.01.08.37.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 01 Feb 2020 08:37:21 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  1 Feb 2020 17:36:59 +0100
+Message-Id: <20200201163703.4264-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <20200131212057.1856967-1-robert.joslyn@redrectangle.org>
-	<20200131212057.1856967-2-robert.joslyn@redrectangle.org>
-In-Reply-To: <20200131212057.1856967-2-robert.joslyn@redrectangle.org>
-From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Sat, 1 Feb 2020 15:25:42 +0000
-Message-ID: <CAO5Uq5S5R92jtdgWoFDJ_2P1egc=VXAs=MzPy3xoEi4d3jS_7w@mail.gmail.com>
-To: Robert Joslyn <robert.joslyn@redrectangle.org>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/3] iwd: Add PACKAGECONFIG options
+Subject: [PATCH 0/4] mozjs -> python3 / upgrades
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,79 +60,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2020 15:25:52 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 01 Feb 2020 16:37:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, Jan 31, 2020 at 9:45 PM Robert Joslyn
-<robert.joslyn@redrectangle.org> wrote:
->
-> Make it easier to disable optional client, monitor, and man page
-> components and their dependencies. A user may want to disable the client
-> to avoid the use of GPLv3 readline.
->
-> Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
-> ---
->  meta-oe/recipes-connectivity/iwd/iwd_1.4.bb | 14 ++++++++++++--
->  1 file changed, 12 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
-> index 49fc45a74..a023c0d28 100644
-> --- a/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
-> +++ b/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
-> @@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
->
->  inherit autotools pkgconfig systemd python3native
->
-> -DEPENDS = "ell readline python3-docutils-native"
-> +DEPENDS = "ell"
->
->  SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
->             file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
-> @@ -12,7 +12,15 @@ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
->  SRCREV = "860fa4697f349da7791ecf22ca76f9ac0e5de261"
->  S = "${WORKDIR}/git"
->
-> -PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-> +PACKAGECONFIG ??= " \
-> +    client \
-> +    monitor \
-> +    manual-pages \
-> +    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-> +"
-> +PACKAGECONFIG[client] = "--enable-client,--disable-client,readline"
-> +PACKAGECONFIG[monitor] = "--enable-monitor,--disable-monitor"
-> +PACKAGECONFIG[manual-pages] = "--enable-manual-pages,--disable-manual-pages,python3-docutils-native"
+Mozjs was build / run tested with Raspi 32bit. For other targets issues
+might pop up - see what autobuilder says - will take care.
 
-If you make this PACKAGECONFIG[manpages], inherit manpages and drop it
-from the default PACKAGECONFIG you'll automatically get documentation
-driven by the api-documentation distro feature. Though at that
-possibly it should be a separate commit.
+Andreas Müller (4):
+  mozjs: port build to python3
+  poppler: upgrade 0.84.0 -> 0.84.0
+  xfce4-whiskermenu-plugin: upgrade 2.3.4 -> 2.3.5
+  thunar: upgrade 1.8.10 -> 1.8.12
 
-Maybe just /manual-pages/manpages/ as that's a common name?
-
->  PACKAGECONFIG[wired] = "--enable-wired,--disable-wired"
->  PACKAGECONFIG[ofono] = "--enable-ofono,--disable-ofono"
->  PACKAGECONFIG[systemd] = "--with-systemd-unitdir=${systemd_system_unitdir},--disable-systemd-service,systemd"
-> @@ -26,6 +34,8 @@ do_configure_prepend () {
->  do_install_append() {
->      mkdir --parents ${D}${docdir}/${BPN}
->      install -m644 ${S}/doc/*.txt ${D}${docdir}/${BPN}
-> +    # If client and monitor are disabled, bindir is empty, causing a QA error
-> +    rmdir --ignore-fail-on-non-empty ${D}/${bindir}
->  }
->
->  FILES_${PN} += "${datadir}/dbus-1 ${nonarch_libdir}/modules-load.d ${systemd_unitdir}/network/"
-> --
-> 2.24.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
+ .../mozjs/0001-Port-build-to-python3.patch    | 6888 +++++++++++++++++
+ ...nclude-RequiredDefines.h-for-depend.patch} |    0
+ ...x-cross-compilation-on-i586-targets.patch} |    0
+ ...04-do-not-create-python-environment.patch} |    0
+ ....patch => 0005-fix-cannot-find-link.patch} |    0
+ ...ound-autoconf-2.13-detection-failed.patch} |    0
+ ... 0007-fix-do_compile-failed-on-mips.patch} |    0
+ ...ort.patch => 0008-add-riscv-support.patch} |    0
+ ...mozjs-fix-coredump-caused-by-getenv.patch} |    0
+ ...rflow.patch => 0010-format-overflow.patch} |    0
+ ... 0011-To-fix-build-error-on-arm32BE.patch} |    0
+ ...LIC_API.patch => 0012-JS_PUBLIC_API.patch} |    0
+ ...013-riscv-Disable-atomic-operations.patch} |    0
+ ... 0014-fallback-to-2011-C++-standard.patch} |    0
+ ...-compiling-failure-on-mips64-n32-bsp.patch |    0
+ .../0001-support-musl.patch}                  |    0
+ .../0002-js-Fix-build-with-musl.patch}        |    0
+ .../recipes-extended/mozjs/mozjs_60.9.0.bb    |   56 +-
+ .../{poppler_0.84.0.bb => poppler_0.85.0.bb}  |    4 +-
+ ...4.bb => xfce4-whiskermenu-plugin_2.3.5.bb} |    4 +-
+ .../{thunar_1.8.10.bb => thunar_1.8.12.bb}    |    4 +-
+ 21 files changed, 6923 insertions(+), 33 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-Port-build-to-python3.patch
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch => 0002-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0010-fix-cross-compilation-on-i586-targets.patch => 0003-fix-cross-compilation-on-i586-targets.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0001-do-not-create-python-environment.patch => 0004-do-not-create-python-environment.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0002-fix-cannot-find-link.patch => 0005-fix-cannot-find-link.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0003-workaround-autoconf-2.13-detection-failed.patch => 0006-workaround-autoconf-2.13-detection-failed.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0005-fix-do_compile-failed-on-mips.patch => 0007-fix-do_compile-failed-on-mips.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{add-riscv-support.patch => 0008-add-riscv-support.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0001-mozjs-fix-coredump-caused-by-getenv.patch => 0009-mozjs-fix-coredump-caused-by-getenv.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{format-overflow.patch => 0010-format-overflow.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0001-To-fix-build-error-on-arm32BE.patch => 0011-To-fix-build-error-on-arm32BE.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{JS_PUBLIC_API.patch => 0012-JS_PUBLIC_API.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0001-riscv-Disable-atomic-operations.patch => 0013-riscv-Disable-atomic-operations.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{fallback-to-2011-C++-standard.patch => 0014-fallback-to-2011-C++-standard.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{ => mipsarchn32}/0001-fix-compiling-failure-on-mips64-n32-bsp.patch (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0006-support-musl.patch => musl/0001-support-musl.patch} (100%)
+ rename meta-oe/recipes-extended/mozjs/mozjs/{0001-js-Fix-build-with-musl.patch => musl/0002-js-Fix-build-with-musl.patch} (100%)
+ rename meta-oe/recipes-support/poppler/{poppler_0.84.0.bb => poppler_0.85.0.bb} (93%)
+ rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.3.4.bb => xfce4-whiskermenu-plugin_2.3.5.bb} (66%)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.8.10.bb => thunar_1.8.12.bb} (84%)
 
 -- 
-Alex Kiernan
+2.21.0
+
 
