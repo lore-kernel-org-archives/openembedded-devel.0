@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
-	[209.85.128.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C53A60A89
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+	[209.85.128.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 81DD960C18
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Feb 2020 16:37:26 +0000 (UTC)
-Received: by mail-wm1-f65.google.com with SMTP id t14so12165605wmi.5
+	Sat,  1 Feb 2020 16:37:27 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id g1so11305203wmh.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Feb 2020 08:37:28 -0800 (PST)
+	Sat, 01 Feb 2020 08:37:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=SY6McZ7o8eOx61XWbqLGmcmqJfo1oiCYO4nRxq56Qj4=;
-	b=FzX8g1Va2odQXlKWjdW3Z3l3NZEjQ4PmOtgHzQT1BNrur+sIUkvGBZNrQGFmi5QphX
-	r9baSdcPlEOBRtXJCOKwWFXIiwPFBpohJALp0QiUcWXrCzQRX9/lxRzXC8f+ZWlxvs/d
-	IFJLpUplHwxDRTQMSm2U1JYh6o3chRVTKcq4++FvamVKKzESGOy8csWKyQU7Bez/jL1q
-	YI3GFjHmLcDA2C2Xe0qKA+ut9wMj56DxGdn5f+FKzfelvd5yKvyoiQbOp9KlLR1UaIpG
-	NoQsV5qtPr20MuhUBG2SRruHZVZMdCjhzS5opzSgnLFOoH8ZU6Wl5CvlrsszEJ2MfvCT
-	cuSw==
+	bh=3bXPKKIMahrm83jMGuWSvV6DxYAkJZRqdYvwhD+POAY=;
+	b=vR8/CfzpQaths/9P7ZY5hVqEuqE0eustgIwAkYfsVl9HSZ1jz1pMVN2N1PfUpPybNo
+	uboxB/yox1bJM+sepYHjCUx59xNJsLCDohVPnHokvJKz/IWH4xKpe7StY77JRc93fKrj
+	bVnyl+bapKDTmuSN37Pt6kXIf1Dxq5xW+YkSOO93mcN4P8vhlKAZJPi6Pao7V6m2szVt
+	Ps+Kwbvx1SiuzM/XsuZkOlYyY1leiya1TuvjYdwps49My+TNGo+8XS8+/EYDVL24w4UL
+	D1mN7KFpyyBanvnwsdq1Fg7HDlJpVwO0yAvBK+b5EuNMSdESyntQG7rH4Lvj1yXhq4pK
+	pmYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=SY6McZ7o8eOx61XWbqLGmcmqJfo1oiCYO4nRxq56Qj4=;
-	b=Xea2aPsGVJymxERzT93U+zHSuT6aGcAeN2qB4ht21bgEBdFpKsOwMAt7zpkfRfjsQg
-	PlH35IvnjorKcB0FCCiabQlj7q0HBTk992T4iNZsoTwdmzmjgc2wSkIfFqhuvHKUnoJb
-	4Ou8dbJTALR+JWxLLog5G45HbLA3AFZUoyHk5p+wc7MYwYKCdna/IAm/Odd6zp6JWiMg
-	19JRjejVYQYrpia2Qof1skyBZtgE9B3KDBmQSRSW3MpG3IpK+EIrEDLVvnIqAGMtrzVI
-	UEbgjRpe2hLCq8VgHpZWhLrPqD352o5s9bZpgaa5gVLTR1HyP6K7g9Q0/6YEsHOacKYZ
-	MOag==
-X-Gm-Message-State: APjAAAUbhG/+G9GvM5Hi3sTWA4YhEyobPj3Boq5p6DypWk8JwxygaRMi
-	NstDDysAbhydjoO+41ZcniY3jjM3
-X-Google-Smtp-Source: APXvYqznlseWpkPBgbhk5zEgm+UgWlolo4BmRjzOAdnpv76KVsZCgm3w0RZNPTjiKow6+lwXK3hadg==
-X-Received: by 2002:a05:600c:20c6:: with SMTP id
-	y6mr18873318wmm.95.1580575046523; 
-	Sat, 01 Feb 2020 08:37:26 -0800 (PST)
+	bh=3bXPKKIMahrm83jMGuWSvV6DxYAkJZRqdYvwhD+POAY=;
+	b=YZTGt/4Rc3BMkr2QrR2xg78cayo66Xj34Bj4azA/F6u32DXQjpGXiWFsJaPh6TMFhi
+	Y7I/mc5mhWNE4mQo+WbKwcD5Hh9trNe8SAKHi5cWGNWwEbkH0b9l0ZYh42NTGxXkHuux
+	IriOmNcYV/Mfqvh11Zgjk0y9WJGfKx5MD08DcDaNnDjwyvMt99H61AS4dA/pRdOP0O+n
+	/49EJYe/lsmMnBSQN1qUtFbxzI12zMK8mP4LTl9GcGX00WBs7CHD1bfSZSKYdnJgpyrG
+	O525wnSNG2Qe+f7SB7ynWpmo11oemoI2BgiAv6qthMZ+SzsP92095fomtAmejbpqt5hQ
+	UbNg==
+X-Gm-Message-State: APjAAAVl+/hEnVqdQ4UdWUxYeKF0bJVhV4y1cXlOG4Gyn18pw3vP9d3Y
+	kuHSeVaiMCOIizqX33EMloZ4zTzm
+X-Google-Smtp-Source: APXvYqxYrRBEEuINSwNdMycIADCjxrOQzDvak9GLosV5+va1+Wb/J50IAu1E8MxEqlvHVnadNdlqsg==
+X-Received: by 2002:a05:600c:299:: with SMTP id
+	25mr9854506wmk.68.1580575048236; 
+	Sat, 01 Feb 2020 08:37:28 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F01CE208F5D55732A5FC539.dip0.t-ipconnect.de.
 	[2003:f0:7f01:ce20:8f5d:5573:2a5f:c539])
-	by smtp.gmail.com with ESMTPSA id s1sm8594117wro.66.2020.02.01.08.37.25
+	by smtp.gmail.com with ESMTPSA id s1sm8594117wro.66.2020.02.01.08.37.27
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 01 Feb 2020 08:37:26 -0800 (PST)
+	Sat, 01 Feb 2020 08:37:27 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Feb 2020 17:37:01 +0100
-Message-Id: <20200201163703.4264-3-schnitzeltony@gmail.com>
+Date: Sat,  1 Feb 2020 17:37:02 +0100
+Message-Id: <20200201163703.4264-4-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20200201163703.4264-1-schnitzeltony@gmail.com>
 References: <20200201163703.4264-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/4] poppler: upgrade 0.84.0 -> 0.84.0
+Subject: [PATCH 3/4] xfce4-whiskermenu-plugin: upgrade 2.3.4 -> 2.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,55 +62,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2020 16:37:27 -0000
+X-List-Received-Date: Sat, 01 Feb 2020 16:37:28 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release 0.85.0:
-core:
- * Fix case unsensitive search for Deseret and Osage. Issue #853
- * Fix crash in unicodeToAscii7
- * CairoOutputDev: make initialisation thread-safe
- * Fix crash on broken files. Issues #869, #870
- * Internal code improvements
-
-qt5:
- * Fix FormField::name encoding
- * Accept UTF-16 uiNames for form fields
- * Fix search for "complex" characters
- * Allow to load document from QIODevice
-
-utils:
- * pdftoppm/pdftocairo: Fix -e/-o printing the wrong pages. Issue #873
- * pdftohtml: Fix issue with the font size sometimes being huge
-
-glib:
- * make the frontend initialization thread safe.
+Release notes for 2.3.5
+=======================
+- Fix saving unchanged plugin title. (bug #15403)
+- Fix sidebar scrollbar covering buttons. (bug #14730)
+- Fix categories remaining scrolled when hidden.
+- Fix incorrect alignment of commands next to search.
+- Fix incorrect fallback value for menu opacity.
+- Fix incorrect check when setting command.
+- Update documentation URL. (bug #16183)
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../poppler/{poppler_0.84.0.bb => poppler_0.85.0.bb}          | 4 ++--
+ ...menu-plugin_2.3.4.bb => xfce4-whiskermenu-plugin_2.3.5.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/poppler/{poppler_0.84.0.bb => poppler_0.85.0.bb} (93%)
+ rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.3.4.bb => xfce4-whiskermenu-plugin_2.3.5.bb} (66%)
 
-diff --git a/meta-oe/recipes-support/poppler/poppler_0.84.0.bb b/meta-oe/recipes-support/poppler/poppler_0.85.0.bb
-similarity index 93%
-rename from meta-oe/recipes-support/poppler/poppler_0.84.0.bb
-rename to meta-oe/recipes-support/poppler/poppler_0.85.0.bb
-index 5153868b6..857b67ff9 100644
---- a/meta-oe/recipes-support/poppler/poppler_0.84.0.bb
-+++ b/meta-oe/recipes-support/poppler/poppler_0.85.0.bb
-@@ -7,8 +7,8 @@ SRC_URI = "http://poppler.freedesktop.org/${BP}.tar.xz \
-            file://0001-Do-not-overwrite-all-our-build-flags.patch \
-            file://basename-include.patch \
-            "
--SRC_URI[md5sum] = "e14a8aca8809908ad4364c32c17bcb92"
--SRC_URI[sha256sum] = "c7a130da743b38a548f7a21fe5940506fb1949f4ebdd3209f0e5b302fa139731"
-+SRC_URI[md5sum] = "5315084523a4d73e9514f51eef78a332"
-+SRC_URI[sha256sum] = "2bc875eb323002ae6b287e09980473518e2b2ed6b5b7d2e1089e36a6cd00d94b"
+diff --git a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.3.4.bb b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.3.5.bb
+similarity index 66%
+rename from meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.3.4.bb
+rename to meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.3.5.bb
+index 595e3c815..75b5a319a 100644
+--- a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.3.4.bb
++++ b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.3.5.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
- DEPENDS = "fontconfig zlib cairo lcms glib-2.0"
+ inherit xfce-panel-plugin cmake
  
+-SRC_URI[md5sum] = "ee9e378fae78b230a23b241cf727c84b"
+-SRC_URI[sha256sum] = "84d3de35695a023aab181f7a9b75f59029eb3b07c3e47a5e11e8bd79db62570e"
++SRC_URI[md5sum] = "b5242d7922fa4253cc99c253efcff7cf"
++SRC_URI[sha256sum] = "8f7134f4c1b5ff5290048c5b96b130e1238a286002cbe35255c2cd7d5a1ab6b4"
+ 
+ RRECOMMENDS_${PN} += "menulibre"
 -- 
 2.21.0
 
