@@ -1,47 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 35F1B601EB
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8550860BDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Feb 2020 17:25:59 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id e25so8033265qtr.13
+	Sat,  1 Feb 2020 17:28:51 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id n21so11928446ioo.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Feb 2020 09:26:00 -0800 (PST)
+	Sat, 01 Feb 2020 09:28:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=+i9p5u+8TRSQnUuaWlvtMergN634fobALuqN4QlhGYI=;
-	b=vfRZzIwcsjZQtihrmikHnVeJVmW3riITAuAWC2zR2Lv3aRzhs3Vkal9DEG0hL/SDDF
-	CJpJVZJ76Ehc7aOtgx2D170iHi/MIG06WGMAR5BrPYowe6QoZoWXD/5iVx888NS/Z9Eg
-	fpgSHSv0prMIydJqAWMbts+l+Le/xcHiDcXQSuMQDRAPuVySvhNLX8lHerZtpv4kZb0N
-	dKTFoEw5vrHZrgXqNhHI5Qmui+ZIFc2qJ3razPqeIG4Ko6s2XR+SOSB+Xy/6tkUZnkOl
-	Vnr2L0knp5AAAL28OXByymsyo731RlGY8vJ8ACqER1a8XIICjVQdDeExq55j8+VHHE18
-	1t0Q==
+	bh=OZJigvB9j8j+MgnDGFJe2w0JHMRq/tE08KlzMtZ2Z3A=;
+	b=RsrnMFuey/tbcFjl6QG/z3CE4m7xhzjY+gZIomJFRbn7Pk2iCENOaVoCPf/0rpJ3+h
+	5fAXB2Z2N7pvVgVocw/n5/r/vDmxZK0QFuAFipPN/n4MMB7ZGna36mBZ55Kvt0ShbVOX
+	fuBQAoTAUV0Ta7Wy3qyDoT5CF1XyO+MVWAtx25mlj8uk0Mv6crWHuRgsda5x4Pj3WsjI
+	WQ8h5Atlh/db7cZvKfkcbijwuI1dCuT6yPzRDXWJLdhpqYgTQE+CeWvZwJu7BPk6eBIp
+	4rvza9mc4PsL8nPNbW6Rj8MkQn6vbw3gYs1SvdF7z6VbWarDOPSKpoFM8Ca8m+4s3RvO
+	6ewQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=+i9p5u+8TRSQnUuaWlvtMergN634fobALuqN4QlhGYI=;
-	b=ioBoZi2s6XibRObmW60wNIkblydbbdu4SQ0WMNDcfqf4VRRlToTF3h3xpTlMvRlTu5
-	ih/ocPemcinnwIlqIMvoeHL6g89zh1jMPreBWpXqJuvKZi/hbRrOyAO7P3rM+DnO8w7t
-	Dxi7lLyfIMncL9bVRjhzwI018w0/qCoB1/bJ6W0ahTTveOyLnyaSn05HZvGtCGzaY8R/
-	kN+ETQyUWYAOCSi2r6OjjL84VjS+EaMSi8omEWuf4XHuZU68nS7wkBUdMRA1wCXXw2VW
-	FrXbJMu7VCfATUdQfyFYGhTsOI+57CCIlU1ScYutkeYxdozxcB9WTMlpN3IywqZnCMNm
-	j0hw==
-X-Gm-Message-State: APjAAAXrVlWbipmJJW36GBVbY0blb+GsTWbvvyG7Uc1+mBvtpbNootii
-	3SdHIsqsOIsBIb/VnvagwCklPwMxXRALWlZlE/o=
-X-Google-Smtp-Source: APXvYqyvLbFeW5m/L9QPrAEyDud78XE937f3e/4LL5QeucJvVQ0NMRySralE165OY7kBv77SoJZ6UW2wS2IwudmKfpA=
-X-Received: by 2002:ac8:145:: with SMTP id f5mr16119722qtg.194.1580577959886; 
-	Sat, 01 Feb 2020 09:25:59 -0800 (PST)
+	bh=OZJigvB9j8j+MgnDGFJe2w0JHMRq/tE08KlzMtZ2Z3A=;
+	b=XSe+q7nusoOnWOrzMn2/1rMrm7xEBxljZSdNPOTNvzRK3yR3a5b3a8U/OCjL8X5ej1
+	vFqXXCWysZuB16oXW5Lo37s27TIwT9rREHhCCH3w6ZUCLFJYcp1n83elR5WLqWGmY/NW
+	FB4QtbvKm7rWdqoEPf0FcdhWD/Uvw10rLeIKFsJ9YeUwcKqYIvbVXK1obbr1tCTmUISr
+	LfXjhRsYU1DiGsa4h+ee9BhXkmsHx2VanVDS39Ehe7wLLdLI+NVt6COAZHDhUN68lE3D
+	aCDqSCKeJN5qPxluZnlWMGZ21ZCFo8O2KismVW3Fnh0OLTpCniPmYTGlBmOisMH6Swjy
+	oN3Q==
+X-Gm-Message-State: APjAAAUOCSMo9+9NigBkQ5YGAizfs8syo/3m3GT4cYTpOa6rrkU86hPr
+	BVpe44IxCyAgbrT5owe8N6viMh/FdAXZnXmv96c=
+X-Google-Smtp-Source: APXvYqygXxxUPJ8cYY17t2VlEwycjLIHMGzIO4deO/o+9ArCrPB+stG4Iv90lbZnQOaODPFC1pn2KFrwkuUj7NhX3ag=
+X-Received: by 2002:a6b:b206:: with SMTP id b6mr5957199iof.299.1580578132464; 
+	Sat, 01 Feb 2020 09:28:52 -0800 (PST)
 MIME-Version: 1.0
 References: <20200201163703.4264-1-schnitzeltony@gmail.com>
 	<20200201163703.4264-3-schnitzeltony@gmail.com>
 	<11ab5995-8055-2b57-caa9-93cabab79be7@windriver.com>
-In-Reply-To: <11ab5995-8055-2b57-caa9-93cabab79be7@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 1 Feb 2020 09:25:33 -0800
-Message-ID: <CAMKF1sodecN8LizT+VqpEECVTDd3JvpaX_LPdx4uMVfa_O68pw@mail.gmail.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
+	<CAMKF1sodecN8LizT+VqpEECVTDd3JvpaX_LPdx4uMVfa_O68pw@mail.gmail.com>
+In-Reply-To: <CAMKF1sodecN8LizT+VqpEECVTDd3JvpaX_LPdx4uMVfa_O68pw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Sat, 1 Feb 2020 18:28:40 +0100
+Message-ID: <CALbNGRTBmuD+m9gMrKv442L3vqu9N9pDxZxYDLA4ScGT77Neow@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 2/4] poppler: upgrade 0.84.0 -> 0.84.0
@@ -57,86 +58,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Feb 2020 17:25:59 -0000
+X-List-Received-Date: Sat, 01 Feb 2020 17:28:51 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-I have fixed it already locally.
-
-On Sat, Feb 1, 2020 at 9:23 AM Randy MacLeod
-<randy.macleod@windriver.com> wrote:
+On Sat, Feb 1, 2020 at 6:26 PM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Typo:
+> I have fixed it already locally.
+Thanks
 >
-> Re: [oe] [PATCH 2/4] poppler: upgrade 0.84.0 -> 0.84.0
-> should be:
-> Re: [oe] [PATCH 2/4] poppler: upgrade 0.84.0 -> 0.85.0
->
-> Thanks,
-> ../Randy
->
->
-> On 2/1/20 11:37 AM, Andreas M=C3=BCller wrote:
-> > Release 0.85.0:
-> > core:
-> >   * Fix case unsensitive search for Deseret and Osage. Issue #853
-> >   * Fix crash in unicodeToAscii7
-> >   * CairoOutputDev: make initialisation thread-safe
-> >   * Fix crash on broken files. Issues #869, #870
-> >   * Internal code improvements
+> On Sat, Feb 1, 2020 at 9:23 AM Randy MacLeod
+> <randy.macleod@windriver.com> wrote:
 > >
-> > qt5:
-> >   * Fix FormField::name encoding
-> >   * Accept UTF-16 uiNames for form fields
-> >   * Fix search for "complex" characters
-> >   * Allow to load document from QIODevice
+> > Typo:
 > >
-> > utils:
-> >   * pdftoppm/pdftocairo: Fix -e/-o printing the wrong pages. Issue #873
-> >   * pdftohtml: Fix issue with the font size sometimes being huge
+> > Re: [oe] [PATCH 2/4] poppler: upgrade 0.84.0 -> 0.84.0
+> > should be:
+> > Re: [oe] [PATCH 2/4] poppler: upgrade 0.84.0 -> 0.85.0
+LOL I have at least on like this in my series'
 > >
-> > glib:
-> >   * make the frontend initialization thread safe.
+> > Thanks,
+> > ../Randy
 > >
-> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> > ---
-> >   .../poppler/{poppler_0.84.0.bb =3D> poppler_0.85.0.bb}          | 4 +=
-+--
-> >   1 file changed, 2 insertions(+), 2 deletions(-)
-> >   rename meta-oe/recipes-support/poppler/{poppler_0.84.0.bb =3D> popple=
-r_0.85.0.bb} (93%)
 > >
-> > diff --git a/meta-oe/recipes-support/poppler/poppler_0.84.0.bb b/meta-o=
-e/recipes-support/poppler/poppler_0.85.0.bb
-> > similarity index 93%
-> > rename from meta-oe/recipes-support/poppler/poppler_0.84.0.bb
-> > rename to meta-oe/recipes-support/poppler/poppler_0.85.0.bb
-> > index 5153868b6..857b67ff9 100644
-> > --- a/meta-oe/recipes-support/poppler/poppler_0.84.0.bb
-> > +++ b/meta-oe/recipes-support/poppler/poppler_0.85.0.bb
-> > @@ -7,8 +7,8 @@ SRC_URI =3D "http://poppler.freedesktop.org/${BP}.tar.x=
-z \
-> >              file://0001-Do-not-overwrite-all-our-build-flags.patch \
-> >              file://basename-include.patch \
-> >              "
-> > -SRC_URI[md5sum] =3D "e14a8aca8809908ad4364c32c17bcb92"
-> > -SRC_URI[sha256sum] =3D "c7a130da743b38a548f7a21fe5940506fb1949f4ebdd32=
-09f0e5b302fa139731"
-> > +SRC_URI[md5sum] =3D "5315084523a4d73e9514f51eef78a332"
-> > +SRC_URI[sha256sum] =3D "2bc875eb323002ae6b287e09980473518e2b2ed6b5b7d2=
-e1089e36a6cd00d94b"
+> > On 2/1/20 11:37 AM, Andreas M=C3=BCller wrote:
+> > > Release 0.85.0:
+> > > core:
+> > >   * Fix case unsensitive search for Deseret and Osage. Issue #853
+> > >   * Fix crash in unicodeToAscii7
+> > >   * CairoOutputDev: make initialisation thread-safe
+> > >   * Fix crash on broken files. Issues #869, #870
+> > >   * Internal code improvements
+> > >
+> > > qt5:
+> > >   * Fix FormField::name encoding
+> > >   * Accept UTF-16 uiNames for form fields
+> > >   * Fix search for "complex" characters
+> > >   * Allow to load document from QIODevice
+> > >
+> > > utils:
+> > >   * pdftoppm/pdftocairo: Fix -e/-o printing the wrong pages. Issue #8=
+73
+> > >   * pdftohtml: Fix issue with the font size sometimes being huge
+> > >
+> > > glib:
+> > >   * make the frontend initialization thread safe.
+> > >
+> > > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > > ---
+> > >   .../poppler/{poppler_0.84.0.bb =3D> poppler_0.85.0.bb}          | 4=
+ ++--
+> > >   1 file changed, 2 insertions(+), 2 deletions(-)
+> > >   rename meta-oe/recipes-support/poppler/{poppler_0.84.0.bb =3D> popp=
+ler_0.85.0.bb} (93%)
+> > >
+> > > diff --git a/meta-oe/recipes-support/poppler/poppler_0.84.0.bb b/meta=
+-oe/recipes-support/poppler/poppler_0.85.0.bb
+> > > similarity index 93%
+> > > rename from meta-oe/recipes-support/poppler/poppler_0.84.0.bb
+> > > rename to meta-oe/recipes-support/poppler/poppler_0.85.0.bb
+> > > index 5153868b6..857b67ff9 100644
+> > > --- a/meta-oe/recipes-support/poppler/poppler_0.84.0.bb
+> > > +++ b/meta-oe/recipes-support/poppler/poppler_0.85.0.bb
+> > > @@ -7,8 +7,8 @@ SRC_URI =3D "http://poppler.freedesktop.org/${BP}.tar=
+.xz \
+> > >              file://0001-Do-not-overwrite-all-our-build-flags.patch \
+> > >              file://basename-include.patch \
+> > >              "
+> > > -SRC_URI[md5sum] =3D "e14a8aca8809908ad4364c32c17bcb92"
+> > > -SRC_URI[sha256sum] =3D "c7a130da743b38a548f7a21fe5940506fb1949f4ebdd=
+3209f0e5b302fa139731"
+> > > +SRC_URI[md5sum] =3D "5315084523a4d73e9514f51eef78a332"
+> > > +SRC_URI[sha256sum] =3D "2bc875eb323002ae6b287e09980473518e2b2ed6b5b7=
+d2e1089e36a6cd00d94b"
+> > >
+> > >   DEPENDS =3D "fontconfig zlib cairo lcms glib-2.0"
+> > >
 > >
-> >   DEPENDS =3D "fontconfig zlib cairo lcms glib-2.0"
 > >
->
->
-> --
-> # Randy MacLeod
-> # Wind River Linux
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > --
+> > # Randy MacLeod
+> > # Wind River Linux
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
