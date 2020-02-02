@@ -1,58 +1,56 @@
 Return-Path: <alistair@alistair23.me>
-X-Greylist: delayed 399 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 02 Feb 2020 02:11:06 UTC
 Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
 	[66.111.4.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 2957D60C06
+	by mail.openembedded.org (Postfix) with ESMTP id 9D1A860C06
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Feb 2020 02:11:06 +0000 (UTC)
+	Sun,  2 Feb 2020 02:17:39 +0000 (UTC)
 Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
-	by mailout.nyi.internal (Postfix) with ESMTP id D37FD21B81;
-	Sat,  1 Feb 2020 21:04:28 -0500 (EST)
+	by mailout.nyi.internal (Postfix) with ESMTP id B9231216DB;
+	Sat,  1 Feb 2020 21:17:40 -0500 (EST)
 Received: from mailfrontend2 ([10.202.2.163])
-	by compute7.internal (MEProxy); Sat, 01 Feb 2020 21:04:28 -0500
+	by compute7.internal (MEProxy); Sat, 01 Feb 2020 21:17:40 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
 	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=fm3; bh=GgqZ1zk0L7OBjp1IUxbdoZb5ej
-	O3tgMzLs8rW+zOxi0=; b=E0h8gXopG3P/TGzSJoU9N293X2u5BVv6LzouWFCy0Y
-	TQDVkJ/4SIrU4ydj7xwOaf3zekWvnCP+GVQcO/TPW3bEOrk+L0SBa9bvEc2h2tmP
-	gZFtcCRGWRfUlZq818K89FuP3VKc1nq9nk8XIW2QKKF2PFypDEHQu6cWhuuSuWcB
-	DEfmP5ziO9TlxBZA/Va5ctnt9C9KRy7swe9GKotHVHoYcqb61TkMXCKtK1fkGpo5
-	a/pqI57esPlNfhvWed4cI5S9Ry9btcCSOSdizGbNp6sVwc34RXoZMHfREr8666rn
-	IPiWAtSQODxk6a18Q7JtmKhjpIx8czs8VRenJCZOk/Wg==
+	:content-transfer-encoding; s=fm3; bh=OIidhKXPSvWKeX/7JbB4oYtGF5
+	HE8E1QAHDfQJidasA=; b=FJKVAqO9kIy7jmpgdXvVdli+F9nJGBqYpc0kDr3ByT
+	VpPpRhc1PlwSepRPYhUllKdYNfTrHS5YoXlDQdB1a0wWG8lO1O8r8Eww1vjCnf4v
+	/LPdIk1l5yQiX5PFV4cYo+6kZPEhfDgSPvHQi0xvukcymBZo50EKUrrWXbgP9Up6
+	17VtfNAy0DI9xd8QLpf6hTFOox2iHJmB0O9D9Ds+nJ+jbxfyIHC5jkWOKtESWNJF
+	p0oVjQUAxODzHFcEfxIb0pYvThqM0SCBb5EHh5vd34iXG+yn++1aTg1c5rQCtgcF
+	DiSqkVyYCaMlTF3b/vD/Y+OcJpexTWW7rVCvKaSQcjCg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
 	messagingengine.com; h=cc:content-transfer-encoding:date:from
 	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=GgqZ1zk0L7OBjp1IU
-	xbdoZb5ejO3tgMzLs8rW+zOxi0=; b=BE5HH6Oyixoc7p0WbCmJo1+onD9Y8WXAY
-	M8VDGRhIDaGPV3eZgA47AGNJm34F8byn41c3ah3VBWJ/5DMbiihvT9JwQvlOWTaG
-	QauMbvfgdhzLNJhNQhgjfBqgRw2oQUk6DatVHsys1nSUL93O9iL9nF1/QnVqYVAr
-	j9g6xLSQIsPsGsSWb8jzyE59mm2vncGOg15YyaiQmHoUdzlJCtCDer2WN6NCfBe1
-	GZ2/ZqtwZ9VH3HLupmsUKa478STQihe9XWHOcd6WxJv2lhK9VJ0wIR1emPQbTICC
-	/aHhk8xDIM/fnVDyzbY8roF4pgiReVHsILv79yjZu8iHv/fJHPEHA==
-X-ME-Sender: <xms:LC42Xnr3-cXOFyRj34P4tRw3VsHCFdtY8wcZAqh-ClnLabvXFgbjLQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrgeefgdegudcutefuodetggdotefrodftvf
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=OIidhKXPSvWKeX/7J
+	bB4oYtGF5HE8E1QAHDfQJidasA=; b=lnc8L4sUcXYKjntS/QYd3CCu09frKCri7
+	3D4QpderxVAHvzIzapBPLU01drvsJQgjlKb4vyQbXewK/k0TvmNGl01vWPruWrmK
+	oupfx2j2RdaZXtlVwnJtQBmFTtKoen5j+Ashlp+qoQvVO6pC7ax6G7ymsa/E1agP
+	gxkPHxABpXK+BY/lz9DRGcceed11e4CAp8B0GFWe9qw2KjQXXcMiDBSO8tv/yIwp
+	ycxLmS3hmMRWSUWV93X1IN8NCp7sffULivnxZk81gvH24xtRjYKZD64j8AvZ6x9q
+	jRn9rXRr9AN+DQSs8ihQHI+oxoL6gaCOMF6LjN/hkkDUgQoTY62GA==
+X-ME-Sender: <xms:RDE2Xml6mngHPGxlkK_8NcvxisubliLFCcfef0EaK0tygqt_lfW_cQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrgeefgdeggecutefuodetggdotefrodftvf
 	curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
 	uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
 	dtnecuhfhrohhmpeetlhhishhtrghirhcuhfhrrghntghishcuoegrlhhishhtrghirhes
 	rghlihhsthgrihhrvdefrdhmvgeqnecukfhppeejfedrleefrdekgedrvddtkeenucevlh
 	hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrlhhishhtrghi
 	rhesrghlihhsthgrihhrvdefrdhmvg
-X-ME-Proxy: <xmx:LC42XuB6HhGSWuPmX2xQtaFML05LE96uMdgd0rAPLA-1VqrZ2yz4sw>
-	<xmx:LC42Xooim3XMuxcEe_uFf7_mF1PV4De6dujgEXVyE7tdQaus8_J4Ng>
-	<xmx:LC42XpDFgn65-o7SFUFgNjI3leEaKiFe69D8tpYacbOfpEaUjb5mPA>
-	<xmx:LC42XhSk0OBcMRkOiYuvnKjDt9_jw9c8Mk9lipsMGn1OhcUXFc8NHw>
+X-ME-Proxy: <xmx:RDE2Xj0UIONd0C3KFK7x4fmyNXDZCnhw0CbwGMKxlCZqfBk7quuz7A>
+	<xmx:RDE2XiRiXElJXKswUjrE4haDKkkM5sjglgtdTkYWxWOuwMQLDegbdg>
+	<xmx:RDE2XltqjBUq-9yCejZyfZgT3L9qn2HII7E7ywSXD7tNf0JcBLhvJg>
+	<xmx:RDE2Xoj4msNxu3sy9rk0sMl7mXYYZxU9pS80H9BC3_v4immbn0GMwg>
 Received: from alistair-xps-14z.alistair23.me
 	(c-73-93-84-208.hsd1.ca.comcast.net [73.93.84.208])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 2E6293060BB4;
-	Sat,  1 Feb 2020 21:04:28 -0500 (EST)
+	by mail.messagingengine.com (Postfix) with ESMTPA id 08BF83060840;
+	Sat,  1 Feb 2020 21:17:39 -0500 (EST)
 From: Alistair Francis <alistair@alistair23.me>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Feb 2020 18:04:26 -0800
-Message-Id: <20200202020426.23802-1-alistair@alistair23.me>
+Date: Sat,  1 Feb 2020 18:17:38 -0800
+Message-Id: <20200202021738.7440-1-alistair@alistair23.me>
 X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-Subject: [PATCH] gpsd: Only require and build for Python3
+Subject: [PATCH v2] gpsd: Only require and build for Python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,16 +63,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Feb 2020 02:11:07 -0000
+X-List-Received-Date: Sun, 02 Feb 2020 02:17:39 -0000
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Alistair Francis <alistair@alistair23.me>
 ---
- meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+v2:
+ - Actually rename everything
+
+ meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 24 ++++++++++----------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
 diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-index dbbc7140f..5e91ec5d7 100644
+index dbbc7140f..f74ebda5f 100644
 --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
 +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
 @@ -2,7 +2,7 @@ SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
@@ -100,15 +101,19 @@ index dbbc7140f..5e91ec5d7 100644
  # Python files are required for gps/fake, required for gpsfake.
  FILES_gps-utils = "${bindir}/* ${libdir}/gps/*.py ${libdir}/gps/*.so"
 -RDEPENDS_gps-utils = "python-pygps"
-+RDEPENDS_gps-utils = "python3-pygps"
- 
- SUMMARY_python-pygps = "Python bindings to gpsd"
- FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py ${libdir}/*.egg-info"
- RDEPENDS_python-pygps = " \
+-
+-SUMMARY_python-pygps = "Python bindings to gpsd"
+-FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py ${libdir}/*.egg-info"
+-RDEPENDS_python-pygps = " \
 -    python-core \
 -    python-io \
 -    python-threading \
 -    python-terminal \
++RDEPENDS_gps-utils = "python3-pygps"
++
++SUMMARY_python3-pygps = "Python bindings to gpsd"
++FILES_python3-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py ${libdir}/*.egg-info"
++RDEPENDS_python3-pygps = " \
 +    python3-core \
 +    python3-io \
 +    python3-threading \
