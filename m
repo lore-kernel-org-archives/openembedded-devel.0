@@ -1,56 +1,52 @@
-Return-Path: <alistair@alistair23.me>
-Received: from out1-smtp.messagingengine.com (out1-smtp.messagingengine.com
-	[66.111.4.25])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D1A860C06
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id C6D5C60DB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Feb 2020 02:17:39 +0000 (UTC)
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
-	by mailout.nyi.internal (Postfix) with ESMTP id B9231216DB;
-	Sat,  1 Feb 2020 21:17:40 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-	by compute7.internal (MEProxy); Sat, 01 Feb 2020 21:17:40 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+	Sun,  2 Feb 2020 15:16:41 +0000 (UTC)
+Received: by mail-wm1-f51.google.com with SMTP id b17so14144128wmb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 02 Feb 2020 07:16:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=fm3; bh=OIidhKXPSvWKeX/7JbB4oYtGF5
-	HE8E1QAHDfQJidasA=; b=FJKVAqO9kIy7jmpgdXvVdli+F9nJGBqYpc0kDr3ByT
-	VpPpRhc1PlwSepRPYhUllKdYNfTrHS5YoXlDQdB1a0wWG8lO1O8r8Eww1vjCnf4v
-	/LPdIk1l5yQiX5PFV4cYo+6kZPEhfDgSPvHQi0xvukcymBZo50EKUrrWXbgP9Up6
-	17VtfNAy0DI9xd8QLpf6hTFOox2iHJmB0O9D9Ds+nJ+jbxfyIHC5jkWOKtESWNJF
-	p0oVjQUAxODzHFcEfxIb0pYvThqM0SCBb5EHh5vd34iXG+yn++1aTg1c5rQCtgcF
-	DiSqkVyYCaMlTF3b/vD/Y+OcJpexTWW7rVCvKaSQcjCg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=OIidhKXPSvWKeX/7J
-	bB4oYtGF5HE8E1QAHDfQJidasA=; b=lnc8L4sUcXYKjntS/QYd3CCu09frKCri7
-	3D4QpderxVAHvzIzapBPLU01drvsJQgjlKb4vyQbXewK/k0TvmNGl01vWPruWrmK
-	oupfx2j2RdaZXtlVwnJtQBmFTtKoen5j+Ashlp+qoQvVO6pC7ax6G7ymsa/E1agP
-	gxkPHxABpXK+BY/lz9DRGcceed11e4CAp8B0GFWe9qw2KjQXXcMiDBSO8tv/yIwp
-	ycxLmS3hmMRWSUWV93X1IN8NCp7sffULivnxZk81gvH24xtRjYKZD64j8AvZ6x9q
-	jRn9rXRr9AN+DQSs8ihQHI+oxoL6gaCOMF6LjN/hkkDUgQoTY62GA==
-X-ME-Sender: <xms:RDE2Xml6mngHPGxlkK_8NcvxisubliLFCcfef0EaK0tygqt_lfW_cQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrgeefgdeggecutefuodetggdotefrodftvf
-	curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-	uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
-	dtnecuhfhrohhmpeetlhhishhtrghirhcuhfhrrghntghishcuoegrlhhishhtrghirhes
-	rghlihhsthgrihhrvdefrdhmvgeqnecukfhppeejfedrleefrdekgedrvddtkeenucevlh
-	hushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpegrlhhishhtrghi
-	rhesrghlihhsthgrihhrvdefrdhmvg
-X-ME-Proxy: <xmx:RDE2Xj0UIONd0C3KFK7x4fmyNXDZCnhw0CbwGMKxlCZqfBk7quuz7A>
-	<xmx:RDE2XiRiXElJXKswUjrE4haDKkkM5sjglgtdTkYWxWOuwMQLDegbdg>
-	<xmx:RDE2XltqjBUq-9yCejZyfZgT3L9qn2HII7E7ywSXD7tNf0JcBLhvJg>
-	<xmx:RDE2Xoj4msNxu3sy9rk0sMl7mXYYZxU9pS80H9BC3_v4immbn0GMwg>
-Received: from alistair-xps-14z.alistair23.me
-	(c-73-93-84-208.hsd1.ca.comcast.net [73.93.84.208])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 08BF83060840;
-	Sat,  1 Feb 2020 21:17:39 -0500 (EST)
-From: Alistair Francis <alistair@alistair23.me>
+	:content-transfer-encoding;
+	bh=JIj6ECFpsyJyC8gfihsE/zEAguD6tLL2KkH5n95EnR8=;
+	b=g+FwyEMflH4bGB6cSczggM3i5tqkZSFvNwtI+NUZW3afvi7mYA72gSE3cpXeOk3BpC
+	BpNsPvjZZiZAKu9PLetEV+C4Q4yUmRar0TNlgYxPFzVolWXMAVn1R21fZLh78KYvM0AN
+	fq8gR2XpTGMoEFvubNVxDlqRgpkXF1x9fiMVbBxBdi9BP50Ua8/EkLxVp4XGxqoFiagz
+	ggV4BufYJplCFohadN0p4LO0IxrlcSCNrBMcEOykn78xxfMt6+e26AHV8oDf6s0KK5Xh
+	LQqA/dqeFHWPRKq/2AX+awbyXC/uGu2REYnxrsIWH0CnaNkYR8mFm6VrOO/33L7XsrJr
+	DwOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=JIj6ECFpsyJyC8gfihsE/zEAguD6tLL2KkH5n95EnR8=;
+	b=ARZJp1zXJ5BvQHUzsY41h81DqK6xJEEr/Ytgtk2MhnTrfN1ZP3iHL3zn6xZXih8Xx8
+	mxrlKVeSNZbdeIEnEQDCYnPzSekU3jk1XK1Nnyrb023j3k6s0r/lQPeBFacCr/ZODzFT
+	HjZEMSPBGOmFg6P/Ubzj0PD6xgtgDutE2RNuuEBX+2k4sRNVW4NolFmfJZp+JyvoDEzk
+	FI3CYdcPsn5fegMFUoRcm+mXsteL/uavK/MTiPv0WFBAkJVwk5MeDqYUqzdSxfwrwnJ1
+	tcVw/mQoEpG8uyYmq91tUbArIRzk0LvQjx8Y6CzZnilbRX90k3PxIy8Kh+O/TQDjcZFk
+	lxvg==
+X-Gm-Message-State: APjAAAVKSioC2Nc++fsKr79OCPemL6qGaezDcoAvIB/JvHQycPpsZ3gi
+	dksKVkBCEgCytU7s0LiKktQJpt0s
+X-Google-Smtp-Source: APXvYqyLh65EsfgWiFnAPuDG4uw0/+svh0XS7PFDkoVoZa5BveRltq3gRm6FtnHzMvvGwZ7A/wLk1w==
+X-Received: by 2002:a7b:cb8e:: with SMTP id m14mr24719046wmi.66.1580656601999; 
+	Sun, 02 Feb 2020 07:16:41 -0800 (PST)
+Received: from linuxdev2.toradex.int (31-10-206-124.static.upc.ch.
+	[31.10.206.124]) by smtp.gmail.com with ESMTPSA id
+	x10sm21681315wrp.58.2020.02.02.07.16.40
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 02 Feb 2020 07:16:41 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Feb 2020 18:17:38 -0800
-Message-Id: <20200202021738.7440-1-alistair@alistair23.me>
-X-Mailer: git-send-email 2.25.0
+Date: Sun,  2 Feb 2020 16:15:22 +0100
+Message-Id: <20200202151522.25732-1-max.krummenacher@toradex.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [PATCH v2] gpsd: Only require and build for Python3
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-oe][PATCH] openbox: use python 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,68 +59,179 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Feb 2020 02:17:39 -0000
+X-List-Received-Date: Sun, 02 Feb 2020 15:16:42 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Alistair Francis <alistair@alistair23.me>
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
-v2:
- - Actually rename everything
+ ...box-xdg-autostart-convert-to-python3.patch | 138 ++++++++++++++++++
+ .../recipes-graphics/openbox/openbox_3.6.1.bb |   3 +-
+ 2 files changed, 140 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/openbox/files/0001-openbox-xdg-autostart-convert-to-python3.patch
 
- meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 24 ++++++++++----------
- 1 file changed, 12 insertions(+), 12 deletions(-)
-
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-index dbbc7140f..f74ebda5f 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-@@ -2,7 +2,7 @@ SUMMARY = "A TCP/IP Daemon simplifying the communication with GPS devices"
- SECTION = "console/network"
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=01764c35ae34d9521944bb6ab312af53"
--DEPENDS = "dbus ncurses python python3 pps-tools"
-+DEPENDS = "dbus ncurses python3 pps-tools"
- PROVIDES = "virtual/gpsd"
- 
- SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-@@ -84,7 +84,7 @@ do_install_append() {
-     install -m 0644 ${S}/systemd/${BPN}.socket ${D}${systemd_unitdir}/system/${BPN}.socket
- }
- 
--PACKAGES =+ "libgps libgpsd python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
-+PACKAGES =+ "libgps libgpsd python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
- 
- RPROVIDES_${PN}-dbg += "python-pygps-dbg"
- 
-@@ -114,17 +114,17 @@ FILES_gpsd-gpsctl = "${bindir}/gpsctl"
- SUMMARY_gps-utils = "Utils used for simulating, monitoring,... a GPS"
- # Python files are required for gps/fake, required for gpsfake.
- FILES_gps-utils = "${bindir}/* ${libdir}/gps/*.py ${libdir}/gps/*.so"
--RDEPENDS_gps-utils = "python-pygps"
--
--SUMMARY_python-pygps = "Python bindings to gpsd"
--FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py ${libdir}/*.egg-info"
--RDEPENDS_python-pygps = " \
--    python-core \
--    python-io \
--    python-threading \
--    python-terminal \
-+RDEPENDS_gps-utils = "python3-pygps"
+diff --git a/meta-oe/recipes-graphics/openbox/files/0001-openbox-xdg-autostart-convert-to-python3.patch b/meta-oe/recipes-graphics/openbox/files/0001-openbox-xdg-autostart-convert-to-python3.patch
+new file mode 100644
+index 000000000..5ebeb0169
+--- /dev/null
++++ b/meta-oe/recipes-graphics/openbox/files/0001-openbox-xdg-autostart-convert-to-python3.patch
+@@ -0,0 +1,138 @@
++From b7de9cff2a9578dd92d191241c28437cd6bbb595 Mon Sep 17 00:00:00 2001
++From: Max Krummenacher <max.krummenacher@toradex.com>
++Date: Sun, 2 Feb 2020 14:39:21 +0000
++Subject: [PATCH] openbox-xdg-autostart: convert to python3
 +
-+SUMMARY_python3-pygps = "Python bindings to gpsd"
-+FILES_python3-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py ${libdir}/*.egg-info"
-+RDEPENDS_python3-pygps = " \
-+    python3-core \
-+    python3-io \
-+    python3-threading \
-+    python3-terminal \
-     gpsd \
--    python-json"
-+    python3-json"
++Upstream-Status: Pending
++
++Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
++---
++ data/autostart/openbox-xdg-autostart | 72 ++++++++++++++--------------
++ 1 file changed, 36 insertions(+), 36 deletions(-)
++
++diff --git a/data/autostart/openbox-xdg-autostart b/data/autostart/openbox-xdg-autostart
++index 04a17a1..52d763f 100755
++--- a/data/autostart/openbox-xdg-autostart
+++++ b/data/autostart/openbox-xdg-autostart
++@@ -1,4 +1,4 @@
++-#!/usr/bin/env python
+++#!/usr/bin/env python3
++ 
++ # openbox-xdg-autostart runs things based on the XDG autostart specification
++ # Copyright (C) 2008       Dana Jansens
++@@ -28,9 +28,9 @@ try:
++     from xdg.DesktopEntry import DesktopEntry
++     from xdg.Exceptions import ParsingError
++ except ImportError:
++-    print
++-    print >>sys.stderr, "ERROR:", ME, "requires PyXDG to be installed"
++-    print
+++    print()
+++    print("ERROR:", ME, "requires PyXDG to be installed", file=sys.stderr)
+++    print()
++     sys.exit(1)
++ 
++ def main(argv=sys.argv):
++@@ -51,7 +51,7 @@ def main(argv=sys.argv):
++             try:
++                 autofile = AutostartFile(path)
++             except ParsingError:
++-                print "Invalid .desktop file: " + path
+++                print("Invalid .desktop file: " + path)
++             else:
++                 if not autofile in files:
++                     files.append(autofile)
++@@ -99,9 +99,9 @@ class AutostartFile:
++ 
++     def _alert(self, str, info=False):
++         if info:
++-            print "\t ", str
+++            print("\t ", str)
++         else:
++-            print "\t*", str
+++            print("\t*", str)
++ 
++     def _showInEnvironment(self, envs, verbose=False):
++         default = not self.de.getOnlyShowIn()
++@@ -146,14 +146,14 @@ class AutostartFile:
++ 
++     def display(self, envs):
++         if self._shouldRun(envs):
++-            print "[*] " + self.de.getName()
+++            print("[*] " + self.de.getName())
++         else:
++-            print "[ ] " + self.de.getName()
+++            print("[ ] " + self.de.getName())
++         self._alert("File: " + self.path, info=True)
++         if self.de.getExec():
++             self._alert("Executes: " + self.de.getExec(), info=True)
++         self._shouldRun(envs, True)
++-        print
+++        print()
++ 
++     def run(self, envs):
++         here = os.getcwd()
++@@ -165,34 +165,34 @@ class AutostartFile:
++         os.chdir(here)
++ 
++ def show_help():
++-    print "Usage:", ME, "[OPTION]... [ENVIRONMENT]..."
++-    print
++-    print "This tool will run xdg autostart .desktop files"
++-    print
++-    print "OPTIONS"
++-    print "  --list        Show a list of the files which would be run"
++-    print "                Files which would be run are marked with an asterix"
++-    print "                symbol [*].  For files which would not be run,"
++-    print "                information is given for why they are excluded"
++-    print "  --help        Show this help and exit"
++-    print "  --version     Show version and copyright information"
++-    print
++-    print "ENVIRONMENT specifies a list of environments for which to run autostart"
++-    print "applications.  If none are specified, only applications which do not "
++-    print "limit themselves to certain environments will be run."
++-    print
++-    print "ENVIRONMENT can be one or more of:"
++-    print "  GNOME         Gnome Desktop"
++-    print "  KDE           KDE Desktop"
++-    print "  ROX           ROX Desktop"
++-    print "  XFCE          XFCE Desktop"
++-    print "  Old           Legacy systems"
++-    print
+++    print("Usage:", ME, "[OPTION]... [ENVIRONMENT]...")
+++    print()
+++    print("This tool will run xdg autostart .desktop files")
+++    print()
+++    print("OPTIONS")
+++    print("  --list        Show a list of the files which would be run")
+++    print("                Files which would be run are marked with an asterix")
+++    print("                symbol [*].  For files which would not be run,")
+++    print("                information is given for why they are excluded")
+++    print("  --help        Show this help and exit")
+++    print("  --version     Show version and copyright information")
+++    print()
+++    print("ENVIRONMENT specifies a list of environments for which to run autostart")
+++    print("applications.  If none are specified, only applications which do not ")
+++    print("limit themselves to certain environments will be run.")
+++    print()
+++    print("ENVIRONMENT can be one or more of:")
+++    print("  GNOME         Gnome Desktop")
+++    print("  KDE           KDE Desktop")
+++    print("  ROX           ROX Desktop")
+++    print("  XFCE          XFCE Desktop")
+++    print("  Old           Legacy systems")
+++    print()
++ 
++ def show_version():
++-    print ME, VERSION
++-    print "Copyright (c) 2008        Dana Jansens"
++-    print
+++    print(ME, VERSION)
+++    print("Copyright (c) 2008        Dana Jansens")
+++    print()
++ 
++ if __name__ == "__main__":
++         sys.exit(main())
++-- 
++2.20.1
++
+diff --git a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
+index 33f34e428..e269a264f 100644
+--- a/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
++++ b/meta-oe/recipes-graphics/openbox/openbox_3.6.1.bb
+@@ -7,6 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ SRC_URI = " \
+     http://icculus.org/openbox/releases/openbox-${PV}.tar.gz \
+     file://0001-Makefile.am-avoid-race-when-creating-autostart-direc.patch \
++    file://0001-openbox-xdg-autostart-convert-to-python3.patch \
+ "
  
- RPROVIDES_${PN} += "${PN}-systemd"
- RREPLACES_${PN} += "${PN}-systemd"
+ SRC_URI[md5sum] = "b72794996c6a3ad94634727b95f9d204"
+@@ -54,4 +55,4 @@ FILES_${PN}-gnome += " \
+ 
+ FILES_${PN}-config += "${sysconfdir}"
+ 
+-RDEPENDS_${PN} += "${PN}-core ${PN}-config ${PN}-theme-clearlooks python python-shell pyxdg"
++RDEPENDS_${PN} += "${PN}-core ${PN}-config ${PN}-theme-clearlooks python3 python3-shell pyxdg"
 -- 
-2.25.0
+2.20.1
 
 
