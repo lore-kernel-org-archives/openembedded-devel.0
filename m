@@ -1,26 +1,48 @@
-Return-Path: <Qi.Chen@windriver.com>
-X-Greylist: delayed 3573 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 04 Feb 2020 03:23:13 UTC
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D1C9B611D8
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-io1-f46.google.com (mail-io1-f46.google.com
+	[209.85.166.46])
+	by mail.openembedded.org (Postfix) with ESMTP id E2C3961197
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Feb 2020 03:23:13 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0142NLWe027094
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue,  4 Feb 2020 04:27:29 +0000 (UTC)
+Received: by mail-io1-f46.google.com with SMTP id s24so19408686iog.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 3 Feb 2020 18:23:31 -0800
-Received: from ala-lpggp7.wrs.com (147.11.105.171) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
-	Mon, 3 Feb 2020 18:23:10 -0800
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 3 Feb 2020 18:23:10 -0800
-Message-ID: <20200204022310.58916-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.21.0
+	Mon, 03 Feb 2020 20:27:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=i7bN1VcR3uObFbZbOS8GkjiuqH8QNZ9d8C5Jh00gqig=;
+	b=TkSIhCrSXqgaE38l7vs2PEDQBev2fh76+FQpx4c8BcUcyeibQbpI1Em/9VYf9V/qhz
+	822AwRUL7Xp4xyqAKN+M4aQuNMPoDhcimNM8SFm6d9qxdOrcakFJHFe/nJrlKaTIe1Ys
+	90Bdmny9UEPUwof9wEJ2cBQyPUmhAMpAKsKJlnT7/MS/CeeE/Fu0vQWlxTInEA2zyUWz
+	02cIuSMA3cBOUyO4Rj0HnQ24LraqE66uma7Hd1UdrQz5sJdut24khhlVy2yI+AgWSzqB
+	R6sVyHrQaxFgul00x+WbsG9ZkwIZHrWMn+9uJhYXfy83b2poBvConFaLA+u37jwLhQZt
+	uEuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=i7bN1VcR3uObFbZbOS8GkjiuqH8QNZ9d8C5Jh00gqig=;
+	b=G1reHNIcd0bWlM1LfYR3yyQ1s4s8W5dzrkyHNWFCn6asg+C8/Bok1Y6DuUAX9uMTCE
+	dw4DK5FnrZpYr6OQ5D67ySD0Esz8Fo1kASNv7QYSPxNCVUyhwQ+foBPZBCT4lcjdUWJd
+	IGiTDVViOY0ZBxGt4Zc2GJELbZNLNc9DRoo9jSIagE6MPjdMWjXWV67yYk35fHBLZU8Z
+	S4DB4JngM7JwxQGMHB76IoXImKRJVsZqvby6Hi//j9sF5lzxoN+E6m3tleuDU2d1WtqZ
+	7oTmvDEFTeOGN2L4j1YN8BgGlKFTZwXodcNqTKIE6w0vc/MVDBjmpIF6HKEPAFZnDdMK
+	3/OA==
+X-Gm-Message-State: APjAAAXvL/5OjUJdOB8lJHOfQLLKnXh5pM8eFczmoRlNKWCVQl6Hf+9Y
+	z7dm5SdsoqY4WxIvwVN1za5CDGboCQpPt6C4SmY=
+X-Google-Smtp-Source: APXvYqzMntRiKrnWwdoDwxfAMEMGUpeu20rxBmqqEzBStHcg0KuC99UHo/UV6lOEauMnPEeLbFWhgd9tM/p+xyJWNnc=
+X-Received: by 2002:a6b:700e:: with SMTP id l14mr23298282ioc.170.1580790450827;
+	Mon, 03 Feb 2020 20:27:30 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] phoronix-test-suite: change python to python3-core in RDEPENDS
+References: <20200203193635.2253-1-raj.khem@gmail.com>
+In-Reply-To: <20200203193635.2253-1-raj.khem@gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 3 Feb 2020 20:27:19 -0800
+Message-ID: <CANx9H-DAha8kWN5pTQXqG9pWh2BT=v1zRG=icmHUDj08L8JG8A@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python2][PATCH] python-six: Update to 1.14.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,31 +55,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Feb 2020 03:23:13 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 04 Feb 2020 04:27:30 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-The source codes are actually using python3 instead of python.
+merged. thank you.
 
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
----
- .../phoronix-test-suite/phoronix-test-suite_9.2.1.bb            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Mon, Feb 3, 2020 at 11:36 AM Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_9.2.1.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_9.2.1.bb
-index 52b341b0e..6525b8ec0 100644
---- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_9.2.1.bb
-+++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_9.2.1.bb
-@@ -29,7 +29,7 @@ do_install() {
- SYSTEMD_AUTO_ENABLE = "disable"
- SYSTEMD_SERVICE_${PN} = "phoromatic-client.service phoromatic-server.service"
- 
--RDEPENDS_${PN} += "bash python php-cli util-linux-lscpu os-release lsb-release"
-+RDEPENDS_${PN} += "bash python3-core php-cli util-linux-lscpu os-release lsb-release"
- 
- FILES_${PN} += " \
-     ${datadir}/phoronix-test-suite \
--- 
-2.21.0
-
+> Have its own checksums so its not tightly coupled to versions from
+> oe-core
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes-devtools/python/python-six_1.13.0.bb | 2 --
+>  recipes-devtools/python/python-six_1.14.0.bb | 6 ++++++
+>  2 files changed, 6 insertions(+), 2 deletions(-)
+>  delete mode 100644 recipes-devtools/python/python-six_1.13.0.bb
+>  create mode 100644 recipes-devtools/python/python-six_1.14.0.bb
+>
+> diff --git a/recipes-devtools/python/python-six_1.13.0.bb
+> b/recipes-devtools/python/python-six_1.13.0.bb
+> deleted file mode 100644
+> index af26e83..0000000
+> --- a/recipes-devtools/python/python-six_1.13.0.bb
+> +++ /dev/null
+> @@ -1,2 +0,0 @@
+> -inherit pypi setuptools
+> -require recipes-devtools/python/python-six.inc
+> diff --git a/recipes-devtools/python/python-six_1.14.0.bb
+> b/recipes-devtools/python/python-six_1.14.0.bb
+> new file mode 100644
+> index 0000000..779883a
+> --- /dev/null
+> +++ b/recipes-devtools/python/python-six_1.14.0.bb
+> @@ -0,0 +1,6 @@
+> +inherit pypi setuptools
+> +require recipes-devtools/python/python-six.inc
+> +
+> +SRC_URI[md5sum] = "21674588a57e649d1a6d977ec3122140"
+> +SRC_URI[sha256sum] =
+> "236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a"
+> +
+> --
+> 2.25.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
