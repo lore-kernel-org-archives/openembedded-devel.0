@@ -1,39 +1,51 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 09F7F611B1
+Return-Path: <asmithakarun@gmail.com>
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 921966041D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Feb 2020 09:00:28 +0000 (UTC)
-Received: from webmail.kmu-office.ch (unknown [IPv6:2a02:418:6a02::a3])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 577865C36EB;
-	Tue,  4 Feb 2020 10:00:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1580806829;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	content-transfer-encoding:content-transfer-encoding:
-	in-reply-to:in-reply-to:references:references;
-	bh=0kbXGfHdP0QAI9zzGXahNldLyTC+DwGoFinqyN/ptaQ=;
-	b=MfgqnDD7kJvLjnjP5bGgCITlVcvgOFlZ/rlYt0HqvikQ6I2i+4f7Ff/4eLShHoccDowDry
-	722i5jGCu56kKgm82+jeseRufla0llUcGzO/2k9g6YjGUfUKLvTKw/JaJTqB4ows4pAZIp
-	nSip048B0GIj63g1w34q9q4stay0Q1U=
+	Tue,  4 Feb 2020 09:21:32 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id 2so9115332pfg.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 Feb 2020 01:21:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=W2DB0plxGNNxBQxz3YjgRYsoOweMyinr7vbCmGcPEHA=;
+	b=PFlXwnnHrKNWreDzjbM6rOKPN9GqZUpub08OH6osEulGj+f2ioJeVsP7xp7is59+v9
+	ygGerKaUjnGUJGwgoUArfz9kEPzHvEnc+MLcNNVX5012mrdg3x4sRsmQaQ7j8N/moJtm
+	BLZi0MdT0aGL6giegu9qYwXc/5h6+3lKTiyP8B85p9IM82xkkNfFGz57pROzl8Lg3h1+
+	Can3EWAidpxT/wzLYRLCAHeUhGOgRYeq6XvjB5aoKOcgsJSNpnOCELr18EACTrjnKA3Y
+	WCk2lQN90NJh/vOXYuiFvVXCQFoaMN7nDVf/zXZGQ/OH8xS4OEd9M3jcUBl8AyppspcP
+	fnOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=W2DB0plxGNNxBQxz3YjgRYsoOweMyinr7vbCmGcPEHA=;
+	b=gJRqtRlvbH/XEHg/65oKB/NNwGUBaeNNoFEmaJCuMVE0vqMjYv8TODSs2gN9yvjU//
+	jL+3mW5Cm3UlHvDAuD+1/NKeEwtCOFHh1PFNcXv9oIqut1nCSGd/16143OivI0TwdBTh
+	lRYl6a/iRVa4U4jA0BE8gjTmeea8yY7XF7/zfB1bEZ3wDJyXqVW8qB6dd83k8IBGiEBd
+	ANmIA5nh4ifeWGZJNUW6s9oLqbbYjM9tchz3N3y3pknC9g7ttuK4/Rub7CyWaYjmAfUd
+	ovYChWfLTIqhzFEofh7sSNBWaix+hKGdnxxpuDr4pNgK89tE8XU1fT0Q5g/h/loFtATl
+	pPSQ==
+X-Gm-Message-State: APjAAAXI43rUfPwD1qWFW00u6jnW5ixxWdwttqcYnbXW+CarAzROHxOM
+	Ry6hY68vpdrz8NXR8PK+yD061Kk+
+X-Google-Smtp-Source: APXvYqxDup8LFYy4dqm8gxrXpfTTy01sOQWABWjVWfZPoB0eQcFCLtrO2Nc/Vwj+LoFbeOku4iVJpg==
+X-Received: by 2002:a62:7883:: with SMTP id
+	t125mr30846813pfc.141.1580808093099; 
+	Tue, 04 Feb 2020 01:21:33 -0800 (PST)
+Received: from dhcp-9-199-73-82.in.ibm.com ([129.41.84.80])
+	by smtp.gmail.com with ESMTPSA id
+	w8sm22832391pfn.186.2020.02.04.01.21.31
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 04 Feb 2020 01:21:32 -0800 (PST)
+From: Asmitha Karunanithi <asmithakarun@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  4 Feb 2020 14:51:26 +0530
+Message-Id: <20200204092126.19209-1-asmithakarun@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Date: Tue, 04 Feb 2020 10:00:28 +0100
-From: Stefan Agner <stefan@agner.ch>
-To: Alex Kiernan <alex.kiernan@gmail.com>
-In-Reply-To: <CAO5Uq5T81etwQkVog0ibiGjmCS6zTHhLVeHRwa-2S+4TP5NWTw@mail.gmail.com>
-References: <CAO5Uq5TV_6f7PXF6Q_TE0ii-W9xG9xgrO8p8OP_vb48HW=DugQ@mail.gmail.com>
-	<CALbNGRSAYNsQkWMhNAfxVqnq4bYx2=mcqMxQpxvPampLFyKazA@mail.gmail.com>
-	<CAO5Uq5TPW+hePvbEmxgN6cFHx5zcNqM-k9m_zSOOReBrYqU=pA@mail.gmail.com>
-	<92e2dcc5-6107-e05f-87f4-161b8132266e@gmail.com>
-	<CAO5Uq5SQeNGN8FmQjPfv_CWpbrT_rMQCjETvvN7ZukkzPd=BLg@mail.gmail.com>
-	<daa2daafef264dc256af9d315d21a635@agner.ch>
-	<CAO5Uq5T81etwQkVog0ibiGjmCS6zTHhLVeHRwa-2S+4TP5NWTw@mail.gmail.com>
-User-Agent: Roundcube Webmail/1.4.1
-Message-ID: <8a912a9368356b5d22e6e740f02ccdaf@agner.ch>
-X-Sender: stefan@agner.ch
-Cc: Ming Liu <liu.ming50@gmail.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: systemd failing in master with Assertion clock_gettime(map_clock_id(clock_id), &ts) failed
+Subject: [meta-oe][PATCH] Library to aid multi-part form data parsing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,106 +58,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Feb 2020 09:00:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 04 Feb 2020 09:21:32 -0000
 Content-Transfer-Encoding: 8bit
 
-On 2020-02-03 23:37, Alex Kiernan wrote:
-> On Mon, Feb 3, 2020 at 10:17 PM Stefan Agner <stefan@agner.ch> wrote:
->>
->> Hi All,
->>
->> On 2020-01-27 16:14, Alex Kiernan wrote:
->> > On Fri, Jan 24, 2020 at 12:22 AM Khem Raj <raj.khem@gmail.com> wrote:
->> >>
->> >> On 1/23/20 4:13 PM, Alex Kiernan wrote:
->> >> > On Thu, Jan 23, 2020 at 10:09 AM Andreas Müller <schnitzeltony@gmail.com> wrote:
->> >> >>
->> >> >> On Thu, Jan 23, 2020 at 10:43 AM Alex Kiernan <alex.kiernan@gmail.com> wrote:
->> >> >>>
->> >> >>> On the offchance someone's tripped over this already/has pointers:
->> >> >>>
->> >> >>> Around the time python2 dropped out, I'm now seeing boot failures with:
->> >> >>>
->> >> >>> [  612.151548] systemd-journald[543]: Assertion
->> >> >>> 'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
->> >> >>> src/basic/time-util.c:55, function now(). Aborting.
->> >> >>>
->> >> >>> I suspect it's unrelated to py2, but that's delayed me getting to the problem.
->> >> >>>
->> >> >>> The board I'm targetting is AM335x based, but without an RTC (which I
->> >> >>> suspect may be relevant).
->> >> >>>
->> >> >>> Anyone seen anything similar?
->> >> >>>
->> >> >>> --
->> >> >>> Alex Kiernan
->> >> >> Hi Alex,
->> >> >>
->> >> >> Have not seen that one yet. Will look for it once I can build images
->> >> >> in current environment (python2/Qt5.14 broke loads for me). What I
->> >> >> have seen were problems with timedatectl <-> ntp. Changing from local
->> >> >> time to ntp-sync did not work: Time remained un-synced on recent
->> >> >> images. Machine was Raspi so no RTC either.
->> >> >>
->> >> >> Don't know if this is related to your finding...
->> >> >>
->> >> >
->> >> > Looks like it's related to the glibc bump - reverting that changeset
->> >> > gets it booting again. I struggle to figure out which of the myriad
->> >> > wrappers are actually being used from inspecting the glibc source, but
->> >> > if it's the one I think it is, there's clearly
->> >> > clock_gettime/clock_gettime64 changes there which I doubt my kernel
->> >> > has (we're currently using the TI 4.19.y kernel).
->> >>
->> >> Is it possible for you to try 5.x for tests ?
->> >
->> > That's where I went first, though I need to bring up the newer TI 5.4
->> > branch first (which has its own problems as there's some patch which
->> > was in the 4.9.y hsmmc driver which isn't in the latest which causes
->> > random timeouts on some of our board samples).
->> >
->>
->> I am seeing this on master branch too on a Toradex Apalis iMX6 (i.MX
->> 6Dual to be specfic) running a mainline kernel 5.4.2.
->>
->> We do have a RTC and according to dmesg the time has been read from it
->> successfully and correctly. We do have a second (the SoC internal) which
->> actually might be not correctly set, I haven't checked.
->>
->> It seems systemd-journald which is tripping, but later also
->> systemd-udevd:
->> [    5.749612] systemd-journald[510]: Assertion
->> 'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
->> src/basic/time-util.c:55, function now(). Aborting.
->> [    6.433771] systemd-journald[534]: Assertion
->> 'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
->> src/basic/time-util.c:55, function now(). Aborting.
->> [    6.934304] systemd-journald[536]: Assertion
->> 'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
->> src/basic/time-util.c:55, function now(). Aborting.
->> [    7.379449] systemd-journald[538]: Assertion
->> 'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
->> src/basic/time-util.c:55, function now(). Aborting.
->> [    7.763130] systemd-journald[539]: Assertion
->> 'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
->> src/basic/time-util.c:55, function now(). Aborting.
->> ...
->> [    8.402258] systemd-udevd[542]: Assertion
->> 'clock_gettime(map_clock_id(clock_id), &ts) == 0' failed at
->> src/basic/time-util.c:55, function now(). Aborting.
->>
->> We do have +SECCOMP, and also here commenting out
->> "SystemCallFilter=@system-service" seems to help.
->>
->> strace seems to point to clock_gettime64:
->>
-> 
-> That fits with systemd-243.4 fixing it - there's a commit in there
-> which adds clock_gettime64 to @system-service.
+From: asmitha <asmithakarun@gmail.com>
 
-Confirmed, the bump to 243.4 fixes it for me too.
+Mimetic library helps parsing the multi-part form data. This library
+can be used for scenarios that includes multi-part form data file uploads
+to the BMC.
 
---
-Stefan
+The patch file (config.patch) includes:
+i) addition of a compilation flag - "no-narrowing" since this has been
+treated as warning in earlier versions of c++ and now with the higher
+versions, this is treated as errors.
+ii) the test directory is removed as there were errors (relocation errors)
+since the shared object files of libc++ and libc were not taken from the
+sysroot path but from the system's library path where the required
+version of the .so is not present.
+
+Signed-off-by: asmitha <asmithakarun@gmail.com>
+---
+ .../libmimetic/libmimetic/config.patch        | 25 +++++++++++++++++++
+ .../libmimetic/libmimetic_0.9.8.bb            | 19 ++++++++++++++
+ 2 files changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libmimetic/libmimetic/config.patch
+ create mode 100644 meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
+
+diff --git a/meta-oe/recipes-support/libmimetic/libmimetic/config.patch b/meta-oe/recipes-support/libmimetic/libmimetic/config.patch
+new file mode 100644
+index 000000000..52bf7b450
+--- /dev/null
++++ b/meta-oe/recipes-support/libmimetic/libmimetic/config.patch
+@@ -0,0 +1,25 @@
++diff --git a/Makefile.am b/Makefile.am
++index 634bd4c..c7cbae7 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -1,6 +1,6 @@
++ MAINTAINERCLEANFILES = Makefile Makefile.in config.cache
++ EXTRA_DIST=LICENSE m4
++-SUBDIRS = mimetic doc examples test win32
+++SUBDIRS = mimetic doc examples win32
++ INCLUDES=-I$(top_srcdir)
++ ACLOCAL_AMFLAGS=-I m4
++
++diff --git a/configure.in b/configure.in
++index 5e8f3d4..af1018e 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -30,7 +30,7 @@ debug_enabled=false
++ dnl CFLAGS and CXXFLAGS default to -O2 -g
++
++ dnl CXXFLAGS="$CXXFLAGS -DNDEBUG -fno-exceptions"
++-CXXFLAGS="$CXXFLAGS -DNDEBUG"
+++CXXFLAGS="$CXXFLAGS -DNDEBUG -Wno-narrowing"
++
++ AC_ARG_ENABLE(debug,
++   [  --enable-debug[=LEVEL]  enables debug symbols [default=2]],
+diff --git a/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
+new file mode 100644
+index 000000000..a0a704188
+--- /dev/null
++++ b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
+@@ -0,0 +1,19 @@
++# Released under the MIT license.
++
++SUMMARY = "Mimetic Library for multi-part parsing"
++DESCRIPTION = "Email library (MIME) written in C++ designed to be easy to use and integrate but yet fast and efficient."
++AUTHOR = "Stefano Barbato <stefano@codesink.org>"
++HOMEPAGE = "http://www.codesink.org/mimetic_mime_library.html"
++BUGTRACKER = "https://github.com/LadislavSopko/mimetic/issues"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b49da7df0ca479ef01ff7f2d799eabee"
++
++SRCREV = "50486af99b4f9b35522d7b3de40b6ce107505279"
++SRC_URI += "git://github.com/LadislavSopko/mimetic/ \
++            file://config.patch \
++           "
++
++S = "${WORKDIR}/git"
++
++inherit autotools
+-- 
+2.21.0
+
 
