@@ -1,34 +1,46 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-X-Greylist: delayed 430 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 04 Feb 2020 17:11:51 UTC
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
-	by mail.openembedded.org (Postfix) with ESMTP id 24B7661123
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F6276112C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  4 Feb 2020 17:11:51 +0000 (UTC)
-IronPort-SDR: wyDa4ujASw9jqHS7HBwmyUSVkLiRWV1VPl4SOeJe0sUw2Ml/DUlxFNTeCDUZKS2wkNNudEEEai
-	pEr6tiZUNaiRerYudsWzmjrKb5NgcsWhf0CUI7qKl/aSgxcXM4D/Dh3NTf/7vRMAQLek/tcfy1
-	1NIzCopMSq6ejVHLutqkCFQbKnisr040yJ1qVp6GTTReVdpetBJ08g6vp05Xl9oExWVP/s9TXM
-	16j9NZsQ0X4ZZNd8gtj6I2rbzRr/DeOKJBHKwzoawPJ4ZC2a9TFdoxkFJ0vr7fpZsRhFCWAXlW
-	3o0=
-X-IronPort-AV: E=Sophos;i="5.70,402,1574118000"; 
-   d="scan'208";a="4918247"
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Asmitha Karunanithi <asmithakarun@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] Library to aid multi-part form data parsing
-Thread-Index: AQHV2zyGlsK6bpIlPUapS6YhiJhlmqgLQZQA
-Date: Tue, 4 Feb 2020 17:04:40 +0000
-Message-ID: <9dec3ef6aecd46c0a01fe5524e1cc1aa@XBOX03.axis.com>
-References: <20200204092126.19209-1-asmithakarun@gmail.com>
-In-Reply-To: <20200204092126.19209-1-asmithakarun@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+	Tue,  4 Feb 2020 17:27:23 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id t13so14950383qto.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 Feb 2020 09:27:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=kOD6nitD6WDN1unGANPR3iTXoqIqnPb3jUKQEotIvZE=;
+	b=ZbnDpKwXCy0pcmlYB1IyfSXxEAWzJFM7BKCXzMbRZQW43tGk0XeyMMCtBBp7imch8i
+	VhXkjgRxjgDevDDY8LDH9V26BdB9Q2tjEAniP/dyJexWmA+mWnKtpA5eFPuOwhbkxXQx
+	yU0YiNSSb4kK6GWJ0cK8+doyGBcOGLE/yOH6tndGoNJUvhUlO3BNEss7Q2z1X1WB//l1
+	iRUrqm7yQoGRYG8GpUx1elOmbxyP/RwrBGoSdmRAp7/h0BHtVkstc50DT+tFAFt79q67
+	iIG5UTTtOhfkucwMZNQo0mpUt/ke4PwkNb1cLqgd19wNWJEV5w/T4uQtAL48zVJMh4vX
+	K2Pw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=kOD6nitD6WDN1unGANPR3iTXoqIqnPb3jUKQEotIvZE=;
+	b=i80+j/86SKYqmfBHK5UyWsCsBo8oek2OaUmp6RBPCkHQJrDlXNbT/NLW1otyX0GVi9
+	ll6iL99tZCiLKyP8fd9EQ6VPfVWgXZBC+lMC18RMjkyCBbWovsUzwaCJx6uGCA7nHCQG
+	D+CkwbS8uxyzr8aTCj2e9pb1ZWpgoWIEDBiipJglbA/VNeRfde7MlH8ekkUzYZU89Aei
+	ONN7xIqUMB8WjXAcp80lipUHv+csMhZzU0TVZ8ql+zMGPmqgRnJYJB+AWVTpa4xlmwWP
+	ov1xdUTxpXYWAbQz2I12XPOSfAlBKMuHHXqlomGGfGDybET+xLdJgDi3WMW447BZOggu
+	xSiA==
+X-Gm-Message-State: APjAAAWA5sUtjZQQX5tAMr6YV5Zzl7IvzqA8SE2HglWSHB7Yv9YTzVZG
+	FtiiEptWJf4YVabYfIiCslxQE1IpIW01/kDL8nfOZfJa0dU=
+X-Google-Smtp-Source: APXvYqx3TV6jLJV15ICqZ8XQekSoNbFqEYxXw1nsZb1K2luGXk6qNYR6siitJC6mFyeslxAzgMpu5V7tHK1yertw8TI=
+X-Received: by 2002:ac8:4419:: with SMTP id j25mr29852262qtn.378.1580837244518;
+	Tue, 04 Feb 2020 09:27:24 -0800 (PST)
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] Library to aid multi-part form data parsing
+References: <20200204055320.107588-1-Qi.Chen@windriver.com>
+In-Reply-To: <20200204055320.107588-1-Qi.Chen@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 4 Feb 2020 09:26:58 -0800
+Message-ID: <CAMKF1sqO8TMBgSzgi34gb3mW=Z5JwkkxJKMc8_DiZCXxKjtacQ@mail.gmail.com>
+To: Chen Qi <Qi.Chen@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] rsyslog: disable ptest as it requires python2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,126 +53,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 Feb 2020 17:11:52 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 04 Feb 2020 17:27:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org <openembedded-
-> devel-bounces@lists.openembedded.org> On Behalf Of Asmitha Karunanithi
-> Sent: den 4 februari 2020 10:21
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [meta-oe][PATCH] Library to aid multi-part form data parsin=
-g
+We need to disable reference to rsyslog-ptest in
+./meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb as well.
 
-The commit subject should be prefixed by the name of the recipe, i.e.:
-
-libmimetic: Add library to aid multi-part form data parsing
-
-> From: asmitha <asmithakarun@gmail.com>
->=20
-> Mimetic library helps parsing the multi-part form data. This library
-> can be used for scenarios that includes multi-part form data file uploads
-> to the BMC.
-
-What is BMC?
-
-> The patch file (config.patch) includes:
-> i) addition of a compilation flag - "no-narrowing" since this has been
-> treated as warning in earlier versions of c++ and now with the higher
-> versions, this is treated as errors.
-> ii) the test directory is removed as there were errors (relocation errors=
-)
-> since the shared object files of libc++ and libc were not taken from the
-> sysroot path but from the system's library path where the required
-> version of the .so is not present.
->=20
-> Signed-off-by: asmitha <asmithakarun@gmail.com>
+On Mon, Feb 3, 2020 at 9:54 PM Chen Qi <Qi.Chen@windriver.com> wrote:
+>
+> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 > ---
->  .../libmimetic/libmimetic/config.patch        | 25 +++++++++++++++++++
->  .../libmimetic/libmimetic_0.9.8.bb            | 19 ++++++++++++++
->  2 files changed, 44 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libmimetic/libmimetic/config.=
-patch
->  create mode 100644 meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.b=
-b
->=20
-> diff --git a/meta-oe/recipes-support/libmimetic/libmimetic/config.patch b=
-/meta-oe/recipes-support/libmimetic/libmimetic/config.patch
-
-There should be an Upstream-Status in the patch. You might as well=20
-regenerate the patch using git format-patch to keep a description=20
-with the patch why it is needed.
-
-> new file mode 100644
-> index 000000000..52bf7b450
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libmimetic/libmimetic/config.patch
-> @@ -0,0 +1,25 @@
-> +diff --git a/Makefile.am b/Makefile.am
-> +index 634bd4c..c7cbae7 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -1,6 +1,6 @@
-> + MAINTAINERCLEANFILES =3D Makefile Makefile.in config.cache
-> + EXTRA_DIST=3DLICENSE m4
-> +-SUBDIRS =3D mimetic doc examples test win32
-> ++SUBDIRS =3D mimetic doc examples win32
-> + INCLUDES=3D-I$(top_srcdir)
-> + ACLOCAL_AMFLAGS=3D-I m4
-> +
-> +diff --git a/configure.in b/configure.in
-> +index 5e8f3d4..af1018e 100644
-> +--- a/configure.in
-> ++++ b/configure.in
-> +@@ -30,7 +30,7 @@ debug_enabled=3Dfalse
-> + dnl CFLAGS and CXXFLAGS default to -O2 -g
-> +
-> + dnl CXXFLAGS=3D"$CXXFLAGS -DNDEBUG -fno-exceptions"
-> +-CXXFLAGS=3D"$CXXFLAGS -DNDEBUG"
-> ++CXXFLAGS=3D"$CXXFLAGS -DNDEBUG -Wno-narrowing"
-
-Do this in the recipe instead. Just add:
-
-CXXFLAGS +=3D "-Wno-narrowing"
-
-at the end of the recipe.
-
-> +
-> + AC_ARG_ENABLE(debug,
-> +   [  --enable-debug[=3DLEVEL]  enables debug symbols [default=3D2]],
-> diff --git a/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb b/met=
-a-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
-> new file mode 100644
-> index 000000000..a0a704188
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
-> @@ -0,0 +1,19 @@
-> +# Released under the MIT license.
-> +
-> +SUMMARY =3D "Mimetic Library for multi-part parsing"
-> +DESCRIPTION =3D "Email library (MIME) written in C++ designed to be easy=
- to use and integrate but yet fast and efficient."
-> +AUTHOR =3D "Stefano Barbato <stefano@codesink.org>"
-> +HOMEPAGE =3D "http://www.codesink.org/mimetic_mime_library.html"
-> +BUGTRACKER =3D "https://github.com/LadislavSopko/mimetic/issues"
-> +
-> +LICENSE =3D "MIT"
-> +LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Db49da7df0ca479ef01ff7f2d799ea=
-bee"
-> +
-> +SRCREV =3D "50486af99b4f9b35522d7b3de40b6ce107505279"
-> +SRC_URI +=3D "git://github.com/LadislavSopko/mimetic/ \
-> +            file://config.patch \
-> +           "
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools
+>  meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
+> index 29bba2d9a..b109e4dec 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
+> @@ -35,7 +35,9 @@ SRC_URI[sha256sum] = "e1f4776b1c62ad7220f4d624a89a96b0c3d4738006899356eaaef0f1f9
+>  UPSTREAM_CHECK_URI = "https://github.com/rsyslog/rsyslog/releases"
+>  UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+>
+> -inherit autotools pkgconfig systemd update-rc.d ptest
+> +inherit autotools pkgconfig systemd update-rc.d
+> +# ptest is disabled for now because it requires python2, after upstream solves  this problem, re-enable it
+> +# inherit ptest
+>
+>  EXTRA_OECONF += "--disable-generate-man-pages ap_cv_atomic_builtins=yes"
+>  EXTRA_OECONF += "--enable-imfile-tests"
 > --
 > 2.21.0
-
-//Peter
-
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
