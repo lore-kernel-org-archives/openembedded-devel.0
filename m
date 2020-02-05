@@ -1,44 +1,44 @@
 Return-Path: <ticotimo@gmail.com>
-Received: from mail-il1-f179.google.com (mail-il1-f179.google.com
-	[209.85.166.179])
-	by mail.openembedded.org (Postfix) with ESMTP id BC3FD60CE7
+Received: from mail-il1-f173.google.com (mail-il1-f173.google.com
+	[209.85.166.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B37F605F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Feb 2020 23:49:10 +0000 (UTC)
-Received: by mail-il1-f179.google.com with SMTP id p8so3449737iln.12
+	Wed,  5 Feb 2020 23:54:38 +0000 (UTC)
+Received: by mail-il1-f173.google.com with SMTP id l4so3500859ilj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Feb 2020 15:49:12 -0800 (PST)
+	Wed, 05 Feb 2020 15:54:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=zuLo+gvDr+QDgFG80CkKji5KvYL9TKExK/OYTiOkgpw=;
-	b=ip8boMexjlD43LCcslwsOEND9ZPwY4VQsuN5q0D/7q0GWD2qmLlgp3dZFPL8ZDT4RZ
-	W1v5j5yLjhNSWk4tGas1lyUK01lMnisroSJSCwwMmbzFNe3CsXrZQJ0KCi2svHndMU9T
-	Lurv2jQ164JgwGfyUmZNFZsGrbogL9sa7BfnvHiGk6xd+PHKpU6qcAY7pfNqMVZxgtvP
-	P7OPo25RBNAYy6aSDXkmvfYVUSAD0LNrZVGTTk9Ju7R70xmcz6J+GQLN+C86t8aC4/6V
-	La7yYVJl2/1vVygxTPbGQ0amlglesnLA5g0Gm0xWQtjhku9arNPGfucH94X+bMTI5o8B
-	JAqQ==
+	:cc; bh=sntMicRM7tZkOvI3OWV+JPNIZom0cZloFjPX6D9Fk88=;
+	b=n+i9fN9njAhVEX4iqWwt8FXhxHn3ur2l0VeAl1zYfDcLdTS+lkmxt4y80HsoLNCPf3
+	iw8McEfm6Yvq4IitzZU4E6a/oOLMwJD4K8QqlyLBPc5TdbasGleVDEL+Y7O44eTAYPJm
+	zv3/O9MbkKEQKErfvMPFOFxBmofuZq6kQ+kYgSdjVtWx3vRIxKigDgYih5oEy27YgwIp
+	BlIlhtLjUvnXxQRdAF5dfP0B2tfXnZSFnsjXhq60oD5sN283Znkoc0BYyp7b/ypGNs8S
+	FK5cvyMqAClTpYm4cVZ7uUop9Pqjjf6a2LpaAF0u922LkALHgBo6i91ce1EWWG7aNuUQ
+	EtCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=zuLo+gvDr+QDgFG80CkKji5KvYL9TKExK/OYTiOkgpw=;
-	b=nT2CpBfKIVLl7hgGibqv47XpVuaagnP3cAczbWpSqABn7e9doL0hZ9HnoBO6NMpO09
-	LAnut/x0Ti2gmSDrPaubTRtAj2I9g6cAesYstVCETT7aGUF+I3RptXJTBPz0qtQHzleQ
-	t5w6mQ78w6F6qrETenJKPj2uE+muhj7vbXrUEXlr71hpLGMhigaBw5XOCFH+D21yVa+r
-	RBkGq5+4QuKThH8nJeOOq1G3G1eqf1iNIpSdsgU8fWGllYTJzGQw5Z/3VJ2mcfsnb5dh
-	Lyui3GSQ+fQM6WtyLE+TM/kQl/CqvEgKPyXcI2oiANyAjlr4wK7zknxBBKFXWP+Xxx6u
-	QagA==
-X-Gm-Message-State: APjAAAXItHaU81cyQlVFLhNn9NlqIrPQ1vDEgMm0zj9WhckEvwn0hNbJ
-	TY+1TuuTlBuMZo49S2+cNmRMj6A+AW7Jo2g8/J0=
-X-Google-Smtp-Source: APXvYqyLGwEnHaPMycixudZzEegejg25vb2QOMaSfgZAZ4VqWLK3m+XaWTbcrRGoxXDflAw+z8XkaKKsaoi63YFU2fE=
-X-Received: by 2002:a92:8d98:: with SMTP id w24mr808921ill.198.1580946551507; 
-	Wed, 05 Feb 2020 15:49:11 -0800 (PST)
+	bh=sntMicRM7tZkOvI3OWV+JPNIZom0cZloFjPX6D9Fk88=;
+	b=Vytb18dWm3KP4c6oKb903YdAX4KGm/J6HWNEcG6rXNK6imMknnCZV7lkYeFpHmx5zc
+	7pvS0IkWjtbGXV//O7pkBLdV4XbN0zgVupDfADNb9L2KauXnV8YIgjT2CV8v5lLbAn+V
+	idSjWbs+OEXJOZD6zjuCyz2sLHUxhODz2B6Oo1ZoWl+MhxQmH27sKf+ec6w/Hs1dmLI6
+	Q/iODDBvJ7HoD65v3ePnSfN2h+8I0HVI0SbJL2NeOPKg+fx1niL+0Z+goYDDDz2bu6Ev
+	O3r215Tk0xs14yDqgWMHtF5gwNZuYXytPtRkrtvvC5GCRcvni0dBs2v/i/0rDa99A4ge
+	Udtw==
+X-Gm-Message-State: APjAAAWa8HULE55xIEwuor/EbmkQIUfxKEHAfpnkdwnqpi7YelGRkbVG
+	dTgU19x771TSabENHH1nwpu2xtniDjMncqBFkeA=
+X-Google-Smtp-Source: APXvYqwep0crj3hgqSOdV40DKB7pqqEllQKVDq5zkIOclpbzS/ppCbq6oEEyhTl8g7smIzLU8dtEw03E73gNJ9AFEDE=
+X-Received: by 2002:a92:290a:: with SMTP id l10mr767956ilg.151.1580946879217; 
+	Wed, 05 Feb 2020 15:54:39 -0800 (PST)
 MIME-Version: 1.0
 References: <20200125082548.12976-1-ticotimo@gmail.com>
 	<513f7afe-1f2a-a8f2-70d1-63db5ddfcfde@windriver.com>
 In-Reply-To: <513f7afe-1f2a-a8f2-70d1-63db5ddfcfde@windriver.com>
 From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 5 Feb 2020 15:49:00 -0800
-Message-ID: <CANx9H-Cf0qg3K3Te_1kp=bh6+s3_2qfnmwPShvJMp=S63mNsOQ@mail.gmail.com>
+Date: Wed, 5 Feb 2020 15:54:28 -0800
+Message-ID: <CANx9H-A-31+cASuXcNuZ_jyk58+NLk46JXFXGVz1Lhup09BbRA@mail.gmail.com>
 To: Randy MacLeod <randy.macleod@windriver.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "Orling, Timothy T" <timothy.t.orling@intel.com>,
@@ -57,7 +57,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2020 23:49:10 -0000
+X-List-Received-Date: Wed, 05 Feb 2020 23:54:38 -0000
 Content-Type: text/plain; charset="UTF-8"
 
 On Wed, Feb 5, 2020 at 3:18 PM Randy MacLeod <randy.macleod@windriver.com>
@@ -91,26 +91,6 @@ wrote:
 > This looks useful. Do you have the python3 version done but not sent
 > or should Trevor see if he can get that to work?
 >
->
-I have not started the python3 version yet. To do what is functional here
-will
-be trivial changes. I'd love to see traction on the TODO list and it should
-be interesting
-work for Trevor to do. This tool is now in my "daily" workflow.
-
-There is one possible issue, which is a change in the variables does not
-necessarily trigger
-the tests you expect. The symptom is running testimage tests the last thing
-you had the variable
-set to, not the current value in local.conf. There are other places in the
-code base where variables
-are watched and trigger changes appropriately. I did not go that far yet.
-
-Also, the variables names between py2 and py3 would need to be different,
-but that is a thing
-of the past for master, so not a real issue.
-
-
 > >
 > > Example configuration in local.conf:
 > >
@@ -130,6 +110,23 @@ of the past for master, so not a real issue.
 >     procps coreutils iproute2 sysstat
 > ?
 >
+>
+Those are required to make the QEMU runner dump any missing things, like
+TUN/TAP. So no, not required. The
+host_dump stuff isn't really all that helpful anyway. If you can run
+"testimage" with KVM, TUN/TAP and virgl/gl then
+you have all the speed ups that I was trying to make sure were working on
+the platform running these tests (with gitlab ci runner)
+
+The fact that the docker-executor in gitlab does not allow the --add-groups
+option to the docker command line gets in the way
+anyway... so you would have to run the container privileged and I'm not
+going to do that ;)
+
+The user in the docker container does not have permissions on  /dev/kvm,
+etc. But that has nothing to do with this code :)
+
+
 > I should probably try it before replying but
 > it's already been a long day!
 >
