@@ -1,50 +1,47 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com
-	[209.85.222.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 29DC5605E5
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
+	[209.85.166.67])
+	by mail.openembedded.org (Postfix) with ESMTP id BA03D60B3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Feb 2020 20:30:58 +0000 (UTC)
-Received: by mail-qk1-f174.google.com with SMTP id q15so3248639qke.9
+	Wed,  5 Feb 2020 20:44:20 +0000 (UTC)
+Received: by mail-io1-f67.google.com with SMTP id m25so3728607ioo.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Feb 2020 12:31:00 -0800 (PST)
+	Wed, 05 Feb 2020 12:44:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=b+5OwqISNLCEXGy3ZPrj+vo/cFxcXIwOVFZwFSOaF3M=;
-	b=MxoWJziYKHDjngMmoMhkt+h822iCIbdiYxV/Gy9ZPWQy4TiVsmfxVNfdR9xc/+n4tO
-	trN8dVJTNYTtaF3C/N+LMxTgwsleaxmnySxknCx8l4qrLPB4nixCDP2i0q70xB51obA7
-	kODoLewcu8EnQPppMDcM5Oshb1jmkrysYjwyZ0wpbfLOWubekmyvrzYD1SoPidGrhuUD
-	7k4jUC+vwMS0uIrYs4vYis3tlLK7gj7qeHTv94DlZeXBlVWMzjVKdzSJIAb3awPEWMRg
-	z2/LPoY0Rj3G/zD7YqsPWxFr5lSK3ZBZwbpLlv1nJwvsRNpE1wwqZTleolTiRDhcGNj5
-	64uQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=RUDWpQt53SNyLev2+1lEN425bwPkDheP4SKlGgVMQx0=;
+	b=Hp8bZ7uvd1Yw8u86dqZ0B0+0nNkbSRtxgDXLmc1v+DSGjyj1Hr3vLFX5PWpl5/R1Re
+	I8tCkuHtxg3qNQ02E2XV3j+YqZYUaOcKUkt2efqaRE1kBGw1Y/qQZD6BroGu8N+0sAwv
+	oLS529oL7I0JV7nYcD9MvRiSi/60LVmefavAnDjSP3sNaqt+/ArCVm0bygOOpIKhjJyF
+	2++JjKztbctg1TCr+j61aB470O3WllUdOGi21xzjeFJ24qE59pjuRdTee9SaMF2VmvzF
+	CNQl7tLkF8zqlvVRvCD4KUTj2XUGYkpD89oPIF6APc0AOfo7UKFBId/wnaiOsN1Ao0Fv
+	iIJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=b+5OwqISNLCEXGy3ZPrj+vo/cFxcXIwOVFZwFSOaF3M=;
-	b=LdTFJuhLrR50J2jkQFtyZIdKpaMnW5iIH1FA1JK/4LbbgmeUV3vEghKtT0sp2npIm1
-	3o7f0NYjV0ki5Hp9R98a7BdGe9pkZE3tV/7bfrgME6gaBHB8Mhq1OJP0zEeX0A0OW5lf
-	NzmHjGu7SEI7+0Mr/OKXL8X/YlkJRaMDU05ZPZApWQ+/ViPfx7sbcniT4EsA68P2+qtU
-	Z2aHExSkM/bmCkxr/K3j0ldv5XO/9Ja/rhJkbZoCfuE4BWYyJznZUa1pxybWKuNDBXt8
-	tXfCQzazOJDGf3ex37ndWOlIPbtjG4CexW9+peDpJIw5LX5lW9qcSp6kRQEY77KqGyls
-	4LxQ==
-X-Gm-Message-State: APjAAAVAtk8KbwgcPy/t+0KmTxm4BRAMtj2e3DHJrnv41klaTk5A3IL/
-	HnAf+xI6vWmZLNQ1JaLWX0spNGp/QxI=
-X-Google-Smtp-Source: APXvYqyghVmuMpnqHfrQXpIcTgWnQb6KsEaJOYIXBjvYJacpYkIgcmmeev7RtOkXr7m10hYhszvxfw==
-X-Received: by 2002:a37:548:: with SMTP id 69mr35363730qkf.222.1580934659492; 
-	Wed, 05 Feb 2020 12:30:59 -0800 (PST)
-Received: from linux-uys3.suse ([206.248.190.95])
-	by smtp.gmail.com with ESMTPSA id y27sm524358qta.50.2020.02.05.12.30.58
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 05 Feb 2020 12:30:58 -0800 (PST)
-From: Trevor Woerner <twoerner@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Feb 2020 15:30:53 -0500
-Message-Id: <20200205203053.6742-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.23.0.37.g745f681289
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=RUDWpQt53SNyLev2+1lEN425bwPkDheP4SKlGgVMQx0=;
+	b=g0+MK5B0z4kwAC12T85zfvFJyb76phVXKTHq3dcDW5f3haLaq/pulc2isWtEnYMqDk
+	mcT7SbTGzPGHCPhFYe/41m0nJMfZNdxnubvJiJDE8lRHS1ZlU61UYfomR6ADt9IoWwMW
+	xq2Xv65MMHLduxcHpe4uJNQJO9Cm4l5kMnsDTWa4WYstnXJm8JMkBIDVGZ22+tl4oY0L
+	GB3tbOWUSU97Jhurni35hU6K83qZcTgGIaNeUUATEeRQVt1jDLg7EFfNIq/qT+DHMu5Y
+	CEELcoa+UatBTK77QpTORU57Pv8OyqFCgOJcdWdKzMW6+NpYl601cH9tVTsdOpyQu43k
+	Uc9Q==
+X-Gm-Message-State: APjAAAXThsFr/H0ACD2szU5zoWj3sDLRGrzhgETS2ZF7ryQVjSePwcIQ
+	HTIDYgHc+kQezTDaTujswrANROVjY4lxMsDVdSFUcA==
+X-Google-Smtp-Source: APXvYqxIOjUsNOyxtvpZerANtFjoJIHacmZIaOSJgJ5Wz/NqEnk75fFbxBbqBhGFWkMjBqsBcQFQTOAqyGx7np6N5ek=
+X-Received: by 2002:a05:6602:2299:: with SMTP id
+	d25mr22072546iod.267.1580935461959; 
+	Wed, 05 Feb 2020 12:44:21 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mpv: 0.26.0 -> 0.32.0
+References: <20200205203053.6742-1-twoerner@gmail.com>
+In-Reply-To: <20200205203053.6742-1-twoerner@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Wed, 5 Feb 2020 21:44:10 +0100
+Message-ID: <CALbNGRQ+GD9FKQ7qbc0OrFCpa6vvsgu2qtL7awTD=DE18F8C3g@mail.gmail.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] mpv: 0.26.0 -> 0.32.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,279 +54,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2020 20:30:59 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 05 Feb 2020 20:44:21 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Remove mpv from the PNBLACKLIST by updating to the latest release and using a
-newer, python3-aware waf for building (copied from glmark2).
+On Wed, Feb 5, 2020 at 9:31 PM Trevor Woerner <twoerner@gmail.com> wrote:
+>
+> Remove mpv from the PNBLACKLIST by updating to the latest release and using a
+> newer, python3-aware waf for building (copied from glmark2).
+>
+> The name of the license file changed, but the licence of the software itself
+> did not.
+>
+> Added mime-xdg to inherit to handle mime artifacts.
+>
+> Added to the FILES command to scoop up additional files being generated by
+> the build.
+>
+> Extensively fixed and cleaned up the PACKAGECONFIG options to reflect the
+> current options available when configuring mpv. Also cleaned up any configure
+> options which are no longer available.
+>
+> Tested with core-image-x11 on a rock-pi-4 with
+> PACKAGECONFIG = "libass x11 opengl egl drm gbm vaapi vdpau"
+>         # mpv --vo=help
+>         Available video outputs:
+>           libmpv           render API for libmpv
+>           gpu              Shader-based GPU Renderer
+>           vdpau            VDPAU with X11
+>           vaapi            VA API with X11
+>           x11              X11 (slow, old crap)
+>           null             Null video output
+>           image            Write video frames to image files
+>           tct              true-color terminals
+>           drm              Direct Rendering Manager
+>
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Thanks
 
-The name of the license file changed, but the licence of the software itself
-did not.
-
-Added mime-xdg to inherit to handle mime artifacts.
-
-Added to the FILES command to scoop up additional files being generated by
-the build.
-
-Extensively fixed and cleaned up the PACKAGECONFIG options to reflect the
-current options available when configuring mpv. Also cleaned up any configure
-options which are no longer available.
-
-Tested with core-image-x11 on a rock-pi-4 with
-PACKAGECONFIG = "libass x11 opengl egl drm gbm vaapi vdpau"
-	# mpv --vo=help
-	Available video outputs:
-	  libmpv           render API for libmpv
-	  gpu              Shader-based GPU Renderer
-	  vdpau            VDPAU with X11
-	  vaapi            VA API with X11
-	  x11              X11 (slow, old crap)
-	  null             Null video output
-	  image            Write video frames to image files
-	  tct              true-color terminals
-	  drm              Direct Rendering Manager
-
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
----
- .../mplayer/mpv/python3.patch                 |  12 ++
- .../recipes-multimedia/mplayer/mpv_0.26.0.bb  |  85 -------------
- .../recipes-multimedia/mplayer/mpv_0.32.0.bb  | 115 ++++++++++++++++++
- 3 files changed, 127 insertions(+), 85 deletions(-)
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/python3.patch
- delete mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
- create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
-
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv/python3.patch b/meta-oe/recipes-multimedia/mplayer/mpv/python3.patch
-new file mode 100644
-index 000000000..df208cf87
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv/python3.patch
-@@ -0,0 +1,12 @@
-+Use Python 3 instead of Python 2.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Ross Burton <ross.burton@intel.com>
-+
-+diff --git a/waf b/waf
-+index 6ce2a24..de3c898 100755
-+--- a/waf
-++++ b/waf
-+@@ -1 +1 @@
-+-#!/usr/bin/env python
-++#!/usr/bin/env python3
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
-deleted file mode 100644
-index c98aa7ab0..000000000
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
-+++ /dev/null
-@@ -1,85 +0,0 @@
--SUMMARY = "Open Source multimedia player"
--DESCRIPTION = "mpv is a fork of mplayer2 and MPlayer. It shares some features with the former projects while introducing many more."
--SECTION = "multimedia"
--HOMEPAGE = "http://www.mpv.io/"
--DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
--           libxscrnsaver libv4l libxinerama \
--"
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
--LICENSE = "GPLv2+"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
--
--# While this item does not require it, it depends on ffmpeg which does
--LICENSE_FLAGS = "commercial"
--
--SRCREV_mpv = "4db82f04502cbcd20d9a975df9dfde91d8c389e3"
--SRC_URI = " \
--    git://github.com/mpv-player/mpv;name=mpv \
--    http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf;downloadfilename=waf;subdir=git \
--"
--SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
--SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
--
--S = "${WORKDIR}/git"
--
--inherit waf pkgconfig python3native features_check
--
--LUA ?= "lua"
--LUA_mips64  = ""
--LUA_aarch64  = ""
--LUA_powerpc64  = ""
--LUA_powerpc64le  = ""
--LUA_powerpc  = ""
--
--# Note: both lua and libass are required to get on-screen-display (controls)
--PACKAGECONFIG ??= " \
--    ${LUA} \
--    libass \
--    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
--"
--
--PACKAGECONFIG_remove_aarch64 = "lua"
--PACKAGECONFIG[drm] = "--enable-drm,--disable-drm,libdrm"
--PACKAGECONFIG[gbm] = "--enable-gbm,--disable-gbm,virtual/mesa"
--PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
--PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
--PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
--PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
--PACKAGECONFIG[vaapi] = "--enable-vaapi, --disable-vaapi,libva"
--PACKAGECONFIG[vdpau] = "--enable-vdpau, --disable-vdpau,libvdpau"
--PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland,wayland libxkbcommon"
--
--SIMPLE_TARGET_SYS = "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', '')}"
--
--EXTRA_OECONF = " \
--    --prefix=${prefix} \
--    --target=${SIMPLE_TARGET_SYS} \
--    --confdir=${sysconfdir} \
--    --datadir=${datadir} \
--    --disable-manpage-build \
--    --disable-gl \
--    --disable-libsmbclient \
--    --disable-encoding \
--    --disable-libbluray \
--    --disable-dvdread \
--    --disable-dvdnav \
--    --disable-cdda \
--    --disable-uchardet \
--    --disable-rubberband \
--    --disable-lcms2 \
--    --disable-vapoursynth \
--    --disable-vapoursynth-lazy \
--    ${PACKAGECONFIG_CONFARGS} \
--"
--
--adjust_waf_perms() {
--    chmod +x ${S}/waf
--}
--
--do_patch[postfuncs] += "adjust_waf_perms"
--
--FILES_${PN} += "${datadir}/icons"
--
--PNBLACKLIST[mpv] = "Needs forward porting to use python3"
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
-new file mode 100644
-index 000000000..e6bab6b3f
---- /dev/null
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
-@@ -0,0 +1,115 @@
-+SUMMARY = "Open Source multimedia player"
-+DESCRIPTION = "mpv is a fork of mplayer2 and MPlayer. It shares some features with the former projects while introducing many more."
-+SECTION = "multimedia"
-+HOMEPAGE = "http://www.mpv.io/"
-+DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
-+           libxscrnsaver libv4l libxinerama \
-+"
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+LICENSE = "GPLv2+"
-+LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=91f1cb870c1cc2d31351a4d2595441cb"
-+
-+# While this item does not require it, it depends on ffmpeg which does
-+LICENSE_FLAGS = "commercial"
-+
-+SRCREV_mpv = "70b991749df389bcc0a4e145b5687233a03b4ed7"
-+SRC_URI = " \
-+    git://github.com/mpv-player/mpv;name=mpv \
-+    https://www.freehackers.org/~tnagy/release/waf-2.0.19;name=waf;downloadfilename=waf;subdir=git \
-+    file://python3.patch \
-+"
-+SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
-+SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit waf pkgconfig features_check mime-xdg
-+
-+LUA ?= "lua"
-+LUA_mips64  = ""
-+LUA_aarch64  = ""
-+LUA_powerpc64  = ""
-+LUA_powerpc64le  = ""
-+LUA_powerpc  = ""
-+
-+# Note: both lua and libass are required to get on-screen-display (controls)
-+PACKAGECONFIG ??= " \
-+    ${LUA} \
-+    libass \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} \
-+    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
-+"
-+
-+PACKAGECONFIG_remove_aarch64 = "lua"
-+PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,virtual/libx11"
-+PACKAGECONFIG[xv] = "--enable-xv,--disable-xv,libxv"
-+PACKAGECONFIG[opengl] = "--enable-gl,--disable-gl,virtual/libgl"
-+PACKAGECONFIG[egl] = "--enable-egl,--disable-egl,"
-+PACKAGECONFIG[drm] = "--enable-drm,--disable-drm,libdrm"
-+PACKAGECONFIG[gbm] = "--enable-gbm,--disable-gbm,virtual/libgbm"
-+PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
-+PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
-+PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
-+PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
-+PACKAGECONFIG[vaapi] = "--enable-vaapi,--disable-vaapi,libva"
-+PACKAGECONFIG[vdpau] = "--enable-vdpau,--disable-vdpau,libvdpau"
-+PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland"
-+
-+python __anonymous() {
-+    packageconfig = (d.getVar("PACKAGECONFIG") or "").split()
-+    extras = []
-+    if "x11" in packageconfig and "opengl" in packageconfig:
-+        extras.append(" --enable-gl-x11")
-+    if "x11" in packageconfig and "egl" in packageconfig:
-+        extras.append(" --enable-egl-x11")
-+    if "egl" in packageconfig and "drm" in packageconfig:
-+        extras.append(" --enable-egl-drm")
-+    if "vaapi" in packageconfig and "x11" in packageconfig:
-+        extras.append(" --enable-vaapi-x11")
-+    if "vaapi" in packageconfig and "drm" in packageconfig:
-+        extras.append(" --enable-vaapi-drm")
-+    if "vaapi" in packageconfig and "x11" in packageconfig and "egl" in packageconfig:
-+        extras.append(" --enable-vaapi-x-egl")
-+    if "vdpau" in packageconfig and "opengl" in packageconfig and "x11" in packageconfig:
-+        extras.append(" --enable-vdpau-gl-x11")
-+    if "wayland" in packageconfig and "opengl" in packageconfig:
-+        extras.append(" --enable-gl-wayland")
-+    if "wayland" in packageconfig and "vaapi" in packageconfig:
-+        extras.append(" --enable-vaapi-wayland")
-+    if extras:
-+        d.appendVar("EXTRA_OECONF", "".join(extras))
-+}
-+
-+SIMPLE_TARGET_SYS = "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', '')}"
-+
-+EXTRA_OECONF = " \
-+    --prefix=${prefix} \
-+    --target=${SIMPLE_TARGET_SYS} \
-+    --confdir=${sysconfdir} \
-+    --datadir=${datadir} \
-+    --disable-manpage-build \
-+    --disable-libsmbclient \
-+    --disable-libbluray \
-+    --disable-dvdnav \
-+    --disable-cdda \
-+    --disable-uchardet \
-+    --disable-rubberband \
-+    --disable-lcms2 \
-+    --disable-vapoursynth \
-+    ${PACKAGECONFIG_CONFARGS} \
-+"
-+
-+adjust_waf_perms() {
-+    chmod +x ${S}/waf
-+}
-+
-+do_patch[postfuncs] += "adjust_waf_perms"
-+
-+FILES_${PN} += " \
-+    ${datadir}/icons \
-+    ${datadir}/zsh \
-+    ${datadir}/bash-completion \
-+    "
--- 
-2.23.0.37.g745f681289
-
+Andreas
 
