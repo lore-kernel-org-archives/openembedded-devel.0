@@ -1,48 +1,22 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id EA1FF60FB4
+Return-Path: <robert.joslyn@redrectangle.org>
+Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
+	[217.70.183.197])
+	by mail.openembedded.org (Postfix) with ESMTP id 747C860F62
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Feb 2020 03:00:09 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id w25so458917qki.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Feb 2020 19:00:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=FvwYMtIhGWt0aCX4/8z3EHqwuX9kLg2dspW4E7ozyEo=;
-	b=IjjykHJ5RjJwsDE1WBf2N6gdMtUc64EPL8KQanRxiZtZ77U1tHZ8CPKs7XbyymnjmP
-	j3jQicOOU6bn+3I+oBMvE706QTJM06QAH6DgmhU4BXD8dxWKDR238+mPGahGMtdmjKMh
-	DvVx8P6mag72fJ2YrhN3HAvJx9Ht8CJocjhL5UwiTTYZr3ewpq6EzHGf488IFGAaBg8K
-	PCwRTnrINfMOr0UPfWKwqp2i9Wn0gEjxusAHwXyrDUoZS568N1yyaFZCbIMvPhMXdoV6
-	nihcKmNWFlJ6NngvqxHTosbMDFjLMO4B1cVTIK/gBC2CDkHz5UicYVnrDffzG1ULKSmd
-	Gq9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=FvwYMtIhGWt0aCX4/8z3EHqwuX9kLg2dspW4E7ozyEo=;
-	b=s42hzCrLHSYs07hOLIQYhe7UdbOU8gdFIVCHQfI7ZPXD6JpSBtGNHEAkNbntFUW8Wk
-	ZmSPhnruTzrpcmUx7kH2K6mC8EYb8mtZ9aybJgpxr/yydL9hJN+RRtHSUzQ4G1BbYaTi
-	OdSEdbYUa2Bu4VyEJ4a3Hu82BhsW++PuREFU7iXdfmwYrsxVyQ9jZd/ywquNtWfh0+fW
-	5H4a9c86cQ/OXwrQF5Ps3z5Od1iWSaC0y2cp2YTb7RuG49GdA/outfGrDzZChQp4ZqV6
-	yFfYYFv8kuT2u4MBJRlvqn5aL3BARQfmfAfs6W6RM1wn2XTOLpS1v9PJf0q1+jrhQthI
-	zw2A==
-X-Gm-Message-State: APjAAAXhfGx08cOFVc5Q4vFHfHhDcQlUBdE5Bd+5GjkgDIg7NT9iwUPr
-	X80Ip+LVEpWoxgcjYBmA2a5DCiFw1GlOjq5Dp0o=
-X-Google-Smtp-Source: APXvYqwym0a96wrb5w0liNNOEgAVanBYWVZ2bFm1vHr87F8EqPYahOgrjxWoeLfHT5NEYIp4I4k3rSKokwRdNIEd1zk=
-X-Received: by 2002:a37:bf82:: with SMTP id
-	p124mr31955935qkf.337.1580871610484; 
-	Tue, 04 Feb 2020 19:00:10 -0800 (PST)
+	Wed,  5 Feb 2020 04:23:53 +0000 (UTC)
+X-Originating-IP: 173.197.191.182
+Received: from localhost.localdomain (rrcs-173-197-191-182.west.biz.rr.com
+	[173.197.191.182])
+	(Authenticated sender: robert.joslyn@redrectangle.org)
+	by relay5-d.mail.gandi.net (Postfix) with ESMTPSA id D193E1C0003;
+	Wed,  5 Feb 2020 04:23:52 +0000 (UTC)
+From: Robert Joslyn <robert.joslyn@redrectangle.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  4 Feb 2020 20:23:06 -0800
+Message-Id: <20200205042309.3555549-1-robert.joslyn@redrectangle.org>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-References: <20200204234013.59800-1-max.krummenacher@toradex.com>
-In-Reply-To: <20200204234013.59800-1-max.krummenacher@toradex.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 4 Feb 2020 18:59:43 -0800
-Message-ID: <CAMKF1soPE2WrRVyQBCM2FBd-qcuAVBc6Z3ibKLsPoUt2X_42Mg@mail.gmail.com>
-To: Max Krummenacher <max.oss.09@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Max Krummenacher <max.krummenacher@toradex.com>
-Subject: Re: [meta-oe][PATCH] smem: use python 3
+Subject: [meta-oe][PATCH v2 1/4] iwd: Update to 1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,239 +29,190 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2020 03:00:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 05 Feb 2020 04:23:54 -0000
+Content-Transfer-Encoding: 8bit
 
-Thanks for doing this.
+dbus is not required to compile, but is expected at run time. Move it to
+RDEPENDS.
 
-On Tue, Feb 4, 2020 at 3:42 PM Max Krummenacher <max.oss.09@gmail.com> wrote:
->
-> There seems to be no user of python-textutils python-shell python-codecs
-> in the script, so these rdepends are dropped.
->
+Backport a patch from upstream to fix build using musl. rawmemchr is a
+GNU extension that is not supported in musl.
 
-OK
+From upstream changelog:
 
-> On a i.MX6 based machine smem runs with just python3-compression and
-> its dependencies installed.
+ver 1.4:
+	Fix issue with handling Crypto-Binding and invalid MACs.
+	Fix issue with handling change station error results.
+	Fix issue with handling DNS resolving installations.
 
-ok. Perhaps, it pulls in right set of rdeps indirectly?
+ver 1.3:
+	Fix issue with handling EAP-GTC and password requests.
+	Fix issue with handling Crypto-Binding TLV for PEAPv0.
+	Fix issue with handling key installation and PEAP Phase 2.
+	Fix issue with handling externally triggered scan requests.
+	Fix issue with handling RCPI calculation for RRM requests.
 
->
-> Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-> ---
->  .../smem/0001-smem-convert-to-python-3.patch  | 161 ++++++++++++++++++
->  meta-oe/recipes-support/smem/smem_1.4.bb      |   7 +-
->  2 files changed, 166 insertions(+), 2 deletions(-)
->  create mode 100644 meta-oe/recipes-support/smem/smem/0001-smem-convert-to-python-3.patch
+ver 1.2:
+	Fix issue with handling scan requests while connecting.
+	Fix issue with handling scan duration for RRM requests.
+	Fix issue with handling parent TSF value for RRM requests.
 
-Perhaps using 1.5 tag would be desired since that already has py3 fixes
-https://selenic.com/repo/smem/archive/1.5.tar.bz2
+ver 1.1:
+	Fix issue with simple configuration support checks.
+	Fix issue with handling TLS tunnel and PEAPv0.
+	Add support for radio resource management.
 
-Or maybe we can cherry pick the patches between 1.4 tag and 1.5 tag
-there are 6 or 7 patches in total [1]
+Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
+---
+ ...d-redirection-of-input-and-output-fi.patch | 12 ++--
+ ...0001-build-Support-missing-rawmemchr.patch | 62 +++++++++++++++++++
+ .../iwd/{iwd_1.0.bb => iwd_1.4.bb}            |  7 ++-
+ 3 files changed, 72 insertions(+), 9 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/iwd/iwd/0001-build-Support-missing-rawmemchr.patch
+ rename meta-oe/recipes-connectivity/iwd/{iwd_1.0.bb => iwd_1.4.bb} (86%)
 
-https://selenic.com/repo/smem
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch
+index 93ef007f8..80126a870 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch
++++ b/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch
+@@ -1,4 +1,4 @@
+-From f2a2b9f445ab1e31fbb27a74744e9a2ededfce17 Mon Sep 17 00:00:00 2001
++From 46fc0e197598579dc05e42f137e84f86a9b926e9 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Mon, 4 Nov 2019 16:38:04 -0800
+ Subject: [PATCH] Makefile.am: Avoid redirection of input and output files
+@@ -15,26 +15,24 @@ make[1]: *** [Makefile:3544: monitor/iwmon.1] Error 1
+ Upstream-Status: Pending
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
+ ---
+  Makefile.am | 5 +++--
+  1 file changed, 3 insertions(+), 2 deletions(-)
+ 
+ diff --git a/Makefile.am b/Makefile.am
+-index 823b7d02..1bd0005c 100644
++index 8c69d9f4..35a25fc0 100644
+ --- a/Makefile.am
+ +++ b/Makefile.am
+-@@ -626,8 +626,9 @@ SED_PROCESS = $(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(SED) \
++@@ -629,8 +629,9 @@ SED_PROCESS = $(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(SED) \
+  		< $< > $@
+  
+  if RUN_RST2MAN
+ -RST2MAN_PROCESS = $(AM_V_GEN)$(RST2MAN) --strict --no-raw --no-generator \
+--			--no-datestamp < $< > $@
++-			--no-datestamp $< $@
+ +RST2MAN_PROCESS = $(AM_V_GEN)$(MKDIR_P) $(dir $@) && \
+ +			$(AM_V_GEN)$(RST2MAN) --strict --no-raw \
+ +			--no-generator --no-datestamp $< $@
+  else
+  RST2MAN_PROCESS = $(AM_V_GEN)test -f $@ || \
+  		{ echo "Generated manual page $@ does not exist"; false; }
+--- 
+-2.24.0
+-
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-build-Support-missing-rawmemchr.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-build-Support-missing-rawmemchr.patch
+new file mode 100644
+index 000000000..733f5fea1
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/iwd/iwd/0001-build-Support-missing-rawmemchr.patch
+@@ -0,0 +1,62 @@
++From fcdddf2b726439e049992878f90da607414a1a47 Mon Sep 17 00:00:00 2001
++From: Denis Kenzior <denkenz@gmail.com>
++Date: Mon, 3 Feb 2020 11:54:28 -0600
++Subject: [PATCH] build: Support missing rawmemchr
++
++rawmemchr is a GNU extension in glibc that does not exist in musl.
++
++Upstream-status: Backport of https://git.kernel.org/pub/scm/network/wireless/iwd.git/commit/?id=fcdddf2b726439e049992878f90da607414a1a47
++
++Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
++
++---
++ configure.ac  |  1 +
++ src/missing.h | 10 ++++++++++
++ src/wiphy.c   |  1 +
++ 3 files changed, 12 insertions(+)
++
++diff --git a/configure.ac b/configure.ac
++index 5ae1401cae17..2d373a47ba68 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -128,6 +128,7 @@ AC_DEFINE_UNQUOTED(WIRED_STORAGEDIR, "${wired_storagedir}",
++ 			[Directory for Ethernet daemon storage files])
++ 
++ AC_CHECK_FUNCS(explicit_bzero)
+++AC_CHECK_FUNCS(rawmemchr)
++ 
++ AC_CHECK_HEADERS(linux/types.h linux/if_alg.h)
++ 
++diff --git a/src/missing.h b/src/missing.h
++index 2bb210ae3c81..2cc80aee5d38 100644
++--- a/src/missing.h
+++++ b/src/missing.h
++@@ -27,3 +27,13 @@ static inline void explicit_bzero(void *s, size_t n)
++         __asm__ __volatile__ ("" : : "r"(s) : "memory");
++ }
++ #endif
+++
+++#ifndef HAVE_RAWMEMCHR
+++static inline void *rawmemchr(const void *s, int c)
+++{
+++_Pragma("GCC diagnostic push")
+++_Pragma("GCC diagnostic ignored \"-Wstringop-overflow=\"")
+++	return memchr(s, c, (size_t) -1);
+++_Pragma("GCC diagnostic pop")
+++}
+++#endif
++diff --git a/src/wiphy.c b/src/wiphy.c
++index 1da479db2dab..511bb27f52b8 100644
++--- a/src/wiphy.c
+++++ b/src/wiphy.c
++@@ -37,6 +37,7 @@
++ 
++ #include "linux/nl80211.h"
++ 
+++#include "src/missing.h"
++ #include "src/iwd.h"
++ #include "src/module.h"
++ #include "src/ie.h"
++-- 
++2.21.0
++
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.0.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
+similarity index 86%
+rename from meta-oe/recipes-connectivity/iwd/iwd_1.0.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
+index cc34ca221..ed8f21ac1 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_1.0.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
+@@ -4,12 +4,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+ 
+ inherit autotools pkgconfig systemd python3native
+ 
+-DEPENDS = "ell readline dbus python3-docutils-native"
++DEPENDS = "ell readline python3-docutils-native"
+ 
+ SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
+            file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
++           file://0001-build-Support-missing-rawmemchr.patch \
+           "
+-SRCREV = "971e1d2038a203ad43bd2278a811a9e5ec8d52db"
++SRCREV = "860fa4697f349da7791ecf22ca76f9ac0e5de261"
+ S = "${WORKDIR}/git"
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+@@ -32,6 +33,8 @@ FILES_${PN} += "${datadir}/dbus-1 ${nonarch_libdir}/modules-load.d ${systemd_uni
+ 
+ SYSTEMD_SERVICE_${PN} = "iwd.service ${@bb.utils.contains('PACKAGECONFIG', 'wired', 'ead.service', '', d)}"
+ 
++RDEPENDS_${PN} = "dbus"
++
+ RRECOMMENDS_${PN} = "\
+     kernel-module-pkcs7-message \
+     kernel-module-pkcs8-key-parser \
+-- 
+2.24.1
 
->
-> diff --git a/meta-oe/recipes-support/smem/smem/0001-smem-convert-to-python-3.patch b/meta-oe/recipes-support/smem/smem/0001-smem-convert-to-python-3.patch
-> new file mode 100644
-> index 000000000..85f35be44
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/smem/smem/0001-smem-convert-to-python-3.patch
-> @@ -0,0 +1,161 @@
-> +From 5535a524f6db57c0b2e4a539db733fd9e840c97e Mon Sep 17 00:00:00 2001
-> +From: Max Krummenacher <max.krummenacher@toradex.com>
-> +Date: Mon, 3 Feb 2020 21:04:42 +0000
-> +Subject: [PATCH] smem: convert to python 3
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
-> +---
-> + smem | 41 ++++++++++++++++++++++-------------------
-> + 1 file changed, 22 insertions(+), 19 deletions(-)
-> +
-> +diff --git a/smem b/smem
-> +index 0cbd925..577d27b 100755
-> +--- a/smem
-> ++++ b/smem
-> +@@ -1,4 +1,4 @@
-> +-#!/usr/bin/env python
-> ++#!/usr/bin/env python3
-> + #
-> + # smem - a tool for meaningful memory reporting
-> + #
-> +@@ -21,7 +21,10 @@ class procdata(object):
-> +     def _list(self):
-> +         return os.listdir(self.source + "/proc")
-> +     def _read(self, f):
-> +-        return file(self.source + '/proc/' + f).read()
-> ++        afile = open(self.source + '/proc/' + f)
-> ++        ret = afile.read()
-> ++        afile.close()
-> ++        return ret
-> +     def _readlines(self, f):
-> +         return self._read(f).splitlines(True)
-> +     def _stat(self, f):
-> +@@ -209,7 +212,7 @@ def fromunits(x):
-> +     s = dict(k=2**10, K=2**10, kB=2**10, KB=2**10,
-> +              M=2**20, MB=2**20, G=2**30, GB=2**30,
-> +              T=2**40, TB=2**40)
-> +-    for k,v in s.items():
-> ++    for k,v in list(s.items()):
-> +         if x.endswith(k):
-> +             return int(float(x[:-len(k)])*v)
-> +     sys.stderr.write("Memory size should be written with units, for example 1024M\n")
-> +@@ -240,7 +243,7 @@ def pidtotals(pid):
-> +     maps = pidmaps(pid)
-> +     t = dict(size=0, rss=0, pss=0, shared_clean=0, shared_dirty=0,
-> +              private_clean=0, private_dirty=0, referenced=0, swap=0)
-> +-    for m in maps.iterkeys():
-> ++    for m in maps.keys():
-> +         for k in t:
-> +             t[k] += maps[m].get(k, 0)
-> +
-> +@@ -296,7 +299,7 @@ def showpids():
-> +         )
-> +     columns = options.columns or 'pid user command swap uss pss rss'
-> +
-> +-    showtable(pt.keys(), fields, columns.split(), options.sort or 'pss')
-> ++    showtable(list(pt.keys()), fields, columns.split(), options.sort or 'pss')
-> +
-> + def maptotals(pids):
-> +     totals = {}
-> +@@ -307,7 +310,7 @@ def maptotals(pids):
-> +         try:
-> +             maps = pidmaps(pid)
-> +             seen = {}
-> +-            for m in maps.iterkeys():
-> ++            for m in maps.keys():
-> +                 name = maps[m]['name']
-> +                 if name not in totals:
-> +                     t = dict(size=0, rss=0, pss=0, shared_clean=0,
-> +@@ -361,7 +364,7 @@ def showmaps():
-> +         )
-> +     columns = options.columns or 'map pids avgpss pss'
-> +
-> +-    showtable(pt.keys(), fields, columns.split(), options.sort or 'pss')
-> ++    showtable(list(pt.keys()), fields, columns.split(), options.sort or 'pss')
-> +
-> + def usertotals(pids):
-> +     totals = {}
-> +@@ -383,7 +386,7 @@ def usertotals(pids):
-> +         else:
-> +             t = totals[user]
-> +
-> +-        for m in maps.iterkeys():
-> ++        for m in maps.keys():
-> +             for k in t:
-> +                 t[k] += maps[m].get(k, 0)
-> +
-> +@@ -419,7 +422,7 @@ def showusers():
-> +         )
-> +     columns = options.columns or 'user count swap uss pss rss'
-> +
-> +-    showtable(pt.keys(), fields, columns.split(), options.sort or 'pss')
-> ++    showtable(list(pt.keys()), fields, columns.split(), options.sort or 'pss')
-> +
-> + def showsystem():
-> +     t = totalmem()
-> +@@ -460,14 +463,14 @@ def showsystem():
-> +               'area not reclaimable'))
-> +
-> +     columns = options.columns or 'area used cache noncache'
-> +-    showtable(range(len(l)), fields, columns.split(), options.sort or 'order')
-> ++    showtable(list(range(len(l))), fields, columns.split(), options.sort or 'order')
-> +
-> + def showfields(fields, f):
-> +     if f != list:
-> +-        print "unknown field", f
-> +-    print "known fields:"
-> ++        print("unknown field", f)
-> ++    print("known fields:")
-> +     for l in sorted(fields.keys()):
-> +-        print "%-8s %s" % (l, fields[l][-1])
-> ++        print("%-8s %s" % (l, fields[l][-1]))
-> +
-> + def showtable(rows, fields, columns, sort):
-> +     header = ""
-> +@@ -518,10 +521,10 @@ def showtable(rows, fields, columns, sort):
-> +         return
-> +
-> +     if not options.no_header:
-> +-        print header
-> ++        print(header)
-> +
-> +     for k,r in l:
-> +-        print format % tuple([f(v) for f,v in zip(formatter, r)])
-> ++        print(format % tuple([f(v) for f,v in zip(formatter, r)]))
-> +
-> +     if options.totals:
-> +         # totals
-> +@@ -533,8 +536,8 @@ def showtable(rows, fields, columns, sort):
-> +             else:
-> +                 t.append("")
-> +
-> +-        print "-" * len(header)
-> +-        print format % tuple([f(v) for f,v in zip(formatter, t)])
-> ++        print("-" * len(header))
-> ++        print(format % tuple([f(v) for f,v in zip(formatter, t)]))
-> +
-> + def showpie(l, sort):
-> +     try:
-> +@@ -605,7 +608,7 @@ def showbar(l, columns, sort):
-> +
-> +     pl = []
-> +     ind = numpy.arange(len(l))
-> +-    for n in xrange(len(rc)):
-> ++    for n in range(len(rc)):
-> +         pl.append(pylab.bar(ind + offset + width * n,
-> +                              [x[1][rc[n]] for x in l], width, color=gc(n)))
-> +
-> +@@ -682,7 +685,7 @@ try:
-> +         showsystem()
-> +     else:
-> +         showpids()
-> +-except IOError, e:
-> ++except IOError as e:
-> +     if e.errno == errno.EPIPE:
-> +         pass
-> + except KeyboardInterrupt:
-> +--
-> +2.20.1
-> +
-> diff --git a/meta-oe/recipes-support/smem/smem_1.4.bb b/meta-oe/recipes-support/smem/smem_1.4.bb
-> index 947c47b0f..4728e6b79 100644
-> --- a/meta-oe/recipes-support/smem/smem_1.4.bb
-> +++ b/meta-oe/recipes-support/smem/smem_1.4.bb
-> @@ -9,7 +9,10 @@ SECTION = "Applications/System"
->  LICENSE = "GPLv2+"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->
-> -SRC_URI = "http://www.selenic.com/${BPN}/download/${BP}.tar.gz"
-> +SRC_URI = " \
-> +    http://www.selenic.com/${BPN}/download/${BP}.tar.gz \
-> +    file://0001-smem-convert-to-python-3.patch \
-> +"
->  SRC_URI[md5sum] = "fe79435c3930389bfdb560255c802162"
->  SRC_URI[sha256sum] = "2ea9f878f4cf3c276774c3f7e2a41977a1f2d64f98d2dcb6a15f1f3d84df61ec"
->
-> @@ -24,7 +27,7 @@ do_install() {
->          install -m 0755 ${S}/smemcap ${D}${bindir}/
->          install -m 0644 ${S}/smem.8 ${D}/${mandir}/man8/
->  }
-> -RDEPENDS_${PN} += "python-textutils python-compression python-shell python-codecs"
-> +RDEPENDS_${PN} += "python3-compression"
->
->  PACKAGES =+ "smemcap"
->
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
