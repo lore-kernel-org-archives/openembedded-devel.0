@@ -1,51 +1,26 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 44EA060451
+Return-Path: <Qi.Chen@windriver.com>
+X-Greylist: delayed 13704 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 05 Feb 2020 12:00:06 UTC
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A0CA60AF0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Feb 2020 09:25:07 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id z9so1703587wrs.10
+	Wed,  5 Feb 2020 12:00:06 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 0158BgWh019057
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Feb 2020 01:25:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=XGQXERF9xoa9dVD24uaFYEQ75s2GL/6vo6BzU4UlsbU=;
-	b=YQsv4esTmoEgHiQtKSVgE0PeP6Gg2B4+X++U6iwru++PfcUB3snU1l6Ckh2Z5DOrQR
-	XKj2s3HCUefVexBqa7xYTByZSe9mN23MvQ9KOFSQMzCI2WgAmKzFoTp0q5X8iJUn0K9v
-	t+wO2ZUnDTFxcyM+xeXytYpnKiUAYq7WNHt9gLg+NZTi0j/JDcIR7a/l9YwVXN41DRhx
-	xCs/8ZAtldifaRLcrdX/hjYxyoEArdmWTwz8lTJIk6J6ak2N0n+kqtg3KLNw9WkUjc0F
-	kN0Bl7EA7faL9nH7zRwQt2KuBGbk+cFxATtXed2nJQIy4ehaGvTPhlL3BjWCN7A0K7Aa
-	Humg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=XGQXERF9xoa9dVD24uaFYEQ75s2GL/6vo6BzU4UlsbU=;
-	b=RkY+3+ppi25SabS1yIbui4uqAAn51R6gDIMXKMkwJpB08H1XsdrcRg3H/BeeOtbrhX
-	2gjVTOryT7kSdPC3gBXHQ6Jiw1Ga442qj3xh8cSSU0a2ISCU9k2CdV/aBFIC9oLk/7uN
-	Cd3oG0yVvXsmEclm06BWtToVQkPXoaoMqWEx6Y3XKrpXx4EPB6lFex42Uy2yIsow1jIw
-	RJfn4+qI3VFq/0+MhLgGTHO4JWABKDYwi76+D9ELdp0ydZE7+v90YxkARvq5/rmH3Xdn
-	hyr6WqI6h4upHY6JFafWbjVX+t9+gMA3B7WDJND0xbICFPvOUlHcun4dRVkxYlaZF4E4
-	+w7w==
-X-Gm-Message-State: APjAAAXaRnj1jrAVtoR/CN334P/CMtf9aGZnEDP5ny6CqMudEROxXU16
-	MJWHsCdQ7V4UKTcXHBtXOnyR59q2
-X-Google-Smtp-Source: APXvYqxD/kozYgH0P92AhLJ5fDr4dMbfLuNnWPsTPYP5A4aAtI6SGGtsiYZokMvAp/392HT+7J86bg==
-X-Received: by 2002:a5d:5183:: with SMTP id k3mr26933398wrv.414.1580894707585; 
-	Wed, 05 Feb 2020 01:25:07 -0800 (PST)
-Received: from mueller-a-nb-linux.zera.local ([195.50.169.54])
-	by smtp.gmail.com with ESMTPSA id
-	h17sm35081024wrs.18.2020.02.05.01.25.06
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 05 Feb 2020 01:25:06 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Feb 2020 10:25:00 +0100
-Message-Id: <20200205092500.23165-1-schnitzeltony@gmail.com>
+	Wed, 5 Feb 2020 00:11:43 -0800 (PST)
+Received: from ala-lpggp7.wrs.com (147.11.105.171) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.468.0;
+	Wed, 5 Feb 2020 00:11:42 -0800
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 5 Feb 2020 00:11:42 -0800
+Message-ID: <20200205081142.54027-1-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Subject: [PATCH][zeus] libldb: upgrade 1.5.5 -> 1.5.6
+Subject: [meta-oe][PATCH] xmlsec1: fix for multilib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,45 +33,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2020 09:25:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 05 Feb 2020 12:00:06 -0000
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-From: Yi Zhao <yi.zhao@windriver.com>
+With previous change of nss/nspr in this recipe, multilib build
+failure at do_configure.
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Fix it by not using hardcoded /lib/.
 
-(cherry picked from commit 2b3fd534874aee125a6c79c70c93b1aa498fda3f)
-
-This is necessary for zeus to fix samba build as reported in [1]
-
-[1] http://lists.openembedded.org/pipermail/openembedded-devel/2020-January/204168.html
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb} (95%)
+ .../0001-nss-nspr-fix-for-multilib.patch      | 52 +++++++++++++++++++
+ .../recipes-support/xmlsec1/xmlsec1_1.2.29.bb |  3 +-
+ 2 files changed, 54 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/xmlsec1/xmlsec1/0001-nss-nspr-fix-for-multilib.patch
 
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-similarity index 95%
-rename from meta-networking/recipes-support/libldb/libldb_1.5.5.bb
-rename to meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-index b19c964d8..99eb6f9ce 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-@@ -33,8 +33,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
-                     file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
-                     file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1/0001-nss-nspr-fix-for-multilib.patch b/meta-oe/recipes-support/xmlsec1/xmlsec1/0001-nss-nspr-fix-for-multilib.patch
+new file mode 100644
+index 000000000..53c119765
+--- /dev/null
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1/0001-nss-nspr-fix-for-multilib.patch
+@@ -0,0 +1,52 @@
++From 9ed3b4e628f9254d5c86006fe63c33a1eb02aee5 Mon Sep 17 00:00:00 2001
++From: Chen Qi <Qi.Chen@windriver.com>
++Date: Tue, 4 Feb 2020 23:39:49 -0800
++Subject: [PATCH] nss/nspr: fix for multilib
++
++Upstream-Status: Pending
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ configure.ac | 16 ++++++++--------
++ 1 file changed, 8 insertions(+), 8 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index b46d97d..39f4318 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -920,24 +920,24 @@ fi
++ dnl Priority 1: User specifies the path to installation
++ if test "z$NSPR_FOUND" = "zno" -a "z$with_nspr" != "z" -a "z$with_nspr" != "zyes" ; then
++     AC_MSG_CHECKING(for nspr library installation in "$with_nspr" folder)
++-    if test -f "$with_nspr/include/$NSPR_INCLUDE_MARKER" -a -f "$with_nspr/lib/$NSPR_LIB_MARKER" ; then
++-        NSPR_INCLUDE_PATH="$with_nspr/include"
++-        NSPR_LIB_PATH="$with_nspr/lib"
+++    if test -f "$with_nspr/${includedir}/$NSPR_INCLUDE_MARKER" -a -f "$with_nspr/${libdir}/$NSPR_LIB_MARKER" ; then
+++        NSPR_INCLUDE_PATH="$with_nspr/${includedir}"
+++        NSPR_LIB_PATH="$with_nspr/${libdir}"
++         NSPR_FOUND="yes"
++         AC_MSG_RESULT([yes])
++     else
++-        AC_MSG_ERROR([not found: "$with_nspr/include/$NSPR_INCLUDE_MARKER" and/or "$with_nspr/lib/$NSPR_LIB_MARKER" files don't exist), typo?])
+++        AC_MSG_ERROR([not found: "$with_nspr/${includedir}/$NSPR_INCLUDE_MARKER" and/or "$with_nspr/${libdir}/$NSPR_LIB_MARKER" files don't exist), typo?])
++     fi
++ fi
++ if test "z$NSS_FOUND" = "zno" -a "z$with_nss" != "z" -a "z$with_nss" != "zyes" ; then
++     AC_MSG_CHECKING(for nss library installation in "$with_nss" folder)
++-    if test -f "$with_nss/include/$NSS_INCLUDE_MARKER" -a -f "$with_nss/lib/$NSS_LIB_MARKER" ; then
++-        NSS_INCLUDE_PATH="$with_nss/include"
++-        NSS_LIB_PATH="$with_nss/lib"
+++    if test -f "$with_nss/${includedir}/$NSS_INCLUDE_MARKER" -a -f "$with_nss/${libdir}/$NSS_LIB_MARKER" ; then
+++        NSS_INCLUDE_PATH="$with_nss/${includedir}"
+++        NSS_LIB_PATH="$with_nss/${libdir}"
++         NSS_FOUND="yes"
++         AC_MSG_RESULT([yes])
++     else
++-        AC_MSG_ERROR([not found: "$with_nss/include/$NSS_INCLUDE_MARKER" and/or "$with_nss/lib/$NSS_LIB_MARKER" files don't exist), typo?])
+++        AC_MSG_ERROR([not found: "$with_nss/${includedir}/$NSS_INCLUDE_MARKER" and/or "$with_nss/${libdir}/$NSS_LIB_MARKER" files don't exist), typo?])
++     fi
++ fi
++ 
++-- 
++2.21.0
++
+diff --git a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.29.bb b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.29.bb
+index 3e25e8d35..8fc611a27 100644
+--- a/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.29.bb
++++ b/meta-oe/recipes-support/xmlsec1/xmlsec1_1.2.29.bb
+@@ -17,6 +17,7 @@ SRC_URI = "http://www.aleksey.com/xmlsec/download/${BP}.tar.gz \
+     file://change-finding-path-of-nss.patch \
+     file://makefile-ptest.patch \
+     file://xmlsec1-examples-allow-build-in-separate-dir.patch \
++    file://0001-nss-nspr-fix-for-multilib.patch \
+     file://run-ptest \
+     "
  
--SRC_URI[md5sum] = "339a41ac9efaec680e6d1469dd9aa35b"
--SRC_URI[sha256sum] = "199f5861aa863f538ec66d5fa95ecc13254a2030c53daf0e47363fa9ba235c68"
-+SRC_URI[md5sum] = "fc58ef432c1fcb03fc3bb6cccce08977"
-+SRC_URI[sha256sum] = "ff82474d0bf109e415a2d50334bde5715f486a53ff4bb8c7f74459dd229e975b"
+@@ -31,7 +32,7 @@ inherit autotools-brokensep ptest pkgconfig
+ PACKAGECONFIG ??= "gnutls libgcrypt nss openssl des"
+ PACKAGECONFIG[gnutls] = ",,gnutls"
+ PACKAGECONFIG[libgcrypt] = ",,libgcrypt"
+-PACKAGECONFIG[nss] = "--with-nss=${STAGING_LIBDIR}/.. --with-nspr=${STAGING_LIBDIR}/..,,nss nspr"
++PACKAGECONFIG[nss] = "--with-nss=${STAGING_DIR_HOST} --with-nspr=${STAGING_DIR_HOST},,nss nspr"
+ PACKAGECONFIG[openssl] = ",,openssl"
+ PACKAGECONFIG[des] = ",--disable-des,,"
  
- inherit waf-samba distro_features_check
- REQUIRED_DISTRO_FEATURES = "pam"
 -- 
 2.21.0
 
