@@ -1,46 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1DDA260EA3
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D38B460EC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Feb 2020 01:12:21 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id w47so305900qtk.4
+	Wed,  5 Feb 2020 02:42:31 +0000 (UTC)
+Received: by mail-pl1-f195.google.com with SMTP id a6so235110plm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 Feb 2020 17:12:22 -0800 (PST)
+	Tue, 04 Feb 2020 18:42:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=gH//ZhHEaI/B0rYU8FC9Kb0zc06dAI20AJDawqwrkGc=;
-	b=jgKjI2LfR3SRANnIsn9qy/KQvBX7qFUA2THX+QSVepQZIrIVy1uGHRf0q4/Z4fOrf6
-	XLinRVba9xqkRAUN2BnQrYngCC+/DMF97YlcRqq8BxWl5WzEM7aeZFMvWKX2HnEjtk5D
-	X5WRawyG2n8xgqDl6wyx/HsLtTHinQ2t5RBtBEPmbA9U19mEftuDlLpyQHaNw5Jqcnsv
-	IbfKRn+Y47sLqjCSGIwBlisfuXU8i6oxZaNieyxvNUJ9lhBN7D6BFBdIdr+FCQq9n9qf
-	jJ9aerJLUqPdazgG5L6wRnxROi2md9LHUhKim8PdM+5K7dueleMbSBWQH3YogeAPDHbU
-	oqmg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fl48AvKYLlK2AMji4oFtUsCLjxQ9lG18ObJ4TlQWwqw=;
+	b=FSHt8TTkHNx6a1i0UjDj9pxdIbo8OrJ6MUH3O45ZpbtF7lTBicQ36/E1/9QU56zhye
+	OwJiaAYg7WrFKkRYO3qyGYVeU4l6tOsXhmx680Db1Hj463Eh6ZvopvKgl52IDQ+ueXmI
+	O3nFqNtEFbWFETde8SrvQyqdHVWP3l92HwQtf9eeX5zi4AIGn9xEmxAR8fUn/HJBMupX
+	iUjgIDnh4IPWW7MkqWMxy5hKQPRELhlccXsKUb/+SZJQVaG1XCKwHV1U+f5nWH0h1nPt
+	ED1+fwpSmIWJUux/onKBqIegDRLMxzD+MQ2vB5OxoCWJyOLkoIygPrVkioXmN0jlkti9
+	XHwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=gH//ZhHEaI/B0rYU8FC9Kb0zc06dAI20AJDawqwrkGc=;
-	b=kdLnmBkJEi88zXpTd52Kn+ut7rYVkglyrMh9D3FYGVbkbHGvWI+nzkGXmuQ2ItuAkJ
-	jai9yCtxYYfjLYB3Mft0WWK+2DGE6bOQ6Lq8rt6pfnNIIXmUNvt6JXQ7cuaG5pBMST+z
-	GRkTnAEMJb+UAlNnz6zfie0mT4X1Zto8mpF9zDwB8QbyvkFceEj36RYnJSNU+G7VE0Id
-	t2lw1hJ4ptUvxjxdjZRB4iKHnGQt4n5qFVSqjF8KGwhLz3c+xz9a47SWwQcUOMwFmmuI
-	Y3aClwe3ayTQ6XHIrRAWcajal4PVibLwT+bRpK8d53qtahWWn1+qMQv+Md68ESQlsJtS
-	Z3dg==
-X-Gm-Message-State: APjAAAXEsjIaMPeMx9yNThDUnpyKIxAz8I6sFNjGQxmEr1AEGFMOxAp+
-	36sqXr7YdtAWceUZj0bswLa+FoZ2TRbG4eBdT80=
-X-Google-Smtp-Source: APXvYqwFd1sSnqA27WZEnZjTt4BARe2cvjF5QlVPTTREb/JIeV8Fu1sxxaigaC7PLLHDDH9JD1s4ZaDEno7PVL2S9i0=
-X-Received: by 2002:ac8:544f:: with SMTP id d15mr31593915qtq.53.1580865141502; 
-	Tue, 04 Feb 2020 17:12:21 -0800 (PST)
-MIME-Version: 1.0
-References: <20200204092126.19209-1-asmithakarun@gmail.com>
-In-Reply-To: <20200204092126.19209-1-asmithakarun@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fl48AvKYLlK2AMji4oFtUsCLjxQ9lG18ObJ4TlQWwqw=;
+	b=YyLLqMvWinqUDhDwnyYcSJt2tnyC6L/BD1mkEEVDaB+PqNCIsT6+mfaj+iRYxrZlr4
+	GD+Kjz6D5LHykyOX8Oc0B2KiD9Pugwg2s1ts8AWiuHlu359gPodf83AIaHeCp64Onryo
+	mnacnzKCzXYwkrgrXduewwuw4w3hm9DBx9oRSmrEOBg1sAghBI7Q+Y615hvaFgy4i6Rv
+	N8x9bMwgslqhlWVGVUuKMGf5I+5iDFpgi3jBeINIsOYCMljkT6uriNJ9IRgoTzEaoPkZ
+	xUra331pOaX2yrLhM/2EK1m7RnHjBctDNJx9nSxBOz2YkRI12yjCZHr4hirSdenN0OA3
+	w0Hw==
+X-Gm-Message-State: APjAAAX2UQ44IBlSL6kZZCXxetrV2G65bmj0X5wglULUAWMs3gi49+gj
+	bYEfyDfivy8qECcyLYdbDepQc//4jWc=
+X-Google-Smtp-Source: APXvYqytZOqTSEngYfFBTbDSBXMrSr2r4bGmpcPbosbQsjGiVZfv88XBdqmGZufw6kDbWK03sFXVtg==
+X-Received: by 2002:a17:902:6902:: with SMTP id
+	j2mr3830803plk.235.1580870552390; 
+	Tue, 04 Feb 2020 18:42:32 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1852])
+	by smtp.gmail.com with ESMTPSA id
+	70sm25952747pfw.140.2020.02.04.18.42.31
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 04 Feb 2020 18:42:31 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 4 Feb 2020 17:11:55 -0800
-Message-ID: <CAMKF1sqpBXWGgxhu1xBAmu_1C_QvKC03ydndDe1iFiy=woDi7g@mail.gmail.com>
-To: Asmitha Karunanithi <asmithakarun@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] Library to aid multi-part form data parsing
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  4 Feb 2020 18:42:36 -0800
+Message-Id: <20200205024236.1113324-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] cpuid: Upgrade to 20200203 and use perlnative for pod2man
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,101 +58,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2020 01:12:21 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 05 Feb 2020 02:42:32 -0000
+Content-Transfer-Encoding: 8bit
 
-it also fails on musl/aarch64
+Fixes
+/bin/sh: pod2man: command not found
 
-https://errors.yoctoproject.org/Errors/Details/385285/
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../cpuid/{cpuid_20180519.bb => cpuid_20200203.bb}          | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/cpuid/{cpuid_20180519.bb => cpuid_20200203.bb} (83%)
 
-On Tue, Feb 4, 2020 at 1:21 AM Asmitha Karunanithi
-<asmithakarun@gmail.com> wrote:
->
-> From: asmitha <asmithakarun@gmail.com>
->
-> Mimetic library helps parsing the multi-part form data. This library
-> can be used for scenarios that includes multi-part form data file uploads
-> to the BMC.
->
-> The patch file (config.patch) includes:
-> i) addition of a compilation flag - "no-narrowing" since this has been
-> treated as warning in earlier versions of c++ and now with the higher
-> versions, this is treated as errors.
-> ii) the test directory is removed as there were errors (relocation errors)
-> since the shared object files of libc++ and libc were not taken from the
-> sysroot path but from the system's library path where the required
-> version of the .so is not present.
->
-> Signed-off-by: asmitha <asmithakarun@gmail.com>
-> ---
->  .../libmimetic/libmimetic/config.patch        | 25 +++++++++++++++++++
->  .../libmimetic/libmimetic_0.9.8.bb            | 19 ++++++++++++++
->  2 files changed, 44 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libmimetic/libmimetic/config.patch
->  create mode 100644 meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
->
-> diff --git a/meta-oe/recipes-support/libmimetic/libmimetic/config.patch b/meta-oe/recipes-support/libmimetic/libmimetic/config.patch
-> new file mode 100644
-> index 000000000..52bf7b450
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libmimetic/libmimetic/config.patch
-> @@ -0,0 +1,25 @@
-> +diff --git a/Makefile.am b/Makefile.am
-> +index 634bd4c..c7cbae7 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -1,6 +1,6 @@
-> + MAINTAINERCLEANFILES = Makefile Makefile.in config.cache
-> + EXTRA_DIST=LICENSE m4
-> +-SUBDIRS = mimetic doc examples test win32
-> ++SUBDIRS = mimetic doc examples win32
-> + INCLUDES=-I$(top_srcdir)
-> + ACLOCAL_AMFLAGS=-I m4
-> +
-> +diff --git a/configure.in b/configure.in
-> +index 5e8f3d4..af1018e 100644
-> +--- a/configure.in
-> ++++ b/configure.in
-> +@@ -30,7 +30,7 @@ debug_enabled=false
-> + dnl CFLAGS and CXXFLAGS default to -O2 -g
-> +
-> + dnl CXXFLAGS="$CXXFLAGS -DNDEBUG -fno-exceptions"
-> +-CXXFLAGS="$CXXFLAGS -DNDEBUG"
-> ++CXXFLAGS="$CXXFLAGS -DNDEBUG -Wno-narrowing"
-> +
-> + AC_ARG_ENABLE(debug,
-> +   [  --enable-debug[=LEVEL]  enables debug symbols [default=2]],
-> diff --git a/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
-> new file mode 100644
-> index 000000000..a0a704188
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
-> @@ -0,0 +1,19 @@
-> +# Released under the MIT license.
-> +
-> +SUMMARY = "Mimetic Library for multi-part parsing"
-> +DESCRIPTION = "Email library (MIME) written in C++ designed to be easy to use and integrate but yet fast and efficient."
-> +AUTHOR = "Stefano Barbato <stefano@codesink.org>"
-> +HOMEPAGE = "http://www.codesink.org/mimetic_mime_library.html"
-> +BUGTRACKER = "https://github.com/LadislavSopko/mimetic/issues"
-> +
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b49da7df0ca479ef01ff7f2d799eabee"
-> +
-> +SRCREV = "50486af99b4f9b35522d7b3de40b6ce107505279"
-> +SRC_URI += "git://github.com/LadislavSopko/mimetic/ \
-> +            file://config.patch \
-> +           "
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit autotools
-> --
-> 2.21.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-devtools/cpuid/cpuid_20180519.bb b/meta-oe/recipes-devtools/cpuid/cpuid_20200203.bb
+similarity index 83%
+rename from meta-oe/recipes-devtools/cpuid/cpuid_20180519.bb
+rename to meta-oe/recipes-devtools/cpuid/cpuid_20200203.bb
+index 533a00026e..b0540e541a 100644
+--- a/meta-oe/recipes-devtools/cpuid/cpuid_20180519.bb
++++ b/meta-oe/recipes-devtools/cpuid/cpuid_20200203.bb
+@@ -8,11 +8,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "http://www.etallen.com/${BPN}/${BP}.src.tar.gz \
+            "
+-SRC_URI[md5sum] = "b3b4e44ef49575043a91def0207dcc76"
+-SRC_URI[sha256sum] = "967823be36f23cbc972eb0aa882d069c1d155a5978990ac3bcf425e6a2e7ff9a"
++SRC_URI[md5sum] = "93e99fd3d0d6cd5401c0f84f2cce1d8f"
++SRC_URI[sha256sum] = "ebbd6448a1e416d95889a252f7e03a5429ad4f30bc84c7e8ede8086433e86c55"
+ 
+ COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+ 
++inherit perlnative
++
+ # The install rule from the Makefile has hardcoded paths, so we duplicate
+ # the actions to accommodate different paths.
+ do_install () {
+-- 
+2.25.0
+
 
