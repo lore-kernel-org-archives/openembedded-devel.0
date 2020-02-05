@@ -1,32 +1,98 @@
-Return-Path: <Trevor.Gamblin@windriver.com>
-X-Greylist: delayed 404 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 05 Feb 2020 15:23:34 UTC
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EB0D60CA1
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BF9D60CAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Feb 2020 15:23:33 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 015FGEYW019312
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Wed, 5 Feb 2020 07:16:24 -0800
-Received: from [128.224.56.226] (128.224.56.226) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Wed, 5 Feb 2020 07:16:02 -0800
-To: Martin Jansa <martin.jansa@gmail.com>, Tim Orling <ticotimo@gmail.com>
-References: <20200130153405.26756-1-Trevor.Gamblin@windriver.com>
-	<CA+chaQdLL1BnAD7Yg3=MJxjxUEOGcZoUvBodTgYCkjTAHTspXQ@mail.gmail.com>
-	<CANx9H-CSjpmXB13nkBB8PSgM8a4q=T+xHpQ4FGdij5ykEM+f+A@mail.gmail.com>
-	<20200205145939.tadzklcfscc442eg@jama>
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-Message-ID: <9c5c3983-5b16-eae0-db77-d273ba65a699@windriver.com>
-Date: Wed, 5 Feb 2020 10:16:01 -0500
+	Wed,  5 Feb 2020 15:57:03 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id j15so1164850pgm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Feb 2020 07:57:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:autocrypt:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=TF4276Dfn6bf6IX0DLsAOWt16B9eFKR9+o1FiVhJKzM=;
+	b=pjQbzX5BIElX8zcRCbHTHbBJ0G7w9ILhaX/3sacz2WGackMwWtG++gBVXT54G/4Rp/
+	lSCERIncTwqrvESrO1Pln+ME1OW7og12xvmQ8fMddD95m+SAEZ1SbIQJFKR8EYqYkVtl
+	pJyLPoIrWaN3FbqjuDU2E7ojrFhQs5E0C9gA3MGzQ+BD3c6iZrqM137udGuPLhKNv1my
+	YUgkQWt0YoKoPZboctY28zpmJuNhemTzhSwJ9uCzOQVSUDjbYFBX+ao3VVQwWntfv3WX
+	eGp/Qfo/QITDmNUd/HbuB8y0EP8xvhHJHq7IKYjngDhf2S1jHwpuux9wAHKFULXSS33H
+	VpSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=TF4276Dfn6bf6IX0DLsAOWt16B9eFKR9+o1FiVhJKzM=;
+	b=KANGhNoYZmycXVzbpcnT2roEfFxTdPSz76ZhM2N5SGSW+jgAjOMADE3pqKO8ylIPVT
+	LZFDNc4PAUZULJgyIBjsYmWiqZWA8axcwxn5T6bxvXN+eb+gPqewQwpiKwEmMQLe2ySy
+	/oeVgBASWdsYN9rB3guhG7WTLUni/M2uQQIbimw+HX3ReNbuCQsE9szS1xxlnAPGO4RZ
+	godYxTbnqZbdvkx8nGsn4jnpWCbPPtkZ2Ff1Bv5b8R1nm792QqR4i/3MYtdIosJDJOQV
+	JCFHdcj37X7A5OmRUwVPQi+1IaOwuV7WGOhFECTzvr2AfZtl2qo2kBTWRjPobykC+tFf
+	hkDQ==
+X-Gm-Message-State: APjAAAU3t88dfr+dRXrTK2T2579rb6jKQhhVnsCLvYUWAaLCmTWUonjE
+	d6RDQLEDpXEY7A+rNgy8ZHmCHNpI
+X-Google-Smtp-Source: APXvYqwG4cmwcsVh11xiifQ0cjVSghyou/v5TeUbyz2MqbXk2MbbKzEaXzYXbyqK788//3Y4azgguw==
+X-Received: by 2002:a63:f70e:: with SMTP id x14mr24237235pgh.71.1580918224008; 
+	Wed, 05 Feb 2020 07:57:04 -0800 (PST)
+Received: from ?IPv6:2601:202:4180:a5c0:e0e6:3e38:df8b:421b?
+	([2601:202:4180:a5c0:e0e6:3e38:df8b:421b])
+	by smtp.gmail.com with ESMTPSA id 3sm198288pjg.27.2020.02.05.07.57.03
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Wed, 05 Feb 2020 07:57:03 -0800 (PST)
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20200205092500.23165-1-schnitzeltony@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <7ba13841-f2da-b42c-e25a-7cb00c8a53d3@gmail.com>
+Date: Wed, 5 Feb 2020 07:57:02 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200205145939.tadzklcfscc442eg@jama>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][zeus][PATCH v2 1/2] python-twisted: add required RDEPENDS for twistd
+In-Reply-To: <20200205092500.23165-1-schnitzeltony@gmail.com>
+Subject: Re: [PATCH][zeus] libldb: upgrade 1.5.5 -> 1.5.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,142 +105,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Feb 2020 15:23:39 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 05 Feb 2020 15:57:03 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 Content-Language: en-US
 
 
-On 2/5/20 9:59 AM, Martin Jansa wrote:
-> On Mon, Feb 03, 2020 at 08:45:26PM -0800, Tim Orling wrote:
->> On Mon, Feb 3, 2020 at 8:30 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->>
->>> Please send this fix to normal meta-python in meta-oe/zeus:
->>>
->>> http://git.openembedded.org/meta-openembedded/tree/meta-python/recipes-devtools/python/python-twisted.inc?h=zeus
->>>
->>> BTW: Why are you using meta-python2 with zeus branch? It imho doesn't have
->>> anything which would be missing in oe-core+meta-oe zeus branch and fixes
->>> like this should be resolved also for people using zeus branch without
->>> overlaying them by meta-python2.
->>>
->>>
->> Because, as I believe I have said before, I need a prior release to test
->> the infrastructure on. zeus allows me to work on more than just master
->> until we have the next stable release branching.
-> The question was for Trevor, I understood that you wanted zeus branch to
-> test the infrastructure, but I still don't understand why any "project"
-> should use meta-python2/zeus for the python2 bits which are still in
-> oe-core/zeus + meta-python/zeus.
-I'm not sure if I'm misunderstanding, or if I have been the cause for 
-confusion in my summary. When the reporter filed 
-https://bugzilla.yoctoproject.org/show_bug.cgi?id=13741, it was clear he 
-was using the python 2.x version of Twisted, on the zeus branch of 
-meta-openembedded (based on the version of Twisted that he reported). 
-The patch was written and tested using meta-oe/meta-python zeus and 
-submitted for that layer. I suppose it could be applied to meta-python2 
-as well.
+
+On 2/5/20 1:25 AM, Andreas Müller wrote:
+> From: Yi Zhao <yi.zhao@windriver.com>
 >
-> I see that there are some differences in the recipes in zeus, e.g.:
+> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 >
-> martin@jama:/OE/meta-python2$ diff recipes-devtools/python/python-configparser_3.8.1.bb ../meta-openembedded/meta-python/recipes-devtools/python/python-configparser_3.8.1.bb
-> 1c1
-> < inherit setuptools python-backports-init
+> (cherry picked from commit 2b3fd534874aee125a6c79c70c93b1aa498fda3f)
+>
+> This is necessary for zeus to fix samba build as reported in [1]
+>
+> [1] http://lists.openembedded.org/pipermail/openembedded-devel/2020-January/204168.html
+
+I already have this 
+https://git.openembedded.org/meta-openembedded-contrib/commit/?h=stable/zeus-nut&id=f64c2d691ea597aa6221e3d7706a4d022e07bfea
+
+thanks for sending the patch.
+
+- armin
+>
+> Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 > ---
->> inherit setuptools
-> martin@jama:/OE/meta-python2$ diff recipes-devtools/python/python-dbus_1.2.12.bb ../meta-openembedded/meta-python/recipes-devtools/python/python-dbus_1.2.12.bb
-> 18,19c18,19
-> < # documentation needs python-sphinx, which is not in oe-core or meta-python2 for now
-> < # change to use PACKAGECONFIG when python-sphinx is added to oe-core or meta-python2
-> ---
->> # documentation needs python-sphinx, which is not in oe-core or meta-python for now
->> # change to use PACKAGECONFIG when python-sphinx is added to oe-core or meta-python
-> But README nor your reply explained to me, what's the benefit of using meta-python2/zeus
-> instead of the existing python2 recipes which are in oe-core and meta-oe zeus. That's why
-> I've never tried to use it with zeus, nor submitted the python-numpy and python-nose
-> recipes which got removed from oe-core/zeus, but weren't re-introduced in meta-python2
-> python-nose was removed in:
-> http://git.openembedded.org/openembedded-core/commit/?h=zeus&id=9f07b2836405d86e869780f8f1ae00843eadc409
-> python-numpy in:
-> http://git.openembedded.org/openembedded-core/commit/?h=zeus&id=4e9659f24e2f699effadcbe378b6a746d77ccdbd
-> from oe-core/zeus.
+>  .../libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb}               | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-networking/recipes-support/libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb} (95%)
 >
->> It has nothing to do with what is missing from meta-oe, it is a viable
->> alternative that also helps prove out my workflow as I have EXTREMELY
->> LIMITED TIME to support this.
-> Understood, thanks for doing this work, I'm happy to use and contribute to
-> master branch, it's just that I still don't understand the purpose of zeus
-> branch (other than testing the infrastructure by you) and I hope you agree
-> that bug fixes for python2 issues like the one in this thread belong
-> to meta-oe/meta-python zeus in first place (because that's the layer which
-> what most people are probably still using with zeus).
->
-> Cheers,
->
->> On Fri, Jan 31, 2020 at 10:29 AM Trevor Gamblin <
->>> Trevor.Gamblin@windriver.com> wrote:
->>>
->>>> From: Trevor Gamblin <trevor.gamblin@windriver.com>
->>>>
->>>> python-twisted is currently missing some packages for its /usr/bin/twistd
->>>> executable to function. Add these to the RDEPENDS list, and also clean up
->>>> formatting since the list is getting long.
->>>>
->>>> Note that a similar patch has already been submitted for master branch,
->>>> but the python2 version of twisted needs more explicit RDEPENDS than the
->>>> python3 version submitted to master in order for /usr/bin/twistd to work
->>>> properly.
->>>>
->>>> Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
->>>> ---
->>>>   .../recipes-devtools/python/python-twisted.inc | 18 +++++++++++++++++-
->>>>   1 file changed, 17 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/meta-python/recipes-devtools/python/python-twisted.inc
->>>> b/meta-python/recipes-devtools/python/python-twisted.inc
->>>> index d70104dc2..024a9fa7c 100644
->>>> --- a/meta-python/recipes-devtools/python/python-twisted.inc
->>>> +++ b/meta-python/recipes-devtools/python/python-twisted.inc
->>>> @@ -56,7 +56,23 @@ RDEPENDS_${PN} = "\
->>>>       ${PN}-zsh \
->>>>   "
->>>>
->>>> -RDEPENDS_${PN}-core = "${PYTHON_PN}-core ${PYTHON_PN}-zopeinterface
->>>> ${PYTHON_PN}-incremental ${PYTHON_PN}-constantly ${PYTHON_PN}-hyperlink
->>>> ${PYTHON_PN}-automat"
->>>> +RDEPENDS_${PN}-core = "${PYTHON_PN}-automat \
->>>> +                       ${PYTHON_PN}-constantly \
->>>> +                       ${PYTHON_PN}-core \
->>>> +                      ${PYTHON_PN}-debugger \
->>>> +                       ${PYTHON_PN}-hyperlink \
->>>> +                       ${PYTHON_PN}-incremental \
->>>> +                       ${PYTHON_PN}-misc \
->>>> +                       ${PYTHON_PN}-pkg-resources \
->>>> +                       ${PYTHON_PN}-pkgutil \
->>>> +                       ${PYTHON_PN}-plistlib \
->>>> +                       ${PYTHON_PN}-pyhamcrest \
->>>> +                       ${PYTHON_PN}-pyserial \
->>>> +                       ${PYTHON_PN}-setuptools \
->>>> +                       ${PYTHON_PN}-unixadmin \
->>>> +                       ${PYTHON_PN}-zopeinterface \
->>>> +"
->>>> +
->>>>   RDEPENDS_${PN}-test = "${PN}"
->>>>   RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
->>>>   RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
->>>> --
->>>> 2.24.0
->>>>
->>>> --
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
+> diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
+> similarity index 95%
+> rename from meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+> rename to meta-networking/recipes-support/libldb/libldb_1.5.6.bb
+> index b19c964d8..99eb6f9ce 100644
+> --- a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
+> +++ b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
+> @@ -33,8 +33,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
+>                      file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
+>                      file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
+>  
+> -SRC_URI[md5sum] = "339a41ac9efaec680e6d1469dd9aa35b"
+> -SRC_URI[sha256sum] = "199f5861aa863f538ec66d5fa95ecc13254a2030c53daf0e47363fa9ba235c68"
+> +SRC_URI[md5sum] = "fc58ef432c1fcb03fc3bb6cccce08977"
+> +SRC_URI[sha256sum] = "ff82474d0bf109e415a2d50334bde5715f486a53ff4bb8c7f74459dd229e975b"
+>  
+>  inherit waf-samba distro_features_check
+>  REQUIRED_DISTRO_FEATURES = "pam"
+
 
