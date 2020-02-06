@@ -1,51 +1,45 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
-	[209.85.208.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BAFC60CD2
+Return-Path: <prvs=298a941f5=Richard.Leitner@skidata.com>
+X-Greylist: delayed 429 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 06 Feb 2020 09:31:17 UTC
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id C411760197
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Feb 2020 00:01:09 +0000 (UTC)
-Received: by mail-ed1-f43.google.com with SMTP id m8so3963263edi.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Feb 2020 16:01:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=wqWspQQGi+YD2yZjMyCwrScj9ZrTvj1cRkNfSSMrXE0=;
-	b=gBfbbnxN09z2R8wj8KEjVX/i6jbO0sprWhaJbdSdaCWHAU20e9SDMa7yLhn8yDykGA
-	g0zw7P/39twP3UZy6PWIwxEg326OXivB9Tiq0LRkFRdmVJsOhFGi1/6zoLydTuBDlEA1
-	3Q4PiZ6qH/VyVqQrhxsAbBEkkAV/T7mytNljkYyrHQd2XTl0Uw6EVr2oX1/pSpJ9SwXk
-	vJZunWwVWI2ZcEMvRpOoX/ScI0m5wyOwwJ75zk8BEeGp7dHmJFDHRhAzM11KSwxUDYfh
-	thUN6eDgYfkR/Yzc6hv0dSCSxmGmPpedymJdBeOotasrV5ih7smFBa5eYO7gHLfUeQqJ
-	LHRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=wqWspQQGi+YD2yZjMyCwrScj9ZrTvj1cRkNfSSMrXE0=;
-	b=KeXJzZCESU0xlF6vyKyjSAquqefpAplmjSBULTG0ym8jH3OMtGk+8urZpt7C5noBtU
-	8qlUwgJwrjcGSk6EnYnrkKl3+5SBjE1A3Zb/ToNKwXjvp5olSvxzHs79ZiBfQzLqcWSr
-	B+XwxxOVnLqEMYyGzQrREgro8kvSstdGRJ1xuwS23x0D0b52wjVFtX/tSvMIi8dSAXNR
-	YhkCVfN7RVHUsGjT+Zzmft52GzOmWIai2oPEkemC6ZpgInZoB0egnDOiiu/QF03AuJTq
-	744zTVYKvqyC/Xj9M2YkZ4a2gBYD2dUtmcNgz+iSrKpcVMToAY2fli+bFBZmrxGY8kEe
-	0uXw==
-X-Gm-Message-State: APjAAAVkPZldMvoend04VF2vGjc53Cf25roaIurQqkbrbU8L218DLkKU
-	DUs9+7M2vMg3RgVZrSVLTm2bSNcXrMyxa1YpUOI=
-X-Google-Smtp-Source: APXvYqwgKZYb6elqjv7CScG2j4kbd3lX6EXs9Fipuf7BGP8IXs7jQDPAm2XxiyW9trv8+ZrVM1K0hDrV7Up+j4CWIuI=
-X-Received: by 2002:a17:906:2e53:: with SMTP id
-	r19mr505287eji.306.1580947269672; 
-	Wed, 05 Feb 2020 16:01:09 -0800 (PST)
+	Thu,  6 Feb 2020 09:31:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1580981479; x=1612517479;
+	h=date:from:to:cc:subject:message-id:references:
+	mime-version:in-reply-to;
+	bh=HvamizdaVS5cDckE93XvGokmQEXxAnmA/QQoIuSb0N8=;
+	b=LM3YDpzf+YxZptQ6v4ONyoM1r3fhAvEByFcZ99Hp6wjafl/qjIswKM1O
+	bCjjK/NMzBv/MS0rNzG6RY01WpeG8wdXco8HMW+sXUdSQdRtmmQgfY9rn
+	pGag9iqnQhLKdArYzmeBMWeNnepOnajVQlxDhn2YZKLtcqWiWqI4QypGv
+	CAJTNPaDwH9HSnhE9caUl8jrnh7dm8GguN4qhB3gnUUJGtWlx3DmZaPyO
+	ZtIrxsdgsLH1QhY/soUwZuTzbF5eoKmz4/5GNU5rmQVej38JF5cRKFyHa
+	Q3ppuroJL3CYKHl/M3fyVzL/HSEcbQt5JQ5mCCLHqwIENfObgchoWZgN/ g==;
+IronPort-SDR: +4U8TtASafIckPWfNkcpviX06k/ZluXWVfyB/zNth9A57OoGGjseUkN4Gsk7AFATYTqySKHbBc
+	HjL/NsRq7Vx6jArhmo14YAdA0EO6cvene/QPo+NbzayBoMcd0F4KVoLVjKk0v6GmkJRkChxb9A
+	Om9dietNXknffNzGWzMvw/w6iR3dUzL/jbQJFFXzH5i9EQqh7faQPRRNxTmM2XJdpZUydJTb0z
+	kWhzoZlHDb7lplHod3nLIrtlbXsipyP6wyXfkpn1e4R3BaK3haI5vBdZ6MQPoIFOMtxNbSzAqo
+	aF0=
+X-IronPort-AV: E=Sophos;i="5.70,409,1574118000"; d="scan'208";a="22500481"
+Date: Thu, 6 Feb 2020 10:24:07 +0100
+From: Richard Leitner <richard.leitner@skidata.com>
+To: Matthias Schoepfer <matthias.schoepfer@googlemail.com>
+Message-ID: <20200206092407.GA7361@pcleri>
+References: <20200126111035.273501-1-jacob.kroon@gmail.com>
+	<20200126112146.GB2043417@pcleri>
+	<80d30f83-b342-cfb7-9114-86ee61198fd7@gmail.com>
+	<424d1981-b4f0-de86-f18b-8a216339d3ea@gmail.com>
+	<20200127052211.GA2138442@pcleri>
+	<639e9a61-3ef7-e391-649d-9b53567ded40@googlemail.com>
 MIME-Version: 1.0
-References: <20200205203053.6742-1-twoerner@gmail.com>
-	<20200205210707.c4eqrvbyl7tl3knt@jama>
-	<20200205230236.GA18868@linux-uys3>
-	<CAMKF1srgMFjgmLkmo6NLW=xdvK-0ARqowk9z6bBRjWqmkgViSg@mail.gmail.com>
-In-Reply-To: <CAMKF1srgMFjgmLkmo6NLW=xdvK-0ARqowk9z6bBRjWqmkgViSg@mail.gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Wed, 5 Feb 2020 19:00:58 -0500
-Message-ID: <CAHUNapQt+Ce+4vysuB4v72mkMZsk9ir9ORZsk0Axt_Fa+RZmpg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] mpv: 0.26.0 -> 0.32.0
+In-Reply-To: <639e9a61-3ef7-e391-649d-9b53567ded40@googlemail.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java][g0hl1n/wip-jdk8u242ga][PATCH] Fix building openjre-8 242
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,34 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Feb 2020 00:01:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 06 Feb 2020 09:31:18 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Wed, Feb 5, 2020 at 6:32 PM Khem Raj <raj.khem@gmail.com> wrote:
+Hi Matthias,
 
-> On Wed, Feb 5, 2020 at 3:02 PM Trevor Woerner <twoerner@gmail.com> wrote:
-> >
-> > On Wed 2020-02-05 @ 10:07:07 PM, Martin Jansa wrote:
-> > > Thanks,
-> > >
-> > > would you mind undoing:
-> > >
-> http://git.openembedded.org/meta-openembedded/commit/?id=0c182e58775966699c303c1e2561c273197bf445
-> > > in the same commit?
-> >
-> > Sure, no problem.
-> > v2 on the way
-> >
-> > > Also was this sent with -M?
-> >
-> > haha, I know exactly what you mean! I did the format-patch twice just to
-> > convince myself I had used the -M (and I had, twice). I don't understand
-> why
-> > there's no similarity :-(
->
-> also please take a look at
-> https://errors.yoctoproject.org/Errors/Details/390294/
->
+On Wed, Feb 05, 2020 at 02:20:53PM +0100, Matthias Schoepfer via Openembedded-devel wrote:
+> Hi Richard and Jacob,
+> 
+> I just stumbled across the very same error, but on aarch64. I tried to
+> switch to the wip-branch, but I get
+> 
+>  ParseError at
+> /[...]/meta-java/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb:7: Could not
+> inherit file classes/features_check.bbclass
+> 
+> I am on zeus...
 
-okay
+This seems legit as AFAIK features_check.bbclass was introduced after the zeus
+release. For zeus you can replace it with distro_features_check.bbclass,
+but please note that I haven't tested on zeus. I'm working on master.
+
+Futhermore please use meta-java's master-next branch for testing as I will
+remove the wip branch in the near future.
+
+thanks for your testing!
+
+regards;rl
+
+> 
+> Regards,
+> 
+>   Matthias
+> 
 
