@@ -1,32 +1,35 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
-	by mail.openembedded.org (Postfix) with ESMTP id 1939660D0A
+Return-Path: <bunk@stusta.de>
+X-Greylist: delayed 384 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 07 Feb 2020 22:15:36 UTC
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id F165660CE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Feb 2020 16:45:18 +0000 (UTC)
-IronPort-SDR: rz5E2qaoW0CIZ08UEFb5DrXhh43HSAlOcgdigoJ+OT4cscQCHjKKSNJOISQxxrLvzCpg8Cs1Zz
-	RZT0Hfyxfzazv7xE96jkjrG9wC3qTC+6Nbr2f1EoQqSW2mS28xR73rMRhfgxCBFe3a4/drvuEt
-	1pgOaGSdpMc6PIV9oEnHPkIYfsxKtCg1r44Y91DU418GPd7WXBerf7UsNk4iDc7s94OQbhVzX/
-	rtwz/2J7hR0F6xBq5vSC91q2XjuLwyTys4N4kDJH93hTUtu20qZF84YYYZKA4HzFz3+eoQmppH
-	fHM=
-X-IronPort-AV: E=Sophos;i="5.70,414,1574118000"; 
-   d="scan'208";a="5053755"
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: "Visser Sander (2) (Consultant)" <sander.visser.2@consultant.volvo.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: systemd-conf bbappend not working (warrior)
-Thread-Index: AdXd0SmjdGHO6GZZQMiy3ZBEJU4iSwAA2tPw
-Date: Fri, 7 Feb 2020 16:45:19 +0000
-Message-ID: <fc16d2651b9547f3848da69a6090ec24@XBOX03.axis.com>
-References: <HE1PR05MB4635DB8B3F93600E64ADE444C51C0@HE1PR05MB4635.eurprd05.prod.outlook.com>
-In-Reply-To: <HE1PR05MB4635DB8B3F93600E64ADE444C51C0@HE1PR05MB4635.eurprd05.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
-MIME-Version: 1.0
-Subject: Re: systemd-conf bbappend not working (warrior)
+	Fri,  7 Feb 2020 22:15:36 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48DqFz3mGdz22
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  7 Feb 2020 23:09:11 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1581113351;
+	bh=buQ3REZbFpb9JXYiYLMXG3fuuJKE0+wP4oPAYrsB9zk=;
+	h=From:To:Subject:Date:From;
+	b=J0X9eNCcoIWlQkCTzF788rUg0is57ZWcyPakCB9hFZSQZW84oDr0pIR/3PdkINkeM
+	WxKBQgfsLCZBMGxPERCRkKkc08wNHUNCwyVsRU7DmV4EB4Xloj2+QktN5W1egUQCsw
+	7+GdpujK85ed/PLgh5llb1Wg5/PZeBfar8rDeDgvUF0MPvPAGq4MvfaZGALVmi6sCd
+	/mZHjkpcevl/vWN5QWl4FGyIs+7mYgwyRPeVYoWPkW0eJMrAmExwMhcX+wN4j/hRgD
+	yImgrA1Er6lXirT5Lv8C8WkH0az8jJSnCAh1JdiGLbmzwTA4EsCOCH++1us33nmba/
+	EQ93YdPz9a5nuBZRH/uT+JN7Uk8DoifUYkQ0hMUAdfhW56ktCv161KgKt/BnnG1YnU
+	wQ5U1wCTmtkU2WeFa5x2nsOCdNafcvPKpQukGgcPG7aLG7lXZQ93UWdp6225iaZCOJ
+	RI60S0FC7mP0ft+h/JigAlp2QIQiqBP20hQ3r4d8AFYNrkqAVdM4ahARVWSEVx4ncP
+	3ovPNt6wen8xMH4coI/aqj2J85hY1TDHaAEbvnDDxfoeewqNJH85lzRjd7vqPCumNn
+	IutoURug0VgbpqcJOl3ghdDN7kQqPEDXN2BjrzihwPvnp1NY8QNVGv5b1TIgmjf9BW
+	cPsam98oR3n1yC3XzsCQjIA4=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat,  8 Feb 2020 00:09:10 +0200
+Message-Id: <20200207220910.31762-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] modemmanager: Add a PACKAGECONFIG for the new --with-at-command-via-dbus option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,44 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Feb 2020 16:45:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 Feb 2020 22:15:37 -0000
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org <openembedded-
-> devel-bounces@lists.openembedded.org> On Behalf Of Visser Sander (2)
-> (Consultant)
-> Sent: den 7 februari 2020 17:15
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] systemd-conf bbappend not working (warrior)
->=20
-> Hi
->=20
-> In warrior there is systemd-conf_243.bb but in the build folder tmp/work
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.4.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-In Warrior, the version of systemd-conf is 241, not 243.=20
-
-* What versions of what layers do your really have?
-* Do you have any other layers than the layers in Poky?
-* Are there any other bb or bbappends for systemd-conf in any of the=20
-  other layers?
-
-> the version is called 1.0-r0
-
-"1.0" is the default version if no version is set in the recipe name=20
-or using PV. Before Warrior, systemd-conf did not have an explicit=20
-version set and would then use "1.0" as version.
-
-> If I create a systemd-conf_%.bbappend its content is not applied. For
-> instance if I set PR =3D "r1" that has no affect. I am also unable to add
-> tasks to modify the default configuration...
->=20
-> Any ideas why this is happening for this recipe alone?
->=20
-> /Regards Sander
-
-//Peter
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.4.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.4.bb
+index 3639f02ca..1f64be09e 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.4.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.4.bb
+@@ -23,6 +23,7 @@ PACKAGECONFIG ??= "mbim qmi \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'systemd polkit', d)} \
+ "
+ 
++PACKAGECONFIG[at] = "--with-at-command-via-dbus"
+ PACKAGECONFIG[systemd] = "--with-systemdsystemunitdir=${systemd_unitdir}/system/,,"
+ PACKAGECONFIG[polkit] = "--with-polkit=yes,--with-polkit=no,polkit"
+ # Support WWAN modems and devices which speak the Mobile Interface Broadband Model (MBIM) protocol.
+-- 
+2.17.1
 
 
