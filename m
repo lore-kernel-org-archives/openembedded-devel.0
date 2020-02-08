@@ -1,58 +1,51 @@
-Return-Path: <alistair@alistair23.me>
-X-Greylist: delayed 356 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 08 Feb 2020 05:01:14 UTC
-Received: from wout5-smtp.messagingengine.com (wout5-smtp.messagingengine.com
-	[64.147.123.21])
-	by mail.openembedded.org (Postfix) with ESMTP id BE2C360974
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-lj1-f196.google.com (mail-lj1-f196.google.com
+	[209.85.208.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 655B560C83
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Feb 2020 05:01:14 +0000 (UTC)
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.47])
-	by mailout.west.internal (Postfix) with ESMTP id D8A004EC;
-	Fri,  7 Feb 2020 23:55:18 -0500 (EST)
-Received: from mailfrontend2 ([10.202.2.163])
-	by compute7.internal (MEProxy); Fri, 07 Feb 2020 23:55:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=fm3; bh=bXkXQhxCTszCuuGlkka9sLBZVO
-	Pn6/DE/XPHhO5BaHA=; b=Cs6fnsA0b2qHo2fXPCflgS9VvNowjlneJvmQxM0KFx
-	fUuguoGPfZ+8I7pez173apENcKPFtqW/h4dD60E7HlIdHupOavpakKiuZDGqdn5e
-	nWVvvQ3KKbqqSTfTtPWoaR4qNWaXoteki35g8a2GLbuz3IdVOhPjs47frksWbuV/
-	Ka89ySoDegTNw/wBJqGTwgkwQ092FC+eOE34Ez6i8CtMrbqnKd5ZLkKrfIO7wG1S
-	lWjpwknXG9Y0UCCCeYTJzc7hQ22/Gqr0QHSEUVYDja16KuxByBcMzE5ILg4uicOw
-	X1DZtNmWAz0MtT6WItsYLfbaN2+r0daWwVmACoB3Qr3A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=bXkXQhxCTszCuuGlk
-	ka9sLBZVOPn6/DE/XPHhO5BaHA=; b=SB2h02luPfbd8fvfiep3azlf6nCwVUjJ+
-	2acKf+GT2wXkoseumwS/piTr+W+jY4rvwGhvNBEdj8IpqcURow6zK6fRvSYOP65F
-	hzOfanbUzDcrhg4XPrqX5rl4M0l2/0gZX/QqShPhyCI6mZo8X5dAut/38gDcTdBM
-	hddaDc5BiI9gmr55+6cKLr6w1ZRQv/Ec1jT2hCm+gYH7dancFX1bb3yV7zxlwJ2T
-	HsaLrwDQ/3whgZEsETOEcbTQMlSP8/lSL1lLHlKqvh9YIN2Q7TtdzJsKEYHGkioc
-	rMFh0vCUnPnzBnTqxWsB2XnNFyuLjQa1aZK6x0DeSc4X0QCMHAa7w==
-X-ME-Sender: <xms:Nj8-XpNN8TtWQaI0OImWLJh6gJS2ExLtEFi2FQgxBSuaWDDR15c1sQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrheeigdejjecutefuodetggdotefrodftvf
-	curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-	uegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertdertd
-	dtnecuhfhrohhmpeetlhhishhtrghirhcuhfhrrghntghishcuoegrlhhishhtrghirhes
-	rghlihhsthgrihhrvdefrdhmvgeqnecuffhomhgrihhnpehgihhthhhusgdrtghomhenuc
-	fkphepjeefrdelfedrkeegrddvtdeknecuvehluhhsthgvrhfuihiivgeptdenucfrrghr
-	rghmpehmrghilhhfrhhomheprghlihhsthgrihhrsegrlhhishhtrghirhdvfedrmhgv
-X-ME-Proxy: <xmx:Nj8-Xm0jx7xe7I3QnTU28q0Bm-scwyqmQEtcPOgMI1wDGZ4eweTFsQ>
-	<xmx:Nj8-XgHESNwU5y5laoTmPI3I49rE8VSB02lEdjODc6vomRrGi538Iw>
-	<xmx:Nj8-Xj5o6idyxKDu1BaEYKEc1lbMaozPKrH4BBOX9ByfIbg8gtYh7g>
-	<xmx:Nj8-Xtlpf9aaWNmNBcKii44u0YlhFWfYlk2UMn2sEHwwzLSTWkcasg>
-Received: from alistair-xps-14z.alistair23.me
-	(c-73-93-84-208.hsd1.ca.comcast.net [73.93.84.208])
-	by mail.messagingengine.com (Postfix) with ESMTPA id A83B13060272;
-	Fri,  7 Feb 2020 23:55:17 -0500 (EST)
-From: Alistair Francis <alistair@alistair23.me>
+	Sat,  8 Feb 2020 11:06:45 +0000 (UTC)
+Received: by mail-lj1-f196.google.com with SMTP id q8so2029704ljb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 08 Feb 2020 03:06:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=B+uyJFS5y/V7dQWHgzvdBlpSCh/oZZIy9xtcM7LW1YY=;
+	b=DNiNG1xCHeWn/nzZ6zK1C7ARDZY6FXU0WI3WoqOAq1D3LoBIduYHd3NzMYg+Ivr80s
+	2/7G0UfauPkgSvwEecGu2kREWSub0m5CTQDs5LRVNGQhqJY+sEozdUrr0muMOrgoA/B9
+	BjLzRN5QIsCj0E7OZtK9tQZmm8UYoj8AdXG+a/6Y4moXvZUbk5ry5pQAZmihRjQBFJB6
+	ruNfpKaaQbXE1EAtoiAdpkwxdE5NB8MyRTQ/RG6seD2Oth49edCWqkOkuBeourEA+eiG
+	EXSWmg6SgtCzXyTnmXEXYb2ryOf76JqkD8cnwYPkR85WYsEzSe25sbDFVGl0qifvT6EG
+	9+Tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=B+uyJFS5y/V7dQWHgzvdBlpSCh/oZZIy9xtcM7LW1YY=;
+	b=R7fynmCxdzR8j55kgUh/olq0K4UW2yyKMaQ6VLFC7ER9lFljTKFFqmtjfuKrmJcdcU
+	z3UnuaiUHfGv/8gvSetdpo2mWcdk+42mA0xMX6rKwfB8wn5EnEJhP87z2h+irHkYkbl6
+	GKfndMHpS96QOMNO9Pt2BzyHoqW2nzBqfs5Q7Z8PaBcRUVNGZC4cVrlhpKbchInw2RMN
+	D85Mo3vacs3HLUjo7gi/GUurqsjuU4P7fPBPegergOwFZi5QS3M22ejgwrg4hKF1s5ed
+	Ni9w3haWt9Dhlf1nuHJajppz82l7haApSDqiLJvHzl7vVJwWcFiX8Bv4+r3hGqPL5lDg
+	Ub1Q==
+X-Gm-Message-State: APjAAAVlk5fHxah1L40wyrGcKd+sHpVjkIKPNLr9kBeYdJ4kkUDU6diq
+	mn7Yv9qJAzWGT/eydidm275QxXyN
+X-Google-Smtp-Source: APXvYqxWoQordsY4sxVhkod53GWrg905ho7JIlDSXGtVy7XzCdhig6fIqQxD6/63b8Jp/G+sGth9CA==
+X-Received: by 2002:a2e:8591:: with SMTP id b17mr2419684lji.249.1581160005550; 
+	Sat, 08 Feb 2020 03:06:45 -0800 (PST)
+Received: from localhost.localdomain (37-247-29-68.customers.ownit.se.
+	[37.247.29.68])
+	by smtp.gmail.com with ESMTPSA id d9sm2861700lja.73.2020.02.08.03.06.44
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 08 Feb 2020 03:06:44 -0800 (PST)
+From: Jacob Kroon <jacob.kroon@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Feb 2020 20:55:14 -0800
-Message-Id: <20200208045514.18797-1-alistair@alistair23.me>
-X-Mailer: git-send-email 2.25.0
+Date: Sat,  8 Feb 2020 12:06:34 +0100
+Message-Id: <20200208110634.250922-1-jacob.kroon@gmail.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-Subject: [PATCH] libchamplain: Add support for building libchamplain
+Subject: [meta-java][master-next][PATCH] openjdk-8: Don't set TOPDIR bitbake variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,37 +58,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Feb 2020 05:01:14 -0000
+X-List-Received-Date: Sat, 08 Feb 2020 11:06:45 -0000
 Content-Transfer-Encoding: 8bit
 
-libchamplain is a Gtk widget displaying zoomable and pannable maps that
-can be loaded from various network sources.
+It is used to set the default sstate cache location.
+Just export it to the environment.
 
-Signed-off-by: Alistair Francis <alistair@alistair23.me>
+Richard, feel free to squash this or someting similar into the
+openjdk-8 update commit.
+
+Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
 ---
- .../libchamplain/libchamplain_0.12.20.bb             | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
+ recipes-core/openjdk/openjdk-8-common.inc | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
-new file mode 100644
-index 000000000..90e553301
---- /dev/null
-+++ b/meta-gnome/recipes-gnome/libchamplain/libchamplain_0.12.20.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "libchamplain is a Gtk widget displaying zoomable and pannable maps"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
-+DEPENDS = "glib-2.0 gtk+3 gdk-pixbuf clutter-1.0 clutter-gtk-1.0 libsoup-2.4"
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index 0ef4750..d8b30b8 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -12,7 +12,6 @@ FILESPATH =. "${FILE_DIRNAME}/patches-openjdk-8:"
+ 
+ # for weird openjdk-common.inc
+ S = "${WORKDIR}/${OPENJDK_HG_U}-${OPENJDK_CHANGESET}"
+-export TOPDIR="${S}"
+ 
+ SRC_URI = "\
+     ${OPENJDK_URI} \
+@@ -27,6 +26,10 @@ SRC_URI = "\
+     ${PATCHES_URI} \
+ "
+ 
++do_configure_prepend () {
++    export TOPDIR=${S}
++}
 +
-+inherit meson gobject-introspection
-+
-+SRCREV = "145e417f32e507b63c21ad4e915b808a6174099e"
-+SRC_URI = "git://github.com/gnome/libchamplain.git"
-+
-+S = "${WORKDIR}/git"
-+
+ do_unpack_extract_submodules () {
+     cd "${S}"
+     # tar --transform
 -- 
-2.25.0
+2.24.1
 
 
