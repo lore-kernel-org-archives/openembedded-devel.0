@@ -1,38 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com
-	[209.85.210.68])
-	by mail.openembedded.org (Postfix) with ESMTP id D3D1D6084A
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Feb 2020 16:05:52 +0000 (UTC)
-Received: by mail-ot1-f68.google.com with SMTP id a15so3989872otf.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Feb 2020 08:05:54 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com
+	[209.85.210.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 4152160CC9
+	for <openembedded-devel@openembedded.org>;
+	Sun,  9 Feb 2020 16:17:22 +0000 (UTC)
+Received: by mail-pf1-f174.google.com with SMTP id k29so2403566pfp.13
+	for <openembedded-devel@openembedded.org>;
+	Sun, 09 Feb 2020 08:17:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=NEirFD7SDZMMxPJRT5gvVZdqPhn0vNWmTYUBu+2nwhk=;
+	b=by5LVj55OfHQSufncgzkzvzwrXVHZsQ57Op19x3LUA2yE3zYmzeVID/HngaZqXEu8S
+	aLq8WasD2EvxDYf9t6L5c+Zx+Vozh3Lsx7SerpoT323pi07TqcUnkg7smtGm/0C5UYI1
+	ebhqsNhsqM1wrif0m51Bbea7Ml0091nvaVgm3dePinzaEjQD1eYjG/36lLmL60jDpG1q
+	IJQqUKiUP6nj9DqzwMR2j62GqqsnISkrYGoIATXsLmXOj9VMQsCQmZbm/DzA1q1WHnHa
+	f39bvGGZJqcnaKpqTDKIu3NP5Ih8dTqKhBeU/QCWlCwe3UQPlq6lYUPN8ZpOT6Lv+Idg
+	Ar8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6ZaNFWPzcmvI8CUrDlRzd6NikvaWAZQIzEqweOIx2UM=;
-	b=L3wdJLMgOwEQg+DzovgdiWjG/5vqbqVilDL+GylbTKGiZBadHmKkuEq8cvYK4mUMW+
-	laEf/SbXDz6+X39BePEB9az+PomHvx//R+kFn5hPGy/PWM9X/XELi6xO+H+5UWBVnEA/
-	KQ2Nkba+TgdWPFLE2Ay9MCo1yLoNNkq9Pvuo+x0lkMxo5UNMCawPxWN+LeMOSCK1VGKo
-	IH0bLq7epozzo6kwvfHOCeRQJtlvYSk06vK4EOby/GJvoYXeLEHNZvvtWFO3OIqLwV2X
-	Ynpa7PdFu/KEfvWHuUhSIOLm7/0iXkJ5PEeFpR+9CZ1B2NvcI0W86KG6YFA6uPFBbsZl
-	X5bQ==
-X-Gm-Message-State: APjAAAUAoroc6m/InItFYWhFK59o6LkCE5B9FDUF1fpn32IJnrkyFHi1
-	zqBKJSxwBK1vCFfZBBGybf4Agj7cvGg=
-X-Google-Smtp-Source: APXvYqwoPXs14035BlTDziU4sciW7J+rRiLdH9WJjcO3A+DY7J81WB0LooiZMG01+9Z4igDzvs1eug==
-X-Received: by 2002:a9d:7f16:: with SMTP id j22mr7257851otq.256.1581264353617; 
-	Sun, 09 Feb 2020 08:05:53 -0800 (PST)
-Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=NEirFD7SDZMMxPJRT5gvVZdqPhn0vNWmTYUBu+2nwhk=;
+	b=mXdMsVVIRkcrmipdW9lJkvT4axL3dD5hi2JvcFA1gPfhNqPUAWThjZscnaTbE+AdwC
+	QXGSxwxn0DmGuTJUE8h947JxYrR9p2hVP5LLu9G/JR/vYpQ2y2kPGZn3KrUYjisiteK2
+	tXUxkByPFLKMK8Sif3qDURgrC/zsfVo8Mtx/N5LXiG1OhlaXEzhi8jm/5SVzEVlRWYVP
+	J/p8CTbA2u2Z6RE1TTqqpUjqfzFz3lvmnoMWifo/AZpv2qZQ816/ZicFJaDYfrVYWbJo
+	hNpxjHi9CZCw4rMvOp87DSFlaexZa7eU4TDP/DbxNdDQgUu3wRKK/HywmAQsYbiI1m//
+	X4+g==
+X-Gm-Message-State: APjAAAWeLlKjZO+cnMSuP8hmhR/uLGzKZ9BcPlz3cMzXTDvapIcnUjOB
+	+lWokm81O2Kap1aPoB26MJYcFevh
+X-Google-Smtp-Source: APXvYqwOgJCj5Je+fehUoFHd7fxfy7wqqP/mjBFmsXu+dyP/r4gfsluHf4mMtglX6hH63lZdrlKsIA==
+X-Received: by 2002:aa7:8605:: with SMTP id p5mr8856694pfn.87.1581265043126;
+	Sun, 09 Feb 2020 08:17:23 -0800 (PST)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4180:a5c0:154b:3780:5122:4aa9])
 	by smtp.gmail.com with ESMTPSA id
-	z21sm3510233oto.52.2020.02.09.08.05.52
+	a19sm8831737pju.11.2020.02.09.08.17.22
+	for <openembedded-devel@openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 09 Feb 2020 08:05:53 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  9 Feb 2020 11:05:36 -0500
-Message-Id: <20200209160536.12357-1-derek@asterius.io>
+	Sun, 09 Feb 2020 08:17:22 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@openembedded.org
+Date: Sun,  9 Feb 2020 08:17:08 -0800
+Message-Id: <cover.1581264950.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-webserver][PATCH] nginx: update to the latest development version (1.17.8)
+Subject: [zeus 00/11] Patch review
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,46 +56,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Feb 2020 16:05:53 -0000
+X-List-Received-Date: Sun, 09 Feb 2020 16:17:22 -0000
 
-See Changelog: https://nginx.org/en/CHANGES
+Here are the next set of changes for meta-oe zeus.
+Please have commnets back by Tuesday
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-webserver/recipes-httpd/nginx/nginx_1.17.0.bb |  6 ------
- meta-webserver/recipes-httpd/nginx/nginx_1.17.8.bb | 10 ++++++++++
- 2 files changed, 10 insertions(+), 6 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.17.0.bb
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.17.8.bb
+The following changes since commit 81e186f6141a6e8f4ab3185b00b9f1392bb89ca1:
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.17.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.17.0.bb
-deleted file mode 100644
-index 8774a87fff..0000000000
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.17.0.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--require nginx.inc
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=52e384aaac868b755b93ad5535e2d075"
--
--SRC_URI[md5sum] = "56767fd62302508295b31adc48b99a59"
--SRC_URI[sha256sum] = "e21b5d06cd53e86afb94f0b3678e0abb0c0f011433471fa3d895cefa65ae0fab"
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.17.8.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.17.8.bb
-new file mode 100644
-index 0000000000..3d2a5edd26
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.17.8.bb
-@@ -0,0 +1,10 @@
-+require nginx.inc
-+
-+# 1.16.x branch is the current stable branch, the recommended default
-+# 1.17.x is the current mainline branches containing all new features
-+DEFAULT_PREFERENCE = "-1"
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=52e384aaac868b755b93ad5535e2d075"
-+
-+SRC_URI[md5sum] = "29cd861a13aae69a058cbabaae86177b"
-+SRC_URI[sha256sum] = "97d23ecf6d5150b30e284b40e8a6f7e3bb5be6b601e373a4d013768d5a25965b"
+  adduser: set default shell with /sbin/nologin (2020-01-19 09:05:19 -0800)
+
+are available in the Git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib stable/zeus-nut
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=stable/zeus-nut
+
+Khem Raj (6):
+  squid: Link with libatomic on riscv
+  grpc: Link with libatomic on clang/x86
+  grpc: Link with libatomic on powerpc
+  grpc: Link with libatomic on riscv
+  netdata: Add libatomic to link step
+  fluentbit: Fix packaging in multilib env
+
+Peter Kjellerstedt (1):
+  gitpkgv.bbclass: Add support for extending the supported tag formats
+
+Sumit Garg (1):
+  mariadb: fix library LZ4 lookup
+
+Trevor Gamblin (2):
+  python-twisted: add required RDEPENDS for twistd
+  pyhamcrest: add python3 version of recipe
+
+Yi Zhao (1):
+  libldb: upgrade 1.5.5 -> 1.5.6
+
+ .../recipes-daemons/squid/squid_4.6.bb        |  2 ++
+ .../recipes-devtools/grpc/grpc_1.24.1.bb      | 16 ++++++++++
+ .../{libldb_1.5.5.bb => libldb_1.5.6.bb}      |  4 +--
+ meta-oe/classes/gitpkgv.bbclass               | 14 ++++++---
+ meta-oe/recipes-dbs/mysql/mariadb.inc         |  1 +
+ .../mariadb/0001-Fix-library-LZ4-lookup.patch | 30 +++++++++++++++++++
+ .../fluentbit/fluentbit/cmake_multilib.patch  | 18 +++++++++++
+ .../fluentbit/fluentbit_0.12.19.bb            |  1 +
+ .../python/python-twisted.inc                 | 18 ++++++++++-
+ .../python/python3-pyhamcrest_1.9.0.bb        | 10 +++++++
+ .../recipes-webadmin/netdata/netdata_git.bb   |  2 ++
+ 11 files changed, 109 insertions(+), 7 deletions(-)
+ rename meta-networking/recipes-support/libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb} (95%)
+ create mode 100644 meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
+ create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/cmake_multilib.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyhamcrest_1.9.0.bb
+
 -- 
 2.17.1
 
