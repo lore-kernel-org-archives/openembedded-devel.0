@@ -1,48 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
-	[209.85.219.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A02160B10
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
+	[209.85.128.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B9716028E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Feb 2020 07:54:17 +0000 (UTC)
-Received: by mail-qv1-f68.google.com with SMTP id o18so1757961qvf.1
+	Sun,  9 Feb 2020 11:42:34 +0000 (UTC)
+Received: by mail-wm1-f51.google.com with SMTP id q9so6832422wmj.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 Feb 2020 23:54:18 -0800 (PST)
+	Sun, 09 Feb 2020 03:42:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=eHAOxRCbUU+GPr4NXjVcNZowoHnWXHY0LQv6qG/J2KQ=;
-	b=Mh/yDXJtfcCtai/xrYQKs7xlizG6w3bfX3/IfEH0VzrnXPkzzC0feFUiz5lL4eR9wC
-	4HVvISS51UqJAGgfr6skBvGEyVuci73c+6AC+8xctHNIqYlUSTK9OahAbo4EP05dTyBr
-	NGQEqdvbVxl4tA/O7kXzoyy14p45qy5UpXKpLBS8sCNVY1jbdh+/xJ8sxv6W2ruUeVsU
-	/2vInF8ku3NnhEa7wRNntmNkwIiKd8WzwmFPjeUqa2gMXqx6fam/WUybTVIe+RMhW7xZ
-	KZ1K1o9SOGJid0i6uMAaXJjPgMNtE2xvLHegb9i6AJ1lqQEH24Evjo8kGa5bzApy5UgR
-	OE+A==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=QdkQrwwGDjM+KOW3jl6426pooPZsGkJ5kDWS/4FR+fk=;
+	b=Y8RY18yFl9W76tTn5yx6HYma6Mx3N6WU0XRLW9gutqw008+6ZGx7ArSOchHzUyV/HV
+	Ym6hTAcgSy6OCngoF4Oi5lhJatq0xOZ3NTfxaUJmqa9+aJJtXdIeZ+bvj/GbzNIswJYM
+	wAuELWry6o+npi2rGRVcElIcmUyDTsSzqMTOGc+E86t+Q/EluWGTl/Mg0712rRMntrQQ
+	wQdPY+tY2Q0J5cCH8HdGU2GLWIpHVbJnoSTICwMnSkOJQVEVuvJEEYWDm93LBVAHJhQg
+	dQk/Tubng3VjHrPdklFKFgzHC2KtE0I3QWInDLFGutBbLwVf0euy4jI8C4VCXe7YCJ/e
+	S4dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=eHAOxRCbUU+GPr4NXjVcNZowoHnWXHY0LQv6qG/J2KQ=;
-	b=KelGsnh+SqKpbOohFriBiwTfQogpdIRP85Ry/qXqr/496l9ypXDWZZ1R2DinevuI2y
-	UqXwmQCR+pbXtap2XHxqeBwS85T+QC8IoRD6mwBSLhSEtMGwuSzvl6MgtCt3eWMcwmUB
-	ML46zkh94nq/1wPiJtAj2XfvDNwMvLwVuDCNYvcFUMtb02PBcqPKuNadYlc8pfiFvLkh
-	nVTUmxaBAoH/2O80OfPd84REWlUUQfhwPCkgZjX6EEZGRMtY+OYEEMFnz0y2a36ok9Op
-	Mao227WFkU5tXLOdusqIrIdFa9kPUINmBTcuUw6+H2POiWWUlMdH5XSqKwm04E8eQ6l7
-	x5BA==
-X-Gm-Message-State: APjAAAVeqk0IHQM40rEfe8vBdc6VTb02grjjqaMw2d+O68yFbOFONbpx
-	gnAnNle73Swr6J+D8wpN8CxPZEiqzriQQKsn4K4=
-X-Google-Smtp-Source: APXvYqxUA2NsuamY1VUvWe8+WMC+CRuUQatZTd9tLc5xxfHnuBCWBZ20T4ei3XiuqU9FUyXH+SvAMDpjlwgiiuvWkeY=
-X-Received: by 2002:a0c:8605:: with SMTP id p5mr5453881qva.109.1581234857908; 
-	Sat, 08 Feb 2020 23:54:17 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=QdkQrwwGDjM+KOW3jl6426pooPZsGkJ5kDWS/4FR+fk=;
+	b=dTDc5nBdhZXAEAcyyIRHwR1bMTvLq50l9LnwEEfO4rq5JVgsBDeSnAlp481ypVJXML
+	5VgVcyiN71pFGkGzhZefnpGibtDT6PE2RFkp+FJRuKmxe461ceCKfcMVa3F1ZBMZrEZJ
+	PlgQ7LiJk3GKiZqq8Ss07GowLGRY+0SveEXaq2G02KAXqdTgisRRaOslwFdDtLNKJcvy
+	hvN1tYHwcYl8YbwXXkKCR7ZUmSWXHwCMTvRYa7HY6mCGj0woc8mcXVF6Rg+yPWAZF25i
+	O+vYbVMW8ce9mMIXBU+rRzec1V3Tn51PF/t28jyHGZhKJiTJqaagZp4LM/vY2oLRJdls
+	k5yA==
+X-Gm-Message-State: APjAAAXAX2NinXoDCvcha76tW34FscI7V7XtriKmmzjL8uVQCx2XF/TB
+	e8o/5nSkGYJe66Kk0RlUpnoCtpXu
+X-Google-Smtp-Source: APXvYqw4t7dgYhvKgkkIdMrHYEJJ/u1GS0qwi+0y3/FypfGfzYzeomVcCQycb6qVi5Zaob4FMLuTPw==
+X-Received: by 2002:a7b:c5d9:: with SMTP id n25mr9472667wmk.65.1581248554515; 
+	Sun, 09 Feb 2020 03:42:34 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F2C16629984A4CCEAA4B6A2.dip0.t-ipconnect.de.
+	[2003:f0:7f2c:1662:9984:a4cc:eaa4:b6a2])
+	by smtp.gmail.com with ESMTPSA id
+	a13sm11828426wrp.93.2020.02.09.03.42.33
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 09 Feb 2020 03:42:33 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  9 Feb 2020 12:42:21 +0100
+Message-Id: <20200209114226.2584-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <20200209034641.19378-1-okaya@kernel.org>
-In-Reply-To: <20200209034641.19378-1-okaya@kernel.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 8 Feb 2020 23:53:51 -0800
-Message-ID: <CAMKF1sorVApNQ69i3QOUiK6yF1gCvubzNvT=VMkjPcFtK+XC+w@mail.gmail.com>
-To: Sinan Kaya <okaya@kernel.org>
-Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Changyi Li <Changyu.Li@microsoft.com>
-Subject: Re: [meta-oe][PATCH] abseil-cpp: add recipe for git version
+Subject: [PATCH 1/6] babl: upgrade 0.1.62 -> 0.1.74
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,130 +60,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Feb 2020 07:54:17 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 09 Feb 2020 11:42:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Feb 8, 2020 at 7:56 PM Sinan Kaya <okaya@kernel.org> wrote:
->
-> The repository contains the Abseil C++ library code. Abseil is an
-> open-source collection of C++ code (compliant to C++11) designed to
-> augment the C++ standard library.
->
-> https://github.com/abseil/abseil-cpp
->
-> Signed-off-by: Changyi Li <Changyu.Li@microsoft.com>
-> Signed-off-by: Sinan Kaya <sinan.kaya@microsoft.com>
-> ---
->  ...e-maes-option-from-cross-compilation.patch | 53 +++++++++++++++++++
->  .../abseil-cpp/abseil-cpp_git.bb              | 27 ++++++++++
->  2 files changed, 80 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
->  create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
->
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
-> new file mode 100644
-> index 0000000000..4c41cd8902
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
-> @@ -0,0 +1,53 @@
-> +From 70926666f7c5c35add363e3bcade6eaabace7206 Mon Sep 17 00:00:00 2001
-> +From: Sinan Kaya <sinan.kaya@microsoft.com>
-> +Date: Mon, 3 Feb 2020 03:25:57 +0000
-> +Subject: [PATCH] Remove maes option from cross-compilation
-> +
-> +---
-> + absl/copts/GENERATED_AbseilCopts.cmake | 4 ----
-> + absl/copts/GENERATED_copts.bzl         | 4 ----
-> + absl/copts/copts.py                    | 4 ----
-> + 3 files changed, 12 deletions(-)
-> +
-> +diff --git a/absl/copts/GENERATED_AbseilCopts.cmake b/absl/copts/GENERATED_AbseilCopts.cmake
-> +index 01bd40b..af99694 100644
-> +--- a/absl/copts/GENERATED_AbseilCopts.cmake
-> ++++ b/absl/copts/GENERATED_AbseilCopts.cmake
-> +@@ -230,7 +230,3 @@ list(APPEND ABSL_RANDOM_HWAES_MSVC_X64_FLAGS
-> +     "/Ob2"
-> + )
-> +
-> +-list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
-> +-    "-maes"
-> +-    "-msse4.1"
-> +-)
-> +diff --git a/absl/copts/GENERATED_copts.bzl b/absl/copts/GENERATED_copts.bzl
-> +index 82f332f..9a548d1 100644
-> +--- a/absl/copts/GENERATED_copts.bzl
-> ++++ b/absl/copts/GENERATED_copts.bzl
-> +@@ -231,7 +231,3 @@ ABSL_RANDOM_HWAES_MSVC_X64_FLAGS = [
-> +     "/Ob2",
-> + ]
-> +
-> +-ABSL_RANDOM_HWAES_X64_FLAGS = [
-> +-    "-maes",
-> +-    "-msse4.1",
-> +-]
-> +diff --git a/absl/copts/copts.py b/absl/copts/copts.py
-> +index 068abce..c2f70fb 100644
-> +--- a/absl/copts/copts.py
-> ++++ b/absl/copts/copts.py
-> +@@ -203,10 +203,6 @@ COPT_VARS = {
-> +     # to improve performance of some random bit generators.
-> +     "ABSL_RANDOM_HWAES_ARM64_FLAGS": ["-march=armv8-a+crypto"],
-> +     "ABSL_RANDOM_HWAES_ARM32_FLAGS": ["-mfpu=neon"],
-> +-    "ABSL_RANDOM_HWAES_X64_FLAGS": [
-> +-        "-maes",
-> +-        "-msse4.1",
-> +-    ],
-> +     "ABSL_RANDOM_HWAES_MSVC_X64_FLAGS": [
-> +         "/O2",  # Maximize speed
-> +         "/Ob2",  # Aggressive inlining
-> +--
-> +2.23.0
-> +
-> diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-> new file mode 100644
-> index 0000000000..c7077c129f
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY = "Abseil is a cpp library like STL"
-> +DESCRIPTION = "It's got containers, algorithms, useful stuff!"
+* babl moved to meson build
+* move to meta-gnome: latest gimp requires gexiv2 and nothing but gimp depends
+  on babl
+* extend to native build for native gegl (next patch)
+* get sources from location gimp's homepage suggests
 
-maybe we can be more specific about it from
-https://github.com/abseil/abseil-cpp/blob/master/README.md
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-gnome/recipes-gimp/babl/babl_0.1.74.bb  | 17 +++++++++++++++++
+ meta-oe/recipes-graphics/babl/babl_0.1.62.bb | 13 -------------
+ 2 files changed, 17 insertions(+), 13 deletions(-)
+ create mode 100644 meta-gnome/recipes-gimp/babl/babl_0.1.74.bb
+ delete mode 100644 meta-oe/recipes-graphics/babl/babl_0.1.62.bb
 
-> +HOMEPAGE = ""
+diff --git a/meta-gnome/recipes-gimp/babl/babl_0.1.74.bb b/meta-gnome/recipes-gimp/babl/babl_0.1.74.bb
+new file mode 100644
+index 000000000..59921d344
+--- /dev/null
++++ b/meta-gnome/recipes-gimp/babl/babl_0.1.74.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Babl is a dynamic, any to any, pixel format conversion library"
++LICENSE = "LGPL-3.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
++
++GNOMEBASEBUILDCLASS = "meson"
++
++GIR_MESON_OPTION = "enable-gir"
++
++inherit setuptools3 gnomebase gobject-introspection
++
++DEPENDS += "lcms"
++
++SRC_URI = "https://download.gimp.org/pub/${BPN}/0.1/${BP}.tar.xz"
++SRC_URI[md5sum] = "d032853f2678bc95054c39d4f02045c1"
++SRC_URI[sha256sum] = "9a710b6950da37ada94cd9e2046cbce26de12473da32a7b79b7d1432fc66ce0e"
++
++BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-graphics/babl/babl_0.1.62.bb b/meta-oe/recipes-graphics/babl/babl_0.1.62.bb
+deleted file mode 100644
+index 4a7dbcab3..000000000
+--- a/meta-oe/recipes-graphics/babl/babl_0.1.62.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-SUMMARY = "Babl is a dynamic, any to any, pixel format conversion library"
+-LICENSE = "LGPL-3.0"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
+-
+-inherit gnomebase
+-
+-SRC_URI = "http://ftp.gimp.org/pub/${BPN}/0.1/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "28fa9d43549378ceebe2871d7721dd46"
+-SRC_URI[sha256sum] = "dc279f174edbcb08821cf37e4ab0bc02e6949369b00b150c759a6c24bfd3f510"
+-
+-FILES_${PN} += "${libdir}/babl-*/*.so"
+-FILES_${PN}-dev += "${libdir}/babl-*/*.la"
+-FILES_${PN}-dbg += "${libdir}/babl-*/.debug/"
+-- 
+2.21.0
 
-perhaps https://abseil.io/ instead of leaving it empty is better.
-
-> +SECTION = "libs"
-> +LICENSE = "Apache-2"
-
-The current value is not wrong but Apache-2.0 would be better to match SPDX
-
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
-> +
-> +SRCREV = "aa844899c937bde5d2b24f276b59997e5b668bde"
-> +BRANCH = "lts_2019_08_08"
-> +SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
-> +           file://0001-Remove-maes-option-from-cross-compilation.patch \
-> +          "
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', ' -march=armv8-a+crypto', '', d)}"
-> +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'x64', ' -maes -msse4.1', '', d)}"
-> +
-> +CXXFLAGS_append_class-nativesdk = " -Wl,--no-as-needed -fPIC"
-> +CXXFLAGS_append_class-native = " -Wl,--no-as-needed -fPIC"
-
-perhaps use ASNEEDED_<override> = ""
-
-> +CXXFLAGS_append_class-target = " -fPIC"
-> +
-> +inherit cmake
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> +ALLOW_EMPTY_${PN} = "1"
-
-why do we need this ?
 
