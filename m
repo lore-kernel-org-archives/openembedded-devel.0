@@ -1,55 +1,53 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 66C8B6028E
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com
+	[209.85.221.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AF516080B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Feb 2020 11:42:44 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id c9so4068356wrw.8
+	Sun,  9 Feb 2020 15:11:01 +0000 (UTC)
+Received: by mail-wr1-f46.google.com with SMTP id m16so4375997wrx.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Feb 2020 03:42:46 -0800 (PST)
+	Sun, 09 Feb 2020 07:11:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=w0IfyUcKI8M+s+n1TuKU+C2hJnsC2x/uNwQgbPvPsCg=;
-	b=SA/pgGQmjTW+YlZ5FLbnJ8WjIUkEeEwaWnnbA8nooc1Litw+mJ7ob7F/S8XaQ94gf9
-	WYBZqlaoiKZ4zBO/LfOTyw3zUYq1as3vlaIvK4L0qzD1VNyg8q+bQRls4/dTf9ZrcJdc
-	R+zyUo/uF2I3u7OOzoC/0R/mXbWKatIzS06Mm6VB5BNjeXEWsM7A+ZSi7bMB7tMaa/RQ
-	9xmR2CRQZBSH2/q7XlQ+X7nV/5Ene8tsJPGVViE/rDY6Ov9HQs1Drh2e0HOViOknyXiR
-	Cfa/vHl1INSaXYIaYAwuc6PImv5XPHzJHNfEdMq+T78QDD6VPlhOwrIuVjdYMeeG4RX1
-	3a9A==
+	bh=kwgggvq9//XphMMFsE2yuuo+tQ8Khm0bx6gTm6yAB+s=;
+	b=A5Z/mrUCHL9X1/ejsbe+UmS8Kymbqi91kDmcU0XtFtfkA+cNjKzmj/9TuNeHp0C9RB
+	4sJScC0y5xEkJgHKtoS/yj1/Da17LqabSc96QhPH0b5uRS1Q/7z+fjALcR75nfy6Y5lK
+	XaAb5/PdoeRXfhxTv5WCk0DZtp2Y3nJJZmlULlKN+9xegTnCTrSziE5L6z26oR+7gRPR
+	ODH2qj1IoYn7aclVJ7IaU4YHO5zlVWSx9B7IvPPu2HSX5mKjM+oupnFLd2EWDw6Z34UF
+	sK/V5IAXhpnd8PyEM3drdm9pGAdPddHxaFakxilFhZYZOPG5g2NnKMOAB5EhoR+k145N
+	fPAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=w0IfyUcKI8M+s+n1TuKU+C2hJnsC2x/uNwQgbPvPsCg=;
-	b=QeA3FepO4SGXAPO7+N9aE7JBJVY8KbgwhpxIqerCZ3gBPtYKLr1FbmYB6ULvwV4oO3
-	Dd9gl9wfeJE7EDEzLQMy25tYpRhdPET5UHzBQHg5wCF7WFnFeshifj/rF+OWZuh0WfgO
-	8Pciiv24s++XVFQccx3PBlgKHcmfLVDUin2YGMhq68awBnLPuUV39Twk+wdnuYULSU7d
-	8eKruBQnMvoFOFu/bbFwHQvZkKpbQKiDUPV8Uk3qpSXi4e/W0O4EbWElWMXabOJrPSAd
-	uNRVxF+IcIOIu7goqpIANQORIBubrZa21MuL7wMc8GtcxRQ8lQI1/lfN4fbcLC7qHBXf
-	tOPA==
-X-Gm-Message-State: APjAAAUM+zx9m3IssJgvfZq3R8/ZbEZ6rG7zn4mDiTRcOItAX8Me+LgJ
-	LsF0XJmLeciZmW+UrAWb87nor8T/
-X-Google-Smtp-Source: APXvYqxpT8oWhwRrp3ixxIpELt6Xv9isQ465AMlcAthrZ2QXLmVoM3/bpUXCL/ajqB/H13iQLE8cyQ==
-X-Received: by 2002:a5d:4702:: with SMTP id y2mr10407148wrq.37.1581248565068; 
-	Sun, 09 Feb 2020 03:42:45 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=kwgggvq9//XphMMFsE2yuuo+tQ8Khm0bx6gTm6yAB+s=;
+	b=gEzUkhPj8uY4/wrqyy/BD1rhIyGLlwiVUeqi48ayg/+xEJXxjeI2BKEoHP4TTpQiot
+	zjOsOJKQR/0YjwoFJzPeskGhNCiLp0CNlq3JBM+9dXbfCtyZvxG4ptE0KFcpKxrYEbOP
+	yjnALFei+AWV+Dkq/2I0CGjWV8NMis+bKK4UmxY2Zvhu1692VDlkL11TIJ494El7y/GO
+	x1zyduAcV5sjwJuxS0LFRBYnyo9OdCKKQ+9CCkNrzDVVqC0pvas9bWHLnHW9vsYuso7k
+	96A2IZWbtIZAcotp7pIyfJRQsMUOXMcWC5c3p0NPGHdwZiXMLhORr8Z391VNKSFqdGTb
+	GVRQ==
+X-Gm-Message-State: APjAAAXpJYYIy6B8rnDjbSadDka3pZReq+dFk8a98kFs8gI5LYU4cEUr
+	qMIMcXFt+dx6/eeAQM7dHyOeEpX5
+X-Google-Smtp-Source: APXvYqyKY3omiCsyWN3rsnXUWXMWgEqTkvdEbBZx4q1XSlLFpAQ8M5a43iMO5+8+A3ZxiJIGLpkUpA==
+X-Received: by 2002:a5d:6789:: with SMTP id v9mr8429302wru.55.1581261061589;
+	Sun, 09 Feb 2020 07:11:01 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F2C16629984A4CCEAA4B6A2.dip0.t-ipconnect.de.
 	[2003:f0:7f2c:1662:9984:a4cc:eaa4:b6a2])
 	by smtp.gmail.com with ESMTPSA id
-	a13sm11828426wrp.93.2020.02.09.03.42.44
+	q10sm11429093wme.16.2020.02.09.07.11.00
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 09 Feb 2020 03:42:44 -0800 (PST)
+	Sun, 09 Feb 2020 07:11:00 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  9 Feb 2020 12:42:26 +0100
-Message-Id: <20200209114226.2584-6-schnitzeltony@gmail.com>
+Date: Sun,  9 Feb 2020 16:10:47 +0100
+Message-Id: <20200209151053.4277-1-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20200209114226.2584-1-schnitzeltony@gmail.com>
-References: <20200209114226.2584-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 6/6] packagegroup-meta-oe: remove babl/gegl/gimp they moved to meta-gnome
+Subject: [PATCH][v2 0/6] gimp upgrade
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,30 +60,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Feb 2020 11:42:45 -0000
+X-List-Received-Date: Sun, 09 Feb 2020 15:11:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+V1 -> V2: git format-patch -M1
 
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index d5789a758..07f71c8a5 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -172,8 +172,8 @@ RDEPENDS_packagegroup-meta-oe-gnome ="\
-     "
- 
- RDEPENDS_packagegroup-meta-oe-graphics ="\
--    babl cairomm dietsplash directfb directfb-examples dnfdragora \
--    fbgrab fbida fontforge fvwm gegl gimp glm gphoto2 libgphoto2 \
-+    cairomm dietsplash directfb directfb-examples dnfdragora \
-+    fbgrab fbida fontforge fvwm glm gphoto2 libgphoto2 \
-     gtkperf jasper leptonica libmng libsdl2-image libsdl2-mixer libsdl2-net \
-     libsdl-gfx libsdl-image libsdl-mixer libsdl-net libsdl-ttf \
-     libvncserver libyui libyui-ncurses lxdm numlockx openbox openjpeg \
+Andreas Müller (6):
+  babl: upgrade 0.1.62 -> 0.1.74
+  gegl: upgrade 0.3.18 -> 0.4.20
+  libmypaint: initial add 1.4.0
+  mypaint-brushes: initial add 1.3.0
+  gimp: upgrade 2.8.22 -> 2.10.14
+  packagegroup-meta-oe: remove babl/gegl/gimp they moved to meta-gnome
+
+ .../recipes-gimp/babl/babl_0.1.74.bb          | 18 +++--
+ ...on.build-Give-note-if-sdl2-was-found.patch | 50 ++++++--------
+ .../recipes-gimp/gegl/gegl_0.4.20.bb          | 69 +++++++++++++------
+ .../recipes-gimp/gimp/gimp_2.10.14.bb         | 32 +++++----
+ .../recipes-gimp/mypaint/libmypaint_git.bb    | 24 +++++++
+ .../mypaint/mypaint-brushes-1.0_git.bb        | 12 ++++
+ .../packagegroups/packagegroup-meta-oe.bb     |  4 +-
+ .../gegl/gegl/pkgconfig.patch                 | 21 ------
+ .../gimp/gimp/0003-Fix-use-of-gegl-API.patch  | 34 ---------
+ .../gimp/gimp/bump_Babl-GEGL_versions.patch   | 53 --------------
+ 10 files changed, 139 insertions(+), 178 deletions(-)
+ rename meta-oe/recipes-graphics/babl/babl_0.1.62.bb => meta-gnome/recipes-gimp/babl/babl_0.1.74.bb (31%)
+ rename meta-oe/recipes-graphics/gimp/gimp/0001-configure-ac-do-not-check-for-freetype-config.patch => meta-gnome/recipes-gimp/gegl/gegl/0001-meson.build-Give-note-if-sdl2-was-found.patch (10%)
+ rename meta-oe/recipes-graphics/gegl/gegl_0.3.18.bb => meta-gnome/recipes-gimp/gegl/gegl_0.4.20.bb (24%)
+ rename meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb => meta-gnome/recipes-gimp/gimp/gimp_2.10.14.bb (49%)
+ create mode 100644 meta-gnome/recipes-gimp/mypaint/libmypaint_git.bb
+ create mode 100644 meta-gnome/recipes-gimp/mypaint/mypaint-brushes-1.0_git.bb
+ delete mode 100644 meta-oe/recipes-graphics/gegl/gegl/pkgconfig.patch
+ delete mode 100644 meta-oe/recipes-graphics/gimp/gimp/0003-Fix-use-of-gegl-API.patch
+ delete mode 100644 meta-oe/recipes-graphics/gimp/gimp/bump_Babl-GEGL_versions.patch
+
 -- 
 2.21.0
 
