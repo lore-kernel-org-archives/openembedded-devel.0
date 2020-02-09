@@ -1,52 +1,39 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf1-f173.google.com (mail-pf1-f173.google.com
-	[209.85.210.173])
-	by mail.openembedded.org (Postfix) with ESMTP id C54E660CED
-	for <openembedded-devel@openembedded.org>;
-	Sun,  9 Feb 2020 16:17:33 +0000 (UTC)
-Received: by mail-pf1-f173.google.com with SMTP id n7so2439209pfn.0
-	for <openembedded-devel@openembedded.org>;
-	Sun, 09 Feb 2020 08:17:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=AY35JJvw9sjNnmcFXxre/QjxnVbezLojIiM1GVpDewY=;
-	b=i0FW+gG5Y+C8yuTu2hF3szQ+uU4aSNOlmXh+u4aCD187CR7FTiHaGEQgnbUnJbX91j
-	J68I9UgOK0SnNSNDgQh07Xo3F8uWNOUdxVRh6KrivWAO9Q/1LepZb9cyqt2PGpmPWnb0
-	AqL1/ySiJP3HpsJ6a9Bt52bTPx/BXkrsfX4+5MZiqyAxP6KFqFNZ2PW+Vurlpt32YTLt
-	Ut54OtpqJxdu9/llvHOMPpChhO1jG40OveIlfBPV2O2ngGdpv/FC2lce1M7c6G2PY/5Q
-	RNUqlcZsBb4mt6BdBFLnPLkOcwZkdrjZ09sf3+BaUcN0ui9MDolAkloxu0GVGJZYAKn8
-	rJKQ==
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com
+	[209.85.167.179])
+	by mail.openembedded.org (Postfix) with ESMTP id D1AA660CD1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  9 Feb 2020 16:21:22 +0000 (UTC)
+Received: by mail-oi1-f179.google.com with SMTP id i1so6919445oie.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 09 Feb 2020 08:21:24 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=AY35JJvw9sjNnmcFXxre/QjxnVbezLojIiM1GVpDewY=;
-	b=nRwvl7nutmNiUEDKwfn8qVA+lcTDr2c4Te4W9rdznWnlNBITGQ2X2gR41XdnrfMXRR
-	69sfRG7qwK/S+tSlSLh59wjZ7F7Vny+egrB72jAMnmgXZ9OwS2ZFhbzlGungvYei4OiT
-	mVqemSQJr0it6E3uWwXT9WTSZWdqQDm/LWTJzH+RqCtvVFsexErApAyMQZGoF3LRQUSD
-	1GzK0T13DL7V7mewvIo+xxhuRLNKmFDTmHF5XbLmfLwZTc+SSR+vTbJFnmeBzj5rr5EL
-	gmSrwUujEqE9iNIvdbcPzDiAdUDalM0B0xocdU9nc0rXfcFIAc8LYF//yOCIQArojqxk
-	WDog==
-X-Gm-Message-State: APjAAAV1XzKTK3gSl6RHkKSZTulpjMN7GdXOVKFRBbMnvnpVVSjEhV6K
-	tuHDJ01xrS7RB2SlsFKVXvJGP8IL
-X-Google-Smtp-Source: APXvYqyXaKwx9WpxfsXGCfXqYVeFhmYvcwN6M8I/N3QGOTO8Rk3OJqAeGadIg0HOFet6ajzYSG6BGA==
-X-Received: by 2002:a63:ed49:: with SMTP id m9mr9695395pgk.304.1581265054509; 
-	Sun, 09 Feb 2020 08:17:34 -0800 (PST)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4180:a5c0:154b:3780:5122:4aa9])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=4O28/Lejm/UjGWdRvr7HygLUvt785uNgirC3Mo/yQzg=;
+	b=daxESXAQxlhsKyTPgjTKvXkdX+6A9RkzGp1Pzl+4f+ZiP3iaBCED5I9W1n/I70B5pH
+	DQBplexi2OVyWhqD38qTWutHXI1qKdxWGgNZjNSTaXFuSP7oSU9VcYI3+YEJQsX4THCD
+	ozZaLLJl7RciYaSgF3rDnKhU97LxuT4xXfetsuGGESqDw1PFfTHMxYbtpRiTRtyX530+
+	lH9fnn1QsJuY/uhUuq8tM2DP9f4hDkYgDaLgtNNaQdhMofaajrhnvf1EShiLobHqm5ZP
+	CkndB8jZaV4p6uY2pUaKM8EMgBPeqWRnuSrhsZ6qGg2kpp4sXPXNn4+RAMmO/CMySvv1
+	r9Gg==
+X-Gm-Message-State: APjAAAXt1jS6OJZqDZslU80qNBejULPFRcnGc0tsVmZm2BYBO4U8jaTV
+	q8BqhasTaTYN7654/T3eZMAubN46BMg=
+X-Google-Smtp-Source: APXvYqyoRIeOKhpghPJjgo7dO5UHqhbZSBZtRdWqVbovd3cXG570Sp6ni+1Shby60GaMxsxKpvwr1g==
+X-Received: by 2002:a05:6808:64e:: with SMTP id
+	z14mr7869735oih.79.1581265283555; 
+	Sun, 09 Feb 2020 08:21:23 -0800 (PST)
+Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
 	by smtp.gmail.com with ESMTPSA id
-	a19sm8831737pju.11.2020.02.09.08.17.33
-	for <openembedded-devel@openembedded.org>
+	k201sm1339532oih.43.2020.02.09.08.21.22
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 09 Feb 2020 08:17:34 -0800 (PST)
-From: Armin Kuster <akuster808@gmail.com>
-To: openembedded-devel@openembedded.org
-Date: Sun,  9 Feb 2020 08:17:19 -0800
-Message-Id: <bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c.1581264950.git.akuster808@gmail.com>
+	Sun, 09 Feb 2020 08:21:22 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  9 Feb 2020 11:20:58 -0500
+Message-Id: <20200209162059.18011-1-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <cover.1581264950.git.akuster808@gmail.com>
-References: <cover.1581264950.git.akuster808@gmail.com>
-Subject: [zeus 11/11] fluentbit: Fix packaging in multilib env
+Subject: [meta-python][PATCH 1/2] python3-aiohttp: update to version 3.6.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,60 +46,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Feb 2020 16:17:34 -0000
+X-List-Received-Date: Sun, 09 Feb 2020 16:21:23 -0000
 
-From: Khem Raj <raj.khem@gmail.com>
+Consolidate inc & bb file into a single python3 version
 
-Fixes
-ERROR: fluentbit-0.12.19-r0 do_package: QA Issue: fluentbit: Files/directories were installed but not shipped in any package:
-/usr/lib/libfluent-bit.so
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 99fe1dec83456100e0bc1c02581defa7aaf04a16)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../fluentbit/fluentbit/cmake_multilib.patch   | 18 ++++++++++++++++++
- .../fluentbit/fluentbit_0.12.19.bb             |  1 +
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/cmake_multilib.patch
+ .../recipes-devtools/python/python3-aiohttp_3.5.4.bb        | 2 --
+ .../python/{python-aiohttp.inc => python3-aiohttp_3.6.2.bb} | 6 +++---
+ 2 files changed, 3 insertions(+), 5 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-aiohttp_3.5.4.bb
+ rename meta-python/recipes-devtools/python/{python-aiohttp.inc => python3-aiohttp_3.6.2.bb} (76%)
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/cmake_multilib.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/cmake_multilib.patch
-new file mode 100644
-index 0000000000..8fe9f3e703
---- /dev/null
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/cmake_multilib.patch
-@@ -0,0 +1,18 @@
-+Use CMAKE_INSTALL_LIBDIR instead of hardcoding lib path
-+
-+Helps build on platforms where libpaths are not lib/ but say lib64/
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+--- a/src/CMakeLists.txt
-++++ b/src/CMakeLists.txt
-+@@ -182,7 +182,7 @@ if(NOT FLB_WITHOUT_SHARED_LIB)
-+     PROPERTIES OUTPUT_NAME fluent-bit)
-+ 
-+   # Library install routines
-+-  install(TARGETS fluent-bit-shared LIBRARY DESTINATION lib)
-++  install(TARGETS fluent-bit-shared LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-+ endif()
-+ 
-+ # Static Library
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.12.19.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.12.19.bb
-index e50aa71a9f..27b910b8be 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_0.12.19.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.12.19.bb
-@@ -4,6 +4,7 @@ BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
+diff --git a/meta-python/recipes-devtools/python/python3-aiohttp_3.5.4.bb b/meta-python/recipes-devtools/python/python3-aiohttp_3.5.4.bb
+deleted file mode 100644
+index cd0303f05b..0000000000
+--- a/meta-python/recipes-devtools/python/python3-aiohttp_3.5.4.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-inherit setuptools3
+-require python-aiohttp.inc
+diff --git a/meta-python/recipes-devtools/python/python-aiohttp.inc b/meta-python/recipes-devtools/python/python3-aiohttp_3.6.2.bb
+similarity index 76%
+rename from meta-python/recipes-devtools/python/python-aiohttp.inc
+rename to meta-python/recipes-devtools/python/python3-aiohttp_3.6.2.bb
+index e711ad71da..979acc9cff 100644
+--- a/meta-python/recipes-devtools/python/python-aiohttp.inc
++++ b/meta-python/recipes-devtools/python/python3-aiohttp_3.6.2.bb
+@@ -4,11 +4,11 @@ HOMEPAGE = "https://github.com/aio-libs/aiohttp"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cf056e8e7a0a5477451af18b7b5aa98c"
  
- SRC_URI = "http://fluentbit.io/releases/0.12/fluent-bit-${PV}.tar.gz \
-            file://jemalloc.patch \
-+           file://cmake_multilib.patch \
-            "
- SRC_URI[md5sum] = "7c8708312ac9122faacf9e2a4751eb34"
- SRC_URI[sha256sum] = "23a81087edf0e2c6f2d49411c6a82308afc5224f67bbaa45729c057af62e9241"
+-SRC_URI[md5sum] = "85fe5c9037256c58d4678148bd91b3f3"
+-SRC_URI[sha256sum] = "9c4c83f4fa1938377da32bc2d59379025ceeee8e24b89f72fcbccd8ca22dc9bf"
++SRC_URI[md5sum] = "ca40144c199a09fc1a141960cf6295f0"
++SRC_URI[sha256sum] = "259ab809ff0727d0e834ac5e8a283dc5e3e0ecc30c4d80b3cd17a4139ce1f326"
+ 
+ PYPI_PACKAGE = "aiohttp"
+-inherit pypi
++inherit setuptools3 pypi
+ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-async-timeout \
+     ${PYTHON_PN}-chardet \
 -- 
 2.17.1
 
