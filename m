@@ -1,51 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D319160CD0
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 072BA60CD0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Feb 2020 18:41:23 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id w8so3472268qts.11
+	Sun,  9 Feb 2020 18:47:02 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id z12so2662025pgl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Feb 2020 10:41:25 -0800 (PST)
+	Sun, 09 Feb 2020 10:47:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=RIi74W338uTQwc/z/KOm3Wq5ACSpZvjmLQwfwNoulLA=;
-	b=DhR1Hh83WTLvlM8A55N0kR0oImG7YMxT9kq9LOz2/xICFxvpu2Be7mYaWxiPciLC/4
-	aGXMcGCmmVylrqSQsa2k3WfsbvD8Hwxh0C7pm6PkGB6FKp0oavz1REIL6xW9ghQjpCn9
-	fBm93L0sg37s8ztQAKatfnkajFqzX3C6b5g9MBLDg2sGEvUFezioTReuO72hW90Tner/
-	gfgZ4T0VHJm5MBnE07ZKkgC8BkosLZF3RdtQ9Uj8pD4w64WrEib4k/lVmjW8aca+9ZAT
-	8bbJWBFGJpS8x64mtNhG2E7bTUNIF2NkUhm/oO1JjUJnakZD03FdZJ7M/2zft6B3vTUy
-	uCxg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=UADXoI29lj569ov+j97D3sq4LSdv81YTa3of3r/Fnb8=;
+	b=lQFmRbXVMHY/XB/wfNiOSMIEVIBepfqNMNwKU1SydT1AwucUBODB3dU/DrLT+alY1U
+	oi7x/987xHl5t4vCp6i/qLXQNXqD4ila2MC6otoaRgtKsDMdPMTVQnp9XMavc00okOlz
+	Dx22t38JEC9BfwzMMGEUPMRj+IGgz/41vnfSmHZrGRv8P+I8Es8yx9ZuD45qsXrj+pwi
+	KLMbJpemDv81Co+koq7LEf/LXMQqqPpKlvwEZdSNGkSOLOttHaX0TFgS/Z9FS335CF+l
+	M5n0PP3uzf7hTZDHQ67m3xXE8FzTg2pACAcuiWiIKzrzEcmok22j6DrvqS4KALeeIfxD
+	4kEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=RIi74W338uTQwc/z/KOm3Wq5ACSpZvjmLQwfwNoulLA=;
-	b=m75TABU1tTsGvkPNI+jeDYMuEl/GgST/ZlRr9MBEpjbqDNWE2IdiLvCfac9qAR9oZ2
-	Ahn12ijisgKoV3MdfW5cQGNurp00qy2dPjMK0i5hve/PNNLEAxyP60Qb+j65HGFgioWJ
-	NarOP7rCyXX7g4bbt9xNVkglghDMz+Cz5ZF/kStO8uXU1MVzl8XN42wGR/L1uq3d6thz
-	xLUHZCDMc0eybNA71vkaUPPCh3DwE/BTx5RXWB93yoSt2tmWzOqjCkX8Ggi1GqP7jkiN
-	PBPjspg06KOWM3hXubEFUhkzUd9g8/r/59lPG1MiUjD45CIbALeNZcvMv6MjNvhI4Bno
-	hzKg==
-X-Gm-Message-State: APjAAAV9J/ctoZQye06Y2KSQ0hea3qLP6sEVkW7NpWy5cxmLmI3ldPNH
-	viI1cA9y3ehxBR2g7RvlJH3YjDgzwq9q7gJ0Frs=
-X-Google-Smtp-Source: APXvYqx49dqlRIMbhR4vXxhL/zlwvs5vnvl26D9b13B92Iwl+j8IxD/9A+xSngAngiEJT8lDy2MA5Yu6WZK62esSHlk=
-X-Received: by 2002:ac8:60c8:: with SMTP id i8mr2636185qtm.53.1581273684376;
-	Sun, 09 Feb 2020 10:41:24 -0800 (PST)
-MIME-Version: 1.0
-References: <20200209034641.19378-1-okaya@kernel.org>
-	<CAMKF1sorVApNQ69i3QOUiK6yF1gCvubzNvT=VMkjPcFtK+XC+w@mail.gmail.com>
-	<CAMKF1sphX1U9MWnhvOhiyKNWy8BJNJtxeJuf9WOYV4qWWrXY7A@mail.gmail.com>
-	<ebdd6807-4f9b-f1aa-fcdf-dba5ab71715e@kernel.org>
-In-Reply-To: <ebdd6807-4f9b-f1aa-fcdf-dba5ab71715e@kernel.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=UADXoI29lj569ov+j97D3sq4LSdv81YTa3of3r/Fnb8=;
+	b=iVAo7H9RwQ3vvzztmKEH3KDCuY524/qE1U9acn0hTk1gLQmXs/aVC5EkUJYSX5C8As
+	OEI3PfsGG2ds8kB3zMouD6mKVG2OwDLkN1FCnQvVTDYHN0IeZ3gMlkA2ovB5TQ05yosp
+	+bbA6yftG5D+2XSr36nP0/F5d5KUuwnUM98fZQo6nni2j5p2DEw73H7Wqa/LADu4z8YD
+	fPjZndzWu93PbhybYXrQuIrF2Z9WkMGsPQ/f5HqvGoTrMNYA0BhaaOewCa9vIX9RRnVE
+	58CbpGofLBHOnfKbz+zjVy0eBMtrHnOAmo8uW85OAN3WZzmldGxcUtq8Bt+t8PcFkF6z
+	kTXQ==
+X-Gm-Message-State: APjAAAVpdz8Z9JN3om5t7ubdj6rFQp/C48TjTTcW7mpz2Jw5BZYD/D7W
+	sxNLASB09GbqK1XYZ2A5q2gbBz3nPCw=
+X-Google-Smtp-Source: APXvYqxLP4TZSsqV1+iDKiLPOBjOKRMf8fa70kBkHKavcicQM6C0HHUKzO9Z5OwLsP+nyGstk6INKA==
+X-Received: by 2002:a65:6384:: with SMTP id h4mr10114778pgv.75.1581274023560; 
+	Sun, 09 Feb 2020 10:47:03 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::5683])
+	by smtp.gmail.com with ESMTPSA id
+	c11sm9758371pfo.170.2020.02.09.10.47.02
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 09 Feb 2020 10:47:03 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 9 Feb 2020 10:40:58 -0800
-Message-ID: <CAMKF1spONv-2fZ676CSPjAHbDwzKAABqBHa0Obj2=0+osj84ZQ@mail.gmail.com>
-To: Sinan Kaya <okaya@kernel.org>
-Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Changyi Li <Changyu.Li@microsoft.com>
-Subject: Re: [meta-oe][PATCH] abseil-cpp: add recipe for git version
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  9 Feb 2020 10:47:06 -0800
+Message-Id: <20200209184706.3574596-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] tigervnc: Do not depend on chkconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,47 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Feb 2020 18:41:24 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 09 Feb 2020 18:47:03 -0000
+Content-Transfer-Encoding: 8bit
 
-On Sun, Feb 9, 2020 at 9:45 AM Sinan Kaya <okaya@kernel.org> wrote:
->
-> On 2/9/2020 11:56 AM, Khem Raj wrote:
-> > It also fails to build on musl
-> > https://errors.yoctoproject.org/Errors/Details/390527/
-> >
-> > On Sat, Feb 8, 2020 at 11:53 PM Khem Raj <raj.khem@gmail.com> wrote:
->
->
-> This library requires "-march=armv8-a+crypto"
->
-> -fvisibility-inlines-hidden
->
-> Yet, it is getting compiled with: -march=armv8-a+crc
->
+This recipe is gone from core
 
-This means the recipe should be checking for crypto being present in
-TUNE_FEATURES
-and be marked incompatible if this is not available.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-mark it compatible only on architectures where
-it works which it seems are only arm/x86, and on aarch64 particularly
-check for CPU feature it requires
-something on the lines below
+diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb
+index 16937792eb..f97c2b2d6c 100644
+--- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb
++++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.10.1.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.tigervnc.com/"
+ LICENSE = "GPLv2+"
+ SECTION = "x11/utils"
+ DEPENDS = "xserver-xorg gnutls jpeg libxtst gettext-native fltk"
+-RDEPENDS_${PN} = "chkconfig coreutils hicolor-icon-theme perl"
++RDEPENDS_${PN} = "coreutils hicolor-icon-theme perl"
+ 
+ LIC_FILES_CHKSUM = "file://LICENCE.TXT;md5=75b02c2872421380bbd47781d2bd75d3"
+ 
+-- 
+2.25.0
 
-python () {
-    arch = d.getVar("TARGET_ARCH")
-
-    if arch == "aarch64":
-        tunes = d.getVar("TUNE_FEATURES")
-        if not tunes:
-            return
-        pkgn = d.getVar("PN")
-        pkgv = d.getVar("PV")
-        if "crypto" not in tunes:
-            raise bb.parse.SkipPackage("%s-%s Needs support for crypto
-on armv8" % (pkgn, pkgv))
-}
-
-> What's the bet way to handle this
 
