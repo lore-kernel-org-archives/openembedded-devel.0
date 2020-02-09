@@ -1,38 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com
-	[209.85.167.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E2F160F43
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id C0D6060CD2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  9 Feb 2020 16:39:11 +0000 (UTC)
-Received: by mail-oi1-f182.google.com with SMTP id p125so6944367oif.10
+	Sun,  9 Feb 2020 16:56:45 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id w15so4232661qkf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Feb 2020 08:39:12 -0800 (PST)
+	Sun, 09 Feb 2020 08:56:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=lz+ZxCBDlOv0ZFEQJ2npi3Bdw1mIsxdhnI56VZetaVY=;
+	b=XXnq6pDlNtf7U+3mdCMsJcSutnX0ie9df5W21XjXLR1aGsa9P1eMad0ool1cdESLuF
+	e4EslMgu1BpwXe1BR2ecFDwbGJp+HRGIUimcTvbu1Gbz+Q9eYMrPnFQZYX8Z+XYCXUHt
+	rcBTDGSZ6I2GeZ7vBNHeQA9Z3lhMlaU+RQA37T9rgzfFQNrK7COPhlHyuyPCltXYB+AF
+	7S7eOxPOzM+h6AZcnpHVUjyaJDPBzBi3yPoNIU01G1kTdJ6B/tAfyDh8TwAcNp/3Ce9X
+	9FpMQJNpysHhkJ83vA4Rv2FfuSV43v1zfpwf7W6ibwbFiBhtRF0sTsXeaNlionlcNC2g
+	Z/lQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=7cV7dQrJGGWYvMcF0Tp2Zu7qJhl7Nze+0kvZ4qo3IGE=;
-	b=iOQhx4VmenGnCIeXR15bVneV80E/Sj9hxjEND/R2hFEGrcIZ0vqUzR2mSaYH7Eq7vx
-	5JP0xcSY/6hYwRDSMxG/12I/6vCzNGRO1uGLo3c/udEi72DM8r6VTquZwuNTOGcJPJha
-	03NVnaVNQCj/a2lgPNQ+nAxMihy1uQrhyR+eTn8xOvHusL3KoCwqk2IWXizwoGWHQLz1
-	C0/mTR/X3ueOjQcmTStZ4asOyWk1biPWdQ50gBMfnMnTE+1U/Ge/pRng8gW8wtfKeI+P
-	AVKbZ7TOZM2qElzurWAZm9b+OCz0QCGmVWYkTfoQ3Z8eqNl78GhqrtDL++0KHFHBCTdB
-	3XhQ==
-X-Gm-Message-State: APjAAAU4QLtZN4qTkgucM3JHlISaEnNDfqyCXg151o0g69/x9x4viwV3
-	GS/2k0HhBKFXRvGyDDaH3SsbSadzKNw=
-X-Google-Smtp-Source: APXvYqz4CjflKGfwo0c7B1ioAwt/fDN4LeNsVZVExq14ubj1TpczmLT9dD/C69OAUyKk6M3tJmLdRQ==
-X-Received: by 2002:aca:1708:: with SMTP id j8mr8407961oii.166.1581266352191; 
-	Sun, 09 Feb 2020 08:39:12 -0800 (PST)
-Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-	by smtp.gmail.com with ESMTPSA id
-	r17sm3524957otq.70.2020.02.09.08.39.11
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 09 Feb 2020 08:39:11 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  9 Feb 2020 11:38:59 -0500
-Message-Id: <20200209163859.24667-1-derek@asterius.io>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-alembic: update to version 1.4.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=lz+ZxCBDlOv0ZFEQJ2npi3Bdw1mIsxdhnI56VZetaVY=;
+	b=udzT8WqHhTJdw1yPwk4fPiisKs2KpUl0IH+A9YUkzls6kn/dEei0jyuxAzpy0XLd8o
+	79mxPSS5sTK7RuebL9lICA7ZJUb3LIXM0ZdBBG/2UCrtJQdkgiSMm4yNfsB3/Edl3k1D
+	IXkrurD00oqinQpZx169i9LoV5huKtgtRLNoAhll3pC33uI6ydRyfps8yJzJVY4oXWrk
+	7PqDBMU68U760ssgzOvcsn9Pzlf2//tIKdB8JNhueHm0rTtbWr4rMf3QC2jx6pYD38//
+	ljK1NcFgw2BBGJO2cpZn1jwsZCzGzVhYEfZ8JCDTyMb/einJsdGN2SiVMzoFF687py3g
+	pijg==
+X-Gm-Message-State: APjAAAXt3jdHQeP7pVB2nG54WkkCJf2DzX0LIPvvg4/SjaXyt0gnrEa6
+	U6uln8pWqNLvhFWpt4NkBINMQcSZq4qb1q4L6WE=
+X-Google-Smtp-Source: APXvYqxQajN2Ui/jtcvBe9ZJvASzfxZ6jWYc7NTaPzvSeRS0F3Qb+Sg2t2UVNrYDjpN7qM6+VwD7VQZ644c/E6d+3NE=
+X-Received: by 2002:ae9:ef50:: with SMTP id d77mr7158001qkg.71.1581267406317; 
+	Sun, 09 Feb 2020 08:56:46 -0800 (PST)
+MIME-Version: 1.0
+References: <20200209034641.19378-1-okaya@kernel.org>
+	<CAMKF1sorVApNQ69i3QOUiK6yF1gCvubzNvT=VMkjPcFtK+XC+w@mail.gmail.com>
+In-Reply-To: <CAMKF1sorVApNQ69i3QOUiK6yF1gCvubzNvT=VMkjPcFtK+XC+w@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 9 Feb 2020 08:56:20 -0800
+Message-ID: <CAMKF1sphX1U9MWnhvOhiyKNWy8BJNJtxeJuf9WOYV4qWWrXY7A@mail.gmail.com>
+To: Sinan Kaya <okaya@kernel.org>
+Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Changyi Li <Changyu.Li@microsoft.com>
+Subject: Re: [meta-oe][PATCH] abseil-cpp: add recipe for git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,76 +56,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 09 Feb 2020 16:39:12 -0000
+X-List-Received-Date: Sun, 09 Feb 2020 16:56:45 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Update license checksum for copyright change to 2020
-Verified license remains MIT
+It also fails to build on musl
+https://errors.yoctoproject.org/Errors/Details/390527/
 
-Consolidated inc & bb file for python3 only recipe
-
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-devtools/python/python-alembic.inc  | 15 ---------------
- .../python/python3-alembic_1.3.2.bb             |  2 --
- .../python/python3-alembic_1.4.0.bb             | 17 +++++++++++++++++
- 3 files changed, 17 insertions(+), 17 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-alembic.inc
- delete mode 100644 meta-python/recipes-devtools/python/python3-alembic_1.3.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-alembic_1.4.0.bb
-
-diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
-deleted file mode 100644
-index c94c142ddb..0000000000
---- a/meta-python/recipes-devtools/python/python-alembic.inc
-+++ /dev/null
-@@ -1,15 +0,0 @@
--DESCRIPTION = "A database migration tool for SQLAlchemy"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=28aaf14a6592d14dbfb2f4abd597aa27"
--
--SRC_URI[md5sum] = "3d7584a8fb0203ec82b90baa726d2bd9"
--SRC_URI[sha256sum] = "3b0cb1948833e062f4048992fbc97ecfaaaac24aaa0d83a1202a99fb58af8c6d"
--
--PYPI_PACKAGE = "alembic"
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-dateutil \
--    ${PYTHON_PN}-editor \
--    ${PYTHON_PN}-mako \
--    ${PYTHON_PN}-sqlalchemy \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.3.2.bb b/meta-python/recipes-devtools/python/python3-alembic_1.3.2.bb
-deleted file mode 100644
-index e248fe7ce9..0000000000
---- a/meta-python/recipes-devtools/python/python3-alembic_1.3.2.bb
-+++ /dev/null
-@@ -1,2 +0,0 @@
--inherit pypi setuptools3
--require python-alembic.inc
-diff --git a/meta-python/recipes-devtools/python/python3-alembic_1.4.0.bb b/meta-python/recipes-devtools/python/python3-alembic_1.4.0.bb
-new file mode 100644
-index 0000000000..8247166da6
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-alembic_1.4.0.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "A database migration tool for SQLAlchemy"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=bd64aba1b968c2bfbc2b525a181ce85c"
-+
-+inherit pypi setuptools3
-+
-+SRC_URI[md5sum] = "758b28361557e45c79c454d662131a83"
-+SRC_URI[sha256sum] = "2df2519a5b002f881517693b95626905a39c5faf4b5a1f94de4f1441095d1d26"
-+
-+PYPI_PACKAGE = "alembic"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-dateutil \
-+    ${PYTHON_PN}-editor \
-+    ${PYTHON_PN}-mako \
-+    ${PYTHON_PN}-sqlalchemy \
-+"
--- 
-2.17.1
-
+On Sat, Feb 8, 2020 at 11:53 PM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Sat, Feb 8, 2020 at 7:56 PM Sinan Kaya <okaya@kernel.org> wrote:
+> >
+> > The repository contains the Abseil C++ library code. Abseil is an
+> > open-source collection of C++ code (compliant to C++11) designed to
+> > augment the C++ standard library.
+> >
+> > https://github.com/abseil/abseil-cpp
+> >
+> > Signed-off-by: Changyi Li <Changyu.Li@microsoft.com>
+> > Signed-off-by: Sinan Kaya <sinan.kaya@microsoft.com>
+> > ---
+> >  ...e-maes-option-from-cross-compilation.patch | 53 +++++++++++++++++++
+> >  .../abseil-cpp/abseil-cpp_git.bb              | 27 ++++++++++
+> >  2 files changed, 80 insertions(+)
+> >  create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
+> >  create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+> >
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
+> > new file mode 100644
+> > index 0000000000..4c41cd8902
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
+> > @@ -0,0 +1,53 @@
+> > +From 70926666f7c5c35add363e3bcade6eaabace7206 Mon Sep 17 00:00:00 2001
+> > +From: Sinan Kaya <sinan.kaya@microsoft.com>
+> > +Date: Mon, 3 Feb 2020 03:25:57 +0000
+> > +Subject: [PATCH] Remove maes option from cross-compilation
+> > +
+> > +---
+> > + absl/copts/GENERATED_AbseilCopts.cmake | 4 ----
+> > + absl/copts/GENERATED_copts.bzl         | 4 ----
+> > + absl/copts/copts.py                    | 4 ----
+> > + 3 files changed, 12 deletions(-)
+> > +
+> > +diff --git a/absl/copts/GENERATED_AbseilCopts.cmake b/absl/copts/GENERATED_AbseilCopts.cmake
+> > +index 01bd40b..af99694 100644
+> > +--- a/absl/copts/GENERATED_AbseilCopts.cmake
+> > ++++ b/absl/copts/GENERATED_AbseilCopts.cmake
+> > +@@ -230,7 +230,3 @@ list(APPEND ABSL_RANDOM_HWAES_MSVC_X64_FLAGS
+> > +     "/Ob2"
+> > + )
+> > +
+> > +-list(APPEND ABSL_RANDOM_HWAES_X64_FLAGS
+> > +-    "-maes"
+> > +-    "-msse4.1"
+> > +-)
+> > +diff --git a/absl/copts/GENERATED_copts.bzl b/absl/copts/GENERATED_copts.bzl
+> > +index 82f332f..9a548d1 100644
+> > +--- a/absl/copts/GENERATED_copts.bzl
+> > ++++ b/absl/copts/GENERATED_copts.bzl
+> > +@@ -231,7 +231,3 @@ ABSL_RANDOM_HWAES_MSVC_X64_FLAGS = [
+> > +     "/Ob2",
+> > + ]
+> > +
+> > +-ABSL_RANDOM_HWAES_X64_FLAGS = [
+> > +-    "-maes",
+> > +-    "-msse4.1",
+> > +-]
+> > +diff --git a/absl/copts/copts.py b/absl/copts/copts.py
+> > +index 068abce..c2f70fb 100644
+> > +--- a/absl/copts/copts.py
+> > ++++ b/absl/copts/copts.py
+> > +@@ -203,10 +203,6 @@ COPT_VARS = {
+> > +     # to improve performance of some random bit generators.
+> > +     "ABSL_RANDOM_HWAES_ARM64_FLAGS": ["-march=armv8-a+crypto"],
+> > +     "ABSL_RANDOM_HWAES_ARM32_FLAGS": ["-mfpu=neon"],
+> > +-    "ABSL_RANDOM_HWAES_X64_FLAGS": [
+> > +-        "-maes",
+> > +-        "-msse4.1",
+> > +-    ],
+> > +     "ABSL_RANDOM_HWAES_MSVC_X64_FLAGS": [
+> > +         "/O2",  # Maximize speed
+> > +         "/Ob2",  # Aggressive inlining
+> > +--
+> > +2.23.0
+> > +
+> > diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+> > new file mode 100644
+> > index 0000000000..c7077c129f
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
+> > @@ -0,0 +1,27 @@
+> > +SUMMARY = "Abseil is a cpp library like STL"
+> > +DESCRIPTION = "It's got containers, algorithms, useful stuff!"
+>
+> maybe we can be more specific about it from
+> https://github.com/abseil/abseil-cpp/blob/master/README.md
+>
+> > +HOMEPAGE = ""
+>
+> perhaps https://abseil.io/ instead of leaving it empty is better.
+>
+> > +SECTION = "libs"
+> > +LICENSE = "Apache-2"
+>
+> The current value is not wrong but Apache-2.0 would be better to match SPDX
+>
+> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
+> > +
+> > +SRCREV = "aa844899c937bde5d2b24f276b59997e5b668bde"
+> > +BRANCH = "lts_2019_08_08"
+> > +SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
+> > +           file://0001-Remove-maes-option-from-cross-compilation.patch \
+> > +          "
+> > +
+> > +S = "${WORKDIR}/git"
+> > +
+> > +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', ' -march=armv8-a+crypto', '', d)}"
+> > +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'x64', ' -maes -msse4.1', '', d)}"
+> > +
+> > +CXXFLAGS_append_class-nativesdk = " -Wl,--no-as-needed -fPIC"
+> > +CXXFLAGS_append_class-native = " -Wl,--no-as-needed -fPIC"
+>
+> perhaps use ASNEEDED_<override> = ""
+>
+> > +CXXFLAGS_append_class-target = " -fPIC"
+> > +
+> > +inherit cmake
+> > +
+> > +BBCLASSEXTEND = "native nativesdk"
+> > +ALLOW_EMPTY_${PN} = "1"
+>
+> why do we need this ?
 
