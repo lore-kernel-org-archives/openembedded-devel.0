@@ -1,47 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E18C860FA0
-	for <openembedded-devel@openembedded.org>;
-	Mon, 10 Feb 2020 20:00:56 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id e21so2124525qtp.13
-	for <openembedded-devel@openembedded.org>;
-	Mon, 10 Feb 2020 12:00:58 -0800 (PST)
+Received: from mail-qk1-f177.google.com (mail-qk1-f177.google.com
+	[209.85.222.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A4EC605C3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Feb 2020 20:11:13 +0000 (UTC)
+Received: by mail-qk1-f177.google.com with SMTP id w25so7870580qki.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Feb 2020 12:11:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DnzEj/justKRa4t5wQBC9FMKxKJYRAeWZ/GoexGJfAQ=;
-	b=Nv+Sno7potdPq5WPWkTVHuTon966SBGVkrdRrJKxubMTaihk9FdZHvuddcF3A8nOxJ
-	zcwswTS+FAhQSI9YPgsuhffYmBVGgNP1CuOxPojnZdTuPlrxVrqBxB+4uF5AnADbaJqD
-	RypUgRDv2+4u88XnHwo0dXM61RPI5wfNw6u6cK0O9ZCGzs1DW6ive/uTJL3ds904a7bo
-	8ocd3a8BblE5y6RLZDNxP5zRbD8Dj2dsMfJuHqqHeNF7H5Md0sIQZuRQjJiobHu5OaBY
-	gztFBxECoRXdHtuwARuHhAkTrTwO/oAE58NP5EQzB++uNjMBQPof/6BeQEuxRRQBIUsN
-	U+KQ==
+	:content-transfer-encoding;
+	bh=zmnnbAFdcyjWBWU14dL7CuGhwyeUzEChB1RjMi7V5n8=;
+	b=egVJKbONDCTgOkKBMqrUUWAJRkQBdQVaxhQciWjwFKQju5kLTiQ4uc4ZlRG11l5fiT
+	xtVzatOogs+4B0nKjU9/zzX2l+FSfhZXoAt2jR9t+jPMoDqalUDowlH5nqM0hAevF5wC
+	7EowVtr0BXcxRk2onXHTn26bjKG0FP+rhOgeKrfKOwZ/nQLpK2L5DU7g/q0NZZPjqqo3
+	JCCSUN+EO1V0lLe1+oEfNzlFEF0qkBwtD3uUSn7nHWp/Y/SJQ2LYC3R+Doe4hVW7584t
+	bLeYw1ntRgGsy/3+Z7DRttj9VOSaOEzITYNxR+ePLXIkFGNjjdJlufcLl4xtZYmOLEpP
+	SU6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=DnzEj/justKRa4t5wQBC9FMKxKJYRAeWZ/GoexGJfAQ=;
-	b=Z6JCL2N81nvfPX9Goi7WndsGQwgTV5GRbPetVcHpWI2DjnVN/ahDkplzYryKAzCLI9
-	kA6sC2MdzOMtQORWJG+9Mn9BMP5vOdSmyOjJBplMIkH1XCNl2U8bPnZsX6Q/gGJRQo0I
-	6mnXwj79NMUIT0PFRxtUduYJxafB450RNzhr8TbixUg2c+/OrXEe8VNeJ/2FOj1CKkKL
-	EiYT0Q4Dw9r7RgJKhLi6BAeM5WtfzTEOOwk7xjSVxUDHcUG7TaoL9/rVrducXHC4yZMU
-	k0iFzyG0Frymu70lz9pjpyPvMJY8wzrUF0f3cf/xHEuNag2L+Wdcz2YEdLZFhWcZaE21
-	JqMw==
-X-Gm-Message-State: APjAAAWYP24XqYdWW69wOeRZ72p9cnyV3bb+59ravzAB1OCRPqd7z8Ds
-	Xm7viaFJu1JHVSVxpUKo8r3RBSHlEioRmIE9Oeg=
-X-Google-Smtp-Source: APXvYqyJO68C/cNnrPS20DbuiS/f3mKBc9r8h+i5Eis1NMEhxqbuq5XapEdOuhfSYoJE5MA1f+P74BbZpt4P5FgbnnU=
-X-Received: by 2002:ac8:145:: with SMTP id f5mr11371317qtg.194.1581364857566; 
-	Mon, 10 Feb 2020 12:00:57 -0800 (PST)
+	:message-id:subject:to:content-transfer-encoding;
+	bh=zmnnbAFdcyjWBWU14dL7CuGhwyeUzEChB1RjMi7V5n8=;
+	b=R9iQOW9tMUyhNzTn1CHfqsSmlZ+nj8iXL+OEkiJBb7bwgTYtqBOmA6SMqosjNPErWH
+	ruXwnNZGBg7lo0dqeZAYMIG/1WzhI3+ZLsFvdlNjKih2OgydIIHNEHu6L32CfLULKJ00
+	HuTlDtl7paFwrI+5WtQu9PZ7jhjeRhqBnr4Hoy8QmHkZUgbmUSPtbXkzyHo6oxDdqeSO
+	ysuuu3Y4Lq2G4fC2UJyWIdxffn/rOkZNm2uURwloAIa+QO8254/XCllXrEZBR+ZAVgnb
+	PTQmqYt9+MvV0FS8xrO85Vz0iJwAGDt+sb3IkTV5CjLKSU62KMpGlzLYlb6R0Bb0sq+6
+	kL1w==
+X-Gm-Message-State: APjAAAV3Q8HAdaAHlJR58SF+P0EUkfxBvcuhmWtP/Q5fhg5K68rSUW4j
+	jiS3l/QffoouhpIid1lvfjA3Lerjy0m4f4hY7y3jyGY/l7s=
+X-Google-Smtp-Source: APXvYqyesPumsCEAEugS7UlgBcMZOV7A/uuaQ975/Fx6J7HQagzCdq1iv/mutVE5N4u5B2Wjma9Zh1eq4uGHQuREykg=
+X-Received: by 2002:ae9:ef50:: with SMTP id d77mr2961018qkg.71.1581365472212; 
+	Mon, 10 Feb 2020 12:11:12 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1581264950.git.akuster808@gmail.com>
-	<f64c2d691ea597aa6221e3d7706a4d022e07bfea.1581264950.git.akuster808@gmail.com>
-In-Reply-To: <f64c2d691ea597aa6221e3d7706a4d022e07bfea.1581264950.git.akuster808@gmail.com>
+References: <20200201163703.4264-1-schnitzeltony@gmail.com>
+	<20200201163703.4264-2-schnitzeltony@gmail.com>
+	<9f2e4677-9acd-f0d7-2eda-140b954ae58f@gmail.com>
+In-Reply-To: <9f2e4677-9acd-f0d7-2eda-140b954ae58f@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 10 Feb 2020 12:00:31 -0800
-Message-ID: <CAMKF1sqUomRGFQP83tEwR1xnaypWYAoEvGcbsvpvg0DE9BYDZw@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@openembedded.org>
-Subject: Re: [zeus 01/11] libldb: upgrade 1.5.5 -> 1.5.6
+Date: Mon, 10 Feb 2020 12:10:44 -0800
+Message-ID: <CAMKF1soH7ofWsnKaT2o76VQgASxVVd+vWOSDSYnZjHS8Ott3sQ@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/4] mozjs: port build to python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,50 +56,7996 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 20:00:57 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 20:11:13 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-patch series looks good to me.
+Hi Andreas
 
-On Sun, Feb 9, 2020 at 8:17 AM Armin Kuster <akuster808@gmail.com> wrote:
+I am seeing failure on OE builders like below
+
+TypeError: a bytes-like object is required, not 'str'
+
+detailed log
+
+http://errors.yoctoproject.org/Errors/Details/390559/
+
+
+On Sat, Feb 1, 2020 at 9:49 AM Khem Raj <raj.khem@gmail.com> wrote:
 >
-> From: Yi Zhao <yi.zhao@windriver.com>
+> Andreas
 >
-> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> (cherry picked from commit 2b3fd534874aee125a6c79c70c93b1aa498fda3f)
-> [Samba's update via ee5aa6911b2e93b89e67ae6167ee7d9a029b9262  required
->  libldb upgrade to 1.5.6 Yocto # 13750]
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  .../libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb}               | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-support/libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb} (95%)
+> Thanks a bunch for doing this work. This is a significant patch to
+> support deprecating py2, I have put it through CI lets see what we find
 >
-> diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-> similarity index 95%
-> rename from meta-networking/recipes-support/libldb/libldb_1.5.5.bb
-> rename to meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-> index b19c964d85..99eb6f9ce8 100644
-> --- a/meta-networking/recipes-support/libldb/libldb_1.5.5.bb
-> +++ b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-> @@ -33,8 +33,8 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
->                      file://man/ldb.3.xml;beginline=261;endline=262;md5=137f9fd61040c1505d1aa1019663fd08 \
->                      file://tools/ldbdump.c;endline=19;md5=a7d4fc5d1f75676b49df491575a86a42"
+> Cheers
+> -Khem
 >
-> -SRC_URI[md5sum] = "339a41ac9efaec680e6d1469dd9aa35b"
-> -SRC_URI[sha256sum] = "199f5861aa863f538ec66d5fa95ecc13254a2030c53daf0e47363fa9ba235c68"
-> +SRC_URI[md5sum] = "fc58ef432c1fcb03fc3bb6cccce08977"
-> +SRC_URI[sha256sum] = "ff82474d0bf109e415a2d50334bde5715f486a53ff4bb8c7f74459dd229e975b"
+> On 2/1/20 8:37 AM, Andreas M=C3=BCller wrote:
+> > While at it:
+> >
+> > * cleanup our patches
+> > * remove useless sed in do_configure
+> >
 >
->  inherit waf-samba distro_features_check
->  REQUIRED_DISTRO_FEATURES = "pam"
-> --
-> 2.17.1
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > ---
+> >   .../mozjs/0001-Port-build-to-python3.patch    | 6888 ++++++++++++++++=
++
+> >   ...nclude-RequiredDefines.h-for-depend.patch} |    0
+> >   ...x-cross-compilation-on-i586-targets.patch} |    0
+> >   ...04-do-not-create-python-environment.patch} |    0
+> >   ....patch =3D> 0005-fix-cannot-find-link.patch} |    0
+> >   ...ound-autoconf-2.13-detection-failed.patch} |    0
+> >   ... 0007-fix-do_compile-failed-on-mips.patch} |    0
+> >   ...ort.patch =3D> 0008-add-riscv-support.patch} |    0
+> >   ...mozjs-fix-coredump-caused-by-getenv.patch} |    0
+> >   ...rflow.patch =3D> 0010-format-overflow.patch} |    0
+> >   ... 0011-To-fix-build-error-on-arm32BE.patch} |    0
+> >   ...LIC_API.patch =3D> 0012-JS_PUBLIC_API.patch} |    0
+> >   ...013-riscv-Disable-atomic-operations.patch} |    0
+> >   ... 0014-fallback-to-2011-C++-standard.patch} |    0
+> >   ...-compiling-failure-on-mips64-n32-bsp.patch |    0
+> >   .../0001-support-musl.patch}                  |    0
+> >   .../0002-js-Fix-build-with-musl.patch}        |    0
+> >   .../recipes-extended/mozjs/mozjs_60.9.0.bb    |   56 +-
+> >   18 files changed, 6917 insertions(+), 27 deletions(-)
+> >   create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-Port-bui=
+ld-to-python3.patch
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0001-js.pc.in-do-not-inc=
+lude-RequiredDefines.h-for-depend.patch =3D> 0002-js.pc.in-do-not-include-R=
+equiredDefines.h-for-depend.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0010-fix-cross-compilati=
+on-on-i586-targets.patch =3D> 0003-fix-cross-compilation-on-i586-targets.pa=
+tch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0001-do-not-create-pytho=
+n-environment.patch =3D> 0004-do-not-create-python-environment.patch} (100%=
+)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0002-fix-cannot-find-lin=
+k.patch =3D> 0005-fix-cannot-find-link.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0003-workaround-autoconf=
+-2.13-detection-failed.patch =3D> 0006-workaround-autoconf-2.13-detection-f=
+ailed.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0005-fix-do_compile-fail=
+ed-on-mips.patch =3D> 0007-fix-do_compile-failed-on-mips.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{add-riscv-support.patch =
+=3D> 0008-add-riscv-support.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0001-mozjs-fix-coredump-=
+caused-by-getenv.patch =3D> 0009-mozjs-fix-coredump-caused-by-getenv.patch}=
+ (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{format-overflow.patch =
+=3D> 0010-format-overflow.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0001-To-fix-build-error-=
+on-arm32BE.patch =3D> 0011-To-fix-build-error-on-arm32BE.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{JS_PUBLIC_API.patch =3D>=
+ 0012-JS_PUBLIC_API.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0001-riscv-Disable-atomi=
+c-operations.patch =3D> 0013-riscv-Disable-atomic-operations.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{fallback-to-2011-C++-sta=
+ndard.patch =3D> 0014-fallback-to-2011-C++-standard.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{ =3D> mipsarchn32}/0001-=
+fix-compiling-failure-on-mips64-n32-bsp.patch (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0006-support-musl.patch =
+=3D> musl/0001-support-musl.patch} (100%)
+> >   rename meta-oe/recipes-extended/mozjs/mozjs/{0001-js-Fix-build-with-m=
+usl.patch =3D> musl/0002-js-Fix-build-with-musl.patch} (100%)
+> >
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-Port-build-to-py=
+thon3.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-Port-build-to-pytho=
+n3.patch
+> > new file mode 100644
+> > index 000000000..695dd97f6
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-extended/mozjs/mozjs/0001-Port-build-to-python3.p=
+atch
+> > @@ -0,0 +1,6888 @@
+> > +From 33a373ba41d978af60c2f0230bcba6ad27357ec8 Mon Sep 17 00:00:00 2001
+> > +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail=
+.com>
+> > +Date: Wed, 29 Jan 2020 16:25:11 +0100
+> > +Subject: [PATCH] Port build to python3
+> > +MIME-Version: 1.0
+> > +Content-Type: text/plain; charset=3DUTF-8
+> > +Content-Transfer-Encoding: 8bit
+> > +
+> > +* first tool of choice was 2to3
+> > +* some parts were taken from [1] but during work it was found that thi=
+s patch
+> > +  introduces interesting effects - see hash functions. Working more on=
+ this
+> > +  makes me guess that one has never worked...
+> > +* Few parts were taken from upstream mirror [2]. Since they use six fo=
+r porting
+> > +  to python3 it adds us a new dependency.
+> > +* To get a better overview what is going on or failing some additional=
+ messages
+> > +  were added. The most verbose one is left disabled - see
+> > +  python/mozbuild/mozbuild/configure/__init__.py / Line 310 onwards
+> > +* major changes upstream on build are not to expect so upgrading shoul=
+d cause
+> > +  little trouble and changes can be tracked by [3]
+> > +* some solutions are workarounds/hacks so this patch will not be accep=
+eted
+> > +  upstream. This should not be a probelme for us: once mozjs >=3D 68 w=
+ill arrive
+> > +  we have to go to rust/cargo based build anyway.
+> > +
+> > +[1] https://code.foxkit.us/adelie/packages/blob/f2b5773da19ab397fbe64f=
+d32dacc383cfe4cd77/user/mozjs/python3.patch
+> > +[2] https://github.com/mozilla/gecko-dev
+> > +[3] https://github.com/mozilla/gecko-dev/tree/esr60
+> > +
+> > +Upstream-Status: Inaproppriate [Some Hacks]
+> > +
+> > +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > +---
+> > + build/autoconf/config.status.m4               |   2 +-
+> > + build/moz.configure/android-ndk.configure     |   4 +-
+> > + build/moz.configure/checks.configure          |   4 +-
+> > + build/moz.configure/init.configure            |  31 +-
+> > + build/moz.configure/keyfiles.configure        |   4 +-
+> > + build/moz.configure/old.configure             |  32 +-
+> > + build/moz.configure/toolchain.configure       |  16 +-
+> > + build/moz.configure/util.configure            |   9 +-
+> > + build/moz.configure/windows.configure         |  10 +-
+> > + build/templates.mozbuild                      |   2 +-
+> > + config/MozZipFile.py                          |  12 +-
+> > + config/expandlibs.py                          |   6 +-
+> > + config/expandlibs_exec.py                     |  14 +-
+> > + config/expandlibs_gen.py                      |   4 +-
+> > + configure.py                                  |  42 +-
+> > + js/src/build/moz.build                        |   8 +-
+> > + js/src/builtin/embedjs.py                     |  10 +-
+> > + js/src/configure                              |   2 +-
+> > + js/src/frontend/GenerateReservedWords.py      |   6 +-
+> > + js/src/gc/GenerateStatsPhases.py              |   4 +-
+> > + js/src/old-configure.in                       |   2 +
+> > + memory/build/moz.build                        |   8 +-
+> > + mozglue/build/moz.build                       |  22 +-
+> > + .../mozbuild/mozbuild/action/check_binary.py  |   2 +
+> > + .../mozbuild/action/process_define_files.py   |   4 +-
+> > + python/mozbuild/mozbuild/backend/base.py      |   8 +-
+> > + python/mozbuild/mozbuild/backend/common.py    |   8 +-
+> > + .../mozbuild/backend/configenvironment.py     |  14 +-
+> > + .../mozbuild/mozbuild/backend/fastermake.py   |  10 +-
+> > + .../mozbuild/backend/recursivemake.py         | 181 +++----
+> > + python/mozbuild/mozbuild/config_status.py     |   7 +-
+> > + .../mozbuild/mozbuild/configure/__init__.py   |  83 +++-
+> > + .../mozbuild/configure/check_debug_ranges.py  |   6 +-
+> > + python/mozbuild/mozbuild/configure/options.py |  24 +-
+> > + python/mozbuild/mozbuild/configure/util.py    |  12 +-
+> > + .../mozbuild/mozbuild/controller/building.py  |  16 +-
+> > + python/mozbuild/mozbuild/frontend/context.py  |  89 ++--
+> > + python/mozbuild/mozbuild/frontend/data.py     |   8 +-
+> > + python/mozbuild/mozbuild/frontend/emitter.py  |  50 +-
+> > + python/mozbuild/mozbuild/frontend/reader.py   |  49 +-
+> > + python/mozbuild/mozbuild/frontend/sandbox.py  |   3 +-
+> > + python/mozbuild/mozbuild/jar.py               |  12 +-
+> > + python/mozbuild/mozbuild/makeutil.py          |  24 +-
+> > + python/mozbuild/mozbuild/mozinfo.py           |   8 +-
+> > + python/mozbuild/mozbuild/preprocessor.py      |  27 +-
+> > + python/mozbuild/mozbuild/shellutil.py         |   6 +-
+> > + .../test/backend/test_recursivemake.py        |  18 +-
+> > + .../mozbuild/test/configure/common.py         |   8 +-
+> > + .../mozbuild/mozbuild/test/configure/lint.py  |   8 +-
+> > + .../test/configure/test_checks_configure.py   |   8 +-
+> > + .../test/configure/test_compile_checks.py     |   4 +-
+> > + .../mozbuild/test/configure/test_configure.py | 244 +++++-----
+> > + .../mozbuild/test/configure/test_lint.py      |  24 +-
+> > + .../test/configure/test_moz_configure.py      |  32 +-
+> > + .../mozbuild/test/configure/test_options.py   | 450 +++++++++--------=
+-
+> > + .../configure/test_toolchain_configure.py     |  22 +-
+> > + .../test/configure/test_toolchain_helpers.py  |  62 +--
+> > + .../configure/test_toolkit_moz_configure.py   |   2 +-
+> > + .../mozbuild/test/configure/test_util.py      |   8 +-
+> > + python/mozbuild/mozbuild/testing.py           |  10 +-
+> > + python/mozbuild/mozbuild/util.py              |  79 ++-
+> > + python/mozbuild/mozbuild/virtualenv.py        |   6 +-
+> > + python/mozbuild/mozpack/chrome/manifest.py    |   6 +-
+> > + python/mozbuild/mozpack/copier.py             |  12 +-
+> > + python/mozbuild/mozpack/files.py              |  22 +-
+> > + python/mozbuild/mozpack/manifests.py          |  16 +-
+> > + python/mozbuild/mozpack/mozjar.py             |  37 +-
+> > + .../manifestparser/manifestparser/ini.py      |  13 +-
+> > + .../manifestparser/manifestparser.py          |  24 +-
+> > + testing/mozbase/mozinfo/mozinfo/mozinfo.py    |  26 +-
+> > + .../mozprocess/mozprocess/processhandler.py   |  10 +-
+> > + third_party/python/which/which.py             |  18 +-
+> > + 72 files changed, 1081 insertions(+), 993 deletions(-)
+> > +
+> > +diff --git a/build/autoconf/config.status.m4 b/build/autoconf/config.s=
+tatus.m4
+> > +index c75575386..543c2d682 100644
+> > +--- a/build/autoconf/config.status.m4
+> > ++++ b/build/autoconf/config.status.m4
+> > +@@ -122,7 +122,7 @@ trap 'rm -f $CONFIG_STATUS conftest*; exit 1' 1 2 =
+15
+> > +
+> > + dnl We're going to need [ ] for python syntax.
+> > + changequote(<<<, >>>)dnl
+> > +-echo creating $CONFIG_STATUS
+> > ++echo creating $CONFIG_STATUS in `pwd`
+> > +
+> > + cat > $CONFIG_STATUS <<EOF
+> > +
+> > +diff --git a/build/moz.configure/android-ndk.configure b/build/moz.con=
+figure/android-ndk.configure
+> > +index 1067b8619..3b592a237 100644
+> > +--- a/build/moz.configure/android-ndk.configure
+> > ++++ b/build/moz.configure/android-ndk.configure
+> > +@@ -30,7 +30,7 @@ js_option('--with-android-version',
+> > +
+> > +
+> > + @depends('--with-android-version', min_android_version, '--help')
+> > +-@imports(_from=3D'__builtin__', _import=3D'ValueError')
+> > ++@imports(_from=3D'builtins', _import=3D'ValueError')
+> > + def android_version(value, min_version, _):
+> > +     if not value:
+> > +         # Someone has passed --without-android-version.
+> > +@@ -68,7 +68,7 @@ add_old_configure_assignment('android_ndk', ndk)
+> > +
+> > + @depends(ndk)
+> > + @checking('for android ndk version')
+> > +-@imports(_from=3D'__builtin__', _import=3D'open')
+> > ++@imports(_from=3D'builtins', _import=3D'open')
+> > + def ndk_version(ndk):
+> > +     if not ndk:
+> > +         # Building 'js/src' for non-Android.
+> > +diff --git a/build/moz.configure/checks.configure b/build/moz.configur=
+e/checks.configure
+> > +index 516652da9..11e1091c6 100644
+> > +--- a/build/moz.configure/checks.configure
+> > ++++ b/build/moz.configure/checks.configure
+> > +@@ -14,7 +14,7 @@
+> > +
+> > +
+> > + @template
+> > +-@imports(_from=3D'__builtin__', _import=3D'Exception')
+> > ++@imports(_from=3D'builtins', _import=3D'Exception')
+> > + def _declare_exceptions():
+> > +     class FatalCheckError(Exception):
+> > +         '''An exception to throw from a function decorated with @chec=
+king.
+> > +@@ -57,7 +57,7 @@ def checking(what, callback=3DNone):
+> > +                 try:
+> > +                     ret =3D func(*args, **kwargs)
+> > +                 except FatalCheckError as e:
+> > +-                    error =3D e.message
+> > ++                    error =3D str(e)
+> > +                 display_ret =3D callback(ret) if callback else ret
+> > +                 if display_ret is True:
+> > +                     log.info('yes')
+> > +diff --git a/build/moz.configure/init.configure b/build/moz.configure/=
+init.configure
+> > +index 648ac2ded..4d74547d8 100644
+> > +--- a/build/moz.configure/init.configure
+> > ++++ b/build/moz.configure/init.configure
+> > +@@ -14,7 +14,7 @@ option(env=3D'DIST', nargs=3D1, help=3D'DIST directo=
+ry')
+> > +
+> > +
+> > + @depends('--help', 'DIST')
+> > +-@imports(_from=3D'__builtin__', _import=3D'open')
+> > ++@imports(_from=3D'builtins', _import=3D'open')
+> > + @imports(_from=3D'os.path', _import=3D'exists')
+> > + def check_build_environment(help, dist):
+> > +     topobjdir =3D os.path.realpath(os.path.abspath('.'))
+> > +@@ -65,7 +65,7 @@ def check_build_environment(help, dist):
+> > +     # Check for CRLF line endings.
+> > +     with open(os.path.join(topsrcdir, 'configure.py'), 'rb') as fh:
+> > +         data =3D fh.read()
+> > +-        if '\r' in data:
+> > ++        if b'\r' in data:
+> > +             die('\n ***\n'
+> > +                 ' * The source tree appears to have Windows-style lin=
+e endings.\n'
+> > +                 ' *\n'
+> > +@@ -269,7 +269,7 @@ def early_options():
+> > +     def early_options():
+> > +         return set(
+> > +             option.env
+> > +-            for option in __sandbox__._options.itervalues()
+> > ++            for option in __sandbox__._options.values()
+> > +             if option.env
+> > +         )
+> > +     return early_options
+> > +@@ -307,15 +307,15 @@ def mozconfig_options(mozconfig, automation, hel=
+p):
+> > +                 log.info('  %s' % arg)
+> > +                 helper.add(arg, origin=3D'mozconfig', args=3Dhelper._=
+args)
+> > +
+> > +-        for key, value in mozconfig['env']['added'].iteritems():
+> > ++        for key, value in mozconfig['env']['added'].items():
+> > +             add(key, value)
+> > +             os.environ[key] =3D value
+> > +-        for key, (_, value) in mozconfig['env']['modified'].iteritems=
+():
+> > ++        for key, (_, value) in mozconfig['env']['modified'].items():
+> > +             add(key, value)
+> > +             os.environ[key] =3D value
+> > +-        for key, value in mozconfig['vars']['added'].iteritems():
+> > ++        for key, value in mozconfig['vars']['added'].items():
+> > +             add(key, value)
+> > +-        for key, (_, value) in mozconfig['vars']['modified'].iteritem=
+s():
+> > ++        for key, (_, value) in mozconfig['vars']['modified'].items():
+> > +             add(key, value)
+> > +
+> > +
+> > +@@ -353,7 +353,7 @@ option(env=3D'PYTHON3', nargs=3D1, help=3D'Python =
+3 interpreter (3.5 or later)')
+> > + @depends('PYTHON3')
+> > + @checking('for Python 3',
+> > +           callback=3Dlambda x: '%s (%s)' % (x.path, x.str_version) if=
+ x else 'no')
+> > +-@imports(_from=3D'__builtin__', _import=3D'Exception')
+> > ++@imports(_from=3D'builtins', _import=3D'Exception')
+> > + @imports(_from=3D'mozbuild.pythonutil', _import=3D'find_python3_execu=
+table')
+> > + @imports(_from=3D'mozbuild.pythonutil', _import=3D'python_executable_=
+version')
+> > + def python3(env_python):
+> > +@@ -377,9 +377,6 @@ def python3(env_python):
+> > +         if not python:
+> > +             return None
+> > +
+> > +-        # The API returns a bytes whereas everything in configure is =
+unicode.
+> > +-        python =3D python.decode('utf-8')
+> > +-
+> > +     return namespace(
+> > +         path=3Dpython,
+> > +         version=3Dversion,
+> > +@@ -481,6 +478,8 @@ def hg_config(build_env, hg, version):
+> > + @imports('re')
+> > + def git_version(git):
+> > +     out =3D check_cmd_output(git, '--version').rstrip()
+> > ++    if isinstance(out, bytes):
+> > ++        out =3D out.decode('utf-8')
+> > +
+> > +     match =3D re.search('git version (.*)$', out)
+> > +
+> > +@@ -551,8 +550,8 @@ option('--target', nargs=3D1,
+> > + @imports(_from=3D'mozbuild.configure.constants', _import=3D'Endiannes=
+s')
+> > + @imports(_from=3D'mozbuild.configure.constants', _import=3D'Kernel')
+> > + @imports(_from=3D'mozbuild.configure.constants', _import=3D'OS')
+> > +-@imports(_from=3D'__builtin__', _import=3D'KeyError')
+> > +-@imports(_from=3D'__builtin__', _import=3D'ValueError')
+> > ++@imports(_from=3D'builtins', _import=3D'KeyError')
+> > ++@imports(_from=3D'builtins', _import=3D'ValueError')
+> > + def split_triplet(triplet, allow_unknown=3DFalse):
+> > +     # The standard triplet is defined as
+> > +     #   CPU_TYPE-MANUFACTURER-OPERATING_SYSTEM
+> > +@@ -562,6 +561,8 @@ def split_triplet(triplet, allow_unknown=3DFalse):
+> > +     # Additionally, some may omit "unknown" when the manufacturer
+> > +     # is not specified and emit
+> > +     #   CPU_TYPE-OPERATING_SYSTEM
+> > ++    if isinstance(triplet, bytes):
+> > ++        triplet =3D triplet.decode('utf-8')
+> > +     parts =3D triplet.split('-', 2)
+> > +     if len(parts) =3D=3D 3:
+> > +         cpu, _, os =3D parts
+> > +@@ -987,7 +988,7 @@ add_old_configure_assignment('MOZ_BUILD_APP', buil=
+d_project)
+> > + # - otherwise, if we have "a" in GRE_MILESTONE, we're building Nightl=
+y or Aurora
+> > + # - otherwise, we're building Release/Beta (define RELEASE_OR_BETA)
+> > + @depends(check_build_environment, '--help')
+> > +-@imports(_from=3D'__builtin__', _import=3D'open')
+> > ++@imports(_from=3D'builtins', _import=3D'open')
+> > + @imports('re')
+> > + def milestone(build_env, _):
+> > +     milestone_path =3D os.path.join(build_env.topsrcdir,
+> > +@@ -1105,7 +1106,7 @@ def enabled_in_nightly(milestone, _):
+> > + def all_configure_options():
+> > +     result =3D []
+> > +     previous =3D None
+> > +-    for option in __sandbox__._options.itervalues():
+> > ++    for option in __sandbox__._options.values():
+> > +         # __sandbox__._options contains items for both option.name an=
+d
+> > +         # option.env. But it's also an OrderedDict, meaning both are
+> > +         # consecutive.
+> > +diff --git a/build/moz.configure/keyfiles.configure b/build/moz.config=
+ure/keyfiles.configure
+> > +index 5d51cccea..14a35a3c6 100644
+> > +--- a/build/moz.configure/keyfiles.configure
+> > ++++ b/build/moz.configure/keyfiles.configure
+> > +@@ -16,8 +16,8 @@ def keyfile(desc, default=3DNone, help=3DNone, callb=
+ack=3Dlambda x: x):
+> > +
+> > +     @depends('--with-%s-keyfile' % name)
+> > +     @checking('for the %s key' % desc, lambda x: x and x is not no_ke=
+y)
+> > +-    @imports(_from=3D'__builtin__', _import=3D'open')
+> > +-    @imports(_from=3D'__builtin__', _import=3D'IOError')
+> > ++    @imports(_from=3D'builtins', _import=3D'open')
+> > ++    @imports(_from=3D'builtins', _import=3D'IOError')
+> > +     def keyfile(value):
+> > +         if value:
+> > +             try:
+> > +diff --git a/build/moz.configure/old.configure b/build/moz.configure/o=
+ld.configure
+> > +index 81c10b91f..29b496bae 100644
+> > +--- a/build/moz.configure/old.configure
+> > ++++ b/build/moz.configure/old.configure
+> > +@@ -64,9 +64,9 @@ set_config('AUTOCONF', autoconf)
+> > +
+> > + @depends('OLD_CONFIGURE', mozconfig, autoconf, check_build_environmen=
+t, shell,
+> > +          old_configure_assignments, build_project)
+> > +-@imports(_from=3D'__builtin__', _import=3D'open')
+> > +-@imports(_from=3D'__builtin__', _import=3D'print')
+> > +-@imports(_from=3D'__builtin__', _import=3D'sorted')
+> > ++@imports(_from=3D'builtins', _import=3D'open')
+> > ++@imports(_from=3D'builtins', _import=3D'print')
+> > ++@imports(_from=3D'builtins', _import=3D'sorted')
+> > + @imports('glob')
+> > + @imports('itertools')
+> > + @imports('subprocess')
+> > +@@ -113,7 +113,7 @@ def prepare_configure(old_configure, mozconfig, au=
+toconf, build_env, shell,
+> > +
+> > +         # Make old-configure append to config.log, where we put our o=
+wn log.
+> > +         # This could be done with a m4 macro, but it's way easier thi=
+s way
+> > +-        script =3D script.replace('>./config.log', '>>./config.log')
+> > ++        script =3D script.replace(b'>./config.log', b'>>./config.log'=
+)
+> > +
+> > +         with open(old_configure, 'wb') as fh:
+> > +             fh.write(script)
+> > +@@ -282,8 +282,8 @@ def old_configure_options(*options):
+> > +     '--x-includes',
+> > +     '--x-libraries',
+> > + )
+> > +-@imports(_from=3D'__builtin__', _import=3D'compile')
+> > +-@imports(_from=3D'__builtin__', _import=3D'open')
+> > ++@imports(_from=3D'builtins', _import=3D'compile')
+> > ++@imports(_from=3D'builtins', _import=3D'open')
+> > + @imports('logging')
+> > + @imports('os')
+> > + @imports('subprocess')
+> > +@@ -326,7 +326,7 @@ def old_configure(prepare_configure, extra_old_con=
+figure_args, all_options,
+> > +     log.debug('Running %s', quote(*cmd))
+> > +     if extra_env:
+> > +         log.debug('with extra environment: %s',
+> > +-                  ' '.join('%s=3D%s' % pair for pair in extra_env.ite=
+ritems()))
+> > ++                  ' '.join('%s=3D%s' % pair for pair in extra_env.ite=
+ms()))
+> > +
+> > +     # Our logging goes to config.log, the same file old.configure use=
+s.
+> > +     # We can't share the handle on the file, so close it. We assume n=
+othing
+> > +@@ -359,7 +359,7 @@ def old_configure(prepare_configure, extra_old_con=
+figure_args, all_options,
+> > +         # Every variation of the exec() function I tried led to:
+> > +         # SyntaxError: unqualified exec is not allowed in function 'm=
+ain' it
+> > +         # contains a nested function with free variables
+> > +-        exec code in raw_config # noqa
+> > ++        exec(code, raw_config) # noqa
+> > +
+> > +     # Ensure all the flags known to old-configure appear in the
+> > +     # @old_configure_options above.
+> > +@@ -393,16 +393,24 @@ def set_old_configure_define(name, value):
+> > + @depends(old_configure)
+> > + @imports('types')
+> > + def post_old_configure(raw_config):
+> > ++    log.info('post_old_configure started')
+> > ++
+> > +     for k, v in raw_config['substs']:
+> > +         set_old_configure_config(
+> > +-            k[1:-1], v[1:-1] if isinstance(v, types.StringTypes) else=
+ v)
+> > ++            k[1:-1], v[1:-1] if isinstance(v, str) else v)
+> > ++
+> > ++    log.info('post_old_configure 1 finished')
+> > +
+> > +-    for k, v in dict(raw_config['defines']).iteritems():
+> > ++    for k, v in dict(raw_config['defines']).items():
+> > +         set_old_configure_define(k[1:-1], v[1:-1])
+> > +
+> > ++    log.info('post_old_configure 2 finished')
+> > ++
+> > +     set_old_configure_config('non_global_defines',
+> > +                              raw_config['non_global_defines'])
+> > +
+> > ++    log.info('post_old_configure 3 finished')
+> > ++
+> > +
+> > + # Assuming no other option is declared after this function, handle th=
+e
+> > + # env options that were injected by mozconfig_options by creating dum=
+my
+> > +@@ -414,6 +422,7 @@ def post_old_configure(raw_config):
+> > + @imports('__sandbox__')
+> > + @imports(_from=3D'mozbuild.configure.options', _import=3D'Option')
+> > + def remaining_mozconfig_options(_):
+> > ++    log.info('remaining_mozconfig_options started')
+> > +     helper =3D __sandbox__._helper
+> > +     for arg in helper:
+> > +         if helper._origins[arg] !=3D 'mozconfig':
+> > +@@ -422,5 +431,6 @@ def remaining_mozconfig_options(_):
+> > +         if name.isupper() and name not in __sandbox__._options:
+> > +             option =3D Option(env=3Dname, nargs=3D'*', help=3Dname)
+> > +             helper.handle(option)
+> > ++    log.info('remaining_mozconfig_options finished')
+> > +
+> > + # Please do not add anything after remaining_mozconfig_options()
+> > +diff --git a/build/moz.configure/toolchain.configure b/build/moz.confi=
+gure/toolchain.configure
+> > +index fc640c75e..c5508dfb7 100755
+> > +--- a/build/moz.configure/toolchain.configure
+> > ++++ b/build/moz.configure/toolchain.configure
+> > +@@ -391,7 +391,7 @@ def get_compiler_info(compiler, language):
+> > +         ('CPU', CPU_preprocessor_checks),
+> > +         ('KERNEL', kernel_preprocessor_checks),
+> > +     ):
+> > +-        for n, (value, condition) in enumerate(preprocessor_checks.it=
+eritems()):
+> > ++        for n, (value, condition) in enumerate(preprocessor_checks.it=
+ems()):
+> > +             check +=3D dedent('''\
+> > +                 #%(if)s %(condition)s
+> > +                 %%%(name)s "%(value)s"
+> > +@@ -425,9 +425,9 @@ def get_compiler_info(compiler, language):
+> > +     data =3D {}
+> > +     for line in result.splitlines():
+> > +         if line.startswith(b'%'):
+> > +-            k, _, v =3D line.partition(' ')
+> > +-            k =3D k.lstrip('%')
+> > +-            data[k] =3D v.replace(' ', '').lstrip('"').rstrip('"')
+> > ++            k, _, v =3D line.partition(b' ')
+> > ++            k =3D k.lstrip(b'%').decode('utf-8')
+> > ++            data[k] =3D v.replace(b' ', b'').lstrip(b'"').rstrip(b'"'=
+).decode('utf-8')
+> > +             log.debug('%s =3D %s', k, data[k])
+> > +
+> > +     try:
+> > +@@ -551,7 +551,7 @@ def check_compiler(compiler, language, target):
+> > +     )
+> > +
+> > +
+> > +-@imports(_from=3D'__builtin__', _import=3D'open')
+> > ++@imports(_from=3D'builtins', _import=3D'open')
+> > + @imports('json')
+> > + @imports('subprocess')
+> > + @imports('sys')
+> > +@@ -606,7 +606,7 @@ def vs_major_version(value):
+> > +
+> > +
+> > + @depends(host, target, vs_major_version, check_build_environment, '--=
+with-visual-studio-version')
+> > +-@imports(_from=3D'__builtin__', _import=3D'sorted')
+> > ++@imports(_from=3D'builtins', _import=3D'sorted')
+> > + @imports(_from=3D'operator', _import=3D'itemgetter')
+> > + @imports('platform')
+> > + def vc_compiler_path(host, target, vs_major_version, env, vs_release_=
+name):
+> > +@@ -807,7 +807,7 @@ def compiler(language, host_or_target, c_compiler=
+=3DNone, other_compiler=3DNone,
+> > +                     target.os !=3D 'Android':
+> > +                 return namespace(**{
+> > +                     k: [] if k =3D=3D 'flags' else v
+> > +-                    for k, v in other_compiler.__dict__.iteritems()
+> > ++                    for k, v in other_compiler.__dict__.items()
+> > +                 })
+> > +
+> > +     # Normally, we'd use `var` instead of `_var`, but the interaction=
+ with
+> > +@@ -1238,7 +1238,7 @@ set_config('VISIBILITY_FLAGS', visibility_flags)
+> > +
+> > + @depends(c_compiler)
+> > + @imports('multiprocessing')
+> > +-@imports(_from=3D'__builtin__', _import=3D'min')
+> > ++@imports(_from=3D'builtins', _import=3D'min')
+> > + def pgo_flags(compiler):
+> > +     if compiler.type in ('gcc', 'clang'):
+> > +         return namespace(
+> > +diff --git a/build/moz.configure/util.configure b/build/moz.configure/=
+util.configure
+> > +index 3284fd8b5..218813e2d 100644
+> > +--- a/build/moz.configure/util.configure
+> > ++++ b/build/moz.configure/util.configure
+> > +@@ -25,7 +25,6 @@ def configure_error(message):
+> > + # does not.
+> > +
+> > +
+> > +-@imports(_from=3D'__builtin__', _import=3D'unicode')
+> > + @imports('subprocess')
+> > + @imports('sys')
+> > + @imports(_from=3D'mozbuild.configure.util', _import=3D'LineIO')
+> > +@@ -39,10 +38,10 @@ def check_cmd_output(*args, **kwargs):
+> > +     if 'env' in kwargs:
+> > +         normalized_env =3D {}
+> > +         for k, v in kwargs['env'].items():
+> > +-            if isinstance(k, unicode):
+> > ++            if isinstance(k, str):
+> > +                 k =3D k.encode('utf-8', 'strict')
+> > +
+> > +-            if isinstance(v, unicode):
+> > ++            if isinstance(v, str):
+> > +                 v =3D v.encode('utf-8', 'strict')
+> > +
+> > +             normalized_env[k] =3D v
+> > +@@ -285,7 +284,7 @@ def unique_list(l):
+> > + #     ('19.0', 'x64', r'C:\...\amd64\cl.exe')
+> > + #     ('19.0', 'x86', r'C:\...\amd64_x86\cl.exe')
+> > + @imports(_import=3D'_winreg', _as=3D'winreg')
+> > +-@imports(_from=3D'__builtin__', _import=3D'WindowsError')
+> > ++@imports(_from=3D'builtins', _import=3D'WindowsError')
+> > + @imports(_from=3D'fnmatch', _import=3D'fnmatch')
+> > + def get_registry_values(pattern, get_32_and_64_bit=3DFalse):
+> > +     def enum_helper(func, key):
+> > +@@ -360,6 +359,8 @@ def get_registry_values(pattern, get_32_and_64_bit=
+=3DFalse):
+> > + @imports(_from=3D'mozbuild.configure.util', _import=3D'Version', _as=
+=3D'_Version')
+> > + def Version(v):
+> > +     'A version number that can be compared usefully.'
+> > ++    if isinstance(v, bytes):
+> > ++        v =3D v.decode('utf-8')
+> > +     return _Version(v)
+> > +
+> > + # Denotes a deprecated option. Combines option() and @depends:
+> > +diff --git a/build/moz.configure/windows.configure b/build/moz.configu=
+re/windows.configure
+> > +index a5b790e3b..2b88fc447 100644
+> > +--- a/build/moz.configure/windows.configure
+> > ++++ b/build/moz.configure/windows.configure
+> > +@@ -10,7 +10,7 @@ option('--with-windows-version', nargs=3D1, default=
+=3D'603',
+> > +
+> > +
+> > + @depends('--with-windows-version')
+> > +-@imports(_from=3D'__builtin__', _import=3D'ValueError')
+> > ++@imports(_from=3D'builtins', _import=3D'ValueError')
+> > + def valid_windows_version(value):
+> > +     if not value:
+> > +         die('Cannot build with --without-windows-version')
+> > +@@ -50,8 +50,8 @@ def windows_sdk_dir(value, host):
+> > +
+> > + @imports('os')
+> > + @imports('re')
+> > +-@imports(_from=3D'__builtin__', _import=3D'sorted')
+> > +-@imports(_from=3D'__builtin__', _import=3D'WindowsError')
+> > ++@imports(_from=3D'builtins', _import=3D'sorted')
+> > ++@imports(_from=3D'builtins', _import=3D'WindowsError')
+> > + def get_sdk_dirs(sdk, subdir):
+> > +     def get_dirs_containing(sdk, stem, subdir):
+> > +         base =3D os.path.join(sdk, stem)
+> > +@@ -96,7 +96,7 @@ def valid_windows_sdk_dir_result(value):
+> > +
+> > + @depends(c_compiler, windows_sdk_dir, valid_windows_version, 'WINDOWS=
+SDKDIR')
+> > + @checking('for Windows SDK', valid_windows_sdk_dir_result)
+> > +-@imports(_from=3D'__builtin__', _import=3D'sorted')
+> > ++@imports(_from=3D'builtins', _import=3D'sorted')
+> > + @imports(_from=3D'textwrap', _import=3D'dedent')
+> > + def valid_windows_sdk_dir(compiler, windows_sdk_dir, target_version,
+> > +                           windows_sdk_dir_env):
+> > +@@ -174,7 +174,7 @@ def valid_ucrt_sdk_dir_result(value):
+> > + @depends(windows_sdk_dir, 'WINDOWSSDKDIR', c_compiler)
+> > + @checking('for Universal CRT SDK', valid_ucrt_sdk_dir_result)
+> > + @imports('os')
+> > +-@imports(_from=3D'__builtin__', _import=3D'sorted')
+> > ++@imports(_from=3D'builtins', _import=3D'sorted')
+> > + @imports(_import=3D'mozpack.path', _as=3D'mozpath')
+> > + def valid_ucrt_sdk_dir(windows_sdk_dir, windows_sdk_dir_env, c_compil=
+er):
+> > +     if windows_sdk_dir_env:
+> > +diff --git a/build/templates.mozbuild b/build/templates.mozbuild
+> > +index 3da850ce5..ae5e410fe 100644
+> > +--- a/build/templates.mozbuild
+> > ++++ b/build/templates.mozbuild
+> > +@@ -10,7 +10,7 @@ def Binary():
+> > +     templates.'''
+> > +
+> > +     # Add -llog by default, since we use it all over the place.
+> > +-    if CONFIG['OS_TARGET'] =3D=3D 'Android':
+> > ++    if str(CONFIG['OS_TARGET']) =3D=3D 'Android':
+> > +         OS_LIBS +=3D ['log']
+> > +
+> > +
+> > +diff --git a/config/MozZipFile.py b/config/MozZipFile.py
+> > +index 337fe0521..dc7add4c3 100644
+> > +--- a/config/MozZipFile.py
+> > ++++ b/config/MozZipFile.py
+> > +@@ -18,7 +18,7 @@ class ZipFile(zipfile.ZipFile):
+> > +   def __init__(self, file, mode=3D"r", compression=3Dzipfile.ZIP_STOR=
+ED,
+> > +                lock =3D False):
+> > +     if lock:
+> > +-      assert isinstance(file, basestring)
+> > ++      assert isinstance(file, str)
+> > +       self.lockfile =3D lock_file(file + '.lck')
+> > +     else:
+> > +       self.lockfile =3D None
+> > +@@ -46,7 +46,7 @@ class ZipFile(zipfile.ZipFile):
+> > +                               date_time=3Dtime.localtime(time.time())=
+)
+> > +       zinfo.compress_type =3D self.compression
+> > +       # Add some standard UNIX file access permissions (-rw-r--r--).
+> > +-      zinfo.external_attr =3D (0x81a4 & 0xFFFF) << 16L
+> > ++      zinfo.external_attr =3D (0x81a4 & 0xFFFF) << 16
+> > +     else:
+> > +       zinfo =3D zinfo_or_arcname
+> > +
+> > +@@ -58,7 +58,7 @@ class ZipFile(zipfile.ZipFile):
+> > +     # as the old, reuse the existing entry.
+> > +
+> > +     doSeek =3D False # store if we need to seek to the eof after over=
+writing
+> > +-    if self.NameToInfo.has_key(zinfo.filename):
+> > ++    if zinfo.filename in self.NameToInfo:
+> > +       # Find the last ZipInfo with our name.
+> > +       # Last, because that's catching multiple overwrites
+> > +       i =3D len(self.filelist)
+> > +@@ -109,14 +109,14 @@ class ZipFile(zipfile.ZipFile):
+> > +       # adjust file mode if we originally just wrote, now we rewrite
+> > +       self.fp.close()
+> > +       self.fp =3D open(self.filename, 'r+b')
+> > +-    all =3D map(lambda zi: (zi, True), self.filelist) + \
+> > +-        map(lambda zi: (zi, False), self._remove)
+> > ++    all =3D [(zi, True) for zi in self.filelist] + \
+> > ++        [(zi, False) for zi in self._remove]
+> > +     all.sort(lambda l, r: cmp(l[0].header_offset, r[0].header_offset)=
+)
+> > +     # empty _remove for multiple closes
+> > +     self._remove =3D []
+> > +
+> > +     lengths =3D [all[i+1][0].header_offset - all[i][0].header_offset
+> > +-               for i in xrange(len(all)-1)]
+> > ++               for i in range(len(all)-1)]
+> > +     lengths.append(self.end - all[-1][0].header_offset)
+> > +     to_pos =3D 0
+> > +     for (zi, keep), length in zip(all, lengths):
+> > +diff --git a/config/expandlibs.py b/config/expandlibs.py
+> > +index ac06c432f..df1fed15d 100644
+> > +--- a/config/expandlibs.py
+> > ++++ b/config/expandlibs.py
+> > +@@ -26,7 +26,7 @@ ${LIB_PREFIX}${ROOT}.${LIB_SUFFIX} following these r=
+ules:
+> > +   descriptor contains. And for each of these LIBS, also apply the sam=
+e
+> > +   rules.
+> > + '''
+> > +-from __future__ import with_statement
+> > ++
+> > + import sys, os, errno
+> > + import expandlibs_config as conf
+> > +
+> > +@@ -36,7 +36,7 @@ def ensureParentDir(file):
+> > +     if dir and not os.path.exists(dir):
+> > +         try:
+> > +             os.makedirs(dir)
+> > +-        except OSError, error:
+> > ++        except OSError as error:
+> > +             if error.errno !=3D errno.EEXIST:
+> > +                 raise
+> > +
+> > +@@ -140,4 +140,4 @@ class ExpandArgs(list):
+> > +         return [relativize(arg)]
+> > +
+> > + if __name__ =3D=3D '__main__':
+> > +-    print " ".join(ExpandArgs(sys.argv[1:]))
+> > ++    print(" ".join(ExpandArgs(sys.argv[1:])))
+> > +diff --git a/config/expandlibs_exec.py b/config/expandlibs_exec.py
+> > +index df656016c..fb786a6a8 100644
+> > +--- a/config/expandlibs_exec.py
+> > ++++ b/config/expandlibs_exec.py
+> > +@@ -20,7 +20,7 @@ With the --symbol-order argument, followed by a file=
+ name, it will add the
+> > + relevant linker options to change the order in which the linker puts =
+the
+> > + symbols appear in the resulting binary. Only works for ELF targets.
+> > + '''
+> > +-from __future__ import with_statement
+> > ++
+> > + import sys
+> > + import os
+> > + from expandlibs import (
+> > +@@ -304,11 +304,11 @@ class SectionFinder(object):
+> > +         return syms
+> > +
+> > + def print_command(out, args):
+> > +-    print >>out, "Executing: " + " ".join(args)
+> > ++    print("Executing: " + " ".join(args), file=3Dout)
+> > +     for tmp in [f for f in args.tmp if os.path.isfile(f)]:
+> > +-        print >>out, tmp + ":"
+> > ++        print(tmp + ":", file=3Dout)
+> > +         with open(tmp) as file:
+> > +-            print >>out, "".join(["    " + l for l in file.readlines(=
+)])
+> > ++            print("".join(["    " + l for l in file.readlines()]), fi=
+le=3Dout)
+> > +     out.flush()
+> > +
+> > + def main(args, proc_callback=3DNone):
+> > +@@ -338,13 +338,13 @@ def main(args, proc_callback=3DNone):
+> > +             proc =3D subprocess.Popen(args, stdout =3D subprocess.PIP=
+E, stderr =3D subprocess.STDOUT)
+> > +             if proc_callback:
+> > +                 proc_callback(proc)
+> > +-        except Exception, e:
+> > +-            print >>sys.stderr, 'error: Launching', args, ':', e
+> > ++        except Exception as e:
+> > ++            print('error: Launching', args, ':', e, file=3Dsys.stderr=
+)
+> > +             raise e
+> > +         (stdout, stderr) =3D proc.communicate()
+> > +         if proc.returncode and not options.verbose:
+> > +             print_command(sys.stderr, args)
+> > +-        sys.stderr.write(stdout)
+> > ++        sys.stderr.write(stdout.decode("utf-8"))
+> > +         sys.stderr.flush()
+> > +         if proc.returncode:
+> > +             return proc.returncode
+> > +diff --git a/config/expandlibs_gen.py b/config/expandlibs_gen.py
+> > +index b1de63cd0..dc62bd184 100644
+> > +--- a/config/expandlibs_gen.py
+> > ++++ b/config/expandlibs_gen.py
+> > +@@ -5,7 +5,7 @@
+> > + '''Given a list of object files and library names, prints a library
+> > + descriptor to standard output'''
+> > +
+> > +-from __future__ import with_statement
+> > ++
+> > + import sys
+> > + import os
+> > + import expandlibs_config as conf
+> > +@@ -38,4 +38,4 @@ if __name__ =3D=3D '__main__':
+> > +
+> > +     ensureParentDir(options.output)
+> > +     with open(options.output, 'w') as outfile:
+> > +-        print >>outfile, generate(args)
+> > ++        print(generate(args), file=3Doutfile)
+> > +diff --git a/configure.py b/configure.py
+> > +index 771e34e38..bee329d7c 100644
+> > +--- a/configure.py
+> > ++++ b/configure.py
+> > +@@ -2,10 +2,11 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import print_function, unicode_literals
+> > ++
+> > +
+> > + import codecs
+> > + import itertools
+> > ++import logging
+> > + import os
+> > + import sys
+> > + import textwrap
+> > +@@ -34,7 +35,9 @@ from mozbuild.util import (
+> > + def main(argv):
+> > +     config =3D {}
+> > +     sandbox =3D ConfigureSandbox(config, os.environ, argv)
+> > ++    print('sandbox.run started')
+> > +     sandbox.run(os.path.join(os.path.dirname(__file__), 'moz.configur=
+e'))
+> > ++    print('sandbox.run finished')
+> > +
+> > +     if sandbox._help:
+> > +         return 0
+> > +@@ -56,12 +59,21 @@ def config_status(config):
+> > +
+> > +     sanitized_config =3D {}
+> > +     sanitized_config['substs'] =3D {
+> > +-        k: sanitized_bools(v) for k, v in config.iteritems()
+> > ++        k: sanitized_bools(v) for k, v in config.items()
+> > +         if k not in ('DEFINES', 'non_global_defines', 'TOPSRCDIR', 'T=
+OPOBJDIR',
+> > +                      'ALL_CONFIGURE_PATHS')
+> > +     }
+> > ++
+> > ++    # Hack around OptionValue entries unknown during compile
+> > ++    for opt in ('BUILD_BACKENDS', 'MOZ_UI_LOCALE', 'RUSTFLAGS' ):
+> > ++        old =3D sanitized_config['substs'][opt]
+> > ++        new =3D []
+> > ++        for setting in old:
+> > ++            new.append(setting)
+> > ++        sanitized_config['substs'][opt] =3D new
+> > ++
+> > +     sanitized_config['defines'] =3D {
+> > +-        k: sanitized_bools(v) for k, v in config['DEFINES'].iteritems=
+()
+> > ++        k: sanitized_bools(v) for k, v in config['DEFINES'].items()
+> > +     }
+> > +     sanitized_config['non_global_defines'] =3D config['non_global_def=
+ines']
+> > +     sanitized_config['topsrcdir'] =3D config['TOPSRCDIR']
+> > +@@ -71,20 +83,17 @@ def config_status(config):
+> > +     # Create config.status. Eventually, we'll want to just do the wor=
+k it does
+> > +     # here, when we're able to skip configure tests/use cached result=
+s/not rely
+> > +     # on autoconf.
+> > +-    print("Creating config.status", file=3Dsys.stderr)
+> > +-    encoding =3D 'mbcs' if sys.platform =3D=3D 'win32' else 'utf-8'
+> > +-    with codecs.open('config.status', 'w', encoding) as fh:
+> > ++    logging.getLogger('moz.configure').info('Creating config.status')
+> > ++    with codecs.open('config.status', 'w', 'utf-8') as fh:
+> > +         fh.write(textwrap.dedent('''\
+> > +             #!%(python)s
+> > +-            # coding=3D%(encoding)s
+> > +-            from __future__ import unicode_literals
+> > +-            from mozbuild.util import encode
+> > +-            encoding =3D '%(encoding)s'
+> > +-        ''') % {'python': config['PYTHON'], 'encoding': encoding})
+> > ++            # coding=3Dutf-8
+> > ++            print("config.status started")
+> > ++        ''') % {'python': config['PYTHON']})
+> > +         # A lot of the build backend code is currently expecting byte
+> > +         # strings and breaks in subtle ways with unicode strings. (bu=
+g 1296508)
+> > +-        for k, v in sanitized_config.iteritems():
+> > +-            fh.write('%s =3D encode(%s, encoding)\n' % (k, indented_r=
+epr(v)))
+> > ++        for k, v in sanitized_config.items():
+> > ++            fh.write('%s =3D %s\n' % (k, indented_repr(v)))
+> > +         fh.write("__all__ =3D ['topobjdir', 'topsrcdir', 'defines', "
+> > +                  "'non_global_defines', 'substs', 'mozconfig']")
+> > +
+> > +@@ -97,6 +106,9 @@ def config_status(config):
+> > +                     args =3D dict([(name, globals()[name]) for name i=
+n __all__])
+> > +                     config_status(**args)
+> > +             '''))
+> > ++        fh.write(textwrap.dedent('''
+> > ++            print("config.status finished")
+> > ++        '''))
+> > +
+> > +     partial_config =3D PartialConfigEnvironment(config['TOPOBJDIR'])
+> > +     partial_config.write_vars(sanitized_config)
+> > +@@ -116,7 +128,7 @@ def config_status(config):
+> > +     # executable permissions.
+> > +     os.chmod('config.status', 0o755)
+> > +     if config.get('MOZ_BUILD_APP') !=3D 'js' or config.get('JS_STANDA=
+LONE'):
+> > +-        os.environ[b'WRITE_MOZINFO'] =3D b'1'
+> > ++        os.environ['WRITE_MOZINFO'] =3D '1'
+> > +         from mozbuild.config_status import config_status
+> > +
+> > +         # Some values in sanitized_config also have more complex type=
+s, such as
+> > +@@ -127,7 +139,7 @@ def config_status(config):
+> > +
+> > +         # A lot of the build backend code is currently expecting byte=
+ strings
+> > +         # and breaks in subtle ways with unicode strings.
+> > +-        return config_status(args=3D[], **encode(sanitized_config, en=
+coding))
+> > ++        return config_status(args=3D[], **sanitized_config)
+> > +     return 0
+> > +
+> > +
+> > +diff --git a/js/src/build/moz.build b/js/src/build/moz.build
+> > +index a7f5fa4ce..856cae32d 100644
+> > +--- a/js/src/build/moz.build
+> > ++++ b/js/src/build/moz.build
+> > +@@ -47,22 +47,22 @@ USE_LIBS +=3D [
+> > +     'zlib',
+> > + ]
+> > +
+> > +-if CONFIG['OS_ARCH'] not in ('WINNT', 'HP-UX'):
+> > ++if str(CONFIG['OS_ARCH']) not in ('WINNT', 'HP-UX'):
+> > +     OS_LIBS +=3D [
+> > +         'm',
+> > +     ]
+> > +
+> > +-if CONFIG['OS_ARCH'] =3D=3D 'FreeBSD':
+> > ++if str(CONFIG['OS_ARCH']) =3D=3D 'FreeBSD':
+> > +     OS_LIBS +=3D [
+> > +         '-pthread',
+> > +     ]
+> > +
+> > +-if CONFIG['OS_ARCH'] =3D=3D 'Linux':
+> > ++if str(CONFIG['OS_ARCH']) =3D=3D 'Linux':
+> > +     OS_LIBS +=3D [
+> > +         'dl',
+> > +     ]
+> > +
+> > +-if CONFIG['OS_ARCH'] =3D=3D 'SunOS':
+> > ++if str(CONFIG['OS_ARCH']) =3D=3D 'SunOS':
+> > +     OS_LIBS +=3D [
+> > +         'posix4',
+> > +         'dl',
+> > +diff --git a/js/src/builtin/embedjs.py b/js/src/builtin/embedjs.py
+> > +index ba25e71c1..d4f2de122 100644
+> > +--- a/js/src/builtin/embedjs.py
+> > ++++ b/js/src/builtin/embedjs.py
+> > +@@ -36,7 +36,7 @@
+> > + #
+> > + # It uses the C preprocessor to process its inputs.
+> > +
+> > +-from __future__ import with_statement
+> > ++
+> > + import re, sys, os, subprocess
+> > + import shlex
+> > + import which
+> > +@@ -52,8 +52,8 @@ def ToCAsciiArray(lines):
+> > +
+> > + def ToCArray(lines):
+> > +   result =3D []
+> > +-  for chr in lines:
+> > +-    result.append(str(ord(chr)))
+> > ++  for char in lines:
+> > ++    result.append("0x%0.2X" % char)
+> > +   return ", ".join(result)
+> > +
+> > + HEADER_TEMPLATE =3D """\
+> > +@@ -87,7 +87,7 @@ def embed(cxx, preprocessorOption, cppflags, msgs, s=
+ources, c_out, js_out, names
+> > +
+> > +   js_out.write(processed)
+> > +   import zlib
+> > +-  compressed =3D zlib.compress(processed)
+> > ++  compressed =3D zlib.compress(processed.encode('utf-8'))
+> > +   data =3D ToCArray(compressed)
+> > +   c_out.write(HEADER_TEMPLATE % {
+> > +     'sources_type': 'unsigned char',
+> > +@@ -107,7 +107,7 @@ def preprocess(cxx, preprocessorOption, source, ar=
+gs =3D []):
+> > +   tmpOut =3D 'self-hosting-preprocessed.pp';
+> > +   outputArg =3D shlex.split(preprocessorOption + tmpOut)
+> > +
+> > +-  with open(tmpIn, 'wb') as input:
+> > ++  with open(tmpIn, 'w') as input:
+> > +     input.write(source)
+> > +   print(' '.join(cxx + outputArg + args + [tmpIn]))
+> > +   result =3D subprocess.Popen(cxx + outputArg + args + [tmpIn]).wait(=
+)
+> > +diff --git a/js/src/configure b/js/src/configure
+> > +index 3b3a39af3..8f5ea41d0 100755
+> > +--- a/js/src/configure
+> > ++++ b/js/src/configure
+> > +@@ -24,4 +24,4 @@ export OLD_CONFIGURE=3D"$SRCDIR"/old-configure
+> > +
+> > + set -- "$@" --enable-project=3Djs
+> > +
+> > +-which python2.7 > /dev/null && exec python2.7 "$TOPSRCDIR/configure.p=
+y" "$@" || exec python "$TOPSRCDIR/configure.py" "$@"
+> > ++which python3 > /dev/null && exec python3 "$TOPSRCDIR/configure.py" "=
+$@" || exec python "$TOPSRCDIR/configure.py" "$@"
+> > +diff --git a/js/src/frontend/GenerateReservedWords.py b/js/src/fronten=
+d/GenerateReservedWords.py
+> > +index 3aa2307b9..381c8e2b4 100644
+> > +--- a/js/src/frontend/GenerateReservedWords.py
+> > ++++ b/js/src/frontend/GenerateReservedWords.py
+> > +@@ -80,14 +80,14 @@ def split_list_per_column(reserved_word_list, colu=
+mn):
+> > +         per_column =3D column_dict.setdefault(word[column], [])
+> > +         per_column.append(item)
+> > +
+> > +-    return sorted(column_dict.items(), key=3Dlambda (char, word): ord=
+(char))
+> > ++    return sorted(list(column_dict.items()), key=3Dlambda char_word: =
+ord(char_word[0]))
+> > +
+> > + def generate_letter_switch(opt, unprocessed_columns, reserved_word_li=
+st,
+> > +                            columns=3DNone):
+> > +     assert(len(reserved_word_list) !=3D 0);
+> > +
+> > +     if not columns:
+> > +-        columns =3D range(0, unprocessed_columns)
+> > ++        columns =3D list(range(0, unprocessed_columns))
+> > +
+> > +     if len(reserved_word_list) =3D=3D 1:
+> > +         index, word =3D reserved_word_list[0]
+> > +@@ -161,7 +161,7 @@ def split_list_per_length(reserved_word_list):
+> > +         per_length =3D length_dict.setdefault(len(word), [])
+> > +         per_length.append(item)
+> > +
+> > +-    return sorted(length_dict.items(), key=3Dlambda (length, word): l=
+ength)
+> > ++    return sorted(list(length_dict.items()), key=3Dlambda length_word=
+: length_word[0])
+> > +
+> > + def generate_switch(opt, reserved_word_list):
+> > +     assert(len(reserved_word_list) !=3D 0);
+> > +diff --git a/js/src/gc/GenerateStatsPhases.py b/js/src/gc/GenerateStat=
+sPhases.py
+> > +index 2daf83555..e39a26a4b 100644
+> > +--- a/js/src/gc/GenerateStatsPhases.py
+> > ++++ b/js/src/gc/GenerateStatsPhases.py
+> > +@@ -267,7 +267,7 @@ def generateHeader(out):
+> > +     #
+> > +     # Generate PhaseKind enum.
+> > +     #
+> > +-    phaseKindNames =3D map(lambda phaseKind: phaseKind.name, AllPhase=
+Kinds)
+> > ++    phaseKindNames =3D [phaseKind.name for phaseKind in AllPhaseKinds=
+]
+> > +     extraPhaseKinds =3D [
+> > +         "NONE =3D LIMIT",
+> > +         "EXPLICIT_SUSPENSION =3D LIMIT",
+> > +@@ -279,7 +279,7 @@ def generateHeader(out):
+> > +     #
+> > +     # Generate Phase enum.
+> > +     #
+> > +-    phaseNames =3D map(lambda phase: phase.name, AllPhases)
+> > ++    phaseNames =3D [phase.name for phase in AllPhases]
+> > +     extraPhases =3D [
+> > +         "NONE =3D LIMIT",
+> > +         "EXPLICIT_SUSPENSION =3D LIMIT",
+> > +diff --git a/js/src/old-configure.in b/js/src/old-configure.in
+> > +index 11c3d5a2e..389265404 100644
+> > +--- a/js/src/old-configure.in
+> > ++++ b/js/src/old-configure.in
+> > +@@ -1884,3 +1884,5 @@ if test "$JS_STANDALONE"; then
+> > + fi
+> > +
+> > + rm -fr confdefs* $ac_clean_files
+> > ++echo confdefs* $ac_clean_files removed
+> > ++echo "old-configure done"
+> > +diff --git a/memory/build/moz.build b/memory/build/moz.build
+> > +index e2c715271..f09ce7935 100644
+> > +--- a/memory/build/moz.build
+> > ++++ b/memory/build/moz.build
+> > +@@ -30,7 +30,7 @@ else:
+> > +         'fallback.cpp',
+> > +     ]
+> > +
+> > +-if CONFIG['OS_TARGET'] =3D=3D 'Darwin' and (CONFIG['MOZ_REPLACE_MALLO=
+C'] or
+> > ++if str(CONFIG['OS_TARGET']) =3D=3D 'Darwin' and (CONFIG['MOZ_REPLACE_=
+MALLOC'] or
+> > +         CONFIG['MOZ_MEMORY']):
+> > +     SOURCES +=3D [
+> > +         'zone.c',
+> > +@@ -38,15 +38,15 @@ if CONFIG['OS_TARGET'] =3D=3D 'Darwin' and (CONFIG=
+['MOZ_REPLACE_MALLOC'] or
+> > +
+> > + Library('memory')
+> > +
+> > +-if CONFIG['OS_TARGET'] =3D=3D 'Android' and CONFIG['CC_TYPE'] =3D=3D =
+'clang':
+> > ++if str(CONFIG['OS_TARGET']) =3D=3D 'Android' and str(CONFIG['CC_TYPE'=
+]) =3D=3D 'clang':
+> > +     CXXFLAGS +=3D [
+> > +         '-Wno-tautological-pointer-compare',
+> > +     ]
+> > +
+> > +-if CONFIG['MOZ_BUILD_APP'] !=3D 'memory':
+> > ++if str(CONFIG['MOZ_BUILD_APP']) !=3D 'memory':
+> > +     FINAL_LIBRARY =3D 'mozglue'
+> > +
+> > +-if CONFIG['CC_TYPE'] in ('msvc', 'clang-cl'):
+> > ++if str(CONFIG['CC_TYPE']) in ('msvc', 'clang-cl'):
+> > +     CXXFLAGS +=3D ['-wd4273'] # inconsistent dll linkage (bug 558163)
+> > +
+> > + if CONFIG['MOZ_REPLACE_MALLOC_STATIC']:
+> > +diff --git a/mozglue/build/moz.build b/mozglue/build/moz.build
+> > +index 53758485a..5e9308802 100644
+> > +--- a/mozglue/build/moz.build
+> > ++++ b/mozglue/build/moz.build
+> > +@@ -9,12 +9,12 @@
+> > + # If this is ever changed, update MOZ_SHARED_MOZGLUE in browser/insta=
+ller/Makefile.in
+> > + if CONFIG['JS_STANDALONE'] and not CONFIG['MOZ_MEMORY']:
+> > +     Library('mozglue')
+> > +-elif CONFIG['OS_TARGET'] in ('WINNT', 'Darwin', 'Android'):
+> > ++elif str(CONFIG['OS_TARGET']) in ('WINNT', 'Darwin', 'Android'):
+> > +     SharedLibrary('mozglue')
+> > + else:
+> > +     Library('mozglue')
+> > +
+> > +-if CONFIG['OS_TARGET'] =3D=3D 'Android':
+> > ++if str(CONFIG['OS_TARGET']) =3D=3D 'Android':
+> > +     SOURCES +=3D [
+> > +         'BionicGlue.cpp',
+> > +     ]
+> > +@@ -24,14 +24,14 @@ if CONFIG['MOZ_ASAN']:
+> > +         'AsanOptions.cpp',
+> > +     ]
+> > +
+> > +-if CONFIG['OS_TARGET'] =3D=3D 'WINNT':
+> > ++if str(CONFIG['OS_TARGET']) =3D=3D 'WINNT':
+> > +     DEFFILE =3D 'mozglue.def'
+> > +     # We'll break the DLL blocklist if we immediately load user32.dll
+> > +     DELAYLOAD_DLLS +=3D [
+> > +         'user32.dll',
+> > +     ]
+> > +
+> > +-    if CONFIG['CC_TYPE'] =3D=3D "msvc":
+> > ++    if str(CONFIG['CC_TYPE']) =3D=3D "msvc":
+> > +         CFLAGS +=3D ['-guard:cf']
+> > +         CXXFLAGS +=3D ['-guard:cf']
+> > +         LDFLAGS +=3D ['-guard:cf']
+> > +@@ -48,12 +48,12 @@ if CONFIG['MOZ_WIDGET_TOOLKIT']:
+> > +             'dummy.cpp',
+> > +         ]
+> > +
+> > +-    if CONFIG['OS_TARGET'] =3D=3D 'WINNT':
+> > ++    if str(CONFIG['OS_TARGET']) =3D=3D 'WINNT':
+> > +         LOCAL_INCLUDES +=3D [
+> > +             '/memory/build',
+> > +         ]
+> > +
+> > +-        if CONFIG['CC_TYPE'] =3D=3D "msvc":
+> > ++        if str(CONFIG['CC_TYPE']) =3D=3D "msvc":
+> > +             SOURCES +=3D ['WindowsCFGStatus.cpp']
+> > +         SOURCES +=3D [
+> > +             'Authenticode.cpp',
+> > +@@ -85,17 +85,17 @@ if CONFIG['MOZ_WIDGET_TOOLKIT']:
+> > +         'WindowsDllBlocklist.h',
+> > +     ]
+> > +
+> > +-    if CONFIG['CPU_ARCH'].startswith('x86'):
+> > ++    if str(CONFIG['CPU_ARCH']).startswith('x86'):
+> > +         SOURCES +=3D [
+> > +             'SSE.cpp',
+> > +         ]
+> > +
+> > +-    if CONFIG['CPU_ARCH'] =3D=3D 'arm':
+> > ++    if str(CONFIG['CPU_ARCH']) =3D=3D 'arm':
+> > +         SOURCES +=3D [
+> > +             'arm.cpp',
+> > +         ]
+> > +
+> > +-    if CONFIG['CPU_ARCH'].startswith('mips'):
+> > ++    if str(CONFIG['CPU_ARCH']).startswith('mips'):
+> > +         SOURCES +=3D [
+> > +             'mips.cpp',
+> > +         ]
+> > +@@ -114,7 +114,7 @@ LIBRARY_DEFINES['MOZ_HAS_MOZGLUE'] =3D True
+> > +
+> > + LDFLAGS +=3D CONFIG['MOZ_GLUE_WRAP_LDFLAGS']
+> > +
+> > +-if CONFIG['OS_TARGET'] =3D=3D 'Darwin':
+> > ++if str(CONFIG['OS_TARGET']) =3D=3D 'Darwin':
+> > +     # On OSX 10.10.3, a dead lock happens in some cases involving dyn=
+amic
+> > +     # symbol resolution for symbols that jemalloc itself uses. While =
+it
+> > +     # might be possible to find a way to avoid all such symbol resolu=
+tions,
+> > +@@ -124,7 +124,7 @@ if CONFIG['OS_TARGET'] =3D=3D 'Darwin':
+> > +     # for TLS.
+> > +     LDFLAGS +=3D ['-Wl,-bind_at_load']
+> > +
+> > +-if CONFIG['MOZ_LINKER'] and CONFIG['TARGET_CPU'] =3D=3D 'arm':
+> > ++if CONFIG['MOZ_LINKER'] and str(CONFIG['TARGET_CPU']) =3D=3D 'arm':
+> > +     LDFLAGS +=3D ['-Wl,-version-script,%s/arm-eabi-filter' % SRCDIR]
+> > +
+> > + DIST_INSTALL =3D True
+> > +diff --git a/python/mozbuild/mozbuild/action/check_binary.py b/python/=
+mozbuild/mozbuild/action/check_binary.py
+> > +index 5665ef053..b696f73d6 100644
+> > +--- a/python/mozbuild/mozbuild/action/check_binary.py
+> > ++++ b/python/mozbuild/mozbuild/action/check_binary.py
+> > +@@ -104,6 +104,8 @@ def iter_readelf_symbols(target, binary):
+> > +
+> > + def iter_readelf_dynamic(target, binary):
+> > +     for line in get_output(target['readelf'], '-d', binary):
+> > ++        if isinstance(line, bytes):
+> > ++            line=3Dline.decode('utf-8')
+> > +         data =3D line.split(None, 2)
+> > +         if data and len(data) =3D=3D 3 and data[0].startswith('0x'):
+> > +             yield data[1].rstrip(')').lstrip('('), data[2]
+> > +diff --git a/python/mozbuild/mozbuild/action/process_define_files.py b=
+/python/mozbuild/mozbuild/action/process_define_files.py
+> > +index 563fbb8fa..c3df2869b 100644
+> > +--- a/python/mozbuild/mozbuild/action/process_define_files.py
+> > ++++ b/python/mozbuild/mozbuild/action/process_define_files.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import argparse
+> > + import os
+> > +@@ -53,7 +53,7 @@ def process_define_file(output, input):
+> > +                                 'CONFIGURE_DEFINE_FILE')
+> > +                         defines =3D '\n'.join(sorted(
+> > +                             '#define %s %s' % (name, val)
+> > +-                            for name, val in config.defines['ALLDEFIN=
+ES'].iteritems()))
+> > ++                            for name, val in config.defines['ALLDEFIN=
+ES'].items()))
+> > +                         l =3D l[:m.start('cmd') - 1] \
+> > +                             + defines + l[m.end('name'):]
+> > +                     elif cmd =3D=3D 'define':
+> > +diff --git a/python/mozbuild/mozbuild/backend/base.py b/python/mozbuil=
+d/mozbuild/backend/base.py
+> > +index a8d5c94e0..7cda63475 100644
+> > +--- a/python/mozbuild/mozbuild/backend/base.py
+> > ++++ b/python/mozbuild/mozbuild/backend/base.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > ++
+> > +
+> > + from abc import (
+> > +     ABCMeta,
+> > +@@ -31,7 +31,7 @@ from .configenvironment import ConfigEnvironment
+> > + from mozbuild.base import ExecutionSummary
+> > +
+> > +
+> > +-class BuildBackend(LoggingMixin):
+> > ++class BuildBackend(LoggingMixin, metaclass=3DABCMeta):
+> > +     """Abstract base class for build backends.
+> > +
+> > +     A build backend is merely a consumer of the build configuration (=
+the output
+> > +@@ -39,8 +39,6 @@ class BuildBackend(LoggingMixin):
+> > +     is the discretion of the specific implementation.
+> > +     """
+> > +
+> > +-    __metaclass__ =3D ABCMeta
+> > +-
+> > +     def __init__(self, environment):
+> > +         assert isinstance(environment, (ConfigEnvironment, EmptyConfi=
+g))
+> > +         self.populate_logger()
+> > +@@ -311,7 +309,7 @@ class BuildBackend(LoggingMixin):
+> > +         srcdir =3D mozpath.dirname(obj.input_path)
+> > +         pp.context.update({
+> > +             k: ' '.join(v) if isinstance(v, list) else v
+> > +-            for k, v in obj.config.substs.iteritems()
+> > ++            for k, v in obj.config.substs.items()
+> > +         })
+> > +         pp.context.update(
+> > +             top_srcdir=3Dobj.topsrcdir,
+> > +diff --git a/python/mozbuild/mozbuild/backend/common.py b/python/mozbu=
+ild/mozbuild/backend/common.py
+> > +index d00cbbcaf..f747df446 100644
+> > +--- a/python/mozbuild/mozbuild/backend/common.py
+> > ++++ b/python/mozbuild/mozbuild/backend/common.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > ++
+> > +
+> > + import json
+> > + import os
+> > +@@ -174,7 +174,7 @@ class CommonBackend(BuildBackend):
+> > +         if len(self._idl_manager.idls):
+> > +             self._write_rust_xpidl_summary(self._idl_manager)
+> > +             self._handle_idl_manager(self._idl_manager)
+> > +-            self._handle_generated_sources(mozpath.join(self.environm=
+ent.topobjdir, 'dist/include/%s.h' % idl['root']) for idl in self._idl_mana=
+ger.idls.values())
+> > ++            self._handle_generated_sources(mozpath.join(self.environm=
+ent.topobjdir, 'dist/include/%s.h' % idl['root']) for idl in list(self._idl=
+_manager.idls.values()))
+> > +
+> > +
+> > +         for config in self._configs:
+> > +@@ -372,14 +372,14 @@ class CommonBackend(BuildBackend):
+> > +
+> > +         with self._write_file(mozpath.join(topobjdir, 'dist', 'xpcrs'=
+, 'rt', 'all.rs')) as fh:
+> > +             fh.write("// THIS FILE IS GENERATED - DO NOT EDIT\n\n")
+> > +-            for idl in manager.idls.values():
+> > ++            for idl in list(manager.idls.values()):
+> > +                 fh.write(include_tmpl % ("rt", idl['root']))
+> > +                 fh.write(";\n")
+> > +
+> > +         with self._write_file(mozpath.join(topobjdir, 'dist', 'xpcrs'=
+, 'bt', 'all.rs')) as fh:
+> > +             fh.write("// THIS FILE IS GENERATED - DO NOT EDIT\n\n")
+> > +             fh.write("&[\n")
+> > +-            for idl in manager.idls.values():
+> > ++            for idl in list(manager.idls.values()):
+> > +                 fh.write(include_tmpl % ("bt", idl['root']))
+> > +                 fh.write(",\n")
+> > +             fh.write("]\n")
+> > +diff --git a/python/mozbuild/mozbuild/backend/configenvironment.py b/p=
+ython/mozbuild/mozbuild/backend/configenvironment.py
+> > +index 3676a7d18..f0896cea4 100644
+> > +--- a/python/mozbuild/mozbuild/backend/configenvironment.py
+> > ++++ b/python/mozbuild/mozbuild/backend/configenvironment.py
+> > +@@ -2,14 +2,14 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + import os
+> > + import sys
+> > + import json
+> > +
+> > + from collections import Iterable, OrderedDict
+> > +-from types import StringTypes, ModuleType
+> > ++from types import ModuleType
+> > +
+> > + import mozpack.path as mozpath
+> > +
+> > +@@ -22,7 +22,7 @@ from mozbuild.shellutil import quote as shell_quote
+> > +
+> > +
+> > + if sys.version_info.major =3D=3D 2:
+> > +-    text_type =3D unicode
+> > ++    text_type =3D str
+> > + else:
+> > +     text_type =3D str
+> > +
+> > +@@ -151,7 +151,7 @@ class ConfigEnvironment(object):
+> > +             shell_quote(self.defines[name]).replace('$', '$$'))
+> > +             for name in sorted(global_defines)])
+> > +         def serialize(name, obj):
+> > +-            if isinstance(obj, StringTypes):
+> > ++            if isinstance(obj, str):
+> > +                 return obj
+> > +             if isinstance(obj, Iterable):
+> > +                 return ' '.join(obj)
+> > +@@ -185,8 +185,8 @@ class ConfigEnvironment(object):
+> > +                 except UnicodeDecodeError:
+> > +                     return v.decode('utf-8', 'replace')
+> > +
+> > +-        for k, v in self.substs.items():
+> > +-            if not isinstance(v, StringTypes):
+> > ++        for k, v in list(self.substs.items()):
+> > ++            if not isinstance(v, str):
+> > +                 if isinstance(v, Iterable):
+> > +                     type(v)(decode(i) for i in v)
+> > +             elif not isinstance(v, text_type):
+> > +@@ -255,7 +255,7 @@ class PartialConfigDict(object):
+> > +         existing_files =3D self._load_config_track()
+> > +
+> > +         new_files =3D set()
+> > +-        for k, v in values.iteritems():
+> > ++        for k, v in values.items():
+> > +             new_files.add(self._write_file(k, v))
+> > +
+> > +         for filename in existing_files - new_files:
+> > +diff --git a/python/mozbuild/mozbuild/backend/fastermake.py b/python/m=
+ozbuild/mozbuild/backend/fastermake.py
+> > +index b029aa10f..b66ade64f 100644
+> > +--- a/python/mozbuild/mozbuild/backend/fastermake.py
+> > ++++ b/python/mozbuild/mozbuild/backend/fastermake.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, unicode_literals, print_funct=
+ion
+> > ++
+> > +
+> > + from mozbuild.backend.base import PartialBackend
+> > + from mozbuild.backend.common import CommonBackend
+> > +@@ -140,7 +140,7 @@ class FasterMakeBackend(CommonBackend, PartialBack=
+end):
+> > +         # Add information for chrome manifest generation
+> > +         manifest_targets =3D []
+> > +
+> > +-        for target, entries in self._manifest_entries.iteritems():
+> > ++        for target, entries in self._manifest_entries.items():
+> > +             manifest_targets.append(target)
+> > +             install_target =3D mozpath.basedir(target, install_manife=
+sts_bases)
+> > +             self._install_manifests[install_target].add_content(
+> > +@@ -152,13 +152,13 @@ class FasterMakeBackend(CommonBackend, PartialBa=
+ckend):
+> > +                          % ' '.join(self._install_manifests.keys()))
+> > +
+> > +         # Add dependencies we infered:
+> > +-        for target, deps in self._dependencies.iteritems():
+> > ++        for target, deps in self._dependencies.items():
+> > +             mk.create_rule([target]).add_dependencies(
+> > +                 '$(TOPOBJDIR)/%s' % d for d in deps)
+> > +
+> > +         mk.add_statement('include $(TOPSRCDIR)/config/faster/rules.mk=
+')
+> > +
+> > +-        for base, install_manifest in self._install_manifests.iterite=
+ms():
+> > ++        for base, install_manifest in self._install_manifests.items()=
+:
+> > +             with self._write_file(
+> > +                     mozpath.join(self.environment.topobjdir, 'faster'=
+,
+> > +                                  'install_%s' % base.replace('/', '_'=
+))) as fh:
+> > +@@ -167,7 +167,7 @@ class FasterMakeBackend(CommonBackend, PartialBack=
+end):
+> > +         # For artifact builds only, write a single unified manifest f=
+or consumption by |mach watch|.
+> > +         if self.environment.is_artifact_build:
+> > +             unified_manifest =3D InstallManifest()
+> > +-            for base, install_manifest in self._install_manifests.ite=
+ritems():
+> > ++            for base, install_manifest in self._install_manifests.ite=
+ms():
+> > +                 # Expect 'dist/bin/**', which includes 'dist/bin' wit=
+h no trailing slash.
+> > +                 assert base.startswith('dist/bin')
+> > +                 base =3D base[len('dist/bin'):]
+> > +diff --git a/python/mozbuild/mozbuild/backend/recursivemake.py b/pytho=
+n/mozbuild/mozbuild/backend/recursivemake.py
+> > +index dd9020d62..aa89cc297 100644
+> > +--- a/python/mozbuild/mozbuild/backend/recursivemake.py
+> > ++++ b/python/mozbuild/mozbuild/backend/recursivemake.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > ++
+> > +
+> > + import logging
+> > + import os
+> > +@@ -12,7 +12,7 @@ from collections import (
+> > +     defaultdict,
+> > +     namedtuple,
+> > + )
+> > +-from StringIO import StringIO
+> > ++from io import StringIO
+> > + from itertools import chain
+> > +
+> > + from mozpack.manifests import (
+> > +@@ -80,75 +80,76 @@ from ..util import (
+> > + )
+> > + from ..makeutil import Makefile
+> > + from mozbuild.shellutil import quote as shell_quote
+> > ++from functools import reduce
+> > +
+> > + MOZBUILD_VARIABLES =3D [
+> > +-    b'ASFLAGS',
+> > +-    b'CMSRCS',
+> > +-    b'CMMSRCS',
+> > +-    b'CPP_UNIT_TESTS',
+> > +-    b'DIRS',
+> > +-    b'DIST_INSTALL',
+> > +-    b'EXTRA_DSO_LDOPTS',
+> > +-    b'EXTRA_JS_MODULES',
+> > +-    b'EXTRA_PP_COMPONENTS',
+> > +-    b'EXTRA_PP_JS_MODULES',
+> > +-    b'FORCE_SHARED_LIB',
+> > +-    b'FORCE_STATIC_LIB',
+> > +-    b'FINAL_LIBRARY',
+> > +-    b'HOST_CFLAGS',
+> > +-    b'HOST_CSRCS',
+> > +-    b'HOST_CMMSRCS',
+> > +-    b'HOST_CXXFLAGS',
+> > +-    b'HOST_EXTRA_LIBS',
+> > +-    b'HOST_LIBRARY_NAME',
+> > +-    b'HOST_PROGRAM',
+> > +-    b'HOST_SIMPLE_PROGRAMS',
+> > +-    b'JAR_MANIFEST',
+> > +-    b'JAVA_JAR_TARGETS',
+> > +-    b'LIBRARY_NAME',
+> > +-    b'LIBS',
+> > +-    b'MAKE_FRAMEWORK',
+> > +-    b'MODULE',
+> > +-    b'NO_DIST_INSTALL',
+> > +-    b'NO_EXPAND_LIBS',
+> > +-    b'NO_INTERFACES_MANIFEST',
+> > +-    b'NO_JS_MANIFEST',
+> > +-    b'OS_LIBS',
+> > +-    b'PARALLEL_DIRS',
+> > +-    b'PREF_JS_EXPORTS',
+> > +-    b'PROGRAM',
+> > +-    b'RESOURCE_FILES',
+> > +-    b'SHARED_LIBRARY_LIBS',
+> > +-    b'SHARED_LIBRARY_NAME',
+> > +-    b'SIMPLE_PROGRAMS',
+> > +-    b'SONAME',
+> > +-    b'STATIC_LIBRARY_NAME',
+> > +-    b'TEST_DIRS',
+> > +-    b'TOOL_DIRS',
+> > ++    'ASFLAGS',
+> > ++    'CMSRCS',
+> > ++    'CMMSRCS',
+> > ++    'CPP_UNIT_TESTS',
+> > ++    'DIRS',
+> > ++    'DIST_INSTALL',
+> > ++    'EXTRA_DSO_LDOPTS',
+> > ++    'EXTRA_JS_MODULES',
+> > ++    'EXTRA_PP_COMPONENTS',
+> > ++    'EXTRA_PP_JS_MODULES',
+> > ++    'FORCE_SHARED_LIB',
+> > ++    'FORCE_STATIC_LIB',
+> > ++    'FINAL_LIBRARY',
+> > ++    'HOST_CFLAGS',
+> > ++    'HOST_CSRCS',
+> > ++    'HOST_CMMSRCS',
+> > ++    'HOST_CXXFLAGS',
+> > ++    'HOST_EXTRA_LIBS',
+> > ++    'HOST_LIBRARY_NAME',
+> > ++    'HOST_PROGRAM',
+> > ++    'HOST_SIMPLE_PROGRAMS',
+> > ++    'JAR_MANIFEST',
+> > ++    'JAVA_JAR_TARGETS',
+> > ++    'LIBRARY_NAME',
+> > ++    'LIBS',
+> > ++    'MAKE_FRAMEWORK',
+> > ++    'MODULE',
+> > ++    'NO_DIST_INSTALL',
+> > ++    'NO_EXPAND_LIBS',
+> > ++    'NO_INTERFACES_MANIFEST',
+> > ++    'NO_JS_MANIFEST',
+> > ++    'OS_LIBS',
+> > ++    'PARALLEL_DIRS',
+> > ++    'PREF_JS_EXPORTS',
+> > ++    'PROGRAM',
+> > ++    'RESOURCE_FILES',
+> > ++    'SHARED_LIBRARY_LIBS',
+> > ++    'SHARED_LIBRARY_NAME',
+> > ++    'SIMPLE_PROGRAMS',
+> > ++    'SONAME',
+> > ++    'STATIC_LIBRARY_NAME',
+> > ++    'TEST_DIRS',
+> > ++    'TOOL_DIRS',
+> > +     # XXX config/Makefile.in specifies this in a make invocation
+> > +     #'USE_EXTENSION_MANIFEST',
+> > +-    b'XPCSHELL_TESTS',
+> > +-    b'XPIDL_MODULE',
+> > ++    'XPCSHELL_TESTS',
+> > ++    'XPIDL_MODULE',
+> > + ]
+> > +
+> > + DEPRECATED_VARIABLES =3D [
+> > +-    b'EXPORT_LIBRARY',
+> > +-    b'EXTRA_LIBS',
+> > +-    b'HOST_LIBS',
+> > +-    b'LIBXUL_LIBRARY',
+> > +-    b'MOCHITEST_A11Y_FILES',
+> > +-    b'MOCHITEST_BROWSER_FILES',
+> > +-    b'MOCHITEST_BROWSER_FILES_PARTS',
+> > +-    b'MOCHITEST_CHROME_FILES',
+> > +-    b'MOCHITEST_FILES',
+> > +-    b'MOCHITEST_FILES_PARTS',
+> > +-    b'MOCHITEST_METRO_FILES',
+> > +-    b'MOCHITEST_ROBOCOP_FILES',
+> > +-    b'MODULE_OPTIMIZE_FLAGS',
+> > +-    b'MOZ_CHROME_FILE_FORMAT',
+> > +-    b'SHORT_LIBNAME',
+> > +-    b'TESTING_JS_MODULES',
+> > +-    b'TESTING_JS_MODULE_DIR',
+> > ++    'EXPORT_LIBRARY',
+> > ++    'EXTRA_LIBS',
+> > ++    'HOST_LIBS',
+> > ++    'LIBXUL_LIBRARY',
+> > ++    'MOCHITEST_A11Y_FILES',
+> > ++    'MOCHITEST_BROWSER_FILES',
+> > ++    'MOCHITEST_BROWSER_FILES_PARTS',
+> > ++    'MOCHITEST_CHROME_FILES',
+> > ++    'MOCHITEST_FILES',
+> > ++    'MOCHITEST_FILES_PARTS',
+> > ++    'MOCHITEST_METRO_FILES',
+> > ++    'MOCHITEST_ROBOCOP_FILES',
+> > ++    'MODULE_OPTIMIZE_FLAGS',
+> > ++    'MOZ_CHROME_FILE_FORMAT',
+> > ++    'SHORT_LIBNAME',
+> > ++    'TESTING_JS_MODULES',
+> > ++    'TESTING_JS_MODULE_DIR',
+> > + ]
+> > +
+> > + MOZBUILD_VARIABLES_MESSAGE =3D 'It should only be defined in moz.buil=
+d files.'
+> > +@@ -207,7 +208,7 @@ class BackendMakeFile(object):
+> > +         self.fh.write(buf)
+> > +
+> > +     def write_once(self, buf):
+> > +-        if isinstance(buf, unicode):
+> > ++        if isinstance(buf, str):
+> > +             buf =3D buf.encode('utf-8')
+> > +         if b'\n' + buf not in self.fh.getvalue():
+> > +             self.write(buf)
+> > +@@ -280,7 +281,7 @@ class RecursiveMakeTraversal(object):
+> > +         Helper function to call a filter from compute_dependencies an=
+d
+> > +         traverse.
+> > +         """
+> > +-        return filter(current, self.get_subdirs(current))
+> > ++        return list(filter(current, self.get_subdirs(current)))
+> > +
+> > +     def compute_dependencies(self, filter=3DNone):
+> > +         """
+> > +@@ -710,7 +711,7 @@ class RecursiveMakeBackend(CommonBackend):
+> > +         convenience variables, and the other dependency definitions f=
+or a
+> > +         hopefully proper directory traversal.
+> > +         """
+> > +-        for tier, no_skip in self._no_skip.items():
+> > ++        for tier, no_skip in list(self._no_skip.items()):
+> > +             self.log(logging.DEBUG, 'fill_root_mk', {
+> > +                 'number': len(no_skip), 'tier': tier
+> > +                 }, 'Using {number} directories during {tier}')
+> > +@@ -757,7 +758,7 @@ class RecursiveMakeBackend(CommonBackend):
+> > +         for tier, filter in filters:
+> > +             main, all_deps =3D \
+> > +                 self._traversal.compute_dependencies(filter)
+> > +-            for dir, deps in all_deps.items():
+> > ++            for dir, deps in list(all_deps.items()):
+> > +                 if deps is not None or (dir in self._idl_dirs \
+> > +                                         and tier =3D=3D 'export'):
+> > +                     rule =3D root_deps_mk.create_rule(['%s/%s' % (dir=
+, tier)])
+> > +@@ -770,7 +771,7 @@ class RecursiveMakeBackend(CommonBackend):
+> > +                 rule.add_dependencies('%s/%s' % (d, tier) for d in ma=
+in)
+> > +
+> > +         all_compile_deps =3D reduce(lambda x,y: x|y,
+> > +-            self._compile_graph.values()) if self._compile_graph else=
+ set()
+> > ++            list(self._compile_graph.values())) if self._compile_grap=
+h else set()
+> > +         # Include the following as dependencies of the top recursion =
+target for
+> > +         # compilation:
+> > +         # - nodes that are not dependended upon by anything. Typicall=
+y, this
+> > +@@ -783,7 +784,7 @@ class RecursiveMakeBackend(CommonBackend):
+> > +         #   as direct dependencies of the top recursion target, to so=
+mehow
+> > +         #   prioritize them.
+> > +         #   1. See bug 1262241 comment 5.
+> > +-        compile_roots =3D [t for t, deps in self._compile_graph.iteri=
+tems()
+> > ++        compile_roots =3D [t for t, deps in list(self._compile_graph.=
+items())
+> > +                          if not deps or t not in all_compile_deps]
+> > +
+> > +         rule =3D root_deps_mk.create_rule(['recurse_compile'])
+> > +@@ -845,14 +846,14 @@ class RecursiveMakeBackend(CommonBackend):
+> > +             rule.add_dependencies(['$(CURDIR)/%: %'])
+> > +
+> > +     def _check_blacklisted_variables(self, makefile_in, makefile_cont=
+ent):
+> > +-        if b'EXTERNALLY_MANAGED_MAKE_FILE' in makefile_content:
+> > ++        if 'EXTERNALLY_MANAGED_MAKE_FILE' in makefile_content:
+> > +             # Bypass the variable restrictions for externally managed=
+ makefiles.
+> > +             return
+> > +
+> > +         for l in makefile_content.splitlines():
+> > +             l =3D l.strip()
+> > +             # Don't check comments
+> > +-            if l.startswith(b'#'):
+> > ++            if l.startswith('#'):
+> > +                 continue
+> > +             for x in chain(MOZBUILD_VARIABLES, DEPRECATED_VARIABLES):
+> > +                 if x not in l:
+> > +@@ -909,11 +910,11 @@ class RecursiveMakeBackend(CommonBackend):
+> > +                     # Directories with a Makefile containing a tools =
+target, or
+> > +                     # XPI_PKGNAME or INSTALL_EXTENSION_ID can't be sk=
+ipped and
+> > +                     # must run during the 'tools' tier.
+> > +-                    for t in (b'XPI_PKGNAME', b'INSTALL_EXTENSION_ID'=
+,
+> > +-                            b'tools'):
+> > ++                    for t in ('XPI_PKGNAME', 'INSTALL_EXTENSION_ID',
+> > ++                            'tools'):
+> > +                         if t not in content:
+> > +                             continue
+> > +-                        if t =3D=3D b'tools' and not re.search('(?:^|=
+\s)tools.*::', content, re.M):
+> > ++                        if t =3D=3D 'tools' and not re.search('(?:^|\=
+s)tools.*::', content, re.M):
+> > +                             continue
+> > +                         if objdir =3D=3D self.environment.topobjdir:
+> > +                             continue
+> > +@@ -933,7 +934,7 @@ class RecursiveMakeBackend(CommonBackend):
+> > +         self._fill_root_mk()
+> > +
+> > +         # Make the master test manifest files.
+> > +-        for flavor, t in self._test_manifests.items():
+> > ++        for flavor, t in list(self._test_manifests.items()):
+> > +             install_prefix, manifests =3D t
+> > +             manifest_stem =3D mozpath.join(install_prefix, '%s.ini' %=
+ flavor)
+> > +             self._write_master_test_manifest(mozpath.join(
+> > +@@ -1039,7 +1040,7 @@ class RecursiveMakeBackend(CommonBackend):
+> > +         for p in ('Makefile', 'backend.mk', '.deps/.mkdir.done'):
+> > +             build_files.add_optional_exists(p)
+> > +
+> > +-        for idl in manager.idls.values():
+> > ++        for idl in list(manager.idls.values()):
+> > +             self._install_manifests['dist_idl'].add_link(idl['source'=
+],
+> > +                 idl['basename'])
+> > +             self._install_manifests['dist_include'].add_optional_exis=
+ts('%s.h'
+> > +@@ -1086,7 +1087,7 @@ class RecursiveMakeBackend(CommonBackend):
+> > +
+> > +         interfaces_manifests =3D []
+> > +         dist_dir =3D mozpath.join(self.environment.topobjdir, 'dist')
+> > +-        for manifest, entries in manager.interface_manifests.items():
+> > ++        for manifest, entries in list(manager.interface_manifests.ite=
+ms()):
+> > +             interfaces_manifests.append(mozpath.join('$(DEPTH)', mani=
+fest))
+> > +             for xpt in sorted(entries):
+> > +                 registered_xpt_files.add(mozpath.join(
+> > +@@ -1194,7 +1195,7 @@ class RecursiveMakeBackend(CommonBackend):
+> > +         # Don't allow files to be defined multiple times unless it is=
+ allowed.
+> > +         # We currently allow duplicates for non-test files or test fi=
+les if
+> > +         # the manifest is listed as a duplicate.
+> > +-        for source, (dest, is_test) in obj.installs.items():
+> > ++        for source, (dest, is_test) in list(obj.installs.items()):
+> > +             try:
+> > +                 self._install_manifests['_test_files'].add_link(sourc=
+e, dest)
+> > +             except ValueError:
+> > +@@ -1558,7 +1559,7 @@ class RecursiveMakeBackend(CommonBackend):
+> > +         man_dir =3D mozpath.join(self.environment.topobjdir, '_build_=
+manifests',
+> > +             dest)
+> > +
+> > +-        for k, manifest in manifests.items():
+> > ++        for k, manifest in list(manifests.items()):
+> > +             with self._write_file(mozpath.join(man_dir, k)) as fh:
+> > +                 manifest.write(fileobj=3Dfh)
+> > +
+> > +@@ -1593,20 +1594,20 @@ class RecursiveMakeBackend(CommonBackend):
+> > +                 pp.context.update(extra)
+> > +             if not pp.context.get('autoconfmk', ''):
+> > +                 pp.context['autoconfmk'] =3D 'autoconf.mk'
+> > +-            pp.handleLine(b'# THIS FILE WAS AUTOMATICALLY GENERATED. =
+DO NOT MODIFY BY HAND.\n');
+> > +-            pp.handleLine(b'DEPTH :=3D @DEPTH@\n')
+> > +-            pp.handleLine(b'topobjdir :=3D @topobjdir@\n')
+> > +-            pp.handleLine(b'topsrcdir :=3D @top_srcdir@\n')
+> > +-            pp.handleLine(b'srcdir :=3D @srcdir@\n')
+> > +-            pp.handleLine(b'VPATH :=3D @srcdir@\n')
+> > +-            pp.handleLine(b'relativesrcdir :=3D @relativesrcdir@\n')
+> > +-            pp.handleLine(b'include $(DEPTH)/config/@autoconfmk@\n')
+> > ++            pp.handleLine('# THIS FILE WAS AUTOMATICALLY GENERATED. D=
+O NOT MODIFY BY HAND.\n');
+> > ++            pp.handleLine('DEPTH :=3D @DEPTH@\n')
+> > ++            pp.handleLine('topobjdir :=3D @topobjdir@\n')
+> > ++            pp.handleLine('topsrcdir :=3D @top_srcdir@\n')
+> > ++            pp.handleLine('srcdir :=3D @srcdir@\n')
+> > ++            pp.handleLine('VPATH :=3D @srcdir@\n')
+> > ++            pp.handleLine('relativesrcdir :=3D @relativesrcdir@\n')
+> > ++            pp.handleLine('include $(DEPTH)/config/@autoconfmk@\n')
+> > +             if not stub:
+> > +                 pp.do_include(obj.input_path)
+> > +             # Empty line to avoid failures when last line in Makefile=
+.in ends
+> > +             # with a backslash.
+> > +-            pp.handleLine(b'\n')
+> > +-            pp.handleLine(b'include $(topsrcdir)/config/recurse.mk\n'=
+)
+> > ++            pp.handleLine('\n')
+> > ++            pp.handleLine('include $(topsrcdir)/config/recurse.mk\n')
+> > +         if not stub:
+> > +             # Adding the Makefile.in here has the desired side-effect
+> > +             # that if the Makefile.in disappears, this will force
+> > +diff --git a/python/mozbuild/mozbuild/config_status.py b/python/mozbui=
+ld/mozbuild/config_status.py
+> > +index d46f1332d..a9a27a699 100644
+> > +--- a/python/mozbuild/mozbuild/config_status.py
+> > ++++ b/python/mozbuild/mozbuild/config_status.py
+> > +@@ -77,6 +77,7 @@ def config_status(topobjdir=3D'.', topsrcdir=3D'.', =
+defines=3DNone,
+> > +     See build/autoconf/config.status.m4.
+> > +     '''
+> > +
+> > ++    print("config_status started")
+> > +     if 'CONFIG_FILES' in os.environ:
+> > +         raise Exception('Using the CONFIG_FILES environment variable =
+is not '
+> > +             'supported.')
+> > +@@ -119,7 +120,7 @@ def config_status(topobjdir=3D'.', topsrcdir=3D'.'=
+, defines=3DNone,
+> > +     if 'WRITE_MOZINFO' in os.environ:
+> > +         write_mozinfo(os.path.join(topobjdir, 'mozinfo.json'), env, o=
+s.environ)
+> > +
+> > +-    cpu_start =3D time.clock()
+> > ++    cpu_start =3D time.perf_counter()
+> > +     time_start =3D time.time()
+> > +
+> > +     # Make appropriate backend instances, defaulting to RecursiveMake=
+Backend,
+> > +@@ -155,7 +156,7 @@ def config_status(topobjdir=3D'.', topsrcdir=3D'.'=
+, defines=3DNone,
+> > +             summary =3D obj.gyp_summary()
+> > +             print(summary, file=3Dsys.stderr)
+> > +
+> > +-    cpu_time =3D time.clock() - cpu_start
+> > ++    cpu_time =3D time.perf_counter() - cpu_start
+> > +     wall_time =3D time.time() - time_start
+> > +     efficiency =3D cpu_time / wall_time if wall_time else 100
+> > +     untracked =3D wall_time - execution_time
+> > +@@ -179,3 +180,5 @@ def config_status(topobjdir=3D'.', topsrcdir=3D'.'=
+, defines=3DNone,
+> > +     # Advertise Android Studio if it is appropriate.
+> > +     if MachCommandConditions.is_android(env):
+> > +         print(ANDROID_IDE_ADVERTISEMENT)
+> > ++
+> > ++    print("config_status finished")
+> > +diff --git a/python/mozbuild/mozbuild/configure/__init__.py b/python/m=
+ozbuild/mozbuild/configure/__init__.py
+> > +index d03615707..13d623d4f 100644
+> > +--- a/python/mozbuild/mozbuild/configure/__init__.py
+> > ++++ b/python/mozbuild/mozbuild/configure/__init__.py
+> > +@@ -2,9 +2,9 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > +
+> > +-import __builtin__
+> > ++
+> > ++import builtins
+> > + import inspect
+> > + import logging
+> > + import os
+> > +@@ -38,6 +38,8 @@ from mozbuild.util import (
+> > +
+> > + import mozpack.path as mozpath
+> > +
+> > ++import traceback
+> > ++
+> > +
+> > + class ConfigureError(Exception):
+> > +     pass
+> > +@@ -69,7 +71,7 @@ class SandboxDependsFunction(object):
+> > +     def __getattr__(self, key):
+> > +         return self._getattr(key).sandboxed
+> > +
+> > +-    def __nonzero__(self):
+> > ++    def __bool__(self):
+> > +         raise ConfigureError(
+> > +             'Cannot do boolean operations on @depends functions.')
+> > +
+> > +@@ -96,6 +98,7 @@ class DependsFunction(object):
+> > +             sandbox._value_for(self)
+> > +         elif not sandbox._help:
+> > +             sandbox._execution_queue.append((sandbox._value_for, (sel=
+f,)))
+> > ++            sandbox.tasks_debug_out("DependsFunction.__init %s" % fun=
+c.__name__)
+> > +
+> > +     @property
+> > +     def name(self):
+> > +@@ -206,6 +209,15 @@ class CombinedDependsFunction(DependsFunction):
+> > +     def __ne__(self, other):
+> > +         return not self =3D=3D other
+> > +
+> > ++    def __hash__(self):
+> > ++        # This was one was taken from [1] initially. Should not have =
+done that:
+> > ++        # it causes explosion of ConfigureSandbox._execution_queue wi=
+th 100%
+> > ++        # CPU load and eating all avaliable memory...
+> > ++        #
+> > ++        # [1] https://code.foxkit.us/adelie/packages/blob/f2b5773da19=
+ab397fbe64fd32dacc383cfe4cd77/user/mozjs/python3.patch#L8068
+> > ++        return hash((self._name, tuple(self.dependencies)))
+> > ++
+> > ++
+> > + class SandboxedGlobal(dict):
+> > +     '''Identifiable dict type for use as function global'''
+> > +
+> > +@@ -253,11 +265,12 @@ class ConfigureSandbox(dict):
+> > +     # The default set of builtins. We expose unicode as str to make s=
+andboxed
+> > +     # files more python3-ready.
+> > +     BUILTINS =3D ReadOnlyDict({
+> > +-        b: getattr(__builtin__, b)
+> > ++        b: getattr(builtins, b)
+> > +         for b in ('None', 'False', 'True', 'int', 'bool', 'any', 'all=
+', 'len',
+> > +                   'list', 'tuple', 'set', 'dict', 'isinstance', 'geta=
+ttr',
+> > +-                  'hasattr', 'enumerate', 'range', 'zip')
+> > +-    }, __import__=3Dforbidden_import, str=3Dunicode)
+> > ++                  'hasattr', 'enumerate', 'range', 'zip', '__build_cl=
+ass__',
+> > ++                  'bytes', 'exec')
+> > ++    }, __import__=3Dforbidden_import, str=3Dstr)
+> > +
+> > +     # Expose a limited set of functions from os.path
+> > +     OS =3D ReadOnlyNamespace(path=3DReadOnlyNamespace(**{
+> > +@@ -294,6 +307,11 @@ class ConfigureSandbox(dict):
+> > +         # Queue of functions to execute, with their arguments
+> > +         self._execution_queue =3D []
+> > +
+> > ++        # For debugging: Show number of tasks started in run() / adde=
+d elsewhere
+> > ++        # and some additional info
+> > ++        self.task_debug =3D False # set True to enable
+> > ++        self.tasks_started =3D 0
+> > ++
+> > +         # Store the `when`s associated to some options.
+> > +         self._conditions =3D {}
+> > +
+> > +@@ -331,7 +349,7 @@ class ConfigureSandbox(dict):
+> > +                 return method
+> > +             def wrapped(*args, **kwargs):
+> > +                 out_args =3D [
+> > +-                    arg.decode(encoding) if isinstance(arg, str) else=
+ arg
+> > ++                    arg.decode(encoding) if isinstance(arg, bytes) el=
+se arg
+> > +                     for arg in args
+> > +                 ]
+> > +                 return method(*out_args, **kwargs)
+> > +@@ -360,6 +378,14 @@ class ConfigureSandbox(dict):
+> > +             handler.setFormatter(formatter)
+> > +             logger.addHandler(handler)
+> > +
+> > ++    def tasks_debug_out(self, text):
+> > ++        if self.task_debug:
+> > ++            print("%s / queued %i / done %i" %(text, len(self._execut=
+ion_queue), self.tasks_started))
+> > ++            #if len(self._execution_queue) > 5000:
+> > ++            #    traceback.print_stack(file=3Dsys.stdout)
+> > ++            #if len(self._execution_queue) > 5010:
+> > ++            #    raise Exception("Too many tasks")
+> > ++
+> > +     def include_file(self, path):
+> > +         '''Include one file in the sandbox. Users of this class proba=
+bly want
+> > +         to use `run` instead.
+> > +@@ -380,6 +406,9 @@ class ConfigureSandbox(dict):
+> > +         if path in self._all_paths:
+> > +             raise ConfigureError(
+> > +                 'Cannot include `%s` because it was included already.=
+' % path)
+> > ++
+> > ++        if self.task_debug:
+> > ++            print("include_file", path)
+> > +         self._paths.append(path)
+> > +         self._all_paths.add(path)
+> > +
+> > +@@ -398,7 +427,7 @@ class ConfigureSandbox(dict):
+> > +         if path:
+> > +             self.include_file(path)
+> > +
+> > +-        for option in self._options.itervalues():
+> > ++        for option in self._options.values():
+> > +             # All options must be referenced by some @depends functio=
+n
+> > +             if option not in self._seen:
+> > +                 raise ConfigureError(
+> > +@@ -425,6 +454,8 @@ class ConfigureSandbox(dict):
+> > +
+> > +         # Run the execution queue
+> > +         for func, args in self._execution_queue:
+> > ++            self.tasks_started +=3D 1
+> > ++            self.tasks_debug_out("ConfigureSandbox.run(%s)" % func.__=
+name__)
+> > +             func(*args)
+> > +
+> > +         if self._help:
+> > +@@ -504,7 +535,7 @@ class ConfigureSandbox(dict):
+> > +                     value =3D PositiveOptionValue()
+> > +                 elif value is False or value =3D=3D ():
+> > +                     value =3D NegativeOptionValue()
+> > +-                elif isinstance(value, types.StringTypes):
+> > ++                elif isinstance(value, (str,)):
+> > +                     value =3D PositiveOptionValue((value,))
+> > +                 elif isinstance(value, tuple):
+> > +                     value =3D PositiveOptionValue(value)
+> > +@@ -544,7 +575,7 @@ class ConfigureSandbox(dict):
+> > +         return value
+> > +
+> > +     def _dependency(self, arg, callee_name, arg_name=3DNone):
+> > +-        if isinstance(arg, types.StringTypes):
+> > ++        if isinstance(arg, (str,)):
+> > +             prefix, name, values =3D Option.split_option(arg)
+> > +             if values !=3D ():
+> > +                 raise ConfigureError("Option must not contain an '=3D=
+'")
+> > +@@ -608,7 +639,7 @@ class ConfigureSandbox(dict):
+> > +         '''
+> > +         when =3D self._normalize_when(kwargs.get('when'), 'option')
+> > +         args =3D [self._resolve(arg) for arg in args]
+> > +-        kwargs =3D {k: self._resolve(v) for k, v in kwargs.iteritems(=
+)
+> > ++        kwargs =3D {k: self._resolve(v) for k, v in kwargs.items()
+> > +                                       if k !=3D 'when'}
+> > +         option =3D Option(*args, **kwargs)
+> > +         if when:
+> > +@@ -689,7 +720,7 @@ class ConfigureSandbox(dict):
+> > +         with self.only_when_impl(when):
+> > +             what =3D self._resolve(what)
+> > +             if what:
+> > +-                if not isinstance(what, types.StringTypes):
+> > ++                if not isinstance(what, (str,)):
+> > +                     raise TypeError("Unexpected type: '%s'" % type(wh=
+at).__name__)
+> > +                 self.include_file(what)
+> > +
+> > +@@ -707,7 +738,7 @@ class ConfigureSandbox(dict):
+> > +             (k[:-len('_impl')], getattr(self, k))
+> > +             for k in dir(self) if k.endswith('_impl') and k !=3D 'tem=
+plate_impl'
+> > +         )
+> > +-        glob.update((k, v) for k, v in self.iteritems() if k not in g=
+lob)
+> > ++        glob.update((k, v) for k, v in self.items() if k not in glob)
+> > +
+> > +         # Any function argument to the template must be prepared to b=
+e sandboxed.
+> > +         # If the template itself returns a function (in which case, i=
+t's very
+> > +@@ -731,7 +762,7 @@ class ConfigureSandbox(dict):
+> > +             def wrapper(*args, **kwargs):
+> > +                 args =3D [maybe_prepare_function(arg) for arg in args=
+]
+> > +                 kwargs =3D {k: maybe_prepare_function(v)
+> > +-                          for k, v in kwargs.iteritems()}
+> > ++                          for k, v in kwargs.items()}
+> > +                 ret =3D template(*args, **kwargs)
+> > +                 if isfunction(ret):
+> > +                     # We can't expect the sandboxed code to think abo=
+ut all the
+> > +@@ -766,7 +797,7 @@ class ConfigureSandbox(dict):
+> > +         for value, required in (
+> > +                 (_import, True), (_from, False), (_as, False)):
+> > +
+> > +-            if not isinstance(value, types.StringTypes) and (
+> > ++            if not isinstance(value, (str,)) and (
+> > +                     required or value is not None):
+> > +                 raise TypeError("Unexpected type: '%s'" % type(value)=
+.__name__)
+> > +             if value is not None and not self.RE_MODULE.match(value):
+> > +@@ -807,7 +838,7 @@ class ConfigureSandbox(dict):
+> > +         # Special case for the open() builtin, because otherwise, usi=
+ng it
+> > +         # fails with "IOError: file() constructor not accessible in
+> > +         # restricted mode"
+> > +-        if what =3D=3D '__builtin__.open':
+> > ++        if what =3D=3D 'builtins.open':
+> > +             return lambda *args, **kwargs: open(*args, **kwargs)
+> > +         # Until this proves to be a performance problem, just constru=
+ct an
+> > +         # import statement and execute it.
+> > +@@ -829,7 +860,7 @@ class ConfigureSandbox(dict):
+> > +         name =3D self._resolve(name, need_help_dependency=3DFalse)
+> > +         if name is None:
+> > +             return
+> > +-        if not isinstance(name, types.StringTypes):
+> > ++        if not isinstance(name, (str,)):
+> > +             raise TypeError("Unexpected type: '%s'" % type(name).__na=
+me__)
+> > +         if name in data:
+> > +             raise ConfigureError(
+> > +@@ -850,6 +881,7 @@ class ConfigureSandbox(dict):
+> > +
+> > +         self._execution_queue.append((
+> > +             self._resolve_and_set, (self._config, name, value, when))=
+)
+> > ++        self.tasks_debug_out("ConfigureSandbox.set_config_impl / %s(%=
+s" % (name, value))
+> > +
+> > +     def set_define_impl(self, name, value, when=3DNone):
+> > +         '''Implementation of set_define().
+> > +@@ -864,6 +896,7 @@ class ConfigureSandbox(dict):
+> > +         defines =3D self._config.setdefault('DEFINES', {})
+> > +         self._execution_queue.append((
+> > +             self._resolve_and_set, (defines, name, value, when)))
+> > ++        self.tasks_debug_out("ConfigureSandbox.set_define_impl / %s(%=
+s)" % (name, value))
+> > +
+> > +     def imply_option_impl(self, option, value, reason=3DNone, when=3D=
+None):
+> > +         '''Implementation of imply_option().
+> > +@@ -922,7 +955,7 @@ class ConfigureSandbox(dict):
+> > +                 if isinstance(possible_reasons[0], Option):
+> > +                     reason =3D possible_reasons[0]
+> > +         if not reason and (isinstance(value, (bool, tuple)) or
+> > +-                           isinstance(value, types.StringTypes)):
+> > ++                           isinstance(value, (str,))):
+> > +             # A reason can be provided automatically when imply_optio=
+n
+> > +             # is called with an immediate value.
+> > +             _, filename, line, _, _, _ =3D inspect.stack()[1]
+> > +@@ -955,10 +988,10 @@ class ConfigureSandbox(dict):
+> > +         if not inspect.isfunction(func):
+> > +             raise TypeError("Unexpected type: '%s'" % type(func).__na=
+me__)
+> > +         if func in self._prepared_functions:
+> > +-            return func, func.func_globals
+> > ++            return func, func.__globals__
+> > +
+> > +         glob =3D SandboxedGlobal(
+> > +-            (k, v) for k, v in func.func_globals.iteritems()
+> > ++            (k, v) for k, v in func.__globals__.items()
+> > +             if (inspect.isfunction(v) and v not in self._templates) o=
+r (
+> > +                 inspect.isclass(v) and issubclass(v, Exception))
+> > +         )
+> > +@@ -979,20 +1012,20 @@ class ConfigureSandbox(dict):
+> > +         # Note this is not entirely bullet proof (if the value is e.g=
+. a list,
+> > +         # the list contents could have changed), but covers the bases=
+.
+> > +         closure =3D None
+> > +-        if func.func_closure:
+> > ++        if func.__closure__:
+> > +             def makecell(content):
+> > +                 def f():
+> > +                     content
+> > +-                return f.func_closure[0]
+> > ++                return f.__closure__[0]
+> > +
+> > +             closure =3D tuple(makecell(cell.cell_contents)
+> > +-                            for cell in func.func_closure)
+> > ++                            for cell in func.__closure__)
+> > +
+> > +         new_func =3D self.wraps(func)(types.FunctionType(
+> > +-            func.func_code,
+> > ++            func.__code__,
+> > +             glob,
+> > +             func.__name__,
+> > +-            func.func_defaults,
+> > ++            func.__defaults__,
+> > +             closure
+> > +         ))
+> > +         @self.wraps(new_func)
+> > +diff --git a/python/mozbuild/mozbuild/configure/check_debug_ranges.py =
+b/python/mozbuild/mozbuild/configure/check_debug_ranges.py
+> > +index c0caa9cc5..a3e1f37e1 100644
+> > +--- a/python/mozbuild/mozbuild/configure/check_debug_ranges.py
+> > ++++ b/python/mozbuild/mozbuild/configure/check_debug_ranges.py
+> > +@@ -6,7 +6,7 @@
+> > + # to a given compilation unit. This is used as a helper to find a bug=
+ in some
+> > + # versions of GNU ld.
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + import subprocess
+> > + import sys
+> > +@@ -45,6 +45,8 @@ def get_range_length(range, debug_ranges):
+> > + def main(bin, compilation_unit):
+> > +     p =3D subprocess.Popen(['objdump', '-W', bin], stdout =3D subproc=
+ess.PIPE, stderr =3D subprocess.PIPE)
+> > +     (out, err) =3D p.communicate()
+> > ++    if isinstance(out, bytes):
+> > ++        out =3D out.decode('utf-8')
+> > +     sections =3D re.split('\n(Contents of the|The section) ', out)
+> > +     debug_info =3D [s for s in sections if s.startswith('.debug_info'=
+)]
+> > +     debug_ranges =3D [s for s in sections if s.startswith('.debug_ran=
+ges')]
+> > +@@ -59,4 +61,4 @@ def main(bin, compilation_unit):
+> > +
+> > +
+> > + if __name__ =3D=3D '__main__':
+> > +-    print(main(*sys.argv[1:]))
+> > ++    print((main(*sys.argv[1:])))
+> > +diff --git a/python/mozbuild/mozbuild/configure/options.py b/python/mo=
+zbuild/mozbuild/configure/options.py
+> > +index 53ae2ae6d..4d80cad86 100644
+> > +--- a/python/mozbuild/mozbuild/configure/options.py
+> > ++++ b/python/mozbuild/mozbuild/configure/options.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import os
+> > + import sys
+> > +@@ -12,7 +12,7 @@ from collections import OrderedDict
+> > +
+> > + def istupleofstrings(obj):
+> > +     return isinstance(obj, tuple) and len(obj) and all(
+> > +-        isinstance(o, types.StringTypes) for o in obj)
+> > ++        isinstance(o, (str,)) for o in obj)
+> > +
+> > +
+> > + class OptionValue(tuple):
+> > +@@ -88,7 +88,7 @@ class PositiveOptionValue(OptionValue):
+> > +     in the form of a tuple for when values are given to the option (i=
+n the form
+> > +     --option=3Dvalue[,value2...].
+> > +     '''
+> > +-    def __nonzero__(self):
+> > ++    def __bool__(self):
+> > +         return True
+> > +
+> > +
+> > +@@ -113,7 +113,7 @@ class ConflictingOptionError(InvalidOptionError):
+> > +         if format_data:
+> > +             message =3D message.format(**format_data)
+> > +         super(ConflictingOptionError, self).__init__(message)
+> > +-        for k, v in format_data.iteritems():
+> > ++        for k, v in format_data.items():
+> > +             setattr(self, k, v)
+> > +
+> > +
+> > +@@ -149,7 +149,7 @@ class Option(object):
+> > +                 'At least an option name or an environment variable n=
+ame must '
+> > +                 'be given')
+> > +         if name:
+> > +-            if not isinstance(name, types.StringTypes):
+> > ++            if not isinstance(name, (str,)):
+> > +                 raise InvalidOptionError('Option must be a string')
+> > +             if not name.startswith('--'):
+> > +                 raise InvalidOptionError('Option must start with `--`=
+')
+> > +@@ -158,7 +158,7 @@ class Option(object):
+> > +             if not name.islower():
+> > +                 raise InvalidOptionError('Option must be all lowercas=
+e')
+> > +         if env:
+> > +-            if not isinstance(env, types.StringTypes):
+> > ++            if not isinstance(env, (str,)):
+> > +                 raise InvalidOptionError(
+> > +                     'Environment variable name must be a string')
+> > +             if not env.isupper():
+> > +@@ -168,8 +168,8 @@ class Option(object):
+> > +                 isinstance(nargs, int) and nargs >=3D 0):
+> > +             raise InvalidOptionError(
+> > +                 "nargs must be a positive integer, '?', '*' or '+'")
+> > +-        if (not isinstance(default, types.StringTypes) and
+> > +-                not isinstance(default, (bool, types.NoneType)) and
+> > ++        if (not isinstance(default, (str,)) and
+> > ++                not isinstance(default, (bool, type(None))) and
+> > +                 not istupleofstrings(default)):
+> > +             raise InvalidOptionError(
+> > +                 'default must be a bool, a string or a tuple of strin=
+gs')
+> > +@@ -241,7 +241,7 @@ class Option(object):
+> > +                     ', '.join("'%s'" % c for c in choices))
+> > +         elif has_choices:
+> > +             maxargs =3D self.maxargs
+> > +-            if len(choices) < maxargs and maxargs !=3D sys.maxint:
+> > ++            if len(choices) < maxargs and maxargs !=3D sys.maxsize:
+> > +                 raise InvalidOptionError('Not enough `choices` for `n=
+args`')
+> > +         self.choices =3D choices
+> > +         self.help =3D help
+> > +@@ -255,7 +255,7 @@ class Option(object):
+> > +         where prefix is one of 'with', 'without', 'enable' or 'disabl=
+e'.
+> > +         The '=3Dvalues' part is optional. Values are separated with c=
+ommas.
+> > +         '''
+> > +-        if not isinstance(option, types.StringTypes):
+> > ++        if not isinstance(option, (str,)):
+> > +             raise InvalidOptionError('Option must be a string')
+> > +
+> > +         elements =3D option.split('=3D', 1)
+> > +@@ -308,7 +308,7 @@ class Option(object):
+> > +     def maxargs(self):
+> > +         if isinstance(self.nargs, int):
+> > +             return self.nargs
+> > +-        return 1 if self.nargs =3D=3D '?' else sys.maxint
+> > ++        return 1 if self.nargs =3D=3D '?' else sys.maxsize
+> > +
+> > +     def _validate_nargs(self, num):
+> > +         minargs, maxargs =3D self.minargs, self.maxargs
+> > +@@ -499,5 +499,5 @@ class CommandLineHelper(object):
+> > +
+> > +     def __iter__(self):
+> > +         for d in (self._args, self._extra_args):
+> > +-            for arg, pos in d.itervalues():
+> > ++            for arg, pos in d.values():
+> > +                 yield arg
+> > +diff --git a/python/mozbuild/mozbuild/configure/util.py b/python/mozbu=
+ild/mozbuild/configure/util.py
+> > +index 9d8b2eb0e..a12986e48 100644
+> > +--- a/python/mozbuild/mozbuild/configure/util.py
+> > ++++ b/python/mozbuild/mozbuild/configure/util.py
+> > +@@ -77,15 +77,7 @@ class ConfigureOutputHandler(logging.Handler):
+> > +         # Python has this feature where it sets the encoding of pipes=
+ to
+> > +         # ascii, which blatantly fails when trying to print out non-a=
+scii.
+> > +         def fix_encoding(fh):
+> > +-            try:
+> > +-                isatty =3D fh.isatty()
+> > +-            except AttributeError:
+> > +-                isatty =3D True
+> > +-
+> > +-            if not isatty:
+> > +-                encoding =3D getpreferredencoding()
+> > +-                if encoding:
+> > +-                    return codecs.getwriter(encoding)(fh)
+> > ++            # no magic on oe / python3
+> > +             return fh
+> > +
+> > +         self._stdout =3D fix_encoding(stdout)
+> > +@@ -200,7 +192,7 @@ class LineIO(object):
+> > +         self._errors =3D errors
+> > +
+> > +     def write(self, buf):
+> > +-        if self._encoding and isinstance(buf, str):
+> > ++        if self._encoding and isinstance(buf, bytes):
+> > +             buf =3D buf.decode(self._encoding, self._errors)
+> > +         lines =3D buf.splitlines()
+> > +         if not lines:
+> > +diff --git a/python/mozbuild/mozbuild/controller/building.py b/python/=
+mozbuild/mozbuild/controller/building.py
+> > +index d5af532f7..e9810fe58 100644
+> > +--- a/python/mozbuild/mozbuild/controller/building.py
+> > ++++ b/python/mozbuild/mozbuild/controller/building.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > ++
+> > +
+> > + import errno
+> > + import getpass
+> > +@@ -146,7 +146,7 @@ class TierStatus(object):
+> > +         """
+> > +         o =3D []
+> > +
+> > +-        for tier, state in self.tiers.items():
+> > ++        for tier, state in list(self.tiers.items()):
+> > +             t_entry =3D dict(
+> > +                 name=3Dtier,
+> > +                 start=3Dstate['begin_time'],
+> > +@@ -574,7 +574,7 @@ class BuildProgressFooter(Footer):
+> > +
+> > +     def __init__(self, terminal, monitor):
+> > +         Footer.__init__(self, terminal)
+> > +-        self.tiers =3D monitor.tiers.tier_status.viewitems()
+> > ++        self.tiers =3D monitor.tiers.tier_status.items()
+> > +
+> > +     def draw(self):
+> > +         """Draws this footer in the terminal."""
+> > +@@ -911,8 +911,8 @@ class CCacheStats(object):
+> > +
+> > +         return '\n'.join(lines)
+> > +
+> > +-    def __nonzero__(self):
+> > +-        relative_values =3D [v for k, v in self._values.items()
+> > ++    def __bool__(self):
+> > ++        relative_values =3D [v for k, v in list(self._values.items())
+> > +                            if k not in self.ABSOLUTE_KEYS]
+> > +         return (all(v >=3D 0 for v in relative_values) and
+> > +                 any(v > 0 for v in relative_values))
+> > +@@ -1156,7 +1156,7 @@ class BuildDriver(MozbuildObject):
+> > +
+> > +         high_finder, finder_percent =3D monitor.have_high_finder_usag=
+e()
+> > +         if high_finder:
+> > +-            print(FINDER_SLOW_MESSAGE % finder_percent)
+> > ++            print((FINDER_SLOW_MESSAGE % finder_percent))
+> > +
+> > +         ccache_end =3D monitor.ccache_stats()
+> > +
+> > +@@ -1276,8 +1276,8 @@ class BuildDriver(MozbuildObject):
+> > +         """Install test files."""
+> > +
+> > +         if self.is_clobber_needed():
+> > +-            print(INSTALL_TESTS_CLOBBER.format(
+> > +-                  clobber_file=3Dos.path.join(self.topobjdir, 'CLOBBE=
+R')))
+> > ++            print((INSTALL_TESTS_CLOBBER.format(
+> > ++                  clobber_file=3Dos.path.join(self.topobjdir, 'CLOBBE=
+R'))))
+> > +             sys.exit(1)
+> > +
+> > +         if not test_objs:
+> > +diff --git a/python/mozbuild/mozbuild/frontend/context.py b/python/moz=
+build/mozbuild/frontend/context.py
+> > +index fbdbefc1d..1aef6a65a 100644
+> > +--- a/python/mozbuild/mozbuild/frontend/context.py
+> > ++++ b/python/mozbuild/mozbuild/frontend/context.py
+> > +@@ -14,7 +14,7 @@ If you are looking for the absolute authority on wha=
+t moz.build files can
+> > + contain, you've come to the right place.
+> > + """
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > ++
+> > +
+> > + import os
+> > +
+> > +@@ -237,15 +237,15 @@ class Context(KeyedDefaultDict):
+> > +         This function is transactional: if setitem fails for one of t=
+he values,
+> > +         the context is not updated at all."""
+> > +         if isinstance(iterable, dict):
+> > +-            iterable =3D iterable.items()
+> > ++            iterable =3D list(iterable.items())
+> > +
+> > +         update =3D {}
+> > +-        for key, value in itertools.chain(iterable, kwargs.items()):
+> > ++        for key, value in itertools.chain(iterable, list(kwargs.items=
+())):
+> > +             stored_type =3D self._validate(key, value)
+> > +             # Don't create an instance of stored_type if coercion is =
+needed,
+> > +             # until all values are validated.
+> > +             update[key] =3D (value, stored_type)
+> > +-        for key, (value, stored_type) in update.items():
+> > ++        for key, (value, stored_type) in list(update.items()):
+> > +             if not isinstance(value, stored_type):
+> > +                 update[key] =3D stored_type(value)
+> > +             else:
+> > +@@ -311,7 +311,7 @@ class BaseCompileFlags(ContextDerivedValue, dict):
+> > +         # a template were set and which were provided as defaults.
+> > +         template_name =3D getattr(context, 'template', None)
+> > +         if template_name in (None, 'Gyp'):
+> > +-            dict.__init__(self, ((k, v if v is None else TypedList(un=
+icode)(v))
+> > ++            dict.__init__(self, ((k, v if v is None else TypedList(st=
+r)(v))
+> > +                                  for k, v, _ in self.flag_variables))
+> > +         else:
+> > +             dict.__init__(self)
+> > +@@ -520,13 +520,13 @@ class CompileFlags(BaseCompileFlags):
+> > +         if key in self and self[key] is None:
+> > +             raise ValueError('`%s` may not be set in COMPILE_FLAGS fr=
+om moz.build, this '
+> > +                              'value is resolved from the emitter.' % =
+key)
+> > +-        if not (isinstance(value, list) and all(isinstance(v, basestr=
+ing) for v in value)):
+> > ++        if not (isinstance(value, list) and all(isinstance(v, str) fo=
+r v in value)):
+> > +             raise ValueError('A list of strings must be provided as a=
+ value for a '
+> > +                              'compile flags category.')
+> > +         dict.__setitem__(self, key, value)
+> > +
+> > +
+> > +-class FinalTargetValue(ContextDerivedValue, unicode):
+> > ++class FinalTargetValue(ContextDerivedValue, str):
+> > +     def __new__(cls, context, value=3D""):
+> > +         if not value:
+> > +             value =3D 'dist/'
+> > +@@ -536,7 +536,7 @@ class FinalTargetValue(ContextDerivedValue, unicod=
+e):
+> > +                 value +=3D 'bin'
+> > +             if context['DIST_SUBDIR']:
+> > +                 value +=3D '/' + context['DIST_SUBDIR']
+> > +-        return unicode.__new__(cls, value)
+> > ++        return str.__new__(cls, value)
+> > +
+> > +
+> > + def Enum(*values):
+> > +@@ -584,7 +584,7 @@ class PathMeta(type):
+> > +                 cls =3D SourcePath
+> > +         return super(PathMeta, cls).__call__(context, value)
+> > +
+> > +-class Path(ContextDerivedValue, unicode):
+> > ++class Path(ContextDerivedValue, str, metaclass=3DPathMeta):
+> > +     """Stores and resolves a source path relative to a given context
+> > +
+> > +     This class is used as a backing type for some of the sandbox vari=
+ables.
+> > +@@ -595,7 +595,6 @@ class Path(ContextDerivedValue, unicode):
+> > +       - '!objdir/relative/paths'
+> > +       - '%/filesystem/absolute/paths'
+> > +     """
+> > +-    __metaclass__ =3D PathMeta
+> > +
+> > +     def __new__(cls, context, value=3DNone):
+> > +         return super(Path, cls).__new__(cls, value)
+> > +@@ -612,10 +611,14 @@ class Path(ContextDerivedValue, unicode):
+> > +         """
+> > +         return Path(self.context, mozpath.join(self, *p))
+> > +
+> > ++    @staticmethod
+> > ++    def cmp(a, b):
+> > ++        return (a > b) - (a < b)
+> > ++
+> > +     def __cmp__(self, other):
+> > +         if isinstance(other, Path) and self.srcdir !=3D other.srcdir:
+> > +-            return cmp(self.full_path, other.full_path)
+> > +-        return cmp(unicode(self), other)
+> > ++            return self.cmp(self.full_path, other.full_path)
+> > ++        return self.cmp(str(self), other)
+> > +
+> > +     # __cmp__ is not enough because unicode has __eq__, __ne__, etc. =
+defined
+> > +     # and __cmp__ is only used for those when they don't exist.
+> > +@@ -773,7 +776,7 @@ def ContextDerivedTypedRecord(*fields):
+> > +         __slots__ =3D tuple([name for name, _ in fields])
+> > +
+> > +         def __init__(self, context):
+> > +-            for fname, ftype in self._fields.items():
+> > ++            for fname, ftype in list(self._fields.items()):
+> > +                 if issubclass(ftype, ContextDerivedValue):
+> > +                     setattr(self, fname, self._fields[fname](context)=
+)
+> > +                 else:
+> > +@@ -909,8 +912,8 @@ def TypedListWithAction(typ, action):
+> > +     return _TypedListWithAction
+> > +
+> > + WebPlatformTestManifest =3D TypedNamedTuple("WebPlatformTestManifest"=
+,
+> > +-                                          [("manifest_path", unicode)=
+,
+> > +-                                           ("test_root", unicode)])
+> > ++                                          [("manifest_path", str),
+> > ++                                           ("test_root", str)])
+> > + ManifestparserManifestList =3D OrderedPathListWithAction(read_manifes=
+tparser_manifest)
+> > + ReftestManifestList =3D OrderedPathListWithAction(read_reftest_manife=
+st)
+> > + WptManifestList =3D TypedListWithAction(WebPlatformTestManifest, read=
+_wpt_manifest)
+> > +@@ -918,18 +921,18 @@ WptManifestList =3D TypedListWithAction(WebPlatf=
+ormTestManifest, read_wpt_manifest
+> > + OrderedSourceList =3D ContextDerivedTypedList(SourcePath, StrictOrder=
+ingOnAppendList)
+> > + OrderedTestFlavorList =3D TypedList(Enum(*all_test_flavors()),
+> > +                                   StrictOrderingOnAppendList)
+> > +-OrderedStringList =3D TypedList(unicode, StrictOrderingOnAppendList)
+> > ++OrderedStringList =3D TypedList(str, StrictOrderingOnAppendList)
+> > + DependentTestsEntry =3D ContextDerivedTypedRecord(('files', OrderedSo=
+urceList),
+> > +                                                 ('tags', OrderedStrin=
+gList),
+> > +                                                 ('flavors', OrderedTe=
+stFlavorList))
+> > + BugzillaComponent =3D TypedNamedTuple('BugzillaComponent',
+> > +-                        [('product', unicode), ('component', unicode)=
+])
+> > ++                        [('product', str), ('component', str)])
+> > + SchedulingComponents =3D ContextDerivedTypedRecord(
+> > +-        ('inclusive', TypedList(unicode, StrictOrderingOnAppendList))=
+,
+> > +-        ('exclusive', TypedList(unicode, StrictOrderingOnAppendList))=
+)
+> > ++        ('inclusive', TypedList(str, StrictOrderingOnAppendList)),
+> > ++        ('exclusive', TypedList(str, StrictOrderingOnAppendList)))
+> > +
+> > + GeneratedFilesList =3D StrictOrderingOnAppendListWithFlagsFactory({
+> > +-    'script': unicode,
+> > ++    'script': str,
+> > +     'inputs': list,
+> > +     'flags': list, })
+> > +
+> > +@@ -1096,7 +1099,7 @@ class Files(SubContext):
+> > +         self.test_tags |=3D other.test_tags
+> > +         self.test_flavors |=3D other.test_flavors
+> > +
+> > +-        for k, v in other.items():
+> > ++        for k, v in list(other.items()):
+> > +             if k =3D=3D 'IMPACTED_TESTS':
+> > +                 self.test_files |=3D set(mozpath.relpath(e.full_path,=
+ e.context.config.topsrcdir)
+> > +                                        for e in v.files)
+> > +@@ -1154,7 +1157,7 @@ class Files(SubContext):
+> > +
+> > +         bug_components =3D Counter()
+> > +
+> > +-        for f in files.values():
+> > ++        for f in list(files.values()):
+> > +             bug_component =3D f.get('BUG_COMPONENT')
+> > +             if bug_component:
+> > +                 bug_components[bug_component] +=3D 1
+> > +@@ -1232,7 +1235,7 @@ VARIABLES =3D {
+> > +         RustLibrary template instead.
+> > +         """),
+> > +
+> > +-    'RUST_LIBRARY_TARGET_DIR': (unicode, unicode,
+> > ++    'RUST_LIBRARY_TARGET_DIR': (str, str,
+> > +         """Where CARGO_TARGET_DIR should point when compiling this li=
+brary.  If
+> > +         not set, it defaults to the current objdir.  It should be a r=
+elative path
+> > +         to the current objdir; absolute paths should not be used.
+> > +@@ -1248,7 +1251,7 @@ VARIABLES =3D {
+> > +         HostRustLibrary template instead.
+> > +         """),
+> > +
+> > +-    'RUST_TEST': (unicode, unicode,
+> > ++    'RUST_TEST': (str, str,
+> > +         """Name of a Rust test to build and run via `cargo test`.
+> > +
+> > +         This variable should not be used directly; you should be usin=
+g the
+> > +@@ -1487,7 +1490,7 @@ VARIABLES =3D {
+> > +         """Like ``OBJDIR_FILES``, with preprocessing. Use sparingly.
+> > +         """),
+> > +
+> > +-    'FINAL_LIBRARY': (unicode, unicode,
+> > ++    'FINAL_LIBRARY': (str, str,
+> > +         """Library in which the objects of the current directory will=
+ be linked.
+> > +
+> > +         This variable contains the name of a library, defined elsewhe=
+re with
+> > +@@ -1528,7 +1531,7 @@ VARIABLES =3D {
+> > +         with the host compiler.
+> > +         """),
+> > +
+> > +-    'HOST_LIBRARY_NAME': (unicode, unicode,
+> > ++    'HOST_LIBRARY_NAME': (str, str,
+> > +         """Name of target library generated when cross compiling.
+> > +         """),
+> > +
+> > +@@ -1546,7 +1549,7 @@ VARIABLES =3D {
+> > +         libraries that link into this library via FINAL_LIBRARY.
+> > +         """),
+> > +
+> > +-    'LIBRARY_NAME': (unicode, unicode,
+> > ++    'LIBRARY_NAME': (str, str,
+> > +         """The code name of the library generated for a directory.
+> > +
+> > +         By default STATIC_LIBRARY_NAME and SHARED_LIBRARY_NAME take t=
+his name.
+> > +@@ -1558,7 +1561,7 @@ VARIABLES =3D {
+> > +         ``example/components/xpcomsample.lib`` on Windows.
+> > +         """),
+> > +
+> > +-    'SHARED_LIBRARY_NAME': (unicode, unicode,
+> > ++    'SHARED_LIBRARY_NAME': (str, str,
+> > +         """The name of the static library generated for a directory, =
+if it needs to
+> > +         differ from the library code name.
+> > +
+> > +@@ -1572,7 +1575,7 @@ VARIABLES =3D {
+> > +         Implies FORCE_SHARED_LIB.
+> > +         """),
+> > +
+> > +-    'STATIC_LIBRARY_NAME': (unicode, unicode,
+> > ++    'STATIC_LIBRARY_NAME': (str, str,
+> > +         """The name of the static library generated for a directory, =
+if it needs to
+> > +         differ from the library code name.
+> > +
+> > +@@ -1604,31 +1607,31 @@ VARIABLES =3D {
+> > +
+> > +         This variable contains a list of system libaries to link agai=
+nst.
+> > +         """),
+> > +-    'RCFILE': (unicode, unicode,
+> > ++    'RCFILE': (str, str,
+> > +         """The program .rc file.
+> > +
+> > +         This variable can only be used on Windows.
+> > +         """),
+> > +
+> > +-    'RESFILE': (unicode, unicode,
+> > ++    'RESFILE': (str, str,
+> > +         """The program .res file.
+> > +
+> > +         This variable can only be used on Windows.
+> > +         """),
+> > +
+> > +-    'RCINCLUDE': (unicode, unicode,
+> > ++    'RCINCLUDE': (str, str,
+> > +         """The resource script file to be included in the default .re=
+s file.
+> > +
+> > +         This variable can only be used on Windows.
+> > +         """),
+> > +
+> > +-    'DEFFILE': (unicode, unicode,
+> > ++    'DEFFILE': (str, str,
+> > +         """The program .def (module definition) file.
+> > +
+> > +         This variable can only be used on Windows.
+> > +         """),
+> > +
+> > +-    'SYMBOLS_FILE': (Path, unicode,
+> > ++    'SYMBOLS_FILE': (Path, str,
+> > +         """A file containing a list of symbols to export from a share=
+d library.
+> > +
+> > +         The given file contains a list of symbols to be exported, and=
+ is
+> > +@@ -1649,7 +1652,7 @@ VARIABLES =3D {
+> > +         ``BIN_SUFFIX``, the name will remain unchanged.
+> > +         """),
+> > +
+> > +-    'SONAME': (unicode, unicode,
+> > ++    'SONAME': (str, str,
+> > +         """The soname of the shared object currently being linked
+> > +
+> > +         soname is the "logical name" of a shared object, often used t=
+o provide
+> > +@@ -1719,7 +1722,7 @@ VARIABLES =3D {
+> > +         ``GENERATED_FILES``.
+> > +         """),
+> > +
+> > +-    'PROGRAM' : (unicode, unicode,
+> > ++    'PROGRAM' : (str, str,
+> > +         """Compiled executable name.
+> > +
+> > +         If the configuration token ``BIN_SUFFIX`` is set, its value w=
+ill be
+> > +@@ -1727,7 +1730,7 @@ VARIABLES =3D {
+> > +         ``BIN_SUFFIX``, ``PROGRAM`` will remain unchanged.
+> > +         """),
+> > +
+> > +-    'HOST_PROGRAM' : (unicode, unicode,
+> > ++    'HOST_PROGRAM' : (str, str,
+> > +         """Compiled host executable name.
+> > +
+> > +         If the configuration token ``HOST_BIN_SUFFIX`` is set, its va=
+lue will be
+> > +@@ -1765,7 +1768,7 @@ VARIABLES =3D {
+> > +         files.
+> > +         """),
+> > +
+> > +-    'XPIDL_MODULE': (unicode, unicode,
+> > ++    'XPIDL_MODULE': (str, str,
+> > +         """XPCOM Interface Definition Module Name.
+> > +
+> > +         This is the name of the ``.xpt`` file that is created by link=
+ing
+> > +@@ -1924,14 +1927,14 @@ VARIABLES =3D {
+> > +
+> > +
+> > +     # The following variables are used to control the target of insta=
+lled files.
+> > +-    'XPI_NAME': (unicode, unicode,
+> > ++    'XPI_NAME': (str, str,
+> > +         """The name of an extension XPI to generate.
+> > +
+> > +         When this variable is present, the results of this directory =
+will end up
+> > +         being packaged into an extension instead of the main dist/bin=
+ results.
+> > +         """),
+> > +
+> > +-    'DIST_SUBDIR': (unicode, unicode,
+> > ++    'DIST_SUBDIR': (str, str,
+> > +         """The name of an alternate directory to install files to.
+> > +
+> > +         When this variable is present, the results of this directory =
+will end up
+> > +@@ -1939,7 +1942,7 @@ VARIABLES =3D {
+> > +         otherwise be placed.
+> > +         """),
+> > +
+> > +-    'FINAL_TARGET': (FinalTargetValue, unicode,
+> > ++    'FINAL_TARGET': (FinalTargetValue, str,
+> > +         """The name of the directory to install targets to.
+> > +
+> > +         The directory is relative to the top of the object directory.=
+ The
+> > +@@ -1970,7 +1973,7 @@ VARIABLES =3D {
+> > +
+> > +     'GYP_DIRS': (StrictOrderingOnAppendListWithFlagsFactory({
+> > +             'variables': dict,
+> > +-            'input': unicode,
+> > ++            'input': str,
+> > +             'sandbox_vars': dict,
+> > +             'no_chromium': bool,
+> > +             'no_unified': bool,
+> > +@@ -2194,7 +2197,7 @@ VARIABLES =3D {
+> > + }
+> > +
+> > + # Sanity check: we don't want any variable above to have a list as st=
+orage type.
+> > +-for name, (storage_type, input_types, docs) in VARIABLES.items():
+> > ++for name, (storage_type, input_types, docs) in list(VARIABLES.items()=
+):
+> > +     if storage_type =3D=3D list:
+> > +         raise RuntimeError('%s has a "list" storage type. Use "List" =
+instead.'
+> > +             % name)
+> > +diff --git a/python/mozbuild/mozbuild/frontend/data.py b/python/mozbui=
+ld/mozbuild/frontend/data.py
+> > +index 442fc9e0a..837453a9f 100644
+> > +--- a/python/mozbuild/mozbuild/frontend/data.py
+> > ++++ b/python/mozbuild/mozbuild/frontend/data.py
+> > +@@ -15,7 +15,7 @@ contains the code for converting executed mozbuild f=
+iles into these data
+> > + structures.
+> > + """
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > ++
+> > +
+> > + from mozbuild.util import StrictOrderingOnAppendList
+> > + from mozpack.chrome.manifest import ManifestEntry
+> > +@@ -182,7 +182,7 @@ class ComputedFlags(ContextDerived):
+> > +             if value:
+> > +                 for dest_var in dest_vars:
+> > +                     flags[dest_var].extend(value)
+> > +-        return flags.items()
+> > ++        return list(flags.items())
+> > +
+> > + class XPIDLFile(ContextDerived):
+> > +     """Describes an XPIDL file to be compiled."""
+> > +@@ -213,7 +213,7 @@ class BaseDefines(ContextDerived):
+> > +         self.defines =3D defines
+> > +
+> > +     def get_defines(self):
+> > +-        for define, value in self.defines.iteritems():
+> > ++        for define, value in self.defines.items():
+> > +             if value is True:
+> > +                 yield('-D%s' % define)
+> > +             elif value is False:
+> > +@@ -494,7 +494,7 @@ class SimpleProgram(BaseProgram):
+> > +     KIND =3D 'target'
+> > +
+> > +     def source_files(self):
+> > +-        for srcs in self.sources.values():
+> > ++        for srcs in list(self.sources.values()):
+> > +             for f in srcs:
+> > +                 if mozpath.basename(mozpath.splitext(f)[0]) =3D=3D mo=
+zpath.splitext(self.program)[0]:
+> > +                     return [f]
+> > +diff --git a/python/mozbuild/mozbuild/frontend/emitter.py b/python/moz=
+build/mozbuild/frontend/emitter.py
+> > +index 642b381c0..c28344a75 100644
+> > +--- a/python/mozbuild/mozbuild/frontend/emitter.py
+> > ++++ b/python/mozbuild/mozbuild/frontend/emitter.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > ++
+> > +
+> > + import itertools
+> > + import logging
+> > +@@ -116,8 +116,8 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +         # arguments. This gross hack works around the problem until w=
+e
+> > +         # rid ourselves of 2.6.
+> > +         self.info =3D {}
+> > +-        for k, v in mozinfo.info.items():
+> > +-            if isinstance(k, unicode):
+> > ++        for k, v in list(mozinfo.info.items()):
+> > ++            if isinstance(k, str):
+> > +                 k =3D k.encode('ascii')
+> > +             self.info[k] =3D v
+> > +
+> > +@@ -234,7 +234,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +
+> > +
+> > +         # Next do FINAL_LIBRARY linkage.
+> > +-        for lib in (l for libs in self._libs.values() for l in libs):
+> > ++        for lib in (l for libs in list(self._libs.values()) for l in =
+libs):
+> > +             if not isinstance(lib, (StaticLibrary, RustLibrary)) or n=
+ot lib.link_into:
+> > +                 continue
+> > +             if lib.link_into not in self._libs:
+> > +@@ -294,13 +294,13 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +                         lib.link_into =3D=3D outerlib.basename):
+> > +                     propagate_defines(lib, defines)
+> > +
+> > +-        for lib in (l for libs in self._libs.values() for l in libs):
+> > ++        for lib in (l for libs in list(self._libs.values()) for l in =
+libs):
+> > +             if isinstance(lib, Library):
+> > +                 propagate_defines(lib, lib.lib_defines)
+> > +             yield lib
+> > +
+> > +
+> > +-        for lib in (l for libs in self._libs.values() for l in libs):
+> > ++        for lib in (l for libs in list(self._libs.values()) for l in =
+libs):
+> > +             lib_defines =3D list(lib.lib_defines.get_defines())
+> > +             if lib_defines:
+> > +                 objdir_flags =3D self._compile_flags[lib.objdir]
+> > +@@ -310,13 +310,13 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +                 if objdir_flags:
+> > +                     objdir_flags.resolve_flags('LIBRARY_DEFINES', lib=
+_defines)
+> > +
+> > +-        for flags_obj in self._compile_flags.values():
+> > ++        for flags_obj in list(self._compile_flags.values()):
+> > +             yield flags_obj
+> > +
+> > +-        for flags_obj in self._compile_as_flags.values():
+> > ++        for flags_obj in list(self._compile_as_flags.values()):
+> > +             yield flags_obj
+> > +
+> > +-        for obj in self._binaries.values():
+> > ++        for obj in list(self._binaries.values()):
+> > +             yield obj
+> > +
+> > +
+> > +@@ -409,7 +409,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +                         libs[key] =3D l
+> > +                     if key not in libs:
+> > +                         libs[key] =3D l
+> > +-            candidates =3D libs.values()
+> > ++            candidates =3D list(libs.values())
+> > +             if force_static and not candidates:
+> > +                 if dir:
+> > +                     raise SandboxValidationError(
+> > +@@ -473,9 +473,9 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +
+> > +     def _verify_deps(self, context, crate_dir, crate_name, dependenci=
+es, description=3D'Dependency'):
+> > +         """Verify that a crate's dependencies all specify local paths=
+."""
+> > +-        for dep_crate_name, values in dependencies.iteritems():
+> > ++        for dep_crate_name, values in dependencies.items():
+> > +             # A simple version number.
+> > +-            if isinstance(values, (str, unicode)):
+> > ++            if isinstance(values, str):
+> > +                 raise SandboxValidationError(
+> > +                     '%s %s of crate %s does not list a path' % (descr=
+iption, dep_crate_name, crate_name),
+> > +                     context)
+> > +@@ -529,7 +529,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +
+> > +         cargo_target_dir =3D context.get('RUST_LIBRARY_TARGET_DIR', '=
+.')
+> > +
+> > +-        dependencies =3D set(config.get('dependencies', {}).iterkeys(=
+))
+> > ++        dependencies =3D set(config.get('dependencies', {}).keys())
+> > +
+> > +         features =3D context.get(cls.FEATURES_VAR, [])
+> > +         unique_features =3D set(features)
+> > +@@ -863,7 +863,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +         assert not gen_sources['UNIFIED_SOURCES']
+> > +
+> > +         no_pgo =3D context.get('NO_PGO')
+> > +-        no_pgo_sources =3D [f for f, flags in all_flags.iteritems()
+> > ++        no_pgo_sources =3D [f for f, flags in all_flags.items()
+> > +                           if flags.no_pgo]
+> > +         if no_pgo:
+> > +             if no_pgo_sources:
+> > +@@ -890,7 +890,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +
+> > +         # The inverse of the above, mapping suffixes to their canonic=
+al suffix.
+> > +         canonicalized_suffix_map =3D {}
+> > +-        for suffix, alternatives in suffix_map.iteritems():
+> > ++        for suffix, alternatives in suffix_map.items():
+> > +             alternatives.add(suffix)
+> > +             for a in alternatives:
+> > +                 canonicalized_suffix_map[a] =3D suffix
+> > +@@ -914,7 +914,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +         # Source files to track for linkables associated with this co=
+ntext.
+> > +         ctxt_sources =3D defaultdict(lambda: defaultdict(list))
+> > +
+> > +-        for variable, (klass, gen_klass, suffixes) in varmap.items():
+> > ++        for variable, (klass, gen_klass, suffixes) in list(varmap.ite=
+ms()):
+> > +             allowed_suffixes =3D set().union(*[suffix_map[s] for s in=
+ suffixes])
+> > +
+> > +             # First ensure that we haven't been given filetypes that =
+we don't
+> > +@@ -941,20 +941,20 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +                     obj =3D cls(*arglist)
+> > +                     srcs =3D obj.files
+> > +                     if isinstance(obj, UnifiedSources) and obj.have_u=
+nified_mapping:
+> > +-                        srcs =3D dict(obj.unified_source_mapping).key=
+s()
+> > ++                        srcs =3D list(dict(obj.unified_source_mapping=
+).keys())
+> > +                     ctxt_sources[variable][canonical_suffix] +=3D sor=
+ted(srcs)
+> > +                     yield obj
+> > +
+> > +         if ctxt_sources:
+> > +             for linkable in linkables:
+> > +                 for target_var in ('SOURCES', 'UNIFIED_SOURCES'):
+> > +-                    for suffix, srcs in ctxt_sources[target_var].item=
+s():
+> > ++                    for suffix, srcs in list(ctxt_sources[target_var]=
+.items()):
+> > +                         linkable.sources[suffix] +=3D srcs
+> > +             for host_linkable in host_linkables:
+> > +-                for suffix, srcs in ctxt_sources['HOST_SOURCES'].item=
+s():
+> > ++                for suffix, srcs in list(ctxt_sources['HOST_SOURCES']=
+.items()):
+> > +                     host_linkable.sources[suffix] +=3D srcs
+> > +
+> > +-        for f, flags in all_flags.iteritems():
+> > ++        for f, flags in all_flags.items():
+> > +             if flags.flags:
+> > +                 ext =3D mozpath.splitext(f)[1]
+> > +                 yield PerSourceFlag(context, f, flags.flags)
+> > +@@ -1143,7 +1143,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +         for obj in self._handle_linkables(context, passthru, generate=
+d_files):
+> > +             yield obj
+> > +
+> > +-        generated_files.update(['%s%s' % (k, self.config.substs.get('=
+BIN_SUFFIX', '')) for k in self._binaries.keys()])
+> > ++        generated_files.update(['%s%s' % (k, self.config.substs.get('=
+BIN_SUFFIX', '')) for k in list(self._binaries.keys())])
+> > +
+> > +         components =3D []
+> > +         for var, cls in (
+> > +@@ -1277,7 +1277,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +         for obj in self._process_jar_manifests(context):
+> > +             yield obj
+> > +
+> > +-        for name, jar in context.get('JAVA_JAR_TARGETS', {}).items():
+> > ++        for name, jar in list(context.get('JAVA_JAR_TARGETS', {}).ite=
+ms()):
+> > +             yield ContextWrapped(context, jar)
+> > +
+> > +         computed_as_flags.resolve_flags('MOZBUILD',
+> > +@@ -1346,7 +1346,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +             script =3D mozpath.join(mozpath.dirname(mozpath.dirname(_=
+_file__)),
+> > +                                   'action', 'process_define_files.py'=
+)
+> > +             yield GeneratedFile(context, script, 'process_define_file=
+',
+> > +-                                unicode(path),
+> > ++                                str(path),
+> > +                                 [Path(context, path + '.in')])
+> > +
+> > +         generated_files =3D context.get('GENERATED_FILES') or []
+> > +@@ -1393,7 +1393,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +                                     flags.flags, localized=3Dlocalize=
+d)
+> > +
+> > +     def _process_test_manifests(self, context):
+> > +-        for prefix, info in TEST_MANIFESTS.items():
+> > ++        for prefix, info in list(TEST_MANIFESTS.items()):
+> > +             for path, manifest in context.get('%s_MANIFESTS' % prefix=
+, []):
+> > +                 for obj in self._process_test_manifest(context, info,=
+ path, manifest):
+> > +                     yield obj
+> > +@@ -1479,7 +1479,7 @@ class TreeMetadataEmitter(LoggingMixin):
+> > +
+> > +                 process_support_files(test)
+> > +
+> > +-            for path, m_defaults in mpmanifest.manifest_defaults.item=
+s():
+> > ++            for path, m_defaults in list(mpmanifest.manifest_defaults=
+.items()):
+> > +                 process_support_files(m_defaults)
+> > +
+> > +             # We also copy manifests into the output directory,
+> > +diff --git a/python/mozbuild/mozbuild/frontend/reader.py b/python/mozb=
+uild/mozbuild/frontend/reader.py
+> > +index c1efc1c3d..0cdf8b8db 100644
+> > +--- a/python/mozbuild/mozbuild/frontend/reader.py
+> > ++++ b/python/mozbuild/mozbuild/frontend/reader.py
+> > +@@ -16,7 +16,7 @@ The BuildReader contains basic logic for traversing =
+a tree of mozbuild files.
+> > + It does this by examining specific variables populated during executi=
+on.
+> > + """
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import ast
+> > + import inspect
+> > +@@ -81,12 +81,13 @@ from .context import (
+> > +
+> > + from mozbuild.base import ExecutionSummary
+> > + from concurrent.futures.process import ProcessPoolExecutor
+> > ++from functools import reduce
+> > +
+> > +
+> > +
+> > + if sys.version_info.major =3D=3D 2:
+> > +-    text_type =3D unicode
+> > +-    type_type =3D types.TypeType
+> > ++    text_type =3D str
+> > ++    type_type =3D type
+> > + else:
+> > +     text_type =3D str
+> > +     type_type =3D type
+> > +@@ -127,7 +128,7 @@ class EmptyConfig(object):
+> > +
+> > +         self.substs =3D self.PopulateOnGetDict(EmptyValue, substs or =
+self.default_substs)
+> > +         udict =3D {}
+> > +-        for k, v in self.substs.items():
+> > ++        for k, v in list(self.substs.items()):
+> > +             if isinstance(v, str):
+> > +                 udict[k.decode('utf-8')] =3D v.decode('utf-8')
+> > +             else:
+> > +@@ -311,7 +312,7 @@ class MozbuildSandbox(Sandbox):
+> > +             raise Exception('`template` is a function decorator. You =
+must '
+> > +                 'use it as `@template` preceding a function declarati=
+on.')
+> > +
+> > +-        name =3D func.func_name
+> > ++        name =3D func.__name__
+> > +
+> > +         if name in self.templates:
+> > +             raise KeyError(
+> > +@@ -390,7 +391,7 @@ class MozbuildSandbox(Sandbox):
+> > +             klass =3D self._context.__class__
+> > +             self._context.__class__ =3D TemplateContext
+> > +             # The sandbox will do all the necessary checks for these =
+merges.
+> > +-            for key, value in context.items():
+> > ++            for key, value in list(context.items()):
+> > +                 if isinstance(value, dict):
+> > +                     self[key].update(value)
+> > +                 elif isinstance(value, (list, HierarchicalStringList)=
+):
+> > +@@ -407,12 +408,14 @@ class MozbuildSandbox(Sandbox):
+> > +
+> > + class TemplateFunction(object):
+> > +     def __init__(self, func, sandbox):
+> > +-        self.path =3D func.func_code.co_filename
+> > +-        self.name =3D func.func_name
+> > ++        self.path =3D func.__code__.co_filename
+> > ++        self.name =3D func.__name__
+> > +
+> > +-        code =3D func.func_code
+> > ++        code =3D func.__code__
+> > +         firstlineno =3D code.co_firstlineno
+> > +         lines =3D sandbox._current_source.splitlines(True)
+> > ++        if len(lines) and isinstance(lines[0], bytes):
+> > ++            lines =3D [l.decode('utf-8') for l in lines]
+> > +         lines =3D inspect.getblock(lines[firstlineno - 1:])
+> > +
+> > +         # The code lines we get out of inspect.getsourcelines look li=
+ke
+> > +@@ -430,7 +433,7 @@ class TemplateFunction(object):
+> > +         # actually never calls __getitem__ and __setitem__, so we nee=
+d to
+> > +         # modify the AST so that accesses to globals are properly dir=
+ected
+> > +         # to a dict.
+> > +-        self._global_name =3D b'_data' # AST wants str for this, not =
+unicode
+> > ++        self._global_name =3D '_data'
+> > +         # In case '_data' is a name used for a variable in the functi=
+on code,
+> > +         # prepend more underscores until we find an unused name.
+> > +         while (self._global_name in code.co_names or
+> > +@@ -449,8 +452,8 @@ class TemplateFunction(object):
+> > +             compile(func_ast, self.path, 'exec'),
+> > +             glob,
+> > +             self.name,
+> > +-            func.func_defaults,
+> > +-            func.func_closure,
+> > ++            func.__defaults__,
+> > ++            func.__closure__,
+> > +         )
+> > +         func()
+> > +
+> > +@@ -464,11 +467,11 @@ class TemplateFunction(object):
+> > +             '__builtins__': sandbox._builtins
+> > +         }
+> > +         func =3D types.FunctionType(
+> > +-            self._func.func_code,
+> > ++            self._func.__code__,
+> > +             glob,
+> > +             self.name,
+> > +-            self._func.func_defaults,
+> > +-            self._func.func_closure
+> > ++            self._func.__defaults__,
+> > ++            self._func.__closure__
+> > +         )
+> > +         sandbox.exec_function(func, args, kwargs, self.path,
+> > +                               becomes_current_path=3DFalse)
+> > +@@ -484,7 +487,7 @@ class TemplateFunction(object):
+> > +         def visit_Str(self, node):
+> > +             # String nodes we got from the AST parser are str, but we=
+ want
+> > +             # unicode literals everywhere, so transform them.
+> > +-            node.s =3D unicode(node.s)
+> > ++            node.s =3D str(node.s)
+> > +             return node
+> > +
+> > +         def visit_Name(self, node):
+> > +@@ -617,7 +620,7 @@ class BuildReaderError(Exception):
+> > +
+> > +             for l in traceback.format_exception(type(self.other), sel=
+f.other,
+> > +                 self.trace):
+> > +-                s.write(unicode(l))
+> > ++                s.write(str(l))
+> > +
+> > +         return s.getvalue()
+> > +
+> > +@@ -767,7 +770,7 @@ class BuildReaderError(Exception):
+> > +             s.write('    %s\n' % inner.args[2])
+> > +             s.write('\n')
+> > +             close_matches =3D difflib.get_close_matches(inner.args[2]=
+,
+> > +-                                                      VARIABLES.keys(=
+), 2)
+> > ++                                                      list(VARIABLES.=
+keys()), 2)
+> > +             if close_matches:
+> > +                 s.write('Maybe you meant %s?\n' % ' or '.join(close_m=
+atches))
+> > +                 s.write('\n')
+> > +@@ -1152,7 +1155,7 @@ class BuildReader(object):
+> > +                         context)
+> > +                 non_unified_sources.add(source)
+> > +             action_overrides =3D {}
+> > +-            for action, script in gyp_dir.action_overrides.iteritems(=
+):
+> > ++            for action, script in gyp_dir.action_overrides.items():
+> > +                 action_overrides[action] =3D SourcePath(context, scri=
+pt)
+> > +
+> > +             gyp_processor =3D GypProcessor(context.config,
+> > +@@ -1188,7 +1191,7 @@ class BuildReader(object):
+> > +
+> > +                 recurse_info[d][key] =3D dict(sandbox.metadata[key])
+> > +
+> > +-        for path, child_metadata in recurse_info.items():
+> > ++        for path, child_metadata in list(recurse_info.items()):
+> > +             child_path =3D path.join('moz.build').full_path
+> > +
+> > +             # Ensure we don't break out of the topsrcdir. We don't do=
+ realpath
+> > +@@ -1279,7 +1282,7 @@ class BuildReader(object):
+> > +         # There is room to improve this code (and the code in
+> > +         # _find_relevant_mozbuilds) to better handle multiple files i=
+n the same
+> > +         # directory. Bug 1136966 tracks.
+> > +-        for path, mbpaths in relevants.items():
+> > ++        for path, mbpaths in list(relevants.items()):
+> > +             path_mozbuilds[path] =3D [mozpath.join(topsrcdir, p) for =
+p in mbpaths]
+> > +
+> > +             for i, mbpath in enumerate(mbpaths[0:-1]):
+> > +@@ -1316,7 +1319,7 @@ class BuildReader(object):
+> > +             all_contexts.append(context)
+> > +
+> > +         result =3D {}
+> > +-        for path, paths in path_mozbuilds.items():
+> > ++        for path, paths in list(path_mozbuilds.items()):
+> > +             result[path] =3D reduce(lambda x, y: x + y, (contexts[p] =
+for p in paths), [])
+> > +
+> > +         return result, all_contexts
+> > +@@ -1356,7 +1359,7 @@ class BuildReader(object):
+> > +
+> > +         r =3D {}
+> > +
+> > +-        for path, ctxs in paths.items():
+> > ++        for path, ctxs in list(paths.items()):
+> > +             # Should be normalized by read_relevant_mozbuilds.
+> > +             assert '\\' not in path
+> > +
+> > +diff --git a/python/mozbuild/mozbuild/frontend/sandbox.py b/python/moz=
+build/mozbuild/frontend/sandbox.py
+> > +index b2090802e..6d94291ea 100644
+> > +--- a/python/mozbuild/mozbuild/frontend/sandbox.py
+> > ++++ b/python/mozbuild/mozbuild/frontend/sandbox.py
+> > +@@ -17,7 +17,7 @@ KeyError are machine parseable. This machine-friendl=
+y data is used to present
+> > + user-friendly error messages in the case of errors.
+> > + """
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > ++
+> > +
+> > + import os
+> > + import sys
+> > +@@ -112,6 +112,7 @@ class Sandbox(dict):
+> > +         'int': int,
+> > +         'set': set,
+> > +         'tuple': tuple,
+> > ++        'str': str,
+> > +     })
+> > +
+> > +     def __init__(self, context, finder=3Ddefault_finder):
+> > +diff --git a/python/mozbuild/mozbuild/jar.py b/python/mozbuild/mozbuil=
+d/jar.py
+> > +index 47a2eff63..96aea63ce 100644
+> > +--- a/python/mozbuild/mozbuild/jar.py
+> > ++++ b/python/mozbuild/mozbuild/jar.py
+> > +@@ -8,7 +8,7 @@ processing jar.mn files.
+> > + See the documentation for jar.mn on MDC for further details on the fo=
+rmat.
+> > + '''
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + import sys
+> > + import os
+> > +@@ -17,7 +17,7 @@ import re
+> > + import logging
+> > + from time import localtime
+> > + from MozZipFile import ZipFile
+> > +-from cStringIO import StringIO
+> > ++from io import StringIO
+> > + from collections import defaultdict
+> > +
+> > + from mozbuild.preprocessor import Preprocessor
+> > +@@ -302,9 +302,9 @@ class JarMaker(object):
+> > +         '''updateManifest replaces the % in the chrome registration e=
+ntries
+> > +         with the given chrome base path, and updates the given manife=
+st file.
+> > +         '''
+> > +-        myregister =3D dict.fromkeys(map(lambda s: s.replace('%',
+> > +-            chromebasepath), register))
+> > +-        addEntriesToListFile(manifestPath, myregister.iterkeys())
+> > ++        myregister =3D dict.fromkeys([s.replace('%',
+> > ++            chromebasepath) for s in register])
+> > ++        addEntriesToListFile(manifestPath, iter(myregister.keys()))
+> > +
+> > +     def makeJar(self, infile, jardir):
+> > +         '''makeJar is the main entry point to JarMaker.
+> > +@@ -322,7 +322,7 @@ class JarMaker(object):
+> > +         elif self.relativesrcdir:
+> > +             self.localedirs =3D \
+> > +                 self.generateLocaleDirs(self.relativesrcdir)
+> > +-        if isinstance(infile, basestring):
+> > ++        if isinstance(infile, str):
+> > +             logging.info('processing ' + infile)
+> > +             self.sourcedirs.append(_normpath(os.path.dirname(infile))=
+)
+> > +         pp =3D self.pp.clone()
+> > +diff --git a/python/mozbuild/mozbuild/makeutil.py b/python/mozbuild/mo=
+zbuild/makeutil.py
+> > +index fcd45bed2..f77c5d2c3 100644
+> > +--- a/python/mozbuild/mozbuild/makeutil.py
+> > ++++ b/python/mozbuild/mozbuild/makeutil.py
+> > +@@ -2,11 +2,10 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + import os
+> > + import re
+> > +-from types import StringTypes
+> > + from collections import Iterable
+> > +
+> > +
+> > +@@ -66,7 +65,7 @@ class _SimpleOrderedSet(object):
+> > +         self._list =3D []
+> > +         self._set =3D set()
+> > +
+> > +-    def __nonzero__(self):
+> > ++    def __bool__(self):
+> > +         return bool(self._set)
+> > +
+> > +     def __iter__(self):
+> > +@@ -103,19 +102,19 @@ class Rule(object):
+> > +
+> > +     def add_targets(self, targets):
+> > +         '''Add additional targets to the rule.'''
+> > +-        assert isinstance(targets, Iterable) and not isinstance(targe=
+ts, StringTypes)
+> > ++        assert isinstance(targets, Iterable) and not isinstance(targe=
+ts, str)
+> > +         self._targets.update(targets)
+> > +         return self
+> > +
+> > +     def add_dependencies(self, deps):
+> > +         '''Add dependencies to the rule.'''
+> > +-        assert isinstance(deps, Iterable) and not isinstance(deps, St=
+ringTypes)
+> > ++        assert isinstance(deps, Iterable) and not isinstance(deps, st=
+r)
+> > +         self._dependencies.update(deps)
+> > +         return self
+> > +
+> > +     def add_commands(self, commands):
+> > +         '''Add commands to the rule.'''
+> > +-        assert isinstance(commands, Iterable) and not isinstance(comm=
+ands, StringTypes)
+> > ++        assert isinstance(commands, Iterable) and not isinstance(comm=
+ands, str)
+> > +         self._commands.extend(commands)
+> > +         return self
+> > +
+> > +@@ -139,13 +138,16 @@ class Rule(object):
+> > +         '''
+> > +         if not self._targets:
+> > +             return
+> > +-        fh.write('%s:' % ' '.join(self._targets))
+> > ++        wstring =3D '%s:' % ' '.join(self._targets)
+> > +         if self._dependencies:
+> > +-            fh.write(' %s' % ' '.join(self.dependencies()))
+> > +-        fh.write('\n')
+> > ++            wstring +=3D ' %s' % ' '.join(self.dependencies())
+> > ++        wstring +=3D '\n'
+> > +         for cmd in self._commands:
+> > +-            fh.write('\t%s\n' % cmd)
+> > +-
+> > ++            wstring +=3D '\t%s\n' % cmd
+> > ++        try:
+> > ++            fh.write(wstring.encode('utf-8'))
+> > ++        except TypeError:
+> > ++            fh.write(wstring)
+> > +
+> > + # colon followed by anything except a slash (Windows path detection)
+> > + _depfilesplitter =3D re.compile(r':(?![\\/])')
+> > +diff --git a/python/mozbuild/mozbuild/mozinfo.py b/python/mozbuild/moz=
+build/mozinfo.py
+> > +index 7e7ad1b2a..f03f20ba3 100755
+> > +--- a/python/mozbuild/mozbuild/mozinfo.py
+> > ++++ b/python/mozbuild/mozbuild/mozinfo.py
+> > +@@ -5,7 +5,7 @@
+> > + # This module produces a JSON file that provides basic build info and
+> > + # configuration metadata.
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + import os
+> > + import re
+> > +@@ -33,7 +33,7 @@ def build_dict(config, env=3Dos.environ):
+> > +         d['mozconfig'] =3D config.mozconfig
+> > +
+> > +     # os
+> > +-    o =3D substs["OS_TARGET"]
+> > ++    o =3D str(substs["OS_TARGET"])
+> > +     known_os =3D {"Linux": "linux",
+> > +                 "WINNT": "win",
+> > +                 "Darwin": "mac",
+> > +@@ -148,7 +148,7 @@ def write_mozinfo(file, config, env=3Dos.environ):
+> > +     and what keys are produced.
+> > +     """
+> > +     build_conf =3D build_dict(config, env)
+> > +-    if isinstance(file, basestring):
+> > +-        file =3D open(file, 'wb')
+> > ++    if isinstance(file, str):
+> > ++        file =3D open(file, 'w')
+> > +
+> > +     json.dump(build_conf, file, sort_keys=3DTrue, indent=3D4)
+> > +diff --git a/python/mozbuild/mozbuild/preprocessor.py b/python/mozbuil=
+d/mozbuild/preprocessor.py
+> > +index 6780b8b72..19e59884e 100644
+> > +--- a/python/mozbuild/mozbuild/preprocessor.py
+> > ++++ b/python/mozbuild/mozbuild/preprocessor.py
+> > +@@ -27,7 +27,8 @@ import os
+> > + import re
+> > + from optparse import OptionParser
+> > + import errno
+> > +-from makeutil import Makefile
+> > ++from .makeutil import Makefile
+> > ++from functools import reduce
+> > +
+> > + # hack around win32 mangling our line endings
+> > + # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/65443
+> > +@@ -230,7 +231,7 @@ class Expression:
+> > +         def __repr__(self):
+> > +             return self.value.__repr__()
+> > +
+> > +-    class ParseError(StandardError):
+> > ++    class ParseError(Exception):
+> > +         """
+> > +         Error raised when parsing fails.
+> > +         It has two members, offset and content, which give the offset=
+ of the
+> > +@@ -278,7 +279,7 @@ class Preprocessor:
+> > +         self.context =3D Context()
+> > +         for k,v in {'FILE': '',
+> > +                     'LINE': 0,
+> > +-                    'DIRECTORY': os.path.abspath('.')}.iteritems():
+> > ++                    'DIRECTORY': os.path.abspath('.')}.items():
+> > +             self.context[k] =3D v
+> > +         self.actionLevel =3D 0
+> > +         self.disableLevel =3D 0
+> > +@@ -292,21 +293,21 @@ class Preprocessor:
+> > +         self.cmds =3D {}
+> > +         for cmd, level in {'define': 0,
+> > +                            'undef': 0,
+> > +-                           'if': sys.maxint,
+> > +-                           'ifdef': sys.maxint,
+> > +-                           'ifndef': sys.maxint,
+> > ++                           'if': sys.maxsize,
+> > ++                           'ifdef': sys.maxsize,
+> > ++                           'ifndef': sys.maxsize,
+> > +                            'else': 1,
+> > +                            'elif': 1,
+> > +                            'elifdef': 1,
+> > +                            'elifndef': 1,
+> > +-                           'endif': sys.maxint,
+> > ++                           'endif': sys.maxsize,
+> > +                            'expand': 0,
+> > +                            'literal': 0,
+> > +                            'filter': 0,
+> > +                            'unfilter': 0,
+> > +                            'include': 0,
+> > +                            'includesubst': 0,
+> > +-                           'error': 0}.iteritems():
+> > ++                           'error': 0}.items():
+> > +             self.cmds[cmd] =3D (level, getattr(self, 'do_' + cmd))
+> > +         self.out =3D sys.stdout
+> > +         self.setMarker(marker)
+> > +@@ -434,7 +435,7 @@ class Preprocessor:
+> > +         filteredLine =3D self.applyFilters(aLine)
+> > +         if filteredLine !=3D aLine:
+> > +             self.actionLevel =3D 2
+> > +-        self.out.write(filteredLine)
+> > ++        self.out.write(filteredLine.encode('utf-8'))
+> > +
+> > +     def handleCommandLine(self, args, defaultToStdin =3D False):
+> > +         """
+> > +@@ -468,7 +469,7 @@ class Preprocessor:
+> > +                 raise Preprocessor.Error(self, "--depend doesn't work=
+ with stdout",
+> > +                                          None)
+> > +             try:
+> > +-                from makeutil import Makefile
+> > ++                from .makeutil import Makefile
+> > +             except:
+> > +                 raise Preprocessor.Error(self, "--depend requires the=
+ "
+> > +                                                "mozbuild.makeutil mod=
+ule", None)
+> > +@@ -683,7 +684,7 @@ class Preprocessor:
+> > +         current =3D dict(self.filters)
+> > +         for f in filters:
+> > +             current[f] =3D getattr(self, 'filter_' + f)
+> > +-        filterNames =3D current.keys()
+> > ++        filterNames =3D list(current.keys())
+> > +         filterNames.sort()
+> > +         self.filters =3D [(fn, current[fn]) for fn in filterNames]
+> > +         return
+> > +@@ -693,7 +694,7 @@ class Preprocessor:
+> > +         for f in filters:
+> > +             if f in current:
+> > +                 del current[f]
+> > +-        filterNames =3D current.keys()
+> > ++        filterNames =3D list(current.keys())
+> > +         filterNames.sort()
+> > +         self.filters =3D [(fn, current[fn]) for fn in filterNames]
+> > +         return
+> > +@@ -738,7 +739,7 @@ class Preprocessor:
+> > +         args can either be a file name, or a file-like object.
+> > +         Files should be opened, and will be closed after processing.
+> > +         """
+> > +-        isName =3D type(args) =3D=3D str or type(args) =3D=3D unicode
+> > ++        isName =3D type(args) =3D=3D str or type(args) =3D=3D str
+> > +         oldCheckLineNumbers =3D self.checkLineNumbers
+> > +         self.checkLineNumbers =3D False
+> > +         if isName:
+> > +diff --git a/python/mozbuild/mozbuild/shellutil.py b/python/mozbuild/m=
+ozbuild/shellutil.py
+> > +index 185a970ee..c0c15f8f2 100644
+> > +--- a/python/mozbuild/mozbuild/shellutil.py
+> > ++++ b/python/mozbuild/mozbuild/shellutil.py
+> > +@@ -15,7 +15,7 @@ def _tokens2re(**tokens):
+> > +     # which matches the pattern and captures it in a named match grou=
+p.
+> > +     # The group names and patterns are given as arguments.
+> > +     all_tokens =3D '|'.join('(?P<%s>%s)' % (name, value)
+> > +-                          for name, value in tokens.iteritems())
+> > ++                          for name, value in tokens.items())
+> > +     nonescaped =3D r'(?<!\\)(?:%s)' % all_tokens
+> > +
+> > +     # The final pattern matches either the above pattern, or an escap=
+ed
+> > +@@ -96,7 +96,7 @@ class _ClineSplitter(object):
+> > +             self.cline =3D self.cline[m.end():]
+> > +
+> > +             match =3D {name: value
+> > +-                     for name, value in m.groupdict().items() if valu=
+e}
+> > ++                     for name, value in list(m.groupdict().items()) i=
+f value}
+> > +             if 'quote' in match:
+> > +                 # " or ' start a quoted string
+> > +                 if match['quote'] =3D=3D '"':
+> > +@@ -144,7 +144,7 @@ class _ClineSplitter(object):
+> > +             self._push(self.cline[:m.start()])
+> > +             self.cline =3D self.cline[m.end():]
+> > +             match =3D {name: value
+> > +-                     for name, value in m.groupdict().items() if valu=
+e}
+> > ++                     for name, value in list(m.groupdict().items()) i=
+f value}
+> > +             if 'quote' in match:
+> > +                 # a double quote ends the quoted string, so go back t=
+o
+> > +                 # unquoted parsing
+> > +diff --git a/python/mozbuild/mozbuild/test/backend/test_recursivemake.=
+py b/python/mozbuild/mozbuild/test/backend/test_recursivemake.py
+> > +index a05059f8a..355a96165 100644
+> > +--- a/python/mozbuild/mozbuild/test/backend/test_recursivemake.py
+> > ++++ b/python/mozbuild/mozbuild/test/backend/test_recursivemake.py
+> > +@@ -2,9 +2,9 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import unicode_literals
+> > +
+> > +-import cPickle as pickle
+> > ++
+> > ++import pickle as pickle
+> > + import json
+> > + import os
+> > + import unittest
+> > +@@ -333,7 +333,7 @@ class TestRecursiveMakeBackend(BackendTester):
+> > +             ],
+> > +         }
+> > +
+> > +-        for var, val in expected.items():
+> > ++        for var, val in list(expected.items()):
+> > +             # print("test_variable_passthru[%s]" % (var))
+> > +             found =3D [str for str in lines if str.startswith(var)]
+> > +             self.assertEqual(found, val)
+> > +@@ -372,7 +372,7 @@ class TestRecursiveMakeBackend(BackendTester):
+> > +             ],
+> > +         }
+> > +
+> > +-        for var, val in expected.items():
+> > ++        for var, val in list(expected.items()):
+> > +             found =3D [str for str in lines if str.startswith(var)]
+> > +             self.assertEqual(found, val)
+> > +
+> > +@@ -563,7 +563,7 @@ class TestRecursiveMakeBackend(BackendTester):
+> > +
+> > +         # This is not the most robust test in the world, but it gets =
+the job
+> > +         # done.
+> > +-        entries =3D [e for e in m._dests.keys() if '**' in e]
+> > ++        entries =3D [e for e in list(m._dests.keys()) if '**' in e]
+> > +         self.assertEqual(len(entries), 1)
+> > +         self.assertIn('support/**', entries[0])
+> > +
+> > +@@ -590,11 +590,11 @@ class TestRecursiveMakeBackend(BackendTester):
+> > +                          set(['child/test_sub.js',
+> > +                               'child/data/**',
+> > +                               'child/another-file.sjs']))
+> > +-        for key in test_installs.keys():
+> > ++        for key in list(test_installs.keys()):
+> > +             self.assertIn(key, test_installs)
+> > +
+> > +         synthesized_manifest =3D InstallManifest()
+> > +-        for item, installs in test_installs.items():
+> > ++        for item, installs in list(test_installs.items()):
+> > +             for install_info in installs:
+> > +                 if len(install_info) =3D=3D 3:
+> > +                     synthesized_manifest.add_pattern_link(*install_in=
+fo)
+> > +@@ -602,7 +602,7 @@ class TestRecursiveMakeBackend(BackendTester):
+> > +                     synthesized_manifest.add_link(*install_info)
+> > +
+> > +         self.assertEqual(len(synthesized_manifest), 3)
+> > +-        for item, info in synthesized_manifest._dests.items():
+> > ++        for item, info in list(synthesized_manifest._dests.items()):
+> > +             self.assertIn(item, m)
+> > +             self.assertEqual(info, m._dests[item])
+> > +
+> > +@@ -864,7 +864,7 @@ class TestRecursiveMakeBackend(BackendTester):
+> > +         expected[mozpath.join(env.topobjdir, 'final-target')] =3D [
+> > +             'FINAL_TARGET =3D $(DEPTH)/random-final-target'
+> > +         ]
+> > +-        for key, expected_rules in expected.iteritems():
+> > ++        for key, expected_rules in expected.items():
+> > +             backend_path =3D mozpath.join(key, 'backend.mk')
+> > +             lines =3D [l.strip() for l in open(backend_path, 'rt').re=
+adlines()[2:]]
+> > +             found =3D [str for str in lines if
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/common.py b/pytho=
+n/mozbuild/mozbuild/test/configure/common.py
+> > +index 150c6e393..5e2c2afaa 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/common.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/common.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import copy
+> > + import errno
+> > +@@ -16,7 +16,7 @@ from mozbuild.configure import ConfigureSandbox
+> > + from mozbuild.util import ReadOnlyNamespace
+> > + from mozpack import path as mozpath
+> > +
+> > +-from StringIO import StringIO
+> > ++from io import StringIO
+> > + from which import WhichError
+> > +
+> > + from buildconfig import (
+> > +@@ -77,10 +77,10 @@ class ConfigureTestSandbox(ConfigureSandbox):
+> > +         self._search_path =3D environ.get('PATH', '').split(os.pathse=
+p)
+> > +
+> > +         self._subprocess_paths =3D {
+> > +-            mozpath.abspath(k): v for k, v in paths.iteritems() if v
+> > ++            mozpath.abspath(k): v for k, v in paths.items() if v
+> > +         }
+> > +
+> > +-        paths =3D paths.keys()
+> > ++        paths =3D list(paths.keys())
+> > +
+> > +         environ =3D dict(environ)
+> > +         if 'CONFIG_SHELL' not in environ:
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/lint.py b/python/=
+mozbuild/mozbuild/test/configure/lint.py
+> > +index 98f5f4fe7..a549b4bcf 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/lint.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/lint.py
+> > +@@ -2,11 +2,11 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import os
+> > + import unittest
+> > +-from StringIO import StringIO
+> > ++from io import StringIO
+> > + from mozunit import main
+> > + from buildconfig import (
+> > +     topobjdir,
+> > +@@ -40,9 +40,7 @@ class LintMeta(type):
+> > +         return type.__new__(mcs, name, bases, attrs)
+> > +
+> > +
+> > +-class Lint(unittest.TestCase):
+> > +-    __metaclass__ =3D LintMeta
+> > +-
+> > ++class Lint(unittest.TestCase, metaclass=3DLintMeta):
+> > +     def setUp(self):
+> > +         self._curdir =3D os.getcwd()
+> > +         os.chdir(topobjdir)
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_checks_confi=
+gure.py b/python/mozbuild/mozbuild/test/configure/test_checks_configure.py
+> > +index c60000bb2..07091c077 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_checks_configure.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_checks_configure.py
+> > +@@ -2,9 +2,9 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > +
+> > +-from StringIO import StringIO
+> > ++
+> > ++from io import StringIO
+> > + import os
+> > + import sys
+> > + import textwrap
+> > +@@ -447,7 +447,7 @@ class TestChecksConfigure(unittest.TestCase):
+> > +             checking for a... %s
+> > +         ''' % self.OTHER_A))
+> > +
+> > +-        dirs =3D map(mozpath.dirname, (self.OTHER_A, self.KNOWN_A))
+> > ++        dirs =3D list(map(mozpath.dirname, (self.OTHER_A, self.KNOWN_=
+A)))
+> > +         config, out, status =3D self.get_result(textwrap.dedent('''\
+> > +             check_prog("A", ("known-a",), paths=3D["%s"])
+> > +         ''' % os.pathsep.join(dirs)))
+> > +@@ -457,7 +457,7 @@ class TestChecksConfigure(unittest.TestCase):
+> > +             checking for a... %s
+> > +         ''' % self.OTHER_A))
+> > +
+> > +-        dirs =3D map(mozpath.dirname, (self.KNOWN_A, self.KNOWN_B))
+> > ++        dirs =3D list(map(mozpath.dirname, (self.KNOWN_A, self.KNOWN_=
+B)))
+> > +         config, out, status =3D self.get_result(textwrap.dedent('''\
+> > +             check_prog("A", ("known-a",), paths=3D["%s", "%s"])
+> > +         ''' % (os.pathsep.join(dirs), self.OTHER_A)))
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_compile_chec=
+ks.py b/python/mozbuild/mozbuild/test/configure/test_compile_checks.py
+> > +index b5be3bf2e..282000bb2 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_compile_checks.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_compile_checks.py
+> > +@@ -2,14 +2,14 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import os
+> > + import textwrap
+> > + import unittest
+> > + import mozpack.path as mozpath
+> > +
+> > +-from StringIO import StringIO
+> > ++from io import StringIO
+> > +
+> > + from buildconfig import topsrcdir
+> > + from common import ConfigureTestSandbox
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_configure.py=
+ b/python/mozbuild/mozbuild/test/configure/test_configure.py
+> > +index f37e2701f..eb0ca84fb 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_configure.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_configure.py
+> > +@@ -2,9 +2,9 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > +
+> > +-from StringIO import StringIO
+> > ++
+> > ++from io import StringIO
+> > + import os
+> > + import sys
+> > + import textwrap
+> > +@@ -43,7 +43,7 @@ class TestConfigure(unittest.TestCase):
+> > +
+> > +         if '--help' in options:
+> > +             return out.getvalue(), config
+> > +-        self.assertEquals('', out.getvalue())
+> > ++        self.assertEqual('', out.getvalue())
+> > +         return config
+> > +
+> > +     def moz_configure(self, source):
+> > +@@ -55,7 +55,7 @@ class TestConfigure(unittest.TestCase):
+> > +     def test_defaults(self):
+> > +         config =3D self.get_config()
+> > +         self.maxDiff =3D None
+> > +-        self.assertEquals({
+> > ++        self.assertEqual({
+> > +             'CHOICES': NegativeOptionValue(),
+> > +             'DEFAULTED': PositiveOptionValue(('not-simple',)),
+> > +             'IS_GCC': NegativeOptionValue(),
+> > +@@ -71,9 +71,9 @@ class TestConfigure(unittest.TestCase):
+> > +     def test_help(self):
+> > +         help, config =3D self.get_config(['--help'], prog=3D'configur=
+e')
+> > +
+> > +-        self.assertEquals({}, config)
+> > ++        self.assertEqual({}, config)
+> > +         self.maxDiff =3D None
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             'Usage: configure [options]\n'
+> > +             '\n'
+> > +             'Options: [defaults in brackets after descriptions]\n'
+> > +@@ -109,7 +109,7 @@ class TestConfigure(unittest.TestCase):
+> > +         ):
+> > +             self.assertNotIn('ENABLED_SIMPLE', config)
+> > +             self.assertIn('SIMPLE', config)
+> > +-            self.assertEquals(NegativeOptionValue(), config['SIMPLE']=
+)
+> > ++            self.assertEqual(NegativeOptionValue(), config['SIMPLE'])
+> > +
+> > +         for config in (
+> > +                 self.get_config(['--enable-simple']),
+> > +@@ -117,7 +117,7 @@ class TestConfigure(unittest.TestCase):
+> > +         ):
+> > +             self.assertIn('ENABLED_SIMPLE', config)
+> > +             self.assertIn('SIMPLE', config)
+> > +-            self.assertEquals(PositiveOptionValue(), config['SIMPLE']=
+)
+> > ++            self.assertEqual(PositiveOptionValue(), config['SIMPLE'])
+> > +             self.assertIs(config['SIMPLE'], config['ENABLED_SIMPLE'])
+> > +
+> > +         # --enable-simple doesn't take values.
+> > +@@ -135,7 +135,7 @@ class TestConfigure(unittest.TestCase):
+> > +                                 env=3D{'MOZ_WITH_ENV': '1'}),
+> > +         ):
+> > +             self.assertIn('WITH_ENV', config)
+> > +-            self.assertEquals(NegativeOptionValue(), config['WITH_ENV=
+'])
+> > ++            self.assertEqual(NegativeOptionValue(), config['WITH_ENV'=
+])
+> > +
+> > +         for config in (
+> > +                 self.get_config(['--enable-with-env']),
+> > +@@ -145,7 +145,7 @@ class TestConfigure(unittest.TestCase):
+> > +                                 env=3D{'MOZ_WITH_ENV': ''}),
+> > +         ):
+> > +             self.assertIn('WITH_ENV', config)
+> > +-            self.assertEquals(PositiveOptionValue(), config['WITH_ENV=
+'])
+> > ++            self.assertEqual(PositiveOptionValue(), config['WITH_ENV'=
+])
+> > +
+> > +         with self.assertRaises(InvalidOptionError):
+> > +             self.get_config(['--enable-with-env=3Dvalue'])
+> > +@@ -160,23 +160,23 @@ class TestConfigure(unittest.TestCase):
+> > +             self.get_config(['--enable-values', '--disable-values']),
+> > +         ):
+> > +             self.assertIn(name, config)
+> > +-            self.assertEquals(NegativeOptionValue(), config[name])
+> > ++            self.assertEqual(NegativeOptionValue(), config[name])
+> > +
+> > +         for config in (
+> > +             self.get_config(['--enable-values']),
+> > +             self.get_config(['--disable-values', '--enable-values']),
+> > +         ):
+> > +             self.assertIn(name, config)
+> > +-            self.assertEquals(PositiveOptionValue(), config[name])
+> > ++            self.assertEqual(PositiveOptionValue(), config[name])
+> > +
+> > +         config =3D self.get_config(['--enable-values=3Dfoo'])
+> > +         self.assertIn(name, config)
+> > +-        self.assertEquals(PositiveOptionValue(('foo',)), config[name]=
+)
+> > ++        self.assertEqual(PositiveOptionValue(('foo',)), config[name])
+> > +
+> > +         config =3D self.get_config(['--enable-values=3Dfoo,bar'])
+> > +         self.assertIn(name, config)
+> > +         self.assertTrue(config[name])
+> > +-        self.assertEquals(PositiveOptionValue(('foo', 'bar')), config=
+[name])
+> > ++        self.assertEqual(PositiveOptionValue(('foo', 'bar')), config[=
+name])
+> > +
+> > +     def test_values2(self):
+> > +         self.test_values('VALUES2')
+> > +@@ -187,12 +187,12 @@ class TestConfigure(unittest.TestCase):
+> > +     def test_returned_default(self):
+> > +         config =3D self.get_config(['--enable-simple'])
+> > +         self.assertIn('DEFAULTED', config)
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             PositiveOptionValue(('simple',)), config['DEFAULTED'])
+> > +
+> > +         config =3D self.get_config(['--disable-simple'])
+> > +         self.assertIn('DEFAULTED', config)
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             PositiveOptionValue(('not-simple',)), config['DEFAULTED']=
+)
+> > +
+> > +     def test_returned_choices(self):
+> > +@@ -200,13 +200,13 @@ class TestConfigure(unittest.TestCase):
+> > +             config =3D self.get_config(
+> > +                 ['--enable-values=3Dalpha', '--returned-choices=3D%s'=
+ % val])
+> > +             self.assertIn('CHOICES', config)
+> > +-            self.assertEquals(PositiveOptionValue((val,)), config['CH=
+OICES'])
+> > ++            self.assertEqual(PositiveOptionValue((val,)), config['CHO=
+ICES'])
+> > +
+> > +         for val in ('0', '1', '2'):
+> > +             config =3D self.get_config(
+> > +                 ['--enable-values=3Dnumeric', '--returned-choices=3D%=
+s' % val])
+> > +             self.assertIn('CHOICES', config)
+> > +-            self.assertEquals(PositiveOptionValue((val,)), config['CH=
+OICES'])
+> > ++            self.assertEqual(PositiveOptionValue((val,)), config['CHO=
+ICES'])
+> > +
+> > +         with self.assertRaises(InvalidOptionError):
+> > +             self.get_config(['--enable-values=3Dnumeric',
+> > +@@ -218,12 +218,12 @@ class TestConfigure(unittest.TestCase):
+> > +     def test_included(self):
+> > +         config =3D self.get_config(env=3D{'CC': 'gcc'})
+> > +         self.assertIn('IS_GCC', config)
+> > +-        self.assertEquals(config['IS_GCC'], True)
+> > ++        self.assertEqual(config['IS_GCC'], True)
+> > +
+> > +         config =3D self.get_config(
+> > +             ['--enable-include=3Dextra.configure', '--extra'])
+> > +         self.assertIn('EXTRA', config)
+> > +-        self.assertEquals(PositiveOptionValue(), config['EXTRA'])
+> > ++        self.assertEqual(PositiveOptionValue(), config['EXTRA'])
+> > +
+> > +         with self.assertRaises(InvalidOptionError):
+> > +             self.get_config(['--extra'])
+> > +@@ -231,7 +231,7 @@ class TestConfigure(unittest.TestCase):
+> > +     def test_template(self):
+> > +         config =3D self.get_config(env=3D{'CC': 'gcc'})
+> > +         self.assertIn('CFLAGS', config)
+> > +-        self.assertEquals(config['CFLAGS'], ['-Werror=3Dfoobar'])
+> > ++        self.assertEqual(config['CFLAGS'], ['-Werror=3Dfoobar'])
+> > +
+> > +         config =3D self.get_config(env=3D{'CC': 'clang'})
+> > +         self.assertNotIn('CFLAGS', config)
+> > +@@ -288,7 +288,7 @@ class TestConfigure(unittest.TestCase):
+> > +             sandbox
+> > +         )
+> > +
+> > +-        import __builtin__
+> > ++        import builtins
+> > +         self.assertIs(sandbox['foo'](), __builtin__)
+> > +
+> > +         exec_(textwrap.dedent('''
+> > +@@ -300,7 +300,7 @@ class TestConfigure(unittest.TestCase):
+> > +         )
+> > +
+> > +         f =3D sandbox['foo']()
+> > +-        self.assertEquals(f.name, os.devnull)
+> > ++        self.assertEqual(f.name, os.devnull)
+> > +         f.close()
+> > +
+> > +         # This unlocks the sandbox
+> > +@@ -336,8 +336,8 @@ class TestConfigure(unittest.TestCase):
+> > +         self.assertIs(sandbox['foo'](), sandbox)
+> > +
+> > +         # Nothing leaked from the function being executed
+> > +-        self.assertEquals(sandbox.keys(), ['__builtins__', 'foo'])
+> > +-        self.assertEquals(sandbox['__builtins__'], ConfigureSandbox.B=
+UILTINS)
+> > ++        self.assertEqual(list(sandbox.keys()), ['__builtins__', 'foo'=
+])
+> > ++        self.assertEqual(sandbox['__builtins__'], ConfigureSandbox.BU=
+ILTINS)
+> > +
+> > +         exec_(textwrap.dedent('''
+> > +             @template
+> > +@@ -354,7 +354,7 @@ class TestConfigure(unittest.TestCase):
+> > +         with self.assertRaises(NameError) as e:
+> > +             sandbox._depends[sandbox['bar']].result()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "global name 'sys' is not defined")
+> > +
+> > +     def test_apply_imports(self):
+> > +@@ -380,28 +380,28 @@ class TestConfigure(unittest.TestCase):
+> > +             sandbox
+> > +         )
+> > +
+> > +-        self.assertEquals(len(imports), 1)
+> > ++        self.assertEqual(len(imports), 1)
+> > +
+> > +     def test_os_path(self):
+> > +         config =3D self.get_config(['--with-imports=3D%s' % __file__]=
+)
+> > +         self.assertIn('HAS_ABSPATH', config)
+> > +-        self.assertEquals(config['HAS_ABSPATH'], True)
+> > ++        self.assertEqual(config['HAS_ABSPATH'], True)
+> > +         self.assertIn('HAS_GETATIME', config)
+> > +-        self.assertEquals(config['HAS_GETATIME'], True)
+> > ++        self.assertEqual(config['HAS_GETATIME'], True)
+> > +         self.assertIn('HAS_GETATIME2', config)
+> > +-        self.assertEquals(config['HAS_GETATIME2'], False)
+> > ++        self.assertEqual(config['HAS_GETATIME2'], False)
+> > +
+> > +     def test_template_call(self):
+> > +         config =3D self.get_config(env=3D{'CC': 'gcc'})
+> > +         self.assertIn('TEMPLATE_VALUE', config)
+> > +-        self.assertEquals(config['TEMPLATE_VALUE'], 42)
+> > ++        self.assertEqual(config['TEMPLATE_VALUE'], 42)
+> > +         self.assertIn('TEMPLATE_VALUE_2', config)
+> > +-        self.assertEquals(config['TEMPLATE_VALUE_2'], 21)
+> > ++        self.assertEqual(config['TEMPLATE_VALUE_2'], 21)
+> > +
+> > +     def test_template_imports(self):
+> > +         config =3D self.get_config(['--enable-imports-in-template'])
+> > +         self.assertIn('PLATFORM', config)
+> > +-        self.assertEquals(config['PLATFORM'], sys.platform)
+> > ++        self.assertEqual(config['PLATFORM'], sys.platform)
+> > +
+> > +     def test_decorators(self):
+> > +         config =3D {}
+> > +@@ -419,27 +419,27 @@ class TestConfigure(unittest.TestCase):
+> > +             return self.get_config(*args, configure=3D'set_config.con=
+figure')
+> > +
+> > +         help, config =3D get_config(['--help'])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config =3D get_config(['--set-foo'])
+> > +         self.assertIn('FOO', config)
+> > +-        self.assertEquals(config['FOO'], True)
+> > ++        self.assertEqual(config['FOO'], True)
+> > +
+> > +         config =3D get_config(['--set-bar'])
+> > +         self.assertNotIn('FOO', config)
+> > +         self.assertIn('BAR', config)
+> > +-        self.assertEquals(config['BAR'], True)
+> > ++        self.assertEqual(config['BAR'], True)
+> > +
+> > +         config =3D get_config(['--set-value=3Dqux'])
+> > +         self.assertIn('VALUE', config)
+> > +-        self.assertEquals(config['VALUE'], 'qux')
+> > ++        self.assertEqual(config['VALUE'], 'qux')
+> > +
+> > +         config =3D get_config(['--set-name=3Dhoge'])
+> > +         self.assertIn('hoge', config)
+> > +-        self.assertEquals(config['hoge'], True)
+> > ++        self.assertEqual(config['hoge'], True)
+> > +
+> > +         config =3D get_config([])
+> > +-        self.assertEquals(config, {'BAR': False})
+> > ++        self.assertEqual(config, {'BAR': False})
+> > +
+> > +         with self.assertRaises(ConfigureError):
+> > +             # Both --set-foo and --set-name=3DFOO are going to try to
+> > +@@ -454,11 +454,11 @@ class TestConfigure(unittest.TestCase):
+> > +             set_config('QUX', 'qux', when=3D'--with-qux')
+> > +         '''):
+> > +             config =3D self.get_config()
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'FOO': 'foo',
+> > +             })
+> > +             config =3D self.get_config(['--with-qux'])
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'FOO': 'foo',
+> > +                 'QUX': 'qux',
+> > +             })
+> > +@@ -468,27 +468,27 @@ class TestConfigure(unittest.TestCase):
+> > +             return self.get_config(*args, configure=3D'set_define.con=
+figure')
+> > +
+> > +         help, config =3D get_config(['--help'])
+> > +-        self.assertEquals(config, {'DEFINES': {}})
+> > ++        self.assertEqual(config, {'DEFINES': {}})
+> > +
+> > +         config =3D get_config(['--set-foo'])
+> > +         self.assertIn('FOO', config['DEFINES'])
+> > +-        self.assertEquals(config['DEFINES']['FOO'], True)
+> > ++        self.assertEqual(config['DEFINES']['FOO'], True)
+> > +
+> > +         config =3D get_config(['--set-bar'])
+> > +         self.assertNotIn('FOO', config['DEFINES'])
+> > +         self.assertIn('BAR', config['DEFINES'])
+> > +-        self.assertEquals(config['DEFINES']['BAR'], True)
+> > ++        self.assertEqual(config['DEFINES']['BAR'], True)
+> > +
+> > +         config =3D get_config(['--set-value=3Dqux'])
+> > +         self.assertIn('VALUE', config['DEFINES'])
+> > +-        self.assertEquals(config['DEFINES']['VALUE'], 'qux')
+> > ++        self.assertEqual(config['DEFINES']['VALUE'], 'qux')
+> > +
+> > +         config =3D get_config(['--set-name=3Dhoge'])
+> > +         self.assertIn('hoge', config['DEFINES'])
+> > +-        self.assertEquals(config['DEFINES']['hoge'], True)
+> > ++        self.assertEqual(config['DEFINES']['hoge'], True)
+> > +
+> > +         config =3D get_config([])
+> > +-        self.assertEquals(config['DEFINES'], {'BAR': False})
+> > ++        self.assertEqual(config['DEFINES'], {'BAR': False})
+> > +
+> > +         with self.assertRaises(ConfigureError):
+> > +             # Both --set-foo and --set-name=3DFOO are going to try to
+> > +@@ -503,11 +503,11 @@ class TestConfigure(unittest.TestCase):
+> > +             set_define('QUX', 'qux', when=3D'--with-qux')
+> > +         '''):
+> > +             config =3D self.get_config()
+> > +-            self.assertEquals(config['DEFINES'], {
+> > ++            self.assertEqual(config['DEFINES'], {
+> > +                 'FOO': 'foo',
+> > +             })
+> > +             config =3D self.get_config(['--with-qux'])
+> > +-            self.assertEquals(config['DEFINES'], {
+> > ++            self.assertEqual(config['DEFINES'], {
+> > +                 'FOO': 'foo',
+> > +                 'QUX': 'qux',
+> > +             })
+> > +@@ -518,19 +518,19 @@ class TestConfigure(unittest.TestCase):
+> > +                 *args, configure=3D'imply_option/simple.configure')
+> > +
+> > +         help, config =3D get_config(['--help'])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config =3D get_config([])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config =3D get_config(['--enable-foo'])
+> > +         self.assertIn('BAR', config)
+> > +-        self.assertEquals(config['BAR'], PositiveOptionValue())
+> > ++        self.assertEqual(config['BAR'], PositiveOptionValue())
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             get_config(['--enable-foo', '--disable-bar'])
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             "'--enable-bar' implied by '--enable-foo' conflicts with =
+"
+> > +             "'--disable-bar' from the command-line")
+> > +@@ -541,31 +541,31 @@ class TestConfigure(unittest.TestCase):
+> > +                 *args, configure=3D'imply_option/negative.configure')
+> > +
+> > +         help, config =3D get_config(['--help'])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config =3D get_config([])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config =3D get_config(['--enable-foo'])
+> > +         self.assertIn('BAR', config)
+> > +-        self.assertEquals(config['BAR'], NegativeOptionValue())
+> > ++        self.assertEqual(config['BAR'], NegativeOptionValue())
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             get_config(['--enable-foo', '--enable-bar'])
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             "'--disable-bar' implied by '--enable-foo' conflicts with=
+ "
+> > +             "'--enable-bar' from the command-line")
+> > +
+> > +         config =3D get_config(['--disable-hoge'])
+> > +         self.assertIn('BAR', config)
+> > +-        self.assertEquals(config['BAR'], NegativeOptionValue())
+> > ++        self.assertEqual(config['BAR'], NegativeOptionValue())
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             get_config(['--disable-hoge', '--enable-bar'])
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             "'--disable-bar' implied by '--disable-hoge' conflicts wi=
+th "
+> > +             "'--enable-bar' from the command-line")
+> > +@@ -576,23 +576,23 @@ class TestConfigure(unittest.TestCase):
+> > +                 *args, configure=3D'imply_option/values.configure')
+> > +
+> > +         help, config =3D get_config(['--help'])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config =3D get_config([])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config =3D get_config(['--enable-foo=3Da'])
+> > +         self.assertIn('BAR', config)
+> > +-        self.assertEquals(config['BAR'], PositiveOptionValue(('a',)))
+> > ++        self.assertEqual(config['BAR'], PositiveOptionValue(('a',)))
+> > +
+> > +         config =3D get_config(['--enable-foo=3Da,b'])
+> > +         self.assertIn('BAR', config)
+> > +-        self.assertEquals(config['BAR'], PositiveOptionValue(('a','b'=
+)))
+> > ++        self.assertEqual(config['BAR'], PositiveOptionValue(('a','b')=
+))
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             get_config(['--enable-foo=3Da,b', '--disable-bar'])
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             "'--enable-bar=3Da,b' implied by '--enable-foo' conflicts=
+ with "
+> > +             "'--disable-bar' from the command-line")
+> > +@@ -603,15 +603,15 @@ class TestConfigure(unittest.TestCase):
+> > +                 *args, configure=3D'imply_option/infer.configure')
+> > +
+> > +         help, config =3D get_config(['--help'])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config =3D get_config([])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             get_config(['--enable-foo', '--disable-bar'])
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             "'--enable-bar' implied by '--enable-foo' conflicts with =
+"
+> > +             "'--disable-bar' from the command-line")
+> > +@@ -619,7 +619,7 @@ class TestConfigure(unittest.TestCase):
+> > +         with self.assertRaises(ConfigureError) as e:
+> > +             self.get_config([], configure=3D'imply_option/infer_ko.co=
+nfigure')
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             "Cannot infer what implies '--enable-bar'. Please add a `=
+reason` "
+> > +             "to the `imply_option` call.")
+> > +@@ -630,25 +630,25 @@ class TestConfigure(unittest.TestCase):
+> > +                 *args, configure=3D'imply_option/imm.configure')
+> > +
+> > +         help, config =3D get_config(['--help'])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config =3D get_config([])
+> > +-        self.assertEquals(config, {})
+> > ++        self.assertEqual(config, {})
+> > +
+> > +         config_path =3D mozpath.abspath(
+> > +             mozpath.join(test_data_path, 'imply_option', 'imm.configu=
+re'))
+> > +
+> > +-        with self.assertRaisesRegexp(InvalidOptionError,
+> > ++        with self.assertRaisesRegex(InvalidOptionError,
+> > +             "--enable-foo' implied by 'imply_option at %s:7' conflict=
+s with "
+> > +             "'--disable-foo' from the command-line" % config_path):
+> > +             get_config(['--disable-foo'])
+> > +
+> > +-        with self.assertRaisesRegexp(InvalidOptionError,
+> > ++        with self.assertRaisesRegex(InvalidOptionError,
+> > +             "--enable-bar=3Dfoo,bar' implied by 'imply_option at %s:1=
+6' conflicts"
+> > +             " with '--enable-bar=3Da,b,c' from the command-line" % co=
+nfig_path):
+> > +             get_config(['--enable-bar=3Da,b,c'])
+> > +
+> > +-        with self.assertRaisesRegexp(InvalidOptionError,
+> > ++        with self.assertRaisesRegex(InvalidOptionError,
+> > +             "--enable-baz=3DBAZ' implied by 'imply_option at %s:25' c=
+onflicts"
+> > +             " with '--enable-baz=3DQUUX' from the command-line" % con=
+fig_path):
+> > +             get_config(['--enable-baz=3DQUUX'])
+> > +@@ -660,7 +660,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "`--with-foo`, emitted from `%s` line 2, is=
+ unknown."
+> > +                           % mozpath.join(test_data_path, 'moz.configu=
+re'))
+> > +
+> > +@@ -675,7 +675,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Unexpected type: 'int'")
+> > +
+> > +     def test_imply_option_when(self):
+> > +@@ -686,12 +686,12 @@ class TestConfigure(unittest.TestCase):
+> > +             set_config('QUX', depends('--with-qux')(lambda x: x))
+> > +         '''):
+> > +             config =3D self.get_config()
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'QUX': NegativeOptionValue(),
+> > +             })
+> > +
+> > +             config =3D self.get_config(['--with-foo'])
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'QUX': PositiveOptionValue(),
+> > +             })
+> > +
+> > +@@ -700,7 +700,7 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.moz_configure('option("--with-foo", help=3D"foo=
+")'):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'Option `--with-foo` is not handled ; reference it with a=
+ @depends'
+> > +         )
+> > +@@ -712,7 +712,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'Option `--with-foo` already defined'
+> > +         )
+> > +@@ -724,7 +724,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'Option `MOZ_FOO` already defined'
+> > +         )
+> > +@@ -736,7 +736,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'Option `MOZ_FOO` already defined'
+> > +         )
+> > +@@ -748,7 +748,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'Option `MOZ_FOO` already defined'
+> > +         )
+> > +@@ -760,7 +760,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'Option `--with-foo` already defined'
+> > +         )
+> > +@@ -776,18 +776,18 @@ class TestConfigure(unittest.TestCase):
+> > +             set_config('QUX', depends('--with-qux', when=3D'--with-fo=
+o')(lambda x: x))
+> > +         '''):
+> > +             config =3D self.get_config()
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'FOO': NegativeOptionValue(),
+> > +             })
+> > +
+> > +             config =3D self.get_config(['--with-foo'])
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'FOO': PositiveOptionValue(),
+> > +                 'QUX': NegativeOptionValue(),
+> > +             })
+> > +
+> > +             config =3D self.get_config(['--with-foo', '--with-qux'])
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'FOO': PositiveOptionValue(),
+> > +                 'QUX': PositiveOptionValue(),
+> > +             })
+> > +@@ -795,7 +795,7 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 self.get_config(['--with-bar'])
+> > +
+> > +-            self.assertEquals(
+> > ++            self.assertEqual(
+> > +                 e.exception.message,
+> > +                 '--with-bar is not available in this configuration'
+> > +             )
+> > +@@ -803,7 +803,7 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 self.get_config(['--with-qux'])
+> > +
+> > +-            self.assertEquals(
+> > ++            self.assertEqual(
+> > +                 e.exception.message,
+> > +                 '--with-qux is not available in this configuration'
+> > +             )
+> > +@@ -811,18 +811,18 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 self.get_config(['QUX=3D1'])
+> > +
+> > +-            self.assertEquals(
+> > ++            self.assertEqual(
+> > +                 e.exception.message,
+> > +                 'QUX is not available in this configuration'
+> > +             )
+> > +
+> > +             config =3D self.get_config(env=3D{'QUX': '1'})
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'FOO': NegativeOptionValue(),
+> > +             })
+> > +
+> > +             help, config =3D self.get_config(['--help'])
+> > +-            self.assertEquals(help, textwrap.dedent('''\
+> > ++            self.assertEqual(help, textwrap.dedent('''\
+> > +                 Usage: configure [options]
+> > +
+> > +                 Options: [defaults in brackets after descriptions]
+> > +@@ -833,7 +833,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''))
+> > +
+> > +             help, config =3D self.get_config(['--help', '--with-foo']=
+)
+> > +-            self.assertEquals(help, textwrap.dedent('''\
+> > ++            self.assertEqual(help, textwrap.dedent('''\
+> > +                 Usage: configure [options]
+> > +
+> > +                 Options: [defaults in brackets after descriptions]
+> > +@@ -851,7 +851,7 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.assertRaises(ConfigureError) as e:
+> > +                 self.get_config()
+> > +
+> > +-            self.assertEquals(e.exception.message,
+> > ++            self.assertEqual(e.exception.message,
+> > +                               '@depends function needs the same `when=
+` as '
+> > +                               'options it depends on')
+> > +
+> > +@@ -868,7 +868,7 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.assertRaises(ConfigureError) as e:
+> > +                 self.get_config()
+> > +
+> > +-            self.assertEquals(e.exception.message,
+> > ++            self.assertEqual(e.exception.message,
+> > +                               '@depends function needs the same `when=
+` as '
+> > +                               'options it depends on')
+> > +
+> > +@@ -896,7 +896,7 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.moz_configure('include("../foo.configure")'):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'Cannot include `%s` because it is not in a subdirectory =
+of `%s`'
+> > +             % (mozpath.normpath(mozpath.join(test_data_path, '..',
+> > +@@ -911,7 +911,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'Cannot include `%s` because it was included already.'
+> > +             % mozpath.normpath(mozpath.join(test_data_path,
+> > +@@ -924,7 +924,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message, "Unexpected type: 'int=
+'")
+> > ++        self.assertEqual(e.exception.message, "Unexpected type: 'int'=
+")
+> > +
+> > +     def test_include_when(self):
+> > +         with MockedOpen({
+> > +@@ -967,26 +967,26 @@ class TestConfigure(unittest.TestCase):
+> > +             '''),
+> > +         }):
+> > +             config =3D self.get_config()
+> > +-            self.assertEquals(config, {})
+> > ++            self.assertEqual(config, {})
+> > +
+> > +             config =3D self.get_config(['--with-foo'])
+> > +-            self.assertEquals(config, {})
+> > ++            self.assertEqual(config, {})
+> > +
+> > +             config =3D self.get_config(['--with-bar'])
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'BAR': 'bar',
+> > +             })
+> > +
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 self.get_config(['--with-qux'])
+> > +
+> > +-            self.assertEquals(
+> > ++            self.assertEqual(
+> > +                 e.exception.message,
+> > +                 '--with-qux is not available in this configuration'
+> > +             )
+> > +
+> > +             config =3D self.get_config(['--with-foo', '--with-foo-rea=
+lly'])
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'FOO': 'foo',
+> > +                 'FOO2': True,
+> > +             })
+> > +@@ -998,7 +998,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message, 'Cannot reassign built=
+ins')
+> > ++        self.assertEqual(e.exception.message, 'Cannot reassign builti=
+ns')
+> > +
+> > +         with self.assertRaises(KeyError) as e:
+> > +             with self.moz_configure('''
+> > +@@ -1006,7 +1006,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           'Cannot assign `foo` because it is neither =
+a '
+> > +                           '@depends nor a @template')
+> > +
+> > +@@ -1019,7 +1019,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "@depends needs at least one argument")
+> > +
+> > +         with self.assertRaises(ConfigureError) as e:
+> > +@@ -1030,7 +1030,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "'--with-foo' is not a known option. Maybe =
+it's "
+> > +                           "declared too late?")
+> > +
+> > +@@ -1042,7 +1042,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Option must not contain an '=3D'")
+> > +
+> > +         with self.assertRaises(TypeError) as e:
+> > +@@ -1053,7 +1053,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Cannot use object of type 'int' as argumen=
+t "
+> > +                           "to @depends")
+> > +
+> > +@@ -1065,7 +1065,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Cannot decorate generator functions with @=
+depends")
+> > +
+> > +         with self.assertRaises(TypeError) as e:
+> > +@@ -1074,7 +1074,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Unexpected type: 'int'")
+> > +
+> > +         with self.assertRaises(ConfigureError) as e:
+> > +@@ -1088,7 +1088,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The `foo` function may not be called")
+> > +
+> > +         with self.assertRaises(TypeError) as e:
+> > +@@ -1099,7 +1099,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "depends_impl() got an unexpected keyword a=
+rgument 'foo'")
+> > +
+> > +     def test_depends_when(self):
+> > +@@ -1124,12 +1124,12 @@ class TestConfigure(unittest.TestCase):
+> > +             set_config('QUX', qux)
+> > +         '''):
+> > +             config =3D self.get_config()
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'FOO': 'foo',
+> > +             })
+> > +
+> > +             config =3D self.get_config(['--with-qux'])
+> > +-            self.assertEquals(config, {
+> > ++            self.assertEqual(config, {
+> > +                 'FOO': 'foo',
+> > +                 'QUX': 'qux',
+> > +             })
+> > +@@ -1144,7 +1144,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           '@imports must appear after @template')
+> > +
+> > +         with self.assertRaises(ConfigureError) as e:
+> > +@@ -1157,7 +1157,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           '@imports must appear after @depends')
+> > +
+> > +         for import_ in (
+> > +@@ -1174,7 +1174,7 @@ class TestConfigure(unittest.TestCase):
+> > +                 ''' % import_):
+> > +                     self.get_config()
+> > +
+> > +-            self.assertEquals(e.exception.message, "Unexpected type: =
+'int'")
+> > ++            self.assertEqual(e.exception.message, "Unexpected type: '=
+int'")
+> > +
+> > +         with self.assertRaises(TypeError) as e:
+> > +             with self.moz_configure('''
+> > +@@ -1185,7 +1185,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message, "Unexpected type: 'int=
+'")
+> > ++        self.assertEqual(e.exception.message, "Unexpected type: 'int'=
+")
+> > +
+> > +         with self.assertRaises(ValueError) as e:
+> > +             with self.moz_configure('''
+> > +@@ -1195,7 +1195,7 @@ class TestConfigure(unittest.TestCase):
+> > +             '''):
+> > +                 self.get_config()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Invalid argument to @imports: 'os*'")
+> > +
+> > +     def test_only_when(self):
+> > +@@ -1250,7 +1250,7 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 self.get_config(['--foo'])
+> > +
+> > +-            self.assertEquals(e.exception.message,
+> > ++            self.assertEqual(e.exception.message,
+> > +                               '--foo is not available in this configu=
+ration')
+> > +
+> > +         # Cannot depend on an option defined in a only_when block, be=
+cause we
+> > +@@ -1261,7 +1261,7 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.assertRaises(ConfigureError) as e:
+> > +                 self.get_config()
+> > +
+> > +-            self.assertEquals(e.exception.message,
+> > ++            self.assertEqual(e.exception.message,
+> > +                               '@depends function needs the same `when=
+` as '
+> > +                               'options it depends on')
+> > +
+> > +@@ -1278,7 +1278,7 @@ class TestConfigure(unittest.TestCase):
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 self.get_config()
+> > +
+> > +-            self.assertEquals(e.exception.message,
+> > ++            self.assertEqual(e.exception.message,
+> > +                               '--foo is not available in this configu=
+ration')
+> > +
+> > +         # And similarly doesn't fail when the condition is true.
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_lint.py b/py=
+thon/mozbuild/mozbuild/test/configure/test_lint.py
+> > +index 6d8d4c49f..6ad897839 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_lint.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_lint.py
+> > +@@ -2,9 +2,9 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > +
+> > +-from StringIO import StringIO
+> > ++
+> > ++from io import StringIO
+> > + import os
+> > + import textwrap
+> > + import unittest
+> > +@@ -62,7 +62,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "`bar` depends on '--help' and `foo`. "
+> > +                           "`foo` must depend on '--help'")
+> > +
+> > +@@ -85,7 +85,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "`bar` depends on '--help' and `foo`. "
+> > +                           "`foo` must depend on '--help'")
+> > +
+> > +@@ -111,7 +111,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Missing @depends for `foo`: '--help'")
+> > +
+> > +         with self.assertRaises(ConfigureError) as e:
+> > +@@ -130,7 +130,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Missing @depends for `foo`: '--help'")
+> > +
+> > +         with self.assertRaises(ConfigureError) as e:
+> > +@@ -145,7 +145,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Missing @depends for `foo`: '--help'")
+> > +
+> > +         # This would have failed with "Missing @depends for `foo`: '-=
+-help'"
+> > +@@ -178,7 +178,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "Missing @depends for `foo`: '--help'")
+> > +
+> > +         # There is a default restricted `os` module when there is no =
+explicit
+> > +@@ -205,7 +205,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "%s:3: The dependency on `--foo` is unused.=
+"
+> > +                           % mozpath.join(test_data_path, 'moz.configu=
+re'))
+> > +
+> > +@@ -222,7 +222,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "%s:5: The dependency on `bar` is unused."
+> > +                           % mozpath.join(test_data_path, 'moz.configu=
+re'))
+> > +
+> > +@@ -236,7 +236,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "%s:2: The dependency on `<lambda>` is unus=
+ed."
+> > +                           % mozpath.join(test_data_path, 'moz.configu=
+re'))
+> > +
+> > +@@ -257,7 +257,7 @@ class TestLint(unittest.TestCase):
+> > +             '''):
+> > +                 self.lint_test()
+> > +
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "%s:9: The dependency on `qux` is unused."
+> > +                           % mozpath.join(test_data_path, 'moz.configu=
+re'))
+> > +
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_moz_configur=
+e.py b/python/mozbuild/mozbuild/test/configure/test_moz_configure.py
+> > +index b3342e268..7a26e9e09 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_moz_configure.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_moz_configure.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + from mozunit import main
+> > + from mozpack import path as mozpath
+> > +@@ -27,10 +27,10 @@ class TestMozConfigure(BaseConfigureTest):
+> > +             shell =3D mozpath.abspath('/bin/sh')
+> > +             return result.replace('CONFIG_SHELL=3D%s ' % shell, '')
+> > +
+> > +-        self.assertEquals('--enable-application=3Dbrowser',
+> > ++        self.assertEqual('--enable-application=3Dbrowser',
+> > +                           get_value_for(['--enable-application=3Dbrow=
+ser']))
+> > +
+> > +-        self.assertEquals('--enable-application=3Dbrowser '
+> > ++        self.assertEqual('--enable-application=3Dbrowser '
+> > +                           'MOZ_VTUNE=3D1',
+> > +                           get_value_for(['--enable-application=3Dbrow=
+ser',
+> > +                                          'MOZ_VTUNE=3D1']))
+> > +@@ -39,25 +39,25 @@ class TestMozConfigure(BaseConfigureTest):
+> > +             environ=3D{'MOZ_VTUNE': '1'},
+> > +             mozconfig=3D'ac_add_options --enable-project=3Djs')
+> > +
+> > +-        self.assertEquals('--enable-project=3Djs MOZ_VTUNE=3D1',
+> > ++        self.assertEqual('--enable-project=3Djs MOZ_VTUNE=3D1',
+> > +                           value)
+> > +
+> > +         # --disable-js-shell is the default, so it's filtered out.
+> > +-        self.assertEquals('--enable-application=3Dbrowser',
+> > ++        self.assertEqual('--enable-application=3Dbrowser',
+> > +                           get_value_for(['--enable-application=3Dbrow=
+ser',
+> > +                                          '--disable-js-shell']))
+> > +
+> > +         # Normally, --without-foo would be filtered out because that'=
+s the
+> > +         # default, but since it is a (fake) old-configure option, it =
+always
+> > +         # appears.
+> > +-        self.assertEquals('--enable-application=3Dbrowser --without-f=
+oo',
+> > ++        self.assertEqual('--enable-application=3Dbrowser --without-fo=
+o',
+> > +                           get_value_for(['--enable-application=3Dbrow=
+ser',
+> > +                                          '--without-foo']))
+> > +-        self.assertEquals('--enable-application=3Dbrowser --with-foo'=
+,
+> > ++        self.assertEqual('--enable-application=3Dbrowser --with-foo',
+> > +                           get_value_for(['--enable-application=3Dbrow=
+ser',
+> > +                                          '--with-foo']))
+> > +
+> > +-        self.assertEquals("--enable-application=3Dbrowser '--with-foo=
+=3Dfoo bar'",
+> > ++        self.assertEqual("--enable-application=3Dbrowser '--with-foo=
+=3Dfoo bar'",
+> > +                           get_value_for(['--enable-application=3Dbrow=
+ser',
+> > +                                          '--with-foo=3Dfoo bar']))
+> > +
+> > +@@ -69,7 +69,7 @@ class TestMozConfigure(BaseConfigureTest):
+> > +                 self.version =3D version
+> > +
+> > +             def __call__(self, stdin, args):
+> > +-                this.assertEquals(args, ('-version',))
+> > ++                this.assertEqual(args, ('-version',))
+> > +                 return 0, self.version, ''
+> > +
+> > +         def check_nsis_version(version):
+> > +@@ -84,13 +84,13 @@ class TestMozConfigure(BaseConfigureTest):
+> > +         with self.assertRaises(SystemExit) as e:
+> > +             check_nsis_version('v3.0a2')
+> > +
+> > +-        self.assertEquals(check_nsis_version('v3.0b1'), '3.0b1')
+> > +-        self.assertEquals(check_nsis_version('v3.0b2'), '3.0b2')
+> > +-        self.assertEquals(check_nsis_version('v3.0rc1'), '3.0rc1')
+> > +-        self.assertEquals(check_nsis_version('v3.0'), '3.0')
+> > +-        self.assertEquals(check_nsis_version('v3.0-2'), '3.0')
+> > +-        self.assertEquals(check_nsis_version('v3.0.1'), '3.0')
+> > +-        self.assertEquals(check_nsis_version('v3.1'), '3.1')
+> > ++        self.assertEqual(check_nsis_version('v3.0b1'), '3.0b1')
+> > ++        self.assertEqual(check_nsis_version('v3.0b2'), '3.0b2')
+> > ++        self.assertEqual(check_nsis_version('v3.0rc1'), '3.0rc1')
+> > ++        self.assertEqual(check_nsis_version('v3.0'), '3.0')
+> > ++        self.assertEqual(check_nsis_version('v3.0-2'), '3.0')
+> > ++        self.assertEqual(check_nsis_version('v3.0.1'), '3.0')
+> > ++        self.assertEqual(check_nsis_version('v3.1'), '3.1')
+> > +
+> > +
+> > + if __name__ =3D=3D '__main__':
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_options.py b=
+/python/mozbuild/mozbuild/test/configure/test_options.py
+> > +index 9defccb2c..330ce3b1f 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_options.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_options.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import unittest
+> > +
+> > +@@ -28,139 +28,139 @@ class Option(Option):
+> > + class TestOption(unittest.TestCase):
+> > +     def test_option(self):
+> > +         option =3D Option('--option')
+> > +-        self.assertEquals(option.prefix, '')
+> > +-        self.assertEquals(option.name, 'option')
+> > +-        self.assertEquals(option.env, None)
+> > ++        self.assertEqual(option.prefix, '')
+> > ++        self.assertEqual(option.name, 'option')
+> > ++        self.assertEqual(option.env, None)
+> > +         self.assertFalse(option.default)
+> > +
+> > +         option =3D Option('--enable-option')
+> > +-        self.assertEquals(option.prefix, 'enable')
+> > +-        self.assertEquals(option.name, 'option')
+> > +-        self.assertEquals(option.env, None)
+> > ++        self.assertEqual(option.prefix, 'enable')
+> > ++        self.assertEqual(option.name, 'option')
+> > ++        self.assertEqual(option.env, None)
+> > +         self.assertFalse(option.default)
+> > +
+> > +         option =3D Option('--disable-option')
+> > +-        self.assertEquals(option.prefix, 'disable')
+> > +-        self.assertEquals(option.name, 'option')
+> > +-        self.assertEquals(option.env, None)
+> > ++        self.assertEqual(option.prefix, 'disable')
+> > ++        self.assertEqual(option.name, 'option')
+> > ++        self.assertEqual(option.env, None)
+> > +         self.assertTrue(option.default)
+> > +
+> > +         option =3D Option('--with-option')
+> > +-        self.assertEquals(option.prefix, 'with')
+> > +-        self.assertEquals(option.name, 'option')
+> > +-        self.assertEquals(option.env, None)
+> > ++        self.assertEqual(option.prefix, 'with')
+> > ++        self.assertEqual(option.name, 'option')
+> > ++        self.assertEqual(option.env, None)
+> > +         self.assertFalse(option.default)
+> > +
+> > +         option =3D Option('--without-option')
+> > +-        self.assertEquals(option.prefix, 'without')
+> > +-        self.assertEquals(option.name, 'option')
+> > +-        self.assertEquals(option.env, None)
+> > ++        self.assertEqual(option.prefix, 'without')
+> > ++        self.assertEqual(option.name, 'option')
+> > ++        self.assertEqual(option.env, None)
+> > +         self.assertTrue(option.default)
+> > +
+> > +         option =3D Option('--without-option-foo', env=3D'MOZ_OPTION')
+> > +-        self.assertEquals(option.env, 'MOZ_OPTION')
+> > ++        self.assertEqual(option.env, 'MOZ_OPTION')
+> > +
+> > +         option =3D Option(env=3D'MOZ_OPTION')
+> > +-        self.assertEquals(option.prefix, '')
+> > +-        self.assertEquals(option.name, None)
+> > +-        self.assertEquals(option.env, 'MOZ_OPTION')
+> > ++        self.assertEqual(option.prefix, '')
+> > ++        self.assertEqual(option.name, None)
+> > ++        self.assertEqual(option.env, 'MOZ_OPTION')
+> > +         self.assertFalse(option.default)
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D0, default=3D('a',))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D1, default=3D())
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'default must be a bool, a string or a tuple of strings')
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D1, default=3DTrue)
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D1, default=3D('a', 'b'))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D2, default=3D())
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'default must be a bool, a string or a tuple of strings')
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D2, default=3DTrue)
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D2, default=3D('a',))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D'?', default=3D('a', 'b'))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D'+', default=3D())
+> > +-        self.assertEquals(
+> > ++        self.assertEqual(
+> > +             e.exception.message,
+> > +             'default must be a bool, a string or a tuple of strings')
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D'+', default=3DTrue)
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +         # --disable options with a nargs value that requires at least=
+ one
+> > +         # argument need to be given a default.
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--disable-option', nargs=3D1)
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--disable-option', nargs=3D'+')
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +         # Test nargs inference from default value
+> > +         option =3D Option('--with-foo', default=3DTrue)
+> > +-        self.assertEquals(option.nargs, 0)
+> > ++        self.assertEqual(option.nargs, 0)
+> > +
+> > +         option =3D Option('--with-foo', default=3DFalse)
+> > +-        self.assertEquals(option.nargs, 0)
+> > ++        self.assertEqual(option.nargs, 0)
+> > +
+> > +         option =3D Option('--with-foo', default=3D'a')
+> > +-        self.assertEquals(option.nargs, '?')
+> > ++        self.assertEqual(option.nargs, '?')
+> > +
+> > +         option =3D Option('--with-foo', default=3D('a',))
+> > +-        self.assertEquals(option.nargs, '?')
+> > ++        self.assertEqual(option.nargs, '?')
+> > +
+> > +         option =3D Option('--with-foo', default=3D('a', 'b'))
+> > +-        self.assertEquals(option.nargs, '*')
+> > ++        self.assertEqual(option.nargs, '*')
+> > +
+> > +         option =3D Option(env=3D'FOO', default=3DTrue)
+> > +-        self.assertEquals(option.nargs, 0)
+> > ++        self.assertEqual(option.nargs, 0)
+> > +
+> > +         option =3D Option(env=3D'FOO', default=3DFalse)
+> > +-        self.assertEquals(option.nargs, 0)
+> > ++        self.assertEqual(option.nargs, 0)
+> > +
+> > +         option =3D Option(env=3D'FOO', default=3D'a')
+> > +-        self.assertEquals(option.nargs, '?')
+> > ++        self.assertEqual(option.nargs, '?')
+> > +
+> > +         option =3D Option(env=3D'FOO', default=3D('a',))
+> > +-        self.assertEquals(option.nargs, '?')
+> > ++        self.assertEqual(option.nargs, '?')
+> > +
+> > +         option =3D Option(env=3D'FOO', default=3D('a', 'b'))
+> > +-        self.assertEquals(option.nargs, '*')
+> > ++        self.assertEqual(option.nargs, '*')
+> > +
+> > +     def test_option_option(self):
+> > +         for option in (
+> > +@@ -170,70 +170,70 @@ class TestOption(unittest.TestCase):
+> > +             '--with-option',
+> > +             '--without-option',
+> > +         ):
+> > +-            self.assertEquals(Option(option).option, option)
+> > +-            self.assertEquals(Option(option, env=3D'FOO').option, opt=
+ion)
+> > ++            self.assertEqual(Option(option).option, option)
+> > ++            self.assertEqual(Option(option, env=3D'FOO').option, opti=
+on)
+> > +
+> > +             opt =3D Option(option, default=3DFalse)
+> > +-            self.assertEquals(opt.option,
+> > ++            self.assertEqual(opt.option,
+> > +                               option.replace('-disable-', '-enable-')
+> > +                                     .replace('-without-', '-with-'))
+> > +
+> > +             opt =3D Option(option, default=3DTrue)
+> > +-            self.assertEquals(opt.option,
+> > ++            self.assertEqual(opt.option,
+> > +                               option.replace('-enable-', '-disable-')
+> > +                                     .replace('-with-', '-without-'))
+> > +
+> > +-        self.assertEquals(Option(env=3D'FOO').option, 'FOO')
+> > ++        self.assertEqual(Option(env=3D'FOO').option, 'FOO')
+> > +
+> > +     def test_option_choices(self):
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D3, choices=3D('a', 'b'))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           'Not enough `choices` for `nargs`')
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--without-option', nargs=3D1, choices=3D('a', 'b'=
+))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           'A `default` must be given along with `choi=
+ces`')
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--without-option', nargs=3D'+', choices=3D('a', '=
+b'))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           'A `default` must be given along with `choi=
+ces`')
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--without-option', default=3D'c', choices=3D('a',=
+ 'b'))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The `default` value must be one of 'a', 'b=
+'")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--without-option', default=3D('a', 'c',), choices=
+=3D('a', 'b'))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The `default` value must be one of 'a', 'b=
+'")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--without-option', default=3D('c',), choices=3D('=
+a', 'b'))
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The `default` value must be one of 'a', 'b=
+'")
+> > +
+> > +         option =3D Option('--with-option', nargs=3D'+', choices=3D('a=
+', 'b'))
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             option.get_value('--with-option=3Dc')
+> > +-        self.assertEquals(e.exception.message, "'c' is not one of 'a'=
+, 'b'")
+> > ++        self.assertEqual(e.exception.message, "'c' is not one of 'a',=
+ 'b'")
+> > +
+> > +         value =3D option.get_value('--with-option=3Db,a')
+> > +         self.assertTrue(value)
+> > +-        self.assertEquals(PositiveOptionValue(('b', 'a')), value)
+> > ++        self.assertEqual(PositiveOptionValue(('b', 'a')), value)
+> > +
+> > +         option =3D Option('--without-option', nargs=3D'*', default=3D=
+'a',
+> > +                         choices=3D('a', 'b'))
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             option.get_value('--with-option=3Dc')
+> > +-        self.assertEquals(e.exception.message, "'c' is not one of 'a'=
+, 'b'")
+> > ++        self.assertEqual(e.exception.message, "'c' is not one of 'a',=
+ 'b'")
+> > +
+> > +         value =3D option.get_value('--with-option=3Db,a')
+> > +         self.assertTrue(value)
+> > +-        self.assertEquals(PositiveOptionValue(('b', 'a')), value)
+> > ++        self.assertEqual(PositiveOptionValue(('b', 'a')), value)
+> > +
+> > +         # Test nargs inference from choices
+> > +         option =3D Option('--with-option', choices=3D('a', 'b'))
+> > +@@ -244,37 +244,37 @@ class TestOption(unittest.TestCase):
+> > +                         choices=3D('a', 'b', 'c', 'd'))
+> > +
+> > +         value =3D option.get_value('--with-option=3D+d')
+> > +-        self.assertEquals(PositiveOptionValue(('b', 'c', 'd')), value=
+)
+> > ++        self.assertEqual(PositiveOptionValue(('b', 'c', 'd')), value)
+> > +
+> > +         value =3D option.get_value('--with-option=3D-b')
+> > +-        self.assertEquals(PositiveOptionValue(('c',)), value)
+> > ++        self.assertEqual(PositiveOptionValue(('c',)), value)
+> > +
+> > +         value =3D option.get_value('--with-option=3D-b,+d')
+> > +-        self.assertEquals(PositiveOptionValue(('c','d')), value)
+> > ++        self.assertEqual(PositiveOptionValue(('c','d')), value)
+> > +
+> > +         # Adding something that is in the default is fine
+> > +         value =3D option.get_value('--with-option=3D+b')
+> > +-        self.assertEquals(PositiveOptionValue(('b', 'c')), value)
+> > ++        self.assertEqual(PositiveOptionValue(('b', 'c')), value)
+> > +
+> > +         # Removing something that is not in the default is fine, as l=
+ong as it
+> > +         # is one of the choices
+> > +         value =3D option.get_value('--with-option=3D-a')
+> > +-        self.assertEquals(PositiveOptionValue(('b', 'c')), value)
+> > ++        self.assertEqual(PositiveOptionValue(('b', 'c')), value)
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             option.get_value('--with-option=3D-e')
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "'e' is not one of 'a', 'b', 'c', 'd'")
+> > +
+> > +         # Other "not a choice" errors.
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             option.get_value('--with-option=3D+e')
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "'e' is not one of 'a', 'b', 'c', 'd'")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             option.get_value('--with-option=3De')
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "'e' is not one of 'a', 'b', 'c', 'd'")
+> > +
+> > +     def test_option_value_compare(self):
+> > +@@ -294,7 +294,7 @@ class TestOption(unittest.TestCase):
+> > +
+> > +         # For usability reasons, we raise TypeError when attempting t=
+o compare
+> > +         # against a non-tuple.
+> > +-        with self.assertRaisesRegexp(TypeError, 'cannot compare a'):
+> > ++        with self.assertRaisesRegex(TypeError, 'cannot compare a'):
+> > +             val =3D=3D 'foo'
+> > +
+> > +         # But we allow empty option values to compare otherwise we ca=
+n't
+> > +@@ -313,36 +313,36 @@ class TestOption(unittest.TestCase):
+> > +
+> > +     def test_option_value_format(self):
+> > +         val =3D PositiveOptionValue()
+> > +-        self.assertEquals('--with-value', val.format('--with-value'))
+> > +-        self.assertEquals('--with-value', val.format('--without-value=
+'))
+> > +-        self.assertEquals('--enable-value', val.format('--enable-valu=
+e'))
+> > +-        self.assertEquals('--enable-value', val.format('--disable-val=
+ue'))
+> > +-        self.assertEquals('--value', val.format('--value'))
+> > +-        self.assertEquals('VALUE=3D1', val.format('VALUE'))
+> > ++        self.assertEqual('--with-value', val.format('--with-value'))
+> > ++        self.assertEqual('--with-value', val.format('--without-value'=
+))
+> > ++        self.assertEqual('--enable-value', val.format('--enable-value=
+'))
+> > ++        self.assertEqual('--enable-value', val.format('--disable-valu=
+e'))
+> > ++        self.assertEqual('--value', val.format('--value'))
+> > ++        self.assertEqual('VALUE=3D1', val.format('VALUE'))
+> > +
+> > +         val =3D PositiveOptionValue(('a',))
+> > +-        self.assertEquals('--with-value=3Da', val.format('--with-valu=
+e'))
+> > +-        self.assertEquals('--with-value=3Da', val.format('--without-v=
+alue'))
+> > +-        self.assertEquals('--enable-value=3Da', val.format('--enable-=
+value'))
+> > +-        self.assertEquals('--enable-value=3Da', val.format('--disable=
+-value'))
+> > +-        self.assertEquals('--value=3Da', val.format('--value'))
+> > +-        self.assertEquals('VALUE=3Da', val.format('VALUE'))
+> > ++        self.assertEqual('--with-value=3Da', val.format('--with-value=
+'))
+> > ++        self.assertEqual('--with-value=3Da', val.format('--without-va=
+lue'))
+> > ++        self.assertEqual('--enable-value=3Da', val.format('--enable-v=
+alue'))
+> > ++        self.assertEqual('--enable-value=3Da', val.format('--disable-=
+value'))
+> > ++        self.assertEqual('--value=3Da', val.format('--value'))
+> > ++        self.assertEqual('VALUE=3Da', val.format('VALUE'))
+> > +
+> > +         val =3D PositiveOptionValue(('a', 'b'))
+> > +-        self.assertEquals('--with-value=3Da,b', val.format('--with-va=
+lue'))
+> > +-        self.assertEquals('--with-value=3Da,b', val.format('--without=
+-value'))
+> > +-        self.assertEquals('--enable-value=3Da,b', val.format('--enabl=
+e-value'))
+> > +-        self.assertEquals('--enable-value=3Da,b', val.format('--disab=
+le-value'))
+> > +-        self.assertEquals('--value=3Da,b', val.format('--value'))
+> > +-        self.assertEquals('VALUE=3Da,b', val.format('VALUE'))
+> > ++        self.assertEqual('--with-value=3Da,b', val.format('--with-val=
+ue'))
+> > ++        self.assertEqual('--with-value=3Da,b', val.format('--without-=
+value'))
+> > ++        self.assertEqual('--enable-value=3Da,b', val.format('--enable=
+-value'))
+> > ++        self.assertEqual('--enable-value=3Da,b', val.format('--disabl=
+e-value'))
+> > ++        self.assertEqual('--value=3Da,b', val.format('--value'))
+> > ++        self.assertEqual('VALUE=3Da,b', val.format('VALUE'))
+> > +
+> > +         val =3D NegativeOptionValue()
+> > +-        self.assertEquals('--without-value', val.format('--with-value=
+'))
+> > +-        self.assertEquals('--without-value', val.format('--without-va=
+lue'))
+> > +-        self.assertEquals('--disable-value', val.format('--enable-val=
+ue'))
+> > +-        self.assertEquals('--disable-value', val.format('--disable-va=
+lue'))
+> > +-        self.assertEquals('', val.format('--value'))
+> > +-        self.assertEquals('VALUE=3D', val.format('VALUE'))
+> > ++        self.assertEqual('--without-value', val.format('--with-value'=
+))
+> > ++        self.assertEqual('--without-value', val.format('--without-val=
+ue'))
+> > ++        self.assertEqual('--disable-value', val.format('--enable-valu=
+e'))
+> > ++        self.assertEqual('--disable-value', val.format('--disable-val=
+ue'))
+> > ++        self.assertEqual('', val.format('--value'))
+> > ++        self.assertEqual('VALUE=3D', val.format('VALUE'))
+> > +
+> > +     def test_option_value(self, name=3D'option', nargs=3D0, default=
+=3DNone):
+> > +         disabled =3D name.startswith(('disable-', 'without-'))
+> > +@@ -359,28 +359,28 @@ class TestOption(unittest.TestCase):
+> > +
+> > +         if nargs in (0, '?', '*') or disabled:
+> > +             value =3D option.get_value('--%s' % name, 'option')
+> > +-            self.assertEquals(value, posOptionValue())
+> > +-            self.assertEquals(value.origin, 'option')
+> > ++            self.assertEqual(value, posOptionValue())
+> > ++            self.assertEqual(value.origin, 'option')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('--%s' % name)
+> > +             if nargs =3D=3D 1:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes 1 value' % name)
+> > +             elif nargs =3D=3D '+':
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes 1 or more values' % nam=
+e)
+> > +             else:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes 2 values' % name)
+> > +
+> > +         value =3D option.get_value('')
+> > +-        self.assertEquals(value, defaultValue)
+> > +-        self.assertEquals(value.origin, 'default')
+> > ++        self.assertEqual(value, defaultValue)
+> > ++        self.assertEqual(value.origin, 'default')
+> > +
+> > +         value =3D option.get_value(None)
+> > +-        self.assertEquals(value, defaultValue)
+> > +-        self.assertEquals(value.origin, 'default')
+> > ++        self.assertEqual(value, defaultValue)
+> > ++        self.assertEqual(value.origin, 'default')
+> > +
+> > +         with self.assertRaises(AssertionError):
+> > +             value =3D option.get_value('MOZ_OPTION=3D', 'environment'=
+)
+> > +@@ -393,47 +393,47 @@ class TestOption(unittest.TestCase):
+> > +
+> > +         if nargs in (1, '?', '*', '+') and not disabled:
+> > +             value =3D option.get_value('--%s=3D' % name, 'option')
+> > +-            self.assertEquals(value, PositiveOptionValue(('',)))
+> > +-            self.assertEquals(value.origin, 'option')
+> > ++            self.assertEqual(value, PositiveOptionValue(('',)))
+> > ++            self.assertEqual(value.origin, 'option')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('--%s=3D' % name)
+> > +             if disabled:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   'Cannot pass a value to --%s' % nam=
+e)
+> > +             else:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes %d values' % (name, nar=
+gs))
+> > +
+> > +         if nargs in (1, '?', '*', '+') and not disabled:
+> > +             value =3D option.get_value('--%s=3Dfoo' % name, 'option')
+> > +-            self.assertEquals(value, PositiveOptionValue(('foo',)))
+> > +-            self.assertEquals(value.origin, 'option')
+> > ++            self.assertEqual(value, PositiveOptionValue(('foo',)))
+> > ++            self.assertEqual(value.origin, 'option')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('--%s=3Dfoo' % name)
+> > +             if disabled:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   'Cannot pass a value to --%s' % nam=
+e)
+> > +             else:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes %d values' % (name, nar=
+gs))
+> > +
+> > +         if nargs in (2, '*', '+') and not disabled:
+> > +             value =3D option.get_value('--%s=3Dfoo,bar' % name, 'opti=
+on')
+> > +-            self.assertEquals(value, PositiveOptionValue(('foo', 'bar=
+')))
+> > +-            self.assertEquals(value.origin, 'option')
+> > ++            self.assertEqual(value, PositiveOptionValue(('foo', 'bar'=
+)))
+> > ++            self.assertEqual(value.origin, 'option')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('--%s=3Dfoo,bar' % name, 'option')
+> > +             if disabled:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   'Cannot pass a value to --%s' % nam=
+e)
+> > +             elif nargs =3D=3D '?':
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes 0 or 1 values' % name)
+> > +             else:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes %d value%s'
+> > +                                   % (name, nargs, 's' if nargs !=3D 1=
+ else ''))
+> > +
+> > +@@ -441,59 +441,59 @@ class TestOption(unittest.TestCase):
+> > +                         default=3Ddefault)
+> > +         if nargs in (0, '?', '*') or disabled:
+> > +             value =3D option.get_value('--%s' % name, 'option')
+> > +-            self.assertEquals(value, posOptionValue())
+> > +-            self.assertEquals(value.origin, 'option')
+> > ++            self.assertEqual(value, posOptionValue())
+> > ++            self.assertEqual(value.origin, 'option')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('--%s' % name)
+> > +             if disabled:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   'Cannot pass a value to --%s' % nam=
+e)
+> > +             elif nargs =3D=3D '+':
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes 1 or more values' % nam=
+e)
+> > +             else:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes %d value%s'
+> > +                                   % (name, nargs, 's' if nargs !=3D 1=
+ else ''))
+> > +
+> > +         value =3D option.get_value('')
+> > +-        self.assertEquals(value, defaultValue)
+> > +-        self.assertEquals(value.origin, 'default')
+> > ++        self.assertEqual(value, defaultValue)
+> > ++        self.assertEqual(value.origin, 'default')
+> > +
+> > +         value =3D option.get_value(None)
+> > +-        self.assertEquals(value, defaultValue)
+> > +-        self.assertEquals(value.origin, 'default')
+> > ++        self.assertEqual(value, defaultValue)
+> > ++        self.assertEqual(value.origin, 'default')
+> > +
+> > +         value =3D option.get_value('MOZ_OPTION=3D', 'environment')
+> > +-        self.assertEquals(value, NegativeOptionValue())
+> > +-        self.assertEquals(value.origin, 'environment')
+> > ++        self.assertEqual(value, NegativeOptionValue())
+> > ++        self.assertEqual(value.origin, 'environment')
+> > +
+> > +         if nargs in (0, '?', '*'):
+> > +             value =3D option.get_value('MOZ_OPTION=3D1', 'environment=
+')
+> > +-            self.assertEquals(value, PositiveOptionValue())
+> > +-            self.assertEquals(value.origin, 'environment')
+> > ++            self.assertEqual(value, PositiveOptionValue())
+> > ++            self.assertEqual(value.origin, 'environment')
+> > +         elif nargs in (1, '+'):
+> > +             value =3D option.get_value('MOZ_OPTION=3D1', 'environment=
+')
+> > +-            self.assertEquals(value, PositiveOptionValue(('1',)))
+> > +-            self.assertEquals(value.origin, 'environment')
+> > ++            self.assertEqual(value, PositiveOptionValue(('1',)))
+> > ++            self.assertEqual(value.origin, 'environment')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('MOZ_OPTION=3D1', 'environment')
+> > +-            self.assertEquals(e.exception.message, 'MOZ_OPTION takes =
+2 values')
+> > ++            self.assertEqual(e.exception.message, 'MOZ_OPTION takes 2=
+ values')
+> > +
+> > +         if nargs in (1, '?', '*', '+') and not disabled:
+> > +             value =3D option.get_value('--%s=3D' % name, 'option')
+> > +-            self.assertEquals(value, PositiveOptionValue(('',)))
+> > +-            self.assertEquals(value.origin, 'option')
+> > ++            self.assertEqual(value, PositiveOptionValue(('',)))
+> > ++            self.assertEqual(value.origin, 'option')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('--%s=3D' % name, 'option')
+> > +             if disabled:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   'Cannot pass a value to --%s' % nam=
+e)
+> > +             else:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s takes %d values' % (name, nar=
+gs))
+> > +
+> > +         with self.assertRaises(AssertionError):
+> > +@@ -501,26 +501,26 @@ class TestOption(unittest.TestCase):
+> > +
+> > +         if nargs in (1, '?', '*', '+'):
+> > +             value =3D option.get_value('MOZ_OPTION=3Dfoo', 'environme=
+nt')
+> > +-            self.assertEquals(value, PositiveOptionValue(('foo',)))
+> > +-            self.assertEquals(value.origin, 'environment')
+> > ++            self.assertEqual(value, PositiveOptionValue(('foo',)))
+> > ++            self.assertEqual(value.origin, 'environment')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('MOZ_OPTION=3Dfoo', 'environment')
+> > +-            self.assertEquals(e.exception.message,
+> > ++            self.assertEqual(e.exception.message,
+> > +                               'MOZ_OPTION takes %d values' % nargs)
+> > +
+> > +         if nargs in (2, '*', '+'):
+> > +             value =3D option.get_value('MOZ_OPTION=3Dfoo,bar', 'envir=
+onment')
+> > +-            self.assertEquals(value, PositiveOptionValue(('foo', 'bar=
+')))
+> > +-            self.assertEquals(value.origin, 'environment')
+> > ++            self.assertEqual(value, PositiveOptionValue(('foo', 'bar'=
+)))
+> > ++            self.assertEqual(value.origin, 'environment')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('MOZ_OPTION=3Dfoo,bar', 'environment=
+')
+> > +             if nargs =3D=3D '?':
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   'MOZ_OPTION takes 0 or 1 values')
+> > +             else:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   'MOZ_OPTION takes %d value%s'
+> > +                                   % (nargs, 's' if nargs !=3D 1 else =
+''))
+> > +
+> > +@@ -532,26 +532,26 @@ class TestOption(unittest.TestCase):
+> > +             env_option.get_value('--%s' % name)
+> > +
+> > +         value =3D env_option.get_value('')
+> > +-        self.assertEquals(value, defaultValue)
+> > +-        self.assertEquals(value.origin, 'default')
+> > ++        self.assertEqual(value, defaultValue)
+> > ++        self.assertEqual(value.origin, 'default')
+> > +
+> > +         value =3D env_option.get_value('MOZ_OPTION=3D', 'environment'=
+)
+> > +-        self.assertEquals(value, negOptionValue())
+> > +-        self.assertEquals(value.origin, 'environment')
+> > ++        self.assertEqual(value, negOptionValue())
+> > ++        self.assertEqual(value.origin, 'environment')
+> > +
+> > +         if nargs in (0, '?', '*'):
+> > +             value =3D env_option.get_value('MOZ_OPTION=3D1', 'environ=
+ment')
+> > +-            self.assertEquals(value, posOptionValue())
+> > ++            self.assertEqual(value, posOptionValue())
+> > +             self.assertTrue(value)
+> > +-            self.assertEquals(value.origin, 'environment')
+> > ++            self.assertEqual(value.origin, 'environment')
+> > +         elif nargs in (1, '+'):
+> > +             value =3D env_option.get_value('MOZ_OPTION=3D1', 'environ=
+ment')
+> > +-            self.assertEquals(value, PositiveOptionValue(('1',)))
+> > +-            self.assertEquals(value.origin, 'environment')
+> > ++            self.assertEqual(value, PositiveOptionValue(('1',)))
+> > ++            self.assertEqual(value.origin, 'environment')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 env_option.get_value('MOZ_OPTION=3D1', 'environment')
+> > +-            self.assertEquals(e.exception.message, 'MOZ_OPTION takes =
+2 values')
+> > ++            self.assertEqual(e.exception.message, 'MOZ_OPTION takes 2=
+ values')
+> > +
+> > +         with self.assertRaises(AssertionError) as e:
+> > +             env_option.get_value('--%s' % name)
+> > +@@ -561,26 +561,26 @@ class TestOption(unittest.TestCase):
+> > +
+> > +         if nargs in (1, '?', '*', '+'):
+> > +             value =3D env_option.get_value('MOZ_OPTION=3Dfoo', 'envir=
+onment')
+> > +-            self.assertEquals(value, PositiveOptionValue(('foo',)))
+> > +-            self.assertEquals(value.origin, 'environment')
+> > ++            self.assertEqual(value, PositiveOptionValue(('foo',)))
+> > ++            self.assertEqual(value.origin, 'environment')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 env_option.get_value('MOZ_OPTION=3Dfoo', 'environment=
+')
+> > +-            self.assertEquals(e.exception.message,
+> > ++            self.assertEqual(e.exception.message,
+> > +                               'MOZ_OPTION takes %d values' % nargs)
+> > +
+> > +         if nargs in (2, '*', '+'):
+> > +             value =3D env_option.get_value('MOZ_OPTION=3Dfoo,bar', 'e=
+nvironment')
+> > +-            self.assertEquals(value, PositiveOptionValue(('foo', 'bar=
+')))
+> > +-            self.assertEquals(value.origin, 'environment')
+> > ++            self.assertEqual(value, PositiveOptionValue(('foo', 'bar'=
+)))
+> > ++            self.assertEqual(value.origin, 'environment')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 env_option.get_value('MOZ_OPTION=3Dfoo,bar', 'environ=
+ment')
+> > +             if nargs =3D=3D '?':
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   'MOZ_OPTION takes 0 or 1 values')
+> > +             else:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   'MOZ_OPTION takes %d value%s'
+> > +                                   % (nargs, 's' if nargs !=3D 1 else =
+''))
+> > +
+> > +@@ -592,28 +592,28 @@ class TestOption(unittest.TestCase):
+> > +                                         default=3Ddefault)
+> > +
+> > +         value =3D option.get_value('--%s-option' % disable, 'option')
+> > +-        self.assertEquals(value, NegativeOptionValue())
+> > +-        self.assertEquals(value.origin, 'option')
+> > ++        self.assertEqual(value, NegativeOptionValue())
+> > ++        self.assertEqual(value.origin, 'option')
+> > +
+> > +         option =3D self.test_option_value('%s-option' % disable, narg=
+s=3Dnargs,
+> > +                                         default=3Ddefault)
+> > +
+> > +         if nargs in (0, '?', '*'):
+> > +             value =3D option.get_value('--%s-option' % enable, 'optio=
+n')
+> > +-            self.assertEquals(value, PositiveOptionValue())
+> > +-            self.assertEquals(value.origin, 'option')
+> > ++            self.assertEqual(value, PositiveOptionValue())
+> > ++            self.assertEqual(value.origin, 'option')
+> > +         else:
+> > +             with self.assertRaises(InvalidOptionError) as e:
+> > +                 option.get_value('--%s-option' % enable, 'option')
+> > +             if nargs =3D=3D 1:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s-option takes 1 value' % enabl=
+e)
+> > +             elif nargs =3D=3D '+':
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s-option takes 1 or more values=
+'
+> > +                                   % enable)
+> > +             else:
+> > +-                self.assertEquals(e.exception.message,
+> > ++                self.assertEqual(e.exception.message,
+> > +                                   '--%s-option takes 2 values' % enab=
+le)
+> > +
+> > +     def test_option_value_with(self):
+> > +@@ -622,12 +622,12 @@ class TestOption(unittest.TestCase):
+> > +     def test_option_value_invalid_nargs(self):
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D'foo')
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "nargs must be a positive integer, '?', '*'=
+ or '+'")
+> > +
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--option', nargs=3D-2)
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "nargs must be a positive integer, '?', '*'=
+ or '+'")
+> > +
+> > +     def test_option_value_nargs_1(self):
+> > +@@ -638,7 +638,7 @@ class TestOption(unittest.TestCase):
+> > +         # A default is required
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--disable-option', nargs=3D1)
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +     def test_option_value_nargs_2(self):
+> > +@@ -649,7 +649,7 @@ class TestOption(unittest.TestCase):
+> > +         # A default is required
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--disable-option', nargs=3D2)
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +     def test_option_value_nargs_0_or_1(self):
+> > +@@ -676,7 +676,7 @@ class TestOption(unittest.TestCase):
+> > +         # A default is required
+> > +         with self.assertRaises(InvalidOptionError) as e:
+> > +             Option('--disable-option', nargs=3D'+')
+> > +-        self.assertEquals(e.exception.message,
+> > ++        self.assertEqual(e.exception.message,
+> > +                           "The given `default` doesn't satisfy `nargs=
+`")
+> > +
+> > +
+> > +@@ -684,21 +684,21 @@ class TestCommandLineHelper(unittest.TestCase):
+> > +     def test_basic(self):
+> > +         helper =3D CommandLineHelper({}, ['cmd', '--foo', '--bar'])
+> > +
+> > +-        self.assertEquals(['--foo', '--bar'], list(helper))
+> > ++        self.assertEqual(['--foo', '--bar'], list(helper))
+> > +
+> > +         helper.add('--enable-qux')
+> > +
+> > +-        self.assertEquals(['--foo', '--bar', '--enable-qux'], list(he=
+lper))
+> > ++        self.assertEqual(['--foo', '--bar', '--enable-qux'], list(hel=
+per))
+> > +
+> > +         value, option =3D helper.handle(Option('--bar'))
+> > +-        self.assertEquals(['--foo', '--enable-qux'], list(helper))
+> > +-        self.assertEquals(PositiveOptionValue(), value)
+> > +-        self.assertEquals('--bar', option)
+> > ++        self.assertEqual(['--foo', '--enable-qux'], list(helper))
+> > ++        self.assertEqual(PositiveOptionValue(), value)
+> > ++        self.assertEqual('--bar', option)
+> > +
+> > +         value, option =3D helper.handle(Option('--baz'))
+> > +-        self.assertEquals(['--foo', '--enable-qux'], list(helper))
+> > +-        self.assertEquals(NegativeOptionValue(), value)
+> > +-        self.assertEquals(None, option)
+> > ++        self.assertEqual(['--foo', '--enable-qux'], list(helper))
+> > ++        self.assertEqual(NegativeOptionValue(), value)
+> > ++        self.assertEqual(None, option)
+> > +
+> > +         with self.assertRaises(AssertionError):
+> > +             CommandLineHelper({}, ['--foo', '--bar'])
+> > +@@ -707,89 +707,89 @@ class TestCommandLineHelper(unittest.TestCase):
+> > +         foo =3D Option('--with-foo', nargs=3D'*')
+> > +         helper =3D CommandLineHelper({}, ['cmd', '--with-foo=3Da,b'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b')), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('--with-foo=3Da,b', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b')), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('--with-foo=3Da,b', option)
+> > +
+> > +         helper =3D CommandLineHelper({}, ['cmd', '--with-foo=3Da,b',
+> > +                                         '--without-foo'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(NegativeOptionValue(), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('--without-foo', option)
+> > ++        self.assertEqual(NegativeOptionValue(), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('--without-foo', option)
+> > +
+> > +         helper =3D CommandLineHelper({}, ['cmd', '--without-foo',
+> > +                                         '--with-foo=3Da,b'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b')), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('--with-foo=3Da,b', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b')), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('--with-foo=3Da,b', option)
+> > +
+> > +         foo =3D Option('--with-foo', env=3D'FOO', nargs=3D'*')
+> > +         helper =3D CommandLineHelper({'FOO': ''}, ['cmd', '--with-foo=
+=3Da,b'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b')), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('--with-foo=3Da,b', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b')), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('--with-foo=3Da,b', option)
+> > +
+> > +         helper =3D CommandLineHelper({'FOO': 'a,b'}, ['cmd', '--witho=
+ut-foo'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(NegativeOptionValue(), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('--without-foo', option)
+> > ++        self.assertEqual(NegativeOptionValue(), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('--without-foo', option)
+> > +
+> > +         helper =3D CommandLineHelper({'FOO': ''}, ['cmd', '--with-bar=
+=3Da,b'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(NegativeOptionValue(), value)
+> > +-        self.assertEquals('environment', value.origin)
+> > +-        self.assertEquals('FOO=3D', option)
+> > ++        self.assertEqual(NegativeOptionValue(), value)
+> > ++        self.assertEqual('environment', value.origin)
+> > ++        self.assertEqual('FOO=3D', option)
+> > +
+> > +         helper =3D CommandLineHelper({'FOO': 'a,b'}, ['cmd', '--witho=
+ut-bar'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b')), value)
+> > +-        self.assertEquals('environment', value.origin)
+> > +-        self.assertEquals('FOO=3Da,b', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b')), value)
+> > ++        self.assertEqual('environment', value.origin)
+> > ++        self.assertEqual('FOO=3Da,b', option)
+> > +
+> > +         helper =3D CommandLineHelper({}, ['cmd', '--with-foo=3Da,b', =
+'FOO=3D'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(NegativeOptionValue(), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('FOO=3D', option)
+> > ++        self.assertEqual(NegativeOptionValue(), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('FOO=3D', option)
+> > +
+> > +         helper =3D CommandLineHelper({}, ['cmd', '--without-foo', 'FO=
+O=3Da,b'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b')), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('FOO=3Da,b', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b')), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('FOO=3Da,b', option)
+> > +
+> > +         helper =3D CommandLineHelper({}, ['cmd', 'FOO=3D', '--with-fo=
+o=3Da,b'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b')), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('--with-foo=3Da,b', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b')), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('--with-foo=3Da,b', option)
+> > +
+> > +         helper =3D CommandLineHelper({}, ['cmd', 'FOO=3Da,b', '--with=
+out-foo'])
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(NegativeOptionValue(), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('--without-foo', option)
+> > ++        self.assertEqual(NegativeOptionValue(), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('--without-foo', option)
+> > +
+> > +     def test_extra_args(self):
+> > +         foo =3D Option('--with-foo', env=3D'FOO', nargs=3D'*')
+> > +         helper =3D CommandLineHelper({}, ['cmd'])
+> > +         helper.add('FOO=3Da,b,c', 'other-origin')
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b', 'c')), value=
+)
+> > +-        self.assertEquals('other-origin', value.origin)
+> > +-        self.assertEquals('FOO=3Da,b,c', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b', 'c')), value)
+> > ++        self.assertEqual('other-origin', value.origin)
+> > ++        self.assertEqual('FOO=3Da,b,c', option)
+> > +
+> > +         helper =3D CommandLineHelper({}, ['cmd'])
+> > +         helper.add('FOO=3Da,b,c', 'other-origin')
+> > +         helper.add('--with-foo=3Da,b,c', 'other-origin')
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b', 'c')), value=
+)
+> > +-        self.assertEquals('other-origin', value.origin)
+> > +-        self.assertEquals('--with-foo=3Da,b,c', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b', 'c')), value)
+> > ++        self.assertEqual('other-origin', value.origin)
+> > ++        self.assertEqual('--with-foo=3Da,b,c', option)
+> > +
+> > +         # Adding conflicting options is not allowed.
+> > +         helper =3D CommandLineHelper({}, ['cmd'])
+> > +@@ -809,9 +809,9 @@ class TestCommandLineHelper(unittest.TestCase):
+> > +         # But adding the same is allowed.
+> > +         helper.add('FOO=3Da,b,c', 'other-origin')
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b', 'c')), value=
+)
+> > +-        self.assertEquals('other-origin', value.origin)
+> > +-        self.assertEquals('FOO=3Da,b,c', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b', 'c')), value)
+> > ++        self.assertEqual('other-origin', value.origin)
+> > ++        self.assertEqual('FOO=3Da,b,c', option)
+> > +
+> > +         # The same rule as above applies when using the option form v=
+s. the
+> > +         # variable form. But we can't detect it when .add is called.
+> > +@@ -837,9 +837,9 @@ class TestCommandLineHelper(unittest.TestCase):
+> > +         helper.add('FOO=3Da,b,c', 'other-origin')
+> > +         helper.add('--with-foo=3Da,b,c', 'other-origin')
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(('a', 'b', 'c')), value=
+)
+> > +-        self.assertEquals('other-origin', value.origin)
+> > +-        self.assertEquals('--with-foo=3Da,b,c', option)
+> > ++        self.assertEqual(PositiveOptionValue(('a', 'b', 'c')), value)
+> > ++        self.assertEqual('other-origin', value.origin)
+> > ++        self.assertEqual('--with-foo=3Da,b,c', option)
+> > +
+> > +         # Conflicts are also not allowed against what is in the
+> > +         # environment/on the command line.
+> > +@@ -869,19 +869,19 @@ class TestCommandLineHelper(unittest.TestCase):
+> > +         foo =3D Option('--foo',
+> > +                      possible_origins=3D('command-line',))
+> > +         value, option =3D helper.handle(foo)
+> > +-        self.assertEquals(PositiveOptionValue(), value)
+> > +-        self.assertEquals('command-line', value.origin)
+> > +-        self.assertEquals('--foo', option)
+> > ++        self.assertEqual(PositiveOptionValue(), value)
+> > ++        self.assertEqual('command-line', value.origin)
+> > ++        self.assertEqual('--foo', option)
+> > +
+> > +         bar =3D Option('--bar',
+> > +                      possible_origins=3D('mozconfig',))
+> > +-        with self.assertRaisesRegexp(InvalidOptionError,
+> > ++        with self.assertRaisesRegex(InvalidOptionError,
+> > +             "--bar can not be set by command-line. Values are accepte=
+d from: mozconfig"):
+> > +             helper.handle(bar)
+> > +
+> > +         baz =3D Option(env=3D'BAZ',
+> > +                      possible_origins=3D('implied',))
+> > +-        with self.assertRaisesRegexp(InvalidOptionError,
+> > ++        with self.assertRaisesRegex(InvalidOptionError,
+> > +             "BAZ=3D1 can not be set by environment. Values are accept=
+ed from: implied"):
+> > +             helper.handle(baz)
+> > +
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_toolchain_co=
+nfigure.py b/python/mozbuild/mozbuild/test/configure/test_toolchain_configu=
+re.py
+> > +index cb7ff709e..c339a32bf 100755
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_toolchain_configure=
+.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_toolchain_configure=
+.py
+> > +@@ -2,12 +2,12 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import logging
+> > + import os
+> > +
+> > +-from StringIO import StringIO
+> > ++from io import StringIO
+> > +
+> > + from mozunit import main
+> > +
+> > +@@ -366,9 +366,9 @@ class BaseToolchainTest(BaseConfigureTest):
+> > +                 compiler =3D sandbox._value_for(sandbox[var])
+> > +                 # Add var on both ends to make it clear which of the
+> > +                 # variables is failing the test when that happens.
+> > +-                self.assertEquals((var, compiler), (var, result))
+> > ++                self.assertEqual((var, compiler), (var, result))
+> > +             except SystemExit:
+> > +-                self.assertEquals((var, result),
+> > ++                self.assertEqual((var, result),
+> > +                                   (var, self.out.getvalue().strip()))
+> > +                 return
+> > +
+> > +@@ -407,7 +407,7 @@ class BaseToolchainTest(BaseConfigureTest):
+> > +             'RUST_LIB_SUFFIX',
+> > +             'OBJ_SUFFIX',
+> > +         ):
+> > +-            self.assertEquals('%s=3D%s' % (k, sandbox.get_config(k)),
+> > ++            self.assertEqual('%s=3D%s' % (k, sandbox.get_config(k)),
+> > +                               '%s=3D%s' % (k, library_name_info[k]))
+> > +
+> > +
+> > +@@ -584,7 +584,7 @@ class LinuxToolchainTest(BaseToolchainTest):
+> > +         # We'll try gcc and clang, but since there is no gcc (gcc-x.y=
+ doesn't
+> > +         # count), find clang.
+> > +         paths =3D {
+> > +-            k: v for k, v in self.PATHS.iteritems()
+> > ++            k: v for k, v in self.PATHS.items()
+> > +             if os.path.basename(k) not in ('gcc', 'g++')
+> > +         }
+> > +         self.do_toolchain_test(paths, {
+> > +@@ -619,7 +619,7 @@ class LinuxToolchainTest(BaseToolchainTest):
+> > +         # Even if there are gcc-x.y or clang-x.y compilers available,=
+ we
+> > +         # don't try them. This could be considered something to impro=
+ve.
+> > +         paths =3D {
+> > +-            k: v for k, v in self.PATHS.iteritems()
+> > ++            k: v for k, v in self.PATHS.items()
+> > +             if os.path.basename(k) not in ('gcc', 'g++', 'clang', 'cl=
+ang++')
+> > +         }
+> > +         self.do_toolchain_test(paths, {
+> > +@@ -800,7 +800,7 @@ class OSXToolchainTest(BaseToolchainTest):
+> > +     def test_not_gcc(self):
+> > +         # We won't pick GCC if it's the only thing available.
+> > +         paths =3D {
+> > +-            k: v for k, v in self.PATHS.iteritems()
+> > ++            k: v for k, v in self.PATHS.items()
+> > +             if os.path.basename(k) not in ('clang', 'clang++')
+> > +         }
+> > +         self.do_toolchain_test(paths, {
+> > +@@ -976,7 +976,7 @@ class WindowsToolchainTest(BaseToolchainTest):
+> > +     def test_clang_cl(self):
+> > +         # We'll pick clang-cl if msvc can't be found.
+> > +         paths =3D {
+> > +-            k: v for k, v in self.PATHS.iteritems()
+> > ++            k: v for k, v in self.PATHS.items()
+> > +             if os.path.basename(k) !=3D 'cl'
+> > +         }
+> > +         self.do_toolchain_test(paths, {
+> > +@@ -987,7 +987,7 @@ class WindowsToolchainTest(BaseToolchainTest):
+> > +     def test_gcc(self):
+> > +         # We'll pick GCC if msvc and clang-cl can't be found.
+> > +         paths =3D {
+> > +-            k: v for k, v in self.PATHS.iteritems()
+> > ++            k: v for k, v in self.PATHS.items()
+> > +             if os.path.basename(k) not in ('cl', 'clang-cl')
+> > +         }
+> > +         self.do_toolchain_test(paths, {
+> > +@@ -1006,7 +1006,7 @@ class WindowsToolchainTest(BaseToolchainTest):
+> > +     def test_clang(self):
+> > +         # We'll pick clang if nothing else is found.
+> > +         paths =3D {
+> > +-            k: v for k, v in self.PATHS.iteritems()
+> > ++            k: v for k, v in self.PATHS.items()
+> > +             if os.path.basename(k) not in ('cl', 'clang-cl', 'gcc')
+> > +         }
+> > +         self.do_toolchain_test(paths, {
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_toolchain_he=
+lpers.py b/python/mozbuild/mozbuild/test/configure/test_toolchain_helpers.p=
+y
+> > +index 8ec33a8b7..ba046ed12 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_toolchain_helpers.p=
+y
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_toolchain_helpers.p=
+y
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import copy
+> > + import re
+> > +@@ -10,7 +10,7 @@ import types
+> > + import unittest
+> > +
+> > + from fnmatch import fnmatch
+> > +-from StringIO import StringIO
+> > ++from io import StringIO
+> > + from textwrap import dedent
+> > +
+> > + from mozunit import (
+> > +@@ -43,7 +43,7 @@ class CompilerPreprocessor(Preprocessor):
+> > +         # Hack around it enough that the configure tests work properl=
+y.
+> > +         context =3D self.context
+> > +         def normalize_numbers(value):
+> > +-            if isinstance(value, types.StringTypes):
+> > ++            if isinstance(value, (str,)):
+> > +                 if value[-1:] =3D=3D 'L' and value[:-1].isdigit():
+> > +                     value =3D int(value[:-1])
+> > +             return value
+> > +@@ -53,7 +53,7 @@ class CompilerPreprocessor(Preprocessor):
+> > +             return self.HAS_FEATURE.sub(r'\1\2', expr)
+> > +         self.context =3D self.Context(
+> > +             (normalize_has_feature(k), normalize_numbers(v))
+> > +-            for k, v in context.iteritems()
+> > ++            for k, v in context.items()
+> > +         )
+> > +         try:
+> > +             return Preprocessor.do_if(self, normalize_has_feature(exp=
+ression),
+> > +@@ -95,7 +95,7 @@ class TestCompilerPreprocessor(unittest.TestCase):
+> > +         input.name =3D 'foo'
+> > +         pp.do_include(input)
+> > +
+> > +-        self.assertEquals(pp.out.getvalue(), '1 . 2 . c "D"')
+> > ++        self.assertEqual(pp.out.getvalue(), '1 . 2 . c "D"')
+> > +
+> > +     def test_condition(self):
+> > +         pp =3D CompilerPreprocessor({
+> > +@@ -125,7 +125,7 @@ class TestCompilerPreprocessor(unittest.TestCase):
+> > +         input.name =3D 'foo'
+> > +         pp.do_include(input)
+> > +
+> > +-        self.assertEquals('IFDEF_A\nIF_A\nIF_B\nIF_NOT_C\n', pp.out.g=
+etvalue())
+> > ++        self.assertEqual('IFDEF_A\nIF_A\nIF_B\nIF_NOT_C\n', pp.out.ge=
+tvalue())
+> > +
+> > +
+> > + class FakeCompiler(dict):
+> > +@@ -164,9 +164,9 @@ class FakeCompiler(dict):
+> > +     '''
+> > +     def __init__(self, *definitions):
+> > +         for definition in definitions:
+> > +-            if all(not isinstance(d, dict) for d in definition.iterva=
+lues()):
+> > ++            if all(not isinstance(d, dict) for d in definition.values=
+()):
+> > +                 definition =3D {None: definition}
+> > +-            for key, value in definition.iteritems():
+> > ++            for key, value in definition.items():
+> > +                 self.setdefault(key, {}).update(value)
+> > +
+> > +     def __call__(self, stdin, args):
+> > +@@ -178,14 +178,14 @@ class FakeCompiler(dict):
+> > +             pp =3D CompilerPreprocessor(self[None])
+> > +
+> > +             def apply_defn(defn):
+> > +-                for k, v in defn.iteritems():
+> > ++                for k, v in defn.items():
+> > +                     if v is False:
+> > +                         if k in pp.context:
+> > +                             del pp.context[k]
+> > +                     else:
+> > +                         pp.context[k] =3D v
+> > +
+> > +-            for glob, defn in self.iteritems():
+> > ++            for glob, defn in self.items():
+> > +                 if glob and not glob.startswith('-') and fnmatch(file=
+, glob):
+> > +                     apply_defn(defn)
+> > +
+> > +@@ -216,7 +216,7 @@ class TestFakeCompiler(unittest.TestCase):
+> > +                 'A': '1',
+> > +                 'B': '2',
+> > +             })
+> > +-            self.assertEquals(compiler(None, ['-E', 'file']),
+> > ++            self.assertEqual(compiler(None, ['-E', 'file']),
+> > +                               (0, '1 2 C', ''))
+> > +
+> > +             compiler =3D FakeCompiler({
+> > +@@ -238,25 +238,25 @@ class TestFakeCompiler(unittest.TestCase):
+> > +                     'B': '42',
+> > +                 },
+> > +             })
+> > +-            self.assertEquals(compiler(None, ['-E', 'file']),
+> > ++            self.assertEqual(compiler(None, ['-E', 'file']),
+> > +                               (0, '1 2 C', ''))
+> > +-            self.assertEquals(compiler(None, ['-E', '-foo', 'file']),
+> > ++            self.assertEqual(compiler(None, ['-E', '-foo', 'file']),
+> > +                               (0, '1 2 foo', ''))
+> > +-            self.assertEquals(compiler(None, ['-E', '-bar', 'file']),
+> > ++            self.assertEqual(compiler(None, ['-E', '-bar', 'file']),
+> > +                               (0, '1 bar bar', ''))
+> > +-            self.assertEquals(compiler(None, ['-E', '-qux', 'file']),
+> > ++            self.assertEqual(compiler(None, ['-E', '-qux', 'file']),
+> > +                               (0, '1 B C', ''))
+> > +-            self.assertEquals(compiler(None, ['-E', '-foo', '-bar', '=
+file']),
+> > ++            self.assertEqual(compiler(None, ['-E', '-foo', '-bar', 'f=
+ile']),
+> > +                               (0, '1 bar bar', ''))
+> > +-            self.assertEquals(compiler(None, ['-E', '-bar', '-foo', '=
+file']),
+> > ++            self.assertEqual(compiler(None, ['-E', '-bar', '-foo', 'f=
+ile']),
+> > +                               (0, '1 bar foo', ''))
+> > +-            self.assertEquals(compiler(None, ['-E', '-bar', '-qux', '=
+file']),
+> > ++            self.assertEqual(compiler(None, ['-E', '-bar', '-qux', 'f=
+ile']),
+> > +                               (0, '1 B bar', ''))
+> > +-            self.assertEquals(compiler(None, ['-E', '-qux', '-bar', '=
+file']),
+> > ++            self.assertEqual(compiler(None, ['-E', '-qux', '-bar', 'f=
+ile']),
+> > +                               (0, '1 bar bar', ''))
+> > +-            self.assertEquals(compiler(None, ['-E', 'file.c']),
+> > ++            self.assertEqual(compiler(None, ['-E', 'file.c']),
+> > +                               (0, '1 42 C', ''))
+> > +-            self.assertEquals(compiler(None, ['-E', '-bar', 'file.c']=
+),
+> > ++            self.assertEqual(compiler(None, ['-E', '-bar', 'file.c'])=
+,
+> > +                               (0, '1 bar bar', ''))
+> > +
+> > +     def test_multiple_definitions(self):
+> > +@@ -267,7 +267,7 @@ class TestFakeCompiler(unittest.TestCase):
+> > +             'C': 3,
+> > +         })
+> > +
+> > +-        self.assertEquals(compiler, {
+> > ++        self.assertEqual(compiler, {
+> > +             None: {
+> > +                 'A': 1,
+> > +                 'B': 2,
+> > +@@ -282,7 +282,7 @@ class TestFakeCompiler(unittest.TestCase):
+> > +             'C': 3,
+> > +         })
+> > +
+> > +-        self.assertEquals(compiler, {
+> > ++        self.assertEqual(compiler, {
+> > +             None: {
+> > +                 'A': 1,
+> > +                 'B': 4,
+> > +@@ -302,7 +302,7 @@ class TestFakeCompiler(unittest.TestCase):
+> > +             },
+> > +         })
+> > +
+> > +-        self.assertEquals(compiler, {
+> > ++        self.assertEqual(compiler, {
+> > +             None: {
+> > +                 'A': 1,
+> > +                 'B': 4,
+> > +@@ -330,7 +330,7 @@ class TestFakeCompiler(unittest.TestCase):
+> > +             },
+> > +         })
+> > +
+> > +-        self.assertEquals(compiler, {
+> > ++        self.assertEqual(compiler, {
+> > +             None: {
+> > +                 'A': 1,
+> > +                 'B': 2,
+> > +@@ -370,7 +370,7 @@ class CompilerResult(ReadOnlyNamespace):
+> > +     def __add__(self, other):
+> > +         assert isinstance(other, dict)
+> > +         result =3D copy.deepcopy(self.__dict__)
+> > +-        for k, v in other.iteritems():
+> > ++        for k, v in other.items():
+> > +             if k =3D=3D 'flags':
+> > +                 result.setdefault(k, []).extend(v)
+> > +             else:
+> > +@@ -381,7 +381,7 @@ class CompilerResult(ReadOnlyNamespace):
+> > + class TestCompilerResult(unittest.TestCase):
+> > +     def test_compiler_result(self):
+> > +         result =3D CompilerResult()
+> > +-        self.assertEquals(result.__dict__, {
+> > ++        self.assertEqual(result.__dict__, {
+> > +             'wrapper': [],
+> > +             'compiler': mozpath.abspath(''),
+> > +             'version': '',
+> > +@@ -397,7 +397,7 @@ class TestCompilerResult(unittest.TestCase):
+> > +             language=3D'C',
+> > +             flags=3D['-std=3Dgnu99'],
+> > +         )
+> > +-        self.assertEquals(result.__dict__, {
+> > ++        self.assertEqual(result.__dict__, {
+> > +             'wrapper': [],
+> > +             'compiler': mozpath.abspath('/usr/bin/gcc'),
+> > +             'version': '4.2.1',
+> > +@@ -407,7 +407,7 @@ class TestCompilerResult(unittest.TestCase):
+> > +         })
+> > +
+> > +         result2 =3D result + {'flags': ['-m32']}
+> > +-        self.assertEquals(result2.__dict__, {
+> > ++        self.assertEqual(result2.__dict__, {
+> > +             'wrapper': [],
+> > +             'compiler': mozpath.abspath('/usr/bin/gcc'),
+> > +             'version': '4.2.1',
+> > +@@ -416,14 +416,14 @@ class TestCompilerResult(unittest.TestCase):
+> > +             'flags': ['-std=3Dgnu99', '-m32'],
+> > +         })
+> > +         # Original flags are untouched.
+> > +-        self.assertEquals(result.flags, ['-std=3Dgnu99'])
+> > ++        self.assertEqual(result.flags, ['-std=3Dgnu99'])
+> > +
+> > +         result3 =3D result + {
+> > +             'compiler': '/usr/bin/gcc-4.7',
+> > +             'version': '4.7.3',
+> > +             'flags': ['-m32'],
+> > +         }
+> > +-        self.assertEquals(result3.__dict__, {
+> > ++        self.assertEqual(result3.__dict__, {
+> > +             'wrapper': [],
+> > +             'compiler': mozpath.abspath('/usr/bin/gcc-4.7'),
+> > +             'version': '4.7.3',
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_toolkit_moz_=
+configure.py b/python/mozbuild/mozbuild/test/configure/test_toolkit_moz_con=
+figure.py
+> > +index ac35d745f..cdd8ece1b 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_toolkit_moz_configu=
+re.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_toolkit_moz_configu=
+re.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import os
+> > +
+> > +diff --git a/python/mozbuild/mozbuild/test/configure/test_util.py b/py=
+thon/mozbuild/mozbuild/test/configure/test_util.py
+> > +index 9f9575fd0..c2db1a628 100644
+> > +--- a/python/mozbuild/mozbuild/test/configure/test_util.py
+> > ++++ b/python/mozbuild/mozbuild/test/configure/test_util.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function, unicode_liter=
+als
+> > ++
+> > +
+> > + import logging
+> > + import os
+> > +@@ -11,7 +11,7 @@ import textwrap
+> > + import unittest
+> > + import sys
+> > +
+> > +-from StringIO import StringIO
+> > ++from io import StringIO
+> > +
+> > + from mozunit import main
+> > + from mozpack import path as mozpath
+> > +@@ -434,11 +434,11 @@ class TestLogSubprocessOutput(unittest.TestCase)=
+:
+> > +         except SystemExit as e:
+> > +             status =3D e.code
+> > +
+> > +-        self.assertEquals(status, 0)
+> > ++        self.assertEqual(status, 0)
+> > +         quote_char =3D "'"
+> > +         if getpreferredencoding().lower() =3D=3D 'utf-8':
+> > +             quote_char =3D '\u00B4'.encode('utf-8')
+> > +-        self.assertEquals(out.getvalue().strip(), quote_char)
+> > ++        self.assertEqual(out.getvalue().strip(), quote_char)
+> > +
+> > +
+> > + class TestVersion(unittest.TestCase):
+> > +diff --git a/python/mozbuild/mozbuild/testing.py b/python/mozbuild/moz=
+build/testing.py
+> > +index 3229c3f77..82d250fab 100644
+> > +--- a/python/mozbuild/mozbuild/testing.py
+> > ++++ b/python/mozbuild/mozbuild/testing.py
+> > +@@ -2,9 +2,9 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > +
+> > +-import cPickle as pickle
+> > ++
+> > ++import pickle as pickle
+> > + import os
+> > + import sys
+> > +
+> > +@@ -70,7 +70,7 @@ REFTEST_FLAVORS =3D ('crashtest', 'reftest')
+> > + WEB_PLATFORM_TESTS_FLAVORS =3D ('web-platform-tests',)
+> > +
+> > + def all_test_flavors():
+> > +-    return ([v[0] for v in TEST_MANIFESTS.values()] +
+> > ++    return ([v[0] for v in list(TEST_MANIFESTS.values())] +
+> > +             list(REFTEST_FLAVORS) +
+> > +             list(WEB_PLATFORM_TESTS_FLAVORS))
+> > +
+> > +@@ -210,7 +210,7 @@ def install_test_files(topsrcdir, topobjdir, tests=
+_root, test_objs):
+> > +     only a few tests need to be run.
+> > +     """
+> > +     flavor_info =3D {flavor: (root, prefix, install)
+> > +-                   for (flavor, root, prefix, install) in TEST_MANIFE=
+STS.values()}
+> > ++                   for (flavor, root, prefix, install) in list(TEST_M=
+ANIFESTS.values())}
+> > +     objdir_dest =3D mozpath.join(topobjdir, tests_root)
+> > +
+> > +     converter =3D SupportFilesConverter()
+> > +@@ -292,7 +292,7 @@ def read_wpt_manifest(context, paths):
+> > +         paths_file =3D os.path.join(context.config.topsrcdir, "testin=
+g",
+> > +                                   "web-platform", "tests", "tools", "=
+localpaths.py")
+> > +         _globals =3D {"__file__": paths_file}
+> > +-        execfile(paths_file, _globals)
+> > ++        exec(compile(open(paths_file, "rb").read(), paths_file, 'exec=
+'), _globals)
+> > +         import manifest as wptmanifest
+> > +     finally:
+> > +         sys.path =3D old_path
+> > +diff --git a/python/mozbuild/mozbuild/util.py b/python/mozbuild/mozbui=
+ld/util.py
+> > +index 4ea227dc0..79cb15713 100644
+> > +--- a/python/mozbuild/mozbuild/util.py
+> > ++++ b/python/mozbuild/mozbuild/util.py
+> > +@@ -5,7 +5,7 @@
+> > + # This file contains miscellaneous utility functions that don't belon=
+g anywhere
+> > + # in particular.
+> > +
+> > +-from __future__ import absolute_import, unicode_literals, print_funct=
+ion
+> > ++
+> > +
+> > + import argparse
+> > + import collections
+> > +@@ -21,6 +21,9 @@ import stat
+> > + import sys
+> > + import time
+> > + import types
+> > ++import pprint
+> > ++import six
+> > ++import subprocess
+> > +
+> > + from collections import (
+> > +     defaultdict,
+> > +@@ -36,7 +39,7 @@ from io import (
+> > + if sys.version_info[0] =3D=3D 3:
+> > +     str_type =3D str
+> > + else:
+> > +-    str_type =3D basestring
+> > ++    str_type =3D str
+> > +
+> > + if sys.platform =3D=3D 'win32':
+> > +     _kernel32 =3D ctypes.windll.kernel32
+> > +@@ -78,7 +81,7 @@ def hash_file(path, hasher=3DNone):
+> > +     return h.hexdigest()
+> > +
+> > +
+> > +-class EmptyValue(unicode):
+> > ++class EmptyValue(str):
+> > +     """A dummy type that behaves like an empty string and sequence.
+> > +
+> > +     This type exists in order to support
+> > +@@ -92,7 +95,7 @@ class EmptyValue(unicode):
+> > + class ReadOnlyNamespace(object):
+> > +     """A class for objects with immutable attributes set at initializ=
+ation."""
+> > +     def __init__(self, **kwargs):
+> > +-        for k, v in kwargs.iteritems():
+> > ++        for k, v in kwargs.items():
+> > +             super(ReadOnlyNamespace, self).__setattr__(k, v)
+> > +
+> > +     def __delattr__(self, key):
+> > +@@ -224,7 +227,7 @@ class FileAvoidWrite(BytesIO):
+> > +         self.mode =3D mode
+> > +
+> > +     def write(self, buf):
+> > +-        if isinstance(buf, unicode):
+> > ++        if isinstance(buf, str):
+> > +             buf =3D buf.encode('utf-8')
+> > +         BytesIO.write(self, buf)
+> > +
+> > +@@ -267,6 +270,10 @@ class FileAvoidWrite(BytesIO):
+> > +             if 'b' in self.mode:
+> > +                 writemode +=3D 'b'
+> > +             with open(self.name, writemode) as file:
+> > ++                if 'b' in self.mode and isinstance(buf, str):
+> > ++                    buf =3D buf.encode('utf-8')
+> > ++                elif 'b' not in self.mode and isinstance(buf, bytes):
+> > ++                    buf =3D buf.decode('utf-8')
+> > +                 file.write(buf)
+> > +
+> > +         if self._capture_diff:
+> > +@@ -381,7 +388,7 @@ class ListMixin(object):
+> > +     def __add__(self, other):
+> > +         # Allow None and EmptyValue is a special case because it make=
+s undefined
+> > +         # variable references in moz.build behave better.
+> > +-        other =3D [] if isinstance(other, (types.NoneType, EmptyValue=
+)) else other
+> > ++        other =3D [] if isinstance(other, (type(None), EmptyValue)) e=
+lse other
+> > +         if not isinstance(other, list):
+> > +             raise ValueError('Only lists can be appended to lists.')
+> > +
+> > +@@ -390,7 +397,7 @@ class ListMixin(object):
+> > +         return new_list
+> > +
+> > +     def __iadd__(self, other):
+> > +-        other =3D [] if isinstance(other, (types.NoneType, EmptyValue=
+)) else other
+> > ++        other =3D [] if isinstance(other, (type(None), EmptyValue)) e=
+lse other
+> > +         if not isinstance(other, list):
+> > +             raise ValueError('Only lists can be appended to lists.')
+> > +
+> > +@@ -561,14 +568,14 @@ def FlagsFactory(flags):
+> > +     functions below.
+> > +     """
+> > +     assert isinstance(flags, dict)
+> > +-    assert all(isinstance(v, type) for v in flags.values())
+> > ++    assert all(isinstance(v, type) for v in list(flags.values()))
+> > +
+> > +     class Flags(object):
+> > +-        __slots__ =3D flags.keys()
+> > ++        __slots__ =3D list(flags.keys())
+> > +         _flags =3D flags
+> > +
+> > +         def update(self, **kwargs):
+> > +-            for k, v in kwargs.iteritems():
+> > ++            for k, v in kwargs.items():
+> > +                 setattr(self, k, v)
+> > +
+> > +         def __getattr__(self, name):
+> > +@@ -1006,8 +1013,6 @@ def TypedNamedTuple(name, fields):
+> > +                                     'got %s, expected %s' % (fname,
+> > +                                     type(value), ftype))
+> > +
+> > +-            super(TypedTuple, self).__init__(*args, **kwargs)
+> > +-
+> > +     TypedTuple._fields =3D fields
+> > +
+> > +     return TypedTuple
+> > +@@ -1099,14 +1104,14 @@ def group_unified_files(files, unified_prefix,=
+ unified_suffix,
+> > +     # issue.  So we do a little dance to filter it out ourselves.
+> > +     dummy_fill_value =3D ("dummy",)
+> > +     def filter_out_dummy(iterable):
+> > +-        return itertools.ifilter(lambda x: x !=3D dummy_fill_value,
+> > ++        return filter(lambda x: x !=3D dummy_fill_value,
+> > +                                  iterable)
+> > +
+> > +     # From the itertools documentation, slightly modified:
+> > +     def grouper(n, iterable):
+> > +         "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
+> > +         args =3D [iter(iterable)] * n
+> > +-        return itertools.izip_longest(fillvalue=3Ddummy_fill_value, *=
+args)
+> > ++        return itertools.zip_longest(fillvalue=3Ddummy_fill_value, *a=
+rgs)
+> > +
+> > +     for i, unified_group in enumerate(grouper(files_per_unified_file,
+> > +                                               files)):
+> > +@@ -1123,7 +1128,7 @@ def pair(iterable):
+> > +         [(1,2), (3,4), (5,6)]
+> > +     '''
+> > +     i =3D iter(iterable)
+> > +-    return itertools.izip_longest(i, i)
+> > ++    return itertools.zip_longest(i, i)
+> > +
+> > +
+> > + VARIABLES_RE =3D re.compile('\$\((\w+)\)')
+> > +@@ -1141,7 +1146,7 @@ def expand_variables(s, variables):
+> > +         value =3D variables.get(name)
+> > +         if not value:
+> > +             continue
+> > +-        if not isinstance(value, types.StringTypes):
+> > ++        if not isinstance(value, (str,)):
+> > +             value =3D ' '.join(value)
+> > +         result +=3D value
+> > +     return result
+> > +@@ -1168,7 +1173,7 @@ class EnumStringComparisonError(Exception):
+> > +     pass
+> > +
+> > +
+> > +-class EnumString(unicode):
+> > ++class EnumString(str):
+> > +     '''A string type that only can have a limited set of values, simi=
+larly to
+> > +     an Enum, and can only be compared against that set of values.
+> > +
+> > +@@ -1185,8 +1190,8 @@ class EnumString(unicode):
+> > +     def __eq__(self, other):
+> > +         if other not in self.POSSIBLE_VALUES:
+> > +             raise EnumStringComparisonError(
+> > +-                'Can only compare with %s'
+> > +-                % ', '.join("'%s'" % v for v in self.POSSIBLE_VALUES)=
+)
+> > ++                '%s is not in %s'
+> > ++                % (other, ', '.join("'%s'" % v for v in self.POSSIBLE=
+_VALUES)))
+> > +         return super(EnumString, self).__eq__(other)
+> > +
+> > +     def __ne__(self, other):
+> > +@@ -1204,14 +1209,14 @@ def _escape_char(c):
+> > +     # quoting could be done with either ' or ".
+> > +     if c =3D=3D "'":
+> > +         return "\\'"
+> > +-    return unicode(c.encode('unicode_escape'))
+> > ++    return str(c.encode('unicode_escape'))
+> > +
+> > + # Mapping table between raw characters below \x80 and their escaped
+> > + # counterpart, when they differ
+> > + _INDENTED_REPR_TABLE =3D {
+> > +     c: e
+> > +     for c, e in map(lambda x: (x, _escape_char(x)),
+> > +-                    map(unichr, range(128)))
+> > ++                    map(chr, range(128)))
+> > +     if c !=3D e
+> > + }
+> > + # Regexp matching all characters to escape.
+> > +@@ -1219,7 +1224,33 @@ _INDENTED_REPR_RE =3D re.compile(
+> > +     '([' + ''.join(_INDENTED_REPR_TABLE.values()) + ']+)')
+> > +
+> > +
+> > ++# Stolen from gecko master [1]
+> > ++# [1] https://github.com/mozilla/gecko-dev/blob/4165a2e843c494bfb3e35=
+d8a1fbf9c61209e3675/python/mozbuild/mozbuild/util.py#L1286
+> > ++
+> > ++# The default PrettyPrinter has some issues with UTF-8, so we need to=
+ override
+> > ++# some stuff here.
+> > ++class _PrettyPrinter(pprint.PrettyPrinter):
+> > ++    def format(self, object, context, maxlevels, level):
+> > ++        if not (isinstance(object, six.text_type) or
+> > ++                isinstance(object, six.binary_type)):
+> > ++            return super(_PrettyPrinter, self).format(
+> > ++                object, context, maxlevels, level)
+> > ++        # This is super hacky and weird, but the output of 'repr' act=
+ually
+> > ++        # varies based on the default I/O encoding of the process, wh=
+ich isn't
+> > ++        # necessarily utf-8. Instead we open a new shell and ask what=
+ the repr
+> > ++        # WOULD be assuming the default encoding is utf-8. If you can=
+ come up
+> > ++        # with a better way of doing this without simply re-implement=
+ing the
+> > ++        # logic of "repr", please replace this.
+> > ++        env =3D dict(os.environ)
+> > ++        env['PYTHONIOENCODING'] =3D 'utf-8'
+> > ++        ret =3D six.ensure_text(subprocess.check_output(
+> > ++            [sys.executable], input=3D'print(repr(%s))' % repr(object=
+),
+> > ++            universal_newlines=3DTrue, env=3Denv, encoding=3D'utf-8')=
+).strip()
+> > ++        return (ret, True, False)
+> > ++
+> > + def indented_repr(o, indent=3D4):
+> > ++    return _PrettyPrinter(indent=3Dindent).pformat(o)
+> > ++
+> > +     '''Similar to repr(), but returns an indented representation of t=
+he object
+> > +
+> > +     One notable difference with repr is that the returned representat=
+ion
+> > +@@ -1242,7 +1273,7 @@ def indented_repr(o, indent=3D4):
+> > +         elif isinstance(o, bytes):
+> > +             yield 'b'
+> > +             yield repr(o)
+> > +-        elif isinstance(o, unicode):
+> > ++        elif isinstance(o, str):
+> > +             yield "'"
+> > +             # We want a readable string (non escaped unicode), but so=
+me
+> > +             # special characters need escaping (e.g. \n, \t, etc.)
+> > +@@ -1272,11 +1303,11 @@ def encode(obj, encoding=3D'utf-8'):
+> > +     if isinstance(obj, dict):
+> > +         return {
+> > +             encode(k, encoding): encode(v, encoding)
+> > +-            for k, v in obj.iteritems()
+> > ++            for k, v in obj.items()
+> > +         }
+> > +     if isinstance(obj, bytes):
+> > +         return obj
+> > +-    if isinstance(obj, unicode):
+> > ++    if isinstance(obj, str):
+> > +         return obj.encode(encoding)
+> > +     if isinstance(obj, Iterable):
+> > +         return [encode(i, encoding) for i in obj]
+> > +diff --git a/python/mozbuild/mozbuild/virtualenv.py b/python/mozbuild/=
+mozbuild/virtualenv.py
+> > +index 38d06d71d..c67c046f3 100644
+> > +--- a/python/mozbuild/mozbuild/virtualenv.py
+> > ++++ b/python/mozbuild/mozbuild/virtualenv.py
+> > +@@ -531,9 +531,9 @@ def verify_python_version(log_handle):
+> > +
+> > +     our =3D LooseVersion('%d.%d.%d' % (major, minor, micro))
+> > +
+> > +-    if major !=3D MINIMUM_PYTHON_MAJOR or our < MINIMUM_PYTHON_VERSIO=
+N:
+> > +-        log_handle.write('Python %s or greater (but not Python 3) is =
+'
+> > +-            'required to build. ' % MINIMUM_PYTHON_VERSION)
+> > ++    if our < MINIMUM_PYTHON_VERSION:
+> > ++        log_handle.write('Python %s or greater is required to build. =
+'
+> > ++            % MINIMUM_PYTHON_VERSION)
+> > +         log_handle.write('You are running Python %s.\n' % our)
+> > +
+> > +         if os.name in ('nt', 'ce'):
+> > +diff --git a/python/mozbuild/mozpack/chrome/manifest.py b/python/mozbu=
+ild/mozpack/chrome/manifest.py
+> > +index c91b99cf1..02eac0dbb 100644
+> > +--- a/python/mozbuild/mozpack/chrome/manifest.py
+> > ++++ b/python/mozbuild/mozpack/chrome/manifest.py
+> > +@@ -2,11 +2,11 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + import re
+> > + import os
+> > +-from urlparse import urlparse
+> > ++from urllib.parse import urlparse
+> > + import mozpack.path as mozpath
+> > + from mozpack.chrome.flags import Flags
+> > + from mozpack.errors import errors
+> > +@@ -316,7 +316,7 @@ class ManifestContract(ManifestEntry):
+> > +         return self.serialize(self.contractID, self.cid)
+> > +
+> > + # All manifest classes by their type name.
+> > +-MANIFESTS_TYPES =3D dict([(c.type, c) for c in globals().values()
+> > ++MANIFESTS_TYPES =3D dict([(c.type, c) for c in list(globals().values(=
+))
+> > +                        if type(c) =3D=3D type and issubclass(c, Manif=
+estEntry)
+> > +                        and hasattr(c, 'type') and c.type])
+> > +
+> > +diff --git a/python/mozbuild/mozpack/copier.py b/python/mozbuild/mozpa=
+ck/copier.py
+> > +index 1e521e52b..43ed9be4a 100644
+> > +--- a/python/mozbuild/mozpack/copier.py
+> > ++++ b/python/mozbuild/mozpack/copier.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + import os
+> > + import stat
+> > +@@ -113,7 +113,7 @@ class FileRegistry(object):
+> > +         '''
+> > +         Return all paths stored in the container, in the order they w=
+ere added.
+> > +         '''
+> > +-        return self._files.keys()
+> > ++        return list(self._files.keys())
+> > +
+> > +     def __len__(self):
+> > +         '''
+> > +@@ -146,7 +146,7 @@ class FileRegistry(object):
+> > +             for path, file in registry:
+> > +                 (...)
+> > +         '''
+> > +-        return self._files.iteritems()
+> > ++        return iter(self._files.items())
+> > +
+> > +     def required_directories(self):
+> > +         '''
+> > +@@ -155,7 +155,7 @@ class FileRegistry(object):
+> > +         unspecified (virtual) root directory (and do not include said=
+ root
+> > +         directory).
+> > +         '''
+> > +-        return set(k for k, v in self._required_directories.items() i=
+f v > 0)
+> > ++        return set(k for k, v in list(self._required_directories.item=
+s()) if v > 0)
+> > +
+> > +     def output_to_inputs_tree(self):
+> > +         '''
+> > +@@ -295,7 +295,7 @@ class FileCopier(FileRegistry):
+> > +
+> > +         Returns a FileCopyResult that details what changed.
+> > +         '''
+> > +-        assert isinstance(destination, basestring)
+> > ++        assert isinstance(destination, str)
+> > +         assert not os.path.exists(destination) or os.path.isdir(desti=
+nation)
+> > +
+> > +         result =3D FileCopyResult()
+> > +@@ -563,7 +563,7 @@ class Jarrer(FileRegistry, BaseFile):
+> > +             def exists(self):
+> > +                 return self.deflater is not None
+> > +
+> > +-        if isinstance(dest, basestring):
+> > ++        if isinstance(dest, str):
+> > +             dest =3D Dest(dest)
+> > +         assert isinstance(dest, Dest)
+> > +
+> > +diff --git a/python/mozbuild/mozpack/files.py b/python/mozbuild/mozpac=
+k/files.py
+> > +index 8ce353375..bf35e39b8 100644
+> > +--- a/python/mozbuild/mozpack/files.py
+> > ++++ b/python/mozbuild/mozpack/files.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + import errno
+> > + import os
+> > +@@ -57,7 +57,7 @@ else:
+> > +
+> > +     def _copyfile(src, dest):
+> > +         # False indicates `dest` should be overwritten if it exists a=
+lready.
+> > +-        if isinstance(src, unicode) and isinstance(dest, unicode):
+> > ++        if isinstance(src, str) and isinstance(dest, str):
+> > +             _CopyFileW(src, dest, False)
+> > +         elif isinstance(src, str) and isinstance(dest, str):
+> > +             _CopyFileA(src, dest, False)
+> > +@@ -164,7 +164,7 @@ class BaseFile(object):
+> > +         disabled when skip_if_older is False.
+> > +         Returns whether a copy was actually performed (True) or not (=
+False).
+> > +         '''
+> > +-        if isinstance(dest, basestring):
+> > ++        if isinstance(dest, str):
+> > +             dest =3D Dest(dest)
+> > +         else:
+> > +             assert isinstance(dest, Dest)
+> > +@@ -278,11 +278,11 @@ class ExecutableFile(File):
+> > +     '''
+> > +     def copy(self, dest, skip_if_older=3DTrue):
+> > +         real_dest =3D dest
+> > +-        if not isinstance(dest, basestring):
+> > ++        if not isinstance(dest, str):
+> > +             fd, dest =3D mkstemp()
+> > +             os.close(fd)
+> > +             os.remove(dest)
+> > +-        assert isinstance(dest, basestring)
+> > ++        assert isinstance(dest, str)
+> > +         # If File.copy didn't actually copy because dest is newer, ch=
+eck the
+> > +         # file sizes. If dest is smaller, it means it is already stri=
+pped and
+> > +         # elfhacked, so we can skip.
+> > +@@ -319,7 +319,7 @@ class AbsoluteSymlinkFile(File):
+> > +         File.__init__(self, path)
+> > +
+> > +     def copy(self, dest, skip_if_older=3DTrue):
+> > +-        assert isinstance(dest, basestring)
+> > ++        assert isinstance(dest, str)
+> > +
+> > +         # The logic in this function is complicated by the fact that =
+symlinks
+> > +         # aren't universally supported. So, where symlinks aren't sup=
+ported, we
+> > +@@ -410,7 +410,7 @@ class HardlinkFile(File):
+> > +     '''
+> > +
+> > +     def copy(self, dest, skip_if_older=3DTrue):
+> > +-        assert isinstance(dest, basestring)
+> > ++        assert isinstance(dest, str)
+> > +
+> > +         if not hasattr(os, 'link'):
+> > +             return super(HardlinkFile, self).copy(
+> > +@@ -471,7 +471,7 @@ class ExistingFile(BaseFile):
+> > +         self.required =3D required
+> > +
+> > +     def copy(self, dest, skip_if_older=3DTrue):
+> > +-        if isinstance(dest, basestring):
+> > ++        if isinstance(dest, str):
+> > +             dest =3D Dest(dest)
+> > +         else:
+> > +             assert isinstance(dest, Dest)
+> > +@@ -517,7 +517,7 @@ class PreprocessedFile(BaseFile):
+> > +         '''
+> > +         Invokes the preprocessor to create the destination file.
+> > +         '''
+> > +-        if isinstance(dest, basestring):
+> > ++        if isinstance(dest, str):
+> > +             dest =3D Dest(dest)
+> > +         else:
+> > +             assert isinstance(dest, Dest)
+> > +@@ -657,7 +657,7 @@ class XPTFile(GeneratedFile):
+> > +         the individual XPTs to link.
+> > +         skip_if_older is ignored.
+> > +         '''
+> > +-        if isinstance(dest, basestring):
+> > ++        if isinstance(dest, str):
+> > +             dest =3D Dest(dest)
+> > +         assert isinstance(dest, Dest)
+> > +
+> > +@@ -1108,7 +1108,7 @@ class ComposedFinder(BaseFinder):
+> > +         from mozpack.copier import FileRegistry
+> > +         self.files =3D FileRegistry()
+> > +
+> > +-        for base, finder in sorted(finders.iteritems()):
+> > ++        for base, finder in sorted(finders.items()):
+> > +             if self.files.contains(base):
+> > +                 self.files.remove(base)
+> > +             for p, f in finder.find(''):
+> > +diff --git a/python/mozbuild/mozpack/manifests.py b/python/mozbuild/mo=
+zpack/manifests.py
+> > +index 27c66634b..f79b40086 100644
+> > +--- a/python/mozbuild/mozpack/manifests.py
+> > ++++ b/python/mozbuild/mozpack/manifests.py
+> > +@@ -2,8 +2,6 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, unicode_literals
+> > +-
+> > + from contextlib import contextmanager
+> > + import json
+> > +
+> > +@@ -116,7 +114,7 @@ class InstallManifest(object):
+> > +         self._source_files =3D set()
+> > +
+> > +         if path or fileobj:
+> > +-            with _auto_fileobj(path, fileobj, 'rb') as fh:
+> > ++            with _auto_fileobj(path, fileobj, 'r') as fh:
+> > +                 self._source_files.add(fh.name)
+> > +                 self._load_from_fileobj(fh)
+> > +
+> > +@@ -175,7 +173,7 @@ class InstallManifest(object):
+> > +                 dest, content =3D fields[1:]
+> > +
+> > +                 self.add_content(
+> > +-                    self._decode_field_entry(content).encode('utf-8')=
+, dest)
+> > ++                    self._decode_field_entry(content), dest)
+> > +                 continue
+> > +
+> > +             # Don't fail for non-actionable items, allowing
+> > +@@ -228,7 +226,7 @@ class InstallManifest(object):
+> > +
+> > +         It is an error if both are specified.
+> > +         """
+> > +-        with _auto_fileobj(path, fileobj, 'wb') as fh:
+> > ++        with _auto_fileobj(path, fileobj, 'w') as fh:
+> > +             fh.write('%d\n' % self.CURRENT_VERSION)
+> > +
+> > +             for dest in sorted(self._dests):
+> > +@@ -242,13 +240,11 @@ class InstallManifest(object):
+> > +                     for path in paths:
+> > +                         source =3D mozpath.join(base, path)
+> > +                         parts =3D ['%d' % type, mozpath.join(dest, pa=
+th), source]
+> > +-                        fh.write('%s\n' % self.FIELD_SEPARATOR.join(
+> > +-                            p.encode('utf-8') for p in parts))
+> > ++                        fh.write('%s\n' % self.FIELD_SEPARATOR.join(p=
+arts))
+> > +                 else:
+> > +                     parts =3D ['%d' % entry[0], dest]
+> > +                     parts.extend(entry[1:])
+> > +-                    fh.write('%s\n' % self.FIELD_SEPARATOR.join(
+> > +-                        p.encode('utf-8') for p in parts))
+> > ++                    fh.write('%s\n' % self.FIELD_SEPARATOR.join(parts=
+))
+> > +
+> > +     def add_link(self, source, dest):
+> > +         """Add a link to this manifest.
+> > +@@ -439,7 +435,7 @@ class InstallManifest(object):
+> > +             if install_type =3D=3D self.CONTENT:
+> > +                 # GeneratedFile expect the buffer interface, which th=
+e unicode
+> > +                 # type doesn't have, so encode to a str.
+> > +-                content =3D self._decode_field_entry(entry[1]).encode=
+('utf-8')
+> > ++                content =3D self._decode_field_entry(entry[1])
+> > +                 registry.add(dest, GeneratedFile(content))
+> > +                 continue
+> > +
+> > +diff --git a/python/mozbuild/mozpack/mozjar.py b/python/mozbuild/mozpa=
+ck/mozjar.py
+> > +index a723fd2c0..0b04d233c 100644
+> > +--- a/python/mozbuild/mozpack/mozjar.py
+> > ++++ b/python/mozbuild/mozpack/mozjar.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this
+> > + # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + from io import BytesIO
+> > + import struct
+> > +@@ -14,9 +14,10 @@ from zipfile import (
+> > +     ZIP_DEFLATED,
+> > + )
+> > + from collections import OrderedDict
+> > +-from urlparse import urlparse, ParseResult
+> > ++from urllib.parse import urlparse, ParseResult
+> > + import mozpack.path as mozpath
+> > + from mozbuild.util import memoize
+> > ++from functools import reduce
+> > +
+> > +
+> > + JAR_STORED =3D ZIP_STORED
+> > +@@ -72,7 +73,7 @@ class JarStruct(object):
+> > +         an instance with empty fields.
+> > +         '''
+> > +         assert self.MAGIC and isinstance(self.STRUCT, OrderedDict)
+> > +-        self.size_fields =3D set(t for t in self.STRUCT.itervalues()
+> > ++        self.size_fields =3D set(t for t in self.STRUCT.values()
+> > +                                if not t in JarStruct.TYPE_MAPPING)
+> > +         self._values =3D {}
+> > +         if data:
+> > +@@ -94,7 +95,7 @@ class JarStruct(object):
+> > +         # For all fields used as other fields sizes, keep track of th=
+eir value
+> > +         # separately.
+> > +         sizes =3D dict((t, 0) for t in self.size_fields)
+> > +-        for name, t in self.STRUCT.iteritems():
+> > ++        for name, t in self.STRUCT.items():
+> > +             if t in JarStruct.TYPE_MAPPING:
+> > +                 value, size =3D JarStruct.get_data(t, data[offset:])
+> > +             else:
+> > +@@ -113,7 +114,7 @@ class JarStruct(object):
+> > +         Initialize an instance with empty fields.
+> > +         '''
+> > +         self.signature =3D self.MAGIC
+> > +-        for name, t in self.STRUCT.iteritems():
+> > ++        for name, t in self.STRUCT.items():
+> > +             if name in self.size_fields:
+> > +                 continue
+> > +             self._values[name] =3D 0 if t in JarStruct.TYPE_MAPPING e=
+lse ''
+> > +@@ -138,9 +139,9 @@ class JarStruct(object):
+> > +         from self.STRUCT.
+> > +         '''
+> > +         serialized =3D struct.pack('<I', self.signature)
+> > +-        sizes =3D dict((t, name) for name, t in self.STRUCT.iteritems=
+()
+> > ++        sizes =3D dict((t, name) for name, t in self.STRUCT.items()
+> > +                      if not t in JarStruct.TYPE_MAPPING)
+> > +-        for name, t in self.STRUCT.iteritems():
+> > ++        for name, t in self.STRUCT.items():
+> > +             if t in JarStruct.TYPE_MAPPING:
+> > +                 format, size =3D JarStruct.TYPE_MAPPING[t]
+> > +                 if name in sizes:
+> > +@@ -159,7 +160,7 @@ class JarStruct(object):
+> > +         variable length fields.
+> > +         '''
+> > +         size =3D JarStruct.TYPE_MAPPING['uint32'][1]
+> > +-        for name, type in self.STRUCT.iteritems():
+> > ++        for name, type in self.STRUCT.items():
+> > +             if type in JarStruct.TYPE_MAPPING:
+> > +                 size +=3D JarStruct.TYPE_MAPPING[type][1]
+> > +             else:
+> > +@@ -180,7 +181,7 @@ class JarStruct(object):
+> > +         return key in self._values
+> > +
+> > +     def __iter__(self):
+> > +-        return self._values.iteritems()
+> > ++        return iter(self._values.items())
+> > +
+> > +     def __repr__(self):
+> > +         return "<%s %s>" % (self.__class__.__name__,
+> > +@@ -374,7 +375,7 @@ class JarReader(object):
+> > +         entries =3D self.entries
+> > +         if not entries:
+> > +             return JAR_STORED
+> > +-        return max(f['compression'] for f in entries.itervalues())
+> > ++        return max(f['compression'] for f in entries.values())
+> > +
+> > +     @property
+> > +     def entries(self):
+> > +@@ -390,7 +391,7 @@ class JarReader(object):
+> > +             preload =3D JarStruct.get_data('uint32', self._data)[0]
+> > +         entries =3D OrderedDict()
+> > +         offset =3D self._cdir_end['cdir_offset']
+> > +-        for e in xrange(self._cdir_end['cdir_entries']):
+> > ++        for e in range(self._cdir_end['cdir_entries']):
+> > +             entry =3D JarCdirEntry(self._data[offset:])
+> > +             offset +=3D entry.size
+> > +             # Creator host system. 0 is MSDOS, 3 is Unix
+> > +@@ -452,7 +453,7 @@ class JarReader(object):
+> > +             for file in jarReader:
+> > +                 ...
+> > +         '''
+> > +-        for entry in self.entries.itervalues():
+> > ++        for entry in self.entries.values():
+> > +             yield self._getreader(entry)
+> > +
+> > +     def __getitem__(self, name):
+> > +@@ -547,7 +548,7 @@ class JarWriter(object):
+> > +         headers =3D {}
+> > +         preload_size =3D 0
+> > +         # Prepare central directory entries
+> > +-        for entry, content in self._contents.itervalues():
+> > ++        for entry, content in self._contents.values():
+> > +             header =3D JarLocalFileHeader()
+> > +             for name in entry.STRUCT:
+> > +                 if name in header:
+> > +@@ -562,7 +563,7 @@ class JarWriter(object):
+> > +         end['disk_entries'] =3D len(self._contents)
+> > +         end['cdir_entries'] =3D end['disk_entries']
+> > +         end['cdir_size'] =3D reduce(lambda x, y: x + y[0].size,
+> > +-                                  self._contents.values(), 0)
+> > ++                                  list(self._contents.values()), 0)
+> > +         # On optimized archives, store the preloaded size and the cen=
+tral
+> > +         # directory entries, followed by the first end of central dir=
+ectory.
+> > +         if self._optimize:
+> > +@@ -571,18 +572,18 @@ class JarWriter(object):
+> > +             if preload_size:
+> > +                 preload_size +=3D offset
+> > +             self._data.write(struct.pack('<I', preload_size))
+> > +-            for entry, _ in self._contents.itervalues():
+> > ++            for entry, _ in self._contents.values():
+> > +                 entry['offset'] +=3D offset
+> > +                 self._data.write(entry.serialize())
+> > +             self._data.write(end.serialize())
+> > +         # Store local file entries followed by compressed data
+> > +-        for entry, content in self._contents.itervalues():
+> > ++        for entry, content in self._contents.values():
+> > +             self._data.write(headers[entry].serialize())
+> > +             self._data.write(content)
+> > +         # On non optimized archives, store the central directory entr=
+ies.
+> > +         if not self._optimize:
+> > +             end['cdir_offset'] =3D offset
+> > +-            for entry, _ in self._contents.itervalues():
+> > ++            for entry, _ in self._contents.values():
+> > +                 self._data.write(entry.serialize())
+> > +         # Store the end of central directory.
+> > +         self._data.write(end.serialize())
+> > +@@ -622,7 +623,7 @@ class JarWriter(object):
+> > +             deflater =3D data
+> > +         else:
+> > +             deflater =3D Deflater(compress, compress_level=3Dself._co=
+mpress_level)
+> > +-            if isinstance(data, basestring):
+> > ++            if isinstance(data, str):
+> > +                 deflater.write(data)
+> > +             elif hasattr(data, 'read'):
+> > +                 if hasattr(data, 'seek'):
+> > +diff --git a/testing/mozbase/manifestparser/manifestparser/ini.py b/te=
+sting/mozbase/manifestparser/manifestparser/ini.py
+> > +index e5ba249c1..c141a18b7 100644
+> > +--- a/testing/mozbase/manifestparser/manifestparser/ini.py
+> > ++++ b/testing/mozbase/manifestparser/manifestparser/ini.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this=
+ file,
+> > + # You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import
+> > ++
+> > +
+> > + import os
+> > + import sys
+> > +@@ -12,7 +12,7 @@ __all__ =3D ['read_ini', 'combine_fields']
+> > +
+> > + class IniParseError(Exception):
+> > +     def __init__(self, fp, linenum, msg):
+> > +-        if isinstance(fp, basestring):
+> > ++        if isinstance(fp, str):
+> > +             path =3D fp
+> > +         elif hasattr(fp, 'name'):
+> > +             path =3D fp.name
+> > +@@ -43,12 +43,15 @@ def read_ini(fp, variables=3DNone, default=3D'DEFA=
+ULT', defaults_only=3DFalse,
+> > +     sections =3D []
+> > +     key =3D value =3D None
+> > +     section_names =3D set()
+> > +-    if isinstance(fp, basestring):
+> > ++    if isinstance(fp, str):
+> > +         fp =3D file(fp)
+> > +
+> > +     # read the lines
+> > +     for (linenum, line) in enumerate(fp.read().splitlines(), start=3D=
+1):
+> > +
+> > ++        if isinstance(line, bytes):
+> > ++           line =3D line.decode('utf-8')
+> > ++
+> > +         stripped =3D line.strip()
+> > +
+> > +         # ignore blank lines
+> > +@@ -66,7 +69,7 @@ def read_ini(fp, variables=3DNone, default=3D'DEFAUL=
+T', defaults_only=3DFalse,
+> > +         inline_prefixes =3D {p: -1 for p in comments}
+> > +         while comment_start =3D=3D sys.maxsize and inline_prefixes:
+> > +             next_prefixes =3D {}
+> > +-            for prefix, index in inline_prefixes.items():
+> > ++            for prefix, index in list(inline_prefixes.items()):
+> > +                 index =3D line.find(prefix, index+1)
+> > +                 if index =3D=3D -1:
+> > +                     continue
+> > +@@ -163,7 +166,7 @@ def combine_fields(global_vars, local_vars):
+> > +         'support-files': '%s %s',
+> > +     }
+> > +     final_mapping =3D global_vars.copy()
+> > +-    for field_name, value in local_vars.items():
+> > ++    for field_name, value in list(local_vars.items()):
+> > +         if field_name not in field_patterns or field_name not in glob=
+al_vars:
+> > +             final_mapping[field_name] =3D value
+> > +             continue
+> > +diff --git a/testing/mozbase/manifestparser/manifestparser/manifestpar=
+ser.py b/testing/mozbase/manifestparser/manifestparser/manifestparser.py
+> > +index 921369fd2..5b2f4c453 100755
+> > +--- a/testing/mozbase/manifestparser/manifestparser/manifestparser.py
+> > ++++ b/testing/mozbase/manifestparser/manifestparser/manifestparser.py
+> > +@@ -2,9 +2,9 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this=
+ file,
+> > + # You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function
+> > +
+> > +-from StringIO import StringIO
+> > ++
+> > ++from io import StringIO
+> > + import json
+> > + import fnmatch
+> > + import os
+> > +@@ -23,7 +23,7 @@ from .filters import (
+> > + __all__ =3D ['ManifestParser', 'TestManifest', 'convert']
+> > +
+> > + relpath =3D os.path.relpath
+> > +-string =3D (basestring,)
+> > ++string =3D (str,)
+> > +
+> > +
+> > + # path normalization
+> > +@@ -195,7 +195,7 @@ class ManifestParser(object):
+> > +
+> > +             # otherwise an item
+> > +             # apply ancestor defaults, while maintaining current file=
+ priority
+> > +-            data =3D dict(self._ancestor_defaults.items() + data.item=
+s())
+> > ++            data =3D dict(list(self._ancestor_defaults.items()) + lis=
+t(data.items()))
+> > +
+> > +             test =3D data
+> > +             test['name'] =3D section
+> > +@@ -323,19 +323,19 @@ class ManifestParser(object):
+> > +         # make some check functions
+> > +         if inverse:
+> > +             def has_tags(test):
+> > +-                return not tags.intersection(test.keys())
+> > ++                return not tags.intersection(list(test.keys()))
+> > +
+> > +             def dict_query(test):
+> > +-                for key, value in kwargs.items():
+> > ++                for key, value in list(kwargs.items()):
+> > +                     if test.get(key) =3D=3D value:
+> > +                         return False
+> > +                 return True
+> > +         else:
+> > +             def has_tags(test):
+> > +-                return tags.issubset(test.keys())
+> > ++                return tags.issubset(list(test.keys()))
+> > +
+> > +             def dict_query(test):
+> > +-                for key, value in kwargs.items():
+> > ++                for key, value in list(kwargs.items()):
+> > +                     if test.get(key) !=3D value:
+> > +                         return False
+> > +                 return True
+> > +@@ -359,7 +359,7 @@ class ManifestParser(object):
+> > +         if tests is None:
+> > +             manifests =3D []
+> > +             # Make sure to return all the manifests, even ones withou=
+t tests.
+> > +-            for manifest in self.manifest_defaults.keys():
+> > ++            for manifest in list(self.manifest_defaults.keys()):
+> > +                 if isinstance(manifest, tuple):
+> > +                     parentmanifest, manifest =3D manifest
+> > +                 if manifest not in manifests:
+> > +@@ -409,7 +409,7 @@ class ManifestParser(object):
+> > +         """
+> > +
+> > +         files =3D set([])
+> > +-        if isinstance(directories, basestring):
+> > ++        if isinstance(directories, str):
+> > +             directories =3D [directories]
+> > +
+> > +         # get files in directories
+> > +@@ -476,7 +476,7 @@ class ManifestParser(object):
+> > +             print('[DEFAULT]', file=3Dfp)
+> > +             for tag in global_tags:
+> > +                 print('%s =3D' % tag, file=3Dfp)
+> > +-            for key, value in global_kwargs.items():
+> > ++            for key, value in list(global_kwargs.items()):
+> > +                 print('%s =3D %s' % (key, value), file=3Dfp)
+> > +             print(file=3Dfp)
+> > +
+> > +@@ -602,7 +602,7 @@ class ManifestParser(object):
+> > +         internal function to import directories
+> > +         """
+> > +
+> > +-        if isinstance(pattern, basestring):
+> > ++        if isinstance(pattern, str):
+> > +             patterns =3D [pattern]
+> > +         else:
+> > +             patterns =3D pattern
+> > +diff --git a/testing/mozbase/mozinfo/mozinfo/mozinfo.py b/testing/mozb=
+ase/mozinfo/mozinfo/mozinfo.py
+> > +index 90c187568..6c5a1f322 100755
+> > +--- a/testing/mozbase/mozinfo/mozinfo/mozinfo.py
+> > ++++ b/testing/mozbase/mozinfo/mozinfo/mozinfo.py
+> > +@@ -8,7 +8,7 @@
+> > + # linux) to the information; I certainly wouldn't want anyone parsing=
+ this
+> > + # information and having behaviour depend on it
+> > +
+> > +-from __future__ import absolute_import, print_function
+> > ++
+> > +
+> > + import os
+> > + import platform
+> > +@@ -24,7 +24,7 @@ _os =3D os
+> > + class unknown(object):
+> > +     """marker class for unknown information"""
+> > +
+> > +-    def __nonzero__(self):
+> > ++    def __bool__(self):
+> > +         return False
+> > +
+> > +     def __str__(self):
+> > +@@ -96,20 +96,17 @@ elif system.startswith(('MINGW', 'MSYS_NT')):
+> > +     info['os'] =3D 'win'
+> > +     os_version =3D version =3D unknown
+> > + elif system =3D=3D "Linux":
+> > +-    if hasattr(platform, "linux_distribution"):
+> > +-        (distro, os_version, codename) =3D platform.linux_distributio=
+n()
+> > +-    else:
+> > +-        (distro, os_version, codename) =3D platform.dist()
+> > +     if not processor:
+> > +         processor =3D machine
+> > +-    version =3D "%s %s" % (distro, os_version)
+> > ++
+> > ++    distro =3D 'OE/Yocto'
+> > ++    os_version =3D version =3D unknown
+> > +
+> > +     # Bug in Python 2's `platform` library:
+> > +     # It will return a triple of empty strings if the distribution is=
+ not supported.
+> > +     # It works on Python 3. If we don't have an OS version,
+> > +     # the unit tests fail to run.
+> > +     if not distro and not os_version and not codename:
+> > +-        distro =3D 'lfs'
+> > +         version =3D release
+> > +         os_version =3D release
+> > +
+> > +@@ -131,7 +128,7 @@ else:
+> > +     os_version =3D version =3D unknown
+> > +
+> > + info['version'] =3D version
+> > +-info['os_version'] =3D StringVersion(os_version)
+> > ++info['os_version'] =3D version
+> > +
+> > + # processor type and bits
+> > + if processor in ["i386", "i686"]:
+> > +@@ -188,12 +185,7 @@ def update(new_info):
+> > +                      to a json file containing the new info.
+> > +     """
+> > +
+> > +-    PY3 =3D sys.version_info[0] =3D=3D 3
+> > +-    if PY3:
+> > +-        string_types =3D str,
+> > +-    else:
+> > +-        string_types =3D basestring,
+> > +-    if isinstance(new_info, string_types):
+> > ++    if isinstance(new_info, str):
+> > +         # lazy import
+> > +         import mozfile
+> > +         import json
+> > +@@ -295,7 +287,7 @@ def main(args=3DNone):
+> > +
+> > +     # print out choices if requested
+> > +     flag =3D False
+> > +-    for key, value in options.__dict__.items():
+> > ++    for key, value in list(options.__dict__.items()):
+> > +         if value is True:
+> > +             print('%s choices: %s' % (key, ' '.join([str(choice)
+> > +                                                      for choice in ch=
+oices[key]])))
+> > +@@ -304,7 +296,7 @@ def main(args=3DNone):
+> > +         return
+> > +
+> > +     # otherwise, print out all info
+> > +-    for key, value in info.items():
+> > ++    for key, value in list(info.items()):
+> > +         print('%s: %s' % (key, value))
+> > +
+> > +
+> > +diff --git a/testing/mozbase/mozprocess/mozprocess/processhandler.py b=
+/testing/mozbase/mozprocess/mozprocess/processhandler.py
+> > +index 3efb650b7..2575a4702 100644
+> > +--- a/testing/mozbase/mozprocess/mozprocess/processhandler.py
+> > ++++ b/testing/mozbase/mozprocess/mozprocess/processhandler.py
+> > +@@ -2,7 +2,7 @@
+> > + # License, v. 2.0. If a copy of the MPL was not distributed with this=
+ file,
+> > + # You can obtain one at http://mozilla.org/MPL/2.0/.
+> > +
+> > +-from __future__ import absolute_import, print_function
+> > ++
+> > +
+> > + import errno
+> > + import os
+> > +@@ -13,7 +13,7 @@ import threading
+> > + import time
+> > + import traceback
+> > +
+> > +-from Queue import Queue, Empty
+> > ++from queue import Queue, Empty
+> > + from datetime import datetime
+> > +
+> > +
+> > +@@ -124,14 +124,14 @@ class ProcessHandlerMixin(object):
+> > +             thread =3D threading.current_thread().name
+> > +             print("DBG::MOZPROC PID:{} ({}) | {}".format(self.pid, th=
+read, msg))
+> > +
+> > +-        def __del__(self, _maxint=3Dsys.maxint):
+> > ++        def __del__(self, _maxint=3Dsys.maxsize):
+> > +             if isWin:
+> > +                 handle =3D getattr(self, '_handle', None)
+> > +                 if handle:
+> > +                     if hasattr(self, '_internal_poll'):
+> > +                         self._internal_poll(_deadstate=3D_maxint)
+> > +                     else:
+> > +-                        self.poll(_deadstate=3Dsys.maxint)
+> > ++                        self.poll(_deadstate=3Dsys.maxsize)
+> > +                 if handle or self._job or self._io_port:
+> > +                     self._cleanup()
+> > +             else:
+> > +@@ -243,7 +243,7 @@ class ProcessHandlerMixin(object):
+> > +                      p2cread, p2cwrite,
+> > +                      c2pread, c2pwrite,
+> > +                      errread, errwrite) =3D args_tuple
+> > +-                if not isinstance(args, basestring):
+> > ++                if not isinstance(args, str):
+> > +                     args =3D subprocess.list2cmdline(args)
+> > +
+> > +                 # Always or in the create new process group
+> > +diff --git a/third_party/python/which/which.py b/third_party/python/wh=
+ich/which.py
+> > +index 9c7d10835..f02b2616e 100644
+> > +--- a/third_party/python/which/which.py
+> > ++++ b/third_party/python/which/which.py
+> > +@@ -90,13 +90,13 @@ def _getRegisteredExecutable(exeName):
+> > +     if sys.platform.startswith('win'):
+> > +         if os.path.splitext(exeName)[1].lower() !=3D '.exe':
+> > +             exeName +=3D '.exe'
+> > +-        import _winreg
+> > ++        import winreg
+> > +         try:
+> > +             key =3D "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Ap=
+p Paths\\" +\
+> > +                   exeName
+> > +-            value =3D _winreg.QueryValue(_winreg.HKEY_LOCAL_MACHINE, =
+key)
+> > ++            value =3D winreg.QueryValue(winreg.HKEY_LOCAL_MACHINE, ke=
+y)
+> > +             registered =3D (value, "from HKLM\\"+key)
+> > +-        except _winreg.error:
+> > ++        except winreg.error:
+> > +             pass
+> > +         if registered and not os.path.exists(registered[0]):
+> > +             registered =3D None
+> > +@@ -244,7 +244,7 @@ def which(command, path=3DNone, verbose=3D0, exts=
+=3DNone):
+> > +     If no match is found for the command, a WhichError is raised.
+> > +     """
+> > +     try:
+> > +-        match =3D whichgen(command, path, verbose, exts).next()
+> > ++        match =3D next(whichgen(command, path, verbose, exts))
+> > +     except StopIteration:
+> > +         raise WhichError("Could not find '%s' on the path." % command=
+)
+> > +     return match
+> > +@@ -281,17 +281,17 @@ def main(argv):
+> > +     try:
+> > +         optlist, args =3D getopt.getopt(argv[1:], 'haVvqp:e:',
+> > +             ['help', 'all', 'version', 'verbose', 'quiet', 'path=3D',=
+ 'exts=3D'])
+> > +-    except getopt.GetoptError, msg:
+> > ++    except getopt.GetoptError as msg:
+> > +         sys.stderr.write("which: error: %s. Your invocation was: %s\n=
+"\
+> > +                          % (msg, argv))
+> > +         sys.stderr.write("Try 'which --help'.\n")
+> > +         return 1
+> > +     for opt, optarg in optlist:
+> > +         if opt in ('-h', '--help'):
+> > +-            print _cmdlnUsage
+> > ++            print(_cmdlnUsage)
+> > +             return 0
+> > +         elif opt in ('-V', '--version'):
+> > +-            print "which %s" % __version__
+> > ++            print("which %s" % __version__)
+> > +             return 0
+> > +         elif opt in ('-a', '--all'):
+> > +             all =3D 1
+> > +@@ -319,9 +319,9 @@ def main(argv):
+> > +         nmatches =3D 0
+> > +         for match in whichgen(arg, path=3Daltpath, verbose=3Dverbose,=
+ exts=3Dexts):
+> > +             if verbose:
+> > +-                print "%s (%s)" % match
+> > ++                print("%s (%s)" % match)
+> > +             else:
+> > +-                print match
+> > ++                print(match)
+> > +             nmatches +=3D 1
+> > +             if not all:
+> > +                 break
+> > +--
+> > +2.21.0
+> > +
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-js.pc.in-do-not-=
+include-RequiredDefines.h-for-depend.patch b/meta-oe/recipes-extended/mozjs=
+/mozjs/0002-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0001-js.pc.in-do-not-i=
+nclude-RequiredDefines.h-for-depend.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0002-js.pc.in-do-not-inc=
+lude-RequiredDefines.h-for-depend.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compil=
+ation-on-i586-targets.patch b/meta-oe/recipes-extended/mozjs/mozjs/0003-fix=
+-cross-compilation-on-i586-targets.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0010-fix-cross-compila=
+tion-on-i586-targets.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0003-fix-cross-compilati=
+on-on-i586-targets.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-do-not-create-py=
+thon-environment.patch b/meta-oe/recipes-extended/mozjs/mozjs/0004-do-not-c=
+reate-python-environment.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0001-do-not-create-pyt=
+hon-environment.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0004-do-not-create-pytho=
+n-environment.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0002-fix-cannot-find-=
+link.patch b/meta-oe/recipes-extended/mozjs/mozjs/0005-fix-cannot-find-link=
+.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0002-fix-cannot-find-l=
+ink.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0005-fix-cannot-find-lin=
+k.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0003-workaround-autoc=
+onf-2.13-detection-failed.patch b/meta-oe/recipes-extended/mozjs/mozjs/0006=
+-workaround-autoconf-2.13-detection-failed.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0003-workaround-autoco=
+nf-2.13-detection-failed.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0006-workaround-autoconf=
+-2.13-detection-failed.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0005-fix-do_compile-f=
+ailed-on-mips.patch b/meta-oe/recipes-extended/mozjs/mozjs/0007-fix-do_comp=
+ile-failed-on-mips.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0005-fix-do_compile-fa=
+iled-on-mips.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0007-fix-do_compile-fail=
+ed-on-mips.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/add-riscv-support.pat=
+ch b/meta-oe/recipes-extended/mozjs/mozjs/0008-add-riscv-support.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/add-riscv-support.patc=
+h
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0008-add-riscv-support.p=
+atch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs-fix-coredu=
+mp-caused-by-getenv.patch b/meta-oe/recipes-extended/mozjs/mozjs/0009-mozjs=
+-fix-coredump-caused-by-getenv.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0001-mozjs-fix-coredum=
+p-caused-by-getenv.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0009-mozjs-fix-coredump-=
+caused-by-getenv.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/format-overflow.patch=
+ b/meta-oe/recipes-extended/mozjs/mozjs/0010-format-overflow.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/format-overflow.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0010-format-overflow.pat=
+ch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-To-fix-build-err=
+or-on-arm32BE.patch b/meta-oe/recipes-extended/mozjs/mozjs/0011-To-fix-buil=
+d-error-on-arm32BE.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0001-To-fix-build-erro=
+r-on-arm32BE.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0011-To-fix-build-error-=
+on-arm32BE.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/JS_PUBLIC_API.patch b=
+/meta-oe/recipes-extended/mozjs/mozjs/0012-JS_PUBLIC_API.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/JS_PUBLIC_API.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0012-JS_PUBLIC_API.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-riscv-Disable-at=
+omic-operations.patch b/meta-oe/recipes-extended/mozjs/mozjs/0013-riscv-Dis=
+able-atomic-operations.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0001-riscv-Disable-ato=
+mic-operations.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0013-riscv-Disable-atomi=
+c-operations.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/fallback-to-2011-C++-=
+standard.patch b/meta-oe/recipes-extended/mozjs/mozjs/0014-fallback-to-2011=
+-C++-standard.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/fallback-to-2011-C++-s=
+tandard.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/0014-fallback-to-2011-C+=
++-standard.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-fix-compiling-fa=
+ilure-on-mips64-n32-bsp.patch b/meta-oe/recipes-extended/mozjs/mozjs/mipsar=
+chn32/0001-fix-compiling-failure-on-mips64-n32-bsp.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0001-fix-compiling-fai=
+lure-on-mips64-n32-bsp.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/mipsarchn32/0001-fix-com=
+piling-failure-on-mips64-n32-bsp.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0006-support-musl.pat=
+ch b/meta-oe/recipes-extended/mozjs/mozjs/musl/0001-support-musl.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0006-support-musl.patc=
+h
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/musl/0001-support-musl.p=
+atch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-js-Fix-build-wit=
+h-musl.patch b/meta-oe/recipes-extended/mozjs/mozjs/musl/0002-js-Fix-build-=
+with-musl.patch
+> > similarity index 100%
+> > rename from meta-oe/recipes-extended/mozjs/mozjs/0001-js-Fix-build-with=
+-musl.patch
+> > rename to meta-oe/recipes-extended/mozjs/mozjs/musl/0002-js-Fix-build-w=
+ith-musl.patch
+> > diff --git a/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb b/meta-oe/r=
+ecipes-extended/mozjs/mozjs_60.9.0.bb
+> > index 4f2da492f..9466c62aa 100644
+> > --- a/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb
+> > +++ b/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb
+> > @@ -3,42 +3,45 @@ HOMEPAGE =3D "https://developer.mozilla.org/en-US/doc=
+s/Mozilla/Projects/SpiderMonk
+> >   LICENSE =3D "MPL-2.0"
+> >   LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddc9b6ecd19a14a54a628edaaf2=
+3733bf"
+> >
+> > -SRC_URI =3D "https://archive.mozilla.org/pub/firefox/releases/${PV}esr=
+/source/firefox-${PV}esr.source.tar.xz \
+> > -           file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-d=
+epend.patch \
+> > -           file://0010-fix-cross-compilation-on-i586-targets.patch \
+> > -           file://0001-do-not-create-python-environment.patch \
+> > -           file://0002-fix-cannot-find-link.patch \
+> > -           file://0003-workaround-autoconf-2.13-detection-failed.patch=
+ \
+> > -           file://0005-fix-do_compile-failed-on-mips.patch \
+> > -           file://add-riscv-support.patch \
+> > -           file://0001-mozjs-fix-coredump-caused-by-getenv.patch \
+> > -           file://format-overflow.patch \
+> > -           file://0001-To-fix-build-error-on-arm32BE.patch \
+> > -           file://JS_PUBLIC_API.patch \
+> > -           file://0001-riscv-Disable-atomic-operations.patch \
+> > -           file://fallback-to-2011-C++-standard.patch \
+> > -           "
+> > +SRC_URI =3D " \
+> > +    https://archive.mozilla.org/pub/firefox/releases/${PV}esr/source/f=
+irefox-${PV}esr.source.tar.xz \
+> > +    file://0001-Port-build-to-python3.patch \
+> > +    file://0002-js.pc.in-do-not-include-RequiredDefines.h-for-depend.p=
+atch \
+> > +    file://0003-fix-cross-compilation-on-i586-targets.patch \
+> > +    file://0004-do-not-create-python-environment.patch \
+> > +    file://0005-fix-cannot-find-link.patch \
+> > +    file://0006-workaround-autoconf-2.13-detection-failed.patch \
+> > +    file://0007-fix-do_compile-failed-on-mips.patch \
+> > +    file://0008-add-riscv-support.patch \
+> > +    file://0009-mozjs-fix-coredump-caused-by-getenv.patch \
+> > +    file://0010-format-overflow.patch \
+> > +    file://0011-To-fix-build-error-on-arm32BE.patch \
+> > +    file://0012-JS_PUBLIC_API.patch \
+> > +    file://0013-riscv-Disable-atomic-operations.patch \
+> > +    file://0014-fallback-to-2011-C++-standard.patch \
+> > +"
+> >   SRC_URI_append_libc-musl =3D " \
+> > -           file://0006-support-musl.patch \
+> > -           file://0001-js-Fix-build-with-musl.patch \
+> > -           "
+> > +    file://musl/0001-support-musl.patch \
+> > +    file://musl/0002-js-Fix-build-with-musl.patch \
+> > +"
+> >   SRC_URI_append_mipsarchn32 =3D " \
+> > -           file://0001-fix-compiling-failure-on-mips64-n32-bsp.patch \
+> > -           "
+> > +    file://mipsarchn32/0001-fix-compiling-failure-on-mips64-n32-bsp.pa=
+tch \
+> > +"
+> >   SRC_URI[md5sum] =3D "69a0be9ce695e5dc4941ed0c78ef00c2"
+> >   SRC_URI[sha256sum] =3D "9f453c8cc5669e46e38f977764d49a36295bf0d023619=
+d9aac782e6bb3e8c53f"
+> >
+> >   S =3D "${WORKDIR}/firefox-${@d.getVar("PV").replace("esr", "")}"
+> >
+> > -inherit autotools pkgconfig perlnative ${@bb.utils.contains("BBFILE_CO=
+LLECTIONS", "meta-python2", "pythonnative", "", d)}
+> > +inherit autotools pkgconfig perlnative python3native
+> >
+> >   inherit features_check
+> >   CONFLICT_DISTRO_FEATURES_mipsarchn32 =3D "ld-is-gold"
+> >
+> > -DEPENDS +=3D "nspr zlib autoconf-2.13-native \
+> > -            python-six-native python-pytoml-native \
+> > -            python-jsmin-native python-futures-native \
+> > -            python-which-native"
+> > +DEPENDS +=3D " \
+> > +    nspr zlib autoconf-2.13-native \
+> > +    python3-six-native python3-pytoml-native \
+> > +    python3-jsmin-native python3-six \
+> > +"
+> >
+> >   # Disable null pointer optimization in gcc >=3D 6
+> >   # https://bugzilla.redhat.com/show_bug.cgi?id=3D1328045
+> > @@ -82,7 +85,7 @@ do_configure() {
+> >       export SHELL=3D"/bin/sh"
+> >       cd ${S}
+> >       # Add mozjs python-modules necessary
+> > -    PYTHONPATH=3D"$PYTHONPATH:${S}/config:${S}/build"
+> > +    PYTHONPATH=3D"${S}/third_party/python/which:${S}/config:${S}/build=
+"
+> >       for sub_dir in python testing/mozbase; do
+> >           for module_dir in `ls $sub_dir -1`;do
+> >               [ $module_dir =3D "virtualenv" ] && continue
+> > @@ -96,7 +99,6 @@ do_configure() {
+> >
+> >       cd ${S}/js/src
+> >       autoconf213 --macrodir=3D${STAGING_DATADIR_NATIVE}/autoconf213 ol=
+d-configure.in > old-configure
+> > -    sed -i 's:refresh =3D True:refresh =3D False:g' ${S}/build/moz.con=
+figure/old.configure
+> >
+> >       cd ${B}
+> >       ${S}/js/src/configure ${EXTRA_OECONF}
+> >
+>
 
