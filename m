@@ -1,51 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
+Return-Path: <twoerner@gmail.com>
 Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com
 	[209.85.219.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 559D360926
+	by mail.openembedded.org (Postfix) with ESMTP id C3D1160B58
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 21:17:57 +0000 (UTC)
-Received: by mail-qv1-f65.google.com with SMTP id dc14so3926339qvb.9
+	Mon, 10 Feb 2020 22:45:44 +0000 (UTC)
+Received: by mail-qv1-f65.google.com with SMTP id n8so4040897qvg.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 13:17:58 -0800 (PST)
+	Mon, 10 Feb 2020 14:45:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=4VCUzZmoi3r7lQj+yjaxJ8fhfFYyHFbOIxB0l0cJyqc=;
-	b=B/s18LYlX0e/WBokD5AoVr8EcVwX//egRwaDMLQ9IElPPBWUAQeE2V+RnjXvcVDeS6
-	ZEyPVRaTNeE0e7KuA+KCbO2q8NXAfvWk3ruXQs8VEp7Oc54qZd2u02XlPExECk2bnTY9
-	+UytXH+jZ1N86QoCK8KKLh7YdtFqKgnlVwtIfNZvvnHf3fuOTOxYO01c1pgmvVmUlYDP
-	e1LNpU3iK8tyPMr4K+RC1s0PW/iqYsCtSbFv1OUBtTmryOZiy7jlF4+HqvdP8jnlems3
-	RV2QfPdJIgwOOLlifgjrvIKMyxQUiEKM74Cl7oCE1c0Qt/sN2KMzQvvjB2iXs5flA7HG
-	8cNg==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=+XRsH43oBOd7GyEuGkNeArUoaPpCUdG1htts942OqiQ=;
+	b=Z0s8Fo6HNp9Oi9OSgetcyzmpVdx7owKUgs96cFzjg6851OvWvE5VpaB6lwE8CNG1zB
+	Pcu8ZxlL6laxUA7+dhGzFXKOMAvZQkIJ3avKOaJx/z1fBwSoVDW4gkr52dqYtKI+wkGt
+	dPQpWSy2Pi8ENJfPb2zUORjSrCnSNEgMgDFCRa11fFE+O588EWDwKmFuFuFliMSLgh9i
+	/hetj7vqy+A2gvdJh9ExPHg/Llr4L3QyfhPu6aLwBUb2flQj03n7sS21WHCN15HYZ+1N
+	ec5LrlFyO0ivGFKHwFmS/WtwWiVppns5tREHfyQUXQSOQNxv0/CsOojdH2wkeBFPrRqU
+	aHQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=4VCUzZmoi3r7lQj+yjaxJ8fhfFYyHFbOIxB0l0cJyqc=;
-	b=e8jn0S8Ss3fZWyE2e0E2q8FDthFgrgDsnLH493xx9n97iOSkZPNwg5QmzH+W66+cYd
-	tO4fDBiXeCPUaGcpjxJm2OvwrR9RBHZgBk+QlFOgFlK7kmcRVEuhUoiN+IV9lGYDu+la
-	CIHnIEnw86/wVLEi8vNCLZMnqHQHFaaj/8/Ck9vVnKNFkNuyucqFDDlyY1jYLJeyTsGI
-	ztsRCVZDRT6bu62oNN8CzKEN4C/FtGEV2JUdzOvSiE/aFmGf3mH7Mjnwqr78Qp9TYl/d
-	fYHiZq2Li5i/5tDaZw48/X8V2SDqWvXg/BEEso40h40jDsG08SjxzlCI5cypNl+Zw0F5
-	wgaQ==
-X-Gm-Message-State: APjAAAWF3A+MLzetnoqtkOcxTbw1/u76GX44y9a1XM+0iTRXPwRG0Ikm
-	PTBq/JmTfQC/lODQ2r0n6QhycgPDWb4wNbuNolg=
-X-Google-Smtp-Source: APXvYqxDH9tLsBaXWXYpH8c6z+VX1Z93YezC69abwpqbB3/9kIRpsic8C7tOfYcTVBzEERdYt9j/e95DH9MU9rPMHys=
-X-Received: by 2002:ad4:4d94:: with SMTP id cv20mr11310960qvb.99.1581369477958;
-	Mon, 10 Feb 2020 13:17:57 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=+XRsH43oBOd7GyEuGkNeArUoaPpCUdG1htts942OqiQ=;
+	b=YMDmIHVDdaUWaBDGBzHE7Vv9B8UlhCR+3vpyJ0RatDfoDYGISZZ9UWmBwV6tNNWVN6
+	1OswBkY5BtSfvomh4/jcaB9gHaOev9P2cywFg8oCIRbGNmyLORgAVGQtIz0jthu37cH8
+	vVNMQuaoIJO6aDgAmiJZMc5YuYrDP5+BMi8HJrDW0YxcdAXzhQaN1OfiBg3Xgowz/Rm9
+	GhXD2okWzVO5rnUXs3bANy0pH3hk/xIFZhUQ9Um1uPTb782P+Ue1HXBSeNrcabz1Dnpy
+	pHjn4PIZ+OHXnSpYUy56JHX9RQhvlAfYIOntbLWJf72QTuw8UyZJFXeyZhsWLffFCJ1T
+	+JmA==
+X-Gm-Message-State: APjAAAUBYt3XGFY5jtKl1FoHX4fdqiJs5MPr/VwTMlx1eK4M1TJ7m5FX
+	Mrcms+yelq8jsOVRZeB63B6IgwnLpzQ=
+X-Google-Smtp-Source: APXvYqxxjNDzK2hjlB/JmuoQrTNpEDteqM21QThQPwyGRBXVm/mCbGoVb2VZLaMHpo9MFymqsNWjGw==
+X-Received: by 2002:a0c:fe8d:: with SMTP id d13mr191862qvs.217.1581374745301; 
+	Mon, 10 Feb 2020 14:45:45 -0800 (PST)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id 141sm882473qkk.62.2020.02.10.14.45.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 10 Feb 2020 14:45:44 -0800 (PST)
+From: Trevor Woerner <twoerner@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Feb 2020 17:45:30 -0500
+Message-Id: <20200210224530.18390-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.25.0.114.g5b0ca878e0
 MIME-Version: 1.0
-References: <20200201163703.4264-1-schnitzeltony@gmail.com>
-	<20200201163703.4264-2-schnitzeltony@gmail.com>
-	<9f2e4677-9acd-f0d7-2eda-140b954ae58f@gmail.com>
-	<CAMKF1soH7ofWsnKaT2o76VQgASxVVd+vWOSDSYnZjHS8Ott3sQ@mail.gmail.com>
-	<CALbNGRT=UrWpkaGGdDrvSV+Z4vy5snr04d_5cn=dL9eARDLcdw@mail.gmail.com>
-In-Reply-To: <CALbNGRT=UrWpkaGGdDrvSV+Z4vy5snr04d_5cn=dL9eARDLcdw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 10 Feb 2020 13:17:31 -0800
-Message-ID: <CAMKF1sos4GO87TD-sSZKYP11faP6=p9XdzUpMgFemuswFxtuag@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/4] mozjs: port build to python3
+Subject: [meta-python][PATCH] python3-bitarray: fix name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,38 +57,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 21:17:57 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 10 Feb 2020 22:45:44 -0000
+Content-Transfer-Encoding: 8bit
 
-On Mon, Feb 10, 2020 at 1:15 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
-m> wrote:
->
-> On Mon, Feb 10, 2020 at 9:11 PM Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > Hi Andreas
-> >
-> > I am seeing failure on OE builders like below
-> >
-> > TypeError: a bytes-like object is required, not 'str'
-> >
-> > detailed log
-> >
-> > http://errors.yoctoproject.org/Errors/Details/390559/
-> >
-> >
-> Yeah I've seen this kind of error dozens of times.
->
-> From the first glance I think it is gold which makes the difference.
-> Hope to get it reproduced and fixed soon and come back
->
-> BTW / off-topic: I sent similar patch for qtwebkit. Is that part of your =
-builds?
->
+This recipe's filename is missing a trailing 'b'.
 
-I use master-next of meta-qt5 so it does get built on some builders
-but on some where
-not enough compute is available, meta-qt5 is disabled.
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ .../{python3-bitarray_1.2.1.b => python3-bitarray_1.2.1.bb}       | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-bitarray_1.2.1.b => python3-bitarray_1.2.1.bb} (100%)
 
-> Andreas
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.b b/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-bitarray_1.2.1.b
+rename to meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+-- 
+2.25.0.114.g5b0ca878e0
+
 
