@@ -1,50 +1,49 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com
-	[209.85.219.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C3D1160B58
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id B8A5460B58
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 22:45:44 +0000 (UTC)
-Received: by mail-qv1-f65.google.com with SMTP id n8so4040897qvg.11
+	Mon, 10 Feb 2020 22:48:04 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id z12so4669079pgl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 14:45:46 -0800 (PST)
+	Mon, 10 Feb 2020 14:48:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=+XRsH43oBOd7GyEuGkNeArUoaPpCUdG1htts942OqiQ=;
-	b=Z0s8Fo6HNp9Oi9OSgetcyzmpVdx7owKUgs96cFzjg6851OvWvE5VpaB6lwE8CNG1zB
-	Pcu8ZxlL6laxUA7+dhGzFXKOMAvZQkIJ3avKOaJx/z1fBwSoVDW4gkr52dqYtKI+wkGt
-	dPQpWSy2Pi8ENJfPb2zUORjSrCnSNEgMgDFCRa11fFE+O588EWDwKmFuFuFliMSLgh9i
-	/hetj7vqy+A2gvdJh9ExPHg/Llr4L3QyfhPu6aLwBUb2flQj03n7sS21WHCN15HYZ+1N
-	ec5LrlFyO0ivGFKHwFmS/WtwWiVppns5tREHfyQUXQSOQNxv0/CsOojdH2wkeBFPrRqU
-	aHQQ==
+	bh=52h9kKMM/cfD30twC9ZxZzvTgHeJdPFcGhUWf23cYCE=;
+	b=in5ALrGy9C7VGIQoGpcPKnyAB/S0d620xpoW5B1utTnbko+zMmY6iEgLIdavCgw4Ug
+	9wuYxL+Vl+sLJaY159OzNvQvvH6cJsZVA2UQCPjQ9IWUW0Kb4rRXa48vhp3R6SIgrzz8
+	TmQhDql7lSZbdbPQfrqrybqM4fYAaKhRpejS5Hr/cp56Dfcy4UxZjejsc3IArWzlQ3dh
+	SrVJf4SYPXE7GESkvhInHOyl7tN7WRHhD6eheu+KxqLfBhT1Uog8PK1XvOlNQAdIEIF0
+	4xiHINbRaUVwyueIedtTtV84dlnW2ecd40I4iicBnyIGAKfkuwkaDq1PHbbXz+cVidcx
+	U02Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=+XRsH43oBOd7GyEuGkNeArUoaPpCUdG1htts942OqiQ=;
-	b=YMDmIHVDdaUWaBDGBzHE7Vv9B8UlhCR+3vpyJ0RatDfoDYGISZZ9UWmBwV6tNNWVN6
-	1OswBkY5BtSfvomh4/jcaB9gHaOev9P2cywFg8oCIRbGNmyLORgAVGQtIz0jthu37cH8
-	vVNMQuaoIJO6aDgAmiJZMc5YuYrDP5+BMi8HJrDW0YxcdAXzhQaN1OfiBg3Xgowz/Rm9
-	GhXD2okWzVO5rnUXs3bANy0pH3hk/xIFZhUQ9Um1uPTb782P+Ue1HXBSeNrcabz1Dnpy
-	pHjn4PIZ+OHXnSpYUy56JHX9RQhvlAfYIOntbLWJf72QTuw8UyZJFXeyZhsWLffFCJ1T
-	+JmA==
-X-Gm-Message-State: APjAAAUBYt3XGFY5jtKl1FoHX4fdqiJs5MPr/VwTMlx1eK4M1TJ7m5FX
-	Mrcms+yelq8jsOVRZeB63B6IgwnLpzQ=
-X-Google-Smtp-Source: APXvYqxxjNDzK2hjlB/JmuoQrTNpEDteqM21QThQPwyGRBXVm/mCbGoVb2VZLaMHpo9MFymqsNWjGw==
-X-Received: by 2002:a0c:fe8d:: with SMTP id d13mr191862qvs.217.1581374745301; 
-	Mon, 10 Feb 2020 14:45:45 -0800 (PST)
-Received: from linux-uys3.suse ([206.248.190.95])
-	by smtp.gmail.com with ESMTPSA id 141sm882473qkk.62.2020.02.10.14.45.43
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Feb 2020 14:45:44 -0800 (PST)
-From: Trevor Woerner <twoerner@gmail.com>
+	bh=52h9kKMM/cfD30twC9ZxZzvTgHeJdPFcGhUWf23cYCE=;
+	b=lgUK4FGPDe2HvZkOXZ8IZSg0Y0MadgfV61Dk4J7ir5DysjL2AmzzwP6t8z2MlOtB8P
+	0pAtAXYzNAwTXe8ftXvC20vOt7clYPW+YaviMbahbfJPBuptUfgjBKQeFu8p9sbpTScY
+	CefepJWIIpSIxJJ1sXPb8Dz9tFnFVT0sYOe+u6z5GhoSIqTVnogJAXh4BzNbkZTwZXAN
+	Q3a5JMXCVMmwgM6RhPxCgVL0Pt3GX2vsd2P6tDjcud2FNwmR1OYk/pfzPi4O5Gvf/IBH
+	pWuOM1skOkckCB2v4RR5EIrG5TdfNp1Bu+FWFRQsZJvhFZA37WLncWz3sGuXivyOupps
+	P51w==
+X-Gm-Message-State: APjAAAUaYuvX59cLRAM5Nqzt9CJSvnEdki+eVc8vGLyGasa4qkN+40Ie
+	wGPRpRyWYPsSU0PvdPO4SESCH+5vX5A=
+X-Google-Smtp-Source: APXvYqwGW01+VMKYFcgS6H46hqYLy2JB+I/p2YY0to01vQmZoM39kSitTRsRP0jgyli00JGn9hS1+Q==
+X-Received: by 2002:a62:3892:: with SMTP id f140mr3238589pfa.190.1581374885263;
+	Mon, 10 Feb 2020 14:48:05 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::5683])
+	by smtp.gmail.com with ESMTPSA id 26sm450799pjk.3.2020.02.10.14.48.04
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 10 Feb 2020 14:48:04 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Feb 2020 17:45:30 -0500
-Message-Id: <20200210224530.18390-1-twoerner@gmail.com>
-X-Mailer: git-send-email 2.25.0.114.g5b0ca878e0
+Date: Mon, 10 Feb 2020 14:48:06 -0800
+Message-Id: <20200210224806.3303847-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python3-bitarray: fix name
+Subject: [meta-oe][PATCH] mozjs: Fix gold linker detection with py3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,22 +56,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 22:45:44 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 22:48:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-This recipe's filename is missing a trailing 'b'.
-
-Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../{python3-bitarray_1.2.1.b => python3-bitarray_1.2.1.bb}       | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-bitarray_1.2.1.b => python3-bitarray_1.2.1.bb} (100%)
+ .../mozjs/mozjs/python3_string_encoding.patch | 20 +++++++++++++++++++
+ .../recipes-extended/mozjs/mozjs_60.9.0.bb    |  1 +
+ 2 files changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/python3_string_encoding.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.b b/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-bitarray_1.2.1.b
-rename to meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs/python3_string_encoding.patch b/meta-oe/recipes-extended/mozjs/mozjs/python3_string_encoding.patch
+new file mode 100644
+index 0000000000..97eb012e83
+--- /dev/null
++++ b/meta-oe/recipes-extended/mozjs/mozjs/python3_string_encoding.patch
+@@ -0,0 +1,20 @@
++Fixes python3 erros like below
++
++AttributeError: 'bytes' object has no attribute 'encode'
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++Index: firefox-60.9.0/build/moz.configure/toolchain.configure
++===================================================================
++--- firefox-60.9.0.orig/build/moz.configure/toolchain.configure
+++++ firefox-60.9.0/build/moz.configure/toolchain.configure
++@@ -1518,7 +1518,7 @@ def enable_gnu_linker(enable_gold_option
++         if not gold:
++             return
++ 
++-        goldFullPath = find_program(gold)
+++        goldFullPath = find_program(gold.decode())
++         if goldFullPath is None:
++             return
++ 
+diff --git a/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb
+index 9466c62aac..b7731c7a2a 100644
+--- a/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb
++++ b/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb
+@@ -19,6 +19,7 @@ SRC_URI = " \
+     file://0012-JS_PUBLIC_API.patch \
+     file://0013-riscv-Disable-atomic-operations.patch \
+     file://0014-fallback-to-2011-C++-standard.patch \
++    file://python3_string_encoding.patch \
+ "
+ SRC_URI_append_libc-musl = " \
+     file://musl/0001-support-musl.patch \
 -- 
-2.25.0.114.g5b0ca878e0
+2.25.0
 
 
