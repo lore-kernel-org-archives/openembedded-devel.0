@@ -1,49 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B8A5460B58
+Return-Path: <twoerner@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id A12A360B58
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 22:48:04 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id z12so4669079pgl.4
+	Mon, 10 Feb 2020 22:49:18 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id a2so7805447qko.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 14:48:06 -0800 (PST)
+	Mon, 10 Feb 2020 14:49:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=52h9kKMM/cfD30twC9ZxZzvTgHeJdPFcGhUWf23cYCE=;
-	b=in5ALrGy9C7VGIQoGpcPKnyAB/S0d620xpoW5B1utTnbko+zMmY6iEgLIdavCgw4Ug
-	9wuYxL+Vl+sLJaY159OzNvQvvH6cJsZVA2UQCPjQ9IWUW0Kb4rRXa48vhp3R6SIgrzz8
-	TmQhDql7lSZbdbPQfrqrybqM4fYAaKhRpejS5Hr/cp56Dfcy4UxZjejsc3IArWzlQ3dh
-	SrVJf4SYPXE7GESkvhInHOyl7tN7WRHhD6eheu+KxqLfBhT1Uog8PK1XvOlNQAdIEIF0
-	4xiHINbRaUVwyueIedtTtV84dlnW2ecd40I4iicBnyIGAKfkuwkaDq1PHbbXz+cVidcx
-	U02Q==
+	bh=YFTzRYz9aLvHoFHbj53eGe/udjuMwt6D36kjYSeEQAE=;
+	b=vdei5Ct+f7ruilYVAtN6e0+8iradkxcVWKm0+oknd+4DG8zA9eXj2eYOgUmPFKrYnY
+	DwjQJ5OJhz4kmi6AeknHLAurpFwIT7Ibpixe1y+rjvv/H8E8q9hGMmOFl15faXTdPDZl
+	fWFEanAnjvw8n5BAzQleXZx9Jsa5blA3GtVA2vh9E2NRpWm84Vtw7vMk9GnMfJ1Lto9w
+	/Dsk5wNeStPbspUtukio9WpaaZlfTxyd5bQmwTX58jSpsDCPyrSdaTIOaXB4QBMjZ4J8
+	JKV71BaN9MlGM73nguXEo5XmyFQ1hBDqG/r2bChC1AYju3ckZZ6JamKhfa97r101F2JZ
+	g16Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=52h9kKMM/cfD30twC9ZxZzvTgHeJdPFcGhUWf23cYCE=;
-	b=lgUK4FGPDe2HvZkOXZ8IZSg0Y0MadgfV61Dk4J7ir5DysjL2AmzzwP6t8z2MlOtB8P
-	0pAtAXYzNAwTXe8ftXvC20vOt7clYPW+YaviMbahbfJPBuptUfgjBKQeFu8p9sbpTScY
-	CefepJWIIpSIxJJ1sXPb8Dz9tFnFVT0sYOe+u6z5GhoSIqTVnogJAXh4BzNbkZTwZXAN
-	Q3a5JMXCVMmwgM6RhPxCgVL0Pt3GX2vsd2P6tDjcud2FNwmR1OYk/pfzPi4O5Gvf/IBH
-	pWuOM1skOkckCB2v4RR5EIrG5TdfNp1Bu+FWFRQsZJvhFZA37WLncWz3sGuXivyOupps
-	P51w==
-X-Gm-Message-State: APjAAAUaYuvX59cLRAM5Nqzt9CJSvnEdki+eVc8vGLyGasa4qkN+40Ie
-	wGPRpRyWYPsSU0PvdPO4SESCH+5vX5A=
-X-Google-Smtp-Source: APXvYqwGW01+VMKYFcgS6H46hqYLy2JB+I/p2YY0to01vQmZoM39kSitTRsRP0jgyli00JGn9hS1+Q==
-X-Received: by 2002:a62:3892:: with SMTP id f140mr3238589pfa.190.1581374885263;
-	Mon, 10 Feb 2020 14:48:05 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::5683])
-	by smtp.gmail.com with ESMTPSA id 26sm450799pjk.3.2020.02.10.14.48.04
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 10 Feb 2020 14:48:04 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
+	bh=YFTzRYz9aLvHoFHbj53eGe/udjuMwt6D36kjYSeEQAE=;
+	b=ayj4d1QVWg5O83M3O1br3hNPLYhQSbsWJQEtkn682AYKWKiOA0+sawo3Os1ALS5Spc
+	JWPLNcDp2guaKsWcQNb3oNG0YbmTqoqrFM6/BEFxCV/FDGsb6MzGje6k81AslSwpDkZx
+	3X93Q4M8ADQ4csi7GG5lopQnUt6tHXeY1hvCX+AVYIAXJ6KUJd/vJoRZgQCUdluTlv35
+	lsXC5ZOCM9Gh40n0Kiqg04d/rOr/gfgkUfnfGpGEXUqhAlAY3uPnYjtC2bjdVHlAWjww
+	kd6ThfCZVD8XfoH17POelQZd+pBHE+y8k3+DAmFLapkVnT2hu49sIJUmYM/itsBTbqTQ
+	9Rcg==
+X-Gm-Message-State: APjAAAXuMnPzUXGggrC8NtV7NRMuautgslIHGK+F0iJQFY8UcephJ+2X
+	zO7PaO84p9jHMEOKyr3hsYYofL3OLqI=
+X-Google-Smtp-Source: APXvYqxZqf/gXHYG4Fo480ND7+/dtFmeBF313NfD9bmAFlDkJ4AiXaFYc9rJZeYdSm//GYXWjlp1HQ==
+X-Received: by 2002:a37:f60b:: with SMTP id y11mr3053957qkj.183.1581374959293; 
+	Mon, 10 Feb 2020 14:49:19 -0800 (PST)
+Received: from linux-uys3.suse ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id t23sm898360qtp.82.2020.02.10.14.49.17
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 10 Feb 2020 14:49:18 -0800 (PST)
+From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Feb 2020 14:48:06 -0800
-Message-Id: <20200210224806.3303847-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.0
+Date: Mon, 10 Feb 2020 17:49:08 -0500
+Message-Id: <20200210224908.13941-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.25.0.114.g5b0ca878e0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mozjs: Fix gold linker detection with py3
+Subject: [meta-perl][PATCH] packagegroup-meta-perl: fix package name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,57 +57,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 22:48:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 10 Feb 2020 22:49:18 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andreas Müller <schnitzeltony@gmail.com>
----
- .../mozjs/mozjs/python3_string_encoding.patch | 20 +++++++++++++++++++
- .../recipes-extended/mozjs/mozjs_60.9.0.bb    |  1 +
- 2 files changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/python3_string_encoding.patch
+There is no libcrypt-openssl-guess package, but there is a
+libcrypt-openssl-guess-perl.
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs/python3_string_encoding.patch b/meta-oe/recipes-extended/mozjs/mozjs/python3_string_encoding.patch
-new file mode 100644
-index 0000000000..97eb012e83
---- /dev/null
-+++ b/meta-oe/recipes-extended/mozjs/mozjs/python3_string_encoding.patch
-@@ -0,0 +1,20 @@
-+Fixes python3 erros like below
-+
-+AttributeError: 'bytes' object has no attribute 'encode'
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Index: firefox-60.9.0/build/moz.configure/toolchain.configure
-+===================================================================
-+--- firefox-60.9.0.orig/build/moz.configure/toolchain.configure
-++++ firefox-60.9.0/build/moz.configure/toolchain.configure
-+@@ -1518,7 +1518,7 @@ def enable_gnu_linker(enable_gold_option
-+         if not gold:
-+             return
-+ 
-+-        goldFullPath = find_program(gold)
-++        goldFullPath = find_program(gold.decode())
-+         if goldFullPath is None:
-+             return
-+ 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb
-index 9466c62aac..b7731c7a2a 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb
-@@ -19,6 +19,7 @@ SRC_URI = " \
-     file://0012-JS_PUBLIC_API.patch \
-     file://0013-riscv-Disable-atomic-operations.patch \
-     file://0014-fallback-to-2011-C++-standard.patch \
-+    file://python3_string_encoding.patch \
- "
- SRC_URI_append_libc-musl = " \
-     file://musl/0001-support-musl.patch \
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+---
+ meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
+index 9d0e33baf..9b2406ba6 100644
+--- a/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
++++ b/meta-perl/recipes-perl/packagegroups/packagegroup-meta-perl.bb
+@@ -16,7 +16,7 @@ RDEPENDS_packagegroup-meta-perl = "\
+     libtext-wrapi18n-perl liblocale-gettext-perl libdata-hexdump-perl \
+     libextutils-installpaths-perl libextutils-helpers-perl libextutils-parsexs-perl \
+     libextutils-config-perl libextutils-cppguess-perl libimport-into-perl \
+-    libcrypt-openssl-rsa-perl libcrypt-openssl-guess libcrypt-openssl-random-perl \
++    libcrypt-openssl-rsa-perl libcrypt-openssl-guess-perl libcrypt-openssl-random-perl \
+     libxml-sax-writer-perl libxml-libxml-perl libxml-filter-buffertext-perl \
+     adduser \
+     libauthen-sasl-perl libnet-ldap-perl libnet-dns-perl \
 -- 
-2.25.0
+2.25.0.114.g5b0ca878e0
 
 
