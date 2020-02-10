@@ -1,31 +1,31 @@
 Return-Path: <okaya@kernel.org>
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id B71B360BE2
+	by mail.openembedded.org (Postfix) with ESMTP id 56EE160BE2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 17:47:22 +0000 (UTC)
+	Mon, 10 Feb 2020 17:49:31 +0000 (UTC)
 Received: from
 	sinanubuntu1604.jnhiziqmwaketkadpjb23kppec.bx.internal.cloudapp.net
 	(unknown [52.170.189.109])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 670642080C;
-	Mon, 10 Feb 2020 17:47:23 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 4DE632080C;
+	Mon, 10 Feb 2020 17:49:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1581356843;
-	bh=IG5DuMClKocwSFfwKXi+KMKfTfUj6rd+be97PGQfLP8=;
+	s=default; t=1581356972;
+	bh=/WiEgjKINraVEaKr2oPhUZzKo6aI/CNU7T9maERRmJk=;
 	h=From:To:Cc:Subject:Date:From;
-	b=aOPR9aEvyzJaRdiiCpruCpny/WkkStpOEf+Gz8E1HOw2g0+j/Jl9MeP/cdNFx9W1P
-	lb0VGwk82NG6sVqJ2rXX5V4AbH3S7bVu7ihCy8I1C3gmmSkhthZJCTLRWEmSD5bZGQ
-	0ugh8iP28K84AqdAE2qKeeDGnJkm0zBVwYsg7rt4=
+	b=rlhzXZJ0AKgPhmD64pBY1wI8rXB1LUrRsxt1rySAjt9TlrIAXMtimGlbO03NMrWLe
+	Qj7noABcM/RlqQDL7OkMVQ/4ICXD9jpQw7WwefEMNLboYu2ltNYvEgsoZW8zDBNMJ/
+	zZJ7bPqWozfLmENYtmUn5soZi1BVuIrOBcmkR6co=
 From: Sinan Kaya <okaya@kernel.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Feb 2020 17:47:20 +0000
-Message-Id: <20200210174720.31886-1-okaya@kernel.org>
+Date: Mon, 10 Feb 2020 17:49:29 +0000
+Message-Id: <20200210174929.34851-1-okaya@kernel.org>
 X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
 Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
 	Changyu Li <Changyu.Li@microsoft.com>
-Subject: [meta-oe][PATCH v2] abseil-cpp: add recipe for git version
+Subject: [meta-oe][PATCH v3] abseil-cpp: add recipe for git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,7 +38,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 17:47:22 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 17:49:31 -0000
 Content-Transfer-Encoding: 8bit
 
 The repository contains the Abseil C++ library code. Abseil is an
@@ -51,8 +51,8 @@ Signed-off-by: Changyu Li <Changyu.Li@microsoft.com>
 Signed-off-by: Sinan Kaya <sinan.kaya@microsoft.com>
 ---
  ...e-maes-option-from-cross-compilation.patch | 53 +++++++++++++++++++
- .../abseil-cpp/abseil-cpp_git.bb              | 42 +++++++++++++++
- 2 files changed, 95 insertions(+)
+ .../abseil-cpp/abseil-cpp_git.bb              | 41 ++++++++++++++
+ 2 files changed, 94 insertions(+)
  create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp/0001-Remove-maes-option-from-cross-compilation.patch
  create mode 100644 meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
 
@@ -117,10 +117,10 @@ index 0000000000..4c41cd8902
 +
 diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
 new file mode 100644
-index 0000000000..5090dc9fae
+index 0000000000..2d4ee0bb92
 --- /dev/null
 +++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -0,0 +1,42 @@
+@@ -0,0 +1,41 @@
 +SUMMARY = "Abseil is a cpp library like STL"
 +DESCRIPTION = "Abseil provides pieces missing from the C++ standard. Contains \
 +additional useful libraries like algorithm, container, debugging, hash, memory, \
@@ -138,7 +138,6 @@ index 0000000000..5090dc9fae
 +
 +S = "${WORKDIR}/git"
 +
-+TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', ' -march=armv8-a+crypto', '', d)}"
 +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'x64', ' -maes -msse4.1', '', d)}"
 +
 +CXXFLAGS_append = " -fPIC"
