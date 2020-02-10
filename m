@@ -1,38 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com
-	[209.85.167.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 908B660B0E
+Received: from mail-ot1-f52.google.com (mail-ot1-f52.google.com
+	[209.85.210.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 0ADF060B0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 00:35:23 +0000 (UTC)
-Received: by mail-oi1-f180.google.com with SMTP id l9so7634049oii.5
+	Mon, 10 Feb 2020 00:37:59 +0000 (UTC)
+Received: by mail-ot1-f52.google.com with SMTP id 59so4674994otp.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Feb 2020 16:35:25 -0800 (PST)
+	Sun, 09 Feb 2020 16:38:01 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=yMGL5WBwLKXZQ4cKJD5niCwSMAxbPqI2kIpDr5iyJEs=;
-	b=ArvkL1J3r7E6VFkSW7RKEE3syUB0VnMWtMFfNtt3bec9Fev5iKQ9T4BjwreT6Y/cVL
-	VhjtA/8PbVvTJMg2WqhxSR/+zMxwXLEXB/ZN2WKfASm29wbW3TJetujIn5jI4Dw6eCgh
-	dg2hH7YuTykyYuZiGb/ZrdKqqv+GlbvJx2R4n4KpkIYyNTd0C8JR8y5R4EE2+mz/tXr7
-	+T3BGCrVMKJbaYokzf0oEjfgauodjvFb/aTsnZwy9I5CJp4dccc1wk7JTur/6/gI1pl9
-	RRfLCZOyfp4G62s0BZiXdq3z/14PuTVfB4FBWn70JpVr7Kel10pOo7NX7yuCwOzSchlA
-	MxsQ==
-X-Gm-Message-State: APjAAAWJIxqgtofklsS9k6c41fzhYpxCbxL6zTnJ774n1vXU61ZT9CV9
-	McgL7yGi8olbyfnGAhMSnDE113S4gQE=
-X-Google-Smtp-Source: APXvYqzu2Ho+eDlYMB2DxkO9qZUzNlT9tGQxGe/3xCeszi2zcICrVR4y0sNNEqGwn5a6cK8AI55QNQ==
-X-Received: by 2002:aca:c646:: with SMTP id w67mr8857912oif.171.1581294924336; 
-	Sun, 09 Feb 2020 16:35:24 -0800 (PST)
+	bh=sguf1wZfj2qt/7cnUncLVVTf5pkH6wiF1dnQnXNS8Uw=;
+	b=JLTgHuS/eR7yX9/3A9Xfj7fboF7msnJZs5Gi/IxRqN4XBNmkeJUQOLlF+JCPpFtzCL
+	AHevwgdgzaeDhC43+Va8TjDLdwC71q+vIO3LQHa21U43qwxab7WgxtHyrBo6H+jNCxin
+	rJfD2jPXYqlwQsh1bqqEd0VDQAo6aGotlnPT5DesAdVH0BzdgvlKLT1bzOzm1sUoA500
+	2IHGNoknMs3MgG7V9qW7r50CLdgNqKMsc/ES5ueeyeB2RMAQQgsKzuGHK4zFGkQ5vx4s
+	Z3Hi471RKfTVGGiEFbnyS/gChter7TzVETXXWQtL5Th9UNkdo8HTud2rgLECVkrOD7k4
+	34IA==
+X-Gm-Message-State: APjAAAXyetRxVrLP5JfAqx5C7PKBquRRnBo0tLwhHWiWblAqnJVrW7Do
+	UZy8VHhcUW+BEISOnQ2aEgRfPU47gdE=
+X-Google-Smtp-Source: APXvYqxzFYJzxI3NPJNIY9Xi6yPmh0+OPr5kb0JIF3CX/YbQja2WikSGbT4Q3Z2zgwIhbP//dUrwTA==
+X-Received: by 2002:a9d:3c6:: with SMTP id f64mr8697408otf.334.1581295080329; 
+	Sun, 09 Feb 2020 16:38:00 -0800 (PST)
 Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-	by smtp.gmail.com with ESMTPSA id
-	v202sm3467636oie.10.2020.02.09.16.35.23
+	by smtp.gmail.com with ESMTPSA id a1sm3918127oti.2.2020.02.09.16.37.59
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 09 Feb 2020 16:35:23 -0800 (PST)
+	Sun, 09 Feb 2020 16:37:59 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  9 Feb 2020 19:35:12 -0500
-Message-Id: <20200210003512.11758-1-derek@asterius.io>
+Date: Sun,  9 Feb 2020 19:37:48 -0500
+Message-Id: <20200210003748.12437-1-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-atomicwrites: consolidate inc and bb files into a single bb file
+Subject: [meta-python][PATCH] python3-attr: consolidate inc and bb files into a single bb file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,43 +44,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 00:35:23 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 00:38:00 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-atomicwrites.inc      | 7 -------
- .../python/python3-atomicwrites_1.3.0.bb                 | 9 ++++++++-
- 2 files changed, 8 insertions(+), 8 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-atomicwrites.inc
+ meta-python/recipes-devtools/python/python-attr.inc   |  9 ---------
+ .../recipes-devtools/python/python3-attr_0.3.1.bb     | 11 +++++++++--
+ 2 files changed, 9 insertions(+), 11 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-attr.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-atomicwrites.inc b/meta-python/recipes-devtools/python/python-atomicwrites.inc
+diff --git a/meta-python/recipes-devtools/python/python-attr.inc b/meta-python/recipes-devtools/python/python-attr.inc
 deleted file mode 100644
-index 773e9dd770..0000000000
---- a/meta-python/recipes-devtools/python/python-atomicwrites.inc
+index 1d93dd7156..0000000000
+--- a/meta-python/recipes-devtools/python/python-attr.inc
 +++ /dev/null
-@@ -1,7 +0,0 @@
--DESCRIPTION = "Powerful Python library for atomic file writes"
--HOMEPAGE = "https://github.com/untitaker/python-atomicwrites"
+@@ -1,9 +0,0 @@
+-DESCRIPTION = "Simple decorator to set attributes of target function or class in a DRY way"
+-HOMEPAGE = "https://github.com/denis-ryzhkov/attr"
 -LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=91cc36cfafeefb7863673bcfcb1d4da4"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=59805a0285f4d2b6abdedae73db4f5c1"
 -
--SRC_URI[md5sum] = "ce11f780a4ce0fce8a55d64494a88178"
--SRC_URI[sha256sum] = "75a9445bac02d8d058d5e1fe689654ba5a6556a1dfd8ce6ec55a0ed79866cfa6"
-diff --git a/meta-python/recipes-devtools/python/python3-atomicwrites_1.3.0.bb b/meta-python/recipes-devtools/python/python3-atomicwrites_1.3.0.bb
-index 9f306e60d6..04bbed7074 100644
---- a/meta-python/recipes-devtools/python/python3-atomicwrites_1.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-atomicwrites_1.3.0.bb
+-SRC_URI[md5sum] = "68b9a503991241fb2df28488686b0e1e"
+-SRC_URI[sha256sum] = "9091548058d17f132596e61fa7518e504f76b9a4c61ca7d86e1f96dbf7d4775d"
+-
+-inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python3-attr_0.3.1.bb b/meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
+index e80648c8c3..22c5218c70 100644
+--- a/meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
++++ b/meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
 @@ -1,2 +1,9 @@
-+DESCRIPTION = "Powerful Python library for atomic file writes"
-+HOMEPAGE = "https://github.com/untitaker/python-atomicwrites"
+-inherit setuptools3
+-require python-attr.inc
++DESCRIPTION = "Simple decorator to set attributes of target function or class in a DRY way"
++HOMEPAGE = "https://github.com/denis-ryzhkov/attr"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=91cc36cfafeefb7863673bcfcb1d4da4"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=59805a0285f4d2b6abdedae73db4f5c1"
 +
-+SRC_URI[md5sum] = "ce11f780a4ce0fce8a55d64494a88178"
-+SRC_URI[sha256sum] = "75a9445bac02d8d058d5e1fe689654ba5a6556a1dfd8ce6ec55a0ed79866cfa6"
++SRC_URI[md5sum] = "68b9a503991241fb2df28488686b0e1e"
++SRC_URI[sha256sum] = "9091548058d17f132596e61fa7518e504f76b9a4c61ca7d86e1f96dbf7d4775d"
 +
- inherit pypi setuptools3
--require python-atomicwrites.inc
++inherit pypi setuptools3
 -- 
 2.17.1
 
