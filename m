@@ -1,23 +1,26 @@
 Return-Path: <okaya@kernel.org>
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 9366B60C78
+	by mail.openembedded.org (Postfix) with ESMTP id C894060C78
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 16:31:32 +0000 (UTC)
+	Mon, 10 Feb 2020 16:33:21 +0000 (UTC)
 Received: from [10.92.140.44] (unknown [167.220.149.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 4042E20733;
-	Mon, 10 Feb 2020 16:31:33 +0000 (UTC)
+	by mail.kernel.org (Postfix) with ESMTPSA id 97EF92080C;
+	Mon, 10 Feb 2020 16:33:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1581352293;
-	bh=+K8bB+12lsu/UKNguPJcvF393KYqA/5d9Vq3jOGJSMg=;
+	s=default; t=1581352403;
+	bh=DL4aeRDGc0n0sE1ljmqy/5iix5i0UOE/rXKGSM8D1aY=;
 	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=KlOlvETXz8pHROW2FGFG2fO/FPuyaB6+lHo498vztVTCvn9tlXw7mDWFoGyP+Jn2R
-	12m8BLRdoFesdWgwdnkMwGh5RGp7w0NfcCTOU0ALCWuTDA0M8aSOTmvu8uJMFMGtCQ
-	X4UmF+9J3Bq5HdOs1od6TYVGrA8XJ/NKVh3FOBas=
+	b=WWSP1hedXPA5FB5aqY9qHkMTEtkjCvps8J9nJ5LPUWYkKe+yADKaMegO2f0OBj7OT
+	T7ClYQI9HJQUEMp/ysy6AqUC8mMJnXqCZ1as0rak+BPfW+pqxEIlCFBRqr807zhH7Q
+	Auvb9zvle2OYrpdMXf+9hbnlKAfDp0DCocf/HxYM=
 To: Khem Raj <raj.khem@gmail.com>
 References: <20200209034641.19378-1-okaya@kernel.org>
 	<CAMKF1sorVApNQ69i3QOUiK6yF1gCvubzNvT=VMkjPcFtK+XC+w@mail.gmail.com>
+	<CAMKF1sphX1U9MWnhvOhiyKNWy8BJNJtxeJuf9WOYV4qWWrXY7A@mail.gmail.com>
+	<ebdd6807-4f9b-f1aa-fcdf-dba5ab71715e@kernel.org>
+	<CAMKF1spONv-2fZ676CSPjAHbDwzKAABqBHa0Obj2=0+osj84ZQ@mail.gmail.com>
 From: Sinan Kaya <okaya@kernel.org>
 Autocrypt: addr=okaya@kernel.org; keydata=
 	mQENBFrnOrUBCADGOL0kF21B6ogpOkuYvz6bUjO7NU99PKhXx1MfK/AzK+SFgxJF7dMluoF6
@@ -43,12 +46,12 @@ Autocrypt: addr=okaya@kernel.org; keydata=
 	9EiM2eXpJw+Rz+vKjSt1YIhg46YbdZrDM2FGrt9ve3YaM5H0lzJgq/JQPKFdbd5MB0X37Qc+
 	2m/A9u9SFnOovA42DgXUyC2cSbIJdPWOK9PnzfXqF3sX9Aol2eLUmQuLpThJtq5EHu6FzJ7Y
 	L+s0nPaNMKwv/Xhhm6Y=
-Message-ID: <784d11f6-ae33-dc1e-da43-6a71824ec0a6@kernel.org>
-Date: Mon, 10 Feb 2020 11:31:33 -0500
+Message-ID: <744b282f-eb9c-4831-dcf3-5fcec52958ab@kernel.org>
+Date: Mon, 10 Feb 2020 11:33:23 -0500
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
 	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sorVApNQ69i3QOUiK6yF1gCvubzNvT=VMkjPcFtK+XC+w@mail.gmail.com>
+In-Reply-To: <CAMKF1spONv-2fZ676CSPjAHbDwzKAABqBHa0Obj2=0+osj84ZQ@mail.gmail.com>
 Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>,
 	Changyi Li <Changyu.Li@microsoft.com>
@@ -65,58 +68,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 16:31:32 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 16:33:21 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On 2/9/2020 2:53 AM, Khem Raj wrote:
->> +SUMMARY = "Abseil is a cpp library like STL"
->> +DESCRIPTION = "It's got containers, algorithms, useful stuff!"
-> maybe we can be more specific about it from
-> https://github.com/abseil/abseil-cpp/blob/master/README.md
+On 2/9/2020 1:40 PM, Khem Raj wrote:
+> python () {
+>     arch = d.getVar("TARGET_ARCH")
 > 
->> +HOMEPAGE = ""
-> perhaps https://abseil.io/ instead of leaving it empty is better.
-> 
-done
+>     if arch == "aarch64":
+>         tunes = d.getVar("TUNE_FEATURES")
+>         if not tunes:
+>             return
+>         pkgn = d.getVar("PN")
+>         pkgv = d.getVar("PV")
+>         if "crypto" not in tunes:
+>             raise bb.parse.SkipPackage("%s-%s Needs support for crypto
+> on armv8" % (pkgn, pkgv))
+> }
 
->> +SECTION = "libs"
->> +LICENSE = "Apache-2"
-> The current value is not wrong but Apache-2.0 would be better to match SPDX
-> 
-done
+thanks, I'm adding this now.
 
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=df52c6edb7adc22e533b2bacc3bd3915"
->> +
->> +SRCREV = "aa844899c937bde5d2b24f276b59997e5b668bde"
->> +BRANCH = "lts_2019_08_08"
->> +SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}         \
->> +           file://0001-Remove-maes-option-from-cross-compilation.patch \
->> +          "
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', '
->> -march=armv8-a+crypto', '', d)}"
->> +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'x64', ' -maes -msse4.1', '', d)}"
->> +
->> +CXXFLAGS_append_class-nativesdk = " -Wl,--no-as-needed -fPIC"
->> +CXXFLAGS_append_class-native = " -Wl,--no-as-needed -fPIC"
-> perhaps use ASNEEDED_<override> = ""
-
-done
-
-> 
->> +CXXFLAGS_append_class-target = " -fPIC"
->> +
->> +inherit cmake
->> +
->> +BBCLASSEXTEND = "native nativesdk"
->> +ALLOW_EMPTY_${PN} = "1"
-> why do we need this ?
-
-Library generates an empty $PN package and I had problems linking the
-library to the new grpc version without producing the empty ${PN}.
-This library is requires by the newer grpc versions.
 
