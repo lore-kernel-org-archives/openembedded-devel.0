@@ -1,61 +1,101 @@
-Return-Path: <okaya@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id C894060C78
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+	[209.85.216.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C69E60C0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 16:33:21 +0000 (UTC)
-Received: from [10.92.140.44] (unknown [167.220.149.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 97EF92080C;
-	Mon, 10 Feb 2020 16:33:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1581352403;
-	bh=DL4aeRDGc0n0sE1ljmqy/5iix5i0UOE/rXKGSM8D1aY=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=WWSP1hedXPA5FB5aqY9qHkMTEtkjCvps8J9nJ5LPUWYkKe+yADKaMegO2f0OBj7OT
-	T7ClYQI9HJQUEMp/ysy6AqUC8mMJnXqCZ1as0rak+BPfW+pqxEIlCFBRqr807zhH7Q
-	Auvb9zvle2OYrpdMXf+9hbnlKAfDp0DCocf/HxYM=
-To: Khem Raj <raj.khem@gmail.com>
-References: <20200209034641.19378-1-okaya@kernel.org>
-	<CAMKF1sorVApNQ69i3QOUiK6yF1gCvubzNvT=VMkjPcFtK+XC+w@mail.gmail.com>
-	<CAMKF1sphX1U9MWnhvOhiyKNWy8BJNJtxeJuf9WOYV4qWWrXY7A@mail.gmail.com>
-	<ebdd6807-4f9b-f1aa-fcdf-dba5ab71715e@kernel.org>
-	<CAMKF1spONv-2fZ676CSPjAHbDwzKAABqBHa0Obj2=0+osj84ZQ@mail.gmail.com>
-From: Sinan Kaya <okaya@kernel.org>
-Autocrypt: addr=okaya@kernel.org; keydata=
-	mQENBFrnOrUBCADGOL0kF21B6ogpOkuYvz6bUjO7NU99PKhXx1MfK/AzK+SFgxJF7dMluoF6
-	uT47bU7zb7HqACH6itTgSSiJeSoq86jYoq5s4JOyaj0/18Hf3/YBah7AOuwk6LtV3EftQIhw
-	9vXqCnBwP/nID6PQ685zl3vH68yzF6FVNwbDagxUz/gMiQh7scHvVCjiqkJ+qu/36JgtTYYw
-	8lGWRcto6gr0eTF8Wd8f81wspmUHGsFdN/xPsZPKMw6/on9oOj3AidcR3P9EdLY4qQyjvcNC
-	V9cL9b5I/Ud9ghPwW4QkM7uhYqQDyh3SwgEFudc+/RsDuxjVlg9CFnGhS0nPXR89SaQZABEB
-	AAG0HVNpbmFuIEtheWEgPG9rYXlhQGtlcm5lbC5vcmc+iQFOBBMBCAA4FiEEYdOlMSE+a7/c
-	ckrQvGF4I+4LAFcFAlztcAoCGwMFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AACgkQvGF4I+4L
-	AFfidAf/VKHInxep0Z96iYkIq42432HTZUrxNzG9IWk4HN7c3vTJKv2W+b9pgvBF1SmkyQSy
-	8SJ3Zd98CO6FOHA1FigFyZahVsme+T0GsS3/OF1kjrtMktoREr8t0rK0yKpCTYVdlkHadxmR
-	Qs5xLzW1RqKlrNigKHI2yhgpMwrpzS+67F1biT41227sqFzW9urEl/jqGJXaB6GV+SRKSHN+
-	ubWXgE1NkmfAMeyJPKojNT7ReL6eh3BNB/Xh1vQJew+AE50EP7o36UXghoUktnx6cTkge0ZS
-	qgxuhN33cCOU36pWQhPqVSlLTZQJVxuCmlaHbYWvye7bBOhmiuNKhOzb3FcgT7kBDQRa5zq1
-	AQgAyRq/7JZKOyB8wRx6fHE0nb31P75kCnL3oE+smKW/sOcIQDV3C7mZKLf472MWB1xdr4Tm
-	eXeL/wT0QHapLn5M5wWghC80YvjjdolHnlq9QlYVtvl1ocAC28y43tKJfklhHiwMNDJfdZbw
-	9lQ2h+7nccFWASNUu9cqZOABLvJcgLnfdDpnSzOye09VVlKr3NHgRyRZa7me/oFJCxrJlKAl
-	2hllRLt0yV08o7i14+qmvxI2EKLX9zJfJ2rGWLTVe3EJBnCsQPDzAUVYSnTtqELu2AGzvDiM
-	gatRaosnzhvvEK+kCuXuCuZlRWP7pWSHqFFuYq596RRG5hNGLbmVFZrCxQARAQABiQEfBBgB
-	CAAJBQJa5zq1AhsMAAoJELxheCPuCwBX2UYH/2kkMC4mImvoClrmcMsNGijcZHdDlz8NFfCI
-	gSb3NHkarnA7uAg8KJuaHUwBMk3kBhv2BGPLcmAknzBIehbZ284W7u3DT9o1Y5g+LDyx8RIi
-	e7pnMcC+bE2IJExCVf2p3PB1tDBBdLEYJoyFz/XpdDjZ8aVls/pIyrq+mqo5LuuhWfZzPPec
-	9EiM2eXpJw+Rz+vKjSt1YIhg46YbdZrDM2FGrt9ve3YaM5H0lzJgq/JQPKFdbd5MB0X37Qc+
-	2m/A9u9SFnOovA42DgXUyC2cSbIJdPWOK9PnzfXqF3sX9Aol2eLUmQuLpThJtq5EHu6FzJ7Y
-	L+s0nPaNMKwv/Xhhm6Y=
-Message-ID: <744b282f-eb9c-4831-dcf3-5fcec52958ab@kernel.org>
-Date: Mon, 10 Feb 2020 11:33:23 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+	Mon, 10 Feb 2020 16:47:43 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id ep11so4457764pjb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Feb 2020 08:47:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:autocrypt:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=FcPx4MtaY3w0SU/FzFPIdXbiP4CFkrsYH9Vz0FHWzYw=;
+	b=MPVScZrrP4Xc1Bamsrk8Bt7kVq/Onc2LHH/3nrUYF0YO+ogr7GLJHRLUBlW/GtMpFG
+	LosXNf0xPtH+TBqw8RpK6YANKsqXr41fV/qNSwJ6kgLCDyWSHCtvQYX74cAc0s5Q23A/
+	FDLAKkREaALw7CwoGvmDyhjcX9wy5GibcofKbvdjY+BPfmtP9TfE2upOLGRUaLzuieW4
+	nQkB08XeMphTqLSF3y+eWYdZZIU0iSbQ6xaa2NYa4tQLSJB7EWQ3bKgiOoQTxKnqD2HS
+	EiHy1UdZwEMZs1y5cpoWNzeryAyTcHi+VQq/91HadRT+EMO19s3SdT1BJvzq6wNyH+EF
+	eCGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=FcPx4MtaY3w0SU/FzFPIdXbiP4CFkrsYH9Vz0FHWzYw=;
+	b=XW89sH9U2K7jgyF47lJgNdODpb0qBVtpJk7obE0ESY0olzqiWiUmBFRzNMWRX9oK3u
+	idH2g4QZ6zBwxyPfWBy3Jl4Eyr7wODNoRF5eahcfrDTMUhqzkXp9A8YrDW6PSqKJF5Eh
+	rAoFi1rD1FCSsq0Iu7cAGwNxoOT0Jb/rVrX5vZfnudOKAqLOxRARJ991DQR+9APrr1HG
+	541OtvxnztSxpHkqF+IZgcOA7Z/GX42hmeSBNHd3A9A416tW4iOpsdgc+aZftFlO4ECx
+	aFzvvCDp0pBd8U5abK6QXlTsvu8qwg+GQ7TJmEAzjmaCN6zBXjQLfH39L0COh3Ur1AfR
+	dK+w==
+X-Gm-Message-State: APjAAAWu1P8Buq76M2JsW22oFGxOFaQ9minOaxBg5TIO3I+fsCXhLrPU
+	yy0eW9fOEXI7OafhkMRkZW/t1Xre
+X-Google-Smtp-Source: APXvYqyYGrZ5zPLCHlDQVwEjgGq0MfneZAwU/NZk7YJJOe604PeIJCaC0JT5e0gxsA6lPvGSsOUn1Q==
+X-Received: by 2002:a17:902:8204:: with SMTP id
+	x4mr13336284pln.225.1581353264190; 
+	Mon, 10 Feb 2020 08:47:44 -0800 (PST)
+Received: from ?IPv6:2601:202:4180:a5c0:58cf:c2e4:7ede:a168?
+	([2601:202:4180:a5c0:58cf:c2e4:7ede:a168])
+	by smtp.gmail.com with ESMTPSA id i9sm939183pfk.24.2020.02.10.08.47.43
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Mon, 10 Feb 2020 08:47:43 -0800 (PST)
+To: Mike Krupicka <Mike.Krupicka@panduit.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <DM6PR13MB298544CC39D605B40E45D333FE1C0@DM6PR13MB2985.namprd13.prod.outlook.com>
+	<DM6PR13MB2985F8C14E5FF0EAF39A5830FE190@DM6PR13MB2985.namprd13.prod.outlook.com>
+From: akuster808 <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <f5ae62e2-92b4-65d5-6be8-54ff693f4bae@gmail.com>
+Date: Mon, 10 Feb 2020 08:47:41 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spONv-2fZ676CSPjAHbDwzKAABqBHa0Obj2=0+osj84ZQ@mail.gmail.com>
-Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Changyi Li <Changyu.Li@microsoft.com>
-Subject: Re: [meta-oe][PATCH] abseil-cpp: add recipe for git version
+In-Reply-To: <DM6PR13MB2985F8C14E5FF0EAF39A5830FE190@DM6PR13MB2985.namprd13.prod.outlook.com>
+Subject: Re: [meta-networking][zeus][PATCH] mosquitto.init
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,26 +108,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 16:33:21 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 16:47:43 -0000
 Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
 
-On 2/9/2020 1:40 PM, Khem Raj wrote:
-> python () {
->     arch = d.getVar("TARGET_ARCH")
-> 
->     if arch == "aarch64":
->         tunes = d.getVar("TUNE_FEATURES")
->         if not tunes:
->             return
->         pkgn = d.getVar("PN")
->         pkgv = d.getVar("PV")
->         if "crypto" not in tunes:
->             raise bb.parse.SkipPackage("%s-%s Needs support for crypto
-> on armv8" % (pkgn, pkgv))
-> }
 
-thanks, I'm adding this now.
+
+On 2/10/20 6:41 AM, Mike Krupicka wrote:
+> Config file specification is missing in start) case. It is present alre=
+ady in restart) case.
+
+This needs to go into master first.
+
+Should just apply.
+
+- armin
+>
+> Mike
+> ---
+> .../recipes-connectivity/mosquitto/files/mosquitto.init         | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/mosquitto/files/mosqu=
+itto.init b/meta-networking/recipes-connectivity/mosquitto/files/mosquitt=
+o.init
+> index 6a0c12760..9d5963c41 100644
+> --- a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.in=
+it
+> +++ b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.in=
+it
+> @@ -38,7 +38,7 @@ export PATH=3D"${PATH:+$PATH:}@SBINDIR@:@BASE_SBINDIR=
+@"
+> case "$1" in
+>      start)
+>          echo "Starting Mosquitto message broker" "mosquitto"
+> -        if start-stop-daemon --start --quiet --oknodo --background  --=
+make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ; then
+> +        if start-stop-daemon --start --quiet --oknodo --background --m=
+ake-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} -- -c @SYSCONFDIR@/mosq=
+uitto/mosquitto.conf ; then
+>              exit 0
+>          else
+>              exit 1
+> --
+> 2.17.1
+
 
 
