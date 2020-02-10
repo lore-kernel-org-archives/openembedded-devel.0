@@ -1,41 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com
 	[209.85.210.43])
-	by mail.openembedded.org (Postfix) with ESMTP id A503F60EE7
+	by mail.openembedded.org (Postfix) with ESMTP id 7E813605EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 01:11:03 +0000 (UTC)
-Received: by mail-ot1-f43.google.com with SMTP id r27so4743305otc.8
+	Mon, 10 Feb 2020 02:12:50 +0000 (UTC)
+Received: by mail-ot1-f43.google.com with SMTP id z9so4846604oth.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 Feb 2020 17:11:05 -0800 (PST)
+	Sun, 09 Feb 2020 18:12:51 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=jyo50qP+szpcjk3HbjMGl2Imku9fPZN+ms5uxERpw7c=;
-	b=lsubVdzD6cu9a8RRjbOTgUOGHUtqW+QTX2ac9u1HnFLxvpM4NJcgLvsxrL1r0OlPTZ
-	5tP3DZTHNnGBvQKs6JcalCAkROMJcZXbll73T/Px1PIBFZE1qpF16W+1+jY/LxRMC8D6
-	7EKxA9Af6lAfGu8HIF18cW4xTxWxP8qP6xubG7esxlHdSKkEbXO3dvFQT8BVzfbItJtC
-	lE/30DhEX4FKUKaMLyAxlt8t7Ti9PAHxwYQitpRthKfssPe3qmbM2Z0jVdsSjB7iXh2K
-	/sFxm3j5s3hh/aMx81A9xaQifi9lBWBoJ1x6M9iI/dbqir4PJbyvX8onB+S83eMFjbSa
-	17ug==
-X-Gm-Message-State: APjAAAUwnJ1xtfNLz620jLmy8FyDBUKtq0Rj2OLYnjE0hQNaxO/VOisJ
-	Laa1TGXWHbh45DsznBml05aXEE5CwmA=
-X-Google-Smtp-Source: APXvYqwlAAuB4sbwYBHy19h+tmVSitK6lvjzpUB8Obs8Xv+NEh9w+CSabBUs9hcDVhF6ul2XkZER5A==
-X-Received: by 2002:a9d:518b:: with SMTP id y11mr7978447otg.349.1581297064324; 
-	Sun, 09 Feb 2020 17:11:04 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=EMrmppHJU0yWX/cEoxbdsibdLYPOxzj6h/scr1QvDoQ=;
+	b=gXlc9JaS9Ock4hWxHn0ZKLC83MbbVE1jNAEKDrdVfebzsqJcqnenc0qoivDDQv2Sfx
+	8FOMInJjUcCUm346zjBLCKXTKDIbJ1RPyCQrZh/suQWqlZ7m6IHfM0pdPQ5QmvMSHf+Q
+	vdq7kRqRnxdC5zA9wiEz3zrtKDbLBfEUDJWnAp9s1LThwB/1FW51yQjkoa2TgKiuYn2o
+	PQ6V2oaQTn9P7U4wsTspt4JLb/cJsJT/1Xm/7TaDMH5s/Ay5wpXUhpcGyNSmzhxemYSl
+	0WezFrEq5rkBgVUPP1ST33G9+8hxXe/NrCFbjhQh3fBeJiEMGZ/m5Yv5gfNW6HfYB+a4
+	44kg==
+X-Gm-Message-State: APjAAAWi3x/bQScewpiiZRiBzPYkr/d9AmbAcJTHCrO79163fArVG6R2
+	mNtI0Gts4xQvydC4y/DfJ+s42yTI2c4=
+X-Google-Smtp-Source: APXvYqzE5oILi1ibGxASBKvoGnTYZOemNzgw0ffB59BCD5U1bjx1xCvOtKtFkW3SqAuJRwbbdV5xtA==
+X-Received: by 2002:a9d:6386:: with SMTP id w6mr8224828otk.115.1581300770937; 
+	Sun, 09 Feb 2020 18:12:50 -0800 (PST)
 Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-	by smtp.gmail.com with ESMTPSA id
-	c21sm3448996oiy.11.2020.02.09.17.11.03
+	by smtp.gmail.com with ESMTPSA id 5sm4032339otr.13.2020.02.09.18.12.49
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 09 Feb 2020 17:11:03 -0800 (PST)
+	Sun, 09 Feb 2020 18:12:50 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  9 Feb 2020 20:10:47 -0500
-Message-Id: <20200210011047.18827-2-derek@asterius.io>
+Date: Sun,  9 Feb 2020 21:12:34 -0500
+Message-Id: <20200210021235.20614-1-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200210011047.18827-1-derek@asterius.io>
-References: <20200210011047.18827-1-derek@asterius.io>
-Subject: [meta-python][PATCH 2/2] python3-babel: upgrade to version 2.8.0
+Subject: [meta-python][PATCH 1/2] python3-backports-functools-lru-cache: consolidate inc and bb files into a single bb file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,32 +44,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 01:11:03 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 02:12:50 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python3-babel_2.7.0.bb => python3-babel_2.8.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-babel_2.7.0.bb => python3-babel_2.8.0.bb} (80%)
+ .../python-backports-functools-lru-cache.inc  | 19 -----------------
+ ...thon3-backports-functools-lru-cache_1.5.bb | 21 +++++++++++++++++--
+ 2 files changed, 19 insertions(+), 21 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-backports-functools-lru-cache.inc
 
-diff --git a/meta-python/recipes-devtools/python/python3-babel_2.7.0.bb b/meta-python/recipes-devtools/python/python3-babel_2.8.0.bb
-similarity index 80%
-rename from meta-python/recipes-devtools/python/python3-babel_2.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-babel_2.8.0.bb
-index 45ff948736..c69098b226 100644
---- a/meta-python/recipes-devtools/python/python3-babel_2.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-babel_2.8.0.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://babel.edgewall.org/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=942469df9305abb1c59e95f778310384"
- 
--SRC_URI[md5sum] = "83c158b7dae9135750a7cf204e6e2eea"
--SRC_URI[sha256sum] = "e86135ae101e31e2c8ec20a4e0c5220f4eed12487d5cf3f78be7e98d3a57fc28"
-+SRC_URI[md5sum] = "6fad9772e75421969ddb41975483abdf"
-+SRC_URI[sha256sum] = "1aac2ae2d0d8ea368fa90906567f5c08463d98ade155c0c4bfedd6a0f7160e38"
- 
- PYPI_PACKAGE = "Babel"
- 
+diff --git a/meta-python/recipes-devtools/python/python-backports-functools-lru-cache.inc b/meta-python/recipes-devtools/python/python-backports-functools-lru-cache.inc
+deleted file mode 100644
+index bce44a28b4..0000000000
+--- a/meta-python/recipes-devtools/python/python-backports-functools-lru-cache.inc
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY = "Backport of functools.lru_cache from Python 3.3"
+-HOMEPAGE = "https://github.com/jaraco/backports.functools_lru_cache"
+-SECTION = "devel/python"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=57;endline=57;md5=98fc3658e5970d26f6b2109808c766be"
+-
+-PYPI_PACKAGE = "backports.functools_lru_cache"
+-
+-SRC_URI[md5sum] = "20f53f54cd3f04b3346ce75a54959754"
+-SRC_URI[sha256sum] = "9d98697f088eb1b0fa451391f91afb5e3ebde16bbdb272819fd091151fda4f1a"
+-
+-DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
+-
+-inherit pypi
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-pickle \
+-    ${PYTHON_PN}-threading \
+-    "
+diff --git a/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.5.bb b/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.5.bb
+index 91fcc41fc7..9182792baf 100644
+--- a/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.5.bb
++++ b/meta-python/recipes-devtools/python/python3-backports-functools-lru-cache_1.5.bb
+@@ -1,2 +1,19 @@
+-require python-backports-functools-lru-cache.inc
+-inherit setuptools3
++SUMMARY = "Backport of functools.lru_cache from Python 3.3"
++HOMEPAGE = "https://github.com/jaraco/backports.functools_lru_cache"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=57;endline=57;md5=98fc3658e5970d26f6b2109808c766be"
++
++PYPI_PACKAGE = "backports.functools_lru_cache"
++
++SRC_URI[md5sum] = "20f53f54cd3f04b3346ce75a54959754"
++SRC_URI[sha256sum] = "9d98697f088eb1b0fa451391f91afb5e3ebde16bbdb272819fd091151fda4f1a"
++
++DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
++
++inherit pypi setuptools3
++
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-pickle \
++    ${PYTHON_PN}-threading \
++    "
 -- 
 2.17.1
 
