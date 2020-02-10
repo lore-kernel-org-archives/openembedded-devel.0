@@ -1,58 +1,47 @@
-Return-Path: <okaya@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F6DB606C5
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id AFFDC606C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 19:31:11 +0000 (UTC)
-Received: from [10.92.140.44] (unknown [167.220.149.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id DDE1820661;
-	Mon, 10 Feb 2020 19:31:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1581363073;
-	bh=DuDHk/aDD5ibg3VJQUfbutkAH08qzspLhDPksl3lCqc=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=UBQCtM2QmtJIENg8rx/xuKgy9AWl+OlqistPTLkCBpSnypSAJ6aJqA0Z9WPAsGyEy
-	lhPZjcH6G1T1y9s5fz8Atn/PF+9dsY4KFTjflN3ec3w1OUCCS1k9Q8XNmbJ90GILAh
-	3z+cX8S7wHbCc0iRzedWBm4ddHYSpZVEIh160+RI=
-To: Andrey Zhizhikin <andrey.z@gmail.com>
-References: <20200210174720.31886-1-okaya@kernel.org>
-	<CAHtQpK4FHyyhkmayDhcNJXs+0kp9+K1fULG21q9P+C=OtFDpLw@mail.gmail.com>
-From: Sinan Kaya <okaya@kernel.org>
-Autocrypt: addr=okaya@kernel.org; keydata=
-	mQENBFrnOrUBCADGOL0kF21B6ogpOkuYvz6bUjO7NU99PKhXx1MfK/AzK+SFgxJF7dMluoF6
-	uT47bU7zb7HqACH6itTgSSiJeSoq86jYoq5s4JOyaj0/18Hf3/YBah7AOuwk6LtV3EftQIhw
-	9vXqCnBwP/nID6PQ685zl3vH68yzF6FVNwbDagxUz/gMiQh7scHvVCjiqkJ+qu/36JgtTYYw
-	8lGWRcto6gr0eTF8Wd8f81wspmUHGsFdN/xPsZPKMw6/on9oOj3AidcR3P9EdLY4qQyjvcNC
-	V9cL9b5I/Ud9ghPwW4QkM7uhYqQDyh3SwgEFudc+/RsDuxjVlg9CFnGhS0nPXR89SaQZABEB
-	AAG0HVNpbmFuIEtheWEgPG9rYXlhQGtlcm5lbC5vcmc+iQFOBBMBCAA4FiEEYdOlMSE+a7/c
-	ckrQvGF4I+4LAFcFAlztcAoCGwMFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AACgkQvGF4I+4L
-	AFfidAf/VKHInxep0Z96iYkIq42432HTZUrxNzG9IWk4HN7c3vTJKv2W+b9pgvBF1SmkyQSy
-	8SJ3Zd98CO6FOHA1FigFyZahVsme+T0GsS3/OF1kjrtMktoREr8t0rK0yKpCTYVdlkHadxmR
-	Qs5xLzW1RqKlrNigKHI2yhgpMwrpzS+67F1biT41227sqFzW9urEl/jqGJXaB6GV+SRKSHN+
-	ubWXgE1NkmfAMeyJPKojNT7ReL6eh3BNB/Xh1vQJew+AE50EP7o36UXghoUktnx6cTkge0ZS
-	qgxuhN33cCOU36pWQhPqVSlLTZQJVxuCmlaHbYWvye7bBOhmiuNKhOzb3FcgT7kBDQRa5zq1
-	AQgAyRq/7JZKOyB8wRx6fHE0nb31P75kCnL3oE+smKW/sOcIQDV3C7mZKLf472MWB1xdr4Tm
-	eXeL/wT0QHapLn5M5wWghC80YvjjdolHnlq9QlYVtvl1ocAC28y43tKJfklhHiwMNDJfdZbw
-	9lQ2h+7nccFWASNUu9cqZOABLvJcgLnfdDpnSzOye09VVlKr3NHgRyRZa7me/oFJCxrJlKAl
-	2hllRLt0yV08o7i14+qmvxI2EKLX9zJfJ2rGWLTVe3EJBnCsQPDzAUVYSnTtqELu2AGzvDiM
-	gatRaosnzhvvEK+kCuXuCuZlRWP7pWSHqFFuYq596RRG5hNGLbmVFZrCxQARAQABiQEfBBgB
-	CAAJBQJa5zq1AhsMAAoJELxheCPuCwBX2UYH/2kkMC4mImvoClrmcMsNGijcZHdDlz8NFfCI
-	gSb3NHkarnA7uAg8KJuaHUwBMk3kBhv2BGPLcmAknzBIehbZ284W7u3DT9o1Y5g+LDyx8RIi
-	e7pnMcC+bE2IJExCVf2p3PB1tDBBdLEYJoyFz/XpdDjZ8aVls/pIyrq+mqo5LuuhWfZzPPec
-	9EiM2eXpJw+Rz+vKjSt1YIhg46YbdZrDM2FGrt9ve3YaM5H0lzJgq/JQPKFdbd5MB0X37Qc+
-	2m/A9u9SFnOovA42DgXUyC2cSbIJdPWOK9PnzfXqF3sX9Aol2eLUmQuLpThJtq5EHu6FzJ7Y
-	L+s0nPaNMKwv/Xhhm6Y=
-Message-ID: <0bf0b668-9fd5-aae9-bf7b-7b741beb84bd@kernel.org>
-Date: Mon, 10 Feb 2020 14:31:11 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
-	Thunderbird/68.4.1
+	Mon, 10 Feb 2020 19:33:24 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id a2so7219377qko.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Feb 2020 11:33:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=uF7wAh0EWykUnLtr0XBQlRPj4cKi4atRE76X8r/084w=;
+	b=so8hL0176sL1MarrFM8IlFEkp7vkZ2jsw5aZrrnO4dAWwf0ku8mcB6KeXISNtrM32Q
+	u3VNg/spz55ANmsnEjMS/ysdHOBL8OQHSEBmPULIfSbTJ/37/S54hryp00ZT8QdCX3Iz
+	Lgvpaxk5SGwr15NEKcoLCeaA3Nt7I743TV2wOoXD67gzO8Ehwdj9Kk9q9AsXCxpilFs1
+	GxFCMFLuwdoElzLSCnFFJTBDQxlaJnLjcmSKqFqfvLGNkhjm7lPFUD+vx0bE+n6i7j9X
+	yoiHHtMd0jou+QtY/nNWNNY/s4pVTzJopj8OwDS/Gss+qvzpi+wXcH7Agk57sj4IXjnP
+	KVUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=uF7wAh0EWykUnLtr0XBQlRPj4cKi4atRE76X8r/084w=;
+	b=hzqFInCu9i0V1KhUw7OSz3N6mwh6NRpvYhBsP2drAMqH+TGLZlAYaJIID03uF48z+w
+	bUpCBid5ojMp3m7ePoOE66XGHDm74b9JLeqyutq0L6JAm8LgHMhzpuIuaoPS4wVS8H6M
+	wbJ1/GipLJbGWkohScmwvtA1kRO/D/zcxZx9UtzEcymFPPo/JKpps0Kt4W96MBI2BC0z
+	98oOGqEKshMuoOgAhbqLVYvKcx9hjn2VYOAdP+tVVnqmZoXfpP0m4EvpwSdi9/l5xcHv
+	aQxRgq703D4ikd1gco9L/A4Zk1HKEO1lZZ8g/mLiRHk8Y9nL1EjjJPGZ7RoAO7BfRBiy
+	50BA==
+X-Gm-Message-State: APjAAAX8sTo49FbMiEABnTQN/4LBWfSI/YbHzHrDysfhUILpefbx/e4H
+	q0xEJrDtDEDUWNz89Axsp8M4aACtVHRlwQgXy7c=
+X-Google-Smtp-Source: APXvYqw6Vm5W022Zn+0phTnKhATSwVsjasNW/yvMqYUw8RfsmWnUGePrHItwy5FmwUJalBzgeNlr8gcS2Avik9FR5vU=
+X-Received: by 2002:ae9:ef50:: with SMTP id d77mr2805367qkg.71.1581363205319; 
+	Mon, 10 Feb 2020 11:33:25 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAHtQpK4FHyyhkmayDhcNJXs+0kp9+K1fULG21q9P+C=OtFDpLw@mail.gmail.com>
-Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Changyu Li <Changyu.Li@microsoft.com>
-Subject: Re: [meta-oe][PATCH v2] abseil-cpp: add recipe for git version
+References: <DM6PR13MB2985C0370F67619F290460BEFE190@DM6PR13MB2985.namprd13.prod.outlook.com>
+In-Reply-To: <DM6PR13MB2985C0370F67619F290460BEFE190@DM6PR13MB2985.namprd13.prod.outlook.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 10 Feb 2020 11:32:59 -0800
+Message-ID: <CAMKF1sr1kWDiCrmK1WQ5Ey4e7Dki=5bHACvXdLhaeS6nXAEW7w@mail.gmail.com>
+To: Mike Krupicka <Mike.Krupicka@panduit.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: FW: [meta-networking][master][zeus][PATCH] mosquitto.init
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,38 +54,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 19:31:12 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 10 Feb 2020 19:33:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 2/10/2020 1:17 PM, Andrey Zhizhikin wrote:
->> +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', '
->> -march=armv8-a+crypto', '', d)}"
-> This cannot be enforced, as it would break those AArch64 derivatives,
-> which does not have Crypto extension. See my comment above, where I
-> extracted 2 sets of tune features for Cortex-A53. That means that
-> there are SoCs there from different vendors, and some vendors decided
-> to license Crypto extensions from ARM to include it in their RTL, but
-> some opted out to save either space on a die or cost of the processor.
-> 
-> If you would base your build with '+crypto' unconditionally, then the
-> binary would segfault on those SoCs which has Crypto opted out.
-> 
-> Moreover, enabling crypto extension in GCC automatically enables
-> inlined NEON and VFP opcodes (see [1]), and there are more side
-> effects to be expected on those SOCs which does not have those
-> integrated.
-> 
+On Mon, Feb 10, 2020 at 10:06 AM Mike Krupicka
+<Mike.Krupicka@panduit.com> wrote:
+>
+> Reposting to tag master branch
+>
+> Config file specification is missing in start) case. It is present already in restart) case.
+>
+> Mike
 
-I agree. I dropped this line on v3.
+Perhaps the commit message could be improved a nit. I have already
+tweaked it locally
+but for future reference its good to make it like described here
+https://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines
 
-I was curious about
-
-TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'x64', ' -maes
--msse4.1', '', d)}"
-
-do we have a feature flag for this too?
-
-Code doesn't compile without arch crypt support.
+> ---
+> .../recipes-connectivity/mosquitto/files/mosquitto.init         | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
+> index 6a0c12760..9d5963c41 100644
+> --- a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
+> +++ b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
+> @@ -38,7 +38,7 @@ export PATH="${PATH:+$PATH:}@SBINDIR@:@BASE_SBINDIR@"
+> case "$1" in
+>      start)
+>          echo "Starting Mosquitto message broker" "mosquitto"
+> -        if start-stop-daemon --start --quiet --oknodo --background  --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ; then
+> +        if start-stop-daemon --start --quiet --oknodo --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} -- -c @SYSCONFDIR@/mosquitto/mosquitto.conf ; then
+>              exit 0
+>          else
+>              exit 1
+> --
+> 2.17.1
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
