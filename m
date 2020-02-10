@@ -1,99 +1,47 @@
-Return-Path: <prvs=2309fbd6a4=mike.krupicka@panduit.com>
-X-Greylist: delayed 1085 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 10 Feb 2020 14:59:49 UTC
-Received: from mx0a-002f5901.pphosted.com (mx0a-002f5901.pphosted.com
-	[67.231.144.188])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F53B60213
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D9E760EA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 14:59:49 +0000 (UTC)
-Received: from pps.filterd (m0142971.ppops.net [127.0.0.1])
-	by mx0b-002f5901.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id
-	01AEa69B015202 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 08:41:45 -0600
-Received: from nam12-mw2-obe.outbound.protection.outlook.com
-	(mail-mw2nam12lp2047.outbound.protection.outlook.com [104.47.66.47])
-	by mx0b-002f5901.pphosted.com with ESMTP id 2y1udx2xd9-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 08:41:45 -0600
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=CCtyIKcMnOMLhJXyE1pT2nRfnV16XIG+dv09l0rKSrt2mZFHR+ByaQSQRMYoJM+O4IFOZCKaJDE8YmobQKn5tvzU9mtRzCcGbLdCk2wVOA9GG4AKx2K8INsnVT08Zy/j0e+gXdlKuRuivwPoDa0TfZ00m6nuFRHavBayjfWzFLSyrNf4o5qvUMBTrB6+ZUq7gJdMiZ7vLQf4gJ/3rc+5JJ7kI/YA2fAUAcVLaaf0EMxBU9Br7Se5dtAcLb9BBJx7qJAwy46M15Fe9/zfNUkoNOsiyoHF17U6M+DlZv+kB/PUPQ0X4V2UHWGQEbqBIM4fDoWr/KQFRFXZlflC+n70Gg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=WyXYnYSrn9G6lUnZSSapAyZOrq2L7jusR3psqhefWsQ=;
-	b=l6LEDR9CGNuTUahKpc9dUw0Io/8rgqgjgYqZvoVP3QBOi1K+1JHaEq+j00rfuik/7/4wTCEev+xbITWRHw1rLsf8z5qpjzuQDoKJYTrGfohdPV+a1jS78vBGE3jjHgkgdshRcTFq7J9bZ/Vv+aCrJYQGrctikovYQ7Qr1j+bBhs/GygDC7vBtXNx0Saf47tn+u6A42LUy7hJxhOSNXuwH0+P7Vxb5ZyJBfWy18V1WrUig31hy8qygxJZqFSWcYh4eMNszyD5tPuZWAgpxm4tbduriM5SYlKLz4wVmdUOTi/N+CaQFjp89LnOzbXyJqsEmh1LXzLwhBNPnlTHzQtjNw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
-	smtp.mailfrom=panduit.com;
-	dmarc=pass action=none header.from=panduit.com; 
-	dkim=pass header.d=panduit.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=panduit.com;
-	s=selector2;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=WyXYnYSrn9G6lUnZSSapAyZOrq2L7jusR3psqhefWsQ=;
-	b=gJ6pVflpPpKA8+JrdMBzXzajgMnYDD3EhSGcePn48Z8dPZ8zZgi1g/y/fp3d8UpAW2CkAFIzL3eQcYgGChVTl28iPp3HYqgsMONKxx0JjPUgSe6DUEvPxpXIFvGRUvQwRnyxduVt1GD43RqE+SUi3KWoEVMtIEHATyFjMivgJsI=
-Received: from DM6PR13MB2985.namprd13.prod.outlook.com (10.255.61.143) by
-	DM6PR13MB3849.namprd13.prod.outlook.com (10.186.140.137) with Microsoft
-	SMTP
-	Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2729.13; Mon, 10 Feb 2020 14:41:44 +0000
-Received: from DM6PR13MB2985.namprd13.prod.outlook.com
-	([fe80::c9b5:7faf:a42e:3ea5]) by
-	DM6PR13MB2985.namprd13.prod.outlook.com
-	([fe80::c9b5:7faf:a42e:3ea5%5]) with mapi id 15.20.2729.020;
-	Mon, 10 Feb 2020 14:41:43 +0000
-From: Mike Krupicka <Mike.Krupicka@panduit.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-networking][zeus][PATCH] mosquitto.init
-Thread-Index: AdXdzkby6TMeghO2Sj2t2to3Yvsp5QCT+VHQ
-Date: Mon, 10 Feb 2020 14:41:43 +0000
-Message-ID: <DM6PR13MB2985F8C14E5FF0EAF39A5830FE190@DM6PR13MB2985.namprd13.prod.outlook.com>
-References: <DM6PR13MB298544CC39D605B40E45D333FE1C0@DM6PR13MB2985.namprd13.prod.outlook.com>
-In-Reply-To: <DM6PR13MB298544CC39D605B40E45D333FE1C0@DM6PR13MB2985.namprd13.prod.outlook.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [75.118.38.115]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 742e775b-a4a6-4fb2-1073-08d7ae37592f
-x-ms-traffictypediagnostic: DM6PR13MB3849:
-x-microsoft-antispam-prvs: <DM6PR13MB384957A264E6E4431958E4F7FE190@DM6PR13MB3849.namprd13.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:1303;
-x-forefront-prvs: 03094A4065
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(366004)(136003)(39860400002)(376002)(346002)(396003)(199004)(189003)(7696005)(2906002)(186003)(81166006)(81156014)(316002)(8936002)(8676002)(478600001)(55016002)(5660300002)(71200400001)(6506007)(26005)(86362001)(9686003)(66476007)(64756008)(66446008)(66946007)(66556008)(6916009)(33656002)(76116006)(52536014);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:DM6PR13MB3849;
-	H:DM6PR13MB2985.namprd13.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: panduit.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: dqoRWo0qRoZdYKpod5Gs8Pa3bOOlFVAASy/BmFRmSGLkiHsV0ecxSVRnit8HxUQ9hRQdH5M9RoyXEGoq2NSaoWlmcFrNKmsfS13UlC8ju20LyG11Jp201egWhlZyyBVxxaXRC5Gv1R3DI46mjvRRlhDRdAfcBDvq00XpAfN8a09kewBVvW7B6jLG8hQUEfC2m5P+gj3B4pjnqBgxlUfipGfofzTJSiJM04OX0Hv5CAwG3Uejn9SL0OZtbX0ErAYVtrkbgr11gvUAFWqFJ8GEPGLNyv985BB0Q2uJ0glKvM98PeMS60t+LXk6BWzLISBOiOGNqysiafRr9th7+iszJeJB7B12lxN3Px0ReucA9QmLvVmseDJbbEciLNhQ1Ly6loFexolGeK111edB92bQfdkC/hWzq9dtxvEQfz/M1dwPKjsU0S8+0ozOimEoubNK
-x-ms-exchange-antispam-messagedata: 9F+mPltt9khDO+gHuJP7Q231N0r+w9pREsGi5pYOrcvkAjkZYbEHQ168xd5Pn7wl1i9xaegOkMYAJ/7jm+TRNj/GAeGXTDdVDecTD870Ba014C3oQ7rxREyF8lOeiXCZ3eVCY6Vm4CyBlfjEaoqBqQ==
-x-ms-exchange-transport-forked: True
+	Mon, 10 Feb 2020 15:40:09 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id w15so6917953qkf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Feb 2020 07:40:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=uCKP0Hhey5Ry8xQiNxHz0GPfGxbxQO5kat1nCaZVolk=;
+	b=kvxUMnEDA+MQ3F+6z8TY0VyWfBP3dAASMB+Uw5ruAwCntfD6zKqQvfuuEkAB9Z36ta
+	c4MZgp5iiQ5M4ABZTCmQIa8nVX9L+qUcdl6QbmmZn/5kyETjTE5mZiMKkPp1YBsbDx+G
+	0wDYiI22sObxPntgsZWEJ9fwYzdj3juRyfv+TNo2NdhhzOQXnSliDxKBHKonnXZ0VAtW
+	hIcvI2QtA3I1JU3Fr/0hbrEbyD/NGQpgqVmx/IwwStIRpKp30aOsBCF7ePRmoE0lVlnv
+	1SUcabP6ON8A6Z73d/xJY8Owq+l0JZk1gn+wXTZV2Q963xPfcXzKwBvRIs4Mdzb1XgV4
+	BWOw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=uCKP0Hhey5Ry8xQiNxHz0GPfGxbxQO5kat1nCaZVolk=;
+	b=A7VVlcXOMwmHjeldJCW8HINUwbZcBoEq/we+L4XtZpzez6AK5J/YMKjlpcsNuj83PB
+	hItNpQVj2D8DwUMOqWDhHyC3+xiYeUUvykCBy05HteKpuYWsZr7NZqiNHCrwB7Vl7vai
+	Tm1vZQ/gPe3vswUKYWVmeVLYYbvDV3/jqiDat7sOQP9PiuazLZAKgQN1ThFCMUu2/IX6
+	RNpzBxQ5rCDpf+N+KSMuVQLhJtnthZcMgXzYTsStzMRkvKvXtigUWNxpX7wx0eE+VE3T
+	p7MiNsvmOZASYezfr9xPM68YjpYe1wb9L5/n2gz6VJhZHlTJv7MQq4PnxdVwDtd5KKKB
+	SNMQ==
+X-Gm-Message-State: APjAAAVGbb3bDwQDHCDWdXlZEIpqrkaM2mG53+k7fQz3Rn+dltGanEHb
+	sZMih7Jj5YwmqqG54EcKNQUhHgBmw4GAU2oO8KM=
+X-Google-Smtp-Source: APXvYqyGT/hsOVEIjWQ5psmrJbhSobQpBwQmuk1PicronXHURXpslZdF1Z6gUX/HBsZqqemmp+MdoG3EBzkYAl6b/f0=
+X-Received: by 2002:a05:620a:6b8:: with SMTP id
+	i24mr1979853qkh.9.1581349209837; 
+	Mon, 10 Feb 2020 07:40:09 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: panduit.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 742e775b-a4a6-4fb2-1073-08d7ae37592f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Feb 2020 14:41:43.7886 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: dad97a0c-c63c-4d47-820c-0e24b682426c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: pik8gksCoMdDcQpP5h+iB5GTDT2tAGNbfnYV3RSqeq+jfyR1an/S3QaWztXvrOnS
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR13MB3849
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138, 18.0.572
-	definitions=2020-02-10_04:2020-02-10,
-	2020-02-10 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
-	priorityscore=1501
-	bulkscore=0 adultscore=0 spamscore=0 lowpriorityscore=0 phishscore=0
-	clxscore=1015 impostorscore=0 mlxscore=0 malwarescore=0 mlxlogscore=999
-	suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
-	engine=8.12.0-2001150001 definitions=main-2002100113
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-networking][zeus][PATCH] mosquitto.init
+References: <20200208192433.20869-1-twoerner@gmail.com>
+In-Reply-To: <20200208192433.20869-1-twoerner@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 10 Feb 2020 07:39:43 -0800
+Message-ID: <CAMKF1spifhn9J3nijHUH+pNgXP79N1TL8S-qAJDo-QC50D6+Ww@mail.gmail.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] mpv: 0.26.0 -> 0.32.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -106,36 +54,238 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 14:59:49 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 10 Feb 2020 15:40:10 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Config file specification is missing in start) case. It is present already =
-in restart) case.
+Trevor
 
-Mike
----
-.../recipes-connectivity/mosquitto/files/mosquitto.init         | 2 +-
-1 file changed, 1 insertion(+), 1 deletion(-)
+Its failing for one of builds with musl/arm
+http://errors.yoctoproject.org/Errors/Details/390554/
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto=
-.init b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
-index 6a0c12760..9d5963c41 100644
---- a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
-@@ -38,7 +38,7 @@ export PATH=3D"${PATH:+$PATH:}@SBINDIR@:@BASE_SBINDIR@"
-case "$1" in
-     start)
-         echo "Starting Mosquitto message broker" "mosquitto"
--        if start-stop-daemon --start --quiet --oknodo --background  --make=
--pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ; then
-+        if start-stop-daemon --start --quiet --oknodo --background --make-=
-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} -- -c @SYSCONFDIR@/mosquitto/=
-mosquitto.conf ; then
-             exit 0
-         else
-             exit 1
---
-2.17.1
+On Sat, Feb 8, 2020 at 11:24 AM Trevor Woerner <twoerner@gmail.com> wrote:
+>
+> Remove mpv from the PNBLACKLIST by updating to the latest release and using a
+> newer, python3-aware waf for building (copied from glmark2).
+>
+> The name of the license file changed, but the licence of the software itself
+> did not.
+>
+> Added mime-xdg to inherit to handle mime artifacts.
+>
+> Added to the FILES command to scoop up additional files being generated by
+> the build.
+>
+> Re-added 'mpv' back to LICENSE_FLAGS_WHITELIST search list in
+> packagegroup-meta-oe.
+>
+> Extensively fixed and cleaned up the PACKAGECONFIG options to reflect the
+> current options available when configuring mpv. Also cleaned up any configure
+> options which are no longer available.
+>
+> Added the correct dependencies so mpv builds under wayland.
+>
+> Tested with core-image-x11 on a rock-pi-4 with
+>         PACKAGECONFIG = "libass x11 opengl egl drm gbm vaapi vdpau"
+>         # mpv --vo=help
+>         Available video outputs:
+>           libmpv           render API for libmpv
+>           gpu              Shader-based GPU Renderer
+>           vdpau            VDPAU with X11
+>           vaapi            VA API with X11
+>           x11              X11 (slow, old crap)
+>           null             Null video output
+>           image            Write video frames to image files
+>           tct              true-color terminals
+>           drm              Direct Rendering Manager
+>
+> Tested with core-image-weston on a rock-pi-4 with:
+>         PACKAGECONFIG = "libass wayland x11 opengl"
+>         # mpv -vo=help
+>         Available video outputs:
+>           libmpv           render API for libmpv
+>           gpu              Shader-based GPU Renderer
+>           wlshm            Wayland SHM video output
+>           x11              X11 (slow, old crap)
+>           null             Null video output
+>           image            Write video frames to image files
+>           tct              true-color terminals
+>
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> ---
+>
+> changes in v2:
+>
+> - Martin Jansa pointed out that this patch should also re-add mpv to the
+>   LICENSE_FLAGS_WHITELIST list in packagegroup-meta-oe
+>   https://git.openembedded.org/meta-openembedded/commit/?id=0c182e58775966699c303c1e2561c273197bf445
+>
+> - Khem Raj pointed out that this recipe fails to build with wayland
+>   https://errors.yoctoproject.org/Errors/Details/390294/
+> ---
+>  .../packagegroups/packagegroup-meta-oe.bb     |  2 +-
+>  .../mplayer/mpv/python3.patch                 | 12 ++++
+>  .../mplayer/{mpv_0.26.0.bb => mpv_0.32.0.bb}  | 60 ++++++++++++++-----
+>  3 files changed, 58 insertions(+), 16 deletions(-)
+>  create mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/python3.patch
+>  rename meta-oe/recipes-multimedia/mplayer/{mpv_0.26.0.bb => mpv_0.32.0.bb} (46%)
+>
+> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> index d5789a758..865cbb0bf 100644
+> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+> @@ -207,7 +207,7 @@ RDEPENDS_packagegroup-meta-oe-multimedia ="\
+>      sound-theme-freedesktop v4l-utils yavta wavpack libvpx \
+>      ${@bb.utils.contains("DISTRO_FEATURES", "x11", "xpext pavucontrol xsp", "", d)} \
+>      libmikmod \
+> -    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad faad2", "", d)} \
+> +    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "libmad faad2 mpv", "", d)} \
+>      "
+>  RDEPENDS_packagegroup-meta-oe-multimedia_remove_libc-musl = "alsa-oss"
+>
+> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv/python3.patch b/meta-oe/recipes-multimedia/mplayer/mpv/python3.patch
+> new file mode 100644
+> index 000000000..df208cf87
+> --- /dev/null
+> +++ b/meta-oe/recipes-multimedia/mplayer/mpv/python3.patch
+> @@ -0,0 +1,12 @@
+> +Use Python 3 instead of Python 2.
+> +
+> +Upstream-Status: Pending
+> +Signed-off-by: Ross Burton <ross.burton@intel.com>
+> +
+> +diff --git a/waf b/waf
+> +index 6ce2a24..de3c898 100755
+> +--- a/waf
+> ++++ b/waf
+> +@@ -1 +1 @@
+> +-#!/usr/bin/env python
+> ++#!/usr/bin/env python3
+> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
+> similarity index 46%
+> rename from meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
+> rename to meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
+> index c98aa7ab0..bd2e389fe 100644
+> --- a/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
+> +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.32.0.bb
+> @@ -9,22 +9,23 @@ DEPENDS = "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
+>  REQUIRED_DISTRO_FEATURES = "x11"
+>
+>  LICENSE = "GPLv2+"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=91f1cb870c1cc2d31351a4d2595441cb"
+> +LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=91f1cb870c1cc2d31351a4d2595441cb"
+>
+>  # While this item does not require it, it depends on ffmpeg which does
+>  LICENSE_FLAGS = "commercial"
+>
+> -SRCREV_mpv = "4db82f04502cbcd20d9a975df9dfde91d8c389e3"
+> +SRCREV_mpv = "70b991749df389bcc0a4e145b5687233a03b4ed7"
+>  SRC_URI = " \
+>      git://github.com/mpv-player/mpv;name=mpv \
+> -    http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=waf;downloadfilename=waf;subdir=git \
+> +    https://www.freehackers.org/~tnagy/release/waf-2.0.19;name=waf;downloadfilename=waf;subdir=git \
+> +    file://python3.patch \
+>  "
+>  SRC_URI[waf.md5sum] = "cef4ee82206b1843db082d0b0506bf71"
+>  SRC_URI[waf.sha256sum] = "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f22fca60c98b"
+>
+>  S = "${WORKDIR}/git"
+>
+> -inherit waf pkgconfig python3native features_check
+> +inherit waf pkgconfig features_check mime-xdg
+>
+>  LUA ?= "lua"
+>  LUA_mips64  = ""
+> @@ -38,18 +39,49 @@ PACKAGECONFIG ??= " \
+>      ${LUA} \
+>      libass \
+>      ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
+> +    ${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)} \
+> +    ${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)} \
+>  "
+>
+>  PACKAGECONFIG_remove_aarch64 = "lua"
+> +PACKAGECONFIG[x11] = "--enable-x11,--disable-x11,virtual/libx11"
+> +PACKAGECONFIG[xv] = "--enable-xv,--disable-xv,libxv"
+> +PACKAGECONFIG[opengl] = "--enable-gl,--disable-gl,virtual/libgl"
+> +PACKAGECONFIG[egl] = "--enable-egl,--disable-egl,"
+>  PACKAGECONFIG[drm] = "--enable-drm,--disable-drm,libdrm"
+> -PACKAGECONFIG[gbm] = "--enable-gbm,--disable-gbm,virtual/mesa"
+> +PACKAGECONFIG[gbm] = "--enable-gbm,--disable-gbm,virtual/libgbm"
+>  PACKAGECONFIG[lua] = "--enable-lua,--disable-lua,lua luajit"
+>  PACKAGECONFIG[libass] = "--enable-libass,--disable-libass,libass"
+>  PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive"
+>  PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
+> -PACKAGECONFIG[vaapi] = "--enable-vaapi, --disable-vaapi,libva"
+> -PACKAGECONFIG[vdpau] = "--enable-vdpau, --disable-vdpau,libvdpau"
+> -PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland,wayland libxkbcommon"
+> +PACKAGECONFIG[vaapi] = "--enable-vaapi,--disable-vaapi,libva"
+> +PACKAGECONFIG[vdpau] = "--enable-vdpau,--disable-vdpau,libvdpau"
+> +PACKAGECONFIG[wayland] = "--enable-wayland,--disable-wayland,wayland wayland-native libxkbcommon"
+> +
+> +python __anonymous() {
+> +    packageconfig = (d.getVar("PACKAGECONFIG") or "").split()
+> +    extras = []
+> +    if "x11" in packageconfig and "opengl" in packageconfig:
+> +        extras.append(" --enable-gl-x11")
+> +    if "x11" in packageconfig and "egl" in packageconfig:
+> +        extras.append(" --enable-egl-x11")
+> +    if "egl" in packageconfig and "drm" in packageconfig:
+> +        extras.append(" --enable-egl-drm")
+> +    if "vaapi" in packageconfig and "x11" in packageconfig:
+> +        extras.append(" --enable-vaapi-x11")
+> +    if "vaapi" in packageconfig and "drm" in packageconfig:
+> +        extras.append(" --enable-vaapi-drm")
+> +    if "vaapi" in packageconfig and "x11" in packageconfig and "egl" in packageconfig:
+> +        extras.append(" --enable-vaapi-x-egl")
+> +    if "vdpau" in packageconfig and "opengl" in packageconfig and "x11" in packageconfig:
+> +        extras.append(" --enable-vdpau-gl-x11")
+> +    if "wayland" in packageconfig and "opengl" in packageconfig:
+> +        extras.append(" --enable-gl-wayland")
+> +    if "wayland" in packageconfig and "vaapi" in packageconfig:
+> +        extras.append(" --enable-vaapi-wayland")
+> +    if extras:
+> +        d.appendVar("EXTRA_OECONF", "".join(extras))
+> +}
+>
+>  SIMPLE_TARGET_SYS = "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', '')}"
+>
+> @@ -59,18 +91,14 @@ EXTRA_OECONF = " \
+>      --confdir=${sysconfdir} \
+>      --datadir=${datadir} \
+>      --disable-manpage-build \
+> -    --disable-gl \
+>      --disable-libsmbclient \
+> -    --disable-encoding \
+>      --disable-libbluray \
+> -    --disable-dvdread \
+>      --disable-dvdnav \
+>      --disable-cdda \
+>      --disable-uchardet \
+>      --disable-rubberband \
+>      --disable-lcms2 \
+>      --disable-vapoursynth \
+> -    --disable-vapoursynth-lazy \
+>      ${PACKAGECONFIG_CONFARGS} \
+>  "
+>
+> @@ -80,6 +108,8 @@ adjust_waf_perms() {
+>
+>  do_patch[postfuncs] += "adjust_waf_perms"
+>
+> -FILES_${PN} += "${datadir}/icons"
+> -
+> -PNBLACKLIST[mpv] = "Needs forward porting to use python3"
+> +FILES_${PN} += " \
+> +    ${datadir}/icons \
+> +    ${datadir}/zsh \
+> +    ${datadir}/bash-completion \
+> +    "
+> --
+> 2.25.0.114.g5b0ca878e0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
