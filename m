@@ -1,47 +1,49 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id F099360B3D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com
+	[209.85.219.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 559D360926
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 21:15:20 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id c16so9267815ioh.6
+	Mon, 10 Feb 2020 21:17:57 +0000 (UTC)
+Received: by mail-qv1-f65.google.com with SMTP id dc14so3926339qvb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 13:15:22 -0800 (PST)
+	Mon, 10 Feb 2020 13:17:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=tVFYQ2ie8Kwx03hdTwDmptqtHlkLTGw1VEf36P4v43Q=;
-	b=pKlvBex53zR/OmNLTqtJLgnPO4PKovexE4lXEMUCFm0NTgTnPuopOXZglOUTtlGhkd
-	HhBKYsI8hhjsPnwIsUWvFsOhwD7T///yclcnOzplkhwTCX1i9Y9702Nk1fqLCJSfcOk7
-	rLDxWoHq/Xex0xoxLRz/loOhTjCC5o//KSGSQ70GEF9oX/iEv9HacD8BACJj5ZR5GhIn
-	tXNUY8p36C8JSF9Vo1WxAdBGkriQn31IFzkomVHDkREoI1go1kgzTWmt73fRCcIcYtQ/
-	JlbWXGbLobPA6O8EYQI7oRJ3mWSpSYC3WaT5QpSCADHAgUR8FNz/+Ne5kE7tJxSKK5b7
-	12ZQ==
+	:cc:content-transfer-encoding;
+	bh=4VCUzZmoi3r7lQj+yjaxJ8fhfFYyHFbOIxB0l0cJyqc=;
+	b=B/s18LYlX0e/WBokD5AoVr8EcVwX//egRwaDMLQ9IElPPBWUAQeE2V+RnjXvcVDeS6
+	ZEyPVRaTNeE0e7KuA+KCbO2q8NXAfvWk3ruXQs8VEp7Oc54qZd2u02XlPExECk2bnTY9
+	+UytXH+jZ1N86QoCK8KKLh7YdtFqKgnlVwtIfNZvvnHf3fuOTOxYO01c1pgmvVmUlYDP
+	e1LNpU3iK8tyPMr4K+RC1s0PW/iqYsCtSbFv1OUBtTmryOZiy7jlF4+HqvdP8jnlems3
+	RV2QfPdJIgwOOLlifgjrvIKMyxQUiEKM74Cl7oCE1c0Qt/sN2KMzQvvjB2iXs5flA7HG
+	8cNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=tVFYQ2ie8Kwx03hdTwDmptqtHlkLTGw1VEf36P4v43Q=;
-	b=ZYDEbHhgiuBQydHVt9ZtFOFFzH/gr/2y9ZO74wCadiTWKHdylNuE0q//JZXti/JWaF
-	Fz79p8Q+emz2DqBax1MNOW9YpOnfOERNWOcHWvLmiHBY4VHpqSPyJL/QChTqyy8oLxHB
-	lS4ougmxfm1zHgME2AaLGsLyHh/heFlIzzgYyO6Mk+7FHZHb5YV7te2nqd4XNPwExfRm
-	XATSGMci5liEDwKdyEFkCZjn/nPBqN1QgTYMa0H7sWwyczyrXXq9ruEWSP26XznUY7y1
-	hLH/LGC7jxsdgKPs4i6wzcLoSXQ+mZ8YBMn1ovQkgaT6bT2nffgj7xriJb+bo4SjZHSl
-	FE8g==
-X-Gm-Message-State: APjAAAVLmWlTIJ7w5KR1B2RUhCH4TEFh0zL/5MIm9J5tBhAlv1vE7I8E
-	hlYyFsMeE/WXTXkRbvD9/dzn5NOf4wXTCTQ6s4kz8z8F
-X-Google-Smtp-Source: APXvYqyIQM45bnEUh3tPoitcRnpyj14iTnjQz8pthYwXdq4vzzIj6oTiN6DCnZ1SoumBI8MvhNbKRZ/ixVm0tUwACsQ=
-X-Received: by 2002:a02:cdcb:: with SMTP id m11mr11883741jap.125.1581369321963;
-	Mon, 10 Feb 2020 13:15:21 -0800 (PST)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=4VCUzZmoi3r7lQj+yjaxJ8fhfFYyHFbOIxB0l0cJyqc=;
+	b=e8jn0S8Ss3fZWyE2e0E2q8FDthFgrgDsnLH493xx9n97iOSkZPNwg5QmzH+W66+cYd
+	tO4fDBiXeCPUaGcpjxJm2OvwrR9RBHZgBk+QlFOgFlK7kmcRVEuhUoiN+IV9lGYDu+la
+	CIHnIEnw86/wVLEi8vNCLZMnqHQHFaaj/8/Ck9vVnKNFkNuyucqFDDlyY1jYLJeyTsGI
+	ztsRCVZDRT6bu62oNN8CzKEN4C/FtGEV2JUdzOvSiE/aFmGf3mH7Mjnwqr78Qp9TYl/d
+	fYHiZq2Li5i/5tDaZw48/X8V2SDqWvXg/BEEso40h40jDsG08SjxzlCI5cypNl+Zw0F5
+	wgaQ==
+X-Gm-Message-State: APjAAAWF3A+MLzetnoqtkOcxTbw1/u76GX44y9a1XM+0iTRXPwRG0Ikm
+	PTBq/JmTfQC/lODQ2r0n6QhycgPDWb4wNbuNolg=
+X-Google-Smtp-Source: APXvYqxDH9tLsBaXWXYpH8c6z+VX1Z93YezC69abwpqbB3/9kIRpsic8C7tOfYcTVBzEERdYt9j/e95DH9MU9rPMHys=
+X-Received: by 2002:ad4:4d94:: with SMTP id cv20mr11310960qvb.99.1581369477958;
+	Mon, 10 Feb 2020 13:17:57 -0800 (PST)
 MIME-Version: 1.0
 References: <20200201163703.4264-1-schnitzeltony@gmail.com>
 	<20200201163703.4264-2-schnitzeltony@gmail.com>
 	<9f2e4677-9acd-f0d7-2eda-140b954ae58f@gmail.com>
 	<CAMKF1soH7ofWsnKaT2o76VQgASxVVd+vWOSDSYnZjHS8Ott3sQ@mail.gmail.com>
-In-Reply-To: <CAMKF1soH7ofWsnKaT2o76VQgASxVVd+vWOSDSYnZjHS8Ott3sQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 10 Feb 2020 22:15:10 +0100
-Message-ID: <CALbNGRT=UrWpkaGGdDrvSV+Z4vy5snr04d_5cn=dL9eARDLcdw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+	<CALbNGRT=UrWpkaGGdDrvSV+Z4vy5snr04d_5cn=dL9eARDLcdw@mail.gmail.com>
+In-Reply-To: <CALbNGRT=UrWpkaGGdDrvSV+Z4vy5snr04d_5cn=dL9eARDLcdw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 10 Feb 2020 13:17:31 -0800
+Message-ID: <CAMKF1sos4GO87TD-sSZKYP11faP6=p9XdzUpMgFemuswFxtuag@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 1/4] mozjs: port build to python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -56,28 +58,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Feb 2020 21:15:21 -0000
+X-List-Received-Date: Mon, 10 Feb 2020 21:17:57 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 10, 2020 at 9:11 PM Khem Raj <raj.khem@gmail.com> wrote:
+On Mon, Feb 10, 2020 at 1:15 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
 >
-> Hi Andreas
+> On Mon, Feb 10, 2020 at 9:11 PM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > Hi Andreas
+> >
+> > I am seeing failure on OE builders like below
+> >
+> > TypeError: a bytes-like object is required, not 'str'
+> >
+> > detailed log
+> >
+> > http://errors.yoctoproject.org/Errors/Details/390559/
+> >
+> >
+> Yeah I've seen this kind of error dozens of times.
 >
-> I am seeing failure on OE builders like below
+> From the first glance I think it is gold which makes the difference.
+> Hope to get it reproduced and fixed soon and come back
 >
-> TypeError: a bytes-like object is required, not 'str'
+> BTW / off-topic: I sent similar patch for qtwebkit. Is that part of your =
+builds?
 >
-> detailed log
->
-> http://errors.yoctoproject.org/Errors/Details/390559/
->
->
-Yeah I've seen this kind of error dozens of times.
 
-From the first glance I think it is gold which makes the difference.
-Hope to get it reproduced and fixed soon and come back
+I use master-next of meta-qt5 so it does get built on some builders
+but on some where
+not enough compute is available, meta-qt5 is disabled.
 
-BTW / off-topic: I sent similar patch for qtwebkit. Is that part of your builds?
-
-Andreas
+> Andreas
 
