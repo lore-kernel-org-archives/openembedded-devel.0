@@ -1,54 +1,47 @@
-Return-Path: <okaya@kernel.org>
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
-	by mail.openembedded.org (Postfix) with ESMTP id 40E6060FF7
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B37660FA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2020 16:48:40 +0000 (UTC)
-Received: from [10.92.140.31] (unknown [167.220.148.31])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by mail.kernel.org (Postfix) with ESMTPSA id 2837E20708;
-	Tue, 11 Feb 2020 16:48:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=default; t=1581439721;
-	bh=zggPQ6gNq7G8KbNCdJLD8euThQXCjMGbg3lOvvMZrkQ=;
-	h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-	b=GtyZ28uta5MdQlV+nG407LsGRRR9OuYWTqioP8nWDTS3AMloLFT65QnbRavadA8W5
-	rio+UOfYe7n2WCZI+N58oW5s3MAu+dWmAvVYg7ATKfcw9+8WGEcghQvGaRYpPGtM2n
-	deGagAwyiU+OwU/Gurr9WDHeq4qN+NItnoQQSbRs=
-To: Khem Raj <raj.khem@gmail.com>
+	Tue, 11 Feb 2020 16:53:30 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id z16so12485463iod.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Feb 2020 08:53:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=DBmdUop3F1azKXI6aeNTwx6mRDmKyZtZNx+b/c8csyw=;
+	b=nbT6IGtXXeNspkGQaaeV7rt2KuXj5eYT527fxFjZwSvt5Z5D0uTl7COrFTiO9CgsRI
+	S7RVy9z5l6ElZ7p3j4SgW+S0O+TtCwllWU13x4gaPcGriawTmRqzz1Ps12Y2aP/5Ib5o
+	q+64v9n2tk2OmzuvA7IlkLxUIKAJ+Fp3iW9oXb8fZ8aKKczvMwqKHrOWhWyiY29AXLG5
+	sAth3PE/J/zDCSPy8+tfMCxoMg5V7npueyRo3iMdvFEeVFqSC134bNoLKK0qQmKXCQ4h
+	PgsAWYauCHGRwvEhlOpZurcy34fxA/rAi2idhAZzQBEwYmfoJbSF34PFMwc/gcSzW+u7
+	8/tw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=DBmdUop3F1azKXI6aeNTwx6mRDmKyZtZNx+b/c8csyw=;
+	b=b9Pdp5KX0EJfK70H/AQzZ5CWZr+Or5LuJtSiIRaseksBucirtC+BuFUqG2j5O9ZYKr
+	9pVl2ERH59aFIvmUBFlMHMneG2KOvlrHgmIgxz/DbMnl1NP4Yl7lMIsFYAsYZYdh15RK
+	YOxpFaa6OjCzObzicEg4b2n+WvQf57kewAeMzGJdPeqQYmjbprQl3xDkf1JdfrROX8jg
+	F3qBYHMHcz4z2cPM+FiMgSU/SSwID6hlaD6P65ADSRivSgVwcki67cR5n3RA+PxdlQ1k
+	QenVgzscT6j2MSNoIqTtan/7KpNvPBfno3w8ynqigl6rgF2ygU4T1kVEj7OHc+nguAKW
+	RTbw==
+X-Gm-Message-State: APjAAAWHk5iYTT9+3XPpVy/X9ADdgqZPUQM6kriYrCQ2rONk6rAbil4b
+	j3QzxvcwvP39wp0yrQgoIK62+Eqblg8UlUGzo0Y=
+X-Google-Smtp-Source: APXvYqwtWqFnnDYwiq3GsnUdNpL1JkqmMvBWG/O5GhOAOn5JtRCbADsjneplC7tkwajIafgOeNX2G3RETSp6M57cqwg=
+X-Received: by 2002:a05:6638:a4a:: with SMTP id
+	10mr15457663jap.44.1581440011091; 
+	Tue, 11 Feb 2020 08:53:31 -0800 (PST)
+MIME-Version: 1.0
 References: <20200211164101.75963-1-okaya@kernel.org>
 	<CAMKF1sqk0ihBNQV_HhtBaqA-a6_VY_7L1QVxQg=SPZtHFSrnig@mail.gmail.com>
-From: Sinan Kaya <okaya@kernel.org>
-Autocrypt: addr=okaya@kernel.org; keydata=
-	mQENBFrnOrUBCADGOL0kF21B6ogpOkuYvz6bUjO7NU99PKhXx1MfK/AzK+SFgxJF7dMluoF6
-	uT47bU7zb7HqACH6itTgSSiJeSoq86jYoq5s4JOyaj0/18Hf3/YBah7AOuwk6LtV3EftQIhw
-	9vXqCnBwP/nID6PQ685zl3vH68yzF6FVNwbDagxUz/gMiQh7scHvVCjiqkJ+qu/36JgtTYYw
-	8lGWRcto6gr0eTF8Wd8f81wspmUHGsFdN/xPsZPKMw6/on9oOj3AidcR3P9EdLY4qQyjvcNC
-	V9cL9b5I/Ud9ghPwW4QkM7uhYqQDyh3SwgEFudc+/RsDuxjVlg9CFnGhS0nPXR89SaQZABEB
-	AAG0HVNpbmFuIEtheWEgPG9rYXlhQGtlcm5lbC5vcmc+iQFOBBMBCAA4FiEEYdOlMSE+a7/c
-	ckrQvGF4I+4LAFcFAlztcAoCGwMFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AACgkQvGF4I+4L
-	AFfidAf/VKHInxep0Z96iYkIq42432HTZUrxNzG9IWk4HN7c3vTJKv2W+b9pgvBF1SmkyQSy
-	8SJ3Zd98CO6FOHA1FigFyZahVsme+T0GsS3/OF1kjrtMktoREr8t0rK0yKpCTYVdlkHadxmR
-	Qs5xLzW1RqKlrNigKHI2yhgpMwrpzS+67F1biT41227sqFzW9urEl/jqGJXaB6GV+SRKSHN+
-	ubWXgE1NkmfAMeyJPKojNT7ReL6eh3BNB/Xh1vQJew+AE50EP7o36UXghoUktnx6cTkge0ZS
-	qgxuhN33cCOU36pWQhPqVSlLTZQJVxuCmlaHbYWvye7bBOhmiuNKhOzb3FcgT7kBDQRa5zq1
-	AQgAyRq/7JZKOyB8wRx6fHE0nb31P75kCnL3oE+smKW/sOcIQDV3C7mZKLf472MWB1xdr4Tm
-	eXeL/wT0QHapLn5M5wWghC80YvjjdolHnlq9QlYVtvl1ocAC28y43tKJfklhHiwMNDJfdZbw
-	9lQ2h+7nccFWASNUu9cqZOABLvJcgLnfdDpnSzOye09VVlKr3NHgRyRZa7me/oFJCxrJlKAl
-	2hllRLt0yV08o7i14+qmvxI2EKLX9zJfJ2rGWLTVe3EJBnCsQPDzAUVYSnTtqELu2AGzvDiM
-	gatRaosnzhvvEK+kCuXuCuZlRWP7pWSHqFFuYq596RRG5hNGLbmVFZrCxQARAQABiQEfBBgB
-	CAAJBQJa5zq1AhsMAAoJELxheCPuCwBX2UYH/2kkMC4mImvoClrmcMsNGijcZHdDlz8NFfCI
-	gSb3NHkarnA7uAg8KJuaHUwBMk3kBhv2BGPLcmAknzBIehbZ284W7u3DT9o1Y5g+LDyx8RIi
-	e7pnMcC+bE2IJExCVf2p3PB1tDBBdLEYJoyFz/XpdDjZ8aVls/pIyrq+mqo5LuuhWfZzPPec
-	9EiM2eXpJw+Rz+vKjSt1YIhg46YbdZrDM2FGrt9ve3YaM5H0lzJgq/JQPKFdbd5MB0X37Qc+
-	2m/A9u9SFnOovA42DgXUyC2cSbIJdPWOK9PnzfXqF3sX9Aol2eLUmQuLpThJtq5EHu6FzJ7Y
-	L+s0nPaNMKwv/Xhhm6Y=
-Message-ID: <63d3f5f5-ab3f-4587-b1f9-78aa77fd3560@kernel.org>
-Date: Tue, 11 Feb 2020 11:48:39 -0500
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
-	Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqk0ihBNQV_HhtBaqA-a6_VY_7L1QVxQg=SPZtHFSrnig@mail.gmail.com>
+	<63d3f5f5-ab3f-4587-b1f9-78aa77fd3560@kernel.org>
+In-Reply-To: <63d3f5f5-ab3f-4587-b1f9-78aa77fd3560@kernel.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 11 Feb 2020 08:53:05 -0800
+Message-ID: <CAMKF1sp0vMz2VaB1kT+-optz7GY5n+YNCCOsWk4nuBqSS9L8Jg@mail.gmail.com>
+To: Sinan Kaya <okaya@kernel.org>
 Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>,
 	Changyu Li <Changyu.Li@microsoft.com>
@@ -65,15 +58,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2020 16:48:40 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 Feb 2020 16:53:30 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 2/11/2020 11:46 AM, Khem Raj wrote:
-> Thanks Sinan, this looks good. Although I wonder why do we need to add
-> -fPIC manually.
+On Tue, Feb 11, 2020 at 8:48 AM Sinan Kaya <okaya@kernel.org> wrote:
+>
+> On 2/11/2020 11:46 AM, Khem Raj wrote:
+> > Thanks Sinan, this looks good. Although I wonder why do we need to add
+> > -fPIC manually.
+>
+> I searched the library. It is not being set there and I had linker
+> errors on both arm64 and x86_64 without it.
 
-I searched the library. It is not being set there and I had linker
-errors on both arm64 and x86_64 without it.
+right, so I wonder if it should be patches in the makery of the
+component separately and sent upstream
 
