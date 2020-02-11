@@ -1,51 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 65A9860B0D
+Return-Path: <wangmy@cn.fujitsu.com>
+X-Greylist: delayed 578 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 11 Feb 2020 09:46:32 UTC
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E2D3605B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2020 07:06:48 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id v2so4246478qkj.2
+	Tue, 11 Feb 2020 09:46:31 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,428,1574092800"; d="scan'208";a="83150276"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 11 Feb 2020 17:37:00 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id C473050A9975
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Feb 2020 23:06:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=9WXmn+uZ18257Z6oUInhwfqtr80WHmSY3ryWcW3sNws=;
-	b=rXi/JttJZTHBmOrqlTJkthDZAPjMMCKt4XmHDcQjN//yu/eGhga+HaIuyE4v0P3Kz2
-	VaUr7xu3bpqkfAm5GERAM+zMEgn6GLRTgL0o4d0h+yG8tCQhCXp+NkDEqVGZ3E6sqbyn
-	JMDOZ5s+nI2oEawOlSLPTduB8U7ATNpn+od46n9TX/1RLiOl2Sdqagv0KgfYnHtAIJmM
-	+kPliM8gYDGS1VC1XoOfNlHU2AVZ4HC/mdSaVkQLzevhAmskHe2e/pAfScD+TtWdb4hN
-	7FMnFxYQttA+ne510OpbrUQqTK90hRExjBHnl2Ad5lq8wr5wr+bFu53Ka3v2dMlunTyY
-	X0YQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=9WXmn+uZ18257Z6oUInhwfqtr80WHmSY3ryWcW3sNws=;
-	b=jxbgoKGJwBZyAD/dRLzS6U2/sxZx0GHEpuM7HjACSRlWa+TNULdNFS1knxQZTo3zQ0
-	Cm0tRAaibf090DZvnEu2SaVBqWthv8NwASR3Ey+YrtcDTuYZ9DVaqSTnLwciyZV1NdKD
-	8AoJ2AncDpxyyHeayBH2wJEP2wArPr+gPMCKgWQH9SL7DNWXv9Y8NbR5a4t//Un8b7e4
-	uZMBAY7E8Nh2N8jnU31ax7D91x/m2+ks2mKYRN0SANuqaF/VAPiIkABn+XmNsuvxQu/m
-	+LF00vVgt1tdsoIBn9VQBOmbIxQrRsIq1iOGCpsElu5NPKT4fKm0AXBhZ1FbvJ/JtSU9
-	6QCA==
-X-Gm-Message-State: APjAAAWGmHNzSYSIB34pIvqOUDly9bpiN3ow/ZjxELKvlDFj9/vgpu40
-	dzZDiMV+CgNMEFm49MBp+zMxcQKM5yMoK+neNeA=
-X-Google-Smtp-Source: APXvYqx719CKhw4Z29y2XtN+i+SxMimcVX1vbXJWsS7uF3nu2o0tXwU4wIVnzYgiSGB7A6s/oQx/xP6JXCvB4xxbJHg=
-X-Received: by 2002:a37:de05:: with SMTP id h5mr1538965qkj.474.1581404808905; 
-	Mon, 10 Feb 2020 23:06:48 -0800 (PST)
+	Tue, 11 Feb 2020 17:27:29 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Tue, 11 Feb 2020 17:36:59 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 11 Feb 2020 17:37:06 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 11 Feb 2020 09:21:32 -0800
+Message-ID: <1581441693-85373-3-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1581441693-85373-1-git-send-email-wangmy@cn.fujitsu.com>
+References: <1581441693-85373-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
-References: <20200210174720.31886-1-okaya@kernel.org>
-	<CAHtQpK4FHyyhkmayDhcNJXs+0kp9+K1fULG21q9P+C=OtFDpLw@mail.gmail.com>
-	<0bf0b668-9fd5-aae9-bf7b-7b741beb84bd@kernel.org>
-	<CAMKF1sougeHV8n2YDcVRYH38O_v_9n=fPhDvbHvzDpih_JvaXw@mail.gmail.com>
-In-Reply-To: <CAMKF1sougeHV8n2YDcVRYH38O_v_9n=fPhDvbHvzDpih_JvaXw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 10 Feb 2020 23:06:22 -0800
-Message-ID: <CAMKF1soEF_7Jpr76pBPdyuXkRTxaeS1uBeOsJFYAGbtXTuCpUA@mail.gmail.com>
-To: Sinan Kaya <okaya@kernel.org>
-Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Changyu Li <Changyu.Li@microsoft.com>
-Subject: Re: [meta-oe][PATCH v2] abseil-cpp: add recipe for git version
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: C473050A9975.AFF40
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] xterm: upgrade 351 -> 353
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,52 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2020 07:06:48 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 11 Feb 2020 09:46:32 -0000
+Content-Type: text/plain
 
-also fails on x86/musl
+Copyright updated: 1996-2018,2019 -> 1999-2019,2020
 
-http://errors.yoctoproject.org/Errors/Details/390565/
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ .../xorg-app/{xterm_351.bb => xterm_353.bb}                 | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xterm_351.bb => xterm_353.bb} (81%)
 
-On Mon, Feb 10, 2020 at 11:36 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Mon, Feb 10, 2020 at 11:31 AM Sinan Kaya <okaya@kernel.org> wrote:
-> >
-> > On 2/10/2020 1:17 PM, Andrey Zhizhikin wrote:
-> > >> +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', '
-> > >> -march=armv8-a+crypto', '', d)}"
-> > > This cannot be enforced, as it would break those AArch64 derivatives,
-> > > which does not have Crypto extension. See my comment above, where I
-> > > extracted 2 sets of tune features for Cortex-A53. That means that
-> > > there are SoCs there from different vendors, and some vendors decided
-> > > to license Crypto extensions from ARM to include it in their RTL, but
-> > > some opted out to save either space on a die or cost of the processor.
-> > >
-> > > If you would base your build with '+crypto' unconditionally, then the
-> > > binary would segfault on those SoCs which has Crypto opted out.
-> > >
-> > > Moreover, enabling crypto extension in GCC automatically enables
-> > > inlined NEON and VFP opcodes (see [1]), and there are more side
-> > > effects to be expected on those SOCs which does not have those
-> > > integrated.
-> > >
-> >
-> > I agree. I dropped this line on v3.
-> >
-> > I was curious about
-> >
-> > TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'x64', ' -maes
-> > -msse4.1', '', d)}"
-> >
-> > do we have a feature flag for this too?
-> >
->
-> perhaps look for corei7 in TUNE_FEATURES
->
-> > Code doesn't compile without arch crypt support.
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_351.bb b/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
+similarity index 81%
+rename from meta-oe/recipes-graphics/xorg-app/xterm_351.bb
+rename to meta-oe/recipes-graphics/xorg-app/xterm_353.bb
+index 40ee555db..6de704d0b 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_351.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_353.bb
+@@ -2,14 +2,14 @@ require recipes-graphics/xorg-app/xorg-app-common.inc
+ SUMMARY = "xterm is the standard terminal emulator for the X Window System"
+ DEPENDS = "libxaw xorgproto libxext libxau libxinerama libxpm ncurses"
+ 
+-LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=c7faceb872d90115e7c0ad90e90c390d"
++LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=996b1ce0584c0747b17b57654cc81e8e"
+ 
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz \
+            file://0001-Add-configure-time-check-for-setsid.patch \
+           "
+ 
+-SRC_URI[md5sum] = "a07edfbee2e2f4c6a9ddbf834fa4bbec"
+-SRC_URI[sha256sum] = "760a8a10221c9c9744afd86db87c7ad95bbf9be4f5f525fecf39125f0d2a6e16"
++SRC_URI[md5sum] = "247c30ebfa44623f3a2d100e0cae5c7f"
++SRC_URI[sha256sum] = "e521d3ee9def61f5d5c911afc74dd5c3a56ce147c7071c74023ea24cac9bb768"
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
+ 
+-- 
+2.17.1
+
+
+
 
