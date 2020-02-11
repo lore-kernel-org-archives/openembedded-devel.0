@@ -1,88 +1,51 @@
-Return-Path: <danc@opengear.com>
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
-	(mail-mw2nam12on2088.outbound.protection.outlook.com [40.107.244.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B29160F8E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 65A9860B0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Feb 2020 06:08:59 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=Pd+bajIRFR2Ih9bTn0KBb4kkciHukpVd4IpVdsM2tIg3SvabRUrI1/SEB5Ziil9yhVeaYA13uKfiMvPC02Z60vq0F1uyhK9+FG7tQn174cf1H2oTw6plva7fRQg7ajq23Her1/YOEei40lCg0zhIZmcVh9ZOhc16wf/p19T40xzjtBywza+Ilq2Xad6wZpGdTIE3MbzY6ahsU9LeA/oVG+Bu2mM9HHrejwShDE/43GKjIWg7Fr94GKiVhOLDNBOJZqIQbrZSIQZ2VzdZmb83GrfgdnSYMV+4d8CWrqK4zMTKQg8VUkUDlbbisWbfyuumduYpzv40x/nUuw1Jid8pbg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=aagOVZAImak1Lbz9xYqlHm5IMYoXawnc81fnIX4bzko=;
-	b=gRlk3CaxaXQp39b1AbD82or+f4uACGn6VyHqhVf8YouCT8IJ0/5imk2NvewA6rXu+7xEhkaXqZqCouYyLUMHjjN1X0CadRQ809X2hiY7PGs+rm2Ru9ByZsNnoOrUS49IRteAkL3QsYqC39YpaxBjBNsoSZugEL/rniP3zbKXBtEwhiciQL+eQjLX5IrV8rvpOzEaPjHg+3jpaDNLxXccbzVHZjCdcc4PMoBro46q17jEHfxXO79yvOnjWmo9ztp4712lS5FjWYS/QJjMftHgWUkxDk95uDvs3qHoVtYTOUFylHKY2xRkj/aYTXs13TyKR3qoFYlHMJp5jeHIu+vjHQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
-	60.241.24.90) smtp.rcpttodomain=lists.openembedded.org
-	smtp.mailfrom=opengear.com;
-	dmarc=pass (p=none sp=none pct=100) action=none
-	header.from=opengear.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opengear.com;
-	s=selector1;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=aagOVZAImak1Lbz9xYqlHm5IMYoXawnc81fnIX4bzko=;
-	b=Xtg2Dz1LFPRaBEG/ULSzmF258PNu2DPJvIQKsTueseHv0Sg29KMck8AF9iVpA2g3pnbfYZo9SPwFlKhYxxQoILdtCOVw+fVCOTeG1v97SUqz3GJByO3WwB3zZEpb/wFEJvr5tpa/UyiLPxc9/HTcz3lLJ2PcY4NqVff+A42rowM=
-Received: from CO1PR15CA0081.namprd15.prod.outlook.com (2603:10b6:101:20::25)
-	by MN2PR15MB2735.namprd15.prod.outlook.com (2603:10b6:208:12a::27)
-	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2707.23;
-	Tue, 11 Feb 2020 06:08:59 +0000
-Received: from SN1NAM04FT017.eop-NAM04.prod.protection.outlook.com
-	(2a01:111:f400:7e4c::208) by CO1PR15CA0081.outlook.office365.com
-	(2603:10b6:101:20::25) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2707.21 via
-	Frontend Transport; Tue, 11 Feb 2020 06:08:58 +0000
-Authentication-Results: spf=pass (sender IP is 60.241.24.90)
-	smtp.mailfrom=opengear.com; lists.openembedded.org;
-	dkim=none (message not
-	signed) header.d=none;lists.openembedded.org; dmarc=pass action=none
-	header.from=opengear.com;
-Received-SPF: Pass (protection.outlook.com: domain of opengear.com designates
-	60.241.24.90 as permitted sender)
-	receiver=protection.outlook.com; 
-	client-ip=60.241.24.90; helo=postman.bne.opengear.com;
-Received: from postman.bne.opengear.com (60.241.24.90) by
-	SN1NAM04FT017.mail.protection.outlook.com (10.152.88.154) with
-	Microsoft SMTP Server id 15.20.2707.21 via Frontend Transport;
-	Tue, 11 Feb 2020 06:08:58 +0000
-Received: from galangal.danc.bne.opengear.com (danc.bne.opengear.com
-	[192.168.254.90])
-	by postman.bne.opengear.com (Postfix) with ESMTPS id 3DC36DFC87;
-	Tue, 11 Feb 2020 16:08:57 +1000 (AEST)
-Received: by galangal.danc.bne.opengear.com (Postfix, from userid 1090)
-	id 2DE01427F563; Tue, 11 Feb 2020 16:08:57 +1000 (AEST)
-From: Dan Callaghan <dan.callaghan@opengear.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Feb 2020 16:08:34 +1000
-Message-Id: <20200211060834.19790-2-dan.callaghan@opengear.com>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200211060834.19790-1-dan.callaghan@opengear.com>
-References: <20200211060834.19790-1-dan.callaghan@opengear.com>
+	Tue, 11 Feb 2020 07:06:48 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id v2so4246478qkj.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Feb 2020 23:06:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=9WXmn+uZ18257Z6oUInhwfqtr80WHmSY3ryWcW3sNws=;
+	b=rXi/JttJZTHBmOrqlTJkthDZAPjMMCKt4XmHDcQjN//yu/eGhga+HaIuyE4v0P3Kz2
+	VaUr7xu3bpqkfAm5GERAM+zMEgn6GLRTgL0o4d0h+yG8tCQhCXp+NkDEqVGZ3E6sqbyn
+	JMDOZ5s+nI2oEawOlSLPTduB8U7ATNpn+od46n9TX/1RLiOl2Sdqagv0KgfYnHtAIJmM
+	+kPliM8gYDGS1VC1XoOfNlHU2AVZ4HC/mdSaVkQLzevhAmskHe2e/pAfScD+TtWdb4hN
+	7FMnFxYQttA+ne510OpbrUQqTK90hRExjBHnl2Ad5lq8wr5wr+bFu53Ka3v2dMlunTyY
+	X0YQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=9WXmn+uZ18257Z6oUInhwfqtr80WHmSY3ryWcW3sNws=;
+	b=jxbgoKGJwBZyAD/dRLzS6U2/sxZx0GHEpuM7HjACSRlWa+TNULdNFS1knxQZTo3zQ0
+	Cm0tRAaibf090DZvnEu2SaVBqWthv8NwASR3Ey+YrtcDTuYZ9DVaqSTnLwciyZV1NdKD
+	8AoJ2AncDpxyyHeayBH2wJEP2wArPr+gPMCKgWQH9SL7DNWXv9Y8NbR5a4t//Un8b7e4
+	uZMBAY7E8Nh2N8jnU31ax7D91x/m2+ks2mKYRN0SANuqaF/VAPiIkABn+XmNsuvxQu/m
+	+LF00vVgt1tdsoIBn9VQBOmbIxQrRsIq1iOGCpsElu5NPKT4fKm0AXBhZ1FbvJ/JtSU9
+	6QCA==
+X-Gm-Message-State: APjAAAWGmHNzSYSIB34pIvqOUDly9bpiN3ow/ZjxELKvlDFj9/vgpu40
+	dzZDiMV+CgNMEFm49MBp+zMxcQKM5yMoK+neNeA=
+X-Google-Smtp-Source: APXvYqx719CKhw4Z29y2XtN+i+SxMimcVX1vbXJWsS7uF3nu2o0tXwU4wIVnzYgiSGB7A6s/oQx/xP6JXCvB4xxbJHg=
+X-Received: by 2002:a37:de05:: with SMTP id h5mr1538965qkj.474.1581404808905; 
+	Mon, 10 Feb 2020 23:06:48 -0800 (PST)
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-Forefront-Antispam-Report: CIP:60.241.24.90; IPV:; CTRY:AU; EFV:NLI; SFV:NSPM;
-	SFS:(10009020)(4636009)(346002)(136003)(396003)(376002)(39850400004)(189003)(199004)(70586007)(5660300002)(6916009)(36756003)(8676002)(426003)(107886003)(186003)(6266002)(2616005)(8936002)(246002)(26005)(70206006)(44832011)(4744005)(36906005)(316002)(4326008)(2906002)(478600001)(42186006)(336012)(6666004)(356004)(1076003)(7636002);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:MN2PR15MB2735;
-	H:postman.bne.opengear.com; FPR:; SPF:Pass; LANG:en;
-	PTR:brisbane.opengear.com; MX:1; A:1; 
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: d12a3c9f-f8f1-4753-6040-08d7aeb8e1f1
-X-MS-TrafficTypeDiagnostic: MN2PR15MB2735:|MN2PR15MB2735:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <MN2PR15MB2735D5B54F4ACF5B561FDD15B8180@MN2PR15MB2735.namprd15.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3513;
-X-Forefront-PRVS: 0310C78181
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: asoGJomA1Grng42pxuEmtOHXjHGAw8W5dTx3AmW/2ip5N0ZBBv8Zl5HaiARedGfU9uXmIe3xL41Ox7eOZnX5W5p3RrvokKjH0exDkcf5A7MZ1PUMS83GZEotLLt7HcBZ31F4E9azfHNo2Y8GN42bi6mVBR6NUDKcID0fxtoY7O8mDWnMu6XrZEmnjDVWjMcaF7A3011KnIzVNjQjdyGjw99hBAz+zUcojXTopRoFf1QPmqwMD97Iaq+Q2Ep/lyPZ7HnHDSyux23WqpwUt/aNiKcEfAh0EDGgLC8olSpAc76HCvLCemR3oiB1HWN7isyoNDmtJRRwqYdqvjw00A5oJGKeF0Fsk0aI/zFNS1bJkGIRdiXl0FUHCVpzoqhyzbspNpckbVOAq8Ax9GeIGYhYf0/0JlJpfN+NusqO7eqvA+QNC7Od40V0dUWKPS985I4/
-X-OriginatorOrg: opengear.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2020 06:08:58.0094 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d12a3c9f-f8f1-4753-6040-08d7aeb8e1f1
-X-MS-Exchange-CrossTenant-Id: a6251c26-d21f-4164-a225-1f4eaebf5f9a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=a6251c26-d21f-4164-a225-1f4eaebf5f9a; Ip=[60.241.24.90];
-	Helo=[postman.bne.opengear.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR15MB2735
-Subject: [meta-networking][PATCH 2/2] quagga: install tmpfiles snippet to /usr/lib/tmpfiles.d
+References: <20200210174720.31886-1-okaya@kernel.org>
+	<CAHtQpK4FHyyhkmayDhcNJXs+0kp9+K1fULG21q9P+C=OtFDpLw@mail.gmail.com>
+	<0bf0b668-9fd5-aae9-bf7b-7b741beb84bd@kernel.org>
+	<CAMKF1sougeHV8n2YDcVRYH38O_v_9n=fPhDvbHvzDpih_JvaXw@mail.gmail.com>
+In-Reply-To: <CAMKF1sougeHV8n2YDcVRYH38O_v_9n=fPhDvbHvzDpih_JvaXw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 10 Feb 2020 23:06:22 -0800
+Message-ID: <CAMKF1soEF_7Jpr76pBPdyuXkRTxaeS1uBeOsJFYAGbtXTuCpUA@mail.gmail.com>
+To: Sinan Kaya <okaya@kernel.org>
+Cc: Sinan Kaya <sinan.kaya@microsoft.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Changyu Li <Changyu.Li@microsoft.com>
+Subject: Re: [meta-oe][PATCH v2] abseil-cpp: add recipe for git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -95,35 +58,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Feb 2020 06:08:59 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Tue, 11 Feb 2020 07:06:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Package-owned tmpfiles snippets belong in /usr/lib/tmpfiles.d,
-/etc/tmpfiles.d is for administrator customisations.
+also fails on x86/musl
 
-Signed-off-by: Dan Callaghan <dan.callaghan@opengear.com>
----
- meta-networking/recipes-protocols/quagga/quagga.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+http://errors.yoctoproject.org/Errors/Details/390565/
 
-diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc b/meta-networking/recipes-protocols/quagga/quagga.inc
-index 2673a8976..f35b27160 100644
---- a/meta-networking/recipes-protocols/quagga/quagga.inc
-+++ b/meta-networking/recipes-protocols/quagga/quagga.inc
-@@ -116,9 +116,9 @@ do_install () {
-     done
- 
-     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
--        install -d ${D}${sysconfdir}/tmpfiles.d
-+        install -d ${D}${nonarch_libdir}/tmpfiles.d
-         echo "d /run/quagga 0755 quagga quagga -" \
--        > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
-+        > ${D}${nonarch_libdir}/tmpfiles.d/${BPN}.conf
-     fi
- 
-     # Remove sysinit script if sysvinit is not in DISTRO_FEATURES
--- 
-2.21.1
-
+On Mon, Feb 10, 2020 at 11:36 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Mon, Feb 10, 2020 at 11:31 AM Sinan Kaya <okaya@kernel.org> wrote:
+> >
+> > On 2/10/2020 1:17 PM, Andrey Zhizhikin wrote:
+> > >> +TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'aarch64', '
+> > >> -march=armv8-a+crypto', '', d)}"
+> > > This cannot be enforced, as it would break those AArch64 derivatives,
+> > > which does not have Crypto extension. See my comment above, where I
+> > > extracted 2 sets of tune features for Cortex-A53. That means that
+> > > there are SoCs there from different vendors, and some vendors decided
+> > > to license Crypto extensions from ARM to include it in their RTL, but
+> > > some opted out to save either space on a die or cost of the processor.
+> > >
+> > > If you would base your build with '+crypto' unconditionally, then the
+> > > binary would segfault on those SoCs which has Crypto opted out.
+> > >
+> > > Moreover, enabling crypto extension in GCC automatically enables
+> > > inlined NEON and VFP opcodes (see [1]), and there are more side
+> > > effects to be expected on those SOCs which does not have those
+> > > integrated.
+> > >
+> >
+> > I agree. I dropped this line on v3.
+> >
+> > I was curious about
+> >
+> > TARGET_CXXFLAGS += "${@bb.utils.contains('TARGET_ARCH', 'x64', ' -maes
+> > -msse4.1', '', d)}"
+> >
+> > do we have a feature flag for this too?
+> >
+>
+> perhaps look for corei7 in TUNE_FEATURES
+>
+> > Code doesn't compile without arch crypt support.
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
