@@ -1,53 +1,47 @@
-Return-Path: <jpuhlman@mvista.com>
-Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com
-	[209.85.167.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D3A860C18
+Return-Path: <jonathan.richardson@broadcom.com>
+Received: from mail-pf1-f177.google.com (mail-pf1-f177.google.com
+	[209.85.210.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 7ADDA60C6F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2020 20:15:28 +0000 (UTC)
-Received: by mail-oi1-f179.google.com with SMTP id d62so7088262oia.11
+	Thu, 13 Feb 2020 23:22:33 +0000 (UTC)
+Received: by mail-pf1-f177.google.com with SMTP id q8so3846702pfh.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2020 12:15:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=to:from:subject:message-id:date:user-agent:mime-version
-	:content-transfer-encoding:content-language;
-	bh=83qpFzw/n6T0N/yx1Ra/a80ouq7eUeNacIZTC6W4oHo=;
-	b=WPmRfgnWe3tad7jlDxR8aTAW0e/VXGHtun/+UkW/gyFiXXO9cvVUCvx2LqKWAsyPBZ
-	9qgFvHQb8GKUb4Yi2llbYTuEfBjNT4koOlMWGcXyGStTRpBMpD54e427OJpY0vVk41t9
-	0aFsjQqAOAzC3MhF58WouM60xM18xnQ5ArWBY5RREKQKmK87bjY5vqf3RKLo2kYx0Y5F
-	Q5F68uAZyTouiKuX8d6+D9C8w9iDqBNbuH8eF7Uz+XOFdEBjX4RBXLZPrWnjV++81Npw
-	7FsaLlQgVwkdVp7WpS9TSGyjjNi7AJWmiW5fb+SlBff4SjmtDecd/gcXGdnADC9h5XLh
-	pwmQ==
+	Thu, 13 Feb 2020 15:22:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=v+dp33dIXYZIvesRhokNJchcFbOFmRmUs8Fb1W2VUL8=;
+	b=Ymn95kgg3ozTG4GduwefXBp5M1c7rHs191t/ekr9WFceduKCn7T0Igf0h0hzszqQBv
+	6UgzEQx2nZenZr0/HLOoTFh6nFPXpNtq3xGv9Pr6tTGRQUMFaipaFShJoD/7aowpwiJa
+	KyBTvv1m495KCTbvlVELUcz2HI5zLO+Hqs/n8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
-	:mime-version:content-transfer-encoding:content-language;
-	bh=83qpFzw/n6T0N/yx1Ra/a80ouq7eUeNacIZTC6W4oHo=;
-	b=PcA3E8Ax0Kjx1P0DzKqtx+Ym1OaHQNrNtXsbHg2r8a7WC4flZvkxLLZhvIzsRFhyAA
-	sbrfZPNM7+a9w0IOHFsDRV/brrDKhRL4/hcsvrYsi7Hgf04oSrfnbPNZAco1zR1zROPD
-	ie0wsieH8q4RkqYSsVsJ2Cd3D98Xgw1ZfQGSDr1PWbXZOAx/c5fOnR8wubQ0d5FWcIxE
-	KxThuy3tiU6i2Z6sxjiobFUet3zcGlEoPxsrOTJNbq8qws7i6wDhDyr+yurqN1mOtyFz
-	JJ1CJOWKI93TsmH+KTao0xtow8lbu7rPfNfXChdR31n8Zw0ac8+V9nldXS6f8VnpQXOz
-	msHQ==
-X-Gm-Message-State: APjAAAUknRU6R2HFqiPxn6XbZUFLj5LCxIahBlL7OBZjNSm+Q+1uSXeP
-	a9WxJaA6eiUtDFYGF36LDdnsgQ==
-X-Google-Smtp-Source: APXvYqyqCUWNrulWGef0LUT6NzGpufF43GtmCZ0T464ifMGnQtfYAJyCFq+YuD2cHubsD+/xy7fogA==
-X-Received: by 2002:a54:450f:: with SMTP id l15mr4329347oil.126.1581624929563; 
-	Thu, 13 Feb 2020 12:15:29 -0800 (PST)
-Received: from ?IPv6:2600:1700:4c90:60a0:18f0:30d2:de29:e134?
-	([2600:1700:4c90:60a0:18f0:30d2:de29:e134])
-	by smtp.gmail.com with ESMTPSA id f1sm1144892otq.4.2020.02.13.12.15.28
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Thu, 13 Feb 2020 12:15:29 -0800 (PST)
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	richard.leitner@skidata.com
-From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-Message-ID: <22639ede-b55a-3e33-3ac3-c462b1e37b62@mvista.com>
-Date: Thu, 13 Feb 2020 12:15:07 -0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
-	Thunderbird/68.4.2
-MIME-Version: 1.0
-Subject: Cherry pick patches breaking zeus/thud/master.
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=v+dp33dIXYZIvesRhokNJchcFbOFmRmUs8Fb1W2VUL8=;
+	b=iLdCs82quTsygm9wJyZkcNw94aQJIsCRZbdK4UUL+ApUIWZXorUJPrbtYoOxUXZvAG
+	S47jSEPIfwlwxUO+awxsHyjY+0K7bZ41DQDPE5r7fH9jy7PadVy5QW8wGd7X2FcPABRw
+	t2UJLnmxc5ZOlTIQOXJctmFBX3D68aWJrJWI7jfnW5Eta9kaCzgaw9tjVMENt5FYLioc
+	3TRdlALeGQ2vF7Vo/dr3CtnQYRFER3fG/e8qk+YgQlFuHRNXso7uQbdunXskCrhKHt25
+	z/s6HOABQfuZtlE//qz9ar8w/2y2qbr8AnoxEjH0RqNbVXh6YiOZZXZYT9rBwvXkowi2
+	qq+Q==
+X-Gm-Message-State: APjAAAWXnHcGy9D7LuD1VV+uj5PBTXYZYCUezSda/AARP0AThieJY/o+
+	rt8c4scKuolW7FfVZ9e8Z/ADliFVVQ0gYm0nFt0rynFk+HQCKi0v2iuJAqIG2sye1WUPiHkxXcD
+	DT0gIVXIuraqP1t7EI8fYBRBUIOF4qmT1Ombehv952E8qvH0TZevL1RF48d3gJa/YWA/KLngpJr
+	dtabnhSaPncls2kcvkyd46z2dSp3qrddE=
+X-Google-Smtp-Source: APXvYqwqul1mYV9ThTbZK2TGBtD79T/nC+F1NtGiVRKr7Zc3gkHXMnmlvSblbVYCl+F1p/XA4nN2Zw==
+X-Received: by 2002:a63:514b:: with SMTP id r11mr289809pgl.329.1581636154189; 
+	Thu, 13 Feb 2020 15:22:34 -0800 (PST)
+Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
+	by smtp.gmail.com with ESMTPSA id
+	g72sm4593833pfb.11.2020.02.13.15.22.32
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 13 Feb 2020 15:22:33 -0800 (PST)
+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 13 Feb 2020 15:22:20 -0800
+Message-Id: <20200213232220.109189-1-jonathan.richardson@broadcom.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Randy Schacher <stuart.schacher@broadcom.com>
+Subject: [meta-oe] pcimem: add initial version 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,24 +54,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2020 20:15:28 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Thu, 13 Feb 2020 23:22:33 -0000
 
-Richard,
+From: Randy Schacher <stuart.schacher@broadcom.com>
 
-Is it possible to cherry pick
+Initial revision from 09724edb1783a98da2b7ae53c5aaa87493aabc9b
 
-d0a9fe08be6e1c2e7f7afc79abc292d3bffeb9fe
-Revert "openjdk-8: disable, stringop-overflow compiler errors"
+Reviewed-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+Reviewed-by: Randy Schacher <stuart.schacher@broadcom.com>
+Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+---
+ meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
 
-to zeus/thud/master, since they are breaking for the same reason as warrior?
-
-TIA
-
+diff --git a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+new file mode 100644
+index 000000000..ee2b1846b
+--- /dev/null
++++ b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "Simple program to read & write to a pci device from userspace"
++HOMEPAGE = "https://github.com/billfarrow/pcimem"
++BUGTRACKER = "https://github.com/billfarrow/pcimem/issues"
++SECTION = "devel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++COMPATIBLE_HOST = "(x86_64|aarch64|arm)"
++
++SRCREV = "09724edb1783a98da2b7ae53c5aaa87493aabc9b"
++SRC_URI = "git://github.com/billfarrow/pcimem.git "
++
++S = "${WORKDIR}/git"
++
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${B}/pcimem ${D}${bindir}
++}
 -- 
-Jeremy A. Puhlman
-jpuhlman@mvista.com
+2.17.1
 
 
