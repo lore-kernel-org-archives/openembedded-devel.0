@@ -1,47 +1,47 @@
-Return-Path: <jonathan.richardson@broadcom.com>
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com
-	[209.85.221.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 32CAF60C6F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
+	[209.85.222.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 96F616100F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2020 23:23:56 +0000 (UTC)
-Received: by mail-wr1-f54.google.com with SMTP id n10so6879288wrm.1
+	Fri, 14 Feb 2020 01:42:24 +0000 (UTC)
+Received: by mail-qk1-f172.google.com with SMTP id d11so7719035qko.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2020 15:23:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=9p5Lt8QTt0oO/SChKll5BHg/2SKwqOyNiLHVlNFpyjQ=;
-	b=EHISPqJ1COtJX3uTlp8S7uDr7dXpj7RX0ffZKTgmI2l57T/5NJ3CmK4QYd/w5raH9Z
-	zJ0FAwo6Gy1l/mk7qZsJ5BhXmcOasYf8skSlJhBV6ZVGK86Ed4hhMOvQmtgb9Zcw1ZQU
-	wzQ9vE1O5ygZFv8FoDUEVzW7a5exDKy0v/Ghg=
+	Thu, 13 Feb 2020 17:42:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=azHU8H4cOAyGnyyLmUc4fc+8b/431YLrj0hVdqJkzBI=;
+	b=k2QtURztaQCr20TFHDf47abKWNH22qjar1/50j4Mnb4FsQlzTia67OhEw74xI8lUgP
+	kJLyuVa8VHr50xnKgKL37Lhg/8OFR1OEksbGXsFDAaqkNq/q8O+Bbg9pVLvyCrvLfs+O
+	XtACUdfFTof6peSqnFzNBbQM0/bUws9jcuR/CY6FuzysCCAvV3wZ4Vk8MNuM7D0lTmwO
+	2mCUcN1ocNnoSwO0G2km14DVHN9n3IVq2IE0ZsYGXp7SVybLE7AkCIFTCX4602Ll3x+1
+	H5aAKVnXRwSZPfMZi4vSpMrJr+YCW47Y4++vjVOqnicn789Hhqm+WY15DPfRg/YyDbZ9
+	6r0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=9p5Lt8QTt0oO/SChKll5BHg/2SKwqOyNiLHVlNFpyjQ=;
-	b=OvRfhxyeqRDZ89A+HsZmLROeuORKBJjaW9Y8m4rVZRcWiziJ8SQKqvCbNMjsnH44gI
-	DzXPuyfj2wVX4ajIltl9cq5zIdYCQ4mLi9o7+W5NhJ0AhUBsL9t+O9ZAjmWV4NRduf9X
-	g+ArF71v16uqE7hZTITNUPdmoiQ8ZjSJsEjD0gPKsvXmeKxu0YMZfSBlY+S7OEhBCI1h
-	4jQPNrqSsdHzSZlUhQxXzCQNPjsji8CKx23Ushd0hScoQPMRGYefbdE9e9SGe+S3cDsw
-	e+mZFNdiW/tlS6pNc/r2Qb0jKweBWeIxDX8y7dIwRfQC6iGEA7o6bfJGTF/aqlp9vNDw
-	Z0Pg==
-X-Gm-Message-State: APjAAAUr22fOvZ6SLGJ0wvjMZ7S44y8RuNpDKXhvAxyYGXEl9kgo1pax
-	yrOBW8jZ0gOrdvGf0yfkGii54kVoDPKLHoIPP/I24UBhQDWEyouToMqEqY4IWvHObIIaKCSZuW7
-	+aY3wjkfgdMMXjcbXyi2T6u3+5sL5692UUyLdm9QLxTHNQtoAQGykeEfV7Bkby7/4bEtCERRgln
-	1WTf/YLOMuQg1rvuZ8/9vOLX28Ymw5MjU=
-X-Google-Smtp-Source: APXvYqzQw5a3YLvYMVKoaQ3zUq8M1x3TB0DWYaWWKs/HluOrxJCOAcRdeFf3/B2Qu5DA4hAco8iESg==
-X-Received: by 2002:adf:eb48:: with SMTP id u8mr23692537wrn.283.1581636236364; 
-	Thu, 13 Feb 2020 15:23:56 -0800 (PST)
-Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
-	by smtp.gmail.com with ESMTPSA id
-	a62sm4970966wmh.33.2020.02.13.15.23.54
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 13 Feb 2020 15:23:55 -0800 (PST)
-From: Jonathan Richardson <jonathan.richardson@broadcom.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Feb 2020 15:23:46 -0800
-Message-Id: <20200213232346.109257-1-jonathan.richardson@broadcom.com>
-X-Mailer: git-send-email 2.17.1
-Cc: Arun Parameswaran <arun.parameswaran@broadcom.com>
-Subject: [meta-oe] spidev-test: Add initial version of recipe
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=azHU8H4cOAyGnyyLmUc4fc+8b/431YLrj0hVdqJkzBI=;
+	b=FSHKIVEjf26m0SQUN8x/Sab4VK7ilSiWwOMwyZV/FepcbbNdNf76IcRd1gBpLCdG1Y
+	w5eY89k2XFEpaEBqmoc6h/O6mYKAoUtWJ6S+9yXFEjgRFseerIFHy+Kp/uDUrNcVH3R6
+	In0m3MbsiqWoz6wrvWaP5zJHTl+AwCVrXwpOKhAQjd2Isx6uzBO+KfYe48JtkivSA3bz
+	tiKR2lBt8QxYCHvPsnHoEJeQ3JX8pX/ehclsqUgSU3xFPkvUooW4dfXttNSS0o9hZPfH
+	DyXlR/2IofwYTMiR2nBnvJiDfhhowhXTlHi9RD/yYzjmDVxDMM3fVSaU5AqiwqdIngv+
+	7V6g==
+X-Gm-Message-State: APjAAAVGzVPu1uuAmdHpRwHjq7ZqzUkDgFS1yBEx+yVeinwXVHFtuTZK
+	9A0Nv9Fy47rHmTrly99eno46ey2vtfCCXI4IBnCcn6Z5UGI=
+X-Google-Smtp-Source: APXvYqyUGIZLH9q5l8NvSRAY/xR2Gi8L+3Upv8kWp9qoinvSFTIvs0hEMWPS+8RNiwKoTCqJNUdqko2bhZtIuMjUjsA=
+X-Received: by 2002:a37:de05:: with SMTP id h5mr429141qkj.474.1581644545221;
+	Thu, 13 Feb 2020 17:42:25 -0800 (PST)
+MIME-Version: 1.0
+References: <20200213232220.109189-1-jonathan.richardson@broadcom.com>
+In-Reply-To: <20200213232220.109189-1-jonathan.richardson@broadcom.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 13 Feb 2020 17:41:59 -0800
+Message-ID: <CAMKF1srr9h4BU9g6NHV66TFfJxv9DOpP-PVXZEPDuFJO+pw9Ng@mail.gmail.com>
+To: Jonathan Richardson <jonathan.richardson@broadcom.com>
+Cc: Randy Schacher <stuart.schacher@broadcom.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe] pcimem: add initial version 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,59 +54,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Feb 2020 23:23:56 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 01:42:24 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Arun Parameswaran <arun.parameswaran@broadcom.com>
+On Thu, Feb 13, 2020 at 3:22 PM Jonathan Richardson via
+Openembedded-devel <openembedded-devel@lists.openembedded.org> wrote:
+>
+> From: Randy Schacher <stuart.schacher@broadcom.com>
+>
+> Initial revision from 09724edb1783a98da2b7ae53c5aaa87493aabc9b
+>
+> Reviewed-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+> Reviewed-by: Randy Schacher <stuart.schacher@broadcom.com>
+> Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+> ---
+>  meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+>
+> diff --git a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+> new file mode 100644
+> index 000000000..ee2b1846b
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY = "Simple program to read & write to a pci device from userspace"
+> +HOMEPAGE = "https://github.com/billfarrow/pcimem"
+> +BUGTRACKER = "https://github.com/billfarrow/pcimem/issues"
+> +SECTION = "devel"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +
+> +COMPATIBLE_HOST = "(x86_64|aarch64|arm)"
+> +
+> +SRCREV = "09724edb1783a98da2b7ae53c5aaa87493aabc9b"
+> +SRC_URI = "git://github.com/billfarrow/pcimem.git "
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +do_install() {
+> +    install -d ${D}${bindir}
+> +    install -m 0755 ${B}/pcimem ${D}${bindir}
 
-Allows for testing SPI interface using spidev driver and is part of the
-kernel tools.
+both installs could be squashed with
+install -D -m 0755 ${B}/pcimem ${D}${bindir}/pcimem
 
-Signed-off-by: Arun Parameswaran <arun.parameswaran@broadcom.com>
-Reviewed-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
-Tested-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
-Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
----
- .../recipes-kernel/spidev-test/spidev-test.bb | 30 +++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-
-diff --git a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-new file mode 100644
-index 000000000..7dd199fe9
---- /dev/null
-+++ b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "Test SPI devices"
-+DESCRIPTION = "SPI testing utility using the spidev driver"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-+DEPENDS = "binutils elfutils"
-+PROVIDES = "virtual/spidev-test"
-+
-+inherit bash-completion kernelsrc kernel-arch
-+
-+do_populate_lic[depends] += "virtual/kernel:do_patch"
-+
-+EXTRA_OEMAKE = "-C ${S}/tools/spi O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
-+
-+do_configure[depends] += "virtual/kernel:do_shared_workdir"
-+
-+do_compile() {
-+    oe_runmake
-+}
-+
-+do_install() {
-+    oe_runmake DESTDIR=${D} install
-+}
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+python do_package_prepend() {
-+    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
-+}
-+
-+B = "${WORKDIR}/${BPN}-${PV}"
--- 
-2.17.1
-
+> +}
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
