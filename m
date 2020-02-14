@@ -1,46 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
-	[209.85.222.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 2625B6100E
+Return-Path: <Wenlin.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4861960886
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 01:48:09 +0000 (UTC)
-Received: by mail-qk1-f194.google.com with SMTP id c20so7771817qkm.1
+	Fri, 14 Feb 2020 09:09:02 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 01E98BZc014934
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2020 17:48:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=xutVAUzL7N2LT6gEEx6gpziuiYmmXu5/XbB9b4pbzoA=;
-	b=pb8AvK5FfrfqOzq3SotzIAYwP6rgnbL96KHH72BVwHz2+k5SaIT6aS/h7S0CJ2PCNj
-	UgWnGjpheobQfkz1/PzktiajtNgzqcMV2gVejIQzdxWrUEu/sq+KseY/a5CltGY8g3cu
-	G0TXTCGq+FEWPh5wPpmJ5Q958iYCK5LXr2m1nT5jzrIn/Uc27y3IFXNzmes6QV4o2aCE
-	gunzUcNCEkocDgLuD70dMRAV5rrxO0oYwXsXGPkQRobWnvMkrrwYH4ctN6oY2IHX7ulG
-	d5oQXuwzV/GwfEoU5maj17znpHKT9n1FUZ6tLx3vflEtlwZqhr4AZ7h78OiA5FLU1BNV
-	76kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=xutVAUzL7N2LT6gEEx6gpziuiYmmXu5/XbB9b4pbzoA=;
-	b=HZ3RZPSPLCumSnONLeL/DI2W9nR1j7PxeQiOkypCbIGG1e8SIeuPBA3OlxQcLJ2fD5
-	xGWmNVWgNIHZI4rQEjgHxZ9sgIrWT4eP1bdcTTedsL4maCwhgDJ9ujrXABlGBR3buOQJ
-	Io9IFFaDp42mykiWKcEgB8SrvquYbACgF0sDn7pvvSrF7YRfFtePvk7bmtDKEhNNwkN9
-	LX9hkfa+SgcD4c/iQ0hi14CkwsR2fmclnMNU9GwoEyA57zoZjOUMorvD218JsOzMqK7C
-	J0LrFvYyx0O4WJ+PL9PJf3OdOeaJaUP4wcjJZD+k/4Gpe5vJT8SU5hSvNB84naQ4U7hE
-	kiHA==
-X-Gm-Message-State: APjAAAWf+vnPcBmp+hg1TA8og1Kv/hAD/59uwfl+xBak4E8q3rg6pdGA
-	+nQvTbwOtewuq6FpLNYzAkIqXn/ujuAi8PZtXuM=
-X-Google-Smtp-Source: APXvYqzLR2zPpvSv9DeeEAiWgCY6VnjDUBUZifjD1tjx4N2siv1eBnYEa0ftqTmQip8ida38w2OUkFQHXqNifHXlZYU=
-X-Received: by 2002:ae9:e88e:: with SMTP id a136mr412731qkg.71.1581644889812; 
-	Thu, 13 Feb 2020 17:48:09 -0800 (PST)
+	Fri, 14 Feb 2020 01:08:53 -0800
+Received: from pek-wkang-d1.wrs.com (128.224.162.172) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.468.0; Fri, 14 Feb 2020 01:08:20 -0800
+From: Wenlin Kang <wenlin.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 14 Feb 2020 17:08:19 +0800
+Message-ID: <20200214090819.15989-1-wenlin.kang@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20200213193536.23301-1-scott.branden@broadcom.com>
-In-Reply-To: <20200213193536.23301-1-scott.branden@broadcom.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 13 Feb 2020 17:47:43 -0800
-Message-ID: <CAMKF1srKAWjN9OzU0-37wD+33U8d7wRVmY_PYtDRWGjQJt675g@mail.gmail.com>
-To: Scott Branden <scott.branden@broadcom.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH] x265: add x265 recipe
+Subject: [meta-oe][PATCH] ipmitool: fix CVE-2020-5208
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,58 +31,170 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 01:48:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 14 Feb 2020 09:09:02 -0000
+Content-Type: text/plain
 
-On Thu, Feb 13, 2020 at 11:36 AM Scott Branden via Openembedded-devel
-<openembedded-devel@lists.openembedded.org> wrote:
->
-> Add x265 recipe for latest tag of Release_3.2 branch (3.2.1).
->
-> Signed-off-by: Scott Branden <scott.branden@broadcom.com>
-> ---
->  .../recipes-multimedia/x265/x265_3.2.1.bb     | 24 +++++++++++++++++++
->  1 file changed, 24 insertions(+)
->  create mode 100644 meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
->
-> diff --git a/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb b/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
-> new file mode 100644
-> index 0000000000..68c1a55c8c
-> --- /dev/null
-> +++ b/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "H.265/HEVC video encoder"
-> +DESCRIPTION = "A free software library and application for encoding video streams into the H.265/HEVC format."
-> +HOMEPAGE = "http://www.videolan.org/developers/x265.html"
-> +
-> +LICENSE = "GPLv2"
-> +LICENSE_FLAGS = "commercial"
-> +LIC_FILES_CHKSUM = "file://../COPYING;md5=c9e0427bc58f129f99728c62d4ad4091"
-> +
-> +DEPENDS = "nasm-native gnutls zlib libpcre"
-> +
-> +SRC_URI = "http://ftp.videolan.org/pub/videolan/x265/x265_${PV}.tar.gz"
-> +
-> +S = "${WORKDIR}/x265_${PV}/source"
-> +
-> +SRC_URI[md5sum] = "94808045a34d88a857e5eaf3f68f4bca"
-> +SRC_URI[sha256sum] = "fb9badcf92364fd3567f8b5aa0e5e952aeea7a39a2b864387cec31e3b58cbbcc"
-> +
-> +inherit lib_package pkgconfig cmake
-> +
-> +AS[unexport] = "1"
-> +
-> +COMPATIBLE_MACHINE = "^$"
-> +COMPATIBLE_MACHINE_x86 = ".*"
-> +COMPATIBLE_MACHINE_x86-64 = ".*"
+Fix CVE-2020-5208
 
-perhaps better to use COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
+---
+ ...-Fix-buffer-overflow-vulnerabilities.patch | 133 ++++++++++++++++++
+ .../ipmitool/ipmitool_1.8.18.bb               |   1 +
+ 2 files changed, 134 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
+
+diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
+new file mode 100644
+index 000000000..b65e3ef1a
+--- /dev/null
++++ b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
+@@ -0,0 +1,133 @@
++From e824c23316ae50beb7f7488f2055ac65e8b341f2 Mon Sep 17 00:00:00 2001
++From: Chrostoper Ertl <chertl@microsoft.com>
++Date: Thu, 28 Nov 2019 16:33:59 +0000
++Subject: [PATCH] fru: Fix buffer overflow vulnerabilities
++
++Partial fix for CVE-2020-5208, see
++https://github.com/ipmitool/ipmitool/security/advisories/GHSA-g659-9qxw-p7cp
++
++The `read_fru_area_section` function only performs size validation of
++requested read size, and falsely assumes that the IPMI message will not
++respond with more than the requested amount of data; it uses the
++unvalidated response size to copy into `frubuf`. If the response is
++larger than the request, this can result in overflowing the buffer.
++
++The same issue affects the `read_fru_area` function.
++
++Upstream-Status: Backport[https://github.com/ipmitool/ipmitool/commit/e824c23316ae50beb7f7488f2055ac65e8b341f2]
++CVE: CVE-2020-5208
++
++Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
++---
++ lib/ipmi_fru.c | 33 +++++++++++++++++++++++++++++++--
++ 1 file changed, 31 insertions(+), 2 deletions(-)
++
++diff --git a/lib/ipmi_fru.c b/lib/ipmi_fru.c
++index c2a139d..2e323ff 100644
++--- a/lib/ipmi_fru.c
+++++ b/lib/ipmi_fru.c
++@@ -663,7 +663,10 @@ int
++ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
++ 			uint32_t offset, uint32_t length, uint8_t *frubuf)
++ {
++-	uint32_t off = offset, tmp, finish;
+++	uint32_t off = offset;
+++	uint32_t tmp;
+++	uint32_t finish;
+++	uint32_t size_left_in_buffer;
++ 	struct ipmi_rs * rsp;
++ 	struct ipmi_rq req;
++ 	uint8_t msg_data[4];
++@@ -676,10 +679,12 @@ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
++ 
++ 	finish = offset + length;
++ 	if (finish > fru->size) {
+++		memset(frubuf + fru->size, 0, length - fru->size);
++ 		finish = fru->size;
++ 		lprintf(LOG_NOTICE, "Read FRU Area length %d too large, "
++ 			"Adjusting to %d",
++ 			offset + length, finish - offset);
+++		length = finish - offset;
++ 	}
++ 
++ 	memset(&req, 0, sizeof(req));
++@@ -715,6 +720,7 @@ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
++ 		}
++ 	}
++ 
+++	size_left_in_buffer = length;
++ 	do {
++ 		tmp = fru->access ? off >> 1 : off;
++ 		msg_data[0] = id;
++@@ -756,9 +762,18 @@ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
++ 		}
++ 
++ 		tmp = fru->access ? rsp->data[0] << 1 : rsp->data[0];
+++		if(rsp->data_len < 1
+++		   || tmp > rsp->data_len - 1
+++		   || tmp > size_left_in_buffer)
+++		{
+++			printf(" Not enough buffer size");
+++			return -1;
+++		}
+++
++ 		memcpy(frubuf, rsp->data + 1, tmp);
++ 		off += tmp;
++ 		frubuf += tmp;
+++		size_left_in_buffer -= tmp;
++ 		/* sometimes the size returned in the Info command
++ 		* is too large.  return 0 so higher level function
++ 		* still attempts to parse what was returned */
++@@ -791,7 +806,9 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
++ 			uint32_t offset, uint32_t length, uint8_t *frubuf)
++ {
++ 	static uint32_t fru_data_rqst_size = 20;
++-	uint32_t off = offset, tmp, finish;
+++	uint32_t off = offset;
+++	uint32_t tmp, finish;
+++	uint32_t size_left_in_buffer;
++ 	struct ipmi_rs * rsp;
++ 	struct ipmi_rq req;
++ 	uint8_t msg_data[4];
++@@ -804,10 +821,12 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
++ 
++ 	finish = offset + length;
++ 	if (finish > fru->size) {
+++		memset(frubuf + fru->size, 0, length - fru->size);
++ 		finish = fru->size;
++ 		lprintf(LOG_NOTICE, "Read FRU Area length %d too large, "
++ 			"Adjusting to %d",
++ 			offset + length, finish - offset);
+++		length = finish - offset;
++ 	}
++ 
++ 	memset(&req, 0, sizeof(req));
++@@ -822,6 +841,8 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
++ 	if (fru->access && fru_data_rqst_size > 16)
++ #endif
++ 		fru_data_rqst_size = 16;
+++
+++	size_left_in_buffer = length;
++ 	do {
++ 		tmp = fru->access ? off >> 1 : off;
++ 		msg_data[0] = id;
++@@ -853,8 +874,16 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
++ 		}
++ 
++ 		tmp = fru->access ? rsp->data[0] << 1 : rsp->data[0];
+++		if(rsp->data_len < 1
+++		   || tmp > rsp->data_len - 1
+++		   || tmp > size_left_in_buffer)
+++		{
+++			printf(" Not enough buffer size");
+++			return -1;
+++		}
++ 		memcpy((frubuf + off)-offset, rsp->data + 1, tmp);
++ 		off += tmp;
+++		size_left_in_buffer -= tmp;
++ 
++ 		/* sometimes the size returned in the Info command
++ 		* is too large.  return 0 so higher level function
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
+index b7f1aa914..500d5bd0b 100644
+--- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
++++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
+@@ -24,6 +24,7 @@ DEPENDS = "openssl readline ncurses"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/ipmitool/ipmitool-${PV}.tar.bz2 \
+            file://0001-Migrate-to-openssl-1.1.patch \
++           file://0001-fru-Fix-buffer-overflow-vulnerabilities.patch \
+            "
+ SRC_URI[md5sum] = "bab7ea104c7b85529c3ef65c54427aa3"
+ SRC_URI[sha256sum] = "0c1ba3b1555edefb7c32ae8cd6a3e04322056bc087918f07189eeedfc8b81e01"
+-- 
+2.17.1
+
 
