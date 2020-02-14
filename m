@@ -1,24 +1,48 @@
-Return-Path: <Wenlin.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4861960886
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-io1-f50.google.com (mail-io1-f50.google.com
+	[209.85.166.50])
+	by mail.openembedded.org (Postfix) with ESMTP id C20DA610AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 09:09:02 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 01E98BZc014934
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Fri, 14 Feb 2020 16:06:35 +0000 (UTC)
+Received: by mail-io1-f50.google.com with SMTP id t26so11054828ioi.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 01:08:53 -0800
-Received: from pek-wkang-d1.wrs.com (128.224.162.172) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.468.0; Fri, 14 Feb 2020 01:08:20 -0800
-From: Wenlin Kang <wenlin.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 14 Feb 2020 17:08:19 +0800
-Message-ID: <20200214090819.15989-1-wenlin.kang@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Fri, 14 Feb 2020 08:06:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=SCpqrUkrW911lWZUXLrBisvuc0bpSHCLY4pfzIyQl9k=;
+	b=c9Qt6NXqnI9CDBmr3UK/MOCl78pxOc9PZSmtiYqQtt01gDFgSG+S08cD33qOLysc5+
+	ZAN7G3dy16TnxwO6V+We2ghMzoFLZOlppvY8yZsaujp+mo8ZvmmsgAJZP32QY2UbgxwD
+	Ew+ELSnS6w9zukSkEWLNczVMJKD8FhvGKw9d8ePhY9R0KmUmFG8eYVK/wJb6LD1T7VV4
+	btzxzJRK4pX2Ok+J/2TFSyIQ/mKB0pQhTcL1Gd6SLqnG+1k+N0rFZCQlm7FO0Hk7z4EU
+	+hNqB5ON/dGHjgSZRoC3VjiEIsjTbowOb+d4ylJrARb+80E9z0q/TVsWYzurgllk2pmy
+	KNMA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=SCpqrUkrW911lWZUXLrBisvuc0bpSHCLY4pfzIyQl9k=;
+	b=uMPA3sIcg54zXraHbSkkC2Fdlgg3q4V6iV+1YC9Ni7NKHJ9IYY8mPstANL1uXONkiP
+	mcWx7ZCP7yJ/+rYcLRpNA3tIrqNz15lBL/VqUQ/YiLkK1M7cTjxn/waHctiek8b61LAz
+	t7+vKq8dI0X9JNMN2K1CGyeQ6t0SoNUrL0ZD12VkJx8ohr5LcoNyPT1eTM2eaOoyF5+O
+	BjmMevfGCS1g32WmEfreMnMurip3BWznbdp5Fd4wyLVyjxs+z5C4tr9POlEuLpCm07/R
+	o2GYOFurKhK1mucZgt1DA66w75ZCpvsEI0Vw43Fagbglfpewhiz3NJKnKZR73Tna5jtC
+	L28g==
+X-Gm-Message-State: APjAAAWXoi8k+sgT5ZNsR3hJrT+caq+UdEeSo5nmCD6AZItdit/R+hLB
+	mCOSL6snPhA7ltFkCKT2GZ1pCG6UM+PypX/aU8w=
+X-Google-Smtp-Source: APXvYqzPvNWZTK957v+yXUbzrmzB1mNCNUqYVncq+245HF8qi+RsKm8B/7ztkpYSTXZBEoUTKiJR+zJTk/6le6dXqBs=
+X-Received: by 2002:a6b:b642:: with SMTP id g63mr2739179iof.122.1581696396833; 
+	Fri, 14 Feb 2020 08:06:36 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] ipmitool: fix CVE-2020-5208
+References: <20200213055519.1978873-1-raj.khem@gmail.com>
+In-Reply-To: <20200213055519.1978873-1-raj.khem@gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Fri, 14 Feb 2020 08:06:25 -0800
+Message-ID: <CANx9H-CONadAvBOw-HF+HqcMm+8+_aXaQKfz07A171PDW7mpGA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python2][PATCH] python-grpcio: Upgrade to 1.27.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,170 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 09:09:02 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 14 Feb 2020 16:06:37 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Fix CVE-2020-5208
+Thank you. I've merged this, but noticed 1.27.2 was released to patch
+python. Can you have a look?
+https://github.com/grpc/grpc/releases/tag/v1.27.2
 
-Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
----
- ...-Fix-buffer-overflow-vulnerabilities.patch | 133 ++++++++++++++++++
- .../ipmitool/ipmitool_1.8.18.bb               |   1 +
- 2 files changed, 134 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
+On Wed, Feb 12, 2020 at 9:55 PM Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
-new file mode 100644
-index 000000000..b65e3ef1a
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
-@@ -0,0 +1,133 @@
-+From e824c23316ae50beb7f7488f2055ac65e8b341f2 Mon Sep 17 00:00:00 2001
-+From: Chrostoper Ertl <chertl@microsoft.com>
-+Date: Thu, 28 Nov 2019 16:33:59 +0000
-+Subject: [PATCH] fru: Fix buffer overflow vulnerabilities
-+
-+Partial fix for CVE-2020-5208, see
-+https://github.com/ipmitool/ipmitool/security/advisories/GHSA-g659-9qxw-p7cp
-+
-+The `read_fru_area_section` function only performs size validation of
-+requested read size, and falsely assumes that the IPMI message will not
-+respond with more than the requested amount of data; it uses the
-+unvalidated response size to copy into `frubuf`. If the response is
-+larger than the request, this can result in overflowing the buffer.
-+
-+The same issue affects the `read_fru_area` function.
-+
-+Upstream-Status: Backport[https://github.com/ipmitool/ipmitool/commit/e824c23316ae50beb7f7488f2055ac65e8b341f2]
-+CVE: CVE-2020-5208
-+
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ lib/ipmi_fru.c | 33 +++++++++++++++++++++++++++++++--
-+ 1 file changed, 31 insertions(+), 2 deletions(-)
-+
-+diff --git a/lib/ipmi_fru.c b/lib/ipmi_fru.c
-+index c2a139d..2e323ff 100644
-+--- a/lib/ipmi_fru.c
-++++ b/lib/ipmi_fru.c
-+@@ -663,7 +663,10 @@ int
-+ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 			uint32_t offset, uint32_t length, uint8_t *frubuf)
-+ {
-+-	uint32_t off = offset, tmp, finish;
-++	uint32_t off = offset;
-++	uint32_t tmp;
-++	uint32_t finish;
-++	uint32_t size_left_in_buffer;
-+ 	struct ipmi_rs * rsp;
-+ 	struct ipmi_rq req;
-+ 	uint8_t msg_data[4];
-+@@ -676,10 +679,12 @@ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 
-+ 	finish = offset + length;
-+ 	if (finish > fru->size) {
-++		memset(frubuf + fru->size, 0, length - fru->size);
-+ 		finish = fru->size;
-+ 		lprintf(LOG_NOTICE, "Read FRU Area length %d too large, "
-+ 			"Adjusting to %d",
-+ 			offset + length, finish - offset);
-++		length = finish - offset;
-+ 	}
-+ 
-+ 	memset(&req, 0, sizeof(req));
-+@@ -715,6 +720,7 @@ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 		}
-+ 	}
-+ 
-++	size_left_in_buffer = length;
-+ 	do {
-+ 		tmp = fru->access ? off >> 1 : off;
-+ 		msg_data[0] = id;
-+@@ -756,9 +762,18 @@ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 		}
-+ 
-+ 		tmp = fru->access ? rsp->data[0] << 1 : rsp->data[0];
-++		if(rsp->data_len < 1
-++		   || tmp > rsp->data_len - 1
-++		   || tmp > size_left_in_buffer)
-++		{
-++			printf(" Not enough buffer size");
-++			return -1;
-++		}
-++
-+ 		memcpy(frubuf, rsp->data + 1, tmp);
-+ 		off += tmp;
-+ 		frubuf += tmp;
-++		size_left_in_buffer -= tmp;
-+ 		/* sometimes the size returned in the Info command
-+ 		* is too large.  return 0 so higher level function
-+ 		* still attempts to parse what was returned */
-+@@ -791,7 +806,9 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 			uint32_t offset, uint32_t length, uint8_t *frubuf)
-+ {
-+ 	static uint32_t fru_data_rqst_size = 20;
-+-	uint32_t off = offset, tmp, finish;
-++	uint32_t off = offset;
-++	uint32_t tmp, finish;
-++	uint32_t size_left_in_buffer;
-+ 	struct ipmi_rs * rsp;
-+ 	struct ipmi_rq req;
-+ 	uint8_t msg_data[4];
-+@@ -804,10 +821,12 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 
-+ 	finish = offset + length;
-+ 	if (finish > fru->size) {
-++		memset(frubuf + fru->size, 0, length - fru->size);
-+ 		finish = fru->size;
-+ 		lprintf(LOG_NOTICE, "Read FRU Area length %d too large, "
-+ 			"Adjusting to %d",
-+ 			offset + length, finish - offset);
-++		length = finish - offset;
-+ 	}
-+ 
-+ 	memset(&req, 0, sizeof(req));
-+@@ -822,6 +841,8 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 	if (fru->access && fru_data_rqst_size > 16)
-+ #endif
-+ 		fru_data_rqst_size = 16;
-++
-++	size_left_in_buffer = length;
-+ 	do {
-+ 		tmp = fru->access ? off >> 1 : off;
-+ 		msg_data[0] = id;
-+@@ -853,8 +874,16 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 		}
-+ 
-+ 		tmp = fru->access ? rsp->data[0] << 1 : rsp->data[0];
-++		if(rsp->data_len < 1
-++		   || tmp > rsp->data_len - 1
-++		   || tmp > size_left_in_buffer)
-++		{
-++			printf(" Not enough buffer size");
-++			return -1;
-++		}
-+ 		memcpy((frubuf + off)-offset, rsp->data + 1, tmp);
-+ 		off += tmp;
-++		size_left_in_buffer -= tmp;
-+ 
-+ 		/* sometimes the size returned in the Info command
-+ 		* is too large.  return 0 so higher level function
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
-index b7f1aa914..500d5bd0b 100644
---- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
-@@ -24,6 +24,7 @@ DEPENDS = "openssl readline ncurses"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/ipmitool/ipmitool-${PV}.tar.bz2 \
-            file://0001-Migrate-to-openssl-1.1.patch \
-+           file://0001-fru-Fix-buffer-overflow-vulnerabilities.patch \
-            "
- SRC_URI[md5sum] = "bab7ea104c7b85529c3ef65c54427aa3"
- SRC_URI[sha256sum] = "0c1ba3b1555edefb7c32ae8cd6a3e04322056bc087918f07189eeedfc8b81e01"
--- 
-2.17.1
-
+> Delete gettid patch, fixed differenty upstream
+> Add code to use cross compiler in setup.py
+>
+> Define GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY so it does not use
+> SYS_clock_gettime syscalls since it does not work when 64bit time_t is
+> used on 32bit arches
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  ...-Do-not-mix-C-and-C-compiler-options.patch | 44 ++++++++++++++-----
+>  .../python/python-grpcio/gettid.patch         | 26 -----------
+>  .../python-grpcio/ppc-boringssl-support.patch |  2 +-
+>  .../python-grpcio/riscv64_support.patch       |  2 +-
+>  ...pcio_1.19.0.bb => python-grpcio_1.27.1.bb} | 11 ++---
+>  5 files changed, 40 insertions(+), 45 deletions(-)
+>  delete mode 100644 recipes-devtools/python/python-grpcio/gettid.patch
+>  rename recipes-devtools/python/{python-grpcio_1.19.0.bb =>
+> python-grpcio_1.27.1.bb} (74%)
+>
+> <snip>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
