@@ -1,39 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-ot1-f41.google.com (mail-ot1-f41.google.com
-	[209.85.210.41])
-	by mail.openembedded.org (Postfix) with ESMTP id D0F78610F1
+Received: from mail-oi1-f175.google.com (mail-oi1-f175.google.com
+	[209.85.167.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 67DDC610EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 22:34:03 +0000 (UTC)
-Received: by mail-ot1-f41.google.com with SMTP id p8so10630923oth.10
+	Fri, 14 Feb 2020 22:35:37 +0000 (UTC)
+Received: by mail-oi1-f175.google.com with SMTP id a142so10947353oii.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 14:34:05 -0800 (PST)
+	Fri, 14 Feb 2020 14:35:38 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=rLmJp88cRPQSz7XGbWDP8XNu6Ag+4y7BZHE5TNs0KFQ=;
-	b=Wmqvjk1Ud7W9gDgq2ALF1DwgbK78uCsjU/2iFvZzlQPQxj1cNNQG7PX7NZxod5cc0l
-	rQ37+kGkzaZzcRrFnTjYaQUiqoEg7RISIPPG2//JPeYC3oBD/0a939rcWZ6Ue2apD4ok
-	o9dVQPL9VXwhANq9TB3UrSx92k2WdyYLX/cr9vjqOyjdJr+7TOtwS2lCCwSVwVMiLFn7
-	U9cvMMMphzY3k1auOtO5PL1Ku+75wS1bxoFS5eBBG7OOo6uToGidvntkPD7cS8N8459n
-	B3rmfev3t6uXadxS+r9uLDAKAshiEyrSkJdkh79iNh38gxG6h2R2eQ85PQzxzw8Ql0Yb
-	0C/g==
-X-Gm-Message-State: APjAAAVkiQ5JL+cqCd1eMUi4Wi1tLpfUUp3hX6RAubC6MySCJyIh+HmJ
-	IB4mw1bpsqvf9Bzh6a9G6GMpN8bDeFI=
-X-Google-Smtp-Source: APXvYqzRRuzPYz1HqjJ1R5nlAlbqWWeqbb8u2EZLBjYB6frFqFmpFuc1sz99VJvo7lt4jJIXKVpm8g==
-X-Received: by 2002:a05:6830:1d55:: with SMTP id
-	p21mr3989685oth.145.1581719644387; 
-	Fri, 14 Feb 2020 14:34:04 -0800 (PST)
+	bh=Lkw5wC/bv7WAZVdx9zm0spJIHtutdwp98oDRWpjRehs=;
+	b=h9RKRAgnyydCzYZv1vmagXbOogtniiZicgQUoTElOTldy0dpjgptEHjkQuer4VlVJg
+	R+iNtbS6h3Wp6XAp+s7Wgr9du6QsE5oKNbsEdyCP3BQg8Vk5c2Q/FYtZazWE8S4nvO0W
+	D5CgmxsNaPOXEliHrFLSlxDFc1AtWmSQnkE+PEgWIR6pRD0ihwgGqRyoxiW+pPWc5ggh
+	6adFMW0NyOmOV437VAdn69UKtrwCT2bsWvF/PAZvyk2yxdh1/kZSNvGysxC91/F1wi7U
+	rQEFEq7fZJsQdw+dTRY16uoReUu0iBSLM+j9+HXxKtPUO0mxqDT6oSNp9nM8v0lhLWqW
+	PJFg==
+X-Gm-Message-State: APjAAAWu9HqnMSLBOirJKsN5OuUrHkSvMTdStyWVpuZ/O65dSOuIO32v
+	YemSosq7RXZS08hZXIIoExZKDRDYUmA=
+X-Google-Smtp-Source: APXvYqwXIs5Pm6i0AxMC8CDR1uIlnL/Tuze/yn2uYAEg/28rVRByM9iNSIIVOs3jPTQsa+6j343taA==
+X-Received: by 2002:aca:fd94:: with SMTP id b142mr3323448oii.11.1581719737961; 
+	Fri, 14 Feb 2020 14:35:37 -0800 (PST)
 Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
 	by smtp.gmail.com with ESMTPSA id
-	r205sm2324564oih.54.2020.02.14.14.34.03
+	s83sm2196184oif.33.2020.02.14.14.35.37
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 14:34:03 -0800 (PST)
+	Fri, 14 Feb 2020 14:35:37 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 17:33:46 -0500
-Message-Id: <20200214223346.14550-1-derek@asterius.io>
+Date: Fri, 14 Feb 2020 17:35:27 -0500
+Message-Id: <20200214223527.14658-1-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-cassandra-driver: consolidate inc and bb files into a single bb file
+Subject: [meta-python][PATCH] python3-certifi: consolidate inc and bb files into a single bb file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,98 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 22:34:04 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 22:35:37 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/python-cassandra-driver.inc        | 33 -----------------
- .../python/python3-cassandra-driver_3.14.0.bb | 35 ++++++++++++++++---
- 2 files changed, 31 insertions(+), 37 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-cassandra-driver.inc
+ .../recipes-devtools/python/python-certifi.inc    | 13 -------------
+ .../python/python3-certifi_2019.11.28.bb          | 15 ++++++++++++++-
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-certifi.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-cassandra-driver.inc b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
+diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
 deleted file mode 100644
-index 53ebfec337..0000000000
---- a/meta-python/recipes-devtools/python/python-cassandra-driver.inc
+index 98fa1f2889..0000000000
+--- a/meta-python/recipes-devtools/python/python-certifi.inc
 +++ /dev/null
-@@ -1,33 +0,0 @@
--SUMMARY = "DataStax Python Driver for Apache Cassandra"
--DESCRIPTION = "A modern, feature-rich and highly-tunable Python client \
--library for Apache Cassandra (1.2+) and DataStax Enterprise (3.1+) using \
--exclusively Cassandra's binary protocol and Cassandra Query Language v3."
--HOMEPAGE = "https://github.com/datastax/python-driver"
--SECTION = "devel/python"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
--SRCNAME = "cassandra-driver"
+@@ -1,13 +0,0 @@
+-SUMMARY = "Python package for providing Mozilla's CA Bundle."
+-DESCRIPTION = "This installable Python package contains a CA Bundle that you can reference in your \
+-Python code. This is useful for verifying HTTP requests, for example.  This is the same CA Bundle \
+-which ships with the Requests codebase, and is derived from Mozilla Firefox's canonical set."
+-HOMEPAGE = " http://certifi.io/"
 -
--SRC_URI[md5sum] = "c5bed026bf48c821424c1f6296193908"
--SRC_URI[sha256sum] = "b65218e2582277f5b77d1436e420db8616f63e3437a9e839cdcd7172d760e861"
+-LICENSE = "ISC"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
 -
--DISTUTILS_BUILD_ARGS += " \
--    --no-libev \
--"
--DISTUTILS_INSTALL_ARGS += " \
--    --no-libev \
--"
+-SRC_URI[md5sum] = "4d5229c4d9f0a4a79106f9e2c2cfd381"
+-SRC_URI[sha256sum] = "25b64c7da4cd7479594d035c08c2d809eb4aab3a26e5a990ea98cc450c320f1f"
 -
--inherit pypi
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-cython \
--    ${PYTHON_PN}-multiprocessing \
--    ${PYTHON_PN}-six \
--    ${PYTHON_PN}-json \
--    libevent \
--"
--
--DEPENDS += "\
--    ${PYTHON_PN}-cython \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
-index 34f149d3f5..768e557b94 100644
---- a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.14.0.bb
-@@ -1,8 +1,35 @@
--inherit setuptools3
--require python-cassandra-driver.inc
-+SUMMARY = "DataStax Python Driver for Apache Cassandra"
-+DESCRIPTION = "A modern, feature-rich and highly-tunable Python client \
-+library for Apache Cassandra (1.2+) and DataStax Enterprise (3.1+) using \
-+exclusively Cassandra's binary protocol and Cassandra Query Language v3."
-+HOMEPAGE = "https://github.com/datastax/python-driver"
-+SECTION = "devel/python"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
-+SRCNAME = "cassandra-driver"
- 
--# Requires concurrent which is currently in -misc
--RDEPENDS_${PN} += " \
-+SRC_URI[md5sum] = "c5bed026bf48c821424c1f6296193908"
-+SRC_URI[sha256sum] = "b65218e2582277f5b77d1436e420db8616f63e3437a9e839cdcd7172d760e861"
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-certifi_2019.11.28.bb b/meta-python/recipes-devtools/python/python3-certifi_2019.11.28.bb
+index 70f674b22c..c9e945f271 100644
+--- a/meta-python/recipes-devtools/python/python3-certifi_2019.11.28.bb
++++ b/meta-python/recipes-devtools/python/python3-certifi_2019.11.28.bb
+@@ -1,2 +1,15 @@
++SUMMARY = "Python package for providing Mozilla's CA Bundle."
++DESCRIPTION = "This installable Python package contains a CA Bundle that you can reference in your \
++Python code. This is useful for verifying HTTP requests, for example.  This is the same CA Bundle \
++which ships with the Requests codebase, and is derived from Mozilla Firefox's canonical set."
++HOMEPAGE = " http://certifi.io/"
 +
-+DISTUTILS_BUILD_ARGS += " \
-+    --no-libev \
-+"
-+DISTUTILS_INSTALL_ARGS += " \
-+    --no-libev \
-+"
++LICENSE = "ISC"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
 +
-+inherit pypi setuptools3
++SRC_URI[md5sum] = "4d5229c4d9f0a4a79106f9e2c2cfd381"
++SRC_URI[sha256sum] = "25b64c7da4cd7479594d035c08c2d809eb4aab3a26e5a990ea98cc450c320f1f"
 +
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-cython \
-+    ${PYTHON_PN}-json \
-     ${PYTHON_PN}-misc \
-+    ${PYTHON_PN}-multiprocessing \
-     ${PYTHON_PN}-numbers \
-+    ${PYTHON_PN}-six \
-+    libevent \
-+"
+ inherit pypi setuptools3
+-require python-certifi.inc
 +
-+DEPENDS += "\
-+    ${PYTHON_PN}-cython \
- "
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
