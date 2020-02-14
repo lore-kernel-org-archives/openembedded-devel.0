@@ -1,39 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com
-	[209.85.210.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 2506B61090
+Return-Path: <jonathan.richardson@broadcom.com>
+Received: from mail-io1-f46.google.com (mail-io1-f46.google.com
+	[209.85.166.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 2C7E961115
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 19:14:05 +0000 (UTC)
-Received: by mail-ot1-f50.google.com with SMTP id h9so10139767otj.11
+	Fri, 14 Feb 2020 19:41:14 +0000 (UTC)
+Received: by mail-io1-f46.google.com with SMTP id n21so11765474ioo.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 11:14:06 -0800 (PST)
+	Fri, 14 Feb 2020 11:41:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
+	h=from:references:in-reply-to:mime-version:thread-index:date
+	:message-id:subject:to:cc;
+	bh=ho7y6bUqZkDmIrQpjMA3DVDbRSRdY7xVtusJOAe8Ba4=;
+	b=H4ZgVClu2OnYvRBztYdlJdYnJFZCBhQSPRJH94xU/pRoQ/XbdXQFEDBcWAXCjX+Mil
+	lYcXC46S2wQgncSClrrHBHsHH9eOanD9rokziUnP2i2NSa2jPG8ujMsANM7G5sa48oxB
+	/BE2lRcxrOTfjutI5xjeyqubD9cJ/vAZjIAlk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=F4l4WkXTMSm524j3dIMqnHs50IoFomWTIxruhCsumPE=;
-	b=gQZ6EVrYHc7O2FsbeixTxtYtLNtpnpfb97lMi1ltQlt/4DcjsATVypdxZDi/RBxFTM
-	QaNEbmFCxPVDa2JDiRXyOZn1174LF3Dz6n5+r/h2CJ2cWaWN9Q22NdOStFSzPkPvgC2L
-	AJ/8+RkiFqvrk2qFrWgRpiD5OnBxwKW0rrGgvX6NqRW2JSnZcU6wv8SE3EPzpV9TnVjO
-	IGpx6zvEO4BvagmrCG4Qu5gTUs2UWhw4+JsdQcR32k4UI9QefTC+TZ0TDjdlitP38tY4
-	73YbZnnFwRUjF0ar4xk78aZLMaoKlpOLy3ZANnkAlcB56lRhnWiJ1l5CD0QadhEcouxa
-	ddgQ==
-X-Gm-Message-State: APjAAAUejxX+rIK5kT9Kn32k0lKZEqV0RTvLKKpsgQAdx1nDhzek2Vdi
-	LONTCoFWcq8Fqm+afq9LbHlV5iyj8xI=
-X-Google-Smtp-Source: APXvYqzCnQfuk0Y/A9QDR7K2DLtBnL+YQgZjs1uVEDV5TAaOjlWWeNDTI7GE7uSZdsenjUv4+vbpUw==
-X-Received: by 2002:a05:6830:128e:: with SMTP id
-	z14mr3446290otp.184.1581707645784; 
-	Fri, 14 Feb 2020 11:14:05 -0800 (PST)
-Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-	by smtp.gmail.com with ESMTPSA id
-	d24sm2255971otf.66.2020.02.14.11.14.05
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 11:14:05 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:from:references:in-reply-to:mime-version
+	:thread-index:date:message-id:subject:to:cc;
+	bh=ho7y6bUqZkDmIrQpjMA3DVDbRSRdY7xVtusJOAe8Ba4=;
+	b=XfP3iJ3d7C/AkwJ6QoELML9Tn+SCsDnbSE7n17eAvKTisfwDb4iZPpCkyHp2URZ9u1
+	4ntRleI6LHiqMc0XMbd7N0Vdf7nuQS3H5JczNKM19vAgpXfoDhMTEWvX1h7s5mKR05qz
+	e6JK5ccsavhqZVvrJrASeV3hEOazVh9vK6lziuiQ22/ync7j4raW8F0ewpk8DwlZCpYO
+	29brLXkKkq9VpwvYUsWDk6qK2Y6qZ2du2H+mjM8YCn4k6fllsBAT3Z4IZ4eMNSBulpGT
+	RvZMlGIkUXy0s6gCPyluvMbYTVRVB10PQQidFQNyc7VxYWH5gyqOp/GQYlj8YedRgK6p
+	GW/g==
+X-Gm-Message-State: APjAAAV7IxACITfO0eK9lUgp5KpsJ8aXmFS/uEG+pwyQrJtwa3SNO/dz
+	cptCnNhDVoXd+fOVSjJLkDsIFyKZ9kq/L/bZyxuFxWBa
+X-Google-Smtp-Source: APXvYqzELpkxLpqTtzbb2lMgKFYgU58Bmf3pYBTxXANb/vQxcGz5JUO6NNkXp5PxxVY7Y8qofuv3Vv2hTZ/hNRu0PI4=
+X-Received: by 2002:a5e:940f:: with SMTP id q15mr3321456ioj.218.1581709274682; 
+	Fri, 14 Feb 2020 11:41:14 -0800 (PST)
+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
+References: <20200213232346.109257-1-jonathan.richardson@broadcom.com>
+In-Reply-To: <20200213232346.109257-1-jonathan.richardson@broadcom.com>
+MIME-Version: 1.0
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AQHHKjtR3dZIphdvI6z5NyqgQ6N9Jag4iK9Q
+Date: Fri, 14 Feb 2020 11:41:12 -0800
+Message-ID: <f4129e1cc23cb42fd6d34e061cb3f132@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 14:13:55 -0500
-Message-Id: <20200214191355.31600-1-derek@asterius.io>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-blinker: consolidate inc and bb files into a single bb file
+Cc: Arun Parameswaran <arun.parameswaran@broadcom.com>
+Subject: Re: [meta-oe] spidev-test: Add initial version of recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,43 +53,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 19:14:05 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 19:41:14 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+-----Original Message-----
+From: Jonathan Richardson [mailto:jonathan.richardson@broadcom.com]
+Sent: Thursday, February 13, 2020 3:24 PM
+To: openembedded-devel@lists.openembedded.org
+Cc: Arun Parameswaran; Jonathan Richardson
+Subject: [meta-oe] spidev-test: Add initial version of recipe
+
+From: Arun Parameswaran <arun.parameswaran@broadcom.com>
+
+Allows for testing SPI interface using spidev driver and is part of the
+kernel tools.
+
+Signed-off-by: Arun Parameswaran <arun.parameswaran@broadcom.com>
+Reviewed-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+Tested-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
 ---
- meta-python/recipes-devtools/python/python-blinker.inc    | 7 -------
- .../recipes-devtools/python/python3-blinker_1.4.bb        | 8 +++++++-
- 2 files changed, 7 insertions(+), 8 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-blinker.inc
+ .../recipes-kernel/spidev-test/spidev-test.bb | 30 +++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/spidev-test/spidev-test.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-blinker.inc b/meta-python/recipes-devtools/python/python-blinker.inc
-deleted file mode 100644
-index eaf3908370..0000000000
---- a/meta-python/recipes-devtools/python/python-blinker.inc
-+++ /dev/null
-@@ -1,7 +0,0 @@
--DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=946d7e89af6f7733aeaebed5635d2682"
--
--SRC_URI[md5sum] = "8b3722381f83c2813c52de3016b68d33"
--SRC_URI[sha256sum] = "471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"
--
-diff --git a/meta-python/recipes-devtools/python/python3-blinker_1.4.bb b/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
-index 924b3cf51d..e2f76c33d8 100644
---- a/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-blinker_1.4.bb
-@@ -1,2 +1,8 @@
-+DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=946d7e89af6f7733aeaebed5635d2682"
-+
-+SRC_URI[md5sum] = "8b3722381f83c2813c52de3016b68d33"
-+SRC_URI[sha256sum] = "471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"
-+
- inherit pypi setuptools3
--require python-blinker.inc
--- 
-2.17.1
+diff --git a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
+b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
+new file mode 100644
+index 000000000..7dd199fe9
+--- /dev/null
++++ b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Test SPI devices"
++DESCRIPTION = "SPI testing utility using the spidev driver"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM =
+"file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6
+"
++DEPENDS = "binutils elfutils"
 
+Doesn't look like these dependencies aren't required. I'm going to remove
+them.
 
