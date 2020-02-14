@@ -1,35 +1,35 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E3F86104C
+	by mail.openembedded.org (Postfix) with ESMTP id BD273610BC
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 14 Feb 2020 16:11:30 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,440,1574092800"; d="scan'208";a="83307824"
+X-IronPort-AV: E=Sophos;i="5.70,440,1574092800"; d="scan'208";a="83307825"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
 	by heian.cn.fujitsu.com with ESMTP; 15 Feb 2020 00:11:31 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 67513406AB15
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id E739050A9969
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 00:01:54 +0800 (CST)
+	Sat, 15 Feb 2020 00:01:56 +0800 (CST)
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Sat, 15 Feb 2020 00:11:27 +0800
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Sat, 15 Feb 2020 00:11:31 +0800
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Sat, 15 Feb 2020 00:11:30 +0800
+	Server (TLS) id 14.3.439.0; Sat, 15 Feb 2020 00:11:33 +0800
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 14 Feb 2020 15:43:42 -0800
-Message-ID: <1581723823-21171-4-git-send-email-wangmy@cn.fujitsu.com>
+Date: Fri, 14 Feb 2020 15:43:43 -0800
+Message-ID: <1581723823-21171-5-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1581723823-21171-1-git-send-email-wangmy@cn.fujitsu.com>
 References: <1581723823-21171-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 67513406AB15.AFF62
+X-yoursite-MailScanner-ID: E739050A9969.A1E0F
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH] libdbi-perl: upgrade 1.642 -> 1.643
+Subject: [meta-oe][PATCH] libp11: upgrade 0.4.10 -> 11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,27 +47,25 @@ Content-Type: text/plain
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- .../perl/{libdbi-perl_1.642.bb => libdbi-perl_1.643.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/perl/{libdbi-perl_1.642.bb => libdbi-perl_1.643.bb} (92%)
+ .../recipes-support/libp11/{libp11_0.4.10.bb => libp11_11.bb}   | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-support/libp11/{libp11_0.4.10.bb => libp11_11.bb} (93%)
 
-diff --git a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb b/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-rename to meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
-index 7532b3fa2..75fad46bf 100644
---- a/meta-oe/recipes-devtools/perl/libdbi-perl_1.642.bb
-+++ b/meta-oe/recipes-devtools/perl/libdbi-perl_1.643.bb
-@@ -10,8 +10,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=10982c7148e0a012c0fd80534522f5c5"
+diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb b/meta-oe/recipes-support/libp11/libp11_11.bb
+similarity index 93%
+rename from meta-oe/recipes-support/libp11/libp11_0.4.10.bb
+rename to meta-oe/recipes-support/libp11/libp11_11.bb
+index 655db4907..5a0951df2 100644
+--- a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
++++ b/meta-oe/recipes-support/libp11/libp11_11.bb
+@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
+ DEPENDS = "libtool openssl"
  
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-${PV}.tar.gz"
--SRC_URI[md5sum] = "f2ba18b5cea1c8cb322a62be0a847f3d"
--SRC_URI[sha256sum] = "3f2025023a56286cebd15cb495e36ccd9b456c3cc229bf2ce1f69e9ebfc27f5d"
-+SRC_URI[md5sum] = "352f80b1e23769c116082a90905d7398"
-+SRC_URI[sha256sum] = "8a2b993db560a2c373c174ee976a51027dd780ec766ae17620c20393d2e836fa"
+ SRC_URI = "git://github.com/OpenSC/libp11.git"
+-SRCREV = "973d31f3f58d5549ddd8b1f822ce8f72186f9d68"
++SRCREV = "e1210903291b1de9eabcad26e740a4b2fbcca692"
  
- S = "${WORKDIR}/DBI-${PV}"
+ S = "${WORKDIR}/git"
  
 -- 
 2.17.1
