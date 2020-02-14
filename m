@@ -1,37 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com
-	[209.85.167.171])
-	by mail.openembedded.org (Postfix) with ESMTP id AC09561145
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+X-Greylist: delayed 303 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 14 Feb 2020 23:14:42 UTC
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id BF06B61146
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 23:08:28 +0000 (UTC)
-Received: by mail-oi1-f171.google.com with SMTP id a22so10992012oid.13
+	Fri, 14 Feb 2020 23:14:42 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1581722084; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: In-Reply-To: References: MIME-Version: Sender;
+	bh=/g/CVUxI/CRzZqI5a8k1gtkcOZh9JtqkDJ+362Jez6k=;
+	b=NQWS4n/TbXkBR6aGUE0ARN44EgkWtE8FgOJ56wexBBayMPU8kDumJ1e3FuXH86LBGNIntK2o
+	Pt7buLEI9pkoyO/IP9buK+rdjd8IU583krnSRoJRtBXK7Cs/m8dAJkyIbeOV1tnzkyNRRX8X
+	swA2evFyYrCGbBk5Cv2rw4KWS2U=
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Sender: derek@asterius.io
+Received: from mail-il1-f182.google.com (mail-il1-f182.google.com
+	[209.85.166.182])
+	by mxa.mailgun.org with ESMTP id 5e47289f.7ffa0b0bcef0-smtp-out-n02;
+	Fri, 14 Feb 2020 23:09:19 -0000 (UTC)
+Received: by mail-il1-f182.google.com with SMTP id x2so622340ila.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 15:08:30 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=AiPyhF/ElLCZwGEr5zODbcg1Zt/puDPHFlt0preCbQw=;
-	b=L6R3GU7EpghMGr0uLYdrIZ9XhkyiXKLBL7qp52Z9oycIuqrsVr10uUw/RSVa8Z5BBR
-	syMW7hQ+rYeXM2ZybTZZ//Vosew8/Gn1YUeg3Xp/dXPe/sv2e4iw2xZbVZKiJ//0jxbz
-	NuOsBKMzxFFiGVmTUQc/mxEn0fWru1iW/CtCmN0xjO0PKobJUGcBBStuV9cZqnWvjggm
-	DRb1Gate2pWYdiBPj9vlRmXDvXIGgf0HdXHUJxEDUj06NE+V0zDz2PS6eJwO6lrxPNby
-	tZbOtYWpRt7+xp1Ywaof2iEqzHLrbbehAkpdwLinbb2VG/vHPx0nL04+u9y1w7oBxWQh
-	lWgg==
-X-Gm-Message-State: APjAAAW//coguzI/TGSOKZzvlU3cW4zWYcd1CdDDon9Kn3J0G/R39i1j
-	08p+4XZ9lLedjIffn+ca0yc6ljzKAEk=
-X-Google-Smtp-Source: APXvYqy7sv01FL21/KLGcVpFop/zAExhX0qul/fHgZhMXDILwh0V7BAbfO2GNr7LuDRB/9B/PsaJ7g==
-X-Received: by 2002:aca:5dc3:: with SMTP id r186mr3525335oib.137.1581721709476;
-	Fri, 14 Feb 2020 15:08:29 -0800 (PST)
-Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-	by smtp.gmail.com with ESMTPSA id u3sm2505727ote.50.2020.02.14.15.08.28
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 15:08:29 -0800 (PST)
+	Fri, 14 Feb 2020 15:09:18 -0800 (PST)
+X-Gm-Message-State: APjAAAXPH+ybCpZtN9pIGlfoh5CZkLQpDuiBrHgq6+X7Nli1kle87EQ5
+	J60gZm3haepDszlO343iBKvZAWBWoczEMCY9orA=
+X-Google-Smtp-Source: APXvYqyLYQNNqE/Zk+A9PP7zw2WxzluKwyEO0Tdr0jitj8U9rJVFyitq3RANxaVh/H50jQHafqJbUAcyUlya9OTKmTo=
+X-Received: by 2002:a05:6e02:4cc:: with SMTP id
+	f12mr4938102ils.90.1581721758426; 
+	Fri, 14 Feb 2020 15:09:18 -0800 (PST)
+MIME-Version: 1.0
+References: <20200214223751.16148-1-derek@asterius.io>
+	<4316c976-5fda-d89c-70a1-729496c0e98b@gmail.com>
+In-Reply-To: <4316c976-5fda-d89c-70a1-729496c0e98b@gmail.com>
 From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 18:08:19 -0500
-Message-Id: <20200214230819.23318-1-derek@asterius.io>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH v2] python3-cffi: consolidate inc and bb files into a single bb file
+Date: Fri, 14 Feb 2020 17:09:07 -0600
+X-Gmail-Original-Message-ID: <CADNbA1ro4XveBqg26BTKzHwffE9eqYALyPyhqWyGkx9-VBB-uA@mail.gmail.com>
+Message-ID: <CADNbA1ro4XveBqg26BTKzHwffE9eqYALyPyhqWyGkx9-VBB-uA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python3-cffi: consolidate inc and bb files into a single bb file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,64 +53,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 23:08:28 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 23:14:43 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-devtools/python/python-cffi.inc   | 17 -----------------
- .../python/python3-cffi_1.14.0.bb             | 19 ++++++++++++++++++-
- 2 files changed, 18 insertions(+), 18 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-cffi.inc
+On Fri, Feb 14, 2020 at 5:02 PM Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
-deleted file mode 100644
-index af10c5f36d..0000000000
---- a/meta-python/recipes-devtools/python/python-cffi.inc
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = "Foreign Function Interface for Python calling C code"
--HOMEPAGE = "http://cffi.readthedocs.org/"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
--DEPENDS += "libffi ${PYTHON_PN}-pycparser"
--
--SRC_URI[md5sum] = "74845f8d2b7b583dd9a3574f402edf39"
--SRC_URI[sha256sum] = "2d384f4a127a15ba701207f7639d94106693b6cd64173d6c8988e2c25f3ac2b6"
--
--RDEPENDS_${PN}_class-target = " \
--    ${PYTHON_PN}-ctypes \
--    ${PYTHON_PN}-io \
--    ${PYTHON_PN}-pycparser \
--    ${PYTHON_PN}-shell \
--"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.14.0.bb b/meta-python/recipes-devtools/python/python3-cffi_1.14.0.bb
-index e888084347..53c8ee2650 100644
---- a/meta-python/recipes-devtools/python/python3-cffi_1.14.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-cffi_1.14.0.bb
-@@ -1,2 +1,19 @@
-+SUMMARY = "Foreign Function Interface for Python calling C code"
-+HOMEPAGE = "http://cffi.readthedocs.org/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
-+DEPENDS += "libffi ${PYTHON_PN}-pycparser"
-+
-+SRC_URI[md5sum] = "74845f8d2b7b583dd9a3574f402edf39"
-+SRC_URI[sha256sum] = "2d384f4a127a15ba701207f7639d94106693b6cd64173d6c8988e2c25f3ac2b6"
-+
- inherit pypi setuptools3
--require python-cffi.inc
-+
-+RDEPENDS_${PN}_class-target = " \
-+    ${PYTHON_PN}-ctypes \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-pycparser \
-+    ${PYTHON_PN}-shell \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.17.1
-
+> On 2/14/20 2:37 PM, Derek Straka wrote:
+> > Signed-off-by: Derek Straka <derek@asterius.io>
+> > ---
+> >   .../recipes-devtools/python/python-cffi.inc   | 17 -----------------
+> >   .../python/python3-cffi_1.13.2.bb             | 19 ++++++++++++++++++-
+> >   2 files changed, 18 insertions(+), 18 deletions(-)
+> >   delete mode 100644 meta-python/recipes-devtools/python/python-cffi.inc
+> >
+> > diff --git a/meta-python/recipes-devtools/python/python-cffi.inc
+> b/meta-python/recipes-devtools/python/python-cffi.inc
+> > deleted file mode 100644
+> > index a2b0c3bb0c..0000000000
+> > --- a/meta-python/recipes-devtools/python/python-cffi.inc
+> > +++ /dev/null
+> > @@ -1,17 +0,0 @@
+> > -SUMMARY = "Foreign Function Interface for Python calling C code"
+> > -HOMEPAGE = "http://cffi.readthedocs.org/"
+> > -LICENSE = "MIT"
+> > -LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+> > -DEPENDS += "libffi ${PYTHON_PN}-pycparser"
+> > -
+> > -SRC_URI[md5sum] = "652203cf99faa254efff7fab23c2f3a2"
+> > -SRC_URI[sha256sum] =
+> "599a1e8ff057ac530c9ad1778293c665cb81a791421f46922d80a86473c13346"
+> > -
+> > -RDEPENDS_${PN}_class-target = " \
+> > -    ${PYTHON_PN}-ctypes \
+> > -    ${PYTHON_PN}-io \
+> > -    ${PYTHON_PN}-pycparser \
+> > -    ${PYTHON_PN}-shell \
+> > -"
+> > -
+> > -BBCLASSEXTEND = "native nativesdk"
+> > diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.13.2.bb
+> b/meta-python/recipes-devtools/python/python3-cffi_1.13.2.bb
+> > index e888084347..6156081126 100644
+> > --- a/meta-python/recipes-devtools/python/python3-cffi_1.13.2.bb
+> > +++ b/meta-python/recipes-devtools/python/python3-cffi_1.13.2.bb
+> > @@ -1,2 +1,19 @@
+> > +SUMMARY = "Foreign Function Interface for Python calling C code"
+> > +HOMEPAGE = "http://cffi.readthedocs.org/"
+> > +LICENSE = "MIT"
+> > +LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+> > +DEPENDS += "libffi ${PYTHON_PN}-pycparser"
+> > +
+> > +SRC_URI[md5sum] = "652203cf99faa254efff7fab23c2f3a2"
+> > +SRC_URI[sha256sum] =
+> "599a1e8ff057ac530c9ad1778293c665cb81a791421f46922d80a86473c13346"
+> > +
+> >   inherit pypi setuptools3
+> > -require python-cffi.inc
+> > +
+> > +RDEPENDS_${PN}_class-target = " \
+> > +    ${PYTHON_PN}-ctypes \
+> > +    ${PYTHON_PN}-io \
+> > +    ${PYTHON_PN}-pycparser \
+> > +    ${PYTHON_PN}-shell \
+> > +"
+> > +
+> > +BBCLASSEXTEND = "native nativesdk"
+> >
+>
+> this patch does not apply cleanly on master-next, can you rebase and
+> send v2 please ?
+>
+No problem.  v2 sent.
 
