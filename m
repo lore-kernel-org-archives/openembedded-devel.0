@@ -1,34 +1,34 @@
 Return-Path: <peter.kjellerstedt@axis.com>
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 1957161083
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+	by mail.openembedded.org (Postfix) with ESMTP id 0934361088
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 16:40:23 +0000 (UTC)
+	Fri, 14 Feb 2020 16:42:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=axis.com; l=4340; q=dns/txt; s=axis-central1;
-	t=1581698426; x=1613234426;
+	d=axis.com; l=4410; q=dns/txt; s=axis-central1;
+	t=1581698576; x=1613234576;
 	h=from:to:subject:date:message-id:mime-version:
 	content-transfer-encoding;
-	bh=L6vx2dzialPiXg6r6+aeQ0FEF2/9thmMu0tE/34VyUY=;
-	b=YfPrh0TWNlyCzi3Cu43pV2m/jTmvNPnb02/l62+G25nSKbsd54Q508nY
-	c9vXFohxp9T8ghEX4EUMWgyCarOrrQbc7tUDh/b6JpJ7Lf1d0VyIxoOKQ
-	dvKhF0T1V4KFXogxfAimeesevzL5OMSgR57YhkOPaJOyTzRlp0CC3bhT8
-	9X6+4x1zs/asauiemTixAxUGtMQrbvOCw6StSWY0NMQlAXNBvVKFR8P8b
-	aK1RiRZl1xwGeCQF5gYQk3D0Q+BVfkeArsI243/0dHckJPErK4zucJd52
-	/IgMQfQAphhSkmxUKI+MB/dCO3SP8T6NRwFgyMiPFO/1qH3d507hiC5Cy w==;
-IronPort-SDR: lPZTzLWBFZ63vBy0fLouBEn8MlwF4/GbeiMs1A0yQfjjiIVUQm7MKI57SEyQS7vGcj4T4Vp5Xg
-	MQdQLcFIftfd2dz3Bs61pRlCdEkOjOjx00rdSYuwkLi8KSL6TL9QNsX4mo0xFEIza9MbJBeVkK
-	Y2YB9m+hDKdcxBmiDthM32GBskDRbmHwH0C+9ASJK0MR6SPIf1pUsTp+qnUggkMiwWdGe8hduv
-	JKMMW03oGGfDKLxC2/osLWxu63pL9j2RwhbcwuEM+H2w12L7Rvuy9Yjt3ViHIjc9XI2ZAXney7
-	2Qk=
+	bh=Q1LWSVgOf+k3PO3vmn3osnU8qfbQaVg4A7H9bMoPH0Y=;
+	b=eZYV2HijVquroRQWPXdh4h4PqkBfw8kiBRItueAqisNHZ1Hx1oS1y06V
+	8ur480HOTHDW2TqMcKvDO1TDjQI2rFQSWLk66Q+T82KuQLSgQSGbw0g7m
+	4b843Uy/0JYnTFsrx5J+yP6xGxyYrN/299Xyu/XmwLNrp11T8I12MY7aW
+	bR7065wYM4lM2tdgJVEQ45gjgWNWzQ0NVD/eareLPlC4/5gmefV+Nh5d0
+	Cc2fYk3ArzFn4cyz6GBmC36ed/gOyYeqAPsP6cOuB2rQV4IwYksjbDq3K
+	JqBy4YAS1u/20rSdx5PHYcpCSjOhJ9rjiGCdtx6LVBSNYjIyNgf33tfm6 A==;
+IronPort-SDR: kB/sugJoecg4UG/qgs2BwErod8NGLo4cHDd7c64dxbuuQlWr6m+KYC/3lPJWr/Jy+MQ7OR4FYM
+	PUK+cKlqrmDA4unbuYgvp/LQR0up5Bw2JyQmuZPMJq40or7BqXySXlQ9CzRBP7i09DyhJmcduF
+	4nsMXy7oCP35pFFGi8R51rWLYWdnp2uuxhWfPWpqWEv/NYA0AhSef27VbEY8OS7i7Z2HyogJGH
+	ozXto/pH8TVOKjTSwt3rAOEfGS+XjheYwxS/4i+A2l9HHOJJ3S40CVaUbCUEZ33f06WaS3iQM1
+	gDg=
 X-IronPort-AV: E=Sophos;i="5.70,441,1574118000"; 
-   d="scan'208";a="5436450"
+   d="scan'208";a="5288524"
 From: Peter Kjellerstedt <pkj@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 14 Feb 2020 17:40:21 +0100
-Message-ID: <20200214164021.1944-1-pkj@axis.com>
+Date: Fri, 14 Feb 2020 17:42:52 +0100
+Message-ID: <20200214164252.2607-1-pkj@axis.com>
 X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-Subject: [meta-oe][master][zeus][PATCH] ntfs-3g-ntfsprogs: Make it support usrmerge properly
+Subject: [meta-filesystems][master][zeus][PATCHv2] ntfs-3g-ntfsprogs: Make it support usrmerge properly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,7 +41,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 16:40:24 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 16:42:54 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
@@ -58,6 +58,9 @@ Also clear up a cryptic comment.
 
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
+
+PATCHv2: Correct [meta-oe] to [meta-filesystems] in the subject.
+
  .../0001-Make-build-support-usrmerge.patch    | 43 -------------------
  .../ntfs-3g-ntfsprogs_2017.3.23.bb            | 15 +++++--
  2 files changed, 11 insertions(+), 47 deletions(-)
