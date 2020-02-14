@@ -1,47 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
-	[209.85.222.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 96F616100F
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 2625B6100E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 01:42:24 +0000 (UTC)
-Received: by mail-qk1-f172.google.com with SMTP id d11so7719035qko.8
+	Fri, 14 Feb 2020 01:48:09 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id c20so7771817qkm.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Feb 2020 17:42:26 -0800 (PST)
+	Thu, 13 Feb 2020 17:48:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=azHU8H4cOAyGnyyLmUc4fc+8b/431YLrj0hVdqJkzBI=;
-	b=k2QtURztaQCr20TFHDf47abKWNH22qjar1/50j4Mnb4FsQlzTia67OhEw74xI8lUgP
-	kJLyuVa8VHr50xnKgKL37Lhg/8OFR1OEksbGXsFDAaqkNq/q8O+Bbg9pVLvyCrvLfs+O
-	XtACUdfFTof6peSqnFzNBbQM0/bUws9jcuR/CY6FuzysCCAvV3wZ4Vk8MNuM7D0lTmwO
-	2mCUcN1ocNnoSwO0G2km14DVHN9n3IVq2IE0ZsYGXp7SVybLE7AkCIFTCX4602Ll3x+1
-	H5aAKVnXRwSZPfMZi4vSpMrJr+YCW47Y4++vjVOqnicn789Hhqm+WY15DPfRg/YyDbZ9
-	6r0g==
+	:cc; bh=xutVAUzL7N2LT6gEEx6gpziuiYmmXu5/XbB9b4pbzoA=;
+	b=pb8AvK5FfrfqOzq3SotzIAYwP6rgnbL96KHH72BVwHz2+k5SaIT6aS/h7S0CJ2PCNj
+	UgWnGjpheobQfkz1/PzktiajtNgzqcMV2gVejIQzdxWrUEu/sq+KseY/a5CltGY8g3cu
+	G0TXTCGq+FEWPh5wPpmJ5Q958iYCK5LXr2m1nT5jzrIn/Uc27y3IFXNzmes6QV4o2aCE
+	gunzUcNCEkocDgLuD70dMRAV5rrxO0oYwXsXGPkQRobWnvMkrrwYH4ctN6oY2IHX7ulG
+	d5oQXuwzV/GwfEoU5maj17znpHKT9n1FUZ6tLx3vflEtlwZqhr4AZ7h78OiA5FLU1BNV
+	76kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=azHU8H4cOAyGnyyLmUc4fc+8b/431YLrj0hVdqJkzBI=;
-	b=FSHKIVEjf26m0SQUN8x/Sab4VK7ilSiWwOMwyZV/FepcbbNdNf76IcRd1gBpLCdG1Y
-	w5eY89k2XFEpaEBqmoc6h/O6mYKAoUtWJ6S+9yXFEjgRFseerIFHy+Kp/uDUrNcVH3R6
-	In0m3MbsiqWoz6wrvWaP5zJHTl+AwCVrXwpOKhAQjd2Isx6uzBO+KfYe48JtkivSA3bz
-	tiKR2lBt8QxYCHvPsnHoEJeQ3JX8pX/ehclsqUgSU3xFPkvUooW4dfXttNSS0o9hZPfH
-	DyXlR/2IofwYTMiR2nBnvJiDfhhowhXTlHi9RD/yYzjmDVxDMM3fVSaU5AqiwqdIngv+
-	7V6g==
-X-Gm-Message-State: APjAAAVGzVPu1uuAmdHpRwHjq7ZqzUkDgFS1yBEx+yVeinwXVHFtuTZK
-	9A0Nv9Fy47rHmTrly99eno46ey2vtfCCXI4IBnCcn6Z5UGI=
-X-Google-Smtp-Source: APXvYqyUGIZLH9q5l8NvSRAY/xR2Gi8L+3Upv8kWp9qoinvSFTIvs0hEMWPS+8RNiwKoTCqJNUdqko2bhZtIuMjUjsA=
-X-Received: by 2002:a37:de05:: with SMTP id h5mr429141qkj.474.1581644545221;
-	Thu, 13 Feb 2020 17:42:25 -0800 (PST)
+	bh=xutVAUzL7N2LT6gEEx6gpziuiYmmXu5/XbB9b4pbzoA=;
+	b=HZ3RZPSPLCumSnONLeL/DI2W9nR1j7PxeQiOkypCbIGG1e8SIeuPBA3OlxQcLJ2fD5
+	xGWmNVWgNIHZI4rQEjgHxZ9sgIrWT4eP1bdcTTedsL4maCwhgDJ9ujrXABlGBR3buOQJ
+	Io9IFFaDp42mykiWKcEgB8SrvquYbACgF0sDn7pvvSrF7YRfFtePvk7bmtDKEhNNwkN9
+	LX9hkfa+SgcD4c/iQ0hi14CkwsR2fmclnMNU9GwoEyA57zoZjOUMorvD218JsOzMqK7C
+	J0LrFvYyx0O4WJ+PL9PJf3OdOeaJaUP4wcjJZD+k/4Gpe5vJT8SU5hSvNB84naQ4U7hE
+	kiHA==
+X-Gm-Message-State: APjAAAWf+vnPcBmp+hg1TA8og1Kv/hAD/59uwfl+xBak4E8q3rg6pdGA
+	+nQvTbwOtewuq6FpLNYzAkIqXn/ujuAi8PZtXuM=
+X-Google-Smtp-Source: APXvYqzLR2zPpvSv9DeeEAiWgCY6VnjDUBUZifjD1tjx4N2siv1eBnYEa0ftqTmQip8ida38w2OUkFQHXqNifHXlZYU=
+X-Received: by 2002:ae9:e88e:: with SMTP id a136mr412731qkg.71.1581644889812; 
+	Thu, 13 Feb 2020 17:48:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20200213232220.109189-1-jonathan.richardson@broadcom.com>
-In-Reply-To: <20200213232220.109189-1-jonathan.richardson@broadcom.com>
+References: <20200213193536.23301-1-scott.branden@broadcom.com>
+In-Reply-To: <20200213193536.23301-1-scott.branden@broadcom.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 13 Feb 2020 17:41:59 -0800
-Message-ID: <CAMKF1srr9h4BU9g6NHV66TFfJxv9DOpP-PVXZEPDuFJO+pw9Ng@mail.gmail.com>
-To: Jonathan Richardson <jonathan.richardson@broadcom.com>
-Cc: Randy Schacher <stuart.schacher@broadcom.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] pcimem: add initial version 2.0
+Date: Thu, 13 Feb 2020 17:47:43 -0800
+Message-ID: <CAMKF1srKAWjN9OzU0-37wD+33U8d7wRVmY_PYtDRWGjQJt675g@mail.gmail.com>
+To: Scott Branden <scott.branden@broadcom.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH] x265: add x265 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,52 +53,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 01:42:24 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 01:48:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Feb 13, 2020 at 3:22 PM Jonathan Richardson via
-Openembedded-devel <openembedded-devel@lists.openembedded.org> wrote:
+On Thu, Feb 13, 2020 at 11:36 AM Scott Branden via Openembedded-devel
+<openembedded-devel@lists.openembedded.org> wrote:
 >
-> From: Randy Schacher <stuart.schacher@broadcom.com>
+> Add x265 recipe for latest tag of Release_3.2 branch (3.2.1).
 >
-> Initial revision from 09724edb1783a98da2b7ae53c5aaa87493aabc9b
->
-> Reviewed-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
-> Reviewed-by: Randy Schacher <stuart.schacher@broadcom.com>
-> Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+> Signed-off-by: Scott Branden <scott.branden@broadcom.com>
 > ---
->  meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+>  .../recipes-multimedia/x265/x265_3.2.1.bb     | 24 +++++++++++++++++++
+>  1 file changed, 24 insertions(+)
+>  create mode 100644 meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
 >
-> diff --git a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+> diff --git a/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb b/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
 > new file mode 100644
-> index 000000000..ee2b1846b
+> index 0000000000..68c1a55c8c
 > --- /dev/null
-> +++ b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
-> @@ -0,0 +1,18 @@
-> +SUMMARY = "Simple program to read & write to a pci device from userspace"
-> +HOMEPAGE = "https://github.com/billfarrow/pcimem"
-> +BUGTRACKER = "https://github.com/billfarrow/pcimem/issues"
-> +SECTION = "devel"
+> +++ b/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY = "H.265/HEVC video encoder"
+> +DESCRIPTION = "A free software library and application for encoding video streams into the H.265/HEVC format."
+> +HOMEPAGE = "http://www.videolan.org/developers/x265.html"
+> +
 > +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +LICENSE_FLAGS = "commercial"
+> +LIC_FILES_CHKSUM = "file://../COPYING;md5=c9e0427bc58f129f99728c62d4ad4091"
 > +
-> +COMPATIBLE_HOST = "(x86_64|aarch64|arm)"
+> +DEPENDS = "nasm-native gnutls zlib libpcre"
 > +
-> +SRCREV = "09724edb1783a98da2b7ae53c5aaa87493aabc9b"
-> +SRC_URI = "git://github.com/billfarrow/pcimem.git "
+> +SRC_URI = "http://ftp.videolan.org/pub/videolan/x265/x265_${PV}.tar.gz"
 > +
-> +S = "${WORKDIR}/git"
+> +S = "${WORKDIR}/x265_${PV}/source"
 > +
-> +do_install() {
-> +    install -d ${D}${bindir}
-> +    install -m 0755 ${B}/pcimem ${D}${bindir}
+> +SRC_URI[md5sum] = "94808045a34d88a857e5eaf3f68f4bca"
+> +SRC_URI[sha256sum] = "fb9badcf92364fd3567f8b5aa0e5e952aeea7a39a2b864387cec31e3b58cbbcc"
+> +
+> +inherit lib_package pkgconfig cmake
+> +
+> +AS[unexport] = "1"
+> +
+> +COMPATIBLE_MACHINE = "^$"
+> +COMPATIBLE_MACHINE_x86 = ".*"
+> +COMPATIBLE_MACHINE_x86-64 = ".*"
 
-both installs could be squashed with
-install -D -m 0755 ${B}/pcimem ${D}${bindir}/pcimem
-
-> +}
+perhaps better to use COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
 > --
 > 2.17.1
 >
