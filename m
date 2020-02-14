@@ -1,48 +1,33 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-io1-f50.google.com (mail-io1-f50.google.com
-	[209.85.166.50])
-	by mail.openembedded.org (Postfix) with ESMTP id C20DA610AD
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id DC38E6103F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 16:06:35 +0000 (UTC)
-Received: by mail-io1-f50.google.com with SMTP id t26so11054828ioi.13
+	Fri, 14 Feb 2020 16:11:26 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,440,1574092800"; d="scan'208";a="83307816"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 15 Feb 2020 00:11:25 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 93CD0406AB15
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 08:06:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=SCpqrUkrW911lWZUXLrBisvuc0bpSHCLY4pfzIyQl9k=;
-	b=c9Qt6NXqnI9CDBmr3UK/MOCl78pxOc9PZSmtiYqQtt01gDFgSG+S08cD33qOLysc5+
-	ZAN7G3dy16TnxwO6V+We2ghMzoFLZOlppvY8yZsaujp+mo8ZvmmsgAJZP32QY2UbgxwD
-	Ew+ELSnS6w9zukSkEWLNczVMJKD8FhvGKw9d8ePhY9R0KmUmFG8eYVK/wJb6LD1T7VV4
-	btzxzJRK4pX2Ok+J/2TFSyIQ/mKB0pQhTcL1Gd6SLqnG+1k+N0rFZCQlm7FO0Hk7z4EU
-	+hNqB5ON/dGHjgSZRoC3VjiEIsjTbowOb+d4ylJrARb+80E9z0q/TVsWYzurgllk2pmy
-	KNMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=SCpqrUkrW911lWZUXLrBisvuc0bpSHCLY4pfzIyQl9k=;
-	b=uMPA3sIcg54zXraHbSkkC2Fdlgg3q4V6iV+1YC9Ni7NKHJ9IYY8mPstANL1uXONkiP
-	mcWx7ZCP7yJ/+rYcLRpNA3tIrqNz15lBL/VqUQ/YiLkK1M7cTjxn/waHctiek8b61LAz
-	t7+vKq8dI0X9JNMN2K1CGyeQ6t0SoNUrL0ZD12VkJx8ohr5LcoNyPT1eTM2eaOoyF5+O
-	BjmMevfGCS1g32WmEfreMnMurip3BWznbdp5Fd4wyLVyjxs+z5C4tr9POlEuLpCm07/R
-	o2GYOFurKhK1mucZgt1DA66w75ZCpvsEI0Vw43Fagbglfpewhiz3NJKnKZR73Tna5jtC
-	L28g==
-X-Gm-Message-State: APjAAAWXoi8k+sgT5ZNsR3hJrT+caq+UdEeSo5nmCD6AZItdit/R+hLB
-	mCOSL6snPhA7ltFkCKT2GZ1pCG6UM+PypX/aU8w=
-X-Google-Smtp-Source: APXvYqzPvNWZTK957v+yXUbzrmzB1mNCNUqYVncq+245HF8qi+RsKm8B/7ztkpYSTXZBEoUTKiJR+zJTk/6le6dXqBs=
-X-Received: by 2002:a6b:b642:: with SMTP id g63mr2739179iof.122.1581696396833; 
-	Fri, 14 Feb 2020 08:06:36 -0800 (PST)
+	Sat, 15 Feb 2020 00:01:46 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Sat, 15 Feb 2020 00:11:19 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Sat, 15 Feb 2020 00:11:22 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 14 Feb 2020 15:43:39 -0800
+Message-ID: <1581723823-21171-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20200213055519.1978873-1-raj.khem@gmail.com>
-In-Reply-To: <20200213055519.1978873-1-raj.khem@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Fri, 14 Feb 2020 08:06:25 -0800
-Message-ID: <CANx9H-CONadAvBOw-HF+HqcMm+8+_aXaQKfz07A171PDW7mpGA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python2][PATCH] python-grpcio: Upgrade to 1.27.1
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: 93CD0406AB15.A31F1
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] cryptsetup: upgrade 2.2.2 -> 2.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,38 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 16:06:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 14 Feb 2020 16:11:27 -0000
+Content-Type: text/plain
 
-Thank you. I've merged this, but noticed 1.27.2 was released to patch
-python. Can you have a look?
-https://github.com/grpc/grpc/releases/tag/v1.27.2
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ .../cryptsetup/{cryptsetup_2.2.2.bb => cryptsetup_2.3.0.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-crypto/cryptsetup/{cryptsetup_2.2.2.bb => cryptsetup_2.3.0.bb} (96%)
 
-On Wed, Feb 12, 2020 at 9:55 PM Khem Raj <raj.khem@gmail.com> wrote:
+diff --git a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.2.bb b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.0.bb
+similarity index 96%
+rename from meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.2.bb
+rename to meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.0.bb
+index 479b9eb37..0e36ed4a2 100644
+--- a/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.2.2.bb
++++ b/meta-oe/recipes-crypto/cryptsetup/cryptsetup_2.3.0.bb
+@@ -21,8 +21,8 @@ RDEPENDS_${PN} = " \
+ "
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}/${BP}.tar.xz"
+-SRC_URI[md5sum] = "2b64ca9ea16e823df359eacf9c02414b"
+-SRC_URI[sha256sum] = "2af0ec9551ab9c870074cae9d3f68d82cab004f4095fa89db0e4413713424a46"
++SRC_URI[md5sum] = "48be3bd7c557d051f638047d280e93ee"
++SRC_URI[sha256sum] = "395690de99509428354d3cd15cf023bed01487e6f1565b2181e013dc847bbc85"
+ 
+ inherit autotools gettext pkgconfig
+ 
+-- 
+2.17.1
 
-> Delete gettid patch, fixed differenty upstream
-> Add code to use cross compiler in setup.py
->
-> Define GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY so it does not use
-> SYS_clock_gettime syscalls since it does not work when 64bit time_t is
-> used on 32bit arches
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  ...-Do-not-mix-C-and-C-compiler-options.patch | 44 ++++++++++++++-----
->  .../python/python-grpcio/gettid.patch         | 26 -----------
->  .../python-grpcio/ppc-boringssl-support.patch |  2 +-
->  .../python-grpcio/riscv64_support.patch       |  2 +-
->  ...pcio_1.19.0.bb => python-grpcio_1.27.1.bb} | 11 ++---
->  5 files changed, 40 insertions(+), 45 deletions(-)
->  delete mode 100644 recipes-devtools/python/python-grpcio/gettid.patch
->  rename recipes-devtools/python/{python-grpcio_1.19.0.bb =>
-> python-grpcio_1.27.1.bb} (74%)
->
-> <snip>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
+
 
