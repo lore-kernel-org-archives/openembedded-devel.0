@@ -1,37 +1,51 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com
-	[209.85.210.45])
-	by mail.openembedded.org (Postfix) with ESMTP id CC166610EC
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+	[209.85.214.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 042B7610EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 22:38:01 +0000 (UTC)
-Received: by mail-ot1-f45.google.com with SMTP id g64so10646030otb.13
+	Fri, 14 Feb 2020 22:47:38 +0000 (UTC)
+Received: by mail-pl1-f172.google.com with SMTP id ay11so4260598plb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 14:38:03 -0800 (PST)
+	Fri, 14 Feb 2020 14:47:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=GbtejPkibBMDZr+5qK3XLgz2Ijza5vXbb5XUqH1k7Kc=;
+	b=jmJqRUQUhledF6ONW6VriUFupg9dC1eWfkahfB3TmaKWjBWkCSLCUS/9ZmzWs0Jom7
+	5hdh4A8qeOvWk+dnnK0nO5HRRmhuahbtKmsBLPNH/pHOa+fDSuFV6px7T+UVcI29dVkA
+	2PEPpg+VI5/7fYBvpYOMxuwg9pdyRAvsvwlmEgfvP4KIoteGnb5T6MK1ozPGGgH6izrG
+	8chf1EL0/a7YAsXDpU9eQYzsYh+h78i8193ivxEQrjjd0iCfvhoCIRs0oQpiV8gKjGU+
+	tXFLDko/5OnYPQjw+5FcQlOrD8SL7hCaKvgrDnPb36rBW1vldfsxwJggvIepqtTNkGev
+	rDiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=avjwIitMhyq2WXh0Es0swBjgglKyYY7c04UD5DM/WGI=;
-	b=VokWK8SjYAgBz+qUGMe7he19PbEqNCDmW9Ws0Uj3K+vABe81PXlVpZ6SK4NddLgvSz
-	lqfyEDkrr+pP8IGPREkBo+b6CEX9MrdNBgkKp0YgmGZgYRbJoJ6J+1YtTeBQkdarf7S/
-	mYrCpD+BrK/A5uERttlkIJ2hEHz5KDcNm2RtQhEj3UYXdlRz2cHZQchcfKcDYjYmk1qo
-	eJVNU4wcAUJ5JvaGrFZYO/yFnqS+yiA1YOlWsuyFqqtp37qBO9nbRVDzAIqkQEKdQA2f
-	efLcr47zoXQ4Ve1Q79ElVGNyHvJXrUDFCwOJvsHpkoO9WggFUtEtAyx3e0OPKYvHRAej
-	GqXA==
-X-Gm-Message-State: APjAAAWhouFMchU9lS3MEnEJmnes2Rga/m52HInJ3ckhHcj5VBQuhNgT
-	OswMT6txIJ3RNUUcCwbsfGrHH8DuwWY=
-X-Google-Smtp-Source: APXvYqwHh1jeEMRACxMCBugbIk74o6Auuw5DOlP7fl919vvuTFFAwFTEFVgQhyzXR6/+B6TqssQXMA==
-X-Received: by 2002:a9d:7305:: with SMTP id e5mr3917706otk.64.1581719882439;
-	Fri, 14 Feb 2020 14:38:02 -0800 (PST)
-Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-	by smtp.gmail.com with ESMTPSA id l12sm2586316oth.9.2020.02.14.14.38.01
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=GbtejPkibBMDZr+5qK3XLgz2Ijza5vXbb5XUqH1k7Kc=;
+	b=tpFvZdGDdDIxQ0n2ElL1JcRzn5TnbjqTurn/EoEI+JgTj9DKCWu+R7Ji0EfoLeqaDw
+	FQNw/yCTCxtx04JbMyH+fhpIus0CtDzhEYFIewSZvESvouHZ2stHFQRYSgP6nlp93rvs
+	bQAGw1oEnKyaSTrUc87Pg/06Fm/jonwv1LZQglfOnUVh+2zzh4bOXte5bwYo1WV+aCMH
+	jtOI5FPaIHjsMoNH0IiZh7R9viTkOmYTlxcOGn0dVSHa+RV73E0P4a7gQmNwj/lF9usr
+	T2yfikh3/f5Pu/huYJkKeYMHs6SQ12h6B7pYwM652oVFHAxFxjcUZz7nkrocU997WpLy
+	7/+w==
+X-Gm-Message-State: APjAAAXEj/+ZEkBzJytiaW4+DF3SJyxWngRLgarkqEM5EOfLTFLw7fR3
+	+LwM6NlD+7Nr5V9Rxd+Z+tMVNn/Nhn4=
+X-Google-Smtp-Source: APXvYqyzwIIVwJm8bfLXI8KAf0stNnlybgxMeu+tqDz0xACRBrxAb1pn4IG2bgLETr8Iw6DCS0HWVw==
+X-Received: by 2002:a17:90a:858c:: with SMTP id
+	m12mr5861719pjn.127.1581720459444; 
+	Fri, 14 Feb 2020 14:47:39 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::709])
+	by smtp.gmail.com with ESMTPSA id
+	l13sm7527088pjq.23.2020.02.14.14.47.38
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 14:38:01 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	Fri, 14 Feb 2020 14:47:39 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 17:37:51 -0500
-Message-Id: <20200214223751.16148-1-derek@asterius.io>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-cffi: consolidate inc and bb files into a single bb file
+Date: Fri, 14 Feb 2020 14:47:42 -0800
+Message-Id: <20200214224742.3270717-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] packagegroup-meta-oe: Remove python2 packages from packagegroup-meta-oe-devtools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,64 +58,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 22:38:02 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 22:47:39 -0000
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-devtools/python/python-cffi.inc   | 17 -----------------
- .../python/python3-cffi_1.13.2.bb             | 19 ++++++++++++++++++-
- 2 files changed, 18 insertions(+), 18 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-cffi.inc
+ meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
-deleted file mode 100644
-index a2b0c3bb0c..0000000000
---- a/meta-python/recipes-devtools/python/python-cffi.inc
-+++ /dev/null
-@@ -1,17 +0,0 @@
--SUMMARY = "Foreign Function Interface for Python calling C code"
--HOMEPAGE = "http://cffi.readthedocs.org/"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
--DEPENDS += "libffi ${PYTHON_PN}-pycparser"
--
--SRC_URI[md5sum] = "652203cf99faa254efff7fab23c2f3a2"
--SRC_URI[sha256sum] = "599a1e8ff057ac530c9ad1778293c665cb81a791421f46922d80a86473c13346"
--
--RDEPENDS_${PN}_class-target = " \
--    ${PYTHON_PN}-ctypes \
--    ${PYTHON_PN}-io \
--    ${PYTHON_PN}-pycparser \
--    ${PYTHON_PN}-shell \
--"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.13.2.bb b/meta-python/recipes-devtools/python/python3-cffi_1.13.2.bb
-index e888084347..6156081126 100644
---- a/meta-python/recipes-devtools/python/python3-cffi_1.13.2.bb
-+++ b/meta-python/recipes-devtools/python/python3-cffi_1.13.2.bb
-@@ -1,2 +1,19 @@
-+SUMMARY = "Foreign Function Interface for Python calling C code"
-+HOMEPAGE = "http://cffi.readthedocs.org/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
-+DEPENDS += "libffi ${PYTHON_PN}-pycparser"
-+
-+SRC_URI[md5sum] = "652203cf99faa254efff7fab23c2f3a2"
-+SRC_URI[sha256sum] = "599a1e8ff057ac530c9ad1778293c665cb81a791421f46922d80a86473c13346"
-+
- inherit pypi setuptools3
--require python-cffi.inc
-+
-+RDEPENDS_${PN}_class-target = " \
-+    ${PYTHON_PN}-ctypes \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-pycparser \
-+    ${PYTHON_PN}-shell \
-+"
-+
-+BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index 777623ba88..bad4aa769e 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -116,7 +116,6 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
+     mpich msgpack-c nlohmann-json openocd pax-utils \
+     ipc-run libdbd-mysql-perl libdbi-perl libio-pty-perl php \
+     protobuf protobuf-c python3-distutils-extra \
+-    python-cpuset python-distutils-extra python-futures python-pygobject \
+     rapidjson serialcheck sip3 tclap uftrace uw-imap valijson \
+     xmlrpc-c yajl yasm \
+     ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geany geany-plugins glade tk", "", d)} \
 -- 
-2.17.1
+2.25.0
 
 
