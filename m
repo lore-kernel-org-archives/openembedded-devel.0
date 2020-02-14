@@ -1,48 +1,38 @@
-Return-Path: <jonathan.richardson@broadcom.com>
-Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
-	[209.85.216.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C897F61128
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-ot1-f42.google.com (mail-ot1-f42.google.com
+	[209.85.210.42])
+	by mail.openembedded.org (Postfix) with ESMTP id E204E61115
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 19:44:31 +0000 (UTC)
-Received: by mail-pj1-f68.google.com with SMTP id ep11so4284994pjb.2
+	Fri, 14 Feb 2020 19:47:47 +0000 (UTC)
+Received: by mail-ot1-f42.google.com with SMTP id p8so10226934oth.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 11:44:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=akFrt4jCphROZ+s/iU38j18KKSiCU4Bef8FB6gRGpOI=;
-	b=WFCKWWF05Wt561Ulh14l5CKmO29Kvv2Y1XjWLQkgLXTQWUYBhMdemPk+XjyFFEBkKt
-	NEjHohPaV3s0tMjYZtO/SSqz5DeXQMzTvjAHJt0wqoBYfPDgLcq6NWMWF7z0eoXjoxMo
-	G6w7T3b/OMbmXfyBCd/vyXg7089PhdUobtITE=
+	Fri, 14 Feb 2020 11:47:49 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=akFrt4jCphROZ+s/iU38j18KKSiCU4Bef8FB6gRGpOI=;
-	b=iU7IuQjXa8FDGy3fhf0oTK4e3WZzlCeXmMDBm/n7Addn8XYUDPbWxKUvJ4bLAl+pBi
-	BUtAMUE8tdlPIqTbSHX3hjh2goRqPeLptLm9sfDExNtWS9zdTu20n7Sl1PUws979kAmm
-	44o4kmFuqj8e5Oo4sTOIBUwH/7JK0fwD+E4lnCLVhBn3a69ySdhjGRdNFk942Q2RU+Ju
-	cGviXZgGytpokHQJwbqEclEW2DBOl+lmUJDYo+9ikFyBAHr5wrqITrLlj5WH/IcABCVP
-	EFHwZfSCYAIha3TPSfEihCJvd2QIoHYcX7cVamO7NhB/G+g/Tgo7jFlgZTMDrgm4YKGk
-	bD3Q==
-X-Gm-Message-State: APjAAAUJ8VfRjchbzQszKguFy9LxfidWVsAiPC7nOKSLT1w5B7amxkAi
-	tcO7AIsHBsWwnWQZWqheb3Hg8EqJb9+IOcXByy5SJJzCBvWyX28FAgAOAGnVpYBLYPDMIUegj5N
-	Jd2GO0fJEqBNsOsOjDfEKghuojw4oW4kWIxwXVWcARM8E0iVIJ+j4F3IyG7qAc2AMVkNGLZohga
-	oFy5N0B+mxqywj1R+AVWzebwHu4aCy8Q8=
-X-Google-Smtp-Source: APXvYqxltahvvrTcBMTxYq8F0W111+ZBe10o9F1F4dZGg3YHuecQuTJc/4RbVTH+sQpHezlHLRlOXQ==
-X-Received: by 2002:a17:90a:8586:: with SMTP id
-	m6mr5525985pjn.121.1581709472404; 
-	Fri, 14 Feb 2020 11:44:32 -0800 (PST)
-Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
+	bh=ia6o2D+XSrtlreDXh6J4gULfo4bq7XVUVq5ULrN8xkI=;
+	b=sP9AErsK6QuAauoUBNXfmaki2rSNXMOSXJ66t/Qn6WB3gkI3q3Q33G2YbDPp4GZMGO
+	EI2Cj2rkzhj9laX8CyApla19UUPHOiqjE6GLP/1WxuAj/N00IaHVrW7JpJHB/ev3tEOX
+	ewne/b9bgQA162kGhET78ITjEmEYAgcXIS3rh3/DtSnmAGnWWlDSs3GJ2iYwylokVrrN
+	Xr4UGoamd06K6TkiWl/K0/uUOHC5T7YWkCHgYYOUj0SyfbM6E9tIplUdtTPDIrkKHdFU
+	GRYOn+DxljVkwNl94d1T0lxYgys3FRIoqq76agH+iZ6sAf4diCVusvjHugZ9g+almhsU
+	zxvQ==
+X-Gm-Message-State: APjAAAWVsgb73HZIUSN5SKGt4XAckLIvCHffzTcG5es0SQ2jTuC6Xf5f
+	JbOib2RnY9f2LkvoF23ub5kKYoR0GS0=
+X-Google-Smtp-Source: APXvYqyZp/WlBlqKqrGqYTvAKlmwIccWYDNtuVGtR4xXm8FXp7kFH+8uNIdyOX9CPgADMEBNRZPKzQ==
+X-Received: by 2002:a9d:d0b:: with SMTP id 11mr3692175oti.287.1581709668541;
+	Fri, 14 Feb 2020 11:47:48 -0800 (PST)
+Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
 	by smtp.gmail.com with ESMTPSA id
-	p17sm7509292pfn.31.2020.02.14.11.44.30
+	x15sm2295481otq.30.2020.02.14.11.47.47
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 11:44:31 -0800 (PST)
-From: Jonathan Richardson <jonathan.richardson@broadcom.com>
+	Fri, 14 Feb 2020 11:47:48 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 11:44:20 -0800
-Message-Id: <20200214194420.106483-1-jonathan.richardson@broadcom.com>
+Date: Fri, 14 Feb 2020 14:47:39 -0500
+Message-Id: <20200214194739.727-1-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
-Cc: Arun Parameswaran <arun.parameswaran@broadcom.com>
-Subject: [meta-oe][PATCH v2 1/1] spidev-test: Add initial version of recipe
+Subject: [meta-python][PATCH] python3-cachetools: consolidate inc and bb files into a single bb file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,57 +45,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 19:44:31 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 19:47:48 -0000
 
-From: Arun Parameswaran <arun.parameswaran@broadcom.com>
-
-Allows for testing SPI interface using spidev driver and is part of the
-kernel tools.
-
-Signed-off-by: Arun Parameswaran <arun.parameswaran@broadcom.com>
-Reviewed-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
-Tested-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
-Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-kernel/spidev-test/spidev-test.bb | 29 +++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/spidev-test/spidev-test.bb
+ .../python/python-cachetools.inc               | 16 ----------------
+ .../python/python3-cachetools_4.0.0.bb         | 18 ++++++++++++++++--
+ 2 files changed, 16 insertions(+), 18 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-cachetools.inc
 
-diff --git a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-new file mode 100644
-index 000000000..662630291
---- /dev/null
-+++ b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
-@@ -0,0 +1,29 @@
-+SUMMARY = "Test SPI devices"
-+DESCRIPTION = "SPI testing utility using the spidev driver"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-+PROVIDES = "virtual/spidev-test"
+diff --git a/meta-python/recipes-devtools/python/python-cachetools.inc b/meta-python/recipes-devtools/python/python-cachetools.inc
+deleted file mode 100644
+index f3d3bc6bc5..0000000000
+--- a/meta-python/recipes-devtools/python/python-cachetools.inc
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "Extensible memoizing collections and decorators"
+-HOMEPAGE = "https://github.com/tkem/cachetools"
+-DESCRIPTION = "This module provides various memoizing \
+-collections and decorators, including variants of the \
+-Python 3 Standard Library @lru_cache function decorator."
+-SECTION = "devel/python"
+-
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=27f7518eb6f7dc686d0f953b2f28dae5"
+-
+-inherit pypi
+-
+-SRC_URI[md5sum] = "6a88df13467e80eb61dd2bedad19b83c"
+-SRC_URI[sha256sum] = "9a52dd97a85f257f4e4127f15818e71a0c7899f121b34591fcc1173ea79a0198"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-cachetools_4.0.0.bb b/meta-python/recipes-devtools/python/python3-cachetools_4.0.0.bb
+index 76b2f6785c..50d0f25739 100644
+--- a/meta-python/recipes-devtools/python/python3-cachetools_4.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-cachetools_4.0.0.bb
+@@ -1,2 +1,16 @@
+-inherit setuptools3
+-require python-cachetools.inc
++SUMMARY = "Extensible memoizing collections and decorators"
++HOMEPAGE = "https://github.com/tkem/cachetools"
++DESCRIPTION = "This module provides various memoizing \
++collections and decorators, including variants of the \
++Python 3 Standard Library @lru_cache function decorator."
++SECTION = "devel/python"
 +
-+inherit bash-completion kernelsrc kernel-arch
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=27f7518eb6f7dc686d0f953b2f28dae5"
 +
-+do_populate_lic[depends] += "virtual/kernel:do_patch"
++inherit pypi setuptools3
 +
-+EXTRA_OEMAKE = "-C ${S}/tools/spi O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
++SRC_URI[md5sum] = "6a88df13467e80eb61dd2bedad19b83c"
++SRC_URI[sha256sum] = "9a52dd97a85f257f4e4127f15818e71a0c7899f121b34591fcc1173ea79a0198"
 +
-+do_configure[depends] += "virtual/kernel:do_shared_workdir"
-+
-+do_compile() {
-+    oe_runmake
-+}
-+
-+do_install() {
-+    oe_runmake DESTDIR=${D} install
-+}
-+
-+PACKAGE_ARCH = "${MACHINE_ARCH}"
-+
-+python do_package_prepend() {
-+    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
-+}
-+
-+B = "${WORKDIR}/${BPN}-${PV}"
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
