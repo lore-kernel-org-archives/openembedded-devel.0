@@ -1,39 +1,47 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com
-	[209.85.210.46])
-	by mail.openembedded.org (Postfix) with ESMTP id B574861090
+Return-Path: <jonathan.richardson@broadcom.com>
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D8B061090
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 18:57:34 +0000 (UTC)
-Received: by mail-ot1-f46.google.com with SMTP id z9so10128398oth.5
+	Fri, 14 Feb 2020 19:07:56 +0000 (UTC)
+Received: by mail-pg1-f170.google.com with SMTP id g3so5272666pgs.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 10:57:36 -0800 (PST)
+	Fri, 14 Feb 2020 11:07:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=vM5HpKh3McpQb2+9eZyVqmvX2UuapdqJNFKIY+lAldg=;
+	b=cEWHoNX6eRK6RDQ6m3gEF1MQFDPld9G5wmSSZQ94wT1J6XbVPRFqnZYKghPbn8jSJC
+	OTxCT/Ik6aeVv0uPT04Qb2jRmNH/dcWye675FF+QSvkIGhSrTskXTR+aiGT5S9mB58ua
+	lOfh1b2xB0uhbCSnyhbIweg8xNHuxmGYkLPPo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Igz5VVrW5F73i8gH7hslqcnRyBqkgsp73SgK1jK0eoI=;
-	b=cYQi0lmkYQbpbC9O4/ycowx2wZSzpYd97MFTIYh+jHm56bVN1D4qs1QvQZA2MmZ1aJ
-	Ds8fxSWzf7OaKgYrYU946Hs9ae9qZx63gFYCS1E6bSh395zKKWX5xYetKitpkDTZuJeY
-	xpnRjqVjgpJKzYbo3xxwq8h/zK7K5y5lZRwHzmUGbCFTp2hFVk7cJb0DvXQ9xc1jG525
-	dX6qBHX0OuCsbKeJay1jczK4GlQMTgJGfnYmtuxVa1HjKdxELWfbCNPeNpZAXHt6Yc8h
-	GnZtoknboZ6QI3X/rTSQ2JW2yARB0NIT7cRls2Bl2/J9acAwLFd3rsee32himw11Fbae
-	hVSw==
-X-Gm-Message-State: APjAAAX8MJ7+BQBQdBMIn6jX/ID3Htt5js0wErqHnuKO/1Kyw2y5gKDs
-	AEZkNnR/pYBxcUiIZB7fgWTA4WX3AGM=
-X-Google-Smtp-Source: APXvYqz89B0i/EgnYmzZOjv6sxasYtAYaOuCPyFbVCqNcRCFPieWhpgdrQZ5ouXcZZOlR2kIyBR8uA==
-X-Received: by 2002:a05:6830:99:: with SMTP id
-	a25mr3564079oto.130.1581706655465; 
-	Fri, 14 Feb 2020 10:57:35 -0800 (PST)
-Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
+	bh=vM5HpKh3McpQb2+9eZyVqmvX2UuapdqJNFKIY+lAldg=;
+	b=RuPmuG5HLdhq0kiaVToo3ZsXIFOsbjMSbdU0sqjwWkq0/uUYZ8nCWjlK7sUq13ae+E
+	+wzkIf70SwKZzKo+6wRRxg2/Ny5AHhjeL72lUU0KjuY04MgSty6e7Vx2mK3i8skalOwz
+	mL3JEWX/gFzWKcKfdKSyZBXdtwR9+SBKf39nWDS+04HqvRhCgFMXWy5ORABLIQ5jWoCR
+	ZGbOh6QkReOxhPinGFNBAsa8mO6xmjlOShGfBbEgjdZWPAucqqn6BuDxFltRn9ZZpCMc
+	z1GzvIBGwcMC+OBoVVXM431DlvS3EdwVvX3DcIDoaxz7PtZoX8/U8mNsW97b/n9/0yGv
+	wiPA==
+X-Gm-Message-State: APjAAAVVD3cazaX7XBDhoI3nITq7vaNKbSKbVlzAb2sXGqiYCV2gus4b
+	Ap6IYb9qryXyU6rIc6W931DBwsyFNTri3OG9uu3ezY7JanLO7Y2LnCWWTCfDJvPa8ibYp6Y8NfY
+	kvXx9xbeMcgUIB4KUg6MK5h5GRv7GreTGhmRx6OG/pE2IkTqxRXGi+BFQD9ufGcEmep/p2dSQav
+	KCqpEMzlS5W0Fmr9VyHcnnyUxfjDxR04A=
+X-Google-Smtp-Source: APXvYqywtiRoc0uSsxol0i+cZ8NLSignp2SW1+OIJUDJ2DFsRDUcWKnUlTW3spiJrBRdu57RIXg1cQ==
+X-Received: by 2002:a62:7c96:: with SMTP id x144mr5091374pfc.7.1581707277266; 
+	Fri, 14 Feb 2020 11:07:57 -0800 (PST)
+Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
 	by smtp.gmail.com with ESMTPSA id
-	n16sm2249892otk.25.2020.02.14.10.57.34
+	c15sm8005113pja.30.2020.02.14.11.07.56
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 10:57:35 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	Fri, 14 Feb 2020 11:07:56 -0800 (PST)
+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 13:57:24 -0500
-Message-Id: <20200214185724.30409-1-derek@asterius.io>
+Date: Fri, 14 Feb 2020 11:07:46 -0800
+Message-Id: <20200214190746.49762-1-jonathan.richardson@broadcom.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-behave: consolidate inc and bb files into a single bb file
+Cc: Randy Schacher <stuart.schacher@broadcom.com>
+Subject: [meta-oe][PATCH v2 1/1] pcimem: add initial version 2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,58 +54,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 18:57:34 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 19:07:56 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Randy Schacher <stuart.schacher@broadcom.com>
+
+Initial revision from 09724edb1783a98da2b7ae53c5aaa87493aabc9b
+
+Reviewed-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+Reviewed-by: Randy Schacher <stuart.schacher@broadcom.com>
+Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
 ---
- .../recipes-devtools/python/python-behave.inc   | 15 ---------------
- .../python/python3-behave_1.2.6.bb              | 17 +++++++++++++++--
- 2 files changed, 15 insertions(+), 17 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-behave.inc
+ meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-behave.inc b/meta-python/recipes-devtools/python/python-behave.inc
-deleted file mode 100644
-index ded75801dd..0000000000
---- a/meta-python/recipes-devtools/python/python-behave.inc
-+++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "A behavior-driven development framework, Python style"
--HOMEPAGE = "https://github.com/behave/behave"
--LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d950439e8ea6ed233e4288f5e1a49c06"
--
--SRC_URI[md5sum] = "3f05c859a1c45f5ed33e925817ad887d"
--SRC_URI[sha256sum] = "b9662327aa53294c1351b0a9c369093ccec1d21026f050c3bd9b3e5cccf81a86"
--
--inherit pypi
--
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-parse-type \
--    ${PYTHON_PN}-setuptools \
--    ${PYTHON_PN}-six \
--    "
-diff --git a/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
-index 1c55871b10..a28e527315 100644
---- a/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-behave_1.2.6.bb
-@@ -1,2 +1,15 @@
--inherit setuptools3
--require python-behave.inc
-+SUMMARY = "A behavior-driven development framework, Python style"
-+HOMEPAGE = "https://github.com/behave/behave"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d950439e8ea6ed233e4288f5e1a49c06"
+diff --git a/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+new file mode 100644
+index 000000000..107d5a8b7
+--- /dev/null
++++ b/meta-oe/recipes-devtools/pcimem/pcimem_2.0.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Simple program to read & write to a pci device from userspace"
++HOMEPAGE = "https://github.com/billfarrow/pcimem"
++BUGTRACKER = "https://github.com/billfarrow/pcimem/issues"
++SECTION = "devel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 +
-+SRC_URI[md5sum] = "3f05c859a1c45f5ed33e925817ad887d"
-+SRC_URI[sha256sum] = "b9662327aa53294c1351b0a9c369093ccec1d21026f050c3bd9b3e5cccf81a86"
++COMPATIBLE_HOST = "(x86_64|aarch64|arm)"
 +
-+inherit pypi setuptools3
++SRCREV = "09724edb1783a98da2b7ae53c5aaa87493aabc9b"
++SRC_URI = "git://github.com/billfarrow/pcimem.git "
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-parse-type \
-+    ${PYTHON_PN}-setuptools \
-+    ${PYTHON_PN}-six \
-+    "
++S = "${WORKDIR}/git"
++
++do_install() {
++    install -D -m 0755 ${B}/pcimem ${D}${bindir}/pcimem
++}
 -- 
 2.17.1
 
