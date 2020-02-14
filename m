@@ -1,38 +1,48 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-oi1-f177.google.com (mail-oi1-f177.google.com
-	[209.85.167.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F06C61115
+Return-Path: <jonathan.richardson@broadcom.com>
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+	[209.85.216.68])
+	by mail.openembedded.org (Postfix) with ESMTP id C897F61128
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 19:44:27 +0000 (UTC)
-Received: by mail-oi1-f177.google.com with SMTP id l136so10534396oig.1
+	Fri, 14 Feb 2020 19:44:31 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id ep11so4284994pjb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 11:44:28 -0800 (PST)
+	Fri, 14 Feb 2020 11:44:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=akFrt4jCphROZ+s/iU38j18KKSiCU4Bef8FB6gRGpOI=;
+	b=WFCKWWF05Wt561Ulh14l5CKmO29Kvv2Y1XjWLQkgLXTQWUYBhMdemPk+XjyFFEBkKt
+	NEjHohPaV3s0tMjYZtO/SSqz5DeXQMzTvjAHJt0wqoBYfPDgLcq6NWMWF7z0eoXjoxMo
+	G6w7T3b/OMbmXfyBCd/vyXg7089PhdUobtITE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OCNHiNEWi+tubeqXGnqgRYiNqMkBLYUINQWkSZDMucM=;
-	b=uZTd6iSN1+nQMLSzpSn8LRweQTkeTCZWGmYkA5/xYA1mBUfYFuhAJGL9Ya5/Y2l2ZR
-	aVExfAAKvNvDYeQdSpUKk+nR7WRTAFqHpRJAL7kqCaeOkLKgDlYfLAVAEmlSFl2YmuKQ
-	3sRvUKB6OKwnleM+mbCYEmyb1Fi2QvT3tc8pR216V4wVLEuycJVtcreiGDj9yuNhNOTj
-	49nAMahs1brXo++A8UJIh7Ij3kHiRtT84qPveju8Cv+/ER6aryxFz89lV12cTD3YITE1
-	BwKJpWtJxgNIYkW3b/WT86303f7MU8KpkmmvW14+IDDHEKQFM35vie6ElnTRvwCBwQ+Y
-	Jehw==
-X-Gm-Message-State: APjAAAXQbcCTZLbUQ6YFVKHD+F6VzIE0Bm+/LUxTag/Hf7x9Eovfk1Zg
-	jAydwZ1QexdFJN0hbffAT7VjRkZ32Xg=
-X-Google-Smtp-Source: APXvYqwKavDcolm9lCnVBSOI4JWkPqFhe6GskpP4ybjOLa5hhD0U29oWkgPtP8+vK4/GGllgs1j1ww==
-X-Received: by 2002:aca:100e:: with SMTP id 14mr3015495oiq.88.1581709468092;
-	Fri, 14 Feb 2020 11:44:28 -0800 (PST)
-Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
+	bh=akFrt4jCphROZ+s/iU38j18KKSiCU4Bef8FB6gRGpOI=;
+	b=iU7IuQjXa8FDGy3fhf0oTK4e3WZzlCeXmMDBm/n7Addn8XYUDPbWxKUvJ4bLAl+pBi
+	BUtAMUE8tdlPIqTbSHX3hjh2goRqPeLptLm9sfDExNtWS9zdTu20n7Sl1PUws979kAmm
+	44o4kmFuqj8e5Oo4sTOIBUwH/7JK0fwD+E4lnCLVhBn3a69ySdhjGRdNFk942Q2RU+Ju
+	cGviXZgGytpokHQJwbqEclEW2DBOl+lmUJDYo+9ikFyBAHr5wrqITrLlj5WH/IcABCVP
+	EFHwZfSCYAIha3TPSfEihCJvd2QIoHYcX7cVamO7NhB/G+g/Tgo7jFlgZTMDrgm4YKGk
+	bD3Q==
+X-Gm-Message-State: APjAAAUJ8VfRjchbzQszKguFy9LxfidWVsAiPC7nOKSLT1w5B7amxkAi
+	tcO7AIsHBsWwnWQZWqheb3Hg8EqJb9+IOcXByy5SJJzCBvWyX28FAgAOAGnVpYBLYPDMIUegj5N
+	Jd2GO0fJEqBNsOsOjDfEKghuojw4oW4kWIxwXVWcARM8E0iVIJ+j4F3IyG7qAc2AMVkNGLZohga
+	oFy5N0B+mxqywj1R+AVWzebwHu4aCy8Q8=
+X-Google-Smtp-Source: APXvYqxltahvvrTcBMTxYq8F0W111+ZBe10o9F1F4dZGg3YHuecQuTJc/4RbVTH+sQpHezlHLRlOXQ==
+X-Received: by 2002:a17:90a:8586:: with SMTP id
+	m6mr5525985pjn.121.1581709472404; 
+	Fri, 14 Feb 2020 11:44:32 -0800 (PST)
+Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
 	by smtp.gmail.com with ESMTPSA id
-	k192sm2038479oib.55.2020.02.14.11.44.27
+	p17sm7509292pfn.31.2020.02.14.11.44.30
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 11:44:27 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	Fri, 14 Feb 2020 11:44:31 -0800 (PST)
+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 14:44:14 -0500
-Message-Id: <20200214194414.32332-1-derek@asterius.io>
+Date: Fri, 14 Feb 2020 11:44:20 -0800
+Message-Id: <20200214194420.106483-1-jonathan.richardson@broadcom.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-booleanpy: consolidate inc and bb files into a single bb file
+Cc: Arun Parameswaran <arun.parameswaran@broadcom.com>
+Subject: [meta-oe][PATCH v2 1/1] spidev-test: Add initial version of recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,56 +55,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 19:44:27 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 19:44:31 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Arun Parameswaran <arun.parameswaran@broadcom.com>
+
+Allows for testing SPI interface using spidev driver and is part of the
+kernel tools.
+
+Signed-off-by: Arun Parameswaran <arun.parameswaran@broadcom.com>
+Reviewed-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+Tested-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
 ---
- .../recipes-devtools/python/python-booleanpy.inc | 14 --------------
- .../python/python3-booleanpy_3.7.bb              | 16 ++++++++++++++--
- 2 files changed, 14 insertions(+), 16 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-booleanpy.inc
+ .../recipes-kernel/spidev-test/spidev-test.bb | 29 +++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/spidev-test/spidev-test.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-booleanpy.inc b/meta-python/recipes-devtools/python/python-booleanpy.inc
-deleted file mode 100644
-index 335d7d396d..0000000000
---- a/meta-python/recipes-devtools/python/python-booleanpy.inc
-+++ /dev/null
-@@ -1,14 +0,0 @@
--SUMMARY = "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL"
--HOMEPAGE = "https://github.com/bastikr/boolean.py"
--
--LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e319747a5eb94cddf646037c01ddba47"
--
--SRC_URI[md5sum] = "1189d115a38f84f5df743014926a9159"
--SRC_URI[sha256sum] = "bd19b412435611ecc712603d0fd7d0e280e24698e7a6e3d5f610473870c5dd1e"
--
--PYPI_PACKAGE = "boolean.py"
--
--inherit pypi
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb b/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
-index 5f8602d187..ebf7ba4e74 100644
---- a/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-booleanpy_3.7.bb
-@@ -1,2 +1,14 @@
--inherit setuptools3
--require python-booleanpy.inc
-+SUMMARY = "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL"
-+HOMEPAGE = "https://github.com/bastikr/boolean.py"
+diff --git a/meta-oe/recipes-kernel/spidev-test/spidev-test.bb b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
+new file mode 100644
+index 000000000..662630291
+--- /dev/null
++++ b/meta-oe/recipes-kernel/spidev-test/spidev-test.bb
+@@ -0,0 +1,29 @@
++SUMMARY = "Test SPI devices"
++DESCRIPTION = "SPI testing utility using the spidev driver"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
++PROVIDES = "virtual/spidev-test"
 +
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e319747a5eb94cddf646037c01ddba47"
++inherit bash-completion kernelsrc kernel-arch
 +
-+SRC_URI[md5sum] = "1189d115a38f84f5df743014926a9159"
-+SRC_URI[sha256sum] = "bd19b412435611ecc712603d0fd7d0e280e24698e7a6e3d5f610473870c5dd1e"
++do_populate_lic[depends] += "virtual/kernel:do_patch"
 +
-+PYPI_PACKAGE = "boolean.py"
++EXTRA_OEMAKE = "-C ${S}/tools/spi O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
 +
-+inherit pypi setuptools3
++do_configure[depends] += "virtual/kernel:do_shared_workdir"
 +
-+BBCLASSEXTEND = "native nativesdk"
++do_compile() {
++    oe_runmake
++}
++
++do_install() {
++    oe_runmake DESTDIR=${D} install
++}
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++python do_package_prepend() {
++    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
++}
++
++B = "${WORKDIR}/${BPN}-${PV}"
 -- 
 2.17.1
 
