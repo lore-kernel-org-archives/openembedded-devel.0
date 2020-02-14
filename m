@@ -1,38 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com
-	[209.85.167.171])
-	by mail.openembedded.org (Postfix) with ESMTP id D8085610B6
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com
+	[209.85.210.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 219BA6113D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 18:45:28 +0000 (UTC)
-Received: by mail-oi1-f171.google.com with SMTP id l136so10372361oig.1
+	Fri, 14 Feb 2020 18:53:55 +0000 (UTC)
+Received: by mail-ot1-f51.google.com with SMTP id g64so10084079otb.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 10:45:30 -0800 (PST)
+	Fri, 14 Feb 2020 10:53:56 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=RMEcmOkhT9Hxfl9P9SYE1bAXLb73ONgjXDmG+n0iywo=;
-	b=uYORxFLK9F0nAsgFrUKXJBpmsR8Nv6lQXof6tSc635CXFmFcYLsb1UHhuQV63DrJvk
-	URvG8DbGF33osy9KvrkOZZyDMhzRhtRFU77UdlyMiEC175bZG/Z/O57w2qoxq+B6QB6Q
-	uXjqtyjbihqJP3i6QqhRjk8OoZFohVHsWNTYI3bjr2RZrWeb1YGRF1MR2Ua4sdodb0gJ
-	FhjxxeUyAowsr4HCYECqi/DXbxV2Mw4l/FZwY2g+0vjN62lBWyrCH4z1CFBBBnrTfhC4
-	KmXlKL1h3lgKioFNUZMpTKdt39c4UZUZ7f3bKmXU3Jx3Lwjr5SmZM+9UMFAS6uOFh5/U
-	2vXA==
-X-Gm-Message-State: APjAAAWPBE+vUu+IJnVjS1vV1hBVlNpnPleY0Nsobfmv8CRT0B8HkSRE
-	t1q1AoQyylfQc3Vj3eoTcVtMsqMdVRo=
-X-Google-Smtp-Source: APXvYqyd0wKHZ6W8dgbT2kIFkjlAD+qWz/a95iOLVA3DWobQVGzP2pnGJmLs68VbCTPREqt0oW1pnQ==
-X-Received: by 2002:a05:6808:a8e:: with SMTP id
-	q14mr2718985oij.173.1581705929474; 
-	Fri, 14 Feb 2020 10:45:29 -0800 (PST)
+	bh=g1Gx1giix8ummnhattablZ759hi+1gBP0RlLmbk2xRg=;
+	b=kGE/6yZju6lubpgahEVRazdlWNBRMukI29E5DZWGikz9YUvYEU8OAQdnKANNC9nGrq
+	p2BCexEmKlnHWLPhZohgkoGRD1EmeLRjk6U0vv1A/+b/yibWG5fMAPZfsUmb/N2YR6UT
+	IrnJ1N0XEoBjDWWT7oxcq0xKIaikCukGvqdMH697yOP83yT2jTgO4tAA0V2uAwWquJUX
+	7yOV9JHSuS5DltydKnJMyeYGsSvA3n3OFCK4RZnJ3lfKbpqdYxUWnUYSQx2XWiH4EB3t
+	xT0FvOD3xfINCjVVocY3gXPBbp6hn8thdj08+UU7UF8yibfdDq1yDgkmz20a8kwMXQnt
+	X55w==
+X-Gm-Message-State: APjAAAWRJiOnXbR4FMQabGkvYhydXbz2jnckjCMljJzXA3zhIOvrxOVE
+	PyePdKmvmgz+UN4NZtsbOZ4ZmOLsNUQ=
+X-Google-Smtp-Source: APXvYqxAq5BGoCK1SR+RpeZ+exD7Ml7HVTVxDwBZ6Y9SFM9nUPs8zNIb7P/lCOo07kGvQkDcuSTAkw==
+X-Received: by 2002:a05:6830:4b9:: with SMTP id
+	l25mr3492484otd.266.1581706435622; 
+	Fri, 14 Feb 2020 10:53:55 -0800 (PST)
 Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-	by smtp.gmail.com with ESMTPSA id j5sm2240699otl.71.2020.02.14.10.45.28
+	by smtp.gmail.com with ESMTPSA id
+	d131sm2179684oia.36.2020.02.14.10.53.54
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 10:45:28 -0800 (PST)
+	Fri, 14 Feb 2020 10:53:55 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 13:45:18 -0500
-Message-Id: <20200214184518.18006-1-derek@asterius.io>
+Date: Fri, 14 Feb 2020 13:53:45 -0500
+Message-Id: <20200214185345.27235-1-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-bcrypt: consolidate inc and bb files into a single bb file
+Subject: [meta-python][PATCH] python-beautifulsoup4: consolidate inc and bb files into a single bb file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,62 +46,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Feb 2020 18:45:29 -0000
+X-List-Received-Date: Fri, 14 Feb 2020 18:53:55 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-bcrypt.inc | 17 -----------------
- .../python/python3-bcrypt_3.1.7.bb            | 19 +++++++++++++++++--
+ .../python/python-beautifulsoup4.inc          | 17 -----------------
+ .../python/python3-beautifulsoup4_4.8.2.bb    | 19 +++++++++++++++++--
  2 files changed, 17 insertions(+), 19 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-bcrypt.inc
+ delete mode 100644 meta-python/recipes-devtools/python/python-beautifulsoup4.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-bcrypt.inc b/meta-python/recipes-devtools/python/python-bcrypt.inc
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
 deleted file mode 100644
-index a264003293..0000000000
---- a/meta-python/recipes-devtools/python/python-bcrypt.inc
+index 3e95bb7f21..0000000000
+--- a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
 +++ /dev/null
 @@ -1,17 +0,0 @@
--DESCRIPTION = "Modern password hashing for your software and your servers."
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
+-SUMMARY = "Screen-scraping library"
+-HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
 -
--DEPENDS += "${PYTHON_PN}-cffi-native"
--
--SRC_URI[md5sum] = "5d6f93b575ce52470af37a8e7dce76fe"
--SRC_URI[sha256sum] = "0b0069c752ec14172c5f78208f1863d7ad6755a6fae6fe76ec2c80d13be41e42"
+-SRC_URI[md5sum] = "5dbdb56c009e4632bae7bed1b385804b"
+-SRC_URI[sha256sum] = "05fd825eb01c290877657a56df4c6e4c311b3965bda790c613a3d6fb01a5462a"
 -
 -inherit pypi
 -
--RDEPENDS_${PN}_class-target += "\
--    ${PYTHON_PN}-cffi \
--    ${PYTHON_PN}-ctypes \
--    ${PYTHON_PN}-shell \
--    ${PYTHON_PN}-six \
+-RDEPENDS_${PN} = "\
+-    ${PYTHON_PN}-html5lib \
+-    ${PYTHON_PN}-lxml \
+-    ${PYTHON_PN}-soupsieve \
 -"
-diff --git a/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb b/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-index d2ec9e386c..0f2d31f537 100644
---- a/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
-+++ b/meta-python/recipes-devtools/python/python3-bcrypt_3.1.7.bb
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
+index d98df11e3d..63fbd09582 100644
+--- a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
++++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.8.2.bb
 @@ -1,2 +1,17 @@
 -inherit setuptools3
--require python-bcrypt.inc
-+DESCRIPTION = "Modern password hashing for your software and your servers."
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
+-require python-beautifulsoup4.inc
++SUMMARY = "Screen-scraping library"
++HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
 +
-+DEPENDS += "${PYTHON_PN}-cffi-native"
-+
-+SRC_URI[md5sum] = "5d6f93b575ce52470af37a8e7dce76fe"
-+SRC_URI[sha256sum] = "0b0069c752ec14172c5f78208f1863d7ad6755a6fae6fe76ec2c80d13be41e42"
++SRC_URI[md5sum] = "5dbdb56c009e4632bae7bed1b385804b"
++SRC_URI[sha256sum] = "05fd825eb01c290877657a56df4c6e4c311b3965bda790c613a3d6fb01a5462a"
 +
 +inherit pypi setuptools3
 +
-+RDEPENDS_${PN}_class-target += "\
-+    ${PYTHON_PN}-cffi \
-+    ${PYTHON_PN}-ctypes \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-six \
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-html5lib \
++    ${PYTHON_PN}-lxml \
++    ${PYTHON_PN}-soupsieve \
 +"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
