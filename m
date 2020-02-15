@@ -1,54 +1,34 @@
-Return-Path: <max.oss.09@gmail.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 54E1761340
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 16:00:03 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id s10so13071080wmh.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 08:00:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=aiAJr6qlZTWGu7pWqguz00qFqc+wfXWfQQqLukIOO0o=;
-	b=ORdzxyP15KWAuhj7iJS/Z/di1aWC5DcCioyDbWYyYVqApRZ4YLKdw0GbgwNB9AHtTT
-	H8b78ra1XvcDrCwokBRSI7kHL9q5F7tSKa91Qppvd75mSzsEUWTCxs6zclQVbFf6VvQb
-	K/TrCEpRWTeMJBBijcA1kzuTPGX+0jcZ88gx5hfZy3nE7VpGAwycMauncDmiBVbtxX6o
-	0lpwnZm/LKLcz35xL0pUun1I7OMUs8rcQZDk2EI4YEGaU4BSVCjWcS1yVqOy27UOhjwF
-	b71Ygn2tsN2o2GSebTNECMTH7r2xyP0rI6EADQBLuCrTgnu+44e6NLYXynJBsEwgEC9k
-	nIQQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=aiAJr6qlZTWGu7pWqguz00qFqc+wfXWfQQqLukIOO0o=;
-	b=MA1DiThNZbbHguIbzfj2ymB9n11MvD2+rnZex8WwHDaqcucSHHKwlrgGli/BPST4o3
-	1TuLHK8lPqCbWS/TuUfpP4qRWWEq0u4SS1p+9aDrnwg+fA42Ur7TBj6c7feKWwbBb3DS
-	YiNDgKd7sei3MawE8npYXJeDWOn0lRZkZHTruR4vh1PA12970yGFPT9ua/99BviBjdnl
-	KYn8iPTx8uPkJWb5V3V1cbp4WyPhldSNA5ACNeHdwqk0dOgGd0PsUShYDtcNfxYvuKG3
-	V1CUSxX7gHumnynAMJGYzGS5Dwnz5y2MLA9Yn8ERRq7n3KUb4A750jq3i37yygqQEqwG
-	IOyA==
-X-Gm-Message-State: APjAAAXb/m1VYVhgAZJmDZiw6CEzR/55041KnpUAMsNWx8jhX7JAFcca
-	QRMYHzhooPpm2vHU/94vfwu+Csp/
-X-Google-Smtp-Source: APXvYqz5LIbmsJjVTGEA5gniySbtuN+UmA17AsfmGGyTnJPdr/jCowuPTD/G/yjJYn/pK5U90m3U5Q==
-X-Received: by 2002:a1c:4c13:: with SMTP id z19mr11230924wmf.75.1581782403671; 
-	Sat, 15 Feb 2020 08:00:03 -0800 (PST)
-Received: from linuxdev2.toradex.int (31-10-206-124.static.upc.ch.
-	[31.10.206.124]) by smtp.gmail.com with ESMTPSA id
-	c9sm11666220wrq.44.2020.02.15.08.00.03
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 15 Feb 2020 08:00:03 -0800 (PST)
-From: Max Krummenacher <max.oss.09@gmail.com>
-X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Feb 2020 16:59:35 +0100
-Message-Id: <20200215155935.6255-3-max.krummenacher@toradex.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200215155935.6255-1-max.krummenacher@toradex.com>
-References: <20200215155935.6255-1-max.krummenacher@toradex.com>
+Return-Path: <pjtexier@koncepto.io>
+X-Greylist: delayed 359 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 15 Feb 2020 16:30:02 UTC
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+	by mail.openembedded.org (Postfix) with ESMTP id 4630E613E1;
+	Sat, 15 Feb 2020 16:30:02 +0000 (UTC)
+Received: from [192.168.1.17] (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
+	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id 7D5516024F;
+	Sat, 15 Feb 2020 17:24:01 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1581783841;
+	bh=0PDZ1bY4lGHAtw/qxFsCEp4unAl+9iNIgRuqwSFcuKo=;
+	h=Subject:To:References:Cc:From:Date:In-Reply-To:From;
+	b=vlg1VOnpvv0fpJ7A/OUTaChjcRN1bxVe9mm+1BdoapsH9yI09p/dbFdNVE0he3+OV
+	ORqyqUP28kARiaopn/SzoJlxKi0/cdZduRJcqWrygDiGQb/Kn1KzyKn2xGdImb+OyK
+	qzsc/r6uje5Ts6wZ1DJfaUv7+ZaFYi21WEh03KW8FPifa+CKtDXcIjkFhxC7lE6LSr
+	6gyZvIqBvwWU31nnHLNv+3WVxcPPepkQldMnATUbNX0+EVrpERaJ3v/o6dow7F4ZdE
+	RYu+LSNDHppZl/e6aolPP1dFOC1DvbRIDrZoNm7K9DOzC5GZgwv7tUO2lEb1upxKKi
+	2vQ63Kn6RTOgw==
+To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+References: <158176248670.31260.7654152103178704127@git.openembedded.org>
+	<20200215102807.938B8232818@git.openembedded.org>
+From: Pierre-Jean Texier <pjtexier@koncepto.io>
+Message-ID: <65fcf6fa-6f55-b082-52fb-6d8a8ce2ef3c@koncepto.io>
+Date: Sat, 15 Feb 2020 17:24:00 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.9.0
 MIME-Version: 1.0
-Cc: Max Krummenacher <max.krummenacher@toradex.com>
-Subject: [meta-oe][PATCH 3/3] openconnect: use target path to script
+In-Reply-To: <20200215102807.938B8232818@git.openembedded.org>
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] [openembedded-core] 11/18: busybox: Backport patches to support removal of __NR_clock_gettime
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,41 +41,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2020 16:00:03 -0000
+X-List-Received-Date: Sat, 15 Feb 2020 16:30:02 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-openconnect puts the default absolute path to the vpnc-script into
-its binary from the --with-vpnc-script configure options.
-So do not prepend the value with the path to the OE sysroot.
+Hello All,
 
-RDEPEND on vpnc-script to have the script from vpnc installed on target.
+Le 15/02/2020 à 11:28, git@git.openembedded.org a écrit :
+>      busybox: Backport patches to support removal of __NR_clock_gettime
+>      
+>      This helps compiling with musl on 32bit arches now that musl has
+>      switched to 64bit time_t
+>      
+>      Signed-off-by: Khem Raj<raj.khem@gmail.com>
+>      Signed-off-by: Richard Purdie<richard.purdie@linuxfoundation.org>
+> ---
+>   ...all-wrappers-around-clock_gettime-closes-.patch | 120 +++++++++++++++++++++
+>   ...-date-Use-64-prefix-syscall-if-we-have-to.patch |  53 +++++++++
+>   ...-time-Use-64-prefix-syscall-if-we-have-to.patch |  43 ++++++++
+>   ...runsv-Use-64-prefix-syscall-if-we-have-to.patch |  46 ++++++++
+>   meta/recipes-core/busybox/busybox_1.31.1.bb        |   4 +
+>   5 files changed, 266 insertions(+)
 
-Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
----
- .../recipes-connectivity/openconnect/openconnect_8.03.bb      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+this commit causes the following build issue :
 
-diff --git a/meta-networking/recipes-connectivity/openconnect/openconnect_8.03.bb b/meta-networking/recipes-connectivity/openconnect/openconnect_8.03.bb
-index 974ff4547..597c1920c 100644
---- a/meta-networking/recipes-connectivity/openconnect/openconnect_8.03.bb
-+++ b/meta-networking/recipes-connectivity/openconnect/openconnect_8.03.bb
-@@ -9,7 +9,7 @@ SRC_URI = " \
- SRCREV = "ea73851969ae7a6ea54fdd2d2b8c94776af24b2a"
- 
- DEPENDS = "vpnc libxml2 krb5 gettext-native"
--RDEPENDS_${PN} = "bash python3-core"
-+RDEPENDS_${PN} = "bash python3-core vpnc-script"
- 
- PACKAGECONFIG ??= "gnutls lz4 libproxy"
- 
-@@ -25,5 +25,5 @@ S = "${WORKDIR}/git"
- 
- inherit autotools pkgconfig
- 
--EXTRA_OECONF += "--with-vpnc-script=${SYSROOT_DESTDIR}${sysconfdir}/vpnc/vpnc-script \
-+EXTRA_OECONF += "--with-vpnc-script=${sysconfdir}/vpnc/vpnc-script \
-                  --disable-static"
+  ERROR: busybox-1.31.1-r0 do_patch: Command Error: 'quilt --quiltrc 
+/home/runner/work/kas-files/kas-files/build/tmp/work/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi/busybox/1.31.1-r0/recipe-sysroot-native/etc/quiltrc 
+push' exited with 0  Output:
+Applying patch 
+0001-Remove-syscall-wrappers-around-clock_gettime-closes-.patch
+patching file Makefile.flags
+patching file coreutils/date.c
+Hunk #2 FAILED at 270.
+1 out of 2 hunks FAILED -- rejects in file coreutils/date.c
+patching file libbb/time.c
+patching file runit/runsv.c
+Patch 0001-Remove-syscall-wrappers-around-clock_gettime-closes-.patch 
+does not apply (enforce with -f)
+ERROR: Logfile of failure stored in: 
+/home/runner/work/kas-files/kas-files/build/tmp/work/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi/busybox/1.31.1-r0/temp/log.do_patch.62122
+ERROR: Task 
+(/home/runner/work/kas-files/kas-files/poky/meta/recipes-core/busybox/busybox_1.31.1.bb:do_patch) 
+failed with exit code '1'
+
+Tested on top of poky master (commit 
+7f2af8bd795ace46828952a7812f0bbdf26529a [1])
+
+[1] - https://github.com/texierp/kas-files/runs/447729194
+
+Thanks !
+
+Regards
 -- 
-2.20.1
-
+Pierre-Jean Texier
+Embedded Linux Engineer
+https://koncepto.io
 
