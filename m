@@ -1,54 +1,48 @@
-Return-Path: <jpuhlman@gmail.com>
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com
-	[209.85.215.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 84BDE613ED
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+	[209.85.208.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D5496140F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 17:51:49 +0000 (UTC)
-Received: by mail-pg1-f169.google.com with SMTP id j15so6824512pgm.6
+	Sat, 15 Feb 2020 18:41:26 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id r21so15402252edq.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 09:51:51 -0800 (PST)
+	Sat, 15 Feb 2020 10:41:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=mf6bPkgwowwzl8qjChfT+JtsSAFVK06M/xLCjoD67Zc=;
-	b=dB73RGDHBpVB6OiTThACyeFMaG5ZjcIJAp20pMwH05cClvaLhqKSGZ7G2PxKLSuDDi
-	9sF0RlKseS7bWorG5LdmZl7dG5eMIMjWhzAGXVTCWHJ/LBVoZXhOjoQDTFTPLtf9FYeZ
-	+WhiZX3piqVuQMTO49uNV7iNdLOE8+qgDK9ndJ6r4ckaKZ3ecZTfgHXOfqy72hO1SSL+
-	b5Oz0t0KQZhbof0ChNRQxsKvjP1FhYqEqR0/Se9Z5xI4c6M5sJ20iZ5KXqZjCXP4cM/D
-	lBzur6ZPBjODpJQn4jRGPdtPO0TlwayYB4YvEJov4G29bpiutKKKOwJMLqXniWVbdt+z
-	SUKA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=EOM0LTgbGMWHIemGWtrDvKtcmnQYx/YgHPr7dJs2SfU=;
+	b=c7hOfm0Vqs2jvyMQp4mE1uTPZqYZWalf8JQc6OEUVNB2X6ml2VHXqSbEG4dqhNxmQ4
+	VAWqFIXlDnW8VpPLoJ05Z18fxHxKIR6sWCZvNd0srpNX7TVM8VgC8695nOCEOPDktaYs
+	o+S/nKDvV82HHJS5EUIJBFb6UzfY2NjC/x1w/PMw06piZKiK2H4ylC+AN0MtKF3gQCk+
+	aCcsTgUEwn0dnAliGgU3muyjC0RQMzLL8WQjuNgQHJxBbw0lQYn6w3/s5wAxTvKi1rhJ
+	FOsiq1kRe7wdOAY/Y+zYyFm8peFw1zBpLwMs7Cp5/yrcpdRc51A+5iea6XbdUP2coof5
+	fMUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-	:in-reply-to:references;
-	bh=mf6bPkgwowwzl8qjChfT+JtsSAFVK06M/xLCjoD67Zc=;
-	b=DYRtds5kA9OSZLgvHP5wxojN75wsfG55FFz+spuTusZtRZT5vodUxYChHYPx5bB4S5
-	IPiCEtB6shxJa2tl1kD3SU+MUD5JE+Td9YlAYIxRgMCS6GWGtsyWr+F1ZT5q5LXmA1EW
-	lzEf84LqeURmLjSUgRdzSv8ZczGMiT7bqZOgCG8cKehAo0HjiwpCBli2rdMLfv47cL5d
-	VrBk7c9z2z9KLBQf3BEomh+n7d4jPBs5hvlJ8kL9ccHjvUzO1wF18PgsubppnQRV14KC
-	DjLMVS8KSTD4+xSJ5sw1tusF0XH2FKkV2UBGVcn3FtTsswf1VtDAC3mzd+YXPlUYM1Uc
-	TGrA==
-X-Gm-Message-State: APjAAAU4Ogf02k0fAOznCdYc5UCwlyGYbktJWCOXfvOBlxVjgiuZ8HTm
-	jr/DxObz1sPiVbepMAXSEInFyDk1weU=
-X-Google-Smtp-Source: APXvYqz/rvAM3HchxEKFL5Km6gOZcn8WeFdmIHpukIrdlcymJzv1rwege6ZQZG2tKmti7wyXCUKQHQ==
-X-Received: by 2002:a63:c14b:: with SMTP id p11mr9692150pgi.290.1581789110403; 
-	Sat, 15 Feb 2020 09:51:50 -0800 (PST)
-Received: from workhorse.localdomain
-	([2600:1700:4c90:60a0:56be:f7ff:fe12:d0bd])
-	by smtp.gmail.com with ESMTPSA id
-	f81sm10806631pfa.118.2020.02.15.09.51.49
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 15 Feb 2020 09:51:50 -0800 (PST)
-Sender: Jeremy Puhlman <jpuhlman@gmail.com>
-Received: by workhorse.localdomain (Postfix, from userid 1000)
-	id 3B4962A0506; Sat, 15 Feb 2020 09:51:49 -0800 (PST)
-From: Jeremy Puhlman <jpuhlman@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Feb 2020 09:51:44 -0800
-Message-Id: <20200215175144.23550-2-jpuhlman@mvista.com>
-X-Mailer: git-send-email 2.13.3
-In-Reply-To: <20200215175144.23550-1-jpuhlman@mvista.com>
-References: <20200215175144.23550-1-jpuhlman@mvista.com>
-Subject: [meta-python][PATCH 2/2] python3-colorlog: add new package
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=EOM0LTgbGMWHIemGWtrDvKtcmnQYx/YgHPr7dJs2SfU=;
+	b=T0jq5iaZ8H+ZUQwX2Z4dwXBLLm9zSULr2aPL1mXX0nKUMsUgbcvioMHx3waqG3r5qu
+	YK6v8xyWzvNMCEu+r7T6MiJ8Vft6qizC1VjZA2AXrJvxvDJmzqs6Ln3/uF/zL4/EVEMA
+	cQFSx0sjzguP7LAD2+O90pol/LQHW9ZcGnWOds+I3oNjfzmEoOMsR9F3DFKLXTM5qVsK
+	Q9F7oiXiO7lmUDuynbaAx8O7CLIj4vFyUPQz80G9Myg3CrWDTrakKlQV0TM5Kh6q0d/x
+	DZJu2PpRvAJ6E7doTyTGYCoUkAsAHe/MTuj77sZZqmnoOYXjQi1ud2Yz3UIPQ10RhEhx
+	/gvQ==
+X-Gm-Message-State: APjAAAUW7GmSoGyn/ElLVxfRi5QHd4q0IKywxacUnu0aoCVsGBZlMqLs
+	8Pzy1dBAzrPLU6IdPrIQhhc6nRb4jvOX5NzEkQs=
+X-Google-Smtp-Source: APXvYqxsTEkpw9z335iN1QYmfhnBGT/DywMiQuk4mBCdQE2feudJ5uW42QXSobx9UegHv23WItRtJvd3GPolbh8EDVA=
+X-Received: by 2002:a17:906:d0d1:: with SMTP id
+	bq17mr8609560ejb.55.1581792087302; 
+	Sat, 15 Feb 2020 10:41:27 -0800 (PST)
+MIME-Version: 1.0
+References: <20200202021738.7440-1-alistair@alistair23.me>
+In-Reply-To: <20200202021738.7440-1-alistair@alistair23.me>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sat, 15 Feb 2020 19:41:16 +0100
+Message-ID: <CA+chaQeXzg=6gEAGwD4-MORiPjUz6bF2tPOgGrJOxfwy2sFNoA@mail.gmail.com>
+To: Alistair Francis <alistair@alistair23.me>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH v2] gpsd: Only require and build for Python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,32 +55,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2020 17:51:49 -0000
+X-List-Received-Date: Sat, 15 Feb 2020 18:41:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-A colored formatter for the python logging module
----
- meta-python/recipes-devtools/python/python3-colorlog_4.1.0.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-colorlog_4.1.0.bb
+FYI: this doesn't prevent the scons to detect python(2) in HOSTTOOLS if
+some layers adds it there, like meta-updater does, reported here:
+https://github.com/advancedtelematic/meta-updater/issues/684
 
-diff --git a/meta-python/recipes-devtools/python/python3-colorlog_4.1.0.bb b/meta-python/recipes-devtools/python/python3-colorlog_4.1.0.bb
-new file mode 100644
-index 000000000..ea4c575eb
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-colorlog_4.1.0.bb
-@@ -0,0 +1,11 @@
-+DESCRIPTION = "A colored formatter for the python logging module"
-+HOMEPAGE = "https://github.com/borntyping/python-colorlog"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://README.md;md5=05592f7a5b83bfc756f62dbd70a9b9b5"
-+
-+inherit pypi setuptools3
-+
-+PYPI_PACKAGE = "colorlog"
-+
-+SRC_URI[md5sum] = "25f79b76421132e2a9e08da15e4e0a73"
-+SRC_URI[sha256sum] = "30aaef5ab2a1873dec5da38fd6ba568fa761c9fa10b40241027fa3edea47f3d2"
--- 
-2.13.3
+It would be nice to have python PACKAGECONFIG to explicitly disable this
+all when not needed.
 
+On Sun, Feb 2, 2020 at 3:17 AM Alistair Francis <alistair@alistair23.me>
+wrote:
+
+> Signed-off-by: Alistair Francis <alistair@alistair23.me>
+> ---
+> v2:
+>  - Actually rename everything
+>
+>  meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 24 ++++++++++----------
+>  1 file changed, 12 insertions(+), 12 deletions(-)
+>
+> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+> b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+> index dbbc7140f..f74ebda5f 100644
+> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
+> @@ -2,7 +2,7 @@ SUMMARY = "A TCP/IP Daemon simplifying the communication
+> with GPS devices"
+>  SECTION = "console/network"
+>  LICENSE = "BSD-2-Clause"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=01764c35ae34d9521944bb6ab312af53"
+> -DEPENDS = "dbus ncurses python python3 pps-tools"
+> +DEPENDS = "dbus ncurses python3 pps-tools"
+>  PROVIDES = "virtual/gpsd"
+>
+>  SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
+> @@ -84,7 +84,7 @@ do_install_append() {
+>      install -m 0644 ${S}/systemd/${BPN}.socket
+> ${D}${systemd_unitdir}/system/${BPN}.socket
+>  }
+>
+> -PACKAGES =+ "libgps libgpsd python-pygps gpsd-udev gpsd-conf gpsd-gpsctl
+> gps-utils"
+> +PACKAGES =+ "libgps libgpsd python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl
+> gps-utils"
+>
+>  RPROVIDES_${PN}-dbg += "python-pygps-dbg"
+>
+> @@ -114,17 +114,17 @@ FILES_gpsd-gpsctl = "${bindir}/gpsctl"
+>  SUMMARY_gps-utils = "Utils used for simulating, monitoring,... a GPS"
+>  # Python files are required for gps/fake, required for gpsfake.
+>  FILES_gps-utils = "${bindir}/* ${libdir}/gps/*.py ${libdir}/gps/*.so"
+> -RDEPENDS_gps-utils = "python-pygps"
+> -
+> -SUMMARY_python-pygps = "Python bindings to gpsd"
+> -FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py
+> ${libdir}/*.egg-info"
+> -RDEPENDS_python-pygps = " \
+> -    python-core \
+> -    python-io \
+> -    python-threading \
+> -    python-terminal \
+> +RDEPENDS_gps-utils = "python3-pygps"
+> +
+> +SUMMARY_python3-pygps = "Python bindings to gpsd"
+> +FILES_python3-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py
+> ${libdir}/*.egg-info"
+> +RDEPENDS_python3-pygps = " \
+> +    python3-core \
+> +    python3-io \
+> +    python3-threading \
+> +    python3-terminal \
+>      gpsd \
+> -    python-json"
+> +    python3-json"
+>
+>  RPROVIDES_${PN} += "${PN}-systemd"
+>  RREPLACES_${PN} += "${PN}-systemd"
+> --
+> 2.25.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
