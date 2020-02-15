@@ -1,45 +1,51 @@
-Return-Path: <scott.branden@broadcom.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BFB361089
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 215B56077F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 00:54:09 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id i6so5694494pfc.1
+	Sat, 15 Feb 2020 01:15:23 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id c23so4355231plz.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 16:54:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=Zr7fx7X9wFsHY/T4YKsdYsvbOE30W2aLOpoUDBh5DcY=;
-	b=HINKCgEs2OjvKker11BDoh96prTbmGTyGk5zwF8oo2AgOnx3oZTXnXU31/DK7sDhlF
-	Y76Gyo1fUuPbp6pt66+TeN3THE/MIltX5/tI8yv5iJCXEGkaxtPDzb0Ma+7CVS6ZJjy6
-	FZG9dpnhfyS2NtgWv2YCPnFcuRE+BQmkGdJl4=
+	Fri, 14 Feb 2020 17:15:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=bN9eRj4eNz6Sho3fOjBpcUO+gWViXJE4KnPypGdJR/8=;
+	b=ds0YnSY1d36n1QBEBu5dDt71CrKxCzyAc9RRtyMCk3zZusXQV7fuMlUjpcJcWCRXNM
+	c7Ci6GzEoTW8UjTkTb9egsjihWBhE3k1lSgpeU1g4YqSdtQeiP5pEYcAfv3ZmNUwKTwP
+	GSplsYklIkOQq+qAaWj8l3+o0AQhcHYt/IXbWfbr9XokIjNazQQkdV52NNLoRySSpUSZ
+	a5NNTJ8rFhGuI/VHwCXBMw580iNUxERHSo/ANTvxmhWFIViDqibFoy5h+hVUP0METhWN
+	6HsmyAs5bKa/PcjsFYacnKQufeIpWhwy8XN8YXnnPNSJlLhIXsEAnG9MtsOY3G1P18zW
+	kK3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Zr7fx7X9wFsHY/T4YKsdYsvbOE30W2aLOpoUDBh5DcY=;
-	b=KH6OdR0IjtRmlQvMCMsFZFn8ie2P7K+o8inZT/KWq+fHo7Tw9LiUJxbsepBncEJgmZ
-	/uIzvP3DNiMuqK7usojj8otu8a+RpEZsTyjyrKLUAmsXKZBn9NScI+q70kXgGNc+zb4M
-	6MeZLC9ydtpErRQuurhvClHorlg3c9IiHqATFuPf+7qvRe3lQzWDtpDXbHUG7S+Wm4y1
-	S2qX2QAhMuIrwBQ6jAGPDDayLlrqczBSQfcqLhOWJz7Xe0XcHasdyEL9a1h+GmGUqhCL
-	59KfGEizQzt22PDConqHMiTjLSsj5hOTA7Cs+apqVIH9z46aL+jSBqb5nRVQ2gYVfxHu
-	l05A==
-X-Gm-Message-State: APjAAAVse7E9y0hM02kicLqnpsA7IObFuDti9GdFaA3uOYW53eXicR7d
-	LRvjCqUOrcSYqzK4O3vxYahA+cx58jvSqKel2aqGoxZ8g+n7ZSrBuDCtwxyUdjEufaJAe9gJi5d
-	uCQj+QPVZyAkWhkGWjXP+kWDTXtZKwpIQctbIft4iGSMxMLYMNQXV/Zte6ytFW11L/+kZ82Ytbv
-	rg84tHs2nym3MLj6YUOHn3SbjC2nrF
-X-Google-Smtp-Source: APXvYqwopwPdzAE0QS3+nNgQKcyqrhWvZMhOUhP6e96fpg7K4hBkrpBqJToSgrMyFdh/ZzxWML7nGA==
-X-Received: by 2002:a63:9856:: with SMTP id l22mr3344441pgo.344.1581728049489; 
-	Fri, 14 Feb 2020 16:54:09 -0800 (PST)
-Received: from lbrmn-lnxub113.broadcom.net ([192.19.228.250])
-	by smtp.gmail.com with ESMTPSA id y3sm8550032pff.52.2020.02.14.16.54.07
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=bN9eRj4eNz6Sho3fOjBpcUO+gWViXJE4KnPypGdJR/8=;
+	b=H8teRlnZMZtNDWTIEJ4JKofoSOXI/LIHNKIUD1fGGeYst1WgNmLm2znXH1UFhIL6To
+	xv7kOo4x8TV96K4AB+hxz9iv5hahC+F3YqOAMPxOU26u/OHuMwmRATlSIFvlPIYtFVsn
+	IQrUfOYNxF9tOIFr0kVjzgS8kq5pZ/lyZRkq+VCJXE745PvDbG9zEQEKwL1oWTyb7Usq
+	xm2WpsRlgahTe4TM/5UGSiXKjidRObMn3+J/zwTf16X+AuxZ1PxDECXbgNVdczSBJZiY
+	Y+XC5ATIz5nH/RxDB3HFTpALApk9zc9xVE6IcxUEKe656IclTQLwtx+euwYpB0SDbUCr
+	ZEpQ==
+X-Gm-Message-State: APjAAAWKA74Oeixmf+KqtWDTCqEJIK0I/i1RJDIbRJTDlVA8vl8vJAjp
+	AuPU8+DzvyWQMJJhydJtkVl2DBe6vuI=
+X-Google-Smtp-Source: APXvYqxLZvTbdE45Gc9yPQcClL5Y+FWDBThpLfLQYnO+5vr75yT0vf5s08BqgRErvORvgHjBx3NUwA==
+X-Received: by 2002:a17:90a:858c:: with SMTP id
+	m12mr6497191pjn.127.1581729323876; 
+	Fri, 14 Feb 2020 17:15:23 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::709])
+	by smtp.gmail.com with ESMTPSA id
+	m15sm8664397pgn.40.2020.02.14.17.15.22
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 16:54:08 -0800 (PST)
-From: Scott Branden <scott.branden@broadcom.com>
+	Fri, 14 Feb 2020 17:15:23 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 16:54:02 -0800
-Message-Id: <20200215005402.18661-1-scott.branden@broadcom.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-multimedia][PATCH v2] x265: add x265 recipe
+Date: Fri, 14 Feb 2020 17:15:27 -0800
+Message-Id: <20200215011527.217227-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.0
+MIME-Version: 1.0
+Subject: [PATCH] libmimetic: Fix ordrered comparision between pointer and zero
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,45 +58,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2020 00:54:09 -0000
+X-List-Received-Date: Sat, 15 Feb 2020 01:15:24 -0000
+Content-Transfer-Encoding: 8bit
 
-Add x265 recipe for latest tag of Release_3.2 branch (3.2.1).
+Found with clang
 
-Signed-off-by: Scott Branden <scott.branden@broadcom.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: asmitha <asmithakarun@gmail.com>
 ---
- .../recipes-multimedia/x265/x265_3.2.1.bb     | 22 +++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
+ ...eck-for-MMAP_FAILED-return-from-mmap.patch | 49 +++++++++++++++++++
+ .../libmimetic/libmimetic_0.9.8.bb            |  1 +
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libmimetic/libmimetic/0001-mimetic-Check-for-MMAP_FAILED-return-from-mmap.patch
 
-diff --git a/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb b/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
+diff --git a/meta-oe/recipes-support/libmimetic/libmimetic/0001-mimetic-Check-for-MMAP_FAILED-return-from-mmap.patch b/meta-oe/recipes-support/libmimetic/libmimetic/0001-mimetic-Check-for-MMAP_FAILED-return-from-mmap.patch
 new file mode 100644
-index 0000000000..21ae596e05
+index 0000000000..c7c8d62aaa
 --- /dev/null
-+++ b/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "H.265/HEVC video encoder"
-+DESCRIPTION = "A free software library and application for encoding video streams into the H.265/HEVC format."
-+HOMEPAGE = "http://www.videolan.org/developers/x265.html"
++++ b/meta-oe/recipes-support/libmimetic/libmimetic/0001-mimetic-Check-for-MMAP_FAILED-return-from-mmap.patch
+@@ -0,0 +1,49 @@
++From f8ab2b1aaa37f6ba9d527a99cb37b6ac2171e122 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 14 Feb 2020 17:03:12 -0800
++Subject: [PATCH] mimetic: Check for MMAP_FAILED return from mmap()
 +
-+LICENSE = "GPLv2"
-+LICENSE_FLAGS = "commercial"
-+LIC_FILES_CHKSUM = "file://../COPYING;md5=c9e0427bc58f129f99728c62d4ad4091"
++Avoids using greater than zero comparision on pointers
 +
-+DEPENDS = "nasm-native gnutls zlib libpcre"
++Fixes
++mimetic/os/mmfile.cxx:60:14: error: ordered comparison between pointer and zero ('char *' and 'int')
 +
-+SRC_URI = "http://ftp.videolan.org/pub/videolan/x265/x265_${PV}.tar.gz"
++if(m_beg > 0)
++~~~~ ^ ~
 +
-+S = "${WORKDIR}/x265_${PV}/source"
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ mimetic/os/mmfile.cxx | 16 +++++++---------
++ 1 file changed, 7 insertions(+), 9 deletions(-)
 +
-+SRC_URI[md5sum] = "94808045a34d88a857e5eaf3f68f4bca"
-+SRC_URI[sha256sum] = "fb9badcf92364fd3567f8b5aa0e5e952aeea7a39a2b864387cec31e3b58cbbcc"
++diff --git a/mimetic/os/mmfile.cxx b/mimetic/os/mmfile.cxx
++index dfc95b7..ed4ff55 100644
++--- a/mimetic/os/mmfile.cxx
+++++ b/mimetic/os/mmfile.cxx
++@@ -57,15 +57,13 @@ bool MMFile::open(int mode)
++ bool MMFile::map()
++ {
++     m_beg = (char*) mmap(0, m_st.st_size, PROT_READ, MAP_SHARED,m_fd,0);
++-    if(m_beg > 0)
++-    {
++-        m_end = m_beg + m_st.st_size;
++-        #if HAVE_MADVISE
++-        madvise(m_beg, m_st.st_size, MADV_SEQUENTIAL);
++-        #endif
++-        return true;
++-    }
++-    return false;
+++    if(m_beg == MAP_FAILED)
+++        return false;
+++    m_end = m_beg + m_st.st_size;
+++    #if HAVE_MADVISE
+++    madvise(m_beg, m_st.st_size, MADV_SEQUENTIAL);
+++    #endif
+++    return true;
++ }
++ 
++ MMFile::~MMFile()
++-- 
++2.25.0
 +
-+inherit lib_package pkgconfig cmake
-+
-+AS[unexport] = "1"
-+
-+COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
+diff --git a/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
+index fd65db2d39..d0fe498adc 100644
+--- a/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
++++ b/meta-oe/recipes-support/libmimetic/libmimetic_0.9.8.bb
+@@ -12,6 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b49da7df0ca479ef01ff7f2d799eabee"
+ SRCREV = "50486af99b4f9b35522d7b3de40b6ce107505279"
+ SRC_URI += "git://github.com/LadislavSopko/mimetic/ \
+             file://0001-libmimetic-Removing-test-directory-from-the-Makefile.patch \
++            file://0001-mimetic-Check-for-MMAP_FAILED-return-from-mmap.patch \
+            "
+ 
+ S = "${WORKDIR}/git"
 -- 
-2.17.1
+2.25.0
 
 
