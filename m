@@ -1,46 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
-	[209.85.222.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3659A611C6
+Return-Path: <jonathan.richardson@broadcom.com>
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+	[209.85.214.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 06FD26118C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 01:17:11 +0000 (UTC)
-Received: by mail-qk1-f196.google.com with SMTP id a141so1180139qkg.6
+	Sat, 15 Feb 2020 01:18:17 +0000 (UTC)
+Received: by mail-pl1-f172.google.com with SMTP id a6so4361456plm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 17:17:12 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=0pOu5vW9QB4WQZMmP3vNkhP8oT2FS358mIvJ6419MZQ=;
-	b=ViH1w0jEjhzj0u4/KbfTQT7Bk/9Q9QNtRiHZbRaCJqvRGSNubXpSDisQrChnT6qgsO
-	MPvCtdKpgomlAAjLg+6ZlAymY1HmbmrY/th56jMvI1mUhqsbWxTuNQBuWrsUKLnj9UNZ
-	bKEBbDuaLXxoWvm1/hfPnYvZefrSIwCHuUSypHNluvKmBcV+jkyrWD1IPfItmZQXjAkJ
-	LCHR3gptIals0Sk/gxw0pQQ6b3SGqZeEnFjKRp5Nm01DWBprmU/qUecR1MdwrW86spdZ
-	mitdz3D9h+SsZCbHEfvugCc13/KicnHVJNL4zR0AuzaOCL5RV4qDRUODxtLY6kS05X8r
-	rSaA==
+	Fri, 14 Feb 2020 17:18:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=ApHDEUEZFEGHuppdKFoToTfn+yefE/BboMz+NDKaxGk=;
+	b=dg1rmhJkF4r5o4DZGaUj6rWfgq+HsB4ds0XYZ4ey74mtbGe1Dax0nB41rVExDC2AzP
+	xPv53YewdMiRclf14UzxVKR4ADzJNpOgb6FJ4RR9YyAHOAQsZC55/RkoaIyCIf8r4TMV
+	ZlVzQgL9G0DefKVHccknwlanrxKkaAModGKxo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=0pOu5vW9QB4WQZMmP3vNkhP8oT2FS358mIvJ6419MZQ=;
-	b=YtcxBa1NYx/4pMosebBrgcmKLOMYUbQhuo0iFB+JoqZ3bofy4ldsPcaY6DGlv3XXCY
-	xGRyHjfBR8/CrcxEQWSf3mShmDIM7hzl3PYMLQGDl15XK+WWs+Eu0TNaAtBlfLsek8UA
-	RbaAzSCzeZcf+mFp216jiBJQ473LYmuaVyyX8ZdDa+h5YY7bmbz2spCLfQEiXz//UDxf
-	N0qaUuDPrVFWfh5p8ps77aBdocm3h9hGlQQiuW2sCLezf6+jPpNHhxtrB9XgGbQxWXK/
-	4vVq4sDNpqtUcKOHdq0ZEGGUnPkeekeiDWnIvwei6E9QngL4eDQZ08SA6IDZVe9fEHFJ
-	trHQ==
-X-Gm-Message-State: APjAAAUeH6/9rb7NXtxSHIgZTfqX9vXA/21MZGM4XhNLsIB/Cnzan7Zt
-	EHUIbthsC7S6r2njJhw1rMIqXMdoQZxD3hQr76HAdjmc
-X-Google-Smtp-Source: APXvYqzX9N91ckp22+3G3opXGU6xiY7MFNaiFBF5U9mBFLcbiukmFpiIAkXUipu0aqBSJI6668PjNJCTc61M4zJ8qtE=
-X-Received: by 2002:a37:de05:: with SMTP id h5mr5332931qkj.474.1581729431825; 
-	Fri, 14 Feb 2020 17:17:11 -0800 (PST)
-MIME-Version: 1.0
-References: <20200215005020.31970-1-jpuhlman@mvista.com>
-In-Reply-To: <20200215005020.31970-1-jpuhlman@mvista.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 14 Feb 2020 17:16:44 -0800
-Message-ID: <CAMKF1sog6ogAhHactnGNz-QePRNmnpCBfusS2rW7FZYn3J2zXQ@mail.gmail.com>
-To: Jeremy Puhlman <jpuhlman@mvista.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-pytest: Fix typo in SUMMARY
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ApHDEUEZFEGHuppdKFoToTfn+yefE/BboMz+NDKaxGk=;
+	b=JkFn3hP+z6ssB945OFWIo4mcBvfZrr2OSL5df5fOfZGKACgNDLRCL6kQ8P1bYKjGte
+	w9WgnAQaiIpuH+dm8eMdCZQKRVeD2BMTc/uEXTpw64If8kLAd19VbsK+XrcsGCFbzjP3
+	7KU4RmSgkRfbh29O5L2DCPUeucnRINym6hqNRPmgufL54HftT6wNhKpj9GSpuxTrTHDB
+	2orYL0gSi0Cc5VxBUDZAYaMXMtX+o/bcBt3L+uv55ycxGysBNqddqvyPcQyZyBrEltI7
+	tAgFMH3bzkiT6RAJ46u1rGGfnr0kZpgezrl4xHJTlHRQJX8G8b9fCb8qcYJSM4J5XJry
+	RG0g==
+X-Gm-Message-State: APjAAAVuewfuEikF+HBA/O195c9g4CVGzqBAAUvUUAKzJyMMymGlWSAK
+	Sl2LFYnm3vX8zTfs9+K157UzMDTg1KKUxI2JGOnpOmIRdTd3Ttf2FK9y7b335q720U5S7tr5Jhd
+	1Xd+DLh2f8C7iHT5c7hZwcfTL+RKkC8okBifGDf63lDmdfLGgeVBvpQpRI8PVOMvm5Del5iD12Z
+	lzi/E/awaZzE87kjPSu/IUrGsNNmmP6Kg=
+X-Google-Smtp-Source: APXvYqxBuY/V11j/VOPCLhXeE9U+bYkulHvCR6L128xraPsp6Z/b+vqBaeCPAqu0oHgAI7tfpcVYuw==
+X-Received: by 2002:a17:90a:ead8:: with SMTP id
+	ev24mr6739047pjb.91.1581729498755; 
+	Fri, 14 Feb 2020 17:18:18 -0800 (PST)
+Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
+	by smtp.gmail.com with ESMTPSA id
+	x28sm8301638pgc.83.2020.02.14.17.18.17
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 14 Feb 2020 17:18:18 -0800 (PST)
+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 14 Feb 2020 17:18:09 -0800
+Message-Id: <20200215011809.112941-1-jonathan.richardson@broadcom.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe] [PATCH] python3-et-xmlfile: add initial recipe version 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,34 +54,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2020 01:17:11 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 15 Feb 2020 01:18:18 -0000
 
-Can you rebase on top of master-next and resend, please
+---
+ .../python/python3-et-xmlfile_1.0.1.bb        | 20 +++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-et-xmlfile_1.0.1.bb
 
-On Fri, Feb 14, 2020 at 4:50 PM Jeremy Puhlman <jpuhlman@mvista.com> wrote:
->
-> Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
-> ---
->  meta-python/recipes-devtools/python/python-pytest.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
-> index 752d67e36..00f2d6021 100644
-> --- a/meta-python/recipes-devtools/python/python-pytest.inc
-> +++ b/meta-python/recipes-devtools/python/python-pytest.inc
-> @@ -1,4 +1,4 @@
-> -SUMMARY = "Simple powerful teting with python"
-> +SUMMARY = "Simple powerful testing with python"
->  HOMEPAGE = "http://pytest.org"
->  LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=640061b8cee64b308a4d2f9f556c12f2"
-> --
-> 2.13.3
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-python/recipes-devtools/python/python3-et-xmlfile_1.0.1.bb b/meta-python/recipes-devtools/python/python3-et-xmlfile_1.0.1.bb
+new file mode 100644
+index 000000000..cfff150cc
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-et-xmlfile_1.0.1.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "et_xmlfile is a low memory library for creating large XML files"
++DESCRIPTION = "It is based upon the xmlfile module from lxml with the aim of allowing code \
++to be developed that will work with both libraries. It was developed initially for \
++the openpyxl project but is now a standalone module."
++
++HOMEPAGE = "https://bitbucket.org/openpyxl/et_xmlfile/src/default/"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b3d89cae66f26c3a0799be8a96f3178b"
++
++SRC_URI[md5sum] = "f47940fd9d556375420b2e276476cfaf"
++SRC_URI[sha256sum] = "614d9722d572f6246302c4491846d2c393c199cfa4edc9af593437691683335b"
++
++RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell"
++
++inherit setuptools3
++PYPI_PACKAGE ?= "et_xmlfile"
++PYPI_SRC_URI ?= "https://files.pythonhosted.org/packages/source/e/et_xmlfile/et_xmlfile-1.0.1.tar.gz"
++SECTION = "devel/python"
++SRC_URI += "${PYPI_SRC_URI}"
++S = "${WORKDIR}/${PYPI_PACKAGE}-${PV}"
+-- 
+2.17.1
+
 
