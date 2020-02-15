@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com
-	[209.85.167.174])
-	by mail.openembedded.org (Postfix) with ESMTP id B676161338
+Received: from mail-oi1-f171.google.com (mail-oi1-f171.google.com
+	[209.85.167.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 70EAB613DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 17:29:31 +0000 (UTC)
-Received: by mail-oi1-f174.google.com with SMTP id p125so12747791oif.10
+	Sat, 15 Feb 2020 17:36:06 +0000 (UTC)
+Received: by mail-oi1-f171.google.com with SMTP id q81so12818168oig.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 09:29:33 -0800 (PST)
+	Sat, 15 Feb 2020 09:36:07 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WYyUIWKceu7OOCoMMvA1QKek54furWf2NxbmNfyYNDM=;
-	b=A10gAAIZdXK61Z0nPuwx2xdaLP6Czlpjnkb0BTGVXiGy8lsi77s3akTQZY0VdyAhTO
-	ETezNwZv5NeV42pKr0WKLX5aEvzyqOgMLGIxgSufwcuAO6xiOZjXkPzytzmT4JmLxplo
-	HUJ8sEiBSKhjjNje23junBoWnh2OiF6TKRE6Tc0xfPzb7gnodAmwSs+Piw+2ySpvgT+E
-	ZHZLwP2Zvp/hvmD70Zn3oeTdesdEvJrb/mvtVY4fzpj0VaEkwQ3za7UHoSD9G2nkaVwA
-	1Zf5MdiEqqDwIGdyi4mhgDtXhMtSfr10zN2kah1ajSPpUpl7q2/uVUNfg4TZweCseI5G
-	op3g==
-X-Gm-Message-State: APjAAAX4z9HykOietouW0D/I2F16i6goI1Qs9IOXQG3mNchZERfxFFJ0
-	7auYAeo61oinjfJqWT46jrv2YQtTRRY=
-X-Google-Smtp-Source: APXvYqyoa4hRnrJti3kcIoBm/Y0+PzdRut5kjZPoLymy3G5HnNUqXKN1TwsoP7169HODPqBM2U5MmQ==
-X-Received: by 2002:a54:450d:: with SMTP id l13mr5589058oil.117.1581787772353; 
-	Sat, 15 Feb 2020 09:29:32 -0800 (PST)
+	bh=Pi5MvF+Ju7o4VfSPe4qwzyHTnEWpy9JYSysnXUETUmY=;
+	b=YODkPVU8EPplWZwrlM2LO3CK3/AMlZpYTZOEFVVR6b3GxBGkdzRa4yDP8/tDDhoEon
+	zPALLx3RU7IAeawgDr2Af1vpjk0FPbX61PpWBAEncqrOseO7fcT8Pq7EAyJebGtNQuJr
+	FNof6g1KLtwrcG8rDivGkteJ0nhIDHU+wyhN4grFd+VCimeBM5Tv8X0xJjWkYH6Qw8vi
+	5Fu7Lbgrq81wcsHW2c0d+QslYHRpseriZCS25x/BeNul4wXiN8TxFSID2HS7ZUW4Ov5f
+	sJPYgJxB2K2MJmyAdUz2RB0f7VPGoZO7/MS5M/0pSqOgSHRch5bchsPNUK/TZwKs2oWy
+	iF2w==
+X-Gm-Message-State: APjAAAWB6K+zk9gCqbFQNxp19ud4h7WdSPYUD81igKVEl57LY4eE4Fsn
+	/365ZGmWFF7Uyfi8d8+gSblODo6k0/A=
+X-Google-Smtp-Source: APXvYqy9GApIlV1875Nxmva4I0kg3+IszSSKWT5wDYh/R1pPmE6A+MqY/ZDSMV9S7nHzTjeOXJk8IQ==
+X-Received: by 2002:aca:ec15:: with SMTP id k21mr5545887oih.35.1581788167163; 
+	Sat, 15 Feb 2020 09:36:07 -0800 (PST)
 Received: from sparta.lan1 (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
 	by smtp.gmail.com with ESMTPSA id
-	p24sm3269718otq.64.2020.02.15.09.29.31
+	x15sm3293117otq.30.2020.02.15.09.36.06
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 15 Feb 2020 09:29:31 -0800 (PST)
+	Sat, 15 Feb 2020 09:36:06 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Feb 2020 12:29:24 -0500
-Message-Id: <20200215172924.27218-1-derek@asterius.io>
+Date: Sat, 15 Feb 2020 12:35:54 -0500
+Message-Id: <20200215173554.32726-1-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-python][PATCH] python3-coloredlogs: consolidate inc and bb files into a single bb file
+Subject: [meta-python][PATCH] python3-configargparse: consolidate inc and bb files into a single bb file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,76 +45,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2020 17:29:31 -0000
+X-List-Received-Date: Sat, 15 Feb 2020 17:36:06 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/python-coloredlogs.inc             | 24 -----------------
- .../python/python3-coloredlogs_10.0.bb        | 26 +++++++++++++++++--
- 2 files changed, 24 insertions(+), 26 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-coloredlogs.inc
+ .../python/python-configargparse.inc          | 22 ------------------
+ .../python/python3-configargparse_0.15.1.bb   | 23 +++++++++++++++++--
+ 2 files changed, 21 insertions(+), 24 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-configargparse.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-coloredlogs.inc b/meta-python/recipes-devtools/python/python-coloredlogs.inc
+diff --git a/meta-python/recipes-devtools/python/python-configargparse.inc b/meta-python/recipes-devtools/python/python-configargparse.inc
 deleted file mode 100644
-index bdb1d752c5..0000000000
---- a/meta-python/recipes-devtools/python/python-coloredlogs.inc
+index 17d296ff8d..0000000000
+--- a/meta-python/recipes-devtools/python/python-configargparse.inc
 +++ /dev/null
-@@ -1,24 +0,0 @@
--DESCRIPTION = "Colored terminal output for Python's logging module"
--HOMEPAGE = "https://coloredlogs.readthedocs.io"
--SECTION = "devel/python"
+@@ -1,22 +0,0 @@
+-SUMMARY = "A drop-in replacement for argparse that allows options to also be set via config files and/or environment variables."
+-HOMEPAGE = "https://github.com/bw2/ConfigArgParse"
 -LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=690da298a43805797a4fa7bbe180b3c6"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=da746463714cc35999ed9a42339f2943"
 -
--SRC_URI[md5sum] = "0a186966a1955fff8cf9489373e691d9"
--SRC_URI[sha256sum] = "b869a2dda3fa88154b9dd850e27828d8755bfab5a838a1c97fbc850c6e377c36"
+-SRC_URI[md5sum] = "aba15b7973b7a70bea86fd69289f8fe3"
+-SRC_URI[sha256sum] = "baaf0fd2c1c108d007f402dab5481ac5f12d77d034825bf5a27f8224757bd0ac"
+-
+-PYPI_PACKAGE = "ConfigArgParse"
 -
 -inherit pypi
 -
--do_compile_prepend() {
--    sed -ie "s/find_pth_directory(),/'',/g" ${S}/setup.py
--}
--
--do_install_append() {
--    rm -rf ${D}${datadir}
--}
+-PACKAGECONFIG ?= "yaml"
+-PACKAGECONFIG[yaml] = ",,,${PYTHON_PN}-pyyaml"
 -
 -RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-humanfriendly \
+-    ${PYTHON_PN}-core \
+-    ${PYTHON_PN}-shell \
 -"
 -
--BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb b/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
-index 3872399665..88fac87c7e 100644
---- a/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-coloredlogs_10.0.bb
-@@ -1,2 +1,24 @@
+-BBCLASSEXTEND = "native nativesdk"
+-
+diff --git a/meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb b/meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb
+index 698eccf666..0797898a9c 100644
+--- a/meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb
++++ b/meta-python/recipes-devtools/python/python3-configargparse_0.15.1.bb
+@@ -1,3 +1,22 @@
 -inherit setuptools3
--require python-coloredlogs.inc
-+DESCRIPTION = "Colored terminal output for Python's logging module"
-+HOMEPAGE = "https://coloredlogs.readthedocs.io"
-+SECTION = "devel/python"
+-require python-configargparse.inc
++SUMMARY = "A drop-in replacement for argparse that allows options to also be set via config files and/or environment variables."
++HOMEPAGE = "https://github.com/bw2/ConfigArgParse"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=690da298a43805797a4fa7bbe180b3c6"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=da746463714cc35999ed9a42339f2943"
 +
-+SRC_URI[md5sum] = "0a186966a1955fff8cf9489373e691d9"
-+SRC_URI[sha256sum] = "b869a2dda3fa88154b9dd850e27828d8755bfab5a838a1c97fbc850c6e377c36"
++SRC_URI[md5sum] = "aba15b7973b7a70bea86fd69289f8fe3"
++SRC_URI[sha256sum] = "baaf0fd2c1c108d007f402dab5481ac5f12d77d034825bf5a27f8224757bd0ac"
++
++PYPI_PACKAGE = "ConfigArgParse"
 +
 +inherit pypi setuptools3
 +
-+do_compile_prepend() {
-+    sed -ie "s/find_pth_directory(),/'',/g" ${S}/setup.py
-+}
-+
-+do_install_append() {
-+    rm -rf ${D}${datadir}
-+}
++PACKAGECONFIG ?= "yaml"
++PACKAGECONFIG[yaml] = ",,,${PYTHON_PN}-pyyaml"
 +
 +RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-humanfriendly \
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-shell \
 +"
 +
-+BBCLASSEXTEND = "native"
++BBCLASSEXTEND = "native nativesdk"
+ 
 -- 
 2.17.1
 
