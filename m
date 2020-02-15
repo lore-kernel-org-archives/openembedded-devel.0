@@ -1,46 +1,46 @@
 Return-Path: <jonathan.richardson@broadcom.com>
-Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com
-	[209.85.216.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 642EE6118C
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 3247C6118C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 01:18:45 +0000 (UTC)
-Received: by mail-pj1-f65.google.com with SMTP id gv17so4619046pjb.1
+	Sat, 15 Feb 2020 01:19:15 +0000 (UTC)
+Received: by mail-pg1-f173.google.com with SMTP id u12so5435765pgb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Feb 2020 17:18:46 -0800 (PST)
+	Fri, 14 Feb 2020 17:19:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
 	h=from:to:cc:subject:date:message-id;
-	bh=e4vl3vTpBMZI/KWeUqTPZZaOtcLPo6YzTfRdOW90am8=;
-	b=AHSxfFfHQC8zEOqq2SeP928wX4rIp0ztgRH5bS2PQ4jYPmZIwnYROQfiG1vat59IXO
-	rlHQ6RWaYY/L+s6gcOHYDBYowqYBl3LIe+0yWXrSp/u8RY6keIuh2pbQrGJu87La0IHY
-	vu1Scx+bdrR7VV8fgI95f7nJsSj5f1l//FglI=
+	bh=XAHATwyFvleen0sa50RaouzWdZ35UNVASYxMiirK/gE=;
+	b=HAqEXWPkbLWj51CtjjYjsgCWOAQYnYUXTaD0m9JQS/8GZVHiND72ApL45t71TwcKaf
+	S5zLX/JnRhxB/TRn5jePV1sgTjA66sQmA27gs1MpuNBc/hmgwdJd/GxZV7ye5xwh2NoU
+	dU9437Tb8OIolpPN25zdthl8GJUb10tiz4uxs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=e4vl3vTpBMZI/KWeUqTPZZaOtcLPo6YzTfRdOW90am8=;
-	b=lbxhPVQekDCz9upRYD3O9mCmUHDTRGKsuud4Ym36FQNYhdkujVDPbsU+4fCnKPfzna
-	mI4SZNxvONnsAhZOIOIgzX/GSpMvXZxA1lx9BM/ZwQMZOlE7gBVlC4LEhl8ba7KEa7Ov
-	Lb9OyhRLYhrr4UKfbY7bX79pqusk0FVkzcQbIvQEZRVUjofcvZNPDACqIOLq2jybFh+E
-	14tdBKUHHTtMKUl0nNQrKJZzRe3xn10OTDjcgUZQWf9O2LzHJkA7Gsdi00ksoZEjITZt
-	SXDbAmjhVYb2BdMB/VJ45vYA8PIrqymn0W5u3YwC3tnIHdBN4CDs4ii5q+9SR6/0Q/2X
-	dMVQ==
-X-Gm-Message-State: APjAAAWQDBZDE/UaI/p1F2gk/KawbULj9lJv2/UIjTu7LomoE+RxEHP2
-	wdi33cuKr4OjIdTU1X9hL/pvNDpEF7HetJ94qG7sTlN1tCkgfqp5qEBiKQYiCzeClpR1yCTStFb
-	PHXk4oWxSCWqw9GBkDmXf+pCFMSwbWn+20jwhE5WV39b002e3Fat1Ih3gagdZpKDkFLnvJv19PA
-	zuNuEU4Y6Oi6buEnBCkfO/VvLR6TU/GPc=
-X-Google-Smtp-Source: APXvYqwW5VRCYZ6vjIqnqY0YHDY34+oKxIzkCWurarqSV9Tq1ZvxsqRHKJl8YIPQHyvY3ciYASK2YQ==
-X-Received: by 2002:a17:90a:c20d:: with SMTP id
-	e13mr6862643pjt.95.1581729525185; 
-	Fri, 14 Feb 2020 17:18:45 -0800 (PST)
+	bh=XAHATwyFvleen0sa50RaouzWdZ35UNVASYxMiirK/gE=;
+	b=q7zL7A/nexRI7X9aFuiLozbsPaWtjGpslTRWog9XsVvMFbChMQL3KDfg5TxjDDiabI
+	O3PUxij/sKNlMeOq8bcTsjLzxQxYxiH+i+8cAmOsdut7MygFYaam9hLfTB3WdroO4Mqy
+	VrilRHPWwnbrAYRNDw0ZVh2JOT8AGfVfww43lVnXXPnuIGeAgBterYmBgJs5ahRu9bpj
+	Fl6DGfTo1LwG+k3FsoTpFqxKk3wS5N9Jwvm74Cpd5bS9wGvcVZYrEWflJW4WlnyMX6k+
+	y6cwF9xuPrBo+WtLXfmvz7Qe79DOkvq4z0we+EnwT5AmMGyLmlXKCa4sahdR206EwQxl
+	Q1DA==
+X-Gm-Message-State: APjAAAVl6idD/iLaDH61F6HpcR0EUuFoCTb3q1N0yuPIdjKToP190Eu6
+	WMXSouxotlV/zQmjWJ7qp6RRDoCyjfwoEH0qwUjyJke1MdA0uleptqgktadocG9vRkalSrq/6td
+	oHOxj36/BcLvtZsarHOahp5CfsQGnhfWrexY6G74Vwu+05WowX17xP7zRCquv4BTfXIgsg96fdm
+	0OkRwBf6b6qUm1cq+d/kugualTuwqRKj8=
+X-Google-Smtp-Source: APXvYqwu73NV3I+S6byGQUklQmJ3wNWpmbj4USjGkmiL9HGoeMogwaDJdO8gRbfsoTrbRs0i/FcVXA==
+X-Received: by 2002:aa7:9f5e:: with SMTP id h30mr6212561pfr.137.1581729555978; 
+	Fri, 14 Feb 2020 17:19:15 -0800 (PST)
 Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
-	by smtp.gmail.com with ESMTPSA id h3sm8535902pfr.15.2020.02.14.17.18.44
+	by smtp.gmail.com with ESMTPSA id
+	x4sm8087797pff.143.2020.02.14.17.19.15
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 14 Feb 2020 17:18:44 -0800 (PST)
+	Fri, 14 Feb 2020 17:19:15 -0800 (PST)
 From: Jonathan Richardson <jonathan.richardson@broadcom.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Feb 2020 17:18:35 -0800
-Message-Id: <20200215011835.112992-1-jonathan.richardson@broadcom.com>
+Date: Fri, 14 Feb 2020 17:19:07 -0800
+Message-Id: <20200215011907.113092-1-jonathan.richardson@broadcom.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe] [PATCH] python3-jdcal: add initial recipe version 1.4.1
+Subject: [meta-oe] [PATCH] python3-openpyxl: Add initial version 2.6.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,34 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2020 01:18:45 -0000
+X-List-Received-Date: Sat, 15 Feb 2020 01:19:15 -0000
 
+openpyxl depends on et-xmlfile and jdcal.
 ---
- .../python/python3-jdcal_1.4.1.bb                 | 15 +++++++++++++++
+ .../python/python3-openpyxl_2.6.3.bb              | 15 +++++++++++++++
  1 file changed, 15 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb b/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb b/meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb
 new file mode 100644
-index 000000000..c8b5c953b
+index 000000000..87cb46ea9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-jdcal_1.4.1.bb
++++ b/meta-python/recipes-devtools/python/python3-openpyxl_2.6.3.bb
 @@ -0,0 +1,15 @@
-+SUMMARY = "This module contains functions for converting between Julian dates and calendar dates"
-+DESCRIPTION = "A function for converting Gregorian calendar dates to Julian dates, \
-+and another function for converting Julian calendar dates to Julian dates are defined. \
-+Two functions for the reverse calculations are also defined."
++SUMMARY = "openpyxl is a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files"
++DESCRIPTION = "It was born from lack of existing library to read/write natively \
++from Python the Office Open XML format. All kudos to the PHPExcel team as openpyxl \
++was initially based on PHPExcel."
 +
-+HOMEPAGE = "https://github.com/phn/jdcal"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=bd236e1f590973467a427bb354be0f46"
++HOMEPAGE = "http://www.python-excel.org/"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3baf26d8abf08632beaf913ea973cb8a"
 +
 +inherit pypi setuptools3
 +
-+SRC_URI[md5sum] = "e05bdb60fa80f25bc60e73e0c6b7c5dc"
-+SRC_URI[sha256sum] = "472872e096eb8df219c23f2689fc336668bdb43d194094b5cc1707e1640acfc8"
++SRC_URI[md5sum] = "b067750e51f17a1a9cc6bacfdd668218"
++SRC_URI[sha256sum] = "72d1ed243972cad0b3c236230083cac00d9c72804e64a2ae93d7901aec1a8f1c"
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell"
++RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-io ${PYTHON_PN}-pprint ${PYTHON_PN}-shell ${PYTHON_PN}-jdcal ${PYTHON_PN}-et-xmlfile"
 -- 
 2.17.1
 
