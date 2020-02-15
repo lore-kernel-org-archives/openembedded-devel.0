@@ -1,48 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D5496140F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 18:41:26 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id r21so15402252edq.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Feb 2020 10:41:28 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 6190F613C9;
+	Sat, 15 Feb 2020 20:49:50 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id t13so9469745qto.3;
+	Sat, 15 Feb 2020 12:49:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=EOM0LTgbGMWHIemGWtrDvKtcmnQYx/YgHPr7dJs2SfU=;
-	b=c7hOfm0Vqs2jvyMQp4mE1uTPZqYZWalf8JQc6OEUVNB2X6ml2VHXqSbEG4dqhNxmQ4
-	VAWqFIXlDnW8VpPLoJ05Z18fxHxKIR6sWCZvNd0srpNX7TVM8VgC8695nOCEOPDktaYs
-	o+S/nKDvV82HHJS5EUIJBFb6UzfY2NjC/x1w/PMw06piZKiK2H4ylC+AN0MtKF3gQCk+
-	aCcsTgUEwn0dnAliGgU3muyjC0RQMzLL8WQjuNgQHJxBbw0lQYn6w3/s5wAxTvKi1rhJ
-	FOsiq1kRe7wdOAY/Y+zYyFm8peFw1zBpLwMs7Cp5/yrcpdRc51A+5iea6XbdUP2coof5
-	fMUg==
+	:cc:content-transfer-encoding;
+	bh=CTUnU0DBIt23sq38Z/xjRE/QpHiALfpPDztW9GKzfHg=;
+	b=t95ey1wXXbngW2H21pXim4I9Zu0K61BfPOp8ROtNxoTt8KmEIXk9UnkrK5eg7yBMqg
+	OkSNUPqa6YxPN9/Ub1414SK0jnU+F42HbadkUUJy2nFBtCsyLdfqpROsmZKfjDkFwNpB
+	Feg27QU1eIcs9pwZo2jvPKyEfqR6tZiUWNCq2iXO2Cg59ELGWAGKyoAzxQmHVIa4O1IK
+	N1eH8eSdQGC27FsekVbgrwwpUJ9DUFtDe77a8pG+ZntPr060IGu3TFBvcHwDcxl2af3+
+	FEtGFxmfrjKrdalZCJ3oPtE4Q0CfsqdSWFZx61ZOz9GLiJItNplQYMPy81oDuK2pvHGK
+	6rBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=EOM0LTgbGMWHIemGWtrDvKtcmnQYx/YgHPr7dJs2SfU=;
-	b=T0jq5iaZ8H+ZUQwX2Z4dwXBLLm9zSULr2aPL1mXX0nKUMsUgbcvioMHx3waqG3r5qu
-	YK6v8xyWzvNMCEu+r7T6MiJ8Vft6qizC1VjZA2AXrJvxvDJmzqs6Ln3/uF/zL4/EVEMA
-	cQFSx0sjzguP7LAD2+O90pol/LQHW9ZcGnWOds+I3oNjfzmEoOMsR9F3DFKLXTM5qVsK
-	Q9F7oiXiO7lmUDuynbaAx8O7CLIj4vFyUPQz80G9Myg3CrWDTrakKlQV0TM5Kh6q0d/x
-	DZJu2PpRvAJ6E7doTyTGYCoUkAsAHe/MTuj77sZZqmnoOYXjQi1ud2Yz3UIPQ10RhEhx
-	/gvQ==
-X-Gm-Message-State: APjAAAUW7GmSoGyn/ElLVxfRi5QHd4q0IKywxacUnu0aoCVsGBZlMqLs
-	8Pzy1dBAzrPLU6IdPrIQhhc6nRb4jvOX5NzEkQs=
-X-Google-Smtp-Source: APXvYqxsTEkpw9z335iN1QYmfhnBGT/DywMiQuk4mBCdQE2feudJ5uW42QXSobx9UegHv23WItRtJvd3GPolbh8EDVA=
-X-Received: by 2002:a17:906:d0d1:: with SMTP id
-	bq17mr8609560ejb.55.1581792087302; 
-	Sat, 15 Feb 2020 10:41:27 -0800 (PST)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=CTUnU0DBIt23sq38Z/xjRE/QpHiALfpPDztW9GKzfHg=;
+	b=iLPlwCjjIyiSNT3oUtceGJWcOexX4uC5ufonIKebkig1Qq2UV049g2k/XLnAELpZPp
+	RbONVlCN2lMy8CoYSGDn1Z+UTUFaIqqNP3erQJplxARKDDjEDaqef4GZkmwFYPf+1Dpg
+	t0qVYq5p6IBSP6I+p1ufb0lYLvBblHWeiklr+hMjWNt3VwuQ++wZ6QvEmKEEZP8f9j8t
+	LvemTVmqiOVIurBcV/JfcaYNh26TU5AmaAYTQNArfNCNwZ0xnYnoqyN/v7FNruHDBEjQ
+	JkcwR3aiYpX+yIN2cdX0EUxg3v2N7JOxu5lOswmMpJHFzHYptkF24/gJNEV9X+YcxpBJ
+	UhGA==
+X-Gm-Message-State: APjAAAXt7S8Oj1AAROtoKez4ik2QA6dWZO7i6vC8Sq0ITakq8dR0VhWY
+	yi06fFLWB5m+W/Qtc+xWeUD9xrI/5zXinzNdFwk=
+X-Google-Smtp-Source: APXvYqxR8Ok0dYkNOxrTANK/7Q2S+nc18ZsKXOrsIUqDEJaSuyhRYGlqrCLkoF0aG/3GZ2jSjVjl0o9+OOuQZUGOpQQ=
+X-Received: by 2002:ac8:405a:: with SMTP id j26mr7692961qtl.88.1581799790799; 
+	Sat, 15 Feb 2020 12:49:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20200202021738.7440-1-alistair@alistair23.me>
-In-Reply-To: <20200202021738.7440-1-alistair@alistair23.me>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 15 Feb 2020 19:41:16 +0100
-Message-ID: <CA+chaQeXzg=6gEAGwD4-MORiPjUz6bF2tPOgGrJOxfwy2sFNoA@mail.gmail.com>
-To: Alistair Francis <alistair@alistair23.me>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v2] gpsd: Only require and build for Python3
+References: <158176248670.31260.7654152103178704127@git.openembedded.org>
+	<20200215102807.938B8232818@git.openembedded.org>
+	<65fcf6fa-6f55-b082-52fb-6d8a8ce2ef3c@koncepto.io>
+	<CA+chaQduoaTu7+dX13w2PbC_uf_CuSChyfRbF+DnhE23dkoTdA@mail.gmail.com>
+	<432947a2-e180-8799-c6dd-22aa89ba4e89@koncepto.io>
+In-Reply-To: <432947a2-e180-8799-c6dd-22aa89ba4e89@koncepto.io>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 15 Feb 2020 12:49:24 -0800
+Message-ID: <CAMKF1sr6kwy4Le85vFsdo8odH-ArO=Y7Fw+fnFeC=ZH0hND1oQ@mail.gmail.com>
+To: Pierre-Jean Texier <pjtexier@koncepto.io>
+Cc: openembedded-commits@lists.openembedded.org,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe-commits] [openembedded-core] 11/18: busybox: Backport patches to support removal of __NR_clock_gettime
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,91 +57,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2020 18:41:27 -0000
+X-List-Received-Date: Sat, 15 Feb 2020 20:49:50 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-FYI: this doesn't prevent the scons to detect python(2) in HOSTTOOLS if
-some layers adds it there, like meta-updater does, reported here:
-https://github.com/advancedtelematic/meta-updater/issues/684
+On Sat, Feb 15, 2020 at 8:46 AM Pierre-Jean Texier <pjtexier@koncepto.io> w=
+rote:
+>
+> Martin,
+>
+> Le 15/02/2020 =C3=A0 17:38, Martin Jansa a =C3=A9crit :
+> > Isn't it caused by some other layer prepending some busybox patch causi=
+ng
+> > this? Can you check with bitbake -e?
+> >
+> > I'm not seeing this one in my builds (and I was just refreshing some of=
+ our
+> > webOS OSE patches to apply cleanly on 1.31.1)
+>
+> You're indeed right :(, after a quick check, it seems the build failure
+> comes from the meta-riscv.
+>
+> Thanks, and sorry for the noise.
+>
 
-It would be nice to have python PACKAGECONFIG to explicitly disable this
-all when not needed.
+some of these patches were in meta-riscv which is fixed now.
 
-On Sun, Feb 2, 2020 at 3:17 AM Alistair Francis <alistair@alistair23.me>
-wrote:
-
-> Signed-off-by: Alistair Francis <alistair@alistair23.me>
-> ---
-> v2:
->  - Actually rename everything
->
->  meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb | 24 ++++++++++----------
->  1 file changed, 12 insertions(+), 12 deletions(-)
->
-> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-> b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-> index dbbc7140f..f74ebda5f 100644
-> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.19.bb
-> @@ -2,7 +2,7 @@ SUMMARY = "A TCP/IP Daemon simplifying the communication
-> with GPS devices"
->  SECTION = "console/network"
->  LICENSE = "BSD-2-Clause"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=01764c35ae34d9521944bb6ab312af53"
-> -DEPENDS = "dbus ncurses python python3 pps-tools"
-> +DEPENDS = "dbus ncurses python3 pps-tools"
->  PROVIDES = "virtual/gpsd"
->
->  SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-> @@ -84,7 +84,7 @@ do_install_append() {
->      install -m 0644 ${S}/systemd/${BPN}.socket
-> ${D}${systemd_unitdir}/system/${BPN}.socket
->  }
->
-> -PACKAGES =+ "libgps libgpsd python-pygps gpsd-udev gpsd-conf gpsd-gpsctl
-> gps-utils"
-> +PACKAGES =+ "libgps libgpsd python3-pygps gpsd-udev gpsd-conf gpsd-gpsctl
-> gps-utils"
->
->  RPROVIDES_${PN}-dbg += "python-pygps-dbg"
->
-> @@ -114,17 +114,17 @@ FILES_gpsd-gpsctl = "${bindir}/gpsctl"
->  SUMMARY_gps-utils = "Utils used for simulating, monitoring,... a GPS"
->  # Python files are required for gps/fake, required for gpsfake.
->  FILES_gps-utils = "${bindir}/* ${libdir}/gps/*.py ${libdir}/gps/*.so"
-> -RDEPENDS_gps-utils = "python-pygps"
-> -
-> -SUMMARY_python-pygps = "Python bindings to gpsd"
-> -FILES_python-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py
-> ${libdir}/*.egg-info"
-> -RDEPENDS_python-pygps = " \
-> -    python-core \
-> -    python-io \
-> -    python-threading \
-> -    python-terminal \
-> +RDEPENDS_gps-utils = "python3-pygps"
-> +
-> +SUMMARY_python3-pygps = "Python bindings to gpsd"
-> +FILES_python3-pygps = "${PYTHON_SITEPACKAGES_DIR}/* ${libdir}/gps/*.py
-> ${libdir}/*.egg-info"
-> +RDEPENDS_python3-pygps = " \
-> +    python3-core \
-> +    python3-io \
-> +    python3-threading \
-> +    python3-terminal \
->      gpsd \
-> -    python-json"
-> +    python3-json"
->
->  RPROVIDES_${PN} += "${PN}-systemd"
->  RREPLACES_${PN} += "${PN}-systemd"
+> Regards,
 > --
-> 2.25.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> Pierre-Jean Texier
+> Embedded Linux Engineer
+> https://koncepto.io
 
