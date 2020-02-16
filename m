@@ -1,50 +1,54 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
-	[209.85.160.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 6190F613C9;
-	Sat, 15 Feb 2020 20:49:50 +0000 (UTC)
-Received: by mail-qt1-f196.google.com with SMTP id t13so9469745qto.3;
-	Sat, 15 Feb 2020 12:49:51 -0800 (PST)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+	[209.85.221.44])
+	by mail.openembedded.org (Postfix) with ESMTP id D9F9761024
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Feb 2020 21:22:52 +0000 (UTC)
+Received: by mail-wr1-f44.google.com with SMTP id m16so17263989wrx.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Feb 2020 13:22:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=CTUnU0DBIt23sq38Z/xjRE/QpHiALfpPDztW9GKzfHg=;
-	b=t95ey1wXXbngW2H21pXim4I9Zu0K61BfPOp8ROtNxoTt8KmEIXk9UnkrK5eg7yBMqg
-	OkSNUPqa6YxPN9/Ub1414SK0jnU+F42HbadkUUJy2nFBtCsyLdfqpROsmZKfjDkFwNpB
-	Feg27QU1eIcs9pwZo2jvPKyEfqR6tZiUWNCq2iXO2Cg59ELGWAGKyoAzxQmHVIa4O1IK
-	N1eH8eSdQGC27FsekVbgrwwpUJ9DUFtDe77a8pG+ZntPr060IGu3TFBvcHwDcxl2af3+
-	FEtGFxmfrjKrdalZCJ3oPtE4Q0CfsqdSWFZx61ZOz9GLiJItNplQYMPy81oDuK2pvHGK
-	6rBw==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4r2yANKX5LzAt94Nvh2n31XldgAmUr9xAAPW1q0LMMo=;
+	b=i1IUrenf+tRbCLM/np7hNbYp+0h6kIyQbFzjdSEraN1jADr9ULlceP9Ys1U/H5bHJQ
+	Ebyx9DIPpw7gna7VAMwEWr04D5QbwTt6uCwLxCQhXdD2Bc/x7woygMBGglHYB372gQsr
+	dRueklacuHTc98OGhmLd9NnRWQR+yyOYt9cNa2mPbcpRtqjOwRUTut4uaGm3UsF4x+k2
+	i3eJwNQ+y1OjfxedFq1UrahZ+GwFgxjR4yEts+QnqAyTdTlhtgKgXlrKdkJcbSoxgpHv
+	xb3+MZeUrYBGCl0Frvso1gUgsNLfXXGcNLfIe5rTvK6Uq/4Xlpy8VVkLnY4jVWmK/Iv8
+	JV9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=CTUnU0DBIt23sq38Z/xjRE/QpHiALfpPDztW9GKzfHg=;
-	b=iLPlwCjjIyiSNT3oUtceGJWcOexX4uC5ufonIKebkig1Qq2UV049g2k/XLnAELpZPp
-	RbONVlCN2lMy8CoYSGDn1Z+UTUFaIqqNP3erQJplxARKDDjEDaqef4GZkmwFYPf+1Dpg
-	t0qVYq5p6IBSP6I+p1ufb0lYLvBblHWeiklr+hMjWNt3VwuQ++wZ6QvEmKEEZP8f9j8t
-	LvemTVmqiOVIurBcV/JfcaYNh26TU5AmaAYTQNArfNCNwZ0xnYnoqyN/v7FNruHDBEjQ
-	JkcwR3aiYpX+yIN2cdX0EUxg3v2N7JOxu5lOswmMpJHFzHYptkF24/gJNEV9X+YcxpBJ
-	UhGA==
-X-Gm-Message-State: APjAAAXt7S8Oj1AAROtoKez4ik2QA6dWZO7i6vC8Sq0ITakq8dR0VhWY
-	yi06fFLWB5m+W/Qtc+xWeUD9xrI/5zXinzNdFwk=
-X-Google-Smtp-Source: APXvYqxR8Ok0dYkNOxrTANK/7Q2S+nc18ZsKXOrsIUqDEJaSuyhRYGlqrCLkoF0aG/3GZ2jSjVjl0o9+OOuQZUGOpQQ=
-X-Received: by 2002:ac8:405a:: with SMTP id j26mr7692961qtl.88.1581799790799; 
-	Sat, 15 Feb 2020 12:49:50 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=4r2yANKX5LzAt94Nvh2n31XldgAmUr9xAAPW1q0LMMo=;
+	b=WtwTIJvAOWdIV2c+4KSmq3pYN7JzRwGEgFzW+ZqpfSYRa+ao4nF72GizOq63KSpXn6
+	CEyzVrhDDZqof7rZkXzV1kHvTR480AusSYekVhrb+vK127Rf3qLGAbYmauRalwWOe2Qu
+	1yUUP1lItC2m5jtZcg5f/XcP91xd95nFeEio+diEXcRk0Txn2/kPvg8dg84y4FIrf4cm
+	MUE9pq6DDfuaZwHAqiBuHzk9y1YwSphuTSZ7uEyBf/Z0bKJwmw1rSitd10OXFLpSxR2w
+	NOD84HSOoQ1+bpOqTqciZV/3KL00P0f8kgsEszeXEopERPfyT9eqCOBalS6J3fb56tT8
+	w65A==
+X-Gm-Message-State: APjAAAXQsiYJ9F4xFKh738R3gcnd3oCTDZ3WwtrahuE1xxEZtTGTgr4+
+	YzU/Pw8JIFo2mxawNRJknBltU9il
+X-Google-Smtp-Source: APXvYqwNrdcu/bVmy22sZw4B8vHFv1Y4nHPdAwr38baobOfKy5e4HHq0pwlqY4nSkvJpd7nMydZoGg==
+X-Received: by 2002:a05:6000:118d:: with SMTP id
+	g13mr16653779wrx.141.1581888173109; 
+	Sun, 16 Feb 2020 13:22:53 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F0689870B30080CC68E0727.dip0.t-ipconnect.de.
+	[2003:f0:7f06:8987:b30:80c:c68e:727])
+	by smtp.gmail.com with ESMTPSA id
+	e22sm18296776wme.45.2020.02.16.13.22.52
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 16 Feb 2020 13:22:52 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 16 Feb 2020 22:22:42 +0100
+Message-Id: <20200216212244.30653-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-References: <158176248670.31260.7654152103178704127@git.openembedded.org>
-	<20200215102807.938B8232818@git.openembedded.org>
-	<65fcf6fa-6f55-b082-52fb-6d8a8ce2ef3c@koncepto.io>
-	<CA+chaQduoaTu7+dX13w2PbC_uf_CuSChyfRbF+DnhE23dkoTdA@mail.gmail.com>
-	<432947a2-e180-8799-c6dd-22aa89ba4e89@koncepto.io>
-In-Reply-To: <432947a2-e180-8799-c6dd-22aa89ba4e89@koncepto.io>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 15 Feb 2020 12:49:24 -0800
-Message-ID: <CAMKF1sr6kwy4Le85vFsdo8odH-ArO=Y7Fw+fnFeC=ZH0hND1oQ@mail.gmail.com>
-To: Pierre-Jean Texier <pjtexier@koncepto.io>
-Cc: openembedded-commits@lists.openembedded.org,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe-commits] [openembedded-core] 11/18: busybox: Backport patches to support removal of __NR_clock_gettime
+Subject: [PATCH 1/3] mutter: upgrade 3.34.3 -> 3.34.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,35 +61,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Feb 2020 20:49:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 16 Feb 2020 21:22:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sat, Feb 15, 2020 at 8:46 AM Pierre-Jean Texier <pjtexier@koncepto.io> w=
-rote:
->
-> Martin,
->
-> Le 15/02/2020 =C3=A0 17:38, Martin Jansa a =C3=A9crit :
-> > Isn't it caused by some other layer prepending some busybox patch causi=
-ng
-> > this? Can you check with bitbake -e?
-> >
-> > I'm not seeing this one in my builds (and I was just refreshing some of=
- our
-> > webOS OSE patches to apply cleanly on 1.31.1)
->
-> You're indeed right :(, after a quick check, it seems the build failure
-> comes from the meta-riscv.
->
-> Thanks, and sorry for the noise.
->
+Backported patch is included see '<-' in annnouncement:
 
-some of these patches were in meta-riscv which is fixed now.
+News
+====
 
-> Regards,
-> --
-> Pierre-Jean Texier
-> Embedded Linux Engineer
-> https://koncepto.io
+* Handle mode set race conditions more gracefully [Jonas; !1007]
+* Fix fallback to GLES2 [Adam; #635] <-
+* Fix interoperation with wl_data_device_manager v1 [Carlos; #965]
+* Fix visual glitches with offscreen effects applied [Georges; !992]
+* Favor text over images in clipboard manager [Carlos; #919]
+* Fixes crashes [Jonas, Carlos; !961, !869]
+* Plugged memory leaks [Sebastian, Adam; !1002, !1011]
+* Misc. bug fixes [Carlos, Robert, Olivier; !1005, #878, !1031, !1034, !1040]
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../mutter/0001-cogl-Fix-GLES2-fallback.patch | 37 -------------------
+ .../{mutter_3.34.3.bb => mutter_3.34.4.bb}    |  5 +--
+ 2 files changed, 2 insertions(+), 40 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/mutter/mutter/0001-cogl-Fix-GLES2-fallback.patch
+ rename meta-gnome/recipes-gnome/mutter/{mutter_3.34.3.bb => mutter_3.34.4.bb} (93%)
+
+diff --git a/meta-gnome/recipes-gnome/mutter/mutter/0001-cogl-Fix-GLES2-fallback.patch b/meta-gnome/recipes-gnome/mutter/mutter/0001-cogl-Fix-GLES2-fallback.patch
+deleted file mode 100644
+index ec9200042..000000000
+--- a/meta-gnome/recipes-gnome/mutter/mutter/0001-cogl-Fix-GLES2-fallback.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From f4f7e31303d78b2a8a0881b61311b8d750301b8f Mon Sep 17 00:00:00 2001
+-From: Adam Jackson <ajax@redhat.com>
+-Date: Tue, 29 Oct 2019 11:53:27 -0400
+-Subject: [PATCH] cogl: Fix GLES2 fallback
+-
+-Say you're using intel gen3, you poor soul. Your big-GL maxes out at 1.5
+-unless you use dirty tricks, but you do have GLES2. We try to fall back
+-to GLES in this case, but we only ever say eglBindAPI(EGL_OPENGL_API).
+-So when we go to do CreateContext, even though we think we've requested
+-GLES 2.0, the driver will compare that "2.0" against the maximum big-GL
+-version, and things will fail.
+-
+-Fix this by binding EGL_OPENGL_ES_API before trying a GLES context.
+-
+-https://gitlab.gnome.org/GNOME/mutter/issues/635
+-
+-Upstream-Status: Applied
+----
+- cogl/cogl/winsys/cogl-winsys-egl.c | 2 ++
+- 1 file changed, 2 insertions(+)
+-
+-diff --git a/cogl/cogl/winsys/cogl-winsys-egl.c b/cogl/cogl/winsys/cogl-winsys-egl.c
+-index 99dcb8bf3..f2b439a67 100644
+---- a/cogl/cogl/winsys/cogl-winsys-egl.c
+-+++ b/cogl/cogl/winsys/cogl-winsys-egl.c
+-@@ -329,6 +329,8 @@ try_create_context (CoglDisplay *display,
+-   if (renderer->driver == COGL_DRIVER_GL ||
+-       renderer->driver == COGL_DRIVER_GL3)
+-     eglBindAPI (EGL_OPENGL_API);
+-+  else if (renderer->driver == COGL_DRIVER_GLES2)
+-+    eglBindAPI (EGL_OPENGL_ES_API);
+- 
+-   egl_attributes_from_framebuffer_config (display,
+-                                           &display->onscreen_template->config,
+--- 
+-2.21.0
+-
+diff --git a/meta-gnome/recipes-gnome/mutter/mutter_3.34.3.bb b/meta-gnome/recipes-gnome/mutter/mutter_3.34.4.bb
+similarity index 93%
+rename from meta-gnome/recipes-gnome/mutter/mutter_3.34.3.bb
+rename to meta-gnome/recipes-gnome/mutter/mutter_3.34.4.bb
+index 9afa269ed..b4ddc5dad 100644
+--- a/meta-gnome/recipes-gnome/mutter/mutter_3.34.3.bb
++++ b/meta-gnome/recipes-gnome/mutter/mutter_3.34.4.bb
+@@ -22,9 +22,8 @@ GNOMEBASEBUILDCLASS = "meson"
+ 
+ inherit gnomebase gsettings gobject-introspection gettext upstream-version-is-even features_check
+ 
+-SRC_URI[archive.md5sum] = "c3ee46ae7b84d9d0e8dd3f9e04a61ab1"
+-SRC_URI[archive.sha256sum] = "cdf57ddd0bc35db952b732b77c796760e65d1ce2f7df31273e5c8d4759ed4a89"
+-SRC_URI += "file://0001-cogl-Fix-GLES2-fallback.patch"
++SRC_URI[archive.md5sum] = "de19a6de98a2250dd7efdfca14359e39"
++SRC_URI[archive.sha256sum] = "0134513515f605dd0858154d0b54d2e23c5779d52590533e266d407251e20ba2"
+ 
+ # x11 is still manadatory - see meson.build
+ REQUIRED_DISTRO_FEATURES = "x11"
+-- 
+2.21.0
+
 
