@@ -1,53 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
 	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C2F51613DE
+	by mail.openembedded.org (Postfix) with ESMTP id E77766140D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2020 02:43:00 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id g6so6111845plt.2
+	Mon, 17 Feb 2020 02:43:01 +0000 (UTC)
+Received: by mail-pl1-f194.google.com with SMTP id d9so6104875plo.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Feb 2020 18:43:02 -0800 (PST)
+	Sun, 16 Feb 2020 18:43:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=llp/D0QL5h3PWLDZPcrd9QeIw3cpofjnLOmGSuSFrvs=;
-	b=CqhMQvSxESLeD11WeQrYs6QRIRkmOk7OiHaociDipODLX7Z42JzlYvgtqUe9a/oH+t
-	DDjxgKG1Wwp0C0rUpAAHArgZK66C7w32TrVVQifcKyJZ4brfSUSv1e+u5ir6BbaaXheA
-	taXX7zMPY97oWRxVsKpCmK/Cg/ZiCn9Tk70RQuMmLqfCRQYRLwhbMLA16j0pyWsNrzLd
-	PgLxjKoBXIkaUubokC8HY2692UE6cPfxTH6NnUBh3urlnx7VUHjtmG1legOciTawJxP6
-	P8MA/rJ4B3bgsa9cPDYxsYEnuSJintUFHEv0NLKaeQFeD9fI7VrwzRFK1S4iC/kH7EoS
-	TwVQ==
+	bh=wXcWQks2vQOPaw8bOOMNEokwwWL4MdZGcAEEg0VcSUY=;
+	b=VHBzX41HrSt+Puv5CnPJIBFE86fFlkbAy9lbYTnBP4RazTrd3Md4RbhJR9JyKQETp+
+	v94Ff6ZWZETnEWxhKr4UeS4px3zvwyA6CsyQoAQ6NfrzbZu5yKG99hkKyWMot+4OkxcA
+	xo8+hSJGJQniiU6LDblf24m54rwY8V7I4wsVcOxvQ2yE4iFSz0Ro0g2+Iy+ep4JxG71A
+	zAgtHv2rnl+VSgqvPE2ZYmzqyqUk0C0JNooqlrwq+8v2bVmP1J6ERUMtVnvsUUQNA/dK
+	wmMvxN4MH30U2xqTbtUY+G+YKMDernyV3e7fJdSuVI0Oq6umjioOcqQEen9P5diCc0g9
+	mA5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=llp/D0QL5h3PWLDZPcrd9QeIw3cpofjnLOmGSuSFrvs=;
-	b=RWF/An7RkiToSF+exu1EOP1l+30UkVwdACEL7/uljbieRNQrT1LrrhJIGKvRv/804n
-	wtKB3AE/uDwrKT03HAD61f+NslkA/Q94iUq3agHND19LswV415aJ5Lr4bXGGcVF4Q/NS
-	qXQcXl8Ju8ABZbUIAKQbq86RuWAqQKm8CaW2Chmcu506fEhOZ0lHTMCBB/WOZ442ItSF
-	zzVeiVF4TIOhs5JTduOT13jIF+rkhyWjmKkyHeNAx9PnE+OJ4BQYkuezHEJFUpOlI41m
-	WxnkWpRMFYVHRu2o7WMnuHVK4doQrsfhh0zIOWFw2YNUJXCXvMjF06GA9hSRFEfVs8ad
-	l2bw==
-X-Gm-Message-State: APjAAAXVLIlLy/88d4AM9pmv13IRSF/CqCpOvg2rdwbKrHyS/At5PLQ5
-	o/IXzFPToPZ4+QVAkcH9qMkTh9fOLp0=
-X-Google-Smtp-Source: APXvYqzsI/4F1TwyDlUzvPzswd0m1U4YgCj3JnJB3Sqg451o+IRHxxxqIGeyzqEvLgD2seh54jNwXQ==
-X-Received: by 2002:a17:90a:198e:: with SMTP id
-	14mr17526871pji.44.1581907381600; 
-	Sun, 16 Feb 2020 18:43:01 -0800 (PST)
+	bh=wXcWQks2vQOPaw8bOOMNEokwwWL4MdZGcAEEg0VcSUY=;
+	b=q128fZu+PE9Y6zNXN/AJ3Tsg0U3gsendotAkvxC3FADdYi4P95V7MZBfXinY7c8srI
+	rTag9ti5ON4gIqMPvrmsLeYv7esjFU2qo0e1y8hVwtdT8QXEidX6XFhB1hbfcwC7RzoI
+	xzpiw3EsTUragwAiJbUoxzY2sBtIiWngePFYSdH6uVSD2Gqdc/pnawsKY9/DnTgDq07u
+	w5EB3wok4Ra4Ih8/84fuuWuQv13aBdIYQ1PaFEK0FCNnkumwj2KRPzRKtFrW9By+0Tla
+	MEWE6zQJFU9uF+n91btr8Si+/yZ/GJ3ukH3UBMINsxOYr3qn4jMfk8hcgGEcxEMVNW2E
+	aGyA==
+X-Gm-Message-State: APjAAAWjKY4rj56CwyNt2L0cY/vIWDAUMCxZT5z78W1zPxrSx9egwNhi
+	6DFfF1d/TDqPCjaJRq7nX4nIg6sZiLQ=
+X-Google-Smtp-Source: APXvYqwVOWMvFabWawrZPJY2cvYH3aLAMiQ4cV3SGUNrXt3R/vGj+g5TVUAWg0LQhafGJQ770ZjF0Q==
+X-Received: by 2002:a17:902:9a42:: with SMTP id
+	x2mr14826895plv.194.1581907382757; 
+	Sun, 16 Feb 2020 18:43:02 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::98a3])
 	by smtp.gmail.com with ESMTPSA id
-	64sm14141008pfd.48.2020.02.16.18.43.00
+	64sm14141008pfd.48.2020.02.16.18.43.01
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 16 Feb 2020 18:43:00 -0800 (PST)
+	Sun, 16 Feb 2020 18:43:01 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Feb 2020 18:43:02 -0800
-Message-Id: <20200217024304.1131392-5-raj.khem@gmail.com>
+Date: Sun, 16 Feb 2020 18:43:03 -0800
+Message-Id: <20200217024304.1131392-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200217024304.1131392-1-raj.khem@gmail.com>
 References: <20200217024304.1131392-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-gnome][PATCH 5/7] sysprof: Inherit mime and mime-xdg
+Subject: [meta-oe][PATCH 6/7] gtkwave: Inherit mime and mime-xdg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,30 +66,30 @@ Content-Transfer-Encoding: 8bit
 Use += for depends to not override prior ones
 
 Fixes
-sysprof-3.34.1: package contains mime types but does not inhert mime: sysprof path '/work/aarch64-yoe-linux/sysprof/3.34.1-r0/packages-split/sysprof/usr/share/mime/packages/sysprof-mime.xml' [mime]
-sysprof-3.34.1: package contains desktop file with key 'MimeType' but does not inhert mime-xdg: sysprof path '/work/aarch64-yoe-linux/sysprof/3.34.1-r0/packages-split/sysprof/usr/share/applications/org.gnome.Sysprof3.desktop' [mime-xdg]
+gtkwave-3.3.103: package contains desktop file with key 'MimeType' but does not inhert mime-xdg: gtkwave path '/work/aarch64-yoe-linux/gtkwave/3.3.103-r0/packages-split/gtkwave/usr/share/applications/gtkwave.desktop' [mime-xdg]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.103.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb b/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-index 1e530efb17..ad69ab68c3 100644
---- a/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-+++ b/meta-gnome/recipes-kernel/sysprof/sysprof_3.34.1.bb
-@@ -5,9 +5,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                     file://src/sysprof/sysprof-application.c;endline=17;md5=a3de8df3b0f8876dd01e1388d2d4b607"
+diff --git a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.103.bb b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.103.bb
+index 286d9aa6a1..fec3c7ce1a 100644
+--- a/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.103.bb
++++ b/meta-oe/recipes-graphics/gtkwave/gtkwave_3.3.103.bb
+@@ -10,9 +10,9 @@ SRC_URI = "http://gtkwave.sourceforge.net/${BP}.tar.gz"
+ SRC_URI[md5sum] = "5a9a5913f9a02a333b2b23626f153fd7"
+ SRC_URI[sha256sum] = "c325abf7cf26c53309a67c0ecaaf196774fa982a717a102c599ac8a516eeeaf7"
  
- GNOMEBASEBUILDCLASS = "meson"
--inherit gnomebase gettext systemd upstream-version-is-even gsettings
-+inherit gnomebase gettext systemd upstream-version-is-even gsettings mime mime-xdg
+-inherit pkgconfig autotools gettext texinfo
+-DEPENDS = "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
+-RDEPENDS_${PN} = "tk-lib"
++inherit pkgconfig autotools gettext texinfo mime mime-xdg
++DEPENDS += "tcl tk gperf-native bzip2 xz pango zlib gtk+ gdk-pixbuf glib-2.0"
++RDEPENDS_${PN} += "tk-lib"
  
--DEPENDS = "glib-2.0 libxml2-native glib-2.0-native"
-+DEPENDS += "glib-2.0 libxml2-native glib-2.0-native"
- 
- SRC_URI[archive.md5sum] = "cc32455277b31afb1965d627ae3e3629"
- SRC_URI[archive.sha256sum] = "844bbb8d8b65071b3bca96f8e921319ceef81f2d2c51fcc9da63a4b355c893d0"
+ # depends on gtk+ which has this restriction
+ inherit features_check
 -- 
 2.25.0
 
