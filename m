@@ -1,53 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com
-	[209.85.216.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F061611A8
+Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com
+	[209.85.216.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 26BD460859
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2020 02:42:58 +0000 (UTC)
-Received: by mail-pj1-f45.google.com with SMTP id gv17so6531348pjb.1
+	Mon, 17 Feb 2020 02:42:59 +0000 (UTC)
+Received: by mail-pj1-f53.google.com with SMTP id dw13so6476316pjb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Feb 2020 18:42:59 -0800 (PST)
+	Sun, 16 Feb 2020 18:43:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=SZiKoOzLrFM7p4zWlauxllOJ0PCKSHNiEVRJGi+su5Y=;
-	b=dC2YapoFJca66qSrNz8vLTM06WApHZ00FguQo74g8lzM0E6MnzPPiJ7lvuzKLEzp7w
-	0gI2kaVcT7UMfZiL+oMPigII7uunD+ETXy7egI8SpM2kL5hJwYhSe2SosnBCplF7Ngxz
-	vrk7pMt2Bcw3wm2I/CRkQo+rjSszdlkm1kirapRA1zWba6zHZVg7UFEQoDWONvWKsu7l
-	StOcCPbH2QNLB18V4Bf6P3THuswTs8Q7yjVpxhne1S6YqkJHCRpcrpfKfYWrOaq+Z05S
-	GyBmTOB4GMWwrxBSll98bH5HaDo78D31iwHQTD0S4TLTi3bdXPt413lMCTFxWPM6BayQ
-	n2fA==
+	bh=3z+0mrKkRVR+rfwWSdjm8HOgbJSjZg1UH4s3euUQi3o=;
+	b=DV6F6qQyuYDB/eRksDSf80cLLH6wUPMn8HYpvFah6UvmswL9ScUtL9KF2YKQvem2Xy
+	xXmj+woKEHkt1gLzA75nKAxceF5rtyxtbkxS+7/GTIBL05wpsuhDQJ1mt6MoEFTELpg0
+	vYeBWp31xnEld1TjtMQqY389fYHqclhOvKqyXXqtWRcDhssf6Z5sZ0/2KoQDhVYsak16
+	WRCEhnIS/vXXvABIV5yXMN90p5q/xYIKYnq6hAOPfLOJ3Yr49ydXPTG79AuDSjc0hrxh
+	h8dN19U2hDCLJDUSP6C7XtQ9we7W/+aQPGJae1/2ihCITMRdbIFf5k3Q3TsAYyInfnIh
+	OIhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=SZiKoOzLrFM7p4zWlauxllOJ0PCKSHNiEVRJGi+su5Y=;
-	b=ayoGTNKWRNuSo5eKiHX0v6GvG8YzuK/PBNFsCmPivkJE3NvFn81nJtpyTSl7LeAtue
-	RczuNBAeNbg8WlzYzG+vu3W2vr39J7Q8ZUUMI6HUNSk7Ls8LzYYhXzYZycqJo+lMXRFR
-	z1AV9EaXubpMpmxNnG9AOrkJd3mVvnrRzG1j0eQflTXra2VQt2oH04b8ouK0Ycawd2he
-	dnFYHMq2e/nEcDquHthotAsmPZm/o7LkWnMsXEhBOjtI8x7m3aCzueJKiokjaTaRb7ZD
-	sOiCVLeBsZV6o3vEWTvQnzl/KGWHZ2jySdwPwYOWeurOMeZzDzjBOB2NrlmsAiuLKVsI
-	p1qw==
-X-Gm-Message-State: APjAAAXG1TaJtkB+9GxtCYpn0/AnINk6M6uBbUPpbdbWMRjRyEIwexsq
-	lyJGp3hDLSOYnPi0SICMC8FUsYSMuVo=
-X-Google-Smtp-Source: APXvYqyP8ZH7bFJdwurcrQ74J7gIG5cmeKOhCpWdQ9slESqg0poMyt6/nGoESC09Ps9AvhJaM2zRzQ==
-X-Received: by 2002:a17:90b:3d0:: with SMTP id
-	go16mr17611971pjb.75.1581907379078; 
+	bh=3z+0mrKkRVR+rfwWSdjm8HOgbJSjZg1UH4s3euUQi3o=;
+	b=J+PhcsTP3GH0lV8d8fmiezHp0hoDYAqK2zjjyYeT6pZErfDZ9fcPta4C2hLE3Ql/CR
+	fMEA3FMZJSe/q1IFj/OqQq/wZfTeGApQILALbNi+Dn0xRiY6bju5k2nUKGRpVZdZdVSh
+	9cxrOoB6zFArrREp2F6R8nHVUeMEDUQvXgR1gQo1oQzz1ZpVDX73ZLrvOeMaAAI9p13T
+	RuZFFbQw9uAi+3iSr4t3esif42ZvWtoukwE4vdt1TJQ+4D4i5vvmFvUZlCy5sTQlctRR
+	u92LntSTnS5HAs740M2vd+gRN7CJlSJeB/YZzLPSlvGAWdFDy0O/M8z2qpUl6p3mghQG
+	8S0A==
+X-Gm-Message-State: APjAAAX6SyTUjQprWn1hYnYG1eAwLvnzU6bzPp058SEA4p03aTZe4gzv
+	gjdhBIac6lIGGqZIgi9wt5v93eCvSnI=
+X-Google-Smtp-Source: APXvYqw17U1KC0SoYm77WQWNDrpopGwHivnQeUQRlWScRrPuG0cxz1bGJXW1/L95DTK3FR/D5pD9RA==
+X-Received: by 2002:a17:90b:3115:: with SMTP id
+	gc21mr16662022pjb.54.1581907379764; 
 	Sun, 16 Feb 2020 18:42:59 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::98a3])
 	by smtp.gmail.com with ESMTPSA id
-	64sm14141008pfd.48.2020.02.16.18.42.58
+	64sm14141008pfd.48.2020.02.16.18.42.59
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 16 Feb 2020 18:42:58 -0800 (PST)
+	Sun, 16 Feb 2020 18:42:59 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 Feb 2020 18:42:59 -0800
-Message-Id: <20200217024304.1131392-2-raj.khem@gmail.com>
+Date: Sun, 16 Feb 2020 18:43:00 -0800
+Message-Id: <20200217024304.1131392-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.0
 In-Reply-To: <20200217024304.1131392-1-raj.khem@gmail.com>
 References: <20200217024304.1131392-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/7] libsigrok: inherit mime
+Subject: [meta-oe][PATCH 3/7] joe: Inherit mime-xdg
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,30 +60,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2020 02:42:58 -0000
+X-List-Received-Date: Mon, 17 Feb 2020 02:42:59 -0000
 Content-Transfer-Encoding: 8bit
 
 Fixes
-libsigrok-0.5.2: package contains mime types but does not inhert mime: libsigrok path '/work/aarch64-yoe-linux/libsigrok/0.5.2-r0/packages-split/libsigrok/usr/share/mime/packages/vnd.sigrok.session.xml' [mime]
+joe-4.6: package contains desktop file with key 'MimeType' but does not inhert mime-xdg: joe path '/work/aarch64-yoe-linux/joe/4.6-r0/packages-split/joe/usr/share/applications/jpico.desktop'
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb | 2 +-
+ meta-oe/recipes-support/joe/joe_4.6.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb b/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb
-index 35e59d6d7d..e8c36a81d7 100644
---- a/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb
-+++ b/meta-oe/recipes-extended/sigrok/libsigrok_0.5.2.bb
-@@ -15,7 +15,7 @@ PACKAGECONFIG[hidapi] = "--with-libhidapi,--without-libhidapi,hidapi"
+diff --git a/meta-oe/recipes-support/joe/joe_4.6.bb b/meta-oe/recipes-support/joe/joe_4.6.bb
+index b79e028f30..674736a68a 100644
+--- a/meta-oe/recipes-support/joe/joe_4.6.bb
++++ b/meta-oe/recipes-support/joe/joe_4.6.bb
+@@ -9,7 +9,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/joe-editor/joe-${PV}.tar.gz"
+ PACKAGECONFIG ??= "curses"
+ PACKAGECONFIG[curses] = "--enable-curses,--disable-curses,ncurses,ncurses-terminfo"
  
- PACKAGECONFIG ??= "serialport ftdi usb"
+-inherit autotools-brokensep
++inherit autotools-brokensep mime-xdg
  
--inherit autotools pkgconfig
-+inherit autotools pkgconfig mime
- 
- SRC_URI = "http://sigrok.org/download/source/libsigrok/libsigrok-${PV}.tar.gz"
- 
+ SRC_URI[md5sum] = "9017484e6116830d846678b625ea5c43"
+ SRC_URI[sha256sum] = "495a0a61f26404070fe8a719d80406dc7f337623788e445b92a9f6de512ab9de"
 -- 
 2.25.0
 
