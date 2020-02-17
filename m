@@ -1,39 +1,50 @@
-Return-Path: <prvs=3095e736d=Richard.Leitner@skidata.com>
-Received: from mail2.skidata.com (mail2.skidata.com [91.230.2.91])
-	by mail.openembedded.org (Postfix) with ESMTP id 113CD60AEC
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com
+	[209.85.222.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BD7B613FD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2020 07:08:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
-	t=1581923341; x=1613459341;
-	h=date:from:to:cc:subject:message-id:references:
-	mime-version:in-reply-to;
-	bh=SpUudRmQge4Fj+BVSASTHTnaE7dOZ9FvWtJDoU9CoxU=;
-	b=dw3jSHswt7fRZLIPgM8g4caF+jgpxhimPNHnfHc6ou5Xuu17BM/VnPOs
-	6LnAxfh/bjOQ2aQbYffL+x8eGbnVttMypMsXWD4BbUjd28nlOpeB8jgl8
-	3GbJrnKLinR58nt5NjY0cB5itG/OhOtkNErnUmmdPwHIPAyjIlN2Zi4GG
-	R/PU09cUBFMeVyx+rf41HI4j7OVoNZutRsj5Xmlh2VgYMHuiJtbY4FWl+
-	fNb6PFy+XZ1It6E85d1Q+8GtgJzIlvCuZ3v0RN3VA+CQeW/Nzx3SusD5P
-	OHSsNmD2Jwtuklba9C/+GH2CN/c1P8RIU12eSSHMZaL0AUF+KFz+CZ0xT g==;
-IronPort-SDR: Ju5Atp7RkDDPb74s2pC+ZkOJ9wOFtz6j1NEnhwdMnyW3CWoBuWxsA6wVlqhLiQ1CA7Fky3yR1K
-	jjrqcdRHGln9A4O7jBYSZs5Q/8984UCEKblVOVorG93oxcyJplwWMgQtA7P+83ERTzonUjGcsJ
-	rBAfyfkOdz5UvqJuoo8qMEabQBrHZjIEg7LbutLLI4MsQJVqz7wB6+6Zg9A7iYGXeoiv6ka42l
-	4YvlgByysbapE7jhEKmZEQyEQbOsoTPTVaX/qgO0tt+4Xr3kySDf2e0ZEeid/ZwCYFkQFuDzBZ
-	fHs=
-X-IronPort-AV: E=Sophos;i="5.70,451,1574118000"; 
-   d="scan'208";a="2522124"
-Date: Mon, 17 Feb 2020 08:08:58 +0100
-From: Richard Leitner <richard.leitner@skidata.com>
-To: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-Message-ID: <20200217070858.GA2701920@pcleri>
-References: <22639ede-b55a-3e33-3ac3-c462b1e37b62@mvista.com>
+	Mon, 17 Feb 2020 07:47:12 +0000 (UTC)
+Received: by mail-qk1-f194.google.com with SMTP id v2so15378663qkj.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Feb 2020 23:47:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=1nY1sSm9zMXlvvDfJ2QzW8RgyuTcW8jPFwZSbEAh290=;
+	b=TN+aVvXbyi7SOCNbz2IiALrUQpju4n1iCZ/Q/mhNtVH9RAGdBTk3I7HOktHRazt3SZ
+	ySRM/Kn2jwM2jssnhlqwLpTSjMr89N11l03EQ73o5xrXd9LmucdLQlFgGhptuOIdZH2u
+	h+S5b3wodznMvO29ieRkF0rsrYvN6KJ4dCTDU/JftFXPTdisuYIAo22Pd2dha0bMFkN9
+	AAfpBohMYHkMuXLhoFkoNKp7OCXncal/5cyjr9YpYbZ2LlaKBDiRL+6ikGRyW0pFJmJr
+	uEjvWgjD36xJSGCFVCdVX3XIr/hxuIS9QIF8NEwGt/cAa9e/V4FOuQdJs80D4l7rV+ZU
+	lVJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=1nY1sSm9zMXlvvDfJ2QzW8RgyuTcW8jPFwZSbEAh290=;
+	b=OkkDhU30o67/6oQgEN9nIvovKOjEQ9zWZ1Ec/pJWtbqG1K4EPtXn0/Y0N7B7a5JA6M
+	D+CuYsOCB7jdbcbV2ADN4S/+NtoGbMLYw9WrGpqbIU7kuLmnVyFyl4jRGdL23nY3MnXy
+	QB1qgz1VUW+gKC9ZcEKck2ToWWKYWRL7docWQ0DCTdl318QcOuS53iuuZ8UETjB4oie3
+	Y7okfG8qTwuHh99SLtZCgWSdYiUaU2j1C8lBJb2+oKR3gdoIOAbLqkBtpv6AtXh3u+56
+	ndI7JbERg2e6Hqj/FUHFykJlRBqHNbyH6RJfp5MgycwRC4+KhaG8ajGBaJIgJAhfVaTP
+	536Q==
+X-Gm-Message-State: APjAAAUUks4IY1KQpkcM+vI37kfD7VCCm3O1cnflCBid72nHo1kr94QV
+	q05l2t5qqpPHuuJNNa111NPqRRPZIrPad80Fa0I=
+X-Google-Smtp-Source: APXvYqzNzgOhKBiLDTAgq9bMUp+5sO/8MNCKOAVG6voRtojfimNQRRopjzdvKkQbyTb0KGkMcy96MGAeS4HOAuKzbU4=
+X-Received: by 2002:ae9:ef96:: with SMTP id
+	d144mr13244607qkg.337.1581925632889; 
+	Sun, 16 Feb 2020 23:47:12 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <22639ede-b55a-3e33-3ac3-c462b1e37b62@mvista.com>
-X-Originating-IP: [192.168.111.252]
-X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
-	sdex5srv.skidata.net (192.168.111.83)
+References: <20200217024304.1131392-1-raj.khem@gmail.com>
+	<20200217024304.1131392-7-raj.khem@gmail.com>
+	<CALbNGRSzRB6zjQO0NBTU5D85+t-BEQuYL27CmHJFJtzGt_sGsg@mail.gmail.com>
+In-Reply-To: <CALbNGRSzRB6zjQO0NBTU5D85+t-BEQuYL27CmHJFJtzGt_sGsg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 16 Feb 2020 23:46:46 -0800
+Message-ID: <CAMKF1srBT++6xgJ89JF27T4XFAzdoE3OG2==5BYBX2EnBneaAw@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Cherry pick patches breaking zeus/thud/master.
+Subject: Re: [meta-gnome][PATCH 7/7] gimp: Depend on libexecinfo for musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,31 +57,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2020 07:09:00 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 17 Feb 2020 07:47:12 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Jeremy,
+On Sun, Feb 16, 2020 at 9:55 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
+m> wrote:
+>
+> On Mon, Feb 17, 2020 at 3:43 AM Khem Raj <raj.khem@gmail.com> wrote:
+> >
+> > musl does not have internal backtrace implementation like glibc
+> > but we can use external library
+>
+> Sound reasonable and does not affect non musl.
+>
+> BTW: Old email address still works but the email address changed form
+> 'googlemail' to 'gmail'.
 
-On Thu, Feb 13, 2020 at 12:15:07PM -0800, Jeremy A. Puhlman wrote:
-> Richard,
-> 
-> Is it possible to cherry pick
-> 
-> d0a9fe08be6e1c2e7f7afc79abc292d3bffeb9fe
-> Revert "openjdk-8: disable, stringop-overflow compiler errors"
-> 
-> to zeus/thud/master, since they are breaking for the same reason as warrior?
+Thanks for info.
+perhaps update them in README of layers in meta-openembedded as well.
 
-Sure, I'll push the changes today.
-
-regards;rl
-
-> 
-> TIA
-> 
-> -- 
-> Jeremy A. Puhlman
-> jpuhlman@mvista.com
-> 
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > Cc: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> > ---
+> >  meta-gnome/recipes-gimp/gimp/gimp_2.10.14.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >
+> > diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.14.bb b/meta-gnome/=
+recipes-gimp/gimp/gimp_2.10.14.bb
+> > index 045958d0a6..30f0579e2d 100644
+> > --- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.14.bb
+> > +++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.14.bb
+> > @@ -29,6 +29,7 @@ DEPENDS =3D " \
+> >      libmng \
+> >      ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', ''=
+, d)} \
+> >  "
+> > +DEPENDS_append_libc-musl =3D " libexecinfo"
+> >
+> >  inherit features_check gnomebase gtk-icon-cache gtk-doc mime-xdg
+> >
+> > --
+> > 2.25.0
+> >
 
