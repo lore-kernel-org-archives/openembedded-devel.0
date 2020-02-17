@@ -1,50 +1,38 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com
-	[209.85.166.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E0F06004E
+Return-Path: <prvs=3095e736d=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id B2E8960B0D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2020 07:53:36 +0000 (UTC)
-Received: by mail-io1-f67.google.com with SMTP id c16so17419237ioh.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 Feb 2020 23:53:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=QfTL/WxofpDNz7vP8My/2gWvb0UvI+bDHymy+BQaXUI=;
-	b=MsvmuhDkq0t/KO3ES16pphKt+7rmj6ZrIdwgdtU9uFqQ5YzCKqMs1i04inCCGxJVzK
-	DSaoMmtODa8/RZkpfN8hwD4Eb6DlZC+YK5J04GmSeyqThZxNO4SwsF90lQf6fm5vqeEZ
-	eXXKZLWVLsDiGJwYj2WXX+351mnhnR/6loGWWi1Jek+Bg7Z7Efv3nOFkaZkKlb3pkNEU
-	rD5Zl+zKQHKMqAM0bJ98Ps4ejoj40QEZi0f7IsGkhHk/+3oGZYg2ciMTZY3zKPgJNxZE
-	jj3G+zMuDLyfLbjVUHPyiglyWtEMwquZLde52BXAJgm5Me8ceDq0geoUPBMrW3Gn4X8A
-	bBOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=QfTL/WxofpDNz7vP8My/2gWvb0UvI+bDHymy+BQaXUI=;
-	b=Uf9VvTK3pLGeJkYYm0mWx8nVS8Nqyg1dOZ8TKvT3vlOzqEygnQc/Sx1tPDm1B29+NI
-	vHVNl2Psg20ONVffs3cPc1ISrJPLWW94SaZW4MIVTnJGee3MJ3TiNPm7cYhE5hDmv3aj
-	UgphAGpLfj7IO8Gk6feWTAyeKGnp76DByvEcHu5sODxOmtQEM32otbUmvUazW59IWySn
-	TUGrUt5gmgM3qaK8TxG2aTqWc2FzU2yNQaqr2yBAyn/wwxOR3NzQ0iz9a2T8yizyJy7t
-	69ghbFN856NPLXt7gkQzLQTjAWp6asB/wJsiAvFdR9oUxEMTq41WzXxUji4Riwm5Wqw7
-	VTxQ==
-X-Gm-Message-State: APjAAAUaxDHfyWF8hxLteYbIeI8sOFp2/XSixeIZuVaI8/cKLepJ7u1c
-	ucaijuODr+TCW4Il7+MOxHjJJsT85f3u7UHmdYw=
-X-Google-Smtp-Source: APXvYqz6EtxX759N6NMSskkXHBdT7uecNbCe6nB+n0Q25KSkOQqNExxM0Hm3nP3TI0JvaEw0HWkTzWanoyshjJ359QM=
-X-Received: by 2002:a6b:7846:: with SMTP id h6mr11692636iop.224.1581926017122; 
-	Sun, 16 Feb 2020 23:53:37 -0800 (PST)
+	Mon, 17 Feb 2020 08:39:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1581928756; x=1613464756;
+	h=date:from:to:cc:subject:message-id:references:
+	mime-version:in-reply-to;
+	bh=FUwWRv0G4FRiU912tBupCl4GJhw4fzu5tc5YLpobR0A=;
+	b=JW1g+8rnKbM7+GTZV1O3+H9J1asT/DtNZMdEzLLEiM4QCUDGGwb4oXXc
+	lnFkO8gP6/Xufz7mJUueke+SxgwrpaBc9w7PWQ6SmJ4qlmp7YhJtUrjMG
+	8Q/XtUvaJGZINbHSRw20ZT9+BvvrDoPjKMXLU97l+UdHgIy8eKieb0QLe
+	dYD1lSZQcbDHYDUCI1tHFSu3S0QdsLh1bVoSDKxnmjsaSUbQDsvCFdP3+
+	lbBdBH8YpReVXVgQ2okL3gfaemfslDlmGSFWSnteEruGellZVvrcZKmGf
+	TzYAVuiM+8a4k96N0D+/Um6ILAs9jkjYGwV5WqLPSbZiEhdVtauMPO5IK g==;
+IronPort-SDR: fK89wUSrhV4JMwItZ1NCQDFT0V3ETYROLpLPZJ9iSo6MYZw4Mhf9eO/zDs5TXKBsM5a7tXEcX9
+	Rzo8NUtEhVbhiKWjuVQGXE1F0V3auhs5xDu7ZoQ80RtBAnh/4SwqIIxzxj9FREsGNTgOGmXDeo
+	/hGXKZQG6nIWI9a/fUPIMh923Je662d5mnqQVOvHzdaOxnYOiWVVJN0wSpB+oKga9aMMI4LeFi
+	eIAb8ugE+BkNMOVyeZ7BJ0O7r1ZEccSDVk1fy+Y7kMQUTSOTMW0EXbpJJz2KELxdeBHOETGs9g
+	R3Y=
+X-IronPort-AV: E=Sophos;i="5.70,451,1574118000"; d="scan'208";a="22704015"
+Date: Mon, 17 Feb 2020 09:39:13 +0100
+From: Richard Leitner <richard.leitner@skidata.com>
+To: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
+Message-ID: <20200217083913.GB12279@pcleri>
+References: <22639ede-b55a-3e33-3ac3-c462b1e37b62@mvista.com>
 MIME-Version: 1.0
-References: <20200217024304.1131392-1-raj.khem@gmail.com>
-	<20200217024304.1131392-7-raj.khem@gmail.com>
-	<CALbNGRSzRB6zjQO0NBTU5D85+t-BEQuYL27CmHJFJtzGt_sGsg@mail.gmail.com>
-	<CAMKF1srBT++6xgJ89JF27T4XFAzdoE3OG2==5BYBX2EnBneaAw@mail.gmail.com>
-In-Reply-To: <CAMKF1srBT++6xgJ89JF27T4XFAzdoE3OG2==5BYBX2EnBneaAw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 17 Feb 2020 08:53:26 +0100
-Message-ID: <CALbNGRSfyQdeOnUNDDsCEO_y84sW=dkrbdmabZmUxmteyHVaFA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <22639ede-b55a-3e33-3ac3-c462b1e37b62@mvista.com>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH 7/7] gimp: Depend on libexecinfo for musl
+Subject: Re: Cherry pick patches breaking zeus/thud/master.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,30 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Feb 2020 07:53:36 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 Feb 2020 08:39:15 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-On Mon, Feb 17, 2020 at 8:47 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> On Sun, Feb 16, 2020 at 9:55 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
-com> wrote:
-> >
-> > On Mon, Feb 17, 2020 at 3:43 AM Khem Raj <raj.khem@gmail.com> wrote:
-> > >
-> > > musl does not have internal backtrace implementation like glibc
-> > > but we can use external library
-> >
-> > Sound reasonable and does not affect non musl.
-> >
-> > BTW: Old email address still works but the email address changed form
-> > 'googlemail' to 'gmail'.
->
-> Thanks for info.
-> perhaps update them in README of layers in meta-openembedded as well.
-Ahh sure that's where you got it from :)
+Hi Jeremy,
 
-Will prepare a patch for that
+On Thu, Feb 13, 2020 at 12:15:07PM -0800, Jeremy A. Puhlman wrote:
+> Richard,
+> 
+> Is it possible to cherry pick
+> 
+> d0a9fe08be6e1c2e7f7afc79abc292d3bffeb9fe
+> Revert "openjdk-8: disable, stringop-overflow compiler errors"
+> 
+> to zeus/thud/master, since they are breaking for the same reason as warrior?
 
-Andreas
+Have you tried adding "-Wno-unknown-warning" instead of removing
+"-Wno-error=stringop-overflow" ?
+
+This would IMHO fix both cases (gcc >=9 and <9).
+
+regards;rl
+
+> 
+> TIA
+> 
+> -- 
+> Jeremy A. Puhlman
+> jpuhlman@mvista.com
+> 
 
