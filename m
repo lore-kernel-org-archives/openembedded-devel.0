@@ -1,33 +1,58 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 153156156D
+Return-Path: <leo.yan@linaro.org>
+Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com
+	[209.85.216.66])
+	by mail.openembedded.org (Postfix) with ESMTP id AC28E6159D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 07:12:28 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,455,1574092800"; d="scan'208";a="83482969"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Feb 2020 15:12:28 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id A3D8C406AB15
+	Tue, 18 Feb 2020 07:27:34 +0000 (UTC)
+Received: by mail-pj1-f66.google.com with SMTP id fa20so625852pjb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 15:02:48 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Tue, 18 Feb 2020 15:12:26 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 18 Feb 2020 15:12:31 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 18 Feb 2020 06:31:11 -0800
-Message-ID: <1582036271-94134-1-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 17 Feb 2020 23:27:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=LLSDWLVNP3Ixtu+f6md2ZMthfYvwwC9fEndSfo3v3K4=;
+	b=WHlT5J/5/P5UbnJpbzw2FGz/KZtI4WJohf3thc1a5xn4UApyVbH8e03MGjd2DvLqkf
+	mkAx/cnW3y+WAMzbkiZW85RAJcNJ19MCLnt9VQgluAMkevz9IDb97L15KeHredARFjmc
+	xkpADIziwERATYOwywoTuqEPMEW+nuuZtyStIq6APVwTkZGtj7JWhH2A4yZQ7toATZ3V
+	l3YUUf7quSY0uJqLr2HTS+6BRUllQ0g/YjCsXpWQdwTSNjKeDxdcQuKOqEZDS3zC2SOM
+	5yAeZAVUiLQ/TnLc7VWLV2asqI2rXA8Vslgx47nVBZiAEP1AR6mCKohswDGhrdl68Am9
+	YWnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=LLSDWLVNP3Ixtu+f6md2ZMthfYvwwC9fEndSfo3v3K4=;
+	b=mFemvbLvkgMQaWdU3azJLUF9CIByx1WQO5TdEGHn+7XSJ+YY5Zojb6CX9yANW8G8DM
+	qifkv41wfo8ZwEvMuzWiI1Uij/D0MOcfl3KJyjUa/Qsf7CNnGvg951bqTvyoQdpW+95o
+	832knnKZSCYClHxvioU5PBL4v+e+2ry++Ud2AjPYYO5mITtQ9VPB2ZNjUS8QpUS7VL75
+	KvN95wpvWNJ1PKLpo6q3PmNo7lRfWxEYaYas2xuzPXMNFTqaUdZrIWfBzc45E0j9CcHV
+	1mWkrBLeBVbEOTywYd+yiodJBNVgd5F471zw7vtSXg8AcBhVsfTUFctrsVe/eOEoS6aP
+	m+eA==
+X-Gm-Message-State: APjAAAWcc4U846m2UEEQHzPN7Ykz9piSGA/ivBfnRsNALePFLO0Y3Rgp
+	ZU+esPXvUtjsbsNb5pL4DN28Hw==
+X-Google-Smtp-Source: APXvYqxUty+SPUzS46k886X+PVC7xKs7WcNK+Val4jLDX+/rpZjbAMXNeC5n2CikZ/pD8cYtIfm2Aw==
+X-Received: by 2002:a17:90a:f014:: with SMTP id
+	bt20mr1025096pjb.31.1582010855724; 
+	Mon, 17 Feb 2020 23:27:35 -0800 (PST)
+Received: from leoy-ThinkPad-X240s (li1441-214.members.linode.com.
+	[45.118.134.214]) by smtp.gmail.com with ESMTPSA id
+	f13sm2933691pfk.64.2020.02.17.23.27.31
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 17 Feb 2020 23:27:34 -0800 (PST)
+Date: Tue, 18 Feb 2020 15:27:26 +0800
+From: Leo Yan <leo.yan@linaro.org>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20200218072726.GB9945@leoy-ThinkPad-X240s>
+References: <20200218052544.9467-1-leo.yan@linaro.org>
+	<20200218052544.9467-4-leo.yan@linaro.org>
+	<CAMKF1spwQ+Y3D3MpdnV1OcNSVL=7=fENq8amqpBMq0d6WHuwiQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: A3D8C406AB15.A3319
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking][PATCH] cifs-utils: upgrade 6.9 -> 6.10
+In-Reply-To: <CAMKF1spwQ+Y3D3MpdnV1OcNSVL=7=fENq8amqpBMq0d6WHuwiQ@mail.gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+	Loic Poulain <loic.poulain@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v1 3/4] BCC: Add build recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,109 +65,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2020 07:12:29 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 18 Feb 2020 07:27:34 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-add the following patch to solve build error:
-0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch
+Hi Khem,
 
-Error message:
-(cd /sbin && ln -sf mount.cifs mount.smb3)
-  /yocto/work001/fnst/wangmy/build/tmp/hosttools/install -c mount.cifs
-'/yocto/work001/fnst/wangmy/build/tmp/work/core2-64-poky-linux/cifs-utils/6.10-r0/image/sbin'
-make  install-data-hook
-ln: failed to create symbolic link 'mount.smb3': Permission denied
+On Mon, Feb 17, 2020 at 10:30:46PM -0800, Khem Raj wrote:
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- ...ify-the-dir-of-install-exec-hook-and.patch | 43 +++++++++++++++++++
- .../{cifs-utils_6.9.bb => cifs-utils_6.10.bb} |  8 +++-
- 2 files changed, 49 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-support/cifs/cifs-utils/0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch
- rename meta-networking/recipes-support/cifs/{cifs-utils_6.9.bb => cifs-utils_6.10.bb} (89%)
+[...]
 
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils/0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch b/meta-networking/recipes-support/cifs/cifs-utils/0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch
-new file mode 100644
-index 000000000..233ae40ce
---- /dev/null
-+++ b/meta-networking/recipes-support/cifs/cifs-utils/0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch
-@@ -0,0 +1,43 @@
-+From f61f5f8a328207867b5c523b1c6bef6aaecaab88 Mon Sep 17 00:00:00 2001
-+From: Wang Mingyu <wangmy@cn.fujitsu.com>
-+Date: Sat, 15 Feb 2020 16:05:58 +0800
-+Subject: [PATCH] Bugfix: Modify the dir of install-exec-hook and
-+ install-data-hook
-+
-+Error message:
-+(cd /sbin && ln -sf mount.cifs mount.smb3)
-+  /yocto/work001/fnst/wangmy/build/tmp/hosttools/install -c mount.cifs
-+'/yocto/work001/fnst/wangmy/build/tmp/work/core2-64-poky-linux/cifs-utils/6.10-r0/image/sbin'
-+make  install-data-hook
-+ln: failed to create symbolic link 'mount.smb3': Permission denied
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-+---
-+ Makefile.am | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index fe9cd34..e9be6b3 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -119,11 +119,11 @@ endif
-+ SUBDIRS = contrib
-+ 
-+ install-exec-hook:
-+-	(cd $(ROOTSBINDIR) && ln -sf mount.cifs mount.smb3)
-++	(cd $(DESTDIR)$(ROOTSBINDIR) && ln -sf mount.cifs mount.smb3)
-+ 
-+ install-data-hook:
-+-	(cd $(man8dir) && ln -sf mount.cifs.8 mount.smb3.8)
-++	(test -n "$(man_MANS)" || exit 0; cd $(DESTDIR)$(man8dir) && ln -sf mount.cifs.8 mount.smb3.8)
-+ 
-+ uninstall-hook:
-+-	(cd $(ROOTSBINDIR) && rm -f $(ROOTSBINDIR)/mount.smb3)
-+-	(cd $(man8dir) && rm -f $(man8dir)/mount.smb3.8)
-++	(cd $(DESTDIR)$(ROOTSBINDIR) && rm -f $(DESTDIR)$(ROOTSBINDIR)/mount.smb3)
-++	(test -n "$(man_MANS)" || exit 0; cd $(DESTDIR)$(man8dir) && rm -f $(DESTDIR)$(man8dir)/mount.smb3.8)
-+-- 
-+2.17.1
-+
-diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.9.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.10.bb
-similarity index 89%
-rename from meta-networking/recipes-support/cifs/cifs-utils_6.9.bb
-rename to meta-networking/recipes-support/cifs/cifs-utils_6.10.bb
-index 51dcb23d1..8d82ee454 100644
---- a/meta-networking/recipes-support/cifs/cifs-utils_6.9.bb
-+++ b/meta-networking/recipes-support/cifs/cifs-utils_6.10.bb
-@@ -4,9 +4,9 @@ SECTION = "otherosfs"
- LICENSE = "GPLv3 & LGPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
--PV = "6.9"
-+PV = "6.10"
- 
--SRCREV = "9a8c21ad9e4510a83a3a41f7a04f763a4fe9ec09"
-+SRCREV = "5ff5fc2ecc10353fd39ad508db5c2828fd2d8d9a"
- SRC_URI = "git://git.samba.org/cifs-utils.git"
- 
- S = "${WORKDIR}/git"
-@@ -22,6 +22,10 @@ PACKAGECONFIG[cifsidmap] = "--enable-cifsidmap,--disable-cifsidmap,keyutils samb
- PACKAGECONFIG[cifsacl] = "--enable-cifsacl,--disable-cifsacl,samba"
- PACKAGECONFIG[pam] = "--enable-pam --with-pamdir=${base_libdir}/security,--disable-pam,libpam keyutils"
- 
-+SRC_URI += " \
-+            file://0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch \
-+            "
-+
- inherit autotools pkgconfig
- 
- do_install_append() {
--- 
-2.17.1
+> > +DEPENDS += "bison-native \
+> > +            ninja-native \
+> > +            elfutils-native \
+> > +            flex-native \
+> > +            ${MLPREFIX}elfutils \
+> > +            ${MLPREFIX}binutils \
+> > +            ${MLPREFIX}flex \
+> > +            luajit \
+> > +            clang \
+> > +            "
+> > +
+> 
+> this will add meta-clang dependency directly into meta-oe, which is not desired
+> is it possible to make it optional or perhaps marked when meta-clang
+> is not in BBLAYERS
 
+Thanks a lot for reviewing.  clang is mandotory for BCC to compile
+eBPF programs, so I think we cannot build clang as optional for BCC.
 
+For marking the recipe when meta-clang is not in BBLAYERS, I searched
+with google but seems 'LAYERDEPENDS' and 'BBMASK' both are not suitable
+for this case.  Could you give more detailed info for how to do this?
 
+Thanks,
+Leo
 
