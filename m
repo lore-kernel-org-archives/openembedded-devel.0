@@ -1,54 +1,53 @@
 Return-Path: <leo.yan@linaro.org>
-Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com
-	[209.85.216.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 035F761580
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com
+	[209.85.210.172])
+	by mail.openembedded.org (Postfix) with ESMTP id B064461586
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 05:26:15 +0000 (UTC)
-Received: by mail-pj1-f65.google.com with SMTP id j17so480459pjz.3
+	Tue, 18 Feb 2020 05:26:19 +0000 (UTC)
+Received: by mail-pf1-f172.google.com with SMTP id i6so10060951pfc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2020 21:26:17 -0800 (PST)
+	Mon, 17 Feb 2020 21:26:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=R6V/H3WZ1KIqgckgzTZHJxiXpLOeB8Wy/6mCLmcrDpU=;
-	b=Dia9UWEnNOEQp87aoCnmJwVk/4NPoyiCIX1c41eQjqX+ceTf0rtzVHVTCA+ZUd0Q9X
-	mTPb9hm0Kz1GTKuOAC/T3+LweYdKQUUryhv/55n+rTe6/CHDraLVzlpACUDYBXR6mxxJ
-	dWUbmgtM1Bi/UJJh4ZToMe5Tg3d6p2zfee7E8cks6DBfy1CYKG2h89wMC73p47vn+hr3
-	eToW2FGGXaK1ulLda2yMB4z4lq21JITXc4zvr+Fyts1uz/XenczzKDaYVBu4zPYDjLMa
-	yNO1GqJF3+zTcC5324q2yI005OvJmFaOReG7HYVm/Cn6fn7ciQlRSZLef6RjyBT4jRPS
-	4VQw==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=RXQZyju8s/BCy9jl4jYBupEPem32BP8kTqnefLJNOQ0=;
+	b=yj20Ilx8p6r1di1m9LgBr5pp/MJXoLI22ujVlXHCyVC3cDYUYpa9jIhZ3NaPp+UYi3
+	qwfNKpNR7143wLdiaiCD+wevWD3mnXkYL0ET02Hvlaqq3LF/urvfoo0NXTXT4AzFpYHV
+	MNR2N2pv5hjAZzNs0X2r84T++EehU05HqvpGoG5STKZvJj0hSwdSCnKW0M3zMIJv5pC7
+	jv3SQvAwNkrtcC8Zf3GxTk0Asyt5pnA9UvyxcTP6WDI6bd/E0pOKAx1uN1VHBWyQsJXr
+	0uSOEEBqaCD2UAkaFGTWYd/6QhkUA0pJhqmHdGfCWZtNNi0SvLTrBqS9ZZBEywkkbfdN
+	9lTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=R6V/H3WZ1KIqgckgzTZHJxiXpLOeB8Wy/6mCLmcrDpU=;
-	b=YO+I+KMh7+pbRBiTqt8D342Tqf7QYEBekwJre3FJ/IpM6BtYztYhy4WWuv6CD7qvqp
-	VhVaotLSjKMVxf4T6BmEVGeI6GkC8sLKezEMgUqL4EwtLi2BCx9oXs23hb41xS3uo2G/
-	Xjpvh4SbOgdTYfizEdxj3EgeDflZt87ltKYFcDjTxoZJ5YwU+f8yBesOdPrE7I+hXiQ7
-	63/kVGD/4EPDudUZrXXuZkXFyfYRyDf1/Kn64aVbDOFHx6Ki9FvkrOJ/YWfsNIJLAjUy
-	dso6rbdWWDrDqRibFhdXbOMbVNxozhB7DBtkTuAkJNbb0Jc9iwfJLRguUPFaYUkj8vHb
-	CQ0g==
-X-Gm-Message-State: APjAAAVwc2/+Bdz2IaQAogoWa0K+NAYJhBDbk9IX/D8fOp8WiK7DQIJD
-	//+OjgBV9iRA6NcVs8ym0JSeA1gFrnDtLw==
-X-Google-Smtp-Source: APXvYqxRNBIJZbBmXcgh7YpEeb0ZMnVZCPyevgRz1NwYW3HxYGT9XNYoVZiq44AJK3RTu2LXYY8tpA==
-X-Received: by 2002:a17:902:123:: with SMTP id
-	32mr19689552plb.38.1582003576928; 
-	Mon, 17 Feb 2020 21:26:16 -0800 (PST)
+	bh=RXQZyju8s/BCy9jl4jYBupEPem32BP8kTqnefLJNOQ0=;
+	b=fqKo7GMYLo7qVJc8EP1NiW0cMKQlbCYVRW8F05gH68XVyikq8srziMKUTHNrubhqv8
+	ljlmEE429/lZ3QWmLGJzxR/kmmjdJDiBCpsuvKix7L/VxPhwswkUyApmdfDc0lVBFJ56
+	caUmZsr7dBSgNIX89NWeOTzIz2LJz96dye41HnhM5rRDKKWeVjhgL3iWwpXJQmotpPvw
+	Ew7gDsn0H5jNixlQsb1qD/KwdcYw9pAoeodcFgVwd7xktmtRIKLs/ZDpOShApfCaM2Ts
+	qDbD2ylh2QfI5jMX2l9jHwLdtuaNSx79SYPVxS5I5ZPnhvJg0PCQKlfSXRbnrbSERkJz
+	XLKg==
+X-Gm-Message-State: APjAAAUjBYPHdQ5gmMiplzipFsRh3VswqNK8pdNzk7okcALbu8Oc4k7U
+	Irh8LbY22pB090bPjZofprqBWiz1gs7wag==
+X-Google-Smtp-Source: APXvYqzaTRYPLt3BwiYw0bPebXfwKM+76o5z6zELrHQcW/LR6Xf4YwZhN5vGezAOqJ4U3LbbTkrj4w==
+X-Received: by 2002:a63:cf41:: with SMTP id b1mr20724348pgj.53.1582003580484; 
+	Mon, 17 Feb 2020 21:26:20 -0800 (PST)
 Received: from localhost.localdomain (li1441-214.members.linode.com.
 	[45.118.134.214])
-	by smtp.gmail.com with ESMTPSA id z4sm2214427pfn.42.2020.02.17.21.26.13
+	by smtp.gmail.com with ESMTPSA id z4sm2214427pfn.42.2020.02.17.21.26.17
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 17 Feb 2020 21:26:16 -0800 (PST)
+	Mon, 17 Feb 2020 21:26:20 -0800 (PST)
 From: Leo Yan <leo.yan@linaro.org>
 To: openembedded-devel@lists.openembedded.org,
 	Sumit Garg <sumit.garg@linaro.org>,
 	Daniel Thompson <daniel.thompson@linaro.org>,
 	Loic Poulain <loic.poulain@linaro.org>
-Date: Tue, 18 Feb 2020 13:25:42 +0800
-Message-Id: <20200218052544.9467-3-leo.yan@linaro.org>
+Date: Tue, 18 Feb 2020 13:25:43 +0800
+Message-Id: <20200218052544.9467-4-leo.yan@linaro.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200218052544.9467-1-leo.yan@linaro.org>
 References: <20200218052544.9467-1-leo.yan@linaro.org>
-Subject: [meta-oe][PATCH v1 2/4] luajit: Add luajit 2.1.0-beta3 recipe
+Subject: [meta-oe][PATCH v1 3/4] BCC: Add build recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,116 +60,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2020 05:26:16 -0000
+X-List-Received-Date: Tue, 18 Feb 2020 05:26:19 -0000
 
-Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
-misses to support aarch64, this patch adds recipe for luajit
-2.1.0-beta3 building.
+From: Sumit Garg <sumit.garg@linaro.org>
 
-Signed-off-by: Leo Yan <leo.yan@linaro.org>
+BPF Compiler Collection (BCC) is a toolkit for creating efficient kernel
+tracing and manipulation programs, and includes versatile tools and
+examples which based on eBPF.  This tool is very widely used on server
+section, but we also can use it for embedded system, e.g. use its
+function trace utilities (trace.py and argdist.py) to trace kernel
+function parameters and return values.
+
+This patch adds recipe for BCC version 0.12.0.  This patch also contains
+a patch to change cmake file so can look for libraries and headers which
+are installed in target sysroot-recipe path for cross compilation.
+
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+Co-developed-by: Leo Yan <leo.yan@linaro.org>
 ---
- .../recipes-devtools/luajit/luajit_2.1.0.bb   | 92 +++++++++++++++++++
- 1 file changed, 92 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/luajit/luajit_2.1.0.bb
+ ...-with-OE-LLVM-cross-compiled-package.patch | 32 ++++++++++++++++
+ meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb    | 37 +++++++++++++++++++
+ 2 files changed, 69 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch
+ create mode 100644 meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.1.0.bb b/meta-oe/recipes-devtools/luajit/luajit_2.1.0.bb
+diff --git a/meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch b/meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch
 new file mode 100644
-index 000000000..167b5d229
+index 000000000..b5acadc1b
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.1.0.bb
-@@ -0,0 +1,92 @@
-+SUMMARY = "Just-In-Time Compiler for Lua"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
-+HOMEPAGE = "http://luajit.org"
++++ b/meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch
+@@ -0,0 +1,32 @@
++From 93cf25ba663e68a6a6f4237fbe0ef8349b3f37ef Mon Sep 17 00:00:00 2001
++From: Sumit Garg <sumit.garg@linaro.org>
++Date: Fri, 14 Feb 2020 07:40:11 +0000
++Subject: [PATCH] Allow to build with OE LLVM cross compiled package
 +
-+PV .= "+git${SRCPV}"
-+SRCREV = "v2.1.0-beta3"
-+SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1"
++The default LLVM cmake package requires all libraries, headers and tools
++to be present but in case of cross compilation, OE only provides
++target specific libraries and headers and requires native llvm tools.
++
++So instead of looking for a complete llvm package, look for libraries and
++headers which are installed in target sysroot-recipe path.
++
++Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
++---
++ CMakeLists.txt | 2 --
++ 1 file changed, 2 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 7bd0f3b2..6f1f12c0 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -39,8 +39,6 @@ endif()
++ if(NOT PYTHON_ONLY AND ENABLE_CLANG_JIT)
++ find_package(BISON)
++ find_package(FLEX)
++-find_package(LLVM REQUIRED CONFIG)
++-message(STATUS "Found LLVM: ${LLVM_INCLUDE_DIRS} ${LLVM_PACKAGE_VERSION}")
++ find_package(LibElf REQUIRED)
++
++ # clang is linked as a library, but the library path searching is
++--
++2.17.1
+diff --git a/meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb b/meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb
+new file mode 100644
+index 000000000..687fb64c7
+--- /dev/null
++++ b/meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb
+@@ -0,0 +1,37 @@
++SUMMARY = "BPF Compiler Collection (BCC)"
++HOMEPAGE = "https://github.com/iovisor/bcc"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
++
++DEPENDS += "bison-native \
++            ninja-native \
++            elfutils-native \
++            flex-native \
++            ${MLPREFIX}elfutils \
++            ${MLPREFIX}binutils \
++            ${MLPREFIX}flex \
++            luajit \
++            clang \
++            "
++
++RDEPENDS_${PN} += "bash python"
++
++SRC_URI = "git://github.com/iovisor/bcc \
++           file://0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch \
++           "
++SRCREV = "368a5b0714961953f3e3f61607fa16cb71449c1b"
 +
 +S = "${WORKDIR}/git"
 +
-+inherit pkgconfig binconfig siteinfo
++inherit cmake
 +
-+BBCLASSEXTEND = "native"
-+
-+# http://luajit.org/install.html#cross
-+# Host luajit needs to be compiled with the same pointer size
-+# If you want to cross-compile to any 32 bit target on an x64 OS,
-+# you need to install the multilib development package (e.g.
-+# libc6-dev-i386 on Debian/Ubuntu) and build a 32 bit host part
-+# (HOST_CC="gcc -m32").
-+BUILD_CC_ARCH_append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
-+
-+# The lua makefiles expect the TARGET_SYS to be from uname -s
-+# Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
-+LUA_TARGET_OS = "Unknown"
-+LUA_TARGET_OS_darwin = "Darwin"
-+LUA_TARGET_OS_linux = "Linux"
-+LUA_TARGET_OS_linux-gnueabi = "Linux"
-+LUA_TARGET_OS_mingw32 = "Windows"
-+
-+# We don't want the lua buildsystem's compiler optimizations, or its
-+# stripping, and we don't want it to pick up CFLAGS or LDFLAGS, as those apply
-+# to both host and target compiles
-+EXTRA_OEMAKE = "\
-+    Q= E='@:' \
-+    \
-+    CCOPT= CCOPT_x86= CFLAGS= LDFLAGS= TARGET_STRIP='@:' \
-+    \
-+    'TARGET_SYS=${LUA_TARGET_OS}' \
-+    \
-+    'CC=${CC}' \
-+    'TARGET_AR=${AR} rcus' \
-+    'TARGET_CFLAGS=${CFLAGS}' \
-+    'TARGET_LDFLAGS=${LDFLAGS}' \
-+    'TARGET_SHLDFLAGS=${LDFLAGS}' \
-+    'HOST_CC=${BUILD_CC}' \
-+    'HOST_CFLAGS=${BUILD_CFLAGS}' \
-+    \
-+    'PREFIX=${prefix}' \
-+    'MULTILIB=${baselib}' \
-+    'LDCONFIG=:' \
++EXTRA_OECMAKE = " \
++    -DCMAKE_INSTALL_PREFIX=/usr \
++    -DENABLE_LLVM_SHARED=ON \
++    -DENABLE_CLANG_JIT=ON \
++    -DENABLE_MAN=OFF \
++    -DLLVM_PACKAGE_VERSION=${LLVMVERSION} \
++    -DPYTHON_CMD=python3 \
 +"
 +
-+do_compile () {
-+    oe_runmake
-+}
-+
-+# There's INSTALL_LIB and INSTALL_SHARE also, but the lua binary hardcodes the
-+# '/share' and '/' + LUA_MULTILIB paths, so we don't want to break those
-+# expectations.
-+EXTRA_OEMAKEINST = "\
-+    'DESTDIR=${D}' \
-+    'INSTALL_BIN=${D}${bindir}' \
-+    'INSTALL_INC=${D}${includedir}/luajit-$(MAJVER).$(MINVER)' \
-+    'INSTALL_MAN=${D}${mandir}/man1' \
-+"
-+do_install () {
-+    oe_runmake ${EXTRA_OEMAKEINST} install
-+    rmdir ${D}${datadir}/lua/5.* \
-+          ${D}${datadir}/lua \
-+          ${D}${libdir}/lua/5.* \
-+          ${D}${libdir}/lua
-+}
-+
-+PACKAGES += 'luajit-common'
-+
-+# See the comment for EXTRA_OEMAKEINST. This is needed to ensure the hardcoded
-+# paths are packaged regardless of what the libdir and datadir paths are.
-+FILES_${PN} += "${prefix}/${baselib} ${prefix}/share"
-+FILES_${PN} += "${libdir}/libluajit-5.1.so.2 \
-+    ${libdir}/libluajit-5.1.so.${PV} \
-+"
-+FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
-+    ${libdir}/libluajit-5.1.so \
-+    ${libdir}/pkgconfig/luajit.pc \
-+"
-+FILES_luajit-common = "${datadir}/${BPN}-${PV}"
-+
-+# mips64 is not supported in this release
-+COMPATIBLE_HOST_mipsarchn32 = "null"
-+COMPATIBLE_HOST_mipsarchn64 = "null"
++FILES_${PN} += "${libdir}/python*/dist-packages"
 -- 
 2.17.1
 
