@@ -1,49 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f172.google.com (mail-pg1-f172.google.com
-	[209.85.215.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D1E461580
+Received: from mail-pj1-f67.google.com (mail-pj1-f67.google.com
+	[209.85.216.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 8772D61596
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 06:23:42 +0000 (UTC)
-Received: by mail-pg1-f172.google.com with SMTP id 6so10441072pgk.0
+	Tue, 18 Feb 2020 06:23:43 +0000 (UTC)
+Received: by mail-pj1-f67.google.com with SMTP id ep11so553428pjb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2020 22:23:44 -0800 (PST)
+	Mon, 17 Feb 2020 22:23:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=wo1aGIII1tlklLkxyqOIbnpz1sRuH6sXI0gQCFb4UP8=;
-	b=XAcB7rlbWLb1kZrLhBclnaTw4sHAN2hgxnYtHprIzQ3o+Vdba9eTkYdgu60hRE5Ngh
-	i8YMdV5OPYdob8rw0Biw5EJj2tZ4Ckdurcb7DOichj0/hPiOymfkm+IfeHbWXSX/7Dwp
-	+YHixX2J/2pDq1dVE0xX6uZyPONUG48JDF/GSfEpxavWooiuMj56mMNA/VGAwfOWiFDn
-	q8nwN0j35wC4AZ5R24JxJYrQHrxcRoIHCqBuO+3DjimICUXRtdhjvLctERVXr2iEcefA
-	k8CXRcJTe6m4+Gtku9gRKwKCyAaBwGnn98JlEOLDoITPLQazT7xO9IOfvQogZDulJf/9
-	D8EA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=/THZ0Wy3BzTVuY+EBJQTKz5dI5bOvJOsSWOj8kixLF8=;
+	b=gmn8dFyWJSfcyWMdjYJHLIrvfzKiMGn9cT/Sp6bAfyWoIHiLG7SPw19zy2Sr1xBSGL
+	H/4IA98p4gbaL3oi62qQobNlZWvG7ECDiW2+Ibd1KW8Y/0sscZnhYVwEo68LIloxXmHO
+	DXkRI9WmzAFfxuA1E+FvNJXRsmJ/1n6AcVKw14rOTRMuinBboyP188K5CI/zChOoT1JL
+	0jbvPfGa6IZPXEenigp6Z1AMaxlkuvvyeE3bEG1rgpT9XhMhhVKnhn8xjPqcZOiOgV6+
+	3/m+gBg//aSCUHd+5uiW7yqdOROsOB7RXVKKQxxdJ8PRUrDvMfD3+4dHbIk3nH3eiyr3
+	fl+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=wo1aGIII1tlklLkxyqOIbnpz1sRuH6sXI0gQCFb4UP8=;
-	b=QAD50YKpTLWW98k5SMotSzelnHe/tWf7eEQjsb2SIZRXO0s4youZw2OsLiSyjKDy2o
-	64in84WaozHWAd8/UdDMNUo8Y+Vz/4SjI0B6YIrbQrCo3iAeOMtjICMDSZirPNGJG4wn
-	V5L7zSriueMSm7NyloaCgCAvC2ofj1PYyvsCJX2FDmCczsVQHEKG1pDwDlBf1SlBeKRP
-	S5O1UWTaGcyfajmklp4phgpvKiBOyZne5Aity1SfC58rSaIF9GAZqU2Qx365vgvgMrqL
-	+++9IfvjfU5819iWFpQSTKBwQSg5WY32e1w41jg2NN5k9zr+sY7akjbhixcv3+RrRcsU
-	g2+w==
-X-Gm-Message-State: APjAAAWFPiPPG2/87e25P8RRCjzXb86nG9CPe+YwfBwr52MTe1euNlUu
-	J7tNdGmbNGirqpKgTfQGh7ZdYT/5G0M=
-X-Google-Smtp-Source: APXvYqzQQn0zNvoc5N80p5LFM26Xo91UZxRZt/Bb0jdzt58+RqjzLVczaThA3XKcsTBfwypE6ohV6g==
-X-Received: by 2002:a63:7d59:: with SMTP id m25mr20526821pgn.356.1582007023243;
-	Mon, 17 Feb 2020 22:23:43 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=/THZ0Wy3BzTVuY+EBJQTKz5dI5bOvJOsSWOj8kixLF8=;
+	b=snwXX4xWvIU1kflZ+aorLA8/PRZGaw4XbStPnUXK+Xx4oQSBezCpW7b5tGxnW5UhSf
+	KMNIAjuIepXIZd30SBIMwvtnOajEgM/USYMgmnWO8S+3h9lxV1d4H3xhNABhle0XHi1s
+	CJv6pXUuvlB3d2NIgZ41c6VnhlowBcXHyNhf+ElszBmnbQimhW72ufFPuJB8Wuoyr1x/
+	3SwdeJLuv4TV5w/HPDevvZGejD9BXDW+blkePWYd7iRAVJpcq0KG2YpjKAZxh2Up3Nst
+	m+qJTteryK4bcqzv1LyDXkuca5bFSFWLP+HvovvzBEr3JKGFYAaq/cxDy5PE7E6XA1+n
+	LgIA==
+X-Gm-Message-State: APjAAAXDDmJmSnIWi2vjUgH1F10a8CgzeNeb/Je7dz64IaHtXI/yjQvx
+	YG24JTWekwc2drSjbocWkRz3e0SXj1Q=
+X-Google-Smtp-Source: APXvYqyXgC75TUkZujRtEYwZusPKQolzOcep3ka2iACNaqSlus0I+u9gTjcRQoDT7DQx2r94g9F04Q==
+X-Received: by 2002:a17:902:6809:: with SMTP id
+	h9mr19283632plk.32.1582007024255; 
+	Mon, 17 Feb 2020 22:23:44 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::98a3])
-	by smtp.gmail.com with ESMTPSA id h26sm2573363pfr.9.2020.02.17.22.23.41
+	by smtp.gmail.com with ESMTPSA id h26sm2573363pfr.9.2020.02.17.22.23.43
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 17 Feb 2020 22:23:42 -0800 (PST)
+	Mon, 17 Feb 2020 22:23:43 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Feb 2020 22:23:41 -0800
-Message-Id: <20200218062348.3742529-1-raj.khem@gmail.com>
+Date: Mon, 17 Feb 2020 22:23:42 -0800
+Message-Id: <20200218062348.3742529-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200218062348.3742529-1-raj.khem@gmail.com>
+References: <20200218062348.3742529-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 1/8] x265: Move into meta-multimedia
+Subject: [meta-multimedia][PATCH 2/8] gssdp: Upgrade to 1.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,19 +59,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2020 06:23:43 -0000
+X-List-Received-Date: Tue, 18 Feb 2020 06:23:44 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-multimedia/x265/x265_3.2.1.bb                         | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename {meta-openembedded/meta-multimedia => meta-multimedia}/recipes-multimedia/x265/x265_3.2.1.bb (100%)
+Switch to using meson
+Use sniffer via packageconfig
 
-diff --git a/meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb b/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
-similarity index 100%
-rename from meta-openembedded/meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
-rename to meta-multimedia/recipes-multimedia/x265/x265_3.2.1.bb
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Andreas Müller <schnitzeltony@gmail.com>
+---
+ .../recipes-connectivity/gupnp/gssdp_1.0.2.bb | 24 -------------------
+ .../recipes-connectivity/gupnp/gssdp_1.2.2.bb | 20 ++++++++++++++++
+ 2 files changed, 20 insertions(+), 24 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb
+
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb
+deleted file mode 100644
+index 6088ef1954..0000000000
+--- a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb
++++ /dev/null
+@@ -1,24 +0,0 @@
+-SUMMARY = "Resource discovery and announcement over SSDP"
+-DESCRIPTION = "GSSDP implements resource discovery and announcement over SSDP (Simpe Service Discovery Protocol)."
+-LICENSE = "LGPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
+-DEPENDS = "glib-2.0 libsoup-2.4"
+-
+-SRC_URI = "${GNOME_MIRROR}/${BPN}/1.0/${BPN}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "b30c9a406853c6a3a012d151d6e7ad2c"
+-SRC_URI[sha256sum] = "a1e17c09c7e1a185b0bd84fd6ff3794045a3cd729b707c23e422ff66471535dc"
+-
+-inherit autotools pkgconfig gobject-introspection vala gtk-doc
+-
+-# Copy vapigen.m4 so that it doesn't get removed by vala class
+-# (normally this would be the right thing to do, but in gssdp the vapigen.m4 has only a custom macro)
+-do_configure_prepend() {
+-        cp -f ${S}/m4/vapigen.m4 ${S}/m4/vapigen-custom.m4 || true
+-}
+-
+-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtk', '', d)}"
+-PACKAGECONFIG[gtk] = "--with-gtk,--without-gtk,gtk+3"
+-
+-PACKAGES =+ "gssdp-tools"
+-
+-FILES_gssdp-tools = "${bindir}/gssdp* ${datadir}/gssdp/*.glade"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb
+new file mode 100644
+index 0000000000..ddaddd2094
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.2.2.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Resource discovery and announcement over SSDP"
++DESCRIPTION = "GSSDP implements resource discovery and announcement over SSDP (Simpe Service Discovery Protocol)."
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
++DEPENDS = "glib-2.0 libsoup-2.4"
++
++SRC_URI = "${GNOME_MIRROR}/${BPN}/1.2/${BPN}-${PV}.tar.xz"
++SRC_URI[md5sum] = "f00a470ebcba96f34def8f83ac5891ed"
++SRC_URI[sha256sum] = "cabb9e3b456b8354a55e23eb0207545d974643cda6d623523470ebbc4188b0a4"
++
++GTKDOC_MESON_OPTION = 'gtk_doc'
++
++inherit meson pkgconfig gobject-introspection vala gtk-doc
++
++PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'sniffer', '', d)}"
++PACKAGECONFIG[sniffer] = "-Dsniffer=true,-Dsniffer=false,gtk+3,"
++
++PACKAGES =+ "gssdp-tools"
++
++FILES_gssdp-tools = "${bindir}/gssdp* ${datadir}/gssdp/*.glade"
 -- 
 2.25.1
 
