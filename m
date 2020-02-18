@@ -1,51 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 704DE615C7
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
+	[209.85.222.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 3CE206157A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 06:25:56 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id q8so10110393pfh.7
+	Tue, 18 Feb 2020 06:31:12 +0000 (UTC)
+Received: by mail-qk1-f193.google.com with SMTP id u124so18000111qkh.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2020 22:25:57 -0800 (PST)
+	Mon, 17 Feb 2020 22:31:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=7Rgjs5W3nj1mQvPBpXY9qYcLmQZlbhfJA0gp8S+ZObg=;
-	b=IYcwW0p9T4l9h7YAwv+JowxDLqbqn7SKymPu4Vs4uaNo5bwA0H/CoF88vnA8U+n+xo
-	dJ8JO44w41LrAZk3DJHInNixboDMBOtPk9D+84+P2oqZzh+fW8+F80APyLbZ7aiBmt+0
-	qfLqYrfucie+VgGQ0S/VJI0NwTskR8QXjYsWTNw8ENiHCWWMlqILeXWLdCtxsl7NSnfU
-	p1zX2cVkRHoXLT40edw4j2NG3rb/wt+nGow+jd9Jy4hpe3R1x0y7FkQkfJQdzD0YguQE
-	1g1H+Kcyg2M5lRULKCT7yxsAUG8lVjnLldQymlxwIQuzzV7gmuhImeoU1nPDOnvte9JZ
-	dd1g==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=D+VRA1WIQ8mWfGR2ilt5TzMaWtFNFPAXvwAXBIYz5a4=;
+	b=Gu5qzAXounJMNB3niJ3v9ukyMZ9zMUd8r+Asfz7zXtogN4A0SYRZFOEK9nQIdkkrVQ
+	UUQw22sKo1nlv1ijup6PALL8iCaymRYIbVq3ZynA9dDU7WL7fU26Mbi4tVrQVFODZwv8
+	CVV+B/JcaYOTdoelqc3o3PwXhZ3eM1XV22GtKxD0j8Bh9lQKK0MBsp/l35TqvZ8FO+fs
+	PlaYiDLFtupgGh3nSMsaXKHzrtI407wI3Eqk4T1Igz0h9Mr83DlPblUz2Ugovic9zmJK
+	GSWVX5+hgFZyShzG6LH7pb1n3dXnsZ69mt/0psa/V5NZlQIIDUC8E5gLbhRe2yE92c2n
+	BZHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=7Rgjs5W3nj1mQvPBpXY9qYcLmQZlbhfJA0gp8S+ZObg=;
-	b=jTm/pzquv0gkwT3kLHOtz3kUD6e3yRe6Vbl3sbhvDBE7CMrhtoN4jdNQZbLF3J0k7b
-	mluJrul81yBZYTbtpdVERY7fXZFSb6vt67FbNl+hVuNHnGLEd248t7shdLynUmCzTE0B
-	476jJUHYTiac6/p2gmplqDMqZG2I15SJAglxMObGmu/zI6KGKoz+LD2SBUYvdEMkYMkg
-	EePQysHySS20Ftu8t03WkYR0qeiA6HlXd9iVOzEP9r0IYstl14E1trJb6psM1OW2E8Hn
-	ic68tO1Q1EVRGguOkECAqwdQ84xACCealoGWjzAotC8LzlUU5QHnZc/XrQToFgis1Lpv
-	YM4w==
-X-Gm-Message-State: APjAAAWsAFcN44L9OlKxMoIixEQTOWsJUJG6hm52BPyVtZJpfnY3MDyr
-	qGpAj0T36qjQc8vRVWjoEfCIig5LxGs=
-X-Google-Smtp-Source: APXvYqzBD2hWt32cRrqbrR1Vau+cl14wDtxhEMZYCg4+c2dX9dGkW/KXh8aN4VHR/z0rCBisRFp3TQ==
-X-Received: by 2002:a63:1503:: with SMTP id v3mr21274719pgl.295.1582007157185; 
-	Mon, 17 Feb 2020 22:25:57 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::98a3])
-	by smtp.gmail.com with ESMTPSA id ev5sm1571898pjb.4.2020.02.17.22.25.56
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 17 Feb 2020 22:25:56 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Feb 2020 22:26:01 -0800
-Message-Id: <20200218062601.3743291-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200218062601.3743291-1-raj.khem@gmail.com>
-References: <20200218062601.3743291-1-raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=D+VRA1WIQ8mWfGR2ilt5TzMaWtFNFPAXvwAXBIYz5a4=;
+	b=KlD1DkmPPj7POmSaHkqqBnE0FjeLGHJMNuPIYOG2WiHLn+v/xTKXVJMTbpvSkQFB7x
+	BbkuDFMW1rVdGlPIzGcwZ4eQjdF4SSutD30nXo+IL0OAzCx37QvgdEsILj7rSG2i8BKu
+	n1CNacXoW3285s0Vev7fE1tT/erRiFj9Ppd+gwcBt926vnLJqRT1/KrcUSZdHK2wWVCG
+	LgcuVcqeDv46xFBkNg9CEwZmUXmRQwXU1lmQF2BlnzxQdyDcMsYxEqHE0YNvdiymeTBy
+	Tkz/6HzR+/HVH7ayj4pOCq5QZXYFd1R+IW5lp7zO3qwTppKuQz/bbLkk/bHysDDLqfL2
+	RArg==
+X-Gm-Message-State: APjAAAUXySduJwSSc94IaWcBHJMDW2+aUlJEuLncBYnDLeoSlbwUErjH
+	ugLteX4ZPoQQxcBya1YSg0yw88kcapiHwBcSqM/Z9eua
+X-Google-Smtp-Source: APXvYqzML7oMEY05mCw4pzo3vC13C6Mk1Rp9wuDKvpLTy8T/EoVecSxXxINA/v6b9n4kjoST64CRmEIZpmv6V5281N8=
+X-Received: by 2002:a37:de05:: with SMTP id h5mr17976518qkj.474.1582007472752; 
+	Mon, 17 Feb 2020 22:31:12 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/3] rsyslog: Use python3 in ptests
+References: <20200218052544.9467-1-leo.yan@linaro.org>
+	<20200218052544.9467-4-leo.yan@linaro.org>
+In-Reply-To: <20200218052544.9467-4-leo.yan@linaro.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 17 Feb 2020 22:30:46 -0800
+Message-ID: <CAMKF1spwQ+Y3D3MpdnV1OcNSVL=7=fENq8amqpBMq0d6WHuwiQ@mail.gmail.com>
+To: Leo Yan <leo.yan@linaro.org>
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+	Loic Poulain <loic.poulain@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v1 3/4] BCC: Add build recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,42 +56,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2020 06:25:56 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 18 Feb 2020 06:31:12 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Adjusts rdeps accordingly
+On Mon, Feb 17, 2020 at 9:27 PM Leo Yan <leo.yan@linaro.org> wrote:
+>
+> From: Sumit Garg <sumit.garg@linaro.org>
+>
+> BPF Compiler Collection (BCC) is a toolkit for creating efficient kernel
+> tracing and manipulation programs, and includes versatile tools and
+> examples which based on eBPF.  This tool is very widely used on server
+> section, but we also can use it for embedded system, e.g. use its
+> function trace utilities (trace.py and argdist.py) to trace kernel
+> function parameters and return values.
+>
+> This patch adds recipe for BCC version 0.12.0.  This patch also contains
+> a patch to change cmake file so can look for libraries and headers which
+> are installed in target sysroot-recipe path for cross compilation.
+>
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> Co-developed-by: Leo Yan <leo.yan@linaro.org>
+> ---
+>  ...-with-OE-LLVM-cross-compiled-package.patch | 32 ++++++++++++++++
+>  meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb    | 37 +++++++++++++++++++
+>  2 files changed, 69 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch
+>  create mode 100644 meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb
+>
+> diff --git a/meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch b/meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch
+> new file mode 100644
+> index 000000000..b5acadc1b
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch
+> @@ -0,0 +1,32 @@
+> +From 93cf25ba663e68a6a6f4237fbe0ef8349b3f37ef Mon Sep 17 00:00:00 2001
+> +From: Sumit Garg <sumit.garg@linaro.org>
+> +Date: Fri, 14 Feb 2020 07:40:11 +0000
+> +Subject: [PATCH] Allow to build with OE LLVM cross compiled package
+> +
+> +The default LLVM cmake package requires all libraries, headers and tools
+> +to be present but in case of cross compilation, OE only provides
+> +target specific libraries and headers and requires native llvm tools.
+> +
+> +So instead of looking for a complete llvm package, look for libraries and
+> +headers which are installed in target sysroot-recipe path.
+> +
+> +Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> +---
+> + CMakeLists.txt | 2 --
+> + 1 file changed, 2 deletions(-)
+> +
+> +diff --git a/CMakeLists.txt b/CMakeLists.txt
+> +index 7bd0f3b2..6f1f12c0 100644
+> +--- a/CMakeLists.txt
+> ++++ b/CMakeLists.txt
+> +@@ -39,8 +39,6 @@ endif()
+> + if(NOT PYTHON_ONLY AND ENABLE_CLANG_JIT)
+> + find_package(BISON)
+> + find_package(FLEX)
+> +-find_package(LLVM REQUIRED CONFIG)
+> +-message(STATUS "Found LLVM: ${LLVM_INCLUDE_DIRS} ${LLVM_PACKAGE_VERSION}")
+> + find_package(LibElf REQUIRED)
+> +
+> + # clang is linked as a library, but the library path searching is
+> +--
+> +2.17.1
+> diff --git a/meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb b/meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb
+> new file mode 100644
+> index 000000000..687fb64c7
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb
+> @@ -0,0 +1,37 @@
+> +SUMMARY = "BPF Compiler Collection (BCC)"
+> +HOMEPAGE = "https://github.com/iovisor/bcc"
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
+> +
+> +DEPENDS += "bison-native \
+> +            ninja-native \
+> +            elfutils-native \
+> +            flex-native \
+> +            ${MLPREFIX}elfutils \
+> +            ${MLPREFIX}binutils \
+> +            ${MLPREFIX}flex \
+> +            luajit \
+> +            clang \
+> +            "
+> +
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+this will add meta-clang dependency directly into meta-oe, which is not desired
+is it possible to make it optional or perhaps marked when meta-clang
+is not in BBLAYERS
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
-index 29bba2d9a7..f82caf7b5c 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.1911.0.bb
-@@ -77,6 +77,12 @@ PACKAGECONFIG[libdbi] = "--enable-libdbi,--disable-libdbi,libdbi,"
- PACKAGECONFIG[mail] = "--enable-mail,--disable-mail,,"
- PACKAGECONFIG[valgrind] = "--enable-valgrind,--disable-valgrind,valgrind,"
- 
-+do_configure_prepend() {
-+    sed -i -e 's|python |python3 |g' ${S}/tests/*.sh
-+    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/tests/*.py
-+    sed -i -e 's|/usr/bin/env python|/usr/bin/env python3|g' ${S}/tests/testsuites/*.py
-+}
-+
- TESTDIR = "tests"
- do_compile_ptest() {
-     echo 'buildtest-TESTS: $(check_PROGRAMS)' >> ${TESTDIR}/Makefile
-@@ -186,6 +192,6 @@ VALGRIND_riscv64 = ""
- 
- RDEPENDS_${PN}-ptest += "\
-   make diffutils gzip bash gawk coreutils procps \
--  libgcc python-core python-io \
-+  libgcc python3-core python3-io \
-   "
- RRECOMMENDS_${PN}-ptest += "${TCLIBC}-dbg ${VALGRIND}"
--- 
-2.25.1
-
+> +RDEPENDS_${PN} += "bash python"
+> +
+> +SRC_URI = "git://github.com/iovisor/bcc \
+> +           file://0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch \
+> +           "
+> +SRCREV = "368a5b0714961953f3e3f61607fa16cb71449c1b"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit cmake
+> +
+> +EXTRA_OECMAKE = " \
+> +    -DCMAKE_INSTALL_PREFIX=/usr \
+> +    -DENABLE_LLVM_SHARED=ON \
+> +    -DENABLE_CLANG_JIT=ON \
+> +    -DENABLE_MAN=OFF \
+> +    -DLLVM_PACKAGE_VERSION=${LLVMVERSION} \
+> +    -DPYTHON_CMD=python3 \
+> +"
+> +
+> +FILES_${PN} += "${libdir}/python*/dist-packages"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
