@@ -1,54 +1,39 @@
-Return-Path: <jpuhlman@gmail.com>
-Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com
-	[209.85.167.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B69F60573
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D51A601B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 21:55:28 +0000 (UTC)
-Received: by mail-oi1-f170.google.com with SMTP id r137so2160236oie.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 13:55:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ivdMRZOO3VoYGtawmShiD3DDNbGHU7wfkUbKWmxWAfs=;
-	b=mn43r9ohj7YRv/eJTJHzF94zo2N0qttI/pSC8zcPzRlbJh43FoMagrOnD4p2BSdZCY
-	OzwK7lHfIPPvHzgp2c2Ixh/Yq+AZM3bQO1djzUVeeWCiyqQu6+VDaqqJ0KREROMaLbVx
-	8XWdPWGbrsWlsRTliNyb9w2MBIRZZzZH3npNyAkdZ+fMV9hoz/bB62AHo1JupW+XGZM1
-	syhyOmxnj4AznHC2fk+O87nDt0/pvdDxQNGsA8TYWd6oNrxuhO5/KHwtoK4AKtd2wgc7
-	EAJZNtAyv8dEcsIKEPJqCNee6xDaV+tE0s7JxoWYSJEvAbys+xOuYzERoEtub6JzeoH+
-	joyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-	:mime-version:content-transfer-encoding;
-	bh=ivdMRZOO3VoYGtawmShiD3DDNbGHU7wfkUbKWmxWAfs=;
-	b=b3U7IL1A7XQF0AzfQjXq0sJk8BcengYDl3mmhcFGJ0SrFFKeW5ug/3ketfpjPtPYsp
-	MiY1fsBy2dMSqTblCGqOCoqIA9aABb/MgRmSmRS43DkUP3XgLawlHE0oYXsXPqWwh9wc
-	hkcMLztChP0Dyz2QfUq+y9yaDw6OJ+bFoDwAzdwy4qDWFSdBgpU/Egv1L9C5XRPcjjy7
-	yQb5AOrMFqBYho/xapcrC2M7ez4gqJhY85cBhulqOjM4lhnn5B/ZILCqO0dOkO/PlA9/
-	pb0PT0KY2MqB2p0RMR1qdyXZEafU9lbO/GpdUb2UVqc4Xsdv7UVv58UXXI5MCmM0t0x4
-	wUMA==
-X-Gm-Message-State: APjAAAUfyc0PssPEAbE38mu8NavH1uLiCYrA7IoNrCF0A7a1ny44/rZE
-	AAgLMNTBQBhYoMBHjIZjX5wOxxFL4rrMqw==
-X-Google-Smtp-Source: APXvYqxhNiOq3fDplqCA1jdXjR8crE/H0FK5SnO6xMxbZigap/35f+GvcOnz7CmYtbjqY25BDC59aQ==
-X-Received: by 2002:a05:6808:8ee:: with SMTP id
-	d14mr2517749oic.138.1582062929131; 
-	Tue, 18 Feb 2020 13:55:29 -0800 (PST)
-Received: from workhorse.localdomain
-	(99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
-	by smtp.gmail.com with ESMTPSA id r2sm1776033otk.22.2020.02.18.13.55.28
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 18 Feb 2020 13:55:28 -0800 (PST)
-Sender: Jeremy Puhlman <jpuhlman@gmail.com>
-Received: by workhorse.localdomain (Postfix, from userid 1000)
-	id 609392A04CB; Tue, 18 Feb 2020 13:55:25 -0800 (PST)
-From: Jeremy Puhlman <jpuhlman@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Feb 2020 13:55:22 -0800
-Message-Id: <20200218215522.13099-1-jpuhlman@mvista.com>
-X-Mailer: git-send-email 2.20.1
+	Tue, 18 Feb 2020 22:09:25 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48MZl82tBfz3R;
+	Tue, 18 Feb 2020 23:09:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1582063764;
+	bh=Rzczh6tIONPpEKEwLUuf9WDg+tpYJxYU5yOyJg4HP+4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=HEFmc7BtR5Jb+w9dugVoPpyPkNdJ3IxjJg7jpdrDfUg9aaor8N9t7yHki0qbk5L8g
+	GAFSbAp8ssqQRDj7xMDhR5BFFUyHgVeZwdyWhbicTlyrzZZmam7l2uhZ2i65Qe0H+w
+	9rdmUoUDpn2U/17zZKHNnEw+mP4xjBulgM5AsUoNRd8O+d+chqj1JbyLefNpcoxEwo
+	wH79VHUe9vPGKL3MnHorVhtyfWr26Bs2eVkxtVVSt+QGjEIKUiExcuUbyMRAy9jLaX
+	1jsdyw08Xi1Sf/HwTYgdWpUpDZiIzaHucP3P2f3UR23M1W2qALiY+HQRgTOk+oKiib
+	g98aN5x2fr6Su5GxBap6HbTk9w/i9GktCbq+OfwciM02kx/U/yeCTLEOI9p/lfwbWV
+	mjYVoGLEQw27D25jaduzs2Y5caKqrPoyScjHqX4wTqRROglZv1ogPm5jjFYUSnosud
+	cO62r+CCpXeY0iwQO6g6Bx03sK8ExWDNhGxHSqFSsIbOYceSIr2fnKVMZxv6bVhMx8
+	YtxOiYopiJotnGQGldjgKAMHckGo2RIVNTFOfnD4tLkB7hUcVPJQSBfShCryC54QIU
+	q6EDgMD+0Y+MY5qlnJABv59GotNUAWBK0An3qDRifG8zlSGYJXaZspJYXZnuxSc/26
+	wdtfQD3j4xqpjS0fp2GSrRmI=
+Date: Wed, 19 Feb 2020 00:09:22 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: Jonathan Richardson <jonathan.richardson@broadcom.com>
+Message-ID: <20200218220922.GA24326@localhost>
+References: <1581723823-21171-1-git-send-email-wangmy@cn.fujitsu.com>
+	<1581723823-21171-2-git-send-email-wangmy@cn.fujitsu.com>
+	<CAMKF1srVisq=yo-3dJ50T8xnBimO=gDkumZLw=yEaugxGbz7Lw@mail.gmail.com>
+	<CAHrpVsXMkZydpmbXPdQJo5qW1=DpJTqSUghNjTnZahqCg7hj9Q@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mariadb: Add pam_auth to server package.
+In-Reply-To: <CAHrpVsXMkZydpmbXPdQJo5qW1=DpJTqSUghNjTnZahqCg7hj9Q@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] fio: upgrade 3.17 -> 3.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,42 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2020 21:55:28 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 18 Feb 2020 22:09:25 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
+On Tue, Feb 18, 2020 at 11:37:33AM -0800, Jonathan Richardson via Openembedded-devel wrote:
+> I was just about to submit a patch to remove the disabling of compiler
+> optimizations to fio. On our cortex A72 this kills the performance of fio
+> by 25%. That would solve this build issue also.
+>...
+> > https://errors.yoctoproject.org/Errors/Details/391129/
+>...
 
-When pam is enabled, the pam plugin in pulled into the
-server package but not the auth tool which results in
-following error on boot:
+t/io_uring.c:103:17: error: '__NR_sys_io_uring_register' undeclared (first use in this function); did you mean 'SYS_io_uring_register'?
 
-Starting to install database for mariadb
-chown: cannot access '/usr/lib/plugin/auth_pam_tool_dir': No such file
-or directory
-Cannot change ownership of the '/usr/lib/plugin/auth_pam_tool_dir'
-directory
- to the 'mysql' user. Check that you have the necessary permissions and
-try again.
+This error does not look related to optimization.
 
-Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
-Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
----
- meta-oe/recipes-dbs/mysql/mariadb.inc | 1 +
- 1 file changed, 1 insertion(+)
+This looks like https://github.com/axboe/fio/issues/923
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 23de69dd2..6888c64e3 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -299,6 +299,7 @@ FILES_${PN}-server = "\
-     ${sbindir}/ndbd \
-     ${sbindir}/ndb_mgmd \
-     ${libdir}/plugin/*.so \
-+    ${libdir}/plugin/auth_pam_tool_dir/auth_pam_tool \
-     ${datadir}/mysql/ \
-     ${localstatedir}/mysql/ \
-     ${sysconfdir}/init.d/mysqld \
--- 
-2.20.1
-
+cu
+Adrian
 
