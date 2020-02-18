@@ -1,49 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CE206157A
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 153156156D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 06:31:12 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id u124so18000111qkh.13
+	Tue, 18 Feb 2020 07:12:28 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,455,1574092800"; d="scan'208";a="83482969"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 Feb 2020 15:12:28 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id A3D8C406AB15
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2020 22:31:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=D+VRA1WIQ8mWfGR2ilt5TzMaWtFNFPAXvwAXBIYz5a4=;
-	b=Gu5qzAXounJMNB3niJ3v9ukyMZ9zMUd8r+Asfz7zXtogN4A0SYRZFOEK9nQIdkkrVQ
-	UUQw22sKo1nlv1ijup6PALL8iCaymRYIbVq3ZynA9dDU7WL7fU26Mbi4tVrQVFODZwv8
-	CVV+B/JcaYOTdoelqc3o3PwXhZ3eM1XV22GtKxD0j8Bh9lQKK0MBsp/l35TqvZ8FO+fs
-	PlaYiDLFtupgGh3nSMsaXKHzrtI407wI3Eqk4T1Igz0h9Mr83DlPblUz2Ugovic9zmJK
-	GSWVX5+hgFZyShzG6LH7pb1n3dXnsZ69mt/0psa/V5NZlQIIDUC8E5gLbhRe2yE92c2n
-	BZHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=D+VRA1WIQ8mWfGR2ilt5TzMaWtFNFPAXvwAXBIYz5a4=;
-	b=KlD1DkmPPj7POmSaHkqqBnE0FjeLGHJMNuPIYOG2WiHLn+v/xTKXVJMTbpvSkQFB7x
-	BbkuDFMW1rVdGlPIzGcwZ4eQjdF4SSutD30nXo+IL0OAzCx37QvgdEsILj7rSG2i8BKu
-	n1CNacXoW3285s0Vev7fE1tT/erRiFj9Ppd+gwcBt926vnLJqRT1/KrcUSZdHK2wWVCG
-	LgcuVcqeDv46xFBkNg9CEwZmUXmRQwXU1lmQF2BlnzxQdyDcMsYxEqHE0YNvdiymeTBy
-	Tkz/6HzR+/HVH7ayj4pOCq5QZXYFd1R+IW5lp7zO3qwTppKuQz/bbLkk/bHysDDLqfL2
-	RArg==
-X-Gm-Message-State: APjAAAUXySduJwSSc94IaWcBHJMDW2+aUlJEuLncBYnDLeoSlbwUErjH
-	ugLteX4ZPoQQxcBya1YSg0yw88kcapiHwBcSqM/Z9eua
-X-Google-Smtp-Source: APXvYqzML7oMEY05mCw4pzo3vC13C6Mk1Rp9wuDKvpLTy8T/EoVecSxXxINA/v6b9n4kjoST64CRmEIZpmv6V5281N8=
-X-Received: by 2002:a37:de05:: with SMTP id h5mr17976518qkj.474.1582007472752; 
-	Mon, 17 Feb 2020 22:31:12 -0800 (PST)
+	Tue, 18 Feb 2020 15:02:48 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Tue, 18 Feb 2020 15:12:26 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 18 Feb 2020 15:12:31 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 18 Feb 2020 06:31:11 -0800
+Message-ID: <1582036271-94134-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20200218052544.9467-1-leo.yan@linaro.org>
-	<20200218052544.9467-4-leo.yan@linaro.org>
-In-Reply-To: <20200218052544.9467-4-leo.yan@linaro.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 17 Feb 2020 22:30:46 -0800
-Message-ID: <CAMKF1spwQ+Y3D3MpdnV1OcNSVL=7=fENq8amqpBMq0d6WHuwiQ@mail.gmail.com>
-To: Leo Yan <leo.yan@linaro.org>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v1 3/4] BCC: Add build recipe
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: A3D8C406AB15.A3319
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking][PATCH] cifs-utils: upgrade 6.9 -> 6.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,125 +40,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2020 06:31:12 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 18 Feb 2020 07:12:29 -0000
+Content-Type: text/plain
 
-On Mon, Feb 17, 2020 at 9:27 PM Leo Yan <leo.yan@linaro.org> wrote:
->
-> From: Sumit Garg <sumit.garg@linaro.org>
->
-> BPF Compiler Collection (BCC) is a toolkit for creating efficient kernel
-> tracing and manipulation programs, and includes versatile tools and
-> examples which based on eBPF.  This tool is very widely used on server
-> section, but we also can use it for embedded system, e.g. use its
-> function trace utilities (trace.py and argdist.py) to trace kernel
-> function parameters and return values.
->
-> This patch adds recipe for BCC version 0.12.0.  This patch also contains
-> a patch to change cmake file so can look for libraries and headers which
-> are installed in target sysroot-recipe path for cross compilation.
->
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> Co-developed-by: Leo Yan <leo.yan@linaro.org>
-> ---
->  ...-with-OE-LLVM-cross-compiled-package.patch | 32 ++++++++++++++++
->  meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb    | 37 +++++++++++++++++++
->  2 files changed, 69 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch
->  create mode 100644 meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb
->
-> diff --git a/meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch b/meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch
-> new file mode 100644
-> index 000000000..b5acadc1b
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/bcc/bcc/0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch
-> @@ -0,0 +1,32 @@
-> +From 93cf25ba663e68a6a6f4237fbe0ef8349b3f37ef Mon Sep 17 00:00:00 2001
-> +From: Sumit Garg <sumit.garg@linaro.org>
-> +Date: Fri, 14 Feb 2020 07:40:11 +0000
-> +Subject: [PATCH] Allow to build with OE LLVM cross compiled package
-> +
-> +The default LLVM cmake package requires all libraries, headers and tools
-> +to be present but in case of cross compilation, OE only provides
-> +target specific libraries and headers and requires native llvm tools.
-> +
-> +So instead of looking for a complete llvm package, look for libraries and
-> +headers which are installed in target sysroot-recipe path.
-> +
-> +Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> +---
-> + CMakeLists.txt | 2 --
-> + 1 file changed, 2 deletions(-)
-> +
-> +diff --git a/CMakeLists.txt b/CMakeLists.txt
-> +index 7bd0f3b2..6f1f12c0 100644
-> +--- a/CMakeLists.txt
-> ++++ b/CMakeLists.txt
-> +@@ -39,8 +39,6 @@ endif()
-> + if(NOT PYTHON_ONLY AND ENABLE_CLANG_JIT)
-> + find_package(BISON)
-> + find_package(FLEX)
-> +-find_package(LLVM REQUIRED CONFIG)
-> +-message(STATUS "Found LLVM: ${LLVM_INCLUDE_DIRS} ${LLVM_PACKAGE_VERSION}")
-> + find_package(LibElf REQUIRED)
-> +
-> + # clang is linked as a library, but the library path searching is
-> +--
-> +2.17.1
-> diff --git a/meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb b/meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb
-> new file mode 100644
-> index 000000000..687fb64c7
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/bcc/bcc_0.12.0.bb
-> @@ -0,0 +1,37 @@
-> +SUMMARY = "BPF Compiler Collection (BCC)"
-> +HOMEPAGE = "https://github.com/iovisor/bcc"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e3fc50a88d0a364313df4b21ef20c29e"
-> +
-> +DEPENDS += "bison-native \
-> +            ninja-native \
-> +            elfutils-native \
-> +            flex-native \
-> +            ${MLPREFIX}elfutils \
-> +            ${MLPREFIX}binutils \
-> +            ${MLPREFIX}flex \
-> +            luajit \
-> +            clang \
-> +            "
-> +
+add the following patch to solve build error:
+0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch
 
-this will add meta-clang dependency directly into meta-oe, which is not desired
-is it possible to make it optional or perhaps marked when meta-clang
-is not in BBLAYERS
+Error message:
+(cd /sbin && ln -sf mount.cifs mount.smb3)
+  /yocto/work001/fnst/wangmy/build/tmp/hosttools/install -c mount.cifs
+'/yocto/work001/fnst/wangmy/build/tmp/work/core2-64-poky-linux/cifs-utils/6.10-r0/image/sbin'
+make  install-data-hook
+ln: failed to create symbolic link 'mount.smb3': Permission denied
 
-> +RDEPENDS_${PN} += "bash python"
-> +
-> +SRC_URI = "git://github.com/iovisor/bcc \
-> +           file://0001-Allow-to-build-with-OE-LLVM-cross-compiled-package.patch \
-> +           "
-> +SRCREV = "368a5b0714961953f3e3f61607fa16cb71449c1b"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit cmake
-> +
-> +EXTRA_OECMAKE = " \
-> +    -DCMAKE_INSTALL_PREFIX=/usr \
-> +    -DENABLE_LLVM_SHARED=ON \
-> +    -DENABLE_CLANG_JIT=ON \
-> +    -DENABLE_MAN=OFF \
-> +    -DLLVM_PACKAGE_VERSION=${LLVMVERSION} \
-> +    -DPYTHON_CMD=python3 \
-> +"
-> +
-> +FILES_${PN} += "${libdir}/python*/dist-packages"
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ ...ify-the-dir-of-install-exec-hook-and.patch | 43 +++++++++++++++++++
+ .../{cifs-utils_6.9.bb => cifs-utils_6.10.bb} |  8 +++-
+ 2 files changed, 49 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/cifs/cifs-utils/0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch
+ rename meta-networking/recipes-support/cifs/{cifs-utils_6.9.bb => cifs-utils_6.10.bb} (89%)
+
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils/0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch b/meta-networking/recipes-support/cifs/cifs-utils/0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch
+new file mode 100644
+index 000000000..233ae40ce
+--- /dev/null
++++ b/meta-networking/recipes-support/cifs/cifs-utils/0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch
+@@ -0,0 +1,43 @@
++From f61f5f8a328207867b5c523b1c6bef6aaecaab88 Mon Sep 17 00:00:00 2001
++From: Wang Mingyu <wangmy@cn.fujitsu.com>
++Date: Sat, 15 Feb 2020 16:05:58 +0800
++Subject: [PATCH] Bugfix: Modify the dir of install-exec-hook and
++ install-data-hook
++
++Error message:
++(cd /sbin && ln -sf mount.cifs mount.smb3)
++  /yocto/work001/fnst/wangmy/build/tmp/hosttools/install -c mount.cifs
++'/yocto/work001/fnst/wangmy/build/tmp/work/core2-64-poky-linux/cifs-utils/6.10-r0/image/sbin'
++make  install-data-hook
++ln: failed to create symbolic link 'mount.smb3': Permission denied
++
++Upstream-Status: Pending
++
++Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
++---
++ Makefile.am | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/Makefile.am b/Makefile.am
++index fe9cd34..e9be6b3 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -119,11 +119,11 @@ endif
++ SUBDIRS = contrib
++ 
++ install-exec-hook:
++-	(cd $(ROOTSBINDIR) && ln -sf mount.cifs mount.smb3)
+++	(cd $(DESTDIR)$(ROOTSBINDIR) && ln -sf mount.cifs mount.smb3)
++ 
++ install-data-hook:
++-	(cd $(man8dir) && ln -sf mount.cifs.8 mount.smb3.8)
+++	(test -n "$(man_MANS)" || exit 0; cd $(DESTDIR)$(man8dir) && ln -sf mount.cifs.8 mount.smb3.8)
++ 
++ uninstall-hook:
++-	(cd $(ROOTSBINDIR) && rm -f $(ROOTSBINDIR)/mount.smb3)
++-	(cd $(man8dir) && rm -f $(man8dir)/mount.smb3.8)
+++	(cd $(DESTDIR)$(ROOTSBINDIR) && rm -f $(DESTDIR)$(ROOTSBINDIR)/mount.smb3)
+++	(test -n "$(man_MANS)" || exit 0; cd $(DESTDIR)$(man8dir) && rm -f $(DESTDIR)$(man8dir)/mount.smb3.8)
++-- 
++2.17.1
++
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_6.9.bb b/meta-networking/recipes-support/cifs/cifs-utils_6.10.bb
+similarity index 89%
+rename from meta-networking/recipes-support/cifs/cifs-utils_6.9.bb
+rename to meta-networking/recipes-support/cifs/cifs-utils_6.10.bb
+index 51dcb23d1..8d82ee454 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_6.9.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_6.10.bb
+@@ -4,9 +4,9 @@ SECTION = "otherosfs"
+ LICENSE = "GPLv3 & LGPLv3"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ 
+-PV = "6.9"
++PV = "6.10"
+ 
+-SRCREV = "9a8c21ad9e4510a83a3a41f7a04f763a4fe9ec09"
++SRCREV = "5ff5fc2ecc10353fd39ad508db5c2828fd2d8d9a"
+ SRC_URI = "git://git.samba.org/cifs-utils.git"
+ 
+ S = "${WORKDIR}/git"
+@@ -22,6 +22,10 @@ PACKAGECONFIG[cifsidmap] = "--enable-cifsidmap,--disable-cifsidmap,keyutils samb
+ PACKAGECONFIG[cifsacl] = "--enable-cifsacl,--disable-cifsacl,samba"
+ PACKAGECONFIG[pam] = "--enable-pam --with-pamdir=${base_libdir}/security,--disable-pam,libpam keyutils"
+ 
++SRC_URI += " \
++            file://0001-Bugfix-Modify-the-dir-of-install-exec-hook-and.patch \
++            "
++
+ inherit autotools pkgconfig
+ 
+ do_install_append() {
+-- 
+2.17.1
+
+
+
 
