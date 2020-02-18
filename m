@@ -1,58 +1,47 @@
-Return-Path: <leo.yan@linaro.org>
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com
-	[209.85.216.66])
-	by mail.openembedded.org (Postfix) with ESMTP id AC28E6159D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C53D6150D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 07:27:34 +0000 (UTC)
-Received: by mail-pj1-f66.google.com with SMTP id fa20so625852pjb.1
+	Tue, 18 Feb 2020 16:22:59 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id b7so20026992qkl.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Feb 2020 23:27:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=LLSDWLVNP3Ixtu+f6md2ZMthfYvwwC9fEndSfo3v3K4=;
-	b=WHlT5J/5/P5UbnJpbzw2FGz/KZtI4WJohf3thc1a5xn4UApyVbH8e03MGjd2DvLqkf
-	mkAx/cnW3y+WAMzbkiZW85RAJcNJ19MCLnt9VQgluAMkevz9IDb97L15KeHredARFjmc
-	xkpADIziwERATYOwywoTuqEPMEW+nuuZtyStIq6APVwTkZGtj7JWhH2A4yZQ7toATZ3V
-	l3YUUf7quSY0uJqLr2HTS+6BRUllQ0g/YjCsXpWQdwTSNjKeDxdcQuKOqEZDS3zC2SOM
-	5yAeZAVUiLQ/TnLc7VWLV2asqI2rXA8Vslgx47nVBZiAEP1AR6mCKohswDGhrdl68Am9
-	YWnA==
+	Tue, 18 Feb 2020 08:23:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=2G+VZjq0mXT7qBzjf6oy9Otn9HdAM1sMa/CHuW5iUDc=;
+	b=oam70uYugO2VjcJWnRmxA4LKNXku9M32onxILhOmmFiXIPcZo1XcV3Q2A/Nnm+OQww
+	XwHP/Z8wD7/MWrsSD2y67JikjFWzs+57m8T+w1aqdvsPmnHOlXUjth7kXTcL0ncHoE3+
+	V8hx98aSzU6zFu7WzKQ+6lMDS7nZK1tzQnVSoWETaY7wjR3r63DMcic9ncprGsJHhBc/
+	6br6OYR6J2trTE3YueZBO2WDwuWRnoo53SFKWfVVn1Wjfxi587qKQxVPn9Em8euXIlM+
+	ulpt72Zcri9ID2zaFPYnk9Q7oWINZXTeRzJR6nHqQ5/sCAylNi9a98OfqvoLXT3dGnBl
+	gPiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=LLSDWLVNP3Ixtu+f6md2ZMthfYvwwC9fEndSfo3v3K4=;
-	b=mFemvbLvkgMQaWdU3azJLUF9CIByx1WQO5TdEGHn+7XSJ+YY5Zojb6CX9yANW8G8DM
-	qifkv41wfo8ZwEvMuzWiI1Uij/D0MOcfl3KJyjUa/Qsf7CNnGvg951bqTvyoQdpW+95o
-	832knnKZSCYClHxvioU5PBL4v+e+2ry++Ud2AjPYYO5mITtQ9VPB2ZNjUS8QpUS7VL75
-	KvN95wpvWNJ1PKLpo6q3PmNo7lRfWxEYaYas2xuzPXMNFTqaUdZrIWfBzc45E0j9CcHV
-	1mWkrBLeBVbEOTywYd+yiodJBNVgd5F471zw7vtSXg8AcBhVsfTUFctrsVe/eOEoS6aP
-	m+eA==
-X-Gm-Message-State: APjAAAWcc4U846m2UEEQHzPN7Ykz9piSGA/ivBfnRsNALePFLO0Y3Rgp
-	ZU+esPXvUtjsbsNb5pL4DN28Hw==
-X-Google-Smtp-Source: APXvYqxUty+SPUzS46k886X+PVC7xKs7WcNK+Val4jLDX+/rpZjbAMXNeC5n2CikZ/pD8cYtIfm2Aw==
-X-Received: by 2002:a17:90a:f014:: with SMTP id
-	bt20mr1025096pjb.31.1582010855724; 
-	Mon, 17 Feb 2020 23:27:35 -0800 (PST)
-Received: from leoy-ThinkPad-X240s (li1441-214.members.linode.com.
-	[45.118.134.214]) by smtp.gmail.com with ESMTPSA id
-	f13sm2933691pfk.64.2020.02.17.23.27.31
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 17 Feb 2020 23:27:34 -0800 (PST)
-Date: Tue, 18 Feb 2020 15:27:26 +0800
-From: Leo Yan <leo.yan@linaro.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20200218072726.GB9945@leoy-ThinkPad-X240s>
-References: <20200218052544.9467-1-leo.yan@linaro.org>
-	<20200218052544.9467-4-leo.yan@linaro.org>
-	<CAMKF1spwQ+Y3D3MpdnV1OcNSVL=7=fENq8amqpBMq0d6WHuwiQ@mail.gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=2G+VZjq0mXT7qBzjf6oy9Otn9HdAM1sMa/CHuW5iUDc=;
+	b=FyhcYxHhdIEpqEXhD6EecJY066/Ze+NmDqn9L8Li9SKvoMv/2e0MQFfem8mtej0X2Y
+	CbqfpOuMurg8KG5hdxeazCoiWa/7As6nZCSUhkm/oK5pGaEskIe3Y4v63wI6RE2B1Hbp
+	s4j/fiC+md9Eocslml2SzghRCNzf5vrFFGV20Fh8+VnXzZx59bQBeia4XkMZ1dKw7mTm
+	2UWYiL5ZP7S+tDpMcv/y/OfjKmNdVzjPdkBD8DmwNIJpflflt6TF1Tn2pKpbgBjkQpD0
+	lgj9EsRzROkegNsURDq5TRc424EZ6wUdX8gy2uImmxk0fbpomAoddPmkD9QGvsOt/oDA
+	klsw==
+X-Gm-Message-State: APjAAAUAprVxrdfrYMp5QAsXj82wa7NeHodjrgheHYGRjgXrQynxY0Ks
+	GSA7uaMZTftBnIMs2coTay7HC0DH0bECuxp0Lbg=
+X-Google-Smtp-Source: APXvYqxrfalYj3cAbCvNbaj5Mbvyx0j/DBwuV9oc7o6/Iy5Scb6VcEh0qLR2BQD5KGHpKST8thWiqG49zxH8hc0GBxU=
+X-Received: by 2002:a05:620a:1415:: with SMTP id
+	d21mr18769854qkj.17.1582042980075; 
+	Tue, 18 Feb 2020 08:23:00 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1spwQ+Y3D3MpdnV1OcNSVL=7=fENq8amqpBMq0d6WHuwiQ@mail.gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v1 3/4] BCC: Add build recipe
+References: <d717ec49-d5f6-6cf0-18c4-107435d6949c@gmail.com>
+In-Reply-To: <d717ec49-d5f6-6cf0-18c4-107435d6949c@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 18 Feb 2020 08:22:33 -0800
+Message-ID: <CAMKF1sqRPG5DBLSj4h7XnM6BAmi_38CJ_qsPRuRN8XYupUn3KA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: zeus merge request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,39 +54,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Feb 2020 07:27:34 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 Feb 2020 16:22:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Khem,
+On Mon, Feb 17, 2020 at 4:21 PM akuster808 <akuster808@gmail.com> wrote:
+>
+> The following changes since commit e855ecc6d35677e79780adc57b2552213c995731:
+>
+>   ruli: Fix install step and build samples too (2020-01-05 14:44:11 -0800)
+>
+> are available in the Git repository at:
+>
+>   https://git.openembedded.org/meta-openembedded zeus-next
+>
 
-On Mon, Feb 17, 2020 at 10:30:46PM -0800, Khem Raj wrote:
+merged thanks
 
-[...]
 
-> > +DEPENDS += "bison-native \
-> > +            ninja-native \
-> > +            elfutils-native \
-> > +            flex-native \
-> > +            ${MLPREFIX}elfutils \
-> > +            ${MLPREFIX}binutils \
-> > +            ${MLPREFIX}flex \
-> > +            luajit \
-> > +            clang \
-> > +            "
-> > +
-> 
-> this will add meta-clang dependency directly into meta-oe, which is not desired
-> is it possible to make it optional or perhaps marked when meta-clang
-> is not in BBLAYERS
-
-Thanks a lot for reviewing.  clang is mandotory for BCC to compile
-eBPF programs, so I think we cannot build clang as optional for BCC.
-
-For marking the recipe when meta-clang is not in BBLAYERS, I searched
-with google but seems 'LAYERDEPENDS' and 'BBMASK' both are not suitable
-for this case.  Could you give more detailed info for how to do this?
-
-Thanks,
-Leo
+> for you to fetch changes up to bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c:
+>
+>   fluentbit: Fix packaging in multilib env (2020-01-30 18:38:10 -0800)
+>
+> ----------------------------------------------------------------
+> Gianfranco Costamagna (3):
+>       cpprest: fix cmake installation directory
+>       websocketpp: add various upstream accepted and proposed patches to
+> fix various issues, including:
+>       websocketpp: refresh clang patch
+>
+> Kai Kang (1):
+>       adduser: set default shell with /sbin/nologin
+>
+> Khem Raj (9):
+>       nodejs: libatomic patch should be target specific
+>       websocketapp: Fix multilib build
+>       websocketpp: Fix clang specific flags in cmake files
+>       squid: Link with libatomic on riscv
+>       grpc: Link with libatomic on clang/x86
+>       grpc: Link with libatomic on powerpc
+>       grpc: Link with libatomic on riscv
+>       netdata: Add libatomic to link step
+>       fluentbit: Fix packaging in multilib env
+>
+> Peter Kjellerstedt (1):
+>       gitpkgv.bbclass: Add support for extending the supported tag formats
+>
+> Sumit Garg (1):
+>       mariadb: fix library LZ4 lookup
+>
+> Trevor Gamblin (2):
+>       python-twisted: add required RDEPENDS for twistd
+>       pyhamcrest: add python3 version of recipe
+>
+> Yi Zhao (1):
+>       libldb: upgrade 1.5.5 -> 1.5.6
+>
+> Zhixiong Chi (1):
+>       dnsmasq: CVE-2019-14834
+>
+>  meta-networking/recipes-daemons/squid/squid_4.6.bb |   2 +
+>  .../recipes-devtools/grpc/grpc_1.24.1.bb           |  16 +++
+>  .../0001-dnsmasq-fix-memory-leak-in-helper-c.patch |  49 ++++++++
+>  .../recipes-support/dnsmasq/dnsmasq_2.80.bb        |   1 +
+>  .../libldb/{libldb_1.5.5.bb => libldb_1.5.6.bb}    |   4 +-
+>  meta-oe/classes/gitpkgv.bbclass                    |  14 ++-
+>  meta-oe/recipes-dbs/mysql/mariadb.inc              |   1 +
+>  .../mariadb/0001-Fix-library-LZ4-lookup.patch      |  30 +++++
+>  meta-oe/recipes-devtools/nodejs/nodejs_10.16.3.bb  |   2 +-
+>  .../fluentbit/fluentbit/cmake_multilib.patch       |  18 +++
+>  .../fluentbit/fluentbit_0.12.19.bb                 |   1 +
+>  meta-oe/recipes-support/cpprest/cpprest_2.10.14.bb |   2 +-
+>  .../0001-Correct-clang-compiler-flags.patch        |  32 +++++
+>  .../0001-cmake-Use-GNUInstallDirs.patch            |  35 ++++++
+>  .../websocketpp/websocketpp-0.8.1/771.patch        |  22 ++++
+>  .../websocketpp/websocketpp-0.8.1/842.patch        |  30 +++++
+>  .../websocketpp/websocketpp-0.8.1/855.patch        |  23 ++++
+>  .../websocketpp/websocketpp-0.8.1/857.patch        | 132
+> +++++++++++++++++++++
+>  .../websocketpp/websocketpp_0.8.1.bb               |  17 ++-
+>  meta-perl/recipes-perl/adduser/adduser_3.118.bb    |   1 +
+>  ...duser-set-default-shell-with-sbin-nologin.patch |  34 ++++++
+>  .../recipes-devtools/python/python-twisted.inc     |  18 ++-
+>  .../python/python3-pyhamcrest_1.9.0.bb             |  10 ++
+>  .../recipes-webadmin/netdata/netdata_git.bb        |   2 +
+>  24 files changed, 486 insertions(+), 10 deletions(-)
+>  create mode 100644
+> meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
+>  rename meta-networking/recipes-support/libldb/{libldb_1.5.5.bb =>
+> libldb_1.5.6.bb} (95%)
+>  create mode 100644
+> meta-oe/recipes-dbs/mysql/mariadb/0001-Fix-library-LZ4-lookup.patch
+>  create mode 100644
+> meta-oe/recipes-extended/fluentbit/fluentbit/cmake_multilib.patch
+>  create mode 100644
+> meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-Correct-clang-compiler-flags.patch
+>  create mode 100644
+> meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/0001-cmake-Use-GNUInstallDirs.patch
+>  create mode 100644
+> meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/771.patch
+>  create mode 100644
+> meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/842.patch
+>  create mode 100644
+> meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/855.patch
+>  create mode 100644
+> meta-oe/recipes-support/websocketpp/websocketpp-0.8.1/857.patch
+>  create mode 100644
+> meta-perl/recipes-perl/adduser/files/0001-adduser-set-default-shell-with-sbin-nologin.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python/python3-pyhamcrest_1.9.0.bb
+> ~
+>
 
