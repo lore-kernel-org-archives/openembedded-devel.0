@@ -1,49 +1,48 @@
 Return-Path: <dl9pf@gmx.de>
-X-Greylist: delayed 302 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 19 Feb 2020 11:56:47 UTC
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 8537E6143D
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C2DD615D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2020 11:56:47 +0000 (UTC)
+	Wed, 19 Feb 2020 11:56:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-	s=badeba3b8450; t=1582113408;
+	s=badeba3b8450; t=1582113417;
 	bh=3G1q2gLIv9zsC6/soPZUSf+d13ZwNzWL/oiuMXBAgME=;
 	h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
-	b=EJ6aewptTVMy8hPKQv2zWv1jpg3qNdWGv8igbZGBvV5GbLlgGp/MlVMuHlhM/1T00
-	0NVKl2JDyRtvBud+/WrYbDy2CYb/pgqaZz+BP/+ttu2yqW5eqsTsslWOH/MxIT5oGI
-	zLPMGCONej/WUrW3Hc2M/NkXKj5rUskJLOoQCOIU=
+	b=BPfJ8rCa3btR48QvDUmVj3Bokl2Lh8uRwEl9E+iV8EWZldjut59W8xgxVCIAYI5cD
+	rO5KddVaVi1GbBbiG7p9pkLgzSsdva1c4JrcmO9WHqZL0LoN6J8Lpn9QMnwpkRvSbt
+	qVjo5xJwEhJy/U9/RS+3mrq6TeIqz0LCWqYosc3k=
 X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
 Received: from localhost.localdomain ([95.216.96.43]) by mail.gmx.com
-	(mrgmx104 [212.227.17.168]) with ESMTPSA (Nemesis) id
-	1N4z6q-1jTrL31s4S-010rtb; Wed, 19 Feb 2020 12:51:45 +0100
+	(mrgmx005 [212.227.17.190]) with ESMTPSA (Nemesis) id
+	1N2mFi-1jRfWf1joa-0137Sh; Wed, 19 Feb 2020 12:56:57 +0100
 From: Jan-Simon Moeller <dl9pf@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Feb 2020 12:51:26 +0100
-Message-Id: <20200219115126.25036-1-dl9pf@gmx.de>
+Date: Wed, 19 Feb 2020 12:56:54 +0100
+Message-Id: <20200219115654.25186-1-dl9pf@gmx.de>
 X-Mailer: git-send-email 2.11.0
-X-Provags-ID: V03:K1:g2Y4ANjExeTUIShjlEV+Ug0zHVl1LXO90WtJ4E1xkyoDd4UizNU
-	BSnE/NS76zb4BjvPV8Rd38skNi+zyI8cIrbQ/xAaCvrUxY6ptOB1QXt+0gwUREAjOD1dXdL
-	HQyW/oU8lKQplM9oWoevEgnmeWDdxw4+Jgdx9SSsSsalUOzQxBTPEj38PJ1PfWsd7SPek7z
-	33o8fLk9a2bYO4aLyY9ng==
+X-Provags-ID: V03:K1:foe6VcxqpusFUaOBz2iwZeH3JDE4jiha+MMVBGlBbntDjs2GNt2
+	suxGoe/vA9RS1Q5rQSLkuh6ys/QvoBm9F/d429rE+6E59JapyVM2bJuc8WYDwp0SlJSwX8X
+	E8IULeSTB/omXqL2XcAhH9c3GulJJeLoVgJi9dswbvh+2k7qAjQOipM8RrqUbzj/OwjNd2m
+	PHtc7ej5WXFk2bZ/6uHEw==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:EgU4l8GTSu4=:3Xt4Xjb9mmKX+iBDl7OhXv
-	khOu1xBuPpPp2n3zeOau4OvAEpgKsmIupA8FtNIz21x3HJiKF5NbxUGkUxTX0JHu7A2U28vMm
-	q6JQusBwDDnqkXDbtE42l9H6ZhMToqO/qqQmENgtDzP84as5jbAUZDmEVKEkrnmuBQzwTjsjM
-	7Sbp+vdK+HUlqoh7iQUkhFPlACC9JkkuBAtt5KEre9O+hh2vY6fbyHu420+qOcNl3VNb7Osvs
-	nfztOUgXVHAR7DEhapPGK5UphIESGlMfUGx3ripGXcRAx0eQFumTwGe1MhnBwIQ1h/znZqpVt
-	VFij5M51/lD1++mI8mhBbbI7Xis0/m7N21CgGaCUiXlMEi2gf9WlMZrq3alnyVgoKqtV3FJBe
-	oe8B1El91+1a1v7rdY43nmBcd5GV0lmmaZHVUsH3N5VaUNEOEddgFPRI8pqN0glw73GdjSdi3
-	XEYyANgA2ii5V7I2j0vUvgU3t2YSSRemoLo7XGsfrMK5D5ozxk0ozDQ4feirvu4I5wX5hWwh/
-	XbBpKGL1HwFJEm9H1WpLV2iR7K7W/1je8UApGSY7Nc7NC7E1jIykLAUw0CfRx8JswozZ0gAuO
-	KsWp9PQbfMBiEsZ7WJqERrANPDxwU8FOHIv+Xm1johFOMkEarb2Us4ofEDXBGMQ/fdlkf8oYl
-	HJh/d1ElXIOPAr7OKOOAlJOO2sHCIVCIRLrMILuQWl24peAtunpeYydRuloKTcQNZPSuI6YoC
-	NJQiM6GwSFjnMdhbkg6svrIZISeIak4ZkIDXMKjL7rHYLC/L3as6/YEyjEpbzMIwBksls+7EX
-	FRtfiepufBNbUFAU10j+ELzMG/abLDekHEP2Yp5k3+UOjSTe1IlcI1+874mbxQBHGLRLEQ5Zc
-	TXCm+HWgQlEpbFstw9jD52sVSp7hN4QxhnI/69I5Cprokbkh3OXp4HqjI85TyhYqDE6YUrUDI
-	uASAeraQy+C58JnY9EZXU3FPs9D01BeJR4ARbWQfD2iAKMYQx4ddBS8zntRt8YMwfFgmH41oS
-	hLT4yDpqae7aCUVi5tR3OAI1BxWY31gUzjcIsz2VKqXb/NG8plwXykaJyq/WI+YitpN+BMezs
-	OkigdsVrMQSFE5oRkp3f97mAXWCMPMMXLmjU+1KG544pYfLi9cin0UFZIWn+GAGB0O1DQ4VPl
-	Z6/a/s954f76A7vPo1MifVGuyhC1+mNnc/TlkhxnJ2SN1ZGGBlOHeHXjqhKHF0SEqtcX8=
+X-UI-Out-Filterresults: notjunk:1;V03:K0:zSxdnySTLjA=:b/eu1hxpoOzgD0RwtuAe3a
+	XkozYIp1gcKIJAa50KMuC3DShMqJZMdhUjRLNACYHnTF6XAJc+U5luVP+lyPM1RjBSspIbsGB
+	mMsdRFqqZ5ShlD9ZrtNlRXckUD/3vvIPtxZhXRZ/p+WA4n32cIZwagdAuTL2AJjdXYtza0RaX
+	vmd5uPJlBj0zyBP0+un4q5/yph2uStLCkkRoq1sYx+oKoMwIh9XY7dLwcOduzlkjICpunENm0
+	WkD8lagdvUg6DGg0a3voDvzUcWFJt7Ed8yMarcxQCjT6YHWvZfc3BPxezlIeunpoA1AXtaR7Y
+	ykxvg/SyH5xqrdYn2jV0i4hb03rjgrTLBmQWbPP/vbiT4cq0/97JDmXc2p3SZt3ZAaPvHgr0z
+	tnjkF3BX8pk/fIZQ0i6LUyRmeh93DIsuswosejOBpc//HqsIo+Qz+SpFRx5iL/7xZx9+HrEud
+	MQnyGzkkZrazBz4jszn88DdI7rndwNO0dOiC5T78LxnMVojqyi3aoo42Ou+tt8bSb2JDLFN/v
+	Wldglb59F3wquMrmqwuYOnITfscZnoEI1NOXivl3mL8iFEp4taCkWy6/3LrCe4sVxrmepBPZQ
+	vlOSpYX5wAiDCunExRC9DTKsbNGrRx//bPcystSYCBsG3AXaMOtFNhFNtrKAd1pAtipfyDdDR
+	JsMefPth5rZhkkxEHIMllSXXQHsOO4pKRJvOE1sx3lNclTA8h1RtyRPrSltUr8I6PBW8mP/jj
+	mvN8Ba4vKpeXC/Ma8uk70OkDadePN9DcSsNJswszPKHj22z+Nn4Bhcq3Jf7XSOTdyIAT4dR17
+	qdIfy9L4ycuDJkjQFl8lw3nBTob8f4TnA8BxWoefPgZSsZ3zAaHOEJ1KJMtnLr4hIuQALkz5E
+	CxBDB+xUFWOBUiAAluQWIy6bbnQ0104eM8USiRYKKBTlRLEpGiNF55mJL2d2DNxRYy3qlx61l
+	zo9fiWpV1cNgSG7j+8k4Yzfp1eN09T7+tybFjASpju9pVVaN7Ua3nyJjdHLgPUrgXXruBs1On
+	bnJRLZZ54jxqJLGOH0uMaVfzNZigk0o4wYhU3vHzeertuglXC2yPejHl4Uls/HOCkvL8kqsZ3
+	G+/xUZgsQ/Z8eJoq50cuPA9/Lwr/wwiyJ1lrH1iz+T26hyM6IxhnIGrsneUL/F5HEmPJTR2Ce
+	LRfASZXfVVPqKsaYUAx/DI4i95+dgY7Xif8gqGeEPRJxs0rdyjkzBV6HP9st+irPoCI/DM+KO
+	U5eb5WgHPX0Dq3D/y
 Subject: [meta-oe][PATCH] meta-oe: master: remmina - use PACKAGECONFIG for spice
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -57,7 +56,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2020 11:56:47 -0000
+X-List-Received-Date: Wed, 19 Feb 2020 11:56:57 -0000
 Content-Transfer-Encoding: quoted-printable
 
 remmina depends on spice and spice-protocol but they are in meta-networkin=
