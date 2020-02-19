@@ -1,51 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
-	[209.85.210.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 146A66155D
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com
+	[209.85.216.46])
+	by mail.openembedded.org (Postfix) with ESMTP id F2D8F61572
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2020 00:50:52 +0000 (UTC)
-Received: by mail-pf1-f175.google.com with SMTP id k29so11557478pfp.13
+	Wed, 19 Feb 2020 00:50:53 +0000 (UTC)
+Received: by mail-pj1-f46.google.com with SMTP id r67so1814481pjb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 16:50:54 -0800 (PST)
+	Tue, 18 Feb 2020 16:50:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=tOjL4DhTNpJB4TL2YUL4M6oLMCMoUm29QpZV12BT3FY=;
-	b=VakMSyzaGOWMD0TVJqzV3l/DVEAtEn/kIXIzf6PMBF2SxiWxF+JLhJRLoyQj5AyuJ5
-	31xOYjXeRLZeUbW64dkC7PwzacQmEcVA9Cbmpr4IvEMPV5X8v428XY0L0JQiDJQVwLaB
-	SHDWbwCtJSof0AFRH3CPaIO2JI3ZXEYy/4x4kSK1TnQazXxcKYsh8BZFZgACRDJviBci
-	oWnOEXtDl/EubBE0QIilg3tptHwyyg4Ujd/ECKW/2hgIMxYl+ZEcM+FNI53O8CdoXD7x
-	ScaaDH7i4ctKFhj94ygG64M4bTpIDUc3gkPFLfEyQGyJ3WIj8opCOBLQzrRS8Berw3oc
-	n5Dw==
+	bh=YLt9TBFBkgmDRsIWQ3m0kunLwfPTXH+gKA6potkbM5o=;
+	b=N1+dKc6aO4PWJQoaZ3wTglD+Ii61IKbFIN4bMISPFHQM/H5CpurrlZq3uAYjHT4Ty/
+	Sqn5bLBblANksGVm3MEEXYcodAJ030XuOE/2QP8tR1pQ2JW3jeibCsUwSx4TyLJehSbn
+	cbDBi9ZR11tQ5wt4F5ypJkoeUCTZ4HYdr2TlFOW3bSSe7T1oqU4wJk5tAq3Q8TBCXSmQ
+	YoQITlWC1j0EhINBan3OvMQ+a6hZRS0rsZYtFAHAv/uDkUwmvsa0WUf2cqHo7XO+51Ts
+	9SjbakjjfLizyL1LIzMATROcopBh1juqy2ICFKyOgj9gkLKWVS8bZH1iHJtcaQ58AiJf
+	AODg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=tOjL4DhTNpJB4TL2YUL4M6oLMCMoUm29QpZV12BT3FY=;
-	b=gh5uGkFLTIOEQGptdTb5lhkg9+IZtbv1KHVjuVpkZZhDjSUeDrMpoDxQYYopBwrh1C
-	MjK6d+dmCKE3qrzC+R9X3sNzyehMQ0EU3sDa1/w2tOkNatecDq8yXSupik12BB3hnZ55
-	OkjRShS1D7yEwjS7sHc4wwWAWW76t+m9fQ1TmbRc6+xNJtZtFbYp3RPqA/xVag3y9nBc
-	1G4yd7yeUbU3ndK3KeZMux685VEeYzbX+xn2wosT7cSeAHTnFjPMGhiuzGkLpiAFIldl
-	3Lo9Ko2314yQGv59iQS4JAaEB0MPwV5DOrFvJ+M9Vyda6/H4Peb9jkyOOO9tasFiqnFh
-	tREQ==
-X-Gm-Message-State: APjAAAXeDaZeM6R3diYuCq564TTelVi5kVFcB7E2cdXe51bIS+lSncDe
-	4q7PdGJ228LcPY+MpjklWlgc89T9H24=
-X-Google-Smtp-Source: APXvYqwLAo7B9i3HrzuI/fHhyF9+ZETjjIq0aOrEaNyXo4nGU9VCHEOrZsIpBJmURRxIrTmMCCRQjg==
-X-Received: by 2002:a65:5281:: with SMTP id y1mr24758178pgp.327.1582073453699; 
-	Tue, 18 Feb 2020 16:50:53 -0800 (PST)
+	bh=YLt9TBFBkgmDRsIWQ3m0kunLwfPTXH+gKA6potkbM5o=;
+	b=l+WOUUMcnfQosFCbAFUQhcRTSTAugZ6KowmqMG5UOFVHBUHkMqFoU+KdD7CYMcLOs8
+	waQvmoRNB8YdnwFm97IgtqgsOOA+OTiHn9kifYhxtt5hX1Pq2BfOOvmheCwJBd+gaclo
+	c+Xqn6g/CRoe5r12/NP136D5QUUrL50+fyO4TApKTZIghZ9+ocL8r8rRaGN8pWSgoMfN
+	/YBKqyZqAukHNvW2XDcsK/L12eshByMdA9mVempp42r8iXbtO/ESyGoO6ZAQTAle38Kj
+	VE6ot9+dH8PtgCzG8M0ju6qTdc4gLGxP5z7WJKXqL3fw5oSRhFflcrTJs4FXRaxuSFMB
+	8ajw==
+X-Gm-Message-State: APjAAAUfKyxoHkasusg03cmCXdDsK2SyM+KmV10DtH5KHonhvhbdkxLV
+	d/Q1yOdWjM4qcSG3sghKeOCIrNzQTds=
+X-Google-Smtp-Source: APXvYqymMeectQJL+uXXqaFetlei+dJMwHhUmMr8bnN9UYR5no3RuwrDH8jhmaUMcrYSpiCYWkuSBg==
+X-Received: by 2002:a17:90a:b381:: with SMTP id
+	e1mr5859438pjr.38.1582073454390; 
+	Tue, 18 Feb 2020 16:50:54 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::396c])
 	by smtp.gmail.com with ESMTPSA id c5sm207276pfi.10.2020.02.18.16.50.53
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 18 Feb 2020 16:50:53 -0800 (PST)
+	Tue, 18 Feb 2020 16:50:54 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Feb 2020 16:50:57 -0800
-Message-Id: <20200219005058.2921658-3-raj.khem@gmail.com>
+Date: Tue, 18 Feb 2020 16:50:58 -0800
+Message-Id: <20200219005058.2921658-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200219005058.2921658-1-raj.khem@gmail.com>
 References: <20200219005058.2921658-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/4] cfengine: Upgrade to 3.15
+Subject: [meta-multimedia][PATCH 4/4] dleyna-renderer: Fix build with gupnp 1.2+
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,117 +59,160 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2020 00:50:53 -0000
+X-List-Received-Date: Wed, 19 Feb 2020 00:50:54 -0000
 Content-Transfer-Encoding: 8bit
-
-License-Update: Change in Company name Cfengine AS a Norwegian company -> Northern.tech
-Python3 fixes to needed scripts
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../cfengine/cfengine-masterfiles/python3.patch  | 16 ++++++++++++++++
- ..._3.12.0.bb => cfengine-masterfiles_3.15.0.bb} | 15 ++++++++++-----
- .../{cfengine_3.12.0.bb => cfengine_3.15.0.bb}   | 10 +++++-----
- 3 files changed, 31 insertions(+), 10 deletions(-)
- create mode 100644 meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch
- rename meta-oe/recipes-extended/cfengine/{cfengine-masterfiles_3.12.0.bb => cfengine-masterfiles_3.15.0.bb} (74%)
- rename meta-oe/recipes-extended/cfengine/{cfengine_3.12.0.bb => cfengine_3.15.0.bb} (89%)
+ .../0001-add-gupnp-1.2-API-support.patch      | 123 ++++++++++++++++++
+ .../dleyna/dleyna-renderer_0.6.0.bb           |   4 +-
+ 2 files changed, 126 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer/0001-add-gupnp-1.2-API-support.patch
 
-diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer/0001-add-gupnp-1.2-API-support.patch b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer/0001-add-gupnp-1.2-API-support.patch
 new file mode 100644
-index 0000000000..a6f6701261
+index 0000000000..8f54658a11
 --- /dev/null
-+++ b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch
-@@ -0,0 +1,16 @@
-+--- a/modules/packages/apt_get
-++++ b/modules/packages/apt_get
-+@@ -1,4 +1,4 @@
-+-#!/var/cfengine/bin/python
-++#!/var/cfengine/bin/python3
-+ 
-+ import sys
-+ import os
-+--- a/modules/packages/apt_get.in
-++++ b/modules/packages/apt_get.in
-+@@ -1,4 +1,4 @@
-+-#!@bindir@/python
-++#!@bindir@/python3
-+ 
-+ import sys
-+ import os
-diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.15.0.bb
-similarity index 74%
-rename from meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
-rename to meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.15.0.bb
-index dda6af9c9d..79269d3147 100644
---- a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
-+++ b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.15.0.bb
-@@ -20,10 +20,11 @@ HOMEPAGE = "http://cfengine.com"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=9f76426f9ef8c6f6739fadd21d817a4f"
- 
--SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz"
--
--SRC_URI[md5sum] = "d59bd8c95620da816c382f749d425860"
--SRC_URI[sha256sum] = "1c50e3d8c702097e13a21258626d936d6ff2e6492e893dfe286ff0d6204d7a65"
-+SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
-+           file://python3.patch \
-+           "
-+SRC_URI[md5sum] = "6d456fdd9bd24ff6617eeaa05efae602"
-+SRC_URI[sha256sum] = "4a071c0c4ba7df9bad93144cff5fbc0566e5172afd66201072e3193b76c55a38"
- 
- inherit autotools
- 
-@@ -31,6 +32,10 @@ export EXPLICIT_VERSION="${PV}"
- 
- EXTRA_OECONF = "--prefix=${datadir}/cfengine"
- 
-+do_install_append() {
-+    rm -rf ${D}${datadir}/cfengine/modules/packages/{zypper,yum}
-+}
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer/0001-add-gupnp-1.2-API-support.patch
+@@ -0,0 +1,123 @@
++From 7c945e7960cf7dffd9dd0bb5f7ec6bee4dc0bca3 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 18 Feb 2020 14:17:55 -0800
++Subject: [PATCH] add gupnp 1.2 API support
 +
- FILES_${PN} = "${datadir}/cfengine"
++Takes from https://git.archlinux.org/svntogit/packages.git/tree/trunk/gupnp-1.2.diff?h=packages/dleyna-renderer
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac                |  4 +--
++ libdleyna/renderer/device.c | 51 +++++++++++++++++++++++++++++++++++--
++ libdleyna/renderer/upnp.c   |  4 +--
++ 3 files changed, 53 insertions(+), 6 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 271ee92..364659d 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -38,8 +38,8 @@ LT_LANG([C])
++ PKG_PROG_PKG_CONFIG(0.16)
++ PKG_CHECK_MODULES([GLIB], [glib-2.0 >= 2.28])
++ PKG_CHECK_MODULES([GIO], [gio-2.0 >= 2.28])
++-PKG_CHECK_MODULES([GSSDP], [gssdp-1.0 >= 0.13.2])
++-PKG_CHECK_MODULES([GUPNP], [gupnp-1.0 >= 0.20.5])
+++PKG_CHECK_MODULES([GSSDP], [gssdp-1.2 >= 1.2.0])
+++PKG_CHECK_MODULES([GUPNP], [gupnp-1.2 >= 1.2.0])
++ PKG_CHECK_MODULES([GUPNPAV], [gupnp-av-1.0 >= 0.11.5])
++ PKG_CHECK_MODULES([GUPNPDLNA], [gupnp-dlna-2.0 >= 0.9.4])
++ PKG_CHECK_MODULES([SOUP], [libsoup-2.4 >= 2.28.2])
++diff --git a/libdleyna/renderer/device.c b/libdleyna/renderer/device.c
++index 783fb52..c7b9fc3 100644
++--- a/libdleyna/renderer/device.c
+++++ b/libdleyna/renderer/device.c
++@@ -2121,6 +2121,53 @@ exit:
++ 	return;
++ }
++ 
+++typedef struct
+++{
+++  GMainLoop *loop;
+++  GUPnPServiceIntrospection *introspection;
+++  GError **error;
+++} GetIntrospectionAsyncData;
+++
+++static void
+++get_introspection_async_cb (GUPnPServiceInfo           *info,
+++                            GUPnPServiceIntrospection  *introspection,
+++                            const GError               *error,
+++                            gpointer                    user_data)
+++{
+++  GetIntrospectionAsyncData *data = user_data;
+++  data->introspection = introspection;
+++  if (data->error)
+++    *data->error = g_error_copy (error);
+++  g_main_loop_quit (data->loop);
+++}
+++
+++static GUPnPServiceIntrospection *
+++_gupnp_service_info_get_introspection (GUPnPServiceInfo *info,
+++                                       GError          **error)
+++{
+++  GetIntrospectionAsyncData data;
+++  GMainContext *context;
+++
+++  context = g_main_context_new ();
+++  data.loop = g_main_loop_new (context, FALSE);
+++  data.error = error;
+++
+++  g_main_context_push_thread_default (context);
+++
+++  gupnp_service_info_get_introspection_async (info,
+++                                              get_introspection_async_cb,
+++                                              &data);
+++
+++  g_main_loop_run (data.loop);
+++
+++  g_main_context_pop_thread_default (context);
+++
+++  g_main_loop_unref (data.loop);
+++  g_main_context_unref (context);
+++
+++  return data.introspection;
+++}
+++
++ static gboolean prv_get_av_service_states_values(GUPnPServiceProxy *av_proxy,
++ 						 GVariant **mpris_tp_speeds,
++ 						 GPtrArray **upnp_tp_speeds,
++@@ -2147,7 +2194,7 @@ static gboolean prv_get_av_service_states_values(GUPnPServiceProxy *av_proxy,
++ 	weak_ref = av_proxy;
++ 	g_object_add_weak_pointer(G_OBJECT(av_proxy), &weak_ref);
++ 
++-	introspection = gupnp_service_info_get_introspection(
+++	introspection = _gupnp_service_info_get_introspection(
++ 		GUPNP_SERVICE_INFO(av_proxy),
++ 		&error);
++ 
++@@ -2215,7 +2262,7 @@ static gboolean prv_get_rc_service_states_values(GUPnPServiceProxy *rc_proxy,
++ 	weak_ref = rc_proxy;
++ 	g_object_add_weak_pointer(G_OBJECT(rc_proxy), &weak_ref);
++ 
++-	introspection = gupnp_service_info_get_introspection(
+++	introspection = _gupnp_service_info_get_introspection(
++ 		GUPNP_SERVICE_INFO(rc_proxy),
++ 		&error);
++ 
++diff --git a/libdleyna/renderer/upnp.c b/libdleyna/renderer/upnp.c
++index ac1b08a..b762226 100644
++--- a/libdleyna/renderer/upnp.c
+++++ b/libdleyna/renderer/upnp.c
++@@ -243,8 +243,8 @@ static void prv_server_unavailable_cb(GUPnPControlPoint *cp,
++ 
++ 	udn = gupnp_device_info_get_udn((GUPnPDeviceInfo *)proxy);
++ 
++-	ip_address = gupnp_context_get_host_ip(
++-		gupnp_control_point_get_context(cp));
+++	ip_address = gssdp_client_get_host_ip(
+++		GSSDP_CLIENT(gupnp_control_point_get_context(cp)));
++ 
++ 	if (!udn || !ip_address)
++ 		goto on_error;
++-- 
++2.25.1
++
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
+index b30aee9fbe..642f21bd53 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-renderer_0.6.0.bb
+@@ -11,7 +11,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
+ DEPENDS = "glib-2.0 gssdp gupnp gupnp-av gupnp-dlna libsoup-2.4 dleyna-core"
+ RDEPENDS_${PN} = "dleyna-connector-dbus"
  
--RDEPENDS_${PN} += "python-core"
-+RDEPENDS_${PN} += "python3-core"
-diff --git a/meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb b/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
-similarity index 89%
-rename from meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
-rename to meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
-index 9d0123d8bd..fa08be3e65 100644
---- a/meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
-+++ b/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
-@@ -11,18 +11,17 @@ its lifecycle. CFEngine takes systems from Build to Deploy, Manage and Audit."
- HOMEPAGE = "http://cfengine.com"
+-SRC_URI = "git://github.com/01org/${BPN}.git"
++SRC_URI = "git://github.com/01org/${BPN}.git \
++           file://0001-add-gupnp-1.2-API-support.patch \
++          "
+ SRCREV = "50fd1ec9d51328e7dea98874129dc8d6fe3ea1dd"
+ S = "${WORKDIR}/git"
  
- LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=f8b34828ab373d6b1bb4b0fc60a78494"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=233aa25e53983237cf0bd4c238af255f"
- 
- DEPENDS = "attr tokyocabinet"
- 
- SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
-            file://set-path-of-default-config-file.patch \
-            "
-+SRC_URI[md5sum] = "d4dabfa46d8afa151be5610f184354e7"
-+SRC_URI[sha256sum] = "fa53e137f850eb268a8e7ae4578b5db5dc383656341f5053dc1a353ed0288265"
- 
--SRC_URI[md5sum] = "33ef12260db4b430352229f37f7cb0e5"
--SRC_URI[sha256sum] = "d71ba98a272390c6fa8bc20e8ea27f0050a0a72a3e6b206a4762b4646be332ec"
--
--inherit autotools systemd
-+inherit autotools-brokensep systemd
- 
- export EXPLICIT_VERSION="${PV}"
- 
-@@ -67,6 +66,7 @@ EOF
-         install -m 0755 -D ${D}${sysconfdir}/init.d/cfengine3 ${D}${datadir}/${BPN}/cfengine3
-         sed -i -e 's#/etc/init.d#${datadir}/${BPN}#' ${D}${systemd_system_unitdir}/*.service
-     fi
-+    rm -rf ${D}${datadir}/cfengine/modules/packages/zypper
- }
- 
- RDEPENDS_${PN} += "${BPN}-masterfiles"
 -- 
 2.25.1
 
