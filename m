@@ -1,48 +1,50 @@
-Return-Path: <jonathan.richardson@broadcom.com>
-Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
-	[209.85.166.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 7AF4A614EA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com
+	[209.85.214.170])
+	by mail.openembedded.org (Postfix) with ESMTP id CE33C611C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2020 00:37:13 +0000 (UTC)
-Received: by mail-io1-f65.google.com with SMTP id z16so24436337iod.11
+	Wed, 19 Feb 2020 00:50:51 +0000 (UTC)
+Received: by mail-pl1-f170.google.com with SMTP id j7so8817825plt.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 16:37:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=fI6TZWo8jRDqorl/N8i/YP2sZoAYFLrLIJDCAbGBNGk=;
-	b=Nynxl0M4X5lr7Bqvw8wfQJ8TvIhltCsoSIKdRjQy1LjBSa3neut7r7vHRUVESgw4HA
-	A8sQVU1qByFc9E3leJ9KiLNNhXIi54VPn4+XHaWXvtBnW5qf6K6ISqaJY9bLxVB51o4Z
-	RfPesYNXs9a291dULH6uvaNc3bVw3aeKK4MY8=
+	Tue, 18 Feb 2020 16:50:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=T7AnshpY0UVe2tpdRJa/wyUk4BosTgQMWfP/ev7VvBI=;
+	b=j02MSqzfEiweKAoxmpibYdBiWoLaIIPyKRq6w52S8d84eKvF7+YL+UzcxZcYya996g
+	h8XYXwN6ICjHCNynwPqQNt0utWlXOrBB104hloU6qXbVuH6lHLD6+/FgJV4oNaHkwhLQ
+	t2DEtF4CYvAa5u4OsBTNprJNFGdTvdUSZJ+7HB2esEsW2dEALSS08+WRaVN4asCKKq2J
+	kqtx52q8zO214XH3hIY+h3qTnm+thKLJgP62TOlpB/d0NXbpu4OtO4sB3pjsOPcH+1G/
+	JofpPM3OAnLlqaR7CWWU5YR81A2rbfcP20Cv4pSwWEsBsQfXEMxtoVsoVqPD76nZaht2
+	JCmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=fI6TZWo8jRDqorl/N8i/YP2sZoAYFLrLIJDCAbGBNGk=;
-	b=c6f7rR611x4EWat8oJTIvdcuKdc4Q8IVMwo1Tvj2Tc+oJmsUGHUlKywd0QvJ0WztFa
-	uOQqnN8rsi0vJcWHNrFVDCqI/EOOuMXzogO3oE+aoYbHytxmKoHOUaxhkVM596sp8h95
-	ypEtGcv6i2Caa5J7Xc8eBOwnv17lJAfIBlP7W7KeL0ZdZgB/hW9rFlnMyuJJa38V2UQK
-	wy93qPPdHKLkZdyq0ro6Fg4iSEo5y8Ogx87fUp9RXXvFt7G7H89u1ZphdrtaCk2vRd9h
-	35+X7GffXIIm3tcZ6XGVcNdzk4LQsJYo1/q73enigEJF35vLy3JyZOV9L2S02SZFZcs1
-	oJMQ==
-X-Gm-Message-State: APjAAAV3wkiEH+RYtBbT1wSzb4KY42eqnYh4xlNNLOQgnSpJja2E5oF1
-	sgn0hoo+Vc2isVkoMVh9mvHPDbREVYfBlmHCuzBjug==
-X-Google-Smtp-Source: APXvYqyu47+I1EPxD3037/4+w/jB27cwinn99Bp0MPPbhX+JaIPSjYsD42oWX+VC2TSG6qXny+dixcK6GdUkhNRq+3g=
-X-Received: by 2002:a05:6638:44a:: with SMTP id
-	r10mr18312318jap.36.1582072634570; 
-	Tue, 18 Feb 2020 16:37:14 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=T7AnshpY0UVe2tpdRJa/wyUk4BosTgQMWfP/ev7VvBI=;
+	b=al5GcVQG9QGM8lh5P9n51ABR7RQmay9IcSAd6dO4bRykXUOUvOIoIwyKwj/lSsfEjk
+	WjMEgO0mZd93EvcrUjM/MxkzPCWI8KUSMVHHlwKcynyjR6HP9cl5v5WskfKlVFbLJgiC
+	CTDtX+N2ZWwQoAa3hp5g0G9NHzGsfV73hQMtkNg5+8j7oBnDxk8652DCFxZrvKvAXLXu
+	rVjrd0JJlj8MNJnCONEJnT2Pje1uivcLJfAjjMkyeCOM2WuKHWHEBZTOr8a7t6DrwIcV
+	jf9odmrdfdHaGEhVJVG8q+Eie8TFgxtZhIau02M4rBENJtOPVd3SAw72QWxBnn3h++0v
+	g30g==
+X-Gm-Message-State: APjAAAUG6U/w1C0QedMS8NYH9OQMOSQJgFoUrKlr90xyrKD5sM9+MKHw
+	TTbJ5ueXvvHvR9rQ9fX1mq/n+smWXRM=
+X-Google-Smtp-Source: APXvYqylZtgEoeY4RgGA9OIIacF6eWh/1D2lk10YAGPCH43p2Fx61l5c/uksa5mdZzY8+4BOJDsChg==
+X-Received: by 2002:a17:90a:b318:: with SMTP id
+	d24mr6231037pjr.142.1582073452238; 
+	Tue, 18 Feb 2020 16:50:52 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::396c])
+	by smtp.gmail.com with ESMTPSA id c5sm207276pfi.10.2020.02.18.16.50.51
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 18 Feb 2020 16:50:51 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 18 Feb 2020 16:50:55 -0800
+Message-Id: <20200219005058.2921658-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <1581723823-21171-1-git-send-email-wangmy@cn.fujitsu.com>
-	<1581723823-21171-2-git-send-email-wangmy@cn.fujitsu.com>
-	<CAMKF1srVisq=yo-3dJ50T8xnBimO=gDkumZLw=yEaugxGbz7Lw@mail.gmail.com>
-	<CAHrpVsXMkZydpmbXPdQJo5qW1=DpJTqSUghNjTnZahqCg7hj9Q@mail.gmail.com>
-	<20200218220922.GA24326@localhost>
-In-Reply-To: <20200218220922.GA24326@localhost>
-From: Jonathan Richardson <jonathan.richardson@broadcom.com>
-Date: Tue, 18 Feb 2020 16:37:03 -0800
-Message-ID: <CAHrpVsXGTU_VDF8o9XSYyCVuwGxvgQ2vd8Ap_kWyY2=vj3MukA@mail.gmail.com>
-To: Adrian Bunk <bunk@stusta.de>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] fio: upgrade 3.17 -> 3.18
+Subject: [meta-oe][PATCH 1/4] graphviz: Depend on py3 at runtime
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,27 +57,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2020 00:37:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 19 Feb 2020 00:50:52 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, Feb 18, 2020 at 2:09 PM Adrian Bunk <bunk@stusta.de> wrote:
->
-> On Tue, Feb 18, 2020 at 11:37:33AM -0800, Jonathan Richardson via Openembedded-devel wrote:
-> > I was just about to submit a patch to remove the disabling of compiler
-> > optimizations to fio. On our cortex A72 this kills the performance of fio
-> > by 25%. That would solve this build issue also.
-> >...
-> > > https://errors.yoctoproject.org/Errors/Details/391129/
-> >...
->
-> t/io_uring.c:103:17: error: '__NR_sys_io_uring_register' undeclared (first use in this function); did you mean 'SYS_io_uring_register'?
->
-> This error does not look related to optimization.
->
-> This looks like https://github.com/axboe/fio/issues/923
+These packages are empty but python scripts
+generally do not depend on python2
 
-Yes you're right. The error is another issue. The message I was referring
-to is actually only a warning. It should fix the warning only:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-  397 | #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
+diff --git a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
+index 176cf4498a..12ecb99091 100644
+--- a/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
++++ b/meta-oe/recipes-graphics/graphviz/graphviz_2.40.1.bb
+@@ -66,8 +66,8 @@ FILES_${PN}-perl += "${libdir}/perl5/*/vendor_perl/ ${libdir}/graphviz/perl/"
+ FILES_${PN}-demo += "${datadir}/graphviz/demo/"
+ 
+ RDEPENDS_${PN}-perl += "perl"
+-RDEPENDS_${PN}-python += "python"
+-RDEPENDS_${PN}-demo += "python perl"
++RDEPENDS_${PN}-python += "python3"
++RDEPENDS_${PN}-demo += "python3 perl"
+ 
+ INSANE_SKIP_${PN}-perl = "dev-so"
+ INSANE_SKIP_${PN}-python = "dev-so"
+-- 
+2.25.1
+
 
