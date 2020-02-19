@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 29FE761085
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B8C0761543
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2020 02:08:56 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id n17so16111304qtv.2
+	Wed, 19 Feb 2020 02:16:34 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id u12so11554460pgb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 18:08:58 -0800 (PST)
+	Tue, 18 Feb 2020 18:16:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=I3/bbISkp42v5ubYI031GjKRQPo5ya6IPAnjGVlHJIs=;
-	b=bRz8KJPWDEUzzOawi4Wcu9og8KHu1Rfa/PtuGWuLUvAI+hhlJDTH54gw/gfUdCDlmh
-	aCIqHCRY8V877ePyAq//T9qGt3EnZUu7aaAXz4G114w7QF4RXhdFZvRBXtBX2wa8215T
-	XlYhPgVFffPaHsNrtdvaas/2sQWMfZdGHykS2WIFxJf+XCgj3/rETRw64oYXldyLAk3H
-	5ysEZLyXzDnNtIAlATRGr53+BZiwFVxqYusb+7HNYabegoEeUisCLGGX6fqk/7uFBc5i
-	oGpzWzkDE/CHiKjU4+rBpwO3ZmjYX9gDW2hITr6MqSVIpgLYVnnj1V9uweeznoEeD8U4
-	GBwg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ianvCSFNw9A0bals1/DKQqkbuuitrWX6WMTOJzNnnpI=;
+	b=c77Zi+dSOz+8nJjTs6B+1aRC8ALgp5vfDE4XUnmmPVWAtutgeun+VVQQs7Be6be9AP
+	dMGtgUigczI5IE9SIe4PoapXJ2Z+/XJrUzPMw7NnRmeJt36kMUmchP4ScnELko+FnIv6
+	H4G1sXUN2V+9smsEbj3+pJps2ttEgH6QC4UpG67iJky2+uxiQ14rmLXGTMOb7wnr1UNJ
+	Yl7js3TWw8a/ZyzRrPllnbGGuXXvN0eaMxYAAe8BmUYQ3yvsJaVgYbv4HvVgK5cC1XqQ
+	+M4qR5d8nAXBB17txyW/DTrxwMv1C4XcNE4qWyoObkzVFaNBMbPcBuJTn/GK4E291Q+g
+	ct5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=I3/bbISkp42v5ubYI031GjKRQPo5ya6IPAnjGVlHJIs=;
-	b=Fep+iYokRzvDaa8lihaqJw/u4AjWRs/HBsedJnGG5alXxrwn1SktNkJhECIPhJaTV0
-	x4K8uzGZsjxLfKmbIzZwIXo3vnIZfrGcO+1oRn76d8muXwhhdgRgUygjoLp1QI9A2LvV
-	bKwVOTG0tvg4MxdJiFRAv/B2RvbEq4wvae63eEhz0S1WyHfmaQDzy51R26Yn6UeIvNxD
-	cUTs0dt5ASaEyUuKGqna7YZEUKqKHk2SUNFxjVBkyNbiDo9n3STkyRrtU87QMauujSfj
-	yaessDD4051VilLpXmSyApK5qnr55xNuG5viWufH0xU0ai53oJcs9ksSPdxPu56wAWWG
-	uhtQ==
-X-Gm-Message-State: APjAAAW5D715KI3ujz5AXFu8NsHYeBz8NDSESDpcVQigg+Txby+g2yQD
-	X/bpBW8NfKDjBcXO6rsfb2lPsarIS2S4etGubHQ=
-X-Google-Smtp-Source: APXvYqzwS/OqYGjCsUcy64en8jp22oghKWwULESgo1vOT8PORf/lEx2fvg+bF7zoIKk4EElW8f6FOD6j/+fGrqBYOyA=
-X-Received: by 2002:ac8:1a19:: with SMTP id v25mr20277564qtj.146.1582078137529;
-	Tue, 18 Feb 2020 18:08:57 -0800 (PST)
-MIME-Version: 1.0
-References: <20200219005058.2921658-1-raj.khem@gmail.com>
-	<20200219005058.2921658-2-raj.khem@gmail.com>
-	<C0207330DF60C5409302EC78C3FE68F303443370@PGSMSX101.gar.corp.intel.com>
-In-Reply-To: <C0207330DF60C5409302EC78C3FE68F303443370@PGSMSX101.gar.corp.intel.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=ianvCSFNw9A0bals1/DKQqkbuuitrWX6WMTOJzNnnpI=;
+	b=SdYE1Ru4OwzLG+h6UTMNUbPkAUDrGkzw5WQfAn8rIcOjjyjYOfeDzsjkdcNz+7eESB
+	W6HD1UPOyLzb0lNRk7nU2uuQXHMVuGM4wChQ57h9rQ7TjFfCcAjFcpwRCyolOfSEkoQv
+	mvFapI3IxHBJXev1EnY7wiTEt45LYw5a6JEYjlpfmMhHL4ZdeQ0On3Sf4xUoCBLof4cd
+	cyNIPbUSRRIYjbfF3bQBJs2d9nhMmVb/IaLUfD2a6r/jQrbWg6+as1cQt7hffwh2bQLy
+	uxSTXQ0u8W7gOWbvzyIpThC89dTyAptlG0p/M7tNTMCLzI0kfzdtbIXFVy80NS36qpMZ
+	4kSA==
+X-Gm-Message-State: APjAAAWkLfw7gUs81cx3lUM6QBCQv7PvVzZzberhvOwrZ+f5fWL5Ge1P
+	OMC/N1fGnTEz2aQ2LAsRQGBsA80mMXo=
+X-Google-Smtp-Source: APXvYqwVlNyxVJrRoOl9HQcsXW7XSiQZYFdSa1h08157wEEU8qAN8x5FZ9btJ/w2cWRGxC8eQm9glA==
+X-Received: by 2002:a63:b257:: with SMTP id t23mr24870522pgo.17.1582078595290; 
+	Tue, 18 Feb 2020 18:16:35 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::396c])
+	by smtp.gmail.com with ESMTPSA id a10sm249228pgk.71.2020.02.18.18.16.34
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 18 Feb 2020 18:16:34 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 18 Feb 2020 18:08:31 -0800
-Message-ID: <CAMKF1spLkd+RQA0Jyv0b402AgPhm06zNE6oh-QopJhsr1ZNu3A@mail.gmail.com>
-To: "Mittal, Anuj" <anuj.mittal@intel.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/4] pm-graph: Renamed from analyze-suspend
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 18 Feb 2020 18:16:46 -0800
+Message-Id: <20200219021646.712447-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH V2] pm-graph: Provide analyze-suspend as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,100 +56,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2020 02:08:57 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 19 Feb 2020 02:16:34 -0000
+Content-Transfer-Encoding: 8bit
 
-On Tue, Feb 18, 2020 at 5:40 PM Mittal, Anuj <anuj.mittal@intel.com> wrote:
->
-> Is this different from the one that is already in meta-oe?
->
-> https://git.openembedded.org/meta-openembedded/tree/meta-oe/recipes-kernel/pm-graph
->
+Remove stale analyze-suspend recipe
 
-These are duplicates, thanks for pointing out, I will move the
-PROVIDES part to pm-graph and other
-goodies from the recipe and delete analyze-suspend
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../analyze-suspend/analyze-suspend_5.5.bb    | 29 -------------------
+ .../packagegroups/packagegroup-meta-oe.bb     |  2 +-
+ .../recipes-kernel/pm-graph/pm-graph_5.5.bb   | 11 +++++++
+ 3 files changed, 12 insertions(+), 30 deletions(-)
+ delete mode 100644 meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb
 
+diff --git a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb b/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb
+deleted file mode 100644
+index bb0aad3413..0000000000
+--- a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb
++++ /dev/null
+@@ -1,29 +0,0 @@
+-SUMMARY = "Analyze Suspend"
+-DESCRIPTION = "analyze-suspend is a tool for system developers to visualize \
+-the activity between suspend and resume, allowing them to identify \
+-inefficiencies and bottlenecks."
+-HOMEPAGE = "https://01.org/suspendresume"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
+-
+-# Apart from the listed RDEPENDS, analyze-suspend depends on some features
+-# provided by the kernel. These options are:
+-#   - CONFIG_PM_DEBUG=y
+-#   - CONFIG_PM_SLEEP_DEBUG=y
+-#   - CONFIG_FTRACE=y
+-#   - CONFIG_FUNCTION_TRACER=y
+-#   - CONFIG_FUNCTION_GRAPH_TRACER=y
+-
+-RDEPENDS_${PN} += "python-core python-datetime python-stringold"
+-
+-SRC_URI = "git://github.com/01org/suspendresume.git;protocol=https"
+-SRCREV = "cf59527dc24fdd2f314ae4dcaeb3d68a117988f6"
+-
+-S = "${WORKDIR}/git"
+-
+-do_install() {
+-    install -Dm 0755 analyze_suspend.py ${D}${bindir}/analyze_suspend.py
+-    install -Dm 0644 README ${D}${docdir}/analyze-suspend/README
+-}
+-
+-BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+index bad4aa769e..3933619add 100644
+--- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
++++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+@@ -46,7 +46,7 @@ RDEPENDS_packagegroup-meta-oe = "\
+ "
+ 
+ RDEPENDS_packagegroup-meta-oe-benchmarks = "\
+-    analyze-suspend dhrystone iperf2 linpack phoronix-test-suite \
++    pm-graph dhrystone iperf2 linpack phoronix-test-suite \
+     tiobench bonnie++ fio iperf2 iperf3 lmbench s-suite whetstone \
+     libc-bench memtester sysbench dbench iozone3 libhugetlbfs \
+     nbench-byte tinymembench \
+diff --git a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb
+index 63a9fa88e9..a1378866ad 100644
+--- a/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb
++++ b/meta-oe/recipes-kernel/pm-graph/pm-graph_5.5.bb
+@@ -12,11 +12,22 @@ SRC_URI = "git://github.com/intel/pm-graph.git \
+ "
+ S = "${WORKDIR}/git"
+ 
++# Apart from the listed RDEPENDS, analyze-suspend depends on some features
++# provided by the kernel. These options are:
++#   - CONFIG_PM_DEBUG=y
++#   - CONFIG_PM_SLEEP_DEBUG=y
++#   - CONFIG_FTRACE=y
++#   - CONFIG_FUNCTION_TRACER=y
++#   - CONFIG_FUNCTION_GRAPH_TRACER=y
++
+ COMPATIBLE_HOST='(i.86|x86_64).*'
+ EXTRA_OEMAKE = "PREFIX=${prefix} DESTDIR=${D} BASELIB=${baselib}"
+ 
+ do_install() {
+         oe_runmake install
++        install -Dm 0755 ${S}/analyze_suspend.py ${D}${bindir}/analyze_suspend.py
+ }
+ 
+ RDEPENDS_${PN} += "python3-core python3-threading python3-datetime python3-compression"
++RPROVIDES_${PN} = "analyze-suspend"
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.25.1
 
-> Thanks,
->
-> Anuj
->
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org <openembedded-
-> > devel-bounces@lists.openembedded.org> On Behalf Of Khem Raj
-> > Sent: Wednesday, February 19, 2020 08:51 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [meta-oe][PATCH 2/4] pm-graph: Renamed from analyze-suspend
-> >
-> > Moved to tip to get py3 support
-> > Point SRC_URI to new location
-> > Adjust for name changes
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  .../pm-graph_5.5.bb}                                 | 12 ++++++++----
-> >  .../packagegroups/packagegroup-meta-oe.bb            |  2 +-
-> >  2 files changed, 9 insertions(+), 5 deletions(-)  rename meta-oe/recipes-
-> > benchmark/{analyze-suspend/analyze-suspend_5.5.bb => pm-graph/pm-
-> > graph_5.5.bb} (74%)
-> >
-> > diff --git a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb
-> > b/meta-oe/recipes-benchmark/pm-graph/pm-graph_5.5.bb
-> > similarity index 74%
-> > rename from meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb
-> > rename to meta-oe/recipes-benchmark/pm-graph/pm-graph_5.5.bb
-> > index bb0aad3413..4f6f3bd40c 100644
-> > --- a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb
-> > +++ b/meta-oe/recipes-benchmark/pm-graph/pm-graph_5.5.bb
-> > @@ -1,4 +1,4 @@
-> > -SUMMARY = "Analyze Suspend"
-> > +SUMMARY = "Analyze Suspend/Resume"
-> >  DESCRIPTION = "analyze-suspend is a tool for system developers to visualize \  the
-> > activity between suspend and resume, allowing them to identify \  inefficiencies and
-> > bottlenecks."
-> > @@ -14,10 +14,11 @@ LIC_FILES_CHKSUM =
-> > "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
-> >  #   - CONFIG_FUNCTION_TRACER=y
-> >  #   - CONFIG_FUNCTION_GRAPH_TRACER=y
-> >
-> > -RDEPENDS_${PN} += "python-core python-datetime python-stringold"
-> > +RDEPENDS_${PN} += "python3-core python3-datetime python3-stringold"
-> >
-> > -SRC_URI = "git://github.com/01org/suspendresume.git;protocol=https"
-> > -SRCREV = "cf59527dc24fdd2f314ae4dcaeb3d68a117988f6"
-> > +PV .= "+git${SRCPV}"
-> > +SRC_URI = "git://github.com/intel/pm-graph;protocol=https"
-> > +SRCREV = "3a8cd2fa9aee3afbc7f7e844885ffdcfaf5a1097"
-> >
-> >  S = "${WORKDIR}/git"
-> >
-> > @@ -27,3 +28,6 @@ do_install() {
-> >  }
-> >
-> >  BBCLASSEXTEND = "native"
-> > +
-> > +RPROVIDES_${PN} = "analyze-suspend"
-> > +
-> > diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-
-> > oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > index bad4aa769e..3933619add 100644
-> > --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> > @@ -46,7 +46,7 @@ RDEPENDS_packagegroup-meta-oe = "\  "
-> >
-> >  RDEPENDS_packagegroup-meta-oe-benchmarks = "\
-> > -    analyze-suspend dhrystone iperf2 linpack phoronix-test-suite \
-> > +    pm-graph dhrystone iperf2 linpack phoronix-test-suite \
-> >      tiobench bonnie++ fio iperf2 iperf3 lmbench s-suite whetstone \
-> >      libc-bench memtester sysbench dbench iozone3 libhugetlbfs \
-> >      nbench-byte tinymembench \
-> > --
-> > 2.25.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
