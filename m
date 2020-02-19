@@ -1,58 +1,50 @@
-Return-Path: <leo.yan@linaro.org>
-Received: from mail-pf1-f193.google.com (mail-pf1-f193.google.com
-	[209.85.210.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 75E1061177
+Return-Path: <dl9pf@gmx.de>
+X-Greylist: delayed 302 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 19 Feb 2020 11:56:47 UTC
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+	by mail.openembedded.org (Postfix) with ESMTP id 8537E6143D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2020 09:45:02 +0000 (UTC)
-Received: by mail-pf1-f193.google.com with SMTP id j9so12225036pfa.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2020 01:45:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=HYRhacsG8+TIKnw46yOEoOafW1OaaBiMUFFaXBYXrsw=;
-	b=BaD7N3QBwYuuHyK/Qtjlo5Q3XI5sQHs/DwQqo83W5PeTxrWptkfNsXxOlRH3mlFBfb
-	WZ3g5DxLnYfZ5Bts1tQ7KNeJkyo8Ba9CO4pFlI2RrRWts099PDSH2lbhvTLVzsWSv/2T
-	pv/SCOCAORAkQmlWmX/gi8w2MxApt4bNR90lSMc7sgI2ob4UAFpKyCVxkbu5ZLGQIn6z
-	K/HiJvmb4JAJCdSslTqLvMQugp6F8C5qZjp+8Xygesg+HiBofNtSl5lSMvtZQ1HqVdlw
-	gplnCEafMKw8aOuQRlHk4AuxsaxxnBbaLWyO4mds330Q8fBWXa8JdVf3PUZ9/3HjH5Rs
-	9pqg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=HYRhacsG8+TIKnw46yOEoOafW1OaaBiMUFFaXBYXrsw=;
-	b=qkElPk/I/B+rm5vN+oq6YBir4QcBYwsnDSC2k/3mfLnOGEUGIyo8eJvRv/9eMTVw+g
-	VDZnl51iqKn7ZYceXo79xm9v5HkE/GVrZOH3l+jfF1niXC2KqgJQcjZ9ZKsPU4cpCSvw
-	7zn27fw47kfcE5vXKgl0zMKEqasew02dDV12Ah8WSAuiHlaCqPTSVzdltLHenL0GTH81
-	4uxHPrB6hPYIGkNXnlqvkax7Bk3DAQL4VB86fuWhEGjhiaBlJPx+4sJ5SzF6G9qpZpJL
-	+veqt9v42tYIShUTQLKQsFW/A4HHXAjoJqgnFtORUqeujUmVvpYqH27IroKFaiFVZ41E
-	fsyg==
-X-Gm-Message-State: APjAAAWXfiHaEXxS3zsNcVJOfJv+6IEgdA2wmJdei2S0ceUFIuDsUU/J
-	b6bLn23xRKLRQMiqdljLiJ5Fmw==
-X-Google-Smtp-Source: APXvYqxIHLYaCQHJpubynGDp7yMzFLsj8clcO0M0O6y1hC0XHp9XNm2sk8K1OTYOVohBW39rm3iIJA==
-X-Received: by 2002:a63:990a:: with SMTP id d10mr28010216pge.63.1582105503433; 
-	Wed, 19 Feb 2020 01:45:03 -0800 (PST)
-Received: from leoy-ThinkPad-X240s ([2400:8904::f03c:91ff:fe8a:bbb8])
-	by smtp.gmail.com with ESMTPSA id
-	u126sm2061517pfu.182.2020.02.19.01.44.57
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 19 Feb 2020 01:45:02 -0800 (PST)
-Date: Wed, 19 Feb 2020 17:44:52 +0800
-From: Leo Yan <leo.yan@linaro.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20200219094452.GA11073@leoy-ThinkPad-X240s>
-References: <20200218052544.9467-1-leo.yan@linaro.org>
-	<20200218052544.9467-4-leo.yan@linaro.org>
-	<CAMKF1spwQ+Y3D3MpdnV1OcNSVL=7=fENq8amqpBMq0d6WHuwiQ@mail.gmail.com>
-	<20200218072726.GB9945@leoy-ThinkPad-X240s>
-MIME-Version: 1.0
-In-Reply-To: <20200218072726.GB9945@leoy-ThinkPad-X240s>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v1 3/4] BCC: Add build recipe
+	Wed, 19 Feb 2020 11:56:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+	s=badeba3b8450; t=1582113408;
+	bh=3G1q2gLIv9zsC6/soPZUSf+d13ZwNzWL/oiuMXBAgME=;
+	h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+	b=EJ6aewptTVMy8hPKQv2zWv1jpg3qNdWGv8igbZGBvV5GbLlgGp/MlVMuHlhM/1T00
+	0NVKl2JDyRtvBud+/WrYbDy2CYb/pgqaZz+BP/+ttu2yqW5eqsTsslWOH/MxIT5oGI
+	zLPMGCONej/WUrW3Hc2M/NkXKj5rUskJLOoQCOIU=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from localhost.localdomain ([95.216.96.43]) by mail.gmx.com
+	(mrgmx104 [212.227.17.168]) with ESMTPSA (Nemesis) id
+	1N4z6q-1jTrL31s4S-010rtb; Wed, 19 Feb 2020 12:51:45 +0100
+From: Jan-Simon Moeller <dl9pf@gmx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 19 Feb 2020 12:51:26 +0100
+Message-Id: <20200219115126.25036-1-dl9pf@gmx.de>
+X-Mailer: git-send-email 2.11.0
+X-Provags-ID: V03:K1:g2Y4ANjExeTUIShjlEV+Ug0zHVl1LXO90WtJ4E1xkyoDd4UizNU
+	BSnE/NS76zb4BjvPV8Rd38skNi+zyI8cIrbQ/xAaCvrUxY6ptOB1QXt+0gwUREAjOD1dXdL
+	HQyW/oU8lKQplM9oWoevEgnmeWDdxw4+Jgdx9SSsSsalUOzQxBTPEj38PJ1PfWsd7SPek7z
+	33o8fLk9a2bYO4aLyY9ng==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:EgU4l8GTSu4=:3Xt4Xjb9mmKX+iBDl7OhXv
+	khOu1xBuPpPp2n3zeOau4OvAEpgKsmIupA8FtNIz21x3HJiKF5NbxUGkUxTX0JHu7A2U28vMm
+	q6JQusBwDDnqkXDbtE42l9H6ZhMToqO/qqQmENgtDzP84as5jbAUZDmEVKEkrnmuBQzwTjsjM
+	7Sbp+vdK+HUlqoh7iQUkhFPlACC9JkkuBAtt5KEre9O+hh2vY6fbyHu420+qOcNl3VNb7Osvs
+	nfztOUgXVHAR7DEhapPGK5UphIESGlMfUGx3ripGXcRAx0eQFumTwGe1MhnBwIQ1h/znZqpVt
+	VFij5M51/lD1++mI8mhBbbI7Xis0/m7N21CgGaCUiXlMEi2gf9WlMZrq3alnyVgoKqtV3FJBe
+	oe8B1El91+1a1v7rdY43nmBcd5GV0lmmaZHVUsH3N5VaUNEOEddgFPRI8pqN0glw73GdjSdi3
+	XEYyANgA2ii5V7I2j0vUvgU3t2YSSRemoLo7XGsfrMK5D5ozxk0ozDQ4feirvu4I5wX5hWwh/
+	XbBpKGL1HwFJEm9H1WpLV2iR7K7W/1je8UApGSY7Nc7NC7E1jIykLAUw0CfRx8JswozZ0gAuO
+	KsWp9PQbfMBiEsZ7WJqERrANPDxwU8FOHIv+Xm1johFOMkEarb2Us4ofEDXBGMQ/fdlkf8oYl
+	HJh/d1ElXIOPAr7OKOOAlJOO2sHCIVCIRLrMILuQWl24peAtunpeYydRuloKTcQNZPSuI6YoC
+	NJQiM6GwSFjnMdhbkg6svrIZISeIak4ZkIDXMKjL7rHYLC/L3as6/YEyjEpbzMIwBksls+7EX
+	FRtfiepufBNbUFAU10j+ELzMG/abLDekHEP2Yp5k3+UOjSTe1IlcI1+874mbxQBHGLRLEQ5Zc
+	TXCm+HWgQlEpbFstw9jD52sVSp7hN4QxhnI/69I5Cprokbkh3OXp4HqjI85TyhYqDE6YUrUDI
+	uASAeraQy+C58JnY9EZXU3FPs9D01BeJR4ARbWQfD2iAKMYQx4ddBS8zntRt8YMwfFgmH41oS
+	hLT4yDpqae7aCUVi5tR3OAI1BxWY31gUzjcIsz2VKqXb/NG8plwXykaJyq/WI+YitpN+BMezs
+	OkigdsVrMQSFE5oRkp3f97mAXWCMPMMXLmjU+1KG544pYfLi9cin0UFZIWn+GAGB0O1DQ4VPl
+	Z6/a/s954f76A7vPo1MifVGuyhC1+mNnc/TlkhxnJ2SN1ZGGBlOHeHXjqhKHF0SEqtcX8=
+Subject: [meta-oe][PATCH] meta-oe: master: remmina - use PACKAGECONFIG for spice
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,54 +57,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2020 09:45:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 19 Feb 2020 11:56:47 -0000
+Content-Transfer-Encoding: quoted-printable
 
-Hi Khem,
+remmina depends on spice and spice-protocol but they are in meta-networkin=
+g.
+Use the PACKAGECONFIG flag to avoid hardcoding the dependency.
 
-On Tue, Feb 18, 2020 at 03:27:26PM +0800, Leo Yan wrote:
-> Hi Khem,
-> 
-> On Mon, Feb 17, 2020 at 10:30:46PM -0800, Khem Raj wrote:
-> 
-> [...]
-> 
-> > > +DEPENDS += "bison-native \
-> > > +            ninja-native \
-> > > +            elfutils-native \
-> > > +            flex-native \
-> > > +            ${MLPREFIX}elfutils \
-> > > +            ${MLPREFIX}binutils \
-> > > +            ${MLPREFIX}flex \
-> > > +            luajit \
-> > > +            clang \
-> > > +            "
-> > > +
-> > 
-> > this will add meta-clang dependency directly into meta-oe, which is not desired
-> > is it possible to make it optional or perhaps marked when meta-clang
-> > is not in BBLAYERS
-> 
-> Thanks a lot for reviewing.  clang is mandotory for BCC to compile
-> eBPF programs, so I think we cannot build clang as optional for BCC.
-> 
-> For marking the recipe when meta-clang is not in BBLAYERS, I searched
-> with google but seems 'LAYERDEPENDS' and 'BBMASK' both are not suitable
-> for this case.  Could you give more detailed info for how to do this?
+Signed-off-by: Jan-Simon Moeller <dl9pf@gmx.de>
+=2D--
+ meta-oe/recipes-support/remmina/remmina_1.3.6.bb | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
 
-Just want to ask a following question.
+diff --git a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb b/meta-oe/re=
+cipes-support/remmina/remmina_1.3.6.bb
+index f9963ff65..f9860a11f 100644
+=2D-- a/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
++++ b/meta-oe/recipes-support/remmina/remmina_1.3.6.bb
+@@ -5,8 +5,6 @@ LICENSE =3D "GPLv2 & openssl"
+ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Ddab7215512044d49037272ce1ac4ea=
+8f file://LICENSE.OpenSSL;md5=3Dc1eb3cee0a4dea27503c531267a69769"
+ DEPENDS +=3D "openssl freerdp gtk+3 gdk-pixbuf atk libgcrypt avahi-ui lib=
+sodium libssh vte json-glib libsoup-2.4 libvncserver libsecret"
 
-Since BCC and bpftrace both are heavily relying on LLVM/Clang for their
-tracing, do you think it's a good idea to merge BCC and bpftrace into
-meta-clang layer, e.g. place into /meta-clang/recipes-devtools/?
-If so, we can easily resolve the dependency issue and avoid to introduce
-mess between meta-oe and meta-clang.
+-DEPENDS_append_x86 =3D " spice spice-protocol"
+-DEPENDS_append_x86-64 =3D " spice spice-protocol"
 
-For the tool ply, it's simple and doesn't depend on Clang.  So should
-keep it into meta-oe/recipes-devtools/ folder?  Also welcome any
-suggestion for this.
+ DEPENDS_append_libc-musl =3D " libexecinfo"
+ LDFLAGS_append_libc-musl =3D " -lexecinfo"
+@@ -23,11 +21,7 @@ inherit cmake features_check mime-xdg
+ # depends on avahi-ui with this restriction
+ ANY_OF_DISTRO_FEATURES =3D "${GTK3DISTROFEATURES}"
 
-Thanks,
-Leo Yan
+-EXTRA_OECMAKE +=3D "-DWITH_APPINDICATOR=3DOFF -DWITH_GETTEXT=3DOFF -DWITH=
+_TRANSLATIONS=3DOFF -DWITH_SPICE=3DOFF"
+-
+-EXTRA_OECMAKE_append_x86 =3D " -DWITH_SPICE=3DON"
+-EXTRA_OECMAKE_append_x86-64 =3D " -DWITH_SPICE=3DON"
+-
++EXTRA_OECMAKE +=3D "-DWITH_APPINDICATOR=3DOFF -DWITH_GETTEXT=3DOFF -DWITH=
+_TRANSLATIONS=3DOFF"
+
+ do_install_append(){
+     # We dont need the extra stuff form other desktop environments
+@@ -36,6 +30,8 @@ do_install_append(){
+     rm -rf ${D}/${datadir}/gnome-session
+ }
+
++PACKAGECONFIG[spice] =3D "-DWITH_SPICE=3DON, -DWITH_SPICE=3DOFF, spice sp=
+ice-protocol"
++
+ RDEPENDS_${PN} =3D "bash"
+
+ FILES_${PN}_append =3D " ${datadir}/icons/hicolor/*"
+=2D-
+2.11.0
+
 
