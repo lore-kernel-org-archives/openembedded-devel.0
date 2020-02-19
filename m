@@ -1,52 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com
-	[209.85.216.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 796F561515
+Received: from mail-pf1-f175.google.com (mail-pf1-f175.google.com
+	[209.85.210.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 146A66155D
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 19 Feb 2020 00:50:52 +0000 (UTC)
-Received: by mail-pj1-f44.google.com with SMTP id gv17so1774665pjb.1
+Received: by mail-pf1-f175.google.com with SMTP id k29so11557478pfp.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Feb 2020 16:50:53 -0800 (PST)
+	Tue, 18 Feb 2020 16:50:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=U+o+aWjf5KlQw5xRrlnCt0Eaflif+OSCvmfmBxYtwS8=;
-	b=pmcjucpKER2i4iwNhv1p8IlzvR/de8u4zW7qpD0C9pvSMtMQuJkGbao65QtIZzQgSn
-	2qLF3akZutvGMi44HgzJVmMve2yFelDkjABuro6SXrlWbc+gi0CmONB24KDnCXsWgDQC
-	lsVH9gE04imeP+gW5IyC3//USO/D0r3XebzL4RYXRsh8+dpGTrEVaj1yQTK7RwxHPTZA
-	pT8X0FYnYVtwVoCDHbbEAG+mgDfUPcUYZdN2wQ8Z3yzUq8iv5uqQlPpJj72XrcYDPqrk
-	Tn7K7YXq8s21hiVhesMEB1RqoiECRc8Jgo52kZkhR1Q/FjtLRiVbnRgydt8e1MtTcEuA
-	uRxg==
+	bh=tOjL4DhTNpJB4TL2YUL4M6oLMCMoUm29QpZV12BT3FY=;
+	b=VakMSyzaGOWMD0TVJqzV3l/DVEAtEn/kIXIzf6PMBF2SxiWxF+JLhJRLoyQj5AyuJ5
+	31xOYjXeRLZeUbW64dkC7PwzacQmEcVA9Cbmpr4IvEMPV5X8v428XY0L0JQiDJQVwLaB
+	SHDWbwCtJSof0AFRH3CPaIO2JI3ZXEYy/4x4kSK1TnQazXxcKYsh8BZFZgACRDJviBci
+	oWnOEXtDl/EubBE0QIilg3tptHwyyg4Ujd/ECKW/2hgIMxYl+ZEcM+FNI53O8CdoXD7x
+	ScaaDH7i4ctKFhj94ygG64M4bTpIDUc3gkPFLfEyQGyJ3WIj8opCOBLQzrRS8Berw3oc
+	n5Dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=U+o+aWjf5KlQw5xRrlnCt0Eaflif+OSCvmfmBxYtwS8=;
-	b=TmrZchW+vck9VWxhsIL4pI2KUW0oFMqypqw3Namnnl2QOLwssJSNu7KawEP0AWqLsL
-	wFyQjbU40HafLcsV0O0cyywvZaTU5BfFxEnUYlXLUTqGnYyL1GEWHLbeEHzRG1zm7oUq
-	DdsA36+nWia41Odtp8/P3sm+m3vVoSCc08gKzJNzveaYAWf9aqy9uRUXZBlYHEQJYEvC
-	lLrsOJLOpNN1cElvxleE6BxLseb9OlJpsmtvNp6sa9koeE+idBRv3x4HhS2CKIn2u1bQ
-	TicOfaMKgMeXSApZkczO/CPZyzgHlVdyfhepRFJrHPRuQqzTYu10c6xAKMVDEfMzUgHw
-	a+jw==
-X-Gm-Message-State: APjAAAXxObp+RNvoeCuNlJoVtn/v4JcJk5avFC2Ht6IqQ5ua2DJE7szD
-	aOsIabCjuU5/D+zb/Z1zOyR5OdH9dPk=
-X-Google-Smtp-Source: APXvYqxSRBX8QEudX+6hnBUjgW8MHll7UTW3SrTa3YJWRnsrMXc3R/pc+HziLMLx0/QVsE4ins55ow==
-X-Received: by 2002:a17:90a:33a1:: with SMTP id
-	n30mr5697240pjb.6.1582073452988; 
-	Tue, 18 Feb 2020 16:50:52 -0800 (PST)
+	bh=tOjL4DhTNpJB4TL2YUL4M6oLMCMoUm29QpZV12BT3FY=;
+	b=gh5uGkFLTIOEQGptdTb5lhkg9+IZtbv1KHVjuVpkZZhDjSUeDrMpoDxQYYopBwrh1C
+	MjK6d+dmCKE3qrzC+R9X3sNzyehMQ0EU3sDa1/w2tOkNatecDq8yXSupik12BB3hnZ55
+	OkjRShS1D7yEwjS7sHc4wwWAWW76t+m9fQ1TmbRc6+xNJtZtFbYp3RPqA/xVag3y9nBc
+	1G4yd7yeUbU3ndK3KeZMux685VEeYzbX+xn2wosT7cSeAHTnFjPMGhiuzGkLpiAFIldl
+	3Lo9Ko2314yQGv59iQS4JAaEB0MPwV5DOrFvJ+M9Vyda6/H4Peb9jkyOOO9tasFiqnFh
+	tREQ==
+X-Gm-Message-State: APjAAAXeDaZeM6R3diYuCq564TTelVi5kVFcB7E2cdXe51bIS+lSncDe
+	4q7PdGJ228LcPY+MpjklWlgc89T9H24=
+X-Google-Smtp-Source: APXvYqwLAo7B9i3HrzuI/fHhyF9+ZETjjIq0aOrEaNyXo4nGU9VCHEOrZsIpBJmURRxIrTmMCCRQjg==
+X-Received: by 2002:a65:5281:: with SMTP id y1mr24758178pgp.327.1582073453699; 
+	Tue, 18 Feb 2020 16:50:53 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::396c])
-	by smtp.gmail.com with ESMTPSA id c5sm207276pfi.10.2020.02.18.16.50.52
+	by smtp.gmail.com with ESMTPSA id c5sm207276pfi.10.2020.02.18.16.50.53
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 18 Feb 2020 16:50:52 -0800 (PST)
+	Tue, 18 Feb 2020 16:50:53 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Feb 2020 16:50:56 -0800
-Message-Id: <20200219005058.2921658-2-raj.khem@gmail.com>
+Date: Tue, 18 Feb 2020 16:50:57 -0800
+Message-Id: <20200219005058.2921658-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200219005058.2921658-1-raj.khem@gmail.com>
 References: <20200219005058.2921658-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/4] pm-graph: Renamed from analyze-suspend
+Subject: [meta-oe][PATCH 3/4] cfengine: Upgrade to 3.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,68 +58,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2020 00:50:52 -0000
+X-List-Received-Date: Wed, 19 Feb 2020 00:50:53 -0000
 Content-Transfer-Encoding: 8bit
 
-Moved to tip to get py3 support
-Point SRC_URI to new location
-Adjust for name changes
+License-Update: Change in Company name Cfengine AS a Norwegian company -> Northern.tech
+Python3 fixes to needed scripts
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../pm-graph_5.5.bb}                                 | 12 ++++++++----
- .../packagegroups/packagegroup-meta-oe.bb            |  2 +-
- 2 files changed, 9 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-benchmark/{analyze-suspend/analyze-suspend_5.5.bb => pm-graph/pm-graph_5.5.bb} (74%)
+ .../cfengine/cfengine-masterfiles/python3.patch  | 16 ++++++++++++++++
+ ..._3.12.0.bb => cfengine-masterfiles_3.15.0.bb} | 15 ++++++++++-----
+ .../{cfengine_3.12.0.bb => cfengine_3.15.0.bb}   | 10 +++++-----
+ 3 files changed, 31 insertions(+), 10 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch
+ rename meta-oe/recipes-extended/cfengine/{cfengine-masterfiles_3.12.0.bb => cfengine-masterfiles_3.15.0.bb} (74%)
+ rename meta-oe/recipes-extended/cfengine/{cfengine_3.12.0.bb => cfengine_3.15.0.bb} (89%)
 
-diff --git a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb b/meta-oe/recipes-benchmark/pm-graph/pm-graph_5.5.bb
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch
+new file mode 100644
+index 0000000000..a6f6701261
+--- /dev/null
++++ b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/python3.patch
+@@ -0,0 +1,16 @@
++--- a/modules/packages/apt_get
+++++ b/modules/packages/apt_get
++@@ -1,4 +1,4 @@
++-#!/var/cfengine/bin/python
+++#!/var/cfengine/bin/python3
++ 
++ import sys
++ import os
++--- a/modules/packages/apt_get.in
+++++ b/modules/packages/apt_get.in
++@@ -1,4 +1,4 @@
++-#!@bindir@/python
+++#!@bindir@/python3
++ 
++ import sys
++ import os
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.15.0.bb
 similarity index 74%
-rename from meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb
-rename to meta-oe/recipes-benchmark/pm-graph/pm-graph_5.5.bb
-index bb0aad3413..4f6f3bd40c 100644
---- a/meta-oe/recipes-benchmark/analyze-suspend/analyze-suspend_5.5.bb
-+++ b/meta-oe/recipes-benchmark/pm-graph/pm-graph_5.5.bb
-@@ -1,4 +1,4 @@
--SUMMARY = "Analyze Suspend"
-+SUMMARY = "Analyze Suspend/Resume"
- DESCRIPTION = "analyze-suspend is a tool for system developers to visualize \
- the activity between suspend and resume, allowing them to identify \
- inefficiencies and bottlenecks."
-@@ -14,10 +14,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
- #   - CONFIG_FUNCTION_TRACER=y
- #   - CONFIG_FUNCTION_GRAPH_TRACER=y
+rename from meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
+rename to meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.15.0.bb
+index dda6af9c9d..79269d3147 100644
+--- a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.12.0.bb
++++ b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.15.0.bb
+@@ -20,10 +20,11 @@ HOMEPAGE = "http://cfengine.com"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=9f76426f9ef8c6f6739fadd21d817a4f"
  
--RDEPENDS_${PN} += "python-core python-datetime python-stringold"
-+RDEPENDS_${PN} += "python3-core python3-datetime python3-stringold"
+-SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz"
+-
+-SRC_URI[md5sum] = "d59bd8c95620da816c382f749d425860"
+-SRC_URI[sha256sum] = "1c50e3d8c702097e13a21258626d936d6ff2e6492e893dfe286ff0d6204d7a65"
++SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
++           file://python3.patch \
++           "
++SRC_URI[md5sum] = "6d456fdd9bd24ff6617eeaa05efae602"
++SRC_URI[sha256sum] = "4a071c0c4ba7df9bad93144cff5fbc0566e5172afd66201072e3193b76c55a38"
  
--SRC_URI = "git://github.com/01org/suspendresume.git;protocol=https"
--SRCREV = "cf59527dc24fdd2f314ae4dcaeb3d68a117988f6"
-+PV .= "+git${SRCPV}"
-+SRC_URI = "git://github.com/intel/pm-graph;protocol=https"
-+SRCREV = "3a8cd2fa9aee3afbc7f7e844885ffdcfaf5a1097"
+ inherit autotools
  
- S = "${WORKDIR}/git"
+@@ -31,6 +32,10 @@ export EXPLICIT_VERSION="${PV}"
  
-@@ -27,3 +28,6 @@ do_install() {
+ EXTRA_OECONF = "--prefix=${datadir}/cfengine"
+ 
++do_install_append() {
++    rm -rf ${D}${datadir}/cfengine/modules/packages/{zypper,yum}
++}
++
+ FILES_${PN} = "${datadir}/cfengine"
+ 
+-RDEPENDS_${PN} += "python-core"
++RDEPENDS_${PN} += "python3-core"
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb b/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
+similarity index 89%
+rename from meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
+rename to meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
+index 9d0123d8bd..fa08be3e65 100644
+--- a/meta-oe/recipes-extended/cfengine/cfengine_3.12.0.bb
++++ b/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
+@@ -11,18 +11,17 @@ its lifecycle. CFEngine takes systems from Build to Deploy, Manage and Audit."
+ HOMEPAGE = "http://cfengine.com"
+ 
+ LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=f8b34828ab373d6b1bb4b0fc60a78494"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=233aa25e53983237cf0bd4c238af255f"
+ 
+ DEPENDS = "attr tokyocabinet"
+ 
+ SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
+            file://set-path-of-default-config-file.patch \
+            "
++SRC_URI[md5sum] = "d4dabfa46d8afa151be5610f184354e7"
++SRC_URI[sha256sum] = "fa53e137f850eb268a8e7ae4578b5db5dc383656341f5053dc1a353ed0288265"
+ 
+-SRC_URI[md5sum] = "33ef12260db4b430352229f37f7cb0e5"
+-SRC_URI[sha256sum] = "d71ba98a272390c6fa8bc20e8ea27f0050a0a72a3e6b206a4762b4646be332ec"
+-
+-inherit autotools systemd
++inherit autotools-brokensep systemd
+ 
+ export EXPLICIT_VERSION="${PV}"
+ 
+@@ -67,6 +66,7 @@ EOF
+         install -m 0755 -D ${D}${sysconfdir}/init.d/cfengine3 ${D}${datadir}/${BPN}/cfengine3
+         sed -i -e 's#/etc/init.d#${datadir}/${BPN}#' ${D}${systemd_system_unitdir}/*.service
+     fi
++    rm -rf ${D}${datadir}/cfengine/modules/packages/zypper
  }
  
- BBCLASSEXTEND = "native"
-+
-+RPROVIDES_${PN} = "analyze-suspend"
-+
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index bad4aa769e..3933619add 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -46,7 +46,7 @@ RDEPENDS_packagegroup-meta-oe = "\
- "
- 
- RDEPENDS_packagegroup-meta-oe-benchmarks = "\
--    analyze-suspend dhrystone iperf2 linpack phoronix-test-suite \
-+    pm-graph dhrystone iperf2 linpack phoronix-test-suite \
-     tiobench bonnie++ fio iperf2 iperf3 lmbench s-suite whetstone \
-     libc-bench memtester sysbench dbench iozone3 libhugetlbfs \
-     nbench-byte tinymembench \
+ RDEPENDS_${PN} += "${BPN}-masterfiles"
 -- 
 2.25.1
 
