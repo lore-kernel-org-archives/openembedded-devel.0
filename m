@@ -1,56 +1,55 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
-	[209.85.214.177])
-	by mail.openembedded.org (Postfix) with ESMTP id E3867615CD
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com
+	[209.85.128.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E4A561330
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 18:19:25 +0000 (UTC)
-Received: by mail-pl1-f177.google.com with SMTP id g6so1872389plt.2
+	Thu, 20 Feb 2020 18:54:30 +0000 (UTC)
+Received: by mail-wm1-f65.google.com with SMTP id s10so3158179wmh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 10:19:27 -0800 (PST)
+	Thu, 20 Feb 2020 10:54:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-language:content-transfer-encoding;
-	bh=XhkFKg+j8aXZpB5C52FDT6wkb2pOUfE+K07XQX4hurc=;
-	b=YlT+4/8O8kCl/d3pMe/2p5/JNDj6WibFGBk35e8Gbe7FlTCSH5Zo4ISb+o6HRdDbiV
-	LJte3H+9IqZHVmp3dZ2XdEwErL1xboYnJpeHMo0XSz2l+MPJF3FykUEtPI1nTF56wLuO
-	G2IuDO1jpjUt5HLyi9Ir6gi2aZsg9dbBCOfb6f2USIE6IjwwxccDaTLF/t0eXXTqPFin
-	LSSy5RlrCzM3ZSi3oWMwPTzb2RMJ8aTNAn8nCCLNskRSswJCpOne3VMYree8a1Yd2gTK
-	OpEcpSjqjqSkZ9JmRBqbtFZAzJFpXNaVOOXdEiBAtGlTXY6MhOFOSVVgYAzSAjpXeTQO
-	9v4A==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=M7JtoAD83e1rzHrpZ2EX4oK9GXnI7fUA30YuvdvMvk8=;
+	b=WQu/Q8PkHGKR4UbKudgYvlHZmGytPU9kZbzCmfnSnIqk8ztiODG7jQQIO1Le7q7RG5
+	wFEzMrRhPRUWM2M8FyoS6cKpd0/821IBIuG1dn6D2FUeoQvYPQNOa3JDBXcBU/Que0CI
+	3X0vvDdC0jSfS9qGi53mBpS5+63Sy1V1W+AA/iIKw7/vKiiLeDEu+TgD1zxZuHKUumIq
+	8DiFx+VdsSH7U8vP3Pgcf+35UeA9m3cpgpwMBjkboUhktZrp2BPURYtr/7QyyYA9QChc
+	7MjQx/mb/LagZ5W01u+Uz4NWDNiW/Eey3cEwD+rhfXKqJqILC96tpWuOiM+JPvmeH9x8
+	MjWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=XhkFKg+j8aXZpB5C52FDT6wkb2pOUfE+K07XQX4hurc=;
-	b=trX8KhQfU8MOcS6O0gWV0K25mdoF1fCKd/jG8opV4r4XqcOOYaieHu8vHj9X8NEIML
-	eelfLpyLM9g8Ql61AJ0Rw0+rvTxUe3Gl2mNFRmJXtBYf8guqimo5h3LN4HlypUtpgEXW
-	03IlTFFDpBrez/cwyWYWr0PfVAKsWe3RXv+a5cYYwhp38R0bfOeQQrPAwKIGyumzoIHu
-	q3fusA3zCz+8AuwToAU3fuDIzK4wpH0PXWFmzjANhLQv1HV6ZNs1+5mZ4EEPqWF2HSBc
-	fXzf0L0nhAjR4uXaJkEHrry3tB7NaC/STW72HVNKCvsm07ZvHLU4OPJw2t9bKZ5FMAPG
-	8ofQ==
-X-Gm-Message-State: APjAAAUvTHsvaxubJs9Giqq3/tVUNH+6+3oaxeMr50DdE/WRvqXdZbFo
-	ypsSgxuil/yEh2LTvNFA/rqSqbKxeGk=
-X-Google-Smtp-Source: APXvYqwamyz4IE/jnp6RUK+nEP/3b5mWHSQAg6kBJSIo1zgzC4JmsypiXMG2qqvoC7MNu1l5Ttwjbg==
-X-Received: by 2002:a17:902:9b8a:: with SMTP id
-	y10mr30692623plp.114.1582222765576; 
-	Thu, 20 Feb 2020 10:19:25 -0800 (PST)
-Received: from ?IPv6:2601:646:9200:4e0:94fc:1e40:9cc4:7d04?
-	([2601:646:9200:4e0:94fc:1e40:9cc4:7d04])
-	by smtp.gmail.com with ESMTPSA id iq22sm144824pjb.9.2020.02.20.10.19.24
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Thu, 20 Feb 2020 10:19:25 -0800 (PST)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel@lists.openembedded.org
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=M7JtoAD83e1rzHrpZ2EX4oK9GXnI7fUA30YuvdvMvk8=;
+	b=tkWVuHFqM5sGRyWy3J7BvLjS0rezd4MsR3gLqMcUR+nZzy1OhHBwpC8plGJ6ZKqtzs
+	2eEikfU0p2rDx8CCoWm2IgkjJ2QTGzFNFUNBNQyBzA5Dc5t+tgW9e/EXtax6bf33m5Zc
+	A9rxcifMupKmdDogsh5w6o90O5AAW3thYg+30wOQiIy/zFb0xBFQMwT4QI3WKDwPR2gk
+	50u5g+ixyTRutkPEmGRq2Dneue1mDIH73qDadZHNJ+QiIVMDrBMsTfP7ZOhEijYlq3vp
+	175pYb3Pgl5BJIii1FfZXJ5L78hBrzxoMK5GxjGwhzOCWXsrqpDLn5Fmhl8Cbj02CJEt
+	Wnyw==
+X-Gm-Message-State: APjAAAVQ2AkObr7+tqegL38gimlZJQPnXWHJ7XxOkXilfIibG/jD7I6U
+	yYfshgJhoazQ+3ax/y6YtjA=
+X-Google-Smtp-Source: APXvYqxX1xxICCvrqQ/5VnrjDhgF4vzE6rxVR/kRr24ROrqiBafu07KGdPB2XiScX/u9AjRkwsNM/A==
+X-Received: by 2002:a05:600c:20f:: with SMTP id
+	15mr5805906wmi.128.1582224871158; 
+	Thu, 20 Feb 2020 10:54:31 -0800 (PST)
+Received: from localhost ([109.238.218.228])
+	by smtp.gmail.com with ESMTPSA id s15sm577822wrp.4.2020.02.20.10.54.29
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 20 Feb 2020 10:54:30 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 20 Feb 2020 19:54:29 +0100
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20200220185429.i5z5vmp7ehq5n3mu@jama>
 References: <20200220175235.367-1-Martin.Jansa@gmail.com>
 	<20200220175235.367-2-Martin.Jansa@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <af60d8a0-618c-7b85-034a-c0118d1cec0b@gmail.com>
-Date: Thu, 20 Feb 2020 10:19:24 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
-	Gecko/20100101 Thunderbird/68.5.0
+	<af60d8a0-618c-7b85-034a-c0118d1cec0b@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20200220175235.367-2-Martin.Jansa@gmail.com>
+In-Reply-To: <af60d8a0-618c-7b85-034a-c0118d1cec0b@gmail.com>
+User-Agent: NeoMutt/20180716
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-oe][PATCH 2/2] s3c24xx-gpio, s3c64xx-gpio, sjf2410-linux-native, usbpath, wmiconfig: remove old recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -64,967 +63,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 18:19:26 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Feb 2020 18:54:30 -0000
+X-Groupsio-MsgNum: 82941
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="2ebfhx6iotiixby7"
+Content-Disposition: inline
 
+--2ebfhx6iotiixby7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Thu, Feb 20, 2020 at 10:19:24AM -0800, Khem Raj wrote:
+>=20
+>=20
+> On 2/20/20 9:52 AM, Martin Jansa wrote:
+> > * I don't   expect anyone nowadays actually using these recipes which I=
+'ve
+> >    imported from meta-smartphone in 2011.
+> >=20
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >   .../packagegroups/packagegroup-meta-oe.bb     |   8 +-
+> >   .../0001-ppt.c-Do-not-include-sys-io.h.patch  |  28 -
+> >   .../samsung-soc-utils/s3c24xx-gpio_git.bb     |  21 -
+> >   .../samsung-soc-utils/s3c64xx-gpio_git.bb     |  21 -
+> >   .../sjf2410-linux-native_git.bb               |  39 --
+> >   .../usbpath/usbpath/configure.patch           |  11 -
+> >   .../recipes-support/usbpath/usbpath_git.bb    |  21 -
+> >   ...0001-makefile-Pass-CFLAGS-to-compile.patch |  26 -
+> >   ...02-fix-err-API-to-have-format-string.patch | 656 ------------------
+> >   .../wmiconfig/wmiconfig_git.bb                |  24 -
+> >   10 files changed, 4 insertions(+), 851 deletions(-)
+> >   delete mode 100644 meta-oe/recipes-support/samsung-soc-utils/files/00=
+01-ppt.c-Do-not-include-sys-io.h.patch
+> >   delete mode 100644 meta-oe/recipes-support/samsung-soc-utils/s3c24xx-=
+gpio_git.bb
+> >   delete mode 100644 meta-oe/recipes-support/samsung-soc-utils/s3c64xx-=
+gpio_git.bb
+> >   delete mode 100644 meta-oe/recipes-support/samsung-soc-utils/sjf2410-=
+linux-native_git.bb
+> >   delete mode 100644 meta-oe/recipes-support/usbpath/usbpath/configure.=
+patch
+> >   delete mode 100644 meta-oe/recipes-support/usbpath/usbpath_git.bb
+> >   delete mode 100644 meta-oe/recipes-support/wmiconfig/wmiconfig/0001-m=
+akefile-Pass-CFLAGS-to-compile.patch
+> >   delete mode 100644 meta-oe/recipes-support/wmiconfig/wmiconfig/0002-f=
+ix-err-API-to-have-format-string.patch
+> >   delete mode 100644 meta-oe/recipes-support/wmiconfig/wmiconfig_git.bb
+> >=20
+>=20
+> I had to manually apply is on master-next, please check master-next if all
+> is fine or else send a rebase on top of master-next
 
-On 2/20/20 9:52 AM, Martin Jansa wrote:
-> * I don't   expect anyone nowadays actually using these recipes which I've
->    imported from meta-smartphone in 2011.
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->   .../packagegroups/packagegroup-meta-oe.bb     |   8 +-
->   .../0001-ppt.c-Do-not-include-sys-io.h.patch  |  28 -
->   .../samsung-soc-utils/s3c24xx-gpio_git.bb     |  21 -
->   .../samsung-soc-utils/s3c64xx-gpio_git.bb     |  21 -
->   .../sjf2410-linux-native_git.bb               |  39 --
->   .../usbpath/usbpath/configure.patch           |  11 -
->   .../recipes-support/usbpath/usbpath_git.bb    |  21 -
->   ...0001-makefile-Pass-CFLAGS-to-compile.patch |  26 -
->   ...02-fix-err-API-to-have-format-string.patch | 656 ------------------
->   .../wmiconfig/wmiconfig_git.bb                |  24 -
->   10 files changed, 4 insertions(+), 851 deletions(-)
->   delete mode 100644 meta-oe/recipes-support/samsung-soc-utils/files/0001-ppt.c-Do-not-include-sys-io.h.patch
->   delete mode 100644 meta-oe/recipes-support/samsung-soc-utils/s3c24xx-gpio_git.bb
->   delete mode 100644 meta-oe/recipes-support/samsung-soc-utils/s3c64xx-gpio_git.bb
->   delete mode 100644 meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_git.bb
->   delete mode 100644 meta-oe/recipes-support/usbpath/usbpath/configure.patch
->   delete mode 100644 meta-oe/recipes-support/usbpath/usbpath_git.bb
->   delete mode 100644 meta-oe/recipes-support/wmiconfig/wmiconfig/0001-makefile-Pass-CFLAGS-to-compile.patch
->   delete mode 100644 meta-oe/recipes-support/wmiconfig/wmiconfig/0002-fix-err-API-to-have-format-string.patch
->   delete mode 100644 meta-oe/recipes-support/wmiconfig/wmiconfig_git.bb
-> 
+Looks the same as what I have locally, thanks.
 
-I had to manually apply is on master-next, please check master-next if 
-all is fine or else send a rebase on top of master-next
+--2ebfhx6iotiixby7
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
-> diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> index bad4aa769e..a8040fb799 100644
-> --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-> @@ -251,13 +251,13 @@ RDEPENDS_packagegroup-meta-oe-support ="\
->       multipath-tools nano neon nmon numactl onig openct openldap \
->       opensc wbxml2 p910nd pcsc-lite picocom libotr pidgin \
->       pngcheck poco poppler poppler-data portaudio-v19 pps-tools \
-> -    pv pxaregs raptor2 rdfind read-edid rsnapshot s3c24xx-gpio s3c64xx-gpio \
-> -    sjf2410-linux-native satyr sdparm pty-forward-native serial-forward \
-> +    pv pxaregs raptor2 rdfind read-edid rsnapshot \
-> +    satyr sdparm pty-forward-native serial-forward \
->       sg3-utils sharutils smem spitools srecord ssiapi stm32flash \
->       syslog-ng system-config-keyboard tbb thin-provisioning-tools tokyocabinet \
->       tree uhubctl unixodbc uriparser usb-modeswitch \
-> -    usb-modeswitch-data usbpath uthash utouch-evemu utouch-frame \
-> -    vim vim-tiny websocketpp wmiconfig xdelta3 xdg-user-dirs xmlstarlet \
-> +    usb-modeswitch-data uthash utouch-evemu utouch-frame \
-> +    vim vim-tiny websocketpp xdelta3 xdg-user-dirs xmlstarlet \
->       zbar zile \
->       ${@bb.utils.contains("DISTRO_FEATURES", "x11", "geis toscoterm uim synergy utouch-mtview links-x11 fltk pidgin-otr", "", d)} \
->       libcanberra \
-> diff --git a/meta-oe/recipes-support/samsung-soc-utils/files/0001-ppt.c-Do-not-include-sys-io.h.patch b/meta-oe/recipes-support/samsung-soc-utils/files/0001-ppt.c-Do-not-include-sys-io.h.patch
-> deleted file mode 100644
-> index 4e6c250415..0000000000
-> --- a/meta-oe/recipes-support/samsung-soc-utils/files/0001-ppt.c-Do-not-include-sys-io.h.patch
-> +++ /dev/null
-> @@ -1,28 +0,0 @@
-> -From fd244ae648789591f0fb79e74d2b8f6c5b15d6e8 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Tue, 6 Aug 2019 00:47:14 +0000
-> -Subject: [PATCH] ppt.c: Do not include sys/io.h
-> -
-> -newer versions of glibc has removed it
-> -
-> -Upstream-Status: Pending
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - ppt.c | 1 -
-> - 1 file changed, 1 deletion(-)
-> -
-> -diff --git a/ppt.c b/ppt.c
-> -index 0bae2d0..0ef279f 100644
-> ---- a/ppt.c
-> -+++ b/ppt.c
-> -@@ -5,7 +5,6 @@
-> - #else
-> - #include <unistd.h>
-> - #include <stdlib.h>
-> --#include <sys/io.h>
-> - #include <linux/parport.h>
-> - #include <linux/ppdev.h>
-> - #include <sys/ioctl.h>
-> ---
-> -2.17.1
-> -
-> diff --git a/meta-oe/recipes-support/samsung-soc-utils/s3c24xx-gpio_git.bb b/meta-oe/recipes-support/samsung-soc-utils/s3c24xx-gpio_git.bb
-> deleted file mode 100644
-> index 98573a062c..0000000000
-> --- a/meta-oe/recipes-support/samsung-soc-utils/s3c24xx-gpio_git.bb
-> +++ /dev/null
-> @@ -1,21 +0,0 @@
-> -SUMMARY = "A user-space tool to show and modify the state of GPIOs on the S3c24xx platform"
-> -SECTION = "console/utils"
-> -AUTHOR = "Werner Almesberger <werner@openmoko.org>"
-> -LICENSE = "GPLv2+"
-> -LIC_FILES_CHKSUM = "file://gpio.c;endline=12;md5=cfb91c686857b2e60852b4925d90a3e1"
-> -PV = "1.0+git${SRCPV}"
-> -
-> -SRCREV = "0bde889e6fc09a330d0e0b9eb9808b20b2bf13d1"
-> -SRC_URI = "git://github.com/openmoko/openmoko-svn.git;protocol=https;subpath=src/target/gpio"
-> -S = "${WORKDIR}/gpio"
-> -
-> -CLEANBROKEN = "1"
-> -
-> -do_compile() {
-> -    ${CC} ${CFLAGS} ${LDFLAGS} -o ${PN} gpio.c
-> -}
-> -
-> -do_install() {
-> -    install -d ${D}${sbindir}
-> -    install -m 0755 ${PN} ${D}${sbindir}
-> -}
-> diff --git a/meta-oe/recipes-support/samsung-soc-utils/s3c64xx-gpio_git.bb b/meta-oe/recipes-support/samsung-soc-utils/s3c64xx-gpio_git.bb
-> deleted file mode 100644
-> index 99781718c8..0000000000
-> --- a/meta-oe/recipes-support/samsung-soc-utils/s3c64xx-gpio_git.bb
-> +++ /dev/null
-> @@ -1,21 +0,0 @@
-> -SUMMARY = "A user-space tool to show and modify the state of GPIOs on the S3c64xx platform"
-> -SECTION = "console/utils"
-> -AUTHOR = "Werner Almesberger <werner@openmoko.org>"
-> -LICENSE = "GPLv2+"
-> -LIC_FILES_CHKSUM = "file://gpio-s3c6410.c;endline=12;md5=060cda1be945ad9194593f11d56d55c7"
-> -PV = "1.0+git${SRCPV}"
-> -
-> -SRCREV = "0bde889e6fc09a330d0e0b9eb9808b20b2bf13d1"
-> -SRC_URI = "git://github.com/openmoko/openmoko-svn.git;protocol=https;subpath=src/target/gpio"
-> -S = "${WORKDIR}/gpio"
-> -
-> -CLEANBROKEN = "1"
-> -
-> -do_compile() {
-> -    ${CC} ${CFLAGS} ${LDFLAGS} -o ${PN} gpio-s3c6410.c
-> -}
-> -
-> -do_install() {
-> -    install -d ${D}${sbindir}
-> -    install -m 0755 ${PN} ${D}${sbindir}
-> -}
-> diff --git a/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_git.bb b/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_git.bb
-> deleted file mode 100644
-> index 283740396b..0000000000
-> --- a/meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_git.bb
-> +++ /dev/null
-> @@ -1,39 +0,0 @@
-> -SUMMARY = "JTAG utility to interface w/ a S3C2410 device"
-> -SECTION = "devel"
-> -AUTHOR = "Harald Welte <laforge@openmoko.org>"
-> -LICENSE = "GPLv2+"
-> -LIC_FILES_CHKSUM = "file://parport.c;endline=19;md5=b5681091b0fd8c5f7068835c441bf0c8"
-> -PV = "1.0+git${SRCPV}"
-> -
-> -SRCREV = "0bde889e6fc09a330d0e0b9eb9808b20b2bf13d1"
-> -SRC_URI = "git://github.com/openmoko/openmoko-svn.git;protocol=https;subpath=src/host/sjf2410-linux \
-> -    file://0001-ppt.c-Do-not-include-sys-io.h.patch \
-> -"
-> -S = "${WORKDIR}/sjf2410-linux"
-> -
-> -inherit native deploy
-> -
-> -CFLAGS += "-DLINUX_PPDEV"
-> -
-> -do_compile() {
-> -    oe_runmake
-> -}
-> -
-> -do_install() {
-> -    install -d ${D}/${bindir}
-> -    install -m 0755 sjf2410 ${D}/${bindir}
-> -}
-> -
-> -do_deploy() {
-> -    install -m 0755 sjf2410 ${DEPLOYDIR}/sjf2410-${PV}
-> -}
-> -
-> -addtask deploy before do_build after do_install
-> -
-> -do_deploy[sstate-outputdirs] = "${DEPLOY_DIR_TOOLS}"
-> -# cleandirs should possibly be in deploy.bbclass but we need it
-> -do_deploy[cleandirs] = "${DEPLOYDIR}"
-> -# clear stamp-extra-info since MACHINE_ARCH is normally put there by
-> -# deploy.bbclass
-> -do_deploy[stamp-extra-info] = ""
-> -
-> diff --git a/meta-oe/recipes-support/usbpath/usbpath/configure.patch b/meta-oe/recipes-support/usbpath/usbpath/configure.patch
-> deleted file mode 100644
-> index 271e6a53ad..0000000000
-> --- a/meta-oe/recipes-support/usbpath/usbpath/configure.patch
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> -Index: usbpath/configure.ac
-> -===================================================================
-> ---- usbpath.orig/configure.ac	2014-07-17 20:40:26.000000000 +0000
-> -+++ usbpath/configure.ac	2014-07-18 07:01:40.933474420 +0000
-> -@@ -1,5 +1,5 @@
-> - AC_INIT([usbpath],[0.1])
-> --AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
-> -+AM_INIT_AUTOMAKE([foreign])
-> -
-> - AC_PROG_CC
-> - AC_PROG_RANLIB
-> diff --git a/meta-oe/recipes-support/usbpath/usbpath_git.bb b/meta-oe/recipes-support/usbpath/usbpath_git.bb
-> deleted file mode 100644
-> index a3c75901fb..0000000000
-> --- a/meta-oe/recipes-support/usbpath/usbpath_git.bb
-> +++ /dev/null
-> @@ -1,21 +0,0 @@
-> -SUMMARY = "Convert the physical locations of a USB device to/from its number"
-> -AUTHOR = "Werner Almesberger <werner@openmoko.org>"
-> -SECTION = "console/utils"
-> -LICENSE = "GPLv2+"
-> -LIC_FILES_CHKSUM = "file://usbpath.c;endline=20;md5=0aa8c7d2af9110c78a99fbf9a504dc3f"
-> -DEPENDS = "virtual/libusb0"
-> -DEPENDS_class-native = "virtual/libusb0-native"
-> -
-> -BBCLASSEXTEND = "native"
-> -
-> -PV = "1.0+git${SRCPV}"
-> -
-> -SRCREV = "0bde889e6fc09a330d0e0b9eb9808b20b2bf13d1"
-> -SRC_URI = "git://github.com/openmoko/openmoko-svn.git;protocol=https;subpath=src/host/usbpath \
-> -    file://configure.patch \
-> -"
-> -S = "${WORKDIR}/usbpath"
-> -
-> -inherit autotools pkgconfig
-> -
-> -RDEPENDS_${PN} += "perl"
-> diff --git a/meta-oe/recipes-support/wmiconfig/wmiconfig/0001-makefile-Pass-CFLAGS-to-compile.patch b/meta-oe/recipes-support/wmiconfig/wmiconfig/0001-makefile-Pass-CFLAGS-to-compile.patch
-> deleted file mode 100644
-> index 90eff5bb0f..0000000000
-> --- a/meta-oe/recipes-support/wmiconfig/wmiconfig/0001-makefile-Pass-CFLAGS-to-compile.patch
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -From 0378cbb323c662a565f7f3de2dee3d8a646e7bd1 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Tue, 27 Jun 2017 09:32:42 -0700
-> -Subject: [PATCH 1/2] makefile: Pass CFLAGS to compile
-> -
-> -Set CC if not already set
-> -
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - host/tools/wmiconfig/Makefile | 4 ++--
-> - 1 file changed, 2 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/host/tools/wmiconfig/Makefile b/host/tools/wmiconfig/Makefile
-> -index c6738c5..3253a7e 100644
-> ---- a/Makefile
-> -+++ b/Makefile
-> -@@ -1,4 +1,4 @@
-> --CC :=$(ATH_CROSS_COMPILE_TYPE)gcc
-> -+CC ?= $(ATH_CROSS_COMPILE_TYPE)gcc
-> -
-> - all:
-> --	$(CC) -Wall -DUSER_KEYS -g $(LDFLAGS) -I../../include -I../../../include -I../../wlan/include -I../../os/linux/include wmiconfig.c -o wmiconfig
-> -+	$(CC) -Wall -DUSER_KEYS -g $(CFLAGS) $(LDFLAGS) -I../../include -I../../../include -I../../wlan/include -I../../os/linux/include wmiconfig.c -o wmiconfig
-> ---
-> -2.13.2
-> -
-> diff --git a/meta-oe/recipes-support/wmiconfig/wmiconfig/0002-fix-err-API-to-have-format-string.patch b/meta-oe/recipes-support/wmiconfig/wmiconfig/0002-fix-err-API-to-have-format-string.patch
-> deleted file mode 100644
-> index f67f784c1f..0000000000
-> --- a/meta-oe/recipes-support/wmiconfig/wmiconfig/0002-fix-err-API-to-have-format-string.patch
-> +++ /dev/null
-> @@ -1,656 +0,0 @@
-> -From 909ebdde4ee2233d65de8fa01fde8e9a3bec12b7 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Tue, 27 Jun 2017 09:33:26 -0700
-> -Subject: [PATCH 2/2] fix err() API to have format string
-> -
-> -Fixes errors with hardening flags
-> -
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - host/tools/wmiconfig/wmiconfig.c | 148 +++++++++++++++++++--------------------
-> - 1 file changed, 74 insertions(+), 74 deletions(-)
-> -
-> -diff --git a/host/tools/wmiconfig/wmiconfig.c b/host/tools/wmiconfig/wmiconfig.c
-> -index 21c9dcd..a6ec481 100644
-> ---- a/wmiconfig.c
-> -+++ b/wmiconfig.c
-> -@@ -483,7 +483,7 @@ main (int argc, char **argv)
-> -     strcpy(ifname, ethIf);
-> -     s = socket(AF_INET, SOCK_DGRAM, 0);
-> -     if (s < 0) {
-> --        err(1, "socket");
-> -+        err(1, "%s", "socket");
-> -     }
-> -
-> -     while (1) {
-> -@@ -1506,28 +1506,28 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)filterCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SETBSSFILTER, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_POWER_MODE:
-> -         ifr.ifr_data = (void *)pwrCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SETPWR, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_PM_PARAMS:
-> -         ifr.ifr_data = (void *)pmParamCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_PMPARAMS, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_IBSS_PM_CAPS:
-> -         ifr.ifr_data = (void *)adhocPmCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_IBSS_PM_CAPS, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_ERROR_DETECTION:
-> -@@ -1535,7 +1535,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_HB_CHALLENGE_RESP:
-> -@@ -1543,7 +1543,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> - #ifdef USER_KEYS
-> -@@ -1554,7 +1554,7 @@ main (int argc, char **argv)
-> -
-> -             if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -             {
-> --                err(1, ifr.ifr_name);
-> -+                err(1, "%s", ifr.ifr_name);
-> -             }
-> -
-> -             break;
-> -@@ -1575,7 +1575,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)sParamCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SETSCAN, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_VERSION:
-> -@@ -1586,7 +1586,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)revinfo;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_GETREV, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         printf("Host Rev = 0x%x(%u.%u.%u.%u), Target Rev = 0x%x(%u.%u.%u.%u)\n",
-> -               revinfo->host_ver,
-> -@@ -1606,14 +1606,14 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)listenCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SETLISTENINT, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_BMISS_TIME:
-> -         ifr.ifr_data = (void *)bmissCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_BMISS_TIME, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_RSSI_THRESHOLDS:
-> -@@ -1621,14 +1621,14 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_SNR_THRESHOLDS:
-> -         ifr.ifr_data = (void *)snrThresholdParam;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_SNRTHRESHOLD, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_CLR_RSSISNR:
-> -@@ -1636,7 +1636,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_LQ_THRESHOLDS:
-> -@@ -1644,7 +1644,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_CHANNEL:
-> -@@ -1693,18 +1693,18 @@ main (int argc, char **argv)
-> -
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_CHANNELPARAMS, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_SSID:
-> -         if (index > MAX_PROBED_SSID_INDEX) {
-> -             printf("num option for ssid command too large\n");
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -             break;
-> -         }
-> -         if (strlen((char *)ssid) > sizeof (ssidCmd->ssid)) {
-> -             printf("ssid name too large\n");
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -             break;
-> -         }
-> -         ssidCmd->entryIndex = index;
-> -@@ -1722,7 +1722,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)ssidCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_PROBEDSSID, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_BADAP:
-> -@@ -1735,7 +1735,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)badApCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_BADAP, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_CREATE_QOS:
-> -@@ -1794,7 +1794,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)crePStreamCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_CREATE_QOS, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_TARGET_STATS:
-> -@@ -1807,7 +1807,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)&tgtStatsCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_GET_TARGET_STATS, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         printTargetStats(&(tgtStatsCmd.targetStats));
-> -         break;
-> -@@ -1815,7 +1815,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)pBitMask;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_ERROR_REPORT_BITMASK, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_DELETE_QOS:
-> -@@ -1824,7 +1824,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)delPStreamCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_DELETE_QOS, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_QOS_QUEUE:
-> -@@ -1840,7 +1840,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)getQosQueueCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_GET_QOS_QUEUE, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -
-> -         printf("Active TSIDs \n");
-> -@@ -1855,7 +1855,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)ieInfo;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_ASSOC_INFO, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_AC_PARAMS:
-> -@@ -1871,14 +1871,14 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = (void *)acParamsCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_ACCESS_PARAMS, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_DISC_TIMEOUT:
-> -         ifr.ifr_data = (void *)discCmd;
-> -         if (ioctl(s, AR6000_IOCTL_WMI_SET_DISC_TIMEOUT, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -      case WMI_SET_ADHOC_BSSID:
-> -@@ -1887,7 +1887,7 @@ main (int argc, char **argv)
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> -             printf("fail to set adhoc bssid \n");
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_OPT_MODE:
-> -@@ -1895,7 +1895,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_OPT_SEND_FRAME:
-> -@@ -1903,7 +1903,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_BEACON_INT:
-> -@@ -1911,7 +1911,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_VOICE_PKT_SIZE:
-> -@@ -1919,7 +1919,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_MAX_SP:
-> -@@ -1927,7 +1927,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_ROAM_TBL:
-> -@@ -1935,7 +1935,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_ROAM_CTRL:
-> -@@ -1943,7 +1943,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_POWERSAVE_TIMERS:
-> -@@ -1951,7 +1951,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_POWER_MODE:
-> -@@ -1959,7 +1959,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         printf("Power mode is %s\n",
-> -                (getPowerMode->powerMode == MAX_PERF_POWER) ? "maxperf" : "rec");
-> -@@ -1969,7 +1969,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_ROAM_DATA:
-> -@@ -1977,7 +1977,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_BT_STATUS:
-> -@@ -1985,7 +1985,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_BT_PARAMS:
-> -@@ -1993,7 +1993,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_RETRYLIMITS:
-> -@@ -2001,14 +2001,14 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_START_SCAN:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_STARTSCAN;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_FIX_RATES:
-> -@@ -2031,14 +2031,14 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_FIX_RATES:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_GETFIXRATES;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         } else {
-> -             int i;
-> -             printf("Fix rate set index:");
-> -@@ -2057,7 +2057,7 @@ main (int argc, char **argv)
-> -         index--;
-> -         setAuthMode->mode = atoi(argv[index]);
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_REASSOC_MODE:
-> -@@ -2067,42 +2067,42 @@ main (int argc, char **argv)
-> -         index--;
-> -         setReassocMode->mode = atoi(argv[index]);
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_LPREAMBLE:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_LPREAMBLE;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_RTS:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_RTS;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_WMM:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_WMM;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_TXOP:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_TXOP;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case DIAG_READ:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_DIAG_READ;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         printf("diagdata: 0x%x\n", *diagdata);
-> -         break;
-> -@@ -2110,7 +2110,7 @@ main (int argc, char **argv)
-> -         ((int *)buf)[0] = AR6000_XIOCTL_DIAG_WRITE;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_RD:
-> -@@ -2118,7 +2118,7 @@ main (int argc, char **argv)
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0)
-> -         {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         else
-> -         {
-> -@@ -2139,14 +2139,14 @@ main (int argc, char **argv)
-> -         index--;
-> -         setKeepAlive->keepaliveInterval = atoi(argv[index]);
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_KEEPALIVE:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_GET_KEEPALIVE;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         printf("Keepalive interval is %d secs and AP is %s\n",
-> -                getKeepAlive->keepaliveInterval, (getKeepAlive->configured ?
-> -@@ -2156,63 +2156,63 @@ main (int argc, char **argv)
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_APPIE;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_MGMT_FRM_RX_FILTER:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_MGMT_FRM_RX_FILTER;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_DBGLOG_CFG_MODULE:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_DBGLOG_CFG_MODULE;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_DBGLOG_GET_DEBUG_LOGS:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_DBGLOG_GET_DEBUG_LOGS;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_HOST_SLEEP_MODE:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_HOST_SLEEP_MODE;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_WOW_MODE:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_WOW_MODE;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_ADD_WOW_PATTERN:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_ADD_WOW_PATTERN;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_DEL_WOW_PATTERN:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_DEL_WOW_PATTERN;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_GET_WOW_LIST:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_GET_WOW_LIST;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case DIAG_DUMP_CHIP_MEM:
-> -@@ -2225,7 +2225,7 @@ main (int argc, char **argv)
-> -                 ((int *)buf)[0] = AR6000_XIOCTL_DIAG_READ;
-> -                 ifr.ifr_data = buf;
-> -                 if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --                    err(1, ifr.ifr_name);
-> -+                    err(1, "%s", ifr.ifr_name);
-> -                 }
-> -                 printf("0x%04x:0x%04x\n", *diagaddr, *diagdata);
-> -             }
-> -@@ -2237,21 +2237,21 @@ main (int argc, char **argv)
-> -         index = optind - 1;
-> -         *connectCtrlFlags = strtoul(argv[index], NULL, 0);
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case DUMP_HTC_CREDITS:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_DUMP_HTC_CREDIT_STATE;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_AKMP_INFO:
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_AKMP_PARAMS;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_PMKID_LIST:
-> -@@ -2259,7 +2259,7 @@ main (int argc, char **argv)
-> -             ((int *)buf)[0] = AR6000_XIOCTL_WMI_SET_PMKID_LIST;
-> -             ifr.ifr_data = buf;
-> -             if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --                err(1, ifr.ifr_name);
-> -+                err(1, "%s", ifr.ifr_name);
-> -             }
-> -         } else {
-> -             printf("No PMKIDs entered\n");
-> -@@ -2269,7 +2269,7 @@ main (int argc, char **argv)
-> -         ((int *)buf)[0] = AR6000_XIOCTL_WMI_GET_PMKID_LIST;
-> -         ifr.ifr_data = buf;
-> -         if (ioctl(s, AR6000_IOCTL_EXTENDED, &ifr) < 0) {
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     case WMI_SET_BSS_PMKID_INFO:
-> -@@ -2277,7 +2277,7 @@ main (int argc, char **argv)
-> -         iwr.u.data.length = sizeof(*pi_cmd);
-> -         if (ioctl(s, IEEE80211_IOCTL_ADDPMKID, &iwr) < 0) {
-> -             printf("ADDPMKID IOCTL Error\n");
-> --            err(1, ifr.ifr_name);
-> -+            err(1, "%s", ifr.ifr_name);
-> -         }
-> -         break;
-> -     default:
-> ---
-> -2.13.2
-> -
-> diff --git a/meta-oe/recipes-support/wmiconfig/wmiconfig_git.bb b/meta-oe/recipes-support/wmiconfig/wmiconfig_git.bb
-> deleted file mode 100644
-> index 23273caf8e..0000000000
-> --- a/meta-oe/recipes-support/wmiconfig/wmiconfig_git.bb
-> +++ /dev/null
-> @@ -1,24 +0,0 @@
-> -SUMMARY = "Atheros 6K Wifi configuration utility"
-> -LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://wmiconfig.c;endline=19;md5=4394a56bca1c5b2446c9f8e406c82911"
-> -SECTION = "console/network"
-> -PV = "1.0+git${SRCPV}"
-> -
-> -SRCREV = "0bde889e6fc09a330d0e0b9eb9808b20b2bf13d1"
-> -SRC_URI = "git://github.com/openmoko/openmoko-svn.git;protocol=https;subpath=src/target/AR6kSDK.build_sw.18 \
-> -    file://0001-makefile-Pass-CFLAGS-to-compile.patch \
-> -    file://0002-fix-err-API-to-have-format-string.patch \
-> -"
-> -S = "${WORKDIR}/AR6kSDK.build_sw.18/host/tools/wmiconfig"
-> -
-> -CLEANBROKEN = "1"
-> -
-> -EXTRA_OEMAKE = "-e MAKEFLAGS="
-> -
-> -TARGET_CC_ARCH += "${LDFLAGS}"
-> -
-> -do_install() {
-> -    install -d ${D}${bindir}
-> -    install -m 0755 wmiconfig ${D}${bindir}
-> -}
-> -
-> 
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXk7V5AAKCRA3VSO3ZXaA
+HKghAJ9RgqbH8EkWu3oeS+wV4/pKBcDlwACfZRAW/fgQw8P+toldzkWpBtdJa6k=
+=srs1
+-----END PGP SIGNATURE-----
 
+--2ebfhx6iotiixby7--
