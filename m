@@ -1,58 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
-	[209.85.210.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 26FB16164E
+Return-Path: <jpuhlman@gmail.com>
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id CA70061606
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2020 23:07:38 +0000 (UTC)
-Received: by mail-pf1-f195.google.com with SMTP id i6so868415pfc.1
+	Thu, 20 Feb 2020 00:29:15 +0000 (UTC)
+Received: by mail-pg1-f178.google.com with SMTP id z12so978624pgl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Feb 2020 15:07:39 -0800 (PST)
+	Wed, 19 Feb 2020 16:29:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-language:content-transfer-encoding;
-	bh=4dTlt2r4I7M/CgVQDhx096YsBV7hAPdKfLVnOdhNXPc=;
-	b=Kz91TzG5vSaEpxZDlOOEjAxWi9E3LlWGk9V97IPkV2DHb9/ri9cKQPZYuNV4Mz94cB
-	SuFTWaQ/+oR72WkrCqVWJn5RvCjx6nyXbdtRWaOSHquEDXtpEemrtnvCeivDSkxQHZHw
-	dGRuQOOr4ekhkM5BZKX7LaZYRE/2a6XRetV6GZ6TagLQaOxGHMFjGr/EQcc3YNvRstdw
-	9Xp/5+TNqE0tzMrbBLSjgnUy2s8nEDWQV+qCvVbfFNF5uHPcJvsi1ne3AN0PsG8HL1ls
-	4FaUFY7UncEalylV8s8HqiMtzU2C0bHjruiZAJL/+WV5NZmGvkY/DtsWEgKYwd17iQcZ
-	358Q==
+	h=sender:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Cdz7VAJ2hfHLXUW+rcXQrcCWedeWcBqIt7b+gi3u80I=;
+	b=sN9Ik45zEaMOceOiaPvy9y0wAOQfOunEuN3jLzNcHGrU0HS2yZQ4MLs2TazNOGsBuT
+	9VAZzOWIh4lmi+u+H2mxx+m/DleqkZDLbChZlEC56el+pkAIpl6OUHjo7SEHEtdljbr2
+	QAnBrL7W673Ui5TpYiVLR2n2XBxaxCYj1PFjQ6XxCle9z3edk31l57kZUnag5KCNouPJ
+	4YdRcTRY0JAQhj17EpCHfyH6c+5gK2Kua6/sz6g7j0czV3LzMng1Vwk1fKEa74ZvWzbB
+	dFGiRIkkb1+/z7IwlJGuE89TfoOayIgxQhv/lT9CL9Aic0Vkvl9BlBd3fxE2w/WLKPiX
+	5iOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=4dTlt2r4I7M/CgVQDhx096YsBV7hAPdKfLVnOdhNXPc=;
-	b=HMR1xuWFWurf/Ji/cWxOAW8AbJSsc0YH4jRw2R24Kcyz8ULHeEGX9JiPIWlmxL2D20
-	DisnjwDQbeVNB/2vdxEc0ruUTQqo4bVkCOB6Lv4lFbtZGlRC9ox9+3hgcDX00COKGSoN
-	LBTmj35XjT4b4b/rtcVz6BeSUR8pfZkjxcK21b75a0bjNCKnDUgdqpk31uvXgYkBr2m9
-	xJLE/QiGOvBNm9tVZwBWYOXfqlN5UPfXtR9CmlNqjLLHmUwC32xMH+PlHD2+suE3+Ois
-	kptAcIY3tP53TMd7sN9wh1qOpwwIfP2/6hYdHQ5mlvoWBEDeS9a58w9YYvf+f2RCCsLK
-	F7hw==
-X-Gm-Message-State: APjAAAWuwRSbKlJcNgikWCDHzaI0mzVCOMcafWlJvV90A9aSEqhoXNlQ
-	aws5tRqZuC2MkuqsIp9cPbFFBLpZbsg=
-X-Google-Smtp-Source: APXvYqwymU8Pl1ASrbosYWY7nYJx5GcLWimOmFizWbCFngKIstdKJtykCbwtl5VrwUJfFbo+S9pnDg==
-X-Received: by 2002:aa7:8805:: with SMTP id c5mr6333201pfo.142.1582153658940; 
-	Wed, 19 Feb 2020 15:07:38 -0800 (PST)
-Received: from ?IPv6:2601:646:9200:4e0:cca7:f312:1961:a4b9?
-	([2601:646:9200:4e0:cca7:f312:1961:a4b9])
-	by smtp.gmail.com with ESMTPSA id q8sm749728pgt.57.2020.02.19.15.07.38
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Wed, 19 Feb 2020 15:07:38 -0800 (PST)
-To: Leo Yan <leo.yan@linaro.org>, openembedded-devel@lists.openembedded.org,
-	Sumit Garg <sumit.garg@linaro.org>,
-	Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>
-References: <20200218052544.9467-1-leo.yan@linaro.org>
-	<20200218052544.9467-3-leo.yan@linaro.org>
-From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <d57ee3d3-c9e1-f263-9a3d-3415dde3ea1c@gmail.com>
-Date: Wed, 19 Feb 2020 15:07:37 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
-	Gecko/20100101 Thunderbird/68.5.0
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:mime-version:content-transfer-encoding;
+	bh=Cdz7VAJ2hfHLXUW+rcXQrcCWedeWcBqIt7b+gi3u80I=;
+	b=sRpjLDqG03b9JiR+zcG8AVx1VaDCLukUTfmGfiQ9//H4GdjacDrCBP0umG0V37zbp0
+	Km3S4GEU8F6ybWdkmZvEFqkS+3I9V5qYSk5+HsWx14k+YZ10hHPqcwyXFc9wVfviCCk5
+	PGcTncLfQIbHR1uFievclasB+yHZ6K0/yZOVmH7VsGYi4bMXbFzsPj5QTmDawkppC0na
+	DdV/QOKp7WdFJlW3JZQdmgFKnCsd9FmZLNoDBcUhjUZuOKUDpfXjP1ylJJCS6Gcn+iPA
+	JoadN+EXjiiZQgJOk9F05SJMXShG27QOR2tnLSgEr0vy5U4xGtdUl3KcFu5PSMVH2QlN
+	ta3g==
+X-Gm-Message-State: APjAAAVVzegL5ZbGj1EAim63g+7Jf8mFhd0QFsxOSWIwKCAu8Kwbqyz2
+	FCr6F5yrdgwxHQLDCC+ig2U47ysiV2iJMQ==
+X-Google-Smtp-Source: APXvYqzw7gSbyFNMyDQa3D+dLbmf6WKJZLBHGO3nVYZu9dM4ieZnLAOtX2KpkUoEB+pbQ4e1UVkcFw==
+X-Received: by 2002:a63:dc0d:: with SMTP id s13mr29214228pgg.129.1582158556301;
+	Wed, 19 Feb 2020 16:29:16 -0800 (PST)
+Received: from workhorse.localdomain
+	(99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
+	by smtp.gmail.com with ESMTPSA id r66sm791654pfc.74.2020.02.19.16.29.15
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 19 Feb 2020 16:29:15 -0800 (PST)
+Sender: Jeremy Puhlman <jpuhlman@gmail.com>
+Received: by workhorse.localdomain (Postfix, from userid 1000)
+	id 5073C2A050B; Wed, 19 Feb 2020 16:29:14 -0800 (PST)
+From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 19 Feb 2020 16:29:12 -0800
+Message-Id: <20200220002912.19522-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20200218052544.9467-3-leo.yan@linaro.org>
-Subject: Re: [meta-oe][PATCH v1 2/4] luajit: Add luajit 2.1.0-beta3 recipe
+Subject: [meta-networking][PATCH] net-snmp: Add pkgconfig file support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,133 +60,207 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Feb 2020 23:07:38 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Feb 2020 00:29:15 -0000
+Content-Transfer-Encoding: 8bit
 
+From: Jeremy Puhlman <jpuhlman@mvista.com>
 
+Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
+---
+ ...upport-for-building-applications-and.patch | 170 ++++++++++++++++++
+ .../net-snmp/net-snmp_5.8.bb                  |   1 +
+ 2 files changed, 171 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Add-pkg-config-support-for-building-applications-and.patch
 
-On 2/17/20 9:25 PM, Leo Yan wrote:
-> Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
-> misses to support aarch64, this patch adds recipe for luajit
-> 2.1.0-beta3 building.
-> 
-> Signed-off-by: Leo Yan <leo.yan@linaro.org>
-> ---
->   .../recipes-devtools/luajit/luajit_2.1.0.bb   | 92 +++++++++++++++++++
->   1 file changed, 92 insertions(+)
->   create mode 100644 meta-oe/recipes-devtools/luajit/luajit_2.1.0.bb
-> 
-> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.1.0.bb b/meta-oe/recipes-devtools/luajit/luajit_2.1.0.bb
-> new file mode 100644
-> index 000000000..167b5d229
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/luajit/luajit_2.1.0.bb
-> @@ -0,0 +1,92 @@
-> +SUMMARY = "Just-In-Time Compiler for Lua"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
-> +HOMEPAGE = "http://luajit.org"
-> +
-> +PV .= "+git${SRCPV}"
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Add-pkg-config-support-for-building-applications-and.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Add-pkg-config-support-for-building-applications-and.patch
+new file mode 100644
+index 000000000..6cb9588eb
+--- /dev/null
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/0001-Add-pkg-config-support-for-building-applications-and.patch
+@@ -0,0 +1,170 @@
++From aea8c2f0bf8004c8da8ca9acb04ab07798cd8068 Mon Sep 17 00:00:00 2001
++From: Hugh McMaster <hugh.mcmaster@outlook.com>
++Date: Wed, 3 Apr 2019 21:36:03 +1100
++Subject: [PATCH] Add pkg-config support for building applications and
++ sub-agents
++
++The netsnmp package should be used when building Net-SNMP applications.
++The netsnmp-agent package should be used when building Net-SNMP subagents.
++
++Signed-off-by: Hugh McMaster <hugh.mcmaster@outlook.com>
++[ bvanassche: edited makefile code and .pc files; added ./configure changes ]
++
++
++Upstream-Status: Backport
++https://sourceforge.net/p/net-snmp/patches/_discuss/thread/a0d66e91dd/f940/attachment/0001-Add-pkg-config-support-for-building-applications-and.patch
++
++---
++ Makefile.in         |  2 ++
++ Makefile.rules      | 30 ++++++++++++++++++++++++++----
++ configure           |  4 ++++
++ configure.ac        |  1 +
++ netsnmp-agent.pc.in | 12 ++++++++++++
++ netsnmp.pc.in       | 12 ++++++++++++
++ 6 files changed, 57 insertions(+), 4 deletions(-)
++ create mode 100644 netsnmp-agent.pc.in
++ create mode 100644 netsnmp.pc.in
++
++diff --git a/Makefile.in b/Makefile.in
++index 9dbdde1353b1..ec972636c279 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -35,6 +35,7 @@ INSTALLBUILTHEADERS=include/net-snmp/net-snmp-config.h
++ INSTALLBUILTINCLUDEHEADERS=@FEATUREHEADERS@
++ INSTALLBINSCRIPTS=net-snmp-config net-snmp-create-v3-user
++ INSTALLUCDHEADERS=ucd-snmp-config.h version.h mib_module_config.h
+++INSTALL_PKGCONFIG=netsnmp.pc netsnmp-agent.pc
++ 
++ #
++ # other install rules.
++@@ -275,6 +276,7 @@ configclean: makefileclean
++ 		libtool include/net-snmp/net-snmp-config.h \
++ 		net-snmp-config net-snmp-config-x configure-summary \
++ 		net-snmp-create-v3-user net-snmp-create-v3-user-x
+++	rm -f *.pc
++ 	rm -f mibs/.index
++ 	rm -f include/net-snmp/agent/mib_module_config.h		\
++ 		include/net-snmp/agent/agent_module_config.h		\
++diff --git a/Makefile.rules b/Makefile.rules
++index 9e9e9009e5d2..e714f91e725e 100644
++--- a/Makefile.rules
+++++ b/Makefile.rules
++@@ -85,12 +85,14 @@ subdirs:
++ # installlibs handles local, ucd and subdir libs. need to do subdir libs
++ # before bins, sinze those libs may be needed for successful linking
++ install: installlocalheaders @installucdheaders@ \
++-         installlibs \
++-         installlocalbin      installlocalsbin   \
+++         installlibs         install_pkgconfig   \
+++         installlocalbin     installlocalsbin    \
++          installsubdirs      $(OTHERINSTALL)
++ 
++-uninstall: uninstalllibs uninstallbin uninstallsbin uninstallheaders \
++-           uninstallsubdirs $(OTHERUNINSTALL)
+++uninstall: uninstalllibs     uninstall_pkgconfig \
+++           uninstallbin      uninstallsbin       \
+++           uninstallheaders                      \
+++           uninstallsubdirs  $(OTHERUNINSTALL)
++ 
++ installprogs: installbin installsbin
++ 
++@@ -287,6 +289,26 @@ uninstalllibs:
++ 		done \
++ 	fi
++ 
+++#
+++# pkg-config files
+++#
+++install_pkgconfig: $(INSTALL_PKGCONFIG)
+++	@if test "x$(INSTALL_PKGCONFIG)" != x; then			\
+++		$(SHELL) $(top_srcdir)/mkinstalldirs $(INSTALL_PREFIX)$(libdir)/pkgconfig; \
+++		for i in $(INSTALL_PKGCONFIG); do			\
+++			echo "installing $$i in $(INSTALL_PREFIX)$(libdir)/pkgconfig"; \
+++		done;							\
+++		$(INSTALL) $(INSTALL_PKGCONFIG) $(INSTALL_PREFIX)$(libdir)/pkgconfig; \
+++	fi
+++
+++uninstall_pkgconfig:
+++	@if test "x$(INSTALL_PKGCONFIG)" != x; then			\
+++		for i in $(INSTALL_PKGCONFIG); do			\
+++			echo "removing $$i from $(INSTALL_PREFIX)$(libdir)/pkgconfig"; \
+++			$(UNINSTALL) $(INSTALL_PREFIX)$(libdir)/pkgconfig/$$i;\
+++		done;							\
+++	fi
+++
++ #
++ # normal bin binaries
++ #
++diff --git a/configure b/configure
++index 5ec44f5ce082..5103a4dc9d88 100755
++--- a/configure
+++++ b/configure
++@@ -30422,6 +30422,8 @@ ac_config_files="$ac_config_files net-snmp-config:net-snmp-config.in"
++ 
++ ac_config_files="$ac_config_files net-snmp-create-v3-user:net-snmp-create-v3-user.in"
++ 
+++ac_config_files="$ac_config_files netsnmp.pc:netsnmp.pc.in netsnmp-agent.pc:netsnmp-agent.pc.in"
+++
++ ac_config_files="$ac_config_files dist/generation-scripts/gen-variables:dist/generation-scripts/gen-variables.in"
++ 
++ ac_config_files="$ac_config_files local/snmpconf"
++@@ -31445,6 +31447,8 @@ do
++     "mibs/Makefile") CONFIG_FILES="$CONFIG_FILES mibs/Makefile:Makefile.top:mibs/Makefile.in:Makefile.rules" ;;
++     "net-snmp-config") CONFIG_FILES="$CONFIG_FILES net-snmp-config:net-snmp-config.in" ;;
++     "net-snmp-create-v3-user") CONFIG_FILES="$CONFIG_FILES net-snmp-create-v3-user:net-snmp-create-v3-user.in" ;;
+++    "netsnmp.pc") CONFIG_FILES="$CONFIG_FILES netsnmp.pc:netsnmp.pc.in" ;;
+++    "netsnmp-agent.pc") CONFIG_FILES="$CONFIG_FILES netsnmp-agent.pc:netsnmp-agent.pc.in" ;;
++     "dist/generation-scripts/gen-variables") CONFIG_FILES="$CONFIG_FILES dist/generation-scripts/gen-variables:dist/generation-scripts/gen-variables.in" ;;
++     "local/snmpconf") CONFIG_FILES="$CONFIG_FILES local/snmpconf" ;;
++     "default") CONFIG_COMMANDS="$CONFIG_COMMANDS default" ;;
++diff --git a/configure.ac b/configure.ac
++index 4c4dce09d488..d62a02da5d88 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -136,6 +136,7 @@ AC_CONFIG_FILES([net-snmp-config:net-snmp-config.in],
++ 		[chmod +x net-snmp-config])
++ AC_CONFIG_FILES([net-snmp-create-v3-user:net-snmp-create-v3-user.in],
++ 		[chmod +x net-snmp-create-v3-user])
+++AC_CONFIG_FILES([netsnmp.pc:netsnmp.pc.in netsnmp-agent.pc:netsnmp-agent.pc.in])
++ AC_CONFIG_FILES([dist/generation-scripts/gen-variables:dist/generation-scripts/gen-variables.in])
++ AC_CONFIG_FILES([local/snmpconf])
++ 
++diff --git a/netsnmp-agent.pc.in b/netsnmp-agent.pc.in
++new file mode 100644
++index 000000000000..3a1c77bbf814
++--- /dev/null
+++++ b/netsnmp-agent.pc.in
++@@ -0,0 +1,12 @@
+++prefix=@prefix@
+++exec_prefix=@exec_prefix@
+++includedir=@includedir@
+++libdir=@libdir@
+++
+++Name: netsnmp-agent (@PACKAGE_NAME@)
+++Description: SNMP (Simple Network Management Protocol) sub-agent SDK.
+++URL: http://www.net-snmp.org
+++Version: @PACKAGE_VERSION@
+++Cflags: -I${includedir}
+++Libs: -L${libdir} -lnetsnmpmibs -lnetsnmpagent -lnetsnmp
+++Libs.private: @LDFLAGS@ @LMIBLIBS@ @LAGENTLIBS@ @PERLLDOPTS_FOR_APPS@ @LNETSNMPLIBS@ @LIBS@
++diff --git a/netsnmp.pc.in b/netsnmp.pc.in
++new file mode 100644
++index 000000000000..0a1f5785a4f4
++--- /dev/null
+++++ b/netsnmp.pc.in
++@@ -0,0 +1,12 @@
+++prefix=@prefix@
+++exec_prefix=@exec_prefix@
+++includedir=@includedir@
+++libdir=@libdir@
+++
+++Name: netsnmp (@PACKAGE_NAME@)
+++Description: SNMP (Simple Network Management Protocol) daemon and applications.
+++URL: http://www.net-snmp.org
+++Version: @PACKAGE_VERSION@
+++Cflags: -I${includedir}
+++Libs: -L${libdir} -lnetsnmp
+++Libs.private: @LDFLAGS@ @LNETSNMPLIBS@ @LIBS@ @PERLLDOPTS_FOR_APPS@
++-- 
++2.21.0.196.g041f5ea1cf98
++
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+index 192b6b506..317350e94 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+@@ -27,6 +27,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.tar.gz \
+            file://reproducibility-have-printcap.patch \
+            file://reproducibility-accept-configure-options-from-env.patch \
+            file://0001-net-snmp-fix-compile-error-disable-des.patch \
++           file://0001-Add-pkg-config-support-for-building-applications-and.patch \
+            "
+ SRC_URI[md5sum] = "63bfc65fbb86cdb616598df1aff6458a"
+ SRC_URI[sha256sum] = "b2fc3500840ebe532734c4786b0da4ef0a5f67e51ef4c86b3345d697e4976adf"
+-- 
+2.20.1
 
-I think its best to call it 2.0.5+${SRCPV}
-
-> +SRCREV = "v2.1.0-beta3"
-
-Please use corresponding SHA1 here instead of tags
-
-> +SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit pkgconfig binconfig siteinfo
-> +
-> +BBCLASSEXTEND = "native"
-> +
-> +# http://luajit.org/install.html#cross
-> +# Host luajit needs to be compiled with the same pointer size
-> +# If you want to cross-compile to any 32 bit target on an x64 OS,
-> +# you need to install the multilib development package (e.g.
-> +# libc6-dev-i386 on Debian/Ubuntu) and build a 32 bit host part
-> +# (HOST_CC="gcc -m32").
-> +BUILD_CC_ARCH_append = " ${@['-m32',''][d.getVar('SITEINFO_BITS') != '32']}"
-> +
-> +# The lua makefiles expect the TARGET_SYS to be from uname -s
-> +# Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
-> +LUA_TARGET_OS = "Unknown"
-> +LUA_TARGET_OS_darwin = "Darwin"
-> +LUA_TARGET_OS_linux = "Linux"
-> +LUA_TARGET_OS_linux-gnueabi = "Linux"
-> +LUA_TARGET_OS_mingw32 = "Windows"
-> +
-> +# We don't want the lua buildsystem's compiler optimizations, or its
-> +# stripping, and we don't want it to pick up CFLAGS or LDFLAGS, as those apply
-> +# to both host and target compiles
-> +EXTRA_OEMAKE = "\
-> +    Q= E='@:' \
-> +    \
-> +    CCOPT= CCOPT_x86= CFLAGS= LDFLAGS= TARGET_STRIP='@:' \
-> +    \
-> +    'TARGET_SYS=${LUA_TARGET_OS}' \
-> +    \
-> +    'CC=${CC}' \
-> +    'TARGET_AR=${AR} rcus' \
-> +    'TARGET_CFLAGS=${CFLAGS}' \
-> +    'TARGET_LDFLAGS=${LDFLAGS}' \
-> +    'TARGET_SHLDFLAGS=${LDFLAGS}' \
-> +    'HOST_CC=${BUILD_CC}' \
-> +    'HOST_CFLAGS=${BUILD_CFLAGS}' \
-> +    \
-> +    'PREFIX=${prefix}' \
-> +    'MULTILIB=${baselib}' \
-> +    'LDCONFIG=:' \
-> +"
-> +
-> +do_compile () {
-> +    oe_runmake
-> +}
-> +
-> +# There's INSTALL_LIB and INSTALL_SHARE also, but the lua binary hardcodes the
-> +# '/share' and '/' + LUA_MULTILIB paths, so we don't want to break those
-> +# expectations.
-> +EXTRA_OEMAKEINST = "\
-> +    'DESTDIR=${D}' \
-> +    'INSTALL_BIN=${D}${bindir}' \
-> +    'INSTALL_INC=${D}${includedir}/luajit-$(MAJVER).$(MINVER)' \
-> +    'INSTALL_MAN=${D}${mandir}/man1' \
-> +"
-> +do_install () {
-> +    oe_runmake ${EXTRA_OEMAKEINST} install
-> +    rmdir ${D}${datadir}/lua/5.* \
-> +          ${D}${datadir}/lua \
-> +          ${D}${libdir}/lua/5.* \
-> +          ${D}${libdir}/lua
-> +}
-> +
-> +PACKAGES += 'luajit-common'
-> +
-> +# See the comment for EXTRA_OEMAKEINST. This is needed to ensure the hardcoded
-> +# paths are packaged regardless of what the libdir and datadir paths are.
-> +FILES_${PN} += "${prefix}/${baselib} ${prefix}/share"
-> +FILES_${PN} += "${libdir}/libluajit-5.1.so.2 \
-> +    ${libdir}/libluajit-5.1.so.${PV} \
-> +"
-> +FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
-> +    ${libdir}/libluajit-5.1.so \
-> +    ${libdir}/pkgconfig/luajit.pc \
-> +"
-> +FILES_luajit-common = "${datadir}/${BPN}-${PV}"
-> +
-> +# mips64 is not supported in this release
-> +COMPATIBLE_HOST_mipsarchn32 = "null"
-> +COMPATIBLE_HOST_mipsarchn64 = "null"
-
-sync this with latest changes to 5.0.4 recipe there are more arches 
-where it is not ported yet.
-
-Also delete the old recipe in the same patch.
-
-> 
 
