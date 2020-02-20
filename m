@@ -1,50 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E11EC61604
+Received: from mail-qt1-f196.google.com (mail-qt1-f196.google.com
+	[209.85.160.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 1AA9961604
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 15:42:00 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id c20so3981136qkm.1
+	Thu, 20 Feb 2020 15:43:44 +0000 (UTC)
+Received: by mail-qt1-f196.google.com with SMTP id t13so3169014qto.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 07:42:02 -0800 (PST)
+	Thu, 20 Feb 2020 07:43:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=JtOvvwvXNsSIz5RWRn40hU02JOBFBuwpbBsyhy7qzPI=;
-	b=LsDMZUjQt2NCD9i1k6El/ZBnC60DCvEfYtu40lc7yZKxzUGdOxqlygkIbrFTUZfuHx
-	q87T2xYLqH4xjHi8f3sL2plg+qwLge6xmhznSBu63eYTfddUQUYeKoazxGHjPf7Hj8Qy
-	cBA/w8FthYUuf8/j/GVQ1mFSESheHFni6sDYcIN4G9ctaLT4FPzjZZFVPWYYcYw/cvOW
-	LHBj92BaQj6GQU9G2eF9OPVcI0rQf4rB7+9b/D5koovpPR7JPeARTPLCujGOGurZRoLz
-	sSU7vxrLiFszAGf8AgWE7kubB8/dx39wrhNguvYi4I872+0KDX+Sv24iQb3e80jMe9Q+
-	sgyA==
+	:cc; bh=9iPAqdqljQ8YbhaoqzRp+e6bTNhIRdH8KHmoqb2UHPk=;
+	b=odHAlhcZyjj9zSWC+QD5YdCNSLvYjfAAKmYcyQ0A3sx9Xt93xALrcbvnwHsRO2Apxb
+	W9DURUSAVjf6NetS1ebIUgbB8j/c2SDd3v3pbhmb9qRpAB6h6XDg99KtBnhFvkWESRXT
+	2+CBJB8PpLCOkBEi6ThLbxWQjE0jFKkAZBbyiJIb6ZoTclXz+cvRsuA20XVz2HudBzJd
+	LpX5Dv57YUEkvkSdCcPz2Nvo+wOMoBGHIkZO1jP7iTAkkcb0DJXtvn1NN3oa6ljlQQIS
+	+qwSpmOG5jkW62fMZJuXkgaOY5c5Hc+Q4Xwhi9n9WoN2c+JTwlgVrz++ACrhXLD6ZKsV
+	jRRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=JtOvvwvXNsSIz5RWRn40hU02JOBFBuwpbBsyhy7qzPI=;
-	b=WxPh8uBqVkMCOu23lseHdW0BmgNEPfHWwgjbSImlW7CdhsavOEcUnNDnO9EYvsbTAn
-	DOdlNc8ATHnVu6nL6AkwVv2vX8xQ/aJup1xFxBpruiZdXr/QpO5aXH4Dk2iQPdCjO7/y
-	xMmv6cxym3On6XWo/ECGRXiSxBG727P65C8+A1KzPibW8jWIpqxvsbxbY2n8R7gtb0Nn
-	k6wrFx+vtWEIiuLXIRMuxGAsg4W/PUX485DFfsoLta2RyEwo6OoryYbPsv3K0T2k1UZK
-	ClcZYO3G+yi2xgkaQRG52RruqwyZJwBAzEUiP8YcH5kAPad489SuFM4DsIkY2k0+FkJx
-	BJqQ==
-X-Gm-Message-State: APjAAAXNK2ImHGDpB+abiZrqlIM22QLWAfDqgfJ4sdtsNZsyhvJ+/HQS
-	A+75gdNu/xHHJovQJ7f3683wsXd085VnTjY9Go0=
-X-Google-Smtp-Source: APXvYqwVrqItavh4UkJwpq3b8FtAJo5HOahsRkzrG3G4Us4sNdUIkmqtweuTHCHK8w/CDXSmHfOdSAZLxC3fYVzeaKs=
-X-Received: by 2002:a37:47c4:: with SMTP id
-	u187mr29290071qka.165.1582213321413; 
-	Thu, 20 Feb 2020 07:42:01 -0800 (PST)
+	bh=9iPAqdqljQ8YbhaoqzRp+e6bTNhIRdH8KHmoqb2UHPk=;
+	b=STjp5Nu5sbCyHwIL4EXKV58Wlg2IxTiBBv/hFzO05XICkQwlj0P3OE9InkGKIbS+52
+	ib4M+mxKtWdJyrIZquMyeOfLNZjzP5NlyBH2a0OZt0OULMOTlg1y6LH0xTC0Tsbz3LtE
+	/d6qd8TBJQ6P72CECH+WWJ4Sm1m+/e+ph4Mkc0TaotT8S9zgqW6kQHE5fGkU06Mg2psx
+	afWINLIlHW4TAlIMuAtFYSUFPcNnrrgXq9pDKqiT3a1rNkQgwTJsdcH8+ZHG2S5qVnH7
+	KfVV+IelgSwlk1XWEaHPZjiPY2LvOSvD4YVByndGRQybvWzECjR1DCgPDvJP/0lol1Kd
+	5IZg==
+X-Gm-Message-State: APjAAAXuW7xt0d8+P2Cmv++d04HHorGrNJmPCVjedL7gWWEWVoELGVsW
+	/nXbi6NAAPzOo1+8O8X5lTcILw0+OuzqrMbXa+P1tlkVfH4=
+X-Google-Smtp-Source: APXvYqxIHHB2l+3uacVC1UpCQzSTwLdoIs/biVxn0oLiZ9Nf7713SwrFI3pcOHq7NGYOdEmlwXiwStZUerdBrUnhuFM=
+X-Received: by 2002:ac8:4e3c:: with SMTP id d28mr27153904qtw.190.1582213425571;
+	Thu, 20 Feb 2020 07:43:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20200218052544.9467-1-leo.yan@linaro.org>
-	<20200218052544.9467-2-leo.yan@linaro.org>
-In-Reply-To: <20200218052544.9467-2-leo.yan@linaro.org>
+References: <1582191622-130680-1-git-send-email-wangmy@cn.fujitsu.com>
+	<1582191622-130680-3-git-send-email-wangmy@cn.fujitsu.com>
+In-Reply-To: <1582191622-130680-3-git-send-email-wangmy@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 20 Feb 2020 07:41:35 -0800
-Message-ID: <CAMKF1sordwdPV8=vvtakN4vb=MugUqY0f4k9P3ewpyR_9x63ZA@mail.gmail.com>
-To: Leo Yan <leo.yan@linaro.org>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v1 1/4] Ply: Add recipe for git version
+Date: Thu, 20 Feb 2020 07:43:19 -0800
+Message-ID: <CAMKF1sqtThAMz=ThJRNVpuKmG366v-bqhAT0Q6oYHnHikqLY1g@mail.gmail.com>
+To: Wang Mingyu <wangmy@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] mraa: upgrade 2.0.0 -> 2.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,62 +54,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 15:42:01 -0000
+X-List-Received-Date: Thu, 20 Feb 2020 15:43:45 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-fails to build fot x86/musl
-http://errors.yoctoproject.org/Errors/Details/391871/
+fails on musl/x86
 
-On Mon, Feb 17, 2020 at 9:26 PM Leo Yan <leo.yan@linaro.org> wrote:
+http://errors.yoctoproject.org/Errors/Details/391870/
+
+On Wed, Feb 19, 2020 at 6:29 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
 >
-> Ply is a light-weight eBPF tool which compiles ply script or one-liner
-> to Linux BPF programs and attaches to kprobes and tracepoints.  It
-> doesn't require external dependencies except libc, so it's very friendly
-> for embedded system usage.
->
-> This patch adds the recipe to support ply building for git version.
->
-> Signed-off-by: Leo Yan <leo.yan@linaro.org>
+> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 > ---
->  meta-oe/recipes-devtools/ply/ply_git.bb | 27 +++++++++++++++++++++++++
->  1 file changed, 27 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/ply/ply_git.bb
+>  meta-oe/recipes-extended/mraa/mraa_git.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/meta-oe/recipes-devtools/ply/ply_git.bb b/meta-oe/recipes-devtools/ply/ply_git.bb
-> new file mode 100644
-> index 000000000..b8295386c
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/ply/ply_git.bb
-> @@ -0,0 +1,27 @@
-> +SUMMARY = "Ply: A light-weight dynamic tracer for eBPF"
-> +HOMEPAGE = "https://github.com/iovisor/ply"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +
-> +DEPENDS += "bison-native"
-> +
-> +SRC_URI = "git://github.com/iovisor/ply"
-> +SRCREV = "aa5b9ac31307ec1acece818be334ef801c802a12"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +do_configure_prepend() {
-> +    ( cd ${S}; ./autogen.sh; cd - )
-> +}
-> +
-> +do_configure() {
-> +    ( cd ${S}; ./configure --host=${TARGET_SYS} --prefix=${D}${prefix}; cd - )
-> +}
-> +
-> +do_compile() {
-> +    ( cd ${S}; oe_runmake; cd - )
-> +}
-> +
-> +do_install() {
-> +    ( cd ${S}; oe_runmake install; cd - )
-> +}
+> diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
+> index 6d42c6771..745e4e3b9 100644
+> --- a/meta-oe/recipes-extended/mraa/mraa_git.bb
+> +++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
+> @@ -3,10 +3,10 @@ HOMEPAGE = "https://github.com/intel-iot-devkit/mraa"
+>  SECTION = "libs"
+>
+>  LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=4b92a3b497d7943042a6db40c088c3f2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=91e7de50a8d3cf01057f318d72460acd"
+>
+
+please describe why this changed in commit msg
+
+> -SRCREV = "967585c9ea0e1a8818d2172d2395d8502f6180a2"
+> -PV = "2.0.0+git${SRCPV}"
+> +SRCREV = "e15ce6fbc76148ba8835adc92196b0d0a3f245e7"
+> +PV = "2.1.0+git${SRCPV}"
+>
+>  SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
+>             "
 > --
 > 2.17.1
+>
+>
 >
 > --
 > _______________________________________________
