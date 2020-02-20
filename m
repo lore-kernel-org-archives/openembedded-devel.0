@@ -1,50 +1,58 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
-	[209.85.215.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C8A5615E6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 16:57:15 +0000 (UTC)
-Received: by mail-pg1-f196.google.com with SMTP id z7so2218408pgk.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 08:57:16 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+	[209.85.221.53])
+	by mail.openembedded.org (Postfix) with ESMTP id C5AFB60B85
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Feb 2020 17:34:22 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id m16so5540882wrx.11
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Feb 2020 09:34:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=GFid4h2/I3m5tZuLTJZTPoI9U28bBc5YMylWcbC8Wuc=;
-	b=pukSXnWTlKg4b62RQTYWReKU+h7FW/KWC5y5XAH8C6WHrKPg2/uar2wcfJcaJfiMwC
-	CQdzsEcnv9F0TtqZFhO1y4cEAorAbi3HbvWLyukIxuQP6oVbBmFRESmw4/ECn1OAg1y4
-	fzzG7VwTsaP69k2rrL/V3FCiNKGhVoQKSykc3s+MGmsIu7OR5R1FQIL5ZJVwH2rmcfru
-	4JDks6Pojpn3jL9EGMBq1WujUDuZ1KIKzwjiWwdheGatcj1f1BMqlxUZ/tFmtzzM6wzO
-	bB0m+QyOCdCyN0MLEr54apbSJqxwpjCuTtIBzjS4Jd+rizP4uNq8e55IANukYYibmr9A
-	/RYA==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=IEwHU1zZavV+xsW4dCNB3sSQmL5y9mujcnQzfHXX9XE=;
+	b=PIjUFsB70S9cynUk4Dq9esOCop28fFTM8L7+xjAwH4HpmxcEJG+05Mehyb0G11HgUr
+	Cm+EwWxzbIr+QCmsnmmFCLF6LJktRgN4QK3x+YAT+lAClzyofZsPlS52yuRgmODClC7A
+	8+sLPNLYK/LxSajIdtUpuU7myQVN9RFYw00YovqBdoD6Tfizgtz2dy9kIokgI2UU6Klt
+	7AHganhRYbDt8KT+l8xqmLGKd6LRlGAb9p6emgl8KpHY1+rGKOJfj7KW0rZ3OadHJI3g
+	0e0vSlaMr4LKhdSdHWDbq1pBtQPGl1XbKzEo3syVB7WKGca/OQLPTduZfn0oQLtPjIp9
+	eCDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=GFid4h2/I3m5tZuLTJZTPoI9U28bBc5YMylWcbC8Wuc=;
-	b=ixmF9essK6/vNI9b8g24EOvfqtsYfm6Y/8RhK69Lt0G3p7DtvbvKnmT+U2vyTovpXc
-	j3riEbhHxIS4VJ76oPpG0s7bSfHrQHSeKXS0TpTW/65ylifu6sSQ0jNdu9i9MYCGPteM
-	vonsLTvdV3Fa2WU9MUWkCcEG6yaWiV832hOIc/pQMbQ0ha9PyxktJ25dVtkBIMzcqjcJ
-	iVeTZAMjhg1W2kUrRLXJ9ojgCWA0ZwE6jK6qg0CPkkTh85pRMEjJJghTsQfUOWslPPiv
-	dkOGsrXPElTRdZiILijlyQtPrz3SOMcdEMQPnj2bi9tCRjtUJBqol6e3RQbi/RUPdcap
-	D7nQ==
-X-Gm-Message-State: APjAAAVpnpEXIHSsqq9DjbYRUGb8sghp+/EZhTE4oK9fTpgl/UBaup46
-	y6YoZzxRe7clnwnBXWGriEmBnq2mBtc=
-X-Google-Smtp-Source: APXvYqx3DSCrZ5a7qJHyVg15O8Qa3z68wFVaVx3YYfq82r7PePJhV8j+zCFYYuXEKBeDX4TTqjak6g==
-X-Received: by 2002:a62:4d87:: with SMTP id
-	a129mr32645689pfb.116.1582217836069; 
-	Thu, 20 Feb 2020 08:57:16 -0800 (PST)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::396c])
-	by smtp.gmail.com with ESMTPSA id d3sm132164pfn.113.2020.02.20.08.57.15
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=IEwHU1zZavV+xsW4dCNB3sSQmL5y9mujcnQzfHXX9XE=;
+	b=MLVyba+KD4hkROhIXuAWAb6ftuAk1Nz24bZTCkoBEi/7omSPdeCqvKa7r7eqp7jxR1
+	Ug+fuWuhRWDCuH2NqFGNIPYG2cUSR2FatN7wCncitPrr8uRyRUcZqB4mBltnHcLfV7Xe
+	OTk/xxlOJljt+jEg3Bm/CpKWWbPY9SoJ6rQ++2hgqbbo4xycskcGqTa8k7SRXoZD4BuW
+	j8CuG7IBHuLP1rkInZmOsDXdlG03v+wE/rHJ+w+O0HrjGvyoTLBvL2X+RzOVf/lpCKfA
+	X6ah/VvEqHXw0KDyr/BtVImcLqVXx+O9qH6GbdF1XiTR2QuIiSJ28BmgQeyFC289Cyf5
+	uQlw==
+X-Gm-Message-State: APjAAAWQRE3TJYPXig7/BvwsLVvWlfjxTSiW1lbNxKLKvlKT39XNPy9d
+	z/mjNTvQ5jnTcatKofmLnLU=
+X-Google-Smtp-Source: APXvYqzQsMKpqbSLGxmXCWPbnnomzfZAeIKiegyU/pZD17GJo+ykfxKwo1RxWC2uSGkYAA7yxBnkJA==
+X-Received: by 2002:adf:ecc2:: with SMTP id s2mr44302716wro.263.1582220063366; 
+	Thu, 20 Feb 2020 09:34:23 -0800 (PST)
+Received: from localhost ([109.238.218.228])
+	by smtp.gmail.com with ESMTPSA id f127sm24989wma.4.2020.02.20.09.34.22
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 20 Feb 2020 08:57:15 -0800 (PST)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Feb 2020 08:57:27 -0800
-Message-Id: <20200220165727.3714809-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.1
+	Thu, 20 Feb 2020 09:34:22 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 20 Feb 2020 18:34:21 +0100
+To: Adrian Bunk <bunk@stusta.de>
+Message-ID: <20200220173421.egafqfq25kbtr4a4@jama>
+References: <CAMKF1squjefU4rg3Rzn6Xn85mLkRHwWr5jha3YU18Z3rT3J-2g@mail.gmail.com>
+	<20200220144848.msiyguq2bsmqokxc@jama>
+	<20200220151620.GA30034@localhost>
+	<20200220153758.o25tn46hhewgmasd@jama>
+	<20200220161159.GB30034@localhost>
+	<20200220162312.cqh5bwvdwxjp362g@jama>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] oprofile: Fix build with bfd 2.34+
+In-Reply-To: <20200220162312.cqh5bwvdwxjp362g@jama>
+User-Agent: NeoMutt/20180716
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: Re: S variable for svn fetcher Was: State of OE world - 2020-02-18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,114 +65,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 16:57:15 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 20 Feb 2020 17:34:23 -0000
+X-Groupsio-MsgNum: 82935
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="yawp3xyqgu4zp26k"
+Content-Disposition: inline
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-oe/recipes-kernel/oprofile/oprofile.inc  |  1 +
- .../0001-Use-new-bfd-APIs-from-2.34.patch     | 79 +++++++++++++++++++
- 2 files changed, 80 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/oprofile/oprofile/0001-Use-new-bfd-APIs-from-2.34.patch
+--yawp3xyqgu4zp26k
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-oe/recipes-kernel/oprofile/oprofile.inc b/meta-oe/recipes-kernel/oprofile/oprofile.inc
-index a9ee775d45..0e1e2ed8c9 100644
---- a/meta-oe/recipes-kernel/oprofile/oprofile.inc
-+++ b/meta-oe/recipes-kernel/oprofile/oprofile.inc
-@@ -25,6 +25,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz \
-            file://root-home-dir.patch \
-            file://0001-Add-rmb-definition-for-NIOS2-architecture.patch \
-            file://0001-replace-sym_iterator-0-with-sym_iterator.patch \
-+           file://0001-Use-new-bfd-APIs-from-2.34.patch \
- "
- UPSTREAM_CHECK_REGEX = "oprofile-(?P<pver>\d+(\.\d+)+)/"
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/oprofile/files/oprofile/"
-diff --git a/meta-oe/recipes-kernel/oprofile/oprofile/0001-Use-new-bfd-APIs-from-2.34.patch b/meta-oe/recipes-kernel/oprofile/oprofile/0001-Use-new-bfd-APIs-from-2.34.patch
-new file mode 100644
-index 0000000000..faf56d1168
---- /dev/null
-+++ b/meta-oe/recipes-kernel/oprofile/oprofile/0001-Use-new-bfd-APIs-from-2.34.patch
-@@ -0,0 +1,79 @@
-+From 34745fb066a266ae6bbb15d08466d4d2cb6a2110 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Feb 2020 08:11:04 -0800
-+Subject: [PATCH] Use new bfd APIs from 2.34+
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libutil++/bfd_support.cpp | 10 +++++-----
-+ opjitconv/create_bfd.c    |  6 +++---
-+ 2 files changed, 8 insertions(+), 8 deletions(-)
-+
-+diff --git a/libutil++/bfd_support.cpp b/libutil++/bfd_support.cpp
-+index fa904839..e53a1530 100644
-+--- a/libutil++/bfd_support.cpp
-++++ b/libutil++/bfd_support.cpp
-+@@ -137,7 +137,7 @@ static bool get_build_id(bfd * ibfd, unsigned char * build_id)
-+ 		}
-+ 	}
-+ 
-+-	bfd_size_type buildid_sect_size = bfd_section_size(ibfd, sect);
-++	bfd_size_type buildid_sect_size = bfd_section_size(sect);
-+ 	char * contents = (char *) xmalloc(buildid_sect_size);
-+ 	errno = 0;
-+ 	if (!bfd_get_section_contents(ibfd, sect,
-+@@ -188,7 +188,7 @@ bool get_debug_link_info(bfd * ibfd, string & filename, unsigned long & crc32)
-+ 	if (sect == NULL)
-+ 		return false;
-+ 	
-+-	bfd_size_type debuglink_size = bfd_section_size(ibfd, sect);  
-++	bfd_size_type debuglink_size = bfd_section_size(sect);  
-+ 	char * contents = (char *) xmalloc(debuglink_size);
-+ 	cverb << vbfd
-+ 	      << ".gnu_debuglink section has size " << debuglink_size << endl;
-+@@ -346,7 +346,7 @@ void fixup_linenr(bfd * abfd, asection * section, asymbol ** syms,
-+ 	// first restrict the search on a sensible range of vma, 16 is
-+ 	// an intuitive value based on epilog code look
-+ 	size_t max_search = 16;
-+-	size_t section_size = bfd_section_size(abfd, section);
-++	size_t section_size = bfd_section_size(section);
-+ 	if (pc + max_search > section_size)
-+ 		max_search = section_size - pc;
-+ 
-+@@ -819,10 +819,10 @@ find_nearest_line(bfd_info const & b, op_bfd_symbol const & sym,
-+ 	else
-+ 		pc = (sym.value() + offset) - sym.filepos();
-+ 
-+-	if ((bfd_get_section_flags(abfd, section) & SEC_ALLOC) == 0)
-++	if ((bfd_section_flags(section) & SEC_ALLOC) == 0)
-+ 		goto fail;
-+ 
-+-	if (pc >= bfd_section_size(abfd, section))
-++	if (pc >= bfd_section_size(section))
-+ 		goto fail;
-+ 
-+ 	ret = bfd_find_nearest_line(abfd, section, syms, pc, &cfilename,
-+diff --git a/opjitconv/create_bfd.c b/opjitconv/create_bfd.c
-+index 48db143b..5c0e9152 100644
-+--- a/opjitconv/create_bfd.c
-++++ b/opjitconv/create_bfd.c
-+@@ -86,12 +86,12 @@ asection * create_section(bfd * abfd, char const * section_name,
-+ 		bfd_perror("bfd_make_section");
-+ 		goto error;
-+ 	}
-+-	bfd_set_section_vma(abfd, section, vma);
-+-	if (bfd_set_section_size(abfd, section, size) == FALSE) {
-++	bfd_set_section_vma(section, vma);
-++	if (bfd_set_section_size(section, size) == FALSE) {
-+ 		bfd_perror("bfd_set_section_size");
-+ 		goto error;
-+ 	}
-+-	if (bfd_set_section_flags(abfd, section, flags) == FALSE) {
-++	if (bfd_set_section_flags(section, flags) == FALSE) {
-+ 		bfd_perror("bfd_set_section_flags");
-+ 		goto error;
-+ 	}
-+-- 
-+2.25.1
-+
--- 
-2.25.1
+On Thu, Feb 20, 2020 at 05:23:12PM +0100, Martin Jansa wrote:
+> On Thu, Feb 20, 2020 at 06:11:59PM +0200, Adrian Bunk wrote:
+> > On Thu, Feb 20, 2020 at 04:37:58PM +0100, Martin Jansa wrote:
+> > > On Thu, Feb 20, 2020 at 05:16:20PM +0200, Adrian Bunk wrote:
+> > > > On Thu, Feb 20, 2020 at 03:48:48PM +0100, Martin Jansa wrote:
+> > > > >...
+> > > > > Any idea why these aren't shown in our build?
+> > > > >...
+> > > >=20
+> > > > What is your mirror configuration?
+> > > >=20
+> > > > Default configuration downloads the tarball from [1].
+> > >=20
+> > > Maybe I'm missing your point, but these aren't fetch issues.
+> > >...
+> >=20
+> > MIRRORS =3D "" (and deleting the downloaded tar) is what I needed for=
+=20
+> > getting a build failure.
+>=20
+> OK, I see now, sorry.
+>=20
+> That explains why it's not shown in khem's builds and might be broken
+> well before thud already, the tarball created here today:
+>=20
+> $ tar xvf ../downloads/gpio_svn.openmoko.org_.trunk.src.target_4949_.tar.=
+gz
+> gpio/
+> gpio/trunk/
+> gpio/trunk/doc/
+> gpio/trunk/doc/hardware/
+> gpio/trunk/doc/hardware/GTA01Bv3/
+> gpio/trunk/doc/hardware/GTA01Bv3/gpio.txt
+> gpio/trunk/doc/hardware/GTA01Bv3/pmu-voltage.txt
+> ...
+>=20
+> while the corresponding tarball on mirror:
+> http://sources.openembedded.org/gpio_svn.openmoko.org_.trunk.src.target_4=
+949_.tar.gz
+> $ tar xvf gpio_svn.openmoko.org_.trunk.src.target_4949_.tar.gz
+> gpio/
+> gpio/gpio-s3c6410.c
+> gpio/Makefile
+> gpio/gpio.c
+> gpio/gpio-glamo.c
+> gpio/README
+>=20
+> Will check when it got broken before thud.
 
+It's still reproducible in pyro, so probably not caused by changes in OE.
 
+There is one more recipe using svn in meta-multimedia which works fine:
+meta-multimedia/recipes-dvb/oscam/oscam_svn.bb:SRC_URI =3D "svn://www.strea=
+mboard.tv/svn/oscam;module=3Dtrunk;protocol=3Dhttp \
+
+The rest are all from svn.openmoko.org:
+meta-oe/recipes-support/samsung-soc-utils/s3c24xx-gpio_svn.bb:SRC_URI =3D "=
+svn://svn.openmoko.org/trunk/src/target;module=3Dgpio;protocol=3Dhttp"
+meta-oe/recipes-support/samsung-soc-utils/s3c64xx-gpio_svn.bb:SRC_URI =3D "=
+svn://svn.openmoko.org/trunk/src/target;module=3Dgpio;protocol=3Dhttp"
+meta-oe/recipes-support/samsung-soc-utils/sjf2410-linux-native_svn.bb:SRC_U=
+RI =3D "svn://svn.openmoko.org/trunk/src/host/;module=3Dsjf2410-linux;proto=
+col=3Dhttp \
+meta-oe/recipes-support/usbpath/usbpath_svn.bb:SRC_URI =3D "svn://svn.openm=
+oko.org/trunk/src/host;module=3Dusbpath;protocol=3Dhttp \
+meta-oe/recipes-support/wmiconfig/wmiconfig_svn.bb:SRC_URI =3D "svn://svn.o=
+penmoko.org/trunk/src/target;module=3DAR6kSDK.build_sw.18;protocol=3Dhttp \
+
+And now this leads to do_fetch running:
+svn --non-interactive --trust-server-cert co --no-auth-cache --ignore-exter=
+nals -r 4949 http://svn.openmoko.org/trunk/src/target/gpio@4949 gpio
+as before, but now it redirects to github:
+
+Redirecting to URL 'https://github.com/openmoko/openmoko-svn':
+A    gpio/branches
+A    gpio/branches/oe
+A    gpio/branches/oe/pre-20070305
+A    gpio/branches/oe/pre-20070305/README
+A    gpio/branches/oe/pre-20070305/classes
+A    gpio/branches/oe/pre-20070305/classes/autotools.bbclass
+A    gpio/branches/oe/pre-20070305/classes/base.bbclass
+A    gpio/branches/oe/pre-20070305/classes/openmoko-base.bbclass
+A    gpio/branches/oe/pre-20070305/classes/openmoko-panel-plugin.bbclass
+=2E.
+
+and the svn bridge to github probably doesn't work exactly the same as the
+native svn repo used to work, but I don't see it explicitly mentioned in:
+https://help.github.com/en/github/importing-your-projects-to-github/support=
+-for-subversion-clients
+
+So to resolve this quickly I'm going to send SRC_URI updates for
+these recipes to just use git fetcher from:
+https://github.com/openmoko/openmoko-svn
+directly. I don't think anyone is using these nowadays, so it's
+also fine with me to just delete them all, which I'll do in
+separate follow-up commit in case someone tries to resurrect them
+later in own layer.
+
+--yawp3xyqgu4zp26k
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXk7DHQAKCRA3VSO3ZXaA
+HOp7AJ96gtk9mq/jaKRUT8m/dZnCVconKQCfXmykdudKV8D/nEYtknbyZkak9f4=
+=/InW
+-----END PGP SIGNATURE-----
+
+--yawp3xyqgu4zp26k--
