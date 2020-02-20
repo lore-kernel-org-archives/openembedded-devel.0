@@ -1,56 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D441613B9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qv1-f65.google.com (mail-qv1-f65.google.com
+	[209.85.219.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E55C56133B
 	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 16:23:13 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id p17so2725367wma.1
+	Thu, 20 Feb 2020 16:26:56 +0000 (UTC)
+Received: by mail-qv1-f65.google.com with SMTP id s6so2153170qvq.4
 	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 08:23:14 -0800 (PST)
+	Thu, 20 Feb 2020 08:26:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=RRJRBpp/INQZzKV6k7fvUVwj7yTJUrLrzrQOypowjIg=;
-	b=WChPlNyMWRQObA4uiYY0QHJPnwaQu7LXimYI9wrX1MpgxlM1BHv9EJaG8PrLQstAj3
-	HQ/GvBvEF0xsD+dprY9MWkag52Llu5q/kggZvYVgMBT9ob4t2qqCIkwoWabLkGM80Afg
-	8P8s6mp2nZ07/CZcXfzmqlH0S/96Y52g02QtBKxrwr1wedyo2K44DkzMozO4a1eluva3
-	41BypVhnGws8G3wlSYCwyLsnxhkNasmhIBpEEeGK5OfX9QeLi3VNvMo8EmKo2h/baPEQ
-	nuTKDUyboYnBq/2KNHHj/7FFgCKIuuMWFEGvtmBkEKVyySvRpHFVHz+HNhjyDW1pmrCC
-	vvKQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=ZjVtcbEhSgqd44Mw2Iir+tBCExU4yJI097/eRGWrDrk=;
+	b=isBKvwR0sHR4I/yzJ/xQGerheJhVhW+KZKhitgJB6NqpSGhjSBBynZ1ugY5wLMUhfb
+	bYCOUlziCll2dVTd7rzpfdHBTWYa9YIPdxZuwv+XD2rye56wqPDK3Ryqwkwvmcp/hsWg
+	+IKVQXw06ncVtT9GIm3xPgmFITOVWLeK5geKOhD4eSMH8kFOGc7imNOlopt3VF/lQ/oR
+	4jy8sTDn1+bVyTSa3EC/YIwFjDNvaESU2iI0T6FBoi0l/TeIKfpTg+0Xvf0+7N35sMDv
+	LkBdTnve5c4sNsvWzWDY5DAXT6r3Q4qqcWbRQy+rDuPYiQ6IZd0Aa8y7BJKzXxQuuxRG
+	LadA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=RRJRBpp/INQZzKV6k7fvUVwj7yTJUrLrzrQOypowjIg=;
-	b=jazd5y5Jwr4hWAxT6Bt6uT8QD+8Kk3wojTAb/WmyVtzqUz/NtDmg5ZFuopyzLVtEap
-	xvd4Zf61GzrO3KsFDbKDhARkkK9BDdG0amHUXjo0sPSXVMHssKG0lW/N2wst8wLKZlLF
-	uusf4N2Ov0CUnbNAv4GMx9K4Kxz2HmV+MB4km3ngl0q3qlu9nc2m27WPevUMc4gf/BtO
-	WfOs0Wlszh0WBkPxMbhieVjdbQ6+GJfACbV2JW5Yd2zS2X2d9tqDeWgOp4wLAT8EXkFV
-	MH4i5fYbRQLkCDwKlH0tJjhV9N/HmMVGEXba5VW+Gk7bEJCjr5n5Sc4P2AYqQf35KdXR
-	6h6w==
-X-Gm-Message-State: APjAAAU2zUiN525LI/duKGdteBXP3QO5HFkmMWwpFvSX0Uj+R0mAI/E5
-	n6F/WjqgcItvOjh/ftWSXGI=
-X-Google-Smtp-Source: APXvYqxxcaGZYm1uPDmIKhOLrhe51ZQoksvD3d7aXlX12vHpkYTJXst3t7Qt+CcWa+r7haLCV6+Rkw==
-X-Received: by 2002:a1c:c209:: with SMTP id s9mr5236618wmf.156.1582215794194; 
-	Thu, 20 Feb 2020 08:23:14 -0800 (PST)
-Received: from localhost ([109.238.218.228])
-	by smtp.gmail.com with ESMTPSA id j15sm89421wrp.9.2020.02.20.08.23.13
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 20 Feb 2020 08:23:13 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 20 Feb 2020 17:23:12 +0100
-To: Adrian Bunk <bunk@stusta.de>
-Message-ID: <20200220162312.cqh5bwvdwxjp362g@jama>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=ZjVtcbEhSgqd44Mw2Iir+tBCExU4yJI097/eRGWrDrk=;
+	b=HMvYB9meAK9d5tv6NyiehrPU4l6qQCfdNWJGY0L7050gkFV+6za5Ixg+ev/2Q1/E2G
+	3neBLtQMLnkQxA380sZU9b0Co3+5GYY8AwvLROnn/0yuXNbEOoe1HSWa2gn0SKovFkmf
+	oBXZ1Fwsk2ieGuq+kdyb2ZUwYbjznstD0SRo+gfTh1GqJ1Tu0j95AmyzDzaLQB0F5UQA
+	pZ5bhywXZbq53RvyuFF4zVaFdnrOxqm9J10m1Fb+z8HhV4X2QmHHQKvIicbJnDJA8BiT
+	oELZP1OiGXlW0eUyBccc+Hb+bmfL7Z46zm27aPxsizbcipbIEVec1tKlpj1Ra2eOgx+H
+	wuag==
+X-Gm-Message-State: APjAAAW/6S9zEo7BBsu+OIoDdhtp3SZHlJWHgKaADKk7Vlr3C10s+sKb
+	gYc7Wy8wAldNo7i5WbKBfypk7hU6J0vj6ouw2Dw=
+X-Google-Smtp-Source: APXvYqyAXUAk+V6NsoLLJPmESwOzvHmmy0R+ftRnTdlWdQChsbfdJo9q5JYxXF6Uee+0KKsqQjir95xxIGSegU7m97o=
+X-Received: by 2002:a05:6214:524:: with SMTP id
+	x4mr26657655qvw.4.1582216017463; 
+	Thu, 20 Feb 2020 08:26:57 -0800 (PST)
+MIME-Version: 1.0
 References: <CAMKF1squjefU4rg3Rzn6Xn85mLkRHwWr5jha3YU18Z3rT3J-2g@mail.gmail.com>
 	<20200220144848.msiyguq2bsmqokxc@jama>
 	<20200220151620.GA30034@localhost>
 	<20200220153758.o25tn46hhewgmasd@jama>
-	<20200220161159.GB30034@localhost>
-MIME-Version: 1.0
-In-Reply-To: <20200220161159.GB30034@localhost>
-User-Agent: NeoMutt/20180716
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+In-Reply-To: <20200220153758.o25tn46hhewgmasd@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 20 Feb 2020 08:26:30 -0800
+Message-ID: <CAMKF1srwogKz+CU1Ca+WixZ_zKoZTbaPYzHH0O1s_wBAHAtFzQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Adrian Bunk <bunk@stusta.de>
 Subject: Re: S variable for svn fetcher Was: State of OE world - 2020-02-18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -64,71 +58,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 16:23:14 -0000
-X-Groupsio-MsgNum: 82932
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="pty2kiyfvalecl22"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Feb 2020 16:26:57 -0000
+Content-Type: text/plain; charset="UTF-8"
 
---pty2kiyfvalecl22
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Feb 20, 2020 at 7:38 AM Martin Jansa <martin.jansa@gmail.com> wrote:
+>
+> On Thu, Feb 20, 2020 at 05:16:20PM +0200, Adrian Bunk wrote:
+> > On Thu, Feb 20, 2020 at 03:48:48PM +0100, Martin Jansa wrote:
+> > >...
+> > > Any idea why these aren't shown in our build?
+> > >...
+> >
+> > What is your mirror configuration?
+> >
+> > Default configuration downloads the tarball from [1].
+>
+> Maybe I'm missing your point, but these aren't fetch issues.
+>
+> Even when bitbake fetches the tarball (with the svn repo), svn fetcher
+> will still do the actual checkout to WORKDIR, so it will fail the same
+> when fetching from upstream repo with svn or when using tarball.
+>
 
-On Thu, Feb 20, 2020 at 06:11:59PM +0200, Adrian Bunk wrote:
-> On Thu, Feb 20, 2020 at 04:37:58PM +0100, Martin Jansa wrote:
-> > On Thu, Feb 20, 2020 at 05:16:20PM +0200, Adrian Bunk wrote:
-> > > On Thu, Feb 20, 2020 at 03:48:48PM +0100, Martin Jansa wrote:
-> > > >...
-> > > > Any idea why these aren't shown in our build?
-> > > >...
-> > >=20
-> > > What is your mirror configuration?
-> > >=20
-> > > Default configuration downloads the tarball from [1].
-> >=20
-> > Maybe I'm missing your point, but these aren't fetch issues.
-> >...
->=20
-> MIRRORS =3D "" (and deleting the downloaded tar) is what I needed for=20
-> getting a build failure.
+they could have been fetched long time ago, perhaps it changed in this
+area after that
+when fetching fresh repos, just guessing
 
-OK, I see now, sorry.
+> Cheers,
 
-That explains why it's not shown in khem's builds and might be broken
-well before thud already, the tarball created here today:
-
-$ tar xvf ../downloads/gpio_svn.openmoko.org_.trunk.src.target_4949_.tar.gz
-gpio/
-gpio/trunk/
-gpio/trunk/doc/
-gpio/trunk/doc/hardware/
-gpio/trunk/doc/hardware/GTA01Bv3/
-gpio/trunk/doc/hardware/GTA01Bv3/gpio.txt
-gpio/trunk/doc/hardware/GTA01Bv3/pmu-voltage.txt
-=2E..
-
-while the corresponding tarball on mirror:
-http://sources.openembedded.org/gpio_svn.openmoko.org_.trunk.src.target_494=
-9_.tar.gz
-$ tar xvf gpio_svn.openmoko.org_.trunk.src.target_4949_.tar.gz
-gpio/
-gpio/gpio-s3c6410.c
-gpio/Makefile
-gpio/gpio.c
-gpio/gpio-glamo.c
-gpio/README
-
-Will check when it got broken before thud.
-
---pty2kiyfvalecl22
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXk6ybwAKCRA3VSO3ZXaA
-HD5kAJ9fhdlSBAVlx4Ui1b2982MXj+0AOgCeIAYS01TgloWWg5h+I7pF1IGhApk=
-=9Hoz
------END PGP SIGNATURE-----
-
---pty2kiyfvalecl22--
