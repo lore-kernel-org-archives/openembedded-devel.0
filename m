@@ -1,21 +1,21 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C2D661299
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A467C61299
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 10:48:38 +0000 (UTC)
+	Thu, 20 Feb 2020 10:49:42 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 01KAmcqm006212
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 01KAnM2E004672
 	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 02:48:39 -0800 (PST)
+	Thu, 20 Feb 2020 02:49:33 -0800
 Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.468.0; Thu, 20 Feb 2020 02:48:32 -0800
+	14.3.468.0; Thu, 20 Feb 2020 02:49:11 -0800
 From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 20 Feb 2020 18:48:31 +0800
-Message-ID: <20200220104831.38506-1-Qi.Chen@windriver.com>
+Date: Thu, 20 Feb 2020 18:49:10 +0800
+Message-ID: <20200220104910.38976-1-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Subject: [meta-python][PATCH] python3-grpcio: fix do_compile error for native
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 10:48:38 -0000
+X-List-Received-Date: Thu, 20 Feb 2020 10:49:42 -0000
 Content-Type: text/plain
 
 When building python3-grpcio-native, we will meet do_compile error
