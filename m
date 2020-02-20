@@ -1,35 +1,24 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 08BF16150F
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C2D661299
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 02:28:35 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,462,1574092800"; d="scan'208";a="83594330"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 20 Feb 2020 10:28:37 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 31BB250A9962
+	Thu, 20 Feb 2020 10:48:38 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 01KAmcqm006212
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 10:18:58 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Thu, 20 Feb 2020 10:28:36 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 20 Feb 2020 10:28:43 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
+	Thu, 20 Feb 2020 02:48:39 -0800 (PST)
+Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.468.0; Thu, 20 Feb 2020 02:48:32 -0800
+From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 20 Feb 2020 01:40:22 -0800
-Message-ID: <1582191622-130680-3-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1582191622-130680-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1582191622-130680-1-git-send-email-wangmy@cn.fujitsu.com>
+Date: Thu, 20 Feb 2020 18:48:31 +0800
+Message-ID: <20200220104831.38506-1-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 31BB250A9962.AFA33
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] mraa: upgrade 2.0.0 -> 2.1.0
+Subject: [meta-python][PATCH] python3-grpcio: fix do_compile error for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,35 +31,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 02:28:36 -0000
+X-List-Received-Date: Thu, 20 Feb 2020 10:48:38 -0000
 Content-Type: text/plain
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- meta-oe/recipes-extended/mraa/mraa_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+When building python3-grpcio-native, we will meet do_compile error
+because of no 'cc'.
 
-diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
-index 6d42c6771..745e4e3b9 100644
---- a/meta-oe/recipes-extended/mraa/mraa_git.bb
-+++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
-@@ -3,10 +3,10 @@ HOMEPAGE = "https://github.com/intel-iot-devkit/mraa"
- SECTION = "libs"
+In fact, 'cc' is not in our hosttools. So fix to use gcc and make
+the patch also apply to native.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ .../0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch | 6 +++---
+ .../recipes-devtools/python/python3-grpcio_1.27.1.bb        | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
+index 131daace0..f39a82a33 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
++++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
+@@ -1,4 +1,4 @@
+-From b02be74a2eff8abc612ef84f30e0fbce6a7f65f5 Mon Sep 17 00:00:00 2001
++1From b02be74a2eff8abc612ef84f30e0fbce6a7f65f5 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Fri, 4 Aug 2017 09:04:07 -0700
+ Subject: [PATCH] setup.py: Do not mix C and C++ compiler options
+@@ -24,7 +24,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  
+  def check_linker_need_libatomic():
+    """Test if linker on system needs libatomic."""
+-+  compiler, cc_args = os.environ.get('CC').split(' ', 1) or 'cc'
+++  compiler, cc_args = os.environ.get('CC').split(' ', 1) or 'gcc'
+    code_test = (b'#include <atomic>\n' +
+                 b'int main() { return std::atomic<int64_t>{}; }')
+ -  cc_test = subprocess.Popen(['cc', '-x', 'c++', '-std=c++11', '-'],
+@@ -57,7 +57,7 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+              """
+              # TODO(lidiz) Remove the generated a.out for success tests.
+ -            cc_test = subprocess.Popen(['cc', '-x', 'c', '-std=c++11', '-'],
+-+            compiler, cc_args = os.environ.get('CC').split(' ', 1) or 'cc'
+++            compiler, cc_args = os.environ.get('CC').split(' ', 1) or 'gcc'
+ +            cc_test = subprocess.Popen([compiler, cc_args, '-x', 'c', '-std=c++11', '-'],
+                                         stdin=subprocess.PIPE,
+                                         stdout=subprocess.PIPE,
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
+index bc2b70cf8..42260cb27 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
+@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4b92a3b497d7943042a6db40c088c3f2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=91e7de50a8d3cf01057f318d72460acd"
+ DEPENDS += "${PYTHON_PN}-protobuf"
  
--SRCREV = "967585c9ea0e1a8818d2172d2395d8502f6180a2"
--PV = "2.0.0+git${SRCPV}"
-+SRCREV = "e15ce6fbc76148ba8835adc92196b0d0a3f245e7"
-+PV = "2.1.0+git${SRCPV}"
- 
- SRC_URI = "git://github.com/intel-iot-devkit/${BPN}.git;protocol=http \
-            "
+-SRC_URI_append_class-target = " file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
+-                                file://ppc-boringssl-support.patch \
++SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch"
++SRC_URI_append_class-target = " file://ppc-boringssl-support.patch \
+                                 file://riscv64_support.patch \
+ "
+ SRC_URI[md5sum] = "ccaf4e7eb4f031d926fb80035d193b98"
 -- 
 2.17.1
-
-
 
 
