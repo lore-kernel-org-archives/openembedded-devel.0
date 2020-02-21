@@ -1,33 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 20E8561778
+	by mail.openembedded.org (Postfix) with ESMTP id 1FDED61769
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 21 Feb 2020 20:44:42 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48PNk32S3wz4c
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48PNk26GvNz40
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 21:44:43 +0100 (CET)
+	Fri, 21 Feb 2020 21:44:42 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1582317883;
-	bh=lBKU2TJ9RndCeHs/Vn83Xmp5P5W8AsA8OOyNuq4WM7E=;
+	bh=Cv7ELb24QbonU4WwUxJX6ZU/KW1fuVoRHhBnxFH0wSU=;
 	h=From:To:Subject:Date:From;
-	b=GrLfvMkzmPTrie7lRbUtEAFUv64dRbThrLnQzvrNdz2zMnxQFjFHdNKfBm6Kk5mTE
-	5G8VC41pWPZhJQzloILVCiEfCGBKjHFNHSqMhmDo6oHagGk7bl5LilYKeq80s+O8et
-	znam/DQnRKwbw/xSKC9WR4sdB6HO6Vb3Hj34enZ8UMJBgmHy57Gxp6aFc7qiyXXQ1+
-	s/DjTcqGElDUSlDPP+/5NRRyZ3owWHHimWFuYG++kKo1G5rizKS9s+dBnzdKvOjpQs
-	Cxb6WwKDyV+P0rVhxqH3jw6q6/oZ5Bq2OzfJrXM9RUs0JSSKmB5dJFPbFG6nSJxYQz
-	iyaswKh646vD8PDPf6UPUeRgkNlNI8h7i/nB0XoxHkwDm9I9KPnyWTSAV2vS7L6sYV
-	FpYpok8B4lRlCrJ3r/3KB8Hf05aYQk0m49iL3lyu8XUowe7K1UxUEA/EOxrcOZJFwg
-	JypncN5MHCP9THO8bP5ke6T0C89yE98R1rGMBWShYzWpduq0y0jJewz8ASSm83M0EM
-	04uLbTYUSPOWeON7kOwLyoIJvEiXiD5LhMI8NRICLrKWQTpkrzuYaaRCdeHTERTzHL
-	7Og+9PQHU5UK8VW5U7yDMh9n/mZVbTV2fyW3g+BdGUfBGDuq51yfp8RcXw8Nu+z/pS
-	1Lz1gfyWI4ZLxwiGnant4L3A=
+	b=VxXdsXzttojUEb2tHe0maHmmaLO6rWDs35WbiGJyByvtbSEGR7UsFPrWq4tGc6sqk
+	beE4ItdXaaO6a/VIUOe6FEzhJMOWEClK3h0a7a7AYt6AO32WjMr7fkWK0WfVUpZLPX
+	ZdrtbTvOAnlhoT3PwD5YRqUppPRDxapC7T/HbzkQmJ9CyZXZwwS2rgPFg7/Zw2n8bj
+	ysxXC6x+DqvF26mL5GhH9kv9CZp4X4WVRu2/fFUlu5DwLE3tFj6HqCwlOKLbkFE3mS
+	vOJ3h0d9aTordtYa1oTw9PVsnisEIyzTvNrrXOvojCmGauh6pKXpvC/dCRJsPr6Rg9
+	trFusrPx7SWpEwYlhYfz73kacRpcl5+l/zAVQXmUlaGk3IBbCuLouoLbeAXavzfkoy
+	ng4ZZnDSPzghTKTVjZ6F0Qu+hxmwTiObnFhe0e3XIAcagVSVqsYW/780KtAV4pV81W
+	XuSMKKTBPmb+AY/f9Gm8XgEUuLYC13YmmEWr4HiqCHiwm2dxcYqDW+qike01jxJkSU
+	G5S1aAkC3W/xKl4f/z8piaY5+8goDwqS2dL2HxEpfflmZacZmxPoF5VEVUeyi2TMb3
+	qDU0ZlBHvug11wXH+8A51Caph2qsBnFemdrHC6mPvrCo1tIhZocFmtkvBvkUQbU6r1
+	dUiSjUeoDdVVter6D+Sic0wE=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Feb 2020 22:44:39 +0200
-Message-Id: <20200221204440.16807-2-bunk@stusta.de>
+Date: Fri, 21 Feb 2020 22:44:38 +0200
+Message-Id: <20200221204440.16807-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][warrior][PATCH] mariadb: upgrade 10.3.16 -> 10.3.18
+Subject: [meta-networking][warrior][PATCH] modemmanager: Upgrade 1.8.2 -> 1.8.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,51 +42,32 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 21 Feb 2020 20:44:43 -0000
 
-From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Bugfix release on the 1.8 stable branch.
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-[Bug fix only update
-https://mariadb.com/kb/en/library/mariadb-10318-release-notes/
-includes:
-CVE-2019-2805
-CVE-2019-2740
-CVE-2019-2739
-CVE-2019-2737
-CVE-2019-2758 ]
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../{mariadb-native_10.3.16.bb => mariadb-native_10.3.18.bb}  | 0
- meta-oe/recipes-dbs/mysql/mariadb.inc                         | 4 ++--
- .../mysql/{mariadb_10.3.16.bb => mariadb_10.3.18.bb}          | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-dbs/mysql/{mariadb-native_10.3.16.bb => mariadb-native_10.3.18.bb} (100%)
- rename meta-oe/recipes-dbs/mysql/{mariadb_10.3.16.bb => mariadb_10.3.18.bb} (100%)
+ .../{modemmanager_1.8.2.bb => modemmanager_1.8.4.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.8.2.bb => modemmanager_1.8.4.bb} (93%)
 
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.16.bb b/meta-oe/recipes-dbs/mysql/mariadb-native_10.3.18.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb-native_10.3.16.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb-native_10.3.18.bb
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb.inc b/meta-oe/recipes-dbs/mysql/mariadb.inc
-index 37abf45d8..c2a30bc99 100644
---- a/meta-oe/recipes-dbs/mysql/mariadb.inc
-+++ b/meta-oe/recipes-dbs/mysql/mariadb.inc
-@@ -19,8 +19,8 @@ SRC_URI = "http://archive.mariadb.org/${BP}/source/${BP}.tar.gz \
-            file://clang_version_header_conflict.patch \
-            file://fix-arm-atomic.patch \
-           "
--SRC_URI[md5sum] = "11220d0b94c5c24caa2e1e9eaba38e31"
--SRC_URI[sha256sum] = "39e9723eaf620afd99b0925b2c2a5a50a89110ba50040adf14cce7cf89e5e21b"
-+SRC_URI[md5sum] = "b3524c0825c3a1c255496daea38304a0"
-+SRC_URI[sha256sum] = "69456ca85bf9d96c6d28b4ade2a9f6787d79a602e27ef941f9ba4e0b55dddedc"
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.8.2.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.8.4.bb
+similarity index 93%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.8.2.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.8.4.bb
+index f9b302a3d..5895a8b76 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.8.2.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.8.4.bb
+@@ -16,8 +16,8 @@ SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.t
+            file://0001-Do-not-pass-null-string-to-s-printf-formatted-string.patch \
+            "
  
- UPSTREAM_CHECK_URI = "https://github.com/MariaDB/server/releases"
+-SRC_URI[md5sum] = "a49c9f73e46c7b89e5efedda250d22c0"
+-SRC_URI[sha256sum] = "96f2a5f0ed15532b4c4c185b756fdc0326e7c2027cea26a1264f91e098260f80"
++SRC_URI[md5sum] = "460661e12b7cc1da5c0920bdfe9f38de"
++SRC_URI[sha256sum] = "d9d0ef25e256586ce3c9bbe4b27f443721f8c891340e5e9087a21f5d70e637da"
  
-diff --git a/meta-oe/recipes-dbs/mysql/mariadb_10.3.16.bb b/meta-oe/recipes-dbs/mysql/mariadb_10.3.18.bb
-similarity index 100%
-rename from meta-oe/recipes-dbs/mysql/mariadb_10.3.16.bb
-rename to meta-oe/recipes-dbs/mysql/mariadb_10.3.18.bb
+ S = "${WORKDIR}/ModemManager-${PV}"
+ 
 -- 
 2.17.1
 
