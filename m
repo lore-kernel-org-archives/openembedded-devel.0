@@ -1,48 +1,47 @@
 Return-Path: <alex.kiernan@gmail.com>
-Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
-	[209.85.166.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 24B7F616E0
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+	[209.85.221.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 7663961774
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 17:08:32 +0000 (UTC)
-Received: by mail-il1-f194.google.com with SMTP id b15so2212703iln.3
+	Fri, 21 Feb 2020 18:18:35 +0000 (UTC)
+Received: by mail-wr1-f44.google.com with SMTP id y11so3074765wrt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 09:08:34 -0800 (PST)
+	Fri, 21 Feb 2020 10:18:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=7KiGCNwWgn+GrxZajuV1vzbPVuvTFAPXn6Tz8ulrHjE=;
-	b=hQ6l08g8MII5VK/zRc5i50dK49no8twSM+9AE+FEN/jWWR0jDK33jFN+56Tl3d+lAh
-	kOYg+t1yuw4JQXCRsJejl4njCg1kKY2buPhQYtcZuc/Ew9Xz9ZcxFTw2rO8A1qtoxm71
-	a57bTtQ+ip5Nc0GcF2elm0ihmNF1SWdw1rhqoV3mh+ldQH3QHMjWSXbOFoPlteNe2AFU
-	/eBJfYsQHetSds5GoAhYBibRcvL9ENBZ543k3XM5tbSoH0vNxN5cRDgvAtU5VIGgmSQv
-	Bpvyrr+0W40bNDjSKtI7KMz6Lv8ZFsxRTtQWnuH4avN+kA0+2/KTQ4ZlleqrKSLqWWTS
-	ouUA==
+	h=from:to:cc:subject:date:message-id;
+	bh=I5KEECgtKz2bh19/8kpXlUCk/lP8Nzdo2EE0oaFHKzk=;
+	b=sidZsxrRaBuDTOg2oHGpDiUdq0NyHr3DV/JhBknDcnkmjoOb6vV7SznKwyLcbcIrLC
+	Zg+wK5V9sVPZtT6flYM6MwB4DKWAU67LqNPoz+GmCzF3e5Jxk7YtZ/VKQiaBvskcpuB/
+	Uuz+lwFrTR27ZASPqbruQU8zXSvbj6DTAiVwPUC2TT0RI0NjwQhACZs1kW5aUztnK4cO
+	h2OUecV+iJqxqF03FrgpxzGG4m6IOKfZFf1BYVYwzg+YEYtJQ4yxMElFC+1Il9EKt8iz
+	FnL3pJHYD3MXCWeTiLEQ4FLfqlW+JqVoKovHJnHHN9SKTFn9+AmnBf4oQLaHV+BBB5f+
+	d8zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=7KiGCNwWgn+GrxZajuV1vzbPVuvTFAPXn6Tz8ulrHjE=;
-	b=X1076ffw5MiRY1Ji6sujBBrsmczNFM8rvc0Z7SnlxaNq5xntxcaU7JiCsk1utE93tq
-	iUoRQQ9bwC8NaE/W29EdGeSSIMyhCPsVTEMEp/zMGmJCUQoGPn7+8GkN7+7iV9Y5RHxk
-	QMldSHAWVm7Dxz6LKACWdO4Ee45jYy3qn5yhfEro3chPIt4uD0pP/A80+8g9CcE8mEcS
-	FrSo0BUA598B9LVHQJZGXjrprrJnvdTzsq2gRRJW+4++3EvYdnd/ixm+Z7PPhGSAalmO
-	NpHzfWD+bSXppbW/+PzVm0Hm9xA1NCgDxKlHGg8VONnZUZd93nPxTZApx5z/hlk1EG1C
-	T1ZA==
-X-Gm-Message-State: APjAAAX7johruG3OgGjxb13/TDYHsp8rqIhxIEl6W/uXBuitO5CX1wUH
-	8hbwuBxYnK2fIBtodFPOT/O2CrlbuRYWx43AVgs=
-X-Google-Smtp-Source: APXvYqzxBE0WcByiqtJqtupgYSZ0e2K6UD6bbLq4Jrjj8jNytxTJAsG4YnAkY7eNln9Jgf02aue7Mm4RE8ycjoNTA38=
-X-Received: by 2002:a92:af08:: with SMTP id n8mr37093104ili.217.1582304913933; 
-	Fri, 21 Feb 2020 09:08:33 -0800 (PST)
-MIME-Version: 1.0
-References: <20200221104340.21294-1-leo.yan@linaro.org>
-In-Reply-To: <20200221104340.21294-1-leo.yan@linaro.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=I5KEECgtKz2bh19/8kpXlUCk/lP8Nzdo2EE0oaFHKzk=;
+	b=rery0hvcchOxLk325JK/KTw8EqwXtGgU0lt57YHuUlkvF+SyzsFUlc8gMbrM+iAn/H
+	V/SVRybxmLrKJjRfhoT/O1+uznYCM8Zj60fHxGcPdaRUefJ0fBCMyK0Pf9kx3jQApy8U
+	rkL9DrAQTjYijd3AsJirg7O3Qs6uqUxvDFWZUk6SZHCMxasSA5AXXD1aQqvjGNkTGyEH
+	PKuY/9u5eBfIRwlOYwZGrl+6UdQb6egLjH9r2OlAlulPXFWUHEDz+ojhGRn/iDEdoxlC
+	DOq17XHPD7N/ar8j1FBkuG/8c/LhAWZQ4d3iYn8mZyY6XpSYpUl4olqZgbk0pN1H3ZOD
+	heLQ==
+X-Gm-Message-State: APjAAAV14EH4ixzmW6uOczPwBJUUUSdg8iPMFYx4Sfop/R3fdNZywVR+
+	yjQdiO4a12XWOUaDfiM930U8D/1a
+X-Google-Smtp-Source: APXvYqwxqYy/ZgmCRHcYQD5wPTm1B6dRDXa+bAeKM+cwvc1ELn3GnSgRunD44ybFHn4p9UiF04Oypw==
+X-Received: by 2002:adf:ecc2:: with SMTP id s2mr50893079wro.263.1582309115708; 
+	Fri, 21 Feb 2020 10:18:35 -0800 (PST)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+	[91.135.6.246]) by smtp.gmail.com with ESMTPSA id
+	f127sm4506001wma.4.2020.02.21.10.18.34
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 21 Feb 2020 10:18:34 -0800 (PST)
 From: Alex Kiernan <alex.kiernan@gmail.com>
-Date: Fri, 21 Feb 2020 17:08:22 +0000
-Message-ID: <CAO5Uq5QWcpy11_ibDE-nFJQpakdXEwE8GJZn+SGJdxPx4Bgm5g@mail.gmail.com>
-To: Leo Yan <leo.yan@linaro.org>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] Ply: Add recipe for git version
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 21 Feb 2020 18:18:32 +0000
+Message-Id: <20200221181832.119222-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] ostree: upgrade 2019.6 -> 2020.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,83 +54,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 17:08:33 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 21 Feb 2020 18:18:35 -0000
 
-On Fri, Feb 21, 2020 at 10:44 AM Leo Yan <leo.yan@linaro.org> wrote:
->
-> Ply is a light-weight eBPF tool which compiles ply script or one-liner
-> to Linux BPF programs and attaches to kprobes and tracepoints.  It
-> doesn't require external dependencies except libc, so it's very friendly
-> for embedded system usage.
->
-> This patch adds the recipe to support ply building for git version.
->
-> Signed-off-by: Leo Yan <leo.yan@linaro.org>
-> ---
->  meta-oe/recipes-devtools/ply/ply_git.bb | 38 +++++++++++++++++++++++++
->  1 file changed, 38 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/ply/ply_git.bb
->
-> diff --git a/meta-oe/recipes-devtools/ply/ply_git.bb b/meta-oe/recipes-devtools/ply/ply_git.bb
-> new file mode 100644
-> index 000000000..21395885c
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/ply/ply_git.bb
-> @@ -0,0 +1,38 @@
-> +SUMMARY = "Ply: A light-weight dynamic tracer for eBPF"
-> +HOMEPAGE = "https://github.com/iovisor/ply"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +
-> +DEPENDS += "bison-native"
-> +
-> +SRC_URI = "git://github.com/iovisor/ply"
-> +SRCREV = "aa5b9ac31307ec1acece818be334ef801c802a12"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +do_configure_prepend() {
-> +    ( cd ${S}; ./autogen.sh; cd - )
-> +}
-> +
-> +do_configure() {
-> +    ( cd ${S}; ./configure --host=${TARGET_SYS} --prefix=${D}${prefix}; cd - )
-> +}
-> +
-> +do_compile() {
-> +    ( cd ${S}; oe_runmake; cd - )
-> +}
-> +
-> +do_install() {
-> +    ( cd ${S}; oe_runmake install; cd - )
-> +}
-> +
+Also expose glib and gpgme in PACKAGECONFIG (which were always on).
 
-Can't all of these do_...  steps be replaced with `inherit autotools-brokensep`?
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+---
 
+ .../{ostree_2019.6.bb => ostree_2020.2.bb}    | 28 +++++++++++++++----
+ 1 file changed, 22 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-extended/ostree/{ostree_2019.6.bb => ostree_2020.2.bb} (88%)
 
-> +do_install_append() {
-> +    chrpath -d ${D}${prefix}/sbin/ply
-> +}
-> +
-> +# x86, mips32/64, riscv64 are not supported in this release
-> +COMPATIBLE_HOST_i586 = 'null'
-> +COMPATIBLE_HOST_i686 = 'null'
-> +COMPATIBLE_HOST_mipsarchn32 = "null"
-> +COMPATIBLE_HOST_mipsarchn64 = "null"
-> +COMPATIBLE_HOST_riscv64 = "null"
-> --
-> 2.17.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2019.6.bb b/meta-oe/recipes-extended/ostree/ostree_2020.2.bb
+similarity index 88%
+rename from meta-oe/recipes-extended/ostree/ostree_2019.6.bb
+rename to meta-oe/recipes-extended/ostree/ostree_2020.2.bb
+index bcf511b9025d..78f4cf588c64 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2019.6.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2020.2.bb
+@@ -10,7 +10,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2"
+ 
+ DEPENDS = " \
+     glib-2.0 \
+-    gpgme \
+     e2fsprogs \
+     libcap \
+     zlib \
+@@ -26,7 +25,7 @@ SRC_URI = " \
+     gitsm://github.com/ostreedev/ostree \
+     file://run-ptest \
+ "
+-SRCREV = "43706202f7de2ce0c829a46caab350ae1656f6ad"
++SRCREV = "c6085ebd5e27da35f43165eb614190665468f13a"
+ 
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
+ 
+@@ -36,11 +35,11 @@ inherit autotools bash-completion gobject-introspection gtk-doc manpages pkgconf
+ 
+ # Package configuration - match ostree defaults, but without rofiles-fuse
+ # otherwise we introduce a dependendency on meta-filesystems
+-#
+-# If running with ptest, both soup (for trivial-httpd) and xattr are required
+ PACKAGECONFIG ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd libmount', '', d)} \
++    glib \
++    gpgme \
+     soup \
+ "
+ 
+@@ -49,6 +48,7 @@ PACKAGECONFIG ??= " \
+ PACKAGECONFIG_class-native ??= " \
+     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux smack', d)} \
+     builtin-grub2-mkconfig \
++    gpgme \
+     soup \
+ "
+ 
+@@ -56,8 +56,10 @@ PACKAGECONFIG[avahi] = "--with-avahi, --without-avahi, avahi"
+ PACKAGECONFIG[builtin-grub2-mkconfig] = "--with-builtin-grub2-mkconfig, --without-builtin-grub2-mkconfig"
+ PACKAGECONFIG[curl] = "--with-curl, --without-curl, curl"
+ PACKAGECONFIG[dracut] = "--with-dracut, --without-dracut"
++PACKAGECONFIG[glib] = "--with-crypto=glib"
+ PACKAGECONFIG[gjs] = "ac_cv_path_GJS=${bindir}/gjs"
+ PACKAGECONFIG[gnutls] = "--with-crypto=gnutls, , gnutls"
++PACKAGECONFIG[gpgme] = "--with-gpgme, --without-gpgme, gpgme"
+ PACKAGECONFIG[libarchive] = "--with-libarchive, --without-libarchive, libarchive"
+ PACKAGECONFIG[libmount] = "--with-libmount, --without-libmount, util-linux"
+ PACKAGECONFIG[manpages] = "--enable-man, --disable-man, libxslt-native docbook-xsl-stylesheets-native"
+@@ -144,9 +146,21 @@ RDEPENDS_${PN} = " \
+ RDEPENDS_${PN}-dracut = "bash"
+ RDEPENDS_${PN}-mkinitcpio = "bash"
+ RDEPENDS_${PN}_class-target = " \
+-    gnupg \
++    ${@bb.utils.contains('PACKAGECONFIG', 'gpgme', 'gnupg', '', d)} \
+     ${PN}-switchroot \
+ "
++
++#
++# Note that to get ptest to pass you also need:
++#
++#   xattr in DISTRO_FEATURES
++#   static ostree-prepare-root (PACKAGECONFIG_append_pn-ostree = " static")
++#   meta-python in your layers
++#   overlayfs in your kernel (KERNEL_EXTRA_FEATURES += "features/overlayfs/overlayfs.scc")
++#   busybox built statically
++#   /var/tmp as a real filesystem (not a tmpfs)
++#   Sufficient disk space (IMAGE_ROOTFS_SIZE = "524288") and RAM (QB_MEM = "-m 1024")
++#
+ RDEPENDS_${PN}-ptest += " \
+     attr \
+     bash \
+@@ -157,7 +171,10 @@ RDEPENDS_${PN}-ptest += " \
+     grep \
+     python3-core \
+     python3-multiprocessing \
++    strace \
+     tar \
++    util-linux \
++    xz \
+     ${PN}-trivial-httpd \
+     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-python', 'python3-pyyaml', '', d)} \
+     ${@bb.utils.contains('PACKAGECONFIG', 'gjs', 'gjs', '', d)} \
+@@ -165,7 +182,6 @@ RDEPENDS_${PN}-ptest += " \
+ RDEPENDS_${PN}-ptest_append_libc-glibc = " glibc-utils glibc-localedata-en-us"
+ 
+ RRECOMMENDS_${PN} += "kernel-module-overlay"
+-RRECOMMENDS_${PN}-ptest += "strace"
+ 
+ SYSTEMD_SERVICE_${PN} = "ostree-remount.service ostree-finalize-staged.path"
+ SYSTEMD_SERVICE_${PN}-switchroot = "ostree-prepare-root.service"
+-- 
+2.17.1
 
-
-
---
-Alex Kiernan
 
