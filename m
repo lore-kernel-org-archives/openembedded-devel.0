@@ -1,35 +1,35 @@
 Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C3DC6164F
+	by mail.openembedded.org (Postfix) with ESMTP id C31EB6164F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 08:45:32 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,467,1574092800"; d="scan'208";a="83686049"
+	Fri, 21 Feb 2020 08:45:33 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,467,1574092800"; d="scan'208";a="83686044"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Feb 2020 16:35:58 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7909750A9976
+	by heian.cn.fujitsu.com with ESMTP; 21 Feb 2020 16:35:53 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 2486B50A997B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 16:26:14 +0800 (CST)
+	Fri, 21 Feb 2020 16:26:07 +0800 (CST)
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Fri, 21 Feb 2020 16:35:54 +0800
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Fri, 21 Feb 2020 16:35:47 +0800
 Received: from localhost.local (10.167.225.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 21 Feb 2020 16:35:56 +0800
+	Server (TLS) id 14.3.439.0; Fri, 21 Feb 2020 16:35:49 +0800
 From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Feb 2020 16:37:36 +0800
-Message-ID: <20200221083737.17042-5-zangrc.fnst@cn.fujitsu.com>
+Date: Fri, 21 Feb 2020 16:37:35 +0800
+Message-ID: <20200221083737.17042-4-zangrc.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200221083737.17042-1-zangrc.fnst@cn.fujitsu.com>
 References: <20200221083737.17042-1-zangrc.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 7909750A9976.A749D
+X-yoursite-MailScanner-ID: 2486B50A997B.A8969
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe] [PATCH] ttf-hunkyfonts: upgrade 0.3.0 -> 0.3.1
+Subject: [meta-oe] [PATCH] snappy: upgrade 1.1.7 -> 1.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,43 +42,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 08:45:33 -0000
+X-List-Received-Date: Fri, 21 Feb 2020 08:45:34 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Since the new version does not have the file LICENSE, change the
-LIC_FILES_CHKSUM to COPYRIGHT.TXT.
+Due to version update, SRC-UR has been modified SRC_URI.
 
 Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../{ttf-hunkyfonts_0.3.0.bb => ttf-hunkyfonts_0.3.1.bb}    | 6 +++---
+ .../snappy/{snappy_1.1.7.bb => snappy_1.1.8.bb}             | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/ttf-fonts/{ttf-hunkyfonts_0.3.0.bb => ttf-hunkyfonts_0.3.1.bb} (68%)
+ rename meta-oe/recipes-extended/snappy/{snappy_1.1.7.bb => snappy_1.1.8.bb} (69%)
 
-diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.1.bb
-similarity index 68%
-rename from meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
-rename to meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.1.bb
-index bd552c08a..4df0c3afb 100644
---- a/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.0.bb
-+++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-hunkyfonts_0.3.1.bb
-@@ -3,7 +3,7 @@ require ttf.inc
- SUMMARY = "Hunky fonts - TTF Version"
- HOMEPAGE = "http://sourceforge.net/projects/hunkyfonts"
- LICENSE = "LGPL-2.1+"
--LIC_FILES_CHKSUM = "file://../LICENSE;md5=7fbc338309ac38fefcd64b04bb903e34"
-+LIC_FILES_CHKSUM = "file://../COPYRIGHT.TXT;md5=70d34478e38b1ad9995079f9921f9ef7"
- PR = "r7"
+diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.8.bb
+similarity index 69%
+rename from meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
+rename to meta-oe/recipes-extended/snappy/snappy_1.1.8.bb
+index 9f37c5fc2..d6d1e4110 100644
+--- a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
++++ b/meta-oe/recipes-extended/snappy/snappy_1.1.8.bb
+@@ -10,10 +10,10 @@ compression ratio."
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/hunkyfonts/hunkyfonts-${PV}.tar.bz2"
-@@ -16,5 +16,5 @@ FONT_PACKAGES = "ttf-hunky-sans ttf-hunky-serif"
- FILES_ttf-hunky-sans = "${datadir}/fonts/truetype/HunkySans*.ttf"
- FILES_ttf-hunky-serif = "${datadir}/fonts/truetype/HunkySerif*.ttf"
+-SRC_URI = "https://src.fedoraproject.org/repo/pkgs/snappy/snappy-1.1.7.tar.gz/sha512/32046f532606ba545a4e4825c0c66a19be449f2ca2ff760a6fa170a3603731479a7deadb683546e5f8b5033414c50f4a9a29f6d23b7a41f047e566e69eca7caf/snappy-1.1.7.tar.gz"
++SRC_URI = "https://src.fedoraproject.org/repo/pkgs/snappy/snappy-1.1.8.tar.gz/sha512/efe18ff1b3edda1b4b6cefcbc6da8119c05d63afdbf7a784f3490353c74dced76baed7b5f1aa34b99899729192b9d657c33c76de4b507a51553fa8001ae75c1c/snappy-1.1.8.tar.gz"
  
--SRC_URI[md5sum] = "36444795a356fb8a56c63b2840729bab"
--SRC_URI[sha256sum] = "e0b1849c545b6af276407d93025c73094dd74fc259b07c1d91594fdbb9a0b829"
-+SRC_URI[md5sum] = "b933312967842e5737b5415fa22d682a"
-+SRC_URI[sha256sum] = "3fc528737ccd12ec3c09c4a91447d241d3c5bceeeb4d24b7f2c29b15c9735328"
+-SRC_URI[md5sum] = "ee9086291c9ae8deb4dac5e0b85bf54a"
+-SRC_URI[sha256sum] = "3dfa02e873ff51a11ee02b9ca391807f0c8ea0529a4924afa645fbf97163f9d4"
++SRC_URI[md5sum] = "70e48cba7fecf289153d009791c9977f"
++SRC_URI[sha256sum] = "16b677f07832a612b0836178db7f374e414f94657c138e6993cbfc5dcc58651f"
+ 
+ inherit cmake pkgconfig
+ 
 -- 
 2.20.1
 
