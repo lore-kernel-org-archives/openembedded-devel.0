@@ -1,81 +1,51 @@
-Return-Path: <JAEWON@xilinx.com>
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
-	(mail-dm6nam10on2065.outbound.protection.outlook.com [40.107.93.65])
-	by mail.openembedded.org (Postfix) with ESMTP id CCA366133B
+Return-Path: <jpuhlman@gmail.com>
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+	[209.85.216.68])
+	by mail.openembedded.org (Postfix) with ESMTP id AD63B61312
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Feb 2020 23:20:31 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=PY4TyJic1l8XuLLpWvoHoePNaQSbu6UcBS2nCl7oIkNf70UhTRIbOTsoxXEy9Vz5KHr5Cq35kpCgDAwdPzxxOHTtZ33lE5ThIRqjvZCvglqDBDsHwp0p3ri4XXS5PFANRfr0kIGvhpPBaNuWfC7/iIKmiZRP1xg4jN5R+kSL3mDvw9sY5VpKUWSxltRo/CzL+33QboBJzQX+Kz9hBGaXzKIf9haRgCCoZKehrurbWRmBu6xzmKZTa4Ke8sGIf1QB2ugxyoQQdSx84JAZ8BwoJg7+vyqIzH4j6TIGCG67I57L8yJ35WmyNyhnbNRactQJ+ud1GXQz4oOwaj5oz75bJg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
-	s=arcselector9901;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=CflXAP2OlPAQoey+2aKlK11jiPFUWDX68uEjE3oylMo=;
-	b=MZtWWmNabWprWMgwDnbxbJedIcUG3CF8h4iAddJynHd3Ejb8jDDCIJam0twRnYgQktyU5lREnwMEKtI0SlEWLvothKXZ7DK4P0OP/8bxTP6G/vpL5j81W1cYsNdsAuZ1o8aTrdLtYJaaq1/+ADll28NVIWtqMqEc1J65iSenRzH3+9ZQPsrYS3B6iID0v/EoUAsHa82zyKr6SePBahHVozwIIwAN1uqVCMpPQXandvmhMt/NYeI71rwKU/xfNhQBJShohEhUufqbDd4qoKyQeWtAMDcPS5kRdlYdacCYcafvLlDqQ7EnkYUW8KqM4qI6toXwvzL0UaKxMFNxDq4toQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
-	smtp.mailfrom=xilinx.com; dmarc=pass action=none header.from=xilinx.com;
-	dkim=pass header.d=xilinx.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=xilinx.onmicrosoft.com; s=selector2-xilinx-onmicrosoft-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=CflXAP2OlPAQoey+2aKlK11jiPFUWDX68uEjE3oylMo=;
-	b=NbA1yd/GAzfZ14HpxGdbUjAVnJ8fAZk534cXP4fFLlNPEWii+T8oT9zLo8/9kFsRYprpbDzrUqP7nAByux7izyfrzzgTxNYETraicPHE4OGZgksEH2j06v+pOXr2M2hxBGH+y6d3821u4pAHgWToh8OybJPXyMclj1svE+tyOxM=
-Received: from BYAPR02MB5816.namprd02.prod.outlook.com (2603:10b6:a03:126::21)
-	by BYAPR02MB3912.namprd02.prod.outlook.com (2603:10b6:a02:f3::27)
-	with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2729.26;
-	Thu, 20 Feb 2020 23:20:31 +0000
-Received: from BYAPR02MB5816.namprd02.prod.outlook.com
-	([fe80::1c67:c589:55cc:9cbf]) by
-	BYAPR02MB5816.namprd02.prod.outlook.com
-	([fe80::1c67:c589:55cc:9cbf%6]) with mapi id 15.20.2729.033;
-	Thu, 20 Feb 2020 23:20:31 +0000
-From: Jaewon Lee <JAEWON@xilinx.com>
-To: "William A. Kennington III via Openembedded-devel"
-	<openembedded-devel@lists.openembedded.org>, Pierre-Jean Texier
-	<pjtexier@koncepto.io>, Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [meta-openembedded][rel-v2020.1][PATCH] can-utils: bump to
-	revision 665d869
-Thread-Index: AQHV6EOkV8tp3BTLJU2dvuihbeJICqgkt/jQ
-Date: Thu, 20 Feb 2020 23:20:31 +0000
-Message-ID: <BYAPR02MB58166A6170BF80841F40FDC4AF130@BYAPR02MB5816.namprd02.prod.outlook.com>
-References: <20200220231516.23639-1-jaewon.lee@xilinx.com>
-In-Reply-To: <20200220231516.23639-1-jaewon.lee@xilinx.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-Auto-Response-Suppress: DR, RN, NRN, OOF, AutoReply
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=JAEWON@xilinx.com; 
-x-originating-ip: [149.199.62.133]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-ht: Tenant
-x-ms-office365-filtering-correlation-id: 9f1fe495-259e-4600-2ef0-08d7b65b7abc
-x-ms-traffictypediagnostic: BYAPR02MB3912:
-x-microsoft-antispam-prvs: <BYAPR02MB39124343569CD562CD6078A9AF130@BYAPR02MB3912.namprd02.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:1443;
-x-forefront-prvs: 031996B7EF
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(4636009)(396003)(136003)(39850400004)(366004)(346002)(376002)(199004)(189003)(2906002)(81166006)(81156014)(8676002)(8936002)(55016002)(52536014)(5660300002)(9686003)(66556008)(66946007)(110136005)(316002)(64756008)(66476007)(66446008)(33656002)(71200400001)(76116006)(7696005)(53546011)(186003)(966005)(86362001)(26005)(478600001)(6506007);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BYAPR02MB3912;
-	H:BYAPR02MB5816.namprd02.prod.outlook.com; FPR:; SPF:None;
-	LANG:en; PTR:InfoNoRecords; A:1; MX:1; 
-received-spf: None (protection.outlook.com: xilinx.com does not designate
-	permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 8BODrOMz/YPtYBt4lON92h+FKy6OZnk28oGpYAyiQtC6k1xvwzjvkNj4x5M7NmVwS+AuN1mELo3QQk/lLuj/HJQ7hbE54Zet72vLPR39y55fzPCTczPLMGzVogKTbhqEOd4O0tbNgjvYaFDelNJmsl0fg+7cgDJk8tLBOiGg3e0I+gwE+m+LBdC32ggmnABcXeGwGTN0lz3tTyEXkgYPqOL6LdHZvAgQSVkon7hhI8ca14UuG1mrQ6oYGIBYi3tHiEGkeWdMd5lJh9xBvPzJa96q18CUJN8RrJJoVLU1diPc2sinAZpoA24xKAb9E8N1P0AylEMfexh/uf47ie9jwC9N0l3YGhoyZHUhDROu7hMB3nYnyw5fp+Js9cQzhsg2pcI2OMWjbvniMErLtOKwYwVhvOFs1P1N4/yxmcAuGeph2HXmLpiefaJMXopMvJNKvrSTe64/TQTLurG0uPHfc6OCYyiimAilCMTcvqpELdFOtflSy0IxHNKcgmhZHpIwYmt/7N3J9zTflMBl1uEISw==
-x-ms-exchange-antispam-messagedata: 4hqUqRzDyatM4DL/qFLrBLaWwSOKequ0TMtFI/swYmp7n+aksooYD6GQ/NbcLQ27Hc0WeM6xUq7fozlToaPqUHtmwVuBOG8D2wblL14yYoKQGpxGgkHl0P46gLEGkVA/oJ9SoCVURWEDswVPfF8ODw==
-x-ms-exchange-transport-forked: True
-MIME-Version: 1.0
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f1fe495-259e-4600-2ef0-08d7b65b7abc
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Feb 2020 23:20:31.2177 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: pFdShtv25CaNNki3hoW6QF5V5QecgBa56AI9qulrw+o9+6oBIyrza/sKm+Hh68UCCR5SIJQ66qGzaqNHU9GIsg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR02MB3912
-Subject: Re: [meta-openembedded][rel-v2020.1][PATCH] can-utils: bump to revision 665d869
+	Fri, 21 Feb 2020 00:36:12 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id q39so246219pjc.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 Feb 2020 16:36:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=DMCZOCzg6S3xrvQ/rIeYPfKp/1bVHj2B/GhmRz/4u+4=;
+	b=oQ4W82hmFtoHtDhQygJehTf+fTjktD0okDhdItHBw7cL+tlX0zo+oxfXuQ10E2E551
+	iqhd55dgkndGUnvRxFrw75DUOpJBnZadXQ2VEDJ7y4a7W6qhpq68cJKottWPiUTxUeDv
+	qZNi6wcASS9X91FRzOyWdumb736RxQZbeDHZQbhW0GgOeNr/vezpzHQ3FPmT55Dx9zjz
+	ma7IJR8pTkQZpuntWJRqaVNxMrNfR5hjOdy4bIAwm7QBjop0/R/R+34cMi7zM8Na82lx
+	jTvPBKCsNzXUqG2VezW909Z1mi/Or6gy1yqMoMd1HLfSWiT7SRXMKWqxmgZLrQRPdAQd
+	hv2A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=DMCZOCzg6S3xrvQ/rIeYPfKp/1bVHj2B/GhmRz/4u+4=;
+	b=IJHzCZi0r7X5BTjQEvd/9O/J6tLfg072R1/lCKPZhOhKdMG9K/wcue0lu+0o8XcN6b
+	xoLVzhWQbG+HyAGP5ODMP8Dnt20mM1ChM49381k+GH/D4pkPdhBCuE4XnIWPNpw9QYXF
+	XCN8Vrek9wygeopGaiE6e6VtsKlh7rZzNXJ9H+f9wN1y9LCeuUrF1kU+F+h4hH0Kb5af
+	WDrJ0wA6PxfCxpC5Ys06PCCuvF5KrCvPHgCFZXvB4wNg+kfntleWIb5N9NKrwxkU/nyT
+	QPew198JXHGg+xmnW2xn8+CKTKeTD8y+WiYSASLD5xVY2qDB7javAdL8YkA03gnB/UvP
+	KqOA==
+X-Gm-Message-State: APjAAAVtkByxs4Z2lp5AnVICKPnaDGmexNqQtkZUrbn3D9bHg4in7oRq
+	ovWv0D0IeACd+Jo2eloJUVQtS6hhViblUg==
+X-Google-Smtp-Source: APXvYqyFiwJFwBR8d3GGF1hzXtMjW3U9oy9arkFn6QpYZNW4/NWB+l1KLCCEKF3/DqNPPeQEcf4WDg==
+X-Received: by 2002:a17:90a:1697:: with SMTP id
+	o23mr6794764pja.62.1582245373152; 
+	Thu, 20 Feb 2020 16:36:13 -0800 (PST)
+Received: from workhorse.localdomain
+	([2600:1700:4c90:60a0:56be:f7ff:fe12:d0bd])
+	by smtp.gmail.com with ESMTPSA id p17sm754574pfn.31.2020.02.20.16.36.12
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 20 Feb 2020 16:36:12 -0800 (PST)
+Sender: Jeremy Puhlman <jpuhlman@gmail.com>
+Received: by workhorse.localdomain (Postfix, from userid 1000)
+	id B2E302A0532; Thu, 20 Feb 2020 16:36:10 -0800 (PST)
+From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 20 Feb 2020 16:35:51 -0800
+Message-Id: <20200221003551.9081-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.13.3
+Subject: [meta-oe][PATCH] syslog-ng: Remove config nag on boot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -88,121 +58,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Feb 2020 23:20:32 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 21 Feb 2020 00:36:12 -0000
 
-UGxlYXNlIGRpc3JlZ2FyZCDwn5iKDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4g
-RnJvbTogSmFld29uIExlZSA8amFld29uLmxlZUB4aWxpbnguY29tPg0KPiBTZW50OiBUaHVyc2Rh
-eSwgRmVicnVhcnkgMjAsIDIwMjAgMzoxNSBQTQ0KPiBUbzogZ2l0X3Bsbnh5b2N0byA8Z2l0X3Bs
-bnh5b2N0b0B4aWxpbnguY29tPg0KPiBDYzogV2lsbGlhbSBBLiBLZW5uaW5ndG9uIElJSSB2aWEg
-T3BlbmVtYmVkZGVkLWRldmVsIDxvcGVuZW1iZWRkZWQtDQo+IGRldmVsQGxpc3RzLm9wZW5lbWJl
-ZGRlZC5vcmc+OyBQaWVycmUtSmVhbiBUZXhpZXINCj4gPHBqdGV4aWVyQGtvbmNlcHRvLmlvPjsg
-S2hlbSBSYWogPHJhai5raGVtQGdtYWlsLmNvbT47IEphZXdvbiBMZWUNCj4gPEpBRVdPTkB4aWxp
-bnguY29tPg0KPiBTdWJqZWN0OiBbbWV0YS1vcGVuZW1iZWRkZWRdW3JlbC12MjAyMC4xXVtQQVRD
-SF0gY2FuLXV0aWxzOiBidW1wIHRvDQo+IHJldmlzaW9uIDY2NWQ4NjkNCj4gDQo+IEZyb206ICJX
-aWxsaWFtIEEuIEtlbm5pbmd0b24gSUlJIHZpYSBPcGVuZW1iZWRkZWQtZGV2ZWwiDQo+IDxvcGVu
-ZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NCj4gDQo+IEFsc286DQo+ICAt
-IHJlbW92ZSBwYXRjaCBhcHBsaWVkIHVwc3RyZWFtDQo+ICAtIHVwZGF0ZSB0aGUgaGFzaCBvZiB0
-aGUgbGljZW5zZSBiZWNhdXNlIHRoZSBmaWxlICBub3cgY29udGFpbnMgYSBTUERYDQo+IGxpY2Vu
-c2UgaWRlbnRpZmllcg0KPiANCj4gQkFDS1BPUlQgZnJvbSBvcGVuZW1iZWRkZWQgbWFzdGVyDQo+
-IA0KPiBTaWduZWQtb2ZmLWJ5OiBQaWVycmUtSmVhbiBUZXhpZXIgPHBqdGV4aWVyQGtvbmNlcHRv
-LmlvPg0KPiBTaWduZWQtb2ZmLWJ5OiBLaGVtIFJhaiA8cmFqLmtoZW1AZ21haWwuY29tPg0KPiBT
-aWduZWQtb2ZmLWJ5OiBKYWV3b24gTGVlIDxqYWV3b24ubGVlQHhpbGlueC5jb20+DQo+IC0tLQ0K
-PiAgLi4uby1maW5kLVNJT0NHU1RBTVAtd2l0aC1sYXRlc3Qta2VybmVsLnBhdGNoIHwgMTA2IC0t
-LS0tLS0tLS0tLS0tLS0tLQ0KPiAgLi4uL3NvY2tldGNhbi9jYW4tdXRpbHNfZ2l0LmJiICAgICAg
-ICAgICAgICAgIHwgICA5ICstDQo+ICAyIGZpbGVzIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwg
-MTExIGRlbGV0aW9ucygtKSAgZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtDQo+IG9lL3JlY2lwZXMt
-ZXh0ZW5kZWQvc29ja2V0Y2FuL2Nhbi11dGlscy8wMDAxLWZpeC1pbmNsdWRlLXRvLWZpbmQtDQo+
-IFNJT0NHU1RBTVAtd2l0aC1sYXRlc3Qta2VybmVsLnBhdGNoDQo+IA0KPiBkaWZmIC0tZ2l0IGEv
-bWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3NvY2tldGNhbi9jYW4tdXRpbHMvMDAwMS1maXgtaW5j
-bHVkZS0NCj4gdG8tZmluZC1TSU9DR1NUQU1QLXdpdGgtbGF0ZXN0LWtlcm5lbC5wYXRjaCBiL21l
-dGEtb2UvcmVjaXBlcy0NCj4gZXh0ZW5kZWQvc29ja2V0Y2FuL2Nhbi11dGlscy8wMDAxLWZpeC1p
-bmNsdWRlLXRvLWZpbmQtU0lPQ0dTVEFNUC13aXRoLQ0KPiBsYXRlc3Qta2VybmVsLnBhdGNoDQo+
-IGRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCBjYmYzYWVlMTAuLjAwMDAwMDAwMA0K
-PiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvc29ja2V0Y2FuL2Nhbi11dGlscy8wMDAx
-LWZpeC1pbmNsdWRlLXRvLQ0KPiBmaW5kLVNJT0NHU1RBTVAtd2l0aC1sYXRlc3Qta2VybmVsLnBh
-dGNoDQo+ICsrKyAvZGV2L251bGwNCj4gQEAgLTEsMTA2ICswLDAgQEANCj4gLUZyb20gMjA5ODFj
-OGEzMjg3NDdmODIzYjdlZWY2OGQwYzI4MTJiM2VhZWQzMCBNb24gU2VwIDE3IDAwOjAwOjAwDQo+
-IDIwMDENCj4gLUZyb206IEZhYnJpY2UgRm9udGFpbmUgPGZvbnRhaW5lLmZhYnJpY2VAZ21haWwu
-Y29tPg0KPiAtRGF0ZTogU3VuLCAxNCBKdWwgMjAxOSAyMTo1MDo0MyArMDIwMA0KPiAtU3ViamVj
-dDogW1BBVENIXSBmaXggaW5jbHVkZSB0byBmaW5kIFNJT0NHU1RBTVAgd2l0aCBsYXRlc3Qga2Vy
-bmVsDQo+IC0NCj4gLUluIGxpbnV4IGtlcm5lbCBjb21taXQgMDc2OGUxNzA3M2RjNTI3Y2NkMThl
-ZDVmOTZjZTg1Zjk5ODVlOTExNQ0KPiAtdGhlIGFzbS1nZW5lcmljL3NvY2tpb3MuaCBoZWFkZXIg
-bm8gbG9uZ2VyIGRlZmluZXMgU0lPQ0dTVEFNUC4NCj4gLUluc3RlYWQgaXQgcHJvdmlkZXMgb25s
-eSBTSU9DR1NUQU1QX09MRC4NCj4gLQ0KPiAtVGhlIGxpbnV4L3NvY2tpb3MuaCBoZWFkZXIgbm93
-IGRlZmluZXMgU0lPQ0dTVEFNUCB1c2luZyBlaXRoZXIgLQ0KPiBTSU9DR1NUQU1QX09MRCBvciBT
-SU9DR1NUQU1QX05FVyBhcyBhcHByb3ByaWF0ZS4gVGhpcyBsaW51eCBvbmx5IC0NCj4gaGVhZGVy
-IGZpbGUgaXMgbm90IHB1bGxlZCBzbyB3ZSBnZXQgYSBidWlsZCBmYWlsdXJlLg0KPiAtDQo+IC1j
-YW5sb2dzZXJ2ZXIuYzogSW4gZnVuY3Rpb24gJ21haW4nOg0KPiAtY2FubG9nc2VydmVyLmM6NDA0
-OjIxOiBlcnJvcjogJ1NJT0NHU1RBTVAnIHVuZGVjbGFyZWQgKGZpcnN0IHVzZSBpbiB0aGlzDQo+
-IGZ1bmN0aW9uKTsgZGlkIHlvdSBtZWFuICdTSU9DR1JBUlAnPw0KPiAtICAgICBpZiAoaW9jdGwo
-c1tpXSwgU0lPQ0dTVEFNUCwgJnR2KSA8IDApDQo+IC0gICAgICAgICAgICAgICAgICAgICBefn5+
-fn5+fn5+DQo+IC0gICAgICAgICAgICAgICAgICAgICBTSU9DR1JBUlANCj4gLWNhbmxvZ3NlcnZl
-ci5jOjQwNDoyMTogbm90ZTogZWFjaCB1bmRlY2xhcmVkIGlkZW50aWZpZXIgaXMgcmVwb3J0ZWQg
-b25seQ0KPiBvbmNlIGZvciBlYWNoIGZ1bmN0aW9uIGl0IGFwcGVhcnMgaW4NCj4gLQ0KPiAtRml4
-ZXM6DQo+IC0gLQ0KPiBodHRwOi8vYXV0b2J1aWxkLmJ1aWxkcm9vdC5vcmcvcmVzdWx0cy8zNjNk
-ZTdkOWJmNDMzYmU4YmM0N2JhNGVlNTJhZTBiDQo+IGI4MGZhOTAyMQ0KPiAtDQo+IC1VcHN0cmVh
-bS1TdGF0dXM6IEJhY2twb3J0IFtodHRwczovL2dpdGh1Yi5jb20vbGludXgtY2FuL2Nhbi0NCj4g
-dXRpbHMvY29tbWl0L2U5NTkwYjFjYTc1ZDM2MGVhZjMyMTFiZWJkODYwNTgyMTRkNDgwNjRdDQo+
-IC1TaWduZWQtb2ZmLWJ5OiBGYWJyaWNlIEZvbnRhaW5lIDxmb250YWluZS5mYWJyaWNlQGdtYWls
-LmNvbT4NCj4gLS0tLQ0KPiAtIGNhbmxvZ3NlcnZlci5jIHwgMSArDQo+IC0gY2Fuc25pZmZlci5j
-ICAgfCAxICsNCj4gLSBpc290cGR1bXAuYyAgICB8IDEgKw0KPiAtIGlzb3RwcGVyZi5jICAgIHwg
-MSArDQo+IC0gaXNvdHBzbmlmZmVyLmMgfCAxICsNCj4gLSBzbGNhbnB0eS5jICAgICB8IDEgKw0K
-PiAtIDYgZmlsZXMgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspDQo+IC0NCj4gLWRpZmYgLS1naXQg
-YS9jYW5sb2dzZXJ2ZXIuYyBiL2NhbmxvZ3NlcnZlci5jIC1pbmRleCBlMzM1MGI3Li5mNTMxNjVj
-IDEwMDY0NA0KPiAtLS0tIGEvY2FubG9nc2VydmVyLmMNCj4gLSsrKyBiL2NhbmxvZ3NlcnZlci5j
-DQo+IC1AQCAtNjEsNiArNjEsNyBAQA0KPiAtDQo+IC0gI2luY2x1ZGUgPGxpbnV4L2Nhbi5oPg0K
-PiAtICNpbmNsdWRlIDxsaW51eC9jYW4vcmF3Lmg+DQo+IC0rI2luY2x1ZGUgPGxpbnV4L3NvY2tp
-b3MuaD4NCj4gLSAjaW5jbHVkZSA8c2lnbmFsLmg+DQo+IC0gI2luY2x1ZGUgPGVycm5vLmg+DQo+
-IC0NCj4gLWRpZmYgLS1naXQgYS9jYW5zbmlmZmVyLmMgYi9jYW5zbmlmZmVyLmMgLWluZGV4IDdi
-MGEzZmEuLmJmN2Q3MmUgMTAwNjQ0DQo+IC0tLS0gYS9jYW5zbmlmZmVyLmMNCj4gLSsrKyBiL2Nh
-bnNuaWZmZXIuYw0KPiAtQEAgLTYxLDYgKzYxLDcgQEANCj4gLQ0KPiAtICNpbmNsdWRlIDxsaW51
-eC9jYW4uaD4NCj4gLSAjaW5jbHVkZSA8bGludXgvY2FuL2JjbS5oPg0KPiAtKyNpbmNsdWRlIDxs
-aW51eC9zb2NraW9zLmg+DQo+IC0NCj4gLSAjaW5jbHVkZSAidGVybWluYWwuaCINCj4gLQ0KPiAt
-ZGlmZiAtLWdpdCBhL2lzb3RwZHVtcC5jIGIvaXNvdHBkdW1wLmMNCj4gLWluZGV4IGIyYjY1MGEu
-LjM2ZDhhZjMgMTAwNjQ0DQo+IC0tLS0gYS9pc290cGR1bXAuYw0KPiAtKysrIGIvaXNvdHBkdW1w
-LmMNCj4gLUBAIC01NSw2ICs1NSw3IEBADQo+IC0NCj4gLSAjaW5jbHVkZSA8bGludXgvY2FuLmg+
-DQo+IC0gI2luY2x1ZGUgPGxpbnV4L2Nhbi9yYXcuaD4NCj4gLSsjaW5jbHVkZSA8bGludXgvc29j
-a2lvcy5oPg0KPiAtICNpbmNsdWRlICJ0ZXJtaW5hbC5oIg0KPiAtDQo+IC0gI2RlZmluZSBOT19D
-QU5fSUQgMHhGRkZGRkZGRlUNCj4gLWRpZmYgLS1naXQgYS9pc290cHBlcmYuYyBiL2lzb3RwcGVy
-Zi5jDQo+IC1pbmRleCBkYjNhMmI3Li41ODUyYTU3IDEwMDY0NA0KPiAtLS0tIGEvaXNvdHBwZXJm
-LmMNCj4gLSsrKyBiL2lzb3RwcGVyZi5jDQo+IC1AQCAtNTYsNiArNTYsNyBAQA0KPiAtDQo+IC0g
-I2luY2x1ZGUgPGxpbnV4L2Nhbi5oPg0KPiAtICNpbmNsdWRlIDxsaW51eC9jYW4vcmF3Lmg+DQo+
-IC0rI2luY2x1ZGUgPGxpbnV4L3NvY2tpb3MuaD4NCj4gLQ0KPiAtICNkZWZpbmUgTk9fQ0FOX0lE
-IDB4RkZGRkZGRkZVDQo+IC0gI2RlZmluZSBQRVJDRU5UUkVTIDIgLyogcmVzb2x1dGlvbiBpbiBw
-ZXJjZW50IGZvciBiYXJncmFwaCAqLyAtZGlmZiAtLWdpdA0KPiBhL2lzb3Rwc25pZmZlci5jIGIv
-aXNvdHBzbmlmZmVyLmMgLWluZGV4IGY0MmUxOGIuLmQ3YTRjNjYgMTAwNjQ0DQo+IC0tLS0gYS9p
-c290cHNuaWZmZXIuYw0KPiAtKysrIGIvaXNvdHBzbmlmZmVyLmMNCj4gLUBAIC01NSw2ICs1NSw3
-IEBADQo+IC0NCj4gLSAjaW5jbHVkZSA8bGludXgvY2FuLmg+DQo+IC0gI2luY2x1ZGUgPGxpbnV4
-L2Nhbi9pc290cC5oPg0KPiAtKyNpbmNsdWRlIDxsaW51eC9zb2NraW9zLmg+DQo+IC0gI2luY2x1
-ZGUgInRlcm1pbmFsLmgiDQo+IC0NCj4gLSAjZGVmaW5lIE5PX0NBTl9JRCAweEZGRkZGRkZGVQ0K
-PiAtZGlmZiAtLWdpdCBhL3NsY2FucHR5LmMgYi9zbGNhbnB0eS5jDQo+IC1pbmRleCA0MzFjYTY4
-Li43ZGZhZjVjIDEwMDY0NA0KPiAtLS0tIGEvc2xjYW5wdHkuYw0KPiAtKysrIGIvc2xjYW5wdHku
-Yw0KPiAtQEAgLTQwLDYgKzQwLDcgQEANCj4gLQ0KPiAtICNpbmNsdWRlIDxsaW51eC9jYW4uaD4N
-Cj4gLSAjaW5jbHVkZSA8bGludXgvY2FuL3Jhdy5oPg0KPiAtKyNpbmNsdWRlIDxsaW51eC9zb2Nr
-aW9zLmg+DQo+IC0NCj4gLSAvKiBtYXhpbXVtIHJ4IGJ1ZmZlciBsZW46IGV4dGVuZGVkIENBTiBm
-cmFtZSB3aXRoIHRpbWVzdGFtcCAqLw0KPiAtICNkZWZpbmUgU0xDX01UVSAoc2l6ZW9mKCJUMTEx
-MTIyMjI4MTEyMjMzNDQ1NTY2Nzc4OEVBNUZcciIpKzEpDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9l
-L3JlY2lwZXMtZXh0ZW5kZWQvc29ja2V0Y2FuL2Nhbi11dGlsc19naXQuYmIgYi9tZXRhLQ0KPiBv
-ZS9yZWNpcGVzLWV4dGVuZGVkL3NvY2tldGNhbi9jYW4tdXRpbHNfZ2l0LmJiDQo+IGluZGV4IGRi
-NTA1NWZlZC4uZTI2MDlkNDExIDEwMDY0NA0KPiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5k
-ZWQvc29ja2V0Y2FuL2Nhbi11dGlsc19naXQuYmINCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWV4
-dGVuZGVkL3NvY2tldGNhbi9jYW4tdXRpbHNfZ2l0LmJiDQo+IEBAIC0xLDE0ICsxLDEzIEBADQo+
-ICBTVU1NQVJZID0gIkxpbnV4IENBTiBuZXR3b3JrIGRldmVsb3BtZW50IHV0aWxpdGllcyINCj4g
-IERFU0NSSVBUSU9OID0gIkxpbnV4IENBTiBuZXR3b3JrIGRldmVsb3BtZW50Ig0KPiAgTElDRU5T
-RSA9ICJHUEx2MiAmIEJTRC0zLUNsYXVzZSINCj4gLUxJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmls
-ZTovL2luY2x1ZGUvbGludXgvY2FuLmg7ZW5kbGluZT00MzttZDU9MzkwYTJjOWEzYzVlMzU5NWEw
-NjlhYzE0MzY1DQo+IDUzZWU3Ig0KPiArTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxlOi8vaW5j
-bHVkZS9saW51eC9jYW4uaDtlbmRsaW5lPTQ0O21kNT1hOWUxMTY5YzZjOWExMTRhNjEzMjllOTlm
-ODYNCj4gZmRkMzEiDQo+IA0KPiAgREVQRU5EUyA9ICJsaWJzb2NrZXRjYW4iDQo+IA0KPiAtU1JD
-X1VSSSA9ICJnaXQ6Ly9naXRodWIuY29tL2xpbnV4LQ0KPiBjYW4vJHtCUE59LmdpdDtwcm90b2Nv
-bD1naXQ7YnJhbmNoPW1hc3RlciBcDQo+IC0gICAgICAgICAgIGZpbGU6Ly8wMDAxLWZpeC1pbmNs
-dWRlLXRvLWZpbmQtU0lPQ0dTVEFNUC13aXRoLWxhdGVzdC1rZXJuZWwucGF0Y2ggXA0KPiAtICAg
-ICAgICAgICAiDQo+IC1TUkNSRVYgPSAiNGM4ZmIwNWNiNGQ2ZGRjZDY3Mjk5MDA4ZGI1NGFmNDIz
-Zjg2ZmQwNSINCj4gK1NSQ19VUkkgPSAiZ2l0Oi8vZ2l0aHViLmNvbS9saW51eC0NCj4gY2FuLyR7
-QlBOfS5naXQ7cHJvdG9jb2w9Z2l0O2JyYW5jaD1tYXN0ZXIiDQo+ICsNCj4gK1NSQ1JFViA9ICI2
-NjVkODY5OWViZTcyOGJmNDhlNjNlOGFlNThkMjQ4MmRiNzJmOTU0Ig0KPiANCj4gIFBWID0gIjAu
-MCtnaXRyJHtTUkNQVn0iDQo+IA0KPiAtLQ0KPiAyLjI1LjANCg0K
+From: Jeremy Puhlman <jpuhlman@mvista.com>
+
+[2020-02-16T22:13:56.331425] WARNING: Configuration file format is too old, syslog-ng is running in compatibility mode. Please update it to use the syslo
+g-ng 3.24 format at your time of convenience. To upgrade the configuration, please review the warnings about incompatible changes printed by syslog-ng, a
+nd once completed change the @version header at the top of the configuration file
+
+Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
+---
+ meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd  | 2 +-
+ meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
+index 965abf722..6a8627672 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.systemd
+@@ -1,4 +1,4 @@
+-@version: 3.19
++@version: 3.24
+ #
+ # Syslog-ng configuration file, compatible with default Debian syslogd
+ # installation. Originally written by anonymous (I can't find his name)
+diff --git a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
+index 2b39b8c1f..32b98610d 100644
+--- a/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
++++ b/meta-oe/recipes-support/syslog-ng/files/syslog-ng.conf.sysvinit
+@@ -1,4 +1,4 @@
+-@version: 3.19
++@version: 3.24
+ #
+ # Syslog-ng configuration file, compatible with default Debian syslogd
+ # installation. Originally written by anonymous (I can't find his name)
+-- 
+2.13.3
+
 
