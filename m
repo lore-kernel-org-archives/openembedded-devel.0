@@ -1,35 +1,33 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id C5DBC6023B
+	by mail.openembedded.org (Postfix) with ESMTP id F1FF36174D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 20:47:47 +0000 (UTC)
+	Fri, 21 Feb 2020 20:49:27 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48PNnc33Pmz4c
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48PNqX4q5jz40
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 21:47:48 +0100 (CET)
+	Fri, 21 Feb 2020 21:49:28 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1582318068;
-	bh=z9D/XFff0MBRYzyvyoP4rXSR5Md51v6br7AaI2kDE4c=;
-	h=From:To:Subject:Date:In-Reply-To:References:From;
-	b=TULwokGaGKe7EH7+9wGh1JlsspqeWeoHgswlHGRcKT8EGA2UzOvxPvPKPhhtokWsx
-	jHcV1qUlJ4tlyFEW2ssxco8/yr6GMyORdSMWUSlScrgoaxnUVA/+0V3tiQ7EbiaN4u
-	OJbJ+GnKdOFU3LM6grsYsbo89BptFe9b+phYtVixZSE49QrQvZ8mlTH9r15rZoya8O
-	lLsL/kmUPKSVLXAkQ/WcohYsQIS04CkXiSz7nRevwlx3e0w34T4BfIVmrVz0JfLjwS
-	w6P7VsvkR3earD7jUvp3eS3s2zN5FuOS+OBCCMOvazV49ahVl7e5/7P2XcrsgD+FHb
-	//VOZ7l3t273h4HcpcpdGuIBLAiUPNMBi1iNET0AWkQYp+cxiDgc53A+qEKgYA+sxV
-	pHyabSGUT0NjnTi6LrwaeI/B188agf/te3R9kgx0cXZ811wAcknqhZav0/SjBd4vaP
-	sfu/dbcpj2j5K6xZQJPVAAGGqUkvWOfrGBf5Tsk/zzOQVJievu9rRSOzuuHd6SjUmS
-	brhOcBkz9JnJ/yLFFVyr4ZyDLi5AZdhhPEtUPce5O5MMeTPtqgjUQzZTDj/D4u0JRN
-	ZHhWRor5JCwn9J/TsdyoxaIus52YSIL28eMhWcNfDeKVk7ZvMk0KT9zPGd543arZFf
-	HdOuH5XbfXrn41MEo8htfJxY=
+	s=default; t=1582318168;
+	bh=SclTLlADbTlqiJV1V6vDLzIiFAV/b5+6MAGcs8rLhuA=;
+	h=From:To:Subject:Date:From;
+	b=VxDTkpW0EDJxs2d09TWrOQk2RIxezxvmVIcg1d5JoNbV7U42tc5pB+hulNH5xsngV
+	5pqJZ/4/MLM76X/LyXLYHkJu4YFAmXZFl34DOauwFeq1zIauKveTdO5LXeSuhwqJzz
+	1Trv8iW8V6kQW6UleWA3Zp9UsmRdsBkQTVRmeD6dJWGc2ABXdHIootifk+iSrdMGGo
+	F1q//0cPQyLjg4V03hU+W92TRXXQ1m5urHz+iVN+P5ZX5ixmR8b2f6YEA4guNX81Br
+	vmphcbwk9k7YQp89RSIAWjGTduKSn2P0FgmmTeLyA8Jakei2RaWmZn9CzYmrLwujUT
+	h4F9xa7tHDcIDZQl5Ut8B1f1/hIdoD5N6i90l2VG5s5nAacrNAFHd2K+lsOwMPhENa
+	bOgL5kKMJ0adE9xqHkbCzmsdL2a1j/H/GyJwX8h2yZiyD3MXu98go9oScqiVJWTIId
+	0otcurryBPuL+dqUI0BoDdyQfpVRPsOOJXcvObQSXZPLqO81qmD9YeTXt1We35Lda+
+	vwAQkLrB+ZnusWBtg5FssnK1QPQ2oF9tPDmqO5JDu4sswFxpuw5JiR/m6m0acJv2og
+	AJm6PsNBxJAnXcKit1KzZSz+tOYzU6VvsViL/DfbCqNW0piuINX0EMPHO01WH9pcAQ
+	wfOkaADd99Wj4RPTdAfKZbzM=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Feb 2020 22:47:46 +0200
-Message-Id: <20200221204746.14560-2-bunk@stusta.de>
+Date: Fri, 21 Feb 2020 22:49:25 +0200
+Message-Id: <20200221204927.13293-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200221204746.14560-1-bunk@stusta.de>
-References: <20200221204746.14560-1-bunk@stusta.de>
-Subject: [meta-networking][warrior][PATCH 2/2] wireshark: Upgrade 3.0.6 -> 3.0.8
+Subject: [meta-networking][warrior][PATCH] freeradius: fix CVE-2019-10143
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,35 +40,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 20:47:48 -0000
+X-List-Received-Date: Fri, 21 Feb 2020 20:49:28 -0000
 
-Upgrade on the 3.0 stable branch,
-including fixes for CVE-2019-19553 and CVE-2020-7045.
+From: Yi Zhao <yi.zhao@windriver.com>
 
+Reference:
+https://nvd.nist.gov/vuln/detail/CVE-2019-10143
+
+Patch from:
+https://github.com/FreeRADIUS/freeradius-server/commit/1f233773962bf1a9c2d228a180eacddb9db2d574
+
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../wireshark/{wireshark_3.0.6.bb => wireshark_3.0.8.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_3.0.6.bb => wireshark_3.0.8.bb} (95%)
+ ...adiusd-user-group-when-rotating-logs.patch | 104 ++++++++++++++++++
+ .../freeradius/freeradius_3.0.17.bb           |   1 +
+ 2 files changed, 105 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.8.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_3.0.8.bb
-index 9436231cd..1c0ededf2 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.8.bb
-@@ -12,8 +12,8 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--SRC_URI[md5sum] = "c6f8d12a3efe21cc7885f7cb0c4bd938"
--SRC_URI[sha256sum] = "a87f4022a0c15ddbf1730bf1acafce9e75a4e657ce9fa494ceda0324c0c3e33e"
-+SRC_URI[md5sum] = "034f09e639fb4efebbc08af7b2a85333"
-+SRC_URI[sha256sum] = "b4bd8189934d82330a053c5b10398f2b625b1e1c8818831ab61739b2d7aa7561"
- 
- PE = "1"
- 
+diff --git a/meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch b/meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
+new file mode 100644
+index 000000000..5859dc7ed
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/freeradius/files/0001-su-to-radiusd-user-group-when-rotating-logs.patch
+@@ -0,0 +1,104 @@
++From 1f233773962bf1a9c2d228a180eacddb9db2d574 Mon Sep 17 00:00:00 2001
++From: Alexander Scheel <ascheel@redhat.com>
++Date: Tue, 7 May 2019 16:04:29 -0400
++Subject: [PATCH] su to radiusd user/group when rotating logs
++
++The su directive to logrotate ensures that log rotation happens under the
++owner of the logs. Otherwise, logrotate runs as root:root, potentially
++enabling privilege escalation if a RCE is discovered against the
++FreeRADIUS daemon.
++
++Signed-off-by: Alexander Scheel <ascheel@redhat.com>
++
++Upstream-Status: Backport
++[https://github.com/FreeRADIUS/freeradius-server/commit/1f233773962bf1a9c2d228a180eacddb9db2d574]
++
++CVE: CVE-2019-10143
++
++Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
++---
++ debian/freeradius.logrotate  | 3 +++
++ redhat/freeradius-logrotate  | 1 +
++ scripts/logrotate/freeradius | 3 +++
++ suse/radiusd-logrotate       | 1 +
++ 4 files changed, 8 insertions(+)
++
++diff --git a/debian/freeradius.logrotate b/debian/freeradius.logrotate
++index 7d837d5..a8d29b7 100644
++--- a/debian/freeradius.logrotate
+++++ b/debian/freeradius.logrotate
++@@ -9,6 +9,7 @@
++ 	notifempty
++ 
++ 	copytruncate
+++	su freerad freerad
++ }
++ 
++ # (in order)
++@@ -26,6 +27,7 @@
++ 	notifempty
++ 
++ 	nocreate
+++	su freerad freerad
++ }
++ 
++ # There are different detail-rotating strategies you can use.  One is
++@@ -45,4 +47,5 @@
++ 	notifempty
++ 
++ 	nocreate
+++	su freerad freerad
++ }
++diff --git a/redhat/freeradius-logrotate b/redhat/freeradius-logrotate
++index 360765d..bb97ca5 100644
++--- a/redhat/freeradius-logrotate
+++++ b/redhat/freeradius-logrotate
++@@ -9,6 +9,7 @@ rotate 4
++ missingok
++ compress
++ delaycompress
+++su radiusd radiusd
++ 
++ #
++ #  The main server log
++diff --git a/scripts/logrotate/freeradius b/scripts/logrotate/freeradius
++index 3de435e..eecf631 100644
++--- a/scripts/logrotate/freeradius
+++++ b/scripts/logrotate/freeradius
++@@ -17,6 +17,7 @@
++ 	notifempty
++ 
++ 	copytruncate
+++	su radiusd radiusd
++ }
++ 
++ # (in order)
++@@ -34,6 +35,7 @@
++ 	notifempty
++ 
++ 	nocreate
+++	su radiusd radiusd
++ }
++ 
++ # There are different detail-rotating strategies you can use.  One is
++@@ -53,4 +55,5 @@
++ 	notifempty
++ 
++ 	nocreate
+++	su radiusd radiusd
++ }
++diff --git a/suse/radiusd-logrotate b/suse/radiusd-logrotate
++index 24d56be..be5a797 100644
++--- a/suse/radiusd-logrotate
+++++ b/suse/radiusd-logrotate
++@@ -11,6 +11,7 @@ missingok
++ compress
++ delaycompress
++ notifempty
+++su radiusd radiusd
++ 
++ #
++ #  The main server log
++-- 
++2.7.4
++
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
+index e0b04c110..ea71eb225 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.17.bb
+@@ -27,6 +27,7 @@ SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.b
+     file://freeradius-fix-quoting-for-BUILT_WITH.patch \
+     file://freeradius-fix-error-for-expansion-of-macro.patch \
+     file://0001-rlm_mschap-Use-includedir-instead-of-hardcoding-usr-.patch \
++    file://0001-su-to-radiusd-user-group-when-rotating-logs.patch \
+     file://radiusd.service \
+     file://radiusd-volatiles.conf \
+     file://0001-freeradius-correct-version-number-of-libssl-defect.patch \
 -- 
 2.17.1
 
