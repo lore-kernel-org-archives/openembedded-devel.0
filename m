@@ -1,57 +1,25 @@
-Return-Path: <leo.yan@linaro.org>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FD7160ADF
+Return-Path: <Li.Zhou@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E149961629
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 09:03:31 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id c23so576763plz.4
+	Fri, 21 Feb 2020 09:16:17 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 01L9GI58024247
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 01:03:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=93BQgj+TbSC8qCxEWK958gvId2Ywq+9HAx/TKBuq4oo=;
-	b=br5RlnQQgIyjbDQcKccEDRLzIzid+Iws9myEmOBKcxbcgL6CCsroAJ4C/tpgQZ7uKT
-	yBTZkLN9nffpJmmjYG52R9AALE6rYZUlA/J1uOvaoHbeQX4QtTjjRVNJVil4mS4zpzdY
-	m6aukyEma0h6yD0ooKT4w5mTx9eeMFuIxNJ2m118HzXOT1Bj6L+9uN4yfQbuJudgI4uL
-	pN6jNnlpbAiU3ndTNwJx8owmuw4CZ4ih5YdL4CKeKzc24UwgBJYgTqze4hr8k9d/c0aJ
-	dxwC0DxyKZug/aAS58xPx5WHTlKHkuMngis8xL4D58/T5HXC2x1Nk3Sz0kCzN1e8voM6
-	pg6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=93BQgj+TbSC8qCxEWK958gvId2Ywq+9HAx/TKBuq4oo=;
-	b=HbCX4Wl8W4+fNs11dgprjZ7l82OOGvfys7lq8gUdKPBJRS8kdJ2oII/fTznVRRtmFc
-	2lDe1SU0cGfQZ3aK2kLWpp5Tf4XyrowCwNkdupNzLBibnNEJ8zsekIIQhNbSb1TsraVf
-	ePiP7bu6JRaeBGAeGhibVbl92+2Kk9HrW9kJkA5CdPBF4VoEIdvyjgmZNG4fHmyQzaZa
-	lOv36kP8264WtZ/5mnai3PJP1C2CIHvH6g5RsMXmngY4sAGGIziAZB2UImwX/Ow3k0wI
-	sJOi0Zhr1sKbpveriYiTaHx/r4Nlt9+zKgpep4U2SVcJsG40up9u0FDSWlc36DiGkRnN
-	HxCw==
-X-Gm-Message-State: APjAAAXU002XA7EBCMb3XndOHrTbvaWXMRDvtwczrzr31jo01M0eecYT
-	78kI7D38ZS82qZ/LMwg7ZeAjjw==
-X-Google-Smtp-Source: APXvYqwJ90VyCULr7DhNSxo79JRk0VLo8Pk/UXB4btp5ld1sTSCK8h45VPBHkmnJPW9ipYyBEF0vuQ==
-X-Received: by 2002:a17:90b:3c9:: with SMTP id go9mr1922628pjb.7.1582275812324;
-	Fri, 21 Feb 2020 01:03:32 -0800 (PST)
-Received: from leoy-ThinkPad-X240s ([2400:8904::f03c:91ff:fe8a:bbb8])
-	by smtp.gmail.com with ESMTPSA id
-	w17sm2050003pfi.56.2020.02.21.01.03.25
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 21 Feb 2020 01:03:31 -0800 (PST)
-Date: Fri, 21 Feb 2020 17:03:20 +0800
-From: Leo Yan <leo.yan@linaro.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20200221090320.GA13327@leoy-ThinkPad-X240s>
-References: <20200218052544.9467-1-leo.yan@linaro.org>
-	<20200218052544.9467-2-leo.yan@linaro.org>
-	<CAMKF1sordwdPV8=vvtakN4vb=MugUqY0f4k9P3ewpyR_9x63ZA@mail.gmail.com>
+	Fri, 21 Feb 2020 01:16:18 -0800 (PST)
+Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Fri, 21 Feb 2020 01:16:05 -0800
+From: Li Zhou <li.zhou@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 21 Feb 2020 17:15:31 +0800
+Message-ID: <1582276531-249476-1-git-send-email-li.zhou@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sordwdPV8=vvtakN4vb=MugUqY0f4k9P3ewpyR_9x63ZA@mail.gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v1 1/4] Ply: Add recipe for git version
+X-Originating-IP: [128.224.153.75]
+Subject: [meta-oe][PATCH] php: Security Advisory - php - CVE-2020-7059
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,25 +32,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 09:03:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 21 Feb 2020 09:16:18 -0000
+Content-Type: text/plain
 
-Hi Khem,
+Backport the patch <http://git.php.net/?p=php-src.git;a=commit;
+h=0f79b1bf301f455967676b5129240140c5c45b09> to solve CVE-2020-7059.
+Because of the version context, this porting mainly refers to the
+version merging commit <http://git.php.net/?p=php-src.git;a=commit;
+h=a8a6242db7c01bb2d87f29e9b8d5ff3f0f847645>
 
-On Thu, Feb 20, 2020 at 07:41:35AM -0800, Khem Raj wrote:
-> fails to build fot x86/musl
-> http://errors.yoctoproject.org/Errors/Details/391871/
+Signed-off-by: Li Zhou <li.zhou@windriver.com>
+---
+ .../recipes-devtools/php/php/CVE-2020-7059.patch   | 86 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/php/php_7.3.11.bb         |  1 +
+ 2 files changed, 87 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7059.patch
 
-Ply doesn't support x86 and it supports x86_64.  Will fix the dependency
-issue in the new patch with adding two lines:
+diff --git a/meta-oe/recipes-devtools/php/php/CVE-2020-7059.patch b/meta-oe/recipes-devtools/php/php/CVE-2020-7059.patch
+new file mode 100644
+index 0000000..f7d3ab6
+--- /dev/null
++++ b/meta-oe/recipes-devtools/php/php/CVE-2020-7059.patch
+@@ -0,0 +1,86 @@
++From 1adaab3aa81fa9b48e351b5644d9fee70f2fe73f Mon Sep 17 00:00:00 2001
++From: Li Zhou <li.zhou@windriver.com>
++Date: Thu, 20 Feb 2020 02:05:52 -0800
++Subject: [PATCH] Fix #79099: OOB read in php_strip_tags_ex
++
++Upstream-Status: Backport
++CVE: CVE-2020-7059
++Signed-off-by: Li Zhou <li.zhou@windriver.com>
++---
++ ext/standard/string.c                 |  6 +++---
++ ext/standard/tests/file/bug79099.phpt | 32 ++++++++++++++++++++++++++++++++
++ 2 files changed, 35 insertions(+), 3 deletions(-)
++ create mode 100644 ext/standard/tests/file/bug79099.phpt
++
++diff --git a/ext/standard/string.c b/ext/standard/string.c
++index dde97fa..2213d8d 100644
++--- a/ext/standard/string.c
+++++ b/ext/standard/string.c
++@@ -5163,7 +5163,7 @@ state_1:
++ 			}
++ 
++ 			lc = '>';
++-			if (is_xml && *(p -1) == '-') {
+++			if (is_xml && p >= buf + 1 && *(p -1) == '-') {
++ 				break;
++ 			}
++ 			in_q = state = is_xml = 0;
++@@ -5195,7 +5195,7 @@ state_1:
++ 			goto reg_char_1;
++ 		case '!':
++ 			/* JavaScript & Other HTML scripting languages */
++-			if (*(p-1) == '<') {
+++			if (p >= buf + 1 && *(p-1) == '<') {
++ 				state = 3;
++ 				lc = c;
++ 				p++;
++@@ -5205,7 +5205,7 @@ state_1:
++ 			}
++ 			break;
++ 		case '?':
++-			if (*(p-1) == '<') {
+++			if (p >= buf + 1 && *(p-1) == '<') {
++ 				br=0;
++ 				state = 2;
++ 				p++;
++diff --git a/ext/standard/tests/file/bug79099.phpt b/ext/standard/tests/file/bug79099.phpt
++new file mode 100644
++index 0000000..a1f2a33
++--- /dev/null
+++++ b/ext/standard/tests/file/bug79099.phpt
++@@ -0,0 +1,32 @@
+++--TEST--
+++Bug #79099 (OOB read in php_strip_tags_ex)
+++--FILE--
+++<?php
+++$stream = fopen('php://memory', 'w+');
+++fputs($stream, "<?\n\"\n");
+++rewind($stream);
+++var_dump(@fgetss($stream));
+++var_dump(@fgetss($stream));
+++fclose($stream);
+++
+++$stream = fopen('php://memory', 'w+');
+++fputs($stream, "<\0\n!\n");
+++rewind($stream);
+++var_dump(@fgetss($stream));
+++var_dump(@fgetss($stream));
+++fclose($stream);
+++
+++$stream = fopen('php://memory', 'w+');
+++fputs($stream, "<\0\n?\n");
+++rewind($stream);
+++var_dump(@fgetss($stream));
+++var_dump(@fgetss($stream));
+++fclose($stream);
+++?>
+++--EXPECT--
+++string(0) ""
+++string(0) ""
+++string(0) ""
+++string(0) ""
+++string(0) ""
+++string(0) ""
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/php/php_7.3.11.bb b/meta-oe/recipes-devtools/php/php_7.3.11.bb
+index e7fb847..ec5fb3b 100644
+--- a/meta-oe/recipes-devtools/php/php_7.3.11.bb
++++ b/meta-oe/recipes-devtools/php/php_7.3.11.bb
+@@ -18,6 +18,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
+            file://0001-Use-pkg-config-for-libxml2-detection.patch \
+            file://debian-php-fixheader.patch \
+            file://CVE-2019-6978.patch \
++           file://CVE-2020-7059.patch \
+           "
+ 
+ SRC_URI_append_class-target = " \
+-- 
+1.9.1
 
-COMPATIBLE_HOST_i586 = 'null'
-COMPATIBLE_HOST_i686 = 'null'
-
-Thanks a lot for the testing; will send new patch with addressing your
-comments and test on qemux86 and qemux86_64.
-
-Thanks,
-Leo
 
