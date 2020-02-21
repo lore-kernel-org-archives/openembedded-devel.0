@@ -1,33 +1,34 @@
 Return-Path: <bunk@stusta.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 549776174D
+	by mail.openembedded.org (Postfix) with ESMTP id B857D6174D
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 21 Feb 2020 20:49:28 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48PNqY0Q7Bz4c
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48PNqY2zS6z4n
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 21:49:28 +0100 (CET)
+	Fri, 21 Feb 2020 21:49:29 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1582318169;
-	bh=c+hHVaKPSzD4NtIr35K79xsy+vFym+r9dW8fNqGvl70=;
+	bh=YWiN2gzO0t1TNWnOfTXjfXBOuCVORZtulf85293ARI4=;
 	h=From:To:Subject:Date:From;
-	b=qdHco5WgArLM2FSOcp3UbRzLcCboT1ne2kzKkcRzOeyENH6Th+NqxkYvMAFy9OP1h
-	7FZKCFchT/+bwyEhPv6O9+RuwKd1OS7xA6R/fMqYZgieAYBGGKXja6TY+IWYfHJQ2Y
-	hKlW9xnM3s2FjvQKTGFxuC9UdiabrSsnG5JWOkM1I0Okv/G0oP62oQ8mDLklkWgh3n
-	mBpHyix7kcI3RAsNQyiX0X8e71HbAd6r9LLACYWm4v1vIjDrgxEmBrX50wHX5i+FES
-	twgk5rcHZCzBpw81uI8mjNdIjbmR+C0Od8hkEwlN90Vc0eunX3V2gM/+XEJ/o7HiOi
-	19iWupQU08WaYDNSKAB6dFEXTZCZHaF490aduwPVPKU3hV+VUKDe3EQsDPbXDdh4EH
-	81srlSO3xM8NozKex7inAJHVPkSH0oXyhhPvLxa9aCVPiApebqc7RtsgMKBQQPIKtB
-	z7551XbmwHT5prUaq87svnPrv+WP3tOhDyjOQfhpvp6v8ENret68nbrR9z3SgCJBrd
-	rJXfHzwRco3aF+M3dviDMq7hfiCTD4Yput04S3G33VZys1PT1bUnSW+tQF7tTOJEl4
-	Yql3bo+DaQhvR1hw9ubgNExJUdnDXjnXP/1HM4PvSSjYqUySg26vR4fDrh5lgI7FCy
-	rUr+dN5pEX8+PWxstD3PhYGM=
+	b=D46RHaPXcuXV7ltAOndSkDSAGdEaaiTCBVDMWFoNTZA/CXSOEq6vwFQP7adp73Gmy
+	AUZY3htYvImOJZvvPo5QBSNU/VF7ENAm5UAi0qG/tCmWscFBbGLy4t6oKsCkaEY+A+
+	Bd8ePN4RjXYzKN6qu/LhVLRqQPODRhRZmADnM5P/MHSqlUKimgOwMGnPZrB08ZR5JU
+	xKwG7cLW0AYRz9G/eSwMVkAleil6V1iof96PlXnS8mHdD/rhY1L1UXL3y+oOAqPeGp
+	NNjKmMYeS2OP2NQrK9hO0758HOxyu/D0PpCYw5KjdVx4ec/GUTUC/8IF3LoIgPsRIa
+	DoLL32LysZNiQRg10CX2OAk4okkQAU1N8FQJH2iRtYawLxqMTejmYDK0LU5xim1w+a
+	IiOi9fMJRPwO0PuHM7gb+xzgbK5QjysKqNrdhtas3biXVe4bNTOGn65qM5PdGVsQ/7
+	CugzLYYLSTv4fGs477Eni6kYQ1FPvNxnYoSVTRc079wDzF7H0tbwAx8Vb4KFq4r9QB
+	GwsTlY68kZANrLPmMNEvHLL+D4MLDRGcjXAwMS4FaYzNjERXfMugOq2hm4OHj9SH7d
+	yVSzMt8lg73nyVuS/huMHrfzoxJdje5YD1jRBzNo28iRRYA9LX4vANCxO44K2o5irn
+	ZoRg6xu/mvSPMbZGedJSuyaE=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Feb 2020 22:49:26 +0200
-Message-Id: <20200221204927.13293-2-bunk@stusta.de>
+Date: Fri, 21 Feb 2020 22:49:27 +0200
+Message-Id: <20200221204927.13293-3-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-networking][warrior][PATCH] dnsmasq: CVE-2019-14834
+MIME-Version: 1.0
+Subject: [meta-networking][warrior][PATCH] networkmanager: Upgrade 1.16.0 -> 1.16.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,89 +41,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 20:49:28 -0000
+X-List-Received-Date: Fri, 21 Feb 2020 20:49:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Zhixiong Chi <zhixiong.chi@windriver.com>
+Upgrade on the 1.16 stable branch.
 
-Backport the CVE patch from the upstream to fix the memory leak.
+Removed patch for issue fixed upstream.
 
-Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit c8ca82feb5d6ceb843aad33dada947b456f7fcac)
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- ...-dnsmasq-fix-memory-leak-in-helper-c.patch | 49 +++++++++++++++++++
- .../recipes-support/dnsmasq/dnsmasq_2.80.bb   |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
+ .../networkmanager/0003-dlopen-failure.patch  | 34 -------------------
+ ...ger_1.16.0.bb => networkmanager_1.16.4.bb} |  5 ++-
+ 2 files changed, 2 insertions(+), 37 deletions(-)
+ delete mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-dlopen-failure.patch
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.16.0.bb => networkmanager_1.16.4.bb} (96%)
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch b/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
-new file mode 100644
-index 000000000..ccd6f82ae
---- /dev/null
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq/0001-dnsmasq-fix-memory-leak-in-helper-c.patch
-@@ -0,0 +1,49 @@
-+From 69bc94779c2f035a9fffdb5327a54c3aeca73ed5 Mon Sep 17 00:00:00 2001
-+From: Simon Kelley <simon@thekelleys.org.uk>
-+Date: Wed, 14 Aug 2019 20:44:50 +0100
-+Subject: [PATCH] Fix memory leak in helper.c
-+
-+Thanks to Xu Mingjie <xumingjie1995@outlook.com> for spotting this.
-+
-+CVE: CVE-2019-14834
-+Upstream-Status: Backport
-+Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
-+---
-+ src/helper.c |   12 +++++++++---
-+ 1 file changed, 9 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/helper.c b/src/helper.c
-+index 33ba120..c392eec 100644
-+--- a/src/helper.c
-++++ b/src/helper.c
-+@@ -82,7 +82,8 @@ int create_helper(int event_fd, int err_fd, uid_t uid, gid_t gid, long max_fd)
-+   pid_t pid;
-+   int i, pipefd[2];
-+   struct sigaction sigact;
-+-
-++  unsigned char *alloc_buff = NULL;
-++  
-+   /* create the pipe through which the main program sends us commands,
-+      then fork our process. */
-+   if (pipe(pipefd) == -1 || !fix_fd(pipefd[1]) || (pid = fork()) == -1)
-+@@ -188,11 +189,16 @@ int create_helper(int event_fd, int err_fd, uid_t uid, gid_t gid, long max_fd)
-+       struct script_data data;
-+       char *p, *action_str, *hostname = NULL, *domain = NULL;
-+       unsigned char *buf = (unsigned char *)daemon->namebuff;
-+-      unsigned char *end, *extradata, *alloc_buff = NULL;
-++      unsigned char *end, *extradata;
-+       int is6, err = 0;
-+       int pipeout[2];
-+ 
-+-      free(alloc_buff);
-++      /* Free rarely-allocated memory from previous iteration. */
-++      if (alloc_buff)
-++	{
-++	  free(alloc_buff);
-++	  alloc_buff = NULL;
-++	}
-+       
-+       /* we read zero bytes when pipe closed: this is our signal to exit */ 
-+       if (!read_write(pipefd[0], (unsigned char *)&data, sizeof(data), 1))
-+-- 
-+1.7.10.4
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-index fdbdefbad..1e5e74bbc 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq_2.80.bb
-@@ -4,5 +4,6 @@ SRC_URI[dnsmasq-2.80.md5sum] = "1f071fd11454e1cffea73bdadcf70b21"
- SRC_URI[dnsmasq-2.80.sha256sum] = "9e4a58f816ce0033ce383c549b7d4058ad9b823968d352d2b76614f83ea39adc"
- SRC_URI += "\
-     file://lua.patch \
-+    file://0001-dnsmasq-fix-memory-leak-in-helper-c.patch \
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-dlopen-failure.patch b/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-dlopen-failure.patch
+deleted file mode 100644
+index e99c22710..000000000
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager/0003-dlopen-failure.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 57239fda56b68a8f3e413f7b6af5290ba0d86636 Mon Sep 17 00:00:00 2001
+-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+-Date: Thu, 22 Mar 2018 18:18:06 +0100
+-Subject: [PATCH] musl: dlopen is included so LD_LIBS="" instead of
+- LD_LIBS="none required"
+-MIME-Version: 1.0
+-Content-Type: text/plain; charset=UTF-8
+-Content-Transfer-Encoding: 8bit
+-
+-Upstream-Status: Pending
+-
+-Stolen from [1] and prettyfied slightly
+-
+-[1] https://github.com/voidlinux/void-packages/tree/master/srcpkgs/NetworkManager/patches
+-
+-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+----
+- configure.ac | 1 +
+- 1 file changed, 1 insertion(+)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 487a266..96ae4f7 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -235,6 +235,7 @@ dnl
+- dnl Checks for libdl - on certain platforms its part of libc
+- dnl
+- AC_SEARCH_LIBS([dlopen], [dl dld], [], [ac_cv_search_dlopen=])
+-+AS_IF([test "$ac_cv_search_dlopen" = "none required"],[ac_cv_search_dlopen=""])
+- AC_SUBST([DL_LIBS], "$ac_cv_search_dlopen")
+- 
+- PKG_CHECK_MODULES(GLIB, [gio-unix-2.0 >= 2.37.6 gmodule-2.0],
+--- 
+-2.14.3
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.0.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.4.bb
+similarity index 96%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.0.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.4.bb
+index 9f01f1bc1..8d222ed2b 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.0.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.4.bb
+@@ -26,15 +26,14 @@ SRC_URI = " \
+     ${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManager-${PV}.tar.xz \
+     file://0001-Fixed-configure.ac-Fix-pkgconfig-sysroot-locations.patch \
+     file://0002-Do-not-create-settings-settings-property-documentati.patch \
+-    file://0003-dlopen-failure.patch \
+ "
+ SRC_URI_append_libc-musl = " \
+     file://musl/0001-Fix-build-with-musl-systemd-specific.patch \
+     file://musl/0002-Fix-build-with-musl.patch \
  "
  
+-SRC_URI[md5sum] = "10abacaafb162a67d2942adf03e7e9e4"
+-SRC_URI[sha256sum] = "8e962833b6ca03edda1bc57ed6614a7b8c2339531b44acef098d05f2324c5d2c"
++SRC_URI[md5sum] = "cde5a88043f69ceec4c2ae3c298d9805"
++SRC_URI[sha256sum] = "130272a279aa26e197e544a270a832ee97ae6833504ff3a41c8ef9eeaed0d1f0"
+ 
+ UPSTREAM_CHECK_URI = "${GNOME_MIRROR}/NetworkManager/1.16/"
+ UPSTREAM_CHECK_REGEX = "NetworkManager\-(?P<pver>1\.10(\.\d+)+).tar.xz"
 -- 
 2.17.1
 
