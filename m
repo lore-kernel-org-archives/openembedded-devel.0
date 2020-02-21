@@ -1,25 +1,50 @@
-Return-Path: <Li.Zhou@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E149961629
+Return-Path: <leo.yan@linaro.org>
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+	[209.85.221.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CFE5616DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 09:16:17 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 01L9GI58024247
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Fri, 21 Feb 2020 10:43:50 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id y11so1455158wrt.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 01:16:18 -0800 (PST)
-Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server (TLS) id 14.3.468.0;
-	Fri, 21 Feb 2020 01:16:05 -0800
-From: Li Zhou <li.zhou@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Feb 2020 17:15:31 +0800
-Message-ID: <1582276531-249476-1-git-send-email-li.zhou@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-Originating-IP: [128.224.153.75]
-Subject: [meta-oe][PATCH] php: Security Advisory - php - CVE-2020-7059
+	Fri, 21 Feb 2020 02:43:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=uLfTUYXtpu4DmSjspBsYnYOduPncI7vrDdmhymUBtrk=;
+	b=qHIoV+HCidvsVYxi54CawziQasd/clVqymuY6yyKZJRP6k8rizXYSG+LjOHcyhD7Xm
+	PAsYEkIOb7hk4wTAAPyFhKP87EcFt2b409LFI8lbdaY9jFTfLTx285khTpt1xmwLWuXM
+	CEOkIkV+DJSmgXq7nd68rRUnsKzzCXidqWuumZPbeKqUmFLJHR6TGHPH2hdK/uvQGm6p
+	0qEiZw8Z510e86Ko40XjF+WYeNflMkaB38uVaFl0ng/jkKPemibyj8Wq+Qx6ZuxCvdIf
+	DAlM41lZETAUJFfR2zQ2oPPY9+V62O/7hBH9uq1jIF0FQHJ6TUGdhffZSNpw6qLhaZCe
+	Krng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=uLfTUYXtpu4DmSjspBsYnYOduPncI7vrDdmhymUBtrk=;
+	b=iivsjVORY6FVMbGcQr1XRUTvLI49X3kphRic/YCtxP5UX9bzE19iMYIlWpVh6xPSiK
+	Y2bE/V45ZCyVO/JEYEzBMQVe6OHr4jsAS67a+iT/OkZt5iCdzPmzoLx+S5bcUj+vXU8A
+	3hIHVZ/Smxoe9bm5AHDRebxyROE+VeR3AC63D78SFEzDQMMB+vlMaSc5Gw8FDNa7XM0E
+	Is6C33SVnoAw5gxA4MdV0m0Yx8nhh2Ip7lDEXStev8Lr8rsEmbUX4niX3igq5z58w8JM
+	5ACVqgvHy5XuA+6CnovcHHBz2CYwdZxeKNBhC1MotjV1wXeT4Dl73B7qLFZWOlz+DVF3
+	PpBw==
+X-Gm-Message-State: APjAAAXxvY0gsCG/Nbdd02QbB7inIFbilFcIJZolouGgyBsFxnA3DPBq
+	l/DLFLrk3Z9mdhqPsZPHCSUcJHZJE1fF7A==
+X-Google-Smtp-Source: APXvYqxKrOJiR/lra2UuOg8Dwtwsj87YE4jROL4uY6iAgua67EFmkWzwhF7YOL0rb+0sycOvylCW0g==
+X-Received: by 2002:a5d:4692:: with SMTP id u18mr48491861wrq.206.1582281830719;
+	Fri, 21 Feb 2020 02:43:50 -0800 (PST)
+Received: from hackbox2.linaro.org ([81.128.185.34])
+	by smtp.gmail.com with ESMTPSA id
+	f65sm3184081wmf.29.2020.02.21.02.43.48
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 21 Feb 2020 02:43:49 -0800 (PST)
+From: Leo Yan <leo.yan@linaro.org>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Khem Raj <raj.khem@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+	Daniel Thompson <daniel.thompson@linaro.org>,
+	Loic Poulain <loic.poulain@linaro.org>
+Date: Fri, 21 Feb 2020 10:43:40 +0000
+Message-Id: <20200221104340.21294-1-leo.yan@linaro.org>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH v2] Ply: Add recipe for git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,127 +57,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 09:16:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 21 Feb 2020 10:43:51 -0000
 
-Backport the patch <http://git.php.net/?p=php-src.git;a=commit;
-h=0f79b1bf301f455967676b5129240140c5c45b09> to solve CVE-2020-7059.
-Because of the version context, this porting mainly refers to the
-version merging commit <http://git.php.net/?p=php-src.git;a=commit;
-h=a8a6242db7c01bb2d87f29e9b8d5ff3f0f847645>
+Ply is a light-weight eBPF tool which compiles ply script or one-liner
+to Linux BPF programs and attaches to kprobes and tracepoints.  It
+doesn't require external dependencies except libc, so it's very friendly
+for embedded system usage.
 
-Signed-off-by: Li Zhou <li.zhou@windriver.com>
+This patch adds the recipe to support ply building for git version.
+
+Signed-off-by: Leo Yan <leo.yan@linaro.org>
 ---
- .../recipes-devtools/php/php/CVE-2020-7059.patch   | 86 ++++++++++++++++++++++
- meta-oe/recipes-devtools/php/php_7.3.11.bb         |  1 +
- 2 files changed, 87 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2020-7059.patch
+ meta-oe/recipes-devtools/ply/ply_git.bb | 38 +++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/ply/ply_git.bb
 
-diff --git a/meta-oe/recipes-devtools/php/php/CVE-2020-7059.patch b/meta-oe/recipes-devtools/php/php/CVE-2020-7059.patch
+diff --git a/meta-oe/recipes-devtools/ply/ply_git.bb b/meta-oe/recipes-devtools/ply/ply_git.bb
 new file mode 100644
-index 0000000..f7d3ab6
+index 000000000..21395885c
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/CVE-2020-7059.patch
-@@ -0,0 +1,86 @@
-+From 1adaab3aa81fa9b48e351b5644d9fee70f2fe73f Mon Sep 17 00:00:00 2001
-+From: Li Zhou <li.zhou@windriver.com>
-+Date: Thu, 20 Feb 2020 02:05:52 -0800
-+Subject: [PATCH] Fix #79099: OOB read in php_strip_tags_ex
++++ b/meta-oe/recipes-devtools/ply/ply_git.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "Ply: A light-weight dynamic tracer for eBPF"
++HOMEPAGE = "https://github.com/iovisor/ply"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 +
-+Upstream-Status: Backport
-+CVE: CVE-2020-7059
-+Signed-off-by: Li Zhou <li.zhou@windriver.com>
-+---
-+ ext/standard/string.c                 |  6 +++---
-+ ext/standard/tests/file/bug79099.phpt | 32 ++++++++++++++++++++++++++++++++
-+ 2 files changed, 35 insertions(+), 3 deletions(-)
-+ create mode 100644 ext/standard/tests/file/bug79099.phpt
++DEPENDS += "bison-native"
 +
-+diff --git a/ext/standard/string.c b/ext/standard/string.c
-+index dde97fa..2213d8d 100644
-+--- a/ext/standard/string.c
-++++ b/ext/standard/string.c
-+@@ -5163,7 +5163,7 @@ state_1:
-+ 			}
-+ 
-+ 			lc = '>';
-+-			if (is_xml && *(p -1) == '-') {
-++			if (is_xml && p >= buf + 1 && *(p -1) == '-') {
-+ 				break;
-+ 			}
-+ 			in_q = state = is_xml = 0;
-+@@ -5195,7 +5195,7 @@ state_1:
-+ 			goto reg_char_1;
-+ 		case '!':
-+ 			/* JavaScript & Other HTML scripting languages */
-+-			if (*(p-1) == '<') {
-++			if (p >= buf + 1 && *(p-1) == '<') {
-+ 				state = 3;
-+ 				lc = c;
-+ 				p++;
-+@@ -5205,7 +5205,7 @@ state_1:
-+ 			}
-+ 			break;
-+ 		case '?':
-+-			if (*(p-1) == '<') {
-++			if (p >= buf + 1 && *(p-1) == '<') {
-+ 				br=0;
-+ 				state = 2;
-+ 				p++;
-+diff --git a/ext/standard/tests/file/bug79099.phpt b/ext/standard/tests/file/bug79099.phpt
-+new file mode 100644
-+index 0000000..a1f2a33
-+--- /dev/null
-++++ b/ext/standard/tests/file/bug79099.phpt
-+@@ -0,0 +1,32 @@
-++--TEST--
-++Bug #79099 (OOB read in php_strip_tags_ex)
-++--FILE--
-++<?php
-++$stream = fopen('php://memory', 'w+');
-++fputs($stream, "<?\n\"\n");
-++rewind($stream);
-++var_dump(@fgetss($stream));
-++var_dump(@fgetss($stream));
-++fclose($stream);
-++
-++$stream = fopen('php://memory', 'w+');
-++fputs($stream, "<\0\n!\n");
-++rewind($stream);
-++var_dump(@fgetss($stream));
-++var_dump(@fgetss($stream));
-++fclose($stream);
-++
-++$stream = fopen('php://memory', 'w+');
-++fputs($stream, "<\0\n?\n");
-++rewind($stream);
-++var_dump(@fgetss($stream));
-++var_dump(@fgetss($stream));
-++fclose($stream);
-++?>
-++--EXPECT--
-++string(0) ""
-++string(0) ""
-++string(0) ""
-++string(0) ""
-++string(0) ""
-++string(0) ""
-+-- 
-+1.9.1
++SRC_URI = "git://github.com/iovisor/ply"
++SRCREV = "aa5b9ac31307ec1acece818be334ef801c802a12"
 +
-diff --git a/meta-oe/recipes-devtools/php/php_7.3.11.bb b/meta-oe/recipes-devtools/php/php_7.3.11.bb
-index e7fb847..ec5fb3b 100644
---- a/meta-oe/recipes-devtools/php/php_7.3.11.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.3.11.bb
-@@ -18,6 +18,7 @@ SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-            file://0001-Use-pkg-config-for-libxml2-detection.patch \
-            file://debian-php-fixheader.patch \
-            file://CVE-2019-6978.patch \
-+           file://CVE-2020-7059.patch \
-           "
- 
- SRC_URI_append_class-target = " \
++S = "${WORKDIR}/git"
++
++do_configure_prepend() {
++    ( cd ${S}; ./autogen.sh; cd - )
++}
++
++do_configure() {
++    ( cd ${S}; ./configure --host=${TARGET_SYS} --prefix=${D}${prefix}; cd - )
++}
++
++do_compile() {
++    ( cd ${S}; oe_runmake; cd - )
++}
++
++do_install() {
++    ( cd ${S}; oe_runmake install; cd - )
++}
++
++do_install_append() {
++    chrpath -d ${D}${prefix}/sbin/ply
++}
++
++# x86, mips32/64, riscv64 are not supported in this release
++COMPATIBLE_HOST_i586 = 'null'
++COMPATIBLE_HOST_i686 = 'null'
++COMPATIBLE_HOST_mipsarchn32 = "null"
++COMPATIBLE_HOST_mipsarchn64 = "null"
++COMPATIBLE_HOST_riscv64 = "null"
 -- 
-1.9.1
+2.17.1
 
 
