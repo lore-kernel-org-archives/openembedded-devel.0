@@ -1,35 +1,57 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C31EB6164F
+Return-Path: <leo.yan@linaro.org>
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FD7160ADF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 08:45:33 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,467,1574092800"; d="scan'208";a="83686044"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Feb 2020 16:35:53 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2486B50A997B
+	Fri, 21 Feb 2020 09:03:31 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id c23so576763plz.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Feb 2020 16:26:07 +0800 (CST)
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Fri, 21 Feb 2020 16:35:47 +0800
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 21 Feb 2020 16:35:49 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Feb 2020 16:37:35 +0800
-Message-ID: <20200221083737.17042-4-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200221083737.17042-1-zangrc.fnst@cn.fujitsu.com>
-References: <20200221083737.17042-1-zangrc.fnst@cn.fujitsu.com>
+	Fri, 21 Feb 2020 01:03:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=93BQgj+TbSC8qCxEWK958gvId2Ywq+9HAx/TKBuq4oo=;
+	b=br5RlnQQgIyjbDQcKccEDRLzIzid+Iws9myEmOBKcxbcgL6CCsroAJ4C/tpgQZ7uKT
+	yBTZkLN9nffpJmmjYG52R9AALE6rYZUlA/J1uOvaoHbeQX4QtTjjRVNJVil4mS4zpzdY
+	m6aukyEma0h6yD0ooKT4w5mTx9eeMFuIxNJ2m118HzXOT1Bj6L+9uN4yfQbuJudgI4uL
+	pN6jNnlpbAiU3ndTNwJx8owmuw4CZ4ih5YdL4CKeKzc24UwgBJYgTqze4hr8k9d/c0aJ
+	dxwC0DxyKZug/aAS58xPx5WHTlKHkuMngis8xL4D58/T5HXC2x1Nk3Sz0kCzN1e8voM6
+	pg6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=93BQgj+TbSC8qCxEWK958gvId2Ywq+9HAx/TKBuq4oo=;
+	b=HbCX4Wl8W4+fNs11dgprjZ7l82OOGvfys7lq8gUdKPBJRS8kdJ2oII/fTznVRRtmFc
+	2lDe1SU0cGfQZ3aK2kLWpp5Tf4XyrowCwNkdupNzLBibnNEJ8zsekIIQhNbSb1TsraVf
+	ePiP7bu6JRaeBGAeGhibVbl92+2Kk9HrW9kJkA5CdPBF4VoEIdvyjgmZNG4fHmyQzaZa
+	lOv36kP8264WtZ/5mnai3PJP1C2CIHvH6g5RsMXmngY4sAGGIziAZB2UImwX/Ow3k0wI
+	sJOi0Zhr1sKbpveriYiTaHx/r4Nlt9+zKgpep4U2SVcJsG40up9u0FDSWlc36DiGkRnN
+	HxCw==
+X-Gm-Message-State: APjAAAXU002XA7EBCMb3XndOHrTbvaWXMRDvtwczrzr31jo01M0eecYT
+	78kI7D38ZS82qZ/LMwg7ZeAjjw==
+X-Google-Smtp-Source: APXvYqwJ90VyCULr7DhNSxo79JRk0VLo8Pk/UXB4btp5ld1sTSCK8h45VPBHkmnJPW9ipYyBEF0vuQ==
+X-Received: by 2002:a17:90b:3c9:: with SMTP id go9mr1922628pjb.7.1582275812324;
+	Fri, 21 Feb 2020 01:03:32 -0800 (PST)
+Received: from leoy-ThinkPad-X240s ([2400:8904::f03c:91ff:fe8a:bbb8])
+	by smtp.gmail.com with ESMTPSA id
+	w17sm2050003pfi.56.2020.02.21.01.03.25
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 21 Feb 2020 01:03:31 -0800 (PST)
+Date: Fri, 21 Feb 2020 17:03:20 +0800
+From: Leo Yan <leo.yan@linaro.org>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20200221090320.GA13327@leoy-ThinkPad-X240s>
+References: <20200218052544.9467-1-leo.yan@linaro.org>
+	<20200218052544.9467-2-leo.yan@linaro.org>
+	<CAMKF1sordwdPV8=vvtakN4vb=MugUqY0f4k9P3ewpyR_9x63ZA@mail.gmail.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 2486B50A997B.A8969
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] snappy: upgrade 1.1.7 -> 1.1.8
+In-Reply-To: <CAMKF1sordwdPV8=vvtakN4vb=MugUqY0f4k9P3ewpyR_9x63ZA@mail.gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+	Loic Poulain <loic.poulain@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v1 1/4] Ply: Add recipe for git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,42 +64,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Feb 2020 08:45:34 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Fri, 21 Feb 2020 09:03:31 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Due to version update, SRC-UR has been modified SRC_URI.
+Hi Khem,
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- .../snappy/{snappy_1.1.7.bb => snappy_1.1.8.bb}             | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-extended/snappy/{snappy_1.1.7.bb => snappy_1.1.8.bb} (69%)
+On Thu, Feb 20, 2020 at 07:41:35AM -0800, Khem Raj wrote:
+> fails to build fot x86/musl
+> http://errors.yoctoproject.org/Errors/Details/391871/
 
-diff --git a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb b/meta-oe/recipes-extended/snappy/snappy_1.1.8.bb
-similarity index 69%
-rename from meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
-rename to meta-oe/recipes-extended/snappy/snappy_1.1.8.bb
-index 9f37c5fc2..d6d1e4110 100644
---- a/meta-oe/recipes-extended/snappy/snappy_1.1.7.bb
-+++ b/meta-oe/recipes-extended/snappy/snappy_1.1.8.bb
-@@ -10,10 +10,10 @@ compression ratio."
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING;md5=f62f3080324a97b3159a7a7e61812d0c"
- 
--SRC_URI = "https://src.fedoraproject.org/repo/pkgs/snappy/snappy-1.1.7.tar.gz/sha512/32046f532606ba545a4e4825c0c66a19be449f2ca2ff760a6fa170a3603731479a7deadb683546e5f8b5033414c50f4a9a29f6d23b7a41f047e566e69eca7caf/snappy-1.1.7.tar.gz"
-+SRC_URI = "https://src.fedoraproject.org/repo/pkgs/snappy/snappy-1.1.8.tar.gz/sha512/efe18ff1b3edda1b4b6cefcbc6da8119c05d63afdbf7a784f3490353c74dced76baed7b5f1aa34b99899729192b9d657c33c76de4b507a51553fa8001ae75c1c/snappy-1.1.8.tar.gz"
- 
--SRC_URI[md5sum] = "ee9086291c9ae8deb4dac5e0b85bf54a"
--SRC_URI[sha256sum] = "3dfa02e873ff51a11ee02b9ca391807f0c8ea0529a4924afa645fbf97163f9d4"
-+SRC_URI[md5sum] = "70e48cba7fecf289153d009791c9977f"
-+SRC_URI[sha256sum] = "16b677f07832a612b0836178db7f374e414f94657c138e6993cbfc5dcc58651f"
- 
- inherit cmake pkgconfig
- 
--- 
-2.20.1
+Ply doesn't support x86 and it supports x86_64.  Will fix the dependency
+issue in the new patch with adding two lines:
 
+COMPATIBLE_HOST_i586 = 'null'
+COMPATIBLE_HOST_i686 = 'null'
 
+Thanks a lot for the testing; will send new patch with addressing your
+comments and test on qemux86 and qemux86_64.
 
+Thanks,
+Leo
 
