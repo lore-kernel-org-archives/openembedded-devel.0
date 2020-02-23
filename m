@@ -1,51 +1,25 @@
-Return-Path: <leo.yan@linaro.org>
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
-	[209.85.128.53])
-	by mail.openembedded.org (Postfix) with ESMTP id EA0CD61602
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7052E616C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 12:55:24 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id z12so3141949wmi.4
+	Sun, 23 Feb 2020 15:04:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 01NF3lQk020811
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 04:55:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=kJVXsuLSefA/CAmy1cBFJUUMWLwiNpst74Q2yRvjOug=;
-	b=GBmF4Ft/tM4FwEP7p2nz815RCXGr9TYrzDXvSXWvIjj9PatgkcEDcFy496gTy4Ycl7
-	eqkdcgBCFWJ3IEUDaRJUmZswkoGe21x7ccShbPmnOi9vKHvrjnBSN0feS0usN9zc9+QN
-	iVXpxWw/LT/zy3y+btkFblo9/RKZYkFpm7Df4fyQl2OVC0RJ3Ej3BuVmGoaEIx+S4sDp
-	EFAo0PhvcpmjZqrvvUx6LdyBm8nUA8bev/v1ppmxd6v9fTxVC8MqnhiLVbO6qTAKNWlo
-	ZY255QHMTUbbAv2U2lKiH+ukk1+mdUrYdeaWMopj+pzxfHutRNMf9tKrNZQz04ItPGiW
-	I02g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=kJVXsuLSefA/CAmy1cBFJUUMWLwiNpst74Q2yRvjOug=;
-	b=rhN+XmeCJgJb6XY0eUfbZzrWDo5NUy5DMQvY/Y8zYvjKl94k4RLuxT3ZLxDWDkFU3L
-	U1QYXO8xTC4CQoi9YyRFvkjpDZn/0XzqQfDmhkIEL91nY9L4YpjcO7qXjtXgYc9kw0l8
-	1aKMJtXvF1rN5/Adsncf3qA8yqzHsj+MLpSmM7N0Gdo2Z4Njx9vhqF3j9M9H3wgTn/uA
-	6tIna7KeTV4cm1K3I2/mAZnoGIyYruRy5O1ZJrNc0Gd2tzuS3PH4zu0ajAptisi1KMap
-	PgbvWVEBoOIMDlKu6v+cQijvZINqsgGN9aXx2nBh5mlh3ttXKkdP/elPW0iIjXaVHOnU
-	Wxrg==
-X-Gm-Message-State: APjAAAVpJUsI6dNExadTS5iUhdpJNiuMy8agDYVu7YlPpbDxeLN08A4E
-	hr9a2XW/Rvg1hce31lgzcLZ+Rn60yqWU3A==
-X-Google-Smtp-Source: APXvYqyOQFw1kXusBozrgdImJzsvWhmCxKfkuWPUdPKRg8gCnh/RQiztn8aFWrTcfNNynAz3uZLR6g==
-X-Received: by 2002:a1c:2645:: with SMTP id m66mr15812691wmm.98.1582462525287; 
-	Sun, 23 Feb 2020 04:55:25 -0800 (PST)
-Received: from hackbox2.linaro.org ([81.128.185.34])
-	by smtp.gmail.com with ESMTPSA id
-	133sm14295204wmd.5.2020.02.23.04.55.24
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 23 Feb 2020 04:55:24 -0800 (PST)
-From: Leo Yan <leo.yan@linaro.org>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Khem Raj <raj.khem@gmail.com>, Alex Kiernan <alex.kiernan@gmail.com>,
-	Sumit Garg <sumit.garg@linaro.org>,
-	Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>
-Date: Sun, 23 Feb 2020 12:55:14 +0000
-Message-Id: <20200223125514.19467-1-leo.yan@linaro.org>
+	Sun, 23 Feb 2020 07:04:08 -0800
+Received: from localhost (128.224.162.174) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.468.0;
+	Sun, 23 Feb 2020 07:03:45 -0800
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sun, 23 Feb 2020 23:03:43 +0800
+Message-ID: <20200223150343.16458-1-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v3] Ply: Add recipe for git version
+MIME-Version: 1.0
+X-Originating-IP: [128.224.162.174]
+Subject: [meta-python][PATCH] python3-networkx: upgrade 2.3 -> 2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,42 +32,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Feb 2020 12:55:25 -0000
+X-List-Received-Date: Sun, 23 Feb 2020 15:04:17 -0000
+Content-Type: text/plain
 
-Ply is a light-weight eBPF tool which compiles ply script or one-liner
-to Linux BPF programs and attaches to kprobes and tracepoints.  It
-doesn't require external dependencies except libc, so it's very friendly
-for embedded system usage.
-
-This patch adds the recipe to support ply building for git version.
-
-Signed-off-by: Leo Yan <leo.yan@linaro.org>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-devtools/ply/ply_git.bb | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/ply/ply_git.bb
+ meta-python/recipes-devtools/python/python-networkx.inc   | 2 --
+ .../recipes-devtools/python/python3-networkx_2.3.bb       | 8 --------
+ .../recipes-devtools/python/python3-networkx_2.4.bb       | 8 ++++++++
+ 3 files changed, 8 insertions(+), 10 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-networkx_2.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-networkx_2.4.bb
 
-diff --git a/meta-oe/recipes-devtools/ply/ply_git.bb b/meta-oe/recipes-devtools/ply/ply_git.bb
+diff --git a/meta-python/recipes-devtools/python/python-networkx.inc b/meta-python/recipes-devtools/python/python-networkx.inc
+index a4c31b2b2..4bca636dc 100644
+--- a/meta-python/recipes-devtools/python/python-networkx.inc
++++ b/meta-python/recipes-devtools/python/python-networkx.inc
+@@ -3,8 +3,6 @@ LICENSE = "BSD-3-Clause"
+ 
+ inherit pypi
+ 
+-PYPI_PACKAGE_EXT = "zip"
+-
+ RDEPENDS_${PN} += "\
+                    ${PYTHON_PN}-decorator \
+                    "
+diff --git a/meta-python/recipes-devtools/python/python3-networkx_2.3.bb b/meta-python/recipes-devtools/python/python3-networkx_2.3.bb
+deleted file mode 100644
+index 8feb6daa3..000000000
+--- a/meta-python/recipes-devtools/python/python3-networkx_2.3.bb
++++ /dev/null
+@@ -1,8 +0,0 @@
+-require python-networkx.inc
+-
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b68290ee1026b204170a23bbdb27a4fd"
+-
+-SRC_URI[md5sum] = "320d3f6c7872732baa63cedafddadea9"
+-SRC_URI[sha256sum] = "8311ddef63cf5c5c5e7c1d0212dd141d9a1fe3f474915281b73597ed5f1d4e3d"
+-
+-inherit setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-networkx_2.4.bb b/meta-python/recipes-devtools/python/python3-networkx_2.4.bb
 new file mode 100644
-index 000000000..7d693b36d
+index 000000000..efa82e21c
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/ply/ply_git.bb
-@@ -0,0 +1,15 @@
-+SUMMARY = "Ply: A light-weight dynamic tracer for eBPF"
-+HOMEPAGE = "https://github.com/iovisor/ply"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++++ b/meta-python/recipes-devtools/python/python3-networkx_2.4.bb
+@@ -0,0 +1,8 @@
++require python-networkx.inc
 +
-+DEPENDS += "bison-native"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b68290ee1026b204170a23bbdb27a4fd"
 +
-+SRC_URI = "git://github.com/iovisor/ply"
-+SRCREV = "aa5b9ac31307ec1acece818be334ef801c802a12"
++SRC_URI[md5sum] = "63e3fdc9d3a46bcabc776acc5ea5fe48"
++SRC_URI[sha256sum] = "f8f4ff0b6f96e4f9b16af6b84622597b5334bf9cae8cf9b2e42e7985d5c95c64"
 +
-+S = "${WORKDIR}/git"
-+
-+inherit autotools-brokensep
-+
-+COMPATIBLE_HOST = "(x86_64.*|aarch64.*|arm.*|powerpc.*)-linux"
++inherit setuptools3
 -- 
 2.17.1
 
