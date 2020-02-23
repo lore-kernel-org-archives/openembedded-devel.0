@@ -1,33 +1,50 @@
-Return-Path: <bunk@stusta.de>
-Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id C558D61749
+Return-Path: <jonatan.p@gmail.com>
+Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
+	[209.85.167.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9B874605F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 12:18:17 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48QPNm5tdNz2J
+	Sun, 23 Feb 2020 12:43:55 +0000 (UTC)
+Received: by mail-lf1-f68.google.com with SMTP id u2so2164241lfk.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 13:18:15 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1582460297;
-	bh=louwmiXQbnUbPOqUETJu1hYpzCm2561MmyAaFrpZU1g=;
-	h=From:To:Subject:Date:From;
-	b=ji0IaREXz2fEAJGkJO1PwWV9TrIXQozF3HSOVUtl7WP0Mi54mwswftK81Z4poO6l9
-	jfkUcgdbO2k31m5hls7HlWDb8meMOS9VAVGxE9SBHgwdjeoZW09/y9jTMByrhBCFzC
-	AJGVrAYrLGswyd4oe8nh/fAfwsIgbLKpzINOgYXjrkAagalcyWuYyH59YVRO+CL9Ao
-	kKiR5Ppfj4mnAmQ70ylsgE/l5YnoKwy0+DcoLMlxUXf7K/dQ+CZKeduZ7vg4zILRkv
-	NegVHmQCaRNRCN+dx0MTTQ9WZ4+JmMW9EixIhN9kba4AAB6xk2DOPXjJ80lG5Yq7ME
-	N2WdNvH/+tLrRJDO2XIjfpDjKqeMv46m+fIUs4V80cbuftPxIudV8bZC1xEbeK8CzH
-	4nLUi9CLmjRW8SUsfOxHyz4/KSHAAaKMZxF8IUUKTBtvJrq0r253R9CzaEoIQaIJQo
-	hp6QchE6KD0zF+TCRAZbFdMUD88cZ3lVdmECPX5VcsHA/h6pwwZadFh06tKAzgDkG2
-	c8o6HS+jWERTuQggglrGvnMLVStjkVfSkooHyKj7svSkvNcn4hMnkm7fnSF/C1W70g
-	yRNetey0KVDhNUWMqWDtF1WL1+fQ4w8Sh6i0phym9PzH49aHCvL+Ipt4EGc6rsYLzu
-	Pu3zog3dDusYnDkCUxU70asc=
-From: Adrian Bunk <bunk@stusta.de>
+	Sun, 23 Feb 2020 04:43:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=QbSiwZSJrmRQY2/mPvYEwcfbzun8tOTiBdKEGPUDi3M=;
+	b=nXAZIvzECN3wc2iM6i2XxzUTyUy9yMDYiVnu0ue4rITTD9zsZasPCTr0v2h9ejDo9w
+	DdtjuwI1WCy3UmmjliRfPlN3xdTv08Mhun3NebKIb05pBK410BVDTrloSZDNH9VhrxnM
+	ISVg4WLUdwHi2AkAd/eUf/rhyAlbsSktih9eGVN3T4G8ty5sZpsffRnj1t5aBAIJoUNC
+	eRlq/nsnp2LyTe0dTuL5yIw6g07OshSHG35BqgMEN+THnMXtgXMjAoaN5aEIpfohVHNf
+	dToDrQw8IGbVCiPWbqgIO6FVyi/iEmH2gwe8hUVabMnIY/BM7AEOz3iUsrwZTozmK/O/
+	0BTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=QbSiwZSJrmRQY2/mPvYEwcfbzun8tOTiBdKEGPUDi3M=;
+	b=qqkupnn0XPMhAqkAsJ9jkRHuuTpvzOm4ZtBfmQK2OyXWhz3N1OlHJClXVyAOdpo4rh
+	EJ8XwQDxB0FF8crmB0ThzN/chsSe8NwEpRboPUmEMQbmFVnTMV6S9i7nfYmPq26RyFPt
+	/ZBfC9fLk3DR8yKsBGriUBcYb6gYRP641jl7fEW94tXFSnhot2Tq+7scUC5G/CmnAbQO
+	asb9XAaXjIOj2w/hPWdHKlLr1QQRRQmDqr3llaMuKB+fPLDnpbRXoy+JJ+E5YeZ/buEE
+	wyWtGD0wI/7jTs4Yw07Yqy9ahZUAMD0raFJ4tNGJlFfyiJhm6ZkIFW6kJEHrbPppoXcd
+	UMFw==
+X-Gm-Message-State: APjAAAWWKVIFIPQcNMtDB0f5jESZRgpR2vKwqyO2d3UrN4Kzf4cvedro
+	1GygeP2GcZ25utPAksxdBugRpexlYxY=
+X-Google-Smtp-Source: APXvYqx2Mq1OZqrsf9oVjrGDPKrJdXtMBv6+eySfme6pnW03RrDI7WZ/Tf2OQymrCnvoNaGIV1zXgw==
+X-Received: by 2002:ac2:4add:: with SMTP id m29mr24980379lfp.190.1582461834547;
+	Sun, 23 Feb 2020 04:43:54 -0800 (PST)
+Received: from localhost.localdomain (h-217-237.A357.priv.bahnhof.se.
+	[81.170.217.237])
+	by smtp.gmail.com with ESMTPSA id y7sm4520339ljy.92.2020.02.23.04.43.53
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 23 Feb 2020 04:43:53 -0800 (PST)
+From: =?UTF-8?q?Jonatan=20P=C3=A5lsson?= <jonatan.p@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Feb 2020 14:18:13 +0200
-Message-Id: <20200223121814.7941-1-bunk@stusta.de>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] libqmi: Upgrade 1.24.2 -> 1.24.4
+Date: Sun, 23 Feb 2020 13:43:23 +0100
+Message-Id: <20200223124323.1892142-1-jonatan.p@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Subject: [meta-python][PATCH] python-h2: Add missing RDEPENDS on hpack and hyperframe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,35 +57,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Feb 2020 12:18:19 -0000
+X-List-Received-Date: Sun, 23 Feb 2020 12:43:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Upgrade on the 1.24 stable branch.
-
-Signed-off-by: Adrian Bunk <bunk@stusta.de>
+Signed-off-by: Jonatan Pålsson <jonatan.p@gmail.com>
 ---
- .../libqmi/{libqmi_1.24.2.bb => libqmi_1.24.4.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.24.2.bb => libqmi_1.24.4.bb} (85%)
+ meta-python/recipes-connectivity/python-h2/python-h2.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.2.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.4.bb
-similarity index 85%
-rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.24.2.bb
-rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.24.4.bb
-index 35a58d2f1..55128284d 100644
---- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.2.bb
-+++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.4.bb
-@@ -14,8 +14,8 @@ inherit autotools pkgconfig bash-completion
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-            "
+diff --git a/meta-python/recipes-connectivity/python-h2/python-h2.inc b/meta-python/recipes-connectivity/python-h2/python-h2.inc
+index 42629c261..c457836b7 100644
+--- a/meta-python/recipes-connectivity/python-h2/python-h2.inc
++++ b/meta-python/recipes-connectivity/python-h2/python-h2.inc
+@@ -8,3 +8,5 @@ SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
+ SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
  
--SRC_URI[md5sum] = "e49c419112d708b5301af7ccc2c090ff"
--SRC_URI[sha256sum] = "4ae4e476f960dbc0d04b1c0368776eb78edffd4421f3e4c074bb2bfb6375b282"
-+SRC_URI[md5sum] = "be6539fde54fec1fc9d852db201c8560"
-+SRC_URI[sha256sum] = "0316badec92ff32f51fe6278e6046968d2272a26608995deedd8e4afb563918a"
- 
- PACKAGECONFIG ??= "udev mbim"
- PACKAGECONFIG[udev] = ",--without-udev,libgudev"
+ inherit pypi
++
++RDEPENDS_${PN} += "${PYTHON_PN}-hpack ${PYTHON_PN}-hyperframe"
 -- 
-2.17.1
+2.25.1
 
 
