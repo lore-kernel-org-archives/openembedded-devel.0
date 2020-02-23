@@ -1,50 +1,57 @@
-Return-Path: <jonatan.p@gmail.com>
-Received: from mail-lf1-f68.google.com (mail-lf1-f68.google.com
-	[209.85.167.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B874605F8
+Return-Path: <leo.yan@linaro.org>
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+	[209.85.216.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1205261602
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 12:43:55 +0000 (UTC)
-Received: by mail-lf1-f68.google.com with SMTP id u2so2164241lfk.13
+	Sun, 23 Feb 2020 12:52:45 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id d5so2827910pjz.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 04:43:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=QbSiwZSJrmRQY2/mPvYEwcfbzun8tOTiBdKEGPUDi3M=;
-	b=nXAZIvzECN3wc2iM6i2XxzUTyUy9yMDYiVnu0ue4rITTD9zsZasPCTr0v2h9ejDo9w
-	DdtjuwI1WCy3UmmjliRfPlN3xdTv08Mhun3NebKIb05pBK410BVDTrloSZDNH9VhrxnM
-	ISVg4WLUdwHi2AkAd/eUf/rhyAlbsSktih9eGVN3T4G8ty5sZpsffRnj1t5aBAIJoUNC
-	eRlq/nsnp2LyTe0dTuL5yIw6g07OshSHG35BqgMEN+THnMXtgXMjAoaN5aEIpfohVHNf
-	dToDrQw8IGbVCiPWbqgIO6FVyi/iEmH2gwe8hUVabMnIY/BM7AEOz3iUsrwZTozmK/O/
-	0BTQ==
+	Sun, 23 Feb 2020 04:52:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=IuQxFGtbC9m7kOF2Oym404cL2K5himy5nKtQFJKPHmQ=;
+	b=fusRhKmlzeQEqMG65Ximi9a69jQSS4WilNbcwzeaREAMkmRYJB0EDeA0ZMNBKLn219
+	TQhktJg3SbeeiPeXsKFM1AWz1dYH0IMCisn7VzHbRMgKHDnARBwYgtW0nqc0nJ7FknYY
+	IIe7APxzNuJaOp/id945dhE6CI/kG2Ft2qzytgoGfJDYAABuDyGcPbpMhaj84wMoJ4BI
+	TWG59QJf/SZTNyA9BkshkwvPu5eQnJzdOOezPU2o8/3dd/BzX/VErduyQsQMb+wydlr8
+	/u6xnKnlXidpKOoxoYvgmw7g//aE8AI+QQgdzWMn4p3XLGKjFcIS/Zui+ldpVP8lmy2O
+	zaWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=QbSiwZSJrmRQY2/mPvYEwcfbzun8tOTiBdKEGPUDi3M=;
-	b=qqkupnn0XPMhAqkAsJ9jkRHuuTpvzOm4ZtBfmQK2OyXWhz3N1OlHJClXVyAOdpo4rh
-	EJ8XwQDxB0FF8crmB0ThzN/chsSe8NwEpRboPUmEMQbmFVnTMV6S9i7nfYmPq26RyFPt
-	/ZBfC9fLk3DR8yKsBGriUBcYb6gYRP641jl7fEW94tXFSnhot2Tq+7scUC5G/CmnAbQO
-	asb9XAaXjIOj2w/hPWdHKlLr1QQRRQmDqr3llaMuKB+fPLDnpbRXoy+JJ+E5YeZ/buEE
-	wyWtGD0wI/7jTs4Yw07Yqy9ahZUAMD0raFJ4tNGJlFfyiJhm6ZkIFW6kJEHrbPppoXcd
-	UMFw==
-X-Gm-Message-State: APjAAAWWKVIFIPQcNMtDB0f5jESZRgpR2vKwqyO2d3UrN4Kzf4cvedro
-	1GygeP2GcZ25utPAksxdBugRpexlYxY=
-X-Google-Smtp-Source: APXvYqx2Mq1OZqrsf9oVjrGDPKrJdXtMBv6+eySfme6pnW03RrDI7WZ/Tf2OQymrCnvoNaGIV1zXgw==
-X-Received: by 2002:ac2:4add:: with SMTP id m29mr24980379lfp.190.1582461834547;
-	Sun, 23 Feb 2020 04:43:54 -0800 (PST)
-Received: from localhost.localdomain (h-217-237.A357.priv.bahnhof.se.
-	[81.170.217.237])
-	by smtp.gmail.com with ESMTPSA id y7sm4520339ljy.92.2020.02.23.04.43.53
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 23 Feb 2020 04:43:53 -0800 (PST)
-From: =?UTF-8?q?Jonatan=20P=C3=A5lsson?= <jonatan.p@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Feb 2020 13:43:23 +0100
-Message-Id: <20200223124323.1892142-1-jonatan.p@gmail.com>
-X-Mailer: git-send-email 2.25.1
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=IuQxFGtbC9m7kOF2Oym404cL2K5himy5nKtQFJKPHmQ=;
+	b=aARmk4r1G3xklB/hHJGVs2xFxxHYAVJ0/zgHLnUg2oPH11u/QT2zRqlVVrCCCqHbQ4
+	GqF/xtWVB8tPXeTGWRQoKjlb10P/WASX0wM2ATNp2uvEVS5UEUqA2dCjJqW0dVOhurOU
+	BkcEg1A6dIsc9Iox/vo6XSDC5F/M0sLZ2kq1mYcR5UtMJZN7jaaizPDa6bOSopv1VuAa
+	u/frGAsS9FGdb7RwQ+vu5PAeJI+d2//oQA+XRGDWS9PZ/tI1IzmWiOHmTOyBUknKSo7y
+	T5DHpMdKsZx9TV0Xi+SBwQOZ1YgQX9MMTrdFuhXcuBAXFnBGbMF7d4wY4WjeJEsKFs3W
+	M0iQ==
+X-Gm-Message-State: APjAAAWMzdz8MuDKITrPKfvUYVdeUQS5aDGkTKN+jZA/pjCuI68crylL
+	Lco1Vept5eh7fij1CZf7i4vuRQ==
+X-Google-Smtp-Source: APXvYqz4d28DLlKCxUxyQ9arOMqTW+3ElF4Km0JYTmz24SJWQzShFqxU7iKmXA2Wc+j2POcE6TvTsw==
+X-Received: by 2002:a17:90a:d78f:: with SMTP id
+	z15mr14670767pju.36.1582462366923; 
+	Sun, 23 Feb 2020 04:52:46 -0800 (PST)
+Received: from leoy-ThinkPad-X240s ([2400:8902::f03c:91ff:fe3f:32da])
+	by smtp.gmail.com with ESMTPSA id
+	o14sm8745972pgm.67.2020.02.23.04.52.40
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 23 Feb 2020 04:52:46 -0800 (PST)
+Date: Sun, 23 Feb 2020 20:52:31 +0800
+From: Leo Yan <leo.yan@linaro.org>
+To: Alex Kiernan <alex.kiernan@gmail.com>
+Message-ID: <20200223125231.GA22823@leoy-ThinkPad-X240s>
+References: <20200221104340.21294-1-leo.yan@linaro.org>
+	<CAO5Uq5QWcpy11_ibDE-nFJQpakdXEwE8GJZn+SGJdxPx4Bgm5g@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python-h2: Add missing RDEPENDS on hpack and hyperframe
+In-Reply-To: <CAO5Uq5QWcpy11_ibDE-nFJQpakdXEwE8GJZn+SGJdxPx4Bgm5g@mail.gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+	Loic Poulain <loic.poulain@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] Ply: Add recipe for git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,26 +64,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Feb 2020 12:43:57 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 23 Feb 2020 12:52:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Jonatan Pålsson <jonatan.p@gmail.com>
----
- meta-python/recipes-connectivity/python-h2/python-h2.inc | 2 ++
- 1 file changed, 2 insertions(+)
+Hi Alex,
 
-diff --git a/meta-python/recipes-connectivity/python-h2/python-h2.inc b/meta-python/recipes-connectivity/python-h2/python-h2.inc
-index 42629c261..c457836b7 100644
---- a/meta-python/recipes-connectivity/python-h2/python-h2.inc
-+++ b/meta-python/recipes-connectivity/python-h2/python-h2.inc
-@@ -8,3 +8,5 @@ SRC_URI[md5sum] = "950b5a62a2a608dc4547a01edf99aa8f"
- SRC_URI[sha256sum] = "b8a32bd282594424c0ac55845377eea13fa54fe4a8db012f3a198ed923dc3ab4"
- 
- inherit pypi
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-hpack ${PYTHON_PN}-hyperframe"
--- 
-2.25.1
+On Fri, Feb 21, 2020 at 05:08:22PM +0000, Alex Kiernan wrote:
 
+[...]
+
+> > +do_configure_prepend() {
+> > +    ( cd ${S}; ./autogen.sh; cd - )
+> > +}
+> > +
+> > +do_configure() {
+> > +    ( cd ${S}; ./configure --host=${TARGET_SYS} --prefix=${D}${prefix}; cd - )
+> > +}
+> > +
+> > +do_compile() {
+> > +    ( cd ${S}; oe_runmake; cd - )
+> > +}
+> > +
+> > +do_install() {
+> > +    ( cd ${S}; oe_runmake install; cd - )
+> > +}
+> > +
+> 
+> Can't all of these do_...  steps be replaced with `inherit autotools-brokensep`?
+
+Have tested with 'autotools-brokensep', it works very well for ply
+building.  Thanks a lot for this good suggestion!
+
+Thanks,
+Leo
 
