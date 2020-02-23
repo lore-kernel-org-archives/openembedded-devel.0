@@ -1,60 +1,53 @@
-Return-Path: <jpuhlman@mvista.com>
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
-	[209.85.210.67])
-	by mail.openembedded.org (Postfix) with ESMTP id EBB05617DC
+Return-Path: <jpuhlman@gmail.com>
+Received: from mail-pg1-f171.google.com (mail-pg1-f171.google.com
+	[209.85.215.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D247617C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 18:43:44 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id w6so6782786otk.0
+	Sun, 23 Feb 2020 19:02:51 +0000 (UTC)
+Received: by mail-pg1-f171.google.com with SMTP id z12so3902814pgl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 10:43:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=zNDNHhRPp5LLuNCdYnZOprlcWxDQ5zXDV3w90azwLFo=;
-	b=d00ItIf+Vs0LMwR0kmAmBtjnWl1J2HPhxKdinmQu4pdsqrRohiP4Zv2/QvU1vT7WaK
-	s0oPNXeTtQFV05/QaIFRChIwJpOTUVRC98eDW1pQ57R04kwXRks1krd43wkjykQRIqjP
-	3shQmVF5Ei78W/Rx4q3NCQ8JGSeQFVoyCD79GPss5Eh5d3d0lcdVumcVhGt6jIU3uLSX
-	mlXjdNaiKxSj8aWsXIz6vw45ub93LSWG6J2TCxLLb5livonaBTGCZ+NxR3p5Sw1dzHjs
-	Wu4jw9LhzEpmsDtcb2Ss9hNfXjlyJwbmzhdy8hJoEyhrhl+2DOLyxRgDNKrTIqhkkDqN
-	RGcw==
+	Sun, 23 Feb 2020 11:02:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=bwE9iJ4VBGYRIUlkMuzptc7hptwr+FOKTuew9qfqzA4=;
+	b=I7rFKgAzLDENI2ahkqpL//5Ttqb0MblUrogQovN94XjjW68/xvFlUG3NApUm7ZLOEm
+	uxu7JCsUg61oGsYlhMzaHEl2rgPgR6KD1Bcabm9Fze6FkL9kjTJq6nfoKDf7fnnPAS1y
+	d7mBTXXaqAxVtUjRFv7ufBYwxoGV/Rbb0TIZ5qIiNsOUs43Z3iSeTO5GC8GHeeSfAVOY
+	AtnMJ1UMvm99oLFyoymMRlnYrabShbhqpZ5Ac0KA5/a+wyRbx6mrLtJut9Xx5zrLFpJL
+	mYhUGqFIQ+UpvXVdPOXmwsAHT0D0+e0hEIlV/1JtRM9faqkyNIJBxOJoVkAS8tZBoNzO
+	5M0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=zNDNHhRPp5LLuNCdYnZOprlcWxDQ5zXDV3w90azwLFo=;
-	b=LT48SXFoCoiLhbPjJ/pbIrNgx0dfMDyIGZM4Rz/ZLkoLuvNB9Hf2eLx0x+bcnNRaYd
-	s2sZ+Am9XFY0H+D9Wf3vQ7wv2I7g5nz4nIRFv5ApsmzibXOkQ9/yrjJcGBBGizBFz1pc
-	tp7nI0/kbqYUvZWaBPJgNaJb1F3PVUsioWWAq2Qs+W1E+kc3Fh9HmkiY7pRRjr7Jsw5n
-	FuPAOqV4BCP41ewfHzaNcLm9rTNx38GyJiV9RDEbK7oGuzIoSf6AE4bNzwqhn056wuFl
-	S+pYuSpGTpGRg8Ppg/pKOZw/z72dO8yv7dCT8SOEvvGvzTxIV3ILZCL4dsogs4EADeeG
-	8j0A==
-X-Gm-Message-State: APjAAAWMl/Pd2XOXYCmTK0c8yU6WW5Yjg8atMt1NhB/jqmIJ27DJhz96
-	Gvgq0HPRjlRlGuj0zRRIfQ8sIhT+/Go=
-X-Google-Smtp-Source: APXvYqzVmwI3pDEvB+cszzjKXTmHgoHp3FHnW+eTeR2ZK0iVVbndGvVjOud6bbErrHOKBeprFQ62FQ==
-X-Received: by 2002:a9d:65da:: with SMTP id z26mr37893070oth.197.1582483425398;
-	Sun, 23 Feb 2020 10:43:45 -0800 (PST)
-Received: from ?IPv6:2600:1700:4c90:60a0:90ba:d6d6:a4f7:d5eb?
-	([2600:1700:4c90:60a0:90ba:d6d6:a4f7:d5eb])
-	by smtp.gmail.com with ESMTPSA id
-	w197sm3228997oia.12.2020.02.23.10.43.44
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Sun, 23 Feb 2020 10:43:44 -0800 (PST)
-To: Adrian Bunk <bunk@stusta.de>
-References: <20200222052935.19762-1-jpuhlman@mvista.com>
-	<55c135f4-f708-bacd-889f-23f7b1e7d889@gmail.com>
-	<463ee6f2-787f-b536-229b-9ce4718df026@mvista.com>
-	<20200223184052.GA3444@localhost>
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:mime-version:content-transfer-encoding;
+	bh=bwE9iJ4VBGYRIUlkMuzptc7hptwr+FOKTuew9qfqzA4=;
+	b=kfVJyx5vvy30+ZpHTVjDRp+fL3YiI6MZa8ZXY2l4SsofhFAJefJS6xPY6KJOz32WXW
+	/R26NW2i59Ol6v+cdyrHlghOjO2nZuLUoTzJxwczLxCbEvJpmIvga69qzJUIaLbIiwOe
+	OZbl1YQG6qWQ/AC8MDjaLd6PxzMF3UWAfyHXZyQ3ZVN2retilIVeQHAp+BR2HsAIAExl
+	UcFcgwH3+U0aLO+VhOeiqxYEtNU0ocikxvZRn3xfTlHwTLNnjPbE5koUd+FLdY+4NGwC
+	6qlFk19/sSKHoxmnPhqi3AyE+oMSWm4Dt4lmDsa7f9/oekKl5marlv33t1+uWISRYA14
+	YQQw==
+X-Gm-Message-State: APjAAAXo9ssEqQGZlWRW7z53eQCkjvv+UqYpsy2cMgtK65V/59n9F9Nk
+	xfPdEjCX9qWIF6B0SzxgnFikwscDPRI=
+X-Google-Smtp-Source: APXvYqwNy6gMMnFYYb1ppDYFmfDcJo18ZR19kZ8uBadDVH+KM1AitE8mETP4z0bym4bHF29trXoYlw==
+X-Received: by 2002:a63:fe50:: with SMTP id x16mr48188504pgj.31.1582484572056; 
+	Sun, 23 Feb 2020 11:02:52 -0800 (PST)
+Received: from workhorse.localdomain
+	(99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
+	by smtp.gmail.com with ESMTPSA id u4sm9470054pgu.75.2020.02.23.11.02.50
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 23 Feb 2020 11:02:51 -0800 (PST)
+Sender: Jeremy Puhlman <jpuhlman@gmail.com>
+Received: by workhorse.localdomain (Postfix, from userid 1000)
+	id 6628D2A0629; Sun, 23 Feb 2020 11:02:49 -0800 (PST)
 From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-Message-ID: <71618158-c5c7-991a-f0e5-96c085e959da@mvista.com>
-Date: Sun, 23 Feb 2020 10:43:39 -0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
-	Thunderbird/68.5.0
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 23 Feb 2020 11:02:46 -0800
+Message-Id: <20200223190246.17729-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20200223184052.GA3444@localhost>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] ipmiutil: gzip man pages with out timestamp
+Subject: [meta-oe][PATCH v2] ipmiutil: gzip man pages with out timestamp
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,32 +60,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Feb 2020 18:43:45 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Sun, 23 Feb 2020 19:02:51 -0000
+Content-Transfer-Encoding: 8bit
 
+From: Jeremy Puhlman <jpuhlman@mvista.com>
 
+A timestamp was getting encoded into the gzip header. This
+causes multilib conflicts when installed together, and would
+likely fail reproducablity tests.
+---
+ ...imes-from-changing-resulting-gzip-md.patch | 25 +++++++++++++++++++
+ .../recipes-kernel/ipmiutil/ipmiutil_3.1.5.bb |  1 +
+ 2 files changed, 26 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/ipmiutil/ipmiutil/0001-Prevent-access-times-from-changing-resulting-gzip-md.patch
 
-On 2/23/2020 10:40 AM, Adrian Bunk wrote:
-> On Sun, Feb 23, 2020 at 10:23:48AM -0800, Jeremy A. Puhlman wrote:
->> On 2/23/2020 12:15 AM, Khem Raj wrote:
->>> fails with clang
->>>
->>> https://errors.yoctoproject.org/Errors/Details/392235/
->> Its a hosttools issue. I was using hosttools tarball that uses pigz
->> as its gzip. Just needs a depends on pigz-native. Ill respin it.
-> Is there a reason why you aren't using -n instead?
-Cause I was laser focused on timestamp. Yeah -n is the right way to go, and
-I don't use the system gzip pretty much anywhere(all my builds are on top of
-the buildtools).
->
-> cu
-> Adrian
->
-
+diff --git a/meta-oe/recipes-kernel/ipmiutil/ipmiutil/0001-Prevent-access-times-from-changing-resulting-gzip-md.patch b/meta-oe/recipes-kernel/ipmiutil/ipmiutil/0001-Prevent-access-times-from-changing-resulting-gzip-md.patch
+new file mode 100644
+index 000000000..78c05ef32
+--- /dev/null
++++ b/meta-oe/recipes-kernel/ipmiutil/ipmiutil/0001-Prevent-access-times-from-changing-resulting-gzip-md.patch
+@@ -0,0 +1,25 @@
++From da668e5bf1a721797361ab866d09913ee8e157c4 Mon Sep 17 00:00:00 2001
++From: Jeremy Puhlman <jpuhlman@mvista.com>
++Date: Sat, 22 Feb 2020 04:37:04 +0000
++Subject: [PATCH] Prevent access times from changing resulting gzip md5sum
++
++Upstream-Status: Pending
++https://github.com/ipmitool/ipmitool/pull/186
++---
++ doc/Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/doc/Makefile.am b/doc/Makefile.am
++index b792762..2c52ce6 100644
++--- a/doc/Makefile.am
+++++ b/doc/Makefile.am
++@@ -59,5 +59,5 @@ install:
++ 	${INSTALL_DATA_SH} iuser.8 	 ${manto}
++ 	${INSTALL_DATA_SH} iseltime.8 	 ${manto}
++ 	${INSTALL_DATA_SH} bmclanpet.mib ${datato}
++-	cd ${manto}; gzip -f *.8
+++	cd ${manto}; gzip -nf *.8
++ 	
++-- 
++2.13.3
++
+diff --git a/meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.1.5.bb b/meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.1.5.bb
+index 3e2634028..d0f3688a2 100644
+--- a/meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.1.5.bb
++++ b/meta-oe/recipes-kernel/ipmiutil/ipmiutil_3.1.5.bb
+@@ -21,6 +21,7 @@ PARALLEL_MAKE = ""
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/ipmiutil/ipmiutil-${PV}.tar.gz \
+            file://fix_systemd_path.patch \
++           file://0001-Prevent-access-times-from-changing-resulting-gzip-md.patch \
+           "
+ SRC_URI[md5sum] = "292d6df25cad678bb27e5c8cdc6748f9"
+ SRC_URI[sha256sum] = "58ccdbd5755d7dd72478756715af09e9c73330dfad2b91dbf03d2ac504b301a3"
 -- 
-Jeremy A. Puhlman
-jpuhlman@mvista.com
+2.20.1
 
 
