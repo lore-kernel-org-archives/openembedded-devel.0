@@ -1,57 +1,51 @@
 Return-Path: <leo.yan@linaro.org>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 45DE161602
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
+	[209.85.128.53])
+	by mail.openembedded.org (Postfix) with ESMTP id EA0CD61602
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 12:54:36 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id 7so1462919pgr.2
+	Sun, 23 Feb 2020 12:55:24 +0000 (UTC)
+Received: by mail-wm1-f53.google.com with SMTP id z12so3141949wmi.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 04:54:37 -0800 (PST)
+	Sun, 23 Feb 2020 04:55:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=SNboWGCS+d2DOeKaCrfvyrWY48JmTJXVy3H/aPfSYrE=;
-	b=GuRXzy4Q4Hi0zUGXEUnB525Y23s91NnUvX2XMrMXdq134AHOH9D+CVi03MwSeYXbU5
-	xptn5n7gVjRv8diC3bEmhPoKbs4dpDr5tS9GXz7bdgA7zcLGP/k0KnGIehZtSbzOyjc3
-	OWG1mMPQkTykRvu6S1E2N5QBaUFG7nH9ZNTj7Os9AbXZsYrLtISpHy+Fyif4MPZOiB6k
-	byiC34kyIX7nrkhWAXQry0eOqZdv5FQx8SNCuRf+M0H7KsOxlc/9mVaYLIbT167mBu2s
-	IgKEhBIOnHmF0qDDt13QaCWqIl56tGHmB/MF/gNXUBulL2uf6MLQxbvgOqlVYbqrCjfJ
-	0gdQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=kJVXsuLSefA/CAmy1cBFJUUMWLwiNpst74Q2yRvjOug=;
+	b=GBmF4Ft/tM4FwEP7p2nz815RCXGr9TYrzDXvSXWvIjj9PatgkcEDcFy496gTy4Ycl7
+	eqkdcgBCFWJ3IEUDaRJUmZswkoGe21x7ccShbPmnOi9vKHvrjnBSN0feS0usN9zc9+QN
+	iVXpxWw/LT/zy3y+btkFblo9/RKZYkFpm7Df4fyQl2OVC0RJ3Ej3BuVmGoaEIx+S4sDp
+	EFAo0PhvcpmjZqrvvUx6LdyBm8nUA8bev/v1ppmxd6v9fTxVC8MqnhiLVbO6qTAKNWlo
+	ZY255QHMTUbbAv2U2lKiH+ukk1+mdUrYdeaWMopj+pzxfHutRNMf9tKrNZQz04ItPGiW
+	I02g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=SNboWGCS+d2DOeKaCrfvyrWY48JmTJXVy3H/aPfSYrE=;
-	b=Gb/q4tl3Mi8CAXgT5F0Qdqu1Ap+b6chxcIJgy/6FUSAbuJ67G+dXTCX3iltTfhyYyD
-	oF9iFUGBCLjA9IxXOOe5fUxSMmFsOhGZuFepyLIneH9x7Ek3nvuGTruzc8O3L97Zb1B3
-	TOlanbcGUP8hxiot8SLLK7i93Fq0pbzj/dHBinBhgXwkgSinWaXdmTvzn7C61ICSlPaL
-	zouat3OTqDqcUdPbW3c6O+rjuRpK0wXoxONb5Jk4Fd4KvrW0Z3+LZabQ2dXJanH+8YNm
-	jH8rkUh2Iu8zqNF0GkZcw4FhhWeVei0KSXrDq+by0dYPn6jSpV001YUUsOfGMLU8i0aE
-	hNnQ==
-X-Gm-Message-State: APjAAAWIFXZPQOxhlqBka6b32G4a3dSX018Ts2uXOw92q3WlqZzPS/Yx
-	F5QsVrLk5bOdrGYosqEY/Z+i0w==
-X-Google-Smtp-Source: APXvYqzJKvXYsqnYOrB2Jf68hQiBoJk+cYnDlrB7bglsq+IeFDTK9NVlVthoeMeW2dcXoxN6ECyiBw==
-X-Received: by 2002:a62:7883:: with SMTP id
-	t125mr48720050pfc.141.1582462477325; 
-	Sun, 23 Feb 2020 04:54:37 -0800 (PST)
-Received: from leoy-ThinkPad-X240s ([2400:8902::f03c:91ff:fe3f:32da])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=kJVXsuLSefA/CAmy1cBFJUUMWLwiNpst74Q2yRvjOug=;
+	b=rhN+XmeCJgJb6XY0eUfbZzrWDo5NUy5DMQvY/Y8zYvjKl94k4RLuxT3ZLxDWDkFU3L
+	U1QYXO8xTC4CQoi9YyRFvkjpDZn/0XzqQfDmhkIEL91nY9L4YpjcO7qXjtXgYc9kw0l8
+	1aKMJtXvF1rN5/Adsncf3qA8yqzHsj+MLpSmM7N0Gdo2Z4Njx9vhqF3j9M9H3wgTn/uA
+	6tIna7KeTV4cm1K3I2/mAZnoGIyYruRy5O1ZJrNc0Gd2tzuS3PH4zu0ajAptisi1KMap
+	PgbvWVEBoOIMDlKu6v+cQijvZINqsgGN9aXx2nBh5mlh3ttXKkdP/elPW0iIjXaVHOnU
+	Wxrg==
+X-Gm-Message-State: APjAAAVpJUsI6dNExadTS5iUhdpJNiuMy8agDYVu7YlPpbDxeLN08A4E
+	hr9a2XW/Rvg1hce31lgzcLZ+Rn60yqWU3A==
+X-Google-Smtp-Source: APXvYqyOQFw1kXusBozrgdImJzsvWhmCxKfkuWPUdPKRg8gCnh/RQiztn8aFWrTcfNNynAz3uZLR6g==
+X-Received: by 2002:a1c:2645:: with SMTP id m66mr15812691wmm.98.1582462525287; 
+	Sun, 23 Feb 2020 04:55:25 -0800 (PST)
+Received: from hackbox2.linaro.org ([81.128.185.34])
 	by smtp.gmail.com with ESMTPSA id
-	c68sm9320026pfc.156.2020.02.23.04.54.31
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 23 Feb 2020 04:54:36 -0800 (PST)
-Date: Sun, 23 Feb 2020 20:54:26 +0800
+	133sm14295204wmd.5.2020.02.23.04.55.24
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 23 Feb 2020 04:55:24 -0800 (PST)
 From: Leo Yan <leo.yan@linaro.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20200223125426.GB22823@leoy-ThinkPad-X240s>
-References: <20200221104340.21294-1-leo.yan@linaro.org>
-	<b9131d30-d9a2-a45c-726a-18be24be376e@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <b9131d30-d9a2-a45c-726a-18be24be376e@gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] Ply: Add recipe for git version
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Khem Raj <raj.khem@gmail.com>, Alex Kiernan <alex.kiernan@gmail.com>,
+	Sumit Garg <sumit.garg@linaro.org>,
+	Daniel Thompson <daniel.thompson@linaro.org>,
+	Loic Poulain <loic.poulain@linaro.org>
+Date: Sun, 23 Feb 2020 12:55:14 +0000
+Message-Id: <20200223125514.19467-1-leo.yan@linaro.org>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH v3] Ply: Add recipe for git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,25 +58,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Feb 2020 12:54:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 23 Feb 2020 12:55:25 -0000
 
-Hi Khem,
+Ply is a light-weight eBPF tool which compiles ply script or one-liner
+to Linux BPF programs and attaches to kprobes and tracepoints.  It
+doesn't require external dependencies except libc, so it's very friendly
+for embedded system usage.
 
-On Fri, Feb 21, 2020 at 02:20:59PM -0800, Khem Raj wrote:
-> Fails to build on mips
-> 
-> https://errors.yoctoproject.org/Errors/Details/392045/
+This patch adds the recipe to support ply building for git version.
 
-Sorry for extra efforts introduced by my patch.  I changed to use
-below line for arch compatible and tested with
-x86-64/aarch64/mips/ppc:
+Signed-off-by: Leo Yan <leo.yan@linaro.org>
+---
+ meta-oe/recipes-devtools/ply/ply_git.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/ply/ply_git.bb
 
-COMPATIBLE_HOST = "(x86_64.*|aarch64.*|arm.*|powerpc.*)-linux"
+diff --git a/meta-oe/recipes-devtools/ply/ply_git.bb b/meta-oe/recipes-devtools/ply/ply_git.bb
+new file mode 100644
+index 000000000..7d693b36d
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ply/ply_git.bb
+@@ -0,0 +1,15 @@
++SUMMARY = "Ply: A light-weight dynamic tracer for eBPF"
++HOMEPAGE = "https://github.com/iovisor/ply"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++DEPENDS += "bison-native"
++
++SRC_URI = "git://github.com/iovisor/ply"
++SRCREV = "aa5b9ac31307ec1acece818be334ef801c802a12"
++
++S = "${WORKDIR}/git"
++
++inherit autotools-brokensep
++
++COMPATIBLE_HOST = "(x86_64.*|aarch64.*|arm.*|powerpc.*)-linux"
+-- 
+2.17.1
 
-Will send out new patch soon.
-
-Thanks,
-Leo
 
