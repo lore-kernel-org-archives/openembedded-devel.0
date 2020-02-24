@@ -1,47 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com
-	[209.85.160.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C7056109F
+Return-Path: <3Q11UXgMKAEg6kuqyyqvo.myw@flex--wak.bounces.google.com>
+Received: from mail-pf1-f201.google.com (mail-pf1-f201.google.com
+	[209.85.210.201])
+	by mail.openembedded.org (Postfix) with ESMTP id 7223B61077
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2020 22:57:55 +0000 (UTC)
-Received: by mail-qt1-f174.google.com with SMTP id j23so7748430qtr.11
+	Mon, 24 Feb 2020 23:33:22 +0000 (UTC)
+Received: by mail-pf1-f201.google.com with SMTP id r127so7678148pfc.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2020 14:57:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=BApO/GZRu31zie7oIywwnpt9e0l0Zi59mwLbDZlQKBs=;
-	b=AweyfCLDkSOKvmp2Ns5NgzTmdPEU2ET5em+/93PXyXeNIhg4Rlc/ha1g5RS5NG3Qko
-	vzmxMW5DXUNyBtfbGQ4GHATDrsog9R9F19dRk0ypxqdrkkHpBk8LswIvMWYErkVX7R5e
-	C8zuGUd3W+K0zBFpmAAK13Kl/vJqYQwmz3lqNd0oQhUwAtl2sT4Jj7JUdGtMAh1AdChV
-	svTWUWaUnJ21VXx7tjWZ67sI+MR3FsAtMhlf4A8VuTyvOal1C+gQB/fnXkr7lnYYzUlG
-	E9p0E2nlPV3BbWeAeom00BseDQQgCKZar/77B01NTHSCZDFBo6m83K/wazYV6wWOY87T
-	3rcQ==
+	Mon, 24 Feb 2020 15:33:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
+	h=date:in-reply-to:message-id:mime-version:references:subject:from:to
+	:cc; bh=WH0aLjmFJu/IF+W/jqo6InYCE4EU326VUsrmS5sA3YE=;
+	b=M3suFGP7qjx7K83YIgNg9AgQC7HQqv0RjIGTo8sFY9xSj+tv0RQb6xNUu7qStz92vj
+	tH4hOVWI4OSC5talmsth6+EZANY9twTNTfeLAGNID41SgwsQ2A7pxfHYisFjETS1gxJH
+	sW6/og58nhEBD8GZMuNlu2FZoDZiuXkuKXCLKic+0JH25gnKuUfOIPubENTQupF0IJLt
+	pk9RRt9K18gpmLQ6jPotTD8uYsOoWEhej3bYjMRAfUUm6CyCQsmHL6JQGxSpFOXpDb4a
+	1MlqFdxF2lIYz/fa6hvqmj33vjoXj/WzWwkcJulv/QjVboxkNEI+Q/KKfx2c5DvgR0Lm
+	/7SA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=BApO/GZRu31zie7oIywwnpt9e0l0Zi59mwLbDZlQKBs=;
-	b=fiAsAFR5MeVJ0NC0aaa1WCWRFeGCF014mhlRnYRXssaCFmzKu2UzGGoBzs/HrjtAix
-	Hf1gNjhX3rbwvh7ZP1MqoRBIEuTkdxZJdwR5A00pNQtT7FoatmxBQq8cdMA83orW6XpM
-	WaaobBb2TrXRMHasIGCxspUnzzwnw27V+LHyIXbW+MkFGj2Nso2V/mgbR7+wMLizVAGM
-	Z88JZ5q/ZPmANbRfAslkZGsu7ULyDiXwGQWVt6rz0T0PmS0JLYYoy0JRosimTTjxuRPL
-	fy5ViFNcmyvB8WT9kXfoRtta6ATbnTaBM2gD+1ROH6KfSUq4cPFboXvvO50hEf4VJ+Of
-	Q91Q==
-X-Gm-Message-State: APjAAAXt+HanQmr0DCPW8Z/OnF/9ZkAKa6m+hWxCeH8vLEi60A/Muphp
-	uaFLoEu1LUT1/ozRzWDegRj11TTrQ102X2cYfd4uxbh6
-X-Google-Smtp-Source: APXvYqy+9VSESiPmB88cUajLOwBYWSfDGWgSwg63tgXrSvYgmXrkDf3LPd9apuNeKT3RIJgwdSVAiK/w1aJIUFjCbeo=
-X-Received: by 2002:aed:29a4:: with SMTP id o33mr10643557qtd.316.1582585075880;
-	Mon, 24 Feb 2020 14:57:55 -0800 (PST)
-MIME-Version: 1.0
-References: <20200224192340.13855-1-matt.ranostay@konsulko.com>
-In-Reply-To: <20200224192340.13855-1-matt.ranostay@konsulko.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 24 Feb 2020 14:57:45 -0800
-Message-ID: <CAMKF1so_Nd40FHv=3D0zxGojM=J2XaCnDBz-O+wbaibowhqvZw@mail.gmail.com>
-To: Matt Ranostay <matt.ranostay@konsulko.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] ttf-noto-emoji: add recipe
+	h=x-gm-message-state:date:in-reply-to:message-id:mime-version
+	:references:subject:from:to:cc;
+	bh=WH0aLjmFJu/IF+W/jqo6InYCE4EU326VUsrmS5sA3YE=;
+	b=tNlvP/U3FAk9g0Qt3BKWKSb646Ifdaw0ggaf7KnvtimFj2JLsB4cklvg4KQ0nVXaf8
+	3Fxdxc8qvPtM6i0V8stEQUxsAhCoZl4tvAn8A2vUMcsNd0DnAS1w9YxBKVGnFIg6TeQj
+	1CHUuAbf22cVnChsJkMNuaAfVT8gn8MQMrobrJTBU9vIjMUKbygMgz+SMzaTSpL4OBOh
+	hek3mLO+d/fX9XGcK+m3N3Lo+w1fItdLTzHEgHD+GgxYxtnqxp2sinSd+S7u0AxC7mLS
+	1n4BWX5QakkJehketMOHf0sfzx+bm+v0jWfx/MPQT0wUM1HzJ+yONt4Fc5cMaTE1lN0a
+	mkig==
+X-Gm-Message-State: APjAAAVjjC2GKikie4lcTwj1bsAr0a0KGZTZ9JAEF/uIyuPSMl0jS3nY
+	diXVwNUMxhk1G4q7WGB+u8O/e3pXra3IfV+g4WmWvMCiktck8mqG5xs0OuMbisWQsMisKAizcwY
+	ee/+NFhq4oy7zVkj2LimEiBG+KeXFrtFNGFe5l62ikOnN17uZzgPx0BEriVJqJ1iyt18Mj7ZV9O
+	rXoS8=
+X-Google-Smtp-Source: APXvYqzVybb2KE5vvJeF4ou5J/2yhkdXo/i0d5xmHmxRnoElIQVp8hHGy0DdwdFuuEzTe+BGIsHa3JM=
+X-Received: by 2002:a65:645a:: with SMTP id s26mr53437921pgv.135.1582587203249;
+	Mon, 24 Feb 2020 15:33:23 -0800 (PST)
+Date: Mon, 24 Feb 2020 15:33:12 -0800
+In-Reply-To: <20191018234515.15676-1-wak@google.com>
+Message-Id: <20200224233312.223960-1-wak@google.com>
+Mime-Version: 1.0
+References: <20191018234515.15676-1-wak@google.com>
+X-Mailer: git-send-email 2.24.1
+From: "William A. Kennington III" <wak@google.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH v2] span-lite: Add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,77 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2020 22:57:55 -0000
+X-List-Received-Date: Mon, 24 Feb 2020 23:33:22 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 24, 2020 at 11:24 AM Matt Ranostay <matt.ranostay@konsulko.com>
-wrote:
+We would generally prefer to use stable releases, but there are fixes in
+master that have not yet been released for compiling the test cases
+against libc++.
 
-> Add both B/W and color emojis fonts from the noto-emoji project.
->
-> Important note for the color emojis to render the pixmap PACKAGECONFIG
-> option needs to be set in freetype package.
->
-> Signed-off-by: Matt Ranostay <matt.ranostay@konsulko.com>
-> ---
->  .../ttf-fonts/ttf-noto-emoji_20190815.bb      | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/
-> ttf-noto-emoji_20190815.bb
->
-> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20190815.b=
-b
-> b/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20190815.bb
-> new file mode 100644
-> index 000000000..e35e08ae1
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20190815.bb
-> @@ -0,0 +1,19 @@
-> +require ttf.inc
-> +
-> +SUMMARY =3D "Google noto emoji font pack"
-> +HOMEPAGE =3D "https://github.com/googlefonts/noto-emoji"
-> +LICENSE =3D "OFL-1.1"
-> +LIC_FILES_CHKSUM =3D
-> "file://${S}/fonts/LICENSE;md5=3D55719faa0112708e946b820b24b14097"
+Signed-off-by: William A. Kennington III <wak@google.com>
+---
+ meta-oe/recipes-support/span-lite/span-lite_git.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-oe/recipes-support/span-lite/span-lite_git.bb
 
+diff --git a/meta-oe/recipes-support/span-lite/span-lite_git.bb b/meta-oe/recipes-support/span-lite/span-lite_git.bb
+new file mode 100644
+index 000000000..96ec829b7
+--- /dev/null
++++ b/meta-oe/recipes-support/span-lite/span-lite_git.bb
+@@ -0,0 +1,12 @@
++SUMMARY = "single-file header-only version of a C++20-like span for C++98, C++11 and later"
++HOMEPAGE = "https://github.com/martinmoene/span-lite"
++LICENSE = "BSL-1.0"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
++
++SRC_URI += "git://github.com/martinmoene/span-lite"
++SRCREV = "e03d1166ccc8481d993dc02aae703966301a5e6e"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++inherit ptest
+-- 
+2.24.1
 
-Do we need S here ?
-
->
-> +
-> +SRC_URI =3D "git://
-> github.com/googlefonts/noto-emoji;protocol=3Dhttps;branch=3Dmaster"
-
-
-Drop branch here master is default
-
->
-> +SRCREV =3D "833a43d03246a9325e748a2d783006454d76ff66"
-> +
-> +PACKAGES =3D "${PN}-color ${PN}-regular"
-> +FONT_PACKAGES =3D "${PN}-color ${PN}-regular"
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +FILES_${PN}-color =3D "${datadir}/fonts/truetype/NotoColorEmoji.ttf"
-> +FILES_${PN}-regular =3D "${datadir}/fonts/truetype/NotoEmoji-Regular.ttf=
-"
-> +
-> +do_compile[noexec] =3D "1=E2=80=9D
-
-
-I wonder how f this should simply use deltask here
-
->
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
