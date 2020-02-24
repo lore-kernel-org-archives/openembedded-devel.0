@@ -1,91 +1,55 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
-	[209.85.215.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 3382A6173C
+Return-Path: <leo.yan@linaro.org>
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id BEA83610BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2020 00:48:32 +0000 (UTC)
-Received: by mail-pg1-f193.google.com with SMTP id d9so4231196pgu.3
+	Mon, 24 Feb 2020 01:10:26 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id d6so4248024pgn.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Feb 2020 16:48:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:autocrypt:organization:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=TFRGwGnyT8ZRyl1nINHL8HiyAtNZA42f/p9L/ogs+dA=;
-	b=Men/CcxnzY4+59y8HcnCRigEgDmZ9Awqlh1tFL1K33cHJt3qvJ2VTQ4KBIw88dNkXe
-	bdVnGf19OgFxCwOo/9ccJ8bNt10TC1QZXIFB9SbU3sWCTKVlMFqisaGb9TEmraoj40/b
-	AxKR59fHnufxVaCnORFSzi3AHqPdEW5D20hO3qFXFLQfw1kW8sK2bZTfqTjw9SV6zaBj
-	D3ROSShmO3bBq8T8J6XrX3aWdccMPwdX8hywC7VFfKmOeXTCAjBzs1/bN4tVOTd+/Eix
-	upNITl6HwObcg8/k7CB1MO69WoL4RIdg96cNjK42qUSoAoM5GveHteLXOCd3ISOO1iI3
-	uZVg==
+	Sun, 23 Feb 2020 17:10:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=/j1ECercVH56sFpqZ4JmyZ7kl75k/n4c7qDYNB5WnGM=;
+	b=WY4T/tkzemmWMybzh1oNeIRYFQd/qJC0d5lBPFq/m7kj/bO9ZGr9lJW2k3lbpgzF1J
+	mMjlou7QGwb1jjoLT/Tu70ZVn6BYbGOchdj+0Bcq6UQhB49muIIWsU9WHoDjd55409HM
+	BJvCz+Sbde2cDLkBafcbx+PHkPfEDpGnT7lxHvaaDPLysqTIXq0K5UuFyRWzUBy3wyf3
+	PWuEI5abuzOoNxzqrobA4Tpl2lAb7kZsHT2LJm5Xufa/wP1ODg7GcMIqFi/Ltea0p96K
+	426npJf8MdyUu5/gja43Px0WMDF0/1+k04wPtAovkBJJrY7KB/3qCaa1nF/k1PKOXdks
+	DjQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:autocrypt
-	:organization:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=TFRGwGnyT8ZRyl1nINHL8HiyAtNZA42f/p9L/ogs+dA=;
-	b=CbDBjMHQZ2K2JuZAahUqSJh7qe8smWd2TJ8JB9t+gt5w32k0+hVUMqqUZoMZSSXpSh
-	zBe7634E14kuyhrckG2aamv4Cf6897mEl2/FyfhDxPf/RMxuUjFGB0Q/Dg0P3Gp5HM1T
-	It2RLMGYVFcMDaZ5lBIxKiy/KDJywXE1CMXykD3W0UjNOjqK6gBKunaEobkwy2rtCf/J
-	YqX+H7gFg4ZsUB5VgJu/vMah4G1EZD7CdAihkNWtwMsIv9dVLhOEmBWgMBP3H2yGg7Tr
-	enCgfQvrCPnUlXUcV54MKDjG8I5aCbUZ9bOq7qL9U5MovauKYFLRjmy8KAP1dP85o7Mg
-	Km9A==
-X-Gm-Message-State: APjAAAX+PWmRKs2meEGcG1hOU6A+icmGHrUXlI5HjUENzXg7F60Sjoyp
-	OR5+8Wz5trBIviwK7rhwqew=
-X-Google-Smtp-Source: APXvYqy0uOR+oM1c/Ws1yZAsmnayGYJtxO+KD+iY1EMpF6KzfSZGy5cEhJ2Q+zjt5JBuytXGG4MPzQ==
-X-Received: by 2002:a63:8541:: with SMTP id u62mr3339589pgd.84.1582505313831; 
-	Sun, 23 Feb 2020 16:48:33 -0800 (PST)
-Received: from ?IPv6:2601:646:9200:4e0::13a9? ([2601:646:9200:4e0::13a9])
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=/j1ECercVH56sFpqZ4JmyZ7kl75k/n4c7qDYNB5WnGM=;
+	b=q6IyaRGZGu9mmU/9X2dwkyRe57nR8NmYfR9RzG+/HK7GyHQD/MYKgC1m39GCfzMbst
+	ffpQVhEPCnWsARnx52+aRNGZbo4t0Fnm5gpbc8QmMXWicmSJFy4WLrUl+vQ3MdX+jVfb
+	D/VqJo3ma+HaKz/eNTF9kUE3s1YTKXKTVT7AwGHRFM7jpEo5aEvGogslRDRLqCqKwu+7
+	2NzDcNvdeUVQuLjtmNJzyDi9JN1dqL60UKUBYbfH4ZPiz42TKYzadC+OFQaWojgKb+cv
+	uQwqOo8H4JJFxFq/K1DNNMYcI3sLanDR6SUbLTGsux5wmmvvJ2BPamMq0qrlW5eje7AM
+	QJ9g==
+X-Gm-Message-State: APjAAAVH72XfygFQ8MAJfJQC+GCLOyYA4gP4fM+a3XXh6rv0drWBgZq6
+	40L78XpRrXgF4YHUXsuo3OE0mw==
+X-Google-Smtp-Source: APXvYqz9ThUiI+tujeHm0tR2bRfGBDlqZf/nfCNmfJPM7NZXCGGOsuDHj9GncPZWD8cLrsWwB3Cy/Q==
+X-Received: by 2002:a63:9856:: with SMTP id l22mr50201139pgo.344.1582506627654;
+	Sun, 23 Feb 2020 17:10:27 -0800 (PST)
+Received: from leoy-ThinkPad-X240s ([2400:8902::f03c:91ff:fe3f:32da])
 	by smtp.gmail.com with ESMTPSA id
-	fz21sm10166466pjb.15.2020.02.23.16.48.33
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Sun, 23 Feb 2020 16:48:33 -0800 (PST)
-To: Leo Yan <leo.yan@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Sumit Garg <sumit.garg@linaro.org>,
-	Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>
+	d69sm10777267pfd.72.2020.02.23.17.10.23
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sun, 23 Feb 2020 17:10:27 -0800 (PST)
+Date: Mon, 24 Feb 2020 09:10:17 +0800
+From: Leo Yan <leo.yan@linaro.org>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20200224011017.GA5175@leoy-ThinkPad-X240s>
 References: <20200223053549.7056-1-leo.yan@linaro.org>
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
-	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
-Organization: HIMVIS LLC
-Message-ID: <3e126d8b-ed9e-3e5b-5fa7-61e043c10355@gmail.com>
-Date: Sun, 23 Feb 2020 16:48:32 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.5.0
+	<3e126d8b-ed9e-3e5b-5fa7-61e043c10355@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20200223053549.7056-1-leo.yan@linaro.org>
+In-Reply-To: <3e126d8b-ed9e-3e5b-5fa7-61e043c10355@gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+	Loic Poulain <loic.poulain@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH v2] luajit: Upgrade to 2.1.0-beta3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -99,60 +63,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2020 00:48:33 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 24 Feb 2020 01:10:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
+Hi Khem,
 
-
-On 2/22/20 9:35 PM, Leo Yan wrote:
-> Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
-> misses to support aarch64, the patch upgrades to luajit 2.1.0-beta3.
+On Sun, Feb 23, 2020 at 04:48:32PM -0800, Khem Raj wrote:
+> On 2/22/20 9:35 PM, Leo Yan wrote:
+> > Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
+> > misses to support aarch64, the patch upgrades to luajit 2.1.0-beta3.
+> > 
+> > Signed-off-by: Leo Yan <leo.yan@linaro.org>
+> > ---
+> >  .../luajit/{luajit_2.0.5.bb => luajit_git.bb}        | 12 ++++--------
+> >  1 file changed, 4 insertions(+), 8 deletions(-)
+> >  rename meta-oe/recipes-devtools/luajit/{luajit_2.0.5.bb => luajit_git.bb} (88%)
+> > 
+> > diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+> > similarity index 88%
+> > rename from meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+> > rename to meta-oe/recipes-devtools/luajit/luajit_git.bb
+> > index 93128dda8..afa60dba7 100644
+> > --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+> > +++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+> > @@ -3,12 +3,9 @@ LICENSE = "MIT"
+> >  LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
+> >  HOMEPAGE = "http://luajit.org"
+> >  
+> > -PV .= "+git${SRCPV}"
+> > -SRCREV = "02b521981a1ab919ff2cd4d9bcaee80baf77dce2"
+> > -SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http \
+> > -           file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
+> > -           file://clang.patch \
+> > -"
+> > +PV = "2.1.0+${SRCPV}"
 > 
-> Signed-off-by: Leo Yan <leo.yan@linaro.org>
-> ---
->  .../luajit/{luajit_2.0.5.bb => luajit_git.bb}        | 12 ++++--------
->  1 file changed, 4 insertions(+), 8 deletions(-)
->  rename meta-oe/recipes-devtools/luajit/{luajit_2.0.5.bb => luajit_git.bb} (88%)
-> 
-> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-> similarity index 88%
-> rename from meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-> rename to meta-oe/recipes-devtools/luajit/luajit_git.bb
-> index 93128dda8..afa60dba7 100644
-> --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-> +++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-> @@ -3,12 +3,9 @@ LICENSE = "MIT"
->  LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
->  HOMEPAGE = "http://luajit.org"
->  
-> -PV .= "+git${SRCPV}"
-> -SRCREV = "02b521981a1ab919ff2cd4d9bcaee80baf77dce2"
-> -SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http \
-> -           file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
-> -           file://clang.patch \
-> -"
-> +PV = "2.1.0+${SRCPV}"
+> I think we will endup in trouble when 2.1.0 releases, so perhaps we
+> should leave room for  sorting 2.1.0 higher than whatever we do now
+> perhaps PV = ""2.0.5+2.1.0-beta3" would be workable.
 
-I think we will endup in trouble when 2.1.0 releases, so perhaps we
-should leave room for  sorting 2.1.0 higher than whatever we do now
-perhaps PV = ""2.0.5+2.1.0-beta3" would be workable.
+This suggestion is fine for me.  But I have some concern for this since
+the naming might introduce confusion when later someone reads this
+recipe, which combines two different versions together.  So seems to
+me PV = "2.1.0-beta3" is more directive, and it can reflect the exact
+version for the building.  How about you think for this?
 
-> +SRCREV = "8271c643c21d1b2f344e339f559f2de6f3663191"
-> +SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1"
->  
->  S = "${WORKDIR}/git"
->  
-> @@ -90,8 +87,7 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
->  "
->  FILES_luajit-common = "${datadir}/${BPN}-${PV}"
->  
-> -# Aarch64/mips64/ppc/ppc64/riscv64 is not supported in this release
-> -COMPATIBLE_HOST_aarch64 = "null"
-> +# mips64/ppc/ppc64/riscv64 is not supported in this release
->  COMPATIBLE_HOST_mipsarchn32 = "null"
->  COMPATIBLE_HOST_mipsarchn64 = "null"
->  COMPATIBLE_HOST_powerpc = "null"
-> 
+In next version, I will remove the two patches from 'luajit/luajit'
+folder.  Also please let me know if you have any concern for this.
+
+Thanks for reviewing and suggestions!
+Leo
+
+> > +SRCREV = "8271c643c21d1b2f344e339f559f2de6f3663191"
+> > +SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1"
+> >  
+> >  S = "${WORKDIR}/git"
+> >  
+> > @@ -90,8 +87,7 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
+> >  "
+> >  FILES_luajit-common = "${datadir}/${BPN}-${PV}"
+> >  
+> > -# Aarch64/mips64/ppc/ppc64/riscv64 is not supported in this release
+> > -COMPATIBLE_HOST_aarch64 = "null"
+> > +# mips64/ppc/ppc64/riscv64 is not supported in this release
+> >  COMPATIBLE_HOST_mipsarchn32 = "null"
+> >  COMPATIBLE_HOST_mipsarchn64 = "null"
+> >  COMPATIBLE_HOST_powerpc = "null"
+> > 
 
