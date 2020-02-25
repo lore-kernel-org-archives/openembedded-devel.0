@@ -1,47 +1,48 @@
 Return-Path: <scott.branden@broadcom.com>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 59D8C6062A
+Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
+	[209.85.214.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CB82C61319
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 00:09:38 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id d9so5979667pgu.3
+	Tue, 25 Feb 2020 00:09:58 +0000 (UTC)
+Received: by mail-pl1-f194.google.com with SMTP id p7so347983pli.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2020 16:09:39 -0800 (PST)
+	Mon, 24 Feb 2020 16:10:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
 	h=from:to:cc:subject:date:message-id;
 	bh=7x9Jrp7mr+MciOc/RCKzZqJVPkqGgpZJey9+8qzI15I=;
-	b=cEPyiQX+wqFh80S40P65sHj9wLw6N5zr3Qd5OXFo9jyJVeal3VBPVA7v+CR+xCeDGd
-	BTTX/ffkUDHq2LejbDcld948uD+OLCRNe0gUeHBlVEQlj9FD66bks939u2KvQwP9tbU2
-	602bkxP8VQhKZoWq5gU+DR4sxQ6BR2PMRELVU=
+	b=M7CpS40BLPXKG1ffmMpRyzyVfyqzya7tX62jT4pKd0ddYe03hFQsb9LlyryJisyHJy
+	5IKrXABNvQnnveCRozYKoOlPV1takVik7QMn1n94t7LiuYx63I7RFqnuWZTpV3nz3hgj
+	sWsP4ClcuVKGvZI9EKCuQq8AvQYGG3S79xgU4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
 	bh=7x9Jrp7mr+MciOc/RCKzZqJVPkqGgpZJey9+8qzI15I=;
-	b=jC0tsO6nXG5nsDGDzGHQKh4NJnrXkFasXx1kW1/4R9uef4hbuKi1+9AcXhdaqdtnl+
-	dBBX8LN64thFYoVimbBFInKl13CWgGetEY0Z7E/7cN0NKUH4bDADhOoN5Rxjze0TTLvu
-	fOdvBSci+a5ZSNGWcRerE+Slg699MG/txbDj5MJlzGpUV0RWYdxWdktqK0LCwFttYJV+
-	9Nzlfp3f8r/jGLd0oRgeOh6Aq/TCX2hDnD1ZZw2gH8M13SCYt5kCHfn6MBeTWHXeCeiI
-	lJfyWq90wtnDbBQJ93m3PA2eFJa1IzLvdAxj7Zpc5TTkN8BLnBQda0oHveASIzd5uKvB
-	RlLQ==
-X-Gm-Message-State: APjAAAUUA4TT4t5WUq8SCXabDrgVoPrP9Y9WoiPe2mzW8bU7hrCVOIVP
-	avA7szHA8gaohi6oUt612Gt6n95s5x7Hp+5hxU09EZNUf6b6rOr3PXeeC4SKJjphYNE3GR+TZDV
-	FgPKjVyFXpRM6kSJYP5n6Oog/OT1cRC2PQZCsDJYGGcyKueu+XJyM06net9b5Mwn55V0/vQinA7
-	EfW9arC2c4qcwVoFVKH+YAiQDoOsNN
-X-Google-Smtp-Source: APXvYqyyFtIcK48yhYJtit2FrATJKYbCzYHkrFx3vZ03yXH+5tq2s9nO1PSZI0Z9son1u19c9AXckw==
-X-Received: by 2002:a62:1958:: with SMTP id 85mr52098931pfz.221.1582589378991; 
-	Mon, 24 Feb 2020 16:09:38 -0800 (PST)
+	b=oTJ6AI54OtgPR75SyeeTKjeejdDhXlZ04QoicIEOSHDG3erBlevQnp1nfhVcbPfowm
+	CjDM28VxFz4SSq9Bjyz1iB+gE9wYW2eUJ5fi/kO9Yx5RebRDDZvydODSny87H3mYg213
+	whNnXXaABqStzwmH87QRqJC3QXXTwnzUFklmwf0rWa+sNpeI6wEIEJMGX0sJG0vNUkbQ
+	aNrG8yIqBNyLFoB8Ip/2/d6xCQiEqFePk5U0bcl/duuB1Qz057i53XfIK2sZhddFTlEE
+	0K/50aqG1DFMdPKdOHR0xQUAxLIH3bSFxw9dMMaXFXVSpiy+1jbF7+og1LqbP55tfvan
+	EhmQ==
+X-Gm-Message-State: APjAAAUWVST9whnysXnGT+yZu8//kymSoFn5blE6+F6Cu4KsQXuPvChC
+	NXMf3pT3eyEQDxRfCujDnAZpvc2PGM0e0uoIWZgjAwD6S2B/14jlyNS3DxKOZLEeGdckWwXEgx3
+	zOSrOv9EmdwyAsT3S1FtFAo8wbq9Kh38xjqO/maeX5z4bThMsWJVc5fQlAwZgr9lAsiryLytqED
+	vq76Po7YGvL/wkF4NQt0xUbKxNZ85T
+X-Google-Smtp-Source: APXvYqyUdYkR0BSE/90C4QXVDOmtGabZ6lcAKtnigT3NoXkURqsFO5zTkpJ5/9O7D4X161tKolpjOQ==
+X-Received: by 2002:a17:90a:cb87:: with SMTP id
+	a7mr1818978pju.135.1582589399405; 
+	Mon, 24 Feb 2020 16:09:59 -0800 (PST)
 Received: from lbrmn-lnxub113.broadcom.net ([192.19.228.250])
 	by smtp.gmail.com with ESMTPSA id
-	a36sm13951567pga.32.2020.02.24.16.09.37
+	z10sm13517078pgj.73.2020.02.24.16.09.58
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 24 Feb 2020 16:09:38 -0800 (PST)
+	Mon, 24 Feb 2020 16:09:58 -0800 (PST)
 From: Scott Branden <scott.branden@broadcom.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Feb 2020 16:09:27 -0800
-Message-Id: <20200225000927.17849-1-scott.branden@broadcom.com>
+Date: Mon, 24 Feb 2020 16:09:53 -0800
+Message-Id: <20200225000953.17899-1-scott.branden@broadcom.com>
 X-Mailer: git-send-email 2.17.1
 Cc: Mircea Carausu <mircea.carausu@broadcom.com>
-Subject: [meta-multi-media][PATCH] fdk-aac: add initial fdk-aac recipe
+Subject: [meta-multimedia][PATCH] fdk-aac: add initial fdk-aac recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,7 +55,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 00:09:38 -0000
+X-List-Received-Date: Tue, 25 Feb 2020 00:09:58 -0000
 
 From: Mircea Carausu <mircea.carausu@broadcom.com>
 
