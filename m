@@ -1,87 +1,55 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 550BE616F4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
+	[209.85.221.68])
+	by mail.openembedded.org (Postfix) with ESMTP id AFA6F616C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 19:22:50 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id i6so67637pfc.1
+	Tue, 25 Feb 2020 19:24:38 +0000 (UTC)
+Received: by mail-wr1-f68.google.com with SMTP id p18so12521431wre.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 11:22:51 -0800 (PST)
+	Tue, 25 Feb 2020 11:24:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:autocrypt:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=3qP8S10o5kxkK2UT+3wxiVTGKL2nYapEfrCzHi0VvRY=;
-	b=E2R39/+WbfBk8M9r0g1Sx/SlRyZOcXOWSsbItZW1xHM0LjloNqE8G31cSiHLE9FVYP
-	BjLrGKR5ZSHmXDyVmolhMAAWUu+V3SC3qbsySlVoe8BP++ogdO+Bh/YiIhFHZK2Z7SpO
-	2tcPJKOY0yCEaas8gb1kmSPeQZ/yKtKBY3w2RmBh2VFr7bgNSw1nYluN2PqfAQAFZIY5
-	YbWEC8UpG21oiTf8bG3kHMQcqwNpSyQ5dxJHrExMGsukxBYNJXC31tvmDlGS50g75IFD
-	CpzsBLRj3G1hBX20ziVrhEoxhZg73+dJLsHJqW/Wzx6BJdcV/agyn5TnzSq3USfwL6tf
-	j0Tg==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=4TipYaRxB6Cj8gcoXRh/u260jWmgc3URPfvn0GqFLRI=;
+	b=iLUbrXakCnOH5uNBEiJEUQ8pPGNNvBgFf91Rg+kcbphCka/2BdF+dbN0BWa+e9E5/b
+	sh2LxZLdr4I5fgVnchqf3RuwR36jBdiDJbnATSl3Mt+u5ePi01C8TK70KXmJLc0KwI7c
+	lvJaY9t5hLCz9LbwBS3vg/IVMwA/I7TQUtmXgeDD9XnEQT9S9X1JIc/MUsyF0rlS3bxk
+	ogQQAaHalH/Tui0u5Rrck60N6VESjsgb5VYOpxiPj5xaTzViwAeE6mBm9NueRGZufcCO
+	1xqweP4eJesMq1CJHitwAKOo7WHk60+AVDu5YqHuvXa1thYWCY7fiHXwpef7VUOLe842
+	yKCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=3qP8S10o5kxkK2UT+3wxiVTGKL2nYapEfrCzHi0VvRY=;
-	b=hGstRueNXi1+OK03Pjapj60pe2OzxQdyu5tMWP2PUObUoJk+UTBnsEB/XDj2vX95MM
-	nwxBvP0mUIwCuceUAYlW05FJNAf7Hiy3fBhQcp1lcbcmo72lpDz/PWXPB5SL6L+bfxt0
-	FIvR39t1gmaohPrn7yFiMwuESS/zzquNwLBWw/l/yhlhTrbuvPIa4tLtM+LYNJJxS8GL
-	dtxxMSZq7Pklfc9zomLTw2jlJWszD92EwwI9tXjBQt1Z0V6oJpl+C7xn+Kxg7XArQ4Wb
-	LTE10oOtp7viqZdhBNbB0sl1OLKBiIIQKoDk0V73ELONsf9hUcHmSXyOerUiOigBe37l
-	8/Aw==
-X-Gm-Message-State: APjAAAV9gVQnV1t8TDWdHg+4/GGeEg/HItrQ27Pi2oPO1a5cs24l9dME
-	ETJ/MAtvXehXgudLQHzNh7c3W/m8hK8=
-X-Google-Smtp-Source: APXvYqzDPOotXQtyfQS/fMmEyA7nfmBsCirIzVz68xr7je6orLnx+0hIVrT+VJgpdrsc+Ons6XWM7Q==
-X-Received: by 2002:a62:ce48:: with SMTP id y69mr273993pfg.8.1582658570862;
-	Tue, 25 Feb 2020 11:22:50 -0800 (PST)
-Received: from ?IPv6:2601:646:9200:4e0::396c? ([2601:646:9200:4e0::396c])
-	by smtp.gmail.com with ESMTPSA id
-	g10sm18509666pfo.166.2020.02.25.11.22.50
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Tue, 25 Feb 2020 11:22:50 -0800 (PST)
-To: Matt Ranostay <matt.ranostay@konsulko.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20200225035949.30515-1-matt.ranostay@konsulko.com>
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
-	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
-Message-ID: <4428794a-fc1f-c178-d3d0-28bf2f3e5adf@gmail.com>
-Date: Tue, 25 Feb 2020 11:23:03 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.5.0
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=4TipYaRxB6Cj8gcoXRh/u260jWmgc3URPfvn0GqFLRI=;
+	b=I6wCFn7skc1TXqtbsFlOGwDBvwvbmddnvEYELCb+W6eImOhOgwwm4vRP3pvfTkznY5
+	AFER5xMB0jix3ScOXl69i+vieoUrpMDwNx3OmgyViBaZQvUFp58cjfoto3aBPOyCUGKi
+	fOv6x/0jVBilfCTeH7LWkT+ztMyNa+G+lLu+UM8zE3H9mw3q6/UsxES9o6Pb3tqfB/hJ
+	D+08T1kEJws9O6SYGFxdVpWHN33+KfbbrvLNL5thiXk/zwAZzULA5TLJ3yTi7zqRfZhD
+	TumpGAtqpSW9jkJeXJBGqZT8b4heL65HGYDbfaOKZUv7DEkOtblip4i3kC87Dg5JAHQb
+	AxSA==
+X-Gm-Message-State: APjAAAW/I7cD0sjvfH/UvcUxRGYIchLAG1yiqurApCLfnrvRgrrTbJQ/
+	MDxh/Kh9xDgg3BdzebpJFNA=
+X-Google-Smtp-Source: APXvYqwcdBBnDBjgqZ0FIVrPzS0CVF6Knf/EjXOIBwHzARS8C+Owp+xu1q2SEn9g9Fc+QmunckH8hA==
+X-Received: by 2002:a5d:6411:: with SMTP id z17mr686530wru.57.1582658679379;
+	Tue, 25 Feb 2020 11:24:39 -0800 (PST)
+Received: from localhost ([109.238.218.228]) by smtp.gmail.com with ESMTPSA id
+	j16sm3461226wru.68.2020.02.25.11.24.38
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 25 Feb 2020 11:24:38 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 25 Feb 2020 20:24:37 +0100
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20200225192437.dmcrr4pnxbn3xugx@jama>
+References: <20200225190710.3928-1-Martin.Jansa@gmail.com>
+	<CAMKF1spuk9oPW-9e6OVW0=O-MUWHM_0tOc35ZT4P5_qneXo8Aw@mail.gmail.com>
+	<20200225192202.fjc5mxecs6c6oruj@jama>
 MIME-Version: 1.0
-In-Reply-To: <20200225035949.30515-1-matt.ranostay@konsulko.com>
-Subject: Re: [[meta-oe][PATCH v2] ttf-noto-emoji: add recipe
+In-Reply-To: <20200225192202.fjc5mxecs6c6oruj@jama>
+User-Agent: NeoMutt/20180716
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/2] nodejs: don't enable ares support by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -94,56 +62,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 19:22:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 Feb 2020 19:24:39 -0000
+X-Groupsio-MsgNum: 83035
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="r2x4ijkxbfdmd2vy"
+Content-Disposition: inline
+
+--r2x4ijkxbfdmd2vy
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Feb 25, 2020 at 08:22:02PM +0100, Martin Jansa wrote:
+> On Tue, Feb 25, 2020 at 11:13:42AM -0800, Khem Raj wrote:
+> > On Tue, Feb 25, 2020 at 11:07 AM Martin Jansa <martin.jansa@gmail.com> =
+wrote:
+> > >
+> > > * c-ares is in meta-networking and meta-oe doesn't depend on meta-net=
+working
+> > > * fixes:
+> > >   ERROR: Nothing PROVIDES 'c-ares' (but meta-oe/recipes-devtools/node=
+js/nodejs_12.14.1.bb DEPENDS on or otherwise requires it)
+> > >   in builds without meta-networking
+> > >
+> >=20
+> > this patch makes me thing if c-ares is better suites for meta-networking
+>=20
+> ?
+>=20
+> This patch exists, because c-ares _is_ in meta-networking, while nodejs
+> which depends on it is in meta-oe.
+
+It got enabled in default PACKAGECONFIG in:
+
+commit 76dd3dac1f1e67a5c44ad732b8e827cc36ded641
+Author: Andr=E9 Draszik <git@andred.net>
+Date:   Tue Oct 29 16:42:24 2019 +0000
+
+    nodejs: allow use of system c-ares (and make default)
+   =20
+    Use system c-ares via PACKAGECONFIG by default. So far,
+    nodejs had been built using its embedded copy of c-ares,
+    which we generally try to avoid, for the known reasons
+    (independent updates, cve & license checks, etc).
+   =20
+    Notes:
+    * otherwise nodejs uses its bundled version of c-ares
+    * the PACKAGECONFIG variable is 'ares' so as to be in
+      line with other uses of this (wget & curl recipes in
+      OE core)
+   =20
+    Signed-off-by: Andr=E9 Draszik <git@andred.net>
+    Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+So unless you actually meant to move c-ares from meta-networking to
+meta-oe..
+
+> > > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > > ---
+> > >  meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb b/meta=
+-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+> > > index 6eb52c209a..9f91a3f4dd 100644
+> > > --- a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+> > > +++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+> > > @@ -51,7 +51,7 @@ ARCHFLAGS_arm =3D "${@bb.utils.contains('TUNE_FEATU=
+RES', 'callconvention-hard', '-
+> > >  GYP_DEFINES_append_mipsel =3D " mips_arch_variant=3D'r1' "
+> > >  ARCHFLAGS ?=3D ""
+> > >
+> > > -PACKAGECONFIG ??=3D "ares icu libuv zlib"
+> > > +PACKAGECONFIG ??=3D "icu libuv zlib"
+> > >  PACKAGECONFIG[ares] =3D "--shared-cares,,c-ares"
+> > >  PACKAGECONFIG[gyp] =3D ",,gyp-py2-native"
+> > >  PACKAGECONFIG[icu] =3D "--with-intl=3Dsystem-icu,--without-intl,icu"
+> > > --
+> > > 2.20.1
+> > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
 
-On 2/24/20 7:59 PM, Matt Ranostay wrote:
-> Add both B/W and color emojis fonts from the noto-emoji project.
-> 
-> Important note for the color emojis to render the pixmap PACKAGECONFIG
-> option needs to be set in freetype package.
-> 
+--r2x4ijkxbfdmd2vy
+Content-Type: application/pgp-signature; name="signature.asc"
 
-We have sstate failures due to fontconfig dep
+-----BEGIN PGP SIGNATURE-----
 
-http://jenkins.nas-admin.org/view/OE/job/oe_world_workspace-compare-signatures/956/console
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXlV0dAAKCRA3VSO3ZXaA
+HGa1AJ9PRrcV4xR91FTOnHzFHs506yHVzgCfU+OZ3Hryu7Ln/m3ZFoV+kF4mx/A=
+=e6cW
+-----END PGP SIGNATURE-----
 
-this should be added to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS in conf/layers.conf
-
-> Signed-off-by: Matt Ranostay <matt.ranostay@konsulko.com>
-> ---
->  .../ttf-fonts/ttf-noto-emoji_20190815.bb      | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20190815.bb
-> 
-> diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20190815.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20190815.bb
-> new file mode 100644
-> index 000000000..e74f7a7f6
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-noto-emoji_20190815.bb
-> @@ -0,0 +1,19 @@
-> +require ttf.inc
-> +
-> +SUMMARY = "Google noto emoji font pack"
-> +HOMEPAGE = "https://github.com/googlefonts/noto-emoji"
-> +LICENSE = "OFL-1.1"
-> +LIC_FILES_CHKSUM = "file://fonts/LICENSE;md5=55719faa0112708e946b820b24b14097"
-> +
-> +SRC_URI = "git://github.com/googlefonts/noto-emoji;protocol=https"
-> +SRCREV = "833a43d03246a9325e748a2d783006454d76ff66"
-> +
-> +PACKAGES = "${PN}-color ${PN}-regular"
-> +FONT_PACKAGES = "${PN}-color ${PN}-regular"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +FILES_${PN}-color = "${datadir}/fonts/truetype/NotoColorEmoji.ttf"
-> +FILES_${PN}-regular = "${datadir}/fonts/truetype/NotoEmoji-Regular.ttf"
-> +
-> +do_compile[noexec] = "1"
-> 
-
+--r2x4ijkxbfdmd2vy--
