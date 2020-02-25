@@ -1,46 +1,50 @@
-Return-Path: <andrey.z@gmail.com>
-Received: from mail-wr1-f65.google.com (mail-wr1-f65.google.com
-	[209.85.221.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 377746103A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
+	[209.85.221.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 116B76182C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 09:45:55 +0000 (UTC)
-Received: by mail-wr1-f65.google.com with SMTP id r11so13882814wrq.10
+	Tue, 25 Feb 2020 13:53:51 +0000 (UTC)
+Received: by mail-wr1-f41.google.com with SMTP id z15so6500099wrl.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 01:45:56 -0800 (PST)
+	Tue, 25 Feb 2020 05:53:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=tijbv0dt4DVGjlOhl4Jr5OumDonb6YPkGN5J15SC/6Y=;
-	b=KVT+9w6QX4l9REDOrZc5VAkLl7KLhcsSHa6FhahiHU29eIi6+JuA8I4m6szGaU6IuP
-	ydopXumtVCu5tVXJYGwQt0YNQ5O/ZEFaXr8JKmc13NERVrCNu3WpwTxeIW6uomOCLuTN
-	waB884ywWIdu7SGVpi0wEMNoF1Ts7BsG8NNstOq+mQEcAGF4hiT6lmQAANNfa2lqRQ8X
-	Fo0CCAP+hII8bEK5LsEGm/IvrYeWCCswWstG3Jfa1eehdp9SPaUVko8IRYHFQz3lKUVP
-	hXb46JTNycktSF/vjbGVqpoW6tYWldf20OcKRHTPPyDbu5Y/NO9WM1gYQVGuGX3GlZJJ
-	Or5A==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pTsn1n1Jo6ynOqqiPhcx3etpZUJ63v0nKI77uSnNscI=;
+	b=Ax93a+6DIR8p/Up0zOL4A8dJMTvcGFPnMAv7EzUuCNkB15ilK3HoZBOR6p0uL+99u9
+	IjJqrzuHD2NDzWUxTbaghM60Jv/fzMnC9NbD4e2DfXd/bXb7k/p5EXu1JymyE5gQk30j
+	bbUTCS9PVqJFD/DgGPYaqE4qNzpW4AnKlvcsviDL7XF9U5f82R9YxQb2pQpv8lBB58jo
+	a4XWlz7wSE5uSISWCaVf1mLrU5hO8O2nzm7EdiRHCQgKrLJUaYQX1XUfZgJnONRY0kjB
+	0yq8okYASe8JgJ22VlfU0e8o0C0L0rqXePyx16T7XKV7wisJjr1A+dJQojE16MniCRu8
+	Fbig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=tijbv0dt4DVGjlOhl4Jr5OumDonb6YPkGN5J15SC/6Y=;
-	b=IMFj+1J2Be2vGVvOxlDIvrQKiWRe5BX35Xm2VxZUi04Nx4KENNneugbzJ6AKR8Li2w
-	J1acdnRx+VSvUjE8bXxBEKFFY4wJ8J4dh1qWzCT1yH19384ijpTwYyUreu7CNjkXuwnT
-	HRB3e84ZWlA3EULoGap7cHxV8tIK+ueZuc/yFNLiujwlnjwpIkgIBUTElq3vv+3GUS1i
-	7ofk9cLLQAlkxVtRnD/hRzUgzVrivi+5yPf1VVQ9g10VjJM/RJv+QDas6fcOeqJeGaFf
-	F5yoOAb3V4mkASxixZiw0P3E8Rr7vC+dYHO9S9BHrsoGuX185iphoozGT1u6xDdwphiV
-	aRfg==
-X-Gm-Message-State: APjAAAXxXh6nlMgMIFSirPVY2OYUfg8zCyvhSu+HBTt3AG229UL1As/o
-	h/RG/1ZJ5SgxggNXCHhL7MFQJ7q2vWsZxc0gPJ7Rx5Ls
-X-Google-Smtp-Source: APXvYqyFUz6PXR8d3X1n25WPSv1IizKSVu0rAJB+TwxXwSp/J9I9RogDhNuY6l5QU1rSDbn9uYH73yGc4DjWXM274KI=
-X-Received: by 2002:adf:fe4c:: with SMTP id m12mr14811001wrs.386.1582623955776;
-	Tue, 25 Feb 2020 01:45:55 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=pTsn1n1Jo6ynOqqiPhcx3etpZUJ63v0nKI77uSnNscI=;
+	b=Bm0NmpcPfkBp23TP+vNigbBXQ7jH3IPHvVmtQVxtcksoNdcKNcZmyNxoGSgVptKnlb
+	YV0LxelOG+LTU99QPTL1CSdYoIfqNb2UYP/J6YFxwpxnnjx+XmOA8TuVB5xaAhH6F2g2
+	zmYlmV92PldldpjrUGyJU6ckjZR4BMzJfDzORgXBL516022fBrqpkjfUJesGEJ09Yjo+
+	nawu9di3x6A02Hcds0xZom8kO+aYLV6HCMX4US3oOHZXH3ahtKxZk1UNjTkXE/Fwfy86
+	F2K347/EwTcOKeMGuFKFZEMSaqxrl7ihpZj9csKWXsaEeYGzhmzaYyCRhGC45QsT0Iw1
+	hRgw==
+X-Gm-Message-State: APjAAAUQc+2/takIeQnBJCFGbGCqAX4g59E9nyHY5W3KyM/12CD3YVIv
+	W+l7uM4lpNyIKJhNdfmXmwJKvdMT
+X-Google-Smtp-Source: APXvYqykWIqZGqk2iogNwPgmCES9S2+l28AJOW80udp+P6CufK8IQyvlRtvSU0j8pauM4ZKBODOakQ==
+X-Received: by 2002:adf:e88f:: with SMTP id d15mr70070959wrm.186.1582638831570;
+	Tue, 25 Feb 2020 05:53:51 -0800 (PST)
+Received: from localhost ([109.238.218.228]) by smtp.gmail.com with ESMTPSA id
+	f12sm4241440wmj.10.2020.02.25.05.53.50
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 25 Feb 2020 05:53:50 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 Feb 2020 14:53:45 +0100
+Message-Id: <20200225135346.13344-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190911145254.15693-1-pkj@axis.com>
-In-Reply-To: <20190911145254.15693-1-pkj@axis.com>
-From: Andrey Zhizhikin <andrey.z@gmail.com>
-Date: Tue, 25 Feb 2020 10:45:45 +0100
-Message-ID: <CAHtQpK6CBwCwivMSk4j0-ofr2eD82a6PkNPYt1aepDcBFVK7ng@mail.gmail.com>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] lvm2/libdevmapper: Make it build for native
+Subject: [meta-python2][PATCH 1/2] python-backports-functools-lru-cache: enable native and nativesdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,162 +57,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 09:45:55 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 25 Feb 2020 13:53:52 -0000
+Content-Transfer-Encoding: 8bit
 
-Hello all,
+* since this change:
+  commit d1a1c57d0e73251e86591214f30fc90010d5c111
+  Author: Tim Orling <ticotimo@gmail.com>
+  Date:   Mon Jan 20 11:31:59 2020 -0800
 
-I've just faced the problem with building lvm2 of the [zeus] and it
-looks like this patch causes issues with similar symptoms that has
-been reported for bash CVE [1].
+    python-beautifulsoup4: fix target RDEPENDS syntax
 
-This patch also touches the configure part, and in case if `-c
-cleanall` is used - the build succeeds.
+  there is now this dependency:
+  'python-beautifulsoup4-native', 'python-soupsieve-native', 'python-backports-functools-lru-cache-native'
+  and error in world builds:
+  ERROR: Nothing RPROVIDES 'python-backports-functools-lru-cache-native' (but virtual:native:meta-python2/recipes-devtools/python/python-soupsieve_1.9.4.bb RDEPENDS on or otherwise requires it)
 
-Failed build log looks like following:
-ERROR: lvm2-2.03.02-r0 do_patch: Command Error: 'quilt --quiltrc
-/development/projects/build-output/work/corei7-64-poky-linux/lvm2/2.03.02-r0/recipe-sysroot-native/etc/quiltrc
-push' exited with 0  Output:
-Applying patch 0001-configure-Fix-setting-of-CLDFLAGS-default.patch
-patching file configure
-Hunk #1 FAILED at 3077.
-Hunk #2 FAILED at 3098.
-Hunk #3 FAILED at 3111.
-3 out of 3 hunks FAILED -- rejects in file configure
-patching file configure.ac
-Hunk #2 succeeded at 50 (offset -1 lines).
-Hunk #3 succeeded at 63 (offset -1 lines).
-Patch 0001-configure-Fix-setting-of-CLDFLAGS-default.patch does not
-apply (enforce with -f)
-ERROR: Logfile of failure stored in:
-/development/projects/build-output/work/corei7-64-poky-linux/lvm2/2.03.02-r0/temp/log.do_patch.10047
-ERROR: Task (/development/projects/yocto-build-appliance/meta-openembedded/meta-oe/recipes-support/lvm2/lvm2_2.03.02.bb:do_patch)
-failed with exit code '1'
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../python/python-backports-functools-lru-cache_1.6.1.bb        | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Since there was no decision (yet) taken on the bash one - can we
-combine those two together to find a common solution for both cases?
+diff --git a/recipes-devtools/python/python-backports-functools-lru-cache_1.6.1.bb b/recipes-devtools/python/python-backports-functools-lru-cache_1.6.1.bb
+index 8c40cf5..aee130f 100644
+--- a/recipes-devtools/python/python-backports-functools-lru-cache_1.6.1.bb
++++ b/recipes-devtools/python/python-backports-functools-lru-cache_1.6.1.bb
+@@ -25,3 +25,5 @@ do_install() {
+ }
+ 
+ FILES_${PN} = "${PYTHON_SITEPACKAGES_DIR}/backports/functools_lru_cache.py"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.20.1
 
-On Wed, Sep 11, 2019 at 4:53 PM Peter Kjellerstedt
-<peter.kjellerstedt@axis.com> wrote:
->
-> Backport a patch from upstream master that corrects the passing of
-> link flags through configure.
->
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> ---
->  ...gure-Fix-setting-of-CLDFLAGS-default.patch | 78 +++++++++++++++++++
->  meta-oe/recipes-support/lvm2/lvm2.inc         |  1 +
->  2 files changed, 79 insertions(+)
->  create mode 100644 meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch
->
-> diff --git a/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch b/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch
-> new file mode 100644
-> index 000000000..07cb88ffb
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch
-> @@ -0,0 +1,78 @@
-> +From 4a3e707402032788e09282e0f54fdf82c8a0f8fc Mon Sep 17 00:00:00 2001
-> +From: Marian Csontos <mcsontos@redhat.com>
-> +Date: Mon, 19 Aug 2019 14:54:43 +0200
-> +Subject: [PATCH] configure: Fix setting of CLDFLAGS default
-> +
-> +---
-> + configure    | 6 +++---
-> + configure.ac | 6 +++---
-> + 2 files changed, 6 insertions(+), 6 deletions(-)
-> +
-> +Upstream-Status: Backport [https://sourceware.org/git/?p=lvm2.git;a=commit;h=4a3e707402032788e09282e0f54fdf82c8a0f8fc]
-> +Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> +
-> +diff --git a/configure b/configure
-> +index ff3a59b6b..4c8476502 100755
-> +--- a/configure
-> ++++ b/configure
-> +@@ -3077,7 +3077,7 @@ if test -z "$CFLAGS"; then :
-> + fi
-> + case "$host_os" in
-> +       linux*)
-> +-              CLDFLAGS="${CLDFLAGS:"$LDFLAGS"} -Wl,--version-script,.export.sym"
-> ++              CLDFLAGS="${CLDFLAGS-"$LDFLAGS"} -Wl,--version-script,.export.sym"
-> +               # equivalent to -rdynamic
-> +               ELDFLAGS="-Wl,--export-dynamic"
-> +               # FIXME Generate list and use --dynamic-list=.dlopen.sym
-> +@@ -3098,7 +3098,7 @@ case "$host_os" in
-> +               ;;
-> +       darwin*)
-> +               CFLAGS="$CFLAGS -no-cpp-precomp -fno-common"
-> +-              CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
-> ++              CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
-> +               ELDFLAGS=
-> +               CLDWHOLEARCHIVE="-all_load"
-> +               CLDNOWHOLEARCHIVE=
-> +@@ -3111,7 +3111,7 @@ case "$host_os" in
-> +               BLKDEACTIVATE=no
-> +               ;;
-> +       *)
-> +-              CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
-> ++              CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
-> +               ;;
-> + esac
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index 5da694631..830edb8da 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -30,7 +30,7 @@ AC_CANONICAL_TARGET([])
-> + AS_IF([test -z "$CFLAGS"], [COPTIMISE_FLAG="-O2"])
-> + case "$host_os" in
-> +       linux*)
-> +-              CLDFLAGS="${CLDFLAGS:"$LDFLAGS"} -Wl,--version-script,.export.sym"
-> ++              CLDFLAGS="${CLDFLAGS-"$LDFLAGS"} -Wl,--version-script,.export.sym"
-> +               # equivalent to -rdynamic
-> +               ELDFLAGS="-Wl,--export-dynamic"
-> +               # FIXME Generate list and use --dynamic-list=.dlopen.sym
-> +@@ -51,7 +51,7 @@ case "$host_os" in
-> +               ;;
-> +       darwin*)
-> +               CFLAGS="$CFLAGS -no-cpp-precomp -fno-common"
-> +-              CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
-> ++              CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
-> +               ELDFLAGS=
-> +               CLDWHOLEARCHIVE="-all_load"
-> +               CLDNOWHOLEARCHIVE=
-> +@@ -64,7 +64,7 @@ case "$host_os" in
-> +               BLKDEACTIVATE=no
-> +               ;;
-> +       *)
-> +-              CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
-> ++              CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
-> +               ;;
-> + esac
-> +
-> +--
-> +2.21.0
-> +
-> diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-> index f358663b0..6c95bfd02 100644
-> --- a/meta-oe/recipes-support/lvm2/lvm2.inc
-> +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-> @@ -15,6 +15,7 @@ SRC_URI = "https://sourceware.org/pub/lvm2/LVM2.${PV}.tgz \
->             file://0001-Avoid-bashisms-in-init-scripts.patch \
->             file://0005-do-not-build-manual.patch \
->             file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
-> +           file://0001-configure-Fix-setting-of-CLDFLAGS-default.patch \
->             "
->  SRC_URI[md5sum] = "5fc07da5461a3794a751dcfc355827d5"
->  SRC_URI[sha256sum] = "550ba750239fd75b7e52c9877565cabffef506bbf6d7f6f17b9700dee56c720f"
-> --
-> 2.21.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-[1]: http://lists.openembedded.org/pipermail/openembedded-core/2020-February/292991.html
-
---
-Regards,
-Andrey.
 
