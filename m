@@ -1,56 +1,24 @@
-Return-Path: <leo.yan@linaro.org>
-Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
-	[209.85.215.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3FF4F60B5D
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 0668A60B29
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 07:39:03 +0000 (UTC)
-Received: by mail-pg1-f194.google.com with SMTP id 6so6473076pgk.0
+	Tue, 25 Feb 2020 07:56:23 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 01P7uOrg021136
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2020 23:39:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=Q5w3EaaFnwMx4+6js+EJxxfoiUgqxL5YsQbvDTZHGrc=;
-	b=pGt3FzK7PdfjUA8YhEl9pe2jEYMv/qtLxcuNYVKs05dVn0nm3dQrlwhiCl5HEOsDKt
-	6bYuvfJKGLh/9LUPZmu0xxg1TiQYC8JwFV2VsAznlSQuZe8cGEWxLacneEXiU5erN1Cm
-	qZ2QoNoECER1A8HWdinB8vh+pQs/9iFXGJbW8RJB+jKMZQmakBP3ABXw53c1+wtYFyw0
-	BFdSbmKC7Xz5R/OwIst5mKZr9UCaJfzcjBHgECjFXlHNtaotC14TF84kSIDAHv3jwUDH
-	EPYj2XzTn3hxHQZJnkmTzHH41TsPHZ46RBADBAtoKJmW340cE2snrmvMhpmNd1qYdSG6
-	0ceA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Q5w3EaaFnwMx4+6js+EJxxfoiUgqxL5YsQbvDTZHGrc=;
-	b=QUEDucYi0P3k/6qC4h/MNPwkSHdunw3ODUM1oCHcUMap3cZWtNQ1wQUDgHwavKhETh
-	MtplYbMObRnHN/hlTb/iTWgldSBkFnGdCzbn60q71Ez5iLgk9on0X4IRvrJfg907MUDt
-	lrqkA6Uc+gnkWp3VeeaeyGRkPyKRH+lcHFfLA/Aqj6L2Cjz+YIFmjGO/RPNIBfdz/YhZ
-	JKA0Ljy9Nb3XHPtZ/byztiAbZGzZbivTJsDsTCZI66jBWJL1CyvetKgUe50CLYnYdPTe
-	lteJVpHGdWnIH08qTBAgF2oKz3F7wwXE6J5CnbmhzVg6/35PILBxvq5qvyBvzX6H/JEk
-	7ylQ==
-X-Gm-Message-State: APjAAAU6E8ziHA05InFHiBeYJnSlo4OrqsBsPJ9k7Dl5s17NUf6q/9CQ
-	am7zF2Uaqc2/OWBuRZ4kEm3RYg==
-X-Google-Smtp-Source: APXvYqwvrRPT9600ssN1+zFdwH7FKjNHcCJl9HyTayK6hb4SBzqDfMe4xv6VXxTElJ6nXc3kqL1esw==
-X-Received: by 2002:a63:4f0c:: with SMTP id d12mr58954101pgb.322.1582616344857;
-	Mon, 24 Feb 2020 23:39:04 -0800 (PST)
-Received: from leoy-ThinkPad-X240s ([2400:8902::f03c:91ff:fe3f:ee42])
-	by smtp.gmail.com with ESMTPSA id
-	y76sm15604505pfc.87.2020.02.24.23.38.59
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 24 Feb 2020 23:39:04 -0800 (PST)
-Date: Tue, 25 Feb 2020 15:38:55 +0800
-From: Leo Yan <leo.yan@linaro.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20200225073129.GA1169@leoy-ThinkPad-X240s>
-References: <20200225063711.4848-1-leo.yan@linaro.org>
-	<263955b2-9b82-f24c-172c-0761d86a1391@gmail.com>
+	Mon, 24 Feb 2020 23:56:24 -0800 (PST)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.468.0; Mon, 24 Feb 2020 23:56:18 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 25 Feb 2020 15:56:16 +0800
+Message-ID: <1582617376-453370-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <263955b2-9b82-f24c-172c-0761d86a1391@gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] luajit: Upgrade to 2.1.0-beta3
+Subject: [meta-webserver][PATCH V2] ngnix: fix error during service startup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,98 +31,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 07:39:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 25 Feb 2020 07:56:24 -0000
+Content-Type: text/plain
 
-Hi Khem,
+From: Changqing Li <changqing.li@windriver.com>
 
-On Mon, Feb 24, 2020 at 10:41:04PM -0800, Khem Raj wrote:
-> 
-> 
-> On 2/24/20 10:37 PM, Leo Yan wrote:
-> > Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
-> > misses to support aarch64, the patch upgrades to luajit 2.1.0-beta3.
-> > 
-> > Signed-off-by: Leo Yan <leo.yan@linaro.org>
-> > ---
-> >   .../luajit/luajit/clang.patch                 | 19 -------------------
-> 
-> 
-> why is this patch dropped ? it building with clang handled differently now ?
-> if so please add a line or two in commit msg
+fix below error:
+nginx.service: failed to parse pid from file /run/nginx/nginx.pid:
+invalid argument
 
-To be honest, I don't know how to hit the condition for
-'#elif !LJ_TARGET_PS3', and since considering Clang has upgraded to new
-version (9.0.1), this is another reason I dropped this patch.
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ .../nginx/files/nginx-fix-pidfile.patch            | 99 ++++++++++++++++++++++
+ meta-webserver/recipes-httpd/nginx/nginx.inc       |  1 +
+ 2 files changed, 100 insertions(+)
+ create mode 100644 meta-webserver/recipes-httpd/nginx/files/nginx-fix-pidfile.patch
 
-But I cannot give out any concrete reason, will keep this patch.
+diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx-fix-pidfile.patch b/meta-webserver/recipes-httpd/nginx/files/nginx-fix-pidfile.patch
+new file mode 100644
+index 0000000..90159a6
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/files/nginx-fix-pidfile.patch
+@@ -0,0 +1,99 @@
++Description: Fix NGINX pidfile handling   
++Author: Tj <ubuntu@iam.tj>                  
++Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/nginx/+bug/1581864
++Last-Update: 2019-06-04 
++---
++This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
++
++Upstream-Status: Pending
++
++This patch is from ubuntu, https://github.com/aroth-arsoft/pkg-nginx/blob
++/master/debian/patches/nginx-fix-pidfile.patch, for fix below
++error info:
++nginx.service: failed to parse pid from file /run/nginx/nginx.pid:
++invalid argument
++
++Signed-off-by: Changqing Li <changqing.li@windriver.com>
++
++diff --git a/src/core/nginx.c b/src/core/nginx.c
++index 9fcb0eb2..083eba1d 100644
++--- a/src/core/nginx.c
+++++ b/src/core/nginx.c
++@@ -338,14 +338,21 @@ main(int argc, char *const *argv)
++         ngx_process = NGX_PROCESS_MASTER;
++     }
++ 
+++    /* tell-tale to detect if this is parent or child process */
+++    ngx_int_t child_pid = NGX_BUSY;
+++
++ #if !(NGX_WIN32)
++ 
++     if (ngx_init_signals(cycle->log) != NGX_OK) {
++         return 1;
++     }
++ 
+++    /* tell-tale that this code has been executed */
+++    child_pid--;
+++
++     if (!ngx_inherited && ccf->daemon) {
++-        if (ngx_daemon(cycle->log) != NGX_OK) {
+++        child_pid = ngx_daemon(cycle->log);
+++        if (child_pid == NGX_ERROR) {
++             return 1;
++         }
++ 
++@@ -358,8 +365,19 @@ main(int argc, char *const *argv)
++ 
++ #endif
++ 
++-    if (ngx_create_pidfile(&ccf->pid, cycle->log) != NGX_OK) {
++-        return 1;
+++    /* If ngx_daemon() returned the child's PID in the parent process
+++     * after the fork() set ngx_pid to the child_pid, which gets
+++     * written to the PID file, then exit.
+++     * For NGX_WIN32 always write the PID file
+++     * For others, only write it from the parent process */
+++    if (child_pid < NGX_OK || child_pid > NGX_OK) {
+++	ngx_pid = child_pid > NGX_OK ? child_pid : ngx_pid;
+++        if (ngx_create_pidfile(&ccf->pid, cycle->log) != NGX_OK) {
+++            return 1;
+++	}
+++    }
+++    if (child_pid > NGX_OK) {
+++        exit(0);
++     }
++ 
++     if (ngx_log_redirect_stderr(cycle) != NGX_OK) {
++diff --git a/src/os/unix/ngx_daemon.c b/src/os/unix/ngx_daemon.c
++index 385c49b6..3719854c 100644
++--- a/src/os/unix/ngx_daemon.c
+++++ b/src/os/unix/ngx_daemon.c
++@@ -7,14 +7,17 @@
++ 
++ #include <ngx_config.h>
++ #include <ngx_core.h>
+++#include <unistd.h>
++ 
++ 
++ ngx_int_t
++ ngx_daemon(ngx_log_t *log)
++ {
++     int  fd;
+++    /* retain the return value for passing back to caller */
+++    pid_t pid_child = fork();
++ 
++-    switch (fork()) {
+++    switch (pid_child) {
++     case -1:
++         ngx_log_error(NGX_LOG_EMERG, log, ngx_errno, "fork() failed");
++         return NGX_ERROR;
++@@ -23,7 +26,8 @@ ngx_daemon(ngx_log_t *log)
++         break;
++ 
++     default:
++-        exit(0);
+++        /* let caller do the exit() */
+++        return pid_child;
++     }
++ 
++     ngx_parent = ngx_pid;
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
+index 0d229ff..2824c66 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx.inc
++++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
+@@ -21,6 +21,7 @@ SRC_URI = " \
+     file://nginx.init \
+     file://nginx-volatile.conf \
+     file://nginx.service \
++    file://nginx-fix-pidfile.patch \
+ "
+ 
+ inherit siteinfo update-rc.d useradd systemd
+-- 
+2.7.4
 
-Thanks,
-Leo
-
-> >   .../luajit/{luajit_2.0.5.bb => luajit_git.bb} | 14 ++++++--------
-> >   2 files changed, 6 insertions(+), 27 deletions(-)
-> >   delete mode 100644 meta-oe/recipes-devtools/luajit/luajit/clang.patch
-> >   rename meta-oe/recipes-devtools/luajit/{luajit_2.0.5.bb => luajit_git.bb} (89%)
-> > 
-> > diff --git a/meta-oe/recipes-devtools/luajit/luajit/clang.patch b/meta-oe/recipes-devtools/luajit/luajit/clang.patch
-> > deleted file mode 100644
-> > index c39ef6fd4..000000000
-> > --- a/meta-oe/recipes-devtools/luajit/luajit/clang.patch
-> > +++ /dev/null
-> > @@ -1,19 +0,0 @@
-> > -clang pretends to be gcc 4.2.0 which is a big lie when it comes
-> > -to features, its same as latest gcc
-> > -
-> > -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > -Upstream-Status: Pending
-> > -
-> > -Index: LuaJIT-2.0.5/src/lj_arch.h
-> > -===================================================================
-> > ---- LuaJIT-2.0.5.orig/src/lj_arch.h
-> > -+++ LuaJIT-2.0.5/src/lj_arch.h
-> > -@@ -313,7 +313,7 @@
-> > - #error "Need at least GCC 4.2 or newer"
-> > - #endif
-> > - #elif !LJ_TARGET_PS3
-> > --#if (__GNUC__ < 4) || ((__GNUC__ == 4) && __GNUC_MINOR__ < 3)
-> > -+#if (__GNUC__ < 4) || ((__GNUC__ == 4) && __GNUC_MINOR__ < 3) && !defined(__clang__)
-> > - #error "Need at least GCC 4.3 or newer"
-> > - #endif
-> > - #endif
-> > diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-> > similarity index 89%
-> > rename from meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-> > rename to meta-oe/recipes-devtools/luajit/luajit_git.bb
-> > index 93128dda8..da798328e 100644
-> > --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-> > +++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-> > @@ -1,14 +1,13 @@
-> >   SUMMARY = "Just-In-Time Compiler for Lua"
-> >   LICENSE = "MIT"
-> > -LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
-> > +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d739bb9250a55c124a545b588fd76771"
-> >   HOMEPAGE = "http://luajit.org"
-> > -PV .= "+git${SRCPV}"
-> > -SRCREV = "02b521981a1ab919ff2cd4d9bcaee80baf77dce2"
-> > -SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http \
-> > +PV = "2.0.5+2.1.0-beta3"
-> > +SRCREV = "0ad60ccbc3768fa8e3e726858adf261950edbc22"
-> > +SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
-> >              file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
-> > -           file://clang.patch \
-> > -"
-> > +           "
-> >   S = "${WORKDIR}/git"
-> > @@ -90,8 +89,7 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
-> >   "
-> >   FILES_luajit-common = "${datadir}/${BPN}-${PV}"
-> > -# Aarch64/mips64/ppc/ppc64/riscv64 is not supported in this release
-> > -COMPATIBLE_HOST_aarch64 = "null"
-> > +# mips64/ppc/ppc64/riscv64 is not supported in this release
-> >   COMPATIBLE_HOST_mipsarchn32 = "null"
-> >   COMPATIBLE_HOST_mipsarchn64 = "null"
-> >   COMPATIBLE_HOST_powerpc = "null"
-> > 
 
