@@ -1,50 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com
-	[209.85.128.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 169F16172D
+Return-Path: <scott.branden@broadcom.com>
+Received: from mail-pg1-f178.google.com (mail-pg1-f178.google.com
+	[209.85.215.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 92FB16177F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 19:36:17 +0000 (UTC)
-Received: by mail-wm1-f53.google.com with SMTP id t79so416333wmt.3
+	Tue, 25 Feb 2020 19:41:13 +0000 (UTC)
+Received: by mail-pg1-f178.google.com with SMTP id z12so51988pgl.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 11:36:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Tue, 25 Feb 2020 11:41:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
 	h=from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=qIx6H18eggUhWfuTgzRsM5jeuD6QiEJE5HIZNXdEtqs=;
-	b=s89POLqNECIqQNuugJ0fYjwT/k+fsYxTJigaO+FJpFEBAT88ZDq+4vr4b6NaF3Xn73
-	5HuFOPK70aJqXvq4SRm79xkR4zqVl6hJ93btb8tIa8gdp2osALcoZV1cvvFVktZEEAtM
-	zMrZrZniEASbgDY8uHgv8bH1YV3rSv9KLFWuSMSpX6tjKqHUCbtYF1aRG+LJjSvZk0lB
-	bX4dsF9Uanc4ggEs6DXChpQewyg5qbZ1lcTaFhiJ4qnLx5+qDwaCayAJY9qfMwTqJBJc
-	TB6gDr5D3c1L1yUJi8yPFs8cu2PPQHDvjyMAwYsP463D1T2n6kFrDT8DSIgEcIHW6Q3H
-	pABg==
+	bh=9ULtLh4OTERTjJoufRXFzR9djVxjiX6Nei3LLtusuLE=;
+	b=Pi7X+G0zAVVCfE8wFoTg0OFiNTdJK+5DOkxVqMU907HnjKKPHqTCa0dXfJPvlCDsxb
+	ErPFP7xIpgy+8ZjGaGp30Sv30E5wnBqBZw3oaCPZpXnyJ6ieWa3fFh5SKkeAoQ1jK0d8
+	mbgcSstJuThErdnLuvIBzUMZpceOFVTKLNJfM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=qIx6H18eggUhWfuTgzRsM5jeuD6QiEJE5HIZNXdEtqs=;
-	b=AMlpvvU8nW2LpTarloaxqtU5XCNdG+8gEw93HQS8EYU8xb08U1TXOwkDZwc4W2xd+e
-	ObH8oxymMMI1odBz+RM7knfvtVkGa800idhEl0wqyGsA8vFCG128+68qknA2jb1KdFel
-	J9QoeoZY+kfCxY/KFlq5KEJGtg/8hEqcxXpKGtnfxrndRIkl+xm3tBbmPt8gsqF0iKFe
-	4BYP1geNFyd3pv9b4bDeqDMIVCtjVlqQHD2k3de10GCfiazO97PSelUGnnFuR4+vr4P3
-	J6A9YqftB46cb9IySrUKFVUhgfLahy8dI8WIJZalPv6mu/pQjJ9UgXImVj866BEToFCJ
-	MG7g==
-X-Gm-Message-State: APjAAAVEo3fH2ZoM3KHMR2Y0KR0l+8PZEszTMq5HF1aN+kEgXygueRvB
-	tVWmr4BA0EtMJzlJMBZPyB1uc5Lx
-X-Google-Smtp-Source: APXvYqz19jK0iekSpYAKGCqwVBll/dFbNMsZL/lJQmMjAsbytgtthwoKzhmNg/KV88F2HGVVMthdqA==
-X-Received: by 2002:a1c:b789:: with SMTP id h131mr754903wmf.148.1582659378261; 
-	Tue, 25 Feb 2020 11:36:18 -0800 (PST)
-Received: from localhost ([109.238.218.228]) by smtp.gmail.com with ESMTPSA id
-	a198sm5453212wme.12.2020.02.25.11.36.17
+	bh=9ULtLh4OTERTjJoufRXFzR9djVxjiX6Nei3LLtusuLE=;
+	b=PMDLrfWY1wGll05hthTr3mvINIAV0rDr98tgXt1kz66sARukof9cMD9sfyl2OW0BlI
+	gevRr9F4sLOp5gmQTciMMSf+O12LRm1doDsvxZP57MHcGBrsdiSNOC9bolDPgLUAmIfW
+	/vtSdAUBQsGzYhrzo2V/mSO4Z9tEXzUOCVzLeQ4/4towb0HrE4jOJNHyzz6UFtJd57hn
+	TbxgWr6SVKNgOZmnz/oNwctoJZiMmGCNUkB4HrXbw0QI06dda0laSQ82aBl+xiLlpAtE
+	a+jwClkqpeSGCJgL/DOmsp3mT22cFyr4rZnB7NYYvdPhMjsjX9CpNAQfKYyIJH95Cfk+
+	stsw==
+X-Gm-Message-State: APjAAAWGl0xNhLwuAwORgp4IYzfVDivmOetABdIczFTFeRGUZQCfyKz+
+	JxARf3aIYP8VWLRSizQRu1vZjv4dmldyBm1cHGu/1XvDu4qYUE3+RAkHllqr6kB0py6hOYsK9Ek
+	wuDIr5xI/q3BA/63clPRM9/1xx8k3dXbpGxDXMMGNtcmSc3pgALteQ2qz4KrtRr215ANIDyirS4
+	9alihKdYHdOTrluEksxAuO3AUoWVcp
+X-Google-Smtp-Source: APXvYqwejkosH2XRFoTTWMC359JCBIo35fCJvtd6rsL6ETfLdtC3L6IlESKbFhBNtS+MYdDqBjupwA==
+X-Received: by 2002:a62:1b4f:: with SMTP id b76mr297064pfb.163.1582659673922; 
+	Tue, 25 Feb 2020 11:41:13 -0800 (PST)
+Received: from lbrmn-lnxub113.broadcom.net ([192.19.228.250])
+	by smtp.gmail.com with ESMTPSA id
+	j21sm4058266pji.13.2020.02.25.11.41.12
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 25 Feb 2020 11:36:17 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Tue, 25 Feb 2020 11:41:13 -0800 (PST)
+From: Scott Branden <scott.branden@broadcom.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Feb 2020 20:36:15 +0100
-Message-Id: <20200225193615.5567-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.20.1
+Date: Tue, 25 Feb 2020 11:41:03 -0800
+Message-Id: <20200225194103.4581-1-scott.branden@broadcom.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Subject: [meta-oe][meta-networking][PATCH] c-ares: move from meta-networking to meta-oe
+Cc: Mircea Carausu <mircea.carausu@broadcom.com>
+Subject: [meta-multimedia][PATCH v2] fdk-aac: add initial fdk-aac recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,76 +57,150 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 19:36:18 -0000
+X-List-Received-Date: Tue, 25 Feb 2020 19:41:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* nodejs from meta-oe depends on this since:
-  commit 76dd3dac1f1e67a5c44ad732b8e827cc36ded641
-  Author: André Draszik <git@andred.net>
-  Date:   Tue Oct 29 16:42:24 2019 +0000
+From: Mircea Carausu <mircea.carausu@broadcom.com>
 
-    nodejs: allow use of system c-ares (and make default)
+Add Fraunhofer FDK AAC Codec Library recipe.
 
-    Use system c-ares via PACKAGECONFIG by default. So far,
-    nodejs had been built using its embedded copy of c-ares,
-    which we generally try to avoid, for the known reasons
-    (independent updates, cve & license checks, etc).
-
-    Notes:
-    * otherwise nodejs uses its bundled version of c-ares
-    * the PACKAGECONFIG variable is 'ares' so as to be in
-      line with other uses of this (wget & curl recipes in
-      OE core)
-
-    Signed-off-by: André Draszik <git@andred.net>
-    Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Mircea Carausu <mircea.carausu@broadcom.com>
+Signed-off-by: Scott Branden <scott.branden@broadcom.com>
 ---
- .../recipes-core/packagegroups/packagegroup-meta-networking.bb  | 2 +-
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb      | 2 +-
- .../c-ares/c-ares/cmake-install-libcares.pc.patch               | 0
- .../recipes-support/c-ares/c-ares_1.15.0.bb                     | 0
- 4 files changed, 2 insertions(+), 2 deletions(-)
- rename {meta-networking => meta-oe}/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch (100%)
- rename {meta-networking => meta-oe}/recipes-support/c-ares/c-ares_1.15.0.bb (100%)
+ ...aunhofer_FDK_AAC_Codec_Library_for_Android | 92 +++++++++++++++++++
+ .../fdk-aac/fdk-aac_2.0.1.bb                  | 22 +++++
+ 2 files changed, 114 insertions(+)
+ create mode 100644 meta-multimedia/licenses/Fraunhofer_FDK_AAC_Codec_Library_for_Android
+ create mode 100644 meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.1.bb
 
-diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-index fa9bf2db52..103c99bb17 100644
---- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-+++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-@@ -107,7 +107,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
-     tunctl dovecot ipvsadm stunnel chrony spice-protocol \
-     usbredir ntop wireshark tnftp lksctp-tools \
-     cim-schema-docs cim-schema-final cim-schema-exper \
--    libmemcached smcroute libtevent ipcalc c-ares uftp \
-+    libmemcached smcroute libtevent ipcalc uftp \
-     ntimed linux-atm ssmtp openvpn rdma-core \
-     iftop aoetools tcpslice tcpdump libtalloc memcached nuttcp netcat \
-     netcat-openbsd fetchmail yp-tools ypbind-mt yp-tools \
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index d2e8ea4af8..4ae71b5c7b 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -238,7 +238,7 @@ NE10_armv7a = "ne10"
- NE10_armv7ve = "ne10"
- 
- RDEPENDS_packagegroup-meta-oe-support ="\
--    anthy asio atop augeas avro-c bdwgc frame grail \
-+    anthy asio atop augeas avro-c bdwgc frame grail c-ares \
-     ccid ceres-solver ckermit cpprest ctapi-common daemonize \
-     daemontools debsums devmem2 dfu-util dfu-util-native digitemp \
-     dstat eject enca epeg espeak fbset fbset-modes \
-diff --git a/meta-networking/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch b/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
-similarity index 100%
-rename from meta-networking/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
-rename to meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
-diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.15.0.bb b/meta-oe/recipes-support/c-ares/c-ares_1.15.0.bb
-similarity index 100%
-rename from meta-networking/recipes-support/c-ares/c-ares_1.15.0.bb
-rename to meta-oe/recipes-support/c-ares/c-ares_1.15.0.bb
+diff --git a/meta-multimedia/licenses/Fraunhofer_FDK_AAC_Codec_Library_for_Android b/meta-multimedia/licenses/Fraunhofer_FDK_AAC_Codec_Library_for_Android
+new file mode 100644
+index 000000000..05b32bdea
+--- /dev/null
++++ b/meta-multimedia/licenses/Fraunhofer_FDK_AAC_Codec_Library_for_Android
+@@ -0,0 +1,92 @@
++Software License for The Fraunhofer FDK AAC Codec Library for Android
++
++© Copyright  1995 - 2018 Fraunhofer-Gesellschaft zur Förderung der angewandten
++Forschung e.V. All rights reserved.
++
++ 1.    INTRODUCTION
++The Fraunhofer FDK AAC Codec Library for Android ("FDK AAC Codec") is software
++that implements the MPEG Advanced Audio Coding ("AAC") encoding and decoding
++scheme for digital audio. This FDK AAC Codec software is intended to be used on
++a wide variety of Android devices.
++
++AAC's HE-AAC and HE-AAC v2 versions are regarded as today's most efficient
++general perceptual audio codecs. AAC-ELD is considered the best-performing
++full-bandwidth communications codec by independent studies and is widely
++deployed. AAC has been standardized by ISO and IEC as part of the MPEG
++specifications.
++
++Patent licenses for necessary patent claims for the FDK AAC Codec (including
++those of Fraunhofer) may be obtained through Via Licensing
++(www.vialicensing.com) or through the respective patent owners individually for
++the purpose of encoding or decoding bit streams in products that are compliant
++with the ISO/IEC MPEG audio standards. Please note that most manufacturers of
++Android devices already license these patent claims through Via Licensing or
++directly from the patent owners, and therefore FDK AAC Codec software may
++already be covered under those patent licenses when it is used for those
++licensed purposes only.
++
++Commercially-licensed AAC software libraries, including floating-point versions
++with enhanced sound quality, are also available from Fraunhofer. Users are
++encouraged to check the Fraunhofer website for additional applications
++information and documentation.
++
++2.    COPYRIGHT LICENSE
++
++Redistribution and use in source and binary forms, with or without modification,
++are permitted without payment of copyright license fees provided that you
++satisfy the following conditions:
++
++You must retain the complete text of this software license in redistributions of
++the FDK AAC Codec or your modifications thereto in source code form.
++
++You must retain the complete text of this software license in the documentation
++and/or other materials provided with redistributions of the FDK AAC Codec or
++your modifications thereto in binary form. You must make available free of
++charge copies of the complete source code of the FDK AAC Codec and your
++modifications thereto to recipients of copies in binary form.
++
++The name of Fraunhofer may not be used to endorse or promote products derived
++from this library without prior written permission.
++
++You may not charge copyright license fees for anyone to use, copy or distribute
++the FDK AAC Codec software or your modifications thereto.
++
++Your modified versions of the FDK AAC Codec must carry prominent notices stating
++that you changed the software and the date of any change. For modified versions
++of the FDK AAC Codec, the term "Fraunhofer FDK AAC Codec Library for Android"
++must be replaced by the term "Third-Party Modified Version of the Fraunhofer FDK
++AAC Codec Library for Android."
++
++3.    NO PATENT LICENSE
++
++NO EXPRESS OR IMPLIED LICENSES TO ANY PATENT CLAIMS, including without
++limitation the patents of Fraunhofer, ARE GRANTED BY THIS SOFTWARE LICENSE.
++Fraunhofer provides no warranty of patent non-infringement with respect to this
++software.
++
++You may use this FDK AAC Codec software or modifications thereto only for
++purposes that are authorized by appropriate patent licenses.
++
++4.    DISCLAIMER
++
++This FDK AAC Codec software is provided by Fraunhofer on behalf of the copyright
++holders and contributors "AS IS" and WITHOUT ANY EXPRESS OR IMPLIED WARRANTIES,
++including but not limited to the implied warranties of merchantability and
++fitness for a particular purpose. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
++CONTRIBUTORS BE LIABLE for any direct, indirect, incidental, special, exemplary,
++or consequential damages, including but not limited to procurement of substitute
++goods or services; loss of use, data, or profits, or business interruption,
++however caused and on any theory of liability, whether in contract, strict
++liability, or tort (including negligence), arising in any way out of the use of
++this software, even if advised of the possibility of such damage.
++
++5.    CONTACT INFORMATION
++
++Fraunhofer Institute for Integrated Circuits IIS
++Attention: Audio and Multimedia Departments - FDK AAC LL
++Am Wolfsmantel 33
++91058 Erlangen, Germany
++
++www.iis.fraunhofer.de/amm
++amm-info@iis.fraunhofer.de
++
+diff --git a/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.1.bb b/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.1.bb
+new file mode 100644
+index 000000000..d7911681c
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.1.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "FDK-AAC audio codec"
++
++DESCRIPTION = "The Fraunhofer FDK AAC Codec Library for Android \
++(\"FDK AAC Codec\") is software that implements the MPEG \
++Advanced Audio Coding (\"AAC\") encoding and decoding scheme \
++for digital audio."
++
++HOMEPAGE = "https://www.iis.fraunhofer.de/en/ff/amm/impl.html"
++
++LICENSE = "Fraunhofer_FDK_AAC_Codec_Library_for_Android"
++LICENSE_FLAGS = "commercial"
++LIC_FILES_CHKSUM = "file://NOTICE;md5=5985e1e12f4afa710d64ed7bfd291875"
++
++SRC_URI = "git://github.com/mstorsjo/fdk-aac.git;protocol=git;branch=master"
++SRCREV = "d387d3b6ed79ff9a82c60440bdd86e6e5e324bec"
++
++S = "${WORKDIR}/git"
++
++SRC_URI[md5sum] = "fef453b5d6ee28ff302c600b8cded3e7"
++SRC_URI[sha256sum] = "07c2a64b098eb48b2e9d729d5e778c08f7d22f28adc8da7c3f92c58da1cbbd8e"
++
++inherit autotools
 -- 
-2.20.1
+2.17.1
 
 
