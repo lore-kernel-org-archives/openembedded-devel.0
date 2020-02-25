@@ -1,48 +1,47 @@
-Return-Path: <3Q11UXgMKAEg6kuqyyqvo.myw@flex--wak.bounces.google.com>
-Received: from mail-pf1-f201.google.com (mail-pf1-f201.google.com
-	[209.85.210.201])
-	by mail.openembedded.org (Postfix) with ESMTP id 7223B61077
+Return-Path: <scott.branden@broadcom.com>
+Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
+	[209.85.215.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 59D8C6062A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2020 23:33:22 +0000 (UTC)
-Received: by mail-pf1-f201.google.com with SMTP id r127so7678148pfc.11
+	Tue, 25 Feb 2020 00:09:38 +0000 (UTC)
+Received: by mail-pg1-f195.google.com with SMTP id d9so5979667pgu.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2020 15:33:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=20161025;
-	h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-	:cc; bh=WH0aLjmFJu/IF+W/jqo6InYCE4EU326VUsrmS5sA3YE=;
-	b=M3suFGP7qjx7K83YIgNg9AgQC7HQqv0RjIGTo8sFY9xSj+tv0RQb6xNUu7qStz92vj
-	tH4hOVWI4OSC5talmsth6+EZANY9twTNTfeLAGNID41SgwsQ2A7pxfHYisFjETS1gxJH
-	sW6/og58nhEBD8GZMuNlu2FZoDZiuXkuKXCLKic+0JH25gnKuUfOIPubENTQupF0IJLt
-	pk9RRt9K18gpmLQ6jPotTD8uYsOoWEhej3bYjMRAfUUm6CyCQsmHL6JQGxSpFOXpDb4a
-	1MlqFdxF2lIYz/fa6hvqmj33vjoXj/WzWwkcJulv/QjVboxkNEI+Q/KKfx2c5DvgR0Lm
-	/7SA==
+	Mon, 24 Feb 2020 16:09:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=7x9Jrp7mr+MciOc/RCKzZqJVPkqGgpZJey9+8qzI15I=;
+	b=cEPyiQX+wqFh80S40P65sHj9wLw6N5zr3Qd5OXFo9jyJVeal3VBPVA7v+CR+xCeDGd
+	BTTX/ffkUDHq2LejbDcld948uD+OLCRNe0gUeHBlVEQlj9FD66bks939u2KvQwP9tbU2
+	602bkxP8VQhKZoWq5gU+DR4sxQ6BR2PMRELVU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-	:references:subject:from:to:cc;
-	bh=WH0aLjmFJu/IF+W/jqo6InYCE4EU326VUsrmS5sA3YE=;
-	b=tNlvP/U3FAk9g0Qt3BKWKSb646Ifdaw0ggaf7KnvtimFj2JLsB4cklvg4KQ0nVXaf8
-	3Fxdxc8qvPtM6i0V8stEQUxsAhCoZl4tvAn8A2vUMcsNd0DnAS1w9YxBKVGnFIg6TeQj
-	1CHUuAbf22cVnChsJkMNuaAfVT8gn8MQMrobrJTBU9vIjMUKbygMgz+SMzaTSpL4OBOh
-	hek3mLO+d/fX9XGcK+m3N3Lo+w1fItdLTzHEgHD+GgxYxtnqxp2sinSd+S7u0AxC7mLS
-	1n4BWX5QakkJehketMOHf0sfzx+bm+v0jWfx/MPQT0wUM1HzJ+yONt4Fc5cMaTE1lN0a
-	mkig==
-X-Gm-Message-State: APjAAAVjjC2GKikie4lcTwj1bsAr0a0KGZTZ9JAEF/uIyuPSMl0jS3nY
-	diXVwNUMxhk1G4q7WGB+u8O/e3pXra3IfV+g4WmWvMCiktck8mqG5xs0OuMbisWQsMisKAizcwY
-	ee/+NFhq4oy7zVkj2LimEiBG+KeXFrtFNGFe5l62ikOnN17uZzgPx0BEriVJqJ1iyt18Mj7ZV9O
-	rXoS8=
-X-Google-Smtp-Source: APXvYqzVybb2KE5vvJeF4ou5J/2yhkdXo/i0d5xmHmxRnoElIQVp8hHGy0DdwdFuuEzTe+BGIsHa3JM=
-X-Received: by 2002:a65:645a:: with SMTP id s26mr53437921pgv.135.1582587203249;
-	Mon, 24 Feb 2020 15:33:23 -0800 (PST)
-Date: Mon, 24 Feb 2020 15:33:12 -0800
-In-Reply-To: <20191018234515.15676-1-wak@google.com>
-Message-Id: <20200224233312.223960-1-wak@google.com>
-Mime-Version: 1.0
-References: <20191018234515.15676-1-wak@google.com>
-X-Mailer: git-send-email 2.24.1
-From: "William A. Kennington III" <wak@google.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=7x9Jrp7mr+MciOc/RCKzZqJVPkqGgpZJey9+8qzI15I=;
+	b=jC0tsO6nXG5nsDGDzGHQKh4NJnrXkFasXx1kW1/4R9uef4hbuKi1+9AcXhdaqdtnl+
+	dBBX8LN64thFYoVimbBFInKl13CWgGetEY0Z7E/7cN0NKUH4bDADhOoN5Rxjze0TTLvu
+	fOdvBSci+a5ZSNGWcRerE+Slg699MG/txbDj5MJlzGpUV0RWYdxWdktqK0LCwFttYJV+
+	9Nzlfp3f8r/jGLd0oRgeOh6Aq/TCX2hDnD1ZZw2gH8M13SCYt5kCHfn6MBeTWHXeCeiI
+	lJfyWq90wtnDbBQJ93m3PA2eFJa1IzLvdAxj7Zpc5TTkN8BLnBQda0oHveASIzd5uKvB
+	RlLQ==
+X-Gm-Message-State: APjAAAUUA4TT4t5WUq8SCXabDrgVoPrP9Y9WoiPe2mzW8bU7hrCVOIVP
+	avA7szHA8gaohi6oUt612Gt6n95s5x7Hp+5hxU09EZNUf6b6rOr3PXeeC4SKJjphYNE3GR+TZDV
+	FgPKjVyFXpRM6kSJYP5n6Oog/OT1cRC2PQZCsDJYGGcyKueu+XJyM06net9b5Mwn55V0/vQinA7
+	EfW9arC2c4qcwVoFVKH+YAiQDoOsNN
+X-Google-Smtp-Source: APXvYqyyFtIcK48yhYJtit2FrATJKYbCzYHkrFx3vZ03yXH+5tq2s9nO1PSZI0Z9son1u19c9AXckw==
+X-Received: by 2002:a62:1958:: with SMTP id 85mr52098931pfz.221.1582589378991; 
+	Mon, 24 Feb 2020 16:09:38 -0800 (PST)
+Received: from lbrmn-lnxub113.broadcom.net ([192.19.228.250])
+	by smtp.gmail.com with ESMTPSA id
+	a36sm13951567pga.32.2020.02.24.16.09.37
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Mon, 24 Feb 2020 16:09:38 -0800 (PST)
+From: Scott Branden <scott.branden@broadcom.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH v2] span-lite: Add git version
+Date: Mon, 24 Feb 2020 16:09:27 -0800
+Message-Id: <20200225000927.17849-1-scott.branden@broadcom.com>
+X-Mailer: git-send-email 2.17.1
+Cc: Mircea Carausu <mircea.carausu@broadcom.com>
+Subject: [meta-multi-media][PATCH] fdk-aac: add initial fdk-aac recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,38 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Feb 2020 23:33:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 25 Feb 2020 00:09:38 -0000
 
-We would generally prefer to use stable releases, but there are fixes in
-master that have not yet been released for compiling the test cases
-against libc++.
+From: Mircea Carausu <mircea.carausu@broadcom.com>
 
-Signed-off-by: William A. Kennington III <wak@google.com>
+Add Fraunhofer FDK AAC Codec Library recipe.
+
+Signed-off-by: Mircea Carausu <mircea.carausu@broadcom.com>
+Signed-off-by: Scott Branden <scott.branden@broadcom.com>
 ---
- meta-oe/recipes-support/span-lite/span-lite_git.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-oe/recipes-support/span-lite/span-lite_git.bb
+ .../fdk-aac/fdk-aac_2.0.1.bb                  | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.1.bb
 
-diff --git a/meta-oe/recipes-support/span-lite/span-lite_git.bb b/meta-oe/recipes-support/span-lite/span-lite_git.bb
+diff --git a/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.1.bb b/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.1.bb
 new file mode 100644
-index 000000000..96ec829b7
+index 000000000..d7911681c
 --- /dev/null
-+++ b/meta-oe/recipes-support/span-lite/span-lite_git.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "single-file header-only version of a C++20-like span for C++98, C++11 and later"
-+HOMEPAGE = "https://github.com/martinmoene/span-lite"
-+LICENSE = "BSL-1.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e4224ccaecb14d942c71d31bef20d78c"
++++ b/meta-multimedia/recipes-multimedia/fdk-aac/fdk-aac_2.0.1.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "FDK-AAC audio codec"
 +
-+SRC_URI += "git://github.com/martinmoene/span-lite"
-+SRCREV = "e03d1166ccc8481d993dc02aae703966301a5e6e"
++DESCRIPTION = "The Fraunhofer FDK AAC Codec Library for Android \
++(\"FDK AAC Codec\") is software that implements the MPEG \
++Advanced Audio Coding (\"AAC\") encoding and decoding scheme \
++for digital audio."
++
++HOMEPAGE = "https://www.iis.fraunhofer.de/en/ff/amm/impl.html"
++
++LICENSE = "Fraunhofer_FDK_AAC_Codec_Library_for_Android"
++LICENSE_FLAGS = "commercial"
++LIC_FILES_CHKSUM = "file://NOTICE;md5=5985e1e12f4afa710d64ed7bfd291875"
++
++SRC_URI = "git://github.com/mstorsjo/fdk-aac.git;protocol=git;branch=master"
++SRCREV = "d387d3b6ed79ff9a82c60440bdd86e6e5e324bec"
 +
 +S = "${WORKDIR}/git"
 +
-+inherit cmake
-+inherit ptest
++SRC_URI[md5sum] = "fef453b5d6ee28ff302c600b8cded3e7"
++SRC_URI[sha256sum] = "07c2a64b098eb48b2e9d729d5e778c08f7d22f28adc8da7c3f92c58da1cbbd8e"
++
++inherit autotools
 -- 
-2.24.1
+2.17.1
 
 
