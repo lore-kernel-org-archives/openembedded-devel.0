@@ -1,52 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
-	[209.85.128.46])
-	by mail.openembedded.org (Postfix) with ESMTP id D65746161D
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 7EC2E6160A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 13:53:52 +0000 (UTC)
-Received: by mail-wm1-f46.google.com with SMTP id m10so2279823wmc.0
+	Tue, 25 Feb 2020 13:58:00 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id a9so3251807wmj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 05:53:54 -0800 (PST)
+	Tue, 25 Feb 2020 05:58:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=7TmCajEFQmqk7CfZ2j5JQNah7QnTvsPA35KB/ZncfGg=;
-	b=GNmGFQls4WdQ39ea7sD8U73wSnWMoCL0dTwnqHVqtKhgOLpAVHqUyrdrrgBLiI/8vv
-	vCU2aBYPDYuia5tEKcOqKb1LT53ccNHzijxO2iUgrVw4QOvXqOgX6GE8C3K2GTEcQXyM
-	wJJjOPnmReIBtLpEZX5V8WfQxTVPKIbQA1aAFzkql+IWkL0afhVHyARMxiL09spwdFEG
-	P5XEmE3PvjOo8ND8y3HxhxEWASkzaVSf+XnJLeb53g2eufxvj88OQ/RXcWHxi2KQtA4E
-	CUGNcaFZdg+5PzpcDgBqjDgNS2bnkcRRIrFoF0tChitxPLQ6Ii+vR+rcjw1U/HeX3kTT
-	J0pg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2j62q7mXI07w6gjVc7L9bpGr6OTG4SYruKD6iFWsGYM=;
+	b=XEdvj9fEenKDWBFFhm7OEZVLu6Pab+w4J5fPFeINGgStshk56uYOhdfgoD9ZBHKe89
+	QQzmBqjA8upvUrH182AtcrbDVfuixXyseE4YTPfCHAWBHZR0NExbQKmwWiJhWFS30+lZ
+	xV0bldRkvkcB3bTW46cFDD9pBvzUY3bLATw1UfSsLAXr00eJWSfNVsDT/WTOc1nGwjx2
+	z03HG40knjVNzxGz1m1qFubA+NYmI2erFkIBKLUAzYp5veMJCYJESH9X+kn3LF1i6XnG
+	nh8U5ZVmGebXSHr1ZS+n4QF3nPY8UaBdFjgg1ss0vHqMXoxQwUXkxsPXixXZA/KeKUXd
+	F8bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=7TmCajEFQmqk7CfZ2j5JQNah7QnTvsPA35KB/ZncfGg=;
-	b=iBgHX8YW5mzGI5Tee/ZHIej0dN1IreTcLwAXMsbIThKgarDg8f0s/IHEvYToj5K2th
-	+3sHQPvusJMuc8AXv38fz56A9PtwMJyIhjlm4jVTclHBOBDLUcqRgrlh0EtzqqNBbBYd
-	bylEQ8eXKeueLxGnQ9yz9ZjEfutB8pJQixBbr9O9sPtZjn2CZFwQu5Yfz0qO3AzntsId
-	0qgHgmvjse4pyiX+INJTMQE2XvcQP2XBgS8j5/2vInENfrPe8h2inqTaNxzMK8xXfUWU
-	E3aVhzxafmg/VVYbULZfbf7b6dCF2qDzpbmHp5RyWmnqos3c2mfmz+fWsefxoQTUZPrd
-	jvmA==
-X-Gm-Message-State: APjAAAW8/O65JAAXTBEqPYPOntvWLMirfOO9VcXS7ABBdzNlyNirXtGX
-	8xDt4zspg32qPv/7Z2CbEuYln0aI
-X-Google-Smtp-Source: APXvYqxXw4kOv7X90EGO0oZtun5MZuyd7wp/yMIAs1381iQrOKLifRAgQgeaXD/xjLxpVNXeJaYB7w==
-X-Received: by 2002:a1c:4e03:: with SMTP id g3mr5404384wmh.22.1582638832936;
-	Tue, 25 Feb 2020 05:53:52 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2j62q7mXI07w6gjVc7L9bpGr6OTG4SYruKD6iFWsGYM=;
+	b=WzivIOq8g0UF4/OQAXBPOoJPGhOlswvJAuZRuivfTwc+OWZl7NuJXCZ9GWTcCWWQUx
+	wZwLMmRiGDto2TJ2jdxmvwArE0ZZUGvynzYTZOrxkz5huCW7U3Q0Ws5633+o2o8g/vwA
+	zEFv/CIpAA46j+2ewLUDhuEyHuzJgZS7rNPPD7bkZPZQ9asWMdPL/3bDS+TLIc/piyIq
+	OZCkYa2KbR3fJPX2OpKuh9Hqw6rMobfx6mecj6vxJ6+eRwV1rgTQz8mFm+K5KXfjaqT6
+	4dIvmgnIJeS6UI5/MUrlIA2sL5DPsr54wo79rwUuIY27pYUCcLtm1D7uicg7G+kHH3ie
+	NZDw==
+X-Gm-Message-State: APjAAAU9J+D4HQYxE4jFLf3AspJ0ZaWxWkZAfiBuofAIryxiinUxMn7A
+	xI58iwXw16XXDzGo9iKonrBhdYSY
+X-Google-Smtp-Source: APXvYqxs77JxzcxcChkfIrDljU+SACZZEUIcZXQmZgAp+3KFigzU9y56XUtuEBDfbx6vz6QEM4f6FA==
+X-Received: by 2002:a05:600c:2c06:: with SMTP id
+	q6mr5750957wmg.154.1582639080865; 
+	Tue, 25 Feb 2020 05:58:00 -0800 (PST)
 Received: from localhost ([109.238.218.228]) by smtp.gmail.com with ESMTPSA id
-	y17sm23946880wrs.82.2020.02.25.05.53.52
+	s23sm24584075wra.15.2020.02.25.05.58.00
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 25 Feb 2020 05:53:52 -0800 (PST)
+	Tue, 25 Feb 2020 05:58:00 -0800 (PST)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Feb 2020 14:53:46 +0100
-Message-Id: <20200225135346.13344-2-Martin.Jansa@gmail.com>
+Date: Tue, 25 Feb 2020 14:57:57 +0100
+Message-Id: <20200225135757.13589-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200225135346.13344-1-Martin.Jansa@gmail.com>
-References: <20200225135346.13344-1-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-python2][PATCH 2/2] python-backports-init: enable native and nativesdk
+Subject: [meta-networking][warrior][PATCH] drbd: update SRC_URI to use archive subdirectory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,26 +58,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 13:53:53 -0000
+X-List-Received-Date: Tue, 25 Feb 2020 13:58:00 -0000
 Content-Transfer-Encoding: 8bit
 
-* needed for python-backports-functools-lru-cache-native
+* 9.0.17-1 version was moved to archive:
+  http://www.linbit.com/downloads/drbd/9.0/archive/drbd-9.0.17-1.tar.gz
+* 9.0.19-1 used by zeus and newer wasn't moved yet:
+  http://www.linbit.com/downloads/drbd/9.0/drbd-9.0.19-1.tar.gz
+  that's why this change is only for warrior
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-devtools/python/python-backports-init_1.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-support/drbd/drbd_9.0.17-1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-devtools/python/python-backports-init_1.0.bb b/recipes-devtools/python/python-backports-init_1.0.bb
-index 29e712a..8b226aa 100644
---- a/recipes-devtools/python/python-backports-init_1.0.bb
-+++ b/recipes-devtools/python/python-backports-init_1.0.bb
-@@ -23,3 +23,5 @@ do_install() {
- }
+diff --git a/meta-networking/recipes-support/drbd/drbd_9.0.17-1.bb b/meta-networking/recipes-support/drbd/drbd_9.0.17-1.bb
+index 1eada269cb..6192e03f99 100644
+--- a/meta-networking/recipes-support/drbd/drbd_9.0.17-1.bb
++++ b/meta-networking/recipes-support/drbd/drbd_9.0.17-1.bb
+@@ -8,7 +8,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+ DEPENDS = "virtual/kernel"
  
- FILES_${PN} = "${PYTHON_SITEPACKAGES_DIR}/backports/__init__.py"
-+
-+BBCLASSEXTEND = "native nativesdk"
+-SRC_URI = "http://www.linbit.com/downloads/drbd/9.0/drbd-${PV}.tar.gz \
++SRC_URI = "http://www.linbit.com/downloads/drbd/9.0/archive/drbd-${PV}.tar.gz \
+            file://check_existence_of_modules_before_installing.patch \
+            file://0001-drbd-kbuild-fix-use-M-don-t-forget-addprefix-obj.patch \
+            "
 -- 
 2.20.1
 
