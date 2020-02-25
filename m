@@ -1,59 +1,56 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 35F0D609B9
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D1969609B9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 04:49:20 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id b22so4958011pls.12
+	Tue, 25 Feb 2020 04:59:47 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id j4so6280343pgi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Feb 2020 20:49:22 -0800 (PST)
+	Mon, 24 Feb 2020 20:59:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=Rets0PTVfhCmyOKka7Nwbf8ZUjksM6FuifEFDGSuG7M=;
-	b=Y2zG1sWMQoz8qbr9dyT4Ymi8rjxoMrLp59sddqV7OL3q/zr3OIWVYoISPJJp9t1IyC
-	Ouo/GoftuKicR/ydMx3mnDpYsnS6KUYVDa8bYMwLGBqsTtPdqqNYer4xXoDey0TjxbTQ
-	HgA15baGBi+n8mX5LEfro7r0VtJDgMjNRPCIqfWO1ZsCeu55x5VbV0W4mGKFPbvaqg0g
-	xMo3I3V0LJ+Q5ElIBm4IFIXXUsfJ4tgana4uEtYi2N29qbAfIM5hnFGqGEZIV85VnGFX
-	+h6lNp1zLCV+/n8byvFZBM45FhTkQy1c0GDsSc/h78pvpyJFBabOOYM0k++7XWI536Lb
-	lJiw==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language:content-transfer-encoding;
+	bh=fAEvz/JlA0O1E1elYlIksdwwCxa+3CWlsTYtCfOVAps=;
+	b=FZ5cv+GNaQowfTRT+GRT6hycrnnM3NZYh7U0BBP/TUDnE5uQNk4wT/wJN9xkiCR+v/
+	SbN5TlgldzZtWIGSl5Sq+AmO26LFKnCmjL6KL0XYIWHqdYPeldfp68ZVGxVnWX2PubZR
+	SUqSgcxo534lEUGECO42BqTGFWfZvD5/a9JRjbYYULXYeMRKXO18lbpIKlIZmu3bDrTf
+	rojCgBMnSQQMO1IBWdMN8+sOeaV8Fy6u+QYW4OE3Xtaku2f8rGhOZEv71vRnsUprLuMu
+	Ms9ovu6F41UXLBymr04gs4zkOQCQTibSxE5AFq1Gao3OMOdx2FNQ2RzbpEP7B4EfoJdU
+	N9mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-language
 	:content-transfer-encoding;
-	bh=Rets0PTVfhCmyOKka7Nwbf8ZUjksM6FuifEFDGSuG7M=;
-	b=F3tXEaOxZAbCOtJPARln1O/MzTNlAg55G8MPrso3/Lw9tqQmMrM119n+wCeeP17M8v
-	nccjUu0q9E2NTp4nB2faQ8+BeAsS+gPmlqKhRZjU63+uJZ1cRJKv9F6n3YgqLpwjwMN1
-	XRWfqpDZKp5Lv1QVgb2KiFY9k6muuK2S9Zt0znsW8HbIxpJW7VIul7lGgTXQIlv7jIDQ
-	/bWjv97Ph5Xx2FK0aFZ4ulxITC9V1owDfERoJmN1pqrIJI27tW05H7FAtYyLUScs4icn
-	pjv/tBaKx7MOoSQk9EiCJ/z0bd4pG6LaOHdazqkpOuEdWgDHLlIepXrnoA6V7Ry+7XWu
-	rhaQ==
-X-Gm-Message-State: APjAAAXoHtBt40Vqo2YJrbqQi2P5kgXit3AASEE68zwFcp+F0H+Y8HlC
-	H+Gfomeq4v+NzGO1f3qYucBFdHwqbnM=
-X-Google-Smtp-Source: APXvYqz6DFUa9Qgq4e9yDF3CIPgMOKt/AXmfmKhmqrgOtO6K5cDPFOMB+g1WY6/iPz6yxCHHzldCrw==
-X-Received: by 2002:a17:902:82c5:: with SMTP id
-	u5mr52081665plz.219.1582606161400; 
-	Mon, 24 Feb 2020 20:49:21 -0800 (PST)
+	bh=fAEvz/JlA0O1E1elYlIksdwwCxa+3CWlsTYtCfOVAps=;
+	b=NeP6DMGW2WWlApYpILSFdqafhtoCwSqLlV4FWieaGaL0I6HLHjP8cnyHNPixzgx/2i
+	YVh3X53pz0sH7Ba9WyR3+IOsDFkDvN+5bPdf41IhxFLXjTJDQh2wrCdjp8PG2jhGEb9o
+	UAE+GIWMOM5YNMtcqeUiLg4Wxjhu5ocOCVoqEYwWharROPJKZoLqZUZtl0OsEjWY+gEp
+	od6XT2tT9NuVsxfQvH7byRGZ7YAIDk3ZnVOCxDzJgXA+Zo6H8eUkJeJ5u1PSBwtxsoHZ
+	KE/DOd+v4GBSKWyFVLCQV6K3nNv6jxESqummtM3Uw0VpxcdGTsRdoArNw0I0YQ7nOG0i
+	IDNw==
+X-Gm-Message-State: APjAAAVHHsW+sOmY0cmhyUHU4iUx5JySw6ffXqWvG9TME2sYvIM8I4/f
+	6iw5/oRjLytCL9KiLrgqekQiG5zTC6w=
+X-Google-Smtp-Source: APXvYqx/gfXi9yR2gP/BUgiiD+UEARopwjitwaEwEXx2Px275tk8VgTVDPV8la2LBWKcN6Ijvqd9ag==
+X-Received: by 2002:a62:3343:: with SMTP id z64mr52937732pfz.150.1582606788375;
+	Mon, 24 Feb 2020 20:59:48 -0800 (PST)
 Received: from ?IPv6:2601:646:9200:4e0:a81f:d24b:3e8b:cce0?
 	([2601:646:9200:4e0:a81f:d24b:3e8b:cce0])
 	by smtp.gmail.com with ESMTPSA id
-	b12sm15021250pfr.26.2020.02.24.20.49.20
+	o6sm11721094pfg.180.2020.02.24.20.59.47
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Mon, 24 Feb 2020 20:49:20 -0800 (PST)
-To: Changqing Li <changqing.li@windriver.com>
-References: <1582544446-241334-1-git-send-email-changqing.li@windriver.com>
-	<CAMKF1so3CU_NMnOKGmUJsrgaUsAF+SKM5XeFQAoX4NrFzRv07w@mail.gmail.com>
-	<fc47113c-82c7-5c17-139c-3ea747eecc26@windriver.com>
+	Mon, 24 Feb 2020 20:59:47 -0800 (PST)
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1582536523-89923-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <23aee0bf-a9f4-b002-8277-615dfa603b04@gmail.com>
-Date: Mon, 24 Feb 2020 20:49:19 -0800
+Message-ID: <549f56c2-9056-ff8c-96f4-713437fc8de0@gmail.com>
+Date: Mon, 24 Feb 2020 20:59:47 -0800
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
 	Gecko/20100101 Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <fc47113c-82c7-5c17-139c-3ea747eecc26@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-webserver][PATCH] nginx.service: sleep 0.1 after nginx start
+In-Reply-To: <1582536523-89923-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Subject: Re: [meta-networking][PATCH] daq: upgrade 2.0.6 -> 2.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,76 +63,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 04:49:21 -0000
+X-List-Received-Date: Tue, 25 Feb 2020 04:59:47 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
 
 
-On 2/24/20 7:53 PM, Changqing Li wrote:
+On 2/24/20 1:28 AM, Zheng Ruoqin wrote:
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>   .../recipes-connectivity/daq/{daq_2.0.6.bb => daq_2.2.2.bb}   | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>   rename meta-networking/recipes-connectivity/daq/{daq_2.0.6.bb => daq_2.2.2.bb} (88%)
 > 
-> On 2/25/20 12:40 AM, Khem Raj wrote:
->> On Mon, Feb 24, 2020 at 3:41 AM<changqing.li@windriver.com>  wrote:
->>> From: Changqing Li<changqing.li@windriver.com>
->>>
->>> Fix error info:
->>> nginx.service: failed to parse pid from file /run/nginx/nginx.pid:
->>> invalid argument
->>>
->>> Signed-off-by: Changqing Li<changqing.li@windriver.com>
->>> ---
->>>   meta-webserver/recipes-httpd/nginx/files/nginx.service | 1 +
->>>   1 file changed, 1 insertion(+)
->>>
->>> diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.service b/meta-webserver/recipes-httpd/nginx/files/nginx.service
->>> index 9a6ca96..65c7752 100644
->>> --- a/meta-webserver/recipes-httpd/nginx/files/nginx.service
->>> +++ b/meta-webserver/recipes-httpd/nginx/files/nginx.service
->>> @@ -7,6 +7,7 @@ Type=forking
->>>   PIDFile=/run/nginx/nginx.pid
->>>   ExecStartPre=@SBINDIR@/nginx -t
->>>   ExecStart=@SBINDIR@/nginx
->>> +ExecStartPost=/bin/sleep 0.1
->> I dont thiink we should be adding sleeps instead try to lock the dependencies
->> so it happens correctly. or perhaps change the logic in code itself if
->> dependencies
->> can not handle it.
+> diff --git a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb b/meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
+> similarity index 88%
+> rename from meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
+> rename to meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
+> index 42ffb17a1..29ac5c770 100644
+> --- a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
+> +++ b/meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
+> @@ -25,8 +25,8 @@ EXTRA_OECONF = "--disable-nfq-module --disable-ipq-module --includedir=${include
+>   PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+>   PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+>   
+> -SRC_URI[md5sum] = "2cd6da422a72c129c685fc4bb848c24c"
+> -SRC_URI[sha256sum] = "b40e1d1273e08aaeaa86e69d4f28d535b7e53bdb3898adf539266b63137be7cb"
+> +SRC_URI[md5sum] = "c61f60674a5f951f0c50faf33a611fee"
+> +SRC_URI[sha256sum] = "7cd818cabb1ad35360e83076e54775f07165ee71407dc672d147e27d3cd37f7b"
+>   
+>   inherit autotools
+>   
 > 
-> error info: "nginx.service: failed to parse pid from file 
-> /run/nginx/nginx.pid: invalid argument" is caused by race condition between
-> 
-> systemd and nginx.  And this error will not caused problem except scary log
-> 
-> This should be a known problem: 
-> https://bugs.launchpad.net/ubuntu/+source/nginx/+bug/1581864
-> 
-> other distro like ubuntu, fedora, should also have this problem, I can 
-> google people report this error on different distro.
+This is causing snort build failures since we use snort 2.9
 
-I do not question the problem but the solution, there have been 
-different solutions posted to ml e.g.
+https://errors.yoctoproject.org/Errors/Details/392611/
 
-https://mailman.nginx.org/pipermail/nginx-devel/2016-February/007961.html
-
-or ubuntu fix
-
-https://github.com/aroth-arsoft/pkg-nginx/blob/master/debian/patches/nginx-fix-pidfile.patch
-
-perhaps you should try one of these patches
-
-> 
-> ubuntu 16.04 use this as a workaround.
-> 
->>>   ExecReload=@SBINDIR@/nginx -s reload
->>>   ExecStop=@BASE_BINDIR@/kill -s QUIT $MAINPID
->>>   PrivateTmp=true
->>> --
->>> 2.7.4
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Perhaps we need to upgrade snort 3.0 and daq together
 
