@@ -1,50 +1,58 @@
 Return-Path: <leo.yan@linaro.org>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 737F160640
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 87DE860640
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 12:26:38 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id z3so2782746wru.3
+	Wed, 26 Feb 2020 12:30:43 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id 2so1379082pfg.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 04:26:39 -0800 (PST)
+	Wed, 26 Feb 2020 04:30:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=fK+2rgd900TEbqvpWXLZFnYDztG22/4KHYT7rEDjOPk=;
-	b=GA8gLq2A6F/Xu6WRWKmdbbiGalyrmui2lA45GT5iG1CH1itVl0WZrE9ZWI+ruZw9Sb
-	IGdJUu/0K8CDZNUSZuowZf0TEmatVFCiPSH4g5PYTEg74DQ+1ja4E69kFppN2rXJovQj
-	bTKkRQ9+ZXhAf1uFmFOOXZQ6R+HEeulI5HUGLFhjJ+DsT3FmhwNHh0/ANpWoQbMHKahc
-	ESelY1k/eI3W6wFMU/3/a8pZTHmt+/AG1Sqwgh5lRyKWVtQRf5suLV/fE2qnPhCBPSlu
-	OwGv2vWibrGy3Gn9UMzjFGPiGbcTRSLuUEUYvn6onyLL8T0BMqnSgM8ehwcOUFwWAE9t
-	F5pQ==
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=uoisO5Damy7boLrP6Yk12wUzpq2GWvnLietJ6AU7Yjw=;
+	b=olJS/KeWnSqlvy2u4VAkdv4PuoJ71FnB7a4QDx88f2ffSEKmwbel/lo9QjbRroBx5s
+	3PrugSeb7dmhdfIWpvOJdSmmKBqW8+bNSwehwLUM87s7aRuhl/K8E9wupsWhhjCT70YF
+	a90cGHh2C/F+Z8wRx9DtjlDI9+nBrbRVcdtQ1L5Jo2MXPm43fKjp5AG07tthnFq1bIWE
+	FdNKHRrBd/MXKgFJ4c1rsd825VaBkZUmW3fMsxY/thSnqjnmDFQKC7t1kv4bTPGpyGu5
+	6N/KHFUKycqxrGcX9ybspqpVn/ck5B1jp5I3ttsdT9Ycbs2SKIarVNn/nvv7ZX8m5qyy
+	zGvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=fK+2rgd900TEbqvpWXLZFnYDztG22/4KHYT7rEDjOPk=;
-	b=AihclxLXh4vmh718Utg2wCnXYdLYnou3nj0OfAlMlRBoI+X26pJzk8zEu4/uoAp8R2
-	ZfJ8MJ5VJfWzI7nLNyNG5z/EaLfUhaPoOhWk/iFjR2PrqNzi6naRG5ShTzkUyVQhMS6d
-	bL3GB2yqRbm8hxB/zhsP7diSqfWktN8CV/gckMB2Rz8EfNEEDeqwdl/Go47u6Dgljs9D
-	4gh2mPB56eLwCg1Vjcyj3XhV+iV+DRRCyQuykauZ2ZHFOYJVVm21y+ROGiZe3GU7Ggoe
-	gmHxxzUbcSi9DU/AQKoVsozILLbC8DYZ5Hzx0YpVAZfoUw1feLsLdcnNQSaOAGt39CZ+
-	VvOw==
-X-Gm-Message-State: APjAAAX/O9NsIsdZwYlCf5u7MnRKk9mlhAmpFeIrMlIzmCpYCTIsFOix
-	zmp+LMsc0qBfDiS63aacu4LRqGAZ+/s=
-X-Google-Smtp-Source: APXvYqwCjdBe0l64l4QKCDK3ZAcHtHE0tNqrVv93syYVIdDwjlYnZP1gtjlVKfid0KGSl5sJt+sJSA==
-X-Received: by 2002:a5d:6284:: with SMTP id k4mr5555568wru.398.1582719998561; 
-	Wed, 26 Feb 2020 04:26:38 -0800 (PST)
-Received: from hackbox2.linaro.org ([81.128.185.34])
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=uoisO5Damy7boLrP6Yk12wUzpq2GWvnLietJ6AU7Yjw=;
+	b=b96gI3rNnyp+6wuDhkOEwDQq3/03TjonkKSRENF6ZTENxH9ffUv7i9SO0tni2GU5s3
+	DOeRfe5OcVeNaa19GtPftQNAxvhjqK9YLigzvB5Cct4kCi2nkkwZeew1As7eKp0X+Gcl
+	rR9aatX4ECMa6haCsUng9eY0P5kAdGjqY4/wLLnHyjsHaehwn9FFY96MMlVEqKhdif7D
+	lBrhOZ2w+07ccyXge5l6oxVRakbIsMASzqjQcA5oxnWGzLyTP7I3M4j3AjqdqdRPnc2y
+	lI//0STDLbC7U7LCCuYAdy4J6lGLRDLEf5MOme8q+pkzLUhNZAiXpe0WrUEMJhZfeGjB
+	g3cA==
+X-Gm-Message-State: APjAAAWSUpOlZ6vcXvvrGxLPLXXfFjuyzFCqkVo5MckAwYb9kPZ62YXJ
+	rVAQFp5WgmRgl0pWvo3u99Igmg==
+X-Google-Smtp-Source: APXvYqzezbXlY4IaduiknxO5KLp0S3U6Lhd8Iwt2o5ssBKgPMzAAjONebnJ1KEEEwD9/R9pBa3MTKQ==
+X-Received: by 2002:a63:594a:: with SMTP id j10mr3773655pgm.227.1582720244382; 
+	Wed, 26 Feb 2020 04:30:44 -0800 (PST)
+Received: from leoy-ThinkPad-X240s ([2400:8902::f03c:91ff:fe3f:ee42])
 	by smtp.gmail.com with ESMTPSA id
-	a26sm2747958wmm.18.2020.02.26.04.26.37
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 26 Feb 2020 04:26:37 -0800 (PST)
+	w189sm2942824pfw.157.2020.02.26.04.30.40
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 26 Feb 2020 04:30:43 -0800 (PST)
+Date: Wed, 26 Feb 2020 20:30:36 +0800
 From: Leo Yan <leo.yan@linaro.org>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Khem Raj <raj.khem@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
-	Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>
-Date: Wed, 26 Feb 2020 12:26:22 +0000
-Message-Id: <20200226122622.33171-1-leo.yan@linaro.org>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v4] luajit: Upgrade to 2.1.0-beta3
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20200226123036.GA2551@leoy-ThinkPad-X240s>
+References: <20200225063711.4848-1-leo.yan@linaro.org>
+	<263955b2-9b82-f24c-172c-0761d86a1391@gmail.com>
+	<20200225073129.GA1169@leoy-ThinkPad-X240s>
+	<8e32456d-c86d-3e87-9588-d8dc075ce061@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <8e32456d-c86d-3e87-9588-d8dc075ce061@gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+	Loic Poulain <loic.poulain@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v3] luajit: Upgrade to 2.1.0-beta3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,74 +65,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 12:26:38 -0000
+X-List-Received-Date: Wed, 26 Feb 2020 12:30:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
-misses to support aarch64, the patch upgrades to luajit 2.1.0-beta3.
+Hi Khem,
 
-Also updated clang.patch to dismiss patch warning: "Hunk #1 succeeded
-at 436 with fuzz 1 (offset 123 lines)."
+On Tue, Feb 25, 2020 at 07:57:09AM -0800, Khem Raj wrote:
+> 
+> 
+> On 2/24/20 11:38 PM, Leo Yan wrote:
+> > Hi Khem,
+> > 
+> > On Mon, Feb 24, 2020 at 10:41:04PM -0800, Khem Raj wrote:
+> > > 
+> > > 
+> > > On 2/24/20 10:37 PM, Leo Yan wrote:
+> > > > Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
+> > > > misses to support aarch64, the patch upgrades to luajit 2.1.0-beta3.
+> > > > 
+> > > > Signed-off-by: Leo Yan <leo.yan@linaro.org>
+> > > > ---
+> > > >    .../luajit/luajit/clang.patch                 | 19 -------------------
+> > > 
+> > > 
+> > > why is this patch dropped ? it building with clang handled differently now ?
+> > > if so please add a line or two in commit msg
+> > 
+> > To be honest, I don't know how to hit the condition for
+> > '#elif !LJ_TARGET_PS3', and since considering Clang has upgraded to new
+> > version (9.0.1), this is another reason I dropped this patch.
+> > 
+> 
+> you could easily excercise the need for it, by adding meta-clang and setting
+> 
+> TOOLCHAIN_pn-luajit = "clang" (in local.conf)
+> bitbake luajit
 
-Signed-off-by: Leo Yan <leo.yan@linaro.org>
----
- meta-oe/recipes-devtools/luajit/luajit/clang.patch  |  4 ++--
- .../luajit/{luajit_2.0.5.bb => luajit_git.bb}       | 13 ++++++-------
- 2 files changed, 8 insertions(+), 9 deletions(-)
- rename meta-oe/recipes-devtools/luajit/{luajit_2.0.5.bb => luajit_git.bb} (90%)
+I tested up setting with MACHINE=qemumips, it can hit the condition
+for '#elif !LJ_TARGET_PS3' and the patch clang.patch is still needed,
+otherwise, it can cause building error.
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit/clang.patch b/meta-oe/recipes-devtools/luajit/luajit/clang.patch
-index c39ef6fd4..807cc4417 100644
---- a/meta-oe/recipes-devtools/luajit/luajit/clang.patch
-+++ b/meta-oe/recipes-devtools/luajit/luajit/clang.patch
-@@ -8,8 +8,8 @@ Index: LuaJIT-2.0.5/src/lj_arch.h
- ===================================================================
- --- LuaJIT-2.0.5.orig/src/lj_arch.h
- +++ LuaJIT-2.0.5/src/lj_arch.h
--@@ -313,7 +313,7 @@
-- #error "Need at least GCC 4.2 or newer"
-+@@ -436,7 +436,7 @@
-+ #endif
-  #endif
-  #elif !LJ_TARGET_PS3
- -#if (__GNUC__ < 4) || ((__GNUC__ == 4) && __GNUC_MINOR__ < 3)
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-similarity index 90%
-rename from meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-rename to meta-oe/recipes-devtools/luajit/luajit_git.bb
-index 93128dda8..2a7243842 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
-@@ -1,14 +1,14 @@
- SUMMARY = "Just-In-Time Compiler for Lua"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d739bb9250a55c124a545b588fd76771"
- HOMEPAGE = "http://luajit.org"
- 
--PV .= "+git${SRCPV}"
--SRCREV = "02b521981a1ab919ff2cd4d9bcaee80baf77dce2"
--SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http \
-+PV = "2.0.5+2.1.0-beta3"
-+SRCREV = "0ad60ccbc3768fa8e3e726858adf261950edbc22"
-+SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
-            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
-            file://clang.patch \
--"
-+           "
- 
- S = "${WORKDIR}/git"
- 
-@@ -90,8 +90,7 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
- "
- FILES_luajit-common = "${datadir}/${BPN}-${PV}"
- 
--# Aarch64/mips64/ppc/ppc64/riscv64 is not supported in this release
--COMPATIBLE_HOST_aarch64 = "null"
-+# mips64/ppc/ppc64/riscv64 is not supported in this release
- COMPATIBLE_HOST_mipsarchn32 = "null"
- COMPATIBLE_HOST_mipsarchn64 = "null"
- COMPATIBLE_HOST_powerpc = "null"
--- 
-2.17.1
+So have sent out patch v4 to keep clang.patch with minor updating
+to dismiss patching warning.
 
+Thanks a lot for guidance.
+
+Leo
 
