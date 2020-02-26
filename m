@@ -1,46 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
-	[209.85.160.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A23861851
+Return-Path: <zboszor@pr.hu>
+X-Greylist: delayed 398 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 26 Feb 2020 08:56:01 UTC
+Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 99A946010E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 06:24:43 +0000 (UTC)
-Received: by mail-qt1-f194.google.com with SMTP id l21so1476232qtr.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 22:24:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=DLLtck2A4jguol84jYvv1Ffzmqicgvk2Y28KugfXql4=;
-	b=MKHzwbJBg3fsr/DCp9Y4ZuL81exVqCPCyeNqkU3ibyBm8bGTCdMt5qJ9CJ5HDCSwGv
-	RMCBQnVha/EOUj+kJkp/kqHeOaOT+FbO1a9yveF85RZb6mte9WHZEDBr/fKBAPcaRJ0a
-	xQ2y3oz7ajpBFFnVbYMaLYZcVYFJaWXYGpqjWHXqpZcjL42uh34ogWCEjh3PGSW6d86v
-	geKDD+i98jv938tWOsTeyln6QwCxSDqCuqp7I4A+A64Thezek5e6sEgPHEuGsZGD5st5
-	thL7WjjhmNH4mOo3QZ5HHkOMNmAQOEaG7QGLmHKjxnvkM6dcVXEJBddkRcAX/dBsEJ0N
-	tcMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=DLLtck2A4jguol84jYvv1Ffzmqicgvk2Y28KugfXql4=;
-	b=mixawD9kPwpzu3FJKoSva1kfKA/orNZdilZ1UgbbOwRDa1VO+G8ArClwhchPxjS/2V
-	HZlxqmrMyKRe2dPdJ6pJdYft418VL6xbIgSGoy+FZ77C0p86enQmNvpluPZFYYXU1f/I
-	f348MKSv7gidxVrsTj4dsTqunoLJN//I/yFCV14pFiz8F4e4s18srovNGVGmspVvRIrc
-	LTDY7CF1HhvRYTaoP15HEkE301VLIk0DrINwnY3ZoFJjFEAX4i/goYKIvHpj1GTpYn39
-	pPh3ZNfsXM8Ci1kOOhLv2Uik/XWebDPaZt8Gj66mT+HBA82cZS4ozRvuV9q2Ismf4r2s
-	fEjw==
-X-Gm-Message-State: APjAAAUHSKoaw5PstJI7Tc2aPeAFwLMNHVu6uj23GzryUQQriJfIJREA
-	+UXJaS0M5bcVbVxRi/n8TXlwBUrAdSDD+PIZMrUhnAT4i3Y=
-X-Google-Smtp-Source: APXvYqyd3wW0OrFaIX5lY4I8lk3MUt3HgZtkKLu5gX9nL52Z1gCXoe/nrTcKZW0gcu29M5vtNKPpU3HDtdGRl6RF89k=
-X-Received: by 2002:ac8:709:: with SMTP id g9mr3386107qth.293.1582698284175;
-	Tue, 25 Feb 2020 22:24:44 -0800 (PST)
+	Wed, 26 Feb 2020 08:56:01 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+	(envelope-from <zboszor@pr.hu>)
+	id 1j6sNe-000700-IQ; Wed, 26 Feb 2020 09:49:23 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
+	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=2guuJyruW/bq2wns3UnAtGamz9hk37a6AsH1phVjAJE=;
+	b=eh09LoDuIV3TS9Tqqj4rVi5/Gr
+	4XeNgg6lpEDr0jEukrshzF+vA5k67BvYecvu0lTC5z7+UztsHeWjEFTCrBfEX185jy9STNxp6DyAZ
+	/Cv4IhDObVBzkkkNxNlKhq20nF0ZfWp6xBeCC5OhcKA2fvxjWsYS6MY9AV96wuROeJ2Ehook2NejS
+	D6Tow6UysRo0yiT2YpA8FErhPll4K68aaHFiRr2Y4y8j7j4YYVEclacqrUL/cXxDtYs3xTBT23V+2
+	JD1lCml+sh8aU2nTIFK+8NXwixypfnQZMgiY9GXPhxqTsdovuoOSIQxEaYnzFN4wiG8bXWyP/Ilmw
+	SJpLrbwQ==;
+Received: from host-87-242-33-197.prtelecom.hu ([87.242.33.197]
+	helo=[192.168.1.2])
+	by mail.pr.hu with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.89) (envelope-from <zboszor@pr.hu>)
+	id 1j6sNa-0007ZH-5O; Wed, 26 Feb 2020 09:49:20 +0100
+To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+References: <55B8D485.7080207@pr.hu>
+	<27501214-4FE0-4D4B-8E0F-797B153B9988@gmail.com>
+From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
+Message-ID: <9e16757b-6678-8be6-9a2c-6d05eb54a500@pr.hu>
+Date: Wed, 26 Feb 2020 09:49:15 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.5.0
 MIME-Version: 1.0
-References: <1582104095-88658-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1582104095-88658-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 25 Feb 2020 22:24:18 -0800
-Message-ID: <CAMKF1sr4t2oXTMBCQAUva4LvLZCWnUnx3HhZ=UBuoeyPGqnbxQ@mail.gmail.com>
-To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] libharu: New recipe
+In-Reply-To: <27501214-4FE0-4D4B-8E0F-797B153B9988@gmail.com>
+X-Spam-Score: -1.9 (-)
+X-Scan-Signature: d8487180e38fe565612df7e774c06e36
+X-Spam-Tracer: backend.mail.pr.hu -1.9 20200226084920Z
+Subject: Re: Trying to resolve build-time cyclic dependency between packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,128 +54,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 06:24:43 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 26 Feb 2020 08:56:01 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-On Wed, Feb 19, 2020 at 1:23 AM Zheng Ruoqin
-<zhengrq.fnst@cn.fujitsu.com> wrote:
->
-> libHaru is a library for generating PDF files.
->
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ---
->  .../libharu/libharu-RELEASE_2_3_0_cmake.patch      | 52 ++++++++++++++++++++++
->  meta-oe/recipes-support/libharu/libharu_2.3.0.bb   | 24 ++++++++++
->  2 files changed, 76 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch
->  create mode 100644 meta-oe/recipes-support/libharu/libharu_2.3.0.bb
->
-> diff --git a/meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch b/meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch
-> new file mode 100644
-> index 0000000..332be1b
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch
-> @@ -0,0 +1,52 @@
-> +Backport from Fedora Project.
-> +https://src.fedoraproject.org/rpms/libharu
-> +
-> +Fix the install destination of some files.
-> +
-> +Upstream-Status: inappropriate
-> +
-> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> +
-> +diff -urp libharu-RELEASE_2_3_0/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/CMakeLists.txt
-> +--- libharu-RELEASE_2_3_0/CMakeLists.txt       2013-10-30 20:11:59.000000000 +0700
-> ++++ libharu-RELEASE_2_3_0_cmake/CMakeLists.txt 2017-06-01 15:56:06.533552795 +0700
-> +@@ -25,7 +25,7 @@ endif(MSVC)
-> +
-> + # information about libharu
-> + set(LIBHPDF_MAJOR 2)
-> +-set(LIBHPDF_MINOR 2)
-> ++set(LIBHPDF_MINOR 3)
-> + set(LIBHPDF_PATCH 0)
-> + set(LIBHPDF_VERSION ${LIBHPDF_MAJOR}.${LIBHPDF_MINOR}.${LIBHPDF_PATCH})
-> + set(LIBHPDF_DESCRIPTION "libHaru is a free, cross platform, open source library for generating PDF files.")
-> +@@ -210,9 +210,9 @@ set(
-> + install(FILES ${haru_HDRS} DESTINATION include)
-> +
-> + # install various files
-> +-install(FILES README CHANGES INSTALL DESTINATION .)
-> ++install(FILES README CHANGES INSTALL DESTINATION ${SHARE_INSTALL_PREFIX}/libharu)
-> + if(NOT DEVPAK)
-> +-  install(DIRECTORY if DESTINATION .)
-> ++  install(DIRECTORY if DESTINATION ${SHARE_INSTALL_PREFIX}/libharu)
-> + endif(NOT DEVPAK)
-> + if(DEVPAK)
-> +   install(FILES ${CMAKE_BINARY_DIR}/libharu.DevPackage DESTINATION .)
-> +diff -urp libharu-RELEASE_2_3_0/src/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/src/CMakeLists.txt
-> +--- libharu-RELEASE_2_3_0/src/CMakeLists.txt   2013-10-30 20:11:59.000000000 +0700
-> ++++ libharu-RELEASE_2_3_0_cmake/src/CMakeLists.txt     2017-06-01 16:08:45.425105746 +0700
-> +@@ -90,11 +90,13 @@ if(LIBHPDF_SHARED)
-> +   target_link_libraries(${LIBHPDF_NAME} ${ADDITIONAL_LIBRARIES})
-> +   if(WIN32 AND NOT CYGWIN)
-> +       set_target_properties(${LIBHPDF_NAME} PROPERTIES DEFINE_SYMBOL HPDF_DLL_MAKE)
-> ++  else(WIN32 AND NOT CYGWIN)
-> ++      set_target_properties(${LIBHPDF_NAME} PROPERTIES SOVERSION ${LIBHPDF_VERSION})
-> +   endif(WIN32 AND NOT CYGWIN)
-> +   install(
-> +     TARGETS ${LIBHPDF_NAME}
-> +-    ARCHIVE DESTINATION lib
-> +-    LIBRARY DESTINATION lib
-> ++    ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
-> ++    LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-> +     RUNTIME DESTINATION bin
-> +   )
-> + endif(LIBHPDF_SHARED)
-> diff --git a/meta-oe/recipes-support/libharu/libharu_2.3.0.bb b/meta-oe/recipes-support/libharu/libharu_2.3.0.bb
-> new file mode 100644
-> index 0000000..359f615
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libharu/libharu_2.3.0.bb
-> @@ -0,0 +1,24 @@
-> +SUMMARY = "free PDF library"
-> +HOMEPAGE = "http://libharu.org"
-> +DESCRIPTION = "libHaru is a library for generating PDF files. \
-> +               It is free, open source, written in ANSI C and cross platform. "
-> +
-> +LICENSE = "Zlib"
-> +LIC_FILES_CHKSUM = "file://README;md5=3ee6bc1f64d9cc7907f44840c8e50cb1"
-> +
-> +SRC_URI = "https://github.com/libharu/${BPN}/archive/RELEASE_${@d.getVar('PV').replace('.','_')}.tar.gz \
+Hi,
 
-Please use a hardcoded SRCREV or release in SRC_URI, archives are
-known to change
-under the rug.
+I am reviving this old idea with Zeus.
 
-WARNING: libharu-2.3.0-r0 do_package_qa: QA Issue: libharu: SRC_URI
-uses unstable GitHub archives [src-uri-bad]
+I have implemented the idea in an ALMOST satisfactory way, tested with
+Mesa 20.0.0.
 
+Side note: Mesa 19.3 and 20.0 needs TOOLCHAIN="gcc" in Zeus,
+otherwise linker errors occur. See:
+https://gitlab.freedesktop.org/mesa/mesa/issues/2533
 
+Mesa doesn't link to libva even with meson -Dgallium-va=true. It only
+needs the libva.pc pkgconfig file and the headers from libva to build
+its VA state tracker so the circular dependency is not that hard to solve.
 
-> +           file://libharu-RELEASE_2_3_0_cmake.patch \
-> +          "
-> +
-> +SRC_URI[md5sum] = "4f916aa49c3069b3a10850013c507460"
-> +SRC_URI[sha256sum] = "8f9e68cc5d5f7d53d1bc61a1ed876add1faf4f91070dbc360d8b259f46d9a4d2"
-> +
-> +S = "${WORKDIR}/${BPN}-RELEASE_${@d.getVar('PV').replace('.','_')}"
-> +
-> +inherit cmake
-> +DEPENDS += "libpng zlib"
-> +
-> +do_install_append() {
-> +     mkdir -p ${D}/${datadir}/libharu
-> +     mv ${D}/libharu ${D}/${datadir}
-> +}
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+I have this new recipe called libva-headers now that is a fork of the
+libva recipe and just deletes the libraries in do_install_append.
+
+My Mesa recipe addendum has this line plus PACKAGECONFIG has "va":
+
+PACKAGECONFIG[va] = "-Dgallium-va=true,-Dgallium-va=false,libva-headers"
+
+Now, building libva is happy without the warning about libva.so is
+shipped by libva-headers (or libva-noglx in the previous incarnation)
+but now marked as shipped by libva because it was built later.
+
+There is another problem now: anything that uses libva as dependency,
+like intel-vaapi-driver, implicitly pulls in mesa and then libva-headers
+so there is a clash in prepare-sysroot between libva and libva-headers
+because they still ship identical headers and pkgconfig files.
+
+My current solution to the problem is to patch staging.bbclass to
+handle a new variable called EXCLUDE_DEPS but a line like this below
+needs to be added to all recipes that depends on libva, so it is
+quite intrusive for now.
+
+EXCLUDE_DEPS = "libva-headers"
+
+I am looking into storing data in "sstate", so libva-headers would add
+itself into a new class of packages that are not added to recipe-sysroot
+unless it is in DEPENDS explicitly.
+
+My question is: is there a generic framework to do this already?
+
+This would allow me to not modify other recipes and may alsoserve other
+recipes with circular dependencies.
+
+The end goal is to allow Chromium to be built with use_vaapi=true now that
+meta-browser has version 79 that includes the VAAPI patches. The current
+solution with setting EXCLUDE_DEPS already does this but as I said, it's
+not clean enough.
+
+Best regards,
+Zoltán Böszörményi
+
+2015. 08. 09. 0:14 keltezéssel, Khem Raj írta:
+> 
+>> On Jul 29, 2015, at 6:26 AM, Boszormenyi Zoltan <zboszor@pr.hu> wrote:
+>>
+>> Hi,
+>>
+>> I have a customized Mesa 10.6.3 package recipe which depends on libva
+>> to be able to build its mesa-va-driver subpackage, but libva also depends
+>> on Mesa to support GLX.
+>>
+>> Previously, I simply created a libva-noglx package that builds libva
+>> with --disable-glx that Mesa depend on and the "real" libva package can
+>> depend on Mesa.
+>>
+>> But since I also have to produce an SDK image with all the *-dev packages,
+>> creating such an initial image with bitbake fails because of a conflict
+>> in the dependency chain: libva-dev -> mesa-dev -> libva-noglx-dev.
+>>
+> 
+> since libva-noglx is sort of a bootstrap package, you could empty/delete out the content
+> its puts into -dev packages and conflict will be gone. Other option is that you share
+> the content of -dev package in exclusive manner between libva and libva-noglx such
+> that they don’t package duplicate files
+> 
+>> I have come up with the attached bbclass (based on Yocto 1.6) that
+>> now Mesa can inherit and that patches the RDEPENDS / RRECOMMENDS
+>> variables according to externally set variables. The comment at
+>> the beginning of the file explains how to use it.
+>>
+>> This pushes the cyclic dependency to opkg which happily breaks it and
+>> installs both libva* and *mesa* packages properly. Creating the initial
+>> image via bitbake works now.
+>>
+>> Comments?
+>>
+>> Best regards,
+>> Zoltán Böszörményi
+>>
+>> <cyclic-deps.bbclass>--
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 
+> 
+
 
