@@ -1,51 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 16BD760635
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
+	[209.85.216.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 3478B60635
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 01:58:16 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id 84so576073pfy.6
+	Wed, 26 Feb 2020 01:59:52 +0000 (UTC)
+Received: by mail-pj1-f42.google.com with SMTP id ep11so566108pjb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 17:58:18 -0800 (PST)
+	Tue, 25 Feb 2020 17:59:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
+	h=subject:to:references:from:autocrypt:message-id:date:user-agent
 	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=K1FZCv7CMrcyVWKfHDsN8r6cgjP7KYdw+Wsb9WnWxv8=;
-	b=bGpTYPCKmOHWpQBaLSJ/9u/Jb2jbBd4RtnibEo8l5jX3PHh2s3dpwq5XTZoE8bW/vq
-	ZVmxJhPBLJN4INeOf6+eh/ejWjFOg2vVSc5yjkqMfRj25w6Fh5cC82blcnfEnf1az1iI
-	+AdZD+trLUXlrsXx258Yr3WaKKT2LR3yxnWsidueUgEaoKGJpc90itfEFuoXiExAfFGV
-	2r6CUOV8nMbS5yOd2z/UTTE32F4XNHbfkaFN9j/kPMGSPrSxIgfLg8/jVsHAztyYZFad
-	mcg7/eft7xj4rsI0HEzNZ4A0YYUH9JHqYLAts07tQbxvOoBARxYyAJ0twROsFdUomduM
-	J4bg==
+	bh=xICTEIcCyte7d4TwH9ygZ86OUpcJG8ebnFLjTkqkQGg=;
+	b=qgQLfkNTHfn16zXpWvTHhfOWq+hPb6A1KX5hWaqGPIsMOkYk27NguxM4RPgo/goAs+
+	4lbjScW/d9uje3EEUdR5E69r9iE9EX/Mhp070d6M7TKILX1fMLkV9F5K/IkxU2/BSZIM
+	aiIOYc5Oynj3FfeKH1XUAUfriUzFlh9bXgZ/wXPlsCnRa99ZN6lxuDHLSGN+Ftt4s1KJ
+	0fd+ipG06wKp6+W3PsHLfuAbOKA1Xk1sGHIawweOFwDtvKWGlZvv6PqE0cfqjF/qgxkQ
+	HPqYowLO2qugUw3XAaicp9rIxqKw9XZGqB9SfYSv/hdqfNt8zBg8s/IKuMDxjT4H6cgF
+	XYRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=K1FZCv7CMrcyVWKfHDsN8r6cgjP7KYdw+Wsb9WnWxv8=;
-	b=Wj7wyghK7ChMIcIENmIjtrj4It1BdR/+ARE4zfT012xeruo2RZ9e184U4x00Z5G2cC
-	1D1o0fkCdTPMnWogxTSvj7FAl5vmiPJdG7/eJie3BPac00SH5sw7TpGU4VOaLYyQkWAw
-	QEXmVKZ7No5IkFF4wOgdrdVtjCqPtnCuhHopTZ1yOnjPKoRmpgP+KvUn9l03E1U4nX40
-	gN7O7JA5P+Xd/utnHRdR0XDMVex8PnX3T6BpAQeGtQn+SXRm9VGhg1pwGVtIJsxp/us/
-	U/h2jH34TK5enqsvb9hTwxC4kUiUaks7UYFFXpqH97A6sYVqKhNHHREojl62kBvb0xur
-	PNdA==
-X-Gm-Message-State: APjAAAVgH9UTbrV/pISYbSonfkI29IIFbqtTFtbilLB38xCFM2cimxt8
-	gB72SpE9SZcVXRZuw8Mvulfv2ENkfRw=
-X-Google-Smtp-Source: APXvYqx/Vkv/dkiFipQ+zxbUQLMyAXw6lH2yqS+vOoASzeRBspJL6rVEm7HuZ+c3V4LSAL2UAb7zhw==
-X-Received: by 2002:aa7:8191:: with SMTP id g17mr1754156pfi.25.1582682297260; 
-	Tue, 25 Feb 2020 17:58:17 -0800 (PST)
+	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=xICTEIcCyte7d4TwH9ygZ86OUpcJG8ebnFLjTkqkQGg=;
+	b=hAshU6rH2DWlLt46Y5d2tc7zz1B+62NjNc6ZkLOze22BdVqkJmi8z4KrpZIoelYPKl
+	X8yCoxwGq4+H6g3c4XN3KXUSrYVtGXlEhDtzS+yvV8s6p7Us9S9kuHLz2IccgiT7VbMg
+	w/CAlBJNiTPf9LPkFYdoM8rtLmk/q0pH7HvGzDoEKwB1akW9HuenoSD4f3+7meewZVSs
+	cHwW5p9np5vAKrVUBbMCHff5rbjOtIq8dTKtUWU4MfzThs2wfZSquhBwhojmp+QMl2bH
+	MQoJCb0zRpW5kc02QoZa+I3iKq/xyne4C8y3Bkogw4wOwqYUaJxXZRca9t66dvx9KBVQ
+	do0A==
+X-Gm-Message-State: APjAAAVUaeDApjIKJRLNA/s6xs1ILAUV24E1bqyG0H+1wDbuW1N5ZwSD
+	Cc6v1fPmWaPdZAUGSubU9cOAqSyeSYM=
+X-Google-Smtp-Source: APXvYqz/xlFhvcRKvAuTBkh1qWOBOI4VJETGurpaf2+ip/m5yZW3r+PV9HZawozHoubSnHkv+LLh2w==
+X-Received: by 2002:a17:90a:ead8:: with SMTP id
+	ev24mr2208674pjb.91.1582682392700; 
+	Tue, 25 Feb 2020 17:59:52 -0800 (PST)
 Received: from ?IPv6:2601:646:9200:4e0:923a:5c32:ada4:3e27?
 	([2601:646:9200:4e0:923a:5c32:ada4:3e27])
-	by smtp.gmail.com with ESMTPSA id
-	c188sm369582pfb.151.2020.02.25.17.58.16
+	by smtp.gmail.com with ESMTPSA id d4sm361063pjg.19.2020.02.25.17.59.52
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Tue, 25 Feb 2020 17:58:16 -0800 (PST)
-To: Changqing Li <changqing.li@windriver.com>
-References: <1582544446-241334-1-git-send-email-changqing.li@windriver.com>
-	<CAMKF1so3CU_NMnOKGmUJsrgaUsAF+SKM5XeFQAoX4NrFzRv07w@mail.gmail.com>
-	<fc47113c-82c7-5c17-139c-3ea747eecc26@windriver.com>
-	<23aee0bf-a9f4-b002-8277-615dfa603b04@gmail.com>
-	<2459deea-b48d-a24b-17b7-7965d5b72a02@windriver.com>
+	Tue, 25 Feb 2020 17:59:52 -0800 (PST)
+To: Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <158266574202.15681.9378221674340872770@git.openembedded.org>
+	<20200225212222.A6EF3232AA5@git.openembedded.org>
+	<CA+chaQci68OmMJZZddXkUSJXmTkxMGdQZ_87i3rOtfD7t38PGg@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 Autocrypt: addr=raj.khem@gmail.com; keydata=
 	mQGiBEqXaJERBACUvFofpD3FsxD9675wcPv+rzguIfsRWilrrpSZ61JHjLHwkUnmDLpLSdfv
@@ -79,14 +78,13 @@ Autocrypt: addr=raj.khem@gmail.com; keydata=
 	suq7Hnb7vszlFYdbzeqjY81LSyxA0kcpgJxdLv9o7UuCEnHDZLPbHdQ83PmyyBKSI31AKe7R
 	XlQNlB5grwH9o6uNtPbV7q/uRqmKq5EiiEkEGBECAAkFAkqXaJECGwwACgkQuwUzVZGdMxR1
 	VACcCkdaO3rb8/gRprldmAH6eR49eo4AnjD3h3aTwv/1bl+BAz1twmZmz8ul
-Message-ID: <d0220eec-83e2-ba74-4ed8-7636c79b756f@gmail.com>
-Date: Tue, 25 Feb 2020 17:58:29 -0800
+Message-ID: <81add210-35eb-1ecf-2528-c0e534595f4d@gmail.com>
+Date: Tue, 25 Feb 2020 18:00:05 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <2459deea-b48d-a24b-17b7-7965d5b72a02@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-webserver][PATCH] nginx.service: sleep 0.1 after nginx start
+In-Reply-To: <CA+chaQci68OmMJZZddXkUSJXmTkxMGdQZ_87i3rOtfD7t38PGg@mail.gmail.com>
+Subject: Re: [oe-commits] [meta-openembedded] 09/10: c-ares: move from meta-networking to meta-oe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -99,96 +97,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 01:58:17 -0000
+X-List-Received-Date: Wed, 26 Feb 2020 01:59:52 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
 
 
-On 2/25/20 5:48 PM, Changqing Li wrote:
-> 
-> On 2/25/20 12:49 PM, Khem Raj wrote:
->>
->>
->> On 2/24/20 7:53 PM, Changqing Li wrote:
->>>
->>> On 2/25/20 12:40 AM, Khem Raj wrote:
->>>> On Mon, Feb 24, 2020 at 3:41 AM<changqing.li@windriver.com>  wrote:
->>>>> From: Changqing Li<changqing.li@windriver.com>
->>>>>
->>>>> Fix error info:
->>>>> nginx.service: failed to parse pid from file /run/nginx/nginx.pid:
->>>>> invalid argument
->>>>>
->>>>> Signed-off-by: Changqing Li<changqing.li@windriver.com>
->>>>> ---
->>>>>   meta-webserver/recipes-httpd/nginx/files/nginx.service | 1 +
->>>>>   1 file changed, 1 insertion(+)
->>>>>
->>>>> diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.service
->>>>> b/meta-webserver/recipes-httpd/nginx/files/nginx.service
->>>>> index 9a6ca96..65c7752 100644
->>>>> --- a/meta-webserver/recipes-httpd/nginx/files/nginx.service
->>>>> +++ b/meta-webserver/recipes-httpd/nginx/files/nginx.service
->>>>> @@ -7,6 +7,7 @@ Type=forking
->>>>>   PIDFile=/run/nginx/nginx.pid
->>>>>   ExecStartPre=@SBINDIR@/nginx -t
->>>>>   ExecStart=@SBINDIR@/nginx
->>>>> +ExecStartPost=/bin/sleep 0.1
->>>> I dont thiink we should be adding sleeps instead try to lock the
->>>> dependencies
->>>> so it happens correctly. or perhaps change the logic in code itself if
->>>> dependencies
->>>> can not handle it.
->>>
->>> error info: "nginx.service: failed to parse pid from file
->>> /run/nginx/nginx.pid: invalid argument" is caused by race condition
->>> between
->>>
->>> systemd and nginx.  And this error will not caused problem except
->>> scary log
->>>
->>> This should be a known problem:
->>> https://bugs.launchpad.net/ubuntu/+source/nginx/+bug/1581864
->>>
->>> other distro like ubuntu, fedora, should also have this problem, I
->>> can google people report this error on different distro.
->>
->> I do not question the problem but the solution, there have been
->> different solutions posted to ml e.g.
->>
->> https://mailman.nginx.org/pipermail/nginx-devel/2016-February/007961.html
->>
->> or ubuntu fix
->>
->> https://github.com/aroth-arsoft/pkg-nginx/blob/master/debian/patches/nginx-fix-pidfile.patch
->>
->>
->> perhaps you should try one of these patches
-> 
-> Hi, Khem
-> 
-> I found that both V1 and V2 are on master-next now,  please remember to
-> drop the V1 when merge to master, thanks.
+On 2/25/20 1:25 PM, Martin Jansa wrote:
+> With this one included, you can drop "07/10: nodejs: don't enable ares
+> support by default"
 > 
 
-thanks, I needed to refresh master-next queue anyway, I will drop this
-at that time
->>
->>>
->>> ubuntu 16.04 use this as a workaround.
->>>
->>>>>   ExecReload=@SBINDIR@/nginx -s reload
->>>>>   ExecStop=@BASE_BINDIR@/kill -s QUIT $MAINPID
->>>>>   PrivateTmp=true
->>>>> -- 
->>>>> 2.7.4
->>>>>
->>>>> -- 
->>>>> _______________________________________________
->>>>> Openembedded-devel mailing list
->>>>> Openembedded-devel@lists.openembedded.org
->>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
+yes it will be thanks
+
+> On Tue, Feb 25, 2020 at 10:22 PM <git@git.openembedded.org
+> <mailto:git@git.openembedded.org>> wrote:
+> 
+>     This is an automated email from the git hooks/post-receive script.
+> 
+>     khem pushed a commit to branch master-next
+>     in repository meta-openembedded.
+> 
+>     commit d15fd2cfb6bcd2472a8b346cc6fe4bc070675d13
+>     Author: Martin Jansa <martin.jansa@gmail.com
+>     <mailto:martin.jansa@gmail.com>>
+>     AuthorDate: Tue Feb 25 20:36:15 2020 +0100
+> 
+>         c-ares: move from meta-networking to meta-oe
+> 
+>         * nodejs from meta-oe depends on this since:
+>           commit 76dd3dac1f1e67a5c44ad732b8e827cc36ded641
+>           Author: André Draszik <git@andred.net <mailto:git@andred.net>>
+>           Date:   Tue Oct 29 16:42:24 2019 +0000
+> 
+>             nodejs: allow use of system c-ares (and make default)
+> 
+>             Use system c-ares via PACKAGECONFIG by default. So far,
+>             nodejs had been built using its embedded copy of c-ares,
+>             which we generally try to avoid, for the known reasons
+>             (independent updates, cve & license checks, etc).
+> 
+>             Notes:
+>             * otherwise nodejs uses its bundled version of c-ares
+>             * the PACKAGECONFIG variable is 'ares' so as to be in
+>               line with other uses of this (wget & curl recipes in
+>               OE core)
+> 
+>             Signed-off-by: André Draszik <git@andred.net
+>     <mailto:git@andred.net>>
+>             Signed-off-by: Khem Raj <raj.khem@gmail.com
+>     <mailto:raj.khem@gmail.com>>
+> 
+>         Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com
+>     <mailto:Martin.Jansa@gmail.com>>
+>         Signed-off-by: Khem Raj <raj.khem@gmail.com
+>     <mailto:raj.khem@gmail.com>>
+>     ---
+>      .../recipes-core/packagegroups/packagegroup-meta-networking.bb
+>     <http://packagegroup-meta-networking.bb>          | 2 +-
+>      meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>     <http://packagegroup-meta-oe.bb>              | 2 +-
+>      .../recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch 
+>          | 0
+>      {meta-networking =>
+>     meta-oe}/recipes-support/c-ares/c-ares_1.15.0.bb
+>     <http://c-ares_1.15.0.bb>    | 0
+>      4 files changed, 2 insertions(+), 2 deletions(-)
+> 
+>     diff --git
+>     a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+>     <http://packagegroup-meta-networking.bb>
+>     b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+>     <http://packagegroup-meta-networking.bb>
+>     index fa9bf2d..103c99b 100644
+>     ---
+>     a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+>     <http://packagegroup-meta-networking.bb>
+>     +++
+>     b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
+>     <http://packagegroup-meta-networking.bb>
+>     @@ -107,7 +107,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
+>          tunctl dovecot ipvsadm stunnel chrony spice-protocol \
+>          usbredir ntop wireshark tnftp lksctp-tools \
+>          cim-schema-docs cim-schema-final cim-schema-exper \
+>     -    libmemcached smcroute libtevent ipcalc c-ares uftp \
+>     +    libmemcached smcroute libtevent ipcalc uftp \
+>          ntimed linux-atm ssmtp openvpn rdma-core \
+>          iftop aoetools tcpslice tcpdump libtalloc memcached nuttcp netcat \
+>          netcat-openbsd fetchmail yp-tools ypbind-mt yp-tools \
+>     diff --git
+>     a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>     <http://packagegroup-meta-oe.bb>
+>     b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>     <http://packagegroup-meta-oe.bb>
+>     index 0bda946..d096539 100644
+>     --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>     <http://packagegroup-meta-oe.bb>
+>     +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
+>     <http://packagegroup-meta-oe.bb>
+>     @@ -238,7 +238,7 @@ NE10_armv7a = "ne10"
+>      NE10_armv7ve = "ne10"
+> 
+>      RDEPENDS_packagegroup-meta-oe-support ="\
+>     -    anthy asio atop augeas avro-c bdwgc frame grail \
+>     +    anthy asio atop augeas avro-c bdwgc frame grail c-ares \
+>          ccid ceres-solver ckermit cpprest ctapi-common daemonize \
+>          daemontools debsums devmem2 dfu-util dfu-util-native digitemp \
+>          dstat eject enca epeg espeak fbset fbset-modes \
+>     diff --git
+>     a/meta-networking/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
+>     b/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
+>     similarity index 100%
+>     rename from
+>     meta-networking/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
+>     rename to
+>     meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
+>     diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.15.0.bb
+>     <http://c-ares_1.15.0.bb>
+>     b/meta-oe/recipes-support/c-ares/c-ares_1.15.0.bb
+>     <http://c-ares_1.15.0.bb>
+>     similarity index 100%
+>     rename from meta-networking/recipes-support/c-ares/c-ares_1.15.0.bb
+>     <http://c-ares_1.15.0.bb>
+>     rename to meta-oe/recipes-support/c-ares/c-ares_1.15.0.bb
+>     <http://c-ares_1.15.0.bb>
+> 
+>     -- 
+>     To stop receiving notification emails like this one, please contact
+>     the administrator of this repository.
+>     -- 
+>     _______________________________________________
+>     Openembedded-commits mailing list
+>     Openembedded-commits@lists.openembedded.org
+>     <mailto:Openembedded-commits@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+> 
 
