@@ -1,89 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
-	[209.85.216.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 2058C611DC
+Received: from mail-qt1-f194.google.com (mail-qt1-f194.google.com
+	[209.85.160.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A23861851
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 03:26:58 +0000 (UTC)
-Received: by mail-pj1-f68.google.com with SMTP id j17so663005pjz.3
+	Wed, 26 Feb 2020 06:24:43 +0000 (UTC)
+Received: by mail-qt1-f194.google.com with SMTP id l21so1476232qtr.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 19:26:59 -0800 (PST)
+	Tue, 25 Feb 2020 22:24:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:autocrypt:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=To2w2i6wQZZG8uaRuhrx70z9pN+T5s1MaxPLELy+rKQ=;
-	b=m5oAVu33nbfcZeG2QQ1Nd6PADw+sCpQgcoBopY4bY8XiXNEKci+m5k6Po4LbrZ1HV6
-	C2D2wz3veMXcYDTgxsFmUdlcd07n4Q5i0Mrl4F+Bk3bf78LbKlXSQ1o64oMGTdILeJml
-	3JrcVC4dFBDHuQt5g5rXOkax4DhHAJf7v3FS3JLuB5Bt5xIH4wH+OsBT7OnXAVUQvRSa
-	HU/yQixceh9O7obL+0KAX7o3Ahcx+0YiMtdoLB9B7FoMPPMJonhUOSwy0ayZKXcY9k8D
-	5267DI9HMiig369Bk1tThO+i2tIbjDKGIEsleARLWf65C8m0VvyQQWSoapVfp6AD63tk
-	c5Cg==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=DLLtck2A4jguol84jYvv1Ffzmqicgvk2Y28KugfXql4=;
+	b=MKHzwbJBg3fsr/DCp9Y4ZuL81exVqCPCyeNqkU3ibyBm8bGTCdMt5qJ9CJ5HDCSwGv
+	RMCBQnVha/EOUj+kJkp/kqHeOaOT+FbO1a9yveF85RZb6mte9WHZEDBr/fKBAPcaRJ0a
+	xQ2y3oz7ajpBFFnVbYMaLYZcVYFJaWXYGpqjWHXqpZcjL42uh34ogWCEjh3PGSW6d86v
+	geKDD+i98jv938tWOsTeyln6QwCxSDqCuqp7I4A+A64Thezek5e6sEgPHEuGsZGD5st5
+	thL7WjjhmNH4mOo3QZ5HHkOMNmAQOEaG7QGLmHKjxnvkM6dcVXEJBddkRcAX/dBsEJ0N
+	tcMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=To2w2i6wQZZG8uaRuhrx70z9pN+T5s1MaxPLELy+rKQ=;
-	b=qHBc7or7dhFAjSoFJyP1L3sNWOe56rUsMSjpVgcgPZrA1B1t/CkbaITyGYbK6Lp7TY
-	uBw+k6fQxBDrOqhx9s4UXCSwmmm5kf0pBWKLltmj0PK76BP5kFkTBTa/NM+Msh6vvFn4
-	qNURa+sL/aFEfr2cOnupD3KliVwvAR/kaXXmceSUdqGO/dgGNUadePPffApsm6ccxL9J
-	RI2faIMFJUWPGofd46L8hjCamOKX6T0memiQ2AyCvDhQJ33QD3y8fs7XH7++rpZ9H8A1
-	UkdqBUDiW3t9Dlzfnp/WEDDgHXvz2zHR0m9BkipZ1vJ00LR3MUeYNL4J3D5oYxiveacq
-	SG6Q==
-X-Gm-Message-State: APjAAAUdQ6Z8LdqTl6UdvRkkjF3QavLT2vgvOYf7m/9+6U3ZwAw6uxLl
-	IVmAGqq04/6mf2zEN9w6mrQdNq+YVDM=
-X-Google-Smtp-Source: APXvYqx1EBy6H8DHJLBqOs/9N8dvgKzOfFK9s2yqlkfA8nuMoqgzquKqzqLdLtLNOMCnAf0OWXHptw==
-X-Received: by 2002:a17:90a:858c:: with SMTP id
-	m12mr2450111pjn.127.1582687618404; 
-	Tue, 25 Feb 2020 19:26:58 -0800 (PST)
-Received: from ?IPv6:2601:646:9200:4e0:923a:5c32:ada4:3e27?
-	([2601:646:9200:4e0:923a:5c32:ada4:3e27])
-	by smtp.gmail.com with ESMTPSA id
-	hg11sm514380pjb.14.2020.02.25.19.26.57
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Tue, 25 Feb 2020 19:26:57 -0800 (PST)
-To: Jonathan Richardson <jonathan.richardson@broadcom.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20200225221904.97152-1-jonathan.richardson@broadcom.com>
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
-	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
-Message-ID: <84740cf1-89ad-5f5d-c8e7-cbf40e02a160@gmail.com>
-Date: Tue, 25 Feb 2020 19:27:10 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.5.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=DLLtck2A4jguol84jYvv1Ffzmqicgvk2Y28KugfXql4=;
+	b=mixawD9kPwpzu3FJKoSva1kfKA/orNZdilZ1UgbbOwRDa1VO+G8ArClwhchPxjS/2V
+	HZlxqmrMyKRe2dPdJ6pJdYft418VL6xbIgSGoy+FZ77C0p86enQmNvpluPZFYYXU1f/I
+	f348MKSv7gidxVrsTj4dsTqunoLJN//I/yFCV14pFiz8F4e4s18srovNGVGmspVvRIrc
+	LTDY7CF1HhvRYTaoP15HEkE301VLIk0DrINwnY3ZoFJjFEAX4i/goYKIvHpj1GTpYn39
+	pPh3ZNfsXM8Ci1kOOhLv2Uik/XWebDPaZt8Gj66mT+HBA82cZS4ozRvuV9q2Ismf4r2s
+	fEjw==
+X-Gm-Message-State: APjAAAUHSKoaw5PstJI7Tc2aPeAFwLMNHVu6uj23GzryUQQriJfIJREA
+	+UXJaS0M5bcVbVxRi/n8TXlwBUrAdSDD+PIZMrUhnAT4i3Y=
+X-Google-Smtp-Source: APXvYqyd3wW0OrFaIX5lY4I8lk3MUt3HgZtkKLu5gX9nL52Z1gCXoe/nrTcKZW0gcu29M5vtNKPpU3HDtdGRl6RF89k=
+X-Received: by 2002:ac8:709:: with SMTP id g9mr3386107qth.293.1582698284175;
+	Tue, 25 Feb 2020 22:24:44 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20200225221904.97152-1-jonathan.richardson@broadcom.com>
-Subject: Re: [meta-oe][PATCH 1/1] open-lldp: Add initial version 1.0.1
+References: <1582104095-88658-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1582104095-88658-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 25 Feb 2020 22:24:18 -0800
+Message-ID: <CAMKF1sr4t2oXTMBCQAUva4LvLZCWnUnx3HhZ=UBuoeyPGqnbxQ@mail.gmail.com>
+To: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] libharu: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -96,142 +53,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 03:26:58 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 Feb 2020 06:24:43 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi Jonathan
-
-On 2/25/20 2:19 PM, Jonathan Richardson via Openembedded-devel wrote:
-> Open-LLDP provides a Link Layer Discovery Protocol agent that supports
-> DCB (Data Center Bridging). The tc utility from iproute is needed to
-> manipulate  traffic control settings in the kernel.
-> 
-
-build on musl fails and finds a problem
-
-https://errors.yoctoproject.org/Errors/Details/392758/
-
-include/clif.h:186:1: error: unknown type name 'pid_t'
-
-this file should either include <sys/types.h> or
-if its already including unistd.h then use -D_XOPEN_SOURCE=700 in cflags
-might fix the issue.
-
-> Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+On Wed, Feb 19, 2020 at 1:23 AM Zheng Ruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
+>
+> libHaru is a library for generating PDF files.
+>
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 > ---
->  ...tion-to-disable-installation-of-syst.patch | 57 +++++++++++++++++++
->  .../openlldp/openlldp_1.0.1.bb                | 37 ++++++++++++
->  2 files changed, 94 insertions(+)
->  create mode 100644 meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
->  create mode 100644 meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
-> 
-> diff --git a/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
+>  .../libharu/libharu-RELEASE_2_3_0_cmake.patch      | 52 ++++++++++++++++++++++
+>  meta-oe/recipes-support/libharu/libharu_2.3.0.bb   | 24 ++++++++++
+>  2 files changed, 76 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch
+>  create mode 100644 meta-oe/recipes-support/libharu/libharu_2.3.0.bb
+>
+> diff --git a/meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch b/meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch
 > new file mode 100644
-> index 000000000..86c9f4463
+> index 0000000..332be1b
 > --- /dev/null
-> +++ b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
-> @@ -0,0 +1,57 @@
-> +From 1c1e01b2414ca5b3cf5a21b6e6389f9ca82fd7e9 Mon Sep 17 00:00:00 2001
-> +From: Jonathan Richardson <jonathan.richardson@broadcom.com>
-> +Date: Fri, 6 Apr 2018 10:49:04 -0700
-> +Subject: [PATCH 1/1] autotools: Add option to disable installation of systemd
-> + conf files
+> +++ b/meta-oe/recipes-support/libharu/libharu/libharu-RELEASE_2_3_0_cmake.patch
+> @@ -0,0 +1,52 @@
+> +Backport from Fedora Project.
+> +https://src.fedoraproject.org/rpms/libharu
 > +
-> +Add option to configure.ac to enable or disable install of systemd conf
-> +files. If --with-systemdsystemunitdir is passed to configure then the
-> +files will be installed to the provided directory. If the option isn't
-> +provided then the value is determined from the systemd pkgconfig file,
-> +if found in PKG_CONFIG_PATH.
+> +Fix the install destination of some files.
 > +
-> +This change is required because Makefile.am always installed the files
-> +to a hard coded path that couldn't be changed.
-> +---
-> + Makefile.am  | 3 ++-
-> + configure.ac | 9 +++++++++
-> + 2 files changed, 11 insertions(+), 1 deletion(-)
+> +Upstream-Status: inappropriate
 > +
-> +diff --git a/Makefile.am b/Makefile.am
-> +index 551d4c7..5491c61 100644
-> +--- a/Makefile.am
-> ++++ b/Makefile.am
-> +@@ -133,8 +133,9 @@ install-data-hook:	installdirs-local
-> + pkgconfigdir = ${libdir}/pkgconfig
-> + pkgconfig_DATA = lldpad.pc liblldp_clif.pc
-> + 
-> +-systemdsystemunitdir = $(prefix)/lib/systemd/system
-> ++if HAVE_SYSTEMD
-> + dist_systemdsystemunit_DATA = lldpad.service lldpad.socket
-> ++endif
-> + 
-> + bashcompletiondir = $(sysconfdir)/bash_completion.d
-> + dist_bashcompletion_DATA = contrib/bash_completion/lldpad contrib/bash_completion/lldptool
-> +diff --git a/configure.ac b/configure.ac
-> +index 0667446..f75f433 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -95,6 +95,15 @@ AC_TYPE_UINT16_T
-> + AC_TYPE_UINT32_T
-> + AC_TYPE_UINT8_T
-> + 
-> ++# Support for systemd unit files.
-> ++AC_ARG_WITH([systemdsystemunitdir],
-> ++        AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files]),
-> ++        [], [with_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)])
-> ++if test "x$with_systemdsystemunitdir" != xno; then
-> ++        AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
-> ++fi
-> ++AM_CONDITIONAL(HAVE_SYSTEMD, [test -n "$with_systemdsystemunitdir" -a "x$with_systemdsystemunitdir" != xno ])
-> ++
-> + AC_CONFIG_FILES([Makefile include/version.h lldpad.spec lldpad.pc liblldp_clif.pc])
-> + AC_CONFIG_MACRO_DIR([m4])
-> + AC_OUTPUT
-> +-- 
-> +1.9.1
+> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 > +
-> diff --git a/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
+> +diff -urp libharu-RELEASE_2_3_0/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/CMakeLists.txt
+> +--- libharu-RELEASE_2_3_0/CMakeLists.txt       2013-10-30 20:11:59.000000000 +0700
+> ++++ libharu-RELEASE_2_3_0_cmake/CMakeLists.txt 2017-06-01 15:56:06.533552795 +0700
+> +@@ -25,7 +25,7 @@ endif(MSVC)
+> +
+> + # information about libharu
+> + set(LIBHPDF_MAJOR 2)
+> +-set(LIBHPDF_MINOR 2)
+> ++set(LIBHPDF_MINOR 3)
+> + set(LIBHPDF_PATCH 0)
+> + set(LIBHPDF_VERSION ${LIBHPDF_MAJOR}.${LIBHPDF_MINOR}.${LIBHPDF_PATCH})
+> + set(LIBHPDF_DESCRIPTION "libHaru is a free, cross platform, open source library for generating PDF files.")
+> +@@ -210,9 +210,9 @@ set(
+> + install(FILES ${haru_HDRS} DESTINATION include)
+> +
+> + # install various files
+> +-install(FILES README CHANGES INSTALL DESTINATION .)
+> ++install(FILES README CHANGES INSTALL DESTINATION ${SHARE_INSTALL_PREFIX}/libharu)
+> + if(NOT DEVPAK)
+> +-  install(DIRECTORY if DESTINATION .)
+> ++  install(DIRECTORY if DESTINATION ${SHARE_INSTALL_PREFIX}/libharu)
+> + endif(NOT DEVPAK)
+> + if(DEVPAK)
+> +   install(FILES ${CMAKE_BINARY_DIR}/libharu.DevPackage DESTINATION .)
+> +diff -urp libharu-RELEASE_2_3_0/src/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/src/CMakeLists.txt
+> +--- libharu-RELEASE_2_3_0/src/CMakeLists.txt   2013-10-30 20:11:59.000000000 +0700
+> ++++ libharu-RELEASE_2_3_0_cmake/src/CMakeLists.txt     2017-06-01 16:08:45.425105746 +0700
+> +@@ -90,11 +90,13 @@ if(LIBHPDF_SHARED)
+> +   target_link_libraries(${LIBHPDF_NAME} ${ADDITIONAL_LIBRARIES})
+> +   if(WIN32 AND NOT CYGWIN)
+> +       set_target_properties(${LIBHPDF_NAME} PROPERTIES DEFINE_SYMBOL HPDF_DLL_MAKE)
+> ++  else(WIN32 AND NOT CYGWIN)
+> ++      set_target_properties(${LIBHPDF_NAME} PROPERTIES SOVERSION ${LIBHPDF_VERSION})
+> +   endif(WIN32 AND NOT CYGWIN)
+> +   install(
+> +     TARGETS ${LIBHPDF_NAME}
+> +-    ARCHIVE DESTINATION lib
+> +-    LIBRARY DESTINATION lib
+> ++    ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+> ++    LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+> +     RUNTIME DESTINATION bin
+> +   )
+> + endif(LIBHPDF_SHARED)
+> diff --git a/meta-oe/recipes-support/libharu/libharu_2.3.0.bb b/meta-oe/recipes-support/libharu/libharu_2.3.0.bb
 > new file mode 100644
-> index 000000000..7fa3429cc
+> index 0000000..359f615
 > --- /dev/null
-> +++ b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
-> @@ -0,0 +1,37 @@
-> +SUMMARY = "Open-LLDP"
-> +DESCRIPTION = "Link Layer Discovery Protocol for Linux that includes support for DCBX"
-> +HOMEPAGE = "http://open-lldp.org/start"
+> +++ b/meta-oe/recipes-support/libharu/libharu_2.3.0.bb
+> @@ -0,0 +1,24 @@
+> +SUMMARY = "free PDF library"
+> +HOMEPAGE = "http://libharu.org"
+> +DESCRIPTION = "libHaru is a library for generating PDF files. \
+> +               It is free, open source, written in ANSI C and cross platform. "
 > +
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
+> +LICENSE = "Zlib"
+> +LIC_FILES_CHKSUM = "file://README;md5=3ee6bc1f64d9cc7907f44840c8e50cb1"
 > +
-> +S = "${WORKDIR}/git"
+> +SRC_URI = "https://github.com/libharu/${BPN}/archive/RELEASE_${@d.getVar('PV').replace('.','_')}.tar.gz \
+
+Please use a hardcoded SRCREV or release in SRC_URI, archives are
+known to change
+under the rug.
+
+WARNING: libharu-2.3.0-r0 do_package_qa: QA Issue: libharu: SRC_URI
+uses unstable GitHub archives [src-uri-bad]
+
+
+
+> +           file://libharu-RELEASE_2_3_0_cmake.patch \
+> +          "
 > +
-> +inherit pkgconfig autotools
-> +inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager', 'systemd', 'systemd', '', d)}
+> +SRC_URI[md5sum] = "4f916aa49c3069b3a10850013c507460"
+> +SRC_URI[sha256sum] = "8f9e68cc5d5f7d53d1bc61a1ed876add1faf4f91070dbc360d8b259f46d9a4d2"
 > +
-> +DEPENDS = "libnl libconfig readline"
+> +S = "${WORKDIR}/${BPN}-RELEASE_${@d.getVar('PV').replace('.','_')}"
 > +
-> +SRCREV = "36d729de7ce5b56cf061d94d610cf0510154820c"
-> +SRC_URI = "git://github.com/intel/openlldp.git;protocol=https;branch=master"
-> +SRC_URI += "file://0001-autotools-Add-option-to-disable-installation-of-syst.patch"
+> +inherit cmake
+> +DEPENDS += "libpng zlib"
 > +
-> +# Even though .ac allows disabling -Werror, Makefile.am adds it to AM_CFLAGS
-> +# causing it to always be enabled. There are warnings so disable it.
-> +TARGET_CFLAGS += "-Wno-error"
-> +
-> +# configure.ac generates version.h from include/version.h.in but autotools puts
-> +# build artefacts in $B, not $S and the header can't be found. To avoid
-> +# inheriting autotools-brokensep and messing up the source dir just tell Makefile
-> +# where it is.
-> +TARGET_CFLAGS += "-I ${B}/include"
-> +
-> +# Enable install of systemd conf files.
-> +EXTRA_OECONF += "${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager', 'systemd', '--with-systemdsystemunitdir=${systemd_system_unitdir}', '', d)}"
-> +
-> +SYSTEMD_SERVICE_${PN} = "lldpad.service lldpad.socket"
-> +
-> +# To enable service at boot set to enable in local.conf.
-> +SYSTEMD_AUTO_ENABLE ?= "disable"
-> +
-> +RRECOMMENDS_${PN} = "iproute2-tc"
-> 
+> +do_install_append() {
+> +     mkdir -p ${D}/${datadir}/libharu
+> +     mv ${D}/libharu ${D}/${datadir}
+> +}
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
