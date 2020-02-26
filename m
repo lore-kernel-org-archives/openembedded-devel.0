@@ -1,46 +1,86 @@
-Return-Path: <jonathan.richardson@broadcom.com>
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
-	[209.85.214.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D18361541
+Return-Path: <Changqing.Li@windriver.com>
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+	(mail-bn7nam10on2054.outbound.protection.outlook.com [40.107.92.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 5FE6B60223
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 22:19:15 +0000 (UTC)
-Received: by mail-pl1-f179.google.com with SMTP id t14so397302plr.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 14:19:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=dxyIciFWIyo16AukeudikBajpwycWnj4zpNt96u2GkA=;
-	b=XdVLcXtNfRIyEvym4QFCdPco8bJkGQzlitHR6vvGsuKwbsCBm4i9RAP7XA5ft4ydVb
-	l/d/OIkEwvht4ri2sFUS8v1EAuS0JIYYs6AOEoSROumkkSB9s1BLSPO6gKsA4qC/8SJ/
-	vQdMXLGIuAl41tA8H6RtxSZaLFQNgJYAkw6zE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=dxyIciFWIyo16AukeudikBajpwycWnj4zpNt96u2GkA=;
-	b=R3/G40Wlb5oENgPLNimJExIbQb5kWTEBi8L2RHZUuCn+nd8/6ZkDw3nbY/JkOaTUfS
-	wyxql5AoMtISaTHztwClaKmOxYm1U72ztLgxu5s31VdxbITgBLt/F6C3ZAQyyQo/jbgX
-	fLY9hMMjVblmWBCzx6IDegqPNlqrUH0Ld++eG+F+ydcWF+PkLoiGUNDsnndto8PxQF1W
-	ZRQQE4EXtUYmfVSC2cK7qWmLRhYCfyv97VMYY+nEaUhnZoj1vCqbds64WfZnGtgrkqDi
-	NmDvEV2LtnmZzwRlNRaZT1v2hJJ6eAeBt4iuSb45Kfbq7yXQIKeOv4NfKlnFsiMLqPWY
-	Uijg==
-X-Gm-Message-State: APjAAAU4EK+HK7UbplVtmkdZTHg/K0iFHVCja/MDHmj/lueU0Edo0Xxm
-	7bVwFHGczNBhghSK4UDYTs3rthKzXF8pQBjvv3W5MQDOcdqpKtSMMVJZb2dXY6SXR9hIYJB/IsE
-	v+ZOu711139F3z3M+4ITWbAFzgfAzsdi6eGsUOFzApoCZnvDQIRKv/g+gMRqvtWF+wqNEUjsgyT
-	JK5OpB+i3R0DGDhFiSf6Ry3tTH2TEBk7A=
-X-Google-Smtp-Source: APXvYqyGyExPbyaLNcZIc3OHeMIVW4ffnCwQMJwXGLVgqhf7AH80XD//aeimQOwhsS9jgqEWYW0onw==
-X-Received: by 2002:a17:902:b40d:: with SMTP id
-	x13mr744819plr.122.1582669155911; 
-	Tue, 25 Feb 2020 14:19:15 -0800 (PST)
-Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
-	by smtp.gmail.com with ESMTPSA id a19sm115486pju.11.2020.02.25.14.19.14
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 25 Feb 2020 14:19:15 -0800 (PST)
-From: Jonathan Richardson <jonathan.richardson@broadcom.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 25 Feb 2020 14:19:04 -0800
-Message-Id: <20200225221904.97152-1-jonathan.richardson@broadcom.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH 1/1] open-lldp: Add initial version 1.0.1
+	Wed, 26 Feb 2020 01:48:16 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+	b=R340OlrPTWhqIF2e7tkrHggBzi6GHYW3rHZxO4P/thI9Ncw1ymux0rO4vRBSHcnzI5y5YLFQLV9PV55IJqlGGYyl9hEc1fFx8hIAuu80FlAhJtoUnVAvfL4bzzdBu8nusdC11x2/tujsHFJyK5EcrAtj10iEQf7B8DxTKHu3cN7sTNl13inv1hYfM8r7Bp1aHmQ8bd7ar+JQLBeQ/+p33uvL3itzo4XZct5BbIJr+ZQxTbJMrqs1K5qoF8qFtFC+E07vTY+avdFhKDQkUMdIKiadEx9/xlESUM3D55RiljLlvpAhP4U6q0lG0Bm31lH5bLKef5eZNpxt2ZGsbiWpSg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+	s=arcselector9901;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=nNh4HF+WYAhhAqUM25C9n1rzPKScP4ezYBdG3Ll+SGM=;
+	b=bSR9dHpCFIxLLh7ofiIiZCotnuFJhKO8rJaSNmZAQ6PMcm3rU+cXn9Iy28Rw8pRTJEYXgN0Bfu+IUrVrMV2XpJuwkIGMH0wBSeqYy6MPutIxvIk4jOTXBkoOP8CcT4d+jVQfJkQg1AfGPqpEnA/5AD6Qmpz8TcnY7rQC1xmJRplfmPODH21w2pxJDjpe32eB1Nq65HEicvHww6VCr3U37ZnooonCp35Str7BA61NV8vB8zCV8PkhUPR300FM7VyVal5kRKoO3crLYhuA+ltr51v4cuO03clGhuvcYCfnabVZhOex5TYAJ5tTwPtbyJZ4GwUpFC4Aktv83D0/IojzUw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+	smtp.mailfrom=windriver.com; dmarc=pass action=none
+	header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=windriversystems.onmicrosoft.com;
+	s=selector2-windriversystems-onmicrosoft-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+	bh=nNh4HF+WYAhhAqUM25C9n1rzPKScP4ezYBdG3Ll+SGM=;
+	b=GBnfF6ExMXimeEqDzh+2BCopz19qUmzF/ulH7jRLKBrV6AmmTwQJxXosj7Wd7hNVFahAbzSPY302YWYkchtV+8remF2f+71klZLU95KbW/QG1rd6PfAFE2nQxeyqMkM0D9oZsGFLOgTZcZF/JllltnoO9avJ1oWEvoBUdqIKcns=
+Authentication-Results: spf=none (sender IP is )
+	smtp.mailfrom=Changqing.Li@windriver.com; 
+Received: from CY4PR11MB1814.namprd11.prod.outlook.com (2603:10b6:903:11d::7)
+	by CY4PR11MB1672.namprd11.prod.outlook.com (2603:10b6:910:f::8) with
+	Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.14;
+	Wed, 26 Feb 2020 01:48:15 +0000
+Received: from CY4PR11MB1814.namprd11.prod.outlook.com
+	([fe80::c5dd:6f6d:56d2:3d55]) by
+	CY4PR11MB1814.namprd11.prod.outlook.com
+	([fe80::c5dd:6f6d:56d2:3d55%8]) with mapi id 15.20.2750.021;
+	Wed, 26 Feb 2020 01:48:15 +0000
+To: Khem Raj <raj.khem@gmail.com>
+References: <1582544446-241334-1-git-send-email-changqing.li@windriver.com>
+	<CAMKF1so3CU_NMnOKGmUJsrgaUsAF+SKM5XeFQAoX4NrFzRv07w@mail.gmail.com>
+	<fc47113c-82c7-5c17-139c-3ea747eecc26@windriver.com>
+	<23aee0bf-a9f4-b002-8277-615dfa603b04@gmail.com>
+From: Changqing Li <changqing.li@windriver.com>
+Message-ID: <2459deea-b48d-a24b-17b7-7965d5b72a02@windriver.com>
+Date: Wed, 26 Feb 2020 09:48:08 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+	Thunderbird/60.7.0
+In-Reply-To: <23aee0bf-a9f4-b002-8277-615dfa603b04@gmail.com>
+X-ClientProxiedBy: HK0PR03CA0102.apcprd03.prod.outlook.com
+	(2603:1096:203:b0::18) To CY4PR11MB1814.namprd11.prod.outlook.com
+	(2603:10b6:903:11d::7)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [128.224.162.189] (60.247.85.82) by
+	HK0PR03CA0102.apcprd03.prod.outlook.com (2603:1096:203:b0::18)
+	with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.14
+	via Frontend Transport; Wed, 26 Feb 2020 01:48:14 +0000
+X-Originating-IP: [60.247.85.82]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c849b7ad-dfbb-43bf-d8a3-08d7ba5df218
+X-MS-TrafficTypeDiagnostic: CY4PR11MB1672:
+X-Microsoft-Antispam-PRVS: <CY4PR11MB1672C5538251BEC26497AE0582EA0@CY4PR11MB1672.namprd11.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1332;
+X-Forefront-PRVS: 0325F6C77B
+X-Forefront-Antispam-Report: SFV:NSPM;
+	SFS:(10009020)(39850400004)(396003)(346002)(376002)(366004)(136003)(189003)(199004)(81156014)(8936002)(81166006)(52116002)(316002)(4326008)(44832011)(2616005)(956004)(6706004)(5660300002)(6916009)(53546011)(8676002)(16526019)(966005)(31696002)(26005)(2906002)(186003)(6666004)(31686004)(66556008)(66476007)(86362001)(16576012)(478600001)(66946007)(6486002)(36756003)(78286006);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:CY4PR11MB1672;
+	H:CY4PR11MB1814.namprd11.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; PTR:InfoNoRecords; MX:1; A:1; 
+Received-SPF: None (protection.outlook.com: windriver.com does not designate
+	permitted sender hosts)
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: gZqWjOtRQLjFqEgcwCOx9N7zH5QA0IJmejA9bUf7bl+AB1ubDvfFFW7t7tDeZ0CpsbzSnTKvwPKcEVxZIwUb3Vd74/Te/DMaiASHFo1daWuQR+5YxVTNE7piJC8i8r0Pg3p1sCWrDduKRV2CX8PtNv3Nrd0F7cVXPjyoSWb68z3wAWJ+njWY2ldhx+OVzzlJcdbDFXZlMBMKg1kb+hdGFjnE6SnHkB0Rn3SFAbO4cxhg+MOYG3Drtx5gY3vNGiGBmq1Q1BHniwBgusc2jj2wwP3ZzqbGIJz4kCeY9xArBhbPvY46HHgsofeAYxf4qFHDRlwMaTb8Jop7ke6gfPRR1921pAfuHtd3hM68h5QJt367zhh3cZZUAa7kI8ERCqvIsZ6mTFNmF/2KHv4bThqffCQLXfFh2h465T0WDZ7++iW/sonIQE0Il2ay9cmGIOtdjX7o4IpO0PPElSpskiO+oWj494rHXWufmAtdFDDJ3aWN4QXmfwZQbLvTHj/CT8godnW3ANOoUgzu7IdI4JpakhQ+MgY7XBktIpxd3Uktlc+zN7fNqaGcQTARQhCAdTcO6F8SJD+yNdN4ZFBki50ZPzlJYhXzVK32IsGucIRnikk=
+X-MS-Exchange-AntiSpam-MessageData: U5Xbtq+2VpqThzEUH7RJqVRBhSAdRJydVQbyikMRzK7U1+X+AXcYVZUlmn1+rWeRoXwOowRmFZgzK8M9OsNMimaM+IcdHZjJbESyEVamTT+iWyS/l1d7llT5kpIk+32tejuQeZSrmSC8zfApI9Thtw==
+X-OriginatorOrg: windriver.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c849b7ad-dfbb-43bf-d8a3-08d7ba5df218
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2020 01:48:15.4783 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0qpHDFrgTMU9NKzuvTxZ57Nk1Zp1soqdMZiC0lAJ4z0vluoCw78IdX3fIBoNTrlKrBKkp5h7rjxWn9R1KqUYu4VbWeShB+Rs90U93S1B9iI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR11MB1672
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-webserver][PATCH] nginx.service: sleep 0.1 after nginx start
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,127 +93,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Feb 2020 22:19:15 -0000
+X-List-Received-Date: Wed, 26 Feb 2020 01:48:16 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Open-LLDP provides a Link Layer Discovery Protocol agent that supports
-DCB (Data Center Bridging). The tc utility from iproute is needed to
-manipulate  traffic control settings in the kernel.
 
-Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
----
- ...tion-to-disable-installation-of-syst.patch | 57 +++++++++++++++++++
- .../openlldp/openlldp_1.0.1.bb                | 37 ++++++++++++
- 2 files changed, 94 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
- create mode 100644 meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
+On 2/25/20 12:49 PM, Khem Raj wrote:
+>
+>
+> On 2/24/20 7:53 PM, Changqing Li wrote:
+>>
+>> On 2/25/20 12:40 AM, Khem Raj wrote:
+>>> On Mon, Feb 24, 2020 at 3:41 AM<changqing.li@windriver.com>  wrote:
+>>>> From: Changqing Li<changqing.li@windriver.com>
+>>>>
+>>>> Fix error info:
+>>>> nginx.service: failed to parse pid from file /run/nginx/nginx.pid:
+>>>> invalid argument
+>>>>
+>>>> Signed-off-by: Changqing Li<changqing.li@windriver.com>
+>>>> ---
+>>>>   meta-webserver/recipes-httpd/nginx/files/nginx.service | 1 +
+>>>>   1 file changed, 1 insertion(+)
+>>>>
+>>>> diff --git a/meta-webserver/recipes-httpd/nginx/files/nginx.service 
+>>>> b/meta-webserver/recipes-httpd/nginx/files/nginx.service
+>>>> index 9a6ca96..65c7752 100644
+>>>> --- a/meta-webserver/recipes-httpd/nginx/files/nginx.service
+>>>> +++ b/meta-webserver/recipes-httpd/nginx/files/nginx.service
+>>>> @@ -7,6 +7,7 @@ Type=forking
+>>>>   PIDFile=/run/nginx/nginx.pid
+>>>>   ExecStartPre=@SBINDIR@/nginx -t
+>>>>   ExecStart=@SBINDIR@/nginx
+>>>> +ExecStartPost=/bin/sleep 0.1
+>>> I dont thiink we should be adding sleeps instead try to lock the 
+>>> dependencies
+>>> so it happens correctly. or perhaps change the logic in code itself if
+>>> dependencies
+>>> can not handle it.
+>>
+>> error info: "nginx.service: failed to parse pid from file 
+>> /run/nginx/nginx.pid: invalid argument" is caused by race condition 
+>> between
+>>
+>> systemd and nginx.  And this error will not caused problem except 
+>> scary log
+>>
+>> This should be a known problem: 
+>> https://bugs.launchpad.net/ubuntu/+source/nginx/+bug/1581864
+>>
+>> other distro like ubuntu, fedora, should also have this problem, I 
+>> can google people report this error on different distro.
+>
+> I do not question the problem but the solution, there have been 
+> different solutions posted to ml e.g.
+>
+> https://mailman.nginx.org/pipermail/nginx-devel/2016-February/007961.html
+>
+> or ubuntu fix
+>
+> https://github.com/aroth-arsoft/pkg-nginx/blob/master/debian/patches/nginx-fix-pidfile.patch 
+>
+>
+> perhaps you should try one of these patches
 
-diff --git a/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
-new file mode 100644
-index 000000000..86c9f4463
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
-@@ -0,0 +1,57 @@
-+From 1c1e01b2414ca5b3cf5a21b6e6389f9ca82fd7e9 Mon Sep 17 00:00:00 2001
-+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
-+Date: Fri, 6 Apr 2018 10:49:04 -0700
-+Subject: [PATCH 1/1] autotools: Add option to disable installation of systemd
-+ conf files
-+
-+Add option to configure.ac to enable or disable install of systemd conf
-+files. If --with-systemdsystemunitdir is passed to configure then the
-+files will be installed to the provided directory. If the option isn't
-+provided then the value is determined from the systemd pkgconfig file,
-+if found in PKG_CONFIG_PATH.
-+
-+This change is required because Makefile.am always installed the files
-+to a hard coded path that couldn't be changed.
-+---
-+ Makefile.am  | 3 ++-
-+ configure.ac | 9 +++++++++
-+ 2 files changed, 11 insertions(+), 1 deletion(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 551d4c7..5491c61 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -133,8 +133,9 @@ install-data-hook:	installdirs-local
-+ pkgconfigdir = ${libdir}/pkgconfig
-+ pkgconfig_DATA = lldpad.pc liblldp_clif.pc
-+ 
-+-systemdsystemunitdir = $(prefix)/lib/systemd/system
-++if HAVE_SYSTEMD
-+ dist_systemdsystemunit_DATA = lldpad.service lldpad.socket
-++endif
-+ 
-+ bashcompletiondir = $(sysconfdir)/bash_completion.d
-+ dist_bashcompletion_DATA = contrib/bash_completion/lldpad contrib/bash_completion/lldptool
-+diff --git a/configure.ac b/configure.ac
-+index 0667446..f75f433 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -95,6 +95,15 @@ AC_TYPE_UINT16_T
-+ AC_TYPE_UINT32_T
-+ AC_TYPE_UINT8_T
-+ 
-++# Support for systemd unit files.
-++AC_ARG_WITH([systemdsystemunitdir],
-++        AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files]),
-++        [], [with_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)])
-++if test "x$with_systemdsystemunitdir" != xno; then
-++        AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
-++fi
-++AM_CONDITIONAL(HAVE_SYSTEMD, [test -n "$with_systemdsystemunitdir" -a "x$with_systemdsystemunitdir" != xno ])
-++
-+ AC_CONFIG_FILES([Makefile include/version.h lldpad.spec lldpad.pc liblldp_clif.pc])
-+ AC_CONFIG_MACRO_DIR([m4])
-+ AC_OUTPUT
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
-new file mode 100644
-index 000000000..7fa3429cc
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
-@@ -0,0 +1,37 @@
-+SUMMARY = "Open-LLDP"
-+DESCRIPTION = "Link Layer Discovery Protocol for Linux that includes support for DCBX"
-+HOMEPAGE = "http://open-lldp.org/start"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig autotools
-+inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager', 'systemd', 'systemd', '', d)}
-+
-+DEPENDS = "libnl libconfig readline"
-+
-+SRCREV = "36d729de7ce5b56cf061d94d610cf0510154820c"
-+SRC_URI = "git://github.com/intel/openlldp.git;protocol=https;branch=master"
-+SRC_URI += "file://0001-autotools-Add-option-to-disable-installation-of-syst.patch"
-+
-+# Even though .ac allows disabling -Werror, Makefile.am adds it to AM_CFLAGS
-+# causing it to always be enabled. There are warnings so disable it.
-+TARGET_CFLAGS += "-Wno-error"
-+
-+# configure.ac generates version.h from include/version.h.in but autotools puts
-+# build artefacts in $B, not $S and the header can't be found. To avoid
-+# inheriting autotools-brokensep and messing up the source dir just tell Makefile
-+# where it is.
-+TARGET_CFLAGS += "-I ${B}/include"
-+
-+# Enable install of systemd conf files.
-+EXTRA_OECONF += "${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager', 'systemd', '--with-systemdsystemunitdir=${systemd_system_unitdir}', '', d)}"
-+
-+SYSTEMD_SERVICE_${PN} = "lldpad.service lldpad.socket"
-+
-+# To enable service at boot set to enable in local.conf.
-+SYSTEMD_AUTO_ENABLE ?= "disable"
-+
-+RRECOMMENDS_${PN} = "iproute2-tc"
--- 
-2.17.1
+Hi, Khem
 
+I found that both V1 and V2 are on master-next now,  please remember to 
+drop the V1 when merge to master, thanks.
+
+>
+>>
+>> ubuntu 16.04 use this as a workaround.
+>>
+>>>>   ExecReload=@SBINDIR@/nginx -s reload
+>>>>   ExecStop=@BASE_BINDIR@/kill -s QUIT $MAINPID
+>>>>   PrivateTmp=true
+>>>> -- 
+>>>> 2.7.4
+>>>>
+>>>> -- 
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
