@@ -1,43 +1,46 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C2A4616F5
+Return-Path: <zboszor@pr.hu>
+Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 64B9A60741
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 09:33:23 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,487,1574092800"; d="scan'208";a="84286940"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Feb 2020 17:33:22 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id D986B406AB15
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 17:23:34 +0800 (CST)
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) by
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Wed, 26 Feb 2020 17:33:19 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local ([fe80::99b4:f2c2:35f3:671a])
-	by G08CNEXMBPEKD06.g08.fujitsu.local
-	([fe80::99b4:f2c2:35f3:671a%14]) with
-	mapi id 15.00.1395.000; Wed, 26 Feb 2020 17:33:18 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH] daq: upgrade 2.0.6 -> 2.2.2
-Thread-Index: AQHV65htF+yQebXm7UCuZcp9jvKJa6gtN7CA
-Date: Wed, 26 Feb 2020 09:33:18 +0000
-Message-ID: <0999b8fa5f394721bdd25b24e1afa2d7@G08CNEXMBPEKD06.g08.fujitsu.local>
-References: <1582536523-89923-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<549f56c2-9056-ff8c-96f4-713437fc8de0@gmail.com>
-In-Reply-To: <549f56c2-9056-ff8c-96f4-713437fc8de0@gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.167.225.35]
+	Wed, 26 Feb 2020 11:43:11 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+	(envelope-from <zboszor@pr.hu>)
+	id 1j6v5q-00066E-A4; Wed, 26 Feb 2020 12:43:10 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
+	s=pr20170203; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+	MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+	Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+	Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+	List-Subscribe:List-Post:List-Owner:List-Archive;
+	bh=IaKe3fSoI79ttZjw/THSxEVlcaZ96fpLOubBSqRwWcU=;
+	b=L1xrP8S0PrUy+q3f2j5og4dtr3
+	QRwqXWwvGAy7T/LrcDX8h36jTW1fbC6yqd+acHnB0wqK1bWizqaLw/6P7adGH3rtiN9nKWWPV4SbF
+	qYg5JCwO+hBpH1ctnK+LPNHDXV21dkIg6HZPrCtdDZOoV1VlX4E9hTF6TZUWkI264bp48eHzTvbcA
+	jhL3OLf4hq5O06CY8VRSEjMqMVECdFBk/sgTioJzU+Yg2/KvywNBQAOL170+bBWO22Nr2P9UmYbw5
+	NIOTaBVDTAAYxRP7QaCkuktbXRhoY495XdaVShwLu8DEwCRj0eI9M1R9aTaNPCzwvOOR4ewNSvEFS
+	XZQ6BxpQ==;
+Received: from host-87-242-33-197.prtelecom.hu ([87.242.33.197]
+	helo=[192.168.1.2])
+	by mail.pr.hu with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.89) (envelope-from <zboszor@pr.hu>)
+	id 1j6v5l-0006dW-VY; Wed, 26 Feb 2020 12:43:08 +0100
+To: openembedded-devel@lists.openembedded.org, Khem Raj <raj.khem@gmail.com>
+References: <55B8D485.7080207@pr.hu>
+	<27501214-4FE0-4D4B-8E0F-797B153B9988@gmail.com>
+	<9e16757b-6678-8be6-9a2c-6d05eb54a500@pr.hu>
+From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
+Message-ID: <7edd1d26-96de-537a-ef17-a1a36670fdb8@pr.hu>
+Date: Wed, 26 Feb 2020 12:43:03 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.5.0
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: D986B406AB15.A903C
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-networking][PATCH] daq: upgrade 2.0.6 -> 2.2.2
+In-Reply-To: <9e16757b-6678-8be6-9a2c-6d05eb54a500@pr.hu>
+X-Spam-Score: -1.9 (-)
+X-Scan-Signature: fc814016fbf334f6643f2a7843ee50ce
+X-Spam-Tracer: backend.mail.pr.hu -1.9 20200226114308Z
+Subject: Re: Trying to resolve build-time cyclic dependency between packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,66 +53,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 09:33:25 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 26 Feb 2020 11:43:12 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-SGkgS2hlbQ0KDQo+IFRoaXMgaXMgY2F1c2luZyBzbm9ydCBidWlsZCBmYWls
-dXJlcyBzaW5jZSB3ZSB1c2Ugc25vcnQgMi45DQo+IA0KPiBodHRwczovL2Vy
-cm9ycy55b2N0b3Byb2plY3Qub3JnL0Vycm9ycy9EZXRhaWxzLzM5MjYxMS8N
-Cj4gDQo+IFBlcmhhcHMgd2UgbmVlZCB0byB1cGdyYWRlIHNub3J0IDMuMCBh
-bmQgZGFxIHRvZ2V0aGVyDQoNCkknbSBzb3JyeSB0byBoYXZlIHRoaXMgZXJy
-b3IuIFRvIGZpeCBpdCwgSSBoYXZlIHRyaWVkIHRvIHVwZ3JhZGUgc25vcnQg
-My4wIGJ1dCBpdCBmYWlsZWTvvIhpbiBkb19jb25maWd1cmUgdGFzaykuDQoN
-CkFuZCBob3cgc2hvdWxkIHdlIGRvIG5leHQ/IFRvIGZpeCBzbm9ydCBhbmQg
-bWFrZSBpdCBwYXNzPw0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVvcWluDQpOYW5qaW5n
-IEZ1aml0c3UgTmFuZGEgU29mdHdhcmUgVGVjaC4gQ28uLCBMdGQuKEZOU1Qp
-DQpBRERSLjogTm8uNiBXZW56aHUgUm9hZCwgU29mdHdhcmUgQXZlbnVlLA0K
-ICAgICAgIE5hbmppbmcsIDIxMDAxMiwgQ2hpbmENCk1BSUwgOiB6aGVuZ3Jx
-LmZuc3RAY24uZnVqaXN0dS5jb20NCg0KDQo+IC0tLS0tT3JpZ2luYWwgTWVz
-c2FnZS0tLS0tDQo+IEZyb206IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5j
-b20+DQo+IFNlbnQ6IFR1ZXNkYXksIEZlYnJ1YXJ5IDI1LCAyMDIwIDE6MDAg
-UE0NCj4gVG86IFpoZW5nLCBSdW9xaW4v6YORIOiLpemSpiA8emhlbmdycS5m
-bnN0QGNuLmZ1aml0c3UuY29tPjsgb3BlbmVtYmVkZGVkLQ0KPiBkZXZlbEBs
-aXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFJlOiBbb2VdIFtt
-ZXRhLW5ldHdvcmtpbmddW1BBVENIXSBkYXE6IHVwZ3JhZGUgMi4wLjYgLT4g
-Mi4yLjINCj4gDQo+IA0KPiANCj4gT24gMi8yNC8yMCAxOjI4IEFNLCBaaGVu
-ZyBSdW9xaW4gd3JvdGU6DQo+ID4gU2lnbmVkLW9mZi1ieTogWmhlbmcgUnVv
-cWluIDx6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5jb20+DQo+ID4gLS0tDQo+
-ID4gICAuLi4vcmVjaXBlcy1jb25uZWN0aXZpdHkvZGFxL3tkYXFfMi4wLjYu
-YmIgPT4gZGFxXzIuMi4yLmJifSAgIHwgNCArKy0tDQo+ID4gICAxIGZpbGUg
-Y2hhbmdlZCwgMiBpbnNlcnRpb25zKCspLCAyIGRlbGV0aW9ucygtKQ0KPiA+
-ICAgcmVuYW1lIG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0
-eS9kYXEve2RhcV8yLjAuNi5iYiA9Pg0KPiBkYXFfMi4yLjIuYmJ9ICg4OCUp
-DQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lw
-ZXMtY29ubmVjdGl2aXR5L2RhcS9kYXFfMi4wLjYuYmIgYi9tZXRhLQ0KPiBu
-ZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L2RhcS9kYXFfMi4yLjIu
-YmINCj4gPiBzaW1pbGFyaXR5IGluZGV4IDg4JQ0KPiA+IHJlbmFtZSBmcm9t
-IG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9kYXEvZGFx
-XzIuMC42LmJiDQo+ID4gcmVuYW1lIHRvIG1ldGEtbmV0d29ya2luZy9yZWNp
-cGVzLWNvbm5lY3Rpdml0eS9kYXEvZGFxXzIuMi4yLmJiDQo+ID4gaW5kZXgg
-NDJmZmIxN2ExLi4yOWFjNWM3NzAgMTAwNjQ0DQo+ID4gLS0tIGEvbWV0YS1u
-ZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L2RhcS9kYXFfMi4wLjYu
-YmINCj4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0
-aXZpdHkvZGFxL2RhcV8yLjIuMi5iYg0KPiA+IEBAIC0yNSw4ICsyNSw4IEBA
-IEVYVFJBX09FQ09ORiA9ICItLWRpc2FibGUtbmZxLW1vZHVsZSAtLWRpc2Fi
-bGUtaXBxLQ0KPiBtb2R1bGUgLS1pbmNsdWRlZGlyPSR7aW5jbHVkZQ0KPiA+
-ICAgUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJiLnV0aWxzLmZpbHRlcignRElT
-VFJPX0ZFQVRVUkVTJywgJ2lwdjYnLCBkKX0iDQo+ID4gICBQQUNLQUdFQ09O
-RklHW2lwdjZdID0gIi0tZW5hYmxlLWlwdjYsLS1kaXNhYmxlLWlwdjYsIg0K
-PiA+DQo+ID4gLVNSQ19VUklbbWQ1c3VtXSA9ICIyY2Q2ZGE0MjJhNzJjMTI5
-YzY4NWZjNGJiODQ4YzI0YyINCj4gPiAtU1JDX1VSSVtzaGEyNTZzdW1dID0N
-Cj4gImI0MGUxZDEyNzNlMDhhYWVhYTg2ZTY5ZDRmMjhkNTM1YjdlNTNiZGIz
-ODk4YWRmNTM5MjY2YjYzMTM3YmU3Y2IiDQo+ID4gK1NSQ19VUklbbWQ1c3Vt
-XSA9ICJjNjFmNjA2NzRhNWY5NTFmMGM1MGZhZjMzYTYxMWZlZSINCj4gPiAr
-U1JDX1VSSVtzaGEyNTZzdW1dID0NCj4gIjdjZDgxOGNhYmIxYWQzNTM2MGU4
-MzA3NmU1NDc3NWYwNzE2NWVlNzE0MDdkYzY3MmQxNDdlMjdkM2NkMzdmN2Ii
-DQo+ID4NCj4gPiAgIGluaGVyaXQgYXV0b3Rvb2xzDQo+ID4NCj4gPg0KPiBU
-aGlzIGlzIGNhdXNpbmcgc25vcnQgYnVpbGQgZmFpbHVyZXMgc2luY2Ugd2Ug
-dXNlIHNub3J0IDIuOQ0KPiANCj4gaHR0cHM6Ly9lcnJvcnMueW9jdG9wcm9q
-ZWN0Lm9yZy9FcnJvcnMvRGV0YWlscy8zOTI2MTEvDQo+IA0KPiBQZXJoYXBz
-IHdlIG5lZWQgdG8gdXBncmFkZSBzbm9ydCAzLjAgYW5kIGRhcSB0b2dldGhl
-cg0KPiANCg0KCgo=
+2020. 02. 26. 9:49 keltezéssel, Böszörményi Zoltán via Openembedded-devel írta:
+> Hi,
+> 
+> I am reviving this old idea with Zeus.
+> 
+> I have implemented the idea in an ALMOST satisfactory way, tested with
+> Mesa 20.0.0.
+> 
+> Side note: Mesa 19.3 and 20.0 needs TOOLCHAIN="gcc" in Zeus,
+> otherwise linker errors occur. See:
+> https://gitlab.freedesktop.org/mesa/mesa/issues/2533
+> 
+> Mesa doesn't link to libva even with meson -Dgallium-va=true. It only
+> needs the libva.pc pkgconfig file and the headers from libva to build
+> its VA state tracker so the circular dependency is not that hard to solve.
+> 
+> I have this new recipe called libva-headers now that is a fork of the
+> libva recipe and just deletes the libraries in do_install_append.
+> 
+> My Mesa recipe addendum has this line plus PACKAGECONFIG has "va":
+> 
+> PACKAGECONFIG[va] = "-Dgallium-va=true,-Dgallium-va=false,libva-headers"
+> 
+> Now, building libva is happy without the warning about libva.so is
+> shipped by libva-headers (or libva-noglx in the previous incarnation)
+> but now marked as shipped by libva because it was built later.
+> 
+> There is another problem now: anything that uses libva as dependency,
+> like intel-vaapi-driver, implicitly pulls in mesa and then libva-headers
+> so there is a clash in prepare-sysroot between libva and libva-headers
+> because they still ship identical headers and pkgconfig files.
+> 
+> My current solution to the problem is to patch staging.bbclass to
+> handle a new variable called EXCLUDE_DEPS but a line like this below
+> needs to be added to all recipes that depends on libva, so it is
+> quite intrusive for now.
+> 
+> EXCLUDE_DEPS = "libva-headers"
+> 
+> I am looking into storing data in "sstate", so libva-headers would add
+> itself into a new class of packages that are not added to recipe-sysroot
+> unless it is in DEPENDS explicitly.
+> 
+> My question is: is there a generic framework to do this already?
+
+Talking to myself... YES THERE IS.
+I just had to name the extra package as "libva-initial" and it works
+the way I expected with no extra fuss.
+
+> 
+> This would allow me to not modify other recipes and may alsoserve other
+> recipes with circular dependencies.
+> 
+> The end goal is to allow Chromium to be built with use_vaapi=true now that
+> meta-browser has version 79 that includes the VAAPI patches. The current
+> solution with setting EXCLUDE_DEPS already does this but as I said, it's
+> not clean enough.
+> 
+> Best regards,
+> Zoltán Böszörményi
+> 
+> 2015. 08. 09. 0:14 keltezéssel, Khem Raj írta:
+>>
+>>> On Jul 29, 2015, at 6:26 AM, Boszormenyi Zoltan <zboszor@pr.hu> wrote:
+>>>
+>>> Hi,
+>>>
+>>> I have a customized Mesa 10.6.3 package recipe which depends on libva
+>>> to be able to build its mesa-va-driver subpackage, but libva also depends
+>>> on Mesa to support GLX.
+>>>
+>>> Previously, I simply created a libva-noglx package that builds libva
+>>> with --disable-glx that Mesa depend on and the "real" libva package can
+>>> depend on Mesa.
+>>>
+>>> But since I also have to produce an SDK image with all the *-dev packages,
+>>> creating such an initial image with bitbake fails because of a conflict
+>>> in the dependency chain: libva-dev -> mesa-dev -> libva-noglx-dev.
+>>>
+>>
+>> since libva-noglx is sort of a bootstrap package, you could empty/delete out the content
+>> its puts into -dev packages and conflict will be gone. Other option is that you share
+>> the content of -dev package in exclusive manner between libva and libva-noglx such
+>> that they don’t package duplicate files
+>>
+>>> I have come up with the attached bbclass (based on Yocto 1.6) that
+>>> now Mesa can inherit and that patches the RDEPENDS / RRECOMMENDS
+>>> variables according to externally set variables. The comment at
+>>> the beginning of the file explains how to use it.
+>>>
+>>> This pushes the cyclic dependency to opkg which happily breaks it and
+>>> installs both libva* and *mesa* packages properly. Creating the initial
+>>> image via bitbake works now.
+>>>
+>>> Comments?
+>>>
+>>> Best regards,
+>>> Zoltán Böszörményi
+>>>
+>>> <cyclic-deps.bbclass>--
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>>
+> 
+
 
