@@ -1,42 +1,89 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FFA361301
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+	[209.85.216.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2058C611DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 03:07:21 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,486,1574092800"; d="scan'208";a="84169084"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Feb 2020 11:06:56 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 4721350A998C
+	Wed, 26 Feb 2020 03:26:58 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id j17so663005pjz.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 10:57:12 +0800 (CST)
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) by
-	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Wed, 26 Feb 2020 11:06:54 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local ([fe80::99b4:f2c2:35f3:671a])
-	by G08CNEXMBPEKD06.g08.fujitsu.local
-	([fe80::99b4:f2c2:35f3:671a%14]) with
-	mapi id 15.00.1395.000; Wed, 26 Feb 2020 11:06:53 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe][meta-oe][PATCH v2] libharu: New recipe
-Thread-Index: AQHV5wYf6BbDMj0hjU+itPahnw6bjqgs1SQQ
-Date: Wed, 26 Feb 2020 03:06:53 +0000
-Message-ID: <31c4ddda013c4fddb0a8010d9013c8fd@G08CNEXMBPEKD06.g08.fujitsu.local>
-References: <1582104095-88658-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1582104095-88658-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.167.225.35]
+	Tue, 25 Feb 2020 19:26:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:autocrypt:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=To2w2i6wQZZG8uaRuhrx70z9pN+T5s1MaxPLELy+rKQ=;
+	b=m5oAVu33nbfcZeG2QQ1Nd6PADw+sCpQgcoBopY4bY8XiXNEKci+m5k6Po4LbrZ1HV6
+	C2D2wz3veMXcYDTgxsFmUdlcd07n4Q5i0Mrl4F+Bk3bf78LbKlXSQ1o64oMGTdILeJml
+	3JrcVC4dFBDHuQt5g5rXOkax4DhHAJf7v3FS3JLuB5Bt5xIH4wH+OsBT7OnXAVUQvRSa
+	HU/yQixceh9O7obL+0KAX7o3Ahcx+0YiMtdoLB9B7FoMPPMJonhUOSwy0ayZKXcY9k8D
+	5267DI9HMiig369Bk1tThO+i2tIbjDKGIEsleARLWf65C8m0VvyQQWSoapVfp6AD63tk
+	c5Cg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
+	:date:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=To2w2i6wQZZG8uaRuhrx70z9pN+T5s1MaxPLELy+rKQ=;
+	b=qHBc7or7dhFAjSoFJyP1L3sNWOe56rUsMSjpVgcgPZrA1B1t/CkbaITyGYbK6Lp7TY
+	uBw+k6fQxBDrOqhx9s4UXCSwmmm5kf0pBWKLltmj0PK76BP5kFkTBTa/NM+Msh6vvFn4
+	qNURa+sL/aFEfr2cOnupD3KliVwvAR/kaXXmceSUdqGO/dgGNUadePPffApsm6ccxL9J
+	RI2faIMFJUWPGofd46L8hjCamOKX6T0memiQ2AyCvDhQJ33QD3y8fs7XH7++rpZ9H8A1
+	UkdqBUDiW3t9Dlzfnp/WEDDgHXvz2zHR0m9BkipZ1vJ00LR3MUeYNL4J3D5oYxiveacq
+	SG6Q==
+X-Gm-Message-State: APjAAAUdQ6Z8LdqTl6UdvRkkjF3QavLT2vgvOYf7m/9+6U3ZwAw6uxLl
+	IVmAGqq04/6mf2zEN9w6mrQdNq+YVDM=
+X-Google-Smtp-Source: APXvYqx1EBy6H8DHJLBqOs/9N8dvgKzOfFK9s2yqlkfA8nuMoqgzquKqzqLdLtLNOMCnAf0OWXHptw==
+X-Received: by 2002:a17:90a:858c:: with SMTP id
+	m12mr2450111pjn.127.1582687618404; 
+	Tue, 25 Feb 2020 19:26:58 -0800 (PST)
+Received: from ?IPv6:2601:646:9200:4e0:923a:5c32:ada4:3e27?
+	([2601:646:9200:4e0:923a:5c32:ada4:3e27])
+	by smtp.gmail.com with ESMTPSA id
+	hg11sm514380pjb.14.2020.02.25.19.26.57
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Tue, 25 Feb 2020 19:26:57 -0800 (PST)
+To: Jonathan Richardson <jonathan.richardson@broadcom.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20200225221904.97152-1-jonathan.richardson@broadcom.com>
+From: Khem Raj <raj.khem@gmail.com>
+Autocrypt: addr=raj.khem@gmail.com; keydata=
+	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
+Message-ID: <84740cf1-89ad-5f5d-c8e7-cbf40e02a160@gmail.com>
+Date: Tue, 25 Feb 2020 19:27:10 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.5.0
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 4721350A998C.A84BD
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-oe][PATCH v2] libharu: New recipe
+In-Reply-To: <20200225221904.97152-1-jonathan.richardson@broadcom.com>
+Subject: Re: [meta-oe][PATCH 1/1] open-lldp: Add initial version 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,120 +96,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 03:07:23 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 26 Feb 2020 03:26:58 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-UGluZw0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVvcWluDQpOYW5qaW5nIEZ1aml0c3Ug
-TmFuZGEgU29mdHdhcmUgVGVjaC4gQ28uLCBMdGQuKEZOU1QpDQpBRERSLjog
-Tm8uNiBXZW56aHUgUm9hZCwgU29mdHdhcmUgQXZlbnVlLA0KICAgICAgIE5h
-bmppbmcsIDIxMDAxMiwgQ2hpbmENCk1BSUwgOiB6aGVuZ3JxLmZuc3RAY24u
-ZnVqaXN0dS5jb20NCg0KDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0t
-LS0NCj4gRnJvbTogWmhlbmcsIFJ1b3Fpbi/WoyDI9MfVIDx6aGVuZ3JxLmZu
-c3RAY24uZnVqaXRzdS5jb20+DQo+IFNlbnQ6IFdlZG5lc2RheSwgRmVicnVh
-cnkgMTksIDIwMjAgNToyMiBQTQ0KPiBUbzogb3BlbmVtYmVkZGVkLWRldmVs
-QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gQ2M6IFpoZW5nLCBSdW9xaW4v
-1qMgyPTH1SA8emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29tPg0KPiBTdWJq
-ZWN0OiBbb2VdW21ldGEtb2VdW1BBVENIIHYyXSBsaWJoYXJ1OiBOZXcgcmVj
-aXBlDQo+IA0KPiBsaWJIYXJ1IGlzIGEgbGlicmFyeSBmb3IgZ2VuZXJhdGlu
-ZyBQREYgZmlsZXMuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBaaGVuZyBSdW9x
-aW4gPHpoZW5ncnEuZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4gLS0tDQo+ICAu
-Li4vbGliaGFydS9saWJoYXJ1LVJFTEVBU0VfMl8zXzBfY21ha2UucGF0Y2gg
-ICAgICB8IDUyDQo+ICsrKysrKysrKysrKysrKysrKysrKysNCj4gIG1ldGEt
-b2UvcmVjaXBlcy1zdXBwb3J0L2xpYmhhcnUvbGliaGFydV8yLjMuMC5iYiAg
-IHwgMjQgKysrKysrKysrKw0KPiAgMiBmaWxlcyBjaGFuZ2VkLCA3NiBpbnNl
-cnRpb25zKCspDQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNp
-cGVzLXN1cHBvcnQvbGliaGFydS9saWJoYXJ1L2xpYmhhcnUtDQo+IFJFTEVB
-U0VfMl8zXzBfY21ha2UucGF0Y2gNCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBt
-ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJoYXJ1L2xpYmhhcnVfMi4zLjAu
-YmINCj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9y
-dC9saWJoYXJ1L2xpYmhhcnUvbGliaGFydS0NCj4gUkVMRUFTRV8yXzNfMF9j
-bWFrZS5wYXRjaCBiL21ldGEtb2UvcmVjaXBlcy0NCj4gc3VwcG9ydC9saWJo
-YXJ1L2xpYmhhcnUvbGliaGFydS1SRUxFQVNFXzJfM18wX2NtYWtlLnBhdGNo
-DQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAuLjMz
-MmJlMWINCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRhLW9lL3JlY2lw
-ZXMtc3VwcG9ydC9saWJoYXJ1L2xpYmhhcnUvbGliaGFydS1SRUxFQVNFXzJf
-M18wX2NtYWsNCj4gKysrIGUucGF0Y2gNCj4gQEAgLTAsMCArMSw1MiBAQA0K
-PiArQmFja3BvcnQgZnJvbSBGZWRvcmEgUHJvamVjdC4NCj4gK2h0dHBzOi8v
-c3JjLmZlZG9yYXByb2plY3Qub3JnL3JwbXMvbGliaGFydQ0KPiArDQo+ICtG
-aXggdGhlIGluc3RhbGwgZGVzdGluYXRpb24gb2Ygc29tZSBmaWxlcy4NCj4g
-Kw0KPiArVXBzdHJlYW0tU3RhdHVzOiBpbmFwcHJvcHJpYXRlDQo+ICsNCj4g
-K1NpZ25lZC1vZmYtYnk6IFpoZW5nIFJ1b3FpbiA8emhlbmdycS5mbnN0QGNu
-LmZ1aml0c3UuY29tPg0KPiArDQo+ICtkaWZmIC11cnAgbGliaGFydS1SRUxF
-QVNFXzJfM18wL0NNYWtlTGlzdHMudHh0IGxpYmhhcnUtDQo+IFJFTEVBU0Vf
-Ml8zXzBfY21ha2UvQ01ha2VMaXN0cy50eHQNCj4gKy0tLSBsaWJoYXJ1LVJF
-TEVBU0VfMl8zXzAvQ01ha2VMaXN0cy50eHQJMjAxMy0xMC0zMA0KPiAyMDox
-MTo1OS4wMDAwMDAwMDAgKzA3MDANCj4gKysrKyBsaWJoYXJ1LVJFTEVBU0Vf
-Ml8zXzBfY21ha2UvQ01ha2VMaXN0cy50eHQJMjAxNy0wNi0wMQ0KPiAxNTo1
-NjowNi41MzM1NTI3OTUgKzA3MDANCj4gK0BAIC0yNSw3ICsyNSw3IEBAIGVu
-ZGlmKE1TVkMpDQo+ICsNCj4gKyAjIGluZm9ybWF0aW9uIGFib3V0IGxpYmhh
-cnUNCj4gKyBzZXQoTElCSFBERl9NQUpPUiAyKQ0KPiArLXNldChMSUJIUERG
-X01JTk9SIDIpDQo+ICsrc2V0KExJQkhQREZfTUlOT1IgMykNCj4gKyBzZXQo
-TElCSFBERl9QQVRDSCAwKQ0KPiArIHNldChMSUJIUERGX1ZFUlNJT04NCj4g
-KyR7TElCSFBERl9NQUpPUn0uJHtMSUJIUERGX01JTk9SfS4ke0xJQkhQREZf
-UEFUQ0h9KQ0KPiArIHNldChMSUJIUERGX0RFU0NSSVBUSU9OICJsaWJIYXJ1
-IGlzIGEgZnJlZSwgY3Jvc3MgcGxhdGZvcm0sIG9wZW4NCj4gK3NvdXJjZSBs
-aWJyYXJ5IGZvciBnZW5lcmF0aW5nIFBERiBmaWxlcy4iKSBAQCAtMjEwLDkg
-KzIxMCw5IEBAIHNldCgNCj4gK2luc3RhbGwoRklMRVMgJHtoYXJ1X0hEUlN9
-IERFU1RJTkFUSU9OIGluY2x1ZGUpDQo+ICsNCj4gKyAjIGluc3RhbGwgdmFy
-aW91cyBmaWxlcw0KPiArLWluc3RhbGwoRklMRVMgUkVBRE1FIENIQU5HRVMg
-SU5TVEFMTCBERVNUSU5BVElPTiAuKQ0KPiArK2luc3RhbGwoRklMRVMgUkVB
-RE1FIENIQU5HRVMgSU5TVEFMTCBERVNUSU5BVElPTg0KPiArKyR7U0hBUkVf
-SU5TVEFMTF9QUkVGSVh9L2xpYmhhcnUpDQo+ICsgaWYoTk9UIERFVlBBSykN
-Cj4gKy0gIGluc3RhbGwoRElSRUNUT1JZIGlmIERFU1RJTkFUSU9OIC4pDQo+
-ICsrICBpbnN0YWxsKERJUkVDVE9SWSBpZiBERVNUSU5BVElPTiAke1NIQVJF
-X0lOU1RBTExfUFJFRklYfS9saWJoYXJ1KQ0KPiArIGVuZGlmKE5PVCBERVZQ
-QUspDQo+ICsgaWYoREVWUEFLKQ0KPiArICAgaW5zdGFsbChGSUxFUyAke0NN
-QUtFX0JJTkFSWV9ESVJ9L2xpYmhhcnUuRGV2UGFja2FnZSBERVNUSU5BVElP
-TiAuKQ0KPiArZGlmZiAtdXJwIGxpYmhhcnUtUkVMRUFTRV8yXzNfMC9zcmMv
-Q01ha2VMaXN0cy50eHQgbGliaGFydS0NCj4gUkVMRUFTRV8yXzNfMF9jbWFr
-ZS9zcmMvQ01ha2VMaXN0cy50eHQNCj4gKy0tLSBsaWJoYXJ1LVJFTEVBU0Vf
-Ml8zXzAvc3JjL0NNYWtlTGlzdHMudHh0CTIwMTMtMTAtMzANCj4gMjA6MTE6
-NTkuMDAwMDAwMDAwICswNzAwDQo+ICsrKysgbGliaGFydS1SRUxFQVNFXzJf
-M18wX2NtYWtlL3NyYy9DTWFrZUxpc3RzLnR4dAkyMDE3LTA2LTAxDQo+IDE2
-OjA4OjQ1LjQyNTEwNTc0NiArMDcwMA0KPiArQEAgLTkwLDExICs5MCwxMyBA
-QCBpZihMSUJIUERGX1NIQVJFRCkNCj4gKyAgIHRhcmdldF9saW5rX2xpYnJh
-cmllcygke0xJQkhQREZfTkFNRX0gJHtBRERJVElPTkFMX0xJQlJBUklFU30p
-DQo+ICsgICBpZihXSU4zMiBBTkQgTk9UIENZR1dJTikNCj4gKyAgIAlzZXRf
-dGFyZ2V0X3Byb3BlcnRpZXMoJHtMSUJIUERGX05BTUV9IFBST1BFUlRJRVMg
-REVGSU5FX1NZTUJPTA0KPiArSFBERl9ETExfTUFLRSkNCj4gKysgIGVsc2Uo
-V0lOMzIgQU5EIE5PVCBDWUdXSU4pDQo+ICsrICAJc2V0X3RhcmdldF9wcm9w
-ZXJ0aWVzKCR7TElCSFBERl9OQU1FfSBQUk9QRVJUSUVTIFNPVkVSU0lPTg0K
-PiArKyAke0xJQkhQREZfVkVSU0lPTn0pDQo+ICsgICBlbmRpZihXSU4zMiBB
-TkQgTk9UIENZR1dJTikNCj4gKyAgIGluc3RhbGwoDQo+ICsgICAgIFRBUkdF
-VFMgJHtMSUJIUERGX05BTUV9DQo+ICstICAgIEFSQ0hJVkUgREVTVElOQVRJ
-T04gbGliDQo+ICstICAgIExJQlJBUlkgREVTVElOQVRJT04gbGliDQo+ICsr
-ICAgIEFSQ0hJVkUgREVTVElOQVRJT04gJHtMSUJfSU5TVEFMTF9ESVJ9DQo+
-ICsrICAgIExJQlJBUlkgREVTVElOQVRJT04gJHtMSUJfSU5TVEFMTF9ESVJ9
-DQo+ICsgICAgIFJVTlRJTUUgREVTVElOQVRJT04gYmluDQo+ICsgICApDQo+
-ICsgZW5kaWYoTElCSFBERl9TSEFSRUQpDQo+IGRpZmYgLS1naXQgYS9tZXRh
-LW9lL3JlY2lwZXMtc3VwcG9ydC9saWJoYXJ1L2xpYmhhcnVfMi4zLjAuYmIg
-Yi9tZXRhLQ0KPiBvZS9yZWNpcGVzLXN1cHBvcnQvbGliaGFydS9saWJoYXJ1
-XzIuMy4wLmJiDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAw
-MDAwMDAuLjM1OWY2MTUNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRh
-LW9lL3JlY2lwZXMtc3VwcG9ydC9saWJoYXJ1L2xpYmhhcnVfMi4zLjAuYmIN
-Cj4gQEAgLTAsMCArMSwyNCBAQA0KPiArU1VNTUFSWSA9ICJmcmVlIFBERiBs
-aWJyYXJ5Ig0KPiArSE9NRVBBR0UgPSAiaHR0cDovL2xpYmhhcnUub3JnIg0K
-PiArREVTQ1JJUFRJT04gPSAibGliSGFydSBpcyBhIGxpYnJhcnkgZm9yIGdl
-bmVyYXRpbmcgUERGIGZpbGVzLiBcDQo+ICsgICAgICAgICAgICAgICBJdCBp
-cyBmcmVlLCBvcGVuIHNvdXJjZSwgd3JpdHRlbiBpbiBBTlNJIEMgYW5kIGNy
-b3NzIHBsYXRmb3JtLiAiDQo+ICsNCj4gK0xJQ0VOU0UgPSAiWmxpYiINCj4g
-K0xJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL1JFQURNRTttZDU9M2Vl
-NmJjMWY2NGQ5Y2M3OTA3ZjQ0ODQwYzhlNTBjYjEiDQo+ICsNCj4gK1NSQ19V
-UkkgPQ0KPiAiaHR0cHM6Ly9naXRodWIuY29tL2xpYmhhcnUvJHtCUE59L2Fy
-Y2hpdmUvUkVMRUFTRV8ke0BkLmdldFZhcignUFYnKS5yZXBsYWMNCj4gZSgn
-LicsJ18nKX0udGFyLmd6IFwNCj4gKyAgICAgICAgICAgZmlsZTovL2xpYmhh
-cnUtUkVMRUFTRV8yXzNfMF9jbWFrZS5wYXRjaCBcDQo+ICsJICAgIg0KPiAr
-DQo+ICtTUkNfVVJJW21kNXN1bV0gPSAiNGY5MTZhYTQ5YzMwNjliM2ExMDg1
-MDAxM2M1MDc0NjAiDQo+ICtTUkNfVVJJW3NoYTI1NnN1bV0gPQ0KPiAiOGY5
-ZTY4Y2M1ZDVmN2Q1M2QxYmM2MWExZWQ4NzZhZGQxZmFmNGY5MTA3MGRiYzM2
-MGQ4YjI1OWY0NmQ5YTRkMiINCj4gKw0KPiArUyA9ICIke1dPUktESVJ9LyR7
-QlBOfS1SRUxFQVNFXyR7QGQuZ2V0VmFyKCdQVicpLnJlcGxhY2UoJy4nLCdf
-Jyl9Ig0KPiArDQo+ICtpbmhlcml0IGNtYWtlDQo+ICtERVBFTkRTICs9ICJs
-aWJwbmcgemxpYiINCj4gKw0KPiArZG9faW5zdGFsbF9hcHBlbmQoKSB7DQo+
-ICsgICAgIG1rZGlyIC1wICR7RH0vJHtkYXRhZGlyfS9saWJoYXJ1DQo+ICsg
-ICAgIG12ICR7RH0vbGliaGFydSAke0R9LyR7ZGF0YWRpcn0NCj4gK30NCj4g
-LS0NCj4gMi43LjQNCg0KCgo=
+Hi Jonathan
+
+On 2/25/20 2:19 PM, Jonathan Richardson via Openembedded-devel wrote:
+> Open-LLDP provides a Link Layer Discovery Protocol agent that supports
+> DCB (Data Center Bridging). The tc utility from iproute is needed to
+> manipulate  traffic control settings in the kernel.
+> 
+
+build on musl fails and finds a problem
+
+https://errors.yoctoproject.org/Errors/Details/392758/
+
+include/clif.h:186:1: error: unknown type name 'pid_t'
+
+this file should either include <sys/types.h> or
+if its already including unistd.h then use -D_XOPEN_SOURCE=700 in cflags
+might fix the issue.
+
+> Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+> ---
+>  ...tion-to-disable-installation-of-syst.patch | 57 +++++++++++++++++++
+>  .../openlldp/openlldp_1.0.1.bb                | 37 ++++++++++++
+>  2 files changed, 94 insertions(+)
+>  create mode 100644 meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
+>  create mode 100644 meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
+> 
+> diff --git a/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
+> new file mode 100644
+> index 000000000..86c9f4463
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
+> @@ -0,0 +1,57 @@
+> +From 1c1e01b2414ca5b3cf5a21b6e6389f9ca82fd7e9 Mon Sep 17 00:00:00 2001
+> +From: Jonathan Richardson <jonathan.richardson@broadcom.com>
+> +Date: Fri, 6 Apr 2018 10:49:04 -0700
+> +Subject: [PATCH 1/1] autotools: Add option to disable installation of systemd
+> + conf files
+> +
+> +Add option to configure.ac to enable or disable install of systemd conf
+> +files. If --with-systemdsystemunitdir is passed to configure then the
+> +files will be installed to the provided directory. If the option isn't
+> +provided then the value is determined from the systemd pkgconfig file,
+> +if found in PKG_CONFIG_PATH.
+> +
+> +This change is required because Makefile.am always installed the files
+> +to a hard coded path that couldn't be changed.
+> +---
+> + Makefile.am  | 3 ++-
+> + configure.ac | 9 +++++++++
+> + 2 files changed, 11 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/Makefile.am b/Makefile.am
+> +index 551d4c7..5491c61 100644
+> +--- a/Makefile.am
+> ++++ b/Makefile.am
+> +@@ -133,8 +133,9 @@ install-data-hook:	installdirs-local
+> + pkgconfigdir = ${libdir}/pkgconfig
+> + pkgconfig_DATA = lldpad.pc liblldp_clif.pc
+> + 
+> +-systemdsystemunitdir = $(prefix)/lib/systemd/system
+> ++if HAVE_SYSTEMD
+> + dist_systemdsystemunit_DATA = lldpad.service lldpad.socket
+> ++endif
+> + 
+> + bashcompletiondir = $(sysconfdir)/bash_completion.d
+> + dist_bashcompletion_DATA = contrib/bash_completion/lldpad contrib/bash_completion/lldptool
+> +diff --git a/configure.ac b/configure.ac
+> +index 0667446..f75f433 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -95,6 +95,15 @@ AC_TYPE_UINT16_T
+> + AC_TYPE_UINT32_T
+> + AC_TYPE_UINT8_T
+> + 
+> ++# Support for systemd unit files.
+> ++AC_ARG_WITH([systemdsystemunitdir],
+> ++        AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files]),
+> ++        [], [with_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)])
+> ++if test "x$with_systemdsystemunitdir" != xno; then
+> ++        AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
+> ++fi
+> ++AM_CONDITIONAL(HAVE_SYSTEMD, [test -n "$with_systemdsystemunitdir" -a "x$with_systemdsystemunitdir" != xno ])
+> ++
+> + AC_CONFIG_FILES([Makefile include/version.h lldpad.spec lldpad.pc liblldp_clif.pc])
+> + AC_CONFIG_MACRO_DIR([m4])
+> + AC_OUTPUT
+> +-- 
+> +1.9.1
+> +
+> diff --git a/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
+> new file mode 100644
+> index 000000000..7fa3429cc
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
+> @@ -0,0 +1,37 @@
+> +SUMMARY = "Open-LLDP"
+> +DESCRIPTION = "Link Layer Discovery Protocol for Linux that includes support for DCBX"
+> +HOMEPAGE = "http://open-lldp.org/start"
+> +
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit pkgconfig autotools
+> +inherit ${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager', 'systemd', 'systemd', '', d)}
+> +
+> +DEPENDS = "libnl libconfig readline"
+> +
+> +SRCREV = "36d729de7ce5b56cf061d94d610cf0510154820c"
+> +SRC_URI = "git://github.com/intel/openlldp.git;protocol=https;branch=master"
+> +SRC_URI += "file://0001-autotools-Add-option-to-disable-installation-of-syst.patch"
+> +
+> +# Even though .ac allows disabling -Werror, Makefile.am adds it to AM_CFLAGS
+> +# causing it to always be enabled. There are warnings so disable it.
+> +TARGET_CFLAGS += "-Wno-error"
+> +
+> +# configure.ac generates version.h from include/version.h.in but autotools puts
+> +# build artefacts in $B, not $S and the header can't be found. To avoid
+> +# inheriting autotools-brokensep and messing up the source dir just tell Makefile
+> +# where it is.
+> +TARGET_CFLAGS += "-I ${B}/include"
+> +
+> +# Enable install of systemd conf files.
+> +EXTRA_OECONF += "${@bb.utils.contains('VIRTUAL-RUNTIME_init_manager', 'systemd', '--with-systemdsystemunitdir=${systemd_system_unitdir}', '', d)}"
+> +
+> +SYSTEMD_SERVICE_${PN} = "lldpad.service lldpad.socket"
+> +
+> +# To enable service at boot set to enable in local.conf.
+> +SYSTEMD_AUTO_ENABLE ?= "disable"
+> +
+> +RRECOMMENDS_${PN} = "iproute2-tc"
+> 
 
