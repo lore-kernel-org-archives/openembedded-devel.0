@@ -1,58 +1,50 @@
-Return-Path: <leo.yan@linaro.org>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 87DE860640
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qk1-f195.google.com (mail-qk1-f195.google.com
+	[209.85.222.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 83DE86154A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 12:30:43 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id 2so1379082pfg.12
+	Wed, 26 Feb 2020 15:05:29 +0000 (UTC)
+Received: by mail-qk1-f195.google.com with SMTP id b5so2884909qkh.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 04:30:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=uoisO5Damy7boLrP6Yk12wUzpq2GWvnLietJ6AU7Yjw=;
-	b=olJS/KeWnSqlvy2u4VAkdv4PuoJ71FnB7a4QDx88f2ffSEKmwbel/lo9QjbRroBx5s
-	3PrugSeb7dmhdfIWpvOJdSmmKBqW8+bNSwehwLUM87s7aRuhl/K8E9wupsWhhjCT70YF
-	a90cGHh2C/F+Z8wRx9DtjlDI9+nBrbRVcdtQ1L5Jo2MXPm43fKjp5AG07tthnFq1bIWE
-	FdNKHRrBd/MXKgFJ4c1rsd825VaBkZUmW3fMsxY/thSnqjnmDFQKC7t1kv4bTPGpyGu5
-	6N/KHFUKycqxrGcX9ybspqpVn/ck5B1jp5I3ttsdT9Ycbs2SKIarVNn/nvv7ZX8m5qyy
-	zGvw==
+	Wed, 26 Feb 2020 07:05:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=E9Ac2XxbZy7sft1AmDa9B4CLGENKBNzsIjNByM+Kz8s=;
+	b=W167lfwBd40djs7sxPZeF5MEsRlAUH7w185WpbdQXuTUEEsiS0YK9l8Mh33fMDF/QV
+	o2+uqLZjVIChuiR7ZMRJnvy9aK/qcEfJI79TsengNl8+X5DHTqWVF1To6lRQ33IPLz1X
+	ZbftU2311QQXeawl45VjIVBCPKpcd/iZZJaZtjHSb6VXAamLqxZw/KR+qvkfH0OP0P80
+	m8wKxngsL8CCAG+/fpogmOo2u6ryw3BnLb49Bt8xEirZCDDd0YTq/T5YaoDygSFDTEfQ
+	UjGyACVq37T1fcP2Y1eyxKE3PhiaQM6nK1eVXAAt+APveO2V5QwQolCuUuSWNiEVp932
+	ySkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=uoisO5Damy7boLrP6Yk12wUzpq2GWvnLietJ6AU7Yjw=;
-	b=b96gI3rNnyp+6wuDhkOEwDQq3/03TjonkKSRENF6ZTENxH9ffUv7i9SO0tni2GU5s3
-	DOeRfe5OcVeNaa19GtPftQNAxvhjqK9YLigzvB5Cct4kCi2nkkwZeew1As7eKp0X+Gcl
-	rR9aatX4ECMa6haCsUng9eY0P5kAdGjqY4/wLLnHyjsHaehwn9FFY96MMlVEqKhdif7D
-	lBrhOZ2w+07ccyXge5l6oxVRakbIsMASzqjQcA5oxnWGzLyTP7I3M4j3AjqdqdRPnc2y
-	lI//0STDLbC7U7LCCuYAdy4J6lGLRDLEf5MOme8q+pkzLUhNZAiXpe0WrUEMJhZfeGjB
-	g3cA==
-X-Gm-Message-State: APjAAAWSUpOlZ6vcXvvrGxLPLXXfFjuyzFCqkVo5MckAwYb9kPZ62YXJ
-	rVAQFp5WgmRgl0pWvo3u99Igmg==
-X-Google-Smtp-Source: APXvYqzezbXlY4IaduiknxO5KLp0S3U6Lhd8Iwt2o5ssBKgPMzAAjONebnJ1KEEEwD9/R9pBa3MTKQ==
-X-Received: by 2002:a63:594a:: with SMTP id j10mr3773655pgm.227.1582720244382; 
-	Wed, 26 Feb 2020 04:30:44 -0800 (PST)
-Received: from leoy-ThinkPad-X240s ([2400:8902::f03c:91ff:fe3f:ee42])
-	by smtp.gmail.com with ESMTPSA id
-	w189sm2942824pfw.157.2020.02.26.04.30.40
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 26 Feb 2020 04:30:43 -0800 (PST)
-Date: Wed, 26 Feb 2020 20:30:36 +0800
-From: Leo Yan <leo.yan@linaro.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20200226123036.GA2551@leoy-ThinkPad-X240s>
-References: <20200225063711.4848-1-leo.yan@linaro.org>
-	<263955b2-9b82-f24c-172c-0761d86a1391@gmail.com>
-	<20200225073129.GA1169@leoy-ThinkPad-X240s>
-	<8e32456d-c86d-3e87-9588-d8dc075ce061@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=E9Ac2XxbZy7sft1AmDa9B4CLGENKBNzsIjNByM+Kz8s=;
+	b=cOqWNZ8Z/Hk/eDev6ioH1sNKdIFqIFoaR/BIlHuNtMtTTx5e2lKP+/U7U1pvBhaMPz
+	Azin0HRgps1lGsHNe4sdtYYka+DhTCBpD9GiTw5l/k1WVEfLgYrh7fjfAuFQrlPU+N9y
+	c04riaEfGn6auBluHGekdQkSb0Y5cHN+bVTdLPvRbYmSIHmfynxyQOWjpqu8QqqKT+iW
+	k/gHbofL05Y+3Q5p21HnrdxBWMRmbptwV+g7e5UO6bWpIeFYJZ15ZxYACizW7z+IZLJq
+	oTkk16wAtEMgqZJ9eZnUYjNvwZFeKouAcRcGgDvIRXiwPGH2CiLM3krVtyXOWZ6tLGPJ
+	OtCw==
+X-Gm-Message-State: APjAAAUu74kQM03JbdiGn8AKmQLjzmfYLrHlqnSeaNq1QAV0ohEKzFio
+	7qf1Y/J/oQPo/gdLjNipYrj6XZHRD7FVmWjujt0=
+X-Google-Smtp-Source: APXvYqxX9DhKAP/URNf7FrW9n+POSW3SzavnnQhd0AzN5usjy/9M18ZhAg3ypnlI8ApQBNHyW+fVPw6RNn/UUB772Tw=
+X-Received: by 2002:a37:e47:: with SMTP id 68mr5577488qko.17.1582729530098;
+	Wed, 26 Feb 2020 07:05:30 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <8e32456d-c86d-3e87-9588-d8dc075ce061@gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] luajit: Upgrade to 2.1.0-beta3
+References: <1582536523-89923-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<549f56c2-9056-ff8c-96f4-713437fc8de0@gmail.com>
+	<0999b8fa5f394721bdd25b24e1afa2d7@G08CNEXMBPEKD06.g08.fujitsu.local>
+In-Reply-To: <0999b8fa5f394721bdd25b24e1afa2d7@G08CNEXMBPEKD06.g08.fujitsu.local>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 26 Feb 2020 07:05:03 -0800
+Message-ID: <CAMKF1soAbC_uVRaBRnjb0=YUvxiRKYfHjyvbPCxuX2wqvjQ9EA@mail.gmail.com>
+To: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] daq: upgrade 2.0.6 -> 2.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,51 +57,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 12:30:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 26 Feb 2020 15:05:29 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Khem,
+On Wed, Feb 26, 2020 at 1:33 AM Zheng, Ruoqin
+<zhengrq.fnst@cn.fujitsu.com> wrote:
+>
+> Hi Khem
+>
+> > This is causing snort build failures since we use snort 2.9
+> >
+> > https://errors.yoctoproject.org/Errors/Details/392611/
+> >
+> > Perhaps we need to upgrade snort 3.0 and daq together
+>
+> I'm sorry to have this error. To fix it, I have tried to upgrade snort 3.=
+0 but it failed=EF=BC=88in do_configure task).
+>
+> And how should we do next? To fix snort and make it pass?
+>
 
-On Tue, Feb 25, 2020 at 07:57:09AM -0800, Khem Raj wrote:
-> 
-> 
-> On 2/24/20 11:38 PM, Leo Yan wrote:
-> > Hi Khem,
-> > 
-> > On Mon, Feb 24, 2020 at 10:41:04PM -0800, Khem Raj wrote:
-> > > 
-> > > 
-> > > On 2/24/20 10:37 PM, Leo Yan wrote:
-> > > > Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
-> > > > misses to support aarch64, the patch upgrades to luajit 2.1.0-beta3.
-> > > > 
-> > > > Signed-off-by: Leo Yan <leo.yan@linaro.org>
-> > > > ---
-> > > >    .../luajit/luajit/clang.patch                 | 19 -------------------
-> > > 
-> > > 
-> > > why is this patch dropped ? it building with clang handled differently now ?
-> > > if so please add a line or two in commit msg
-> > 
-> > To be honest, I don't know how to hit the condition for
-> > '#elif !LJ_TARGET_PS3', and since considering Clang has upgraded to new
-> > version (9.0.1), this is another reason I dropped this patch.
-> > 
-> 
-> you could easily excercise the need for it, by adding meta-clang and setting
-> 
-> TOOLCHAIN_pn-luajit = "clang" (in local.conf)
-> bitbake luajit
+perhaps share errors yoou are seeing
 
-I tested up setting with MACHINE=qemumips, it can hit the condition
-for '#elif !LJ_TARGET_PS3' and the patch clang.patch is still needed,
-otherwise, it can cause building error.
-
-So have sent out patch v4 to keep clang.patch with minor updating
-to dismiss patching warning.
-
-Thanks a lot for guidance.
-
-Leo
+> --------------------------------------------------
+> Zheng Ruoqin
+> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST)
+> ADDR.: No.6 Wenzhu Road, Software Avenue,
+>        Nanjing, 210012, China
+> MAIL : zhengrq.fnst@cn.fujistu.com
+>
+>
+> > -----Original Message-----
+> > From: Khem Raj <raj.khem@gmail.com>
+> > Sent: Tuesday, February 25, 2020 1:00 PM
+> > To: Zheng, Ruoqin/=E9=83=91 =E8=8B=A5=E9=92=A6 <zhengrq.fnst@cn.fujitsu=
+.com>; openembedded-
+> > devel@lists.openembedded.org
+> > Subject: Re: [oe] [meta-networking][PATCH] daq: upgrade 2.0.6 -> 2.2.2
+> >
+> >
+> >
+> > On 2/24/20 1:28 AM, Zheng Ruoqin wrote:
+> > > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> > > ---
+> > >   .../recipes-connectivity/daq/{daq_2.0.6.bb =3D> daq_2.2.2.bb}   | 4=
+ ++--
+> > >   1 file changed, 2 insertions(+), 2 deletions(-)
+> > >   rename meta-networking/recipes-connectivity/daq/{daq_2.0.6.bb =3D>
+> > daq_2.2.2.bb} (88%)
+> > >
+> > > diff --git a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb b/=
+meta-
+> > networking/recipes-connectivity/daq/daq_2.2.2.bb
+> > > similarity index 88%
+> > > rename from meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
+> > > rename to meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
+> > > index 42ffb17a1..29ac5c770 100644
+> > > --- a/meta-networking/recipes-connectivity/daq/daq_2.0.6.bb
+> > > +++ b/meta-networking/recipes-connectivity/daq/daq_2.2.2.bb
+> > > @@ -25,8 +25,8 @@ EXTRA_OECONF =3D "--disable-nfq-module --disable-ip=
+q-
+> > module --includedir=3D${include
+> > >   PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', =
+d)}"
+> > >   PACKAGECONFIG[ipv6] =3D "--enable-ipv6,--disable-ipv6,"
+> > >
+> > > -SRC_URI[md5sum] =3D "2cd6da422a72c129c685fc4bb848c24c"
+> > > -SRC_URI[sha256sum] =3D
+> > "b40e1d1273e08aaeaa86e69d4f28d535b7e53bdb3898adf539266b63137be7cb"
+> > > +SRC_URI[md5sum] =3D "c61f60674a5f951f0c50faf33a611fee"
+> > > +SRC_URI[sha256sum] =3D
+> > "7cd818cabb1ad35360e83076e54775f07165ee71407dc672d147e27d3cd37f7b"
+> > >
+> > >   inherit autotools
+> > >
+> > >
+> > This is causing snort build failures since we use snort 2.9
+> >
+> > https://errors.yoctoproject.org/Errors/Details/392611/
+> >
+> > Perhaps we need to upgrade snort 3.0 and daq together
+> >
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
