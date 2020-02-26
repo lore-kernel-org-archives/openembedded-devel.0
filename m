@@ -1,90 +1,42 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com
-	[209.85.216.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 3478B60635
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 7FFA361301
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 01:59:52 +0000 (UTC)
-Received: by mail-pj1-f42.google.com with SMTP id ep11so566108pjb.2
+	Wed, 26 Feb 2020 03:07:21 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,486,1574092800"; d="scan'208";a="84169084"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 26 Feb 2020 11:06:56 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 4721350A998C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Feb 2020 17:59:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:autocrypt:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=xICTEIcCyte7d4TwH9ygZ86OUpcJG8ebnFLjTkqkQGg=;
-	b=qgQLfkNTHfn16zXpWvTHhfOWq+hPb6A1KX5hWaqGPIsMOkYk27NguxM4RPgo/goAs+
-	4lbjScW/d9uje3EEUdR5E69r9iE9EX/Mhp070d6M7TKILX1fMLkV9F5K/IkxU2/BSZIM
-	aiIOYc5Oynj3FfeKH1XUAUfriUzFlh9bXgZ/wXPlsCnRa99ZN6lxuDHLSGN+Ftt4s1KJ
-	0fd+ipG06wKp6+W3PsHLfuAbOKA1Xk1sGHIawweOFwDtvKWGlZvv6PqE0cfqjF/qgxkQ
-	HPqYowLO2qugUw3XAaicp9rIxqKw9XZGqB9SfYSv/hdqfNt8zBg8s/IKuMDxjT4H6cgF
-	XYRA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=xICTEIcCyte7d4TwH9ygZ86OUpcJG8ebnFLjTkqkQGg=;
-	b=hAshU6rH2DWlLt46Y5d2tc7zz1B+62NjNc6ZkLOze22BdVqkJmi8z4KrpZIoelYPKl
-	X8yCoxwGq4+H6g3c4XN3KXUSrYVtGXlEhDtzS+yvV8s6p7Us9S9kuHLz2IccgiT7VbMg
-	w/CAlBJNiTPf9LPkFYdoM8rtLmk/q0pH7HvGzDoEKwB1akW9HuenoSD4f3+7meewZVSs
-	cHwW5p9np5vAKrVUBbMCHff5rbjOtIq8dTKtUWU4MfzThs2wfZSquhBwhojmp+QMl2bH
-	MQoJCb0zRpW5kc02QoZa+I3iKq/xyne4C8y3Bkogw4wOwqYUaJxXZRca9t66dvx9KBVQ
-	do0A==
-X-Gm-Message-State: APjAAAVUaeDApjIKJRLNA/s6xs1ILAUV24E1bqyG0H+1wDbuW1N5ZwSD
-	Cc6v1fPmWaPdZAUGSubU9cOAqSyeSYM=
-X-Google-Smtp-Source: APXvYqz/xlFhvcRKvAuTBkh1qWOBOI4VJETGurpaf2+ip/m5yZW3r+PV9HZawozHoubSnHkv+LLh2w==
-X-Received: by 2002:a17:90a:ead8:: with SMTP id
-	ev24mr2208674pjb.91.1582682392700; 
-	Tue, 25 Feb 2020 17:59:52 -0800 (PST)
-Received: from ?IPv6:2601:646:9200:4e0:923a:5c32:ada4:3e27?
-	([2601:646:9200:4e0:923a:5c32:ada4:3e27])
-	by smtp.gmail.com with ESMTPSA id d4sm361063pjg.19.2020.02.25.17.59.52
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Tue, 25 Feb 2020 17:59:52 -0800 (PST)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <158266574202.15681.9378221674340872770@git.openembedded.org>
-	<20200225212222.A6EF3232AA5@git.openembedded.org>
-	<CA+chaQci68OmMJZZddXkUSJXmTkxMGdQZ_87i3rOtfD7t38PGg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Autocrypt: addr=raj.khem@gmail.com; keydata=
-	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
-Message-ID: <81add210-35eb-1ecf-2528-c0e534595f4d@gmail.com>
-Date: Tue, 25 Feb 2020 18:00:05 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.5.0
+	Wed, 26 Feb 2020 10:57:12 +0800 (CST)
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) by
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Wed, 26 Feb 2020 11:06:54 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local ([fe80::99b4:f2c2:35f3:671a])
+	by G08CNEXMBPEKD06.g08.fujitsu.local
+	([fe80::99b4:f2c2:35f3:671a%14]) with
+	mapi id 15.00.1395.000; Wed, 26 Feb 2020 11:06:53 +0800
+From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe][meta-oe][PATCH v2] libharu: New recipe
+Thread-Index: AQHV5wYf6BbDMj0hjU+itPahnw6bjqgs1SQQ
+Date: Wed, 26 Feb 2020 03:06:53 +0000
+Message-ID: <31c4ddda013c4fddb0a8010d9013c8fd@G08CNEXMBPEKD06.g08.fujitsu.local>
+References: <1582104095-88658-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+In-Reply-To: <1582104095-88658-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.167.225.35]
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQci68OmMJZZddXkUSJXmTkxMGdQZ_87i3rOtfD7t38PGg@mail.gmail.com>
-Subject: Re: [oe-commits] [meta-openembedded] 09/10: c-ares: move from meta-networking to meta-oe
+X-yoursite-MailScanner-ID: 4721350A998C.A84BD
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: Re: [meta-oe][PATCH v2] libharu: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -97,140 +49,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 01:59:52 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 26 Feb 2020 03:07:23 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-
-
-On 2/25/20 1:25 PM, Martin Jansa wrote:
-> With this one included, you can drop "07/10: nodejs: don't enable ares
-> support by default"
-> 
-
-yes it will be thanks
-
-> On Tue, Feb 25, 2020 at 10:22 PM <git@git.openembedded.org
-> <mailto:git@git.openembedded.org>> wrote:
-> 
->     This is an automated email from the git hooks/post-receive script.
-> 
->     khem pushed a commit to branch master-next
->     in repository meta-openembedded.
-> 
->     commit d15fd2cfb6bcd2472a8b346cc6fe4bc070675d13
->     Author: Martin Jansa <martin.jansa@gmail.com
->     <mailto:martin.jansa@gmail.com>>
->     AuthorDate: Tue Feb 25 20:36:15 2020 +0100
-> 
->         c-ares: move from meta-networking to meta-oe
-> 
->         * nodejs from meta-oe depends on this since:
->           commit 76dd3dac1f1e67a5c44ad732b8e827cc36ded641
->           Author: André Draszik <git@andred.net <mailto:git@andred.net>>
->           Date:   Tue Oct 29 16:42:24 2019 +0000
-> 
->             nodejs: allow use of system c-ares (and make default)
-> 
->             Use system c-ares via PACKAGECONFIG by default. So far,
->             nodejs had been built using its embedded copy of c-ares,
->             which we generally try to avoid, for the known reasons
->             (independent updates, cve & license checks, etc).
-> 
->             Notes:
->             * otherwise nodejs uses its bundled version of c-ares
->             * the PACKAGECONFIG variable is 'ares' so as to be in
->               line with other uses of this (wget & curl recipes in
->               OE core)
-> 
->             Signed-off-by: André Draszik <git@andred.net
->     <mailto:git@andred.net>>
->             Signed-off-by: Khem Raj <raj.khem@gmail.com
->     <mailto:raj.khem@gmail.com>>
-> 
->         Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com
->     <mailto:Martin.Jansa@gmail.com>>
->         Signed-off-by: Khem Raj <raj.khem@gmail.com
->     <mailto:raj.khem@gmail.com>>
->     ---
->      .../recipes-core/packagegroups/packagegroup-meta-networking.bb
->     <http://packagegroup-meta-networking.bb>          | 2 +-
->      meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->     <http://packagegroup-meta-oe.bb>              | 2 +-
->      .../recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch 
->          | 0
->      {meta-networking =>
->     meta-oe}/recipes-support/c-ares/c-ares_1.15.0.bb
->     <http://c-ares_1.15.0.bb>    | 0
->      4 files changed, 2 insertions(+), 2 deletions(-)
-> 
->     diff --git
->     a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
->     <http://packagegroup-meta-networking.bb>
->     b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
->     <http://packagegroup-meta-networking.bb>
->     index fa9bf2d..103c99b 100644
->     ---
->     a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
->     <http://packagegroup-meta-networking.bb>
->     +++
->     b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
->     <http://packagegroup-meta-networking.bb>
->     @@ -107,7 +107,7 @@ RDEPENDS_packagegroup-meta-networking-support = "\
->          tunctl dovecot ipvsadm stunnel chrony spice-protocol \
->          usbredir ntop wireshark tnftp lksctp-tools \
->          cim-schema-docs cim-schema-final cim-schema-exper \
->     -    libmemcached smcroute libtevent ipcalc c-ares uftp \
->     +    libmemcached smcroute libtevent ipcalc uftp \
->          ntimed linux-atm ssmtp openvpn rdma-core \
->          iftop aoetools tcpslice tcpdump libtalloc memcached nuttcp netcat \
->          netcat-openbsd fetchmail yp-tools ypbind-mt yp-tools \
->     diff --git
->     a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->     <http://packagegroup-meta-oe.bb>
->     b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->     <http://packagegroup-meta-oe.bb>
->     index 0bda946..d096539 100644
->     --- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->     <http://packagegroup-meta-oe.bb>
->     +++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
->     <http://packagegroup-meta-oe.bb>
->     @@ -238,7 +238,7 @@ NE10_armv7a = "ne10"
->      NE10_armv7ve = "ne10"
-> 
->      RDEPENDS_packagegroup-meta-oe-support ="\
->     -    anthy asio atop augeas avro-c bdwgc frame grail \
->     +    anthy asio atop augeas avro-c bdwgc frame grail c-ares \
->          ccid ceres-solver ckermit cpprest ctapi-common daemonize \
->          daemontools debsums devmem2 dfu-util dfu-util-native digitemp \
->          dstat eject enca epeg espeak fbset fbset-modes \
->     diff --git
->     a/meta-networking/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
->     b/meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
->     similarity index 100%
->     rename from
->     meta-networking/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
->     rename to
->     meta-oe/recipes-support/c-ares/c-ares/cmake-install-libcares.pc.patch
->     diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.15.0.bb
->     <http://c-ares_1.15.0.bb>
->     b/meta-oe/recipes-support/c-ares/c-ares_1.15.0.bb
->     <http://c-ares_1.15.0.bb>
->     similarity index 100%
->     rename from meta-networking/recipes-support/c-ares/c-ares_1.15.0.bb
->     <http://c-ares_1.15.0.bb>
->     rename to meta-oe/recipes-support/c-ares/c-ares_1.15.0.bb
->     <http://c-ares_1.15.0.bb>
-> 
->     -- 
->     To stop receiving notification emails like this one, please contact
->     the administrator of this repository.
->     -- 
->     _______________________________________________
->     Openembedded-commits mailing list
->     Openembedded-commits@lists.openembedded.org
->     <mailto:Openembedded-commits@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-commits
-> 
+UGluZw0KDQotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLQ0KWmhlbmcgUnVvcWluDQpOYW5qaW5nIEZ1aml0c3Ug
+TmFuZGEgU29mdHdhcmUgVGVjaC4gQ28uLCBMdGQuKEZOU1QpDQpBRERSLjog
+Tm8uNiBXZW56aHUgUm9hZCwgU29mdHdhcmUgQXZlbnVlLA0KICAgICAgIE5h
+bmppbmcsIDIxMDAxMiwgQ2hpbmENCk1BSUwgOiB6aGVuZ3JxLmZuc3RAY24u
+ZnVqaXN0dS5jb20NCg0KDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0t
+LS0NCj4gRnJvbTogWmhlbmcsIFJ1b3Fpbi/WoyDI9MfVIDx6aGVuZ3JxLmZu
+c3RAY24uZnVqaXRzdS5jb20+DQo+IFNlbnQ6IFdlZG5lc2RheSwgRmVicnVh
+cnkgMTksIDIwMjAgNToyMiBQTQ0KPiBUbzogb3BlbmVtYmVkZGVkLWRldmVs
+QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gQ2M6IFpoZW5nLCBSdW9xaW4v
+1qMgyPTH1SA8emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29tPg0KPiBTdWJq
+ZWN0OiBbb2VdW21ldGEtb2VdW1BBVENIIHYyXSBsaWJoYXJ1OiBOZXcgcmVj
+aXBlDQo+IA0KPiBsaWJIYXJ1IGlzIGEgbGlicmFyeSBmb3IgZ2VuZXJhdGlu
+ZyBQREYgZmlsZXMuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBaaGVuZyBSdW9x
+aW4gPHpoZW5ncnEuZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4gLS0tDQo+ICAu
+Li4vbGliaGFydS9saWJoYXJ1LVJFTEVBU0VfMl8zXzBfY21ha2UucGF0Y2gg
+ICAgICB8IDUyDQo+ICsrKysrKysrKysrKysrKysrKysrKysNCj4gIG1ldGEt
+b2UvcmVjaXBlcy1zdXBwb3J0L2xpYmhhcnUvbGliaGFydV8yLjMuMC5iYiAg
+IHwgMjQgKysrKysrKysrKw0KPiAgMiBmaWxlcyBjaGFuZ2VkLCA3NiBpbnNl
+cnRpb25zKCspDQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNp
+cGVzLXN1cHBvcnQvbGliaGFydS9saWJoYXJ1L2xpYmhhcnUtDQo+IFJFTEVB
+U0VfMl8zXzBfY21ha2UucGF0Y2gNCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBt
+ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJoYXJ1L2xpYmhhcnVfMi4zLjAu
+YmINCj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9y
+dC9saWJoYXJ1L2xpYmhhcnUvbGliaGFydS0NCj4gUkVMRUFTRV8yXzNfMF9j
+bWFrZS5wYXRjaCBiL21ldGEtb2UvcmVjaXBlcy0NCj4gc3VwcG9ydC9saWJo
+YXJ1L2xpYmhhcnUvbGliaGFydS1SRUxFQVNFXzJfM18wX2NtYWtlLnBhdGNo
+DQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAwMDAwMDAuLjMz
+MmJlMWINCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRhLW9lL3JlY2lw
+ZXMtc3VwcG9ydC9saWJoYXJ1L2xpYmhhcnUvbGliaGFydS1SRUxFQVNFXzJf
+M18wX2NtYWsNCj4gKysrIGUucGF0Y2gNCj4gQEAgLTAsMCArMSw1MiBAQA0K
+PiArQmFja3BvcnQgZnJvbSBGZWRvcmEgUHJvamVjdC4NCj4gK2h0dHBzOi8v
+c3JjLmZlZG9yYXByb2plY3Qub3JnL3JwbXMvbGliaGFydQ0KPiArDQo+ICtG
+aXggdGhlIGluc3RhbGwgZGVzdGluYXRpb24gb2Ygc29tZSBmaWxlcy4NCj4g
+Kw0KPiArVXBzdHJlYW0tU3RhdHVzOiBpbmFwcHJvcHJpYXRlDQo+ICsNCj4g
+K1NpZ25lZC1vZmYtYnk6IFpoZW5nIFJ1b3FpbiA8emhlbmdycS5mbnN0QGNu
+LmZ1aml0c3UuY29tPg0KPiArDQo+ICtkaWZmIC11cnAgbGliaGFydS1SRUxF
+QVNFXzJfM18wL0NNYWtlTGlzdHMudHh0IGxpYmhhcnUtDQo+IFJFTEVBU0Vf
+Ml8zXzBfY21ha2UvQ01ha2VMaXN0cy50eHQNCj4gKy0tLSBsaWJoYXJ1LVJF
+TEVBU0VfMl8zXzAvQ01ha2VMaXN0cy50eHQJMjAxMy0xMC0zMA0KPiAyMDox
+MTo1OS4wMDAwMDAwMDAgKzA3MDANCj4gKysrKyBsaWJoYXJ1LVJFTEVBU0Vf
+Ml8zXzBfY21ha2UvQ01ha2VMaXN0cy50eHQJMjAxNy0wNi0wMQ0KPiAxNTo1
+NjowNi41MzM1NTI3OTUgKzA3MDANCj4gK0BAIC0yNSw3ICsyNSw3IEBAIGVu
+ZGlmKE1TVkMpDQo+ICsNCj4gKyAjIGluZm9ybWF0aW9uIGFib3V0IGxpYmhh
+cnUNCj4gKyBzZXQoTElCSFBERl9NQUpPUiAyKQ0KPiArLXNldChMSUJIUERG
+X01JTk9SIDIpDQo+ICsrc2V0KExJQkhQREZfTUlOT1IgMykNCj4gKyBzZXQo
+TElCSFBERl9QQVRDSCAwKQ0KPiArIHNldChMSUJIUERGX1ZFUlNJT04NCj4g
+KyR7TElCSFBERl9NQUpPUn0uJHtMSUJIUERGX01JTk9SfS4ke0xJQkhQREZf
+UEFUQ0h9KQ0KPiArIHNldChMSUJIUERGX0RFU0NSSVBUSU9OICJsaWJIYXJ1
+IGlzIGEgZnJlZSwgY3Jvc3MgcGxhdGZvcm0sIG9wZW4NCj4gK3NvdXJjZSBs
+aWJyYXJ5IGZvciBnZW5lcmF0aW5nIFBERiBmaWxlcy4iKSBAQCAtMjEwLDkg
+KzIxMCw5IEBAIHNldCgNCj4gK2luc3RhbGwoRklMRVMgJHtoYXJ1X0hEUlN9
+IERFU1RJTkFUSU9OIGluY2x1ZGUpDQo+ICsNCj4gKyAjIGluc3RhbGwgdmFy
+aW91cyBmaWxlcw0KPiArLWluc3RhbGwoRklMRVMgUkVBRE1FIENIQU5HRVMg
+SU5TVEFMTCBERVNUSU5BVElPTiAuKQ0KPiArK2luc3RhbGwoRklMRVMgUkVB
+RE1FIENIQU5HRVMgSU5TVEFMTCBERVNUSU5BVElPTg0KPiArKyR7U0hBUkVf
+SU5TVEFMTF9QUkVGSVh9L2xpYmhhcnUpDQo+ICsgaWYoTk9UIERFVlBBSykN
+Cj4gKy0gIGluc3RhbGwoRElSRUNUT1JZIGlmIERFU1RJTkFUSU9OIC4pDQo+
+ICsrICBpbnN0YWxsKERJUkVDVE9SWSBpZiBERVNUSU5BVElPTiAke1NIQVJF
+X0lOU1RBTExfUFJFRklYfS9saWJoYXJ1KQ0KPiArIGVuZGlmKE5PVCBERVZQ
+QUspDQo+ICsgaWYoREVWUEFLKQ0KPiArICAgaW5zdGFsbChGSUxFUyAke0NN
+QUtFX0JJTkFSWV9ESVJ9L2xpYmhhcnUuRGV2UGFja2FnZSBERVNUSU5BVElP
+TiAuKQ0KPiArZGlmZiAtdXJwIGxpYmhhcnUtUkVMRUFTRV8yXzNfMC9zcmMv
+Q01ha2VMaXN0cy50eHQgbGliaGFydS0NCj4gUkVMRUFTRV8yXzNfMF9jbWFr
+ZS9zcmMvQ01ha2VMaXN0cy50eHQNCj4gKy0tLSBsaWJoYXJ1LVJFTEVBU0Vf
+Ml8zXzAvc3JjL0NNYWtlTGlzdHMudHh0CTIwMTMtMTAtMzANCj4gMjA6MTE6
+NTkuMDAwMDAwMDAwICswNzAwDQo+ICsrKysgbGliaGFydS1SRUxFQVNFXzJf
+M18wX2NtYWtlL3NyYy9DTWFrZUxpc3RzLnR4dAkyMDE3LTA2LTAxDQo+IDE2
+OjA4OjQ1LjQyNTEwNTc0NiArMDcwMA0KPiArQEAgLTkwLDExICs5MCwxMyBA
+QCBpZihMSUJIUERGX1NIQVJFRCkNCj4gKyAgIHRhcmdldF9saW5rX2xpYnJh
+cmllcygke0xJQkhQREZfTkFNRX0gJHtBRERJVElPTkFMX0xJQlJBUklFU30p
+DQo+ICsgICBpZihXSU4zMiBBTkQgTk9UIENZR1dJTikNCj4gKyAgIAlzZXRf
+dGFyZ2V0X3Byb3BlcnRpZXMoJHtMSUJIUERGX05BTUV9IFBST1BFUlRJRVMg
+REVGSU5FX1NZTUJPTA0KPiArSFBERl9ETExfTUFLRSkNCj4gKysgIGVsc2Uo
+V0lOMzIgQU5EIE5PVCBDWUdXSU4pDQo+ICsrICAJc2V0X3RhcmdldF9wcm9w
+ZXJ0aWVzKCR7TElCSFBERl9OQU1FfSBQUk9QRVJUSUVTIFNPVkVSU0lPTg0K
+PiArKyAke0xJQkhQREZfVkVSU0lPTn0pDQo+ICsgICBlbmRpZihXSU4zMiBB
+TkQgTk9UIENZR1dJTikNCj4gKyAgIGluc3RhbGwoDQo+ICsgICAgIFRBUkdF
+VFMgJHtMSUJIUERGX05BTUV9DQo+ICstICAgIEFSQ0hJVkUgREVTVElOQVRJ
+T04gbGliDQo+ICstICAgIExJQlJBUlkgREVTVElOQVRJT04gbGliDQo+ICsr
+ICAgIEFSQ0hJVkUgREVTVElOQVRJT04gJHtMSUJfSU5TVEFMTF9ESVJ9DQo+
+ICsrICAgIExJQlJBUlkgREVTVElOQVRJT04gJHtMSUJfSU5TVEFMTF9ESVJ9
+DQo+ICsgICAgIFJVTlRJTUUgREVTVElOQVRJT04gYmluDQo+ICsgICApDQo+
+ICsgZW5kaWYoTElCSFBERl9TSEFSRUQpDQo+IGRpZmYgLS1naXQgYS9tZXRh
+LW9lL3JlY2lwZXMtc3VwcG9ydC9saWJoYXJ1L2xpYmhhcnVfMi4zLjAuYmIg
+Yi9tZXRhLQ0KPiBvZS9yZWNpcGVzLXN1cHBvcnQvbGliaGFydS9saWJoYXJ1
+XzIuMy4wLmJiDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAw
+MDAwMDAuLjM1OWY2MTUNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRh
+LW9lL3JlY2lwZXMtc3VwcG9ydC9saWJoYXJ1L2xpYmhhcnVfMi4zLjAuYmIN
+Cj4gQEAgLTAsMCArMSwyNCBAQA0KPiArU1VNTUFSWSA9ICJmcmVlIFBERiBs
+aWJyYXJ5Ig0KPiArSE9NRVBBR0UgPSAiaHR0cDovL2xpYmhhcnUub3JnIg0K
+PiArREVTQ1JJUFRJT04gPSAibGliSGFydSBpcyBhIGxpYnJhcnkgZm9yIGdl
+bmVyYXRpbmcgUERGIGZpbGVzLiBcDQo+ICsgICAgICAgICAgICAgICBJdCBp
+cyBmcmVlLCBvcGVuIHNvdXJjZSwgd3JpdHRlbiBpbiBBTlNJIEMgYW5kIGNy
+b3NzIHBsYXRmb3JtLiAiDQo+ICsNCj4gK0xJQ0VOU0UgPSAiWmxpYiINCj4g
+K0xJQ19GSUxFU19DSEtTVU0gPQ0KPiAiZmlsZTovL1JFQURNRTttZDU9M2Vl
+NmJjMWY2NGQ5Y2M3OTA3ZjQ0ODQwYzhlNTBjYjEiDQo+ICsNCj4gK1NSQ19V
+UkkgPQ0KPiAiaHR0cHM6Ly9naXRodWIuY29tL2xpYmhhcnUvJHtCUE59L2Fy
+Y2hpdmUvUkVMRUFTRV8ke0BkLmdldFZhcignUFYnKS5yZXBsYWMNCj4gZSgn
+LicsJ18nKX0udGFyLmd6IFwNCj4gKyAgICAgICAgICAgZmlsZTovL2xpYmhh
+cnUtUkVMRUFTRV8yXzNfMF9jbWFrZS5wYXRjaCBcDQo+ICsJICAgIg0KPiAr
+DQo+ICtTUkNfVVJJW21kNXN1bV0gPSAiNGY5MTZhYTQ5YzMwNjliM2ExMDg1
+MDAxM2M1MDc0NjAiDQo+ICtTUkNfVVJJW3NoYTI1NnN1bV0gPQ0KPiAiOGY5
+ZTY4Y2M1ZDVmN2Q1M2QxYmM2MWExZWQ4NzZhZGQxZmFmNGY5MTA3MGRiYzM2
+MGQ4YjI1OWY0NmQ5YTRkMiINCj4gKw0KPiArUyA9ICIke1dPUktESVJ9LyR7
+QlBOfS1SRUxFQVNFXyR7QGQuZ2V0VmFyKCdQVicpLnJlcGxhY2UoJy4nLCdf
+Jyl9Ig0KPiArDQo+ICtpbmhlcml0IGNtYWtlDQo+ICtERVBFTkRTICs9ICJs
+aWJwbmcgemxpYiINCj4gKw0KPiArZG9faW5zdGFsbF9hcHBlbmQoKSB7DQo+
+ICsgICAgIG1rZGlyIC1wICR7RH0vJHtkYXRhZGlyfS9saWJoYXJ1DQo+ICsg
+ICAgIG12ICR7RH0vbGliaGFydSAke0R9LyR7ZGF0YWRpcn0NCj4gK30NCj4g
+LS0NCj4gMi43LjQNCg0KCgo=
 
