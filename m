@@ -1,54 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com
-	[209.85.221.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 15C3161892
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
+	[209.85.221.45])
+	by mail.openembedded.org (Postfix) with ESMTP id BD81061892
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 22:13:01 +0000 (UTC)
-Received: by mail-wr1-f41.google.com with SMTP id p18so680178wre.9
+	Thu, 27 Feb 2020 22:13:02 +0000 (UTC)
+Received: by mail-wr1-f45.google.com with SMTP id c13so670411wrq.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 14:13:03 -0800 (PST)
+	Thu, 27 Feb 2020 14:13:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=VrcLhBqYNERpihT8mheB2F3CW2GxQzs69JJ0q1cBAsA=;
-	b=prUOvLFOLFSjiB7t4Rmw1+SP/HK+zMbh49JWrFkoONX8WTUEAg6tvMVnvQh3C806di
-	KSIyYPC16GfE4BWlSvfgDtuYbdfc4ySH4zXKyBvg1Rl6r6ykXfc967V6sy3UUSHKqq0a
-	+Wv9kTR6magWxq6EGm2QnkzXPwe+slc5RLFeGWnYem9MDiVTH4MqhOI8qcp4eAfc58dm
-	/sdp3XXd6cV+iJlDOJ7EMGMSjWm8+L78PUW27zhBBvsCo4SreG0oQ7MLdVynZR9Rc1sd
-	frgg2tIgc1B5jk+skmrkw4g9XEqm4qUAYAJLWrmH11OmYXqgNCm0LSCsF1W9wwZYfBTU
-	HmIA==
+	bh=gadv3pybqunJPEGrF9fKpoEGp1rHJaxtih04W1MlgxY=;
+	b=FQRecraUH/fKS5gKvK13JmDlQPsxHxxYqBEbj7f65qt3WdpnJO4GY/fKSdah1yj7tf
+	7Jwy/HXYXQo2eB7SHIUuuHcZRKuQ0+8fcX4Sd51dt5/+0qFkPQCl2efmaq/OmXUNxN2U
+	y6RdMCDkS4Twk1z+ZF0CP8jhBufeZhmVxP63WxrOzBVBUMOdCo7pP11ZIbT4Gv9oBv6d
+	Uv0ea23qfjxzl9baUICvP1Bl2rumeH/99dWC45K4m0wNe66Di4/tAnB+EMhhiIX+glJH
+	NrLPUR9uNKDwMiH8abA0RBMydX6Xw8ZqLQW2JLRexaoOEFOx+I+MI+jDVL/vEFSWyvjN
+	8++Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=VrcLhBqYNERpihT8mheB2F3CW2GxQzs69JJ0q1cBAsA=;
-	b=q8jM6ZWNy2qkIEM8Vu49WCNuBUn+31fWclFHpWsLRvEKhtjyf3AvqGoVAgOZ+K+/q7
-	/nzD2K+GQSLzqLw5wCWMp3mXDU2y6qRCsPVq9CWz/5lyBbTZAqFZT3mlYye8NcJRa37W
-	K20zdCzxNZZW0RVnjWaMqCPC9WtUnUjzooaK9jUNJsaWEws6fOzXaT3JYk2GWe1CLhbs
-	y28gY8A6w+ZHbJzxeqBw1U8weMI98oz+twUfPuQBi0XlCVcQYtQ9ZC2azosRiNVejUd7
-	6xO5NrhpTGKKTgXmlprvogZxhng/4H9j7IqnjildiXZ1ArU//OIfoMZYPmJGuURClRra
-	XCaQ==
-X-Gm-Message-State: APjAAAUxNBzxbXzM1UKvB9+gnpjyYL4A6aCg0CsaX8oJ9TCdA4XLF6V/
-	x/crfB0fDSRayl4yRPsIyLyOYkrC
-X-Google-Smtp-Source: APXvYqwbUhJnAd9keYBmIb1lBDYhc9NyPeZqplkgRuOsV6DBMsWKn9stEeNezcmQR+3k/FVb/reBdw==
-X-Received: by 2002:adf:e48b:: with SMTP id i11mr946498wrm.376.1582841582495; 
-	Thu, 27 Feb 2020 14:13:02 -0800 (PST)
+	bh=gadv3pybqunJPEGrF9fKpoEGp1rHJaxtih04W1MlgxY=;
+	b=KpuTaUcS8EgahpmfdRYzxj1z5z8dhLO1q78y/mZdip0gAyLVH+o23ozS05xTfq0GFV
+	9xtlbfpLOVDTDiJPVUTuaLbzCx3gbWcO2qiI2MtPbo6RffXBmjFVshMwOFV2fp0bCdmL
+	dw91tHZP66yJIvBO79O4vrjAox4raYQFTy6WfjH1E+aGn4EPjwRlUjsTEhhUYA5GNRjo
+	NI5hdNOj8gszNm/xUZn/6kR5rMBS2LAtGc7jhn4/DRnS84OPUunCtyJ/K1TfuZWsBv2k
+	TibMlrnYOTljjtCO9uN15Sv00MRrldYapyT6aGgW29Nx034gEAotaz02OeZ0hVn7p0ly
+	AfWA==
+X-Gm-Message-State: APjAAAUiNXbcYTacZCs2o8b3sszXIm87lnbJYMvm6YbgLFFHcD6uVwe1
+	Ffv0XIP9u/uDLGxprZW1jAbUWjSH
+X-Google-Smtp-Source: APXvYqz1vXlkTCujTvP9ZN+jA5v5A2ti6aniHaebBCsKMM+bLc1JX59qVBeRpZs8AVJlpePhQlB6cA==
+X-Received: by 2002:a5d:5706:: with SMTP id a6mr967553wrv.318.1582841583272;
+	Thu, 27 Feb 2020 14:13:03 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F102C9262505CD5EB98F253.dip0.t-ipconnect.de.
 	[2003:f0:7f10:2c92:6250:5cd5:eb98:f253])
-	by smtp.gmail.com with ESMTPSA id y8sm8911422wma.10.2020.02.27.14.13.01
+	by smtp.gmail.com with ESMTPSA id y8sm8911422wma.10.2020.02.27.14.13.02
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 27 Feb 2020 14:13:01 -0800 (PST)
+	Thu, 27 Feb 2020 14:13:02 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Feb 2020 23:12:44 +0100
-Message-Id: <20200227221245.22944-7-schnitzeltony@gmail.com>
+Date: Thu, 27 Feb 2020 23:12:45 +0100
+Message-Id: <20200227221245.22944-8-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20200227221245.22944-1-schnitzeltony@gmail.com>
 References: <20200227221245.22944-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 7/8] libgee: upgrade 0.20.2 -> 0.20.3
+Subject: [PATCH 8/8] gmime: upgrade 3.2.5 -> 3.2.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,31 +61,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 22:13:02 -0000
+X-List-Received-Date: Thu, 27 Feb 2020 22:13:03 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../libgee/{libgee_0.20.2.bb => libgee_0.20.3.bb}             | 4 ++--
+ .../recipes-gnome/gmime/{gmime_3.2.5.bb => gmime_3.2.6.bb}    | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/libgee/{libgee_0.20.2.bb => libgee_0.20.3.bb} (77%)
+ rename meta-oe/recipes-gnome/gmime/{gmime_3.2.5.bb => gmime_3.2.6.bb} (72%)
 
-diff --git a/meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb b/meta-oe/recipes-devtools/libgee/libgee_0.20.3.bb
-similarity index 77%
-rename from meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
-rename to meta-oe/recipes-devtools/libgee/libgee_0.20.3.bb
-index a048e4832..576eff6d5 100644
---- a/meta-oe/recipes-devtools/libgee/libgee_0.20.2.bb
-+++ b/meta-oe/recipes-devtools/libgee/libgee_0.20.3.bb
-@@ -18,5 +18,5 @@ do_configure_prepend() {
-     done
- }
+diff --git a/meta-oe/recipes-gnome/gmime/gmime_3.2.5.bb b/meta-oe/recipes-gnome/gmime/gmime_3.2.6.bb
+similarity index 72%
+rename from meta-oe/recipes-gnome/gmime/gmime_3.2.5.bb
+rename to meta-oe/recipes-gnome/gmime/gmime_3.2.6.bb
+index 568083bf3..9d1bb7d04 100644
+--- a/meta-oe/recipes-gnome/gmime/gmime_3.2.5.bb
++++ b/meta-oe/recipes-gnome/gmime/gmime_3.2.6.bb
+@@ -9,8 +9,8 @@ inherit gnomebase gobject-introspection
+ SRC_URI += "file://iconv-detect.h \
+             file://nodolt.patch"
  
--SRC_URI[archive.md5sum] = "45db478f2b300ada8e039ebc6c9458de"
--SRC_URI[archive.sha256sum] = "9e035c4b755f46bfae70ba81cdcf8328b03f554373cec8c816e8b5680f85353c"
-+SRC_URI[archive.md5sum] = "e574b3952b93d219b5ec7c74c5892c33"
-+SRC_URI[archive.sha256sum] = "d0b5edefc88cbca5f1709d19fa62aef490922c6577a14ac4e7b085507911a5de"
+-SRC_URI[archive.md5sum] = "98970e3995e67ac3f23827ff52308f9e"
+-SRC_URI[archive.sha256sum] = "fb7556501f85c3bf3e65fdd82697cbc4fa4b55dccd33ad14239ce0197e78ba59"
++SRC_URI[archive.md5sum] = "656548dc431004d1ebf95e5d0bb4b9c8"
++SRC_URI[archive.sha256sum] = "abff194c7c4802fba2e233890d09dde8bf7170c3ad5e13000601c8d5b3c44717"
+ 
+ export ac_cv_have_iconv_detect_h="yes"
+ do_configure_append = "cp ${WORKDIR}/iconv-detect.h ${S}"
 -- 
 2.21.0
 
