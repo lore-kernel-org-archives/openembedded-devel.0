@@ -1,34 +1,33 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D3FF6116B
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 363 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 27 Feb 2020 01:09:19 UTC
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+	by mail.openembedded.org (Postfix) with ESMTP id 59F5061090
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 00:48:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=axis.com; l=2405; q=dns/txt; s=axis-central1;
-	t=1582764536; x=1614300536;
-	h=from:to:subject:date:message-id:mime-version:
-	content-transfer-encoding;
-	bh=m5RO2KoKYyDvviao3E1XMYHfTXicbSDdvYbzKvrXjlQ=;
-	b=ROUf18pZU0v+EIoS2RI3624hkvfbyS89LIeRmN9KN+d2sOGqCfwCjGVX
-	ZXxD5savEOjoywBBXWhvbJoLSPb8MF5WsmFZkeduOxZspelmiNZ5oDh9h
-	AfAw+VdFr9Z6RvguAE3YuuwFh1pwAVxp6u/vH7/f203Ljev7ayIAyYE6k
-	JSO1QuY1wai3iDw52gwSX2z6N6KVfX/q5M/Ze9hHpBcOIp7GmHPTCZF+r
-	Soevl64wSZeF1zZF/+gyFK5ZpSZ5wWVbUoB07WeWQ+3HD33IF1oknysd/
-	nhgU4x5rRtEzH5tK5ZqEewpQ6q6Z/HjVyZPqx91bJfXLDuBHiS/bTEKWl A==;
-IronPort-SDR: 1lQfWBWL9F9NFEQG4W3feg3iqFfxKIzyjBwILVLuIpy5/h7T00/UTLdEwDuuU0Yj4HdW+bbSIj
-	1Ocbp2demlicDamL+yegTjmzsU7+bTOrBvmdTICKVsZN3tzNdjNrZPvHby0I4sjoiGn6K4q+fX
-	+VLDB7fpRecB3mOTbHtU+muWryyWLZDkWdPUioyE2GtEnlr8KeeMw6TUEf2dpLHOzj6EDPPnPE
-	/OULtAbHORGA4AVCaz/63d0gr78cKpJpXnJ+xlvpasMgCnhHOqKoBe8jRtpLiyUerXRQOaxOVK
-	CZI=
-X-IronPort-AV: E=Sophos;i="5.70,490,1574118000"; 
-   d="scan'208";a="5868549"
-From: Peter Kjellerstedt <pkj@axis.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Feb 2020 01:48:50 +0100
-Message-ID: <20200227004850.23746-1-pkj@axis.com>
-X-Mailer: git-send-email 2.21.1
-MIME-Version: 1.0
-Subject: [meta-oe][zeus][PATCHv2] lvm2, libdevmapper: Do not patch configure
+	Thu, 27 Feb 2020 01:09:19 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 92ACD40BFD;
+	Thu, 27 Feb 2020 01:03:17 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id oCvGT56w0cyL; Thu, 27 Feb 2020 01:03:17 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net
+	[100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 2716240A13;
+	Thu, 27 Feb 2020 01:03:16 +0000 (UTC)
+Received: from gimli.denix (unknown [192.168.30.6])
+	by mail.denix.org (Postfix) with ESMTP id 515A0161A11;
+	Wed, 26 Feb 2020 20:03:15 -0500 (EST)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 26 Feb 2020 20:03:07 -0500
+Message-Id: <1582765387-17990-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [PATCH] can-utils: update to v2020.02.04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,77 +40,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 00:48:55 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Feb 2020 01:09:19 -0000
 
-Since the do_configure task regenerates the configure script, there is
-no need to patch it. Actually doing so will cause problems, which can be
-seen by doing:
+From: Denys Dmytriyenko <denys@ti.com>
 
-  bitbake lvm2 -c configure
-  bitbake lvm2 -c patch -f
+https://github.com/linux-can/can-utils/releases/tag/v2020.02.04
 
-Reported-by: Andrey Zhizhikin <andrey.z@gmail.com>
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+This version is required to build against kernel > 5.2
+
+While at it, drop redundant DESCRIPTION and branch=master
+
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
 ---
+ meta-oe/recipes-extended/socketcan/can-utils_git.bb | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-PATCHv2: Corrcted a typo (scripte -> script).
-
- ...gure-Fix-setting-of-CLDFLAGS-default.patch | 34 +------------------
- 1 file changed, 1 insertion(+), 33 deletions(-)
-
-diff --git a/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch b/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch
-index 07cb88ffb..91ab239f3 100644
---- a/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch
-+++ b/meta-oe/recipes-support/lvm2/files/0001-configure-Fix-setting-of-CLDFLAGS-default.patch
-@@ -4,44 +4,12 @@ Date: Mon, 19 Aug 2019 14:54:43 +0200
- Subject: [PATCH] configure: Fix setting of CLDFLAGS default
+diff --git a/meta-oe/recipes-extended/socketcan/can-utils_git.bb b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
+index e2609d4..6114bda 100644
+--- a/meta-oe/recipes-extended/socketcan/can-utils_git.bb
++++ b/meta-oe/recipes-extended/socketcan/can-utils_git.bb
+@@ -1,17 +1,15 @@
+ SUMMARY = "Linux CAN network development utilities"
+-DESCRIPTION = "Linux CAN network development"
+ LICENSE = "GPLv2 & BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://include/linux/can.h;endline=44;md5=a9e1169c6c9a114a61329e99f86fdd31"
  
- ---
-- configure    | 6 +++---
-  configure.ac | 6 +++---
-- 2 files changed, 6 insertions(+), 6 deletions(-)
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ DEPENDS = "libsocketcan"
  
- Upstream-Status: Backport [https://sourceware.org/git/?p=lvm2.git;a=commit;h=4a3e707402032788e09282e0f54fdf82c8a0f8fc]
- Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+-SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=git;branch=master"
++SRC_URI = "git://github.com/linux-can/${BPN}.git;protocol=git"
  
--diff --git a/configure b/configure
--index ff3a59b6b..4c8476502 100755
----- a/configure
--+++ b/configure
--@@ -3077,7 +3077,7 @@ if test -z "$CFLAGS"; then :
-- fi
-- case "$host_os" in
-- 	linux*)
---		CLDFLAGS="${CLDFLAGS:"$LDFLAGS"} -Wl,--version-script,.export.sym"
--+		CLDFLAGS="${CLDFLAGS-"$LDFLAGS"} -Wl,--version-script,.export.sym"
-- 		# equivalent to -rdynamic
-- 		ELDFLAGS="-Wl,--export-dynamic"
-- 		# FIXME Generate list and use --dynamic-list=.dlopen.sym
--@@ -3098,7 +3098,7 @@ case "$host_os" in
-- 		;;
-- 	darwin*)
-- 		CFLAGS="$CFLAGS -no-cpp-precomp -fno-common"
---		CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
--+		CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
-- 		ELDFLAGS=
-- 		CLDWHOLEARCHIVE="-all_load"
-- 		CLDNOWHOLEARCHIVE=
--@@ -3111,7 +3111,7 @@ case "$host_os" in
-- 		BLKDEACTIVATE=no
-- 		;;
-- 	*)
---		CLDFLAGS="${CLDFLAGS:"$LDFLAGS"}"
--+		CLDFLAGS="${CLDFLAGS-"$LDFLAGS"}"
-- 		;;
-- esac
-- 
- diff --git a/configure.ac b/configure.ac
- index 5da694631..830edb8da 100644
- --- a/configure.ac
+-SRCREV = "665d8699ebe728bf48e63e8ae58d2482db72f954"
++SRCREV = "da65fdfe0d1986625ee00af0b56ae17ec132e700"
+ 
+-PV = "0.0+gitr${SRCPV}"
++PV = "2020.02.04+gitr${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools pkgconfig
+-
 -- 
-2.21.1
+2.7.4
 
 
