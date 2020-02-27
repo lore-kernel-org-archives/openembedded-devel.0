@@ -1,54 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
-	[209.85.221.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E11761219
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com
+	[209.85.128.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CBBF60FEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 06:51:20 +0000 (UTC)
-Received: by mail-wr1-f47.google.com with SMTP id p18so1873180wre.9
+	Thu, 27 Feb 2020 06:51:21 +0000 (UTC)
+Received: by mail-wm1-f50.google.com with SMTP id m3so2075785wmi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 22:51:22 -0800 (PST)
+	Wed, 26 Feb 2020 22:51:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=0iyI8lzCWiEZCaaHpNjkeaCoKLFjvOlsogyUVpmJOoE=;
-	b=SjioOZ8VTXwL7VyiM0Uc58fmIXNQseKINk50t1MnT3HxRKgVh45Y1kZFa6pMv9kImk
-	iWXAvNJ5BiTZ5+r2hYL3TEBH9v7eChST/CNxhg7T566HCFKG2VAD0RECn8+uVxoB9KG2
-	ySDfG20IM9rFthR+FLNjpNnfOgknRJO07GxIReMln5Ng7oRdPVPDBY5QE2rHVmmZ0Ey1
-	6E3yE3NwzeYxiUORkfnVgGYAiTbwAVq32G3MzmMoalguWRexb+JfFiqdEWhG+KHRpf75
-	VzgpwpF8g/MHXsv2MG+6WVDbBUb7/8ehFNu2kYKE96EGufPJ+YiJm9RNN8Sn+SlfLADg
-	0Y3g==
+	bh=sBoCSBPdLu/hjhKDokYCOCnZDldJtpohMThm6BhrQKo=;
+	b=DUoiwsYa3PlyjSG6eya+ZwP5m+yuRtygs6400tWDCt0cDFcpCxW8a7a63/xPXoX86A
+	I0jEIaETQ/D/pM5/8IFQtoDxCQoGhbPbSjxOCaTGUkEFLXhdaq6r3xujG7Xa0pItMIdf
+	UthpPCLa024Y3A7iS/Jcntrs6UAKHqGYHxa6rlXp4KDNRJW5lqz7FxgCTiRBrTfau9Hi
+	Sa12W/SHyJD7RPrZVEglXx4XzI7M57uFjN+wnYWjifLS2sOY4Sfk4UytkN+KHhWx9Mpd
+	Q2D7Rj9hVHFeKoDk129i/gaewvRgE4R9hx0jnwFA7SlM2ADahIyGEQNxpOvZJSv1u7Qp
+	QRDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=0iyI8lzCWiEZCaaHpNjkeaCoKLFjvOlsogyUVpmJOoE=;
-	b=GElG2gbEmMUap7jX/8TzI6xAuoU14+J6gwRij+L6gzNmaUm/3ggy7IiIxJMT5+b+px
-	WZLTNKDw1bIyNwkY8E/YfB9yh4Z6+ORtvazDGpdXPbrfiUKK0VABp7XGhR3Fx/BcKwSQ
-	joLC7OeuMW2GQYgZQssS/tEIroFWCdKTZgNSVQPTzvPkdRSjPsKekqbcV2bP3BqIuNSK
-	TuT2GEkR7yIKgojh6Bx5Z767r0E5FaCWdSAKy2JSc7uy3Oi/O+FHBzXn0gFzOiuTSLvy
-	/8TOQ5ljUHrIEt25xC13wjy6phQ33fr6MCLANyLYO8/etSqzv9bd0ZI401fP0TEiZDag
-	KUag==
-X-Gm-Message-State: APjAAAXZA/ELC9Ol1+lRNPoqekvDimkUQIehBQaD66qrV/Oh1ry3ZMmP
-	fKfcJakM+KWTu864yfZTgzdd3dX8
-X-Google-Smtp-Source: APXvYqx9U9RKys805FAY9iMsFV/kvLxDVZzDHBRKqgAnrMnvsZkGDyvDaCEOK5OxkXzLsVgwg1of3g==
-X-Received: by 2002:a5d:678f:: with SMTP id v15mr3071351wru.27.1582786281211; 
-	Wed, 26 Feb 2020 22:51:21 -0800 (PST)
+	bh=sBoCSBPdLu/hjhKDokYCOCnZDldJtpohMThm6BhrQKo=;
+	b=cxuh1t3zNvrrsBDVACHXSXWNPp0AIJu5yeHDcKh8YsqvjpiCZmMI4xJ7yQFCyna9l2
+	tIvoZdQNx2BuOlMnZdnJspOLJfjZNXA3QFekzYelvYIKoWeK2srmYAchxDV6KQy1Pbvw
+	lI6fqWJOuu8Kt7ikjEwU2JU4fhbfZd9gAFU5esdZwxYC3/Zt8t7nxLQBZiu6wWIMAgbC
+	qBa4RPvHJ9VYJ6ExZ1mYmznCyrhjUjEhzAFaOznn5t6c0HDPitmvsxQwnp1hi94jR352
+	Fbn3S7wzDfgPACFyeSw5KAhAVC2FRRfejjlVWUGINHcO3G06X2KVvRb0QAGuQjpW0vMl
+	5u9Q==
+X-Gm-Message-State: APjAAAXGr+y9fNG/y5NxJzaQBi+h2K9ifW+QFBTTiWrQOkhIsH3F9jBB
+	HV2Ja7igcvONctEt7bRqEFHTGPUt
+X-Google-Smtp-Source: APXvYqzxs67TzDPF6M51TKPEpslO35MEAM95vsCI63MNxv7UXV8la3Scbsa7hmCYO5P/8WtR+Ut73w==
+X-Received: by 2002:a05:600c:290e:: with SMTP id
+	i14mr3352579wmd.139.1582786282461; 
+	Wed, 26 Feb 2020 22:51:22 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F102C9262505CD5EB98F253.dip0.t-ipconnect.de.
 	[2003:f0:7f10:2c92:6250:5cd5:eb98:f253])
-	by smtp.gmail.com with ESMTPSA id u8sm6470066wmm.15.2020.02.26.22.51.20
+	by smtp.gmail.com with ESMTPSA id u8sm6470066wmm.15.2020.02.26.22.51.21
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 26 Feb 2020 22:51:20 -0800 (PST)
+	Wed, 26 Feb 2020 22:51:21 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Feb 2020 07:51:04 +0100
-Message-Id: <20200227065105.29865-2-schnitzeltony@gmail.com>
+Date: Thu, 27 Feb 2020 07:51:05 +0100
+Message-Id: <20200227065105.29865-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <20200227065105.29865-1-schnitzeltony@gmail.com>
 References: <20200227065105.29865-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/3] gegl: upgrade 0.4.20 -> 0.4.22
+Subject: [PATCH 3/3] gimp: upgrade 2.10.14 -> 2.10.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,34 +62,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 06:51:21 -0000
+X-List-Received-Date: Thu, 27 Feb 2020 06:51:22 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+Release information can be found at [1]
+
+[1] https://www.gimp.org/news/2020/02/24/gimp-2-10-18-released/
+
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../recipes-gimp/gegl/{gegl_0.4.20.bb => gegl_0.4.22.bb}      | 4 ++--
+ .../recipes-gimp/gimp/{gimp_2.10.14.bb => gimp_2.10.18.bb}    | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-gnome/recipes-gimp/gegl/{gegl_0.4.20.bb => gegl_0.4.22.bb} (93%)
+ rename meta-gnome/recipes-gimp/gimp/{gimp_2.10.14.bb => gimp_2.10.18.bb} (91%)
 
-diff --git a/meta-gnome/recipes-gimp/gegl/gegl_0.4.20.bb b/meta-gnome/recipes-gimp/gegl/gegl_0.4.22.bb
-similarity index 93%
-rename from meta-gnome/recipes-gimp/gegl/gegl_0.4.20.bb
-rename to meta-gnome/recipes-gimp/gegl/gegl_0.4.22.bb
-index 5e7a1bb84..ca73e66f3 100644
---- a/meta-gnome/recipes-gimp/gegl/gegl_0.4.20.bb
-+++ b/meta-gnome/recipes-gimp/gegl/gegl_0.4.22.bb
-@@ -26,8 +26,8 @@ SRC_URI = " \
-     https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz \
-     file://0001-meson.build-Give-note-if-sdl2-was-found.patch \
- "
--SRC_URI[md5sum] = "37433eb00f8a4b0d1ae9e975aaedfa26"
--SRC_URI[sha256sum] = "23bd8bb42b20de7c2a8c314eeb5301dc20141feda20a4b1ed455020b69b73dff"
-+SRC_URI[md5sum] = "1776ac26792de0de3c3d680872e94b72"
-+SRC_URI[sha256sum] = "1888ec41dfd19fe28273795c2209efc1a542be742691561816683990dc642c61"
+diff --git a/meta-gnome/recipes-gimp/gimp/gimp_2.10.14.bb b/meta-gnome/recipes-gimp/gimp/gimp_2.10.18.bb
+similarity index 91%
+rename from meta-gnome/recipes-gimp/gimp/gimp_2.10.14.bb
+rename to meta-gnome/recipes-gimp/gimp/gimp_2.10.18.bb
+index 30f0579e2..838bd374a 100644
+--- a/meta-gnome/recipes-gimp/gimp/gimp_2.10.14.bb
++++ b/meta-gnome/recipes-gimp/gimp/gimp_2.10.18.bb
+@@ -38,8 +38,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
+ SHPV = "${@gnome_verdir("${PV}")}"
  
- PACKAGECONFIG ??= "gexiv2 jpeg libpng librsvg sdl2"
- PACKAGECONFIG_class-native = "libpng librsvg"
+ SRC_URI = "https://download.gimp.org/pub/${BPN}/v${SHPV}/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "a64f2be299755a2da130306cad9b1d26"
+-SRC_URI[sha256sum] = "df9b0f11c2078eea1de3ebc66529a5d3854c5e28636cd25a8dd077bd9d6ddc54"
++SRC_URI[md5sum] = "096d04ffb2c4559cb2152f507ff31c9c"
++SRC_URI[sha256sum] = "65bfe111e8eebffd3dde3016ccb507f9948d2663d9497cb438d9bb609e11d716"
+ 
+ EXTRA_OECONF = "--disable-python \
+                 --without-webkit \
 -- 
 2.21.0
 
