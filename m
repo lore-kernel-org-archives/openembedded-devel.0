@@ -1,52 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
-	[209.85.128.47])
-	by mail.openembedded.org (Postfix) with ESMTP id F203261879
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com
+	[209.85.221.43])
+	by mail.openembedded.org (Postfix) with ESMTP id AAEE761879
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 22:12:56 +0000 (UTC)
-Received: by mail-wm1-f47.google.com with SMTP id m10so7968936wmc.0
+	Thu, 27 Feb 2020 22:12:57 +0000 (UTC)
+Received: by mail-wr1-f43.google.com with SMTP id c13so670206wrq.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 14:12:58 -0800 (PST)
+	Thu, 27 Feb 2020 14:12:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=2eJXzXb8ZY4uDfLWnOxqs80NtNMOvKDh46R8VExW7gk=;
-	b=j6kCk4kb/P115jf1dh1dvAT5GHHJvR2KRJrSBwHhajCkfMplVc3NTcYS15/IobOZNP
-	KI8FkHuBGzxPtQf3wn6Tg219McpNr/xuyYU208q3S1NfPr1RIpfCVhN0hCsCwoMC6jEY
-	XvRxlpvmvQctTK3US9+JVbc9/7EvX0iFl5LbgWrlohcAkQ5xmue7AYOMUetG4AdQ4Dx9
-	dFevjXIwZVU8/o2iECBPz8jM6A8F52oMF8pIK7en6spcmn/3rhww6KfEGPerR0wzFN5P
-	rC1/JY6VzvzPtbnnAYx5D+ZeVL5ZwkzrTshWZwCLhqIZwujorIbTrVijn8rIkuRolvDh
-	XhOA==
+	bh=MPq+xYSyjj+aEpoDVT8dBk2b7NWdEU+dkdleeo8az38=;
+	b=WOEA5YvQpDq2+16Cud7yjTb5n9tIv3og2hG1ccxHu14g86QY9PFrs+0hRiXy0l0gVo
+	XXSKLV4W8OLhayB7rqmlUYvKX3FV9wmEwG/fC/dVeSoYUp1ht5UtQLEBNTmf1j/IAlH5
+	gFnwvc+XkOG8dsGL+PlHMNPOr072+X/XTpgaPejxjgNvQ0FULfEamCC/2fLqGU1z7imN
+	oD41THA5E3MCTT0WrtddIc7KEuCZVJnlWBlZMrh/ZV6y2artUtoxyzUu1C5AyWlEaQfR
+	Dk/qaXouFCegp9ad9kdAPAJOUyC6dRbc6Vy7doYh8YuDOhvnqIqswomMczG79pYNfwax
+	mgyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=2eJXzXb8ZY4uDfLWnOxqs80NtNMOvKDh46R8VExW7gk=;
-	b=GdK0aECugwygbH71/pg4zkXSh5Chx+i+YDWhLK/t770bpsOyMyaKVtTV1NDK706Sri
-	XLxfZWvmIkujewXjzwfSTG0poh+epSrceav/he90f4bVfQPkma7gcSMvTIxof5gFN0Xv
-	0gmOnqetC36d5KU+a04grjDXnfllgBbMqP2H6mITukF7zlUpOj/G5ew9USnBF8Bfz3v0
-	8QvBTUs1EhPNSq/gmwpeQf/FwipIeAILNFCOHxqsLaKXr3qoTphxF4qWtm7yJHssttOJ
-	gUo82PilWQlIRNpdzZQSYJfFj6Ll8NR111ZnG42SebrU9gpFsZlFGt8iJ2j7aHKAvl5h
-	CVbQ==
-X-Gm-Message-State: APjAAAUUPk1ElTOUHCInF6oel2FW86XJfJfEBN6ekZi1S9Z2P+jMuxy2
-	dLq1vAE7zAWQLwrlwjY8MNQ+0A1L
-X-Google-Smtp-Source: APXvYqzPmUff1ydq8IZS0Y5Od7qXKbKWW3TRu7PkU3SoWWoxTymmcqcCaWBpyRdudDcQ6yTmyptYzg==
-X-Received: by 2002:a1c:9d0a:: with SMTP id g10mr826485wme.125.1582841577308; 
-	Thu, 27 Feb 2020 14:12:57 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=MPq+xYSyjj+aEpoDVT8dBk2b7NWdEU+dkdleeo8az38=;
+	b=j3qBP0dVSyNMWRifGy+WuUcEAMrDMZsN7QJNL06SFDtCYYaq5BYCQZ6k2yZyVHm/FJ
+	4i8c/dzhwoVrHRmZpr0JTt8hAJNN2ETE0RU7l8dAKyBSbghmQbEnUCIDTGiJSnRirHJi
+	fbBl3Md6epnc1IrEFOn0d2zWeXGRFQfdao6brTzq/lqSSb7seRUOxUgp9ekfVtv/ITsN
+	GImR0z7sMA1X7qSELrDU76Uy3DUXm8H5mnMNF8FNrVMR9W3XYwH6LzqLaZ8bzPZxqqJn
+	MwK+UhdjZN2SaN2nlHD9dgAULNlm7+W05cgfi5i910ulrnPi56tOY30GJcZRbd2l08YQ
+	RDXw==
+X-Gm-Message-State: APjAAAV+a+9v0aP1tsSIFE1S44QlOUm9ZxVY19Kn6gGqSiWU3pK0Y/tc
+	av5j2cA9zL5oqhdYEDj3ecAVWDdV
+X-Google-Smtp-Source: APXvYqwcSuf6f4ulPAiedVjQirDO7OSa3t3k5zJB7Im+UVSWMQWg3GW+6IcMaXISu4SshQbPdSI91w==
+X-Received: by 2002:a5d:4204:: with SMTP id n4mr956515wrq.123.1582841578119;
+	Thu, 27 Feb 2020 14:12:58 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F102C9262505CD5EB98F253.dip0.t-ipconnect.de.
 	[2003:f0:7f10:2c92:6250:5cd5:eb98:f253])
-	by smtp.gmail.com with ESMTPSA id y8sm8911422wma.10.2020.02.27.14.12.56
+	by smtp.gmail.com with ESMTPSA id y8sm8911422wma.10.2020.02.27.14.12.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 27 Feb 2020 14:12:56 -0800 (PST)
+	Thu, 27 Feb 2020 14:12:57 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Feb 2020 23:12:38 +0100
-Message-Id: <20200227221245.22944-1-schnitzeltony@gmail.com>
+Date: Thu, 27 Feb 2020 23:12:39 +0100
+Message-Id: <20200227221245.22944-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20200227221245.22944-1-schnitzeltony@gmail.com>
+References: <20200227221245.22944-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/8] evolution-data-server: upgrade 3.34.3 -> 3.34.4
+Subject: [PATCH 2/8] file-roller: upgrade 3.32.3 -> 3.32.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,23 +67,27 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../evolution-data-server/evolution-data-server.inc         | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../{file-roller_3.32.3.bb => file-roller_3.32.4.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-gnome/recipes-gnome/file-roller/{file-roller_3.32.3.bb => file-roller_3.32.4.bb} (77%)
 
-diff --git a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-index 1eae3df35..4da3f8259 100644
---- a/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-+++ b/meta-gnome/recipes-gnome/evolution-data-server/evolution-data-server.inc
-@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6e689d19255cf0557f3fe7d7068212 \
+diff --git a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.3.bb b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
+similarity index 77%
+rename from meta-gnome/recipes-gnome/file-roller/file-roller_3.32.3.bb
+rename to meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
+index f6b045786..0e57848c5 100644
+--- a/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.3.bb
++++ b/meta-gnome/recipes-gnome/file-roller/file-roller_3.32.4.bb
+@@ -13,8 +13,8 @@ DEPENDS = " \
  
- inherit gnomebase upstream-version-is-even
+ inherit gnomebase gsettings itstool gnome-help gettext upstream-version-is-even mime-xdg
  
--SRC_URI[archive.md5sum] = "687d6d7242d60a8a3a3322eee6a45dca"
--SRC_URI[archive.sha256sum] = "d2dfac5ca76e05e872fbb06a57cae0dace64818c4dce1e906b0396888270c3a9"
--PV = "3.34.3"
-+SRC_URI[archive.md5sum] = "23293554e9d92c6c0c78b5568b286efd"
-+SRC_URI[archive.sha256sum] = "985c4b4b613c50c999a4ca5e9d52478acbea85e1e99bab3a8b6e57ba7eace8f3"
-+PV = "3.34.4"
+-SRC_URI[archive.md5sum] = "5e098bb254d34f48a9b5761b468f4240"
+-SRC_URI[archive.sha256sum] = "be111fb877dc1eb487ec5d6e2b72ba5defe1ab8033a6a6b9b9044a2a7787e22a"
++SRC_URI[archive.md5sum] = "21982b8d298cb2994a99494399dcb2d5"
++SRC_URI[archive.sha256sum] = "1b3b2cbfcb444e0d150bfd063add9d5181c8ab24f0593e5a8894399297214017"
+ 
+ PACKAGECONFIG[nautilus] = "-Dnautilus-actions=true,-Dnautilus-actions=false,nautilus"
  
 -- 
 2.21.0
