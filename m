@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
-	[209.85.160.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 5A37E605C3
+Received: from mail-qk1-f196.google.com (mail-qk1-f196.google.com
+	[209.85.222.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 34B48612E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 15:04:26 +0000 (UTC)
-Received: by mail-qt1-f193.google.com with SMTP id j23so2451783qtr.11
+	Thu, 27 Feb 2020 15:27:48 +0000 (UTC)
+Received: by mail-qk1-f196.google.com with SMTP id e16so3487235qkl.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 07:04:28 -0800 (PST)
+	Thu, 27 Feb 2020 07:27:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=CmmiabwfnNF/NfuYkylbZHRRMX9hpKa/OF+uafcneGw=;
-	b=bYioQykZViXP+YVkEv4PoCAu2SSC28vkVhBlbkfahNNQsVVrf1K9z6jZkauA1/BruX
-	TuWI2DMvGaCDB8I49b+SKtgRr0vhV5rlvoi57CVM/I9xbqLfCzy3+wphXRrxcwaFt7t4
-	U6QMRUYPqLuCZYHZO2yvi452BHPEYioJMUQFUuGlgKhIj41juikVSjhlLL1GxZnUkNWJ
-	VLmP98ze6AAV3yAStzEOATzr+B5JfzK8JeOmg1cJc0rtQoqgwROMpJrz99EeUBiKuqcV
-	PnrkomVQ4jC0mUa4EAhDBcMl7DB5FrfmKJg17uyWwHTHsbIpf/JRYFnde5KMZPy+WIGW
-	Xmmg==
+	:cc; bh=lYPSG9IDbvABUAKKly19SQ4dtI6URno+hLZY1ZO0wJE=;
+	b=Dk5FR1VbsJ22ivJKdeQV0PHhb2adiHwMGISKc9k+6VeCBMFUyNs8Mv4hKub1NYesOs
+	joRu3Nn57DwkHfR2VZApnMMO+7IWRsMRg0kO3mY/btC77xCQeVEf+nz77KrsUzQvmyK6
+	+grHdpVwqZzd0FciOmQ9dXNCV/+nnEIXUbJ1tV1esZBxe/iMXjrrEpB5/6EMl3rd5a7v
+	3YbiRomUAvWdZfTXrHH9N/wQ5ZPWZi3C+lCavvwdBLIgMo9gTQPvXkvUr26jFXQwR2fh
+	oaGIcZLlo1H+Ee8874yX8jKKT1FkfXHTaa0+SULsq+Ta9Yi73agl3DoWQWuk/zUkQxYi
+	TwHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=CmmiabwfnNF/NfuYkylbZHRRMX9hpKa/OF+uafcneGw=;
-	b=VgNYEWXhK182Dm8ff727Yawtv6gOoienN+gVX1VbZ2uEaxAFjEI+WBiHb/6qAD1emF
-	rdtjIA948kUgSeXClP98g3f8r3g8lWLVCFcMf1GRlEIEs2TYidWAoaF+1oQjkjWTWJG1
-	NMGwGgRcJcM+qLhaK5uncFem2z6uBK1aq8a5mxuo+tqWakXx4W3yKKxPfxYCLsqDFY3n
-	7tOYSG1p9dZxrScTTTxDLa2miLKgJXh9uDWjR+GxyWq8sS8eF9I+GYynHYu7qFkB8bdM
-	aVHhZjTAxYGfQVggFcavYjJy7lrhFo1+tsO79Va3iL6n2ZzwTnXVqTa9B4L1mYhLwgim
-	bATA==
-X-Gm-Message-State: APjAAAUS51XBRvH2ST1QVixX6Vhzq7d5AmAfQbKXUYviuRR5FSRa1sN/
-	soTyqKCVjq3kVrAmzULuGX6dO1rJrvU4qwF6YxFX6p2Y1BI=
-X-Google-Smtp-Source: APXvYqw3ZcqkwA4BjgsClTV9LeixVsEMjEno2uicHpanEWewDDC0VLDJGLERPTP6FIha37b4MYgUF6YPuv76LoR/tFM=
-X-Received: by 2002:ac8:36dd:: with SMTP id b29mr5363834qtc.285.1582815867621; 
-	Thu, 27 Feb 2020 07:04:27 -0800 (PST)
+	bh=lYPSG9IDbvABUAKKly19SQ4dtI6URno+hLZY1ZO0wJE=;
+	b=V9ZBUdiLEfbf+Mv5QmrPdGAZwF+BveLhB3lf6cYkESjVTlGH0IrEzuX6ZlgrzTVmmJ
+	jHEWxZOCf4NbV2+WePx0MRvKc4d1YXkyr8TfGiP0vO+6fK33TGPqWY5McrSAeGHWDYYf
+	KlcmsY3wwFpv29ANSlrG4TYlJN4h9KKxHNYTveyJ2Jq7jsLFvGLhP2+7RFNoimpbEApQ
+	OihIth/sWra7pKObLCFQzCMoHJj8l6kMSMdD2zi5W/1e+qkhmJNkrPQu7kc6gwtjAV6t
+	ITzlPSj8LG+On9RbJiWGDkioNJ69FB31LVEY+oIWRP7PWxbw4aDSQqqOWYoYnJNHm42b
+	1dPg==
+X-Gm-Message-State: APjAAAV9qTrsCUxCJ6VpWuascSroasf2fQ16DT0S4erFfgXdjrsuvbjl
+	fla83riYtRlvZZKjqcRz3skzC6it7RADTThggXs=
+X-Google-Smtp-Source: APXvYqwqUh4Reu2XwRM3Jsv5z3Jg8Xp8IUtIz6751YoGPdRROgo5C3N3TfHZwISpXM8a7B2x/gPqIvXzbQkte7sPGek=
+X-Received: by 2002:a37:e317:: with SMTP id y23mr5871261qki.431.1582817268694; 
+	Thu, 27 Feb 2020 07:27:48 -0800 (PST)
 MIME-Version: 1.0
-References: <1582807398-13955-1-git-send-email-wangmy@cn.fujitsu.com>
-	<1582807398-13955-6-git-send-email-wangmy@cn.fujitsu.com>
-In-Reply-To: <1582807398-13955-6-git-send-email-wangmy@cn.fujitsu.com>
+References: <20200226122622.33171-1-leo.yan@linaro.org>
+In-Reply-To: <20200226122622.33171-1-leo.yan@linaro.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 27 Feb 2020 07:04:01 -0800
-Message-ID: <CAMKF1sq3_BTRy3Jeke+mtOsSae1kZ3qWb5ULJjhvUhd_jXSejg@mail.gmail.com>
-To: Wang Mingyu <wangmy@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCH] flashrom: upgrade 1.1 -> 1.2
+Date: Thu, 27 Feb 2020 07:27:21 -0800
+Message-ID: <CAMKF1sq3DnDjXNyyUs5g3rbQp295gEP3xrYteL3adUOOy3Nkug@mail.gmail.com>
+To: Leo Yan <leo.yan@linaro.org>
+Cc: Daniel Thompson <daniel.thompson@linaro.org>,
+	Loic Poulain <loic.poulain@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v4] luajit: Upgrade to 2.1.0-beta3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,46 +55,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 15:04:27 -0000
+X-List-Received-Date: Thu, 27 Feb 2020 15:27:48 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-fails to build with clang
-https://errors.yoctoproject.org/Errors/Details/392867/
+I am seeing version going backward errors still
 
-On Wed, Feb 26, 2020 at 10:01 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
+luajit-2.0.5+2.1.0-beta3: Package version for package luajit-src went
+backwards which would break package feeds (from
+0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
+[version-going-backwards]
+luajit-2.0.5+2.1.0-beta3: Package version for package luajit-dbg went
+backwards which would break package feeds (from
+0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
+[version-going-backwards]
+luajit-2.0.5+2.1.0-beta3: Package version for package luajit-staticdev
+went backwards which would break package feeds (from
+0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
+[version-going-backwards]
+luajit-2.0.5+2.1.0-beta3: Package version for package luajit-dev went
+backwards which would break package feeds (from
+0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
+[version-going-backwards]
+luajit-2.0.5+2.1.0-beta3: Package version for package luajit-doc went
+backwards which would break package feeds (from
+0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
+[version-going-backwards]
+luajit-2.0.5+2.1.0-beta3: Package version for package luajit-locale
+went backwards which would break package feeds (from
+0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
+[version-going-backwards]
+luajit-2.0.5+2.1.0-beta3: Package version for package luajit went
+backwards which would break package feeds (from
+0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
+[version-going-backwards]
+luajit-2.0.5+2.1.0-beta3: Package version for package luajit-common
+went backwards which would break package feeds (from
+0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
+[version-going-backwards]
+
+On Wed, Feb 26, 2020 at 4:26 AM Leo Yan <leo.yan@linaro.org> wrote:
 >
-> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+> Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
+> misses to support aarch64, the patch upgrades to luajit 2.1.0-beta3.
+>
+> Also updated clang.patch to dismiss patch warning: "Hunk #1 succeeded
+> at 436 with fuzz 1 (offset 123 lines)."
+>
+> Signed-off-by: Leo Yan <leo.yan@linaro.org>
 > ---
->  .../recipes-bsp/flashrom/{flashrom_1.1.bb => flashrom_1.2.bb} | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-oe/recipes-bsp/flashrom/{flashrom_1.1.bb => flashrom_1.2.bb} (77%)
+>  meta-oe/recipes-devtools/luajit/luajit/clang.patch  |  4 ++--
+>  .../luajit/{luajit_2.0.5.bb => luajit_git.bb}       | 13 ++++++-------
+>  2 files changed, 8 insertions(+), 9 deletions(-)
+>  rename meta-oe/recipes-devtools/luajit/{luajit_2.0.5.bb => luajit_git.bb} (90%)
 >
-> diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
-> similarity index 77%
-> rename from meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb
-> rename to meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
-> index 074a1a5f6..17445ac2d 100644
-> --- a/meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb
-> +++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
-> @@ -7,8 +7,8 @@ DEPENDS = "pciutils libusb libusb-compat"
+> diff --git a/meta-oe/recipes-devtools/luajit/luajit/clang.patch b/meta-oe/recipes-devtools/luajit/luajit/clang.patch
+> index c39ef6fd4..807cc4417 100644
+> --- a/meta-oe/recipes-devtools/luajit/luajit/clang.patch
+> +++ b/meta-oe/recipes-devtools/luajit/luajit/clang.patch
+> @@ -8,8 +8,8 @@ Index: LuaJIT-2.0.5/src/lj_arch.h
+>  ===================================================================
+>  --- LuaJIT-2.0.5.orig/src/lj_arch.h
+>  +++ LuaJIT-2.0.5/src/lj_arch.h
+> -@@ -313,7 +313,7 @@
+> - #error "Need at least GCC 4.2 or newer"
+> +@@ -436,7 +436,7 @@
+> + #endif
+>   #endif
+>   #elif !LJ_TARGET_PS3
+>  -#if (__GNUC__ < 4) || ((__GNUC__ == 4) && __GNUC_MINOR__ < 3)
+> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+> similarity index 90%
+> rename from meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+> rename to meta-oe/recipes-devtools/luajit/luajit_git.bb
+> index 93128dda8..2a7243842 100644
+> --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+> +++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
+> @@ -1,14 +1,14 @@
+>  SUMMARY = "Just-In-Time Compiler for Lua"
+>  LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
+> +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d739bb9250a55c124a545b588fd76771"
+>  HOMEPAGE = "http://luajit.org"
 >
->  SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
->             "
-> -SRC_URI[md5sum] = "91bab6c072e38a493bb4eb673e4fe0d6"
-> -SRC_URI[sha256sum] = "aeada9c70c22421217c669356180c0deddd0b60876e63d2224e3260b90c14e19"
-> +SRC_URI[md5sum] = "7f8e4b87087eb12ecee0fcc5445b4956"
-> +SRC_URI[sha256sum] = "e1f8d95881f5a4365dfe58776ce821dfcee0f138f75d0f44f8a3cd032d9ea42b"
+> -PV .= "+git${SRCPV}"
+> -SRCREV = "02b521981a1ab919ff2cd4d9bcaee80baf77dce2"
+> -SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http \
+> +PV = "2.0.5+2.1.0-beta3"
+> +SRCREV = "0ad60ccbc3768fa8e3e726858adf261950edbc22"
+> +SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
+>             file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
+>             file://clang.patch \
+> -"
+> +           "
 >
->  S = "${WORKDIR}/flashrom-v${PV}"
+>  S = "${WORKDIR}/git"
 >
+> @@ -90,8 +90,7 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
+>  "
+>  FILES_luajit-common = "${datadir}/${BPN}-${PV}"
+>
+> -# Aarch64/mips64/ppc/ppc64/riscv64 is not supported in this release
+> -COMPATIBLE_HOST_aarch64 = "null"
+> +# mips64/ppc/ppc64/riscv64 is not supported in this release
+>  COMPATIBLE_HOST_mipsarchn32 = "null"
+>  COMPATIBLE_HOST_mipsarchn64 = "null"
+>  COMPATIBLE_HOST_powerpc = "null"
 > --
 > 2.17.1
 >
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
