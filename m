@@ -1,34 +1,34 @@
 Return-Path: <peter.kjellerstedt@axis.com>
 Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 9721361125
+	by mail.openembedded.org (Postfix) with ESMTP id 8D3FF6116B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 00:46:22 +0000 (UTC)
+	Thu, 27 Feb 2020 00:48:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=axis.com; l=2355; q=dns/txt; s=axis-central1;
-	t=1582764384; x=1614300384;
+	d=axis.com; l=2405; q=dns/txt; s=axis-central1;
+	t=1582764536; x=1614300536;
 	h=from:to:subject:date:message-id:mime-version:
 	content-transfer-encoding;
-	bh=eXRc1GWjvinrAywjCnW88DmmNaO/FUvsjY4H/FX3w94=;
-	b=TLil+wOmCmQv1RQy2EV55Cb11T5PJGIjBwgSfydGr4Vtdsl0yHbEoWOQ
-	odPZP0HUKSwYnnxkIzpd2nP8E94bs02lhUNjU01kFpzJ1wZPRis7+/jGI
-	vTAcSwtChuwTKvLAyJYB+PcsGfkeNiDbfHspI9FwzOkDWDnP2uEe74tcR
-	EOFOK0Q5bz58JI5PYoI0bN0IUKfB6Evn9030fB1SXcdyNWpKaBNABwfoa
-	33GzVZHwhLgdgDyfs3MGonxtPaMRTnoex14/2n4ctCDlXZo4yirPjaSW2
-	qnvV2uCI8NICgV027yNCtRekxYg6SNfK2qeZdQe73wj/rK6KKbUt0V+Zq A==;
-IronPort-SDR: H+G0gK4QX4IH+Q8rA89EEw1N3bUleNb1c6HgvjH9FfTwMKTVpq1rMD5KmHE8cbUirSPl8wOxKE
-	F3AdTptXQwGpIpXJ7W/YqbMLCpREA1saX4ULAOV4zR+yeNc2VhEORVcodMiMBGWGM0lq3D7/sc
-	herxWw4S/VnGE86lIeSPCxUsXdBmkkjfOP/d+1CqGyOcIRZQFNU1gpVYayvQX3ezB+2DTvof3r
-	2KZyrS/hhdAl5fts/4b6D2dbo4L8rD5x4bwz/XoCSFKsLhNzOa9GKYSaUZzg5duUfcxfpo07I+
-	/R4=
+	bh=m5RO2KoKYyDvviao3E1XMYHfTXicbSDdvYbzKvrXjlQ=;
+	b=ROUf18pZU0v+EIoS2RI3624hkvfbyS89LIeRmN9KN+d2sOGqCfwCjGVX
+	ZXxD5savEOjoywBBXWhvbJoLSPb8MF5WsmFZkeduOxZspelmiNZ5oDh9h
+	AfAw+VdFr9Z6RvguAE3YuuwFh1pwAVxp6u/vH7/f203Ljev7ayIAyYE6k
+	JSO1QuY1wai3iDw52gwSX2z6N6KVfX/q5M/Ze9hHpBcOIp7GmHPTCZF+r
+	Soevl64wSZeF1zZF/+gyFK5ZpSZ5wWVbUoB07WeWQ+3HD33IF1oknysd/
+	nhgU4x5rRtEzH5tK5ZqEewpQ6q6Z/HjVyZPqx91bJfXLDuBHiS/bTEKWl A==;
+IronPort-SDR: 1lQfWBWL9F9NFEQG4W3feg3iqFfxKIzyjBwILVLuIpy5/h7T00/UTLdEwDuuU0Yj4HdW+bbSIj
+	1Ocbp2demlicDamL+yegTjmzsU7+bTOrBvmdTICKVsZN3tzNdjNrZPvHby0I4sjoiGn6K4q+fX
+	+VLDB7fpRecB3mOTbHtU+muWryyWLZDkWdPUioyE2GtEnlr8KeeMw6TUEf2dpLHOzj6EDPPnPE
+	/OULtAbHORGA4AVCaz/63d0gr78cKpJpXnJ+xlvpasMgCnhHOqKoBe8jRtpLiyUerXRQOaxOVK
+	CZI=
 X-IronPort-AV: E=Sophos;i="5.70,490,1574118000"; 
-   d="scan'208";a="5868483"
+   d="scan'208";a="5868549"
 From: Peter Kjellerstedt <pkj@axis.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Feb 2020 01:46:19 +0100
-Message-ID: <20200227004619.16908-1-pkj@axis.com>
+Date: Thu, 27 Feb 2020 01:48:50 +0100
+Message-ID: <20200227004850.23746-1-pkj@axis.com>
 X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-Subject: [meta-oe][zeus][PATCH] lvm2, libdevmapper: Do not patch configure
+Subject: [meta-oe][zeus][PATCHv2] lvm2, libdevmapper: Do not patch configure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,11 +41,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 00:46:23 -0000
+X-List-Received-Date: Thu, 27 Feb 2020 00:48:55 -0000
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Since the do_configure task regenerates the configure scripte, there is
+Since the do_configure task regenerates the configure script, there is
 no need to patch it. Actually doing so will cause problems, which can be
 seen by doing:
 
@@ -55,6 +55,9 @@ seen by doing:
 Reported-by: Andrey Zhizhikin <andrey.z@gmail.com>
 Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
+
+PATCHv2: Corrcted a typo (scripte -> script).
+
  ...gure-Fix-setting-of-CLDFLAGS-default.patch | 34 +------------------
  1 file changed, 1 insertion(+), 33 deletions(-)
 
