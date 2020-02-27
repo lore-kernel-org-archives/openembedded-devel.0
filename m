@@ -1,35 +1,52 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 2C0856121C
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
+	[209.85.221.53])
+	by mail.openembedded.org (Postfix) with ESMTP id F242B60FEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 06:02:42 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,490,1574092800"; d="scan'208";a="84484447"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Feb 2020 14:02:45 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 6369C50A997C
+	Thu, 27 Feb 2020 06:51:19 +0000 (UTC)
+Received: by mail-wr1-f53.google.com with SMTP id c13so1866429wrq.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 13:52:55 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Thu, 27 Feb 2020 14:02:38 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 27 Feb 2020 14:02:47 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Feb 2020 04:43:18 -0800
-Message-ID: <1582807398-13955-8-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1582807398-13955-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1582807398-13955-1-git-send-email-wangmy@cn.fujitsu.com>
+	Wed, 26 Feb 2020 22:51:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=BoY3X7AVHiKgxX7inlAnOiotYSGQ655adAcLGx9jt70=;
+	b=FEq0fzhxVjuS2yG3YFXAVf+yLT8WoXn4Kx/4WQqTJI6Ufz4xppuA6uQDMxF7K44TIb
+	GVd9epgGaJKBJcnllgFWeIb0HhEOneBw2Rf71hBqSuA7FSQy3xpQ1IB+aSwnVSWESDA9
+	MfK7qcYfZrkLMBMtOBzNuql2VlMcsKl5KwuCk0YhPJhNKbqBLWNmhe3qWEK1xY/7WuCx
+	Wy+rVXGF+D1zkhY+4oYCMAU8wKhcfCdZtbpXaxyKt4Ub4fRbVSlCdigXwOWhn9vQ2arw
+	nR0jOSh1TSRNinBXv2zD7I0WqZx+qpV/PR2/RxrCeLG3kfhvNfzCEF/XMaRa3y3/BjY6
+	KpQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=BoY3X7AVHiKgxX7inlAnOiotYSGQ655adAcLGx9jt70=;
+	b=Ia3NHzmVrMi0yr9GKdNzXayAXW4ZWJOAwHT6dJ96CXe95dh5G4GdGXuxbqRTKWa8x4
+	qKRcXwvBDZmvlBI01qCDI2cGxhZ552yxtRA+ZfYJL8OsqCcEl1/uTVjp9ebtHXou+jfK
+	W56p3G7q5rJO2i1OOpWsjf8U/vtgw1jcWPc8iIdHFG1FTgtkHJvxPPwrqxtJa/08ZPr3
+	rxRjG2O/NW7M8GFCxVGnEY92PmZ3FAab9+G3Dx8MWS5x9SXc6sc5mRqjE5jLSt8aVqJD
+	fYy2KyQn8GOq9ihDSCWiyi8fiwJgHIdPRTbqYWhy/QX1BO6zX/UgzsxQnHhPBsqzvtGE
+	UN1w==
+X-Gm-Message-State: APjAAAUZcU6X2fht1oNxAskx/WHLmyHau0aQvGoWsgj6dP2+/lKFgOaL
+	g5dBanUCnw85rpsnNGSXE2/YsC6Z
+X-Google-Smtp-Source: APXvYqz1DqzpieQx2xdb+LSI+88utfRs5P9Utt6+Hnc6eWO/cJM/zZYuXbEJsITf9XEEtqPnJZlCKw==
+X-Received: by 2002:adf:aa0e:: with SMTP id p14mr3050769wrd.399.1582786280354; 
+	Wed, 26 Feb 2020 22:51:20 -0800 (PST)
+Received: from superandy.speedport.ip
+	(p200300F07F102C9262505CD5EB98F253.dip0.t-ipconnect.de.
+	[2003:f0:7f10:2c92:6250:5cd5:eb98:f253])
+	by smtp.gmail.com with ESMTPSA id u8sm6470066wmm.15.2020.02.26.22.51.19
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 26 Feb 2020 22:51:19 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Feb 2020 07:51:03 +0100
+Message-Id: <20200227065105.29865-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 6369C50A997C.A495C
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] libmbim: upgrade 1.20.4 -> 1.22.0
+Subject: [PATCH 1/3] xfce4-weather-plugin: upgrade 0.10.0 -> 0.10.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,122 +59,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 06:02:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Feb 2020 06:51:21 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-clang.patch
-Revemod since the file of this patch is non-existent.
+Release notes for 0.10.1
+========================
+- Switch to 'locationforecast' product and use a more recent API version
+(bug #16268)
+- Fix invalid scrollbar index to add a label (bug #16023)
+- Update URLs from goodies.x.o to docs.x.o (bug #16182)
+- Fix build with panel 4.15
+- Make build output less verbose
+- Use standard icon names (bug #16059)
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Translation Updates:
+Albanian, Croatian, Finnish, Galician, Greek, Portuguese, Slovak,
+Slovenian
+
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../libmbim/libmbim/clang.patch               | 73 -------------------
- .../{libmbim_1.20.4.bb => libmbim_1.22.0.bb}  |  9 +--
- 2 files changed, 4 insertions(+), 78 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/libmbim/libmbim/clang.patch
- rename meta-oe/recipes-connectivity/libmbim/{libmbim_1.20.4.bb => libmbim_1.22.0.bb} (76%)
+ ...eather-plugin_0.10.0.bb => xfce4-weather-plugin_0.10.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.10.0.bb => xfce4-weather-plugin_0.10.1.bb} (72%)
 
-diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim/clang.patch b/meta-oe/recipes-connectivity/libmbim/libmbim/clang.patch
-deleted file mode 100644
-index d88578418..000000000
---- a/meta-oe/recipes-connectivity/libmbim/libmbim/clang.patch
-+++ /dev/null
-@@ -1,73 +0,0 @@
--Check for clang compiler since we need to disable
--unused-function warning for clang, at same time
--pass werror when checking for compiler options if
--werror is enabled so spurious options do not get
--enabled. Only the ones that are supported by given
--compiler are accepted.
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Upstream-Status: Pending
--
--Index: libmbim-1.14.0/m4/compiler-warnings.m4
--===================================================================
----- libmbim-1.14.0.orig/m4/compiler-warnings.m4
--+++ libmbim-1.14.0/m4/compiler-warnings.m4
--@@ -2,10 +2,30 @@ AC_DEFUN([LIBMBIM_COMPILER_WARNINGS],
-- [AC_ARG_ENABLE(more-warnings,
-- 	AS_HELP_STRING([--enable-more-warnings], [Possible values: no/yes/error]),
-- 	set_more_warnings="$enableval",set_more_warnings=error)
--+
--+# Clang throws a lot of warnings when it does not understand a flag. Disable
--+# this warning for now so other warnings are visible.
--+AC_MSG_CHECKING([if compiling with clang])
--+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([], [[
--+#ifndef __clang__
--+	not clang
--+#endif
--+	]])],
--+	[CLANG=yes],
--+	[CLANG=no]
--+)
--+AC_MSG_RESULT([$CLANG])
--+AS_IF([test "x$CLANG" = "xyes"], [CLANG_FLAGS=-Wno-error=unused-function])
--+CFLAGS="$CFLAGS $CLANG_FLAGS"
--+LDFLAGS="$LDFLAGS $CLANG_FLAGS"
--+
-- AC_MSG_CHECKING(for more warnings)
-- if test "$GCC" = "yes" -a "$set_more_warnings" != "no"; then
-- 	AC_MSG_RESULT(yes)
-- 	CFLAGS="-Wall -std=gnu89 $CFLAGS"
--+	if test "x$set_more_warnings" = xerror; then
--+		WERROR="-Werror"
--+	fi
-- 
-- 	for option in -Wmissing-declarations -Wmissing-prototypes \
-- 		      -Wdeclaration-after-statement -Wstrict-prototypes \
--@@ -17,22 +37,23 @@ if test "$GCC" = "yes" -a "$set_more_war
-- 		      -Wmissing-include-dirs -Waggregate-return \
-- 		      -Wformat-security -Wtype-limits; do
-- 		SAVE_CFLAGS="$CFLAGS"
---		CFLAGS="$CFLAGS $option"
--+		CFLAGS="$CFLAGS $option $WERROR"
-- 		AC_MSG_CHECKING([whether gcc understands $option])
-- 		AC_TRY_COMPILE([], [],
-- 			has_option=yes,
-- 			has_option=no,)
-- 		if test $has_option = no; then
-- 			CFLAGS="$SAVE_CFLAGS"
--+		else
--+			CFLAGS="$SAVE_CFLAGS $option"
-- 		fi
-- 		AC_MSG_RESULT($has_option)
-- 		unset has_option
-- 		unset SAVE_CFLAGS
-- 	done
--+	CFLAGS="$CFLAGS $WERROR"
-- 	unset option
---	if test "x$set_more_warnings" = xerror; then
---		CFLAGS="$CFLAGS -Werror"
---	fi
--+	unset WERROR
-- else
-- 	AC_MSG_RESULT(no)
-- fi
-diff --git a/meta-oe/recipes-connectivity/libmbim/libmbim_1.20.4.bb b/meta-oe/recipes-connectivity/libmbim/libmbim_1.22.0.bb
-similarity index 76%
-rename from meta-oe/recipes-connectivity/libmbim/libmbim_1.20.4.bb
-rename to meta-oe/recipes-connectivity/libmbim/libmbim_1.22.0.bb
-index a3ef80c1b..61e314f1f 100644
---- a/meta-oe/recipes-connectivity/libmbim/libmbim_1.20.4.bb
-+++ b/meta-oe/recipes-connectivity/libmbim/libmbim_1.22.0.bb
-@@ -11,8 +11,7 @@ DEPENDS = "glib-2.0 glib-2.0-native libgudev"
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.0.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.1.bb
+similarity index 72%
+rename from meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.0.bb
+rename to meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.1.bb
+index 96c2048be..ad9b6e9e7 100644
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.0.bb
++++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.1.bb
+@@ -7,7 +7,7 @@ inherit xfce-panel-plugin
  
- inherit autotools pkgconfig bash-completion
+ DEPENDS += "libsoup-2.4 dbus-glib upower"
  
--SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
--           file://clang.patch \
--"
--SRC_URI[md5sum] = "d38d637e33cde8a91484f53a9f6c4d49"
--SRC_URI[sha256sum] = "ac2708a409b09f1f6f1786a8a9e39c36619aa8d6f285ea943daa7a48ea36d3e8"
-+SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz"
-+
-+SRC_URI[md5sum] = "87060e8957013177e4140edc6f64f5bd"
-+SRC_URI[sha256sum] = "5c0778eb1cd12c3604523134e55183f5147b0cae71150e875b583768f7aa1f38"
+-SRC_URI[md5sum] = "7ff4ab636f93addba0817bf6436d2964"
+-SRC_URI[sha256sum] = "4423a0c27830fd1f08e063aaefbf70f31d89235d75549ca841d677ab2e409572"
++SRC_URI[md5sum] = "203ad16e74d4823f6fb6e9a18bb7df55"
++SRC_URI[sha256sum] = "afb2af5f3effc2ea6181636ed0e82e6dafd556ec1b8478100802f85a5d167a89"
+ 
+ FILES_${PN} += "${datadir}/xfce4/weather"
 -- 
-2.17.1
-
-
+2.21.0
 
 
