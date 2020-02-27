@@ -1,57 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F16661687
+Return-Path: <ricardo@foundries.io>
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+	[209.85.210.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 9A65B61878
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 17:08:47 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id q4so44372pls.4
+	Thu, 27 Feb 2020 17:53:24 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id 66so3740199otd.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 09:08:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-language:content-transfer-encoding;
-	bh=kEP0ZzAPcbfvjlqie9GbewpTYNdwbdGjK50O7qmdsfg=;
-	b=jIf4Tf/MVV8D3xE8+YOBOZL9lgGjQxg2bQ3qjwtzFH/sz42Yezg3YgdmbsPBMSaHin
-	pEYCRkHtaRVoBaPMBXA6p/q7eFopmcECcxV2sFnNOepp2lvjVgPim7/U3Q4OO0sEyZlX
-	IBuj8cZKj11HsiD9XhvEGtoHjq5QQnfEMGzWo2pcBwm03Ar+11wW8J5q5mmzDgvmj8ox
-	HEcMUkK5dqnHKv7bNjvcVGFg93ueU2IAEu8AtGn7usMoP8lbsxmuMNher4oFYnGNlW32
-	JfRlxXRoS7h3lZ9HbAD+XwlIjZD2OU62J9VbY84uMlQIKH4w1jUiRNoq50HiEQmTn3Tz
-	ZZWw==
+	Thu, 27 Feb 2020 09:53:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=foundries-io.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=xwOruZibVj+6qRtLfEumG/9hXR249URM9SH+xXkDaV0=;
+	b=0T5IbLAa8cR8xmdWrLt66btems6rwVgJ5P9RIAFgVuSIq3l09NzLLEbO2tnzD7DAPe
+	IK9ECGIR8yiqTNEsuCAjubI/OVRZAd6Gjbk+S3AHvhxHfdiDqhBRKJDurSzPuKHsnnMu
+	H2ZbJs0QpQ8aQJ1dv7teeARd7Qnv0J7n+RHctYWMnsXrFUoaUCQmjEkLRyBG3/8QfvaK
+	19K4nYj/Yvtbin+noAo/ugvJ4AAa49vaJGRaj+iJF+BHlEBvzOb3ydDQbfj0BrgiII4Q
+	FFa4XIXyCfwCYqmhIJjewz19NQXR1XQF6Eu4Ofvj4gIPeSNxaKhH+Ln55iXu1E39SEh/
+	7rRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=kEP0ZzAPcbfvjlqie9GbewpTYNdwbdGjK50O7qmdsfg=;
-	b=Yn2Q63WZJBj2ydolkXO15hFQx4+7D0THbzLhX+QdsRou5CvsSCV63QEkpL7zqvyg8W
-	lgvooZoaA0nYCpV1cV/sLShIHWJVzDpffXsEDew8vie1NdqP5dOSuP9EvCXf1ZJje5Jm
-	0mHF200GtbED/Nkfw6xHWr6LxTBDv6GfFnrI0rdi4GwX4/IlJC06jDc2fQt26T0p5EIO
-	2lTpVHKkVzsAUyd53NKTNcZzOYosHNyLbeGlRz02yLp+xqIQ4vam27MnkgnKt+cKvwnY
-	nycpwXaGXqRbd/GnL3YjgotSaUNpRUjlEGGU6YBDkwMNLHgfaFIbpRGALmIDrEy07fF1
-	/Ocw==
-X-Gm-Message-State: APjAAAVv0cK6UKNS9nXxmkzDppxGuHXpsvLoKa3sqytWaAYrN8s5mVcG
-	0OtzBW6qtKmPwum7UXfbfyhOHzbGL4U=
-X-Google-Smtp-Source: APXvYqzLO1x6izd+RISvz3+oC+2ncYiZemLrtnqz2O8fsFKaADLNpqJmvrA7tFjXj2TPypio6w0Qqw==
-X-Received: by 2002:a17:90b:f0f:: with SMTP id
-	br15mr714909pjb.138.1582823328187; 
-	Thu, 27 Feb 2020 09:08:48 -0800 (PST)
-Received: from ?IPv6:2601:646:9200:4e0:19c7:2796:79bc:80ea?
-	([2601:646:9200:4e0:19c7:2796:79bc:80ea])
-	by smtp.gmail.com with ESMTPSA id
-	a10sm7116403pgk.71.2020.02.27.09.08.47
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Thu, 27 Feb 2020 09:08:47 -0800 (PST)
-To: =?UTF-8?Q?Andr=c3=a9_Draszik?= <git@andred.net>,
-	openembedded-devel@lists.openembedded.org
-References: <20200227164143.24022-1-git@andred.net>
-From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <903a8d79-9298-5f7e-db68-d3e15c62121e@gmail.com>
-Date: Thu, 27 Feb 2020 09:08:46 -0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
-	Gecko/20100101 Thunderbird/68.5.0
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=xwOruZibVj+6qRtLfEumG/9hXR249URM9SH+xXkDaV0=;
+	b=jP6GQXprBTaengMpX+YNaSwCJv6rpGY5gw53wHGGExtuVedHJR682p8whzX9Lh05Dw
+	ET1s/Wzdkr8EGIQKO2iWkBZA1x4bGA7YhEF641nUxLD0XJ9joVN4PINZUu019CEqGsf2
+	EKYAYOarBWIru9O60CK1/SiXWz27GEG7pbOJVBDnakWDpnQMElQ1qd5AUcF2Zu69qL3m
+	It7evMpgKQWK2yU9AsMCgaIN7rHkbupppB9+PzVvxJKiFFRzNuWpugVySKjydY/yXIaE
+	TvYGh/uCN5gK8j19rpXOKHv44TwIrBBqQ9P1vUSnLXlqWd/MGe78jrQ8F34rlNxap2AO
+	F77w==
+X-Gm-Message-State: APjAAAXwiJ8JHdwYMo8PZUByuC4kNTVUDvNedHGJ0mMzQziyhPYbIhh8
+	cAkTtbw128lqqNv4HSrkTnbMn89G3hMx0IczjUro
+X-Google-Smtp-Source: APXvYqxS+112FuclPZEP6Y/NinMZqWMVBR0VGv4sTZAtJ32iU4fO+Ocuzu+rDaZWFmro7AJIx9Ij+tUEYLNm/dFUsdA=
+X-Received: by 2002:a9d:6647:: with SMTP id q7mr73214otm.35.1582826005525;
+	Thu, 27 Feb 2020 09:53:25 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20200227164143.24022-1-git@andred.net>
-Subject: Re: [meta-multimedia][PATCH] meta-multimedia: s|${COREBASE}/meta/files/common-licenses|${COMMON_LICENSE_DIR}
+References: <1581723823-21171-1-git-send-email-wangmy@cn.fujitsu.com>
+	<1581723823-21171-5-git-send-email-wangmy@cn.fujitsu.com>
+In-Reply-To: <1581723823-21171-5-git-send-email-wangmy@cn.fujitsu.com>
+From: Ricardo Salveti <ricardo@foundries.io>
+Date: Thu, 27 Feb 2020 14:52:49 -0300
+Message-ID: <CAAaKDhE__cs1WdFWSN7_JRDfX_TzyxUr0eQpYWNTRSxvmdoZ7w@mail.gmail.com>
+To: Wang Mingyu <wangmy@cn.fujitsu.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] libp11: upgrade 0.4.10 -> 11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,75 +55,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 17:08:48 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 27 Feb 2020 17:53:25 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi André
+Hi,
 
-Thanks for doing this cleanup, but perhaps subject could be more simple 
-and readable and this detail of sed operation could be in details.
-
-On 2/27/20 8:41 AM, André Draszik wrote:
-> Signed-off-by: André Draszik <git@andred.net>
+On Fri, Feb 14, 2020 at 1:12 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
+>
+> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 > ---
->   .../recipes-multimedia/sample-content/bigbuckbunny-1080p.bb     | 2 +-
->   .../recipes-multimedia/sample-content/bigbuckbunny-480p.bb      | 2 +-
->   .../recipes-multimedia/sample-content/bigbuckbunny-720p.bb      | 2 +-
->   .../recipes-multimedia/sample-content/tearsofsteel-1080p.bb     | 2 +-
->   4 files changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
-> index cee386c2a..70eb6e4be 100644
-> --- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
-> +++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
-> @@ -1,7 +1,7 @@
->   SUMMARY = "Big Buck Bunny movie - 1080P"
->   LICENSE = "CC-BY-3.0"
->   # http://www.bigbuckbunny.org/index.php/about/
-> -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
-> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
->   
->   SRC_URI = "http://themazzone.com/big_buck_bunny_1080p_surround.avi"
->   SRC_URI[md5sum] = "223991c8b33564eb77988a4c13c1c76a"
-> diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
-> index d395b9206..df2368996 100644
-> --- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
-> +++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
-> @@ -1,7 +1,7 @@
->   SUMMARY = "Big Buck Bunny movie - 480P"
->   LICENSE = "CC-BY-3.0"
->   # http://www.bigbuckbunny.org/index.php/about/
-> -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
-> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
->   
->   SRC_URI = "https://archive.org/download/BigBuckBunny/big_buck_bunny_480p_surround-fix.avi"
->   SRC_URI[md5sum] = "ed7ed01e9aefba8ddd77c13332cec120"
-> diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
-> index 20d562749..cb8ece0cb 100644
-> --- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
-> +++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
-> @@ -1,7 +1,7 @@
->   SUMMARY = "Big Buck Bunny movie - 720P"
->   LICENSE = "CC-BY-3.0"
->   # http://www.bigbuckbunny.org/index.php/about/
-> -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
-> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
->   
->   SRC_URI = "https://archive.org/download/BigBuckBunny/big_buck_bunny_720p_surround.avi"
->   SRC_URI[md5sum] = "0da8fe124595f5b206d64cb1400bbefc"
-> diff --git a/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
-> index 0582a4856..04cbd2e34 100644
-> --- a/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
-> +++ b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
-> @@ -1,6 +1,6 @@
->   SUMMARY = "Tears of Steel movie - 1080P"
->   LICENSE = "CC-BY-3.0"
-> -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
-> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
->   
->   SRC_URI = "http://ftp.nluug.nl/pub/graphics/blender/demo/movies/ToS/ToS-4k-1920.mov"
->   SRC_URI[md5sum] = "e3fee55b1779c553e37b1d3988e6fad6"
-> 
+>  .../recipes-support/libp11/{libp11_0.4.10.bb => libp11_11.bb}   | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-support/libp11/{libp11_0.4.10.bb => libp11_11.bb} (93%)
+>
+> diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb b/meta-oe/recipes-support/libp11/libp11_11.bb
+> similarity index 93%
+> rename from meta-oe/recipes-support/libp11/libp11_0.4.10.bb
+> rename to meta-oe/recipes-support/libp11/libp11_11.bb
+> index 655db4907..5a0951df2 100644
+> --- a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
+> +++ b/meta-oe/recipes-support/libp11/libp11_11.bb
+> @@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
+>  DEPENDS = "libtool openssl"
+>
+>  SRC_URI = "git://github.com/OpenSC/libp11.git"
+> -SRCREV = "973d31f3f58d5549ddd8b1f822ce8f72186f9d68"
+> +SRCREV = "e1210903291b1de9eabcad26e740a4b2fbcca692"
+
+Is this change really correct? The latest libp11 upstream release is
+0.4.10, as you can see at https://github.com/OpenSC/libp11/releases.
+The next one seems that will be 0.4.11, so now sure how it was moved
+to 11 directly.
+
+Also, the SRCREV seems incorrect, as it is pointing out to the 0.4.9
+release (https://github.com/OpenSC/libp11/commit/e1210903291b1de9eabcad26e740a4b2fbcca6920).
+
+In the end this change is increasing the PV but moving SRCREV to an
+even older release.
+
+Thanks,
+-- 
+Ricardo Salveti
 
