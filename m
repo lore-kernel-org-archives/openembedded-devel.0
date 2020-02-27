@@ -1,54 +1,54 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com
-	[209.85.221.45])
-	by mail.openembedded.org (Postfix) with ESMTP id BD81061892
+Return-Path: <jpuhlman@gmail.com>
+Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
+	[209.85.210.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 83ED36188A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 22:13:02 +0000 (UTC)
-Received: by mail-wr1-f45.google.com with SMTP id c13so670411wrq.10
+	Thu, 27 Feb 2020 22:17:56 +0000 (UTC)
+Received: by mail-ot1-f67.google.com with SMTP id j16so780791otl.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 14:13:04 -0800 (PST)
+	Thu, 27 Feb 2020 14:17:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	h=sender:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=gadv3pybqunJPEGrF9fKpoEGp1rHJaxtih04W1MlgxY=;
-	b=FQRecraUH/fKS5gKvK13JmDlQPsxHxxYqBEbj7f65qt3WdpnJO4GY/fKSdah1yj7tf
-	7Jwy/HXYXQo2eB7SHIUuuHcZRKuQ0+8fcX4Sd51dt5/+0qFkPQCl2efmaq/OmXUNxN2U
-	y6RdMCDkS4Twk1z+ZF0CP8jhBufeZhmVxP63WxrOzBVBUMOdCo7pP11ZIbT4Gv9oBv6d
-	Uv0ea23qfjxzl9baUICvP1Bl2rumeH/99dWC45K4m0wNe66Di4/tAnB+EMhhiIX+glJH
-	NrLPUR9uNKDwMiH8abA0RBMydX6Xw8ZqLQW2JLRexaoOEFOx+I+MI+jDVL/vEFSWyvjN
-	8++Q==
+	bh=ryb6/J6929jDFpSmY7uGp2DK1xAHdZ9ta0nF18meysA=;
+	b=pY7kV4A4pdokgUsFtvYqMKiM97YifCu623X0H8Iln3LTNx7Gypvf5ebhPcTBBAtHdA
+	YoPwR0SSoxmWM/nBC5LlvaHxHAgDRayN7zWimXHpcPUJcZh+wT/Mxz+ZJu573uTa0HNA
+	TvobDOq/BlJfy9xxbLJ/6wu988u6bCCCPdAA8BqR0QlDf3hVZVb1f9dVTJYssAqqfyuK
+	kvr7IbMp9VqG3isKziVQECtKfeEgLwlnQn807E29yuEoQJqk1fv9p8IJLnfwPE8vt4sR
+	D1l+YeY988fg/n4gvUDW2hSS/cVL6XpKUW8cjbVPnP415x+cwLdMC5/h6E84epSbpPaB
+	/xoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=gadv3pybqunJPEGrF9fKpoEGp1rHJaxtih04W1MlgxY=;
-	b=KpuTaUcS8EgahpmfdRYzxj1z5z8dhLO1q78y/mZdip0gAyLVH+o23ozS05xTfq0GFV
-	9xtlbfpLOVDTDiJPVUTuaLbzCx3gbWcO2qiI2MtPbo6RffXBmjFVshMwOFV2fp0bCdmL
-	dw91tHZP66yJIvBO79O4vrjAox4raYQFTy6WfjH1E+aGn4EPjwRlUjsTEhhUYA5GNRjo
-	NI5hdNOj8gszNm/xUZn/6kR5rMBS2LAtGc7jhn4/DRnS84OPUunCtyJ/K1TfuZWsBv2k
-	TibMlrnYOTljjtCO9uN15Sv00MRrldYapyT6aGgW29Nx034gEAotaz02OeZ0hVn7p0ly
-	AfWA==
-X-Gm-Message-State: APjAAAUiNXbcYTacZCs2o8b3sszXIm87lnbJYMvm6YbgLFFHcD6uVwe1
-	Ffv0XIP9u/uDLGxprZW1jAbUWjSH
-X-Google-Smtp-Source: APXvYqz1vXlkTCujTvP9ZN+jA5v5A2ti6aniHaebBCsKMM+bLc1JX59qVBeRpZs8AVJlpePhQlB6cA==
-X-Received: by 2002:a5d:5706:: with SMTP id a6mr967553wrv.318.1582841583272;
-	Thu, 27 Feb 2020 14:13:03 -0800 (PST)
-Received: from superandy.speedport.ip
-	(p200300F07F102C9262505CD5EB98F253.dip0.t-ipconnect.de.
-	[2003:f0:7f10:2c92:6250:5cd5:eb98:f253])
-	by smtp.gmail.com with ESMTPSA id y8sm8911422wma.10.2020.02.27.14.13.02
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:mime-version:content-transfer-encoding;
+	bh=ryb6/J6929jDFpSmY7uGp2DK1xAHdZ9ta0nF18meysA=;
+	b=KJgLo4fsmtNfY7OYNQttvgYKS9wAKa+23OG2jL6ptL+7facHuhRG+HqgkAGebB+rSq
+	M7WpSYPftnnwgbAHqIEX9n0ttO83z21Eq/fH4LUh5OeKKhPFL8y+CwTIvEVFfkxSp9Bn
+	NfmHNdRPu7nBA5/hemSFv8TVL4fFFfbL3b4V/WXhi2LJ0iomcDzte8g68aw2M1HZ5wye
+	mu1pQwGS1s3U/02PkGtDfLx95T//ZyQO9Z5SZT120e9ySgHthqTCjqXjCDykJeQ5QZ0e
+	03sTndnzePAbUbC8n46WDJ+wzSTMn9VFYX7nSjysw+OBTdHRnBFE0Okpqp3t3PMa9f93
+	rH9Q==
+X-Gm-Message-State: APjAAAUFDfq4t8ZONm+eoS+FNcI81OMe9C8anCaTixDsE9NwHUPrjOl8
+	3oT2B2QfYMBOqJCKbmvHDt2Ge5AP
+X-Google-Smtp-Source: APXvYqyH1GK5XR7/3L7Om4GbrXOyPoprxcVpBog9I5hfT5HlEEI8gMkXiq0rMIQ7/6Kz0ZVaJODnEA==
+X-Received: by 2002:a9d:7590:: with SMTP id s16mr787830otk.89.1582841877217;
+	Thu, 27 Feb 2020 14:17:57 -0800 (PST)
+Received: from workhorse.localdomain
+	([2600:1700:4c90:60a0:56be:f7ff:fe12:d0bd])
+	by smtp.gmail.com with ESMTPSA id
+	t22sm2434186otq.18.2020.02.27.14.17.56
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 27 Feb 2020 14:13:02 -0800 (PST)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+	Thu, 27 Feb 2020 14:17:56 -0800 (PST)
+Sender: Jeremy Puhlman <jpuhlman@gmail.com>
+Received: by workhorse.localdomain (Postfix, from userid 1000)
+	id C17B22A05A0; Thu, 27 Feb 2020 14:17:55 -0800 (PST)
+From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Feb 2020 23:12:45 +0100
-Message-Id: <20200227221245.22944-8-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20200227221245.22944-1-schnitzeltony@gmail.com>
-References: <20200227221245.22944-1-schnitzeltony@gmail.com>
+Date: Thu, 27 Feb 2020 14:17:48 -0800
+Message-Id: <20200227221748.8856-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Subject: [PATCH 8/8] gmime: upgrade 3.2.5 -> 3.2.6
+Subject: [meta-networking][PATCH] netkit-ftp: clean in configure step broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,35 +61,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 22:13:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 27 Feb 2020 22:17:56 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- .../recipes-gnome/gmime/{gmime_3.2.5.bb => gmime_3.2.6.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-gnome/gmime/{gmime_3.2.5.bb => gmime_3.2.6.bb} (72%)
+From: Jeremy Puhlman <jpuhlman@mvista.com>
 
-diff --git a/meta-oe/recipes-gnome/gmime/gmime_3.2.5.bb b/meta-oe/recipes-gnome/gmime/gmime_3.2.6.bb
-similarity index 72%
-rename from meta-oe/recipes-gnome/gmime/gmime_3.2.5.bb
-rename to meta-oe/recipes-gnome/gmime/gmime_3.2.6.bb
-index 568083bf3..9d1bb7d04 100644
---- a/meta-oe/recipes-gnome/gmime/gmime_3.2.5.bb
-+++ b/meta-oe/recipes-gnome/gmime/gmime_3.2.6.bb
-@@ -9,8 +9,8 @@ inherit gnomebase gobject-introspection
- SRC_URI += "file://iconv-detect.h \
-             file://nodolt.patch"
+| DEBUG: Executing shell function autotools_preconfigure
+| NOTE: make clean
+| (cd  ftp && make clean)
+| make[1]: Entering directory '/project/tmp/work/i586-oe-linux/netkit-ftp/0.17-r0/netkit-ftp-0.17/ftp'
+| Makefile:3: ../MCONFIG: No such file or directory
+| make[1]: *** No rule to make target '../MCONFIG'.  Stop.
+
+Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
+---
+ meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb b/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
+index 65c20c072..cf306ec82 100644
+--- a/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-ftp/netkit-ftp_0.17.bb
+@@ -18,6 +18,8 @@ SRC_URI[patch31.sha256sum] = "4edd46a32d70daa7ba00f0ebf0118dc5d17dff23d6e46aa21a
  
--SRC_URI[archive.md5sum] = "98970e3995e67ac3f23827ff52308f9e"
--SRC_URI[archive.sha256sum] = "fb7556501f85c3bf3e65fdd82697cbc4fa4b55dccd33ad14239ce0197e78ba59"
-+SRC_URI[archive.md5sum] = "656548dc431004d1ebf95e5d0bb4b9c8"
-+SRC_URI[archive.sha256sum] = "abff194c7c4802fba2e233890d09dde8bf7170c3ad5e13000601c8d5b3c44717"
+ inherit autotools-brokensep
  
- export ac_cv_have_iconv_detect_h="yes"
- do_configure_append = "cp ${WORKDIR}/iconv-detect.h ${S}"
++CLEANBROKEN = "1"
++
+ do_configure () {
+     ./configure --prefix=${prefix}
+     echo "LDFLAGS=${LDFLAGS}" >> MCONFIG
 -- 
-2.21.0
+2.20.1
 
 
