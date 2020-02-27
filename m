@@ -1,48 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com
-	[209.85.222.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 79FFC611E0
+Return-Path: <bunk@stusta.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id A6BF1605AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 19:02:47 +0000 (UTC)
-Received: by mail-qk1-f193.google.com with SMTP id 11so491611qkd.1
+	Thu, 27 Feb 2020 20:10:10 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48T3gP3MNyz3l
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 11:02:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=r/4TiNQf9Z+g+PpcDGVB9Cf/VCVbGUnK72mxRZO2110=;
-	b=as01LCq9J8l8fr2Orgr4CKOs0wFjSXedIte6b1JLex+CBU80UqGJJhwp+0sDgXltXy
-	moFfdmWLZIqisjjtIVndGwOTbq4U2Ft6COdv8awnVW1l9W8ENJRFQoLJFxw2gAYiOTJG
-	u24xHib/GFTZ8Od2XmzPuYFkVoopUqI6azZJUPyDTuQ/J7cdP0GgqOYMNwcNtG3Wcpwl
-	28Qs+HqBf6lFbE+MQdQOKW5MZlHIxw46FUVeHxHzJESqPDXQdbG9HKvtkrQnbzWKta+Z
-	+bNQMNn4gGoMf/ESJa6sgPlsGb7Zo3w99p5KWaQ7wo9whX7hVC+pbXhrArukcr5a2oMj
-	ib2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=r/4TiNQf9Z+g+PpcDGVB9Cf/VCVbGUnK72mxRZO2110=;
-	b=al9G7e8GT+TU9K4+675kscuqwPMSYU1+WggOeV41Maq8I21/bHzNsGhin0ogXhP23A
-	jEPDD2Y4Eqxef1QcfWVZX8KKwlavYyN1ctqGpQpR9+14GmmYIUUxXhBCCWPLWrMRk57f
-	xduNqXXC0pS/2FRuLDhSlezBZygskQgEBUvqDpPM7FezowAQ0/hbQ6NBoE0lSCvXeh1m
-	x3toSoE5ZvzHBjI1vVF/FhpkQVxzG+VFQs5CFTJNaBhQj1gU63apl0cSEj64wrvzFP3l
-	HUIBVzVh05/MCWd6b4N9SJXKPIx30cT6k2I2kanTm+iAGnCK0kIb1F5kpk+J1MeIShDH
-	FBZw==
-X-Gm-Message-State: APjAAAWmwz58znMpesoagHZDvOM7oeEcya25doc3u/jiPBJ/22hqEb7+
-	D855N9V0qAySaOcq6TJLb5tCAISdi7+d7cCCh6Wk/zIT
-X-Google-Smtp-Source: APXvYqxAFsmI/nrFt2EHS1SgJnufv3ac/AWw3ROcRiExAMbolOEJVPkUYN9vUHyB9C8oZGYI/ofOXmNVhUjP4INKmpo=
-X-Received: by 2002:a37:47c4:: with SMTP id u187mr798774qka.165.1582830167926; 
-	Thu, 27 Feb 2020 11:02:47 -0800 (PST)
-MIME-Version: 1.0
-References: <1581723823-21171-1-git-send-email-wangmy@cn.fujitsu.com>
-	<1581723823-21171-5-git-send-email-wangmy@cn.fujitsu.com>
-	<CAAaKDhE__cs1WdFWSN7_JRDfX_TzyxUr0eQpYWNTRSxvmdoZ7w@mail.gmail.com>
-In-Reply-To: <CAAaKDhE__cs1WdFWSN7_JRDfX_TzyxUr0eQpYWNTRSxvmdoZ7w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 27 Feb 2020 11:02:21 -0800
-Message-ID: <CAMKF1spoR9p1UDrPHsW+MA6sK7DnUgDyxy+voZODM27rus_JfA@mail.gmail.com>
-To: Ricardo Salveti <ricardo@foundries.io>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libp11: upgrade 0.4.10 -> 11
+	Thu, 27 Feb 2020 21:10:09 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1582834209;
+	bh=kB0/Sud/PnPzfQ6lieVh/Z/phmYGUc8PDniANwlB7fI=;
+	h=From:To:Subject:Date:From;
+	b=hGaAWn3boI/HsOTIAIPFpfyJOct6RKo24t+EbPSZ3TOABYNkF+HLObQLTX7owD1BJ
+	7cog1gXIZHJ4TmYZYK6c9UzdI23OYX5BnOZ+VKfjL5v9fIup8y1+W8Cly+csrqOgDr
+	0LjN8y2/Xj1404HlBVG91QtB7JxirO3IcEich7rLny7HXGr5NBIGOtjv0qjT1yjwg0
+	3hk2xEdjHsKUY5MdPpEnf/vaHD/kaG+nMH7yB0MS5lIlydVVDBY623FG8SmW5rA2HM
+	7sig0EEodmroOvIiQW29fzLkgtjlUmSfLeVbu+B3x1RvWqdvp5vFvZgLOhXhXRYWZ2
+	jAc3dZbiiFOM6nip6+biBRAakMf3HG8CNsa7/FK32P3saeJWQrHQlucOXiDcXY2W6T
+	zrcIJlZDIfOJ/484L8PQ4eaT/iWqAY5LlOOrWwvCxTA6e6pQvIs2NlAIKlpfAYxVSH
+	rP5ZRmvPNExJM+4zfNs1x4PF6d2KBtVzAfVwDIPN/BrEy60kZvsEgaKut+ZC4nEXNp
+	LQy7mrNag4JG4H5Uvq1XecJLmjCRPiNDQXRsE9Astj+QggWBnXSLcJXkRYdqjyi/jG
+	Uj5xXO1RCqtzjZ4Hw21Qgx/I+X7eKkgsHELgu+YUEr8NA9HsDTHGBBT9BUO0qiwHyo
+	zH8pOJ29dyQJ3mk/IX8dosko=
+From: Adrian Bunk <bunk@stusta.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 27 Feb 2020 22:10:07 +0200
+Message-Id: <20200227201007.25063-1-bunk@stusta.de>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] libidn: Remove obsolete patches for issues already fixed upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,52 +40,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 19:02:47 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 27 Feb 2020 20:10:11 -0000
 
-On Thu, Feb 27, 2020 at 9:53 AM Ricardo Salveti <ricardo@foundries.io> wrote:
->
-> Hi,
->
-> On Fri, Feb 14, 2020 at 1:12 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote:
-> >
-> > Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-> > ---
-> >  .../recipes-support/libp11/{libp11_0.4.10.bb => libp11_11.bb}   | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >  rename meta-oe/recipes-support/libp11/{libp11_0.4.10.bb => libp11_11.bb} (93%)
-> >
-> > diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb b/meta-oe/recipes-support/libp11/libp11_11.bb
-> > similarity index 93%
-> > rename from meta-oe/recipes-support/libp11/libp11_0.4.10.bb
-> > rename to meta-oe/recipes-support/libp11/libp11_11.bb
-> > index 655db4907..5a0951df2 100644
-> > --- a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
-> > +++ b/meta-oe/recipes-support/libp11/libp11_11.bb
-> > @@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fad9b3332be894bab9bc501572864b29"
-> >  DEPENDS = "libtool openssl"
-> >
-> >  SRC_URI = "git://github.com/OpenSC/libp11.git"
-> > -SRCREV = "973d31f3f58d5549ddd8b1f822ce8f72186f9d68"
-> > +SRCREV = "e1210903291b1de9eabcad26e740a4b2fbcca692"
->
-> Is this change really correct? The latest libp11 upstream release is
-> 0.4.10, as you can see at https://github.com/OpenSC/libp11/releases.
-> The next one seems that will be 0.4.11, so now sure how it was moved
-> to 11 directly.
->
-> Also, the SRCREV seems incorrect, as it is pointing out to the 0.4.9
-> release (https://github.com/OpenSC/libp11/commit/e1210903291b1de9eabcad26e740a4b2fbcca6920).
->
-> In the end this change is increasing the PV but moving SRCREV to an
-> even older release.
->
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
+---
+ ...R_P_warning_error_with_automake_1.12.patch | 34 ------------------
+ .../libidn/libidn_fix_for_automake-1.12.patch | 35 -------------------
+ .../recipes-extended/libidn/libidn_1.35.bb    |  2 --
+ 3 files changed, 71 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/libidn/libidn/avoid_AM_PROG_MKDIR_P_warning_error_with_automake_1.12.patch
+ delete mode 100644 meta-oe/recipes-extended/libidn/libidn/libidn_fix_for_automake-1.12.patch
 
-you are right, and it escaped me. Would you be willing to send a patch
-to correct it
-since it was not long time ago.
+diff --git a/meta-oe/recipes-extended/libidn/libidn/avoid_AM_PROG_MKDIR_P_warning_error_with_automake_1.12.patch b/meta-oe/recipes-extended/libidn/libidn/avoid_AM_PROG_MKDIR_P_warning_error_with_automake_1.12.patch
+deleted file mode 100644
+index 43bd23294..000000000
+--- a/meta-oe/recipes-extended/libidn/libidn/avoid_AM_PROG_MKDIR_P_warning_error_with_automake_1.12.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From cdd9e2e960eeb4eda7b08f0113d0cd03524c1d45 Mon Sep 17 00:00:00 2001
+-From: Nitin A Kamble <nitin.a.kamble@intel.com>
+-Date: Tue, 10 Jul 2012 02:44:30 -0700
+-Subject: [PATCH] libidn: fix build with automake 1.12
+-
+-Upstream-Status: Inappropriate
+-
+-automake 1.12.x has deprecated AM_PROG_MKDIR_P , and throws a warning for that,
+-and the warnings are treated as errors because of the -Werror parameter.
+-
+-These AM_PROG_MKDIR_P are coming from gettext, and the latest gettext code has not
+-eliminated these deprecated macros yet. So disable the treatment of warnings
+-as errors until gettext is updated to remove the deprecated macros.
+-
+-Signed-off-by: Nitin A Kamble <nitin.a.kamble@intel.com>
+-2012/07/10
+-
+----
+- configure.ac | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 261dad2..c4f935e 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -22,7 +22,7 @@ AC_INIT([GNU Libidn], [1.34], [bug-libidn@gnu.org])
+- AC_CONFIG_AUX_DIR([build-aux])
+- AC_CONFIG_MACRO_DIR([m4])
+- AC_CONFIG_HEADERS(config.h)
+--AM_INIT_AUTOMAKE([1.10 -Wall -Werror -Wno-override])
+-+AM_INIT_AUTOMAKE([1.10 -Wall -Wno-override])
+- m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+- 
+- # Library code modified:                              REVISION++
+diff --git a/meta-oe/recipes-extended/libidn/libidn/libidn_fix_for_automake-1.12.patch b/meta-oe/recipes-extended/libidn/libidn/libidn_fix_for_automake-1.12.patch
+deleted file mode 100644
+index 3c0559e34..000000000
+--- a/meta-oe/recipes-extended/libidn/libidn/libidn_fix_for_automake-1.12.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From d4f64b78419139eda3c0e1c6ee116bb5f70ea67c Mon Sep 17 00:00:00 2001
+-From: Nitin A Kamble <nitin.a.kamble@intel.com>
+-Date: Wed, 2 May 2012 18:05:19 -0700
+-Subject: [PATCH] libtasn1: fix build with automake 1.12
+-
+-Upstream-Status: Pending
+-
+-This patch fixes following issue with automake 1.12
+-
+-| automake: warnings are treated as errors
+-| /srv/home/nitin/builds/build-gcc47/tmp/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: warning: 'libidn.la': linking libtool libraries using a non-POSIX
+-| /srv/home/nitin/builds/build-gcc47/tmp/sysroots/x86_64-linux/usr/share/automake-1.12/am/ltlibrary.am: archiver requires 'AM_PROG_AR' in 'configure.ac'
+-
+-Signed-off-by: Nitin A Kamble <nitin.a.kamble@intel.com>
+-2012/05/03
+-
+----
+- configure.ac | 4 ++++
+- 1 file changed, 4 insertions(+)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 8297649..7b9626e 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -33,6 +33,10 @@ AC_SUBST(LT_CURRENT, 18)
+- AC_SUBST(LT_REVISION, 0)
+- AC_SUBST(LT_AGE, 6)
+- 
+-+# automake 1.12 seems to require this, but automake 1.11 doesn't recognize it
+-+m4_pattern_allow([AM_PROG_AR])
+-+AM_PROG_AR
+-+
+- AC_PROG_CC
+- gl_EARLY
+- lgl_EARLY
+diff --git a/meta-oe/recipes-extended/libidn/libidn_1.35.bb b/meta-oe/recipes-extended/libidn/libidn_1.35.bb
+index d5ce5b46b..105740354 100644
+--- a/meta-oe/recipes-extended/libidn/libidn_1.35.bb
++++ b/meta-oe/recipes-extended/libidn/libidn_1.35.bb
+@@ -15,8 +15,6 @@ DEPENDS = "virtual/libiconv autoconf-archive"
+ inherit pkgconfig autotools gettext texinfo gtk-doc
+ 
+ SRC_URI = "${GNU_MIRROR}/libidn/${BPN}-${PV}.tar.gz \
+-           file://libidn_fix_for_automake-1.12.patch \
+-           file://avoid_AM_PROG_MKDIR_P_warning_error_with_automake_1.12.patch \
+            file://dont-depend-on-help2man.patch \
+            file://0001-idn-format-security-warnings.patch \
+            "
+-- 
+2.17.1
 
-> Thanks,
-> --
-> Ricardo Salveti
 
