@@ -1,52 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
-	[209.85.221.53])
-	by mail.openembedded.org (Postfix) with ESMTP id F242B60FEC
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com
+	[209.85.221.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E11761219
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 06:51:19 +0000 (UTC)
-Received: by mail-wr1-f53.google.com with SMTP id c13so1866429wrq.10
+	Thu, 27 Feb 2020 06:51:20 +0000 (UTC)
+Received: by mail-wr1-f47.google.com with SMTP id p18so1873180wre.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 22:51:21 -0800 (PST)
+	Wed, 26 Feb 2020 22:51:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=BoY3X7AVHiKgxX7inlAnOiotYSGQ655adAcLGx9jt70=;
-	b=FEq0fzhxVjuS2yG3YFXAVf+yLT8WoXn4Kx/4WQqTJI6Ufz4xppuA6uQDMxF7K44TIb
-	GVd9epgGaJKBJcnllgFWeIb0HhEOneBw2Rf71hBqSuA7FSQy3xpQ1IB+aSwnVSWESDA9
-	MfK7qcYfZrkLMBMtOBzNuql2VlMcsKl5KwuCk0YhPJhNKbqBLWNmhe3qWEK1xY/7WuCx
-	Wy+rVXGF+D1zkhY+4oYCMAU8wKhcfCdZtbpXaxyKt4Ub4fRbVSlCdigXwOWhn9vQ2arw
-	nR0jOSh1TSRNinBXv2zD7I0WqZx+qpV/PR2/RxrCeLG3kfhvNfzCEF/XMaRa3y3/BjY6
-	KpQA==
+	bh=0iyI8lzCWiEZCaaHpNjkeaCoKLFjvOlsogyUVpmJOoE=;
+	b=SjioOZ8VTXwL7VyiM0Uc58fmIXNQseKINk50t1MnT3HxRKgVh45Y1kZFa6pMv9kImk
+	iWXAvNJ5BiTZ5+r2hYL3TEBH9v7eChST/CNxhg7T566HCFKG2VAD0RECn8+uVxoB9KG2
+	ySDfG20IM9rFthR+FLNjpNnfOgknRJO07GxIReMln5Ng7oRdPVPDBY5QE2rHVmmZ0Ey1
+	6E3yE3NwzeYxiUORkfnVgGYAiTbwAVq32G3MzmMoalguWRexb+JfFiqdEWhG+KHRpf75
+	VzgpwpF8g/MHXsv2MG+6WVDbBUb7/8ehFNu2kYKE96EGufPJ+YiJm9RNN8Sn+SlfLADg
+	0Y3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=BoY3X7AVHiKgxX7inlAnOiotYSGQ655adAcLGx9jt70=;
-	b=Ia3NHzmVrMi0yr9GKdNzXayAXW4ZWJOAwHT6dJ96CXe95dh5G4GdGXuxbqRTKWa8x4
-	qKRcXwvBDZmvlBI01qCDI2cGxhZ552yxtRA+ZfYJL8OsqCcEl1/uTVjp9ebtHXou+jfK
-	W56p3G7q5rJO2i1OOpWsjf8U/vtgw1jcWPc8iIdHFG1FTgtkHJvxPPwrqxtJa/08ZPr3
-	rxRjG2O/NW7M8GFCxVGnEY92PmZ3FAab9+G3Dx8MWS5x9SXc6sc5mRqjE5jLSt8aVqJD
-	fYy2KyQn8GOq9ihDSCWiyi8fiwJgHIdPRTbqYWhy/QX1BO6zX/UgzsxQnHhPBsqzvtGE
-	UN1w==
-X-Gm-Message-State: APjAAAUZcU6X2fht1oNxAskx/WHLmyHau0aQvGoWsgj6dP2+/lKFgOaL
-	g5dBanUCnw85rpsnNGSXE2/YsC6Z
-X-Google-Smtp-Source: APXvYqz1DqzpieQx2xdb+LSI+88utfRs5P9Utt6+Hnc6eWO/cJM/zZYuXbEJsITf9XEEtqPnJZlCKw==
-X-Received: by 2002:adf:aa0e:: with SMTP id p14mr3050769wrd.399.1582786280354; 
-	Wed, 26 Feb 2020 22:51:20 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=0iyI8lzCWiEZCaaHpNjkeaCoKLFjvOlsogyUVpmJOoE=;
+	b=GElG2gbEmMUap7jX/8TzI6xAuoU14+J6gwRij+L6gzNmaUm/3ggy7IiIxJMT5+b+px
+	WZLTNKDw1bIyNwkY8E/YfB9yh4Z6+ORtvazDGpdXPbrfiUKK0VABp7XGhR3Fx/BcKwSQ
+	joLC7OeuMW2GQYgZQssS/tEIroFWCdKTZgNSVQPTzvPkdRSjPsKekqbcV2bP3BqIuNSK
+	TuT2GEkR7yIKgojh6Bx5Z767r0E5FaCWdSAKy2JSc7uy3Oi/O+FHBzXn0gFzOiuTSLvy
+	/8TOQ5ljUHrIEt25xC13wjy6phQ33fr6MCLANyLYO8/etSqzv9bd0ZI401fP0TEiZDag
+	KUag==
+X-Gm-Message-State: APjAAAXZA/ELC9Ol1+lRNPoqekvDimkUQIehBQaD66qrV/Oh1ry3ZMmP
+	fKfcJakM+KWTu864yfZTgzdd3dX8
+X-Google-Smtp-Source: APXvYqx9U9RKys805FAY9iMsFV/kvLxDVZzDHBRKqgAnrMnvsZkGDyvDaCEOK5OxkXzLsVgwg1of3g==
+X-Received: by 2002:a5d:678f:: with SMTP id v15mr3071351wru.27.1582786281211; 
+	Wed, 26 Feb 2020 22:51:21 -0800 (PST)
 Received: from superandy.speedport.ip
 	(p200300F07F102C9262505CD5EB98F253.dip0.t-ipconnect.de.
 	[2003:f0:7f10:2c92:6250:5cd5:eb98:f253])
-	by smtp.gmail.com with ESMTPSA id u8sm6470066wmm.15.2020.02.26.22.51.19
+	by smtp.gmail.com with ESMTPSA id u8sm6470066wmm.15.2020.02.26.22.51.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 26 Feb 2020 22:51:19 -0800 (PST)
+	Wed, 26 Feb 2020 22:51:20 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Feb 2020 07:51:03 +0100
-Message-Id: <20200227065105.29865-1-schnitzeltony@gmail.com>
+Date: Thu, 27 Feb 2020 07:51:04 +0100
+Message-Id: <20200227065105.29865-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20200227065105.29865-1-schnitzeltony@gmail.com>
+References: <20200227065105.29865-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/3] xfce4-weather-plugin: upgrade 0.10.0 -> 0.10.1
+Subject: [PATCH 2/3] gegl: upgrade 0.4.20 -> 0.4.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,43 +65,30 @@ X-List-Received-Date: Thu, 27 Feb 2020 06:51:21 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 0.10.1
-========================
-- Switch to 'locationforecast' product and use a more recent API version
-(bug #16268)
-- Fix invalid scrollbar index to add a label (bug #16023)
-- Update URLs from goodies.x.o to docs.x.o (bug #16182)
-- Fix build with panel 4.15
-- Make build output less verbose
-- Use standard icon names (bug #16059)
-
-Translation Updates:
-Albanian, Croatian, Finnish, Galician, Greek, Portuguese, Slovak,
-Slovenian
-
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...eather-plugin_0.10.0.bb => xfce4-weather-plugin_0.10.1.bb} | 4 ++--
+ .../recipes-gimp/gegl/{gegl_0.4.20.bb => gegl_0.4.22.bb}      | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.10.0.bb => xfce4-weather-plugin_0.10.1.bb} (72%)
+ rename meta-gnome/recipes-gimp/gegl/{gegl_0.4.20.bb => gegl_0.4.22.bb} (93%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.0.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.1.bb
-similarity index 72%
-rename from meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.0.bb
-rename to meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.1.bb
-index 96c2048be..ad9b6e9e7 100644
---- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.0.bb
-+++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.10.1.bb
-@@ -7,7 +7,7 @@ inherit xfce-panel-plugin
+diff --git a/meta-gnome/recipes-gimp/gegl/gegl_0.4.20.bb b/meta-gnome/recipes-gimp/gegl/gegl_0.4.22.bb
+similarity index 93%
+rename from meta-gnome/recipes-gimp/gegl/gegl_0.4.20.bb
+rename to meta-gnome/recipes-gimp/gegl/gegl_0.4.22.bb
+index 5e7a1bb84..ca73e66f3 100644
+--- a/meta-gnome/recipes-gimp/gegl/gegl_0.4.20.bb
++++ b/meta-gnome/recipes-gimp/gegl/gegl_0.4.22.bb
+@@ -26,8 +26,8 @@ SRC_URI = " \
+     https://download.gimp.org/pub/${BPN}/${SHPV}/${BP}.tar.xz \
+     file://0001-meson.build-Give-note-if-sdl2-was-found.patch \
+ "
+-SRC_URI[md5sum] = "37433eb00f8a4b0d1ae9e975aaedfa26"
+-SRC_URI[sha256sum] = "23bd8bb42b20de7c2a8c314eeb5301dc20141feda20a4b1ed455020b69b73dff"
++SRC_URI[md5sum] = "1776ac26792de0de3c3d680872e94b72"
++SRC_URI[sha256sum] = "1888ec41dfd19fe28273795c2209efc1a542be742691561816683990dc642c61"
  
- DEPENDS += "libsoup-2.4 dbus-glib upower"
- 
--SRC_URI[md5sum] = "7ff4ab636f93addba0817bf6436d2964"
--SRC_URI[sha256sum] = "4423a0c27830fd1f08e063aaefbf70f31d89235d75549ca841d677ab2e409572"
-+SRC_URI[md5sum] = "203ad16e74d4823f6fb6e9a18bb7df55"
-+SRC_URI[sha256sum] = "afb2af5f3effc2ea6181636ed0e82e6dafd556ec1b8478100802f85a5d167a89"
- 
- FILES_${PN} += "${datadir}/xfce4/weather"
+ PACKAGECONFIG ??= "gexiv2 jpeg libpng librsvg sdl2"
+ PACKAGECONFIG_class-native = "libpng librsvg"
 -- 
 2.21.0
 
