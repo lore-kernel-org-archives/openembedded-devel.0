@@ -1,46 +1,44 @@
-Return-Path: <jonathan.richardson@broadcom.com>
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
-	[209.85.128.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FB4061125
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+	by mail.openembedded.org (Postfix) with ESMTP id A8DD2610F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 00:32:53 +0000 (UTC)
-Received: by mail-wm1-f66.google.com with SMTP id z12so1496043wmi.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 16:32:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=R9HQ139vLz9t7T/KwdgFlhp9NDIbfAtutRCN6vYp93s=;
-	b=MnebxJooDHxjkZ/DtCdtINln3kvX+4Yzaq6Mf6eIPAfh+TrEfB18rs8/RYb6tg7XEP
-	KRg2e3ELGCYBET/7IYYx0D/WdGJ0Yj2EwaJaa2sK+bP10olzk7vkcYcwFiVUi4D+IqV2
-	XQw+3+SpZ9NnfulFcTrVdKi9mIz5IvtnRbziM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=R9HQ139vLz9t7T/KwdgFlhp9NDIbfAtutRCN6vYp93s=;
-	b=ggDE14xtSE1ww48gYDlbCxhySQJUBLa5aSnW/IrGlV7T1gRkiNVLbzIZI51Hhskwzs
-	HbYnTRkDyn4AaICuKF/0BI7hjCeaDPEyF0rsiKvNzvl/DX75DsN53vw7x+gXi2JhOSAW
-	BhAqWDzPR9bFW/GsLXXoJv0Yj9ndcSVmUvSgNdyDo4byIg9pLNGB+XtmWl6MLA7/W+jw
-	JZXQM8UXJtvbZmh2iNmmumGc/1djPEI3/yY5Ive2ayztQkc/1tfS4mUuGgAqZhsNQ4CS
-	ezG7x/My51T5p6uPwS1x3SoZa55R3Glj4PtM5Teqk8evDqa2PBxTD97AyfSL2+X8YmLe
-	LQsw==
-X-Gm-Message-State: APjAAAX9nx2Ge2LRJf9bePnxEd+awPGO9FrAQ4MlbtbtZLYn+PFT5WTF
-	EWT9CakPkHbIZ2aG1A46YyDBX2HCkbs1Ka4zxa6nsNJ8bfwSxqfIEvfUG0RxnfnPTjE/p7Qktvf
-	q05wGCwPpxS9LwkHyb+NkgX6juy2usW2DwP40UlVeknzdvxjiTCCkiYd5S5ubLG4EM8FRSPJH59
-	BGCxHzGCm1S7V7EHQa1b650sP08fOV2zE=
-X-Google-Smtp-Source: APXvYqyY4zzqeYpHcHpC7A1OUDD62PzGPr+3M2Icb89VxalbjvVkGNxWr1qk6DLPqQBOvsGwj7LrYQ==
-X-Received: by 2002:a7b:c450:: with SMTP id l16mr1625022wmi.31.1582763573663; 
-	Wed, 26 Feb 2020 16:32:53 -0800 (PST)
-Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
-	by smtp.gmail.com with ESMTPSA id
-	m22sm4207829wmc.41.2020.02.26.16.32.51
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 26 Feb 2020 16:32:52 -0800 (PST)
-From: Jonathan Richardson <jonathan.richardson@broadcom.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Feb 2020 16:32:40 -0800
-Message-Id: <20200227003240.76088-1-jonathan.richardson@broadcom.com>
-X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH v3 1/1] open-lldp: Add initial version 1.0.1
+	Thu, 27 Feb 2020 00:44:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=axis.com; l=10380; q=dns/txt; s=axis-central1;
+	t=1582764288; x=1614300288;
+	h=from:to:cc:subject:date:message-id:references:
+	in-reply-to:content-transfer-encoding:mime-version;
+	bh=OQYhGU2LH/mHe3hZxHxbGXXnnIwwrhOXJo8vuS67sV4=;
+	b=j9fjESo/rFYuRsRXoF9nA1e6HPEz0z7+sWPDannDwWsnjgdnEMmJ2r5V
+	oQz2k8+xSDZgV0pgFdCJZKF2FsDu5O9nWwLTljh3W/qRGrDAXHF3k0h5q
+	6lAjUkyyx7Np9EAeTNN9Qq0+i8mLLVJicU9yFRpCR05aUyYrdLpGd8HAR
+	8PHT1/dsPIZ4FAyVjVhTu6JbqrWppn0lih7JFQmXw8aISVh7/aO43G5ck
+	Pez/mwp1KayhaKcmx/U9vqkYX6hlcDJUoyJZtcFaumdhuZqm6gaZ6zwyP
+	PA+k1wvmdrvJT9vQ6Y8LHxQUnlvIjn5iiVstUvuUCpS5b+swJOemJ2Haq Q==;
+IronPort-SDR: p/MG9j0GwPcr7xT9g9AqZQ4HPcnWvXYn1O+BitOalYBeIg6wxJmQ5fbApu6mnkLYJPe4xs22R7
+	CNINPYe3beCLuNpFQSyle6aQcRMovh2wWS5y9x/dvNPF8R61dsZ/RMzkgg/23LGtGVvxx1U7rf
+	MpuVSs+Jiz3EgSqIjR2nuVtpDaCYhAH/ZzSXJhvThWzv6X0YhBKWdJMwP01CmynUj3wCTq+R08
+	ryLwYuQaPZYWg7pY9lVUryKSPdoC40uGF4ezq6/z14UaAgwYLJgwADD//Bb/nkn5TYqUUmRvRS
+	OlI=
+X-IronPort-AV: E=Sophos;i="5.70,490,1574118000"; 
+   d="scan'208";a="5705459"
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Andrey Zhizhikin <andrey.z@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH] lvm2/libdevmapper: Make it build for native
+Thread-Index: AQHVaLC1n8cESW2ONEC4ymktVLK1vqgsno6AgAKc8nA=
+Date: Thu, 27 Feb 2020 00:44:44 +0000
+Message-ID: <9256632edce94fb9acfe6ab466f88c0a@XBOX03.axis.com>
+References: <20190911145254.15693-1-pkj@axis.com>
+	<CAHtQpK6CBwCwivMSk4j0-ofr2eD82a6PkNPYt1aepDcBFVK7ng@mail.gmail.com>
+In-Reply-To: <CAHtQpK6CBwCwivMSk4j0-ofr2eD82a6PkNPYt1aepDcBFVK7ng@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
+MIME-Version: 1.0
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] lvm2/libdevmapper: Make it build for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,194 +51,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 00:32:54 -0000
+X-List-Received-Date: Thu, 27 Feb 2020 00:44:47 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Open-LLDP provides a Link Layer Discovery Protocol agent that supports
-DCB (Data Center Bridging). The tc utility from iproute is needed to
-manipulate  traffic control settings in the kernel.
-
-Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
----
- .../0001-Fix-musl-libc-build-issue.patch      | 26 +++++++++
- ...-include-path-to-generated-version.h.patch | 29 ++++++++++
- ...tion-to-disable-installation-of-syst.patch | 57 +++++++++++++++++++
- .../openlldp/openlldp_1.0.1.bb                | 33 +++++++++++
- 4 files changed, 145 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/openlldp/files/0001-Fix-musl-libc-build-issue.patch
- create mode 100644 meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-include-path-to-generated-version.h.patch
- create mode 100644 meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
- create mode 100644 meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
-
-diff --git a/meta-networking/recipes-protocols/openlldp/files/0001-Fix-musl-libc-build-issue.patch b/meta-networking/recipes-protocols/openlldp/files/0001-Fix-musl-libc-build-issue.patch
-new file mode 100644
-index 000000000..40b082e77
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openlldp/files/0001-Fix-musl-libc-build-issue.patch
-@@ -0,0 +1,26 @@
-+From a64e52f9b58519aa2b8a1073fa6c04da04933428 Mon Sep 17 00:00:00 2001
-+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
-+Date: Wed, 26 Feb 2020 12:16:38 -0800
-+Subject: [PATCH] Fix musl libc build issue
-+
-+clif.h should include sys/types.h for the definition of pid_t. It fails
-+to compile when using musl libc.
-+
-+Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
-+
-+---
-+ include/clif.h | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/include/clif.h b/include/clif.h
-+index 648eedf..92f4fd8 100644
-+--- a/include/clif.h
-++++ b/include/clif.h
-+@@ -32,6 +32,7 @@
-+ #ifndef CLIF_H
-+ #define CLIF_H
-+ 
-++#include <sys/types.h>
-+ #include <sys/un.h>
-+ #include "clif_sock.h"
-+ 
-diff --git a/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-include-path-to-generated-version.h.patch b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-include-path-to-generated-version.h.patch
-new file mode 100644
-index 000000000..b58fc104d
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-include-path-to-generated-version.h.patch
-@@ -0,0 +1,29 @@
-+From eb14aa66dc0384071af401cced8c02993b55502e Mon Sep 17 00:00:00 2001
-+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
-+Date: Wed, 26 Feb 2020 15:54:51 -0800
-+Subject: [PATCH] autotools: Add include path to generated version.h
-+
-+When the build dir isn't the same as source dir it fails to compile
-+because the generated version.h from AC_CONFIG_FILES is always in build
-+dir. Include the path to it in AM_CPPFLAGS.
-+
-+Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
-+
-+---
-+ Makefile.am | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 0fb9bb0..2952019 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -14,6 +14,9 @@ endif
-+ AM_CPPFLAGS = -I${srcdir}/include -DSYSCONFDIR="\"${sysconfdir}\"" \
-+ 	-D_FORTIFY_SOURCE=2
-+ 
-++# Required for the generated version.h when build dir is not the same as srcdir.
-++AM_CPPFLAGS += -I${top_builddir}/include
-++
-+ ACLOCAL_AMFLAGS = -I m4
-+ 
-+ parse_cli.o: CFLAGS+=-U_FORTIFY_SOURCE -Wno-error
-diff --git a/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
-new file mode 100644
-index 000000000..a26a5299a
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
-@@ -0,0 +1,57 @@
-+From dc3f2250908587710f109c80ddf8a94f0bc40b82 Mon Sep 17 00:00:00 2001
-+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
-+Date: Fri, 6 Apr 2018 10:49:04 -0700
-+Subject: [PATCH] autotools: Add option to disable installation of systemd conf
-+ files
-+
-+Add option to configure.ac to enable or disable install of systemd conf
-+files. If --with-systemdsystemunitdir is passed to configure then the
-+files will be installed to the provided directory. If the option isn't
-+provided then the value is determined from the systemd pkgconfig file,
-+if found in PKG_CONFIG_PATH.
-+
-+This change is required because Makefile.am always installed the files
-+to a hard coded path that couldn't be changed.
-+
-+
-+Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
-+---
-+ Makefile.am  | 3 ++-
-+ configure.ac | 9 +++++++++
-+ 2 files changed, 11 insertions(+), 1 deletion(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 292c0fd..0fb9bb0 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -138,8 +138,9 @@ install-data-hook:	installdirs-local
-+ pkgconfigdir = ${libdir}/pkgconfig
-+ pkgconfig_DATA = lldpad.pc liblldp_clif.pc
-+ 
-+-systemdsystemunitdir = $(prefix)/lib/systemd/system
-++if HAVE_SYSTEMD
-+ dist_systemdsystemunit_DATA = lldpad.service lldpad.socket
-++endif
-+ 
-+ bashcompletiondir = $(sysconfdir)/bash_completion.d
-+ dist_bashcompletion_DATA = contrib/bash_completion/lldpad contrib/bash_completion/lldptool
-+diff --git a/configure.ac b/configure.ac
-+index 0667446..f75f433 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -95,6 +95,15 @@ AC_TYPE_UINT16_T
-+ AC_TYPE_UINT32_T
-+ AC_TYPE_UINT8_T
-+ 
-++# Support for systemd unit files.
-++AC_ARG_WITH([systemdsystemunitdir],
-++        AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files]),
-++        [], [with_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)])
-++if test "x$with_systemdsystemunitdir" != xno; then
-++        AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
-++fi
-++AM_CONDITIONAL(HAVE_SYSTEMD, [test -n "$with_systemdsystemunitdir" -a "x$with_systemdsystemunitdir" != xno ])
-++
-+ AC_CONFIG_FILES([Makefile include/version.h lldpad.spec lldpad.pc liblldp_clif.pc])
-+ AC_CONFIG_MACRO_DIR([m4])
-+ AC_OUTPUT
-diff --git a/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
-new file mode 100644
-index 000000000..5fbf0645e
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
-@@ -0,0 +1,33 @@
-+SUMMARY = "Open-LLDP"
-+DESCRIPTION = "Link Layer Discovery Protocol for Linux that includes support for DCBX"
-+HOMEPAGE = "http://open-lldp.org/start"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit pkgconfig autotools
-+inherit ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}
-+
-+DEPENDS = "libnl libconfig readline"
-+
-+SRCREV = "36d729de7ce5b56cf061d94d610cf0510154820c"
-+SRC_URI = "git://github.com/intel/openlldp.git;protocol=https;branch=master \
-+           file://0001-Fix-musl-libc-build-issue.patch \
-+           file://0001-autotools-Add-include-path-to-generated-version.h.patch \
-+           file://0001-autotools-Add-option-to-disable-installation-of-syst.patch \
-+           "
-+
-+# Makefile.am adds -Werror to AM_CFLAGS. There are warnings so disable it.
-+TARGET_CFLAGS += "-Wno-error"
-+
-+# Enable install of systemd conf files.
-+EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_system_unitdir}', '', d)}"
-+
-+SYSTEMD_SERVICE_${PN} = "lldpad.service lldpad.socket"
-+
-+# To enable service at boot set to enable in local.conf.
-+SYSTEMD_AUTO_ENABLE ?= "disable"
-+
-+RRECOMMENDS_${PN} = "iproute2-tc"
--- 
-2.17.1
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBBbmRyZXkgWmhpemhpa2luIDxh
+bmRyZXkuekBnbWFpbC5jb20+DQo+IFNlbnQ6IGRlbiAyNSBmZWJydWFyaSAyMDIwIDEwOjQ2DQo+
+IFRvOiBQZXRlciBLamVsbGVyc3RlZHQgPHBldGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbT4NCj4g
+Q2M6IG9wZW5lbWJlZGVkLWRldmVsIDxvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVk
+ZGVkLm9yZz47IFJpY2hhcmQNCj4gUHVyZGllIDxyaWNoYXJkLnB1cmRpZUBsaW51eGZvdW5kYXRp
+b24ub3JnPg0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0hdIGx2bTIvbGliZGV2
+bWFwcGVyOiBNYWtlIGl0IGJ1aWxkIGZvcg0KPiBuYXRpdmUNCj4gDQo+IEhlbGxvIGFsbCwNCj4g
+DQo+IEkndmUganVzdCBmYWNlZCB0aGUgcHJvYmxlbSB3aXRoIGJ1aWxkaW5nIGx2bTIgb2YgdGhl
+IFt6ZXVzXSBhbmQgaXQNCj4gbG9va3MgbGlrZSB0aGlzIHBhdGNoIGNhdXNlcyBpc3N1ZXMgd2l0
+aCBzaW1pbGFyIHN5bXB0b21zIHRoYXQgaGFzDQo+IGJlZW4gcmVwb3J0ZWQgZm9yIGJhc2ggQ1ZF
+IFsxXS4NCj4gDQo+IFRoaXMgcGF0Y2ggYWxzbyB0b3VjaGVzIHRoZSBjb25maWd1cmUgcGFydCwg
+YW5kIGluIGNhc2UgaWYgYC1jDQo+IGNsZWFuYWxsYCBpcyB1c2VkIC0gdGhlIGJ1aWxkIHN1Y2Nl
+ZWRzLg0KPiANCj4gRmFpbGVkIGJ1aWxkIGxvZyBsb29rcyBsaWtlIGZvbGxvd2luZzoNCj4gRVJS
+T1I6IGx2bTItMi4wMy4wMi1yMCBkb19wYXRjaDogQ29tbWFuZCBFcnJvcjogJ3F1aWx0IC0tcXVp
+bHRyYw0KPiAvZGV2ZWxvcG1lbnQvcHJvamVjdHMvYnVpbGQtb3V0cHV0L3dvcmsvY29yZWk3LTY0
+LXBva3ktbGludXgvbHZtMi8yLjAzLjAyLQ0KPiByMC9yZWNpcGUtc3lzcm9vdC1uYXRpdmUvZXRj
+L3F1aWx0cmMNCj4gcHVzaCcgZXhpdGVkIHdpdGggMCAgT3V0cHV0Og0KPiBBcHBseWluZyBwYXRj
+aCAwMDAxLWNvbmZpZ3VyZS1GaXgtc2V0dGluZy1vZi1DTERGTEFHUy1kZWZhdWx0LnBhdGNoDQo+
+IHBhdGNoaW5nIGZpbGUgY29uZmlndXJlDQo+IEh1bmsgIzEgRkFJTEVEIGF0IDMwNzcuDQo+IEh1
+bmsgIzIgRkFJTEVEIGF0IDMwOTguDQo+IEh1bmsgIzMgRkFJTEVEIGF0IDMxMTEuDQo+IDMgb3V0
+IG9mIDMgaHVua3MgRkFJTEVEIC0tIHJlamVjdHMgaW4gZmlsZSBjb25maWd1cmUNCj4gcGF0Y2hp
+bmcgZmlsZSBjb25maWd1cmUuYWMNCj4gSHVuayAjMiBzdWNjZWVkZWQgYXQgNTAgKG9mZnNldCAt
+MSBsaW5lcykuDQo+IEh1bmsgIzMgc3VjY2VlZGVkIGF0IDYzIChvZmZzZXQgLTEgbGluZXMpLg0K
+PiBQYXRjaCAwMDAxLWNvbmZpZ3VyZS1GaXgtc2V0dGluZy1vZi1DTERGTEFHUy1kZWZhdWx0LnBh
+dGNoIGRvZXMgbm90DQo+IGFwcGx5IChlbmZvcmNlIHdpdGggLWYpDQo+IEVSUk9SOiBMb2dmaWxl
+IG9mIGZhaWx1cmUgc3RvcmVkIGluOg0KPiAvZGV2ZWxvcG1lbnQvcHJvamVjdHMvYnVpbGQtb3V0
+cHV0L3dvcmsvY29yZWk3LTY0LXBva3ktbGludXgvbHZtMi8yLjAzLjAyLQ0KPiByMC90ZW1wL2xv
+Zy5kb19wYXRjaC4xMDA0Nw0KPiBFUlJPUjogVGFzayAoL2RldmVsb3BtZW50L3Byb2plY3RzL3lv
+Y3RvLWJ1aWxkLWFwcGxpYW5jZS9tZXRhLQ0KPiBvcGVuZW1iZWRkZWQvbWV0YS1vZS9yZWNpcGVz
+LXN1cHBvcnQvbHZtMi9sdm0yXzIuMDMuMDIuYmI6ZG9fcGF0Y2gpDQo+IGZhaWxlZCB3aXRoIGV4
+aXQgY29kZSAnMScNCj4gDQo+IFNpbmNlIHRoZXJlIHdhcyBubyBkZWNpc2lvbiAoeWV0KSB0YWtl
+biBvbiB0aGUgYmFzaCBvbmUgLSBjYW4gd2UNCj4gY29tYmluZSB0aG9zZSB0d28gdG9nZXRoZXIg
+dG8gZmluZCBhIGNvbW1vbiBzb2x1dGlvbiBmb3IgYm90aCBjYXNlcz8NCg0KSSBkb24ndCBrbm93
+IGFueXRoaW5nIGFib3V0IHRoZSBiYXNoIHBhdGNoLCBidXQgc2luY2UgSSBiYWNrcG9ydGVkIHRo
+ZSANCm9uZSBmb3IgbHZtMi9saWJkZXZtYXBwZXIsIEkgd2lsbCBmaXggaXQuIEkgd2FzIGFjdHVh
+bGx5IGhpdCBieSB0aGlzIA0KcHJvYmxlbSBqdXN0IGEgZmV3IG1pbnV0ZXMgYWZ0ZXIgcmVhZGlu
+ZyB0aGlzIG1haWwgd2hlbiBJIHdhcyB1cGRhdGluZyANCnRvIFBva3kgWmV1cyAyMi4wLjIuIEFu
+eXdheSwgdGhlIGZpeCBpcyBzaW1wbGUsIGFzIHN1Z2dlc3RlZCBieSBSaWNoYXJkIA0KaW4gdGhl
+IGJhc2ggdGhyZWFkOiBqdXN0IHJlbW92ZSB0aGUgcGF0Y2hpbmcgb2YgY29uZmlndXJlLg0KDQov
+L1BldGVyDQoNCj4gT24gV2VkLCBTZXAgMTEsIDIwMTkgYXQgNDo1MyBQTSBQZXRlciBLamVsbGVy
+c3RlZHQNCj4gPHBldGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbT4gd3JvdGU6DQo+ID4NCj4gPiBC
+YWNrcG9ydCBhIHBhdGNoIGZyb20gdXBzdHJlYW0gbWFzdGVyIHRoYXQgY29ycmVjdHMgdGhlIHBh
+c3Npbmcgb2YNCj4gPiBsaW5rIGZsYWdzIHRocm91Z2ggY29uZmlndXJlLg0KPiA+DQo+ID4gU2ln
+bmVkLW9mZi1ieTogUGV0ZXIgS2plbGxlcnN0ZWR0IDxwZXRlci5ramVsbGVyc3RlZHRAYXhpcy5j
+b20+DQo+ID4gLS0tDQo+ID4gIC4uLmd1cmUtRml4LXNldHRpbmctb2YtQ0xERkxBR1MtZGVmYXVs
+dC5wYXRjaCB8IDc4ICsrKysrKysrKysrKysrKysrKysNCj4gPiAgbWV0YS1vZS9yZWNpcGVzLXN1
+cHBvcnQvbHZtMi9sdm0yLmluYyAgICAgICAgIHwgIDEgKw0KPiA+ICAyIGZpbGVzIGNoYW5nZWQs
+IDc5IGluc2VydGlvbnMoKykNCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBl
+cy1zdXBwb3J0L2x2bTIvZmlsZXMvMDAwMS1jb25maWd1cmUtDQo+IEZpeC1zZXR0aW5nLW9mLUNM
+REZMQUdTLWRlZmF1bHQucGF0Y2gNCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lw
+ZXMtc3VwcG9ydC9sdm0yL2ZpbGVzLzAwMDEtY29uZmlndXJlLUZpeC0NCj4gc2V0dGluZy1vZi1D
+TERGTEFHUy1kZWZhdWx0LnBhdGNoIGIvbWV0YS1vZS9yZWNpcGVzLQ0KPiBzdXBwb3J0L2x2bTIv
+ZmlsZXMvMDAwMS1jb25maWd1cmUtRml4LXNldHRpbmctb2YtQ0xERkxBR1MtZGVmYXVsdC5wYXRj
+aA0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+ID4gaW5kZXggMDAwMDAwMDAwLi4wN2NiODhm
+ZmINCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQv
+bHZtMi9maWxlcy8wMDAxLWNvbmZpZ3VyZS1GaXgtc2V0dGluZy1vZi0NCj4gQ0xERkxBR1MtZGVm
+YXVsdC5wYXRjaA0KPiA+IEBAIC0wLDAgKzEsNzggQEANCj4gPiArRnJvbSA0YTNlNzA3NDAyMDMy
+Nzg4ZTA5MjgyZTBmNTRmZGY4MmM4YTBmOGZjIE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQ0KPiA+
+ICtGcm9tOiBNYXJpYW4gQ3NvbnRvcyA8bWNzb250b3NAcmVkaGF0LmNvbT4NCj4gPiArRGF0ZTog
+TW9uLCAxOSBBdWcgMjAxOSAxNDo1NDo0MyArMDIwMA0KPiA+ICtTdWJqZWN0OiBbUEFUQ0hdIGNv
+bmZpZ3VyZTogRml4IHNldHRpbmcgb2YgQ0xERkxBR1MgZGVmYXVsdA0KPiA+ICsNCj4gPiArLS0t
+DQo+ID4gKyBjb25maWd1cmUgICAgfCA2ICsrKy0tLQ0KPiA+ICsgY29uZmlndXJlLmFjIHwgNiAr
+KystLS0NCj4gPiArIDIgZmlsZXMgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCA2IGRlbGV0aW9u
+cygtKQ0KPiA+ICsNCj4gPiArVXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydA0KPiBbaHR0cHM6Ly9z
+b3VyY2V3YXJlLm9yZy9naXQvP3A9bHZtMi5naXQ7YT1jb21taXQ7aD00YTNlNzA3NDAyMDMyNzg4
+ZTA5MjgyZQ0KPiAwZjU0ZmRmODJjOGEwZjhmY10NCj4gPiArU2lnbmVkLW9mZi1ieTogUGV0ZXIg
+S2plbGxlcnN0ZWR0IDxwZXRlci5ramVsbGVyc3RlZHRAYXhpcy5jb20+DQo+ID4gKw0KPiA+ICtk
+aWZmIC0tZ2l0IGEvY29uZmlndXJlIGIvY29uZmlndXJlDQo+ID4gK2luZGV4IGZmM2E1OWI2Yi4u
+NGM4NDc2NTAyIDEwMDc1NQ0KPiA+ICstLS0gYS9jb25maWd1cmUNCj4gPiArKysrIGIvY29uZmln
+dXJlDQo+ID4gK0BAIC0zMDc3LDcgKzMwNzcsNyBAQCBpZiB0ZXN0IC16ICIkQ0ZMQUdTIjsgdGhl
+biA6DQo+ID4gKyBmaQ0KPiA+ICsgY2FzZSAiJGhvc3Rfb3MiIGluDQo+ID4gKyAgICAgICBsaW51
+eCopDQo+ID4gKy0gICAgICAgICAgICAgIENMREZMQUdTPSIke0NMREZMQUdTOiIkTERGTEFHUyJ9
+IC1XbCwtLXZlcnNpb24tDQo+IHNjcmlwdCwuZXhwb3J0LnN5bSINCj4gPiArKyAgICAgICAgICAg
+ICAgQ0xERkxBR1M9IiR7Q0xERkxBR1MtIiRMREZMQUdTIn0gLVdsLC0tdmVyc2lvbi0NCj4gc2Ny
+aXB0LC5leHBvcnQuc3ltIg0KPiA+ICsgICAgICAgICAgICAgICAjIGVxdWl2YWxlbnQgdG8gLXJk
+eW5hbWljDQo+ID4gKyAgICAgICAgICAgICAgIEVMREZMQUdTPSItV2wsLS1leHBvcnQtZHluYW1p
+YyINCj4gPiArICAgICAgICAgICAgICAgIyBGSVhNRSBHZW5lcmF0ZSBsaXN0IGFuZCB1c2UgLS1k
+eW5hbWljLWxpc3Q9LmRsb3Blbi5zeW0NCj4gPiArQEAgLTMwOTgsNyArMzA5OCw3IEBAIGNhc2Ug
+IiRob3N0X29zIiBpbg0KPiA+ICsgICAgICAgICAgICAgICA7Ow0KPiA+ICsgICAgICAgZGFyd2lu
+KikNCj4gPiArICAgICAgICAgICAgICAgQ0ZMQUdTPSIkQ0ZMQUdTIC1uby1jcHAtcHJlY29tcCAt
+Zm5vLWNvbW1vbiINCj4gPiArLSAgICAgICAgICAgICAgQ0xERkxBR1M9IiR7Q0xERkxBR1M6IiRM
+REZMQUdTIn0iDQo+ID4gKysgICAgICAgICAgICAgIENMREZMQUdTPSIke0NMREZMQUdTLSIkTERG
+TEFHUyJ9Ig0KPiA+ICsgICAgICAgICAgICAgICBFTERGTEFHUz0NCj4gPiArICAgICAgICAgICAg
+ICAgQ0xEV0hPTEVBUkNISVZFPSItYWxsX2xvYWQiDQo+ID4gKyAgICAgICAgICAgICAgIENMRE5P
+V0hPTEVBUkNISVZFPQ0KPiA+ICtAQCAtMzExMSw3ICszMTExLDcgQEAgY2FzZSAiJGhvc3Rfb3Mi
+IGluDQo+ID4gKyAgICAgICAgICAgICAgIEJMS0RFQUNUSVZBVEU9bm8NCj4gPiArICAgICAgICAg
+ICAgICAgOzsNCj4gPiArICAgICAgICopDQo+ID4gKy0gICAgICAgICAgICAgIENMREZMQUdTPSIk
+e0NMREZMQUdTOiIkTERGTEFHUyJ9Ig0KPiA+ICsrICAgICAgICAgICAgICBDTERGTEFHUz0iJHtD
+TERGTEFHUy0iJExERkxBR1MifSINCj4gPiArICAgICAgICAgICAgICAgOzsNCj4gPiArIGVzYWMN
+Cj4gPiArDQo+ID4gK2RpZmYgLS1naXQgYS9jb25maWd1cmUuYWMgYi9jb25maWd1cmUuYWMNCj4g
+PiAraW5kZXggNWRhNjk0NjMxLi44MzBlZGI4ZGEgMTAwNjQ0DQo+ID4gKy0tLSBhL2NvbmZpZ3Vy
+ZS5hYw0KPiA+ICsrKysgYi9jb25maWd1cmUuYWMNCj4gPiArQEAgLTMwLDcgKzMwLDcgQEAgQUNf
+Q0FOT05JQ0FMX1RBUkdFVChbXSkNCj4gPiArIEFTX0lGKFt0ZXN0IC16ICIkQ0ZMQUdTIl0sIFtD
+T1BUSU1JU0VfRkxBRz0iLU8yIl0pDQo+ID4gKyBjYXNlICIkaG9zdF9vcyIgaW4NCj4gPiArICAg
+ICAgIGxpbnV4KikNCj4gPiArLSAgICAgICAgICAgICAgQ0xERkxBR1M9IiR7Q0xERkxBR1M6IiRM
+REZMQUdTIn0gLVdsLC0tdmVyc2lvbi0NCj4gc2NyaXB0LC5leHBvcnQuc3ltIg0KPiA+ICsrICAg
+ICAgICAgICAgICBDTERGTEFHUz0iJHtDTERGTEFHUy0iJExERkxBR1MifSAtV2wsLS12ZXJzaW9u
+LQ0KPiBzY3JpcHQsLmV4cG9ydC5zeW0iDQo+ID4gKyAgICAgICAgICAgICAgICMgZXF1aXZhbGVu
+dCB0byAtcmR5bmFtaWMNCj4gPiArICAgICAgICAgICAgICAgRUxERkxBR1M9Ii1XbCwtLWV4cG9y
+dC1keW5hbWljIg0KPiA+ICsgICAgICAgICAgICAgICAjIEZJWE1FIEdlbmVyYXRlIGxpc3QgYW5k
+IHVzZSAtLWR5bmFtaWMtbGlzdD0uZGxvcGVuLnN5bQ0KPiA+ICtAQCAtNTEsNyArNTEsNyBAQCBj
+YXNlICIkaG9zdF9vcyIgaW4NCj4gPiArICAgICAgICAgICAgICAgOzsNCj4gPiArICAgICAgIGRh
+cndpbiopDQo+ID4gKyAgICAgICAgICAgICAgIENGTEFHUz0iJENGTEFHUyAtbm8tY3BwLXByZWNv
+bXAgLWZuby1jb21tb24iDQo+ID4gKy0gICAgICAgICAgICAgIENMREZMQUdTPSIke0NMREZMQUdT
+OiIkTERGTEFHUyJ9Ig0KPiA+ICsrICAgICAgICAgICAgICBDTERGTEFHUz0iJHtDTERGTEFHUy0i
+JExERkxBR1MifSINCj4gPiArICAgICAgICAgICAgICAgRUxERkxBR1M9DQo+ID4gKyAgICAgICAg
+ICAgICAgIENMRFdIT0xFQVJDSElWRT0iLWFsbF9sb2FkIg0KPiA+ICsgICAgICAgICAgICAgICBD
+TEROT1dIT0xFQVJDSElWRT0NCj4gPiArQEAgLTY0LDcgKzY0LDcgQEAgY2FzZSAiJGhvc3Rfb3Mi
+IGluDQo+ID4gKyAgICAgICAgICAgICAgIEJMS0RFQUNUSVZBVEU9bm8NCj4gPiArICAgICAgICAg
+ICAgICAgOzsNCj4gPiArICAgICAgICopDQo+ID4gKy0gICAgICAgICAgICAgIENMREZMQUdTPSIk
+e0NMREZMQUdTOiIkTERGTEFHUyJ9Ig0KPiA+ICsrICAgICAgICAgICAgICBDTERGTEFHUz0iJHtD
+TERGTEFHUy0iJExERkxBR1MifSINCj4gPiArICAgICAgICAgICAgICAgOzsNCj4gPiArIGVzYWMN
+Cj4gPiArDQo+ID4gKy0tDQo+ID4gKzIuMjEuMA0KPiA+ICsNCj4gPiBkaWZmIC0tZ2l0IGEvbWV0
+YS1vZS9yZWNpcGVzLXN1cHBvcnQvbHZtMi9sdm0yLmluYyBiL21ldGEtb2UvcmVjaXBlcy0NCj4g
+c3VwcG9ydC9sdm0yL2x2bTIuaW5jDQo+ID4gaW5kZXggZjM1ODY2M2IwLi42Yzk1YmZkMDIgMTAw
+NjQ0DQo+ID4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbHZtMi9sdm0yLmluYw0KPiA+
+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L2x2bTIvbHZtMi5pbmMNCj4gPiBAQCAtMTUs
+NiArMTUsNyBAQCBTUkNfVVJJID0NCj4gImh0dHBzOi8vc291cmNld2FyZS5vcmcvcHViL2x2bTIv
+TFZNMi4ke1BWfS50Z3ogXA0KPiA+ICAgICAgICAgICAgIGZpbGU6Ly8wMDAxLUF2b2lkLWJhc2hp
+c21zLWluLWluaXQtc2NyaXB0cy5wYXRjaCBcDQo+ID4gICAgICAgICAgICAgZmlsZTovLzAwMDUt
+ZG8tbm90LWJ1aWxkLW1hbnVhbC5wYXRjaCBcDQo+ID4gICAgICAgICAgICAgZmlsZTovLzAwMDYt
+c3RhcnQtbHZtMi1tb25pdG9yLnNlcnZpY2UtYWZ0ZXItdG1wLm1vdW50LnBhdGNoDQo+IFwNCj4g
+PiArICAgICAgICAgICBmaWxlOi8vMDAwMS1jb25maWd1cmUtRml4LXNldHRpbmctb2YtQ0xERkxB
+R1MtZGVmYXVsdC5wYXRjaA0KPiBcDQo+ID4gICAgICAgICAgICAgIg0KPiA+ICBTUkNfVVJJW21k
+NXN1bV0gPSAiNWZjMDdkYTU0NjFhMzc5NGE3NTFkY2ZjMzU1ODI3ZDUiDQo+ID4gIFNSQ19VUklb
+c2hhMjU2c3VtXSA9DQo+ICI1NTBiYTc1MDIzOWZkNzViN2U1MmM5ODc3NTY1Y2FiZmZlZjUwNmJi
+ZjZkN2Y2ZjE3Yjk3MDBkZWU1NmM3MjBmIg0KPiA+IC0tDQo+ID4gMi4yMS4wDQo+ID4NCj4gPiAt
+LQ0KPiA+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+
+ID4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiA+IE9wZW5lbWJlZGRlZC1kZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5v
+cmcvbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCj4gDQo+IFsxXTogaHR0cDov
+L2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvcGlwZXJtYWlsL29wZW5lbWJlZGRlZC1jb3JlLzIwMjAt
+DQo+IEZlYnJ1YXJ5LzI5Mjk5MS5odG1sDQo+IA0KPiAtLQ0KPiBSZWdhcmRzLA0KPiBBbmRyZXku
+DQo=
 
