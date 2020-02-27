@@ -1,24 +1,33 @@
-Return-Path: <Changqing.Li@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 27445601DA
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 57CC0611A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Feb 2020 03:38:55 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 01R3cupJ020632
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Thu, 27 Feb 2020 05:58:11 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,490,1574092800"; d="scan'208";a="84484074"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 27 Feb 2020 13:58:10 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 0C50C50A9975
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 19:38:56 -0800 (PST)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.468.0; Wed, 26 Feb 2020 19:38:56 -0800
-From: <changqing.li@windriver.com>
+	Thu, 27 Feb 2020 13:48:25 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Thu, 27 Feb 2020 13:58:09 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 27 Feb 2020 13:58:19 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Feb 2020 11:38:54 +0800
-Message-ID: <1582774734-157200-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Date: Thu, 27 Feb 2020 04:43:11 -0800
+Message-ID: <1582807398-13955-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] cyrus-sasl: fix CVE-2019-19906
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: 0C50C50A9975.A444A
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking][PATCH] drbd-utils: upgrade 9.11.0 -> 9.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,72 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Feb 2020 03:38:56 -0000
+X-List-Received-Date: Thu, 27 Feb 2020 05:58:12 -0000
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- .../cyrus-sasl/cyrus-sasl/CVE-2019-19906.patch     | 35 ++++++++++++++++++++++
- .../cyrus-sasl/cyrus-sasl_2.1.27.bb                |  1 +
- 2 files changed, 36 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/CVE-2019-19906.patch
+ .../drbd/{drbd-utils_9.11.0.bb => drbd-utils_9.12.0.bb}     | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/drbd/{drbd-utils_9.11.0.bb => drbd-utils_9.12.0.bb} (93%)
 
-diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/CVE-2019-19906.patch b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/CVE-2019-19906.patch
-new file mode 100644
-index 0000000..b94780f
---- /dev/null
-+++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl/CVE-2019-19906.patch
-@@ -0,0 +1,35 @@
-+From 94fe6eb9ea2691f4a7c32fbf2d0c7c454995b666 Mon Sep 17 00:00:00 2001
-+From: Changqing Li <changqing.li@windriver.com>
-+Date: Thu, 27 Feb 2020 11:08:57 +0800
-+Subject: [PATCH] Fix #587
-+
-+Off by one error in common.c, CVE-2019-19906.
-+
-+Thanks to Stephan Zeisberg for reporting
-+
-+CVE: CVE-2019-19906
-+
-+Upstream-Stauts: Backport [https://github.com/cyrusimap/cyrus-sasl
-+/commit/dcc9f51cbd4ed622cfb0f9b1c141eb2ffe3b12f1]
-+
-+Signed-off-by: Changqing Li <changqing.li@windriver.com>
-+---
-+ lib/common.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/lib/common.c b/lib/common.c
-+index 305311d..445c5d5 100644
-+--- a/lib/common.c
-++++ b/lib/common.c
-+@@ -190,7 +190,7 @@ int _sasl_add_string(char **out, size_t *alloclen,
-+ 
-+   if (add==NULL) add = "(null)";
-+ 
-+-  addlen=strlen(add); /* only compute once */
-++  addlen=strlen(add)+1; /* only compute once */
-+   if (_buf_alloc(out, alloclen, (*outlen)+addlen)!=SASL_OK)
-+     return SASL_NOMEM;
-+ 
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-index be7131d..d55dc4a 100644
---- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-+++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.27.bb
-@@ -16,6 +16,7 @@ SRC_URI = "git://github.com/cyrusimap/cyrus-sasl;protocol=https \
-            file://0004-configure.ac-fix-condition-for-suppliment-snprintf-i.patch \
-            file://0001-Allow-saslauthd-to-be-built-outside-of-source-tree-w.patch \
-            file://0001-makeinit.sh-fix-parallel-build-issue.patch \
-+           file://CVE-2019-19906.patch \
-            "
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb b/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb
+similarity index 93%
+rename from meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb
+rename to meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb
+index 01bb16af9..b83f68f8c 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_9.11.0.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_9.12.0.bb
+@@ -12,9 +12,9 @@ SRC_URI = "git://github.com/LINBIT/drbd-utils;name=drbd-utils \
+            git://github.com/LINBIT/drbd-headers;name=drbd-headers;destsuffix=git/drbd-headers \
+            ${@bb.utils.contains('DISTRO_FEATURES','usrmerge','file://0001-drbd-utils-support-usrmerge.patch','',d)} \
+           "
+-# v9.11.0
+-SRCREV_drbd-utils = "63092751e76e1fba397e53df4be5c1161b83a223"
+-SRCREV_drbd-headers = "d100ee01bf5aa8d5220767e4e35c4224faa8d865"
++# v9.12.0
++SRCREV_drbd-utils = "91629a4cce49ca0d4f917fe0bffa25cfe8db3052"
++SRCREV_drbd-headers = "233006b4d26cf319638be0ef6d16ec7dee287b66"
  
- UPSTREAM_CHECK_URI = "https://github.com/cyrusimap/cyrus-sasl/archives"
+ S = "${WORKDIR}/git"
+ 
 -- 
-2.7.4
+2.17.1
+
+
 
 
