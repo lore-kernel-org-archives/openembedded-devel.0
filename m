@@ -1,46 +1,46 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 972C060B3C
+Return-Path: <jonathan.richardson@broadcom.com>
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 9FB4061125
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Feb 2020 23:38:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=axis.com; l=2698; q=dns/txt; s=axis-central1;
-	t=1582760337; x=1614296337;
-	h=from:to:subject:date:message-id:references:in-reply-to:
-	content-transfer-encoding:mime-version;
-	bh=zsIGItznK0/uGNjSy8ieQaBqlbrxt3RTtXU1h856Qw8=;
-	b=WJVQBiQ5GoALDoC+MoJIwn4wW1oG1u2/UQjXYxm3bZRfdZUC8I5ci+sg
-	pu1pLC8Oho8aXczaEPEnxbxIjVzvtv1EeliqZS1WkSS2VTgFNg/PrH+IG
-	acxSad4U+HE6qzFKDAUOhf5t/AtAyOvrpAZrX65LjXCr1FORMhE0f1oqF
-	5WOJgrzqyvoUPalOC7TFR25U6DYHn7KWdhxE/AlgdGXknZPD7ZIx85kC8
-	mTarbj2k/k4PVlUE4QyCgk987HEkmg6cseDRbuE1hnTMa7C6ItRTz4mav
-	NIx5sUHb3HuEnC9gCBScaSzODsDZcCNGd9MvKHQ/6QxYmWlg7kWPgchC1 Q==;
-IronPort-SDR: th9aIej1YPsmwbXe2EXVWfWy4DSSb1dDsbcPfQ2E+q0+NufbZQ7I/6TmCP+NAAgise7FwpARxY
-	uvLkj2FFDRktqQaizU88dqOtpkxplO6xNTQTL92VrTJTEGZrRa1yEt8q/pUAwCs2uBoaghMikM
-	ack7t+1bLGyJR0COfAoZSv+MDuwfftpykyfxFRKoCl+izyMjiC/Vo2dBQAn+9yM1Ko0EvBcCZ/
-	RbaC6I9m2LWyPbPdtznnohXvJ1jaieBncOWVxmkwYqMgfAWlRKc0i0q1pHUpgv2o491J7cAnup
-	a7k=
-X-IronPort-AV: E=Sophos;i="5.70,489,1574118000"; 
-   d="scan'208";a="5867442"
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: akuster808 <akuster808@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][zeus][PATCH 1/2] libldb: Do not require the "pam"
-	distro feature to be enabled
-Thread-Index: AQHV2FyjvxyHEUe9q0+vnU+UYngccaguSkpw
-Date: Wed, 26 Feb 2020 23:38:53 +0000
-Message-ID: <92dc761a5b4847109b4889eedeeaa335@XBOX03.axis.com>
-References: <20200130210409.29802-1-pkj@axis.com>
-	<ea500f22-d505-d82b-b0c8-c264945f6354@gmail.com>
-In-Reply-To: <ea500f22-d505-d82b-b0c8-c264945f6354@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
-MIME-Version: 1.0
-Subject: Re: [meta-oe][zeus][PATCH 1/2] libldb: Do not require the "pam" distro feature to be enabled
+	Thu, 27 Feb 2020 00:32:53 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id z12so1496043wmi.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Feb 2020 16:32:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=R9HQ139vLz9t7T/KwdgFlhp9NDIbfAtutRCN6vYp93s=;
+	b=MnebxJooDHxjkZ/DtCdtINln3kvX+4Yzaq6Mf6eIPAfh+TrEfB18rs8/RYb6tg7XEP
+	KRg2e3ELGCYBET/7IYYx0D/WdGJ0Yj2EwaJaa2sK+bP10olzk7vkcYcwFiVUi4D+IqV2
+	XQw+3+SpZ9NnfulFcTrVdKi9mIz5IvtnRbziM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=R9HQ139vLz9t7T/KwdgFlhp9NDIbfAtutRCN6vYp93s=;
+	b=ggDE14xtSE1ww48gYDlbCxhySQJUBLa5aSnW/IrGlV7T1gRkiNVLbzIZI51Hhskwzs
+	HbYnTRkDyn4AaICuKF/0BI7hjCeaDPEyF0rsiKvNzvl/DX75DsN53vw7x+gXi2JhOSAW
+	BhAqWDzPR9bFW/GsLXXoJv0Yj9ndcSVmUvSgNdyDo4byIg9pLNGB+XtmWl6MLA7/W+jw
+	JZXQM8UXJtvbZmh2iNmmumGc/1djPEI3/yY5Ive2ayztQkc/1tfS4mUuGgAqZhsNQ4CS
+	ezG7x/My51T5p6uPwS1x3SoZa55R3Glj4PtM5Teqk8evDqa2PBxTD97AyfSL2+X8YmLe
+	LQsw==
+X-Gm-Message-State: APjAAAX9nx2Ge2LRJf9bePnxEd+awPGO9FrAQ4MlbtbtZLYn+PFT5WTF
+	EWT9CakPkHbIZ2aG1A46YyDBX2HCkbs1Ka4zxa6nsNJ8bfwSxqfIEvfUG0RxnfnPTjE/p7Qktvf
+	q05wGCwPpxS9LwkHyb+NkgX6juy2usW2DwP40UlVeknzdvxjiTCCkiYd5S5ubLG4EM8FRSPJH59
+	BGCxHzGCm1S7V7EHQa1b650sP08fOV2zE=
+X-Google-Smtp-Source: APXvYqyY4zzqeYpHcHpC7A1OUDD62PzGPr+3M2Icb89VxalbjvVkGNxWr1qk6DLPqQBOvsGwj7LrYQ==
+X-Received: by 2002:a7b:c450:: with SMTP id l16mr1625022wmi.31.1582763573663; 
+	Wed, 26 Feb 2020 16:32:53 -0800 (PST)
+Received: from lbrmn-lnxub108.ric.broadcom.com ([192.19.228.250])
+	by smtp.gmail.com with ESMTPSA id
+	m22sm4207829wmc.41.2020.02.26.16.32.51
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 26 Feb 2020 16:32:52 -0800 (PST)
+From: Jonathan Richardson <jonathan.richardson@broadcom.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 26 Feb 2020 16:32:40 -0800
+Message-Id: <20200227003240.76088-1-jonathan.richardson@broadcom.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH v3 1/1] open-lldp: Add initial version 1.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,44 +53,194 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Feb 2020 23:38:56 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 27 Feb 2020 00:32:54 -0000
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBha3VzdGVyODA4IDxha3VzdGVy
-ODA4QGdtYWlsLmNvbT4NCj4gU2VudDogZGVuIDMxIGphbnVhcmkgMjAyMCAxODozNA0KPiBUbzog
-UGV0ZXIgS2plbGxlcnN0ZWR0IDxwZXRlci5ramVsbGVyc3RlZHRAYXhpcy5jb20+OyBvcGVuZW1i
-ZWRkZWQtDQo+IGRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtv
-ZV0gW21ldGEtb2VdW3pldXNdW1BBVENIIDEvMl0gbGlibGRiOiBEbyBub3QgcmVxdWlyZSB0aGUN
-Cj4gInBhbSIgZGlzdHJvIGZlYXR1cmUgdG8gYmUgZW5hYmxlZA0KPiANCj4gT24gMS8zMC8yMCAx
-OjA0IFBNLCBQZXRlciBLamVsbGVyc3RlZHQgd3JvdGU6DQo+ID4gRnJvbTogUGV0ZXIgS2plbGxl
-cnN0ZWR0IDxwZXRlci5ramVsbGVyc3RlZHRAYXhpcy5jb20+DQo+ID4NCj4gPiBJdCB3YXMgb25s
-eSBhZGRlZCBiZWNhdXNlIHNhbWJhIHdhcyBhIGRlcGVuZGVuY3ksIGJ1dCB3YXMgbm90IHJlbW92
-ZWQNCj4gPiBhZ2FpbiB3aGVuIHRoZSBkZXBlbmRlbmN5IG9uIHNhbWJhIHdhcyByZW1vdmVkIGlu
-IGNvbW1pdCA2MjA3MzMxZi4NCj4gPg0KPiA+IFRoaXMgZWZmZWN0aXZlbHkgcmV2ZXJ0cyBjb21t
-aXQgYTE5MGMyZTMuDQo+IEkgaGF2ZSBhbiB1cGRhdGUgdG8gdGhpcyBwYWNrYWdlIHN0YWdlZC4g
-SSBhcHBseSB0aGlzIG9uIHRvcCBvZiB0aGF0Lg0KPiANCj4gaHR0cHM6Ly9naXQub3BlbmVtYmVk
-ZGVkLm9yZy9tZXRhLW9wZW5lbWJlZGRlZC1jb250cmliL2NvbW1pdC8/aD1zdGFibGUvemV1cy1u
-dXQmaWQ9ZjY0YzJkNjkxZWE1OTdhYTYyMjFlM2Q3NzA2YTRkMDIyZTA3YmZlYQ0KPiANCj4gLSBh
-cm1pbg0KDQpEaWQgeW91IGZvcmdldCBhYm91dCB0aGlzPyBJdCBkaWRuJ3QgbWFrZSBpdCBpbiB3
-aGVuIGxpYmxkYiB3YXMgdXBkYXRlZCB0byANCjEuNS42LCBhbmQgaXQgaXMgbm90IGluIHN0YWJs
-ZS96ZXVzLW51dCBub3cuDQoNCi8vUGV0ZXINCg0KPiA+IFNpZ25lZC1vZmYtYnk6IFBldGVyIEtq
-ZWxsZXJzdGVkdCA8cGV0ZXIua2plbGxlcnN0ZWR0QGF4aXMuY29tPg0KPiA+IFNpZ25lZC1vZmYt
-Ynk6IEtoZW0gUmFqIDxyYWoua2hlbUBnbWFpbC5jb20+DQo+ID4gLS0tDQo+ID4gIG1ldGEtbmV0
-d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvbGlibGRiL2xpYmxkYl8xLjUuNS5iYiB8IDMgKy0tDQo+
-ID4gIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMiBkZWxldGlvbnMoLSkNCj4gPg0K
-PiA+IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2xpYmxkYi9s
-aWJsZGJfMS41LjUuYmIgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2xpYmxkYi9s
-aWJsZGJfMS41LjUuYmINCj4gPiBpbmRleCBiMTljOTY0ZDguLjlhOTNlNjZiNiAxMDA2NDQNCj4g
-PiAtLS0gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2xpYmxkYi9saWJsZGJfMS41
-LjUuYmINCj4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2xpYmxkYi9s
-aWJsZGJfMS41LjUuYmINCj4gPiBAQCAtMzYsOCArMzYsNyBAQCBMSUNfRklMRVNfQ0hLU1VNID0g
-ImZpbGU6Ly9weWxkYi5oO2VuZGxpbmU9MjQ7bWQ1PWRmYmQyMzhjZWNhZDc2OTU3ZjdmODYwZmJl
-OWFkYQ0KPiA+ICBTUkNfVVJJW21kNXN1bV0gPSAiMzM5YTQxYWM5ZWZhZWM2ODBlNmQxNDY5ZGQ5
-YWEzNWIiDQo+ID4gIFNSQ19VUklbc2hhMjU2c3VtXSA9ICIxOTlmNTg2MWFhODYzZjUzOGVjNjZk
-NWZhOTVlY2MxMzI1NGEyMDMwYzUzZGFmMGU0NzM2M2ZhOWJhMjM1YzY4Ig0KPiA+DQo+ID4gLWlu
-aGVyaXQgd2FmLXNhbWJhIGRpc3Ryb19mZWF0dXJlc19jaGVjaw0KPiA+IC1SRVFVSVJFRF9ESVNU
-Uk9fRkVBVFVSRVMgPSAicGFtIg0KPiA+ICtpbmhlcml0IHdhZi1zYW1iYQ0KPiA+DQo+ID4gIFMg
-PSAiJHtXT1JLRElSfS9sZGItJHtQVn0iDQo+ID4NCg0K
+Open-LLDP provides a Link Layer Discovery Protocol agent that supports
+DCB (Data Center Bridging). The tc utility from iproute is needed to
+manipulate  traffic control settings in the kernel.
+
+Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
+---
+ .../0001-Fix-musl-libc-build-issue.patch      | 26 +++++++++
+ ...-include-path-to-generated-version.h.patch | 29 ++++++++++
+ ...tion-to-disable-installation-of-syst.patch | 57 +++++++++++++++++++
+ .../openlldp/openlldp_1.0.1.bb                | 33 +++++++++++
+ 4 files changed, 145 insertions(+)
+ create mode 100644 meta-networking/recipes-protocols/openlldp/files/0001-Fix-musl-libc-build-issue.patch
+ create mode 100644 meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-include-path-to-generated-version.h.patch
+ create mode 100644 meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
+ create mode 100644 meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
+
+diff --git a/meta-networking/recipes-protocols/openlldp/files/0001-Fix-musl-libc-build-issue.patch b/meta-networking/recipes-protocols/openlldp/files/0001-Fix-musl-libc-build-issue.patch
+new file mode 100644
+index 000000000..40b082e77
+--- /dev/null
++++ b/meta-networking/recipes-protocols/openlldp/files/0001-Fix-musl-libc-build-issue.patch
+@@ -0,0 +1,26 @@
++From a64e52f9b58519aa2b8a1073fa6c04da04933428 Mon Sep 17 00:00:00 2001
++From: Jonathan Richardson <jonathan.richardson@broadcom.com>
++Date: Wed, 26 Feb 2020 12:16:38 -0800
++Subject: [PATCH] Fix musl libc build issue
++
++clif.h should include sys/types.h for the definition of pid_t. It fails
++to compile when using musl libc.
++
++Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
++
++---
++ include/clif.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/include/clif.h b/include/clif.h
++index 648eedf..92f4fd8 100644
++--- a/include/clif.h
+++++ b/include/clif.h
++@@ -32,6 +32,7 @@
++ #ifndef CLIF_H
++ #define CLIF_H
++ 
+++#include <sys/types.h>
++ #include <sys/un.h>
++ #include "clif_sock.h"
++ 
+diff --git a/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-include-path-to-generated-version.h.patch b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-include-path-to-generated-version.h.patch
+new file mode 100644
+index 000000000..b58fc104d
+--- /dev/null
++++ b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-include-path-to-generated-version.h.patch
+@@ -0,0 +1,29 @@
++From eb14aa66dc0384071af401cced8c02993b55502e Mon Sep 17 00:00:00 2001
++From: Jonathan Richardson <jonathan.richardson@broadcom.com>
++Date: Wed, 26 Feb 2020 15:54:51 -0800
++Subject: [PATCH] autotools: Add include path to generated version.h
++
++When the build dir isn't the same as source dir it fails to compile
++because the generated version.h from AC_CONFIG_FILES is always in build
++dir. Include the path to it in AM_CPPFLAGS.
++
++Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
++
++---
++ Makefile.am | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/Makefile.am b/Makefile.am
++index 0fb9bb0..2952019 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -14,6 +14,9 @@ endif
++ AM_CPPFLAGS = -I${srcdir}/include -DSYSCONFDIR="\"${sysconfdir}\"" \
++ 	-D_FORTIFY_SOURCE=2
++ 
+++# Required for the generated version.h when build dir is not the same as srcdir.
+++AM_CPPFLAGS += -I${top_builddir}/include
+++
++ ACLOCAL_AMFLAGS = -I m4
++ 
++ parse_cli.o: CFLAGS+=-U_FORTIFY_SOURCE -Wno-error
+diff --git a/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
+new file mode 100644
+index 000000000..a26a5299a
+--- /dev/null
++++ b/meta-networking/recipes-protocols/openlldp/files/0001-autotools-Add-option-to-disable-installation-of-syst.patch
+@@ -0,0 +1,57 @@
++From dc3f2250908587710f109c80ddf8a94f0bc40b82 Mon Sep 17 00:00:00 2001
++From: Jonathan Richardson <jonathan.richardson@broadcom.com>
++Date: Fri, 6 Apr 2018 10:49:04 -0700
++Subject: [PATCH] autotools: Add option to disable installation of systemd conf
++ files
++
++Add option to configure.ac to enable or disable install of systemd conf
++files. If --with-systemdsystemunitdir is passed to configure then the
++files will be installed to the provided directory. If the option isn't
++provided then the value is determined from the systemd pkgconfig file,
++if found in PKG_CONFIG_PATH.
++
++This change is required because Makefile.am always installed the files
++to a hard coded path that couldn't be changed.
++
++
++Signed-off-by: Jonathan Richardson <jonathan.richardson@broadcom.com>
++---
++ Makefile.am  | 3 ++-
++ configure.ac | 9 +++++++++
++ 2 files changed, 11 insertions(+), 1 deletion(-)
++
++diff --git a/Makefile.am b/Makefile.am
++index 292c0fd..0fb9bb0 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -138,8 +138,9 @@ install-data-hook:	installdirs-local
++ pkgconfigdir = ${libdir}/pkgconfig
++ pkgconfig_DATA = lldpad.pc liblldp_clif.pc
++ 
++-systemdsystemunitdir = $(prefix)/lib/systemd/system
+++if HAVE_SYSTEMD
++ dist_systemdsystemunit_DATA = lldpad.service lldpad.socket
+++endif
++ 
++ bashcompletiondir = $(sysconfdir)/bash_completion.d
++ dist_bashcompletion_DATA = contrib/bash_completion/lldpad contrib/bash_completion/lldptool
++diff --git a/configure.ac b/configure.ac
++index 0667446..f75f433 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -95,6 +95,15 @@ AC_TYPE_UINT16_T
++ AC_TYPE_UINT32_T
++ AC_TYPE_UINT8_T
++ 
+++# Support for systemd unit files.
+++AC_ARG_WITH([systemdsystemunitdir],
+++        AS_HELP_STRING([--with-systemdsystemunitdir=DIR], [Directory for systemd service files]),
+++        [], [with_systemdsystemunitdir=$($PKG_CONFIG --variable=systemdsystemunitdir systemd)])
+++if test "x$with_systemdsystemunitdir" != xno; then
+++        AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
+++fi
+++AM_CONDITIONAL(HAVE_SYSTEMD, [test -n "$with_systemdsystemunitdir" -a "x$with_systemdsystemunitdir" != xno ])
+++
++ AC_CONFIG_FILES([Makefile include/version.h lldpad.spec lldpad.pc liblldp_clif.pc])
++ AC_CONFIG_MACRO_DIR([m4])
++ AC_OUTPUT
+diff --git a/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
+new file mode 100644
+index 000000000..5fbf0645e
+--- /dev/null
++++ b/meta-networking/recipes-protocols/openlldp/openlldp_1.0.1.bb
+@@ -0,0 +1,33 @@
++SUMMARY = "Open-LLDP"
++DESCRIPTION = "Link Layer Discovery Protocol for Linux that includes support for DCBX"
++HOMEPAGE = "http://open-lldp.org/start"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
++
++S = "${WORKDIR}/git"
++
++inherit pkgconfig autotools
++inherit ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}
++
++DEPENDS = "libnl libconfig readline"
++
++SRCREV = "36d729de7ce5b56cf061d94d610cf0510154820c"
++SRC_URI = "git://github.com/intel/openlldp.git;protocol=https;branch=master \
++           file://0001-Fix-musl-libc-build-issue.patch \
++           file://0001-autotools-Add-include-path-to-generated-version.h.patch \
++           file://0001-autotools-Add-option-to-disable-installation-of-syst.patch \
++           "
++
++# Makefile.am adds -Werror to AM_CFLAGS. There are warnings so disable it.
++TARGET_CFLAGS += "-Wno-error"
++
++# Enable install of systemd conf files.
++EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-systemdsystemunitdir=${systemd_system_unitdir}', '', d)}"
++
++SYSTEMD_SERVICE_${PN} = "lldpad.service lldpad.socket"
++
++# To enable service at boot set to enable in local.conf.
++SYSTEMD_AUTO_ENABLE ?= "disable"
++
++RRECOMMENDS_${PN} = "iproute2-tc"
+-- 
+2.17.1
+
 
