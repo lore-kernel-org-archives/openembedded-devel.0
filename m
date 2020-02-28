@@ -1,41 +1,42 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
-	[209.85.221.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 84D4A6184F
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AA076196B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2020 13:36:05 +0000 (UTC)
-Received: by mail-wr1-f66.google.com with SMTP id p18so2944290wre.9
+	Fri, 28 Feb 2020 13:36:26 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id r17so2967104wrj.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2020 05:36:06 -0800 (PST)
+	Fri, 28 Feb 2020 05:36:28 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=Ne7ktBG7Vbucdyc0MvUk5QF9uSTcGYxqJiiyevCyvrU=;
-	b=Va88YIlDw+otfOF19sy631Ay8sprsN129VdnVJNGVpghxB3eQZc9zAPZnbYXXjZIc4
-	hE823AigNfSTGrFinj5z49KdiIqDPrlEljTeftSpgr5pN9+AWJV2ev8FRyHRPIVXgSGM
-	m8myU+/EYvXZZ7EfM5Dmk3DFeR9ONGuDl6ggULtNKCvyaGDM4tQFa5Dp5Nx0AUZi8ahm
-	92ivqVpYe6t7fonrmVnlnyJqoBjek+7KWFQeCFzKptBfF/r4w25H9wRU4YjYccPg3sbk
-	e+6hLfzhbzwY4kjd16Lulzqki5WhxrRq758tViYSeuQW0Z0qRvGg7oxYXxaOgLWUErfH
-	nYsw==
-X-Gm-Message-State: APjAAAVUxaxMsHdkXbW8aemHEiJyqKTTkp9ITG9GISKx3tJqtH3XcaDN
-	yFX0IBXUlbe1oGuGGNXIONlfzxPn
-X-Google-Smtp-Source: APXvYqxeJ8vbMo4Vgk6/0E8TyV48JByG7IrJsjTQsqiqtJdbJYUL9qIGR9IZdVZ7dX7F4E5Trj1sVg==
-X-Received: by 2002:adf:c445:: with SMTP id a5mr4903562wrg.14.1582896965569;
-	Fri, 28 Feb 2020 05:36:05 -0800 (PST)
+	bh=kcg6MNn7fNP2R7Bs2cabVWgHgl2GvL6DFxs8kfIvA38=;
+	b=kJA3KIFH00QwXY0sOQ7G1/W3XHFcSnVS1hijz/348MkOb4SKqRQT6s4vTkY+GK3hhX
+	ok/xJrUgQmzvgai4rJv6PjImmFL97kLeMoSR7REEmfM40uu7rqlhR0M6d6D4glsubuGb
+	Mf2BF+gqHXE3oOguwZW41t2r8vKO4mtTeMjj+PhoqgopQ/1Wh0JecAnmiQ3Q4gjehcSC
+	qcH+leZD6JpIsIJ5AdLhcsJc99qQnoscCH3qVqeqxWzK6C0AHiDzb0XRGf67dQQCwm2L
+	Z/zPcrbLfZ8JVP4Q7wx/EpebQSgQiujlazRD/HnQCgL+0+Eroby5AXU+Bihok5DH0xc+
+	gI5A==
+X-Gm-Message-State: APjAAAURTJ51fHDpezWpG0eguD4FUVjJqk/T8rfFSaKDObS5Pq/7zOW6
+	D5L5jt91Db45y3rDSYK68kFAbDJH
+X-Google-Smtp-Source: APXvYqyJvCFgcKpcfzocguaOlD0G4bPKC7miqsODVGzDz1X1fDcUk/BNGKJzCxuGi3cfu4lN/DOu6g==
+X-Received: by 2002:a05:6000:1206:: with SMTP id
+	e6mr5158856wrx.410.1582896987434; 
+	Fri, 28 Feb 2020 05:36:27 -0800 (PST)
 Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	a3sm13210471wrq.63.2020.02.28.05.36.04
+	y185sm2356713wmg.2.2020.02.28.05.36.26
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 28 Feb 2020 05:36:04 -0800 (PST)
+	Fri, 28 Feb 2020 05:36:26 -0800 (PST)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Feb 2020 13:36:04 +0000
-Message-Id: <20200228133604.39253-1-git@andred.net>
+Date: Fri, 28 Feb 2020 13:36:26 +0000
+Message-Id: <20200228133626.39374-1-git@andred.net>
 X-Mailer: git-send-email 2.23.0.rc1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] meta-oe: use COMMON_LICENSE_DIR for license file location
+Subject: [meta-multimedia][PATCH] meta-multimedia: use COMMON_LICENSE_DIR for license file location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,7 +49,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2020 13:36:05 -0000
+X-List-Received-Date: Fri, 28 Feb 2020 13:36:28 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -56,64 +57,63 @@ COMMON_LICENSE_DIR is the official location for license files
 
 Signed-off-by: André Draszik <git@andred.net>
 ---
- meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb          | 2 +-
- .../gnome-doc-utils-stub/gnome-doc-utils-stub_1.0.bb          | 4 ++--
- meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb      | 2 +-
- meta-oe/recipes-support/spdlog/spdlog_1.5.0.bb                | 2 +-
- 4 files changed, 5 insertions(+), 5 deletions(-)
+ .../recipes-multimedia/sample-content/bigbuckbunny-1080p.bb     | 2 +-
+ .../recipes-multimedia/sample-content/bigbuckbunny-480p.bb      | 2 +-
+ .../recipes-multimedia/sample-content/bigbuckbunny-720p.bb      | 2 +-
+ .../recipes-multimedia/sample-content/tearsofsteel-1080p.bb     | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb b/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb
-index 17e8c700c..39a0ccc8c 100644
---- a/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb
-+++ b/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Dhrystone CPU benchmark"
- LICENSE = "PD"
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/PD;md5=b3597d12946881e13cb3b548d1173851"
- 
- SRC_URI = "http://www.netlib.org/benchmark/dhry-c;downloadfilename=dhry-c.shar \
-            file://dhrystone.patch"
-diff --git a/meta-oe/recipes-gnome/gnome-doc-utils-stub/gnome-doc-utils-stub_1.0.bb b/meta-oe/recipes-gnome/gnome-doc-utils-stub/gnome-doc-utils-stub_1.0.bb
-index d6da51b0d..9c16da416 100644
---- a/meta-oe/recipes-gnome/gnome-doc-utils-stub/gnome-doc-utils-stub_1.0.bb
-+++ b/meta-oe/recipes-gnome/gnome-doc-utils-stub/gnome-doc-utils-stub_1.0.bb
-@@ -3,8 +3,8 @@ DESCRIPTION = "This recipe provides m4 macros from gnome-doc-utils project, so \
- that dependent recipes can build. Gnome-doc-utils itself is no longer packaged because \
- it requires libxml2 and python 2 at the same time, which can no longer be satisfied. "
- LICENSE = "GPLv2 & LGPLv2.1"
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 \
--                    file://${COREBASE}/meta/files/common-licenses/LGPL-2.1;md5=1a6d268fd218675ffea8be556788b780"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 \
-+                    file://${COMMON_LICENSE_DIR}/LGPL-2.1;md5=1a6d268fd218675ffea8be556788b780"
- SRC_URI = "file://gnome-doc-utils.m4"
- 
- PROVIDES = "gnome-doc-utils"
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb b/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb
-index d2058ba57..fae760bbf 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd-machine-conf_1.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Machine specific gpsd config"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD;md5=3775480a712fc46a69647678acb234cb"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD;md5=3775480a712fc46a69647678acb234cb"
- 
- # empty by default
- # BSP layers can add stuff like meta-openmoko example:
-diff --git a/meta-oe/recipes-support/spdlog/spdlog_1.5.0.bb b/meta-oe/recipes-support/spdlog/spdlog_1.5.0.bb
-index 39629cce0..44679c047 100644
---- a/meta-oe/recipes-support/spdlog/spdlog_1.5.0.bb
-+++ b/meta-oe/recipes-support/spdlog/spdlog_1.5.0.bb
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
+index cee386c2a..70eb6e4be 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-1080p.bb
 @@ -1,7 +1,7 @@
- DESCRIPTION = "Very fast, header only, C++ logging library."
- HOMEPAGE = "https://github.com/gabime/spdlog/wiki"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+ SUMMARY = "Big Buck Bunny movie - 1080P"
+ LICENSE = "CC-BY-3.0"
+ # http://www.bigbuckbunny.org/index.php/about/
+-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
  
- SRCREV = "cf6f1dd01e660d5865d68bf5fa78f6376b89470a"
- SRC_URI = "git://github.com/gabime/spdlog.git;protocol=git;branch=v1.x;"
+ SRC_URI = "http://themazzone.com/big_buck_bunny_1080p_surround.avi"
+ SRC_URI[md5sum] = "223991c8b33564eb77988a4c13c1c76a"
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
+index d395b9206..df2368996 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-480p.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Big Buck Bunny movie - 480P"
+ LICENSE = "CC-BY-3.0"
+ # http://www.bigbuckbunny.org/index.php/about/
+-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
+ 
+ SRC_URI = "https://archive.org/download/BigBuckBunny/big_buck_bunny_480p_surround-fix.avi"
+ SRC_URI[md5sum] = "ed7ed01e9aefba8ddd77c13332cec120"
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
+index 20d562749..cb8ece0cb 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/bigbuckbunny-720p.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Big Buck Bunny movie - 720P"
+ LICENSE = "CC-BY-3.0"
+ # http://www.bigbuckbunny.org/index.php/about/
+-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
+ 
+ SRC_URI = "https://archive.org/download/BigBuckBunny/big_buck_bunny_720p_surround.avi"
+ SRC_URI[md5sum] = "0da8fe124595f5b206d64cb1400bbefc"
+diff --git a/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
+index 0582a4856..04cbd2e34 100644
+--- a/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
++++ b/meta-multimedia/recipes-multimedia/sample-content/tearsofsteel-1080p.bb
+@@ -1,6 +1,6 @@
+ SUMMARY = "Tears of Steel movie - 1080P"
+ LICENSE = "CC-BY-3.0"
+-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/CC-BY-3.0;md5=dfa02b5755629022e267f10b9c0a2ab7"
+ 
+ SRC_URI = "http://ftp.nluug.nl/pub/graphics/blender/demo/movies/ToS/ToS-4k-1920.mov"
+ SRC_URI[md5sum] = "e3fee55b1779c553e37b1d3988e6fad6"
 -- 
 2.23.0.rc1
 
