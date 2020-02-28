@@ -1,53 +1,45 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com
-	[209.85.128.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 271D160B1C
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+	by mail.openembedded.org (Postfix) with ESMTP id C94F861944
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2020 15:04:01 +0000 (UTC)
-Received: by mail-wm1-f68.google.com with SMTP id f15so3508713wml.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2020 07:04:03 -0800 (PST)
+	Fri, 28 Feb 2020 19:55:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=bd2tueSiuDQouj+dva53PZ7U95u0TAj2S5wXBOKflVs=;
-	b=RQjEmWteFIMr4cvX4N2tHzvBd3JOZS9sbpjfBQXOc9nJKXyOizMH4oZKxFbEdDxK+r
-	oFxb3NZJATgo1CPiPCPv8QMTE/Slor6NLvdVFQmn2SLagnZ4lAa6FwJbgYSz7fnzAwVd
-	0NmaA8yLsdM3NVSGzHLbQRyF8Sf9ffolcOQVPqxFR0woi/0lzaBLbJLfpBqI3H2t0Jqv
-	/SX3liaIdo7j11zVc+qLSMwQdMLygM+LuJzPJ2ZJ5X7LsOroSffpJbcT5EmN+Oq2K3pS
-	mw3meEzT30MvkyTkKVEnrn+zahjFYuSq4E8ySxpzwvKAdypEdypapNz0k4eVFnN50Phg
-	mkzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=bd2tueSiuDQouj+dva53PZ7U95u0TAj2S5wXBOKflVs=;
-	b=sdAN7kFA4s7vnkBVDl8Br8Db+NHRQRCu//zbQrE4Un7PiXdklzHDoLGrLVYSE47gmv
-	dp78qPRS0aXRTZjKWsx0Ghup3QZZmrDBmmlM+o9oRzQuIKRsSq+Abxuppgd6nBYND8vi
-	wGWNi2l/FchnBHSSc11e48Lsec8GnspXyz1rFpSatCIq6CQUjuijjLYFeBHATpzoaKEF
-	bJ/Kvpg9lPHog4/n1CHQxbQV9OgP8z1WFJi1ECLeCOxwDuEMXEu10aAoZiYn8BRfage+
-	9jRzS8k8EEXQoYKcoaPwXFJHaXpRvSXwU9Rw9S/PO/lmS0gbnbV0nCGbYqxiKZGNV4Qw
-	0ieg==
-X-Gm-Message-State: APjAAAUW2n0wRIyr0F5c4mrICFjE0owiTgMtnDZlZnu8xdfTIDhEHAMw
-	fu7zRHajmDlQZ0B3K7fsC/bwjg==
-X-Google-Smtp-Source: APXvYqzTkSSYHsKzJci5NxBUEkUyes3Zm0R9+wjH7SzS7W7kgtSUb/DB4LnvroB9qAqHPQTXjp543A==
-X-Received: by 2002:a1c:1b86:: with SMTP id b128mr4959155wmb.64.1582902242541; 
-	Fri, 28 Feb 2020 07:04:02 -0800 (PST)
-Received: from localhost.localdomain (lfbn-nic-1-188-94.w2-15.abo.wanadoo.fr.
-	[2.15.37.94]) by smtp.gmail.com with ESMTPSA id
-	b16sm2339853wmj.39.2020.02.28.07.04.01
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 28 Feb 2020 07:04:01 -0800 (PST)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: Khem Raj <raj.khem@gmail.com>, Armin Kuster <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Date: Fri, 28 Feb 2020 16:03:45 +0100
-Message-Id: <20200228150345.11829-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.25.0
+	d=axis.com; l=6020; q=dns/txt; s=axis-central1;
+	t=1582919755; x=1614455755;
+	h=from:to:subject:date:message-id:references:in-reply-to:
+	content-transfer-encoding:mime-version;
+	bh=//O2tVVbzKatyeHkU+ZVoj1nSBA6ddtjekU+dXFpgmI=;
+	b=Xw8xOqVLF6GOGYyV5CKuWQ23o+IXgrz6WKMdglH275BQkGRzT+yvDGjn
+	f5EG3zqSKKNFC4P5iEuG/kZgJxFglYFpNk8u3Fmr5DOUx9xiV2verWSR6
+	3jpa6AFXnDsmmwwiDBFb7hzOp0cmEhYB+oqvxGaIt7p1VjO2KmKljNdxE
+	+Phd/6yiU3KHSgEG+ZY3qI3THJ6AJDaTeBWa0PcTVMW7x4E2c4xBEixab
+	n0283O938M5SytWzB2unpqC5UOvZG4gW8s/lKk+uVNz/Q05koNb7hshnL
+	RuAeZy9rAqqAkU1eodPY3/VT47ukE0oPbxy1CUXoP8ESSf72YX3Z9dDGC Q==;
+IronPort-SDR: OycG6E0J74eE/PAfLZ6K6wLxSm1h8PWMdIoSw0kuAEwMcLXBhV4f+oVVa/6zdapDiQcxzvN1Va
+	1/JIm72ZWUwduyACxSN6I0qHYHvHC3KLbYoUD8p2PokNdG/W04CF6HfeJ+iGGQadSvk6Xex//Y
+	C83yt5R53lqPDhVdTPUVoWc3PNtjjn0iTmbD0iOaaq2bfEytrw5mnrC0A2slOvezmadGi0KRyQ
+	oTPvjT2ZO7UeK1Jk975+wv2V9cRdPIImeL7W/yDY5OFCSOnxof+Mzc9E33rmuVc6Cl8HS1iMfc
+	l0Y=
+X-IronPort-AV: E=Sophos;i="5.70,497,1574118000"; 
+   d="scan'208";a="5948103"
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: =?utf-8?B?QW5kcsOpIERyYXN6aWs=?= <git@andred.net>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH] meta-networking:
+	s|${COREBASE}/meta/files/common-licenses|${COMMON_LICENSE_DIR}
+Thread-Index: AQHV7YzlKRBJ1wmw0ECNZ73v5JeNGKgxAfjQ
+Date: Fri, 28 Feb 2020 19:55:53 +0000
+Message-ID: <7bc1a555a6b845899219c29be5723ce7@XBOX03.axis.com>
+References: <20200227164219.24229-1-git@andred.net>
+In-Reply-To: <20200227164219.24229-1-git@andred.net>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [meta-ota][PATCH] meta-ota: add support for binary-delta images in a new layer
+Subject: Re: [meta-networking][PATCH] meta-networking:	s|${COREBASE}/meta/files/common-licenses|${COMMON_LICENSE_DIR}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,173 +52,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2020 15:04:02 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 28 Feb 2020 19:55:54 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-
-Over-The-Air updates are a crucial part of IoT systems based on linux.
-There are several OTA update frameworks available and many offer some
-sort of support in yocto (e.g. meta-mender, meta-rauc). There are certain
-operations that are common to all of them such as: generating binary
-delta patches, system recovery, creating provisioning images etc.
-
-This patch proposes to add a new layer in meta-openembedded dedicated to
-OTA. As the first functionality it adds a bbclass for generating binary
-delta images using two popular algorithms - vcdiff and rsync.
-
-Such images can then be easily packaged in update artifacts for different
-OTA frameworks.
-
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
----
-Hi,
-
-I've noticed that when launching CE products and implementing OTA support
-I find myself implementing the same functionalities over again. I recently
-started abstracting them and would like to upstream them in meta-openembedded
-so that at least a part of that becomes standardized.
-
-This patch proposes to add a new layer to meta-openembedded and I'll gladly
-maintain it. If accepted I intend on extending it with more functionalities
-such as creating provisioning (factory) images for updatable systems, recovery
-system images etc.
-
- meta-ota/README                       | 27 +++++++++++
- meta-ota/classes/binary-delta.bbclass | 64 +++++++++++++++++++++++++++
- meta-ota/conf/layer.conf              | 17 +++++++
- 3 files changed, 108 insertions(+)
- create mode 100644 meta-ota/README
- create mode 100644 meta-ota/classes/binary-delta.bbclass
- create mode 100644 meta-ota/conf/layer.conf
-
-diff --git a/meta-ota/README b/meta-ota/README
-new file mode 100644
-index 000000000..07a1debdd
---- /dev/null
-+++ b/meta-ota/README
-@@ -0,0 +1,27 @@
-+meta-ota
-+========
-+
-+This layer provides support for creating Over-The-Air update images.
-+
-+Dependencies
-+------------
-+
-+This layer depends on:
-+
-+URI: git://github.com/openembedded/oe-core.git
-+subdirectory: meta
-+branch: master
-+revision: HEAD
-+
-+URI: git://github.com/openembedded/meta-oe.git
-+subdirectory: meta-oe
-+branch: master
-+revision: HEAD
-+
-+Maintenance
-+-----------
-+
-+Send patches / pull requests to openembedded-devel@lists.openembedded.org
-+with '[meta-ota]' in the subject.
-+
-+Layer maintainer: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-diff --git a/meta-ota/classes/binary-delta.bbclass b/meta-ota/classes/binary-delta.bbclass
-new file mode 100644
-index 000000000..24fb20b1b
---- /dev/null
-+++ b/meta-ota/classes/binary-delta.bbclass
-@@ -0,0 +1,64 @@
-+# SPDX-License-Identifier: MIT
-+#
-+# Copyright (C) 2020 BayLibre SAS
-+# Author: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-+#
-+# This class provides image conversions which - given a baseline partition
-+# image - can generate a binary delta patch. Such patch can be applied on top
-+# of a deployed baseline partition to generate an updated image.
-+#
-+# For now the supported algorithms are rsync and vcdiff (supplied by rdiff and
-+# xdelta3 respectively). We also provide several compression methods.
-+#
-+# We only support binary delta on ext[2-4] and btrfs images as it doesn't make
-+# much sense on high-entropy, compressed filesystems.
-+
-+BINARY_DELTA_BASELINE ?= ""
-+
-+verify_baseline() {
-+    if [ -z ${BINARY_DELTA_BASELINE} ] ; then
-+        bbfatal "variable BINARY_DELTA_BASELINE cannot be empty."
-+    fi
-+
-+    if ! [ -f ${BINARY_DELTA_BASELINE} ] ; then
-+        bbfatal "${BINARY_DELTA_BASELINE} doesn't exist"
-+    fi
-+}
-+
-+gen_rdiff() {
-+    local IMAGE=$1
-+    local SIGNATURE=$1.sig
-+    local PATCH=$1.rdiff
-+
-+    verify_baseline
-+
-+    rdiff signature ${BINARY_DELTA_BASELINE} $SIGNATURE
-+    rdiff delta $SIGNATURE $IMAGE $PATCH
-+    rm $SIGNATURE
-+}
-+
-+gen_vcdiff() {
-+    local IMAGE=$1
-+    local PATCH=$1.vcdiff
-+
-+    verify_baseline
-+
-+    xdelta3 -e -s ${BINARY_DELTA_BASELINE} $IMAGE $PATCH
-+}
-+
-+IMAGE_TYPES += " \
-+    ext2.rdiff ext3.rdiff ext4.rdiff btrfs.rdiff \
-+    ext2.rdiff.gz ext3.rdiff.gz ext4.rdiff.gz btrfs.rdiff.gz \
-+    ext2.rdiff.bz2 ext3.rdiff.bz2 ext4.rdiff.bz2 btrfs.rdiff.bz2 \
-+    ext2.rdiff.xz ext3.rdiff.xz ext4.rdiff.xz btrfs.rdiff.xz \
-+    ext2.vcdiff ext3.vcdiff ext4.vcdiff brtfs.vcdiff \
-+    ext2.vcdiff.gz ext3.vcdiff.gz ext4.vcdiff.gz brtfs.vcdiff.gz \
-+    ext2.vcdiff.bz2 ext3.vcdiff.bz2 ext4.vcdiff.bz2 brtfs.vcdiff.bz2 \
-+    ext2.vcdiff.xz ext3.vcdiff.xz ext4.vcdiff.xz brtfs.vcdiff.xz \
-+"
-+
-+CONVERSIONTYPES += "rdiff vcdiff"
-+CONVERSION_CMD_rdiff = "gen_rdiff ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
-+CONVERSION_CMD_vcdiff = "gen_vcdiff ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
-+CONVERSION_DEPENDS_rdiff = "librsync-native"
-+CONVERSION_DEPENDS_vcdiff = "xdelta3-native"
-diff --git a/meta-ota/conf/layer.conf b/meta-ota/conf/layer.conf
-new file mode 100644
-index 000000000..05c6b0f96
---- /dev/null
-+++ b/meta-ota/conf/layer.conf
-@@ -0,0 +1,17 @@
-+# Layer configuration for meta-ota layer
-+# Copyright (C) 2020 BayLibre SAS
-+
-+# We have a conf and classes directory, add to BBPATH
-+BBPATH .= ":${LAYERDIR}"
-+
-+BBFILE_COLLECTIONS += "ota"
-+BBFILE_PATTERN_ota := "^${LAYERDIR}/"
-+BBFILE_PRIORITY_ota = "6"
-+
-+# This should only be incremented on significant changes that will
-+# cause compatibility issues with other layers
-+LAYERVERSION_ota = "1"
-+
-+LAYERDEPENDS_ota = "core openembedded-layer"
-+
-+LAYERSERIES_COMPAT_ota = "zeus"
--- 
-2.19.1
-
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIDxvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNl
+c0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgQW5kcsOpIERyYXN6aWsNCj4g
+U2VudDogZGVuIDI3IGZlYnJ1YXJpIDIwMjAgMTc6NDINCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFtvZV0gW21ldGEtbmV0d29ya2lu
+Z11bUEFUQ0hdIG1ldGEtbmV0d29ya2luZzogc3wke0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1v
+bi1saWNlbnNlc3wke0NPTU1PTl9MSUNFTlNFX0RJUn0NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IEFu
+ZHLDqSBEcmFzemlrIDxnaXRAYW5kcmVkLm5ldD4NCj4gLS0tDQo+ICBtZXRhLW5ldHdvcmtpbmcv
+cmVjaXBlcy1jb25uZWN0aXZpdHkvc2FtYmEvc2FtYmFfNC4xMC4xMy5iYiB8IDQgKystLQ0KPiAg
+bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9sbGRwZC9sbGRwZF8xLjAuNC5iYiAgICAg
+ICAgfCAyICstDQo+ICBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2FycHRhYmxlcy9h
+cnB0YWJsZXNfZ2l0LmJiICB8IDIgKy0NCj4gIG1ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBv
+cnQvbmNwL25jcF8xLjIuNC5iYiAgICAgICAgICAgIHwgMiArLQ0KPiAgNCBmaWxlcyBjaGFuZ2Vk
+LCA1IGluc2VydGlvbnMoKyksIDUgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEvbWV0
+YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL3NhbWJhXzQuMTAuMTMuYmIg
+Yi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0aXZpdHkvc2FtYmEvc2FtYmFfNC4xMC4x
+My5iYg0KPiBpbmRleCA3MWQ4ZmEyZjguLjRkNTcyNTVmMSAxMDA2NDQNCj4gLS0tIGEvbWV0YS1u
+ZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL3NhbWJhXzQuMTAuMTMuYmINCj4g
+KysrIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL3NhbWJhXzQu
+MTAuMTMuYmINCj4gQEAgLTMsOCArMyw4IEBAIFNFQ1RJT04gPSAiY29uc29sZS9uZXR3b3JrIg0K
+PiANCj4gIExJQ0VOU0UgPSAiR1BMLTMuMCsgJiBMR1BMLTMuMCsgJiBHUEwtMi4wKyINCj4gIExJ
+Q19GSUxFU19DSEtTVU0gPSAiZmlsZTovL0NPUFlJTkc7bWQ1PWQzMjIzOWJjYjY3MzQ2M2FiODc0
+ZTgwZDQ3ZmFlNTA0IFwNCj4gLSAgICAgICAgICAgICAgICAgICAgZmlsZTovLyR7Q09SRUJBU0V9
+L21ldGEvZmlsZXMvY29tbW9uLWxpY2Vuc2VzL0xHUEwtMy4wO21kNT1iZmNjZmU5NTIyNjlmZmYy
+YjQwN2RkMTFmMmYzMDgzYiBcDQo+IC0gICAgICAgICAgICAgICAgICAgIGZpbGU6Ly8ke0NPUkVC
+QVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9HUEwtMi4wO21kNT04MDFmODA5ODBkMTcx
+ZGQ2NDI1NjEwODMzYTIyZGJlNiAiDQo+ICsgICAgICAgICAgICAgICAgICAgIGZpbGU6Ly8ke0NP
+TU1PTl9MSUNFTlNFX0RJUn0vTEdQTC0zLjA7bWQ1PWJmY2NmZTk1MjI2OWZmZjJiNDA3ZGQxMWYy
+ZjMwODNiIFwNCj4gKyAgICAgICAgICAgICAgICAgICAgZmlsZTovLyR7Q09NTU9OX0xJQ0VOU0Vf
+RElSfS9HUEwtMi4wO21kNT04MDFmODA5ODBkMTcxZGQ2NDI1NjEwODMzYTIyZGJlNiAiDQoNClRo
+ZXNlIHR3byBhcmUgcG9pbnRsZXNzIHNpbmNlIHRoZXJlIGlzIGEgcHJvdmlkZWQgQ09QWUlORyBm
+aWxlLiANCkp1c3QgcmVtb3ZlIHRoZW0uDQoNCj4gDQo+ICBTQU1CQV9NSVJST1IgPSAiaHR0cDov
+L3NhbWJhLm9yZy9zYW1iYS9mdHAiDQo+ICBNSVJST1JTICs9ICJcDQo+IGRpZmYgLS1naXQgYS9t
+ZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1kYWVtb25zL2xsZHBkL2xsZHBkXzEuMC40LmJiIGIvbWV0
+YS1uZXR3b3JraW5nL3JlY2lwZXMtZGFlbW9ucy9sbGRwZC9sbGRwZF8xLjAuNC5iYg0KPiBpbmRl
+eCA4ZmRhZjg0OGYuLjIxYjAyNjg3ZiAxMDA2NDQNCj4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3Jl
+Y2lwZXMtZGFlbW9ucy9sbGRwZC9sbGRwZF8xLjAuNC5iYg0KPiArKysgYi9tZXRhLW5ldHdvcmtp
+bmcvcmVjaXBlcy1kYWVtb25zL2xsZHBkL2xsZHBkXzEuMC40LmJiDQo+IEBAIC0xLDcgKzEsNyBA
+QA0KPiAgU1VNTUFSWSA9ICJBIDgwMi4xYWIgaW1wbGVtZW50YXRpb24gKExMRFApIHRvIGhlbHAg
+eW91IGxvY2F0ZSBuZWlnaGJvcnMgb2YgYWxsIHlvdXIgZXF1aXBtZW50cyINCj4gIFNFQ1RJT04g
+PSAibmV0L21pc2MiDQo+ICBMSUNFTlNFID0gIklTQyINCj4gLUxJQ19GSUxFU19DSEtTVU0gPSAi
+ZmlsZTovLyR7Q09SRUJBU0V9L21ldGEvZmlsZXMvY29tbW9uLWxpY2Vuc2VzL0lTQzttZDU9ZjNi
+OTBlNzhlYTBjZmZiMjBiZjVjY2E3OTQ3YTg5NmQiDQo+ICtMSUNfRklMRVNfQ0hLU1VNID0gImZp
+bGU6Ly8ke0NPTU1PTl9MSUNFTlNFX0RJUn0vSVNDO21kNT1mM2I5MGU3OGVhMGNmZmIyMGJmNWNj
+YTc5NDdhODk2ZCINCg0KVGhlcmUgaXMgYSBMSUNFTlNFIGZpbGUgaW4gdGhlIHRhciBiYWxsLiBQ
+bGVhc2UgdXNlIGl0IGluc3RlYWQuDQoNCj4gDQo+ICBERVBFTkRTID0gImxpYmJzZCBsaWJldmVu
+dCINCj4gDQo+IGRpZmYgLS1naXQgYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L2Fy
+cHRhYmxlcy9hcnB0YWJsZXNfZ2l0LmJiIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9y
+dC9hcnB0YWJsZXMvYXJwdGFibGVzX2dpdC5iYg0KPiBpbmRleCBjZWMxZDFmNzcuLmU4ODYzMWUw
+OCAxMDA2NDQNCj4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9hcnB0YWJs
+ZXMvYXJwdGFibGVzX2dpdC5iYg0KPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBw
+b3J0L2FycHRhYmxlcy9hcnB0YWJsZXNfZ2l0LmJiDQo+IEBAIC0xLDcgKzEsNyBAQA0KPiAgU1VN
+TUFSWSA9ICJBZG1pbmlzdHJhdGlvbiB0b29sIGZvciBhcnAgcGFja2V0IGZpbHRlcmluZyINCj4g
+IFNFQ1RJT04gPSAibmV0Ig0KPiAgTElDRU5TRSA9ICJHUEwtMi4wIg0KPiAtTElDX0ZJTEVTX0NI
+S1NVTSA9ICJmaWxlOi8vJHtDT1JFQkFTRX0vbWV0YS9maWxlcy9jb21tb24tbGljZW5zZXMvR1BM
+LTIuMDttZDU9ODAxZjgwOTgwZDE3MWRkNjQyNTYxMDgzM2EyMmRiZTYiDQo+ICtMSUNfRklMRVNf
+Q0hLU1VNID0gImZpbGU6Ly8ke0NPTU1PTl9MSUNFTlNFX0RJUn0vR1BMLTIuMDttZDU9ODAxZjgw
+OTgwZDE3MWRkNjQyNTYxMDgzM2EyMmRiZTYiDQoNClRoZXJlIGlzIGEgQ09QWUlORyBmaWxlIGlu
+IHRoZSBHaXQgcmVwb3NpdG9yeS4gUGxlYXNlIHVzZSBpdCBpbnN0ZWFkLg0KDQo+ICBTUkNSRVYg
+PSAiZjRhYjhmNjNmMTFhNzJmMTQ2ODdhNjY0NmQwNGFlMWJhZTNmYTQ1ZiINCj4gIFBWID0gIjAu
+MC40K2dpdCR7U1JDUFZ9Ig0KPiANCj4gZGlmZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNp
+cGVzLXN1cHBvcnQvbmNwL25jcF8xLjIuNC5iYiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1
+cHBvcnQvbmNwL25jcF8xLjIuNC5iYg0KPiBpbmRleCBmNDIyMjNiMWYuLmJhNmUyM2U4NiAxMDA2
+NDQNCj4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uY3AvbmNwXzEuMi40
+LmJiDQo+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvbmNwL25jcF8xLjIu
+NC5iYg0KPiBAQCAtNCw3ICs0LDcgQEAgc2VjdXJpdHkgb3IgaW50ZWdyaXR5IGNoZWNraW5nLCBu
+byB0aHJvdHRsaW5nLCBubyBmZWF0dXJlcywgZXhjZXB0IFwNCj4gIG9uZTogeW91IGRvbid0IGhh
+dmUgdG8gdHlwZSB0aGUgY29vcmRpbmF0ZXMgb2YgeW91ciBwZWVyLiINCj4gIEhPTUVQQUdFID0g
+Imh0dHA6Ly93d3cuZmVmZS5kZS9uY3AiDQo+ICBMSUNFTlNFID0gIkdQTHYyIg0KDQpJIGNhbiBm
+aW5kIG5vIGluZm9ybWF0aW9uIGFib3V0IGxpY2Vuc2UgZWl0aGVyIGluIHRoZSBjb2RlIG9yIGF0
+IA0KaHR0cDovL3d3dy5mZWZlLmRlL25jcC4gSG93IGRvIHlvdSBrbm93IHRoaXMgbGljZW5zZSBp
+cyBjb3JyZWN0Pw0KDQo+IC1MSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly8ke0NPUkVCQVNFfS9t
+ZXRhL2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9HUEwtMi4wO21kNT04MDFmODA5ODBkMTcxZGQ2NDI1
+NjEwODMzYTIyZGJlNiINCj4gK0xJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovLyR7Q09NTU9OX0xJ
+Q0VOU0VfRElSfS9HUEwtMi4wO21kNT04MDFmODA5ODBkMTcxZGQ2NDI1NjEwODMzYTIyZGJlNiIN
+Cj4gIERFUEVORFMgPSAibGlib3dmYXQiDQo+IA0KPiAgU1JDX1VSSSA9ICJodHRwczovL2RsLmZl
+ZmUuZGUvJHtCUH0udGFyLmJ6MiINCj4gLS0NCj4gMi4yMy4wLnJjMQ0KPiANCj4gLS0NCg0KLy9Q
+ZXRlcg0KDQo=
 
