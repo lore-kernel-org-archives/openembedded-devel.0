@@ -1,44 +1,49 @@
-Return-Path: <andre.draszik@gmail.com>
-Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
-	[209.85.208.65])
-	by mail.openembedded.org (Postfix) with ESMTP id C43506011C
+Return-Path: <alex.kanavin@gmail.com>
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com
+	[209.85.221.42])
+	by mail.openembedded.org (Postfix) with ESMTP id E128861A07
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Feb 2020 07:08:18 +0000 (UTC)
-Received: by mail-ed1-f65.google.com with SMTP id h62so4261175edd.12
+	Sat, 29 Feb 2020 10:14:17 +0000 (UTC)
+Received: by mail-wr1-f42.google.com with SMTP id r7so6247743wro.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2020 23:08:20 -0800 (PST)
+	Sat, 29 Feb 2020 02:14:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=6Yq0dQoAjZ8afj5mfiyWxod6bgNH6WLiY/Y7/Pm1I7M=;
+	b=NFZMeCTQ/EAJXZbTkHLYkI0qCbpwb91ve2fkKWf38SmoMYT4A0tKRLChZBLMqlVEDH
+	GlvugPkvmXUu3HsJx4jqqyxqDI06/b9OElli2GQtCKoyTWNgNaZsfBRN4QPWmyME4OcC
+	GCx0JqJcr+13aOOAsSjMSXIyVIISJYtVaH2N+p2aRYC4CuG2oqJdP2BkBhNuRvia2GlD
+	MfxzoWZfs5ayU7TnSUeddtVhqXN1VTHoXJG5r0HtnqoQDYMTKSzV5bdTNMNuS42pzjRW
+	Be78zQYKs9DsiJj7ezOHtzm5S3Rv992+q5kHWKO/EIIKN+59AZYYVJUFKlnbZ0s70EFY
+	nD2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
-	:references:user-agent:mime-version;
-	bh=ttzvUWb3pEB4w9OBr69adCdGYjXmyVcS0pzKLSqSOTc=;
-	b=hqEpsB6KKQW9hDSCuOy4Bl6Ychq60gN3c6WVnURS7yoM3mghSTdyL8ALn1UeZ3uhxJ
-	uhvv+AvYbc4x89PqZ3CUdH2eaI3px7DUhAbh0UsB5m6e4EFSiGpeoqeZkvOC/FtNdclp
-	z3iZDMzrDN+4lS0ga66vTTdtuvNUu7e5TdGq9jutlQLqJHxGNh8p4yrr3GuTEK0dwLeV
-	4Uqi2auxVjCN90r+c0QSWjRu/1LMwaZCEOGsVeYB2P6/vPA1sdfKzwtSA/Pemx+ClSlk
-	/etrt8i93y9tNaO8KEf3RAl03dhC39BDEhsCmyL7r3Dep4kLy85oyKhORzcjtcIPwSyf
-	OmXA==
-X-Gm-Message-State: APjAAAVIomP4DACliBBhiAzMcbU4tyxGqP3toCU5FpTVuDRGHOVWmV5H
-	JY5pKxsY/TYgf3Jr3RoMnqN46BG8
-X-Google-Smtp-Source: APXvYqwsSYeUTwS8w57FvLmyAYUk8vZ4xZQecipIcNufFLORj3FWpG1200ltfXrE6xXDx8y20RzbPw==
-X-Received: by 2002:aa7:dad0:: with SMTP id x16mr7676040eds.307.1582960099305; 
-	Fri, 28 Feb 2020 23:08:19 -0800 (PST)
-Received: from tfsielt31850.fritz.box ([79.97.20.138])
-	by smtp.gmail.com with ESMTPSA id b20sm52253edy.54.2020.02.28.23.08.18
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=6Yq0dQoAjZ8afj5mfiyWxod6bgNH6WLiY/Y7/Pm1I7M=;
+	b=U22XOuA1HQDXyvPNuGneAVYqAwg8tiqUGFjWqd0mjMC/TCdZqz/TtIC0ifcCYzCE16
+	gq9Zvm01EXHkG9orD67b0NeU1F2on+sMsBOOoqoU0dFTwUpd9iLBn1JdcivKVU14Qm/h
+	4LS70nM9oIqm7ilITfnR3SwkcdDaCzPQoXLrZAzLzyegFCKbuGe/m403gTrJeKQDBTza
+	BD8Cw5f2sJ5zCrwGAHZGcIn/wZacwoGN129x9NI5Qx0zMESwlMh63YIPwmtonEs5XfwU
+	kLDEUsxXezIBoK8PokTikYO65qKnq4k16uVm0IfPziwYp6YpIvkHU5Q9BTUtKHkP+vS2
+	pW8g==
+X-Gm-Message-State: APjAAAU3ga5sciWPPVY8yhg2wTRB2vzRfh6q7FikAduRtVQkFl0LFEAD
+	U0xDHGhSkQIQVygADJPHmH38MeOs
+X-Google-Smtp-Source: APXvYqykAU7Cf0vwEcl1WUbOJtkUiXEjgh+2ubtqwlWyetgjQ/rABoaFchFypSEsSQmY/sfwO9jkYg==
+X-Received: by 2002:adf:bc0e:: with SMTP id s14mr10037462wrg.364.1582971258154;
+	Sat, 29 Feb 2020 02:14:18 -0800 (PST)
+Received: from linux-f9zs.site ([2a02:2450:1011:56f:238d:84be:b349:9184])
+	by smtp.gmail.com with ESMTPSA id i7sm724461wro.87.2020.02.29.02.14.17
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 28 Feb 2020 23:08:18 -0800 (PST)
-Message-ID: <3c14fbe1d2b373efc17de48dcf6d7eecc0ae51cc.camel@andred.net>
-From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Sat, 29 Feb 2020 07:08:17 +0000
-In-Reply-To: <7bc1a555a6b845899219c29be5723ce7@XBOX03.axis.com>
-References: <20200227164219.24229-1-git@andred.net>
-	<7bc1a555a6b845899219c29be5723ce7@XBOX03.axis.com>
-User-Agent: Evolution 3.30.5-1.1 
+	Sat, 29 Feb 2020 02:14:17 -0800 (PST)
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 29 Feb 2020 11:13:35 +0100
+Message-Id: <20200229101336.30490-1-alex.kanavin@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH] meta-networking: s|${COREBASE}/meta/files/common-licenses|${COMMON_LICENSE_DIR}
+Subject: [PATCH 1/2] python3-numpy: add from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,171 +56,203 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Feb 2020 07:08:19 -0000
-X-Groupsio-MsgNum: 83123
-Content-Type: multipart/mixed; boundary="=-xxbZHoswn5s15/xEDo8R"
-
---=-xxbZHoswn5s15/xEDo8R
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 29 Feb 2020 10:14:18 -0000
 Content-Transfer-Encoding: 8bit
 
-On Fri, 2020-02-28 at 19:55 +0000, Peter Kjellerstedt wrote:
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org <openembedded-devel-bounces@lists.openembedded.org> On
-> > Behalf Of André Draszik
-> > Sent: den 27 februari 2020 17:42
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [meta-networking][PATCH] meta-networking: s|${COREBASE}/meta/files/common-
-> > licenses|${COMMON_LICENSE_DIR}
-> > 
-> > Signed-off-by: André Draszik <git@andred.net>
-> > ---
-> >  meta-networking/recipes-connectivity/samba/samba_4.10.13.bb | 4 ++--
-> >  meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb        | 2 +-
-> >  meta-networking/recipes-support/arptables/arptables_git.bb  | 2 +-
-> >  meta-networking/recipes-support/ncp/ncp_1.2.4.bb            | 2 +-
-> >  4 files changed, 5 insertions(+), 5 deletions(-)
-> > 
-> > diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.13.bb b/meta-networking/recipes-
-> > connectivity/samba/samba_4.10.13.bb
-> > index 71d8fa2f8..4d57255f1 100644
-> > --- a/meta-networking/recipes-connectivity/samba/samba_4.10.13.bb
-> > +++ b/meta-networking/recipes-connectivity/samba/samba_4.10.13.bb
-> > @@ -3,8 +3,8 @@ SECTION = "console/network"
-> > 
-> >  LICENSE = "GPL-3.0+ & LGPL-3.0+ & GPL-2.0+"
-> >  LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-> > -                    file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
-> > -                    file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 "
-> > +                    file://${COMMON_LICENSE_DIR}/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
-> > +                    file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 "
-> 
-> These two are pointless since there is a provided COPYING file. 
-> Just remove them.
-> 
-> >  SAMBA_MIRROR = "http://samba.org/samba/ftp"
-> >  MIRRORS += "\
-> > diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb b/meta-networking/recipes-
-> > daemons/lldpd/lldpd_1.0.4.bb
-> > index 8fdaf848f..21b02687f 100644
-> > --- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
-> > +++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
-> > @@ -1,7 +1,7 @@
-> >  SUMMARY = "A 802.1ab implementation (LLDP) to help you locate neighbors of all your equipments"
-> >  SECTION = "net/misc"
-> >  LICENSE = "ISC"
-> > -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e78ea0cffb20bf5cca7947a896d"
-> > +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/ISC;md5=f3b90e78ea0cffb20bf5cca7947a896d"
-> 
-> There is a LICENSE file in the tar ball. Please use it instead.
-> 
-> >  DEPENDS = "libbsd libevent"
-> > 
-> > diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-
-> > support/arptables/arptables_git.bb
-> > index cec1d1f77..e88631e08 100644
-> > --- a/meta-networking/recipes-support/arptables/arptables_git.bb
-> > +++ b/meta-networking/recipes-support/arptables/arptables_git.bb
-> > @@ -1,7 +1,7 @@
-> >  SUMMARY = "Administration tool for arp packet filtering"
-> >  SECTION = "net"
-> >  LICENSE = "GPL-2.0"
-> > -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-> > +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-> 
-> There is a COPYING file in the Git repository. Please use it instead.
-> 
-> >  SRCREV = "f4ab8f63f11a72f14687a6646d04ae1bae3fa45f"
-> >  PV = "0.0.4+git${SRCPV}"
-> > 
-> > diff --git a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb b/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
-> > index f42223b1f..ba6e23e86 100644
-> > --- a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
-> > +++ b/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
-> > @@ -4,7 +4,7 @@ security or integrity checking, no throttling, no features, except \
-> >  one: you don't have to type the coordinates of your peer."
-> >  HOMEPAGE = "http://www.fefe.de/ncp"
-> >  LICENSE = "GPLv2"
-> 
-> I can find no information about license either in the code or at 
-> http://www.fefe.de/ncp. How do you know this license is correct?
+Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+---
+ ...-and-so-on-for-libraries-by-default-.patch | 70 +++++++++++++++++++
+ ...up.py-remove-the-detection-of-x86-ta.patch | 32 +++++++++
+ .../python-numpy/python-numpy.inc             | 52 ++++++++++++++
+ .../python-numpy/python3-numpy_1.17.4.bb      |  3 +
+ 4 files changed, 157 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python-numpy/files/0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch
+ create mode 100644 meta-python/recipes-devtools/python-numpy/files/0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch
+ create mode 100644 meta-python/recipes-devtools/python-numpy/python-numpy.inc
+ create mode 100644 meta-python/recipes-devtools/python-numpy/python3-numpy_1.17.4.bb
 
-Please see attached email.
+diff --git a/meta-python/recipes-devtools/python-numpy/files/0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch b/meta-python/recipes-devtools/python-numpy/files/0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch
+new file mode 100644
+index 000000000..98a970583
+--- /dev/null
++++ b/meta-python/recipes-devtools/python-numpy/files/0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch
+@@ -0,0 +1,70 @@
++From 672a75c8417ce08db9e31fc415ec445479231d5a Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Thu, 10 Dec 2015 13:20:30 +0200
++Subject: [PATCH] Don't search /usr and so on for libraries by default to
++
++ avoid host contamination.
++
++Upstream-Status: Inappropriate (As the code stands, this is a hack)
++Signed-off-by: Ross Burton <ross.burton@intel.com>
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++
++---
++ numpy/distutils/system_info.py | 42 ++++------------------------------
++ 1 file changed, 5 insertions(+), 37 deletions(-)
++
++diff --git a/numpy/distutils/system_info.py b/numpy/distutils/system_info.py
++index ba2b1f4..f94dce1 100644
++--- a/numpy/distutils/system_info.py
+++++ b/numpy/distutils/system_info.py
++@@ -278,45 +278,13 @@ if sys.platform == 'win32':
++             add_system_root(os.path.join(conda_dir, 'Library'))
++ 
++ else:
++-    default_lib_dirs = libpaths(['/usr/local/lib', '/opt/lib', '/usr/lib',
++-                                 '/opt/local/lib', '/sw/lib'], platform_bits)
++     default_runtime_dirs = []
++-    default_include_dirs = ['/usr/local/include',
++-                            '/opt/include', '/usr/include',
++-                            # path of umfpack under macports
++-                            '/opt/local/include/ufsparse',
++-                            '/opt/local/include', '/sw/include',
++-                            '/usr/include/suitesparse']
++-    default_src_dirs = ['.', '/usr/local/src', '/opt/src', '/sw/src']
++-
++-    default_x11_lib_dirs = libpaths(['/usr/X11R6/lib', '/usr/X11/lib',
++-                                     '/usr/lib'], platform_bits)
++-    default_x11_include_dirs = ['/usr/X11R6/include', '/usr/X11/include',
++-                                '/usr/include']
++-
++-    if os.path.exists('/usr/lib/X11'):
++-        globbed_x11_dir = glob('/usr/lib/*/libX11.so')
++-        if globbed_x11_dir:
++-            x11_so_dir = os.path.split(globbed_x11_dir[0])[0]
++-            default_x11_lib_dirs.extend([x11_so_dir, '/usr/lib/X11'])
++-            default_x11_include_dirs.extend(['/usr/lib/X11/include',
++-                                             '/usr/include/X11'])
++-
++-    with open(os.devnull, 'w') as tmp:
++-        try:
++-            p = subprocess.Popen(["gcc", "-print-multiarch"], stdout=subprocess.PIPE,
++-                         stderr=tmp)
++-        except (OSError, DistutilsError):
++-            # OSError if gcc is not installed, or SandboxViolation (DistutilsError
++-            # subclass) if an old setuptools bug is triggered (see gh-3160).
++-            pass
++-        else:
++-            triplet = str(p.communicate()[0].decode().strip())
++-            if p.returncode == 0:
++-                # gcc supports the "-print-multiarch" option
++-                default_x11_lib_dirs += [os.path.join("/usr/lib/", triplet)]
++-                default_lib_dirs += [os.path.join("/usr/lib/", triplet)]
+++    default_lib_dirs = libpaths(['/deadir/lib'], platform_bits)
+++    default_include_dirs = ['/deaddir/include']
+++    default_src_dirs = ['.', '/deaddir/src']
++ 
+++    default_x11_lib_dirs = libpaths(['/deaddir/lib'], platform_bits)
+++    default_x11_include_dirs = ['/deaddir/include']
++ 
++ if os.path.join(sys.prefix, 'lib') not in default_lib_dirs:
++     default_lib_dirs.insert(0, os.path.join(sys.prefix, 'lib'))
+diff --git a/meta-python/recipes-devtools/python-numpy/files/0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch b/meta-python/recipes-devtools/python-numpy/files/0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch
+new file mode 100644
+index 000000000..9da6a2b3d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python-numpy/files/0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch
+@@ -0,0 +1,32 @@
++From b881e0b2ba9cf1a4aa351a1c1ea90b1e1776ce21 Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Mon, 12 Aug 2019 15:37:36 +0200
++Subject: [PATCH] numpy/random/setup.py: remove the detection of x86 targets
++ via uname()
++
++This was badly breaking compilation for ARM targets (and possibly
++other non-x86 targets); if -msse2 is desirable for x86 builds it has
++to be passed through another channel.
++
++Upstream-Status: Inappropriate [oe-core specific]
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++---
++ numpy/random/setup.py | 5 -----
++ 1 file changed, 5 deletions(-)
++
++diff --git a/numpy/random/setup.py b/numpy/random/setup.py
++index a1bf3b8..60fb534 100644
++--- a/numpy/random/setup.py
+++++ b/numpy/random/setup.py
++@@ -49,11 +49,6 @@ def configuration(parent_package='', top_path=None):
++     elif not is_msvc:
++         # Some bit generators require c99
++         EXTRA_COMPILE_ARGS += ['-std=c99']
++-        INTEL_LIKE = any(arch in platform.machine() 
++-                         for arch in ('x86', 'i686', 'i386', 'amd64'))
++-        if INTEL_LIKE:
++-            # Assumes GCC or GCC-like compiler
++-            EXTRA_COMPILE_ARGS += ['-msse2']
++ 
++     # Use legacy integer variable sizes
++     LEGACY_DEFS = [('NP_RANDOM_LEGACY', '1')]
+diff --git a/meta-python/recipes-devtools/python-numpy/python-numpy.inc b/meta-python/recipes-devtools/python-numpy/python-numpy.inc
+new file mode 100644
+index 000000000..8413434af
+--- /dev/null
++++ b/meta-python/recipes-devtools/python-numpy/python-numpy.inc
+@@ -0,0 +1,52 @@
++SUMMARY = "A sophisticated Numeric Processing Package for Python"
++SECTION = "devel/python"
++LICENSE = "BSD-3-Clause & BSD-2-Clause & PSF & Apache-2.0 & BSD & MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=1a32aba007a415aa8a1c708a0e2b86a1"
++
++SRCNAME = "numpy"
++
++SRC_URI = "https://github.com/${SRCNAME}/${SRCNAME}/releases/download/v${PV}/${SRCNAME}-${PV}.tar.gz \
++           file://0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch \
++           file://0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch \
++           "
++SRC_URI[md5sum] = "9147c3ee75e58d657b5b8b5a4f3564e0"
++SRC_URI[sha256sum] = "fb0415475e673cb9a6dd816df999e0ab9f86fa3af2b1770944e7288d2bea4ac9"
++
++UPSTREAM_CHECK_URI = "https://github.com/numpy/numpy/releases"
++UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)\.tar"
++
++# Needed for building with gcc 4.x from centos 7
++CFLAGS_append_class-native = " -std=c99"
++
++S = "${WORKDIR}/numpy-${PV}"
++
++CLEANBROKEN = "1"
++
++FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
++
++# install what is needed for numpy.test()
++RDEPENDS_${PN} = "${PYTHON_PN}-unittest \
++                  ${PYTHON_PN}-difflib \
++                  ${PYTHON_PN}-pprint \
++                  ${PYTHON_PN}-pickle \
++                  ${PYTHON_PN}-shell \
++                  ${PYTHON_PN}-nose \
++                  ${PYTHON_PN}-doctest \
++                  ${PYTHON_PN}-datetime \
++                  ${PYTHON_PN}-distutils \
++                  ${PYTHON_PN}-misc \
++                  ${PYTHON_PN}-mmap \
++                  ${PYTHON_PN}-netclient \
++                  ${PYTHON_PN}-numbers \
++                  ${PYTHON_PN}-pydoc \
++                  ${PYTHON_PN}-pkgutil \
++                  ${PYTHON_PN}-email \
++                  ${PYTHON_PN}-compression \
++                  ${PYTHON_PN}-ctypes \
++                  ${PYTHON_PN}-threading \
++                  ${PYTHON_PN}-multiprocessing \
++"
++
++RDEPENDS_${PN}_class-native = ""
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python-numpy/python3-numpy_1.17.4.bb b/meta-python/recipes-devtools/python-numpy/python3-numpy_1.17.4.bb
+new file mode 100644
+index 000000000..d388e88d2
+--- /dev/null
++++ b/meta-python/recipes-devtools/python-numpy/python3-numpy_1.17.4.bb
+@@ -0,0 +1,3 @@
++inherit setuptools3
++require python-numpy.inc
++
+-- 
+2.25.1
 
-Cheers,
-Andre'
 
-> 
-> > -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-> > +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
-> >  DEPENDS = "libowfat"
-> > 
-> >  SRC_URI = "https://dl.fefe.de/${BP}.tar.bz2"
-> > --
-> > 2.23.0.rc1
-> > 
-> > --
-> 
-> //Peter
-> 
-
---=-xxbZHoswn5s15/xEDo8R
-Content-Disposition: inline
-Content-Description: Attached message - Re: ncp Lizenz
-Content-Type: message/rfc822
-
-Delivered-To: andre.draszik@gmail.com
-Received: by 10.64.220.1 with SMTP id ps1csp1631210iec;
-        Tue, 15 Nov 2016 06:22:51 -0800 (PST)
-X-Received: by 10.28.1.135 with SMTP id 129mr4488282wmb.108.1479219771227;
-        Tue, 15 Nov 2016 06:22:51 -0800 (PST)
-Return-Path: <SRS0+OrVR=XA=fefe.de=felix@mailforward.dd24.net>
-Received: from mailfw-02.dd24.net (mailfw-02.dd24.net. [193.46.215.52]) by
- mx.google.com with ESMTPS id k8si14975684wjv.25.2016.11.15.06.22.51 for
- <andre.draszik@gmail.com> (version=TLS1_2
- cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128); Tue, 15 Nov 2016 06:22:51
- -0800 (PST)
-Received-SPF: pass (google.com: best guess record for domain of
- srs0+orvr=xa=fefe.de=felix@mailforward.dd24.net designates 193.46.215.52 as
- permitted sender) client-ip=193.46.215.52;
-Authentication-Results: mx.google.com; spf=pass (google.com: best guess
- record for domain of srs0+orvr=xa=fefe.de=felix@mailforward.dd24.net
- designates 193.46.215.52 as permitted sender)
- smtp.mailfrom=SRS0+OrVR=XA=fefe.de=felix@mailforward.dd24.net
-X-policyd-weight: NOT_IN_SBL_XBL_SPAMHAUS=-1.5 NOT_IN_SPAMCOP=-1.5
- DSBL_ORG=ERR(0) CL_IP_EQ_FROM_MX=-3.1; rate: -6.1
-Received: from a.mx.fefe.de (qarx.de [31.15.64.162])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mailfw-02.dd24.net (Postfix) with ESMTPS id D51CE60175
-	for <git@andred.net>; Tue, 15 Nov 2016 14:22:44 +0000 (UTC)
-Received: (qmail 311 invoked by uid 638); 15 Nov 2016 14:22:37 -0000
-Date: Tue, 15 Nov 2016 15:22:37 +0100
-From: Felix von Leitner <felix@fefe.de>
-To: =?iso-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
-Subject: Re: ncp Lizenz
-Message-ID: <20161115142237.GA28800@qarx.de>
-References: <1479213895.3131.2.camel@andred.net>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <1479213895.3131.2.camel@andred.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-X-Evolution-Source: 1458725645.5855.23@tfsielt31850
-Content-Transfer-Encoding: quoted-printable
-
-Thus spake Andr=E9 Draszik (git@andred.net):
-> Kannst du bitte ein LICENCE oder COPYING oder so in das ncp archiv packen=
-?
-> Ich wuerde das gern in OpenEmbedded integrieren nur leider ist gibt es
-> nirgends eine Lizenzinformation...
-
-Nee, ich fass das jetzt nicht mehr an.
-
-Du hast hiermit offiziell die Distributionserlaubnis f=FCr ncp. GPL, MIT, W=
-hatever ihr da braucht.
-Rock Linux konnte es auch einbauen.
-
-Felix
-
---=-xxbZHoswn5s15/xEDo8R--
