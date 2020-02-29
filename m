@@ -1,45 +1,44 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 114B360AF4
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-ed1-f65.google.com (mail-ed1-f65.google.com
+	[209.85.208.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C43506011C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Feb 2020 20:10:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=axis.com; l=5778; q=dns/txt; s=axis-central1;
-	t=1582920639; x=1614456639;
-	h=from:to:subject:date:message-id:references:in-reply-to:
-	content-transfer-encoding:mime-version;
-	bh=ADAlPI4Kuv9qLc1aXPX93V9TsURdR2aa4y39BhRwSlw=;
-	b=Kzx5Soa6e53lpRCYjqie3IbNThusEp8vbKS8AzhPVnnnfxucyqZVyNZh
-	QOClHnW8lAfy5+mbT9Z3VqVNo+4BKrzgM8YLhRtj7DZDkzvhDCxxV3F+o
-	AHZ+6nk1t3C0E7lDjD0rzoIg16avm76yLurGPnm7zam36CvIZJtUcVIpL
-	5YaBRYx7w9vrTqfYvYWrJxAUnZs7tBs1GAYF6iQ6l/Q2TGO4Jg0Viuy/O
-	Pc28Whv0vB2bnsIxBtCIdzv5wRRrAae6woEGe5FzKTGAvWb8VS3Uyln6R
-	zAJL1ImEGUzZmLsu/HBcSb9CZtawEFiyXy+XsEONFHLNiBOqAmxl57PyO Q==;
-IronPort-SDR: fmQLGCTeGqoNKokkjmY0nDZSyyJfx4KPHNu8jKvqzI/YMD+sfBy1BAL2B028NT2fjmZKwn++b7
-	H60jbuFlrqG9R7RHdVdqmwkKI7UgS8J1ZfdrzxCilV0wFa255bQthJMcTbVr3zG3/6/XRUu97U
-	1++xskESI0x2B7iG1nIWzsbCneB0Flba56zZQaRrCuqdo6ujz9ITWcRoCL77QFwBaMoAhNrJxc
-	hpX8uWQLecBcec/uvu80hS4vTEMdqZOHhaDnuBIikgHAaO4Ju6pPO3cwKgYyUxSAkGeFGmSTkz
-	qPI=
-X-IronPort-AV: E=Sophos;i="5.70,497,1574118000"; 
-   d="scan'208";a="5948504"
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: =?utf-8?B?QW5kcsOpIERyYXN6aWs=?= <git@andred.net>,
+	Sat, 29 Feb 2020 07:08:18 +0000 (UTC)
+Received: by mail-ed1-f65.google.com with SMTP id h62so4261175edd.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 Feb 2020 23:08:20 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:user-agent:mime-version;
+	bh=ttzvUWb3pEB4w9OBr69adCdGYjXmyVcS0pzKLSqSOTc=;
+	b=hqEpsB6KKQW9hDSCuOy4Bl6Ychq60gN3c6WVnURS7yoM3mghSTdyL8ALn1UeZ3uhxJ
+	uhvv+AvYbc4x89PqZ3CUdH2eaI3px7DUhAbh0UsB5m6e4EFSiGpeoqeZkvOC/FtNdclp
+	z3iZDMzrDN+4lS0ga66vTTdtuvNUu7e5TdGq9jutlQLqJHxGNh8p4yrr3GuTEK0dwLeV
+	4Uqi2auxVjCN90r+c0QSWjRu/1LMwaZCEOGsVeYB2P6/vPA1sdfKzwtSA/Pemx+ClSlk
+	/etrt8i93y9tNaO8KEf3RAl03dhC39BDEhsCmyL7r3Dep4kLy85oyKhORzcjtcIPwSyf
+	OmXA==
+X-Gm-Message-State: APjAAAVIomP4DACliBBhiAzMcbU4tyxGqP3toCU5FpTVuDRGHOVWmV5H
+	JY5pKxsY/TYgf3Jr3RoMnqN46BG8
+X-Google-Smtp-Source: APXvYqwsSYeUTwS8w57FvLmyAYUk8vZ4xZQecipIcNufFLORj3FWpG1200ltfXrE6xXDx8y20RzbPw==
+X-Received: by 2002:aa7:dad0:: with SMTP id x16mr7676040eds.307.1582960099305; 
+	Fri, 28 Feb 2020 23:08:19 -0800 (PST)
+Received: from tfsielt31850.fritz.box ([79.97.20.138])
+	by smtp.gmail.com with ESMTPSA id b20sm52253edy.54.2020.02.28.23.08.18
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 28 Feb 2020 23:08:18 -0800 (PST)
+Message-ID: <3c14fbe1d2b373efc17de48dcf6d7eecc0ae51cc.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>, 
 	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][PATCH] meta-oe:
-	s|${COREBASE}/meta/files/common-licenses|${COMMON_LICENSE_DIR}
-Thread-Index: AQHV7YzIqbv2jT+bV0K56EhhTpJrCagxB4Xg
-Date: Fri, 28 Feb 2020 20:10:35 +0000
-Message-ID: <360398e1842c44df887759dc3aca7979@XBOX03.axis.com>
-References: <20200227164115.23879-1-git@andred.net>
-In-Reply-To: <20200227164115.23879-1-git@andred.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+Date: Sat, 29 Feb 2020 07:08:17 +0000
+In-Reply-To: <7bc1a555a6b845899219c29be5723ce7@XBOX03.axis.com>
+References: <20200227164219.24229-1-git@andred.net>
+	<7bc1a555a6b845899219c29be5723ce7@XBOX03.axis.com>
+User-Agent: Evolution 3.30.5-1.1 
 MIME-Version: 1.0
-Subject: Re: [meta-oe][PATCH] meta-oe:	s|${COREBASE}/meta/files/common-licenses|${COMMON_LICENSE_DIR}
+Subject: Re: [meta-networking][PATCH] meta-networking: s|${COREBASE}/meta/files/common-licenses|${COMMON_LICENSE_DIR}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,84 +51,171 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Feb 2020 20:10:38 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Sat, 29 Feb 2020 07:08:19 -0000
+X-Groupsio-MsgNum: 83123
+Content-Type: multipart/mixed; boundary="=-xxbZHoswn5s15/xEDo8R"
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIDxvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNl
-c0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnPiBPbiBCZWhhbGYgT2YgQW5kcsOpIERyYXN6aWsNCj4g
-U2VudDogZGVuIDI3IGZlYnJ1YXJpIDIwMjAgMTc6NDENCj4gVG86IG9wZW5lbWJlZGRlZC1kZXZl
-bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6IFtvZV0gW21ldGEtb2VdW1BBVENI
-XSBtZXRhLW9lOiBzfCR7Q09SRUJBU0V9L21ldGEvZmlsZXMvY29tbW9uLWxpY2Vuc2VzfCR7Q09N
-TU9OX0xJQ0VOU0VfRElSfQ0KPiANCj4gU2lnbmVkLW9mZi1ieTogQW5kcsOpIERyYXN6aWsgPGdp
-dEBhbmRyZWQubmV0Pg0KPiAtLS0NCj4gIG1ldGEtb2UvcmVjaXBlcy1iZW5jaG1hcmsvZGhyeXN0
-b25lL2RocnlzdG9uZV8yLjEuYmIgICAgICAgICAgfCAyICstDQo+ICAuLi4vZ25vbWUtZG9jLXV0
-aWxzLXN0dWIvZ25vbWUtZG9jLXV0aWxzLXN0dWJfMS4wLmJiICAgICAgICAgIHwgNCArKy0tDQo+
-ICBtZXRhLW9lL3JlY2lwZXMtbmF2aWdhdGlvbi9ncHNkL2dwc2QtbWFjaGluZS1jb25mXzEuMC5i
-YiAgICAgIHwgMiArLQ0KPiAgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvc3BkbG9nL3NwZGxvZ18x
-LjUuMC5iYiAgICAgICAgICAgICAgICB8IDIgKy0NCj4gIDQgZmlsZXMgY2hhbmdlZCwgNSBpbnNl
-cnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQ0KPiANCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVj
-aXBlcy1iZW5jaG1hcmsvZGhyeXN0b25lL2RocnlzdG9uZV8yLjEuYmIgYi9tZXRhLQ0KPiBvZS9y
-ZWNpcGVzLWJlbmNobWFyay9kaHJ5c3RvbmUvZGhyeXN0b25lXzIuMS5iYg0KPiBpbmRleCAxN2U4
-YzcwMGMuLjM5YTBjY2M4YyAxMDA2NDQNCj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWJlbmNobWFy
-ay9kaHJ5c3RvbmUvZGhyeXN0b25lXzIuMS5iYg0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtYmVu
-Y2htYXJrL2RocnlzdG9uZS9kaHJ5c3RvbmVfMi4xLmJiDQo+IEBAIC0xLDYgKzEsNiBAQA0KPiAg
-U1VNTUFSWSA9ICJEaHJ5c3RvbmUgQ1BVIGJlbmNobWFyayINCj4gIExJQ0VOU0UgPSAiUEQiDQo+
-IC1MSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly8ke0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1v
-bi1saWNlbnNlcy9QRDttZDU9YjM1OTdkMTI5NDY4ODFlMTNjYjNiNTQ4ZDExNzM4NTEiDQo+ICtM
-SUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly8ke0NPTU1PTl9MSUNFTlNFX0RJUn0vUEQ7bWQ1PWIz
-NTk3ZDEyOTQ2ODgxZTEzY2IzYjU0OGQxMTczODUxIg0KPiANCj4gIFNSQ19VUkkgPSAiaHR0cDov
-L3d3dy5uZXRsaWIub3JnL2JlbmNobWFyay9kaHJ5LWM7ZG93bmxvYWRmaWxlbmFtZT1kaHJ5LWMu
-c2hhciBcDQo+ICAgICAgICAgICAgIGZpbGU6Ly9kaHJ5c3RvbmUucGF0Y2giDQo+IGRpZmYgLS1n
-aXQgYS9tZXRhLW9lL3JlY2lwZXMtZ25vbWUvZ25vbWUtZG9jLXV0aWxzLXN0dWIvZ25vbWUtZG9j
-LXV0aWxzLXN0dWJfMS4wLmJiIGIvbWV0YS1vZS9yZWNpcGVzLWdub21lL2dub21lLWRvYy11dGls
-cy1zdHViL2dub21lLWRvYy11dGlscy1zdHViXzEuMC5iYg0KPiBpbmRleCBkNmRhNTFiMGQuLjlj
-MTZkYTQxNiAxMDA2NDQNCj4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLWdub21lL2dub21lLWRvYy11
-dGlscy1zdHViL2dub21lLWRvYy11dGlscy1zdHViXzEuMC5iYg0KPiArKysgYi9tZXRhLW9lL3Jl
-Y2lwZXMtZ25vbWUvZ25vbWUtZG9jLXV0aWxzLXN0dWIvZ25vbWUtZG9jLXV0aWxzLXN0dWJfMS4w
-LmJiDQo+IEBAIC0zLDggKzMsOCBAQCBERVNDUklQVElPTiA9ICJUaGlzIHJlY2lwZSBwcm92aWRl
-cyBtNCBtYWNyb3MgZnJvbSBnbm9tZS1kb2MtdXRpbHMgcHJvamVjdCwgc28gXA0KPiAgdGhhdCBk
-ZXBlbmRlbnQgcmVjaXBlcyBjYW4gYnVpbGQuIEdub21lLWRvYy11dGlscyBpdHNlbGYgaXMgbm8g
-bG9uZ2VyIHBhY2thZ2VkIGJlY2F1c2UgXA0KPiAgaXQgcmVxdWlyZXMgbGlieG1sMiBhbmQgcHl0
-aG9uIDIgYXQgdGhlIHNhbWUgdGltZSwgd2hpY2ggY2FuIG5vIGxvbmdlciBiZSBzYXRpc2ZpZWQu
-ICINCj4gIExJQ0VOU0UgPSAiR1BMdjIgJiBMR1BMdjIuMSINCj4gLUxJQ19GSUxFU19DSEtTVU0g
-PSAiZmlsZTovLyR7Q09SRUJBU0V9L21ldGEvZmlsZXMvY29tbW9uLWxpY2Vuc2VzL0dQTC0yLjA7
-bWQ1PTgwMWY4MDk4MGQxNzFkZDY0MjU2MTA4MzNhMjJkYmU2IFwNCj4gLSAgICAgICAgICAgICAg
-ICAgICAgZmlsZTovLyR7Q09SRUJBU0V9L21ldGEvZmlsZXMvY29tbW9uLWxpY2Vuc2VzL0xHUEwt
-Mi4xO21kNT0xYTZkMjY4ZmQyMTg2NzVmZmVhOGJlNTU2Nzg4Yjc4MCINCj4gK0xJQ19GSUxFU19D
-SEtTVU0gPSAiZmlsZTovLyR7Q09NTU9OX0xJQ0VOU0VfRElSfS9HUEwtMi4wO21kNT04MDFmODA5
-ODBkMTcxZGQ2NDI1NjEwODMzYTIyZGJlNiBcDQo+ICsgICAgICAgICAgICAgICAgICAgIGZpbGU6
-Ly8ke0NPTU1PTl9MSUNFTlNFX0RJUn0vTEdQTC0yLjE7bWQ1PTFhNmQyNjhmZDIxODY3NWZmZWE4
-YmU1NTY3ODhiNzgwIg0KPiAgU1JDX1VSSSA9ICJmaWxlOi8vZ25vbWUtZG9jLXV0aWxzLm00Ig0K
-PiANCj4gIFBST1ZJREVTID0gImdub21lLWRvYy11dGlscyINCj4gZGlmZiAtLWdpdCBhL21ldGEt
-b2UvcmVjaXBlcy1uYXZpZ2F0aW9uL2dwc2QvZ3BzZC1tYWNoaW5lLWNvbmZfMS4wLmJiIGIvbWV0
-YS1vZS9yZWNpcGVzLW5hdmlnYXRpb24vZ3BzZC9ncHNkLW1hY2hpbmUtY29uZl8xLjAuYmINCj4g
-aW5kZXggZDIwNThiYTU3Li5mYWU3NjBiYmYgMTAwNjQ0DQo+IC0tLSBhL21ldGEtb2UvcmVjaXBl
-cy1uYXZpZ2F0aW9uL2dwc2QvZ3BzZC1tYWNoaW5lLWNvbmZfMS4wLmJiDQo+ICsrKyBiL21ldGEt
-b2UvcmVjaXBlcy1uYXZpZ2F0aW9uL2dwc2QvZ3BzZC1tYWNoaW5lLWNvbmZfMS4wLmJiDQo+IEBA
-IC0xLDYgKzEsNiBAQA0KPiAgU1VNTUFSWSA9ICJNYWNoaW5lIHNwZWNpZmljIGdwc2QgY29uZmln
-Ig0KPiAgTElDRU5TRSA9ICJCU0QiDQo+IC1MSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly8ke0NP
-UkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi1saWNlbnNlcy9CU0Q7bWQ1PTM3NzU0ODBhNzEyZmM0
-NmE2OTY0NzY3OGFjYjIzNGNiIg0KPiArTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vJHtDT01N
-T05fTElDRU5TRV9ESVJ9L0JTRDttZDU9Mzc3NTQ4MGE3MTJmYzQ2YTY5NjQ3Njc4YWNiMjM0Y2Ii
-DQo+IA0KPiAgIyBlbXB0eSBieSBkZWZhdWx0DQo+ICAjIEJTUCBsYXllcnMgY2FuIGFkZCBzdHVm
-ZiBsaWtlIG1ldGEtb3Blbm1va28gZXhhbXBsZToNCj4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVj
-aXBlcy1zdXBwb3J0L3NwZGxvZy9zcGRsb2dfMS41LjAuYmIgYi9tZXRhLW9lL3JlY2lwZXMtc3Vw
-cG9ydC9zcGRsb2cvc3BkbG9nXzEuNS4wLmJiDQo+IGluZGV4IDM5NjI5Y2NlMC4uNDQ2NzljMDQ3
-IDEwMDY0NA0KPiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9zcGRsb2cvc3BkbG9nXzEu
-NS4wLmJiDQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L3NwZGxvZy9zcGRsb2dfMS41
-LjAuYmINCj4gQEAgLTEsNyArMSw3IEBADQo+ICBERVNDUklQVElPTiA9ICJWZXJ5IGZhc3QsIGhl
-YWRlciBvbmx5LCBDKysgbG9nZ2luZyBsaWJyYXJ5LiINCj4gIEhPTUVQQUdFID0gImh0dHBzOi8v
-Z2l0aHViLmNvbS9nYWJpbWUvc3BkbG9nL3dpa2kiDQo+ICBMSUNFTlNFID0gIk1JVCINCj4gLUxJ
-Q19GSUxFU19DSEtTVU0gPSAiZmlsZTovLyR7Q09SRUJBU0V9L21ldGEvZmlsZXMvY29tbW9uLWxp
-Y2Vuc2VzL01JVDttZDU9MDgzNWFkZTY5OGUwYmNmODUwNmVjZGEyZjdiNGYzMDIiDQo+ICtMSUNf
-RklMRVNfQ0hLU1VNID0gImZpbGU6Ly8ke0NPTU1PTl9MSUNFTlNFX0RJUn0vTUlUO21kNT0wODM1
-YWRlNjk4ZTBiY2Y4NTA2ZWNkYTJmN2I0ZjMwMiINCg0KVGhlcmUgaXMgYSBMSUNFTlNFIGZpbGUg
-aW4gdGhlIEdpdCByZXBvc2l0b3J5LiBQbGVhc2UgdXNlIGl0IGluc3RlYWQuDQoNCj4gDQo+ICBT
-UkNSRVYgPSAiY2Y2ZjFkZDAxZTY2MGQ1ODY1ZDY4YmY1ZmE3OGY2Mzc2Yjg5NDcwYSINCj4gIFNS
-Q19VUkkgPSAiZ2l0Oi8vZ2l0aHViLmNvbS9nYWJpbWUvc3BkbG9nLmdpdDtwcm90b2NvbD1naXQ7
-YnJhbmNoPXYxLng7Ig0KPiAtLQ0KPiAyLjIzLjAucmMxDQo+IA0KPiAtLQ0KDQovL1BldGVyDQoN
-Cg==
+--=-xxbZHoswn5s15/xEDo8R
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
+On Fri, 2020-02-28 at 19:55 +0000, Peter Kjellerstedt wrote:
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org <openembedded-devel-bounces@lists.openembedded.org> On
+> > Behalf Of André Draszik
+> > Sent: den 27 februari 2020 17:42
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: [oe] [meta-networking][PATCH] meta-networking: s|${COREBASE}/meta/files/common-
+> > licenses|${COMMON_LICENSE_DIR}
+> > 
+> > Signed-off-by: André Draszik <git@andred.net>
+> > ---
+> >  meta-networking/recipes-connectivity/samba/samba_4.10.13.bb | 4 ++--
+> >  meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb        | 2 +-
+> >  meta-networking/recipes-support/arptables/arptables_git.bb  | 2 +-
+> >  meta-networking/recipes-support/ncp/ncp_1.2.4.bb            | 2 +-
+> >  4 files changed, 5 insertions(+), 5 deletions(-)
+> > 
+> > diff --git a/meta-networking/recipes-connectivity/samba/samba_4.10.13.bb b/meta-networking/recipes-
+> > connectivity/samba/samba_4.10.13.bb
+> > index 71d8fa2f8..4d57255f1 100644
+> > --- a/meta-networking/recipes-connectivity/samba/samba_4.10.13.bb
+> > +++ b/meta-networking/recipes-connectivity/samba/samba_4.10.13.bb
+> > @@ -3,8 +3,8 @@ SECTION = "console/network"
+> > 
+> >  LICENSE = "GPL-3.0+ & LGPL-3.0+ & GPL-2.0+"
+> >  LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+> > -                    file://${COREBASE}/meta/files/common-licenses/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+> > -                    file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 "
+> > +                    file://${COMMON_LICENSE_DIR}/LGPL-3.0;md5=bfccfe952269fff2b407dd11f2f3083b \
+> > +                    file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6 "
+> 
+> These two are pointless since there is a provided COPYING file. 
+> Just remove them.
+> 
+> >  SAMBA_MIRROR = "http://samba.org/samba/ftp"
+> >  MIRRORS += "\
+> > diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb b/meta-networking/recipes-
+> > daemons/lldpd/lldpd_1.0.4.bb
+> > index 8fdaf848f..21b02687f 100644
+> > --- a/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
+> > +++ b/meta-networking/recipes-daemons/lldpd/lldpd_1.0.4.bb
+> > @@ -1,7 +1,7 @@
+> >  SUMMARY = "A 802.1ab implementation (LLDP) to help you locate neighbors of all your equipments"
+> >  SECTION = "net/misc"
+> >  LICENSE = "ISC"
+> > -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/ISC;md5=f3b90e78ea0cffb20bf5cca7947a896d"
+> > +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/ISC;md5=f3b90e78ea0cffb20bf5cca7947a896d"
+> 
+> There is a LICENSE file in the tar ball. Please use it instead.
+> 
+> >  DEPENDS = "libbsd libevent"
+> > 
+> > diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-
+> > support/arptables/arptables_git.bb
+> > index cec1d1f77..e88631e08 100644
+> > --- a/meta-networking/recipes-support/arptables/arptables_git.bb
+> > +++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+> > @@ -1,7 +1,7 @@
+> >  SUMMARY = "Administration tool for arp packet filtering"
+> >  SECTION = "net"
+> >  LICENSE = "GPL-2.0"
+> > -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+> > +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+> 
+> There is a COPYING file in the Git repository. Please use it instead.
+> 
+> >  SRCREV = "f4ab8f63f11a72f14687a6646d04ae1bae3fa45f"
+> >  PV = "0.0.4+git${SRCPV}"
+> > 
+> > diff --git a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb b/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+> > index f42223b1f..ba6e23e86 100644
+> > --- a/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+> > +++ b/meta-networking/recipes-support/ncp/ncp_1.2.4.bb
+> > @@ -4,7 +4,7 @@ security or integrity checking, no throttling, no features, except \
+> >  one: you don't have to type the coordinates of your peer."
+> >  HOMEPAGE = "http://www.fefe.de/ncp"
+> >  LICENSE = "GPLv2"
+> 
+> I can find no information about license either in the code or at 
+> http://www.fefe.de/ncp. How do you know this license is correct?
+
+Please see attached email.
+
+Cheers,
+Andre'
+
+> 
+> > -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+> > +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+> >  DEPENDS = "libowfat"
+> > 
+> >  SRC_URI = "https://dl.fefe.de/${BP}.tar.bz2"
+> > --
+> > 2.23.0.rc1
+> > 
+> > --
+> 
+> //Peter
+> 
+
+--=-xxbZHoswn5s15/xEDo8R
+Content-Disposition: inline
+Content-Description: Attached message - Re: ncp Lizenz
+Content-Type: message/rfc822
+
+Delivered-To: andre.draszik@gmail.com
+Received: by 10.64.220.1 with SMTP id ps1csp1631210iec;
+        Tue, 15 Nov 2016 06:22:51 -0800 (PST)
+X-Received: by 10.28.1.135 with SMTP id 129mr4488282wmb.108.1479219771227;
+        Tue, 15 Nov 2016 06:22:51 -0800 (PST)
+Return-Path: <SRS0+OrVR=XA=fefe.de=felix@mailforward.dd24.net>
+Received: from mailfw-02.dd24.net (mailfw-02.dd24.net. [193.46.215.52]) by
+ mx.google.com with ESMTPS id k8si14975684wjv.25.2016.11.15.06.22.51 for
+ <andre.draszik@gmail.com> (version=TLS1_2
+ cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128); Tue, 15 Nov 2016 06:22:51
+ -0800 (PST)
+Received-SPF: pass (google.com: best guess record for domain of
+ srs0+orvr=xa=fefe.de=felix@mailforward.dd24.net designates 193.46.215.52 as
+ permitted sender) client-ip=193.46.215.52;
+Authentication-Results: mx.google.com; spf=pass (google.com: best guess
+ record for domain of srs0+orvr=xa=fefe.de=felix@mailforward.dd24.net
+ designates 193.46.215.52 as permitted sender)
+ smtp.mailfrom=SRS0+OrVR=XA=fefe.de=felix@mailforward.dd24.net
+X-policyd-weight: NOT_IN_SBL_XBL_SPAMHAUS=-1.5 NOT_IN_SPAMCOP=-1.5
+ DSBL_ORG=ERR(0) CL_IP_EQ_FROM_MX=-3.1; rate: -6.1
+Received: from a.mx.fefe.de (qarx.de [31.15.64.162])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mailfw-02.dd24.net (Postfix) with ESMTPS id D51CE60175
+	for <git@andred.net>; Tue, 15 Nov 2016 14:22:44 +0000 (UTC)
+Received: (qmail 311 invoked by uid 638); 15 Nov 2016 14:22:37 -0000
+Date: Tue, 15 Nov 2016 15:22:37 +0100
+From: Felix von Leitner <felix@fefe.de>
+To: =?iso-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+Subject: Re: ncp Lizenz
+Message-ID: <20161115142237.GA28800@qarx.de>
+References: <1479213895.3131.2.camel@andred.net>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+In-Reply-To: <1479213895.3131.2.camel@andred.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-Evolution-Source: 1458725645.5855.23@tfsielt31850
+Content-Transfer-Encoding: quoted-printable
+
+Thus spake Andr=E9 Draszik (git@andred.net):
+> Kannst du bitte ein LICENCE oder COPYING oder so in das ncp archiv packen=
+?
+> Ich wuerde das gern in OpenEmbedded integrieren nur leider ist gibt es
+> nirgends eine Lizenzinformation...
+
+Nee, ich fass das jetzt nicht mehr an.
+
+Du hast hiermit offiziell die Distributionserlaubnis f=FCr ncp. GPL, MIT, W=
+hatever ihr da braucht.
+Rock Linux konnte es auch einbauen.
+
+Felix
+
+--=-xxbZHoswn5s15/xEDo8R--
