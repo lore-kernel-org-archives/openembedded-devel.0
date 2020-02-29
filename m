@@ -1,51 +1,46 @@
 Return-Path: <alex.kanavin@gmail.com>
-Received: from mail-wr1-f68.google.com (mail-wr1-f68.google.com
-	[209.85.221.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E736661A0E
+Received: from mail-vk1-f179.google.com (mail-vk1-f179.google.com
+	[209.85.221.179])
+	by mail.openembedded.org (Postfix) with ESMTP id CAE5961994
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Feb 2020 10:14:18 +0000 (UTC)
-Received: by mail-wr1-f68.google.com with SMTP id j7so6147875wrp.13
+	Sat, 29 Feb 2020 16:29:51 +0000 (UTC)
+Received: by mail-vk1-f179.google.com with SMTP id f17so894088vkk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Feb 2020 02:14:20 -0800 (PST)
+	Sat, 29 Feb 2020 08:29:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=+g8HbLd+7Q+1H4Pt4kipvrSkM8dGX2kYTa0FknEkDfY=;
-	b=F8MeB13DwwH0bn4vnyifU1udUh7LKY8ezW533yYcItEmL8Ta92gOziHgO7ylEB/jq/
-	LYremN0VI6FWdEOhl2MaJxdCW+hnOI9XEN2VFLYHUG/0jbe19Ms7BDEbEozIrZwHUnLc
-	w9uxzn69WE1FFfyRc83MHWuSUXNFS7h5EtPeEFEa8j21Dds7TofjglANYXfWSgk+dp1S
-	rPHsoQbdYNuwOL3XsYkvEIysk//Xbql0wLq1sur9GBSFf8nb3U4swzh03qUu3aTUmS8M
-	jEaNzIyGJvtrau/cTz6DNvA61mQ1M8SHMvqNB46NeZpIVe6bHv+M+ahcj7uutvWDq405
-	oxNw==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=KS7oE2Oour3RRHIO85JvV2v3I2LAlHrqX2RGdmnTC7M=;
+	b=aJDqkWwLfvEwzMT346OaJz8uWkJst8Uaxb+kpswkEYQo/b+0rxVVyTEqWeGGNzrBWu
+	MNF75LBlwwLAeQAYd0wt7eiCsxlCkjT+lHIkgXGWwYsHNqKVgYf7+fxAwBCC54EQyZ5E
+	vYmM/foJgeni0Hknj5y6v8jYBGnyDsKT8r57pApyZkpAP2crB7noKpS/1YBamRPo7FMF
+	Xf8iCKdqiT0DwoNzU8dAWPNqtAmNje653B6s1WQCMm+fle5gmvdGMdvMn2RBZ79msjej
+	zR/Ul90/hNjX6UTgOz+2jNofyCV27LlwsWXZhWZEeGfinibFrAJ2y9iqqXVJPlyritVz
+	rPaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=+g8HbLd+7Q+1H4Pt4kipvrSkM8dGX2kYTa0FknEkDfY=;
-	b=BpDWqM4qf8Xg7z55OsUT7wl09X6gbAYT4KDaf6YHHSS390UiEvIiUIvwrVQP7zAaXY
-	WNTZ6b5JmS4xGXchkk0SVoSuBWhBD1KCiPa/uye5XfRac4YigC/c/8tOwpF5PizPb1W/
-	R8OTRAqqAGFLGXUxr2Qr7y36KKdlfhZvP3Fdmuq1AIgt7AgjOwcnoFrm2DvyOpEaDE+o
-	Oi73Qko2/vPHixP2lMl5Fu+ueO2RUQ9PpCwFvF+VhVJkL9YsYCOBsFfWn6KKj5R6qdym
-	cdtYo6bG50ZOzZVAS6HBHiP6fugKLmhh2yG/AGQP7xoJz1gdOkjbOInI28OPXLkesa3r
-	DC9A==
-X-Gm-Message-State: APjAAAXDGvf2t22NRSOkGncFVvbkt/1wLUDfZpE3gAKiib/wiyBsoSaU
-	geY7h4frdUV0iLu4RgWJGGwLEHl6
-X-Google-Smtp-Source: APXvYqwdH32ojYhbCA7ICN8msj19WA4Y9aORQuMKEq8q/IRTC4P8PKdp76dVI0pbByY5FLV1ieoAxQ==
-X-Received: by 2002:adf:ef4e:: with SMTP id c14mr9663183wrp.335.1582971259425; 
-	Sat, 29 Feb 2020 02:14:19 -0800 (PST)
-Received: from linux-f9zs.site ([2a02:2450:1011:56f:238d:84be:b349:9184])
-	by smtp.gmail.com with ESMTPSA id i7sm724461wro.87.2020.02.29.02.14.18
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sat, 29 Feb 2020 02:14:18 -0800 (PST)
-From: Alexander Kanavin <alex.kanavin@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 29 Feb 2020 11:13:36 +0100
-Message-Id: <20200229101336.30490-2-alex.kanavin@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200229101336.30490-1-alex.kanavin@gmail.com>
-References: <20200229101336.30490-1-alex.kanavin@gmail.com>
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=KS7oE2Oour3RRHIO85JvV2v3I2LAlHrqX2RGdmnTC7M=;
+	b=B3kkVX7pHjqveISrmtKma0TQCk8cGYJwOfGK/ri9uPkgExJLcggcBE+ePMMqeTirJC
+	0Jw966bMMJ+PK4aTrfBcD0ABlOdDuQmKB2OgttnCgKQEQMya6Tq+P12BkGUDVpgOW7+g
+	FybBOE6o7m+AKAaZtt0pxtVHTnRIMQvppmLr1us8JbYUuX/SPrm+VwRDp4fs9kUgEv5X
+	1P4Q/onf0DYUH3iwshbNS/ebfLfkfw8fPkjrlLeqPgQWM9AnXImix7K/+fdAOErWfeoe
+	hMFUlYjSR6T5+2s4ZiunOMCG+kjpY/IchSBWi1Bfoy45nmKwd6zaNvTXsn7VDyOW3edM
+	gBlw==
+X-Gm-Message-State: ANhLgQ3wue17xDy4wVZzu42hlSmkV1lGz0UHLxyo+PNcn7aehRe8WJCk
+	BbktoSH7S3TyiNnIV59ZF9mWJo43zZ6xnUbo5NGAqw==
+X-Google-Smtp-Source: ADFU+vvyIGv8boJLzge+t17epPXp/eYWUwKbOlE+nxV5xbEZGGd0GazQQPKrt7D5j3YqaDKBbJCcCcsRIYqg/pPmpds=
+X-Received: by 2002:ac5:cce6:: with SMTP id k6mr3382819vkn.1.1582993792308;
+	Sat, 29 Feb 2020 08:29:52 -0800 (PST)
 MIME-Version: 1.0
-Subject: [PATCH 2/2] piglist: add from oe-core
+References: <20200229101336.30490-1-alex.kanavin@gmail.com>
+In-Reply-To: <20200229101336.30490-1-alex.kanavin@gmail.com>
+From: Alexander Kanavin <alex.kanavin@gmail.com>
+Date: Sat, 29 Feb 2020 17:29:41 +0100
+Message-ID: <CANNYZj84xRM4NCHOkQz3Q3KSLNhKEW5Ew+FGenNDXRXqr5BPkA@mail.gmail.com>
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 1/2] python3-numpy: add from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,169 +53,238 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 Feb 2020 10:14:19 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 29 Feb 2020 16:29:52 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
----
- ...-bash-completions-in-the-right-place.patch | 35 ++++++++++
- ...proper-WAYLAND_INCLUDE_DIRS-variable.patch | 32 ++++++++++
- meta-oe/recipes-graphics/piglit/piglit_git.bb | 64 +++++++++++++++++++
- 3 files changed, 131 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/piglit/piglit/0001-cmake-install-bash-completions-in-the-right-place.patch
- create mode 100644 meta-oe/recipes-graphics/piglit/piglit/0001-cmake-use-proper-WAYLAND_INCLUDE_DIRS-variable.patch
- create mode 100644 meta-oe/recipes-graphics/piglit/piglit_git.bb
+Please ignore this set; the recipes will stay in core for now.
 
-diff --git a/meta-oe/recipes-graphics/piglit/piglit/0001-cmake-install-bash-completions-in-the-right-place.patch b/meta-oe/recipes-graphics/piglit/piglit/0001-cmake-install-bash-completions-in-the-right-place.patch
-new file mode 100644
-index 000000000..e07e810a7
---- /dev/null
-+++ b/meta-oe/recipes-graphics/piglit/piglit/0001-cmake-install-bash-completions-in-the-right-place.patch
-@@ -0,0 +1,35 @@
-+From 26faa2c157a27a18a9f767976730fe0c115e3af4 Mon Sep 17 00:00:00 2001
-+From: Jussi Kukkonen <jussi.kukkonen@intel.com>
-+Date: Wed, 13 Jul 2016 19:19:02 +0300
-+Subject: [PATCH] cmake: install bash-completions in the right place
-+
-+The completionsdir variable is a full path and should not be
-+prefixed.
-+
-+This does mean the files may be installed outside of
-+CMAKE_INSTALL_PREFIX -- the alternative is more difficult and
-+means that bash completion files may be installed where
-+bash-completion can't find them.
-+
-+Signed-off-by: Jussi Kukkonen <jussi.kukkonen@intel.com>
-+Upstream-Status: Submitted [mailing list]
-+---
-+ CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 8e2abba..784a8f9 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -532,7 +532,7 @@ install (
-+ if (BASH_COMPLETION_FOUND)
-+ 	install(
-+ 		FILES completions/bash/piglit
-+-		DESTINATION ${CMAKE_INSTALL_PREFIX}/${BASH_COMPLETION_COMPLETIONSDIR}/
-++		DESTINATION ${BASH_COMPLETION_COMPLETIONSDIR}/
-+ 	)
-+ endif (BASH_COMPLETION_FOUND)
-+ 
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-graphics/piglit/piglit/0001-cmake-use-proper-WAYLAND_INCLUDE_DIRS-variable.patch b/meta-oe/recipes-graphics/piglit/piglit/0001-cmake-use-proper-WAYLAND_INCLUDE_DIRS-variable.patch
-new file mode 100644
-index 000000000..5d6ec368b
---- /dev/null
-+++ b/meta-oe/recipes-graphics/piglit/piglit/0001-cmake-use-proper-WAYLAND_INCLUDE_DIRS-variable.patch
-@@ -0,0 +1,32 @@
-+From 3bf1beee1ddd19bc536ff2856e04ac269d43daa2 Mon Sep 17 00:00:00 2001
-+From: Pascal Bach <pascal.bach@siemens.com>
-+Date: Thu, 4 Oct 2018 14:43:17 +0200
-+Subject: [PATCH] cmake: use proper WAYLAND_INCLUDE_DIRS variable
-+
-+WAYLAND_wayland-client_INCLUDEDIR is an internal variable and is not correctly
-+set when cross compiling. WAYLAND_INCLUDE_DIRS includes the correct path even
-+when cross compiling.
-+
-+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
-+
-+Upstream-Status: Submitted [piglit@lists.freedesktop.org]
-+---
-+ tests/util/CMakeLists.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/tests/util/CMakeLists.txt b/tests/util/CMakeLists.txt
-+index a5f080156..a303a9f58 100644
-+--- a/tests/util/CMakeLists.txt
-++++ b/tests/util/CMakeLists.txt
-+@@ -97,7 +97,7 @@ if(PIGLIT_USE_WAFFLE)
-+ 			piglit-framework-gl/piglit_wl_framework.c
-+ 		)
-+ 		list(APPEND UTIL_GL_INCLUDES
-+-			${WAYLAND_wayland-client_INCLUDEDIR}
-++			${WAYLAND_INCLUDE_DIRS}
-+ 		)
-+ 	endif()
-+ 	if(PIGLIT_HAS_X11)
-+-- 
-+2.11.0
-+
-diff --git a/meta-oe/recipes-graphics/piglit/piglit_git.bb b/meta-oe/recipes-graphics/piglit/piglit_git.bb
-new file mode 100644
-index 000000000..58d10d6b9
---- /dev/null
-+++ b/meta-oe/recipes-graphics/piglit/piglit_git.bb
-@@ -0,0 +1,64 @@
-+SUMMARY = "OpenGL driver testing framework"
-+DESCRIPTION = "Piglit is an open-source test suite for OpenGL and OpenCL \
-+implementations."
-+LICENSE = "MIT & LGPLv2+ & GPLv3 & GPLv2+ & BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b2beded7103a3d8a442a2a0391d607b0"
-+
-+SRC_URI = "git://gitlab.freedesktop.org/mesa/piglit.git;protocol=https \
-+           file://0001-cmake-install-bash-completions-in-the-right-place.patch \
-+           file://0001-cmake-use-proper-WAYLAND_INCLUDE_DIRS-variable.patch \
-+           "
-+UPSTREAM_CHECK_COMMITS = "1"
-+
-+SRCREV = "6126c2d4e476c7770d216ffa1932c10e2a5a7813"
-+# (when PV goes above 1.0 remove the trailing r)
-+PV = "1.0+gitr${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+X11_DEPS = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11 libxrender libglu', '', d)}"
-+X11_RDEPS = "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'mesa-demos', '', d)}"
-+
-+DEPENDS = "libpng waffle libxkbcommon virtual/libgl python3-mako-native python3-numpy-native python3-six-native virtual/egl"
-+
-+inherit cmake pkgconfig python3native features_check bash-completion
-+
-+# depends on virtual/libgl
-+REQUIRED_DISTRO_FEATURES += "opengl"
-+
-+# The built scripts go into the temporary directory according to tempfile
-+# (typically /tmp) which can race if multiple builds happen on the same machine,
-+# so tell it to use a directory in ${B} to avoid overwriting.
-+export TEMP = "${B}/temp/"
-+do_compile[dirs] =+ "${B}/temp/"
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'x11', d)}"
-+PACKAGECONFIG[freeglut] = "-DPIGLIT_USE_GLUT=1,-DPIGLIT_USE_GLUT=0,freeglut,"
-+PACKAGECONFIG[x11] = "-DPIGLIT_BUILD_GL_TESTS=ON,-DPIGLIT_BUILD_GL_TESTS=OFF,${X11_DEPS}, ${X11_RDEPS}"
-+
-+
-+do_configure_prepend() {
-+   if [ "${@bb.utils.contains('PACKAGECONFIG', 'freeglut', 'yes', 'no', d)}" = "no" ]; then
-+        sed -i -e "/^#.*include <GL\/freeglut_ext.h>$/d" ${S}/src/piglit/glut_wrap.h
-+        sed -i -e "/^#.*include.*<GL\/glut.h>$/d" ${S}/src/piglit/glut_wrap.h
-+   fi
-+}
-+
-+# Forcibly strip because Piglit is *huge*
-+OECMAKE_TARGET_INSTALL = "install/strip"
-+
-+RDEPENDS_${PN} = "waffle waffle-bin python3 python3-mako python3-json \
-+	python3-misc \
-+	python3-unixadmin python3-xml python3-multiprocessing \
-+	python3-six python3-shell python3-io \
-+	python3-netserver bash \
-+	"
-+
-+INSANE_SKIP_${PN} += "dev-so already-stripped"
-+
-+# As nothing builds against Piglit we don't need to have anything in the
-+# sysroot, especially when this is ~2GB of test suite
-+SYSROOT_DIRS_remove = "${libdir}"
-+
-+# Can't be built with ccache
-+CCACHE_DISABLE = "1"
--- 
-2.25.1
+Alex
 
+On Sat, 29 Feb 2020 at 11:14, Alexander Kanavin <alex.kanavin@gmail.com>
+wrote:
+
+> Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+> ---
+>  ...-and-so-on-for-libraries-by-default-.patch | 70 +++++++++++++++++++
+>  ...up.py-remove-the-detection-of-x86-ta.patch | 32 +++++++++
+>  .../python-numpy/python-numpy.inc             | 52 ++++++++++++++
+>  .../python-numpy/python3-numpy_1.17.4.bb      |  3 +
+>  4 files changed, 157 insertions(+)
+>  create mode 100644
+> meta-python/recipes-devtools/python-numpy/files/0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python-numpy/files/0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch
+>  create mode 100644
+> meta-python/recipes-devtools/python-numpy/python-numpy.inc
+>  create mode 100644 meta-python/recipes-devtools/python-numpy/
+> python3-numpy_1.17.4.bb
+>
+> diff --git
+> a/meta-python/recipes-devtools/python-numpy/files/0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch
+> b/meta-python/recipes-devtools/python-numpy/files/0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch
+> new file mode 100644
+> index 000000000..98a970583
+> --- /dev/null
+> +++
+> b/meta-python/recipes-devtools/python-numpy/files/0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch
+> @@ -0,0 +1,70 @@
+> +From 672a75c8417ce08db9e31fc415ec445479231d5a Mon Sep 17 00:00:00 2001
+> +From: Alexander Kanavin <alex.kanavin@gmail.com>
+> +Date: Thu, 10 Dec 2015 13:20:30 +0200
+> +Subject: [PATCH] Don't search /usr and so on for libraries by default to
+> +
+> + avoid host contamination.
+> +
+> +Upstream-Status: Inappropriate (As the code stands, this is a hack)
+> +Signed-off-by: Ross Burton <ross.burton@intel.com>
+> +Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+> +
+> +---
+> + numpy/distutils/system_info.py | 42 ++++------------------------------
+> + 1 file changed, 5 insertions(+), 37 deletions(-)
+> +
+> +diff --git a/numpy/distutils/system_info.py
+> b/numpy/distutils/system_info.py
+> +index ba2b1f4..f94dce1 100644
+> +--- a/numpy/distutils/system_info.py
+> ++++ b/numpy/distutils/system_info.py
+> +@@ -278,45 +278,13 @@ if sys.platform == 'win32':
+> +             add_system_root(os.path.join(conda_dir, 'Library'))
+> +
+> + else:
+> +-    default_lib_dirs = libpaths(['/usr/local/lib', '/opt/lib',
+> '/usr/lib',
+> +-                                 '/opt/local/lib', '/sw/lib'],
+> platform_bits)
+> +     default_runtime_dirs = []
+> +-    default_include_dirs = ['/usr/local/include',
+> +-                            '/opt/include', '/usr/include',
+> +-                            # path of umfpack under macports
+> +-                            '/opt/local/include/ufsparse',
+> +-                            '/opt/local/include', '/sw/include',
+> +-                            '/usr/include/suitesparse']
+> +-    default_src_dirs = ['.', '/usr/local/src', '/opt/src', '/sw/src']
+> +-
+> +-    default_x11_lib_dirs = libpaths(['/usr/X11R6/lib', '/usr/X11/lib',
+> +-                                     '/usr/lib'], platform_bits)
+> +-    default_x11_include_dirs = ['/usr/X11R6/include', '/usr/X11/include',
+> +-                                '/usr/include']
+> +-
+> +-    if os.path.exists('/usr/lib/X11'):
+> +-        globbed_x11_dir = glob('/usr/lib/*/libX11.so')
+> +-        if globbed_x11_dir:
+> +-            x11_so_dir = os.path.split(globbed_x11_dir[0])[0]
+> +-            default_x11_lib_dirs.extend([x11_so_dir, '/usr/lib/X11'])
+> +-            default_x11_include_dirs.extend(['/usr/lib/X11/include',
+> +-                                             '/usr/include/X11'])
+> +-
+> +-    with open(os.devnull, 'w') as tmp:
+> +-        try:
+> +-            p = subprocess.Popen(["gcc", "-print-multiarch"],
+> stdout=subprocess.PIPE,
+> +-                         stderr=tmp)
+> +-        except (OSError, DistutilsError):
+> +-            # OSError if gcc is not installed, or SandboxViolation
+> (DistutilsError
+> +-            # subclass) if an old setuptools bug is triggered (see
+> gh-3160).
+> +-            pass
+> +-        else:
+> +-            triplet = str(p.communicate()[0].decode().strip())
+> +-            if p.returncode == 0:
+> +-                # gcc supports the "-print-multiarch" option
+> +-                default_x11_lib_dirs += [os.path.join("/usr/lib/",
+> triplet)]
+> +-                default_lib_dirs += [os.path.join("/usr/lib/", triplet)]
+> ++    default_lib_dirs = libpaths(['/deadir/lib'], platform_bits)
+> ++    default_include_dirs = ['/deaddir/include']
+> ++    default_src_dirs = ['.', '/deaddir/src']
+> +
+> ++    default_x11_lib_dirs = libpaths(['/deaddir/lib'], platform_bits)
+> ++    default_x11_include_dirs = ['/deaddir/include']
+> +
+> + if os.path.join(sys.prefix, 'lib') not in default_lib_dirs:
+> +     default_lib_dirs.insert(0, os.path.join(sys.prefix, 'lib'))
+> diff --git
+> a/meta-python/recipes-devtools/python-numpy/files/0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch
+> b/meta-python/recipes-devtools/python-numpy/files/0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch
+> new file mode 100644
+> index 000000000..9da6a2b3d
+> --- /dev/null
+> +++
+> b/meta-python/recipes-devtools/python-numpy/files/0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch
+> @@ -0,0 +1,32 @@
+> +From b881e0b2ba9cf1a4aa351a1c1ea90b1e1776ce21 Mon Sep 17 00:00:00 2001
+> +From: Alexander Kanavin <alex.kanavin@gmail.com>
+> +Date: Mon, 12 Aug 2019 15:37:36 +0200
+> +Subject: [PATCH] numpy/random/setup.py: remove the detection of x86
+> targets
+> + via uname()
+> +
+> +This was badly breaking compilation for ARM targets (and possibly
+> +other non-x86 targets); if -msse2 is desirable for x86 builds it has
+> +to be passed through another channel.
+> +
+> +Upstream-Status: Inappropriate [oe-core specific]
+> +Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+> +---
+> + numpy/random/setup.py | 5 -----
+> + 1 file changed, 5 deletions(-)
+> +
+> +diff --git a/numpy/random/setup.py b/numpy/random/setup.py
+> +index a1bf3b8..60fb534 100644
+> +--- a/numpy/random/setup.py
+> ++++ b/numpy/random/setup.py
+> +@@ -49,11 +49,6 @@ def configuration(parent_package='', top_path=None):
+> +     elif not is_msvc:
+> +         # Some bit generators require c99
+> +         EXTRA_COMPILE_ARGS += ['-std=c99']
+> +-        INTEL_LIKE = any(arch in platform.machine()
+> +-                         for arch in ('x86', 'i686', 'i386', 'amd64'))
+> +-        if INTEL_LIKE:
+> +-            # Assumes GCC or GCC-like compiler
+> +-            EXTRA_COMPILE_ARGS += ['-msse2']
+> +
+> +     # Use legacy integer variable sizes
+> +     LEGACY_DEFS = [('NP_RANDOM_LEGACY', '1')]
+> diff --git a/meta-python/recipes-devtools/python-numpy/python-numpy.inc
+> b/meta-python/recipes-devtools/python-numpy/python-numpy.inc
+> new file mode 100644
+> index 000000000..8413434af
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python-numpy/python-numpy.inc
+> @@ -0,0 +1,52 @@
+> +SUMMARY = "A sophisticated Numeric Processing Package for Python"
+> +SECTION = "devel/python"
+> +LICENSE = "BSD-3-Clause & BSD-2-Clause & PSF & Apache-2.0 & BSD & MIT"
+> +LIC_FILES_CHKSUM =
+> "file://LICENSE.txt;md5=1a32aba007a415aa8a1c708a0e2b86a1"
+> +
+> +SRCNAME = "numpy"
+> +
+> +SRC_URI = "
+> https://github.com/${SRCNAME}/${SRCNAME}/releases/download/v${PV}/${SRCNAME}-${PV}.tar.gz
+> \
+> +
+>  file://0001-Don-t-search-usr-and-so-on-for-libraries-by-default-.patch \
+> +
+>  file://0001-numpy-random-setup.py-remove-the-detection-of-x86-ta.patch \
+> +           "
+> +SRC_URI[md5sum] = "9147c3ee75e58d657b5b8b5a4f3564e0"
+> +SRC_URI[sha256sum] =
+> "fb0415475e673cb9a6dd816df999e0ab9f86fa3af2b1770944e7288d2bea4ac9"
+> +
+> +UPSTREAM_CHECK_URI = "https://github.com/numpy/numpy/releases"
+> +UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)\.tar"
+> +
+> +# Needed for building with gcc 4.x from centos 7
+> +CFLAGS_append_class-native = " -std=c99"
+> +
+> +S = "${WORKDIR}/numpy-${PV}"
+> +
+> +CLEANBROKEN = "1"
+> +
+> +FILES_${PN}-staticdev += "${PYTHON_SITEPACKAGES_DIR}/numpy/core/lib/*.a"
+> +
+> +# install what is needed for numpy.test()
+> +RDEPENDS_${PN} = "${PYTHON_PN}-unittest \
+> +                  ${PYTHON_PN}-difflib \
+> +                  ${PYTHON_PN}-pprint \
+> +                  ${PYTHON_PN}-pickle \
+> +                  ${PYTHON_PN}-shell \
+> +                  ${PYTHON_PN}-nose \
+> +                  ${PYTHON_PN}-doctest \
+> +                  ${PYTHON_PN}-datetime \
+> +                  ${PYTHON_PN}-distutils \
+> +                  ${PYTHON_PN}-misc \
+> +                  ${PYTHON_PN}-mmap \
+> +                  ${PYTHON_PN}-netclient \
+> +                  ${PYTHON_PN}-numbers \
+> +                  ${PYTHON_PN}-pydoc \
+> +                  ${PYTHON_PN}-pkgutil \
+> +                  ${PYTHON_PN}-email \
+> +                  ${PYTHON_PN}-compression \
+> +                  ${PYTHON_PN}-ctypes \
+> +                  ${PYTHON_PN}-threading \
+> +                  ${PYTHON_PN}-multiprocessing \
+> +"
+> +
+> +RDEPENDS_${PN}_class-native = ""
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-python/recipes-devtools/python-numpy/
+> python3-numpy_1.17.4.bb b/meta-python/recipes-devtools/python-numpy/
+> python3-numpy_1.17.4.bb
+> new file mode 100644
+> index 000000000..d388e88d2
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python-numpy/python3-numpy_1.17.4.bb
+> @@ -0,0 +1,3 @@
+> +inherit setuptools3
+> +require python-numpy.inc
+> +
+> --
+> 2.25.1
+>
+>
 
