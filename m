@@ -1,26 +1,46 @@
-Return-Path: <ee.peng.yeoh@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id EF8FC61A6B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
+	[209.85.160.195])
+	by mail.openembedded.org (Postfix) with ESMTP id EAD3F61A7D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Mar 2020 00:40:18 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	29 Feb 2020 16:33:15 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,501,1574150400"; d="scan'208";a="232904923"
-Received: from andromeda02.png.intel.com ([10.221.183.11])
-	by fmsmga008.fm.intel.com with ESMTP; 29 Feb 2020 16:33:14 -0800
-From: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  1 Mar 2020 08:33:02 +0800
-Message-Id: <1583022782-6527-5-git-send-email-ee.peng.yeoh@intel.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1583022782-6527-1-git-send-email-ee.peng.yeoh@intel.com>
+	Sun,  1 Mar 2020 02:40:48 +0000 (UTC)
+Received: by mail-qt1-f195.google.com with SMTP id t13so5076770qto.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 29 Feb 2020 18:40:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=a9C+5Cf+7vV66N6o7XJaVzEjmUPqhmv/ikWq+XLE+Io=;
+	b=D5dGSVGuyzhFZ812ScSq8/eCpP4sD6SUuhCZMCqGNqCBEox8t1RuZDFKkSAXpQOrgT
+	eF0DF/GhO+O1VQlWj2NiGV/6/lcwK86GVKqdazb1jZtLVQzAT66+Qq8g/0MSHJB+NlZf
+	QseJr0xyTZa5nZsMJ+h2DbORxw63BgcykRgS80uVzIM+zIGoOadWodM1eBxqAKIazkGf
+	1zmlgWwxLORV97aq14fCiPp7UeKs+XSP4e/WXlSx8486WvrzsDdWWRbwxILTAIjxRS+i
+	u+wRY219zTZiPY+2Al4tTsWpc1pWqBx/549dQqLDcEaP37qfm/Ns/9DB96O8V8gvB62A
+	eY9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=a9C+5Cf+7vV66N6o7XJaVzEjmUPqhmv/ikWq+XLE+Io=;
+	b=W8O9Zqy8Umz8GZ+20mGpbc+IzWxgqoggBfGQXN+QiJ1YQAcnYcTYd5xspFBYnIf0wY
+	ccc8boiCGOfzwROgvKpDLptJxSZcPqdgZL5yrDXaQpo4q5GgPoWNrm93PllX1VtgfkaF
+	o0jbN+sv63ilfuqk1p4f8zSGp8nkdby98fOZ9yMZjJ+x+/Y6+0l0m6zI5lfJ/Lt+9Sf4
+	WkqAKCPN/pL7PqA+hZtMMNas70Sm+Gk/fZPjLpENRmCShQG4+jcYWlKrGp2xuWFoK2vW
+	EFkSLc4j9XyE6PuO70INlDobEkcJAIlAAlR5TrijIjlf53JB6715mry8YKkehHXlhx/g
+	M3HA==
+X-Gm-Message-State: ANhLgQ0iB/kksL4hjtvzvyKRajTPTTEtrHvm15e98AhtB2hnJ6GTk0lg
+	vdTrWvfnQYwxsJO6gAVvInwsOAPYE9obCmz2ZcY=
+X-Google-Smtp-Source: ADFU+vvWNqAbmZ0ZSaQJJ3xowfml93uGKigz1slUt9fJ9sj0KHK6x5fER7BE/cnOdqzq7AKCjpiGp3tKRTL1ZMYC69k=
+X-Received: by 2002:ac8:7109:: with SMTP id z9mr237353qto.146.1583030449658;
+	Sat, 29 Feb 2020 18:40:49 -0800 (PST)
+MIME-Version: 1.0
 References: <1583022782-6527-1-git-send-email-ee.peng.yeoh@intel.com>
-Cc: Ross Burton <ross.burton@intel.com>, Yeoh Ee Peng <ee.peng.yeoh@intel.com>
-Subject: [PATCH 5/5] opencv: abort configure if we need to download
+In-Reply-To: <1583022782-6527-1-git-send-email-ee.peng.yeoh@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 29 Feb 2020 18:40:23 -0800
+Message-ID: <CAMKF1soxc=WDStbrVAjZzf5CKprvPb4zZW=OVjOB32dtpE944w@mail.gmail.com>
+To: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/5] opencv: Enable pkg-config .pc file generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,82 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Mar 2020 00:40:19 -0000
+X-List-Received-Date: Sun, 01 Mar 2020 02:40:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Ross Burton <ross.burton@intel.com>
+which branch is this intended for? it does not
+look it is for master since it sounds more like
+backport, please add it to subject prefix so stable
+maintainer can get notified about it.
 
-OpenCV's habit of downloading files during do_configure is bad form
-(as it becomes impossible to do offline builds), so add an option to
-error out if a download would be needed.
-
-Signed-off-by: Ross Burton <ross.burton@intel.com>
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
----
- .../recipes-support/opencv/opencv/download.patch   | 32 ++++++++++++++++++++++
- meta-oe/recipes-support/opencv/opencv_4.1.0.bb     |  2 ++
- 2 files changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/download.patch
-
-diff --git a/meta-oe/recipes-support/opencv/opencv/download.patch b/meta-oe/recipes-support/opencv/opencv/download.patch
-new file mode 100644
-index 0000000..fa8db88
---- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv/download.patch
-@@ -0,0 +1,32 @@
-+This CMake module will download files during do_configure.  This is bad as it
-+means we can't do offline builds.
-+
-+Add an option to disallow downloads by emitting a fatal error.
-+
-+Upstream-Status: Pending
-+Signed-off-by: Ross Burton <ross.burton@intel.com>
-+
-+diff --git a/cmake/OpenCVDownload.cmake b/cmake/OpenCVDownload.cmake
-+index cdc47ad2cb..74573f45a2 100644
-+--- a/cmake/OpenCVDownload.cmake
-++++ b/cmake/OpenCVDownload.cmake
-+@@ -14,6 +14,7 @@
-+ #    RELATIVE_URL - if set, then URL is treated as a base, and FILENAME will be appended to it
-+ #  Note: uses OPENCV_DOWNLOAD_PATH folder as cache, default is <opencv>/.cache
-+ 
-++set(OPENCV_ALLOW_DOWNLOADS ON CACHE BOOL "Allow downloads")
-+ set(HELP_OPENCV_DOWNLOAD_PATH "Cache directory for downloaded files")
-+ if(DEFINED ENV{OPENCV_DOWNLOAD_PATH})
-+   set(OPENCV_DOWNLOAD_PATH "$ENV{OPENCV_DOWNLOAD_PATH}" CACHE PATH "${HELP_OPENCV_DOWNLOAD_PATH}")
-+@@ -153,6 +154,11 @@ function(ocv_download)
-+ 
-+   # Download
-+   if(NOT EXISTS "${CACHE_CANDIDATE}")
-++    if(NOT OPENCV_ALLOW_DOWNLOADS)
-++      message(FATAL_ERROR "Not going to download ${DL_FILENAME}")
-++      return()
-++    endif()
-++
-+     ocv_download_log("#cmake_download \"${CACHE_CANDIDATE}\" \"${DL_URL}\"")
-+     file(DOWNLOAD "${DL_URL}" "${CACHE_CANDIDATE}"
-+          INACTIVITY_TIMEOUT 60
-diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-index 03e4f58..f679ccb 100644
---- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-@@ -48,6 +48,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
-            file://0003-To-fix-errors-as-following.patch \
-            file://0001-Temporarliy-work-around-deprecated-ffmpeg-RAW-functi.patch \
-            file://0001-Dont-use-isystem.patch \
-+           file://download.patch \
-            "
- PV = "4.1.0"
- 
-@@ -87,6 +88,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
-     -DIPPROOT=${WORKDIR}/ippicv_lnx \
-     -DOPENCV_GENERATE_PKGCONFIG=ON \
-     -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
-+    -DOPENCV_ALLOW_DOWNLOADS=OFF \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
--- 
-2.7.4
-
+On Sat, Feb 29, 2020 at 4:33 PM Yeoh Ee Peng <ee.peng.yeoh@intel.com> wrote:
+>
+> From: Carlos Rafael Giani <crg7475@mailbox.org>
+>
+> In OpenCV 4, .pc file generation is disabled by default. Yet, other
+> software such as GStreamer and FFmpeg rely on the .pc files during build
+> time configuration. Explicitely enable .pc file generation to make sure
+> pkg-config can be used for getting information about OpenCV.
+>
+> Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
+> ---
+>  meta-oe/recipes-support/opencv/opencv_4.1.0.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+> index 77b5dd6..5e89db0 100644
+> --- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+> +++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+> @@ -64,6 +64,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
+>      -DCMAKE_SKIP_RPATH=ON \
+>      -DOPENCV_ICV_HASH=${IPP_MD5} \
+>      -DIPPROOT=${WORKDIR}/ippicv_lnx \
+> +    -DOPENCV_GENERATE_PKGCONFIG=ON \
+>      ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
+>      ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
+>      ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
+> --
+> 2.7.4
+>
 
