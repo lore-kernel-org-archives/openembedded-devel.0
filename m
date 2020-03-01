@@ -1,46 +1,38 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id EAD3F61A7D
+Return-Path: <prvs=3224e252f=Richard.Leitner@skidata.com>
+Received: from mail1.skidata.com (mail1.skidata.com [91.230.2.99])
+	by mail.openembedded.org (Postfix) with ESMTP id 48A8661984
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Mar 2020 02:40:48 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id t13so5076770qto.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 Feb 2020 18:40:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=a9C+5Cf+7vV66N6o7XJaVzEjmUPqhmv/ikWq+XLE+Io=;
-	b=D5dGSVGuyzhFZ812ScSq8/eCpP4sD6SUuhCZMCqGNqCBEox8t1RuZDFKkSAXpQOrgT
-	eF0DF/GhO+O1VQlWj2NiGV/6/lcwK86GVKqdazb1jZtLVQzAT66+Qq8g/0MSHJB+NlZf
-	QseJr0xyTZa5nZsMJ+h2DbORxw63BgcykRgS80uVzIM+zIGoOadWodM1eBxqAKIazkGf
-	1zmlgWwxLORV97aq14fCiPp7UeKs+XSP4e/WXlSx8486WvrzsDdWWRbwxILTAIjxRS+i
-	u+wRY219zTZiPY+2Al4tTsWpc1pWqBx/549dQqLDcEaP37qfm/Ns/9DB96O8V8gvB62A
-	eY9Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=a9C+5Cf+7vV66N6o7XJaVzEjmUPqhmv/ikWq+XLE+Io=;
-	b=W8O9Zqy8Umz8GZ+20mGpbc+IzWxgqoggBfGQXN+QiJ1YQAcnYcTYd5xspFBYnIf0wY
-	ccc8boiCGOfzwROgvKpDLptJxSZcPqdgZL5yrDXaQpo4q5GgPoWNrm93PllX1VtgfkaF
-	o0jbN+sv63ilfuqk1p4f8zSGp8nkdby98fOZ9yMZjJ+x+/Y6+0l0m6zI5lfJ/Lt+9Sf4
-	WkqAKCPN/pL7PqA+hZtMMNas70Sm+Gk/fZPjLpENRmCShQG4+jcYWlKrGp2xuWFoK2vW
-	EFkSLc4j9XyE6PuO70INlDobEkcJAIlAAlR5TrijIjlf53JB6715mry8YKkehHXlhx/g
-	M3HA==
-X-Gm-Message-State: ANhLgQ0iB/kksL4hjtvzvyKRajTPTTEtrHvm15e98AhtB2hnJ6GTk0lg
-	vdTrWvfnQYwxsJO6gAVvInwsOAPYE9obCmz2ZcY=
-X-Google-Smtp-Source: ADFU+vvWNqAbmZ0ZSaQJJ3xowfml93uGKigz1slUt9fJ9sj0KHK6x5fER7BE/cnOdqzq7AKCjpiGp3tKRTL1ZMYC69k=
-X-Received: by 2002:ac8:7109:: with SMTP id z9mr237353qto.146.1583030449658;
-	Sat, 29 Feb 2020 18:40:49 -0800 (PST)
+	Sun,  1 Mar 2020 11:14:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=skidata.com; i=@skidata.com; q=dns/txt; s=selector1;
+	t=1583061243; x=1614597243;
+	h=date:from:to:cc:subject:message-id:references:
+	mime-version:in-reply-to;
+	bh=7RuXYOrTMS6FT7sVj8Px/MJuh4VbahHwXPgJvVXzNZg=;
+	b=RC1MhsJUi6PL3O5KzKEn97sQcQNnPZMCAPXIBILIiuVcv5PbekloZ0/x
+	uDwcrrnM5bkkSlJn+UKU8yWUwnWi6L5bWVOifgNPjwgHv/+53lb3PyadQ
+	SIB9WXVBhEzmQRHxMBgHHQVCc1ejG/N8gAVFKnsnvAf381Qf2Y3+j1wGL
+	ksvOJnA4ZvMyV8PrxHKryzr/c83e4bdybyWbhNaZm7/Ob0Mi4+YinOMQc
+	Ivo0h0DRlA2VtUFtFvSYYw4UmjINK7z8XEXOoCKbS9j/AAOl/ZRwbwGEd
+	psr+W9LVWpZlq/9WTcv8Jic6YK288MFa5AlilQOvZEfi01xZpZ1cgFZxp A==;
+IronPort-SDR: ulg0N6+rIqf++nKH9lNfProXJiszlxajpv+19kUPy3DVU8plYwnWTPbaPo6Hlbha+m3bCeRGnT
+	ESJ/lOWRkX4+tkdknkjsoNHy4y/sPjKBlaudYD/gtk/87DtDnm5dK7RHcc66GBXlKIkEv4cpQg
+	1rsV0BioaejpViZNUIPCHoLqjkA2X2Lu2F0vMEvRgXqfLu++4WFTeOBYLU05daeLA0we3p2s10
+	/XH7/IEDUZ5TqBtzQ5CqGEBXdWU8Na6jooZlfx3VuLvUT5OSb+jR+kZ5o2wDzqENMnFROI16pv
+	SP4=
+X-IronPort-AV: E=Sophos;i="5.70,503,1574118000"; d="scan'208";a="22963188"
+Date: Sun, 1 Mar 2020 12:14:00 +0100
+From: Richard Leitner <richard.leitner@skidata.com>
+To: Lennart Sorensen <lsorense@csclub.uwaterloo.ca>
+Message-ID: <20200301111400.GB1806323@pcleri>
+References: <20200226183011.x7pp6kwn6nlwgcrc@csclub.uwaterloo.ca>
 MIME-Version: 1.0
-References: <1583022782-6527-1-git-send-email-ee.peng.yeoh@intel.com>
-In-Reply-To: <1583022782-6527-1-git-send-email-ee.peng.yeoh@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 29 Feb 2020 18:40:23 -0800
-Message-ID: <CAMKF1soxc=WDStbrVAjZzf5CKprvPb4zZW=OVjOB32dtpE944w@mail.gmail.com>
-To: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/5] opencv: Enable pkg-config .pc file generation
+In-Reply-To: <20200226183011.x7pp6kwn6nlwgcrc@csclub.uwaterloo.ca>
+X-Originating-IP: [192.168.111.252]
+X-ClientProxiedBy: sdex3srv.skidata.net (192.168.111.81) To
+	sdex5srv.skidata.net (192.168.111.83)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-java] openjre-8 fmacro-prefix-map problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,43 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Mar 2020 02:40:50 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 01 Mar 2020 11:14:02 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
 
-which branch is this intended for? it does not
-look it is for master since it sounds more like
-backport, please add it to subject prefix so stable
-maintainer can get notified about it.
+Hi,
 
-On Sat, Feb 29, 2020 at 4:33 PM Yeoh Ee Peng <ee.peng.yeoh@intel.com> wrote:
->
-> From: Carlos Rafael Giani <crg7475@mailbox.org>
->
-> In OpenCV 4, .pc file generation is disabled by default. Yet, other
-> software such as GStreamer and FFmpeg rely on the .pc files during build
-> time configuration. Explicitely enable .pc file generation to make sure
-> pkg-config can be used for getting information about OpenCV.
->
-> Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Signed-off-by: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
-> ---
->  meta-oe/recipes-support/opencv/opencv_4.1.0.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-> index 77b5dd6..5e89db0 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-> @@ -64,6 +64,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
->      -DCMAKE_SKIP_RPATH=ON \
->      -DOPENCV_ICV_HASH=${IPP_MD5} \
->      -DIPPROOT=${WORKDIR}/ippicv_lnx \
-> +    -DOPENCV_GENERATE_PKGCONFIG=ON \
->      ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
->      ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
->      ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
-> --
-> 2.7.4
->
+On Wed, Feb 26, 2020 at 01:30:11PM -0500, Lennart Sorensen wrote:
+> On Mon, Sep 30, 2019, Vincent Prince wrote:
+> > Hello again,
+> > 
+> > I see that there is a patch that should fix the problem:
+> > https://git.yoctoproject.org/cgit/cgit.cgi/meta-java/tree/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-adlc-flags.patch
+> > It is applied but it seems target compilation options are non filtered?
+> 
+> I just hit this problem too, and found out why it isn't filtering.
+> TARGET_CFLAGS isn't actually exported so the build can't use it to filter.
+> 
+> Adding this to openjre-8_242.bb fixes the problem:
+> 
+> export TARGET_CFLAGS
+> export TARGET_CXXFLAGS
+> 
+> No more problem with the host gcc/g++ complaining about -fmacro-prefix-map
+> being unknown.
+
+Thanks for the pointer. I'll take a look into it!
+
+regards;rl
+
+> 
+> I suspect openjdk-8 would need to same fix but I didn't build that yet.
+> 
+> -- 
+> Len Sorensen
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
