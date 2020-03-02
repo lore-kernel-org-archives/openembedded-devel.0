@@ -1,64 +1,38 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
-	[209.85.219.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 75F9B6062D
+Return-Path: <rpjday@crashcourse.ca>
+X-Greylist: delayed 2394 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 02 Mar 2020 12:20:17 UTC
+Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
+	by mail.openembedded.org (Postfix) with ESMTP id 50EC660706
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2020 11:25:47 +0000 (UTC)
-Received: by mail-qv1-f41.google.com with SMTP id r8so1127080qvs.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Mar 2020 03:25:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=IpEN2FToe6jhwhFS54XXCdl9HTsByKfMmVLA72znuc0=;
-	b=MHv9ALL9A5SwWSnoaCiFospk/G87ErIzyhyUdBSryIUkoq7vR0Mj7hzN0/UzHsrZEC
-	TsXo01E6ixSj1lbc7kTl7+KYTQbhar11SnB10ei9KQd4Bqs/rwUXJlNfDXYQ5vnoZAC6
-	rHfeNmdZZVkCRwsp56k22zIypxhIjFC/QM8ujHJ7fv21EkQhNBHGXHw9i7cFnyZuyxgV
-	1EIfuIXQP4WK94b45VNX3hOBYPktjG0/T8FguFVTLPUBZh8wBilbn6dui911mKuZNkcn
-	SV6q7w73+Nz5sZtMR5zlC7tH1++nlg+zH1FfL+6GfMsuhz7jWcywy2DNSKpUHRymEBov
-	mR4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=IpEN2FToe6jhwhFS54XXCdl9HTsByKfMmVLA72znuc0=;
-	b=nQCmMj8fIIRSZRvdFjwUj40oCjiDDPyHucmSCzDhrDoJ6mfQ1RafaGbm0uyEIr205b
-	atiecdmn6GjRBSNnYXOZcmnPts+e0xZcz0dM2CIK8B+dXBgFq/a2bLWAookXnkAaLZQ6
-	f8MJqcGN/Zv+njKD+W/U/A01QPcSOfc7U4B6w7391g64nOBjPI6rDEWPsRuV7ZEx1SFR
-	Bq/V/s5Th246nQ5zpJGspB+aaxp13IzOQA8n2kZUx5NqQiSnSdN+aypHQVJYLVmLr7P8
-	npI1/Em1LiVZpG3MT0ygXPqEjqg2m1ksyiW53lNZB0EPjM/rzPZyJIrlMFmikKR6ylH1
-	XC/g==
-X-Gm-Message-State: ANhLgQ38E4RpiYpShtOQj2bdFb4WC/XKivig2+crKGN+XyTW2SNpfIf0
-	EHGvRqlw7/i7s6eXe9+HxJtVtWK+pg8m9Q==
-X-Google-Smtp-Source: ADFU+vtY+T7HKCS2y05qLKwrW8xaB4vSUngckawM+zhgrR6bI3mTjcFaeGBOCxJufBPJMs9lSJdw/g==
-X-Received: by 2002:a0c:f892:: with SMTP id u18mr4020960qvn.159.1583148347632; 
-	Mon, 02 Mar 2020 03:25:47 -0800 (PST)
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com.
-	[209.85.222.173]) by smtp.gmail.com with ESMTPSA id
-	j17sm10319785qth.27.2020.03.02.03.25.46
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Mon, 02 Mar 2020 03:25:46 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-qk1-f173.google.com with SMTP id m9so9584224qke.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Mar 2020 03:25:46 -0800 (PST)
-X-Received: by 2002:a37:551:: with SMTP id 78mr15169392qkf.46.1583148346461;
-	Mon, 02 Mar 2020 03:25:46 -0800 (PST)
+	Mon,  2 Mar 2020 12:20:17 +0000 (UTC)
+Received: from [127.0.0.1] (port=57780 helo=cpanel7.indieserve.net)
+	by cpanel7.indieserve.net with esmtpsa (TLS1.2) tls
+	TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.93)
+	(envelope-from <rpjday@crashcourse.ca>) id 1j8jQt-007mb6-6j
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Mar 2020 06:40:24 -0500
+Received: from [66.129.241.14] ([66.129.241.14]) by crashcourse.ca (Horde
+	Framework) with HTTPS; Mon, 02 Mar 2020 06:40:23 -0500
+Date: Mon, 02 Mar 2020 06:40:23 -0500
+Message-ID: <20200302064023.Horde.ysbjnASrU_28GwKCJ5dLyb-@crashcourse.ca>
+From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+User-Agent: Horde Application Framework 5
 MIME-Version: 1.0
-References: <20200228150345.11829-1-brgl@bgdev.pl>
-	<CAP9ODKqbfrnLUBzE+WkGceSo+qBimGPUFUcgRuZmS3vwJZqpwA@mail.gmail.com>
-	<CAMRc=MftVskWMFZQhbFKZLwNAR9a1+4zbayWTbXFuSJgG-ZgbA@mail.gmail.com>
-In-Reply-To: <CAMRc=MftVskWMFZQhbFKZLwNAR9a1+4zbayWTbXFuSJgG-ZgbA@mail.gmail.com>
-Date: Mon, 2 Mar 2020 08:25:35 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKpVW6qxw7+5oA7auBMW1ApLdqjicZf8Ahe3RhYG8QjmgQ@mail.gmail.com>
-Message-ID: <CAP9ODKpVW6qxw7+5oA7auBMW1ApLdqjicZf8Ahe3RhYG8QjmgQ@mail.gmail.com>
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-ota][PATCH] meta-ota: add support for binary-delta images in a new layer
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id:
+	rpjday@crashcourse.ca
+X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Subject: error in meta-oe "indent" recipe file -- absolute path for FILES_${PN}-doc"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,22 +45,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2020 11:25:47 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 02 Mar 2020 12:20:17 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed; DelSp=Yes
+Content-Disposition: inline
 
-On Mon, Mar 2, 2020 at 4:37 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-> niedz., 1 mar 2020 o 14:43 Otavio Salvador
-> <otavio.salvador@ossystems.com.br> napisa=C5=82(a):
-> This single class surely doesn't justify a new layer but I have a
-> bunch of other stuff lined up for upstreaming if this is accepted.
-> This is thematically separate from most of the recipes in meta-oe too.
 
-So please give us an idea of what are your plans, so we can understand
-it better.
+from indent_2.2.12.bb (master):
 
---=20
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
+layer i'm currently perusing applies this patch for indent, with the  
+comment that this current error breaks extending this recipe to  
+"nativesdk":
+
+FILES_${PN}-doc += "${prefix}/doc/indent/indent.html"
+FILES_${PN}-doc_remove = "/usr/doc/indent/indent.html"
+
+certainly seems reasonable to fix this ... should i submit a patch?
+
+rday
+
 
