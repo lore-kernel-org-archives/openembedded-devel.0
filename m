@@ -1,47 +1,61 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-il1-f195.google.com (mail-il1-f195.google.com
-	[209.85.166.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D79626026C
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com
+	[209.85.219.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 75F9B6062D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2020 07:37:25 +0000 (UTC)
-Received: by mail-il1-f195.google.com with SMTP id o18so4510986ilg.10
+	Mon,  2 Mar 2020 11:25:47 +0000 (UTC)
+Received: by mail-qv1-f41.google.com with SMTP id r8so1127080qvs.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Mar 2020 23:37:27 -0800 (PST)
+	Mon, 02 Mar 2020 03:25:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=nbGkaAxDkmRdauJfNAwOTdLPCQ4T63EN/stmtYQ7yXU=;
-	b=Wu+ea9yipqYbVrD9HJzWlZ3FjjU1jRAu8PxxL3bY+A+DuPxqdz3D72jdH651qpoJlc
-	nzE/iMQh58vgO9uHLDWhsyLAhpSf8b5owWHb6n8ZvKAWBRiOVOcNP6R9WhHeNeGR4+74
-	hG3AKps42eRflt6mb4cbV3f5AzCqW+yBS72ZDlVX2In+/s1sZaBjUnd5ln1A75ObaCXf
-	kfFjYNzmO5Erj8rgKAiLaNWFrMBscctvrVaN6o1MIfKg1ZR1C8tW9mrCv9HAEcL1R0uc
-	5OVZ+U3H3eT957qw0fjcgtk4ona91cyWI4bpDGguaXo+DwnexuAvPQcIOaF9pQkguNiV
-	zY8w==
+	bh=IpEN2FToe6jhwhFS54XXCdl9HTsByKfMmVLA72znuc0=;
+	b=MHv9ALL9A5SwWSnoaCiFospk/G87ErIzyhyUdBSryIUkoq7vR0Mj7hzN0/UzHsrZEC
+	TsXo01E6ixSj1lbc7kTl7+KYTQbhar11SnB10ei9KQd4Bqs/rwUXJlNfDXYQ5vnoZAC6
+	rHfeNmdZZVkCRwsp56k22zIypxhIjFC/QM8ujHJ7fv21EkQhNBHGXHw9i7cFnyZuyxgV
+	1EIfuIXQP4WK94b45VNX3hOBYPktjG0/T8FguFVTLPUBZh8wBilbn6dui911mKuZNkcn
+	SV6q7w73+Nz5sZtMR5zlC7tH1++nlg+zH1FfL+6GfMsuhz7jWcywy2DNSKpUHRymEBov
+	mR4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=nbGkaAxDkmRdauJfNAwOTdLPCQ4T63EN/stmtYQ7yXU=;
-	b=e80ewdyK3blEcM+0T0SSZrb2txoHe4z4PVVXtmMUPxtZRkM7vkN56BqtBCksnJOrrB
-	ucVMMfjJ40pbP1ZIGllLEe/OJYdhERYOnjbjY1PDHbZVXga9RZXFH5yno6Gl7W3XacxR
-	3RzOh3mCEiN72NjmY4g/67wT6nGDP9+F3Kz5ZZSIK8jqNZI1IGzGZsUxTVEv2IGPJubl
-	s4j3n4rxTJQUt4vNtXOQtAKjfvfRqO0gA7b4sL9rT1XVVNSt5rsrraiA/ggzHHMUsG5U
-	nqxLvtR9mPVcLMXowyj/HD0cFUdUposAz3K7gKBc11hzNb19ghTMlwxJ9uwXOMdibo40
-	k+Dw==
-X-Gm-Message-State: APjAAAWj2pNQVT8yFR+bkODaxAJZW6Uw2LshB7F3nMfGC0NOmbnbc+xq
-	PQSoFQ8u1kdP3TRPK5uSrJOaGzkx3Cb/FnmmRkLf9A==
-X-Google-Smtp-Source: APXvYqy9gwZRRlUiM4UWN8UC042eartHuQz0sFZU5mWiFTAkRkfY7yYZqganSooSELFEbb7yMn+se1yeJobI7XjMlQo=
-X-Received: by 2002:a92:8117:: with SMTP id e23mr12729458ild.220.1583134646655;
-	Sun, 01 Mar 2020 23:37:26 -0800 (PST)
+	bh=IpEN2FToe6jhwhFS54XXCdl9HTsByKfMmVLA72znuc0=;
+	b=nQCmMj8fIIRSZRvdFjwUj40oCjiDDPyHucmSCzDhrDoJ6mfQ1RafaGbm0uyEIr205b
+	atiecdmn6GjRBSNnYXOZcmnPts+e0xZcz0dM2CIK8B+dXBgFq/a2bLWAookXnkAaLZQ6
+	f8MJqcGN/Zv+njKD+W/U/A01QPcSOfc7U4B6w7391g64nOBjPI6rDEWPsRuV7ZEx1SFR
+	Bq/V/s5Th246nQ5zpJGspB+aaxp13IzOQA8n2kZUx5NqQiSnSdN+aypHQVJYLVmLr7P8
+	npI1/Em1LiVZpG3MT0ygXPqEjqg2m1ksyiW53lNZB0EPjM/rzPZyJIrlMFmikKR6ylH1
+	XC/g==
+X-Gm-Message-State: ANhLgQ38E4RpiYpShtOQj2bdFb4WC/XKivig2+crKGN+XyTW2SNpfIf0
+	EHGvRqlw7/i7s6eXe9+HxJtVtWK+pg8m9Q==
+X-Google-Smtp-Source: ADFU+vtY+T7HKCS2y05qLKwrW8xaB4vSUngckawM+zhgrR6bI3mTjcFaeGBOCxJufBPJMs9lSJdw/g==
+X-Received: by 2002:a0c:f892:: with SMTP id u18mr4020960qvn.159.1583148347632; 
+	Mon, 02 Mar 2020 03:25:47 -0800 (PST)
+Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com.
+	[209.85.222.173]) by smtp.gmail.com with ESMTPSA id
+	j17sm10319785qth.27.2020.03.02.03.25.46
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Mon, 02 Mar 2020 03:25:46 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-qk1-f173.google.com with SMTP id m9so9584224qke.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 02 Mar 2020 03:25:46 -0800 (PST)
+X-Received: by 2002:a37:551:: with SMTP id 78mr15169392qkf.46.1583148346461;
+	Mon, 02 Mar 2020 03:25:46 -0800 (PST)
 MIME-Version: 1.0
 References: <20200228150345.11829-1-brgl@bgdev.pl>
 	<CAP9ODKqbfrnLUBzE+WkGceSo+qBimGPUFUcgRuZmS3vwJZqpwA@mail.gmail.com>
-In-Reply-To: <CAP9ODKqbfrnLUBzE+WkGceSo+qBimGPUFUcgRuZmS3vwJZqpwA@mail.gmail.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Mon, 2 Mar 2020 08:37:15 +0100
-Message-ID: <CAMRc=MftVskWMFZQhbFKZLwNAR9a1+4zbayWTbXFuSJgG-ZgbA@mail.gmail.com>
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+	<CAMRc=MftVskWMFZQhbFKZLwNAR9a1+4zbayWTbXFuSJgG-ZgbA@mail.gmail.com>
+In-Reply-To: <CAMRc=MftVskWMFZQhbFKZLwNAR9a1+4zbayWTbXFuSJgG-ZgbA@mail.gmail.com>
+Date: Mon, 2 Mar 2020 08:25:35 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKpVW6qxw7+5oA7auBMW1ApLdqjicZf8Ahe3RhYG8QjmgQ@mail.gmail.com>
+Message-ID: <CAP9ODKpVW6qxw7+5oA7auBMW1ApLdqjicZf8Ahe3RhYG8QjmgQ@mail.gmail.com>
+To: Bartosz Golaszewski <brgl@bgdev.pl>
 Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
 	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-ota][PATCH] meta-ota: add support for binary-delta images in a new layer
@@ -57,44 +71,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2020 07:37:26 -0000
+X-List-Received-Date: Mon, 02 Mar 2020 11:25:47 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-niedz., 1 mar 2020 o 14:43 Otavio Salvador
-<otavio.salvador@ossystems.com.br> napisa=C5=82(a):
->
-> Hello,
->
-> On Fri, Feb 28, 2020 at 12:03 PM Bartosz Golaszewski <brgl@bgdev.pl> wrot=
-e:
-> ...
-> > Over-The-Air updates are a crucial part of IoT systems based on linux.
-> > There are several OTA update frameworks available and many offer some
-> > sort of support in yocto (e.g. meta-mender, meta-rauc). There are certa=
-in
-> > operations that are common to all of them such as: generating binary
-> > delta patches, system recovery, creating provisioning images etc.
-> >
-> > This patch proposes to add a new layer in meta-openembedded dedicated t=
-o
-> > OTA. As the first functionality it adds a bbclass for generating binary
-> > delta images using two popular algorithms - vcdiff and rsync.
-> >
-> > Such images can then be easily packaged in update artifacts for differe=
-nt
-> > OTA frameworks.
-> >
-> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->
-> I see the value of this, as we are also doing OTA update framework
-> development, however I wonder if it is worth a new layer for this. For
-> now, I'd say to put it inside meta-oe directly.
->
+On Mon, Mar 2, 2020 at 4:37 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+> niedz., 1 mar 2020 o 14:43 Otavio Salvador
+> <otavio.salvador@ossystems.com.br> napisa=C5=82(a):
+> This single class surely doesn't justify a new layer but I have a
+> bunch of other stuff lined up for upstreaming if this is accepted.
+> This is thematically separate from most of the recipes in meta-oe too.
 
-This single class surely doesn't justify a new layer but I have a
-bunch of other stuff lined up for upstreaming if this is accepted.
-This is thematically separate from most of the recipes in meta-oe too.
+So please give us an idea of what are your plans, so we can understand
+it better.
 
-Bartosz
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
 
