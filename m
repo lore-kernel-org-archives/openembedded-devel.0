@@ -1,61 +1,24 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id BED6D61923
+Return-Path: <ee.peng.yeoh@intel.com>
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+	by mail.openembedded.org (Postfix) with ESMTP id F1B29608C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Mar 2020 13:43:57 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id v22so2003826qtp.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Mar 2020 05:43:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
-	:cc; bh=aqp120+V1evV+DCgD+Ffu7mdJC4/TrjOhGIZNF43B0Y=;
-	b=LaoH171akypku0NhaDJT758FzwvmiB1vy1HZUuGpPthI0m2WbwXfgpzVn9M/Z/gVj7
-	jOQYYqY5vzdPY98NKHCvVA3UVXGvwoDNqaugfeVlotbUrPDT54MxkMMasgb00qJoK/OD
-	eUuBrCnBiJy1CrIxivLVS/wqyAdFcqHd6YzwZA7kLXuATDwe+z2jxyXmjjm3A7KIQT0B
-	+PffyM1nzuS7ETri4u4jueO7mY0iifIWKzFnNBjtQVab8chQIKpatzYrf1OA7DlMKi5i
-	rjafsFJsVjVx4RnT6paOwEmaDgG0LWanX4ozGR597F7VDVkDaaIWsx/5aYohOElwVfCR
-	i/gA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
-	:message-id:subject:to:cc;
-	bh=aqp120+V1evV+DCgD+Ffu7mdJC4/TrjOhGIZNF43B0Y=;
-	b=Ea6WWYy3rnrB5j6Nwsed5Pgb0JD1sLzwXGKCPboqLivGMimGYl5bPQL5EothoxKRTL
-	gllMKvLyWRqvK9Wezz1EbOZnVzsmTIeoaD2NIPsYdQ9V6J4rUDxtGXQmAm9UayYofLzs
-	dc0P0BeprCX5Ofk48jaX5qwIh3ZkdxG5sg7u88ZyQFlty/UUyk+OSmr9dm//AhaGhqGr
-	8FhwouX06FOBnq2NEBiy73Kzct9CzECqbeOeeYT2lmT6RLBsexIEPt1/Tje2AOWac6ZU
-	5fUsEhn59ZQInWokYKorYqy31TwHMwaFWvh5hlb7tlRCgXxVSLuBUmmG8ZAEa8ckdJOE
-	g/oA==
-X-Gm-Message-State: APjAAAWlCNX+uABv+ubXmoMz3/UGoyWcYY6yiebFBSD8DuTnTx9YFr7T
-	QZvZlLDaJjl1KP3BP51fBLmGAtrqXIzprQ==
-X-Google-Smtp-Source: APXvYqxUJtHiPUw84+8tssCovgDZJxH3yRPxC5MvKACbBF9/S7plb33sXb/f/LkBc9OrGd+KelTOdA==
-X-Received: by 2002:ac8:4e91:: with SMTP id 17mr12254128qtp.133.1583070238201; 
-	Sun, 01 Mar 2020 05:43:58 -0800 (PST)
-Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com.
-	[209.85.222.174])
-	by smtp.gmail.com with ESMTPSA id f19sm543728qtp.46.2020.03.01.05.43.57
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Sun, 01 Mar 2020 05:43:57 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-qk1-f174.google.com with SMTP id u124so7534839qkh.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 01 Mar 2020 05:43:57 -0800 (PST)
-X-Received: by 2002:ae9:e509:: with SMTP id w9mr8448752qkf.26.1583070237025;
-	Sun, 01 Mar 2020 05:43:57 -0800 (PST)
-MIME-Version: 1.0
-References: <20200228150345.11829-1-brgl@bgdev.pl>
-In-Reply-To: <20200228150345.11829-1-brgl@bgdev.pl>
-Date: Sun, 1 Mar 2020 10:43:46 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKqbfrnLUBzE+WkGceSo+qBimGPUFUcgRuZmS3vwJZqpwA@mail.gmail.com>
-Message-ID: <CAP9ODKqbfrnLUBzE+WkGceSo+qBimGPUFUcgRuZmS3vwJZqpwA@mail.gmail.com>
-To: Bartosz Golaszewski <brgl@bgdev.pl>
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-ota][PATCH] meta-ota: add support for binary-delta images in a new layer
+	Mon,  2 Mar 2020 01:27:37 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	01 Mar 2020 17:27:38 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,505,1574150400"; d="scan'208";a="228257676"
+Received: from andromeda02.png.intel.com ([10.221.183.11])
+	by orsmga007.jf.intel.com with ESMTP; 01 Mar 2020 17:27:37 -0800
+From: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  2 Mar 2020 09:27:31 +0800
+Message-Id: <1583112455-26910-1-git-send-email-ee.peng.yeoh@intel.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
+Subject: [zeus][PATCH 1/5] opencv: Enable pkg-config .pc file generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,34 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Mar 2020 13:43:58 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 02 Mar 2020 01:27:38 -0000
 
-Hello,
+From: Carlos Rafael Giani <crg7475@mailbox.org>
 
-On Fri, Feb 28, 2020 at 12:03 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-...
-> Over-The-Air updates are a crucial part of IoT systems based on linux.
-> There are several OTA update frameworks available and many offer some
-> sort of support in yocto (e.g. meta-mender, meta-rauc). There are certain
-> operations that are common to all of them such as: generating binary
-> delta patches, system recovery, creating provisioning images etc.
->
-> This patch proposes to add a new layer in meta-openembedded dedicated to
-> OTA. As the first functionality it adds a bbclass for generating binary
-> delta images using two popular algorithms - vcdiff and rsync.
->
-> Such images can then be easily packaged in update artifacts for different
-> OTA frameworks.
->
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+In OpenCV 4, .pc file generation is disabled by default. Yet, other
+software such as GStreamer and FFmpeg rely on the .pc files during build
+time configuration. Explicitely enable .pc file generation to make sure
+pkg-config can be used for getting information about OpenCV.
 
-I see the value of this, as we are also doing OTA update framework
-development, however I wonder if it is worth a new layer for this. For
-now, I'd say to put it inside meta-oe directly.
+Signed-off-by: Carlos Rafael Giani <crg7475@mailbox.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
+---
+ meta-oe/recipes-support/opencv/opencv_4.1.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+index 77b5dd6..5e89db0 100644
+--- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
++++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
+@@ -64,6 +64,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
+     -DCMAKE_SKIP_RPATH=ON \
+     -DOPENCV_ICV_HASH=${IPP_MD5} \
+     -DIPPROOT=${WORKDIR}/ippicv_lnx \
++    -DOPENCV_GENERATE_PKGCONFIG=ON \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
+     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
+2.7.4
+
 
