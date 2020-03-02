@@ -1,26 +1,26 @@
 Return-Path: <ee.peng.yeoh@intel.com>
 Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
-	by mail.openembedded.org (Postfix) with ESMTP id C329861931
+	by mail.openembedded.org (Postfix) with ESMTP id 0E9F56193C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Mar 2020 01:27:39 +0000 (UTC)
+	Mon,  2 Mar 2020 01:27:42 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
 Received: from orsmga007.jf.intel.com ([10.7.209.58])
 	by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	01 Mar 2020 17:27:40 -0800
+	01 Mar 2020 17:27:42 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,505,1574150400"; d="scan'208";a="228257682"
+X-IronPort-AV: E=Sophos;i="5.70,505,1574150400"; d="scan'208";a="228257692"
 Received: from andromeda02.png.intel.com ([10.221.183.11])
-	by orsmga007.jf.intel.com with ESMTP; 01 Mar 2020 17:27:39 -0800
+	by orsmga007.jf.intel.com with ESMTP; 01 Mar 2020 17:27:42 -0800
 From: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Mar 2020 09:27:32 +0800
-Message-Id: <1583112455-26910-2-git-send-email-ee.peng.yeoh@intel.com>
+Date: Mon,  2 Mar 2020 09:27:33 +0800
+Message-Id: <1583112455-26910-3-git-send-email-ee.peng.yeoh@intel.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1583112455-26910-1-git-send-email-ee.peng.yeoh@intel.com>
 References: <1583112455-26910-1-git-send-email-ee.peng.yeoh@intel.com>
 Cc: Ross Burton <ross.burton@intel.com>, Yeoh Ee Peng <ee.peng.yeoh@intel.com>
-Subject: [zeus][[PATCH 2/5] opencv: don't download during configure
+Subject: [zeus][[PATCH 3/5] opencv: also download face alignment data in do_fetch()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,72 +33,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Mar 2020 01:27:39 -0000
+X-List-Received-Date: Mon, 02 Mar 2020 01:27:42 -0000
 
 From: Ross Burton <ross.burton@intel.com>
 
-OpenCV downloads data files during the CMake configure phase, which
-is bad because fetching should only happen in do_fetch (and if proxies
-are needed, won't be set in do_configure).
-
-The recipe attempts to solve this already by having the repositories in
-SRC_URI and moving the files to the correct place before do_configure().
-However they are written to ${B} which is then wiped in do_configure so
-they're not used.
-
-The OpenCV download logic has a download cache with specially formatted
-filenames, so take the downloaded files and populate the cache.
+The face alignment data is downloaded in do_configure, so download it in
+do_fetch and add it to the cache.
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
 ---
- meta-oe/recipes-support/opencv/opencv_4.1.0.bb | 23 +++++++++++++++++++++--
- 1 file changed, 21 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/opencv/opencv_4.1.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-index 5e89db0..cfc7854 100644
+index cfc7854..487393f 100644
 --- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
 +++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-@@ -51,10 +51,28 @@ PV = "4.1.0"
+@@ -15,6 +15,7 @@ SRCREV_contrib = "2c32791a9c500343568a21ea34bf2daeac2adae7"
+ SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
+ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+ SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
++SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
  
- S = "${WORKDIR}/git"
- 
-+# OpenCV wants to download more files during configure.  We download these in
-+# do_fetch and construct a source cache in the format it expects
-+OPENCV_DLDIR = "${WORKDIR}/downloads"
-+
- do_unpack_extra() {
-     tar xzf ${WORKDIR}/ipp/ippicv/${IPP_FILENAME} -C ${WORKDIR}
--    cp ${WORKDIR}/vgg/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
--    cp ${WORKDIR}/boostdesc/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
-+
-+    md5() {
-+        # Return the MD5 of $1
-+        echo $(md5sum $1 | cut -d' ' -f1)
-+    }
-+    cache() {
-+        TAG=$1
-+        shift
-+        mkdir --parents ${OPENCV_DLDIR}/$TAG
-+        for F in $*; do
-+            DEST=${OPENCV_DLDIR}/$TAG/$(md5 $F)-$(basename $F)
-+            test -e $DEST || ln -s $F $DEST
-+        done
-+    }
-+    cache xfeatures2d/boostdesc ${WORKDIR}/boostdesc/*.i
-+    cache xfeatures2d/vgg ${WORKDIR}/vgg/*.i
+ def ipp_filename(d):
+     import re
+@@ -41,6 +42,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+            git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180723;destsuffix=ipp;name=ipp \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
++           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=face;name=face \
+            file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
+            file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
+            file://0003-To-fix-errors-as-following.patch \
+@@ -73,6 +75,7 @@ do_unpack_extra() {
+     }
+     cache xfeatures2d/boostdesc ${WORKDIR}/boostdesc/*.i
+     cache xfeatures2d/vgg ${WORKDIR}/vgg/*.i
++    cache data ${WORKDIR}/face/*.dat
  }
  addtask unpack_extra after do_unpack before do_patch
  
-@@ -65,6 +83,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
-     -DOPENCV_ICV_HASH=${IPP_MD5} \
-     -DIPPROOT=${WORKDIR}/ippicv_lnx \
-     -DOPENCV_GENERATE_PKGCONFIG=ON \
-+    -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
 -- 
 2.7.4
 
