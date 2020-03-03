@@ -1,48 +1,40 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FD6D618EE
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+	[209.85.128.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 76E1C60F93
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Mar 2020 11:06:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=axis.com; l=8556; q=dns/txt; s=axis-central1;
-	t=1583233578; x=1614769578;
-	h=from:to:subject:date:message-id:references:in-reply-to:
-	content-transfer-encoding:mime-version;
-	bh=Js2vJcKXMA825TwhAeJgYFW3rTpIdDjzSn5cHXL6U8I=;
-	b=GReGlg4zQHLkbMo0Zt3vsk+qS4Rh+Y0tciaaEs6K017i5iwhhnECS8nc
-	/0l/OJzLZFMpb5LacCDdCk6+SgIFfDWG4zZCZkRgT6KAB253EUy1xIeag
-	PoJSkLq/cizqdGU5ep2GFy0y8ZcoC46/1cNTfh5XxjTPAElV5k4vonRcL
-	3SDLoeIfzKSPi8Barzx+JgnPP8CbGDNZNsWE/ZTmJr2Qb3pQ3dWnI+hLL
-	ORjRvXznUrhS/LMvxFdtLKPuATvKhJ4oywO2QLnT8KEYyl+Y3lwM+wtFv
-	3aD7CdZPC1fIiDxxAqxZN9cjwsCLgQlBqauIxM3Xo7yQ1ZZpHPJqg9VC9 w==;
-IronPort-SDR: eSNbvlXZHVtYwkYEJYurWiSdWBCEi+VA66kW71QNTIDmy6Na831hUCndtJWkO9PHsAH5Ns/hPq
-	g3jnA3gv+IfewR6cDn50ayO2+6fp66K8/AuJ2DBKOlC/86YdK12QElgH/vnM+UenuRJM6yHqe+
-	dc9G6XNA4IhqrMe86AGbt1c7r5qRZgTPZXSPmemj0LsTzQqga3bARldCjMxsarg5H26mYN7AfB
-	zO5Y8wzVxdaTJKISEXgFbXleIH8D5uIqjFngK7yQxSMll8G+gwNBQZBux5X89n8QbIOjqsvBns
-	8c8=
-X-IronPort-AV: E=Sophos;i="5.70,511,1574118000"; 
-   d="scan'208";a="5869468"
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: =?utf-8?B?QW5kcsOpIERyYXN6aWs=?= <git@andred.net>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH] meta-networking:
-	s|${COREBASE}/meta/files/common-licenses|${COMMON_LICENSE_DIR}
-Thread-Index: AQHV7s8HSmFVuUMRtkCoItV9S/xJUag2uHYAgAAA60A=
-Date: Tue, 3 Mar 2020 11:06:16 +0000
-Message-ID: <f6e3a8107f404f07a975c1f09902ce91@XBOX03.axis.com>
-References: <20200227164219.24229-1-git@andred.net>
-	<7bc1a555a6b845899219c29be5723ce7@XBOX03.axis.com>
-	<3c14fbe1d2b373efc17de48dcf6d7eecc0ae51cc.camel@andred.net>
-	<b94e0ab2a6854ce3b472487ea1616612@XBOX03.axis.com>
-In-Reply-To: <b94e0ab2a6854ce3b472487ea1616612@XBOX03.axis.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+	Tue,  3 Mar 2020 13:45:36 +0000 (UTC)
+Received: by mail-wm1-f49.google.com with SMTP id i9so1851403wml.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Mar 2020 05:45:37 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=xWtkvjWDcZ3T2fxS3P9L16zV6egdY1O4tqlmh0qmdto=;
+	b=IvvNDeshDThk6QBlWYLeijypLra664GpXU4RBzdsV1v5zdPvzct5fBCtLj1LVuo2dZ
+	AKChIILS2RHsEfP1d3m3Z2r5VxPuosWaHsjjY6bxTMMhLRI39fd7FBJHVUkscA1oOQEg
+	fY9+0MePuAXS6ByQIv0eAp2SYNl4+C17Chd428lstvUhpDqSMuqFA3FCcATlG1Rtrg90
+	7s1MbRm2yQBCPjIuSiYenbwO/CePJxx0Hcf9a61pSHSEzalAPV6+au+DaGUv8hX19X4j
+	ktet18Ai1urAdOfeLQS+IvX7CqWW3U/eqFYibjvEWByh1xq33TVDqSe5lpn16grUSWMq
+	xMqQ==
+X-Gm-Message-State: ANhLgQ2v3d8rg6+jnv85vfJMOPQj/987WHhZgful6cFp+aHBttqmAK9T
+	deJeGSA1hO6RfhNh3Op6wRTXBenF
+X-Google-Smtp-Source: ADFU+vt7NQJlAbLYZ4eE9PTukKnuX1YJXpOwpAIAQWEOmAMpJ2waaR0jeev9SPq5dZOCfqPbYVGN4w==
+X-Received: by 2002:a7b:ce16:: with SMTP id m22mr4383745wmc.139.1583243136664; 
+	Tue, 03 Mar 2020 05:45:36 -0800 (PST)
+Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id k2sm2411251wrn.57.2020.03.03.05.45.34
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 03 Mar 2020 05:45:34 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  3 Mar 2020 13:45:32 +0000
+Message-Id: <20200303134534.36509-1-git@andred.net>
+X-Mailer: git-send-email 2.23.0.rc1
 MIME-Version: 1.0
-Subject: Re: [meta-networking][PATCH] meta-networking: s|${COREBASE}/meta/files/common-licenses|${COMMON_LICENSE_DIR}
+Subject: [meta-oe][PATCH 1/3] nodejs: drop 'gyp' PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,119 +47,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 11:06:17 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 03 Mar 2020 13:45:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnIDxvcGVuZW1iZWRkZWQtDQo+IGRldmVsLWJv
-dW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4gT24gQmVoYWxmIE9mIFBldGVyIEtqZWxsZXJz
-dGVkdA0KPiBTZW50OiBkZW4gMyBtYXJzIDIwMjAgMTI6MDMNCj4gVG86IEFuZHLDqSBEcmFzemlr
-IDxnaXRAYW5kcmVkLm5ldD47IG9wZW5lbWJlZGRlZC0NCj4gZGV2ZWxAbGlzdHMub3BlbmVtYmVk
-ZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1uZXR3b3JraW5nXVtQQVRDSF0gbWV0
-YS1uZXR3b3JraW5nOg0KPiBzfCR7Q09SRUJBU0V9L21ldGEvZmlsZXMvY29tbW9uLWxpY2Vuc2Vz
-fCR7Q09NTU9OX0xJQ0VOU0VfRElSfQ0KPiANCj4gPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0t
-LQ0KPiA+IEZyb206IEFuZHLDqSBEcmFzemlrIDxnaXRAYW5kcmVkLm5ldD4NCj4gPiBTZW50OiBk
-ZW4gMjkgZmVicnVhcmkgMjAyMCAwODowOA0KPiA+IFRvOiBQZXRlciBLamVsbGVyc3RlZHQgPHBl
-dGVyLmtqZWxsZXJzdGVkdEBheGlzLmNvbT47IG9wZW5lbWJlZGRlZC0NCj4gPiBkZXZlbEBsaXN0
-cy5vcGVuZW1iZWRkZWQub3JnDQo+ID4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtbmV0d29ya2lu
-Z11bUEFUQ0hdIG1ldGEtbmV0d29ya2luZzoNCj4gPiBzfCR7Q09SRUJBU0V9L21ldGEvZmlsZXMv
-Y29tbW9uLWxpY2Vuc2VzfCR7Q09NTU9OX0xJQ0VOU0VfRElSfQ0KPiA+DQo+ID4gT24gRnJpLCAy
-MDIwLTAyLTI4IGF0IDE5OjU1ICswMDAwLCBQZXRlciBLamVsbGVyc3RlZHQgd3JvdGU6DQo+ID4g
-PiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gPiA+IEZyb206IG9wZW5lbWJlZGRl
-ZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPG9wZW5lbWJlZGRlZC0N
-Cj4gPiBkZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+IE9uDQo+ID4gPiA+IEJl
-aGFsZiBPZiBBbmRyw6kgRHJhc3ppaw0KPiA+ID4gPiBTZW50OiBkZW4gMjcgZmVicnVhcmkgMjAy
-MCAxNzo0Mg0KPiA+ID4gPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmcNCj4gPiA+ID4gU3ViamVjdDogW29lXSBbbWV0YS1uZXR3b3JraW5nXVtQQVRDSF0gbWV0
-YS1uZXR3b3JraW5nOg0KPiA+IHN8JHtDT1JFQkFTRX0vbWV0YS9maWxlcy9jb21tb24tDQo+ID4g
-PiA+IGxpY2Vuc2VzfCR7Q09NTU9OX0xJQ0VOU0VfRElSfQ0KPiA+ID4gPg0KPiA+ID4gPiBTaWdu
-ZWQtb2ZmLWJ5OiBBbmRyw6kgRHJhc3ppayA8Z2l0QGFuZHJlZC5uZXQ+DQo+ID4gPiA+IC0tLQ0K
-PiA+ID4gPiAgbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L3NhbWJhL3NhbWJh
-XzQuMTAuMTMuYmIgfCA0ICsrLQ0KPiAtDQo+ID4gPiA+ICBtZXRhLW5ldHdvcmtpbmcvcmVjaXBl
-cy1kYWVtb25zL2xsZHBkL2xsZHBkXzEuMC40LmJiICAgICAgICB8IDIgKy0NCj4gPiA+ID4gIG1l
-dGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvYXJwdGFibGVzL2FycHRhYmxlc19naXQuYmIg
-IHwgMiArLQ0KPiA+ID4gPiAgbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uY3AvbmNw
-XzEuMi40LmJiICAgICAgICAgICAgfCAyICstDQo+ID4gPiA+ICA0IGZpbGVzIGNoYW5nZWQsIDUg
-aW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMoLSkNCj4gPiA+ID4NCj4gPiA+ID4gZGlmZiAtLWdp
-dCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLQ0KPiA+IGNvbm5lY3Rpdml0eS9zYW1iYS9zYW1i
-YV80LjEwLjEzLmJiIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtDQo+ID4gPiA+IGNvbm5lY3Rp
-dml0eS9zYW1iYS9zYW1iYV80LjEwLjEzLmJiDQo+ID4gPiA+IGluZGV4IDcxZDhmYTJmOC4uNGQ1
-NzI1NWYxIDEwMDY0NA0KPiA+ID4gPiAtLS0gYS9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25u
-ZWN0aXZpdHkvc2FtYmEvc2FtYmFfNC4xMC4xMy5iYg0KPiA+ID4gPiArKysgYi9tZXRhLW5ldHdv
-cmtpbmcvcmVjaXBlcy1jb25uZWN0aXZpdHkvc2FtYmEvc2FtYmFfNC4xMC4xMy5iYg0KPiA+ID4g
-PiBAQCAtMyw4ICszLDggQEAgU0VDVElPTiA9ICJjb25zb2xlL25ldHdvcmsiDQo+ID4gPiA+DQo+
-ID4gPiA+ICBMSUNFTlNFID0gIkdQTC0zLjArICYgTEdQTC0zLjArICYgR1BMLTIuMCsiDQo+ID4g
-PiA+ICBMSUNfRklMRVNfQ0hLU1VNID0NCj4gPiAiZmlsZTovL0NPUFlJTkc7bWQ1PWQzMjIzOWJj
-YjY3MzQ2M2FiODc0ZTgwZDQ3ZmFlNTA0IFwNCj4gPiA+ID4gLSAgICAgICAgICAgICAgICAgICAg
-ZmlsZTovLyR7Q09SRUJBU0V9L21ldGEvZmlsZXMvY29tbW9uLQ0KPiA+IGxpY2Vuc2VzL0xHUEwt
-My4wO21kNT1iZmNjZmU5NTIyNjlmZmYyYjQwN2RkMTFmMmYzMDgzYiBcDQo+ID4gPiA+IC0gICAg
-ICAgICAgICAgICAgICAgIGZpbGU6Ly8ke0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi0NCj4g
-PiBsaWNlbnNlcy9HUEwtMi4wO21kNT04MDFmODA5ODBkMTcxZGQ2NDI1NjEwODMzYTIyZGJlNiAi
-DQo+ID4gPiA+ICsgICAgICAgICAgICAgICAgICAgIGZpbGU6Ly8ke0NPTU1PTl9MSUNFTlNFX0RJ
-Un0vTEdQTC0NCj4gPiAzLjA7bWQ1PWJmY2NmZTk1MjI2OWZmZjJiNDA3ZGQxMWYyZjMwODNiIFwN
-Cj4gPiA+ID4gKyAgICAgICAgICAgICAgICAgICAgZmlsZTovLyR7Q09NTU9OX0xJQ0VOU0VfRElS
-fS9HUEwtDQo+ID4gMi4wO21kNT04MDFmODA5ODBkMTcxZGQ2NDI1NjEwODMzYTIyZGJlNiAiDQo+
-ID4gPg0KPiA+ID4gVGhlc2UgdHdvIGFyZSBwb2ludGxlc3Mgc2luY2UgdGhlcmUgaXMgYSBwcm92
-aWRlZCBDT1BZSU5HIGZpbGUuDQo+ID4gPiBKdXN0IHJlbW92ZSB0aGVtLg0KPiA+ID4NCj4gPiA+
-ID4gIFNBTUJBX01JUlJPUiA9ICJodHRwOi8vc2FtYmEub3JnL3NhbWJhL2Z0cCINCj4gPiA+ID4g
-IE1JUlJPUlMgKz0gIlwNCj4gPiA+ID4gZGlmZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNp
-cGVzLWRhZW1vbnMvbGxkcGQvbGxkcGRfMS4wLjQuYmINCj4gPiBiL21ldGEtbmV0d29ya2luZy9y
-ZWNpcGVzLQ0KPiA+ID4gPiBkYWVtb25zL2xsZHBkL2xsZHBkXzEuMC40LmJiDQo+ID4gPiA+IGlu
-ZGV4IDhmZGFmODQ4Zi4uMjFiMDI2ODdmIDEwMDY0NA0KPiA+ID4gPiAtLS0gYS9tZXRhLW5ldHdv
-cmtpbmcvcmVjaXBlcy1kYWVtb25zL2xsZHBkL2xsZHBkXzEuMC40LmJiDQo+ID4gPiA+ICsrKyBi
-L21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWRhZW1vbnMvbGxkcGQvbGxkcGRfMS4wLjQuYmINCj4g
-PiA+ID4gQEAgLTEsNyArMSw3IEBADQo+ID4gPiA+ICBTVU1NQVJZID0gIkEgODAyLjFhYiBpbXBs
-ZW1lbnRhdGlvbiAoTExEUCkgdG8gaGVscCB5b3UgbG9jYXRlDQo+ID4gbmVpZ2hib3JzIG9mIGFs
-bCB5b3VyIGVxdWlwbWVudHMiDQo+ID4gPiA+ICBTRUNUSU9OID0gIm5ldC9taXNjIg0KPiA+ID4g
-PiAgTElDRU5TRSA9ICJJU0MiDQo+ID4gPiA+IC1MSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly8k
-e0NPUkVCQVNFfS9tZXRhL2ZpbGVzL2NvbW1vbi0NCj4gPiBsaWNlbnNlcy9JU0M7bWQ1PWYzYjkw
-ZTc4ZWEwY2ZmYjIwYmY1Y2NhNzk0N2E4OTZkIg0KPiA+ID4gPiArTElDX0ZJTEVTX0NIS1NVTSA9
-DQo+ID4gImZpbGU6Ly8ke0NPTU1PTl9MSUNFTlNFX0RJUn0vSVNDO21kNT1mM2I5MGU3OGVhMGNm
-ZmIyMGJmNWNjYTc5NDdhODk2ZCINCj4gPiA+DQo+ID4gPiBUaGVyZSBpcyBhIExJQ0VOU0UgZmls
-ZSBpbiB0aGUgdGFyIGJhbGwuIFBsZWFzZSB1c2UgaXQgaW5zdGVhZC4NCj4gPiA+DQo+ID4gPiA+
-ICBERVBFTkRTID0gImxpYmJzZCBsaWJldmVudCINCj4gPiA+ID4NCj4gPiA+ID4gZGlmZiAtLWdp
-dCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLQ0KPiA+IHN1cHBvcnQvYXJwdGFibGVzL2FycHRh
-Ymxlc19naXQuYmIgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy0NCj4gPiA+ID4gc3VwcG9ydC9h
-cnB0YWJsZXMvYXJwdGFibGVzX2dpdC5iYg0KPiA+ID4gPiBpbmRleCBjZWMxZDFmNzcuLmU4ODYz
-MWUwOCAxMDA2NDQNCj4gPiA+ID4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9y
-dC9hcnB0YWJsZXMvYXJwdGFibGVzX2dpdC5iYg0KPiA+ID4gPiArKysgYi9tZXRhLW5ldHdvcmtp
-bmcvcmVjaXBlcy1zdXBwb3J0L2FycHRhYmxlcy9hcnB0YWJsZXNfZ2l0LmJiDQo+ID4gPiA+IEBA
-IC0xLDcgKzEsNyBAQA0KPiA+ID4gPiAgU1VNTUFSWSA9ICJBZG1pbmlzdHJhdGlvbiB0b29sIGZv
-ciBhcnAgcGFja2V0IGZpbHRlcmluZyINCj4gPiA+ID4gIFNFQ1RJT04gPSAibmV0Ig0KPiA+ID4g
-PiAgTElDRU5TRSA9ICJHUEwtMi4wIg0KPiA+ID4gPiAtTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxl
-Oi8vJHtDT1JFQkFTRX0vbWV0YS9maWxlcy9jb21tb24tDQo+ID4gbGljZW5zZXMvR1BMLTIuMDtt
-ZDU9ODAxZjgwOTgwZDE3MWRkNjQyNTYxMDgzM2EyMmRiZTYiDQo+ID4gPiA+ICtMSUNfRklMRVNf
-Q0hLU1VNID0gImZpbGU6Ly8ke0NPTU1PTl9MSUNFTlNFX0RJUn0vR1BMLQ0KPiA+IDIuMDttZDU9
-ODAxZjgwOTgwZDE3MWRkNjQyNTYxMDgzM2EyMmRiZTYiDQo+ID4gPg0KPiA+ID4gVGhlcmUgaXMg
-YSBDT1BZSU5HIGZpbGUgaW4gdGhlIEdpdCByZXBvc2l0b3J5LiBQbGVhc2UgdXNlIGl0IGluc3Rl
-YWQuDQo+ID4gPg0KPiA+ID4gPiAgU1JDUkVWID0gImY0YWI4ZjYzZjExYTcyZjE0Njg3YTY2NDZk
-MDRhZTFiYWUzZmE0NWYiDQo+ID4gPiA+ICBQViA9ICIwLjAuNCtnaXQke1NSQ1BWfSINCj4gPiA+
-ID4NCj4gPiA+ID4gZGlmZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQv
-bmNwL25jcF8xLjIuNC5iYg0KPiBiL21ldGEtDQo+ID4gbmV0d29ya2luZy9yZWNpcGVzLXN1cHBv
-cnQvbmNwL25jcF8xLjIuNC5iYg0KPiA+ID4gPiBpbmRleCBmNDIyMjNiMWYuLmJhNmUyM2U4NiAx
-MDA2NDQNCj4gPiA+ID4gLS0tIGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9uY3Av
-bmNwXzEuMi40LmJiDQo+ID4gPiA+ICsrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBv
-cnQvbmNwL25jcF8xLjIuNC5iYg0KPiA+ID4gPiBAQCAtNCw3ICs0LDcgQEAgc2VjdXJpdHkgb3Ig
-aW50ZWdyaXR5IGNoZWNraW5nLCBubyB0aHJvdHRsaW5nLCBubw0KPiA+IGZlYXR1cmVzLCBleGNl
-cHQgXA0KPiA+ID4gPiAgb25lOiB5b3UgZG9uJ3QgaGF2ZSB0byB0eXBlIHRoZSBjb29yZGluYXRl
-cyBvZiB5b3VyIHBlZXIuIg0KPiA+ID4gPiAgSE9NRVBBR0UgPSAiaHR0cDovL3d3dy5mZWZlLmRl
-L25jcCINCj4gPiA+ID4gIExJQ0VOU0UgPSAiR1BMdjIiDQo+ID4gPg0KPiA+ID4gSSBjYW4gZmlu
-ZCBubyBpbmZvcm1hdGlvbiBhYm91dCBsaWNlbnNlIGVpdGhlciBpbiB0aGUgY29kZSBvciBhdA0K
-PiA+ID4gaHR0cDovL3d3dy5mZWZlLmRlL25jcC4gSG93IGRvIHlvdSBrbm93IHRoaXMgbGljZW5z
-ZSBpcyBjb3JyZWN0Pw0KPiA+DQo+ID4gUGxlYXNlIHNlZSBhdHRhY2hlZCBlbWFpbC4NCj4gDQo+
-IEhtbSwgb2suIEkgdGhpbmsgaXQgd291bGQgYmUgZ29vZCBpZiB0aGlzIHdhcyBhY3R1YWxseSBk
-b2N1bWVudGVkIGluDQo+IHRoZSByZWNpcGUgaXRzZWxmIHRoZW4uDQoNCk9yIEkgZ3Vlc3MgeW91
-IGNhbiBwdXQgdGhlIG1haWwgeW91IGF0dGFjaGVkIGFzIGEgTElDRU5TRSBmaWxlIGFsb25nc2lk
-ZSANCnRoZSByZWNpcGUgYW5kIGluY2x1ZGUgaXQgYXMgdXN1YWwgdmlhIExJQ19GSUxFU19DSEtT
-VU0gKGFuZCBTUkNfVVJJKS4NCg0KPiA+IENoZWVycywNCj4gPiBBbmRyZScNCj4gPg0KPiA+ID4N
-Cj4gPiA+ID4gLUxJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovLyR7Q09SRUJBU0V9L21ldGEvZmls
-ZXMvY29tbW9uLQ0KPiA+IGxpY2Vuc2VzL0dQTC0yLjA7bWQ1PTgwMWY4MDk4MGQxNzFkZDY0MjU2
-MTA4MzNhMjJkYmU2Ig0KPiA+ID4gPiArTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vJHtDT01N
-T05fTElDRU5TRV9ESVJ9L0dQTC0NCj4gPiAyLjA7bWQ1PTgwMWY4MDk4MGQxNzFkZDY0MjU2MTA4
-MzNhMjJkYmU2Ig0KPiA+ID4gPiAgREVQRU5EUyA9ICJsaWJvd2ZhdCINCj4gPiA+ID4NCj4gPiA+
-ID4gIFNSQ19VUkkgPSAiaHR0cHM6Ly9kbC5mZWZlLmRlLyR7QlB9LnRhci5iejIiDQo+ID4gPiA+
-IC0tDQo+ID4gPiA+IDIuMjMuMC5yYzENCj4gPiA+ID4NCj4gPiA+ID4gLS0NCj4gPiA+DQo+ID4g
-PiAvL1BldGVyDQo+IA0KPiAvL1BldGVyDQoNCi8vUGV0ZXINCg0K
+From: André Draszik <andre.draszik@jci.com>
+
+During the python3 / nodejs update, the dependencies weren't updated, so
+using system-gyp ends up trying to use the python2 version of system-
+gyp, which will of course fail.
+Fixing this to depend on the python3 version of gyp still doesn't
+doesn't make things work, though:
+    ERROR: nodejs-native-12.14.1-r0 do_configure: Execution of '.../nodejs-native/12.14.1-r0/temp/run.do_configure.26054' failed with exit code 1:
+    gyp: Error importing pymod_do_mainmodule (ForEachFormat): No module named 'ForEachFormat' while loading dependencies of .../nodejs-native/12.14.1-r0/node-v12.14.1/node.gyp while trying to load .../nodejs-native/12.14.1-r0/node-v12.14.1/node.gyp
+    Error running GYP
+
+The reason is the following patch nodejs has applied to its version of gyp as
+of NodeJS v12 (commit fff922afee6e ("deps,build: compute torque_outputs in v8.gyp")
+upstream):
+
+--- gyp/pylib/gyp/input.py      2020-03-02 12:36:30.788248197 +0000
++++ node.git/tools/gyp/pylib/gyp/input.py    2020-03-02 12:16:09.956707788 +0000
+@@ -890,6 +881,7 @@ def ExpandVariables(input, phase, variab
+           oldwd = os.getcwd()  # Python doesn't like os.open('.'): no fchdir.
+           if build_file_dir:  # build_file_dir may be None (see above).
+             os.chdir(build_file_dir)
++          sys.path.append(os.getcwd())
+           try:
+
+             parsed_contents = shlex.split(contents)
+@@ -900,6 +892,7 @@ def ExpandVariables(input, phase, variab
+                              "module (%s): %s" % (parsed_contents[0], e))
+             replacement = str(py_module.DoMain(parsed_contents[1:])).rstrip()
+           finally:
++            sys.path.pop()
+             os.chdir(oldwd)
+           assert replacement != None
+         elif command_string:
+
+Since I'm not sure how to deal with that when using system-gyp, and because
+the original intention for using system-gyp was to make the previous nodejs
+version compatible with python3 by ultimately switching to the python3 version
+of system-gyp which isn't necessary anymore, and given nobody else seems to
+be using this PACKAGECONFIG, just drop it.
+
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+---
+ meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+index 6eb52c209..49bb71e28 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+@@ -53,7 +53,6 @@ ARCHFLAGS ?= ""
+ 
+ PACKAGECONFIG ??= "ares icu libuv zlib"
+ PACKAGECONFIG[ares] = "--shared-cares,,c-ares"
+-PACKAGECONFIG[gyp] = ",,gyp-py2-native"
+ PACKAGECONFIG[icu] = "--with-intl=system-icu,--without-intl,icu"
+ PACKAGECONFIG[libuv] = "--shared-libuv,,libuv"
+ PACKAGECONFIG[nghttp2] = "--shared-nghttp2,,nghttp2"
+@@ -82,8 +81,6 @@ python do_unpack() {
+     shutil.rmtree(d.getVar('S') + '/deps/openssl', True)
+     if 'ares' in d.getVar('PACKAGECONFIG'):
+         shutil.rmtree(d.getVar('S') + '/deps/cares', True)
+-    if 'gyp' in d.getVar('PACKAGECONFIG'):
+-        shutil.rmtree(d.getVar('S') + '/tools/gyp', True)
+     if 'libuv' in d.getVar('PACKAGECONFIG'):
+         shutil.rmtree(d.getVar('S') + '/deps/uv', True)
+     if 'nghttp2' in d.getVar('PACKAGECONFIG'):
+-- 
+2.23.0.rc1
+
 
