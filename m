@@ -1,35 +1,33 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C294D61955
+	by mail.openembedded.org (Postfix) with ESMTP id E9F1061954
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Mar 2020 05:32:25 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,510,1574092800"; d="scan'208";a="85488976"
+	Tue,  3 Mar 2020 05:44:00 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,510,1574092800"; d="scan'208";a="85489769"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 03 Mar 2020 13:32:26 +0800
+	by heian.cn.fujitsu.com with ESMTP; 03 Mar 2020 13:43:59 +0800
 Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id D92E850A997A
+	by cn.fujitsu.com (Postfix) with ESMTP id A0F6B50A997F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Mar 2020 13:22:33 +0800 (CST)
+	Tue,  3 Mar 2020 13:34:09 +0800 (CST)
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
 	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Tue, 3 Mar 2020 13:32:20 +0800
+	Server (TLS) id 15.0.1395.4; Tue, 3 Mar 2020 13:43:58 +0800
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 3 Mar 2020 13:32:27 +0800
+	Server (TLS) id 14.3.439.0; Tue, 3 Mar 2020 13:44:06 +0800
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 3 Mar 2020 03:52:00 -0800
-Message-ID: <1583236320-114088-10-git-send-email-wangmy@cn.fujitsu.com>
+Date: Tue, 3 Mar 2020 04:10:22 -0800
+Message-ID: <1583237422-114479-1-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1583236320-114088-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1583236320-114088-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: D92E850A997A.A4689
+X-yoursite-MailScanner-ID: A0F6B50A997F.A485B
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-python][PATCH] python3-decorator: upgrade 4.4.1 -> 4.4.2
+Subject: [meta-oe][PATCH] renderdoc: upgrade 1.5 -> 1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,35 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 05:32:26 -0000
+X-List-Received-Date: Tue, 03 Mar 2020 05:44:02 -0000
 Content-Type: text/plain
+
+-License-Update: Copyright year updated to 2020.
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-decorator.inc      | 4 ++--
- ...{python3-decorator_4.4.1.bb => python3-decorator_4.4.2.bb} | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-decorator_4.4.1.bb => python3-decorator_4.4.2.bb} (100%)
+ .../renderdoc/{renderdoc_1.5.bb => renderdoc_1.6.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/renderdoc/{renderdoc_1.5.bb => renderdoc_1.6.bb} (89%)
 
-diff --git a/meta-python/recipes-devtools/python/python-decorator.inc b/meta-python/recipes-devtools/python/python-decorator.inc
-index 65db1a961..3faee3913 100644
---- a/meta-python/recipes-devtools/python/python-decorator.inc
-+++ b/meta-python/recipes-devtools/python/python-decorator.inc
-@@ -9,8 +9,8 @@ decorator, just because you can."
- LICENSE = "BSD-2-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=be2fd2007972bf96c08af3293d728b22"
+diff --git a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.5.bb b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.6.bb
+similarity index 89%
+rename from meta-oe/recipes-graphics/renderdoc/renderdoc_1.5.bb
+rename to meta-oe/recipes-graphics/renderdoc/renderdoc_1.6.bb
+index 5f81e841d..7cb79d070 100644
+--- a/meta-oe/recipes-graphics/renderdoc/renderdoc_1.5.bb
++++ b/meta-oe/recipes-graphics/renderdoc/renderdoc_1.6.bb
+@@ -2,9 +2,9 @@ SUMMARY = "RenderDoc recipe providing renderdoccmd"
+ DESCRIPTION = "RenderDoc is a frame-capture based graphics debugger"
+ HOMEPAGE = "https://github.com/baldurk/renderdoc"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.md;md5=9753b1b4fba3261c27d1ce5c1acef667"
++LIC_FILES_CHKSUM = "file://LICENSE.md;md5=df7ea9e196efc7014c124747a0ef9772"
  
--SRC_URI[md5sum] = "933981f288c4230816b5beee8d40e6ea"
--SRC_URI[sha256sum] = "54c38050039232e1db4ad7375cfce6748d7b41c29e95a081c8a6d2c30364a2ce"
-+SRC_URI[md5sum] = "d83c624cce93e6bdfab144821b526e1d"
-+SRC_URI[sha256sum] = "e3a62f0520172440ca0dcc823749319382e377f37f140a0b99ef45fecb84bfe7"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python3-decorator_4.4.1.bb b/meta-python/recipes-devtools/python/python3-decorator_4.4.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-decorator_4.4.1.bb
-rename to meta-python/recipes-devtools/python/python3-decorator_4.4.2.bb
+-SRCREV = "a94f238e37cfe2f142093eb8e5da7775abaa88c6"
++SRCREV = "0e7f772596035137416be01766c2d61205efc63e"
+ SRC_URI = "git://github.com/baldurk/${BPN}.git;protocol=http;branch=v1.x \
+ 	   file://0001-renderdoc-use-xxd-instead-of-cross-compiling-shim-bi.patch \
+ 	   file://0001-Remove-glslang-pool_allocator-setAllocator.patch \
 -- 
 2.17.1
 
