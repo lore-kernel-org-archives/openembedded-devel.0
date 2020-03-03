@@ -1,51 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
-	[209.85.221.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 31CEE61992
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f193.google.com (mail-qt1-f193.google.com
+	[209.85.160.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E81261904
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Mar 2020 16:25:11 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id z11so5101407wro.9
+	Tue,  3 Mar 2020 17:25:14 +0000 (UTC)
+Received: by mail-qt1-f193.google.com with SMTP id v22so3401213qtp.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Mar 2020 08:25:12 -0800 (PST)
+	Tue, 03 Mar 2020 09:25:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=q4rmrt4MZMKo97j2W7C9U/kRzCYK+GUf2s7LHMMAq74=;
-	b=qknSBcfqOt+JwyVj0n7jPWQc5I4kZc47DSSOv+fyHxYWpvcqNhLPossx/HNZfF7F1o
-	d5qb1D+/uTo0ZNurQvVPX/ww8dzjm4yGvC1f2Z/2TEX7FwkXjZDUibe99PlqKfpH6JaR
-	Z1iOyPLLEUv2uhEA8XFAf1TtThnc/igilrs4xn4/jTuiT1SunubRu3BAoG//dYZwtlqf
-	eSBVkt7qLS1rwQePHhe9AYTE+KH88bjLd9oHGh8dYUb9W+QH5BOnKyWN3Z0L485GjIdB
-	P3Wz19kfug62H2x/iPzchJzyhy7ognozhXa6jGkKiPeQi8kKdpEcHlL1UDoK9Tb2UdA5
-	ua0g==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=bG2Bcl9f1SAMiIZ+4wPt08sbWwh0IQOs/ifeDTvRS7k=;
+	b=KpX9qYIgIAauimF3wb5J8vVjHF77o7vXIcDimj98RECNgExz5xzDpZ8qAYEHt3NykP
+	DJkT+iWzSs+h03HZWeVj3gCVg6wn0fL87K11GnxYF7K9lkIN4FnIIc/w6XZp4uvtewBD
+	XAfKraALmpfH34WvsWnQbFBGUNoQ1dSwL1nuvCYDv8RmfEtMIOkGe95PL0ZUM1pw7GzO
+	vg7UAUAu+mfQdq2t5gmt37P+lXQt84Ssdk9S5Fl2mt98nxErYen+4ch7tyGoSk5Taqq0
+	avP+OI2N8rQS8CiicGkLS9Y/pS1ROOC7YK4OyWKphHMfxRfhXV56oib1peDAdGTemAmt
+	8yXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=q4rmrt4MZMKo97j2W7C9U/kRzCYK+GUf2s7LHMMAq74=;
-	b=qjc8HkB5hie4YcLtvCvXdppevC2BRG/v+WtFMgEBho2gg+57lYq8QU1XzTeKHmlg5W
-	P4XoYoqGkWjE4MYLbMQ9Pn9i+BVet5oRNNEw/D2Sr2dypUuWYBetVnBAX8wrT/T9IEBS
-	j9xmBYzVuJOSCFdeXUbYt3y9IfOFhAM5CTH4waTWojabsCVa83fKXvgzYtfdSLM0x+o4
-	sMBS34KCbg1U4CZGA2htg8PhfjCFY08x7r8WXEXvNgHlQr5lnGwr9pnxhTCkmnnDqlW5
-	NyldYQokP1oiDGxvanKw4VXu3ZqiE69DChHCGqVbFWicIxR6FQjF+YkLTlOT3NWX6g4E
-	O6rw==
-X-Gm-Message-State: ANhLgQ3kM3UfhmHyMjm7l66aCZkFJjkV8HMMOCr0ttfRibD7hUrDz/Z8
-	FRSnQP4MEMD6lXd3/6zdatUDXEDM
-X-Google-Smtp-Source: ADFU+vvuFhNZdfHO/IsG+tUvA2DDqKrnke7cd/FRhnFfUOxpa/nxv4SEc4a22xfIlX0E54tytZEQ9w==
-X-Received: by 2002:a05:6000:8f:: with SMTP id
-	m15mr5940651wrx.378.1583252711605; 
-	Tue, 03 Mar 2020 08:25:11 -0800 (PST)
-Received: from localhost ([109.238.218.228]) by smtp.gmail.com with ESMTPSA id
-	m25sm2810482wml.35.2020.03.03.08.25.10
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Tue, 03 Mar 2020 08:25:10 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Mar 2020 17:25:08 +0100
-Message-Id: <20200303162508.12573-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=bG2Bcl9f1SAMiIZ+4wPt08sbWwh0IQOs/ifeDTvRS7k=;
+	b=azPd0PXvVA3kc2PsARFFRvXSzBDHLawwujNNMkeIwPF/Kc9/DlVS4YFt/MH9cE9S8c
+	9mYfzThz1JwLN+0qLDwPRfzdtARJfKpfo6ERa60JyLMSeMVxPTGy1gk3UOo/SEu/SaTN
+	fg1mAJA8E3sGqcLti7TELmA+MWqrucQqx/x7iabbHGdM13BZb4cz34bTgfjrVY/vaugG
+	gxxooYK5gvRzHdN+VdUYU3dIvwuirNbtyRfymBmycDd/viR9k3YWYQOzSjT5dAtyQPoU
+	s5on7YCSpSPgFF7VmM5H2eF5uBGbVBu/ftV6eArPW2ehchaRLnPQzu+V7aRaFzFbfgJd
+	eJSQ==
+X-Gm-Message-State: ANhLgQ2rvVwsXqp4TQyWf2YdHidqL0YG95T0YOaS/fXqBcnPxQWvP9vJ
+	493nWddsyOaUVmrMbEXz++apu1dvOZjird6X7pQ=
+X-Google-Smtp-Source: ADFU+vuHSQf44tPdmP2cufxQ1/9rgLc0qfThUnLmceDMgh/Rsd7SwMcljA4XinR0H2g+utkBH1E6PZLGpoPPdIZQoO0=
+X-Received: by 2002:ac8:5351:: with SMTP id d17mr5492549qto.190.1583256315334; 
+	Tue, 03 Mar 2020 09:25:15 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-oe][meta-networking][PATCH] grpc: move from meta-networking to meta-oe
+References: <20200303134534.36509-1-git@andred.net>
+In-Reply-To: <20200303134534.36509-1-git@andred.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 3 Mar 2020 09:24:47 -0800
+Message-ID: <CAMKF1so8ZV_HZNma1Ddwn6a6irZ_Lurd5-JEqiDaCajpjdN9oA@mail.gmail.com>
+To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/3] nodejs: drop 'gyp' PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,67 +54,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Mar 2020 16:25:11 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 03 Mar 2020 17:25:15 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* because sysdig from meta-oe depends on it now, since:
-  commit ed798c764319d83ad9eb1b963bfc99b1fa1a791a
-  Author: Khem Raj <raj.khem@gmail.com>
-  Date:   Wed Jan 2 17:59:20 2019 -0800
+can you rebase it on top of master-next and resend
 
-    sysdig: Upgrade to 0.26.5
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../recipes-core/packagegroups/packagegroup-meta-networking.bb  | 2 +-
- meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb      | 2 +-
- ...1-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch | 0
- ...01-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch | 0
- .../recipes-devtools/grpc/grpc_1.24.3.bb                        | 0
- 5 files changed, 2 insertions(+), 2 deletions(-)
- rename {meta-networking => meta-oe}/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch (100%)
- rename {meta-networking => meta-oe}/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch (100%)
- rename {meta-networking => meta-oe}/recipes-devtools/grpc/grpc_1.24.3.bb (100%)
-
-diff --git a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-index 103c99bb17..1e10c3085f 100644
---- a/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-+++ b/meta-networking/recipes-core/packagegroups/packagegroup-meta-networking.bb
-@@ -55,7 +55,7 @@ RDEPENDS_packagegroup-meta-networking-daemons = "\
- RDEPENDS_packagegroup-meta-networking-daemons_remove_libc-musl = "opensaf"
- 
- RDEPENDS_packagegroup-meta-networking-devtools = "\
--    python3-ldap grpc \
-+    python3-ldap \
-     "
- 
- RDEPENDS_packagegroup-meta-networking-extended = "\
-diff --git a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-index d09653901c..e04b48f85a 100644
---- a/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-+++ b/meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-@@ -110,7 +110,7 @@ RDEPENDS_packagegroup-meta-oe-devtools ="\
-     android-tools android-tools-conf bootchart breakpad \
-     capnproto cgdb cscope ctags \
-     debootstrap dmalloc flatbuffers \
--    giflib icon-slicer iptraf-ng jq jsoncpp jsonrpc json-spirit \
-+    giflib grpc icon-slicer iptraf-ng jq jsoncpp jsonrpc json-spirit \
-     kconfig-frontends lemon libedit libgee libsombok3 \
-     libubox log4cplus lshw ltrace lua mcpp memstat mercurial \
-     mpich msgpack-c nlohmann-json openocd pax-utils \
-diff --git a/meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch b/meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch
-similarity index 100%
-rename from meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch
-rename to meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-grpc_cpp_plugin-path-during-cross.patch
-diff --git a/meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch b/meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch
-similarity index 100%
-rename from meta-networking/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch
-rename to meta-oe/recipes-devtools/grpc/grpc/0001-CMakeLists.txt-Fix-libraries-installation-for-Linux.patch
-diff --git a/meta-networking/recipes-devtools/grpc/grpc_1.24.3.bb b/meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb
-similarity index 100%
-rename from meta-networking/recipes-devtools/grpc/grpc_1.24.3.bb
-rename to meta-oe/recipes-devtools/grpc/grpc_1.24.3.bb
--- 
-2.20.1
-
+On Tue, Mar 3, 2020 at 5:45 AM Andr=C3=A9 Draszik <git@andred.net> wrote:
+>
+> From: Andr=C3=A9 Draszik <andre.draszik@jci.com>
+>
+> During the python3 / nodejs update, the dependencies weren't updated, so
+> using system-gyp ends up trying to use the python2 version of system-
+> gyp, which will of course fail.
+> Fixing this to depend on the python3 version of gyp still doesn't
+> doesn't make things work, though:
+>     ERROR: nodejs-native-12.14.1-r0 do_configure: Execution of '.../nodej=
+s-native/12.14.1-r0/temp/run.do_configure.26054' failed with exit code 1:
+>     gyp: Error importing pymod_do_mainmodule (ForEachFormat): No module n=
+amed 'ForEachFormat' while loading dependencies of .../nodejs-native/12.14.=
+1-r0/node-v12.14.1/node.gyp while trying to load .../nodejs-native/12.14.1-=
+r0/node-v12.14.1/node.gyp
+>     Error running GYP
+>
+> The reason is the following patch nodejs has applied to its version of gy=
+p as
+> of NodeJS v12 (commit fff922afee6e ("deps,build: compute torque_outputs i=
+n v8.gyp")
+> upstream):
+>
+> --- gyp/pylib/gyp/input.py      2020-03-02 12:36:30.788248197 +0000
+> +++ node.git/tools/gyp/pylib/gyp/input.py    2020-03-02 12:16:09.95670778=
+8 +0000
+> @@ -890,6 +881,7 @@ def ExpandVariables(input, phase, variab
+>            oldwd =3D os.getcwd()  # Python doesn't like os.open('.'): no =
+fchdir.
+>            if build_file_dir:  # build_file_dir may be None (see above).
+>              os.chdir(build_file_dir)
+> +          sys.path.append(os.getcwd())
+>            try:
+>
+>              parsed_contents =3D shlex.split(contents)
+> @@ -900,6 +892,7 @@ def ExpandVariables(input, phase, variab
+>                               "module (%s): %s" % (parsed_contents[0], e)=
+)
+>              replacement =3D str(py_module.DoMain(parsed_contents[1:])).r=
+strip()
+>            finally:
+> +            sys.path.pop()
+>              os.chdir(oldwd)
+>            assert replacement !=3D None
+>          elif command_string:
+>
+> Since I'm not sure how to deal with that when using system-gyp, and becau=
+se
+> the original intention for using system-gyp was to make the previous node=
+js
+> version compatible with python3 by ultimately switching to the python3 ve=
+rsion
+> of system-gyp which isn't necessary anymore, and given nobody else seems =
+to
+> be using this PACKAGECONFIG, just drop it.
+>
+> Signed-off-by: Andr=C3=A9 Draszik <andre.draszik@jci.com>
+> ---
+>  meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb | 3 ---
+>  1 file changed, 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb b/meta-oe/=
+recipes-devtools/nodejs/nodejs_12.14.1.bb
+> index 6eb52c209..49bb71e28 100644
+> --- a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+> +++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+> @@ -53,7 +53,6 @@ ARCHFLAGS ?=3D ""
+>
+>  PACKAGECONFIG ??=3D "ares icu libuv zlib"
+>  PACKAGECONFIG[ares] =3D "--shared-cares,,c-ares"
+> -PACKAGECONFIG[gyp] =3D ",,gyp-py2-native"
+>  PACKAGECONFIG[icu] =3D "--with-intl=3Dsystem-icu,--without-intl,icu"
+>  PACKAGECONFIG[libuv] =3D "--shared-libuv,,libuv"
+>  PACKAGECONFIG[nghttp2] =3D "--shared-nghttp2,,nghttp2"
+> @@ -82,8 +81,6 @@ python do_unpack() {
+>      shutil.rmtree(d.getVar('S') + '/deps/openssl', True)
+>      if 'ares' in d.getVar('PACKAGECONFIG'):
+>          shutil.rmtree(d.getVar('S') + '/deps/cares', True)
+> -    if 'gyp' in d.getVar('PACKAGECONFIG'):
+> -        shutil.rmtree(d.getVar('S') + '/tools/gyp', True)
+>      if 'libuv' in d.getVar('PACKAGECONFIG'):
+>          shutil.rmtree(d.getVar('S') + '/deps/uv', True)
+>      if 'nghttp2' in d.getVar('PACKAGECONFIG'):
+> --
+> 2.23.0.rc1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
