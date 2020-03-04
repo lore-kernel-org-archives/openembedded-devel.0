@@ -1,60 +1,50 @@
-Return-Path: <prvs=133295fcb3=holzmayr@rsi-elektrotechnik.de>
-X-Greylist: delayed 360 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 04 Mar 2020 17:09:03 UTC
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
-	[85.215.255.21])
-	by mail.openembedded.org (Postfix) with ESMTP id 61B0160AE3
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
+	[209.85.215.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CBD0610E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2020 17:09:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1583341743;
-	s=strato-dkim-0002; d=rsi-elektrotechnik.de;
-	h=In-Reply-To:References:Message-ID:Subject:Cc:To:From:Date:
-	X-RZG-CLASS-ID:X-RZG-AUTH:From:Subject:Sender;
-	bh=U8zmj1PEEWVjU4ln4vwZlTaIzpo1hES1FfdvptcAJJ8=;
-	b=oh3ym7wb1FKtX4Xi+qhgr8DteRf9Or5UZfVzAEELpCRvc6T3Yq+SZtpY0IfJfPsago
-	7+nXSxjD3XWskEPKngZtQGUbEzkHIstWY4v6yzlsMaKVYq6LR8xmG0DcjJQ1zPOSW/A4
-	++hWyTqUmaSBO3u5KF1021oNkdpYw94BEgduYLsAvt20jezNrHl8BsVUaEGPJ42nOSAw
-	M5AkQ0Oy2UvU3iOe2ia1rxUSAu6VaAJGqXVeuIb637cob+RGUwt3udw9Yoa9m3Nxv6st
-	Rn/xcvyBnBbjeIT1MiDE86JcXabwy7f4E8NBmJfVUForyTMIneqkkz7yeFSWHYL+qBlP
-	AMhA==
-X-RZG-AUTH: ":fz5RJhWIaexwuXGosGLfiBc0xYyi1Y5bd+wRKqrzPXw4V1/KqCOd+ZZzzoK8epFp9XQIUl6aPGQL"
-X-RZG-CLASS-ID: mo00
-Received: from mail.rsi-elektrotechnik.de by smtp.strato.de (RZmta 46.2.0 AUTH)
-	with ESMTPSA id Y0aff3w24H30HUv
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256 bits))
-	(Client did not present a certificate);
-	Wed, 4 Mar 2020 18:03:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/relaxed;
-	d=rsi-elektrotechnik.de; s=MDaemon; t=1583341380; x=1583946180;
-	i=holzmayr@rsi-elektrotechnik.de; q=dns/txt; h=Date:From:To:Cc:
-	Subject:Message-ID:References:MIME-Version:Content-Type:
-	Content-Disposition:Content-Transfer-Encoding:In-Reply-To:
-	User-Agent; bh=U8zmj1PEEWVjU4ln4vwZlTaIzpo1hES1FfdvptcAJJ8=; b=s
-	4R7vrO7NHayN02kYs2T5UoB7B3S4FC/coAwTqD3zpfztSfYUDyxSdyhylGtPHaLA
-	rER9f1VqM9nVwF3wfu9guQpV4qVuwZRVC51gaPS7I42Mp09CF/T9dhqUug3DpnaU
-	RPjNyrMSSAIWODj4Z1X2WoSFnSBZ+L2S4Az5dnV5Eo=
-Received: by mail.rsi-elektrotechnik.de (MDaemon PRO v19.5.4) with ESMTPSA id
-	md50000250744.msg; Wed, 04 Mar 2020 18:03:00 +0100
-X-Spam-Processed: mail.rsi-elektrotechnik.de, Wed, 04 Mar 2020 18:03:00 +0100
-	(not processed: message from trusted or authenticated source)
-X-MDArrival-Date: Wed, 04 Mar 2020 18:03:00 +0100
-X-Authenticated-Sender: holzmayr@rsi-elektrotechnik.de
-X-Return-Path: prvs=133295fcb3=holzmayr@rsi-elektrotechnik.de
-X-Envelope-From: holzmayr@rsi-elektrotechnik.de
-Date: Wed, 4 Mar 2020 17:02:01 +0000
-From: Josef Holzmayr <holzmayr@rsi-elektrotechnik.de>
-To: Philip Balister <philip@balister.org>
-Message-ID: <20200304170201.msozkjkbqf4zf5wt@jh-mailer>
-References: <20200304122811.16655-1-leo.yan@linaro.org>
-	<alpine.LFD.2.21.2003041103340.29352@godzilla.spiteful.org>
-	<0d9bdfd0-9321-940b-4542-e4ba6505aed1@balister.org>
+	Wed,  4 Mar 2020 17:19:16 +0000 (UTC)
+Received: by mail-pg1-f177.google.com with SMTP id d9so1297004pgu.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Mar 2020 09:19:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=icG7d3FnEG1+I/p4BCjyGyfRs+KRIW+AZ3Mmw9uXCg4=;
+	b=dNUJYbe/CvfrC2g3kOfJX/vq8VoD7zJ0idwQnHfvqmct+JEEGHQ3wsh3bx51bDGWaM
+	FHV7mKjRRNTukHPksV+14Sz6kwtO1IoAVkhFLkQda5TzDBn5hZW/j310QSrM77HBA/uK
+	kO9C+VM2KHWJLpge85B9VI+bIf8aW74ujMhLydq7BFAQP+YOR4HQPkorxSYz1NgeP1VY
+	p98l7kQ1Ru2OtvrodAoQ5Q9EPFiMplX/fEj2lI5lYZruKMrGacnMjLtbUOOuUhfiMBp5
+	0duong4prxO8kXariuG0mf/nXI70K8AK4Vro80z+8wjyxIZ7LIFJr0FuSmglSdgZvnTK
+	iuSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=icG7d3FnEG1+I/p4BCjyGyfRs+KRIW+AZ3Mmw9uXCg4=;
+	b=riaBSxXW8LTODaxwT2g09fJMOvbSPNnqQxYO+LR0K1XoupYnGmi0sHkNj5L9LxwgiZ
+	91/TbDOFL7Lnu7cJl+/CYjMMCcym+tRzM/6mODvYN7iuvwy+0eieKuVWeY0o+cCEUNvh
+	iqCzXBzyb6SyX1M05DSDhkC1RQJD4FyOpzn/DqShIMGqi0IY9Fnil6cGnBjIZXIxCONf
+	L8RrHBnoPjVNUPN/MZt6Q75+DrhPorgnkdEvVWDtK9L990EogzuWtYpqdaOfXU+dSQo6
+	noPGjCAFfJ8I3xflTHEAVCA2+AMwYWGrXWMgAWHpPWNyTRg6pM8UiVEVgJ4CEs2zoXwM
+	vh7w==
+X-Gm-Message-State: ANhLgQ1Q2ObNmpdpvelPN07C4uUqHYawuArfa/IKDgY5N47GYvsvNYe2
+	re70K/3Nz8wKw14zqmtVJzZoAKL7BHY=
+X-Google-Smtp-Source: ADFU+vt3eneajNlrrN0VMXCr9wr3nzpwZtWfvt1fZyKK23ZuqA9rbJousrRiYGjj/5CX024d9Oxj2w==
+X-Received: by 2002:a63:4555:: with SMTP id u21mr3465780pgk.66.1583342357388; 
+	Wed, 04 Mar 2020 09:19:17 -0800 (PST)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::8ce3])
+	by smtp.gmail.com with ESMTPSA id
+	g10sm29343645pfo.166.2020.03.04.09.19.16
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 04 Mar 2020 09:19:16 -0800 (PST)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Mar 2020 09:19:23 -0800
+Message-Id: <20200304171927.2068660-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <0d9bdfd0-9321-940b-4542-e4ba6505aed1@balister.org>
-User-Agent: NeoMutt/20171215
-Cc: Mike Leach <mike.leach@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>
-Subject: Re: [PATCH v1] OpenCSD: Support for Arm CoreSight decode lib
+Subject: [meta-multimedia][PATCH 1/5] packagegroup-meta-multimedia: Purge gst 0.10 related rdeps
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,97 +57,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2020 17:09:04 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Mar 2020 17:19:17 -0000
 Content-Transfer-Encoding: 8bit
 
-On Wed, Mar 04, 2020 at 11:36:38AM -0500, Philip Balister wrote:
-> On 3/4/20 11:05 AM, Scott Murray wrote:
-> > On Wed, 4 Mar 2020, Leo Yan wrote:
-> > 
-> >> This recipe is to support OpenCSD, which is an open source
-> >> CoreSight trace decode library and utility.
-> > 
-> > Just a thought, this seems like the kind of thing that might make sense
-> > for the new meta-arm layer that Jon has been working up?
-> 
-> I had the exact thought and am really glad I read this before saying the
-> same thing!
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../packagegroups/packagegroup-meta-multimedia.bb           | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-+1
-
-> 
-> Philip
-> 
-> > 
-> >> Signed-off-by: Leo Yan <leo.yan@linaro.org>
-> >> ---
-> >>  .../recipes-devtools/opencsd/opencsd_git.bb   | 28 +++++++++++++++++++
-> >>  1 file changed, 28 insertions(+)
-> >>  create mode 100644 meta-oe/recipes-devtools/opencsd/opencsd_git.bb
-> >>
-> >> diff --git a/meta-oe/recipes-devtools/opencsd/opencsd_git.bb b/meta-oe/recipes-devtools/opencsd/opencsd_git.bb
-> >> new file mode 100644
-> >> index 000000000..0c3b4837d
-> >> --- /dev/null
-> >> +++ b/meta-oe/recipes-devtools/opencsd/opencsd_git.bb
-> >> @@ -0,0 +1,28 @@
-> >> +SUMMARY = "OpenCSD - An open source CoreSight(tm) Trace Decode library"
-> >> +HOMEPAGE = "https://github.com/Linaro/OpenCSD"
-> >> +LICENSE = "BSD-3-Clause"
-> >> +LIC_FILES_CHKSUM = "file://LICENSE;md5=ad8cb685eb324d2fa2530b985a43f3e5"
-> >> +
-> >> +SRC_URI = "git://github.com/Linaro/OpenCSD;protocol=http;branch=master"
-> >> +SRCREV = "03c194117971e4ad0598df29395757ced2e6e9bd"
-> >> +
-> >> +S = "${WORKDIR}/git"
-> >> +
-> >> +COMPATIBLE_HOST = "(x86_64.*|aarch64.*)-linux"
-> >> +
-> >> +EXTRA_OEMAKE = "ARCH='${TARGET_ARCH}' \
-> >> +                CROSS_COMPILE='${TARGET_SYS}-' \
-> >> +                CC='${CC}' \
-> >> +                CXX='${CXX}' \
-> >> +                LINKER='${CXX}' \
-> >> +                LINUX64=1 \
-> >> +                DEBUG=1 \
-> >> +                "
-> >> +
-> >> +do_compile() {
-> >> +    ( cd ${S}/decoder/build/linux; oe_runmake ${EXTRA_OEMAKE}; cd - )
-> >> +}
-> >> +
-> >> +do_install() {
-> >> +    ( cd ${S}/decoder/build/linux; oe_runmake PREFIX=${D}/usr install; cd - )
-> >> +}
-> >>
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+index cef45f9d6d..e0cb415e3b 100644
+--- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
++++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
+@@ -29,9 +29,9 @@ RDEPENDS_packagegroup-meta-multimedia = "\
+     rtmpdump libopenmpt schroedinger mpd mpc libmpdclient \
+     ncmpc libmpd dcadec libiec61883 \
+     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "", "", d)} \
+-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna gst-fluendo-mpegdemux vlc", "", d)} \
+-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vo-aacenc sox libde265 gst-openmax", "", d)} \
+-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "streamripper gst-plugins-ugly gst-fluendo-mp3 gst-plugins-gl", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna vlc", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vo-aacenc sox libde265", "", d)} \
++    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "streamripper", "", d)} \
+     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "openh264 opencore-amr faac vo-amrwbenc", "", d)} \
+     "
+ 
 -- 
-———————————————
-Josef Holzmayr
-Software Developer Embedded Systems
-
-Tel: +49 8444 9204-48
-Fax: +49 8444 9204-50
-
-R-S-I Elektrotechnik GmbH & Co. KG
-Woelkestrasse 11
-D-85301 Schweitenkirchen
-www.rsi-elektrotechnik.de
-———————————————
-Amtsgericht Ingolstadt – GmbH: HRB 191328 – KG: HRA 170393
-Geschäftsführer: Dr.-Ing. Michael Sorg, Dipl.-Ing. Franz Sorg
-Ust-IdNr: DE 128592548 
-
-_____________________________________________________________
-Amtsgericht Ingolstadt - GmbH: HRB 191328 - KG: HRA 170363
-Geschäftsführer: Dr.-Ing. Michael Sorg, Dipl.-Ing. Franz Sorg
-USt-IdNr.: DE 128592548
+2.25.1
 
 
