@@ -1,51 +1,100 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com
-	[209.85.160.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E72EB610F7
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg1-f193.google.com (mail-pg1-f193.google.com
+	[209.85.215.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 9ECC261145
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2020 04:53:33 +0000 (UTC)
-Received: by mail-qt1-f195.google.com with SMTP id e13so455023qts.6
+	Wed,  4 Mar 2020 05:06:23 +0000 (UTC)
+Received: by mail-pg1-f193.google.com with SMTP id d9so407514pgu.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Mar 2020 20:53:35 -0800 (PST)
+	Tue, 03 Mar 2020 21:06:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=fK2JQ99JC+NRAzhiFWAkSQhNf9DbSZeYBFK0ViOkOEg=;
-	b=OHFZKUShE98ioDp94MDCnK8ZLXHFvtMp1UZwlY6v+tYlugS4LMpzmtYkKf6icUpKjx
-	efDJgk/FJqakocwgiiMs7CZSQUV+ujx+qDCQWHfjdpWvOVGzY6ecaMovjrxcOL2rnIK+
-	ad9wi1IhIPL/t7jLSMJDgv1fv5N+k699MqU8JWw7A8BCzUYA+7SXGXRigEL0nlda4HYD
-	DNDzJCKfJCVo2oLiVM0+2t3z8gJ67Uxu5ckYfswo19M03NSGs0E5MAi8K6hi4lRdbCIl
-	1ij+j2MnlzMa5YdPn+BHg7J2ifYCfeeTvpH9He4PM+CnHQNuLs+yytWx+6ZgOybE1aSA
-	IZuA==
+	h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=ZN7I8NJyf4wsLpKL/NongCauF8jT/MK9XtnXMzXzuFQ=;
+	b=j6rhaWEPRYUjSAHTB2JUCCQqLUNEwypj9Zfnv6ezEKLuba3qyBhK6MwgxEuoqn7fQu
+	50M1yfWL7+6zA+PfCiX78n/K4ecMsv05WwbzwAd2hzzpa6iqezWbfqvp+1gW1U17QrCu
+	DdIohRMJLBTJlzYryuEAU5j0VQVlPcJLBVVjX8z1CpVaqlyU3at00H9urLJSndP9bceP
+	kSb245J3knaU019v4xycKeL4QkDqfGxRlXj6oDVg8b2F9hi+MF0rk2nOGy0c34Ekk1XK
+	8LRDHaL5Tn7s8uIgteoiImRP1oyh0vgIfEFEmGG+rWDD73s7rZG94UsVeDlKx1W8+xcZ
+	2/eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=fK2JQ99JC+NRAzhiFWAkSQhNf9DbSZeYBFK0ViOkOEg=;
-	b=Dr+J1NRcQf1NtnP2Ti1XboAyKRmD2/ltKiTdxYTb+Tha+oTHFlAivEI1J/bfIUt6C5
-	zn4nlQxJc9vuXnCFI86GVfcuA/D+3jeKDbYeC1AxFKFlp1n1DgkBNzGfpgO3veypKmio
-	CZYLzWilE1xjpKaryFXPTRxH6Q8hvbEblRtW/dGUDTdgwT2OXWdxSHgELI450dhIn/nz
-	1YTUT+jFRiz4azL6QIHkEoBmgVHCGlog0QbUMrLwSxy2uvdfiaSiUYeHdsIEo4be4CyY
-	XW+mT4qn4dqYtMIC+oCmKH9iPoQdijPR6hcFmfYbWL4VQas3g5QL15JE36VsNl977Ut5
-	Rkog==
-X-Gm-Message-State: ANhLgQ2LrVr/m7+RY6P7K9f+EIoBi6yopFEN64QEY9ETHgKB7tdeB7IQ
-	BCqX7/GaW6xVpV6lCyzWypv3HT6FJY6fzHlQC0k=
-X-Google-Smtp-Source: ADFU+vtpdYv4V3waz5co1bd26h5iZaq+nyEEsrwoxVTwUgV1CXiJLYOcScwuCnWd8/1e7w+6L1vxHNbd42jD29fH+Rc=
-X-Received: by 2002:ac8:5351:: with SMTP id d17mr891280qto.190.1583297614269; 
-	Tue, 03 Mar 2020 20:53:34 -0800 (PST)
+	h=x-gm-message-state:subject:to:cc:references:from:autocrypt
+	:message-id:date:user-agent:mime-version:in-reply-to
+	:content-transfer-encoding:content-language;
+	bh=ZN7I8NJyf4wsLpKL/NongCauF8jT/MK9XtnXMzXzuFQ=;
+	b=bibHTRG9dWOHWRS6L81UZ+oSJV2wtnAsIOfJj4VuWRPFXH2ijN0db0mlAK8QBkber7
+	pfElxykClBJZOdf1l49/+7QgHtGRfzHJKy56DLK/krV571w1eUMQmMptOpsPdG6AdL8J
+	TeMg+XWpH4Agz1zB+ubKIM7dklPf1JiSvrPkNJLeKSaKiggLnYLafurfRnIsFPjJ7sLw
+	14v6hUL/xvCaJvhZcaSUlie1+1vvW25veq3TpqCgUKvFD7h8TDdyvtRAzMjFVEMm1KFJ
+	JDdKt4oxEmo0c/kZf62ak+fYQJaYpDNnz8br55vhXBI63e/83eVdZZ05x+bPXaGIyh9R
+	wPsA==
+X-Gm-Message-State: ANhLgQ2u1YpWwoiAo+7xfUXqyL6XvnFm/3KUqoWyDDJwb9WgsQA4IhN+
+	uvqEX2PBZBZ8No8mzCvqikE=
+X-Google-Smtp-Source: ADFU+vuxOgZm+bao9ST63VDuKCFiK7VesWqh08wNsuAbdF/fEORvbnW+VoHWnpDfUn86vCmfTp68Pg==
+X-Received: by 2002:a63:104a:: with SMTP id 10mr959663pgq.276.1583298384635;
+	Tue, 03 Mar 2020 21:06:24 -0800 (PST)
+Received: from ?IPv6:2601:202:4180:a5c0:3055:bf8b:bc3b:3d57?
+	([2601:202:4180:a5c0:3055:bf8b:bc3b:3d57])
+	by smtp.gmail.com with ESMTPSA id
+	w65sm22894457pfd.77.2020.03.03.21.06.23
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Tue, 03 Mar 2020 21:06:24 -0800 (PST)
+To: Haiqing Bai <Haiqing.Bai@windriver.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1583292052-256796-1-git-send-email-Haiqing.Bai@windriver.com>
+From: akuster808 <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
+	Jmd71vHMw+coBetWC3lk+IKjX815Ox0puYXQVRRtI+yMCgd6ib3oGxoQ8tCMwhf9c9/aKjaz
+	mP97lWgGHbiEVsDpjzmMZGlJ6pDVZzxykkJExKaosE46AcA8KvfhRQg5zRyYBtinzs8Zu8AP
+	aquZVHNXxPwjKPaSEEYqQjFeiNgFTavV+AhM2dmPmGUWCX9RZisrqA4slGwEB0srMdFf12Zg
+	mD35Y9jZ80qpu5LPtJCFcsaAlebqR+dg36pIpiRR+olhN1wmC6LYP1vw6uMEYBjkTa2Rnb6+
+	C4FDzCJD4UCrUvLMNeTW810DY0bjMMj3SfmSGSfQUssaaaTXCVlLGuGxyCr/kza1rHaXMKum
+	Ek4EFj1fyn7AfkSLEHfJfY4sO1tpgigvs4eD/4ZSQEXSu/TjVvyKx4EvUbhlGMRyH2CPwD/H
+	7DFF8tcVtJvCwUUW+zKtjxjSSLrhniNMXAOQJZ6CdaqCe4OyJQT5aRdr+FWbBRjpaRCCf5nf
+	dTc88NMU9PrBT3vu0QJ5WNPO6MJpnb+d8iMNLZAz8tv8JMm2l+sMcNKSJ6lhX8peoBsfMVqc
+	FgiykEO0fUt7DCbUYR5tLjM/3E5tHvTjMooVJyOxoufVLYtTtQARAQABzSFha3VzdGVyODA4
+	IDxha3VzdGVyODA4QGdtYWlsLmNvbT7CwX0EEwEIACcFAlnlUP4CGyMFCQlmAYAFCwkIBwIG
+	FQgJCgsCBBYCAwECHgECF4AACgkQ7ou0mfRW5/kuhRAAlR2FTq5572jrX5nnPR7AqI2bvSVb
+	vqGLlvv739WhghvagbC+tu05QguopAhWW1/DcHK2+QtfIoC9UZrSW4RaO0CCo5sPjqK7l1KT
+	ngWX/rGjF6xTF2QN0U/btcpMyVN2CNtVLwsDF9e+GHKoUcnFkP+JP8vHGokN9k6E/c97hLaL
+	IJPeKl8LZXc2Efk+MaW1NXkfDJdcp/p+voajbihSQO6OZ/o+x9d2I3ZybKfTZ71+ek5Hxzjz
+	g6KkMOI7KJjlmBlrQFAtVbS+CFAKrwkYznE6ggkcmGv3N7DeUBTUR78hf+EZEAM+ajeLMtrG
+	rXE00pIb+gLGYPZxba5pCdQ+qWUW38qi9UnIRPm6fq7Ypx1r6XwJvbgCOkhbxo3D4YUdyC0b
+	FE9lgrg8htbc9in4j2+hVI6ALswNjLprzXdzdKrd+T3Egx36o3Z/qrYsW2o5/A5sVvvASVKi
+	wRPuEKhEhfmiHUPLvuKqhMoymHaz3fg5D2Q8G0gSDkLgeEpAjiWqf4+AGLx+MSDai7DSOsmI
+	t61kWxs7cFTB32UrB/TDoVNn3Fm88ZFQpA/bngikE9jgEm045mSY86fNlbFj2mcCd0Ha1i1n
+	aYc97RpgfjNMWyHDVHOGrNg/hJjkGa5RsAXkfyBwltHRw0Hj4urUQ3rr8um8PLe43SezPwXA
+	oRoyDxDOwU0EWeVQ/gEQALNHwj5VSPdnvXy1RXUuH+rclMx4x8zaqDyY0YqHfA7b/d8Y0VAt
+	Y6YpzDeFTwD8A0Wfb7kZ2mlDIE6ODCB71uT/E3C6b+FiiN+lgzslznjUW+9l8ddDhRrC8HMG
+	37vrXF5h++PTXUKEKUlkDib1w093tu3mlJXUvIAzl8CEHkptF6Br0L9XxFwuWoNUfjT9IorQ
+	0SVIhvq5PhVAITXUD5fD7/N8B4TYegmHFRo1UaaKSnSHwlJJkzKpeWOH8QTYrP0RHxX86Obv
+	IZuwbAo3F3oojcvLJt9NxWnbEmEALkleklLZnukgu7q5Wp1VDwhUbMFTLb6qmnBa/Xi30uOk
+	0l1TMHDbeQswvQDOZBAMukSRqyBetKxQ3iTfZ/3z1ubQRcVDbVlMDScSHQq0LK3F9yMOMM/6
+	0QPqJjl13xn/+Bn7WJiAIXXwzAV7uo6i0khFfjDtCDQ40aeffqOLxp1yMLkc3EKJGcQ5F6O2
+	ycEf4QXCYUbMXjxB0EJB8y7z+xOi5Mmd/pPlVmZ2gQK84NAL90p7n7jRlyf3gOUY+JOl4c5e
+	UFiIhOzmuqNrvPOiZ02GXh6SGUU5y7IgSoIKvXSFgHAn2OG/tcspBmkyv6IuNVpmbmEgYn4I
+	Rnt40UXVQkxTh0dENFhk2cjunMYozV/OqYCgmZLFSeJd8kAo4yn+yOtNABEBAAHCwWUEGAEI
+	AA8FAlnlUP4CGwwFCQlmAYAACgkQ7ou0mfRW5/nNcg//R63cbOS6zLtvdnPub3Ssp1Ft8Wmv
+	mni+kccuNApuDV7d63QckYxjAfUv2zYMLpbh87gVbLyCq9ASn552EbfRhTvHdk44CgbHBVcI
+	ZBEdZWgRR5ViJakQSYHpP2e5AGNFnx9gSIuRTaa5rvZM+4xeoZ2vJiq93TtaYPr7UFNfK+c4
+	vv4C66lkt9l95/I10eSc3RqbOKZW47emlg4X3ygEoB9k2lPrpspyf6sUuSEi0WrlSxoLAr6p
+	JG8rTUErYNeXe6JCdL31odDx1Dh5sdKIj2RicUYZNilxu9f1M7jZwf2ra1FGAlKj2ybqmgpZ
+	EFteaiCinEYsvDyZyOiWHjAFI+RZIPQQL3AnVp4l7wYD3r9hnqYPww0slyMDcb9262RoFkHq
+	dDwxPYarrNjWUpOzxB6bFxOgNRdCTgvQl8Ftk8a/yXB6vHeUSm1vPFCBxQPZytyfOLhEWm0J
+	/mkVL0Z6iRK3p1LKnpLYCS4/esL2u7RrhPyCs2SsL58YcQF/g+PpeT9geZ+oyZ/4IQ+TWJoU
+	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
+	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
+	8CS2NxU=
+Message-ID: <c9c12515-5552-8054-28a8-e7b72ae9af7e@gmail.com>
+Date: Tue, 3 Mar 2020 21:06:23 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.4.1
 MIME-Version: 1.0
-References: <20200226122622.33171-1-leo.yan@linaro.org>
-	<CAMKF1sq3DnDjXNyyUs5g3rbQp295gEP3xrYteL3adUOOy3Nkug@mail.gmail.com>
-	<20200304030048.GB8032@leoy-ThinkPad-X240s>
-	<CA+chaQdnHSE0bw=kA8fRek-2ig4jLjr_ibdcML0qZhXbbN=4fQ@mail.gmail.com>
-In-Reply-To: <CA+chaQdnHSE0bw=kA8fRek-2ig4jLjr_ibdcML0qZhXbbN=4fQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 3 Mar 2020 20:53:07 -0800
-Message-ID: <CAMKF1sqDD8BRgjvf=NWSLtjazKva12gyz06aUsW=dF0amN66qg@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: Daniel Thompson <daniel.thompson@linaro.org>,
-	Loic Poulain <loic.poulain@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v4] luajit: Upgrade to 2.1.0-beta3
+In-Reply-To: <1583292052-256796-1-git-send-email-Haiqing.Bai@windriver.com>
+Cc: yue.tao@windriver.com
+Subject: Re: [zeus][PATCH] gd: fix CVE-2017-6363
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,151 +107,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2020 04:53:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 04 Mar 2020 05:06:23 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-On Tue, Mar 3, 2020 at 8:43 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->
-> You can use something like:
-> 2.0.99+2.1.0-beta3
-> to make sure it doesn't go backwards.
->
-> 2.1.0+beta3 seems wrong, because it would sort higher than final 2.1.0 (without the +git${SRCPV} suffix).
->
-> 2.1.0~beta3 might work, but it's not used by many recipes.
->
 
-this came out to work well and is concise too, so I went with this
 
-> On Wed, Mar 4, 2020 at 4:01 AM Leo Yan <leo.yan@linaro.org> wrote:
->>
->> Hi Khem,
->>
->> On Thu, Feb 27, 2020 at 07:27:21AM -0800, Khem Raj wrote:
->> > I am seeing version going backward errors still
->> >
->> > luajit-2.0.5+2.1.0-beta3: Package version for package luajit-src went
->> > backwards which would break package feeds (from
->> > 0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
->> > [version-going-backwards]
->> > luajit-2.0.5+2.1.0-beta3: Package version for package luajit-dbg went
->> > backwards which would break package feeds (from
->> > 0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
->> > [version-going-backwards]
->> > luajit-2.0.5+2.1.0-beta3: Package version for package luajit-staticdev
->> > went backwards which would break package feeds (from
->> > 0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
->> > [version-going-backwards]
->> > luajit-2.0.5+2.1.0-beta3: Package version for package luajit-dev went
->> > backwards which would break package feeds (from
->> > 0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
->> > [version-going-backwards]
->> > luajit-2.0.5+2.1.0-beta3: Package version for package luajit-doc went
->> > backwards which would break package feeds (from
->> > 0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
->> > [version-going-backwards]
->> > luajit-2.0.5+2.1.0-beta3: Package version for package luajit-locale
->> > went backwards which would break package feeds (from
->> > 0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
->> > [version-going-backwards]
->> > luajit-2.0.5+2.1.0-beta3: Package version for package luajit went
->> > backwards which would break package feeds (from
->> > 0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
->> > [version-going-backwards]
->> > luajit-2.0.5+2.1.0-beta3: Package version for package luajit-common
->> > went backwards which would break package feeds (from
->> > 0:2.0.5+git0+02b521981a-r0.7 to 0:2.0.5+2.1.0-beta3-r0.0)
->> > [version-going-backwards]
->>
->> I googled for this issue, the backwards issue is likely caused by the
->> PV: from "2.0.5+git${SRCPV}" to "2.0.5+2.1.0-beta3".
->>
->> So how about change PV to "2.1.0+beta3" and later for version 2.1.0,
->> we can use the format "2.1.0+git${SRCPV}"?  At the end we can get the
->> version sequence as:
->>
->> Old:   2.0.5+git${SRCPV}
->> Now:   2.1.0+beta3
->> Later: 2.1.0+git${SRCPV}
->>
->> Does this make sense for you?
->>
->> Thanks,
->> Leo
->>
->> > On Wed, Feb 26, 2020 at 4:26 AM Leo Yan <leo.yan@linaro.org> wrote:
->> > >
->> > > Since luajit 2.1.0-beta3 can support architecture aarch64 and the old
->> > > misses to support aarch64, the patch upgrades to luajit 2.1.0-beta3.
->> > >
->> > > Also updated clang.patch to dismiss patch warning: "Hunk #1 succeeded
->> > > at 436 with fuzz 1 (offset 123 lines)."
->> > >
->> > > Signed-off-by: Leo Yan <leo.yan@linaro.org>
->> > > ---
->> > >  meta-oe/recipes-devtools/luajit/luajit/clang.patch  |  4 ++--
->> > >  .../luajit/{luajit_2.0.5.bb => luajit_git.bb}       | 13 ++++++-------
->> > >  2 files changed, 8 insertions(+), 9 deletions(-)
->> > >  rename meta-oe/recipes-devtools/luajit/{luajit_2.0.5.bb => luajit_git.bb} (90%)
->> > >
->> > > diff --git a/meta-oe/recipes-devtools/luajit/luajit/clang.patch b/meta-oe/recipes-devtools/luajit/luajit/clang.patch
->> > > index c39ef6fd4..807cc4417 100644
->> > > --- a/meta-oe/recipes-devtools/luajit/luajit/clang.patch
->> > > +++ b/meta-oe/recipes-devtools/luajit/luajit/clang.patch
->> > > @@ -8,8 +8,8 @@ Index: LuaJIT-2.0.5/src/lj_arch.h
->> > >  ===================================================================
->> > >  --- LuaJIT-2.0.5.orig/src/lj_arch.h
->> > >  +++ LuaJIT-2.0.5/src/lj_arch.h
->> > > -@@ -313,7 +313,7 @@
->> > > - #error "Need at least GCC 4.2 or newer"
->> > > +@@ -436,7 +436,7 @@
->> > > + #endif
->> > >   #endif
->> > >   #elif !LJ_TARGET_PS3
->> > >  -#if (__GNUC__ < 4) || ((__GNUC__ == 4) && __GNUC_MINOR__ < 3)
->> > > diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_git.bb
->> > > similarity index 90%
->> > > rename from meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
->> > > rename to meta-oe/recipes-devtools/luajit/luajit_git.bb
->> > > index 93128dda8..2a7243842 100644
->> > > --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
->> > > +++ b/meta-oe/recipes-devtools/luajit/luajit_git.bb
->> > > @@ -1,14 +1,14 @@
->> > >  SUMMARY = "Just-In-Time Compiler for Lua"
->> > >  LICENSE = "MIT"
->> > > -LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
->> > > +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=d739bb9250a55c124a545b588fd76771"
->> > >  HOMEPAGE = "http://luajit.org"
->> > >
->> > > -PV .= "+git${SRCPV}"
->> > > -SRCREV = "02b521981a1ab919ff2cd4d9bcaee80baf77dce2"
->> > > -SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http \
->> > > +PV = "2.0.5+2.1.0-beta3"
->> > > +SRCREV = "0ad60ccbc3768fa8e3e726858adf261950edbc22"
->> > > +SRC_URI = "git://luajit.org/git/luajit-2.0.git;protocol=http;branch=v2.1 \
->> > >             file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
->> > >             file://clang.patch \
->> > > -"
->> > > +           "
->> > >
->> > >  S = "${WORKDIR}/git"
->> > >
->> > > @@ -90,8 +90,7 @@ FILES_${PN}-dev += "${libdir}/libluajit-5.1.a \
->> > >  "
->> > >  FILES_luajit-common = "${datadir}/${BPN}-${PV}"
->> > >
->> > > -# Aarch64/mips64/ppc/ppc64/riscv64 is not supported in this release
->> > > -COMPATIBLE_HOST_aarch64 = "null"
->> > > +# mips64/ppc/ppc64/riscv64 is not supported in this release
->> > >  COMPATIBLE_HOST_mipsarchn32 = "null"
->> > >  COMPATIBLE_HOST_mipsarchn64 = "null"
->> > >  COMPATIBLE_HOST_powerpc = "null"
->> > > --
->> > > 2.17.1
->> > >
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On 3/3/20 7:20 PM, Haiqing Bai wrote:
+> Backport the CVE patch from the upstream to fix the heap-based buffer
+> over-read in tiffWriter.
+Did I miss the patch for master?
+
+- armin
+>
+> Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+> ---
+>  .../recipes-support/gd/gd/CVE-2017-6363.patch | 35 +++++++++++++++++++
+>  meta-oe/recipes-support/gd/gd_2.2.5.bb        |  1 +
+>  2 files changed, 36 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch
+>
+> diff --git a/meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch b/meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch
+> new file mode 100644
+> index 000000000..25b5880ff
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/gd/gd/CVE-2017-6363.patch
+> @@ -0,0 +1,35 @@
+> +From 8f7b60ea7db87de5df76169e3f3918e401ef8bf7 Mon Sep 17 00:00:00 2001
+> +From: Mike Frysinger <vapier@gentoo.org>
+> +Date: Wed, 31 Jan 2018 14:50:16 -0500
+> +Subject: [PATCH] gd/gd2: make sure transparent palette index is within bounds
+> + #383
+> +
+> +The gd image formats allow for a palette of 256 colors,
+> +so if the transparent index is out of range, disable it.
+> +
+> +Upstream-Status: Backport
+> +[https://github.com/libgd/libgd.git commit:0be86e1926939a98afbd2f3a23c673dfc4df2a7c]
+> +CVE-2017-6363
+> +
+> +Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+> +---
+> + src/gd_gd.c | 3 ++-
+> + 1 file changed, 2 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/src/gd_gd.c b/src/gd_gd.c
+> +index f8d39cb..5a86fc3 100644
+> +--- a/src/gd_gd.c
+> ++++ b/src/gd_gd.c
+> +@@ -54,7 +54,8 @@ _gdGetColors (gdIOCtx * in, gdImagePtr im, int gd2xFlag)
+> + 		if (!gdGetWord (&im->transparent, in)) {
+> + 			goto fail1;
+> + 		}
+> +-		if (im->transparent == 257) {
+> ++		/* Make sure transparent index is within bounds of the palette. */
+> ++		if (im->transparent >= 256 || im->transparent < 0) {
+> + 			im->transparent = (-1);
+> + 		}
+> + 	}
+> +-- 
+> +1.9.1
+> +
+> diff --git a/meta-oe/recipes-support/gd/gd_2.2.5.bb b/meta-oe/recipes-support/gd/gd_2.2.5.bb
+> index 35f9bb251..dda2e67d6 100644
+> --- a/meta-oe/recipes-support/gd/gd_2.2.5.bb
+> +++ b/meta-oe/recipes-support/gd/gd_2.2.5.bb
+> @@ -17,6 +17,7 @@ SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
+>             file://0001-annotate.c-gdft.c-Replace-strncpy-with-memccpy-to-fi.patch \
+>             file://CVE-2018-1000222.patch \
+>             file://CVE-2019-6978.patch \
+> +           file://CVE-2017-6363.patch \
+>            "
+>  
+>  SRCREV = "8255231b68889597d04d451a72438ab92a405aba"
+
 
