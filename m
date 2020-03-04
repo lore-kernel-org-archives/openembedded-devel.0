@@ -1,50 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg1-f177.google.com (mail-pg1-f177.google.com
-	[209.85.215.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 0CBD0610E3
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 5038D611C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Mar 2020 17:19:16 +0000 (UTC)
-Received: by mail-pg1-f177.google.com with SMTP id d9so1297004pgu.3
+	Wed,  4 Mar 2020 17:19:18 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id d9so1297040pgu.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Mar 2020 09:19:18 -0800 (PST)
+	Wed, 04 Mar 2020 09:19:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=icG7d3FnEG1+I/p4BCjyGyfRs+KRIW+AZ3Mmw9uXCg4=;
-	b=dNUJYbe/CvfrC2g3kOfJX/vq8VoD7zJ0idwQnHfvqmct+JEEGHQ3wsh3bx51bDGWaM
-	FHV7mKjRRNTukHPksV+14Sz6kwtO1IoAVkhFLkQda5TzDBn5hZW/j310QSrM77HBA/uK
-	kO9C+VM2KHWJLpge85B9VI+bIf8aW74ujMhLydq7BFAQP+YOR4HQPkorxSYz1NgeP1VY
-	p98l7kQ1Ru2OtvrodAoQ5Q9EPFiMplX/fEj2lI5lYZruKMrGacnMjLtbUOOuUhfiMBp5
-	0duong4prxO8kXariuG0mf/nXI70K8AK4Vro80z+8wjyxIZ7LIFJr0FuSmglSdgZvnTK
-	iuSQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=NglKJahbBGDshxtNO7sLC0zqV28KnevbtZR3l+0xJZE=;
+	b=UwAORgRSi+EvAKlD9svAc6CKWjyadJXCPOUNzsPQkPb5/DDlH8oHCeF8U++AHj4Ydy
+	EYuJXWJkfqfFtBl+Gpg4ZZd0FLCxVe8C3KgKTCB5m/7r5wo1I5TK7UhN1HvzxRVz4p2j
+	Nld4WjvQCeI9NnvfvUhf3hTT37RcKCpJCnmy9rTxs6Ed3vbPcSI5zu+a0qF6cDufkrZK
+	pNS2IN+nxhoCw/PT1ySivdyv710bBpHQLa8aPMY1e6RsR3Q4B4UlDMDXQWhnEC5tVpw1
+	twcrOVAdusRlDe5/LRknI/4oUSPoTXUg7VQuc4Z75w/cc1WcCHoXHP+1dzO7C20BS9pI
+	JXNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=icG7d3FnEG1+I/p4BCjyGyfRs+KRIW+AZ3Mmw9uXCg4=;
-	b=riaBSxXW8LTODaxwT2g09fJMOvbSPNnqQxYO+LR0K1XoupYnGmi0sHkNj5L9LxwgiZ
-	91/TbDOFL7Lnu7cJl+/CYjMMCcym+tRzM/6mODvYN7iuvwy+0eieKuVWeY0o+cCEUNvh
-	iqCzXBzyb6SyX1M05DSDhkC1RQJD4FyOpzn/DqShIMGqi0IY9Fnil6cGnBjIZXIxCONf
-	L8RrHBnoPjVNUPN/MZt6Q75+DrhPorgnkdEvVWDtK9L990EogzuWtYpqdaOfXU+dSQo6
-	noPGjCAFfJ8I3xflTHEAVCA2+AMwYWGrXWMgAWHpPWNyTRg6pM8UiVEVgJ4CEs2zoXwM
-	vh7w==
-X-Gm-Message-State: ANhLgQ1Q2ObNmpdpvelPN07C4uUqHYawuArfa/IKDgY5N47GYvsvNYe2
-	re70K/3Nz8wKw14zqmtVJzZoAKL7BHY=
-X-Google-Smtp-Source: ADFU+vt3eneajNlrrN0VMXCr9wr3nzpwZtWfvt1fZyKK23ZuqA9rbJousrRiYGjj/5CX024d9Oxj2w==
-X-Received: by 2002:a63:4555:: with SMTP id u21mr3465780pgk.66.1583342357388; 
-	Wed, 04 Mar 2020 09:19:17 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=NglKJahbBGDshxtNO7sLC0zqV28KnevbtZR3l+0xJZE=;
+	b=P+tFwcptat/wCzI9tQn/DL3zdoZhIV4IASrJCbK2VpH7WSkUzIOYQ4xjrJypHnW1tY
+	AOVihk0mdH/bVykAYB09InYSyH4SvM1Y5R+SdbN2cYnvudFdysor2NHiXpSv/OUU0PoS
+	JXu3XVKmHxaq+dKtd+iE3eERqIhFHQRAwaysY60zSHlcANRsXk8blkJCsBLeP80cpxQ4
+	mPOKNIS5vz1QsjeCqkkegG3a940BR3uV9tcV7tna4GgrolLvVlzgTayS9X6c6q1+gIwE
+	8+xMnXKRDVhxFJtcw/yAS2ZjBectyRi7a+AsslFlg41yB5YZPzobdgN7JE1OMmUGMOXF
+	6lwQ==
+X-Gm-Message-State: ANhLgQ3FjkzlXtsmEfgLxebJfl3Da8RcxwmVt+eCGFvbgBqGuZ4acHqa
+	ft2ToUtaGzMdad11YvM89OyoIONNYnM=
+X-Google-Smtp-Source: ADFU+vtXPGahONXHucHRknCcRV8mpAGsMqSMdJ8nWhocFIsHy0IT8cB8XTsdyqokSMWsdHwyIKjzdw==
+X-Received: by 2002:aa7:8582:: with SMTP id w2mr3903468pfn.89.1583342358942;
+	Wed, 04 Mar 2020 09:19:18 -0800 (PST)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::8ce3])
 	by smtp.gmail.com with ESMTPSA id
-	g10sm29343645pfo.166.2020.03.04.09.19.16
+	g10sm29343645pfo.166.2020.03.04.09.19.18
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 04 Mar 2020 09:19:16 -0800 (PST)
+	Wed, 04 Mar 2020 09:19:18 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Mar 2020 09:19:23 -0800
-Message-Id: <20200304171927.2068660-1-raj.khem@gmail.com>
+Date: Wed,  4 Mar 2020 09:19:25 -0800
+Message-Id: <20200304171927.2068660-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20200304171927.2068660-1-raj.khem@gmail.com>
+References: <20200304171927.2068660-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 1/5] packagegroup-meta-multimedia: Purge gst 0.10 related rdeps
+Subject: [meta-multimedia][PATCH 3/5] minidlna: Retarget gettext patch to gettex version 0.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +59,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Mar 2020 17:19:17 -0000
+X-List-Received-Date: Wed, 04 Mar 2020 17:19:18 -0000
 Content-Transfer-Encoding: 8bit
+
+This fixes
+*** error: gettext infrastructure mismatch: using a Makefile.in.in from gettext version 0.19 but the autoconf macros are from gettext version 0.20
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../packagegroups/packagegroup-meta-multimedia.bb           | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ .../minidlna/minidlna/0001-Update-Gettext-version.patch     | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-index cef45f9d6d..e0cb415e3b 100644
---- a/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-+++ b/meta-multimedia/recipes-multimedia/packagegroups/packagegroup-meta-multimedia.bb
-@@ -29,9 +29,9 @@ RDEPENDS_packagegroup-meta-multimedia = "\
-     rtmpdump libopenmpt schroedinger mpd mpc libmpdclient \
-     ncmpc libmpd dcadec libiec61883 \
-     ${@bb.utils.contains("DISTRO_FEATURES", "pam", "", "", d)} \
--    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna gst-fluendo-mpegdemux vlc", "", d)} \
--    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vo-aacenc sox libde265 gst-openmax", "", d)} \
--    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "streamripper gst-plugins-ugly gst-fluendo-mp3 gst-plugins-gl", "", d)} \
-+    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "minidlna vlc", "", d)} \
-+    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "vo-aacenc sox libde265", "", d)} \
-+    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "streamripper", "", d)} \
-     ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "openh264 opencore-amr faac vo-amrwbenc", "", d)} \
-     "
+diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-Update-Gettext-version.patch b/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-Update-Gettext-version.patch
+index c18095d42c..6100da3581 100644
+--- a/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-Update-Gettext-version.patch
++++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-Update-Gettext-version.patch
+@@ -10,8 +10,6 @@ Signed-off-by: Baptiste Durand <baptiste.durand@gmail.com>
+  configure.ac | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
  
+-diff --git a/configure.ac b/configure.ac
+-index f343d21..a556b33 100644
+ --- a/configure.ac
+ +++ b/configure.ac
+ @@ -14,7 +14,7 @@
+@@ -23,12 +21,12 @@ index f343d21..a556b33 100644
+  #LT_INIT
+  
+  AC_CANONICAL_TARGET
+-@@ -28,7 +28,7 @@ m4_ifdef([AC_USE_SYSTEM_EXTENSIONS], [AC_USE_SYSTEM_EXTENSIONS])
++@@ -28,7 +28,7 @@ m4_ifdef([AC_USE_SYSTEM_EXTENSIONS], [AC
+  
+  AM_ICONV
+  AM_GNU_GETTEXT([external])
+ -AM_GNU_GETTEXT_VERSION(0.18)
+-+AM_GNU_GETTEXT_VERSION(0.19)
+++AM_GNU_GETTEXT_VERSION(0.20)
+  
+  # Checks for programs.
+  AC_PROG_AWK
 -- 
 2.25.1
 
