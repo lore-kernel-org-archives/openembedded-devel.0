@@ -1,56 +1,56 @@
 Return-Path: <jpuhlman@gmail.com>
-Received: from mail-pj1-f66.google.com (mail-pj1-f66.google.com
-	[209.85.216.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 14E2361027
+Received: from mail-pj1-f65.google.com (mail-pj1-f65.google.com
+	[209.85.216.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C09AB61027
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2020 22:39:43 +0000 (UTC)
-Received: by mail-pj1-f66.google.com with SMTP id o21so2725588pjs.0
+	Thu,  5 Mar 2020 22:39:44 +0000 (UTC)
+Received: by mail-pj1-f65.google.com with SMTP id l8so208312pjy.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Mar 2020 14:39:45 -0800 (PST)
+	Thu, 05 Mar 2020 14:39:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=hnrq0RBRNa1oF/GPmzGBtKXSMnZF2ohWmc5TkvXjIK0=;
-	b=bwCXwPdkZ58BtkaUwvmCjuxP4zvSJ7ywABdE3J+Ua3DqD7NObdoFxSA2mBi1hPHKPg
-	D8+69z60xOeIm1AtJ2YVYe14to8bM/XvAToCc3oH+mWpMfAiM4LuSWNrHYKAI0wTaU7h
-	Bz5Ed4dLsWc9GOyGlV8SEzxXyG79djH79TRuKBVHqWrT/LACXgy4Q43rJxLnvSMRLTsq
-	mDxczsvczi9R13wgMupko+rBNPMh5WyFkHfm6yscOMnyl+0wF70gTCAM8489X2PKlvxG
-	Aowc1LShTPRgZrhPRVCcZ+sbR5yqPsRneTEYBx6nMBzzBjOFMOGyPI091GdryUf1XaRB
-	WsoA==
+	bh=8UAAlH9G2NGDcGxhJ/D1yAIcC0VdbqPF+R7gu8pGHGc=;
+	b=m0ESBo0mVhkDCkdvh3q5GuDoKpLa5wokJSs0o4FhaTr5gwwdvM85b8T+78oBRV6lb6
+	yu2CE4wTx51sG9R4sUgQb/T8edn0Qns57OoFIXiHMxqbuSKeU+E+y7eYiOzRFtOJMF3f
+	p7OrWW9+3L4OPk0ap9NFeaWz1nMOU4gxFOyHr3CHLyVBTSz0J97Zzimf30JjS3V1reC9
+	nV/U6dhwwpJycH2FW9AJ9zyQYaghHzZpQ6rc559YRgyXDAia4l+TfN0d7kMey8KCOQI6
+	WWb2nF3pmxwq+5taI5UnsgkkfmshBUBf1S/RjPei4t2AUVDui6m7VKUNPAPL9Nu+9o5H
+	mWeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
 	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=hnrq0RBRNa1oF/GPmzGBtKXSMnZF2ohWmc5TkvXjIK0=;
-	b=pREscYOuVr1oK5hIMw2uRKoqlw/9tG90aFU+k1T9qmiy0oFuDxkqZSpjxSkGmqjp8t
-	d9dGX9qhTDPHXoMmlY9jOgu8+o1TK2xOJatapx7WkkxUFNdIjBF4T5vtsVakIBOom6U/
-	/9p6+MYmqNdyNLKp7ANA9o5mvvuGUtCt2W7o2xCR1fHszYVPGW3U8Vbpal+cYkoyumb+
-	1gSHYA9pYbXZqOIclpO49A3ZosGzzyvVgaXXIsPa4gqhAT09eRplkH7+wwTSehJiYWmz
-	BIluiHx3nmx1xhBmEBq08afTejTXDFylY+jFvs9YPWC476vdWSIYaNqHrOroUe7ioyzb
-	eJDQ==
-X-Gm-Message-State: ANhLgQ0CtkNBQvpH6upCl0T1f1SyjdYg7AOpQGeoNbPDUt2vj4mu2br8
-	2aIpN7BzjqVro3U4teYgJLpSaKvB9Yg=
-X-Google-Smtp-Source: ADFU+vuxrXG6E6IKoYnm2w2xCjLFzV27DgXyfotKHVz/5HYkE1kxfBkwZ8NV6wZmUjdWdEWOrnx7Yg==
-X-Received: by 2002:a17:902:8a8d:: with SMTP id p13mr6480plo.159.1583447984796;
-	Thu, 05 Mar 2020 14:39:44 -0800 (PST)
+	bh=8UAAlH9G2NGDcGxhJ/D1yAIcC0VdbqPF+R7gu8pGHGc=;
+	b=EI8Gbxk9OhL5lmaYZjhX7vLJZ+r7ca3R3jyPT4AjFm+XBPQQK4zKQFVlG802d6Y9t+
+	xiuyaJBDnpYfK17z8M/ZKSW/rext1zjM1giRhKnFswHNSeQlldGgNb4SJGdEPOhoKTvi
+	gocW6hw6OtcVvqC8HjuDXokKPR5YYsZBu+K5LAtwIU+4xa6OfU4y4rCaV4aHlTg6xYuf
+	Uyn39/SCSCZLAUpB5XYne2mxSqOec70Zlf5OcHf73B7Rr7ZBtjfdelwp7Qmba+S1flVe
+	NlcJeRaBxLoM4qJnVvXVQaosJt9lH3TFWmluUUdrWxfSRQsKaOoVtNR7fcRkYDiPzRJN
+	QLAQ==
+X-Gm-Message-State: ANhLgQ1iY4USwL01UQkBfYfFFqAhHr5Ie6g0/3woQ0D/sXOmZrJksA1F
+	BUqLJyE46/h5sW8U55Iqso9Ys6+lpFE=
+X-Google-Smtp-Source: ADFU+vsECTJR7VwCwVwgnfsVYskUHnLHcUAEujVDQk8wEONHw7AjCSamHx8TaQDCi6GgHe/pUzpxfg==
+X-Received: by 2002:a17:90a:5285:: with SMTP id w5mr371433pjh.77.1583447985644;
+	Thu, 05 Mar 2020 14:39:45 -0800 (PST)
 Received: from workhorse.localdomain
 	([2600:1700:4c90:60a0:56be:f7ff:fe12:d0bd])
 	by smtp.gmail.com with ESMTPSA id
-	u12sm26925549pgh.52.2020.03.05.14.39.44
+	x11sm32871795pfn.53.2020.03.05.14.39.45
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 05 Mar 2020 14:39:44 -0800 (PST)
+	Thu, 05 Mar 2020 14:39:45 -0800 (PST)
 Sender: Jeremy Puhlman <jpuhlman@gmail.com>
 Received: by workhorse.localdomain (Postfix, from userid 1000)
-	id 6DE692A05DF; Thu,  5 Mar 2020 14:39:43 -0800 (PST)
+	id 5FD9D2A0501; Thu,  5 Mar 2020 14:39:44 -0800 (PST)
 From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Mar 2020 14:39:35 -0800
-Message-Id: <20200305223937.12418-5-jpuhlman@mvista.com>
+Date: Thu,  5 Mar 2020 14:39:36 -0800
+Message-Id: <20200305223937.12418-6-jpuhlman@mvista.com>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200305223937.12418-1-jpuhlman@mvista.com>
 References: <20200305223937.12418-1-jpuhlman@mvista.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 5/7] net-snmp: multilib fixes
+Subject: [meta-networking][PATCH 6/7] proftpd: remove macro-prefix-map from prxs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,45 +68,26 @@ Content-Transfer-Encoding: 8bit
 
 From: Jeremy Puhlman <jpuhlman@mvista.com>
 
-net-snmp/net-snmp-config.h:
-- encodes type sizes
-- encodes pathing into the libdir
-net-snmp-config:
-- encodes build configuration data and lib pathing.
+macro-prefix-map points to build WORKDIR which will
+cause reproducibilty failures.
 
 Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
 ---
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index 91c50c4e3..762dec48c 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -35,7 +35,7 @@ SRC_URI[sha256sum] = "b2fc3500840ebe532734c4786b0da4ef0a5f67e51ef4c86b3345d697e4
- UPSTREAM_CHECK_URI = "https://sourceforge.net/projects/net-snmp/files/net-snmp/"
- UPSTREAM_CHECK_REGEX = "/net-snmp/(?P<pver>\d+(\.\d+)+)/"
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
+index 409947265..a080bec81 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
+@@ -110,6 +110,7 @@ do_install () {
+     sed -e 's|--sysroot=${STAGING_DIR_HOST}||g' \
+         -e 's|${STAGING_DIR_NATIVE}||g' \
+         -e 's|-fdebug-prefix-map=[^ ]*||g' \
++        -e 's|-fmacro-prefix-map=[^ ]*||g' \
+         -i ${D}/${bindir}/prxs
  
--inherit autotools-brokensep update-rc.d siteinfo systemd pkgconfig perlnative ptest
-+inherit autotools-brokensep update-rc.d siteinfo systemd pkgconfig perlnative ptest multilib_script multilib_header
- 
- EXTRA_OEMAKE = "INSTALL_PREFIX=${D} OTHERLDFLAGS='${LDFLAGS}' HOST_CPPFLAGS='${BUILD_CPPFLAGS}'"
- 
-@@ -138,6 +138,8 @@ do_install_append() {
-             -e "s@^NSC_LIBDIR=-L.*@NSC_LIBDIR=-L\$\{libdir\}@g" \
-             -i ${D}${bindir}/net-snmp-config
-     fi
-+
-+    oe_multilib_header net-snmp/net-snmp-config.h
- }
- 
- do_install_ptest() {
-@@ -270,3 +272,5 @@ RREPLACES_${PN}-server-snmptrapd += "${PN}-server-snmptrapd-systemd"
- RCONFLICTS_${PN}-server-snmptrapd += "${PN}-server-snmptrapd-systemd"
- 
- LEAD_SONAME = "libnetsnmp.so"
-+
-+MULTILIB_SCRIPTS = "${PN}-dev:${bindir}/net-snmp-config"
+     # ftpmail perl script, which reads the proftpd log file and sends
 -- 
 2.20.1
 
