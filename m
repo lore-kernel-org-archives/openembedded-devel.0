@@ -1,49 +1,53 @@
-Return-Path: <offougajoris@gmail.com>
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com
-	[209.85.221.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C7C26060B
+Return-Path: <robert.berger.oe.devel@gmail.com>
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com
+	[209.85.128.46])
+	by mail.openembedded.org (Postfix) with ESMTP id D2E9561147
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2020 15:06:47 +0000 (UTC)
-Received: by mail-wr1-f51.google.com with SMTP id v11so5485108wrm.9
+	Thu,  5 Mar 2020 15:33:02 +0000 (UTC)
+Received: by mail-wm1-f46.google.com with SMTP id a132so6824432wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Mar 2020 07:06:48 -0800 (PST)
+	Thu, 05 Mar 2020 07:33:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ocZeE+thGErsQfJdquysW9bXeTdXzARYf9x9Jz+ZHuA=;
-	b=IBPvyCQ7mkae/JNNoS3VM7VjLTyfx2khMCEKiwg07nXzSjAxZgoo9G+gwlj7Onpc5u
-	nQ7odULjNAW6JkASk6uRGSExBbB9wJUT6Bv7Kw0BJ3zxgLlFn4iURKALe+Ddx4/pKp7u
-	b0xCnMoJp2hlvDYN7ZBbTGf93DbMhgyFiydInpbT1rwEQQu0L/Wmu4+Hjq76FrqHg2o3
-	9o+kqojQg3rjpQwkfD0hjcUo7XH9geto05PLY815cfJRvsYNObONavaREbzfS9tDMxmT
-	TEnVe4C6XU6H1iYn/8DH+QilVbenMlwpEQ/eb82HI0hcMXj6qgP7HmcMlU19gvhzCBjG
-	bGpw==
+	h=to:cc:from:subject:message-id:date:user-agent:mime-version
+	:content-language:content-transfer-encoding;
+	bh=q1XKZcBWfEh/VykEXAQswckChTM8MTM6s03qaFO6kZU=;
+	b=NRqD7I+CyezFOTs9pf3l7H0xgO+jiTYr7ln+sR71QrjXf0tu/xknfgfv8eYHt0JUd5
+	0+H5UHfFf6uJi/KsZjQLO0ehpoNocUqfoxUYrHeXQTqooOTJJ6hP4RhFGTgCa7j7k0rM
+	wJK3iWYtdg+jkgR6dfgDzUCpE7+5bve492l06p17N9m4ZBckbvfAI+0vkC6rO46bsio8
+	Df2+wWCD7E3HZIS2I3sB1AKIpB8V3Dt+hNi76hpXKniM+tI3PmQbHvMBvJ5lg1gXqjpp
+	F9oMgjjh2fuEev0EHP6XSBcFPTDCa3A92zy1bOxj4RTogkeWW0bkTNGubArE2Y1Rlv6j
+	ebNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=ocZeE+thGErsQfJdquysW9bXeTdXzARYf9x9Jz+ZHuA=;
-	b=f5lTZAf113FLhEzPd2xW69E3AHsTrJbzP9lcZ2A8HbhFkdrxvQXjRhd72jD9b/J8G5
-	uqLXxJr6YYObhOn2hUkrZN/mjIfnDP/9UJegePCrS6TQwyNwYdCe6kDtQC9KLI4JLUoT
-	RPynQFu78WZ58p9WJuVtVRP/7oEHkjtC0fobE0BErsrOb7P1sFO851eG93a2lpb1oOQX
-	ULLwAjUapJqPr28AxguRvDId6CpOluJIADmSZMbrTQM7Pga6q+IuJZSxOEwMLBwPCvYI
-	98/sUyUnJrCS+dcJi1L9NTDcbTMdwNUIEg/6L/TIkHUOW6BquhPw2TSDMDpob2RqRRLF
-	jBag==
-X-Gm-Message-State: ANhLgQ3Ph/ryPTmFZaMy+HepsPcd+/7B1PczcvSv/GzImZ/VABFTsKi4
-	ZqaKtp0Sy8CXYZrUz/aMLDUZsIDQCA4=
-X-Google-Smtp-Source: ADFU+vtTJ/fMSBvC4i0LXQyj0DkG51/MppJMjSRSI5aMjZFOcvKqvqfCLlQLtGRlr7x8zoqVNGYImA==
-X-Received: by 2002:a5d:4f12:: with SMTP id c18mr10684071wru.329.1583420807566;
-	Thu, 05 Mar 2020 07:06:47 -0800 (PST)
-Received: from XPS-15-7590.home ([2a01:cb19:16b:9900:658e:2ae4:3d5f:17d])
-	by smtp.gmail.com with ESMTPSA id f6sm9241504wmh.29.2020.03.05.07.06.46
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 05 Mar 2020 07:06:46 -0800 (PST)
-From: Joris Offouga <offougajoris@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Mar 2020 16:08:09 +0100
-Message-Id: <20200305150809.6991-1-offougajoris@gmail.com>
-X-Mailer: git-send-email 2.20.1
+	h=x-gm-message-state:to:cc:from:subject:message-id:date:user-agent
+	:mime-version:content-language:content-transfer-encoding;
+	bh=q1XKZcBWfEh/VykEXAQswckChTM8MTM6s03qaFO6kZU=;
+	b=jcTEf83nze7owecAR4UUe9q4tfw6V5DlUlsgxY/Xyx3lfS5DQWwF7JDsJcJxuZxCbL
+	km05SGefyo9YNHFOe7RTZBVOWZaJ5s0HT2+KDtBRe0NnOPZ2l2xqC9dS1qOehJi7gjYG
+	HCrD3W0aQ7RAMVCiTnqm5dopS4+wP+mcCec/Zr+fSlc99cSzF+ZyMPfyZS2B7M/TvcIA
+	C7Qc1XbXJRZqh7cB2bC3JwRIqlJKVVPUGXe5veczQ7JVI2mZ6aD9Tr6Tagow01FMAUut
+	7E2IO342mpEYC5d20A+Ux6SbYQQY1bnU+0u4Urx34Mk/o/V0kZlwoqdr/MW5wz1Uk42/
+	dn/w==
+X-Gm-Message-State: ANhLgQ39p/UnF74cPDFz539Y8JmtDR3fZjQ7T+qsiYXnVc9iFcUz6Ht/
+	0Y10UDlT3OnMGfZG4E1mGWRCr1Pu
+X-Google-Smtp-Source: ADFU+vsrSY/maMFZiAHvE19HD20ljanLrAGCfYlmfA5bt7CzTaSTcnTfjnc1p2bEN1SesoXHN9OL1A==
+X-Received: by 2002:a05:600c:24d2:: with SMTP id
+	18mr10209026wmu.149.1583422383065; 
+	Thu, 05 Mar 2020 07:33:03 -0800 (PST)
+Received: from ?IPv6:2a02:587:3b17:4058:898f:61bf:ff8a:d241?
+	([2a02:587:3b17:4058:898f:61bf:ff8a:d241])
+	by smtp.gmail.com with ESMTPSA id x9sm3687442wrx.0.2020.03.05.07.33.01
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Thu, 05 Mar 2020 07:33:02 -0800 (PST)
+To: Richard Leitner <richard.leitner@skidata.com>
+From: "robert.berger.oe.devel" <robert.berger.oe.devel@gmail.com>
+Message-ID: <4c466104-c2f3-0ad6-447a-f6bc3496c25a@gmail.com>
+Date: Thu, 5 Mar 2020 17:33:00 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.4.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] monit: new package
+Cc: openembedded-devel@lists.openembedded.org
+Subject: issue with -Wno-unknown-warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,177 +60,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2020 15:06:48 -0000
+X-List-Received-Date: Thu, 05 Mar 2020 15:33:03 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Joris Offouga <offougajoris@gmail.com>
----
- meta-oe/recipes-support/monit/monit/monit     | 42 +++++++++++++++
- meta-oe/recipes-support/monit/monit/monitrc   | 44 +++++++++++++++
- meta-oe/recipes-support/monit/monit_5.26.0.bb | 53 +++++++++++++++++++
- 3 files changed, 139 insertions(+)
- create mode 100644 meta-oe/recipes-support/monit/monit/monit
- create mode 100644 meta-oe/recipes-support/monit/monit/monitrc
- create mode 100644 meta-oe/recipes-support/monit/monit_5.26.0.bb
+Hi Richard,
 
-diff --git a/meta-oe/recipes-support/monit/monit/monit b/meta-oe/recipes-support/monit/monit/monit
-new file mode 100644
-index 000000000..394704e06
---- /dev/null
-+++ b/meta-oe/recipes-support/monit/monit/monit
-@@ -0,0 +1,42 @@
-+#! /bin/sh 
-+#
-+# This is an init script for openembedded
-+# Copy it to /etc/init.d/monit and type
-+# > update-rc.d monit defaults 89
-+#
-+monit=/usr/bin/monit
-+pidfile=/var/run/monit.pid
-+monit_args="-c /etc/monitrc"
-+
-+test -x "$monit" || exit 0
-+
-+case "$1" in
-+  start)
-+    echo -n "Starting Monit"
-+    start-stop-daemon --start --quiet --exec $monit -- $monit_args
-+    RETVAL=$?
-+    echo "."
-+    ;;
-+  stop)
-+    echo -n "Stopping Monit"
-+    start-stop-daemon --stop --quiet --pidfile $pidfile
-+    RETVAL=$?
-+    echo "."
-+    ;;
-+  restart)
-+    $0 stop
-+    $0 start
-+    RETVAL=$?
-+    ;;
-+  status)
-+    $monit $monit_args status
-+    RETVAL=$?
-+    echo "."
-+    ;;
-+  *)
-+    echo "Usage: $0 {start|stop|restart|status}"
-+    exit 1
-+esac
-+
-+exit $RETVAL
-+
-diff --git a/meta-oe/recipes-support/monit/monit/monitrc b/meta-oe/recipes-support/monit/monit/monitrc
-new file mode 100644
-index 000000000..f8d6a4388
---- /dev/null
-+++ b/meta-oe/recipes-support/monit/monit/monitrc
-@@ -0,0 +1,44 @@
-+###############################################################################
-+## Monit control file
-+###############################################################################
-+##
-+## Comments begin with a '#' and extend through the end of the line. Keywords
-+## are case insensitive. All path's MUST BE FULLY QUALIFIED, starting with '/'.
-+##
-+## Below you will find examples of some frequently used statements. For
-+## information about the control file and a complete list of statements and
-+## options, please have a look in the Monit manual.
-+##
-+##
-+###############################################################################
-+## Global section
-+###############################################################################
-+##
-+## Start Monit in the background (run as a daemon):
-+#
-+set daemon  30              # check services at 30 seconds intervals
-+#   with start delay 240    # optional: delay the first check by 4-minutes (by
-+#                           # default Monit check immediately after Monit start)
-+#
-+#
-+## Set syslog logging. If you want to log to a standalone log file instead,
-+## specify the full path to the log file
-+#
-+set log syslog
-+
-+set httpd port 2812
-+    allow 0.0.0.0/0        # allow localhost to connect to the server and
-+    allow admin:monit      # require user 'admin' with password 'monit'
-+    #with ssl {            # enable SSL/TLS and set path to server certificate
-+    #    pemfile: /etc/ssl/certs/monit.pem
-+    #}
-+
-+###############################################################################
-+## Includes
-+###############################################################################
-+##
-+## It is possible to include additional configuration parts from other files or
-+## directories.
-+#
-+include /etc/monit.d/*
-+
-diff --git a/meta-oe/recipes-support/monit/monit_5.26.0.bb b/meta-oe/recipes-support/monit/monit_5.26.0.bb
-new file mode 100644
-index 000000000..a954682d6
---- /dev/null
-+++ b/meta-oe/recipes-support/monit/monit_5.26.0.bb
-@@ -0,0 +1,53 @@
-+DESCRIPTION = "Monit is a free open source utility for managing and monitoring, \
-+processes, programs, files, directories and filesystems on a UNIX system. \
-+Monit conducts automatic maintenance and repair and can execute meaningful \
-+causal actions in error situations."
-+
-+HOMEPAGE = "http://mmonit.com/monit/"
-+
-+LICENSE = "AGPL-3.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=ea116a7defaf0e93b3bb73b2a34a3f51 \
-+                    file://libmonit/COPYING;md5=2405f1c59ed1bf3714cebdb40162ce92"
-+
-+SRC_URI = " \
-+	https://mmonit.com/monit/dist/monit-${PV}.tar.gz \
-+	file://monit \
-+	file://monitrc \
-+"
-+
-+SRC_URI[md5sum] = "9f7dc65e902c103e4c5891354994c3df"
-+SRC_URI[sha256sum] = "87fc4568a3af9a2be89040efb169e3a2e47b262f99e78d5ddde99dd89f02f3c2"
-+
-+DEPENDS = "zlib bison-native libnsl2 flex-native openssl virtual/crypt"
-+
-+inherit autotools-brokensep systemd update-rc.d
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
-+PACKAGECONFIG[pam] = "--with-pam,--without-pam,libpam"
-+
-+EXTRA_OECONF = "\
-+    libmonit_cv_setjmp_available=no \
-+    libmonit_cv_vsnprintf_c99_conformant=no \
-+    --with-ssl-lib-dir=${STAGING_LIBDIR} \
-+    --with-ssl-incl-dir=${STAGING_INCDIR} \
-+"
-+
-+SYSTEMD_SERVICE_${PN} = "monit.service"
-+SYSTEMD_AUTO_ENABLE = "enable"
-+
-+INITSCRIPT_PACKAGES = "${PN}"
-+INITSCRIPT_NAME_${PN} = "monit"
-+INITSCRIPT_PARAMS_${PN} = "defaults 89"
-+
-+do_install_append() {
-+
-+    # Configuration file
-+    install -Dm 0600 ${WORKDIR}/monitrc ${D}${sysconfdir}/monitrc
-+
-+    # SystemD
-+    install -Dm 0644 ${S}/system/startup/monit.service.in ${D}${systemd_system_unitdir}/monit.service
-+    sed -i -e 's,@prefix@,${exec_prefix},g' ${D}${systemd_unitdir}/system/monit.service
-+
-+    # SysV
-+    install -Dm 0755 ${WORKDIR}/monit ${D}${sysconfdir}/init.d/monit
-+}
--- 
-2.20.1
+Sorry for coming back after such a long time, but I am pretty busy;)
+
+Anyhow, I tried what you suggested in some off-list e-mail:
+
+ >> 1.2) You need 2 patches [2][3]
+ >>
+ >> [2] 
+https://github.com/RobertBerger/meta-java/commit/898a0ae33c9102387aae2e3427a007e3935e663e
+ >
+ > That's basically fine, but in case of icedtea7-native this restricts the
+ > host compilers to >= gcc9. Therefore you should also add
+ > "-Wno-unknown-warning".
+ >
+ > Furthermore please remove the "old" line instead of adding it as a 
+comment.
+
+Here is what I did as per your suggestion:
+
+https://github.com/RobertBerger/meta-java/commit/3d8ae5afb639ec7abcc48f15c74b42b373863c57
+
+ >
+ >
+ >>
+ >> [3] 
+https://github.com/RobertBerger/meta-java/commit/213b40c25602d23d00366149a778d2e53779b018
+ >
+ > Looks good.
+
+
+... but it does not build:
+
+https://pastebin.com/B1nxHcPH
+
+cc1plus: error: unrecognized command line option ‘-Wno-unknown-warning’ 
+[-Werror]
+
+That's my host gcc:
+
+pokyuser@3a469e7032d9:/workdir$ gcc --version
+gcc (Ubuntu 9.2.1-17ubuntu1~16.04) 9.2.1 20191102
+Copyright (C) 2019 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+pokyuser@3a469e7032d9:/workdir$
+
+Please advise.
+
+Regards,
+
+Robert
+
+
 
 
