@@ -1,56 +1,24 @@
-Return-Path: <jpuhlman@gmail.com>
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com
-	[209.85.210.180])
-	by mail.openembedded.org (Postfix) with ESMTP id ECD1961134
+Return-Path: <Changqing.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9457060C4D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Mar 2020 22:39:45 +0000 (UTC)
-Received: by mail-pf1-f180.google.com with SMTP id g21so83416pfb.5
+	Fri,  6 Mar 2020 04:35:11 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 0264Ykhu017526
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Mar 2020 14:39:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=KJPlBw0YHDyVCCHKwxVvbzdB294UHdSk+pK3kuG2Yvg=;
-	b=L4Yt6aziXfc7fL8obvHZE49Heqbd4WiyCj4cxDWAFVVHF177rzo7kp5sB2Ukk+Z3Ji
-	XcFbMacVzT8K+/GuSiQbG8U1+O7I+D45/+we3pKloq5BFSGLv1lfvZK6YYzVWS9bpvBt
-	WTZF38t/mM2x+yxWrJsHpY8nrnPfpRqjMm9ti57cqxuwLA9QjN1lRK6QpJZarh8RZFf2
-	yYv7vbCGMpyhmMvquxgYZsse5P9oerfu2NhtHKJj1xwEDroZUHQ913hwsrWExqUQdT3Q
-	3bqF58pTPX2d7oNWR1AS7HtZyqurYVmMbaSAeGx1v5Kjr8D5HNFDe2JkJ4o/B5GgkJql
-	8oig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-	:in-reply-to:references:mime-version:content-transfer-encoding;
-	bh=KJPlBw0YHDyVCCHKwxVvbzdB294UHdSk+pK3kuG2Yvg=;
-	b=OZWKXDx2v8nqTozoZknT7VNga7u+/1mhfCkP5MwioZvfvjHW0SpknupbIfKElFzWcd
-	B3f41443SoMzf/cxq/7YON5/gXpZ70ZwAuv9bGjEcJdfo6Jvi3zDukJvu+pTiL3cXM3s
-	8coOEDWUuGMrVp8Wc9zF8yCspQrSNWU643BhUMJsKNVj6ZT2sDotyQP6Bf661TnrSX35
-	orS2CB2Xfd3oeTxOJmyiWGzNqBwr6VzQW3Dtenm4eANxahUqsX0gNc5JhO8yJfYFJ2Gk
-	VLG9Ae7qPT67gbvzepnDAdClrgQs3EjB7FsM+MtOSe7OTRCIuCBOxQ00jzhCGqHxKSKP
-	SBAA==
-X-Gm-Message-State: ANhLgQ2TmbosUUlnOXsh5YJSW9eI1URJEo7qRkCvAw2B4V805u8w0xpS
-	xlQ/b4d2YTmMY67Hg6X64MpVB4gRwWM=
-X-Google-Smtp-Source: ADFU+vu7AuIAsdd9rNU9ZVAggOKUia82TmO7/XTFwfehRYMkfl7BMTvgpYC40mmGn4hJlwaSy7UvQA==
-X-Received: by 2002:aa7:8b03:: with SMTP id f3mr591761pfd.133.1583447986729;
-	Thu, 05 Mar 2020 14:39:46 -0800 (PST)
-Received: from workhorse.localdomain
-	([2600:1700:4c90:60a0:56be:f7ff:fe12:d0bd])
-	by smtp.gmail.com with ESMTPSA id
-	g9sm33711247pfm.150.2020.03.05.14.39.45
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 05 Mar 2020 14:39:46 -0800 (PST)
-Sender: Jeremy Puhlman <jpuhlman@gmail.com>
-Received: by workhorse.localdomain (Postfix, from userid 1000)
-	id 55E5F2A07BB; Thu,  5 Mar 2020 14:39:45 -0800 (PST)
-From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Mar 2020 14:39:37 -0800
-Message-Id: <20200305223937.12418-7-jpuhlman@mvista.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200305223937.12418-1-jpuhlman@mvista.com>
-References: <20200305223937.12418-1-jpuhlman@mvista.com>
+	Thu, 5 Mar 2020 20:35:02 -0800
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.487.0; Thu, 5 Mar 2020 20:34:37 -0800
+From: <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 6 Mar 2020 12:34:35 +0800
+Message-ID: <1583469275-310604-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 7/7] proftpd: make prxs a mulitlib script
+Subject: [meta-oe][PATCH] python3-pygobject: remove this recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,43 +31,193 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Mar 2020 22:39:46 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 06 Mar 2020 04:35:11 -0000
+Content-Type: text/plain
 
-From: Jeremy Puhlman <jpuhlman@mvista.com>
+From: Changqing Li <changqing.li@windriver.com>
 
-Script encodes compiler settings and compiler name.
+python3-pygobject already in oe-core, previously,
+we have python-pygobject in meta-oe, but recently, in order
+to drop python2, we transfer python-pygobject to
+python3-pygobject, so duplicated with oe-core, meantime,
+this will cause test_signature failure when do yocto-check-layer
+for layer meta-oe.
 
-my $compiler = q(x86_64-poky-linux-gcc  -m64 -march=nehalem -mtune=generic -mfpmath=sse -msse4.2 );
-
-Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ---
- meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ .../0001-python-pyobject-fix-install-dir.patch     | 121 ---------------------
+ .../python/python3-pygobject_3.34.0.bb             |  33 ------
+ 2 files changed, 154 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/python/python3-pygobject/0001-python-pyobject-fix-install-dir.patch
+ delete mode 100644 meta-oe/recipes-devtools/python/python3-pygobject_3.34.0.bb
 
-diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-index a080bec81..d5bbdd374 100644
---- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-+++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
-@@ -16,7 +16,7 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
- iSRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
- SRC_URI[sha256sum] = "91ef74b143495d5ff97c4d4770c6804072a8c8eb1ad1ecc8cc541b40e152ecaf"
- 
--inherit autotools-brokensep useradd update-rc.d systemd
-+inherit autotools-brokensep useradd update-rc.d systemd multilib_script
- 
- PACKAGECONFIG ??= "shadow \
-                    ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6 pam', d)} \
-@@ -134,6 +134,8 @@ GROUPADD_PARAM_${PN} = "--system ${FTPGROUP}"
- USERADD_PARAM_${PN} = "--system -g ${FTPGROUP} --home-dir /var/lib/${FTPUSER} --no-create-home \
-                        --shell /bin/false ${FTPUSER}"
- 
-+MULTILIB_SCRIPTS = "${PN}:${bindir}/prxs"
-+
- FILES_${PN} += "/home/${FTPUSER}"
- 
- RDEPENDS_${PN} += "perl"
+diff --git a/meta-oe/recipes-devtools/python/python3-pygobject/0001-python-pyobject-fix-install-dir.patch b/meta-oe/recipes-devtools/python/python3-pygobject/0001-python-pyobject-fix-install-dir.patch
+deleted file mode 100644
+index 848cda5..0000000
+--- a/meta-oe/recipes-devtools/python/python3-pygobject/0001-python-pyobject-fix-install-dir.patch
++++ /dev/null
+@@ -1,121 +0,0 @@
+-From 8b4648d5bc50cb1c14961ed38bf97d5a693f5237 Mon Sep 17 00:00:00 2001
+-From: Changqing Li <changqing.li@windriver.com>
+-Date: Mon, 24 Jun 2019 14:51:52 +0800
+-Subject: [PATCH] python-pyobject: fix the wrong install dir for python2
+-
+-* after upgrade to 3.32.1, pygobject switch to build with meson, and
+-  default python option is python3, switch to python2
+-
+-* default install dir get by python.install_sources and 
+-python.get_install_dir is get from python's sysconfig info,
+-not like python3, for python2, the install dir include the basedir of
+-recipe-sysroot-native, add stagedir option for user to config
+-correct install dir.
+-
+-Upstream-Status: Inappropriate [oe-specific]
+-
+-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+----
+- gi/meson.build            | 7 +++----
+- gi/overrides/meson.build  | 4 ++--
+- gi/repository/meson.build | 4 ++--
+- meson.build               | 4 +++-
+- meson_options.txt         | 1 +
+- pygtkcompat/meson.build   | 4 ++--
+- 6 files changed, 13 insertions(+), 11 deletions(-)
+-
+-diff --git a/gi/meson.build b/gi/meson.build
+-index c1afd68..249c23d 100644
+---- a/gi/meson.build
+-+++ b/gi/meson.build
+-@@ -60,9 +60,8 @@ python_sources = [
+-   'types.py',
+- ]
+- 
+--python.install_sources(python_sources,
+--  pure : false,
+--  subdir : 'gi'
+-+install_data(python_sources,
+-+  install_dir: join_paths(stagedir, 'gi')
+- )
+- 
+- # https://github.com/mesonbuild/meson/issues/4117
+-@@ -76,7 +75,7 @@ giext = python.extension_module('_gi', sources,
+-   dependencies : [python_ext_dep, glib_dep, gi_dep, ffi_dep],
+-   include_directories: include_directories('..'),
+-   install: true,
+--  subdir : 'gi',
+-+  install_dir: join_paths(stagedir, 'gi'),
+-   c_args: pyext_c_args + main_c_args
+- )
+-
+-diff --git a/gi/overrides/meson.build b/gi/overrides/meson.build
+-index 6ff073f..964fef1 100644
+---- a/gi/overrides/meson.build
+-+++ b/gi/overrides/meson.build
+-@@ -10,6 +10,6 @@ python_sources = [
+-   'keysyms.py',
+-   '__init__.py']
+- 
+--python.install_sources(python_sources,
+--  subdir : join_paths('gi', 'overrides')
+-+install_data(python_sources,
+-+  install_dir: join_paths(stagedir, 'gi', 'overrides')
+- )
+-diff --git a/gi/repository/meson.build b/gi/repository/meson.build
+-index fdc136b..fc88adf 100644
+---- a/gi/repository/meson.build
+-+++ b/gi/repository/meson.build
+-@@ -1,5 +1,5 @@
+- python_sources = ['__init__.py']
+- 
+--python.install_sources(python_sources,
+--  subdir : join_paths('gi', 'repository')
+-+install_data(python_sources,
+-+  install_dir: join_paths(stagedir, 'gi', 'repository')
+- )
+-diff --git a/meson.build b/meson.build
+-index d27a005..ecd55d5 100644
+---- a/meson.build
+-+++ b/meson.build
+-@@ -165,12 +165,14 @@ else
+-   py_version = pygobject_version
+- endif
+- 
+-+stagedir = get_option('stagedir')
+-+
+- pkginfo_conf = configuration_data()
+- pkginfo_conf.set('VERSION', py_version)
+- configure_file(input : 'PKG-INFO.in',
+-   output : 'PyGObject-@0@.egg-info'.format(py_version),
+-   configuration : pkginfo_conf,
+--  install_dir : python.get_install_dir(pure : false))
+-+  install_dir : stagedir)
+- 
+- subdir('gi')
+- subdir('pygtkcompat')
+-diff --git a/meson_options.txt b/meson_options.txt
+-index 5dd4cbc..21def16 100644
+---- a/meson_options.txt
+-+++ b/meson_options.txt
+-@@ -1,3 +1,4 @@
+- option('python', type : 'string', value : 'python3')
+- option('pycairo', type : 'boolean', value : true, description : 'build with pycairo integration')
+- option('tests', type : 'boolean', value : true, description : 'build unit tests')
+-+option('stagedir', type : 'string', value : '')
+-diff --git a/pygtkcompat/meson.build b/pygtkcompat/meson.build
+-index 9e43c44..ef3322d 100644
+---- a/pygtkcompat/meson.build
+-+++ b/pygtkcompat/meson.build
+-@@ -3,6 +3,6 @@ python_sources = [
+-   'generictreemodel.py',
+-   'pygtkcompat.py']
+- 
+--python.install_sources(python_sources,
+--  subdir : 'pygtkcompat'
+-+install_data(python_sources,
+-+  install_dir: join_paths(stagedir, 'pygtkcompat')
+- )
+--- 
+-2.7.4
+-
+diff --git a/meta-oe/recipes-devtools/python/python3-pygobject_3.34.0.bb b/meta-oe/recipes-devtools/python/python3-pygobject_3.34.0.bb
+deleted file mode 100644
+index e06f4dc..0000000
+--- a/meta-oe/recipes-devtools/python/python3-pygobject_3.34.0.bb
++++ /dev/null
+@@ -1,33 +0,0 @@
+-SUMMARY = "Python GObject bindings"
+-HOMEPAGE = "http://www.pygtk.org/"
+-SECTION = "devel/python"
+-LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a916467b91076e631dd8edb7424769c7"
+-
+-GNOMEBASEBUILDCLASS = "meson"
+-inherit gnomebase gobject-introspection distutils3-base upstream-version-is-even
+-
+-DEPENDS += "python3 glib-2.0"
+-
+-SRCNAME = "pygobject"
+-SRC_URI = " \
+-    http://ftp.gnome.org/pub/GNOME/sources/${SRCNAME}/${@gnome_verdir("${PV}")}/${SRCNAME}-${PV}.tar.xz \
+-"
+-
+-SRC_URI[md5sum] = "ca1dc4f31c1d6d283758e8f315a88ab6"
+-SRC_URI[sha256sum] = "87e2c9aa785f352ef111dcc5f63df9b85cf6e05e52ff04f803ffbebdacf5271a"
+-
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+-UNKNOWN_CONFIGURE_WHITELIST = "introspection"
+-
+-PACKAGECONFIG ??= ""
+-
+-PACKAGECONFIG[cairo] = "-Dpycairo=true,-Dpycairo=false, cairo python-pycairo, python-pycairo"
+-PACKAGECONFIG[tests] = "-Dtests=true, -Dtests=false, , "
+-
+-EXTRA_OEMESON_append = " -Dpython=python3"
+-
+-BBCLASSEXTEND = "native"
+-RDEPENDS_${PN} = "python3-pkgutil"
+-RDEPENDS_${PN}_class-native = ""
 -- 
-2.20.1
+2.7.4
 
 
