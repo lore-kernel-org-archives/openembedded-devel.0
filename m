@@ -1,58 +1,58 @@
-Return-Path: <jpuhlman@mvista.com>
-Received: from mail-ot1-f67.google.com (mail-ot1-f67.google.com
-	[209.85.210.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 05EEE61086
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f196.google.com (mail-pl1-f196.google.com
+	[209.85.214.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BA096025F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Mar 2020 17:48:48 +0000 (UTC)
-Received: by mail-ot1-f67.google.com with SMTP id j14so3253255otq.3
+	Sat,  7 Mar 2020 01:36:20 +0000 (UTC)
+Received: by mail-pl1-f196.google.com with SMTP id y1so1578963plp.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Mar 2020 09:48:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=NUAEO03oH7VjfxxlEhbMVaooNGp2r5D8gxWXjnDm5dU=;
-	b=icyqctGoOoGCt3lxmHCHioIRTmHSvyHtDm8aKNuXGmSIcd0CIHOJtdGDEJHk2uHzk6
-	m7hVLAO7zAYMWLe9hpmkhsWMG82jx+/YPh21F2KC5CGRgrsN2TTpGp0b3bekV6HnsTkc
-	fNafbeclEzBFtZuExRJmXLYrJ+sYMvX3TC0l/x2cuZcCI4Gv0dUCi8pL/PVtkHJ3cF96
-	8r1oZi1zNXQI13wveuNXcIPhgKzxx3deKXLdyrcUWPXy75HPXAkBLOG198qrT0D/r+XQ
-	zgRj1xh7qLnIgVHFcTCawhC46Oa9EOWeIKtaBxynt3UXWqQkfXVhXDSKXjiKtH7QOeel
-	tNaQ==
+	Fri, 06 Mar 2020 17:36:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language:content-transfer-encoding;
+	bh=YNBNWiSGDvakVUUFXcB9DxmMzLUzrlJtxW5bM8KtdKg=;
+	b=oMeLYzQR/4G9hQUCvdPH0C+hnURA7rQAQ8RvzruntH2HGxL7v0kp4qBdw2mqDCe3B7
+	lbmPaVk88jMbC4Fi04FiGHdMx9S2OPecyhEbkdQHDtWCOD8xA6jqSrG/xM/sf77vuXKm
+	3WJfQ3nTgoX6t86VHLjpVIbwggh+kFjo8DcEp6QWOLdnciftHuxLr2GGZ9SPTWRPfHpp
+	prBM6F7lZ7VJoYndTPftGf5eSxqc4LMU50Lrmlv52FdwzU8bD7xOqnqWqG/RaKeuJs6T
+	IkIiBr90Rvk8haed5a008t73/njftvWKHOku3Tp090Idsp+bd9xWUoFZfNZFl4K1Pnrg
+	qP/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=NUAEO03oH7VjfxxlEhbMVaooNGp2r5D8gxWXjnDm5dU=;
-	b=U4ylpfGX695prP6vzITgYc6j9HzKVMDTlDlZb+DBgkRZo3LVJ2OY5FHQe23ZbNVUsi
-	sL1rHxFH0ah3tehnG4SGSewDbSIct3YBqvQRGhKMSIs1Y/19TzpaLbhNYzVR3ECvQV3m
-	HZ53H2qm715tSkE3oTkcI55oObWom1mEvbqGWyjJU5RmGcEhEsM1T0p+vcxzafgBujWG
-	xXIzxpuzC/IeZxy2cdb/IkxTjoqFfLlyf/5rWK5buBgYK3YkC+EMxP9sIWOoFftpOsMs
-	6E+Kd8coFvIp69GvypiMXgP9OoHgOLsI2oJmphnB12qNWtdckMjKWVsKQiUk6r4w4TbY
-	iL5w==
-X-Gm-Message-State: ANhLgQ3MPGZd54w5tvW6Z/iuEx/u7NBXWR5H9Wob/jQAe06zKX8cOTfV
-	c7zeYyYIjaCkl2Je638qMw9HjLqo1SM=
-X-Google-Smtp-Source: ADFU+vsfDxYgP4d5G+PaaqGvxUVABSQd+eM8J5jgoQKmY6mB0ej1/aGDqm/XTALytQJA4T3yG2fUMA==
-X-Received: by 2002:a9d:748c:: with SMTP id t12mr3334995otk.38.1583516929407; 
-	Fri, 06 Mar 2020 09:48:49 -0800 (PST)
-Received: from ?IPv6:2600:1700:4c90:60a0:30e1:1fb2:1aa0:5ad3?
-	([2600:1700:4c90:60a0:30e1:1fb2:1aa0:5ad3])
-	by smtp.gmail.com with ESMTPSA id y130sm33302oie.48.2020.03.06.09.48.47
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=YNBNWiSGDvakVUUFXcB9DxmMzLUzrlJtxW5bM8KtdKg=;
+	b=KIu6mw8ACtmZXGznMGHUvYeOxRjKy9vbY4zp6pB+1rn7tEOvWdqe1VvaxlTSgq3ddJ
+	+i0ELdAijveZhmxOpXtvB8eKw0gFPZ7hQr9EQx+krWkayTDLS5BMJ+CoyqXhMEPR6VOW
+	bV3RAZ2gylXhsQcNQyDEEfiaE+a2hFnyRcgCXTsY2POsBnKQ1ubPlApbZLxoL+M6REbH
+	ztp90foFaHG5cO4dcGzzFVFfbpFH7/C3enB+rDr0ThS15BA9L/kfeFpIkLqMkxanNeEq
+	sIzKuyj90B6clVttoFFn0Xc3C0n6VTsBVAbTt+HWyoyagQpwCrEuT0NjTfbL+jIaiH5x
+	1wZw==
+X-Gm-Message-State: ANhLgQ2RF6ueppatXWksvGwMA7K/QwT0NgCivMLLq63iRRxUYgbxXcGB
+	n7ouabcPpdiF7aZtI8386GCTlGdaBcg=
+X-Google-Smtp-Source: ADFU+vsQF59dP4l4ygGoeZ0Sw/NqSMsLaQLDjOAlKALBpZb/XmhnDvqIlbzYzJ/mqOJfp4I4BYvBEQ==
+X-Received: by 2002:a17:90a:32aa:: with SMTP id
+	l39mr5917657pjb.184.1583544980919; 
+	Fri, 06 Mar 2020 17:36:20 -0800 (PST)
+Received: from ?IPv6:2601:646:9200:4e0:39eb:a2f5:6fb2:abe0?
+	([2601:646:9200:4e0:39eb:a2f5:6fb2:abe0])
+	by smtp.gmail.com with ESMTPSA id
+	b16sm8695097pff.25.2020.03.06.17.36.20
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 06 Mar 2020 09:48:48 -0800 (PST)
-To: Khem Raj <raj.khem@gmail.com>, Martin Jansa <martin.jansa@gmail.com>
-References: <1583473076-316898-1-git-send-email-changqing.li@windriver.com>
-	<CA+chaQeyJH+C1u6bmi+6oLm5EqwTUyavb_E1WBz7RNJ4+Yf4EQ@mail.gmail.com>
-	<CAMKF1sqK87OAVsNfumC0TZC+6U80NJ4aWzCx45pU+NK33ax=pw@mail.gmail.com>
-From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-Message-ID: <8fe016ad-faf5-32d7-bf5b-61758fcc2b66@mvista.com>
-Date: Fri, 6 Mar 2020 09:48:44 -0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
-	Thunderbird/68.5.0
+	Fri, 06 Mar 2020 17:36:20 -0800 (PST)
+To: "Jeremy A. Puhlman" <jpuhlman@mvista.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20200305223937.12418-1-jpuhlman@mvista.com>
+	<20200305223937.12418-4-jpuhlman@mvista.com>
+From: Khem Raj <raj.khem@gmail.com>
+Message-ID: <74c7eed5-4a2b-aeb2-2c4f-b89f335897a0@gmail.com>
+Date: Fri, 6 Mar 2020 17:36:19 -0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+	Gecko/20100101 Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqK87OAVsNfumC0TZC+6U80NJ4aWzCx45pU+NK33ax=pw@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] layer.conf: add meta-python to LAYERDEPENDS
+In-Reply-To: <20200305223937.12418-4-jpuhlman@mvista.com>
+Subject: Re: [meta-networking][PATCH 4/7] net-snmp: fix reproducibilty issues in net-snmp-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,92 +65,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Mar 2020 17:48:49 -0000
+X-List-Received-Date: Sat, 07 Mar 2020 01:36:22 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
-Content-Language: en-US
 
+Hi Jeremy
 
+On 3/5/20 2:39 PM, Jeremy A. Puhlman wrote:
+> From: Jeremy Puhlman <jpuhlman@mvista.com>
+> 
+> Both STAGING_HOST_DIR and -fmacro-prefix-map path to WORKDIR were
+> encoded in the config.
+> 
+> Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
+> ---
+>   meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+> index 317350e94..91c50c4e3 100644
+> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+> @@ -124,11 +124,13 @@ do_install_append() {
+>           -i ${D}${bindir}/net-snmp-create-v3-user
+>       sed -e 's@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g' \
+>           -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
+> +        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
+>           -e 's@[^ ]*--sysroot=[^ "]*@@g' \
+>           -e 's@[^ ]*--with-libtool-sysroot=[^ "]*@@g' \
+>           -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
+>           -e 's@[^ ]*PKG_CONFIG_PATH=[^ "]*@@g' \
+>           -e 's@[^ ]*PKG_CONFIG_LIBDIR=[^ "]*@@g' \
+> +        -e 's@${STAGING_DIR_HOST}@@g' \
 
-On 3/6/2020 8:12 AM, Khem Raj wrote:
-> On Thu, Mar 5, 2020 at 11:55 PM Martin Jansa <martin.jansa@gmail.com> wrote:
->> Can we fix mozjs instead?
-> perhaps thats better fix, maybe it can made optional via packageconfig ?
-> or marked incompatible if meta-python is not included
+This is causing problems, indirectly like
 
-So that would be the logical thing, but wont that fail the 
-yocto-layer-check, which
-was the original reason for the change request in the first place?
+https://errors.yoctoproject.org/Errors/Details/393851/
+https://errors.yoctoproject.org/Errors/Details/393852/
+https://errors.yoctoproject.org/Errors/Details/393853/
 
-One of the checks is that the configuration of packages is the same 
-before and
-after you add the new layer. If configuration changes in mozjs when you 
-add the
-meta-networking layer, that should trigger a fail. In this instance the 
-change
-is instituted by the original mozjs recipe so it should be legal, but I 
-don't think
-the checker is able to validate that is it?
+Since its editing out the paths, whats left is just /usr/lib
+and that gets added to compiler commandline as -L/usr/lib which
+thankfully gets caught by Build QA
 
->> On Fri, Mar 6, 2020 at 6:38 AM <changqing.li@windriver.com> wrote:
->>
->>> From: Changqing Li <changqing.li@windriver.com>
->>>
->>> yocto-check-layer/test_world failed since error:
->>> ERROR: test_world (common.CommonCheckLayer)
->>> ERROR: Nothing PROVIDES 'python3-pytoml-native' (but
->>> /meta-openembedded/meta-oe/recipes-extended/mozjs/mozjs_60.9.0.bb
->>> DEPENDS on or otherwise requires it). Close matches:
->>>    python3-numpy-native
->>>    python3-pycairo-native
->>>    python3-rpm-native
->>> ERROR: Required build target 'meta-world-pkgdata' has no buildable
->>> providers.
->>> Missing or unbuildable dependency chain was: ['meta-world-pkgdata',
->>> 'mozjs', 'python3-pytoml-native']
->>>
->>> mozjs depend on recipe under meta-python, but meta-python
->>> isn't in LAYERDEPENDS, so error occurred. Fix by add
->>> it into LAYERDEPENDS.
->>>
->>> Signed-off-by: Changqing Li <changqing.li@windriver.com>
->>> ---
->>>   meta-oe/conf/layer.conf | 5 ++++-
->>>   1 file changed, 4 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
->>> index c537736..0ce0ad2 100644
->>> --- a/meta-oe/conf/layer.conf
->>> +++ b/meta-oe/conf/layer.conf
->>> @@ -27,7 +27,10 @@ BBFILE_PRIORITY_openembedded-layer = "6"
->>>   # cause compatibility issues with other layers
->>>   LAYERVERSION_openembedded-layer = "1"
->>>
->>> -LAYERDEPENDS_openembedded-layer = "core"
->>> +LAYERDEPENDS_openembedded-layer = " \
->>> +    core \
->>> +    meta-python \
->>> +"
->>>
->>>   LAYERSERIES_COMPAT_openembedded-layer = "thud warrior zeus"
->>>
->>> --
->>> 2.7.4
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
--- 
-Jeremy A. Puhlman
-jpuhlman@mvista.com
-
+perhaps this regexp can be made less greedy
 
