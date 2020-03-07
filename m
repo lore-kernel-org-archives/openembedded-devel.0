@@ -1,52 +1,51 @@
-Return-Path: <jpuhlman@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 095F5607EC
+Return-Path: <adrian.freihofer@gmail.com>
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com
+	[209.85.128.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EB406021F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Mar 2020 04:06:10 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id ay11so1687537plb.0
+	Sat,  7 Mar 2020 15:20:28 +0000 (UTC)
+Received: by mail-wm1-f43.google.com with SMTP id a132so5542991wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Mar 2020 20:06:12 -0800 (PST)
+	Sat, 07 Mar 2020 07:20:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=tG/d6Zf2weNsXX1NySjSzxjSv6qbA0LjELS6HQaBCqo=;
-	b=JtB+JD0o7/S12WYd185jHpMDJQA5nD7onVZutjfZWwQwcgZvF8PL7IsCCPRI7VL++R
-	8oHWq8TO/TzYnMvTYxzubCoqZ5bJBAjGG3pcqPh1a4Giat9V5y/skOD27XA5b5JP4nOc
-	t2GC7CK4Bg5xuZsCJd3dPyMKEXENkBD7fqic6bnooYw6PmGYH8PnYsD7+h7P4m/FsEQw
-	N3hFOBIzNWspW9CEVsoMnamrOAZT5UUyl2SnfMw6UktOYzPlmOKfQlOnT2dMP8OS55z8
-	m7p2j35iL2eX0ErXtkxQ1zcdoem4Kg5Xr4JSR9I904AMP8MdGIYFxlARnikgLPh9/ilQ
-	ofuA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=HimC/hOdopdCAoQN9w+lSfKhz1gSFH23Qiwzcn/OO8w=;
+	b=JNRhAWYpGXPsoWyFEtaAAA1nZDjXSXLm1Uqz5UO/UJ/MV9VNQJs8FsV1Bxg/yOid/2
+	8kL9DRSGZ5t8oi4X4sa051vh1RkNHVG0pngiLqucInnyDCgvEPYjzVT2OXE3SiPu2mMV
+	qje/8OfsoMUAIiSMg28OF50P1Vx2p5KcvUhliJZGLaKFc3ON9V1XO07zPugxHkNMKAoL
+	7my8abtqh/SfSBwcaEqTw8vcv4/vVYq0L12sgM7x6rISc/WXHI+17WuyxJlA7flClh3N
+	oXNqaHb+GmdGy/ZEahxXDU6euJXhl9R5Qmxz9GRMHdHQ9emmffsh6i+4AYEhuXY+kMQR
+	pn3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=tG/d6Zf2weNsXX1NySjSzxjSv6qbA0LjELS6HQaBCqo=;
-	b=oxgw9ahy3jWbn+72XsGR4JshUT51cpM2C/aroE1JFQbu78Q7E20/Vcy8VXaTkuyx+b
-	laQCIPYNE4OnK+rAfjPtnc6k1W7+lfR6YiMP4DjMALwSfwxW0XLCJlO9tQZKS4YvlxLc
-	wepk5YUGVOs0yl7qHfteKTB8y2xDnsLwbM6MGrjdo+RMspOFdMISe2Eq3E2LEqiTe4rJ
-	u/iw8cVlIDzXxGWcEBIZzCf4qUI7O/rPy/Q0DKACiv5E5IB7FnL6KS1ZS4xPU+rKiWTH
-	F1lolvyq71CvuISJDyfFjh4fNHvr06DffqPbhstomH+HmZqXmZpoHMhuz+DJrNzZ3dFa
-	0qxg==
-X-Gm-Message-State: ANhLgQ1rRJjR7ncLXQe3XDrBLiBJMv0MQCl8MoI542qvXSvTJB3UXXVe
-	gc5isWFKw+RYn8ajAB+huPboLpJTyU4=
-X-Google-Smtp-Source: ADFU+vtfWv3FUv/85UdtQq2Iac3bx50uaR+1U1W5LLj7g72vZi4d5UWTj3OchPztaJQyRerKCuGRDA==
-X-Received: by 2002:a17:902:bd86:: with SMTP id
-	q6mr5632904pls.143.1583553971362; 
-	Fri, 06 Mar 2020 20:06:11 -0800 (PST)
-Received: from workhorse.localdomain
-	(99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
-	by smtp.gmail.com with ESMTPSA id
-	c17sm16366725pfo.71.2020.03.06.20.06.10
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=HimC/hOdopdCAoQN9w+lSfKhz1gSFH23Qiwzcn/OO8w=;
+	b=CLEMkcRyyKcFs8823lWvc6KyXajodVVsG9B8RO20JWZ7ZT0ZcwA3BlQ9cKmQcadvUs
+	8URpNgRBAKvBwf4O+KprFEK/0honOC3oGeTQkumg/xFgqyEw94MLL35YK0HUN3+0E0xC
+	GuN3HyJoflIJdi6jKRsDYzRw31/XF8Er/teOppao5v+vCyZTN526Zp3Vgj7yyyvpd7PH
+	gtLJkgahu5/W6jhwNqCxXsqPaMR0LYEB830I2sgdE7x35LeYZPqThpQqitwHbnn+5HjW
+	nkT1/bQ15roKTT63erFRE5GoYpf/PisfBdohIqD6+/r0t40fwAkn2wfUfrt1N8u/P8TR
+	pV6g==
+X-Gm-Message-State: ANhLgQ3w4GLnXkoYJXGcV/1BHPOZqcq1y5izbBEyrdNIVYUchhjl8dnq
+	nl6OIVZgWEskKCyBRMLyf2SAza9B/USs9Q==
+X-Google-Smtp-Source: ADFU+vsV4X38osE6j1Sl+1ZxxG1U/35AMPgg+v8nJGkEwm6XTiJKjuCDUCf6G2Rcz1DE2cAgW2tOHg==
+X-Received: by 2002:a1c:456:: with SMTP id 83mr10256135wme.54.1583594429379;
+	Sat, 07 Mar 2020 07:20:29 -0800 (PST)
+Received: from md2pfrec.ad001.siemens.net (c-82-192-240-69.customer.ggaweb.ch.
+	[82.192.240.69]) by smtp.gmail.com with ESMTPSA id
+	z13sm22823165wrw.88.2020.03.07.07.20.28
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 06 Mar 2020 20:06:10 -0800 (PST)
-Sender: Jeremy Puhlman <jpuhlman@gmail.com>
-Received: by workhorse.localdomain (Postfix, from userid 1000)
-	id 20E0F2A05DF; Fri,  6 Mar 2020 20:06:09 -0800 (PST)
-From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
+	Sat, 07 Mar 2020 07:20:28 -0800 (PST)
+From: Adrian Freihofer <adrian.freihofer@gmail.com>
+X-Google-Original-From: Adrian Freihofer <adrian.freihofer@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  6 Mar 2020 20:06:07 -0800
-Message-Id: <20200307040607.23866-1-jpuhlman@mvista.com>
-X-Mailer: git-send-email 2.13.3
-Subject: [meta-networking][PATCH v2] net-snmp: fix reproducibilty issues in net-snmp-config
+Date: Sat,  7 Mar 2020 16:20:10 +0100
+Message-Id: <20200307152011.3104080-1-adrian.freihofer@siemens.com>
+X-Mailer: git-send-email 2.24.1
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH v3 0/1] networkmanager: Upgrade 1.18.4 -> 1.22.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,34 +58,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Mar 2020 04:06:11 -0000
+X-List-Received-Date: Sat, 07 Mar 2020 15:20:29 -0000
+Content-Transfer-Encoding: 8bit
 
-Both STAGING_HOST_DIR and -fmacro-prefix-map path to WORKDIR were
-encoded in the config.
----
- meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 3 +++
- 1 file changed, 3 insertions(+)
+v3 adds two small patches. NetworkManager compiles now also with poky-tiny.
+Thank you for the hint.
 
-diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-index 9c2ffb2c7..5466649a8 100644
---- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-+++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
-@@ -124,11 +124,14 @@ do_install_append() {
-         -i ${D}${bindir}/net-snmp-create-v3-user
-     sed -e 's@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g' \
-         -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
-+        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
-         -e 's@[^ ]*--sysroot=[^ "]*@@g' \
-         -e 's@[^ ]*--with-libtool-sysroot=[^ "]*@@g' \
-         -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
-         -e 's@[^ ]*PKG_CONFIG_PATH=[^ "]*@@g' \
-         -e 's@[^ ]*PKG_CONFIG_LIBDIR=[^ "]*@@g' \
-+        -e 's@-L${STAGING_DIR_HOST}${libdir}@@g' \
-+        -e 's@-I${STAGING_DIR_HOST}${includedir}@@g' \
-         -i ${D}${bindir}/net-snmp-config
- 
-     if [ "${HAS_PERL}" = "1" ]; then
+Adrian Freihofer (1):
+  networkmanager: Upgrade 1.18.4 -> 1.22.8
+
+ ...e.ac-Fix-pkgconfig-sysroot-locations.patch |  6 +-
+ ...ttings-settings-property-documentati.patch | 23 ++++---
+ ...Fix-build-with-musl-systemd-specific.patch | 26 ++++----
+ .../musl/0002-Fix-build-with-musl.patch       | 30 +++++----
+ ...0003-Fix-build-with-musl-for-n-dhcp4.patch | 61 +++++++++++++++++++
+ ...Fix-build-with-musl-systemd-specific.patch | 26 ++++++++
+ ...ger_1.18.4.bb => networkmanager_1.22.8.bb} | 44 ++++++++-----
+ 7 files changed, 159 insertions(+), 57 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0003-Fix-build-with-musl-for-n-dhcp4.patch
+ create mode 100644 meta-networking/recipes-connectivity/networkmanager/networkmanager/musl/0004-Fix-build-with-musl-systemd-specific.patch
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.18.4.bb => networkmanager_1.22.8.bb} (76%)
+
 -- 
-2.13.3
+2.24.1
 
 
