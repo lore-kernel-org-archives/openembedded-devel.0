@@ -1,57 +1,52 @@
-Return-Path: <jpuhlman@mvista.com>
-Received: from mail-ot1-f65.google.com (mail-ot1-f65.google.com
-	[209.85.210.65])
-	by mail.openembedded.org (Postfix) with ESMTP id EC53360FFB
+Return-Path: <jpuhlman@gmail.com>
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 095F5607EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  7 Mar 2020 02:56:56 +0000 (UTC)
-Received: by mail-ot1-f65.google.com with SMTP id j5so4439938otn.10
+	Sat,  7 Mar 2020 04:06:10 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id ay11so1687537plb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Mar 2020 18:56:58 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mvista-com.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=XCLnGHXfJ9tFyE9vYmbpLIpXOkNAQSQ+ern96ldC2aM=;
-	b=Rjx2QVb0+oykDsI7FHqJ0Uo0fUhO0kwN7ld8Ji1QGYJHrJ+iXaw+rKx8yOyPLDRTKZ
-	MRLdtypzuTMCs0xAr8H+nl98ujrRe98j0TMJ89g2SkI101574UvPwUMJTfwcgEo4XEGW
-	YQe9BsAixOR4tCLkwfChzHf3Ig3Rm8AVPo5GFWDYFbFC22AkrUqYImQkyQFLghJZRiUK
-	lFN/gHW8dKDMSzMmeKtfG5n0QDDlPlQknHxNcizA3joGFEwX55MhFkoRaw+XuSpzbbU8
-	yjNL6CipfzPJXjXnltdmD/V2KvEIyj3cUKItUDri44fUpFBKAv4dstUzOrj9ToUQ1usD
-	yIdQ==
+	Fri, 06 Mar 2020 20:06:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=sender:from:to:cc:subject:date:message-id;
+	bh=tG/d6Zf2weNsXX1NySjSzxjSv6qbA0LjELS6HQaBCqo=;
+	b=JtB+JD0o7/S12WYd185jHpMDJQA5nD7onVZutjfZWwQwcgZvF8PL7IsCCPRI7VL++R
+	8oHWq8TO/TzYnMvTYxzubCoqZ5bJBAjGG3pcqPh1a4Giat9V5y/skOD27XA5b5JP4nOc
+	t2GC7CK4Bg5xuZsCJd3dPyMKEXENkBD7fqic6bnooYw6PmGYH8PnYsD7+h7P4m/FsEQw
+	N3hFOBIzNWspW9CEVsoMnamrOAZT5UUyl2SnfMw6UktOYzPlmOKfQlOnT2dMP8OS55z8
+	m7p2j35iL2eX0ErXtkxQ1zcdoem4Kg5Xr4JSR9I904AMP8MdGIYFxlARnikgLPh9/ilQ
+	ofuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=XCLnGHXfJ9tFyE9vYmbpLIpXOkNAQSQ+ern96ldC2aM=;
-	b=isz2o6Cl5OFS8Q9ILgUQfCWLJfzioQWRr/LV7Lhd9eSPpxDWNxnDvBIgT61lXQVI63
-	AKIIVz8Jn+rAqVs4qIuPQHeizbYsYIoD3VXSa/QaSthQxGmBd95+ZqJTQ015vvXVZwhX
-	BXbA5PF7/pbb2my5HI86zytz/CluyHaMO1vyqA1x49uH7z6PseXiSni0GVYAI1MgzEzo
-	J3fcT9qrvdi+57tUquKPQpEYzlOmXn9PfENXOxt0apWSyNU+M5RfE7sHydjip7Cbjrba
-	VOwE2oAwzbh4ZFm+dkdoDUm1urtpMTixVxOBZ27zi5Vtu1gVWK9Ptp7KsVW758X72org
-	v1/A==
-X-Gm-Message-State: ANhLgQ0MDDPZgacshj0SiBOTh3wh/itYQREujF6XjH5JZPg5TQ5JhegW
-	FZn79oxhVjaeFHpwhOEKoIoquzoOJLA=
-X-Google-Smtp-Source: ADFU+vvFtE5HOKAFZd+/Pg5hg9rttUAUbIc1eoCJweFRkF52akNsn8+opFQVKIudxcuIN3ToCx3uWA==
-X-Received: by 2002:a9d:480c:: with SMTP id c12mr4950272otf.336.1583549817139; 
-	Fri, 06 Mar 2020 18:56:57 -0800 (PST)
-Received: from ?IPv6:2600:1700:4c90:60a0:30e1:1fb2:1aa0:5ad3?
-	([2600:1700:4c90:60a0:30e1:1fb2:1aa0:5ad3])
-	by smtp.gmail.com with ESMTPSA id 93sm2128349otp.80.2020.03.06.18.56.55
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 06 Mar 2020 18:56:56 -0800 (PST)
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
-References: <20200305223937.12418-1-jpuhlman@mvista.com>
-	<20200305223937.12418-4-jpuhlman@mvista.com>
-	<74c7eed5-4a2b-aeb2-2c4f-b89f335897a0@gmail.com>
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+	bh=tG/d6Zf2weNsXX1NySjSzxjSv6qbA0LjELS6HQaBCqo=;
+	b=oxgw9ahy3jWbn+72XsGR4JshUT51cpM2C/aroE1JFQbu78Q7E20/Vcy8VXaTkuyx+b
+	laQCIPYNE4OnK+rAfjPtnc6k1W7+lfR6YiMP4DjMALwSfwxW0XLCJlO9tQZKS4YvlxLc
+	wepk5YUGVOs0yl7qHfteKTB8y2xDnsLwbM6MGrjdo+RMspOFdMISe2Eq3E2LEqiTe4rJ
+	u/iw8cVlIDzXxGWcEBIZzCf4qUI7O/rPy/Q0DKACiv5E5IB7FnL6KS1ZS4xPU+rKiWTH
+	F1lolvyq71CvuISJDyfFjh4fNHvr06DffqPbhstomH+HmZqXmZpoHMhuz+DJrNzZ3dFa
+	0qxg==
+X-Gm-Message-State: ANhLgQ1rRJjR7ncLXQe3XDrBLiBJMv0MQCl8MoI542qvXSvTJB3UXXVe
+	gc5isWFKw+RYn8ajAB+huPboLpJTyU4=
+X-Google-Smtp-Source: ADFU+vtfWv3FUv/85UdtQq2Iac3bx50uaR+1U1W5LLj7g72vZi4d5UWTj3OchPztaJQyRerKCuGRDA==
+X-Received: by 2002:a17:902:bd86:: with SMTP id
+	q6mr5632904pls.143.1583553971362; 
+	Fri, 06 Mar 2020 20:06:11 -0800 (PST)
+Received: from workhorse.localdomain
+	(99-14-97-149.lightspeed.frokca.sbcglobal.net. [99.14.97.149])
+	by smtp.gmail.com with ESMTPSA id
+	c17sm16366725pfo.71.2020.03.06.20.06.10
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 06 Mar 2020 20:06:10 -0800 (PST)
+Sender: Jeremy Puhlman <jpuhlman@gmail.com>
+Received: by workhorse.localdomain (Postfix, from userid 1000)
+	id 20E0F2A05DF; Fri,  6 Mar 2020 20:06:09 -0800 (PST)
 From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
-Message-ID: <ff31c97e-c802-278b-05b6-858b8e3212a9@mvista.com>
-Date: Fri, 6 Mar 2020 18:56:51 -0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
-	Thunderbird/68.5.0
-MIME-Version: 1.0
-In-Reply-To: <74c7eed5-4a2b-aeb2-2c4f-b89f335897a0@gmail.com>
-Subject: Re: [meta-networking][PATCH 4/7] net-snmp: fix reproducibilty issues in net-snmp-config
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  6 Mar 2020 20:06:07 -0800
+Message-Id: <20200307040607.23866-1-jpuhlman@mvista.com>
+X-Mailer: git-send-email 2.13.3
+Subject: [meta-networking][PATCH v2] net-snmp: fix reproducibilty issues in net-snmp-config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,61 +59,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Mar 2020 02:56:57 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Sat, 07 Mar 2020 04:06:11 -0000
 
+Both STAGING_HOST_DIR and -fmacro-prefix-map path to WORKDIR were
+encoded in the config.
+---
+ meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-
-On 3/6/2020 5:36 PM, Khem Raj wrote:
-> Hi Jeremy
->
-> On 3/5/20 2:39 PM, Jeremy A. Puhlman wrote:
->> From: Jeremy Puhlman <jpuhlman@mvista.com>
->>
->> Both STAGING_HOST_DIR and -fmacro-prefix-map path to WORKDIR were
->> encoded in the config.
->>
->> Signed-off-by: Jeremy A. Puhlman <jpuhlman@mvista.com>
->> ---
->>   meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb | 2 ++
->>   1 file changed, 2 insertions(+)
->>
->> diff --git 
->> a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb 
->> b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
->> index 317350e94..91c50c4e3 100644
->> --- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
->> +++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
->> @@ -124,11 +124,13 @@ do_install_append() {
->>           -i ${D}${bindir}/net-snmp-create-v3-user
->>       sed -e 's@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g' \
->>           -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
->> +        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
->>           -e 's@[^ ]*--sysroot=[^ "]*@@g' \
->>           -e 's@[^ ]*--with-libtool-sysroot=[^ "]*@@g' \
->>           -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
->>           -e 's@[^ ]*PKG_CONFIG_PATH=[^ "]*@@g' \
->>           -e 's@[^ ]*PKG_CONFIG_LIBDIR=[^ "]*@@g' \
->> +        -e 's@${STAGING_DIR_HOST}@@g' \
->
-> This is causing problems, indirectly like
->
-> https://errors.yoctoproject.org/Errors/Details/393851/
-> https://errors.yoctoproject.org/Errors/Details/393852/
-> https://errors.yoctoproject.org/Errors/Details/393853/
->
-> Since its editing out the paths, whats left is just /usr/lib
-> and that gets added to compiler commandline as -L/usr/lib which
-> thankfully gets caught by Build QA
->
-> perhaps this regexp can be made less greedy
-Okay, no problem, I have some builds running locally to check.
-
-
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+index 9c2ffb2c7..5466649a8 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.8.bb
+@@ -124,11 +124,14 @@ do_install_append() {
+         -i ${D}${bindir}/net-snmp-create-v3-user
+     sed -e 's@^NSC_SRCDIR=.*@NSC_SRCDIR=.@g' \
+         -e 's@[^ ]*-fdebug-prefix-map=[^ "]*@@g' \
++        -e 's@[^ ]*-fmacro-prefix-map=[^ "]*@@g' \
+         -e 's@[^ ]*--sysroot=[^ "]*@@g' \
+         -e 's@[^ ]*--with-libtool-sysroot=[^ "]*@@g' \
+         -e 's@[^ ]*--with-install-prefix=[^ "]*@@g' \
+         -e 's@[^ ]*PKG_CONFIG_PATH=[^ "]*@@g' \
+         -e 's@[^ ]*PKG_CONFIG_LIBDIR=[^ "]*@@g' \
++        -e 's@-L${STAGING_DIR_HOST}${libdir}@@g' \
++        -e 's@-I${STAGING_DIR_HOST}${includedir}@@g' \
+         -i ${D}${bindir}/net-snmp-config
+ 
+     if [ "${HAS_PERL}" = "1" ]; then
 -- 
-Jeremy A. Puhlman
-jpuhlman@mvista.com
+2.13.3
 
 
