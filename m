@@ -1,59 +1,50 @@
-Return-Path: <alistair@alistair23.me>
-X-Greylist: delayed 522 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sun, 08 Mar 2020 08:16:15 UTC
-Received: from out4-smtp.messagingengine.com (out4-smtp.messagingengine.com
-	[66.111.4.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 3736D60115
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg1-f196.google.com (mail-pg1-f196.google.com
+	[209.85.215.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 46EC0606E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  8 Mar 2020 08:16:15 +0000 (UTC)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-	by mailout.nyi.internal (Postfix) with ESMTP id 418A22203A;
-	Sun,  8 Mar 2020 04:07:31 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
-	by compute3.internal (MEProxy); Sun, 08 Mar 2020 04:07:31 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alistair23.me;
+	Sun,  8 Mar 2020 15:14:58 +0000 (UTC)
+Received: by mail-pg1-f196.google.com with SMTP id d9so3543742pgu.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 Mar 2020 08:14:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding; s=fm3; bh=hHfxixNv90KCm0xligtnIS1P8I
-	ARXKQIEa8fj9gXGKs=; b=akfilTFI8YxLjPbylmr4uLFlCKrVGvyoYMBeeIjJKm
-	EQp4e8HkGRuNvTLqyoxD/boxjYElfA2aIYSTzhCE/iXduTDBXYyG2vTYpqryfcxr
-	Tqe/WBLZfy4SFaEgdmRsd8beNBagxXzwnn7jUVJex82RBMq8+sicZvbE6GbobG0x
-	X8Ucz8gGJOsJLbwtR2Lw62YN3mWkjqIGL1coDtn6x/F1AP5RO/DXO51gSAr3P6/n
-	AkDL8GYP3I874BystV/mqaR7i/S37NxlZDZpE4RBqTXGD7zdZf8j3brvX+/Mn4ui
-	EOIWMBGttvM/01hBUYjyGZYKR81ZT72PuqJqa9xxpGQg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:content-transfer-encoding:date:from
-	:message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=hHfxixNv90KCm0xli
-	gtnIS1P8IARXKQIEa8fj9gXGKs=; b=dEzynkFrrTIGWiT/5xaF5pj6n+SvDo97i
-	AEiutwWWkhnFafNGlqtWFF3fiIGi1B4gVeRTEdxMyG7Ecm/SDMoPDRYcAmoqqryB
-	M9PcJUbBODxxopEW4DVttfMRlUY8i6epMSayijRcZ4Xs3mCL/5o48IJsrqydo/Rf
-	62n7KDSWdosJvwaSGIv/8aHT9EciSHmsY3i8GNbmGjEBkMxjyFRGtyEEcQHOXL8n
-	VDHJM6PjnG5+AksLZzzvo2yO7qNPUU/9E0/L9pNU/z6A0BRdr5imNqmg587fuNS6
-	3dd3qDd34mMYlAmVNi5snU8p8kIHsGVpY9splMW5LNoJBPnjRAvGg==
-X-ME-Sender: <xms:w6dkXgFSMz51pz5c0yp8EbSX8fAyx8lEkTk2Aob_IqY7D1kA2VBV5A>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrudduhedguddugecutefuodetggdotefrod
-	ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
-	necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvufffkffoggfgsedtkeertd
-	ertddtnecuhfhrohhmpeetlhhishhtrghirhcuhfhrrghntghishcuoegrlhhishhtrghi
-	rhesrghlihhsthgrihhrvdefrdhmvgeqnecuffhomhgrihhnpehgihhthhhusgdrtghomh
-	enucfkphepjeefrdelfedrkeegrddvtdeknecuvehluhhsthgvrhfuihiivgeptdenucfr
-	rghrrghmpehmrghilhhfrhhomheprghlihhsthgrihhrsegrlhhishhtrghirhdvfedrmh
-	gv
-X-ME-Proxy: <xmx:w6dkXqA3aj2og-p16D7I5ZD_awy8JF3rAcdtd0haORPwfiQ5yVx-Eg>
-	<xmx:w6dkXupAhP45R-fDAcqSR7c3QDTuJwqPVS-iwcp9dUbjwRwHEIZQlA>
-	<xmx:w6dkXilprAbeiG1lGumTTEXDNDSqNAJw3gDx-CYXjxfNhKR93P_oeQ>
-	<xmx:w6dkXrSiZB-9MSOMOroK_AZqWjoEp1BX7UZcfi9IMgFSGoToVKfBXg>
-Received: from alistair-xps-14z.alistair23.me
-	(c-73-93-84-208.hsd1.ca.comcast.net [73.93.84.208])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 8DCD4306130A;
-	Sun,  8 Mar 2020 04:07:30 -0400 (EDT)
-From: Alistair Francis <alistair@alistair23.me>
+	:content-transfer-encoding;
+	bh=Lk5wmn1AXPMoTADiLQwRitN+uAkv9WjNoZNkVKGDB5I=;
+	b=fyqISXN1kwJB2dIG6GmvsULIgrA5DMHgTAVZLNt19Pt+hyUVIZ3KkMb6KkiiV7Hcux
+	iN3xdFow1gw3x6H344Sn124H+orHqru6CbzEGOyT1cTK8IfO560jUtXZb6eAbxbH9LYb
+	gamYMdiSNvoErG+U2rqJnmt/gB3HOM2xM5jrtTZVhItst8R7dEwvKRGLLD+89IrnTcDK
+	Ecy+0gteh0eMJth7Yz+zp/h1+WfXltJz4CIXJQvhHPusT8jMDiV9KS4zt+TIgr9muMTp
+	23HF5jhdOlQci2tVfWd/5ub672Pg6QfVt3k8U76O5fCAVcahTEVBUWhO1/maJ4EHaYq1
+	FSbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Lk5wmn1AXPMoTADiLQwRitN+uAkv9WjNoZNkVKGDB5I=;
+	b=h4AZTrgzfziLJJmcO5/cKmyWpr/C9u0QZckYmlqLUgsJ2kXOpIH5pGVp1kejZPLwoW
+	C/zDFfd83CKgz8pzsuSj/taTi5z3P6bQqrR4tOTMK095UACJlrXGPs+0FfjJV+er3OgJ
+	lIpP2c2+lZHovkRmvtR4HWVCnj7zkU3d99SQMTETac4Dy31ZQSVnaE/4b/IPGGLHFz6P
+	PG3hS3SOV9AzpeKx0Jv+pqy/Tz+VRuYH8BY9h5b59FNWmhq8ZFgRPWuepuTYlT6HQfao
+	5351jtmFMYIgeRpVEnJigw5AH+kGyGjgWCV9LvShB7Ypcgnq2wekcUDydhuNAHGRV3V7
+	5Zgg==
+X-Gm-Message-State: ANhLgQ07f9AS9MoDONK/OXwIzlLI2imsSR6ncOgxD3yz5nodOITYA5a1
+	YwOz1mkFNwLBZD9DoltJftdmek8Nf/o=
+X-Google-Smtp-Source: ADFU+vvclCjXzdVaovcMQNcwe/3JW6VF0o3+1zQ4bvv6eEe2OcJQeoxM/b01KE0kFOVDIvTnyGhwqw==
+X-Received: by 2002:a63:565b:: with SMTP id g27mr12392904pgm.309.1583680498893;
+	Sun, 08 Mar 2020 08:14:58 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1c34])
+	by smtp.gmail.com with ESMTPSA id
+	d186sm23877392pfc.8.2020.03.08.08.14.58
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 08 Mar 2020 08:14:58 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 Mar 2020 00:07:26 -0800
-Message-Id: <20200308080726.6318-1-alistair@alistair23.me>
-X-Mailer: git-send-email 2.25.0
+Date: Sun,  8 Mar 2020 08:15:06 -0700
+Message-Id: <20200308151509.1573831-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Subject: [PATCH] python3-obd: Consolidate into a single file
+Subject: [meta-networking][PATCH 1/4] kronosnet: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,51 +57,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Mar 2020 08:16:15 -0000
+X-List-Received-Date: Sun, 08 Mar 2020 15:14:58 -0000
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Alistair Francis <alistair@alistair23.me>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-obd.inc   | 11 -----------
- .../recipes-devtools/python/python3-obd_0.7.1.bb     | 12 ++++++++++--
- 2 files changed, 10 insertions(+), 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-obd.inc
+ .../kronosnet/kronosnet_1.15.bb                 | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-networking/recipes-extended/kronosnet/kronosnet_1.15.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-obd.inc b/meta-python/recipes-devtools/python/python-obd.inc
-deleted file mode 100644
-index 51e663b51..000000000
---- a/meta-python/recipes-devtools/python/python-obd.inc
-+++ /dev/null
-@@ -1,11 +0,0 @@
--DESCRIPTION = "A python module for handling realtime sensor data from OBD-II vehicle ports"
--HOMEPAGE = "https://github.com/brendan-w/python-OBD"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://README.md;md5=58ba896fa086c96ad23317cebfeab277"
--
--SRC_URI[md5sum] = "305efcb6c650db7b9583532355ebeb7c"
--SRC_URI[sha256sum] = "8b81ea5896157b6e861af12e173c10b001cb6cca6ebb04db2c01d326812ad77b"
--
--inherit pypi
--
--RDEPENDS_${PN} = "${PYTHON_PN}-pyserial ${PYTHON_PN}-pint"
-diff --git a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
-index 578e38d3a..55131b333 100644
---- a/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-obd_0.7.1.bb
-@@ -1,2 +1,10 @@
--inherit setuptools3
--require python-obd.inc
-+DESCRIPTION = "A python module for handling realtime sensor data from OBD-II vehicle ports"HOMEPAGE = "https://github.com/brendan-w/python-OBD"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://README.md;md5=58ba896fa086c96ad23317cebfeab277"
+diff --git a/meta-networking/recipes-extended/kronosnet/kronosnet_1.15.bb b/meta-networking/recipes-extended/kronosnet/kronosnet_1.15.bb
+new file mode 100644
+index 0000000000..24aa27a87b
+--- /dev/null
++++ b/meta-networking/recipes-extended/kronosnet/kronosnet_1.15.bb
+@@ -0,0 +1,17 @@
++# Copyright (C) 2020 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
 +
-+SRC_URI[md5sum] = "305efcb6c650db7b9583532355ebeb7c"
-+SRC_URI[sha256sum] = "8b81ea5896157b6e861af12e173c10b001cb6cca6ebb04db2c01d326812ad77b"
++SUMMARY = " Kronosnet, often referred to as knet, is a network abstraction layer designed for High Availability use cases, where redundancy, security, fault tolerance and fast fail-over are the core requirements of your application."
++HOMEPAGE = "https://kronosnet.org/"
++LICENSE = "GPL-2.0+ & LGPL-2.1"
++LIC_FILES_CHKSUM = "file://COPYING.applications;md5=751419260aa954499f7abaabaa882bbe \
++                    file://COPYING.libraries;md5=2d5025d4aa3495befef8f17206a5b0a1"
++SECTION = "libs"
++DEPENDS = "doxygen-native libqb-native libxml2-native bzip2 libqb libxml2 libnl lksctp-tools lz4 lzo openssl nss xz zlib zstd"
 +
-+inherit setuptools3 pypi
++SRCREV = "0ba5985c3ddec8429b989f0e7bd3324f53e0a9b0"
++SRC_URI = "git://github.com/kronosnet/kronosnet;protocol=https;branch=stable1"
 +
-+RDEPENDS_${PN} = "${PYTHON_PN}-pyserial ${PYTHON_PN}-pint"
++inherit autotools
++
++S = "${WORKDIR}/git"
 -- 
-2.25.0
+2.25.1
 
 
