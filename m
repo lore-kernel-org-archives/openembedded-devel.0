@@ -1,53 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
-	[209.85.214.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 6398560F57
+Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com
+	[209.85.215.173])
+	by mail.openembedded.org (Postfix) with ESMTP id F087561147
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon,  9 Mar 2020 19:37:02 +0000 (UTC)
-Received: by mail-pl1-f172.google.com with SMTP id t14so4405407plr.8
+Received: by mail-pg1-f173.google.com with SMTP id m15so5162843pgv.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Mar 2020 12:37:03 -0700 (PDT)
+	Mon, 09 Mar 2020 12:37:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=vsGR41FwgjKBoPBYTNH2gpUz8A+6lMWPzq+MfT5q8aQ=;
-	b=jXWoZz5o64KqLxhCZ3ztTnv7mgFfOaBkbyG3hz1Oz7+oTjaIcoaiGOdultzQX9t8cl
-	QdDjzOa7m9W6ks6AK5KyTqhXYSJtetR1gop41gEnpYaM4GWvU5CQyGP1j3Qqz3Z1e4dW
-	VcZeO/rocbyQwMb/5LeI5yF8WikPVsi4fhRoNUhLDQ4hpBVpiHEHiWa/v6zPxBBQw2+O
-	8CdLEs8po6dRZo+1IlMsiTRGZW6Ac8wUpxvf4lppwq0uSGj3er+fsPTQ0FzmIKGz3hRm
-	P5qXWhotLUoNWezmgnEooJW1uQUHgn+oSdg1oCU4rYrCdnoFgRfhlos0P2FC6NaF9b+k
-	tk4A==
+	bh=Vu0SEuOfBRhZCoVdhLPXcJfJzMi5ttSlSwFJDqptxEM=;
+	b=nHSJhs+ShsMQEr4NoP3jmM06E6ohLIHkGpliLWjIrhIEN2hRo2ilLlXwWkSJ3+JRY3
+	8Uqf7JNZjEox+jDummcbIDcAMGlnHPkf+WBLXGJcE73w4fEj2Ow1t8Hmhiq35T90yLJe
+	QYEuVjY8UqOgQjv3y5sFNBRwLkjCegSlkI4Dy9T/G+hPiCpddY+0oVi9w5I9v8UvPtmB
+	v0MAPRXqOe/KIlvCaku0z4fyDdaoLmhbmDp4AE+w8dlvztAEUpLHOCa7cRLv1SbOiJg8
+	c9DJWs/VlXoeDkzDLnFiSkPcyjS3b5ZsHQJ6ABlIP6cTabu2Gl5BzFotFdj5FAf/dc0P
+	UJsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=vsGR41FwgjKBoPBYTNH2gpUz8A+6lMWPzq+MfT5q8aQ=;
-	b=F0RAZa7j573n6MwCkEW2cp39qBZd/DXryIz8BPKjSd+/oIA9nPvQYaw8qbwuhLk4QT
-	kKFo18bnAlFJLm6u7/Eu+fl7v4U4ijlLO9TtkoeuHUBmYAHC8VFipxynfaxKAY0BAT/9
-	MPg7mqR0+7bQ0qA9nY5tzdXFTqzU+P3KJripUDVovQJv3KjYtMcZ9Vcmkd4V9aTFCuDs
-	/z0CY21xmnAw/zrqtQlN0C1RXmG9CeaTn4Cwz1z6n26SdEtkqj0xWcifb3lYgiQmXCRI
-	GEB55TxgIuRhi6gv33VlBEntthpBg87Dyd70w3/1/vOaMtEmUChF7prcj7on/vST7Pmb
-	6IQg==
-X-Gm-Message-State: ANhLgQ2ERjMrRUr4yBczQ8vD25fha4ulHyIxnqJG2O3SfS8snDuxUbw4
-	p+UAkfPqPEkLtIkdO0ENt1N23ou0bWY=
-X-Google-Smtp-Source: ADFU+vt+UpC/MMWAThHXVOKJNx09S4AOcJ8W3O58QbuBl8nO4w9vK1xunkEFNEFWaCx543AhXyEzSA==
-X-Received: by 2002:a17:90a:2330:: with SMTP id
-	f45mr396729pje.169.1583782623040; 
+	bh=Vu0SEuOfBRhZCoVdhLPXcJfJzMi5ttSlSwFJDqptxEM=;
+	b=SzVLmwRR06s1KYPcDZ74l41Nhn0fGxvpcCWO6OXRNxpQnf/SD0rlZhVCYKomN/1QHJ
+	x7a1TtbEZ0sBbb/phRIX3y79KHhWwt4IpGsnblZX5J1NIrdNUe2K2wwdW1ZxAoqynIv6
+	ePOOc0g8d3RA4AQfzVvejn6kGpWnY6ahveiZtoO4UzNgOmHqB0M3CHgpQd/OKKIP3+eg
+	SaQV9ztDbJUJwd1/e34J7VLerd3Q9v6XksYxLJwFkVswfUFq2gCRFE5YNUAjFVy0nKz5
+	CQDuzLNSD7MISncIv694QE3Z69mmLOPzNOrp4iHwDcsc6YHzIrJdp/pW33iKnYfif7Qm
+	MHeA==
+X-Gm-Message-State: ANhLgQ1lLFOX+Xmt8blPmN/A6H2SiXLXOQd9NOARetxXNJsTRS9F7rm+
+	JR+yhKS+bGDqhES+FjfV8k34weII/eI=
+X-Google-Smtp-Source: ADFU+vvaI8N/dhHkdrq4Cbc8U1WNUq6TOnd3iXKPj1Z0kah3VyPmrDuYeUthAVztbfMgj6MdT939zQ==
+X-Received: by 2002:a63:155c:: with SMTP id 28mr17146286pgv.176.1583782623677; 
 	Mon, 09 Mar 2020 12:37:03 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1c34])
 	by smtp.gmail.com with ESMTPSA id
-	s11sm16221436pfh.7.2020.03.09.12.37.02
+	s11sm16221436pfh.7.2020.03.09.12.37.03
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Mar 2020 12:37:02 -0700 (PDT)
+	Mon, 09 Mar 2020 12:37:03 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Mar 2020 12:37:11 -0700
-Message-Id: <20200309193712.1028142-4-raj.khem@gmail.com>
+Date: Mon,  9 Mar 2020 12:37:12 -0700
+Message-Id: <20200309193712.1028142-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200309193712.1028142-1-raj.khem@gmail.com>
 References: <20200309193712.1028142-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-multimedia][PATCH 4/5] minidlna: Use clock_gettime API insteaad of syscall
+Subject: [meta-multimedia][PATCH 5/5] libde265: Update to 1.0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,72 +59,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2020 19:37:02 -0000
+X-List-Received-Date: Mon, 09 Mar 2020 19:37:03 -0000
 Content-Transfer-Encoding: 8bit
 
-Makes it 64bit time_t safe
+License-Update: Examples are now MIT see [1]
+
+[1] https://github.com/strukturag/libde265/commit/4488ae0c3b287ef6f24a958004481b2b337abc76
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-multimedia/minidlna/minidlna.inc  |  1 +
- ...for-clock_gettime-seprately-from-__N.patch | 36 +++++++++++++++++++
- 2 files changed, 37 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-configure-Check-for-clock_gettime-seprately-from-__N.patch
+ .../libde265/{libde265_1.0.2.bb => libde265_1.0.5.bb}      | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+ rename meta-multimedia/recipes-multimedia/libde265/{libde265_1.0.2.bb => libde265_1.0.5.bb} (69%)
 
-diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
-index 187ff536aa..04648a5d28 100644
---- a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
-+++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
-@@ -12,6 +12,7 @@ SRC_URI = "git://git.code.sf.net/p/minidlna/git;branch=master;module=git \
-            file://minidlna-daemon.init.d \
-            file://minidlna.service \
-            file://0001-Update-Gettext-version.patch \
-+           file://0001-configure-Check-for-clock_gettime-seprately-from-__N.patch \
-            "
+diff --git a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.2.bb b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.5.bb
+similarity index 69%
+rename from meta-multimedia/recipes-multimedia/libde265/libde265_1.0.2.bb
+rename to meta-multimedia/recipes-multimedia/libde265/libde265_1.0.5.bb
+index cd075ffe1b..613dcc71bf 100644
+--- a/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.2.bb
++++ b/meta-multimedia/recipes-multimedia/libde265/libde265_1.0.5.bb
+@@ -4,13 +4,12 @@ simple integration into other software."
+ HOMEPAGE = "http://www.libde265.org/"
+ SECTION = "libs/multimedia"
  
- S = "${WORKDIR}/git"
-diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-configure-Check-for-clock_gettime-seprately-from-__N.patch b/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-configure-Check-for-clock_gettime-seprately-from-__N.patch
-new file mode 100644
-index 0000000000..24a307db19
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-configure-Check-for-clock_gettime-seprately-from-__N.patch
-@@ -0,0 +1,36 @@
-+From 1118b1912916924bbfa3fd4dced9dfed01fbf0e0 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 9 Mar 2020 09:44:33 -0700
-+Subject: [PATCH] configure: Check for clock_gettime seprately from
-+ __NR_clock_gettime
-+
-+This helps prioritize using clock_gettime API from libc over syscall
-+since direct use of __NR_clock_gettime is not time64-safe
-+
-+Upstream-Status: Pending
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 10 +++++++---
-+ 1 file changed, 7 insertions(+), 3 deletions(-)
-+
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -125,6 +125,10 @@ case $host in
-+ esac
-+ 
-+ AC_CHECK_HEADERS(syscall.h sys/syscall.h mach/mach_time.h)
-++
-++AC_MSG_CHECKING([for clock_gettime])
-++AC_SEARCH_LIBS([clock_gettime], [rt], [AC_DEFINE([HAVE_CLOCK_GETTIME], [1], [use clock_gettime])],)
-++
-+ AC_MSG_CHECKING([for __NR_clock_gettime syscall])
-+ AC_COMPILE_IFELSE(
-+     [AC_LANG_PROGRAM(
-+@@ -143,7 +147,6 @@ AC_COMPILE_IFELSE(
-+     ],
-+     [
-+         AC_MSG_RESULT([no])
-+-        AC_SEARCH_LIBS([clock_gettime], [rt], [AC_DEFINE([HAVE_CLOCK_GETTIME], [1], [use clock_gettime])],)
-+     ])
-+ 
-+ AC_CHECK_HEADER(linux/netlink.h,
+-LICENSE = "LGPLv3"
++LICENSE = "LGPLv3 & MIT"
+ LICENSE_FLAGS = "commercial"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=852f345c1c52c9160f9a7c36bb997546"
++LIC_FILES_CHKSUM = "file://COPYING;md5=695b556799abb2435c97a113cdca512f"
+ 
+ SRC_URI = "https://github.com/strukturag/libde265/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "93520b378df25f3a94e962f2b54872cc"
+-SRC_URI[sha256sum] = "eaa0348839c2935dd90647d72c6dd4a043e36361cb3c33d2b04df10fbcebd3cb"
++SRC_URI[sha256sum] = "e3f277d8903408615a5cc34718b391b83c97c646faea4f41da93bac5ee08a87f"
+ 
+ EXTRA_OECONF = "--disable-sherlock265 --disable-dec265"
+ 
 -- 
 2.25.1
 
