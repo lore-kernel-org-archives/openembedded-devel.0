@@ -1,53 +1,53 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com
-	[209.85.214.176])
-	by mail.openembedded.org (Postfix) with ESMTP id B1E8260AE5
+Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com
+	[209.85.214.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 6398560F57
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Mar 2020 19:37:01 +0000 (UTC)
-Received: by mail-pl1-f176.google.com with SMTP id f16so2260540plj.4
+	Mon,  9 Mar 2020 19:37:02 +0000 (UTC)
+Received: by mail-pl1-f172.google.com with SMTP id t14so4405407plr.8
 	for <openembedded-devel@lists.openembedded.org>;
 	Mon, 09 Mar 2020 12:37:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=D6hr/RWgE8rkLeRY5bij3YDOo2ROWNAgBgnk1kjIIiU=;
-	b=R1xQeD22y8NeBoQMErASo1mE12UbkRPqzqDWp/Ccaf6U0tdETbiet+Xfaeh67L5V/7
-	2wPLrYeL9BXIQgZz3OUkziiWKGUNLEUnH3ttgIpJj+PU46STnaYL5P/IOxee/rDLIB8A
-	1Yf8X/U11ENExbW0HJQL47ez/7+MMHbuWz3K6hOFHgK/Jhgk3ftAdJus8Gc8AL9APsvm
-	qFbJaI5cURJ22rRC6Ufhv7sSVBuOItqzg9tCM8p0dHw0D08dcG+GDx4iSxWtqCalfbjx
-	UgfFLWoN1K1EzjZjh+HAZjG9nw0RDX5O6LZtQf4J6bWWTLZ2FrKuLdnqesSrej/HFkoN
-	qSPw==
+	bh=vsGR41FwgjKBoPBYTNH2gpUz8A+6lMWPzq+MfT5q8aQ=;
+	b=jXWoZz5o64KqLxhCZ3ztTnv7mgFfOaBkbyG3hz1Oz7+oTjaIcoaiGOdultzQX9t8cl
+	QdDjzOa7m9W6ks6AK5KyTqhXYSJtetR1gop41gEnpYaM4GWvU5CQyGP1j3Qqz3Z1e4dW
+	VcZeO/rocbyQwMb/5LeI5yF8WikPVsi4fhRoNUhLDQ4hpBVpiHEHiWa/v6zPxBBQw2+O
+	8CdLEs8po6dRZo+1IlMsiTRGZW6Ac8wUpxvf4lppwq0uSGj3er+fsPTQ0FzmIKGz3hRm
+	P5qXWhotLUoNWezmgnEooJW1uQUHgn+oSdg1oCU4rYrCdnoFgRfhlos0P2FC6NaF9b+k
+	tk4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=D6hr/RWgE8rkLeRY5bij3YDOo2ROWNAgBgnk1kjIIiU=;
-	b=Xw6vjcVMMIdBXk95OcPtGf5qW1H3JLK2Q6Qe0SSHyWcp+7bScyDGgTZ3HGqOSYVdBJ
-	zm5kh5E/+q8vC7c2OJJnvs9byTDYepFZLcgENQo4ZUkNfPWcfkhDdE/rtVQ/T8AjKAO4
-	MGUHiWDQmp+QKSajeWugAr7gRQwZzOJe6bL+VcgqFAfjt4uyoz8mqJNyWS/Ehi9kwxsB
-	ah5Wb8oUtsF6Wg3AePb/Be5TAoJv25y4ezKt1o1FnbaAqZBMbNiRnVRERHtkeVCePq1V
-	1jQXDMZssW5QkaMecTLrjLW3PPx2Jagmblr9UWPwc2WkbHgZtxfniIgWqg9reqnR/L8O
-	xkcQ==
-X-Gm-Message-State: ANhLgQ0EUPOotS//ymTyiQON3G7pS7AMRNts9zchhO0zJXCqOrdR4VZ3
-	Rqyt8R7ar22Maj3EiilA8raJof94z64=
-X-Google-Smtp-Source: ADFU+vtu9jeOjXUx18Ib7lEcskJWgHrQXcJ3l6DYgrW71HN6wP5wUxPoOxNRNm79OsG5qi0lyEMwLQ==
-X-Received: by 2002:a17:902:ac83:: with SMTP id
-	h3mr17253176plr.86.1583782622382; 
-	Mon, 09 Mar 2020 12:37:02 -0700 (PDT)
+	bh=vsGR41FwgjKBoPBYTNH2gpUz8A+6lMWPzq+MfT5q8aQ=;
+	b=F0RAZa7j573n6MwCkEW2cp39qBZd/DXryIz8BPKjSd+/oIA9nPvQYaw8qbwuhLk4QT
+	kKFo18bnAlFJLm6u7/Eu+fl7v4U4ijlLO9TtkoeuHUBmYAHC8VFipxynfaxKAY0BAT/9
+	MPg7mqR0+7bQ0qA9nY5tzdXFTqzU+P3KJripUDVovQJv3KjYtMcZ9Vcmkd4V9aTFCuDs
+	/z0CY21xmnAw/zrqtQlN0C1RXmG9CeaTn4Cwz1z6n26SdEtkqj0xWcifb3lYgiQmXCRI
+	GEB55TxgIuRhi6gv33VlBEntthpBg87Dyd70w3/1/vOaMtEmUChF7prcj7on/vST7Pmb
+	6IQg==
+X-Gm-Message-State: ANhLgQ2ERjMrRUr4yBczQ8vD25fha4ulHyIxnqJG2O3SfS8snDuxUbw4
+	p+UAkfPqPEkLtIkdO0ENt1N23ou0bWY=
+X-Google-Smtp-Source: ADFU+vt+UpC/MMWAThHXVOKJNx09S4AOcJ8W3O58QbuBl8nO4w9vK1xunkEFNEFWaCx543AhXyEzSA==
+X-Received: by 2002:a17:90a:2330:: with SMTP id
+	f45mr396729pje.169.1583782623040; 
+	Mon, 09 Mar 2020 12:37:03 -0700 (PDT)
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::1c34])
 	by smtp.gmail.com with ESMTPSA id
-	s11sm16221436pfh.7.2020.03.09.12.37.01
+	s11sm16221436pfh.7.2020.03.09.12.37.02
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Mon, 09 Mar 2020 12:37:01 -0700 (PDT)
+	Mon, 09 Mar 2020 12:37:02 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Mar 2020 12:37:10 -0700
-Message-Id: <20200309193712.1028142-3-raj.khem@gmail.com>
+Date: Mon,  9 Mar 2020 12:37:11 -0700
+Message-Id: <20200309193712.1028142-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200309193712.1028142-1-raj.khem@gmail.com>
 References: <20200309193712.1028142-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/5] abseil-cpp: Depend on libexecinfo on musl
+Subject: [meta-multimedia][PATCH 4/5] minidlna: Use clock_gettime API insteaad of syscall
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +60,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Mar 2020 19:37:01 -0000
+X-List-Received-Date: Mon, 09 Mar 2020 19:37:02 -0000
 Content-Transfer-Encoding: 8bit
 
-Needed for execinfo to work
-Fixes
-absl/debugging/internal/stacktrace_generic-inl.inc:14:10: fatal error: 'execinfo.h' file not found
-         ^~~~~~~~~~~~
-1 error generated.
+Makes it 64bit time_t safe
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-multimedia/minidlna/minidlna.inc  |  1 +
+ ...for-clock_gettime-seprately-from-__N.patch | 36 +++++++++++++++++++
+ 2 files changed, 37 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-configure-Check-for-clock_gettime-seprately-from-__N.patch
 
-diff --git a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-index 115ffc69f9..b6ea5fdecc 100644
---- a/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-+++ b/meta-oe/recipes-devtools/abseil-cpp/abseil-cpp_git.bb
-@@ -19,6 +19,8 @@ SRC_URI = "git://github.com/abseil/abseil-cpp;branch=${BRANCH}                \
+diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+index 187ff536aa..04648a5d28 100644
+--- a/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
++++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna.inc
+@@ -12,6 +12,7 @@ SRC_URI = "git://git.code.sf.net/p/minidlna/git;branch=master;module=git \
+            file://minidlna-daemon.init.d \
+            file://minidlna.service \
+            file://0001-Update-Gettext-version.patch \
++           file://0001-configure-Check-for-clock_gettime-seprately-from-__N.patch \
+            "
  
  S = "${WORKDIR}/git"
- 
-+DEPENDS_append_libc-musl = " libexecinfo "
+diff --git a/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-configure-Check-for-clock_gettime-seprately-from-__N.patch b/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-configure-Check-for-clock_gettime-seprately-from-__N.patch
+new file mode 100644
+index 0000000000..24a307db19
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/minidlna/minidlna/0001-configure-Check-for-clock_gettime-seprately-from-__N.patch
+@@ -0,0 +1,36 @@
++From 1118b1912916924bbfa3fd4dced9dfed01fbf0e0 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 9 Mar 2020 09:44:33 -0700
++Subject: [PATCH] configure: Check for clock_gettime seprately from
++ __NR_clock_gettime
 +
- ASNEEDED_class-native = ""
- ASNEEDED_class-nativesdk = ""
- 
++This helps prioritize using clock_gettime API from libc over syscall
++since direct use of __NR_clock_gettime is not time64-safe
++
++Upstream-Status: Pending
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ configure.ac | 10 +++++++---
++ 1 file changed, 7 insertions(+), 3 deletions(-)
++
++--- a/configure.ac
+++++ b/configure.ac
++@@ -125,6 +125,10 @@ case $host in
++ esac
++ 
++ AC_CHECK_HEADERS(syscall.h sys/syscall.h mach/mach_time.h)
+++
+++AC_MSG_CHECKING([for clock_gettime])
+++AC_SEARCH_LIBS([clock_gettime], [rt], [AC_DEFINE([HAVE_CLOCK_GETTIME], [1], [use clock_gettime])],)
+++
++ AC_MSG_CHECKING([for __NR_clock_gettime syscall])
++ AC_COMPILE_IFELSE(
++     [AC_LANG_PROGRAM(
++@@ -143,7 +147,6 @@ AC_COMPILE_IFELSE(
++     ],
++     [
++         AC_MSG_RESULT([no])
++-        AC_SEARCH_LIBS([clock_gettime], [rt], [AC_DEFINE([HAVE_CLOCK_GETTIME], [1], [use clock_gettime])],)
++     ])
++ 
++ AC_CHECK_HEADER(linux/netlink.h,
 -- 
 2.25.1
 
