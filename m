@@ -1,17 +1,17 @@
 Received: from Henrys-MBP.localdomain (Henrys-MBP.localdomain [114.34.172.18])
- by mx.groups.io with SMTP id smtpd.web10.6110.1586156454221251144
+ by mx.groups.io with SMTP id smtpd.web10.6111.1586156454271284037
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 06 Apr 2020 00:00:54 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=permanent DNS error (domain: henrys-mbp.localdomain, ip: 114.34.172.18, mailfrom: jrhenry@henrys-mbp.localdomain)
 Received: by Henrys-MBP.localdomain (Postfix, from userid 501)
-	id 3300777975B; Tue, 10 Mar 2020 16:15:55 +0800 (CST)
+	id 81E12778BBE; Tue, 10 Mar 2020 15:09:46 +0800 (CST)
 From: "Henry Chang" <mr.changyuheng@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Henry Chang <mr.changyuheng@gmail.com>
 Subject: [meta-python][PATCH] python-pandas: upgrade 0.23.4 -> 1.0.1
-Date: Tue, 10 Mar 2020 16:15:52 +0800
-Message-Id: <20200310081552.34486-1-mr.changyuheng@gmail.com>
+Date: Tue, 10 Mar 2020 15:09:33 +0800
+Message-Id: <20200310070933.34089-1-mr.changyuheng@gmail.com>
 X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
