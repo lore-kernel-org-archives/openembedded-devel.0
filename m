@@ -1,54 +1,47 @@
-Return-Path: <scott.branden@broadcom.com>
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
-	[209.85.128.51])
-	by mail.openembedded.org (Postfix) with ESMTP id C6F476070B
+Return-Path: <jpewhacker@gmail.com>
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
+	[209.85.166.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A788960B1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2020 19:15:52 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id f7so2652099wml.4
+	Tue, 10 Mar 2020 19:50:36 +0000 (UTC)
+Received: by mail-il1-f194.google.com with SMTP id a14so10039084ilk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2020 12:15:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=broadcom.com; s=google;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language;
-	bh=yFXXZLpLgiGh+lf/LFnGCeOKKWxAXT2Egl/Lvj5MJow=;
-	b=XUmOIwUX06wlHcmj8oUrMJOVVNgyJ2rKdGyXhfKGepTcbiHEqOYKk7UBsS0U8RD+JP
-	0yZZMMMELYsL/Fr3vBnGku4qYd7GxyODTGvRaji4WWP/LJOPVMPJ4AZlbQ9FrLHE1E6w
-	JcDZnY6UY6vUOAQ7d9j4+PgGFmZR1atZBjQEI=
+	Tue, 10 Mar 2020 12:50:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=35AA0Rq5WL5Uvyq+hwnYnJnVltSOGwI9gR0Air+sXpE=;
+	b=Qi+o4YsqWj5DhiMuwjRsUrHVWtlZxYYnRMAOGRFgZGQJ21yxdf5E3kupit3npx2+XK
+	+GFlbRp72pY9FfMzcXCkfQGH0weDVswDRK4qH1s9W4U9XWCjB4YPNyDdY9A8zAkblj7C
+	HKtce0ZlXR7Bs5ouXqKGawQl5U0HM5xUBlcHwflAFJ4n3UaF9fEIWTlCxfzrH5tdSYW8
+	f6GLgaIWTjB21L9rOKcjYetn2MLJ4mRl/CvGPGBOjZF26B+dW4uK9YI/RSK76f7dRTYy
+	MJ2/WlAIxQZuCZS7wETR3c2Xjs2uF4h6YdYFURKG/3AkRX+8DTXGl1cizLzA7ROGfCYG
+	nfvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language;
-	bh=yFXXZLpLgiGh+lf/LFnGCeOKKWxAXT2Egl/Lvj5MJow=;
-	b=ss/5GucFFrfNI0K4qrnZI4ngF2iVvtPFQdrJKTpC3erPjArKOMFPvfZ8iAzNGHne5I
-	MgWNs2iHjLc0TnnIlzWngwVjUF7t54IDhbZIkGuQwOfHcjua9F2bc/s10PkIEdchEfqv
-	h/mYS+mGQsCp/i+1wVzxpturIvz7KSvmPc5CEsZ3yUCkwPDFBiujejQyZ6MIMs5Kx9yd
-	SceRJmw6OnWHhSnnHG6lCRDXyvIBBYbPZUS0vzjHgxzHicFzCYmojOcAZdMkEUPK54qm
-	K7wfoact6Zu9fAf5gh4qC9/UmWULYYlOxsPGpkXUrh+KJ7zw2fEme4vGo7TP5figxdLG
-	2gmQ==
-X-Gm-Message-State: ANhLgQ0Fw025SxpeiisjOvL0lTiefn/ijZMP5U8eRriSiMfTYzKDUqm/
-	omrz6Bbng36kvQo+GBF2QFViqw==
-X-Google-Smtp-Source: ADFU+vtbUxIJCkGlQi1JtDzmIhBgTTeA1Z+ZBn19pUihVfSEJRck3aWt5ICPx+KVQHlM5PoqJ6+8XQ==
-X-Received: by 2002:a1c:f21a:: with SMTP id s26mr3532781wmc.39.1583867753055; 
-	Tue, 10 Mar 2020 12:15:53 -0700 (PDT)
-Received: from [10.136.13.65] ([192.19.228.250])
-	by smtp.gmail.com with ESMTPSA id
-	u25sm5164291wml.17.2020.03.10.12.15.50
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Tue, 10 Mar 2020 12:15:52 -0700 (PDT)
-To: Tim Orling <ticotimo@gmail.com>
-References: <20200310024936.18941-1-scott.branden@broadcom.com>
-	<CANx9H-A_bpFV7c+u_-3p23a4kUmjiuQ+FUE5LqtKu2_rDW+BzQ@mail.gmail.com>
-From: Scott Branden <scott.branden@broadcom.com>
-Message-ID: <2bdaa8bf-73cd-18d4-fbf7-2f08469e7a00@broadcom.com>
-Date: Tue, 10 Mar 2020 12:15:48 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <CANx9H-A_bpFV7c+u_-3p23a4kUmjiuQ+FUE5LqtKu2_rDW+BzQ@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Rajesh Ravi <rajesh.ravi@broadcom.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] python3-pycryptodomex: add 3.9.4 recipe
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=35AA0Rq5WL5Uvyq+hwnYnJnVltSOGwI9gR0Air+sXpE=;
+	b=pyR2k2yqm/B6aGgwc/oxlKdYDydo8YL0bnrNeDBQeLXZh6FrNwWJvY3W2H4bHDCCw9
+	jxgrqI37bctZFvDw41fhpcjwO/SqTh/0BBxTnYvHWU1bTK6/CStDeNQdDKbO4xBr/NhL
+	5380GuZDgrPC/3Jz1LD+DohrJr3N6rum9pWy538W1aKIwpTjnjC+tQHVlKjFdDGNi0HL
+	fHhOtzpnX1a8UFe0WTu28rRKZgfjuiIdt7ticGWTP2PogoN1ov2HX0O7QA8J9tyZgRxJ
+	ix5URKOGDAZqi2fHq+eHfsgigfX0wLqnMXdT2oZrfcVsC2LDfuOresWtjvzYVd0FHM3S
+	ABWw==
+X-Gm-Message-State: ANhLgQ3qEg38qHXI/+G0CqKX5H/5Fk1LcdbVLcw/Milp7PLhIsVCSpwV
+	lLeQ/0Fsq/LZtZuBaZLmypVAC18i+EM=
+X-Google-Smtp-Source: ADFU+vsC3Rk+i7HjRe8qypcHAAlQXVO3uCd+IKKry6jPtEIdPxIIwnbi4U7bryFf2otUQ4LR8nMXag==
+X-Received: by 2002:a92:9ad3:: with SMTP id c80mr22396416ill.141.1583869837190;
+	Tue, 10 Mar 2020 12:50:37 -0700 (PDT)
+Received: from OLA-8C37N23.ad.garmin.com ([204.77.163.55])
+	by smtp.gmail.com with ESMTPSA id q6sm2708141ild.70.2020.03.10.12.50.36
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 10 Mar 2020 12:50:36 -0700 (PDT)
+From: Joshua Watt <jpewhacker@gmail.com>
+X-Google-Original-From: Joshua Watt <JPEWhacker@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Mar 2020 14:50:25 -0500
+Message-Id: <20200310195025.4789-1-JPEWhacker@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] glmark2: Update to latest version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,100 +54,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2020 19:15:53 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 10 Mar 2020 19:50:36 -0000
 
+Updates to the most recent version of glmark2. In particular, this fixes
+problems where the benchmark would fail to start due to improper
+handling of EGL_NO_DISPLAY with EGL 1.5
 
+Signed-off-by: Joshua Watt <JPEWhacker@gmail.com>
+---
+ meta-oe/recipes-benchmark/glmark2/glmark2_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On 2020-03-09 10:50 p.m., Tim Orling wrote:
-> This probably should have an RCONFLICTS with python3-cryptodme (and 
-> maybe even python3-crypto).
->
-> These three packages step all over each other with same functionality...
-
-Good feedback Tim.
-
-Rajesh, could you look if the other recipes do what is needed or can be 
-enhanced and used instead?
->
-> On Mon, Mar 9, 2020 at 7:50 PM Scott Branden via Openembedded-devel 
-> <openembedded-devel@lists.openembedded.org 
-> <mailto:openembedded-devel@lists.openembedded.org>> wrote:
->
->     From: Rajesh Ravi <rajesh.ravi@broadcom.com
->     <mailto:rajesh.ravi@broadcom.com>>
->
->     Add python3-pycryptodomex 3.9.4 recipe needed to build
->     such components as optee 3.8.0.
->
->     Signed-off-by: Rajesh Ravi <rajesh.ravi@broadcom.com
->     <mailto:rajesh.ravi@broadcom.com>>
->     Signed-off-by: Scott Branden <scott.branden@broadcom.com
->     <mailto:scott.branden@broadcom.com>>
->     ---
->      .../python/python3-pycryptodomex_3.9.4.bb
->     <http://python3-pycryptodomex_3.9.4.bb>    | 30 +++++++++++++++++++
->      1 file changed, 30 insertions(+)
->      create mode 100644
->     meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
->     <http://python3-pycryptodomex_3.9.4.bb>
->
->     diff --git
->     a/meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
->     <http://python3-pycryptodomex_3.9.4.bb>
->     b/meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
->     <http://python3-pycryptodomex_3.9.4.bb>
->     new file mode 100644
->     index 000000000..be6b10f3f
->     --- /dev/null
->     +++
->     b/meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
->     <http://python3-pycryptodomex_3.9.4.bb>
->     @@ -0,0 +1,30 @@
->     +SUMMARY = "Cryptographic library for Python"
->     +DESCRIPTION = "PyCryptodome is a self-contained Python package of
->     low-level\
->     + cryptographic primitives."
->     +HOMEPAGE = "http://www.pycryptodome.org"
->     +LICENSE = "PD & BSD-2-Clause"
->     +LIC_FILES_CHKSUM =
->     "file://LICENSE.rst;md5=6dc0e2a13d2f25d6f123c434b761faba"
->     +
->     +SRC_URI[md5sum] = "46ba513d95b6e323734074d960a7d57b"
->     +SRC_URI[sha256sum] =
->     "22d970cee5c096b9123415e183ae03702b2cd4d3ba3f0ced25c4e1aba3967167"
->     +
->     +inherit pypi
->     +inherit setuptools3
->     +
->     +RDEPENDS_${PN} += " \
->     +    ${PYTHON_PN}-io \
->     +    ${PYTHON_PN}-math \
->     +"
->     +
->     +RDEPENDS_${PN}-tests += " \
->     +    ${PYTHON_PN}-unittest \
->     +"
->     +
->     +PACKAGES =+ "${PN}-tests"
->     +
->     +FILES_${PN}-tests += " \
->     +    ${PYTHON_SITEPACKAGES_DIR}/Cryptodome/SelfTest/ \
->     + ${PYTHON_SITEPACKAGES_DIR}/Cryptodome/SelfTest/__pycache__/ \
->     +"
->     +
->     +BBCLASSEXTEND = "native nativesdk"
->     -- 
->     2.17.1
->
->     -- 
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+index 50b553c80..6d20bbdaf 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+@@ -10,13 +10,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+ 
+ DEPENDS = "libpng jpeg udev"
+ 
+-PV = "20190904+${SRCPV}"
++PV = "20191226+${SRCPV}"
+ 
+ COMPATIBLE_HOST_rpi  = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics', '.*-linux*', 'null', d)}"
+ 
+ SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https \
+            file://python3.patch"
+-SRCREV = "24a1139dcbfd86bd02065316eaa90559e39374e1"
++SRCREV = "72dabc5d72b49c6d45badeb8a941ba4d829b0bd6"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.17.1
 
 
