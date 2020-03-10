@@ -1,33 +1,48 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B64E861912
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-il1-f172.google.com (mail-il1-f172.google.com
+	[209.85.166.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 232D360984
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2020 05:29:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,535,1574092800"; d="scan'208";a="86089633"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 10 Mar 2020 13:29:18 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 4A43A406AB15
+	Tue, 10 Mar 2020 05:50:53 +0000 (UTC)
+Received: by mail-il1-f172.google.com with SMTP id p1so6927901ils.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Mar 2020 13:19:17 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Tue, 10 Mar 2020 13:29:09 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 10 Mar 2020 13:29:17 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 10 Mar 2020 04:29:18 -0700
-Message-ID: <1583839758-124554-1-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 09 Mar 2020 22:50:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=OWq1h93IO8RB/FBMs39MIERyrl0crqMrwFYb1/OXGY4=;
+	b=PDaqpe5AkCX9i8ymMQdWllxOge4r4Fj8HTTcP0BLHbh/uDsyUUFuIVroRz8KLeHF+a
+	7wTPvjtjxF7/nPBzqRJjvVzTa9ACdmwRF+Scm4gprNcTS2/y769G6U0F9my7d2v3WXJg
+	FVteCXdk1XKSjNwkqMMsPMOeLh12PNeaisK9SSQjwPqgpXcbP2msLKA5k4+cmkMvRoSP
+	cVur2ImukMlcxLm0oonTAAOQ+8QD2ldKXTPZu/5C2sVr4gCmHMBQCjyc2IaOBjJ13Dgq
+	ScG6bwg6QvSyxSApm+69CBXgFkbVvtiicceqb3yXK0MGeQ1FMDdn0QATEEaR466XZRly
+	5/+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=OWq1h93IO8RB/FBMs39MIERyrl0crqMrwFYb1/OXGY4=;
+	b=tTvzCCOhpA/vdD0h0iIr9giLbnAkNO4qe9UBDby26SU0+s1Xc1MXzfpi2A+E4+K8ho
+	itdK7TQLzZ7DizPorYRYF0xzDFu14K3f7CMKh9/yK6tnC/NAaGyaPScOz6vnDEUEK71A
+	iOXyYeKcYs57m1VDrNqIKgKui9LQR0/DcA/IwSMY+FkNd70zR0lfZb5eQTTiuL0TYZmp
+	plT4pbOurFikX1XUpm1ZI/EqQY8zy8UUQ20D4qVS39CHaUcaKxJqekysGIklfdyLkDU6
+	pE9x/1gRJ9Kx3z9ncMlxYLyZyMrP9P6EMboSKTOipzPKYZm//SNqGMM+/D6tOUMwlX8S
+	uFoQ==
+X-Gm-Message-State: ANhLgQ3Ro1R92vKQAYqFxnmHY7WSMjWCFARfy4chor73ULDIbbN2+5yI
+	KE2wbB7XBehtdQj1XUMzhf1E8PYKC0x9f7C/jVU=
+X-Google-Smtp-Source: ADFU+vudIe2PiyuPjmkuRv5V3UA0IYe14KZ4xoC6MCZQAcuyId4Q8ubFX7HSnjwtNhkFzm8TCacdi/u4BwS2cOzzDlM=
+X-Received: by 2002:a92:5c81:: with SMTP id d1mr1616772ilg.122.1583819454916; 
+	Mon, 09 Mar 2020 22:50:54 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 4A43A406AB15.A2375
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking][PATCH] kea: upgrade 1.7.4 -> 1.7.5
+References: <20200310024936.18941-1-scott.branden@broadcom.com>
+In-Reply-To: <20200310024936.18941-1-scott.branden@broadcom.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 9 Mar 2020 22:50:44 -0700
+Message-ID: <CANx9H-A_bpFV7c+u_-3p23a4kUmjiuQ+FUE5LqtKu2_rDW+BzQ@mail.gmail.com>
+To: Scott Branden <scott.branden@broadcom.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Rajesh Ravi <rajesh.ravi@broadcom.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][PATCH] python3-pycryptodomex: add 3.9.4 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,36 +55,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Mar 2020 05:29:21 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 10 Mar 2020 05:50:54 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- .../recipes-connectivity/kea/{kea_1.7.4.bb => kea_1.7.5.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-connectivity/kea/{kea_1.7.4.bb => kea_1.7.5.bb} (93%)
+This probably should have an RCONFLICTS with python3-cryptodme (and maybe
+even python3-crypto).
 
-diff --git a/meta-networking/recipes-connectivity/kea/kea_1.7.4.bb b/meta-networking/recipes-connectivity/kea/kea_1.7.5.bb
-similarity index 93%
-rename from meta-networking/recipes-connectivity/kea/kea_1.7.4.bb
-rename to meta-networking/recipes-connectivity/kea/kea_1.7.5.bb
-index a2c97655a..38a256afd 100644
---- a/meta-networking/recipes-connectivity/kea/kea_1.7.4.bb
-+++ b/meta-networking/recipes-connectivity/kea/kea_1.7.5.bb
-@@ -14,8 +14,8 @@ SRC_URI = "\
-     file://kea-dhcp6.service \
-     file://kea-dhcp-ddns.service \
- "
--SRC_URI[md5sum] = "d2d0e3ad8064a5e6f3ba1e970d39f9cc"
--SRC_URI[sha256sum] = "2b7f8d8cafdb9ad2be8df9aceb2de58c8f37c1544e47c28f05e84555d0015ef5"
-+SRC_URI[md5sum] = "1f771e0209c9149bcf8fb91a25db03bf"
-+SRC_URI[sha256sum] = "9b89b75cd8fd71e0ad7cb32c1b996177ba617bea2d162851eed42eea739e9999"
- 
- inherit autotools systemd
- 
--- 
-2.17.1
+These three packages step all over each other with same functionality...
 
+On Mon, Mar 9, 2020 at 7:50 PM Scott Branden via Openembedded-devel <
+openembedded-devel@lists.openembedded.org> wrote:
 
-
+> From: Rajesh Ravi <rajesh.ravi@broadcom.com>
+>
+> Add python3-pycryptodomex 3.9.4 recipe needed to build
+> such components as optee 3.8.0.
+>
+> Signed-off-by: Rajesh Ravi <rajesh.ravi@broadcom.com>
+> Signed-off-by: Scott Branden <scott.branden@broadcom.com>
+> ---
+>  .../python/python3-pycryptodomex_3.9.4.bb     | 30 +++++++++++++++++++
+>  1 file changed, 30 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-pycryptodomex_3.9.4.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/
+> python3-pycryptodomex_3.9.4.bb b/meta-python/recipes-devtools/python/
+> python3-pycryptodomex_3.9.4.bb
+> new file mode 100644
+> index 000000000..be6b10f3f
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-pycryptodomex_3.9.4.bb
+> @@ -0,0 +1,30 @@
+> +SUMMARY = "Cryptographic library for Python"
+> +DESCRIPTION = "PyCryptodome is a self-contained Python package of
+> low-level\
+> + cryptographic primitives."
+> +HOMEPAGE = "http://www.pycryptodome.org"
+> +LICENSE = "PD & BSD-2-Clause"
+> +LIC_FILES_CHKSUM =
+> "file://LICENSE.rst;md5=6dc0e2a13d2f25d6f123c434b761faba"
+> +
+> +SRC_URI[md5sum] = "46ba513d95b6e323734074d960a7d57b"
+> +SRC_URI[sha256sum] =
+> "22d970cee5c096b9123415e183ae03702b2cd4d3ba3f0ced25c4e1aba3967167"
+> +
+> +inherit pypi
+> +inherit setuptools3
+> +
+> +RDEPENDS_${PN} += " \
+> +    ${PYTHON_PN}-io \
+> +    ${PYTHON_PN}-math \
+> +"
+> +
+> +RDEPENDS_${PN}-tests += " \
+> +    ${PYTHON_PN}-unittest \
+> +"
+> +
+> +PACKAGES =+ "${PN}-tests"
+> +
+> +FILES_${PN}-tests += " \
+> +    ${PYTHON_SITEPACKAGES_DIR}/Cryptodome/SelfTest/ \
+> +    ${PYTHON_SITEPACKAGES_DIR}/Cryptodome/SelfTest/__pycache__/ \
+> +"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> --
+> 2.17.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
