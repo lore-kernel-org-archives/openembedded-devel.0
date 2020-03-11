@@ -1,49 +1,57 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
-	[209.85.167.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E207261B8E
+Return-Path: <nicolas.dechesne@linaro.org>
+Received: from mail-yw1-f42.google.com (mail-yw1-f42.google.com
+	[209.85.161.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 744556069A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 11:48:38 +0000 (UTC)
-Received: by mail-lf1-f66.google.com with SMTP id q9so1408077lfc.10
+	Wed, 11 Mar 2020 13:28:21 +0000 (UTC)
+Received: by mail-yw1-f42.google.com with SMTP id v138so1935799ywa.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 04:48:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Wed, 11 Mar 2020 06:28:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=pb43IAA7IPFocDN0WhznoKia+sZsyRGVe7iaUw8UFiQ=;
-	b=uA1zrPOPqcwonCd+434az0Z8mHs1noRpmeAOE+tRHNstG/fz8GM48vywVHnJ/6hfpN
-	qnamVg76l/mtncWboJbqBM+TCzKfGwu4NFLN44qZHakwLvMoKEujdLxK9oBaMBCa/5gx
-	/jQsWrA+0iKHNdTBcvf4JsJErlkckFmqy0gn3bugNxQj3olfDVY1FCuatJBIDQxeSSUW
-	WaezvdzRAy/1SE7dbCmIfsGn/N3duGSNWu+dPWLXUstsomkZdwJGnaASBVbVY+KMC0Cg
-	ILUymUDgin8dUusw3XXGjENVkCVhjRD3qh5H0z9+RSgyUSzmJQ5mXMMmuXy2DtkZhJpO
-	rxBA==
+	:cc; bh=Y2sihzjefJ+eA/dskUa68RWTmp4BVrC876pst1VzPc4=;
+	b=iTpYaMxDerGxOiZSh73rOMvVxV49aRe1C49Ir9Dnoamt2Yi527m0bYIlOkckFk/Dlz
+	XOHD/t5NbkOPziM5WodrFcjzfRpoFumuzsBi29l4mDdPnmZPCDD1Xjd9BZFtLVjOeaaD
+	T6KSblAUFNeA+6uEuyxBBiAdpbaEO2zib56GAyV3jXz62l5Hawu9YAZiq3/sd+SjVmio
+	usucC4/L3KmjEALL6IKJ9E4Zq5ntyLfaLYVZcBviv6ogKuYLA3ZmPqxY5oBCDEwglwCs
+	EKidcQizDW5ck94bZXVjwcUktEJ+bSnHzZ1iDR5UWcfXUff5+Wp0Vbyr37Wsl5XBbL/K
+	+OuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=pb43IAA7IPFocDN0WhznoKia+sZsyRGVe7iaUw8UFiQ=;
-	b=Ro5DflbcML0RSpaOyVUsGX9uhmZshFgTknD5riPpV8+wt17cWMELky15M98hI81B+1
-	6a15+fDZzzv0b/9anLrE/5LHYJ5ze271F44hQl5ePc7/iTKekWQioH1pQCthmEX4DSMZ
-	Q1IkKQb7BkerMcW9FxIjMajxWtqgxALyf+PlYcqrrCUsuPE2kle9wBmkNWY1hqlKlv+J
-	8zbmWiwemgqPCRRNgecfx4/QbKKAnvjJI8cUheKU34Bs9Lf5h8zYRXj/a2iCeyN2tdkq
-	zgv5Z/o3McgLAjOq/KvAh3ps9GN5t6JkAKw4jrO7L5vZ/BYRkZrYYx1CEOD3NrRzWdp0
-	IsNQ==
-X-Gm-Message-State: ANhLgQ14HeMZXVTUcYkWSJsI+rS14ST97UVh35UPsufqpN2c1bU7gRiP
-	T6EX1gvIEko3YS2kDz1HCy/b/Z6MgyIBaICHPcY=
-X-Google-Smtp-Source: ADFU+vusW+Y4x3uZpy0gXs2lnn+9gyAyCLYKiHkqeH5KERFLRJ5u698MrYzBLNgyJ9G8Jh4wTwLVnfWTOEGJmpDFGZo=
-X-Received: by 2002:ac2:4848:: with SMTP id 8mr1937587lfy.203.1583927319277;
-	Wed, 11 Mar 2020 04:48:39 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=Y2sihzjefJ+eA/dskUa68RWTmp4BVrC876pst1VzPc4=;
+	b=XZ8hPwdlf8cMVisq3xGYqS6VuehNN6AYWadVsa+dWAgHyiV4/+ZL8KrsL9lVOrjDaY
+	bWGsCtybQhjHPtYnZ/ftwvZ9L6gv5q7ObcQd96szEttSLIY2uKew9xuuxffUN1QcRJMF
+	bl9pCIVdEERPr/bg5HfUORXRxWVIAcouQTYZShbKSgwmLRlSFSY/2DG7P7kGYui4ziBE
+	Y8TazOLqisIqXlvjq/kdQaxmSjDe+qK8y5rVqVkcEyJFA++ofFmBWg71kcdoV/6hFzrs
+	gfCpYrDfmsWKYp9a3fysr7A0CTHJZLPLEnKToNPmaE/Gva7xZh6Ys7hsQYD0dCeP5PP3
+	B9kw==
+X-Gm-Message-State: ANhLgQ0U1oXCOztTceeBsSv8Q0z7gvykkY+jgSwrmQaXVnwfU0GvfwkF
+	qrpkhLgdF1u2H7DGUjKUL40Rje1vz674VHXZeIWjtA==
+X-Google-Smtp-Source: ADFU+vvGvjL9s3EC4PuB4sWyHP7D1PqFlEqmv+AdSfSQwVh40JFQhBUt7pziL2Wx3L1Me6uQnc9+Ye/zGYBIU4Oe/II=
+X-Received: by 2002:a0d:ee04:: with SMTP id x4mr3266299ywe.189.1583933300914; 
+	Wed, 11 Mar 2020 06:28:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200311075513.9491-1-nick83ola@gmail.com>
-	<e50174e3f36143c1dc43f41cedc6232c34035578.camel@andred.net>
-	<44513925f8e11e8f2c6afedce2558da0a9e608f0.camel@andred.net>
-In-Reply-To: <44513925f8e11e8f2c6afedce2558da0a9e608f0.camel@andred.net>
-From: nick83ola <nick83ola@gmail.com>
-Date: Wed, 11 Mar 2020 11:48:27 +0000
-Message-ID: <CABPh3UP2nKhoJ8PCysTc=datmBa=Cgb6kCbiyAk4=yjDV1X2Ow@mail.gmail.com>
-To: =?UTF-8?Q?Andr=C3=A9_Draszik?= <git@andred.net>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] smem: matplotlib is an optional depencency
+References: <20200228150345.11829-1-brgl@bgdev.pl>
+	<CAP9ODKqbfrnLUBzE+WkGceSo+qBimGPUFUcgRuZmS3vwJZqpwA@mail.gmail.com>
+	<CAMRc=MftVskWMFZQhbFKZLwNAR9a1+4zbayWTbXFuSJgG-ZgbA@mail.gmail.com>
+	<CAP9ODKpVW6qxw7+5oA7auBMW1ApLdqjicZf8Ahe3RhYG8QjmgQ@mail.gmail.com>
+	<CAMRc=MeJ0R81s-ui7J78pe89JE6c-_wx3RGUZx-tzMLc3pzthQ@mail.gmail.com>
+	<dd3d6ea7-2bac-6a06-823d-fd070f547784@gmail.com>
+	<CAMRc=MevN3tAfBkLZuOiW0BVbOWkq_T_HiD6XTMwh5d32xrGeQ@mail.gmail.com>
+	<CAMRc=MehBSu1RpPkzP=xiFqt3wpJrf4FhV889jcPxUHPnf0GLg@mail.gmail.com>
+In-Reply-To: <CAMRc=MehBSu1RpPkzP=xiFqt3wpJrf4FhV889jcPxUHPnf0GLg@mail.gmail.com>
+From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Date: Wed, 11 Mar 2020 14:28:09 +0100
+Message-ID: <CAP71Wjz1n_Csm762xbsxUK-3i3OYm-rfh=9Ccf28USLgJjRiFQ@mail.gmail.com>
+To: Bartosz Golaszewski <brgl@bgdev.pl>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>
+Subject: Re: [meta-ota][PATCH] meta-ota: add support for binary-delta images in a new layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,121 +64,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2020 11:48:39 -0000
+X-List-Received-Date: Wed, 11 Mar 2020 13:28:21 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Andre,
-the problem is that if you put the package in RRECOMMENDS, yocto will
-still build
-python3-numpy and python3-matplotlib even if you add it to BAD_RECOMMENDATI=
-ONS
+hi Bartosz,
 
-from https://www.yoctoproject.org/docs/current/mega-manual/mega-manual.html=
-#var-RRECOMMENDS
-  The package manager will automatically install the RRECOMMENDS list
-of packages when installing the built package.
-  However, you can prevent listed packages from being installed by using th=
-e
-  BAD_RECOMMENDATIONS, NO_RECOMMENDATIONS, and PACKAGE_EXCLUDE variables.
+On Wed, Mar 11, 2020 at 9:04 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
 
-Note the "from being installed"
-
-And on my particular machine (armv5) with musl the numpy build is broken
-(no fpu, not supported for now, working on a fix for that but it
-require more time)
-
-Also I don't think is a good idea to build python-numpy (that is huge)
-if the user is not using it...
-on the smem web page it clearly states (https://www.selenic.com/smem)
-
- ->  the matplotlib library for chart generation (optional, auto-detected)
-
-and in the code is doing exactly that
-
-  def showbar(l, columns, sort):
-      try:
-          import pylab, numpy
-      except ImportError:
-          sys.stderr.write("bar chart requires matplotlib\n")
-          sys.exit(-1)
-
-so numpy and matplotlib are needed only if you want to use the
-
-parser.add_option("", "--pie", type=3D'str', help=3D"show pie graph")
-parser.add_option("", "--bar", type=3D'str', help=3D"show bar graph")
-
-function
-
-Another thing: there's a way to declare that a recipe needs a floating
-point unit?
-
-Cheers
-Nick
-
-
-On Wed, 11 Mar 2020 at 10:06, Andr=C3=A9 Draszik <git@andred.net> wrote:
->
-> On Wed, 2020-03-11 at 09:43 +0000, Andr=C3=A9 Draszik wrote:
-> > On Wed, 2020-03-11 at 07:55 +0000, Nicola Lunghi wrote:
-> > > smem doesn't need matplotlib and numpy to run, is an optional depende=
-ncy only
-> > > needed to produce graphs.
+> wt., 3 mar 2020 o 14:56 Bartosz Golaszewski <brgl@bgdev.pl> napisa=C5=82(=
+a):
 > >
-> > Right, that's why it's an RRECOMMENDS. If you don't want it in the imag=
-e, just do
-> > BAD_RECOMMENDATIONS as per usual practice :-)
->
-> Also, smem really wants those to produce graphs. If you want something si=
-mple on
-> the target to just capture the data, there is smemcap as a separate utili=
-ty
-> (and package).
->
-> A.
->
+> > If this is not something that should be part of meta-openembedded - is
+> > there any way to have it hosted at https://git.yoctoproject.org/cgit/
+> > as an official yocto layer? I'm sorry if this is a dumb question, I
+> > don't know exactly what the policy is for that.
 > >
-> > Cheers,
-> > Andre'
-> >
-> > > This is needed to avoid to include and build matplotlib and numpy by =
-default
-> > >
-> > > Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
-> > > ---
-> > >  meta-oe/recipes-support/smem/smem_1.5.bb | 4 +++-
-> > >  1 file changed, 3 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/meta-oe/recipes-support/smem/smem_1.5.bb b/meta-oe/recip=
-es-support/smem/smem_1.5.bb
-> > > index 90db9c3f3..446325e93 100644
-> > > --- a/meta-oe/recipes-support/smem/smem_1.5.bb
-> > > +++ b/meta-oe/recipes-support/smem/smem_1.5.bb
-> > > @@ -20,6 +20,9 @@ UPSTREAM_CHECK_REGEX =3D "(?P<pver>\d+(\.\d+)+)"
-> > >
-> > >  S =3D "${WORKDIR}/${BPN}-${HG_CHANGESET}"
-> > >
-> > > +#PACKAGECONFIG ?=3D "graph"
-> > > +PACKAGECONFIG[graph] =3D ",,,python3-matplotlib python3-numpy"
-> > > +
-> > >  do_compile() {
-> > >          ${CC} ${CFLAGS} ${LDFLAGS} smemcap.c -o smemcap
-> > >  }
-> > > @@ -34,7 +37,6 @@ do_install() {
-> > >  }
-> > >
-> > >  RDEPENDS_${PN} =3D "python3-core python3-compression"
-> > > -RRECOMMENDS_${PN} =3D "python3-matplotlib python3-numpy"
-> > >
-> > >  PACKAGE_BEFORE_PN =3D "smemcap"
-> > >
-> > > --
-> > > 2.20.1
-> > >
 >
+> Hi Khem,
+>
+> gentle ping on this. What is the procedure of hosting a layer at OE?
+>
+
+it depends what you mean here.
+
+1. Hosting on git.yoctoproject.org is mostly for layers supported by YP
+membership, these layers are under the responsibility of the YP TSC [1]
+2. Hosting on git.openembedded.org is under the responsibility of the OE
+TSC [2]
+
+We recently started an initiative using gitlab, to host layers:
+https://gitlab.com/openembedded/community, though it's not picking up much
+for now. But that would be another option, Paul B. or myself could give you
+access
+
+You might want to host the layer on your own (github, gitlab or anywhere
+else). I understand why you think that hosting on yoctoproject.org would
+make it 'more' official, however hundreds of layers are 'self hosted' and
+it's usually not a big concern.
+
+In any case you should register your layer in the OE layer index.
+
+
+[1] https://wiki.yoctoproject.org/wiki/TSC
+[2] https://www.openembedded.org/wiki/TSC
+
+
+
+> Bartosz
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
