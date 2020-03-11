@@ -1,48 +1,26 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
-	[209.85.166.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C5D561BCA
+Return-Path: <ssajal@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 08EE761BCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 14:47:12 +0000 (UTC)
-Received: by mail-il1-f194.google.com with SMTP id a6so2240178ilc.4
+	Wed, 11 Mar 2020 19:11:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 02BJBmSC017507
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 07:47:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=LMS9oAjwbQ8LTOrWPgvj0Gy3Yzn9xsQ/7n7woJjQ6qE=;
-	b=VLQ5G1pqUWarlbNFIv+whwshATQGo7TVKMXXGR2tfE6HUTZVSLqP/OlM1266PqcVoJ
-	haV7vCK18BmI7nn6LwxrMUrp1go6NhPLMhbGU8DkfIsMiQT1EX7WpzNmLAAh9zAAQOFZ
-	mWWPtfVYXxPfgK6RWlR+ZKu3iNp/JMNrqEMNn7l9vgG8Zn+1pP0z/jSU44A9n1DBER1Y
-	ovJYb2KLujvzQ4eqnwBya+tIK8XPuF/qC2Zd4S4oOqpJWMCJcBQmdHzjiXHL1X60cuMw
-	AfVsH02OsracfgYFTmM3+WPIxZray7yTu3m6eZ3+oCe49X8dfdwa1M+kJe+5spv2gjoa
-	4PyQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=LMS9oAjwbQ8LTOrWPgvj0Gy3Yzn9xsQ/7n7woJjQ6qE=;
-	b=mSZnoFgaibZ2zKfvoQwpF2o0gUyPp+xPYvlFXsNFsidMeAdudUSAXU3svRk6Lpl74e
-	9vC5BoDQ4OXzg1Zu8UIde3CXbSGXbSIwdv5rNLyYqQJfpWGfxbhfbf4ExVwm24sspWoV
-	WKsHPci4sTxrmZuNrwett7f5uAkxw9NQczuidQsQVWnQ6trqYoWLJ68TGxcQNILQQeXq
-	O5mn5r1gdHhEE0PwJGCg/czwxIjsVAuIIBl68dSRlXGKWnRXLMKSXXP9KqFSXvTjZ5oy
-	K6HJ5QY3zxVt4qWYyXNENCifxurPdPHy2pjFffOGQHxofRLoImxPr0AfrIf0fCmVc5Z5
-	8OWA==
-X-Gm-Message-State: ANhLgQ0ny1UAHSr6SPQ7Pirw0FL+f8xHKHnIO2yVc8ufegivJCNrrjFq
-	6CaRgZUi1XvFQuJtDTDp3qyRfZTk9SDZ0yGao3Q=
-X-Google-Smtp-Source: ADFU+vugTRjzJSWad9TgJf79k1E6ENQXVxHUA4MQOh2OQM4uezzfHV4eEOcoxm2Q5LEPsnkKkOIx8Cb3FfowQNWoTuU=
-X-Received: by 2002:a92:d304:: with SMTP id x4mr3483408ila.151.1583938033962; 
-	Wed, 11 Mar 2020 07:47:13 -0700 (PDT)
+	Wed, 11 Mar 2020 12:11:48 -0700 (PDT)
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.487.0;
+	Wed, 11 Mar 2020 12:11:48 -0700
+Received: by ala-lpggp3.wrs.com (Postfix, from userid 20885)	id 8111C9001C9;
+	Wed, 11 Mar 2020 12:11:48 -0700 (PDT)
+From: Sakib Sajal <sakib.sajal@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 11 Mar 2020 12:11:48 -0700
+Message-ID: <20200311191148.77027-1-sakib.sajal@windriver.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20200311070359.18480-1-nick83ola@gmail.com>
-In-Reply-To: <20200311070359.18480-1-nick83ola@gmail.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Wed, 11 Mar 2020 07:47:03 -0700
-Message-ID: <CANx9H-Ctq14Tj8DyHnN3-X3bB=8XXncAQiiVhRiALtLW4Rszjg@mail.gmail.com>
-To: Nicola Lunghi <nick83ola@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org,
-	Parthiban Nallathambi <parthitce@gmail.com>
-Subject: Re: [meta-python][PATCH 1/3] python3-cycler: add recipe for 0.10.0
+Subject: [meta-oe][PATCH v2] openjpeg: Fix CVE-2020-6851
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,61 +33,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2020 14:47:13 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 11 Mar 2020 19:11:48 -0000
+Content-Type: text/plain
 
-FWIW, I had made significant progress towards getting ptest enabled for
-Matplotlib, although a bit out of date now [1]. Which included a recipe for
-cycler. It also unbundled a bunch of dependencies, like libagg.
+From: Yue Tao <Yue.Tao@windriver.com>
 
-The ptests do require a fair amount of ram, so standard qemu settings will
-epically fail.
+Backport patch from upstream to fix heap-based buffer overflow
 
-[1]
-https://git.openembedded.org/meta-openembedded-contrib/log/?h=timo/python-matplotlib-2.1.2-WIP
+Upstream-Status: Backport
+CVE: CVE-2020-6851
 
-On Wed, Mar 11, 2020 at 12:04 AM Nicola Lunghi <nick83ola@gmail.com> wrote:
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+Signed-off-by: Sakib Sajal <Sakib.Sajal@windriver.com>
+---
+ .../openjpeg/openjpeg/CVE-2020-6851.patch     | 32 +++++++++++++++++++
+ .../openjpeg/openjpeg_2.3.1.bb                |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
 
-> This is a dependency for python3-matplotlib
->
-> Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
-> ---
->  .../python/python3-cycler_0.10.0.bb              | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/
-> python3-cycler_0.10.0.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb
-> b/meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb
-> new file mode 100644
-> index 000000000..cd21be8ac
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb
-> @@ -0,0 +1,16 @@
-> +SUMMARY = "Composable style cycles"
-> +HOMEPAGE = "http://github.com/matplotlib/cycler"
-> +LICENSE = "BSD"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=7713fe42cd766b15c710e19392bfa811"
-> +
-> +SRC_URI[md5sum] = "4cb42917ac5007d1cdff6cccfe2d016b"
-> +SRC_URI[sha256sum] =
-> "cd7b2d1018258d7247a71425e9f26463dfb444d411c39569972f4ce586b0c9d8"
-> +
-> +inherit pypi setuptools3
-> +
-> +RDEPENDS_${PN} += "\
-> +    python3-core \
-> +    python3-six \
-> +"
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> --
-> 2.20.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
+new file mode 100644
+index 000000000..9f2fc901f
+--- /dev/null
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
+@@ -0,0 +1,32 @@
++From 024b8407392cb0b82b04b58ed256094ed5799e04 Mon Sep 17 00:00:00 2001
++From: Even Rouault <even.rouault@spatialys.com>
++Date: Sat, 11 Jan 2020 01:51:19 +0100
++Subject: [PATCH] opj_j2k_update_image_dimensions(): reject images whose
++ coordinates are beyond INT_MAX (fixes #1228)
++
++---
++ src/lib/openjp2/j2k.c | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/src/lib/openjp2/j2k.c b/src/lib/openjp2/j2k.c
++index 14f6ff41..922550eb 100644
++--- a/src/lib/openjp2/j2k.c
+++++ b/src/lib/openjp2/j2k.c
++@@ -9236,6 +9236,14 @@ static OPJ_BOOL opj_j2k_update_image_dim
++     l_img_comp = p_image->comps;
++     for (it_comp = 0; it_comp < p_image->numcomps; ++it_comp) {
++         OPJ_INT32 l_h, l_w;
+++        if (p_image->x0 > (OPJ_UINT32)INT_MAX ||
+++                p_image->y0 > (OPJ_UINT32)INT_MAX ||
+++                p_image->x1 > (OPJ_UINT32)INT_MAX ||
+++                p_image->y1 > (OPJ_UINT32)INT_MAX) {
+++            opj_event_msg(p_manager, EVT_ERROR,
+++                          "Image coordinates above INT_MAX are not supported\n");
+++            return OPJ_FALSE;
+++        }
++ 
++         l_img_comp->x0 = (OPJ_UINT32)opj_int_ceildiv((OPJ_INT32)p_image->x0,
++                          (OPJ_INT32)l_img_comp->dx);
++-- 
++2.17.1
++
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
+index ffd4099b4..4045148dd 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
+@@ -8,6 +8,7 @@ DEPENDS = "libpng tiff lcms zlib"
+ SRC_URI = " \
+     git://github.com/uclouvain/openjpeg.git \
+     file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
++    file://CVE-2020-6851.patch \
+ "
+ SRCREV = "57096325457f96d8cd07bd3af04fe81d7a2ba788"
+ S = "${WORKDIR}/git"
+-- 
+2.17.1
+
 
