@@ -1,99 +1,42 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f195.google.com (mail-pg1-f195.google.com
-	[209.85.215.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A1C6460451
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 19:39:44 +0000 (UTC)
-Received: by mail-pg1-f195.google.com with SMTP id t3so1752450pgn.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 12:39:46 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
+	[209.85.160.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 39F7E61BB5
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2020 22:41:21 +0000 (UTC)
+Received: by mail-qt1-f179.google.com with SMTP id f17so1610724qtq.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2020 15:41:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:autocrypt:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=1aKvx7DFAp7B7BXyUGV7pe5mFobFK7DeQRj6WAZd6Gg=;
-	b=P6XhX0yKpxhoru3gErozenDpc8qWVXUN2EnlOkW4ajbSZqjK8Bk4bY1G2IWOiqYtJH
-	DNnhWarFbAkZbWZ17iKRH4iWPWTt8cfb5MrcgVWyQIUQ2Ja2Zvdzheq9c32weCC9LIfN
-	K2k4JSYFi7QR2rFUQ6yUBl4k49Ut5RTy7VdhHOwQP4sqCs6JBW47A9sd1f4zcCmuAlHE
-	/xwamaaIMJ0ljswka7r1jCsM5UOZxY3CyGYyb3254zNPJ70kASlThPaqVNTDqtxaA66Q
-	hO/UkIQQ5Jpn2tyiPmJpf3uhJFXwnx7o7OXgjs7OAvOAXhXV9UEJzj2lGpT7x67tN7AW
-	jM2g==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=QsPpvL9873HQdCXV/o26YNb9Cr4/4VWhPaULNIxSCyk=;
+	b=czEKgVoGvuCuFdaaSIQqL73rSgt4dG7hCviW+K1hQVD7v5bmsikF+S8BFp6m0JmZv4
+	1y0TUUNwhRWJ5euzUSHVkvaAOfxgcME0uuo3lDizQi9TsFXLah2ieNc6AVwYcD2MQse2
+	sKYFIlWZuVVyDkysCFyymoe0G4AAVTBl2FR44xRbYRcqqv6IWNFr55LWoGTGkr8LprN6
+	egxYjIOzCoTuaL21yWaldU/RAW8wvcsJh6C1o7NpBmq8+H7/WhFfObp9vw5rXUsFJT4k
+	Iooj6E5Tzxu1BaNgwWqNjyKM4lmX90WengWMTCMt4qCiY8FbKKLDIsc9+QHQuRWp1yQz
+	VNLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=1aKvx7DFAp7B7BXyUGV7pe5mFobFK7DeQRj6WAZd6Gg=;
-	b=cDc3aNZNZH1NI6wJ4mBFdMa8lgiN6x1yO7tvFpQeUpYqnYnB5HiUjw/DhI6FEJl11R
-	DfIwClcN2/irNE4x69wloi0dGPy3Zl/RIQeZnKiWXWv4Oy0fwPwAUwtaALr4ANSWGwCl
-	lqVytQy9Iw7dD5o0xJzbiYVK9TgNs70mW9VjDlhyMzMRcBVBjCgOBJy/zTI9ZRPmsmF1
-	NMehji14HPSZC+zyjq3bktJk+JhumSrm9slqzlhjSmzo8jn7ompMdzE7rOnxmnggZ32i
-	ItPLGJQ69r7yOVNyec2Ze2xo7djJJ10pjlwWA0SO80b2MMHlAp/BASvd813V5vOzgqLc
-	6oOA==
-X-Gm-Message-State: ANhLgQ3i5MR4C6PB2xkF8BP6nxstTtZ8ry93iUpJvIPO/j+itN/ugW4b
-	FjsqsSImfnbmUfmmCwqN2IeEPEmY
-X-Google-Smtp-Source: ADFU+vun2WLfB7tFIk0lAOevgsYWnPiN4tQ9sFwm+mdzuujTnXNehA/fXCDul+gYSRPZxsDEvsdRrg==
-X-Received: by 2002:a62:1513:: with SMTP id 19mr4336622pfv.85.1583955585439;
-	Wed, 11 Mar 2020 12:39:45 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:a5c0:60a5:8a88:a7f9:d809?
-	([2601:202:4180:a5c0:60a5:8a88:a7f9:d809])
-	by smtp.gmail.com with ESMTPSA id
-	v133sm41329572pfc.68.2020.03.11.12.39.44
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Wed, 11 Mar 2020 12:39:44 -0700 (PDT)
-To: Sakib Sajal <sakib.sajal@windriver.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20200311191148.77027-1-sakib.sajal@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <6edd37b1-c032-c6b3-fc8c-3d7b3e82a294@gmail.com>
-Date: Wed, 11 Mar 2020 12:39:43 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.4.1
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=QsPpvL9873HQdCXV/o26YNb9Cr4/4VWhPaULNIxSCyk=;
+	b=dfrajvUPvq6JcM49ss8tJsEQtspdfSgtBdxUqAAiYR1YhOW2yMAQClhgnXEXKkCWPA
+	KxcdXrp0Hcj/y4unzfby1TeR2OHrFre4gTGHZ29Pte3YlaiuUOGnhGRlyI+w2ycQUfbS
+	re0CTtMTcu4ihME1g8N2EvAvznYjOm/E0wlkvN+Y3iudCU1jq5AVPAFrQD4yV7jdS4Sz
+	uxaL10aDBlxXYrk752Foc5gg0S3CbQVk6cuKSKNrU3eC+rgqId7ByqulDz2DyP8Y1Hve
+	+bBZwzHxqOUZP8fj12sZWpI0G7xka+f9/jFPxXJapWuCQZBEx9Jud2LpKBESt75jKLE6
+	WXcQ==
+X-Gm-Message-State: ANhLgQ23n0mkFy7bmAjIEABGQyBNjp7NVEt5gYCdxlI1hYpaorPrjX6q
+	gVB4Nh+arQf6AT8DWNra/rkGQ+bF0xCZdIwwacR7wNGEOIs=
+X-Google-Smtp-Source: ADFU+vtvG/fhBhcRTUwYWkH2zBlv6BwEVh7Vg/AaYdl+GOR9Kij3OCFjAiuf6miRrj2jvYX5JIvxNxSGhYyojduP1NQ=
+X-Received: by 2002:ac8:3003:: with SMTP id f3mr4722753qte.293.1583966481280; 
+	Wed, 11 Mar 2020 15:41:21 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200311191148.77027-1-sakib.sajal@windriver.com>
-Subject: Re: [meta-oe][PATCH v2] openjpeg: Fix CVE-2020-6851
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Mar 2020 15:40:55 -0700
+Message-ID: <CAMKF1spbcLr-ZA8KrObx3OAhv0A7gJ2Dk+Zkj0FZzbMr7C_Maw@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Subject: State of OE world - 2020-03-09
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -106,82 +49,209 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2020 19:39:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 11 Mar 2020 22:41:21 -0000
+Content-Type: text/plain; charset="UTF-8"
+
+== Failed tasks 2020-03-09 ==
+
+INFO: jenkins-job.sh-1.8.46 Complete log available at
+/media/ra_build_share/buildlogs/oe/world/dunfell/log.report.20200310_140304.log
+
+=== common (0) ===
+
+=== common-x86 (0) ===
+
+=== qemuarm (0) ===
+
+=== qemuarm64 (1) ===
+    * sources/meta-openembedded/meta-oe/recipes-extended/sysdig/sysdig_git.bb:do_compile
+
+=== qemux86 (0) ===
+
+=== qemux86_64 (0) ===
+
+=== Number of failed tasks (1) ===
+{| class=wikitable
+|-
+|| qemuarm || 0 ||
+/media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.world.qemuarm.20200309_132038.log/
+||
+|-
+|| qemuarm64 || 1 ||
+/media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.world.qemuarm64.20200309_202041.log/
+|| http://errors.yoctoproject.org/Errors/Build/99898/
+|-
+|| qemux86 || 0 ||
+/media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.world.qemux86.20200309_202040.log/
+||
+|-
+|| qemux86_64 || 0 ||
+/media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.world.qemux86-64.20200309_202038.log/
+||
+|}
+
+=== PNBLACKLISTs (20) ===
+
+
+sources/meta-openembedded:
+    * meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb:PNBLACKLIST[netkit-rusers]
+= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or
+directory"
+    * meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb:PNBLACKLIST[drbd]
+= "Kernel module Needs forward porting to kernel 5.2+"
+    * meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb:PNBLACKLIST[lowpan-tools]
+= "WARNING these tools are deprecated! Use wpan-tools instead"
+    * meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb:PNBLACKLIST[dnf-plugin-tui]
+?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does
+not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
+    * meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb:PNBLACKLIST[nanopb]
+= "Needs forward porting to use python3"
+    * meta-oe/recipes-extended/socketcan/can-isotp_git.bb:PNBLACKLIST[can-isotp]
+= "Kernel module Needs forward porting to kernel 5.2+"
+    * meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb:PNBLACKLIST[dnfdragora]
+?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does
+not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
+    * meta-oe/recipes-kernel/bpftool/bpftool.bb:PNBLACKLIST[bpftool] =
+"Needs forward porting to kernel 5.2+"
+
+
+sources/meta-yoe:
+    * conf/distro/yoe.inc:PNBLACKLIST[build-appliance-image] = "tries
+to include whole downloads directory in /home/builder/poky :/"
+    * conf/distro/yoe.inc:PNBLACKLIST[smartrefrigerator] = "Needs
+porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[homeautomation] = "Needs porting
+to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[applicationlauncher] = "Needs
+porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[spacetouch] = "Needs porting to
+libplanes 1.0"
+    * conf/distro/yoe.inc:PNBLACKLIST[qtviewplanes] = "Needs porting
+to libplanes 1.0"
+    * conf/distro/yoe.inc:PNBLACKLIST[egt-thermostat] = "Needs porting
+to egt 0.8.2+"
+
+
+sources/openembedded-core:
+    * meta/recipes-devtools/dnf/dnf_4.2.2.bb:PNBLACKLIST[dnf] ?=
+"${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does not
+build without package_rpm in PACKAGE_CLASSES due disabled rpm support
+in libsolv', d)}"
+    * meta/recipes-devtools/libdnf/libdnf_0.28.1.bb:PNBLACKLIST[libdnf]
+?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'Does
+not build without package_rpm in PACKAGE_CLASSES due disabled rpm
+support in libsolv', d)}"
+
+
+conf/local.conf:
+    * PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need
+to be tested so much"
+    * PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to
+be tested so much"
+    * PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to
+be tested so much"
+    * PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need
+to be tested so much"
+    * PNBLACKLIST[build-appliance-image] = "tries to include whole
+downloads directory in /home/builder/poky :/"
+
+=== QA issues (0) ===
+{| class=wikitable
+!| Count ||Issue
+|-
+||0 ||already-stripped
+|-
+||0 ||build-deps
+|-
+||0 ||compile-host-path
+|-
+||0 ||file-rdeps
+|-
+||0 ||host-user-contaminated
+|-
+||0 ||installed-vs-shipped
+|-
+||0 ||invalid-pkgconfig
+|-
+||0 ||ldflags
+|-
+||0 ||libdir
+|-
+||0 ||pkgname
+|-
+||0 ||qa_pseudo
+|-
+||0 ||symlink-to-sysroot
+|-
+||0 ||textrel
+|-
+||0 ||unknown-configure-option
+|-
+||0 ||version-going-backwards
+|}
 
 
 
-On 3/11/20 12:11 PM, Sakib Sajal wrote:
-> From: Yue Tao <Yue.Tao@windriver.com>
->
-> Backport patch from upstream to fix heap-based buffer overflow
->
-> Upstream-Status: Backport
-> CVE: CVE-2020-6851
+=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
 
-Applies to Zeus too.
+Complete log: /media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.signatures.20200309_212117.log/
+
+No issues detected
 
 
->
-> Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
-> Signed-off-by: Sakib Sajal <Sakib.Sajal@windriver.com>
-> ---
->  .../openjpeg/openjpeg/CVE-2020-6851.patch     | 32 +++++++++++++++++++
->  .../openjpeg/openjpeg_2.3.1.bb                |  1 +
->  2 files changed, 33 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
->
-> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
-> new file mode 100644
-> index 000000000..9f2fc901f
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-6851.patch
-> @@ -0,0 +1,32 @@
-> +From 024b8407392cb0b82b04b58ed256094ed5799e04 Mon Sep 17 00:00:00 2001
-> +From: Even Rouault <even.rouault@spatialys.com>
-> +Date: Sat, 11 Jan 2020 01:51:19 +0100
-> +Subject: [PATCH] opj_j2k_update_image_dimensions(): reject images whose
-> + coordinates are beyond INT_MAX (fixes #1228)
-> +
-> +---
-> + src/lib/openjp2/j2k.c | 8 ++++++++
-> + 1 file changed, 8 insertions(+)
-> +
-> +diff --git a/src/lib/openjp2/j2k.c b/src/lib/openjp2/j2k.c
-> +index 14f6ff41..922550eb 100644
-> +--- a/src/lib/openjp2/j2k.c
-> ++++ b/src/lib/openjp2/j2k.c
-> +@@ -9236,6 +9236,14 @@ static OPJ_BOOL opj_j2k_update_image_dim
-> +     l_img_comp = p_image->comps;
-> +     for (it_comp = 0; it_comp < p_image->numcomps; ++it_comp) {
-> +         OPJ_INT32 l_h, l_w;
-> ++        if (p_image->x0 > (OPJ_UINT32)INT_MAX ||
-> ++                p_image->y0 > (OPJ_UINT32)INT_MAX ||
-> ++                p_image->x1 > (OPJ_UINT32)INT_MAX ||
-> ++                p_image->y1 > (OPJ_UINT32)INT_MAX) {
-> ++            opj_event_msg(p_manager, EVT_ERROR,
-> ++                          "Image coordinates above INT_MAX are not supported\n");
-> ++            return OPJ_FALSE;
-> ++        }
-> + 
-> +         l_img_comp->x0 = (OPJ_UINT32)opj_int_ceildiv((OPJ_INT32)p_image->x0,
-> +                          (OPJ_INT32)l_img_comp->dx);
-> +-- 
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> index ffd4099b4..4045148dd 100644
-> --- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> +++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-> @@ -8,6 +8,7 @@ DEPENDS = "libpng tiff lcms zlib"
->  SRC_URI = " \
->      git://github.com/uclouvain/openjpeg.git \
->      file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-> +    file://CVE-2020-6851.patch \
->  "
->  SRCREV = "57096325457f96d8cd07bd3af04fe81d7a2ba788"
->  S = "${WORKDIR}/git"
+QA issues by type:
+count: 0 issue: already-stripped
 
+
+count: 0 issue: libdir
+
+
+count: 0 issue: textrel
+
+
+count: 0 issue: build-deps
+
+
+count: 0 issue: file-rdeps
+
+
+count: 0 issue: version-going-backwards
+
+
+count: 0 issue: host-user-contaminated
+
+
+count: 0 issue: installed-vs-shipped
+
+
+count: 0 issue: unknown-configure-option
+
+
+count: 0 issue: symlink-to-sysroot
+
+
+count: 0 issue: invalid-pkgconfig
+
+
+count: 0 issue: pkgname
+
+
+count: 0 issue: ldflags
+
+
+count: 0 issue: compile-host-path
+
+
+count: 0 issue: qa_pseudo
+
+
+
+This git log matches with the metadata as seen by qemuarm build.
+In some cases qemux86 and qemux86-64 builds are built with slightly
+different metadata, you can see the exact version near the top of each
+log.world.qemu* files linked from the report
+~/oe/world/yoe ~/oe/world/yoe
 
