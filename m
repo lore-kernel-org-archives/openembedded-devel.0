@@ -1,57 +1,52 @@
-Return-Path: <nicolas.dechesne@linaro.org>
-Received: from mail-yw1-f42.google.com (mail-yw1-f42.google.com
-	[209.85.161.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 744556069A
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-il1-f180.google.com (mail-il1-f180.google.com
+	[209.85.166.180])
+	by mail.openembedded.org (Postfix) with ESMTP id CAA5661BE9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 13:28:21 +0000 (UTC)
-Received: by mail-yw1-f42.google.com with SMTP id v138so1935799ywa.9
+	Wed, 11 Mar 2020 14:38:41 +0000 (UTC)
+Received: by mail-il1-f180.google.com with SMTP id k29so2237221ilg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 06:28:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	Wed, 11 Mar 2020 07:38:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=Y2sihzjefJ+eA/dskUa68RWTmp4BVrC876pst1VzPc4=;
-	b=iTpYaMxDerGxOiZSh73rOMvVxV49aRe1C49Ir9Dnoamt2Yi527m0bYIlOkckFk/Dlz
-	XOHD/t5NbkOPziM5WodrFcjzfRpoFumuzsBi29l4mDdPnmZPCDD1Xjd9BZFtLVjOeaaD
-	T6KSblAUFNeA+6uEuyxBBiAdpbaEO2zib56GAyV3jXz62l5Hawu9YAZiq3/sd+SjVmio
-	usucC4/L3KmjEALL6IKJ9E4Zq5ntyLfaLYVZcBviv6ogKuYLA3ZmPqxY5oBCDEwglwCs
-	EKidcQizDW5ck94bZXVjwcUktEJ+bSnHzZ1iDR5UWcfXUff5+Wp0Vbyr37Wsl5XBbL/K
-	+OuQ==
+	:cc; bh=cGVk/WBXd6B8aPUh7GEZN884f7QztgIN9yRs+B7zP7o=;
+	b=D4dXMZnDwjIwbSGSGAgJbSwJ/TrMAeP59TuqF4D+V5U5XTAeWJUVx5YXb2MC6ZI+Tc
+	mkjs/sBrtfelhljCFdQjkB5T4DEZwg9/gE/ee4pVpiNsaIsFC+N1pyzVVH4PO0j7r+u5
+	UYDzIT3tpi/jdMS+ZVZlsnoO/HWTcwxh1GO/AJYke5H9/ILNpJsr84Dxwihf+itRWjHc
+	FWba5EWUEiKMgsewW8ppSF62t9ld+nxkri3Zpd63OPogLJvjLUYP3hy+yBX33rTQQd4m
+	U/zh3J2cqjc+TEHvoMpP2Tfg92Z3hxxZNLCjTZfpyWhi2GXZW2x9hVYG8QXSVMap/36V
+	p3Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=Y2sihzjefJ+eA/dskUa68RWTmp4BVrC876pst1VzPc4=;
-	b=XZ8hPwdlf8cMVisq3xGYqS6VuehNN6AYWadVsa+dWAgHyiV4/+ZL8KrsL9lVOrjDaY
-	bWGsCtybQhjHPtYnZ/ftwvZ9L6gv5q7ObcQd96szEttSLIY2uKew9xuuxffUN1QcRJMF
-	bl9pCIVdEERPr/bg5HfUORXRxWVIAcouQTYZShbKSgwmLRlSFSY/2DG7P7kGYui4ziBE
-	Y8TazOLqisIqXlvjq/kdQaxmSjDe+qK8y5rVqVkcEyJFA++ofFmBWg71kcdoV/6hFzrs
-	gfCpYrDfmsWKYp9a3fysr7A0CTHJZLPLEnKToNPmaE/Gva7xZh6Ys7hsQYD0dCeP5PP3
-	B9kw==
-X-Gm-Message-State: ANhLgQ0U1oXCOztTceeBsSv8Q0z7gvykkY+jgSwrmQaXVnwfU0GvfwkF
-	qrpkhLgdF1u2H7DGUjKUL40Rje1vz674VHXZeIWjtA==
-X-Google-Smtp-Source: ADFU+vvGvjL9s3EC4PuB4sWyHP7D1PqFlEqmv+AdSfSQwVh40JFQhBUt7pziL2Wx3L1Me6uQnc9+Ye/zGYBIU4Oe/II=
-X-Received: by 2002:a0d:ee04:: with SMTP id x4mr3266299ywe.189.1583933300914; 
-	Wed, 11 Mar 2020 06:28:20 -0700 (PDT)
+	bh=cGVk/WBXd6B8aPUh7GEZN884f7QztgIN9yRs+B7zP7o=;
+	b=KeC75MIUhvbGqDVFJIKcqGl95pAhJGFNlCKAuZCC+hFg3KVXBsB0a1tp+U4nVmM9q6
+	2f/7X98XVil3TYIwsHh/F49+HSoEOYx9jxwqeC41kfvIzl+PP2gg75NOm9LhveL88I+T
+	TfMn5rY30UBYU4KOoAFZC/OALCCdBbHoFIqNresr0t5RoXYx/C/Z3Jh4pRv5zEjO64ws
+	jUkJswjoehAGV870XImWEZSP99J5gH8PyT/wz4a4fo7pJr4Iiuy/OKqffX4V5Vcq8Q3a
+	JkHgKA/p2rg6+UtItIbpPEFOVdeBurddt3hy4r4H7dl9hWClfOQF0EvazRUeon5MoNo4
+	/FBg==
+X-Gm-Message-State: ANhLgQ2hacKujj0HE4W1L38ADVYzUDm51QHi6aCWEXWICQcqb5ik42Tt
+	Dtsqf/a6yXiP94R1MhNKNCYFOXA3Jyf0aziJQ6w=
+X-Google-Smtp-Source: ADFU+vtgRQ2IjLjKN1MK3qInjp2cf4B6kkb4ifc7rq8/FTcsFRu9GJZhf9UovnjIygBA/67Gw7S3EBooua8ymZuNPvA=
+X-Received: by 2002:a05:6e02:1090:: with SMTP id
+	r16mr3506680ilj.198.1583937522225; 
+	Wed, 11 Mar 2020 07:38:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200228150345.11829-1-brgl@bgdev.pl>
-	<CAP9ODKqbfrnLUBzE+WkGceSo+qBimGPUFUcgRuZmS3vwJZqpwA@mail.gmail.com>
-	<CAMRc=MftVskWMFZQhbFKZLwNAR9a1+4zbayWTbXFuSJgG-ZgbA@mail.gmail.com>
-	<CAP9ODKpVW6qxw7+5oA7auBMW1ApLdqjicZf8Ahe3RhYG8QjmgQ@mail.gmail.com>
-	<CAMRc=MeJ0R81s-ui7J78pe89JE6c-_wx3RGUZx-tzMLc3pzthQ@mail.gmail.com>
-	<dd3d6ea7-2bac-6a06-823d-fd070f547784@gmail.com>
-	<CAMRc=MevN3tAfBkLZuOiW0BVbOWkq_T_HiD6XTMwh5d32xrGeQ@mail.gmail.com>
-	<CAMRc=MehBSu1RpPkzP=xiFqt3wpJrf4FhV889jcPxUHPnf0GLg@mail.gmail.com>
-In-Reply-To: <CAMRc=MehBSu1RpPkzP=xiFqt3wpJrf4FhV889jcPxUHPnf0GLg@mail.gmail.com>
-From: Nicolas Dechesne <nicolas.dechesne@linaro.org>
-Date: Wed, 11 Mar 2020 14:28:09 +0100
-Message-ID: <CAP71Wjz1n_Csm762xbsxUK-3i3OYm-rfh=9Ccf28USLgJjRiFQ@mail.gmail.com>
-To: Bartosz Golaszewski <brgl@bgdev.pl>,
-	Richard Purdie <richard.purdie@linuxfoundation.org>
+References: <1583473076-316898-1-git-send-email-changqing.li@windriver.com>
+	<CA+chaQeyJH+C1u6bmi+6oLm5EqwTUyavb_E1WBz7RNJ4+Yf4EQ@mail.gmail.com>
+	<CAMKF1sqK87OAVsNfumC0TZC+6U80NJ4aWzCx45pU+NK33ax=pw@mail.gmail.com>
+	<c519184e-2e78-36fd-2f9a-1b97ebfcb2f1@windriver.com>
+	<CAMKF1spdp2K5V2-ejRC+9aHiWoDiqkkDw6KwwQXz1BjdprygJw@mail.gmail.com>
+In-Reply-To: <CAMKF1spdp2K5V2-ejRC+9aHiWoDiqkkDw6KwwQXz1BjdprygJw@mail.gmail.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Wed, 11 Mar 2020 07:38:31 -0700
+Message-ID: <CANx9H-A94H-OdEHBPwwRuDGctRq_Qqx5SLQq-4K8Ov5O08nbxg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio.salvador@ossystems.com.br>
-Subject: Re: [meta-ota][PATCH] meta-ota: add support for binary-delta images in a new layer
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] layer.conf: add meta-python to LAYERDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,58 +59,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2020 13:28:21 -0000
+X-List-Received-Date: Wed, 11 Mar 2020 14:38:42 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-hi Bartosz,
+On Wed, Mar 11, 2020 at 12:38 AM Khem Raj <raj.khem@gmail.com> wrote:
 
-On Wed, Mar 11, 2020 at 9:04 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-
-> wt., 3 mar 2020 o 14:56 Bartosz Golaszewski <brgl@bgdev.pl> napisa=C5=82(=
-a):
+> On Tue, Mar 10, 2020 at 11:39 PM Changqing Li
+> <changqing.li@windriver.com> wrote:
 > >
-> > If this is not something that should be part of meta-openembedded - is
-> > there any way to have it hosted at https://git.yoctoproject.org/cgit/
-> > as an official yocto layer? I'm sorry if this is a dumb question, I
-> > don't know exactly what the policy is for that.
 > >
+> > On 3/7/20 12:12 AM, Khem Raj wrote:
+> > > On Thu, Mar 5, 2020 at 11:55 PM Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> > >> Can we fix mozjs instead?
+> > > perhaps thats better fix, maybe it can made optional via packageconfig
+> ?
+> > > or marked incompatible if meta-python is not included
+> >
+> > Hi,  Khem
+> >
+> > There are 2 solutions for the problem, Which do you think is better?
+> >
+> >
+> > 1.  fix this by using BBFILES_DYNAMIC, add a folder dynamic-layers under
+> > meta-oe,
+> >
+> > and move those recipes that depend on meta-python under the
+> > dynamic-layers.  and add
+> >
+> > these bbfiles by BBFILES_DYNAMIC.   but these will need to move many
+> > recipes from
+> >
+> > original folder to folder dynamic-layers,   do you think this change is
+> > acceptable?
 >
-> Hi Khem,
 >
-> gentle ping on this. What is the procedure of hosting a layer at OE?
->
-
-it depends what you mean here.
-
-1. Hosting on git.yoctoproject.org is mostly for layers supported by YP
-membership, these layers are under the responsibility of the YP TSC [1]
-2. Hosting on git.openembedded.org is under the responsibility of the OE
-TSC [2]
-
-We recently started an initiative using gitlab, to host layers:
-https://gitlab.com/openembedded/community, though it's not picking up much
-for now. But that would be another option, Paul B. or myself could give you
-access
-
-You might want to host the layer on your own (github, gitlab or anywhere
-else). I understand why you think that hosting on yoctoproject.org would
-make it 'more' official, however hundreds of layers are 'self hosted' and
-it's usually not a big concern.
-
-In any case you should register your layer in the OE layer index.
+> I think we can live with BBFILES_DYNAMIC solution.
 
 
-[1] https://wiki.yoctoproject.org/wiki/TSC
-[2] https://www.openembedded.org/wiki/TSC
+I agree.
 
 
-
-> Bartosz
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
