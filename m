@@ -1,50 +1,53 @@
 Return-Path: <nick83ola@gmail.com>
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com
-	[209.85.128.45])
-	by mail.openembedded.org (Postfix) with ESMTP id D42D961B3B
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com
+	[209.85.221.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 928B161BD2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 07:04:33 +0000 (UTC)
-Received: by mail-wm1-f45.google.com with SMTP id x3so2452995wmj.1
+	Wed, 11 Mar 2020 07:04:47 +0000 (UTC)
+Received: by mail-wr1-f49.google.com with SMTP id z15so1155251wrl.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 00:04:35 -0700 (PDT)
+	Wed, 11 Mar 2020 00:04:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7FMOq4VpqVb1Cp7y5s+oJEtE00OqJ4FjOzVLTcdUifs=;
-	b=q5YNT/FfNuZfLdlmmam8jpZ0kEP8jxq21+Ah0JyqAaN11qYR4s0eqe2THDcwz5ixde
-	tvZQkjdmgvnG4B5haOdX3jzivKc48YF7/yIvJ5liezfFjTDdRxFr9RqgEgBuBYleCHBV
-	ES3VAcHDP+eKh7DQ0lIFbKhXsLgYvDy0ltCd3HaUII/5gbjIPUVSCwhvtLTjpC6yE0lX
-	/+donXLDtDSqPkzbjZasOXFlEKonoy1Dll2WVBKxT+LrXyV5f0n4MyHuQtSll55ux6pe
-	dvA8EqPqxkblr005X2B6I48WD9VYRyK1tfJUhV8XPIlggwfd8RvP9tOKa1LQ0FiZHzXf
-	4ruA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=I8tMnzA3jtI70iuNB3GpkQVjVdOoGQ9fklrrzxcZXHM=;
+	b=lMnFsfvuaEh1zGZ6SoTfbXdP+8z8yk6G1/GKQ/1OaXGVikwtSZIsB3kGmzfUt5yvBn
+	ix1yRMXvt9IWvkItv1cEGDist3b5owsN8s8e4kmRi5V45vw9Ul4fEgrdGxsggG4tlE5B
+	EhgCM5aMaSjiIMOMmzsMfpKkKl0aLDqqbiTXj6qPxOSSVLI+rs40bWOXBJSSilFNCf+4
+	u2SfW31hpKT/O2RT3kyeeOUgrqZjJW9tEr0tgHeN9PHwOV+gQPDeqWU80oaNziZvNZKr
+	cHPOvFnFyJFouhVdWBOBzN56GMXYXedmme0RLTpjUQJPZ4zuH/2Ku8uxs/30uatvaDm1
+	vdog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=7FMOq4VpqVb1Cp7y5s+oJEtE00OqJ4FjOzVLTcdUifs=;
-	b=d4UXp8umhMUG/ceGWe++TKE3iNXTJSjx28eOXNLrdhRl/6RfMg3eLVskEYc+0UVw//
-	zy2xbAjJtPnvfVJ21viaoobI79ITSv6vFtGYYYlYjm8zJMLBOHSgmSo8ZigE0ZjeZwca
-	khzQybR89jYad7hl4tsnUW5cicPnvxrc0QVNlUpfHsjdtA7T+cOCzyu75DAHNYwGwbpE
-	8CGD0CMF5QWbc77LnlA+ZLxKkeQhh1oQUxTX1lvP1RMfHRZXCnLIZAIaebsjF5kUWfSF
-	Jo/Cp+GjgEhy17rA3nxfLZPtB80YlvKmA32UaW5a9gqa00RDF79F9OanxEMiOE7n00od
-	b+GQ==
-X-Gm-Message-State: ANhLgQ2FgXFt5PsX+KHKoLadOFmHgc+lATFq2hqpRmpbdJloF7V/q+t0
-	v4J0lEl+W27rinrhR12p/WrAKP84/5BJMw==
-X-Google-Smtp-Source: ADFU+vsU5bT5Iv69qSUzLNphhx23UzIsMTBRH8R3bWAYvXgRqC3EdZ8X+GFiDkwE51mMsi2+F3TBSg==
-X-Received: by 2002:a1c:9c96:: with SMTP id f144mr2046703wme.98.1583910274145; 
-	Wed, 11 Mar 2020 00:04:34 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=I8tMnzA3jtI70iuNB3GpkQVjVdOoGQ9fklrrzxcZXHM=;
+	b=P6cMFjLHd73Sk/iL2g8C9/ZZPnzbSTQFZtJV41+BPFRSZNioWL/jhyfkRd7iVr4T8a
+	mncoSuDvaie3jv0atxUwm++1725OwLdgr9+doAhhLZvgpRA+xYrgd+aqiTQneR9Pdzag
+	MEbh+kTIwY+uctkiKqx+DBkPRz5mDZiFHU0fp1+pirMKxp6yNqzOUr1ty6OVZbw7rq5w
+	CTbjcxdT1V+sydNqJgRvj+SjuZsTHHiN65O7eIykewC9BsiNnW/7P2HXvhdQI/Wwd3Qt
+	Op2Ew5DV9K3hPfQ9dKP9qYsSedvW1LTFWODiwhdm8OFGKXDuRkcp7nJebdbS+Ah/43bW
+	Zw5w==
+X-Gm-Message-State: ANhLgQ0ZTFoVBJQm7laFkGplYdOS+Z86G2IO+0h3H6/KjglyAjLjCGfR
+	5R2ZcvDIHU50qjYHQk8VLCizPMsoy61YaA==
+X-Google-Smtp-Source: ADFU+vvXJBB5/P2oatLrBMfs7hgM/+59/OGQXrEFFm1ad+yoNH7MHG/fenw3HTMzhr7sAyOTFgktiQ==
+X-Received: by 2002:a05:6000:18f:: with SMTP id
+	p15mr2766225wrx.149.1583910287921; 
+	Wed, 11 Mar 2020 00:04:47 -0700 (PDT)
 Received: from localhost.localdomain ([79.97.95.10])
-	by smtp.gmail.com with ESMTPSA id f2sm9567312wrv.48.2020.03.11.00.04.31
+	by smtp.gmail.com with ESMTPSA id f2sm9567312wrv.48.2020.03.11.00.04.46
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 11 Mar 2020 00:04:32 -0700 (PDT)
+	Wed, 11 Mar 2020 00:04:47 -0700 (PDT)
 From: Nicola Lunghi <nick83ola@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Mar 2020 07:03:58 +0000
-Message-Id: <20200311070359.18480-1-nick83ola@gmail.com>
+Date: Wed, 11 Mar 2020 07:04:00 +0000
+Message-Id: <20200311070359.18480-2-nick83ola@gmail.com>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200311070359.18480-1-nick83ola@gmail.com>
+References: <20200311070359.18480-1-nick83ola@gmail.com>
 MIME-Version: 1.0
 Cc: Parthiban Nallathambi <parthitce@gmail.com>
-Subject: [meta-python][PATCH 1/3] python3-cycler: add recipe for 0.10.0
+Subject: [meta-python][PATCH 2/3] python3-kiwisolver: add recipe for version 1.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,36 +60,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2020 07:04:34 -0000
+X-List-Received-Date: Wed, 11 Mar 2020 07:04:47 -0000
 Content-Transfer-Encoding: 8bit
 
 This is a dependency for python3-matplotlib
 
 Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
 ---
- .../python/python3-cycler_0.10.0.bb              | 16 ++++++++++++++++
+ .../python/python3-kiwisolver_1.1.0.bb           | 16 ++++++++++++++++
  1 file changed, 16 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb b/meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb b/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
 new file mode 100644
-index 000000000..cd21be8ac
+index 000000000..a10830257
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-kiwisolver_1.1.0.bb
 @@ -0,0 +1,16 @@
-+SUMMARY = "Composable style cycles"
-+HOMEPAGE = "http://github.com/matplotlib/cycler"
++SUMMARY = "A fast implementation of the Cassowary constraint solver"
++HOMEPAGE = "https://github.com/nucleic/kiwi"
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=7713fe42cd766b15c710e19392bfa811"
++LIC_FILES_CHKSUM = "file://setup.py;endline=7;md5=1c177d169db050341d3b890c69fb80e3"
 +
-+SRC_URI[md5sum] = "4cb42917ac5007d1cdff6cccfe2d016b"
-+SRC_URI[sha256sum] = "cd7b2d1018258d7247a71425e9f26463dfb444d411c39569972f4ce586b0c9d8"
++SRC_URI[md5sum] = "fc8a614367f7ba0d34a02fd08c535afc"
++SRC_URI[sha256sum] = "53eaed412477c836e1b9522c19858a8557d6e595077830146182225613b11a75"
 +
 +inherit pypi setuptools3
 +
 +RDEPENDS_${PN} += "\
 +    python3-core \
-+    python3-six \
++    python3-setuptools \
 +"
 +
 +BBCLASSEXTEND = "native nativesdk"
