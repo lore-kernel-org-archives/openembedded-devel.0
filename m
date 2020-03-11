@@ -1,26 +1,44 @@
-Return-Path: <dhuo@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DFA566069A
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com
+	[209.85.221.67])
+	by mail.openembedded.org (Postfix) with ESMTP id F26FA61B94
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 09:53:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 02B9r4bE012633
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Wed, 11 Mar 2020 10:06:03 +0000 (UTC)
+Received: by mail-wr1-f67.google.com with SMTP id p2so1762713wrw.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 02:53:04 -0700 (PDT)
-Received: from pek-lpggp2 (128.224.153.75) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.487.0;
-	Wed, 11 Mar 2020 02:52:58 -0700
-Received: by pek-lpggp2 (Postfix, from userid 18189)	id E313C721DF0; Wed, 11
-	Mar 2020 17:52:31 +0800 (CST)
-From: De Huo <De.Huo@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 11 Mar 2020 17:52:30 +0800
-Message-ID: <1583920350-198351-1-git-send-email-De.Huo@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 11 Mar 2020 03:06:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:user-agent:mime-version:content-transfer-encoding;
+	bh=u/OPQbvq9U4m4GRnfy9rHO6DhyhdNg+loZfLUce/A/Q=;
+	b=rPh1Zrjblw3tKOAZOLlG8RcI1kELJN735EDI/zS5fDStPXCd/uQDoANC39qYsMIjqN
+	pIo/0XnRsCVE/XQDYUL6NYwpUPYfV7Hl6w2tv+qRiwGm3/AjK4MHsDYGgyx7pXAtcgtO
+	c5I4Mm4Gu0snFDGNFbnf42XyGUHcOhwasbderc4JEaK8hJfQjz1KVBeJLIy6YRsaUIZe
+	6s04JNrSmgzpGqB4YROJNnAfOybp4j0Q4hkNnNjgkTerfOqgnxWR/RjlKvfts1jA4Ugo
+	blvwwXFjttxIMwoF5hCyT4ZVs/6J4K/JAIkEBTAbshrUO4FIG6yeWhejuQO9J+kHP5g4
+	ykeQ==
+X-Gm-Message-State: ANhLgQ1z2/BLlY0zEr3y0cLQ1uLUA7afEGFJIe8Zjb7i6lvPsouzL1Kb
+	yFSOSlCZZ/UpYAvP7kFTYYzFClim
+X-Google-Smtp-Source: ADFU+vvmxszXTLNSzngn19FLqSx5xN/c9pnSaje+jckgGoStt6FDSuc+y4mX/TWqYCL+ODyVLLn8gw==
+X-Received: by 2002:adf:e4c3:: with SMTP id v3mr3577476wrm.303.1583921164398; 
+	Wed, 11 Mar 2020 03:06:04 -0700 (PDT)
+Received: from tfsielt31850 ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	n11sm36715401wrw.11.2020.03.11.03.06.03
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Wed, 11 Mar 2020 03:06:03 -0700 (PDT)
+Message-ID: <44513925f8e11e8f2c6afedce2558da0a9e608f0.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 11 Mar 2020 10:06:03 +0000
+In-Reply-To: <e50174e3f36143c1dc43f41cedc6232c34035578.camel@andred.net>
+References: <20200311075513.9491-1-nick83ola@gmail.com>
+	<e50174e3f36143c1dc43f41cedc6232c34035578.camel@andred.net>
+User-Agent: Evolution 3.30.5-1.1 
 MIME-Version: 1.0
-Subject: [meta-oe][zeus][PATCH] rng-tools: Supply patches to fix rngd block reboot issue
+Subject: Re: [meta-oe][PATCH] smem: matplotlib is an optional depencency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,270 +51,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2020 09:53:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 11 Mar 2020 10:06:04 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-There will be issue about "Hardware RNG Entropy Gatherer Daemon slow stop"
-during "reboot" of CN96xx.
+On Wed, 2020-03-11 at 09:43 +0000, André Draszik wrote:
+> On Wed, 2020-03-11 at 07:55 +0000, Nicola Lunghi wrote:
+> > smem doesn't need matplotlib and numpy to run, is an optional dependency only
+> > needed to produce graphs.
+> 
+> Right, that's why it's an RRECOMMENDS. If you don't want it in the image, just do
+> BAD_RECOMMENDATIONS as per usual practice :-)
 
-Backport the patches from
-https://github.com/nhorman/rng-tools/commit/3e47faae108df4824531bf9c003cc1c65b7b2842
- and
-https://github.com/nhorman/rng-tools/commit/cf1475fbdf33d5c3a62099b6b20f2b2017d6de33
+Also, smem really wants those to produce graphs. If you want something simple on
+the target to just capture the data, there is smemcap as a separate utility
+(and package).
 
-Signed-off-by: De Huo <De.Huo@windriver.com>
----
- .../0001-Allow-jitter-threads-to-exit-faster.patch | 130 +++++++++++++++++++++
- .../rng-tools/0002-Daemonize-earlier-in-init.patch |  88 ++++++++++++++
- meta/recipes-support/rng-tools/rng-tools_6.7.bb    |   2 +
- 3 files changed, 220 insertions(+)
- create mode 100644 meta/recipes-support/rng-tools/rng-tools/0001-Allow-jitter-threads-to-exit-faster.patch
- create mode 100644 meta/recipes-support/rng-tools/rng-tools/0002-Daemonize-earlier-in-init.patch
+A.
 
-diff --git a/meta/recipes-support/rng-tools/rng-tools/0001-Allow-jitter-threads-to-exit-faster.patch b/meta/recipes-support/rng-tools/rng-tools/0001-Allow-jitter-threads-to-exit-faster.patch
-new file mode 100644
-index 0000000..46a401a
---- /dev/null
-+++ b/meta/recipes-support/rng-tools/rng-tools/0001-Allow-jitter-threads-to-exit-faster.patch
-@@ -0,0 +1,130 @@
-+From 3e47faae108df4824531bf9c003cc1c65b7b2842 Mon Sep 17 00:00:00 2001
-+From: Neil Horman <nhorman@tuxdriver.com>
-+Date: Fri, 7 Jun 2019 08:51:02 -0400
-+Subject: [PATCH] Allow jitter threads to exit faster
-+
-+commit:3e47faae108df4824531bf9c003cc1c65b7b2842
-+https://github.com/nhorman/rng-tools
-+
-+Even with the recent pipe adjustments, it can take a long time for
-+jitterentropy to exit.  This is because the call to jent_read_entropy
-+can take a long time to complete, and termination signal delivery won't
-+cause it to return early, like a syscall.
-+
-+Mitigate this by using sigsetjmp/siglongjmp.  We set a return point at
-+the top of the loop for each thread, and register a signal handler to
-+execute a siglongjmp back to that point so that we can recheck the
-+active flag and break the loop as soon as a signal is delivered.
-+
-+Upstream-Status: Backport
-+
-+Signed-off-by: Neil Horman <nhorman@tuxdriver.com>
-+Signed-off-by: Anca Nicoleta Mihalache <anca.mihalache@windriver.com>
-+Signed-off-by: De Huo <de.huo@windriver.com>
-+---
-+ rngd_jitter.c | 32 ++++++++++++++++++++++++++++++--
-+ 1 file changed, 30 insertions(+), 2 deletions(-)
-+
-+diff --git a/rngd_jitter.c b/rngd_jitter.c
-+index 54070ae..7f01ee9 100644
-+--- a/rngd_jitter.c
-++++ b/rngd_jitter.c
-+@@ -26,6 +26,7 @@
-+ #include <time.h>
-+ #include <unistd.h>
-+ #include <signal.h>
-++#include <setjmp.h>
-+ #include "rng-tools-config.h"
-+ 
-+ #include <jitterentropy.h>
-+@@ -48,6 +49,7 @@ struct thread_data {
-+ 	int active;
-+ 	int done;
-+ 	struct timespec slptm;
-++	sigjmp_buf	jmpbuf;
-+ };
-+ 
-+ static struct thread_data *tdata;
-+@@ -228,6 +230,16 @@ static inline void update_sleep_time(struct thread_data *me,
-+ 	me->slptm.tv_nsec /= 2;
-+ }
-+ 
-++void jitter_thread_exit_signal(int signum)
-++{
-++	pthread_t self = pthread_self();
-++	int i;
-++	for(i=0;i<num_threads;i++)  {
-++		if (threads[i] == self)
-++			siglongjmp(tdata[i].jmpbuf, 1);
-++	}
-++}
-++
-+ static void *thread_entropy_task(void *data)
-+ {
-+ 	cpu_set_t cpuset;
-+@@ -263,6 +275,13 @@ static void *thread_entropy_task(void *data)
-+ 		goto out;
-+ 	}
-+ 
-++	/*
-++	 * Use setjmp here to allow us to return early from
-++	 * jent_read_entropy, as it can run for a long time
-++	 */
-++	if (sigsetjmp(me->jmpbuf, 1))
-++		goto out_interrupt;
-++
-+ 	/* Now go to sleep until there is more work to do */
-+ 	do {
-+ 		message(LOG_DAEMON|LOG_DEBUG, "JITTER thread on cpu %d wakes up for refill\n", me->core_id);
-+@@ -286,7 +305,11 @@ static void *thread_entropy_task(void *data)
-+ 			message(LOG_DAEMON|LOG_DEBUG, "DONE Writing to pipe with return %ld\n", ret);
-+ 			if (first)
-+ 				me->active = 1;
-+-			if (ret < 0)
-++			/*
-++ 			 * suppress EBADF errors, as those indicate the pipe is
-++ 			 * closed and we are exiting
-++ 			 */
-++			if ((ret < 0) && (errno != EBADF))
-+ 				message(LOG_DAEMON|LOG_WARNING, "Error on pipe write: %s\n", strerror(errno));
-+ 			if (!first && !me->active)
-+ 				break;
-+@@ -296,6 +319,7 @@ static void *thread_entropy_task(void *data)
-+ 
-+ 	} while (me->active);
-+ 
-++out_interrupt:
-+ 	free(tmpbuf);
-+ out:
-+ 	me->done = 1;
-+@@ -335,6 +359,7 @@ int validate_jitter_options(struct rng *ent_src)
-+ 	return 0;
-+ }
-+ 
-++
-+ /*
-+  * Init JITTER
-+  */
-+@@ -349,6 +374,9 @@ int init_jitter_entropy_source(struct rng *ent_src)
-+ #ifdef HAVE_LIBGCRYPT
-+ 	char key[AES_BLOCK];
-+ #endif
-++
-++	signal(SIGUSR1, jitter_thread_exit_signal);
-++
-+ 	int ret = jent_entropy_init();
-+ 	if(ret) {
-+ 		message(LOG_DAEMON|LOG_WARNING, "JITTER rng fails with code %d\n", ret);
-+@@ -474,8 +502,8 @@ void close_jitter_entropy_source(struct rng *ent_src)
-+ 	/* And wait for completion of each thread */
-+ 	for (i=0; i < num_threads; i++) {
-+ 		message(LOG_DAEMON|LOG_DEBUG, "Checking on done for thread %d\n", i);
-++		pthread_kill(threads[i], SIGUSR1);
-+ 		while (!tdata[i].done)
-+-			pthread_kill(threads[i], SIGINT);
-+ 			if(tdata[i].done) {
-+ 				message(LOG_DAEMON|LOG_INFO, "Closing thread %d\n", tdata[i].core_id);
-+ 				pthread_join(threads[i], NULL);
-+-- 
-+2.23.0
-+
-diff --git a/meta/recipes-support/rng-tools/rng-tools/0002-Daemonize-earlier-in-init.patch b/meta/recipes-support/rng-tools/rng-tools/0002-Daemonize-earlier-in-init.patch
-new file mode 100644
-index 0000000..c517516
---- /dev/null
-+++ b/meta/recipes-support/rng-tools/rng-tools/0002-Daemonize-earlier-in-init.patch
-@@ -0,0 +1,88 @@
-+From cf1475fbdf33d5c3a62099b6b20f2b2017d6de33 Mon Sep 17 00:00:00 2001
-+From: Neil Horman <nhorman@hmswarspite.think-freely.org>
-+Date: Wed, 13 Nov 2019 08:23:22 -0500
-+Subject: [PATCH] Daemonize earlier in init
-+
-+commit:cf1475fbdf33d5c3a62099b6b20f2b2017d6de33
-+https://github.com/nhorman/rng-tools
-+
-+It was reported here:
-+https://github.com/nhorman/rng-tools/issues/73
-+
-+That rngd hangs on shutdown, but only when being run as a daemon.  The problem
-+turns out to be that we are daemonizing too late in init.  Because we daemonize
-+after initalizing all our entropy sources, we get a premature exit on the
-+threads created prior to daemonization.  This leads to hangs in shutdown when we
-+wait for termination of threads that have already exited abnormally.
-+
-+Fix it by daemonizing before we init any entropy sources
-+
-+Upstream-Status: Backport
-+
-+Signed-off-by: Neil Horman <nhorman@tuxdriver.com>
-+Signed-off-by: Anca Nicoleta Mihalache <anca.mihalache@windriver.com>
-+Signed-off-by: De Huo <de.huo@windriver.com>
-+---
-+ rngd.c | 34 +++++++++++++++++-----------------
-+ 1 file changed, 17 insertions(+), 17 deletions(-)
-+
-+diff --git a/rngd.c b/rngd.c
-+index a086949..78ff4f4 100644
-+--- a/rngd.c
-++++ b/rngd.c
-+@@ -749,6 +749,22 @@ int main(int argc, char **argv)
-+ 	if (argp_parse(&argp, argc, argv, 0, 0, arguments) < 0)
-+ 		return 1;
-+ 
-++	if (arguments->daemon && !arguments->list) {
-++		am_daemon = true;
-++
-++		if (daemon(0, 0) < 0) {
-++			message(LOG_CONS|LOG_INFO, "can't daemonize: %s\n",
-++			strerror(errno));
-++			return 1;
-++		}
-++
-++		/* require valid, locked PID file to proceed */
-++		pid_fd = write_pid_file(arguments->pid_file);
-++		if (pid_fd < 0)
-++			return 1;
-++
-++	}
-++
-+ 	if (arguments->list) {
-+ 		int found = 0;
-+ 		message(LOG_CONS|LOG_INFO, "Entropy sources that are available but disabled\n");
-+@@ -807,28 +823,12 @@ int main(int argc, char **argv)
-+ 	/* Init entropy sink and open random device */
-+ 	init_kernel_rng(arguments->random_name);
-+ 
-+-	if (arguments->daemon) {
-+-		am_daemon = true;
-+-
-+-		if (daemon(0, 0) < 0) {
-+-			message(LOG_CONS|LOG_INFO, "can't daemonize: %s\n",
-+-			strerror(errno));
-+-			return 1;
-+-		}
-+-
-+-		/* require valid, locked PID file to proceed */
-+-		pid_fd = write_pid_file(arguments->pid_file);
-+-		if (pid_fd < 0)
-+-			return 1;
-+-
-+-		signal(SIGHUP, SIG_IGN);
-+-		signal(SIGPIPE, SIG_IGN);
-+-	}
-+ 	/*
-+ 	 * We always catch these to ensure that we gracefully shutdown
-+ 	 */
-+ 	signal(SIGINT, term_signal);
-+ 	signal(SIGTERM, term_signal);
-++
-+ 	if (arguments->test) {
-+ 		message(LOG_CONS|LOG_INFO, "Entering test mode...no entropy will "
-+ 			"be delivered to the kernel\n");
-+-- 
-+2.23.0
-+
-diff --git a/meta/recipes-support/rng-tools/rng-tools_6.7.bb b/meta/recipes-support/rng-tools/rng-tools_6.7.bb
-index b4e453f..c73466e 100644
---- a/meta/recipes-support/rng-tools/rng-tools_6.7.bb
-+++ b/meta/recipes-support/rng-tools/rng-tools_6.7.bb
-@@ -13,6 +13,8 @@ SRC_URI = "\
-     file://init \
-     file://default \
-     file://rngd.service \
-+    file://0001-Allow-jitter-threads-to-exit-faster.patch \
-+    file://0002-Daemonize-earlier-in-init.patch \
- "
- SRCREV = "9fc873c5af0e392632e6b736938b811f7ca97251"
- 
--- 
-1.9.1
+> 
+> Cheers,
+> Andre'
+> 
+> > This is needed to avoid to include and build matplotlib and numpy by default
+> > 
+> > Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
+> > ---
+> >  meta-oe/recipes-support/smem/smem_1.5.bb | 4 +++-
+> >  1 file changed, 3 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/meta-oe/recipes-support/smem/smem_1.5.bb b/meta-oe/recipes-support/smem/smem_1.5.bb
+> > index 90db9c3f3..446325e93 100644
+> > --- a/meta-oe/recipes-support/smem/smem_1.5.bb
+> > +++ b/meta-oe/recipes-support/smem/smem_1.5.bb
+> > @@ -20,6 +20,9 @@ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
+> >  
+> >  S = "${WORKDIR}/${BPN}-${HG_CHANGESET}"
+> >  
+> > +#PACKAGECONFIG ?= "graph"
+> > +PACKAGECONFIG[graph] = ",,,python3-matplotlib python3-numpy"
+> > +
+> >  do_compile() {
+> >          ${CC} ${CFLAGS} ${LDFLAGS} smemcap.c -o smemcap
+> >  }
+> > @@ -34,7 +37,6 @@ do_install() {
+> >  }
+> >  
+> >  RDEPENDS_${PN} = "python3-core python3-compression"
+> > -RRECOMMENDS_${PN} = "python3-matplotlib python3-numpy"
+> >  
+> >  PACKAGE_BEFORE_PN = "smemcap"
+> >  
+> > -- 
+> > 2.20.1
+> > 
 
 
