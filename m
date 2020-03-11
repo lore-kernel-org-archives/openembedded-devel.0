@@ -1,42 +1,71 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com
-	[209.85.160.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 39F7E61BB5
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 22:41:21 +0000 (UTC)
-Received: by mail-qt1-f179.google.com with SMTP id f17so1610724qtq.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Mar 2020 15:41:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=QsPpvL9873HQdCXV/o26YNb9Cr4/4VWhPaULNIxSCyk=;
-	b=czEKgVoGvuCuFdaaSIQqL73rSgt4dG7hCviW+K1hQVD7v5bmsikF+S8BFp6m0JmZv4
-	1y0TUUNwhRWJ5euzUSHVkvaAOfxgcME0uuo3lDizQi9TsFXLah2ieNc6AVwYcD2MQse2
-	sKYFIlWZuVVyDkysCFyymoe0G4AAVTBl2FR44xRbYRcqqv6IWNFr55LWoGTGkr8LprN6
-	egxYjIOzCoTuaL21yWaldU/RAW8wvcsJh6C1o7NpBmq8+H7/WhFfObp9vw5rXUsFJT4k
-	Iooj6E5Tzxu1BaNgwWqNjyKM4lmX90WengWMTCMt4qCiY8FbKKLDIsc9+QHQuRWp1yQz
-	VNLA==
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
+	[209.85.219.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 26E7861BB6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2020 23:03:51 +0000 (UTC)
+Received: by mail-qv1-f68.google.com with SMTP id l17so1718688qvu.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2020 16:03:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:references:in-reply-to:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=aYmQ9vDU1SUhqk6ywoJbMbWZPXeyq2MecfNtXBMQiiY=;
+	b=QsxWQDmFZa5TplNyltSeYhpnCC7g2g0L8vPBuInJ27A0Stf4EBr2nNOInVs6FeRbn3
+	bYMDoKM7uHNnxKiSGV7Br4kefSVrZl+OiSdUDrHPUE6v69SJivmlM3537aksahC0B6l/
+	ElnfBxlkFJi0dZBHXrBFTrepiF5rPOY+41txpeu2ezqTT5sv35Huii3cnQI5JRHFa9Dz
+	PcKWVn8BMNTmCm27YbwnzdUeN4OoRee3JOdQiFAYIrc12+6ZNp96p0z898BXW8SxTKil
+	cU2cVqF2hFe07z5W8EBMpgFOl78pEeQL0yLpvANBG/ucAg91vXuu69DtIPWPYBNRP7uP
+	Rkbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=QsPpvL9873HQdCXV/o26YNb9Cr4/4VWhPaULNIxSCyk=;
-	b=dfrajvUPvq6JcM49ss8tJsEQtspdfSgtBdxUqAAiYR1YhOW2yMAQClhgnXEXKkCWPA
-	KxcdXrp0Hcj/y4unzfby1TeR2OHrFre4gTGHZ29Pte3YlaiuUOGnhGRlyI+w2ycQUfbS
-	re0CTtMTcu4ihME1g8N2EvAvznYjOm/E0wlkvN+Y3iudCU1jq5AVPAFrQD4yV7jdS4Sz
-	uxaL10aDBlxXYrk752Foc5gg0S3CbQVk6cuKSKNrU3eC+rgqId7ByqulDz2DyP8Y1Hve
-	+bBZwzHxqOUZP8fj12sZWpI0G7xka+f9/jFPxXJapWuCQZBEx9Jud2LpKBESt75jKLE6
-	WXcQ==
-X-Gm-Message-State: ANhLgQ23n0mkFy7bmAjIEABGQyBNjp7NVEt5gYCdxlI1hYpaorPrjX6q
-	gVB4Nh+arQf6AT8DWNra/rkGQ+bF0xCZdIwwacR7wNGEOIs=
-X-Google-Smtp-Source: ADFU+vtvG/fhBhcRTUwYWkH2zBlv6BwEVh7Vg/AaYdl+GOR9Kij3OCFjAiuf6miRrj2jvYX5JIvxNxSGhYyojduP1NQ=
-X-Received: by 2002:ac8:3003:: with SMTP id f3mr4722753qte.293.1583966481280; 
-	Wed, 11 Mar 2020 15:41:21 -0700 (PDT)
+	h=x-gm-message-state:from:mime-version:references:in-reply-to:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=aYmQ9vDU1SUhqk6ywoJbMbWZPXeyq2MecfNtXBMQiiY=;
+	b=UdDU+zPA1gfISCrsQIefwsYeX2qAOiQyjBgw3CdlJvGD8bdKKfYxhbcYmkHBs0bba9
+	CjRQ6O/sQJSJse9Zv81YmamteyF6+ChmffXmm3L5bsXtGRJUe/kidtBDlDY7lN6mVbMI
+	8sohbwIr72zJTtGfBkmgWuj2V4sMiUZ7SbSVUEnEHjP7V64sItIxD7R/YY8BiuFXjcNi
+	EINvDtploBvNLRLBEgun6tO/B6sZGavkU6LYjp4aLrhRo5mugxjOkuZUgb0TPLO3AX0z
+	AirHCdFaasyC14DYZmIRUyN5mMISC4bkD15noDszkypBIWOYLuQXKXshImPnYcF959aZ
+	yV7w==
+X-Gm-Message-State: ANhLgQ2aK0XnojXadg5cryRIle+oHU91D+U8u1V4mr75GDVnpBJObzVr
+	1YKI3L7UGpMhi2xUGre7hGYChx5EFNIxBg==
+X-Google-Smtp-Source: ADFU+vscm43JcMROs5bO+ctYx3IQoP9Hx5kePUYp9Q0/ofzYlNS8c6Fh3bwfl145BBJqIUUxbyUsKA==
+X-Received: by 2002:ad4:588e:: with SMTP id dz14mr4986182qvb.103.1583967832342;
+	Wed, 11 Mar 2020 16:03:52 -0700 (PDT)
+Received: from mail-qk1-f174.google.com (mail-qk1-f174.google.com.
+	[209.85.222.174]) by smtp.gmail.com with ESMTPSA id
+	y60sm2109969qtd.32.2020.03.11.16.03.51
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Wed, 11 Mar 2020 16:03:51 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-qk1-f174.google.com with SMTP id e16so3869814qkl.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Mar 2020 16:03:51 -0700 (PDT)
+X-Received: by 2002:a05:620a:2209:: with SMTP id
+	m9mr4911624qkh.71.1583967830921; 
+	Wed, 11 Mar 2020 16:03:50 -0700 (PDT)
 MIME-Version: 1.0
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 11 Mar 2020 15:40:55 -0700
-Message-ID: <CAMKF1spbcLr-ZA8KrObx3OAhv0A7gJ2Dk+Zkj0FZzbMr7C_Maw@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: State of OE world - 2020-03-09
+References: <20200228150345.11829-1-brgl@bgdev.pl>
+	<CAP9ODKqbfrnLUBzE+WkGceSo+qBimGPUFUcgRuZmS3vwJZqpwA@mail.gmail.com>
+	<CAMRc=MftVskWMFZQhbFKZLwNAR9a1+4zbayWTbXFuSJgG-ZgbA@mail.gmail.com>
+	<CAP9ODKpVW6qxw7+5oA7auBMW1ApLdqjicZf8Ahe3RhYG8QjmgQ@mail.gmail.com>
+	<CAMRc=MeJ0R81s-ui7J78pe89JE6c-_wx3RGUZx-tzMLc3pzthQ@mail.gmail.com>
+	<dd3d6ea7-2bac-6a06-823d-fd070f547784@gmail.com>
+	<CAMRc=MevN3tAfBkLZuOiW0BVbOWkq_T_HiD6XTMwh5d32xrGeQ@mail.gmail.com>
+	<CAMRc=MehBSu1RpPkzP=xiFqt3wpJrf4FhV889jcPxUHPnf0GLg@mail.gmail.com>
+	<CAP71Wjz1n_Csm762xbsxUK-3i3OYm-rfh=9Ccf28USLgJjRiFQ@mail.gmail.com>
+In-Reply-To: <CAP71Wjz1n_Csm762xbsxUK-3i3OYm-rfh=9Ccf28USLgJjRiFQ@mail.gmail.com>
+Date: Wed, 11 Mar 2020 20:03:39 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKrUcXcvrgWP1DpE=yDaoBcNSo=7fDd+y7jZZ9zcLQYuNQ@mail.gmail.com>
+Message-ID: <CAP9ODKrUcXcvrgWP1DpE=yDaoBcNSo=7fDd+y7jZZ9zcLQYuNQ@mail.gmail.com>
+To: Nicolas Dechesne <nicolas.dechesne@linaro.org>
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-ota][PATCH] meta-ota: add support for binary-delta images in a new layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,209 +78,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Mar 2020 22:41:21 -0000
+X-List-Received-Date: Wed, 11 Mar 2020 23:03:52 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-== Failed tasks 2020-03-09 ==
+On Wed, Mar 11, 2020 at 10:28 AM Nicolas Dechesne
+<nicolas.dechesne@linaro.org> wrote:
+> On Wed, Mar 11, 2020 at 9:04 AM Bartosz Golaszewski <brgl@bgdev.pl> wrote=
+:
+>> wt., 3 mar 2020 o 14:56 Bartosz Golaszewski <brgl@bgdev.pl> napisa=C5=82=
+(a):
+>> >
+>> > If this is not something that should be part of meta-openembedded - is
+>> > there any way to have it hosted at https://git.yoctoproject.org/cgit/
+>> > as an official yocto layer? I'm sorry if this is a dumb question, I
+>> > don't know exactly what the policy is for that.
+>> gentle ping on this. What is the procedure of hosting a layer at OE?
+>
+> it depends what you mean here.
+>
+> 1. Hosting on git.yoctoproject.org is mostly for layers supported by YP m=
+embership, these layers are under the responsibility of the YP TSC [1]
+> 2. Hosting on git.openembedded.org is under the responsibility of the OE =
+TSC [2]
+>
+> We recently started an initiative using gitlab, to host layers: https://g=
+itlab.com/openembedded/community, though it's not picking up much for now. =
+But that would be another option, Paul B. or myself could give you access
+>
+> You might want to host the layer on your own (github, gitlab or anywhere =
+else). I understand why you think that hosting on yoctoproject.org would ma=
+ke it 'more' official, however hundreds of layers are 'self hosted' and it'=
+s usually not a big concern.
+>
+> In any case you should register your layer in the OE layer index.
+>
+>
+> [1] https://wiki.yoctoproject.org/wiki/TSC
+> [2] https://www.openembedded.org/wiki/TSC
 
-INFO: jenkins-job.sh-1.8.46 Complete log available at
-/media/ra_build_share/buildlogs/oe/world/dunfell/log.report.20200310_140304.log
-
-=== common (0) ===
-
-=== common-x86 (0) ===
-
-=== qemuarm (0) ===
-
-=== qemuarm64 (1) ===
-    * sources/meta-openembedded/meta-oe/recipes-extended/sysdig/sysdig_git.bb:do_compile
-
-=== qemux86 (0) ===
-
-=== qemux86_64 (0) ===
-
-=== Number of failed tasks (1) ===
-{| class=wikitable
-|-
-|| qemuarm || 0 ||
-/media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.world.qemuarm.20200309_132038.log/
-||
-|-
-|| qemuarm64 || 1 ||
-/media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.world.qemuarm64.20200309_202041.log/
-|| http://errors.yoctoproject.org/Errors/Build/99898/
-|-
-|| qemux86 || 0 ||
-/media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.world.qemux86.20200309_202040.log/
-||
-|-
-|| qemux86_64 || 0 ||
-/media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.world.qemux86-64.20200309_202038.log/
-||
-|}
-
-=== PNBLACKLISTs (20) ===
-
-
-sources/meta-openembedded:
-    * meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb:PNBLACKLIST[netkit-rusers]
-= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or
-directory"
-    * meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb:PNBLACKLIST[drbd]
-= "Kernel module Needs forward porting to kernel 5.2+"
-    * meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb:PNBLACKLIST[lowpan-tools]
-= "WARNING these tools are deprecated! Use wpan-tools instead"
-    * meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb:PNBLACKLIST[dnf-plugin-tui]
-?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does
-not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
-    * meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb:PNBLACKLIST[nanopb]
-= "Needs forward porting to use python3"
-    * meta-oe/recipes-extended/socketcan/can-isotp_git.bb:PNBLACKLIST[can-isotp]
-= "Kernel module Needs forward porting to kernel 5.2+"
-    * meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb:PNBLACKLIST[dnfdragora]
-?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does
-not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
-    * meta-oe/recipes-kernel/bpftool/bpftool.bb:PNBLACKLIST[bpftool] =
-"Needs forward porting to kernel 5.2+"
+I've been preferring github over gitlab but either works. I also think
+we ought to put it under one of those platforms and rely on those for
+future.
 
 
-sources/meta-yoe:
-    * conf/distro/yoe.inc:PNBLACKLIST[build-appliance-image] = "tries
-to include whole downloads directory in /home/builder/poky :/"
-    * conf/distro/yoe.inc:PNBLACKLIST[smartrefrigerator] = "Needs
-porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[homeautomation] = "Needs porting
-to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[applicationlauncher] = "Needs
-porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[spacetouch] = "Needs porting to
-libplanes 1.0"
-    * conf/distro/yoe.inc:PNBLACKLIST[qtviewplanes] = "Needs porting
-to libplanes 1.0"
-    * conf/distro/yoe.inc:PNBLACKLIST[egt-thermostat] = "Needs porting
-to egt 0.8.2+"
-
-
-sources/openembedded-core:
-    * meta/recipes-devtools/dnf/dnf_4.2.2.bb:PNBLACKLIST[dnf] ?=
-"${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does not
-build without package_rpm in PACKAGE_CLASSES due disabled rpm support
-in libsolv', d)}"
-    * meta/recipes-devtools/libdnf/libdnf_0.28.1.bb:PNBLACKLIST[libdnf]
-?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'Does
-not build without package_rpm in PACKAGE_CLASSES due disabled rpm
-support in libsolv', d)}"
-
-
-conf/local.conf:
-    * PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need
-to be tested so much"
-    * PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to
-be tested so much"
-    * PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to
-be tested so much"
-    * PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need
-to be tested so much"
-    * PNBLACKLIST[build-appliance-image] = "tries to include whole
-downloads directory in /home/builder/poky :/"
-
-=== QA issues (0) ===
-{| class=wikitable
-!| Count ||Issue
-|-
-||0 ||already-stripped
-|-
-||0 ||build-deps
-|-
-||0 ||compile-host-path
-|-
-||0 ||file-rdeps
-|-
-||0 ||host-user-contaminated
-|-
-||0 ||installed-vs-shipped
-|-
-||0 ||invalid-pkgconfig
-|-
-||0 ||ldflags
-|-
-||0 ||libdir
-|-
-||0 ||pkgname
-|-
-||0 ||qa_pseudo
-|-
-||0 ||symlink-to-sysroot
-|-
-||0 ||textrel
-|-
-||0 ||unknown-configure-option
-|-
-||0 ||version-going-backwards
-|}
-
-
-
-=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
-
-Complete log: /media/ra_build_share/buildlogs/oe/world/dunfell//media/ra_build_share/buildlogs/oe/world/dunfell/log.signatures.20200309_212117.log/
-
-No issues detected
-
-
-QA issues by type:
-count: 0 issue: already-stripped
-
-
-count: 0 issue: libdir
-
-
-count: 0 issue: textrel
-
-
-count: 0 issue: build-deps
-
-
-count: 0 issue: file-rdeps
-
-
-count: 0 issue: version-going-backwards
-
-
-count: 0 issue: host-user-contaminated
-
-
-count: 0 issue: installed-vs-shipped
-
-
-count: 0 issue: unknown-configure-option
-
-
-count: 0 issue: symlink-to-sysroot
-
-
-count: 0 issue: invalid-pkgconfig
-
-
-count: 0 issue: pkgname
-
-
-count: 0 issue: ldflags
-
-
-count: 0 issue: compile-host-path
-
-
-count: 0 issue: qa_pseudo
-
-
-
-This git log matches with the metadata as seen by qemuarm build.
-In some cases qemux86 and qemux86-64 builds are built with slightly
-different metadata, you can see the exact version near the top of each
-log.world.qemu* files linked from the report
-~/oe/world/yoe ~/oe/world/yoe
+--=20
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9 9981-7854          Mobile: +1 (347) 903-9750
 
