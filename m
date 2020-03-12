@@ -1,49 +1,52 @@
-Return-Path: <nick83ola@gmail.com>
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com
-	[209.85.167.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 051F46010F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
+	[209.85.208.66])
+	by mail.openembedded.org (Postfix) with ESMTP id EE56861C45
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 08:51:08 +0000 (UTC)
-Received: by mail-lf1-f66.google.com with SMTP id b186so4006298lfg.11
+	Thu, 12 Mar 2020 14:15:07 +0000 (UTC)
+Received: by mail-ed1-f66.google.com with SMTP id df19so1399563edb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 01:51:09 -0700 (PDT)
+	Thu, 12 Mar 2020 07:15:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=6M/hl0gXu2NRruaJrC6u/BBzQj7CnUJjrWgrpRjpLHc=;
-	b=szEfXLUTKAC3JJdr57AZxKoOM7eIK7pJ+waz4EzkNRK81kTC5aG38ZS9hLDHYpvrVs
-	SG78KHpT7nwILT5C9VWx/OwKCyqS39FpPPQAE4IcBsCv8BPn1nMxyD5EN0K5Bl/HWSzW
-	TkW1ZBCmw9wKJj9SZxnqovn05Oq8kr40UpkEeQ77m7KoQDE99n9k0L7jUfoct0fXXz76
-	szN0wYsZzYNAyUUSjDTLHO4WZBCgN4cof2c26KO/ld1y5bK5nUBmYaroFGIrQKEvzSnb
-	Y8tJDZhM9uBR04dMKZezoR0cNN7m1Ba3fWyvzc+oOq2uT9+IRgLBkiW4GR6sjoBlSqXf
-	Ed+A==
+	:cc; bh=z/DmN6Qpy5/SV79dTzZ2GE+ZCdYveq7lp0nuhwEUF2A=;
+	b=e/MOpbb97iBHk0PjdLgqvHIZRUX/o7ht860t303sR8W2s9q0iE+Evjp+KZN1wO7jaf
+	cI8c0qQi07KlQLcnEyPNEUF+aeW8VRrGPe5WHFZWxR3cjfGehFf4d3X5D8srhSKZhLTn
+	IQMVLavSMoSZpFWp9CyJzxlQHBf7RWUq3Ijapak2ml1c3Tlcdpx2blGKbsZL2V7Ih7Rt
+	GF1KCFZryVAZw8/oms54HZZivABw4X2ctIejsY3qr2zGaOLkwhmu/Jd1YIMBv0tYtbWS
+	W1rnmpMGBh9tg8/KC8oMcuZR18fvFMnWNmdchtNFwsryFynxhF1srEa5n+2ES3LJgNQD
+	Z8dw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc;
-	bh=6M/hl0gXu2NRruaJrC6u/BBzQj7CnUJjrWgrpRjpLHc=;
-	b=dhSfYT4oo+lZJV5SfugHTc3ACIC42M/UhBimYlCbSuDoMe6jzprcMsY9VjdZIG0kNI
-	+sKyaFhh32T3Z3NVktnd1+vPC+nYOcqmzcUhUle4X9/wcxoIIESiCgH1RL+cMJlrIZiH
-	TFIK1Sdksg4csLM4POe78yujo0bRgYBpnoXFpyS1tuDG1cxSu3Cpo9smt3vxbNYUyVwy
-	nDwrrxEUYsy6nXFliERvdDDjHPgUp0B6TTd0G6C1B+VPIfYXUpfv053WyJfSRmpqro8n
-	jAv/YUWWqQ022xcs5bHPmuOxGwEgf0G/AAxnIjikS6RKQ8poBvZghaNRZ917/CLpzmDS
-	5SSA==
-X-Gm-Message-State: ANhLgQ07JyNhlxlY5IjH2TAfVws4lhV5RNVsDLxyBVZ9S/CAqWRYKWnD
-	EkhPEVB0IM9/LglNYLCSFKXlueF0ngcukJ9k+ONME0ID
-X-Google-Smtp-Source: ADFU+vvaOwxqBQ9WDw8ciTlhN44GFlSLu0vvAF1tJ+URKi7EeeXySp4PKEoKjEeei95g6F8p+hM6879alFG4n6j3XUM=
-X-Received: by 2002:a05:6512:10cf:: with SMTP id
-	k15mr4848055lfg.142.1584003068857; 
-	Thu, 12 Mar 2020 01:51:08 -0700 (PDT)
+	bh=z/DmN6Qpy5/SV79dTzZ2GE+ZCdYveq7lp0nuhwEUF2A=;
+	b=RpAURMwHwf5DLZ+clOYqnaIpoX3w84wXah6D2npFFgIetG+QSclBRJGHzKiR9skbR1
+	Q4NzIiuC9kyTxq0NB+vWLbrOYKb6OUWB0kazUQaBsJSknlLFihVWpOEQgvm/eQurH4Jo
+	H1PXLydAa68FX87gkgAljnG9jv4kO21BJ9yeinE/lrxq3fTX7Vbe2yjyl+YcmXmbF5xq
+	EpsSq8ecbPsWn0b3GeKsVu1jA6UBccvKhy8IJOe38LPgrJrcSIz4aWTuj+IZxJ34D1E7
+	hybdRndG20DyLnebktYCKvv6CqqRTDQoTKV12BMUiluxDrZZMZG4FGdkf80UluP7CUgK
+	65mA==
+X-Gm-Message-State: ANhLgQ0FoWLOZSptsEqAZHt79PSAkPV9taBWk4rakIOPqhi2l8DcHfhR
+	kol5GIo1grA5XV+LBZxU+/dYq89hX6n30s9Uf2GB2nWL
+X-Google-Smtp-Source: ADFU+vvWp68S4JxQrKxjdNCh419JUYxkMwlWnDxfVxqmCrjF9e5qYVWsKoXf3cy/B23ohB69uLo5SqpkF5XegSpvTOE=
+X-Received: by 2002:a17:906:6995:: with SMTP id
+	i21mr1227399ejr.320.1584022508593; 
+	Thu, 12 Mar 2020 07:15:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200311070359.18480-1-nick83ola@gmail.com>
-	<CANx9H-Ctq14Tj8DyHnN3-X3bB=8XXncAQiiVhRiALtLW4Rszjg@mail.gmail.com>
-In-Reply-To: <CANx9H-Ctq14Tj8DyHnN3-X3bB=8XXncAQiiVhRiALtLW4Rszjg@mail.gmail.com>
-From: nick83ola <nick83ola@gmail.com>
-Date: Thu, 12 Mar 2020 08:50:57 +0000
-Message-ID: <CABPh3UNyYWiP0pVLkDG_738E+wCxQ38-kgogg5LX00LUnadd4g@mail.gmail.com>
-To: Tim Orling <ticotimo@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Parthiban Nallathambi <parthitce@gmail.com>
-Subject: Re: [meta-python][PATCH 1/3] python3-cycler: add recipe for 0.10.0
+References: <20200229185539.3905864-1-raj.khem@gmail.com>
+	<CA+chaQfxab4+mepbvxdNkoj4h9T1T5Qq4TWwne2teiexjyuwnA@mail.gmail.com>
+	<CAMKF1srZjHaeuTD0FLv0kmmn+Gwq9QThHxhGXB0+WSBSo2bEJg@mail.gmail.com>
+	<CA+chaQeF7U2C+t+zugHFry2bpxiFbfa294_A_dnfmdvJ-3pw9A@mail.gmail.com>
+	<CAMKF1spqvnHXTOMWX8VV4QponpKun+2tpZS4hAG5JpDDdv8xgQ@mail.gmail.com>
+In-Reply-To: <CAMKF1spqvnHXTOMWX8VV4QponpKun+2tpZS4hAG5JpDDdv8xgQ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 12 Mar 2020 15:14:56 +0100
+Message-ID: <CA+chaQcTRNcXnWX67kRts_K6cBdR9gun3qdqBX5nREts0ymH-g@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] sysdig: Upgrade to 0.26.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,63 +59,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 08:51:09 -0000
+X-List-Received-Date: Thu, 12 Mar 2020 14:15:08 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi TIm,
-nice work I'll have a look into it
+It doesn't seem to build for aarch64 without the jit in luajit:
 
-Thanks for sharing
-Nick
+| DEBUG: Executing shell function do_compile
+| NOTE: VERBOSE=3D1 cmake --build
+/OE/build/tmp-glibc/work/aarch64-oe-linux/sysdig/0.26.5-r0/build --target
+all --
+| ninja: error: 'libluajit-5.1.so', needed by 'userspace/sysdig/csysdig',
+missing and no known rule to make it
+| WARNING: exit code 1 from a shell command.
+| ERROR: Execution of
+'/OE/build/tmp-glibc/work/aarch64-oe-linux/sysdig/0.26.5-r0/temp/run.do_com=
+pile.51845'
+failed with exit code 1:
+| ninja: error: 'libluajit-5.1.so', needed by 'userspace/sysdig/csysdig',
+missing and no known rule to make it
+| WARNING: exit code 1 from a shell command.
 
+On Tue, Mar 3, 2020 at 4:27 PM Khem Raj <raj.khem@gmail.com> wrote:
 
-On Wed, 11 Mar 2020 at 14:47, Tim Orling <ticotimo@gmail.com> wrote:
 >
-> FWIW, I had made significant progress towards getting ptest enabled for Matplotlib, although a bit out of date now [1]. Which included a recipe for cycler. It also unbundled a bunch of dependencies, like libagg.
 >
-> The ptests do require a fair amount of ram, so standard qemu settings will epically fail.
+> On Tue, Mar 3, 2020 at 5:53 AM Martin Jansa <martin.jansa@gmail.com>
+> wrote:
 >
-> [1]
-> https://git.openembedded.org/meta-openembedded-contrib/log/?h=timo/python-matplotlib-2.1.2-WIP
+>> Should I send the patch to move grpc from meta-networking to meta-oe to
+>> fix this or do you have it already?
+>>
 >
-> On Wed, Mar 11, 2020 at 12:04 AM Nicola Lunghi <nick83ola@gmail.com> wrote:
+> Please send I don=E2=80=99t have it ready
+>
 >>
->> This is a dependency for python3-matplotlib
+>> On Mon, Mar 2, 2020 at 6:22 PM Khem Raj <raj.khem@gmail.com> wrote:
 >>
->> Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
->> ---
->>  .../python/python3-cycler_0.10.0.bb              | 16 ++++++++++++++++
->>  1 file changed, 16 insertions(+)
->>  create mode 100644 meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb
+>>> On Mon, Mar 2, 2020 at 4:27 AM Martin Jansa <martin.jansa@gmail.com>
+>>> wrote:
+>>> >
+>>> > Hi,
+>>> >
+>>> > added dependency on grpc exists only in meta-networking, so this fail=
+s
+>>> to parse now.
+>>> >
+>>>
+>>> I think grpc is common enough to belong to meta-oe as well.
+>>>
+>>> > Cheers,
+>>>
 >>
->> diff --git a/meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb b/meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb
->> new file mode 100644
->> index 000000000..cd21be8ac
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-cycler_0.10.0.bb
->> @@ -0,0 +1,16 @@
->> +SUMMARY = "Composable style cycles"
->> +HOMEPAGE = "http://github.com/matplotlib/cycler"
->> +LICENSE = "BSD"
->> +LIC_FILES_CHKSUM = "file://LICENSE;md5=7713fe42cd766b15c710e19392bfa811"
->> +
->> +SRC_URI[md5sum] = "4cb42917ac5007d1cdff6cccfe2d016b"
->> +SRC_URI[sha256sum] = "cd7b2d1018258d7247a71425e9f26463dfb444d411c39569972f4ce586b0c9d8"
->> +
->> +inherit pypi setuptools3
->> +
->> +RDEPENDS_${PN} += "\
->> +    python3-core \
->> +    python3-six \
->> +"
->> +
->> +BBCLASSEXTEND = "native nativesdk"
->> --
->> 2.20.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
