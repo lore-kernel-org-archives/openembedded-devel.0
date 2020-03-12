@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com
-	[209.85.214.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 428EE61BF9
+Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
+	[209.85.214.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 108B461C2C
 	for <openembedded-devel@openembedded.org>;
 	Thu, 12 Mar 2020 02:57:41 +0000 (UTC)
-Received: by mail-pl1-f171.google.com with SMTP id ay11so2054169plb.0
+Received: by mail-pl1-f195.google.com with SMTP id a23so2050693plm.1
 	for <openembedded-devel@openembedded.org>;
-	Wed, 11 Mar 2020 19:57:42 -0700 (PDT)
+	Wed, 11 Mar 2020 19:57:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=d66RtAeKLW0uwCFHLEF37P+snFkwT1A2gewxormtMtg=;
-	b=D+70YpgGw81Q98DneUz9niiolTaTZCzQQS4LKYppnM2DoIUJc4TiUwkPR2KUmmxKdy
-	t3HCzxACaSSKczptDHLpwMOC/v/0fcINpuzBW+PTCSdDXx4iWB43uQepnx5FcKOXQ7da
-	C/MYMaTtWGS+czOcX1oqp4LhCKVOEc0hmMyG+UhCQBbyLoZy80E+u1Qx++jNTevDWR88
-	U/xJ9hLbvutRfX38WQUk2pk1D2qsjuNbeNk4sdmiSBEIw6UlLIHtVPp0av+uwF6sw9hF
-	gKqocu2iB8KqsPGsGj3KuJdfyu3OnPjO40dU+UymKK3T51PuGBtLFtAtT5TuGOZNP7F+
-	7FVg==
+	bh=w44lyKiJKa8mfNcJlUDB/ENkvzP4GS4OIhm8GGljsWk=;
+	b=p8YhysW8ygjkTbruxoFpFFTaqKdGqsdGhuatINhLttI3GV3mwUwEbHdZeGOOsG1/3Q
+	Amm3006r6zIE21dhM7ofCxYbDWNja7Bm8ZX/UQ2y2HDWj8mY/XbxtGWVCd3OM4Cg4OFp
+	Mpb1/o64dr2LTNKKhXs7jlw9PmZyEn2CuTOUyeJmVlkuuGfYA7nw/5gmcoDo1C7ip0TU
+	zAglr+zA4PlNsjmr4Zh+sQ+6lAGPPaM37MBHLXZp9Smq+/7owPBgvjF3AunKrq6+D0w2
+	nVZUa1+FyHUwgjcu3aNrQRN2hr0QZD1inh2kjHhBECZdMfQ4UIdXKuavDKHjovoFF2yD
+	w0VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=d66RtAeKLW0uwCFHLEF37P+snFkwT1A2gewxormtMtg=;
-	b=MgXHyeLXVtS8pm9qstWYDlIrXFiRw5/hiRLa+xxE4gZsQFZCK8AzcbOO+mApWbsur2
-	CsHI4yNPfcSVXtR1c0btMV7+vT8/SEGK8zKfxTtCJijKN6NAdHANABSTj1Cd7D9UMuAI
-	mYuyTwXhC4BkISf9XHP/zIPXBxXL1tWBS5BPtvSfI4Y3YnSRImXOuxKU7rVNKWZa4dwY
-	Erpdm8cS9Hhcb20d0msKRamkkt99Hk9oNADa61dSWk2WmG8d90XR6EvI3bW+s3NPdJo/
-	xkKODwvPbrj8vUYFvHxbAwW4HMy62zvHT01/xRSzfQDQoCcatNgj4ZQaeVfxBIdiRHl4
-	YqOQ==
-X-Gm-Message-State: ANhLgQ2QQz6k3U5TNYq3VxpvDLgb7K1eRjNTqzxb0QBeFS05H/oAwhIf
-	dO6ZT257NBzzvPlbrUs4DiXeSeLn
-X-Google-Smtp-Source: ADFU+vsm8bih5+eFWZogF0aU1/0VssZdbpQUP0V6u+TnESNPy3QUlEJirx0iJIWYHtNibCE33qeO1A==
-X-Received: by 2002:a17:90a:9dc3:: with SMTP id
-	x3mr1846099pjv.116.1583981862098; 
+	bh=w44lyKiJKa8mfNcJlUDB/ENkvzP4GS4OIhm8GGljsWk=;
+	b=NqAz0T4E/DVnp6xz/PR+xKGmI5QkIhsV43QVw3/ZtfOMUVKjSS3onRZn87DO/idcO0
+	D26MSn0307/snI9rsxCtDO7en0gTHkxy2D5Q2c5kIA8af7vBqeye1/JF7ehBg/jv2JF2
+	4xKfEyxPZFBC9tkPM0gzpLIezUYWVvrCBoH5Fk8JEF4SEFOZcQmxdZ1bKSKGLjgxTpxr
+	9UdMtdvZLVhgWVtuFbyKSjat85VYDYQ/oi0148cygNOXgN0QX5RAQgp1mgpaWlFSW1NB
+	s4Op7f0goKIjSgEdLgYRD/CVzNe25nXP5EouOkkucuvSHe59jHxunMYz/7d4eTK7m9wf
+	7jsw==
+X-Gm-Message-State: ANhLgQ0/B+ocKAdTJMTmFKUm7HQlfnRwhHUvDz5jUv4rwS02cB373vqE
+	zjFhKbQggz1UoFiOqzzOLU/r8/+K
+X-Google-Smtp-Source: ADFU+vsS5Pa0rEGN303ObbCxhKeceCl3fAJlHnnstr8w2Q9+EUyuxA5ZdrJEsfNBrEz9AL4ZZJ34iQ==
+X-Received: by 2002:a17:90a:928c:: with SMTP id
+	n12mr1864823pjo.45.1583981862969; 
 	Wed, 11 Mar 2020 19:57:42 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:60a5:8a88:a7f9:d809])
 	by smtp.gmail.com with ESMTPSA id
-	e2sm18328236pgv.81.2020.03.11.19.57.41
+	e2sm18328236pgv.81.2020.03.11.19.57.42
 	for <openembedded-devel@openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 11 Mar 2020 19:57:41 -0700 (PDT)
+	Wed, 11 Mar 2020 19:57:42 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@openembedded.org
-Date: Wed, 11 Mar 2020 19:57:23 -0700
-Message-Id: <57213b86c2999636b038ebc4fc4b380fec551523.1583981708.git.akuster808@gmail.com>
+Date: Wed, 11 Mar 2020 19:57:24 -0700
+Message-Id: <863f24825bf877224ac8391a22798d15a2e60478.1583981708.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1583981708.git.akuster808@gmail.com>
 References: <cover.1583981708.git.akuster808@gmail.com>
-Subject: [zeus 04/13] lmsensors: Fix sensord dependencies
+Subject: [zeus 05/13] libldb: Do not require the "pam" distro feature to be enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,45 +60,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 02:57:41 -0000
+X-List-Received-Date: Thu, 12 Mar 2020 02:57:42 -0000
 
-From: Paul Barker <pbarker@konsulko.com>
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 
-If sensord is removed from PACKAGECONFIG, the recipe should not depend
-on rrdtool and the lmsensors package should not depend on
-lmsensors-sensord.
+It was only added because samba was a dependency, but was not removed
+again when the dependency on samba was removed in commit 6207331f.
 
-Signed-off-by: Paul Barker <pbarker@konsulko.com>
+This effectively reverts commit a190c2e3.
+
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-
-Backport of 5674b0a9e8778f7538419451e629ef0c13711123 from master branch.
-
+(cherry picked from commit 0d2b80bd783fb2190c28caa2ebf3a13d4491d7c7)
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-bsp/lm_sensors/lmsensors_3.5.0.bb | 3 +--
+ meta-networking/recipes-support/libldb/libldb_1.5.6.bb | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.5.0.bb b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.5.0.bb
-index ffafd17f82..316d066d59 100644
---- a/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.5.0.bb
-+++ b/meta-oe/recipes-bsp/lm_sensors/lmsensors_3.5.0.bb
-@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe \
- DEPENDS = " \
-     bison-native \
-     flex-native \
--    rrdtool \
-     virtual/libiconv \
- "
+diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.6.bb b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
+index 99eb6f9ce8..cc24863c60 100644
+--- a/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
++++ b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
+@@ -36,8 +36,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
+ SRC_URI[md5sum] = "fc58ef432c1fcb03fc3bb6cccce08977"
+ SRC_URI[sha256sum] = "ff82474d0bf109e415a2d50334bde5715f486a53ff4bb8c7f74459dd229e975b"
  
-@@ -93,7 +92,7 @@ ALLOW_EMPTY_${PN} = "1"
- RDEPENDS_${PN} += " \
-     ${PN}-libsensors \
-     ${PN}-sensors \
--    ${PN}-sensord \
-+    ${@bb.utils.contains('PACKAGECONFIG', 'sensord', '${PN}-sensord', '', d)} \
-     ${PN}-fancontrol \
-     ${PN}-sensorsdetect \
-     ${PN}-sensorsconfconvert \
+-inherit waf-samba distro_features_check
+-REQUIRED_DISTRO_FEATURES = "pam"
++inherit waf-samba
+ 
+ S = "${WORKDIR}/ldb-${PV}"
+ 
 -- 
 2.17.1
 
