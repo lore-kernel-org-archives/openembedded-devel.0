@@ -1,55 +1,61 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
-	[209.85.128.42])
-	by mail.openembedded.org (Postfix) with ESMTP id BC29C61C45
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A84E961C2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 14:21:50 +0000 (UTC)
-Received: by mail-wm1-f42.google.com with SMTP id 25so6305325wmk.3
+	Thu, 12 Mar 2020 16:09:39 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id f16so2847576plj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 07:21:52 -0700 (PDT)
+	Thu, 12 Mar 2020 09:09:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=J+Hoo/x/91bLObFqw2A41SyNt6iSKdVv8lkAYSx3bLo=;
-	b=kcxzk4B2CRZQ/JwHgbwrGGJb9uTKZIqzWr8ci5tC/M1CIFKTAhrXarehhlnHyrugus
-	qcEVQttoRL1aSRZt/31tPso7xpm+Cb7rIg46HYCsh1djD+yO6BOi7amFSsrPbCLlCXA/
-	64RreEq6TO6DH3wOWmf4mfEwZWMZRu8XD6YJaALLXk6mS25f5Tm2kKQLJ4BUQEuX4QW4
-	GP4fwfENIDjvZLE1lw1Hp686iarC/V7Czl3h+1dU35duZ5MEpRzru5gp1xpvhVeizAPq
-	44HSdsohvHIyvGQIqLn8En2HKHgVR1ei67vAN2iWZ4op6aEvT+D5oOOGqCPmIEtYVuqM
-	MEOQ==
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=hwqO7vX/oWzIi4YjilM5rxJdIy6mbgGHnj4wIApNa3Q=;
+	b=Ups7mAQ+dsnxadTdrJQlkW/93RhxMes4zfSh0+hWPwJF5OCmrmbnfhCbD4aU0J9tv+
+	lewIaEg5KTMHGXdrESzPIdaland2EEzI+HDfdiXEPw7dUHJM4PSfauqw7tTOTc/lYU66
+	0+kcnVq3g+z+Cc2Y8tU0WTvu86GKfBZ99/u+Y+iYhPtyW7bTJga/7iOyFxWRWRrOa4y1
+	+W0Aezce+OdON+Bw2OeAiVMYnN0W0hVQgG7rWB14DB3qzOfDCXXHy5k90Y0Q5FXwVLvm
+	7wDNNMVQtWPAwCNmM/nSbvWEuN2YP41KDUch25xkqKS4N5bFmJf3/l8HQE1H0Gnbqh0u
+	zczA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=J+Hoo/x/91bLObFqw2A41SyNt6iSKdVv8lkAYSx3bLo=;
-	b=mwfI6ox71DpFKR3M+zLXrF1dBOmfL6l7juXZfZ4Zxf7PffwS7WnBqCGUgMjX61/cA6
-	Z2gMd4IKrMiX5cSpTTm0bTCXWjdmRUSi9bd7zcdEZu0FDwNYktSzykcKIaU8GTRtY6DB
-	2aZudXHYQHtvWG67HLj5hC+5z96GKE9e6r4YhvnuAsGPWzPjc/pPHkNApLdW46+TXXL0
-	Lmk5QAZHbGYqQfeQtoMwS1z3RDRxwEN+oAfo3Iu2z9HMuPLGvW4yhurEF42lTDUPbB0O
-	QbeVvFsAZxqOlonf+mF9ce1JCjegxPS4u0IJqjCeB4Cp2sPYY0A8nqGvfwayLjKoQ4AQ
-	F4nQ==
-X-Gm-Message-State: ANhLgQ3nOLt9D3onovsOmAHEDxhLtnPsBDWLJE9gCxVKrKxEgrzdPVGg
-	CPA0uW3daFL30vIDflR7nOTg1Nz3
-X-Google-Smtp-Source: ADFU+vuISoKgQCe3ylfNkaqWCDRqdQvo1qjLxpvjXHB4cMcACpMPY0ymka875D/MLD/4DCunsE5E+w==
-X-Received: by 2002:a05:600c:2306:: with SMTP id
-	6mr5067442wmo.86.1584022911128; 
-	Thu, 12 Mar 2020 07:21:51 -0700 (PDT)
-Received: from superandy.speedport.ip
-	(p200300F07F067F32CE0B3214CDB29793.dip0.t-ipconnect.de.
-	[2003:f0:7f06:7f32:ce0b:3214:cdb2:9793])
-	by smtp.gmail.com with ESMTPSA id
-	r12sm20974339wrx.26.2020.03.12.07.21.49
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Mar 2020 07:21:50 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Mar 2020 15:21:40 +0100
-Message-Id: <20200312142140.5926-3-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200312142140.5926-1-schnitzeltony@gmail.com>
-References: <20200312142140.5926-1-schnitzeltony@gmail.com>
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=hwqO7vX/oWzIi4YjilM5rxJdIy6mbgGHnj4wIApNa3Q=;
+	b=Z1wuKTDWBPuaJBPtklUtaycxvn/mgJrHgDC8yNPvTo/fotifctRLIcDgm42M+p7jun
+	NCaZQ6nMOBRVyXsHvvEzC1cxsMgdlHETKs1X/9UVJeTxujapmZ02QI8//yYVTBJtWSRp
+	svrYgCosZgurJSVwdIONYYzpvjrzoFl592JNWlF2ywsxrrcNHjF4f2ORJCU3dlOrS7Jh
+	PP/UPgjRzyyFtRj0w/qrcASOfdtIwAZ4kQ4fqxWNnGSKSh1fW6QIn8MCrtki7PlTRAv9
+	xEFrmYd/tLkLcJQJuDtzE5Z7mQDDB+ftLh+iCHRVDAuVnTsA3+xdqOc26EO1fjnhmyMn
+	HE6Q==
+X-Gm-Message-State: ANhLgQ0BgzXD2fpxO+tuOnodFeGWaWfbx7+e9vxiv7sXWjt3ntcZf/V4
+	1HgJCWWhcdk08LblShlOwOP9K4YZk+w=
+X-Google-Smtp-Source: ADFU+vtoVuKn5gMQb1WlaUkHLbNvg/k7IrC2Td72ef/RwcYak4WCpbDDuqyDbM9W36Y0acI2VhtqNQ==
+X-Received: by 2002:a17:902:d684:: with SMTP id
+	v4mr8750775ply.112.1584029380246; 
+	Thu, 12 Mar 2020 09:09:40 -0700 (PDT)
+Received: from ?IPv6:2601:646:9200:4e0:d558:25ee:538d:b97a?
+	([2601:646:9200:4e0:d558:25ee:538d:b97a])
+	by smtp.gmail.com with ESMTPSA id h6sm8856885pjk.33.2020.03.12.09.09.39
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Thu, 12 Mar 2020 09:09:39 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <20200229185539.3905864-1-raj.khem@gmail.com>
+	<CA+chaQfxab4+mepbvxdNkoj4h9T1T5Qq4TWwne2teiexjyuwnA@mail.gmail.com>
+	<CAMKF1srZjHaeuTD0FLv0kmmn+Gwq9QThHxhGXB0+WSBSo2bEJg@mail.gmail.com>
+	<CA+chaQeF7U2C+t+zugHFry2bpxiFbfa294_A_dnfmdvJ-3pw9A@mail.gmail.com>
+	<CAMKF1spqvnHXTOMWX8VV4QponpKun+2tpZS4hAG5JpDDdv8xgQ@mail.gmail.com>
+	<CA+chaQcTRNcXnWX67kRts_K6cBdR9gun3qdqBX5nREts0ymH-g@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Message-ID: <f8165f06-2341-e19d-5135-cfee6cba28fe@gmail.com>
+Date: Thu, 12 Mar 2020 09:09:38 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+	Gecko/20100101 Thunderbird/68.5.0
 MIME-Version: 1.0
-Subject: [PATCH][meta-xfce 3/3] xfce4-power-manager: upgrade 1.6.5 -> 1.6.6
+In-Reply-To: <CA+chaQcTRNcXnWX67kRts_K6cBdR9gun3qdqBX5nREts0ymH-g@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] sysdig: Upgrade to 0.26.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,47 +68,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 14:21:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 12 Mar 2020 16:09:39 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
 
-Release notes for 1.6.6
-=======================
-- Dismiss critical notification when connecting to AC
-- Fix inhibiting xfce4-screensaver (Bug #16364)
-- settings: Move % sign out of spinbutton (Bug #15994)
-- panel-plugin: Toggle presentation mode on middle click
-- panel-plugin: Properly show 'About' menu item
-- panel-plugin: Add missing about callback
-- panel-plugin: Properly hook up about signal
-- panel-plugin: Replace deprecated call
-- Switch to symbolic window-close icons
 
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- ...e4-power-manager_1.6.5.bb => xfce4-power-manager_1.6.6.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.6.5.bb => xfce4-power-manager_1.6.6.bb} (89%)
 
-diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.5.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.6.bb
-similarity index 89%
-rename from meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.5.bb
-rename to meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.6.bb
-index 295e2e4ed..608990ad4 100644
---- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.5.bb
-+++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.6.bb
-@@ -11,8 +11,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
- 
- DEPENDS += "libnotify libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
- 
--SRC_URI[md5sum] = "709efbc2de9ed84b4831847ff70bcd7f"
--SRC_URI[sha256sum] = "10adb67899b181ca5fc577fc9bb7a698fb94e42073585f7e2be642c7db127a74"
-+SRC_URI[md5sum] = "19873fc8a6de5e37ed57036a0002a5ce"
-+SRC_URI[sha256sum] = "1b7bf0d3e8af69b10f7b6a518451e01fc7888e0d9d360bc33f6c89179bb6080b"
- 
- EXTRA_OECONF = " \
-     --enable-network-manager \
--- 
-2.21.1
+On 3/12/20 7:14 AM, Martin Jansa wrote:
+> It doesn't seem to build for aarch64 without the jit in luajit:
+> 
+> | DEBUG: Executing shell function do_compile
+> | NOTE: VERBOSE=1 cmake --build 
+> /OE/build/tmp-glibc/work/aarch64-oe-linux/sysdig/0.26.5-r0/build 
+> --target all --
+> | ninja: error: 'libluajit-5.1.so <http://libluajit-5.1.so>', needed by 
+> 'userspace/sysdig/csysdig', missing and no known rule to make it
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Execution of 
+> '/OE/build/tmp-glibc/work/aarch64-oe-linux/sysdig/0.26.5-r0/temp/run.do_compile.51845' 
+> failed with exit code 1:
+> | ninja: error: 'libluajit-5.1.so <http://libluajit-5.1.so>', needed by 
+> 'userspace/sysdig/csysdig', missing and no known rule to make it
+> | WARNING: exit code 1 from a shell command.
+> 
 
+luajit needs 32bit compiler on build host, so I wonder if thats the case 
+here. I have not yet looked into it, but I have seen this failure on 
+aarch64 as well.
+
+> On Tue, Mar 3, 2020 at 4:27 PM Khem Raj <raj.khem@gmail.com 
+> <mailto:raj.khem@gmail.com>> wrote:
+> 
+> 
+> 
+>     On Tue, Mar 3, 2020 at 5:53 AM Martin Jansa <martin.jansa@gmail.com
+>     <mailto:martin.jansa@gmail.com>> wrote:
+> 
+>         Should I send the patch to move grpc from meta-networking to
+>         meta-oe to fix this or do you have it already?
+> 
+> 
+>     Please send I don’t have it ready
+> 
+> 
+>         On Mon, Mar 2, 2020 at 6:22 PM Khem Raj <raj.khem@gmail.com
+>         <mailto:raj.khem@gmail.com>> wrote:
+> 
+>             On Mon, Mar 2, 2020 at 4:27 AM Martin Jansa
+>             <martin.jansa@gmail.com <mailto:martin.jansa@gmail.com>> wrote:
+>              >
+>              > Hi,
+>              >
+>              > added dependency on grpc exists only in meta-networking,
+>             so this fails to parse now.
+>              >
+> 
+>             I think grpc is common enough to belong to meta-oe as well.
+> 
+>              > Cheers,
+> 
 
