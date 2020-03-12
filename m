@@ -1,61 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id A84E961C2D
+Received: from mail-pg1-f194.google.com (mail-pg1-f194.google.com
+	[209.85.215.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 03D4B61C13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 16:09:39 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id f16so2847576plj.4
+	Thu, 12 Mar 2020 16:56:57 +0000 (UTC)
+Received: by mail-pg1-f194.google.com with SMTP id x7so3353589pgh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 09:09:41 -0700 (PDT)
+	Thu, 12 Mar 2020 09:56:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=hwqO7vX/oWzIi4YjilM5rxJdIy6mbgGHnj4wIApNa3Q=;
-	b=Ups7mAQ+dsnxadTdrJQlkW/93RhxMes4zfSh0+hWPwJF5OCmrmbnfhCbD4aU0J9tv+
-	lewIaEg5KTMHGXdrESzPIdaland2EEzI+HDfdiXEPw7dUHJM4PSfauqw7tTOTc/lYU66
-	0+kcnVq3g+z+Cc2Y8tU0WTvu86GKfBZ99/u+Y+iYhPtyW7bTJga/7iOyFxWRWRrOa4y1
-	+W0Aezce+OdON+Bw2OeAiVMYnN0W0hVQgG7rWB14DB3qzOfDCXXHy5k90Y0Q5FXwVLvm
-	7wDNNMVQtWPAwCNmM/nSbvWEuN2YP41KDUch25xkqKS4N5bFmJf3/l8HQE1H0Gnbqh0u
-	zczA==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=2kenxD/+X+PqMepflotl6K9c0lU8RDrCTugC03/ReXo=;
+	b=TlVMJ0KitEj5a68OF46/8eWF83O2ce0ge0Gwfbf9wHuxNP5DPJ7g0/c3Z+huJungHF
+	34GrMAgU0MpunEu1DZu9qeTfMnUpYeXRLIVC2UIUGVXTFWYq5WxlS/JtUUbWCHJF2xhd
+	VotA2aG2RGCWlFqmzKpMV4/ZEMQqEtghcdFI9H7kPnWoHdrs/ZYFzmOARoiVkDZ45Fxk
+	j0eefaHo0m06O/GoF1+T5v/Rv9dFS2RpGkBWEW0LSOh6eiW5p5emYO4smCquTpQMKDeR
+	7H7ODmC3q/EW4m+rApqjL0Utr+JRhy/PFRRUHMnp8IF0ZPxAfJEN2wRdkPcF3Udqdjmr
+	SeHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
 	:content-transfer-encoding;
-	bh=hwqO7vX/oWzIi4YjilM5rxJdIy6mbgGHnj4wIApNa3Q=;
-	b=Z1wuKTDWBPuaJBPtklUtaycxvn/mgJrHgDC8yNPvTo/fotifctRLIcDgm42M+p7jun
-	NCaZQ6nMOBRVyXsHvvEzC1cxsMgdlHETKs1X/9UVJeTxujapmZ02QI8//yYVTBJtWSRp
-	svrYgCosZgurJSVwdIONYYzpvjrzoFl592JNWlF2ywsxrrcNHjF4f2ORJCU3dlOrS7Jh
-	PP/UPgjRzyyFtRj0w/qrcASOfdtIwAZ4kQ4fqxWNnGSKSh1fW6QIn8MCrtki7PlTRAv9
-	xEFrmYd/tLkLcJQJuDtzE5Z7mQDDB+ftLh+iCHRVDAuVnTsA3+xdqOc26EO1fjnhmyMn
-	HE6Q==
-X-Gm-Message-State: ANhLgQ0BgzXD2fpxO+tuOnodFeGWaWfbx7+e9vxiv7sXWjt3ntcZf/V4
-	1HgJCWWhcdk08LblShlOwOP9K4YZk+w=
-X-Google-Smtp-Source: ADFU+vtoVuKn5gMQb1WlaUkHLbNvg/k7IrC2Td72ef/RwcYak4WCpbDDuqyDbM9W36Y0acI2VhtqNQ==
-X-Received: by 2002:a17:902:d684:: with SMTP id
-	v4mr8750775ply.112.1584029380246; 
-	Thu, 12 Mar 2020 09:09:40 -0700 (PDT)
-Received: from ?IPv6:2601:646:9200:4e0:d558:25ee:538d:b97a?
-	([2601:646:9200:4e0:d558:25ee:538d:b97a])
-	by smtp.gmail.com with ESMTPSA id h6sm8856885pjk.33.2020.03.12.09.09.39
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Thu, 12 Mar 2020 09:09:39 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20200229185539.3905864-1-raj.khem@gmail.com>
-	<CA+chaQfxab4+mepbvxdNkoj4h9T1T5Qq4TWwne2teiexjyuwnA@mail.gmail.com>
-	<CAMKF1srZjHaeuTD0FLv0kmmn+Gwq9QThHxhGXB0+WSBSo2bEJg@mail.gmail.com>
-	<CA+chaQeF7U2C+t+zugHFry2bpxiFbfa294_A_dnfmdvJ-3pw9A@mail.gmail.com>
-	<CAMKF1spqvnHXTOMWX8VV4QponpKun+2tpZS4hAG5JpDDdv8xgQ@mail.gmail.com>
-	<CA+chaQcTRNcXnWX67kRts_K6cBdR9gun3qdqBX5nREts0ymH-g@mail.gmail.com>
+	bh=2kenxD/+X+PqMepflotl6K9c0lU8RDrCTugC03/ReXo=;
+	b=MIglx4cw0xl+61Vx6dawcCAw1xEX+4fPNKrp/lXphSDUU5ajpDcI4/5u8sZ5Xb5E1T
+	BOhS5yEKuein4mRgoh6aeXX97gmB3nkKM2gllJHojIjB6J6XnZqMDGHfQ+XLGRffJomB
+	mndfDXRlA/a57FEafbbhMF8WXJ3j8L0vNrfOxm+ziOqy+fh5Jgk7BO7NxpG8HK7rMll3
+	Edxk3sHTJYL8L1rDRu+f3KIzghX7dWMCLVwIcxDiN0cPMAF9dRebSUXBLx33Baj5oqO+
+	hCgPuXuibw7jbHn+tXsx/0eLfRnwKyJVs8eCTN8NGQdEEzNscPJkbnFZcrQJm6wbSJq3
+	etbg==
+X-Gm-Message-State: ANhLgQ1FU/KodeNUu5HaUZU8qlx+4IBUBTdA8EJl+gIvbkFmGtkOdTKn
+	abn0nR5weqJ1LLQevYQR8xhSjRpWNDQ=
+X-Google-Smtp-Source: ADFU+vsMmAalwRJDeJDF6pJheK+oIu16CP70bIGApSgUgevDmqdGPdiN7Naqkl+AP5VGLWwt7u1cug==
+X-Received: by 2002:a62:e414:: with SMTP id r20mr9338875pfh.154.1584032218287; 
+	Thu, 12 Mar 2020 09:56:58 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::94a8])
+	by smtp.gmail.com with ESMTPSA id k5sm6392322pgl.3.2020.03.12.09.56.57
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 12 Mar 2020 09:56:57 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <f8165f06-2341-e19d-5135-cfee6cba28fe@gmail.com>
-Date: Thu, 12 Mar 2020 09:09:38 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
-	Gecko/20100101 Thunderbird/68.5.0
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Mar 2020 09:57:04 -0700
+Message-Id: <20200312165704.2373253-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQcTRNcXnWX67kRts_K6cBdR9gun3qdqBX5nREts0ymH-g@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] sysdig: Upgrade to 0.26.5
+Cc: Jaga <jagadheesan_duraisamy@comcast.com>
+Subject: [PATCH] nodejs: install gen-regexp-special-case only when icu is enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,64 +57,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 16:09:39 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-GB
+X-List-Received-Date: Thu, 12 Mar 2020 16:56:58 -0000
 Content-Transfer-Encoding: 8bit
 
+From: Jaga <jagadheesan_duraisamy@comcast.com>
 
+Fixes install errors when icu packageconfig is disabled
 
-On 3/12/20 7:14 AM, Martin Jansa wrote:
-> It doesn't seem to build for aarch64 without the jit in luajit:
-> 
-> | DEBUG: Executing shell function do_compile
-> | NOTE: VERBOSE=1 cmake --build 
-> /OE/build/tmp-glibc/work/aarch64-oe-linux/sysdig/0.26.5-r0/build 
-> --target all --
-> | ninja: error: 'libluajit-5.1.so <http://libluajit-5.1.so>', needed by 
-> 'userspace/sysdig/csysdig', missing and no known rule to make it
-> | WARNING: exit code 1 from a shell command.
-> | ERROR: Execution of 
-> '/OE/build/tmp-glibc/work/aarch64-oe-linux/sysdig/0.26.5-r0/temp/run.do_compile.51845' 
-> failed with exit code 1:
-> | ninja: error: 'libluajit-5.1.so <http://libluajit-5.1.so>', needed by 
-> 'userspace/sysdig/csysdig', missing and no known rule to make it
-> | WARNING: exit code 1 from a shell command.
-> 
+Signed-off-by: Jaga <jagadheesan_duraisamy@comcast.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-luajit needs 32bit compiler on build host, so I wonder if thats the case 
-here. I have not yet looked into it, but I have seen this failure on 
-aarch64 as well.
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+index 1ea438c5b0..a482c6b4ca 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+@@ -138,7 +138,9 @@ do_install_append_class-native() {
+     install -d ${D}${bindir}
+     install -m 0755 ${S}/out/Release/torque ${D}${bindir}/torque
+     install -m 0755 ${S}/out/Release/bytecode_builtins_list_generator ${D}${bindir}/bytecode_builtins_list_generator
+-    install -m 0755 ${S}/out/Release/gen-regexp-special-case ${D}${bindir}/gen-regexp-special-case
++    if ${@bb.utils.contains('PACKAGECONFIG','icu','true','false',d)}; then
++        install -m 0755 ${S}/out/Release/gen-regexp-special-case ${D}${bindir}/gen-regexp-special-case
++    fi
+     install -m 0755 ${S}/out/Release/mkcodecache ${D}${bindir}/mkcodecache
+     install -m 0755 ${S}/out/Release/node_mksnapshot ${D}${bindir}/node_mksnapshot
+ }
+-- 
+2.25.1
 
-> On Tue, Mar 3, 2020 at 4:27 PM Khem Raj <raj.khem@gmail.com 
-> <mailto:raj.khem@gmail.com>> wrote:
-> 
-> 
-> 
->     On Tue, Mar 3, 2020 at 5:53 AM Martin Jansa <martin.jansa@gmail.com
->     <mailto:martin.jansa@gmail.com>> wrote:
-> 
->         Should I send the patch to move grpc from meta-networking to
->         meta-oe to fix this or do you have it already?
-> 
-> 
->     Please send I don’t have it ready
-> 
-> 
->         On Mon, Mar 2, 2020 at 6:22 PM Khem Raj <raj.khem@gmail.com
->         <mailto:raj.khem@gmail.com>> wrote:
-> 
->             On Mon, Mar 2, 2020 at 4:27 AM Martin Jansa
->             <martin.jansa@gmail.com <mailto:martin.jansa@gmail.com>> wrote:
->              >
->              > Hi,
->              >
->              > added dependency on grpc exists only in meta-networking,
->             so this fails to parse now.
->              >
-> 
->             I think grpc is common enough to belong to meta-oe as well.
-> 
->              > Cheers,
-> 
 
