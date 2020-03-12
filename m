@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 108B461C2C
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com
+	[209.85.216.52])
+	by mail.openembedded.org (Postfix) with ESMTP id D040D61BD1
 	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Mar 2020 02:57:41 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id a23so2050693plm.1
+	Thu, 12 Mar 2020 02:57:42 +0000 (UTC)
+Received: by mail-pj1-f52.google.com with SMTP id m15so1305498pje.3
 	for <openembedded-devel@openembedded.org>;
-	Wed, 11 Mar 2020 19:57:43 -0700 (PDT)
+	Wed, 11 Mar 2020 19:57:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=w44lyKiJKa8mfNcJlUDB/ENkvzP4GS4OIhm8GGljsWk=;
-	b=p8YhysW8ygjkTbruxoFpFFTaqKdGqsdGhuatINhLttI3GV3mwUwEbHdZeGOOsG1/3Q
-	Amm3006r6zIE21dhM7ofCxYbDWNja7Bm8ZX/UQ2y2HDWj8mY/XbxtGWVCd3OM4Cg4OFp
-	Mpb1/o64dr2LTNKKhXs7jlw9PmZyEn2CuTOUyeJmVlkuuGfYA7nw/5gmcoDo1C7ip0TU
-	zAglr+zA4PlNsjmr4Zh+sQ+6lAGPPaM37MBHLXZp9Smq+/7owPBgvjF3AunKrq6+D0w2
-	nVZUa1+FyHUwgjcu3aNrQRN2hr0QZD1inh2kjHhBECZdMfQ4UIdXKuavDKHjovoFF2yD
-	w0VA==
+	bh=LC7RxfHvK++rBbGJjNhBlLS0Nyw209m1yTayr/5OXAA=;
+	b=LprLOfdo+lAoCWvmRE364X7FvXizYw8HD9mv6dOEQ05+ZrWtuhtDZIB/AsaBOxqZu7
+	mJuq44xBCRMh+eark87UjBeKv5LClrkjDo8BS3Xz7hZlCDIGiO8nJswuLRU3w1NE/MxP
+	SMDt2z3eioRK6vBfkY5tqt7IRHcr4GhIVrzuv63Hs5eb8aznVUzjJGxRn7ZCxM58FF7y
+	eTbL/B7rXpm1G0i8vwoTwQ6xDFiaRB/nSiXOvW4NW0twjn+a1tPMRUGHXn5ONgc+ZMYY
+	0BdG4P2hSdlWokatI5Ym1JKE2U9Is2pELCsySZm5eGMRlhNfKm7zjFj7yZL1rMp0KLuH
+	imxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=w44lyKiJKa8mfNcJlUDB/ENkvzP4GS4OIhm8GGljsWk=;
-	b=NqAz0T4E/DVnp6xz/PR+xKGmI5QkIhsV43QVw3/ZtfOMUVKjSS3onRZn87DO/idcO0
-	D26MSn0307/snI9rsxCtDO7en0gTHkxy2D5Q2c5kIA8af7vBqeye1/JF7ehBg/jv2JF2
-	4xKfEyxPZFBC9tkPM0gzpLIezUYWVvrCBoH5Fk8JEF4SEFOZcQmxdZ1bKSKGLjgxTpxr
-	9UdMtdvZLVhgWVtuFbyKSjat85VYDYQ/oi0148cygNOXgN0QX5RAQgp1mgpaWlFSW1NB
-	s4Op7f0goKIjSgEdLgYRD/CVzNe25nXP5EouOkkucuvSHe59jHxunMYz/7d4eTK7m9wf
-	7jsw==
-X-Gm-Message-State: ANhLgQ0/B+ocKAdTJMTmFKUm7HQlfnRwhHUvDz5jUv4rwS02cB373vqE
-	zjFhKbQggz1UoFiOqzzOLU/r8/+K
-X-Google-Smtp-Source: ADFU+vsS5Pa0rEGN303ObbCxhKeceCl3fAJlHnnstr8w2Q9+EUyuxA5ZdrJEsfNBrEz9AL4ZZJ34iQ==
-X-Received: by 2002:a17:90a:928c:: with SMTP id
-	n12mr1864823pjo.45.1583981862969; 
-	Wed, 11 Mar 2020 19:57:42 -0700 (PDT)
+	bh=LC7RxfHvK++rBbGJjNhBlLS0Nyw209m1yTayr/5OXAA=;
+	b=Z9miCOE6SUPajepb/jgA4xspCeyFuwfvrXPFL4wj0kTrPFNEPGmFekuWeL18ufV9Bl
+	ljwzZ0rZKKjsy+gTSsUS3INkgkDQpQVOq7briVws06ckl3M9RILDn9jxflqx+G/SpDBg
+	9SfM+wMHyZ1oyC2YwtYADkB0v3PNPBgLNYArVQrmjw4JMISWjvawNvf17t1u0uRHJvQY
+	YFyabC4uuXz1Waqv/izSiNM4q4tQGeFDRWVHFjrOnKeM3WLJtmt46zbEVHK7X12+Zu3g
+	GFh686Sf+S7coEEWd126Q0pqGqD+5/fKdrf3vPONlN6PlmXt+JPzDuxH8+X603+dCKpS
+	hm+w==
+X-Gm-Message-State: ANhLgQ0r+Us+ZhBNDw6PKx1ABuUy0FSteFVXqDQI/2jrThA0ugz5hVpR
+	2ru+0PahMDPUWq9V0aV0QpnZg8ri
+X-Google-Smtp-Source: ADFU+vurH4C+V5FkplUiEu3AsddnVTG17Pu2WpLYimfzJayI71CxXCpDM/WEargpFzlhoStCaIGUng==
+X-Received: by 2002:a17:90a:de16:: with SMTP id
+	m22mr1824096pjv.19.1583981863820; 
+	Wed, 11 Mar 2020 19:57:43 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:60a5:8a88:a7f9:d809])
 	by smtp.gmail.com with ESMTPSA id
-	e2sm18328236pgv.81.2020.03.11.19.57.42
+	e2sm18328236pgv.81.2020.03.11.19.57.43
 	for <openembedded-devel@openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 11 Mar 2020 19:57:42 -0700 (PDT)
+	Wed, 11 Mar 2020 19:57:43 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@openembedded.org
-Date: Wed, 11 Mar 2020 19:57:24 -0700
-Message-Id: <863f24825bf877224ac8391a22798d15a2e60478.1583981708.git.akuster808@gmail.com>
+Date: Wed, 11 Mar 2020 19:57:25 -0700
+Message-Id: <00cf0f4ddcd89ea8cc8f5f0f800954c349ade834.1583981708.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1583981708.git.akuster808@gmail.com>
 References: <cover.1583981708.git.akuster808@gmail.com>
-Subject: [zeus 05/13] libldb: Do not require the "pam" distro feature to be enabled
+Subject: [zeus 06/13] ade: Fix install paths in multilib builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,35 +62,79 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 12 Mar 2020 02:57:42 -0000
 
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+From: Khem Raj <raj.khem@gmail.com>
 
-It was only added because samba was a dependency, but was not removed
-again when the dependency on samba was removed in commit 6207331f.
+Fixes
+ERROR: ade-0.1.1f-r0 do_package: QA Issue: ade: Files/directories were installed but not shipped in any package:
+  /usr/lib
+  /usr/lib/libade.a
 
-This effectively reverts commit a190c2e3.
-
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 0d2b80bd783fb2190c28caa2ebf3a13d4491d7c7)
+Signed-off-by: Sanjeev Nahulanthran <sanjeev.nahulanthran@intel.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-networking/recipes-support/libldb/libldb_1.5.6.bb | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ ...tallDirs-for-detecting-install-paths.patch | 39 +++++++++++++++++++
+ meta-oe/recipes-support/opencv/ade_0.1.1f.bb  |  1 +
+ 2 files changed, 40 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/ade/0001-use-GNUInstallDirs-for-detecting-install-paths.patch
 
-diff --git a/meta-networking/recipes-support/libldb/libldb_1.5.6.bb b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-index 99eb6f9ce8..cc24863c60 100644
---- a/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-+++ b/meta-networking/recipes-support/libldb/libldb_1.5.6.bb
-@@ -36,8 +36,7 @@ LIC_FILES_CHKSUM = "file://pyldb.h;endline=24;md5=dfbd238cecad76957f7f860fbe9ada
- SRC_URI[md5sum] = "fc58ef432c1fcb03fc3bb6cccce08977"
- SRC_URI[sha256sum] = "ff82474d0bf109e415a2d50334bde5715f486a53ff4bb8c7f74459dd229e975b"
+diff --git a/meta-oe/recipes-support/opencv/ade/0001-use-GNUInstallDirs-for-detecting-install-paths.patch b/meta-oe/recipes-support/opencv/ade/0001-use-GNUInstallDirs-for-detecting-install-paths.patch
+new file mode 100644
+index 0000000000..f038b0aa91
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/ade/0001-use-GNUInstallDirs-for-detecting-install-paths.patch
+@@ -0,0 +1,39 @@
++From 67ccf77d97b76e8260c9d793ab172577e2393dbc Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 19 Dec 2019 21:33:46 -0800
++Subject: [PATCH] use GNUInstallDirs for detecting install paths
++
++This helps with multilib builds
++
++Upstream-Status: Submitted [https://github.com/opencv/ade/pull/19]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ sources/ade/CMakeLists.txt | 10 ++++++----
++ 1 file changed, 6 insertions(+), 4 deletions(-)
++
++diff --git a/sources/ade/CMakeLists.txt b/sources/ade/CMakeLists.txt
++index 2d1dd20..46415d1 100644
++--- a/sources/ade/CMakeLists.txt
+++++ b/sources/ade/CMakeLists.txt
++@@ -47,12 +47,14 @@ if(BUILD_ADE_DOCUMENTATION)
++                       VERBATIM)
++ endif()
++ 
+++include(GNUInstallDirs)
+++
++ install(TARGETS ade COMPONENT dev
++         EXPORT adeTargets
++-        ARCHIVE DESTINATION lib
++-        LIBRARY DESTINATION lib
++-        RUNTIME DESTINATION lib
++-        INCLUDES DESTINATION include)
+++	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+++        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+++        RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR}
+++	INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
++ 
++ install(EXPORT adeTargets DESTINATION share/ade COMPONENT dev)
++ 
++-- 
++2.24.1
++
+diff --git a/meta-oe/recipes-support/opencv/ade_0.1.1f.bb b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+index 332820d149..3861802158 100644
+--- a/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
++++ b/meta-oe/recipes-support/opencv/ade_0.1.1f.bb
+@@ -5,6 +5,7 @@ organizing data flow processing and execution."
+ HOMEPAGE = "https://github.com/opencv/ade"
  
--inherit waf-samba distro_features_check
--REQUIRED_DISTRO_FEATURES = "pam"
-+inherit waf-samba
+ SRC_URI = "git://github.com/opencv/ade.git \
++           file://0001-use-GNUInstallDirs-for-detecting-install-paths.patch \
+            "
  
- S = "${WORKDIR}/ldb-${PV}"
- 
+ SRCREV = "58b2595a1a95cc807be8bf6222f266a9a1f393a9"
 -- 
 2.17.1
 
