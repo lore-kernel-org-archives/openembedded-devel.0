@@ -1,54 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com
-	[209.85.128.47])
-	by mail.openembedded.org (Postfix) with ESMTP id B3B0661C42
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com
+	[209.85.128.42])
+	by mail.openembedded.org (Postfix) with ESMTP id BC29C61C45
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 14:21:49 +0000 (UTC)
-Received: by mail-wm1-f47.google.com with SMTP id t13so157365wmi.3
+	Thu, 12 Mar 2020 14:21:50 +0000 (UTC)
+Received: by mail-wm1-f42.google.com with SMTP id 25so6305325wmk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 07:21:50 -0700 (PDT)
+	Thu, 12 Mar 2020 07:21:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references
 	:mime-version:content-transfer-encoding;
-	bh=+rQqW0O/aceJ9c6GwauVEaOgunu7oszWI35vZ8FZ6to=;
-	b=R6aenKFRI4Ji6+4disAUzRgUkMCL4WIFkeycBJK0quoj0h4gv9k2/iErH6p3l5pT6g
-	K7V2IZ0935actHRc7HkYlD4QdFo8ChbFQ1z2IyFtRnGM/ny21V9psrx/+h+3ozrx+Fjr
-	vBQ56MvF0GjNBmet/ScZS/mkIKilPGhHs37efufh63SH0INSkKm2ShV6ciNyPdYBD+qp
-	sTVaRnd2cvW7lqp/qNyoStXoLHZcRlypq5zZhrBR4CFGgJxEJ49lU8DQBFB0pVDNydEn
-	fPrZzrzpDVvP7Riyl69QCF7Od8IQbEXlZTkCh4QoAi8+eYKe7sLmUgNniFsDQ3xPQD5n
-	2lVQ==
+	bh=J+Hoo/x/91bLObFqw2A41SyNt6iSKdVv8lkAYSx3bLo=;
+	b=kcxzk4B2CRZQ/JwHgbwrGGJb9uTKZIqzWr8ci5tC/M1CIFKTAhrXarehhlnHyrugus
+	qcEVQttoRL1aSRZt/31tPso7xpm+Cb7rIg46HYCsh1djD+yO6BOi7amFSsrPbCLlCXA/
+	64RreEq6TO6DH3wOWmf4mfEwZWMZRu8XD6YJaALLXk6mS25f5Tm2kKQLJ4BUQEuX4QW4
+	GP4fwfENIDjvZLE1lw1Hp686iarC/V7Czl3h+1dU35duZ5MEpRzru5gp1xpvhVeizAPq
+	44HSdsohvHIyvGQIqLn8En2HKHgVR1ei67vAN2iWZ4op6aEvT+D5oOOGqCPmIEtYVuqM
+	MEOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=+rQqW0O/aceJ9c6GwauVEaOgunu7oszWI35vZ8FZ6to=;
-	b=TNG7oAmFUqq9orqMDkuDlB4/l56tc/DG4ogIkGOZQg8r7NR03FXEQ/E+MdZPwSxpC4
-	aa1MzKhsi08+ggIrgiFLah6AdlBmeMRToYLjfjZIitzOtxBPfjjIQzd8oP8BjW7LQ/9N
-	Q8zd4hxaPYqmoGmsYuL0JGBMVSkrNp+HOGWxxq7Laf06LBV7SKoF/oNh0sOSYdRKobcD
-	soLuHMyJMi9kcXme8Ul156H8iHCNM2GsdyD7ybhAXFd9QjAwtgE69ayzn0dahbjR1GsB
-	mjCSNifYkbg/yTc3JalLJvv80D/wWaD5UeqDea6qlkU0tZe3NvgNtmc+uIi5BV4L8H4D
-	HGxg==
-X-Gm-Message-State: ANhLgQ1tEdN8umQDGwZFP6iIETH6m++kAYI35dnWMH/zSt4MPaGR/iUy
-	xItPQTtEqczB05yrNKFv3tAiSNjU
-X-Google-Smtp-Source: ADFU+vvQ8Ng+B2kbKkRBHCAw13FTfCV4jz5vW4LMIpFs00x5IaOEqukyszKIQK1Y8ea0TN5PNaoo6A==
-X-Received: by 2002:a1c:6285:: with SMTP id w127mr5344493wmb.133.1584022909859;
-	Thu, 12 Mar 2020 07:21:49 -0700 (PDT)
+	bh=J+Hoo/x/91bLObFqw2A41SyNt6iSKdVv8lkAYSx3bLo=;
+	b=mwfI6ox71DpFKR3M+zLXrF1dBOmfL6l7juXZfZ4Zxf7PffwS7WnBqCGUgMjX61/cA6
+	Z2gMd4IKrMiX5cSpTTm0bTCXWjdmRUSi9bd7zcdEZu0FDwNYktSzykcKIaU8GTRtY6DB
+	2aZudXHYQHtvWG67HLj5hC+5z96GKE9e6r4YhvnuAsGPWzPjc/pPHkNApLdW46+TXXL0
+	Lmk5QAZHbGYqQfeQtoMwS1z3RDRxwEN+oAfo3Iu2z9HMuPLGvW4yhurEF42lTDUPbB0O
+	QbeVvFsAZxqOlonf+mF9ce1JCjegxPS4u0IJqjCeB4Cp2sPYY0A8nqGvfwayLjKoQ4AQ
+	F4nQ==
+X-Gm-Message-State: ANhLgQ3nOLt9D3onovsOmAHEDxhLtnPsBDWLJE9gCxVKrKxEgrzdPVGg
+	CPA0uW3daFL30vIDflR7nOTg1Nz3
+X-Google-Smtp-Source: ADFU+vuISoKgQCe3ylfNkaqWCDRqdQvo1qjLxpvjXHB4cMcACpMPY0ymka875D/MLD/4DCunsE5E+w==
+X-Received: by 2002:a05:600c:2306:: with SMTP id
+	6mr5067442wmo.86.1584022911128; 
+	Thu, 12 Mar 2020 07:21:51 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F067F32CE0B3214CDB29793.dip0.t-ipconnect.de.
 	[2003:f0:7f06:7f32:ce0b:3214:cdb2:9793])
 	by smtp.gmail.com with ESMTPSA id
-	r12sm20974339wrx.26.2020.03.12.07.21.48
+	r12sm20974339wrx.26.2020.03.12.07.21.49
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Thu, 12 Mar 2020 07:21:49 -0700 (PDT)
+	Thu, 12 Mar 2020 07:21:50 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Mar 2020 15:21:39 +0100
-Message-Id: <20200312142140.5926-2-schnitzeltony@gmail.com>
+Date: Thu, 12 Mar 2020 15:21:40 +0100
+Message-Id: <20200312142140.5926-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200312142140.5926-1-schnitzeltony@gmail.com>
 References: <20200312142140.5926-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH][meta-xfce 2/3] xfce4-whiskermenu-plugin: upgrade 2.4.2 -> 2.4.3
+Subject: [PATCH][meta-xfce 3/3] xfce4-power-manager: upgrade 1.6.5 -> 1.6.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,39 +62,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 14:21:50 -0000
+X-List-Received-Date: Thu, 12 Mar 2020 14:21:51 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 2.4.3
+Release notes for 1.6.6
 =======================
-- Fix loading incorrect icons for some applications. (bug #16461)
-- Translation updates: Bulgarian, Finnish, Greek, Icelandic,
-  Interlingue, Nepali, Norwegian Bokmal, Russian, Slovak.
+- Dismiss critical notification when connecting to AC
+- Fix inhibiting xfce4-screensaver (Bug #16364)
+- settings: Move % sign out of spinbutton (Bug #15994)
+- panel-plugin: Toggle presentation mode on middle click
+- panel-plugin: Properly show 'About' menu item
+- panel-plugin: Add missing about callback
+- panel-plugin: Properly hook up about signal
+- panel-plugin: Replace deprecated call
+- Switch to symbolic window-close icons
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...menu-plugin_2.4.2.bb => xfce4-whiskermenu-plugin_2.4.3.bb} | 4 ++--
+ ...e4-power-manager_1.6.5.bb => xfce4-power-manager_1.6.6.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/whiskermenu/{xfce4-whiskermenu-plugin_2.4.2.bb => xfce4-whiskermenu-plugin_2.4.3.bb} (66%)
+ rename meta-xfce/recipes-xfce/xfce4-power-manager/{xfce4-power-manager_1.6.5.bb => xfce4-power-manager_1.6.6.bb} (89%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.2.bb b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.3.bb
-similarity index 66%
-rename from meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.2.bb
-rename to meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.3.bb
-index 25fc72d97..3da631bb2 100644
---- a/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/whiskermenu/xfce4-whiskermenu-plugin_2.4.3.bb
-@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+diff --git a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.5.bb b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.6.bb
+similarity index 89%
+rename from meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.5.bb
+rename to meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.6.bb
+index 295e2e4ed..608990ad4 100644
+--- a/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.5.bb
++++ b/meta-xfce/recipes-xfce/xfce4-power-manager/xfce4-power-manager_1.6.6.bb
+@@ -11,8 +11,8 @@ REQUIRED_DISTRO_FEATURES = "x11"
  
- inherit xfce-panel-plugin cmake
+ DEPENDS += "libnotify libxrandr virtual/libx11 libxext xfce4-panel upower libxscrnsaver"
  
--SRC_URI[md5sum] = "f553d3be2ffebd8d9fa5b6415647e4ff"
--SRC_URI[sha256sum] = "fb2e1d44744d851c5339900e7af9068397028efa9ee5235a66ab273e95740dee"
-+SRC_URI[md5sum] = "7b66438996127b759ad634f6579e003c"
-+SRC_URI[sha256sum] = "39faeee91ceb3cb727f9de09dbf20a8c73e524851a2c3b76a4b19a0732de5ff0"
+-SRC_URI[md5sum] = "709efbc2de9ed84b4831847ff70bcd7f"
+-SRC_URI[sha256sum] = "10adb67899b181ca5fc577fc9bb7a698fb94e42073585f7e2be642c7db127a74"
++SRC_URI[md5sum] = "19873fc8a6de5e37ed57036a0002a5ce"
++SRC_URI[sha256sum] = "1b7bf0d3e8af69b10f7b6a518451e01fc7888e0d9d360bc33f6c89179bb6080b"
  
- RRECOMMENDS_${PN} += "menulibre"
+ EXTRA_OECONF = " \
+     --enable-network-manager \
 -- 
 2.21.1
 
