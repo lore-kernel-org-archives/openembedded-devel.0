@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pj1-f43.google.com (mail-pj1-f43.google.com
-	[209.85.216.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 0459561C2A
+Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com
+	[209.85.216.50])
+	by mail.openembedded.org (Postfix) with ESMTP id A89C461C24
 	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Mar 2020 02:57:44 +0000 (UTC)
-Received: by mail-pj1-f43.google.com with SMTP id l41so2003359pjb.1
+	Thu, 12 Mar 2020 02:57:46 +0000 (UTC)
+Received: by mail-pj1-f50.google.com with SMTP id mq3so2003646pjb.0
 	for <openembedded-devel@openembedded.org>;
-	Wed, 11 Mar 2020 19:57:46 -0700 (PDT)
+	Wed, 11 Mar 2020 19:57:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=cDlfld8qE9/PSawNnNq2exL1uzBBako7ooqNuvUpJZs=;
-	b=fCZVU9cKIS6Bn8VFJGxBALknVfVLOLc3eJGyWwyM+CBnVM548eHnhMtaBgrxhYo+ZR
-	udMTBOAxd2eiuJaDvTYcVsvgAlJmUpV+kVNjiLqviQMsqgGe9HSD0qGTmcnd+LjgBPko
-	WE/lJeJpVqcXWL9ZDn0ebGo79rxMSPX6K8Hddb7OjaPcuHBL+rYFSQ8a/vfxDeRJAqiG
-	dB7r9z0Dvl+JzLkfjCg4dXy412tuK9tW2/Iy4NPLn2OvbLA8vDzOixKpzwgrT6IPGGn7
-	5aLve6/UxC/Br8h69LCtmLcLC6k2pEQ1CH8qe6UBGZwoqJ6V2iSJwn+ijVfBERu/x84O
-	dLQw==
+	bh=NvJBB72DRqKucqbgEDu08b6HijTI0HVWH9fqsUcxv0k=;
+	b=c7zNdo490EraNKhWpm5M2NpgR/zbNBjRmILLwG5v1Fsu98bdGYuqPL6FM/ycYsGk/r
+	7dpkUTJt2kg0h8laPRHLS6tANOPc3236slrOc0g23gKUa0BIOXbNB6B/mth9r3OPmr5b
+	7f1eORr5ZJOTm0iu99qaWCnY2W+gTVJN9YtEFW2VEs9T+S0YGnpiQyzfMrp6+uxA7p2Z
+	5nLZKHd8dmR8XIdNhMOSlrVNZZZJw12fc6p7iELDgb/tXSEzs2MmPA9b1XenN5Cum3DE
+	TFWgAp+eeIsBTzhOh/fsnKWeZSkKKpDl2TI7McPCGtQu5Th5yob8VopJc/hU7pq6gBi6
+	ESAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=cDlfld8qE9/PSawNnNq2exL1uzBBako7ooqNuvUpJZs=;
-	b=G/kFQikazMtxvOTQJlOHj+aaBTTu6xKbzFMtrpPKXbad7ilMTkR+8gKhjSrHjIW4vO
-	Ci3LmK1ypah4RIPNTxj+J5BhVAGMz9D+LkRT3JIJKIN9L3OPX6BrJazzdmWXqjoUl3d5
-	9YoXaE+WYDDOEAc08mhWmuLjxL889/WpWbTIs4PthOYk4zasPq3pdwz4gFKAn4MiFmj2
-	LAKkl+BSuHm5Ded5BW516dZcomHMRbthftXRQiOcbmwxWrwUyQj1quZ/yD72aAHvmFAt
-	Uo6kfffSGC0G9qrbYvBA29IdZJyIYZtr6mRy3AVSUB5xO0ykUnFrZNHireSqlxpTXUVe
-	/xiw==
-X-Gm-Message-State: ANhLgQ0fnaj51kwsoXKwQjtRX2jFjzKQqGAL5pJVPQGePchLDIDFM30S
-	yFlepdYWdZze/x2X4s82lQLCGrTC
-X-Google-Smtp-Source: ADFU+vsd8jX5jvejLPb85j0pKzJofA4seym37T5D+EmpPmpV0x6q5jSlp4S9N+lk7amrz/Ifb/p8kw==
-X-Received: by 2002:a17:90a:2663:: with SMTP id
-	l90mr1695645pje.188.1583981865798; 
-	Wed, 11 Mar 2020 19:57:45 -0700 (PDT)
+	bh=NvJBB72DRqKucqbgEDu08b6HijTI0HVWH9fqsUcxv0k=;
+	b=fjk+PFVJKH8vr+B2/d2dS1Fy0tkxTVHNIa/nMlfMSzR2VjNd6yZX03Yzh5CNkYKYuX
+	y+Z9d75mxl148IRkEtGre5JV2zHXA/MOhiGdAJkDMzg5b95gpgTdB/mMACFMBIWIdnnN
+	QOeiVhOxm32sXQdUoDzeE9iyGTI2/fY3ACrw89CO8LCtKi6HswKgT/7ch61JqjwHaobS
+	r2Zkut9XP8OkqCUmco2FEJ7bt1YEfwoUfx3ehAuVE48doM6vVM3Qkqs7hlA4xaZqjb2z
+	4OiIY0Ok1WJNqR9sX9VjIzgFycW2iDSruVt5j2m8YY4Q4pyXh0RR/+IeIc581okVuA9f
+	+CGg==
+X-Gm-Message-State: ANhLgQ0evg/h4wk5aPrFiAL0Q6nMOya8A3WgSNCeuAez3OWMyYDhHld9
+	OOzSu5lkCi8RYvL7RmxKWbTtYQQt
+X-Google-Smtp-Source: ADFU+vtmkl+6MFm7mDI9lgmaxM2b0Q90W/Ter5aJFAtU4H0Moymt4pa1tDeI08YxmjFxsQL0tCJgiQ==
+X-Received: by 2002:a17:90a:3a8f:: with SMTP id
+	b15mr1782693pjc.178.1583981867516; 
+	Wed, 11 Mar 2020 19:57:47 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:60a5:8a88:a7f9:d809])
 	by smtp.gmail.com with ESMTPSA id
-	e2sm18328236pgv.81.2020.03.11.19.57.44
+	e2sm18328236pgv.81.2020.03.11.19.57.45
 	for <openembedded-devel@openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 11 Mar 2020 19:57:45 -0700 (PDT)
+	Wed, 11 Mar 2020 19:57:47 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@openembedded.org
-Date: Wed, 11 Mar 2020 19:57:27 -0700
-Message-Id: <289c3f9fb5a395fa660f21d3768b7d70f04af040.1583981708.git.akuster808@gmail.com>
+Date: Wed, 11 Mar 2020 19:57:28 -0700
+Message-Id: <41f3185f91bf1e8b1ec7cfe0c6da29a9058093d0.1583981708.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1583981708.git.akuster808@gmail.com>
 References: <cover.1583981708.git.akuster808@gmail.com>
-Subject: [zeus 08/13] opencv: don't download during configure
+Subject: [zeus 09/13] opencv: also download face alignment data in do_fetch()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,73 +60,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 02:57:45 -0000
+X-List-Received-Date: Thu, 12 Mar 2020 02:57:46 -0000
 
 From: Ross Burton <ross.burton@intel.com>
 
-OpenCV downloads data files during the CMake configure phase, which
-is bad because fetching should only happen in do_fetch (and if proxies
-are needed, won't be set in do_configure).
-
-The recipe attempts to solve this already by having the repositories in
-SRC_URI and moving the files to the correct place before do_configure().
-However they are written to ${B} which is then wiped in do_configure so
-they're not used.
-
-The OpenCV download logic has a download cache with specially formatted
-filenames, so take the downloaded files and populate the cache.
+The face alignment data is downloaded in do_configure, so download it in
+do_fetch and add it to the cache.
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 Signed-off-by: Yeoh Ee Peng <ee.peng.yeoh@intel.com>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-support/opencv/opencv_4.1.0.bb    | 23 +++++++++++++++++--
- 1 file changed, 21 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/opencv/opencv_4.1.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-index 5e89db0977..cfc7854e1d 100644
+index cfc7854e1d..487393f388 100644
 --- a/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
 +++ b/meta-oe/recipes-support/opencv/opencv_4.1.0.bb
-@@ -51,10 +51,28 @@ PV = "4.1.0"
+@@ -15,6 +15,7 @@ SRCREV_contrib = "2c32791a9c500343568a21ea34bf2daeac2adae7"
+ SRCREV_ipp = "32e315a5b106a7b89dbed51c28f8120a48b368b4"
+ SRCREV_boostdesc = "34e4206aef44d50e6bbcd0ab06354b52e7466d26"
+ SRCREV_vgg = "fccf7cd6a4b12079f73bbfb21745f9babcd4eb1d"
++SRCREV_face = "8afa57abc8229d611c4937165d20e2a2d9fc5a12"
  
- S = "${WORKDIR}/git"
- 
-+# OpenCV wants to download more files during configure.  We download these in
-+# do_fetch and construct a source cache in the format it expects
-+OPENCV_DLDIR = "${WORKDIR}/downloads"
-+
- do_unpack_extra() {
-     tar xzf ${WORKDIR}/ipp/ippicv/${IPP_FILENAME} -C ${WORKDIR}
--    cp ${WORKDIR}/vgg/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
--    cp ${WORKDIR}/boostdesc/*.i ${WORKDIR}/contrib/modules/xfeatures2d/src
-+
-+    md5() {
-+        # Return the MD5 of $1
-+        echo $(md5sum $1 | cut -d' ' -f1)
-+    }
-+    cache() {
-+        TAG=$1
-+        shift
-+        mkdir --parents ${OPENCV_DLDIR}/$TAG
-+        for F in $*; do
-+            DEST=${OPENCV_DLDIR}/$TAG/$(md5 $F)-$(basename $F)
-+            test -e $DEST || ln -s $F $DEST
-+        done
-+    }
-+    cache xfeatures2d/boostdesc ${WORKDIR}/boostdesc/*.i
-+    cache xfeatures2d/vgg ${WORKDIR}/vgg/*.i
+ def ipp_filename(d):
+     import re
+@@ -41,6 +42,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+            git://github.com/opencv/opencv_3rdparty.git;branch=ippicv/master_20180723;destsuffix=ipp;name=ipp \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_boostdesc_20161012;destsuffix=boostdesc;name=boostdesc \
+            git://github.com/opencv/opencv_3rdparty.git;branch=contrib_xfeatures2d_vgg_20160317;destsuffix=vgg;name=vgg \
++           git://github.com/opencv/opencv_3rdparty.git;branch=contrib_face_alignment_20170818;destsuffix=face;name=face \
+            file://0001-3rdparty-ippicv-Use-pre-downloaded-ipp.patch \
+            file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
+            file://0003-To-fix-errors-as-following.patch \
+@@ -73,6 +75,7 @@ do_unpack_extra() {
+     }
+     cache xfeatures2d/boostdesc ${WORKDIR}/boostdesc/*.i
+     cache xfeatures2d/vgg ${WORKDIR}/vgg/*.i
++    cache data ${WORKDIR}/face/*.dat
  }
  addtask unpack_extra after do_unpack before do_patch
  
-@@ -65,6 +83,7 @@ EXTRA_OECMAKE = "-DOPENCV_EXTRA_MODULES_PATH=${WORKDIR}/contrib/modules \
-     -DOPENCV_ICV_HASH=${IPP_MD5} \
-     -DIPPROOT=${WORKDIR}/ippicv_lnx \
-     -DOPENCV_GENERATE_PKGCONFIG=ON \
-+    -DOPENCV_DOWNLOAD_PATH=${OPENCV_DLDIR} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse3", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1", "", d)} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.1", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1", "", d)} \
-     ${@bb.utils.contains("TARGET_CC_ARCH", "-msse4.2", "-DENABLE_SSE=1 -DENABLE_SSE2=1 -DENABLE_SSE3=1 -DENABLE_SSSE3=1 -DENABLE_SSE41=1 -DENABLE_SSE42=1", "", d)} \
 -- 
 2.17.1
 
