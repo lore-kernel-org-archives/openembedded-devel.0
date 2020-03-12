@@ -1,52 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ed1-f66.google.com (mail-ed1-f66.google.com
-	[209.85.208.66])
-	by mail.openembedded.org (Postfix) with ESMTP id EE56861C45
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com
+	[209.85.221.44])
+	by mail.openembedded.org (Postfix) with ESMTP id B217161C42
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 14:15:07 +0000 (UTC)
-Received: by mail-ed1-f66.google.com with SMTP id df19so1399563edb.6
+	Thu, 12 Mar 2020 14:21:48 +0000 (UTC)
+Received: by mail-wr1-f44.google.com with SMTP id a25so7741002wrd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Mar 2020 07:15:09 -0700 (PDT)
+	Thu, 12 Mar 2020 07:21:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=z/DmN6Qpy5/SV79dTzZ2GE+ZCdYveq7lp0nuhwEUF2A=;
-	b=e/MOpbb97iBHk0PjdLgqvHIZRUX/o7ht860t303sR8W2s9q0iE+Evjp+KZN1wO7jaf
-	cI8c0qQi07KlQLcnEyPNEUF+aeW8VRrGPe5WHFZWxR3cjfGehFf4d3X5D8srhSKZhLTn
-	IQMVLavSMoSZpFWp9CyJzxlQHBf7RWUq3Ijapak2ml1c3Tlcdpx2blGKbsZL2V7Ih7Rt
-	GF1KCFZryVAZw8/oms54HZZivABw4X2ctIejsY3qr2zGaOLkwhmu/Jd1YIMBv0tYtbWS
-	W1rnmpMGBh9tg8/KC8oMcuZR18fvFMnWNmdchtNFwsryFynxhF1srEa5n+2ES3LJgNQD
-	Z8dw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=u9iIuHhyrCPMxEvKdZuDxSRNDFCmkfnWJTs5txNqalM=;
+	b=kUG7Y3cIk1WICmhXXh77WShGRD/ZY385m/f/ENkMfzYD+BE4ifcjEZJzyS92sFI1zK
+	eL/WxazmjFbS1qganxl3yxVckmu3HXoCO6nJb8sKZexyno+RGYG0TiMiRnyFrcvLMcDa
+	UKhWO8a00vgRIUwpg5BcEUvv13dl7f63BeKavKzXijf8IahGLzXAkw1GDb61/IZZv63O
+	AjLYVFLmDThRzVtxFGPAWyZ8tIgN1USDTfB5obbehqL7PgHlI1R0R0Z0G3P3/h7SFeJN
+	YcYH72bgmI0LA3rC/qD5LZdKddixE0mDVt5PPjeK37lTGMUMocIcfLAuqi6kwfNXvkTJ
+	4syw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=z/DmN6Qpy5/SV79dTzZ2GE+ZCdYveq7lp0nuhwEUF2A=;
-	b=RpAURMwHwf5DLZ+clOYqnaIpoX3w84wXah6D2npFFgIetG+QSclBRJGHzKiR9skbR1
-	Q4NzIiuC9kyTxq0NB+vWLbrOYKb6OUWB0kazUQaBsJSknlLFihVWpOEQgvm/eQurH4Jo
-	H1PXLydAa68FX87gkgAljnG9jv4kO21BJ9yeinE/lrxq3fTX7Vbe2yjyl+YcmXmbF5xq
-	EpsSq8ecbPsWn0b3GeKsVu1jA6UBccvKhy8IJOe38LPgrJrcSIz4aWTuj+IZxJ34D1E7
-	hybdRndG20DyLnebktYCKvv6CqqRTDQoTKV12BMUiluxDrZZMZG4FGdkf80UluP7CUgK
-	65mA==
-X-Gm-Message-State: ANhLgQ0FoWLOZSptsEqAZHt79PSAkPV9taBWk4rakIOPqhi2l8DcHfhR
-	kol5GIo1grA5XV+LBZxU+/dYq89hX6n30s9Uf2GB2nWL
-X-Google-Smtp-Source: ADFU+vvWp68S4JxQrKxjdNCh419JUYxkMwlWnDxfVxqmCrjF9e5qYVWsKoXf3cy/B23ohB69uLo5SqpkF5XegSpvTOE=
-X-Received: by 2002:a17:906:6995:: with SMTP id
-	i21mr1227399ejr.320.1584022508593; 
-	Thu, 12 Mar 2020 07:15:08 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=u9iIuHhyrCPMxEvKdZuDxSRNDFCmkfnWJTs5txNqalM=;
+	b=d7lCdrLC0R2dA1jJ8EBrvmcc9UtadHCV+Qf2IKrjTNWhWdCUEupBgxv5V+ZXAOWTeZ
+	+FlqT6fA2am4s6uiKJeD+/1r/QlwwZgpemaQkpdnAdDlhQV9runzF9TyP083I6FFy0J8
+	saJI7ImxqoGvAylof29HnKL95K4MrwPYarhK5++Zj3/qHfhs266gvO/TSkHcFgNrZSm4
+	dD/9PZT8hh+X4Is9FIMoZuJ71zs52Sgs2dnJp0HuhoAU8RxqAu3/ygpz0vBZ61/our7m
+	WB3L/g4AHqzmatKD6A5VI/U6kjP9ZzVHc7DdoWMBNV2li8GUbshEJFggs/WzKNToiCg7
+	gWUA==
+X-Gm-Message-State: ANhLgQ0S6R92ZylFq1+hB7a5RX047fn9T9Ri5wlscw87rWxNeDAAt8Ko
+	7b5BKrUNgtV/4lYanPbhEGRQuqg7
+X-Google-Smtp-Source: ADFU+vvXGU8AxjUYhW+dzlNqjH+WWLGcydOzLP7GCkbVJ4pYEx9nDZpY7wSAUdl0eH4xA7GqNcdk8g==
+X-Received: by 2002:adf:b641:: with SMTP id i1mr11315456wre.18.1584022908932; 
+	Thu, 12 Mar 2020 07:21:48 -0700 (PDT)
+Received: from superandy.speedport.ip
+	(p200300F07F067F32CE0B3214CDB29793.dip0.t-ipconnect.de.
+	[2003:f0:7f06:7f32:ce0b:3214:cdb2:9793])
+	by smtp.gmail.com with ESMTPSA id
+	r12sm20974339wrx.26.2020.03.12.07.21.47
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Thu, 12 Mar 2020 07:21:48 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Mar 2020 15:21:38 +0100
+Message-Id: <20200312142140.5926-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-References: <20200229185539.3905864-1-raj.khem@gmail.com>
-	<CA+chaQfxab4+mepbvxdNkoj4h9T1T5Qq4TWwne2teiexjyuwnA@mail.gmail.com>
-	<CAMKF1srZjHaeuTD0FLv0kmmn+Gwq9QThHxhGXB0+WSBSo2bEJg@mail.gmail.com>
-	<CA+chaQeF7U2C+t+zugHFry2bpxiFbfa294_A_dnfmdvJ-3pw9A@mail.gmail.com>
-	<CAMKF1spqvnHXTOMWX8VV4QponpKun+2tpZS4hAG5JpDDdv8xgQ@mail.gmail.com>
-In-Reply-To: <CAMKF1spqvnHXTOMWX8VV4QponpKun+2tpZS4hAG5JpDDdv8xgQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 12 Mar 2020 15:14:56 +0100
-Message-ID: <CA+chaQcTRNcXnWX67kRts_K6cBdR9gun3qdqBX5nREts0ymH-g@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] sysdig: Upgrade to 0.26.5
+Subject: [PATCH][meta-xfce 1/3] xfce4-clipman-plugin: upgrade 1.4.3 -> 1.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,56 +59,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Mar 2020 14:15:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Mar 2020 14:21:49 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-It doesn't seem to build for aarch64 without the jit in luajit:
+Release notes for 1.4.4
+=======================
+This is a bugfix release.
 
-| DEBUG: Executing shell function do_compile
-| NOTE: VERBOSE=3D1 cmake --build
-/OE/build/tmp-glibc/work/aarch64-oe-linux/sysdig/0.26.5-r0/build --target
-all --
-| ninja: error: 'libluajit-5.1.so', needed by 'userspace/sysdig/csysdig',
-missing and no known rule to make it
-| WARNING: exit code 1 from a shell command.
-| ERROR: Execution of
-'/OE/build/tmp-glibc/work/aarch64-oe-linux/sysdig/0.26.5-r0/temp/run.do_com=
-pile.51845'
-failed with exit code 1:
-| ninja: error: 'libluajit-5.1.so', needed by 'userspace/sysdig/csysdig',
-missing and no known rule to make it
-| WARNING: exit code 1 from a shell command.
+- settings: Improve layout
+- settings: Drop some GtkStock items
+- Update support URLs from goodies to docs.xfce.org (Bug #16141)
+- Drop deprecated Gtk style properties
+- Also show desktop file in Cinnamon (Bug #14058)
+- Fix getting modifier in gsd-clipboard-manager (Bug #14642)
+- Fix typo
+- Translation Updates:
+  Albanian, Armenian (Armenia), Belarusian, Catalan,
+  Chinese (China), Czech, Danish, Finnish, French, Galician,
+  Hebrew, Icelandic, Italian, Kazakh, Norwegian Bokmål, Polish,
+  Portuguese, Slovak, Slovenian, Spanish, Turkish, Ukrainian
 
-On Tue, Mar 3, 2020 at 4:27 PM Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ ...-clipman-plugin_1.4.3.bb => xfce4-clipman-plugin_1.4.4.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/clipman/{xfce4-clipman-plugin_1.4.3.bb => xfce4-clipman-plugin_1.4.4.bb} (76%)
 
->
->
-> On Tue, Mar 3, 2020 at 5:53 AM Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->
->> Should I send the patch to move grpc from meta-networking to meta-oe to
->> fix this or do you have it already?
->>
->
-> Please send I don=E2=80=99t have it ready
->
->>
->> On Mon, Mar 2, 2020 at 6:22 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->>> On Mon, Mar 2, 2020 at 4:27 AM Martin Jansa <martin.jansa@gmail.com>
->>> wrote:
->>> >
->>> > Hi,
->>> >
->>> > added dependency on grpc exists only in meta-networking, so this fail=
-s
->>> to parse now.
->>> >
->>>
->>> I think grpc is common enough to belong to meta-oe as well.
->>>
->>> > Cheers,
->>>
->>
+diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.3.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.4.bb
+similarity index 76%
+rename from meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.3.bb
+rename to meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.4.bb
+index a1ac05729..164895013 100644
+--- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.3.bb
++++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.4.bb
+@@ -8,8 +8,8 @@ inherit xfce-panel-plugin
+ 
+ DEPENDS += "xfconf xorgproto libxtst"
+ 
+-SRC_URI[md5sum] = "fa0acd5f5e3298e56ebd47d2944cd02b"
+-SRC_URI[sha256sum] = "29cdb85efb54bd5c9c04cc695b7c4914d6dff972b9fd969cbfb5504e9c632ad2"
++SRC_URI[md5sum] = "104c917ef53a66f7aa2dca01b43c3b77"
++SRC_URI[sha256sum] = "08e14c5d0fcee9adb4bc77efc0ab4af2b12b3fe1ee5e2121fc60e877ac9c29a0"
+ 
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[qrencode] = "--enable-libqrencode,--disable-libqrencode,qrencode"
+-- 
+2.21.1
+
 
