@@ -1,53 +1,53 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com
-	[209.85.216.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 19E0961BE9
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com
+	[209.85.216.49])
+	by mail.openembedded.org (Postfix) with ESMTP id A6C1361BE9
 	for <openembedded-devel@openembedded.org>;
-	Thu, 12 Mar 2020 02:57:38 +0000 (UTC)
-Received: by mail-pj1-f52.google.com with SMTP id 39so2178315pjo.1
+	Thu, 12 Mar 2020 02:57:39 +0000 (UTC)
+Received: by mail-pj1-f49.google.com with SMTP id dw20so204390pjb.0
 	for <openembedded-devel@openembedded.org>;
-	Wed, 11 Mar 2020 19:57:40 -0700 (PDT)
+	Wed, 11 Mar 2020 19:57:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=NPLvfms/b56+l2EKUU7xc1byTaDYuKDoXxpWi6/O0Uc=;
-	b=WjbIP6s2IxYrOGMVk8fKphvzXh4Gw/+KjDh8POHh86+K6g0nS2D1UAu7iB9MZvRNHu
-	WwamVc8otQwn9BGYBy1rFt4A6h6g2uOTPE1XDh9N4lQSjPRqynZP/Sr+ynjJJSxCEcEq
-	+HTfnvE49UwUachLbHd+Hr777Aqwa7NalJsP64qC37AzroCeTlfK5+5CfLVV0B67iXmK
-	ZEHz3lLkC8pM2gj8IVEetVSil94lWUn5M/h7fAaYYM77cSfeWfHFQeeVtBm0n9sgnEL1
-	Utpl9/QpKEk0dpIGXK9ZIi/RbEen48aYtJEQ3BThL4HufXUXUN9jI2dfx8ALjnqqNja/
-	V/kA==
+	bh=ACNpX0LWpZFLyah10r8cby1qD+J8/6nRw5S7vDD3WVI=;
+	b=pW/spa7F6grFx5cqRzpFxbrWdlfSoL/lf50FXgzm15TyvGN/ETHHTusAM8f6R5LQXZ
+	brn5OMVa29hJIMfx9k9KmPdAusbuPwhx6GR1wCQQFE2BttgTX8TPbrUMgrwaIP4Qcz6F
+	iMs+dU9C4Lrkk4aNz1noRxO+qIvX8lBOVUV/pKby+b7nDpKVhBXycBCq9L/uMoM1sn1I
+	G51akCaTqtyplccQQsYSAx5SDNYnGJ2ocfEWcrkhVctMxeGuYlpBLyCRELNo0UQuCfU5
+	GraPHRAEKVii6e0+k8y/i1jDmBPNmL1U/W1jEXD0GcFsSd6Q46U6m6FDwLEpCQz+wDFW
+	s+sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=NPLvfms/b56+l2EKUU7xc1byTaDYuKDoXxpWi6/O0Uc=;
-	b=HAAosaD45SwXggbaMvHACJKSLleT/dh7KXz4XsOdsWxSlAyJrC//5mMpMuPKfRgRuq
-	DPJWpp0EtTfaTwUktXp5Hot62NQQ7vBMKQ7aYCxQQj8CLn8xAuk7EWK/PWoTglSV5cXz
-	dpKL+rB0sXgKbre3aNMOM10XTV8njTXfUoPylaiuWc+/YWKZ80jmUri3jiYxjlSYrX2F
-	IZvLnKsUtbcvp6kCPrkyJJruxnEQ2Dwx+CI4uEWkE0MAb9Bc9Xhhi9yO621LHUR3/InZ
-	csABcf4cKF/Nb7BrYgv/DHqXi9xUGGG8ATq+cceKCgR6fFK+ajgZ70ZCEbyZt+M3P/v/
-	km5w==
-X-Gm-Message-State: ANhLgQ06ody6UMsucQyHpHzdseP2ey6Xi3LoiiDWIuDJbZABeSq7a5uf
-	i5rQqTVhXKtIRk3+CQ3UUGBdtiuR
-X-Google-Smtp-Source: ADFU+vvYR31pB1+S55RKsDNb3YFVjZ/7YdQ3I4TX4PYigoFmxXTGBiqxlXckMFHFg/DON13SR0tK/g==
-X-Received: by 2002:a17:90a:8983:: with SMTP id
-	v3mr1801507pjn.65.1583981859587; 
-	Wed, 11 Mar 2020 19:57:39 -0700 (PDT)
+	bh=ACNpX0LWpZFLyah10r8cby1qD+J8/6nRw5S7vDD3WVI=;
+	b=GAmZZCNUEsFMgAwNsabM7GTuvUc/JMDAlmoqLOtrKgmJFYdDu2IEQcfseMdd50f/kQ
+	vwp8pIljJaesp8bqZEBkMS/49n4jPJ3nLo0nMOS+get5Nd4p246ShKAlvf6jT7cGKVWB
+	2VFTBrLb7x51nS99w1/uKWsBAA2XOxM0m4HZo+L2JYy5R2eOXMGePycql8GzQKqYRjFH
+	n1oIuThOVis9vNsOEQY9J5u8L9PztBw8lpo7IQ1t77Cs2RT0YpU8/nxAqw9VMgjdURjF
+	yM544iZmLEnkzycBGwlikzlNE77ewZ+ll1/1Yojwwy/7N0ab7MFNl9AbfFiEsyWP1BVK
+	39kQ==
+X-Gm-Message-State: ANhLgQ0GUrjP8bGkvS8P+0o4pOLjmO1I8+WcfK+thbakAS1xFn11M82i
+	j8VxOjUgTilThiGkjtw7FNlG2DYJ
+X-Google-Smtp-Source: ADFU+vu3ayb6bYKEzljWEzIV2HO6NBbp7Dc8efYo682TP7arzeIYjWshgd4pa+0n5UpoUUJr/NeoCQ==
+X-Received: by 2002:a17:90a:5d88:: with SMTP id
+	t8mr1902378pji.120.1583981860432; 
+	Wed, 11 Mar 2020 19:57:40 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4180:a5c0:60a5:8a88:a7f9:d809])
 	by smtp.gmail.com with ESMTPSA id
-	e2sm18328236pgv.81.2020.03.11.19.57.38
+	e2sm18328236pgv.81.2020.03.11.19.57.39
 	for <openembedded-devel@openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
 	Wed, 11 Mar 2020 19:57:39 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: openembedded-devel@openembedded.org
-Date: Wed, 11 Mar 2020 19:57:20 -0700
-Message-Id: <7624a4f2d1a86538dbf556e7ad1d82841e7e4e65.1583981708.git.akuster808@gmail.com>
+Date: Wed, 11 Mar 2020 19:57:21 -0700
+Message-Id: <8d55a4ea3ccf886dbecdc1ce15c37e4c01ac8788.1583981708.git.akuster808@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <cover.1583981708.git.akuster808@gmail.com>
 References: <cover.1583981708.git.akuster808@gmail.com>
-Subject: [zeus 01/13] mosquitto: Use mosquitto.init for daemon init
+Subject: [zeus 02/13] wireshark: Upgrade 3.0.6 -> 3.0.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,30 +62,36 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 12 Mar 2020 02:57:39 -0000
 
-From: Mike Krupicka <Mike.Krupicka@panduit.com>
+From: Adrian Bunk <bunk@stusta.de>
 
-Config file specification is missing in start) case. It is present already in restart) case.
+Upgrade on the 3.0 stable branch,
+including fixes for CVE-2019-19553 and CVE-2020-7045.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-(cherry picked from commit 257ea010b716073acbe6866f4c3968b4962fdc37)
+Signed-off-by: Adrian Bunk <bunk@stusta.de>
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-connectivity/mosquitto/files/mosquitto.init         | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../wireshark/{wireshark_3.0.6.bb => wireshark_3.0.8.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.0.6.bb => wireshark_3.0.8.bb} (95%)
 
-diff --git a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
-index 6a0c12760e..9d5963c418 100644
---- a/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
-+++ b/meta-networking/recipes-connectivity/mosquitto/files/mosquitto.init
-@@ -38,7 +38,7 @@ export PATH="${PATH:+$PATH:}@SBINDIR@:@BASE_SBINDIR@"
- case "$1" in
-     start)
-         echo "Starting Mosquitto message broker" "mosquitto"
--        if start-stop-daemon --start --quiet --oknodo --background  --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ; then
-+        if start-stop-daemon --start --quiet --oknodo --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} -- -c @SYSCONFDIR@/mosquitto/mosquitto.conf ; then
-             exit 0
-         else
-             exit 1
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.8.bb
+similarity index 95%
+rename from meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_3.0.8.bb
+index ccaa0c94a3..226e16e4ed 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.8.bb
+@@ -12,8 +12,8 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
+-SRC_URI[md5sum] = "c6f8d12a3efe21cc7885f7cb0c4bd938"
+-SRC_URI[sha256sum] = "a87f4022a0c15ddbf1730bf1acafce9e75a4e657ce9fa494ceda0324c0c3e33e"
++SRC_URI[md5sum] = "034f09e639fb4efebbc08af7b2a85333"
++SRC_URI[sha256sum] = "b4bd8189934d82330a053c5b10398f2b625b1e1c8818831ab61739b2d7aa7561"
+ 
+ PE = "1"
+ 
 -- 
 2.17.1
 
