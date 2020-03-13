@@ -1,50 +1,27 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
-	[209.85.210.194])
-	by mail.openembedded.org (Postfix) with ESMTP id E933D6089C
+Return-Path: <pjtexier@koncepto.io>
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+	by mail.openembedded.org (Postfix) with ESMTP id 5BC7F61B94
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 17:58:28 +0000 (UTC)
-Received: by mail-pf1-f194.google.com with SMTP id c19so5664635pfo.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 10:58:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=53Agwv1vudU8CQOvbrVqHL/3Wah6hzcXwLInCGJut/o=;
-	b=txUzCbX29lknWnNIUPzf64qpjWnS3bzGlisOHFDeJMJPkwAEzRrDbTMSLSAmB048G9
-	03X46FiGSBzOE2qCSouSuqd4j3jHYNbK4JY8KKGWxiaSkYEumh8ZUKwptUhHrpXHi/5a
-	SM629LVy2W/zV1ysX6k//UvPGb6KlRwoqC3eiLInDI5poUNSZHIBv00O5D+DdtkT6+s2
-	Bi5fy8o1zWrUttDDAuS7cJSVatqRagPqb1vdpl9nrp8LobV/U74/+xwGNF3sr9u7KCVv
-	/ddIyagqGEAMGxYlxRgLro7PqFM2xyn4S08Ndobu57EP5FmzUSMNqE5bVMaKSkgkPXD6
-	bYWw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=53Agwv1vudU8CQOvbrVqHL/3Wah6hzcXwLInCGJut/o=;
-	b=fmf/gcViMZvwXm34rex6RAL+hITOwpgtlhTjn/fRnGVj8BeY0kHIQy/S1MGok/fyBw
-	zODlpNER2dD8caVp5lFxI2mvudzoqMwi02Hmdk5+1wbFk6nOysTCFoQBjzXfGuV04R1n
-	LwZK5WOJI0SCQ4nVzsO7VVAtUN5mX4xcgDTgclxduHT/aDlYg8NQ836G0acF+dc8usD8
-	Kpey4WJ7/BbqET1UG2pqT42UelReYhHgszYn3UeNRs/Btpytq5XBDdyoOVF2hZE8o43G
-	M36RWDAoFoaxAkxTp/Yc/t3Z+IrVF9Gxy42k3j+xyCtd9BLHbq+gxKFw8lvPoDFSAqe9
-	5njQ==
-X-Gm-Message-State: ANhLgQ2MIi8l45FOenBA8CSy8Nix0053Msox/ijAsTiVfVw5JmcRq0/X
-	Y9GAEf5uQvxaZPoHVN5Zz/laYPni03Q=
-X-Google-Smtp-Source: ADFU+vvAUXl54ytQsL6vGiK32i0TR+JkBWOA3qMCwtQHXobu3Jy5aPSrJpTS7PQ4wfI+fTxknVGrfw==
-X-Received: by 2002:a63:c54b:: with SMTP id g11mr14244832pgd.164.1584122309022;
-	Fri, 13 Mar 2020 10:58:29 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::af11])
-	by smtp.gmail.com with ESMTPSA id
-	r10sm53412359pgv.25.2020.03.13.10.58.28
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Fri, 13 Mar 2020 10:58:28 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 13 Mar 2020 18:58:02 +0000 (UTC)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
+	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id B2EA960045;
+	Fri, 13 Mar 2020 19:57:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1584125879;
+	bh=lLq7MMpj9bOklkUW21yo5AePPFj8vFDJfPsaOwA0BnE=;
+	h=From:To:Cc:Subject:Date:From;
+	b=k9ZmXsyms1L5azEcuVfYfueqqWgtXd3z6lPQHaxPmxFRI04U7klO/kilBWxaoW37s
+	hgEskFzihsNHgbzrYOAEUJGqO2AljpTa2wTp+R6a3FyM4ttuia45wSS1msftoMUhsD
+	yx8ZuYlURzIV1HyZqNsTMHHVUVXsiD6VCoaFgPkWg1/ciSTWgQAVhLPAyZFddL/Tqu
+	UtF9m0yg5bxU5JzF19cGEZ7JNYzklC7m+/Q8avD+BGAPcCwmO1JusTeLzOxog5mrt7
+	KDsZy9FwzADnY3YRSW3iixbAWefJE6c6NwVt4HP7XK2l/+oE/+eC5fieeW12QcY/gq
+	Ww/zLLgzjLqkA==
+From: Pierre-Jean Texier <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Mar 2020 10:58:41 -0700
-Message-Id: <20200313175841.1142001-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] sysdig: Use luajit and build fixes on aarch64
+Date: Fri, 13 Mar 2020 19:57:48 +0100
+Message-Id: <1584125871-11210-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] python-requests: upgrade 2.22 -> 2.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,406 +34,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 17:58:29 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 13 Mar 2020 18:58:02 -0000
 
-latest luajit now supports aarch64
+License-Update: copyright years updated
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Copyright 2018 Kenneth Reitz
++Copyright 2019 Kenneth Reitz
+
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- .../sysdig/sysdig/aarch64.patch               | 359 ++++++++++++++++++
- meta-oe/recipes-extended/sysdig/sysdig_git.bb |   3 +-
- 2 files changed, 360 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch
+ meta-python/recipes-devtools/python/python-requests.inc             | 6 +++---
+ .../{python3-requests_2.22.0.bb => python3-requests_2.23.0.bb}      | 0
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-requests_2.22.0.bb => python3-requests_2.23.0.bb} (100%)
 
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch b/meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch
-new file mode 100644
-index 0000000000..f16b0eca50
---- /dev/null
-+++ b/meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch
-@@ -0,0 +1,359 @@
-+Check if legacy syscalls exist
-+
-+A lot of legacy syscalls are replaced with *at and are not implemented in newer
-+architectures like aarch64
-+
-+Upstream-Status: Submitted [https://github.com/draios/sysdig/pull/1601]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+--- a/driver/syscall_table.c
-++++ b/driver/syscall_table.c
-+@@ -42,26 +42,46 @@ or GPL2.txt for full copies of the licen
-+  * SYSCALL TABLE
-+  */
-+ const struct syscall_evt_pair g_syscall_table[SYSCALL_TABLE_SIZE] = {
-++#ifdef __NR_open
-+ 	[__NR_open - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_OPEN_E, PPME_SYSCALL_OPEN_X},
-++#endif
-++#ifdef __NR_creat
-+ 	[__NR_creat - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_CREAT_E, PPME_SYSCALL_CREAT_X},
-++#endif
-+ 	[__NR_close - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_CLOSE_E, PPME_SYSCALL_CLOSE_X},
-+ 	[__NR_brk - SYSCALL_TABLE_ID0] =                        {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_BRK_4_E, PPME_SYSCALL_BRK_4_X},
-+ 	[__NR_read - SYSCALL_TABLE_ID0] =                       {UF_USED, PPME_SYSCALL_READ_E, PPME_SYSCALL_READ_X},
-+ 	[__NR_write - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_WRITE_E, PPME_SYSCALL_WRITE_X},
-+ 	[__NR_execve - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_EXECVE_19_E, PPME_SYSCALL_EXECVE_19_X},
-+ 	[__NR_clone - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_CLONE_20_E, PPME_SYSCALL_CLONE_20_X},
-++#ifdef __NR_fork
-+ 	[__NR_fork - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_FORK_20_E, PPME_SYSCALL_FORK_20_X},
-++#endif
-++#ifdef __NR_vfork
-+ 	[__NR_vfork - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_VFORK_20_E, PPME_SYSCALL_VFORK_20_X},
-++#endif
-++#ifdef __NR_pipe
-+ 	[__NR_pipe - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_PIPE_E, PPME_SYSCALL_PIPE_X},
-++#endif
-+ 	[__NR_pipe2 - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_PIPE_E, PPME_SYSCALL_PIPE_X},
-++#ifdef __NR_eventfd
-+ 	[__NR_eventfd - SYSCALL_TABLE_ID0] =                    {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_EVENTFD_E, PPME_SYSCALL_EVENTFD_X},
-++#endif
-+ 	[__NR_eventfd2 - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_EVENTFD_E, PPME_SYSCALL_EVENTFD_X},
-+ 	[__NR_futex - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_FUTEX_E, PPME_SYSCALL_FUTEX_X},
-++#ifdef __NR_stat
-+ 	[__NR_stat - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_STAT_E, PPME_SYSCALL_STAT_X},
-++#endif
-++#ifdef __NR_lstat
-+ 	[__NR_lstat - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_LSTAT_E, PPME_SYSCALL_LSTAT_X},
-++#endif
-+ 	[__NR_fstat - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_FSTAT_E, PPME_SYSCALL_FSTAT_X},
-++#ifdef __NR_epoll_wait
-+ 	[__NR_epoll_wait - SYSCALL_TABLE_ID0] =                 {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_EPOLLWAIT_E, PPME_SYSCALL_EPOLLWAIT_X},
-++#endif
-++#ifdef __NR_poll
-+ 	[__NR_poll - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_POLL_E, PPME_SYSCALL_POLL_X},
-++#endif
-+ #ifdef __NR_select
-+ 	[__NR_select - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_SELECT_E, PPME_SYSCALL_SELECT_X},
-+ #endif
-+@@ -70,13 +90,21 @@ const struct syscall_evt_pair g_syscall_
-+ 	[__NR_getcwd - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_GETCWD_E, PPME_SYSCALL_GETCWD_X},
-+ 	[__NR_chdir - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_CHDIR_E, PPME_SYSCALL_CHDIR_X},
-+ 	[__NR_fchdir - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_FCHDIR_E, PPME_SYSCALL_FCHDIR_X},
-++#ifdef __NR_mkdir
-+ 	[__NR_mkdir - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_MKDIR_2_E, PPME_SYSCALL_MKDIR_2_X},
-++#endif
-++#ifdef __NR_rmdir
-+ 	[__NR_rmdir - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_RMDIR_2_E, PPME_SYSCALL_RMDIR_2_X},
-++#endif
-+ 	[__NR_openat - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_OPENAT_2_E, PPME_SYSCALL_OPENAT_2_X},
-+ 	[__NR_mkdirat - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_MKDIRAT_E, PPME_SYSCALL_MKDIRAT_X},
-++#ifdef __NR_link
-+ 	[__NR_link - SYSCALL_TABLE_ID0] =                       {UF_USED, PPME_SYSCALL_LINK_2_E, PPME_SYSCALL_LINK_2_X},
-++#endif
-+ 	[__NR_linkat - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_LINKAT_2_E, PPME_SYSCALL_LINKAT_2_X},
-++#ifdef __NR_unlink
-+ 	[__NR_unlink - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_UNLINK_2_E, PPME_SYSCALL_UNLINK_2_X},
-++#endif
-+ 	[__NR_unlinkat - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_UNLINKAT_2_E, PPME_SYSCALL_UNLINKAT_2_X},
-+ 	[__NR_pread64 - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_PREAD_E, PPME_SYSCALL_PREAD_X},
-+ 	[__NR_pwrite64 - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_PWRITE_E, PPME_SYSCALL_PWRITE_X},
-+@@ -85,16 +113,22 @@ const struct syscall_evt_pair g_syscall_
-+ 	[__NR_preadv - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_PREADV_E, PPME_SYSCALL_PREADV_X},
-+ 	[__NR_pwritev - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_PWRITEV_E, PPME_SYSCALL_PWRITEV_X},
-+ 	[__NR_dup - SYSCALL_TABLE_ID0] =                        {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_DUP_E, PPME_SYSCALL_DUP_X},
-++#ifdef __NR_dup2
-+ 	[__NR_dup2 - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_DUP_E, PPME_SYSCALL_DUP_X},
-++#endif
-+ 	[__NR_dup3 - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_DUP_E, PPME_SYSCALL_DUP_X},
-++#ifdef __NR_signalfd
-+ 	[__NR_signalfd - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_SIGNALFD_E, PPME_SYSCALL_SIGNALFD_X},
-++#endif
-+ 	[__NR_signalfd4 - SYSCALL_TABLE_ID0] =                  {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_SIGNALFD_E, PPME_SYSCALL_SIGNALFD_X},
-+ 	[__NR_kill - SYSCALL_TABLE_ID0] =                       {UF_USED, PPME_SYSCALL_KILL_E, PPME_SYSCALL_KILL_X},
-+ 	[__NR_tkill - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_TKILL_E, PPME_SYSCALL_TKILL_X},
-+ 	[__NR_tgkill - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_TGKILL_E, PPME_SYSCALL_TGKILL_X},
-+ 	[__NR_nanosleep - SYSCALL_TABLE_ID0] =                  {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_NANOSLEEP_E, PPME_SYSCALL_NANOSLEEP_X},
-+ 	[__NR_timerfd_create - SYSCALL_TABLE_ID0] =             {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_TIMERFD_CREATE_E, PPME_SYSCALL_TIMERFD_CREATE_X},
-++#ifdef __NR_inotify_init
-+ 	[__NR_inotify_init - SYSCALL_TABLE_ID0] =               {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_INOTIFY_INIT_E, PPME_SYSCALL_INOTIFY_INIT_X},
-++#endif
-+ 	[__NR_inotify_init1 - SYSCALL_TABLE_ID0] =              {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_INOTIFY_INIT_E, PPME_SYSCALL_INOTIFY_INIT_X},
-+ 	[__NR_fchmodat - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_FCHMODAT_E, PPME_SYSCALL_FCHMODAT_X},
-+ 	[__NR_fchmod - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_FCHMOD_E, PPME_SYSCALL_FCHMOD_X},
-+@@ -114,14 +148,22 @@ const struct syscall_evt_pair g_syscall_
-+ #endif
-+ /* [__NR_old_select - SYSCALL_TABLE_ID0] =	{UF_USED, PPME_GENERIC_E, PPME_GENERIC_X}, */
-+ 	[__NR_pselect6 - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-++#ifdef __NR_epoll_create
-+ 	[__NR_epoll_create - SYSCALL_TABLE_ID0] =               {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-++#endif
-+ 	[__NR_epoll_ctl - SYSCALL_TABLE_ID0] =                  {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-++#ifdef __NR_uselib
-+ 	[__NR_uselib - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-++#endif
-+ 	[__NR_sched_setparam - SYSCALL_TABLE_ID0] =             {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-+ 	[__NR_sched_getparam - SYSCALL_TABLE_ID0] =             {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-+ 	[__NR_syslog - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-++#ifdef __NR_chmod
-+ 	[__NR_chmod - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_CHMOD_E, PPME_SYSCALL_CHMOD_X},
-++#endif
-++#ifdef __NR_lchown
-+ 	[__NR_lchown - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_GENERIC_E, PPME_GENERIC_X},
-++#endif
-+ #ifdef __NR_utime
-+ 	[__NR_utime - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-+ #endif
-+@@ -131,8 +173,9 @@ const struct syscall_evt_pair g_syscall_
-+ #ifdef __NR_alarm
-+ 	[__NR_alarm - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-+ #endif
-++#ifdef __NR_pause
-+ 	[__NR_pause - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
-+-
-++#endif
-+ #ifndef __NR_socketcall
-+ 	[__NR_socket - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SOCKET_SOCKET_E, PPME_SOCKET_SOCKET_X},
-+ 	[__NR_bind - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP, PPME_SOCKET_BIND_E,  PPME_SOCKET_BIND_X},
-+@@ -184,9 +227,13 @@ const struct syscall_evt_pair g_syscall_
-+ 	[__NR_process_vm_writev - SYSCALL_TABLE_ID0] =          {UF_USED, PPME_GENERIC_E, PPME_GENERIC_X},
-+ #endif
-+ 
-++#ifdef __NR_rename
-+ 	[__NR_rename - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_RENAME_E, PPME_SYSCALL_RENAME_X},
-++#endif
-+ 	[__NR_renameat - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_RENAMEAT_E, PPME_SYSCALL_RENAMEAT_X},
-++#ifdef __NR_symlink
-+ 	[__NR_symlink - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_SYMLINK_E, PPME_SYSCALL_SYMLINK_X},
-++#endif
-+ 	[__NR_symlinkat - SYSCALL_TABLE_ID0] =                  {UF_USED, PPME_SYSCALL_SYMLINKAT_E, PPME_SYSCALL_SYMLINKAT_X},
-+ 	[__NR_sendfile - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_SENDFILE_E, PPME_SYSCALL_SENDFILE_X},
-+ #ifdef __NR_sendfile64
-+@@ -255,7 +302,9 @@ const struct syscall_evt_pair g_syscall_
-+ #ifdef __NR_getresgid32
-+ 	[__NR_getresgid32 - SYSCALL_TABLE_ID0] =                {UF_USED, PPME_SYSCALL_GETRESGID_E, PPME_SYSCALL_GETRESGID_X },
-+ #endif
-++#ifdef __NR_getdents
-+ 	[__NR_getdents - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_GETDENTS_E, PPME_SYSCALL_GETDENTS_X},
-++#endif
-+ 	[__NR_getdents64 - SYSCALL_TABLE_ID0] =                 {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_GETDENTS64_E, PPME_SYSCALL_GETDENTS64_X},
-+ #ifdef __NR_setns
-+ 	[__NR_setns - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_SETNS_E, PPME_SYSCALL_SETNS_X},
-+@@ -298,19 +347,33 @@ const enum ppm_syscall_code g_syscall_co
-+ 	[__NR_exit - SYSCALL_TABLE_ID0] = PPM_SC_EXIT,
-+ 	[__NR_read - SYSCALL_TABLE_ID0] = PPM_SC_READ,
-+ 	[__NR_write - SYSCALL_TABLE_ID0] = PPM_SC_WRITE,
-++#ifdef __NR_open
-+ 	[__NR_open - SYSCALL_TABLE_ID0] = PPM_SC_OPEN,
-++#endif
-+ 	[__NR_close - SYSCALL_TABLE_ID0] = PPM_SC_CLOSE,
-++#ifdef __NR_creat
-+ 	[__NR_creat - SYSCALL_TABLE_ID0] = PPM_SC_CREAT,
-++#endif
-++#ifdef __NR_link
-+ 	[__NR_link - SYSCALL_TABLE_ID0] = PPM_SC_LINK,
-++#endif
-++#ifdef __NR_unlink
-+ 	[__NR_unlink - SYSCALL_TABLE_ID0] = PPM_SC_UNLINK,
-++#endif
-+ 	[__NR_chdir - SYSCALL_TABLE_ID0] = PPM_SC_CHDIR,
-+ #ifdef __NR_time
-+ 	[__NR_time - SYSCALL_TABLE_ID0] = PPM_SC_TIME,
-+ #endif
-++#ifdef __NR_mknod
-+ 	[__NR_mknod - SYSCALL_TABLE_ID0] = PPM_SC_MKNOD,
-++#endif
-++#ifdef __NR_chmod
-+ 	[__NR_chmod - SYSCALL_TABLE_ID0] = PPM_SC_CHMOD,
-++#endif
-+ /* [__NR_lchown16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_LCHOWN16, */
-++#ifdef __NR_stat
-+ 	[__NR_stat - SYSCALL_TABLE_ID0] = PPM_SC_STAT,
-++#endif
-+ 	[__NR_lseek - SYSCALL_TABLE_ID0] = PPM_SC_LSEEK,
-+ 	[__NR_getpid - SYSCALL_TABLE_ID0] = PPM_SC_GETPID,
-+ 	[__NR_mount - SYSCALL_TABLE_ID0] = PPM_SC_MOUNT,
-+@@ -322,17 +385,27 @@ const enum ppm_syscall_code g_syscall_co
-+ 	[__NR_alarm - SYSCALL_TABLE_ID0] = PPM_SC_ALARM,
-+ #endif
-+ 	[__NR_fstat - SYSCALL_TABLE_ID0] = PPM_SC_FSTAT,
-++#ifdef __NR_pause
-+ 	[__NR_pause - SYSCALL_TABLE_ID0] = PPM_SC_PAUSE,
-++#endif
-+ #ifdef __NR_utime
-+ 	[__NR_utime - SYSCALL_TABLE_ID0] = PPM_SC_UTIME,
-+ #endif
-+ 	[__NR_sync - SYSCALL_TABLE_ID0] = PPM_SC_SYNC,
-+ 	[__NR_kill - SYSCALL_TABLE_ID0] = PPM_SC_KILL,
-++#ifdef __NR_rename
-+ 	[__NR_rename - SYSCALL_TABLE_ID0] = PPM_SC_RENAME,
-++#endif
-++#ifdef __NR_mkdir
-+ 	[__NR_mkdir - SYSCALL_TABLE_ID0] = PPM_SC_MKDIR,
-++#endif
-++#ifdef __NR_rmdir
-+ 	[__NR_rmdir - SYSCALL_TABLE_ID0] = PPM_SC_RMDIR,
-++#endif
-+ 	[__NR_dup - SYSCALL_TABLE_ID0] = PPM_SC_DUP,
-++#ifdef __NR_pipe
-+ 	[__NR_pipe - SYSCALL_TABLE_ID0] = PPM_SC_PIPE,
-++#endif
-+ 	[__NR_times - SYSCALL_TABLE_ID0] = PPM_SC_TIMES,
-+ 	[__NR_brk - SYSCALL_TABLE_ID0] = PPM_SC_BRK,
-+ /* [__NR_setgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETGID16, */
-+@@ -345,10 +418,16 @@ const enum ppm_syscall_code g_syscall_co
-+ 	[__NR_setpgid - SYSCALL_TABLE_ID0] = PPM_SC_SETPGID,
-+ 	[__NR_umask - SYSCALL_TABLE_ID0] = PPM_SC_UMASK,
-+ 	[__NR_chroot - SYSCALL_TABLE_ID0] = PPM_SC_CHROOT,
-++#ifdef __NR_ustat
-+ 	[__NR_ustat - SYSCALL_TABLE_ID0] = PPM_SC_USTAT,
-++#endif
-++#ifdef __NR_dup2
-+ 	[__NR_dup2 - SYSCALL_TABLE_ID0] = PPM_SC_DUP2,
-++#endif
-+ 	[__NR_getppid - SYSCALL_TABLE_ID0] = PPM_SC_GETPPID,
-++#ifdef __NR_getpgrp
-+ 	[__NR_getpgrp - SYSCALL_TABLE_ID0] = PPM_SC_GETPGRP,
-++#endif
-+ 	[__NR_setsid - SYSCALL_TABLE_ID0] = PPM_SC_SETSID,
-+ 	[__NR_sethostname - SYSCALL_TABLE_ID0] = PPM_SC_SETHOSTNAME,
-+ 	[__NR_setrlimit - SYSCALL_TABLE_ID0] = PPM_SC_SETRLIMIT,
-+@@ -359,10 +438,18 @@ const enum ppm_syscall_code g_syscall_co
-+ /* [__NR_getgroups16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_GETGROUPS16, */
-+ /* [__NR_setgroups16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETGROUPS16, */
-+ /* [__NR_old_select - SYSCALL_TABLE_ID0] = PPM_SC_NR_OLD_SELECT, */
-++#ifdef __NR_symlink
-+ 	[__NR_symlink - SYSCALL_TABLE_ID0] = PPM_SC_SYMLINK,
-++#endif
-++#ifdef __NR_lstat
-+ 	[__NR_lstat - SYSCALL_TABLE_ID0] = PPM_SC_LSTAT,
-++#endif
-++#ifdef __NR_readlink
-+ 	[__NR_readlink - SYSCALL_TABLE_ID0] = PPM_SC_READLINK,
-++#endif
-++#ifdef __NR_uselib
-+ 	[__NR_uselib - SYSCALL_TABLE_ID0] = PPM_SC_USELIB,
-++#endif
-+ 	[__NR_swapon - SYSCALL_TABLE_ID0] = PPM_SC_SWAPON,
-+ 	[__NR_reboot - SYSCALL_TABLE_ID0] = PPM_SC_REBOOT,
-+ /* [__NR_old_readdir - SYSCALL_TABLE_ID0] = PPM_SC_NR_OLD_READDIR, */
-+@@ -399,12 +486,16 @@ const enum ppm_syscall_code g_syscall_co
-+ 	[__NR_delete_module - SYSCALL_TABLE_ID0] = PPM_SC_DELETE_MODULE,
-+ 	[__NR_getpgid - SYSCALL_TABLE_ID0] = PPM_SC_GETPGID,
-+ 	[__NR_fchdir - SYSCALL_TABLE_ID0] = PPM_SC_FCHDIR,
-++#ifdef __NR_sysfs
-+ 	[__NR_sysfs - SYSCALL_TABLE_ID0] = PPM_SC_SYSFS,
-++#endif
-+ 	[__NR_personality - SYSCALL_TABLE_ID0] = PPM_SC_PERSONALITY,
-+ /* [__NR_setfsuid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETFSUID16, */
-+ /* [__NR_setfsgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETFSGID16, */
-+ /* [__NR_llseek - SYSCALL_TABLE_ID0] = PPM_SC_NR_LLSEEK, */
-++#ifdef __NR_getdents
-+ 	[__NR_getdents - SYSCALL_TABLE_ID0] = PPM_SC_GETDENTS,
-++#endif
-+ #ifdef __NR_select
-+ 	[__NR_select - SYSCALL_TABLE_ID0] = PPM_SC_SELECT,
-+ #endif
-+@@ -431,7 +522,9 @@ const enum ppm_syscall_code g_syscall_co
-+ 	[__NR_mremap - SYSCALL_TABLE_ID0] = PPM_SC_MREMAP,
-+ /* [__NR_setresuid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETRESUID16, */
-+ /* [__NR_getresuid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_GETRESUID16, */
-++#ifdef __NR_poll
-+ 	[__NR_poll - SYSCALL_TABLE_ID0] = PPM_SC_POLL,
-++#endif
-+ /* [__NR_setresgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETRESGID16, */
-+ /* [__NR_getresgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_GETRESGID16, */
-+ 	[__NR_prctl - SYSCALL_TABLE_ID0] = PPM_SC_PRCTL,
-+@@ -453,13 +546,17 @@ const enum ppm_syscall_code g_syscall_co
-+ 	[__NR_getrlimit - SYSCALL_TABLE_ID0] = PPM_SC_GETRLIMIT,
-+ #endif
-+ /* [__NR_mmap_pgoff - SYSCALL_TABLE_ID0] = PPM_SC_NR_MMAP_PGOFF, */
-++#ifdef __NR_lchown
-+ 	[__NR_lchown - SYSCALL_TABLE_ID0] = PPM_SC_LCHOWN,
-++#endif
-+ 	[__NR_setreuid - SYSCALL_TABLE_ID0] = PPM_SC_SETREUID,
-+ 	[__NR_setregid - SYSCALL_TABLE_ID0] = PPM_SC_SETREGID,
-+ 	[__NR_getgroups - SYSCALL_TABLE_ID0] = PPM_SC_GETGROUPS,
-+ 	[__NR_setgroups - SYSCALL_TABLE_ID0] = PPM_SC_SETGROUPS,
-+ 	[__NR_fchown - SYSCALL_TABLE_ID0] = PPM_SC_FCHOWN,
-++#ifdef __NR_chown
-+ 	[__NR_chown - SYSCALL_TABLE_ID0] = PPM_SC_CHOWN,
-++#endif
-+ 	[__NR_setfsuid - SYSCALL_TABLE_ID0] = PPM_SC_SETFSUID,
-+ 	[__NR_setfsgid - SYSCALL_TABLE_ID0] = PPM_SC_SETFSGID,
-+ 	[__NR_pivot_root - SYSCALL_TABLE_ID0] = PPM_SC_PIVOT_ROOT,
-+@@ -494,9 +591,13 @@ const enum ppm_syscall_code g_syscall_co
-+ 	[__NR_io_submit - SYSCALL_TABLE_ID0] = PPM_SC_IO_SUBMIT,
-+ 	[__NR_io_cancel - SYSCALL_TABLE_ID0] = PPM_SC_IO_CANCEL,
-+ 	[__NR_exit_group - SYSCALL_TABLE_ID0] = PPM_SC_EXIT_GROUP,
-++#ifdef __NR_epoll_create
-+ 	[__NR_epoll_create - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_CREATE,
-++#endif
-+ 	[__NR_epoll_ctl - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_CTL,
-++#ifdef __NR_epoll_wait
-+ 	[__NR_epoll_wait - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_WAIT,
-++#endif
-+ 	[__NR_remap_file_pages - SYSCALL_TABLE_ID0] = PPM_SC_REMAP_FILE_PAGES,
-+ 	[__NR_set_tid_address - SYSCALL_TABLE_ID0] = PPM_SC_SET_TID_ADDRESS,
-+ 	[__NR_timer_create - SYSCALL_TABLE_ID0] = PPM_SC_TIMER_CREATE,
-+@@ -509,7 +610,9 @@ const enum ppm_syscall_code g_syscall_co
-+ 	[__NR_clock_getres - SYSCALL_TABLE_ID0] = PPM_SC_CLOCK_GETRES,
-+ 	[__NR_clock_nanosleep - SYSCALL_TABLE_ID0] = PPM_SC_CLOCK_NANOSLEEP,
-+ 	[__NR_tgkill - SYSCALL_TABLE_ID0] = PPM_SC_TGKILL,
-++#ifdef __NR_utimes
-+ 	[__NR_utimes - SYSCALL_TABLE_ID0] = PPM_SC_UTIMES,
-++#endif
-+ 	[__NR_mq_open - SYSCALL_TABLE_ID0] = PPM_SC_MQ_OPEN,
-+ 	[__NR_mq_unlink - SYSCALL_TABLE_ID0] = PPM_SC_MQ_UNLINK,
-+ 	[__NR_mq_timedsend - SYSCALL_TABLE_ID0] = PPM_SC_MQ_TIMEDSEND,
-+@@ -523,14 +626,18 @@ const enum ppm_syscall_code g_syscall_co
-+ 	[__NR_keyctl - SYSCALL_TABLE_ID0] = PPM_SC_KEYCTL,
-+ 	[__NR_ioprio_set - SYSCALL_TABLE_ID0] = PPM_SC_IOPRIO_SET,
-+ 	[__NR_ioprio_get - SYSCALL_TABLE_ID0] = PPM_SC_IOPRIO_GET,
-++#ifdef __NR_inotify_init
-+ 	[__NR_inotify_init - SYSCALL_TABLE_ID0] = PPM_SC_INOTIFY_INIT,
-++#endif
-+ 	[__NR_inotify_add_watch - SYSCALL_TABLE_ID0] = PPM_SC_INOTIFY_ADD_WATCH,
-+ 	[__NR_inotify_rm_watch - SYSCALL_TABLE_ID0] = PPM_SC_INOTIFY_RM_WATCH,
-+ 	[__NR_openat - SYSCALL_TABLE_ID0] = PPM_SC_OPENAT,
-+ 	[__NR_mkdirat - SYSCALL_TABLE_ID0] = PPM_SC_MKDIRAT,
-+ 	[__NR_mknodat - SYSCALL_TABLE_ID0] = PPM_SC_MKNODAT,
-+ 	[__NR_fchownat - SYSCALL_TABLE_ID0] = PPM_SC_FCHOWNAT,
-++#ifdef __NR_futimesat
-+ 	[__NR_futimesat - SYSCALL_TABLE_ID0] = PPM_SC_FUTIMESAT,
-++#endif
-+ 	[__NR_unlinkat - SYSCALL_TABLE_ID0] = PPM_SC_UNLINKAT,
-+ 	[__NR_renameat - SYSCALL_TABLE_ID0] = PPM_SC_RENAMEAT,
-+ 	[__NR_linkat - SYSCALL_TABLE_ID0] = PPM_SC_LINKAT,
-+@@ -551,9 +658,13 @@ const enum ppm_syscall_code g_syscall_co
-+ #endif
-+ 	[__NR_epoll_pwait - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_PWAIT,
-+ 	[__NR_utimensat - SYSCALL_TABLE_ID0] = PPM_SC_UTIMENSAT,
-++#ifdef __NR_signalfd
-+ 	[__NR_signalfd - SYSCALL_TABLE_ID0] = PPM_SC_SIGNALFD,
-++#endif
-+ 	[__NR_timerfd_create - SYSCALL_TABLE_ID0] = PPM_SC_TIMERFD_CREATE,
-++#ifdef __NR_eventfd
-+ 	[__NR_eventfd - SYSCALL_TABLE_ID0] = PPM_SC_EVENTFD,
-++#endif
-+ 	[__NR_timerfd_settime - SYSCALL_TABLE_ID0] = PPM_SC_TIMERFD_SETTIME,
-+ 	[__NR_timerfd_gettime - SYSCALL_TABLE_ID0] = PPM_SC_TIMERFD_GETTIME,
-+ 	[__NR_signalfd4 - SYSCALL_TABLE_ID0] = PPM_SC_SIGNALFD4,
-diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-index ce1a4245ba..11eb5db9e4 100644
---- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-+++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
-@@ -12,7 +12,6 @@ inherit cmake pkgconfig
- JIT ?= "jit"
- JIT_mipsarchn32 = ""
- JIT_mipsarchn64 = ""
--JIT_aarch64 = ""
+diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/meta-python/recipes-devtools/python/python-requests.inc
+index 5fe5dc2..ddca4bc 100644
+--- a/meta-python/recipes-devtools/python/python-requests.inc
++++ b/meta-python/recipes-devtools/python/python-requests.inc
+@@ -1,12 +1,12 @@
+ DESCRIPTION = "Python HTTP for Humans."
+ HOMEPAGE = "http://python-requests.org"
+ LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a8d5a1d1c2d53025e2282c511033f6f7"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=19b6be66ed463d93fa88c29f7860bcd7"
  
- DEPENDS += "lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
- RDEPENDS_${PN} = "bash"
-@@ -21,8 +20,8 @@ SRC_URI = "git://github.com/draios/sysdig.git;branch=dev \
-            file://0001-fix-build-with-LuaJIT-2.1-betas.patch \
-            file://0001-Fix-build-with-musl-backtrace-APIs-are-glibc-specifi.patch \
-            file://fix-uint64-const.patch \
-+           file://aarch64.patch \
-           "
--# v0.26.4
- SRCREV = "9fa0d129668fdabf256446be4be35838888052d9"
- PV = "0.26.5"
+ FILESEXTRAPATHS_prepend := "${THISDIR}/python-requests:"
  
+-SRC_URI[md5sum] = "ee28bee2de76e9198fc41e48f3a7dd47"
+-SRC_URI[sha256sum] = "11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4"
++SRC_URI[md5sum] = "abfdc28db1065bbd0bc32592ac9d27a6"
++SRC_URI[sha256sum] = "b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python3-requests_2.22.0.bb b/meta-python/recipes-devtools/python/python3-requests_2.23.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-requests_2.22.0.bb
+rename to meta-python/recipes-devtools/python/python3-requests_2.23.0.bb
 -- 
-2.25.1
+2.7.4
 
 
