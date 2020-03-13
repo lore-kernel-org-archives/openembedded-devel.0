@@ -1,49 +1,48 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
-	[209.85.214.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0707C61CB9
+Received: from mail-pf1-f195.google.com (mail-pf1-f195.google.com
+	[209.85.210.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 8DC0261CA2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 15:36:44 +0000 (UTC)
-Received: by mail-pl1-f193.google.com with SMTP id t3so4403710plz.9
+	Fri, 13 Mar 2020 15:37:35 +0000 (UTC)
+Received: by mail-pf1-f195.google.com with SMTP id l184so5423572pfl.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 08:36:46 -0700 (PDT)
+	Fri, 13 Mar 2020 08:37:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:autocrypt:message-id:date:user-agent
 	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=4FVywF93XHv3f3kZsni5xS8ZMxT5SOs7pns6JSmhujU=;
-	b=QMd855jhZX0IrYKZJqNJOZV8Iy2tX31h7qkjLc2tmgOpNGPeOusMw5aLF0OEHjnSym
-	cn+sEshBwbZ4N8lCzx+aRuIbNnXum5PCDBSl6Y7jgap5PZw6WDU/+xY3uxnWOvk+NyL2
-	kR1pQsO/Mh8ZzmT1pN94Y/qeLW2fv/SWplJbSS42Fc2kUZdzFidO1IBc7Va+xix1ucXG
-	hxm6RNIG8kO9Aamp+KrojgKDMJIDCoQMMUcK83tpDH8LoJTVmLLbIZzhVsdGTS0Z3RcW
-	rAivKwMVwePYG72BNll3n9ropnqrRF+0LmUG4S7szlTQHIII7vy/FBUMxdfA8funmKlo
-	XV8A==
+	bh=i711/TNtn/3H7r753LA0bHS3RkDan/waG2e2BXRBi9M=;
+	b=Ewj9a8s3Jt6bm0taEuV8SdfvCSn31BqttomGlnOw1zjAIFMP6awsbgPAbxiSHbSe17
+	xIMYNgSUZog10LUQPJ3yPWyxm6UYVqF4P3LZ9nUzLJud3by4MtiPUgAUJHaq7uM543X/
+	0eN/GDN+UATxC3z0IcuXwRFLFQMPu+X51fHFxM8Uy016uXEcWlcsGL0AJbnhO8mRH6+y
+	X4Dd8jekuMmvhFqwIDmLwgYsW+aF4hp73o7cBDR+4ngQ0Bhro3WV3Lfhi77XZZfyOOsj
+	0S6Sde1PqJSrMcSx2poEZf3iR/t4ntCf2vYsgjmJ6nvDpn1wk1z1+eA2lxXewGjF7d/I
+	FKLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
 	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=4FVywF93XHv3f3kZsni5xS8ZMxT5SOs7pns6JSmhujU=;
-	b=cuAiwa//d3MTM2IIi79GrrPOPq/dDpULrbL1lpwe2TOkJxp3d/nmIYucUjPT+sqkGH
-	vpwHyGQqJDC335axSokJLCHQBgWrfE1rltrGnuG5QCBBzSHJFpoqmDcL9swZp6gk75nd
-	hoMBAhPTLoRaY1EnbKsJP4YCI0SUIa/jdxEQVt6EgzcL7rPndaqgDQHFWtmX+ndYpS1Z
-	rcxEl6yXMhyQNgY3FDBdcKHTJPuu+TDegnvinqPZgulZ27Cr+cCUotqywmIgoNIhCCX2
-	fMhrKuSgPOP6Q40v7V1u1nc8/1Zjwg87NRHhl/Qq1w2xz4nTwgUI8Mksrtvwd3oTfRjw
-	iEaA==
-X-Gm-Message-State: ANhLgQ23gIZP95eYjmE7KiP51fXR+v9oKgzDYKSMn2G2eelUqmpfQl5t
-	H1u7YTTfCwemG9dajIRDXBAvr0fq
-X-Google-Smtp-Source: ADFU+vuEqxdnMRLE4GH9cqKN/dzADjP53IxYmk8Uqzzk9uvGTmyfo+xDrNiAKbDEZd9qo7MPxhQXRA==
-X-Received: by 2002:a17:90b:288:: with SMTP id
-	az8mr8763591pjb.25.1584113805578; 
-	Fri, 13 Mar 2020 08:36:45 -0700 (PDT)
+	bh=i711/TNtn/3H7r753LA0bHS3RkDan/waG2e2BXRBi9M=;
+	b=XjYVZr/Cmy2hKE+tTUMcPrGDaAH0U0BxgoxMojulB0zovM98IVP6Mx5L97dlA0NGvA
+	hGZvRZ0spRWoie2B2tFQVa6lb7F2zt8wX8UVkJoeBhtwWE3J6uyRZMlyre3+pJoHRudO
+	Z9GFEJdWOsNik5WC9pnQExl5g0PHGZT6RiIHRsTpWrrUIjbHfkswjaEZ4L4OTcuRexbD
+	o+o6O215T4Ee+Gwa5onpO1waU8+FryKa6T3Aa+pb9c4cEUCSOHooRyxw8YpsBAd1tkha
+	a1dSQN7ZpzONrpvMbr6zE1pqXT0aaw0eIEPqlCd5mZpeDTE1jdr23jsrplgNzCMw+f5M
+	lTFQ==
+X-Gm-Message-State: ANhLgQ1HjeByu89PdK+qv09eDQB9aL2V+mQuIMDFBeA1LAec/eR7zCQO
+	Qg82MemgD+bV8PjHA2Ou20tVNIex
+X-Google-Smtp-Source: ADFU+vuEB0hqB821Hn0kZiCo7wkrcVlQFkq0qXCVGcUJZADfpvUfxaGOzG8dpEaV/I7jb6t1JtMmsA==
+X-Received: by 2002:a63:5c18:: with SMTP id q24mr13964752pgb.322.1584113856246;
+	Fri, 13 Mar 2020 08:37:36 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:a5c0:b971:4aa1:90b2:e851?
 	([2601:202:4180:a5c0:b971:4aa1:90b2:e851])
-	by smtp.gmail.com with ESMTPSA id
-	u5sm37654930pfb.153.2020.03.13.08.36.44
+	by smtp.gmail.com with ESMTPSA id f68sm9414240pje.0.2020.03.13.08.37.35
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 13 Mar 2020 08:36:44 -0700 (PDT)
+	Fri, 13 Mar 2020 08:37:35 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
 References: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
+	<1584097824-54462-2-git-send-email-wangmy@cn.fujitsu.com>
 From: akuster808 <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -88,13 +87,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <1f663de1-6dc9-c9fb-c14b-082de2934777@gmail.com>
-Date: Fri, 13 Mar 2020 08:36:43 -0700
+Message-ID: <230ee0cf-428b-7c16-50c9-ec699e390d5f@gmail.com>
+Date: Fri, 13 Mar 2020 08:37:34 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
-Subject: Re: [meta-oe][zeus][PATCH] libssh2: CVE-2019-17498.patch
+In-Reply-To: <1584097824-54462-2-git-send-email-wangmy@cn.fujitsu.com>
+Subject: Re: [meta-oe][zeus][PATCH] opensc: CVE-2019-19479 CVE-2019-19480
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -107,7 +106,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 15:36:45 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 15:37:35 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
@@ -117,165 +116,111 @@ Content-Language: en-US
 On 3/13/20 4:10 AM, Wang Mingyu wrote:
 > Security Advisory
 >
-> References:
-> https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17498
-is this fix in master?
+> References
+> https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19479
+> https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19480
+
+Is this fix in master?
+
 >
 > Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 > ---
->  .../libssh2/libssh2/CVE-2019-17498.patch      | 131 ++++++++++++++++++
->  .../recipes-support/libssh2/libssh2_1.8.2.bb  |   1 +
->  2 files changed, 132 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch
+>  .../opensc/opensc/CVE-2019-19479.patch        | 30 ++++++++++++++++
+>  .../opensc/opensc/CVE-2019-19480.patch        | 34 +++++++++++++++++++
+>  .../recipes-support/opensc/opensc_0.19.0.bb   |  2 ++
+>  3 files changed, 66 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/opensc/opensc/CVE-2019-19479.patch
+>  create mode 100644 meta-oe/recipes-support/opensc/opensc/CVE-2019-19480.patch
 >
-> diff --git a/meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch b/meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch
+> diff --git a/meta-oe/recipes-support/opensc/opensc/CVE-2019-19479.patch b/meta-oe/recipes-support/opensc/opensc/CVE-2019-19479.patch
 > new file mode 100644
-> index 000000000..f60764c92
+> index 000000000..73222ee1a
 > --- /dev/null
-> +++ b/meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch
-> @@ -0,0 +1,131 @@
-> +From dedcbd106f8e52d5586b0205bc7677e4c9868f9c Mon Sep 17 00:00:00 2001
-> +From: Will Cosgrove <will@panic.com>
-> +Date: Fri, 30 Aug 2019 09:57:38 -0700
-> +Subject: [PATCH] packet.c: improve message parsing (#402)
+> +++ b/meta-oe/recipes-support/opensc/opensc/CVE-2019-19479.patch
+> @@ -0,0 +1,30 @@
+> +From c3f23b836e5a1766c36617fe1da30d22f7b63de2 Mon Sep 17 00:00:00 2001
+> +From: Frank Morgner <frankmorgner@gmail.com>
+> +Date: Sun, 3 Nov 2019 04:45:28 +0100
+> +Subject: [PATCH] fixed  UNKNOWN READ
 > +
-> +* packet.c: improve parsing of packets
-> +
-> +file: packet.c
-> +
-> +notes:
-> +Use _libssh2_get_string API in SSH_MSG_DEBUG/SSH_MSG_DISCONNECT. Additional uint32 bounds check in SSH_MSG_GLOBAL_REQUEST.
-> +
-> +Upstream-Status: Accepted
-> +CVE: CVE-2019-17498
+> +Upstream-Status: Accepted <or Backport>
+> +CVE: CVE-2019-19479 
+> +   
+> +Reported by OSS-Fuzz
+> +https://oss-fuzz.com/testcase-detail/5681169970757632
 > +
 > +Reference to upstream patch:
-> +https://github.com/libssh2/libssh2/commit/dedcbd106f8e52d5586b0205bc7677e4c9868f9c
-> +
+> +https://github.com/OpenSC/OpenSC/commit/c3f23b836e5a1766c36617fe1da30d22f7b63de2
+Missing signed-off-by
 > +---
-> + src/packet.c | 68 ++++++++++++++++++++++------------------------------
-> + 1 file changed, 29 insertions(+), 39 deletions(-)
+> + src/libopensc/card-setcos.c | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
 > +
-> +diff --git a/src/packet.c b/src/packet.c
-> +index 38ab6294..2e01bfc5 100644
-> +--- a/src/packet.c
-> ++++ b/src/packet.c
-> +@@ -416,8 +416,8 @@ _libssh2_packet_add(LIBSSH2_SESSION * session, unsigned char *data,
-> +                     size_t datalen, int macstate)
-> + {
-> +     int rc = 0;
-> +-    char *message = NULL;
-> +-    char *language = NULL;
-> ++    unsigned char *message = NULL;
-> ++    unsigned char *language = NULL;
-> +     size_t message_len = 0;
-> +     size_t language_len = 0;
-> +     LIBSSH2_CHANNEL *channelp = NULL;
-> +@@ -469,33 +469,23 @@ _libssh2_packet_add(LIBSSH2_SESSION * session, unsigned char *data,
+> +diff --git a/src/libopensc/card-setcos.c b/src/libopensc/card-setcos.c
+> +index 4cf328ad6a..1b4e8f3e23 100644
+> +--- a/src/libopensc/card-setcos.c
+> ++++ b/src/libopensc/card-setcos.c
+> +@@ -868,7 +868,7 @@ static void parse_sec_attr_44(sc_file_t *file, const u8 *buf, size_t len)
+> + 			}
 > + 
-> +         case SSH_MSG_DISCONNECT:
-> +             if(datalen >= 5) {
-> +-                size_t reason = _libssh2_ntohu32(data + 1);
-> ++                uint32_t reason = 0;
-> ++                struct string_buf buf;
-> ++                buf.data = (unsigned char *)data;
-> ++                buf.dataptr = buf.data;
-> ++                buf.len = datalen;
-> ++                buf.dataptr++; /* advance past type */
+> + 			/* Encryption key present ? */
+> +-			iPinCount = iACLen - 1;		
+> ++			iPinCount = iACLen > 0 ? iACLen - 1 : 0;
 > + 
-> +-                if(datalen >= 9) {
-> +-                    message_len = _libssh2_ntohu32(data + 5);
-> ++                _libssh2_get_u32(&buf, &reason);
-> ++                _libssh2_get_string(&buf, &message, &message_len);
-> ++                _libssh2_get_string(&buf, &language, &language_len);
+> + 			if (buf[iOffset] & 0x20) {
+> + 				int iSC;
+> diff --git a/meta-oe/recipes-support/opensc/opensc/CVE-2019-19480.patch b/meta-oe/recipes-support/opensc/opensc/CVE-2019-19480.patch
+> new file mode 100644
+> index 000000000..12c1f0b4a
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/opensc/opensc/CVE-2019-19480.patch
+> @@ -0,0 +1,34 @@
+> +From 6ce6152284c47ba9b1d4fe8ff9d2e6a3f5ee02c7 Mon Sep 17 00:00:00 2001
+> +From: Jakub Jelen <jjelen@redhat.com>
+> +Date: Wed, 23 Oct 2019 09:22:44 +0200
+> +Subject: [PATCH] pkcs15-prkey: Simplify cleaning memory after failure
+> +
+> +https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=18478
+> +
+> +Upstream-Status: Accepted
+> +CVE: CVE-2019-19480
+> +
+> +Reference to upstream patch:
+> +https://github.com/OpenSC/OpenSC/commit/6ce6152284c47ba9b1d4fe8ff9d2e6a3f5ee02c7
+> +---
+> + src/libopensc/pkcs15-prkey.c | 4 ++++
+> + 1 file changed, 4 insertions(+)
+> +
+> +diff --git a/src/libopensc/pkcs15-prkey.c b/src/libopensc/pkcs15-prkey.c
+> +index d3eee983..4b249582 100644
+> +--- a/src/libopensc/pkcs15-prkey.c
+> ++++ b/src/libopensc/pkcs15-prkey.c
+> +@@ -258,6 +258,10 @@ int sc_pkcs15_decode_prkdf_entry(struct sc_pkcs15_card *p15card,
+> + 	memset(gostr3410_params, 0, sizeof(gostr3410_params));
 > + 
-> +-                    if(message_len < datalen-13) {
-> +-                        /* 9 = packet_type(1) + reason(4) + message_len(4) */
-> +-                        message = (char *) data + 9;
-> +-
-> +-                        language_len =
-> +-                            _libssh2_ntohu32(data + 9 + message_len);
-> +-                        language = (char *) data + 9 + message_len + 4;
-> +-
-> +-                        if(language_len > (datalen-13-message_len)) {
-> +-                            /* bad input, clear info */
-> +-                            language = message = NULL;
-> +-                            language_len = message_len = 0;
-> +-                        }
-> +-                    }
-> +-                    else
-> +-                        /* bad size, clear it */
-> +-                        message_len = 0;
-> +-                }
-> +                 if(session->ssh_msg_disconnect) {
-> +-                    LIBSSH2_DISCONNECT(session, reason, message,
-> +-                                       message_len, language, language_len);
-> ++                    LIBSSH2_DISCONNECT(session, reason, (const char *)message,
-> ++                                       message_len, (const char *)language,
-> ++                                       language_len);
-> +                 }
-> ++
-> +                 _libssh2_debug(session, LIBSSH2_TRACE_TRANS,
-> +                                "Disconnect(%d): %s(%s)", reason,
-> +                                message, language);
-> +@@ -534,23 +526,24 @@ _libssh2_packet_add(LIBSSH2_SESSION * session, unsigned char *data,
-> +                 int always_display = data[1];
-> + 
-> +                 if(datalen >= 6) {
-> +-                    message_len = _libssh2_ntohu32(data + 2);
-> +-
-> +-                    if(message_len <= (datalen - 10)) {
-> +-                        /* 6 = packet_type(1) + display(1) + message_len(4) */
-> +-                        message = (char *) data + 6;
-> +-                        language_len = _libssh2_ntohu32(data + 6 +
-> +-                                                        message_len);
-> +-
-> +-                        if(language_len <= (datalen - 10 - message_len))
-> +-                            language = (char *) data + 10 + message_len;
-> +-                    }
-> ++                    struct string_buf buf;
-> ++                    buf.data = (unsigned char *)data;
-> ++                    buf.dataptr = buf.data;
-> ++                    buf.len = datalen;
-> ++                    buf.dataptr += 2; /* advance past type & always display */
-> ++
-> ++                    _libssh2_get_string(&buf, &message, &message_len);
-> ++                    _libssh2_get_string(&buf, &language, &language_len);
-> +                 }
-> + 
-> +                 if(session->ssh_msg_debug) {
-> +-                    LIBSSH2_DEBUG(session, always_display, message,
-> +-                                  message_len, language, language_len);
-> ++                    LIBSSH2_DEBUG(session, always_display,
-> ++                                  (const char *)message,
-> ++                                  message_len, (const char *)language,
-> ++                                  language_len);
-> +                 }
-> +             }
-> ++
-> +             /*
-> +              * _libssh2_debug will actually truncate this for us so
-> +              * that it's not an inordinate about of data
-> +@@ -576,7 +566,7 @@ _libssh2_packet_add(LIBSSH2_SESSION * session, unsigned char *data,
-> +                 uint32_t len = 0;
-> +                 unsigned char want_reply = 0;
-> +                 len = _libssh2_ntohu32(data + 1);
-> +-                if(datalen >= (6 + len)) {
-> ++                if((len <= (UINT_MAX - 6)) && (datalen >= (6 + len))) {
-> +                     want_reply = data[5 + len];
-> +                     _libssh2_debug(session,
-> +                                    LIBSSH2_TRACE_CONN,
-> diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb b/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb
-> index fe853cde4..a17ae5b7c 100644
-> --- a/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb
-> +++ b/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb
-> @@ -17,6 +17,7 @@ inherit autotools pkgconfig
->  EXTRA_OECONF += "\
->                   --with-libz \
->                   --with-libz-prefix=${STAGING_LIBDIR} \
-> +                 file://CVE-2019-17498.patch \
->                  "
+> + 	r = sc_asn1_decode_choice(ctx, asn1_prkey, *buf, *buflen, buf, buflen);
+> ++	if (r < 0) {
+> ++	        /* This might have allocated something. If so, clear it now */
+> ++	        free(info.subject.value);
+> ++        }
+> + 	if (r == SC_ERROR_ASN1_END_OF_CONTENTS)
+> + 		return r;
+> + 	LOG_TEST_RET(ctx, r, "PrKey DF ASN.1 decoding failed");
+> +-- 
+> +2.17.1
+> +
+> diff --git a/meta-oe/recipes-support/opensc/opensc_0.19.0.bb b/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
+> index bc1722e39..d26825a06 100644
+> --- a/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
+> +++ b/meta-oe/recipes-support/opensc/opensc_0.19.0.bb
+> @@ -15,6 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+>  SRCREV = "f1691fc91fc113191c3a8aaf5facd6983334ec47"
+>  SRC_URI = "git://github.com/OpenSC/OpenSC \
+>             file://0001-Remove-redundant-logging.patch \
+> +           file://CVE-2019-19479.patch \
+> +           file://CVE-2019-19480.patch \
+>            "
+>  DEPENDS = "openct pcsc-lite virtual/libiconv openssl"
 >  
->  # only one of openssl and gcrypt could be set
 
 
