@@ -1,24 +1,60 @@
-Return-Path: <Haiqing.Bai@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A23861CA1
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-io1-f65.google.com (mail-io1-f65.google.com
+	[209.85.166.65])
+	by mail.openembedded.org (Postfix) with ESMTP id DCC3C60F93
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 10:19:54 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 02DAJtv2022648
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Fri, 13 Mar 2020 15:05:47 +0000 (UTC)
+Received: by mail-io1-f65.google.com with SMTP id h8so9686693iob.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 03:19:55 -0700 (PDT)
-Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.487.0;
-	Fri, 13 Mar 2020 03:19:55 -0700
-From: Haiqing Bai <Haiqing.Bai@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <haiqing.bai@windriver.com>
-Date: Fri, 13 Mar 2020 18:19:23 +0800
-Message-ID: <1584094764-17831-1-git-send-email-Haiqing.Bai@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Fri, 13 Mar 2020 08:05:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=80p5SOgBwUDnsJ3OjAYYKwshPt+RtJFUk96b3j6xW3A=;
+	b=Ah2SSXMumRvx3ncPHGewwD57oF6TeNB7Nr5jp+LFL2JVHlcwBYYHcyz/01jC6ElMC8
+	Jq9S6gmJtWf/58F4jx41H3NZAqRq1ElQzpwfYbiKr7lzVdtPYuDAphOPKmiVULt45VfE
+	PUk9EKjgNaV7d4U5KoW6W035Wwp+O1g5xM43sr+BJQhcPU00ymOyygZs2CpLLm4ZfncZ
+	o6YZ7biAdvuDMK9al5vAo3Rj1RSJcHzPzYMmwE4L5jrYnWdhjmWdxRtjUvLgqPNklaqn
+	lD+++dNJnlP1ghTmktXmAi1uJl8fhxCLzL61Kzwt4VArTn45Cp2GIE9ysZf92kOn+rYK
+	/IWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=80p5SOgBwUDnsJ3OjAYYKwshPt+RtJFUk96b3j6xW3A=;
+	b=hXKXutIz6Gqrc4ZaytiAJfiz0PsTpk7RqufThlGCkz3CVpkqRmxzwMPV0SX0nVLszi
+	OwfhAFmyijPWKKvWtvO2B09zbdTpmIG/E4J+XLLZh58N165vigoYlj5RPU7yTuajfJoU
+	V60MOhDxMct0OZM33sMOdOqnLfTkkZv4xz8Uw8Xuej8DQQlUnjIOMhNiY00Vgxm18Dee
+	NTsTGGNtpetXyYOicN0/2CuZgqtpRqq899dEmBzHThptk6B9vlDt2CKEPRSn3oVeIjOS
+	EA0lIZxUKYsovgcCisl43Yr9a/ZknGLUX3nSqDhccGcRElmyT+a3QAxWv2sqPc2rjjff
+	eC/A==
+X-Gm-Message-State: ANhLgQ22FcDbyGag62dtBOdYOp04O2QzqWsqDeWIDTO0PgXYcDDb6XCt
+	hObbh6IbzqtQWGUeCk7TzQK/JHTM7+t+mUZdawRGRg==
+X-Google-Smtp-Source: ADFU+vvkRfm9pakjdCNjmnCilCoZWVCQC38eZsVfZ/EuHX/z9Pi7aOE+ewc1u5TvTMRirmEZYvPVMZxQnoxN71cIXCU=
+X-Received: by 2002:a02:cbc3:: with SMTP id u3mr12887604jaq.114.1584111948686; 
+	Fri, 13 Mar 2020 08:05:48 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-python][zeus][PATCH] python-urllib3/python3-urllib3: fix CVE-2020-7212
+References: <20200228150345.11829-1-brgl@bgdev.pl>
+	<CAP9ODKqbfrnLUBzE+WkGceSo+qBimGPUFUcgRuZmS3vwJZqpwA@mail.gmail.com>
+	<CAMRc=MftVskWMFZQhbFKZLwNAR9a1+4zbayWTbXFuSJgG-ZgbA@mail.gmail.com>
+	<CAP9ODKpVW6qxw7+5oA7auBMW1ApLdqjicZf8Ahe3RhYG8QjmgQ@mail.gmail.com>
+	<CAMRc=MeJ0R81s-ui7J78pe89JE6c-_wx3RGUZx-tzMLc3pzthQ@mail.gmail.com>
+	<dd3d6ea7-2bac-6a06-823d-fd070f547784@gmail.com>
+	<CAMRc=MevN3tAfBkLZuOiW0BVbOWkq_T_HiD6XTMwh5d32xrGeQ@mail.gmail.com>
+	<CAMRc=MehBSu1RpPkzP=xiFqt3wpJrf4FhV889jcPxUHPnf0GLg@mail.gmail.com>
+	<CAP71Wjz1n_Csm762xbsxUK-3i3OYm-rfh=9Ccf28USLgJjRiFQ@mail.gmail.com>
+	<CAMRc=Md1Udxq0eOUzNH=Pr3corUEa88_wdTJJFyurjMvJcfaAQ@mail.gmail.com>
+	<CAMKF1spHPHW7xk5icpG5qVhYTSjuawWidw24o=tVWEve8_MDkg@mail.gmail.com>
+In-Reply-To: <CAMKF1spHPHW7xk5icpG5qVhYTSjuawWidw24o=tVWEve8_MDkg@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Fri, 13 Mar 2020 16:05:38 +0100
+Message-ID: <CAMRc=McjtuhBVSzFyXvQCNq9Y2mUSH6-_WrF06b0xJuRyd8YXQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-ota][PATCH] meta-ota: add support for binary-delta images in a new layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,160 +67,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 10:19:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 13 Mar 2020 15:05:48 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Optimize _encode_invalid_chars for a denial of service (CPU consumption)
+czw., 12 mar 2020 o 19:13 Khem Raj <raj.khem@gmail.com> napisa=C5=82(a):
+> > >
+> > > it depends what you mean here.
+> > >
+> > > 1. Hosting on git.yoctoproject.org is mostly for layers supported by =
+YP membership, these layers are under the responsibility of the YP TSC [1]
+> > > 2. Hosting on git.openembedded.org is under the responsibility of the=
+ OE TSC [2]
+> > >
+> >
+> > I'm not sure what that means exactly in terms of making a layer
+> > official. I can only guess that non-members can't make their layers
+> > part of the project for political reasons.
+>
+> I would suggest to send the proposal to oe-tsc mailing list
+> tsc@lists.openembedded.org
+>
 
-Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
----
- .../python/python-urllib3/CVE-2020-7212.patch      | 54 ++++++++++++++++++++++
- .../python/python-urllib3_1.25.6.bb                |  2 +
- .../python/python3-urllib3/CVE-2020-7212.patch     | 54 ++++++++++++++++++++++
- .../python/python3-urllib3_1.25.6.bb               |  2 +
- 4 files changed, 112 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
+Thanks. I'll do this as soon as I have more things to show in this layer.
 
-diff --git a/meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch b/meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
-new file mode 100644
-index 0000000..a2bb0fb
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
-@@ -0,0 +1,54 @@
-+From aff951b7a41eb5b958b32c49eaa00da02adc9c2d Mon Sep 17 00:00:00 2001
-+From: Quentin Pradet <quentin.pradet@gmail.com>
-+Date: Tue, 21 Jan 2020 22:32:56 +0400
-+Subject: [PATCH] Optimize _encode_invalid_chars (#1787)
-+
-+Co-authored-by: Seth Michael Larson <sethmichaellarson@gmail.com>
-+
-+Upstream-Status: Backport
-+[from git://github.com/urllib3/urllib3.git commit:a2697e7c6b]
-+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-+---
-+ src/urllib3/util/url.py | 15 ++++++---------
-+ 1 file changed, 6 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/urllib3/util/url.py b/src/urllib3/util/url.py
-+index 9675f74..e353937 100644
-+--- a/src/urllib3/util/url.py
-++++ b/src/urllib3/util/url.py
-+@@ -216,18 +216,15 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
-+ 
-+     component = six.ensure_text(component)
-+ 
-++    # Normalize existing percent-encoded bytes.
-+     # Try to see if the component we're encoding is already percent-encoded
-+     # so we can skip all '%' characters but still encode all others.
-+-    percent_encodings = PERCENT_RE.findall(component)
-+-
-+-    # Normalize existing percent-encoded bytes.
-+-    for enc in percent_encodings:
-+-        if not enc.isupper():
-+-            component = component.replace(enc, enc.upper())
-++    component, percent_encodings = PERCENT_RE.subn(
-++        lambda match: match.group(0).upper(), component
-++    )
-+ 
-+     uri_bytes = component.encode("utf-8", "surrogatepass")
-+-    is_percent_encoded = len(percent_encodings) == uri_bytes.count(b"%")
-+-
-++    is_percent_encoded = percent_encodings == uri_bytes.count(b"%")
-+     encoded_component = bytearray()
-+ 
-+     for i in range(0, len(uri_bytes)):
-+@@ -237,7 +234,7 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
-+         if (is_percent_encoded and byte == b"%") or (
-+             byte_ord < 128 and byte.decode() in allowed_chars
-+         ):
-+-            encoded_component.extend(byte)
-++            encoded_component += byte
-+             continue
-+         encoded_component.extend(b"%" + (hex(byte_ord)[2:].encode().zfill(2).upper()))
-+ 
-+-- 
-+2.23.0
-+
-diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
-index 6c81f1d..9f2d2c8 100644
---- a/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
-+++ b/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
-@@ -1,2 +1,4 @@
- inherit pypi setuptools
- require python-urllib3.inc
-+
-+SRC_URI += "file://CVE-2020-7212.patch"
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
-new file mode 100644
-index 0000000..a2bb0fb
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
-@@ -0,0 +1,54 @@
-+From aff951b7a41eb5b958b32c49eaa00da02adc9c2d Mon Sep 17 00:00:00 2001
-+From: Quentin Pradet <quentin.pradet@gmail.com>
-+Date: Tue, 21 Jan 2020 22:32:56 +0400
-+Subject: [PATCH] Optimize _encode_invalid_chars (#1787)
-+
-+Co-authored-by: Seth Michael Larson <sethmichaellarson@gmail.com>
-+
-+Upstream-Status: Backport
-+[from git://github.com/urllib3/urllib3.git commit:a2697e7c6b]
-+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-+---
-+ src/urllib3/util/url.py | 15 ++++++---------
-+ 1 file changed, 6 insertions(+), 9 deletions(-)
-+
-+diff --git a/src/urllib3/util/url.py b/src/urllib3/util/url.py
-+index 9675f74..e353937 100644
-+--- a/src/urllib3/util/url.py
-++++ b/src/urllib3/util/url.py
-+@@ -216,18 +216,15 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
-+ 
-+     component = six.ensure_text(component)
-+ 
-++    # Normalize existing percent-encoded bytes.
-+     # Try to see if the component we're encoding is already percent-encoded
-+     # so we can skip all '%' characters but still encode all others.
-+-    percent_encodings = PERCENT_RE.findall(component)
-+-
-+-    # Normalize existing percent-encoded bytes.
-+-    for enc in percent_encodings:
-+-        if not enc.isupper():
-+-            component = component.replace(enc, enc.upper())
-++    component, percent_encodings = PERCENT_RE.subn(
-++        lambda match: match.group(0).upper(), component
-++    )
-+ 
-+     uri_bytes = component.encode("utf-8", "surrogatepass")
-+-    is_percent_encoded = len(percent_encodings) == uri_bytes.count(b"%")
-+-
-++    is_percent_encoded = percent_encodings == uri_bytes.count(b"%")
-+     encoded_component = bytearray()
-+ 
-+     for i in range(0, len(uri_bytes)):
-+@@ -237,7 +234,7 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
-+         if (is_percent_encoded and byte == b"%") or (
-+             byte_ord < 128 and byte.decode() in allowed_chars
-+         ):
-+-            encoded_component.extend(byte)
-++            encoded_component += byte
-+             continue
-+         encoded_component.extend(b"%" + (hex(byte_ord)[2:].encode().zfill(2).upper()))
-+ 
-+-- 
-+2.23.0
-+
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
-index 19eb702..e3583a0 100644
---- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
-@@ -1,2 +1,4 @@
- inherit pypi setuptools3
- require python-urllib3.inc
-+
-+SRC_URI += "file://CVE-2020-7212.patch"
--- 
-1.9.1
-
+Bartosz
 
