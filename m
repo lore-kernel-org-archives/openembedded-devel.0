@@ -1,101 +1,50 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6920B61CA9
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf1-f194.google.com (mail-pf1-f194.google.com
+	[209.85.210.194])
+	by mail.openembedded.org (Postfix) with ESMTP id E933D6089C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 15:39:23 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id h11so4410816plk.7
+	Fri, 13 Mar 2020 17:58:28 +0000 (UTC)
+Received: by mail-pf1-f194.google.com with SMTP id c19so5664635pfo.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 08:39:24 -0700 (PDT)
+	Fri, 13 Mar 2020 10:58:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:autocrypt:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=EffdGue2rZMf6Sf9aUOPec2CIITn5U7aN68Nwtsu9FY=;
-	b=XWlFYqTEVW1SWMfmQfWBlUu4NYxseq8AsWH98TMmyNjhTVETsvBLlKNoBdbs84HkJf
-	2LwnHEe7MNfm4hH0wKE21YbZgSDJd5EmS9gUomHaIVtu+pMKGZyzEkEWnmLUrbO1ytyv
-	sie+uVxr+lTMQWZwd834rWWmz6tUzc2nVPF2U+z2iynprq7T0/SBzs9dBq3y+R5mG/C1
-	BaAfui5jJC1wbftNHOdXZekeEAc8cdOCnxz9S3/Ykath3f7azw2SM6nUDP5KR7MriGs4
-	AnH2z7GfI/KF+vubkMiNZq3+uS0Bo+hkFY5EA2V83gjIkmSM5sMLXpk2mlUTmWz6S+I4
-	kexQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=53Agwv1vudU8CQOvbrVqHL/3Wah6hzcXwLInCGJut/o=;
+	b=txUzCbX29lknWnNIUPzf64qpjWnS3bzGlisOHFDeJMJPkwAEzRrDbTMSLSAmB048G9
+	03X46FiGSBzOE2qCSouSuqd4j3jHYNbK4JY8KKGWxiaSkYEumh8ZUKwptUhHrpXHi/5a
+	SM629LVy2W/zV1ysX6k//UvPGb6KlRwoqC3eiLInDI5poUNSZHIBv00O5D+DdtkT6+s2
+	Bi5fy8o1zWrUttDDAuS7cJSVatqRagPqb1vdpl9nrp8LobV/U74/+xwGNF3sr9u7KCVv
+	/ddIyagqGEAMGxYlxRgLro7PqFM2xyn4S08Ndobu57EP5FmzUSMNqE5bVMaKSkgkPXD6
+	bYWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=EffdGue2rZMf6Sf9aUOPec2CIITn5U7aN68Nwtsu9FY=;
-	b=hCQ6mBF/BfgC9FRT76jzctMw8nTJNezzM8nac2L2ATBoKNlShDLz+QVYkcpaPcY3eg
-	qYNxkg6WWlx9dibCcIRkZQ89mbX0I63m8UB1BStq5PVebK53x6e6liW/UAvAXhevtQy+
-	+XIhosYt2H+7xMahqZoPBtX9T+ok4Y86Xbq0tZqc3gU0Lf09oLaO8Y/LUd4H+SsWN+ca
-	NWJybZVwPBxdI6HJrKzy57WMAAM6CrqT0x5+ybnzYh7SsKRPRYohuxN0pDRjFW3aJztr
-	MQ2hYBQatd+h45YtuQQqO3+qMFZJZFwqR2hBfyEzqaFr83otAa5N1Q5ypWkhBxnW3WOe
-	tn4Q==
-X-Gm-Message-State: ANhLgQ0wU74oio4Vkp8pRVZ584BICWmAT+EF4/BaGdunHiMWpkcstxuc
-	aMwXw5zarkSOVBg7bdfaLxqBgWY9
-X-Google-Smtp-Source: ADFU+vvgz/Xxvk+iOBcWQuIk0RLq3e43dDke8QA4GVpdOJ5cOHZwlMXf8afTr7swwNFe3smFaLFZww==
-X-Received: by 2002:a17:90b:1911:: with SMTP id
-	mp17mr1936583pjb.196.1584113964041; 
-	Fri, 13 Mar 2020 08:39:24 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:a5c0:b971:4aa1:90b2:e851?
-	([2601:202:4180:a5c0:b971:4aa1:90b2:e851])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=53Agwv1vudU8CQOvbrVqHL/3Wah6hzcXwLInCGJut/o=;
+	b=fmf/gcViMZvwXm34rex6RAL+hITOwpgtlhTjn/fRnGVj8BeY0kHIQy/S1MGok/fyBw
+	zODlpNER2dD8caVp5lFxI2mvudzoqMwi02Hmdk5+1wbFk6nOysTCFoQBjzXfGuV04R1n
+	LwZK5WOJI0SCQ4nVzsO7VVAtUN5mX4xcgDTgclxduHT/aDlYg8NQ836G0acF+dc8usD8
+	Kpey4WJ7/BbqET1UG2pqT42UelReYhHgszYn3UeNRs/Btpytq5XBDdyoOVF2hZE8o43G
+	M36RWDAoFoaxAkxTp/Yc/t3Z+IrVF9Gxy42k3j+xyCtd9BLHbq+gxKFw8lvPoDFSAqe9
+	5njQ==
+X-Gm-Message-State: ANhLgQ2MIi8l45FOenBA8CSy8Nix0053Msox/ijAsTiVfVw5JmcRq0/X
+	Y9GAEf5uQvxaZPoHVN5Zz/laYPni03Q=
+X-Google-Smtp-Source: ADFU+vvAUXl54ytQsL6vGiK32i0TR+JkBWOA3qMCwtQHXobu3Jy5aPSrJpTS7PQ4wfI+fTxknVGrfw==
+X-Received: by 2002:a63:c54b:: with SMTP id g11mr14244832pgd.164.1584122309022;
+	Fri, 13 Mar 2020 10:58:29 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::af11])
 	by smtp.gmail.com with ESMTPSA id
-	k1sm54257640pgt.70.2020.03.13.08.39.23
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 13 Mar 2020 08:39:23 -0700 (PDT)
+	r10sm53412359pgv.25.2020.03.13.10.58.28
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 13 Mar 2020 10:58:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
-	<1584097824-54462-3-git-send-email-wangmy@cn.fujitsu.com>
-From: akuster808 <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <5787a0ee-36c6-16d3-e440-4b063a7e3522@gmail.com>
-Date: Fri, 13 Mar 2020 08:39:12 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
-	Thunderbird/68.4.1
+Date: Fri, 13 Mar 2020 10:58:41 -0700
+Message-Id: <20200313175841.1142001-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <1584097824-54462-3-git-send-email-wangmy@cn.fujitsu.com>
-Subject: Re: [meta-oe][zeus][PATCH] php: CVE-2019-11045.patch CVE-2019-11046.patch CVE-2019-11047.patch CVE-2019-11050.patch
+Subject: [meta-oe][PATCH] sysdig: Use luajit and build fixes on aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -108,327 +57,406 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 15:39:24 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 13 Mar 2020 17:58:29 -0000
+Content-Transfer-Encoding: 8bit
 
+latest luajit now supports aarch64
 
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../sysdig/sysdig/aarch64.patch               | 359 ++++++++++++++++++
+ meta-oe/recipes-extended/sysdig/sysdig_git.bb |   3 +-
+ 2 files changed, 360 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch
 
-On 3/13/20 4:10 AM, Wang Mingyu wrote:
-> Security Advisory
->
-> References:
-> https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11045
-> https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11046
-> https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11047
-> https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11050
-
-are these fixes in master?
->
-> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-> ---
->  .../php/php/CVE-2019-11045.patch              | 78 +++++++++++++++++++
->  .../php/php/CVE-2019-11046.patch              | 59 ++++++++++++++
->  .../php/php/CVE-2019-11047.patch              | 57 ++++++++++++++
->  .../php/php/CVE-2019-11050.patch              | 53 +++++++++++++
->  meta-oe/recipes-devtools/php/php_7.3.9.bb     |  4 +
->  5 files changed, 251 insertions(+)
->  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11045.patch
->  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11046.patch
->  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11047.patch
->  create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11050.patch
->
-> diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-11045.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-11045.patch
-> new file mode 100644
-> index 000000000..3b3c187a4
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/php/php/CVE-2019-11045.patch
-> @@ -0,0 +1,78 @@
-> +From a5a15965da23c8e97657278fc8dfbf1dfb20c016 Mon Sep 17 00:00:00 2001
-> +From: "Christoph M. Becker" <cmbecker69@gmx.de>
-> +Date: Mon, 25 Nov 2019 16:56:34 +0100
-> +Subject: [PATCH] Fix #78863: DirectoryIterator class silently truncates after
-> + a null byte
-> +
-> +Since the constructor of DirectoryIterator and friends is supposed to
-> +accepts paths (i.e. strings without NUL bytes), we must not accept
-> +arbitrary strings.
-> +
-> +Upstream-Status: Accepted
-Accepted mean you sent the fix upstream and they took it.
-is this a "Backport"
-
-Missing "Signed-off-by: "
-
-> +CVE: CVE-2019-11045
-> +   
-> +Reference to upstream patch:
-> +http://git.php.net/?p=php-src.git;a=commit;h=a5a15965da23c8e97657278fc8dfbf1dfb20c016
-> +http://git.php.net/?p=php-src.git;a=commit;h=d74907b8575e6edb83b728c2a94df434c23e1f79
-> +---
-> + ext/spl/spl_directory.c     |  4 ++--
-> + ext/spl/tests/bug78863.phpt | 31 +++++++++++++++++++++++++++++++
-> + 2 files changed, 33 insertions(+), 2 deletions(-)
-> + create mode 100644 ext/spl/tests/bug78863.phpt
-> +
-> +diff --git a/ext/spl/spl_directory.c b/ext/spl/spl_directory.c
-> +index 91ea2e0265..56e809b1c7 100644
-> +--- a/ext/spl/spl_directory.c
-> ++++ b/ext/spl/spl_directory.c
-> +@@ -708,10 +708,10 @@ void spl_filesystem_object_construct(INTERNAL_FUNCTION_PARAMETERS, zend_long cto
-> + 
-> + 	if (SPL_HAS_FLAG(ctor_flags, DIT_CTOR_FLAGS)) {
-> + 		flags = SPL_FILE_DIR_KEY_AS_PATHNAME|SPL_FILE_DIR_CURRENT_AS_FILEINFO;
-> +-		parsed = zend_parse_parameters(ZEND_NUM_ARGS(), "s|l", &path, &len, &flags);
-> ++		parsed = zend_parse_parameters(ZEND_NUM_ARGS(), "p|l", &path, &len, &flags);
-> + 	} else {
-> + 		flags = SPL_FILE_DIR_KEY_AS_PATHNAME|SPL_FILE_DIR_CURRENT_AS_SELF;
-> +-		parsed = zend_parse_parameters(ZEND_NUM_ARGS(), "s", &path, &len);
-> ++		parsed = zend_parse_parameters(ZEND_NUM_ARGS(), "p", &path, &len);
-> + 	}
-> + 	if (SPL_HAS_FLAG(ctor_flags, SPL_FILE_DIR_SKIPDOTS)) {
-> + 		flags |= SPL_FILE_DIR_SKIPDOTS;
-> +diff --git a/ext/spl/tests/bug78863.phpt b/ext/spl/tests/bug78863.phpt
-> +new file mode 100644
-> +index 0000000000..dc88d98dee
-> +--- /dev/null
-> ++++ b/ext/spl/tests/bug78863.phpt
-> +@@ -0,0 +1,31 @@
-> ++--TEST--
-> ++Bug #78863 (DirectoryIterator class silently truncates after a null byte)
-> ++--FILE--
-> ++<?php
-> ++$dir = __DIR__ . '/bug78863';
-> ++mkdir($dir);
-> ++touch("$dir/bad");
-> ++mkdir("$dir/sub");
-> ++touch("$dir/sub/good");
-> ++
-> ++$it = new DirectoryIterator(__DIR__ . "/bug78863\0/sub");
-> ++foreach ($it as $fileinfo) {
-> ++    if (!$fileinfo->isDot()) {
-> ++        var_dump($fileinfo->getFilename());
-> ++    }
-> ++}
-> ++?>
-> ++--EXPECTF--
-> ++Fatal error: Uncaught UnexpectedValueException: DirectoryIterator::__construct() expects parameter 1 to be a valid path, string given in %s:%d
-> ++Stack trace:
-> ++#0 %s(%d): DirectoryIterator->__construct('%s')
-> ++#1 {main}
-> ++  thrown in %s on line %d
-> ++--CLEAN--
-> ++<?php
-> ++$dir = __DIR__ . '/bug78863';
-> ++unlink("$dir/sub/good");
-> ++rmdir("$dir/sub");
-> ++unlink("$dir/bad");
-> ++rmdir($dir);
-> ++?>
-> +-- 
-> +2.11.0
-> diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-11046.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-11046.patch
-> new file mode 100644
-> index 000000000..711b8525a
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/php/php/CVE-2019-11046.patch
-> @@ -0,0 +1,59 @@
-> +From 2d07f00b73d8f94099850e0f5983e1cc5817c196 Mon Sep 17 00:00:00 2001
-> +From: "Christoph M. Becker" <cmbecker69@gmx.de>
-> +Date: Sat, 30 Nov 2019 12:26:37 +0100
-> +Subject: [PATCH] Fix #78878: Buffer underflow in bc_shift_addsub
-> +
-> +We must not rely on `isdigit()` to detect digits, since we only support
-> +decimal ASCII digits in the following processing.
-> +
-> +(cherry picked from commit eb23c6008753b1cdc5359dead3a096dce46c9018)
-> +
-> +Upstream-Status: Accepted
-> +CVE: CVE-2019-11046
-> +   
-> +Reference to upstream patch:
-> +http://git.php.net/?p=php-src.git;a=commit;h=eb23c6008753b1cdc5359dead3a096dce46c9018
-> +http://git.php.net/?p=php-src.git;a=commit;h=2d07f00b73d8f94099850e0f5983e1cc5817c196
-> +---
-> + ext/bcmath/libbcmath/src/str2num.c |  4 ++--
-> + ext/bcmath/tests/bug78878.phpt     | 13 +++++++++++++
-> + 2 files changed, 15 insertions(+), 2 deletions(-)
-> + create mode 100644 ext/bcmath/tests/bug78878.phpt
-> +
-> +diff --git a/ext/bcmath/libbcmath/src/str2num.c b/ext/bcmath/libbcmath/src/str2num.c
-> +index f38d341570..03aec15930 100644
-> +--- a/ext/bcmath/libbcmath/src/str2num.c
-> ++++ b/ext/bcmath/libbcmath/src/str2num.c
-> +@@ -57,9 +57,9 @@ bc_str2num (bc_num *num, char *str, int scale)
-> +   zero_int = FALSE;
-> +   if ( (*ptr == '+') || (*ptr == '-'))  ptr++;  /* Sign */
-> +   while (*ptr == '0') ptr++;			/* Skip leading zeros. */
-> +-  while (isdigit((int)*ptr)) ptr++, digits++;	/* digits */
-> ++  while (*ptr >= '0' && *ptr <= '9') ptr++, digits++;	/* digits */
-> +   if (*ptr == '.') ptr++;			/* decimal point */
-> +-  while (isdigit((int)*ptr)) ptr++, strscale++;	/* digits */
-> ++  while (*ptr >= '0' && *ptr <= '9') ptr++, strscale++;	/* digits */
-> +   if ((*ptr != '\0') || (digits+strscale == 0))
-> +     {
-> +       *num = bc_copy_num (BCG(_zero_));
-> +diff --git a/ext/bcmath/tests/bug78878.phpt b/ext/bcmath/tests/bug78878.phpt
-> +new file mode 100644
-> +index 0000000000..2c9d72b946
-> +--- /dev/null
-> ++++ b/ext/bcmath/tests/bug78878.phpt
-> +@@ -0,0 +1,13 @@
-> ++--TEST--
-> ++Bug #78878 (Buffer underflow in bc_shift_addsub)
-> ++--SKIPIF--
-> ++<?php
-> ++if (!extension_loaded('bcmath')) die('skip bcmath extension not available');
-> ++?>
-> ++--FILE--
-> ++<?php
-> ++print @bcmul("\xB26483605105519922841849335928742092", bcpowmod(2, 65535, -4e-4));
-> ++?>
-> ++--EXPECT--
-> ++bc math warning: non-zero scale in modulus
-> ++0
-> +-- 
-> +2.11.0
-> diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-11047.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-11047.patch
-> new file mode 100644
-> index 000000000..e2922bf8f
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/php/php/CVE-2019-11047.patch
-> @@ -0,0 +1,57 @@
-> +From d348cfb96f2543565691010ade5e0346338be5a7 Mon Sep 17 00:00:00 2001
-> +From: Stanislav Malyshev <stas@php.net>
-> +Date: Mon, 16 Dec 2019 00:10:39 -0800
-> +Subject: [PATCH] Fixed bug #78910
-> +
-> +Upstream-Status: Accepted
-> +CVE-2019-11047
-> +   
-> +Reference to upstream patch:
-> +http://git.php.net/?p=php-src.git;a=commit;h=d348cfb96f2543565691010ade5e0346338be5a7
-> +http://git.php.net/?p=php-src.git;a=commit;h=57325460d2bdee01a13d8e6cf03345c90543ff4f
-> +---
-> + ext/exif/exif.c              |  3 ++-
-> + ext/exif/tests/bug78910.phpt | 17 +++++++++++++++++
-> + 2 files changed, 19 insertions(+), 1 deletion(-)
-> + create mode 100644 ext/exif/tests/bug78910.phpt
-> +
-> +diff --git a/ext/exif/exif.c b/ext/exif/exif.c
-> +index 2804807e..a5780113 100644
-> +--- a/ext/exif/exif.c
-> ++++ b/ext/exif/exif.c
-> +@@ -3138,7 +3138,8 @@ static int exif_process_IFD_in_MAKERNOTE(image_info_type *ImageInfo, char * valu
-> + 		/*exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_NOTICE, "check (%s)", maker_note->make?maker_note->make:"");*/
-> + 		if (maker_note->make && (!ImageInfo->make || strcmp(maker_note->make, ImageInfo->make)))
-> + 			continue;
-> +-		if (maker_note->id_string && strncmp(maker_note->id_string, value_ptr, maker_note->id_string_len))
-> ++		if (maker_note->id_string && value_len >= maker_note->id_string_len
-> ++				&& strncmp(maker_note->id_string, value_ptr, maker_note->id_string_len))
-> + 			continue;
-> + 		break;
-> + 	}
-> +diff --git a/ext/exif/tests/bug78910.phpt b/ext/exif/tests/bug78910.phpt
-> +new file mode 100644
-> +index 00000000..f5b1c32c
-> +--- /dev/null
-> ++++ b/ext/exif/tests/bug78910.phpt
-> +@@ -0,0 +1,17 @@
-> ++--TEST--
-> ++Bug #78910: Heap-buffer-overflow READ in exif (OSS-Fuzz #19044)
-> ++--FILE--
-> ++<?php
-> ++
-> ++var_dump(exif_read_data('data:image/jpg;base64,TU0AKgAAAAwgICAgAAIBDwAEAAAAAgAAACKSfCAgAAAAAEZVSklGSUxN'));
-> ++
-> ++?>
-> ++--EXPECTF--
-> ++Notice: exif_read_data(): Read from TIFF: tag(0x927C, MakerNote  ): Illegal format code 0x2020, switching to BYTE in %s on line %d
-> ++
-> ++Warning: exif_read_data(): Process tag(x927C=MakerNote  ): Illegal format code 0x2020, suppose BYTE in %s on line %d
-> ++
-> ++Warning: exif_read_data(): IFD data too short: 0x0000 offset 0x000C in %s on line %d
-> ++
-> ++Warning: exif_read_data(): Invalid TIFF file in %s on line %d
-> ++bool(false)
-> +-- 
-> +2.17.1
-> +
-> diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-11050.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-11050.patch
-> new file mode 100644
-> index 000000000..700b99bd9
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/php/php/CVE-2019-11050.patch
-> @@ -0,0 +1,53 @@
-> +From c14eb8de974fc8a4d74f3515424c293bc7a40fba Mon Sep 17 00:00:00 2001
-> +From: Stanislav Malyshev <stas@php.net>
-> +Date: Mon, 16 Dec 2019 01:14:38 -0800
-> +Subject: [PATCH] Fix bug #78793
-> +
-> +Upstream-Status: Accepted
-> +CVE-2019-11050
-> +   
-> +Reference to upstream patch:
-> +http://git.php.net/?p=php-src.git;a=commit;h=c14eb8de974fc8a4d74f3515424c293bc7a40fba
-> +http://git.php.net/?p=php-src.git;a=commit;h=1b3b4a0d367b6f0b67e9f73d82f53db6c6b722b2
-> +---
-> + ext/exif/exif.c              |  5 +++--
-> + ext/exif/tests/bug78793.phpt | 12 ++++++++++++
-> + 2 files changed, 15 insertions(+), 2 deletions(-)
-> + create mode 100644 ext/exif/tests/bug78793.phpt
-> +
-> +diff --git a/ext/exif/exif.c b/ext/exif/exif.c
-> +index c0be05922f..7fe055f381 100644
-> +--- a/ext/exif/exif.c
-> ++++ b/ext/exif/exif.c
-> +@@ -3240,8 +3240,9 @@ static int exif_process_IFD_in_MAKERNOTE(image_info_type *ImageInfo, char * valu
-> + 	}
-> + 
-> + 	for (de=0;de<NumDirEntries;de++) {
-> +-		if (!exif_process_IFD_TAG(ImageInfo, dir_start + 2 + 12 * de,
-> +-								  offset_base, data_len, displacement, section_index, 0, maker_note->tag_table)) {
-> ++		size_t offset = 2 + 12 * de;
-> ++		if (!exif_process_IFD_TAG(ImageInfo, dir_start + offset,
-> ++								  offset_base, data_len - offset, displacement, section_index, 0, maker_note->tag_table)) {
-> + 			return FALSE;
-> + 		}
-> + 	}
-> +diff --git a/ext/exif/tests/bug78793.phpt b/ext/exif/tests/bug78793.phpt
-> +new file mode 100644
-> +index 0000000000..033f255ace
-> +--- /dev/null
-> ++++ b/ext/exif/tests/bug78793.phpt
-> +@@ -0,0 +1,12 @@
-> ++--TEST--
-> ++Bug #78793: Use-after-free in exif parsing under memory sanitizer
-> ++--FILE--
-> ++<?php
-> ++$f = "ext/exif/tests/bug77950.tiff";
-> ++for ($i = 0; $i < 10; $i++) {
-> ++    @exif_read_data($f);
-> ++}
-> ++?>
-> ++===DONE===
-> ++--EXPECT--
-> ++===DONE===
-> +-- 
-> +2.11.0
-> diff --git a/meta-oe/recipes-devtools/php/php_7.3.9.bb b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-> index e886cb1a2..670c3321c 100644
-> --- a/meta-oe/recipes-devtools/php/php_7.3.9.bb
-> +++ b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-> @@ -9,6 +9,10 @@ SRC_URI += "file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
->              file://debian-php-fixheader.patch \
->              file://CVE-2019-6978.patch \
->              file://CVE-2019-11043.patch \
-> +            file://CVE-2019-11045.patch \
-> +            file://CVE-2019-11046.patch \
-> +            file://CVE-2019-11047.patch \
-> +            file://CVE-2019-11050.patch \
->             "
->  SRC_URI_append_class-target = " \
->                                  file://pear-makefile.patch \
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch b/meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch
+new file mode 100644
+index 0000000000..f16b0eca50
+--- /dev/null
++++ b/meta-oe/recipes-extended/sysdig/sysdig/aarch64.patch
+@@ -0,0 +1,359 @@
++Check if legacy syscalls exist
++
++A lot of legacy syscalls are replaced with *at and are not implemented in newer
++architectures like aarch64
++
++Upstream-Status: Submitted [https://github.com/draios/sysdig/pull/1601]
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++--- a/driver/syscall_table.c
+++++ b/driver/syscall_table.c
++@@ -42,26 +42,46 @@ or GPL2.txt for full copies of the licen
++  * SYSCALL TABLE
++  */
++ const struct syscall_evt_pair g_syscall_table[SYSCALL_TABLE_SIZE] = {
+++#ifdef __NR_open
++ 	[__NR_open - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_OPEN_E, PPME_SYSCALL_OPEN_X},
+++#endif
+++#ifdef __NR_creat
++ 	[__NR_creat - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_CREAT_E, PPME_SYSCALL_CREAT_X},
+++#endif
++ 	[__NR_close - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_CLOSE_E, PPME_SYSCALL_CLOSE_X},
++ 	[__NR_brk - SYSCALL_TABLE_ID0] =                        {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_BRK_4_E, PPME_SYSCALL_BRK_4_X},
++ 	[__NR_read - SYSCALL_TABLE_ID0] =                       {UF_USED, PPME_SYSCALL_READ_E, PPME_SYSCALL_READ_X},
++ 	[__NR_write - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_WRITE_E, PPME_SYSCALL_WRITE_X},
++ 	[__NR_execve - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_EXECVE_19_E, PPME_SYSCALL_EXECVE_19_X},
++ 	[__NR_clone - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_CLONE_20_E, PPME_SYSCALL_CLONE_20_X},
+++#ifdef __NR_fork
++ 	[__NR_fork - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_FORK_20_E, PPME_SYSCALL_FORK_20_X},
+++#endif
+++#ifdef __NR_vfork
++ 	[__NR_vfork - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_VFORK_20_E, PPME_SYSCALL_VFORK_20_X},
+++#endif
+++#ifdef __NR_pipe
++ 	[__NR_pipe - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_PIPE_E, PPME_SYSCALL_PIPE_X},
+++#endif
++ 	[__NR_pipe2 - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_PIPE_E, PPME_SYSCALL_PIPE_X},
+++#ifdef __NR_eventfd
++ 	[__NR_eventfd - SYSCALL_TABLE_ID0] =                    {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_EVENTFD_E, PPME_SYSCALL_EVENTFD_X},
+++#endif
++ 	[__NR_eventfd2 - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_EVENTFD_E, PPME_SYSCALL_EVENTFD_X},
++ 	[__NR_futex - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_FUTEX_E, PPME_SYSCALL_FUTEX_X},
+++#ifdef __NR_stat
++ 	[__NR_stat - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_STAT_E, PPME_SYSCALL_STAT_X},
+++#endif
+++#ifdef __NR_lstat
++ 	[__NR_lstat - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_LSTAT_E, PPME_SYSCALL_LSTAT_X},
+++#endif
++ 	[__NR_fstat - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_FSTAT_E, PPME_SYSCALL_FSTAT_X},
+++#ifdef __NR_epoll_wait
++ 	[__NR_epoll_wait - SYSCALL_TABLE_ID0] =                 {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_EPOLLWAIT_E, PPME_SYSCALL_EPOLLWAIT_X},
+++#endif
+++#ifdef __NR_poll
++ 	[__NR_poll - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_POLL_E, PPME_SYSCALL_POLL_X},
+++#endif
++ #ifdef __NR_select
++ 	[__NR_select - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_SELECT_E, PPME_SYSCALL_SELECT_X},
++ #endif
++@@ -70,13 +90,21 @@ const struct syscall_evt_pair g_syscall_
++ 	[__NR_getcwd - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_GETCWD_E, PPME_SYSCALL_GETCWD_X},
++ 	[__NR_chdir - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_CHDIR_E, PPME_SYSCALL_CHDIR_X},
++ 	[__NR_fchdir - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_FCHDIR_E, PPME_SYSCALL_FCHDIR_X},
+++#ifdef __NR_mkdir
++ 	[__NR_mkdir - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_MKDIR_2_E, PPME_SYSCALL_MKDIR_2_X},
+++#endif
+++#ifdef __NR_rmdir
++ 	[__NR_rmdir - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_RMDIR_2_E, PPME_SYSCALL_RMDIR_2_X},
+++#endif
++ 	[__NR_openat - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_OPENAT_2_E, PPME_SYSCALL_OPENAT_2_X},
++ 	[__NR_mkdirat - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_MKDIRAT_E, PPME_SYSCALL_MKDIRAT_X},
+++#ifdef __NR_link
++ 	[__NR_link - SYSCALL_TABLE_ID0] =                       {UF_USED, PPME_SYSCALL_LINK_2_E, PPME_SYSCALL_LINK_2_X},
+++#endif
++ 	[__NR_linkat - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_LINKAT_2_E, PPME_SYSCALL_LINKAT_2_X},
+++#ifdef __NR_unlink
++ 	[__NR_unlink - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_UNLINK_2_E, PPME_SYSCALL_UNLINK_2_X},
+++#endif
++ 	[__NR_unlinkat - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_UNLINKAT_2_E, PPME_SYSCALL_UNLINKAT_2_X},
++ 	[__NR_pread64 - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_PREAD_E, PPME_SYSCALL_PREAD_X},
++ 	[__NR_pwrite64 - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_PWRITE_E, PPME_SYSCALL_PWRITE_X},
++@@ -85,16 +113,22 @@ const struct syscall_evt_pair g_syscall_
++ 	[__NR_preadv - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_PREADV_E, PPME_SYSCALL_PREADV_X},
++ 	[__NR_pwritev - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_PWRITEV_E, PPME_SYSCALL_PWRITEV_X},
++ 	[__NR_dup - SYSCALL_TABLE_ID0] =                        {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_DUP_E, PPME_SYSCALL_DUP_X},
+++#ifdef __NR_dup2
++ 	[__NR_dup2 - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_DUP_E, PPME_SYSCALL_DUP_X},
+++#endif
++ 	[__NR_dup3 - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SYSCALL_DUP_E, PPME_SYSCALL_DUP_X},
+++#ifdef __NR_signalfd
++ 	[__NR_signalfd - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_SIGNALFD_E, PPME_SYSCALL_SIGNALFD_X},
+++#endif
++ 	[__NR_signalfd4 - SYSCALL_TABLE_ID0] =                  {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_SIGNALFD_E, PPME_SYSCALL_SIGNALFD_X},
++ 	[__NR_kill - SYSCALL_TABLE_ID0] =                       {UF_USED, PPME_SYSCALL_KILL_E, PPME_SYSCALL_KILL_X},
++ 	[__NR_tkill - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_TKILL_E, PPME_SYSCALL_TKILL_X},
++ 	[__NR_tgkill - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_TGKILL_E, PPME_SYSCALL_TGKILL_X},
++ 	[__NR_nanosleep - SYSCALL_TABLE_ID0] =                  {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_NANOSLEEP_E, PPME_SYSCALL_NANOSLEEP_X},
++ 	[__NR_timerfd_create - SYSCALL_TABLE_ID0] =             {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_TIMERFD_CREATE_E, PPME_SYSCALL_TIMERFD_CREATE_X},
+++#ifdef __NR_inotify_init
++ 	[__NR_inotify_init - SYSCALL_TABLE_ID0] =               {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_INOTIFY_INIT_E, PPME_SYSCALL_INOTIFY_INIT_X},
+++#endif
++ 	[__NR_inotify_init1 - SYSCALL_TABLE_ID0] =              {UF_USED | UF_NEVER_DROP, PPME_SYSCALL_INOTIFY_INIT_E, PPME_SYSCALL_INOTIFY_INIT_X},
++ 	[__NR_fchmodat - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_FCHMODAT_E, PPME_SYSCALL_FCHMODAT_X},
++ 	[__NR_fchmod - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_FCHMOD_E, PPME_SYSCALL_FCHMOD_X},
++@@ -114,14 +148,22 @@ const struct syscall_evt_pair g_syscall_
++ #endif
++ /* [__NR_old_select - SYSCALL_TABLE_ID0] =	{UF_USED, PPME_GENERIC_E, PPME_GENERIC_X}, */
++ 	[__NR_pselect6 - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
+++#ifdef __NR_epoll_create
++ 	[__NR_epoll_create - SYSCALL_TABLE_ID0] =               {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
+++#endif
++ 	[__NR_epoll_ctl - SYSCALL_TABLE_ID0] =                  {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
+++#ifdef __NR_uselib
++ 	[__NR_uselib - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
+++#endif
++ 	[__NR_sched_setparam - SYSCALL_TABLE_ID0] =             {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
++ 	[__NR_sched_getparam - SYSCALL_TABLE_ID0] =             {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
++ 	[__NR_syslog - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
+++#ifdef __NR_chmod
++ 	[__NR_chmod - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_CHMOD_E, PPME_SYSCALL_CHMOD_X},
+++#endif
+++#ifdef __NR_lchown
++ 	[__NR_lchown - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_GENERIC_E, PPME_GENERIC_X},
+++#endif
++ #ifdef __NR_utime
++ 	[__NR_utime - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
++ #endif
++@@ -131,8 +173,9 @@ const struct syscall_evt_pair g_syscall_
++ #ifdef __NR_alarm
++ 	[__NR_alarm - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
++ #endif
+++#ifdef __NR_pause
++ 	[__NR_pause - SYSCALL_TABLE_ID0] =                      {UF_USED | UF_ALWAYS_DROP, PPME_GENERIC_E, PPME_GENERIC_X},
++-
+++#endif
++ #ifndef __NR_socketcall
++ 	[__NR_socket - SYSCALL_TABLE_ID0] =                     {UF_USED | UF_NEVER_DROP | UF_SIMPLEDRIVER_KEEP, PPME_SOCKET_SOCKET_E, PPME_SOCKET_SOCKET_X},
++ 	[__NR_bind - SYSCALL_TABLE_ID0] =                       {UF_USED | UF_NEVER_DROP, PPME_SOCKET_BIND_E,  PPME_SOCKET_BIND_X},
++@@ -184,9 +227,13 @@ const struct syscall_evt_pair g_syscall_
++ 	[__NR_process_vm_writev - SYSCALL_TABLE_ID0] =          {UF_USED, PPME_GENERIC_E, PPME_GENERIC_X},
++ #endif
++ 
+++#ifdef __NR_rename
++ 	[__NR_rename - SYSCALL_TABLE_ID0] =                     {UF_USED, PPME_SYSCALL_RENAME_E, PPME_SYSCALL_RENAME_X},
+++#endif
++ 	[__NR_renameat - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_RENAMEAT_E, PPME_SYSCALL_RENAMEAT_X},
+++#ifdef __NR_symlink
++ 	[__NR_symlink - SYSCALL_TABLE_ID0] =                    {UF_USED, PPME_SYSCALL_SYMLINK_E, PPME_SYSCALL_SYMLINK_X},
+++#endif
++ 	[__NR_symlinkat - SYSCALL_TABLE_ID0] =                  {UF_USED, PPME_SYSCALL_SYMLINKAT_E, PPME_SYSCALL_SYMLINKAT_X},
++ 	[__NR_sendfile - SYSCALL_TABLE_ID0] =                   {UF_USED, PPME_SYSCALL_SENDFILE_E, PPME_SYSCALL_SENDFILE_X},
++ #ifdef __NR_sendfile64
++@@ -255,7 +302,9 @@ const struct syscall_evt_pair g_syscall_
++ #ifdef __NR_getresgid32
++ 	[__NR_getresgid32 - SYSCALL_TABLE_ID0] =                {UF_USED, PPME_SYSCALL_GETRESGID_E, PPME_SYSCALL_GETRESGID_X },
++ #endif
+++#ifdef __NR_getdents
++ 	[__NR_getdents - SYSCALL_TABLE_ID0] =                   {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_GETDENTS_E, PPME_SYSCALL_GETDENTS_X},
+++#endif
++ 	[__NR_getdents64 - SYSCALL_TABLE_ID0] =                 {UF_USED | UF_ALWAYS_DROP, PPME_SYSCALL_GETDENTS64_E, PPME_SYSCALL_GETDENTS64_X},
++ #ifdef __NR_setns
++ 	[__NR_setns - SYSCALL_TABLE_ID0] =                      {UF_USED, PPME_SYSCALL_SETNS_E, PPME_SYSCALL_SETNS_X},
++@@ -298,19 +347,33 @@ const enum ppm_syscall_code g_syscall_co
++ 	[__NR_exit - SYSCALL_TABLE_ID0] = PPM_SC_EXIT,
++ 	[__NR_read - SYSCALL_TABLE_ID0] = PPM_SC_READ,
++ 	[__NR_write - SYSCALL_TABLE_ID0] = PPM_SC_WRITE,
+++#ifdef __NR_open
++ 	[__NR_open - SYSCALL_TABLE_ID0] = PPM_SC_OPEN,
+++#endif
++ 	[__NR_close - SYSCALL_TABLE_ID0] = PPM_SC_CLOSE,
+++#ifdef __NR_creat
++ 	[__NR_creat - SYSCALL_TABLE_ID0] = PPM_SC_CREAT,
+++#endif
+++#ifdef __NR_link
++ 	[__NR_link - SYSCALL_TABLE_ID0] = PPM_SC_LINK,
+++#endif
+++#ifdef __NR_unlink
++ 	[__NR_unlink - SYSCALL_TABLE_ID0] = PPM_SC_UNLINK,
+++#endif
++ 	[__NR_chdir - SYSCALL_TABLE_ID0] = PPM_SC_CHDIR,
++ #ifdef __NR_time
++ 	[__NR_time - SYSCALL_TABLE_ID0] = PPM_SC_TIME,
++ #endif
+++#ifdef __NR_mknod
++ 	[__NR_mknod - SYSCALL_TABLE_ID0] = PPM_SC_MKNOD,
+++#endif
+++#ifdef __NR_chmod
++ 	[__NR_chmod - SYSCALL_TABLE_ID0] = PPM_SC_CHMOD,
+++#endif
++ /* [__NR_lchown16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_LCHOWN16, */
+++#ifdef __NR_stat
++ 	[__NR_stat - SYSCALL_TABLE_ID0] = PPM_SC_STAT,
+++#endif
++ 	[__NR_lseek - SYSCALL_TABLE_ID0] = PPM_SC_LSEEK,
++ 	[__NR_getpid - SYSCALL_TABLE_ID0] = PPM_SC_GETPID,
++ 	[__NR_mount - SYSCALL_TABLE_ID0] = PPM_SC_MOUNT,
++@@ -322,17 +385,27 @@ const enum ppm_syscall_code g_syscall_co
++ 	[__NR_alarm - SYSCALL_TABLE_ID0] = PPM_SC_ALARM,
++ #endif
++ 	[__NR_fstat - SYSCALL_TABLE_ID0] = PPM_SC_FSTAT,
+++#ifdef __NR_pause
++ 	[__NR_pause - SYSCALL_TABLE_ID0] = PPM_SC_PAUSE,
+++#endif
++ #ifdef __NR_utime
++ 	[__NR_utime - SYSCALL_TABLE_ID0] = PPM_SC_UTIME,
++ #endif
++ 	[__NR_sync - SYSCALL_TABLE_ID0] = PPM_SC_SYNC,
++ 	[__NR_kill - SYSCALL_TABLE_ID0] = PPM_SC_KILL,
+++#ifdef __NR_rename
++ 	[__NR_rename - SYSCALL_TABLE_ID0] = PPM_SC_RENAME,
+++#endif
+++#ifdef __NR_mkdir
++ 	[__NR_mkdir - SYSCALL_TABLE_ID0] = PPM_SC_MKDIR,
+++#endif
+++#ifdef __NR_rmdir
++ 	[__NR_rmdir - SYSCALL_TABLE_ID0] = PPM_SC_RMDIR,
+++#endif
++ 	[__NR_dup - SYSCALL_TABLE_ID0] = PPM_SC_DUP,
+++#ifdef __NR_pipe
++ 	[__NR_pipe - SYSCALL_TABLE_ID0] = PPM_SC_PIPE,
+++#endif
++ 	[__NR_times - SYSCALL_TABLE_ID0] = PPM_SC_TIMES,
++ 	[__NR_brk - SYSCALL_TABLE_ID0] = PPM_SC_BRK,
++ /* [__NR_setgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETGID16, */
++@@ -345,10 +418,16 @@ const enum ppm_syscall_code g_syscall_co
++ 	[__NR_setpgid - SYSCALL_TABLE_ID0] = PPM_SC_SETPGID,
++ 	[__NR_umask - SYSCALL_TABLE_ID0] = PPM_SC_UMASK,
++ 	[__NR_chroot - SYSCALL_TABLE_ID0] = PPM_SC_CHROOT,
+++#ifdef __NR_ustat
++ 	[__NR_ustat - SYSCALL_TABLE_ID0] = PPM_SC_USTAT,
+++#endif
+++#ifdef __NR_dup2
++ 	[__NR_dup2 - SYSCALL_TABLE_ID0] = PPM_SC_DUP2,
+++#endif
++ 	[__NR_getppid - SYSCALL_TABLE_ID0] = PPM_SC_GETPPID,
+++#ifdef __NR_getpgrp
++ 	[__NR_getpgrp - SYSCALL_TABLE_ID0] = PPM_SC_GETPGRP,
+++#endif
++ 	[__NR_setsid - SYSCALL_TABLE_ID0] = PPM_SC_SETSID,
++ 	[__NR_sethostname - SYSCALL_TABLE_ID0] = PPM_SC_SETHOSTNAME,
++ 	[__NR_setrlimit - SYSCALL_TABLE_ID0] = PPM_SC_SETRLIMIT,
++@@ -359,10 +438,18 @@ const enum ppm_syscall_code g_syscall_co
++ /* [__NR_getgroups16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_GETGROUPS16, */
++ /* [__NR_setgroups16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETGROUPS16, */
++ /* [__NR_old_select - SYSCALL_TABLE_ID0] = PPM_SC_NR_OLD_SELECT, */
+++#ifdef __NR_symlink
++ 	[__NR_symlink - SYSCALL_TABLE_ID0] = PPM_SC_SYMLINK,
+++#endif
+++#ifdef __NR_lstat
++ 	[__NR_lstat - SYSCALL_TABLE_ID0] = PPM_SC_LSTAT,
+++#endif
+++#ifdef __NR_readlink
++ 	[__NR_readlink - SYSCALL_TABLE_ID0] = PPM_SC_READLINK,
+++#endif
+++#ifdef __NR_uselib
++ 	[__NR_uselib - SYSCALL_TABLE_ID0] = PPM_SC_USELIB,
+++#endif
++ 	[__NR_swapon - SYSCALL_TABLE_ID0] = PPM_SC_SWAPON,
++ 	[__NR_reboot - SYSCALL_TABLE_ID0] = PPM_SC_REBOOT,
++ /* [__NR_old_readdir - SYSCALL_TABLE_ID0] = PPM_SC_NR_OLD_READDIR, */
++@@ -399,12 +486,16 @@ const enum ppm_syscall_code g_syscall_co
++ 	[__NR_delete_module - SYSCALL_TABLE_ID0] = PPM_SC_DELETE_MODULE,
++ 	[__NR_getpgid - SYSCALL_TABLE_ID0] = PPM_SC_GETPGID,
++ 	[__NR_fchdir - SYSCALL_TABLE_ID0] = PPM_SC_FCHDIR,
+++#ifdef __NR_sysfs
++ 	[__NR_sysfs - SYSCALL_TABLE_ID0] = PPM_SC_SYSFS,
+++#endif
++ 	[__NR_personality - SYSCALL_TABLE_ID0] = PPM_SC_PERSONALITY,
++ /* [__NR_setfsuid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETFSUID16, */
++ /* [__NR_setfsgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETFSGID16, */
++ /* [__NR_llseek - SYSCALL_TABLE_ID0] = PPM_SC_NR_LLSEEK, */
+++#ifdef __NR_getdents
++ 	[__NR_getdents - SYSCALL_TABLE_ID0] = PPM_SC_GETDENTS,
+++#endif
++ #ifdef __NR_select
++ 	[__NR_select - SYSCALL_TABLE_ID0] = PPM_SC_SELECT,
++ #endif
++@@ -431,7 +522,9 @@ const enum ppm_syscall_code g_syscall_co
++ 	[__NR_mremap - SYSCALL_TABLE_ID0] = PPM_SC_MREMAP,
++ /* [__NR_setresuid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETRESUID16, */
++ /* [__NR_getresuid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_GETRESUID16, */
+++#ifdef __NR_poll
++ 	[__NR_poll - SYSCALL_TABLE_ID0] = PPM_SC_POLL,
+++#endif
++ /* [__NR_setresgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_SETRESGID16, */
++ /* [__NR_getresgid16 - SYSCALL_TABLE_ID0] = PPM_SC_NR_GETRESGID16, */
++ 	[__NR_prctl - SYSCALL_TABLE_ID0] = PPM_SC_PRCTL,
++@@ -453,13 +546,17 @@ const enum ppm_syscall_code g_syscall_co
++ 	[__NR_getrlimit - SYSCALL_TABLE_ID0] = PPM_SC_GETRLIMIT,
++ #endif
++ /* [__NR_mmap_pgoff - SYSCALL_TABLE_ID0] = PPM_SC_NR_MMAP_PGOFF, */
+++#ifdef __NR_lchown
++ 	[__NR_lchown - SYSCALL_TABLE_ID0] = PPM_SC_LCHOWN,
+++#endif
++ 	[__NR_setreuid - SYSCALL_TABLE_ID0] = PPM_SC_SETREUID,
++ 	[__NR_setregid - SYSCALL_TABLE_ID0] = PPM_SC_SETREGID,
++ 	[__NR_getgroups - SYSCALL_TABLE_ID0] = PPM_SC_GETGROUPS,
++ 	[__NR_setgroups - SYSCALL_TABLE_ID0] = PPM_SC_SETGROUPS,
++ 	[__NR_fchown - SYSCALL_TABLE_ID0] = PPM_SC_FCHOWN,
+++#ifdef __NR_chown
++ 	[__NR_chown - SYSCALL_TABLE_ID0] = PPM_SC_CHOWN,
+++#endif
++ 	[__NR_setfsuid - SYSCALL_TABLE_ID0] = PPM_SC_SETFSUID,
++ 	[__NR_setfsgid - SYSCALL_TABLE_ID0] = PPM_SC_SETFSGID,
++ 	[__NR_pivot_root - SYSCALL_TABLE_ID0] = PPM_SC_PIVOT_ROOT,
++@@ -494,9 +591,13 @@ const enum ppm_syscall_code g_syscall_co
++ 	[__NR_io_submit - SYSCALL_TABLE_ID0] = PPM_SC_IO_SUBMIT,
++ 	[__NR_io_cancel - SYSCALL_TABLE_ID0] = PPM_SC_IO_CANCEL,
++ 	[__NR_exit_group - SYSCALL_TABLE_ID0] = PPM_SC_EXIT_GROUP,
+++#ifdef __NR_epoll_create
++ 	[__NR_epoll_create - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_CREATE,
+++#endif
++ 	[__NR_epoll_ctl - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_CTL,
+++#ifdef __NR_epoll_wait
++ 	[__NR_epoll_wait - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_WAIT,
+++#endif
++ 	[__NR_remap_file_pages - SYSCALL_TABLE_ID0] = PPM_SC_REMAP_FILE_PAGES,
++ 	[__NR_set_tid_address - SYSCALL_TABLE_ID0] = PPM_SC_SET_TID_ADDRESS,
++ 	[__NR_timer_create - SYSCALL_TABLE_ID0] = PPM_SC_TIMER_CREATE,
++@@ -509,7 +610,9 @@ const enum ppm_syscall_code g_syscall_co
++ 	[__NR_clock_getres - SYSCALL_TABLE_ID0] = PPM_SC_CLOCK_GETRES,
++ 	[__NR_clock_nanosleep - SYSCALL_TABLE_ID0] = PPM_SC_CLOCK_NANOSLEEP,
++ 	[__NR_tgkill - SYSCALL_TABLE_ID0] = PPM_SC_TGKILL,
+++#ifdef __NR_utimes
++ 	[__NR_utimes - SYSCALL_TABLE_ID0] = PPM_SC_UTIMES,
+++#endif
++ 	[__NR_mq_open - SYSCALL_TABLE_ID0] = PPM_SC_MQ_OPEN,
++ 	[__NR_mq_unlink - SYSCALL_TABLE_ID0] = PPM_SC_MQ_UNLINK,
++ 	[__NR_mq_timedsend - SYSCALL_TABLE_ID0] = PPM_SC_MQ_TIMEDSEND,
++@@ -523,14 +626,18 @@ const enum ppm_syscall_code g_syscall_co
++ 	[__NR_keyctl - SYSCALL_TABLE_ID0] = PPM_SC_KEYCTL,
++ 	[__NR_ioprio_set - SYSCALL_TABLE_ID0] = PPM_SC_IOPRIO_SET,
++ 	[__NR_ioprio_get - SYSCALL_TABLE_ID0] = PPM_SC_IOPRIO_GET,
+++#ifdef __NR_inotify_init
++ 	[__NR_inotify_init - SYSCALL_TABLE_ID0] = PPM_SC_INOTIFY_INIT,
+++#endif
++ 	[__NR_inotify_add_watch - SYSCALL_TABLE_ID0] = PPM_SC_INOTIFY_ADD_WATCH,
++ 	[__NR_inotify_rm_watch - SYSCALL_TABLE_ID0] = PPM_SC_INOTIFY_RM_WATCH,
++ 	[__NR_openat - SYSCALL_TABLE_ID0] = PPM_SC_OPENAT,
++ 	[__NR_mkdirat - SYSCALL_TABLE_ID0] = PPM_SC_MKDIRAT,
++ 	[__NR_mknodat - SYSCALL_TABLE_ID0] = PPM_SC_MKNODAT,
++ 	[__NR_fchownat - SYSCALL_TABLE_ID0] = PPM_SC_FCHOWNAT,
+++#ifdef __NR_futimesat
++ 	[__NR_futimesat - SYSCALL_TABLE_ID0] = PPM_SC_FUTIMESAT,
+++#endif
++ 	[__NR_unlinkat - SYSCALL_TABLE_ID0] = PPM_SC_UNLINKAT,
++ 	[__NR_renameat - SYSCALL_TABLE_ID0] = PPM_SC_RENAMEAT,
++ 	[__NR_linkat - SYSCALL_TABLE_ID0] = PPM_SC_LINKAT,
++@@ -551,9 +658,13 @@ const enum ppm_syscall_code g_syscall_co
++ #endif
++ 	[__NR_epoll_pwait - SYSCALL_TABLE_ID0] = PPM_SC_EPOLL_PWAIT,
++ 	[__NR_utimensat - SYSCALL_TABLE_ID0] = PPM_SC_UTIMENSAT,
+++#ifdef __NR_signalfd
++ 	[__NR_signalfd - SYSCALL_TABLE_ID0] = PPM_SC_SIGNALFD,
+++#endif
++ 	[__NR_timerfd_create - SYSCALL_TABLE_ID0] = PPM_SC_TIMERFD_CREATE,
+++#ifdef __NR_eventfd
++ 	[__NR_eventfd - SYSCALL_TABLE_ID0] = PPM_SC_EVENTFD,
+++#endif
++ 	[__NR_timerfd_settime - SYSCALL_TABLE_ID0] = PPM_SC_TIMERFD_SETTIME,
++ 	[__NR_timerfd_gettime - SYSCALL_TABLE_ID0] = PPM_SC_TIMERFD_GETTIME,
++ 	[__NR_signalfd4 - SYSCALL_TABLE_ID0] = PPM_SC_SIGNALFD4,
+diff --git a/meta-oe/recipes-extended/sysdig/sysdig_git.bb b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
+index ce1a4245ba..11eb5db9e4 100644
+--- a/meta-oe/recipes-extended/sysdig/sysdig_git.bb
++++ b/meta-oe/recipes-extended/sysdig/sysdig_git.bb
+@@ -12,7 +12,6 @@ inherit cmake pkgconfig
+ JIT ?= "jit"
+ JIT_mipsarchn32 = ""
+ JIT_mipsarchn64 = ""
+-JIT_aarch64 = ""
+ 
+ DEPENDS += "lua${JIT} zlib c-ares grpc-native grpc curl ncurses jsoncpp tbb jq openssl elfutils protobuf protobuf-native jq-native"
+ RDEPENDS_${PN} = "bash"
+@@ -21,8 +20,8 @@ SRC_URI = "git://github.com/draios/sysdig.git;branch=dev \
+            file://0001-fix-build-with-LuaJIT-2.1-betas.patch \
+            file://0001-Fix-build-with-musl-backtrace-APIs-are-glibc-specifi.patch \
+            file://fix-uint64-const.patch \
++           file://aarch64.patch \
+           "
+-# v0.26.4
+ SRCREV = "9fa0d129668fdabf256446be4be35838888052d9"
+ PV = "0.26.5"
+ 
+-- 
+2.25.1
 
 
