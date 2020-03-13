@@ -1,35 +1,33 @@
-Return-Path: <wangmy@cn.fujitsu.com>
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EBB561CBC
+	by mail.openembedded.org (Postfix) with ESMTP id D0E4560C1E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 05:21:40 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,547,1574092800"; d="scan'208";a="86257217"
+	Fri, 13 Mar 2020 06:56:29 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,547,1574092800"; d="scan'208";a="86263297"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 13 Mar 2020 13:21:40 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 304E750A9986
+	by heian.cn.fujitsu.com with ESMTP; 13 Mar 2020 14:56:25 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id AFF69406AB15
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 13:11:39 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Fri, 13 Mar 2020 13:21:38 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Fri, 13 Mar 2020 13:21:42 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
+	Fri, 13 Mar 2020 14:46:20 +0800 (CST)
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Fri, 13 Mar 2020 14:56:21 +0800
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Fri, 13 Mar 2020 14:56:21 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 13 Mar 2020 04:10:24 -0700
-Message-ID: <1584097824-54462-3-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
+Date: Fri, 13 Mar 2020 14:58:41 +0800
+Message-ID: <20200313065841.17365-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 304E750A9986.A4AD8
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: AFF69406AB15.AB28A
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][zeus][PATCH] php: CVE-2019-11045.patch CVE-2019-11046.patch CVE-2019-11047.patch CVE-2019-11050.patch
+Subject: [zeus] [meta-networking] [PATCH] wireshark: CVE-2019-19553
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,318 +40,247 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 05:21:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 13 Mar 2020 06:56:30 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
 Security Advisory
-
 References:
-https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11045
-https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11046
-https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11047
-https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11050
+https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-19553
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../php/php/CVE-2019-11045.patch              | 78 +++++++++++++++++++
- .../php/php/CVE-2019-11046.patch              | 59 ++++++++++++++
- .../php/php/CVE-2019-11047.patch              | 57 ++++++++++++++
- .../php/php/CVE-2019-11050.patch              | 53 +++++++++++++
- meta-oe/recipes-devtools/php/php_7.3.9.bb     |  4 +
- 5 files changed, 251 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11045.patch
- create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11046.patch
- create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11047.patch
- create mode 100644 meta-oe/recipes-devtools/php/php/CVE-2019-11050.patch
+ ..._identifier_id-after-dissecting-Cont.patch | 204 ++++++++++++++++++
+ .../wireshark/wireshark_3.0.6.bb              |   3 +-
+ 2 files changed, 206 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/wireshark/wireshark/0001-CMS-reset-object_identifier_id-after-dissecting-Cont.patch
 
-diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-11045.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-11045.patch
+diff --git a/meta-networking/recipes-support/wireshark/wireshark/0001-CMS-reset-object_identifier_id-after-dissecting-Cont.patch b/meta-networking/recipes-support/wireshark/wireshark/0001-CMS-reset-object_identifier_id-after-dissecting-Cont.patch
 new file mode 100644
-index 000000000..3b3c187a4
+index 000000000..08060db04
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/CVE-2019-11045.patch
-@@ -0,0 +1,78 @@
-+From a5a15965da23c8e97657278fc8dfbf1dfb20c016 Mon Sep 17 00:00:00 2001
-+From: "Christoph M. Becker" <cmbecker69@gmx.de>
-+Date: Mon, 25 Nov 2019 16:56:34 +0100
-+Subject: [PATCH] Fix #78863: DirectoryIterator class silently truncates after
-+ a null byte
++++ b/meta-networking/recipes-support/wireshark/wireshark/0001-CMS-reset-object_identifier_id-after-dissecting-Cont.patch
+@@ -0,0 +1,204 @@
++From e1731e2bc1d2a78b67e18fa66e7440acb9bea563 Mon Sep 17 00:00:00 2001
++From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
++Date: Fri, 13 Mar 2020 13:54:50 +0800
++Subject: [PATCH] CMS: reset object_identifier_id after dissecting ContentInfo
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
 +
-+Since the constructor of DirectoryIterator and friends is supposed to
-+accepts paths (i.e. strings without NUL bytes), we must not accept
-+arbitrary strings.
++MIME-Version: 1.0
++Content-Type: text/plain; charset=utf8
++Content-Transfer-Encoding: 8bit
 +
-+Upstream-Status: Accepted
-+CVE: CVE-2019-11045
-+   
-+Reference to upstream patch:
-+http://git.php.net/?p=php-src.git;a=commit;h=a5a15965da23c8e97657278fc8dfbf1dfb20c016
-+http://git.php.net/?p=php-src.git;a=commit;h=d74907b8575e6edb83b728c2a94df434c23e1f79
++Bug: 15961
++Change-Id: I3d6b3e96103b69f88fcb512da81fa20ff6a1c40e
++Reviewed-on: https://code.wireshark.org/review/34960
++Petri-Dish: Pascal Quantin <pascal@wireshark.org>
++Tested-by: Petri Dish Buildbot
++Reviewed-by: Stig BjÃ¸rlykke <stig@bjorlykke.org>
++Reviewed-by: Roland Knall <rknall@gmail.com>
++(cherry picked from commit 23850a3342d64b9c9808f14c20bfea6d22b7dc08)
++Conflicts:
++	epan/dissectors/packet-cms.c
++Reviewed-on: https://code.wireshark.org/review/34975
++Reviewed-by: Pascal Quantin <pascal@wireshark.org>
 +---
-+ ext/spl/spl_directory.c     |  4 ++--
-+ ext/spl/tests/bug78863.phpt | 31 +++++++++++++++++++++++++++++++
-+ 2 files changed, 33 insertions(+), 2 deletions(-)
-+ create mode 100644 ext/spl/tests/bug78863.phpt
++ epan/dissectors/asn1/cms/cms.cnf              |  1 +
++ .../dissectors/asn1/cms/packet-cms-template.c |  2 +-
++ epan/dissectors/packet-cms.c                  | 31 ++++++++++---------
++ 3 files changed, 18 insertions(+), 16 deletions(-)
 +
-+diff --git a/ext/spl/spl_directory.c b/ext/spl/spl_directory.c
-+index 91ea2e0265..56e809b1c7 100644
-+--- a/ext/spl/spl_directory.c
-++++ b/ext/spl/spl_directory.c
-+@@ -708,10 +708,10 @@ void spl_filesystem_object_construct(INTERNAL_FUNCTION_PARAMETERS, zend_long cto
++diff --git a/epan/dissectors/asn1/cms/cms.cnf b/epan/dissectors/asn1/cms/cms.cnf
++index ab94f8c..8feef01 100644
++--- a/epan/dissectors/asn1/cms/cms.cnf
+++++ b/epan/dissectors/asn1/cms/cms.cnf
++@@ -122,6 +122,7 @@ FirmwarePackageLoadError/version		fwErrorVersion
++   top_tree = tree;
++   %(DEFAULT_BODY)s
++   content_tvb = NULL;
+++  object_identifier_id = NULL;
++   top_tree = NULL;
 + 
-+ 	if (SPL_HAS_FLAG(ctor_flags, DIT_CTOR_FLAGS)) {
-+ 		flags = SPL_FILE_DIR_KEY_AS_PATHNAME|SPL_FILE_DIR_CURRENT_AS_FILEINFO;
-+-		parsed = zend_parse_parameters(ZEND_NUM_ARGS(), "s|l", &path, &len, &flags);
-++		parsed = zend_parse_parameters(ZEND_NUM_ARGS(), "p|l", &path, &len, &flags);
-+ 	} else {
-+ 		flags = SPL_FILE_DIR_KEY_AS_PATHNAME|SPL_FILE_DIR_CURRENT_AS_SELF;
-+-		parsed = zend_parse_parameters(ZEND_NUM_ARGS(), "s", &path, &len);
-++		parsed = zend_parse_parameters(ZEND_NUM_ARGS(), "p", &path, &len);
-+ 	}
-+ 	if (SPL_HAS_FLAG(ctor_flags, SPL_FILE_DIR_SKIPDOTS)) {
-+ 		flags |= SPL_FILE_DIR_SKIPDOTS;
-+diff --git a/ext/spl/tests/bug78863.phpt b/ext/spl/tests/bug78863.phpt
-+new file mode 100644
-+index 0000000000..dc88d98dee
-+--- /dev/null
-++++ b/ext/spl/tests/bug78863.phpt
-+@@ -0,0 +1,31 @@
-++--TEST--
-++Bug #78863 (DirectoryIterator class silently truncates after a null byte)
-++--FILE--
-++<?php
-++$dir = __DIR__ . '/bug78863';
-++mkdir($dir);
-++touch("$dir/bad");
-++mkdir("$dir/sub");
-++touch("$dir/sub/good");
-++
-++$it = new DirectoryIterator(__DIR__ . "/bug78863\0/sub");
-++foreach ($it as $fileinfo) {
-++    if (!$fileinfo->isDot()) {
-++        var_dump($fileinfo->getFilename());
-++    }
-++}
-++?>
-++--EXPECTF--
-++Fatal error: Uncaught UnexpectedValueException: DirectoryIterator::__construct() expects parameter 1 to be a valid path, string given in %s:%d
-++Stack trace:
-++#0 %s(%d): DirectoryIterator->__construct('%s')
-++#1 {main}
-++  thrown in %s on line %d
-++--CLEAN--
-++<?php
-++$dir = __DIR__ . '/bug78863';
-++unlink("$dir/sub/good");
-++rmdir("$dir/sub");
-++unlink("$dir/bad");
-++rmdir($dir);
-++?>
-+-- 
-+2.11.0
-diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-11046.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-11046.patch
-new file mode 100644
-index 000000000..711b8525a
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/CVE-2019-11046.patch
-@@ -0,0 +1,59 @@
-+From 2d07f00b73d8f94099850e0f5983e1cc5817c196 Mon Sep 17 00:00:00 2001
-+From: "Christoph M. Becker" <cmbecker69@gmx.de>
-+Date: Sat, 30 Nov 2019 12:26:37 +0100
-+Subject: [PATCH] Fix #78878: Buffer underflow in bc_shift_addsub
-+
-+We must not rely on `isdigit()` to detect digits, since we only support
-+decimal ASCII digits in the following processing.
-+
-+(cherry picked from commit eb23c6008753b1cdc5359dead3a096dce46c9018)
-+
-+Upstream-Status: Accepted
-+CVE: CVE-2019-11046
-+   
-+Reference to upstream patch:
-+http://git.php.net/?p=php-src.git;a=commit;h=eb23c6008753b1cdc5359dead3a096dce46c9018
-+http://git.php.net/?p=php-src.git;a=commit;h=2d07f00b73d8f94099850e0f5983e1cc5817c196
-+---
-+ ext/bcmath/libbcmath/src/str2num.c |  4 ++--
-+ ext/bcmath/tests/bug78878.phpt     | 13 +++++++++++++
-+ 2 files changed, 15 insertions(+), 2 deletions(-)
-+ create mode 100644 ext/bcmath/tests/bug78878.phpt
-+
-+diff --git a/ext/bcmath/libbcmath/src/str2num.c b/ext/bcmath/libbcmath/src/str2num.c
-+index f38d341570..03aec15930 100644
-+--- a/ext/bcmath/libbcmath/src/str2num.c
-++++ b/ext/bcmath/libbcmath/src/str2num.c
-+@@ -57,9 +57,9 @@ bc_str2num (bc_num *num, char *str, int scale)
-+   zero_int = FALSE;
-+   if ( (*ptr == '+') || (*ptr == '-'))  ptr++;  /* Sign */
-+   while (*ptr == '0') ptr++;			/* Skip leading zeros. */
-+-  while (isdigit((int)*ptr)) ptr++, digits++;	/* digits */
-++  while (*ptr >= '0' && *ptr <= '9') ptr++, digits++;	/* digits */
-+   if (*ptr == '.') ptr++;			/* decimal point */
-+-  while (isdigit((int)*ptr)) ptr++, strscale++;	/* digits */
-++  while (*ptr >= '0' && *ptr <= '9') ptr++, strscale++;	/* digits */
-+   if ((*ptr != '\0') || (digits+strscale == 0))
-+     {
-+       *num = bc_copy_num (BCG(_zero_));
-+diff --git a/ext/bcmath/tests/bug78878.phpt b/ext/bcmath/tests/bug78878.phpt
-+new file mode 100644
-+index 0000000000..2c9d72b946
-+--- /dev/null
-++++ b/ext/bcmath/tests/bug78878.phpt
-+@@ -0,0 +1,13 @@
-++--TEST--
-++Bug #78878 (Buffer underflow in bc_shift_addsub)
-++--SKIPIF--
-++<?php
-++if (!extension_loaded('bcmath')) die('skip bcmath extension not available');
-++?>
-++--FILE--
-++<?php
-++print @bcmul("\xB26483605105519922841849335928742092", bcpowmod(2, 65535, -4e-4));
-++?>
-++--EXPECT--
-++bc math warning: non-zero scale in modulus
-++0
-+-- 
-+2.11.0
-diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-11047.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-11047.patch
-new file mode 100644
-index 000000000..e2922bf8f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/CVE-2019-11047.patch
-@@ -0,0 +1,57 @@
-+From d348cfb96f2543565691010ade5e0346338be5a7 Mon Sep 17 00:00:00 2001
-+From: Stanislav Malyshev <stas@php.net>
-+Date: Mon, 16 Dec 2019 00:10:39 -0800
-+Subject: [PATCH] Fixed bug #78910
-+
-+Upstream-Status: Accepted
-+CVE-2019-11047
-+   
-+Reference to upstream patch:
-+http://git.php.net/?p=php-src.git;a=commit;h=d348cfb96f2543565691010ade5e0346338be5a7
-+http://git.php.net/?p=php-src.git;a=commit;h=57325460d2bdee01a13d8e6cf03345c90543ff4f
-+---
-+ ext/exif/exif.c              |  3 ++-
-+ ext/exif/tests/bug78910.phpt | 17 +++++++++++++++++
-+ 2 files changed, 19 insertions(+), 1 deletion(-)
-+ create mode 100644 ext/exif/tests/bug78910.phpt
-+
-+diff --git a/ext/exif/exif.c b/ext/exif/exif.c
-+index 2804807e..a5780113 100644
-+--- a/ext/exif/exif.c
-++++ b/ext/exif/exif.c
-+@@ -3138,7 +3138,8 @@ static int exif_process_IFD_in_MAKERNOTE(image_info_type *ImageInfo, char * valu
-+ 		/*exif_error_docref(NULL EXIFERR_CC, ImageInfo, E_NOTICE, "check (%s)", maker_note->make?maker_note->make:"");*/
-+ 		if (maker_note->make && (!ImageInfo->make || strcmp(maker_note->make, ImageInfo->make)))
-+ 			continue;
-+-		if (maker_note->id_string && strncmp(maker_note->id_string, value_ptr, maker_note->id_string_len))
-++		if (maker_note->id_string && value_len >= maker_note->id_string_len
-++				&& strncmp(maker_note->id_string, value_ptr, maker_note->id_string_len))
-+ 			continue;
-+ 		break;
-+ 	}
-+diff --git a/ext/exif/tests/bug78910.phpt b/ext/exif/tests/bug78910.phpt
-+new file mode 100644
-+index 00000000..f5b1c32c
-+--- /dev/null
-++++ b/ext/exif/tests/bug78910.phpt
-+@@ -0,0 +1,17 @@
-++--TEST--
-++Bug #78910: Heap-buffer-overflow READ in exif (OSS-Fuzz #19044)
-++--FILE--
-++<?php
-++
-++var_dump(exif_read_data('data:image/jpg;base64,TU0AKgAAAAwgICAgAAIBDwAEAAAAAgAAACKSfCAgAAAAAEZVSklGSUxN'));
-++
-++?>
-++--EXPECTF--
-++Notice: exif_read_data(): Read from TIFF: tag(0x927C, MakerNote  ): Illegal format code 0x2020, switching to BYTE in %s on line %d
-++
-++Warning: exif_read_data(): Process tag(x927C=MakerNote  ): Illegal format code 0x2020, suppose BYTE in %s on line %d
-++
-++Warning: exif_read_data(): IFD data too short: 0x0000 offset 0x000C in %s on line %d
-++
-++Warning: exif_read_data(): Invalid TIFF file in %s on line %d
-++bool(false)
-+-- 
-+2.17.1
-+
-diff --git a/meta-oe/recipes-devtools/php/php/CVE-2019-11050.patch b/meta-oe/recipes-devtools/php/php/CVE-2019-11050.patch
-new file mode 100644
-index 000000000..700b99bd9
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/CVE-2019-11050.patch
-@@ -0,0 +1,53 @@
-+From c14eb8de974fc8a4d74f3515424c293bc7a40fba Mon Sep 17 00:00:00 2001
-+From: Stanislav Malyshev <stas@php.net>
-+Date: Mon, 16 Dec 2019 01:14:38 -0800
-+Subject: [PATCH] Fix bug #78793
-+
-+Upstream-Status: Accepted
-+CVE-2019-11050
-+   
-+Reference to upstream patch:
-+http://git.php.net/?p=php-src.git;a=commit;h=c14eb8de974fc8a4d74f3515424c293bc7a40fba
-+http://git.php.net/?p=php-src.git;a=commit;h=1b3b4a0d367b6f0b67e9f73d82f53db6c6b722b2
-+---
-+ ext/exif/exif.c              |  5 +++--
-+ ext/exif/tests/bug78793.phpt | 12 ++++++++++++
-+ 2 files changed, 15 insertions(+), 2 deletions(-)
-+ create mode 100644 ext/exif/tests/bug78793.phpt
-+
-+diff --git a/ext/exif/exif.c b/ext/exif/exif.c
-+index c0be05922f..7fe055f381 100644
-+--- a/ext/exif/exif.c
-++++ b/ext/exif/exif.c
-+@@ -3240,8 +3240,9 @@ static int exif_process_IFD_in_MAKERNOTE(image_info_type *ImageInfo, char * valu
-+ 	}
++ #.FN_PARS ContentType
++diff --git a/epan/dissectors/asn1/cms/packet-cms-template.c b/epan/dissectors/asn1/cms/packet-cms-template.c
++index 2e803ec..931fd4f 100644
++--- a/epan/dissectors/asn1/cms/packet-cms-template.c
+++++ b/epan/dissectors/asn1/cms/packet-cms-template.c
++@@ -43,7 +43,7 @@ static int hf_cms_ci_contentType = -1;
++ static int dissect_cms_OCTET_STRING(gboolean implicit_tag _U_, tvbuff_t *tvb, int offset, asn1_ctx_t *actx, proto_tree *tree, int hf_index _U_) ; /* XXX kill a compiler warning until asn2wrs stops generating these silly wrappers */
 + 
-+ 	for (de=0;de<NumDirEntries;de++) {
-+-		if (!exif_process_IFD_TAG(ImageInfo, dir_start + 2 + 12 * de,
-+-								  offset_base, data_len, displacement, section_index, 0, maker_note->tag_table)) {
-++		size_t offset = 2 + 12 * de;
-++		if (!exif_process_IFD_TAG(ImageInfo, dir_start + offset,
-++								  offset_base, data_len - offset, displacement, section_index, 0, maker_note->tag_table)) {
-+ 			return FALSE;
-+ 		}
-+ 	}
-+diff --git a/ext/exif/tests/bug78793.phpt b/ext/exif/tests/bug78793.phpt
-+new file mode 100644
-+index 0000000000..033f255ace
-+--- /dev/null
-++++ b/ext/exif/tests/bug78793.phpt
-+@@ -0,0 +1,12 @@
-++--TEST--
-++Bug #78793: Use-after-free in exif parsing under memory sanitizer
-++--FILE--
-++<?php
-++$f = "ext/exif/tests/bug77950.tiff";
-++for ($i = 0; $i < 10; $i++) {
-++    @exif_read_data($f);
-++}
-++?>
-++===DONE===
-++--EXPECT--
-++===DONE===
++ 
++-static const char *object_identifier_id;
+++static const char *object_identifier_id = NULL;
++ static tvbuff_t *content_tvb = NULL;
++ 
++ static proto_tree *top_tree=NULL;
++diff --git a/epan/dissectors/packet-cms.c b/epan/dissectors/packet-cms.c
++index 690513d..2a6942f 100644
++--- a/epan/dissectors/packet-cms.c
+++++ b/epan/dissectors/packet-cms.c
++@@ -311,7 +311,7 @@ static gint ett_cms_FirmwarePackageMessageDigest = -1;
++ static int dissect_cms_OCTET_STRING(gboolean implicit_tag _U_, tvbuff_t *tvb, int offset, asn1_ctx_t *actx, proto_tree *tree, int hf_index _U_) ; /* XXX kill a compiler warning until asn2wrs stops generating these silly wrappers */
++ 
++ 
++-static const char *object_identifier_id;
+++static const char *object_identifier_id = NULL;
++ static tvbuff_t *content_tvb = NULL;
++ 
++ static proto_tree *top_tree=NULL;
++@@ -373,7 +373,7 @@ cms_verify_msg_digest(proto_item *pi, tvbuff_t *content, const char *alg, tvbuff
++ 
++ int
++ dissect_cms_ContentType(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 131 "./asn1/cms/cms.cnf"
+++#line 132 "./asn1/cms/cms.cnf"
++   	const char *name = NULL;
++ 
++ 	  offset = dissect_ber_object_identifier_str(implicit_tag, actx, tree, tvb, offset, hf_index, &object_identifier_id);
++@@ -393,7 +393,7 @@ dissect_cms_ContentType(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset
++ 
++ static int
++ dissect_cms_T_content(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 141 "./asn1/cms/cms.cnf"
+++#line 142 "./asn1/cms/cms.cnf"
++   offset=call_ber_oid_callback(object_identifier_id, tvb, offset, actx->pinfo, tree, NULL);
++ 
++ 
++@@ -417,6 +417,7 @@ dissect_cms_ContentInfo(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset
++                                    ContentInfo_sequence, hf_index, ett_cms_ContentInfo);
++ 
++   content_tvb = NULL;
+++  object_identifier_id = NULL;
++   top_tree = NULL;
++ 
++ 
++@@ -470,7 +471,7 @@ dissect_cms_DigestAlgorithmIdentifiers(gboolean implicit_tag _U_, tvbuff_t *tvb
++ 
++ static int
++ dissect_cms_T_eContent(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 145 "./asn1/cms/cms.cnf"
+++#line 146 "./asn1/cms/cms.cnf"
++ 
++   offset = dissect_ber_octet_string(FALSE, actx, tree, tvb, offset, hf_index, &content_tvb);
++ 
++@@ -504,7 +505,7 @@ dissect_cms_EncapsulatedContentInfo(gboolean implicit_tag _U_, tvbuff_t *tvb _U_
++ 
++ static int
++ dissect_cms_T_attrType(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 175 "./asn1/cms/cms.cnf"
+++#line 176 "./asn1/cms/cms.cnf"
++   const char *name = NULL;
++ 
++     offset = dissect_ber_object_identifier_str(implicit_tag, actx, tree, tvb, offset, hf_cms_attrType, &object_identifier_id);
++@@ -524,7 +525,7 @@ dissect_cms_T_attrType(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset
++ 
++ static int
++ dissect_cms_AttributeValue(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 185 "./asn1/cms/cms.cnf"
+++#line 186 "./asn1/cms/cms.cnf"
++ 
++   offset=call_ber_oid_callback(object_identifier_id, tvb, offset, actx->pinfo, tree, NULL);
++ 
++@@ -786,7 +787,7 @@ dissect_cms_T_otherRevInfoFormat(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, i
++ 
++ static int
++ dissect_cms_T_otherRevInfo(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 169 "./asn1/cms/cms.cnf"
+++#line 170 "./asn1/cms/cms.cnf"
++   offset=call_ber_oid_callback(object_identifier_id, tvb, offset, actx->pinfo, tree, NULL);
++ 
++ 
++@@ -1123,7 +1124,7 @@ dissect_cms_T_keyAttrId(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset
++ 
++ static int
++ dissect_cms_T_keyAttr(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 164 "./asn1/cms/cms.cnf"
+++#line 165 "./asn1/cms/cms.cnf"
++   offset=call_ber_oid_callback(object_identifier_id, tvb, offset, actx->pinfo, tree, NULL);
++ 
++ 
++@@ -1311,7 +1312,7 @@ dissect_cms_T_oriType(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _
++ 
++ static int
++ dissect_cms_T_oriValue(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 158 "./asn1/cms/cms.cnf"
+++#line 159 "./asn1/cms/cms.cnf"
++   offset=call_ber_oid_callback(object_identifier_id, tvb, offset, actx->pinfo, tree, NULL);
++ 
++ 
++@@ -1388,14 +1389,14 @@ dissect_cms_ContentEncryptionAlgorithmIdentifier(gboolean implicit_tag _U_, tvbu
++ 
++ static int
++ dissect_cms_EncryptedContent(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 235 "./asn1/cms/cms.cnf"
+++#line 236 "./asn1/cms/cms.cnf"
++ 	tvbuff_t *encrypted_tvb;
++ 	proto_item *item;
++ 
++   offset = dissect_ber_octet_string(implicit_tag, actx, tree, tvb, offset, hf_index,
++                                        &encrypted_tvb);
++ 
++-#line 240 "./asn1/cms/cms.cnf"
+++#line 241 "./asn1/cms/cms.cnf"
++ 
++ 	item = actx->created_item;
++ 
++@@ -1553,7 +1554,7 @@ dissect_cms_AuthenticatedData(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int
++ 
++ static int
++ dissect_cms_MessageDigest(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 189 "./asn1/cms/cms.cnf"
+++#line 190 "./asn1/cms/cms.cnf"
++   proto_item *pi;
++   int old_offset = offset;
++ 
++@@ -1637,7 +1638,7 @@ dissect_cms_KeyWrapAlgorithm(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int o
++ 
++ static int
++ dissect_cms_RC2ParameterVersion(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 225 "./asn1/cms/cms.cnf"
+++#line 226 "./asn1/cms/cms.cnf"
++   guint32 length = 0;
++ 
++     offset = dissect_ber_integer(implicit_tag, actx, tree, tvb, offset, hf_index,
++@@ -1715,7 +1716,7 @@ dissect_cms_DigestInfo(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset
++ 
++ static int
++ dissect_cms_T_capability(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 207 "./asn1/cms/cms.cnf"
+++#line 208 "./asn1/cms/cms.cnf"
++   const char *name = NULL;
++ 
++     offset = dissect_ber_object_identifier_str(implicit_tag, actx, tree, tvb, offset, hf_cms_attrType, &object_identifier_id);
++@@ -1736,7 +1737,7 @@ dissect_cms_T_capability(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offse
++ 
++ static int
++ dissect_cms_T_parameters(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _U_) {
++-#line 218 "./asn1/cms/cms.cnf"
+++#line 219 "./asn1/cms/cms.cnf"
++ 
++   offset=call_ber_oid_callback(object_identifier_id, tvb, offset, actx->pinfo, tree, NULL);
++ 
 +-- 
-+2.11.0
-diff --git a/meta-oe/recipes-devtools/php/php_7.3.9.bb b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-index e886cb1a2..670c3321c 100644
---- a/meta-oe/recipes-devtools/php/php_7.3.9.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.3.9.bb
-@@ -9,6 +9,10 @@ SRC_URI += "file://0001-acinclude.m4-don-t-unset-cache-variables.patch \
-             file://debian-php-fixheader.patch \
-             file://CVE-2019-6978.patch \
-             file://CVE-2019-11043.patch \
-+            file://CVE-2019-11045.patch \
-+            file://CVE-2019-11046.patch \
-+            file://CVE-2019-11047.patch \
-+            file://CVE-2019-11050.patch \
-            "
- SRC_URI_append_class-target = " \
-                                 file://pear-makefile.patch \
++2.20.1
++
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
+index ccaa0c94a..9bac5bde4 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
+@@ -8,7 +8,8 @@ DEPENDS = "pcre expat glib-2.0 glib-2.0-native libgcrypt libgpg-error libxml2 bi
+ 
+ DEPENDS_append_class-target = " wireshark-native chrpath-replacement-native "
+ 
+-SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz"
++SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz \
++	file://0001-CMS-reset-object_identifier_id-after-dissecting-Cont.patch"
+ 
+ UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
+ 
 -- 
-2.17.1
+2.20.1
 
 
 
