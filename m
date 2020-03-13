@@ -1,27 +1,29 @@
 Return-Path: <pjtexier@koncepto.io>
 Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BC7F61B94
+	by mail.openembedded.org (Postfix) with ESMTP id 5CBD161CCD
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 13 Mar 2020 18:58:02 +0000 (UTC)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
-	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id B2EA960045;
-	Fri, 13 Mar 2020 19:57:59 +0100 (CET)
+	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id D10F260323;
+	Fri, 13 Mar 2020 19:58:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584125879;
-	bh=lLq7MMpj9bOklkUW21yo5AePPFj8vFDJfPsaOwA0BnE=;
-	h=From:To:Cc:Subject:Date:From;
-	b=k9ZmXsyms1L5azEcuVfYfueqqWgtXd3z6lPQHaxPmxFRI04U7klO/kilBWxaoW37s
-	hgEskFzihsNHgbzrYOAEUJGqO2AljpTa2wTp+R6a3FyM4ttuia45wSS1msftoMUhsD
-	yx8ZuYlURzIV1HyZqNsTMHHVUVXsiD6VCoaFgPkWg1/ciSTWgQAVhLPAyZFddL/Tqu
-	UtF9m0yg5bxU5JzF19cGEZ7JNYzklC7m+/Q8avD+BGAPcCwmO1JusTeLzOxog5mrt7
-	KDsZy9FwzADnY3YRSW3iixbAWefJE6c6NwVt4HP7XK2l/+oE/+eC5fieeW12QcY/gq
-	Ww/zLLgzjLqkA==
+	s=default; t=1584125883;
+	bh=zOLnYlDBJuM26cwLTuGQLPwD3QCzU4SV0SDcJ8FqUGw=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=PCA9DJULzDnxoCE3+BqYvmlBSOR4lRQkmmVGYoQ84kZPOAt0zd2lnIW57cpENc7Rd
+	mdcOLQ31mG/Npqq+XOS6lPVnX/SCWbSq/pKY+lQcX4H2LCz05Tce1dCQ3IXaDeaCkz
+	E9IRh/yfJhRt4vH2NGhZ1z1R9ZBOG89RipTJ5B7B/SSw++Ow3UfYqSh/FagjNsn2tu
+	8jgou04VnIhr23CeZqQJ6S0VQ1B596yGxiTsXt9mfSnhJ4cOfrx2mqoV0lWj+KH1ia
+	NL3771pjV+oYf/uR7GtYEQTp7YlsNfucjxvamIHvbEsFuFT7RyXgSyOULqJPHdve11
+	XhraS/N3egOwQ==
 From: Pierre-Jean Texier <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Mar 2020 19:57:48 +0100
-Message-Id: <1584125871-11210-1-git-send-email-pjtexier@koncepto.io>
+Date: Fri, 13 Mar 2020 19:57:49 +0100
+Message-Id: <1584125871-11210-2-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] python-requests: upgrade 2.22 -> 2.23
+In-Reply-To: <1584125871-11210-1-git-send-email-pjtexier@koncepto.io>
+References: <1584125871-11210-1-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH] python3-kconfiglib: upgrade 13.7.0 -> 14.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,42 +38,31 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 13 Mar 2020 18:58:02 -0000
 
-License-Update: copyright years updated
-
--Copyright 2018 Kenneth Reitz
-+Copyright 2019 Kenneth Reitz
-
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-python/recipes-devtools/python/python-requests.inc             | 6 +++---
- .../{python3-requests_2.22.0.bb => python3-requests_2.23.0.bb}      | 0
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-requests_2.22.0.bb => python3-requests_2.23.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-kconfiglib.inc             | 4 ++--
+ .../{python3-kconfiglib_13.7.0.bb => python3-kconfiglib_14.1.0.bb}    | 0
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-kconfiglib_13.7.0.bb => python3-kconfiglib_14.1.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/meta-python/recipes-devtools/python/python-requests.inc
-index 5fe5dc2..ddca4bc 100644
---- a/meta-python/recipes-devtools/python/python-requests.inc
-+++ b/meta-python/recipes-devtools/python/python-requests.inc
-@@ -1,12 +1,12 @@
- DESCRIPTION = "Python HTTP for Humans."
- HOMEPAGE = "http://python-requests.org"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a8d5a1d1c2d53025e2282c511033f6f7"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=19b6be66ed463d93fa88c29f7860bcd7"
+diff --git a/meta-python/recipes-devtools/python/python-kconfiglib.inc b/meta-python/recipes-devtools/python/python-kconfiglib.inc
+index c82b26b..3dc4961 100644
+--- a/meta-python/recipes-devtools/python/python-kconfiglib.inc
++++ b/meta-python/recipes-devtools/python/python-kconfiglib.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "Kconfiglib is a Kconfig implementation in Python"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=712177a72a3937909543eda3ad1bfb7c"
  
- FILESEXTRAPATHS_prepend := "${THISDIR}/python-requests:"
+-SRC_URI[md5sum] = "7879aa13d306263e95146439d3959f23"
+-SRC_URI[sha256sum] = "8dbb946d41a33cec2b63432393a4920479c8c9fa8d5bbca468c4e8a673be6e36"
++SRC_URI[md5sum] = "4ad68618824d4bad1d1de1d7eb838bba"
++SRC_URI[sha256sum] = "bed2cc2216f538eca4255a83a4588d8823563cdd50114f86cf1a2674e602c93c"
  
--SRC_URI[md5sum] = "ee28bee2de76e9198fc41e48f3a7dd47"
--SRC_URI[sha256sum] = "11e007a8a2aa0323f5a921e9e6a2d7e4e67d9877e85773fba9ba6419025cbeb4"
-+SRC_URI[md5sum] = "abfdc28db1065bbd0bc32592ac9d27a6"
-+SRC_URI[sha256sum] = "b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python3-requests_2.22.0.bb b/meta-python/recipes-devtools/python/python3-requests_2.23.0.bb
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-kconfiglib_13.7.0.bb b/meta-python/recipes-devtools/python/python3-kconfiglib_14.1.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-requests_2.22.0.bb
-rename to meta-python/recipes-devtools/python/python3-requests_2.23.0.bb
+rename from meta-python/recipes-devtools/python/python3-kconfiglib_13.7.0.bb
+rename to meta-python/recipes-devtools/python/python3-kconfiglib_14.1.0.bb
 -- 
 2.7.4
 
