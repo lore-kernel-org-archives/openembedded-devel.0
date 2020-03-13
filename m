@@ -1,29 +1,45 @@
-Return-Path: <pjtexier@koncepto.io>
-Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id DDBAC61CD7
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 18:58:05 +0000 (UTC)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
-	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id C5F9E60323;
-	Fri, 13 Mar 2020 19:58:06 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584125886;
-	bh=LtR1s7YcJ414Fs9iTSVffzob2sscl7z6ZC/clXmFRxQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=oIyU0hxfkuqSBhtkPoYw0yjRCJHoMzgSKheWsRV2zY6ojPTwkmP5+tZ5/bCERVJjA
-	6x4e2InMm2jGYD8mZqts0z8aE8QzJTHTL6WC/EBH0UENWXcN4NoavaVLQOIFvgY7kT
-	lk/CcBUtYD6WWyvBwGNlmoSyKAmIzsr+uHFiyIMRQyTCh34oy8vB7jDD+QPj0NL6uo
-	b42s97+euT8VgEkIhDgW3K2rJnrlADeOIjci+u8OU8C15qlOBteb+8ZLVDqScFqSTY
-	4vHZq1hydTllaf8pCkLN0yMyUJgz6ztAxrj/ipi0t+JQXq+ldEtcNFlWXcZCGqEMgk
-	6M28jNCsFQwJw==
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Mar 2020 19:57:51 +0100
-Message-Id: <1584125871-11210-4-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1584125871-11210-1-git-send-email-pjtexier@koncepto.io>
-References: <1584125871-11210-1-git-send-email-pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] libqmi: upgrade 1.24.4 -> 1.24.6
+Return-Path: <mhalstead@linuxfoundation.org>
+Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com
+	[209.85.210.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B94861CC6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Mar 2020 23:58:40 +0000 (UTC)
+Received: by mail-ot1-f47.google.com with SMTP id k26so12055826otr.2
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Mar 2020 16:58:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linuxfoundation.org; s=google;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Rq0sYyqzUa6ve58wf9QFme0R8HeZmQUxKqKZghBzCBs=;
+	b=U5cx0/pNEnncr4fatQwFkIfgicrNZl0tjvC6z9kyzPJYmEHvLUJPpzn4cGvvZ2K/Vp
+	ZSDRTomXJ9UpszClcCrE/N1kXodDQhvR2HIrGd10nTkIZ6CQR/iyX/Jt5xvMLDRbnptQ
+	ktphpA+hPHyYm/VzIPZQOFTKIoswseSskpER4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Rq0sYyqzUa6ve58wf9QFme0R8HeZmQUxKqKZghBzCBs=;
+	b=EHORUGMRN1EnIH5eoxUszpHhRztd76L8FhFYsnfo4lM49XKChh4+n6pu9mkv9EtkHQ
+	lA7y9nQHOhadKNwgiUViWuE4R1YcUjkXyEkSVLWikPoGJ7nwtpyVKnmrVcT4I5gSKN3J
+	fYQSSk+ChS6481cqJW3tpywLOSxLeIwNYj28HGxzVKleSxfkak8njIW1QTlshdgMn5VC
+	n+UHChzD/STmzbRfVzlGIXLsEI8TKA3BFoWTYMdwsx3D3e1znJRSX/QjROq2CFP5tzzT
+	0DPzsPkT8TBi6bANdUy+9xX0qpgtf75ytsvVEbRGsan8jPdXBf90mwPsVhfPfJLb+8Bs
+	N+xQ==
+X-Gm-Message-State: ANhLgQ1J8o7/behxC090+nK85oHxLZU2zUrnQFVLuTO3pN8eALngAoTt
+	zTlF0iLSQguj/RLWJYFZ3c6MXziTd/rZgRXU2trQV6Ff4KA=
+X-Google-Smtp-Source: ADFU+vuaWgTdGvwte3xYfKMHJQKAmg3AtmkhbSQgebszsBl7foyE7MTvX4gl+CdkhnwRtTLO9bnXGwslBIwcBSjzXlk=
+X-Received: by 2002:a05:6830:1e25:: with SMTP id
+	t5mr1367081otr.70.1584143921519; 
+	Fri, 13 Mar 2020 16:58:41 -0700 (PDT)
+MIME-Version: 1.0
+From: Michael Halstead <mhalstead@linuxfoundation.org>
+Date: Fri, 13 Mar 2020 16:58:30 -0700
+Message-ID: <CADfgfobNNXr9HSOiwyamzbZ4q1uc8wgD5PzobDF56cDyYui-HQ@mail.gmail.com>
+To: bitbake-devel@lists.openembedded.org, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	openembedded-architecture@lists.openembedded.org, 
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Mailing list platform change March 20th
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,52 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 18:58:06 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 23:58:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Overview of changes in libqmi 1.24.6
-----------------------------------------
+We are moving our lists from Mailman to Groups.io. E-mail to lists will be
+delayed during the move window. We are aiming to complete the migration
+during business hours in the Pacific time zone.
 
- * libqmi-glib:
-   ** Fixed the close operation logic to make sure that a reopen done right
-      away doesn't close the wrong endpoint.
-   ** Updated string reading logic to make sure that all strings are valid
-      UTF-8.
-   ** Updated string reading logic to attempt parsing as GSM7 or UCS2 if the
-      initial UTF-8 validation fails.
-   *+ Renamed TLV 0x15 in the "WDA Get Data Format" message, and added new
-      compat methods for the old name.
-   ** Fixed the format of the NITZ information TLV, and added new compat
-      methods for the old name.
-   ** Fixed the format of the Home Network 3GPP2 TLV, and added new compat
-      methods for the old name.
+A new account will be created for you on the Groups.io platform if you
+don't already have one.
 
- * Several other minor improvements and fixes.
+You can read more about the change on the wiki:
+https://www.openembedded.org/wiki/GroupsMigration
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
----
- .../libqmi/{libqmi_1.24.4.bb => libqmi_1.24.6.bb}                     | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.24.4.bb => libqmi_1.24.6.bb} (85%)
+If there are serious issues we will rollback the changes. We will e-mail
+all lists when work is complete.
 
-diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.4.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.6.bb
-similarity index 85%
-rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.24.4.bb
-rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.24.6.bb
-index 5512828..a86215a 100644
---- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.4.bb
-+++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.6.bb
-@@ -14,8 +14,8 @@ inherit autotools pkgconfig bash-completion
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
-            "
- 
--SRC_URI[md5sum] = "be6539fde54fec1fc9d852db201c8560"
--SRC_URI[sha256sum] = "0316badec92ff32f51fe6278e6046968d2272a26608995deedd8e4afb563918a"
-+SRC_URI[md5sum] = "5d50233394a33e43dee3e70e197323e5"
-+SRC_URI[sha256sum] = "1325257bc16de7b2b443fa689826c993474bdbd6e78c7a1e60e527269b44d8c9"
- 
- PACKAGECONFIG ??= "udev mbim"
- PACKAGECONFIG[udev] = ",--without-udev,libgudev"
--- 
-2.7.4
-
+--
+Michael Halstead
+Linux Foundation / Yocto Project
+Systems Operations Engineer
 
