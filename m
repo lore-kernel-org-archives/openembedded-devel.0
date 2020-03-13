@@ -1,48 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
-	[209.85.215.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 7688161C82
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 0707C61CB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 15:36:23 +0000 (UTC)
-Received: by mail-pg1-f170.google.com with SMTP id c7so5191376pgw.3
+	Fri, 13 Mar 2020 15:36:44 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id t3so4403710plz.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 08:36:25 -0700 (PDT)
+	Fri, 13 Mar 2020 08:36:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:autocrypt:message-id:date:user-agent
 	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=Sc7gnlJuYIit6ueV7qyAxRxY8P3B0S08VmDKCBydL+I=;
-	b=Jc55BQD5cRAyTniMNxOFmi722Tt3m0TNXBFFAA6dFxjUNhFIqVz29+P0g85iNMuhFx
-	X4dXKmpzzVobovi8qVm8k4XToFSN8DDRJErOdFqj/JT1EsnahMY+JK/xmh+VSk2Vzb4D
-	4rzsx9EZQi4+uoS8Jc+N8guGLpF8zWd5ubQK80CRQeOCkopf8Qkopgs0aTXg0dVCk+nc
-	9RKifO+UQQA0IslR3jqIn+h1f6tiqYbyMBcK4xLXmDALXWO7/sb005ia04Gcou1/sTEx
-	nMXqyQlgEXtYmfwmTeTv8kSuqsIVOGz1eDd9E/2nQLFz+n6n8+Us3YnslGKwpas5UW2T
-	fiiQ==
+	bh=4FVywF93XHv3f3kZsni5xS8ZMxT5SOs7pns6JSmhujU=;
+	b=QMd855jhZX0IrYKZJqNJOZV8Iy2tX31h7qkjLc2tmgOpNGPeOusMw5aLF0OEHjnSym
+	cn+sEshBwbZ4N8lCzx+aRuIbNnXum5PCDBSl6Y7jgap5PZw6WDU/+xY3uxnWOvk+NyL2
+	kR1pQsO/Mh8ZzmT1pN94Y/qeLW2fv/SWplJbSS42Fc2kUZdzFidO1IBc7Va+xix1ucXG
+	hxm6RNIG8kO9Aamp+KrojgKDMJIDCoQMMUcK83tpDH8LoJTVmLLbIZzhVsdGTS0Z3RcW
+	rAivKwMVwePYG72BNll3n9ropnqrRF+0LmUG4S7szlTQHIII7vy/FBUMxdfA8funmKlo
+	XV8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
 	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=Sc7gnlJuYIit6ueV7qyAxRxY8P3B0S08VmDKCBydL+I=;
-	b=h6Bztb6ewJUf/DQVtqkv723MlxUGW9Ea/xt++oku4DPCeUfOMJZLSijeGclvhNsJLt
-	v2ixk5gijpfbsjiXJHNHgpnm6F2C0BT/im1E5cKOSp45lNq3IardmDhY763Kmv85H3BN
-	ea6xhDMjBudhn9DyeMhBIbUvMcK6qYEkdm+lOZFCRsHZculrxcKihliD191qyeyPEkKm
-	g1efXK+ERw02JMEjYAZZg/a14Itcxjrcljh1pd52Ymc5B03EMSlLtmc6utptO4ar7wXl
-	OqPjGZ5GBp7HAeyBWHk6kL2doYC1dkuxrZH2eOC9Pcx0dbsKKPpk3vrVNdUlaK5fQl/l
-	+6iw==
-X-Gm-Message-State: ANhLgQ2E7Gsp1ZfMHmkg08QF3TlkWoVoiI3EmxZhCmW1vQ1Lt2j722E5
-	Z5Yd38K4mrrDlq7UHiAv/BtUimvO
-X-Google-Smtp-Source: ADFU+vt/sqalgvkhBVm/hC59yUK2p72MM8dxg6m+7ssn58Ci2+1NUitpcguapKOGFLjmYvFLm7iFhQ==
-X-Received: by 2002:a63:7453:: with SMTP id e19mr13434845pgn.50.1584113784307; 
-	Fri, 13 Mar 2020 08:36:24 -0700 (PDT)
+	bh=4FVywF93XHv3f3kZsni5xS8ZMxT5SOs7pns6JSmhujU=;
+	b=cuAiwa//d3MTM2IIi79GrrPOPq/dDpULrbL1lpwe2TOkJxp3d/nmIYucUjPT+sqkGH
+	vpwHyGQqJDC335axSokJLCHQBgWrfE1rltrGnuG5QCBBzSHJFpoqmDcL9swZp6gk75nd
+	hoMBAhPTLoRaY1EnbKsJP4YCI0SUIa/jdxEQVt6EgzcL7rPndaqgDQHFWtmX+ndYpS1Z
+	rcxEl6yXMhyQNgY3FDBdcKHTJPuu+TDegnvinqPZgulZ27Cr+cCUotqywmIgoNIhCCX2
+	fMhrKuSgPOP6Q40v7V1u1nc8/1Zjwg87NRHhl/Qq1w2xz4nTwgUI8Mksrtvwd3oTfRjw
+	iEaA==
+X-Gm-Message-State: ANhLgQ23gIZP95eYjmE7KiP51fXR+v9oKgzDYKSMn2G2eelUqmpfQl5t
+	H1u7YTTfCwemG9dajIRDXBAvr0fq
+X-Google-Smtp-Source: ADFU+vuEqxdnMRLE4GH9cqKN/dzADjP53IxYmk8Uqzzk9uvGTmyfo+xDrNiAKbDEZd9qo7MPxhQXRA==
+X-Received: by 2002:a17:90b:288:: with SMTP id
+	az8mr8763591pjb.25.1584113805578; 
+	Fri, 13 Mar 2020 08:36:45 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:a5c0:b971:4aa1:90b2:e851?
 	([2601:202:4180:a5c0:b971:4aa1:90b2:e851])
 	by smtp.gmail.com with ESMTPSA id
-	jz19sm8466625pjb.48.2020.03.13.08.36.22
+	u5sm37654930pfb.153.2020.03.13.08.36.44
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 13 Mar 2020 08:36:23 -0700 (PDT)
-To: Haiqing Bai <Haiqing.Bai@windriver.com>,
-	openembedded-devel@lists.openembedded.org
-References: <1584094764-17831-1-git-send-email-Haiqing.Bai@windriver.com>
+	Fri, 13 Mar 2020 08:36:44 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
 From: akuster808 <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -87,13 +88,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <652c9f72-5751-7494-c6e8-245e8e6af43e@gmail.com>
-Date: Fri, 13 Mar 2020 08:36:22 -0700
+Message-ID: <1f663de1-6dc9-c9fb-c14b-082de2934777@gmail.com>
+Date: Fri, 13 Mar 2020 08:36:43 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <1584094764-17831-1-git-send-email-Haiqing.Bai@windriver.com>
-Subject: Re: [meta-python][zeus][PATCH] python-urllib3/python3-urllib3: fix CVE-2020-7212
+In-Reply-To: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
+Subject: Re: [meta-oe][zeus][PATCH] libssh2: CVE-2019-17498.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -106,167 +107,175 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 15:36:24 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 15:36:45 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 3/13/20 3:19 AM, Haiqing Bai wrote:
-> Optimize _encode_invalid_chars for a denial of service (CPU consumption)
-
+On 3/13/20 4:10 AM, Wang Mingyu wrote:
+> Security Advisory
+>
+> References:
+> https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17498
 is this fix in master?
-
-
 >
-> Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+> Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 > ---
->  .../python/python-urllib3/CVE-2020-7212.patch      | 54 ++++++++++++++++++++++
->  .../python/python-urllib3_1.25.6.bb                |  2 +
->  .../python/python3-urllib3/CVE-2020-7212.patch     | 54 ++++++++++++++++++++++
->  .../python/python3-urllib3_1.25.6.bb               |  2 +
->  4 files changed, 112 insertions(+)
->  create mode 100644 meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
->  create mode 100644 meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
+>  .../libssh2/libssh2/CVE-2019-17498.patch      | 131 ++++++++++++++++++
+>  .../recipes-support/libssh2/libssh2_1.8.2.bb  |   1 +
+>  2 files changed, 132 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch
 >
-> diff --git a/meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch b/meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
+> diff --git a/meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch b/meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch
 > new file mode 100644
-> index 0000000..a2bb0fb
+> index 000000000..f60764c92
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
-> @@ -0,0 +1,54 @@
-> +From aff951b7a41eb5b958b32c49eaa00da02adc9c2d Mon Sep 17 00:00:00 2001
-> +From: Quentin Pradet <quentin.pradet@gmail.com>
-> +Date: Tue, 21 Jan 2020 22:32:56 +0400
-> +Subject: [PATCH] Optimize _encode_invalid_chars (#1787)
+> +++ b/meta-oe/recipes-support/libssh2/libssh2/CVE-2019-17498.patch
+> @@ -0,0 +1,131 @@
+> +From dedcbd106f8e52d5586b0205bc7677e4c9868f9c Mon Sep 17 00:00:00 2001
+> +From: Will Cosgrove <will@panic.com>
+> +Date: Fri, 30 Aug 2019 09:57:38 -0700
+> +Subject: [PATCH] packet.c: improve message parsing (#402)
 > +
-> +Co-authored-by: Seth Michael Larson <sethmichaellarson@gmail.com>
+> +* packet.c: improve parsing of packets
 > +
-> +Upstream-Status: Backport
-> +[from git://github.com/urllib3/urllib3.git commit:a2697e7c6b]
-> +Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+> +file: packet.c
+> +
+> +notes:
+> +Use _libssh2_get_string API in SSH_MSG_DEBUG/SSH_MSG_DISCONNECT. Additional uint32 bounds check in SSH_MSG_GLOBAL_REQUEST.
+> +
+> +Upstream-Status: Accepted
+> +CVE: CVE-2019-17498
+> +
+> +Reference to upstream patch:
+> +https://github.com/libssh2/libssh2/commit/dedcbd106f8e52d5586b0205bc7677e4c9868f9c
+> +
 > +---
-> + src/urllib3/util/url.py | 15 ++++++---------
-> + 1 file changed, 6 insertions(+), 9 deletions(-)
+> + src/packet.c | 68 ++++++++++++++++++++++------------------------------
+> + 1 file changed, 29 insertions(+), 39 deletions(-)
 > +
-> +diff --git a/src/urllib3/util/url.py b/src/urllib3/util/url.py
-> +index 9675f74..e353937 100644
-> +--- a/src/urllib3/util/url.py
-> ++++ b/src/urllib3/util/url.py
-> +@@ -216,18 +216,15 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
+> +diff --git a/src/packet.c b/src/packet.c
+> +index 38ab6294..2e01bfc5 100644
+> +--- a/src/packet.c
+> ++++ b/src/packet.c
+> +@@ -416,8 +416,8 @@ _libssh2_packet_add(LIBSSH2_SESSION * session, unsigned char *data,
+> +                     size_t datalen, int macstate)
+> + {
+> +     int rc = 0;
+> +-    char *message = NULL;
+> +-    char *language = NULL;
+> ++    unsigned char *message = NULL;
+> ++    unsigned char *language = NULL;
+> +     size_t message_len = 0;
+> +     size_t language_len = 0;
+> +     LIBSSH2_CHANNEL *channelp = NULL;
+> +@@ -469,33 +469,23 @@ _libssh2_packet_add(LIBSSH2_SESSION * session, unsigned char *data,
 > + 
-> +     component = six.ensure_text(component)
+> +         case SSH_MSG_DISCONNECT:
+> +             if(datalen >= 5) {
+> +-                size_t reason = _libssh2_ntohu32(data + 1);
+> ++                uint32_t reason = 0;
+> ++                struct string_buf buf;
+> ++                buf.data = (unsigned char *)data;
+> ++                buf.dataptr = buf.data;
+> ++                buf.len = datalen;
+> ++                buf.dataptr++; /* advance past type */
 > + 
-> ++    # Normalize existing percent-encoded bytes.
-> +     # Try to see if the component we're encoding is already percent-encoded
-> +     # so we can skip all '%' characters but still encode all others.
-> +-    percent_encodings = PERCENT_RE.findall(component)
+> +-                if(datalen >= 9) {
+> +-                    message_len = _libssh2_ntohu32(data + 5);
+> ++                _libssh2_get_u32(&buf, &reason);
+> ++                _libssh2_get_string(&buf, &message, &message_len);
+> ++                _libssh2_get_string(&buf, &language, &language_len);
+> + 
+> +-                    if(message_len < datalen-13) {
+> +-                        /* 9 = packet_type(1) + reason(4) + message_len(4) */
+> +-                        message = (char *) data + 9;
 > +-
-> +-    # Normalize existing percent-encoded bytes.
-> +-    for enc in percent_encodings:
-> +-        if not enc.isupper():
-> +-            component = component.replace(enc, enc.upper())
-> ++    component, percent_encodings = PERCENT_RE.subn(
-> ++        lambda match: match.group(0).upper(), component
-> ++    )
-> + 
-> +     uri_bytes = component.encode("utf-8", "surrogatepass")
-> +-    is_percent_encoded = len(percent_encodings) == uri_bytes.count(b"%")
+> +-                        language_len =
+> +-                            _libssh2_ntohu32(data + 9 + message_len);
+> +-                        language = (char *) data + 9 + message_len + 4;
 > +-
-> ++    is_percent_encoded = percent_encodings == uri_bytes.count(b"%")
-> +     encoded_component = bytearray()
+> +-                        if(language_len > (datalen-13-message_len)) {
+> +-                            /* bad input, clear info */
+> +-                            language = message = NULL;
+> +-                            language_len = message_len = 0;
+> +-                        }
+> +-                    }
+> +-                    else
+> +-                        /* bad size, clear it */
+> +-                        message_len = 0;
+> +-                }
+> +                 if(session->ssh_msg_disconnect) {
+> +-                    LIBSSH2_DISCONNECT(session, reason, message,
+> +-                                       message_len, language, language_len);
+> ++                    LIBSSH2_DISCONNECT(session, reason, (const char *)message,
+> ++                                       message_len, (const char *)language,
+> ++                                       language_len);
+> +                 }
+> ++
+> +                 _libssh2_debug(session, LIBSSH2_TRACE_TRANS,
+> +                                "Disconnect(%d): %s(%s)", reason,
+> +                                message, language);
+> +@@ -534,23 +526,24 @@ _libssh2_packet_add(LIBSSH2_SESSION * session, unsigned char *data,
+> +                 int always_display = data[1];
 > + 
-> +     for i in range(0, len(uri_bytes)):
-> +@@ -237,7 +234,7 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
-> +         if (is_percent_encoded and byte == b"%") or (
-> +             byte_ord < 128 and byte.decode() in allowed_chars
-> +         ):
-> +-            encoded_component.extend(byte)
-> ++            encoded_component += byte
-> +             continue
-> +         encoded_component.extend(b"%" + (hex(byte_ord)[2:].encode().zfill(2).upper()))
-> + 
-> +-- 
-> +2.23.0
-> +
-> diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
-> index 6c81f1d..9f2d2c8 100644
-> --- a/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
-> +++ b/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
-> @@ -1,2 +1,4 @@
->  inherit pypi setuptools
->  require python-urllib3.inc
-> +
-> +SRC_URI += "file://CVE-2020-7212.patch"
-> diff --git a/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
-> new file mode 100644
-> index 0000000..a2bb0fb
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
-> @@ -0,0 +1,54 @@
-> +From aff951b7a41eb5b958b32c49eaa00da02adc9c2d Mon Sep 17 00:00:00 2001
-> +From: Quentin Pradet <quentin.pradet@gmail.com>
-> +Date: Tue, 21 Jan 2020 22:32:56 +0400
-> +Subject: [PATCH] Optimize _encode_invalid_chars (#1787)
-> +
-> +Co-authored-by: Seth Michael Larson <sethmichaellarson@gmail.com>
-> +
-> +Upstream-Status: Backport
-> +[from git://github.com/urllib3/urllib3.git commit:a2697e7c6b]
-> +Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
-> +---
-> + src/urllib3/util/url.py | 15 ++++++---------
-> + 1 file changed, 6 insertions(+), 9 deletions(-)
-> +
-> +diff --git a/src/urllib3/util/url.py b/src/urllib3/util/url.py
-> +index 9675f74..e353937 100644
-> +--- a/src/urllib3/util/url.py
-> ++++ b/src/urllib3/util/url.py
-> +@@ -216,18 +216,15 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
-> + 
-> +     component = six.ensure_text(component)
-> + 
-> ++    # Normalize existing percent-encoded bytes.
-> +     # Try to see if the component we're encoding is already percent-encoded
-> +     # so we can skip all '%' characters but still encode all others.
-> +-    percent_encodings = PERCENT_RE.findall(component)
+> +                 if(datalen >= 6) {
+> +-                    message_len = _libssh2_ntohu32(data + 2);
 > +-
-> +-    # Normalize existing percent-encoded bytes.
-> +-    for enc in percent_encodings:
-> +-        if not enc.isupper():
-> +-            component = component.replace(enc, enc.upper())
-> ++    component, percent_encodings = PERCENT_RE.subn(
-> ++        lambda match: match.group(0).upper(), component
-> ++    )
-> + 
-> +     uri_bytes = component.encode("utf-8", "surrogatepass")
-> +-    is_percent_encoded = len(percent_encodings) == uri_bytes.count(b"%")
+> +-                    if(message_len <= (datalen - 10)) {
+> +-                        /* 6 = packet_type(1) + display(1) + message_len(4) */
+> +-                        message = (char *) data + 6;
+> +-                        language_len = _libssh2_ntohu32(data + 6 +
+> +-                                                        message_len);
 > +-
-> ++    is_percent_encoded = percent_encodings == uri_bytes.count(b"%")
-> +     encoded_component = bytearray()
+> +-                        if(language_len <= (datalen - 10 - message_len))
+> +-                            language = (char *) data + 10 + message_len;
+> +-                    }
+> ++                    struct string_buf buf;
+> ++                    buf.data = (unsigned char *)data;
+> ++                    buf.dataptr = buf.data;
+> ++                    buf.len = datalen;
+> ++                    buf.dataptr += 2; /* advance past type & always display */
+> ++
+> ++                    _libssh2_get_string(&buf, &message, &message_len);
+> ++                    _libssh2_get_string(&buf, &language, &language_len);
+> +                 }
 > + 
-> +     for i in range(0, len(uri_bytes)):
-> +@@ -237,7 +234,7 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
-> +         if (is_percent_encoded and byte == b"%") or (
-> +             byte_ord < 128 and byte.decode() in allowed_chars
-> +         ):
-> +-            encoded_component.extend(byte)
-> ++            encoded_component += byte
-> +             continue
-> +         encoded_component.extend(b"%" + (hex(byte_ord)[2:].encode().zfill(2).upper()))
-> + 
-> +-- 
-> +2.23.0
-> +
-> diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
-> index 19eb702..e3583a0 100644
-> --- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
-> +++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
-> @@ -1,2 +1,4 @@
->  inherit pypi setuptools3
->  require python-urllib3.inc
-> +
-> +SRC_URI += "file://CVE-2020-7212.patch"
+> +                 if(session->ssh_msg_debug) {
+> +-                    LIBSSH2_DEBUG(session, always_display, message,
+> +-                                  message_len, language, language_len);
+> ++                    LIBSSH2_DEBUG(session, always_display,
+> ++                                  (const char *)message,
+> ++                                  message_len, (const char *)language,
+> ++                                  language_len);
+> +                 }
+> +             }
+> ++
+> +             /*
+> +              * _libssh2_debug will actually truncate this for us so
+> +              * that it's not an inordinate about of data
+> +@@ -576,7 +566,7 @@ _libssh2_packet_add(LIBSSH2_SESSION * session, unsigned char *data,
+> +                 uint32_t len = 0;
+> +                 unsigned char want_reply = 0;
+> +                 len = _libssh2_ntohu32(data + 1);
+> +-                if(datalen >= (6 + len)) {
+> ++                if((len <= (UINT_MAX - 6)) && (datalen >= (6 + len))) {
+> +                     want_reply = data[5 + len];
+> +                     _libssh2_debug(session,
+> +                                    LIBSSH2_TRACE_CONN,
+> diff --git a/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb b/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb
+> index fe853cde4..a17ae5b7c 100644
+> --- a/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb
+> +++ b/meta-oe/recipes-support/libssh2/libssh2_1.8.2.bb
+> @@ -17,6 +17,7 @@ inherit autotools pkgconfig
+>  EXTRA_OECONF += "\
+>                   --with-libz \
+>                   --with-libz-prefix=${STAGING_LIBDIR} \
+> +                 file://CVE-2019-17498.patch \
+>                  "
+>  
+>  # only one of openssl and gcrypt could be set
 
 
