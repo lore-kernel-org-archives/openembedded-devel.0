@@ -1,29 +1,29 @@
 Return-Path: <pjtexier@koncepto.io>
 Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id 5CBD161CCD
+	by mail.openembedded.org (Postfix) with ESMTP id CC3F761CE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 18:58:02 +0000 (UTC)
+	Fri, 13 Mar 2020 18:58:04 +0000 (UTC)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
-	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id D10F260323;
-	Fri, 13 Mar 2020 19:58:02 +0100 (CET)
+	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id B07EC60045;
+	Fri, 13 Mar 2020 19:58:05 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584125883;
-	bh=zOLnYlDBJuM26cwLTuGQLPwD3QCzU4SV0SDcJ8FqUGw=;
+	s=default; t=1584125885;
+	bh=Gl17ShifQKuulzB/06knMo9hTGDBrneccZLR1BTfS5E=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=PCA9DJULzDnxoCE3+BqYvmlBSOR4lRQkmmVGYoQ84kZPOAt0zd2lnIW57cpENc7Rd
-	mdcOLQ31mG/Npqq+XOS6lPVnX/SCWbSq/pKY+lQcX4H2LCz05Tce1dCQ3IXaDeaCkz
-	E9IRh/yfJhRt4vH2NGhZ1z1R9ZBOG89RipTJ5B7B/SSw++Ow3UfYqSh/FagjNsn2tu
-	8jgou04VnIhr23CeZqQJ6S0VQ1B596yGxiTsXt9mfSnhJ4cOfrx2mqoV0lWj+KH1ia
-	NL3771pjV+oYf/uR7GtYEQTp7YlsNfucjxvamIHvbEsFuFT7RyXgSyOULqJPHdve11
-	XhraS/N3egOwQ==
+	b=DV0lyTMgnEHDeiK3GgntYr4JWKJHcV3tNansVT88zrcvqjC/dr5h+z2ShcF9sueDG
+	y6eeac7YVXwidvAGNik7rLnqMGqmK97K6gsuiKVpjgTKtHI4aR+lb4+ugkXkwjc+IM
+	24564xEQfQY86y9cqM1Ger/d6sO39YUcXImOOW3LAVrOcliu4IKbl65/jY5Jdg1Bnd
+	i7b5+7kmG7ecO/xnWa8ytscZ8r3/2xhbBT0KefpCcidZLPoo2Wwx2CDYAzxnNrzdv1
+	iYDRfZtN9Zt73urn0LG1ULZ8/Hv4hsYSHGcXs+xROWDGcCiL1ydpdXFGxhrC/jVkZW
+	ZX56XabcwlIPA==
 From: Pierre-Jean Texier <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Mar 2020 19:57:49 +0100
-Message-Id: <1584125871-11210-2-git-send-email-pjtexier@koncepto.io>
+Date: Fri, 13 Mar 2020 19:57:50 +0100
+Message-Id: <1584125871-11210-3-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1584125871-11210-1-git-send-email-pjtexier@koncepto.io>
 References: <1584125871-11210-1-git-send-email-pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] python3-kconfiglib: upgrade 13.7.0 -> 14.1.0
+Subject: [meta-oe][PATCH] iwd: upgrade 1.4 -> 1.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,33 +36,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 18:58:02 -0000
+X-List-Received-Date: Fri, 13 Mar 2020 18:58:05 -0000
+
+Remove patch already in version
+
+Fixes:
+
+ver 1.5:
+	Fix issue with handling missing NEW_WIPHY events.
+	Fix issue with interface creation and NEW_WIPHY events.
+	Fix issue with handling LastConnectedTime property change.
+	Fix issue with PEAPv0 interoperability with Windows.
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-python/recipes-devtools/python/python-kconfiglib.inc             | 4 ++--
- .../{python3-kconfiglib_13.7.0.bb => python3-kconfiglib_14.1.0.bb}    | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-kconfiglib_13.7.0.bb => python3-kconfiglib_14.1.0.bb} (100%)
+ .../iwd/0001-build-Support-missing-rawmemchr.patch | 62 ----------------------
+ .../iwd/{iwd_1.4.bb => iwd_1.5.bb}                 | 10 ++--
+ 2 files changed, 4 insertions(+), 68 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/iwd/iwd/0001-build-Support-missing-rawmemchr.patch
+ rename meta-oe/recipes-connectivity/iwd/{iwd_1.4.bb => iwd_1.5.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python-kconfiglib.inc b/meta-python/recipes-devtools/python/python-kconfiglib.inc
-index c82b26b..3dc4961 100644
---- a/meta-python/recipes-devtools/python/python-kconfiglib.inc
-+++ b/meta-python/recipes-devtools/python/python-kconfiglib.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "Kconfiglib is a Kconfig implementation in Python"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=712177a72a3937909543eda3ad1bfb7c"
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-build-Support-missing-rawmemchr.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-build-Support-missing-rawmemchr.patch
+deleted file mode 100644
+index 733f5fe..0000000
+--- a/meta-oe/recipes-connectivity/iwd/iwd/0001-build-Support-missing-rawmemchr.patch
++++ /dev/null
+@@ -1,62 +0,0 @@
+-From fcdddf2b726439e049992878f90da607414a1a47 Mon Sep 17 00:00:00 2001
+-From: Denis Kenzior <denkenz@gmail.com>
+-Date: Mon, 3 Feb 2020 11:54:28 -0600
+-Subject: [PATCH] build: Support missing rawmemchr
+-
+-rawmemchr is a GNU extension in glibc that does not exist in musl.
+-
+-Upstream-status: Backport of https://git.kernel.org/pub/scm/network/wireless/iwd.git/commit/?id=fcdddf2b726439e049992878f90da607414a1a47
+-
+-Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
+-
+----
+- configure.ac  |  1 +
+- src/missing.h | 10 ++++++++++
+- src/wiphy.c   |  1 +
+- 3 files changed, 12 insertions(+)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 5ae1401cae17..2d373a47ba68 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -128,6 +128,7 @@ AC_DEFINE_UNQUOTED(WIRED_STORAGEDIR, "${wired_storagedir}",
+- 			[Directory for Ethernet daemon storage files])
+- 
+- AC_CHECK_FUNCS(explicit_bzero)
+-+AC_CHECK_FUNCS(rawmemchr)
+- 
+- AC_CHECK_HEADERS(linux/types.h linux/if_alg.h)
+- 
+-diff --git a/src/missing.h b/src/missing.h
+-index 2bb210ae3c81..2cc80aee5d38 100644
+---- a/src/missing.h
+-+++ b/src/missing.h
+-@@ -27,3 +27,13 @@ static inline void explicit_bzero(void *s, size_t n)
+-         __asm__ __volatile__ ("" : : "r"(s) : "memory");
+- }
+- #endif
+-+
+-+#ifndef HAVE_RAWMEMCHR
+-+static inline void *rawmemchr(const void *s, int c)
+-+{
+-+_Pragma("GCC diagnostic push")
+-+_Pragma("GCC diagnostic ignored \"-Wstringop-overflow=\"")
+-+	return memchr(s, c, (size_t) -1);
+-+_Pragma("GCC diagnostic pop")
+-+}
+-+#endif
+-diff --git a/src/wiphy.c b/src/wiphy.c
+-index 1da479db2dab..511bb27f52b8 100644
+---- a/src/wiphy.c
+-+++ b/src/wiphy.c
+-@@ -37,6 +37,7 @@
+- 
+- #include "linux/nl80211.h"
+- 
+-+#include "src/missing.h"
+- #include "src/iwd.h"
+- #include "src/module.h"
+- #include "src/ie.h"
+--- 
+-2.21.0
+-
+diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.5.bb
+similarity index 85%
+rename from meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
+rename to meta-oe/recipes-connectivity/iwd/iwd_1.5.bb
+index f758781..4d4c699 100644
+--- a/meta-oe/recipes-connectivity/iwd/iwd_1.4.bb
++++ b/meta-oe/recipes-connectivity/iwd/iwd_1.5.bb
+@@ -5,12 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
  
--SRC_URI[md5sum] = "7879aa13d306263e95146439d3959f23"
--SRC_URI[sha256sum] = "8dbb946d41a33cec2b63432393a4920479c8c9fa8d5bbca468c4e8a673be6e36"
-+SRC_URI[md5sum] = "4ad68618824d4bad1d1de1d7eb838bba"
-+SRC_URI[sha256sum] = "bed2cc2216f538eca4255a83a4588d8823563cdd50114f86cf1a2674e602c93c"
+ DEPENDS = "ell"
  
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-kconfiglib_13.7.0.bb b/meta-python/recipes-devtools/python/python3-kconfiglib_14.1.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-kconfiglib_13.7.0.bb
-rename to meta-python/recipes-devtools/python/python3-kconfiglib_14.1.0.bb
+-SRC_URI = " \
+-    git://git.kernel.org/pub/scm/network/wireless/iwd.git \
+-    file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
+-    file://0001-build-Support-missing-rawmemchr.patch \
+-"
+-SRCREV = "860fa4697f349da7791ecf22ca76f9ac0e5de261"
++SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
++           file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
++           "
++SRCREV = "1ee7b985aaa294447d073bfe1242744784278a8e"
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools manpages pkgconfig python3native systemd
 -- 
 2.7.4
 
