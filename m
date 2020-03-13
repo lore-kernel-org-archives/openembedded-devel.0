@@ -1,48 +1,48 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f195.google.com (mail-pl1-f195.google.com
-	[209.85.214.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 023C961C82
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com
+	[209.85.215.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 7688161C82
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 15:35:26 +0000 (UTC)
-Received: by mail-pl1-f195.google.com with SMTP id d9so4396046plo.11
+	Fri, 13 Mar 2020 15:36:23 +0000 (UTC)
+Received: by mail-pg1-f170.google.com with SMTP id c7so5191376pgw.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Mar 2020 08:35:28 -0700 (PDT)
+	Fri, 13 Mar 2020 08:36:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:autocrypt:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language;
-	bh=asxUZrIjYJyWEqsQEQTu3nCbiq+aRHAn3FhoC3/R6+k=;
-	b=QVZK9cbSoTLVMVdLQMM/CWACZK91jhapqh5l5v64/4IJ9f0tLFDgTXS4ho+gsbGoGc
-	yueArJFG+5pCo+TZ4kPbwvmYYGLgtny/faxRdxYmAfvjiK2PRZ3KbtafEu6qDVc9EKva
-	7wwOGHXGJl1+Vnr8wZOhReuAOlBmhtqQd+WUEIqN8dVUbj+y2GH8aHhb5OrITvFkSVUv
-	yASMuV88WYajeJgaoO9FiyFQPK/kkUFNiPC9xAwKvK1rvqK0O8lBLBiafa4KAKchNrnm
-	KMvjJ2uyVLPrtgc3fBMKfIz+hs4JY6T7QsiETYwsqS5G8v97g4Y+PWMMrjNdeDbUheFc
-	VB8g==
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=Sc7gnlJuYIit6ueV7qyAxRxY8P3B0S08VmDKCBydL+I=;
+	b=Jc55BQD5cRAyTniMNxOFmi722Tt3m0TNXBFFAA6dFxjUNhFIqVz29+P0g85iNMuhFx
+	X4dXKmpzzVobovi8qVm8k4XToFSN8DDRJErOdFqj/JT1EsnahMY+JK/xmh+VSk2Vzb4D
+	4rzsx9EZQi4+uoS8Jc+N8guGLpF8zWd5ubQK80CRQeOCkopf8Qkopgs0aTXg0dVCk+nc
+	9RKifO+UQQA0IslR3jqIn+h1f6tiqYbyMBcK4xLXmDALXWO7/sb005ia04Gcou1/sTEx
+	nMXqyQlgEXtYmfwmTeTv8kSuqsIVOGz1eDd9E/2nQLFz+n6n8+Us3YnslGKwpas5UW2T
+	fiiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-	:date:user-agent:mime-version:in-reply-to:content-language;
-	bh=asxUZrIjYJyWEqsQEQTu3nCbiq+aRHAn3FhoC3/R6+k=;
-	b=V9Mj9CfX3gKJ6vrbv6Co/1eP09Q+M9lynxQEk4hMMRwMCpHxpZ9gZZHTCAg+gXsJzW
-	5pVag7CnaarYBswPL5dmGnKpMS/et60gmaf3z7Hu5fTCMWfzZAb1r+/pkqd/rfU3D+WW
-	77pcuLgO0+VWIapETn8aEKa4be1vF17nuwsRtV6RfhZCcL8mapPRm2hAH8vrCZ4P62vL
-	1DpzXskkO7QeDPGpWs3tP7rqpIoxURkB8vNBb+ncMqEJu1QwxPvR5kk1xkyffGnA+QbM
-	/Hy6PDZfyYsRF17In3HoPtG24QG8CtEqp9yB7WUeo+4ukfyHZYiURQ3TZD6VCnXywC9c
-	R4lg==
-X-Gm-Message-State: ANhLgQ2oHO2beP5o3vRkXOsruyUBITNtiGXC1PRsSq+8bmounizU4Z5r
-	gGsL7ANav16O1UvMfH0VUHp8XwWY
-X-Google-Smtp-Source: ADFU+vsciwPTFk3kiLnXHfU4OEn7Gvqn31UTVnqbV4X0mxH/yKrw3xCAJJ5dhNoqKQx6bFEXPUwv0w==
-X-Received: by 2002:a17:902:ab95:: with SMTP id
-	f21mr12662729plr.188.1584113727561; 
-	Fri, 13 Mar 2020 08:35:27 -0700 (PDT)
+	:date:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=Sc7gnlJuYIit6ueV7qyAxRxY8P3B0S08VmDKCBydL+I=;
+	b=h6Bztb6ewJUf/DQVtqkv723MlxUGW9Ea/xt++oku4DPCeUfOMJZLSijeGclvhNsJLt
+	v2ixk5gijpfbsjiXJHNHgpnm6F2C0BT/im1E5cKOSp45lNq3IardmDhY763Kmv85H3BN
+	ea6xhDMjBudhn9DyeMhBIbUvMcK6qYEkdm+lOZFCRsHZculrxcKihliD191qyeyPEkKm
+	g1efXK+ERw02JMEjYAZZg/a14Itcxjrcljh1pd52Ymc5B03EMSlLtmc6utptO4ar7wXl
+	OqPjGZ5GBp7HAeyBWHk6kL2doYC1dkuxrZH2eOC9Pcx0dbsKKPpk3vrVNdUlaK5fQl/l
+	+6iw==
+X-Gm-Message-State: ANhLgQ2E7Gsp1ZfMHmkg08QF3TlkWoVoiI3EmxZhCmW1vQ1Lt2j722E5
+	Z5Yd38K4mrrDlq7UHiAv/BtUimvO
+X-Google-Smtp-Source: ADFU+vt/sqalgvkhBVm/hC59yUK2p72MM8dxg6m+7ssn58Ci2+1NUitpcguapKOGFLjmYvFLm7iFhQ==
+X-Received: by 2002:a63:7453:: with SMTP id e19mr13434845pgn.50.1584113784307; 
+	Fri, 13 Mar 2020 08:36:24 -0700 (PDT)
 Received: from ?IPv6:2601:202:4180:a5c0:b971:4aa1:90b2:e851?
 	([2601:202:4180:a5c0:b971:4aa1:90b2:e851])
 	by smtp.gmail.com with ESMTPSA id
-	r186sm1895908pfc.181.2020.03.13.08.35.25
+	jz19sm8466625pjb.48.2020.03.13.08.36.22
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 13 Mar 2020 08:35:26 -0700 (PDT)
-To: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>,
+	Fri, 13 Mar 2020 08:36:23 -0700 (PDT)
+To: Haiqing Bai <Haiqing.Bai@windriver.com>,
 	openembedded-devel@lists.openembedded.org
-References: <20200313065841.17365-1-zangrc.fnst@cn.fujitsu.com>
+References: <1584094764-17831-1-git-send-email-Haiqing.Bai@windriver.com>
 From: akuster808 <akuster808@gmail.com>
 Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	xsFNBFnlUP4BEADpKf+FQdLykenQXKk8i6xJNxDow+ypFeVAy8iFJp7Dsev+BtwUFo8VG7hx
@@ -87,14 +87,13 @@ Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
 	PNHndk8VBTpzrmOaJxrebNL/W6C8JCmbLM11TAUMmHYi9JDytN8Au78hWpDbIdKwg1LeSxpw
 	ZZD/OqOc0DBvHOpQhzkSrtR1lVlDV/+9E8J1T4uDhrGmZwYV+4xQetypHax8aAHisYbjXdVa
 	8CS2NxU=
-Message-ID: <753761b4-5d17-4453-8a7a-58310b5da746@gmail.com>
-Date: Fri, 13 Mar 2020 08:35:15 -0700
+Message-ID: <652c9f72-5751-7494-c6e8-245e8e6af43e@gmail.com>
+Date: Fri, 13 Mar 2020 08:36:22 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <20200313065841.17365-1-zangrc.fnst@cn.fujitsu.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [zeus] [meta-networking] [PATCH] wireshark: CVE-2019-19553
+In-Reply-To: <1584094764-17831-1-git-send-email-Haiqing.Bai@windriver.com>
+Subject: Re: [meta-python][zeus][PATCH] python-urllib3/python3-urllib3: fix CVE-2020-7212
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -107,357 +106,167 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Mar 2020 15:35:27 -0000
-Content-Language: en-US
+X-List-Received-Date: Fri, 13 Mar 2020 15:36:24 -0000
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
 
 
-On 3/12/20 11:58 PM, Zang Ruochen wrote:
-> Security Advisory
-> References:
-> https://cve.mitre.org/cgi-bin/cvename.cgi?name=3DCVE-2019-19553
-Thanks for the CVE fix.
+On 3/13/20 3:19 AM, Haiqing Bai wrote:
+> Optimize _encode_invalid_chars for a denial of service (CPU consumption)
 
-Wireshark 3.0.x series are bug fix only so updating the 3.0.9 would be
-preferred.
-
-3.0.9
-wnpa-sec-2020-03 <https://www.wireshark.org/security/wnpa-sec-2020-03>
-LTE RRC dissector memory leak. Bug 16341
-<https://bugs.wireshark.org/bugzilla/show_bug.cgi?id=3D16341>.
-wnpa-sec-2020-04 <https://www.wireshark.org/security/wnpa-sec-2020-04>
-WiMax DLMAP dissector crash. Bug 16368
-<https://bugs.wireshark.org/bugzilla/show_bug.cgi?id=3D16368>.
-wnpa-sec-2020-05 <https://www.wireshark.org/security/wnpa-sec-2020-05>
-EAP dissector crash. Bug 16397
-<https://bugs.wireshark.org/bugzilla/show_bug.cgi?id=3D16397>.
-
-3.0.8
-wnpa-sec-2020-02 <https://www.wireshark.org/security/wnpa-sec-2020-02>
-BT ATT dissector crash. Bug 16258
-<https://bugs.wireshark.org/bugzilla/show_bug.cgi?id=3D16258>.
-CVE-2020-7045
-<https://cve.mitre.org/cgi-bin/cvename.cgi?name=3DCVE-2020-7045>.
-3.0.7
-wnpa-sec-2019-22 <https://www.wireshark.org/security/wnpa-sec-2019-22>
-CMS dissector crash. Bug 15961
-<https://bugs.wireshark.org/bugzilla/show_bug.cgi?id=3D15961>.
-CVE-2019-19553
-<https://cve.mitre.org/cgi-bin/cvename.cgi?name=3DCVE-2019-19553>.
+is this fix in master?
 
 
-- armin
 >
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+> Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
 > ---
->  ..._identifier_id-after-dissecting-Cont.patch | 204 ++++++++++++++++++=
-
->  .../wireshark/wireshark_3.0.6.bb              |   3 +-
->  2 files changed, 206 insertions(+), 1 deletion(-)
->  create mode 100644 meta-networking/recipes-support/wireshark/wireshark=
-/0001-CMS-reset-object_identifier_id-after-dissecting-Cont.patch
+>  .../python/python-urllib3/CVE-2020-7212.patch      | 54 ++++++++++++++++++++++
+>  .../python/python-urllib3_1.25.6.bb                |  2 +
+>  .../python/python3-urllib3/CVE-2020-7212.patch     | 54 ++++++++++++++++++++++
+>  .../python/python3-urllib3_1.25.6.bb               |  2 +
+>  4 files changed, 112 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
+>  create mode 100644 meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
 >
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark/0001-C=
-MS-reset-object_identifier_id-after-dissecting-Cont.patch b/meta-networki=
-ng/recipes-support/wireshark/wireshark/0001-CMS-reset-object_identifier_i=
-d-after-dissecting-Cont.patch
+> diff --git a/meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch b/meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
 > new file mode 100644
-> index 000000000..08060db04
+> index 0000000..a2bb0fb
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/wireshark/wireshark/0001-CMS-rese=
-t-object_identifier_id-after-dissecting-Cont.patch
-> @@ -0,0 +1,204 @@
-> +From e1731e2bc1d2a78b67e18fa66e7440acb9bea563 Mon Sep 17 00:00:00 2001=
-
-> +From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-> +Date: Fri, 13 Mar 2020 13:54:50 +0800
-> +Subject: [PATCH] CMS: reset object_identifier_id after dissecting Cont=
-entInfo
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
+> +++ b/meta-python/recipes-devtools/python/python-urllib3/CVE-2020-7212.patch
+> @@ -0,0 +1,54 @@
+> +From aff951b7a41eb5b958b32c49eaa00da02adc9c2d Mon Sep 17 00:00:00 2001
+> +From: Quentin Pradet <quentin.pradet@gmail.com>
+> +Date: Tue, 21 Jan 2020 22:32:56 +0400
+> +Subject: [PATCH] Optimize _encode_invalid_chars (#1787)
 > +
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3Dutf8
-> +Content-Transfer-Encoding: 8bit
+> +Co-authored-by: Seth Michael Larson <sethmichaellarson@gmail.com>
 > +
-> +Bug: 15961
-> +Change-Id: I3d6b3e96103b69f88fcb512da81fa20ff6a1c40e
-> +Reviewed-on: https://code.wireshark.org/review/34960
-> +Petri-Dish: Pascal Quantin <pascal@wireshark.org>
-> +Tested-by: Petri Dish Buildbot
-> +Reviewed-by: Stig Bj=C3=83=C2=B8rlykke <stig@bjorlykke.org>
-> +Reviewed-by: Roland Knall <rknall@gmail.com>
-> +(cherry picked from commit 23850a3342d64b9c9808f14c20bfea6d22b7dc08)
-> +Conflicts:
-> +	epan/dissectors/packet-cms.c
-> +Reviewed-on: https://code.wireshark.org/review/34975
-> +Reviewed-by: Pascal Quantin <pascal@wireshark.org>
+> +Upstream-Status: Backport
+> +[from git://github.com/urllib3/urllib3.git commit:a2697e7c6b]
+> +Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
 > +---
-> + epan/dissectors/asn1/cms/cms.cnf              |  1 +
-> + .../dissectors/asn1/cms/packet-cms-template.c |  2 +-
-> + epan/dissectors/packet-cms.c                  | 31 ++++++++++--------=
--
-> + 3 files changed, 18 insertions(+), 16 deletions(-)
+> + src/urllib3/util/url.py | 15 ++++++---------
+> + 1 file changed, 6 insertions(+), 9 deletions(-)
 > +
-> +diff --git a/epan/dissectors/asn1/cms/cms.cnf b/epan/dissectors/asn1/c=
-ms/cms.cnf
-> +index ab94f8c..8feef01 100644
-> +--- a/epan/dissectors/asn1/cms/cms.cnf
-> ++++ b/epan/dissectors/asn1/cms/cms.cnf
-> +@@ -122,6 +122,7 @@ FirmwarePackageLoadError/version		fwErrorVersion
-> +   top_tree =3D tree;
-> +   %(DEFAULT_BODY)s
-> +   content_tvb =3D NULL;
-> ++  object_identifier_id =3D NULL;
-> +   top_tree =3D NULL;
-> +=20
-> + #.FN_PARS ContentType
-> +diff --git a/epan/dissectors/asn1/cms/packet-cms-template.c b/epan/dis=
-sectors/asn1/cms/packet-cms-template.c
-> +index 2e803ec..931fd4f 100644
-> +--- a/epan/dissectors/asn1/cms/packet-cms-template.c
-> ++++ b/epan/dissectors/asn1/cms/packet-cms-template.c
-> +@@ -43,7 +43,7 @@ static int hf_cms_ci_contentType =3D -1;
-> + static int dissect_cms_OCTET_STRING(gboolean implicit_tag _U_, tvbuff=
-_t *tvb, int offset, asn1_ctx_t *actx, proto_tree *tree, int hf_index _U_=
-) ; /* XXX kill a compiler warning until asn2wrs stops generating these s=
-illy wrappers */
-> +=20
-> +=20
-> +-static const char *object_identifier_id;
-> ++static const char *object_identifier_id =3D NULL;
-> + static tvbuff_t *content_tvb =3D NULL;
-> +=20
-> + static proto_tree *top_tree=3DNULL;
-> +diff --git a/epan/dissectors/packet-cms.c b/epan/dissectors/packet-cms=
-=2Ec
-> +index 690513d..2a6942f 100644
-> +--- a/epan/dissectors/packet-cms.c
-> ++++ b/epan/dissectors/packet-cms.c
-> +@@ -311,7 +311,7 @@ static gint ett_cms_FirmwarePackageMessageDigest =3D=
- -1;
-> + static int dissect_cms_OCTET_STRING(gboolean implicit_tag _U_, tvbuff=
-_t *tvb, int offset, asn1_ctx_t *actx, proto_tree *tree, int hf_index _U_=
-) ; /* XXX kill a compiler warning until asn2wrs stops generating these s=
-illy wrappers */
-> +=20
-> +=20
-> +-static const char *object_identifier_id;
-> ++static const char *object_identifier_id =3D NULL;
-> + static tvbuff_t *content_tvb =3D NULL;
-> +=20
-> + static proto_tree *top_tree=3DNULL;
-> +@@ -373,7 +373,7 @@ cms_verify_msg_digest(proto_item *pi, tvbuff_t *co=
-ntent, const char *alg, tvbuff
-> +=20
-> + int
-> + dissect_cms_ContentType(gboolean implicit_tag _U_, tvbuff_t *tvb _U_,=
- int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index=
- _U_) {
-> +-#line 131 "./asn1/cms/cms.cnf"
-> ++#line 132 "./asn1/cms/cms.cnf"
-> +   	const char *name =3D NULL;
-> +=20
-> + 	  offset =3D dissect_ber_object_identifier_str(implicit_tag, actx, t=
-ree, tvb, offset, hf_index, &object_identifier_id);
-> +@@ -393,7 +393,7 @@ dissect_cms_ContentType(gboolean implicit_tag _U_,=
- tvbuff_t *tvb _U_, int offset
-> +=20
-> + static int
-> + dissect_cms_T_content(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, i=
-nt offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _=
-U_) {
-> +-#line 141 "./asn1/cms/cms.cnf"
-> ++#line 142 "./asn1/cms/cms.cnf"
-> +   offset=3Dcall_ber_oid_callback(object_identifier_id, tvb, offset, a=
-ctx->pinfo, tree, NULL);
-> +=20
-> +=20
-> +@@ -417,6 +417,7 @@ dissect_cms_ContentInfo(gboolean implicit_tag _U_,=
- tvbuff_t *tvb _U_, int offset
-> +                                    ContentInfo_sequence, hf_index, et=
-t_cms_ContentInfo);
-> +=20
-> +   content_tvb =3D NULL;
-> ++  object_identifier_id =3D NULL;
-> +   top_tree =3D NULL;
-> +=20
-> +=20
-> +@@ -470,7 +471,7 @@ dissect_cms_DigestAlgorithmIdentifiers(gboolean im=
-plicit_tag _U_, tvbuff_t *tvb
-> +=20
-> + static int
-> + dissect_cms_T_eContent(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, =
-int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index =
-_U_) {
-> +-#line 145 "./asn1/cms/cms.cnf"
-> ++#line 146 "./asn1/cms/cms.cnf"
-> +=20
-> +   offset =3D dissect_ber_octet_string(FALSE, actx, tree, tvb, offset,=
- hf_index, &content_tvb);
-> +=20
-> +@@ -504,7 +505,7 @@ dissect_cms_EncapsulatedContentInfo(gboolean impli=
-cit_tag _U_, tvbuff_t *tvb _U_
-> +=20
-> + static int
-> + dissect_cms_T_attrType(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, =
-int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index =
-_U_) {
-> +-#line 175 "./asn1/cms/cms.cnf"
-> ++#line 176 "./asn1/cms/cms.cnf"
-> +   const char *name =3D NULL;
-> +=20
-> +     offset =3D dissect_ber_object_identifier_str(implicit_tag, actx, =
-tree, tvb, offset, hf_cms_attrType, &object_identifier_id);
-> +@@ -524,7 +525,7 @@ dissect_cms_T_attrType(gboolean implicit_tag _U_, =
-tvbuff_t *tvb _U_, int offset
-> +=20
-> + static int
-> + dissect_cms_AttributeValue(gboolean implicit_tag _U_, tvbuff_t *tvb _=
-U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_in=
-dex _U_) {
-> +-#line 185 "./asn1/cms/cms.cnf"
-> ++#line 186 "./asn1/cms/cms.cnf"
-> +=20
-> +   offset=3Dcall_ber_oid_callback(object_identifier_id, tvb, offset, a=
-ctx->pinfo, tree, NULL);
-> +=20
-> +@@ -786,7 +787,7 @@ dissect_cms_T_otherRevInfoFormat(gboolean implicit=
-_tag _U_, tvbuff_t *tvb _U_, i
-> +=20
-> + static int
-> + dissect_cms_T_otherRevInfo(gboolean implicit_tag _U_, tvbuff_t *tvb _=
-U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_in=
-dex _U_) {
-> +-#line 169 "./asn1/cms/cms.cnf"
-> ++#line 170 "./asn1/cms/cms.cnf"
-> +   offset=3Dcall_ber_oid_callback(object_identifier_id, tvb, offset, a=
-ctx->pinfo, tree, NULL);
-> +=20
-> +=20
-> +@@ -1123,7 +1124,7 @@ dissect_cms_T_keyAttrId(gboolean implicit_tag _U=
-_, tvbuff_t *tvb _U_, int offset
-> +=20
-> + static int
-> + dissect_cms_T_keyAttr(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, i=
-nt offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index _=
-U_) {
-> +-#line 164 "./asn1/cms/cms.cnf"
-> ++#line 165 "./asn1/cms/cms.cnf"
-> +   offset=3Dcall_ber_oid_callback(object_identifier_id, tvb, offset, a=
-ctx->pinfo, tree, NULL);
-> +=20
-> +=20
-> +@@ -1311,7 +1312,7 @@ dissect_cms_T_oriType(gboolean implicit_tag _U_,=
- tvbuff_t *tvb _U_, int offset _
-> +=20
-> + static int
-> + dissect_cms_T_oriValue(gboolean implicit_tag _U_, tvbuff_t *tvb _U_, =
-int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_index =
-_U_) {
-> +-#line 158 "./asn1/cms/cms.cnf"
-> ++#line 159 "./asn1/cms/cms.cnf"
-> +   offset=3Dcall_ber_oid_callback(object_identifier_id, tvb, offset, a=
-ctx->pinfo, tree, NULL);
-> +=20
-> +=20
-> +@@ -1388,14 +1389,14 @@ dissect_cms_ContentEncryptionAlgorithmIdentifi=
-er(gboolean implicit_tag _U_, tvbu
-> +=20
-> + static int
-> + dissect_cms_EncryptedContent(gboolean implicit_tag _U_, tvbuff_t *tvb=
- _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_=
-index _U_) {
-> +-#line 235 "./asn1/cms/cms.cnf"
-> ++#line 236 "./asn1/cms/cms.cnf"
-> + 	tvbuff_t *encrypted_tvb;
-> + 	proto_item *item;
-> +=20
-> +   offset =3D dissect_ber_octet_string(implicit_tag, actx, tree, tvb, =
-offset, hf_index,
-> +                                        &encrypted_tvb);
-> +=20
-> +-#line 240 "./asn1/cms/cms.cnf"
-> ++#line 241 "./asn1/cms/cms.cnf"
-> +=20
-> + 	item =3D actx->created_item;
-> +=20
-> +@@ -1553,7 +1554,7 @@ dissect_cms_AuthenticatedData(gboolean implicit_=
-tag _U_, tvbuff_t *tvb _U_, int
-> +=20
-> + static int
-> + dissect_cms_MessageDigest(gboolean implicit_tag _U_, tvbuff_t *tvb _U=
-_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_ind=
-ex _U_) {
-> +-#line 189 "./asn1/cms/cms.cnf"
-> ++#line 190 "./asn1/cms/cms.cnf"
-> +   proto_item *pi;
-> +   int old_offset =3D offset;
-> +=20
-> +@@ -1637,7 +1638,7 @@ dissect_cms_KeyWrapAlgorithm(gboolean implicit_t=
-ag _U_, tvbuff_t *tvb _U_, int o
-> +=20
-> + static int
-> + dissect_cms_RC2ParameterVersion(gboolean implicit_tag _U_, tvbuff_t *=
-tvb _U_, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int =
-hf_index _U_) {
-> +-#line 225 "./asn1/cms/cms.cnf"
-> ++#line 226 "./asn1/cms/cms.cnf"
-> +   guint32 length =3D 0;
-> +=20
-> +     offset =3D dissect_ber_integer(implicit_tag, actx, tree, tvb, off=
-set, hf_index,
-> +@@ -1715,7 +1716,7 @@ dissect_cms_DigestInfo(gboolean implicit_tag _U_=
-, tvbuff_t *tvb _U_, int offset
-> +=20
-> + static int
-> + dissect_cms_T_capability(gboolean implicit_tag _U_, tvbuff_t *tvb _U_=
-, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_inde=
-x _U_) {
-> +-#line 207 "./asn1/cms/cms.cnf"
-> ++#line 208 "./asn1/cms/cms.cnf"
-> +   const char *name =3D NULL;
-> +=20
-> +     offset =3D dissect_ber_object_identifier_str(implicit_tag, actx, =
-tree, tvb, offset, hf_cms_attrType, &object_identifier_id);
-> +@@ -1736,7 +1737,7 @@ dissect_cms_T_capability(gboolean implicit_tag _=
-U_, tvbuff_t *tvb _U_, int offse
-> +=20
-> + static int
-> + dissect_cms_T_parameters(gboolean implicit_tag _U_, tvbuff_t *tvb _U_=
-, int offset _U_, asn1_ctx_t *actx _U_, proto_tree *tree _U_, int hf_inde=
-x _U_) {
-> +-#line 218 "./asn1/cms/cms.cnf"
-> ++#line 219 "./asn1/cms/cms.cnf"
-> +=20
-> +   offset=3Dcall_ber_oid_callback(object_identifier_id, tvb, offset, a=
-ctx->pinfo, tree, NULL);
-> +=20
-> +--=20
-> +2.20.1
+> +diff --git a/src/urllib3/util/url.py b/src/urllib3/util/url.py
+> +index 9675f74..e353937 100644
+> +--- a/src/urllib3/util/url.py
+> ++++ b/src/urllib3/util/url.py
+> +@@ -216,18 +216,15 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
+> + 
+> +     component = six.ensure_text(component)
+> + 
+> ++    # Normalize existing percent-encoded bytes.
+> +     # Try to see if the component we're encoding is already percent-encoded
+> +     # so we can skip all '%' characters but still encode all others.
+> +-    percent_encodings = PERCENT_RE.findall(component)
+> +-
+> +-    # Normalize existing percent-encoded bytes.
+> +-    for enc in percent_encodings:
+> +-        if not enc.isupper():
+> +-            component = component.replace(enc, enc.upper())
+> ++    component, percent_encodings = PERCENT_RE.subn(
+> ++        lambda match: match.group(0).upper(), component
+> ++    )
+> + 
+> +     uri_bytes = component.encode("utf-8", "surrogatepass")
+> +-    is_percent_encoded = len(percent_encodings) == uri_bytes.count(b"%")
+> +-
+> ++    is_percent_encoded = percent_encodings == uri_bytes.count(b"%")
+> +     encoded_component = bytearray()
+> + 
+> +     for i in range(0, len(uri_bytes)):
+> +@@ -237,7 +234,7 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
+> +         if (is_percent_encoded and byte == b"%") or (
+> +             byte_ord < 128 and byte.decode() in allowed_chars
+> +         ):
+> +-            encoded_component.extend(byte)
+> ++            encoded_component += byte
+> +             continue
+> +         encoded_component.extend(b"%" + (hex(byte_ord)[2:].encode().zfill(2).upper()))
+> + 
+> +-- 
+> +2.23.0
 > +
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.=
-bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
-> index ccaa0c94a..9bac5bde4 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
-> @@ -8,7 +8,8 @@ DEPENDS =3D "pcre expat glib-2.0 glib-2.0-native libgcr=
-ypt libgpg-error libxml2 bi
-> =20
->  DEPENDS_append_class-target =3D " wireshark-native chrpath-replacement=
--native "
-> =20
-> -SRC_URI =3D "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-=
-${PV}.tar.xz"
-> +SRC_URI =3D "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-=
-${PV}.tar.xz \
-> +	file://0001-CMS-reset-object_identifier_id-after-dissecting-Cont.patc=
-h"
-> =20
->  UPSTREAM_CHECK_URI =3D "https://1.as.dl.wireshark.org/src"
-> =20
+> diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
+> index 6c81f1d..9f2d2c8 100644
+> --- a/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
+> +++ b/meta-python/recipes-devtools/python/python-urllib3_1.25.6.bb
+> @@ -1,2 +1,4 @@
+>  inherit pypi setuptools
+>  require python-urllib3.inc
+> +
+> +SRC_URI += "file://CVE-2020-7212.patch"
+> diff --git a/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
+> new file mode 100644
+> index 0000000..a2bb0fb
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-urllib3/CVE-2020-7212.patch
+> @@ -0,0 +1,54 @@
+> +From aff951b7a41eb5b958b32c49eaa00da02adc9c2d Mon Sep 17 00:00:00 2001
+> +From: Quentin Pradet <quentin.pradet@gmail.com>
+> +Date: Tue, 21 Jan 2020 22:32:56 +0400
+> +Subject: [PATCH] Optimize _encode_invalid_chars (#1787)
+> +
+> +Co-authored-by: Seth Michael Larson <sethmichaellarson@gmail.com>
+> +
+> +Upstream-Status: Backport
+> +[from git://github.com/urllib3/urllib3.git commit:a2697e7c6b]
+> +Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+> +---
+> + src/urllib3/util/url.py | 15 ++++++---------
+> + 1 file changed, 6 insertions(+), 9 deletions(-)
+> +
+> +diff --git a/src/urllib3/util/url.py b/src/urllib3/util/url.py
+> +index 9675f74..e353937 100644
+> +--- a/src/urllib3/util/url.py
+> ++++ b/src/urllib3/util/url.py
+> +@@ -216,18 +216,15 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
+> + 
+> +     component = six.ensure_text(component)
+> + 
+> ++    # Normalize existing percent-encoded bytes.
+> +     # Try to see if the component we're encoding is already percent-encoded
+> +     # so we can skip all '%' characters but still encode all others.
+> +-    percent_encodings = PERCENT_RE.findall(component)
+> +-
+> +-    # Normalize existing percent-encoded bytes.
+> +-    for enc in percent_encodings:
+> +-        if not enc.isupper():
+> +-            component = component.replace(enc, enc.upper())
+> ++    component, percent_encodings = PERCENT_RE.subn(
+> ++        lambda match: match.group(0).upper(), component
+> ++    )
+> + 
+> +     uri_bytes = component.encode("utf-8", "surrogatepass")
+> +-    is_percent_encoded = len(percent_encodings) == uri_bytes.count(b"%")
+> +-
+> ++    is_percent_encoded = percent_encodings == uri_bytes.count(b"%")
+> +     encoded_component = bytearray()
+> + 
+> +     for i in range(0, len(uri_bytes)):
+> +@@ -237,7 +234,7 @@ def _encode_invalid_chars(component, allowed_chars, encoding="utf-8"):
+> +         if (is_percent_encoded and byte == b"%") or (
+> +             byte_ord < 128 and byte.decode() in allowed_chars
+> +         ):
+> +-            encoded_component.extend(byte)
+> ++            encoded_component += byte
+> +             continue
+> +         encoded_component.extend(b"%" + (hex(byte_ord)[2:].encode().zfill(2).upper()))
+> + 
+> +-- 
+> +2.23.0
+> +
+> diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
+> index 19eb702..e3583a0 100644
+> --- a/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
+> +++ b/meta-python/recipes-devtools/python/python3-urllib3_1.25.6.bb
+> @@ -1,2 +1,4 @@
+>  inherit pypi setuptools3
+>  require python-urllib3.inc
+> +
+> +SRC_URI += "file://CVE-2020-7212.patch"
 
 
