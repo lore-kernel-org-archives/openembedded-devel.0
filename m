@@ -1,34 +1,33 @@
-Return-Path: <Haiqing.Bai@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8DB9560C3E
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FD1361B3B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Mar 2020 03:21:26 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 02E3LP8h001682
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Fri, 13 Mar 2020 20:21:25 -0700 (PDT)
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.196]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0487.000;
-	Fri, 13 Mar 2020 20:21:24 -0700
-From: "Bai, Haiqing" <Haiqing.Bai@windriver.com>
-To: akuster808 <akuster808@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-python][zeus][PATCH]
-	python-urllib3/python3-urllib3: fix CVE-2020-7212
-Thread-Index: AQHV+U0trxLolg6bskS75CJR5LqifqhHarJQ
-Date: Sat, 14 Mar 2020 03:21:23 +0000
-Message-ID: <C2A454FDE6C23F41BD5011E2458C46C9FA265549@ALA-MBD.corp.ad.wrs.com>
-References: <1584094764-17831-1-git-send-email-Haiqing.Bai@windriver.com>
-	<652c9f72-5751-7494-c6e8-245e8e6af43e@gmail.com>
-In-Reply-To: <652c9f72-5751-7494-c6e8-245e8e6af43e@gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.17.80]
+	Sat, 14 Mar 2020 03:29:59 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,550,1574092800"; d="scan'208";a="86307975"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 14 Mar 2020 11:29:57 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 2F22D406AB15
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Mar 2020 11:19:55 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1395.4; Sat, 14 Mar 2020 11:29:55 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Sat, 14 Mar 2020 11:29:58 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Sat, 14 Mar 2020 02:15:18 -0700
+Message-ID: <1584177319-73191-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Subject: Re: [meta-python][zeus][PATCH] python-urllib3/python3-urllib3: fix CVE-2020-7212
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: 2F22D406AB15.A3AE7
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] postgresql: 12.1 -> 12.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,138 +40,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Mar 2020 03:21:26 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Sat, 14 Mar 2020 03:30:01 -0000
+Content-Type: text/plain
 
-IEhlbGxvLCAgdGhpcyByciBpcyBvbmx5IGZvciB6ZXVzIGJyYW5jaC4gIFRoYW5rIHlvdSBzbyBt
-dWNoLiANCg0KLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IGFrdXN0ZXI4MDggPGFr
-dXN0ZXI4MDhAZ21haWwuY29tPiANClNlbnQ6IEZyaWRheSwgTWFyY2ggMTMsIDIwMjAgMTE6MzYg
-UE0NClRvOiBCYWksIEhhaXFpbmcgPEhhaXFpbmcuQmFpQHdpbmRyaXZlci5jb20+OyBvcGVuZW1i
-ZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KU3ViamVjdDogUmU6IFtvZV0gW21l
-dGEtcHl0aG9uXVt6ZXVzXVtQQVRDSF0gcHl0aG9uLXVybGxpYjMvcHl0aG9uMy11cmxsaWIzOiBm
-aXggQ1ZFLTIwMjAtNzIxMg0KDQoNCg0KT24gMy8xMy8yMCAzOjE5IEFNLCBIYWlxaW5nIEJhaSB3
-cm90ZToNCj4gT3B0aW1pemUgX2VuY29kZV9pbnZhbGlkX2NoYXJzIGZvciBhIGRlbmlhbCBvZiBz
-ZXJ2aWNlIChDUFUgDQo+IGNvbnN1bXB0aW9uKQ0KDQppcyB0aGlzIGZpeCBpbiBtYXN0ZXI/DQoN
-Cg0KPg0KPiBTaWduZWQtb2ZmLWJ5OiBIYWlxaW5nIEJhaSA8SGFpcWluZy5CYWlAd2luZHJpdmVy
-LmNvbT4NCj4gLS0tDQo+ICAuLi4vcHl0aG9uL3B5dGhvbi11cmxsaWIzL0NWRS0yMDIwLTcyMTIu
-cGF0Y2ggICAgICB8IDU0ICsrKysrKysrKysrKysrKysrKysrKysNCj4gIC4uLi9weXRob24vcHl0
-aG9uLXVybGxpYjNfMS4yNS42LmJiICAgICAgICAgICAgICAgIHwgIDIgKw0KPiAgLi4uL3B5dGhv
-bi9weXRob24zLXVybGxpYjMvQ1ZFLTIwMjAtNzIxMi5wYXRjaCAgICAgfCA1NCArKysrKysrKysr
-KysrKysrKysrKysrDQo+ICAuLi4vcHl0aG9uL3B5dGhvbjMtdXJsbGliM18xLjI1LjYuYmIgICAg
-ICAgICAgICAgICB8ICAyICsNCj4gIDQgZmlsZXMgY2hhbmdlZCwgMTEyIGluc2VydGlvbnMoKykN
-Cj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCANCj4gbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9w
-eXRob24vcHl0aG9uLXVybGxpYjMvQ1ZFLTIwMjAtNzIxMi5wYXRjaA0KPiAgY3JlYXRlIG1vZGUg
-MTAwNjQ0IA0KPiBtZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXVy
-bGxpYjMvQ1ZFLTIwMjAtNzIxMi5wYXRjDQo+IGgNCj4NCj4gZGlmZiAtLWdpdCANCj4gYS9tZXRh
-LXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24tdXJsbGliMy9DVkUtMjAyMC03
-MjEyLnBhdA0KPiBjaCANCj4gYi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9w
-eXRob24tdXJsbGliMy9DVkUtMjAyMC03MjEyLnBhdA0KPiBjaA0KPiBuZXcgZmlsZSBtb2RlIDEw
-MDY0NA0KPiBpbmRleCAwMDAwMDAwLi5hMmJiMGZiDQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIv
-bWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uLXVybGxpYjMvQ1ZFLTIw
-MjAtNzIxMg0KPiArKysgLnBhdGNoDQo+IEBAIC0wLDAgKzEsNTQgQEANCj4gK0Zyb20gYWZmOTUx
-YjdhNDFlYjViOTU4YjMyYzQ5ZWFhMDBkYTAyYWRjOWMyZCBNb24gU2VwIDE3IDAwOjAwOjAwIA0K
-PiArMjAwMQ0KPiArRnJvbTogUXVlbnRpbiBQcmFkZXQgPHF1ZW50aW4ucHJhZGV0QGdtYWlsLmNv
-bT4NCj4gK0RhdGU6IFR1ZSwgMjEgSmFuIDIwMjAgMjI6MzI6NTYgKzA0MDANCj4gK1N1YmplY3Q6
-IFtQQVRDSF0gT3B0aW1pemUgX2VuY29kZV9pbnZhbGlkX2NoYXJzICgjMTc4NykNCj4gKw0KPiAr
-Q28tYXV0aG9yZWQtYnk6IFNldGggTWljaGFlbCBMYXJzb24gPHNldGhtaWNoYWVsbGFyc29uQGdt
-YWlsLmNvbT4NCj4gKw0KPiArVXBzdHJlYW0tU3RhdHVzOiBCYWNrcG9ydA0KPiArW2Zyb20gZ2l0
-Oi8vZ2l0aHViLmNvbS91cmxsaWIzL3VybGxpYjMuZ2l0IGNvbW1pdDphMjY5N2U3YzZiXQ0KPiAr
-U2lnbmVkLW9mZi1ieTogSGFpcWluZyBCYWkgPEhhaXFpbmcuQmFpQHdpbmRyaXZlci5jb20+DQo+
-ICstLS0NCj4gKyBzcmMvdXJsbGliMy91dGlsL3VybC5weSB8IDE1ICsrKysrKy0tLS0tLS0tLQ0K
-PiArIDEgZmlsZSBjaGFuZ2VkLCA2IGluc2VydGlvbnMoKyksIDkgZGVsZXRpb25zKC0pDQo+ICsN
-Cj4gK2RpZmYgLS1naXQgYS9zcmMvdXJsbGliMy91dGlsL3VybC5weSBiL3NyYy91cmxsaWIzL3V0
-aWwvdXJsLnB5IGluZGV4IA0KPiArOTY3NWY3NC4uZTM1MzkzNyAxMDA2NDQNCj4gKy0tLSBhL3Ny
-Yy91cmxsaWIzL3V0aWwvdXJsLnB5DQo+ICsrKysgYi9zcmMvdXJsbGliMy91dGlsL3VybC5weQ0K
-PiArQEAgLTIxNiwxOCArMjE2LDE1IEBAIGRlZiBfZW5jb2RlX2ludmFsaWRfY2hhcnMoY29tcG9u
-ZW50LCBhbGxvd2VkX2NoYXJzLCBlbmNvZGluZz0idXRmLTgiKToNCj4gKyANCj4gKyAgICAgY29t
-cG9uZW50ID0gc2l4LmVuc3VyZV90ZXh0KGNvbXBvbmVudCkNCj4gKyANCj4gKysgICAgIyBOb3Jt
-YWxpemUgZXhpc3RpbmcgcGVyY2VudC1lbmNvZGVkIGJ5dGVzLg0KPiArICAgICAjIFRyeSB0byBz
-ZWUgaWYgdGhlIGNvbXBvbmVudCB3ZSdyZSBlbmNvZGluZyBpcyBhbHJlYWR5IHBlcmNlbnQtZW5j
-b2RlZA0KPiArICAgICAjIHNvIHdlIGNhbiBza2lwIGFsbCAnJScgY2hhcmFjdGVycyBidXQgc3Rp
-bGwgZW5jb2RlIGFsbCBvdGhlcnMuDQo+ICstICAgIHBlcmNlbnRfZW5jb2RpbmdzID0gUEVSQ0VO
-VF9SRS5maW5kYWxsKGNvbXBvbmVudCkNCj4gKy0NCj4gKy0gICAgIyBOb3JtYWxpemUgZXhpc3Rp
-bmcgcGVyY2VudC1lbmNvZGVkIGJ5dGVzLg0KPiArLSAgICBmb3IgZW5jIGluIHBlcmNlbnRfZW5j
-b2RpbmdzOg0KPiArLSAgICAgICAgaWYgbm90IGVuYy5pc3VwcGVyKCk6DQo+ICstICAgICAgICAg
-ICAgY29tcG9uZW50ID0gY29tcG9uZW50LnJlcGxhY2UoZW5jLCBlbmMudXBwZXIoKSkNCj4gKysg
-ICAgY29tcG9uZW50LCBwZXJjZW50X2VuY29kaW5ncyA9IFBFUkNFTlRfUkUuc3VibigNCj4gKysg
-ICAgICAgIGxhbWJkYSBtYXRjaDogbWF0Y2guZ3JvdXAoMCkudXBwZXIoKSwgY29tcG9uZW50DQo+
-ICsrICAgICkNCj4gKyANCj4gKyAgICAgdXJpX2J5dGVzID0gY29tcG9uZW50LmVuY29kZSgidXRm
-LTgiLCAic3Vycm9nYXRlcGFzcyIpDQo+ICstICAgIGlzX3BlcmNlbnRfZW5jb2RlZCA9IGxlbihw
-ZXJjZW50X2VuY29kaW5ncykgPT0gdXJpX2J5dGVzLmNvdW50KGIiJSIpDQo+ICstDQo+ICsrICAg
-IGlzX3BlcmNlbnRfZW5jb2RlZCA9IHBlcmNlbnRfZW5jb2RpbmdzID09IHVyaV9ieXRlcy5jb3Vu
-dChiIiUiKQ0KPiArICAgICBlbmNvZGVkX2NvbXBvbmVudCA9IGJ5dGVhcnJheSgpDQo+ICsgDQo+
-ICsgICAgIGZvciBpIGluIHJhbmdlKDAsIGxlbih1cmlfYnl0ZXMpKToNCj4gK0BAIC0yMzcsNyAr
-MjM0LDcgQEAgZGVmIF9lbmNvZGVfaW52YWxpZF9jaGFycyhjb21wb25lbnQsIGFsbG93ZWRfY2hh
-cnMsIGVuY29kaW5nPSJ1dGYtOCIpOg0KPiArICAgICAgICAgaWYgKGlzX3BlcmNlbnRfZW5jb2Rl
-ZCBhbmQgYnl0ZSA9PSBiIiUiKSBvciAoDQo+ICsgICAgICAgICAgICAgYnl0ZV9vcmQgPCAxMjgg
-YW5kIGJ5dGUuZGVjb2RlKCkgaW4gYWxsb3dlZF9jaGFycw0KPiArICAgICAgICAgKToNCj4gKy0g
-ICAgICAgICAgICBlbmNvZGVkX2NvbXBvbmVudC5leHRlbmQoYnl0ZSkNCj4gKysgICAgICAgICAg
-ICBlbmNvZGVkX2NvbXBvbmVudCArPSBieXRlDQo+ICsgICAgICAgICAgICAgY29udGludWUNCj4g
-KyAgICAgICAgIGVuY29kZWRfY29tcG9uZW50LmV4dGVuZChiIiUiICsgDQo+ICsgKGhleChieXRl
-X29yZClbMjpdLmVuY29kZSgpLnpmaWxsKDIpLnVwcGVyKCkpKQ0KPiArIA0KPiArLS0NCj4gKzIu
-MjMuMA0KPiArDQo+IGRpZmYgLS1naXQgDQo+IGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29s
-cy9weXRob24vcHl0aG9uLXVybGxpYjNfMS4yNS42LmJiIA0KPiBiL21ldGEtcHl0aG9uL3JlY2lw
-ZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbi11cmxsaWIzXzEuMjUuNi5iYg0KPiBpbmRleCA2Yzgx
-ZjFkLi45ZjJkMmM4IDEwMDY0NA0KPiAtLS0gYS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xz
-L3B5dGhvbi9weXRob24tdXJsbGliM18xLjI1LjYuYmINCj4gKysrIGIvbWV0YS1weXRob24vcmVj
-aXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uLXVybGxpYjNfMS4yNS42LmJiDQo+IEBAIC0xLDIg
-KzEsNCBAQA0KPiAgaW5oZXJpdCBweXBpIHNldHVwdG9vbHMNCj4gIHJlcXVpcmUgcHl0aG9uLXVy
-bGxpYjMuaW5jDQo+ICsNCj4gK1NSQ19VUkkgKz0gImZpbGU6Ly9DVkUtMjAyMC03MjEyLnBhdGNo
-Ig0KPiBkaWZmIC0tZ2l0IA0KPiBhL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9u
-L3B5dGhvbjMtdXJsbGliMy9DVkUtMjAyMC03MjEyLnBhDQo+IHRjaCANCj4gYi9tZXRhLXB5dGhv
-bi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXVybGxpYjMvQ1ZFLTIwMjAtNzIxMi5w
-YQ0KPiB0Y2gNCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXggMDAwMDAwMC4uYTJiYjBm
-Yg0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMv
-cHl0aG9uL3B5dGhvbjMtdXJsbGliMy9DVkUtMjAyMC03MjENCj4gKysrIDIucGF0Y2gNCj4gQEAg
-LTAsMCArMSw1NCBAQA0KPiArRnJvbSBhZmY5NTFiN2E0MWViNWI5NThiMzJjNDllYWEwMGRhMDJh
-ZGM5YzJkIE1vbiBTZXAgMTcgMDA6MDA6MDAgDQo+ICsyMDAxDQo+ICtGcm9tOiBRdWVudGluIFBy
-YWRldCA8cXVlbnRpbi5wcmFkZXRAZ21haWwuY29tPg0KPiArRGF0ZTogVHVlLCAyMSBKYW4gMjAy
-MCAyMjozMjo1NiArMDQwMA0KPiArU3ViamVjdDogW1BBVENIXSBPcHRpbWl6ZSBfZW5jb2RlX2lu
-dmFsaWRfY2hhcnMgKCMxNzg3KQ0KPiArDQo+ICtDby1hdXRob3JlZC1ieTogU2V0aCBNaWNoYWVs
-IExhcnNvbiA8c2V0aG1pY2hhZWxsYXJzb25AZ21haWwuY29tPg0KPiArDQo+ICtVcHN0cmVhbS1T
-dGF0dXM6IEJhY2twb3J0DQo+ICtbZnJvbSBnaXQ6Ly9naXRodWIuY29tL3VybGxpYjMvdXJsbGli
-My5naXQgY29tbWl0OmEyNjk3ZTdjNmJdDQo+ICtTaWduZWQtb2ZmLWJ5OiBIYWlxaW5nIEJhaSA8
-SGFpcWluZy5CYWlAd2luZHJpdmVyLmNvbT4NCj4gKy0tLQ0KPiArIHNyYy91cmxsaWIzL3V0aWwv
-dXJsLnB5IHwgMTUgKysrKysrLS0tLS0tLS0tDQo+ICsgMSBmaWxlIGNoYW5nZWQsIDYgaW5zZXJ0
-aW9ucygrKSwgOSBkZWxldGlvbnMoLSkNCj4gKw0KPiArZGlmZiAtLWdpdCBhL3NyYy91cmxsaWIz
-L3V0aWwvdXJsLnB5IGIvc3JjL3VybGxpYjMvdXRpbC91cmwucHkgaW5kZXggDQo+ICs5Njc1Zjc0
-Li5lMzUzOTM3IDEwMDY0NA0KPiArLS0tIGEvc3JjL3VybGxpYjMvdXRpbC91cmwucHkNCj4gKysr
-KyBiL3NyYy91cmxsaWIzL3V0aWwvdXJsLnB5DQo+ICtAQCAtMjE2LDE4ICsyMTYsMTUgQEAgZGVm
-IF9lbmNvZGVfaW52YWxpZF9jaGFycyhjb21wb25lbnQsIGFsbG93ZWRfY2hhcnMsIGVuY29kaW5n
-PSJ1dGYtOCIpOg0KPiArIA0KPiArICAgICBjb21wb25lbnQgPSBzaXguZW5zdXJlX3RleHQoY29t
-cG9uZW50KQ0KPiArIA0KPiArKyAgICAjIE5vcm1hbGl6ZSBleGlzdGluZyBwZXJjZW50LWVuY29k
-ZWQgYnl0ZXMuDQo+ICsgICAgICMgVHJ5IHRvIHNlZSBpZiB0aGUgY29tcG9uZW50IHdlJ3JlIGVu
-Y29kaW5nIGlzIGFscmVhZHkgcGVyY2VudC1lbmNvZGVkDQo+ICsgICAgICMgc28gd2UgY2FuIHNr
-aXAgYWxsICclJyBjaGFyYWN0ZXJzIGJ1dCBzdGlsbCBlbmNvZGUgYWxsIG90aGVycy4NCj4gKy0g
-ICAgcGVyY2VudF9lbmNvZGluZ3MgPSBQRVJDRU5UX1JFLmZpbmRhbGwoY29tcG9uZW50KQ0KPiAr
-LQ0KPiArLSAgICAjIE5vcm1hbGl6ZSBleGlzdGluZyBwZXJjZW50LWVuY29kZWQgYnl0ZXMuDQo+
-ICstICAgIGZvciBlbmMgaW4gcGVyY2VudF9lbmNvZGluZ3M6DQo+ICstICAgICAgICBpZiBub3Qg
-ZW5jLmlzdXBwZXIoKToNCj4gKy0gICAgICAgICAgICBjb21wb25lbnQgPSBjb21wb25lbnQucmVw
-bGFjZShlbmMsIGVuYy51cHBlcigpKQ0KPiArKyAgICBjb21wb25lbnQsIHBlcmNlbnRfZW5jb2Rp
-bmdzID0gUEVSQ0VOVF9SRS5zdWJuKA0KPiArKyAgICAgICAgbGFtYmRhIG1hdGNoOiBtYXRjaC5n
-cm91cCgwKS51cHBlcigpLCBjb21wb25lbnQNCj4gKysgICAgKQ0KPiArIA0KPiArICAgICB1cmlf
-Ynl0ZXMgPSBjb21wb25lbnQuZW5jb2RlKCJ1dGYtOCIsICJzdXJyb2dhdGVwYXNzIikNCj4gKy0g
-ICAgaXNfcGVyY2VudF9lbmNvZGVkID0gbGVuKHBlcmNlbnRfZW5jb2RpbmdzKSA9PSB1cmlfYnl0
-ZXMuY291bnQoYiIlIikNCj4gKy0NCj4gKysgICAgaXNfcGVyY2VudF9lbmNvZGVkID0gcGVyY2Vu
-dF9lbmNvZGluZ3MgPT0gdXJpX2J5dGVzLmNvdW50KGIiJSIpDQo+ICsgICAgIGVuY29kZWRfY29t
-cG9uZW50ID0gYnl0ZWFycmF5KCkNCj4gKyANCj4gKyAgICAgZm9yIGkgaW4gcmFuZ2UoMCwgbGVu
-KHVyaV9ieXRlcykpOg0KPiArQEAgLTIzNyw3ICsyMzQsNyBAQCBkZWYgX2VuY29kZV9pbnZhbGlk
-X2NoYXJzKGNvbXBvbmVudCwgYWxsb3dlZF9jaGFycywgZW5jb2Rpbmc9InV0Zi04Iik6DQo+ICsg
-ICAgICAgICBpZiAoaXNfcGVyY2VudF9lbmNvZGVkIGFuZCBieXRlID09IGIiJSIpIG9yICgNCj4g
-KyAgICAgICAgICAgICBieXRlX29yZCA8IDEyOCBhbmQgYnl0ZS5kZWNvZGUoKSBpbiBhbGxvd2Vk
-X2NoYXJzDQo+ICsgICAgICAgICApOg0KPiArLSAgICAgICAgICAgIGVuY29kZWRfY29tcG9uZW50
-LmV4dGVuZChieXRlKQ0KPiArKyAgICAgICAgICAgIGVuY29kZWRfY29tcG9uZW50ICs9IGJ5dGUN
-Cj4gKyAgICAgICAgICAgICBjb250aW51ZQ0KPiArICAgICAgICAgZW5jb2RlZF9jb21wb25lbnQu
-ZXh0ZW5kKGIiJSIgKyANCj4gKyAoaGV4KGJ5dGVfb3JkKVsyOl0uZW5jb2RlKCkuemZpbGwoMiku
-dXBwZXIoKSkpDQo+ICsgDQo+ICstLQ0KPiArMi4yMy4wDQo+ICsNCj4gZGlmZiAtLWdpdCANCj4g
-YS9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRob24zLXVybGxpYjNfMS4y
-NS42LmJiIA0KPiBiL21ldGEtcHl0aG9uL3JlY2lwZXMtZGV2dG9vbHMvcHl0aG9uL3B5dGhvbjMt
-dXJsbGliM18xLjI1LjYuYmINCj4gaW5kZXggMTllYjcwMi4uZTM1ODNhMCAxMDA2NDQNCj4gLS0t
-IGEvbWV0YS1weXRob24vcmVjaXBlcy1kZXZ0b29scy9weXRob24vcHl0aG9uMy11cmxsaWIzXzEu
-MjUuNi5iYg0KPiArKysgYi9tZXRhLXB5dGhvbi9yZWNpcGVzLWRldnRvb2xzL3B5dGhvbi9weXRo
-b24zLXVybGxpYjNfMS4yNS42LmJiDQo+IEBAIC0xLDIgKzEsNCBAQA0KPiAgaW5oZXJpdCBweXBp
-IHNldHVwdG9vbHMzDQo+ICByZXF1aXJlIHB5dGhvbi11cmxsaWIzLmluYw0KPiArDQo+ICtTUkNf
-VVJJICs9ICJmaWxlOi8vQ1ZFLTIwMjAtNzIxMi5wYXRjaCINCg0K
+-License-Update: Copyright year updated to 2020.
+
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ meta-oe/recipes-dbs/postgresql/postgresql_12.1.bb | 12 ------------
+ meta-oe/recipes-dbs/postgresql/postgresql_12.2.bb | 12 ++++++++++++
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-oe/recipes-dbs/postgresql/postgresql_12.1.bb
+ create mode 100644 meta-oe/recipes-dbs/postgresql/postgresql_12.2.bb
+
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_12.1.bb b/meta-oe/recipes-dbs/postgresql/postgresql_12.1.bb
+deleted file mode 100644
+index 486851941..000000000
+--- a/meta-oe/recipes-dbs/postgresql/postgresql_12.1.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require postgresql.inc
+-
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=87da2b84884860b71f5f24ab37e7da78"
+-
+-SRC_URI += "\
+-   file://not-check-libperl.patch \
+-   file://0001-Add-support-for-RISC-V.patch \
+-   file://0001-Improve-reproducibility.patch \
+-"
+-
+-SRC_URI[md5sum] = "2ee1bd4ec5f49363a3f456f07e599b41"
+-SRC_URI[sha256sum] = "a09bf3abbaf6763980d0f8acbb943b7629a8b20073de18d867aecdb7988483ed"
+diff --git a/meta-oe/recipes-dbs/postgresql/postgresql_12.2.bb b/meta-oe/recipes-dbs/postgresql/postgresql_12.2.bb
+new file mode 100644
+index 000000000..0613e50c7
+--- /dev/null
++++ b/meta-oe/recipes-dbs/postgresql/postgresql_12.2.bb
+@@ -0,0 +1,12 @@
++require postgresql.inc
++
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=fc4ce21960f0c561460d750bc270d11f"
++
++SRC_URI += "\
++   file://not-check-libperl.patch \
++   file://0001-Add-support-for-RISC-V.patch \
++   file://0001-Improve-reproducibility.patch \
++"
++
++SRC_URI[md5sum] = "a88ceea8ecf2741307f663e4539b58b7"
++SRC_URI[sha256sum] = "ad1dcc4c4fc500786b745635a9e1eba950195ce20b8913f50345bb7d5369b5de"
+-- 
+2.17.1
+
+
+
 
