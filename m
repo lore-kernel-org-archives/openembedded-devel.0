@@ -1,35 +1,41 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 8089F61CBC
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wr1-f66.google.com (mail-wr1-f66.google.com
+	[209.85.221.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A073560203
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Mar 2020 03:30:02 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,550,1574092800"; d="scan'208";a="86307991"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 14 Mar 2020 11:30:03 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 1856C50A997C
+	Sat, 14 Mar 2020 19:50:36 +0000 (UTC)
+Received: by mail-wr1-f66.google.com with SMTP id v11so16387104wrm.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Mar 2020 11:19:58 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
-	Server (TLS) id 15.0.1395.4; Sat, 14 Mar 2020 11:29:59 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Sat, 14 Mar 2020 11:30:00 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sat, 14 Mar 2020 02:15:19 -0700
-Message-ID: <1584177319-73191-2-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1584177319-73191-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1584177319-73191-1-git-send-email-wangmy@cn.fujitsu.com>
+	Sat, 14 Mar 2020 12:50:37 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=uV+2otkyPl3JmHJguVbCw2jsSirs73kX5itjANu5qL8=;
+	b=Wb/IcGxoISxOeEKUXVNncaAuvn4zSlVn4qZBfIWjuNZe8YbZaTpsGlyWc/sRC2J1Sp
+	+Zyp3e+zKDTiNPHW6yNprm53MDDbtwrs/BHUn9z36TIv2qkWT0+W2kZ0zkpMBBaBuCY6
+	V5DW0EoTXUHIkoVEQhn8rXIOtrCup32PuvHfhfyLdb7rik1w2oGhqKZBZuZwtPZ8bSIz
+	2vOyVjDiFnvkTO7Ico2MxMtwYqT1z7zeFjf1yQs6XtcvEHT03zzRYM7JGV7eSH9HvLRF
+	kAFbYpJ+Zv+naBMJlX19d547UmnvsOnE2iiHsb/9GCD1W0BLFS6STu+sCDr2RgEDv5vR
+	Qhzw==
+X-Gm-Message-State: ANhLgQ3wsLphv/fOZIlSxqxqvMkY8RoEnZp7cu/sB/RPhAVCfJymzrJU
+	7RlhXujULNItxCD8LUTDLd7T5OIo
+X-Google-Smtp-Source: ADFU+vuoGGYP9Tu8+5S44VDXBTJwfgK7zR2ecz8CtkC4kVYXALgfumDiKyVF7m/NLqY9Du4GjDlTJA==
+X-Received: by 2002:adf:de0d:: with SMTP id b13mr25470193wrm.297.1584215436793;
+	Sat, 14 Mar 2020 12:50:36 -0700 (PDT)
+Received: from 1aq-andre.garage.tyco.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	f15sm22360779wmj.25.2020.03.14.12.50.35
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sat, 14 Mar 2020 12:50:36 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 14 Mar 2020 19:50:35 +0000
+Message-Id: <20200314195035.28224-1-git@andred.net>
+X-Mailer: git-send-email 2.23.0.rc1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 1856C50A997C.A807F
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] sg3-utils: upgrade 1.44 -> 1.45
+Subject: [meta-oe][PATCH] smem: remove numpy dependency on armv4 and armv5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,36 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Mar 2020 03:30:05 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sat, 14 Mar 2020 19:50:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+numpy doesn't build on those.
+
+Signed-off-by: André Draszik <git@andred.net>
 ---
- .../sg3-utils/{sg3-utils_1.44.bb => sg3-utils_1.45.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/sg3-utils/{sg3-utils_1.44.bb => sg3-utils_1.45.bb} (81%)
+ meta-oe/recipes-support/smem/smem_1.5.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.44.bb b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb
-similarity index 81%
-rename from meta-oe/recipes-support/sg3-utils/sg3-utils_1.44.bb
-rename to meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb
-index 4909035b3..22995b773 100644
---- a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.44.bb
-+++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.45.bb
-@@ -14,8 +14,8 @@ MIRRORS += "http://sg.danny.cz/sg/p https://fossies.org/linux/misc"
+diff --git a/meta-oe/recipes-support/smem/smem_1.5.bb b/meta-oe/recipes-support/smem/smem_1.5.bb
+index 90db9c3f3..77179906e 100644
+--- a/meta-oe/recipes-support/smem/smem_1.5.bb
++++ b/meta-oe/recipes-support/smem/smem_1.5.bb
+@@ -35,6 +35,9 @@ do_install() {
  
- UPSTREAM_CHECK_REGEX = "sg3_utils-(?P<pver>\d+(\.\d+)+)\.tgz"
+ RDEPENDS_${PN} = "python3-core python3-compression"
+ RRECOMMENDS_${PN} = "python3-matplotlib python3-numpy"
++# numpy doesn't work on those.
++RRECOMMENDS_${PN}_remove_armv4 = "python3-matplotlib python3-numpy"
++RRECOMMENDS_${PN}_remove_armv5 = "python3-matplotlib python3-numpy"
  
--SRC_URI[md5sum] = "c11d2b3ca4cc2fd01796473e5330afed"
--SRC_URI[sha256sum] = "8dae684d22e71b11353a48b16c95597af90f0cbe9bbd57f98d7f5544da5cae7b"
-+SRC_URI[md5sum] = "2e71d7cd925dcc48acb24afaaaac7990"
-+SRC_URI[sha256sum] = "0b87c971af52af7cebebcce343eac6bd3d73febb3c72af9ce41a4552f1605a61"
- 
- inherit autotools-brokensep
+ PACKAGE_BEFORE_PN = "smemcap"
  
 -- 
-2.17.1
-
-
+2.23.0.rc1
 
 
