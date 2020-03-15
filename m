@@ -1,27 +1,29 @@
 Return-Path: <pjtexier@koncepto.io>
 Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BEBF61B72
+	by mail.openembedded.org (Postfix) with ESMTP id 9586861B72
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 15 Mar 2020 13:11:29 +0000 (UTC)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
-	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id BA6CD6004D;
-	Sun, 15 Mar 2020 14:11:29 +0100 (CET)
+	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id 669436035F;
+	Sun, 15 Mar 2020 14:11:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584277889;
-	bh=QWxJ1n6dCtMmFjvpTOqWWtBoNtg/SCPhkPavS0zfQkE=;
-	h=From:To:Cc:Subject:Date:From;
-	b=EqpzQpAAz5IJB0z13IwR4HywWCG4GE5lvQZUnMNuo9w+qNFO0apihGSaneSM5ZOlp
-	eoqEBPt8WxQdHnzSib9MDKSy331/bqDLpf4/38eqRdC2Wu5Bruh1YsOZyT+qb9HsJ4
-	C+G9s6iKSNSL5nlSI7GN7wBn5EqyC4Xm9gAl5qjzMIRBuu56B125vUzNAwsZbVPOjU
-	QhiwlapA0hKB0FTbQQQQ9qI+yjR+mPgDrFf2pSnKavA8bmv4X1YgsKrNrj7vFgX/Ld
-	0toP8trRMo4XaoYeibn72VyEb8SUycB0oXJEmzMgBBbelSte3/j4kj81kCj9GX+Sz/
-	LsB9sbi9GNeTA==
+	s=default; t=1584277890;
+	bh=Dhg9f8/DmVIDm9LWIP/UBO/I32fVewmTEP+BbmCjIIQ=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=wMhTSq18meUamqx8aWHxIgTf0VHbdKcQeLrYuStzMpu+D1LAjPeGueBiCvS8FBDAZ
+	rqU4f3OwAIcuJfabhrloT4ESl8AomnbLBhmqzcpC76juV2ZVv0PXnfBULfE2MJXYD9
+	aR3/mIN8kE140i7NRPtsHBRg/UH+N+LF2IH8StD3P0qppvWSEbwXgFCya0u1Oey3yr
+	0RlG6ZLE0loh6s6k3eHojzGHk4keo/mPQ7odhqfbLmERUcSinviudiqM2hHnP+rnlT
+	Tnwi5uZXJW+5iKFM7QwjgoBvu9VFJKSkY1CInFKxC0Z958lwsTSMPzrYC/IYAaR0LB
+	Z628CuWqfjQ2Q==
 From: Pierre-Jean Texier <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Mar 2020 14:11:24 +0100
-Message-Id: <1584277886-652-1-git-send-email-pjtexier@koncepto.io>
+Date: Sun, 15 Mar 2020 14:11:25 +0100
+Message-Id: <1584277886-652-2-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] xxhash: upgrade 0.7.2 -> 0.7.3
+In-Reply-To: <1584277886-652-1-git-send-email-pjtexier@koncepto.io>
+References: <1584277886-652-1-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH] ddrescue: upgrade 1.24 -> 1.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,41 +38,32 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 15 Mar 2020 13:11:29 -0000
 
-License-Update: change link to https
-
--BSD 2-Clause License (http://www.opensource.org/licenses/bsd-license.php)
-+BSD 2-Clause License (https://www.opensource.org/licenses/bsd-license.php)
-
-See full changelog https://github.com/Cyan4973/xxHash/releases/tag/v0.7.3
+See changelog https://lists.gnu.org/archive/html/info-gnu/2020-03/msg00002.html
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-oe/recipes-support/xxhash/{xxhash_0.7.2.bb => xxhash_0.7.3.bb} | 4 ++--
+ .../recipes-extended/ddrescue/{ddrescue_1.24.bb => ddrescue_1.25.bb}  | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/xxhash/{xxhash_0.7.2.bb => xxhash_0.7.3.bb} (78%)
+ rename meta-oe/recipes-extended/ddrescue/{ddrescue_1.24.bb => ddrescue_1.25.bb} (90%)
 
-diff --git a/meta-oe/recipes-support/xxhash/xxhash_0.7.2.bb b/meta-oe/recipes-support/xxhash/xxhash_0.7.3.bb
-similarity index 78%
-rename from meta-oe/recipes-support/xxhash/xxhash_0.7.2.bb
-rename to meta-oe/recipes-support/xxhash/xxhash_0.7.3.bb
-index df106e4..865adc5 100644
---- a/meta-oe/recipes-support/xxhash/xxhash_0.7.2.bb
-+++ b/meta-oe/recipes-support/xxhash/xxhash_0.7.3.bb
-@@ -3,12 +3,12 @@ DESCRIPTION = "xxHash is an extremely fast non-cryptographic hash algorithm, \
- working at speeds close to RAM limits."
- HOMEPAGE = "http://www.xxhash.com/"
- LICENSE = "BSD-2-Clause & GPL-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=ed3511a67991a5923907dff2ed268026"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=01a7eba4212ef1e882777a38585e7a9b"
+diff --git a/meta-oe/recipes-extended/ddrescue/ddrescue_1.24.bb b/meta-oe/recipes-extended/ddrescue/ddrescue_1.25.bb
+similarity index 90%
+rename from meta-oe/recipes-extended/ddrescue/ddrescue_1.24.bb
+rename to meta-oe/recipes-extended/ddrescue/ddrescue_1.25.bb
+index 52bd11b..cf24354 100644
+--- a/meta-oe/recipes-extended/ddrescue/ddrescue_1.24.bb
++++ b/meta-oe/recipes-extended/ddrescue/ddrescue_1.25.bb
+@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
+                     file://main_common.cc;beginline=5;endline=16;md5=3ec288b2676528cd2b069364e313016f"
  
- SRC_URI = "git://github.com/Cyan4973/xxHash.git"
- UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+(\.\d+)+)"
+ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.lz"
+-SRC_URI[md5sum] = "8ac89f833c0df221723e33b447e230fe"
+-SRC_URI[sha256sum] = "4b5d3feede70e3657ca6b3c7844f23131851cbb6af0cecc9721500f7d7021087"
++SRC_URI[md5sum] = "99fd7a28bf9953d88534c7ee9ab5bd2a"
++SRC_URI[sha256sum] = "ce538ebd26a09f45da67d3ad3f7431932428231ceec7a2d255f716fa231a1063"
  
--SRCREV = "e2f4695899e831171ecd2e780078474712ea61d3"
-+SRCREV = "d408e9b0606d07b1ddc5452ffc0ec8512211b174"
- 
- S = "${WORKDIR}/git"
- 
+ # This isn't already added by base.bbclass
+ do_unpack[depends] += "lzip-native:do_populate_sysroot"
 -- 
 2.7.4
 
