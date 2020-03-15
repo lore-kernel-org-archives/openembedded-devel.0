@@ -1,29 +1,48 @@
-Return-Path: <pjtexier@koncepto.io>
-Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B96661B75
+Return-Path: <alex.kiernan@gmail.com>
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com
+	[209.85.128.44])
+	by mail.openembedded.org (Postfix) with ESMTP id C90F46021C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2020 13:11:30 +0000 (UTC)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
-	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id 077B96043B;
-	Sun, 15 Mar 2020 14:11:31 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584277891;
-	bh=SFXf9Mv9hKEtDl1UYVxZWBU9RQj/hhdikxnllQf/lEU=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ruIUJMT+F6ZvlhXRULqnmrlqeK/DUC4AdTb30kKPW5GqPs6UW5JVhbkdKzMK9sFoF
-	Kd1bV2U2bqmgPWOTlo4d0NC2M5cH0Potr0MT8Ovr5GkVc86GqUgjyDWZMidObeKjrt
-	8Y7Hqy79WGbemsQlzn3yQfnAS8UrrZ3rK7ssLkCGZXs3hXlS3SSgwTNgHGR8MuAsEk
-	r0un2nTYWg1qd7g3oWaHXbDEBqEEdpj9D/N2hQhgNvzg4f/7ubnm+xuLHfuATx8bXN
-	sGnH0VPq/vjaOQF6ZF4BV1V3Am9TuE8cogjJPJiA0zNrCAVuaKVABXkv+6rZ5BZCks
-	TGLf5okQ6hLCw==
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
+	Sun, 15 Mar 2020 16:47:10 +0000 (UTC)
+Received: by mail-wm1-f44.google.com with SMTP id 25so15087738wmk.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Mar 2020 09:47:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=HKGmEl6+4Cz+zg8u5YHvs7X9hnuHeHoYtFHm6YDAMIY=;
+	b=vXCv2NLEHG4nOy9cBtWAOSTXHOIJPtOknefmYY/TGNhr5GpLpfgGbi4WmxtPiFMBqx
+	+G9QwD3HSs1LR6bSj1xb7i5Xh2kSZVoUeYQTu6ZKK9jGWSO2kqSFYTIc6MHcUdPXl/4f
+	wQ1MlD6ndcfhcyCdZ2Hshr+lTj0/54wk1PttM76jF+Ed6wKNpEJfq2uW0I+5zzPIQjAZ
+	J3HgTL3y+d+c8F9asF6HvAfRj+XBUnJC9a1J5Hl4FlJZI2iqIBGvlYI+EPmNZdivGSoJ
+	zeBRZ6BqInjxanS5LicUTApLtNZp6PXZDXaFSQeNwK7p5MxiPVeC+0JNcn6DYBAzQkH5
+	ZZOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HKGmEl6+4Cz+zg8u5YHvs7X9hnuHeHoYtFHm6YDAMIY=;
+	b=CGhkgH49cj8MNezhmQ+2OBJ5O5CCCcWzH7qJmDU8fwMuAofe1UrOvDI8gKID8jupij
+	rHVnhCxXL+jWwWsf63aH/9rLjOvvfycnMSRyv928JhQNQq98lZmCwJXnlNLTY7epAlso
+	pUNI2rsGXnXCN95U7dpmo58yLLE5kEGu8bCuH09G37NwIKGdzn8uoCiZIfAy73GNaWO6
+	UvtqyU4rQtq/alQIDSlOIWl3Bi6RzSVGJ3sG6WEoUx+pQ9g1gxO5SUPmY0N0iwH9i4wc
+	k2GinZQYMeS6LwJ69YphNdRQBmFgbkwlZtYHRYk1a+8atU+x1PCweoPNuV0qbRg8XzgZ
+	bicQ==
+X-Gm-Message-State: ANhLgQ3zGJxUZ5NzuIbdQEArTApuhUMSpOE8gc9/5bfhvPGYg7re7Szi
+	OxYEQNbt6+wncxbGZN/YLtWYew2m
+X-Google-Smtp-Source: ADFU+vv53YC2hEz6e20w+H3iSKS/flFVJOnmZhoEUiSzIWmJdSteWXQbPL1clk2rRLgHICK+r83TYA==
+X-Received: by 2002:a05:600c:248:: with SMTP id
+	8mr23395953wmj.182.1584290831021; 
+	Sun, 15 Mar 2020 09:47:11 -0700 (PDT)
+Received: from localhost.localdomain (cust246-dsl91-135-6.idnet.net.
+	[91.135.6.246])
+	by smtp.gmail.com with ESMTPSA id v2sm20743980wme.2.2020.03.15.09.47.10
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 15 Mar 2020 09:47:10 -0700 (PDT)
+From: Alex Kiernan <alex.kiernan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Mar 2020 14:11:26 +0100
-Message-Id: <1584277886-652-3-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1584277886-652-1-git-send-email-pjtexier@koncepto.io>
-References: <1584277886-652-1-git-send-email-pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] flashrom: upgrade 1.1 -> 1.2
+Date: Sun, 15 Mar 2020 16:47:06 +0000
+Message-Id: <20200315164706.7672-1-alex.kiernan@gmail.com>
+X-Mailer: git-send-email 2.17.1
+Subject: [meta-oe][PATCH] ostree: upgrade 2020.2 -> 2020.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,33 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 13:11:30 -0000
+X-List-Received-Date: Sun, 15 Mar 2020 16:47:11 -0000
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
 ---
- meta-oe/recipes-bsp/flashrom/{flashrom_1.1.bb => flashrom_1.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-bsp/flashrom/{flashrom_1.1.bb => flashrom_1.2.bb} (77%)
 
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
-similarity index 77%
-rename from meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb
-rename to meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
-index 074a1a5..17445ac 100644
---- a/meta-oe/recipes-bsp/flashrom/flashrom_1.1.bb
-+++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
-@@ -7,8 +7,8 @@ DEPENDS = "pciutils libusb libusb-compat"
+ .../ostree/{ostree_2020.2.bb => ostree_2020.3.bb}               | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/ostree/{ostree_2020.2.bb => ostree_2020.3.bb} (99%)
+
+diff --git a/meta-oe/recipes-extended/ostree/ostree_2020.2.bb b/meta-oe/recipes-extended/ostree/ostree_2020.3.bb
+similarity index 99%
+rename from meta-oe/recipes-extended/ostree/ostree_2020.2.bb
+rename to meta-oe/recipes-extended/ostree/ostree_2020.3.bb
+index 78f4cf588c64..43021c534249 100644
+--- a/meta-oe/recipes-extended/ostree/ostree_2020.2.bb
++++ b/meta-oe/recipes-extended/ostree/ostree_2020.3.bb
+@@ -25,7 +25,7 @@ SRC_URI = " \
+     gitsm://github.com/ostreedev/ostree \
+     file://run-ptest \
+ "
+-SRCREV = "c6085ebd5e27da35f43165eb614190665468f13a"
++SRCREV = "6ed48234ba579ff73eb128af237212b0a00f2057"
  
- SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
-            "
--SRC_URI[md5sum] = "91bab6c072e38a493bb4eb673e4fe0d6"
--SRC_URI[sha256sum] = "aeada9c70c22421217c669356180c0deddd0b60876e63d2224e3260b90c14e19"
-+SRC_URI[md5sum] = "7f8e4b87087eb12ecee0fcc5445b4956"
-+SRC_URI[sha256sum] = "e1f8d95881f5a4365dfe58776ce821dfcee0f138f75d0f44f8a3cd032d9ea42b"
- 
- S = "${WORKDIR}/flashrom-v${PV}"
+ UPSTREAM_CHECK_GITTAGREGEX = "v(?P<pver>\d+\.\d+)"
  
 -- 
-2.7.4
+2.17.1
 
 
