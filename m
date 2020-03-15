@@ -1,45 +1,44 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f179.google.com (mail-qk1-f179.google.com
-	[209.85.222.179])
-	by mail.openembedded.org (Postfix) with ESMTP id D126961C79
+Received: from mail-qv1-f48.google.com (mail-qv1-f48.google.com
+	[209.85.219.48])
+	by mail.openembedded.org (Postfix) with ESMTP id E26C26092C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2020 23:27:15 +0000 (UTC)
-Received: by mail-qk1-f179.google.com with SMTP id f28so23106586qkk.13
+	Sun, 15 Mar 2020 23:35:56 +0000 (UTC)
+Received: by mail-qv1-f48.google.com with SMTP id c28so7861435qvb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2020 16:27:17 -0700 (PDT)
+	Sun, 15 Mar 2020 16:35:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
 	:cc:content-transfer-encoding;
-	bh=ikmPX32zqf0weyHVepMr3p5iQMsA8LSQi9dgZLvG91E=;
-	b=DPyI2koCIwu1nnC/vTiTLRdX1ErHjLY8bfv0bQ+g9KYeHZsRp9Rp5u2R9aT46GpiAo
-	GTHQrGtk/4iNF0fbCjIz6/8g3awWzB4aiswbfkrcpkmrPPoH7i8xZ+7QIhWkuVu4HVFd
-	McdPX3XAYlioEoeDnPXQ+ecNVsC2LLBQqLO9YS5kDRf8FlRa03slQYhgLIA61aITinyt
-	MhY6jWA+QPFTb6HB2S37qVTEjf769BJza/GliO7/IcMGKHD31saYhEoXL22HUmtczc6O
-	ISSj1Ic/FsYiYBgO9Apc1ai7rVLEA5oRuNA9F8reMZy7dPgWnWiNIZK8iV6ZxNNObWIn
-	ZCcQ==
+	bh=/GUcTV3KSK1E/I02QklGZlogHqVmai+W2bLiBOSBjDE=;
+	b=Nv+ljgqQNYtdWB1aHdicRko15bVszN6s7J3HEymTe82FF8AnuLKOU84xKNPgdXGpgH
+	cpu7q0GUoIr9kKh3QBK1b26S3utCZVxJGsqBq4TauChMOfI6UGDpEg2UCSmNgjRxKg63
+	bheUqjs+phkQC+RoxbhnHG4OtEUC0gzXZ51Csmu89hP+z77hy9Ubk08a+HgdJKN2/0pR
+	ruCHlTdU3JXFSsbbMjU+A6Ioea7gvUtOjlnvzsgP/M9Xhcn2CW5Wb4o3mCiXzyMbz9UM
+	u5rLyiNfN1rloam0Q0x4YC4h7Zafp3ZOscr5ocJp8zrNe+g4FjzmV7dvm2u/0tXY5MmK
+	OWdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
 	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=ikmPX32zqf0weyHVepMr3p5iQMsA8LSQi9dgZLvG91E=;
-	b=HBaI4hqcl3ky2BLaDLzS1fUYt/IYC8Jr/ByE0j5jk8kHjPJ+jQPIAMFNzMh/+VB6Uh
-	u+w3jcWEtfYu2agldMxQJbnRkCsbvoo/lLF5rIqSeWspgYpZlcuvsdOZarbJmmQARs6+
-	du3Eh4tby5HzN+QNaa2kccCGcw4pQwcB/qFJ0O+QYbcIQY0uqyWkqcgp55JDQibRasp/
-	VpNbrM27kb5qpMnd48+vD/PI+2IM6CALE/HsKJjHF5/rluzj/s7jYSScouj70Xh9rYXn
-	aJ9hafvxVkF9p+mjc6rwJFzYcIEUBJyJct4LL7tIjDukEpdhb+ehb6BPqT6Mya4XRpEZ
-	M35A==
-X-Gm-Message-State: ANhLgQ12EuDP4txf01OW5xrdx0bKDpTGjOA2eSHyzz051J2ea0cfxhzv
-	QE2PER5BFrvV4kKfpTQRjF1ZmOhLqj2ZtRtz8Tc=
-X-Google-Smtp-Source: ADFU+vsOqCz33f+0YKFGeHN6RqjzDBnKL95ovzzRdTm7ZsYzd7W9Pgkrt4ZcYTBOJGHbdfqIrJfF9zLZuJ+LFEg794Y=
-X-Received: by 2002:a05:620a:15d1:: with SMTP id
-	o17mr15976378qkm.165.1584314836218; 
-	Sun, 15 Mar 2020 16:27:16 -0700 (PDT)
+	bh=/GUcTV3KSK1E/I02QklGZlogHqVmai+W2bLiBOSBjDE=;
+	b=inuTq++RoJdC9UrNzP/uRE7JXHzLeAAhovmHcbY07NWr1m8JfQkyuHfceNRsj5/tvS
+	6LIxsVmBe317dgkLUQ8qJSA0UycRHQwHpPaJV4Be+LAGq+3jySNb9ZIwiYCg5XXeHImK
+	jMbyoCVXxEfHlKv+fA2tkuk9zN5vSvjOfCl15IkRlBJd9nKrZcdu06yYc92PEOZ02JTu
+	NetK162nDZNmeTJ8QWC7t9fFp33ZAwVcsod8Xhymyo+JIK5UmzfMUrSgXp/zzFvkpPeA
+	fWpSPoT5eQ7bb0dBsWRSum3vB8RWFQEGlJIAlCbxnmv9IBT+cLlk35a5gRZ8sGT3QyA0
+	pWwA==
+X-Gm-Message-State: ANhLgQ3QQdtMZK4OFbmBssYNKzbo7HZ13BE5DgFI6JCuuR03A/yuiY5E
+	WfhiJAOEJvaQh7CAa1KLReddE0iMIcVOOHw0uzc=
+X-Google-Smtp-Source: ADFU+vsYZ3isYJsgE2m9t9b7Q9AP7nC9Ckoe7hK7w7fd9Gbs01Zx47zOQjYoITmMM54HBLtbi8nxurGPgUgUHLmCCAA=
+X-Received: by 2002:a0c:9e41:: with SMTP id z1mr11580556qve.130.1584315356628; 
+	Sun, 15 Mar 2020 16:35:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <20200314220440.5983-1-schnitzeltony@gmail.com>
 In-Reply-To: <20200314220440.5983-1-schnitzeltony@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 15 Mar 2020 16:26:50 -0700
-Message-ID: <CAMKF1sqsq6xMRCRAbNibJP1YeJ-aYyYNyQM_3Ef6KcvSwWLo5A@mail.gmail.com>
+Date: Sun, 15 Mar 2020 16:35:30 -0700
+Message-ID: <CAMKF1sotjDeZvidnX=FDL8u1f2KJ_Y5X-FLM++07jfqV887wxg@mail.gmail.com>
 To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 1/2] pipewire: upgrade 0.2.7 -> 0.3.1
@@ -55,14 +54,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 23:27:16 -0000
+X-List-Received-Date: Sun, 15 Mar 2020 23:35:57 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-
-We need something like below patch to get it going on mips/x86
-
-https://git.openembedded.org/meta-openembedded/commit/?h=3Dmaster-next&id=
-=3D0ea5b0d3721d04111310ef6c331cbb3c2d68bd5c
 
 On Sat, Mar 14, 2020 at 3:05 PM Andreas M=C3=BCller <schnitzeltony@gmail.co=
 m> wrote:
@@ -193,6 +187,13 @@ e/recipes-multimedia/pipewire/pipewire_git.bb
 } \
 > +    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio systemd vulkan', d=
 )} \
+
+Perhaps add vulkan as packageconfig too here. I am seeing
+
+WARNING: pipewire-0.3.1-r0 do_configure: QA Issue: pipewire: invalid
+PACKAGECONFIG: vulkan [invalid-packageconfig]
+
+
 > +    jack gstreamer \
 >  "
 >
@@ -202,6 +203,9 @@ ed,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
 > +# disable vulkan fo now
 > +EXTRA_OEMESON =3D "-Dvulkan=3Dfalse"
 > +
+
+This should be turned into PACKAGECONFIG
+
 > +PACKAGECONFIG[bluez] =3D "-Dbluez5=3Dtrue,-Dbluez5=3Dfalse,bluez5 sbc"
 > +PACKAGECONFIG[jack] =3D "-Djack=3Dtrue,-Djack=3Dfalse,jack"
 > +PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3Dtrue,-Dgstreamer=3Dfalse,gli=
