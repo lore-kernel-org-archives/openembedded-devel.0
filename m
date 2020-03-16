@@ -1,48 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-qv1-f68.google.com (mail-qv1-f68.google.com
-	[209.85.219.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EB27761C60
+Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
+	[209.85.216.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 466CE61B85
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2020 23:44:21 +0000 (UTC)
-Received: by mail-qv1-f68.google.com with SMTP id cy12so1981270qvb.7
+	Mon, 16 Mar 2020 00:06:40 +0000 (UTC)
+Received: by mail-pj1-f68.google.com with SMTP id l36so7251664pjb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2020 16:44:23 -0700 (PDT)
+	Sun, 15 Mar 2020 17:06:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=lBsMYtx7MvJQs15qySaxNWvqsaVZ89OIw2Mvuxjc8uE=;
-	b=cZBROGg5DA7glTP4UTJZalh49DYsvWhqKeQg85zMuLpZoDFivdpyGIrSFBxU8ctUub
-	h/mkkuo5PiuLF6RoNOP46uUG+lvLbjuHGgZAkr7nFVvfrAk2C/ntpfmfypWyIIastJ29
-	z36iHkbyTdkZjO6kuchgaJFEjRjM3S6envDvBcG2f2zkMeW18H+V6g/ZHa2r9qllEG8M
-	UoszdZ5UrkKFnTn8wN6O1sXKBfDr0+1WycB81vjSZeK0csvkN1ud33FO3E61EY2Y3ZnX
-	rd6b6f75txcnCOlBGa8NsU4ZDPLYGvnR2eDEmRtt0P24q0a67a2G8YVkY8xuPa+rcP88
-	gnrQ==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=L/zx2sioXGr5FHVvHKIuhKSHjY6OkbFNBUNnb1MQf/A=;
+	b=EHFqfz9unaJ5D+ebFLpUR1ErtZBlHDddsoXRdSoU798/g45XjbK7YzQ4aF3oyNzC1P
+	hziG0tx+lIQzDdYPJkU3v9s9CKejPW+LpWGx+0kNU9pVPzCN2SEJQkQMdLRHuf/VZ2U5
+	mq0+9jDlJWO5rOIRxq0TjQQI15o9E8iXLoNOlleYudxWpQtNNxxiOC3IwZz5uv0VWCdZ
+	3tG/BTmF9LnM2bDdvtc7u6zSvPo+mW/ztKx+pXmALr4xMzk1y5gHCNktTkrhyjxM9OYm
+	qUmLTLP7PjIQsyt8Lu6zYwWL41w8m5q5cGRRT9uazGwnNPJKjpEGNxAMaEUHlImYcdhs
+	TOiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=lBsMYtx7MvJQs15qySaxNWvqsaVZ89OIw2Mvuxjc8uE=;
-	b=PQJGEa77lKLDvRoqLspWCchK89MbRN0ATO0gyfeTEVYLw0oQC7ibM+DwP2dlmCq1aQ
-	XoygD0ABavVZBdjiHtQ1iDVTGjrb/wjpTuU98sobGdtBCYaFHmba991nKwjDm0ewrfFO
-	l3DP6yjlA0lcPf3zBJSk+M5xWHvjVH763p7/ueyzJcdhOC5IBdXLWkv+zPPQ5bhRaWM8
-	IMj/p7wl7nTozu7c4DLFJPNv/NAe3RpCDQy3iKejR9J6BmJXbL2BjlDNnA2valacmaW2
-	G9veWnq0wL704M5z6bh+54eIOf2rvI5E0hDC96/LxT3J3YVr/LmZVUDGBL7OAlN6T5n6
-	jNDw==
-X-Gm-Message-State: ANhLgQ1qMpdKtXGCc984BAI5qBYRG3xn62dbuGHnX392kM4p9fEoBlmD
-	qLC11aYr929HGG5XoOfEku290zLcPlkq7T4dwBw=
-X-Google-Smtp-Source: ADFU+vvqmbjz81HBYJKOiX3oYpo3jziovroLcIZmiBw+l03D1UdUbo4p18ALnewPbjTICxqJG8Bhzq+9LvFCm9JnHUo=
-X-Received: by 2002:ad4:45a7:: with SMTP id y7mr22603428qvu.146.1584315862381; 
-	Sun, 15 Mar 2020 16:44:22 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200311070359.18480-1-nick83ola@gmail.com>
-	<20200311070359.18480-3-nick83ola@gmail.com>
-In-Reply-To: <20200311070359.18480-3-nick83ola@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=L/zx2sioXGr5FHVvHKIuhKSHjY6OkbFNBUNnb1MQf/A=;
+	b=BwKx85usJxnQ+rPSaOfwocMks+nW0Vc3wzGeG0QoQ/gPmxR83FAymk65N0+6KMZVk6
+	fYY5j5sN07e+Lm+6xlHx5/soJJsmIdDGSNJq68BrScepwj3SFSyb792UJR4W7LU2CHtX
+	TjLsG4d1pQGS41zfL7Z2CbwvgepAk8Z7PMHEAVRQ5IxEMuENitFsBkf/nMcubA95zd9n
+	YsR1/T2bM8XJh6TVrz0huHp94b1QuO1VcPU8PZDseaLGUvFygwz3u5py4swHZmM0shgf
+	KxUmdirdj3bVldqIK3JF5ThnqD1FTTHDOX/UwweJPK8BrKGBrlYNs7WyQF32dJSnFiOF
+	Cwog==
+X-Gm-Message-State: ANhLgQ1eANGQnFbY0QvQKq5jBdtAt0QmUlrFewj99ivwEid52H4x85QX
+	q2CB6FoWVrCAuKzfSu0bEvCVV8PfAfY=
+X-Google-Smtp-Source: ADFU+vv+Uh+Nc4xV2m4t+aI5I34QGT2vxhmKOfrn/x2vn2Td+ZCcBO5mjpxyoJObIfC/EljlDsC+jg==
+X-Received: by 2002:a17:902:74c2:: with SMTP id
+	f2mr22686304plt.318.1584317201663; 
+	Sun, 15 Mar 2020 17:06:41 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::af11])
+	by smtp.gmail.com with ESMTPSA id
+	i72sm35775587pgd.88.2020.03.15.17.06.40
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Sun, 15 Mar 2020 17:06:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 15 Mar 2020 16:43:56 -0700
-Message-ID: <CAMKF1sqcprj2Yq3vKnrD2s0Firk8YSmjZDMq2s72SqOnVVRA0g@mail.gmail.com>
-To: Nicola Lunghi <nick83ola@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Parthiban Nallathambi <parthitce@gmail.com>
-Subject: Re: [meta-python][PATCH 3/3] python3-matplotlib: fix dependencies and license
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 15 Mar 2020 17:06:54 -0700
+Message-Id: <20200316000654.1093220-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] flashrom: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,183 +58,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Mar 2020 23:44:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 16 Mar 2020 00:06:41 -0000
+Content-Transfer-Encoding: 8bit
 
-please rebase on master-next and resend.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...typecast-enum-conversions-explicitly.patch | 69 +++++++++++++++++++
+ meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb  |  1 +
+ 2 files changed, 70 insertions(+)
+ create mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
 
-On Wed, Mar 11, 2020 at 12:05 AM Nicola Lunghi <nick83ola@gmail.com> wrote:
->
-> * The license indicated in the old recipe (and in this) is the PSF not the BSD
-> that was indicated before.
-> * fixed the dependencies (looking at the recipe at meta-jupiter
-> https://github.com/Xilinx/meta-jupyter/tree/master/recipes-python/
-> * the setupext script was a leftover from the python2 recipe remove it for now
->   but probably has to be put updated and put back in the future:
->   -> all the module are installed by default and they have different licenses?
->
-> Signed-off-by: Nicola Lunghi <nick83ola@gmail.com>
-> ---
->  .../python-matplotlib/fix_setupext.patch      | 110 ------------------
->  .../python/python3-matplotlib_3.1.1.bb        |  24 ++--
->  2 files changed, 17 insertions(+), 117 deletions(-)
->  delete mode 100644 meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch
->
-> diff --git a/meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch b/meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch
-> deleted file mode 100644
-> index 21b9094a1..000000000
-> --- a/meta-python/recipes-devtools/python/python-matplotlib/fix_setupext.patch
-> +++ /dev/null
-> @@ -1,110 +0,0 @@
-> -This fixes the numpy import problem in setupext.py using a hard-coded path.
-> -
-> -Index: matplotlib-2.0.2/setupext.py
-> -===================================================================
-> ---- matplotlib-2.0.2.orig/setupext.py
-> -+++ matplotlib-2.0.2/setupext.py
-> -@@ -148,6 +148,7 @@ def has_include_file(include_dirs, filen
-> -     Returns `True` if `filename` can be found in one of the
-> -     directories in `include_dirs`.
-> -     """
-> -+    return True
-> -     if sys.platform == 'win32':
-> -         include_dirs += os.environ.get('INCLUDE', '.').split(';')
-> -     for dir in include_dirs:
-> -@@ -172,7 +173,7 @@ def get_base_dirs():
-> -     Returns a list of standard base directories on this platform.
-> -     """
-> -     if options['basedirlist']:
-> --        return options['basedirlist']
-> -+        return [os.environ['STAGING_LIBDIR']]
-> -
-> -     basedir_map = {
-> -         'win32': ['win32_static', ],
-> -@@ -260,14 +261,6 @@ def make_extension(name, files, *args, *
-> -     `distutils.core.Extension` constructor.
-> -     """
-> -     ext = DelayedExtension(name, files, *args, **kwargs)
-> --    for dir in get_base_dirs():
-> --        include_dir = os.path.join(dir, 'include')
-> --        if os.path.exists(include_dir):
-> --            ext.include_dirs.append(include_dir)
-> --        for lib in ('lib', 'lib64'):
-> --            lib_dir = os.path.join(dir, lib)
-> --            if os.path.exists(lib_dir):
-> --                ext.library_dirs.append(lib_dir)
-> -     ext.include_dirs.append('.')
-> -
-> -     return ext
-> -@@ -314,6 +307,7 @@ class PkgConfig(object):
-> -                     "    matplotlib may not be able to find some of its dependencies")
-> -
-> -     def set_pkgconfig_path(self):
-> -+        return
-> -         pkgconfig_path = sysconfig.get_config_var('LIBDIR')
-> -         if pkgconfig_path is None:
-> -             return
-> -@@ -875,14 +869,14 @@ class Numpy(SetupPackage):
-> -             reload(numpy)
-> -
-> -         ext = Extension('test', [])
-> --        ext.include_dirs.append(numpy.get_include())
-> -+        ext.include_dirs.append(os.path.join(os.environ['STAGING_LIBDIR'], 'python2.7/site-packages/numpy/core/include/'))
-> -         if not has_include_file(
-> -                 ext.include_dirs, os.path.join("numpy", "arrayobject.h")):
-> -             warnings.warn(
-> -                 "The C headers for numpy could not be found. "
-> -                 "You may need to install the development package")
-> -
-> --        return [numpy.get_include()]
-> -+        return [os.path.join(os.environ['STAGING_LIBDIR'], 'python2.7/site-packages/numpy/core/include/')]
-> -
-> -     def check(self):
-> -         min_version = extract_versions()['__version__numpy__']
-> -Index: matplotlib-2.0.2/setup.py
-> -===================================================================
-> ---- matplotlib-2.0.2.orig/setup.py
-> -+++ matplotlib-2.0.2/setup.py
-> -@@ -66,28 +66,6 @@ mpl_packages = [
-> -     setupext.Python(),
-> -     setupext.Platform(),
-> -     'Required dependencies and extensions',
-> --    setupext.Numpy(),
-> --    setupext.Six(),
-> --    setupext.Dateutil(),
-> --    setupext.FuncTools32(),
-> --    setupext.Subprocess32(),
-> --    setupext.Pytz(),
-> --    setupext.Cycler(),
-> --    setupext.Tornado(),
-> --    setupext.Pyparsing(),
-> --    setupext.LibAgg(),
-> --    setupext.FreeType(),
-> --    setupext.FT2Font(),
-> --    setupext.Png(),
-> --    setupext.Qhull(),
-> --    setupext.Image(),
-> --    setupext.TTConv(),
-> --    setupext.Path(),
-> --    setupext.ContourLegacy(),
-> --    setupext.Contour(),
-> --    setupext.Delaunay(),
-> --    setupext.QhullWrap(),
-> --    setupext.Tri(),
-> -     'Optional subpackages',
-> -     setupext.SampleData(),
-> -     setupext.Toolkits(),
-> -@@ -100,13 +78,8 @@ mpl_packages = [
-> -     setupext.BackendMacOSX(),
-> -     setupext.BackendQt5(),
-> -     setupext.BackendQt4(),
-> --    setupext.BackendGtk3Agg(),
-> -     setupext.BackendGtk3Cairo(),
-> --    setupext.BackendGtkAgg(),
-> --    setupext.BackendTkAgg(),
-> --    setupext.BackendWxAgg(),
-> -     setupext.BackendGtk(),
-> --    setupext.BackendAgg(),
-> -     setupext.BackendCairo(),
-> -     setupext.Windowing(),
-> -     'Optional LaTeX dependencies',
-> diff --git a/meta-python/recipes-devtools/python/python3-matplotlib_3.1.1.bb b/meta-python/recipes-devtools/python/python3-matplotlib_3.1.1.bb
-> index 824680c24..1fb234c8e 100644
-> --- a/meta-python/recipes-devtools/python/python3-matplotlib_3.1.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-matplotlib_3.1.1.bb
-> @@ -4,16 +4,26 @@ Matplotlib is a Python 2D plotting library which produces \
->  publication-quality figures in a variety of hardcopy formats \
->  and interactive environments across platforms."
->  HOMEPAGE = "https://github.com/matplotlib/matplotlib"
-> -LICENSE = "BSD-2-Clause"
-> -LIC_FILES_CHKSUM = "file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74"
-> -
-> -DEPENDS = "python3-numpy-native python3-numpy freetype libpng python3-dateutil python3-pytz"
-> -RDEPENDS_${PN} = "python3-numpy freetype libpng python3-dateutil python3-pytz"
-> +LICENSE = "PSF"
-> +LIC_FILES_CHKSUM = "\
-> +    file://setup.py;beginline=275;endline=275;md5=2a114620e4e6843aa7568d5902501753 \
-> +    file://LICENSE/LICENSE;md5=afec61498aa5f0c45936687da9a53d74 \
-> +"
-> +DEPENDS = "python3-numpy-native freetype libpng"
->
->  SRC_URI[md5sum] = "f894af5564a588e880644123237251b7"
->  SRC_URI[sha256sum] = "1febd22afe1489b13c6749ea059d392c03261b2950d1d45c17e3aed812080c93"
->
-> -PYPI_PACKAGE = "matplotlib"
-> -inherit pypi setuptools3
-> +inherit pypi setuptools3 pkgconfig
-> +
-> +EXTRA_OECONF = "--disable-docs"
-> +
-> +RDEPENDS_${PN} += "\
-> +    python3-numpy \
-> +    python3-pyparsing \
-> +    python3-cycler \
-> +    python3-dateutil \
-> +    python3-kiwisolver \
-> +"
->
->  BBCLASSEXTEND = "native"
-> --
-> 2.20.1
->
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
+new file mode 100644
+index 0000000000..7ac53650f2
+--- /dev/null
++++ b/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
+@@ -0,0 +1,69 @@
++From 8a236330f2af56bde21e9f69208ea3e59f529f0c Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 15 Mar 2020 17:02:30 -0700
++Subject: [PATCH] typecast enum conversions explicitly
++
++clang complains like below
++
++libflashrom.c:191:43: error: implicit conversion from enumeration type 'const enum test_state' to different enumeration type 'enum flashrom_test_state' [-Werror,-Wenum-conversion]
++                        supported_boards[i].working = binfo[i].working;
++                                                    ~ ~~~~~~~~~^~~~~~~
++libflashrom.c:229:46: error: implicit conversion from enumeration type 'const enum test_state' to different enumeration type 'enum flashrom_test_state' [-Werror,-Wenum-conversion]
++                        supported_chipsets[i].status = chipset[i].status;
++                                                     ~ ~~~~~~~~~~~^~~~~~
++
++However these enums are exactly same so they can be typecasted
++
++libflashrom.h
++
++/** @ingroup flashrom-query */
++enum flashrom_test_state {
++        FLASHROM_TESTED_OK  = 0,
++        FLASHROM_TESTED_NT  = 1,
++        FLASHROM_TESTED_BAD = 2,
++        FLASHROM_TESTED_DEP = 3,
++        FLASHROM_TESTED_NA  = 4,
++};
++
++flash.h
++
++enum test_state {
++          OK = 0,
++          NT = 1, /* Not tested */
++          BAD,    /* Known to not work */
++          DEP,    /* Support depends on configuration (e.g. Intel flash descriptor) */
++          NA,     /* Not applicable (e.g. write support on ROM chips) */
++  };
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ libflashrom.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/libflashrom.c b/libflashrom.c
++index 0dec22e..7956685 100644
++--- a/libflashrom.c
+++++ b/libflashrom.c
++@@ -188,7 +188,7 @@ struct flashrom_board_info *flashrom_supported_boards(void)
++ 		for (; i < boards_known_size; ++i) {
++ 			supported_boards[i].vendor = binfo[i].vendor;
++ 			supported_boards[i].name = binfo[i].name;
++-			supported_boards[i].working = binfo[i].working;
+++			supported_boards[i].working = (enum flashrom_test_state)binfo[i].working;
++ 		}
++ 	} else {
++ 		msg_gerr("Memory allocation error!\n");
++@@ -226,7 +226,7 @@ struct flashrom_chipset_info *flashrom_supported_chipsets(void)
++ 			supported_chipsets[i].chipset = chipset[i].device_name;
++ 			supported_chipsets[i].vendor_id = chipset[i].vendor_id;
++ 			supported_chipsets[i].chipset_id = chipset[i].device_id;
++-			supported_chipsets[i].status = chipset[i].status;
+++			supported_chipsets[i].status = (enum flashrom_test_state)chipset[i].status;
++ 	  }
++ 	} else {
++ 		msg_gerr("Memory allocation error!\n");
++-- 
++2.25.1
++
+diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
+index 17445ac2da..642cec1598 100644
+--- a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
++++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ DEPENDS = "pciutils libusb libusb-compat"
+ 
+ SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
++           file://0001-typecast-enum-conversions-explicitly.patch \
+            "
+ SRC_URI[md5sum] = "7f8e4b87087eb12ecee0fcc5445b4956"
+ SRC_URI[sha256sum] = "e1f8d95881f5a4365dfe58776ce821dfcee0f138f75d0f44f8a3cd032d9ea42b"
+-- 
+2.25.1
+
 
