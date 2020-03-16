@@ -1,51 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pj1-f68.google.com (mail-pj1-f68.google.com
-	[209.85.216.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 466CE61B85
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
+	[209.85.166.194])
+	by mail.openembedded.org (Postfix) with ESMTP id DDAA460579
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Mar 2020 00:06:40 +0000 (UTC)
-Received: by mail-pj1-f68.google.com with SMTP id l36so7251664pjb.3
+	Mon, 16 Mar 2020 05:49:18 +0000 (UTC)
+Received: by mail-il1-f194.google.com with SMTP id v6so4120863ilq.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Mar 2020 17:06:42 -0700 (PDT)
+	Sun, 15 Mar 2020 22:49:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=L/zx2sioXGr5FHVvHKIuhKSHjY6OkbFNBUNnb1MQf/A=;
-	b=EHFqfz9unaJ5D+ebFLpUR1ErtZBlHDddsoXRdSoU798/g45XjbK7YzQ4aF3oyNzC1P
-	hziG0tx+lIQzDdYPJkU3v9s9CKejPW+LpWGx+0kNU9pVPzCN2SEJQkQMdLRHuf/VZ2U5
-	mq0+9jDlJWO5rOIRxq0TjQQI15o9E8iXLoNOlleYudxWpQtNNxxiOC3IwZz5uv0VWCdZ
-	3tG/BTmF9LnM2bDdvtc7u6zSvPo+mW/ztKx+pXmALr4xMzk1y5gHCNktTkrhyjxM9OYm
-	qUmLTLP7PjIQsyt8Lu6zYwWL41w8m5q5cGRRT9uazGwnNPJKjpEGNxAMaEUHlImYcdhs
-	TOiA==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=Qe9U3LOlcsJP6IEwLmTLBVTI1LIa2Cctm9qf0Wbs4Mc=;
+	b=Ik55QTW7QMar9daT0tzFgb97LsR0/IDiZKLJzA2HU0+o8LOMHm/vxkTva7YsWNAfxR
+	W2fO7/WlXc/PO+ROUo9pZv4Wj8V0hg1M/O+ki3VW2Cb4tYAwVKNrTzS+rqDoI8IoYxYv
+	61cvSz3KLoF7v1+zkHIYfe5qumS/U6CaxBDyrt6LeKSE6+KnMVcaxG//0t1yZpGtNQH8
+	5qY+7nR4UiWtbbqFwtn6tyd1y+82wOMA2e58dDUq/wDEPhJDzEkzjtwEZzgj1wrYcTVX
+	72CCLLbIkQuHBOxrlDgdZQdg4yMS5whnOvJN0VAjrcK6Yiok7WqbKFnaoWUoOG3BKH0n
+	nkww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=L/zx2sioXGr5FHVvHKIuhKSHjY6OkbFNBUNnb1MQf/A=;
-	b=BwKx85usJxnQ+rPSaOfwocMks+nW0Vc3wzGeG0QoQ/gPmxR83FAymk65N0+6KMZVk6
-	fYY5j5sN07e+Lm+6xlHx5/soJJsmIdDGSNJq68BrScepwj3SFSyb792UJR4W7LU2CHtX
-	TjLsG4d1pQGS41zfL7Z2CbwvgepAk8Z7PMHEAVRQ5IxEMuENitFsBkf/nMcubA95zd9n
-	YsR1/T2bM8XJh6TVrz0huHp94b1QuO1VcPU8PZDseaLGUvFygwz3u5py4swHZmM0shgf
-	KxUmdirdj3bVldqIK3JF5ThnqD1FTTHDOX/UwweJPK8BrKGBrlYNs7WyQF32dJSnFiOF
-	Cwog==
-X-Gm-Message-State: ANhLgQ1eANGQnFbY0QvQKq5jBdtAt0QmUlrFewj99ivwEid52H4x85QX
-	q2CB6FoWVrCAuKzfSu0bEvCVV8PfAfY=
-X-Google-Smtp-Source: ADFU+vv+Uh+Nc4xV2m4t+aI5I34QGT2vxhmKOfrn/x2vn2Td+ZCcBO5mjpxyoJObIfC/EljlDsC+jg==
-X-Received: by 2002:a17:902:74c2:: with SMTP id
-	f2mr22686304plt.318.1584317201663; 
-	Sun, 15 Mar 2020 17:06:41 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::af11])
-	by smtp.gmail.com with ESMTPSA id
-	i72sm35775587pgd.88.2020.03.15.17.06.40
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Sun, 15 Mar 2020 17:06:40 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 15 Mar 2020 17:06:54 -0700
-Message-Id: <20200316000654.1093220-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.1
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=Qe9U3LOlcsJP6IEwLmTLBVTI1LIa2Cctm9qf0Wbs4Mc=;
+	b=KjvLZKgwBA+Cwk+yRRytWD+XXnBMWO9gYGIYREMO6MD8ZzGixvt9M6nvqrXxsmLaU8
+	VWFXH5pDutY71l/aOILeU9rc8SVBLBgejxX5y8Iv+Y8delL9+LscrzGIYWSHuPNjNF8d
+	gF9RUu4bJ122AiZnGYWMyg7cBCNxVG9pmFjyfAo43JN2TXaVfhNZzhEZk3xswMsmh10m
+	FVQJKeMYSlvRLhaFfMeqjEAk8udXrCiYVqQvRopv2YsRNGU5km/FaXSv8u4i39a7x52I
+	dawDi/qN/7pjTYubkWuxVIHD5avywGjJ5smquRyoeJaSYCayou5WH096x77K22xym/q+
+	pGMA==
+X-Gm-Message-State: ANhLgQ1yECC3/0QBAub+ZXOCKKiVzLECEJbOYjYIxkXiGvhIUpfOigtZ
+	KfX90vEg2DWYPR7dEqAxC1KjNiFZopORt4BUhsQ=
+X-Google-Smtp-Source: ADFU+vvEwd+VRjFtg0UzY0FDU+lYrWWmlaeAKGgSUnfI/MDT9fmkhjD65m8E13XvAp9EsNR/HYHndx2F93FLAYVTK6M=
+X-Received: by 2002:a92:c534:: with SMTP id m20mr24992361ili.147.1584337759623;
+	Sun, 15 Mar 2020 22:49:19 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] flashrom: Fix build with clang
+References: <20200314220440.5983-1-schnitzeltony@gmail.com>
+	<CAMKF1sotjDeZvidnX=FDL8u1f2KJ_Y5X-FLM++07jfqV887wxg@mail.gmail.com>
+In-Reply-To: <CAMKF1sotjDeZvidnX=FDL8u1f2KJ_Y5X-FLM++07jfqV887wxg@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 16 Mar 2020 06:49:08 +0100
+Message-ID: <CALbNGRQUKLFzvAUF2djkp2nuqnYD1CaHMT8fELiAPxNtkwTWbQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/2] pipewire: upgrade 0.2.7 -> 0.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,104 +55,164 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Mar 2020 00:06:41 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 16 Mar 2020 05:49:19 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...typecast-enum-conversions-explicitly.patch | 69 +++++++++++++++++++
- meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb  |  1 +
- 2 files changed, 70 insertions(+)
- create mode 100644 meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
+On Mon, Mar 16, 2020 at 12:35 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Sat, Mar 14, 2020 at 3:05 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
+com> wrote:
+> >
+> > * as long as we have not upgradeed mutter to 3.36 we have to keep pipew=
+ire
+> >   0.2.7 as pipewire-0.2 - mutter 3.34 asks for pipewire 0.2
+> > * license was changed to MIT
+> > * additional PACKAGECONFIGs added. The defaults were chosen by DISTRO_F=
+EATURES
+> >   or if not available by pipewire's defaults
+> > * vulkan was disabled for now
+> >
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > ---
+> >  .../pipewire/pipewire-0.2_git.bb              | 65 +++++++++++++++++++
+> >  .../pipewire/pipewire_git.bb                  | 32 +++++----
+> >  2 files changed, 86 insertions(+), 11 deletions(-)
+> >  create mode 100644 meta-oe/recipes-multimedia/pipewire/pipewire-0.2_gi=
+t.bb
+> >
+> > diff --git a/meta-oe/recipes-multimedia/pipewire/pipewire-0.2_git.bb b/=
+meta-oe/recipes-multimedia/pipewire/pipewire-0.2_git.bb
+> > new file mode 100644
+> > index 000000000..bcb3015f8
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-multimedia/pipewire/pipewire-0.2_git.bb
+> > @@ -0,0 +1,65 @@
+> > +SUMMARY =3D "Multimedia processing server for Linux"
+> > +AUTHOR =3D "Wim Taymans <wtaymans@redhat.com>"
+> > +HOMEPAGE =3D "https://pipewire.org"
+> > +SECTION =3D "multimedia"
+> > +LICENSE =3D "LGPL-2.1"
+> > +LIC_FILES_CHKSUM =3D " \
+> > +    file://LICENSE;md5=3Dd8153c6e65986f862a0550ca74a3ed73 \
+> > +    file://LGPL;md5=3D2d5025d4aa3495befef8f17206a5b0a1 \
+> > +"
+> > +DEPENDS =3D "alsa-lib dbus udev"
+> > +SRCREV =3D "14c11c0fe4d366bad4cfecdee97b6652ff9ed63d"
+> > +PV =3D "0.2.7"
+> > +
+> > +SRC_URI =3D "git://github.com/PipeWire/pipewire"
+> > +
+> > +S =3D "${WORKDIR}/git"
+> > +
+> > +inherit meson pkgconfig systemd manpages
+> > +
+> > +PACKAGECONFIG ??=3D "\
+> > +    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+> > +    gstreamer \
+> > +"
+> > +
+> > +PACKAGECONFIG[systemd] =3D "-Dsystemd=3Dtrue,-Dsystemd=3Dfalse,systemd=
+"
+> > +PACKAGECONFIG[gstreamer] =3D "-Dgstreamer=3Denabled,-Dgstreamer=3Ddisa=
+bled,glib-2.0 gstreamer1.0 gstreamer1.0-plugins-base"
+> > +PACKAGECONFIG[manpages] =3D "-Dman=3Dtrue,-Dman=3Dfalse,libxml-parser-=
+perl-native"
+> > +
+> > +PACKAGES =3D+ "\
+> > +    ${PN}-spa-plugins \
+> > +    ${PN}-alsa \
+> > +    ${PN}-config \
+> > +    gstreamer1.0-${PN} \
+> > +    lib${PN} \
+> > +    lib${PN}-modules \
+> > +"
+> > +
+> > +RDEPENDS_lib${PN} +=3D "lib${PN}-modules ${PN}-spa-plugins"
+> > +
+> > +FILES_${PN} =3D "\
+> > +    ${sysconfdir}/pipewire/pipewire.conf \
+> > +    ${bindir}/pipewire* \
+> > +    ${systemd_user_unitdir}/* \
+> > +"
+> > +FILES_lib${PN} =3D "\
+> > +    ${libdir}/libpipewire-*.so.* \
+> > +"
+> > +FILES_lib${PN}-modules =3D "\
+> > +    ${libdir}/pipewire-*/* \
+> > +"
+> > +FILES_${PN}-spa-plugins =3D "\
+> > +    ${bindir}/spa-* \
+> > +    ${libdir}/spa/* \
+> > +"
+> > +FILES_${PN}-alsa =3D "\
+> > +    ${libdir}/alsa-lib/* \
+> > +    ${datadir}/alsa/alsa.conf.d/50-pipewire.conf \
+> > +"
+> > +FILES_gstreamer1.0-${PN} =3D "\
+> > +    ${libdir}/gstreamer-1.0/* \
+> > +"
+> > +
+> > +CONFFILES_${PN} =3D "\
+> > +    ${sysconfdir}/pipewire/pipewire.conf \
+> > +"
+> > diff --git a/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb b/meta=
+-oe/recipes-multimedia/pipewire/pipewire_git.bb
+> > index bcb3015f8..95da2df09 100644
+> > --- a/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
+> > +++ b/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
+> > @@ -2,14 +2,14 @@ SUMMARY =3D "Multimedia processing server for Linux"
+> >  AUTHOR =3D "Wim Taymans <wtaymans@redhat.com>"
+> >  HOMEPAGE =3D "https://pipewire.org"
+> >  SECTION =3D "multimedia"
+> > -LICENSE =3D "LGPL-2.1"
+> > +LICENSE =3D "MIT"
+> >  LIC_FILES_CHKSUM =3D " \
+> > -    file://LICENSE;md5=3Dd8153c6e65986f862a0550ca74a3ed73 \
+> > -    file://LGPL;md5=3D2d5025d4aa3495befef8f17206a5b0a1 \
+> > +    file://LICENSE;md5=3De2c0b7d86d04e716a3c4c9ab34260e69 \
+> > +    file://COPYING;md5=3D97be96ca4fab23e9657ffa590b931c1a \
+> >  "
+> >  DEPENDS =3D "alsa-lib dbus udev"
+> > -SRCREV =3D "14c11c0fe4d366bad4cfecdee97b6652ff9ed63d"
+> > -PV =3D "0.2.7"
+> > +SRCREV =3D "74a1632f0720886d5b3b6c23ee8fcd6c03ca7aac"
+> > +PV =3D "0.3.1"
+> >
+> >  SRC_URI =3D "git://github.com/PipeWire/pipewire"
+> >
+> > @@ -18,13 +18,20 @@ S =3D "${WORKDIR}/git"
+> >  inherit meson pkgconfig systemd manpages
+> >
+> >  PACKAGECONFIG ??=3D "\
+> > -    ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
+> > -    gstreamer \
+> > +    ${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', =
+d)} \
+> > +    ${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio systemd vulkan',=
+ d)} \
+>
+> Perhaps add vulkan as packageconfig too here. I am seeing
+>
+> WARNING: pipewire-0.3.1-r0 do_configure: QA Issue: pipewire: invalid
+> PACKAGECONFIG: vulkan [invalid-packageconfig]
 
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch b/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
-new file mode 100644
-index 0000000000..7ac53650f2
---- /dev/null
-+++ b/meta-oe/recipes-bsp/flashrom/flashrom/0001-typecast-enum-conversions-explicitly.patch
-@@ -0,0 +1,69 @@
-+From 8a236330f2af56bde21e9f69208ea3e59f529f0c Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 15 Mar 2020 17:02:30 -0700
-+Subject: [PATCH] typecast enum conversions explicitly
-+
-+clang complains like below
-+
-+libflashrom.c:191:43: error: implicit conversion from enumeration type 'const enum test_state' to different enumeration type 'enum flashrom_test_state' [-Werror,-Wenum-conversion]
-+                        supported_boards[i].working = binfo[i].working;
-+                                                    ~ ~~~~~~~~~^~~~~~~
-+libflashrom.c:229:46: error: implicit conversion from enumeration type 'const enum test_state' to different enumeration type 'enum flashrom_test_state' [-Werror,-Wenum-conversion]
-+                        supported_chipsets[i].status = chipset[i].status;
-+                                                     ~ ~~~~~~~~~~~^~~~~~
-+
-+However these enums are exactly same so they can be typecasted
-+
-+libflashrom.h
-+
-+/** @ingroup flashrom-query */
-+enum flashrom_test_state {
-+        FLASHROM_TESTED_OK  = 0,
-+        FLASHROM_TESTED_NT  = 1,
-+        FLASHROM_TESTED_BAD = 2,
-+        FLASHROM_TESTED_DEP = 3,
-+        FLASHROM_TESTED_NA  = 4,
-+};
-+
-+flash.h
-+
-+enum test_state {
-+          OK = 0,
-+          NT = 1, /* Not tested */
-+          BAD,    /* Known to not work */
-+          DEP,    /* Support depends on configuration (e.g. Intel flash descriptor) */
-+          NA,     /* Not applicable (e.g. write support on ROM chips) */
-+  };
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ libflashrom.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/libflashrom.c b/libflashrom.c
-+index 0dec22e..7956685 100644
-+--- a/libflashrom.c
-++++ b/libflashrom.c
-+@@ -188,7 +188,7 @@ struct flashrom_board_info *flashrom_supported_boards(void)
-+ 		for (; i < boards_known_size; ++i) {
-+ 			supported_boards[i].vendor = binfo[i].vendor;
-+ 			supported_boards[i].name = binfo[i].name;
-+-			supported_boards[i].working = binfo[i].working;
-++			supported_boards[i].working = (enum flashrom_test_state)binfo[i].working;
-+ 		}
-+ 	} else {
-+ 		msg_gerr("Memory allocation error!\n");
-+@@ -226,7 +226,7 @@ struct flashrom_chipset_info *flashrom_supported_chipsets(void)
-+ 			supported_chipsets[i].chipset = chipset[i].device_name;
-+ 			supported_chipsets[i].vendor_id = chipset[i].vendor_id;
-+ 			supported_chipsets[i].chipset_id = chipset[i].device_id;
-+-			supported_chipsets[i].status = chipset[i].status;
-++			supported_chipsets[i].status = (enum flashrom_test_state)chipset[i].status;
-+ 	  }
-+ 	} else {
-+ 		msg_gerr("Memory allocation error!\n");
-+-- 
-+2.25.1
-+
-diff --git a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
-index 17445ac2da..642cec1598 100644
---- a/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
-+++ b/meta-oe/recipes-bsp/flashrom/flashrom_1.2.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- DEPENDS = "pciutils libusb libusb-compat"
- 
- SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.bz2 \
-+           file://0001-typecast-enum-conversions-explicitly.patch \
-            "
- SRC_URI[md5sum] = "7f8e4b87087eb12ecee0fcc5445b4956"
- SRC_URI[sha256sum] = "e1f8d95881f5a4365dfe58776ce821dfcee0f138f75d0f44f8a3cd032d9ea42b"
--- 
-2.25.1
+As you can see I played around with vulkan PACKAGECONFIG but forgot to
+remove it's usage. The reasons I decided to disable it by default are
 
+* I am not sure what to (r)depend it needs - there is no
+virtual/vulkan. Is it vulkan-loader as gstreamer1.0-plugins-bad does?
+* Have no machine to test
+* Would take me huge amount of build time - and for me it is just an
+optional dependency for mutter (that I never used yet)
+
+So what do you prefer:
+
+* keep disabled (as soon as sombody wants vulkan here he/she/it can take ca=
+re)
+* add untested PACKAGECONFIG (with vulkan-loader in DEPENDS field?)
+
+Cheers
+
+Andreas
 
