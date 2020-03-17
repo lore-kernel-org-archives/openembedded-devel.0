@@ -1,44 +1,33 @@
-Return-Path: <wangmy@cn.fujitsu.com>
+Return-Path: <zangrc.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id BF696601CF
+	by mail.openembedded.org (Postfix) with ESMTP id 8AAD0601E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 01:55:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,562,1574092800"; d="scan'208";a="86436360"
+	Tue, 17 Mar 2020 02:33:35 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,562,1574092800"; d="scan'208";a="86439185"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 Mar 2020 09:55:28 +0800
+	by heian.cn.fujitsu.com with ESMTP; 17 Mar 2020 10:33:34 +0800
 Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 66EF650A9981
+	by cn.fujitsu.com (Postfix) with ESMTP id 1B1EA49DF145
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 09:45:24 +0800 (CST)
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) by
+	Tue, 17 Mar 2020 10:23:27 +0800 (CST)
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
 	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1497.2; Tue, 17 Mar 2020 09:55:27 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::3022:98f4:eabc:e85a])
-	by G08CNEXMBPEKD05.g08.fujitsu.local
-	([fe80::3022:98f4:eabc:e85a%14]) with
-	mapi id 15.00.1497.000; Tue, 17 Mar 2020 09:55:26 +0800
-From: "Wang, Mingyu" <wangmy@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-oe][zeus][PATCH] opensc: CVE-2019-19479 CVE-2019-19480
-Thread-Index: AQHV+U1boBKggeP800iPMPSrX80pQahMCz7g
-Date: Tue, 17 Mar 2020 01:55:25 +0000
-Message-ID: <91429f635f3e4274b165b26d4b959af8@G08CNEXMBPEKD05.g08.fujitsu.local>
-References: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
-	<1584097824-54462-2-git-send-email-wangmy@cn.fujitsu.com>
-	<230ee0cf-428b-7c16-50c9-ec699e390d5f@gmail.com>
-In-Reply-To: <230ee0cf-428b-7c16-50c9-ec699e390d5f@gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.167.225.33]
+	Server (TLS) id 15.0.1497.2; Tue, 17 Mar 2020 10:33:28 +0800
+Received: from localhost.local (10.167.225.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 17 Mar 2020 10:33:27 +0800
+From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 17 Mar 2020 10:35:50 +0800
+Message-ID: <20200317023550.2885-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 66EF650A9981.AA879
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 1B1EA49DF145.A9209
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: Re: [meta-oe][zeus][PATCH] opensc: CVE-2019-19479	CVE-2019-19480
+Subject: [meta-oe] [PATCH] redis: upgrade 5.0.7 -> 5.0.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,125 +40,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 01:55:28 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 17 Mar 2020 02:33:37 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Pj4gUmVmZXJlbmNlcw0KPj4gaHR0cHM6Ly9jdmUubWl0cmUub3JnL2NnaS1i
-aW4vY3ZlbmFtZS5jZ2k/bmFtZT1DVkUtMjAxOS0xOTQ3OQ0KPj4gaHR0cHM6
-Ly9jdmUubWl0cmUub3JnL2NnaS1iaW4vY3ZlbmFtZS5jZ2k/bmFtZT1DVkUt
-MjAxOS0xOTQ4MA0KPklzIHRoaXMgZml4IGluIG1hc3Rlcj8NCg0KWWVzLiBJ
-dCdzIGZpeCBpbiBtYXN0ZXIuDQoNCi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0t
-LS0tDQpGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0cy5v
-cGVuZW1iZWRkZWQub3JnIFttYWlsdG86b3BlbmVtYmVkZGVkLWRldmVsLWJv
-dW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mIGFr
-dXN0ZXI4MDgNClNlbnQ6IEZyaWRheSwgTWFyY2ggMTMsIDIwMjAgMTE6Mzgg
-UE0NClRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZw0KU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW3pldXNdW1BBVENI
-XSBvcGVuc2M6IENWRS0yMDE5LTE5NDc5IENWRS0yMDE5LTE5NDgwDQoNCg0K
-DQpPbiAzLzEzLzIwIDQ6MTAgQU0sIFdhbmcgTWluZ3l1IHdyb3RlOg0KPiBT
-ZWN1cml0eSBBZHZpc29yeQ0KPg0KPiBSZWZlcmVuY2VzDQo+IGh0dHBzOi8v
-Y3ZlLm1pdHJlLm9yZy9jZ2ktYmluL2N2ZW5hbWUuY2dpP25hbWU9Q1ZFLTIw
-MTktMTk0NzkNCj4gaHR0cHM6Ly9jdmUubWl0cmUub3JnL2NnaS1iaW4vY3Zl
-bmFtZS5jZ2k/bmFtZT1DVkUtMjAxOS0xOTQ4MA0KDQpJcyB0aGlzIGZpeCBp
-biBtYXN0ZXI/DQoNCj4NCj4gU2lnbmVkLW9mZi1ieTogV2FuZyBNaW5neXUg
-PHdhbmdteUBjbi5mdWppdHN1LmNvbT4NCj4gLS0tDQo+ICAuLi4vb3BlbnNj
-L29wZW5zYy9DVkUtMjAxOS0xOTQ3OS5wYXRjaCAgICAgICAgfCAzMCArKysr
-KysrKysrKysrKysrDQo+ICAuLi4vb3BlbnNjL29wZW5zYy9DVkUtMjAxOS0x
-OTQ4MC5wYXRjaCAgICAgICAgfCAzNCArKysrKysrKysrKysrKysrKysrDQo+
-ICAuLi4vcmVjaXBlcy1zdXBwb3J0L29wZW5zYy9vcGVuc2NfMC4xOS4wLmJi
-ICAgfCAgMiArKw0KPiAgMyBmaWxlcyBjaGFuZ2VkLCA2NiBpbnNlcnRpb25z
-KCspDQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgDQo+IG1ldGEtb2UvcmVjaXBl
-cy1zdXBwb3J0L29wZW5zYy9vcGVuc2MvQ1ZFLTIwMTktMTk0NzkucGF0Y2gN
-Cj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCANCj4gbWV0YS1vZS9yZWNpcGVzLXN1
-cHBvcnQvb3BlbnNjL29wZW5zYy9DVkUtMjAxOS0xOTQ4MC5wYXRjaA0KPg0K
-PiBkaWZmIC0tZ2l0IA0KPiBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29w
-ZW5zYy9vcGVuc2MvQ1ZFLTIwMTktMTk0NzkucGF0Y2ggDQo+IGIvbWV0YS1v
-ZS9yZWNpcGVzLXN1cHBvcnQvb3BlbnNjL29wZW5zYy9DVkUtMjAxOS0xOTQ3
-OS5wYXRjaA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAw
-MDAwMDAuLjczMjIyZWUxYQ0KPiAtLS0gL2Rldi9udWxsDQo+ICsrKyBiL21l
-dGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5zYy9vcGVuc2MvQ1ZFLTIwMTkt
-MTk0NzkucGF0Y2gNCj4gQEAgLTAsMCArMSwzMCBAQA0KPiArRnJvbSBjM2Yy
-M2I4MzZlNWExNzY2YzM2NjE3ZmUxZGEzMGQyMmY3YjYzZGUyIE1vbiBTZXAg
-MTcgMDA6MDA6MDAgDQo+ICsyMDAxDQo+ICtGcm9tOiBGcmFuayBNb3JnbmVy
-IDxmcmFua21vcmduZXJAZ21haWwuY29tPg0KPiArRGF0ZTogU3VuLCAzIE5v
-diAyMDE5IDA0OjQ1OjI4ICswMTAwDQo+ICtTdWJqZWN0OiBbUEFUQ0hdIGZp
-eGVkICBVTktOT1dOIFJFQUQNCj4gKw0KPiArVXBzdHJlYW0tU3RhdHVzOiBB
-Y2NlcHRlZCA8b3IgQmFja3BvcnQ+DQo+ICtDVkU6IENWRS0yMDE5LTE5NDc5
-DQo+ICsgICANCj4gK1JlcG9ydGVkIGJ5IE9TUy1GdXp6DQo+ICtodHRwczov
-L29zcy1mdXp6LmNvbS90ZXN0Y2FzZS1kZXRhaWwvNTY4MTE2OTk3MDc1NzYz
-Mg0KPiArDQo+ICtSZWZlcmVuY2UgdG8gdXBzdHJlYW0gcGF0Y2g6DQo+ICto
-dHRwczovL2dpdGh1Yi5jb20vT3BlblNDL09wZW5TQy9jb21taXQvYzNmMjNi
-ODM2ZTVhMTc2NmMzNjYxN2ZlMWRhMzANCj4gK2QyMmY3YjYzZGUyDQpNaXNz
-aW5nIHNpZ25lZC1vZmYtYnkNCj4gKy0tLQ0KPiArIHNyYy9saWJvcGVuc2Mv
-Y2FyZC1zZXRjb3MuYyB8IDIgKy0NCj4gKyAxIGZpbGUgY2hhbmdlZCwgMSBp
-bnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkNCj4gKw0KPiArZGlmZiAtLWdp
-dCBhL3NyYy9saWJvcGVuc2MvY2FyZC1zZXRjb3MuYyANCj4gK2Ivc3JjL2xp
-Ym9wZW5zYy9jYXJkLXNldGNvcy5jIGluZGV4IDRjZjMyOGFkNmEuLjFiNGU4
-ZjNlMjMgMTAwNjQ0DQo+ICstLS0gYS9zcmMvbGlib3BlbnNjL2NhcmQtc2V0
-Y29zLmMNCj4gKysrKyBiL3NyYy9saWJvcGVuc2MvY2FyZC1zZXRjb3MuYw0K
-PiArQEAgLTg2OCw3ICs4NjgsNyBAQCBzdGF0aWMgdm9pZCBwYXJzZV9zZWNf
-YXR0cl80NChzY19maWxlX3QgKmZpbGUsIGNvbnN0IHU4ICpidWYsIHNpemVf
-dCBsZW4pDQo+ICsgCQkJfQ0KPiArIA0KPiArIAkJCS8qIEVuY3J5cHRpb24g
-a2V5IHByZXNlbnQgPyAqLw0KPiArLQkJCWlQaW5Db3VudCA9IGlBQ0xlbiAt
-IDE7CQkNCj4gKysJCQlpUGluQ291bnQgPSBpQUNMZW4gPiAwID8gaUFDTGVu
-IC0gMSA6IDA7DQo+ICsgDQo+ICsgCQkJaWYgKGJ1ZltpT2Zmc2V0XSAmIDB4
-MjApIHsNCj4gKyAJCQkJaW50IGlTQzsNCj4gZGlmZiAtLWdpdCANCj4gYS9t
-ZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9vcGVuc2Mvb3BlbnNjL0NWRS0yMDE5
-LTE5NDgwLnBhdGNoIA0KPiBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29w
-ZW5zYy9vcGVuc2MvQ1ZFLTIwMTktMTk0ODAucGF0Y2gNCj4gbmV3IGZpbGUg
-bW9kZSAxMDA2NDQNCj4gaW5kZXggMDAwMDAwMDAwLi4xMmMxZjBiNGENCj4g
-LS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtc3VwcG9y
-dC9vcGVuc2Mvb3BlbnNjL0NWRS0yMDE5LTE5NDgwLnBhdGNoDQo+IEBAIC0w
-LDAgKzEsMzQgQEANCj4gK0Zyb20gNmNlNjE1MjI4NGM0N2JhOWIxZDRmZThm
-ZjlkMmU2YTNmNWVlMDJjNyBNb24gU2VwIDE3IDAwOjAwOjAwIA0KPiArMjAw
-MQ0KPiArRnJvbTogSmFrdWIgSmVsZW4gPGpqZWxlbkByZWRoYXQuY29tPg0K
-PiArRGF0ZTogV2VkLCAyMyBPY3QgMjAxOSAwOToyMjo0NCArMDIwMA0KPiAr
-U3ViamVjdDogW1BBVENIXSBwa2NzMTUtcHJrZXk6IFNpbXBsaWZ5IGNsZWFu
-aW5nIG1lbW9yeSBhZnRlciBmYWlsdXJlDQo+ICsNCj4gK2h0dHBzOi8vYnVn
-cy5jaHJvbWl1bS5vcmcvcC9vc3MtZnV6ei9pc3N1ZXMvZGV0YWlsP2lkPTE4
-NDc4DQo+ICsNCj4gK1Vwc3RyZWFtLVN0YXR1czogQWNjZXB0ZWQNCj4gK0NW
-RTogQ1ZFLTIwMTktMTk0ODANCj4gKw0KPiArUmVmZXJlbmNlIHRvIHVwc3Ry
-ZWFtIHBhdGNoOg0KPiAraHR0cHM6Ly9naXRodWIuY29tL09wZW5TQy9PcGVu
-U0MvY29tbWl0LzZjZTYxNTIyODRjNDdiYTliMWQ0ZmU4ZmY5ZDJlDQo+ICs2
-YTNmNWVlMDJjNw0KPiArLS0tDQo+ICsgc3JjL2xpYm9wZW5zYy9wa2NzMTUt
-cHJrZXkuYyB8IDQgKysrKw0KPiArIDEgZmlsZSBjaGFuZ2VkLCA0IGluc2Vy
-dGlvbnMoKykNCj4gKw0KPiArZGlmZiAtLWdpdCBhL3NyYy9saWJvcGVuc2Mv
-cGtjczE1LXBya2V5LmMgDQo+ICtiL3NyYy9saWJvcGVuc2MvcGtjczE1LXBy
-a2V5LmMgaW5kZXggZDNlZWU5ODMuLjRiMjQ5NTgyIDEwMDY0NA0KPiArLS0t
-IGEvc3JjL2xpYm9wZW5zYy9wa2NzMTUtcHJrZXkuYw0KPiArKysrIGIvc3Jj
-L2xpYm9wZW5zYy9wa2NzMTUtcHJrZXkuYw0KPiArQEAgLTI1OCw2ICsyNTgs
-MTAgQEAgaW50IHNjX3BrY3MxNV9kZWNvZGVfcHJrZGZfZW50cnkoc3RydWN0
-IHNjX3BrY3MxNV9jYXJkICpwMTVjYXJkLA0KPiArIAltZW1zZXQoZ29zdHIz
-NDEwX3BhcmFtcywgMCwgc2l6ZW9mKGdvc3RyMzQxMF9wYXJhbXMpKTsNCj4g
-KyANCj4gKyAJciA9IHNjX2FzbjFfZGVjb2RlX2Nob2ljZShjdHgsIGFzbjFf
-cHJrZXksICpidWYsICpidWZsZW4sIGJ1ZiwgDQo+ICsgYnVmbGVuKTsNCj4g
-KysJaWYgKHIgPCAwKSB7DQo+ICsrCSAgICAgICAgLyogVGhpcyBtaWdodCBo
-YXZlIGFsbG9jYXRlZCBzb21ldGhpbmcuIElmIHNvLCBjbGVhciBpdCBub3cg
-Ki8NCj4gKysJICAgICAgICBmcmVlKGluZm8uc3ViamVjdC52YWx1ZSk7DQo+
-ICsrICAgICAgICB9DQo+ICsgCWlmIChyID09IFNDX0VSUk9SX0FTTjFfRU5E
-X09GX0NPTlRFTlRTKQ0KPiArIAkJcmV0dXJuIHI7DQo+ICsgCUxPR19URVNU
-X1JFVChjdHgsIHIsICJQcktleSBERiBBU04uMSBkZWNvZGluZyBmYWlsZWQi
-KTsNCj4gKy0tDQo+ICsyLjE3LjENCj4gKw0KPiBkaWZmIC0tZ2l0IGEvbWV0
-YS1vZS9yZWNpcGVzLXN1cHBvcnQvb3BlbnNjL29wZW5zY18wLjE5LjAuYmIg
-DQo+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvb3BlbnNjL29wZW5zY18w
-LjE5LjAuYmINCj4gaW5kZXggYmMxNzIyZTM5Li5kMjY4MjVhMDYgMTAwNjQ0
-DQo+IC0tLSBhL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW5zYy9vcGVu
-c2NfMC4xOS4wLmJiDQo+ICsrKyBiL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0
-L29wZW5zYy9vcGVuc2NfMC4xOS4wLmJiDQo+IEBAIC0xNSw2ICsxNSw4IEBA
-IExJQ19GSUxFU19DSEtTVU0gPSAiZmlsZTovL0NPUFlJTkc7bWQ1PTdmYmMz
-MzgzMDlhYzM4ZmVmY2Q2NGIwNGJiOTAzZTM0Ig0KPiAgU1JDUkVWID0gImYx
-NjkxZmM5MWZjMTEzMTkxYzNhOGFhZjVmYWNkNjk4MzMzNGVjNDciDQo+ICBT
-UkNfVVJJID0gImdpdDovL2dpdGh1Yi5jb20vT3BlblNDL09wZW5TQyBcDQo+
-ICAgICAgICAgICAgIGZpbGU6Ly8wMDAxLVJlbW92ZS1yZWR1bmRhbnQtbG9n
-Z2luZy5wYXRjaCBcDQo+ICsgICAgICAgICAgIGZpbGU6Ly9DVkUtMjAxOS0x
-OTQ3OS5wYXRjaCBcDQo+ICsgICAgICAgICAgIGZpbGU6Ly9DVkUtMjAxOS0x
-OTQ4MC5wYXRjaCBcDQo+ICAgICAgICAgICAgIg0KPiAgREVQRU5EUyA9ICJv
-cGVuY3QgcGNzYy1saXRlIHZpcnR1YWwvbGliaWNvbnYgb3BlbnNzbCINCj4g
-IA0KDQotLQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18NCk9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QN
-Ck9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQpo
-dHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L29wZW5lbWJlZGRlZC1kZXZlbA0KDQoNCgoK
+-Refresh the following patch:
+	0001-src-Do-not-reset-FINAL_LIBS.patch
+
+-0005-Mark-extern-definition-of-SDS_NOINIT-in-sds.h.patch
+	Removed since this is included in 5.0.8
+
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+---
+ .../0001-src-Do-not-reset-FINAL_LIBS.patch    |  4 +--
+ ...rn-definition-of-SDS_NOINIT-in-sds.h.patch | 27 -------------------
+ .../redis/{redis_5.0.7.bb => redis_5.0.8.bb}  |  5 ++--
+ 3 files changed, 4 insertions(+), 32 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/redis/redis/0005-Mark-extern-definition-of-SDS_NOINIT-in-sds.h.patch
+ rename meta-oe/recipes-extended/redis/{redis_5.0.7.bb => redis_5.0.8.bb} (90%)
+
+diff --git a/meta-oe/recipes-extended/redis/redis/0001-src-Do-not-reset-FINAL_LIBS.patch b/meta-oe/recipes-extended/redis/redis/0001-src-Do-not-reset-FINAL_LIBS.patch
+index 04af15dd8..b5c4133e3 100644
+--- a/meta-oe/recipes-extended/redis/redis/0001-src-Do-not-reset-FINAL_LIBS.patch
++++ b/meta-oe/recipes-extended/redis/redis/0001-src-Do-not-reset-FINAL_LIBS.patch
+@@ -18,7 +18,7 @@ diff --git a/src/Makefile b/src/Makefile
+ index 7f7c625..c71dd3b 100644
+ --- a/src/Makefile
+ +++ b/src/Makefile
+-@@ -66,7 +66,7 @@ endif
++@@ -75,7 +75,7 @@ endif
+  
+  FINAL_CFLAGS=$(STD) $(WARN) $(OPT) $(DEBUG) $(CFLAGS) $(REDIS_CFLAGS)
+  FINAL_LDFLAGS=$(LDFLAGS) $(REDIS_LDFLAGS) $(DEBUG)
+@@ -26,7 +26,7 @@ index 7f7c625..c71dd3b 100644
+ +FINAL_LIBS+=-lm
+  DEBUG=-g -ggdb
+  
+- ifeq ($(uname_S),SunOS)
++ # Linux ARM needs -latomic at linking time
+ -- 
+ 2.23.0
+ 
+diff --git a/meta-oe/recipes-extended/redis/redis/0005-Mark-extern-definition-of-SDS_NOINIT-in-sds.h.patch b/meta-oe/recipes-extended/redis/redis/0005-Mark-extern-definition-of-SDS_NOINIT-in-sds.h.patch
+deleted file mode 100644
+index 4675687c3..000000000
+--- a/meta-oe/recipes-extended/redis/redis/0005-Mark-extern-definition-of-SDS_NOINIT-in-sds.h.patch
++++ /dev/null
+@@ -1,27 +0,0 @@
+-From 7f7f710c8821b7254baeaf945ca3ca263b9845e2 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sat, 21 Dec 2019 11:17:50 -0800
+-Subject: [PATCH] Mark extern definition of SDS_NOINIT in sds.h
+-
+-This helps avoiding multiple definition of this variable, its also
+-defined globally in sds.c
+-
+-Upstream-Status: Pending
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- src/sds.h | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/src/sds.h b/src/sds.h
+-index 1bdb60d..adcc12c 100644
+---- a/src/sds.h
+-+++ b/src/sds.h
+-@@ -34,7 +34,7 @@
+- #define __SDS_H
+- 
+- #define SDS_MAX_PREALLOC (1024*1024)
+--const char *SDS_NOINIT;
+-+extern const char *SDS_NOINIT;
+- 
+- #include <sys/types.h>
+- #include <stdarg.h>
+diff --git a/meta-oe/recipes-extended/redis/redis_5.0.7.bb b/meta-oe/recipes-extended/redis/redis_5.0.8.bb
+similarity index 90%
+rename from meta-oe/recipes-extended/redis/redis_5.0.7.bb
+rename to meta-oe/recipes-extended/redis/redis_5.0.8.bb
+index b91575552..2aec1b46a 100644
+--- a/meta-oe/recipes-extended/redis/redis_5.0.7.bb
++++ b/meta-oe/recipes-extended/redis/redis_5.0.8.bb
+@@ -14,12 +14,11 @@ SRC_URI = "http://download.redis.io/releases/${BP}.tar.gz \
+            file://lua-update-Makefile-to-use-environment-build-setting.patch \
+            file://oe-use-libc-malloc.patch \
+            file://0001-src-Do-not-reset-FINAL_LIBS.patch \
+-           file://0005-Mark-extern-definition-of-SDS_NOINIT-in-sds.h.patch \
+            file://GNU_SOURCE.patch \
+            "
+ 
+-SRC_URI[md5sum] = "612ec43075a888bc8b8a7dd8ccb2e0f7"
+-SRC_URI[sha256sum] = "61db74eabf6801f057fd24b590232f2f337d422280fd19486eca03be87d3a82b"
++SRC_URI[md5sum] = "1885f1c67281d566a1fd126e19cfb25d"
++SRC_URI[sha256sum] = "f3c7eac42f433326a8d981b50dba0169fdfaf46abb23fcda2f933a7552ee4ed7"
+ 
+ inherit autotools-brokensep update-rc.d systemd useradd
+ 
+-- 
+2.20.1
+
+
+
 
