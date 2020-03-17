@@ -1,35 +1,43 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C93FE60BA0
+	by mail.openembedded.org (Postfix) with ESMTP id 0B32360BB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 01:46:12 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,562,1574092800"; d="scan'208";a="86435403"
+	Tue, 17 Mar 2020 01:53:24 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,562,1574092800"; d="scan'208";a="86436250"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 Mar 2020 09:46:13 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id 3D57F50A9990
+	by heian.cn.fujitsu.com with ESMTP; 17 Mar 2020 09:53:24 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id BF1EE50A9992
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 09:36:05 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
-	Server (TLS) id 15.0.1497.2; Tue, 17 Mar 2020 09:46:05 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 17 Mar 2020 09:46:15 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Mar 2020 00:19:56 -0700
-Message-ID: <1584429596-2007-2-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1584429596-2007-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1584429596-2007-1-git-send-email-wangmy@cn.fujitsu.com>
+	Tue, 17 Mar 2020 09:43:17 +0800 (CST)
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) by
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1497.2; Tue, 17 Mar 2020 09:53:21 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::3022:98f4:eabc:e85a])
+	by G08CNEXMBPEKD05.g08.fujitsu.local
+	([fe80::3022:98f4:eabc:e85a%14]) with
+	mapi id 15.00.1497.000; Tue, 17 Mar 2020 09:53:19 +0800
+From: "Wang, Mingyu" <wangmy@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][zeus][PATCH] libssh2: CVE-2019-17498.patch
+Thread-Index: AQHV+PdD2SUt/fdY3kK7+KbFwq9zgKhGIlmAgAXo27A=
+Date: Tue, 17 Mar 2020 01:53:19 +0000
+Message-ID: <2954451373f4476ba391f6e570ff347b@G08CNEXMBPEKD05.g08.fujitsu.local>
+References: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
+	<1f663de1-6dc9-c9fb-c14b-082de2934777@gmail.com>
+In-Reply-To: <1f663de1-6dc9-c9fb-c14b-082de2934777@gmail.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.167.225.33]
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 3D57F50A9990.A2F45
+X-yoursite-MailScanner-ID: BF1EE50A9992.AEA1F
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-networking] [PATCH] libtdb: upgrade 1.4.2 -> 1.4.3
+Subject: Re: [meta-oe][zeus][PATCH] libssh2: CVE-2019-17498.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,129 +50,192 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 01:46:13 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 17 Mar 2020 01:53:25 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-0001-waf-add-support-of-cross_compile.patch
-removed since it's not available for 1.4.3
-
-refresh tdb-Add-configure-options-for-packages.patch
-
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
----
- ...001-waf-add-support-of-cross_compile.patch | 63 -------------------
- ...b-Add-configure-options-for-packages.patch |  2 +-
- .../{libtdb_1.4.2.bb => libtdb_1.4.3.bb}      |  5 +-
- 3 files changed, 3 insertions(+), 67 deletions(-)
- delete mode 100644 meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch
- rename meta-networking/recipes-support/libtdb/{libtdb_1.4.2.bb => libtdb_1.4.3.bb} (90%)
-
-diff --git a/meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch b/meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch
-deleted file mode 100644
-index e20c9a2c2..000000000
---- a/meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch
-+++ /dev/null
-@@ -1,63 +0,0 @@
--From 4b8463ff43f8983a706b181c5292491f9f954be1 Mon Sep 17 00:00:00 2001
--From: Changqing Li <changqing.li@windriver.com>
--Date: Fri, 25 Jan 2019 15:00:59 +0800
--Subject: [PATCH] waf: add support of cross_compile
--
--After upgrade libtdb from 1.3.16 to 1.3.17, waf build system
--which used by libtdb upgrade from 1.5.19 to 2.0.8
--
--on 1.5.19, for cross_compile, subprocess.Popen is set to be
--samba_cross.cross_Popen, which will not execute testprog on
--host, but only read result from cross-answers.txt which is
--passed by option --cross-answer
--
--part of old code:
--    args = Utils.to_list(kw.get('exec_args', []))
--    proc = Utils.pproc.Popen([lastprog] + args, stdout=Utils.pproc.PIPE, stderr=Utils.pproc.PIPE)
--
--but on 2.0.8, exec_args is not used and cause do_configure
--failed with Exec format error
--
--fixed by append cross anser related args to cmd
--
--Upstream-Status: Submitted [https://gitlab.com/samba-team/samba/merge_requests/211]
--
--Signed-off-by: Changqing Li <changqing.li@windriver.com>
-----
-- third_party/waf/waflib/Tools/c_config.py | 11 ++++++-----
-- 1 file changed, 6 insertions(+), 5 deletions(-)
--
--diff --git a/third_party/waf/waflib/Tools/c_config.py b/third_party/waf/waflib/Tools/c_config.py
--index 7608215..767cf33 100644
----- a/third_party/waf/waflib/Tools/c_config.py
--+++ b/third_party/waf/waflib/Tools/c_config.py
--@@ -660,20 +660,21 @@ class test_exec(Task.Task):
-- 	"""
-- 	color = 'PINK'
-- 	def run(self):
--+		args = self.generator.bld.kw.get('exec_args', [])
-- 		if getattr(self.generator, 'rpath', None):
-- 			if getattr(self.generator, 'define_ret', False):
---				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()])
---			else:
---				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()])
--+				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()] + args)
--+			else: 
--+				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()] + args)
-- 		else:
-- 			env = self.env.env or {}
-- 			env.update(dict(os.environ))
-- 			for var in ('LD_LIBRARY_PATH', 'DYLD_LIBRARY_PATH', 'PATH'):
-- 				env[var] = self.inputs[0].parent.abspath() + os.path.pathsep + env.get(var, '')
-- 			if getattr(self.generator, 'define_ret', False):
---				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()], env=env)
--+				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()] + args, env=env)
-- 			else:
---				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()], env=env)
--+				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()] + args, env=env)
-- 
-- @feature('test_exec')
-- @after_method('apply_link')
---- 
--2.7.4
--
-diff --git a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
-index 481fd68a4..c35cab7c2 100644
---- a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
-+++ b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
-@@ -78,7 +78,7 @@ index 1d01e1e..2336dc3 100644
- +    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h compat.h')
- +    conf.CHECK_HEADERS('attr/xattr.h compat.h ctype.h dustat.h')
-      conf.CHECK_HEADERS('fcntl.h fnmatch.h glob.h history.h krb5.h langinfo.h')
---    conf.CHECK_HEADERS('libaio.h locale.h ndir.h pwd.h')
-+-    conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
- -    conf.CHECK_HEADERS('shadow.h sys/acl.h')
- -    conf.CHECK_HEADERS('sys/attributes.h attr/attributes.h sys/capability.h sys/dir.h sys/epoll.h')
- +    conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
-diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.2.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.3.bb
-similarity index 90%
-rename from meta-networking/recipes-support/libtdb/libtdb_1.4.2.bb
-rename to meta-networking/recipes-support/libtdb/libtdb_1.4.3.bb
-index 4973e80ca..c131014ff 100644
---- a/meta-networking/recipes-support/libtdb/libtdb_1.4.2.bb
-+++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.3.bb
-@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c
- 
- SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
-            file://tdb-Add-configure-options-for-packages.patch \
--           file://0001-waf-add-support-of-cross_compile.patch \
- "
- 
--SRC_URI[md5sum] = "b2c05ad68334368d3258a63db709f254"
--SRC_URI[sha256sum] = "9040b2cce4028e392f063f91bbe76b8b28fecc2b7c0c6071c67b5eb3168e004a"
-+SRC_URI[md5sum] = "e638e8890f743624a754304b3f994f4d"
-+SRC_URI[sha256sum] = "c8058393dfa15f47e11ebd2f1d132693f0b3b3b8bf22d0201bfb305026f88a1b"
- 
- PACKAGECONFIG ??= "\
-     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
--- 
-2.17.1
-
-
-
+PiBodHRwczovL2N2ZS5taXRyZS5vcmcvY2dpLWJpbi9jdmVuYW1lLmNnaT9u
+YW1lPUNWRS0yMDE5LTE3NDk4DQo+aXMgdGhpcyBmaXggaW4gbWFzdGVyPw0K
+DQpZZXMuIEl0J3MgYWxyZWFkeSBmaXggaW4gbWFzdGVyLg0KDQotLS0tLU9y
+aWdpbmFsIE1lc3NhZ2UtLS0tLQ0KRnJvbTogb3BlbmVtYmVkZGVkLWRldmVs
+LWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyBbbWFpbHRvOm9wZW5l
+bWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmdd
+IE9uIEJlaGFsZiBPZiBha3VzdGVyODA4DQpTZW50OiBGcmlkYXksIE1hcmNo
+IDEzLCAyMDIwIDExOjM3IFBNDQpUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxp
+c3RzLm9wZW5lbWJlZGRlZC5vcmcNClN1YmplY3Q6IFJlOiBbb2VdIFttZXRh
+LW9lXVt6ZXVzXVtQQVRDSF0gbGlic3NoMjogQ1ZFLTIwMTktMTc0OTgucGF0
+Y2gNCg0KDQoNCk9uIDMvMTMvMjAgNDoxMCBBTSwgV2FuZyBNaW5neXUgd3Jv
+dGU6DQo+IFNlY3VyaXR5IEFkdmlzb3J5DQo+DQo+IFJlZmVyZW5jZXM6DQo+
+IGh0dHBzOi8vY3ZlLm1pdHJlLm9yZy9jZ2ktYmluL2N2ZW5hbWUuY2dpP25h
+bWU9Q1ZFLTIwMTktMTc0OTgNCmlzIHRoaXMgZml4IGluIG1hc3Rlcj8NCj4N
+Cj4gU2lnbmVkLW9mZi1ieTogV2FuZyBNaW5neXUgPHdhbmdteUBjbi5mdWpp
+dHN1LmNvbT4NCj4gLS0tDQo+ICAuLi4vbGlic3NoMi9saWJzc2gyL0NWRS0y
+MDE5LTE3NDk4LnBhdGNoICAgICAgfCAxMzEgKysrKysrKysrKysrKysrKysr
+DQo+ICAuLi4vcmVjaXBlcy1zdXBwb3J0L2xpYnNzaDIvbGlic3NoMl8xLjgu
+Mi5iYiAgfCAgIDEgKw0KPiAgMiBmaWxlcyBjaGFuZ2VkLCAxMzIgaW5zZXJ0
+aW9ucygrKQ0KPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IA0KPiBtZXRhLW9lL3Jl
+Y2lwZXMtc3VwcG9ydC9saWJzc2gyL2xpYnNzaDIvQ1ZFLTIwMTktMTc0OTgu
+cGF0Y2gNCj4NCj4gZGlmZiAtLWdpdCANCj4gYS9tZXRhLW9lL3JlY2lwZXMt
+c3VwcG9ydC9saWJzc2gyL2xpYnNzaDIvQ1ZFLTIwMTktMTc0OTgucGF0Y2gg
+DQo+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlic3NoMi9saWJzc2gy
+L0NWRS0yMDE5LTE3NDk4LnBhdGNoDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0
+DQo+IGluZGV4IDAwMDAwMDAwMC4uZjYwNzY0YzkyDQo+IC0tLSAvZGV2L251
+bGwNCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlic3NoMi9s
+aWJzc2gyL0NWRS0yMDE5LTE3NDk4LnBhdGNoDQo+IEBAIC0wLDAgKzEsMTMx
+IEBADQo+ICtGcm9tIGRlZGNiZDEwNmY4ZTUyZDU1ODZiMDIwNWJjNzY3N2U0
+Yzk4NjhmOWMgTW9uIFNlcCAxNyAwMDowMDowMCANCj4gKzIwMDENCj4gK0Zy
+b206IFdpbGwgQ29zZ3JvdmUgPHdpbGxAcGFuaWMuY29tPg0KPiArRGF0ZTog
+RnJpLCAzMCBBdWcgMjAxOSAwOTo1NzozOCAtMDcwMA0KPiArU3ViamVjdDog
+W1BBVENIXSBwYWNrZXQuYzogaW1wcm92ZSBtZXNzYWdlIHBhcnNpbmcgKCM0
+MDIpDQo+ICsNCj4gKyogcGFja2V0LmM6IGltcHJvdmUgcGFyc2luZyBvZiBw
+YWNrZXRzDQo+ICsNCj4gK2ZpbGU6IHBhY2tldC5jDQo+ICsNCj4gK25vdGVz
+Og0KPiArVXNlIF9saWJzc2gyX2dldF9zdHJpbmcgQVBJIGluIFNTSF9NU0df
+REVCVUcvU1NIX01TR19ESVNDT05ORUNULiBBZGRpdGlvbmFsIHVpbnQzMiBi
+b3VuZHMgY2hlY2sgaW4gU1NIX01TR19HTE9CQUxfUkVRVUVTVC4NCj4gKw0K
+PiArVXBzdHJlYW0tU3RhdHVzOiBBY2NlcHRlZA0KPiArQ1ZFOiBDVkUtMjAx
+OS0xNzQ5OA0KPiArDQo+ICtSZWZlcmVuY2UgdG8gdXBzdHJlYW0gcGF0Y2g6
+DQo+ICtodHRwczovL2dpdGh1Yi5jb20vbGlic3NoMi9saWJzc2gyL2NvbW1p
+dC9kZWRjYmQxMDZmOGU1MmQ1NTg2YjAyMDViYzcNCj4gKzY3N2U0Yzk4Njhm
+OWMNCj4gKw0KPiArLS0tDQo+ICsgc3JjL3BhY2tldC5jIHwgNjggDQo+ICsr
+KysrKysrKysrKysrKysrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tDQo+ICsgMSBmaWxlIGNoYW5nZWQsIDI5IGluc2VydGlvbnMoKyks
+IDM5IGRlbGV0aW9ucygtKQ0KPiArDQo+ICtkaWZmIC0tZ2l0IGEvc3JjL3Bh
+Y2tldC5jIGIvc3JjL3BhY2tldC5jIGluZGV4IDM4YWI2Mjk0Li4yZTAxYmZj
+NSANCj4gKzEwMDY0NA0KPiArLS0tIGEvc3JjL3BhY2tldC5jDQo+ICsrKysg
+Yi9zcmMvcGFja2V0LmMNCj4gK0BAIC00MTYsOCArNDE2LDggQEAgX2xpYnNz
+aDJfcGFja2V0X2FkZChMSUJTU0gyX1NFU1NJT04gKiBzZXNzaW9uLCB1bnNp
+Z25lZCBjaGFyICpkYXRhLA0KPiArICAgICAgICAgICAgICAgICAgICAgc2l6
+ZV90IGRhdGFsZW4sIGludCBtYWNzdGF0ZSkgIHsNCj4gKyAgICAgaW50IHJj
+ID0gMDsNCj4gKy0gICAgY2hhciAqbWVzc2FnZSA9IE5VTEw7DQo+ICstICAg
+IGNoYXIgKmxhbmd1YWdlID0gTlVMTDsNCj4gKysgICAgdW5zaWduZWQgY2hh
+ciAqbWVzc2FnZSA9IE5VTEw7DQo+ICsrICAgIHVuc2lnbmVkIGNoYXIgKmxh
+bmd1YWdlID0gTlVMTDsNCj4gKyAgICAgc2l6ZV90IG1lc3NhZ2VfbGVuID0g
+MDsNCj4gKyAgICAgc2l6ZV90IGxhbmd1YWdlX2xlbiA9IDA7DQo+ICsgICAg
+IExJQlNTSDJfQ0hBTk5FTCAqY2hhbm5lbHAgPSBOVUxMOyBAQCAtNDY5LDMz
+ICs0NjksMjMgQEAgDQo+ICtfbGlic3NoMl9wYWNrZXRfYWRkKExJQlNTSDJf
+U0VTU0lPTiAqIHNlc3Npb24sIHVuc2lnbmVkIGNoYXIgKmRhdGEsDQo+ICsg
+DQo+ICsgICAgICAgICBjYXNlIFNTSF9NU0dfRElTQ09OTkVDVDoNCj4gKyAg
+ICAgICAgICAgICBpZihkYXRhbGVuID49IDUpIHsNCj4gKy0gICAgICAgICAg
+ICAgICAgc2l6ZV90IHJlYXNvbiA9IF9saWJzc2gyX250b2h1MzIoZGF0YSAr
+IDEpOw0KPiArKyAgICAgICAgICAgICAgICB1aW50MzJfdCByZWFzb24gPSAw
+Ow0KPiArKyAgICAgICAgICAgICAgICBzdHJ1Y3Qgc3RyaW5nX2J1ZiBidWY7
+DQo+ICsrICAgICAgICAgICAgICAgIGJ1Zi5kYXRhID0gKHVuc2lnbmVkIGNo
+YXIgKilkYXRhOw0KPiArKyAgICAgICAgICAgICAgICBidWYuZGF0YXB0ciA9
+IGJ1Zi5kYXRhOw0KPiArKyAgICAgICAgICAgICAgICBidWYubGVuID0gZGF0
+YWxlbjsNCj4gKysgICAgICAgICAgICAgICAgYnVmLmRhdGFwdHIrKzsgLyog
+YWR2YW5jZSBwYXN0IHR5cGUgKi8NCj4gKyANCj4gKy0gICAgICAgICAgICAg
+ICAgaWYoZGF0YWxlbiA+PSA5KSB7DQo+ICstICAgICAgICAgICAgICAgICAg
+ICBtZXNzYWdlX2xlbiA9IF9saWJzc2gyX250b2h1MzIoZGF0YSArIDUpOw0K
+PiArKyAgICAgICAgICAgICAgICBfbGlic3NoMl9nZXRfdTMyKCZidWYsICZy
+ZWFzb24pOw0KPiArKyAgICAgICAgICAgICAgICBfbGlic3NoMl9nZXRfc3Ry
+aW5nKCZidWYsICZtZXNzYWdlLCAmbWVzc2FnZV9sZW4pOw0KPiArKyAgICAg
+ICAgICAgICAgICBfbGlic3NoMl9nZXRfc3RyaW5nKCZidWYsICZsYW5ndWFn
+ZSwgJmxhbmd1YWdlX2xlbik7DQo+ICsgDQo+ICstICAgICAgICAgICAgICAg
+ICAgICBpZihtZXNzYWdlX2xlbiA8IGRhdGFsZW4tMTMpIHsNCj4gKy0gICAg
+ICAgICAgICAgICAgICAgICAgICAvKiA5ID0gcGFja2V0X3R5cGUoMSkgKyBy
+ZWFzb24oNCkgKyBtZXNzYWdlX2xlbig0KSAqLw0KPiArLSAgICAgICAgICAg
+ICAgICAgICAgICAgIG1lc3NhZ2UgPSAoY2hhciAqKSBkYXRhICsgOTsNCj4g
+Ky0NCj4gKy0gICAgICAgICAgICAgICAgICAgICAgICBsYW5ndWFnZV9sZW4g
+PQ0KPiArLSAgICAgICAgICAgICAgICAgICAgICAgICAgICBfbGlic3NoMl9u
+dG9odTMyKGRhdGEgKyA5ICsgbWVzc2FnZV9sZW4pOw0KPiArLSAgICAgICAg
+ICAgICAgICAgICAgICAgIGxhbmd1YWdlID0gKGNoYXIgKikgZGF0YSArIDkg
+KyBtZXNzYWdlX2xlbiArIDQ7DQo+ICstDQo+ICstICAgICAgICAgICAgICAg
+ICAgICAgICAgaWYobGFuZ3VhZ2VfbGVuID4gKGRhdGFsZW4tMTMtbWVzc2Fn
+ZV9sZW4pKSB7DQo+ICstICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8q
+IGJhZCBpbnB1dCwgY2xlYXIgaW5mbyAqLw0KPiArLSAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICBsYW5ndWFnZSA9IG1lc3NhZ2UgPSBOVUxMOw0KPiAr
+LSAgICAgICAgICAgICAgICAgICAgICAgICAgICBsYW5ndWFnZV9sZW4gPSBt
+ZXNzYWdlX2xlbiA9IDA7DQo+ICstICAgICAgICAgICAgICAgICAgICAgICAg
+fQ0KPiArLSAgICAgICAgICAgICAgICAgICAgfQ0KPiArLSAgICAgICAgICAg
+ICAgICAgICAgZWxzZQ0KPiArLSAgICAgICAgICAgICAgICAgICAgICAgIC8q
+IGJhZCBzaXplLCBjbGVhciBpdCAqLw0KPiArLSAgICAgICAgICAgICAgICAg
+ICAgICAgIG1lc3NhZ2VfbGVuID0gMDsNCj4gKy0gICAgICAgICAgICAgICAg
+fQ0KPiArICAgICAgICAgICAgICAgICBpZihzZXNzaW9uLT5zc2hfbXNnX2Rp
+c2Nvbm5lY3QpIHsNCj4gKy0gICAgICAgICAgICAgICAgICAgIExJQlNTSDJf
+RElTQ09OTkVDVChzZXNzaW9uLCByZWFzb24sIG1lc3NhZ2UsDQo+ICstICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbWVzc2FnZV9s
+ZW4sIGxhbmd1YWdlLCBsYW5ndWFnZV9sZW4pOw0KPiArKyAgICAgICAgICAg
+ICAgICAgICAgTElCU1NIMl9ESVNDT05ORUNUKHNlc3Npb24sIHJlYXNvbiwg
+KGNvbnN0IGNoYXIgKiltZXNzYWdlLA0KPiArKyAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2VfbGVuLCAoY29uc3QgY2hh
+ciAqKWxhbmd1YWdlLA0KPiArKyAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGxhbmd1YWdlX2xlbik7DQo+ICsgICAgICAgICAgICAg
+ICAgIH0NCj4gKysNCj4gKyAgICAgICAgICAgICAgICAgX2xpYnNzaDJfZGVi
+dWcoc2Vzc2lvbiwgTElCU1NIMl9UUkFDRV9UUkFOUywNCj4gKyAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIkRpc2Nvbm5lY3QoJWQpOiAlcygl
+cykiLCByZWFzb24sDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgIG1lc3NhZ2UsIGxhbmd1YWdlKTsgQEAgLTUzNCwyMyANCj4gKys1MjYs
+MjQgQEAgX2xpYnNzaDJfcGFja2V0X2FkZChMSUJTU0gyX1NFU1NJT04gKiBz
+ZXNzaW9uLCB1bnNpZ25lZCBjaGFyICpkYXRhLA0KPiArICAgICAgICAgICAg
+ICAgICBpbnQgYWx3YXlzX2Rpc3BsYXkgPSBkYXRhWzFdOw0KPiArIA0KPiAr
+ICAgICAgICAgICAgICAgICBpZihkYXRhbGVuID49IDYpIHsNCj4gKy0gICAg
+ICAgICAgICAgICAgICAgIG1lc3NhZ2VfbGVuID0gX2xpYnNzaDJfbnRvaHUz
+MihkYXRhICsgMik7DQo+ICstDQo+ICstICAgICAgICAgICAgICAgICAgICBp
+ZihtZXNzYWdlX2xlbiA8PSAoZGF0YWxlbiAtIDEwKSkgew0KPiArLSAgICAg
+ICAgICAgICAgICAgICAgICAgIC8qIDYgPSBwYWNrZXRfdHlwZSgxKSArIGRp
+c3BsYXkoMSkgKyBtZXNzYWdlX2xlbig0KSAqLw0KPiArLSAgICAgICAgICAg
+ICAgICAgICAgICAgIG1lc3NhZ2UgPSAoY2hhciAqKSBkYXRhICsgNjsNCj4g
+Ky0gICAgICAgICAgICAgICAgICAgICAgICBsYW5ndWFnZV9sZW4gPSBfbGli
+c3NoMl9udG9odTMyKGRhdGEgKyA2ICsNCj4gKy0gICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lc3Nh
+Z2VfbGVuKTsNCj4gKy0NCj4gKy0gICAgICAgICAgICAgICAgICAgICAgICBp
+ZihsYW5ndWFnZV9sZW4gPD0gKGRhdGFsZW4gLSAxMCAtIG1lc3NhZ2VfbGVu
+KSkNCj4gKy0gICAgICAgICAgICAgICAgICAgICAgICAgICAgbGFuZ3VhZ2Ug
+PSAoY2hhciAqKSBkYXRhICsgMTAgKyBtZXNzYWdlX2xlbjsNCj4gKy0gICAg
+ICAgICAgICAgICAgICAgIH0NCj4gKysgICAgICAgICAgICAgICAgICAgIHN0
+cnVjdCBzdHJpbmdfYnVmIGJ1ZjsNCj4gKysgICAgICAgICAgICAgICAgICAg
+IGJ1Zi5kYXRhID0gKHVuc2lnbmVkIGNoYXIgKilkYXRhOw0KPiArKyAgICAg
+ICAgICAgICAgICAgICAgYnVmLmRhdGFwdHIgPSBidWYuZGF0YTsNCj4gKysg
+ICAgICAgICAgICAgICAgICAgIGJ1Zi5sZW4gPSBkYXRhbGVuOw0KPiArKyAg
+ICAgICAgICAgICAgICAgICAgYnVmLmRhdGFwdHIgKz0gMjsgLyogYWR2YW5j
+ZSBwYXN0IHR5cGUgJiBhbHdheXMgDQo+ICsrIGRpc3BsYXkgKi8NCj4gKysN
+Cj4gKysgICAgICAgICAgICAgICAgICAgIF9saWJzc2gyX2dldF9zdHJpbmco
+JmJ1ZiwgJm1lc3NhZ2UsICZtZXNzYWdlX2xlbik7DQo+ICsrICAgICAgICAg
+ICAgICAgICAgICBfbGlic3NoMl9nZXRfc3RyaW5nKCZidWYsICZsYW5ndWFn
+ZSwgDQo+ICsrICZsYW5ndWFnZV9sZW4pOw0KPiArICAgICAgICAgICAgICAg
+ICB9DQo+ICsgDQo+ICsgICAgICAgICAgICAgICAgIGlmKHNlc3Npb24tPnNz
+aF9tc2dfZGVidWcpIHsNCj4gKy0gICAgICAgICAgICAgICAgICAgIExJQlNT
+SDJfREVCVUcoc2Vzc2lvbiwgYWx3YXlzX2Rpc3BsYXksIG1lc3NhZ2UsDQo+
+ICstICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2Vf
+bGVuLCBsYW5ndWFnZSwgbGFuZ3VhZ2VfbGVuKTsNCj4gKysgICAgICAgICAg
+ICAgICAgICAgIExJQlNTSDJfREVCVUcoc2Vzc2lvbiwgYWx3YXlzX2Rpc3Bs
+YXksDQo+ICsrICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIChj
+b25zdCBjaGFyICopbWVzc2FnZSwNCj4gKysgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgbWVzc2FnZV9sZW4sIChjb25zdCBjaGFyICopbGFu
+Z3VhZ2UsDQo+ICsrICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IGxhbmd1YWdlX2xlbik7DQo+ICsgICAgICAgICAgICAgICAgIH0NCj4gKyAg
+ICAgICAgICAgICB9DQo+ICsrDQo+ICsgICAgICAgICAgICAgLyoNCj4gKyAg
+ICAgICAgICAgICAgKiBfbGlic3NoMl9kZWJ1ZyB3aWxsIGFjdHVhbGx5IHRy
+dW5jYXRlIHRoaXMgZm9yIHVzIHNvDQo+ICsgICAgICAgICAgICAgICogdGhh
+dCBpdCdzIG5vdCBhbiBpbm9yZGluYXRlIGFib3V0IG9mIGRhdGEgQEAgLTU3
+Niw3IA0KPiArKzU2Niw3IEBAIF9saWJzc2gyX3BhY2tldF9hZGQoTElCU1NI
+Ml9TRVNTSU9OICogc2Vzc2lvbiwgdW5zaWduZWQgY2hhciAqZGF0YSwNCj4g
+KyAgICAgICAgICAgICAgICAgdWludDMyX3QgbGVuID0gMDsNCj4gKyAgICAg
+ICAgICAgICAgICAgdW5zaWduZWQgY2hhciB3YW50X3JlcGx5ID0gMDsNCj4g
+KyAgICAgICAgICAgICAgICAgbGVuID0gX2xpYnNzaDJfbnRvaHUzMihkYXRh
+ICsgMSk7DQo+ICstICAgICAgICAgICAgICAgIGlmKGRhdGFsZW4gPj0gKDYg
+KyBsZW4pKSB7DQo+ICsrICAgICAgICAgICAgICAgIGlmKChsZW4gPD0gKFVJ
+TlRfTUFYIC0gNikpICYmIChkYXRhbGVuID49ICg2ICsgDQo+ICsrIGxlbikp
+KSB7DQo+ICsgICAgICAgICAgICAgICAgICAgICB3YW50X3JlcGx5ID0gZGF0
+YVs1ICsgbGVuXTsNCj4gKyAgICAgICAgICAgICAgICAgICAgIF9saWJzc2gy
+X2RlYnVnKHNlc3Npb24sDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICBMSUJTU0gyX1RSQUNFX0NPTk4sDQo+IGRpZmYgLS1naXQg
+YS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJzc2gyL2xpYnNzaDJfMS44
+LjIuYmIgDQo+IGIvbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvbGlic3NoMi9s
+aWJzc2gyXzEuOC4yLmJiDQo+IGluZGV4IGZlODUzY2RlNC4uYTE3YWU1Yjdj
+IDEwMDY0NA0KPiAtLS0gYS9tZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9saWJz
+c2gyL2xpYnNzaDJfMS44LjIuYmINCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVz
+LXN1cHBvcnQvbGlic3NoMi9saWJzc2gyXzEuOC4yLmJiDQo+IEBAIC0xNyw2
+ICsxNyw3IEBAIGluaGVyaXQgYXV0b3Rvb2xzIHBrZ2NvbmZpZyAgRVhUUkFf
+T0VDT05GICs9ICJcDQo+ICAgICAgICAgICAgICAgICAgIC0td2l0aC1saWJ6
+IFwNCj4gICAgICAgICAgICAgICAgICAgLS13aXRoLWxpYnotcHJlZml4PSR7
+U1RBR0lOR19MSUJESVJ9IFwNCj4gKyAgICAgICAgICAgICAgICAgZmlsZTov
+L0NWRS0yMDE5LTE3NDk4LnBhdGNoIFwNCj4gICAgICAgICAgICAgICAgICAi
+DQo+ICANCj4gICMgb25seSBvbmUgb2Ygb3BlbnNzbCBhbmQgZ2NyeXB0IGNv
+dWxkIGJlIHNldA0KDQotLQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX18NCk9wZW5lbWJlZGRlZC1kZXZlbCBtYWls
+aW5nIGxpc3QNCk9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
+ZWQub3JnDQpodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KDQoNCgoK
 
