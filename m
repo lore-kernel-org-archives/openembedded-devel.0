@@ -1,24 +1,96 @@
-Return-Path: <Wenlin.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CDD076062C
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com
+	[209.85.214.169])
+	by mail.openembedded.org (Postfix) with ESMTP id B29A560B34
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 14:41:44 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 02HEfARu000940
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 17 Mar 2020 14:48:48 +0000 (UTC)
+Received: by mail-pl1-f169.google.com with SMTP id f16so9726931plj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 07:41:35 -0700
-Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.487.0;
-	Tue, 17 Mar 2020 07:41:19 -0700
-From: Wenlin Kang <wenlin.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Mar 2020 07:41:19 -0700
-Message-ID: <20200317144119.97477-1-wenlin.kang@windriver.com>
-X-Mailer: git-send-email 2.23.0
+	Tue, 17 Mar 2020 07:48:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=to:from:subject:autocrypt:message-id:date:user-agent:mime-version
+	:content-transfer-encoding:content-language;
+	bh=HL1NahLD34YErdL1ecmri9QBFGExdtFuOURW29r3x8I=;
+	b=iOCHudyWYP/vey43jbQvrPDzvjLqtVakSmb3JGFRgGJqW72qwqlDgPTPluEOyqNc1U
+	ia9cEy5LeAdjswtPVPv8d24OYFAmo4LbXQ9zxXkXFFueCBd4KbaMcS7MPXaYxPt+IoZ9
+	b15xiq9vl04ORABsITIvoucuoQFp0ZLUX043bZY9Z7HW7mHbi9cm/O2AL1DAKatJspSX
+	0M0s26wZ8lC7i8DPDPbmGcbuVbGxrtnklDBgWqXB4zNORrNmgslKhpc6rbSRYru5zd3V
+	J3ZD8IH3+EqVys7IknZa/f+CR4+haypPiQnCKPE3QN27jTxtPH0bY0Xx2slqcrz9LNZM
+	4PNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:to:from:subject:autocrypt:message-id:date
+	:user-agent:mime-version:content-transfer-encoding:content-language;
+	bh=HL1NahLD34YErdL1ecmri9QBFGExdtFuOURW29r3x8I=;
+	b=qU62GENgRxwqnj72eDIfxoREN3N8bQG7yRzs1Y1Pa+M4d0Pv7JHgS27a04pq0rOAsa
+	Or1yPDjlHn61LsHMdDNetaPt1/DhhrVPpWTQW7ctZYQco0HRxsU1tlNt4+e8tw782BAi
+	7J2Q4h5+sIYOyJ1YGCnw46BSqRkpQ/TN9VLrX0Gxm4I8or+HphjVXVQohOrkmwCEFWdD
+	9d/TD+37hwrNfEaaV+/LM7Y/+jx6fVkt2JvDPfZWuR2EWVLzqgkhJEyysVmZAx+I+SYV
+	vPkqMZErUkuCoCByLn54U+VAsAC0tqdeDrjW5lgH15PP8FvyIDvPJOvFw3yTJXPlaUzE
+	NwwQ==
+X-Gm-Message-State: ANhLgQ3kiyXxUjm63EXks2NYJ1s0xOKoVFDLOI+Im2iPNrddmVcLZJ/Z
+	QpLBl/IJwuZqwlctapfV30X8Iyws
+X-Google-Smtp-Source: ADFU+vv6UjLMR++MsiisMT7emEpF6wBQRZvz5l0tt2RBurgw900E9zaiFJ1MG7K7AJvj9uSJyWnNYw==
+X-Received: by 2002:a17:902:7204:: with SMTP id
+	ba4mr4772887plb.232.1584456529253; 
+	Tue, 17 Mar 2020 07:48:49 -0700 (PDT)
+Received: from ?IPv6:2601:202:4180:a5c0:8879:dca4:8dd7:7b83?
+	([2601:202:4180:a5c0:8879:dca4:8dd7:7b83])
+	by smtp.gmail.com with ESMTPSA id w11sm3360377pfn.4.2020.03.17.07.48.48
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Tue, 17 Mar 2020 07:48:48 -0700 (PDT)
+To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+From: akuster808 <akuster808@gmail.com>
+Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
+	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
+	8CS2NxU=
+Message-ID: <c68254db-aa96-df47-7b86-179bab336393@gmail.com>
+Date: Tue, 17 Mar 2020 07:48:47 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+	Thunderbird/68.4.1
 MIME-Version: 1.0
-Subject: [meta-oe][zeus][PATCH] ipmitool: fix CVE-2020-5208
+Subject: zeus pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,627 +103,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 14:41:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 17 Mar 2020 14:48:48 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Fix CVE-2020-5208
+The following changes since commit bb65c27a772723dfe2c15b5e1b27bcc1a1ed884c:
 
-Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
----
- ...-Fix-buffer-overflow-vulnerabilities.patch | 133 ++++++++++++++++
- ...uffer-overflow-in-ipmi_spd_print_fru.patch |  53 +++++++
- ...er-overflow-in-ipmi_get_session_info.patch |  53 +++++++
- .../0004-channel-Fix-buffer-overflow.patch    |  69 +++++++++
- ...er-overflows-in-get_lan_param_select.patch |  94 ++++++++++++
- ...u-sdr-Fix-id_string-buffer-overflows.patch | 142 ++++++++++++++++++
- .../ipmitool/ipmitool_1.8.18.bb               |   6 +
- 7 files changed, 550 insertions(+)
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0002-fru-Fix-buffer-overflow-in-ipmi_spd_print_fru.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0003-session-Fix-buffer-overflow-in-ipmi_get_session_info.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0004-channel-Fix-buffer-overflow.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0005-lanp-Fix-buffer-overflows-in-get_lan_param_select.patch
- create mode 100644 meta-oe/recipes-kernel/ipmitool/ipmitool/0006-fru-sdr-Fix-id_string-buffer-overflows.patch
+  fluentbit: Fix packaging in multilib env (2020-01-30 18:38:10 -0800)
 
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
-new file mode 100644
-index 000000000..aeb0da80e
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool/0001-fru-Fix-buffer-overflow-vulnerabilities.patch
-@@ -0,0 +1,133 @@
-+From 2542bade29c192370ca897eab67c40f27b8912f8 Mon Sep 17 00:00:00 2001
-+From: Chrostoper Ertl <chertl@microsoft.com>
-+Date: Wed, 12 Feb 2020 12:32:00 +0800
-+Subject: [PATCH 1/6] fru: Fix buffer overflow vulnerabilities
-+
-+Partial fix for CVE-2020-5208, see
-+https://github.com/ipmitool/ipmitool/security/advisories/GHSA-g659-9qxw-p7cp
-+
-+The `read_fru_area_section` function only performs size validation of
-+requested read size, and falsely assumes that the IPMI message will not
-+respond with more than the requested amount of data; it uses the
-+unvalidated response size to copy into `frubuf`. If the response is
-+larger than the request, this can result in overflowing the buffer.
-+
-+The same issue affects the `read_fru_area` function.
-+
-+Upstream-Status: Backport[https://github.com/ipmitool/ipmitool/commit/e824c23316ae50beb7f7488f2055ac65e8b341f2]
-+CVE: CVE-2020-5208
-+
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ lib/ipmi_fru.c | 33 +++++++++++++++++++++++++++++++--
-+ 1 file changed, 31 insertions(+), 2 deletions(-)
-+
-+diff --git a/lib/ipmi_fru.c b/lib/ipmi_fru.c
-+index cf00eff..af99aa9 100644
-+--- a/lib/ipmi_fru.c
-++++ b/lib/ipmi_fru.c
-+@@ -615,7 +615,10 @@ int
-+ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 			uint32_t offset, uint32_t length, uint8_t *frubuf)
-+ {
-+-	uint32_t off = offset, tmp, finish;
-++	uint32_t off = offset;
-++	uint32_t tmp;
-++	uint32_t finish;
-++	uint32_t size_left_in_buffer;
-+ 	struct ipmi_rs * rsp;
-+ 	struct ipmi_rq req;
-+ 	uint8_t msg_data[4];
-+@@ -628,10 +631,12 @@ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 
-+ 	finish = offset + length;
-+ 	if (finish > fru->size) {
-++		memset(frubuf + fru->size, 0, length - fru->size);
-+ 		finish = fru->size;
-+ 		lprintf(LOG_NOTICE, "Read FRU Area length %d too large, "
-+ 			"Adjusting to %d",
-+ 			offset + length, finish - offset);
-++		length = finish - offset;
-+ 	}
-+ 
-+ 	memset(&req, 0, sizeof(req));
-+@@ -667,6 +672,7 @@ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 		}
-+ 	}
-+ 
-++	size_left_in_buffer = length;
-+ 	do {
-+ 		tmp = fru->access ? off >> 1 : off;
-+ 		msg_data[0] = id;
-+@@ -707,9 +713,18 @@ read_fru_area(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 		}
-+ 
-+ 		tmp = fru->access ? rsp->data[0] << 1 : rsp->data[0];
-++		if(rsp->data_len < 1
-++		   || tmp > rsp->data_len - 1
-++		   || tmp > size_left_in_buffer)
-++		{
-++			printf(" Not enough buffer size");
-++			return -1;
-++		}
-++
-+ 		memcpy(frubuf, rsp->data + 1, tmp);
-+ 		off += tmp;
-+ 		frubuf += tmp;
-++		size_left_in_buffer -= tmp;
-+ 		/* sometimes the size returned in the Info command
-+ 		* is too large.  return 0 so higher level function
-+ 		* still attempts to parse what was returned */
-+@@ -742,7 +757,9 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 			uint32_t offset, uint32_t length, uint8_t *frubuf)
-+ {
-+ 	static uint32_t fru_data_rqst_size = 20;
-+-	uint32_t off = offset, tmp, finish;
-++	uint32_t off = offset;
-++	uint32_t tmp, finish;
-++	uint32_t size_left_in_buffer;
-+ 	struct ipmi_rs * rsp;
-+ 	struct ipmi_rq req;
-+ 	uint8_t msg_data[4];
-+@@ -755,10 +772,12 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 
-+ 	finish = offset + length;
-+ 	if (finish > fru->size) {
-++		memset(frubuf + fru->size, 0, length - fru->size);
-+ 		finish = fru->size;
-+ 		lprintf(LOG_NOTICE, "Read FRU Area length %d too large, "
-+ 			"Adjusting to %d",
-+ 			offset + length, finish - offset);
-++		length = finish - offset;
-+ 	}
-+ 
-+ 	memset(&req, 0, sizeof(req));
-+@@ -773,6 +792,8 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 	if (fru->access && fru_data_rqst_size > 16)
-+ #endif
-+ 		fru_data_rqst_size = 16;
-++
-++	size_left_in_buffer = length;
-+ 	do {
-+ 		tmp = fru->access ? off >> 1 : off;
-+ 		msg_data[0] = id;
-+@@ -804,8 +825,16 @@ read_fru_area_section(struct ipmi_intf * intf, struct fru_info *fru, uint8_t id,
-+ 		}
-+ 
-+ 		tmp = fru->access ? rsp->data[0] << 1 : rsp->data[0];
-++		if(rsp->data_len < 1
-++		   || tmp > rsp->data_len - 1
-++		   || tmp > size_left_in_buffer)
-++		{
-++			printf(" Not enough buffer size");
-++			return -1;
-++		}
-+ 		memcpy((frubuf + off)-offset, rsp->data + 1, tmp);
-+ 		off += tmp;
-++		size_left_in_buffer -= tmp;
-+ 
-+ 		/* sometimes the size returned in the Info command
-+ 		* is too large.  return 0 so higher level function
-+-- 
-+2.23.0
-+
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0002-fru-Fix-buffer-overflow-in-ipmi_spd_print_fru.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0002-fru-Fix-buffer-overflow-in-ipmi_spd_print_fru.patch
-new file mode 100644
-index 000000000..50a5635a0
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool/0002-fru-Fix-buffer-overflow-in-ipmi_spd_print_fru.patch
-@@ -0,0 +1,53 @@
-+From 16b10ba5d3a368cd0ed90e9789553c306f1136a6 Mon Sep 17 00:00:00 2001
-+From: Chrostoper Ertl <chertl@microsoft.com>
-+Date: Thu, 28 Nov 2019 16:44:18 +0000
-+Subject: [PATCH 2/6] fru: Fix buffer overflow in ipmi_spd_print_fru
-+
-+Partial fix for CVE-2020-5208, see
-+https://github.com/ipmitool/ipmitool/security/advisories/GHSA-g659-9qxw-p7cp
-+
-+The `ipmi_spd_print_fru` function has a similar issue as the one fixed
-+by the previous commit in `read_fru_area_section`. An initial request is
-+made to get the `fru.size`, which is used as the size for the allocation
-+of `spd_data`. Inside a loop, further requests are performed to get the
-+copy sizes which are not checked before being used as the size for a
-+copy into the buffer.
-+
-+Upstream-Status: Backport[https://github.com/ipmitool/ipmitool/commit/840fb1cbb4fb365cb9797300e3374d4faefcdb10]
-+CVE: CVE-2020-5208
-+
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ lib/dimm_spd.c | 9 ++++++++-
-+ 1 file changed, 8 insertions(+), 1 deletion(-)
-+
-+diff --git a/lib/dimm_spd.c b/lib/dimm_spd.c
-+index 41e30db..68f3b4f 100644
-+--- a/lib/dimm_spd.c
-++++ b/lib/dimm_spd.c
-+@@ -1621,7 +1621,7 @@ ipmi_spd_print_fru(struct ipmi_intf * intf, uint8_t id)
-+ 	struct ipmi_rq req;
-+ 	struct fru_info fru;
-+ 	uint8_t *spd_data, msg_data[4];
-+-	int len, offset;
-++	uint32_t len, offset;
-+ 
-+ 	msg_data[0] = id;
-+ 
-+@@ -1697,6 +1697,13 @@ ipmi_spd_print_fru(struct ipmi_intf * intf, uint8_t id)
-+ 		}
-+ 
-+ 		len = rsp->data[0];
-++		if(rsp->data_len < 1
-++		   || len > rsp->data_len - 1
-++		   || len > fru.size - offset)
-++		{
-++			printf(" Not enough buffer size");
-++			return -1;
-++		}
-+ 		memcpy(&spd_data[offset], rsp->data + 1, len);
-+ 		offset += len;
-+ 	} while (offset < fru.size);
-+-- 
-+2.23.0
-+
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0003-session-Fix-buffer-overflow-in-ipmi_get_session_info.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0003-session-Fix-buffer-overflow-in-ipmi_get_session_info.patch
-new file mode 100644
-index 000000000..6b5022533
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool/0003-session-Fix-buffer-overflow-in-ipmi_get_session_info.patch
-@@ -0,0 +1,53 @@
-+From 89621b1ce67065fb9044b73c215862fc8aef523f Mon Sep 17 00:00:00 2001
-+From: Chrostoper Ertl <chertl@microsoft.com>
-+Date: Thu, 28 Nov 2019 16:51:49 +0000
-+Subject: [PATCH 3/6] session: Fix buffer overflow in ipmi_get_session_info
-+
-+Partial fix for CVE-2020-5208, see
-+https://github.com/ipmitool/ipmitool/security/advisories/GHSA-g659-9qxw-p7cp
-+
-+The `ipmi_get_session_info` function does not properly check the
-+response `data_len`, which is used as a copy size, allowing stack buffer
-+overflow.
-+
-+Upstream-Status: Backport[https://github.com/ipmitool/ipmitool/commit/41d7026946fafbd4d1ec0bcaca3ea30a6e8eed22]
-+CVE: CVE-2020-5208
-+
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ lib/ipmi_session.c | 12 ++++++++----
-+ 1 file changed, 8 insertions(+), 4 deletions(-)
-+
-+diff --git a/lib/ipmi_session.c b/lib/ipmi_session.c
-+index 141f0f4..b9af1fd 100644
-+--- a/lib/ipmi_session.c
-++++ b/lib/ipmi_session.c
-+@@ -309,8 +309,10 @@ ipmi_get_session_info(struct ipmi_intf         * intf,
-+ 		}
-+ 		else
-+ 		{
-+-			memcpy(&session_info,  rsp->data, rsp->data_len);
-+-			print_session_info(&session_info, rsp->data_len);
-++			memcpy(&session_info,  rsp->data,
-++			       __min(rsp->data_len, sizeof(session_info)));
-++			print_session_info(&session_info,
-++			                   __min(rsp->data_len, sizeof(session_info)));
-+ 		}
-+ 		break;
-+ 		
-+@@ -341,8 +343,10 @@ ipmi_get_session_info(struct ipmi_intf         * intf,
-+ 				break;
-+ 			}
-+ 
-+-			memcpy(&session_info,  rsp->data, rsp->data_len);
-+-			print_session_info(&session_info, rsp->data_len);
-++			memcpy(&session_info,  rsp->data,
-++			       __min(rsp->data_len, sizeof(session_info)));
-++			print_session_info(&session_info,
-++			                   __min(rsp->data_len, sizeof(session_info)));
-+ 			
-+ 		} while (i <= session_info.session_slot_count);
-+ 		break;
-+-- 
-+2.23.0
-+
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0004-channel-Fix-buffer-overflow.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0004-channel-Fix-buffer-overflow.patch
-new file mode 100644
-index 000000000..480090b92
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool/0004-channel-Fix-buffer-overflow.patch
-@@ -0,0 +1,69 @@
-+From 2a84669ea0d685b4a2ccb664fa3236ec5f19a80a Mon Sep 17 00:00:00 2001
-+From: Chrostoper Ertl <chertl@microsoft.com>
-+Date: Thu, 28 Nov 2019 16:56:38 +0000
-+Subject: [PATCH 4/6] channel: Fix buffer overflow
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Partial fix for CVE-2020-5208, see
-+https://github.com/ipmitool/ipmitool/security/advisories/GHSA-g659-9qxw-p7cp
-+
-+The `ipmi_get_channel_cipher_suites` function does not properly check
-+the final response’s `data_len`, which can lead to stack buffer overflow
-+on the final copy.
-+
-+Upstream-Status: Backport[https://github.com/ipmitool/ipmitool/commit/9452be87181a6e83cfcc768b3ed8321763db50e4]
-+CVE: CVE-2020-5208
-+
-+[Make some changes to apply it]
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ include/ipmitool/ipmi_channel.h |  2 ++
-+ lib/ipmi_channel.c              | 10 ++++++++--
-+ 2 files changed, 10 insertions(+), 2 deletions(-)
-+
-+diff --git a/include/ipmitool/ipmi_channel.h b/include/ipmitool/ipmi_channel.h
-+index b138c26..d7cce5e 100644
-+--- a/include/ipmitool/ipmi_channel.h
-++++ b/include/ipmitool/ipmi_channel.h
-+@@ -77,6 +77,8 @@ struct channel_access_t {
-+ 	uint8_t user_level_auth;
-+ };
-+ 
-++#define MAX_CIPHER_SUITE_DATA_LEN 0x10
-++
-+ /*
-+  * The Get Authentication Capabilities response structure
-+  * From table 22-15 of the IPMI v2.0 spec
-+diff --git a/lib/ipmi_channel.c b/lib/ipmi_channel.c
-+index fab2e54..76ecdcd 100644
-+--- a/lib/ipmi_channel.c
-++++ b/lib/ipmi_channel.c
-+@@ -378,7 +378,10 @@ ipmi_get_channel_cipher_suites(struct ipmi_intf *intf, const char *payload_type,
-+ 		lprintf(LOG_ERR, "Unable to Get Channel Cipher Suites");
-+ 		return -1;
-+ 	}
-+-	if (rsp->ccode > 0) {
-++	if (rsp->ccode
-++	    || rsp->data_len < 1
-++	    || rsp->data_len > sizeof(uint8_t) + MAX_CIPHER_SUITE_DATA_LEN)
-++	{
-+ 		lprintf(LOG_ERR, "Get Channel Cipher Suites failed: %s",
-+ 			val2str(rsp->ccode, completion_code_vals));
-+ 		return -1;
-+@@ -413,7 +416,10 @@ ipmi_get_channel_cipher_suites(struct ipmi_intf *intf, const char *payload_type,
-+ 			lprintf(LOG_ERR, "Unable to Get Channel Cipher Suites");
-+ 			return -1;
-+ 		}
-+-		if (rsp->ccode > 0) {
-++		if (rsp->ccode
-++		    || rsp->data_len < 1
-++		    || rsp->data_len > sizeof(uint8_t) + MAX_CIPHER_SUITE_DATA_LEN)
-++		{
-+ 			lprintf(LOG_ERR, "Get Channel Cipher Suites failed: %s",
-+ 					val2str(rsp->ccode, completion_code_vals));
-+ 			return -1;
-+-- 
-+2.23.0
-+
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0005-lanp-Fix-buffer-overflows-in-get_lan_param_select.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0005-lanp-Fix-buffer-overflows-in-get_lan_param_select.patch
-new file mode 100644
-index 000000000..1b1dec1c1
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool/0005-lanp-Fix-buffer-overflows-in-get_lan_param_select.patch
-@@ -0,0 +1,94 @@
-+From f45e6d84b75dcd649e18c9256c136cda354de6fd Mon Sep 17 00:00:00 2001
-+From: Chrostoper Ertl <chertl@microsoft.com>
-+Date: Thu, 28 Nov 2019 17:06:39 +0000
-+Subject: [PATCH 5/6] lanp: Fix buffer overflows in get_lan_param_select
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+Partial fix for CVE-2020-5208, see
-+https://github.com/ipmitool/ipmitool/security/advisories/GHSA-g659-9qxw-p7cp
-+
-+The `get_lan_param_select` function is missing a validation check on the
-+response’s `data_len`, which it then returns to caller functions, where
-+stack buffer overflow can occur.
-+
-+Upstream-Status: Backport[https://github.com/ipmitool/ipmitool/commit/d45572d71e70840e0d4c50bf48218492b79c1a10]
-+CVE: CVE-2020-5208
-+
-+[Make some changes to apply it]
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ lib/ipmi_lanp.c | 14 +++++++-------
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
-+
-+diff --git a/lib/ipmi_lanp.c b/lib/ipmi_lanp.c
-+index 65d881b..022c7f1 100644
-+--- a/lib/ipmi_lanp.c
-++++ b/lib/ipmi_lanp.c
-+@@ -1809,7 +1809,7 @@ ipmi_lan_alert_set(struct ipmi_intf * intf, uint8_t chan, uint8_t alert,
-+ 		if (p == NULL) {
-+ 			return (-1);
-+ 		}
-+-		memcpy(data, p->data, p->data_len);
-++		memcpy(data, p->data, __min(p->data_len, sizeof(data)));
-+ 		/* set new ipaddr */
-+ 		memcpy(data+3, temp, 4);
-+ 		printf("Setting LAN Alert %d IP Address to %d.%d.%d.%d\n", alert,
-+@@ -1824,7 +1824,7 @@ ipmi_lan_alert_set(struct ipmi_intf * intf, uint8_t chan, uint8_t alert,
-+ 		if (p == NULL) {
-+ 			return (-1);
-+ 		}
-+-		memcpy(data, p->data, p->data_len);
-++		memcpy(data, p->data, __min(p->data_len, sizeof(data)));
-+ 		/* set new macaddr */
-+ 		memcpy(data+7, temp, 6);
-+ 		printf("Setting LAN Alert %d MAC Address to "
-+@@ -1838,7 +1838,7 @@ ipmi_lan_alert_set(struct ipmi_intf * intf, uint8_t chan, uint8_t alert,
-+ 		if (p == NULL) {
-+ 			return (-1);
-+ 		}
-+-		memcpy(data, p->data, p->data_len);
-++		memcpy(data, p->data, __min(p->data_len, sizeof(data)));
-+ 
-+ 		if (strncasecmp(argv[1], "def", 3) == 0 ||
-+ 		    strncasecmp(argv[1], "default", 7) == 0) {
-+@@ -1864,7 +1864,7 @@ ipmi_lan_alert_set(struct ipmi_intf * intf, uint8_t chan, uint8_t alert,
-+ 		if (p == NULL) {
-+ 			return (-1);
-+ 		}
-+-		memcpy(data, p->data, p->data_len);
-++		memcpy(data, p->data, __min(p->data_len, sizeof(data)));
-+ 
-+ 		if (strncasecmp(argv[1], "on", 2) == 0 ||
-+ 		    strncasecmp(argv[1], "yes", 3) == 0) {
-+@@ -1889,7 +1889,7 @@ ipmi_lan_alert_set(struct ipmi_intf * intf, uint8_t chan, uint8_t alert,
-+ 		if (p == NULL) {
-+ 			return (-1);
-+ 		}
-+-		memcpy(data, p->data, p->data_len);
-++		memcpy(data, p->data, __min(p->data_len, sizeof(data)));
-+ 
-+ 		if (strncasecmp(argv[1], "pet", 3) == 0) {
-+ 			printf("Setting LAN Alert %d destination to PET Trap\n", alert);
-+@@ -1917,7 +1917,7 @@ ipmi_lan_alert_set(struct ipmi_intf * intf, uint8_t chan, uint8_t alert,
-+ 		if (p == NULL) {
-+ 			return (-1);
-+ 		}
-+-		memcpy(data, p->data, p->data_len);
-++		memcpy(data, p->data, __min(p->data_len, sizeof(data)));
-+ 
-+ 		if (str2uchar(argv[1], &data[2]) != 0) {
-+ 			lprintf(LOG_ERR, "Invalid time: %s", argv[1]);
-+@@ -1933,7 +1933,7 @@ ipmi_lan_alert_set(struct ipmi_intf * intf, uint8_t chan, uint8_t alert,
-+ 		if (p == NULL) {
-+ 			return (-1);
-+ 		}
-+-		memcpy(data, p->data, p->data_len);
-++		memcpy(data, p->data, __min(p->data_len, sizeof(data)));
-+ 
-+ 		if (str2uchar(argv[1], &data[3]) != 0) {
-+ 			lprintf(LOG_ERR, "Invalid retry: %s", argv[1]);
-+-- 
-+2.23.0
-+
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool/0006-fru-sdr-Fix-id_string-buffer-overflows.patch b/meta-oe/recipes-kernel/ipmitool/ipmitool/0006-fru-sdr-Fix-id_string-buffer-overflows.patch
-new file mode 100644
-index 000000000..38ca41b68
---- /dev/null
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool/0006-fru-sdr-Fix-id_string-buffer-overflows.patch
-@@ -0,0 +1,142 @@
-+From 401b7dda5ad1beada4791d54a7e75880f2a4fc24 Mon Sep 17 00:00:00 2001
-+From: Chrostoper Ertl <chertl@microsoft.com>
-+Date: Thu, 28 Nov 2019 17:13:45 +0000
-+Subject: [PATCH 6/6] fru, sdr: Fix id_string buffer overflows
-+
-+Final part of the fixes for CVE-2020-5208, see
-+https://github.com/ipmitool/ipmitool/security/advisories/GHSA-g659-9qxw-p7cp
-+
-+9 variants of stack buffer overflow when parsing `id_string` field of
-+SDR records returned from `CMD_GET_SDR` command.
-+
-+SDR record structs have an `id_code` field, and an `id_string` `char`
-+array.
-+
-+The length of `id_string` is calculated as `(id_code & 0x1f) + 1`,
-+which can be larger than expected 16 characters (if `id_code = 0xff`,
-+then length will be `(0xff & 0x1f) + 1 = 32`).
-+
-+In numerous places, this can cause stack buffer overflow when copying
-+into fixed buffer of size `17` bytes from this calculated length.
-+
-+Upstream-Status: Backport[https://github.com/ipmitool/ipmitool/commit/7ccea283dd62a05a320c1921e3d8d71a87772637]
-+CVE: CVE-2020-5208
-+
-+Signed-off-by: Wenlin Kang <wenlin.kang@windriver.com>
-+---
-+ lib/ipmi_fru.c |  2 +-
-+ lib/ipmi_sdr.c | 40 ++++++++++++++++++++++++----------------
-+ 2 files changed, 25 insertions(+), 17 deletions(-)
-+
-+diff --git a/lib/ipmi_fru.c b/lib/ipmi_fru.c
-+index af99aa9..98bc984 100644
-+--- a/lib/ipmi_fru.c
-++++ b/lib/ipmi_fru.c
-+@@ -3062,7 +3062,7 @@ ipmi_fru_print(struct ipmi_intf * intf, struct sdr_record_fru_locator * fru)
-+ 		return 0;
-+ 
-+ 	memset(desc, 0, sizeof(desc));
-+-	memcpy(desc, fru->id_string, fru->id_code & 0x01f);
-++	memcpy(desc, fru->id_string, __min(fru->id_code & 0x01f, sizeof(desc)));
-+ 	desc[fru->id_code & 0x01f] = 0;
-+ 	printf("FRU Device Description : %s (ID %d)\n", desc, fru->device_id);
-+ 
-+diff --git a/lib/ipmi_sdr.c b/lib/ipmi_sdr.c
-+index 2a9cbe3..62aac08 100644
-+--- a/lib/ipmi_sdr.c
-++++ b/lib/ipmi_sdr.c
-+@@ -2084,7 +2084,7 @@ ipmi_sdr_print_sensor_eventonly(struct ipmi_intf *intf,
-+ 		return -1;
-+ 
-+ 	memset(desc, 0, sizeof (desc));
-+-	snprintf(desc, (sensor->id_code & 0x1f) + 1, "%s", sensor->id_string);
-++	snprintf(desc, sizeof(desc), "%.*s", (sensor->id_code & 0x1f) + 1, sensor->id_string);
-+ 
-+ 	if (verbose) {
-+ 		printf("Sensor ID              : %s (0x%x)\n",
-+@@ -2135,7 +2135,7 @@ ipmi_sdr_print_sensor_mc_locator(struct ipmi_intf *intf,
-+ 		return -1;
-+ 
-+ 	memset(desc, 0, sizeof (desc));
-+-	snprintf(desc, (mc->id_code & 0x1f) + 1, "%s", mc->id_string);
-++	snprintf(desc, sizeof(desc), "%.*s", (mc->id_code & 0x1f) + 1, mc->id_string);
-+ 
-+ 	if (verbose == 0) {
-+ 		if (csv_output)
-+@@ -2228,7 +2228,7 @@ ipmi_sdr_print_sensor_generic_locator(struct ipmi_intf *intf,
-+ 	char desc[17];
-+ 
-+ 	memset(desc, 0, sizeof (desc));
-+-	snprintf(desc, (dev->id_code & 0x1f) + 1, "%s", dev->id_string);
-++	snprintf(desc, sizeof(desc), "%.*s", (dev->id_code & 0x1f) + 1, dev->id_string);
-+ 
-+ 	if (!verbose) {
-+ 		if (csv_output)
-+@@ -2285,7 +2285,7 @@ ipmi_sdr_print_sensor_fru_locator(struct ipmi_intf *intf,
-+ 	char desc[17];
-+ 
-+ 	memset(desc, 0, sizeof (desc));
-+-	snprintf(desc, (fru->id_code & 0x1f) + 1, "%s", fru->id_string);
-++	snprintf(desc, sizeof(desc), "%.*s", (fru->id_code & 0x1f) + 1, fru->id_string);
-+ 
-+ 	if (!verbose) {
-+ 		if (csv_output)
-+@@ -2489,35 +2489,43 @@ ipmi_sdr_print_name_from_rawentry(struct ipmi_intf *intf, uint16_t id,
-+ 
-+    int rc =0;
-+    char desc[17];
-++   const char *id_string;
-++   uint8_t id_code;
-+    memset(desc, ' ', sizeof (desc));
-+ 
-+    switch ( type) {
-+       case SDR_RECORD_TYPE_FULL_SENSOR:
-+       record.full = (struct sdr_record_full_sensor *) raw;
-+-      snprintf(desc, (record.full->id_code & 0x1f) +1, "%s",
-+-               (const char *)record.full->id_string);
-++      id_code = record.full->id_code;
-++      id_string = record.full->id_string;
-+       break;
-++
-+       case SDR_RECORD_TYPE_COMPACT_SENSOR:
-+       record.compact = (struct sdr_record_compact_sensor *) raw	;
-+-      snprintf(desc, (record.compact->id_code & 0x1f)  +1, "%s",
-+-               (const char *)record.compact->id_string);
-++      id_code = record.compact->id_code;
-++      id_string = record.compact->id_string;
-+       break;
-++
-+       case SDR_RECORD_TYPE_EVENTONLY_SENSOR:
-+       record.eventonly  = (struct sdr_record_eventonly_sensor *) raw ;
-+-      snprintf(desc, (record.eventonly->id_code & 0x1f)  +1, "%s",
-+-               (const char *)record.eventonly->id_string);
-+-      break;            
-++      id_code = record.eventonly->id_code;
-++      id_string = record.eventonly->id_string;
-++      break;
-++
-+       case SDR_RECORD_TYPE_MC_DEVICE_LOCATOR:
-+       record.mcloc  = (struct sdr_record_mc_locator *) raw ;
-+-      snprintf(desc, (record.mcloc->id_code & 0x1f)  +1, "%s",
-+-               (const char *)record.mcloc->id_string);		
-++      id_code = record.mcloc->id_code;
-++      id_string = record.mcloc->id_string;
-+       break;
-++
-+       default:
-+       rc = -1;
-+-      break;
-+-   }   
-++   }
-++   if (!rc) {
-++       snprintf(desc, sizeof(desc), "%.*s", (id_code & 0x1f) + 1, id_string);
-++   }
-+ 
-+-      lprintf(LOG_INFO, "ID: 0x%04x , NAME: %-16s", id, desc);
-++   lprintf(LOG_INFO, "ID: 0x%04x , NAME: %-16s", id, desc);
-+    return rc;
-+ }
-+ 
-+-- 
-+2.23.0
-+
-diff --git a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
-index b7f1aa914..16dbcb291 100644
---- a/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
-+++ b/meta-oe/recipes-kernel/ipmitool/ipmitool_1.8.18.bb
-@@ -24,6 +24,12 @@ DEPENDS = "openssl readline ncurses"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/ipmitool/ipmitool-${PV}.tar.bz2 \
-            file://0001-Migrate-to-openssl-1.1.patch \
-+           file://0001-fru-Fix-buffer-overflow-vulnerabilities.patch \
-+           file://0002-fru-Fix-buffer-overflow-in-ipmi_spd_print_fru.patch \
-+           file://0003-session-Fix-buffer-overflow-in-ipmi_get_session_info.patch \
-+           file://0004-channel-Fix-buffer-overflow.patch \
-+           file://0005-lanp-Fix-buffer-overflows-in-get_lan_param_select.patch \
-+           file://0006-fru-sdr-Fix-id_string-buffer-overflows.patch \
-            "
- SRC_URI[md5sum] = "bab7ea104c7b85529c3ef65c54427aa3"
- SRC_URI[sha256sum] = "0c1ba3b1555edefb7c32ae8cd6a3e04322056bc087918f07189eeedfc8b81e01"
--- 
-2.23.0
+are available in the Git repository at:
+
+  https://git.openembedded.org/meta-openembedded zeus-next
+
+for you to fetch changes up to 9e60d30669a2ad0598e9abf0cd15ee06b523986b:
+
+  sanlock: Replace cp -a with cp -R --no-dereference (2020-03-15
+13:30:34 -0700)
+
+----------------------------------------------------------------
+Adrian Bunk (1):
+      wireshark: Upgrade 3.0.6 -> 3.0.8
+
+Carlos Rafael Giani (1):
+      opencv: Enable pkg-config .pc file generation
+
+Khem Raj (2):
+      ade: Fix install paths in multilib builds
+      sanlock: Replace cp -a with cp -R --no-dereference
+
+Martin Jansa (1):
+      s3c24xx-gpio, s3c64xx-gpio, sjf2410-linux-native, usbpath,
+wmiconfig: use git fetcher instead of svn fetcher
+
+Mike Krupicka (1):
+      mosquitto: Use mosquitto.init for daemon init
+
+Paul Barker (1):
+      lmsensors: Fix sensord dependencies
+
+Peter Kjellerstedt (2):
+      lvm2, libdevmapper: Do not patch configure
+      libldb: Do not require the "pam" distro feature to be enabled
+
+Ross Burton (4):
+      opencv: don't download during configure
+      opencv: also download face alignment data in do_fetch()
+      opencv: PACKAGECONFIG for G-API, use system ADE
+      opencv: abort configure if we need to download
+
+ .../mosquitto/files/mosquitto.init                 |  2 +-
+ .../recipes-support/libldb/libldb_1.5.6.bb         |  3 +-
+ .../{wireshark_3.0.6.bb => wireshark_3.0.8.bb}     |  4 +-
+ meta-oe/recipes-bsp/lm_sensors/lmsensors_3.5.0.bb  |  3 +-
+ ...lace-cp-a-with-cp-R-no-dereference-preser.patch | 51
+++++++++++++++++++++++
+ meta-oe/recipes-extended/sanlock/sanlock_3.8.0.bb  |  4 +-
+ ...configure-Fix-setting-of-CLDFLAGS-default.patch | 34 +--------------
+ ...NUInstallDirs-for-detecting-install-paths.patch | 39 +++++++++++++++++
+ meta-oe/recipes-support/opencv/ade_0.1.1f.bb       |  1 +
+ .../recipes-support/opencv/opencv/download.patch   | 32 ++++++++++++++
+ meta-oe/recipes-support/opencv/opencv_4.1.0.bb     | 32 ++++++++++++--
+ .../{s3c24xx-gpio_svn.bb => s3c24xx-gpio_git.bb}   |  7 ++-
+ .../{s3c64xx-gpio_svn.bb => s3c64xx-gpio_git.bb}   |  6 +--
+ ...x-native_svn.bb => sjf2410-linux-native_git.bb} | 11 +++--
+ .../usbpath/{usbpath_svn.bb => usbpath_git.bb}     | 10 ++---
+ .../{wmiconfig_svn.bb => wmiconfig_git.bb}         | 13 +++---
+ 16 files changed, 183 insertions(+), 69 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_3.0.6.bb =>
+wireshark_3.0.8.bb} (95%)
+ create mode 100644
+meta-oe/recipes-extended/sanlock/sanlock/0001-sanlock-Replace-cp-a-with-cp-R-no-dereference-preser.patch
+ create mode 100644
+meta-oe/recipes-support/opencv/ade/0001-use-GNUInstallDirs-for-detecting-install-paths.patch
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/download.patch
+ rename meta-oe/recipes-support/samsung-soc-utils/{s3c24xx-gpio_svn.bb
+=> s3c24xx-gpio_git.bb} (73%)
+ rename meta-oe/recipes-support/samsung-soc-utils/{s3c64xx-gpio_svn.bb
+=> s3c64xx-gpio_git.bb} (74%)
+ rename
+meta-oe/recipes-support/samsung-soc-utils/{sjf2410-linux-native_svn.bb
+=> sjf2410-linux-native_git.bb} (72%)
+ rename meta-oe/recipes-support/usbpath/{usbpath_svn.bb =>
+usbpath_git.bb} (68%)
+ rename meta-oe/recipes-support/wmiconfig/{wmiconfig_svn.bb =>
+wmiconfig_git.bb} (58%)
 
 
