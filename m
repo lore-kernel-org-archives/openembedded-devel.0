@@ -1,20 +1,20 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
-	by mail.openembedded.org (Postfix) with ESMTP id 17D3360B33
+	by mail.openembedded.org (Postfix) with ESMTP id EE56E606D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 22:41:23 +0000 (UTC)
+	Tue, 17 Mar 2020 23:02:44 +0000 (UTC)
 Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com
-	([174.114.57.56]:58382 helo=localhost.localdomain)
+	([174.114.57.56]:58492 helo=localhost.localdomain)
 	by cpanel7.indieserve.net with esmtpsa (TLS1.2) tls
 	TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
 	(envelope-from <rpjday@crashcourse.ca>)
-	id 1jEKtn-005daE-N1; Tue, 17 Mar 2020 18:41:24 -0400
-Date: Tue, 17 Mar 2020 18:41:20 -0400 (EDT)
+	id 1jELET-005gur-1i; Tue, 17 Mar 2020 19:02:45 -0400
+Date: Tue, 17 Mar 2020 19:02:42 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost.localdomain
 To: Ross Burton <ross@burtonini.com>
 In-Reply-To: <06ab2bbe-0bba-6b5c-1fd8-53ad3db16936@burtonini.com>
-Message-ID: <alpine.LFD.2.21.2003171833550.3944@localhost.localdomain>
+Message-ID: <alpine.LFD.2.21.2003171856500.23572@localhost.localdomain>
 References: <alpine.LFD.2.21.2003171319540.14640@localhost.localdomain>
 	<06ab2bbe-0bba-6b5c-1fd8-53ad3db16936@burtonini.com>
 MIME-Version: 1.0
@@ -46,7 +46,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 22:41:24 -0000
+X-List-Received-Date: Tue, 17 Mar 2020 23:02:45 -0000
 Content-Type: text/plain; charset=US-ASCII
 
 On Tue, 17 Mar 2020, Ross Burton wrote:
@@ -63,13 +63,16 @@ On Tue, 17 Mar 2020, Ross Burton wrote:
 > >
 > > or am i misreading something?
 >
-> Recipes should never use /usr directly unless they're relocating
-> something from e.g. ${D}/usr/lib to ${D}${libdir}.
+> Recipes should never use /usr directly unless they're relocating something
+> from e.g. ${D}/usr/lib to ${D}${libdir}.
 >
 > The recipe should be telling the Makefiles to install into ${docdir}
 > (typically, /usr/share/doc).
 
-  ah, of course ... i can submit a patch for that shortly.
+  just to be clear, this depends on where the indent software actually
+installs the documentation, yes? i'll have to check when i get home as
+to were that stuff is actually placed. for all i know, it *could* be
+under /usr/doc.
 
 rday
 
