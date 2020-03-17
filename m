@@ -1,26 +1,45 @@
-Return-Path: <bluelightning@bluelightning.org>
-X-Greylist: delayed 471 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 17 Mar 2020 02:46:50 UTC
-Received: from adige.pair.com (adige.pair.com [209.68.5.114])
-	by mail.openembedded.org (Postfix) with ESMTP id 3527C60C16;
-	Tue, 17 Mar 2020 02:46:50 +0000 (UTC)
-Received: from adige.pair.com (localhost [127.0.0.1])
-	by adige.pair.com (Postfix) with ESMTP id D1246959CE;
-	Mon, 16 Mar 2020 22:39:00 -0400 (EDT)
-Received: from linc.localnet (unknown
-	[IPv6:2406:e003:130a:e501:f188:4b83:8582:1e57])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by adige.pair.com (Postfix) with ESMTPSA id 0B1DE959AA;
-	Mon, 16 Mar 2020 22:38:59 -0400 (EDT)
-From: Paul Eggleton <bluelightning@bluelightning.org>
-To: tsc@lists.openembedded.org
-Date: Tue, 17 Mar 2020 15:38:56 +1300
-Message-ID: <22665987.Wx5bFTl31r@linc>
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AA7560B74
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2020 06:13:58 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,563,1574092800"; d="scan'208";a="86450213"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 17 Mar 2020 14:13:56 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 5B83349DF12C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2020 14:03:49 +0800 (CST)
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) by
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1497.2; Tue, 17 Mar 2020 14:13:52 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local ([fe80::3022:98f4:eabc:e85a])
+	by G08CNEXMBPEKD05.g08.fujitsu.local
+	([fe80::3022:98f4:eabc:e85a%14]) with
+	mapi id 15.00.1497.000; Tue, 17 Mar 2020 14:13:51 +0800
+From: "Wang, Mingyu" <wangmy@cn.fujitsu.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][zeus][PATCH] php: CVE-2019-11045.patch
+	CVE-2019-11046.patch CVE-2019-11047.patch CVE-2019-11050.patch
+Thread-Index: AQHV+PdGKDaV7AwqZEqDuUU5yJ+X56hGIwsAgAYw6nA=
+Date: Tue, 17 Mar 2020 06:13:50 +0000
+Message-ID: <7dc7e3aa6752477db4c7725a1985053f@G08CNEXMBPEKD05.g08.fujitsu.local>
+References: <1584097824-54462-1-git-send-email-wangmy@cn.fujitsu.com>
+	<1584097824-54462-3-git-send-email-wangmy@cn.fujitsu.com>
+	<5787a0ee-36c6-16d3-e440-4b063a7e3522@gmail.com>
+In-Reply-To: <5787a0ee-36c6-16d3-e440-4b063a7e3522@gmail.com>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.167.225.33]
 MIME-Version: 1.0
-Cc: openembedded-core@openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Subject: OpenEmbedded TSC Meeting Minutes 2020-03-17
+X-yoursite-MailScanner-ID: 5B83349DF12C.AB09B
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: Re: [meta-oe][zeus][PATCH] php: CVE-2019-11045.patch CVE-2019-11046.patch CVE-2019-11047.patch CVE-2019-11050.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,226 +52,323 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 02:46:51 -0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 17 Mar 2020 06:14:00 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-OpenEmbedded Technical Steering Committee (TSC) Meeting Minutes 2020-03-17
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-Meeting was held in #oe-tsc on Freenode; channel access public.
-
-Present:
-=2D Richard Purdie (RP)
-=2D Joshua Watt (JPEW)
-=2D Bruce Ashfield (zeddii)
-=2D Paul Eggleton (bluelightning)
-Apologies:
-=2D Martin Jansa (JaMa)
-
-Summary:
-* Need to think about ways to encourage contributions
-  - Make contributions more visible? (see also last meeting's discussion)
-    - Include contributor names in release notes
-  - Response emails to patches / when patch merged?
-  - Ideas / discussion around any barriers to contributing and removing the=
-m very welcome
-
-
-=46ull meeting long
-=2D----------------
-
-[11:01] <bluelightning> I presume we are meeting now?
-[11:02] <JPEW> That's the plan
-[11:03] <JPEW> JaMa doesn't appear to be online, and RP is currently away
-[11:03] <JPEW> I forgot to send out a reminder today
-[11:04] <bluelightning> I have just pinged RP - I could also text him
-[11:10] <RP> Hi, I'm here now, sorry I'm late
-[11:10] <bluelightning> no worries
-[11:10] <bluelightning> do we have zeddii?
-[11:11] <JPEW> Not sure. He was on earlier today
-[11:15] <RP> Is there an agenda?
-[11:15] <RP> I must admit I got M3 built and kind of went and "collapsed" ;=
-=2D)
-[11:16] <JPEW> I'm not aware of anything
-[11:16] <RP> I did have one item the YP TSC asked me to raise
-[11:16] <RP> Sorry for not officially adding it to the wiki etc
-[11:16] <zeddii> here. sorry, I was supposed to be on vacation this week, s=
-o I removed the meeting from my calendar.
-[11:17] <RP> Basically, it was to ask the OC TSC to consider the resourcing=
- situation we have and to consider what we could do about it.
-[11:17] <JPEW> zeddii: No problem, we just started
-[11:17] <RP> There are various bodies that are thinking about it (YP TSC, Y=
-P board, OE board) but the OE TSC probably also needs to give it some thoug=
-ht
-[11:19] <JPEW> RP: Ya, make sense.
-[11:20] <JPEW> Are there any identified reasons why people don't contribute?
-[11:22] <RP> JPEW: In general the pattern seems to be employers expecting s=
-omeone else to do the core work
-[11:22] <RP> Some things don't have clear return on investment too
-[11:22] <zeddii> agreed. and agreed.
-[11:22] <JPEW> which things?
-[11:23] <bluelightning> anything that is mostly refactoring I would imagine
-[11:23] <RP> JPEW: build failure triage (SWAT), bug triage
-[11:23] <RP> things where its day to day monitoring without direct line of =
-sight to a problem they themselves see
-[11:23] <zeddii> and even things like why a reference kernel, when they don=
-=E2=80=99t use it directly.
-[11:23] <RP> zeddii: right
-[11:24] <RP> also, new feature development like hashequiv
-[11:24] <RP> or as bluelightning says, refactoring or new architectural work
-[11:25] <zeddii> yup.
-[11:28] <zeddii> I assume that I either got disconnected, or we are all dee=
-p in thought.
-[11:28] <JPEW> zeddii: The latter :)
-[11:29] <RP> I've spent a lot of time thinking about it and I'm not sure wh=
-at we can do
-[11:29] <zeddii> the problem is that  only OSVs really care about =E2=80=9C=
-credibility=E2=80=9D in the community. if you know what I mean.
-[11:29] <JPEW> Aside from employeer expectations, any other reasons why peo=
-ple don't participate?
-[11:29] <RP> We have made some changes like newcomer bugs. I also need to s=
-end out some kind of summary of the challenges to the wider community. I'm =
-still working on that
-[11:30] <RP> JPEW: there is probably a knowledge barrier too
-[11:30] <zeddii> I could volunteer some of my time to help someone that act=
-ually picked up a new comer bug, but I think that=E2=80=99s probably just a=
- drop in the ocean.
-[11:30] <RP> JPEW: even some of our regular contributors think of bitbake a=
-s a blackbox, you're one of the few who doesn't
-[11:30] <JPEW> zeddii: Not necessarily if you can help someone get interest=
-ed, it pays dividends :)
-[11:31] <RP> zeddii: lots of small things do grow over time, I am trying to=
- encourage people. Not all will work out but its great to see when people d=
-o grow
-[11:32] <zeddii> that=E2=80=99s what I was wondering, are none of them bein=
-g picked up, since newcomers don=E2=80=99t know where to start. maybe pairi=
-ng them up with someone to office advice can help. but maybe that  has alre=
-ady been tried (and yes, I know that pulls more time from people that don=
-=E2=80=99t have it, etc).
-[11:32] <zeddii> I=E2=80=99m throwing my hat into the ring for that. but th=
-at implies someone is looking for that kind of help.
-[11:32] <JPEW> zeddii: That's a good idea. I'd be willing to advise someone=
- fixing a bug also (newcomer or otherwise)
-[11:32] <RP> zeddii: we're seeing poor take up despite what I thought was a=
- good spectrum of bugs there
-[11:33] <JPEW> Perhaps more of a visibility problem?
-[11:33] <RP> I would note that the we lack YP advocacy people atm too :(
-[11:33] <RP> visibility is definitely part of it
-[11:34] <JPEW> It's hard being on the inside looking out and trying to figu=
-re out how visible you are sometimes
-[11:34] <bluelightning> the newcomer doc on the YP wiki is pretty good I th=
-ink, but that assumes people find that
-[11:35] <bluelightning> I did just get to it by googling "yocto project con=
-tribute"
-[11:36] <JPEW> Hmm, is it pretty easy to identify new contributers on the M=
-L?
-[11:37] <RP> JPEW: for a person or for a machine?
-[11:38] <JPEW> person (email address)
-[11:38] <zeddii> I=E2=80=99m thinking more of companies that use OE, not en=
-d users. since getting contributions from each category is quite a differen=
-t thing.
-[11:40] <JPEW> zeddii: Sure, but having people in the company that are invo=
-lved anyway helps
-[11:40] <JPEW> sometimes :eyeroll:
-[11:40] <RP> JPEW: I mean its easy for a computer to look at an email and s=
-ee if they've had a patch merged before
-[11:42] <JPEW> RP: Right. Would it be bad form to send them a message "welc=
-ome to the community" message? I've not been doing OSS very long, so I don'=
-t know all the edicate
-[11:42] <JPEW> Thanks for your patch! Here's some other ways you can get in=
-volved...
-[11:42] <RP> JPEW: if they were new to OE but an experienced OSS contributo=
-r it may seem patronising :/
-[11:42] <bluelightning> I think it might be nice - you could include "if yo=
-u don't get a reply in x days here's what to do"
-[11:43] <bluelightning> I wouldn't find it patronising if I was joining a n=
-ew project, others may differ possibly
-[11:43] <bluelightning> I know I've struggled when joining other projects, =
-people sort of expect you to know what to do / where to look and that's not=
- always easy even if you're experienced with OSS, every project is different
-[11:44] <zeddii> yah. is it a get started issue, credit issue, or lack of m=
-apping to ROI issue .. hard to say, since we don=E2=80=99t even have that i=
-nfo :(
-[11:45] <JPEW> zeddii: Hard to operate effectively without data
-[11:45] <RP> I don't have an objection to it
-[11:45] <JPEW> When do the other TSC's meet
-[11:46] <RP> By the time they sent a contribution they're already part way =
-there though, we may need to find new contributors as well
-[11:46] <RP> JPEW: you mean the YP TSC?
-[11:46] <JPEW> Ya
-[11:47] <RP> zeddii: the "data" I have says all the above
-[11:47] <zeddii> I jokingly say that with all of the users of OE, and a fai=
-rly narrow set of contributors, I assume that means that they have no issue=
-s. which I can=E2=80=99t imagine is the case.
-[11:47] <RP> JPEW: YP TSC meets after the engineering sync tomorrow
-[11:47] <RP> zeddii: most of my data is reading the mailing lists and socia=
-l media posts from users, new and experienced
-[11:49] <JPEW> OK. Maybe we can draft up a skeleton e-mail and all look it =
-over (maybe the YP TSC too)
-[11:49] <zeddii> non-corporate contributions are hard to capture, since the=
-y are likely elsewhere for many high level applications.
-[11:50] <RP> JPEW: another thing may be a "your patch has merged" email fro=
-m patchwork
-[11:50] <JPEW> RP: Ya that would be good too
-[11:50] <zeddii> I mean, it would be nice if we went to openembedded.org an=
-d saw some logo=E2=80=99s, but I suppose that collides with YP very quickly=
-=2E and you get a logo if you have a patch in the release ;)
-[11:51] <RP> I also have no objection to that but it needs someone else to =
-own and drive it
-[11:51] <zeddii> that @gmail.com company could get a big logo!
-[11:51] <bluelightning> patch merged reports was something that was suppose=
-d to be added to patchwork a long time ago, unfortunately due to various re=
-asons it never got done :/
-[11:51] <RP> bluelightning: one idea that did get talked about but probably=
- ironically, not with you was a list of contributors to the release
-[11:52] <bluelightning> hmm, yes, I think maybe it did get mentioned somewh=
-ere
-[11:52] <zeddii> I thought it was a good idea, since then large and small c=
-ould see their name in =E2=80=9Cprint=E2=80=9D along with a release.
-[11:52] <RP> (ironically as bluelightning ends up writing the release notes)
-[11:52] <zeddii> but again, time. I can help with that when the time comes.
-[11:53] <bluelightning> at least as far as commits go there are various git=
- stats analysis tools that might be helpful (and don't involve us writing a=
-dditional code)
-[11:53] <RP> zeddii: the time for that one is now, release is in weeks!
-[11:53] <bluelightning> although yes it would be good to have the info actu=
-ally in the notes... that should be pretty easy for me to do
-[11:53] <zeddii> I mean, I get an email from the kernel once and a while tr=
-ying to figure out who I work for, since @gmail.com =E2=80=A6. so there=E2=
-=80=99s some mappings that can be done on that front as well.
-[11:54] <RP> bluelightning: you can integrate if someone helps too! :)
-[11:54] <zeddii> bluelightning: if there=E2=80=99s something you think I ca=
-n do for that, I can help.
-[11:54] <bluelightning> zeddii: thanks - I'll keep that in mind
-[11:55] <zeddii> I=E2=80=99ll go look at the other release notes to see if =
-I can think of anything else that might be interesting to add.
-[11:55] <zeddii> i.e. if a release mentioned some steps forward in a vertic=
-al that interested some companies, they might be interested to help more in=
- the future, etc. hard to say if its even possible to do that, but its an i=
-dea.
-[11:58] <JPEW> There might be more we could do at conferences and such also=
-=2E.. although thats not useful in the short term
-[11:59] <RP> some kind of metrics/lists focused on "first contributions fro=
-m" might be interesting
-[12:03] <JPEW> Any other topics?
-[12:03] <RP> Not from me
-[12:03] <JPEW> I'll put this one on the list for next month so we can see i=
-f there are any more ideas in the meantime
-[12:04] <JPEW> And I'll try to draft some example e-mails
-[12:04] <RP> If people do have ideas, please do feel free to share. I think=
- the project has some challenges ahead (as does the world at large atm :( )
-[12:06] <JPEW> OK, supper time for me.
-[12:06] <JPEW> Bye all
-[12:07] <bluelightning> I'll send out the minutes
-[12:08] <JPEW> Thanks. Don't forget to link on the wiki: https://www.openem=
-bedded.org/wiki/TSC
-[12:08] <bluelightning> ah yes thanks for the reminder, I think I missed th=
-at the last couple of times
-[12:09] <RP> Thanks all!
-
-
-
+Pj4gUmVmZXJlbmNlczoNCj4+IGh0dHBzOi8vY3ZlLm1pdHJlLm9yZy9jZ2kt
+YmluL2N2ZW5hbWUuY2dpP25hbWU9Q1ZFLTIwMTktMTEwNDUNCj4+IGh0dHBz
+Oi8vY3ZlLm1pdHJlLm9yZy9jZ2ktYmluL2N2ZW5hbWUuY2dpP25hbWU9Q1ZF
+LTIwMTktMTEwNDYNCj4+IGh0dHBzOi8vY3ZlLm1pdHJlLm9yZy9jZ2ktYmlu
+L2N2ZW5hbWUuY2dpP25hbWU9Q1ZFLTIwMTktMTEwNDcNCj4+IGh0dHBzOi8v
+Y3ZlLm1pdHJlLm9yZy9jZ2ktYmluL2N2ZW5hbWUuY2dpP25hbWU9Q1ZFLTIw
+MTktMTEwNTANCj4gYXJlIHRoZXNlIGZpeGVzIGluIG1hc3Rlcj8NClRoZXNl
+IHByb2JsZW1zIGFsc28gbmVlZCB0byBiZSBmaXhlZCBpbiBtYXN0ZXIuIEkg
+d2lsbCBzdWJtaXQgYSBwYXRjaCBsYXRlci4NCg0KLS0tLS1PcmlnaW5hbCBN
+ZXNzYWdlLS0tLS0NCkZyb206IG9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2Vz
+QGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcgW21haWx0bzpvcGVuZW1iZWRkZWQt
+ZGV2ZWwtYm91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnXSBPbiBCZWhh
+bGYgT2YgYWt1c3RlcjgwOA0KU2VudDogRnJpZGF5LCBNYXJjaCAxMywgMjAy
+MCAxMTozOSBQTQ0KVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVu
+ZW1iZWRkZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bemV1
+c11bUEFUQ0hdIHBocDogQ1ZFLTIwMTktMTEwNDUucGF0Y2ggQ1ZFLTIwMTkt
+MTEwNDYucGF0Y2ggQ1ZFLTIwMTktMTEwNDcucGF0Y2ggQ1ZFLTIwMTktMTEw
+NTAucGF0Y2gNCg0KDQoNCk9uIDMvMTMvMjAgNDoxMCBBTSwgV2FuZyBNaW5n
+eXUgd3JvdGU6DQo+IFNlY3VyaXR5IEFkdmlzb3J5DQo+DQo+IFJlZmVyZW5j
+ZXM6DQo+IGh0dHBzOi8vY3ZlLm1pdHJlLm9yZy9jZ2ktYmluL2N2ZW5hbWUu
+Y2dpP25hbWU9Q1ZFLTIwMTktMTEwNDUNCj4gaHR0cHM6Ly9jdmUubWl0cmUu
+b3JnL2NnaS1iaW4vY3ZlbmFtZS5jZ2k/bmFtZT1DVkUtMjAxOS0xMTA0Ng0K
+PiBodHRwczovL2N2ZS5taXRyZS5vcmcvY2dpLWJpbi9jdmVuYW1lLmNnaT9u
+YW1lPUNWRS0yMDE5LTExMDQ3DQo+IGh0dHBzOi8vY3ZlLm1pdHJlLm9yZy9j
+Z2ktYmluL2N2ZW5hbWUuY2dpP25hbWU9Q1ZFLTIwMTktMTEwNTANCg0KYXJl
+IHRoZXNlIGZpeGVzIGluIG1hc3Rlcj8NCj4NCj4gU2lnbmVkLW9mZi1ieTog
+V2FuZyBNaW5neXUgPHdhbmdteUBjbi5mdWppdHN1LmNvbT4NCj4gLS0tDQo+
+ICAuLi4vcGhwL3BocC9DVkUtMjAxOS0xMTA0NS5wYXRjaCAgICAgICAgICAg
+ICAgfCA3OCArKysrKysrKysrKysrKysrKysrDQo+ICAuLi4vcGhwL3BocC9D
+VkUtMjAxOS0xMTA0Ni5wYXRjaCAgICAgICAgICAgICAgfCA1OSArKysrKysr
+KysrKysrKw0KPiAgLi4uL3BocC9waHAvQ1ZFLTIwMTktMTEwNDcucGF0Y2gg
+ICAgICAgICAgICAgIHwgNTcgKysrKysrKysrKysrKysNCj4gIC4uLi9waHAv
+cGhwL0NWRS0yMDE5LTExMDUwLnBhdGNoICAgICAgICAgICAgICB8IDUzICsr
+KysrKysrKysrKysNCj4gIG1ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9waHAv
+cGhwXzcuMy45LmJiICAgICB8ICA0ICsNCj4gIDUgZmlsZXMgY2hhbmdlZCwg
+MjUxIGluc2VydGlvbnMoKykNCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCANCj4g
+bWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHAvQ1ZFLTIwMTktMTEw
+NDUucGF0Y2gNCj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCANCj4gbWV0YS1vZS9y
+ZWNpcGVzLWRldnRvb2xzL3BocC9waHAvQ1ZFLTIwMTktMTEwNDYucGF0Y2gN
+Cj4gIGNyZWF0ZSBtb2RlIDEwMDY0NCANCj4gbWV0YS1vZS9yZWNpcGVzLWRl
+dnRvb2xzL3BocC9waHAvQ1ZFLTIwMTktMTEwNDcucGF0Y2gNCj4gIGNyZWF0
+ZSBtb2RlIDEwMDY0NCANCj4gbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3Bo
+cC9waHAvQ1ZFLTIwMTktMTEwNTAucGF0Y2gNCj4NCj4gZGlmZiAtLWdpdCBh
+L21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9waHAvcGhwL0NWRS0yMDE5LTEx
+MDQ1LnBhdGNoIA0KPiBiL21ldGEtb2UvcmVjaXBlcy1kZXZ0b29scy9waHAv
+cGhwL0NWRS0yMDE5LTExMDQ1LnBhdGNoDQo+IG5ldyBmaWxlIG1vZGUgMTAw
+NjQ0DQo+IGluZGV4IDAwMDAwMDAwMC4uM2IzYzE4N2E0DQo+IC0tLSAvZGV2
+L251bGwNCj4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9w
+aHAvQ1ZFLTIwMTktMTEwNDUucGF0Y2gNCj4gQEAgLTAsMCArMSw3OCBAQA0K
+PiArRnJvbSBhNWExNTk2NWRhMjNjOGU5NzY1NzI3OGZjOGRmYmYxZGZiMjBj
+MDE2IE1vbiBTZXAgMTcgMDA6MDA6MDAgDQo+ICsyMDAxDQo+ICtGcm9tOiAi
+Q2hyaXN0b3BoIE0uIEJlY2tlciIgPGNtYmVja2VyNjlAZ214LmRlPg0KPiAr
+RGF0ZTogTW9uLCAyNSBOb3YgMjAxOSAxNjo1NjozNCArMDEwMA0KPiArU3Vi
+amVjdDogW1BBVENIXSBGaXggIzc4ODYzOiBEaXJlY3RvcnlJdGVyYXRvciBj
+bGFzcyBzaWxlbnRseSANCj4gK3RydW5jYXRlcyBhZnRlciAgYSBudWxsIGJ5
+dGUNCj4gKw0KPiArU2luY2UgdGhlIGNvbnN0cnVjdG9yIG9mIERpcmVjdG9y
+eUl0ZXJhdG9yIGFuZCBmcmllbmRzIGlzIHN1cHBvc2VkIHRvIA0KPiArYWNj
+ZXB0cyBwYXRocyAoaS5lLiBzdHJpbmdzIHdpdGhvdXQgTlVMIGJ5dGVzKSwg
+d2UgbXVzdCBub3QgYWNjZXB0IA0KPiArYXJiaXRyYXJ5IHN0cmluZ3MuDQo+
+ICsNCj4gK1Vwc3RyZWFtLVN0YXR1czogQWNjZXB0ZWQNCkFjY2VwdGVkIG1l
+YW4geW91IHNlbnQgdGhlIGZpeCB1cHN0cmVhbSBhbmQgdGhleSB0b29rIGl0
+Lg0KaXMgdGhpcyBhICJCYWNrcG9ydCINCg0KTWlzc2luZyAiU2lnbmVkLW9m
+Zi1ieTogIg0KDQo+ICtDVkU6IENWRS0yMDE5LTExMDQ1DQo+ICsgICANCj4g
+K1JlZmVyZW5jZSB0byB1cHN0cmVhbSBwYXRjaDoNCj4gK2h0dHA6Ly9naXQu
+cGhwLm5ldC8/cD1waHAtc3JjLmdpdDthPWNvbW1pdDtoPWE1YTE1OTY1ZGEy
+M2M4ZTk3NjU3Mjc4Zg0KPiArYzhkZmJmMWRmYjIwYzAxNg0KPiAraHR0cDov
+L2dpdC5waHAubmV0Lz9wPXBocC1zcmMuZ2l0O2E9Y29tbWl0O2g9ZDc0OTA3
+Yjg1NzVlNmVkYjgzYjcyOGMyDQo+ICthOTRkZjQzNGMyM2UxZjc5DQo+ICst
+LS0NCj4gKyBleHQvc3BsL3NwbF9kaXJlY3RvcnkuYyAgICAgfCAgNCArKy0t
+DQo+ICsgZXh0L3NwbC90ZXN0cy9idWc3ODg2My5waHB0IHwgMzEgKysrKysr
+KysrKysrKysrKysrKysrKysrKysrKysrKw0KPiArIDIgZmlsZXMgY2hhbmdl
+ZCwgMzMgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkgIGNyZWF0ZSBt
+b2RlIA0KPiArMTAwNjQ0IGV4dC9zcGwvdGVzdHMvYnVnNzg4NjMucGhwdA0K
+PiArDQo+ICtkaWZmIC0tZ2l0IGEvZXh0L3NwbC9zcGxfZGlyZWN0b3J5LmMg
+Yi9leHQvc3BsL3NwbF9kaXJlY3RvcnkuYyBpbmRleCANCj4gKzkxZWEyZTAy
+NjUuLjU2ZTgwOWIxYzcgMTAwNjQ0DQo+ICstLS0gYS9leHQvc3BsL3NwbF9k
+aXJlY3RvcnkuYw0KPiArKysrIGIvZXh0L3NwbC9zcGxfZGlyZWN0b3J5LmMN
+Cj4gK0BAIC03MDgsMTAgKzcwOCwxMCBAQCB2b2lkIA0KPiArc3BsX2ZpbGVz
+eXN0ZW1fb2JqZWN0X2NvbnN0cnVjdChJTlRFUk5BTF9GVU5DVElPTl9QQVJB
+TUVURVJTLCANCj4gK3plbmRfbG9uZyBjdG8NCj4gKyANCj4gKyAJaWYgKFNQ
+TF9IQVNfRkxBRyhjdG9yX2ZsYWdzLCBESVRfQ1RPUl9GTEFHUykpIHsNCj4g
+KyAJCWZsYWdzID0gU1BMX0ZJTEVfRElSX0tFWV9BU19QQVRITkFNRXxTUExf
+RklMRV9ESVJfQ1VSUkVOVF9BU19GSUxFSU5GTzsNCj4gKy0JCXBhcnNlZCA9
+IHplbmRfcGFyc2VfcGFyYW1ldGVycyhaRU5EX05VTV9BUkdTKCksICJzfGwi
+LCAmcGF0aCwgJmxlbiwgJmZsYWdzKTsNCj4gKysJCXBhcnNlZCA9IHplbmRf
+cGFyc2VfcGFyYW1ldGVycyhaRU5EX05VTV9BUkdTKCksICJwfGwiLCAmcGF0
+aCwgDQo+ICsrJmxlbiwgJmZsYWdzKTsNCj4gKyAJfSBlbHNlIHsNCj4gKyAJ
+CWZsYWdzID0gU1BMX0ZJTEVfRElSX0tFWV9BU19QQVRITkFNRXxTUExfRklM
+RV9ESVJfQ1VSUkVOVF9BU19TRUxGOw0KPiArLQkJcGFyc2VkID0gemVuZF9w
+YXJzZV9wYXJhbWV0ZXJzKFpFTkRfTlVNX0FSR1MoKSwgInMiLCAmcGF0aCwg
+Jmxlbik7DQo+ICsrCQlwYXJzZWQgPSB6ZW5kX3BhcnNlX3BhcmFtZXRlcnMo
+WkVORF9OVU1fQVJHUygpLCAicCIsICZwYXRoLCAmbGVuKTsNCj4gKyAJfQ0K
+PiArIAlpZiAoU1BMX0hBU19GTEFHKGN0b3JfZmxhZ3MsIFNQTF9GSUxFX0RJ
+Ul9TS0lQRE9UUykpIHsNCj4gKyAJCWZsYWdzIHw9IFNQTF9GSUxFX0RJUl9T
+S0lQRE9UUzsNCj4gK2RpZmYgLS1naXQgYS9leHQvc3BsL3Rlc3RzL2J1Zzc4
+ODYzLnBocHQgDQo+ICtiL2V4dC9zcGwvdGVzdHMvYnVnNzg4NjMucGhwdCBu
+ZXcgZmlsZSBtb2RlIDEwMDY0NCBpbmRleCANCj4gKzAwMDAwMDAwMDAuLmRj
+ODhkOThkZWUNCj4gKy0tLSAvZGV2L251bGwNCj4gKysrKyBiL2V4dC9zcGwv
+dGVzdHMvYnVnNzg4NjMucGhwdA0KPiArQEAgLTAsMCArMSwzMSBAQA0KPiAr
+Ky0tVEVTVC0tDQo+ICsrQnVnICM3ODg2MyAoRGlyZWN0b3J5SXRlcmF0b3Ig
+Y2xhc3Mgc2lsZW50bHkgdHJ1bmNhdGVzIGFmdGVyIGEgbnVsbCANCj4gKyti
+eXRlKQ0KPiArKy0tRklMRS0tDQo+ICsrPD9waHANCj4gKyskZGlyID0gX19E
+SVJfXyAuICcvYnVnNzg4NjMnOw0KPiArK21rZGlyKCRkaXIpOw0KPiArK3Rv
+dWNoKCIkZGlyL2JhZCIpOw0KPiArK21rZGlyKCIkZGlyL3N1YiIpOw0KPiAr
+K3RvdWNoKCIkZGlyL3N1Yi9nb29kIik7DQo+ICsrDQo+ICsrJGl0ID0gbmV3
+IERpcmVjdG9yeUl0ZXJhdG9yKF9fRElSX18gLiAiL2J1Zzc4ODYzXDAvc3Vi
+Iik7IGZvcmVhY2ggDQo+ICsrKCRpdCBhcyAkZmlsZWluZm8pIHsNCj4gKysg
+ICAgaWYgKCEkZmlsZWluZm8tPmlzRG90KCkpIHsNCj4gKysgICAgICAgIHZh
+cl9kdW1wKCRmaWxlaW5mby0+Z2V0RmlsZW5hbWUoKSk7DQo+ICsrICAgIH0N
+Cj4gKyt9DQo+ICsrPz4NCj4gKystLUVYUEVDVEYtLQ0KPiArK0ZhdGFsIGVy
+cm9yOiBVbmNhdWdodCBVbmV4cGVjdGVkVmFsdWVFeGNlcHRpb246IA0KPiAr
+K0RpcmVjdG9yeUl0ZXJhdG9yOjpfX2NvbnN0cnVjdCgpIGV4cGVjdHMgcGFy
+YW1ldGVyIDEgdG8gYmUgYSB2YWxpZCBwYXRoLCBzdHJpbmcgZ2l2ZW4gaW4g
+JXM6JWQgU3RhY2sgdHJhY2U6DQo+ICsrIzAgJXMoJWQpOiBEaXJlY3RvcnlJ
+dGVyYXRvci0+X19jb25zdHJ1Y3QoJyVzJykNCj4gKysjMSB7bWFpbn0NCj4g
+KysgIHRocm93biBpbiAlcyBvbiBsaW5lICVkDQo+ICsrLS1DTEVBTi0tDQo+
+ICsrPD9waHANCj4gKyskZGlyID0gX19ESVJfXyAuICcvYnVnNzg4NjMnOw0K
+PiArK3VubGluaygiJGRpci9zdWIvZ29vZCIpOw0KPiArK3JtZGlyKCIkZGly
+L3N1YiIpOw0KPiArK3VubGluaygiJGRpci9iYWQiKTsNCj4gKytybWRpcigk
+ZGlyKTsNCj4gKys/Pg0KPiArLS0NCj4gKzIuMTEuMA0KPiBkaWZmIC0tZ2l0
+IGEvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHAvQ1ZFLTIwMTkt
+MTEwNDYucGF0Y2ggDQo+IGIvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3Bo
+cC9waHAvQ1ZFLTIwMTktMTEwNDYucGF0Y2gNCj4gbmV3IGZpbGUgbW9kZSAx
+MDA2NDQNCj4gaW5kZXggMDAwMDAwMDAwLi43MTFiODUyNWENCj4gLS0tIC9k
+ZXYvbnVsbA0KPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhw
+L3BocC9DVkUtMjAxOS0xMTA0Ni5wYXRjaA0KPiBAQCAtMCwwICsxLDU5IEBA
+DQo+ICtGcm9tIDJkMDdmMDBiNzNkOGY5NDA5OTg1MGUwZjU5ODNlMWNjNTgx
+N2MxOTYgTW9uIFNlcCAxNyAwMDowMDowMCANCj4gKzIwMDENCj4gK0Zyb206
+ICJDaHJpc3RvcGggTS4gQmVja2VyIiA8Y21iZWNrZXI2OUBnbXguZGU+DQo+
+ICtEYXRlOiBTYXQsIDMwIE5vdiAyMDE5IDEyOjI2OjM3ICswMTAwDQo+ICtT
+dWJqZWN0OiBbUEFUQ0hdIEZpeCAjNzg4Nzg6IEJ1ZmZlciB1bmRlcmZsb3cg
+aW4gYmNfc2hpZnRfYWRkc3ViDQo+ICsNCj4gK1dlIG11c3Qgbm90IHJlbHkg
+b24gYGlzZGlnaXQoKWAgdG8gZGV0ZWN0IGRpZ2l0cywgc2luY2Ugd2Ugb25s
+eSANCj4gK3N1cHBvcnQgZGVjaW1hbCBBU0NJSSBkaWdpdHMgaW4gdGhlIGZv
+bGxvd2luZyBwcm9jZXNzaW5nLg0KPiArDQo+ICsoY2hlcnJ5IHBpY2tlZCBm
+cm9tIGNvbW1pdCBlYjIzYzYwMDg3NTNiMWNkYzUzNTlkZWFkM2EwOTZkY2U0
+NmM5MDE4KQ0KPiArDQo+ICtVcHN0cmVhbS1TdGF0dXM6IEFjY2VwdGVkDQo+
+ICtDVkU6IENWRS0yMDE5LTExMDQ2DQo+ICsgICANCj4gK1JlZmVyZW5jZSB0
+byB1cHN0cmVhbSBwYXRjaDoNCj4gK2h0dHA6Ly9naXQucGhwLm5ldC8/cD1w
+aHAtc3JjLmdpdDthPWNvbW1pdDtoPWViMjNjNjAwODc1M2IxY2RjNTM1OWRl
+YQ0KPiArZDNhMDk2ZGNlNDZjOTAxOA0KPiAraHR0cDovL2dpdC5waHAubmV0
+Lz9wPXBocC1zcmMuZ2l0O2E9Y29tbWl0O2g9MmQwN2YwMGI3M2Q4Zjk0MDk5
+ODUwZTBmDQo+ICs1OTgzZTFjYzU4MTdjMTk2DQo+ICstLS0NCj4gKyBleHQv
+YmNtYXRoL2xpYmJjbWF0aC9zcmMvc3RyMm51bS5jIHwgIDQgKystLQ0KPiAr
+IGV4dC9iY21hdGgvdGVzdHMvYnVnNzg4NzgucGhwdCAgICAgfCAxMyArKysr
+KysrKysrKysrDQo+ICsgMiBmaWxlcyBjaGFuZ2VkLCAxNSBpbnNlcnRpb25z
+KCspLCAyIGRlbGV0aW9ucygtKSAgY3JlYXRlIG1vZGUgDQo+ICsxMDA2NDQg
+ZXh0L2JjbWF0aC90ZXN0cy9idWc3ODg3OC5waHB0DQo+ICsNCj4gK2RpZmYg
+LS1naXQgYS9leHQvYmNtYXRoL2xpYmJjbWF0aC9zcmMvc3RyMm51bS5jIA0K
+PiArYi9leHQvYmNtYXRoL2xpYmJjbWF0aC9zcmMvc3RyMm51bS5jDQo+ICtp
+bmRleCBmMzhkMzQxNTcwLi4wM2FlYzE1OTMwIDEwMDY0NA0KPiArLS0tIGEv
+ZXh0L2JjbWF0aC9saWJiY21hdGgvc3JjL3N0cjJudW0uYw0KPiArKysrIGIv
+ZXh0L2JjbWF0aC9saWJiY21hdGgvc3JjL3N0cjJudW0uYw0KPiArQEAgLTU3
+LDkgKzU3LDkgQEAgYmNfc3RyMm51bSAoYmNfbnVtICpudW0sIGNoYXIgKnN0
+ciwgaW50IHNjYWxlKQ0KPiArICAgemVyb19pbnQgPSBGQUxTRTsNCj4gKyAg
+IGlmICggKCpwdHIgPT0gJysnKSB8fCAoKnB0ciA9PSAnLScpKSAgcHRyKys7
+ICAvKiBTaWduICovDQo+ICsgICB3aGlsZSAoKnB0ciA9PSAnMCcpIHB0cisr
+OwkJCS8qIFNraXAgbGVhZGluZyB6ZXJvcy4gKi8NCj4gKy0gIHdoaWxlIChp
+c2RpZ2l0KChpbnQpKnB0cikpIHB0cisrLCBkaWdpdHMrKzsJLyogZGlnaXRz
+ICovDQo+ICsrICB3aGlsZSAoKnB0ciA+PSAnMCcgJiYgKnB0ciA8PSAnOScp
+IHB0cisrLCBkaWdpdHMrKzsJLyogZGlnaXRzICovDQo+ICsgICBpZiAoKnB0
+ciA9PSAnLicpIHB0cisrOwkJCS8qIGRlY2ltYWwgcG9pbnQgKi8NCj4gKy0g
+IHdoaWxlIChpc2RpZ2l0KChpbnQpKnB0cikpIHB0cisrLCBzdHJzY2FsZSsr
+OwkvKiBkaWdpdHMgKi8NCj4gKysgIHdoaWxlICgqcHRyID49ICcwJyAmJiAq
+cHRyIDw9ICc5JykgcHRyKyssIHN0cnNjYWxlKys7CS8qIGRpZ2l0cyAqLw0K
+PiArICAgaWYgKCgqcHRyICE9ICdcMCcpIHx8IChkaWdpdHMrc3Ryc2NhbGUg
+PT0gMCkpDQo+ICsgICAgIHsNCj4gKyAgICAgICAqbnVtID0gYmNfY29weV9u
+dW0gKEJDRyhfemVyb18pKTsgZGlmZiAtLWdpdCANCj4gK2EvZXh0L2JjbWF0
+aC90ZXN0cy9idWc3ODg3OC5waHB0IGIvZXh0L2JjbWF0aC90ZXN0cy9idWc3
+ODg3OC5waHB0IG5ldyANCj4gK2ZpbGUgbW9kZSAxMDA2NDQgaW5kZXggMDAw
+MDAwMDAwMC4uMmM5ZDcyYjk0Ng0KPiArLS0tIC9kZXYvbnVsbA0KPiArKysr
+IGIvZXh0L2JjbWF0aC90ZXN0cy9idWc3ODg3OC5waHB0DQo+ICtAQCAtMCww
+ICsxLDEzIEBADQo+ICsrLS1URVNULS0NCj4gKytCdWcgIzc4ODc4IChCdWZm
+ZXIgdW5kZXJmbG93IGluIGJjX3NoaWZ0X2FkZHN1YikNCj4gKystLVNLSVBJ
+Ri0tDQo+ICsrPD9waHANCj4gKytpZiAoIWV4dGVuc2lvbl9sb2FkZWQoJ2Jj
+bWF0aCcpKSBkaWUoJ3NraXAgYmNtYXRoIGV4dGVuc2lvbiBub3QgDQo+ICsr
+YXZhaWxhYmxlJyk7ID8+DQo+ICsrLS1GSUxFLS0NCj4gKys8P3BocA0KPiAr
+K3ByaW50IEBiY211bCgiXHhCMjY0ODM2MDUxMDU1MTk5MjI4NDE4NDkzMzU5
+Mjg3NDIwOTIiLCBiY3Bvd21vZCgyLCANCj4gKys2NTUzNSwgLTRlLTQpKTsg
+Pz4NCj4gKystLUVYUEVDVC0tDQo+ICsrYmMgbWF0aCB3YXJuaW5nOiBub24t
+emVybyBzY2FsZSBpbiBtb2R1bHVzDQo+ICsrMA0KPiArLS0NCj4gKzIuMTEu
+MA0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3Bo
+cC9waHAvQ1ZFLTIwMTktMTEwNDcucGF0Y2ggDQo+IGIvbWV0YS1vZS9yZWNp
+cGVzLWRldnRvb2xzL3BocC9waHAvQ1ZFLTIwMTktMTEwNDcucGF0Y2gNCj4g
+bmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXggMDAwMDAwMDAwLi5lMjky
+MmJmOGYNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRhLW9lL3JlY2lw
+ZXMtZGV2dG9vbHMvcGhwL3BocC9DVkUtMjAxOS0xMTA0Ny5wYXRjaA0KPiBA
+QCAtMCwwICsxLDU3IEBADQo+ICtGcm9tIGQzNDhjZmI5NmYyNTQzNTY1Njkx
+MDEwYWRlNWUwMzQ2MzM4YmU1YTcgTW9uIFNlcCAxNyAwMDowMDowMCANCj4g
+KzIwMDENCj4gK0Zyb206IFN0YW5pc2xhdiBNYWx5c2hldiA8c3Rhc0BwaHAu
+bmV0Pg0KPiArRGF0ZTogTW9uLCAxNiBEZWMgMjAxOSAwMDoxMDozOSAtMDgw
+MA0KPiArU3ViamVjdDogW1BBVENIXSBGaXhlZCBidWcgIzc4OTEwDQo+ICsN
+Cj4gK1Vwc3RyZWFtLVN0YXR1czogQWNjZXB0ZWQNCj4gK0NWRS0yMDE5LTEx
+MDQ3DQo+ICsgICANCj4gK1JlZmVyZW5jZSB0byB1cHN0cmVhbSBwYXRjaDoN
+Cj4gK2h0dHA6Ly9naXQucGhwLm5ldC8/cD1waHAtc3JjLmdpdDthPWNvbW1p
+dDtoPWQzNDhjZmI5NmYyNTQzNTY1NjkxMDEwYQ0KPiArZGU1ZTAzNDYzMzhi
+ZTVhNyANCj4gK2h0dHA6Ly9naXQucGhwLm5ldC8/cD1waHAtc3JjLmdpdDth
+PWNvbW1pdDtoPTU3MzI1NDYwZDJiZGVlMDFhMTNkOGU2Yw0KPiArZjAzMzQ1
+YzkwNTQzZmY0Zg0KPiArLS0tDQo+ICsgZXh0L2V4aWYvZXhpZi5jICAgICAg
+ICAgICAgICB8ICAzICsrLQ0KPiArIGV4dC9leGlmL3Rlc3RzL2J1Zzc4OTEw
+LnBocHQgfCAxNyArKysrKysrKysrKysrKysrKw0KPiArIDIgZmlsZXMgY2hh
+bmdlZCwgMTkgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigtKSAgY3JlYXRl
+IG1vZGUgMTAwNjQ0IA0KPiArZXh0L2V4aWYvdGVzdHMvYnVnNzg5MTAucGhw
+dA0KPiArDQo+ICtkaWZmIC0tZ2l0IGEvZXh0L2V4aWYvZXhpZi5jIGIvZXh0
+L2V4aWYvZXhpZi5jIGluZGV4IA0KPiArMjgwNDgwN2UuLmE1NzgwMTEzIDEw
+MDY0NA0KPiArLS0tIGEvZXh0L2V4aWYvZXhpZi5jDQo+ICsrKysgYi9leHQv
+ZXhpZi9leGlmLmMNCj4gK0BAIC0zMTM4LDcgKzMxMzgsOCBAQCBzdGF0aWMg
+aW50IGV4aWZfcHJvY2Vzc19JRkRfaW5fTUFLRVJOT1RFKGltYWdlX2luZm9f
+dHlwZSAqSW1hZ2VJbmZvLCBjaGFyICogdmFsdQ0KPiArIAkJLypleGlmX2Vy
+cm9yX2RvY3JlZihOVUxMIEVYSUZFUlJfQ0MsIEltYWdlSW5mbywgRV9OT1RJ
+Q0UsICJjaGVjayAoJXMpIiwgbWFrZXJfbm90ZS0+bWFrZT9tYWtlcl9ub3Rl
+LT5tYWtlOiIiKTsqLw0KPiArIAkJaWYgKG1ha2VyX25vdGUtPm1ha2UgJiYg
+KCFJbWFnZUluZm8tPm1ha2UgfHwgc3RyY21wKG1ha2VyX25vdGUtPm1ha2Us
+IEltYWdlSW5mby0+bWFrZSkpKQ0KPiArIAkJCWNvbnRpbnVlOw0KPiArLQkJ
+aWYgKG1ha2VyX25vdGUtPmlkX3N0cmluZyAmJiBzdHJuY21wKG1ha2VyX25v
+dGUtPmlkX3N0cmluZywgdmFsdWVfcHRyLCBtYWtlcl9ub3RlLT5pZF9zdHJp
+bmdfbGVuKSkNCj4gKysJCWlmIChtYWtlcl9ub3RlLT5pZF9zdHJpbmcgJiYg
+dmFsdWVfbGVuID49IG1ha2VyX25vdGUtPmlkX3N0cmluZ19sZW4NCj4gKysJ
+CQkJJiYgc3RybmNtcChtYWtlcl9ub3RlLT5pZF9zdHJpbmcsIHZhbHVlX3B0
+ciwgDQo+ICsrbWFrZXJfbm90ZS0+aWRfc3RyaW5nX2xlbikpDQo+ICsgCQkJ
+Y29udGludWU7DQo+ICsgCQlicmVhazsNCj4gKyAJfQ0KPiArZGlmZiAtLWdp
+dCBhL2V4dC9leGlmL3Rlc3RzL2J1Zzc4OTEwLnBocHQgDQo+ICtiL2V4dC9l
+eGlmL3Rlc3RzL2J1Zzc4OTEwLnBocHQgbmV3IGZpbGUgbW9kZSAxMDA2NDQg
+aW5kZXggDQo+ICswMDAwMDAwMC4uZjViMWMzMmMNCj4gKy0tLSAvZGV2L251
+bGwNCj4gKysrKyBiL2V4dC9leGlmL3Rlc3RzL2J1Zzc4OTEwLnBocHQNCj4g
+K0BAIC0wLDAgKzEsMTcgQEANCj4gKystLVRFU1QtLQ0KPiArK0J1ZyAjNzg5
+MTA6IEhlYXAtYnVmZmVyLW92ZXJmbG93IFJFQUQgaW4gZXhpZiAoT1NTLUZ1
+enogIzE5MDQ0KQ0KPiArKy0tRklMRS0tDQo+ICsrPD9waHANCj4gKysNCj4g
+Kyt2YXJfZHVtcChleGlmX3JlYWRfZGF0YSgnZGF0YTppbWFnZS9qcGc7YmFz
+ZTY0LFRVMEFLZ0FBQUF3Z0lDQWdBQUlCRA0KPiArK3dBRUFBQUFBZ0FBQUNL
+U2ZDQWdBQUFBQUVaVlNrbEdTVXhOJykpOw0KPiArKw0KPiArKz8+DQo+ICsr
+LS1FWFBFQ1RGLS0NCj4gKytOb3RpY2U6IGV4aWZfcmVhZF9kYXRhKCk6IFJl
+YWQgZnJvbSBUSUZGOiB0YWcoMHg5MjdDLCBNYWtlck5vdGUgICk6IA0KPiAr
+K0lsbGVnYWwgZm9ybWF0IGNvZGUgMHgyMDIwLCBzd2l0Y2hpbmcgdG8gQllU
+RSBpbiAlcyBvbiBsaW5lICVkDQo+ICsrDQo+ICsrV2FybmluZzogZXhpZl9y
+ZWFkX2RhdGEoKTogUHJvY2VzcyB0YWcoeDkyN0M9TWFrZXJOb3RlICApOiBJ
+bGxlZ2FsIA0KPiArK2Zvcm1hdCBjb2RlIDB4MjAyMCwgc3VwcG9zZSBCWVRF
+IGluICVzIG9uIGxpbmUgJWQNCj4gKysNCj4gKytXYXJuaW5nOiBleGlmX3Jl
+YWRfZGF0YSgpOiBJRkQgZGF0YSB0b28gc2hvcnQ6IDB4MDAwMCBvZmZzZXQg
+MHgwMDBDIA0KPiArK2luICVzIG9uIGxpbmUgJWQNCj4gKysNCj4gKytXYXJu
+aW5nOiBleGlmX3JlYWRfZGF0YSgpOiBJbnZhbGlkIFRJRkYgZmlsZSBpbiAl
+cyBvbiBsaW5lICVkDQo+ICsrYm9vbChmYWxzZSkNCj4gKy0tDQo+ICsyLjE3
+LjENCj4gKw0KPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWRldnRv
+b2xzL3BocC9waHAvQ1ZFLTIwMTktMTEwNTAucGF0Y2ggDQo+IGIvbWV0YS1v
+ZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHAvQ1ZFLTIwMTktMTEwNTAucGF0
+Y2gNCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXggMDAwMDAwMDAw
+Li43MDBiOTliZDkNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9tZXRhLW9l
+L3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocC9DVkUtMjAxOS0xMTA1MC5wYXRj
+aA0KPiBAQCAtMCwwICsxLDUzIEBADQo+ICtGcm9tIGMxNGViOGRlOTc0ZmM4
+YTRkNzRmMzUxNTQyNGMyOTNiYzdhNDBmYmEgTW9uIFNlcCAxNyAwMDowMDow
+MCANCj4gKzIwMDENCj4gK0Zyb206IFN0YW5pc2xhdiBNYWx5c2hldiA8c3Rh
+c0BwaHAubmV0Pg0KPiArRGF0ZTogTW9uLCAxNiBEZWMgMjAxOSAwMToxNDoz
+OCAtMDgwMA0KPiArU3ViamVjdDogW1BBVENIXSBGaXggYnVnICM3ODc5Mw0K
+PiArDQo+ICtVcHN0cmVhbS1TdGF0dXM6IEFjY2VwdGVkDQo+ICtDVkUtMjAx
+OS0xMTA1MA0KPiArICAgDQo+ICtSZWZlcmVuY2UgdG8gdXBzdHJlYW0gcGF0
+Y2g6DQo+ICtodHRwOi8vZ2l0LnBocC5uZXQvP3A9cGhwLXNyYy5naXQ7YT1j
+b21taXQ7aD1jMTRlYjhkZTk3NGZjOGE0ZDc0ZjM1MTUNCj4gKzQyNGMyOTNi
+YzdhNDBmYmENCj4gK2h0dHA6Ly9naXQucGhwLm5ldC8/cD1waHAtc3JjLmdp
+dDthPWNvbW1pdDtoPTFiM2I0YTBkMzY3YjZmMGI2N2U5ZjczZA0KPiArODJm
+NTNkYjZjNmI3MjJiMg0KPiArLS0tDQo+ICsgZXh0L2V4aWYvZXhpZi5jICAg
+ICAgICAgICAgICB8ICA1ICsrKy0tDQo+ICsgZXh0L2V4aWYvdGVzdHMvYnVn
+Nzg3OTMucGhwdCB8IDEyICsrKysrKysrKysrKw0KPiArIDIgZmlsZXMgY2hh
+bmdlZCwgMTUgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkgIGNyZWF0
+ZSBtb2RlIA0KPiArMTAwNjQ0IGV4dC9leGlmL3Rlc3RzL2J1Zzc4NzkzLnBo
+cHQNCj4gKw0KPiArZGlmZiAtLWdpdCBhL2V4dC9leGlmL2V4aWYuYyBiL2V4
+dC9leGlmL2V4aWYuYyBpbmRleCANCj4gK2MwYmUwNTkyMmYuLjdmZTA1NWYz
+ODEgMTAwNjQ0DQo+ICstLS0gYS9leHQvZXhpZi9leGlmLmMNCj4gKysrKyBi
+L2V4dC9leGlmL2V4aWYuYw0KPiArQEAgLTMyNDAsOCArMzI0MCw5IEBAIHN0
+YXRpYyBpbnQgZXhpZl9wcm9jZXNzX0lGRF9pbl9NQUtFUk5PVEUoaW1hZ2Vf
+aW5mb190eXBlICpJbWFnZUluZm8sIGNoYXIgKiB2YWx1DQo+ICsgCX0NCj4g
+KyANCj4gKyAJZm9yIChkZT0wO2RlPE51bURpckVudHJpZXM7ZGUrKykgew0K
+PiArLQkJaWYgKCFleGlmX3Byb2Nlc3NfSUZEX1RBRyhJbWFnZUluZm8sIGRp
+cl9zdGFydCArIDIgKyAxMiAqIGRlLA0KPiArLQkJCQkJCQkJICBvZmZzZXRf
+YmFzZSwgZGF0YV9sZW4sIGRpc3BsYWNlbWVudCwgc2VjdGlvbl9pbmRleCwg
+MCwgbWFrZXJfbm90ZS0+dGFnX3RhYmxlKSkgew0KPiArKwkJc2l6ZV90IG9m
+ZnNldCA9IDIgKyAxMiAqIGRlOw0KPiArKwkJaWYgKCFleGlmX3Byb2Nlc3Nf
+SUZEX1RBRyhJbWFnZUluZm8sIGRpcl9zdGFydCArIG9mZnNldCwNCj4gKysJ
+CQkJCQkJCSAgb2Zmc2V0X2Jhc2UsIGRhdGFfbGVuIC0gb2Zmc2V0LCBkaXNw
+bGFjZW1lbnQsIA0KPiArK3NlY3Rpb25faW5kZXgsIDAsIG1ha2VyX25vdGUt
+PnRhZ190YWJsZSkpIHsNCj4gKyAJCQlyZXR1cm4gRkFMU0U7DQo+ICsgCQl9
+DQo+ICsgCX0NCj4gK2RpZmYgLS1naXQgYS9leHQvZXhpZi90ZXN0cy9idWc3
+ODc5My5waHB0IA0KPiArYi9leHQvZXhpZi90ZXN0cy9idWc3ODc5My5waHB0
+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0IGluZGV4IA0KPiArMDAwMDAwMDAwMC4u
+MDMzZjI1NWFjZQ0KPiArLS0tIC9kZXYvbnVsbA0KPiArKysrIGIvZXh0L2V4
+aWYvdGVzdHMvYnVnNzg3OTMucGhwdA0KPiArQEAgLTAsMCArMSwxMiBAQA0K
+PiArKy0tVEVTVC0tDQo+ICsrQnVnICM3ODc5MzogVXNlLWFmdGVyLWZyZWUg
+aW4gZXhpZiBwYXJzaW5nIHVuZGVyIG1lbW9yeSBzYW5pdGl6ZXINCj4gKyst
+LUZJTEUtLQ0KPiArKzw/cGhwDQo+ICsrJGYgPSAiZXh0L2V4aWYvdGVzdHMv
+YnVnNzc5NTAudGlmZiI7IGZvciAoJGkgPSAwOyAkaSA8IDEwOyAkaSsrKSB7
+DQo+ICsrICAgIEBleGlmX3JlYWRfZGF0YSgkZik7DQo+ICsrfQ0KPiArKz8+
+DQo+ICsrPT09RE9ORT09PQ0KPiArKy0tRVhQRUNULS0NCj4gKys9PT1ET05F
+PT09DQo+ICstLQ0KPiArMi4xMS4wDQo+IGRpZmYgLS1naXQgYS9tZXRhLW9l
+L3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocF83LjMuOS5iYiANCj4gYi9tZXRh
+LW9lL3JlY2lwZXMtZGV2dG9vbHMvcGhwL3BocF83LjMuOS5iYg0KPiBpbmRl
+eCBlODg2Y2IxYTIuLjY3MGMzMzIxYyAxMDA2NDQNCj4gLS0tIGEvbWV0YS1v
+ZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHBfNy4zLjkuYmINCj4gKysrIGIv
+bWV0YS1vZS9yZWNpcGVzLWRldnRvb2xzL3BocC9waHBfNy4zLjkuYmINCj4g
+QEAgLTksNiArOSwxMCBAQCBTUkNfVVJJICs9ICJmaWxlOi8vMDAwMS1hY2lu
+Y2x1ZGUubTQtZG9uLXQtdW5zZXQtY2FjaGUtdmFyaWFibGVzLnBhdGNoIFwN
+Cj4gICAgICAgICAgICAgIGZpbGU6Ly9kZWJpYW4tcGhwLWZpeGhlYWRlci5w
+YXRjaCBcDQo+ICAgICAgICAgICAgICBmaWxlOi8vQ1ZFLTIwMTktNjk3OC5w
+YXRjaCBcDQo+ICAgICAgICAgICAgICBmaWxlOi8vQ1ZFLTIwMTktMTEwNDMu
+cGF0Y2ggXA0KPiArICAgICAgICAgICAgZmlsZTovL0NWRS0yMDE5LTExMDQ1
+LnBhdGNoIFwNCj4gKyAgICAgICAgICAgIGZpbGU6Ly9DVkUtMjAxOS0xMTA0
+Ni5wYXRjaCBcDQo+ICsgICAgICAgICAgICBmaWxlOi8vQ1ZFLTIwMTktMTEw
+NDcucGF0Y2ggXA0KPiArICAgICAgICAgICAgZmlsZTovL0NWRS0yMDE5LTEx
+MDUwLnBhdGNoIFwNCj4gICAgICAgICAgICAgIg0KPiAgU1JDX1VSSV9hcHBl
+bmRfY2xhc3MtdGFyZ2V0ID0gIiBcDQo+ICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgIGZpbGU6Ly9wZWFyLW1ha2VmaWxlLnBhdGNoIFwNCg0K
+LS0NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fDQpPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQpPcGVu
+ZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KaHR0cDov
+L2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVu
+ZW1iZWRkZWQtZGV2ZWwNCg0KDQoKCg==
 
