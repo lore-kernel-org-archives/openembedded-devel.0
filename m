@@ -1,37 +1,47 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
-	by mail.openembedded.org (Postfix) with ESMTP id EE56E606D0
+Return-Path: <ross@burtonini.com>
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com
+	[209.85.167.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 75A826063E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 23:02:44 +0000 (UTC)
-Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com
-	([174.114.57.56]:58492 helo=localhost.localdomain)
-	by cpanel7.indieserve.net with esmtpsa (TLS1.2) tls
-	TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
-	(envelope-from <rpjday@crashcourse.ca>)
-	id 1jELET-005gur-1i; Tue, 17 Mar 2020 19:02:45 -0400
-Date: Tue, 17 Mar 2020 19:02:42 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost.localdomain
-To: Ross Burton <ross@burtonini.com>
-In-Reply-To: <06ab2bbe-0bba-6b5c-1fd8-53ad3db16936@burtonini.com>
-Message-ID: <alpine.LFD.2.21.2003171856500.23572@localhost.localdomain>
+	Tue, 17 Mar 2020 23:17:24 +0000 (UTC)
+Received: by mail-lf1-f50.google.com with SMTP id j17so18696589lfe.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2020 16:17:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=burtonini-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=oFcEB4cBM4EFjObLvgwr+yg7ni81bi9Bdbf/mLTfc1M=;
+	b=kihfxRpGWADl/UXe5UkWan6SoSWzMmm23kMMjw0RiG5lLH8xaefNLuBB/hFXM82y8J
+	C1MDPEaeuO62Bx+TMrMLy/TUTe3iQrW0rthcJ70LxOF+rZCpOiCepXt1okx8K9KQHkr1
+	nZysFUWM+nnLH4OuHx1+hIXi30FVn3CF0utl4dgDR7aiNF2JMiT16mcEKKf+f9gYsd9v
+	ibS3fDz16vEADRgPOx8CYaTwoF1YHhmLG5UisXiw8iLmSUEOsVTog/Mtdmeq8jbZg4If
+	/01qXLkhrr55tmNZDp/xnx4RKNW1NObCe1jj95oUcbc7qZIsUamo5+MNdrkOr1D0AAm1
+	MwMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=oFcEB4cBM4EFjObLvgwr+yg7ni81bi9Bdbf/mLTfc1M=;
+	b=SRu4ocdkqk+KMDnnQSlTbNUH5d2tGg9o/davMFW+E8HFdAZjRib7u5sGC0UMp269En
+	ZCm8iP6aSXXK5B1ZB3hIRLnr52azB3z3g6VpdA2X5n2SQj33uDrLve2i/aR76GaPpcCi
+	SZVXah3PGwt08F5ykAkLmT4cN41IJQiz7Sg63muCkditSfu5bFYLY4UXM2YjMhL8KzY8
+	WqaNCZ7Wl+ywMvRea38+zWF4pSOCFC90gEuFqxwFnEHTQ7awxk/Vc3RXoWZjHiiHUYKz
+	dy1FvtTmWNzSLMzTQPSg/rBGkiJsQOAafEaQIU55XYotN+H6kO/NJneUE8CDfCW+VW6A
+	SMNw==
+X-Gm-Message-State: ANhLgQ10GzdE6uaRq12r5gcS1K9Fgeob1S3qgox9k/ZTdMGojbQ26gz4
+	Gq6krY+RIv7+46mCL3x54Mxh3buvseIQf3LsA4nuf6leBQWDdw==
+X-Google-Smtp-Source: ADFU+vsZau66rxz7Mznhn3q8Q+Z50fcKCPNXh+CzoSCymfNoDoC4SFsCqEgvcjnvpdCOUk/S4dTjvo9wL/YXFX6Q/aM=
+X-Received: by 2002:a19:f503:: with SMTP id j3mr1007745lfb.39.1584487044689;
+	Tue, 17 Mar 2020 16:17:24 -0700 (PDT)
+MIME-Version: 1.0
 References: <alpine.LFD.2.21.2003171319540.14640@localhost.localdomain>
 	<06ab2bbe-0bba-6b5c-1fd8-53ad3db16936@burtonini.com>
-MIME-Version: 1.0
-X-OutGoing-Spam-Status: No, score=-1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id:
-	rpjday+crashcourse.ca/only user confirmed/virtual account not
-	confirmed
-X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+	<alpine.LFD.2.21.2003171856500.23572@localhost.localdomain>
+In-Reply-To: <alpine.LFD.2.21.2003171856500.23572@localhost.localdomain>
+From: Ross Burton <ross@burtonini.com>
+Date: Tue, 17 Mar 2020 23:17:12 +0000
+Message-ID: <CAAnfSTu1O59FwuShBXQWTaOW7J4m1Hx5Wa_wCw6yRV-E6XNw8Q@mail.gmail.com>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: should indent recipe use "${prefix}" instead of "/usr"?
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -46,33 +56,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 23:02:45 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Tue, 17 Mar 2020 23:17:25 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, 17 Mar 2020, Ross Burton wrote:
+>   just to be clear, this depends on where the indent software actually
+> installs the documentation, yes? i'll have to check when i get home as
+> to were that stuff is actually placed. for all i know, it *could* be
+> under /usr/doc.
 
-> On 17/03/2020 17:22, Robert P. J. Day wrote:
-> >    just noticed that ./meta-oe/recipes-extended/indent/indent_2.2.12.bb
-> > on master branch contains the line:
-> >
-> >    FILES_${PN}-doc += "/usr/doc/indent/indent.html"
-> >
-> > should that not properly read:
-> >
-> >    FILES_${PN}-doc += "${prefix}/doc/indent/indent.html"
-> >
-> > or am i misreading something?
->
-> Recipes should never use /usr directly unless they're relocating something
-> from e.g. ${D}/usr/lib to ${D}${libdir}.
->
-> The recipe should be telling the Makefiles to install into ${docdir}
-> (typically, /usr/share/doc).
+Yes.
 
-  just to be clear, this depends on where the indent software actually
-installs the documentation, yes? i'll have to check when i get home as
-to were that stuff is actually placed. for all i know, it *could* be
-under /usr/doc.
+That FILES suggests that the makefile is installing to /usr/doc/ and
+needs to be told somehow to use $docdir.
 
-rday
+Ross
 
