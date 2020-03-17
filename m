@@ -1,26 +1,56 @@
-Return-Path: <ssajal@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id ABEA36078B
+Return-Path: <ross@burtonini.com>
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com
+	[209.85.215.175])
+	by mail.openembedded.org (Postfix) with ESMTP id E6D8F605EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 20:05:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 02HK5sQ1014209
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	Tue, 17 Mar 2020 21:32:15 +0000 (UTC)
+Received: by mail-pg1-f175.google.com with SMTP id b1so12420405pgm.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 13:05:54 -0700 (PDT)
-Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.487.0;
-	Tue, 17 Mar 2020 13:05:54 -0700
-Received: by ala-lpggp3.wrs.com (Postfix, from userid 20885)	id 33F3A900B9E;
-	Tue, 17 Mar 2020 13:05:54 -0700 (PDT)
-From: Sakib Sajal <sakib.sajal@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Mar 2020 13:05:33 -0700
-Message-ID: <20200317200533.56238-1-sakib.sajal@windriver.com>
-X-Mailer: git-send-email 2.17.1
+	Tue, 17 Mar 2020 14:32:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=burtonini-com.20150623.gappssmtp.com; s=20150623;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language:content-transfer-encoding;
+	bh=bFq4BLu09PS8U8P/M23mhkSjbxl/Se7bRBhMcY33Y7Q=;
+	b=FWQsr5S4c2+SE7iePd9BkwUWlAkM/VxGahNBH3RMIYc4CNHAoVm1G5rPc0smS/pD4O
+	xNzylCgU1/CfGfByhNop4aIThDuHrBRs2v35VctonLFdnxtx7kSfEgX5NZxKYBrjnbTB
+	v3DdRne4/7ocYgEkiAV3ii8piTFUq/mfwCv5q/4xAgXVf7Gz8N2Hzze+Kcjp1BSSNf4g
+	Yd5l3/y9X+9hw5Lc5/tsngA8fQ4Zk0Cak3/V5OhqZ4tlIQZMV+r+8CHsGhejpvsd9G3S
+	hXJceiSndVVnNHS8Ot8asQ8PHqaOqMPt5GJjpREDX/WdcF7VB7vUpdXL3to4GtySCFeg
+	FxYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=bFq4BLu09PS8U8P/M23mhkSjbxl/Se7bRBhMcY33Y7Q=;
+	b=pEN5YgzPF3YXV4aVNzVRCd16ovkeqiI7sghemuP1B7D4SKKPXu6XxV5cVkfRxyf7ET
+	o6TyHU2IGcnMZli9qhVENoRNdIICuGrRW5H67TgjRDnwasbmxAgQ1KJk2tnl1isr9fP+
+	hHPEW67iSwq/y1jSxmMgw4VRuHuEvo7aH2jXt/IeGHJhx5kAksCwqNMxxgPJ5MBr9ZGj
+	cZmO4VgzpYeNoeChC30J5lz+hSIrVdbpmXjpebUmZBpwNGChzyERtpSAvDGl90Ac9BmS
+	vMZATrDHqHglppr94ctYzITO/4HlJ4EzN7+4wk936hJfZ9eSAsmrsWh3myqkOb0DAzkB
+	2wKg==
+X-Gm-Message-State: ANhLgQ3VeIXIZygjjasHgqdfL4IHOWPbPjfw1aZen1ZQVxltcM5iV949
+	jbRaxU40CXok1uSz0H4I2y/HKqPy7oFLTQ==
+X-Google-Smtp-Source: ADFU+vtXtbXZgxFHiTVFKHUeiJRNV//UhxJF9VtqX54WQKaezFJ4PU1M6s9/LjsGYNrmkNAW0qNbGA==
+X-Received: by 2002:a63:2323:: with SMTP id j35mr1187541pgj.440.1584480736133; 
+	Tue, 17 Mar 2020 14:32:16 -0700 (PDT)
+Received: from cjmcquil-mobl1.ger.corp.intel.com (jfdmzpr03-ext.jf.intel.com.
+	[134.134.139.72]) by smtp.gmail.com with ESMTPSA id
+	t142sm3532402pgb.31.2020.03.17.14.32.14
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+	Tue, 17 Mar 2020 14:32:15 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
+References: <alpine.LFD.2.21.2003171319540.14640@localhost.localdomain>
+From: Ross Burton <ross@burtonini.com>
+Message-ID: <06ab2bbe-0bba-6b5c-1fd8-53ad3db16936@burtonini.com>
+Date: Tue, 17 Mar 2020 21:32:10 +0000
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+	Gecko/20100101 Thunderbird/68.6.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] openjpeg: Fix CVE-2020-8112
+In-Reply-To: <alpine.LFD.2.21.2003171319540.14640@localhost.localdomain>
+Subject: Re: should indent recipe use "${prefix}" instead of "/usr"?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,86 +63,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 20:05:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 17 Mar 2020 21:32:16 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Backport from upstream to fix heap-based buffer overflow.
+On 17/03/2020 17:22, Robert P. J. Day wrote:
+>    just noticed that ./meta-oe/recipes-extended/indent/indent_2.2.12.bb
+> on master branch contains the line:
+> 
+>    FILES_${PN}-doc += "/usr/doc/indent/indent.html"
+> 
+> should that not properly read:
+> 
+>    FILES_${PN}-doc += "${prefix}/doc/indent/indent.html"
+> 
+> or am i misreading something?
 
-Upstream-Status: Backport
-CVE: CVE-2020-8112
+Recipes should never use /usr directly unless they're relocating 
+something from e.g. ${D}/usr/lib to ${D}${libdir}.
 
-Signed-off-by: Sakib Sajal <sakib.sajal@windriver.com>
----
- .../openjpeg/openjpeg/CVE-2020-8112.patch     | 46 +++++++++++++++++++
- .../openjpeg/openjpeg_2.3.1.bb                |  1 +
- 2 files changed, 47 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch
+The recipe should be telling the Makefiles to install into ${docdir} 
+(typically, /usr/share/doc).
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch
-new file mode 100644
-index 000000000..cb250530e
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg/CVE-2020-8112.patch
-@@ -0,0 +1,46 @@
-+From 05f9b91e60debda0e83977e5e63b2e66486f7074 Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Thu, 30 Jan 2020 00:59:57 +0100
-+Subject: [PATCH] opj_tcd_init_tile(): avoid integer overflow
-+
-+That could lead to later assertion failures.
-+
-+Fixes #1231 / CVE-2020-8112
-+---
-+ src/lib/openjp2/tcd.c | 20 ++++++++++++++++++--
-+ 1 file changed, 18 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/lib/openjp2/tcd.c b/src/lib/openjp2/tcd.c
-+index deecc4df..aa419030 100644
-+--- a/src/lib/openjp2/tcd.c
-++++ b/src/lib/openjp2/tcd.c
-+@@ -905,8 +905,24 @@ static INLINE OPJ_BOOL opj_tcd_init_tile(opj_tcd_t *p_tcd, OPJ_UINT32 p_tile_no,
-+             /* p. 64, B.6, ISO/IEC FDIS15444-1 : 2000 (18 august 2000)  */
-+             l_tl_prc_x_start = opj_int_floordivpow2(l_res->x0, (OPJ_INT32)l_pdx) << l_pdx;
-+             l_tl_prc_y_start = opj_int_floordivpow2(l_res->y0, (OPJ_INT32)l_pdy) << l_pdy;
-+-            l_br_prc_x_end = opj_int_ceildivpow2(l_res->x1, (OPJ_INT32)l_pdx) << l_pdx;
-+-            l_br_prc_y_end = opj_int_ceildivpow2(l_res->y1, (OPJ_INT32)l_pdy) << l_pdy;
-++            {
-++                OPJ_UINT32 tmp = ((OPJ_UINT32)opj_int_ceildivpow2(l_res->x1,
-++                                  (OPJ_INT32)l_pdx)) << l_pdx;
-++                if (tmp > (OPJ_UINT32)INT_MAX) {
-++                    opj_event_msg(manager, EVT_ERROR, "Integer overflow\n");
-++                    return OPJ_FALSE;
-++                }
-++                l_br_prc_x_end = (OPJ_INT32)tmp;
-++            }
-++            {
-++                OPJ_UINT32 tmp = ((OPJ_UINT32)opj_int_ceildivpow2(l_res->y1,
-++                                  (OPJ_INT32)l_pdy)) << l_pdy;
-++                if (tmp > (OPJ_UINT32)INT_MAX) {
-++                    opj_event_msg(manager, EVT_ERROR, "Integer overflow\n");
-++                    return OPJ_FALSE;
-++                }
-++                l_br_prc_y_end = (OPJ_INT32)tmp;
-++            }
-+             /*fprintf(stderr, "\t\t\tprc_x_start=%d, prc_y_start=%d, br_prc_x_end=%d, br_prc_y_end=%d \n", l_tl_prc_x_start, l_tl_prc_y_start, l_br_prc_x_end ,l_br_prc_y_end );*/
-+ 
-+             l_res->pw = (l_res->x0 == l_res->x1) ? 0U : (OPJ_UINT32)((
-+-- 
-+2.20.1
-+
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-index 4045148dd..42011efa9 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.3.1.bb
-@@ -9,6 +9,7 @@ SRC_URI = " \
-     git://github.com/uclouvain/openjpeg.git \
-     file://0002-Do-not-ask-cmake-to-export-binaries-they-don-t-make-.patch \
-     file://CVE-2020-6851.patch \
-+    file://CVE-2020-8112.patch \
- "
- SRCREV = "57096325457f96d8cd07bd3af04fe81d7a2ba788"
- S = "${WORKDIR}/git"
--- 
-2.17.1
-
+Ross
 
