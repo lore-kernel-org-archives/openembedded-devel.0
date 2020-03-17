@@ -1,33 +1,35 @@
 Return-Path: <wangmy@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D8A9860BD7
+	by mail.openembedded.org (Postfix) with ESMTP id C93FE60BA0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 01:45:35 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,562,1574092800"; d="scan'208";a="86435361"
+	Tue, 17 Mar 2020 01:46:12 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,562,1574092800"; d="scan'208";a="86435403"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 Mar 2020 09:45:36 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 0841C50A9981
+	by heian.cn.fujitsu.com with ESMTP; 17 Mar 2020 09:46:13 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id 3D57F50A9990
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Mar 2020 09:35:32 +0800 (CST)
+	Tue, 17 Mar 2020 09:36:05 +0800 (CST)
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1497.2; Tue, 17 Mar 2020 09:45:33 +0800
+	G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP
+	Server (TLS) id 15.0.1497.2; Tue, 17 Mar 2020 09:46:05 +0800
 Received: from localhost.localdomain.localdomain (10.167.225.33) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Tue, 17 Mar 2020 09:45:40 +0800
+	Server (TLS) id 14.3.439.0; Tue, 17 Mar 2020 09:46:15 +0800
 From: Wang Mingyu <wangmy@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 17 Mar 2020 00:19:55 -0700
-Message-ID: <1584429596-2007-1-git-send-email-wangmy@cn.fujitsu.com>
+Date: Tue, 17 Mar 2020 00:19:56 -0700
+Message-ID: <1584429596-2007-2-git-send-email-wangmy@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1584429596-2007-1-git-send-email-wangmy@cn.fujitsu.com>
+References: <1584429596-2007-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 0841C50A9981.A569D
+X-yoursite-MailScanner-ID: 3D57F50A9990.A2F45
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-networking][PATCH] arptables: upgrade 0.0.4 -> 0.0.5
+Subject: [meta-networking] [PATCH] libtdb: upgrade 1.4.2 -> 1.4.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,253 +42,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Mar 2020 01:45:36 -0000
+X-List-Received-Date: Tue, 17 Mar 2020 01:46:13 -0000
 Content-Type: text/plain
 
-arptables-init-busybox.patch
-arptables-remove-bashism.patch
-removed since they are not available in 0.0.5
+0001-waf-add-support-of-cross_compile.patch
+removed since it's not available for 1.4.3
 
-refresh 0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch
+refresh tdb-Add-configure-options-for-packages.patch
 
 Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- ...-for-package-specific-compiler-flags.patch | 42 +++-------
- .../arptables/arptables-init-busybox.patch    | 77 -------------------
- .../arptables/arptables-remove-bashism.patch  | 37 ---------
- .../arptables/arptables_git.bb                |  6 +-
- 4 files changed, 14 insertions(+), 148 deletions(-)
- delete mode 100644 meta-networking/recipes-support/arptables/arptables/arptables-init-busybox.patch
- delete mode 100644 meta-networking/recipes-support/arptables/arptables/arptables-remove-bashism.patch
+ ...001-waf-add-support-of-cross_compile.patch | 63 -------------------
+ ...b-Add-configure-options-for-packages.patch |  2 +-
+ .../{libtdb_1.4.2.bb => libtdb_1.4.3.bb}      |  5 +-
+ 3 files changed, 3 insertions(+), 67 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch
+ rename meta-networking/recipes-support/libtdb/{libtdb_1.4.2.bb => libtdb_1.4.3.bb} (90%)
 
-diff --git a/meta-networking/recipes-support/arptables/arptables/0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch b/meta-networking/recipes-support/arptables/arptables/0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch
-index e8be45e6b..eb58389c3 100644
---- a/meta-networking/recipes-support/arptables/arptables/0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch
-+++ b/meta-networking/recipes-support/arptables/arptables/0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch
-@@ -8,24 +8,17 @@ which OE uses to pass tweaks
- 
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
- ---
-- Makefile            | 15 +++++++--------
-- extensions/Makefile |  5 ++++-
-- 2 files changed, 11 insertions(+), 9 deletions(-)
-+ Makefile            | 10 ++++------
-+ extensions/Makefile |  4 ++++
-+ 2 files changed, 8 insertions(+), 6 deletions(-)
- 
- diff --git a/Makefile b/Makefile
--index 7bead0d..336db6b 100644
-+index 62ebdf2..cd06813 100644
- --- a/Makefile
- +++ b/Makefile
--@@ -7,15 +7,13 @@ LIBDIR:=$(PREFIX)/lib
-- BINDIR:=$(PREFIX)/sbin
-- MANDIR:=$(PREFIX)/man
-- man8dir=$(MANDIR)/man8
---INITDIR:=/etc/rc.d/init.d
--+INITDIR:=/etc/init.d
-- SYSCONFIGDIR:=/etc/sysconfig
-- DESTDIR:=
-+@@ -12,9 +12,7 @@ DESTDIR:=
-  
-- MANS = arptables.8 arptables-save.8 arptables-restore.8
-+ MANS = arptables-legacy.8 arptables-save.8 arptables-restore.8
-  
- -COPT_FLAGS:=-O2
- -CFLAGS:=$(COPT_FLAGS) -Wall -Wunused -I$(KERNEL_DIR)/include/ -Iinclude/ -DARPTABLES_VERSION=\"$(ARPTABLES_VERSION)\" #-g -DDEBUG #-pg # -DARPTC_DEBUG
-@@ -34,8 +27,8 @@ index 7bead0d..336db6b 100644
-  ifndef ARPT_LIBDIR
-  ARPT_LIBDIR:=$(LIBDIR)/arptables
-  endif
--@@ -25,13 +23,13 @@ include extensions/Makefile
-- all: arptables libarptc/libarptc.a
-+@@ -24,13 +22,13 @@ include extensions/Makefile
-+ all: arptables-legacy libarptc/libarptc.a
-  
-  arptables.o: arptables.c
- -	$(CC) $(CFLAGS) -c -o $@ $<
-@@ -51,29 +44,18 @@ index 7bead0d..336db6b 100644
-  
-  libarptc/libarptc.a: libarptc/libarptc.o
-  	$(AR) rcs $@ $<
--@@ -53,7 +51,8 @@ scripts: arptables-save arptables-restore arptables.sysv
-- 	install -m 0755 arptables-restore_ $(DESTDIR)$(BINDIR)/arptables-restore
-- 	cat arptables.sysv | sed 's/__EXEC_PATH__/$(tmp1)/g' | sed 's/__SYSCONFIG__/$(tmp2)/g' > arptables.sysv_
-- 	if [ "$(DESTDIR)" != "" ]; then mkdir -p $(DESTDIR)$(INITDIR); fi
---	if test -d $(DESTDIR)$(INITDIR); then install -m 0755 arptables.sysv_ $(DESTDIR)$(INITDIR)/arptables; fi
--+	install -d $(DESTDIR)$(INITDIR)
--+	install -m 0755 arptables.sysv_ $(DESTDIR)$(INITDIR)/arptables
-- 	rm -f arptables-save_ arptables-restore_ arptables.sysv_
-- 
-- .PHONY: install-man
- diff --git a/extensions/Makefile b/extensions/Makefile
--index 0189cc9..b046425 100644
-+index 0189cc9..e8af782 100644
- --- a/extensions/Makefile
- +++ b/extensions/Makefile
--@@ -4,4 +4,7 @@ EXT_FUNC+=standard mangle CLASSIFY MARK
-- EXT_OBJS+=$(foreach T,$(EXT_FUNC), extensions/arpt_$(T).o)
-+@@ -5,3 +5,7 @@ EXT_OBJS+=$(foreach T,$(EXT_FUNC), extensions/arpt_$(T).o)
-  
-  extensions/ebt_%.o: extensions/arpt_%.c include/arptables.h include/arptables_common.h
---	$(CC) $(CFLAGS) $(PROGSPECS) -c -o $@ $<
-+ 	$(CC) $(CFLAGS) $(PROGSPECS) -c -o $@ $<
- +	$(CC) $(CFLAGS) $(ARPCFLAGS) $(PROGSPECS) -c -o $@ $<
- +
- +extensions/arpt_%.o: extensions/arpt_%.c include/arptables.h include/arptables_common.h
- +	$(CC) $(CFLAGS) $(ARPCFLAGS) $(PROGSPECS) -c -o $@ $<
- -- 
--2.12.1
-+2.17.1
- 
-diff --git a/meta-networking/recipes-support/arptables/arptables/arptables-init-busybox.patch b/meta-networking/recipes-support/arptables/arptables/arptables-init-busybox.patch
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch b/meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch
 deleted file mode 100644
-index 24956c4ca..000000000
---- a/meta-networking/recipes-support/arptables/arptables/arptables-init-busybox.patch
+index e20c9a2c2..000000000
+--- a/meta-networking/recipes-support/libtdb/libtdb/0001-waf-add-support-of-cross_compile.patch
 +++ /dev/null
-@@ -1,77 +0,0 @@
--Index: arptables-v0.0.3-4/arptables.sysv
--===================================================================
----- arptables-v0.0.3-4.orig/arptables.sysv	2010-03-22 16:28:03.000000000 +0300
--+++ arptables-v0.0.3-4/arptables.sysv	2010-03-22 16:27:51.000000000 +0300
--@@ -12,10 +12,10 @@
-- # config: __SYSCONFIG__/arptables
-- 
-- source /etc/init.d/functions
---source /etc/sysconfig/network
--+# source /etc/sysconfig/network
-- 
-- # Check that networking is up.
---[ ${NETWORKING} = "no" ] && exit 0
--+# [ ${NETWORKING} = "no" ] && exit 0
-- 
-- [ -x __EXEC_PATH__/arptables ] || exit 1
-- [ -x __EXEC_PATH__/arptables-save ] || exit 1
--@@ -28,32 +28,30 @@
-- desc="Arp filtering"
-- 
-- start() {
---	echo -n $"Starting $desc ($prog): "
--+	echo -n "Starting $desc ($prog): "
-- 	__EXEC_PATH__/arptables-restore < __SYSCONFIG__/arptables || RETVAL=1
-- 
-- 	if [ $RETVAL -eq 0 ]; then
---		success "$prog startup"
---		rm -f /var/lock/subsys/$prog
--+		echo "$prog ok"
--+		touch /var/lock/subsys/$prog
-- 	else
---		failure "$prog startup"
--+		echo "$prog failed"
-- 	fi
-- 
---	echo
-- 	return $RETVAL
-- }
-- 
-- stop() {
---	echo -n $"Stopping $desc ($prog): "
--+	echo -n "Stopping $desc ($prog): "
-- 	__EXEC_PATH__/arptables-restore < /dev/null || RETVAL=1
-- 
-- 	if [ $RETVAL -eq 0 ]; then
---		success "$prog shutdown"
---		rm -f %{_localstatedir}/lock/subsys/$prog
--+		echo "$prog stopped"
--+		rm -f /var/lock/subsys/$prog
-- 	else
---		failure "$prog shutdown"
--+		echo "$prog failed to stop"
-- 	fi
-- 
---	echo
-- 	return $RETVAL
-- }
-- 
--@@ -63,15 +61,14 @@
-- }
-- 
-- save() {
---	echo -n $"Saving $desc ($prog): "
--+	echo -n "Saving $desc ($prog): "
-- 	__EXEC_PATH__/arptables-save > __SYSCONFIG__/arptables || RETVAL=1
-- 
-- 	if [ $RETVAL -eq 0 ]; then
---		success "$prog saved"
--+		echo "$prog saved"
-- 	else
---		failure "$prog saved"
--+		echo "$prog is not saved"
-- 	fi
---	echo
-- }
-- 
-- case "$1" in
-diff --git a/meta-networking/recipes-support/arptables/arptables/arptables-remove-bashism.patch b/meta-networking/recipes-support/arptables/arptables/arptables-remove-bashism.patch
-deleted file mode 100644
-index f332658bc..000000000
---- a/meta-networking/recipes-support/arptables/arptables/arptables-remove-bashism.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--From cd312bc0e3686404428878d23b8888cba09a20e1 Mon Sep 17 00:00:00 2001
--From: Robert Yang <liezhi.yang@windriver.com>
--Date: Thu, 18 Sep 2014 19:46:58 -0700
--Subject: [PATCH] arptables.sysv: remove bashism
+@@ -1,63 +0,0 @@
+-From 4b8463ff43f8983a706b181c5292491f9f954be1 Mon Sep 17 00:00:00 2001
+-From: Changqing Li <changqing.li@windriver.com>
+-Date: Fri, 25 Jan 2019 15:00:59 +0800
+-Subject: [PATCH] waf: add support of cross_compile
 -
--Use "." to replace of "source", and change /bin/bash to /bin/sh, the
--echo $"foo" works well in busybox.
+-After upgrade libtdb from 1.3.16 to 1.3.17, waf build system
+-which used by libtdb upgrade from 1.5.19 to 2.0.8
 -
--Upstream-Status: Pending
+-on 1.5.19, for cross_compile, subprocess.Popen is set to be
+-samba_cross.cross_Popen, which will not execute testprog on
+-host, but only read result from cross-answers.txt which is
+-passed by option --cross-answer
 -
--Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+-part of old code:
+-    args = Utils.to_list(kw.get('exec_args', []))
+-    proc = Utils.pproc.Popen([lastprog] + args, stdout=Utils.pproc.PIPE, stderr=Utils.pproc.PIPE)
+-
+-but on 2.0.8, exec_args is not used and cause do_configure
+-failed with Exec format error
+-
+-fixed by append cross anser related args to cmd
+-
+-Upstream-Status: Submitted [https://gitlab.com/samba-team/samba/merge_requests/211]
+-
+-Signed-off-by: Changqing Li <changqing.li@windriver.com>
 ----
-- arptables.sysv |    4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
+- third_party/waf/waflib/Tools/c_config.py | 11 ++++++-----
+- 1 file changed, 6 insertions(+), 5 deletions(-)
 -
--diff --git a/arptables.sysv b/arptables.sysv
--index 7a90bd2..7710376 100644
----- a/arptables.sysv
--+++ b/arptables.sysv
--@@ -1,4 +1,4 @@
---#!/bin/bash
--+#!/bin/sh
-- #
-- # init script for arptables
-- #
--@@ -11,7 +11,7 @@
-- #
-- # config: __SYSCONFIG__/arptables
+-diff --git a/third_party/waf/waflib/Tools/c_config.py b/third_party/waf/waflib/Tools/c_config.py
+-index 7608215..767cf33 100644
+---- a/third_party/waf/waflib/Tools/c_config.py
+-+++ b/third_party/waf/waflib/Tools/c_config.py
+-@@ -660,20 +660,21 @@ class test_exec(Task.Task):
+- 	"""
+- 	color = 'PINK'
+- 	def run(self):
+-+		args = self.generator.bld.kw.get('exec_args', [])
+- 		if getattr(self.generator, 'rpath', None):
+- 			if getattr(self.generator, 'define_ret', False):
+--				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()])
+--			else:
+--				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()])
+-+				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()] + args)
+-+			else: 
+-+				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()] + args)
+- 		else:
+- 			env = self.env.env or {}
+- 			env.update(dict(os.environ))
+- 			for var in ('LD_LIBRARY_PATH', 'DYLD_LIBRARY_PATH', 'PATH'):
+- 				env[var] = self.inputs[0].parent.abspath() + os.path.pathsep + env.get(var, '')
+- 			if getattr(self.generator, 'define_ret', False):
+--				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()], env=env)
+-+				self.generator.bld.retval = self.generator.bld.cmd_and_log([self.inputs[0].abspath()] + args, env=env)
+- 			else:
+--				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()], env=env)
+-+				self.generator.bld.retval = self.generator.bld.exec_command([self.inputs[0].abspath()] + args, env=env)
 - 
---source /etc/init.d/functions
--+. /etc/init.d/functions
-- # source /etc/sysconfig/network
-- 
-- # Check that networking is up.
+- @feature('test_exec')
+- @after_method('apply_link')
 --- 
--1.7.9.5
+-2.7.4
 -
-diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
-index cec1d1f77..c02a19944 100644
---- a/meta-networking/recipes-support/arptables/arptables_git.bb
-+++ b/meta-networking/recipes-support/arptables/arptables_git.bb
-@@ -2,15 +2,13 @@ SUMMARY = "Administration tool for arp packet filtering"
- SECTION = "net"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
--SRCREV = "f4ab8f63f11a72f14687a6646d04ae1bae3fa45f"
--PV = "0.0.4+git${SRCPV}"
-+SRCREV = "efae8949e31f8b2eb6290f377a28384cecaf105a"
-+PV = "0.0.5+git${SRCPV}"
+diff --git a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
+index 481fd68a4..c35cab7c2 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
++++ b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
+@@ -78,7 +78,7 @@ index 1d01e1e..2336dc3 100644
+ +    conf.CHECK_HEADERS('linux/types.h crypt.h locale.h compat.h')
+ +    conf.CHECK_HEADERS('attr/xattr.h compat.h ctype.h dustat.h')
+      conf.CHECK_HEADERS('fcntl.h fnmatch.h glob.h history.h krb5.h langinfo.h')
+--    conf.CHECK_HEADERS('libaio.h locale.h ndir.h pwd.h')
++-    conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
+ -    conf.CHECK_HEADERS('shadow.h sys/acl.h')
+ -    conf.CHECK_HEADERS('sys/attributes.h attr/attributes.h sys/capability.h sys/dir.h sys/epoll.h')
+ +    conf.CHECK_HEADERS('locale.h ndir.h pwd.h')
+diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.4.2.bb b/meta-networking/recipes-support/libtdb/libtdb_1.4.3.bb
+similarity index 90%
+rename from meta-networking/recipes-support/libtdb/libtdb_1.4.2.bb
+rename to meta-networking/recipes-support/libtdb/libtdb_1.4.3.bb
+index 4973e80ca..c131014ff 100644
+--- a/meta-networking/recipes-support/libtdb/libtdb_1.4.2.bb
++++ b/meta-networking/recipes-support/libtdb/libtdb_1.4.3.bb
+@@ -8,11 +8,10 @@ LIC_FILES_CHKSUM = "file://tools/tdbdump.c;endline=18;md5=b59cd45aa8624578126a8c
  
- SRC_URI = " \
-     git://git.netfilter.org/arptables \
-     file://0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch \
--    file://arptables-init-busybox.patch \
-     file://arptables-arpt-get-target-fix.patch \
--    file://arptables-remove-bashism.patch \
-     file://arptables.service \
+ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
+            file://tdb-Add-configure-options-for-packages.patch \
+-           file://0001-waf-add-support-of-cross_compile.patch \
  "
- SRC_URI[arptables.md5sum] = "1d4ab05761f063b0751645d8f2b8f8e5"
+ 
+-SRC_URI[md5sum] = "b2c05ad68334368d3258a63db709f254"
+-SRC_URI[sha256sum] = "9040b2cce4028e392f063f91bbe76b8b28fecc2b7c0c6071c67b5eb3168e004a"
++SRC_URI[md5sum] = "e638e8890f743624a754304b3f994f4d"
++SRC_URI[sha256sum] = "c8058393dfa15f47e11ebd2f1d132693f0b3b3b8bf22d0201bfb305026f88a1b"
+ 
+ PACKAGECONFIG ??= "\
+     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
 -- 
 2.17.1
 
