@@ -1,42 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
-	[209.85.222.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D43D6023A
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Mar 2020 20:44:16 +0000 (UTC)
-Received: by mail-qk1-f172.google.com with SMTP id s11so17429307qks.8
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Mar 2020 13:44:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=YZn6E3SKqR1WbjIaTaHQzTbge0AagCOI8M6PgLG/LhQ=;
-	b=BB+e9lRhKw2GVsY+k3yxtLc3yZnh6u1hR4T1BoTksltVwOSGgiTLfwLf/Qd6IxUz/w
-	ooLeQXCdS4A6/049bbroDXGpg/8Yaq+TutRgiHeUcoBByqQEVpg9zZIyV+Lw6rQSdHwg
-	b3n3UHhmS2yj1sExf8cNzDlBjUK3J7L2GIQdGVJQX1cFk5tSadZ2Rbv28RWNbwbCihn+
-	FCrrzXKz6B8tIg2v2i6QBxEsPhqOgimyDfNHznymk2YM76oAURvaApT6jrSGRjTKecCq
-	0oJY6hYTRZWDhmUTCjBdgBZLc8AUE5oVQY2nyv1HJL+qXMqK94fm2NM32mJM9gqjrtB/
-	lnzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=YZn6E3SKqR1WbjIaTaHQzTbge0AagCOI8M6PgLG/LhQ=;
-	b=bEwVg8Xd3p8YRYSR+RkyttIIedyZ6qN6ZvyaBKhLy72rfj/6AHQQ+N9gJNdcNWOsHP
-	5d4lSUd+yU33948rPxwfMIulg6MnvtaVAUbtMVvywj5ji7uAoz7eyBW39xz315+FBO3M
-	rM8TCMiRQ3mVIjI3gRWWsawoIgWeNEEtjOFaUEzwZu/gF4tNOAwoDocnglcPgxO6CXDO
-	uenM/003eFMpq3Hvj+g2/DNjcq+wFn3YDUMUklR1hAildFBPFO1leeCjgzRecb7iqXC2
-	34pFtMOJ+khfPUd4yO4OaTUX8+xflJJoc4JWm5obtjplVRWG5l1C5yQTuen44EqmavjG
-	GzEw==
-X-Gm-Message-State: ANhLgQ1Z1E2ffIpE7oQITwQ4zN9IMuWkCEgnHam3GPYjizHtZX4fC0rP
-	An9yypYlLkvfH2cAEyoFmXeqBVxakJMvQPbuHAR1+VXxZUQ=
-X-Google-Smtp-Source: ADFU+vsA+fD9LKaVW7MaQ0yZiRa9bp+96KagNvQxwWMmP5JvNxWL4tuzeYWtJbXvOsnGZhsThR1CK7K8yyZKHTGJTgA=
-X-Received: by 2002:a37:b003:: with SMTP id z3mr1574804qke.431.1584391456611; 
-	Mon, 16 Mar 2020 13:44:16 -0700 (PDT)
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id D8A9860BD7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2020 01:45:35 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,562,1574092800"; d="scan'208";a="86435361"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 17 Mar 2020 09:45:36 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 0841C50A9981
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Mar 2020 09:35:32 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
+	Server (TLS) id 15.0.1497.2; Tue, 17 Mar 2020 09:45:33 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Tue, 17 Mar 2020 09:45:40 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 17 Mar 2020 00:19:55 -0700
+Message-ID: <1584429596-2007-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 16 Mar 2020 13:43:50 -0700
-Message-ID: <CAMKF1srmw_yUQv0HQCqn7jzAWJFvNtm5WOJTLt49t=YTDNxwCA@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: State of OE world - 2020-03-16
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: 0841C50A9981.A569D
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-networking][PATCH] arptables: upgrade 0.0.4 -> 0.0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,254 +40,256 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Mar 2020 20:44:16 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 17 Mar 2020 01:45:36 -0000
+Content-Type: text/plain
 
-https://www.openembedded.org/wiki/Bitbake_World_Status_Dunfell#Number_of_issues_-_stats
+arptables-init-busybox.patch
+arptables-remove-bashism.patch
+removed since they are not available in 0.0.5
 
-== Failed tasks 2020-03-16 ==
+refresh 0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch
 
-INFO: jenkins-job.sh-1.8.46 Complete log available at
-http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.report.20200316_203849.log
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ ...-for-package-specific-compiler-flags.patch | 42 +++-------
+ .../arptables/arptables-init-busybox.patch    | 77 -------------------
+ .../arptables/arptables-remove-bashism.patch  | 37 ---------
+ .../arptables/arptables_git.bb                |  6 +-
+ 4 files changed, 14 insertions(+), 148 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/arptables/arptables/arptables-init-busybox.patch
+ delete mode 100644 meta-networking/recipes-support/arptables/arptables/arptables-remove-bashism.patch
 
-=== common (0) ===
+diff --git a/meta-networking/recipes-support/arptables/arptables/0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch b/meta-networking/recipes-support/arptables/arptables/0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch
+index e8be45e6b..eb58389c3 100644
+--- a/meta-networking/recipes-support/arptables/arptables/0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch
++++ b/meta-networking/recipes-support/arptables/arptables/0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch
+@@ -8,24 +8,17 @@ which OE uses to pass tweaks
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ ---
+- Makefile            | 15 +++++++--------
+- extensions/Makefile |  5 ++++-
+- 2 files changed, 11 insertions(+), 9 deletions(-)
++ Makefile            | 10 ++++------
++ extensions/Makefile |  4 ++++
++ 2 files changed, 8 insertions(+), 6 deletions(-)
+ 
+ diff --git a/Makefile b/Makefile
+-index 7bead0d..336db6b 100644
++index 62ebdf2..cd06813 100644
+ --- a/Makefile
+ +++ b/Makefile
+-@@ -7,15 +7,13 @@ LIBDIR:=$(PREFIX)/lib
+- BINDIR:=$(PREFIX)/sbin
+- MANDIR:=$(PREFIX)/man
+- man8dir=$(MANDIR)/man8
+--INITDIR:=/etc/rc.d/init.d
+-+INITDIR:=/etc/init.d
+- SYSCONFIGDIR:=/etc/sysconfig
+- DESTDIR:=
++@@ -12,9 +12,7 @@ DESTDIR:=
+  
+- MANS = arptables.8 arptables-save.8 arptables-restore.8
++ MANS = arptables-legacy.8 arptables-save.8 arptables-restore.8
+  
+ -COPT_FLAGS:=-O2
+ -CFLAGS:=$(COPT_FLAGS) -Wall -Wunused -I$(KERNEL_DIR)/include/ -Iinclude/ -DARPTABLES_VERSION=\"$(ARPTABLES_VERSION)\" #-g -DDEBUG #-pg # -DARPTC_DEBUG
+@@ -34,8 +27,8 @@ index 7bead0d..336db6b 100644
+  ifndef ARPT_LIBDIR
+  ARPT_LIBDIR:=$(LIBDIR)/arptables
+  endif
+-@@ -25,13 +23,13 @@ include extensions/Makefile
+- all: arptables libarptc/libarptc.a
++@@ -24,13 +22,13 @@ include extensions/Makefile
++ all: arptables-legacy libarptc/libarptc.a
+  
+  arptables.o: arptables.c
+ -	$(CC) $(CFLAGS) -c -o $@ $<
+@@ -51,29 +44,18 @@ index 7bead0d..336db6b 100644
+  
+  libarptc/libarptc.a: libarptc/libarptc.o
+  	$(AR) rcs $@ $<
+-@@ -53,7 +51,8 @@ scripts: arptables-save arptables-restore arptables.sysv
+- 	install -m 0755 arptables-restore_ $(DESTDIR)$(BINDIR)/arptables-restore
+- 	cat arptables.sysv | sed 's/__EXEC_PATH__/$(tmp1)/g' | sed 's/__SYSCONFIG__/$(tmp2)/g' > arptables.sysv_
+- 	if [ "$(DESTDIR)" != "" ]; then mkdir -p $(DESTDIR)$(INITDIR); fi
+--	if test -d $(DESTDIR)$(INITDIR); then install -m 0755 arptables.sysv_ $(DESTDIR)$(INITDIR)/arptables; fi
+-+	install -d $(DESTDIR)$(INITDIR)
+-+	install -m 0755 arptables.sysv_ $(DESTDIR)$(INITDIR)/arptables
+- 	rm -f arptables-save_ arptables-restore_ arptables.sysv_
+- 
+- .PHONY: install-man
+ diff --git a/extensions/Makefile b/extensions/Makefile
+-index 0189cc9..b046425 100644
++index 0189cc9..e8af782 100644
+ --- a/extensions/Makefile
+ +++ b/extensions/Makefile
+-@@ -4,4 +4,7 @@ EXT_FUNC+=standard mangle CLASSIFY MARK
+- EXT_OBJS+=$(foreach T,$(EXT_FUNC), extensions/arpt_$(T).o)
++@@ -5,3 +5,7 @@ EXT_OBJS+=$(foreach T,$(EXT_FUNC), extensions/arpt_$(T).o)
+  
+  extensions/ebt_%.o: extensions/arpt_%.c include/arptables.h include/arptables_common.h
+--	$(CC) $(CFLAGS) $(PROGSPECS) -c -o $@ $<
++ 	$(CC) $(CFLAGS) $(PROGSPECS) -c -o $@ $<
+ +	$(CC) $(CFLAGS) $(ARPCFLAGS) $(PROGSPECS) -c -o $@ $<
+ +
+ +extensions/arpt_%.o: extensions/arpt_%.c include/arptables.h include/arptables_common.h
+ +	$(CC) $(CFLAGS) $(ARPCFLAGS) $(PROGSPECS) -c -o $@ $<
+ -- 
+-2.12.1
++2.17.1
+ 
+diff --git a/meta-networking/recipes-support/arptables/arptables/arptables-init-busybox.patch b/meta-networking/recipes-support/arptables/arptables/arptables-init-busybox.patch
+deleted file mode 100644
+index 24956c4ca..000000000
+--- a/meta-networking/recipes-support/arptables/arptables/arptables-init-busybox.patch
++++ /dev/null
+@@ -1,77 +0,0 @@
+-Index: arptables-v0.0.3-4/arptables.sysv
+-===================================================================
+---- arptables-v0.0.3-4.orig/arptables.sysv	2010-03-22 16:28:03.000000000 +0300
+-+++ arptables-v0.0.3-4/arptables.sysv	2010-03-22 16:27:51.000000000 +0300
+-@@ -12,10 +12,10 @@
+- # config: __SYSCONFIG__/arptables
+- 
+- source /etc/init.d/functions
+--source /etc/sysconfig/network
+-+# source /etc/sysconfig/network
+- 
+- # Check that networking is up.
+--[ ${NETWORKING} = "no" ] && exit 0
+-+# [ ${NETWORKING} = "no" ] && exit 0
+- 
+- [ -x __EXEC_PATH__/arptables ] || exit 1
+- [ -x __EXEC_PATH__/arptables-save ] || exit 1
+-@@ -28,32 +28,30 @@
+- desc="Arp filtering"
+- 
+- start() {
+--	echo -n $"Starting $desc ($prog): "
+-+	echo -n "Starting $desc ($prog): "
+- 	__EXEC_PATH__/arptables-restore < __SYSCONFIG__/arptables || RETVAL=1
+- 
+- 	if [ $RETVAL -eq 0 ]; then
+--		success "$prog startup"
+--		rm -f /var/lock/subsys/$prog
+-+		echo "$prog ok"
+-+		touch /var/lock/subsys/$prog
+- 	else
+--		failure "$prog startup"
+-+		echo "$prog failed"
+- 	fi
+- 
+--	echo
+- 	return $RETVAL
+- }
+- 
+- stop() {
+--	echo -n $"Stopping $desc ($prog): "
+-+	echo -n "Stopping $desc ($prog): "
+- 	__EXEC_PATH__/arptables-restore < /dev/null || RETVAL=1
+- 
+- 	if [ $RETVAL -eq 0 ]; then
+--		success "$prog shutdown"
+--		rm -f %{_localstatedir}/lock/subsys/$prog
+-+		echo "$prog stopped"
+-+		rm -f /var/lock/subsys/$prog
+- 	else
+--		failure "$prog shutdown"
+-+		echo "$prog failed to stop"
+- 	fi
+- 
+--	echo
+- 	return $RETVAL
+- }
+- 
+-@@ -63,15 +61,14 @@
+- }
+- 
+- save() {
+--	echo -n $"Saving $desc ($prog): "
+-+	echo -n "Saving $desc ($prog): "
+- 	__EXEC_PATH__/arptables-save > __SYSCONFIG__/arptables || RETVAL=1
+- 
+- 	if [ $RETVAL -eq 0 ]; then
+--		success "$prog saved"
+-+		echo "$prog saved"
+- 	else
+--		failure "$prog saved"
+-+		echo "$prog is not saved"
+- 	fi
+--	echo
+- }
+- 
+- case "$1" in
+diff --git a/meta-networking/recipes-support/arptables/arptables/arptables-remove-bashism.patch b/meta-networking/recipes-support/arptables/arptables/arptables-remove-bashism.patch
+deleted file mode 100644
+index f332658bc..000000000
+--- a/meta-networking/recipes-support/arptables/arptables/arptables-remove-bashism.patch
++++ /dev/null
+@@ -1,37 +0,0 @@
+-From cd312bc0e3686404428878d23b8888cba09a20e1 Mon Sep 17 00:00:00 2001
+-From: Robert Yang <liezhi.yang@windriver.com>
+-Date: Thu, 18 Sep 2014 19:46:58 -0700
+-Subject: [PATCH] arptables.sysv: remove bashism
+-
+-Use "." to replace of "source", and change /bin/bash to /bin/sh, the
+-echo $"foo" works well in busybox.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+----
+- arptables.sysv |    4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/arptables.sysv b/arptables.sysv
+-index 7a90bd2..7710376 100644
+---- a/arptables.sysv
+-+++ b/arptables.sysv
+-@@ -1,4 +1,4 @@
+--#!/bin/bash
+-+#!/bin/sh
+- #
+- # init script for arptables
+- #
+-@@ -11,7 +11,7 @@
+- #
+- # config: __SYSCONFIG__/arptables
+- 
+--source /etc/init.d/functions
+-+. /etc/init.d/functions
+- # source /etc/sysconfig/network
+- 
+- # Check that networking is up.
+--- 
+-1.7.9.5
+-
+diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
+index cec1d1f77..c02a19944 100644
+--- a/meta-networking/recipes-support/arptables/arptables_git.bb
++++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+@@ -2,15 +2,13 @@ SUMMARY = "Administration tool for arp packet filtering"
+ SECTION = "net"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+-SRCREV = "f4ab8f63f11a72f14687a6646d04ae1bae3fa45f"
+-PV = "0.0.4+git${SRCPV}"
++SRCREV = "efae8949e31f8b2eb6290f377a28384cecaf105a"
++PV = "0.0.5+git${SRCPV}"
+ 
+ SRC_URI = " \
+     git://git.netfilter.org/arptables \
+     file://0001-Use-ARPCFLAGS-for-package-specific-compiler-flags.patch \
+-    file://arptables-init-busybox.patch \
+     file://arptables-arpt-get-target-fix.patch \
+-    file://arptables-remove-bashism.patch \
+     file://arptables.service \
+ "
+ SRC_URI[arptables.md5sum] = "1d4ab05761f063b0751645d8f2b8f8e5"
+-- 
+2.17.1
 
-=== common-x86 (0) ===
-
-=== qemuarm (0) ===
-
-=== qemuarm64 (0) ===
-
-=== qemux86 (0) ===
-
-=== qemux86_64 (0) ===
-
-=== Number of failed tasks (0) ===
-{| class=wikitable
-|-
-|| qemuarm || 0 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.world.qemuarm.20200315_230040.log
-||
-|-
-|| qemuarm64 || 0 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.world.qemuarm64.20200316_060031.log
-||
-|-
-|| qemux86 || 0 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.world.qemux86.20200316_060038.log
-||
-|-
-|| qemux86_64 || 0 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.world.qemux86-64.20200316_060039.log
-||
-|}
-
-=== PNBLACKLISTs (20) ===
 
 
-sources/meta-openembedded:
-    * meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb:PNBLACKLIST[netkit-rusers]
-= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or
-directory"
-    * meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb:PNBLACKLIST[drbd]
-= "Kernel module Needs forward porting to kernel 5.2+"
-    * meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb:PNBLACKLIST[lowpan-tools]
-= "WARNING these tools are deprecated! Use wpan-tools instead"
-    * meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb:PNBLACKLIST[dnf-plugin-tui]
-?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does
-not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
-    * meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb:PNBLACKLIST[nanopb]
-= "Needs forward porting to use python3"
-    * meta-oe/recipes-extended/socketcan/can-isotp_git.bb:PNBLACKLIST[can-isotp]
-= "Kernel module Needs forward porting to kernel 5.2+"
-    * meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb:PNBLACKLIST[dnfdragora]
-?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does
-not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
-    * meta-oe/recipes-kernel/bpftool/bpftool.bb:PNBLACKLIST[bpftool] =
-"Needs forward porting to kernel 5.2+"
-
-
-sources/meta-yoe:
-    * conf/distro/yoe.inc:PNBLACKLIST[build-appliance-image] = "tries
-to include whole downloads directory in /home/builder/poky :/"
-    * conf/distro/yoe.inc:PNBLACKLIST[smartrefrigerator] = "Needs
-porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[homeautomation] = "Needs porting
-to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[applicationlauncher] = "Needs
-porting to QT > 5.6"
-    * conf/distro/yoe.inc:PNBLACKLIST[spacetouch] = "Needs porting to
-libplanes 1.0"
-    * conf/distro/yoe.inc:PNBLACKLIST[qtviewplanes] = "Needs porting
-to libplanes 1.0"
-    * conf/distro/yoe.inc:PNBLACKLIST[egt-thermostat] = "Needs porting
-to egt 0.8.2+"
-
-
-sources/openembedded-core:
-    * meta/recipes-devtools/dnf/dnf_4.2.2.bb:PNBLACKLIST[dnf] ?=
-"${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does not
-build without package_rpm in PACKAGE_CLASSES due disabled rpm support
-in libsolv', d)}"
-    * meta/recipes-devtools/libdnf/libdnf_0.28.1.bb:PNBLACKLIST[libdnf]
-?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'Does
-not build without package_rpm in PACKAGE_CLASSES due disabled rpm
-support in libsolv', d)}"
-
-
-conf/local.conf:
-    * PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need
-to be tested so much"
-    * PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to
-be tested so much"
-    * PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to
-be tested so much"
-    * PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need
-to be tested so much"
-    * PNBLACKLIST[build-appliance-image] = "tries to include whole
-downloads directory in /home/builder/poky :/"
-
-=== QA issues (0) ===
-{| class=wikitable
-!| Count ||Issue
-|-
-||0 ||already-stripped
-|-
-||0 ||build-deps
-|-
-||0 ||compile-host-path
-|-
-||0 ||file-rdeps
-|-
-||0 ||host-user-contaminated
-|-
-||0 ||installed-vs-shipped
-|-
-||0 ||invalid-pkgconfig
-|-
-||0 ||ldflags
-|-
-||0 ||libdir
-|-
-||0 ||pkgname
-|-
-||0 ||qa_pseudo
-|-
-||0 ||symlink-to-sysroot
-|-
-||0 ||textrel
-|-
-||0 ||unknown-configure-option
-|-
-||0 ||version-going-backwards
-|}
-
-
-
-=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.signatures.20200316_070928.log
-
-No issues detected
-
-
-QA issues by type:
-count: 0 issue: already-stripped
-
-
-count: 0 issue: libdir
-
-
-count: 0 issue: textrel
-
-
-count: 0 issue: build-deps
-
-
-count: 0 issue: file-rdeps
-
-
-count: 0 issue: version-going-backwards
-
-
-count: 0 issue: host-user-contaminated
-
-
-count: 0 issue: installed-vs-shipped
-
-
-count: 0 issue: unknown-configure-option
-
-
-count: 0 issue: symlink-to-sysroot
-
-
-count: 0 issue: invalid-pkgconfig
-
-
-count: 0 issue: pkgname
-
-
-count: 0 issue: ldflags
-
-
-count: 0 issue: compile-host-path
-
-
-count: 0 issue: qa_pseudo
-
-
-
-This git log matches with the metadata as seen by qemuarm build.
-In some cases qemux86 and qemux86-64 builds are built with slightly
-different metadata, you can see the exact version near the top of each
-log.world.qemu* files linked from the report
-~/oe/world/yoe ~/oe/world/yoe
-
-== Tested changes (not included in master yet) - bitbake ==
-latest upstream commit:
-e67dfa4a tinfoil: Update to match recent knotty console changes
-not included in master yet:
-
-== Tested changes (not included in master yet) - openembedded-core ==
-latest upstream commit:
-61d80b07bc build-appliance-image: Update to master head revision
-not included in master yet:
-c66847865c runit: Add runit and related recipes
-0295e9228f qemux86: Add identical qemux86copy variant for tests
-68910da942 qemuppc64: Add a QEMU machine definition for ppc64
-9ce9e399db linux-yocto: Add powerpc64le support
-02a4e9e755 report-error: Allow to upload reports automatically
-930e0a3419 report-error.bbclass: replace angle brackets with &lt; and &gt;
-bcc40312e9 oeqa: Extend parselogs to rpi4
-90ecbe3a82 bison: Update to 3.5.3
-3dbef4b1c5 bison: Reset load average settings if specified in environment
-
-== Tested changes (not included in master yet) - meta-openembedded ==
-latest upstream commit:
-802f9127b flashrom: Fix build with clang
-not included in master yet:
-66a52463f drone: Add CI support
-e3e18be30 pipewire: upgrade 0.2.7 -> 0.3.1
-201e8b7d3 pipewire: Link with libatomic on mips/i*86
-86d26c74f mutter: depend on pipewire-0.2 in PACKAGECONFIG[remote-desktop]
-
-== Tested changes (not included in master yet) - meta-qt5 ==
-latest upstream commit:
-89de99e python-{pyqt5,pyqtchart}: fold .inc file into .bb
-not included in master yet:
-af02c6d qt5-creator: Inherit mime-xdg
-ea67b19 gstreamer1.0-plugins-good: Turn on qt5 packageconfig
-50e95c6 qtmultimedia: Enable gstreamer support
-
-== Tested changes (not included in master yet) - meta-browser ==
-latest upstream commit:
-830ef43 chromium: update to 80.0.3987.132
-not included in master yet:
-b4a58f8 chromium: Fix build on 32bit arches with 64bit time_t
-bf5256c chromium: Fix build with clang10/gcc10
-~/oe/world/yoe
 
