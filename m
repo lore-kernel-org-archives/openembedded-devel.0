@@ -1,49 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com
-	[209.85.222.172])
-	by mail.openembedded.org (Postfix) with ESMTP id D13BC60B28
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C09B9609A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 07:50:57 +0000 (UTC)
-Received: by mail-qk1-f172.google.com with SMTP id f3so37202142qkh.1
+	Wed, 18 Mar 2020 09:29:28 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 02I9T96B028776
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 00:50:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=/CLRCwVBrm3Z9AchDz+oxLRfhLvIugD9X6ynryouE1s=;
-	b=uSyx7ybQqBWSxKUwxZWx7d0yCiu79eKcFUdE8M/cT6kIqjwjy71VBNAl84vlDLdk6l
-	VfLbQsLcB/S8PEfJceHUL2p0qbND/PlV1AXmQtzIKA0mi/tjwoCRaGJb65iWSfqBM9xg
-	ZQhl6rQQR2bMI9TJx0PPB0MWeOhQPI1bgfgQvs621HmvvvRK5fj8Wvnvu8vjDPLq0yr6
-	xCqXrJmnjNe/M2XMXpgaH7tfm//EQtFZ9BF/tnhf3+XFW5YSAh5RFR+SKAArJNHGJgmy
-	mQEBu3Y5aiKYtkZ1qexwqFe/j97951ufgMx5zKRW6T0Ll+iCs2GCCyqXQ80IK7r+NlV0
-	DHHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=/CLRCwVBrm3Z9AchDz+oxLRfhLvIugD9X6ynryouE1s=;
-	b=tr1f37wDjTg1dZJaxAivWt1XN08C2/RTjk0BSN24WjwFil2gZgvqd3acJ2GbH7Mu6R
-	PSLMJQweJ+8o807wzyudSl+J3IgNNTNYvZn0hdJgV30NDQ8RvublMJp6uoVHc9TXmr8C
-	SBLQENxAZidhAxjjRESg5oyoeKh3s3NZPbdviXvyu+FYy7ry9N1/1X8kThLsQY1OzsCr
-	6nEx4XUZUMVU7uvtEjok7lYO5nz2VnQR3VPKV3Ypjk5Zr9kW0KeILPruO2Ie0pxqblkB
-	Yd5PgI/P5WjNVQI7ctetrbWEuGYJzxHAoQW8dlN21sv3soxLQkd0+rRStDrUxyF7rxkS
-	05rg==
-X-Gm-Message-State: ANhLgQ36RHetc8eYKq24ya0j7NwYwPlJoENK1Lkit1oLdWrH5MYWeSoD
-	aBCrOMAsPcT7rgxqZuTjUESXDmPz/xhidg8SblQ7QpdkDw0=
-X-Google-Smtp-Source: ADFU+vuXTWXPd5O3NfFab5/feVKW+/ovOD24w/e4kiKjeOEA6ZpzTZ/HK2toXANvCuskRYh0JSGnIXWe+jvmtr5NP9A=
-X-Received: by 2002:a37:b003:: with SMTP id z3mr2660998qke.431.1584517858461; 
-	Wed, 18 Mar 2020 00:50:58 -0700 (PDT)
+	Wed, 18 Mar 2020 02:29:19 -0700
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.487.0; Wed, 18 Mar 2020 02:28:58 -0700
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 18 Mar 2020 17:28:57 +0800
+Message-ID: <20200318092857.192541-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-References: <1584515992-22564-1-git-send-email-wangmy@cn.fujitsu.com>
-	<1584515992-22564-4-git-send-email-wangmy@cn.fujitsu.com>
-	<CAMKF1sqtJsVpgiV4XUdAnhEvC5ZFS6JcyvKvTJ2KFyTYHEry4Q@mail.gmail.com>
-In-Reply-To: <CAMKF1sqtJsVpgiV4XUdAnhEvC5ZFS6JcyvKvTJ2KFyTYHEry4Q@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Mar 2020 00:50:32 -0700
-Message-ID: <CAMKF1srcXQr2YcDzKdtQtn93gJiL-2m4Aj+MGsnwdbyCtqNTXQ@mail.gmail.com>
-To: Wang Mingyu <wangmy@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe] [PATCH] rocksdb: upgrade 6.5.2 -> 6.6.4
+Subject: [meta-networking][PATCH] corosync: update corosync.conf to 3.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,116 +31,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2020 07:50:58 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Mar 2020 09:29:28 -0000
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-also x86/clang
-https://errors.yoctoproject.org/Errors/Details/397161/
+From: Mingli Yu <mingli.yu@windriver.com>
 
-On Wed, Mar 18, 2020 at 12:48 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> fails on mips https://errors.yoctoproject.org/Errors/Details/397160/
->
-> On Tue, Mar 17, 2020 at 6:50 PM Wang Mingyu <wangmy@cn.fujitsu.com> wrote=
-:
-> >
-> > 0001-Fix-build-breakage-from-lock_guard-error-6161.patch
-> > removed since it is included in 6.6.4
-> >
-> > Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
-> > ---
-> >  ...-breakage-from-lock_guard-error-6161.patch | 36 -------------------
-> >  meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb    |  7 ++--
-> >  2 files changed, 3 insertions(+), 40 deletions(-)
-> >  delete mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-br=
-eakage-from-lock_guard-error-6161.patch
-> >
-> > diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-=
-from-lock_guard-error-6161.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-F=
-ix-build-breakage-from-lock_guard-error-6161.patch
-> > deleted file mode 100644
-> > index ac87d0c60..000000000
-> > --- a/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-from-lo=
-ck_guard-error-6161.patch
-> > +++ /dev/null
-> > @@ -1,36 +0,0 @@
-> > -From b626703de7ece507f360507e49d3ecb448b12e07 Mon Sep 17 00:00:00 2001
-> > -From: Maysam Yabandeh <myabandeh@fb.com>
-> > -Date: Thu, 12 Dec 2019 13:48:50 -0800
-> > -Subject: [PATCH] Fix build breakage from lock_guard error (#6161)
-> > -
-> > -Summary:
-> > -This change fixes a source issue that caused compile time error which =
-breaks build for many fbcode services in that setup. The size() member func=
-tion of channel is a const member, so member variables accessed within it a=
-re implicitly const as well. This caused error when clang fails to resolve =
-to a constructor that takes std::mutex because the suitable constructor got=
- rejected due to loss of constness for its argument. The fix is to add muta=
-ble modifier to the lock_ member of channel.
-> > -Pull Request resolved: https://github.com/facebook/rocksdb/pull/6161
-> > -
-> > -Differential Revision: D18967685
-> > -
-> > -Pulled By: maysamyabandeh
-> > -
-> > -Upstream-Status: Backport
-> > -
-> > -fbshipit-source-id: 698b6a5153c3c92eeacb842c467aa28cc350d432
-> > ----
-> > - util/channel.h | 2 +-
-> > - 1 file changed, 1 insertion(+), 1 deletion(-)
-> > -
-> > -diff --git a/util/channel.h b/util/channel.h
-> > -index 0225482c0..a8a47680a 100644
-> > ---- a/util/channel.h
-> > -+++ b/util/channel.h
-> > -@@ -60,7 +60,7 @@ class channel {
-> > -
-> > -  private:
-> > -   std::condition_variable cv_;
-> > --  std::mutex lock_;
-> > -+  mutable std::mutex lock_;
-> > -   std::queue<T> buffer_;
-> > -   bool eof_;
-> > - };
-> > ---
-> > -2.24.1
-> > -
-> > diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recip=
-es-dbs/rocksdb/rocksdb_git.bb
-> > index 713d5bb14..e82b77e14 100644
-> > --- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-> > +++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-> > @@ -6,12 +6,11 @@ LIC_FILES_CHKSUM =3D "file://LICENSE.Apache;md5=3D3b8=
-3ef96387f14655fc854ddc3c6bd57 \
-> >                      file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263 \
-> >                      file://LICENSE.leveldb;md5=3Dfb04ff57a14f308f2eed4=
-a9b87d45837"
-> >
-> > -SRCREV =3D "4cfbd87afd08a16df28436fb990ef6b154ee6114"
-> > -SRCBRANCH =3D "6.5.fb"
-> > -PV =3D "6.5.2"
-> > +SRCREV =3D "551a110918493a19d11243f53408b97485de1411"
-> > +SRCBRANCH =3D "6.6.fb"
-> > +PV =3D "6.6.4"
-> >
-> >  SRC_URI =3D "git://github.com/facebook/${BPN}.git;branch=3D${SRCBRANCH=
-} \
-> > -           file://0001-Fix-build-breakage-from-lock_guard-error-6161.p=
-atch \
-> >             file://0001-db-write_thread.cc-Initialize-state.patch \
-> >            "
-> >
-> > --
-> > 2.17.1
-> >
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Update corosync.conf to make it valid after corosync
+upgrades to 3.x.
+
+Reference: https://sources.debian.org/data/main/c/corosync/3.0.3-2/debian/patches/Make-the-example-config-valid.patch
+
+Signed-off-by: Mingli Yu <mingli.yu@windriver.com>
+---
+ .../corosync/corosync/corosync.conf           | 85 ++++++++++---------
+ 1 file changed, 44 insertions(+), 41 deletions(-)
+
+diff --git a/meta-networking/recipes-extended/corosync/corosync/corosync.conf b/meta-networking/recipes-extended/corosync/corosync/corosync.conf
+index 6aef9de95..744a30ff5 100644
+--- a/meta-networking/recipes-extended/corosync/corosync/corosync.conf
++++ b/meta-networking/recipes-extended/corosync/corosync/corosync.conf
+@@ -1,58 +1,61 @@
+-# Starting point for cluster with pacemaker/openais
+-compatibility: none
+-
+-corosync {
+-	 user:  root
+-	 group: root
+-}
+-
+-aisexec {
+-	with Pacemaker
+-	user:  root
+-	group: root
+-}
+-
+-service {
+-	name: pacemaker
+-	ver: 1
+-}
+-
++# Please read the corosync.conf.5 manual page
+ totem {
+ 	version: 2
+-	secauth: off
+-	threads: 0
+-	interface {
+-		ringnumber: 0
+-		# Cluster network address
+-		bindnetaddr: 192.168.10.0
+-		# Should be fine in most cases, don't forget to allow
+-		# packets for this address/port in netfilter if there
+-		# is restrictive policy set for cluster network
+-		mcastaddr: 226.94.1.1
+-		mcastport: 5405
+-	}
++
++	# Set name of the cluster
++	cluster_name: testCluster
++
++	# crypto_cipher and crypto_hash: Used for mutual node authentication.
++	# If you choose to enable this, then do remember to create a shared
++	# secret with "corosync-keygen".
++	# enabling crypto_cipher, requires also enabling of crypto_hash.
++	# crypto works only with knet transport
++	crypto_cipher: none
++	crypto_hash: none
+ }
+ 
+ logging {
++	# Log the source file and line where messages are being
++	# generated. When in doubt, leave off. Potentially useful for
++	# debugging.
+ 	fileline: off
+-	to_stderr: no
++	# Log to standard error. When in doubt, set to yes. Useful when
++	# running in the foreground (when invoking "corosync -f")
++	to_stderr: yes
++	# Log to a log file. When set to "no", the "logfile" option
++	# must not be set.
+ 	to_logfile: yes
+-	to_syslog: yes
+ 	logfile: /var/log/cluster/corosync.log
++	# Log to the system log daemon. When in doubt, set to yes.
++	to_syslog: yes
++	# Log debug messages (very verbose). When in doubt, leave off.
+ 	debug: off
+-	timestamp: on
++	# Log messages with time stamps. When in doubt, set to hires (or on)
++	#timestamp: hires
+ 	logger_subsys {
+-		subsys: AMF
++		subsys: QUORUM
+ 		debug: off
+ 	}
+ }
+ 
+-amf {
+-	mode: disabled
+-}
+-
+ quorum {
+-	# Quorum for the Pacemaker Cluster Resource Manager
++	# Enable and configure quorum subsystem (default: off)
++	# see also corosync.conf.5 and votequorum.5
+ 	provider: corosync_votequorum
+-	expected_votes: 1
++}
++
++nodelist {
++	# Change/uncomment/add node sections to match cluster configuration
++
++	node {
++		# Hostname of the node
++		name: node1
++		# Cluster membership node identifier
++		nodeid: 1
++		# Address of first link
++		ring0_addr: 127.0.0.1
++		# When knet transport is used it's possible to define up to 8 links
++		#ring1_addr: 192.168.1.1
++	}
++	# ...
+ }
+-- 
+2.24.1
+
 
