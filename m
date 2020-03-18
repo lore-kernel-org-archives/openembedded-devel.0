@@ -1,33 +1,33 @@
 Return-Path: <SRS0=VQHR=5D=stusta.de=bunk@stusta.mhn.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id A078C60AD8
+	by mail.openembedded.org (Postfix) with ESMTP id 9F78A605F2
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 18 Mar 2020 18:52:03 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48jK022ngsz2J
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48jK025z42z5c
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 19:52:01 +0100 (CET)
+	Wed, 18 Mar 2020 19:52:02 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
 	s=default; t=1584557522;
-	bh=E1TUxHZ5HtGilp+pYB+We0v5dp647LwzM/mm3ecZWQk=;
+	bh=W987JBGkck0JeeXa4FS5rrsHtN1lWOw4tF/ZPz7L118=;
 	h=From:To:Subject:Date:From;
-	b=sxwkeegDLtGCC2YkuKCjR9nJeR5hhPVtMRZpiVJFMEYkn2uyjNMWDpGfgJ601GDJm
-	X8Ae5U3MnYpD6W1I1pPFmTJNEqPcTpSA4zB50RTS1GNg0Nm19XzF2v+l9rMWQSB4Pz
-	1AUGpSnDIYb0T5UjOz5AQF3sUq480a6t/glIMk6eeNWmcEipaSZDtQsT0ctRXnEyDq
-	9njsIl5onE/vhwFun/awNQw4msxXOhmFjk7AQID2EmU17MmRW6AXZ1WSH4Jw1ZhWKh
-	KyNYoyzOva50kFj+npgsmAIghA4gyaRTqJeisogiQC0guaqzFgOLN/tP/yFfJeGHAG
-	ZF29QSOmlHM+7l+o8aSsetECK9GVgVYVJZ3X+BRNMAxtolSp3zZr0OvgBPfeMIhsbW
-	w3NR14ewRffwgnMhCRSVvgicL1LzGzX+URWuQV+JcUv8iX6o0u3NpHx7bwgen5TZeE
-	RgoT9m7ECT6ykTFNHARGbQl4FRrCcDvkV4MEGFEP0MFgCLBiYqHo1BfEp/pgo2IsL7
-	kIQV1gTECOpwZFYosWsaiLRK84G0x2suTzi7byuFDWCdQIkQXuu53LiNo1vg2gbPaj
-	BHq5HN4prMFkdXXmmbqSvt+fMc4JQINUtJ84lQzdRzI1bVAYwPY1htitS0a1QHKO4k
-	jZzgkemgMI1ZBViwFoHbM0IM=
+	b=iDorLaGnWj9MSb6CNthB9TkHZdVOFS000JwXzgg2wW6Z7tsm+FadjrvW2NkDL+8HW
+	xUb8HjNuqtpUugX4xbGnfIFJMGUL0OOWHFQWZKYDQKQglBGFjAGlkavh2VmdeLmY5z
+	ICmOeIvWz6UgdJ3mRH2R+FHvaS8TfKOvw8hmA7WlSZ4/foMfgO/tDu8J76Gi3svD1x
+	OO7UJo/Maec98ymlunklDDnoDEOBF7+jgyK5JFFkG2q4N+kw3RpSrUlhAOjiA66mPU
+	LRDBhs02nsVDDwSpmjccfp5MzUMioLWVaLeTZrtBntxbHpriStSkmzTcdvFrHa+BrD
+	29zcy1nKO2lZxZDELtwi8ShpRz48VnpXAmHI37QmwoN0SsRNthuz1Jp/VF10O2oTg9
+	JZYygIMo9tXZZVzaLUzHhfXdeS2QOXSyU9imSc7N4wlBaSZNZb78X6/Ol1jAEsdZyO
+	uk4XaO1ffU7LvSa7MA1meBygce3KKStlUi/uQFacfcWCkXldcoapRFOFnVQnn4Tsg6
+	NHERASCAaDfl4XGJWn7e3ZBdVXpff/Yo6kSKBLOvOXW9++uAbvZGw3cdnZ9bEvhj1i
+	1mE/jPeR99du2NmFrDctrfugvLgSj9cpK9OdA/T/rHq1Y/JBOB5VtJGWRBiB57/SYn
+	875FvXy+MLO4WJsf2qBZmx5E=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Mar 2020 20:51:59 +0200
-Message-Id: <20200318185200.28166-1-bunk@stusta.de>
+Date: Wed, 18 Mar 2020 20:52:00 +0200
+Message-Id: <20200318185200.28166-2-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] libqmi: Upgrade 1.24.6 -> 1.24.8
+Subject: [meta-oe][PATCH] modemmanager: Upgrade 1.12.6 -> 1.12.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,31 +42,31 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 18 Mar 2020 18:52:05 -0000
 
-Bugfix release on the 1.24 stable branch.
+Bugfix release on the 1.12 stable branch.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../libqmi/{libqmi_1.24.6.bb => libqmi_1.24.8.bb}              | 3 +--
+ .../{modemmanager_1.12.6.bb => modemmanager_1.12.8.bb}         | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/libqmi/{libqmi_1.24.6.bb => libqmi_1.24.8.bb} (85%)
+ rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.12.6.bb => modemmanager_1.12.8.bb} (93%)
 
-diff --git a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.6.bb b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.8.bb
-similarity index 85%
-rename from meta-oe/recipes-connectivity/libqmi/libqmi_1.24.6.bb
-rename to meta-oe/recipes-connectivity/libqmi/libqmi_1.24.8.bb
-index a86215aa3..124b0f1b0 100644
---- a/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.6.bb
-+++ b/meta-oe/recipes-connectivity/libqmi/libqmi_1.24.8.bb
-@@ -14,8 +14,7 @@ inherit autotools pkgconfig bash-completion
- SRC_URI = "http://www.freedesktop.org/software/${BPN}/${BPN}-${PV}.tar.xz \
+diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.6.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.8.bb
+similarity index 93%
+rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.6.bb
+rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.8.bb
+index ef6ba6bb4..47a86b919 100644
+--- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.6.bb
++++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.8.bb
+@@ -14,8 +14,7 @@ DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
+ SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
             "
  
--SRC_URI[md5sum] = "5d50233394a33e43dee3e70e197323e5"
--SRC_URI[sha256sum] = "1325257bc16de7b2b443fa689826c993474bdbd6e78c7a1e60e527269b44d8c9"
-+SRC_URI[sha256sum] = "c793db2c91d7928160341b357b26315d9c879ecb36699cb7a6b36054cba60893"
+-SRC_URI[md5sum] = "796bf7bfc156c4229cef1a9cb8c79f37"
+-SRC_URI[sha256sum] = "2eb3353ee5518005c51d429308695c69d8c38cf2fd9102b04f785c03a0cc624c"
++SRC_URI[sha256sum] = "68b53d0615ba0d3e2bbf386ed029dfe644a6a30a79ab8d85523527bb4e713aff"
  
- PACKAGECONFIG ??= "udev mbim"
- PACKAGECONFIG[udev] = ",--without-udev,libgudev"
+ S = "${WORKDIR}/ModemManager-${PV}"
+ 
 -- 
 2.17.1
 
