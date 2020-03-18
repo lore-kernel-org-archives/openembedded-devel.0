@@ -1,33 +1,33 @@
 Return-Path: <SRS0=VQHR=5D=stusta.de=bunk@stusta.mhn.de>
 Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F78A605F2
+	by mail.openembedded.org (Postfix) with ESMTP id EA2B6605B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 18:52:03 +0000 (UTC)
+	Wed, 18 Mar 2020 19:18:31 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48jK025z42z5c
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48jKZb5xjSz2J
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 19:52:02 +0100 (CET)
+	Wed, 18 Mar 2020 20:18:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
-	s=default; t=1584557522;
-	bh=W987JBGkck0JeeXa4FS5rrsHtN1lWOw4tF/ZPz7L118=;
+	s=default; t=1584559111;
+	bh=syvUh+oxlygzTQWhDEwOOkzt4drauFZG4n/OlOplMd0=;
 	h=From:To:Subject:Date:From;
-	b=iDorLaGnWj9MSb6CNthB9TkHZdVOFS000JwXzgg2wW6Z7tsm+FadjrvW2NkDL+8HW
-	xUb8HjNuqtpUugX4xbGnfIFJMGUL0OOWHFQWZKYDQKQglBGFjAGlkavh2VmdeLmY5z
-	ICmOeIvWz6UgdJ3mRH2R+FHvaS8TfKOvw8hmA7WlSZ4/foMfgO/tDu8J76Gi3svD1x
-	OO7UJo/Maec98ymlunklDDnoDEOBF7+jgyK5JFFkG2q4N+kw3RpSrUlhAOjiA66mPU
-	LRDBhs02nsVDDwSpmjccfp5MzUMioLWVaLeTZrtBntxbHpriStSkmzTcdvFrHa+BrD
-	29zcy1nKO2lZxZDELtwi8ShpRz48VnpXAmHI37QmwoN0SsRNthuz1Jp/VF10O2oTg9
-	JZYygIMo9tXZZVzaLUzHhfXdeS2QOXSyU9imSc7N4wlBaSZNZb78X6/Ol1jAEsdZyO
-	uk4XaO1ffU7LvSa7MA1meBygce3KKStlUi/uQFacfcWCkXldcoapRFOFnVQnn4Tsg6
-	NHERASCAaDfl4XGJWn7e3ZBdVXpff/Yo6kSKBLOvOXW9++uAbvZGw3cdnZ9bEvhj1i
-	1mE/jPeR99du2NmFrDctrfugvLgSj9cpK9OdA/T/rHq1Y/JBOB5VtJGWRBiB57/SYn
-	875FvXy+MLO4WJsf2qBZmx5E=
+	b=sE9bech6ysPtm6HLXjR257JlWovM9uaUoP+3jG5E20Tgngz/w4YKH1monRQiEk6bM
+	4cruwwbpo4WUF9ea22Zg3rR+GarWpHTXlGdHc6oPo6lL+xXWqylymoFDj71yt8vlNU
+	xdLR3RK0OvxwmVTUjraUSHZjJfuLDJRZIc1VXDwL2wSZA0tQjXLe0xN9sFXZ/g0Y6p
+	bp2GzUwXOp3W7H7oxPcAUcID8/YLJsBXPaGv0r4c/6eDQH9HQ3tP5lvv6gqekMrFCV
+	Nz8GLsM5buYwTGGOYFDNEKDbCxeFBvvTpjjP0E9DhKejdmDIXUxZSPnr67WUlSiVut
+	Cwy+mX2IkPKpqBt7AIG1+xE6D6w6DmSKFmQlPNFT13bUiOTrlgKA2+DAixbBYRzpwf
+	29hYkbJk9p9owxR2ftBhBxQi5VA9Y16fiUsS3Ql894DUgFrOf7HSey7nrAuNw1+FcT
+	hWK5rwTzYSckaJEJZlOD3Jz9hvZySlMscIIglh+BiDbTetcis3qKgxupG/TXHf0cup
+	8Qy8+AokD2iGflm/ZzR+EwOH2kI5MjhPdgvCRZWXZoNFr14cZOm/MTfjW81+8ieeYf
+	r+FIQvgkkMGmyXqswBE95ZKp+yefjtRTH83Rgaf1SZ1H4KdRGMWF1dZWkPlKANR8PM
+	PRN+zDHhEN6zJ/8AjLqqRFQk=
 From: Adrian Bunk <bunk@stusta.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Mar 2020 20:52:00 +0200
-Message-Id: <20200318185200.28166-2-bunk@stusta.de>
+Date: Wed, 18 Mar 2020 21:18:25 +0200
+Message-Id: <20200318191825.18696-1-bunk@stusta.de>
 X-Mailer: git-send-email 2.17.1
-Subject: [meta-oe][PATCH] modemmanager: Upgrade 1.12.6 -> 1.12.8
+Subject: [meta-networking][PATCH] networkmanager: Upgrade 1.22.8 -> 1.22.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,32 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2020 18:52:05 -0000
+X-List-Received-Date: Wed, 18 Mar 2020 19:18:32 -0000
 
-Bugfix release on the 1.12 stable branch.
+Upgrade on the 1.22 stable branch.
 
 Signed-off-by: Adrian Bunk <bunk@stusta.de>
 ---
- .../{modemmanager_1.12.6.bb => modemmanager_1.12.8.bb}         | 3 +--
+ .../{networkmanager_1.22.8.bb => networkmanager_1.22.10.bb}    | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/modemmanager/{modemmanager_1.12.6.bb => modemmanager_1.12.8.bb} (93%)
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager_1.22.8.bb => networkmanager_1.22.10.bb} (97%)
 
-diff --git a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.6.bb b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.8.bb
-similarity index 93%
-rename from meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.6.bb
-rename to meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.8.bb
-index ef6ba6bb4..47a86b919 100644
---- a/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.6.bb
-+++ b/meta-oe/recipes-connectivity/modemmanager/modemmanager_1.12.8.bb
-@@ -14,8 +14,7 @@ DEPENDS = "glib-2.0 libgudev intltool-native libxslt-native"
- SRC_URI = "http://www.freedesktop.org/software/ModemManager/ModemManager-${PV}.tar.xz \
-            "
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.8.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.10.bb
+similarity index 97%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.8.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.10.bb
+index 297f05618..33a2b7c0c 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.8.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.22.10.bb
+@@ -33,8 +33,7 @@ SRC_URI_append_libc-musl = " \
+     file://musl/0003-Fix-build-with-musl-for-n-dhcp4.patch \
+     file://musl/0004-Fix-build-with-musl-systemd-specific.patch \
+ "
+-SRC_URI[md5sum] = "b512b4985fe3b7e0b37fdac7ab5b8284"
+-SRC_URI[sha256sum] = "9511b92c72c6b5b4f063de9590ef6560696657bb6ba7d360676151742c7dab4f"
++SRC_URI[sha256sum] = "2b29ccc1531ba7ebba95a97f40c22b963838e8b6833745efe8e6fb71fd8fca77"
  
--SRC_URI[md5sum] = "796bf7bfc156c4229cef1a9cb8c79f37"
--SRC_URI[sha256sum] = "2eb3353ee5518005c51d429308695c69d8c38cf2fd9102b04f785c03a0cc624c"
-+SRC_URI[sha256sum] = "68b53d0615ba0d3e2bbf386ed029dfe644a6a30a79ab8d85523527bb4e713aff"
- 
- S = "${WORKDIR}/ModemManager-${PV}"
+ S = "${WORKDIR}/NetworkManager-${PV}"
  
 -- 
 2.17.1
