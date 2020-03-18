@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com
-	[209.85.128.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 12C5C60A5A
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com
+	[209.85.128.49])
+	by mail.openembedded.org (Postfix) with ESMTP id E90F060ADF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 20:44:26 +0000 (UTC)
-Received: by mail-wm1-f51.google.com with SMTP id n8so5047983wmc.4
+	Wed, 18 Mar 2020 20:44:28 +0000 (UTC)
+Received: by mail-wm1-f49.google.com with SMTP id z12so4965303wmf.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 13:44:28 -0700 (PDT)
+	Wed, 18 Mar 2020 13:44:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=Qw+HlV1PZlPBKIcCkgKA1xLiD562LGiJB0ORLUDvIIg=;
-	b=UZ7IXwIyjnrwqDJed5HJNJHTQvtf5dn5HtgpltwQtlaoVFm8nIid89MFfDOeA/ZaDm
-	1NrlBwJx+yYjmt8kEykr8R/qGPtSYDg7aAJXb4FoaOtQAPjRVVHEZ5Y/hqf2pnWBGel+
-	8VmBgTNxJsYu3juwRXc2VvAXvpAz93YFOYvD+v4aK55FHqanwzfdgKrbknKOtjfiyJ90
-	L6EYAMu3jF7dCg9Nc7ZpSyz7OAjAghUXZtYuYvg5OPOomnL9nyIEcadlAB9dI0A+hs96
-	12bpxz7AwwpmOAGj+kszvX99La7Ey48b5a4ku1w3HSgrknlnIpIG0APDtpkS2Y4Pn3b4
-	wmrg==
+	bh=gNpftL8qzHejFS3pvq3dt/W31dEyArvnEjzRgymD20A=;
+	b=kdkFE6q8c1XPJLXsszAfxizO7/yCSa4cQ2lds18QKH0oXJNAgVhIxtp3Z8U+qVhAHj
+	icXN9s29F8bSCVaX96evs6PfIh9i8HYqLxC6wHv3PRrjsYmx09OdSuNNYiU4c3rn+o3y
+	15j/mH4BnSUK7ZjqpLoVnLdgc0g4rtL2leVtDEx6nurr/hHI+7ayZZNqw1C7lQho3Jg7
+	JyKtNuR3rdNr5PmBCP4OacRkX4SX/gsVZNT0HFZ3uzXdhv8bvsh0sB9hiNJaGsU0yzkU
+	L0Yr01IIFWpNrPHH7eIWSrOx2LKZcNQJKINqntT0wbaQlajyN0lkU67L4/NX+4DV4CDS
+	YCVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=Qw+HlV1PZlPBKIcCkgKA1xLiD562LGiJB0ORLUDvIIg=;
-	b=WnxtrzBQMXHhCCBkFpq+7fx4nENLaC3MVcKBEi+85pnbHIInx9Lwjm+AVV/kWFkWrA
-	Wjqnzl8hmoW3FjtSE/oLehLhtfI5Hm5x1upMjdNM/Rk2LhCF45+kQzxBXpHVS+73r58v
-	RQWERci++4fGSdRP/wbqNveZ/XgtQMAXdn4v7edD2iRX/GuysVqqSN7JyBGKoOco+xzt
-	T0Q01rwEACn8nSsnDCUsji1OXL0TO+DHoH9d8ldhgeV/Ut8AIOjDEKXcJI9vxH18RpR+
-	hxA9knQQ7MyJIB1ZX4IkTxJvF1p14YIW9NPBrfy1fKTCVMm9N1cLWctlvExi2u8Vcvq7
-	41fg==
-X-Gm-Message-State: ANhLgQ186Rsu5k9RnZ4RLklqwiTqWZAyavYR6vfE+PBv5S3SA/W6iQKY
-	xryWyYuFEpR9V+c+L/SdJYRZvVxOSRs=
-X-Google-Smtp-Source: ADFU+vv5bXuPpG3b2ZKdpff9l2XJLqPRjub4qojPLvxAQAY4XC1u+TPmwsJtHRn/wakGykCZADJjPw==
-X-Received: by 2002:a1c:988d:: with SMTP id a135mr4386705wme.16.1584564267285; 
-	Wed, 18 Mar 2020 13:44:27 -0700 (PDT)
+	bh=gNpftL8qzHejFS3pvq3dt/W31dEyArvnEjzRgymD20A=;
+	b=iopf8IY7OXvl+8RblNyT2phWn9INAO35QFCFBeOboBlO9qWh+IFdFgYUaHEjUYie0g
+	cR6daOpgIpzffFNYuREqzHH0dIrOKp2Cc+ZcTNRU1tm39tapFcHiI2wjb8AZxA7I3jPs
+	jM4bR8Pp9PJUVTRaYkYaIf3sa6cDL2UR1L4fnH5r2Hyyclv8uiJhcbGFXtWbMev2U63O
+	FnfVBZ3mXuBnvhGkgnek43+Fl+SlPKVH9yL6MnpLGbPlV0UfxMd3GbQtzyO90e9Rowo3
+	e9cK8OByOkCfF41feY39NvVMub5lUvRRdhbBxrL0tkskEt31sK3ME+Qf54wIE0DTRacC
+	cisQ==
+X-Gm-Message-State: ANhLgQ0Z4R3m0f4TT/uuBuCrHJWdZ2wEwfia58XGzeVx0EvXKZLtndG1
+	RQ+gvtds1op5Mx/4WrmfP3cra0m0ez8=
+X-Google-Smtp-Source: ADFU+vsJHYuT+IPKa2llux3eZyptk5gBJYgC5t8+pbVB0QhQwP8GXyH+0qHYDaQOV8Tmua/ioDDd5Q==
+X-Received: by 2002:a7b:c770:: with SMTP id x16mr6851122wmk.159.1584564268920; 
+	Wed, 18 Mar 2020 13:44:28 -0700 (PDT)
 Received: from superandy.speedport.ip
 	(p200300F07F0E8C3838FF9D0BB177A6DE.dip0.t-ipconnect.de.
 	[2003:f0:7f0e:8c38:38ff:9d0b:b177:a6de])
 	by smtp.gmail.com with ESMTPSA id
-	j188sm3982590wmj.36.2020.03.18.13.44.24
+	j188sm3982590wmj.36.2020.03.18.13.44.27
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 18 Mar 2020 13:44:25 -0700 (PDT)
+	Wed, 18 Mar 2020 13:44:28 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Mar 2020 21:44:08 +0100
-Message-Id: <20200318204411.12996-2-schnitzeltony@gmail.com>
+Date: Wed, 18 Mar 2020 21:44:09 +0100
+Message-Id: <20200318204411.12996-3-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200318204411.12996-1-schnitzeltony@gmail.com>
 References: <20200318204411.12996-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 2/5] network-manager-applet: upgrade 1.8.24 -> 1.16.0
+Subject: [PATCH 3/5] networkmanager-openvpn: upgrade 1.8.10 -> 1.8.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,101 +62,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2020 20:44:27 -0000
+X-List-Received-Date: Wed, 18 Mar 2020 20:44:29 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-* License changed in [1] - it is still GPLv2
-
+From [1]:
 =======================================================
-network-manager-applet-1.16.0
-Overview of changes since network-manager-applet-1.8.24
+NetworkManager-openvpn-1.8.12
+Overview of changes since NetworkManager-openvpn-1.8.10
 =======================================================
 
-* Turned libnma into an external dependency and move to
-  "https://gitlab.gnome.org/GNOME/libnma". To build,
-  libnma-1.8.28 or newer is required.
-* The libnm-gtk, the deprecated libnm-glib compatibility library was
-  removed. Everybody should be using libnma by now.
-* Improve applet icons for hidpi.
-* Fix transparent dialog borders.
+* The auth helper in external UI mode can now be run without a display
+  server. Future nmcli version will utilize this for handling the
+  secrets without a graphical desktop.
+* libnm-glib compatibility (NetworkManager < 1.0) is disabled by default.
+  It can be enabled by passing --with-libnm-glib to configure script.
+  Nobody should need it by now. Users that still use this are encouraged
+  to let us know before the libnm-glib support is removed for good.
+* Add support for the following OpenVPN options: tls-version-min,
+  tls-version-max, compress.
+* Support inline CRL blobs during import.
+* Allow option mssfix to be set to zero.
+* Update Catalan, Czech, Danish, Dutch, Friulian, Hungarian,
+  Indonesian, Italian, Polish, Serbian, Spanish, Swedish and Ukrainian
+  translations.
 
-[1] https://gitlab.gnome.org/GNOME/network-manager-applet/-/commit/1ab20e8d49d10a7e673efc3c15983f2fac7a41fe
+[1] http://ftp.gnome.org/pub/gnome/sources/NetworkManager-openvpn/1.8/NetworkManager-openvpn-1.8.12.news
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- .../network-manager-applet_1.16.0.bb          | 25 ++++++++++++++++
- .../network-manager-applet_1.8.24.bb          | 29 -------------------
- 2 files changed, 25 insertions(+), 29 deletions(-)
- create mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb
- delete mode 100644 meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.24.bb
+ ...er-openvpn_1.8.10.bb => networkmanager-openvpn_1.8.12.bb} | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/networkmanager/{networkmanager-openvpn_1.8.10.bb => networkmanager-openvpn_1.8.12.bb} (85%)
 
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb
-new file mode 100644
-index 000000000..0cac52c05
---- /dev/null
-+++ b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.16.0.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "GTK+ applet for NetworkManager"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+DEPENDS = "gtk+3 libnma libnotify libsecret networkmanager iso-codes nss"
-+
-+GNOMEBASEBUILDCLASS = "meson"
-+inherit features_check gnomebase gsettings gtk-icon-cache gettext
-+
-+REQUIRED_DISTRO_FEATURES = "x11"
-+
-+SRC_URI[archive.md5sum] = "9652c2757e85d6caba657405cf794fbd"
-+SRC_URI[archive.sha256sum] = "d6f98a455a271e7e169b5d35d290f4880f503cdf7593251572c9330941b5c3e5"
-+
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[modemmanager] = "-Dwwan=true, -Dwwan=false, modemmanager"
-+PACKAGECONFIG[selinux] = "-Dselinux=true, -Dselinux=false, libselinux"
-+
-+RDEPENDS_${PN} =+ "networkmanager"
-+
-+FILES_${PN} += " \
-+    ${datadir}/nm-applet/ \
-+    ${datadir}/libnma/wifi.ui \
-+    ${datadir}/metainfo \
-+"
-diff --git a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.24.bb b/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.24.bb
-deleted file mode 100644
-index 0853407ca..000000000
---- a/meta-gnome/recipes-connectivity/network-manager-applet/network-manager-applet_1.8.24.bb
-+++ /dev/null
-@@ -1,29 +0,0 @@
--SUMMARY = "GTK+ applet for NetworkManager"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
--
--DEPENDS = "gtk+3 libnotify libsecret networkmanager iso-codes nss"
--
--GNOMEBASEBUILDCLASS = "meson"
--inherit features_check gnomebase gsettings gtk-doc gtk-icon-cache gobject-introspection gettext
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
--SRC_URI[archive.md5sum] = "5c1bf351fde5adc12200345550516050"
--SRC_URI[archive.sha256sum] = "118bbb8a5027634b62e8b45b16ceafce74441529c99bf230654e3bec38f9fbbf"
--
--GTKDOC_MESON_OPTION = "gtk_doc"
--
--PACKAGECONFIG ??= ""
--PACKAGECONFIG[gcr] = "-Dgcr=true, -Dgcr=false, gcr"
--PACKAGECONFIG[modemmanager] = "-Dwwan=true, -Dwwan=false, modemmanager"
--PACKAGECONFIG[mobile-provider-info] = "-Dmobile_broadband_provider_info=true, -Dmobile_broadband_provider_info=false, mobile-broadband-provider-info,mobile-broadband-provider-info"
--PACKAGECONFIG[selinux] = "-Dselinux=true, -Dselinux=false, libselinux"
--
--RDEPENDS_${PN} =+ "networkmanager"
--
--FILES_${PN} += " \
--    ${datadir}/nm-applet/ \
--    ${datadir}/libnma/wifi.ui \
--    ${datadir}/metainfo \
--"
+diff --git a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.10.bb b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.12.bb
+similarity index 85%
+rename from meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.10.bb
+rename to meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.12.bb
+index 56db770b9..5e246a85b 100644
+--- a/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.10.bb
++++ b/meta-networking/recipes-connectivity/networkmanager/networkmanager-openvpn_1.8.12.bb
+@@ -10,8 +10,8 @@ inherit gnomebase useradd gettext systemd
+ 
+ SRC_URI = "${GNOME_MIRROR}/NetworkManager-openvpn/${@gnome_verdir("${PV}")}/NetworkManager-openvpn-${PV}.tar.xz"
+ 
+-SRC_URI[md5sum] = "4dbbc103761facc7a61a1c00dfd55231"
+-SRC_URI[sha256sum] = "af3cc86ba848d21b4ac807a09d575de11335ba4df8ce6fdb089212e77c2231ef"
++SRC_URI[md5sum] = "e8b1210011ece18d0278310fbff45af5"
++SRC_URI[sha256sum] = "0efda8878aaf0e6eb5071a053aea5d7f9d42aac097b3ff89e7cbc9233f815318"
+ 
+ S = "${WORKDIR}/NetworkManager-openvpn-${PV}"
+ 
+@@ -26,6 +26,7 @@ USERADD_PACKAGES = "${PN}"
+ USERADD_PARAM_${PN} = "--system nm-openvpn"
+ 
+ FILES_${PN} += " \
++    ${datadir}/dbus-1 \
+     ${libdir}/NetworkManager/*.so \
+     ${nonarch_libdir}/NetworkManager/VPN/nm-openvpn-service.name \
+ "
 -- 
 2.21.1
 
