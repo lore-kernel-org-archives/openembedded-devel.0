@@ -1,35 +1,51 @@
-Return-Path: <wangmy@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 1292A60ADF
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com
+	[209.85.214.193])
+	by mail.openembedded.org (Postfix) with ESMTP id CC1636012F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 01:49:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,565,1574092800"; d="scan'208";a="86504536"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Mar 2020 09:49:47 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id EE4B550A9985
+	Wed, 18 Mar 2020 02:45:29 +0000 (UTC)
+Received: by mail-pl1-f193.google.com with SMTP id f16so10509977plj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 09:39:39 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1497.2; Wed, 18 Mar 2020 09:49:44 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Wed, 18 Mar 2020 09:49:53 +0800
-From: Wang Mingyu <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Mar 2020 00:19:51 -0700
-Message-ID: <1584515992-22564-4-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1584515992-22564-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1584515992-22564-1-git-send-email-wangmy@cn.fujitsu.com>
+	Tue, 17 Mar 2020 19:45:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Ru2XJNvt2+1MKgXBeK6Kk7wtGHMQc6i/oSs3O0gs5Gs=;
+	b=nbCpiozHO1fOxjeh8JWYW/tUqjnmU7GHDviGUy1TwTF8dOkwzbJ5+LNnzGiMtHjyig
+	cO2lDrJgebD1BYOzV1+Eha24rjqiuiJTGjm7BI1kKnQePrNX+dsLEv/mYW57F4F3Pa3S
+	9JzSa51F4gZp/wEqKEqITZa/9OA/28yH2RtLcgSrgLdN6B4iF9pdrLOKiLnEL2VI+b5d
+	aCjIKqrZTY3oOcDRTuzxXI7g2AqUVN12d7ZNrkbnIITI0+uC+gt5kbgt9qgrqaOgF7qa
+	YFSe9r8r0/RNC4G05doWngP8xgr5DSY6YebatRI/h3G96d+Rb4V6oRtfO1tR88rWgYDa
+	WUfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Ru2XJNvt2+1MKgXBeK6Kk7wtGHMQc6i/oSs3O0gs5Gs=;
+	b=bbKcaODbRkEwPfTmTn7PG1/GgVGtvoTBuBxoyqEq7TUjCQDYKIEbt5lTmzB3yjQYmf
+	oDtIjy3+Dxf187P85W5AdzaYevgJeC004htw55lG+ShQmTyBBIAV5xRWly3hxOE4nJB8
+	B+jtVHjNqKoK2ePvSFEo9BGIsfNecVs413g5QwA6aTc2EIGsfZfokKld+KdEGFZgqytf
+	eF0p+7heJs1Grp8BProI4I4R55QG04jrZDi4yVWbiMN1tYFwfwi24l05PJ8P3Os0UN1o
+	3SYYvYIDAIlc255b5KOloNSyvjLzJ5UYhFWb6LW+D9SFqhFOPZyccCc3SgxE+xevzckC
+	aZOQ==
+X-Gm-Message-State: ANhLgQ0PnY90ebSlfJXbiTcbtiym3ASXKo0Sx0t+utS8h5fVfXChwt87
+	mjhsOTMMJkrf7YPvVmGZhgmo0hXiz5Y=
+X-Google-Smtp-Source: ADFU+vuoC0PVee948p9TAfryv0iGU+Qr7bho9pFVGw4hcu4s1SCN6sQ60yvHObz2ceZOZdBuPTZ+3A==
+X-Received: by 2002:a17:90b:3645:: with SMTP id
+	nh5mr2400523pjb.150.1584499527931; 
+	Tue, 17 Mar 2020 19:45:27 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::593])
+	by smtp.gmail.com with ESMTPSA id
+	y143sm4444922pfb.22.2020.03.17.19.45.26
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Tue, 17 Mar 2020 19:45:27 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 17 Mar 2020 19:45:40 -0700
+Message-Id: <20200318024540.3962610-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: EE4B550A9985.A69FC
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] rocksdb: upgrade 6.5.2 -> 6.6.4
+Subject: [meta-oe][PATCH] botan: Define --libdir to fix multilib build issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,84 +58,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2020 01:49:47 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 18 Mar 2020 02:45:29 -0000
+Content-Transfer-Encoding: 8bit
 
-0001-Fix-build-breakage-from-lock_guard-error-6161.patch
-removed since it is included in 6.6.4
-
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-breakage-from-lock_guard-error-6161.patch | 36 -------------------
- meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb    |  7 ++--
- 2 files changed, 3 insertions(+), 40 deletions(-)
- delete mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
+ meta-oe/recipes-crypto/botan/botan_2.13.0.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-from-lock_guard-error-6161.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
-deleted file mode 100644
-index ac87d0c60..000000000
---- a/meta-oe/recipes-dbs/rocksdb/files/0001-Fix-build-breakage-from-lock_guard-error-6161.patch
-+++ /dev/null
-@@ -1,36 +0,0 @@
--From b626703de7ece507f360507e49d3ecb448b12e07 Mon Sep 17 00:00:00 2001
--From: Maysam Yabandeh <myabandeh@fb.com>
--Date: Thu, 12 Dec 2019 13:48:50 -0800
--Subject: [PATCH] Fix build breakage from lock_guard error (#6161)
--
--Summary:
--This change fixes a source issue that caused compile time error which breaks build for many fbcode services in that setup. The size() member function of channel is a const member, so member variables accessed within it are implicitly const as well. This caused error when clang fails to resolve to a constructor that takes std::mutex because the suitable constructor got rejected due to loss of constness for its argument. The fix is to add mutable modifier to the lock_ member of channel.
--Pull Request resolved: https://github.com/facebook/rocksdb/pull/6161
--
--Differential Revision: D18967685
--
--Pulled By: maysamyabandeh
--
--Upstream-Status: Backport
--
--fbshipit-source-id: 698b6a5153c3c92eeacb842c467aa28cc350d432
-----
-- util/channel.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/util/channel.h b/util/channel.h
--index 0225482c0..a8a47680a 100644
----- a/util/channel.h
--+++ b/util/channel.h
--@@ -60,7 +60,7 @@ class channel {
-- 
--  private:
--   std::condition_variable cv_;
---  std::mutex lock_;
--+  mutable std::mutex lock_;
--   std::queue<T> buffer_;
--   bool eof_;
-- };
---- 
--2.24.1
--
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-index 713d5bb14..e82b77e14 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-@@ -6,12 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-                     file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-                     file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
+diff --git a/meta-oe/recipes-crypto/botan/botan_2.13.0.bb b/meta-oe/recipes-crypto/botan/botan_2.13.0.bb
+index 0854bd6728..4143264b44 100644
+--- a/meta-oe/recipes-crypto/botan/botan_2.13.0.bb
++++ b/meta-oe/recipes-crypto/botan/botan_2.13.0.bb
+@@ -19,14 +19,15 @@ CPU_armv7ve = "armv7"
  
--SRCREV = "4cfbd87afd08a16df28436fb990ef6b154ee6114"
--SRCBRANCH = "6.5.fb"
--PV = "6.5.2"
-+SRCREV = "551a110918493a19d11243f53408b97485de1411"
-+SRCBRANCH = "6.6.fb"
-+PV = "6.6.4"
- 
- SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
--           file://0001-Fix-build-breakage-from-lock_guard-error-6161.patch \
-            file://0001-db-write_thread.cc-Initialize-state.patch \
-           "
- 
+ do_configure() {
+ 	python3 ${S}/configure.py \
+-	--prefix="${D}${prefix}" \
++	--prefix="${D}${exec_prefix}" \
++	--libdir="${D}${libdir}" \
+ 	--cpu="${CPU}" \
+ 	--cc-bin="${CXX}" \
+ 	--cxxflags="${CXXFLAGS}" \
+ 	--ldflags="${LDFLAGS}" \
+ 	--with-endian=${@oe.utils.conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+ 	${@bb.utils.contains("TUNE_FEATURES","neon","","--disable-neon",d)} \
+-	--with-sysroot-dir=${STAGING_DIR_TARGET} \
++	--with-sysroot-dir=${STAGING_DIR_HOST} \
+ 	--with-build-dir="${B}" \
+ 	--optimize-for-size \
+ 	--with-stack-protector \
 -- 
-2.17.1
-
-
+2.25.1
 
 
