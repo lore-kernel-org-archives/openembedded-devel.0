@@ -1,33 +1,49 @@
-Return-Path: <zangrc.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 6043F6010E
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-il1-f194.google.com (mail-il1-f194.google.com
+	[209.85.166.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 03458601B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2020 05:38:12 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.70,570,1574092800"; d="scan'208";a="86582574"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 19 Mar 2020 13:38:12 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5A2A850A9986
+	Thu, 19 Mar 2020 08:17:03 +0000 (UTC)
+Received: by mail-il1-f194.google.com with SMTP id k29so1437793ilg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2020 13:28:03 +0800 (CST)
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.83) by
-	G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP
-	Server (TLS) id 15.0.1497.2; Thu, 19 Mar 2020 13:38:09 +0800
-Received: from localhost.local (10.167.225.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.439.0; Thu, 19 Mar 2020 13:38:07 +0800
-From: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 19 Mar 2020 13:40:32 +0800
-Message-ID: <20200319054032.14353-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+	Thu, 19 Mar 2020 01:17:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=ua/Ytr4YvmTcoJigR55VDD9XDC7N/RTiUq8MC5Gxnn8=;
+	b=l3EX9KtDmLpixtbs8VqGkiz4/k2V2tZjJ0Jy+mCd95n+6FawmkO9vYsjudVaHPy5s9
+	aI4R4B4xSzpD73ePnfFKrcS5JWPZL4vP8fgV0ZYFSNVT8kaTHOpb60C/x9XcoBBMwGl/
+	5odTVRK4S/l4/aZdJdrRwx+9VwOXX6b+gaNcDgMK4lH4ryOsuTxhWowqblCl3xjpRZV0
+	UV1mPg7H5v36VEwZyZszB/lW6Q11gnIim9HShd29qKIJK6v8WLKiRLZlGVrF5r5oqomv
+	bR5F39fkIpr5BS1GftMAOwl1wPsbwar2G5bF247U5Epqx3M6sM9y/hGMRUYTP1m5hsc3
+	gliA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=ua/Ytr4YvmTcoJigR55VDD9XDC7N/RTiUq8MC5Gxnn8=;
+	b=dzoG5vOOm7wFzRR1UTSERwViztiMCVfHsG8DIUXQlOeY6ijbjwfduCVbLPWu9fbokD
+	QN0SuFFnO1iW7e4kzkIaG7CuhmWE1g0gkUfX+sFXSdyYW3A7tfhPGnVIZUhzBpz8xzGy
+	qS/A6v71mZNMV/v5SaOcuAfd4mdgDhJ76wkCUc1EH62tU9/WctlbfsPs5CXQ6tmALRvb
+	CI4Kf5wli8qjgYQBYBLduVbxIoE6QzCTu7XVtPEgYrcx723wOt2AN38NTw9nCbhrTtTs
+	n6QBKqoh4V0OJFPEkkuhIggvM0AWnp3Pf9a3bHrn7OwWqHSqTIS6NYo27snBVJAgjsyA
+	8ejQ==
+X-Gm-Message-State: ANhLgQ2cXhRwh5MQMz/Rkii3ogyEBRBnEbritLjeJhFsXCDnkvwZ9L1+
+	RGhqj6AW7i8+2bM1G/hBzLfVkiKKJG8Tk+Wy94s=
+X-Google-Smtp-Source: ADFU+vtE3RfbcogIeL62B/sPHArMPOrb6mx5h1WiYLw9CQmZTgK+KCTj77ndNKHUbOsm3if9T54SdOAhLXifwuAPWhA=
+X-Received: by 2002:a92:cc8c:: with SMTP id x12mr2163746ilo.224.1584605824988; 
+	Thu, 19 Mar 2020 01:17:04 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: 5A2A850A9986.A93B2
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking] [zeus] [PATCH] wireshark: upgrade 3.0.6 -> 3.0.9
+References: <20200318204411.12996-1-schnitzeltony@gmail.com>
+	<20200318204411.12996-4-schnitzeltony@gmail.com>
+	<CAMKF1sobKhs8spp7UY-dny3nZQtKLS3BMOTNR9q6updeaLSuLA@mail.gmail.com>
+In-Reply-To: <CAMKF1sobKhs8spp7UY-dny3nZQtKLS3BMOTNR9q6updeaLSuLA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 19 Mar 2020 09:16:52 +0100
+Message-ID: <CALbNGRRG+_-J9_ixPpA24AvkO3iAOKqrSM4kP9-gXwgHQpP7Gg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 4/5] networkmanager-openvpn: Make PACKAGECONFIG gnome work
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,49 +56,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2020 05:38:13 -0000
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+X-List-Received-Date: Thu, 19 Mar 2020 08:17:04 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-To fix CVE issues, update to 3.0.9.
+On Thu, Mar 19, 2020 at 5:14 AM Khem Raj <raj.khem@gmail.com> wrote:
+>
+> On Wed, Mar 18, 2020 at 1:45 PM Andreas M=C3=BCller <schnitzeltony@gmail.=
+com> wrote:
+> >
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > ---
+> >  .../networkmanager/networkmanager-openvpn_1.8.12.bb | 13 ++++++++++++-
+> >  1 file changed, 12 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/meta-networking/recipes-connectivity/networkmanager/networ=
+kmanager-openvpn_1.8.12.bb b/meta-networking/recipes-connectivity/networkma=
+nager/networkmanager-openvpn_1.8.12.bb
+> > index 5e246a85b..d455a0f06 100644
+> > --- a/meta-networking/recipes-connectivity/networkmanager/networkmanage=
+r-openvpn_1.8.12.bb
+> > +++ b/meta-networking/recipes-connectivity/networkmanager/networkmanage=
+r-openvpn_1.8.12.bb
+> > @@ -15,7 +15,18 @@ SRC_URI[sha256sum] =3D "0efda8878aaf0e6eb5071a053aea=
+5d7f9d42aac097b3ff89e7cbc9233f
+> >
+> >  S =3D "${WORKDIR}/NetworkManager-openvpn-${PV}"
+> >
+> > -PACKAGECONFIG[gnome] =3D "--with-gnome,--without-gnome"
+> > +# meta-gnome in layers is required using gnome:
+> > +PACKAGECONFIG[gnome] =3D "--with-gnome,--without-gnome,gtk+3 libnma li=
+bsecret"
+> > +
+> > +do_configure_append() {
+> > +    # network-manager-openvpn.metainfo.xml is created in source folder=
+ but
+> > +    # compile expects it in build folder. As long as nobody comes up w=
+ith a
+> > +    # better solution just support build:
+> > +    if [ -e ${S}/appdata/network-manager-openvpn.metainfo.xml ]; then
+> > +        mkdir -p ${B}/appdata
+> > +        cp -f ${S}/appdata/network-manager-openvpn.metainfo.xml ${B}/a=
+ppdata/
+>
+> perhaps use install -Dm 0644 here
+In do_configure for a file required for buld-time only?
 
-3.0.9
-wnpa-sec-2020-03 LTE RRC dissector memory leak. Bug 16341.
-wnpa-sec-2020-04 WiMax DLMAP dissector crash. Bug 16368.
-wnpa-sec-2020-05 EAP dissector crash. Bug 16397.
-
-3.0.8
-wnpa-sec-2020-02 BT ATT dissector crash. Bug 16258. CVE-2020-7045.
-3.0.7
-wnpa-sec-2019-22 CMS dissector crash. Bug 15961. CVE-2019-19553.
-
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- .../wireshark/{wireshark_3.0.6.bb => wireshark_3.0.9.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_3.0.6.bb => wireshark_3.0.9.bb} (95%)
-
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb b/meta-networking/recipes-support/wireshark/wireshark_3.0.9.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_3.0.9.bb
-index ccaa0c94a..76309f140 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_3.0.6.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_3.0.9.bb
-@@ -12,8 +12,8 @@ SRC_URI = "https://1.eu.dl.wireshark.org/src/all-versions/wireshark-${PV}.tar.xz
- 
- UPSTREAM_CHECK_URI = "https://1.as.dl.wireshark.org/src"
- 
--SRC_URI[md5sum] = "c6f8d12a3efe21cc7885f7cb0c4bd938"
--SRC_URI[sha256sum] = "a87f4022a0c15ddbf1730bf1acafce9e75a4e657ce9fa494ceda0324c0c3e33e"
-+SRC_URI[md5sum] = "4250b5bfb7f0ce04321114df9682503c"
-+SRC_URI[sha256sum] = "bb4697ead91824b1fa33ffbe6643f6193459a66c906910a7611d5b26ff32aa04"
- 
- PE = "1"
- 
--- 
-2.20.1
-
-
-
+Andreas
 
