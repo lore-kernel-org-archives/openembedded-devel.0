@@ -1,42 +1,27 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
-	by mail.openembedded.org (Postfix) with ESMTP id D154960FEC
+Return-Path: <pjtexier@koncepto.io>
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+	by mail.openembedded.org (Postfix) with ESMTP id 7311960FD8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2020 19:12:36 +0000 (UTC)
-Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com
-	([174.114.57.56]:33196 helo=localhost.localdomain)
-	by cpanel7.indieserve.net with esmtpsa (TLS1.2) tls
-	TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
-	(envelope-from <rpjday@crashcourse.ca>)
-	id 1jF0ar-00CzPO-DS; Thu, 19 Mar 2020 15:12:37 -0400
-Date: Thu, 19 Mar 2020 15:12:36 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost.localdomain
-To: Ross Burton <ross@burtonini.com>
-In-Reply-To: <ba526e90-ccd7-04e2-5907-026b754a2da0@burtonini.com>
-Message-ID: <alpine.LFD.2.21.2003191511320.3869@localhost.localdomain>
-References: <alpine.LFD.2.21.2003190907590.10468@localhost.localdomain>
-	<20200319134213.GA29515@localhost>
-	<alpine.LFD.2.21.2003191302490.458222@localhost.localdomain>
-	<20200319173223.GC29515@localhost>
-	<ba526e90-ccd7-04e2-5907-026b754a2da0@burtonini.com>
-MIME-Version: 1.0
-X-OutGoing-Spam-Status: No, score=-1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id:
-	rpjday+crashcourse.ca/only user confirmed/virtual account not
-	confirmed
-X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: proper way to report(?) conflicting files being installed?
+	Thu, 19 Mar 2020 19:50:12 +0000 (UTC)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
+	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id 7CF436004D;
+	Thu, 19 Mar 2020 20:50:11 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1584647411;
+	bh=IFCwT+fpZe71SlnUi6AljOnFIQ3bZnE8r552Kv6bZqI=;
+	h=From:To:Cc:Subject:Date:From;
+	b=O48VhDezFnqHCjcyVJOxijmlKvTDaxUJqMxNcuOHmXmJepkRbds2gFPXfAP6bWQ3E
+	PNppCiZV+BcjlkFR9EX2OFJMd2FLtswvRXtOkfj0xCYc+609YmcKXiXYiS2xhl/DmT
+	PlgCSlWjnD3qheA4Kzb9tq3Mtc+rDHtQwa9sr/wOR16jCzAaJdBiTA/hPDCld1ekWJ
+	kbVgyMaJPjyPLYAkKc8XGo5WQ1pxqsCu44zpRdr7U3ipZQywBF7Yxx1hs6ynJJbxLt
+	brwb9hxGzk0coWQkrx4p+TOE7jsjmqRet9yEo1Idsq118+dIlk6BnNQ7g9DKhx1pyo
+	KkbChcJVKO2hA==
+From: Pierre-Jean Texier <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Mar 2020 20:49:59 +0100
+Message-Id: <1584647399-3555-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] nvme-cli: upgrade 1.9 -> 1.10.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,28 +34,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2020 19:12:38 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 19 Mar 2020 19:50:12 -0000
 
-On Thu, 19 Mar 2020, Ross Burton wrote:
+Also backport a patch to fix a build failure
+with the mucl libc.
 
-> On 19/03/2020 17:32, Adrian Bunk wrote:
-> >>    this does seem backwards ... if both gnome-common and
-> >> autoconf-archive currently try to install those two m4-related files,
-> >> doing the above pretty much *assures* an installation conflict,
-> >> ...
-> >
-> > No, --with-autoconf-archive makes gnome-common not install the
-> > conflicting files.
->
-> I should point out that gnome-common is dead upstream and mostly
-> unused now, so if you find a recipe using it do check that it is
-> actually needed.
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+---
+ .../nvme-cli/0001-fix-musl-compilation.patch       | 26 ++++++++++++++++++++++
+ .../{nvme-cli_1.9.bb => nvme-cli_1.10.1.bb}        |  6 +++--
+ 2 files changed, 30 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-bsp/nvme-cli/nvme-cli/0001-fix-musl-compilation.patch
+ rename meta-oe/recipes-bsp/nvme-cli/{nvme-cli_1.9.bb => nvme-cli_1.10.1.bb} (85%)
 
-  in fact, just earlier this aft, i sent the short note, "um ...
-what are you doing that needs that gnome-common thing?"
+diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli/0001-fix-musl-compilation.patch b/meta-oe/recipes-bsp/nvme-cli/nvme-cli/0001-fix-musl-compilation.patch
+new file mode 100644
+index 0000000..be5d0da
+--- /dev/null
++++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli/0001-fix-musl-compilation.patch
+@@ -0,0 +1,26 @@
++From 0ff7ad2c88e3a47e7e3f6fe68c28a8d2d8a71f1f Mon Sep 17 00:00:00 2001
++From: Neel Chotai <neel@chot.ai>
++Date: Fri, 14 Feb 2020 17:56:23 +0000
++Subject: [PATCH] fix musl compilation
++
++Upstream-Status: Backport [https://github.com/linux-nvme/nvme-cli/commit/0ff7ad2c88e3a47e7e3f6fe68c28a8d2d8a71f1f]
++Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
++---
++ plugins/micron/micron-nvme.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/plugins/micron/micron-nvme.c b/plugins/micron/micron-nvme.c
++index 8240887..165fcf0 100644
++--- a/plugins/micron/micron-nvme.c
+++++ b/plugins/micron/micron-nvme.c
++@@ -13,6 +13,7 @@
++ #include "nvme-print.h"
++ #include "nvme-ioctl.h"
++ #include <sys/ioctl.h>
+++#include <limits.h>
++ 
++ #define CREATE_CMD
++ #include "micron-nvme.h"
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.10.1.bb
+similarity index 85%
+rename from meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb
+rename to meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.10.1.bb
+index ea8bc17..4f4bb2d 100644
+--- a/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.9.bb
++++ b/meta-oe/recipes-bsp/nvme-cli/nvme-cli_1.10.1.bb
+@@ -7,8 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8264535c0c4e9c6c335635c4026a8022"
+ DEPENDS = "util-linux"
+ PV .= "+git${SRCPV}"
+ 
+-SRC_URI = "git://github.com/linux-nvme/nvme-cli.git"
+-SRCREV = "977e7d4cf59c3c7f89e9c093c91f991b07292e45"
++SRC_URI = "git://github.com/linux-nvme/nvme-cli.git \
++           file://0001-fix-musl-compilation.patch \
++"
++SRCREV = "1d84d6ae0c7d7ceff5a73fe174dde8b0005f6108"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.7.4
 
-  i await the reply.
-
-rday
 
