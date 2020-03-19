@@ -1,52 +1,35 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pl1-f177.google.com (mail-pl1-f177.google.com
-	[209.85.214.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 248C760AE0
+Return-Path: <wangmy@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 33D3A60303
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 22:24:49 +0000 (UTC)
-Received: by mail-pl1-f177.google.com with SMTP id t3so117591plz.9
+	Thu, 19 Mar 2020 02:12:32 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.70,569,1574092800"; d="scan'208";a="86569189"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 19 Mar 2020 10:12:32 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id C61D449DF136
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Mar 2020 15:24:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=pvbWiiTfCy13iguwg7WxH/ztNKAfXyjF97hrR3LkkL8=;
-	b=XLZ4jvkebI5h6PRrv+0hVdYMDu8MIA4zwT+9zieVcxwnzvun7AZKq5iBqlsnaz8NeE
-	U6YboSEKMLRqpaBx3AQfPVS/E7w9chHTJd+7FGM8atcN+ZAoVMqNU4F/N8VKmU/JLjvf
-	mQuo5pi6o4TmZUDxRtrxycqFHyfZWZkQlWfYTkdAxfl6gO651yNjSJqKgWFSOxaCbgoD
-	q7Wyg+Zm9TzYKfMCGCCwdfnSsvscAFe/9IP6yJ8wk5HDvTALq9332Q2yY35SjaI4Aism
-	/ADR9qFXvmGllLG+k+LPccyw0ylAC3JhvSnYPDAa09R0DS/mDKK5fm4p1Zgj/a/w7lQY
-	HdPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=pvbWiiTfCy13iguwg7WxH/ztNKAfXyjF97hrR3LkkL8=;
-	b=HS9dT0AzSazlxzU5azZJQjg7ysfLrK/zcyNjM1zwDlRHN9gMIs1IXz7iP6GZfp51Hp
-	7XJNc06Y03hbzVTGATd4j7wMWnmL0YrRPwGn2Butb+pZ+KpgRnGMRAXYd4ycVrEEpXbd
-	BCqa2OZQGbabJ78x4ysbCG1BEKPqnf98TEIWzr//2tzBb1dcxnps3uLZCTwlbIMz3FpG
-	z8m16ke2lzSpoa2F2SNasEG3riVkJjBGCEHlMpFh4E+C9OPWxShjHvF2sZ81hZuxCvIz
-	WqYZGfKhoiPxUD8A/m0GbE/HtmDTb38g47r8waB6R9M1bRaM96QrNw2iD3Iprpi13kGb
-	8PBQ==
-X-Gm-Message-State: ANhLgQ3ltvs88Zcifwyt8XV1WIS7m/v4C0Lp5k9Al6Q9AxCi6k19Zssn
-	vmgd/3f1ARd+2vGrLM/JdLsxuVVJB/s=
-X-Google-Smtp-Source: ADFU+vt9O5MbvUvLRkKA8FBXqVT4tzmB1nfuGGYsFpiyXACc0r6z4d1q+w7MQlRrQcxcDSKg46OETg==
-X-Received: by 2002:a17:90a:d593:: with SMTP id
-	v19mr362991pju.177.1584570289662; 
-	Wed, 18 Mar 2020 15:24:49 -0700 (PDT)
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::593])
-	by smtp.gmail.com with ESMTPSA id j4sm53604pfg.133.2020.03.18.15.24.49
-	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-	Wed, 18 Mar 2020 15:24:49 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Mar 2020 15:25:00 -0700
-Message-Id: <20200318222500.3249882-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.25.2
-In-Reply-To: <20200318222500.3249882-1-raj.khem@gmail.com>
-References: <20200318222500.3249882-1-raj.khem@gmail.com>
+	Thu, 19 Mar 2020 10:02:26 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+	G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP
+	Server (TLS) id 15.0.1497.2; Thu, 19 Mar 2020 10:12:32 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.439.0; Thu, 19 Mar 2020 10:12:40 +0800
+From: Wang Mingyu <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 19 Mar 2020 00:39:16 -0700
+Message-ID: <1584603557-43263-2-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1584603557-43263-1-git-send-email-wangmy@cn.fujitsu.com>
+References: <1584603557-43263-1-git-send-email-wangmy@cn.fujitsu.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] rocksdb: Fix build on platforms not having all atomic intrinsics
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: C61D449DF136.A3FE2
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] hwdata: upgrade 0.332 -> 0.333
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,162 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Mar 2020 22:24:49 -0000
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 19 Mar 2020 02:12:33 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
 ---
- ...1-cmake-Add-check-for-atomic-support.patch | 127 ++++++++++++++++++
- meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb    |   1 +
- 2 files changed, 128 insertions(+)
- create mode 100644 meta-oe/recipes-dbs/rocksdb/files/0001-cmake-Add-check-for-atomic-support.patch
+ meta-oe/recipes-support/hwdata/hwdata_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-dbs/rocksdb/files/0001-cmake-Add-check-for-atomic-support.patch b/meta-oe/recipes-dbs/rocksdb/files/0001-cmake-Add-check-for-atomic-support.patch
-new file mode 100644
-index 0000000000..82dc2d584b
---- /dev/null
-+++ b/meta-oe/recipes-dbs/rocksdb/files/0001-cmake-Add-check-for-atomic-support.patch
-@@ -0,0 +1,127 @@
-+From ba0a0e54d9544babbd3963891f4e3200dd5583f5 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 18 Mar 2020 15:10:37 -0700
-+Subject: [PATCH] cmake: Add check for atomic support
-+
-+Detect if libatomic should be linked in or compiler and platform can
-+provide the needed atomic instrinsics, this helps build on certain
-+platforms like mips or clang/i386
-+
-+Fixes
-+
-+| /mnt/b/yoe/build/tmp/work/mips32r2-yoe-linux/rocksdb/6.6.4-r0/recipe-sysroot-native/usr/bin/mips-yoe-linux/mips-yoe-linux-ld: librocksdb.so.6.6.4: undefined reference to `__atomic_exchange_8'
-+| /mnt/b/yoe/build/tmp/work/mips32r2-yoe-linux/rocksdb/6.6.4-r0/recipe-sysroot-native/usr/bin/mips-yoe-linux/mips-yoe-linux-ld: librocksdb.so.6.6.4: undefined reference to `__atomic_fetch_or_8'
-+| /mnt/b/yoe/build/tmp/work/mips32r2-yoe-linux/rocksdb/6.6.4-r0/recipe-sysroot-native/usr/bin/mips-yoe-linux/mips-yoe-linux-ld: librocksdb.so.6.6.4: undefined reference to `__atomic_compare_exchange_8'
-+| /mnt/b/yoe/build/tmp/work/mips32r2-yoe-linux/rocksdb/6.6.4-r0/recipe-sysroot-native/usr/bin/mips-yoe-linux/mips-yoe-linux-ld: librocksdb.so.6.6.4: undefined reference to `__atomic_fetch_sub_8'
-+| /mnt/b/yoe/build/tmp/work/mips32r2-yoe-linux/rocksdb/6.6.4-r0/recipe-sysroot-native/usr/bin/mips-yoe-linux/mips-yoe-linux-ld: librocksdb.so.6.6.4: undefined reference to `__atomic_load_8'
-+| /mnt/b/yoe/build/tmp/work/mips32r2-yoe-linux/rocksdb/6.6.4-r0/recipe-sysroot-native/usr/bin/mips-yoe-linux/mips-yoe-linux-ld: librocksdb.so.6.6.4: undefined reference to `__atomic_store_8'
-+| /mnt/b/yoe/build/tmp/work/mips32r2-yoe-linux/rocksdb/6.6.4-r0/recipe-sysroot-native/usr/bin/mips-yoe-linux/mips-yoe-linux-ld: librocksdb.so.6.6.4: undefined reference to `__atomic_fetch_add_8'
-+
-+Upstream-Status: Submitted [https://github.com/facebook/rocksdb/pull/6555]
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ CMakeLists.txt                  |  6 +++
-+ cmake/modules/CheckAtomic.cmake | 69 +++++++++++++++++++++++++++++++++
-+ 2 files changed, 75 insertions(+)
-+ create mode 100644 cmake/modules/CheckAtomic.cmake
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index eebda35e9..692d71911 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -776,11 +776,17 @@ if(WITH_LIBRADOS)
-+   list(APPEND THIRDPARTY_LIBS rados)
-+ endif()
-+ 
-++# check if linking against libatomic is necessary
-++include(CheckAtomic)
-++
-+ if(WIN32)
-+   set(SYSTEM_LIBS ${SYSTEM_LIBS} shlwapi.lib rpcrt4.lib)
-+   set(LIBS ${ROCKSDB_STATIC_LIB} ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
-+ else()
-+   set(SYSTEM_LIBS ${CMAKE_THREAD_LIBS_INIT})
-++  if(HAVE_CXX_ATOMIC_WITH_LIB OR HAVE_CXX_ATOMICS64_WITH_LIB)
-++    set(SYSTEM_LIBS ${SYSTEM_LIBS} atomic)
-++  endif()
-+   set(LIBS ${ROCKSDB_SHARED_LIB} ${THIRDPARTY_LIBS} ${SYSTEM_LIBS})
-+ 
-+   add_library(${ROCKSDB_SHARED_LIB} SHARED ${SOURCES})
-+diff --git a/cmake/modules/CheckAtomic.cmake b/cmake/modules/CheckAtomic.cmake
-+new file mode 100644
-+index 000000000..8b7dc8a37
-+--- /dev/null
-++++ b/cmake/modules/CheckAtomic.cmake
-+@@ -0,0 +1,69 @@
-++# Checks if atomic operations are supported natively or if linking against
-++# libatomic is needed.
-++
-++# Check inspired by LLVMs cmake/modules/CheckAtomic.cmake
-++
-++INCLUDE(CheckCXXSourceCompiles)
-++INCLUDE(CheckLibraryExists)
-++
-++function(check_working_cxx_atomics varname)
-++  set(OLD_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
-++  set(CMAKE_REQUIRED_FLAGS "${CMAKE_REQUIRED_FLAGS} -std=c++11")
-++  CHECK_CXX_SOURCE_COMPILES("
-++#include <atomic>
-++std::atomic<int> x;
-++int main() {
-++  return x;
-++}
-++" ${varname})
-++  set(CMAKE_REQUIRED_FLAGS ${OLD_CMAKE_REQUIRED_FLAGS})
-++endfunction(check_working_cxx_atomics)
-++
-++function(check_working_cxx_atomics64 varname)
-++  set(OLD_CMAKE_REQUIRED_FLAGS ${CMAKE_REQUIRED_FLAGS})
-++  set(CMAKE_REQUIRED_FLAGS "-std=c++11 ${CMAKE_REQUIRED_FLAGS}")
-++  CHECK_CXX_SOURCE_COMPILES("
-++#include <atomic>
-++#include <cstdint>
-++std::atomic<uint64_t> x (0);
-++std::atomic<double> y (0);
-++int main() {
-++  uint64_t i = x.load(std::memory_order_relaxed);
-++  return int(y);
-++}
-++" ${varname})
-++  set(CMAKE_REQUIRED_FLAGS ${OLD_CMAKE_REQUIRED_FLAGS})
-++endfunction(check_working_cxx_atomics64)
-++
-++# Check if atomics work without libatomic
-++check_working_cxx_atomics(HAVE_CXX_ATOMICS_WITHOUT_LIB)
-++
-++if(NOT HAVE_CXX_ATOMICS_WITHOUT_LIB)
-++  check_library_exists(atomic __atomic_fetch_add_4 "" HAVE_LIBATOMIC)
-++  if( HAVE_LIBATOMIC )
-++    list(APPEND CMAKE_REQUIRED_LIBRARIES "atomic")
-++    check_working_cxx_atomics(HAVE_CXX_ATOMICS_WITH_LIB)
-++    if (NOT HAVE_CXX_ATOMICS_WITH_LIB)
-++      message(FATAL_ERROR "Host compiler must support std::atomic!")
-++    endif()
-++  else()
-++    message(FATAL_ERROR "Host compiler appears to require libatomic, but cannot find it.")
-++  endif()
-++endif()
-++
-++# Check if 64bit atomics work without libatomic
-++check_working_cxx_atomics64(HAVE_CXX_ATOMICS64_WITHOUT_LIB)
-++
-++if(NOT HAVE_CXX_ATOMICS64_WITHOUT_LIB)
-++  check_library_exists(atomic __atomic_load_8 "" HAVE_CXX_LIBATOMICS64)
-++  if(HAVE_CXX_LIBATOMICS64)
-++    list(APPEND CMAKE_REQUIRED_LIBRARIES "atomic")
-++    check_working_cxx_atomics64(HAVE_CXX_ATOMICS64_WITH_LIB)
-++    if (NOT HAVE_CXX_ATOMICS64_WITH_LIB)
-++      message(FATAL_ERROR "Host compiler must support std::atomic!")
-++    endif()
-++  else()
-++    message(FATAL_ERROR "Host compiler appears to require libatomic, but cannot find it.")
-++  endif()
-++endif()
-++
-+-- 
-+2.25.2
-+
-diff --git a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-index e82b77e147..addf9552b5 100644
---- a/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-+++ b/meta-oe/recipes-dbs/rocksdb/rocksdb_git.bb
-@@ -12,6 +12,7 @@ PV = "6.6.4"
+diff --git a/meta-oe/recipes-support/hwdata/hwdata_git.bb b/meta-oe/recipes-support/hwdata/hwdata_git.bb
+index 77bb60aed..5f3e3f686 100644
+--- a/meta-oe/recipes-support/hwdata/hwdata_git.bb
++++ b/meta-oe/recipes-support/hwdata/hwdata_git.bb
+@@ -5,8 +5,8 @@ SECTION = "System/Base"
+ LICENSE = "GPL-2.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1556547711e8246992b999edd9445a57"
  
- SRC_URI = "git://github.com/facebook/${BPN}.git;branch=${SRCBRANCH} \
-            file://0001-db-write_thread.cc-Initialize-state.patch \
-+           file://0001-cmake-Add-check-for-atomic-support.patch \
-           "
+-PV = "0.332"
+-SRCREV = "17cc5d636a559ae1073865846980e4db35f7989a"
++PV = "0.333"
++SRCREV = "2de52be0d00015fa6cde70bb845fa9b86cf6f420"
+ SRC_URI = "git://github.com/vcrhonek/${BPN}.git"
  
  S = "${WORKDIR}/git"
 -- 
-2.25.2
+2.17.1
+
+
 
 
