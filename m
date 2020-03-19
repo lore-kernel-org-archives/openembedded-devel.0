@@ -1,37 +1,27 @@
-Return-Path: <rpjday@crashcourse.ca>
-Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
-	by mail.openembedded.org (Postfix) with ESMTP id 5374C60C66
+Return-Path: <pjtexier@koncepto.io>
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+	by mail.openembedded.org (Postfix) with ESMTP id 1118860C61
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2020 13:22:57 +0000 (UTC)
-Received: from cpeac202e043973-cmac202e043970.sdns.net.rogers.com
-	([174.114.100.179]:57060 helo=localhost.localdomain)
-	by cpanel7.indieserve.net with esmtpsa (TLS1.2) tls
-	TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
-	(envelope-from <rpjday@crashcourse.ca>) id 1jEv8T-00C5yZ-BU
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Mar 2020 09:22:58 -0400
-Date: Thu, 19 Mar 2020 09:22:54 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@localhost.localdomain
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.LFD.2.21.2003190907590.10468@localhost.localdomain>
-MIME-Version: 1.0
-X-OutGoing-Spam-Status: No, score=-1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id:
-	rpjday+crashcourse.ca/only user confirmed/virtual account not
-	confirmed
-X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Subject: proper way to report(?) conflicting files being installed?
+	Thu, 19 Mar 2020 13:41:11 +0000 (UTC)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
+	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id 150576010A;
+	Thu, 19 Mar 2020 14:41:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1584625270;
+	bh=SEYlHXJUNKRWfCtP2ZpR2opLFQSn0x/qLD4+Ee4Sy30=;
+	h=From:To:Cc:Subject:Date:From;
+	b=QDlV+FNNZ/z0yPHVQSlb6yT4aABKh9lCOXqVnMdp/DBMv/QGCWZhinSIGpLAKkJEp
+	AYGG3/N5lSCtKowYrQ0HGFij3KnBR0x2xZLvGKOqicglIowhNR8DepHg1fw2d+jIVu
+	AoNbA88WSc53QAZmSEPwAIaSMVUfPTasJbR1Pr+rJQUj/YgKyTMIjUaYWM2e3m7a9a
+	adiieHxlG65UutLpzK6eSo9MmaBlHz+PkZt72KsLoAqR7dQMvV/mmC31WsxU8scGCZ
+	ZaRzenWfmDoh1x4j4arMY5dSPEIEk9LRwfzrtPOmvEbYO1a0WYRj5n1jUb2X8ja6jt
+	yh7Nnw7opCF2w==
+From: Pierre-Jean Texier <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 19 Mar 2020 14:41:08 +0100
+Message-Id: <1584625268-20452-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] libev: upgrade 4.31 -> 4.33
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,46 +34,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2020 13:22:57 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 19 Mar 2020 13:41:12 -0000
 
+The complete Changes since 4.31 are:
 
-  long story short, colleague was adding packages to a build and ran
-into error wherein both of:
+4.33 Wed Mar 18 13:22:29 CET 2020
+        - the 4.31 timerfd code wrongly changed the priority of the signal
+          fd watcher, which is usually harmless unless signal fds are
+          also used (found via cpan tester service).
+        - the documentation wrongly claimed that user may modify fd and events
+          members in io watchers when the watcher was stopped
+          (found by b_jonas).
+        - new ev_io_modify mutator which changes only the events member,
+          which can be faster. also added ev::io::set (int events) method
+          to ev++.h.
+        - officially allow a zero events mask for io watchers. this should
+          work with older libev versions as well but was not officially
+          allowed before.
+        - do not wake up every minute when timerfd is used to detect timejumps.
+        - do not wake up every minute when periodics are disabled and we have
+          a monotonic clock.
+        - support a lot more "uncommon" compile time configurations,
+          such as ev_embed enabled but ev_timer disabled.
+        - use a start/stop wrapper class to reduce code duplication in
+          ev++.h and make it needlessly more c++-y.
+        - the linux aio backend is no longer compiled in by default.
+        - update to libecb version 0x00010008.
 
-  * autoconf-archive
-  * gnome-common
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+---
+ meta-oe/recipes-connectivity/libev/{libev_4.31.bb => libev_4.33.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-connectivity/libev/{libev_4.31.bb => libev_4.33.bb} (80%)
 
-were trying to install a couple identical m4-related files. some
-quick googling produced this:
+diff --git a/meta-oe/recipes-connectivity/libev/libev_4.31.bb b/meta-oe/recipes-connectivity/libev/libev_4.33.bb
+similarity index 80%
+rename from meta-oe/recipes-connectivity/libev/libev_4.31.bb
+rename to meta-oe/recipes-connectivity/libev/libev_4.33.bb
+index beea855..760c2db 100644
+--- a/meta-oe/recipes-connectivity/libev/libev_4.31.bb
++++ b/meta-oe/recipes-connectivity/libev/libev_4.33.bb
+@@ -5,8 +5,8 @@ LICENSE = "BSD-2-Clause | GPL-2.0+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
+ 
+ SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
+-SRC_URI[md5sum] = "20111fda0df0a289c152faa2aac91b08"
+-SRC_URI[sha256sum] = "ed855d2b52118e32c0c1a6a32bd18c97f9e6711ca511f5ee12de3b9eccc66e5a"
++SRC_URI[md5sum] = "a3433f23583167081bf4acdd5b01b34f"
++SRC_URI[sha256sum] = "507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea"
+ 
+ inherit autotools
+ 
+-- 
+2.7.4
 
-  https://patchwork.openembedded.org/patch/142467/
-
-with the self-evident solution being applied to gnome-common to
-"uninstall" the two conflicting files:
-
---- a/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
-+++ b/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
-@@ -17,4 +17,15 @@  DEPENDS = ""
- FILES_${PN} += "${datadir}/aclocal"
- FILES_${PN}-dev = ""
-
-+# ax_code_coverage.m4 and ax_check_enable_debug.m4 are in gnome-common only
-+# because older versions of autoconf-archive didn't have them yet. Now they
-+# are in autoconf-archive from OE-core. We depend on that below to ensure
-+# that recipes which only depend on gnome-common still get them.
-+do_install_append () {
-+    rm -f ${D}${datadir}/aclocal/ax_code_coverage.m4
-+    rm -f ${D}${datadir}/aclocal/ax_check_enable_debug.m4
-+}
-+RDEPENDS_${PN} += "autoconf-archive"
-+DEPENDS_append_class-native = " autoconf-archive-native"
-+
-
-  it *appears* that solved the problem, which raises the question --
-should this patch be applied to the current gnome-common recipe? that
-patchwork entry dates back to 2017 ... should it have been applied at
-some point?
-
-rday
 
