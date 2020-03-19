@@ -1,48 +1,42 @@
-Return-Path: <cengic@gmail.com>
-Received: from mail-lj1-f193.google.com (mail-lj1-f193.google.com
-	[209.85.208.193])
-	by mail.openembedded.org (Postfix) with ESMTP id EC21660FCB
+Return-Path: <rpjday@crashcourse.ca>
+Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F0C960CB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2020 18:44:05 +0000 (UTC)
-Received: by mail-lj1-f193.google.com with SMTP id 19so3689719ljj.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2020 11:44:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Vi4P1aJlotMoAWIq2o9Z2uV6i5lr0kRsRY6NLTrHyWU=;
-	b=D63IsYV+wmARagQWo3ZtyYB4t1Oon4eF3WeluW69yjC6/kXSn1wGZ8xc8luCTs1rDq
-	fAwk8QIXXAE97pR8MirHEZxYWRe5YdVD/db190hSOX+rGqDh0j9HvCKqExSEixlonOW1
-	wkdcBu1RDa/clebiRIfZ1zOOZFjnH94qljpC4jmRJJ5zYNRmS8eXWI6KfIVyjmU+snRn
-	KLIjEid+DhGty4l8ZtptU10WdIJy3lPJgsmoIWCO6U/1jrVvjCsDHU0GEpXpCWXfoLFp
-	dNlkudoiuiOQmSM18dEtsecEfyrQO6Zttv12fKc1A5oydGk1fQeBNyOR0FG/1iFRAkVG
-	g8tw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Vi4P1aJlotMoAWIq2o9Z2uV6i5lr0kRsRY6NLTrHyWU=;
-	b=IXmFajOgX5xzLjCfdPU1TJqD8wZnu4+z69MvhxvVq378fjjFUhtzZrOa2pf0Uf3D7d
-	7tvQIEK5OvzEGZrsnfhenMq84vS4i3+Jw7wMQWTf74EIyf5aE1yKB7zcTb2PoJs99ofR
-	HUxuEC3M5bik6Uqyeik82BGpZWfMArajO8JoAaHQ1oMJ15hTLgMoBX/a0N5NPLnB2mt/
-	HeYKZEtj+qMowWqL/CgIG9UeiGTKIr1swxs+TBhMuyRZ7DO2KkFUPtIrQxBc4ydm92mB
-	OyHwAThNpX5Cg1QG+XO1MzcyUP1JwNl0CN1cfvTGDxuiYyPDWsIE+N9UcTjlS5+7aQmb
-	WPvQ==
-X-Gm-Message-State: ANhLgQ0euREeI+RGYDvwnS32M8Quvbft9Uud9FHCNXLI7cD4i463LJ4F
-	EVim5x53dehSIzkYsh3R81im8l/iAJI=
-X-Google-Smtp-Source: ADFU+vvJKtfvjtHXql2IWPCurJ9YlGP5xJemmTXWghesosYLINvq5VuE1ad7DjMsU1+k48fkBKqyoA==
-X-Received: by 2002:a2e:b00c:: with SMTP id y12mr2941767ljk.167.1584643445892; 
-	Thu, 19 Mar 2020 11:44:05 -0700 (PDT)
-Received: from localhost.localdomain (c83-248-75-173.bredband.comhem.se.
-	[83.248.75.173]) by smtp.gmail.com with ESMTPSA id
-	q14sm2008389lji.100.2020.03.19.11.44.05
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 19 Mar 2020 11:44:05 -0700 (PDT)
-From: Goran Cengic <cengic@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Mar 2020 19:43:55 +0100
-Message-Id: <1584643435-1936-1-git-send-email-cengic@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Goran Cengic <cengic@gmail.com>
-Subject: [meta-oe][PATCH v3] crash: fix crash-cross build on x86_64
+	Thu, 19 Mar 2020 19:10:46 +0000 (UTC)
+Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com
+	([174.114.57.56]:33184 helo=localhost.localdomain)
+	by cpanel7.indieserve.net with esmtpsa (TLS1.2) tls
+	TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
+	(envelope-from <rpjday@crashcourse.ca>)
+	id 1jF0Z4-00Cz9H-QP; Thu, 19 Mar 2020 15:10:47 -0400
+Date: Thu, 19 Mar 2020 15:10:44 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost.localdomain
+To: Adrian Bunk <bunk@stusta.de>
+In-Reply-To: <20200319173223.GC29515@localhost>
+Message-ID: <alpine.LFD.2.21.2003191510270.3869@localhost.localdomain>
+References: <alpine.LFD.2.21.2003190907590.10468@localhost.localdomain>
+	<20200319134213.GA29515@localhost>
+	<alpine.LFD.2.21.2003191302490.458222@localhost.localdomain>
+	<20200319173223.GC29515@localhost>
+MIME-Version: 1.0
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel7.indieserve.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel7.indieserve.net: authenticated_id:
+	rpjday+crashcourse.ca/only user confirmed/virtual account not
+	confirmed
+X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Cc: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: proper way to report(?) conflicting files being installed?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,63 +49,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2020 18:44:06 -0000
+X-List-Received-Date: Thu, 19 Mar 2020 19:10:47 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-Remove -m32 from CFLAGS even for -cross recipe. Also remove
-${GDB_CONF_FLAGS} from GDB_TARGET variable (that is passed to the gdb
-configuration) since the use of GDB_CONF_FLAGS is removed by
-0001-cross_add_configure_option.patch.
+On Thu, 19 Mar 2020, Adrian Bunk wrote:
 
-Signed-off-by: Goran Cengic <cengic@gmail.com>
----
- meta-oe/recipes-kernel/crash/crash_7.2.8.bb | 12 +++---------
- 1 file changed, 3 insertions(+), 9 deletions(-)
+> On Thu, Mar 19, 2020 at 01:09:13PM -0400, Robert P. J. Day wrote:
+> > On Thu, 19 Mar 2020, Adrian Bunk wrote:
+> >
+> > > On Thu, Mar 19, 2020 at 09:22:54AM -0400, Robert P. J. Day wrote:
+> > > >...
+> > > > +# ax_code_coverage.m4 and ax_check_enable_debug.m4 are in gnome-common only
+> > > > +# because older versions of autoconf-archive didn't have them yet. Now they
+> > > > +# are in autoconf-archive from OE-core. We depend on that below to ensure
+> > > > +# that recipes which only depend on gnome-common still get them.
+> > > > +do_install_append () {
+> > > > +    rm -f ${D}${datadir}/aclocal/ax_code_coverage.m4
+> > > > +    rm -f ${D}${datadir}/aclocal/ax_check_enable_debug.m4
+> > > > +}
+> > > > +RDEPENDS_${PN} += "autoconf-archive"
+> > > > +DEPENDS_append_class-native = " autoconf-archive-native"
+> > > > +
+> > > >
+> > > >   it *appears* that solved the problem, which raises the question --
+> > > > should this patch be applied to the current gnome-common recipe? that
+> > > > patchwork entry dates back to 2017 ... should it have been applied at
+> > > > some point?
+> > >
+> > > The currently implemented solution is:
+> > > # Default to enable autoconf-archive to avoid conflicts
+> > > PACKAGECONFIG ??= "autoconf-archive"
+> > > PACKAGECONFIG[autoconf-archive] = "--with-autoconf-archive, --without-autoconf-archive, autoconf-archive"
+> > >
+> > > It is not clear to me why this gives the user to disable it
+> > > instead of unconditionally enabling it.
+> >
+> >   this does seem backwards ... if both gnome-common and
+> > autoconf-archive currently try to install those two m4-related files,
+> > doing the above pretty much *assures* an installation conflict,
+> >...
+>
+> No, --with-autoconf-archive makes gnome-common not install the
+> conflicting files.
 
-diff --git a/meta-oe/recipes-kernel/crash/crash_7.2.8.bb b/meta-oe/recipes-kernel/crash/crash_7.2.8.bb
-index 61cc71f..5fc25f4 100644
---- a/meta-oe/recipes-kernel/crash/crash_7.2.8.bb
-+++ b/meta-oe/recipes-kernel/crash/crash_7.2.8.bb
-@@ -10,7 +10,7 @@ SECTION = "devel"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING3;md5=d32239bcb673463ab874e80d47fae504"
- 
--DEPENDS = "zlib readline coreutils-native"
-+DEPENDS = "zlib readline coreutils-native ncurses-native"
- 
- S = "${WORKDIR}/git"
- SRC_URI = "git://github.com/crash-utility/${BPN}.git \
-@@ -49,9 +49,7 @@ EXTRA_OEMAKE = 'RPMPKG="${PV}" \
-                 '
- 
- EXTRA_OEMAKE_class-cross = 'RPMPKG="${PV}" \
--                            GDB_TARGET="${BUILD_SYS} \
--                                        \${GDB_CONF_FLAGS} \
--                                        --target=${TARGET_SYS}" \
-+                            GDB_TARGET="${BUILD_SYS} --target=${TARGET_SYS}" \
-                             GDB_HOST="${BUILD_SYS}" \
-                             GDB_MAKE_JOBS="${PARALLEL_MAKE}" \
-                             '
-@@ -59,10 +57,6 @@ EXTRA_OEMAKE_class-cross = 'RPMPKG="${PV}" \
- EXTRA_OEMAKE_append_class-native = " LDFLAGS='${BUILD_LDFLAGS}'"
- EXTRA_OEMAKE_append_class-cross = " LDFLAGS='${BUILD_LDFLAGS}'"
- 
--REMOVE_M32 = "sed -i -e 's/#define TARGET_CFLAGS_ARM_ON_X86_64.*/#define TARGET_CFLAGS_ARM_ON_X86_64\t\"TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64\"/g' ${S}/configure.c"
--
--REMOVE_M32_class-cross = ""
--
- do_configure() {
-     :
- }
-@@ -79,7 +73,7 @@ do_compile_prepend() {
-     esac
- 
-     sed -i s/FORCE_DEFINE_ARCH/"${ARCH}"/g ${S}/configure.c
--    ${REMOVE_M32}
-+    sed -i -e 's/#define TARGET_CFLAGS_ARM_ON_X86_64.*/#define TARGET_CFLAGS_ARM_ON_X86_64\t\"TARGET_CFLAGS=-D_FILE_OFFSET_BITS=64\"/g' ${S}/configure.c
-     sed -i 's/&gt;/>/g' ${S}/Makefile
- }
- 
--- 
-2.7.4
+  ah, right, i was just reading (and thinking) backwards.
 
+rday
 
