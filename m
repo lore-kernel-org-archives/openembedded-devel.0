@@ -1,24 +1,25 @@
 Return-Path: <rpjday@crashcourse.ca>
 Received: from cpanel7.indieserve.net (cpanel7.indieserve.net [199.212.143.8])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F0C960CB9
+	by mail.openembedded.org (Postfix) with ESMTP id D154960FEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2020 19:10:46 +0000 (UTC)
+	Thu, 19 Mar 2020 19:12:36 +0000 (UTC)
 Received: from cpef81d0f814063-cmf81d0f814060.cpe.net.cable.rogers.com
-	([174.114.57.56]:33184 helo=localhost.localdomain)
+	([174.114.57.56]:33196 helo=localhost.localdomain)
 	by cpanel7.indieserve.net with esmtpsa (TLS1.2) tls
 	TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
 	(envelope-from <rpjday@crashcourse.ca>)
-	id 1jF0Z4-00Cz9H-QP; Thu, 19 Mar 2020 15:10:47 -0400
-Date: Thu, 19 Mar 2020 15:10:44 -0400 (EDT)
+	id 1jF0ar-00CzPO-DS; Thu, 19 Mar 2020 15:12:37 -0400
+Date: Thu, 19 Mar 2020 15:12:36 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@localhost.localdomain
-To: Adrian Bunk <bunk@stusta.de>
-In-Reply-To: <20200319173223.GC29515@localhost>
-Message-ID: <alpine.LFD.2.21.2003191510270.3869@localhost.localdomain>
+To: Ross Burton <ross@burtonini.com>
+In-Reply-To: <ba526e90-ccd7-04e2-5907-026b754a2da0@burtonini.com>
+Message-ID: <alpine.LFD.2.21.2003191511320.3869@localhost.localdomain>
 References: <alpine.LFD.2.21.2003190907590.10468@localhost.localdomain>
 	<20200319134213.GA29515@localhost>
 	<alpine.LFD.2.21.2003191302490.458222@localhost.localdomain>
 	<20200319173223.GC29515@localhost>
+	<ba526e90-ccd7-04e2-5907-026b754a2da0@burtonini.com>
 MIME-Version: 1.0
 X-OutGoing-Spam-Status: No, score=-1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -34,8 +35,7 @@ X-Authenticated-Sender: cpanel7.indieserve.net: rpjday@crashcourse.ca
 X-Source: 
 X-Source-Args: 
 X-Source-Dir: 
-Cc: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: proper way to report(?) conflicting files being installed?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -49,50 +49,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2020 19:10:47 -0000
+X-List-Received-Date: Thu, 19 Mar 2020 19:12:38 -0000
 Content-Type: text/plain; charset=US-ASCII
 
-On Thu, 19 Mar 2020, Adrian Bunk wrote:
+On Thu, 19 Mar 2020, Ross Burton wrote:
 
-> On Thu, Mar 19, 2020 at 01:09:13PM -0400, Robert P. J. Day wrote:
-> > On Thu, 19 Mar 2020, Adrian Bunk wrote:
+> On 19/03/2020 17:32, Adrian Bunk wrote:
+> >>    this does seem backwards ... if both gnome-common and
+> >> autoconf-archive currently try to install those two m4-related files,
+> >> doing the above pretty much *assures* an installation conflict,
+> >> ...
 > >
-> > > On Thu, Mar 19, 2020 at 09:22:54AM -0400, Robert P. J. Day wrote:
-> > > >...
-> > > > +# ax_code_coverage.m4 and ax_check_enable_debug.m4 are in gnome-common only
-> > > > +# because older versions of autoconf-archive didn't have them yet. Now they
-> > > > +# are in autoconf-archive from OE-core. We depend on that below to ensure
-> > > > +# that recipes which only depend on gnome-common still get them.
-> > > > +do_install_append () {
-> > > > +    rm -f ${D}${datadir}/aclocal/ax_code_coverage.m4
-> > > > +    rm -f ${D}${datadir}/aclocal/ax_check_enable_debug.m4
-> > > > +}
-> > > > +RDEPENDS_${PN} += "autoconf-archive"
-> > > > +DEPENDS_append_class-native = " autoconf-archive-native"
-> > > > +
-> > > >
-> > > >   it *appears* that solved the problem, which raises the question --
-> > > > should this patch be applied to the current gnome-common recipe? that
-> > > > patchwork entry dates back to 2017 ... should it have been applied at
-> > > > some point?
-> > >
-> > > The currently implemented solution is:
-> > > # Default to enable autoconf-archive to avoid conflicts
-> > > PACKAGECONFIG ??= "autoconf-archive"
-> > > PACKAGECONFIG[autoconf-archive] = "--with-autoconf-archive, --without-autoconf-archive, autoconf-archive"
-> > >
-> > > It is not clear to me why this gives the user to disable it
-> > > instead of unconditionally enabling it.
-> >
-> >   this does seem backwards ... if both gnome-common and
-> > autoconf-archive currently try to install those two m4-related files,
-> > doing the above pretty much *assures* an installation conflict,
-> >...
+> > No, --with-autoconf-archive makes gnome-common not install the
+> > conflicting files.
 >
-> No, --with-autoconf-archive makes gnome-common not install the
-> conflicting files.
+> I should point out that gnome-common is dead upstream and mostly
+> unused now, so if you find a recipe using it do check that it is
+> actually needed.
 
-  ah, right, i was just reading (and thinking) backwards.
+  in fact, just earlier this aft, i sent the short note, "um ...
+what are you doing that needs that gnome-common thing?"
+
+  i await the reply.
 
 rday
 
