@@ -1,27 +1,37 @@
-Return-Path: <pjtexier@koncepto.io>
-Received: from koncepto.io (koncepto.io [195.154.119.111])
-	by mail.openembedded.org (Postfix) with ESMTP id 1118860C61
+Return-Path: <SRS0=nN3C=5E=stusta.de=bunk@stusta.mhn.de>
+Received: from mail.stusta.mhn.de (mail.stusta.mhn.de [141.84.69.5])
+	by mail.openembedded.org (Postfix) with ESMTP id EBED060CD9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Mar 2020 13:41:11 +0000 (UTC)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr
-	[193.250.66.88]) by koncepto.io (Postfix) with ESMTPSA id 150576010A;
-	Thu, 19 Mar 2020 14:41:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584625270;
-	bh=SEYlHXJUNKRWfCtP2ZpR2opLFQSn0x/qLD4+Ee4Sy30=;
-	h=From:To:Cc:Subject:Date:From;
-	b=QDlV+FNNZ/z0yPHVQSlb6yT4aABKh9lCOXqVnMdp/DBMv/QGCWZhinSIGpLAKkJEp
-	AYGG3/N5lSCtKowYrQ0HGFij3KnBR0x2xZLvGKOqicglIowhNR8DepHg1fw2d+jIVu
-	AoNbA88WSc53QAZmSEPwAIaSMVUfPTasJbR1Pr+rJQUj/YgKyTMIjUaYWM2e3m7a9a
-	adiieHxlG65UutLpzK6eSo9MmaBlHz+PkZt72KsLoAqR7dQMvV/mmC31WsxU8scGCZ
-	ZaRzenWfmDoh1x4j4arMY5dSPEIEk9LRwfzrtPOmvEbYO1a0WYRj5n1jUb2X8ja6jt
-	yh7Nnw7opCF2w==
-From: Pierre-Jean Texier <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Mar 2020 14:41:08 +0100
-Message-Id: <1584625268-20452-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] libev: upgrade 4.31 -> 4.33
+	Thu, 19 Mar 2020 13:42:17 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	by mail.stusta.mhn.de (Postfix) with ESMTPSA id 48jp482yYlz3L;
+	Thu, 19 Mar 2020 14:42:15 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stusta.de;
+	s=default; t=1584625336;
+	bh=XK6xNLaKYDRbYKRMo3a6NyWSFFVInwhRI0OFSCDMD0k=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=dkncZfC5yQ5A5Y4jRqvRm7vz13nRniYentIlZIHEoa9vV344JwKjx1nCqLo49XoUI
+	8dk4+m2XtEfD/AN1s6jY04KtQrAcTIsEZigIXrAZmvuSiCrmKcvVYXdlzmjiwyxRmI
+	LKuJyu5wlSwyVERh5J7nGJe7FPU1EkgrREl2kRqRUq/DLhl+ywiQgKMxuul3U86Pn5
+	emrkwnxmAEqVYdR0bqPwHkyXUEoOUVYNmN3hD9bedlHePG3P5s5/Gq9D8BWtixJpcy
+	yAP0WS/gNqo1b0ZXXBxweOul2NsBrtSfK62lUWGgU1iW2ZHYSjDfwVyjczi8phhdje
+	jXXdbCUBFEzN8y3zOQhcUWh5FOg9Z/b04gvw8uMawf9i9iqONmluq1HHC0V0yTquPA
+	voNyHwjB0YGaTpci1gidOBktRrOOD26Zleg5ToHaZGq+TVQB1tJwZYx0s4FdgxbINk
+	3EaKQDn0hnfjMeLEl2hUVWqw1uqqpZOxODLB/ivD3+boy8dUOVWK4cz0gL8kl3X6Yf
+	e1rQdmodQvHj5u+QZL7sCEeZDu3yfYGxzMqtQhv5QaLEDH1SBGFcykr5nAkZI3K1lH
+	Wq6JKu6P5PNWvZSvVY6wX4Q2ufLgPkgzYKwr0uG+M7Crw5RsTia47WB14kgRkjlJnH
+	k30DB2P5pNJz9Pvlvn+Ei90g=
+Date: Thu, 19 Mar 2020 15:42:13 +0200
+From: Adrian Bunk <bunk@stusta.de>
+To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+Message-ID: <20200319134213.GA29515@localhost>
+References: <alpine.LFD.2.21.2003190907590.10468@localhost.localdomain>
+MIME-Version: 1.0
+In-Reply-To: <alpine.LFD.2.21.2003190907590.10468@localhost.localdomain>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: proper way to report(?) conflicting files being installed?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,58 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Mar 2020 13:41:12 -0000
+X-List-Received-Date: Thu, 19 Mar 2020 13:42:18 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-The complete Changes since 4.31 are:
+On Thu, Mar 19, 2020 at 09:22:54AM -0400, Robert P. J. Day wrote:
+>...
+> +# ax_code_coverage.m4 and ax_check_enable_debug.m4 are in gnome-common only
+> +# because older versions of autoconf-archive didn't have them yet. Now they
+> +# are in autoconf-archive from OE-core. We depend on that below to ensure
+> +# that recipes which only depend on gnome-common still get them.
+> +do_install_append () {
+> +    rm -f ${D}${datadir}/aclocal/ax_code_coverage.m4
+> +    rm -f ${D}${datadir}/aclocal/ax_check_enable_debug.m4
+> +}
+> +RDEPENDS_${PN} += "autoconf-archive"
+> +DEPENDS_append_class-native = " autoconf-archive-native"
+> +
+> 
+>   it *appears* that solved the problem, which raises the question --
+> should this patch be applied to the current gnome-common recipe? that
+> patchwork entry dates back to 2017 ... should it have been applied at
+> some point?
 
-4.33 Wed Mar 18 13:22:29 CET 2020
-        - the 4.31 timerfd code wrongly changed the priority of the signal
-          fd watcher, which is usually harmless unless signal fds are
-          also used (found via cpan tester service).
-        - the documentation wrongly claimed that user may modify fd and events
-          members in io watchers when the watcher was stopped
-          (found by b_jonas).
-        - new ev_io_modify mutator which changes only the events member,
-          which can be faster. also added ev::io::set (int events) method
-          to ev++.h.
-        - officially allow a zero events mask for io watchers. this should
-          work with older libev versions as well but was not officially
-          allowed before.
-        - do not wake up every minute when timerfd is used to detect timejumps.
-        - do not wake up every minute when periodics are disabled and we have
-          a monotonic clock.
-        - support a lot more "uncommon" compile time configurations,
-          such as ev_embed enabled but ev_timer disabled.
-        - use a start/stop wrapper class to reduce code duplication in
-          ev++.h and make it needlessly more c++-y.
-        - the linux aio backend is no longer compiled in by default.
-        - update to libecb version 0x00010008.
+The currently implemented solution is:
+# Default to enable autoconf-archive to avoid conflicts
+PACKAGECONFIG ??= "autoconf-archive"
+PACKAGECONFIG[autoconf-archive] = "--with-autoconf-archive, --without-autoconf-archive, autoconf-archive"
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
----
- meta-oe/recipes-connectivity/libev/{libev_4.31.bb => libev_4.33.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/libev/{libev_4.31.bb => libev_4.33.bb} (80%)
+It is not clear to me why this gives the user to disable it
+instead of unconditionally enabling it.
 
-diff --git a/meta-oe/recipes-connectivity/libev/libev_4.31.bb b/meta-oe/recipes-connectivity/libev/libev_4.33.bb
-similarity index 80%
-rename from meta-oe/recipes-connectivity/libev/libev_4.31.bb
-rename to meta-oe/recipes-connectivity/libev/libev_4.33.bb
-index beea855..760c2db 100644
---- a/meta-oe/recipes-connectivity/libev/libev_4.31.bb
-+++ b/meta-oe/recipes-connectivity/libev/libev_4.33.bb
-@@ -5,8 +5,8 @@ LICENSE = "BSD-2-Clause | GPL-2.0+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
- 
- SRC_URI = "http://dist.schmorp.de/libev/Attic/${BP}.tar.gz"
--SRC_URI[md5sum] = "20111fda0df0a289c152faa2aac91b08"
--SRC_URI[sha256sum] = "ed855d2b52118e32c0c1a6a32bd18c97f9e6711ca511f5ee12de3b9eccc66e5a"
-+SRC_URI[md5sum] = "a3433f23583167081bf4acdd5b01b34f"
-+SRC_URI[sha256sum] = "507eb7b8d1015fbec5b935f34ebed15bf346bed04a11ab82b8eee848c4205aea"
- 
- inherit autotools
- 
--- 
-2.7.4
+> rday
 
+cu
+Adrian
 
