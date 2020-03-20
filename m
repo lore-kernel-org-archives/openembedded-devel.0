@@ -1,16 +1,16 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
-	(mail-co1nam11on2056.outbound.protection.outlook.com [40.107.220.56])
-	by mail.openembedded.org (Postfix) with ESMTP id 1EF43605A0
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+	(mail-mw2nam12on2073.outbound.protection.outlook.com [40.107.244.73])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AF596007B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2020 03:45:47 +0000 (UTC)
+	Fri, 20 Mar 2020 06:42:43 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
-	b=eaVIwYHgbAGVsnJ+mATPFnCSJUsze/xFOvccL/ICZLV+WKZHRYZl1ObCHPotqu3VbiiHRn36aVMnSXH2c3w00FqBXGHZpZw1q9Q2Myi5B7qoSStZFuj3yixDRAqAnAUbaME/HkWduzezXnHsH/AVbcyPEgrG39c5KmgYvpLupGoLqGUeKMbXKKKGvv0hUiRTFi1VS/+zfJQz/BXUD1SaJiwokO7do4jtTxW8GWSLAxtnXn78L8qQa446gJBiFAzYJX8WZUH0gxbIs0vm+AiZfp1eJYKGt/cZj4lQJGRCLpYGWFhC70IGmvbwCAImybaIpLFOAs2vQq3nCoQ3XCJymw==
+	b=Vgp3I+Q9pe9nGvS/kSv/bRyVwzzrG/LK2aHAG367j5HZyXePq/pDGjhGZNKZ1p5WcFWJR/k9/XWyM5rjgPHCYMNh0DfBbQRsaMIxZSvNwd9aC2S9h6HptcHO5RFggDC0JgpPT9lcUPdWsG4G9aWSZuULaFuVTZYEs5jC/RSqCLT/+hlXRR78QGUEZYRK+thPqjsuqhKEmTMa2zrahBBa7eSeRHa8NhJjsllMPkyH69+3bTvxurvcgU9pzYFODdavEHqsinKx2S9P752Jty+KfIX4BFJnXn8AXelkKxM8SID3YZzwEkRH9G3yH4Fkks3y7Ws7sADVWeSguvq8kRVC3w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
 	s=arcselector9901;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=/XHMVPSMbWrVCUvjOKp4gyOoj4O3A5lNMyEnG85abD8=;
-	b=dPXB50/rwjVGlaS1sUOVnB06FXET+n1X0V1KE+2DcEUkIGe1E2UV1UTstUrfnekway84+Kmiin/N6c2wsJv+e9uKojut/bFY79AQSfllZIJifLAtpMby2JGIb11RIfGtnP5e/aVNEF82dQoG6FZfdenzeWTZA9pOpwSxY0mFuEyuHHlJcQ7ZBcx5KCRclhYZDztie6lPRaGeejeFEiWH/PwwKUEj/mM/yluWqmDscXbYHQcVfdEdqKaPjqKCbCUmwdcmnMTJbZiNiDWD2d6iLWz5mKQUoX5MvA5HRe27GfA58n4OUSnAkBq7EgoqX5rqiqaN8fvIHCZlBlB2zasyZQ==
+	bh=S5qhCBr68vT2TG5Nd43owKZbkP8PTEtOcAUOvPxe4jc=;
+	b=n/VGbEcznEyR7uIPzd2V1FdKVtf27O02kllobQQZzxugKuF8wA/y4wLpTsGxrTWv9hPITLi9DgGecR0rnOvtPZSLo1f2uqZyAxA3VNiQvcMjcvMrmjPz9BGqPfIiB+DgYVrstGs8BsDVYIda6vW7/KC5rl5U9l2BUsJPaLwETfI4LRmTkse+ml8ByutEYTLLFJK810zrjlwJ/j2ys+eI9SAAL9CZqywT+mNxDuIHRxd/h/wvjNwK3acQaRQjAYeYoHkqHnmv2QFp9jQcCHgxN+RVVVfX+0JgyMfntrgMQRgRcJvY2i6IJta8NCiEfBByJX0Cts4bssIEtC3sjl4oFA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 	smtp.mailfrom=windriver.com; dmarc=pass action=none
 	header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
@@ -18,28 +18,29 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=windriversystems.onmicrosoft.com;
 	s=selector2-windriversystems-onmicrosoft-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
-	bh=/XHMVPSMbWrVCUvjOKp4gyOoj4O3A5lNMyEnG85abD8=;
-	b=mG+Vwfr5o65yCttgPS1z7rfiRk7GZ2o1kUTZyitL1NkN1gU5jn4L+X/zs1/FUX5M7M3L6V33L8lRnHs98NYOB5KaSnkbju0WoXv5Rvyf9IBy24489WmsvSmKQJJZ2kp844QK+AFyoTXVbV6CVNGgIpwWqjuhBQU29XTN9lUq9tk=
+	bh=S5qhCBr68vT2TG5Nd43owKZbkP8PTEtOcAUOvPxe4jc=;
+	b=oRRzAZBoXIKS65VEOAZb7TYDPVqxSQTj1t+tAUN90HYxwXjlJtRYQOE58s+QvImVITe+saIMTCjwXI+9F0w558+pvDJYfm2Y11Ir3UJIQbg2z3xP8h7X0BwQF2Z36OnD8A2+9XLkEAGsoaVnziBvR2eybWYVkOEh2aZEBoJl9po=
 Received: from DM6PR11MB3498.namprd11.prod.outlook.com (2603:10b6:5:6c::22) by
-	DM6PR11MB3785.namprd11.prod.outlook.com (2603:10b6:5:13f::30) with
+	DM6PR11MB4009.namprd11.prod.outlook.com (2603:10b6:5:193::14) with
 	Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
-	15.20.2814.21; Fri, 20 Mar 2020 03:45:47 +0000
+	15.20.2835.20; Fri, 20 Mar 2020 06:42:43 +0000
 Received: from DM6PR11MB3498.namprd11.prod.outlook.com
 	([fe80::59da:f995:a842:c07c]) by
 	DM6PR11MB3498.namprd11.prod.outlook.com
 	([fe80::59da:f995:a842:c07c%4]) with mapi id 15.20.2835.017;
-	Fri, 20 Mar 2020 03:45:47 +0000
+	Fri, 20 Mar 2020 06:42:43 +0000
 From: "Chen, Qi" <Qi.Chen@windriver.com>
 To: =?iso-8859-1?Q?Andreas_M=FCller?= <schnitzeltony@gmail.com>,
 	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Thread-Topic: [oe] [PATCH 1/5] libnma: initial add 1.8.28
-Thread-Index: AQHV/WYcLGLkRsJFuU+/DATvaiYalKhQ2PH3
-Date: Fri, 20 Mar 2020 03:45:47 +0000
-Message-ID: <DM6PR11MB349890ADEBB154F7AB354EF4EDF50@DM6PR11MB3498.namprd11.prod.outlook.com>
-References: <20200318204411.12996-1-schnitzeltony@gmail.com>
-In-Reply-To: <20200318204411.12996-1-schnitzeltony@gmail.com>
+Thread-Index: AQHV/WYcLGLkRsJFuU+/DATvaiYalKhQ2PH3gAAxjt4=
+Date: Fri, 20 Mar 2020 06:42:43 +0000
+Message-ID: <DM6PR11MB3498A7172CD23A5BCE165647EDF50@DM6PR11MB3498.namprd11.prod.outlook.com>
+References: <20200318204411.12996-1-schnitzeltony@gmail.com>,
+	<DM6PR11MB349890ADEBB154F7AB354EF4EDF50@DM6PR11MB3498.namprd11.prod.outlook.com>
+In-Reply-To: <DM6PR11MB349890ADEBB154F7AB354EF4EDF50@DM6PR11MB3498.namprd11.prod.outlook.com>
 Accept-Language: en-US, zh-CN
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
@@ -47,32 +48,32 @@ authentication-results: spf=none (sender IP is )
 	smtp.mailfrom=Qi.Chen@windriver.com; 
 x-originating-ip: [192.103.52.1]
 x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 25805dd9-44b3-4f4a-16dc-08d7cc812d3e
-x-ms-traffictypediagnostic: DM6PR11MB3785:
-x-microsoft-antispam-prvs: <DM6PR11MB378586B2E3C71F0B43F2955DEDF50@DM6PR11MB3785.namprd11.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:8273;
+x-ms-office365-filtering-correlation-id: 902b6302-4b22-4549-9191-08d7cc99e4c4
+x-ms-traffictypediagnostic: DM6PR11MB4009:
+x-microsoft-antispam-prvs: <DM6PR11MB4009DAD8D632EF6CFB6F7DBEEDF50@DM6PR11MB4009.namprd11.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8882;
 x-forefront-prvs: 03484C0ABF
 x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(346002)(376002)(396003)(39850400004)(136003)(366004)(199004)(66446008)(55016002)(71200400001)(81156014)(8676002)(19627405001)(33656002)(81166006)(9686003)(110136005)(64756008)(316002)(7696005)(2906002)(66946007)(6506007)(76116006)(66556008)(91956017)(478600001)(5660300002)(186003)(52536014)(86362001)(8936002)(66476007)(26005)(966005);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:DM6PR11MB3785;
+	SFS:(10009020)(346002)(396003)(376002)(39850400004)(366004)(136003)(199004)(8676002)(81166006)(81156014)(86362001)(9686003)(66574012)(966005)(8936002)(19627405001)(478600001)(71200400001)(2940100002)(33656002)(110136005)(7696005)(316002)(2906002)(26005)(186003)(66476007)(66946007)(66556008)(64756008)(91956017)(66446008)(76116006)(52536014)(6506007)(55016002)(5660300002);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:DM6PR11MB4009;
 	H:DM6PR11MB3498.namprd11.prod.outlook.com; FPR:; SPF:None;
 	LANG:en; PTR:InfoNoRecords; A:1; 
 received-spf: None (protection.outlook.com: windriver.com does not designate
 	permitted sender hosts)
 x-ms-exchange-senderadcheck: 1
 x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: eTZ/RRhLmzMbiv/GQRf0ALaF4abqAKCBqQVLfLUIyR0lWayj+u/ZFw4XuUXGDfdsBJcL+QrGZJ2aCgAJUhGdSLHimnQzsA6HFvLSij2O5UmElCHSsNO7900z9lpbHj+52xev7mq2GEAZSEr3yG1RbSBrCfP4Z9FpHma7UR94huyauvzqKb2fLFZ/U6soMAPkWEeJ5b+7DDQY1x4W9ltllSMabhTzl3hKeddghWYi/MhxTkiV4Yyny/Hy7df3PGrPl1thp/io/ARPUZxY4kAeaPkV+LN6y+5eTed84EW9e2jqAYfJ1bCRMTrFG+lr/yVSft0zQclaIQvS5bKXvezwAGOddbql6Sa7ikc5499aLq9eZqTCcU5ccPgElmcsG4NSqOSAWv3GDZIc6msZ9HIgdDWVimUetXq5iGjGbHE3WM/0sKe+tPEjLA99PyylWXBVmgSbnKluQPGQOGBBLQntjyVPo6I4+//koX8UN7o3pM85aeZgRyNzMbyEB+70FxkSUXZvfY3orLMLBladaw3f2Q==
-x-ms-exchange-antispam-messagedata: 0JTQOmPSToifs64OXHaBCH130Lozry9gFYakZ4CkpsgvqLayItycr7KGwV8NowVLAjFap4hdpfpOQRlM4jMyk8dFl8Xzazv0vsJFrn6HLOxtUTOk7OnS43rGNdqakzRwj6IgS0wB2bkvEOuy3q+Dug==
+x-microsoft-antispam-message-info: aBdtMUV3imk73c6CxOTfkflOmIQQP5RzBNia6DrJPe3NMz1hPG7H+hvpfqmyFCFZdA1/f9JJDSX/q4aAd8fCpfgdayViN+cxUgypoDui+JuUuLFBdsAhzE3BU35+ke3XO6tjQ7xEbd/Hac1R8mo0toL9fbLv+j2cTfU6F3+PrO0II30RhbGwqQUVyQbLIU24z0D2pYVzuRbaU8S0QVMEMgDqIcdFppme3tJcv6ae45mRVAnO86z+Ahu/KijVQhfB38QnKrivvra2a83zd1JxsVC0KOGDecoH6JLRwC80aKLjMxP7BE24cgJPgdNMievMYcI+iQkXiCxevG5Y6em+1gmCOMgs9WfgFWuWEgQrqMM8+OlVXXvf/zQefWB/9nH/EtS76USvkf+2swm3LvKCt941r1kAhTlE0XaKA3gvL+bEnC1V2jWim6YNyk4weQikRu1tJ9eIYX45n+a9zkUC5gCYGIUzTWXN9mSwGC//lCCV/NT+08Qxm6b75LGchJVgL1T968upud1FXQRXzVHs0Q==
+x-ms-exchange-antispam-messagedata: wz1bFo0BL0OxipRQWSaorVU3ZKko2DrN07Y3lwQ5lOF4n0U/O+LcC6AjC+RxBHXvMoGVXIeT0x112A7NYo9KR43JGT56On9DkgBct1cpR5Azt5504d5bbx9K+bkIYoGiGThWii3e/KMCuwloI++X0A==
 x-ms-exchange-transport-forked: True
 MIME-Version: 1.0
 X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 25805dd9-44b3-4f4a-16dc-08d7cc812d3e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Mar 2020 03:45:47.7066 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 902b6302-4b22-4549-9191-08d7cc99e4c4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Mar 2020 06:42:43.5395 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: LXcmVnlus8XMp2VYC/+mXg31ADsA7W4qrmISKO7TNajzj38YHNfJyQKkB/3HoGGC26HNBRLkZO3PSn8EffJriA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB3785
+X-MS-Exchange-CrossTenant-userprincipalname: y3eUkx1QEGi8utY/EXc/GiPJZY1YJ7GxubsjkbU/wqCQKrOiu3nK0DuemDso4SF7RK27wqM+m0Z7gV3ho+juSg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR11MB4009
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [PATCH 1/5] libnma: initial add 1.8.28
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -87,10 +88,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Mar 2020 03:45:48 -0000
+X-List-Received-Date: Fri, 20 Mar 2020 06:42:44 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
+
+Hi Andreas,
+
+There's also another problem. The PACKAGECONFIG item, 'gcr', cannot be disa=
+bled, otherwise, we will have do_configure error.
+
+Best Regards,
+Chen Qi
+________________________________
+From: openembedded-devel-bounces@lists.openembedded.org <openembedded-devel=
+-bounces@lists.openembedded.org> on behalf of Chen, Qi <Qi.Chen@windriver.c=
+om>
+Sent: Friday, March 20, 2020 11:45
+To: Andreas M=FCller <schnitzeltony@gmail.com>; openembedded-devel@lists.op=
+enembedded.org <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] [PATCH 1/5] libnma: initial add 1.8.28
 
 Hi Andreas,
 
@@ -159,6 +176,11 @@ provider-info,mobile-broadband-provider-info"
 --
 2.21.1
 
+--
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 --
 _______________________________________________
 Openembedded-devel mailing list
