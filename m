@@ -1,49 +1,51 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-il1-f195.google.com (mail-il1-f195.google.com
-	[209.85.166.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E90860405
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com
+	[209.85.214.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 124DC61ADC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2020 08:19:25 +0000 (UTC)
-Received: by mail-il1-f195.google.com with SMTP id l14so4780186ilj.8
+	Fri, 20 Mar 2020 14:45:40 +0000 (UTC)
+Received: by mail-pl1-f179.google.com with SMTP id t16so2564048plr.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2020 01:19:26 -0700 (PDT)
+	Fri, 20 Mar 2020 07:45:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=16N+k5AgTDyi7PV8Kij6kFNALRyr6MsjRrLH8dvhJuU=;
-	b=lI80H2IYtxPXAjXqL3QbpWEpilP9rg6Nge7yn0M+2rsGg9IoGZ+ebgUzJ2EtKcQSYV
-	LyeXkq1sc32+bf4W2UrOXPKV7ZxsCPujlvcFRgmbb4UI3uEcpNYifa6Fu0FxBRl2JCRL
-	sgxq6tH1RtkKYW4GN9HdnMtHZo/iaReEJv/BVHjF/zACwYJMVG6fhv0DIGGR9bHBRiiJ
-	i4UHLt0fPZB44UE6UTkS6Lk3UFH5zJ5LXsI/S8OxCtqPUeg0z78KVTYJnmFs2v6z3HLP
-	PLFHpcrlfSxTZsTgXZgVF3ale9iua5Z7dASMB16RkTh4VvGzug8jjFUyASM+hht9Fe/C
-	ewug==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fXVhqkf2wUM+4WLu/fk0PIK10wpxVIvqNtyDIEiCAFI=;
+	b=tRHBAh5JsQ4ncliYFN1zLH+kH/X5TgjQwaaVWYYqYiX4fEq1d9rVMWrDql/SplBPoq
+	LihIZUwwbjRPhOlII7YhLE/zsyq+b1W1IY9y+qQdyTxW2kwwCa32MdHup69T/74IL6/0
+	+B63qtmgwOmqceuXMeEblzCa3Fel8cDTQwjRp60KmOpqkCsGgdNAdoU2N7AqcbzDgR4U
+	MFwhaeu+2dCBJBPl9JW/U6I6GbQ3sKfAwVWQsXIux5p1yJSg1rVzgxeMSSDpSUQFmjmV
+	IlAFkYTMoLL3BuoOjpjGylbnfwD5XMfx5LKf6geXmlmsdHO1vCoEj9GWQgPiEFtU6vLN
+	PuLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=16N+k5AgTDyi7PV8Kij6kFNALRyr6MsjRrLH8dvhJuU=;
-	b=c9qZB/3frZs7lbaFFP9gaI9vPdkyxFpBLOL3hXOqBxoQx2cqA6nH107CnCtyVTIUVE
-	ruwVw21KFhRKdIw7FkDYJKt6QrvOXdLrBE7jLCAseXYLhWFPEjzZC/KQlO3NV8t/h1zS
-	Hiv2U1e7BhOPAkKp0XRJ8C+HNMOCCz60dhYc2J35EiHpEk/Xg5kubXVwL2X3WGp3WVYd
-	VGRO+xCVXYxyry1D0l7AYUg8jCEsmnQF3D5wr3ChXovs3/dRflSRbK2By8pBPQ/owxXO
-	3CgnIl+v4HHhV83SajkX+HxmbwbjVfjoEJyVF76fzPsHLYYmmPWMD/iHKWl2wYGIa3lZ
-	toEQ==
-X-Gm-Message-State: ANhLgQ15Zq58FdaIFXvOR6JNspeH1ymMiV5QjsQrPbYj7NfHAEEITMIK
-	3vs9XdqcYYkA3lgH4DYxyQ2cVAoUYAIwq5Kw48I=
-X-Google-Smtp-Source: ADFU+vtCho3ZRDEQjhoAT2o3E+sC3uKbZzwfV9csScFDzqLbLYXAqCbVNtgiTY8/w2+hyGcp7a/d97nkxcKCKWTISX8=
-X-Received: by 2002:a92:c504:: with SMTP id r4mr6828961ilg.147.1584692366172; 
-	Fri, 20 Mar 2020 01:19:26 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=fXVhqkf2wUM+4WLu/fk0PIK10wpxVIvqNtyDIEiCAFI=;
+	b=Rxq3LhNKmdnI1t8u6edkKd4EHSmoPKnbILVtrMvzs8KxhNyYm4PCwD3ODgQXzrJEcg
+	bWkbuHFGMi8YVYe3c5RtkM2XiAIURpOmlSnkvxjGDeDAGMKCaWrybzow6wF8xxF/Bguh
+	OjFYE0K7GpAn15YEejk6Jjvyo5Ue4LEuNjzeFRHotBnB2Y+lLQoaiU3NEqZ/O0DHXD/p
+	CBLdekNujGcURgbXrmFLBx7a42ECg6i1wyCpH8z1SkWvhHBJSmj3hgM3TggNUTztCt7B
+	z3sWRXuaNsB1DbZQYknsGnHyj3SptasZ8yO7jq4uUPaY8xl59kyCk4QzQTLYV7UqFmh0
+	jVLQ==
+X-Gm-Message-State: ANhLgQ362EdQuTI/MNWnEsUhFapdG2TJTMNvZdmYrGZ2PSO+ajTo8Xwz
+	JA++k2+l7vecJGU+koIuJ1TD56twW1A=
+X-Google-Smtp-Source: ADFU+vug7BMJbqyCc6yXWNHmMT0hoZR4quRZKLvKERToq6eWcv3wCe/fcZGYWgY2L4hykhABbl91BQ==
+X-Received: by 2002:a17:90a:8806:: with SMTP id
+	s6mr10027254pjn.141.1584715541463; 
+	Fri, 20 Mar 2020 07:45:41 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::81bf])
+	by smtp.gmail.com with ESMTPSA id
+	k24sm5872176pgm.61.2020.03.20.07.45.40
+	(version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+	Fri, 20 Mar 2020 07:45:40 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 20 Mar 2020 07:45:51 -0700
+Message-Id: <20200320144553.2587659-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.25.2
 MIME-Version: 1.0
-References: <20200318204411.12996-1-schnitzeltony@gmail.com>
-	<DM6PR11MB349890ADEBB154F7AB354EF4EDF50@DM6PR11MB3498.namprd11.prod.outlook.com>
-	<DM6PR11MB3498A7172CD23A5BCE165647EDF50@DM6PR11MB3498.namprd11.prod.outlook.com>
-In-Reply-To: <DM6PR11MB3498A7172CD23A5BCE165647EDF50@DM6PR11MB3498.namprd11.prod.outlook.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 20 Mar 2020 09:19:15 +0100
-Message-ID: <CALbNGRTwwQzzb6Xij0WwxuMMv7wLs2909V9Mx36LcdemPMrGpg@mail.gmail.com>
-To: "Chen, Qi" <Qi.Chen@windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/5] libnma: initial add 1.8.28
+Subject: [meta-oe][PATCH 1/3] node: Enable cross-compiling options and disable dtrace and etw
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,18 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Mar 2020 08:19:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 20 Mar 2020 14:45:41 -0000
+Content-Transfer-Encoding: 8bit
 
-On Fri, Mar 20, 2020 at 7:42 AM Chen, Qi <Qi.Chen@windriver.com> wrote:
->
-> Hi Andreas,
->
-> There's also another problem. The PACKAGECONFIG item, 'gcr', cannot be disabled, otherwise, we will have do_configure error.
->
-> Best Regards,
-> Chen Qi
-Thanks for feedback - will look into both issues and send follow up.
+dtrace and etw are hardly used for embedded usecase
 
-Andreas
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+index a482c6b4ca..28b4136a5a 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_12.14.1.bb
+@@ -99,7 +99,9 @@ do_configure () {
+     export LD="${CXX}"
+     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
+     # $TARGET_ARCH settings don't match --dest-cpu settings
+-    python3 configure.py --prefix=${prefix} --without-snapshot --shared-openssl \
++    python3 configure.py --prefix=${prefix} --cross-compiling --without-snapshot --shared-openssl \
++               --without-dtrace \
++               --without-etw \
+                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
+                --dest-os=linux \
+                --libdir=${D}${libdir} \
+-- 
+2.25.2
+
 
