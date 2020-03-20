@@ -1,102 +1,53 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl1-f194.google.com (mail-pl1-f194.google.com
-	[209.85.214.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 08B6B61B41
+Return-Path: <robert.berger.oe.devel@gmail.com>
+Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com
+	[209.85.128.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 5541A61ADC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2020 15:53:11 +0000 (UTC)
-Received: by mail-pl1-f194.google.com with SMTP id t3so2644932plz.9
+	Fri, 20 Mar 2020 16:38:18 +0000 (UTC)
+Received: by mail-wm1-f66.google.com with SMTP id r7so7660902wmg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Mar 2020 08:53:13 -0700 (PDT)
+	Fri, 20 Mar 2020 09:38:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:autocrypt:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=9LrBXAlG1a/Rebw2KvPFXH1QRl+1DAFdotS8RTjSmDE=;
-	b=uCzrN2jYVhgrM1B9pUqXTPCCXE+EcK5IsiEf8RLXIai8hCimYfUP3dHBve+gVdTN9v
-	Kv/j2e9CybdH7XGRPViEzF09rRGy9BOqqHFAiTiW+8LzyNPcoAF3998BhnGBcAGLzDTa
-	5Qi1hj9ZKIjERsHoJ4qA0XhLyZ6RRwhSkrX/KlVftvXCNU/BXJsGFs6tuXNP9sPYmGVA
-	O7VztibXf6wO2LA4EDlzvXr1n0PCgaYKadx7Jq85NuKk78YWtnY0t+2fexR5sZGtCHJu
-	XlIaOBmxM6jsJZwZfO+sfQMwvg1jLIlhJVtw/DiYC/nrO6D5r8e6EWdLWiX3P3N4duRz
-	wuAQ==
+	h=to:cc:from:subject:message-id:date:user-agent:mime-version
+	:content-language:content-transfer-encoding;
+	bh=Eeidwq6mAdnoOpZL7+AwyUl1P+NWqUDAlNNxCfy6vf4=;
+	b=UjrIE0W9eVUFxg93PruGCukA++Y2Mq/aYS8IICbJHaizvx+qr7exrRYG4Hd/3VX+sl
+	m2/YXeoaRhKC/a4dm6mceccj5QQnc3omobbZIWQ3I/MZyKALPSvz1RRJQfHNChxHV+PO
+	WD+hnJDFDQLZtW6K5QSWwBTRttkaim5d5cS2Wi0L5nvrDeCUojlEnzqZlNS80svfA3Wb
+	XMrRFFe7UPY4pk1G7pxtq3aKrtfxb8fLe/2IlnejqM+HsgXVJQjdIFpeDLwvoObvqmQM
+	r91IPISnDjXZI46YLnHCKm4qvJflkCDQ7j/yw3/tteRZIWlQqi8qTVnN7ljqgv4ZZCLD
+	gMfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:autocrypt
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=9LrBXAlG1a/Rebw2KvPFXH1QRl+1DAFdotS8RTjSmDE=;
-	b=PZuNskx4hFmC5X46YvgqNrjQSoQpKLt4YsxeM7HYiJzUBtqpu9U7z6S59LvigZ8ueF
-	4pBqmMvX7oVJO4QNoP7wV85KfcoodPoXiBdLCoOV/acv7z0WFAhRCRe1R5RLgNgeTR7O
-	NmZGw1jWPJcqK86rwiIW0HMwwMFao/5VJi38h+AyDK3xfHIJveTq5Siqh/C1t9SpgBGB
-	g0REVp3cc3F33jkCzB6VBNM/C0SusdNB8lunzR/cqs6U+AK6en5vqBinhNcipUNIzonU
-	hEWAd42rv19kVejrvYwyvPgP22O/cLUfavxMDx+eyJUzSSVAyk+bnuBfyTD7uOIn++eR
-	qGkg==
-X-Gm-Message-State: ANhLgQ3juAWJI/FUVM/Aw+crx6pi9qhPUoD4e9+e5wf+IxTJqNXd3toi
-	c53cs+CbwpK7nJqFJsyN+VRxfqL8
-X-Google-Smtp-Source: ADFU+vtF8g6A1HNctUvqXwmM58wsGx1F9PG5ZrRUrmxqWC90GPlfKj6MlFejC/BiJdzgrbkUNvwQFg==
-X-Received: by 2002:a17:90b:3645:: with SMTP id
-	nh5mr10495802pjb.150.1584719592324; 
-	Fri, 20 Mar 2020 08:53:12 -0700 (PDT)
-Received: from ?IPv6:2601:202:4180:a5c0:7d4a:161a:ec93:c30e?
-	([2601:202:4180:a5c0:7d4a:161a:ec93:c30e])
-	by smtp.gmail.com with ESMTPSA id
-	w15sm5951446pfj.28.2020.03.20.08.53.08
+	h=x-gm-message-state:to:cc:from:subject:message-id:date:user-agent
+	:mime-version:content-language:content-transfer-encoding;
+	bh=Eeidwq6mAdnoOpZL7+AwyUl1P+NWqUDAlNNxCfy6vf4=;
+	b=hT7QE3bsUPas50iLsw9rofSLvf8LTi0Ny51v5bA0PY+zbvFKw/1pkX1UvXBEUolTuK
+	sAxyo3p+ozPqA2Z+lcsTXGT1wEYVmttAtfbm25ZYD/Zqulu2s6Sc5YvBeDCRwbfAoNz6
+	EauTjgkHF+w/k/67oAaD829X4qlGlJ8Vv4hnZqkKkUJijGfhIyFf8/0KtTp9SGnCdx+F
+	XLRCSrXcPrs1I18Yjem9bDOv86iCYBRfxH2YuwBdF35tRMom1+bIn6NMsPf1NTu6M2wT
+	iO6xSqwQ/hGyhPwax4w85gOqzwCXSCUwKKrXlsMWj8efFGMO9/nmpIfK+iR4OzlJuC+K
+	2aYA==
+X-Gm-Message-State: ANhLgQ2S35LF3bvm1hls5UmuDwPBjuCaiihm0E46HcRCVuZxB+qy9hA4
+	4RUQfyXYRXFXhLaw4+qifIY=
+X-Google-Smtp-Source: ADFU+vthKqGt2iCTWxbMRm04N8BXjD9bwdYyMdxvOR4Qgz3IDeALUrGgBChejMSw21HFR1wK3UwN3w==
+X-Received: by 2002:a1c:456:: with SMTP id 83mr11341638wme.54.1584722299577;
+	Fri, 20 Mar 2020 09:38:19 -0700 (PDT)
+Received: from [192.168.42.52] (athedsl-4432938.home.otenet.gr.
+	[79.129.148.26]) by smtp.gmail.com with ESMTPSA id
+	138sm8724332wmb.21.2020.03.20.09.38.18
 	(version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-	Fri, 20 Mar 2020 08:53:09 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>, Khem Raj <raj.khem@gmail.com>
-References: <20200320144553.2587659-1-raj.khem@gmail.com>
-	<20200320144553.2587659-3-raj.khem@gmail.com>
-	<CA+chaQczKRWOke9maR0n_4LRZ4KsUWYDuEjWtE7-Gawk8RoCRw@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
-	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
-	8CS2NxU=
-Message-ID: <dd222844-2183-a23c-d445-ac90b3305043@gmail.com>
-Date: Fri, 20 Mar 2020 08:53:07 -0700
+	Fri, 20 Mar 2020 09:38:19 -0700 (PDT)
+To: Richard Leitner <richard.leitner@skidata.com>
+From: "robert.berger.oe.devel" <robert.berger.oe.devel@gmail.com>
+Message-ID: <add27e61-09ac-3e8a-af0e-73479a3f97ab@gmail.com>
+Date: Fri, 20 Mar 2020 18:38:17 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
 	Thunderbird/68.4.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQczKRWOke9maR0n_4LRZ4KsUWYDuEjWtE7-Gawk8RoCRw@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 3/3] layers: update LAYERSERIES_COMPAT to dunfell
+Cc: openembedded-devel@lists.openembedded.org,
+	Robert Berger <robert.berger@reliableembeddedsystems.com>
+Subject: [meta-java] archiver.bbclass incompatible with openjdk-8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -109,165 +60,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Mar 2020 15:53:12 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Mar 2020 16:38:19 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+The problem can be very easily reproduced. Just enable the 
+archiver.bbclass and build openjdk-8 and it will break. I'll explain 
+further down why.
+
+I would really like to have some upstream solution, so openjdk-8 can be 
+built with the archiver.bbclass active, but so far I only have my hacky 
+patch[1].
+
+[1] 
+https://github.com/RobertBerger/meta-java/commit/a97d27ea0d6701df222c79fb1ce983fc39308c0c
+
+Here I try to explain the problem:
+
+1) Without the archiver class:
+
+in openjdk-8-common.inc:
+
+1.1) do_unpack[postfuncs] += "do_unpack_extract_submodules"
+
+1.2)
+
+do_unpack_extract_submodules () {
+     cd "${S}"
+     # tar --transform
+     tar xjf ${WORKDIR}/${CORBA_FILE_LOCAL} --transform 
+"s,-${CORBA_CHANGESET},,g"
+...
+}
+
+2) With the archiver class:
+
+2.1) do_unpack_and_patch could be used instead of do_unpack directly:
+
+2.1.1) It is always used for ARCHIVER_MODE[src] = "patched" and 
+ARCHIVER_MODE[src] = "configured".
+
+2.1.2) For ARCHIVER_MODE[src] = "original" it is only enabled if 
+ARCHIVER_MODE[diff] = "1" is also enabled.
+
+2.1.3) And for the new ARCHIVE_MODE[src] = "mirror" it is never enabled.
+
+Thanks to Saur for the detailed explanation when and when not 
+do_unpack_and_patch is being called.
+
+2.2) if do_unpack_and_patch() is used it sets WORKDIR itself to 
+${ARCHIVER_WORKDIR}, which defaults to ${WORKDIR}/archiver-work/
+
+2.3) Which makes
+
+do_unpack_extract_submodules () {
+     cd "${S}"
+     # tar --transform
+     tar xjf ${WORKDIR}/${CORBA_FILE_LOCAL} --transform 
+"s,-${CORBA_CHANGESET},,g"
+...
+}
+
+fail, since it should be tar xjf ${WORKDIR}/../${CORBA_FILE_LOCAL} 
+--transform "s,-${CORBA_CHANGESET},,g"
+
+...
+
+due to the additional directory structure.
+
+I would be happy to hear suggestions how to improve my hack.
+
+If I could somehow programatically figure out within BitBake that 
+do_unpack_extract_submodules is called from do_unpack_and_patch -> 
+do_unpack I guess it would be better. Just don't know how this can be 
+done. Is there a BitBake callstack?
+
+3) My (hacky) solution
+
+[1] 
+https://github.com/RobertBerger/meta-java/commit/a97d27ea0d6701df222c79fb1ce983fc39308c0c
 
 
+Regards,
 
-On 3/20/20 8:27 AM, Martin Jansa wrote:
-> Can we drop at least thud and warrior? without e.g. features_check or
-> mime-xdg bbclasses from dunfell oe-core some of these layers don't even
-> parse, so it might be worth keeping just dunfell (that's what I did for
-> meta-qt5 now).
-Not to mention the shifting of packages between core and meta-oe.
-
-- armin
->
-> On Fri, Mar 20, 2020 at 3:46 PM Khem Raj <raj.khem@gmail.com> wrote:
->
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  meta-filesystems/conf/layer.conf | 2 +-
->>  meta-gnome/conf/layer.conf       | 2 +-
->>  meta-initramfs/conf/layer.conf   | 2 +-
->>  meta-multimedia/conf/layer.conf  | 2 +-
->>  meta-networking/conf/layer.conf  | 2 +-
->>  meta-oe/conf/layer.conf          | 2 +-
->>  meta-perl/conf/layer.conf        | 2 +-
->>  meta-python/conf/layer.conf      | 2 +-
->>  meta-webserver/conf/layer.conf   | 2 +-
->>  meta-xfce/conf/layer.conf        | 2 +-
->>  10 files changed, 10 insertions(+), 10 deletions(-)
->>
->> diff --git a/meta-filesystems/conf/layer.conf
->> b/meta-filesystems/conf/layer.conf
->> index e8bd3628f8..be1635deea 100644
->> --- a/meta-filesystems/conf/layer.conf
->> +++ b/meta-filesystems/conf/layer.conf
->> @@ -15,4 +15,4 @@ LAYERVERSION_filesystems-layer = "1"
->>
->>  LAYERDEPENDS_filesystems-layer = "core openembedded-layer"
->>
->> -LAYERSERIES_COMPAT_filesystems-layer = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_filesystems-layer = "thud warrior zeus dunfell"
->> diff --git a/meta-gnome/conf/layer.conf b/meta-gnome/conf/layer.conf
->> index d381fdf070..7aa9507eb5 100644
->> --- a/meta-gnome/conf/layer.conf
->> +++ b/meta-gnome/conf/layer.conf
->> @@ -17,4 +17,4 @@ LAYERVERSION_gnome-layer = "1"
->>
->>  LAYERDEPENDS_gnome-layer = "core openembedded-layer networking-layer"
->>
->> -LAYERSERIES_COMPAT_gnome-layer = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_gnome-layer = "thud warrior zeus dunfell"
->> diff --git a/meta-initramfs/conf/layer.conf
->> b/meta-initramfs/conf/layer.conf
->> index 93220b1208..634e0883c6 100644
->> --- a/meta-initramfs/conf/layer.conf
->> +++ b/meta-initramfs/conf/layer.conf
->> @@ -16,7 +16,7 @@ BBFILE_PATTERN_meta-initramfs := "^${LAYERDIR}/"
->>  BBFILE_PRIORITY_meta-initramfs = "8"
->>  LAYERDEPENDS_meta-initramfs = "core"
->>
->> -LAYERSERIES_COMPAT_meta-initramfs = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_meta-initramfs = "thud warrior zeus dunfell"
->>
->>  SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
->>    dracut->virtual/kernel \
->> diff --git a/meta-multimedia/conf/layer.conf
->> b/meta-multimedia/conf/layer.conf
->> index 74dd4a1b03..2d52fb938a 100644
->> --- a/meta-multimedia/conf/layer.conf
->> +++ b/meta-multimedia/conf/layer.conf
->> @@ -31,4 +31,4 @@ LAYERVERSION_multimedia-layer = "1"
->>
->>  LAYERDEPENDS_multimedia-layer = "core meta-python"
->>
->> -LAYERSERIES_COMPAT_multimedia-layer = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_multimedia-layer = "thud warrior zeus dunfell"
->> diff --git a/meta-networking/conf/layer.conf
->> b/meta-networking/conf/layer.conf
->> index 866bda7558..7bc0702ba7 100644
->> --- a/meta-networking/conf/layer.conf
->> +++ b/meta-networking/conf/layer.conf
->> @@ -17,7 +17,7 @@ LAYERDEPENDS_networking-layer = "core"
->>  LAYERDEPENDS_networking-layer += "openembedded-layer"
->>  LAYERDEPENDS_networking-layer += "meta-python"
->>
->> -LAYERSERIES_COMPAT_networking-layer = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_networking-layer = "thud warrior zeus dunfell"
->>
->>  LICENSE_PATH += "${LAYERDIR}/licenses"
->>
->> diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
->> index 652a378f28..434537fd3a 100644
->> --- a/meta-oe/conf/layer.conf
->> +++ b/meta-oe/conf/layer.conf
->> @@ -34,7 +34,7 @@ LAYERVERSION_openembedded-layer = "1"
->>
->>  LAYERDEPENDS_openembedded-layer = "core"
->>
->> -LAYERSERIES_COMPAT_openembedded-layer = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_openembedded-layer = "thud warrior zeus dunfell"
->>
->>  LICENSE_PATH += "${LAYERDIR}/licenses"
->>
->> diff --git a/meta-perl/conf/layer.conf b/meta-perl/conf/layer.conf
->> index 2c730e4c75..1361fe0842 100644
->> --- a/meta-perl/conf/layer.conf
->> +++ b/meta-perl/conf/layer.conf
->> @@ -15,4 +15,4 @@ LAYERVERSION_perl-layer = "1"
->>
->>  LAYERDEPENDS_perl-layer = "core openembedded-layer"
->>
->> -LAYERSERIES_COMPAT_perl-layer = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_perl-layer = "thud warrior zeus dunfell"
->> diff --git a/meta-python/conf/layer.conf b/meta-python/conf/layer.conf
->> index db65943f56..7cfeafe599 100644
->> --- a/meta-python/conf/layer.conf
->> +++ b/meta-python/conf/layer.conf
->> @@ -14,6 +14,6 @@ LAYERVERSION_meta-python = "1"
->>
->>  LAYERDEPENDS_meta-python = "core openembedded-layer"
->>
->> -LAYERSERIES_COMPAT_meta-python = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_meta-python = "thud warrior zeus dunfell"
->>
->>  LICENSE_PATH += "${LAYERDIR}/licenses"
->> diff --git a/meta-webserver/conf/layer.conf
->> b/meta-webserver/conf/layer.conf
->> index 2c6fad4ac6..24469115e4 100644
->> --- a/meta-webserver/conf/layer.conf
->> +++ b/meta-webserver/conf/layer.conf
->> @@ -17,7 +17,7 @@ LAYERVERSION_webserver = "1"
->>
->>  LAYERDEPENDS_webserver = "core openembedded-layer"
->>
->> -LAYERSERIES_COMPAT_webserver = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_webserver = "thud warrior zeus dunfell"
->>
->>  LICENSE_PATH += "${LAYERDIR}/licenses"
->>
->> diff --git a/meta-xfce/conf/layer.conf b/meta-xfce/conf/layer.conf
->> index 070ea6ac7d..199c69e7b2 100644
->> --- a/meta-xfce/conf/layer.conf
->> +++ b/meta-xfce/conf/layer.conf
->> @@ -19,4 +19,4 @@ LAYERDEPENDS_xfce-layer += "multimedia-layer"
->>  LAYERDEPENDS_xfce-layer += "meta-python"
->>  LAYERDEPENDS_xfce-layer += "networking-layer"
->>
->> -LAYERSERIES_COMPAT_xfce-layer = "thud warrior zeus"
->> +LAYERSERIES_COMPAT_xfce-layer = "thud warrior zeus dunfell"
->> --
->> 2.25.2
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
-
+Robert
 
