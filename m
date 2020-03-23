@@ -1,56 +1,57 @@
 Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web12.765.1584999770415499617
+ by mx.groups.io with SMTP id smtpd.web11.810.1584999770495965065
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 23 Mar 2020 14:42:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=Jrow0wAA;
+ dkim=pass header.i=@koncepto.io header.s=default header.b=ZHHe9QJh;
  spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 9B49560031;
-	Mon, 23 Mar 2020 22:42:47 +0100 (CET)
+	by koncepto.io (Postfix) with ESMTPSA id 1B98260338;
+	Mon, 23 Mar 2020 22:42:49 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584999767;
-	bh=gnbKm0kgun8TPbzjmh9f5ZhDhtkXF6S8XkfCcL8iVa8=;
-	h=From:To:Cc:Subject:Date:From;
-	b=Jrow0wAAtVM0UmczoihpnAHJgQKTiHHG//GQFi1K5LMPhej24hAcBvrKhjokjhHYN
-	 jXl/5Fbl/QZ+PYtiIjJFxJ9FGd7q7DOGeygbMyXMbai1xNKoxLlujDckHWMEVRlXIF
-	 eyjuWT2VEDwCymFzslNfm4tiTocoZOcQbm7QQidSwyepjU1IwU89rUDM5TDOagdqGJ
-	 ZZ954EqPSd/N1bgR8jqkcAxbEcLSOXeOaX+8jVsOqrPA2oR91UsX2e1gfPKz5V0GdG
-	 /J5TZ7D/o3r/qoxS9jnmblBgFenip1HKYpAnKMZnnH8OA5Hc8vKBjduUlXYQyuJY+Q
-	 e68FiTE7KiqMQ==
+	s=default; t=1584999769;
+	bh=t7JXjBdwF5SpP1KcVOOY8FNVMfnXrl1q08GDbujDKM4=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=ZHHe9QJhhallk0OcX3Zrg3zG0dDvhm61Z89vHCwUfWcdQ8a9EqouPOpHPzMK1ptz5
+	 6HQxINMW+EhEzPMQWQmCHQMe8ai0ErUWOKrLXTHGNsXSitEq1jfvcJtjuC/0dijEU2
+	 teUX4MUNn1EOSAlj9hF9bI3jk+9t0j99mi+AWWDAoPTtYNKKQfurYXJk+gw4bdK1DG
+	 4qFOkmFABp2/4sDpz/5XdoxtnBpCxmEL61Pq8N9wFTxJj4VUR2hr0FYdm9MAT8oPDb
+	 iR4iagdxM6+6N9p2K60H16FJLTmvnLM03BYY24pE1ZZ+6Jo/bTzLZ48dDa3RDi0Nlr
+	 wrXYWZ4oIKgUQ==
 From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH 1/5] ufw: fix upstream check URL
-Date: Mon, 23 Mar 2020 22:42:26 +0100
-Message-Id: <1584999750-7278-1-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH 3/5] libmemcached: fix upstream check URL
+Date: Mon, 23 Mar 2020 22:42:28 +0100
+Message-Id: <1584999750-7278-3-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1584999750-7278-1-git-send-email-pjtexier@koncepto.io>
+References: <1584999750-7278-1-git-send-email-pjtexier@koncepto.io>
 
 Fixes:
 
-$: devtool check-upgrade-status ufw
+$: devtool check-upgrade-status libmemcached
 <...>
 
-INFO: ufw                       0.33            UNKNOWN_BROKEN  None
+INFO: libmemcached              1.0.18          UNKNOWN_BROKEN  None
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-networking/recipes-connectivity/ufw/ufw_0.33.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-support/libmemcached/libmemcached.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb b/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
-index d620e88..42fc262 100644
---- a/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
-+++ b/meta-networking/recipes-connectivity/ufw/ufw_0.33.bb
-@@ -17,6 +17,9 @@ SRC_URI = " \
-            file://0004-lp1039729.patch \
-            file://0005-lp1191197.patch \
- "
+diff --git a/meta-networking/recipes-support/libmemcached/libmemcached.inc b/meta-networking/recipes-support/libmemcached/libmemcached.inc
+index d9a821d..319ab29 100644
+--- a/meta-networking/recipes-support/libmemcached/libmemcached.inc
++++ b/meta-networking/recipes-support/libmemcached/libmemcached.inc
+@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=865490941c91ba790f0ea78dec93bd60"
+ 
+ SRC_URI = "http://launchpad.net/libmemcached/1.0/${PV}/+download/libmemcached-${PV}.tar.gz"
+ 
++UPSTREAM_CHECK_URI = "https://launchpad.net/libmemcached"
 +
-+UPSTREAM_CHECK_URI = "https://launchpad.net/ufw"
-+
- SRC_URI[md5sum] = "3747b453d76709e5a99da209fc0bb5f5"
- SRC_URI[sha256sum] = "5f85a8084ad3539b547bec097286948233188c971f498890316dec170bdd1da8"
+ TARGET_LDFLAGS += "-luuid"
+ TARGET_CFLAGS += "-D__USE_GNU -D_GNU_SOURCE"
  
 -- 
 2.7.4
