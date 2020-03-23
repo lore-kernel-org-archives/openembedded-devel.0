@@ -1,57 +1,71 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web12.52458.1584970419168868863
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web10.2108.1584988697703793855
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Mar 2020 06:33:40 -0700
+ Mon, 23 Mar 2020 11:38:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=PrIHylBS;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 0929E6010A;
-	Mon, 23 Mar 2020 14:33:36 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584970416;
-	bh=Xk/0xOyCiZ59q0V8esX8PDjf7f0sbnoAsHeop5cy0Rw=;
-	h=From:To:Cc:Subject:Date:From;
-	b=PrIHylBSmvjKGx3S8iDkpr64MrRihw9AyCZmnrbwLWTtsPp3ghbIDFkTJH/OkNBlN
-	 VkR31UOCCLKj7DmXnZTBqoip2jPMQ/eug0u/BAty99a33iaXBn9a57/iiJjRVwgM/A
-	 q9gSkywnbMXKIYFSRsXytPNQ0gK8fuCkSEDTB7joZymws5MHvqODbNU1rDwMiHRBDU
-	 Paw1WXpdwNuM8W+6pDS1Xya2RdrZeyFKV2G/LrTxTQGznOqbGpAY5vEfu4TWMzduwJ
-	 q5RaUHbW5aNPG6ZzfogmNeg5t5DmhEsB9+oC89B+6VHwydJe5/KN56LIpmdYc9HpXn
-	 8LvN4DY3ODwBA==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] libcereal: upgrade 1.2.2 -> 1.3.0
-Date: Mon, 23 Mar 2020 14:33:29 +0100
-Message-Id: <1584970409-18269-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: joe.slater@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 02NIcHaQ001936
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 23 Mar 2020 11:38:17 -0700 (PDT)
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCB.corp.ad.wrs.com
+ (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Mon, 23 Mar 2020
+ 11:38:11 -0700
+From: "Joe Slater" <joe.slater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: <joe.slater@windriver.com>, <randy.macleod@windriver.com>
+Subject: [meta-oe][PATCH 1/1] nss: suppress unused-function compile error
+Date: Mon, 23 Mar 2020 11:38:11 -0700
+Message-ID: <20200323183811.67969-1-joe.slater@windriver.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Content-Type: text/plain
 
-This is a feature and bug fix release.
+Allows qemumips64 nss to compile.
 
-See full changelog https://github.com/USCiLab/cereal/releases/tag/v1.3.0
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Joe Slater <joe.slater@windriver.com>
 ---
- .../libcereal/{libcereal_1.2.2.bb => libcereal_1.3.0.bb}                | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-support/libcereal/{libcereal_1.2.2.bb => libcereal_1.3.0.bb} (88%)
+ .../nss/nss/no_unused_function_error.patch             | 18 ++++++++++++++++++
+ meta-oe/recipes-support/nss/nss_3.51.bb                |  1 +
+ 2 files changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nss/nss/no_unused_function_error.patch
 
-diff --git a/meta-oe/recipes-support/libcereal/libcereal_1.2.2.bb b/meta-oe/recipes-support/libcereal/libcereal_1.3.0.bb
-similarity index 88%
-rename from meta-oe/recipes-support/libcereal/libcereal_1.2.2.bb
-rename to meta-oe/recipes-support/libcereal/libcereal_1.3.0.bb
-index 365b40b..6fc5881 100644
---- a/meta-oe/recipes-support/libcereal/libcereal_1.2.2.bb
-+++ b/meta-oe/recipes-support/libcereal/libcereal_1.3.0.bb
-@@ -6,7 +6,7 @@ SECTION = "libs"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e612690af2f575dfd02e2e91443cea23"
+diff --git a/meta-oe/recipes-support/nss/nss/no_unused_function_error.patch b/meta-oe/recipes-support/nss/nss/no_unused_function_error.patch
+new file mode 100644
+index 0000000..cce748f
+--- /dev/null
++++ b/meta-oe/recipes-support/nss/nss/no_unused_function_error.patch
+@@ -0,0 +1,18 @@
++nss: suppress unused-function compile error
++
++Upstream-Status: Inappropriate [workaround]
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++
++
++--- a/nss/coreconf/Werror.mk
+++++ b/nss/coreconf/Werror.mk
++@@ -96,7 +96,7 @@ ifndef WARNING_CFLAGS
++     endif #ndef NSS_ENABLE_WERROR
++ 
++     ifeq ($(NSS_ENABLE_WERROR),1)
++-      WARNING_CFLAGS += -Werror
+++      WARNING_CFLAGS += -Werror -Wno-error=unused-function
++     else
++       # Old versions of gcc (< 4.8) don't support #pragma diagnostic in functions.
++       # Use this to disable use of that #pragma and the warnings it suppresses.
+diff --git a/meta-oe/recipes-support/nss/nss_3.51.bb b/meta-oe/recipes-support/nss/nss_3.51.bb
+index 889967c..73e5150 100644
+--- a/meta-oe/recipes-support/nss/nss_3.51.bb
++++ b/meta-oe/recipes-support/nss/nss_3.51.bb
+@@ -32,6 +32,7 @@ SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/${VERSIO
+            file://system-pkcs11.txt \
+            file://nss-fix-nsinstall-build.patch \
+            file://0001-freebl-add-a-configure-option-to-disable-ARM-HW-cryp.patch \
++           file://no_unused_function_error.patch \
+            "
  
--SRCREV = "51cbda5f30e56c801c07fe3d3aba5d7fb9e6cca4"
-+SRCREV = "02eace19a99ce3cd564ca4e379753d69af08c2c8"
- SRC_URI = "git://github.com/USCiLab/cereal.git"
- 
- S = "${WORKDIR}/git"
+ SRC_URI[md5sum] = "e59dc16965ef7713669c628d2640ebd1"
 -- 
 2.7.4
 
