@@ -1,57 +1,58 @@
 Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.810.1584999770495965065
+ by mx.groups.io with SMTP id smtpd.web11.811.1584999770574867752
  for <openembedded-devel@lists.openembedded.org>;
  Mon, 23 Mar 2020 14:42:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=ZHHe9QJh;
+ dkim=pass header.i=@koncepto.io header.s=default header.b=jzi9UmSD;
  spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 1B98260338;
-	Mon, 23 Mar 2020 22:42:49 +0100 (CET)
+	by koncepto.io (Postfix) with ESMTPSA id 7921D60332;
+	Mon, 23 Mar 2020 22:42:48 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584999769;
-	bh=t7JXjBdwF5SpP1KcVOOY8FNVMfnXrl1q08GDbujDKM4=;
+	s=default; t=1584999768;
+	bh=PvVmefClAgw1Ez7j7YML6Aon009IMpGrDCikfzjLj9U=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=ZHHe9QJhhallk0OcX3Zrg3zG0dDvhm61Z89vHCwUfWcdQ8a9EqouPOpHPzMK1ptz5
-	 6HQxINMW+EhEzPMQWQmCHQMe8ai0ErUWOKrLXTHGNsXSitEq1jfvcJtjuC/0dijEU2
-	 teUX4MUNn1EOSAlj9hF9bI3jk+9t0j99mi+AWWDAoPTtYNKKQfurYXJk+gw4bdK1DG
-	 4qFOkmFABp2/4sDpz/5XdoxtnBpCxmEL61Pq8N9wFTxJj4VUR2hr0FYdm9MAT8oPDb
-	 iR4iagdxM6+6N9p2K60H16FJLTmvnLM03BYY24pE1ZZ+6Jo/bTzLZ48dDa3RDi0Nlr
-	 wrXYWZ4oIKgUQ==
+	b=jzi9UmSDD391UlVOfhb4X4yK14ZtpN7Xl8uED4kKZ7RFaQuaOV8w8/5/fXlDiu3ku
+	 FCG1Azd1/MJEv00QdiJkM8HLe7uIA7jKuLLNfLWyVubSu3O65I6HDgJMTjdJU3alm2
+	 W3FbknBfoYp+vyq2cLSGrGZ1UP0x2YMs53GYBoWj0oEgKUXDFZqFLPqdZ/JYHE0/6P
+	 bueLkS80T0qP9GzG1JGKgxDgTcQa7egYKBOnGt2UJy+1DwvnGzU8bFt96d3GgA3mK6
+	 bWPGbGLJv1k/oB8TADjd/Elx2jMTO6b8LJgZ/CQ3NKJG6d07Ox8nOZHZQGGRXrV3VJ
+	 iQlMD/6KdnpKg==
 From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH 3/5] libmemcached: fix upstream check URL
-Date: Mon, 23 Mar 2020 22:42:28 +0100
-Message-Id: <1584999750-7278-3-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH 2/5] frame: fix upstream check URL
+Date: Mon, 23 Mar 2020 22:42:27 +0100
+Message-Id: <1584999750-7278-2-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1584999750-7278-1-git-send-email-pjtexier@koncepto.io>
 References: <1584999750-7278-1-git-send-email-pjtexier@koncepto.io>
 
 Fixes:
 
-$: devtool check-upgrade-status libmemcached
+$: devtool check-upgrade-status frame
 <...>
 
-INFO: libmemcached              1.0.18          UNKNOWN_BROKEN  None
+INFO: frame                     2.5.0           UNKNOWN_BROKEN  None
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-networking/recipes-support/libmemcached/libmemcached.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-networking/recipes-support/libmemcached/libmemcached.inc b/meta-networking/recipes-support/libmemcached/libmemcached.inc
-index d9a821d..319ab29 100644
---- a/meta-networking/recipes-support/libmemcached/libmemcached.inc
-+++ b/meta-networking/recipes-support/libmemcached/libmemcached.inc
-@@ -6,6 +6,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=865490941c91ba790f0ea78dec93bd60"
+diff --git a/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb b/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb
+index da1a2a3..22b9d0b 100644
+--- a/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb
++++ b/meta-oe/recipes-support/canonical-multitouch/frame_2.5.0.bb
+@@ -12,6 +12,9 @@ inherit autotools pkgconfig
  
- SRC_URI = "http://launchpad.net/libmemcached/1.0/${PV}/+download/libmemcached-${PV}.tar.gz"
- 
-+UPSTREAM_CHECK_URI = "https://launchpad.net/libmemcached"
+ SRC_URI = "https://launchpad.net/${BPN}/trunk/v${PV}/+download/${BPN}-${PV}.tar.gz \
+            file://pessimizing-move.patch"
 +
- TARGET_LDFLAGS += "-luuid"
- TARGET_CFLAGS += "-D__USE_GNU -D_GNU_SOURCE"
++UPSTREAM_CHECK_URI = "https://launchpad.net/frame/trunk"
++
+ SRC_URI[md5sum] = "02baa941091c5d198cd1623b3ad36e68"
+ SRC_URI[sha256sum] = "cfb9ab52cdccd926f1822a457264d0014c7eb9f4600a72626063dd073b26256f"
  
 -- 
 2.7.4
