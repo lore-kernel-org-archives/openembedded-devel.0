@@ -1,59 +1,57 @@
 Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web10.782.1584999771806731660
+ by mx.groups.io with SMTP id smtpd.web11.8091.1585061902332221362
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 23 Mar 2020 14:42:52 -0700
+ Tue, 24 Mar 2020 07:58:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=hSoTJqXG;
+ dkim=pass header.i=@koncepto.io header.s=default header.b=FoYqrFAD;
  spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 5F42F60481;
-	Mon, 23 Mar 2020 22:42:50 +0100 (CET)
+	by koncepto.io (Postfix) with ESMTPSA id 4AFCC60222;
+	Tue, 24 Mar 2020 15:58:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1584999770;
-	bh=M0i3D3lFaNf7bnkCr57HKn8yhAjit/+kdZP/FkCjqqo=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=hSoTJqXGw41L8BV8AOrhOygMWaDQcruAXj63qb72iwsNhw8lyLBr3Fgh7s1z0dAto
-	 scj9ayTvBdEGOWPUVFsbWUwzYzO2UzR3vkC0lH5d8Ucu7KLiaoCA4QZrBW4UGujyXl
-	 uFIM7EUqkeNLz5f17NJa59PUDLOgPQH4dQIubVjRSWxGsyFGDJnAka7driA+OMyeG7
-	 Jjc+CkEcAJCXRXai28t28CuQBAfgzrX6ZWdLuRgustbO/op2VyXf97MbPIktuMJyGl
-	 z0QQAx9xAJBFwV8HQqBbIBm0+JhcOH5QYKmAAgF+cyqUz9qrk1hFWtPZuG3UBD/reh
-	 xsLA9kKrzvvCA==
+	s=default; t=1585061900;
+	bh=40K+/RoqQbrkEU0JCwF/t+nQG/s8R7DsySNoBNOVKQ0=;
+	h=From:To:Cc:Subject:Date:From;
+	b=FoYqrFAD3PZo1ZG22TssAQH++Tzg2q81UolhYAqNXTs/MHUGU+yTosOJ5M9e4WVFs
+	 g/zJR3z1EksaFORyyzdoHiV6E7KvTOV80LIA9+Pc4fJYgpQyMi+wl5sBdUrNzZ6FYb
+	 gzUv4EiMZmkEJJJm67MfOkGrXKmDnrjFzV/hPEa7yp5XnkyZl7+EURAwzHilkoM9AY
+	 jX73Z8fIiN+BqbBm1WY/dSol3AbEIF6PCOBi84ltnmChMr0EVAEsQTvmAmJkklDq+o
+	 cqV0SGMVbabqyxriWxLi0NJaVt52aUAlANJ5TLr8Tmxjz7C3Qg5V7uIxQWeGsffkbL
+	 ZeGvjUc1FdqHQ==
 From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH 5/5] grail: fix upstream check URL
-Date: Mon, 23 Mar 2020 22:42:30 +0100
-Message-Id: <1584999750-7278-5-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH 1/2] openvpn: upgrade 2.4.7 -> 2.4.8
+Date: Tue, 24 Mar 2020 15:58:11 +0100
+Message-Id: <1585061892-18458-1-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1584999750-7278-1-git-send-email-pjtexier@koncepto.io>
-References: <1584999750-7278-1-git-send-email-pjtexier@koncepto.io>
 
-Fixes:
-
-$: devtool check-upgrade-status grail
-<...>
-
-INFO: grail                     3.1.1           UNKNOWN_BROKEN  None
+See full changelog https://community.openvpn.net/openvpn/wiki/ChangesInOpenvpn24
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-oe/recipes-support/canonical-multitouch/grail_3.1.1.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../recipes-support/openvpn/{openvpn_2.4.7.bb => openvpn_2.4.8.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.4.7.bb => openvpn_2.4.8.bb} (95%)
 
-diff --git a/meta-oe/recipes-support/canonical-multitouch/grail_3.1.1.bb b/meta-oe/recipes-support/canonical-multitouch/grail_3.1.1.bb
-index 22fd0f4..e1d3777 100644
---- a/meta-oe/recipes-support/canonical-multitouch/grail_3.1.1.bb
-+++ b/meta-oe/recipes-support/canonical-multitouch/grail_3.1.1.bb
-@@ -13,6 +13,9 @@ inherit autotools pkgconfig
- DEPENDS = "frame"
- CXXFLAGS_append_toolchain-clang = " -Wno-pessimizing-move"
- SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BPN}-${PV}.tar.bz2"
-+
-+UPSTREAM_CHECK_URI = "https://launchpad.net/grail/trunk"
-+
- SRC_URI[md5sum] = "0df1b3ec6167920f310e2effe6e2ad44"
- SRC_URI[sha256sum] = "5eed1f650f042481daa3a2de5e7d43261fe343b2a1b1e240f3b7fc26572c9df3"
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.4.7.bb b/meta-networking/recipes-support/openvpn/openvpn_2.4.8.bb
+similarity index 95%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.4.7.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.4.8.bb
+index 2a4eb25..7cad0e4 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.4.7.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.4.8.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+            file://openvpn@.service \
+            file://openvpn-volatile.conf"
  
+-SRC_URI[md5sum] = "9d67cabc9b0441062ebd4e12bb7dfedb"
+-SRC_URI[sha256sum] = "73dce542ed3d6f0553674f49025dfbdff18348eb8a25e6215135d686b165423c"
++SRC_URI[md5sum] = "e9cb40542e17ce295d80860690710aab"
++SRC_URI[sha256sum] = "65e1da3f3a08e7e900c175e7fc30d834881fd2dea0eb39b25325a861a9da0bc5"
+ 
+ SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
 -- 
 2.7.4
 
