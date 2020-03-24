@@ -1,25 +1,25 @@
 Received: from NAM11-BN8-obe.outbound.protection.outlook.com (NAM11-BN8-obe.outbound.protection.outlook.com [])
  by mx.groups.io with SMTP id smtpd.web10.293.1585090151533401776
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 24 Mar 2020 15:49:13 -0700
+ Tue, 24 Mar 2020 15:49:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=fail reason="body hash did not verify" header.i=@uievolution.onmicrosoft.com header.s=selector2-uievolution-onmicrosoft-com header.b=GohN05Wf;
+ dkim=fail reason="body hash did not verify" header.i=@uievolution.onmicrosoft.com header.s=selector2-uievolution-onmicrosoft-com header.b=EFSqneUQ;
  spf=fail (domain: xevo.com, ip: <nil>, mailfrom: mkelly@xevo.com)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=D27m0mfP/Z71WbjALHfyjrjyiQEBU5/kT/gJnRVdsf/OouCB4Fx7zLbOsNjzoQQTSmy6b57ee3tkVlLb8LnE8y3B96kPDEUAeV+3jLYYTwes1Rtn7Eq8P8zse6R+e3Ys4cIdD8y1Gges7YQJjLKcKFwwAM24YH+G/wYtXQ6sT/d1MJ4+o1xqsNIjWqNLOKLAxKN7hDipyGG5PrgA0UxOS+bSsc6Z2OypmpHXQUAq2uKU0mYBhvGo7cXkzN4tJy1VWghvqcFDhDINwze7zqktHkdopznQMwbRTK2F9gnbK4SksBiQieHdgxLNuzXwRBJkVttI3nWWoG7nFecC5gz48Q==
+ b=BYc18pmkO4ybhf5BQgo6r4sOIal7IkkoFZidY0BE1pesCqifXMMDtk9rMirB78CpOHF+0wYXgnjbNXGe3SCObdTQtuLeAxS6qzkpeHwOG1tbXBkW6TpkSyZ2aVqoEN00wDQgqEPgMIMKelDG0hKX8tBk5cgxiZ4Afae0SAZCC0nvqyW+FnnuYfXFSO4j7QUVN5MGSVLsVZ+VBpYFWK+RuPiLBwDWpmaGKC6sqb5NjRcfV8lb+3B21UvfWEOpo4fAmUqCbyDzgMQkyavI1+yDIkHxf4fm/Hp+vCNPbsYmI4MUPMkbKTotJhBe62M6URBH1lyxs59TYsYnLNA3QJ0lhw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cTZZwfYjU+nWMS4IlQzcVy0/gFM9KulXL03ljIk+ik0=;
- b=IWOaGTc4TNFlD5CnuewuviOYVtMV05tfbRMathukkBMn72QMUCt+hXRCar874NlIXFoIwcO+L9dNW4c8BarSF3Oeg1ZPFEti0NtBJbbo/5908w0oQvkxhwcg8iNWjeXX0dnaqMK2MAyAwHalYGE+xKP02aWtjxR77fz9dJbwuhs5S9I6t7OHWeZExuFkPUGJlEMN0475Ei4PUpvFHMDVmFwm6Z+w8aiF3kL2nDkifOurul4pWfZb6Jzy6s24S+FxJMuTJmOf2yw/IX/d8+xW8xw+Zj+K9oZfsKZyufCT1WtCpmXjDiP2mqfERDEG0K3NumT5EBPku5jeoZ7rZfOu4Q==
+ bh=LMzqJc7/3pFPKD3VfAmx3aUje3wW9aNJLRHBnk3uKmg=;
+ b=HYEq6/ixf2+/SHSqfQroHTZZrBVpOps83s0vTUSnY67ekWqcuDVOTzz4Y1pwRDdOYA10mebBdKkFvqXxGbIpdcog4fQmmdsp6U+P8UwLsFuZZNoPGh1YItKNXvsVjfQJmAVQpvgkof9NKsiNWG9ToPDgVppqWPl2uCM6ML7Naqq4SU2z4oW4VJ62JkCVAz61shqYUVsSnCDiGb20XwhjBalSCb8VyvRrJ9HRw6BTeKJznT8djG6WxTMxhn44V9jU/2LHtO2rGkAVnwWiKtUznesXt018vX1DQgcmoY65nqwgr5HlR86Ju4m26pg7uhl4iphg59fdVX0tcCM+KQHU4A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=xevo.com; dmarc=pass action=none header.from=xevo.com;
  dkim=pass header.d=xevo.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=uievolution.onmicrosoft.com; s=selector2-uievolution-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cTZZwfYjU+nWMS4IlQzcVy0/gFM9KulXL03ljIk+ik0=;
- b=GohN05WfzgADyuDTVQ1I3YGVxzKEloqN0RW/4dgxK12p1obo4iREGRzhGgvMazM0M7tNB0P6WLKmAaIFbjndmPT2mzG0Wb+WWsaDVs7Nfc7QqIiRFlws1Ou4Zf8rFqv9AJ9AX3ZKDb4IK0lDmUUUijlsv5o0Ll+GU26achqeRu8=
+ bh=LMzqJc7/3pFPKD3VfAmx3aUje3wW9aNJLRHBnk3uKmg=;
+ b=EFSqneUQs7SJQtWFBXRiB6ws+f7Fg9Mr3Na1x0EBGlJGADgFCVqJSggEL8gyuiZ6mxn8fCEJRgn7Yea/iyUHL1y5pVg43Q3Z5JlOry9RC1GfNh/wKGxDtKBG3cSQaJektVa0M5oFruAvodRIJgFdtVFqIt7lX7qeV4zRECCjilg=
 Authentication-Results: spf=none (sender IP is )
  smtp.mailfrom=mkelly@xevo.com; 
 Received: from MW2PR18MB2236.namprd18.prod.outlook.com (2603:10b6:907:7::14)
@@ -34,9 +34,9 @@ Received: from MW2PR18MB2236.namprd18.prod.outlook.com
 From: "Martin Kelly" <mkelly@xevo.com>
 To: openembedded-devel@lists.openembedded.org
 CC: Martin Kelly <mkelly@xevo.com>
-Subject: [meta-python][PATCH 09/17] python3-iso3166: add recipe for 1.0.1
-Date: Tue, 24 Mar 2020 15:48:35 -0700
-Message-ID: <20200324224843.752394-10-mkelly@xevo.com>
+Subject: [meta-python][PATCH 10/17] python3-geojson: add recipe for 2.5.0
+Date: Tue, 24 Mar 2020 15:48:36 -0700
+Message-ID: <20200324224843.752394-11-mkelly@xevo.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200324224843.752394-1-mkelly@xevo.com>
 References: <20200324224843.752394-1-mkelly@xevo.com>
@@ -46,16 +46,16 @@ X-ClientProxiedBy: MWHPR22CA0068.namprd22.prod.outlook.com
 Return-Path: mkelly@xevo.com
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from columbia.frontierlocal.net (50.35.85.47) by MWHPR22CA0068.namprd22.prod.outlook.com (2603:10b6:300:12a::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2835.19 via Frontend Transport; Tue, 24 Mar 2020 22:49:10 +0000
+Received: from columbia.frontierlocal.net (50.35.85.47) by MWHPR22CA0068.namprd22.prod.outlook.com (2603:10b6:300:12a::30) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2835.19 via Frontend Transport; Tue, 24 Mar 2020 22:49:11 +0000
 X-Mailer: git-send-email 2.25.1
 X-Originating-IP: [50.35.85.47]
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5711d1e2-2a16-4537-bc35-08d7d0459180
+X-MS-Office365-Filtering-Correlation-Id: 45c75a88-af6f-4585-6175-08d7d04591dc
 X-MS-TrafficTypeDiagnostic: MW2PR18MB2169:
 X-MS-Exchange-Transport-Forked: True
 X-Microsoft-Antispam-PRVS: 
-	<MW2PR18MB21693FA5B1D3BDB5B0C12072ABF10@MW2PR18MB2169.namprd18.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:296;
+	<MW2PR18MB21696F7F0F3F97C2B007856FABF10@MW2PR18MB2169.namprd18.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1079;
 X-Forefront-PRVS: 03524FBD26
 X-Forefront-Antispam-Report: 
 	SFV:NSPM;SFS:(10009020)(39840400004)(396003)(366004)(136003)(346002)(376002)(6512007)(66476007)(66556008)(8936002)(6486002)(52116002)(4326008)(36756003)(316002)(107886003)(66946007)(6506007)(2906002)(8676002)(81166006)(5660300002)(81156014)(2616005)(6666004)(6916009)(186003)(16526019)(1076003)(478600001)(26005)(4744005)(86362001)(956004);DIR:OUT;SFP:1101;SCL:1;SRVR:MW2PR18MB2169;H:MW2PR18MB2236.namprd18.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;
@@ -64,48 +64,48 @@ Received-SPF: None (protection.outlook.com: xevo.com does not designate
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
 X-Microsoft-Antispam-Message-Info: 
-	xR0pgqXoyI/Qk3qun9DqNI+yZxcMK3VgBQh0PAYIIEpkrvLXSRNCm/sPimFiobKfQdEqG8fS/DDO10O8xi5kZWdNZB6qQ6QzMLMBoJ5atAXW9pRJc7kj0+u7zso6LOo3mvbrLHMKR8XXcJZ4z4xf5nK7CmF4CYllnY+LBUEaxgdDdI8VvoeK/jpARB6naMqLsLgqL5aebG41fiEeB7Amxrdos2j+E+8ksE3qQ48jjC/Cm4IvdoAu3kKAF/mZ6daI2jJH+zRosieCZb+m2OpPEwOjxDtt8yjDQrpofq25ALA1TpIDtPNW6R4k9ifGRnZ3fggRbygSxK+a4PsU2ucecADLTsFNZm1CIe9q8D3wMj8sINSMObKgm5Gpo/bYhiPlgAmOyIPGfVv/ZuW5XfWY6oUNZFplVCfl7zzGixgqw2OdXbry546R0EXV+Y9zUrAa+Jwy7ceMj/ont8yikPYB57s7YmAXuztRMYaqrMLKXQXJb6zymrgfuBF8RF8JR5veXOBvoPlAKMIb3vn1SB3u+w==
+	/uSDK1Ad2Ep4Odu9ylWvGybROzDdm7Kud7M+9ji2cRdLmRwug5u24qPk2VVO7JuMTqkikMBqS1crXd6yNkOSXhRC50/HUFob4RWJQIPhdBvUk7xQvEYdyZP2aWtRIP9/ZD5sbqO2bq5N2S1NXJbGnnPSIsXcXOZh+3D8hdQAWWKVflF2+MeL9hgwFDlpS7o9GboUjV6xar1a4kgj/Zj89oyOUzeqeWOlIn4cfvFA8bT/1o0qS4TAr+KGZCM3ZZHnSEFWKro1RAjvEwHmGltAjvqCJYrZKg/xonRUAl1DgwSSmSXkP6zN3AjXHanXk5HGQkPqHSfr6L0yPKir4AsQqxy76BzAxPfsZTdLf3hW3pe0Ga3k6AituY90W3ezZUajVBVPramwQ+6VjXZWPwVHpnlimzmcPpUjjJx8d9IFcHg0jjcCfbEC1pezH/brxMo16jOEPuOgu49K5pTblQn6DP9KhOft0i8mYvaF5oHTiUdk8w5Iu7+laexXAK/X0M4v0C/qHhuup6ktnKtMeT3tYw==
 X-MS-Exchange-AntiSpam-MessageData: 
-	vRIUDd4UAc4faNCKRm774a4oK2Y0z9L6ixTK5sxsnDP3o5rMv5oE1qU2LesGTxax+I1vQnOvUZi53X8/O+qy984ATkbuottJhe4VJ69kRJKEjtHHyqlwymarlvz9aSP3xIIhRlGihv3B17L12ukXLQ==
+	+Yn9BY5jGh73BudxhZ0IGkfE6ifPPcGfujOnAKpIZZkPWg3Oy3T/sq5YHCmVI3xMFh4QkLPQbtBy1/5DNZzYKzTEKB+8SLc6VbRZGcrlmVLrTjTlSi3i8kgKDDfP8egcctH1Totqy5kDjratSzVKDQ==
 X-OriginatorOrg: xevo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5711d1e2-2a16-4537-bc35-08d7d0459180
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2020 22:49:11.1136
+X-MS-Exchange-CrossTenant-Network-Message-Id: 45c75a88-af6f-4585-6175-08d7d04591dc
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Mar 2020 22:49:11.7412
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e0a7ca1f-2458-4cd6-a7c7-d733c07495ab
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: icOUaecyhWIoIpUNmC68TgU6q4gtDqXnrVBe+9pzBZQ8eMLz81rxWssflkV31B18
+X-MS-Exchange-CrossTenant-UserPrincipalName: 6DVubt5pVoM87QPPOIdpFRMVVTeaRq1DuBoe2g130nB0KnlPizaga7okC5sLgTl0
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW2PR18MB2169
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain
 
 Signed-off-by: Martin Kelly <mkelly@xevo.com>
 ---
- .../python/python3-iso3166_1.0.1.bb                 | 13 +++++++++++++
+ .../python/python3-geojson_2.5.0.bb                 | 13 +++++++++++++
  1 file changed, 13 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-iso3166_1.0=
-.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-geojson_2.5=
+.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-iso3166_1.0.1.bb b=
-/meta-python/recipes-devtools/python/python3-iso3166_1.0.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb b=
+/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
 new file mode 100644
-index 000000000..23fc4eb75
+index 000000000..7c3c23b22
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-iso3166_1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-geojson_2.5.0.bb
 @@ -0,0 +1,13 @@
-+SUMMARY =3D "Self-contained ISO 3166-1 country definitions"
-+HOMEPAGE =3D "https://pypi.org/project/iso3166/"
-+LICENSE =3D "MIT"
-+LIC_FILES_CHKSUM =3D "file://LICENSE.txt;md5=3D5e2f4edc7e7408a82e4a1d05f22=
-9b695"
++SUMMARY =3D "Python bindings and utilities for GeoJSON"
++HOMEPAGE =3D "https://pypi.org/project/geojson/"
++LICENSE =3D "BSD"
++LIC_FILES_CHKSUM =3D "file://LICENSE.rst;md5=3Df48972abe5cddee79e301574742=
+ed745"
 +
-+SRC_URI[md5sum] =3D "53c313c7ae8721e40ddd5e7a01bbcb7e"
-+SRC_URI[sha256sum] =3D "b1e58dbcf50fbb2c9c418ec7a6057f0cdb30b8f822ac852f72=
-e71ba769dae8c5"
++SRC_URI[md5sum] =3D "14753ed28678828b1de73f68b04e2324"
++SRC_URI[sha256sum] =3D "6e4bb7ace4226a45d9c8c8b1348b3fc43540658359f93c3f7e=
+03efa9f15f658a"
 +
 +inherit pypi setuptools3
 +
-+RDEPENDS_${PN} +=3D "python3-numbers"
++RDEPENDS_${PN} +=3D "python3-simplejson python3-math"
 +
 +BBCLASSEXTEND =3D "native nativesdk"
 --=20
