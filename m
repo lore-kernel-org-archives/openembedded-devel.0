@@ -1,54 +1,49 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web10.23356.1585170277493606268
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web10.25921.1585177495201188825
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Mar 2020 14:04:37 -0700
+ Wed, 25 Mar 2020 16:04:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: trevor.gamblin@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 02PL4bfI005576
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Mar 2020 14:04:37 -0700 (PDT)
-Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Wed, 25 Mar 2020
- 14:04:36 -0700
-From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-werkzeug: upgrade 0.16.0 -> 1.0.0
-Date: Wed, 25 Mar 2020 17:04:36 -0400
-Message-ID: <20200325210436.8218-1-Trevor.Gamblin@windriver.com>
-X-Mailer: git-send-email 2.24.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+ dkim=pass header.i=@koncepto.io header.s=default header.b=po6ucPZ0;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id 5434560044;
+	Thu, 26 Mar 2020 00:04:52 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1585177492;
+	bh=LtHx+HS8Aa7UOJtJG+u+R7IuohSVRetfOn8HfWOHTM8=;
+	h=From:To:Cc:Subject:Date:From;
+	b=po6ucPZ0dPnfY2x3CmMJ738RCdl6g+MQOnmscFDE9X9DlC0Yp5Btz5aaq/IuYY90D
+	 7ZdjFBnchyyFKQa1JqK5KEXtJWlbXugc3RFIsT6iBQdPJ8OOLk8tXUj7jH2klSFwSb
+	 n2qjGxyY1ETFifVc7jCoeniT9ebSQ1n1byC9LZ6Q5jLksJUNZ1/I3/k0ijYv4Xms0m
+	 EP79FCzXLu5oty7/ypl6MozlIoeJth5kiM9XHAQr8Ov8kAI0qthXmYqW07VI1CH+Jc
+	 cJb7Yu4ESAb6kqGEqJqtnZ6EFL8TEUVpo3/9SE3b2bJoTRqAVw81rMjG+NkeStUAk6
+	 LukZ09/hjXrrg==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH] fuse-exfat: fix upstream check URL
+Date: Thu, 26 Mar 2020 00:04:48 +0100
+Message-Id: <1585177488-4212-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
 
-From: Trevor Gamblin <trevor.gamblin@windriver.com>
-
-Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-python/recipes-devtools/python/python-werkzeug.inc       | 4 ++--
- .../{python3-werkzeug_0.16.0.bb => python3-werkzeug_1.0.0.bb} | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-werkzeug_0.16.0.bb => python3-werkzeug_1.0.0.bb} (100%)
+ meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-werkzeug.inc b/meta-python/recipes-devtools/python/python-werkzeug.inc
-index e292d93bb..e4d3d38d7 100644
---- a/meta-python/recipes-devtools/python/python-werkzeug.inc
-+++ b/meta-python/recipes-devtools/python/python-werkzeug.inc
-@@ -10,8 +10,8 @@ HOMEPAGE = "http://werkzeug.pocoo.org/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
+diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
+index 5720430..be2415f 100644
+--- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
++++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
+@@ -9,6 +9,8 @@ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ SRC_URI = "https://github.com/relan/exfat/releases/download/v${PV}/${BP}.tar.gz"
  
--SRC_URI[md5sum] = "5b23b4953efc4f52b1d0b33af6f7cd2d"
--SRC_URI[sha256sum] = "7280924747b5733b246fe23972186c6b348f9ae29724135a6dfc1e53cea433e7"
-+SRC_URI[md5sum] = "305f75c4a88c96dcdc5654bf2d01bc05"
-+SRC_URI[sha256sum] = "169ba8a33788476292d04186ab33b01d6add475033dfc07215e6d219cc077096"
++UPSTREAM_CHECK_URI = "https://github.com/relan/exfat/releases"
++
+ DEPENDS = "fuse virtual/libc"
+ RRECOMMENDS_${PN} = "util-linux-mount"
  
- PYPI_PACKAGE = "Werkzeug"
- 
-diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_0.16.0.bb b/meta-python/recipes-devtools/python/python3-werkzeug_1.0.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-werkzeug_0.16.0.bb
-rename to meta-python/recipes-devtools/python/python3-werkzeug_1.0.0.bb
 -- 
-2.24.1
+2.7.4
 
