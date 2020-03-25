@@ -1,83 +1,72 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web10.8747.1585133825561589394
+Received: from mail-wm1-f68.google.com (mail-wm1-f68.google.com [209.85.128.68])
+ by mx.groups.io with SMTP id smtpd.web11.10581.1585141344855107363
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Mar 2020 03:57:05 -0700
+ Wed, 25 Mar 2020 06:02:25 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: zhe.he@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 02PAv4bm013227
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Wed, 25 Mar 2020 03:57:05 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Wed, 25 Mar 2020 03:57:04 -0700
-From: "He Zhe" <zhe.he@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][PATCH] turbostat: Fix build failure for missing kernel internal heaers and clean up
-Date: Wed, 25 Mar 2020 18:57:02 +0800
-Message-ID: <1585133822-167040-1-git-send-email-zhe.he@windriver.com>
-X-Mailer: git-send-email 2.7.4
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=UKsZTbPI;
+ spf=pass (domain: gmail.com, ip: 209.85.128.68, mailfrom: martin.jansa@gmail.com)
+Received: by mail-wm1-f68.google.com with SMTP id c81so2362724wmd.4
+        for <openembedded-devel@lists.openembedded.org>; Wed, 25 Mar 2020 06:02:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=53O2X4IZwyADbiVYC5MqMMPDZOAkvN8mJlGObducKO4=;
+        b=UKsZTbPIrj/sUjer1JTRBkbF/8SU5M+NB4ZCB5+ZwRN04BRyC0KuXSUjktr5U+1xZC
+         mjbyj0hwUYYkGfu4PuRuY6WcVDuoknDIoRwNxKIw3Ntfows0OqlRf5EadvES1oU8KYI3
+         neNY5Ifc6NOerLH4DifYhCkEoqPDLj8WKQyZKUXIIhEsQ/2KVkFUJi64OzH3UXUEGJ4z
+         Kql27S6eMA5UO3yEDCraeYHf1ihl92zYBlF4SQW+GPbvf4xcJ5wHS4uUXeFuMRbmzUD/
+         Vi81xtm4sKMjvubpweWDO7K3Z7I8UJXRjAXoKswOV6LupqmdyjUHMZlrgrRIwC4WkVB2
+         ZN3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=53O2X4IZwyADbiVYC5MqMMPDZOAkvN8mJlGObducKO4=;
+        b=LnhfGk16EzYtL+0tD0HCXp2cZEyC11mxHdQv1aXCG77smNlDltrpjUYvr8159oNL3N
+         vY4pdg8W5u+MiHtq6pebJKeT9vbP2WdLoE6BZkWX13abVV5eHTrl8I1LDCgp9ioIqrh2
+         /WbXm2O9oYSoA8076Adnnurh36lpRb+4uhfJf4tnclf6wByaQ2shArTvzOxfEwyNvrq5
+         xXU4HTBexckbtHmmreyGFTLNmabfNAoz51mpu7LJaGD2QmCEFR7q3QfrrGNmV0RGab1X
+         vd5Q+YL9yogI3RcIwGMhSRVBQ4vfK9IWA4qx8YdoF3ESvUPbeTDJRdSyNDwIOFjozh3h
+         y1+g==
+X-Gm-Message-State: ANhLgQ0iaSj+hn8OlM+33J8g8K7JcP4hYPPldcHAgZjpfEnISALeLSl3
+	DYqRXMS3Pg412oQiAsNdSltXOjZu
+X-Google-Smtp-Source: ADFU+vubTB9AVWG7MWxCuy04cjMOf94sTwinlXgDYiE+4sngwsZYJfPTPi4YVLP+egYlSsrDSj8YcQ==
+X-Received: by 2002:a7b:c8cc:: with SMTP id f12mr3376113wml.172.1585141343142;
+        Wed, 25 Mar 2020 06:02:23 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from localhost ([109.238.218.228])
+        by smtp.gmail.com with ESMTPSA id w81sm9181826wmg.19.2020.03.25.06.02.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Mar 2020 06:02:21 -0700 (PDT)
+From: "Martin Jansa" <Martin.Jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Martin Jansa <Martin.Jansa@gmail.com>
+Subject: [meta-python2][PATCH] layer.conf: update LAYERSERIES_COMPAT for dunfell
+Date: Wed, 25 Mar 2020 14:02:19 +0100
+Message-Id: <20200325130219.25151-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
 
-From: He Zhe <zhe.he@windriver.com>
-
-To fix the following build failures
-turbostat.c:(.text+0xc28a): undefined reference to `UL'
-turbostat.c:33:10: fatal error: sys/capability.h: No such file or directory (for kernel v5.6-rc7)
-
-- Add dependency on libcap for kernel v5.6-rc7 and later versions
-- Copy internal linux/const.h used by previously added internal linux/bits.h
-- Tweak linux/const.h to allow it to refer to uapi const.h, as
-  linux-libc-headers purposely removes _UAPI from the locker macros of the
-  headers
-- Remove -I for kernel-source in EXTRA_OEMAKE, as linux-kernel-headers has
-  provided enough and necessary headers
-
-Signed-off-by: He Zhe <zhe.he@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ conf/layer.conf | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-index 5f6588d..d2694b8 100644
---- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-+++ b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-@@ -21,7 +21,7 @@ SRC_URI += "\
-             "
+diff --git a/conf/layer.conf b/conf/layer.conf
+index 395954c..b25c9ef 100644
+--- a/conf/layer.conf
++++ b/conf/layer.conf
+@@ -14,6 +14,6 @@ LAYERVERSION_meta-python2 = "1"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
--DEPENDS = "virtual/kernel"
-+DEPENDS = "virtual/kernel libcap"
+ LAYERDEPENDS_meta-python2 = "core openembedded-layer"
  
- # This looks in S, so we better make sure there's
- # something in the directory.
-@@ -30,8 +30,7 @@ do_populate_lic[depends] = "${PN}:do_configure"
+-LAYERSERIES_COMPAT_meta-python2 = "thud warrior zeus"
++LAYERSERIES_COMPAT_meta-python2 = "dunfell"
  
- 
- EXTRA_OEMAKE = '\
--                CC="${CC}" \
--		'CFLAGS=-Wall -I${STAGING_KERNEL_DIR}/arch/x86/include/uapi ${LDFLAGS}' \
-+                CC="${CC}" 'CFLAGS=-Wall ${LDFLAGS}' \
-                '
- 
- # If we build under STAGING_KERNEL_DIR, source will not be put
-@@ -43,12 +42,15 @@ do_configure_prepend() {
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/include/linux/bits.h ${S}
-+	cp -r ${STAGING_KERNEL_DIR}/include/linux/const.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
- 	cp -r ${WORKDIR}/COPYING ${S}
- }
- 
- do_compile() {
- 	sed -i 's#<linux/bits.h>#"bits.h"#' msr-index.h
-+	sed -i 's#<linux/const.h>#"const.h"#' bits.h
-+	sed -i -e 's#<uapi/linux/const.h>#<linux/const.h>#' -e 's#_LINUX_CONST_H#_LINUX_CONST_H_KERNEL#' const.h
- 	sed -i 's#MSRHEADER#"msr-index.h"#' turbostat.c
- 	sed -i 's#INTEL_FAMILY_HEADER#"intel-family.h"#' turbostat.c
- 	sed -i 's#\$(CC) \$(CFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#\$(CC) \$(CFLAGS) \$(LDFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#' Makefile
+ LICENSE_PATH += "${LAYERDIR}/licenses"
 -- 
-2.7.4
+2.20.1
 
