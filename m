@@ -1,49 +1,40 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web10.25921.1585177495201188825
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web12.27347.1585180978733727354
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 25 Mar 2020 16:04:56 -0700
+ Wed, 25 Mar 2020 17:02:59 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=po6ucPZ0;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 5434560044;
-	Thu, 26 Mar 2020 00:04:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1585177492;
-	bh=LtHx+HS8Aa7UOJtJG+u+R7IuohSVRetfOn8HfWOHTM8=;
-	h=From:To:Cc:Subject:Date:From;
-	b=po6ucPZ0dPnfY2x3CmMJ738RCdl6g+MQOnmscFDE9X9DlC0Yp5Btz5aaq/IuYY90D
-	 7ZdjFBnchyyFKQa1JqK5KEXtJWlbXugc3RFIsT6iBQdPJ8OOLk8tXUj7jH2klSFwSb
-	 n2qjGxyY1ETFifVc7jCoeniT9ebSQ1n1byC9LZ6Q5jLksJUNZ1/I3/k0ijYv4Xms0m
-	 EP79FCzXLu5oty7/ypl6MozlIoeJth5kiM9XHAQr8Ov8kAI0qthXmYqW07VI1CH+Jc
-	 cJb7Yu4ESAb6kqGEqJqtnZ6EFL8TEUVpo3/9SE3b2bJoTRqAVw81rMjG+NkeStUAk6
-	 LukZ09/hjXrrg==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 1834040B37
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2020 00:02:58 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dDx46etuj2_T
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Mar 2020 00:02:58 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0026640AEE
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2020 00:02:57 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 5FE731718F4; Wed, 25 Mar 2020 20:02:57 -0400 (EDT)
+Date: Wed, 25 Mar 2020 20:02:57 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] fuse-exfat: fix upstream check URL
-Date: Thu, 26 Mar 2020 00:04:48 +0100
-Message-Id: <1585177488-4212-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
+Subject: [meta-qt5] qtwebkit 5.15 update failure
+Message-ID: <20200326000257.GF1578@denix.org>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
----
- meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+| Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScreenVideoHandler.cpp:116: error: undefined reference to 'QWebFullScreenVideoHandler::qt_metacast(char const*)'
+| Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScreenVideoHandler.cpp:121: error: undefined reference to 'QWebFullScreenVideoHandler::qt_metacall(QMetaObject::Call, int, void**)'
+| Source/WebKit/CMakeFiles/WebKitWidgets.dir/WebKitWidgets_autogen/mocs_compilation.cpp.o:mocs_compilation.cpp:WebKit::DefaultFullScreenVideoHandler::staticMetaObject: error: undefined reference to 'QWebFullScreenVideoHandler::staticMetaObject'
+| /usr/src/debug/qtwebkit/5.14.99+gitAUTOINC+ab1bd15209-r0.arago8/git/Source/WebKit/qt/WidgetSupport/DefaultFullScreenVideoHandler.cpp:45: error: undefined reference to 'vtable for QWebFullScreenVideoHandler'
 
-diff --git a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
-index 5720430..be2415f 100644
---- a/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
-+++ b/meta-filesystems/recipes-filesystems/fuse-exfat/fuse-exfat_1.3.0.bb
-@@ -9,6 +9,8 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- SRC_URI = "https://github.com/relan/exfat/releases/download/v${PV}/${BP}.tar.gz"
- 
-+UPSTREAM_CHECK_URI = "https://github.com/relan/exfat/releases"
-+
- DEPENDS = "fuse virtual/libc"
- RRECOMMENDS_${PN} = "util-linux-mount"
- 
+FWIW, it was building just fine before the update...
+
 -- 
-2.7.4
-
+Denys
