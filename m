@@ -1,188 +1,152 @@
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (NAM12-DM6-obe.outbound.protection.outlook.com [40.107.243.43])
- by mx.groups.io with SMTP id smtpd.web11.32933.1585211948054995403
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web10.32831.1585212005170757062
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2020 01:39:08 -0700
+ Thu, 26 Mar 2020 01:40:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@windriversystems.onmicrosoft.com header.s=selector2-windriversystems-onmicrosoft-com header.b=j7zBP3uP;
- spf=pass (domain: windriver.com, ip: 40.107.243.43, mailfrom: zhe.he@windriver.com)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Y2eqc1y+BQpJ0X7XdsKd9oZpqgcjpsfm9cMg6e2IFFzcQxXkkKQT1JrWcfIBX7ctfycierGnnOC4ufdJpVu46sKK2F+vjZoeAquXY9xLbta9LcjnNrzAFVQwafLcZfjzQJM61rwpu5n8TLVJMVi1OzGbyq/l0weK6Z2l9lUEDraeG4jd3hSihbgmV8jaGwmdUA4XgUtpHc6Ux/HWxLbVA2e3JSDFScRea6R+MCJZqOpG3utThrr+ixu9Z4aZJg7v8lOeasgOyywNQzlospsQEq5Y8W5qsbxg4GJmhwXcoJe3DUbgAZVYR/1DL8JtrUS57v7mTq+ok/cH37CSonWnZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QvInAvj/Mt5jtrLjqH7lkrFCzhilLIjAUrB3zVamX2E=;
- b=SGGt+SjfgZrwmjUbeIPbi9Xy/W3scxg1AY1FcKom87yxmFEOTCsUDJCFsqb6dFLhvRMIbS8EuWiyJblx0+GzvH0PaA27EjqZzLMEhxv6fWd3a/CeO31s4Gt7FssVQjXzpG2QxkLJHj1R1vzLzi78dCUVUPaaRmKWDhRSK44ynAYRmc9cHJOPwciGqIT3VD0RBMsO55VC0Ju6b9mGMvOcmzfWSvri8QykewueE8kBo0AhEEPf9YKYm0wI2bpO0fUCp31j4frvOp6kFd4CrBjStA4T65VHTTEygBwB3h+79L1RcK5w3o4VMlvaFMVofCDzyvQDdfzNG1QPpa1JTMUfOw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=windriver.com; dmarc=pass action=none
- header.from=windriver.com; dkim=pass header.d=windriver.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=windriversystems.onmicrosoft.com;
- s=selector2-windriversystems-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QvInAvj/Mt5jtrLjqH7lkrFCzhilLIjAUrB3zVamX2E=;
- b=j7zBP3uPCNjqtcZNLTTKAjyRr2rE/KfVs+TKwldmZv5YF4q1OkxSRQZJxwdLON02aDlsLfvbnEbZ+CojRnS+3TYU2EuSJg7UNUgXHjE0/zE+g5Zd1dDAUbZYTpmm4DV1aqe1Djw4/WQoD4bFJ6JdA9pkHRdsCrGJ4DfFfUdBsHU=
-Authentication-Results: spf=none (sender IP is )
- smtp.mailfrom=Zhe.He@windriver.com; 
-Received: from SN6PR11MB3360.namprd11.prod.outlook.com (2603:10b6:805:c8::30)
- by SN6PR11MB2720.namprd11.prod.outlook.com (2603:10b6:805:56::27) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2835.18; Thu, 26 Mar
- 2020 08:39:06 +0000
-Received: from SN6PR11MB3360.namprd11.prod.outlook.com
- ([fe80::d852:181d:278b:ba9d]) by SN6PR11MB3360.namprd11.prod.outlook.com
- ([fe80::d852:181d:278b:ba9d%5]) with mapi id 15.20.2835.021; Thu, 26 Mar 2020
- 08:39:06 +0000
-Subject: Re: [oe][meta-oe][PATCH] turbostat: Fix build failure for missing kernel internal heaers and clean up
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-References: <1585133822-167040-1-git-send-email-zhe.he@windriver.com>
- <CAMKF1sqdcGRxKfubhncfxwHRKdcUTRprLsaX9ofhA8m6Bw3HJA@mail.gmail.com>
- <42e3898f-d34a-402a-9934-cf5587e8bce9@windriver.com>
- <CAMKF1srrO=Yf_GwRia86RBOyejxKHWwBuph1K6DPbO_YJL1AOQ@mail.gmail.com>
-From: "He Zhe" <zhe.he@windriver.com>
-Message-ID: <455aaf4d-1727-3634-3388-8fdb4a41479d@windriver.com>
-Date: Thu, 26 Mar 2020 16:38:58 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-In-Reply-To: <CAMKF1srrO=Yf_GwRia86RBOyejxKHWwBuph1K6DPbO_YJL1AOQ@mail.gmail.com>
-X-ClientProxiedBy: HK2PR0302CA0008.apcprd03.prod.outlook.com
- (2603:1096:202::18) To SN6PR11MB3360.namprd11.prod.outlook.com
- (2603:10b6:805:c8::30)
-Return-Path: zhe.he@windriver.com
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: hongxu.jia@windriver.com)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 02Q8dRxS027820
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Thu, 26 Mar 2020 01:39:37 -0700
+Received: from pek-lpg-core1-vm2.wrs.com (128.224.156.107) by
+ ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 26 Mar 2020 01:39:04 -0700
+From: "hongxu" <hongxu.jia@windriver.com>
+To: <raj.khem@gmail.com>
+CC: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH] python3-grpcio: fix native build failure on ubuntu 16.04 and centos 8
+Date: Thu, 26 Mar 2020 16:39:01 +0800
+Message-ID: <1585211941-9451-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [128.224.162.175] (60.247.85.82) by HK2PR0302CA0008.apcprd03.prod.outlook.com (2603:1096:202::18) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2878.9 via Frontend Transport; Thu, 26 Mar 2020 08:39:05 +0000
-X-Originating-IP: [60.247.85.82]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3238ccff-4c65-49b7-f659-08d7d1612538
-X-MS-TrafficTypeDiagnostic: SN6PR11MB2720:
-X-Microsoft-Antispam-PRVS: 
-	<SN6PR11MB2720D268C04BD9B7BA17000F8FCF0@SN6PR11MB2720.namprd11.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7219;
-X-Forefront-PRVS: 0354B4BED2
-X-Forefront-Antispam-Report: 
-	SFV:NSPM;SFS:(10009020)(396003)(39850400004)(346002)(366004)(136003)(376002)(478600001)(81166006)(966005)(6706004)(6666004)(2906002)(31686004)(6916009)(36756003)(956004)(53546011)(8676002)(316002)(6486002)(81156014)(16576012)(86362001)(26005)(52116002)(31696002)(2616005)(66946007)(16526019)(186003)(4326008)(5660300002)(66556008)(66476007)(8936002)(78286006);DIR:OUT;SFP:1101;SCL:1;SRVR:SN6PR11MB2720;H:SN6PR11MB3360.namprd11.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;
-Received-SPF: None (protection.outlook.com: windriver.com does not designate
- permitted sender hosts)
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 
-	tYwLJtuCIdG79Iu9X4mtRMVuR62yn6vl1Iq6EQmlaSFHtqW/dIM1AgadueVcqcebINKtjkkwV5gJNENS4nHFIzk3RIVdV+dbneXiyssSd967OE+MGvJCNU8MfHRZN7hFxsOWoFv+2RvVhTLokQpR/axYLsyVLmCgX8ywwU4E6wlC5N+ECkt10s/AjJkPYZjYTziG8778BcSxr1/7D8NHH1EcpoROPwld7GzQY714gl4V6dHKoRkz8j7Bu8NIxGOR6vAS/+F6CXtJDjZ4vm4+DskdNqD7fG4Jme3gcnJ+fgQ/v4MAu4nuQBH09/ZIAnmH2dnsqSDpcgAXo/NBrQCyRu4WsJPN8fQ5qp7GX6YNZnrMNsH+sL6eLL/YKhuYGlNj7Cf21wE61u1Aqk9F10odI9jJ1PbZtFENEGBr00uPuPcQAQxOJoMD9PrgqlWSMFct5Vb+nhiQ5RtqlFCVjx20xhb6g0LWWnooHnc5Q3y21ybgsC2Ucgm74ogCf4Q1BxmQxXd/oP1yv+14QP0X+Gid5FrZK8NaCyF87xWk1fa5zibHZ5M18EprEy+w6gYMHxU9zCgVq72oJJf4xWNeHh4nllTHAP4z6pZcKzACNvcFpg0=
-X-MS-Exchange-AntiSpam-MessageData: 
-	FRdYKMOtF/CEkubRbyDDt2EaqIYyAtovRSHzxc+CwfvaFDSuGL86kffLTiykCQILtQBHEFMXNLBnnSqlCblCh7yN48+Vjq9NXYSnyDmLK4+8TqOnxp9HO7wr/vh0rEQGhD8ObbaTVXIXHrwMXjEIjg==
-X-OriginatorOrg: windriver.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3238ccff-4c65-49b7-f659-08d7d1612538
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2020 08:39:06.4256
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 8ddb2873-a1ad-4a18-ae4e-4644631433be
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bIYoe741bybV4irCJ6bObhSDkIu1bviu+Mr93KjmFEssnXIq/Bvl6WybQLtnThMzKtKWdqfrW+zrK5JqAJyMXA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR11MB2720
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Type: text/plain
 
+1. Keep '-std=c++11' and '-std=gnu99' to fix native build error
+with old gcc (such as gcc 5.4.0 on ubuntu 16.04); for clang, remove
+them through setting GRPC_PYTHON_CFLAGS at do_compile in bb recipe
 
+2. While export CC="gcc ", cc_args is empty, it will
+cause subprocess.Popen always return 1. On centos 8, if you don't
+install package libatomic, there will be a native build error
+`cannot find /usr/lib64/libatomic.so.1.2.0'.
 
-On 3/26/20 3:38 PM, Khem Raj wrote:
-> On Wed, Mar 25, 2020 at 10:11 PM He Zhe <zhe.he@windriver.com> wrote:
->>
->>
->> On 3/25/20 11:30 PM, Khem Raj wrote:
->>> Fails build on qemux86
->>>
->>> https://errors.yoctoproject.org/Errors/Details/398664/
->> Hi Raj,
->>
->> I cannot reproduce this failurewith poky(master branch) + meta-openembedded(master branch).
->>
->> Looking at the reported error,
->> 'TOPDIR/build/tmp/work-shared/qemux86/kernel-source/arch/x86/include/asm/msr-index.h': No such file or directory
->> the TOPDIR, part of STAGING_KERNEL_DIR, is not evaluated, strange.
->>
->> Where can I find the exact reproduction steps? Thanks.
->>
-> its listed here http://errors.yoctoproject.org/Errors/Details/398850/
->
-> Use master-next branch of poky and MACHINE=qemux86-64
+Add no harm '-g' to cc_args if cc_args is empty.
 
-I've tried with the following config,
-git://git.yoctoproject.org/poky on master-next
-git://git.openembedded.org/meta-openembedded on master-next
-MACHINE=qemux86-64
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ ...up.py-Do-not-mix-C-and-C-compiler-options.patch | 56 +++++++++++++---------
+ .../python/python3-grpcio_1.27.1.bb                |  4 ++
+ 2 files changed, 37 insertions(+), 23 deletions(-)
 
-But I still cannot reproduce it. Anything that might still be missing here?
-
-And it seems it's not turbostat's recipe who makes "TOPDIR" not evaluated.
-
-
-Zhe
-
->
->> Zhe
->>
->>> On Wed, Mar 25, 2020 at 3:57 AM He Zhe <zhe.he@windriver.com> wrote:
->>>> From: He Zhe <zhe.he@windriver.com>
->>>>
->>>> To fix the following build failures
->>>> turbostat.c:(.text+0xc28a): undefined reference to `UL'
->>>> turbostat.c:33:10: fatal error: sys/capability.h: No such file or directory (for kernel v5.6-rc7)
->>>>
->>>> - Add dependency on libcap for kernel v5.6-rc7 and later versions
->>>> - Copy internal linux/const.h used by previously added internal linux/bits.h
->>>> - Tweak linux/const.h to allow it to refer to uapi const.h, as
->>>>   linux-libc-headers purposely removes _UAPI from the locker macros of the
->>>>   headers
->>>> - Remove -I for kernel-source in EXTRA_OEMAKE, as linux-kernel-headers has
->>>>   provided enough and necessary headers
->>>>
->>>> Signed-off-by: He Zhe <zhe.he@windriver.com>
->>>> ---
->>>>  meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb | 8 +++++---
->>>>  1 file changed, 5 insertions(+), 3 deletions(-)
->>>>
->>>> diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
->>>> index 5f6588d..d2694b8 100644
->>>> --- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
->>>> +++ b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
->>>> @@ -21,7 +21,7 @@ SRC_URI += "\
->>>>              "
->>>>
->>>>  PACKAGE_ARCH = "${MACHINE_ARCH}"
->>>> -DEPENDS = "virtual/kernel"
->>>> +DEPENDS = "virtual/kernel libcap"
->>>>
->>>>  # This looks in S, so we better make sure there's
->>>>  # something in the directory.
->>>> @@ -30,8 +30,7 @@ do_populate_lic[depends] = "${PN}:do_configure"
->>>>
->>>>
->>>>  EXTRA_OEMAKE = '\
->>>> -                CC="${CC}" \
->>>> -               'CFLAGS=-Wall -I${STAGING_KERNEL_DIR}/arch/x86/include/uapi ${LDFLAGS}' \
->>>> +                CC="${CC}" 'CFLAGS=-Wall ${LDFLAGS}' \
->>>>                 '
->>>>
->>>>  # If we build under STAGING_KERNEL_DIR, source will not be put
->>>> @@ -43,12 +42,15 @@ do_configure_prepend() {
->>>>         cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
->>>>         cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
->>>>         cp -r ${STAGING_KERNEL_DIR}/include/linux/bits.h ${S}
->>>> +       cp -r ${STAGING_KERNEL_DIR}/include/linux/const.h ${S}
->>>>         cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
->>>>         cp -r ${WORKDIR}/COPYING ${S}
->>>>  }
->>>>
->>>>  do_compile() {
->>>>         sed -i 's#<linux/bits.h>#"bits.h"#' msr-index.h
->>>> +       sed -i 's#<linux/const.h>#"const.h"#' bits.h
->>>> +       sed -i -e 's#<uapi/linux/const.h>#<linux/const.h>#' -e 's#_LINUX_CONST_H#_LINUX_CONST_H_KERNEL#' const.h
->>>>         sed -i 's#MSRHEADER#"msr-index.h"#' turbostat.c
->>>>         sed -i 's#INTEL_FAMILY_HEADER#"intel-family.h"#' turbostat.c
->>>>         sed -i 's#\$(CC) \$(CFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#\$(CC) \$(CFLAGS) \$(LDFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#' Makefile
->>>> --
->>>> 2.7.4
->>>>
->>>> 
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch b/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
+index f39a82a..bff50a0 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
++++ b/meta-python/recipes-devtools/python/python3-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
+@@ -1,4 +1,4 @@
+-1From b02be74a2eff8abc612ef84f30e0fbce6a7f65f5 Mon Sep 17 00:00:00 2001
++From 2ef8a85933f3ac36b289979ff9edd49dd12d0d16 Mon Sep 17 00:00:00 2001
+ From: Khem Raj <raj.khem@gmail.com>
+ Date: Fri, 4 Aug 2017 09:04:07 -0700
+ Subject: [PATCH] setup.py: Do not mix C and C++ compiler options
+@@ -14,17 +14,38 @@ gcc7 ( defaults are -std=gnu11 and -std=gnu++14 )
+ anyway
+ 
+ Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
++1. Keep '-std=c++11' and '-std=gnu99' to fix native build error
++with old gcc (such as gcc 5.4.0 on ubuntu 16.04), for clang
++we will remove them through GRPC_PYTHON_CFLAGS at do_compile
++in bb recipe.
++
++2. While export CC="gcc ", cc_args is None, it will
++cause subprocess.Popen always return 1. On centos 8, if you don't
++install package libatomic, there will be a native build error
++`cannot find /usr/lib64/libatomic.so.1.2.0'.
++
++Add no harm '-g' to cc_args if cc_args is empty.
++
++Upstream-Status: Inappropriate [oe specific]
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+ ---
+- setup.py | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
++ setup.py                      | 6 +++++-
++ src/python/grpcio/commands.py | 5 ++++-
++ 2 files changed, 9 insertions(+), 2 deletions(-)
+ 
++diff --git a/setup.py b/setup.py
++index e950057..1b68221 100644
+ --- a/setup.py
+ +++ b/setup.py
+-@@ -144,9 +144,10 @@ ENABLE_DOCUMENTATION_BUILD = os.environ.
++@@ -144,9 +144,13 @@ ENABLE_DOCUMENTATION_BUILD = os.environ.get(
+  
+  def check_linker_need_libatomic():
+    """Test if linker on system needs libatomic."""
+ +  compiler, cc_args = os.environ.get('CC').split(' ', 1) or 'gcc'
+++  if not cc_args:
+++      cc_args = "-g"
+++
+    code_test = (b'#include <atomic>\n' +
+                 b'int main() { return std::atomic<int64_t>{}; }')
+ -  cc_test = subprocess.Popen(['cc', '-x', 'c++', '-std=c++11', '-'],
+@@ -32,33 +53,22 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
+                               stdin=PIPE,
+                               stdout=PIPE,
+                               stderr=PIPE)
+-@@ -163,7 +164,7 @@ def check_linker_need_libatomic():
+- EXTRA_ENV_COMPILE_ARGS = os.environ.get('GRPC_PYTHON_CFLAGS', None)
+- EXTRA_ENV_LINK_ARGS = os.environ.get('GRPC_PYTHON_LDFLAGS', None)
+- if EXTRA_ENV_COMPILE_ARGS is None:
+--  EXTRA_ENV_COMPILE_ARGS = ' -std=c++11'
+-+  EXTRA_ENV_COMPILE_ARGS = ' '
+-   if 'win32' in sys.platform:
+-     if sys.version_info < (3, 5):
+-       EXTRA_ENV_COMPILE_ARGS += ' -D_hypot=hypot'
+-@@ -180,7 +181,7 @@ if EXTRA_ENV_COMPILE_ARGS is None:
+-       # available dynamically
+-       EXTRA_ENV_COMPILE_ARGS += ' /MT'
+-   elif "linux" in sys.platform:
+--    EXTRA_ENV_COMPILE_ARGS += ' -std=gnu99 -fvisibility=hidden -fno-wrapv -fno-exceptions'
+-+    EXTRA_ENV_COMPILE_ARGS += ' -fvisibility=hidden -fno-wrapv -fno-exceptions'
+-   elif "darwin" in sys.platform:
+-     EXTRA_ENV_COMPILE_ARGS += ' -stdlib=libc++ -fvisibility=hidden -fno-wrapv -fno-exceptions'
+- 
++diff --git a/src/python/grpcio/commands.py b/src/python/grpcio/commands.py
++index 064dda9..a75d8b9 100644
+ --- a/src/python/grpcio/commands.py
+ +++ b/src/python/grpcio/commands.py
+-@@ -216,7 +216,8 @@ class BuildExt(build_ext.build_ext):
++@@ -216,7 +216,10 @@ class BuildExt(build_ext.build_ext):
+              when invoked in C mode. GCC is okay with this, while clang is not.
+              """
+              # TODO(lidiz) Remove the generated a.out for success tests.
+ -            cc_test = subprocess.Popen(['cc', '-x', 'c', '-std=c++11', '-'],
+ +            compiler, cc_args = os.environ.get('CC').split(' ', 1) or 'gcc'
+++            if not cc_args:
+++                cc_args = "-g"
+ +            cc_test = subprocess.Popen([compiler, cc_args, '-x', 'c', '-std=c++11', '-'],
+                                         stdin=subprocess.PIPE,
+                                         stdout=subprocess.PIPE,
+                                         stderr=subprocess.PIPE)
++-- 
++2.7.4
++
+diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
+index 42260cb..358b237 100644
+--- a/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
++++ b/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
+@@ -23,6 +23,10 @@ inherit pypi
+ 
+ export GRPC_PYTHON_DISABLE_LIBC_COMPATIBILITY = "1"
+ 
++do_compile_prepend_toolchain-clang() {
++    export GRPC_PYTHON_CFLAGS='-fvisibility=hidden -fno-wrapv -fno-exceptions'
++}
++
+ CLEANBROKEN = "1"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+-- 
+2.7.4
 
