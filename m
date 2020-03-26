@@ -1,83 +1,78 @@
-Received: from mail-qv1-f41.google.com (mail-qv1-f41.google.com [209.85.219.41])
- by mx.groups.io with SMTP id smtpd.web10.497.1585242860723086157
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
+ by mx.groups.io with SMTP id smtpd.web10.1176.1585244382255837764
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2020 10:14:20 -0700
+ Thu, 26 Mar 2020 10:39:42 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=NVSzoSmf;
- spf=pass (domain: gmail.com, ip: 209.85.219.41, mailfrom: raj.khem@gmail.com)
-Received: by mail-qv1-f41.google.com with SMTP id g4so3388180qvo.12
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2020 10:14:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=YRTtKbX0YElCAZPxiO4QjmDDyDG7Roi7ftXSyhpmnd8=;
-        b=NVSzoSmf+FkqlOeCbpLeQW1GxNr57/jfTJTR0fTakCLlvUHfyo7NccptiDXmG9uJjS
-         H/sIv00QsrogCn59C52mqx/1GJ8NTwzBKwZOts2E3WQkFHhYIbBbNLUFVGHZEOcuR4R2
-         Z4VSRHNpq8sVa1kbfxK9vd1FMgn2G7eWrnv/mQ2R5xKKZfjjID5iCVRNYCJgbK5KvSfl
-         mcNK1jVv5IILr0DvyeAXDKV6S/OkqxyAKqLAhkqrOXpjr9GsMs5bhnXDaOaG2U8KMJaY
-         q+osWkRUNi2Z+lDCtEG88CzhClZOYSXgxvapQtLKxV/+XZl/DJ0gUT7pUrV+26v31wi/
-         oR4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=YRTtKbX0YElCAZPxiO4QjmDDyDG7Roi7ftXSyhpmnd8=;
-        b=az7+6U1rOlcFfNtke1Xiw1MB661O1U16SsVYc70XpShUWKEunasWBP/FZMhaP3g5e4
-         qKDaj1JGW++M2xcHaqCt7U2Lxh4pu69m/pxOyCWXeKugeqgyzdiYLYEwqq26cyLpFRZN
-         6lI85dD0jQuTk9zCDWVYKSOgq3v94gA6Bkayzc/9SyK9pHl+f814mKcm61+x2JK36umM
-         z4mjJb1Pd6r/1GLA0MUUnF3bi2FUL85LQSdwCIN9tJi6sfM2nBrEyKIgVFPJrnVIjptA
-         0Gp6wkaep3HuxjnGTGvRPF7ub04vRiUhA7qUkmoSMW6U4Y+BaIP/dUzIRsauhgSHHqWd
-         YcYg==
-X-Gm-Message-State: ANhLgQ0BVEzs/ivu/rBQbY7LCp7Oj+OT1ubGdlS5oznMhTu9rxBB3tOk
-	5N2KN4g8gT1fE6u+p4xp1nLNo9YK/3zUsSEauzY=
-X-Google-Smtp-Source: ADFU+vvT7df73taAwizMKJzvxwuPBac2lWxn66cMm21I2etTREOxHo6Whi4xOvwpNxcXFAmnlW51h+/F/S450StvKhA=
-X-Received: by 2002:a0c:c311:: with SMTP id f17mr9375753qvi.146.1585242859583;
- Thu, 26 Mar 2020 10:14:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200326000257.GF1578@denix.org> <20200326005529.c77siajyzfgxdc4a@jama>
- <20200326170721.GH1578@denix.org>
-In-Reply-To: <20200326170721.GH1578@denix.org>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 26 Mar 2020 10:13:52 -0700
-Message-ID: <CAMKF1srxY6873+cEoy+2jOQrQxjbnmq+nFxXSEFpXH5pgqM2bg@mail.gmail.com>
-Subject: Re: [oe] [meta-qt5] qtwebkit 5.15 update failure
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: Martin Jansa <martin.jansa@gmail.com>, 
+ dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 8E5FF40BFE;
+	Thu, 26 Mar 2020 17:39:41 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id i8TaGuffq0EM; Thu, 26 Mar 2020 17:39:41 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 41AFA40BFD;
+	Thu, 26 Mar 2020 17:39:37 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id EB9601718F1; Thu, 26 Mar 2020 13:39:36 -0400 (EDT)
+Date: Thu, 26 Mar 2020 13:39:36 -0400
+From: "Denys Dmytriyenko" <denis@denix.org>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Martin Jansa <martin.jansa@gmail.com>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [oe] [meta-qt5] qtwebkit 5.15 update failure
+Message-ID: <20200326173936.GI1578@denix.org>
+References: <20200326000257.GF1578@denix.org>
+ <20200326005529.c77siajyzfgxdc4a@jama>
+ <20200326170721.GH1578@denix.org>
+ <CAMKF1srxY6873+cEoy+2jOQrQxjbnmq+nFxXSEFpXH5pgqM2bg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAMKF1srxY6873+cEoy+2jOQrQxjbnmq+nFxXSEFpXH5pgqM2bg@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, Mar 26, 2020 at 10:07 AM Denys Dmytriyenko <denis@denix.org> wrote:
->
-> On Thu, Mar 26, 2020 at 01:55:29AM +0100, Martin Jansa wrote:
-> > On Wed, Mar 25, 2020 at 08:02:57PM -0400, Denys Dmytriyenko wrote:
-> > > | Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScreenVideoHandler.cpp:116: error: undefined reference to 'QWebFullScreenVideoHandler::qt_metacast(char const*)'
-> > > | Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScreenVideoHandler.cpp:121: error: undefined reference to 'QWebFullScreenVideoHandler::qt_metacall(QMetaObject::Call, int, void**)'
-> > > | Source/WebKit/CMakeFiles/WebKitWidgets.dir/WebKitWidgets_autogen/mocs_compilation.cpp.o:mocs_compilation.cpp:WebKit::DefaultFullScreenVideoHandler::staticMetaObject: error: undefined reference to 'QWebFullScreenVideoHandler::staticMetaObject'
-> > > | /usr/src/debug/qtwebkit/5.14.99+gitAUTOINC+ab1bd15209-r0.arago8/git/Source/WebKit/qt/WidgetSupport/DefaultFullScreenVideoHandler.cpp:45: error: undefined reference to 'vtable for QWebFullScreenVideoHandler'
-> > >
-
-Yeah I have seen this failure too on master.
-
-> > > FWIW, it was building just fine before the update...
+On Thu, Mar 26, 2020 at 10:13:52AM -0700, Khem Raj wrote:
+> On Thu, Mar 26, 2020 at 10:07 AM Denys Dmytriyenko <denis@denix.org> wrote:
 > >
-> > If you care about qtwebkit, then please send patches for this.
->
-> On the other hand - if you don't care about qtwebkit, why would you update it
-> from a working version to a broken one?
->
-> The issue is that with the upcoming 3.1 LTS around the corner, many of us are
-> trying to finalize and stabilize our own code bases in master. I was very
-> close to resolving most of the breakages for my builds just couple days ago,
-> and now I got few more unexpected failures from meta-qt5...
->
-
-meta-qt5 has already branched out dunfell before bumping QT version,
-so we should be good there
- unless Martin plans to backport it into dunfell branch
-
-> Anyway, I'll see if I can find some time to look into this breakage...
->
-> --
-> Denys
+> > On Thu, Mar 26, 2020 at 01:55:29AM +0100, Martin Jansa wrote:
+> > > On Wed, Mar 25, 2020 at 08:02:57PM -0400, Denys Dmytriyenko wrote:
+> > > > | Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScreenVideoHandler.cpp:116: error: undefined reference to 'QWebFullScreenVideoHandler::qt_metacast(char const*)'
+> > > > | Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScreenVideoHandler.cpp:121: error: undefined reference to 'QWebFullScreenVideoHandler::qt_metacall(QMetaObject::Call, int, void**)'
+> > > > | Source/WebKit/CMakeFiles/WebKitWidgets.dir/WebKitWidgets_autogen/mocs_compilation.cpp.o:mocs_compilation.cpp:WebKit::DefaultFullScreenVideoHandler::staticMetaObject: error: undefined reference to 'QWebFullScreenVideoHandler::staticMetaObject'
+> > > > | /usr/src/debug/qtwebkit/5.14.99+gitAUTOINC+ab1bd15209-r0.arago8/git/Source/WebKit/qt/WidgetSupport/DefaultFullScreenVideoHandler.cpp:45: error: undefined reference to 'vtable for QWebFullScreenVideoHandler'
+> > > >
 > 
+> Yeah I have seen this failure too on master.
+> 
+> > > > FWIW, it was building just fine before the update...
+> > >
+> > > If you care about qtwebkit, then please send patches for this.
+> >
+> > On the other hand - if you don't care about qtwebkit, why would you update it
+> > from a working version to a broken one?
+> >
+> > The issue is that with the upcoming 3.1 LTS around the corner, many of us are
+> > trying to finalize and stabilize our own code bases in master. I was very
+> > close to resolving most of the breakages for my builds just couple days ago,
+> > and now I got few more unexpected failures from meta-qt5...
+> >
+> 
+> meta-qt5 has already branched out dunfell before bumping QT version,
+> so we should be good there
+
+Ah, that's good to know, I missed that!
+
+
+>  unless Martin plans to backport it into dunfell branch
+> 
+> > Anyway, I'll see if I can find some time to look into this breakage...
+> >
+> > --
+> > Denys
+> > 
+
+> 
+
