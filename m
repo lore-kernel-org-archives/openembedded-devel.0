@@ -1,128 +1,93 @@
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
- by mx.groups.io with SMTP id smtpd.web11.4139.1585251261421937839
+Received: from mail-il1-f174.google.com (mail-il1-f174.google.com [209.85.166.174])
+ by mx.groups.io with SMTP id smtpd.web11.4947.1585253175722427287
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2020 12:34:21 -0700
+ Thu, 26 Mar 2020 13:06:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=hCC2WTZ7;
- spf=pass (domain: gmail.com, ip: 209.85.128.66, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wm1-f66.google.com with SMTP id a9so8611852wmj.4
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2020 12:34:21 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=j38EOFLM;
+ spf=pass (domain: gmail.com, ip: 209.85.166.174, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-il1-f174.google.com with SMTP id j69so6626753ila.11
+        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2020 13:06:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:date:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=QWVcxQEn2YXMyV710K8Lhwi8KPH0FP6G+b2gFzIEWnA=;
-        b=hCC2WTZ7WS7Mq5mxMwFl7G/ky6F4XYu67//wiJTD8CVdTcYkPJ16pb/t1T6Wl8GrfP
-         K/uNSVYhAmL85NG4r3OpedzuaAh4dEXPSkbtvOO5niZvXdvbaYA2hG21+gOeeCyUQEmG
-         a/Lc3g3OvSDTUbDfmGqadOu7XWmEs3HAsGcJ/X4W5SakCUlTT815rHDLvqnP6vecJCIC
-         bO1PcRX7NkbtkzrL3yjNe3YpTWzCMG889+MY55pfNVaHc1r2f2mOO/Wh0R3uSIcj6kAS
-         6OHr/uE43hSNNORCToPir1B9WITONRZ/ImVB7KnSK1XBGddQ0AbEXxJu8+E43x6qQ7e1
-         SUjg==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=ueMKA+DtKOT5gjrAd1r7hagk4Nk4/NmDUMhjq1KEn7Y=;
+        b=j38EOFLMo9gzexaQFPHYLmahYJNV20y/8QKHz4t4gpfqssv7Wdj0MchX7hjn1bb9xn
+         dSFqVvWjMEC9k4FMl1UOz2up/qsB4Ytc/WANmBr+ea5UJvQWZ0s+bNoPmJTfTJrj5Wc9
+         ixlvzham4oKtST9YLO8FBB+ZDT3BAaQ+rnMdSxHOL5pOJV0wOcKFNnvaukcLAXfr27C1
+         Ww85gmR4HMiIKmK2502ZvG9gRTl2xZ3PdWkrKd2JvtWPHwX/P8i22VEpx9VZJRVaNtHC
+         fF2LBs/ZpUJqdRh+SEiLkOuB4e5Z9I1OVFkG30/aw3aUSIkRfA5dHe36yM6E4gDcfKCi
+         IDNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=QWVcxQEn2YXMyV710K8Lhwi8KPH0FP6G+b2gFzIEWnA=;
-        b=OViHQ+Aza2iiAI4nURyWPIK/o8RnWkzE12eHo8HilJkQblHsG0VHPx8XZEF0sp3aiE
-         bQaQCb5o+raN6C5ol7FuTAzPWTbit1rFw84pRO1KMokmVAYQ3OeqfhKk1dd5yaRiC+RD
-         /MySjvrAxeA8TAuN+rArNxZ/FyEf+I4QS+4m5TcliYCn3d6UhJazlEpHLHdUah+M1wp/
-         Us5tnAm7JHTCCOf+WKomLJsEHzvlCcTdph7cIQNHhrM56JNfHbjYq4sj6EQDbQTuqTjB
-         /efXjWTal5tGwvM8RE7XuAS7dhqyZzsajDV83XKRfnVOnq/W6795L4xsOPOwkVEMhAg7
-         zEKw==
-X-Gm-Message-State: ANhLgQ0FlG+6/LWadDXeIDrlh8fFlJLbLR20KGhnNS+G+LXNkl/PgytS
-	eHiYzaK0AY/wJzypGqqmlb4=
-X-Google-Smtp-Source: ADFU+vuFuZWCB7Cd2gy4avn2Cr6hXL/utKSlm8LxtTL2/51THfgP1ECuQeGrj1ag9G7JUSfShZTHfQ==
-X-Received: by 2002:adf:a4d2:: with SMTP id h18mr11418731wrb.90.1585251259865;
-        Thu, 26 Mar 2020 12:34:19 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id l4sm3641748wru.1.2020.03.26.12.34.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Mar 2020 12:34:18 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 26 Mar 2020 20:34:18 +0100
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-qt5] qtwebkit 5.15 update failure
-Message-ID: <20200326193418.fiehd5wti6gd7yfw@jama>
-References: <20200326000257.GF1578@denix.org>
- <20200326005529.c77siajyzfgxdc4a@jama>
- <20200326170721.GH1578@denix.org>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=ueMKA+DtKOT5gjrAd1r7hagk4Nk4/NmDUMhjq1KEn7Y=;
+        b=jCtyDnyVgCAAczD01mGeIWnOhLNKVbKHkLKprKpRLPyK6Zr2pnM50tE16qbdavMem8
+         wGy8t4QeqM17jjq0cspmI6qTAsgbF8YCC+6ogqqB+uciH6X6fj19yYtWfq4H2oseLMSM
+         XeKh66iTi7hPmL9sJsbC3cyg6e3u4vvMWkAX8XYJv6gD7YVsugHNTubH/3R25HPmAc7k
+         hgZ7z5cICR7KRCSJhhCyRWJpjE53h2MGOMf2giej8qHxvZL77Z1GXjNaV9GdNEPhrBwK
+         9sz67uPNwqItCB0XNBia/w+U3ouZtzmz8feU1ZUjt3drsZs2Unc6KNwR6GJ0L+NUB4Sp
+         m1WA==
+X-Gm-Message-State: ANhLgQ3laoFKz/jG9fxlRmMN/QxLvBUiRdIpXFiIJDpCATS2MHY+gVAz
+	qxI7sRUOx7lTgWfuQpunsb8JbWE+WgvbfjZq1XA=
+X-Google-Smtp-Source: ADFU+vv8x5wiwPkIxd3lI3gwsAX94pvlzWXw3CiQ8KoDu5wbg6fccsIF97GlgWHd/DuCG0Xfw3ARCOkq6ZnHVkiHJns=
+X-Received: by 2002:a92:3c04:: with SMTP id j4mr10853723ila.108.1585253175041;
+ Thu, 26 Mar 2020 13:06:15 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200326170721.GH1578@denix.org>
-User-Agent: NeoMutt/20180716
-X-Groupsio-MsgNum: 83526
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="tzbc4r2wphvfbtol"
-Content-Disposition: inline
+References: <20200326000257.GF1578@denix.org> <20200326005529.c77siajyzfgxdc4a@jama>
+ <20200326170721.GH1578@denix.org> <20200326193418.fiehd5wti6gd7yfw@jama>
+In-Reply-To: <20200326193418.fiehd5wti6gd7yfw@jama>
+From: "Andreas M?ller" <schnitzeltony@gmail.com>
+Date: Thu, 26 Mar 2020 21:06:03 +0100
+Message-ID: <CALbNGRQV1Q=hCTJWXLknJLacgKX6LAyvAg6bt9hCzC5CQhZXAA@mail.gmail.com>
+Subject: Re: [oe] [meta-qt5] qtwebkit 5.15 update failure
+To: Martin Jansa <Martin.Jansa@gmail.com>
+Cc: Denys Dmytriyenko <denis@denix.org>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
---tzbc4r2wphvfbtol
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, Mar 26, 2020 at 8:34 PM Martin Jansa <Martin.Jansa@gmail.com> wrote:
+>
+> On Thu, Mar 26, 2020 at 01:07:21PM -0400, Denys Dmytriyenko wrote:
+> > On Thu, Mar 26, 2020 at 01:55:29AM +0100, Martin Jansa wrote:
+> > > On Wed, Mar 25, 2020 at 08:02:57PM -0400, Denys Dmytriyenko wrote:
+> > > > | Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScreenVideoHandler.cpp:116: error: undefined reference to 'QWebFullScreenVideoHandler::qt_metacast(char const*)'
+> > > > | Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScreenVideoHandler.cpp:121: error: undefined reference to 'QWebFullScreenVideoHandler::qt_metacall(QMetaObject::Call, int, void**)'
+> > > > | Source/WebKit/CMakeFiles/WebKitWidgets.dir/WebKitWidgets_autogen/mocs_compilation.cpp.o:mocs_compilation.cpp:WebKit::DefaultFullScreenVideoHandler::staticMetaObject: error: undefined reference to 'QWebFullScreenVideoHandler::staticMetaObject'
+> > > > | /usr/src/debug/qtwebkit/5.14.99+gitAUTOINC+ab1bd15209-r0.arago8/git/Source/WebKit/qt/WidgetSupport/DefaultFullScreenVideoHandler.cpp:45: error: undefined reference to 'vtable for QWebFullScreenVideoHandler'
+> > > >
+> > > > FWIW, it was building just fine before the update...
+> > >
+> > > If you care about qtwebkit, then please send patches for this.
+> >
+> > On the other hand - if you don't care about qtwebkit, why would you update it
+> > from a working version to a broken one?
+>
+> I didn't update qtwebkit.
+>
+> qtwebkit isn't part of regular Qt upgrades since 5.9, I've already
+> removed it a while ago and then restored it based on Andreas's request,
+> see last few commits:
+>
+> c8cd55b0 qtwebkit: build with python3
+> 23914740 Revert "qtwebkit: remove"
+> a35403dc qtwebkit: remove
+> a797f85c python-pyqt5, qtwebengine, qtwebkit, qt-kiosk-browser: skip without meta-python2
+> b1f4f1fd Revert "recipes: Use python3 during build"
+> 47fb26de recipes: Use python3 during build
+>
+> I have not intention to support it myself, either send patches or maybe
+> Andreas will do.
+>
+> > The issue is that with the upcoming 3.1 LTS around the corner, many of us are
+> > trying to finalize and stabilize our own code bases in master. I was very
+> > close to resolving most of the breakages for my builds just couple days ago,
+> > and now I got few more unexpected failures from meta-qt5...
+>
+> Yes, that's why there is dunfell branch as mentioned in the PR, see:
+> https://github.com/meta-qt5/meta-qt5/pull/294
+Since KDE (meta-qt5-extra) still requires it I have to take care - but
+cannot say when I am tough enough for after dunfell adventures...
 
-On Thu, Mar 26, 2020 at 01:07:21PM -0400, Denys Dmytriyenko wrote:
-> On Thu, Mar 26, 2020 at 01:55:29AM +0100, Martin Jansa wrote:
-> > On Wed, Mar 25, 2020 at 08:02:57PM -0400, Denys Dmytriyenko wrote:
-> > > | Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScree=
-nVideoHandler.cpp:116: error: undefined reference to 'QWebFullScreenVideoHa=
-ndler::qt_metacast(char const*)'
-> > > | Source/WebKit/WebKitWidgets_autogen/J52LRV53MS/moc_DefaultFullScree=
-nVideoHandler.cpp:121: error: undefined reference to 'QWebFullScreenVideoHa=
-ndler::qt_metacall(QMetaObject::Call, int, void**)'
-> > > | Source/WebKit/CMakeFiles/WebKitWidgets.dir/WebKitWidgets_autogen/mo=
-cs_compilation.cpp.o:mocs_compilation.cpp:WebKit::DefaultFullScreenVideoHan=
-dler::staticMetaObject: error: undefined reference to 'QWebFullScreenVideoH=
-andler::staticMetaObject'
-> > > | /usr/src/debug/qtwebkit/5.14.99+gitAUTOINC+ab1bd15209-r0.arago8/git=
-/Source/WebKit/qt/WidgetSupport/DefaultFullScreenVideoHandler.cpp:45: error=
-: undefined reference to 'vtable for QWebFullScreenVideoHandler'
-> > >=20
-> > > FWIW, it was building just fine before the update...
-> >=20
-> > If you care about qtwebkit, then please send patches for this.
->=20
-> On the other hand - if you don't care about qtwebkit, why would you updat=
-e it=20
-> from a working version to a broken one?
-
-I didn't update qtwebkit.
-
-qtwebkit isn't part of regular Qt upgrades since 5.9, I've already
-removed it a while ago and then restored it based on Andreas's request,
-see last few commits:
-
-c8cd55b0 qtwebkit: build with python3
-23914740 Revert "qtwebkit: remove"
-a35403dc qtwebkit: remove
-a797f85c python-pyqt5, qtwebengine, qtwebkit, qt-kiosk-browser: skip withou=
-t meta-python2
-b1f4f1fd Revert "recipes: Use python3 during build"
-47fb26de recipes: Use python3 during build
-
-I have not intention to support it myself, either send patches or maybe
-Andreas will do.
-
-> The issue is that with the upcoming 3.1 LTS around the corner, many of us=
- are=20
-> trying to finalize and stabilize our own code bases in master. I was very=
-=20
-> close to resolving most of the breakages for my builds just couple days a=
-go,=20
-> and now I got few more unexpected failures from meta-qt5...
-
-Yes, that's why there is dunfell branch as mentioned in the PR, see:
-https://github.com/meta-qt5/meta-qt5/pull/294
-
---tzbc4r2wphvfbtol
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXn0DuQAKCRA3VSO3ZXaA
-HCzWAJ9WxBIn+Bfc4Zs2nfqJ674JPLR0eQCbBySpai6OiyuBAKqOi+AcJB6JdW8=
-=hI0q
------END PGP SIGNATURE-----
-
---tzbc4r2wphvfbtol--
+Andreas
