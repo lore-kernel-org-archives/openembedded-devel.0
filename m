@@ -1,53 +1,63 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web10.3651.1585272376284771733
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.3879.1585273795392913141
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2020 18:26:16 -0700
+ Thu, 26 Mar 2020 18:49:55 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: changqing.li@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 02R1QFNg027632
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2020 18:26:15 -0700 (PDT)
-Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 26 Mar 2020 18:26:14 -0700
-From: "Changqing Li" <changqing.li@windriver.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.72,310,1580745600"; 
+   d="scan'208";a="87517236"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 27 Mar 2020 09:49:50 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id 8E828406AB15
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Mar 2020 09:39:33 +0800 (CST)
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.85) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Fri, 27 Mar 2020 09:49:45 +0800
+Received: from localhost.local (10.167.225.81) by
+ G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
+ (TLS) id 14.3.439.0; Fri, 27 Mar 2020 09:49:56 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [V2][PATCH] freeradius: don't download LFS content by default
-Date: Fri, 27 Mar 2020 09:26:13 +0800
-Message-ID: <1585272373-75546-1-git-send-email-changqing.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] [oe] [meta-filesystems] [PATCH] fuse3: upgrade 3.9.0 -> 3.9.1
+Date: Fri, 27 Mar 2020 09:52:15 +0800
+Message-ID: <20200327015215.22115-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 8E828406AB15.A750F
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-From: Changqing Li <changqing.li@windriver.com>
-
-fix error:
-Fetcher failure: Repository
-git://github.com/FreeRADIUS/freeradius-server.git has LFS content,
-install git-lfs on host to download (or set lfs=0 to ignore it)
-
-upstream has file .lfsconfig to make it not download lfs files by
-default, so we also don't download it by default
-
-Signed-off-by: Changqing Li <changqing.li@windriver.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-support/fuse/{fuse3_3.9.0.bb => fuse3_3.9.1.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-filesystems/recipes-support/fuse/{fuse3_3.9.0.bb => fuse3_3.9.1.bb} (91%)
 
-diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
-index a9c2fad..005ca47 100644
---- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
-+++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
-@@ -13,7 +13,7 @@ LICENSE = "GPLv2 & LGPLv2+"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
- DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
+diff --git a/meta-filesystems/recipes-support/fuse/fuse3_3.9.0.bb b/meta-filesystems/recipes-support/fuse/fuse3_3.9.1.bb
+similarity index 91%
+rename from meta-filesystems/recipes-support/fuse/fuse3_3.9.0.bb
+rename to meta-filesystems/recipes-support/fuse/fuse3_3.9.1.bb
+index 19a3499a1..1830fa166 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse3_3.9.0.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse3_3.9.1.bb
+@@ -13,8 +13,8 @@ LIC_FILES_CHKSUM = "file://GPL2.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
  
--SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x; \
-+SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0; \
-     file://freeradius \
-     file://volatiles.58_radiusd \
-     file://freeradius-enble-user-in-conf.patch \
+ SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.xz \
+ "
+-SRC_URI[md5sum] = "5dc2be21c0d06c7eace340996e8a37e2"
+-SRC_URI[sha256sum] = "fcb7079a1bb4e510377b427d1c5c37c349281d498e249ae0c2379b4cf50059c2"
++SRC_URI[md5sum] = "26d6b450276fb04e20bf91d83b9423f0"
++SRC_URI[sha256sum] = "1bafcfd6c66ba35b7b0beb822532a9106eb8409ad6cde988888fde85f89be645"
+ 
+ S = "${WORKDIR}/fuse-${PV}"
+ 
 -- 
-2.7.4
+2.20.1
+
+
 
