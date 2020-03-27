@@ -1,58 +1,53 @@
-Received: from mail-qk1-f173.google.com (mail-qk1-f173.google.com [209.85.222.173])
- by mx.groups.io with SMTP id smtpd.web10.1691.1585259267895228698
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web10.3651.1585272376284771733
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2020 14:47:48 -0700
+ Thu, 26 Mar 2020 18:26:16 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=pWH0PCmc;
- spf=pass (domain: gmail.com, ip: 209.85.222.173, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f173.google.com with SMTP id e11so8698234qkg.9
-        for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2020 14:47:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=rbWOMPLZpaC69jtZHz5kSp0zWe74pvuUCmYI8H1jZLc=;
-        b=pWH0PCmcTNrv3RTVQ+U3o+0qV0puJTRBV3MKRw6mTEjeM3Sw64AFuHrpVL4Ckghh7J
-         n1gMPgwU8DdD1vyp/IDdVW4kOSgFcniub4z0S1GxkrFsIfTIz5fz1FaKbOezM2W6m4YW
-         hj42CHGoxV+1UKiFQxw8y2UPqqi5HlQfjNVpiFxSBtFJLKW1IsWcyA2CBNv7m4Ili/Jw
-         5qedA2MV8R4GJyHRYzRihTRPxtIUjKyML9RJiz3nQq34qMBcN5a0fYYPkav/bPqLP2Ia
-         hKkH3k2ENM/gazxXih2oyzMFIdRI45Qat/cwGnXis8EQWpL9qHXRtAlkr8uTR3OitGCo
-         c4Cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=rbWOMPLZpaC69jtZHz5kSp0zWe74pvuUCmYI8H1jZLc=;
-        b=jpr0RzftiUsOeSqpKmQHFD2s28jn0Bj4eiGqzAK4Yu1SKoIIL0LIDL6WZPFNG4EZi/
-         ES+9trO2JBEc5TKlIUut63+ZRCR185LLznyp2wh6wC0S4qWxLvLPpD+GxGOP9xPsI9Ho
-         rLmmeFWEvMUnmYPGG2UekMn0KJOGql8YE1kNXofCOZ8Fz1zjL92FGqoJGLdCu+9HWXPE
-         d/wLuKZ1ORWcUxxKl4nZavgrR86A/FxVwqR8pxKDGdtuaHH6xvmNeSTXsPYsNzptG3h0
-         0Mv0oJQBnlKBdQxAm3Y7+QrA0CtJtDoQM3QU/Tb1/X3MocFdEdhEjXiWx2liTN+Sah8r
-         Mbuw==
-X-Gm-Message-State: ANhLgQ3EyrEjP3tXLPV4x7S/48rQCSIDP+zN6gHnpzNq3RPUYFHVImrj
-	hpYwnDZxrA/aAVtFrJWmEkosFgGDSPOAVMB2AIW7awUn
-X-Google-Smtp-Source: ADFU+vtn36QEec77Gd4oEnFM11r2ZD9i1UkWuoN0woKVkomLeaXl+YIzKMP5v9Sk0gz54dy5i/q8nBwMfxnLKTcyrqY=
-X-Received: by 2002:a05:620a:22b:: with SMTP id u11mr10928103qkm.225.1585259266683;
- Thu, 26 Mar 2020 14:47:46 -0700 (PDT)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: changqing.li@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 02R1QFNg027632
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2020 18:26:15 -0700 (PDT)
+Received: from pek-lpg-core2.corp.ad.wrs.com (128.224.153.41) by
+ ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 26 Mar 2020 18:26:14 -0700
+From: "Changqing Li" <changqing.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [V2][PATCH] freeradius: don't download LFS content by default
+Date: Fri, 27 Mar 2020 09:26:13 +0800
+Message-ID: <1585272373-75546-1-git-send-email-changqing.li@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <20200326000440.GG1578@denix.org>
-In-Reply-To: <20200326000440.GG1578@denix.org>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Thu, 26 Mar 2020 14:47:19 -0700
-Message-ID: <CAMKF1sq15BM1_Bmhx-_3gapap7c+ueshijPTXsFE1qWtt8zpzA@mail.gmail.com>
-Subject: Re: [oe] [meta-qt5] qt3d patch failure
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
 
-On Wed, Mar 25, 2020 at 5:04 PM Denys Dmytriyenko <denis@denix.org> wrote:
->
-> 0001-Allow-a-tools-only-build.patch this patch no longer applies for qt3d
-> after the update and fails do_patch()
->
+From: Changqing Li <changqing.li@windriver.com>
 
-seen that too :)
-> --
-> Denys
->
-> 
+fix error:
+Fetcher failure: Repository
+git://github.com/FreeRADIUS/freeradius-server.git has LFS content,
+install git-lfs on host to download (or set lfs=0 to ignore it)
+
+upstream has file .lfsconfig to make it not download lfs files by
+default, so we also don't download it by default
+
+Signed-off-by: Changqing Li <changqing.li@windriver.com>
+---
+ meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
+index a9c2fad..005ca47 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.20.bb
+@@ -13,7 +13,7 @@ LICENSE = "GPLv2 & LGPLv2+"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=eb723b61539feef013de476e68b5c50a"
+ DEPENDS = "openssl-native openssl libidn libtool libpcap libtalloc"
+ 
+-SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x; \
++SRC_URI = "git://github.com/FreeRADIUS/freeradius-server.git;branch=v3.0.x;lfs=0; \
+     file://freeradius \
+     file://volatiles.58_radiusd \
+     file://freeradius-enble-user-in-conf.patch \
+-- 
+2.7.4
+
