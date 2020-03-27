@@ -1,89 +1,53 @@
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web10.5453.1585281255747136939
+ by mx.groups.io with SMTP id smtpd.web12.21978.1585340774976754798
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 26 Mar 2020 20:54:16 -0700
+ Fri, 27 Mar 2020 13:26:15 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: zhe.he@windriver.com)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: tgamblin@windriver.com)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 02R3sEGu013360
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 02RKQD1T000006
 	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Thu, 26 Mar 2020 20:54:14 -0700 (PDT)
-Received: from pek-lpg-core3.wrs.com (128.224.153.232) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 26 Mar 2020 20:54:13 -0700
-From: "He Zhe" <zhe.he@windriver.com>
+	for <openembedded-devel@lists.openembedded.org>; Fri, 27 Mar 2020 13:26:14 -0700 (PDT)
+Received: from ala-lpggp3.wrs.com (147.11.105.124) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Fri, 27 Mar 2020
+ 13:26:13 -0700
+Received: by ala-lpggp3.wrs.com (Postfix, from userid 20958)	id 37E6D900276;
+ Fri, 27 Mar 2020 13:26:13 -0700 (PDT)
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe][meta-oe][PATCH v2] turbostat: Fix build failure for missing kernel internal heaers and clean up
-Date: Fri, 27 Mar 2020 11:54:12 +0800
-Message-ID: <20200327035412.15163-1-zhe.he@windriver.com>
+Subject: [meta-python][PATCH] python3-psutil: upgrade 5.6.7 -> 5.7.0
+Date: Fri, 27 Mar 2020 13:26:13 -0700
+Message-ID: <20200327202613.132996-1-trevor.gamblin@windriver.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain
 
-From: He Zhe <zhe.he@windriver.com>
-
-To fix the following build failures
-turbostat.c:(.text+0xc28a): undefined reference to `UL'
-turbostat.c:33:10: fatal error: sys/capability.h: No such file or directory (for kernel v5.6-rc7)
-
-- Add dependency on libcap for kernel v5.6-rc7 and later versions
-- Copy internal linux/const.h used by previously added internal linux/bits.h
-- Tweak linux/const.h to allow it to refer to uapi const.h, as
-  linux-libc-headers purposely removes _UAPI from the locker macros of the
-  headers
-- Remove -I for kernel-source in EXTRA_OEMAKE, as linux-kernel-headers has
-  provided enough and necessary headers
-- Make do_configure depend on kernel's do_shared_workdir
-
-Signed-off-by: He Zhe <zhe.he@windriver.com>
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
 ---
- meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ meta-python/recipes-devtools/python/python-psutil.inc         | 4 ++--
+ .../{python3-psutil_5.6.7.bb => python3-psutil_5.7.0.bb}      | 0
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-psutil_5.6.7.bb => python3-psutil_5.7.0.bb} (100%)
 
-diff --git a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-index 5f6588de5..60040a47a 100644
---- a/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-+++ b/meta-oe/recipes-kernel/turbostat/turbostat_3.4.bb
-@@ -21,7 +21,7 @@ SRC_URI += "\
-             "
+diff --git a/meta-python/recipes-devtools/python/python-psutil.inc b/meta-python/recipes-devtools/python/python-psutil.inc
+index bf49d9863..dfb33e8dc 100644
+--- a/meta-python/recipes-devtools/python/python-psutil.inc
++++ b/meta-python/recipes-devtools/python/python-psutil.inc
+@@ -2,8 +2,8 @@ SUMMARY = "A cross-platform process and system utilities module for Python"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e35fd9f271d19d5f742f20a9d1f8bb8b"
  
- PACKAGE_ARCH = "${MACHINE_ARCH}"
--DEPENDS = "virtual/kernel"
-+DEPENDS = "libcap"
+-SRC_URI[md5sum] = "b2c94e0368fc6e6f237a7252f8e85ca2"
+-SRC_URI[sha256sum] = "ffad8eb2ac614518bbe3c0b8eb9dffdb3a8d2e3a7d5da51c5b974fb723a5c5aa"
++SRC_URI[md5sum] = "ed7b0f11ed214bcabbe76b7cf52f3ae3"
++SRC_URI[sha256sum] = "685ec16ca14d079455892f25bd124df26ff9137664af445563c1bd36629b5e0e"
  
- # This looks in S, so we better make sure there's
- # something in the directory.
-@@ -30,25 +30,28 @@ do_populate_lic[depends] = "${PN}:do_configure"
+ PACKAGES =+ "${PN}-tests"
  
- 
- EXTRA_OEMAKE = '\
--                CC="${CC}" \
--		'CFLAGS=-Wall -I${STAGING_KERNEL_DIR}/arch/x86/include/uapi ${LDFLAGS}' \
-+                CC="${CC}" 'CFLAGS=-Wall ${LDFLAGS}' \
-                '
- 
- # If we build under STAGING_KERNEL_DIR, source will not be put
- # into the dbg rpm.  STAGING_KERNEL_DIR will exist by the time
- # do_configure() is invoked so we can safely copy from it.
- #
-+do_configure[depends] += "virtual/kernel:do_shared_workdir"
- do_configure_prepend() {
- 	mkdir -p ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/msr-index.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/arch/x86/include/asm/intel-family.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/include/linux/bits.h ${S}
-+	cp -r ${STAGING_KERNEL_DIR}/include/linux/const.h ${S}
- 	cp -r ${STAGING_KERNEL_DIR}/tools/power/x86/turbostat/* ${S}
- 	cp -r ${WORKDIR}/COPYING ${S}
- }
- 
- do_compile() {
- 	sed -i 's#<linux/bits.h>#"bits.h"#' msr-index.h
-+	sed -i 's#<linux/const.h>#"const.h"#' bits.h
-+	sed -i -e 's#<uapi/linux/const.h>#<linux/const.h>#' -e 's#_LINUX_CONST_H#_LINUX_CONST_H_KERNEL#' const.h
- 	sed -i 's#MSRHEADER#"msr-index.h"#' turbostat.c
- 	sed -i 's#INTEL_FAMILY_HEADER#"intel-family.h"#' turbostat.c
- 	sed -i 's#\$(CC) \$(CFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#\$(CC) \$(CFLAGS) \$(LDFLAGS) \$< -o \$(BUILD_OUTPUT)/\$@#' Makefile
+diff --git a/meta-python/recipes-devtools/python/python3-psutil_5.6.7.bb b/meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-psutil_5.6.7.bb
+rename to meta-python/recipes-devtools/python/python3-psutil_5.7.0.bb
 -- 
 2.17.1
 
