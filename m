@@ -1,87 +1,93 @@
-Received: from mail-pf1-f180.google.com (mail-pf1-f180.google.com [209.85.210.180])
- by mx.groups.io with SMTP id smtpd.web12.40637.1585528305915423998
+Received: from mail-pl1-f193.google.com (mail-pl1-f193.google.com [209.85.214.193])
+ by mx.groups.io with SMTP id smtpd.web11.40497.1585528306656682496
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 29 Mar 2020 17:31:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=e2W6Ezut;
- spf=pass (domain: gmail.com, ip: 209.85.210.180, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f180.google.com with SMTP id i13so7759650pfe.3
-        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2020 17:31:45 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=BpMCQHJj;
+ spf=pass (domain: gmail.com, ip: 209.85.214.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f193.google.com with SMTP id a23so6054318plm.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2020 17:31:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=iSRy/2dmJLCbqPtTp0y/U6yJ9iDF+qWndxXlHXpRCMQ=;
-        b=e2W6EzutV0+mK8RuySLcKnWBoEVu5ERv7RSnIe2Zd0YvbghuIC/6Ku0/TaVLqLzA9o
-         BAr61vmEvJ3aAFh3kqDL51yT/XCMiz1ILo3Kgz0zdkybk59axSI46zPu5dLA3i43jqzJ
-         8g5oO1U6vmSkmsroaKBl1VMHaN4Y16Z2/L57BU/jA9Rn0RKWy5BuUL4FzulHnURRNHPV
-         iW5lw5SSn6FODDntH6cfuFxmGBQegf6jlBOEkkG7Y7vkYqM7m0qb7uIk/I+WjsPO0Bh0
-         ksEK3rw6viC70vmrME7I+PyCBk+ubk2UQyysRymsQamdyoZR8iqnuk16Q//VJDtut1tM
-         OpAw==
+        bh=VWtPxo5HX7S17UBR3KR5t9FqBC05xR3M5jSg0oIB1x4=;
+        b=BpMCQHJjKfxfFYKNu+qJz8bmRLpb5xPACXZAEKfDtuIylJd+5mqYIT+Xr46uHgQhxr
+         ARKUt8O+s2+mQiFQQbw403duePRJU3KU7VWR69qnByhTK5G1pFqhvNQa8zgW0/7cPwxQ
+         9RyTxrowuCznE5yG9m71XYop/xcbScyYS2zGKbrPCHuRtmn0MdqEOeUBsmdMETAQd69Q
+         ZCPZhiWYJ7zppgCX41BbFCayYgKwOxVF3oi6qaPvRiGqAONmZotHQ8JmE9wLDFTDWRoF
+         05EtEA6fyGCX3AKH3uAnX1iQjE3VG4rb8+fGNzNHo5/JVFopyvuRZgy7n3ssvjDP0U/y
+         vQag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=iSRy/2dmJLCbqPtTp0y/U6yJ9iDF+qWndxXlHXpRCMQ=;
-        b=n7zlTySjwrdM8QEiBbIjvIK4MK721ON+5AZQu9oD1ymZZEkzT3NQ8FHQK5OnJeEBQi
-         5JKAOK1fOoq563/ZYSSnax6qAO8g7v17U1sa22Lfgo5yacB3hT5Qn2gVfNbEObCM1drH
-         u2Ld34eDpPSjjsHKCK+1wAZer4AFXd3YJLRD+oha+K8j9lOwGuwWETA3e/71DKF0D3Ry
-         Ww9MQl6jZVm9wKpOq2B0lISX9KEpghJi6oboQVmnHiy8nsTkLp39wyCq1+529jDR2lf+
-         Va/dJkHnKk+DQYNRgCdYUwOrlw1onUJz8l98wlPqHkldDZ/ywx1YQw45H0mXaYlgak/g
-         V7lA==
-X-Gm-Message-State: ANhLgQ2cLBFsZmVz7+I63uKKxLcBl50iXpQzIBNOxOwQLjsZp+WmiKdn
-	oKEhZacNloFEsFwRhyGT9sn41EQpIIw=
-X-Google-Smtp-Source: ADFU+vuvn0dj6y/ALQTG0D4DkNBDDaIf9EFa167OSK4mkDKknjx7kiDfAt3+uZCQSlx33s17iey7Hw==
-X-Received: by 2002:a63:8948:: with SMTP id v69mr10285778pgd.318.1585528305029;
+        bh=VWtPxo5HX7S17UBR3KR5t9FqBC05xR3M5jSg0oIB1x4=;
+        b=nCGNhO0PLWkejuOs3SCKizA3FKsXcjKGhSVdKRW7yktNeTRoNpsFsctqqwGirz6/Jy
+         MlzZtgvLrNjc0b2uEhQjUilwRM46csUiFEfsFQDKE3o74eUtOFDx5rEKPm90XucjGByq
+         vOb0nuTTXGuzcYZTYYWrpySlinZsUTjq5F91jvcrAPru5twM17hkEN1mpUxYDtMN6qg4
+         Y8qbVpARnXqhhug/XteQyv72XcjU7pEQZHdyReW83Y3bpk+jz/fmoEXQbqjSVwQZSF/1
+         pBF6UhkMM0lU5lLFYKfgYVjccVC8fUU8Wa1vhyVhG8JtyvAWXPw1SgtCNm0zzwb1JK0L
+         0XHA==
+X-Gm-Message-State: ANhLgQ2IBvPjLNrcVEON4EhmYxRxJ2XXISGlE6ZxH05lJxXmQQIfEXHp
+	g9RzdVZB9az4bD1Sjzw8UgvRo1TGcCE=
+X-Google-Smtp-Source: ADFU+vu7XIO6lVo2R8d71ArRki8alkB6AK+jzNi/b3zkOQDYdgzDIQ9E2okVsHG3nMFx1G7GyhNYSw==
+X-Received: by 2002:a17:90b:1888:: with SMTP id mn8mr13216823pjb.115.1585528305698;
         Sun, 29 Mar 2020 17:31:45 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::49c5])
-        by smtp.gmail.com with ESMTPSA id i13sm4662317pfa.113.2020.03.29.17.31.44
+        by smtp.gmail.com with ESMTPSA id i13sm4662317pfa.113.2020.03.29.17.31.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 29 Mar 2020 17:31:44 -0700 (PDT)
+        Sun, 29 Mar 2020 17:31:45 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/6] tbb: Ensure that install does not race
-Date: Sun, 29 Mar 2020 17:31:53 -0700
-Message-Id: <20200330003155.1670457-4-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 5/6] id3lib: Make sure that quilt-native is staged
+Date: Sun, 29 Mar 2020 17:31:54 -0700
+Message-Id: <20200330003155.1670457-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.0
 In-Reply-To: <20200330003155.1670457-1-raj.khem@gmail.com>
 References: <20200330003155.1670457-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-This fixes
-
-install: will not overwrite just-created 'TOPDIR/build/tmp/work/core2-64-yoe-linux/tbb/20170412+AUTOINC+a2cfdfe946-r0/image/usr/lib/libtbbmalloc_proxy.so' with 'TOPDIR/build/tmp/work/core2-64-yoe-linux/tbb/20170412+AUTOINC+a2cfdfe946-r0/git/build/linux_x86_64_gcc_cc4_release/libtbbmalloc_proxy.so'
+id3lib_do_patch needs quilt to be built for it to run
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/tbb/tbb.bb | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
+ meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/tbb/tbb.bb b/meta-oe/recipes-support/tbb/tbb.bb
-index f870104015..911139b0da 100644
---- a/meta-oe/recipes-support/tbb/tbb.bb
-+++ b/meta-oe/recipes-support/tbb/tbb.bb
-@@ -27,11 +27,14 @@ do_compile() {
+diff --git a/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb b/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
+index 9d311608e4..21fa0bda1e 100644
+--- a/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
++++ b/meta-oe/recipes-multimedia/id3lib/id3lib_3.8.3.bb
+@@ -21,6 +21,7 @@ inherit autotools
+ # patches maintained by quilt. So manually apply them before applying other local
+ # patches. Also remove all temp files before leaving, because do_patch() will pop
+ # up all previously applied patches in the start
++do_patch[depends] += "quilt-native:do_populate_sysroot"
+ id3lib_do_patch() {
+     cd ${S}
+     # it's important that we only pop the existing patches when they've
+@@ -33,14 +34,14 @@ id3lib_do_patch() {
+         # the test inside which we operate
+         QUILT_PATCHES=${S}/patches quilt pop -a
+     fi
+-    if [ -d ${S}/.pc-id3lib ]; then
++    if [ -d ${S}/.pc-${BPN} ]; then
+         rm -rf ${S}/.pc
+-        mv ${S}/.pc-id3lib ${S}/.pc
++        mv ${S}/.pc-${BPN} ${S}/.pc
+         QUILT_PATCHES=${S}/debian/patches quilt pop -a
+         rm -rf ${S}/.pc ${S}/debian
+     fi
+     QUILT_PATCHES=${S}/debian/patches quilt push -a
+-    mv ${S}/.pc ${S}/.pc-id3lib
++    mv ${S}/.pc ${S}/.pc-${BPN}
  }
  
- do_install() {
--    install -d ${D}${includedir} ${D}${libdir}/pkgconfig
-+    install -d ${D}${includedir} ${D}${libdir}
-     rm ${S}/include/tbb/index.html -f
-     cp -R --no-dereference --preserve=mode,links -v ${S}/include/tbb ${D}${includedir}
--    install -m 0755 ${B}/build/linux_*_release/lib*.so* ${D}${libdir}
--    install -m 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig
-+    for f in ${B}/build/linux_*_release/lib*.so*
-+    do
-+        install -Dm 0755 $f ${D}${libdir}/
-+    done
-+    install -Dm 0644 ${WORKDIR}/tbb.pc ${D}${libdir}/pkgconfig/tbb.pc
- }
- 
- # fails with thumb enabled:
+ do_unpack[cleandirs] += "${S}"
 -- 
 2.26.0
 
