@@ -1,52 +1,52 @@
-Received: from mail-wm1-f66.google.com (mail-wm1-f66.google.com [209.85.128.66])
- by mx.groups.io with SMTP id smtpd.web10.50599.1585576463717987073
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com [209.85.128.65])
+ by mx.groups.io with SMTP id smtpd.web12.50557.1585576530429179510
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Mar 2020 06:54:24 -0700
+ Mon, 30 Mar 2020 06:55:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=ymYyKjSy;
- spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.66, mailfrom: brgl@bgdev.pl)
-Received: by mail-wm1-f66.google.com with SMTP id g62so22047867wme.1
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 06:54:23 -0700 (PDT)
+ dkim=pass header.i=@bgdev-pl.20150623.gappssmtp.com header.s=20150623 header.b=mIOMJq9k;
+ spf=none, err=SPF record not found (domain: bgdev.pl, ip: 209.85.128.65, mailfrom: brgl@bgdev.pl)
+Received: by mail-wm1-f65.google.com with SMTP id i19so1663415wmb.0
+        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 06:55:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=w5JsFjfMVlbcRQ0jR+LABoJtXeNI2Rzra0VeDCV6R8A=;
-        b=ymYyKjSy8epp62vn4cLqccQEz3svNgrP2O2fdBdhlN9P8XBqT9PpSvtI4OZIUyXMMP
-         9hl+jyXAO+U7THo7fY1fmUsYlj/L+14Z3zE4wBO4/YNUZ/pxQxmv50VlwtoRUcdHvqdQ
-         3nOqqkxDMZ/P5MXN45to0wTSLTUsvBBOlEmGXIOlyT8zVFMY7Hz1DMfEv/iypyCQC+vc
-         LJL8/88r+dIWi/uVo/9V8O6q2BlbjgjfCv85c3/Z9NbP/qSKSXre9aoHOhggXZF25qcC
-         9Si8fwXe/Zby9QvTG6n3CdoyrgqaCShDLEtFY+7Y2lREgksg5ddp8zT0ZWGqYSsOFB3R
-         a5wA==
+        bh=gBrzC6dwKnEZcR3hL1+MY9rJsvrQHzTO0VNe49sCZdM=;
+        b=mIOMJq9khXzpUKXq3atFszeB6V1rY4E2qa2NyXYf8/cO/vRaKETA3Q0jGrKZp5Ax4V
+         Wlw/krAJFBO4T7Ts2fpHxMAQxbzOk92laiXqjg275PU21g1vxQExkYkXzAa6sdTkn82H
+         HgpqLCyd4N6ENW+7RbxryWBIjeCNBkRIswGSmA+kZ9wcAWx+Ae9we2lnlMz1BVEZCZUr
+         dtmJs8GZQCAxrDq2WOP1puf/RhB/XuxaUOR8Y2xG/qA2KY7DIAYvlFUTni9VN1CgaVKx
+         mVDe7dOitucSJCJLjg01+PDzR6PDBPtZVa+th3Cakp6elscEILiGZ+JkqiBPISs4ixIU
+         PGwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=w5JsFjfMVlbcRQ0jR+LABoJtXeNI2Rzra0VeDCV6R8A=;
-        b=M3QWtYXzf97xY2UCJAwgu6lCYE0Eg+j10BjsCeyKNYszoDBAQZBcNaQPB2pnHAAfoT
-         N+7prJVy8kcXG4RXn8uFTsNQOj1rRZl14g06cRTmuktg7Svj0tqr29AmjsFdiO5Ms6zp
-         T8tK7h2rUAAaa2NfANV2JDlqq+k2s3tSVdUEXmollSnrFBOH6+O2rLbhcSeE9SGqkp9H
-         IactVg72/NP51LxsxJx/hm9S+69CEG0mdAZMdfHGUGNltSKBg4/bLmC6JpGXAc6PqHeC
-         ZWpLmp7cE8iHWiM0YNuW4a/53dz6FVESzub3t7s7IOb7Ky6hr9vZuh/1CcSeMkRILJRx
-         NCSA==
-X-Gm-Message-State: ANhLgQ2igzoEtT+tUfAundFYn0uO4twiPvaCIlxJuTTIBUsiDJah/O3c
-	5icahIfCLRnSc2/XwAVtTpd6Rg==
-X-Google-Smtp-Source: ADFU+vuyQINUWszHhAH8J0EIxa0qiFfHiiHIbEGzS+gmv31s39E3JIabHOCim2SHktYyAKzGJo0bZg==
-X-Received: by 2002:a1c:de87:: with SMTP id v129mr13392927wmg.68.1585576462110;
-        Mon, 30 Mar 2020 06:54:22 -0700 (PDT)
+        bh=gBrzC6dwKnEZcR3hL1+MY9rJsvrQHzTO0VNe49sCZdM=;
+        b=sMFBk2joMlCIH+Hsd8qQtFeWnXi2sNHMn9xdZ+yWg5VLP0AlTOutTCdxX9hUAXV3bu
+         Om0vNlK7F8KqttdDVHGBuClSFVEd0t34KYpNKe4KIrHEkXO8R2RnWK/4UHkaA9FFdwkf
+         2665Ayd1epznT+AK0JX6KksWS52vku6nLYGIWzQonVpD59vWWWpFfmjfCQx3oRs3Va/Q
+         hZA/t4a0LR9RX0pvVTPPg5vWPQQuYqiGlrRbz1CCGpZSFZ/UKnryM7EotyuVtnPw6UKN
+         dMQkJHe5bCwpX+AusWsceAhKrHk+H6GZJdLaUoVPtzVKmtP6KecPoQU2qdNuAzHi8jRi
+         dYwA==
+X-Gm-Message-State: ANhLgQ0OMnkFgabrRrrArO+Wv2NbqGAIp73eHuQDyCt51H4zN7kdCRWq
+	7sjxFiioeKXPsu3EfKBSlHKZUw==
+X-Google-Smtp-Source: ADFU+vviPZWjJPqv9p1KPAAhzklICVe0GJcLcziQC10Xzskiwa4PKliebTtJ4z5qppvy6JVuKlIXhA==
+X-Received: by 2002:a1c:96cf:: with SMTP id y198mr13252505wmd.186.1585576528813;
+        Mon, 30 Mar 2020 06:55:28 -0700 (PDT)
 Return-Path: <brgl@bgdev.pl>
 Received: from localhost.localdomain (lfbn-nic-1-65-232.w2-15.abo.wanadoo.fr. [2.15.156.232])
-        by smtp.gmail.com with ESMTPSA id g3sm23198357wrm.66.2020.03.30.06.54.21
+        by smtp.gmail.com with ESMTPSA id k15sm22263898wrm.55.2020.03.30.06.55.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Mar 2020 06:54:21 -0700 (PDT)
+        Mon, 30 Mar 2020 06:55:28 -0700 (PDT)
 From: "Bartosz Golaszewski" <brgl@bgdev.pl>
 To: Khem Raj <raj.khem@gmail.com>,
 	Armin Kuster <akuster808@gmail.com>,
 	openembedded-devel@lists.openembedded.org
 Cc: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH] figlet: new package
-Date: Mon, 30 Mar 2020 15:54:18 +0200
-Message-Id: <20200330135418.26140-1-brgl@bgdev.pl>
+Subject: [meta-oe][RESEND PATCH] figlet: new package
+Date: Mon, 30 Mar 2020 15:55:26 +0200
+Message-Id: <20200330135526.26227-1-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -62,6 +62,8 @@ at build-time.
 
 Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
+Resending with the correct tag. Sorry for spamming.
+
  ...ols-support-to-allow-easy-cross-comp.patch | 252 ++++++++++++++++++
  meta-oe/recipes-extended/figlet/figlet_git.bb |  15 ++
  2 files changed, 267 insertions(+)
