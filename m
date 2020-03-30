@@ -1,76 +1,76 @@
-Received: from mail-pf1-f174.google.com (mail-pf1-f174.google.com [209.85.210.174])
- by mx.groups.io with SMTP id smtpd.web11.40495.1585528303942299565
+Received: from mail-pf1-f171.google.com (mail-pf1-f171.google.com [209.85.210.171])
+ by mx.groups.io with SMTP id smtpd.web12.40636.1585528304579754132
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 29 Mar 2020 17:31:44 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=FweYqqPn;
- spf=pass (domain: gmail.com, ip: 209.85.210.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pf1-f174.google.com with SMTP id b72so7739507pfb.11
-        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2020 17:31:43 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=QWUNZwHF;
+ spf=pass (domain: gmail.com, ip: 209.85.210.171, mailfrom: raj.khem@gmail.com)
+Received: by mail-pf1-f171.google.com with SMTP id f206so7743134pfa.10
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2020 17:31:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ZvEgHIHfl0Lw4/dsx8sqHJ+lUFMrU+MQ6Dy0n/oBhqY=;
-        b=FweYqqPnjKpsDQXRFoq5lLaT4DtbbZGXohjAPzzUEwlVLScNZksX0GQcfb9U3pPCcv
-         Be/LeSN0hITVVvOu4c6YAy1Zr4Ba2huEAQHKYBOyEguhNg3OdHdmKniEvHIMNRSzZWYJ
-         fi5XZWxWhvKoyVy32t8Af5AMBLz+3rx3LNAKfYUibM+CLjcEgyuKxLyyIwU+VmNM37KJ
-         TGs3wICmNXczhwoW1OfHpXqEWt5goKiOhjg7q6bUCxSIKDIeBb4Ykc56t0xR4MOLnUCE
-         9IS+hj+3ShnsTRZGoAbPXn66aXS65oNns7Tx5NEAIyzEwXz6Q5YLsV5+zZeZIwuEC6ah
-         eX1g==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=qx+J677HFQs34uqs110mfvB1leljvjGZpwcm8Sqq16k=;
+        b=QWUNZwHFQhBfdmQX5JN4lgOT3XCXzdqG79KF2pd9p2paRUTrE/HNlnVL11p5yb2wQK
+         jVx3F+aY1ArKlp0cLgIp+0a51wlgmWYMIyOSpaQoUMO1egGMatQd/zizm2x2IcvUrkEv
+         v2DpLOzjpM+GnwKrNMS8VQo+5B6khAjkj4IEq4Su1gyAvmcgjg3VcL5WzQxO0bWLcsNW
+         Y4WpzvgNa9dVj0mwQSXMCGkEVKeSl6XPqd/+HzGI/B8x7yaXhHn+C0xZlb0asZO0if3n
+         nYUzRKssbc677VRoMPN5MURV0VELUCTs/s+trL9rwSyLqInVyWXr2dGgMm/3EWJVOhGY
+         WUEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=ZvEgHIHfl0Lw4/dsx8sqHJ+lUFMrU+MQ6Dy0n/oBhqY=;
-        b=Yu2LD5t44gvtCSCEmYokbo9n2Uk7jgZerhdv7sn+iPw732xcAxUI/EgiWBhVdipADd
-         3mi+qFmKcct9JLj1DTnzjiPofBI2qMH43iT8UGcuPiw35mukBwj1muh9Ji2DkzjhNXPo
-         FUKlnf9W0CFcVWKKWLR1HXY2/s3SMXCy6kI4e8i0OgTwKgUR57HaZFgmQT5kwx3xxjYR
-         f756a/k9sCk/8PeLw3Qgz6ol/D5/DWyJzfrAU40UCMryfXDHsRr3zl+SFL1IGexP8bMl
-         QAhULmtHgRfnd0g5X54IkMT+Gk+Tx+MlifcMpLnWIn7X/kSeE7BlrRGr/I3ENUZx01b6
-         f4WQ==
-X-Gm-Message-State: ANhLgQ08B/OlPQLim4oKdvd+2nVhuT5RPtGcJF9PnN9WiHG1T/k1UU7V
-	m38LmHeoqKxaAmKxpT4gYbCn+4LXi14=
-X-Google-Smtp-Source: ADFU+vtAYpFR2QuLbyHdRnPJiiDs2It3Ns+e4tbi0fCgk8KgmTjJFg86r7633ZtDu0+K+7zxtFUlXA==
-X-Received: by 2002:a63:790e:: with SMTP id u14mr9960466pgc.361.1585528302885;
-        Sun, 29 Mar 2020 17:31:42 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=qx+J677HFQs34uqs110mfvB1leljvjGZpwcm8Sqq16k=;
+        b=n1cY8tRqKC6qKTxl4vlc0u235Kx5zW8W2GE8qdzDRFMXMTcqwPSDY3KOBv58VmS4fD
+         0wC8eKM2zCkvqKiI8pBwhgKPiBzXT8IuTflxm8rrZIwmJjemUBrIgwYbz5Fn/N+fkjCu
+         yPsu8U4XuvGpFV+lq8e80kEMHFcCkPhOePh8CcBT8PdeTGAgYcx1WeMpIZhpkpVCsacF
+         0VnxR+xu9Z0xepNFe5rkjPEU7wPm214NSaHJ+d4/pQXvVDP0zN1Zzso5XfvnoRSXxgHY
+         KS8O7VVtkM5bwHS5Uec9Y7uJ+BhxXCrehOxQNjdjDb3VYV3lnsOouAkWpr1aIb6Kj0JN
+         3RlA==
+X-Gm-Message-State: ANhLgQ2zq2ataY69Dqj5lOOgrQJFAY823GfC3lfmxr6Je343xIdHDuZP
+	W8UjXaoqapgEfZaCBSy61IX6lXgLyZ8=
+X-Google-Smtp-Source: ADFU+vtTEk1g8dx/H23KcST74SC3P90NLGbsTXUmZfGr8759FabHwswCoChIWwuNjNkSH1SnL1ZT9w==
+X-Received: by 2002:a63:f95c:: with SMTP id q28mr10321944pgk.321.1585528303612;
+        Sun, 29 Mar 2020 17:31:43 -0700 (PDT)
 Return-Path: <raj.khem@gmail.com>
 Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::49c5])
         by smtp.gmail.com with ESMTPSA id i13sm4662317pfa.113.2020.03.29.17.31.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 29 Mar 2020 17:31:42 -0700 (PDT)
+        Sun, 29 Mar 2020 17:31:43 -0700 (PDT)
 From: "Khem Raj" <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 1/6] cfengine: Add missing dep on bison-native
-Date: Sun, 29 Mar 2020 17:31:50 -0700
-Message-Id: <20200330003155.1670457-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/6] ttf-inconsolata: Use cp instead of move in do_configure
+Date: Sun, 29 Mar 2020 17:31:51 -0700
+Message-Id: <20200330003155.1670457-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.26.0
+In-Reply-To: <20200330003155.1670457-1-raj.khem@gmail.com>
+References: <20200330003155.1670457-1-raj.khem@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Fixes
-../ylwrap: line 176: yacc: command not found
-make[2]: *** [Makefile:1016: cf3parse.c] Error 127
+This helps in re-running do_configure on an existing tree
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb | 2 +-
+ meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb b/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
-index fa08be3e65..2d146bf88c 100644
---- a/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
-+++ b/meta-oe/recipes-extended/cfengine/cfengine_3.15.0.bb
-@@ -13,7 +13,7 @@ HOMEPAGE = "http://cfengine.com"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=233aa25e53983237cf0bd4c238af255f"
+diff --git a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+index 20041bb7b3..bf32fedc3b 100644
+--- a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
++++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+@@ -14,7 +14,7 @@ FILES_${PN} = "${datadir}/fonts/truetype/Inconsolata.ttf \
+     ${datadir}/doc/ttf-inconsolata/*"
  
--DEPENDS = "attr tokyocabinet"
-+DEPENDS = "attr tokyocabinet bison-native"
+ do_configure() {
+-    mv ${WORKDIR}/Inconsolata.otf ${S}/Inconsolata.ttf
++    cp -fr ${WORKDIR}/Inconsolata.otf ${S}/Inconsolata.ttf
+ }
  
- SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
-            file://set-path-of-default-config-file.patch \
+ do_install_append() {
 -- 
 2.26.0
 
