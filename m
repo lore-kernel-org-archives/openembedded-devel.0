@@ -1,117 +1,212 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.55393.1585587479254708641
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+ by mx.groups.io with SMTP id smtpd.web11.2292.1585607190828105388
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Mar 2020 09:58:00 -0700
+ Mon, 30 Mar 2020 15:26:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=oTGbrLIa;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 441B3600BB;
-	Mon, 30 Mar 2020 18:57:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1585587476;
-	bh=ehvgtH/3LfMmco/wyiZEor80d/aQ5h9Fc+PJ/7/8goI=;
-	h=From:To:Cc:Subject:Date:From;
-	b=oTGbrLIaVZKuwr1RFRnPQjSiebUEp99Zh8b++HKELvM0Ph7+AtDSb/5YKpBJkEwvm
-	 u68d2ilNL8y4IVXwRsLOf18ZYfqAoMwPxzeZ9wJtqYr91LJers9yU9/DT7fFKjLxL0
-	 pnXVdnjANHyaEU2Tfeba9VuM5UEqO46ojgKrDfhvtEexOLTY9YTPRbQh4lwNJeft5n
-	 Nv146+4Q7GTEaa4KDzjH6rmBwWJxySjZ0R8Wk9lCLjJ6qP8tlzLRMBBfiXWemcOpvq
-	 Ct+V/Gi5nBveVmubTb4oQIp2uC/S8Kb24dzt23ky/4wCgrjAKDd9uKZ1QultiBWubi
-	 56RtCE3WWuzeQ==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iRc5PdDO;
+ spf=pass (domain: gmail.com, ip: 209.85.128.50, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f50.google.com with SMTP id 26so659388wmk.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 15:26:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cSpUob1efRGevx92QytLbQ1+Mdu96c5D4n/N6XRNoDg=;
+        b=iRc5PdDO19io9AlL1EKH2gqgeLuB+YLoNYJAgRWDkTr8CLOlM+k+06WH5xM7lwAfOD
+         Hq5EU8HeL6M19Wurq8IcvkE0tLaznnlZ1hZn2ugiTeO9laxwekhT6A1R6MoubnEr3PTZ
+         wYGmreUtDAcPcnoTuDcQaTMkGTAqpEf+miwHNVDtR0tm0ICYEdHUJBOlBh1D+YKruKM5
+         xIqhoz34AUeqQJBQF2qKlTwdpApsveTp41o73Ep+vni73SUZM4p9u+osVNxu83wMyS6q
+         re3QeHoFTXlY2aiilt2AQ2uULmM4O8w6YQIaVy70JOLvhqmd+4M0ul8JuR/2KQ7Jjpcr
+         6GrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=cSpUob1efRGevx92QytLbQ1+Mdu96c5D4n/N6XRNoDg=;
+        b=teuvtr3njQ6dy4GBDURiETjiVTn2DPxya5WBuynucneSygfq8UPIYO/oXYwAivnysz
+         JKD9bZZWfbfvOqZL2j3iv2LZNDEKObAJ7tBET3Z3fyg31Hs+fVBDL+TDxcFHI1eRZ83l
+         PcHyGYIPmndGLsDbvUgyv0C/yTsitgWxR2Z9x6ax2Dj9x9f1CojCvsz62kgSsV4e/Ahc
+         WOnM/sc4MxqX9qlohHpxh7CitBYOfsrgIcUEpotyl+3ghnL/abH9wQWPRvXVVtblrHfH
+         Gk0XbshEEB4q4iAem0XFO+Q1lKq1QWIYKfzYMFtH4z2FEtWTEk0aeU3BewtNpP8tRSV/
+         UrpQ==
+X-Gm-Message-State: ANhLgQ1n40M96MORm+ocX3GvbLpFdfwLkd42adLyvJQ2h4Ie/HPi4uD2
+	NNzB9QVJYPEDhuq5MSffY75qvjTV64Q=
+X-Google-Smtp-Source: ADFU+vs6lLhY5od/4ovVA+PTnablwh0/bWbCBhyREg2Y1kF4lmpxEl9kXcLMnM33ETkObOmHLHF0Aw==
+X-Received: by 2002:a1c:3885:: with SMTP id f127mr276918wma.134.1585607188671;
+        Mon, 30 Mar 2020 15:26:28 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300F07F030968BA11C5DB455F3E0C.dip0.t-ipconnect.de. [2003:f0:7f03:968:ba11:c5db:455f:3e0c])
+        by smtp.gmail.com with ESMTPSA id z1sm12002404wrp.90.2020.03.30.15.26.27
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 30 Mar 2020 15:26:27 -0700 (PDT)
+From: "Andreas M?ller" <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH] iwd: upgrade 1.5 -> 1.6
-Date: Mon, 30 Mar 2020 18:57:15 +0200
-Message-Id: <1585587435-8840-1-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
+Subject: [PATCH 1/6] wxwidgets: initial add 3.1.3
+Date: Tue, 31 Mar 2020 00:26:11 +0200
+Message-Id: <20200330222616.2354-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-This includes the following changes:
+* need it for 0.a.d and audacity
+* did extensive testing with PACKAGECONFIG combinations (exception: mspack -
+  libmspack is in meta-security)
 
-ver 1.6:
-	Fix issue with handling missing AP stop events.
-	Fix issue with handling out-of-order disconnect events.
-	Fix issue with handling missing auth/assoc support.
-	Fix issue with handling omitted EAP-TLS-CACert.
-	Fix issue with handling OWE PTK derivation.
-	Add support for internal frame exchange API.
-	Add support for MAC randomization and override.
-	Add support for per-network MAC addresses.
-
-Also remove patch applied upstream
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...-Avoid-redirection-of-input-and-output-fi.patch | 38 ----------------------
- .../iwd/{iwd_1.5.bb => iwd_1.6.bb}                 |  6 ++--
- 2 files changed, 2 insertions(+), 42 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch
- rename meta-oe/recipes-connectivity/iwd/{iwd_1.5.bb => iwd_1.6.bb} (91%)
+ meta-oe/licenses/wxWidgets                    | 54 +++++++++++++
+ .../wxwidgets/wxwidgets_git.bb                | 79 +++++++++++++++++++
+ 2 files changed, 133 insertions(+)
+ create mode 100644 meta-oe/licenses/wxWidgets
+ create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
 
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch b/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch
-deleted file mode 100644
-index 80126a8..0000000
---- a/meta-oe/recipes-connectivity/iwd/iwd/0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From 46fc0e197598579dc05e42f137e84f86a9b926e9 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Mon, 4 Nov 2019 16:38:04 -0800
--Subject: [PATCH] Makefile.am: Avoid redirection of input and output files
--
--Ensure that directory is created before its written to
--
--This can cause a build race in a highly parallelised build where a directory is not yet created but
--output file is being written using redirection e.g.
--
--rst2man.py --strict --no-raw --no-generator --no-datestamp < ../git/monitor/iwmon.rst > monitor/iwmon.1
--/bin/sh: monitor/iwmon.1: No such file or directory
--make[1]: *** [Makefile:3544: monitor/iwmon.1] Error 1
--
--Upstream-Status: Pending
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
-----
-- Makefile.am | 5 +++--
-- 1 file changed, 3 insertions(+), 2 deletions(-)
--
--diff --git a/Makefile.am b/Makefile.am
--index 8c69d9f4..35a25fc0 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -629,8 +629,9 @@ SED_PROCESS = $(AM_V_GEN)$(MKDIR_P) $(dir $@) && $(SED) \
-- 		< $< > $@
-- 
-- if RUN_RST2MAN
---RST2MAN_PROCESS = $(AM_V_GEN)$(RST2MAN) --strict --no-raw --no-generator \
---			--no-datestamp $< $@
--+RST2MAN_PROCESS = $(AM_V_GEN)$(MKDIR_P) $(dir $@) && \
--+			$(AM_V_GEN)$(RST2MAN) --strict --no-raw \
--+			--no-generator --no-datestamp $< $@
-- else
-- RST2MAN_PROCESS = $(AM_V_GEN)test -f $@ || \
-- 		{ echo "Generated manual page $@ does not exist"; false; }
-diff --git a/meta-oe/recipes-connectivity/iwd/iwd_1.5.bb b/meta-oe/recipes-connectivity/iwd/iwd_1.6.bb
-similarity index 91%
-rename from meta-oe/recipes-connectivity/iwd/iwd_1.5.bb
-rename to meta-oe/recipes-connectivity/iwd/iwd_1.6.bb
-index 4d4c699..10ac03e 100644
---- a/meta-oe/recipes-connectivity/iwd/iwd_1.5.bb
-+++ b/meta-oe/recipes-connectivity/iwd/iwd_1.6.bb
-@@ -5,10 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
- 
- DEPENDS = "ell"
- 
--SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git \
--           file://0001-Makefile.am-Avoid-redirection-of-input-and-output-fi.patch \
--           "
--SRCREV = "1ee7b985aaa294447d073bfe1242744784278a8e"
-+SRC_URI = "git://git.kernel.org/pub/scm/network/wireless/iwd.git"
-+SRCREV = "ad97f4f945b828425ff288e905523e11b330d41d"
- S = "${WORKDIR}/git"
- 
- inherit autotools manpages pkgconfig python3native systemd
+diff --git a/meta-oe/licenses/wxWidgets b/meta-oe/licenses/wxWidgets
+new file mode 100644
+index 000000000..0f6b9d6a8
+--- /dev/null
++++ b/meta-oe/licenses/wxWidgets
+@@ -0,0 +1,54 @@
++                wxWindows Library Licence, Version 3.1
++                ======================================
++
++  Copyright (c) 1998-2005 Julian Smart, Robert Roebling et al
++
++  Everyone is permitted to copy and distribute verbatim copies
++  of this licence document, but changing it is not allowed.
++
++                       WXWINDOWS LIBRARY LICENCE
++     TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
++
++  This library is free software; you can redistribute it and/or modify it
++  under the terms of the GNU Library General Public Licence as published by
++  the Free Software Foundation; either version 2 of the Licence, or (at
++  your option) any later version.
++
++  This library is distributed in the hope that it will be useful, but
++  WITHOUT ANY WARRANTY; without even the implied warranty of
++  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Library
++  General Public Licence for more details.
++
++  You should have received a copy of the GNU Library General Public Licence
++  along with this software, usually in a file named COPYING.LIB.  If not,
++  write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
++  Boston, MA 02110-1301 USA.
++
++  EXCEPTION NOTICE
++
++  1. As a special exception, the copyright holders of this library give
++  permission for additional uses of the text contained in this release of
++  the library as licenced under the wxWindows Library Licence, applying
++  either version 3.1 of the Licence, or (at your option) any later version of
++  the Licence as published by the copyright holders of version
++  3.1 of the Licence document.
++
++  2. The exception is that you may use, copy, link, modify and distribute
++  under your own terms, binary object code versions of works based
++  on the Library.
++
++  3. If you copy code from files distributed under the terms of the GNU
++  General Public Licence or the GNU Library General Public Licence into a
++  copy of this library, as this licence permits, the exception does not
++  apply to the code that you add in this way.  To avoid misleading anyone as
++  to the status of such modified files, you must delete this exception
++  notice from such code and/or adjust the licensing conditions notice
++  accordingly.
++
++  4. If you write modifications of your own for this library, it is your
++  choice whether to permit this exception to apply to your modifications.
++  If you do not wish that, you must delete the exception notice from such
++  code and/or adjust the licensing conditions notice accordingly.
++
++
++
+diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb b/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
+new file mode 100644
+index 000000000..72d56a066
+--- /dev/null
++++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
+@@ -0,0 +1,79 @@
++SUMMARY = "Cross-Plattform GUI Library"
++DESCRIPTIOM = "wxWidgets is a free and open source cross-platform C++ framework for writing advanced GUI applications using native controls."
++HOMEPAGE = "https://www.wxwidgets.org/"
++BUGTRACKER = "https://trac.wxwidgets.org/"
++
++# wxWidgets licence is a modified version of LGPL explicitly allowing not
++# distributing the sources of an application using the library even in the
++# case of static linking.
++LICENSE = "wxWidgets"
++LIC_FILES_CHKSUM = "file://docs/licence.txt;md5=981f50a934828620b08f44d75db557c6"
++
++inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'cmake_qt5', 'cmake', d)}
++inherit features_check lib_package
++
++# All toolkit-configs except 'no_gui' require x11 explicitly (see toolkit.cmake)
++REQUIRED_DISTRO_FEATURES = "${@bb.utils.contains('PACKAGECONFIG', 'no_gui', '', 'x11', d)}"
++
++DEPENDS += " \
++    jpeg \
++    libpng \
++    tiff \
++"
++
++SRC_URI = "git://github.com/wxWidgets/wxWidgets.git"
++PV = "3.1.3"
++SRCREV= "8a40d23b27ed1c80b5a2ca9f7e8461df4fbc1a31"
++S = "${WORKDIR}/git"
++
++# These can be either 'builtin' or 'sys' and builtin means cloned soures are
++# build. So these cannot be PACKAGECONFIGs and let's use libs where we can (see
++# DEPENDS)
++EXTRA_OECMAKE += " \
++    -DwxUSE_LIBJPEG=sys \
++    -DwxUSE_LIBPNG=sys \
++    -DwxUSE_LIBTIFF=sys \
++    -DwxUSE_REGEX=builtin \
++"
++
++PACKAGECONFIG ?= "gtk"
++
++# Note on toolkit-PACKAGECONFIGs: select exactly one of 'no_gui' / 'gtk' / 'qt'
++PACKAGECONFIG[no_gui] = "-DwxUSE_GUI=OFF,,,,,qt gtk"
++PACKAGECONFIG[gtk] = "-DwxBUILD_TOOLKIT=gtk3 -DwxUSE_GUI=ON,,gtk+3,,,no_gui qt"
++PACKAGECONFIG[qt] = "-DwxBUILD_TOOLKIT=qt  -DwxUSE_GUI=ON,,qtbase,,,no_gui gtk"
++python () {
++    pkgconfig = d.getVar('PACKAGECONFIG')
++    if (not 'no_gui' in pkgconfig) and (not 'gtk' in pkgconfig) and (not 'qt' in pkgconfig):
++        bb.error("PACKAGECONFIG must select a toolkit. Add one of no_gui / gtk / qt!")
++}
++
++# Notes on other PACKAGECONFIGs:
++# * 'no_gui' overrides some configs below so they are marked as conflicting
++#   with 'no_gui' to avoid surprises
++# * qt+gstreamer is broken due to incorrect references on glib-2.0 -> mark
++#   as conflicting
++# * wxUSE_LIBGNOMEVFS is for gtk2 (see init.cmake) which we don't support
++#   -> no gvfs PACKAGECONFIG
++# * libmspack is in meta-security
++PACKAGECONFIG[gstreamer] = "-DwxUSE_MEDIACTRL=ON,-DwxUSE_MEDIACTRL=OFF,gstreamer1.0-plugins-base,,,no_gui qt"
++PACKAGECONFIG[libsecret] = "-DwxUSE_SECRETSTORE=ON,-DwxUSE_SECRETSTORE=OFF,libsecret,,,no_gui"
++PACKAGECONFIG[lzma] = "-DwxUSE_LIBLZMA=ON,-DwxUSE_LIBLZMA=OFF,xz"
++PACKAGECONFIG[mspack] = "-DwxUSE_LIBMSPACK=ON,-DwxUSE_LIBMSPACK=OFF,libmspack"
++PACKAGECONFIG[sdl_audio] = "-DwxUSE_LIBSDL=ON,-DwxUSE_LIBSDL=OFF,libsdl2"
++PACKAGECONFIG[webkit] = "-DwxUSE_WEBVIEW_WEBKIT=ON,-DwxUSE_WEBVIEW_WEBKIT=OFF,webkitgtk,,,no_gui"
++
++do_install_append() {
++    # do not ship bindir if empty
++    rmdir --ignore-fail-on-non-empty ${D}${bindir}
++}
++
++# lib names are not canonical
++FILES_SOLIBSDEV = ""
++
++FILES_${PN} += " \
++    ${libdir}/libwx_*.so \
++    ${libdir}/wx/ \
++"
++
++FILES_${PN}-dev += "${libdir}/wx/include/"
 -- 
-2.7.4
+2.21.1
 
