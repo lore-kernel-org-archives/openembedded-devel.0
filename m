@@ -1,81 +1,117 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.44493.1585547680247412826
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
+ by mx.groups.io with SMTP id smtpd.web10.44995.1585551078181174771
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 29 Mar 2020 22:54:40 -0700
+ Sun, 29 Mar 2020 23:51:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.72,323,1580745600"; 
-   d="scan'208";a="87872153"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 30 Mar 2020 13:54:39 +0800
-Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
-	by cn.fujitsu.com (Postfix) with ESMTP id F087E406AB15
-	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 13:44:18 +0800 (CST)
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.85) by
- G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Mon, 30 Mar 2020 13:54:36 +0800
-Received: from localhost.local (10.167.225.81) by
- G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
- (TLS) id 14.3.439.0; Mon, 30 Mar 2020 13:54:35 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-ujson: Enable ptest
-Date: Mon, 30 Mar 2020 13:57:04 +0800
-Message-ID: <20200330055704.18537-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Ct0eIpXP;
+ spf=pass (domain: gmail.com, ip: 209.85.167.67, mailfrom: jacob.kroon@gmail.com)
+Received: by mail-lf1-f67.google.com with SMTP id j17so13154798lfe.7
+        for <openembedded-devel@lists.openembedded.org>; Sun, 29 Mar 2020 23:51:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Uu09iaLjFU6Sf0AhP+SKXo1xIU66jQlBL9wlIvr3oH8=;
+        b=Ct0eIpXPrfvEHTpJQPNDRUpX3nkAyW3Z79/sFw4b2Wz72bQngeUIwt7WRlXJWm9b3J
+         tXgt1AOnkOzZmsRB6WVZqDHcNDbsHf8UgwsJ8tsdo3sQfODMeqQHOs4ER1CYnt2wyn4J
+         hnkFZc7KCLzBXbaferYNAqQJovD4GS0It1xyb7QpsOmjYZIGwW8AYytC50x0WeYQccCa
+         iKnRkh2sxS4P6focR4WXJo+YcTg/s/MqnyyDcKwLj/Q+7/uxKLBC53cEKAJhGZSdi4PS
+         SCkEqdLsPaRLQUPAZEGwq1o7RiE6VfpXbloWSUVmVRYSIIwPvkNqBwKr3447Z9Te0u8U
+         rqbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Uu09iaLjFU6Sf0AhP+SKXo1xIU66jQlBL9wlIvr3oH8=;
+        b=C7hUcqzMFO535lOK/wejZWyt9FqNGGR0RdnutyjDaHgOJMFpnKdQpHxpWLQQYPZCT7
+         kY/Vh+h95iuKg8sTok6OEzgxr7hZHcfOtwaYB+RPL7BWJx40sHlzurJMdh9LDaHmrG8z
+         E5f3sYG1dUznQklv8qd6f/4dyd2jY9vngApj/MqMYYxq4X7VRTgTMcQ1Kcu17TUL5557
+         3rsS41MR+WkErsQzkChOY/6xS0yv3soaFggkIGIl+oesiGA0ikIUFC19nbjFWvfWSzn/
+         NayMU/4Y5FvCCmH8uLRYEifVWtNTXs/+sxM5ArtbNL/bBEEaJrwxWonjPdtoFlzDxwzf
+         OwCA==
+X-Gm-Message-State: AGi0PuaQq1QKIbaqnuMqUChTRSacdBof82wIoygVSLYoR1ShsswO3vf/
+	HkbALSet0xq+4TVK1xCoxyPCZxLT
+X-Google-Smtp-Source: APiQypIASvTQzl8shhyGA8sundqA/LYIb85ejPUNmnm5gnuc1RypkiZvTkTBkE5960KqYxu+Lhu+LQ==
+X-Received: by 2002:a19:be94:: with SMTP id o142mr7045164lff.13.1585551075796;
+        Sun, 29 Mar 2020 23:51:15 -0700 (PDT)
+Return-Path: <jacob.kroon@gmail.com>
+Received: from localhost.localdomain ([213.185.29.22])
+        by smtp.gmail.com with ESMTPSA id b193sm7228993lfd.74.2020.03.29.23.51.14
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 29 Mar 2020 23:51:15 -0700 (PDT)
+From: "Jacob Kroon" <jacob.kroon@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-java][zeus][PATCH] Revert "recipes: rename distro_features_check to features_check"
+Date: Mon, 30 Mar 2020 08:51:00 +0200
+Message-Id: <20200330065100.100833-1-jacob.kroon@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: F087E406AB15.A8E06
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
+The corresponding changes in oe-core has not been backported to zeus.
+
+This reverts commit d2e962a795e8713e5443659669842298453d938f.
+
+Signed-off-by: Jacob Kroon <jacob.kroon@gmail.com>
 ---
- .../recipes-devtools/python/python-ujson.inc      | 15 ++++++++++++++-
- .../python/python3-ujson/run-ptest                |  3 +++
- 2 files changed, 17 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-ujson/run-ptest
+ recipes-core/cacao/cacao_2d6f6c14daf9.bb      | 2 +-
+ recipes-core/classpath/classpath_0.99.bb      | 2 +-
+ recipes-core/jamvm/jamvm.inc                  | 2 +-
+ recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-ujson.inc b/meta-python/recipes-devtools/python/python-ujson.inc
-index 018ddf418..3196b02f3 100644
---- a/meta-python/recipes-devtools/python/python-ujson.inc
-+++ b/meta-python/recipes-devtools/python/python-ujson.inc
-@@ -7,7 +7,20 @@ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=88df8e78b9edfd7449
- SRC_URI[md5sum] = "42f77b0cce686dfa4da2e68480b1dd24"
- SRC_URI[sha256sum] = "f66073e5506e91d204ab0c614a148d5aa938bdbf104751be66f8ad7a222f5f86"
+diff --git a/recipes-core/cacao/cacao_2d6f6c14daf9.bb b/recipes-core/cacao/cacao_2d6f6c14daf9.bb
+index 0e50b68..6783894 100644
+--- a/recipes-core/cacao/cacao_2d6f6c14daf9.bb
++++ b/recipes-core/cacao/cacao_2d6f6c14daf9.bb
+@@ -19,7 +19,7 @@ S = "${WORKDIR}/cacaovm-cacao-staging-${PV}"
+ SRC_URI[md5sum] = "5157d0bb9eb1332f7a6b6186eaac01aa"
+ SRC_URI[sha256sum] = "34b51d660d69c2a83225fd75eab5e1fac002fb5974cb4a74b7478baf923a76cd"
  
--inherit pypi
-+inherit pypi ptest
-+
-+SRC_URI += " \
-+	file://run-ptest \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+	${PYTHON_PN}-pytz \
-+"
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/tests
-+	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
+-inherit java autotools-brokensep update-alternatives pkgconfig features_check
++inherit java autotools-brokensep update-alternatives pkgconfig distro_features_check
  
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-datetime \
-diff --git a/meta-python/recipes-devtools/python/python3-ujson/run-ptest b/meta-python/recipes-devtools/python/python3-ujson/run-ptest
-new file mode 100644
-index 000000000..1b3914647
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-ujson/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+python3 tests/tests.py
+ REQUIRED_DISTRO_FEATURES = "x11"
+ REQUIRED_DISTRO_FEATURES_class-native := ""
+diff --git a/recipes-core/classpath/classpath_0.99.bb b/recipes-core/classpath/classpath_0.99.bb
+index 5b9d904..714503a 100644
+--- a/recipes-core/classpath/classpath_0.99.bb
++++ b/recipes-core/classpath/classpath_0.99.bb
+@@ -1,6 +1,6 @@
+ require classpath.inc
+ 
+-inherit features_check
++inherit distro_features_check
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
+index b03a5b9..d47b2f1 100644
+--- a/recipes-core/jamvm/jamvm.inc
++++ b/recipes-core/jamvm/jamvm.inc
+@@ -15,7 +15,7 @@ RPROVIDES_${PN}_class-native = ""
+ 
+ BBCLASSEXTEND = "native"
+ 
+-inherit java autotools update-alternatives pkgconfig relative_symlinks features_check
++inherit java autotools update-alternatives pkgconfig relative_symlinks distro_features_check
+ 
+ REQUIRED_DISTRO_FEATURES_class-target = "x11"
+ 
+diff --git a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
+index d774cc2..cb670cb 100644
+--- a/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
++++ b/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ 
+ FILESPATH =. "${FILE_DIRNAME}/patches-openjdk-7:"
+ 
+-inherit features_check
++inherit distro_features_check
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
 -- 
-2.20.1
-
-
+2.25.1
 
