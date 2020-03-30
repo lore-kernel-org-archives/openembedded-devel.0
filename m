@@ -1,50 +1,50 @@
-Received: from mail-wm1-f67.google.com (mail-wm1-f67.google.com [209.85.128.67])
- by mx.groups.io with SMTP id smtpd.web12.2306.1585607192662829861
+Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
+ by mx.groups.io with SMTP id smtpd.web10.2252.1585607193642412191
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Mar 2020 15:26:32 -0700
+ Mon, 30 Mar 2020 15:26:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=MED41Dkn;
- spf=pass (domain: gmail.com, ip: 209.85.128.67, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wm1-f67.google.com with SMTP id t128so527955wma.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 15:26:32 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=aZU0lLjy;
+ spf=pass (domain: gmail.com, ip: 209.85.221.49, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wr1-f49.google.com with SMTP id 65so23644484wrl.1
+        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 15:26:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=/8CWXRI69ubf4htbJ6rJhefi8SHQqyFhK8u7OnY+24o=;
-        b=MED41DknRiaGf1YFcVPZd0GtWx1wwD144g7b25b11RKhxnAZCgl3NvK588zRyMX8uF
-         K0vfSKJCOcOj9nMhpwD/YLAlIwCUEp3OI21xBTfuUf0cRZl7J2IC5iwSAj1ObsECieO+
-         uOvO91Tm/E1oX47ZZxq8+qPwzyJ07tHYdIocJeh0tA7UyVRpSITt8YMF7P7h81KEd+CA
-         08SVygdP4CNpducZ1kBpuVxruVhvpq7Xje19Sx4HavbupAi7oWCs8x22A2bHfDCMy2H/
-         jXXPSfl4Ia6tii0JUB9s5JxlBII0TWHO3p3kwUBeTA6579eNZzbraza2UuRT322YxNgd
-         OmGg==
+        bh=vlyhdbI9DWvWwlKQmhlNUM86Tk0clxCh8LXg0j4nBZY=;
+        b=aZU0lLjytySngiAH0pkmzuOvhpyCGVk23VWQd93gfstrUBtytK4k079sP9B8qlovrY
+         8yGM8VyNdqvJ1AAL8wl8zDHtfwf4424azIbQjYud7X6IFHpwYZWwxDf92mLmqikqv30x
+         tKI+tUboFDPmzC8cyPMQ3tlNcrxNLnGw+3bM6lZ6VUqM7GF3DMIfpUensDxIb35ldePE
+         mrPcwEbMp6Kf6mHJhS25HFUAL4GWDIj+/6MKJHbYH6ztPn+2/OFhhWXR1C1d58Mf2EOS
+         Ew0V6oAue21d1D6tHwGDVRe1nr9P+rSgtPwhAFJHcyi1D2qP1engBqAw6LjJ4mHEIGK3
+         5kDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=/8CWXRI69ubf4htbJ6rJhefi8SHQqyFhK8u7OnY+24o=;
-        b=oeqEo8Zcj29ihSya8eUMi+96FGmeqI8DdS+id+/gfJkfSS5XEYxeA5HaZ4rYV/+nON
-         pqosTDltvzbPAU3TB6W6OWixoYMdchDN+Ut5pnLTbBNKdDtetimOhcXZ66yC2YoDJWjl
-         LuSaKAVZNkLHu++Zwt8xWwGNop6ZUZ2ZljVD8yr7Vws2bBeFHA+yBoKT1lzhbe5Q3lND
-         uxqhjDTpkNAFANGH3/0sXy5y9li9J6qJxbGZRVAYZs9gY1hDpoy16PYaBOVmAybkFVbB
-         pBccTiKqWtwKr9H1WYq4qU2YlRGn85pmCbpAHIv0CBlLNEdVn3JLEhJCXXuf6wGfJMUH
-         zOJQ==
-X-Gm-Message-State: ANhLgQ0s6BeoLAvpqR7JEgrlZL0Yyji16kI4txeBEMAo+jPzfjQxHpqp
-	xbOROrrgNvrrlH1tXSmEN/I8grdkjB8=
-X-Google-Smtp-Source: ADFU+vu5SAP4S4qH/G1RaNJuYW6LFMFqEXX8zuGr5LQOpQG19x6e2MB8MPYC2uvIwSgqz341HPqQQQ==
-X-Received: by 2002:a05:600c:2251:: with SMTP id a17mr287123wmm.106.1585607190956;
-        Mon, 30 Mar 2020 15:26:30 -0700 (PDT)
+        bh=vlyhdbI9DWvWwlKQmhlNUM86Tk0clxCh8LXg0j4nBZY=;
+        b=Lmq1DY/L+euHSHyV80gKDPBsRKrXAxZi4yswoss0LSycNo15FdtxZFjp9UGXbjBvOU
+         XgEmZAJnQnl9xHDceONswCElp50A3jqfh/lba7skb2mv/6CN+dVaZX/iG6Cnrl0qljtt
+         /cekhH8YU2B5DGigzHTmo3QQP/Ms1e66JJ5M19Ph34AVPGH3yl9vsZ9hBiBMl9njTD7P
+         +gbnhfcGwO1HUviPAwnJnFoFMD0/kYQBezpBLrys3Dv4JDoDqkrcCMf66ZRqKpqmJeth
+         iEsiBN+QIqnrE7MIR4i4ip44HSByLf9nUxPWkx/XylndCYjey43M8egZYxamiP3+W0E6
+         fevA==
+X-Gm-Message-State: ANhLgQ38AO22dS6cBi/0KTt/+7YBFxko37xGDHs+E6ULy80PJNcXKGUC
+	RpbYMLnTgxMNKBWhimSpnMDMMY1ea0Y=
+X-Google-Smtp-Source: ADFU+vvUJrjQy67CXXRFXrkaMpBUFTuiCZlm6+Gq9O0VevrBPJDy7pW/wGK1ulzFLYVaocH0q/JbTw==
+X-Received: by 2002:adf:f68b:: with SMTP id v11mr16268097wrp.270.1585607191875;
+        Mon, 30 Mar 2020 15:26:31 -0700 (PDT)
 Return-Path: <schnitzeltony@gmail.com>
 Received: from superandy.speedport.ip (p200300F07F030968BA11C5DB455F3E0C.dip0.t-ipconnect.de. [2003:f0:7f03:968:ba11:c5db:455f:3e0c])
-        by smtp.gmail.com with ESMTPSA id z1sm12002404wrp.90.2020.03.30.15.26.30
+        by smtp.gmail.com with ESMTPSA id z1sm12002404wrp.90.2020.03.30.15.26.31
         for <openembedded-devel@lists.openembedded.org>
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Mar 2020 15:26:30 -0700 (PDT)
+        Mon, 30 Mar 2020 15:26:31 -0700 (PDT)
 From: "Andreas M?ller" <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 4/6] xfce4-pulseaudio-plugin: upgrade 0.4.2 -> 0.4.3
-Date: Tue, 31 Mar 2020 00:26:14 +0200
-Message-Id: <20200330222616.2354-4-schnitzeltony@gmail.com>
+Subject: [PATCH 5/6] xfce4-clipman-plugin: upgrade 1.4.4 -> 1.6.0
+Date: Tue, 31 Mar 2020 00:26:15 +0200
+Message-Id: <20200330222616.2354-5-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <20200330222616.2354-1-schnitzeltony@gmail.com>
 References: <20200330222616.2354-1-schnitzeltony@gmail.com>
@@ -52,48 +52,67 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Release notes for 0.4.3
+Release notes for 1.6.0
 =======================
-This is a new stable release.
+This is a feature release.
+Apart from fixing deprecations, improving the settings dialog and
+small improvements to the panel plugin a new feature has been
+introduced: xfce4-clipman-history.
+It allows you to search the history interactively and paste directly (or
+just update the clipboard by holding Ctrl).
 
-General:
-- Build now requires exo-2 0.11 or newer
-- Fixed various memory leaks and warnings
-- Removed unused dbus-glib include (Xfce #15343)
-- Replaced g_type_class_add_private deprecations
-- Updated copyright years
-- Updated URLs from goodies.x.o to docs.x.o (Xfce #16173)
-- MPRIS: Added support for filename icons (Xfce #14329)
-- MPRIS: Added support for single-string variants on xesam:artist
-- MPRIS: Added support for the DesktopEntry property (Xfce #14412)
-- MPRIS: Added support for the plasma-browser-integration plugin (Xfce
-- MPRIS: Added title/artist conditioning from the track title
-- Preferences: Fixed icon rendering known players
+- Add standalone dialog to search history: xfce4-clipman-history
+- Don't delete the history on startup
+- plugin: Indicate if clipman is disabled (Bug #11381)
+- plugin: Bind middle-click to toggle "inhibit"
+- plugin: Add "Clipman settings..." menuitem
+- plugin: "Show full history..." menuitem
+- plugin: Wire up max-menu-items setting
+- settings: Make strings translatablei (Bug #16496)
+- settings: Improve responsiveness of actions tab
+- settings: Replace GtkStock icons and tweak actions dialog
+- settings: Revamp UI and add max-menu-items setting
+- settings: Further UI tweaks
+- daemon: Show info dialog if already running
+- Add warning if clipman is not running
+- Show info/warning dialogs if clipman is (not) running
+- Add clipman-settings desktop file
+- Replace deprecated g_type_class_add_private
+- Replace GtkStock items
+- Improve clipman autostart file
+- Update copyright
+- Update gitignore
+- Translation Updates:
+  Albanian, Belarusian, Bulgarian, Catalan, Chinese (China),
+  Chinese (Taiwan), Danish, Dutch, French, Galician, German,
+  Hebrew, Hungarian, Italian, Japanese, Lithuanian, Norwegian
+  Bokmål, Polish, Portuguese, Portuguese (Brazil), Russian,
+  Serbian, Spanish, Turkish
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- ...audio-plugin_0.4.2.bb => xfce4-pulseaudio-plugin_0.4.3.bb} | 4 ++--
+ ...-clipman-plugin_1.4.4.bb => xfce4-clipman-plugin_1.6.0.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/pulseaudio/{xfce4-pulseaudio-plugin_0.4.2.bb => xfce4-pulseaudio-plugin_0.4.3.bb} (73%)
+ rename meta-xfce/recipes-panel-plugins/clipman/{xfce4-clipman-plugin_1.4.4.bb => xfce4-clipman-plugin_1.6.0.bb} (76%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.2.bb b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.3.bb
-similarity index 73%
-rename from meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.2.bb
-rename to meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.3.bb
-index fc380c153..f3e4df298 100644
---- a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.2.bb
-+++ b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.4.3.bb
-@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "pulseaudio x11"
+diff --git a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.4.bb b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.0.bb
+similarity index 76%
+rename from meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.4.bb
+rename to meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.0.bb
+index 164895013..c0f4a5d49 100644
+--- a/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.4.4.bb
++++ b/meta-xfce/recipes-panel-plugins/clipman/xfce4-clipman-plugin_1.6.0.bb
+@@ -8,8 +8,8 @@ inherit xfce-panel-plugin
  
- DEPENDS += "dbus-glib pulseaudio"
+ DEPENDS += "xfconf xorgproto libxtst"
  
--SRC_URI[md5sum] = "9a34eadf06ed217ec0732a096f178987"
--SRC_URI[sha256sum] = "4ae8aebc2458675d4f885bf16f73829be359e16370a684301bbef6a23758a120"
-+SRC_URI[md5sum] = "3d86032acb9364d47e0a144350c63e1a"
-+SRC_URI[sha256sum] = "5a518237e2137341d8ca6584938950525e20c28a0177e30ecaea3ba8e7a2615b"
+-SRC_URI[md5sum] = "104c917ef53a66f7aa2dca01b43c3b77"
+-SRC_URI[sha256sum] = "08e14c5d0fcee9adb4bc77efc0ab4af2b12b3fe1ee5e2121fc60e877ac9c29a0"
++SRC_URI[md5sum] = "6db8e1b6ed2babab339a650c8f6d596b"
++SRC_URI[sha256sum] = "0295da92ade7d6e1d8b15a525e73ddcfba1986142d34c6143955164a13552ed7"
  
  PACKAGECONFIG ??= ""
- PACKAGECONFIG[libnotify] = "--enable-libnotify,--disable-libnotify,libnotify"
+ PACKAGECONFIG[qrencode] = "--enable-libqrencode,--disable-libqrencode,qrencode"
 -- 
 2.21.1
 
