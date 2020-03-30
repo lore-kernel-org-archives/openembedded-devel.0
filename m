@@ -1,112 +1,54 @@
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
- by mx.groups.io with SMTP id smtpd.web11.52510.1585581535177424775
- for <Openembedded-devel@lists.openembedded.org>;
- Mon, 30 Mar 2020 08:18:56 -0700
+Received: from mail5.wrs.com (mail5.wrs.com [192.103.53.11])
+ by mx.groups.io with SMTP id smtpd.web11.54468.1585585530090419226
+ for <openembedded-devel@lists.openembedded.org>;
+ Mon, 30 Mar 2020 09:25:30 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=GHSPeDjq;
- spf=pass (domain: gmail.com, ip: 209.85.221.47, mailfrom: martin.jansa@gmail.com)
-Received: by mail-wr1-f47.google.com with SMTP id d5so22198702wrn.2;
-        Mon, 30 Mar 2020 08:18:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:date:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=e2h8VOz0p4Pg+RzOQEkI6HqOfuafCjE03DiyPGhlj/s=;
-        b=GHSPeDjqyrc92C5TXQRtrLoava7sDow/dr5oyKQHPxiSqg31ZiiS+cYdcoN4U26PM8
-         pL5XLB+OZlfT19TvPo6gvdpIb87YhlDOQJjCx9KS3YKS8bdTmgziFcYiCld7jBlyHpHf
-         WtJPLeS4etwbjhqMwUe0hhCOTDE9QOFYaY8nESX4puO1imI59XyaCbFUG0Iq9RhWX9o8
-         JclPqW+5AyhL5U8bLFQUOec9JWTSzAwjDnajCoecjdOIo6c70WNwNAdc6MwOt/1RMzuo
-         30syidzxGf7C3W/uqyngq1FNYXg+bWQFgA3YZXlqdoNUY7o3nBDzMElCqtRwOSCAwWRn
-         3tBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=e2h8VOz0p4Pg+RzOQEkI6HqOfuafCjE03DiyPGhlj/s=;
-        b=fXxmCGs683WnPYLSjTEjKjPKPBOmYcX2AnRn4D+P8oyUdnLfNMoUd6LgAQj5E0AfsT
-         PVA1PYeQYJ+yy/Sjxbod04UTgJV6VoXoONUjps9X0ACVb95hK3dB6eX/A7Ct9TYLoeo7
-         vNIjyklyy7fy9StbTqXLXCz6sdrvQ1daoRVf/5guXLseP36HOEviAlaxAPpoqC/83eUR
-         KEEohaKBYYZ121wfBjfiwc4/7O2HDZ5xHBVS+XhOBB2TmhH3+hs1AqNzJk6miJP0lGMC
-         YpiF9SqHGa5+L6BjWfK8u2CgBnIjg/9Vfk/bNOA10S7imiM9VLM5dwUfETgFwd1ChYCp
-         BE9Q==
-X-Gm-Message-State: ANhLgQ15hLjaVu5Xefwb0WQFuEFBfz96PPO5JFfW2QOv90TZdUhkM8Hs
-	CgU/ZKEdPIscHPmKbR2jW90=
-X-Google-Smtp-Source: ADFU+vumv9AAIwecRYd3Le4a8dNU/fCiX1mqxopYDHpoirPlfUEj2WgnDruM4/G7yhIR7HuCdY0lAw==
-X-Received: by 2002:adf:94c6:: with SMTP id 64mr15735724wrr.386.1585581533734;
-        Mon, 30 Mar 2020 08:18:53 -0700 (PDT)
-Return-Path: <martin.jansa@gmail.com>
-Received: from localhost ([109.238.218.228])
-        by smtp.gmail.com with ESMTPSA id y7sm25157307wrq.54.2020.03.30.08.18.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Mar 2020 08:18:52 -0700 (PDT)
-From: "Martin Jansa" <Martin.Jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 30 Mar 2020 17:18:52 +0200
-To: Michael Halstead <mhalstead@linuxfoundation.org>
-Cc: akuster808 <akuster808@gmail.com>, bitbake-devel@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-architecture@lists.openembedded.org,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe] [bitbake-devel] Mailing list platform change March 20th
-Message-ID: <20200330151851.s4p24hkg4kbrysd4@jama>
-References: <CADfgfobNNXr9HSOiwyamzbZ4q1uc8wgD5PzobDF56cDyYui-HQ@mail.gmail.com>
- <CADfgfoYCjVip=oc_U0TdFzOVst5U-KU+R31JhdckRv77APzQ-g@mail.gmail.com>
- <CADfgfob4=Zeh=jn9b9uMqq6Wnt83oGmJ-8yf1wSXYEFTppv2Bg@mail.gmail.com>
- <24a37655-8c0b-ca10-543e-90a32bc6bdb9@gmail.com>
- <CADfgfoZRZCM_Dvot5_z4YnG+OOyMg6xvDE13XQOK50wpucZWFA@mail.gmail.com>
- <20200325150325.yq5jtofhnxaui6he@jama>
+ dkim=missing; spf=pass (domain: windriver.com, ip: 192.103.53.11, mailfrom: trevor.gamblin@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id 02UGP8VY023179
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 09:25:19 -0700
+Received: from yow-lpggp3.wrs.com (128.224.137.13) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server id 14.3.487.0; Mon, 30 Mar 2020
+ 09:24:58 -0700
+From: "Trevor Gamblin" <trevor.gamblin@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [meta-python][PATCH] python3-jinja2: upgrade 2.10.3 -> 2.11.1
+Date: Mon, 30 Mar 2020 12:24:57 -0400
+Message-ID: <20200330162457.31684-1-Trevor.Gamblin@windriver.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-In-Reply-To: <20200325150325.yq5jtofhnxaui6he@jama>
-User-Agent: NeoMutt/20180716
-X-Groupsio-MsgNum: 83560
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bztawwnrdg3bwbdj"
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
---bztawwnrdg3bwbdj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+From: Trevor Gamblin <trevor.gamblin@windriver.com>
 
-On Wed, Mar 25, 2020 at 04:03:25PM +0100, Martin Jansa wrote:
-> On Fri, Mar 20, 2020 at 05:44:36PM -0700, Michael Halstead wrote:
-> > The migration to Groups.io is nearly complete. All functionality is rea=
-dy
-> > to use and you can send e-mail now. Archives are in place except for the
-> > most recent from the Openembedded-commits list. Those are continuing to
-> > import.
-> >=20
-> > There is no need to update your address book as the list addresses have=
- not
-> > changed.
-> >=20
-> > If you encounter any issues please visit
-> > https://www.openembedded.org/wiki/GroupsMigration for the latest
-> > information. If your concern isn't addressed e-mail me directly.
->=20
-> Hi,
->=20
-> thanks Michael!
->=20
-> Can you please check if git hooks sending e-mail notifications still
-> work or need some change (possibly related to this)?
->=20
-> There were new commits recently in couple repositories, but last e-mail
-> from git hook I see from Mar 19th.
+Signed-off-by: Trevor Gamblin <trevor.gamblin@windriver.com>
+---
+ meta-python/recipes-devtools/python/python-jinja2.inc         | 4 ++--
+ .../{python3-jinja2_2.10.3.bb => python3-jinja2_2.11.1.bb}    | 0
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-jinja2_2.10.3.bb => python3-jinja2_2.11.1.bb} (100%)
 
-There was one e-mail today, but it doesn't seem to be working correctly:
-https://lists.openembedded.org/g/openembedded-commits/message/186006
+diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
+index 6a6aad9ef..6a95b953f 100644
+--- a/meta-python/recipes-devtools/python/python-jinja2.inc
++++ b/meta-python/recipes-devtools/python/python-jinja2.inc
+@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=5dc88300786f1c214c1e9827a5229462"
+ 
+ PYPI_PACKAGE = "Jinja2"
+ 
+-SRC_URI[md5sum] = "7883559bc5cc3e2781d94b4be61cfdcd"
+-SRC_URI[sha256sum] = "9fe95f19286cfefaa917656583d020be14e7859c6b0252588391e47db34527de"
++SRC_URI[md5sum] = "5d88c7e77aa63fc852a04f65dbfe5594"
++SRC_URI[sha256sum] = "93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"
+ 
+ RDEPENDS_${PN} += "${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
+     ${PYTHON_PN}-math ${PYTHON_PN}-netclient \
+diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.10.3.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-jinja2_2.10.3.bb
+rename to meta-python/recipes-devtools/python/python3-jinja2_2.11.1.bb
+-- 
+2.24.1
 
-Cheers,
-
---bztawwnrdg3bwbdj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCXoINjQAKCRA3VSO3ZXaA
-HNKmAJ0XgCK+F1JhVq4FZrozxZ33Oda0qACeIsKD5SbCsgZsxdMLorxFe9WTHiA=
-=b2wI
------END PGP SIGNATURE-----
-
---bztawwnrdg3bwbdj--
