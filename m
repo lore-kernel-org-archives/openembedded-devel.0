@@ -1,112 +1,85 @@
-Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
- by mx.groups.io with SMTP id smtpd.web12.3229.1585630871892072062
+Received: from mail-il1-f178.google.com (mail-il1-f178.google.com [209.85.166.178])
+ by mx.groups.io with SMTP id smtpd.web11.3816.1585635487766426676
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Mar 2020 22:01:12 -0700
+ Mon, 30 Mar 2020 23:18:07 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=DIsugmm/;
- spf=pass (domain: gmail.com, ip: 209.85.222.194, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f194.google.com with SMTP id u4so21691813qkj.13
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 22:01:11 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=jIzdez8b;
+ spf=pass (domain: gmail.com, ip: 209.85.166.178, mailfrom: alex.kiernan@gmail.com)
+Received: by mail-il1-f178.google.com with SMTP id a6so18327091ilr.4
+        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 23:18:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=o3dVb/AKEe3eKPF2el6wvYW4lG73aUBZNi0362jXLv8=;
-        b=DIsugmm/qxV95PcrjOmD5CZsnKNhOakuzp49JfeFBNpFi6Yeh28EaP03lBrM1TnHd+
-         ppQZ0w6Ot2GaTyc1BVrzpeM9FRUl0kaxwvAJ84QSVqTptqBQ1QbauGnNgcjepBHSkXv+
-         JTYFC1mgE50zdahlC8S0e43sAXwjbY6x34T/yZclr9m/OFBg48Dx3E+KMOe19onOmwlt
-         Sg9B0RDhjd/av5/ghed1zA9TFqXFpEzDCZ9rfHZV+9qN6YQ9yk2o2C+w6vD2ekW20t9s
-         NfADXuSTWy6uIQqO8VbA+1Hk4eLGQJmmP4IPH+GOdKkD4ViBCz78UbX8caCkYnFeCQKg
-         CFow==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
+        bh=uCBPOyKQJRZKoJx0OhfEjY4CfEVAUu6iQDLrSa2ZyEc=;
+        b=jIzdez8b44o4dxRCoXIrqLK+DSZmurcEQ9a+Ph7HlaBJtgaetH4vQLXtulY23g7KTi
+         Fzj90Ri2+kaFXyqxxUoXL7shry3IvrfUYHfgnD1hJha5dKX+TJ7CAjHzbayTqUvbbvZq
+         xTpNFM36wdALGqV29hBXw/4pYlpMo7I2sBTGmgAN+yppvfE4J+POfhocxoZcb1k7WJuj
+         y8OXIv0TS90HN2ITyGh0F4tSijJMBdSAsZagQVTCwaSotLmdqIsWh/e6AW0TGks0AGoM
+         FeUmmVyDeDDU7KCZ8gLL97IarieD3WkyaoBBj+9sr8gDYgbG0NWUoxxII+nWpD6dIH5D
+         XsjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=o3dVb/AKEe3eKPF2el6wvYW4lG73aUBZNi0362jXLv8=;
-        b=PA4jXM07hT62D/uTue/TLhNySfvPZqh9+TD8nngFY9eMStLcGk418yfAiUB/q9Ku+o
-         Z1M4jSxHRqJ2s+jFxJ6IEt9oeWEIx4pLpBLrnrYXs1GfniBWuDvoPbbDcANNyTGX10TW
-         NIbvGhb2fP1qqsk42n/U4/OwbAjF9pQb5nUkLqsomSrJXKuNPt3PWDyhr8dalnTpco3Q
-         +DRboDy6MHMsY6N4bJ77oANv1Gl1YB/QUzt4rD3oSt5R+0RbMS412WuozJDvt5ICZX9Y
-         2DRscoBYH/LFydqKLGhDPYtEt2HXZ7WyaNy0naWNGVTiO/7ZaLY/r2XJf6sbPHhkYR1O
-         c/kg==
-X-Gm-Message-State: ANhLgQ2Ml+ya8rhr8RO4g/wFGRX2QN6xiq92+9uMQUbE9fQZFh6Qt5IG
-	aooJGHPhZAGZofcXuNQQCv89gRySMSV3C6JyVkfRxv2tOPk=
-X-Google-Smtp-Source: ADFU+vsqPmjqB1Udv1vzCxhRlMdEGiCOF/A7MQB5vrGZC1c3cadB6bvJtw+TKcKdYffNDsXU0QTi2qUmLpwEQ7Cp97k=
-X-Received: by 2002:a37:a746:: with SMTP id q67mr3377036qke.215.1585630870752;
- Mon, 30 Mar 2020 22:01:10 -0700 (PDT)
+         :message-id:subject:to;
+        bh=uCBPOyKQJRZKoJx0OhfEjY4CfEVAUu6iQDLrSa2ZyEc=;
+        b=EOGRA3+iP9Vf29IGL5utqMrppv0dCmBKO+meA1PcRf/OWdGlvjNIEJYclFiVeaLJF/
+         mi/AEKVDFlLwhZgVWtWKP9T52Z/auyw7IA6aUaMXA8q8nWXPKpz6nFcC9lq2/rWzZW7L
+         5Y5qNwe2gqpHz4oCIRzccEONPRFZYQXM7lbIZ0cGdgQO9Yo6CCpqz9uqKooRR0scfCps
+         HZlJdfBE0XxFASbAuM0whcv2KfUa7owo1tX6bDrifNrujtxrZbyjpcbo9f5XLrhla1yi
+         h5MEjp7z5gANQjpw5vpvp0Yd1c0QVPzVdAh0+fIZ4GFj/SyQL8zhh7ZCvvtnUtqjWuz7
+         Zb9A==
+X-Gm-Message-State: ANhLgQ3gNc6X8aC6LL06gQSRLjv/d42zyxJ3rQnzICLK1bS4KRlUHenV
+	eTuMKVCROMS+7hxFQsuQwoXKjcVLDxNHAi40H1A=
+X-Google-Smtp-Source: ADFU+vtVo4SvECzvFLxrbNxc5E8e+DZoNyAf/W8nvypdGec+ttJXEtxAY0rMBX+u7Pfz1RvUZlCSyGT/2DPgHnTPcpg=
+X-Received: by 2002:a92:ce06:: with SMTP id b6mr15913466ilo.102.1585635486806;
+ Mon, 30 Mar 2020 23:18:06 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200330055645.18477-1-zangrc.fnst@cn.fujitsu.com>
-In-Reply-To: <20200330055645.18477-1-zangrc.fnst@cn.fujitsu.com>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 30 Mar 2020 22:00:44 -0700
-Message-ID: <CAMKF1spPh32=VTCTYgJ872vxdbeg4J1jBHJfJpFR163qya24RQ@mail.gmail.com>
-Subject: Re: [oe] [meta-python] [PATCH] python3-test-generator: Enable ptest
-To: zangrc <zangrc.fnst@cn.fujitsu.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <BY5PR11MB4307FAE9DC43F1587395B1FEE7C80@BY5PR11MB4307.namprd11.prod.outlook.com>
+In-Reply-To: <BY5PR11MB4307FAE9DC43F1587395B1FEE7C80@BY5PR11MB4307.namprd11.prod.outlook.com>
+From: "Alex Kiernan" <alex.kiernan@gmail.com>
+Date: Tue, 31 Mar 2020 07:17:55 +0100
+Message-ID: <CAO5Uq5S43bAyCv2Z58APL70xWEFXdHi8+UvsXy7PE0rrkt8LGA@mail.gmail.com>
+Subject: Re: Request to Revert 'recipes: rename distro_features_check to features_check' comit on meta-java zeus branch
+To: Geoff Parker <Geoffrey.Parker@arthrex.com>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
 
-I see
+On Tue, Mar 31, 2020 at 5:46 AM Geoff Parker
+<Geoffrey.Parker@arthrex.com> wrote:
+>
+> Hi Alex,
+>
+> We  moved one of our products to the zeus Yocto 3.0 meta layer branches. It recently stopped building due to this commit on the meta-java zeus branch:
+>
+> commit d2e962a795e8713e5443659669842298453d938f
+> Author: Alex Kiernan <alex.kiernan@gmail.com>
+> Date:   Sat Dec 7 18:07:38 2019 +0000
+>
+>    recipes: rename distro_features_check to features_check
+>
+>    Avoid warning due to the class rename in OE-Core.
+>
+>    Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+>    Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+>
+> Although this change is appropriate for the Yocto 3.1 branches, it breaks our build on Yocto 3.0 zeus because the zeus branch of the openembedded-core layer does not have the features_check class.
+>
+> The following recipes fail to parse:
+>
+>   openjdk-7_99b00-2.6.5.bb
+>   classpath_0.99.bb
+>   cacao_2d6fc614daf9.bb
+>
+> With errors like:
+>
+> ERROR: ParseError at /home/geoff/yocto-ccu/poky/build/../meta-java/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb:7: Could not
+> inherit file classes/features_check.bbclass
+>
+> Can this commit be reverted?
+>
 
-19:39:18 ERROR: Nothing RPROVIDES 'python3-mock' (but
-/mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
-RDEPENDS on or otherwise requires it)
-19:39:19 ERROR: Nothing RPROVIDES 'python3-test-generator-dev' (but
-/mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
-RDEPENDS on or otherwise requires it)
-19:39:19 No eligible RPROVIDERs exist for 'python3-test-generator-dev'
+@OpenEmbedded Devel List this shouldn't have been pulled into zeus as
+it relies on changes in master on oe-core
 
-
-On Sun, Mar 29, 2020 at 10:54 PM zangrc <zangrc.fnst@cn.fujitsu.com> wrote:
->
-> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
-> ---
->  .../python/python3-test-generator/run-ptest      |  3 +++
->  .../python/python3-test-generator_0.1.2.bb       | 16 +++++++++++++++-
->  2 files changed, 18 insertions(+), 1 deletion(-)
->  create mode 100644 meta-python/recipes-devtools/python/python3-test-generator/run-ptest
->
-> diff --git a/meta-python/recipes-devtools/python/python3-test-generator/run-ptest b/meta-python/recipes-devtools/python/python3-test-generator/run-ptest
-> new file mode 100644
-> index 000000000..5cec71169
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-test-generator/run-ptest
-> @@ -0,0 +1,3 @@
-> +#!/bin/sh
-> +
-> +pytest
-> diff --git a/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb b/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
-> index 14943a4bd..a83ee5efc 100644
-> --- a/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
-> +++ b/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
-> @@ -5,10 +5,24 @@ parsers that prevent any potentially malicious operation."
->  LICENSE = "ISC"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=041a2bff595d40ccb4b36356f89dab00"
->
-> +SRC_URI += " \
-> +       file://run-ptest \
-> +"
-> +
->  SRC_URI[md5sum] = "6c69e73ba5b4b3ed62f7bcda071c64f1"
->  SRC_URI[sha256sum] = "ad5925c814bfe79497b43df096e3bb52c166d1577f7aff160137301676232f4a"
->
-> -inherit pypi setuptools3
-> +inherit pypi setuptools3 ptest
-> +
-> +RDEPENDS_${PN}-ptest += " \
-> +       ${PYTHON_PN}-pytest \
-> +       ${PYTHON_PN}-mock \
-> +"
-> +
-> +do_install_ptest() {
-> +       install -d ${D}${PTEST_PATH}/tests
-> +       cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-> +}
->
->  DEPENDS += "python3-nose-native"
->
-> --
-> 2.20.1
->
->
->
-> 
+-- 
+Alex Kiernan
