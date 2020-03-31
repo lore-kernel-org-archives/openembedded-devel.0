@@ -1,118 +1,79 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
- by mx.groups.io with SMTP id smtpd.web11.2293.1585607194515536121
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web10.1113.1585619554262056564
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Mar 2020 15:26:34 -0700
+ Mon, 30 Mar 2020 18:52:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cfsKg1LE;
- spf=pass (domain: gmail.com, ip: 209.85.221.51, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-wr1-f51.google.com with SMTP id h15so23582528wrx.9
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 15:26:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=O8XI7uvQ3GdwB0L0lzhTHAxqqGkPkHAg8IiRgmXrXP8=;
-        b=cfsKg1LELShHKwwz1VThJgNkiZ5CCPPXtS6PjNEJpyz/BFNjXLa3gb6cq3luZ1otFY
-         jgdHcZB+LNpp+KF+gC5vuN+u30l5LgiJBQZ6TvopwPve4zUnGrdnyNWyTJaYKqBOBypN
-         kATXhwntdVX7tklmCPEuiVzj8yLZo8hZdkKY/j+lS/Gs3iiYBfGzBELupzGV3z4KX2Nn
-         SAG5o//TX14mE6elu4K9fv0dQuAgs4JcBevRQpYS0iy2YcDoXZzAi+z5pXVj7u55UEhX
-         r+MRtrGV44wRlOtUEIoWQ2aCLgxlw3ibZ9FM11wZ3Y6q81tg1oU/pFnpTUSrVZI2BReQ
-         ieow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=O8XI7uvQ3GdwB0L0lzhTHAxqqGkPkHAg8IiRgmXrXP8=;
-        b=HWTjsgejdInHQ6JGefgp8KVDYWTs2PMgORJ0fP0dj3Qf4wP+DFQhfLEg0Ttzdz5WLc
-         SOR26aMGRL97Q07ooC6MNZi8c5UE/ngBrewthWKI5/7YZOj+Lmrb1f8BKQF99jsfN5A5
-         6wXKJ98UTniEFcTJvSR/xMNq/l/QWeMuI4LSfIR18L7rXuOSDbNQaqGjXGEPCNgHo3/H
-         hkjVXlcQrQpf23kQYfKH90l2uXArBT4WIxp5OOkcDmnA7pI0oUqopMGe5vw+ueWmGXun
-         shkpF0gF0coshZgg+4Gc1c5K0Mw8+j/b0ISiKj9aMAlCKQU6Yhn1HjB9p0SRt8/hjhbi
-         v+iQ==
-X-Gm-Message-State: ANhLgQ2bc+3wjyEdR6aGB3efJmXoMvwOEIqs44FnV015jhBRWK8O5Qr4
-	NmK/nZkVNsktoHNSmL00aoDgN3ARl40=
-X-Google-Smtp-Source: ADFU+vsTMGPoKCnFoPiJbBVOs8zgCSzXxm2pKGpRjNnd56Iz548xt8Yo7hQhLzg+SssE8xAOOmiiSw==
-X-Received: by 2002:adf:ea8f:: with SMTP id s15mr16852184wrm.393.1585607192859;
-        Mon, 30 Mar 2020 15:26:32 -0700 (PDT)
-Return-Path: <schnitzeltony@gmail.com>
-Received: from superandy.speedport.ip (p200300F07F030968BA11C5DB455F3E0C.dip0.t-ipconnect.de. [2003:f0:7f03:968:ba11:c5db:455f:3e0c])
-        by smtp.gmail.com with ESMTPSA id z1sm12002404wrp.90.2020.03.30.15.26.31
-        for <openembedded-devel@lists.openembedded.org>
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Mar 2020 15:26:32 -0700 (PDT)
-From: "Andreas M?ller" <schnitzeltony@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 6/6] xfce4-screensaver: upgrade 0.1.8 -> 0.1.10
-Date: Tue, 31 Mar 2020 00:26:16 +0200
-Message-Id: <20200330222616.2354-6-schnitzeltony@gmail.com>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200330222616.2354-1-schnitzeltony@gmail.com>
-References: <20200330222616.2354-1-schnitzeltony@gmail.com>
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.72,326,1580745600"; 
+   d="scan'208";a="88257686"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 31 Mar 2020 09:52:30 +0800
+Received: from G08CNEXMBPEKD05.g08.fujitsu.local (unknown [10.167.33.204])
+	by cn.fujitsu.com (Postfix) with ESMTP id D8851406AB15
+	for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2020 09:42:11 +0800 (CST)
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.85) by
+ G08CNEXMBPEKD05.g08.fujitsu.local (10.167.33.204) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 31 Mar 2020 09:52:26 +0800
+Received: from localhost.local (10.167.225.81) by
+ G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
+ (TLS) id 14.3.439.0; Tue, 31 Mar 2020 09:52:30 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-simpleeval: Enable ptest
+Date: Tue, 31 Mar 2020 09:54:56 +0800
+Message-ID: <20200331015456.27897-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: D8851406AB15.A8312
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
+X-Spam-Status: No
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 
-Release notes for 0.1.10
-========================
-[Please note that this is a development release.]
-
-This release adds empty responses to DBus calls that don't require a
-response. This matches gnome-screensaver's functionality, and fixes
-support for xfce4-session.
-
-- Send DBus lock responses for xfce4-session support (bug #16522)
-- Translation Update: Galician
-
-Release notes for 0.1.9
-=======================
-Please note that this is a development release.
-
-- Replace deprecated GTimeVal usage
-- Rebuild windows on monitor reconfiguration
-- Draw overlays during window reconstruction to protect screen
-- Do not activate DPMS when screensaver is inactive (bug #16327)
-- Better handling of multi-monitor and lid-close events (bug #16102)
-- Update LINGUAS (bug #15949)
-- Fix decimal properties when running through atof
-- Return 1 on lock command failure (bug #15945)
-- Rename 'Pictures folder' to 'Slideshow' (bug #15589)
-- Raise NameError and TypeError (bug #15830)
-- Fix float parsing error (bug #16295)
-- Fix inhibitor proxying (bug #16356)
-- Fix inhibitor listing in xfce4-screensaver-command (bug #16355)
-- Add systemd sleep inhibitor (bug #15929)
-- Fix dbus inhibition (bug #16365)
-- dbus: Prevent overzealous activation (bug #16365)
-
-Translation Updates:
-Albanian, Belarusian, Czech, Finnish, Galician, Hebrew, Italian,
-Japanese, Korean, Malay, Norwegian Bokmål, Polish, Portuguese (Brazil),
-Serbian, Spanish, Swedish, Turkish
-
-Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- ...xfce4-screensaver_0.1.8.bb => xfce4-screensaver_0.1.10.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-screensaver/{xfce4-screensaver_0.1.8.bb => xfce4-screensaver_0.1.10.bb} (86%)
+ .../python/python3-simpleeval/run-ptest            |  3 +++
+ .../python/python3-simpleeval_0.9.10.bb            | 14 +++++++++++++-
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-simpleeval/run-ptest
 
-diff --git a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.8.bb b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.10.bb
-similarity index 86%
-rename from meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.8.bb
-rename to meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.10.bb
-index 9c9c327b7..62f0640f0 100644
---- a/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.8.bb
-+++ b/meta-xfce/recipes-apps/xfce4-screensaver/xfce4-screensaver_0.1.10.bb
-@@ -16,8 +16,8 @@ SRC_URI_append = " \
-     file://fix-cross-compile.patch \
-     file://fix-pam-config.patch \
- "
--SRC_URI[md5sum] = "0fea7b676e6e533a3f305c6f642fe0cd"
--SRC_URI[sha256sum] = "4056045ea5fd3eccfe328b86ae245ee4949b9e3044e42ca29c492c0f4ac860d7"
-+SRC_URI[md5sum] = "1f093cde5af09e9fd9be017774e032ef"
-+SRC_URI[sha256sum] = "586f1c78dd6745a20e9ce9f12d0117189d597ba7ad0c8ffcfcd25c9bb05f1d57"
+diff --git a/meta-python/recipes-devtools/python/python3-simpleeval/run-ptest b/meta-python/recipes-devtools/python/python3-simpleeval/run-ptest
+new file mode 100644
+index 000000000..5cec71169
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-simpleeval/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++pytest
+diff --git a/meta-python/recipes-devtools/python/python3-simpleeval_0.9.10.bb b/meta-python/recipes-devtools/python/python3-simpleeval_0.9.10.bb
+index 633347a93..1cacf9af2 100644
+--- a/meta-python/recipes-devtools/python/python3-simpleeval_0.9.10.bb
++++ b/meta-python/recipes-devtools/python/python3-simpleeval_0.9.10.bb
+@@ -6,6 +6,18 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=dc9277482effe59b734b004cbcc1fee7"
+ SRC_URI[md5sum] = "f175fc12d408487ca26fa3905e0a6691"
+ SRC_URI[sha256sum] = "692055488c2864637f6c2edb5fa48175978a2a07318009e7cf03c9790ca17bea"
  
- do_install_append() {
-     install -D -m 0644 ${S}/data/xfce4-screensaver.common-auth ${D}${sysconfdir}/pam.d/xfce4-screensaver
+-inherit pypi setuptools3
++inherit pypi setuptools3 ptest
+ 
+ BBCLASSEXTEND = "native nativesdk"
++
++SRC_URI += " \
++	file://run-ptest \
++"
++
++RDEPENDS_${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
++	cp -f ${S}/test_simpleeval.py ${D}${PTEST_PATH}/
++}
 -- 
-2.21.1
+2.20.1
+
+
 
