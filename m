@@ -1,85 +1,106 @@
-Received: from mail-il1-f178.google.com (mail-il1-f178.google.com [209.85.166.178])
- by mx.groups.io with SMTP id smtpd.web11.3816.1585635487766426676
+Received: from mail-lf1-f67.google.com (mail-lf1-f67.google.com [209.85.167.67])
+ by mx.groups.io with SMTP id smtpd.web11.4172.1585638303361017985
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Mar 2020 23:18:07 -0700
+ Tue, 31 Mar 2020 00:05:03 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=jIzdez8b;
- spf=pass (domain: gmail.com, ip: 209.85.166.178, mailfrom: alex.kiernan@gmail.com)
-Received: by mail-il1-f178.google.com with SMTP id a6so18327091ilr.4
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 23:18:07 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=c+BUlwDO;
+ spf=pass (domain: gmail.com, ip: 209.85.167.67, mailfrom: jacob.kroon@gmail.com)
+Received: by mail-lf1-f67.google.com with SMTP id t11so3950594lfe.4
+        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2020 00:05:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to;
-        bh=uCBPOyKQJRZKoJx0OhfEjY4CfEVAUu6iQDLrSa2ZyEc=;
-        b=jIzdez8b44o4dxRCoXIrqLK+DSZmurcEQ9a+Ph7HlaBJtgaetH4vQLXtulY23g7KTi
-         Fzj90Ri2+kaFXyqxxUoXL7shry3IvrfUYHfgnD1hJha5dKX+TJ7CAjHzbayTqUvbbvZq
-         xTpNFM36wdALGqV29hBXw/4pYlpMo7I2sBTGmgAN+yppvfE4J+POfhocxoZcb1k7WJuj
-         y8OXIv0TS90HN2ITyGh0F4tSijJMBdSAsZagQVTCwaSotLmdqIsWh/e6AW0TGks0AGoM
-         FeUmmVyDeDDU7KCZ8gLL97IarieD3WkyaoBBj+9sr8gDYgbG0NWUoxxII+nWpD6dIH5D
-         XsjQ==
+        h=subject:to:references:from:message-id:date:user-agent:mime-version
+         :in-reply-to:content-language:content-transfer-encoding;
+        bh=8BloZbYR4j84iu6RIKqflADGLsR2Uj8LDdt8CATJZTQ=;
+        b=c+BUlwDOz4L6W+hnllyjRCF72jjqM0oXagggM9IwvxGwSWiRMRn3jwp3ChM/w9KIpO
+         i2gyDWtm0HzoZHRAC7Vqu2hKM7CwyslsGznoAnFzObPC0z0PROg3y6D8lZPuSuSX/gFo
+         JTo7Cj58fW7J6CUbpIpYD+j3bPidVE/x8ERxAl1GmznIPAYgcD65GLdR05Ky9wCgIbr+
+         GOKU5e/QQ0qwRGn9gQQHFoyDHPTWUZasf1wQxrfPEGMGoWNh9wwp7VQ9mefeBv9tMBVI
+         MaHYo0mj5lRfxdoOD0mHHE51yXy4dKqpTfe5pPX0a8gYzlyfyECT+f8u7uDdWy3Uubzq
+         kJfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to;
-        bh=uCBPOyKQJRZKoJx0OhfEjY4CfEVAUu6iQDLrSa2ZyEc=;
-        b=EOGRA3+iP9Vf29IGL5utqMrppv0dCmBKO+meA1PcRf/OWdGlvjNIEJYclFiVeaLJF/
-         mi/AEKVDFlLwhZgVWtWKP9T52Z/auyw7IA6aUaMXA8q8nWXPKpz6nFcC9lq2/rWzZW7L
-         5Y5qNwe2gqpHz4oCIRzccEONPRFZYQXM7lbIZ0cGdgQO9Yo6CCpqz9uqKooRR0scfCps
-         HZlJdfBE0XxFASbAuM0whcv2KfUa7owo1tX6bDrifNrujtxrZbyjpcbo9f5XLrhla1yi
-         h5MEjp7z5gANQjpw5vpvp0Yd1c0QVPzVdAh0+fIZ4GFj/SyQL8zhh7ZCvvtnUtqjWuz7
-         Zb9A==
-X-Gm-Message-State: ANhLgQ3gNc6X8aC6LL06gQSRLjv/d42zyxJ3rQnzICLK1bS4KRlUHenV
-	eTuMKVCROMS+7hxFQsuQwoXKjcVLDxNHAi40H1A=
-X-Google-Smtp-Source: ADFU+vtVo4SvECzvFLxrbNxc5E8e+DZoNyAf/W8nvypdGec+ttJXEtxAY0rMBX+u7Pfz1RvUZlCSyGT/2DPgHnTPcpg=
-X-Received: by 2002:a92:ce06:: with SMTP id b6mr15913466ilo.102.1585635486806;
- Mon, 30 Mar 2020 23:18:06 -0700 (PDT)
-MIME-Version: 1.0
+        h=x-gm-message-state:subject:to:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=8BloZbYR4j84iu6RIKqflADGLsR2Uj8LDdt8CATJZTQ=;
+        b=S908vdXDlBCOOGos6pbzrLpdLlp6+1PJJi0ZdPYkY36u2R8C6FWszMiD10S+m8J2XI
+         fyCmagNCejLJOW+qWN6ucf3PfOQuG2oMhPWTkC+Taedqnpzhe7GWVNKJhGDbAURCu/gL
+         ekwfcBk7MHqQPuLmjiSgXOacwIKhwcFZl7Z0F1BohGZoweAk/KxM5/JYdoa6bp6VGsAk
+         lbrEr7Vck7z0+QbbSEhBA766P2K1KkyXlCRgDMZKc5ahFqGw+QMaVT47amYtWngBayCM
+         3J/VWLPbb0/aaErE7RLrJQ7L5SMY0RQyIcZahxBnKu3g4W6U8ToHbqYI5R2TKyoNryW7
+         iUBA==
+X-Gm-Message-State: AGi0PuaN32Lz0Zzayb0dNysQCGs2uUZrBI6gZs+qeT3zpl5Wu7BuyFWM
+	+HRJ389EWEFkai7B7FA5cmal9Pi9
+X-Google-Smtp-Source: APiQypIlgprpRO/XmmvS0sFxOhkw0rhMd/gfRFGWw3CAKuV6rjspYrffr7QN5o105C3FHgo/9YMgcw==
+X-Received: by 2002:ac2:5211:: with SMTP id a17mr8274207lfl.167.1585638300246;
+        Tue, 31 Mar 2020 00:05:00 -0700 (PDT)
+Return-Path: <jacob.kroon@gmail.com>
+Received: from localhost.localdomain ([213.185.29.22])
+        by smtp.gmail.com with ESMTPSA id b16sm3939659ljh.20.2020.03.31.00.04.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 31 Mar 2020 00:04:59 -0700 (PDT)
+Subject: Re: [oe] Request to Revert 'recipes: rename distro_features_check to features_check' comit on meta-java zeus branch
+To: Alex Kiernan <alex.kiernan@gmail.com>,
+ Geoff Parker <Geoffrey.Parker@arthrex.com>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 References: <BY5PR11MB4307FAE9DC43F1587395B1FEE7C80@BY5PR11MB4307.namprd11.prod.outlook.com>
-In-Reply-To: <BY5PR11MB4307FAE9DC43F1587395B1FEE7C80@BY5PR11MB4307.namprd11.prod.outlook.com>
-From: "Alex Kiernan" <alex.kiernan@gmail.com>
-Date: Tue, 31 Mar 2020 07:17:55 +0100
-Message-ID: <CAO5Uq5S43bAyCv2Z58APL70xWEFXdHi8+UvsXy7PE0rrkt8LGA@mail.gmail.com>
-Subject: Re: Request to Revert 'recipes: rename distro_features_check to features_check' comit on meta-java zeus branch
-To: Geoff Parker <Geoffrey.Parker@arthrex.com>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+ <CAO5Uq5S43bAyCv2Z58APL70xWEFXdHi8+UvsXy7PE0rrkt8LGA@mail.gmail.com>
+From: "Jacob Kroon" <jacob.kroon@gmail.com>
+Message-ID: <a8f619ef-4bba-b3f9-1e69-2f16b2a5f914@gmail.com>
+Date: Tue, 31 Mar 2020 09:04:58 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
+MIME-Version: 1.0
+In-Reply-To: <CAO5Uq5S43bAyCv2Z58APL70xWEFXdHi8+UvsXy7PE0rrkt8LGA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-On Tue, Mar 31, 2020 at 5:46 AM Geoff Parker
-<Geoffrey.Parker@arthrex.com> wrote:
->
-> Hi Alex,
->
-> We  moved one of our products to the zeus Yocto 3.0 meta layer branches. It recently stopped building due to this commit on the meta-java zeus branch:
->
-> commit d2e962a795e8713e5443659669842298453d938f
-> Author: Alex Kiernan <alex.kiernan@gmail.com>
-> Date:   Sat Dec 7 18:07:38 2019 +0000
->
->    recipes: rename distro_features_check to features_check
->
->    Avoid warning due to the class rename in OE-Core.
->
->    Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
->    Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
->
-> Although this change is appropriate for the Yocto 3.1 branches, it breaks our build on Yocto 3.0 zeus because the zeus branch of the openembedded-core layer does not have the features_check class.
->
-> The following recipes fail to parse:
->
->   openjdk-7_99b00-2.6.5.bb
->   classpath_0.99.bb
->   cacao_2d6fc614daf9.bb
->
-> With errors like:
->
-> ERROR: ParseError at /home/geoff/yocto-ccu/poky/build/../meta-java/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb:7: Could not
-> inherit file classes/features_check.bbclass
->
-> Can this commit be reverted?
->
+On 3/31/20 8:17 AM, Alex Kiernan wrote:
+> On Tue, Mar 31, 2020 at 5:46 AM Geoff Parker
+> <Geoffrey.Parker@arthrex.com> wrote:
+>>
+>> Hi Alex,
+>>
+>> We  moved one of our products to the zeus Yocto 3.0 meta layer branches. It recently stopped building due to this commit on the meta-java zeus branch:
+>>
+>> commit d2e962a795e8713e5443659669842298453d938f
+>> Author: Alex Kiernan <alex.kiernan@gmail.com>
+>> Date:   Sat Dec 7 18:07:38 2019 +0000
+>>
+>>     recipes: rename distro_features_check to features_check
+>>
+>>     Avoid warning due to the class rename in OE-Core.
+>>
+>>     Signed-off-by: Alex Kiernan <alex.kiernan@gmail.com>
+>>     Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+>>
+>> Although this change is appropriate for the Yocto 3.1 branches, it breaks our build on Yocto 3.0 zeus because the zeus branch of the openembedded-core layer does not have the features_check class.
+>>
+>> The following recipes fail to parse:
+>>
+>>    openjdk-7_99b00-2.6.5.bb
+>>    classpath_0.99.bb
+>>    cacao_2d6fc614daf9.bb
+>>
+>> With errors like:
+>>
+>> ERROR: ParseError at /home/geoff/yocto-ccu/poky/build/../meta-java/recipes-core/openjdk/openjdk-7_99b00-2.6.5.bb:7: Could not
+>> inherit file classes/features_check.bbclass
+>>
+>> Can this commit be reverted?
+>>
+> 
+> @OpenEmbedded Devel List this shouldn't have been pulled into zeus as
+> it relies on changes in master on oe-core
+> 
+> 
 
-@OpenEmbedded Devel List this shouldn't have been pulled into zeus as
-it relies on changes in master on oe-core
+I've sent:
+https://lists.openembedded.org/g/openembedded-devel/message/83557
 
--- 
-Alex Kiernan
+Anyone know how I can make the new mailing list archive use a sane font 
+when displaying patches ?
+
+/Jacob
