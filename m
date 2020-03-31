@@ -1,255 +1,112 @@
-Received: from mail-qk1-f182.google.com (mail-qk1-f182.google.com [209.85.222.182])
- by mx.groups.io with SMTP id smtpd.web10.3254.1585630683699806248
+Received: from mail-qk1-f194.google.com (mail-qk1-f194.google.com [209.85.222.194])
+ by mx.groups.io with SMTP id smtpd.web12.3229.1585630871892072062
  for <openembedded-devel@lists.openembedded.org>;
- Mon, 30 Mar 2020 21:58:03 -0700
+ Mon, 30 Mar 2020 22:01:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=H/vEgyUb;
- spf=pass (domain: gmail.com, ip: 209.85.222.182, mailfrom: raj.khem@gmail.com)
-Received: by mail-qk1-f182.google.com with SMTP id v7so21782176qkc.0
-        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 21:58:03 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=DIsugmm/;
+ spf=pass (domain: gmail.com, ip: 209.85.222.194, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f194.google.com with SMTP id u4so21691813qkj.13
+        for <openembedded-devel@lists.openembedded.org>; Mon, 30 Mar 2020 22:01:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=td7Pcg2ua0bLsXVxrb2O8mUGx1RBL5Bkz9+/qvIaSpI=;
-        b=H/vEgyUb0RsQcWneAaUW8SEpFr8nlQ+JH77XupLrJces5PHl39LCuT4Kp5a29QBET0
-         KPSZ7BzTFfRNFAvJZcI2oYsKv4y6RFu3p+HkZ5CXKnATyy87TnZK8jw+AzBX3wg4IRgt
-         owrlNGJWoBly9f5EUFP0JSDRU4Wm1QY8N9Jy3N98KrbeVc/1ZiCZLNEowqj+yoZbuVpE
-         fYmhsnEwg8IXGo9umXTg6qHoQX9lHszQR39uwIk5IXqK5nAgfTabplqFnEXmq9l6lq6w
-         v6iYeu8QoRbUea+Bdo3Seobd3W2vHsoqzRyfcvEVqcN72ZAegduDUsHrp1q0bc/VjD6w
-         ciNg==
+         :cc;
+        bh=o3dVb/AKEe3eKPF2el6wvYW4lG73aUBZNi0362jXLv8=;
+        b=DIsugmm/qxV95PcrjOmD5CZsnKNhOakuzp49JfeFBNpFi6Yeh28EaP03lBrM1TnHd+
+         ppQZ0w6Ot2GaTyc1BVrzpeM9FRUl0kaxwvAJ84QSVqTptqBQ1QbauGnNgcjepBHSkXv+
+         JTYFC1mgE50zdahlC8S0e43sAXwjbY6x34T/yZclr9m/OFBg48Dx3E+KMOe19onOmwlt
+         Sg9B0RDhjd/av5/ghed1zA9TFqXFpEzDCZ9rfHZV+9qN6YQ9yk2o2C+w6vD2ekW20t9s
+         NfADXuSTWy6uIQqO8VbA+1Hk4eLGQJmmP4IPH+GOdKkD4ViBCz78UbX8caCkYnFeCQKg
+         CFow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=td7Pcg2ua0bLsXVxrb2O8mUGx1RBL5Bkz9+/qvIaSpI=;
-        b=DEmZDDWPwE9J/Zn3u+Zye5W/h7pbTxyjCmBqx/AiEIrR0zppaqZgxS2CJbA+e8ZoWI
-         V0zmQGEg44qXcuwFuS9SMBXET6aOL0SB6ROQTEaBWU3IKj9n3x3L0C90WXhwxaneWMBE
-         FBx/L0kejgpIZcB5Xx0Jb5xVHDNm1N2bn7VPMu/m2fhFPhekD7XoIAKit8vWqgFC/Oux
-         HMup0FmJinLdurmnngZfhe1+nG+cGNAJ8ZVA9gkTatFFdfm+TIpt9E0y649ljXhyqFaU
-         c8O2dW66X8ZvaICUKsza1KUiS1p/Ya3EgzR8k+Oc5FDqFgohZaAVrjcoFVaFdFz3KYDP
-         KfOw==
-X-Gm-Message-State: ANhLgQ3M88B7a53c3yskw0gcJJOs/DE5CP0KQ/4JNpFfISJI03KMCSFy
-	VWPbaWLEdfdPv5puOD317vGWlUMVUOR04ALUFyE=
-X-Google-Smtp-Source: ADFU+vv3DCC4p+MUufUwXLAhrsZ3w6O3msAEjunBOY2jjFU01MHDj9YJh1S0gNPkX2na0/vgZRsyewkopyyfn2Gphbk=
-X-Received: by 2002:a05:620a:22b:: with SMTP id u11mr3224627qkm.225.1585630682463;
- Mon, 30 Mar 2020 21:58:02 -0700 (PDT)
+         :message-id:subject:to:cc;
+        bh=o3dVb/AKEe3eKPF2el6wvYW4lG73aUBZNi0362jXLv8=;
+        b=PA4jXM07hT62D/uTue/TLhNySfvPZqh9+TD8nngFY9eMStLcGk418yfAiUB/q9Ku+o
+         Z1M4jSxHRqJ2s+jFxJ6IEt9oeWEIx4pLpBLrnrYXs1GfniBWuDvoPbbDcANNyTGX10TW
+         NIbvGhb2fP1qqsk42n/U4/OwbAjF9pQb5nUkLqsomSrJXKuNPt3PWDyhr8dalnTpco3Q
+         +DRboDy6MHMsY6N4bJ77oANv1Gl1YB/QUzt4rD3oSt5R+0RbMS412WuozJDvt5ICZX9Y
+         2DRscoBYH/LFydqKLGhDPYtEt2HXZ7WyaNy0naWNGVTiO/7ZaLY/r2XJf6sbPHhkYR1O
+         c/kg==
+X-Gm-Message-State: ANhLgQ2Ml+ya8rhr8RO4g/wFGRX2QN6xiq92+9uMQUbE9fQZFh6Qt5IG
+	aooJGHPhZAGZofcXuNQQCv89gRySMSV3C6JyVkfRxv2tOPk=
+X-Google-Smtp-Source: ADFU+vsqPmjqB1Udv1vzCxhRlMdEGiCOF/A7MQB5vrGZC1c3cadB6bvJtw+TKcKdYffNDsXU0QTi2qUmLpwEQ7Cp97k=
+X-Received: by 2002:a37:a746:: with SMTP id q67mr3377036qke.215.1585630870752;
+ Mon, 30 Mar 2020 22:01:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200330222616.2354-1-schnitzeltony@gmail.com>
-In-Reply-To: <20200330222616.2354-1-schnitzeltony@gmail.com>
+References: <20200330055645.18477-1-zangrc.fnst@cn.fujitsu.com>
+In-Reply-To: <20200330055645.18477-1-zangrc.fnst@cn.fujitsu.com>
 From: "Khem Raj" <raj.khem@gmail.com>
-Date: Mon, 30 Mar 2020 21:57:36 -0700
-Message-ID: <CAMKF1sry1VWmFTZEVt_Xj6GsVetGbaYLZd8_x3=J3YTUM9m7og@mail.gmail.com>
-Subject: Re: [oe] [PATCH 1/6] wxwidgets: initial add 3.1.3
-To: "Andreas M?ller" <schnitzeltony@gmail.com>
+Date: Mon, 30 Mar 2020 22:00:44 -0700
+Message-ID: <CAMKF1spPh32=VTCTYgJ872vxdbeg4J1jBHJfJpFR163qya24RQ@mail.gmail.com>
+Subject: Re: [oe] [meta-python] [PATCH] python3-test-generator: Enable ptest
+To: zangrc <zangrc.fnst@cn.fujitsu.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-Fails on musl
+I see
 
-https://errors.yoctoproject.org/Errors/Details/399768/
+19:39:18 ERROR: Nothing RPROVIDES 'python3-mock' (but
+/mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
+RDEPENDS on or otherwise requires it)
+19:39:19 ERROR: Nothing RPROVIDES 'python3-test-generator-dev' (but
+/mnt/jenkins/workspace/yocto-world-glibc/sources/meta-openembedded/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
+RDEPENDS on or otherwise requires it)
+19:39:19 No eligible RPROVIDERs exist for 'python3-test-generator-dev'
 
-On Mon, Mar 30, 2020 at 3:26 PM Andreas M?ller <schnitzeltony@gmail.com> w=
-rote:
+
+On Sun, Mar 29, 2020 at 10:54 PM zangrc <zangrc.fnst@cn.fujitsu.com> wrote:
 >
-> * need it for 0.a.d and audacity
-> * did extensive testing with PACKAGECONFIG combinations (exception: mspa=
-ck -
->   libmspack is in meta-security)
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 > ---
->  meta-oe/licenses/wxWidgets                    | 54 +++++++++++++
->  .../wxwidgets/wxwidgets_git.bb                | 79 +++++++++++++++++++
->  2 files changed, 133 insertions(+)
->  create mode 100644 meta-oe/licenses/wxWidgets
->  create mode 100644 meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
+>  .../python/python3-test-generator/run-ptest      |  3 +++
+>  .../python/python3-test-generator_0.1.2.bb       | 16 +++++++++++++++-
+>  2 files changed, 18 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-python/recipes-devtools/python/python3-test-generator/run-ptest
 >
-> diff --git a/meta-oe/licenses/wxWidgets b/meta-oe/licenses/wxWidgets
+> diff --git a/meta-python/recipes-devtools/python/python3-test-generator/run-ptest b/meta-python/recipes-devtools/python/python3-test-generator/run-ptest
 > new file mode 100644
-> index 000000000..0f6b9d6a8
+> index 000000000..5cec71169
 > --- /dev/null
-> +++ b/meta-oe/licenses/wxWidgets
-> @@ -0,0 +1,54 @@
-> +                wxWindows Library Licence, Version 3.1
-> +                =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +++ b/meta-python/recipes-devtools/python/python3-test-generator/run-ptest
+> @@ -0,0 +1,3 @@
+> +#!/bin/sh
 > +
-> +  Copyright (c) 1998-2005 Julian Smart, Robert Roebling et al
-> +
-> +  Everyone is permitted to copy and distribute verbatim copies
-> +  of this licence document, but changing it is not allowed.
-> +
-> +                       WXWINDOWS LIBRARY LICENCE
-> +     TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-> +
-> +  This library is free software; you can redistribute it and/or modify =
-it
-> +  under the terms of the GNU Library General Public Licence as publishe=
-d by
-> +  the Free Software Foundation; either version 2 of the Licence, or (at
-> +  your option) any later version.
-> +
-> +  This library is distributed in the hope that it will be useful, but
-> +  WITHOUT ANY WARRANTY; without even the implied warranty of
-> +  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lib=
-rary
-> +  General Public Licence for more details.
-> +
-> +  You should have received a copy of the GNU Library General Public Lic=
-ence
-> +  along with this software, usually in a file named COPYING.LIB.  If no=
-t,
-> +  write to the Free Software Foundation, Inc., 51 Franklin Street, Fift=
-h Floor,
-> +  Boston, MA 02110-1301 USA.
-> +
-> +  EXCEPTION NOTICE
-> +
-> +  1. As a special exception, the copyright holders of this library give
-> +  permission for additional uses of the text contained in this release =
-of
-> +  the library as licenced under the wxWindows Library Licence, applying
-> +  either version 3.1 of the Licence, or (at your option) any later vers=
-ion of
-> +  the Licence as published by the copyright holders of version
-> +  3.1 of the Licence document.
-> +
-> +  2. The exception is that you may use, copy, link, modify and distribu=
-te
-> +  under your own terms, binary object code versions of works based
-> +  on the Library.
-> +
-> +  3. If you copy code from files distributed under the terms of the GNU
-> +  General Public Licence or the GNU Library General Public Licence into=
- a
-> +  copy of this library, as this licence permits, the exception does not
-> +  apply to the code that you add in this way.  To avoid misleading anyo=
-ne as
-> +  to the status of such modified files, you must delete this exception
-> +  notice from such code and/or adjust the licensing conditions notice
-> +  accordingly.
-> +
-> +  4. If you write modifications of your own for this library, it is you=
-r
-> +  choice whether to permit this exception to apply to your modification=
-s.
-> +  If you do not wish that, you must delete the exception notice from su=
-ch
-> +  code and/or adjust the licensing conditions notice accordingly.
-> +
-> +
-> +
-> diff --git a/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb b/meta-=
-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
-> new file mode 100644
-> index 000000000..72d56a066
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/wxwidgets/wxwidgets_git.bb
-> @@ -0,0 +1,79 @@
-> +SUMMARY =3D "Cross-Plattform GUI Library"
-> +DESCRIPTIOM =3D "wxWidgets is a free and open source cross-platform C++=
- framework for writing advanced GUI applications using native controls."
-> +HOMEPAGE =3D "https://www.wxwidgets.org/"
-> +BUGTRACKER =3D "https://trac.wxwidgets.org/"
-> +
-> +# wxWidgets licence is a modified version of LGPL explicitly allowing n=
-ot
-> +# distributing the sources of an application using the library even in =
-the
-> +# case of static linking.
-> +LICENSE =3D "wxWidgets"
-> +LIC_FILES_CHKSUM =3D "file://docs/licence.txt;md5=3D981f50a934828620b08=
-f44d75db557c6"
-> +
-> +inherit ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'cmake_qt5', 'cmake=
-', d)}
-> +inherit features_check lib_package
-> +
-> +# All toolkit-configs except 'no_gui' require x11 explicitly (see toolk=
-it.cmake)
-> +REQUIRED_DISTRO_FEATURES =3D "${@bb.utils.contains('PACKAGECONFIG', 'no=
-_gui', '', 'x11', d)}"
-> +
-> +DEPENDS +=3D " \
-> +    jpeg \
-> +    libpng \
-> +    tiff \
+> +pytest
+> diff --git a/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb b/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
+> index 14943a4bd..a83ee5efc 100644
+> --- a/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
+> +++ b/meta-python/recipes-devtools/python/python3-test-generator_0.1.2.bb
+> @@ -5,10 +5,24 @@ parsers that prevent any potentially malicious operation."
+>  LICENSE = "ISC"
+>  LIC_FILES_CHKSUM = "file://LICENSE;md5=041a2bff595d40ccb4b36356f89dab00"
+>
+> +SRC_URI += " \
+> +       file://run-ptest \
 > +"
 > +
-> +SRC_URI =3D "git://github.com/wxWidgets/wxWidgets.git"
-> +PV =3D "3.1.3"
-> +SRCREV=3D "8a40d23b27ed1c80b5a2ca9f7e8461df4fbc1a31"
-> +S =3D "${WORKDIR}/git"
+>  SRC_URI[md5sum] = "6c69e73ba5b4b3ed62f7bcda071c64f1"
+>  SRC_URI[sha256sum] = "ad5925c814bfe79497b43df096e3bb52c166d1577f7aff160137301676232f4a"
+>
+> -inherit pypi setuptools3
+> +inherit pypi setuptools3 ptest
 > +
-> +# These can be either 'builtin' or 'sys' and builtin means cloned soure=
-s are
-> +# build. So these cannot be PACKAGECONFIGs and let's use libs where we =
-can (see
-> +# DEPENDS)
-> +EXTRA_OECMAKE +=3D " \
-> +    -DwxUSE_LIBJPEG=3Dsys \
-> +    -DwxUSE_LIBPNG=3Dsys \
-> +    -DwxUSE_LIBTIFF=3Dsys \
-> +    -DwxUSE_REGEX=3Dbuiltin \
+> +RDEPENDS_${PN}-ptest += " \
+> +       ${PYTHON_PN}-pytest \
+> +       ${PYTHON_PN}-mock \
 > +"
 > +
-> +PACKAGECONFIG ?=3D "gtk"
-> +
-> +# Note on toolkit-PACKAGECONFIGs: select exactly one of 'no_gui' / 'gtk=
-' / 'qt'
-> +PACKAGECONFIG[no_gui] =3D "-DwxUSE_GUI=3DOFF,,,,,qt gtk"
-> +PACKAGECONFIG[gtk] =3D "-DwxBUILD_TOOLKIT=3Dgtk3 -DwxUSE_GUI=3DON,,gtk+=
-3,,,no_gui qt"
-> +PACKAGECONFIG[qt] =3D "-DwxBUILD_TOOLKIT=3Dqt  -DwxUSE_GUI=3DON,,qtbase=
-,,,no_gui gtk"
-> +python () {
-> +    pkgconfig =3D d.getVar('PACKAGECONFIG')
-> +    if (not 'no_gui' in pkgconfig) and (not 'gtk' in pkgconfig) and (no=
-t 'qt' in pkgconfig):
-> +        bb.error("PACKAGECONFIG must select a toolkit. Add one of no_gu=
-i / gtk / qt!")
+> +do_install_ptest() {
+> +       install -d ${D}${PTEST_PATH}/tests
+> +       cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
 > +}
-> +
-> +# Notes on other PACKAGECONFIGs:
-> +# * 'no_gui' overrides some configs below so they are marked as conflic=
-ting
-> +#   with 'no_gui' to avoid surprises
-> +# * qt+gstreamer is broken due to incorrect references on glib-2.0 -> m=
-ark
-> +#   as conflicting
-> +# * wxUSE_LIBGNOMEVFS is for gtk2 (see init.cmake) which we don't suppo=
-rt
-> +#   -> no gvfs PACKAGECONFIG
-> +# * libmspack is in meta-security
-> +PACKAGECONFIG[gstreamer] =3D "-DwxUSE_MEDIACTRL=3DON,-DwxUSE_MEDIACTRL=
-=3DOFF,gstreamer1.0-plugins-base,,,no_gui qt"
-> +PACKAGECONFIG[libsecret] =3D "-DwxUSE_SECRETSTORE=3DON,-DwxUSE_SECRETST=
-ORE=3DOFF,libsecret,,,no_gui"
-> +PACKAGECONFIG[lzma] =3D "-DwxUSE_LIBLZMA=3DON,-DwxUSE_LIBLZMA=3DOFF,xz"
-> +PACKAGECONFIG[mspack] =3D "-DwxUSE_LIBMSPACK=3DON,-DwxUSE_LIBMSPACK=3DO=
-FF,libmspack"
-> +PACKAGECONFIG[sdl_audio] =3D "-DwxUSE_LIBSDL=3DON,-DwxUSE_LIBSDL=3DOFF,=
-libsdl2"
-> +PACKAGECONFIG[webkit] =3D "-DwxUSE_WEBVIEW_WEBKIT=3DON,-DwxUSE_WEBVIEW_=
-WEBKIT=3DOFF,webkitgtk,,,no_gui"
-> +
-> +do_install_append() {
-> +    # do not ship bindir if empty
-> +    rmdir --ignore-fail-on-non-empty ${D}${bindir}
-> +}
-> +
-> +# lib names are not canonical
-> +FILES_SOLIBSDEV =3D ""
-> +
-> +FILES_${PN} +=3D " \
-> +    ${libdir}/libwx_*.so \
-> +    ${libdir}/wx/ \
-> +"
-> +
-> +FILES_${PN}-dev +=3D "${libdir}/wx/include/"
+>
+>  DEPENDS += "python3-nose-native"
+>
 > --
-> 2.21.1
+> 2.20.1
 >
->=20
+>
+>
+> 
