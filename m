@@ -1,55 +1,81 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web10.10145.1585755189087945947
+Received: from mail-wm1-f65.google.com (mail-wm1-f65.google.com [209.85.128.65])
+ by mx.groups.io with SMTP id smtpd.web10.683.1585771951643865535
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Apr 2020 08:33:10 -0700
+ Wed, 01 Apr 2020 13:12:31 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=Wa259Ka2;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 7935C60450;
-	Wed,  1 Apr 2020 17:33:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1585755187;
-	bh=7mHMONpVzgSx6+uM8w9bVz5Vam0NGJYuRQMnA7SoR9w=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Wa259Ka2UgGPpTV6cRfuqMa6ZdFkLKygn67lzVPzduprnjHk2rhTMDhURirr4/dG0
-	 TkHWLd1dB/CzPMvSH+yXLjBYl6ZcvtXb1h7wU9CVBjEzH3DkSTAKL6NaHSYcuvYHAw
-	 VttbKWfEEKRJ7iYK6Y7CDf1eJsztHHDDGz46NtGvUcZWwe7W8oeAFw5T6IHkt1PVXS
-	 yoQVKJqQ/0KAcclz8QH1rSfkhlkMgxQhdjtLsUrHBaYqHO6seJGA/B0mR9m31E/0PM
-	 MjECOffGiQs08+fE7xoCiFt+PeDa2tFYueGn6eJvvqvLOzAgJ0GQ/smSe8KkXiPnrz
-	 4BiKTDGlSAnOw==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=mcvjC/yE;
+ spf=pass (domain: gmail.com, ip: 209.85.128.65, mailfrom: schnitzeltony@gmail.com)
+Received: by mail-wm1-f65.google.com with SMTP id j19so1180706wmi.2
+        for <openembedded-devel@lists.openembedded.org>; Wed, 01 Apr 2020 13:12:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Z0AzOTCOq0MFKQm2H8m/jJxLiw2E+KZ3rZsdFCo7bUQ=;
+        b=mcvjC/yEsYLbpccxUVrZZIeydeyR1zZF6gqkzSYfz1qzLoyMVZ3Ysmf1QUJ9sk1oRN
+         m6Hg++zn70LKvW6347c5JyEoKzj/i2/bTw7GWDLi4EgtNdtDbm0Q2PIlpO7lA397wOLb
+         qS31FO4qiqfv4F3l1nWoa7hIGNtFjIFWNxYjUsjMnkx5uQ8LPpCbAqsntWIv8Ou8p96a
+         PeeCbVgxdK3SsUHEcCGDH+BCnBJ/4u12on/3XqJSjLnuQ3WoT4NsBK0Yx2HS1fNVmCeP
+         3vQD0Z7bFsaeMdOVwaI8AFinmys3oxXMXIXEd28H36kA4xNVSuiB78IaqlmEMI9V1qdM
+         DWGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Z0AzOTCOq0MFKQm2H8m/jJxLiw2E+KZ3rZsdFCo7bUQ=;
+        b=bsKUu3eV/qIHuheY2+DnaMTh/992fSNT3YfRs/RCtzFuwzdDnpv5A/6QEpNeACmbek
+         b+8F52wnT6jEGpsrL7VKpbMfE/eQhWZBo9sCjgiGiRe0De3AOX0XgLqZVjvGJfM9noP/
+         DPQzLQcOOBwWZ1xBGo7RHVQvsLNg094LLj9vqiFj3pwV3c9QZoC0yr4Xpip1UWRfDxvo
+         2b8dFbyrklnlGbQnKoY5RxqywE9/0L6qNhbf1PGSsW8Ec89c+CQWo+GECizNx5d9IHCK
+         hoY2z5oXtdiLk8lhG///unz0G40XQY0bScJVEM9gB7APWoSe1OH7xVPtotiDscaeP384
+         z7xQ==
+X-Gm-Message-State: AGi0PuZJWYxeWUfBAJ4LsiaCEUi6zaH7qVmsgZ3e54S3oIrgyoB3YUPL
+	su9QN/J6D4kOXgAZP6YWXCTFgRQ9bGQ=
+X-Google-Smtp-Source: APiQypIZAfv52qaJEQjf6LIkfeIV47Nk2hPbhTvFFt8HEf1aKoZBld6VL5O7CnuKAG3VLHs9o2h9SA==
+X-Received: by 2002:a05:600c:2297:: with SMTP id 23mr100245wmf.166.1585771949597;
+        Wed, 01 Apr 2020 13:12:29 -0700 (PDT)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from superandy.speedport.ip (p200300F07F030902931B45A4944A4AD2.dip0.t-ipconnect.de. [2003:f0:7f03:902:931b:45a4:944a:4ad2])
+        by smtp.gmail.com with ESMTPSA id j11sm3939512wmi.33.2020.04.01.13.12.28
+        for <openembedded-devel@lists.openembedded.org>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 01 Apr 2020 13:12:28 -0700 (PDT)
+From: "Andreas M?ller" <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-oe][PATCH 2/2] libp11: add UPSTREAM_CHECK_GITTAGREGEX
-Date: Wed,  1 Apr 2020 17:32:20 +0200
-Message-Id: <1585755140-23538-2-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1585755140-23538-1-git-send-email-pjtexier@koncepto.io>
-References: <1585755140-23538-1-git-send-email-pjtexier@koncepto.io>
+Subject: [PATCH 1/2] gigolo: upgrade 0.5.0 -> 0.5.1
+Date: Wed,  1 Apr 2020 22:12:16 +0200
+Message-Id: <20200401201217.11809-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.21.1
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Fixes:
+Release notes for 0.5.1
+=======================
+Fixes an annoying bug about wrong port being saved in the bookmark when
+saving it (#15455).
 
-INFO: libp11                    0.4.10          11              None e1210903291b1de9eabcad26e740a4b2fbcca692
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-oe/recipes-support/libp11/libp11_0.4.10.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-apps/gigolo/{gigolo_0.5.0.bb => gigolo_0.5.1.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-apps/gigolo/{gigolo_0.5.0.bb => gigolo_0.5.1.bb} (67%)
 
-diff --git a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb b/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
-index 655db49..7fe0640 100644
---- a/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
-+++ b/meta-oe/recipes-support/libp11/libp11_0.4.10.bb
-@@ -12,6 +12,8 @@ DEPENDS = "libtool openssl"
- SRC_URI = "git://github.com/OpenSC/libp11.git"
- SRCREV = "973d31f3f58d5549ddd8b1f822ce8f72186f9d68"
+diff --git a/meta-xfce/recipes-apps/gigolo/gigolo_0.5.0.bb b/meta-xfce/recipes-apps/gigolo/gigolo_0.5.1.bb
+similarity index 67%
+rename from meta-xfce/recipes-apps/gigolo/gigolo_0.5.0.bb
+rename to meta-xfce/recipes-apps/gigolo/gigolo_0.5.1.bb
+index 4446214f8..1233fe069 100644
+--- a/meta-xfce/recipes-apps/gigolo/gigolo_0.5.0.bb
++++ b/meta-xfce/recipes-apps/gigolo/gigolo_0.5.1.bb
+@@ -7,5 +7,5 @@ DEPENDS = "gtk+3 intltool-native xfce4-dev-tools-native"
  
-+UPSTREAM_CHECK_GITTAGREGEX = "libp11-(?P<pver>\d+(\.\d+)+)"
-+
- S = "${WORKDIR}/git"
+ inherit xfce-app
  
- inherit autotools pkgconfig
+-SRC_URI[md5sum] = "273111f5d7c26898e5ddea7b97d5dfe1"
+-SRC_URI[sha256sum] = "97a301aff012a143d0b99e7ecbb27084d3872aa203a74745e8357aab3a1880dc"
++SRC_URI[md5sum] = "94e89ad3fabba7167760004b64062f4a"
++SRC_URI[sha256sum] = "ca87badb5871e4844579704704ea9e5ede444f710a3b264c12b60b2a0e48e14e"
 -- 
-2.7.4
+2.21.1
 
