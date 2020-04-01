@@ -1,48 +1,58 @@
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
- by mx.groups.io with SMTP id smtpd.web12.1214.1585723839145484109
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+ by mx.groups.io with SMTP id smtpd.web12.1215.1585723839227884934
  for <openembedded-devel@lists.openembedded.org>;
  Tue, 31 Mar 2020 23:50:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: ovidiu.panait@windriver.com)
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: ovidiu.panait@windriver.com)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com [147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 0316obt4001622
+	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0316odaZ011745
 	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2020 23:50:37 -0700 (PDT)
+	for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2020 23:50:39 -0700 (PDT)
 Received: from otp-linux01.wrs.com (128.224.126.17) by ALA-HCB.corp.ad.wrs.com
  (147.11.189.41) with Microsoft SMTP Server id 14.3.487.0; Tue, 31 Mar 2020
- 23:50:37 -0700
+ 23:50:38 -0700
 From: "Ovidiu Panait" <ovidiu.panait@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-networking][PATCH 1/2] netkit-telnet: Use alternatives to avoid manpage conflict
-Date: Wed, 1 Apr 2020 09:49:06 +0300
-Message-ID: <20200401064907.18586-1-ovidiu.panait@windriver.com>
+Subject: [meta-networking][PATCH 2/2] tftp-hpa: Use alternatives to avoid manpage conflicts
+Date: Wed, 1 Apr 2020 09:49:07 +0300
+Message-ID: <20200401064907.18586-2-ovidiu.panait@windriver.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200401064907.18586-1-ovidiu.panait@windriver.com>
+References: <20200401064907.18586-1-ovidiu.panait@windriver.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 
-Fix the following manpage installation conflict:
- * check_data_file_clashes: Package netkit-telnet-doc wants to install file /usr/share/man/man8/telnetd.8
-   But that file is already provided by package  * inetutils-doc
+Fix the following manpage conflicts:
+ * check_data_file_clashes: Package inetutils-doc wants to install file /usr/share/man/man1/tftp.1
+	But that file is already provided by package  * tftp-hpa-doc
+ * check_data_file_clashes: Package inetutils-doc wants to install file /usr/share/man/man8/tftpd.8
+	But that file is already provided by package  * tftp-hpa-doc
 
 Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
 ---
- .../recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb         | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-index cf9934138..ffd3b48e8 100644
---- a/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-telnet/netkit-telnet_0.17.bb
-@@ -57,6 +57,9 @@ ALTERNATIVE_${PN} = "telnet"
- ALTERNATIVE_LINK_NAME[telnet] = "${bindir}/telnet"
- ALTERNATIVE_TARGET[telnet] = "${bindir}/telnet.${PN}"
+diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+index 132972b33..413950be1 100644
+--- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
++++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
+@@ -82,10 +82,15 @@ INITSCRIPT_PACKAGES = "tftp-hpa-server"
+ INITSCRIPT_NAME = "tftpd-hpa"
+ INITSCRIPT_PARAMS = "start 20 2 3 4 5 . stop 20 1 ."
  
-+ALTERNATIVE_${PN}-doc = "telnetd.8"
-+ALTERNATIVE_LINK_NAME[telnetd.8] = "${mandir}/man8/telnetd.8"
++ALTERNATIVE_${PN}-doc = "tftpd.8 tftp.1"
++ALTERNATIVE_LINK_NAME[tftpd.8] = "${mandir}/man8/tftpd.8"
++ALTERNATIVE_LINK_NAME[tftp.1] = "${mandir}/man1/tftp.1"
 +
- SRC_URI[md5sum] = "d6beabaaf53fe6e382c42ce3faa05a36"
- SRC_URI[sha256sum] = "9c80d5c7838361a328fb6b60016d503def9ce53ad3c589f3b08ff71a2bb88e00"
- FILES_${PN} += "${sbindir}/in.* ${libdir}/* ${sysconfdir}/xinetd.d/*"
+ ALTERNATIVE_${PN} = "tftp"
+ ALTERNATIVE_TARGET[tftp] = "${bindir}/tftp-hpa"
+ ALTERNATIVE_PRIORITY = "60"
+ 
++
+ SYSTEMD_PACKAGES = "tftp-hpa-server"
+ SYSTEMD_SERVICE_tftp-hpa-server = "tftpd-hpa.socket tftpd-hpa.service"
+ SYSTEMD_AUTO_ENABLE_tftp-hpa-server = "enable"
 -- 
 2.17.1
 
