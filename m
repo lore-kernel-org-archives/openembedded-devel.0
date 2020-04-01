@@ -1,55 +1,63 @@
-Received: from mail-io1-f48.google.com (mail-io1-f48.google.com [209.85.166.48])
- by mx.groups.io with SMTP id smtpd.web10.3094.1585680516596080334
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.2747.1585704785349458333
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 31 Mar 2020 11:48:36 -0700
+ Tue, 31 Mar 2020 18:33:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=taST3zIJ;
- spf=pass (domain: gmail.com, ip: 209.85.166.48, mailfrom: schnitzeltony@gmail.com)
-Received: by mail-io1-f48.google.com with SMTP id k9so22919590iov.7
-        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2020 11:48:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=9UYpF14PYTc/HVMMUE0F/h3OjRVpuVM7tBBhx85FFLI=;
-        b=taST3zIJuftrBmz68aEvOgD4ydcQUhYstMuolY2Uz2nBq7XKQf9BRVS149qxwm7cDJ
-         Rj58wUqvbCx+PDpcsgwmjVZGIT2hAA4MsysjfrDTU+kZpnl1jhZobHOBQ3ulEsPa8PO1
-         Ktctdw5pIYNUZfyTR3NIK2kq1i/Fg8q4dkiA35LMrQp4BfC+tiEMNNHoPi4o93bU9cVV
-         PeSpralquhTmYMdjm+f7elrSTFhDnSSEAk3SHbNWA0xEwpvc5H7oD4Yh3RogARBU29yJ
-         wdnVEa3gdgKwvm2Qz69vXCrUIFrFMnW4gnqoC0kNP5gUOHb8BOTfMmH6HxWbaG/B95Mv
-         tO5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=9UYpF14PYTc/HVMMUE0F/h3OjRVpuVM7tBBhx85FFLI=;
-        b=KlQzmZnFoXAfw3Z//GLmyYoz1rCI18fCtprRZpgfDSkPMe7wQHMRYx9q/FR0p1sn8J
-         c3rOH14NJN27ZMZWs0IJheeMZYK4r/rOsQ6w4CJJseYSw36+2UyrEh6AJRoFgtTzNUeh
-         iJyvZgEPNxGH3p+GayUBSbxTjhswKvzy5Jz27g7E30DpHYkJ9eW7aejrxsMPgbzZ5++n
-         2WqhpUhUXcuiYNgb5X9ycpfZVBq9DbDkWfZpVI4LRO+D45+pDKa7SEQIPtppmnhMnE5F
-         4BKhsmIWum/3SOhOAPlMr9vR79oDe/7zw26KX4VofOz8ScGCuQOIPorgPOP/HD4VvpkC
-         Leng==
-X-Gm-Message-State: ANhLgQ2xpsIiEgyugicu0s2Qy2xwF9w43ZR/wL3st11+kdsby5aQp3W9
-	4lch+WA19JrrjMOeZBLXI87Qtbwvi8WKUyRmwpI=
-X-Google-Smtp-Source: ADFU+vu+g0K7EHasTTgZisptucLr1sSXhsbN8xwZUnVDM6vzn7K5EcvzMhw072Gyf+uYumtX6jQthe9pg7RPQlbsQz4=
-X-Received: by 2002:a6b:7419:: with SMTP id s25mr16774822iog.45.1585680515970;
- Tue, 31 Mar 2020 11:48:35 -0700 (PDT)
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.72,329,1580745600"; 
+   d="scan'208";a="88306230"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 01 Apr 2020 09:33:03 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 7522649DF125
+	for <openembedded-devel@lists.openembedded.org>; Wed,  1 Apr 2020 09:22:45 +0800 (CST)
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Wed, 1 Apr 2020 09:33:01 +0800
+Received: from localhost.localdomain.localdomain (10.167.225.33) by
+ G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
+ (TLS) id 14.3.439.0; Wed, 1 Apr 2020 09:33:07 +0800
+From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+CC: Wang Mingyu <wangmy@cn.fujitsu.com>
+Subject: [oe] [meta-networking][PATCH] kea: upgrade 1.7.5 -> 1.7.6
+Date: Wed, 1 Apr 2020 02:06:39 -0700
+Message-ID: <1585732005-8348-1-git-send-email-wangmy@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-References: <20200330222616.2354-1-schnitzeltony@gmail.com> <CAMKF1sry1VWmFTZEVt_Xj6GsVetGbaYLZd8_x3=J3YTUM9m7og@mail.gmail.com>
-In-Reply-To: <CAMKF1sry1VWmFTZEVt_Xj6GsVetGbaYLZd8_x3=J3YTUM9m7og@mail.gmail.com>
-From: "Andreas M?ller" <schnitzeltony@gmail.com>
-Date: Tue, 31 Mar 2020 20:48:24 +0200
-Message-ID: <CALbNGRTqzjA=P8C0dqBEVP3PU4SuizjyBx-4k+FVfPexT+cP3Q@mail.gmail.com>
-Subject: Re: [oe] [PATCH 1/6] wxwidgets: initial add 3.1.3
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+X-Originating-IP: [10.167.225.33]
+X-yoursite-MailScanner-ID: 7522649DF125.A0044
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-On Tue, Mar 31, 2020 at 6:58 AM Khem Raj <raj.khem@gmail.com> wrote:
->
-> Fails on musl
->
-> https://errors.yoctoproject.org/Errors/Details/399768/
-Will look into...
+Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+---
+ .../recipes-connectivity/kea/{kea_1.7.5.bb => kea_1.7.6.bb}   | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/kea/{kea_1.7.5.bb => kea_1.7.6.bb} (93%)
 
-Andreas
+diff --git a/meta-networking/recipes-connectivity/kea/kea_1.7.5.bb b/meta-networking/recipes-connectivity/kea/kea_1.7.6.bb
+similarity index 93%
+rename from meta-networking/recipes-connectivity/kea/kea_1.7.5.bb
+rename to meta-networking/recipes-connectivity/kea/kea_1.7.6.bb
+index 38a256afd..51e361c58 100644
+--- a/meta-networking/recipes-connectivity/kea/kea_1.7.5.bb
++++ b/meta-networking/recipes-connectivity/kea/kea_1.7.6.bb
+@@ -14,8 +14,8 @@ SRC_URI = "\
+     file://kea-dhcp6.service \
+     file://kea-dhcp-ddns.service \
+ "
+-SRC_URI[md5sum] = "1f771e0209c9149bcf8fb91a25db03bf"
+-SRC_URI[sha256sum] = "9b89b75cd8fd71e0ad7cb32c1b996177ba617bea2d162851eed42eea739e9999"
++SRC_URI[md5sum] = "26f48997a37a670a406d5020ce64a7fb"
++SRC_URI[sha256sum] = "1da3d50e0c8e92e1aa6d66100b5afd7b93ba2c50b0a4ea114fd9dcb8be982ca9"
+ 
+ inherit autotools systemd
+ 
+-- 
+2.17.1
+
+
+
