@@ -1,77 +1,86 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.2814.1585704798832089525
+Received: from mail-wr1-f67.google.com (mail-wr1-f67.google.com [209.85.221.67])
+ by mx.groups.io with SMTP id smtpd.web12.4540.1585712052167407338
  for <openembedded-devel@lists.openembedded.org>;
- Tue, 31 Mar 2020 18:33:19 -0700
+ Tue, 31 Mar 2020 20:34:12 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: wangmy@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.72,329,1580745600"; 
-   d="scan'208";a="88306256"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 01 Apr 2020 09:33:15 +0800
-Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
-	by cn.fujitsu.com (Postfix) with ESMTP id 6349D49DF126
-	for <openembedded-devel@lists.openembedded.org>; Wed,  1 Apr 2020 09:22:59 +0800 (CST)
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.80) by
- G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Wed, 1 Apr 2020 09:33:15 +0800
-Received: from localhost.localdomain.localdomain (10.167.225.33) by
- G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
- (TLS) id 14.3.439.0; Wed, 1 Apr 2020 09:33:24 +0800
-From: "Wang Mingyu" <wangmy@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-CC: Wang Mingyu <wangmy@cn.fujitsu.com>
-Subject: [oe] [meta-oe] [PATCH] usb-modeswitch: upgrade 2.5.2 -> 2.6.0
-Date: Wed, 1 Apr 2020 02:06:45 -0700
-Message-ID: <1585732005-8348-7-git-send-email-wangmy@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1585732005-8348-1-git-send-email-wangmy@cn.fujitsu.com>
-References: <1585732005-8348-1-git-send-email-wangmy@cn.fujitsu.com>
-MIME-Version: 1.0
-X-Originating-IP: [10.167.225.33]
-X-yoursite-MailScanner-ID: 6349D49DF126.A164D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: wangmy@cn.fujitsu.com
-X-Spam-Status: No
-Content-Type: text/plain
+ dkim=pass header.i=@broadcom.com header.s=google header.b=bLkpaRgW;
+ spf=pass (domain: broadcom.com, ip: 209.85.221.67, mailfrom: scott.branden@broadcom.com)
+Received: by mail-wr1-f67.google.com with SMTP id a25so28878425wrd.0
+        for <openembedded-devel@lists.openembedded.org>; Tue, 31 Mar 2020 20:34:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=broadcom.com; s=google;
+        h=from:to:cc:subject:date:message-id;
+        bh=lJxOtDXo+iY52jd0TiCiwgSfeNX5810/dcOAp/i2xvM=;
+        b=bLkpaRgWdpZU5tQLP/8nXedJ+8Sf1nH4Zgw+x7yo5+P6OVfAyUsIOtMoMVpkArkkH1
+         dyLKdpnqvEMKyig8g6rddz9JwbDFO59POX6Rg58PiUIBC3o2i3XuUT6RnM77JUBzkjdA
+         IV4MEwFQiQdNdahtOs+XmMmNtobjXgE0c01cM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=lJxOtDXo+iY52jd0TiCiwgSfeNX5810/dcOAp/i2xvM=;
+        b=BgY5T0D/Msa6O/+/6aWEF/7z+0GXUEofi9464IDModnkyJ7RzOeCcZ15PlsSp8jqz+
+         Y68tENRPmd5/CB+eWfMg6R8EVf1paImJC3pEUivyek7NsHv7v36qKxTWXblGIvBeZ9cE
+         7NbrUgL5Cte8AiSMjawZHbIqeWEYiTKT4dAlvFePJiJlwL5E6SGxe9CrQFTwhGbXOCuw
+         /s32JssBBwknUmgZpVYXxblzf4W9MKQ0oiQvpaEiAwsTDy4t0/oMY5HCKJzYG3fiduMS
+         jv8CpF/TbIyXzobOYTDu00ZOnTghTaHwacb09Lu7WRVZQCYs4Ju+t/WV1sMQfgyTS26p
+         3ChA==
+X-Gm-Message-State: ANhLgQ1yGeECOauq0UK/3abs55qhF4ASeaJHsJbTQlesuWG0LDJEMkyg
+	GHBzJ7vJZqCqRsqjAoY0ptNbCnWWDbs2RmLf1jLmyTe3WhZoDs0lgk/tSpBefmxFV94CI9vIQvx
+	efteog30tAONn/dqxmWh7ZnnyKtHcMijfPYiZypprKwuXTNNTebrm70WW5mx/M59qADZzadUwHg
+	hLiSACXswm7d4DlwAImDFgOMeY9A==
+X-Google-Smtp-Source: ADFU+vuVamSHBGCDwWvemxpo7KHnB7IXm45EwfEy6PwxfoIksE0fLxltNk6R23oZRt1ZoQ9x3EGVhA==
+X-Received: by 2002:a5d:4ad1:: with SMTP id y17mr22697862wrs.13.1585712050110;
+        Tue, 31 Mar 2020 20:34:10 -0700 (PDT)
+Return-Path: <scott.branden@broadcom.com>
+Received: from lbrmn-lnxub113.broadcom.net ([192.19.228.250])
+        by smtp.gmail.com with ESMTPSA id q13sm1103761wrg.21.2020.03.31.20.34.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 31 Mar 2020 20:34:09 -0700 (PDT)
+From: "Scott Branden" <scott.branden@broadcom.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Scott Branden <scott.branden@broadcom.com>
+Subject: [meta-oe][PATCH] kernel-selftest: add firmware tests
+Date: Tue, 31 Mar 2020 20:33:52 -0700
+Message-Id: <20200401033352.19306-1-scott.branden@broadcom.com>
+X-Mailer: git-send-email 2.17.1
 
--License-Update:
-  the followning message is added to COPYING file:
-  The files usb_modeswitch.c, usb_modeswitch.h, usb_modeswitch.sh and
-  usb_modeswitch_dispatcher.tcl are released under the conditions of
-  the GPL 2 (or any later GPL version of your choice).
-  The file dispatcher.c is released under the BSD-2-Clause
+Add firmware tests to kernel-selftest.
 
-Signed-off-by: Wang Mingyu <wangmy@cn.fujitsu.com>
+Signed-off-by: Scott Branden <scott.branden@broadcom.com>
 ---
- .../{usb-modeswitch_2.5.2.bb => usb-modeswitch_2.6.0.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-support/usb-modeswitch/{usb-modeswitch_2.5.2.bb => usb-modeswitch_2.6.0.bb} (78%)
+ meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.5.2.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
-similarity index 78%
-rename from meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.5.2.bb
-rename to meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
-index 33e40b36b..baad34090 100644
---- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.5.2.bb
-+++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch_2.6.0.bb
-@@ -1,12 +1,12 @@
- SUMMARY = "A mode switching tool for controlling 'flip flop' (multiple device) USB gear"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=091556bd6d0154cd4c2d17a1bfc7380a"
+diff --git a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+index 299c1f28e..172767b9a 100644
+--- a/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
++++ b/meta-oe/recipes-kernel/kernel-selftest/kernel-selftest.bb
+@@ -18,7 +18,7 @@ SRC_URI += "file://run-ptest \
+ # we will append other kernel selftest in the future
+ # bpf was added in 4.10 with: https://github.com/torvalds/linux/commit/5aa5bd14c5f8660c64ceedf14a549781be47e53d
+ # if you have older kernel than that you need to remove it from PACKAGECONFIG
+-PACKAGECONFIG ??= "bpf vm"
++PACKAGECONFIG ??= "bpf firmware vm"
+ PACKAGECONFIG_remove_x86 = "bpf"
+ PACKAGECONFIG_remove_arm = "bpf"
+ # host ptrace.h is used to compile BPF target but mips ptrace.h is needed
+@@ -27,6 +27,7 @@ PACKAGECONFIG_remove_arm = "bpf"
+ PACKAGECONFIG_remove_qemumips = "bpf"
  
- DEPENDS = "libusb1"
+ PACKAGECONFIG[bpf] = ",,elfutils libcap libcap-ng rsync-native,"
++PACKAGECONFIG[firmware] = ",,libcap, bash"
+ PACKAGECONFIG[vm] = ",,libcap,libgcc bash"
  
- SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
--SRC_URI[md5sum] = "16b9a8efa1bf8fbd7d5612757eae4f26"
--SRC_URI[sha256sum] = "abffac09c87eacd78e101545967dc25af7e989745b4276756d45dbf4008a2ea6"
-+SRC_URI[md5sum] = "be73dcc84025794081a1d4d4e5a75e4c"
-+SRC_URI[sha256sum] = "c215236e6bada6e659fc195a31d611ea298a4bdb4d57a0d68c553b56585f8ba3"
+ do_patch[depends] += "virtual/kernel:do_shared_workdir"
+@@ -36,7 +37,7 @@ inherit linux-kernel-base kernel-arch ptest
+ S = "${WORKDIR}/${BP}"
  
- inherit pkgconfig systemd
+ TEST_LIST = "\
+-    ${@bb.utils.filter('PACKAGECONFIG', 'bpf vm', d)} \
++    ${@bb.utils.filter('PACKAGECONFIG', 'bpf firmware vm', d)} \
+     rtc \
+ "
  
 -- 
 2.17.1
-
-
 
