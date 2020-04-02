@@ -1,30 +1,30 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.5328.1585792067413191814
+ by mx.groups.io with SMTP id smtpd.web12.5356.1585792215279524423
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Apr 2020 18:47:47 -0700
+ Wed, 01 Apr 2020 18:50:15 -0700
 Authentication-Results: mx.groups.io;
  dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
 X-IronPort-AV: E=Sophos;i="5.72,333,1580745600"; 
-   d="scan'208";a="88363824"
+   d="scan'208";a="88363932"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 02 Apr 2020 09:47:46 +0800
+  by heian.cn.fujitsu.com with ESMTP; 02 Apr 2020 09:50:14 +0800
 Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 898B250A9974
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Apr 2020 09:37:25 +0800 (CST)
+	by cn.fujitsu.com (Postfix) with ESMTP id 121EF406AB15
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Apr 2020 09:39:52 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.35) by
  G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 2 Apr 2020 09:47:44 +0800
+ (TLS) id 15.0.1497.2; Thu, 2 Apr 2020 09:50:10 +0800
 From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-perl][PATCH] libcgi-perl: upgrade 4.44 -> 4.46
-Date: Thu, 2 Apr 2020 18:47:40 +0800
-Message-ID: <1585824460-15814-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Subject: [oe] [meta-perl][PATCH] libextutils-cppguess-perl: upgrade 0.20 -> 0.21
+Date: Thu, 2 Apr 2020 18:50:07 +0800
+Message-ID: <1585824607-15906-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.35]
 X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
  G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: 898B250A9974.A611A
+X-yoursite-MailScanner-ID: 121EF406AB15.A8698
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
@@ -32,27 +32,27 @@ Content-Type: text/plain
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../libcgi/{libcgi-perl_4.44.bb => libcgi-perl_4.46.bb}       | 4 ++--
+ ...ppguess-perl_0.20.bb => libextutils-cppguess-perl_0.21.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libcgi/{libcgi-perl_4.44.bb => libcgi-perl_4.46.bb} (90%)
+ rename meta-perl/recipes-perl/libextutils/{libextutils-cppguess-perl_0.20.bb => libextutils-cppguess-perl_0.21.bb} (89%)
 
-diff --git a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.44.bb b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.46.bb
-similarity index 90%
-rename from meta-perl/recipes-perl/libcgi/libcgi-perl_4.44.bb
-rename to meta-perl/recipes-perl/libcgi/libcgi-perl_4.46.bb
-index cde187d8b..33ec73770 100644
---- a/meta-perl/recipes-perl/libcgi/libcgi-perl_4.44.bb
-+++ b/meta-perl/recipes-perl/libcgi/libcgi-perl_4.46.bb
-@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=415fc49abed2728f9480cd32c8d67beb"
+diff --git a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.20.bb b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.21.bb
+similarity index 89%
+rename from meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.20.bb
+rename to meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.21.bb
+index 594899b07..a11b4d2db 100644
+--- a/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.20.bb
++++ b/meta-perl/recipes-perl/libextutils/libextutils-cppguess-perl_0.21.bb
+@@ -12,8 +12,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://README;beginline=81;endline=84;md5=84c0390b90ea8c6702ce659b67bed699"
  
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/L/LE/LEEJO/CGI-${PV}.tar.gz"
+ SRC_URI = "${CPAN_MIRROR}/authors/id/E/ET/ETJ/ExtUtils-CppGuess-${PV}.tar.gz"
+-SRC_URI[md5sum] = "d6ddd5568c84f4c7b11b996b65f2ea3b"
+-SRC_URI[sha256sum] = "12bf914708885265b5c3b0b8bfb0a9294cf132d5ca30d54bda0e00335fb43e61"
++SRC_URI[md5sum] = "62bdf731bcbe988d07486836e11585f7"
++SRC_URI[sha256sum] = "ff629178321a1e591b83f809712593eae4408a413aa448654bce59b156f24153"
  
--SRC_URI[md5sum] = "2cbe560fdadbb8b9237744e39bbfc3eb"
--SRC_URI[sha256sum] = "12435fb7ebd3585c47b6d60ee4f5c7d6a7c114a2827d2b5acf3d62aa9fcf1208"
-+SRC_URI[md5sum] = "c2ae443de78a69d85e3931c8c29596d1"
-+SRC_URI[sha256sum] = "788998ddc33ca382e5d7ce72c6c0ea1d8366c93067371fe2f14239ddea2e4298"
- 
- S = "${WORKDIR}/CGI-${PV}"
+ S = "${WORKDIR}/ExtUtils-CppGuess-${PV}"
  
 -- 
 2.17.1
