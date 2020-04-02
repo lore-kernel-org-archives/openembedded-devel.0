@@ -1,184 +1,301 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
- by mx.groups.io with SMTP id smtpd.web10.7713.1585836799690906497
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+ by mx.groups.io with SMTP id smtpd.web11.139.1585847381341552226
  for <Openembedded-devel@lists.openembedded.org>;
- Thu, 02 Apr 2020 07:13:19 -0700
+ Thu, 02 Apr 2020 10:09:41 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=dse/8wVy;
- spf=pass (domain: gmail.com, ip: 209.85.214.180, mailfrom: akuster808@gmail.com)
-Received: by mail-pl1-f180.google.com with SMTP id g2so1387855plo.3
-        for <Openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2020 07:13:19 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=Q/wKVN7+;
+ spf=pass (domain: gmail.com, ip: 209.85.222.172, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f172.google.com with SMTP id l25so4783835qki.7
+        for <Openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2020 10:09:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:references:from:autocrypt:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language;
-        bh=YyUoN4CRIY7LUgiQKxegF710/guSzx3gpJLtMzHoKqk=;
-        b=dse/8wVydbizUNmq8AKtrlD0sWhyfsEVfLg8wJnJbQfRjgfWr2iPIMBIAUKK6yx5jN
-         cXvRYipfHR9iWOse93ZaajSqpCx/Y1U+bDGeuKaJbtE1rbiEIBC1Suq2B0QC27GT6k6O
-         jg0c+egfkx7V+aWShIyGAzNq7sF/0Cubo5UUcb4nMQOPULYjmlgx8KUjZNktm2H2N357
-         Zj3DzRDLE3LpnkA4EbAe0tF82ZVIzrNOyClCTDvEEBEpKZ/DqATph1azx0Zew7b+IWeb
-         KFBhwHA1mnpsCQ8WBVwni5oEBvwWsCT5cRXGqGswnlQtDG/5gO5ZG2c+uXqIVRl8oED5
-         heKw==
+        h=mime-version:from:date:message-id:subject:to;
+        bh=8HY+1EFjtkU97fRkyoHBg55HPwlusO/HSVYHLJNg5oM=;
+        b=Q/wKVN7+lOjzhqfMI0IS6v4QboshRmBjCYoEqUx3xjOHLsBLQoGL0jvSks/gC3fAgz
+         Od7TuebpfIN7cCcWTvMZjfKo2cOu/GhU+NuDEj3VYYyWr7aNjJv7dLziqinnWol49xBN
+         k94Tq7FyjIGBrx5B8b7rw2cIcK6e5/rHUgDS5DEcK+4Ki8KojLggg+iB8lepkwB6rPZZ
+         PLeKTe3SsHB8MseY5CT9Vh//c6DwbdhWuY9u2kEr6kFZQKyX0UA7/vDw24yIylkrXC/o
+         J0qhLky3Jj0NYGP+jhKUMgxJoO1SIL03UUajYmTeKvDpgDY4FPVzlMn24RmQzVCL3kY8
+         kIzg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:references:from:autocrypt:message-id
-         :date:user-agent:mime-version:in-reply-to:content-language;
-        bh=YyUoN4CRIY7LUgiQKxegF710/guSzx3gpJLtMzHoKqk=;
-        b=dEz0Y53wDpK7NABl9p69zdnaZV6A0NDidsMQToj2kruMFgJVYo1c/+8++1JoEYS1xe
-         8tMCw5eWL4/J5ee2xvPSGAGfk99nFt6545nb8YqcBAbYi7L597jknx+Y9xktuxNFR/1x
-         8fDHEVt4r2I4xGqxfkINUWwPezkBYI2ptYgoJcU05Ddw++Zjy97TX/ggcZKC/9BnIgId
-         TxD8MuZQl1wgZVpBQX2MjoBTVyx6s/J2GkhSOtwJkp26s1RzN/zCNpET/FpskoEH9zH8
-         xUbAWL+cc9TtYVakTG0sODAE09BD8MVEg/HSuHn4a7c7riCABQbVld8VDPoOCT2ghopM
-         RH9g==
-X-Gm-Message-State: AGi0PubA5Xmrau2fFpDzoyaJWFFaTq61q4XJJKM7QheN2hWU5PTgrfle
-	tS7Zg3SFGPJYLhE97OT4Yzj69opKQ9k=
-X-Google-Smtp-Source: APiQypL/kIXB7uRexfGt0KriB5AUZZbRyJEkjbUZat6jfkMoGiiLDCjv03T6gSV2VW776uGU4uRw1Q==
-X-Received: by 2002:a17:902:9a93:: with SMTP id w19mr3107559plp.277.1585836798905;
-        Thu, 02 Apr 2020 07:13:18 -0700 (PDT)
-Return-Path: <akuster808@gmail.com>
-Received: from ?IPv6:2601:202:4180:a5c0:31b6:f353:d938:e1a9? ([2601:202:4180:a5c0:31b6:f353:d938:e1a9])
-        by smtp.gmail.com with ESMTPSA id z30sm3820525pfq.84.2020.04.02.07.13.17
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 02 Apr 2020 07:13:18 -0700 (PDT)
-Subject: Re: [oe] [meta-python] Call to arms, help wanted
-To: Tim Orling <ticotimo@gmail.com>,
- "openembedded-devel@lists.openembedded.org"
- <Openembedded-devel@lists.openembedded.org>
-References: <CANx9H-AEEPHqpeNXZhkn_154xsysdsFq+wbjc71nCkWAz0=Jww@mail.gmail.com>
-From: "akuster" <akuster808@gmail.com>
-Autocrypt: addr=akuster808@gmail.com; prefer-encrypt=mutual; keydata=
- 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
- 8CS2NxU=
-Message-ID: <73e98851-d637-5071-c960-ec11fbdb59dd@gmail.com>
-Date: Thu, 2 Apr 2020 07:13:17 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=8HY+1EFjtkU97fRkyoHBg55HPwlusO/HSVYHLJNg5oM=;
+        b=J/s3a58ENYmAAi9PMYNGdpZv91HKdQ8tXeSnQEo2u0OTXNF6nmoKdINZ6Tlv0tidAw
+         uvYIJNFasCIwIKLmuOt0NJPqf9zhPKW/5r6Xt9E0gQ9ac1kitIRleGh6jbp4OhqLbPJd
+         iWLc3JfSUSeJy1yNqxJ8LpuDnfHUmC243FR5UzpQ5aVtP0cI8XuAbbPY33+UmZwRJNQp
+         knrSWD35nA0lnwvRL6QQnJ11toTpUiZ5N6RQzzyj8T5TrYX5fSefywVL2FymhC9dhcy5
+         lljE5B5UmmGzRt2eEqBwr6X2sZ6gNRctHkX44wYC13T6qo4JGkZazIXGj+MibnKyPguR
+         IF6A==
+X-Gm-Message-State: AGi0PuaDJTX/4gOKg1xJvw4m4S1WjgrN027A3JqMtgswBACDjE26Q3sX
+	QvHDkbkOeBnmLpRae2X24Fw55vXy68g4agqji95jSMQsMT8=
+X-Google-Smtp-Source: APiQypKrfC/vMhf+xIFbXraed6AAPlphmFaBToG69QQJd8llEuEM6dSns9VqExfpUYgNuLCCsOQfpsPOOM8w4fv+HMs=
+X-Received: by 2002:a37:8d81:: with SMTP id p123mr4329500qkd.17.1585847379786;
+ Thu, 02 Apr 2020 10:09:39 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CANx9H-AEEPHqpeNXZhkn_154xsysdsFq+wbjc71nCkWAz0=Jww@mail.gmail.com>
-Content-Type: multipart/alternative;
- boundary="------------5DD35681A6CDC27A77ABA157"
-Content-Language: en-US
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Thu, 2 Apr 2020 10:09:13 -0700
+Message-ID: <CAMKF1sp5NP2VmydNzESpWaH7VJTt-wdtVNDksK6Uwqfkt1rDbw@mail.gmail.com>
+Subject: State of OE World - 2020-04-02
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
---------------5DD35681A6CDC27A77ABA157
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+http://www.openembedded.org/wiki/Bitbake_World_Status
+
+== Failed tasks 2020-04-02 ==
+
+INFO: jenkins-job.sh-1.8.46 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.report.20200402_163251.log
+
+=== common (0) ===
+
+=== common-x86 (0) ===
+
+=== qemuarm (0) ===
+
+=== qemuarm64 (0) ===
+
+=== qemux86 (0) ===
+
+=== qemux86_64 (0) ===
+
+=== Number of failed tasks (0) ===
+{| class=wikitable
+|-
+|| qemuarm || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.world.qemuarm.20200401_232948.log
+||
+|-
+|| qemuarm64 || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.world.qemuarm64.20200402_062944.log
+||
+|-
+|| qemux86 || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.world.qemux86.20200402_062946.log
+||
+|-
+|| qemux86_64 || 0 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.world.qemux86-64.20200402_062944.log
+||
+|}
+
+=== PNBLACKLISTs (20) ===
 
 
-Why did you refer to me in your subject ; )
-
-- Arm
-
-On 4/1/20 9:25 PM, Tim Orling wrote:
-> Now that python2 support has been dropped, we have no need to maintain
-> the .inc and .bb files. And in fact, this makes upgrades with devtool
-> more difficult than it need be.
->
-> Please help the layer prepare for the dunfell Yocto Project 3.1
-> release by sending patches to merge the .inc and .bb files.
->
-> If you are upgrading a recipe in meta-python, please use that
-> opportunity to also get rid of the .inc files.
->
-> We have a limited window before stable release branching will occur,
-> at which point we will all have to live with the state of things as
-> they are.
->
-> Regards,
->
-> --Tim
->
-> 
+sources/meta-openembedded:
+    * meta-networking/recipes-netkit/netkit-rusers/netkit-rusers_0.17.bb:PNBLACKLIST[netkit-rusers]
+= "Fails to build rup.c:51:10: fatal error: rstat.h: No such file or
+directory"
+    * meta-networking/recipes-support/drbd/drbd_9.0.19-1.bb:PNBLACKLIST[drbd]
+= "Kernel module Needs forward porting to kernel 5.2+"
+    * meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb:PNBLACKLIST[lowpan-tools]
+= "WARNING these tools are deprecated! Use wpan-tools instead"
+    * meta-oe/recipes-devtools/dnf-plugin-tui/dnf-plugin-tui_git.bb:PNBLACKLIST[dnf-plugin-tui]
+?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does
+not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
+    * meta-oe/recipes-devtools/nanopb/nanopb_0.4.0.bb:PNBLACKLIST[nanopb]
+= "Needs forward porting to use python3"
+    * meta-oe/recipes-extended/socketcan/can-isotp_git.bb:PNBLACKLIST[can-isotp]
+= "Kernel module Needs forward porting to kernel 5.2+"
+    * meta-oe/recipes-graphics/dnfdragora/dnfdragora_git.bb:PNBLACKLIST[dnfdragora]
+?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does
+not build correctly without package_rpm in PACKAGE_CLASSES', d)}"
+    * meta-oe/recipes-kernel/bpftool/bpftool.bb:PNBLACKLIST[bpftool] =
+"Needs forward porting to kernel 5.2+"
 
 
---------------5DD35681A6CDC27A77ABA157
-Content-Type: text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
+sources/meta-yoe:
+    * conf/distro/yoe.inc:PNBLACKLIST[build-appliance-image] = "tries
+to include whole downloads directory in /home/builder/poky :/"
+    * conf/distro/yoe.inc:PNBLACKLIST[smartrefrigerator] = "Needs
+porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[qmlbrowser] = "Needs porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[minehunt] = "Needs porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[homeautomation] = "Needs porting
+to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[samegame] = "Needs porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[applicationlauncher] = "Needs
+porting to QT > 5.6"
+    * conf/distro/yoe.inc:PNBLACKLIST[spacetouch] = "Needs porting to
+libplanes 1.0"
+    * conf/distro/yoe.inc:PNBLACKLIST[qtviewplanes] = "Needs porting
+to libplanes 1.0"
+    * conf/distro/yoe.inc:PNBLACKLIST[egt-thermostat] = "Needs porting
+to egt 0.8.2+"
 
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  </head>
-  <body>
-    <br>
-    Why did you refer to me in your subject ; )<br>
-    <br>
-    - Arm<br>
-    <br>
-    <div class="moz-cite-prefix">On 4/1/20 9:25 PM, Tim Orling wrote:<br>
-    </div>
-    <blockquote type="cite"
-cite="mid:CANx9H-AEEPHqpeNXZhkn_154xsysdsFq+wbjc71nCkWAz0=Jww@mail.gmail.com">
-      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-      <div dir="ltr">Now that python2 support has been dropped, we have
-        no need to maintain the .inc and .bb files. And in fact, this
-        makes upgrades with devtool more difficult than it need be.
-        <div><br>
-        </div>
-        <div>Please help the layer prepare for the dunfell Yocto Project
-          3.1 release by sending patches to merge the .inc and
-          .bb files.</div>
-        <div><br>
-        </div>
-        <div>If you are upgrading a recipe in meta-python, please use
-          that opportunity to also get rid of the .inc files.</div>
-        <div><br>
-        </div>
-        <div>We have a limited window before stable release branching
-          will occur, at which point we will all have to live with the
-          state of things as they are.</div>
-        <div><br>
-        </div>
-        <div>Regards,</div>
-        <div><br>
-        </div>
-        <div>--Tim</div>
-      </div>
-      <br>
-      <fieldset class="mimeAttachmentHeader"></fieldset>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
 
---------------5DD35681A6CDC27A77ABA157--
+sources/openembedded-core:
+    * meta/recipes-devtools/dnf/dnf_4.2.2.bb:PNBLACKLIST[dnf] ?=
+"${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'does not
+build without package_rpm in PACKAGE_CLASSES due disabled rpm support
+in libsolv', d)}"
+    * meta/recipes-devtools/libdnf/libdnf_0.28.1.bb:PNBLACKLIST[libdnf]
+?= "${@bb.utils.contains('PACKAGE_CLASSES', 'package_rpm', '', 'Does
+not build without package_rpm in PACKAGE_CLASSES due disabled rpm
+support in libsolv', d)}"
+
+
+conf/local.conf:
+    * PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need
+to be tested so much"
+    * PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to
+be tested so much"
+    * PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to
+be tested so much"
+    * PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need
+to be tested so much"
+    * PNBLACKLIST[build-appliance-image] = "tries to include whole
+downloads directory in /home/builder/poky :/"
+
+=== QA issues (0) ===
+{| class=wikitable
+!| Count ||Issue
+|-
+||0 ||already-stripped
+|-
+||0 ||build-deps
+|-
+||0 ||compile-host-path
+|-
+||0 ||file-rdeps
+|-
+||0 ||host-user-contaminated
+|-
+||0 ||installed-vs-shipped
+|-
+||0 ||invalid-pkgconfig
+|-
+||0 ||ldflags
+|-
+||0 ||libdir
+|-
+||0 ||pkgname
+|-
+||0 ||qa_pseudo
+|-
+||0 ||symlink-to-sysroot
+|-
+||0 ||textrel
+|-
+||0 ||unknown-configure-option
+|-
+||0 ||version-going-backwards
+|}
+
+
+
+=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/dunfell/log.signatures.20200402_063259.log
+
+No issues detected
+
+
+QA issues by type:
+count: 0 issue: already-stripped
+
+
+count: 0 issue: libdir
+
+
+count: 0 issue: textrel
+
+
+count: 0 issue: build-deps
+
+
+count: 0 issue: file-rdeps
+
+
+count: 0 issue: version-going-backwards
+
+
+count: 0 issue: host-user-contaminated
+
+
+count: 0 issue: installed-vs-shipped
+
+
+count: 0 issue: unknown-configure-option
+
+
+count: 0 issue: symlink-to-sysroot
+
+
+count: 0 issue: invalid-pkgconfig
+
+
+count: 0 issue: pkgname
+
+
+count: 0 issue: ldflags
+
+
+count: 0 issue: compile-host-path
+
+
+count: 0 issue: qa_pseudo
+
+
+
+This git log matches with the metadata as seen by qemuarm build.
+In some cases qemux86 and qemux86-64 builds are built with slightly
+different metadata, you can see the exact version near the top of each
+log.world.qemu* files linked from the report
+~/oe/world/yoe ~/oe/world/yoe
+
+== Tested changes (not included in master yet) - bitbake ==
+latest upstream commit:
+5bd29d44 toaster: fix for import build directory with var refs in BBLAYERS
+not included in master yet:
+9a5dd1be fetch2: Fix urldata_cache key issues
+
+== Tested changes (not included in master yet) - openembedded-core ==
+latest upstream commit:
+38e3d5bd3d scripts/oe-buildenv-internal: Add pointer to
+scripts/install-buildtools
+not included in master yet:
+f12d1d22fc runit: Add runit and related recipes
+d01fb788e3 qemux86: Add identical qemux86copy variant for tests
+010b1f4802 qemuppc64: Add a QEMU machine definition for ppc64
+60048b9a77 linux-yocto: Add powerpc64le support
+82116820ad report-error: Allow to upload reports automatically
+9dc108edf5 report-error.bbclass: replace angle brackets with &lt; and &gt;
+f83cc1b000 lto.inc: Add global LTO distro policy file
+7e156da927 gstreamer1.0-plugins-good: Fix build when egl is enabled
+but no x11/wayland
+0b7fc6c314 binutils: Do not build gold linker on mips/glibc
+
+== Tested changes (not included in master yet) - meta-openembedded ==
+latest upstream commit:
+a6e846dad libgpiod: update v1.4.2 -> v1.4.3
+not included in master yet:
+7810ed60e openzone: Package icons
+1e2da42fa kea: upgrade 1.7.5 -> 1.7.6
+0ca71a262 strongswan: upgrade 5.8.2 -> 5.8.4
+b5c694db6 gsoap: update 2.8.99 -> 2.8.100
+a94b7befe kpatch: upgrade 0.9.0 -> 0.9.1
+efdb95f70 libdvdread: upgrade 6.0.2 -> 6.1.0
+28fe5881c usb-modeswitch-data: upgrade 20170806 -> 20191128
+10f72cb1f usb-modeswitch: upgrade 2.5.2 -> 2.6.0
+a3df40b1b kernel-selftest: add firmware tests
+31da4a2cb kernel-selftest: only emit warning on clang if bpf is built
+ffc0878a7 netkit-telnet: Use alternatives to avoid manpage conflict
+6c44a5ebe tftp-hpa: Use alternatives to avoid manpage conflicts
+8263131bb python3-parallax: add new recipe
+207d738db poco: add UPSTREAM_CHECK_GITTAGREGEX
+ec1e92937 libp11: add UPSTREAM_CHECK_GITTAGREGEX
+ed4d7e291 XXX: Add DRONE CI support
+
+== Tested changes (not included in master yet) - meta-qt5 ==
+latest upstream commit:
+b88c292 qtquick3d: Fix branch for fetching assimp submodule
+not included in master yet:
+
+== Tested changes (not included in master yet) - meta-browser ==
+latest upstream commit:
+4642816 layer.conf: Mark layer 3.1 release compatible
+not included in master yet:
+f2b1949 chromium: Fix build on 32bit arches with 64bit time_t
+fab5f62 chromium: Fix build with clang10/gcc10
+~/oe/world/yoe
