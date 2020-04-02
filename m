@@ -1,61 +1,81 @@
 Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web11.5428.1585792269990544945
+ by mx.groups.io with SMTP id smtpd.web11.5810.1585794005465642611
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Apr 2020 18:51:10 -0700
+ Wed, 01 Apr 2020 19:20:05 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.72,333,1580745600"; 
-   d="scan'208";a="88363972"
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.72,334,1580745600"; 
+   d="scan'208";a="88365633"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 02 Apr 2020 09:51:09 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5866E50A9999
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Apr 2020 09:40:50 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.35) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 2 Apr 2020 09:51:08 +0800
-From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
+  by heian.cn.fujitsu.com with ESMTP; 02 Apr 2020 10:20:03 +0800
+Received: from G08CNEXMBPEKD04.g08.fujitsu.local (unknown [10.167.33.201])
+	by cn.fujitsu.com (Postfix) with ESMTP id 202F6406AB15
+	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Apr 2020 10:09:42 +0800 (CST)
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.85) by
+ G08CNEXMBPEKD04.g08.fujitsu.local (10.167.33.201) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Thu, 2 Apr 2020 10:20:00 +0800
+Received: from localhost.local (10.167.225.81) by
+ G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
+ (TLS) id 14.3.439.0; Thu, 2 Apr 2020 10:20:00 +0800
+From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-perl][PATCH] libencode-perl: upgrade 3.02 -> 3.05
-Date: Thu, 2 Apr 2020 18:51:05 +0800
-Message-ID: <1585824665-15963-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+Subject: [oe] [meta-python] [PATCH] python3-parse: Enable ptest
+Date: Thu, 2 Apr 2020 10:22:31 +0800
+Message-ID: <20200402022231.29910-1-zangrc.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.35]
-X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
-X-yoursite-MailScanner-ID: 5866E50A9999.A70E6
+X-Originating-IP: [10.167.225.81]
+X-yoursite-MailScanner-ID: 202F6406AB15.A667C
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
 X-Spam-Status: No
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
 ---
- .../{libencode-perl_3.02.bb => libencode-perl_3.05.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libencode/{libencode-perl_3.02.bb => libencode-perl_3.05.bb} (95%)
+ .../recipes-devtools/python/python-parse.inc       | 14 +++++++++++++-
+ .../python/python3-parse/run-ptest                 |  2 ++
+ 2 files changed, 15 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-parse/run-ptest
 
-diff --git a/meta-perl/recipes-perl/libencode/libencode-perl_3.02.bb b/meta-perl/recipes-perl/libencode/libencode-perl_3.05.bb
-similarity index 95%
-rename from meta-perl/recipes-perl/libencode/libencode-perl_3.02.bb
-rename to meta-perl/recipes-perl/libencode/libencode-perl_3.05.bb
-index b32bc023e..62430e91f 100644
---- a/meta-perl/recipes-perl/libencode/libencode-perl_3.02.bb
-+++ b/meta-perl/recipes-perl/libencode/libencode-perl_3.05.bb
-@@ -15,8 +15,8 @@ LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://META.json;beginline=8;endline=10;md5=b12e3be1e17a7e99ca4f429ff32c28b5"
+diff --git a/meta-python/recipes-devtools/python/python-parse.inc b/meta-python/recipes-devtools/python/python-parse.inc
+index adae26129..ecfd67172 100644
+--- a/meta-python/recipes-devtools/python/python-parse.inc
++++ b/meta-python/recipes-devtools/python/python-parse.inc
+@@ -6,9 +6,21 @@ LIC_FILES_CHKSUM = "file://parse.py;beginline=1325;endline=1345;md5=3d987b2e7388
+ SRC_URI[md5sum] = "a5aa82b2b8b4d733d227e3c99d7d01b4"
+ SRC_URI[sha256sum] = "a6d4e2c2f1fbde6717d28084a191a052950f758c0cbd83805357e6575c2b95c0"
  
- SRC_URI = "${CPAN_MIRROR}/authors/id/D/DA/DANKOGAI/Encode-${PV}.tar.gz"
--SRC_URI[md5sum] = "4eb07ba6db02d5b982316e1dd05f68bd"
--SRC_URI[sha256sum] = "5865be4951870f62f43722818d076d7724306c75c8f268346b282351cbc820a8"
-+SRC_URI[md5sum] = "137aef00bfc3d5cb97096ad985d3153a"
-+SRC_URI[sha256sum] = "e0f51e03cd787a3e26026503e806afdc03f3823ae3551c711a9b04ad901a8794"
+-inherit pypi
++inherit pypi ptest
  
- UPSTREAM_CHECK_REGEX = "Encode\-(?P<pver>(\d+\.\d+))(?!_\d+).tar"
- 
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-datetime \
+     ${PYTHON_PN}-logging \
+     "
++
++SRC_URI += " \
++	file://run-ptest \
++"
++
++RDEPENDS_${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
++	cp -f ${S}/test_parse.py ${D}${PTEST_PATH}/
++}
+diff --git a/meta-python/recipes-devtools/python/python3-parse/run-ptest b/meta-python/recipes-devtools/python/python3-parse/run-ptest
+new file mode 100644
+index 000000000..40c284799
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-parse/run-ptest
+@@ -0,0 +1,2 @@
++#!/bin/sh
++pytest
 -- 
-2.17.1
+2.20.1
 
 
 
