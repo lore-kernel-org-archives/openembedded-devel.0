@@ -1,80 +1,69 @@
-Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
- by mx.groups.io with SMTP id smtpd.web10.5778.1585794035850840816
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+ by mx.groups.io with SMTP id smtpd.web12.6693.1585798331638775722
  for <openembedded-devel@lists.openembedded.org>;
- Wed, 01 Apr 2020 19:20:36 -0700
+ Wed, 01 Apr 2020 20:32:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zangrc.fnst@cn.fujitsu.com)
-X-IronPort-AV: E=Sophos;i="5.72,334,1580745600"; 
-   d="scan'208";a="88365661"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-  by heian.cn.fujitsu.com with ESMTP; 02 Apr 2020 10:20:35 +0800
-Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
-	by cn.fujitsu.com (Postfix) with ESMTP id D973450A9999
-	for <openembedded-devel@lists.openembedded.org>; Thu,  2 Apr 2020 10:10:13 +0800 (CST)
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.85) by
- G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
- (TLS) id 15.0.1497.2; Thu, 2 Apr 2020 10:20:32 +0800
-Received: from localhost.local (10.167.225.81) by
- G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP Server
- (TLS) id 14.3.439.0; Thu, 2 Apr 2020 10:20:32 +0800
-From: "zangrc" <zangrc.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Subject: [oe] [meta-python] [PATCH] python3-parse-type: Enable ptest
-Date: Thu, 2 Apr 2020 10:23:03 +0800
-Message-ID: <20200402022303.29984-1-zangrc.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.20.1
+ dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.1.11, mailfrom: matthew.zeng@windriver.com)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.2) with ESMTPS id 0323W8kC007411
+	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
+	Wed, 1 Apr 2020 20:32:08 -0700 (PDT)
+Received: from mt-manjaro (128.224.21.26) by ALA-HCA.corp.ad.wrs.com
+ (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Wed, 1 Apr
+ 2020 20:32:07 -0700
+References: <87o8sbf8e4.fsf@windriver.com> <87k12zeyre.fsf@windriver.com>
+ <4bb66aea-66e2-7810-4986-f3ea63ed7992@gmail.com>
+User-agent: mu4e 1.2.0; emacs 28.0.50
+From: "Matthew" <matthew.zeng@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+CC: Matthew <matthew.zeng@windriver.com>,
+        <openembedded-devel@lists.openembedded.org>
+Subject: Re: [oe] Regarding poppler auto PACKAGECONFIG when qt5-layer exists
+Message-ID: <87v9mipo0t.fsf@windriver.com>
+In-Reply-To: <4bb66aea-66e2-7810-4986-f3ea63ed7992@gmail.com>
+Date: Wed, 1 Apr 2020 23:32:05 -0400
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.81]
-X-yoursite-MailScanner-ID: D973450A9999.A8B39
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zangrc.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Content-Transfer-Encoding: 8bit
+X-Originating-IP: [128.224.21.26]
 Content-Type: text/plain
 
-Signed-off-by: Zang Ruochen <zangrc.fnst@cn.fujitsu.com>
----
- .../recipes-devtools/python/python-parse-type.inc | 15 ++++++++++++++-
- .../python/python3-parse-type/run-ptest           |  3 +++
- 2 files changed, 17 insertions(+), 1 deletion(-)
- create mode 100644 meta-python/recipes-devtools/python/python3-parse-type/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python-parse-type.inc b/meta-python/recipes-devtools/python/python-parse-type.inc
-index 4549ec98b..147ea6443 100644
---- a/meta-python/recipes-devtools/python/python-parse-type.inc
-+++ b/meta-python/recipes-devtools/python/python-parse-type.inc
-@@ -7,6 +7,19 @@ SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
- SRC_URI[sha256sum] = "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
- 
- PYPI_PACKAGE = "parse_type"
--inherit pypi
-+inherit pypi ptest
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-parse"
-+
-+SRC_URI += " \
-+	file://run-ptest \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+	${PYTHON_PN}-pytest \
-+"
-+
-+do_install_ptest() {
-+	install -d ${D}${PTEST_PATH}/tests
-+	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-diff --git a/meta-python/recipes-devtools/python/python3-parse-type/run-ptest b/meta-python/recipes-devtools/python/python3-parse-type/run-ptest
-new file mode 100644
-index 000000000..5cec71169
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-parse-type/run-ptest
-@@ -0,0 +1,3 @@
-+#!/bin/sh
-+
-+pytest
--- 
-2.20.1
+Khem Raj <raj.khem@gmail.com> writes:
+
+> On 4/1/20 1:28 PM, Matthew wrote:
+>> Hello,
+>> In meta-oe/recipes-support/poppler/poppler_0.85.0.bb line 17, there
+>> is the line
+>>      PACKAGECONFIG ??= "jpeg openjpeg png tiff nss
+>> ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5', '',
+>> d)}"
+>> Let's say I add meta-qt5 to bblayers.conf, but I don't plan to use
+>> it immediately in a build. Therefore I haven't make any additional
+>> change to local.conf.
+>> However I will be receiving the following error when starting a
+>> build:
+>>      WARNING: qtbase is not whitelisted, figuring out PNWHITELIST...
+>>      ERROR: Nothing PROVIDES 'qtbase' (but .../meta-openembedded/meta-oe/recipes-support/poppler/poppler_0.85.0.bb DEPENDS on or otherwise requires it)
+>> because PACKAGECONFIG is changed so it assumes I'll be using qt5. Is
+>> this reasonable?
+>>
+>
+> Yeah I think here the choice is dynamic, what happens if you add a
+> bbappend where you do PACKAGECONFIG_remove = "qt5" does that work ?
+
+Haven't test specifically, but this should work.
+
+However I personally don't think it is reasonable to add a PACKAGECONFIG_remove line, or any line in local.conf for a layer that I don't plan to use immediately.
+The layer is added to bblayers.conf because I can use it whenever I feel necessary for my build, but I don't think anything should be triggered based on bblayers.conf, it creates more confusion.
+
+Matthew
+
+>
+>> --
+>> Mingde (Matthew) Zeng
+>>
+>> 
+>>
 
 
-
+--
+Mingde (Matthew) Zeng
