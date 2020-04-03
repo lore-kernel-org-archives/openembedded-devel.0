@@ -1,198 +1,198 @@
-Received: from mail-io1-f67.google.com (mail-io1-f67.google.com [209.85.166.67])
- by mx.groups.io with SMTP id smtpd.web10.1160.1585935058635155351
+Received: from mail-io1-f66.google.com (mail-io1-f66.google.com [209.85.166.66])
+ by mx.groups.io with SMTP id smtpd.web12.1151.1585935168864099586
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Apr 2020 10:30:58 -0700
+ Fri, 03 Apr 2020 10:32:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=cQeY3MfM;
- spf=pass (domain: gmail.com, ip: 209.85.166.67, mailfrom: ticotimo@gmail.com)
-Received: by mail-io1-f67.google.com with SMTP id m15so8353047iob.5
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2020 10:30:58 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=iJdjWXwD;
+ spf=pass (domain: gmail.com, ip: 209.85.166.66, mailfrom: ticotimo@gmail.com)
+Received: by mail-io1-f66.google.com with SMTP id o127so8408526iof.0
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2020 10:32:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=v5Qvz9aFygHFihQxwKK2dBw+bTDGAIuzLOpgo7W9Qw0=;
-        b=cQeY3MfMCPFoASCevGQZDFEGj6c0gD0b8T0Z8Nhre9VUo2bCnogJGZ/PXiTiP1FZaQ
-         lWkKEsgCwQqhSnJpFsowOtipRK/ZhBB6iAqtUzzSbdBujVfkh+4xYIE7dXxKYmCkhdZa
-         2HTVluYH2xE50B9x3Id1DCIPTEEIl6KvqYX2E0dDC8W+knuMqhc1r6lK5gKHk16/h6Uz
-         eWpYgGcByR70R9mNcOQCH8a2kSivf6NVUCt5UoSQCu6g3gnm5vpdOuN0OaP7f52ImEr9
-         bdRqX8f8gVHRLz1BIJOb30+vQYWtQe9ZiMtVbD4wvkWjsntPCgzy2dMwN9jRWcx2IUcK
-         iulg==
+        bh=tTgiRBeQs2STBcVZobP8nmMUoHDziKCK+ntwmXEj9Hc=;
+        b=iJdjWXwDY/u2Rap+b+oLF0mKrtUp4e+qheN2QCAhCNjgaJHdyfxQKk+7pb+jbolm0F
+         hc78Vi703dKdDei/k4QCk4b4St3ARCbvlZ1oUGz2Va92WERqV3EoQGDLuDjUsEYb1b8y
+         34CPVjlBbZxcWdRM2wmVzUJDJq7ETGwi8GnV0+eCLgHdBiVEwljYz9kV11+FLJtjrAZg
+         xpVmKCWR/1i6YQCOSMSTDMOoiJwy6xcHLTx1gWLtdyB93u0Er2cCqcQyMbm5vcoJMHJS
+         4ApR0/GJ4QRUB+Al+EC8jHTGwN5DppTvDsupm58WvbFk9VCsi8IQ8ucMJ5iz3cqfy9hE
+         1VOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=v5Qvz9aFygHFihQxwKK2dBw+bTDGAIuzLOpgo7W9Qw0=;
-        b=gKyYQi9Tj0uOfcaaM299j53DNic4lsIC1pf6USiBZq+SWHpgFGP2n/osXM3B5HCCdE
-         GtJfawIUF8jnt9gpB2+Nn5kMAK93/DcjL4p5D7yai4I5fOM4VlciCr9d4sQI2Z8/+GE1
-         R4rtj4Z60Z/i2+QkYb8iSTBCkQWwv4XbrKTa8Sr92RUfexu3fs5/NVIQ2gqZ1LAz0AJc
-         ZGod7DXG/NR+MCgpYZbtTcactf8z678xpeUolF0Ld1MdWPvkrnBB+7wBDz4IrsqOoyJE
-         tspzqze18+Y279Dam2w3fQG5tqGnuLCGI9Z2vNv27fNAatb5aJOm9pO4NM71yeQduEAD
-         x7gg==
-X-Gm-Message-State: AGi0PuYXgVAy4+LCxRHBfhFsUMurGr38u3cddLqs+A2y+B8ICZPYyPvP
-	upMDcmjTLOgmRp3YMNdpycSRHHWL06jTocxa4zb0WmCY
-X-Google-Smtp-Source: APiQypLvqbJaludEpcEdwFKyM4aABfSpPYozvMwnTzT/913a1qoTWAiO4/ffyQ2zxN8c3ONycCee+y6YT3Fc5PTBTXY=
-X-Received: by 2002:a6b:610b:: with SMTP id v11mr8776221iob.146.1585935058011;
- Fri, 03 Apr 2020 10:30:58 -0700 (PDT)
+        bh=tTgiRBeQs2STBcVZobP8nmMUoHDziKCK+ntwmXEj9Hc=;
+        b=IlwbVVyJRE13zfVKVa7e0lFwClAlqbfk9RdiGoxiWJ6zv6kuUHvYSjcY5mqRYxR8me
+         J07NtwtRhH8fnFd8DUkZS9DZRHjT//5dNOeCA4ibJsQQlAE+ZxQl8z/8mSD05EtWmCuN
+         F4Nw/iumL7Az35TQyLU6H9HBGp5TLUJ2dAw/TDtUwufGkOLRBUcHmr8LfhHEDXOl7ZNZ
+         anKj8vfcTD+DUut+aRaFClArBIKmiEYpMWjusZjReauhEDilJtphycK+Yetj4SoNNN/n
+         XFMeETWXZx0ScvxY0Uy6jWc0sdEIxM6QStaxbhe600DVcwev9ZNbLVaKWQseQYVbydK/
+         6DnA==
+X-Gm-Message-State: AGi0PuYtP9GT5fn/SOFmkyw3TWidDpvcIU2OojDLLnLOmAvbbiXhcRtQ
+	sya1grlHGUlfIOLlhu/AnfzFAzV0CNN4LS44P7s=
+X-Google-Smtp-Source: APiQypKCEuHUVLV3yRThokHjGUz14U1H3Jifols+1gxwkNDXFFomdlmlK+Z7AlD1h/KgYJFfFMJhQKTpPS86jSTKJ+0=
+X-Received: by 2002:a02:90d0:: with SMTP id c16mr9619251jag.22.1585935168129;
+ Fri, 03 Apr 2020 10:32:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <1585901748-16446-1-git-send-email-leon.anavi@konsulko.com> <1585901748-16446-3-git-send-email-leon.anavi@konsulko.com>
-In-Reply-To: <1585901748-16446-3-git-send-email-leon.anavi@konsulko.com>
+References: <1585901748-16446-1-git-send-email-leon.anavi@konsulko.com> <1585901748-16446-2-git-send-email-leon.anavi@konsulko.com>
+In-Reply-To: <1585901748-16446-2-git-send-email-leon.anavi@konsulko.com>
 From: "Tim Orling" <ticotimo@gmail.com>
-Date: Fri, 3 Apr 2020 10:30:47 -0700
-Message-ID: <CANx9H-Cjz=5vm6sRUJC3c6uSeS9Revmt4Fby0P7B5Cs-DTHxxw@mail.gmail.com>
-Subject: Re: [oe] [meta-python][PATCH 3/3] python-luma-oled: add new recipe
+Date: Fri, 3 Apr 2020 10:32:36 -0700
+Message-ID: <CANx9H-AAy9+3yHD_r4eViKCyLBA9koB_oDL8_oSkhGYNMNF3QA@mail.gmail.com>
+Subject: Re: [oe] [meta-python][PATCH 2/3] python-luma-core: add new recipe
 To: Leon Anavi <leon.anavi@konsulko.com>
 Cc: openembedded-devel@lists.openembedded.org
-Content-Type: multipart/alternative; boundary="000000000000c508da05a2664772"
+Content-Type: multipart/alternative; boundary="000000000000554ff505a2664e17"
 
---000000000000c508da05a2664772
+--000000000000554ff505a2664e17
 Content-Type: text/plain; charset="UTF-8"
 
 We do not want separate .inc and .bb files. It makes recipe upgrades with
 devtool/AUH difficult. Please merge .inc and .bb
 
-On Fri, Apr 3, 2020 at 1:16 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
+On Fri, Apr 3, 2020 at 1:15 AM Leon Anavi <leon.anavi@konsulko.com> wrote:
 
-> Python library interfacing OLED matrix displays with the SSD1306,
-> SSD1309, SSD1322, SSD1325, SSD1327, SSD1331, SSD1351 or SH1106
-> driver using I2C/SPI on the Raspberry Pi and other single-board
-> computers.
+> Component library providing a Pillow-compatible drawing canvas,
+> and other functionality to support drawing primitives and
+> text-rendering capabilities for small displays on the Raspberry Pi
+> and other single board computers.
 >
 > Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 > ---
->  .../recipes-devtools/python/python-luma-oled.inc       | 18
+>  .../recipes-devtools/python/python-luma-core.inc       | 18
 > ++++++++++++++++++
->  .../recipes-devtools/python/python3-luma-oled_3.4.0.bb |  2 ++
+>  .../python/python3-luma-core_1.12.0.bb                 |  2 ++
 >  2 files changed, 20 insertions(+)
 >  create mode 100644
-> meta-python/recipes-devtools/python/python-luma-oled.inc
+> meta-python/recipes-devtools/python/python-luma-core.inc
 >  create mode 100644 meta-python/recipes-devtools/python/
-> python3-luma-oled_3.4.0.bb
+> python3-luma-core_1.12.0.bb
 >
-> diff --git a/meta-python/recipes-devtools/python/python-luma-oled.inc
-> b/meta-python/recipes-devtools/python/python-luma-oled.inc
+> diff --git a/meta-python/recipes-devtools/python/python-luma-core.inc
+> b/meta-python/recipes-devtools/python/python-luma-core.inc
 > new file mode 100644
-> index 0000000..dc59024
+> index 0000000..65350ef
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-luma-oled.inc
+> +++ b/meta-python/recipes-devtools/python/python-luma-core.inc
 > @@ -0,0 +1,18 @@
-> +SUMMARY = "A small library to drive an OLED device"
-> +DESCRIPTION = "\
-> +A small library to drive an OLED device with either SSD1306 , SSD1309,
-> SSD1322, \
-> +SSD1325, SSD1327, SSD1331, SSD1351 or SH1106 chipset"
-> +HOMEPAGE = "https://github.com/rm-hull/luma.oled"
+> +SUMMARY = "A component library to support SBC display drivers"
+> +DESCRIPTION = "A component library to support SBC display drivers"
+> +HOMEPAGE = "https://github.com/rm-hull/luma.core"
 > +LICENSE = "MIT"
 > +LIC_FILES_CHKSUM =
-> "file://LICENSE.rst;md5=c328c862c3335ad464e1c9a3ba574249"
+> "file://LICENSE.rst;md5=eda804060ba2312e41fe96b6fa334fd7"
 > +
-> +SRC_URI[md5sum] = "2944155b2242b9d2ddeb6e139c6083b8"
+> +SRC_URI[md5sum] = "4378edb99cd12540b4e4a588969567ee"
 > +SRC_URI[sha256sum] =
-> "2ea2b535e7e2f056a51a8c54ad78aa1f00d5699fc439c01bc7c2902823889552"
+> "864a427de78bcc16758f4f4402a9e61f31cc8857bfae9aba8041159aaec3a491"
 > +
 > +CLEANBROKEN = "1"
 > +
-> +PYPI_PACKAGE = "luma.oled"
+> +PYPI_PACKAGE = "luma.core"
 > +
 > +RDEPENDS_${PN} += " \
-> +       ${PYTHON_PN}-luma-core \
+> +       ${PYTHON_PN}-pillow \
+> +       ${PYTHON_PN}-threading \
+> +       ${PYTHON_PN}-smbus2 \
 > +"
 > diff --git a/meta-python/recipes-devtools/python/
-> python3-luma-oled_3.4.0.bb b/meta-python/recipes-devtools/python/
-> python3-luma-oled_3.4.0.bb
+> python3-luma-core_1.12.0.bb b/meta-python/recipes-devtools/python/
+> python3-luma-core_1.12.0.bb
 > new file mode 100644
-> index 0000000..4f64a92
+> index 0000000..6e34f81
 > --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-luma-oled_3.4.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-luma-core_1.12.0.bb
 > @@ -0,0 +1,2 @@
 > +inherit pypi setuptools3
-> +require python-luma-oled.inc
+> +require python-luma-core.inc
 > --
 > 2.7.4
 >
 > 
 >
 
---000000000000c508da05a2664772
+--000000000000554ff505a2664e17
 Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-<div><div dir=3D"auto">We do not want separate .inc and .bb files. It makes=
- recipe upgrades with devtool/AUH difficult. Please merge .inc and .bb</div=
-></div><div><br><div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_=
-attr">On Fri, Apr 3, 2020 at 1:16 AM Leon Anavi &lt;<a href=3D"mailto:leon.=
-anavi@konsulko.com">leon.anavi@konsulko.com</a>&gt; wrote:<br></div><blockq=
-uote class=3D"gmail_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc =
-solid;padding-left:1ex">Python library interfacing OLED matrix displays wit=
-h the SSD1306,<br>
-SSD1309, SSD1322, SSD1325, SSD1327, SSD1331, SSD1351 or SH1106<br>
-driver using I2C/SPI on the Raspberry Pi and other single-board<br>
-computers.<br>
+<div><span style=3D"font-size:16px;color:rgb(117,117,117);word-spacing:1px"=
+>We do not want separate .inc and .bb files. It makes recipe upgrades with =
+devtool/AUH difficult. Please merge .inc and .bb</span><br></div><div><br><=
+div class=3D"gmail_quote"><div dir=3D"ltr" class=3D"gmail_attr">On Fri, Apr=
+ 3, 2020 at 1:15 AM Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.co=
+m">leon.anavi@konsulko.com</a>&gt; wrote:<br></div><blockquote class=3D"gma=
+il_quote" style=3D"margin:0 0 0 .8ex;border-left:1px #ccc solid;padding-lef=
+t:1ex">Component library providing a Pillow-compatible drawing canvas,<br>
+and other functionality to support drawing primitives and<br>
+text-rendering capabilities for small displays on the Raspberry Pi<br>
+and other single board computers.<br>
 <br>
 Signed-off-by: Leon Anavi &lt;<a href=3D"mailto:leon.anavi@konsulko.com" t=
 arget=3D"_blank">leon.anavi@konsulko.com</a>&gt;<br>
 ---<br>
-=C2=A0.../recipes-devtools/python/python-luma-oled.inc=C2=A0 =C2=A0 =C2=A0=
+=C2=A0.../recipes-devtools/python/python-luma-core.inc=C2=A0 =C2=A0 =C2=A0=
  =C2=A0| 18 ++++++++++++++++++<br>
-=C2=A0.../recipes-devtools/python/<a href=3D"http://python3-luma-oled_3.4.=
-0.bb" rel=3D"noreferrer" target=3D"_blank">python3-luma-oled_3.4.0.bb</a> |=
+=C2=A0.../python/<a href=3D"http://python3-luma-core_1.12.0.bb" rel=3D"nor=
+eferrer" target=3D"_blank">python3-luma-core_1.12.0.bb</a>=C2=A0 =C2=A0 =C2=
 =
-=C2=A0 2 ++<br>
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0|=C2=A0 2 ++<br>
 =C2=A02 files changed, 20 insertions(+)<br>
-=C2=A0create mode 100644 meta-python/recipes-devtools/python/python-luma-o=
-led.inc<br>
+=C2=A0create mode 100644 meta-python/recipes-devtools/python/python-luma-c=
+ore.inc<br>
 =C2=A0create mode 100644 meta-python/recipes-devtools/python/<a href=3D"ht=
-tp://python3-luma-oled_3.4.0.bb" rel=3D"noreferrer" target=3D"_blank">pytho=
-n3-luma-oled_3.4.0.bb</a><br>
+tp://python3-luma-core_1.12.0.bb" rel=3D"noreferrer" target=3D"_blank">pyth=
+on3-luma-core_1.12.0.bb</a><br>
 <br>
-diff --git a/meta-python/recipes-devtools/python/python-luma-oled.inc b/me=
-ta-python/recipes-devtools/python/python-luma-oled.inc<br>
+diff --git a/meta-python/recipes-devtools/python/python-luma-core.inc b/me=
+ta-python/recipes-devtools/python/python-luma-core.inc<br>
 new file mode 100644<br>
-index 0000000..dc59024<br>
+index 0000000..65350ef<br>
 --- /dev/null<br>
-+++ b/meta-python/recipes-devtools/python/python-luma-oled.inc<br>
++++ b/meta-python/recipes-devtools/python/python-luma-core.inc<br>
 @@ -0,0 +1,18 @@<br>
-+SUMMARY =3D &quot;A small library to drive an OLED device&quot;<br>
-+DESCRIPTION =3D &quot;\<br>
-+A small library to drive an OLED device with either SSD1306 , SSD1309, SS=
-D1322, \<br>
-+SSD1325, SSD1327, SSD1331, SSD1351 or SH1106 chipset&quot;<br>
-+HOMEPAGE =3D &quot;<a href=3D"https://github.com/rm-hull/luma.oled" rel=
-=3D"noreferrer" target=3D"_blank">https://github.com/rm-hull/luma.oled</a>=
++SUMMARY =3D &quot;A component library to support SBC display drivers&quot=
+;<br>
++DESCRIPTION =3D &quot;A component library to support SBC display drivers&=
+quot;<br>
++HOMEPAGE =3D &quot;<a href=3D"https://github.com/rm-hull/luma.core" rel=
+=3D"noreferrer" target=3D"_blank">https://github.com/rm-hull/luma.core</a>=
 &quot;<br>
 +LICENSE =3D &quot;MIT&quot;<br>
-+LIC_FILES_CHKSUM =3D &quot;file://LICENSE.rst;md5=3Dc328c862c3335ad464e1c=
-9a3ba574249&quot;<br>
++LIC_FILES_CHKSUM =3D &quot;file://LICENSE.rst;md5=3Deda804060ba2312e41fe9=
+6b6fa334fd7&quot;<br>
 +<br>
-+SRC_URI[md5sum] =3D &quot;2944155b2242b9d2ddeb6e139c6083b8&quot;<br>
-+SRC_URI[sha256sum] =3D &quot;2ea2b535e7e2f056a51a8c54ad78aa1f00d5699fc439=
-c01bc7c2902823889552&quot;<br>
++SRC_URI[md5sum] =3D &quot;4378edb99cd12540b4e4a588969567ee&quot;<br>
++SRC_URI[sha256sum] =3D &quot;864a427de78bcc16758f4f4402a9e61f31cc8857bfae=
+9aba8041159aaec3a491&quot;<br>
 +<br>
 +CLEANBROKEN =3D &quot;1&quot;<br>
 +<br>
-+PYPI_PACKAGE =3D &quot;luma.oled&quot;<br>
++PYPI_PACKAGE =3D &quot;luma.core&quot;<br>
 +<br>
 +RDEPENDS_${PN} +=3D &quot; \<br>
-+=C2=A0 =C2=A0 =C2=A0 =C2=A0${PYTHON_PN}-luma-core \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0${PYTHON_PN}-pillow \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0${PYTHON_PN}-threading \<br>
++=C2=A0 =C2=A0 =C2=A0 =C2=A0${PYTHON_PN}-smbus2 \<br>
 +&quot;<br>
 diff --git a/meta-python/recipes-devtools/python/<a href=3D"http://python3=
--luma-oled_3.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-luma-oled=
-_3.4.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://pytho=
-n3-luma-oled_3.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-luma-ol=
-ed_3.4.0.bb</a><br>
+-luma-core_1.12.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-luma-cor=
+e_1.12.0.bb</a> b/meta-python/recipes-devtools/python/<a href=3D"http://pyt=
+hon3-luma-core_1.12.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-luma=
+-core_1.12.0.bb</a><br>
 new file mode 100644<br>
-index 0000000..4f64a92<br>
+index 0000000..6e34f81<br>
 --- /dev/null<br>
-+++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-luma-o=
-led_3.4.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-luma-oled_3.4.0.=
-bb</a><br>
++++ b/meta-python/recipes-devtools/python/<a href=3D"http://python3-luma-c=
+ore_1.12.0.bb" rel=3D"noreferrer" target=3D"_blank">python3-luma-core_1.12.=
+0.bb</a><br>
 @@ -0,0 +1,2 @@<br>
 +inherit pypi setuptools3<br>
-+require python-luma-oled.inc<br>
++require python-luma-core.inc<br>
 -- <br>
 2.7.4<br>
 <br>
 <br>
 </blockquote></div></div>
 
---000000000000c508da05a2664772--
+--000000000000554ff505a2664e17--
