@@ -1,116 +1,81 @@
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.64])
- by mx.groups.io with SMTP id smtpd.web11.6481.1585947295941772874
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
+ by mx.groups.io with SMTP id smtpd.web10.6857.1585948924743414563
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Apr 2020 13:54:56 -0700
+ Fri, 03 Apr 2020 14:22:04 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=none, err=permanent DNS error (domain: denix.org, ip: 64.68.198.64, mailfrom: denis@denix.org)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 4A9AA40BAC;
-	Fri,  3 Apr 2020 20:54:55 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo14-pco.easydns.vpn [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fhytTRCTMVlF; Fri,  3 Apr 2020 20:54:55 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-86-127.washdc.fios.verizon.net [100.15.86.127])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 27E4C400E7;
-	Fri,  3 Apr 2020 20:54:54 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 7BD861718F5; Fri,  3 Apr 2020 16:54:53 -0400 (EDT)
-Date: Fri, 3 Apr 2020 16:54:53 -0400
-From: "Denys Dmytriyenko" <denis@denix.org>
-To: pjtexier@koncepto.io
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [meta-python][PATCH 1/5] python-pyroute2: consolidate into a single file
-Message-ID: <20200403205453.GW1578@denix.org>
-References: <1585942963-20703-1-git-send-email-pjtexier@koncepto.io>
-MIME-Version: 1.0
-In-Reply-To: <1585942963-20703-1-git-send-email-pjtexier@koncepto.io>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f53.google.com with SMTP id f52so8813144otf.8
+        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2020 14:22:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=/TloFVgovD47rDkepH6tEhqunvtiuBNZ5IHEbSi/QjA=;
+        b=hDK/p80C6YtuSX2eFZZhpex1bhOZNTfrayE7IeRKz36OKxohsClYAzBsProLBIKc86
+         ZEaFblNpXybiHMr2HeYkzteDYZILLudGJP//wbHElouzaPG6Vs7UmQ0BiaUTwB5YO691
+         PLkmi6oho7zzlMRa2nQrfx+jMUdSnQLwCNtRUysPPsEuuK+V5EF8FMNpw1m5IixAsOCy
+         rsbgJBhc6IlEP4Rc84uXekynGmyB7k++SJLH31fxxKf8erfqmW6svpgCjiM4FkVsBYcF
+         PCgizC4r4A6MFA/nK12V5B1vRADakfgZ5fAFcr25hYG8MHBXw3YXx8JDgToSAoxMAHx7
+         +Nbg==
+X-Gm-Message-State: AGi0PuaMHbNzhQRAnUjB7yY/uzzJCaUUDT65lLxGxf5/yCQDiFGYxSGp
+	CWfps/aQ/povpMVwrKuNMe9TcwrL+VE=
+X-Google-Smtp-Source: APiQypIuyw26P43A0+hJKZHFw1lua17oZ93QbfqLO+ng3/8eBTe+2QpZI8Dn6zeHPmKRohhshHQ4wQ==
+X-Received: by 2002:a9d:1904:: with SMTP id j4mr8294384ota.37.1585948923382;
+        Fri, 03 Apr 2020 14:22:03 -0700 (PDT)
+Return-Path: <straka.derek@gmail.com>
+Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
+        by smtp.gmail.com with ESMTPSA id a76sm2344771oob.5.2020.04.03.14.22.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 03 Apr 2020 14:22:02 -0700 (PDT)
+From: "Derek Straka" <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Derek Straka <derek@asterius.io>
+Subject: [oe][meta-python][PATCH 01/10] python-bitarray: consolidate inc and bb files into a single bb file
+Date: Fri,  3 Apr 2020 17:21:11 -0400
+Message-Id: <20200403212120.23481-1-derek@asterius.io>
+X-Mailer: git-send-email 2.17.1
 
-On Fri, Apr 03, 2020 at 09:42:39PM +0200, Pierre-Jean Texier via lists.openembedded.org wrote:
-> For details see [1]
-> 
-> [1] - https://lists.openembedded.org/g/openembedded-devel/topic/72718415
-> 
-> Suggested-by: Tim Orling <ticotimo@gmail.com>
-> Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
-> ---
->  .../recipes-devtools/python/python-pyroute2.inc    | 25 ----------------------
->  .../python/python3-pyroute2_0.5.9.bb               | 25 ++++++++++++++++++++--
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../recipes-devtools/python/python-bitarray.inc     | 11 -----------
+ .../python/python3-bitarray_1.2.1.bb                | 13 +++++++++++--
+ 2 files changed, 11 insertions(+), 13 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-bitarray.inc
 
-Any chance to pass -C -M so the diff is more readable?
-
-
->  2 files changed, 23 insertions(+), 27 deletions(-)
->  delete mode 100644 meta-python/recipes-devtools/python/python-pyroute2.inc
-> 
-> diff --git a/meta-python/recipes-devtools/python/python-pyroute2.inc b/meta-python/recipes-devtools/python/python-pyroute2.inc
-> deleted file mode 100644
-> index add7b7b..0000000
-> --- a/meta-python/recipes-devtools/python/python-pyroute2.inc
-> +++ /dev/null
-> @@ -1,25 +0,0 @@
-> -SUMMARY = "A pure Python netlink and Linux network configuration library"
-> -LICENSE = "GPLv2 & Apache-2.0"
-> -LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-> -                    file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
-> -
-> -SRC_URI[md5sum] = "4ee568832c98c39253230293a2ca3d59"
-> -SRC_URI[sha256sum] = "240ed116fabef02c284cc40d27986e629f02aa788311a8059905b8988752d5b7"
-> -
-> -FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyroute2:"
-> -
-> -inherit pypi
-> -
-> -RDEPENDS_${PN} += " \
-> -    ${PYTHON_PN}-ctypes \
-> -    ${PYTHON_PN}-distutils \
-> -    ${PYTHON_PN}-io \
-> -    ${PYTHON_PN}-json \
-> -    ${PYTHON_PN}-logging \
-> -    ${PYTHON_PN}-multiprocessing \
-> -    ${PYTHON_PN}-pickle \
-> -    ${PYTHON_PN}-pkgutil \
-> -    ${PYTHON_PN}-pprint \
-> -    ${PYTHON_PN}-shell \
-> -    ${PYTHON_PN}-unixadmin \
-> -"
-> diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.9.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.9.bb
-> index a23e72c..90d9486 100644
-> --- a/meta-python/recipes-devtools/python/python3-pyroute2_0.5.9.bb
-> +++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.5.9.bb
-> @@ -1,2 +1,23 @@
-> -require python-pyroute2.inc
-> -inherit setuptools3
-> +SUMMARY = "A pure Python netlink and Linux network configuration library"
-> +LICENSE = "GPLv2 & Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-> +                    file://LICENSE.Apache.v2;md5=34281e312165f843a2b7d1f114fe65ce"
-> +
-> +SRC_URI[md5sum] = "4ee568832c98c39253230293a2ca3d59"
-> +SRC_URI[sha256sum] = "240ed116fabef02c284cc40d27986e629f02aa788311a8059905b8988752d5b7"
-> +
-> +inherit setuptools3 pypi
-> +
-> +RDEPENDS_${PN} += " \
-> +    ${PYTHON_PN}-ctypes \
-> +    ${PYTHON_PN}-distutils \
-> +    ${PYTHON_PN}-io \
-> +    ${PYTHON_PN}-json \
-> +    ${PYTHON_PN}-logging \
-> +    ${PYTHON_PN}-multiprocessing \
-> +    ${PYTHON_PN}-pickle \
-> +    ${PYTHON_PN}-pkgutil \
-> +    ${PYTHON_PN}-pprint \
-> +    ${PYTHON_PN}-shell \
-> +    ${PYTHON_PN}-unixadmin \
-> +"
-> -- 
-> 2.7.4
-> 
-
-> 
+diff --git a/meta-python/recipes-devtools/python/python-bitarray.inc b/meta-python/recipes-devtools/python/python-bitarray.inc
+deleted file mode 100644
+index 32da348c41..0000000000
+--- a/meta-python/recipes-devtools/python/python-bitarray.inc
++++ /dev/null
+@@ -1,11 +0,0 @@
+-SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
+-HOMEPAGE = "https://github.com/ilanschnell/bitarray"
+-LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=dc301a25ebe210dcc53b0a2d5a038eae"
+-
+-SRC_URI[md5sum] = "a46bf869f6adf34f5b0dc82b469793b7"
+-SRC_URI[sha256sum] = "2ed675f460bb0d3d66fd8042a6f1f0d36cf213e52e72a745283ddb245da7b9cf"
+-
+-inherit pypi
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb b/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+index 7ee444dc9e..2bf2937d1d 100644
+--- a/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
++++ b/meta-python/recipes-devtools/python/python3-bitarray_1.2.1.bb
+@@ -1,2 +1,11 @@
+-inherit setuptools3
+-require python-bitarray.inc
++SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
++HOMEPAGE = "https://github.com/ilanschnell/bitarray"
++LICENSE = "PSF"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=dc301a25ebe210dcc53b0a2d5a038eae"
++
++SRC_URI[md5sum] = "a46bf869f6adf34f5b0dc82b469793b7"
++SRC_URI[sha256sum] = "2ed675f460bb0d3d66fd8042a6f1f0d36cf213e52e72a745283ddb245da7b9cf"
++
++inherit setuptools3 pypi
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.17.1
 
