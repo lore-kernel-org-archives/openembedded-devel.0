@@ -1,51 +1,77 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web12.6279.1585899343952775629
+Received: from anavi.org (anavi.org [91.215.217.29])
+ by mx.groups.io with SMTP id smtpd.web10.6549.1585901757890885507
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Apr 2020 00:35:44 -0700
+ Fri, 03 Apr 2020 01:15:58 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: hongxu.jia@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 0337ZdF2006087
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Fri, 3 Apr 2020 00:35:40 -0700 (PDT)
-Received: from 0d91d9514440.wrs.com (128.224.153.74) by
- ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
- 14.3.487.0; Fri, 3 Apr 2020 00:35:39 -0700
-From: "hongxu" <hongxu.jia@windriver.com>
-To: <raj.khem@gmail.com>
-CC: <openembedded-devel@lists.openembedded.org>
-Subject: [meta-python][PATCH] python3-grpcio: disable ccache to workaround native build failure
-Date: Fri, 3 Apr 2020 15:35:37 +0800
-Message-ID: <20200403073537.23061-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain
+ dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
+Received: from [78.130.197.211] (port=45474 helo=localhost.localdomain)
+	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-SHA256:128)
+	(Exim 4.92)
+	(envelope-from <leon.anavi@konsulko.com>)
+	id 1jKHUZ-0006Wi-1K; Fri, 03 Apr 2020 11:15:55 +0300
+From: "Leon Anavi" <leon.anavi@konsulko.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Leon Anavi <leon.anavi@konsulko.com>
+Subject: [meta-python][PATCH 1/3] python-smbus2: Add new recipe
+Date: Fri,  3 Apr 2020 11:15:46 +0300
+Message-Id: <1585901748-16446-1-git-send-email-leon.anavi@konsulko.com>
+X-Mailer: git-send-email 2.7.4
+X-OutGoing-Spam-Status: No, score=-1.0
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - voyager.icnhost.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - konsulko.com
+X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
+X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 
-While enabling ccache, build python3-grpcio-native failed:
-...
-|error: can't copy 'tmp-glibc/work/x86_64-linux/python3-grpcio-native/
-1.27.1-r0/build/lib.linux-x86_64-3.8/grpc/_cython/
-cygrpc.cpython-38-x86_64-linux-gnu.so': doesn't exist or not a regular file
-|ERROR: 'python3 setup.py build ' execution failed.
-...
+Drop-in replacement for smbus-cffi/smbus-python in pure Python.
+It is another implementation of the python-smbus package.
 
-So disable ccache to workaround the failure.
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
 ---
- meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-python/recipes-devtools/python/python-smbus2.inc | 19 +++++++++++++++++++
+ .../recipes-devtools/python/python3-smbus2_0.3.0.bb   |  2 ++
+ 2 files changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-smbus2.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb b/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
-index 358b237f7..83d367101 100644
---- a/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-grpcio_1.27.1.bb
-@@ -30,3 +30,5 @@ do_compile_prepend_toolchain-clang() {
- CLEANBROKEN = "1"
- 
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-smbus2.inc b/meta-python/recipes-devtools/python/python-smbus2.inc
+new file mode 100644
+index 0000000..0bab1a4
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-smbus2.inc
+@@ -0,0 +1,19 @@
++SUMMARY = "Drop-in replacement for smbus-cffi/smbus-python in pure Python"
++DESCRIPTION = "smbus2 is a drop-in replacement for smbus-cffi/smbus-python in pure Python"
++HOMEPAGE = "https://github.com/kplindegaard/smbus2"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 +
-+CCACHE_DISABLE = "1"
++SRC_URI[md5sum] = "d5ed5acc889b4770a84cc932853ed20a"
++SRC_URI[sha256sum] = "210e66eebe4d0b1fe836b3ec2751841942e1c4918c0b429b20a0e20a222228b4"
++
++CLEANBROKEN = "1"
++
++PYPI_PACKAGE = "smbus2"
++
++RDEPENDS_${PN} = "${PYTHON_PN}-ctypes ${PYTHON_PN}-fcntl"
++
++RDEPENDS_${PN} += "\
++	${PYTHON_PN}-ctypes \
++	${PYTHON_PN}-fcntl \
++"
+diff --git a/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb b/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
+new file mode 100644
+index 0000000..6149e35
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools3
++require python-smbus2.inc
 -- 
-2.17.1
+2.7.4
 
