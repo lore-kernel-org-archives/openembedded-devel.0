@@ -1,80 +1,83 @@
-Received: from anavi.org (anavi.org [91.215.217.29])
- by mx.groups.io with SMTP id smtpd.web11.6666.1585901758771899457
+Received: from heian.cn.fujitsu.com (heian.cn.fujitsu.com [183.91.158.132])
+ by mx.groups.io with SMTP id smtpd.web11.6935.1585903516848468717
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Apr 2020 01:15:59 -0700
+ Fri, 03 Apr 2020 01:45:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=softfail (domain: konsulko.com, ip: 91.215.217.29, mailfrom: leon.anavi@konsulko.com)
-Received: from [78.130.197.211] (port=45474 helo=localhost.localdomain)
-	by voyager.icnhost.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-SHA256:128)
-	(Exim 4.92)
-	(envelope-from <leon.anavi@konsulko.com>)
-	id 1jKHUa-0006Wi-LP; Fri, 03 Apr 2020 11:15:57 +0300
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: Leon Anavi <leon.anavi@konsulko.com>
-Subject: [meta-python][PATCH 3/3] python-luma-oled: add new recipe
-Date: Fri,  3 Apr 2020 11:15:48 +0300
-Message-Id: <1585901748-16446-3-git-send-email-leon.anavi@konsulko.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1585901748-16446-1-git-send-email-leon.anavi@konsulko.com>
-References: <1585901748-16446-1-git-send-email-leon.anavi@konsulko.com>
-X-OutGoing-Spam-Status: No, score=-1.0
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - voyager.icnhost.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - konsulko.com
-X-Get-Message-Sender-Via: voyager.icnhost.net: authenticated_id: leon@anavi.org
-X-Authenticated-Sender: voyager.icnhost.net: leon@anavi.org
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+ dkim=missing; spf=none, err=SPF record not found (domain: cn.fujitsu.com, ip: 183.91.158.132, mailfrom: zhengrq.fnst@cn.fujitsu.com)
+X-IronPort-AV: E=Sophos;i="5.72,339,1580745600"; 
+   d="scan'208";a="88445762"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+  by heian.cn.fujitsu.com with ESMTP; 03 Apr 2020 16:45:13 +0800
+Received: from G08CNEXMBPEKD06.g08.fujitsu.local (unknown [10.167.33.206])
+	by cn.fujitsu.com (Postfix) with ESMTP id AD33349DF138
+	for <openembedded-devel@lists.openembedded.org>; Fri,  3 Apr 2020 16:34:54 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Fri, 3 Apr 2020 16:45:14 +0800
+From: "zhengruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Subject: [oe] [meta-python] [PATCH] python3-pint: Enable ptest
+Date: Sat, 4 Apr 2020 01:45:07 +0800
+Message-ID: <1585935907-41366-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.35]
+X-ClientProxiedBy: G08CNEXCHPEKD06.g08.fujitsu.local (10.167.33.205) To
+ G08CNEXMBPEKD06.g08.fujitsu.local (10.167.33.206)
+X-yoursite-MailScanner-ID: AD33349DF138.A7BD1
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Content-Type: text/plain
 
-Python library interfacing OLED matrix displays with the SSD1306,
-SSD1309, SSD1322, SSD1325, SSD1327, SSD1331, SSD1351 or SH1106
-driver using I2C/SPI on the Raspberry Pi and other single-board
-computers.
-
-Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../recipes-devtools/python/python-luma-oled.inc       | 18 ++++++++++++++++++
- .../recipes-devtools/python/python3-luma-oled_3.4.0.bb |  2 ++
- 2 files changed, 20 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-luma-oled.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-luma-oled_3.4.0.bb
+ .../recipes-devtools/python/python-pint.inc       | 15 ++++++++++++++-
+ .../python/python3-pint/run-ptest                 |  3 +++
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python3-pint/run-ptest
 
-diff --git a/meta-python/recipes-devtools/python/python-luma-oled.inc b/meta-python/recipes-devtools/python/python-luma-oled.inc
-new file mode 100644
-index 0000000..dc59024
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-luma-oled.inc
-@@ -0,0 +1,18 @@
-+SUMMARY = "A small library to drive an OLED device"
-+DESCRIPTION = "\
-+A small library to drive an OLED device with either SSD1306 , SSD1309, SSD1322, \
-+SSD1325, SSD1327, SSD1331, SSD1351 or SH1106 chipset"
-+HOMEPAGE = "https://github.com/rm-hull/luma.oled"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=c328c862c3335ad464e1c9a3ba574249"
+diff --git a/meta-python/recipes-devtools/python/python-pint.inc b/meta-python/recipes-devtools/python/python-pint.inc
+index c58dc9076..5c3481008 100644
+--- a/meta-python/recipes-devtools/python/python-pint.inc
++++ b/meta-python/recipes-devtools/python/python-pint.inc
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=bccf824202692270a1e0829a62e3f47b"
+ 
+ PYPI_PACKAGE := "Pint"
+ 
+-inherit pypi
++inherit pypi ptest
+ 
+ SRC_URI[md5sum] = "3a8f29c2a30efd35af4b5c5a224ef965"
+ SRC_URI[sha256sum] = "308f1070500e102f83b6adfca6db53debfce2ffc5d3cbe3f6c367da359b5cf4d"
+@@ -15,3 +15,16 @@ SRC_URI[sha256sum] = "308f1070500e102f83b6adfca6db53debfce2ffc5d3cbe3f6c367da359
+ DEPENDS += "python3-setuptools-scm-native"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 +
-+SRC_URI[md5sum] = "2944155b2242b9d2ddeb6e139c6083b8"
-+SRC_URI[sha256sum] = "2ea2b535e7e2f056a51a8c54ad78aa1f00d5699fc439c01bc7c2902823889552"
-+
-+CLEANBROKEN = "1"
-+
-+PYPI_PACKAGE = "luma.oled"
-+
-+RDEPENDS_${PN} += " \
-+	${PYTHON_PN}-luma-core \
++SRC_URI += " \
++	file://run-ptest \
 +"
-diff --git a/meta-python/recipes-devtools/python/python3-luma-oled_3.4.0.bb b/meta-python/recipes-devtools/python/python3-luma-oled_3.4.0.bb
++
++RDEPENDS_${PN}-ptest += " \
++	${PYTHON_PN}-pytest \
++"
++
++do_install_ptest() {
++	install -d ${D}${PTEST_PATH}/testsuite
++	cp -rf ${S}/pint/testsuite/* ${D}${PTEST_PATH}/testsuite/
++}
+diff --git a/meta-python/recipes-devtools/python/python3-pint/run-ptest b/meta-python/recipes-devtools/python/python3-pint/run-ptest
 new file mode 100644
-index 0000000..4f64a92
+index 000000000..5cec71169
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-luma-oled_3.4.0.bb
-@@ -0,0 +1,2 @@
-+inherit pypi setuptools3
-+require python-luma-oled.inc
++++ b/meta-python/recipes-devtools/python/python3-pint/run-ptest
+@@ -0,0 +1,3 @@
++#!/bin/sh
++
++pytest
 -- 
-2.7.4
+2.20.1
+
+
 
