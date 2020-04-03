@@ -1,122 +1,78 @@
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
- by mx.groups.io with SMTP id smtpd.web11.4327.1585860213767087191
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+ by mx.groups.io with SMTP id smtpd.web12.4838.1585887814057853502
  for <openembedded-devel@lists.openembedded.org>;
- Thu, 02 Apr 2020 13:43:34 -0700
+ Thu, 02 Apr 2020 21:23:34 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: windriver.com, ip: 147.11.146.13, mailfrom: matthew.zeng@windriver.com)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com [147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.2) with ESMTPS id 032KhVMZ006915
-	(version=TLSv1 cipher=AES256-SHA bits=256 verify=FAIL);
-	Thu, 2 Apr 2020 13:43:31 -0700 (PDT)
-Received: from mt-manjaro (128.224.21.163) by ALA-HCA.corp.ad.wrs.com
- (147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.487.0; Thu, 2 Apr
- 2020 13:43:30 -0700
-References: <87o8sbf8e4.fsf@windriver.com>
- <CALbNGRSB_ZNW1qyFYuhTnR-eKCPo_oU5Bg+K4_UE5oiiCdXD=Q@mail.gmail.com>
- <871rp6t1jg.fsf@windriver.com>
- <21293c7f-669d-8153-2104-f9de823a7362@windriver.com>
- <CALbNGRQ1LqMOstdxGu4M4+sNUMj0-zabRePq0Z0Q3SNDpjj_2A@mail.gmail.com>
-User-agent: mu4e 1.2.0; emacs 28.0.50
-From: "Matthew" <matthew.zeng@windriver.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
-CC: Andreas =?utf-8?Q?M=C3=BCller?= <schnitzeltony@gmail.com>,
-        <openembedded-devel@lists.openembedded.org>
-Subject: Re: Regarding poppler auto PACKAGECONFIG when qt5-layer exists
-In-Reply-To: <CALbNGRQ1LqMOstdxGu4M4+sNUMj0-zabRePq0Z0Q3SNDpjj_2A@mail.gmail.com>
-Date: Thu, 2 Apr 2020 16:43:28 -0400
-Message-ID: <87mu7tehzj.fsf@windriver.com>
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=CxJDEi2l;
+ spf=pass (domain: gmail.com, ip: 209.85.214.173, mailfrom: raj.khem@gmail.com)
+Received: by mail-pl1-f173.google.com with SMTP id ay1so2226088plb.0
+        for <openembedded-devel@lists.openembedded.org>; Thu, 02 Apr 2020 21:23:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qByTy+tRUc86clzNkKyhB16v18278Bksjc/w1dd6Zpk=;
+        b=CxJDEi2lMn2XQz3/eeDjSEwQeJjqLryI+DMSPrTFihUWbpE9kJohp0YRJQRbf3Q2j/
+         Un8mVXoYtTINtdgILrlJVtdJpEC+7Dkt2Mzi11NT7bxar/tqZjVXqn6h5zsMycGAGxlj
+         GyxOWzMVpKsEOepSaWeMA8d4t7q4s0NsBr+D2bxd4GHsV95qAMqDGaHz4hrdzCpKbiGJ
+         minAAUSGgRcRBbtSP8OuAJMeeRqVpCHjvJ6+cMBqMhMkpkrerlGUtY9qHhLHvytBqkW0
+         +jm9/7yaj+WDDljMAl7CjVNnmCupJAhDBVJrhKh+/jbwn/R4yOSi6+hB1UwYVevO4/yv
+         ob7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=qByTy+tRUc86clzNkKyhB16v18278Bksjc/w1dd6Zpk=;
+        b=m2B9CUVG5eM/1g1GBLmmDm1mt9yn3+M+iFG34Fde2QL5jiHnJmgbHebulI519UXXrV
+         K8EQEmeMQqYQ5ZCr/G7iQPqgXIFVsA9JcPPWWR5iAXRvU7Pb58pZuRlgEeheh8p/I9aS
+         6OEUvf4yXyOhtX4JxdXKjzNyJwFip605v5/W5hqjPj3YJbEobBenFJ5WslQ09+c0D7RO
+         d36wi1nuO3zmQa2CGPBRW9YOV/IuAGQb+1xfB8AJehdPNN/UBKMYxkGPu0LIC9SuLdQ5
+         RppF50CuHnjAiToqvhSRaqcpn8WCV0w8Blr+7KPCVuAPjjXpUcm77QnZ+NTvXa8PMCOQ
+         /E7w==
+X-Gm-Message-State: AGi0PuYI3oMglErB716gc3tElQ/LiX52mApUSnKpl5Jbt5NlsEV0qKBL
+	Wma4+uyVuAEPdATISgydZCx4HLYmlsQ=
+X-Google-Smtp-Source: APiQypK3wmgy5rVjXlaAT9OQFAfJhTkAlfLRTLgOQ6ItGnCGGJ1LqojgTdNcWekpg3KxsBfIxFhMVA==
+X-Received: by 2002:a17:902:8c94:: with SMTP id t20mr5973873plo.336.1585887812973;
+        Thu, 02 Apr 2020 21:23:32 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::3e84])
+        by smtp.gmail.com with ESMTPSA id e9sm4858413pfl.179.2020.04.02.21.23.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 02 Apr 2020 21:23:32 -0700 (PDT)
+From: "Khem Raj" <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Cc: Vinothkumar <vinothkumar_baskaran@comcast.com>,
+	Khem Raj <raj.khem@gmail.com>
+Subject: [meta-networking][PATCH] miniupnpd: Package miniupnpd_functions.sh
+Date: Thu,  2 Apr 2020 21:23:46 -0700
+Message-Id: <20200403042346.1234574-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.26.0
 MIME-Version: 1.0
-X-Originating-IP: [128.224.21.163]
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
+From: Vinothkumar <vinothkumar_baskaran@comcast.com>
 
-Andreas M=C3=BCller <schnitzeltony@gmail.com> writes:
+Currently miniupnpd.service fails to start
+without miniupnpd_functions.sh in rootfs
 
-> On Thu, Apr 2, 2020 at 7:27 PM Randy MacLeod
-> <randy.macleod@windriver.com> wrote:
->>
->> On 2020-04-02 10:17 a.m., Mingde (Matthew) Zeng wrote:
->> >
->> > Andreas M=C3=BCller <schnitzeltony@gmail.com> writes:
->> >
->> >> On Wed, Apr 1, 2020 at 7:02 PM Mingde (Matthew) Zeng
->> >> <matthew.zeng@windriver.com> wrote:
->> >>>
->> >>> Hello,
->> >>>
->> >>> In meta-oe/recipes-support/poppler/poppler_0.85.0.bb line 17, there =
-is the line
->> >>>
->> >>>      PACKAGECONFIG ??=3D "jpeg openjpeg png tiff nss ${@bb.utils.con=
-tains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5', '', d)}"
->> >>>
->> >>> Let's say I add meta-qt5 to bblayers.conf, but I don't plan to use i=
-t immediately in a build. Therefore I haven't make any additional change to=
- local.conf.
->> >>>
->> >>> However I will be receiving the following error when starting a buil=
-d:
->> >>>
->> >>>      WARNING: qtbase is not whitelisted, figuring out PNWHITELIST...
->> >>>      ERROR: Nothing PROVIDES 'qtbase' (but .../meta-openembedded/met=
-a-oe/recipes-support/poppler/poppler_0.85.0.bb DEPENDS on or otherwise requ=
-ires it)
->> >> Guess I know how this is going to end so just out of curiosity: What
->> >> configuration is causing 'qtbase is not whitelisted' ?
->> >
->> > This is the problem. I don't have any configuration in local.conf rela=
-ted to qt5, because I don't plan to use it in my build. It is only in bblay=
-ers.conf so I can use qt5 layer when I feel necessary.
->>
->> Mathew is building xfce using the whitelist bbclass that some people
->> use. When he added meta-qt5 and whitelisted a few recipes, the
->> build broke. I don't object to adding changing how poppler works
->> when qt is present but by default as Matthew said, adding a layer
->> should not change anything. On the other hand, I can understand how
->> it would be very convenient to have the dependencies and configuration
->> change automatically. Could the be a tunable that is off by default?
->> The obvious downside to such an approach is testing but the
->> PACKAGECONFIGs already suffer from lack of testing so this only makes
->> it incrementally less tested! ;-)
->>
->>
->> There are only two such dynamic package configurarations in meta-oe:
->> $ grep -r BBFILE_COLLECTIONS | grep "PACKAGECONFIG "
->> meta-oe/recipes-support/poppler/poppler_0.85.0.bb:PACKAGECONFIG ??=3D
->> "jpeg openjpeg png tiff nss ${@bb.utils.contains('BBFILE_COLLECTIONS',
->> 'qt5-layer', 'qt5', '', d)}"
->> meta-networking/recipes-support/wireshark/wireshark_3.2.2.bb:PACKAGECONF=
-IG
->> ?=3D "libpcap gnutls libnl libcap sbc
->> ${@bb.utils.contains('BBFILE_COLLECTIONS', 'qt5-layer', 'qt5 plugins',
->> '', d)}"
->>
->>
->> and the only other such usage that I have in the meta-foo layers in my
->> local collection is:
->> meta-security/meta-tpm/recipes-tpm/swtpm/swtpm_0.2.0.bb:PACKAGECONFIG +=
-=3D
->> "${@bb.utils.contains('BBFILE_COLLECTIONS', 'filesystems-layer', 'cuse',
->> '', d)}"
->>
->> so fixing this isn't a huge impact.
->>
->> Matthew,
->> If Andreas agrees, please send a patch removing this behaviour
->> unless someone replies this week, providing a mechanism and a
->> local.conf setting to make it configurable.
+Signed-off-by: Vinothkumar <vinothkumar_baskaran@comcast.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb     | 1 +
+ 1 file changed, 1 insertion(+)
 
-Sounds good, let's see if there is an alternative mechanism.
+diff --git a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
+index 81bfe66a9e..a630d27b9c 100644
+--- a/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
++++ b/meta-networking/recipes-connectivity/miniupnpd/miniupnpd_2.1.20191006.bb
+@@ -37,6 +37,7 @@ do_install() {
+     install ${S}/netfilter/iptables_init.sh ${D}/${sysconfdir}/${BPN}
+     install ${S}/netfilter/iptables_removeall.sh ${D}/${sysconfdir}/${BPN}
+     install ${S}/netfilter/ip6tables_init.sh ${D}/${sysconfdir}/${BPN}
++    install ${S}/netfilter/miniupnpd_functions.sh ${D}/${sysconfdir}/${BPN}
+     install ${S}/netfilter/ip6tables_removeall.sh ${D}/${sysconfdir}/${BPN}
+     install -m 0644 -b ${S}/miniupnpd.conf ${D}/${sysconfdir}/${BPN}
+     install -d ${D}/${sysconfdir}/init.d
+-- 
+2.26.0
 
->>
->> ../Randy
-> Ahh - thanks for explanation. Send out whatever is 'correct' I won't
-> complain and find a way to not break the qt-based pdf readers /
-> poppler consumers.
->
-> Andreas
-
-
---
-Mingde (Matthew) Zeng
