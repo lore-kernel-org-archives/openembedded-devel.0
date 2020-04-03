@@ -1,121 +1,89 @@
-Received: from mail-lf1-f66.google.com (mail-lf1-f66.google.com [209.85.167.66])
- by mx.groups.io with SMTP id smtpd.web12.8570.1585912599728932896
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web12.15028.1585930873324958848
  for <openembedded-devel@lists.openembedded.org>;
- Fri, 03 Apr 2020 04:16:40 -0700
+ Fri, 03 Apr 2020 09:21:14 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@konsulko.com header.s=google header.b=rNK4weNc;
- spf=pass (domain: konsulko.com, ip: 209.85.167.66, mailfrom: leon.anavi@konsulko.com)
-Received: by mail-lf1-f66.google.com with SMTP id s13so5433936lfb.9
-        for <openembedded-devel@lists.openembedded.org>; Fri, 03 Apr 2020 04:16:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=konsulko.com; s=google;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=I9GhwpD1k1ZcRSzd6kBeC0H2T9mLiyupEBU2J0GITvw=;
-        b=rNK4weNcF4C1nD4Mb+nm13i3foivFK1Htpnu58Aj45XoKSu1ISv0Jc7b2xBERELefe
-         G8HX8NfZyPtOZB5SeSlqAHnFA5f/KyHsuipC3XXKlgASu9hYNMqGYGo7AYZzYyDb2tNG
-         77gwqAsa6c58IIQ/lVnpYadUn326/9n7bH3PU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=I9GhwpD1k1ZcRSzd6kBeC0H2T9mLiyupEBU2J0GITvw=;
-        b=qrbvnLuV46jiTnBYfMC0UCvPEwxANn6USswrwkQZZ2pyc6w3BUeYjBmZN/uY+itaVm
-         SkzL8a1sMhWiyX7/HtVKV+PY352CGl1Ol3aCqbmoSfEKLaVGyho0826J//bZ/8v0BnfF
-         YKaxy3DWThPXJG41NzpmM+8Nf1iwDaJ1AR9Fehaz/JGzNaSstn7yZ/pAllBWb4vgIJuE
-         tXNrPisepuT9r9/CTPb/WnkYDPGEwff6t/YSiT+x6NBL+iBTJRFR7eFz5novXCm5HWcn
-         DcdnZZuf+blDODa1+AUvNxpwAHm7Lo1DZbVN2M21K+UG8bC/FjGOUb0UF3Wmt/77TBZV
-         tUuA==
-X-Gm-Message-State: AGi0PuaquCv1YmeFOajchLvCT6oUiHxqotiqjFPAXbE/FGkbWscAgkXL
-	GvyBGZXVINP4rCA5B8C9jzt2Oc0nuCU=
-X-Google-Smtp-Source: APiQypIwbw8gh53M3JuNtLyNvYtqviJzPiSRHbEoAbr7i1WZxwPiWeYxp7/gHbUNPUXvyA5Sb5dBXA==
-X-Received: by 2002:ac2:4342:: with SMTP id o2mr5005727lfl.195.1585912597176;
-        Fri, 03 Apr 2020 04:16:37 -0700 (PDT)
-Return-Path: <leon.anavi@konsulko.com>
-Received: from [192.168.4.166] ([78.130.197.211])
-        by smtp.gmail.com with ESMTPSA id a6sm5790103lfl.5.2020.04.03.04.16.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 03 Apr 2020 04:16:36 -0700 (PDT)
-Subject: Re: [oe] [meta-python][PATCH 1/3] python-smbus2: Add new recipe
-To: Paul Barker <pbarker@konsulko.com>
-Cc: openembedded-devel@lists.openembedded.org
-References: <1585901748-16446-1-git-send-email-leon.anavi@konsulko.com>
- <20200403113348.21435aab@ub1910>
-From: "Leon Anavi" <leon.anavi@konsulko.com>
-Message-ID: <6c47735d-edf1-baef-91e0-8d20edc9a315@konsulko.com>
-Date: Fri, 3 Apr 2020 14:16:34 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <20200403113348.21435aab@ub1910>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+ dkim=pass header.i=@koncepto.io header.s=default header.b=ieQc+e7I;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id 3F862600BB;
+	Fri,  3 Apr 2020 18:21:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1585930871;
+	bh=C7tvSwwQqnWcM41ndKsiikR7nTsl78fltz/Ir0lVtCg=;
+	h=From:To:Cc:Subject:Date:From;
+	b=ieQc+e7Iz3h1rB0gQNbWsoO3Ohs87lSCUdoLcXDgki1z/+u4tCq1GEyOHq/c0YKsS
+	 pyP/k9FPvOY0T5MNGjXk8HKferVZjM4LmetlqjM5/ocw0rTk3VZCNT5zs9EU/8B57e
+	 +PX2+StdDxWsi3WsimJ8ykBK8rQxjdX2cSeIGkqjWUShUL2TPGhNWqWn3ZciUqjqfg
+	 OIvBM6oo2jJ7iRKD2+sRvKm8Jr5JCw9wdZDa/nA0TPJ2c0ScgFXm8fEkjr7ttQjUAq
+	 BtMlfb+fzOQMDNv5SG4dVJr2TrGytAWnb81JK5LCMHfpquiHZABWS3H3jDLsVyxLUG
+	 slGoATf5oms6Q==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-networking][PATCH 1/2] libnftnl: upgrade 1.1.5 -> 1.1.6
+Date: Fri,  3 Apr 2020 18:20:18 +0200
+Message-Id: <1585930819-13325-1-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
 
-Hi Paul,
+This includes the following changes:
 
-On 3.04.20 г. 13:33 ч., Paul Barker wrote:
-> On Fri,  3 Apr 2020 11:15:46 +0300
-> "Leon Anavi" <leon.anavi@konsulko.com> wrote:
->
->> Drop-in replacement for smbus-cffi/smbus-python in pure Python.
->> It is another implementation of the python-smbus package.
->>
->> Signed-off-by: Leon Anavi <leon.anavi@konsulko.com>
->> ---
->>   meta-python/recipes-devtools/python/python-smbus2.inc | 19 +++++++++++++++++++
->>   .../recipes-devtools/python/python3-smbus2_0.3.0.bb   |  2 ++
->>   2 files changed, 21 insertions(+)
->>   create mode 100644 meta-python/recipes-devtools/python/python-smbus2.inc
->>   create mode 100644 meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
->>
->> diff --git a/meta-python/recipes-devtools/python/python-smbus2.inc b/meta-python/recipes-devtools/python/python-smbus2.inc
->> new file mode 100644
->> index 0000000..0bab1a4
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python-smbus2.inc
->> @@ -0,0 +1,19 @@
->> +SUMMARY = "Drop-in replacement for smbus-cffi/smbus-python in pure Python"
->> +DESCRIPTION = "smbus2 is a drop-in replacement for smbus-cffi/smbus-python in pure Python"
->> +HOMEPAGE = "https://github.com/kplindegaard/smbus2"
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
->> +
->> +SRC_URI[md5sum] = "d5ed5acc889b4770a84cc932853ed20a"
->> +SRC_URI[sha256sum] = "210e66eebe4d0b1fe836b3ec2751841942e1c4918c0b429b20a0e20a222228b4"
->> +
->> +CLEANBROKEN = "1"
->> +
->> +PYPI_PACKAGE = "smbus2"
->> +
->> +RDEPENDS_${PN} = "${PYTHON_PN}-ctypes ${PYTHON_PN}-fcntl"
->> +
->> +RDEPENDS_${PN} += "\
->> +	${PYTHON_PN}-ctypes \
->> +	${PYTHON_PN}-fcntl \
->> +"
->> diff --git a/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb b/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
->> new file mode 100644
->> index 0000000..6149e35
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-smbus2_0.3.0.bb
->> @@ -0,0 +1,2 @@
->> +inherit pypi setuptools3
->> +require python-smbus2.inc
-> We should be doing away with this kind of .inc file now that meta-python is
-> python3 only. See
-> https://lists.openembedded.org/g/openembedded-devel/topic/72718415.
->
-> Thanks,
-Thanks for pointing it out. I will update accordingly my patches and 
-resubmit them.
+ac0778e build: libnftnl 1.1.6 release
+60e6d9b include: update nf_tables.h.
+c8cc25b Revert "bitwise: add support for passing mask and xor via registers."
+4bf470b expr: nat: snprint flags in hexadecimal
+ff92868 expr: masq: revisit _snprintf()
+c76d36a set: support for NFTNL_SET_EXPR
+9270557 set_elem: missing set and build for NFTNL_SET_ELEM_EXPR
+4c8abad chain: add NFTNL_CHAIN_FLAGS
+75b8778 bitwise: add support for passing mask and xor via registers.
+8db0a94 include: update nf_tables.h.
+7b4848c tests: bitwise: fix error message.
+ec3622b src: add nftnl_*_{get,set}_array()
+629ee38 src: Fix for reading garbage in nftnl_chain getters
+04cc28d set_elem: Introduce support for NFTNL_SET_ELEM_KEY_END
+7cd41b5 set: Add support for NFTA_SET_DESC_CONCAT attributes
+131a6c2 include: resync nf_tables.h cache copy
+8fa63d7 bitwise: add support for left- and right-shifts.
+3f232d7 bitwise: add support for new netlink attributes.
+3fb5640 include: update nf_tables.h.
+154104a bitwise: add helper to print boolean expressions.
+66d6afb bitwise: fix some incorrect indentation.
+35bac9a Update gitignore.
+325cb6f include: Remove buffer.h
+6079297 expr: meta: add slave device matching
+7e15d9d udata: support for TLV attribute nesting
+7f72b5c udata: add NFTNL_UDATA_SET_*TYPEOF* definitions
+d16abf7 include: typo in object.h C++ wrapper
+dfe3828 examples: Replace use of deprecated symbols
+d95a703 chain: Correctly check realloc() call
+835d645 flowtable: Correctly check realloc() call
+32a8c5f chain: Fix memleak in error path of nftnl_chain_parse_devs()
+ba1b025 flowtable: Fix memleak in error path of nftnl_flowtable_parse_devs()
+b238876 tests: flowtable: Don't check NFTNL_FLOWTABLE_SIZE
 
-Best regards,
-Leon
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+---
+ .../recipes-filter/libnftnl/{libnftnl_1.1.5.bb => libnftnl_1.1.6.bb}    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-networking/recipes-filter/libnftnl/{libnftnl_1.1.5.bb => libnftnl_1.1.6.bb} (88%)
 
+diff --git a/meta-networking/recipes-filter/libnftnl/libnftnl_1.1.5.bb b/meta-networking/recipes-filter/libnftnl/libnftnl_1.1.6.bb
+similarity index 88%
+rename from meta-networking/recipes-filter/libnftnl/libnftnl_1.1.5.bb
+rename to meta-networking/recipes-filter/libnftnl/libnftnl_1.1.6.bb
+index e1c2720..db42954 100644
+--- a/meta-networking/recipes-filter/libnftnl/libnftnl_1.1.5.bb
++++ b/meta-networking/recipes-filter/libnftnl/libnftnl_1.1.6.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=79808397c3355f163c012616125c9e26"
+ SECTION = "libs"
+ DEPENDS = "libmnl"
+ 
+-SRCREV = "a71599dc0ae1a808e970e96850ea83d77f452994"
++SRCREV = "ac0778e403eb51986ce19bcf1a6e8ae3cd83dcfa"
+ SRC_URI = "git://git.netfilter.org/libnftnl \
+            file://0001-avoid-naming-local-function-as-one-of-printf-family.patch \
+            "
 -- 
-Leon Anavi
-Software Engineer
-konsulko.com
+2.7.4
 
