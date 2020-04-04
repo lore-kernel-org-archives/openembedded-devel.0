@@ -1,86 +1,117 @@
-Received: from mail-oi1-f170.google.com (mail-oi1-f170.google.com [209.85.167.170])
- by mx.groups.io with SMTP id smtpd.web10.1585.1586020401982510890
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+ by mx.groups.io with SMTP id smtpd.web12.1532.1586020403129672475
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 10:13:22 -0700
+ Sat, 04 Apr 2020 10:13:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.170, mailfrom: straka.derek@gmail.com)
-Received: by mail-oi1-f170.google.com with SMTP id m14so9228564oic.0
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 10:13:21 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f45.google.com with SMTP id t28so10794923ott.5
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 10:13:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=w1QhOERC91r7+8HLJ01wwy9CSd665o3V5HXsd4Jgtew=;
-        b=T0rjKVt5se7/G9iQ95QRaAQnEOL4jqVpw4djRAZthhThNntniLI5981RLe0+8sSoqf
-         7NibeIYI3ugzZcEhyhVLjP8z59eA/Twxpzhyl8dqh/gVWGEEirx+hbcrsJyyAWly5+cI
-         dIHoONwKv6926JFbv2q8dNdOIFb39jOomN3iEcBqHnVFiiR1QcJg8F3r3jxLah9lWWM1
-         U8TdvzOgVE+EfKSnFGXzCrHLMrVWqJvaum9nUvvd/Hq70Ez2kOvNs0Erk0CXOPVlXWsQ
-         YRdC0zXfmpbzhq7zP5NXyYChcEwhYngtH+EHXxA25THTokTvKAcl+74eIfn3xZuwbxDk
-         387g==
-X-Gm-Message-State: AGi0PuaLVXzJ8AOo9xxdz+gYr2dSW8H2ehtUhW1irvkP+uknuAobJG/3
-	zsiBQpMJEHDXZw2zPgSlW1BCa0U2ptY=
-X-Google-Smtp-Source: APiQypKhCggVzCZUa/E7QO7BdePXT24UotonjbtI+GZVa8EfjQOxO1gIHJxyQb8ygPOXApvaEM525g==
-X-Received: by 2002:a05:6808:207:: with SMTP id l7mr7499397oie.171.1586020401006;
+        bh=K4FAajVmj7/kefInkpRZESoECMve5GYUdlxxV/OMM9A=;
+        b=kFKRyM8scn31BNxV4AuvaSsotuHWyaYWIAYkwtl2jQY7uNJjwUHusMkpvRYjfougkN
+         uUBRdCyFViAruKDQ8MqkiRrldJQ1CZ8u90c+v8T6NWWFSyun6O37X8qscKYV5nrY3LDp
+         Blw2vwGvRQeOVVbrEWHQT2MNzWi1UhCtcZnLSlTrPgKEMzR9Y90pypqM8Xchw7lEqDmd
+         QsQlJHLxXjMwtVjVB7/fCLrUlILyuLrt9/ygRmSg353LkZJA4iBanXT+M9yjOH54FOwE
+         /2t9hUc63a2x5OLfBZb1z8jLk8uxXqucoxkRpZTw4lysHCgYdAkjZx0laHn45pdEXj6Z
+         B55A==
+X-Gm-Message-State: AGi0PubdHEtcwYWHPKG7aAdwr3LTX3Y+s1Op5fdBtazvEeesRbGKIsMb
+	P4kGLEhc+frlaiEy1E9g1LN6V/VLbHY=
+X-Google-Smtp-Source: APiQypJ563wdX0j4iw2L5Lxsy+DrWgzhiLLED18OiYytxN8dWU8kdDtf5AlqgXLP4PBKIc42dv7jbA==
+X-Received: by 2002:a05:6830:19ec:: with SMTP id t12mr10562770ott.24.1586020401950;
         Sat, 04 Apr 2020 10:13:21 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id q12sm3054551otn.43.2020.04.04.10.13.20
+        by smtp.gmail.com with ESMTPSA id q12sm3054551otn.43.2020.04.04.10.13.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 10:13:20 -0700 (PDT)
+        Sat, 04 Apr 2020 10:13:21 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 15/27] python-smbus: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 13:12:39 -0400
-Message-Id: <20200404171251.19823-15-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 16/27] python-socketio: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 13:12:40 -0400
+Message-Id: <20200404171251.19823-16-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404171251.19823-1-derek@asterius.io>
 References: <20200404171251.19823-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-smbus.inc        | 12 ------------
- .../recipes-devtools/python/python3-smbus_4.1.bb    | 13 ++++++++++++-
- 2 files changed, 12 insertions(+), 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-smbus.inc
+ .../python/python-socketio.inc                | 28 -------------------
+ .../python/python3-socketio_4.4.0.bb          | 26 +++++++++++++++--
+ 2 files changed, 24 insertions(+), 30 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-socketio.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-smbus.inc b/meta-python/recipes-devtools/python/python-smbus.inc
+diff --git a/meta-python/recipes-devtools/python/python-socketio.inc b/meta-python/recipes-devtools/python/python-socketio.inc
 deleted file mode 100644
-index 8ba1ab2b82..0000000000
---- a/meta-python/recipes-devtools/python/python-smbus.inc
+index 117eb60784..0000000000
+--- a/meta-python/recipes-devtools/python/python-socketio.inc
 +++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "Set of i2c tools for linux - Python module"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://smbusmodule.c;beginline=1;endline=18;md5=46e424fb045901ab25e0f92c28c80055"
--PR = "r1"
+@@ -1,28 +0,0 @@
+-SUMMARY = "Socket.IO server"
+-HOMEPAGE = "https://github.com/miguelgrinberg/python-socketio/"
+-SECTION = "devel/python"
 -
--SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz "
--SRC_URI[md5sum] = "3536237a6b51fb10caacdc3b8a496237"
--SRC_URI[sha256sum] = "ef8f77afc70e7dbfd1171bfeae87a8a7f10074829370ce8d9ccd585a014e0073"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=42d0a9e728978f0eeb759c3be91536b8"
 -
--DEPENDS += "i2c-tools"
+-inherit pypi
 -
--S = "${WORKDIR}/i2c-tools-${PV}/py-smbus/"
-diff --git a/meta-python/recipes-devtools/python/python3-smbus_4.1.bb b/meta-python/recipes-devtools/python/python3-smbus_4.1.bb
-index b357bcd822..1be77393b2 100644
---- a/meta-python/recipes-devtools/python/python3-smbus_4.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-smbus_4.1.bb
-@@ -1,2 +1,13 @@
-+SUMMARY = "Set of i2c tools for linux - Python module"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://smbusmodule.c;beginline=1;endline=18;md5=46e424fb045901ab25e0f92c28c80055"
-+PR = "r1"
+-PYPI_PACKAGE = "python-socketio"
+-
+-SRC_URI[md5sum] = "6631497753977b70d2b5ceb12af2775f"
+-SRC_URI[sha256sum] = "48cba5b827ac665dbf923a4f5ec590812aed5299a831fc43576a9af346272534"
+-
+-PACKAGECONFIG ?= ""
+-PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
+-PACKAGECONFIG[client] = ",,,${PYTHON_PN}-requests ${PYTHON_PN}-websocket-client"
+-
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-engineio \
+-    ${PYTHON_PN}-logging \
+-    ${PYTHON_PN}-math \
+-    ${PYTHON_PN}-pickle \
+-    ${PYTHON_PN}-json \
+-    ${PYTHON_PN}-threading \
+-    ${PYTHON_PN}-six \
+-    ${PYTHON_PN}-attrs \
+-    "
+diff --git a/meta-python/recipes-devtools/python/python3-socketio_4.4.0.bb b/meta-python/recipes-devtools/python/python3-socketio_4.4.0.bb
+index e2542cf4a5..73548e368b 100644
+--- a/meta-python/recipes-devtools/python/python3-socketio_4.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-socketio_4.4.0.bb
+@@ -1,5 +1,27 @@
+-inherit setuptools3
++SUMMARY = "Socket.IO server"
++HOMEPAGE = "https://github.com/miguelgrinberg/python-socketio/"
++SECTION = "devel/python"
 +
-+SRC_URI = "${KERNELORG_MIRROR}/software/utils/i2c-tools/i2c-tools-${PV}.tar.gz "
-+SRC_URI[md5sum] = "3536237a6b51fb10caacdc3b8a496237"
-+SRC_URI[sha256sum] = "ef8f77afc70e7dbfd1171bfeae87a8a7f10074829370ce8d9ccd585a014e0073"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=42d0a9e728978f0eeb759c3be91536b8"
 +
-+DEPENDS += "i2c-tools"
++SRC_URI[md5sum] = "6631497753977b70d2b5ceb12af2775f"
++SRC_URI[sha256sum] = "48cba5b827ac665dbf923a4f5ec590812aed5299a831fc43576a9af346272534"
 +
-+S = "${WORKDIR}/i2c-tools-${PV}/py-smbus/"
- inherit distutils3
--require python-smbus.inc
++PYPI_PACKAGE = "python-socketio"
++inherit pypi setuptools3
+ 
+ PACKAGECONFIG ?= "asyncio_client client"
+-require python-socketio.inc
++PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
++PACKAGECONFIG[client] = ",,,${PYTHON_PN}-requests ${PYTHON_PN}-websocket-client"
+ 
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-engineio \
++    ${PYTHON_PN}-logging \
++    ${PYTHON_PN}-math \
++    ${PYTHON_PN}-pickle \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-threading \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-attrs \
++    "
 -- 
 2.17.1
 
