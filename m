@@ -1,148 +1,130 @@
-Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
- by mx.groups.io with SMTP id smtpd.web12.3074.1586024489525004918
+Received: from mail-qk1-f193.google.com (mail-qk1-f193.google.com [209.85.222.193])
+ by mx.groups.io with SMTP id smtpd.web10.4733.1586029191475976990
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 11:21:29 -0700
+ Sat, 04 Apr 2020 12:39:51 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f44.google.com with SMTP id g23so10949411otq.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 11:21:29 -0700 (PDT)
+ dkim=pass header.i=@gmail.com header.s=20161025 header.b=cuYM8WaF;
+ spf=pass (domain: gmail.com, ip: 209.85.222.193, mailfrom: raj.khem@gmail.com)
+Received: by mail-qk1-f193.google.com with SMTP id b62so11921840qkf.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 12:39:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=LOQeGGLrNJ/oC1ephyJazrn5aLhmw45CgDWAkF669Wg=;
+        b=cuYM8WaFQrNFX1R2o/G1h7kThvO0tHw+Oe/JWYBB3wrLJdCGVRA5jccoNjReQvwEXC
+         YpOUf+1bj5xyC7P49zqn/aDALqBTw64vAbSGZzR0xVHhhyles4Cvn34W8izNMR4k7Ykn
+         1+dZpuyaldOdXurbaBhBf3qdjahNMFl1N3KFnCwtVVC7SekEQrnDpLRY9NKmlAOrk3Nh
+         zd+xJVDkHQ7k32UBFfAWsoaFUnrQjAENTMCCK+f8tHyM122j1/7fq2ew4EZKGYeFAmL/
+         300XkXEaAmZsAhiQUD2E5HUzwBxHex6HQMeTBBmSZYO/7XWK5xMfpv35rL7n+eefQumP
+         0xBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=Np2khW6GebaXmvczG8M7ywUuo/RaMy6xZhL8eWUtVKU=;
-        b=UrYdGmos6KhEF2LN0mfMmWonO5T+bp8pIjFdHnPLssA5D6ZbsV+vE5Kcqpgw2cmdml
-         LHua1g+a1qtNd+eO9zDInYLyyRKqNN3YnoLqrVox48bJ2cgAW8pYd+o30ccMb4SBl0Vf
-         g/NOHlQzFIsZBnvGwKyENxB7lm3YCSs3QjfZ4Lahg/EX5Swap0lqi6WZy7PzkKOWtmvx
-         8lEZ/j5x/Ek8LC4XP0cFYae7QaTftKy8bLX3ei6CA8CnLjC+MUw0fbabCrZp0GJjaEki
-         PniSLITiFsTnBbU5yGSX0NB2oCtaShX5VBLxOn+RRGFZrKFz7hemGdK3QKUkI/rukBNs
-         Nttg==
-X-Gm-Message-State: AGi0PuYpn2OCti7XhrCtZ0Fo8JUPWvcm7YUpFjbz5h92wR0/1sZYEoFR
-	zVb00qs657r5CHP0qNLxGsI+Nsz6wy8=
-X-Google-Smtp-Source: APiQypJQ+oAPVt0lZo73gHuUhIqZ3j30QvP3gaaoI0NLZgYUuXy+rM8tbx0BMTIYULdVbHOuHiAong==
-X-Received: by 2002:a4a:df05:: with SMTP id i5mr11818754oou.9.1586024488471;
-        Sat, 04 Apr 2020 11:21:28 -0700 (PDT)
-Return-Path: <straka.derek@gmail.com>
-Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id j23sm3162059oib.32.2020.04.04.11.21.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 11:21:27 -0700 (PDT)
-From: "Derek Straka" <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 12/12] python-pytest: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 14:21:04 -0400
-Message-Id: <20200404182104.21027-12-derek@asterius.io>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200404182104.21027-1-derek@asterius.io>
-References: <20200404182104.21027-1-derek@asterius.io>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=LOQeGGLrNJ/oC1ephyJazrn5aLhmw45CgDWAkF669Wg=;
+        b=iC4ekfGqS54FuMHR/oax8vDmlC+NmYxbdIzNcnOOlUeRckBsl1R3WGh+DX5tRJWZvc
+         +ZTn11pJ1O7v/Ridjy4FEJYSDZE9CC1x0sXgwSeO/v/lnN9J1pOFZpqICzrz5eEcyg2S
+         huLe4u1JJYJHWWSEKiTnJv9/ueBPteo7E8w5nDDKk8kFOMVlDeSjXU9F7qGuvyoxlEZL
+         SgKqUI2Urokg+sDtHBBu0kbVMEmnIr6BIzjCYe/R7H1ZbY2KvQ0EPTPoYUUmd8BVSYqe
+         7BYan5ZVdvEro/5XU0/Q1Hp/51FqWSB0ufEK350gM8QEDbSA1gIYnZXm7MOVH4fN5O35
+         Eh2w==
+X-Gm-Message-State: AGi0Pub3tU3CO0wFFsM2BvedZ0migmURKPC6jgIRzv0RaW2L2vXlbtFK
+	O0kOsPcsu8+v2kP5qu57oR/Ve9MsdTHszo1ehbpTZ1k2
+X-Google-Smtp-Source: APiQypKF5jNoSf5aclbDoVznG2l7IWqq6UHTqLE+VoKP16zvgM7kVRz6sGUoVfR1r2Lj1ei5wYl36edIIvzw2nQWA84=
+X-Received: by 2002:a37:bec5:: with SMTP id o188mr14756239qkf.165.1586029190414;
+ Sat, 04 Apr 2020 12:39:50 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200404171251.19823-1-derek@asterius.io> <20200404171251.19823-16-derek@asterius.io>
+In-Reply-To: <20200404171251.19823-16-derek@asterius.io>
+From: "Khem Raj" <raj.khem@gmail.com>
+Date: Sat, 4 Apr 2020 12:39:24 -0700
+Message-ID: <CAMKF1sqxAOP2vvuM3=aoX7sXHaXQ-MQcNfVDq6D4UtpS4pm0pQ@mail.gmail.com>
+Subject: Re: [oe][meta-python][PATCH 16/27] python-socketio: consolidate inc and bb files into a single bb file
+To: Derek Straka <derek@asterius.io>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-devtools/python/python-pytest.inc | 41 -------------------
- ...he-setup_requires-for-setuptools-scm.patch |  0
- .../python/python3-pytest_5.3.5.bb            | 40 ++++++++++++++++--
- 3 files changed, 37 insertions(+), 44 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pytest.inc
- rename meta-python/recipes-devtools/python/{python-pytest => python3-pytest}/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch (100%)
+there is a similar patch already on ml, so dropping this
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
-deleted file mode 100644
-index 40ca9c2f13..0000000000
---- a/meta-python/recipes-devtools/python/python-pytest.inc
-+++ /dev/null
-@@ -1,41 +0,0 @@
--SUMMARY = "Simple powerful testing with python"
--HOMEPAGE = "http://pytest.org"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
--
--SRC_URI[md5sum] = "d5ef453f723be46d93e0795f3be86c88"
--SRC_URI[sha256sum] = "0d5fe9189a148acc3c3eb2ac8e1ac0742cb7618c084f3d228baaec0c254b318d"
--
--SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch \
--                   "
--
--inherit update-alternatives
--
--RDEPENDS_${PN}_class-target += " \
--    ${PYTHON_PN}-attrs \
--    ${PYTHON_PN}-debugger \
--    ${PYTHON_PN}-doctest \
--    ${PYTHON_PN}-json \
--    ${PYTHON_PN}-pluggy \
--    ${PYTHON_PN}-py \
--    ${PYTHON_PN}-setuptools \
--    ${PYTHON_PN}-six \
--    ${PYTHON_PN}-atomicwrites \
--    ${PYTHON_PN}-importlib-metadata \
--    ${PYTHON_PN}-pathlib2 \
--    ${PYTHON_PN}-wcwidth \
--    ${PYTHON_PN}-more-itertools \
--    ${PYTHON_PN}-packaging \
--"
--
--FILESEXTRAPATHS_prepend := "${THISDIR}/python-pytest:"
--
--ALTERNATIVE_${PN} += "py.test pytest"
--
--NATIVE_LINK_NAME[pytest] = "${bindir}/pytest"
--ALTERNATIVE_TARGET[pytest] = "${bindir}/pytest"
--
--ALTERNATIVE_LINK_NAME[py.test] = "${bindir}/py.test"
--ALTERNATIVE_TARGET[py.test] = "${bindir}/py.test"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch b/meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-rename to meta-python/recipes-devtools/python/python3-pytest/0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch
-diff --git a/meta-python/recipes-devtools/python/python3-pytest_5.3.5.bb b/meta-python/recipes-devtools/python/python3-pytest_5.3.5.bb
-index eba6632a27..8dad13a9e1 100644
---- a/meta-python/recipes-devtools/python/python3-pytest_5.3.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytest_5.3.5.bb
-@@ -1,4 +1,38 @@
--inherit pypi setuptools3
--require python-pytest.inc
-+SUMMARY = "Simple powerful testing with python"
-+HOMEPAGE = "http://pytest.org"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=81eb9f71d006c6b268cf4388e3c98f7b"
- 
--ALTERNATIVE_PRIORITY = "100"
-+SRC_URI[md5sum] = "d5ef453f723be46d93e0795f3be86c88"
-+SRC_URI[sha256sum] = "0d5fe9189a148acc3c3eb2ac8e1ac0742cb7618c084f3d228baaec0c254b318d"
-+
-+SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch "
-+
-+inherit update-alternatives pypi setuptools3
-+
-+RDEPENDS_${PN}_class-target += " \
-+    ${PYTHON_PN}-attrs \
-+    ${PYTHON_PN}-debugger \
-+    ${PYTHON_PN}-doctest \
-+    ${PYTHON_PN}-json \
-+    ${PYTHON_PN}-pluggy \
-+    ${PYTHON_PN}-py \
-+    ${PYTHON_PN}-setuptools \
-+    ${PYTHON_PN}-six \
-+    ${PYTHON_PN}-atomicwrites \
-+    ${PYTHON_PN}-importlib-metadata \
-+    ${PYTHON_PN}-pathlib2 \
-+    ${PYTHON_PN}-wcwidth \
-+    ${PYTHON_PN}-more-itertools \
-+    ${PYTHON_PN}-packaging \
-+"
-+
-+ALTERNATIVE_${PN} += "py.test pytest"
-+
-+NATIVE_LINK_NAME[pytest] = "${bindir}/pytest"
-+ALTERNATIVE_TARGET[pytest] = "${bindir}/pytest"
-+
-+ALTERNATIVE_LINK_NAME[py.test] = "${bindir}/py.test"
-+ALTERNATIVE_TARGET[py.test] = "${bindir}/py.test"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.17.1
-
+On Sat, Apr 4, 2020 at 10:13 AM Derek Straka <derek@asterius.io> wrote:
+>
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  .../python/python-socketio.inc                | 28 -------------------
+>  .../python/python3-socketio_4.4.0.bb          | 26 +++++++++++++++--
+>  2 files changed, 24 insertions(+), 30 deletions(-)
+>  delete mode 100644 meta-python/recipes-devtools/python/python-socketio.inc
+>
+> diff --git a/meta-python/recipes-devtools/python/python-socketio.inc b/meta-python/recipes-devtools/python/python-socketio.inc
+> deleted file mode 100644
+> index 117eb60784..0000000000
+> --- a/meta-python/recipes-devtools/python/python-socketio.inc
+> +++ /dev/null
+> @@ -1,28 +0,0 @@
+> -SUMMARY = "Socket.IO server"
+> -HOMEPAGE = "https://github.com/miguelgrinberg/python-socketio/"
+> -SECTION = "devel/python"
+> -
+> -LICENSE = "MIT"
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=42d0a9e728978f0eeb759c3be91536b8"
+> -
+> -inherit pypi
+> -
+> -PYPI_PACKAGE = "python-socketio"
+> -
+> -SRC_URI[md5sum] = "6631497753977b70d2b5ceb12af2775f"
+> -SRC_URI[sha256sum] = "48cba5b827ac665dbf923a4f5ec590812aed5299a831fc43576a9af346272534"
+> -
+> -PACKAGECONFIG ?= ""
+> -PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
+> -PACKAGECONFIG[client] = ",,,${PYTHON_PN}-requests ${PYTHON_PN}-websocket-client"
+> -
+> -RDEPENDS_${PN} += "\
+> -    ${PYTHON_PN}-engineio \
+> -    ${PYTHON_PN}-logging \
+> -    ${PYTHON_PN}-math \
+> -    ${PYTHON_PN}-pickle \
+> -    ${PYTHON_PN}-json \
+> -    ${PYTHON_PN}-threading \
+> -    ${PYTHON_PN}-six \
+> -    ${PYTHON_PN}-attrs \
+> -    "
+> diff --git a/meta-python/recipes-devtools/python/python3-socketio_4.4.0.bb b/meta-python/recipes-devtools/python/python3-socketio_4.4.0.bb
+> index e2542cf4a5..73548e368b 100644
+> --- a/meta-python/recipes-devtools/python/python3-socketio_4.4.0.bb
+> +++ b/meta-python/recipes-devtools/python/python3-socketio_4.4.0.bb
+> @@ -1,5 +1,27 @@
+> -inherit setuptools3
+> +SUMMARY = "Socket.IO server"
+> +HOMEPAGE = "https://github.com/miguelgrinberg/python-socketio/"
+> +SECTION = "devel/python"
+> +
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=42d0a9e728978f0eeb759c3be91536b8"
+> +
+> +SRC_URI[md5sum] = "6631497753977b70d2b5ceb12af2775f"
+> +SRC_URI[sha256sum] = "48cba5b827ac665dbf923a4f5ec590812aed5299a831fc43576a9af346272534"
+> +
+> +PYPI_PACKAGE = "python-socketio"
+> +inherit pypi setuptools3
+>
+>  PACKAGECONFIG ?= "asyncio_client client"
+> -require python-socketio.inc
+> +PACKAGECONFIG[asyncio_client] = ",,,${PYTHON_PN}-aiohttp ${PYTHON_PN}-websockets"
+> +PACKAGECONFIG[client] = ",,,${PYTHON_PN}-requests ${PYTHON_PN}-websocket-client"
+>
+> +RDEPENDS_${PN} += "\
+> +    ${PYTHON_PN}-engineio \
+> +    ${PYTHON_PN}-logging \
+> +    ${PYTHON_PN}-math \
+> +    ${PYTHON_PN}-pickle \
+> +    ${PYTHON_PN}-json \
+> +    ${PYTHON_PN}-threading \
+> +    ${PYTHON_PN}-six \
+> +    ${PYTHON_PN}-attrs \
+> +    "
+> --
+> 2.17.1
+>
+> 
