@@ -1,56 +1,58 @@
 Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.7739.1586003791367361503
+ by mx.groups.io with SMTP id smtpd.web12.7776.1586003791363118657
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Apr 2020 05:36:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=YKXL+4Yt;
+ dkim=pass header.i=@koncepto.io header.s=default header.b=ONJIvgPX;
  spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 0BA9D600BB;
+	by koncepto.io (Postfix) with ESMTPSA id C0E816035D;
 	Sat,  4 Apr 2020 14:36:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
 	s=default; t=1586003789;
-	bh=4rVEeinZvMqSYKZKj+kCzhkHhnc/zPaRImmaKUZ3K8s=;
-	h=From:To:Cc:Subject:Date:From;
-	b=YKXL+4Yt6LN3XoBuUQXmCFrdF7A2yuCDhK2xGRtsOshQfpVpVLTZHlkecnw0RH/zr
-	 UDuwbVqsc6g016JKHDUPNtEOrsSYHdkqCpAA0sftHwb7YpvqvH/Yn/ug+BY+T5gi/f
-	 posDUSGCShGMc+k/GUlA0KLJFT0Z1z8R/Y4BSnm6yauw4S4wcDnbR3fU8fGQISoP35
-	 QA0taULUgmrLVOJi856J1Abzyt4Xpy00Z4GdAUKQZNS8RTmdBLxiKxEUzTsYwOXrPB
-	 NiL+SxheeUXD0sIuPWgPCACEXCykF+9D76qnqarmtVhbfp4dC8M9/VDIoAWZHBhb0P
-	 OYDVDtudN5g5Q==
+	bh=S36fUhhIw8tCemLHkOr+WTMyI/dVPbbvKlkSokcaTBg=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=ONJIvgPXA1Ln8TlBWhwZj9c86mXx+fbBjUYWpyr7O56csWWXZfQD6KYqY6xdEjh4T
+	 fg1197i5KcJYjXTPMXhW+fQR0YMrKM+NjjpO5owangGMK0/7ii5D5jPkzjmyGY7jy8
+	 OE/O2NDRO1C3nlt3Mgt8+d3uQJHKS7fkzRSOJoLs+iz/UtpMwtJXmBKaP8m6ytfo93
+	 7HoSPZO3Sxs3+L74B6pjnkJLepf9rh1EC5cbEGqJdUM2xCoP4g6/HqI26r3Tbg+y5w
+	 DFT9WV9kF9K2O5NkULaW8pfLWUYFnt2OP7W0xo2CmeMLIrFV9VuMDV0LxDSA6/B6my
+	 Ns36bByRmh0yg==
 From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-networking][PATCH 1/5] opensaf: fix upstream check URL
-Date: Sat,  4 Apr 2020 14:35:57 +0200
-Message-Id: <1586003761-12873-1-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-networking][PATCH 2/5] relayd: use UPSTREAM_CHECK_COMMITS
+Date: Sat,  4 Apr 2020 14:35:58 +0200
+Message-Id: <1586003761-12873-2-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1586003761-12873-1-git-send-email-pjtexier@koncepto.io>
+References: <1586003761-12873-1-git-send-email-pjtexier@koncepto.io>
 
 Fixes:
 
-$: devtool check-upgrade-status opensaf
+$: devtool check-upgrade-status relayd
 <...>
 
-INFO: opensaf                   5.19.10         UNKNOWN_BROKEN  None
+INFO: relayd                    0.0.1           UNKNOWN_BROKEN  None
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-networking/recipes-daemons/opensaf/opensaf_5.19.10.bb | 2 ++
+ meta-networking/recipes-connectivity/relayd/relayd_git.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.10.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.10.bb
-index 8ce8fce..3ab4757 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_5.19.10.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.19.10.bb
-@@ -31,6 +31,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
- SRC_URI[md5sum] = "9b61df01d1a092101c4a626692edae19"
- SRC_URI[sha256sum] = "6da9af96e8ee58d11031d305bf4804a00deb6108e12e422722882a2091bd34bd"
+diff --git a/meta-networking/recipes-connectivity/relayd/relayd_git.bb b/meta-networking/recipes-connectivity/relayd/relayd_git.bb
+index 98dc41a..e3134e4 100644
+--- a/meta-networking/recipes-connectivity/relayd/relayd_git.bb
++++ b/meta-networking/recipes-connectivity/relayd/relayd_git.bb
+@@ -12,6 +12,8 @@ SRC_URI = "git://git.openwrt.org/project/relayd.git \
+ SRCREV = "ad0b25ad74345d367c62311e14b279f5ccb8ef13"
+ PV = "0.0.1+git${SRCPV}"
  
-+UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/opensaf/files/releases"
++UPSTREAM_CHECK_COMMITS = "1"
 +
- inherit autotools useradd systemd pkgconfig
+ S = "${WORKDIR}/git"
  
- USERADD_PACKAGES = "${PN}"
+ inherit cmake
 -- 
 2.7.4
 
