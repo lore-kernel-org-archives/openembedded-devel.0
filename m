@@ -1,91 +1,116 @@
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
- by mx.groups.io with SMTP id smtpd.web11.2990.1586024481164422432
+Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com [209.85.167.195])
+ by mx.groups.io with SMTP id smtpd.web12.3066.1586024481616548645
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Apr 2020 11:21:21 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: straka.derek@gmail.com)
-Received: by mail-oi1-f182.google.com with SMTP id r21so870607oij.11
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.195, mailfrom: straka.derek@gmail.com)
+Received: by mail-oi1-f195.google.com with SMTP id q204so9253212oia.13
         for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 11:21:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=nb8hNnvY0z3YuNTTEPH/CwAMVRLci02GgBH0bmLIAgE=;
-        b=G5tg3oaful2uLwlUSGQYFTkA0smjgUvzLLEKCBqtAHak4tgoI8Mb+5/dMzn2By8o4N
-         c7X9idV002tHnkEDNkEWkxFVuq6dHBMAGpr3QMIc3LZI1xP2d08FzXPLCe/x3k2GTIu6
-         2GabA165r9shqiq/lru1Ix0wdQJgny65JJXlqVnEztClLr7qiI6MEIdsevD7YpnErrKe
-         TkQNqvNF5gL8USDkr67tGzUFUCPNlc7UM56SCzTdCpXvMiGJKWlKi+mnCHybr06fw6Dq
-         kVB1cuOzl81ikUM5QgZROZ4ZgIhPI5SDeT8qq1RBJBOMbHjoRX7uVC4AifM8VkTpJWss
-         toDw==
-X-Gm-Message-State: AGi0PuYtNDsifJKzi8uycPcADwM+wY7tlSPYVkS0mr83MNcI+nzRsoUr
-	thccGgLkMTsoLyNzeqIJf1LXN4nnkUA=
-X-Google-Smtp-Source: APiQypI2uMq+/Y+HMxdX69gCI/AwuzZRQN4BeUyPvfPKSuMW9XHK9m2X8kGzezBv4HVGbC7g98MFDQ==
-X-Received: by 2002:aca:5b09:: with SMTP id p9mr7608983oib.57.1586024479965;
-        Sat, 04 Apr 2020 11:21:19 -0700 (PDT)
+         :references;
+        bh=U562UdoR1GEFL2nLHJ0EKMrQkjO7s9FW0RQvxfCxkO0=;
+        b=pmjJLfnImXn7Vn9XQWGLB4BkVp0rDbSJA4EC4oz93D+u85DMOYG6oi/qSvv8AQKiLC
+         IMhQe5tddLs3an8uE4NTmZXk4X6NGiQxgO1WKlEeuJJq8SepK8/JiwyCxB3lNRTnG7H1
+         ZREy06wG7bmNCBrsJTpPof2luQi+VP+LKZoQjWD65AVBCOawFIjwjruZqRMOYfL+iwor
+         KGYLI21Zun4VUngwIc5kNZ5I6GYeY/GSzJBJ2mV+c4ZouCbilIGxcXnbbE9C7lvfOwcf
+         lmWalrhJHvXbP589wzlI0K/Qflh/CgPcQfHFd5eY8ucuD2Tmvv6GHFNBvsMklqncwB5C
+         rgXw==
+X-Gm-Message-State: AGi0Pub+dTibWqQ60TfdgCC7XNf1x5gG0HdJUMnVNY+1KSVTjcCVF9nf
+	37TZTHToNSAaWeQNGm9SeQBRaS3wpR8=
+X-Google-Smtp-Source: APiQypKNnMaKLe6SizLkvBpPsWJH8QPSdiMWo05xMW2eRwCtoQBg2Dgmj4PPwdo4IoqVE7Wk7bhnsA==
+X-Received: by 2002:aca:b743:: with SMTP id h64mr7612597oif.176.1586024480684;
+        Sat, 04 Apr 2020 11:21:20 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id j23sm3162059oib.32.2020.04.04.11.21.19
+        by smtp.gmail.com with ESMTPSA id j23sm3162059oib.32.2020.04.04.11.21.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 11:21:19 -0700 (PDT)
+        Sat, 04 Apr 2020 11:21:20 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 03/12] python-raven: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 14:20:55 -0400
-Message-Id: <20200404182104.21027-3-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 04/12] python-pyzmq: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 14:20:56 -0400
+Message-Id: <20200404182104.21027-4-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404182104.21027-1-derek@asterius.io>
 References: <20200404182104.21027-1-derek@asterius.io>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-raven.inc      | 13 -------------
- .../python/python3-raven_6.10.0.bb                | 15 +++++++++++++--
- 2 files changed, 13 insertions(+), 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-raven.inc
+ .../recipes-devtools/python/python-pyzmq.inc  | 27 -----------------
+ .../python/python3-pyzmq_17.1.0.bb            | 29 +++++++++++++++++--
+ 2 files changed, 27 insertions(+), 29 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyzmq.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-raven.inc b/meta-python/recipes-devtools/python/python-raven.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyzmq.inc b/meta-python/recipes-devtools/python/python-pyzmq.inc
 deleted file mode 100644
-index 1c65e11767..0000000000
---- a/meta-python/recipes-devtools/python/python-raven.inc
+index 2447c2f34b..0000000000
+--- a/meta-python/recipes-devtools/python/python-pyzmq.inc
 +++ /dev/null
-@@ -1,13 +0,0 @@
--SUMMARY = "Raven is the legacy Python client for Sentry (getsentry.com)"
--DESCRIPTION = "\
--Raven is the official legacy Python client for Sentry, officially \
--supports Python 2.6–2.7 & 3.3–3.7, and runs on PyPy and Google App Engine."
--HOMEPAGE = "https://github.com/getsentry/raven-python"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=b9a4414e08f0571d55184531cefc131b"
+@@ -1,27 +0,0 @@
+-SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
+-HOMEPAGE = "http://zeromq.org/bindings:python"
+-LICENSE = "BSD & LGPL-3.0"
+-LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
+-                    file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e"
+-DEPENDS = "zeromq"
 -
--SRC_URI[md5sum] = "3676f31dadfa61526444dd0245c78a38"
--SRC_URI[sha256sum] = "3fa6de6efa2493a7c827472e984ce9b020797d0da16f1db67197bcc23c8fae54"
+-FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyzmq:"
 -
--PYPI_PACKAGE = "raven"
--inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python3-raven_6.10.0.bb b/meta-python/recipes-devtools/python/python3-raven_6.10.0.bb
-index 0f346e45ec..b0d19c31ad 100644
---- a/meta-python/recipes-devtools/python/python3-raven_6.10.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-raven_6.10.0.bb
-@@ -1,2 +1,13 @@
+-SRC_URI += "file://club-rpath-out.patch"
+-SRC_URI[md5sum] = "aecdfc328193fbd81f6dc23228319943"
+-SRC_URI[sha256sum] = "2199f753a230e26aec5238b0518b036780708a4c887d4944519681a920b9dee4"
+-
+-inherit pypi pkgconfig
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-multiprocessing"
+-
+-FILES_${PN}-dbg =+ "${PYTHON_SITEPACKAGES_DIR}/zmq/backend/cython/.debug"
+-
+-do_compile_prepend() {
+-    echo [global] > ${S}/setup.cfg
+-    echo zmq_prefix = ${STAGING_DIR_HOST} >> ${S}/setup.cfg
+-    echo have_sys_un_h = True >> ${S}/setup.cfg
+-    echo skip_check_zmq = True >> ${S}/setup.cfg
+-    echo libzmq_extension = False >> ${S}/setup.cfg
+-    echo no_libzmq_extension = True >> ${S}/setup.cfg
+-}
+diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_17.1.0.bb b/meta-python/recipes-devtools/python/python3-pyzmq_17.1.0.bb
+index 050f53af14..2369f067ee 100644
+--- a/meta-python/recipes-devtools/python/python3-pyzmq_17.1.0.bb
++++ b/meta-python/recipes-devtools/python/python3-pyzmq_17.1.0.bb
+@@ -1,2 +1,27 @@
+-require python-pyzmq.inc
 -inherit setuptools3
--require python-raven.inc
-+SUMMARY = "Raven is the legacy Python client for Sentry (getsentry.com)"
-+DESCRIPTION = "\
-+Raven is the official legacy Python client for Sentry, officially \
-+supports Python 2.6–2.7 & 3.3–3.7, and runs on PyPy and Google App Engine."
-+HOMEPAGE = "https://github.com/getsentry/raven-python"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b9a4414e08f0571d55184531cefc131b"
++SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
++HOMEPAGE = "http://zeromq.org/bindings:python"
++LICENSE = "BSD & LGPL-3.0"
++LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
++                    file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e"
++DEPENDS = "zeromq"
 +
-+SRC_URI[md5sum] = "3676f31dadfa61526444dd0245c78a38"
-+SRC_URI[sha256sum] = "3fa6de6efa2493a7c827472e984ce9b020797d0da16f1db67197bcc23c8fae54"
++FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyzmq:"
 +
-+PYPI_PACKAGE = "raven"
-+inherit pypi setuptools3
++SRC_URI += "file://club-rpath-out.patch"
++SRC_URI[md5sum] = "aecdfc328193fbd81f6dc23228319943"
++SRC_URI[sha256sum] = "2199f753a230e26aec5238b0518b036780708a4c887d4944519681a920b9dee4"
++
++inherit pypi pkgconfig setuptools3
++
++RDEPENDS_${PN} += "${PYTHON_PN}-multiprocessing"
++
++FILES_${PN}-dbg =+ "${PYTHON_SITEPACKAGES_DIR}/zmq/backend/cython/.debug"
++
++do_compile_prepend() {
++    echo [global] > ${S}/setup.cfg
++    echo zmq_prefix = ${STAGING_DIR_HOST} >> ${S}/setup.cfg
++    echo have_sys_un_h = True >> ${S}/setup.cfg
++    echo skip_check_zmq = True >> ${S}/setup.cfg
++    echo libzmq_extension = False >> ${S}/setup.cfg
++    echo no_libzmq_extension = True >> ${S}/setup.cfg
++}
 -- 
 2.17.1
 
