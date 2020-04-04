@@ -1,96 +1,84 @@
-Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
- by mx.groups.io with SMTP id smtpd.web12.3067.1586024482659730292
+Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com [209.85.167.195])
+ by mx.groups.io with SMTP id smtpd.web12.3069.1586024483569063700
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 11:21:22 -0700
+ Sat, 04 Apr 2020 11:21:23 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: straka.derek@gmail.com)
-Received: by mail-oi1-f179.google.com with SMTP id u20so9313370oic.4
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 11:21:22 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.195, mailfrom: straka.derek@gmail.com)
+Received: by mail-oi1-f195.google.com with SMTP id e4so9269425oig.9
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 11:21:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=SYGcJPuvhlTcxWyYwdjxQxJ2dx00Yz+IXjUAQUWD0Ss=;
-        b=rb6H4y+MulmOsiifSuDLBjh30D/5HvbUTBjf4fdgbUfhjcx+WMBCFrW94JhuVsfA6i
-         8rjRFq9ms4GCZElPR+zjK26AMjlCvDohV5lZXqXZwtaabArNG2Kv2ME2WdayUjBG4Wm9
-         5u66jjvR+R9up0UfgKVK7nMb2hSpihMDOF8z2hzi2zABmX6NfIbmIcQwpMLLrrwu6djj
-         U0e7BL+Y0/naVGH4mGzudTyizY6Xc8jh5ja3uHd5GgQB+aQ6uSaCug92K2bVlVcoWYgV
-         454T3Me2xP1JWh+c8lauloDrIKgxom2Uh/zZEKagc9rfnOGqUvt260pnamUTcYlklIbp
-         k/ag==
-X-Gm-Message-State: AGi0PuanQCrfCRtekB9evUTWYvzb3HAPOesSqAN8OYCSmxjjcagqFNEG
-	4+Ec68BRbZzDGW2yEDkhSCwGjY+RUR4=
-X-Google-Smtp-Source: APiQypKs8peLHpKMvJzgDUBM8i94qtp7q2P56rz5XWjc6SzqTcrLfv9eKB+sTOyGcMRxZCPlBPHu8Q==
-X-Received: by 2002:aca:fc88:: with SMTP id a130mr7019924oii.89.1586024481660;
-        Sat, 04 Apr 2020 11:21:21 -0700 (PDT)
+        bh=fcTxMwoWCXBplGQ60ZVEABJ0sWDiWzk9adKNZ9UelG4=;
+        b=nEMgBy6eiPNRPtG39RGw8YTHT1dxIMI6zUGXYB81/WZ3qXd+Id/hp6bkPwpB3dYV9O
+         tTwnzLVy26A8QfFv297l97V5OcrFQ34Dq5Pin+0ahoNGOAf9FyEVYBXH4bK9YrtLypH1
+         zYHm8IXzwNYd+FIZtqhUYiWzPskfK0yoQNwrgTW907SvgAejjua57E+yoZMMhom6q5Ts
+         YB/u4ifD0yB6idHxW3LHgWXOLxDFszOKzeKHT+SHu/qYCHXzZ5vwXaLcuTyMWn5xVTYW
+         xC0F/oWFvmGKXRZTGUcfrDzyNmiJFq+B5smnfy4egkOFXTYPPyKXwFK4RhB7PIGxRUbo
+         YYkQ==
+X-Gm-Message-State: AGi0PuY+YR/fM3dL12u9fISBN+vfYi5KEM3ErPWBdgQfApmkPQhxPG88
+	gjz5hLLkMTopjWgI1CrWrfpoWuMq/2w=
+X-Google-Smtp-Source: APiQypIMntQBkMBxnkDTb2URnAXR9n6YBEZqdle7aP9tpl0vD3pyGsro8XgzU22ISxzvXn4KoUQW/Q==
+X-Received: by 2002:aca:2209:: with SMTP id b9mr7652851oic.103.1586024482703;
+        Sat, 04 Apr 2020 11:21:22 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id j23sm3162059oib.32.2020.04.04.11.21.20
+        by smtp.gmail.com with ESMTPSA id j23sm3162059oib.32.2020.04.04.11.21.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 11:21:20 -0700 (PDT)
+        Sat, 04 Apr 2020 11:21:21 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 05/12] python-pyyaml: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 14:20:57 -0400
-Message-Id: <20200404182104.21027-5-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 06/12] python-pyusb: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 14:20:58 -0400
+Message-Id: <20200404182104.21027-6-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404182104.21027-1-derek@asterius.io>
 References: <20200404182104.21027-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pyyaml.inc | 18 -----------------
- .../python/python3-pyyaml_5.3.bb              | 20 +++++++++++++++++--
- 2 files changed, 18 insertions(+), 20 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pyyaml.inc
+ .../recipes-devtools/python/python-pyusb.inc       | 12 ------------
+ .../recipes-devtools/python/python3-pyusb_1.0.2.bb | 14 ++++++++++++--
+ 2 files changed, 12 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyusb.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pyyaml.inc b/meta-python/recipes-devtools/python/python-pyyaml.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyusb.inc b/meta-python/recipes-devtools/python/python-pyusb.inc
 deleted file mode 100644
-index aede58530a..0000000000
---- a/meta-python/recipes-devtools/python/python-pyyaml.inc
+index e783dd4325..0000000000
+--- a/meta-python/recipes-devtools/python/python-pyusb.inc
 +++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "Python support for YAML"
--HOMEPAGE = "http://www.pyyaml.org"
--SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a76b4c69bfcf82313bbdc0393b04438a"
--DEPENDS = "libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}"
+@@ -1,12 +0,0 @@
+-SUMMARY = "PyUSB provides USB access on the Python language"
+-HOMEPAGE = "http://pyusb.sourceforge.net/"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=51691ed11cc2c7ae93e383f60ed49b0f"
+-DEPENDS += "libusb1"
 -
--PYPI_PACKAGE = "PyYAML"
+-SRC_URI[md5sum] = "862b56452c64948c787ad8ef9498590b"
+-SRC_URI[sha256sum] = "4e9b72cc4a4205ca64fbf1f3fff39a335512166c151ad103e55c8223ac147362"
+-
 -inherit pypi
 -
--SRC_URI[md5sum] = "adbb0d336b509d6472d3b095a0f1cf30"
--SRC_URI[sha256sum] = "e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e691615"
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-datetime \
--"
--
 -BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-index 470aca608b..b5425b8c95 100644
---- a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
-@@ -1,2 +1,18 @@
+diff --git a/meta-python/recipes-devtools/python/python3-pyusb_1.0.2.bb b/meta-python/recipes-devtools/python/python3-pyusb_1.0.2.bb
+index 1ecede7cf8..44c24f423a 100644
+--- a/meta-python/recipes-devtools/python/python3-pyusb_1.0.2.bb
++++ b/meta-python/recipes-devtools/python/python3-pyusb_1.0.2.bb
+@@ -1,2 +1,12 @@
 -inherit setuptools3
--require python-pyyaml.inc
-+SUMMARY = "Python support for YAML"
-+HOMEPAGE = "http://www.pyyaml.org"
-+SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a76b4c69bfcf82313bbdc0393b04438a"
-+DEPENDS = "libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}"
+-require python-pyusb.inc
++SUMMARY = "PyUSB provides USB access on the Python language"
++HOMEPAGE = "http://pyusb.sourceforge.net/"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=51691ed11cc2c7ae93e383f60ed49b0f"
++DEPENDS += "libusb1"
 +
-+PYPI_PACKAGE = "PyYAML"
++SRC_URI[md5sum] = "862b56452c64948c787ad8ef9498590b"
++SRC_URI[sha256sum] = "4e9b72cc4a4205ca64fbf1f3fff39a335512166c151ad103e55c8223ac147362"
++
 +inherit pypi setuptools3
-+
-+SRC_URI[md5sum] = "adbb0d336b509d6472d3b095a0f1cf30"
-+SRC_URI[sha256sum] = "e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e691615"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-datetime \
-+"
 +
 +BBCLASSEXTEND = "native nativesdk"
 -- 
