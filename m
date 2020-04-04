@@ -1,116 +1,86 @@
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
- by mx.groups.io with SMTP id smtpd.web12.1538.1586020409231264287
+Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
+ by mx.groups.io with SMTP id smtpd.web11.1535.1586020409675866715
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Apr 2020 10:13:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f50.google.com with SMTP id a6so10779477otb.10
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f49.google.com with SMTP id v2so10814034oto.2
         for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 10:13:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=rBCPKC7qJD+DtMnfjOOM3rV9UeIpimYZtWmdNPYex4s=;
-        b=LMX0jSoAtXb5+cpl32mRlr3XZa7Xj93lcR226iD33c6LFxRz23xnKGrdJ1b4QV4w7R
-         4tfxJ7RFoCq6Gew7Nb3xsciWcfon7cD6uja7BoELQfx5fuBirYSkrjgHbFfP6x30OAWa
-         Ba/vAM98J+n4yQd9fMM2WBfSxYADWAa9PSdmOIA/LpZUZLUaBEomcaIJA/86LIQ3vGjU
-         bgaFaGotcx1zB6IEPk+Wa5mQo39S0FNpl2pUtz2NMcYPnA+3Lvkp5FZLOCiHHsT+6zZ5
-         2KpUfWXrSssAzg+3g+miCMe0544cFZ6cVyytN536bm+ywcCRP6hixeb/cqPlV79UQ6Nn
-         IhjA==
-X-Gm-Message-State: AGi0PubCovdlQ8OfHS9BIzjWyD3KGTkmphIRnMjDKUFxf7azdeTkqmou
-	XnD6IpPdh7Q6p7SHuy1YQUomZFha0Qg=
-X-Google-Smtp-Source: APiQypKycUzlPuRwCdJFDu11V+ixlDK+kcsR5YFbCoRlLh+wZyovt64a3bP4GUA+JljTFJaxn/Ma8g==
-X-Received: by 2002:a9d:775a:: with SMTP id t26mr10961447otl.178.1586020407970;
-        Sat, 04 Apr 2020 10:13:27 -0700 (PDT)
+        bh=uGcl65TLAfBHSRda5xlRKvmKKWLaSZQKOboM9ufb15E=;
+        b=VssNIeQRcRjSQNXNU4nEIcvt3zUdXnWyJSHwie3nzNU8Q4zGvEbfsC6luFtp9OVvGp
+         +6tTGR/X0wWeU04TNL0Ka37UWi5/JHTablSPt2z1ysFAdOSDmpVlw+ADWSIe5IMB/W44
+         kMrZameL3Xt6OLWESm/oNzyqf7UmLCNnDXAmMKvpXHpnWBX4JxPrQ/B28fFmAzocdzmB
+         8dQwT5HhJXOHWmJxusfd1vqPJKKyvYgAd4RTwBndUtdnemGKGFuPCfyTuWWUYAcBXLfU
+         nwzPTm+Liah4dR65/frf+U371fy8ZS5xVfGRCgnModOYzcWuOv405wNpuuiCSAz5J54b
+         cUpQ==
+X-Gm-Message-State: AGi0Pua+wh7ZaYRhzdw3mcPTvGlVEcGjJKcM28iRzswbdcvNHsTzeXMM
+	ijFY3ZJ4TpHu7avFbGfBfUN3KT7BZFg=
+X-Google-Smtp-Source: APiQypJFemejhQXmXSgXDfcrFioNDGWbhV0832lvUe2UDBSw6ziDKcVH1rVvPWPYkSujZotfLb9V7w==
+X-Received: by 2002:a05:6830:1d91:: with SMTP id y17mr10944438oti.184.1586020408732;
+        Sat, 04 Apr 2020 10:13:28 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id q12sm3054551otn.43.2020.04.04.10.13.27
+        by smtp.gmail.com with ESMTPSA id q12sm3054551otn.43.2020.04.04.10.13.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 10:13:27 -0700 (PDT)
+        Sat, 04 Apr 2020 10:13:28 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 23/27] python-serpent: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 13:12:47 -0400
-Message-Id: <20200404171251.19823-23-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 24/27] python-sentry-sdk: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 13:12:48 -0400
+Message-Id: <20200404171251.19823-24-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404171251.19823-1-derek@asterius.io>
 References: <20200404171251.19823-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/python-serpent.inc                 | 27 -----------------
- .../python/python3-serpent_1.28.bb            | 29 +++++++++++++++++--
- 2 files changed, 27 insertions(+), 29 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-serpent.inc
+ .../recipes-devtools/python/python-sentry-sdk.inc  | 12 ------------
+ .../python/python3-sentry-sdk_0.14.0.bb            | 14 ++++++++++++--
+ 2 files changed, 12 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-sentry-sdk.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-serpent.inc b/meta-python/recipes-devtools/python/python-serpent.inc
+diff --git a/meta-python/recipes-devtools/python/python-sentry-sdk.inc b/meta-python/recipes-devtools/python/python-sentry-sdk.inc
 deleted file mode 100644
-index 676ea39de3..0000000000
---- a/meta-python/recipes-devtools/python/python-serpent.inc
+index 3714cd0ffc..0000000000
+--- a/meta-python/recipes-devtools/python/python-sentry-sdk.inc
 +++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = "Serialization based on ast.literal_eval"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5cd70632b6cdb96df9ddaf6a4ce619e6"
+@@ -1,12 +0,0 @@
+-SUMMARY = "The new Python SDK for Sentry.io"
+-DESCRIPTION = "This is the next line of the Python SDK \
+-for Sentry, intended to replace the raven package on PyPI."
+-HOMEPAGE = "https://github.com/getsentry/sentry-python"
+-LICENSE = "BSD-2-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
 -
--SRC_URI[md5sum] = "15ef8b67c76a6d19bac9c16731a1e62a"
--SRC_URI[sha256sum] = "f306336ca09aa38e526f3b03cab58eb7e45af09981267233167bcf3bfd6436ab"
+-SRC_URI[md5sum] = "2d5cc43c8a178134b739c77439d1f26b"
+-SRC_URI[sha256sum] = "8e2d38dc58dc992280487e553ec3d97a424e4d179f4fad802ef3b08f64ccf4d8"
 -
--inherit pypi ptest
--
--SRC_URI += " \
--	file://run-ptest \
--"
--
--RDEPENDS_${PN}-ptest += " \
--	${PYTHON_PN}-pytest \
--	${PYTHON_PN}-pytz \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-numbers \
--    "    
-diff --git a/meta-python/recipes-devtools/python/python3-serpent_1.28.bb b/meta-python/recipes-devtools/python/python3-serpent_1.28.bb
-index 1e04def7b7..af2d4aa4a7 100644
---- a/meta-python/recipes-devtools/python/python3-serpent_1.28.bb
-+++ b/meta-python/recipes-devtools/python/python3-serpent_1.28.bb
-@@ -1,2 +1,27 @@
+-PYPI_PACKAGE = "sentry-sdk"
+-inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.14.0.bb b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.14.0.bb
+index 840df93404..894e1f9020 100644
+--- a/meta-python/recipes-devtools/python/python3-sentry-sdk_0.14.0.bb
++++ b/meta-python/recipes-devtools/python/python3-sentry-sdk_0.14.0.bb
+@@ -1,2 +1,12 @@
 -inherit setuptools3
--require python-serpent.inc
-+SUMMARY = "Serialization based on ast.literal_eval"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5cd70632b6cdb96df9ddaf6a4ce619e6"
+-require python-sentry-sdk.inc
++SUMMARY = "The new Python SDK for Sentry.io"
++DESCRIPTION = "This is the next line of the Python SDK \
++for Sentry, intended to replace the raven package on PyPI."
++HOMEPAGE = "https://github.com/getsentry/sentry-python"
++LICENSE = "BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=0c79f8d3c91fc847350efd28bfe0a341"
 +
-+SRC_URI[md5sum] = "15ef8b67c76a6d19bac9c16731a1e62a"
-+SRC_URI[sha256sum] = "f306336ca09aa38e526f3b03cab58eb7e45af09981267233167bcf3bfd6436ab"
++SRC_URI[md5sum] = "2d5cc43c8a178134b739c77439d1f26b"
++SRC_URI[sha256sum] = "8e2d38dc58dc992280487e553ec3d97a424e4d179f4fad802ef3b08f64ccf4d8"
 +
-+inherit pypi ptest setuptools3
-+
-+SRC_URI += " \
-+    file://run-ptest \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+    ${PYTHON_PN}-pytest \
-+    ${PYTHON_PN}-pytz \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-numbers \
-+"    
++PYPI_PACKAGE = "sentry-sdk"
++inherit pypi setuptools3
 -- 
 2.17.1
 
