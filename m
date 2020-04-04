@@ -1,88 +1,85 @@
-Received: from mail-ot1-f50.google.com (mail-ot1-f50.google.com [209.85.210.50])
- by mx.groups.io with SMTP id smtpd.web12.1518.1586020391184156233
+Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
+ by mx.groups.io with SMTP id smtpd.web10.1575.1586020391836111758
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Apr 2020 10:13:11 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.50, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f50.google.com with SMTP id 22so10859936otf.0
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.46, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f46.google.com with SMTP id c9so10744746otl.12
         for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 10:13:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=qkfg+vTHo3yysjCc40UpVio169XwtIi+Vw9Bg+naV3o=;
-        b=sbQlixTH3cxVzSzAa0LOlHqS2brtZnoVwO/rudxCPG3BhJETjL0ONQMm805gjBMDS+
-         Bg+yTSYG799OiHUe+14nlu4jhK9d9+ndMmj8hEKVKboB0V67hWt1qtOM5RRSiMYA4a5C
-         iatZhXPY6XqGp7uYevDM1LnGkcCBoWBmUsRAgkNZG0c4OXOsLHzFtVyUnuTmNUcAdUGn
-         k3vUj2c7td9yDC2ngxLzZKhGawngzBaqNb747+nlwqeqBOigm9tcL8phfuQEVEeDyr8K
-         ZMR8tx2dxSZ8Oq4Kh5OJ0xT3r9O9OZfi2Q88QOW3p55c5rC9pjNRwI8t6JJzxmf5nHwg
-         pppg==
-X-Gm-Message-State: AGi0PuYPV2BmalfxlABYl+jGhZPFxK/Myof1Aj75gJwSQY4xGdLzUV0Y
-	wXcghBwYk8lzVk4V6sJrMqlisp72snk=
-X-Google-Smtp-Source: APiQypK+6z+KFzLid3zjlYQenI6ACnAOMOPZSDVw5WOZbMVpjKDweBIIR47LkNl9sikqjBkISWOShQ==
-X-Received: by 2002:a9d:3b8b:: with SMTP id k11mr10650634otc.245.1586020389984;
-        Sat, 04 Apr 2020 10:13:09 -0700 (PDT)
+        bh=3YXnpPRU7bV+warlSPtKgeq60zyWtLUQeU+t2lNkLUw=;
+        b=FuVT6VejPTrH0lfLNRwLbnH6z/QbDwrfIj/FAfIEcuodmF/1OtEOKkrec94X6zZ28M
+         +Dpawu+tQvX70xsKQmwdx6Cy21J3m4zfsHp88UIZZRlKb5D+gGsOwpHMBfFWKh2iAnPD
+         EDsefa2fWVGvdpmUYeF9gKzSPNR+H+jqWyWYA9oh/3H/jtYTGjaB4MPz+nM9HTt+cuHh
+         4JsePt4bFdb2/w/8vp0ZU4Mk7axgSojGepa6MJd4PJsme/SbpTFMYAZ4HAxzCW77fvFh
+         VMkYAA57E4rFV4EUuRoHBgLfccgYzW36tzm/5xMlkL+7wLn5k3llISlLRnyCm2Tq+al6
+         eFlQ==
+X-Gm-Message-State: AGi0PuYDl2U5YqTkRFZmfW3Gg+0F/u26eTjAGD+Z5M6YHIiVWxH/2gBM
+	EZ69+eT/NO4qpxqM+F4+hL0eKLXA/u8=
+X-Google-Smtp-Source: APiQypLzKXMNVEZcYIz/Shp1czEx2GZ0xMde4NZvK3YMGy4UKeGLNXI7XTyevl6y/LK900WLURbYYw==
+X-Received: by 2002:a9d:62c2:: with SMTP id z2mr11750001otk.155.1586020390672;
+        Sat, 04 Apr 2020 10:13:10 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id q12sm3054551otn.43.2020.04.04.10.13.09
+        by smtp.gmail.com with ESMTPSA id q12sm3054551otn.43.2020.04.04.10.13.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 10:13:09 -0700 (PDT)
+        Sat, 04 Apr 2020 10:13:10 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 02/27] python-tqdm: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 13:12:26 -0400
-Message-Id: <20200404171251.19823-2-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 03/27] python-toml: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 13:12:27 -0400
+Message-Id: <20200404171251.19823-3-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404171251.19823-1-derek@asterius.io>
 References: <20200404171251.19823-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-tqdm.inc       | 13 -------------
- .../python/python3-tqdm_4.43.0.bb                 | 15 +++++++++++++--
- 2 files changed, 13 insertions(+), 15 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-tqdm.inc
+ meta-python/recipes-devtools/python/python-toml.inc  | 10 ----------
+ .../recipes-devtools/python/python3-toml_0.10.0.bb   | 12 ++++++++++--
+ 2 files changed, 10 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-toml.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-tqdm.inc b/meta-python/recipes-devtools/python/python-tqdm.inc
+diff --git a/meta-python/recipes-devtools/python/python-toml.inc b/meta-python/recipes-devtools/python/python-toml.inc
 deleted file mode 100644
-index 242bb3cbc4..0000000000
---- a/meta-python/recipes-devtools/python/python-tqdm.inc
+index a3b3dfc862..0000000000
+--- a/meta-python/recipes-devtools/python/python-toml.inc
 +++ /dev/null
-@@ -1,13 +0,0 @@
--SUMMARY = "Fast, Extensible Progress Meter"
--HOMEPAGE = "http://tqdm.github.io/"
+@@ -1,10 +0,0 @@
+-SUMMARY = "Python Library for Tom's Obvious, Minimal Language"
+-HOMEPAGE = "https://github.com/uiri/toml"
+-LICENSE = "MIT"
 -SECTION = "devel/python"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=6d6012eea477117abf51c31262a152f8"
 -
--LICENSE = "MIT & MPL-2.0"
--LIC_FILES_CHKSUM = "file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"
+-SRC_URI[md5sum] = "63fffbe2d632865ec29cd69bfdf36682"
+-SRC_URI[sha256sum] = "229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c"
 -
 -inherit pypi
--
--SRC_URI[md5sum] = "81454c26572e4e47911596ea065eb1b7"
--SRC_URI[sha256sum] = "f35fb121bafa030bd94e74fcfd44f3c2830039a2ddef7fc87ef1c2d205237b24"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb b/meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb
-index 348337f0d6..642246c000 100644
---- a/meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-tqdm_4.43.0.bb
-@@ -1,2 +1,13 @@
+diff --git a/meta-python/recipes-devtools/python/python3-toml_0.10.0.bb b/meta-python/recipes-devtools/python/python3-toml_0.10.0.bb
+index cebb41a533..5a7b04c9e0 100644
+--- a/meta-python/recipes-devtools/python/python3-toml_0.10.0.bb
++++ b/meta-python/recipes-devtools/python/python3-toml_0.10.0.bb
+@@ -1,5 +1,13 @@
 -inherit setuptools3
--require python-tqdm.inc
-+SUMMARY = "Fast, Extensible Progress Meter"
-+HOMEPAGE = "http://tqdm.github.io/"
+-require python-toml.inc
++SUMMARY = "Python Library for Tom's Obvious, Minimal Language"
++HOMEPAGE = "https://github.com/uiri/toml"
++LICENSE = "MIT"
 +SECTION = "devel/python"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=6d6012eea477117abf51c31262a152f8"
 +
-+LICENSE = "MIT & MPL-2.0"
-+LIC_FILES_CHKSUM = "file://LICENCE;md5=7ea57584e3f8bbde2ae3e1537551de25"
-+
-+SRC_URI[md5sum] = "81454c26572e4e47911596ea065eb1b7"
-+SRC_URI[sha256sum] = "f35fb121bafa030bd94e74fcfd44f3c2830039a2ddef7fc87ef1c2d205237b24"
++SRC_URI[md5sum] = "63fffbe2d632865ec29cd69bfdf36682"
++SRC_URI[sha256sum] = "229f81c57791a41d65e399fc06bf0848bab550a9dfd5ed66df18ce5f05e73d5c"
 +
 +inherit pypi setuptools3
-+
-+BBCLASSEXTEND = "native nativesdk"
+ 
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-misc \
 -- 
 2.17.1
 
