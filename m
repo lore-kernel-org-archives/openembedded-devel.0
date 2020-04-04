@@ -1,122 +1,78 @@
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
- by mx.groups.io with SMTP id smtpd.web10.8630.1586006956628773223
+Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com [209.85.167.196])
+ by mx.groups.io with SMTP id smtpd.web11.8643.1586006957511504886
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 06:29:16 -0700
+ Sat, 04 Apr 2020 06:29:17 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.46, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f46.google.com with SMTP id l23so10383749otf.3
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 06:29:16 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.196, mailfrom: straka.derek@gmail.com)
+Received: by mail-oi1-f196.google.com with SMTP id r21so384286oij.11
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 06:29:17 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=toT+igN4asepTpJGqgLZskHZEfNSprxGwmKl9cLOqbU=;
-        b=ivOiy2hWnT+92ADjGoepBhnarFuFxnaKGrs1DKawUNV02w8eD4ytuv2Bly9LCY+0A2
-         6UJL8HfYh4G3T3ZCz5cTGIss4mX+m1vvnYY6AGg/ExEYmycL5ri9DDTeaQrsOb03uWBA
-         0lUh1uNqyKfqUiU0IL/j8S7udU3H3AO6wG8L0+lK6qtldxhcGNbkQ7xJbeYk0S1RG7kb
-         oMnMYVwLnjUysODqkkUG41HVfISRZoSYhTJ61fMdPLyz5PQA8Lzg/yLpcSnKjd0c+2n2
-         n1dRxVdwad0/6mzwsqNCOn6/h1wK3txYjubwbl9f8NuyUUZdWRc9mLUlpyzzj1q5Vi00
-         MLTA==
-X-Gm-Message-State: AGi0PuYoHJNv109b7UowP41MZLKPpSVKHWoT41o0ClEXC1CRPhU47Ggc
-	1HYZapD7iN2MVXjAGTzzKIFY1vySyWo=
-X-Google-Smtp-Source: APiQypJ7SWZ0bCl2rXHmq10Q3y6bGmnYHXrId9S3wC+4oHKHEr4+U0mZ5EhEASZzpuww32OqC3+b6Q==
-X-Received: by 2002:a05:6830:2421:: with SMTP id k1mr10581146ots.192.1586006955583;
-        Sat, 04 Apr 2020 06:29:15 -0700 (PDT)
+        bh=cx8lDEksbn7sbno0QH/vHrXD/pfH2s+i1aKrXvJO7vA=;
+        b=KmWbQ8Nuita74MTRAy/m4zxmaCc9/Up+cVRHLsJyUgqiKfR+cJcj8fEp1j3xQ9POKd
+         pIJLQBrvli51Kw55Fm5leZYYDcjjWnkYiFGbVRFzY4xlQjKTduVoE/jP22LZ70k8jR/f
+         m2z1ST0PP9wunZbaXac7RTF2NJ1jq9L86BwycKUskGA8L01IfhYio+5/5PZEGYedLTmg
+         Mb53UJffLCaEqBdKeDnhtQ/XjnZV8XHatjk5kAIOmbC8ORyZGdXuROH4fNl3zI0rsdhK
+         i95SUZRVZgjiAtsMPw3tMH3peCU0LzkMTCkm1QPD1sBVH/8eUtGMnI828pVJaczipriC
+         yCuA==
+X-Gm-Message-State: AGi0PuayVyIaEiKW39HG9Qu69q/sIE4CDP7u7LDOjApNDFR+qyvh/zQ6
+	1WO1mvPz9lMIJizLgK3tBzd29iNKkUA=
+X-Google-Smtp-Source: APiQypLxA73IQ3zg+MFSBmY17xTJ1wqA1QCI5s2xJmJyXpQ4jWtQmPkJnFzL9ztIPYN2M3ysYnOS6Q==
+X-Received: by 2002:aca:da57:: with SMTP id r84mr6393258oig.79.1586006956629;
+        Sat, 04 Apr 2020 06:29:16 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id t17sm2813013oof.43.2020.04.04.06.29.14
+        by smtp.gmail.com with ESMTPSA id t17sm2813013oof.43.2020.04.04.06.29.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 06:29:14 -0700 (PDT)
+        Sat, 04 Apr 2020 06:29:15 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 07/11] python-ujson: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 09:28:42 -0400
-Message-Id: <20200404132846.16832-7-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 08/11] python-tzlocal: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 09:28:43 -0400
+Message-Id: <20200404132846.16832-8-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404132846.16832-1-derek@asterius.io>
 References: <20200404132846.16832-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-ujson.inc  | 30 -----------------
- .../python/python3-ujson_1.35.bb              | 32 +++++++++++++++++--
- 2 files changed, 30 insertions(+), 32 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-ujson.inc
+ meta-python/recipes-devtools/python/python-tzlocal.inc   | 8 --------
+ .../recipes-devtools/python/python3-tzlocal_2.0.0.bb     | 9 ++++++++-
+ 2 files changed, 8 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-tzlocal.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-ujson.inc b/meta-python/recipes-devtools/python/python-ujson.inc
+diff --git a/meta-python/recipes-devtools/python/python-tzlocal.inc b/meta-python/recipes-devtools/python/python-tzlocal.inc
 deleted file mode 100644
-index 3196b02f3f..0000000000
---- a/meta-python/recipes-devtools/python/python-ujson.inc
+index 3e423d2278..0000000000
+--- a/meta-python/recipes-devtools/python/python-tzlocal.inc
 +++ /dev/null
-@@ -1,30 +0,0 @@
--SUMMARY  = "Ultra fast JSON encoder and decoder for Python"
--DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pure C with bindings for Python 2.5+ and 3."
+@@ -1,8 +0,0 @@
+-SUMMARY = "Library to return tzinfo with the local timezone information"
+-HOMEPAGE = "https://pypi.org/project/tzlocal/"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
 -
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=88df8e78b9edfd744953862179f2d14e"
+-SRC_URI[md5sum] = "b14262cecca16ec9220ca8dff2ca7c5d"
+-SRC_URI[sha256sum] = "949b9dd5ba4be17190a80c0268167d7e6c92c62b30026cf9764caf3e308e5590"
 -
--SRC_URI[md5sum] = "42f77b0cce686dfa4da2e68480b1dd24"
--SRC_URI[sha256sum] = "f66073e5506e91d204ab0c614a148d5aa938bdbf104751be66f8ad7a222f5f86"
--
--inherit pypi ptest
--
--SRC_URI += " \
--	file://run-ptest \
--"
--
--RDEPENDS_${PN}-ptest += " \
--	${PYTHON_PN}-pytz \
--"
--
--do_install_ptest() {
--	install -d ${D}${PTEST_PATH}/tests
--	cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
--}
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-datetime \
--    ${PYTHON_PN}-numbers \
--    "
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-ujson_1.35.bb b/meta-python/recipes-devtools/python/python3-ujson_1.35.bb
-index ae4cc0a812..36abb7ea9d 100644
---- a/meta-python/recipes-devtools/python/python3-ujson_1.35.bb
-+++ b/meta-python/recipes-devtools/python/python3-ujson_1.35.bb
-@@ -1,2 +1,30 @@
--inherit setuptools3
--require python-ujson.inc
-+SUMMARY  = "Ultra fast JSON encoder and decoder for Python"
-+DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pure C with bindings for Python 2.5+ and 3."
+diff --git a/meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb b/meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb
+index 813934c812..3573b29f03 100644
+--- a/meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb
+@@ -1,2 +1,9 @@
++SUMMARY = "Library to return tzinfo with the local timezone information"
++HOMEPAGE = "https://pypi.org/project/tzlocal/"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
 +
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=88df8e78b9edfd744953862179f2d14e"
++SRC_URI[md5sum] = "b14262cecca16ec9220ca8dff2ca7c5d"
++SRC_URI[sha256sum] = "949b9dd5ba4be17190a80c0268167d7e6c92c62b30026cf9764caf3e308e5590"
 +
-+SRC_URI[md5sum] = "42f77b0cce686dfa4da2e68480b1dd24"
-+SRC_URI[sha256sum] = "f66073e5506e91d204ab0c614a148d5aa938bdbf104751be66f8ad7a222f5f86"
-+
-+inherit pypi ptest setuptools3
-+
-+SRC_URI += " \
-+    file://run-ptest \
-+"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-numbers \
-+"
-+
-+RDEPENDS_${PN}-ptest += " \
-+    ${PYTHON_PN}-pytz \
-+"
-+
-+do_install_ptest() {
-+    install -d ${D}${PTEST_PATH}/tests
-+    cp -rf ${S}/tests/* ${D}${PTEST_PATH}/tests/
-+}
-+
-+BBCLASSEXTEND = "native nativesdk"
+ inherit pypi setuptools3
+-require python-tzlocal.inc
 -- 
 2.17.1
 
