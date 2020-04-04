@@ -1,78 +1,63 @@
-Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com [209.85.167.196])
- by mx.groups.io with SMTP id smtpd.web11.8643.1586006957511504886
+Received: from mail-oi1-f176.google.com (mail-oi1-f176.google.com [209.85.167.176])
+ by mx.groups.io with SMTP id smtpd.web12.8714.1586006958546422178
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 06:29:17 -0700
+ Sat, 04 Apr 2020 06:29:18 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.196, mailfrom: straka.derek@gmail.com)
-Received: by mail-oi1-f196.google.com with SMTP id r21so384286oij.11
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 06:29:17 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.176, mailfrom: straka.derek@gmail.com)
+Received: by mail-oi1-f176.google.com with SMTP id k5so8795544oiw.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 06:29:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=cx8lDEksbn7sbno0QH/vHrXD/pfH2s+i1aKrXvJO7vA=;
-        b=KmWbQ8Nuita74MTRAy/m4zxmaCc9/Up+cVRHLsJyUgqiKfR+cJcj8fEp1j3xQ9POKd
-         pIJLQBrvli51Kw55Fm5leZYYDcjjWnkYiFGbVRFzY4xlQjKTduVoE/jP22LZ70k8jR/f
-         m2z1ST0PP9wunZbaXac7RTF2NJ1jq9L86BwycKUskGA8L01IfhYio+5/5PZEGYedLTmg
-         Mb53UJffLCaEqBdKeDnhtQ/XjnZV8XHatjk5kAIOmbC8ORyZGdXuROH4fNl3zI0rsdhK
-         i95SUZRVZgjiAtsMPw3tMH3peCU0LzkMTCkm1QPD1sBVH/8eUtGMnI828pVJaczipriC
-         yCuA==
-X-Gm-Message-State: AGi0PuayVyIaEiKW39HG9Qu69q/sIE4CDP7u7LDOjApNDFR+qyvh/zQ6
-	1WO1mvPz9lMIJizLgK3tBzd29iNKkUA=
-X-Google-Smtp-Source: APiQypLxA73IQ3zg+MFSBmY17xTJ1wqA1QCI5s2xJmJyXpQ4jWtQmPkJnFzL9ztIPYN2M3ysYnOS6Q==
-X-Received: by 2002:aca:da57:: with SMTP id r84mr6393258oig.79.1586006956629;
-        Sat, 04 Apr 2020 06:29:16 -0700 (PDT)
+        bh=sAEEySnXCFDR4HJbXJlPUtySgkX294iwOnN7m1822yU=;
+        b=XHgu8ckrKLH+gOtFT0xJDpKVn2FmMAtPCSOXcWWO1KtlvyNk+oplgYI5krNC2pBcnl
+         3OLBc1MxUpzklb3pibvgiy9QmzOwvhT65KmILVHGe1+bK1bhEpwQGyj3+Yk26Q3WtTrn
+         C5Tt2PgO6FTVAH3axO36+Io8CPVqzTWNuDUiPNKSRHkV6yB28aVif21ET14Xy+fmd9EB
+         ToEnjxHFKG3WlMAxaP1RHqJ8daiiDvXusptNyfUX7vLFt0bQZMgkzSIcJvxYaUTYN77s
+         Z9wSrzzJ6A1H7PBCFgvufrUaOk0o9Em9ISnuxVly63SuGQfcGsbJTIMtixQeHLqjF8/N
+         zHvg==
+X-Gm-Message-State: AGi0PubNc7gTguISugcJGnqFxeYNbWa929AGOCuVDf3ShYDNgkrSqybk
+	sGhfy/bofTsRPPbMyKw4TjDXCYpre7Y=
+X-Google-Smtp-Source: APiQypI4bOdn8yTNgDmOPayZbqr4e2ZXWXUc7xWipu1Gtg1aFquUZCvIIoxN4XaxHdVjR0s5v8Brzw==
+X-Received: by 2002:aca:4a55:: with SMTP id x82mr6942993oia.28.1586006957593;
+        Sat, 04 Apr 2020 06:29:17 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id t17sm2813013oof.43.2020.04.04.06.29.15
+        by smtp.gmail.com with ESMTPSA id t17sm2813013oof.43.2020.04.04.06.29.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 06:29:15 -0700 (PDT)
+        Sat, 04 Apr 2020 06:29:16 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 08/11] python-tzlocal: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 09:28:43 -0400
-Message-Id: <20200404132846.16832-8-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 09/11] python-typing: remove unused inc file
+Date: Sat,  4 Apr 2020 09:28:44 -0400
+Message-Id: <20200404132846.16832-9-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404132846.16832-1-derek@asterius.io>
 References: <20200404132846.16832-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-tzlocal.inc   | 8 --------
- .../recipes-devtools/python/python3-tzlocal_2.0.0.bb     | 9 ++++++++-
- 2 files changed, 8 insertions(+), 9 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-tzlocal.inc
+ meta-python/recipes-devtools/python/python-typing.inc | 9 ---------
+ 1 file changed, 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-typing.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-tzlocal.inc b/meta-python/recipes-devtools/python/python-tzlocal.inc
+diff --git a/meta-python/recipes-devtools/python/python-typing.inc b/meta-python/recipes-devtools/python/python-typing.inc
 deleted file mode 100644
-index 3e423d2278..0000000000
---- a/meta-python/recipes-devtools/python/python-tzlocal.inc
+index ab8ee81ec5..0000000000
+--- a/meta-python/recipes-devtools/python/python-typing.inc
 +++ /dev/null
-@@ -1,8 +0,0 @@
--SUMMARY = "Library to return tzinfo with the local timezone information"
--HOMEPAGE = "https://pypi.org/project/tzlocal/"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
+@@ -1,9 +0,0 @@
+-SUMMARY = "Simple Python module defined by PEP 484."
+-HOMEPAGE = "https://github.com/python/typing"
+-LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=64fc2b30b67d0a8423c250e0386ed72f"
 -
--SRC_URI[md5sum] = "b14262cecca16ec9220ca8dff2ca7c5d"
--SRC_URI[sha256sum] = "949b9dd5ba4be17190a80c0268167d7e6c92c62b30026cf9764caf3e308e5590"
+-SRC_URI[md5sum] = "0a1ebd4af65b4769e33459004eb20345"
+-SRC_URI[sha256sum] = "91dfe6f3f706ee8cc32d38edbbf304e9b7583fb37108fef38229617f8b3eba23"
 -
-diff --git a/meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb b/meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb
-index 813934c812..3573b29f03 100644
---- a/meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-tzlocal_2.0.0.bb
-@@ -1,2 +1,9 @@
-+SUMMARY = "Library to return tzinfo with the local timezone information"
-+HOMEPAGE = "https://pypi.org/project/tzlocal/"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=57e0bd61643d81d05683cdce65b11d10"
-+
-+SRC_URI[md5sum] = "b14262cecca16ec9220ca8dff2ca7c5d"
-+SRC_URI[sha256sum] = "949b9dd5ba4be17190a80c0268167d7e6c92c62b30026cf9764caf3e308e5590"
-+
- inherit pypi setuptools3
--require python-tzlocal.inc
+-BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
