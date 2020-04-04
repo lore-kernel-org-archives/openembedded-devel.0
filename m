@@ -1,58 +1,56 @@
 Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.7740.1586003792423362075
+ by mx.groups.io with SMTP id smtpd.web11.7741.1586003793319593380
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 05:36:32 -0700
+ Sat, 04 Apr 2020 05:36:33 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=Wdj5xYlk;
+ dkim=pass header.i=@koncepto.io header.s=default header.b=w7EPYENu;
  spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
 Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id 01586603D2;
-	Sat,  4 Apr 2020 14:36:30 +0200 (CEST)
+	by koncepto.io (Postfix) with ESMTPSA id D263E60481;
+	Sat,  4 Apr 2020 14:36:31 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
 	s=default; t=1586003791;
-	bh=Mwh04haEpR3XX7NZXhPvcCUSfAJBDgJSU0jx+Otqrbo=;
+	bh=z5YVBZ1IedOQN89Q9ALaySEjeAQtAAMBByfan9/yKQ4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=Wdj5xYlkamVoX09r8D+dnTIfmOaIzgUz1aXtUFItXr817gzAz2owqqBw8FGBqc7yH
-	 JHmTZNwuIghKbsUEYBdXV3abJS0VjfM9B1mncO+OsvO6sQmM5PzTHHpOAxwj6B52iv
-	 Diomi8cGtbwFFMS/7iGGUR/qSs2eLSG015Cv0NTfng7WBJJQmDf7k4L8o+wf8TrA7P
-	 Nnx0Nc0Np1ue0YaKeBk6ZpDbG/JXLlLdKxxEW+g+TWO35EBSK7QXXvBCEOxICjfx+i
-	 8Wx0wLiWB5PUJnLcj9FBaNyWHg1zQxK+heteQYSPcPET02UrEOAYaf2EKVty5NfLRq
-	 9SypI/wxmkuQw==
+	b=w7EPYENuh3FbNP9S8CTSPp4MQbXZ1CToKxk1lr6s/OEEFVjCSvvqa8TujZAIgFOci
+	 3820LpeoZZTU0IFGxA44O6Uvp6eP55JbDqOvHF42Siym3ig0TWgjllwMA3woFOMlhD
+	 Ygj6d0/VIx2Pdu+dEYalnCWJqPddmRHsmcczaxfDhgZ+bDlkxQSuLmjgmIAboHs5rr
+	 4UajojjMyU7xbUP/IA3pIN8eKigRECilv/8TAUfOactm0tr82fPV67x8DLY/ZcNbfB
+	 Vfmik8MqC2xGhIp9B1Rkr3JOlF6e/DFhnbfZOBwqQOpwdU7BZp/2lWdDbVM7W+opZ9
+	 ZOm1OlVSW0Dlw==
 From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-networking][PATCH 4/5] usrsctp: use UPSTREAM_CHECK_COMMITS
-Date: Sat,  4 Apr 2020 14:36:00 +0200
-Message-Id: <1586003761-12873-4-git-send-email-pjtexier@koncepto.io>
+Subject: [meta-networking][PATCH 5/5] igmpproxy: fix upstream check URL
+Date: Sat,  4 Apr 2020 14:36:01 +0200
+Message-Id: <1586003761-12873-5-git-send-email-pjtexier@koncepto.io>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1586003761-12873-1-git-send-email-pjtexier@koncepto.io>
 References: <1586003761-12873-1-git-send-email-pjtexier@koncepto.io>
 
 Fixes:
 
-$: devtool check-upgrade-status usrsctp
+$: devtool check-upgrade-status igmpproxy
 <...>
 
-INFO: usrsctp                   git             UNKNOWN_BROKEN  None f4e14ab5e12187cb2cf1ddbdc0ee5555aead3f72
+INFO: igmpproxy                 0.2.1           UNKNOWN_BROKEN  None
 
 Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb | 2 ++
+ meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
-index a5a5605..4f8e4d4 100644
---- a/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
-+++ b/meta-networking/recipes-protocols/usrsctp/usrsctp_git.bb
-@@ -8,6 +8,8 @@ SRC_URI = "git://github.com/sctplab/usrsctp;protocol=https;branch=master \
+diff --git a/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb b/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb
+index db96d48..004433b 100644
+--- a/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb
++++ b/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb
+@@ -8,4 +8,6 @@ SRC_URI = "https://github.com/pali/igmpproxy/releases/download/${PV}/${BP}.tar.g
+ SRC_URI[md5sum] = "3a9c2cb42c1f5ee0cb769a4884545641"
+ SRC_URI[sha256sum] = "d351e623037390f575c1203d9cbb7ba33a8bdef85a3c5e1d2901c5a2a38449a1"
  
- S = "${WORKDIR}/git"
- 
-+UPSTREAM_CHECK_COMMITS = "1"
++UPSTREAM_CHECK_URI = "https://github.com/pali/${BPN}/releases"
 +
  inherit autotools pkgconfig
- 
- DEPENDS += "openssl"
 -- 
 2.7.4
 
