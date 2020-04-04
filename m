@@ -1,114 +1,79 @@
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com [209.85.210.68])
- by mx.groups.io with SMTP id smtpd.web10.1962.1586021371984823003
+Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
+ by mx.groups.io with SMTP id smtpd.web10.1964.1586021372471460483
  for <openembedded-devel@lists.openembedded.org>;
  Sat, 04 Apr 2020 10:29:32 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.68, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f68.google.com with SMTP id z5so10807556oth.9
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 10:29:31 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: straka.derek@gmail.com)
+Received: by mail-oi1-f180.google.com with SMTP id l22so9167006oii.12
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 10:29:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=y+qjwaroo6OX0kJQXUE3JtJHzCHCw0ecoJQK6r2pOLQ=;
-        b=OEwVqo/UTmshYTfNPhJg4SRAl1+AXy5HixKrsYTrblNpTuVLPcROZuGerLiToGtVYI
-         bcNMlJorXKe6gn82vm7k8/dZiT9C8zVXPHtbcGYcDkHz5rvbWGG97W2b6L82oKwdrdIN
-         duhzfQqN2kTG2jLOLEWq5gx1+I9dOV2VgRNl8o6ejFL9EiaxrU1AFmQILOlLlho+GDNO
-         +1J4CUipTnnebldHQ9tnZKzStZH+1Sad2lI7uJWg3LF7MNXVzf1JIWjM8S/5kzrdRYR+
-         i0tUyEeZWFjfSi9Wwnl40gXyrN+zl6GX9ct3Q1HuZlig9NrfvlaqQ5bag3tU7YqmyfM1
-         PnJA==
-X-Gm-Message-State: AGi0PuZKx/GDmRFmBVCB7b/ON7G1Vr8FqDO0JxWI2HTsHfA7tFIjYdjc
-	jphez0t3AGERuUlAIadTkSEc8HMZtQk=
-X-Google-Smtp-Source: APiQypKp0tmPDBVs6JSlesyBRFd4Pfp/Ur/EsLHjW3BSJsI+LRQM+MXArBbvFGynBaTDjrhmOCyfCA==
-X-Received: by 2002:a9d:6c8f:: with SMTP id c15mr10650279otr.10.1586021370727;
-        Sat, 04 Apr 2020 10:29:30 -0700 (PDT)
+        bh=8mNAelFbEDYr0YAPxUL3G2l5jY3MXLHl/mdw1F0QP2Y=;
+        b=sSHvTkJxiW1zmTobEHRpsYNgMHRGzwlJ5AIxGwvN2sYmfQwGJ1jVeRpp+yzpU3rw7i
+         RY+6xFT/B+vnrX2/Q0tgKlfYvnd14GaJyqIS8zQUpqTotRhLYECdKRtwvHG0A6daJNLg
+         F3y82H6hkelMXRceKi5zP9Wa/IXHCKgTuFb4cS2DnzAcb8wplLw+sTiY7LXlwuX1iSuj
+         dQopUkm1X1zWPITGnxB4hVzHl2eC8jqZisLKP6KhlK0QtDl6rtYtPYXitLU+aC0gjiK5
+         ECab8QlKEcO3DdN16coXQEgHGcL8c1W9UC/HKl/7L7bopgo0uiF37gtlKFRwJ0PrssHO
+         o/IA==
+X-Gm-Message-State: AGi0PuZ3vpfNMQCERL5tRPIo5tZ2fqgVnaBMxxID52LnUs3QVWt8KUKS
+	qpX5+uQYL3cA3HaddsDQUfCoPAkCYgA=
+X-Google-Smtp-Source: APiQypL8rQ147FM+lxL9kD68UYaYALc0gkpYLcOfeoG1wO5VOFDVSSx2kp61HHUCYL+aEaVRJulJbw==
+X-Received: by 2002:aca:5b09:: with SMTP id p9mr7476445oib.57.1586021371465;
+        Sat, 04 Apr 2020 10:29:31 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id e22sm3068964ote.32.2020.04.04.10.29.29
+        by smtp.gmail.com with ESMTPSA id e22sm3068964ote.32.2020.04.04.10.29.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 10:29:29 -0700 (PDT)
+        Sat, 04 Apr 2020 10:29:30 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 2/7] python-robotframework: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 13:29:06 -0400
-Message-Id: <20200404172911.26978-2-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 3/7] python-rfc3987: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 13:29:07 -0400
+Message-Id: <20200404172911.26978-3-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404172911.26978-1-derek@asterius.io>
 References: <20200404172911.26978-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/python-robotframework.inc          | 26 -----------------
- .../python/python3-robotframework_3.0.4.bb    | 28 +++++++++++++++++--
- 2 files changed, 26 insertions(+), 28 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-robotframework.inc
+ meta-python/recipes-devtools/python/python-rfc3987.inc |  8 --------
+ .../recipes-devtools/python/python3-rfc3987_1.3.8.bb   | 10 +++++++++-
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-rfc3987.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-robotframework.inc b/meta-python/recipes-devtools/python/python-robotframework.inc
+diff --git a/meta-python/recipes-devtools/python/python-rfc3987.inc b/meta-python/recipes-devtools/python/python-rfc3987.inc
 deleted file mode 100644
-index e920c51da1..0000000000
---- a/meta-python/recipes-devtools/python/python-robotframework.inc
+index 9cfa07da55..0000000000
+--- a/meta-python/recipes-devtools/python/python-rfc3987.inc
 +++ /dev/null
-@@ -1,26 +0,0 @@
--SUMMARY = "A Python generic test automation framework"
--DESCRIPTION = "Generic open source test atomation framework for acceptance\
--testing and acceptance test-driven development (ATDD). It has easy-to-use\
--tabular test data syntax and it utilizes the keyword-driven testing approach.\
--Its testing capabilities can be extended by test libraries implemented either\
--with Python or Java, and users can create new higher-level keywords from\
--existing ones using the same syntax that is used for creating test cases."
--HOMEPAGE = "http://robotframework.org"
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+@@ -1,8 +0,0 @@
+-SUMMARY = "Parsing and validation of URIs (RFC 3986) and IRIs (RFC 3987)"
+-LICENSE = "GPLv3+"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=9;md5=2b723edf67b2f3088bc5e339b1ceda2d"
 -
--inherit pypi
+-SRC_URI[md5sum] = "b6c4028acdc788a9ba697e1c1d6b896c"
+-SRC_URI[sha256sum] = "d3c4d257a560d544e9826b38bc81db676890c79ab9d7ac92b39c7a253d5ca733"
 -
--SRC_URI[md5sum] = "ee753415645ff4831ff0d366a0467fe7"
--SRC_URI[sha256sum] = "ab94257cbd848dfca7148e092d233a12853cc7e840ce8231af9cbb5e7f51aa47"
--
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-shell \
--    ${PYTHON_PN}-pprint \
--    ${PYTHON_PN}-xml \
--    ${PYTHON_PN}-difflib \
--    ${PYTHON_PN}-threading \
--    ${PYTHON_PN}-html \
--    ${PYTHON_PN}-docutils \
--    ${PYTHON_PN}-ctypes \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-robotframework_3.0.4.bb b/meta-python/recipes-devtools/python/python3-robotframework_3.0.4.bb
-index 8f613c3868..0628f92d98 100644
---- a/meta-python/recipes-devtools/python/python3-robotframework_3.0.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-robotframework_3.0.4.bb
-@@ -1,2 +1,26 @@
--inherit setuptools3
--require python-robotframework.inc
-+SUMMARY = "A Python generic test automation framework"
-+DESCRIPTION = "Generic open source test atomation framework for acceptance\
-+testing and acceptance test-driven development (ATDD). It has easy-to-use\
-+tabular test data syntax and it utilizes the keyword-driven testing approach.\
-+Its testing capabilities can be extended by test libraries implemented either\
-+with Python or Java, and users can create new higher-level keywords from\
-+existing ones using the same syntax that is used for creating test cases."
-+HOMEPAGE = "http://robotframework.org"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3b83ef96387f14655fc854ddc3c6bd57"
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-rfc3987_1.3.8.bb b/meta-python/recipes-devtools/python/python3-rfc3987_1.3.8.bb
+index cd1536b36f..80e2aa5bc2 100644
+--- a/meta-python/recipes-devtools/python/python3-rfc3987_1.3.8.bb
++++ b/meta-python/recipes-devtools/python/python3-rfc3987_1.3.8.bb
+@@ -1,2 +1,10 @@
++SUMMARY = "Parsing and validation of URIs (RFC 3986) and IRIs (RFC 3987)"
++LICENSE = "GPLv3+"
++LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=9;md5=2b723edf67b2f3088bc5e339b1ceda2d"
 +
-+inherit pypi setuptools3
++SRC_URI[md5sum] = "b6c4028acdc788a9ba697e1c1d6b896c"
++SRC_URI[sha256sum] = "d3c4d257a560d544e9826b38bc81db676890c79ab9d7ac92b39c7a253d5ca733"
 +
-+SRC_URI[md5sum] = "ee753415645ff4831ff0d366a0467fe7"
-+SRC_URI[sha256sum] = "ab94257cbd848dfca7148e092d233a12853cc7e840ce8231af9cbb5e7f51aa47"
+ inherit pypi setuptools3
+-require python-rfc3987.inc
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-pprint \
-+    ${PYTHON_PN}-xml \
-+    ${PYTHON_PN}-difflib \
-+    ${PYTHON_PN}-threading \
-+    ${PYTHON_PN}-html \
-+    ${PYTHON_PN}-docutils \
-+    ${PYTHON_PN}-ctypes \
-+"
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
