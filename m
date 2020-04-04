@@ -1,75 +1,82 @@
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
- by mx.groups.io with SMTP id smtpd.web12.8710.1586006952390941602
+Received: from mail-ot1-f43.google.com (mail-ot1-f43.google.com [209.85.210.43])
+ by mx.groups.io with SMTP id smtpd.web10.8627.1586006953472222879
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 06:29:12 -0700
+ Sat, 04 Apr 2020 06:29:13 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f45.google.com with SMTP id r19so10350577otn.7
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 06:29:12 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.43, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f43.google.com with SMTP id m2so10392487otr.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 06:29:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=+9aj1VTm9I/vCdzkThyEYX8fWZnB3DdTorjZghTI8y4=;
-        b=VBZivzNMMcP/HVBsr2JrNPTieD/ByMs8BmmqGhDsFOnlqREsNNqsCDLAfvcZ59jBfO
-         JdTg2rAAnIPTVFCMPjb9bLIqr+eMpWjhPj49MqJRynKv9MH5hWUCoeEJWw9H46kMWs0C
-         q+o1X06Z+YVUJkUWTiPPCXouQytyWn7m2acOBw2XpwU+ZhO/4KNS6FcgSJnlh/+gTt71
-         sf+zaCmJ9qyKUQcqIsEINJHdsN0Z3Dxj15AVC1rNbgvXwVF0+MIdPTra9hPhl2cEPH3d
-         sHVlxSZppDNARwHaotNjJQYKw9bjSSX4rrB3fzmyGmMMwvvcALneGmlMWSzQ8eDohYKA
-         Gdjw==
-X-Gm-Message-State: AGi0PuYOFkEU14kj60tW3Pqu3p+duFuFbeIuyNbsZcPoJ5EGBIWWBv1C
-	PqweX26TfDU+NOe5Prdpz0jc45mPwQA=
-X-Google-Smtp-Source: APiQypJUBDnpqFXMbSpNodCuAaAgbN3C0EwbKHKGjuEk70B1M4CDdDFQ5yubmmMWZhzxTRBkt7P10A==
-X-Received: by 2002:a9d:600f:: with SMTP id h15mr6321341otj.275.1586006951476;
-        Sat, 04 Apr 2020 06:29:11 -0700 (PDT)
+        bh=8N/2R6no8dhPOjoULvDxCz0Eog+BLhvMsWr3WrmgKXA=;
+        b=Gkb3nkuM/yDCofisc96YMWuEo5tR09GQhz0PdMxgY3TyFNFeE0B8hrjj/R6/VDdpZn
+         v0p5WIDC/segajwY7i1taaw3QXcM75/L6EZWq052dj+x+9YePkQNo+UKK1455xNnrDzS
+         TJCA6X721e3OMdx+Pkbh4UbVnI0Ys1PYz0co1FYprpx2ZcL3y/2BAJ56Izx1kNyGU0wr
+         dbGREOGu80m3n/aT6Yy+xAAvEjxQvsIwwca5GuQKpMH34kY2V42it847Ha4N8XtLBHFi
+         vvzpI71Aaj8O16wiMbGSlOjGiR2OGZqJ6Ybti7kz6Ku/5mCabDBi0OehRkFEz2/sN89D
+         3uJQ==
+X-Gm-Message-State: AGi0PubAG91iLfk6T9UNK2IVQMvfCAAACVO76P69oB5JFeu+BzfxC0f+
+	K6wikQj9gnlrumrfnHbhTubXbpKGtZU=
+X-Google-Smtp-Source: APiQypKb3SAB/2WczlkRo8sYzmz5eS30y4hYXda26rpoudwBt1VgOYY2RwX3PiJJWUqQi7TAF8wKBw==
+X-Received: by 2002:a9d:340b:: with SMTP id v11mr10306324otb.14.1586006952546;
+        Sat, 04 Apr 2020 06:29:12 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id t17sm2813013oof.43.2020.04.04.06.29.10
+        by smtp.gmail.com with ESMTPSA id t17sm2813013oof.43.2020.04.04.06.29.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 06:29:10 -0700 (PDT)
+        Sat, 04 Apr 2020 06:29:11 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 03/11] python-visitor: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 09:28:38 -0400
-Message-Id: <20200404132846.16832-3-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 04/11] python-versiontools: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 09:28:39 -0400
+Message-Id: <20200404132846.16832-4-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404132846.16832-1-derek@asterius.io>
 References: <20200404132846.16832-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-visitor.inc    | 6 ------
- .../recipes-devtools/python/python3-visitor_0.1.3.bb      | 8 +++++++-
- 2 files changed, 7 insertions(+), 7 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-visitor.inc
+ .../recipes-devtools/python/python-versiontools.inc  | 10 ----------
+ .../python/python3-versiontools_1.9.1.bb             | 12 ++++++++++--
+ 2 files changed, 10 insertions(+), 12 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-versiontools.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-visitor.inc b/meta-python/recipes-devtools/python/python-visitor.inc
+diff --git a/meta-python/recipes-devtools/python/python-versiontools.inc b/meta-python/recipes-devtools/python/python-versiontools.inc
 deleted file mode 100644
-index 8c2288cf0a..0000000000
---- a/meta-python/recipes-devtools/python/python-visitor.inc
+index b0e696f9c3..0000000000
+--- a/meta-python/recipes-devtools/python/python-versiontools.inc
 +++ /dev/null
-@@ -1,6 +0,0 @@
--SUMMARY = "A tiny pythonic visitor implementation."
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+@@ -1,10 +0,0 @@
+-SUMMARY = "Smart replacement for plain tuple used in __version__"
+-SECTION = "devel/python"
+-HOMEPAGE = "https://launchpad.net/versiontools"
+-LICENSE = "LGPLv3"
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=20;md5=02193721a38fd8a05a4ddeb7df8e294d"
 -
--SRC_URI[md5sum] = "94a024ed0ec1b02b4497c15267d319ca"
--SRC_URI[sha256sum] = "2c737903b2b6864ebc6167eef7cf3b997126f1aa94bdf590f90f1436d23e480a"
-diff --git a/meta-python/recipes-devtools/python/python3-visitor_0.1.3.bb b/meta-python/recipes-devtools/python/python3-visitor_0.1.3.bb
-index b9bc51d4b9..ac3a90efb0 100644
---- a/meta-python/recipes-devtools/python/python3-visitor_0.1.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-visitor_0.1.3.bb
-@@ -1,2 +1,8 @@
-+SUMMARY = "A tiny pythonic visitor implementation."
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+-inherit pypi
+-
+-SRC_URI[md5sum] = "602b7db8eea30dd29a1d451997adf251"
+-SRC_URI[sha256sum] = "a969332887a18a9c98b0df0ea4d4ca75972f24ca94f06fb87d591377e83414f6"
+diff --git a/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb b/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
+index e8d6b7ddaf..cf0fa30a32 100644
+--- a/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
++++ b/meta-python/recipes-devtools/python/python3-versiontools_1.9.1.bb
+@@ -1,2 +1,10 @@
+-inherit setuptools3
+-require python-versiontools.inc
++SUMMARY = "Smart replacement for plain tuple used in __version__"
++SECTION = "devel/python"
++HOMEPAGE = "https://launchpad.net/versiontools"
++LICENSE = "LGPLv3"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=3;endline=20;md5=02193721a38fd8a05a4ddeb7df8e294d"
 +
-+SRC_URI[md5sum] = "94a024ed0ec1b02b4497c15267d319ca"
-+SRC_URI[sha256sum] = "2c737903b2b6864ebc6167eef7cf3b997126f1aa94bdf590f90f1436d23e480a"
++SRC_URI[md5sum] = "602b7db8eea30dd29a1d451997adf251"
++SRC_URI[sha256sum] = "a969332887a18a9c98b0df0ea4d4ca75972f24ca94f06fb87d591377e83414f6"
 +
- inherit pypi setuptools3
--require python-visitor.inc
++inherit pypi setuptools3
 -- 
 2.17.1
 
