@@ -1,85 +1,88 @@
-Received: from mail-ot1-f68.google.com (mail-ot1-f68.google.com [209.85.210.68])
- by mx.groups.io with SMTP id smtpd.web11.2998.1586024486641332785
+Received: from mail-oi1-f173.google.com (mail-oi1-f173.google.com [209.85.167.173])
+ by mx.groups.io with SMTP id smtpd.web10.3126.1586024487637688854
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 11:21:26 -0700
+ Sat, 04 Apr 2020 11:21:27 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.68, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f68.google.com with SMTP id f52so10891748otf.8
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 11:21:26 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.173, mailfrom: straka.derek@gmail.com)
+Received: by mail-oi1-f173.google.com with SMTP id d3so9345484oic.1
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 11:21:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=C1ecDJaiOhU9KTfmVkLDgx+BoUn1k2z7GJTuWK32nAA=;
-        b=gvZv5DkaDwlruiwDc3+d/g2d/xnIV68hUUWKoWIkLXm9c3iw1qCpUpCCrY2edJFDzU
-         yxxPGAZZQhcAaB9Azx/FBb/QO4Xs5l4JF9sxLKU168gwEaOPUajxvQEPm7HcsgFyecpf
-         UEITI20rEYIw2GUpcdpDIZqDr90JOAJFria+fRLzpAquT4z4sA9GUk4IXtZJA+Reudvz
-         MvUbo0W3xFD8Mf/xAHiCG5kdj1zZkabn/dhgReNNgdkbWiry01KgnG71T3TyQct5dlPk
-         4r3rMO3iicakKwofUdxGeabflHKWHiU7IAM6Vo3eP9nKtLbdrYhnRMDDm8CUliRHSUDk
-         FlFQ==
-X-Gm-Message-State: AGi0PuYwTuIKa8SqqW3uUpi77nc0pZkZlcyCUG/hg4HfPVVcxta4cj7h
-	myYWoS3uSYiWPRvHfpoS6e/WkRuKknI=
-X-Google-Smtp-Source: APiQypLWTkBv8AuYmyRFcFJuHWNzsaKc+EQ6qymJPcxxZ32l95GDipeFXr6Xgc8HB/O1BuXyc7xWuw==
-X-Received: by 2002:a9d:20e4:: with SMTP id x91mr9791462ota.6.1586024485672;
-        Sat, 04 Apr 2020 11:21:25 -0700 (PDT)
+        bh=vW02aXL9iqNw0BcziqPOg6et3hvQEfj1hso8oAkIzjg=;
+        b=dgjNCIV+pHzKNy2ybKx73DO31pBuMuXmp0B5yRiRE4/CSUl4WdLcp4J4G7e0p6p8xI
+         e6dXdLVPbLR2ZjaYCCF4tr6ZZhz3dsPmewEGJPwdgA6VuQo6PJ4HZd7Y70Yv0yeddJ59
+         JTTLpH4h8nUWz6IBdmApITlycCaYScKRfgJ5Lgsocux2w+ZnjO9sWscicqHAkKKDKnDs
+         mBzJHNGN3p5C6B4KW6M/kSqxc1YUCyxTd3rbNxIC+ZkCZP/GnCHCScS8TTZHhP5hPAgj
+         UHYpoJyPsArNAovdc/0DemK2XG2KPeDaKrtC86hczP7tM/HUD3ADI8Wm1PgtscU/S+lx
+         5xrA==
+X-Gm-Message-State: AGi0PuYlYWrBQ6G0KeHqUYsaDwg7CU2A+hUSvTKxlUFryjlJdKcSGDOf
+	AeUNq5rcP1imNMLDoSyPwOOjFvFrp6s=
+X-Google-Smtp-Source: APiQypI1DvL0PeTanlk6tJ4sPaPtKav1JE9BXwhSAYsHShCVQ0qFJ4+iLJxEw/70HdxkWpXjVDc4zA==
+X-Received: by 2002:aca:ab4b:: with SMTP id u72mr7669743oie.26.1586024486690;
+        Sat, 04 Apr 2020 11:21:26 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id j23sm3162059oib.32.2020.04.04.11.21.24
+        by smtp.gmail.com with ESMTPSA id j23sm3162059oib.32.2020.04.04.11.21.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 11:21:24 -0700 (PDT)
+        Sat, 04 Apr 2020 11:21:25 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 09/12] python-pytoml: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 14:21:01 -0400
-Message-Id: <20200404182104.21027-9-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 10/12] python-pytest-tempdir: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 14:21:02 -0400
+Message-Id: <20200404182104.21027-10-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404182104.21027-1-derek@asterius.io>
 References: <20200404182104.21027-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pytoml.inc        | 12 ------------
- .../recipes-devtools/python/python3-pytoml_0.1.21.bb | 12 +++++++++++-
- 2 files changed, 11 insertions(+), 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pytoml.inc
+ .../python/python-pytest-tempdir.inc              | 10 ----------
+ .../python/python3-pytest-tempdir_2019.10.12.bb   | 15 +++++++++++----
+ 2 files changed, 11 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pytest-tempdir.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pytoml.inc b/meta-python/recipes-devtools/python/python-pytoml.inc
+diff --git a/meta-python/recipes-devtools/python/python-pytest-tempdir.inc b/meta-python/recipes-devtools/python/python-pytest-tempdir.inc
 deleted file mode 100644
-index 180531d750..0000000000
---- a/meta-python/recipes-devtools/python/python-pytoml.inc
+index cf355a364d..0000000000
+--- a/meta-python/recipes-devtools/python/python-pytest-tempdir.inc
 +++ /dev/null
-@@ -1,12 +0,0 @@
--SUMMARY = "A TOML-0.4.0 parser/writer for Python"
--HOMEPAGE = "https://pypi.python.org/pypi/pytoml/"
+@@ -1,10 +0,0 @@
+-DESCRIPTION = "Adds support for a predictable and repeatable temporary directory."
+-HOMEPAGE = "https://github.com/saltstack/pytest-tempdir"
 -SECTION = "devel/python"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=cfff423699bdaef24331933ac4f56078"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9872c3a37cc9baf79a464cd168282be5"
 -
--SRC_URI[md5sum] = "e59dd36a559dd2a876e4c149c69e947b"
--SRC_URI[sha256sum] = "8eecf7c8d0adcff3b375b09fe403407aa9b645c499e5ab8cac670ac4a35f61e7"
+-SRC_URI[md5sum] = "79b997d418fb85c2529ab50cd4333689"
+-SRC_URI[sha256sum] = "e7d91813a9aa991db87dacdef8cfd3f1657632d731d56d06238c5ffb63ab36d8"
 -
 -inherit pypi
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pytoml_0.1.21.bb b/meta-python/recipes-devtools/python/python3-pytoml_0.1.21.bb
-index ed6a4d3a6b..f8c759a7d4 100644
---- a/meta-python/recipes-devtools/python/python3-pytoml_0.1.21.bb
-+++ b/meta-python/recipes-devtools/python/python3-pytoml_0.1.21.bb
-@@ -1,2 +1,12 @@
-+SUMMARY = "A TOML-0.4.0 parser/writer for Python"
-+HOMEPAGE = "https://pypi.python.org/pypi/pytoml/"
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-tempdir_2019.10.12.bb b/meta-python/recipes-devtools/python/python3-pytest-tempdir_2019.10.12.bb
+index 02e8215636..7a48fd520f 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-tempdir_2019.10.12.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-tempdir_2019.10.12.bb
+@@ -1,7 +1,14 @@
+-require python-pytest-tempdir.inc
++DESCRIPTION = "Adds support for a predictable and repeatable temporary directory."
++HOMEPAGE = "https://github.com/saltstack/pytest-tempdir"
 +SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=cfff423699bdaef24331933ac4f56078"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9872c3a37cc9baf79a464cd168282be5"
+ 
+-inherit setuptools3
++SRC_URI[md5sum] = "79b997d418fb85c2529ab50cd4333689"
++SRC_URI[sha256sum] = "e7d91813a9aa991db87dacdef8cfd3f1657632d731d56d06238c5ffb63ab36d8"
 +
-+SRC_URI[md5sum] = "e59dd36a559dd2a876e4c149c69e947b"
-+SRC_URI[sha256sum] = "8eecf7c8d0adcff3b375b09fe403407aa9b645c499e5ab8cac670ac4a35f61e7"
-+
- inherit pypi setuptools3
--require python-pytoml.inc
-+
-+BBCLASSEXTEND = "native nativesdk"
++inherit pypi setuptools3
+ 
+ RDEPENDS_${PN} += " \
+-    python3-pytest \
+-    "
++    ${PYTHON_PN}-pytest \
++"
 -- 
 2.17.1
 
