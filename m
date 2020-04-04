@@ -1,99 +1,85 @@
-Received: from mail-qt1-f195.google.com (mail-qt1-f195.google.com [209.85.160.195])
- by mx.groups.io with SMTP id smtpd.web10.4962.1586029859436855835
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
+ by mx.groups.io with SMTP id smtpd.web11.6590.1586035569229741923
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 12:50:59 -0700
+ Sat, 04 Apr 2020 14:26:09 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=VE8ZaprO;
- spf=pass (domain: gmail.com, ip: 209.85.160.195, mailfrom: raj.khem@gmail.com)
-Received: by mail-qt1-f195.google.com with SMTP id e14so9545880qts.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 12:50:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=HE5KQ4qnwCs63RfO/ddErCHXKJY/q25f9vWydI4W5Go=;
-        b=VE8ZaprO+tH08KdOc8Cb9CfCxOtfnWJpLEkRTHCT53XduoIjz2fFpo64jMGdCaS8X2
-         5G0+ed7qTmsvd2gsHWNhkr/LzoMsAkD//PwzC8s0KMXPgrwmYVb0KTBUFbN/4CdRXFEr
-         FakDDZKXV32vDd5jCqo+W9arHXN6YBzTxvTB+c+oYDS5nqjHOqxqsaqWIVYrSVlfwOpg
-         TPYoEtyHqK+Ry0ulaQjoIseh/YQK6rA1rRIwP8RTlPwy6YbqXw49Tjd2JksVqMsNdIQo
-         zW00B8vropq4l3d3xD2YAwWlW+V/7X7o66J/5FlODv6RQ8Af9FX44G0ljvJKnhejXvkG
-         1odA==
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.54, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f54.google.com with SMTP id a6so11251805otb.10
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 14:26:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=HE5KQ4qnwCs63RfO/ddErCHXKJY/q25f9vWydI4W5Go=;
-        b=Y9a2of6uv3l0OLMyvalHR8lcHBPPyiKoRd3/6ko92a/XLBPdFC/ppUtRqCfyxThGig
-         +6VkvSp+xP450iyjvzh1tHLSC3U1Cpwxv3zaYxX/nhVlyEgc7zt/zw/732yQ1tFi6flC
-         0jHrjbUxx04xI4j8pWY+5BAKajCAa3fOHsLhOYJM6yyZNwimSkM9jz295NSLs5sVyHbV
-         UmtEvjransXJXfpa8DxYEYKrG+v+XFF6D6uZAOuS7wKWE4+DyTjksAVCc1ZyCimGkrGo
-         E3Iic3BjV6Sfhk267Mrt/RGYoYZEwv8uvHWXu30I22SwqhhV5gwCM3qLNMKXZmu2gLht
-         lTSw==
-X-Gm-Message-State: AGi0PuZrZHRzKyjc/lG7970HDc5n4S7wKxzkXSjKHSFwwzSfc1qw2vMp
-	rVMdpbnX0EFLdj+wmLv27O2isxi8gUomJV/rbZ7sGtmt
-X-Google-Smtp-Source: APiQypLXaLYUy/RUs0HsK9afnZGlBQKm9rp+XiR8x9oq3If2egDsMJMf7aI2WcblxBzJVbF2Rd4oxozA4fhiHAfXhHE=
-X-Received: by 2002:ac8:a09:: with SMTP id b9mr14224470qti.190.1586029858359;
- Sat, 04 Apr 2020 12:50:58 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200404171251.19823-1-derek@asterius.io> <20200404171251.19823-25-derek@asterius.io>
-In-Reply-To: <20200404171251.19823-25-derek@asterius.io>
-From: "Khem Raj" <raj.khem@gmail.com>
-Date: Sat, 4 Apr 2020 12:50:31 -0700
-Message-ID: <CAMKF1sqMPjf6rXHfc=G0kvP8qFCugqhqwNV+erS_FTJ87GmYUA@mail.gmail.com>
-Subject: Re: [oe][meta-python][PATCH 25/27] python-semver: consolidate inc and bb files into a single bb file
-To: Derek Straka <derek@asterius.io>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=wnEajEE7G+9EOK1oSn9c6Ub5yCy96S/Nt7XkXLga7WQ=;
+        b=h9pfff+T1HCDVlh2eHhzX6NJIQBASYXWDbNKbj5846wnZPj0EGG/PpmFhlKT34jc4j
+         rho89mtqNRIIkbVgZm+72j67ePPpFP2v+TzWySUeFai8MQDz2xy3N67us27AETpMaSpM
+         vHnkWPIzBTe4GhebfQzzwYa1abSqt0+ec2/Kz7fXNyYWItTqrJAGi7jZA6xDFtm0Sfwx
+         6V4MPGEZ0fXUOw07jgfbXfPw3zmRt4oJDYDkUhJBBwQylhQUi9Wgx+otKlARgt7csqAD
+         RsyQ/2cejjuGFXF8OXiHthrC/4oQNzE8cb2Lj+61Qx64NgDbmC+qrRCXh25kC8+11kTO
+         roYQ==
+X-Gm-Message-State: AGi0PuYvyu7dgdaPjFDcvATvRtnwvBexSihot8fK0TCHjSkaUzwdr0VU
+	6PNof29mwqGsTgyN7/efE9122K3Y8d4=
+X-Google-Smtp-Source: APiQypKO4Ipa1EmbdAqyxi67RH+W84xzWMoFxALy1bOPy+z/bDoCBYHi2u3Qnm+BiUDe60GYYi/3Ow==
+X-Received: by 2002:a05:6820:346:: with SMTP id m6mr12020355ooe.22.1586035568001;
+        Sat, 04 Apr 2020 14:26:08 -0700 (PDT)
+Return-Path: <straka.derek@gmail.com>
+Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
+        by smtp.gmail.com with ESMTPSA id g72sm3183470otg.79.2020.04.04.14.26.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 04 Apr 2020 14:26:07 -0700 (PDT)
+From: "Derek Straka" <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Cc: Derek Straka <derek@asterius.io>
+Subject: [oe][meta-python][PATCH 1/5] python-pytest-helpers-namespace: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 17:25:56 -0400
+Message-Id: <20200404212600.25018-1-derek@asterius.io>
+X-Mailer: git-send-email 2.17.1
 
-There is another patch on ml for this so dropping this one.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../python/python-pytest-helpers-namespace.inc    | 10 ----------
+ .../python3-pytest-helpers-namespace_2019.1.8.bb  | 15 +++++++++++----
+ 2 files changed, 11 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc
 
-On Sat, Apr 4, 2020 at 10:13 AM Derek Straka <derek@asterius.io> wrote:
->
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  .../recipes-devtools/python/python-semver.inc      | 12 ------------
->  .../python/python3-semver_2.8.1.bb                 | 14 ++++++++++++--
->  2 files changed, 12 insertions(+), 14 deletions(-)
->  delete mode 100644 meta-python/recipes-devtools/python/python-semver.inc
->
-> diff --git a/meta-python/recipes-devtools/python/python-semver.inc b/meta-python/recipes-devtools/python/python-semver.inc
-> deleted file mode 100644
-> index 3c95c06eaf..0000000000
-> --- a/meta-python/recipes-devtools/python/python-semver.inc
-> +++ /dev/null
-> @@ -1,12 +0,0 @@
-> -DESCRIPTION = "Python module for Semantic Versioning"
-> -HOMEPAGE = "https://github.com/k-bx/python-semver"
-> -BUGTRACKER = "https://github.com/k-bx/python-semver/issues"
-> -LICENSE = "BSD-3-Clause"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
-> -
-> -SRC_URI[md5sum] = "dc579ba9d0bb2137bad5324d4bdb7e40"
-> -SRC_URI[sha256sum] = "5b09010a66d9a3837211bb7ae5a20d10ba88f8cb49e92cb139a69ef90d5060d8"
-> -
-> -inherit pypi
-> -
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-python/recipes-devtools/python/python3-semver_2.8.1.bb b/meta-python/recipes-devtools/python/python3-semver_2.8.1.bb
-> index 77925ae2b1..a469b23b10 100644
-> --- a/meta-python/recipes-devtools/python/python3-semver_2.8.1.bb
-> +++ b/meta-python/recipes-devtools/python/python3-semver_2.8.1.bb
-> @@ -1,2 +1,12 @@
-> -inherit setuptools3
-> -require python-semver.inc
-> +DESCRIPTION = "Python module for Semantic Versioning"
-> +HOMEPAGE = "https://github.com/k-bx/python-semver"
-> +BUGTRACKER = "https://github.com/k-bx/python-semver/issues"
-> +LICENSE = "BSD-3-Clause"
-> +LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e910b35b0ef4e1f665b9a75d6afb7709"
-> +
-> +SRC_URI[md5sum] = "dc579ba9d0bb2137bad5324d4bdb7e40"
-> +SRC_URI[sha256sum] = "5b09010a66d9a3837211bb7ae5a20d10ba88f8cb49e92cb139a69ef90d5060d8"
-> +
-> +inherit pypi setuptools3
-> +
-> +BBCLASSEXTEND = "native nativesdk"
-> --
-> 2.17.1
->
-> 
+diff --git a/meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc b/meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc
+deleted file mode 100644
+index c091ab9768..0000000000
+--- a/meta-python/recipes-devtools/python/python-pytest-helpers-namespace.inc
++++ /dev/null
+@@ -1,10 +0,0 @@
+-DESCRIPTION = "This plugin does not provide any helpers to pytest, it does, however, provide a helpers namespace in pytest which enables you to register helper functions in your conftest.py to be used within your tests without having to import them."
+-HOMEPAGE = "https://github.com/saltstack/pytest-helpers-namespace"
+-SECTION = "devel/python"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=cc99508c43d9d14fd51c7fac622ffd23"
+-
+-SRC_URI[md5sum] = "04ec1d8750f9b154e782a47cf8b30736"
+-SRC_URI[sha256sum] = "4eff23a19f92410c0166f6dffbfa8901d3e14a80e97d70cd08428b6d597771ce"
+-
+-inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb
+index f03f5d415f..b3aced4f68 100644
+--- a/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb
++++ b/meta-python/recipes-devtools/python/python3-pytest-helpers-namespace_2019.1.8.bb
+@@ -1,7 +1,14 @@
+-require python-pytest-helpers-namespace.inc
++DESCRIPTION = "This plugin does not provide any helpers to pytest, it does, however, provide a helpers namespace in pytest which enables you to register helper functions in your conftest.py to be used within your tests without having to import them."
++HOMEPAGE = "https://github.com/saltstack/pytest-helpers-namespace"
++SECTION = "devel/python"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=cc99508c43d9d14fd51c7fac622ffd23"
+ 
+-inherit setuptools3
++SRC_URI[md5sum] = "04ec1d8750f9b154e782a47cf8b30736"
++SRC_URI[sha256sum] = "4eff23a19f92410c0166f6dffbfa8901d3e14a80e97d70cd08428b6d597771ce"
++
++inherit pypi setuptools3
+ 
+ RDEPENDS_${PN} += " \
+-    python3-pytest \
+-    "
++    ${PYTHON_PN}-pytest \
++"
+-- 
+2.17.1
+
