@@ -1,56 +1,76 @@
-Received: from koncepto.io (koncepto.io [195.154.119.111])
- by mx.groups.io with SMTP id smtpd.web11.7741.1586003793319593380
+Received: from mail-ot1-f48.google.com (mail-ot1-f48.google.com [209.85.210.48])
+ by mx.groups.io with SMTP id smtpd.web10.8625.1586006950349847636
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 05:36:33 -0700
+ Sat, 04 Apr 2020 06:29:10 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@koncepto.io header.s=default header.b=w7EPYENu;
- spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
-Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
-	by koncepto.io (Postfix) with ESMTPSA id D263E60481;
-	Sat,  4 Apr 2020 14:36:31 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
-	s=default; t=1586003791;
-	bh=z5YVBZ1IedOQN89Q9ALaySEjeAQtAAMBByfan9/yKQ4=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=w7EPYENuh3FbNP9S8CTSPp4MQbXZ1CToKxk1lr6s/OEEFVjCSvvqa8TujZAIgFOci
-	 3820LpeoZZTU0IFGxA44O6Uvp6eP55JbDqOvHF42Siym3ig0TWgjllwMA3woFOMlhD
-	 Ygj6d0/VIx2Pdu+dEYalnCWJqPddmRHsmcczaxfDhgZ+bDlkxQSuLmjgmIAboHs5rr
-	 4UajojjMyU7xbUP/IA3pIN8eKigRECilv/8TAUfOactm0tr82fPV67x8DLY/ZcNbfB
-	 Vfmik8MqC2xGhIp9B1Rkr3JOlF6e/DFhnbfZOBwqQOpwdU7BZp/2lWdDbVM7W+opZ9
-	 ZOm1OlVSW0Dlw==
-From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.48, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f48.google.com with SMTP id x11so10363444otp.6
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 06:29:10 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=M0oPjn+64USpRH7v4yglb+N423DE51Altapn3V463gc=;
+        b=mAAc6e1XvKcGEeN4lyVG3NCa/ENynA/WwNwPQoBdLcglse2jjsmKD5m5EZPpts5HQl
+         FcbAUvpD8OKujlblhxAFRAjVS5ZifYvQGxN8McVY39UqRpKA6xHXh0RpDKQhT+ZdnDgm
+         5GAIISFewjtHKv00oyGT8GptNo1sCipSjM8vpFOnUpskBz5RMmwYo/99FMWoBNtwfp7c
+         rCGfnLyEuhrK5Xt+pd0ES9OEwikUdhHO2UDr2OCNKr9QhO0euIdnwgp6BgtmAwEaewXj
+         H/L9i9SeoWybLU1aLSFs0qqfdKfGcC3tfacckDvnj9nVYlh+VDi7mC/nVo7co8hD0AE4
+         JddQ==
+X-Gm-Message-State: AGi0PubMjpCX74VWH/Y/UDrsw+lvsGnHUdaFiyLH5pqXg28/r/qkb2BK
+	4UDmljlFaTWAip3wc6NF/7zHyRafLRo=
+X-Google-Smtp-Source: APiQypJSrLTH50aYStngDL8yKv6O5UPNDWMDjspMue/J1AcCUDn1ubzG8jF8unD/FuHnsLIvg4sKEg==
+X-Received: by 2002:a05:6830:1d91:: with SMTP id y17mr10260258oti.184.1586006949326;
+        Sat, 04 Apr 2020 06:29:09 -0700 (PDT)
+Return-Path: <straka.derek@gmail.com>
+Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
+        by smtp.gmail.com with ESMTPSA id t17sm2813013oof.43.2020.04.04.06.29.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 04 Apr 2020 06:29:08 -0700 (PDT)
+From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
-Subject: [meta-networking][PATCH 5/5] igmpproxy: fix upstream check URL
-Date: Sat,  4 Apr 2020 14:36:01 +0200
-Message-Id: <1586003761-12873-5-git-send-email-pjtexier@koncepto.io>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1586003761-12873-1-git-send-email-pjtexier@koncepto.io>
-References: <1586003761-12873-1-git-send-email-pjtexier@koncepto.io>
+Cc: Derek Straka <derek@asterius.io>
+Subject: [oe][meta-python][PATCH 01/11] python-wcwidth: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 09:28:36 -0400
+Message-Id: <20200404132846.16832-1-derek@asterius.io>
+X-Mailer: git-send-email 2.17.1
 
-Fixes:
-
-$: devtool check-upgrade-status igmpproxy
-<...>
-
-INFO: igmpproxy                 0.2.1           UNKNOWN_BROKEN  None
-
-Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-python/recipes-devtools/python/python-wcwidth.inc |  8 --------
+ .../recipes-devtools/python/python3-wcwidth_0.1.8.bb   | 10 +++++++++-
+ 2 files changed, 9 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-wcwidth.inc
 
-diff --git a/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb b/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb
-index db96d48..004433b 100644
---- a/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb
-+++ b/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.2.1.bb
-@@ -8,4 +8,6 @@ SRC_URI = "https://github.com/pali/igmpproxy/releases/download/${PV}/${BP}.tar.g
- SRC_URI[md5sum] = "3a9c2cb42c1f5ee0cb769a4884545641"
- SRC_URI[sha256sum] = "d351e623037390f575c1203d9cbb7ba33a8bdef85a3c5e1d2901c5a2a38449a1"
- 
-+UPSTREAM_CHECK_URI = "https://github.com/pali/${BPN}/releases"
+diff --git a/meta-python/recipes-devtools/python/python-wcwidth.inc b/meta-python/recipes-devtools/python/python-wcwidth.inc
+deleted file mode 100644
+index bbd0d50bf0..0000000000
+--- a/meta-python/recipes-devtools/python/python-wcwidth.inc
++++ /dev/null
+@@ -1,8 +0,0 @@
+-SUMMARY = "Library for building powerful interactive command lines in Python"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=11fba47286258744a6bc6e43530c32a1"
+-
+-SRC_URI[md5sum] = "dc6677d099e6f49c0f6fbc310de261e9"
+-SRC_URI[sha256sum] = "f28b3e8a6483e5d49e7f8949ac1a78314e740333ae305b4ba5defd3e74fb37a8"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb b/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb
+index 5f6259b081..f9f6474add 100644
+--- a/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb
++++ b/meta-python/recipes-devtools/python/python3-wcwidth_0.1.8.bb
+@@ -1,2 +1,10 @@
++SUMMARY = "Library for building powerful interactive command lines in Python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=11fba47286258744a6bc6e43530c32a1"
 +
- inherit autotools pkgconfig
++SRC_URI[md5sum] = "dc6677d099e6f49c0f6fbc310de261e9"
++SRC_URI[sha256sum] = "f28b3e8a6483e5d49e7f8949ac1a78314e740333ae305b4ba5defd3e74fb37a8"
++
+ inherit pypi setuptools3
+-require python-wcwidth.inc
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.7.4
+2.17.1
 
