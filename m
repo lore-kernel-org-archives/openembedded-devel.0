@@ -1,27 +1,27 @@
-Received: from mail-oi1-f195.google.com (mail-oi1-f195.google.com [209.85.167.195])
- by mx.groups.io with SMTP id smtpd.web12.3066.1586024481616548645
+Received: from mail-oi1-f179.google.com (mail-oi1-f179.google.com [209.85.167.179])
+ by mx.groups.io with SMTP id smtpd.web12.3067.1586024482659730292
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 11:21:21 -0700
+ Sat, 04 Apr 2020 11:21:22 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.195, mailfrom: straka.derek@gmail.com)
-Received: by mail-oi1-f195.google.com with SMTP id q204so9253212oia.13
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 11:21:21 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.179, mailfrom: straka.derek@gmail.com)
+Received: by mail-oi1-f179.google.com with SMTP id u20so9313370oic.4
+        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 11:21:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=U562UdoR1GEFL2nLHJ0EKMrQkjO7s9FW0RQvxfCxkO0=;
-        b=pmjJLfnImXn7Vn9XQWGLB4BkVp0rDbSJA4EC4oz93D+u85DMOYG6oi/qSvv8AQKiLC
-         IMhQe5tddLs3an8uE4NTmZXk4X6NGiQxgO1WKlEeuJJq8SepK8/JiwyCxB3lNRTnG7H1
-         ZREy06wG7bmNCBrsJTpPof2luQi+VP+LKZoQjWD65AVBCOawFIjwjruZqRMOYfL+iwor
-         KGYLI21Zun4VUngwIc5kNZ5I6GYeY/GSzJBJ2mV+c4ZouCbilIGxcXnbbE9C7lvfOwcf
-         lmWalrhJHvXbP589wzlI0K/Qflh/CgPcQfHFd5eY8ucuD2Tmvv6GHFNBvsMklqncwB5C
-         rgXw==
-X-Gm-Message-State: AGi0Pub+dTibWqQ60TfdgCC7XNf1x5gG0HdJUMnVNY+1KSVTjcCVF9nf
-	37TZTHToNSAaWeQNGm9SeQBRaS3wpR8=
-X-Google-Smtp-Source: APiQypKNnMaKLe6SizLkvBpPsWJH8QPSdiMWo05xMW2eRwCtoQBg2Dgmj4PPwdo4IoqVE7Wk7bhnsA==
-X-Received: by 2002:aca:b743:: with SMTP id h64mr7612597oif.176.1586024480684;
-        Sat, 04 Apr 2020 11:21:20 -0700 (PDT)
+        bh=SYGcJPuvhlTcxWyYwdjxQxJ2dx00Yz+IXjUAQUWD0Ss=;
+        b=rb6H4y+MulmOsiifSuDLBjh30D/5HvbUTBjf4fdgbUfhjcx+WMBCFrW94JhuVsfA6i
+         8rjRFq9ms4GCZElPR+zjK26AMjlCvDohV5lZXqXZwtaabArNG2Kv2ME2WdayUjBG4Wm9
+         5u66jjvR+R9up0UfgKVK7nMb2hSpihMDOF8z2hzi2zABmX6NfIbmIcQwpMLLrrwu6djj
+         U0e7BL+Y0/naVGH4mGzudTyizY6Xc8jh5ja3uHd5GgQB+aQ6uSaCug92K2bVlVcoWYgV
+         454T3Me2xP1JWh+c8lauloDrIKgxom2Uh/zZEKagc9rfnOGqUvt260pnamUTcYlklIbp
+         k/ag==
+X-Gm-Message-State: AGi0PuanQCrfCRtekB9evUTWYvzb3HAPOesSqAN8OYCSmxjjcagqFNEG
+	4+Ec68BRbZzDGW2yEDkhSCwGjY+RUR4=
+X-Google-Smtp-Source: APiQypKs8peLHpKMvJzgDUBM8i94qtp7q2P56rz5XWjc6SzqTcrLfv9eKB+sTOyGcMRxZCPlBPHu8Q==
+X-Received: by 2002:aca:fc88:: with SMTP id a130mr7019924oii.89.1586024481660;
+        Sat, 04 Apr 2020 11:21:21 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
         by smtp.gmail.com with ESMTPSA id j23sm3162059oib.32.2020.04.04.11.21.20
@@ -30,87 +30,69 @@ Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. 
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 04/12] python-pyzmq: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 14:20:56 -0400
-Message-Id: <20200404182104.21027-4-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 05/12] python-pyyaml: consolidate inc and bb files into a single bb file
+Date: Sat,  4 Apr 2020 14:20:57 -0400
+Message-Id: <20200404182104.21027-5-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200404182104.21027-1-derek@asterius.io>
 References: <20200404182104.21027-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pyzmq.inc  | 27 -----------------
- .../python/python3-pyzmq_17.1.0.bb            | 29 +++++++++++++++++--
- 2 files changed, 27 insertions(+), 29 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pyzmq.inc
+ .../recipes-devtools/python/python-pyyaml.inc | 18 -----------------
+ .../python/python3-pyyaml_5.3.bb              | 20 +++++++++++++++++--
+ 2 files changed, 18 insertions(+), 20 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyyaml.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pyzmq.inc b/meta-python/recipes-devtools/python/python-pyzmq.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyyaml.inc b/meta-python/recipes-devtools/python/python-pyyaml.inc
 deleted file mode 100644
-index 2447c2f34b..0000000000
---- a/meta-python/recipes-devtools/python/python-pyzmq.inc
+index aede58530a..0000000000
+--- a/meta-python/recipes-devtools/python/python-pyyaml.inc
 +++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
--HOMEPAGE = "http://zeromq.org/bindings:python"
--LICENSE = "BSD & LGPL-3.0"
--LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
--                    file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e"
--DEPENDS = "zeromq"
+@@ -1,18 +0,0 @@
+-SUMMARY = "Python support for YAML"
+-HOMEPAGE = "http://www.pyyaml.org"
+-SECTION = "devel/python"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=a76b4c69bfcf82313bbdc0393b04438a"
+-DEPENDS = "libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}"
 -
--FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyzmq:"
+-PYPI_PACKAGE = "PyYAML"
+-inherit pypi
 -
--SRC_URI += "file://club-rpath-out.patch"
--SRC_URI[md5sum] = "aecdfc328193fbd81f6dc23228319943"
--SRC_URI[sha256sum] = "2199f753a230e26aec5238b0518b036780708a4c887d4944519681a920b9dee4"
+-SRC_URI[md5sum] = "adbb0d336b509d6472d3b095a0f1cf30"
+-SRC_URI[sha256sum] = "e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e691615"
 -
--inherit pypi pkgconfig
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-datetime \
+-"
 -
--RDEPENDS_${PN} += "${PYTHON_PN}-multiprocessing"
--
--FILES_${PN}-dbg =+ "${PYTHON_SITEPACKAGES_DIR}/zmq/backend/cython/.debug"
--
--do_compile_prepend() {
--    echo [global] > ${S}/setup.cfg
--    echo zmq_prefix = ${STAGING_DIR_HOST} >> ${S}/setup.cfg
--    echo have_sys_un_h = True >> ${S}/setup.cfg
--    echo skip_check_zmq = True >> ${S}/setup.cfg
--    echo libzmq_extension = False >> ${S}/setup.cfg
--    echo no_libzmq_extension = True >> ${S}/setup.cfg
--}
-diff --git a/meta-python/recipes-devtools/python/python3-pyzmq_17.1.0.bb b/meta-python/recipes-devtools/python/python3-pyzmq_17.1.0.bb
-index 050f53af14..2369f067ee 100644
---- a/meta-python/recipes-devtools/python/python3-pyzmq_17.1.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyzmq_17.1.0.bb
-@@ -1,2 +1,27 @@
--require python-pyzmq.inc
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
+index 470aca608b..b5425b8c95 100644
+--- a/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pyyaml_5.3.bb
+@@ -1,2 +1,18 @@
 -inherit setuptools3
-+SUMMARY = "Pyzmq provides Zero message queue access for the Python language"
-+HOMEPAGE = "http://zeromq.org/bindings:python"
-+LICENSE = "BSD & LGPL-3.0"
-+LIC_FILES_CHKSUM = "file://COPYING.BSD;md5=11c65680f637c3df7f58bbc8d133e96e \
-+                    file://COPYING.LESSER;md5=12c592fa0bcfff3fb0977b066e9cb69e"
-+DEPENDS = "zeromq"
+-require python-pyyaml.inc
++SUMMARY = "Python support for YAML"
++HOMEPAGE = "http://www.pyyaml.org"
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=a76b4c69bfcf82313bbdc0393b04438a"
++DEPENDS = "libyaml ${PYTHON_PN}-cython-native ${PYTHON_PN}"
 +
-+FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyzmq:"
++PYPI_PACKAGE = "PyYAML"
++inherit pypi setuptools3
 +
-+SRC_URI += "file://club-rpath-out.patch"
-+SRC_URI[md5sum] = "aecdfc328193fbd81f6dc23228319943"
-+SRC_URI[sha256sum] = "2199f753a230e26aec5238b0518b036780708a4c887d4944519681a920b9dee4"
++SRC_URI[md5sum] = "adbb0d336b509d6472d3b095a0f1cf30"
++SRC_URI[sha256sum] = "e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e691615"
 +
-+inherit pypi pkgconfig setuptools3
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
++"
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-multiprocessing"
-+
-+FILES_${PN}-dbg =+ "${PYTHON_SITEPACKAGES_DIR}/zmq/backend/cython/.debug"
-+
-+do_compile_prepend() {
-+    echo [global] > ${S}/setup.cfg
-+    echo zmq_prefix = ${STAGING_DIR_HOST} >> ${S}/setup.cfg
-+    echo have_sys_un_h = True >> ${S}/setup.cfg
-+    echo skip_check_zmq = True >> ${S}/setup.cfg
-+    echo libzmq_extension = False >> ${S}/setup.cfg
-+    echo no_libzmq_extension = True >> ${S}/setup.cfg
-+}
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
