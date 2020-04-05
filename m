@@ -1,97 +1,121 @@
-Received: from mail-oi1-f180.google.com (mail-oi1-f180.google.com [209.85.167.180])
- by mx.groups.io with SMTP id smtpd.web11.23406.1586111985204149809
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+ by mx.groups.io with SMTP id smtpd.web10.23480.1586111986287249976
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2020 11:39:45 -0700
+ Sun, 05 Apr 2020 11:39:46 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.180, mailfrom: straka.derek@gmail.com)
-Received: by mail-oi1-f180.google.com with SMTP id k9so11129920oia.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 11:39:45 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.45, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f45.google.com with SMTP id c9so12968400otl.12
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 11:39:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=hYNDXKkONRvbdLu0UXW489iGgS85YHnSD8ch4GFdxEo=;
-        b=OOQpjYa8mwoo+GYK4vc/ZGHbmHGocoY8IE6BYAL2PlYMq4NTeNbWyhLZZ5Ry9fHZzh
-         jGY9CqO3yxPsgVrTAkHM1bIl4SQrJrRT1okbQ469l2q/pEzaNglUVYWc3yqmMmjjkfy8
-         wnQG98ZNbcYmWUErpen5T6KzB7aa9LvdiS953Fzzy9bPth1xIrVBEQQKvCLapRnN+JNr
-         qR4PAy7tl3LwwDFoBmXVi3fCAI7Qqt1zZ0dyZ6EEbGyOkjMTnKgLdGaACRW+C+6EuRuF
-         SCHqLBxUvbKLuTYPQNTFyhK0KyUL6lLzr/zFocVeyPm29xGea3txUIuU6lm9rM5ReTPg
-         ct3g==
-X-Gm-Message-State: AGi0PuayaPxo4nTKlQ1QwtmNNLjHv5tn0eQ86XZZU0dpxv+cw904dafj
-	cdpA1ILLBpagNOsdEn60DshGuvusAOc=
-X-Google-Smtp-Source: APiQypKj5K5g7CNkY6y8jdavv6IAUdHjHTSl1X61lCrz7LTbsWDxssC3RV4lmxkw/O+pKAMxKkLWTw==
-X-Received: by 2002:aca:5e0b:: with SMTP id s11mr9843313oib.111.1586111984269;
-        Sun, 05 Apr 2020 11:39:44 -0700 (PDT)
+        bh=wkz/EQHYYNl8Z0xfl2yObU0zHX+Q2jG6SGbm04+6GGc=;
+        b=ArDOgynTbwYTQ6kK27TXZ3Efb7nquOHCxUeqot1SpkvIKM4FDlI39VRc2Ca27bW1FT
+         Ethk5WEHufY9g0zNAA+JJ4EJ4A3lSqjEAaNgOhntoXq99JG4ABZLIRrA35QlfUWYZMo6
+         FL0Ya3mS3iGztsf9/v4QY0jptGY6emCN5xzLD4A1tsjigp4D5lW3rPfFRqCySH6yqswi
+         Fxhb+ipQ/iFIHZmmRuZY6RahdeUXHPXS9ITo6AkjR0T7zCZxReJgSW6D8ufATO26KzCO
+         UWWEZMLLbZ1eqWhAK/EWZNefFnnecp7wvmAnZ+ZmORuGhMf1C/7+q5VMaiKm97uPswhr
+         xllQ==
+X-Gm-Message-State: AGi0PuZllE0d6aZJtuEEU1F0E6gQScePrNi9UhIoeHrThdUvr2m35kJa
+	SpyikM8opztHVwQE+r5k1Mgtoj3w6PY=
+X-Google-Smtp-Source: APiQypLE3CsCNGOGsJhQZ/2uWShEPreEcFNtWnK7ibYCcDOmTKPZH1KOu30RaL9//8U6IZ5o+6rzsw==
+X-Received: by 2002:a9d:6944:: with SMTP id p4mr10936372oto.220.1586111985236;
+        Sun, 05 Apr 2020 11:39:45 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id q22sm3833927oic.22.2020.04.05.11.39.43
+        by smtp.gmail.com with ESMTPSA id q22sm3833927oic.22.2020.04.05.11.39.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2020 11:39:43 -0700 (PDT)
+        Sun, 05 Apr 2020 11:39:44 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 02/15] python-pymysql: consolidate inc and bb files into a single bb file
-Date: Sun,  5 Apr 2020 14:39:16 -0400
-Message-Id: <20200405183929.28266-2-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 03/15] python-pymongo: consolidate inc and bb files into a single bb file
+Date: Sun,  5 Apr 2020 14:39:17 -0400
+Message-Id: <20200405183929.28266-3-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200405183929.28266-1-derek@asterius.io>
 References: <20200405183929.28266-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/python-pymysql.inc                 | 18 ------------------
- .../python/python3-pymysql_0.9.3.bb           | 19 +++++++++++++++++--
- 2 files changed, 17 insertions(+), 20 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pymysql.inc
+ .../python/python-pymongo.inc                 | 29 -----------------
+ .../python/python3-pymongo_3.10.1.bb          | 31 ++++++++++++++++++-
+ 2 files changed, 30 insertions(+), 30 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pymongo.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pymysql.inc b/meta-python/recipes-devtools/python/python-pymysql.inc
+diff --git a/meta-python/recipes-devtools/python/python-pymongo.inc b/meta-python/recipes-devtools/python/python-pymongo.inc
 deleted file mode 100644
-index 8c7f4556cb..0000000000
---- a/meta-python/recipes-devtools/python/python-pymysql.inc
+index 2b9794f9c4..0000000000
+--- a/meta-python/recipes-devtools/python/python-pymongo.inc
 +++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "A pure-Python MySQL client library"
--DESCRIPTION = " \
--  This package contains a pure-Python MySQL client library, based on PEP 249 \
--  Most public APIs are compatible with mysqlclient and MySQLdb. \
--  "
--SECTION = "devel/python"
--HOMEPAGE = "https://pymysql.readthedocs.io"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=528175c84163bb800d23ad835c7fa0fc"
+@@ -1,29 +0,0 @@
+-SUMMARY = "Python driver for MongoDB <http://www.mongodb.org>"
+-DESCRIPTION = "\
+-The PyMongo distribution contains tools for interacting with MongoDB \
+-database from Python. The bson package is an implementation of the BSON \
+-format for Python. The pymongo package is a native Python driver for \
+-MongoDB. The gridfs package is a gridfs implementation on top of pymongo."
+-HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 -
--SRC_URI[md5sum] = "e5d9183cc0a775ac29f9e0365cca6556"
--SRC_URI[sha256sum] = "d8c059dcd81dedb85a9f034d5e22dcb4442c0b201908bede99e306d65ea7c8e7"
+-SRC_URI[md5sum] = "e31b9c0190c9eaf1f792d0277b2a8ebe"
+-SRC_URI[sha256sum] = "993257f6ca3cde55332af1f62af3e04ca89ce63c08b56a387cdd46136c72f2fa"
 -
--inherit pypi
+-PACKAGES =+ "${PYTHON_PN}-bson"
 -
--PYPI_PACKAGE = "PyMySQL"
+-FILES_${PYTHON_PN}-bson = "${PYTHON_SITEPACKAGES_DIR}/bson/*"
 -
--RDEPENDS_${PN} += "${PYTHON_PN}-cryptography"
-diff --git a/meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb b/meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb
-index 13774bd632..6a64ccb161 100644
---- a/meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymysql_0.9.3.bb
-@@ -1,2 +1,17 @@
--inherit setuptools3
--require python-pymysql.inc
-+SUMMARY = "A pure-Python MySQL client library"
-+DESCRIPTION = " \
-+  This package contains a pure-Python MySQL client library, based on PEP 249 \
-+  Most public APIs are compatible with mysqlclient and MySQLdb. \
-+  "
-+SECTION = "devel/python"
-+HOMEPAGE = "https://pymysql.readthedocs.io"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=528175c84163bb800d23ad835c7fa0fc"
+-RDEPENDS_${PYTHON_PN}-bson += " \
+-     ${PYTHON_PN}-datetime \
+-     ${PYTHON_PN}-json \
+-     ${PYTHON_PN}-netclient \
+-     ${PYTHON_PN}-numbers \
+-     ${PYTHON_PN}-threading \
+-"
+-
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-bson \
+-    ${PYTHON_PN}-pprint \
+-"
+diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.10.1.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.10.1.bb
+index 5164b186bf..f69ca53cf5 100644
+--- a/meta-python/recipes-devtools/python/python3-pymongo_3.10.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pymongo_3.10.1.bb
+@@ -1,2 +1,31 @@
++SUMMARY = "Python driver for MongoDB <http://www.mongodb.org>"
++DESCRIPTION = "\
++The PyMongo distribution contains tools for interacting with MongoDB \
++database from Python. The bson package is an implementation of the BSON \
++format for Python. The pymongo package is a native Python driver for \
++MongoDB. The gridfs package is a gridfs implementation on top of pymongo."
++HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 +
-+SRC_URI[md5sum] = "e5d9183cc0a775ac29f9e0365cca6556"
-+SRC_URI[sha256sum] = "d8c059dcd81dedb85a9f034d5e22dcb4442c0b201908bede99e306d65ea7c8e7"
++SRC_URI[md5sum] = "e31b9c0190c9eaf1f792d0277b2a8ebe"
++SRC_URI[sha256sum] = "993257f6ca3cde55332af1f62af3e04ca89ce63c08b56a387cdd46136c72f2fa"
 +
-+PYPI_PACKAGE = "PyMySQL"
-+inherit pypi setuptools3
+ inherit pypi setuptools3
+-require python-pymongo.inc
 +
-+RDEPENDS_${PN} += "${PYTHON_PN}-cryptography"
++PACKAGES =+ "${PYTHON_PN}-bson"
++
++FILES_${PYTHON_PN}-bson = "${PYTHON_SITEPACKAGES_DIR}/bson/*"
++
++RDEPENDS_${PYTHON_PN}-bson += " \
++     ${PYTHON_PN}-datetime \
++     ${PYTHON_PN}-json \
++     ${PYTHON_PN}-netclient \
++     ${PYTHON_PN}-numbers \
++     ${PYTHON_PN}-threading \
++"
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-bson \
++    ${PYTHON_PN}-pprint \
++"
 -- 
 2.17.1
 
