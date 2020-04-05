@@ -1,79 +1,152 @@
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
- by mx.groups.io with SMTP id smtpd.web11.19691.1586101791269064133
+Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
+ by mx.groups.io with SMTP id smtpd.web12.20948.1586104948921819940
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2020 08:49:51 -0700
+ Sun, 05 Apr 2020 09:42:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=pass header.i=@gmail.com header.s=20161025 header.b=oceO6LOg;
- spf=pass (domain: gmail.com, ip: 209.85.214.174, mailfrom: raj.khem@gmail.com)
-Received: by mail-pl1-f174.google.com with SMTP id c12so4910349plz.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 08:49:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=3ig25zLBVOPbbmLPzDTB9GXuioXOjU3FJ9z+KC9gPaI=;
-        b=oceO6LOgnBYqhPa38JVIb/1jZ82+hIFWk+erFEys8nvVu0MTTRmpw1IKlBuRK6MpZu
-         08WBcgR/12+FrKbw68/dOMQGKuymU33kePhlP9Tz8t01xnAeKa5BSC1I1yYGRntRB9iU
-         thikY7bPUugxAYbNjSXnbhrV9lT9o+OY0V29ApSA6VPiM5awkHExnWC735oFfLFwM+/G
-         f094OpgzplE3qnIDvT7QdKTraae2J9LH2tDSpUAb0xgV+546+1LWAaw4azzH9i33pZ2J
-         NX7WGW3Spux4YGstCrhVrOk45in73vPR3PTRrre49nXGA96AZFgauuc2CEVjGzQmbRMh
-         KvEw==
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.47, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f47.google.com with SMTP id f52so12768326otf.8
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 09:42:28 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=3ig25zLBVOPbbmLPzDTB9GXuioXOjU3FJ9z+KC9gPaI=;
-        b=Dhyt5YSlkkyu747zP4bRR8EgTNUMh/4/9szvPNoebQMtdW9IZCO3W2BqYaanWcR0yO
-         GkZtaCdEOmgDYGRkGsu6FVugRpgwg+6UWozzl8ZYX5XC5beXKzCILZT1yaKBbsVo7NG/
-         gxulLMEB+tYiE7w50m57DuElZsYJh1p/eh+sjyOg6lKAzlvh4mWBuyKFPWacjmS2zyqV
-         BjFRC3JfTEz7ZDsgLWWFdW6AoKmUU4Uv+SRAto2ZX6rsOPWR3zlSj8ueCQnMnL2VMdE6
-         ExS98nM+GDPKnLxS27V0ybk6cebj5xIwanl/HdKDDNKe85KinlBvgwzkJ5mi3gR4+CNO
-         yyjw==
-X-Gm-Message-State: AGi0PuYUS3W0YfgAX+IMKpb6T2/9XUBDrrcRQXkInkABMS7aGvyXzLXc
-	Fb1omPVS7s70y1CnfLZh/EaRFNSpWjQ=
-X-Google-Smtp-Source: APiQypLkRN337ZB0JBfHGBIeGJArP1RgzKEBGZss5lSDKuWC4FFzsrAyBj4vnMKNLkATVh3POhAB7Q==
-X-Received: by 2002:a17:902:b60d:: with SMTP id b13mr17245943pls.324.1586101790496;
-        Sun, 05 Apr 2020 08:49:50 -0700 (PDT)
-Return-Path: <raj.khem@gmail.com>
-Received: from apollo.hsd1.ca.comcast.net ([2601:646:9200:4e0::3e84])
-        by smtp.gmail.com with ESMTPSA id k14sm9692933pfg.15.2020.04.05.08.49.49
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=cdX2/MIWRq+CB9xzKD6bAWbP0TAhLKasMV/vItkNNQo=;
+        b=fdEym3VREm56eif2Pkw0ngjWquWpUcillwJ8TjgenXkA7UoPBKW7gGDnv326CPr3na
+         mDgIfeGQEwSrDIf9VaNcAb9wlJMMcyTTrPOjpiPOwalemYu8Qh9Gm0ExbpUfw5gsKgim
+         23GmEu0K9pdsJmN79hwC42Mj2z2T1caMg2BVf5eZYT3v2IooWsq2TuUHigT0jiQBsa4h
+         8BFglMR5OXDxi4Ugi8WaWUVzgF8wFCW3WdgHV0dA9zZW5xaXJ6wbi3Q1F3JFIdF7Y7vA
+         3p6u/E4ORP2wgs2HGaTnvOKmaKqe2oKjhmBj7jMTtEbqBjU7P9dze9R0+nGwVZCF8+NC
+         OdfA==
+X-Gm-Message-State: AGi0PuaQTa8czNYyylWW6WOm17Pu3/81+O197S9kxWwb+Zz9Ec8poh1Y
+	zsm2z+EndWAfOvI3KWt5oOE4BhbJiFk=
+X-Google-Smtp-Source: APiQypLyRxqohT+i+oewPajT+gM/bWhIC3si+EY0qkxcObesddahXM68xYsdjK2sCAGHe+NXzY25lg==
+X-Received: by 2002:a9d:3b5:: with SMTP id f50mr13941847otf.31.1586104947768;
+        Sun, 05 Apr 2020 09:42:27 -0700 (PDT)
+Return-Path: <straka.derek@gmail.com>
+Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
+        by smtp.gmail.com with ESMTPSA id r15sm3866573oie.18.2020.04.05.09.42.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2020 08:49:49 -0700 (PDT)
-From: "Khem Raj" <raj.khem@gmail.com>
+        Sun, 05 Apr 2020 09:42:27 -0700 (PDT)
+From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Khem Raj <raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/4] mraa: Use -fcommon
-Date: Sun,  5 Apr 2020 08:50:01 -0700
-Message-Id: <20200405155001.1816150-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.26.0
-In-Reply-To: <20200405155001.1816150-1-raj.khem@gmail.com>
-References: <20200405155001.1816150-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Cc: Derek Straka <derek@asterius.io>
+Subject: [oe][meta-python][PATCH 1/6] python-pyserial: consolidate inc and bb files into a single bb file
+Date: Sun,  5 Apr 2020 12:41:55 -0400
+Message-Id: <20200405164200.31599-1-derek@asterius.io>
+X-Mailer: git-send-email 2.17.1
 
-gcc10 is going to default to -fno-common which is opposite of all
-previous gcc version defaults, ideally package should be fixed so it can
-work with -fno-common but this is good enough for now, it does not
-change default behavious with older compilers
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-extended/mraa/mraa_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../python/python-pyserial.inc                | 44 ------------------
+ .../python/python3-pyserial_3.4.bb            | 46 ++++++++++++++++++-
+ 2 files changed, 44 insertions(+), 46 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyserial.inc
 
-diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-extended/mraa/mraa_git.bb
-index e702ce0ba9..403d641ee9 100644
---- a/meta-oe/recipes-extended/mraa/mraa_git.bb
-+++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
-@@ -27,6 +27,8 @@ EXTRA_OECMAKE_append = " -DINSTALLTOOLS:BOOL=ON -DFIRMATA=ON -DCMAKE_SKIP_RPATH=
-                          -DPYTHON_INCLUDE_DIR=${STAGING_INCDIR}/${PYTHON_DIR}${PYTHON_ABI} \
-                        "
- 
-+CFLAGS += "-fcommon"
+diff --git a/meta-python/recipes-devtools/python/python-pyserial.inc b/meta-python/recipes-devtools/python/python-pyserial.inc
+deleted file mode 100644
+index c9580de264..0000000000
+--- a/meta-python/recipes-devtools/python/python-pyserial.inc
++++ /dev/null
+@@ -1,44 +0,0 @@
+-SUMMARY = "Serial Port Support for Python"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d476d94926db6e0008a5b3860d1f5c0d"
+-
+-SRC_URI[md5sum] = "ed6183b15519a0ae96675e9c3330c69b"
+-SRC_URI[sha256sum] = "6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627"
+-
+-inherit pypi
+-
+-PACKAGES =+ "${PN}-java ${PN}-osx ${PN}-win32 ${PN}-tools"
+-
+-FILES_${PN}-java = " \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/*java* \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*java* \
+-"
+-
+-FILES_${PN}-osx = " \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/*osx* \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/*osx* \
+-"
+-
+-FILES_${PN}-win32 = " \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/*serialcli* \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*serialcli* \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/*win32* \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*win32* \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/miniterm* \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/miniterm* \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/*windows* \
+-    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/*windows* \
+-"
+-
+-RDEPENDS_${PN} = "\
+-    ${PYTHON_PN}-fcntl \
+-    ${PYTHON_PN}-io \
+-    ${PYTHON_PN}-logging \
+-    ${PYTHON_PN}-netclient \
+-    ${PYTHON_PN}-numbers \
+-    ${PYTHON_PN}-shell \
+-    ${PYTHON_PN}-stringold \
+-    ${PYTHON_PN}-threading \
+-"
+-
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
+index 17ed3f8bc4..eee8eb2d16 100644
+--- a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
++++ b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
+@@ -1,7 +1,49 @@
+-inherit setuptools3
+-require python-pyserial.inc
++SUMMARY = "Serial Port Support for Python"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d476d94926db6e0008a5b3860d1f5c0d"
 +
- # Prepend mraa-utils to make sure bindir ends up in there
- PACKAGES =+ "${PN}-utils"
++SRC_URI[md5sum] = "ed6183b15519a0ae96675e9c3330c69b"
++SRC_URI[sha256sum] = "6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627"
++
++inherit pypi setuptools3
  
+ do_install_append() {
+     rm -f ${D}${bindir}/miniterm.py
+     rmdir ${D}${bindir}
+ }
++
++PACKAGES =+ "${PN}-java ${PN}-osx ${PN}-win32 ${PN}-tools"
++
++FILES_${PN}-java = " \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/*java* \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*java* \
++"
++
++FILES_${PN}-osx = " \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/*osx* \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/*osx* \
++"
++
++FILES_${PN}-win32 = " \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/*serialcli* \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*serialcli* \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/*win32* \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*win32* \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/miniterm* \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/miniterm* \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/*windows* \
++    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/*windows* \
++"
++
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-fcntl \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-logging \
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-numbers \
++    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-stringold \
++    ${PYTHON_PN}-threading \
++"
++
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.26.0
+2.17.1
 
