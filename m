@@ -1,84 +1,90 @@
-Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
- by mx.groups.io with SMTP id smtpd.web12.23528.1586111995582701839
+Received: from mail-ot1-f53.google.com (mail-ot1-f53.google.com [209.85.210.53])
+ by mx.groups.io with SMTP id smtpd.web10.23491.1586111996598429775
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2020 11:39:55 -0700
+ Sun, 05 Apr 2020 11:39:56 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f49.google.com with SMTP id t28so13015661ott.5
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 11:39:55 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.53, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f53.google.com with SMTP id m2so13056664otr.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 11:39:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=7jVtLwbZ3ZoeXuBiuNhD9m3VWGfDvhHBf+n5FNJEBkk=;
-        b=Ioq1bIYHL4/Ty/wovUiUJsc9CjIOJd1Z78W55nTsi+uI1EDZPi2IXi1JpisdoXSwa2
-         wMdKSu9Eyp2g7BNLBiNUMVA31ey5PsZYxfyRvaeFL2V2qSr5Qc9WEmXVhHY52jTRPoyZ
-         im+QdTkK8rUeIc7s3jwHOJZ7RK0btuf+3SZt9qkIBYLYf/9x+Ed723Co396Iwmd18VPo
-         oBq7Xs/yv5rCgHPejDV2AriLlaLLpZhC/hPtWcnn884D9HhPXw2Nu0F4QhscDHN8UeGM
-         GGXMPnuB/KyfI0I760DyOYofN2VD7aodiEt8mu9rVeLanmJOvXMuOuVzW1jMGM++skOM
-         FIYg==
-X-Gm-Message-State: AGi0PuZykQVlXh43tvmkfunthe8WnEv0EGVJQyzOrDFgeo5nVTGftB+k
-	g8T5ZbZ4etI/YUCVHarQQpuv3pmj+Tk=
-X-Google-Smtp-Source: APiQypJP2ivPOf4NFkG0pdpD1pXlkdhZFZExpm6ufEyg2M2UNx1zqST5bpLATCBD7km9HVeFNDcOEQ==
-X-Received: by 2002:a05:6830:2421:: with SMTP id k1mr14966536ots.192.1586111994705;
-        Sun, 05 Apr 2020 11:39:54 -0700 (PDT)
+        bh=hN9FkVTSTcV0e+C+EyrFwRf+w1jJNUHiapiFbDJo6BE=;
+        b=N9uVFTTJWH6s7iArIAqJXwyiPOyYO+03FXhRM+liSUV28Zw2jr+4OUEOcQV1ht6wl9
+         d6NlLjuTSwammlqQmnLH33Y5BORju1ihmvpTEsx5A0R9+Q2IFIHzWZfbbj0TP+NwhYw3
+         KU/ry0FStaGAT1aXHpP1e1pOFej9sAxR1Z4hIa4rFvg7dtyhoxsRxHBmLh1Gd/uVKDaV
+         QJRh3ENZF+/deFysRsabCjSaooruN1S+fTxDYCf2H3Png7zKZfmEkIDfYIpU5BN28smg
+         XYsKtSZPTN/orLynfBlhykah5f763r0IyjoX/AMFmmwu/AEKfT0PGoZGWHa2zs6x5rd2
+         SRQA==
+X-Gm-Message-State: AGi0PuYEPu23Kro68J5Fyfb+PUXGTbu67FMs1AAw8sv87dcswOn+pilb
+	sZUnjDVRd7X0gWL/FtZc7mywUcqzAZI=
+X-Google-Smtp-Source: APiQypIF7U2LuYF+ea6ooedlGz7JT3WKIi/ZA9Ry6Kqckq6CWZNhDoq3IDcbmOoctALWzYSXrEKhkQ==
+X-Received: by 2002:a05:6830:1382:: with SMTP id d2mr14038904otq.214.1586111995673;
+        Sun, 05 Apr 2020 11:39:55 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id q22sm3833927oic.22.2020.04.05.11.39.53
+        by smtp.gmail.com with ESMTPSA id q22sm3833927oic.22.2020.04.05.11.39.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2020 11:39:54 -0700 (PDT)
+        Sun, 05 Apr 2020 11:39:55 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 13/15] python-pyexpect: consolidate inc and bb files into a single bb file
-Date: Sun,  5 Apr 2020 14:39:27 -0400
-Message-Id: <20200405183929.28266-13-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 14/15] python-pyelftools: consolidate inc and bb files into a single bb file
+Date: Sun,  5 Apr 2020 14:39:28 -0400
+Message-Id: <20200405183929.28266-14-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200405183929.28266-1-derek@asterius.io>
 References: <20200405183929.28266-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pyexpect.inc     | 11 -----------
- .../python/python3-pyexpect_1.0.19.bb               | 13 +++++++++++--
- 2 files changed, 11 insertions(+), 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pyexpect.inc
+ .../python/python-pyelftools.inc                 | 14 --------------
+ .../python/python3-pyelftools_0.25.bb            | 16 ++++++++++++++--
+ 2 files changed, 14 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyelftools.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pyexpect.inc b/meta-python/recipes-devtools/python/python-pyexpect.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyelftools.inc b/meta-python/recipes-devtools/python/python-pyelftools.inc
 deleted file mode 100644
-index 85d9588a84..0000000000
---- a/meta-python/recipes-devtools/python/python-pyexpect.inc
+index 7d4f763ffd..0000000000
+--- a/meta-python/recipes-devtools/python/python-pyelftools.inc
 +++ /dev/null
-@@ -1,11 +0,0 @@
--SUMMARY = "Python expectaton library"
--DESCRIPTION = "Minimal but very flexible implementation of the expect pattern"
+@@ -1,14 +0,0 @@
+-DESCRIPTION = "pyelftools is a pure-Python library for parsing and analyzing ELF files and DWARF debugging information"
+-HOMEPAGE = "https://github.com/eliben/pyelftools"
 -SECTION = "devel/python"
--HOMEPAGE = " https://bitbucket.org/dwt/pyexpect"
--LICENSE = "ISC"
--LIC_FILES_CHKSUM = "file://README.md;md5=500b884e9dcd5f677a53cbbee8ace939"
+-LICENSE = "PD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=5ce2a2b07fca326bc7c146d10105ccfc"
+-
+-SRC_URI[md5sum] = "c5629b9a5d19c82107a946cce52eeec2"
+-SRC_URI[sha256sum] = "89c6da6f56280c37a5ff33468591ba9a124e17d71fe42de971818cbff46c1b24"
+-
+-PYPI_PACKAGE = "pyelftools"
 -
 -inherit pypi
 -
--SRC_URI[md5sum] = "dc744289858001925c75d21e26f1260f"
--SRC_URI[sha256sum] = "bff4654b113dac6c2231e486e11dcb23281ddc0742a5404467303fe7638829ef"
-diff --git a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
-index bfd5840410..ea3c018af7 100644
---- a/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyexpect_1.0.19.bb
-@@ -1,2 +1,11 @@
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb b/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
+index 56eb8c4cd6..03d96db3c2 100644
+--- a/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
++++ b/meta-python/recipes-devtools/python/python3-pyelftools_0.25.bb
+@@ -1,2 +1,14 @@
 -inherit setuptools3
--require python-pyexpect.inc
-+SUMMARY = "Python expectaton library"
-+DESCRIPTION = "Minimal but very flexible implementation of the expect pattern"
+-require python-pyelftools.inc
++DESCRIPTION = "pyelftools is a pure-Python library for parsing and analyzing ELF files and DWARF debugging information"
++HOMEPAGE = "https://github.com/eliben/pyelftools"
 +SECTION = "devel/python"
-+HOMEPAGE = " https://bitbucket.org/dwt/pyexpect"
-+LICENSE = "ISC"
-+LIC_FILES_CHKSUM = "file://README.md;md5=500b884e9dcd5f677a53cbbee8ace939"
++LICENSE = "PD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5ce2a2b07fca326bc7c146d10105ccfc"
++
++SRC_URI[md5sum] = "c5629b9a5d19c82107a946cce52eeec2"
++SRC_URI[sha256sum] = "89c6da6f56280c37a5ff33468591ba9a124e17d71fe42de971818cbff46c1b24"
++
++PYPI_PACKAGE = "pyelftools"
 +
 +inherit pypi setuptools3
 +
-+SRC_URI[md5sum] = "dc744289858001925c75d21e26f1260f"
-+SRC_URI[sha256sum] = "bff4654b113dac6c2231e486e11dcb23281ddc0742a5404467303fe7638829ef"
++BBCLASSEXTEND = "native"
 -- 
 2.17.1
 
