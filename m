@@ -1,107 +1,98 @@
-Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
- by mx.groups.io with SMTP id smtpd.web12.26083.1586119358703362865
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
+ by mx.groups.io with SMTP id smtpd.web10.26067.1586119359313488550
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2020 13:42:38 -0700
+ Sun, 05 Apr 2020 13:42:39 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: straka.derek@gmail.com)
-Received: by mail-oi1-f182.google.com with SMTP id u20so11335490oic.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 13:42:38 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f51.google.com with SMTP id v2so13253455oto.2
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 13:42:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=aDEBc1ecckxdqk5OxDklvA9kltIH8eOkwN22jpmEXTU=;
-        b=IqjtEZCAxI7aq6ehpngZ8xSgtDn5LbVICTn7X92fhuk98Nk6Lx7nTVqgC7NzvY8p6z
-         DBuE0kJSPJNm8AFY+uk9qoCGWq6e7bX6cV5Ks+S3NJme8iiuOCb+vVuhucLPwsygTdc8
-         8OxG+qjJVkQv9T6P2RxDo4l3DhSOfLaJEwSN5qHhLHF7JnC/Rg2tN7K9R4mhSV8Zizje
-         rD5REOMBCOI613rZ/cvYx7h9/fdzli8yRsvFGXPc5sd7op/NdbPw2ZDwcbcvRdanb/Mg
-         xpCCwIU6mTgsGx148lYdx3Ngb7iMFLd/mOL/MBeo4KHJ2xmP76Fijl+kuBuG7hlbuWxx
-         JrBQ==
-X-Gm-Message-State: AGi0PuamxATQhNlu9KXXcvZooJOjb6GZvgotHDstmjyFjKisDnL6V95p
-	Cy2CzZC0n3Rh9sK2SvqYDXihspxYbDc=
-X-Google-Smtp-Source: APiQypL9++ry7w91tMOM9d599lmCLxKST5OobaaYhssTlADMZ4coVQbNiesZtvdiMCMvcR/kW//h9g==
-X-Received: by 2002:aca:b5c3:: with SMTP id e186mr10195152oif.114.1586119357501;
-        Sun, 05 Apr 2020 13:42:37 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=PUZaqmty3jjps/1JRQ1Wr6JUBB2yh1PkNUl416nZvk4=;
+        b=oQ9EkqorYjKJqZ2qeD6a6wI7jHiq0tjJculO4F2pyTUyLKFk2zNNc/V1NvqHjA2E9P
+         w31OSLsXVYy/sZ2cDTaomNRmlYLFaPAypyozIPSgc+nei7JIPewjdE35m0EH0poMnCRi
+         83ELk9mHkLhM6SzspXLMSt8Vlpl1tWbzFBLqguKajww9SW5AnEwgXi1dM1unQxjz+2aq
+         YUFw5K1tqciSVtESmofAYEOEx7TNkeoko+FpYq4p8ortBqRYmGowA9FZmwic1B9htAt3
+         S0YH8lhy3nhuwJLGjFvoHqXd17kZc7nujhJmpm+9+E7AuNxJlsun8B9mGv8esOV9yCiU
+         4H5A==
+X-Gm-Message-State: AGi0PuYtQgeoBLX/qZsyUc0+Y8ZULOuj6RV+wEHfOHzpJVnVU8bxPdbs
+	Wg+uqTn8ZUCX98wwZDhmYqgc2erXwJU=
+X-Google-Smtp-Source: APiQypIK6BKWUgf7lSxKL1dEqx0VNaInK49u+MqIpFG/yjCAPNYOZx+Z+1ufUGct/0qPpUoNQq0WOg==
+X-Received: by 2002:a9d:220e:: with SMTP id o14mr14470033ota.88.1586119358207;
+        Sun, 05 Apr 2020 13:42:38 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id d6sm3905295oos.10.2020.04.05.13.42.36
+        by smtp.gmail.com with ESMTPSA id d6sm3905295oos.10.2020.04.05.13.42.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sun, 05 Apr 2020 13:42:37 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 1/4] python-pycurl: consolidate inc and bb files into a single bb file
-Date: Sun,  5 Apr 2020 16:42:12 -0400
-Message-Id: <20200405204215.8292-1-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 2/4] python-pycparser: consolidate inc and bb files into a single bb file
+Date: Sun,  5 Apr 2020 16:42:13 -0400
+Message-Id: <20200405204215.8292-2-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200405204215.8292-1-derek@asterius.io>
+References: <20200405204215.8292-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pycurl.inc | 25 -------------------
- .../python/python3-pycurl_7.43.0.5.bb         | 24 ++++++++++++++++--
- 2 files changed, 22 insertions(+), 27 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pycurl.inc
+ .../python/python-pycparser.inc                 | 17 -----------------
+ .../python/python3-pycparser_2.19.bb            | 17 +++++++++++++++--
+ 2 files changed, 15 insertions(+), 19 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pycparser.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pycurl.inc b/meta-python/recipes-devtools/python/python-pycurl.inc
+diff --git a/meta-python/recipes-devtools/python/python-pycparser.inc b/meta-python/recipes-devtools/python/python-pycparser.inc
 deleted file mode 100644
-index 0f661434c0..0000000000
---- a/meta-python/recipes-devtools/python/python-pycurl.inc
+index 47a0e0e973..0000000000
+--- a/meta-python/recipes-devtools/python/python-pycparser.inc
 +++ /dev/null
-@@ -1,25 +0,0 @@
--SUMMARY = "A Python Interface To The cURL library"
--DESCRIPTION = "\
--PycURL is a Python interface to libcurl, the multiprotocol file \
--transfer library. Similarly to the urllib Python module, PycURL can \
--be used to fetch objects identified by a URL from a Python program \
--"
--SECTION = "devel/python"
--HOMEPAGE = "http://pycurl.io/"
+@@ -1,17 +0,0 @@
+-SUMMARY = "Parser of the C language, written in pure Python"
+-HOMEPAGE = "https://github.com/eliben/pycparser"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=86f1cedb4e6410a88ce8e30b91079169"
 -
--LICENSE = "LGPLv2 | MIT"
--LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
--                    file://COPYING-MIT;md5=60872a112595004233b769b6cbfd65b6 \
--                    "
+-SRC_URI[md5sum] = "76396762adc3fa769c83d8e202d36b6f"
+-SRC_URI[sha256sum] = "a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"
 -
--SRC_URI[md5sum] = "0b387d4609ed20c88baede8579a4d425"
--SRC_URI[sha256sum] = "ec7dd291545842295b7b56c12c90ffad2976cc7070c98d7b1517b7b6cd5994b3"
 -
--inherit pypi
+-BBCLASSEXTEND = "native nativesdk"
 -
--PYPI_PACKAGE = "pycurl"
--
--DEPENDS = "\
--    curl \
--    ${PYTHON_PN}\
--"
-diff --git a/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb b/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb
-index c98b7d6f60..5a1c1797ad 100644
---- a/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb
-+++ b/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb
-@@ -1,3 +1,23 @@
--inherit setuptools3
--require python-pycurl.inc
-+SUMMARY = "A Python Interface To The cURL library"
-+DESCRIPTION = "\
-+PycURL is a Python interface to libcurl, the multiprotocol file \
-+transfer library. Similarly to the urllib Python module, PycURL can \
-+be used to fetch objects identified by a URL from a Python program \
-+"
-+SECTION = "devel/python"
-+HOMEPAGE = "http://pycurl.io/"
+-RDEPENDS_${PN}_class-target += "\
+-    ${PYTHON_PN}-ply \
+-    ${PYTHON_PN}-pprint \
+-    cpp \
+-    cpp-symlinks \
+-    "
+diff --git a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb b/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
+index 7cc024ea09..35ed93e09b 100644
+--- a/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
++++ b/meta-python/recipes-devtools/python/python3-pycparser_2.19.bb
+@@ -1,6 +1,19 @@
++SUMMARY = "Parser of the C language, written in pure Python"
++HOMEPAGE = "https://github.com/eliben/pycparser"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=86f1cedb4e6410a88ce8e30b91079169"
++
++SRC_URI[md5sum] = "76396762adc3fa769c83d8e202d36b6f"
++SRC_URI[sha256sum] = "a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"
++
+ inherit pypi setuptools3
+-require python-pycparser.inc
++
++BBCLASSEXTEND = "native nativesdk"
  
-+LICENSE = "LGPLv2 | MIT"
-+LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
-+                    file://COPYING-MIT;md5=60872a112595004233b769b6cbfd65b6 \
-+                    "
-+
-+SRC_URI[md5sum] = "0b387d4609ed20c88baede8579a4d425"
-+SRC_URI[sha256sum] = "ec7dd291545842295b7b56c12c90ffad2976cc7070c98d7b1517b7b6cd5994b3"
-+
-+inherit pypi setuptools3
-+
-+DEPENDS = "\
-+    curl \
-+    ${PYTHON_PN}\
-+"
+ RDEPENDS_${PN}_class-target += "\
+     ${PYTHON_PN}-netclient \
+-    " 
++    ${PYTHON_PN}-ply \
++    ${PYTHON_PN}-pprint \
++    cpp \
++    cpp-symlinks \
++    "
 -- 
 2.17.1
 
