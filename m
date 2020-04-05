@@ -1,138 +1,95 @@
-Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
- by mx.groups.io with SMTP id smtpd.web10.23482.1586111988301437081
+Received: from mail-ot1-f54.google.com (mail-ot1-f54.google.com [209.85.210.54])
+ by mx.groups.io with SMTP id smtpd.web12.23518.1586111989261901060
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2020 11:39:48 -0700
+ Sun, 05 Apr 2020 11:39:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f44.google.com with SMTP id m2so13056300otr.1
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 11:39:48 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.54, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f54.google.com with SMTP id z5so13000746oth.9
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 11:39:49 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=LBnf+Gk2Y1fuJEF+VjGGsLeHGkD5XN5MLXzkgyMRTpc=;
-        b=iH6xIIaHGl6Q3FtcseatlOe78+CX/0QO0kCdB1+EmQCWLOXwISkwcpY987i/LLLg3c
-         5eHGRnTkMynggxA3t/swUtJDyPDh+vCnW0JwpvBW7sc25KgUtQ6L9V/DYR8e6ecdUZH2
-         OFFGMVU4zxIrLC7+1O6VUoxXDx/W/I9za/0lntN/+Bi0ulUG/b+V6WR00lUPzRfhS0zc
-         TQ9CnsraAJFEJIxUq1WxBsu2rvuqC3jFcqSEYU2RMRRF+uMk7q+nbscLPll/VNAF4mFV
-         3IdNlN39VqFXun3RxQ1heDCMM5Z/Fpxr+aWdxeX8ij7dUpHgeubR0AVLunCMewnbyOaD
-         zn4A==
-X-Gm-Message-State: AGi0PuZQF7/q2FW4CuIPYR1Ex1OtIK/YCKRhSGPQr5MeznjTuLu/efI4
-	w2yKc4PAseK6f5dW8zMzIuBVa6Va7LA=
-X-Google-Smtp-Source: APiQypLpc5wvPr6AG1XZkcEDxV3r7T7Yu10v3LdHM7tiTJPats9n0LHK5lVl828bmDvqyMVYrGwKww==
-X-Received: by 2002:a9d:6a12:: with SMTP id g18mr14354279otn.19.1586111987335;
-        Sun, 05 Apr 2020 11:39:47 -0700 (PDT)
+        bh=eYLnHrzXmpdsBF2Q1gMocM9tlv+yWUl/Kg0uQfvPQKA=;
+        b=JluOls+Ma/a8cVVYWGtnUAG5PZtx75P9hfKHbn1+R8/YmBhYADltII2qAnsIAcjg99
+         oplS+tVtyzaqGEqfnotNeuxex7i/TWOjdnCauHx5YAS4RBxg1R6sZcSrNxdX9VaAwVEa
+         bF1nUXlCsp6RlPhnJFwZSRTkXyc6k6gTUk8hMnLT9Lc1lrrloPhLYECnXnlEHJvlGOT8
+         uITzvnfI0aW5bsiMClTkQ34lM+tIm+UyqLoQInPpXrzfpXUObgC+/R6nE/5e7NERi5Gk
+         8Tc0ey9mKeW0cLKNEgO7L9TTLumUW/i1Oasn1j73cpqNnvt/aP7hM8LT7qvaUq+RAGxn
+         kApg==
+X-Gm-Message-State: AGi0PubMvUbTDEyY3tkDCVIXn8m7aI669vAeInh27UB37QWc/bZiu6b5
+	r4cU4u/IPH6nUcH977lbBpcUvM262ZU=
+X-Google-Smtp-Source: APiQypLTBfWgEgY3AmHzGax6BURw1Q6v6VKYN1BUXSpefEuGMQUbhQY0y16jyrruPHBcaCo0fAE47A==
+X-Received: by 2002:a9d:6a97:: with SMTP id l23mr14292783otq.69.1586111988349;
+        Sun, 05 Apr 2020 11:39:48 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id q22sm3833927oic.22.2020.04.05.11.39.46
+        by smtp.gmail.com with ESMTPSA id q22sm3833927oic.22.2020.04.05.11.39.47
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2020 11:39:46 -0700 (PDT)
+        Sun, 05 Apr 2020 11:39:47 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 05/15] python-pylint: consolidate inc and bb files into a single bb file
-Date: Sun,  5 Apr 2020 14:39:19 -0400
-Message-Id: <20200405183929.28266-5-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 06/15] python-pyjwt: consolidate inc and bb files into a single bb file
+Date: Sun,  5 Apr 2020 14:39:20 -0400
+Message-Id: <20200405183929.28266-6-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200405183929.28266-1-derek@asterius.io>
 References: <20200405183929.28266-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pylint.inc | 38 ------------------
- .../python/python3-pylint_1.8.3.bb            | 40 ++++++++++++++++++-
- 2 files changed, 38 insertions(+), 40 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pylint.inc
+ .../recipes-devtools/python/python-pyjwt.inc   | 17 -----------------
+ .../python/python3-pyjwt_1.7.1.bb              | 18 ++++++++++++++++--
+ 2 files changed, 16 insertions(+), 19 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyjwt.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pylint.inc b/meta-python/recipes-devtools/python/python-pylint.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyjwt.inc b/meta-python/recipes-devtools/python/python-pyjwt.inc
 deleted file mode 100644
-index ba85b98878..0000000000
---- a/meta-python/recipes-devtools/python/python-pylint.inc
+index 9b8938530a..0000000000
+--- a/meta-python/recipes-devtools/python/python-pyjwt.inc
 +++ /dev/null
-@@ -1,38 +0,0 @@
--SUMMARY="Pylint is a Python source code analyzer"
--HOMEPAGE= "http://www.pylint.org/"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+@@ -1,17 +0,0 @@
+-SUMMARY = "JSON Web Token implementation in Python"
+-SUMMARY = "JSON Web Token implementation in Python"
+-DESCRIPTION = "A Python implementation of JSON Web Token draft 32.\
+- Original implementation was written by https://github.com/progrium"
+-HOMEPAGE = "http://github.com/jpadilla/pyjwt"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c"
 -
--SRC_URI[md5sum] = "2eb5f3cb8fe567eaf5420dd415012202"
--SRC_URI[sha256sum] = "c77311859e0c2d7932095f30d2b1bfdc4b6fe111f534450ba727a52eae330ef2"
+-SRC_URI[md5sum] = "a4712f980c008696e13e09504120b2a0"
+-SRC_URI[sha256sum] = "8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
 -
+-PYPI_PACKAGE = "PyJWT"
 -inherit pypi
 -
--DEPENDS += "${PYTHON_PN}-pytest-runner-native"
+-RDEPENDS_${PN} = "${PYTHON_PN}-cryptography"
 -
--do_install_append(){
--    rm ${D}${bindir}/pylint
--    cat >> ${D}${bindir}/pylint <<EOF
--#!/usr/bin/env ${PYTHON_PN}
--from pylint import run_pylint
--run_pylint()
--EOF
--    chmod 755 ${D}${bindir}/pylint
--    sed -i -e 's:^#!/usr/bin/python:#!/usr/bin/env\ ${PYTHON_PN}:g' ${D}/${PYTHON_SITEPACKAGES_DIR}/pylint/test/data/ascript
--}
--
--PACKAGES =+ "${PN}-tests"
--FILES_${PN}-tests+= " \
--    ${PYTHON_SITEPACKAGES_DIR}/pylint/test/ \
--    ${PYTHON_SITEPACKAGES_DIR}/pylint/testutils.py \
--"
--
--RDEPENDS_${PN} += "${PYTHON_PN}-astroid \
--                   ${PYTHON_PN}-isort \
--                   ${PYTHON_PN}-numbers \
--                   ${PYTHON_PN}-shell \
--                   ${PYTHON_PN}-json \
--                   ${PYTHON_PN}-pkgutil \
--                   ${PYTHON_PN}-difflib \
--                   ${PYTHON_PN}-netserver \
--                  "
-diff --git a/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
-index 563e8316cf..7a873a1e12 100644
---- a/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
-@@ -1,2 +1,38 @@
--inherit setuptools3 python3-dir
--require python-pylint.inc
-+SUMMARY="Pylint is a Python source code analyzer"
-+HOMEPAGE= "http://www.pylint.org/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb b/meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb
+index dc16d22825..d2f7be46cf 100644
+--- a/meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb
++++ b/meta-python/recipes-devtools/python/python3-pyjwt_1.7.1.bb
+@@ -1,2 +1,16 @@
+-require python-pyjwt.inc
+-inherit setuptools3
++SUMMARY = "JSON Web Token implementation in Python"
++DESCRIPTION = "A Python implementation of JSON Web Token draft 32.\
++ Original implementation was written by https://github.com/progrium"
++HOMEPAGE = "http://github.com/jpadilla/pyjwt"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=68626705a7b513ca8d5f44a3e200ed0c"
 +
-+SRC_URI[md5sum] = "2eb5f3cb8fe567eaf5420dd415012202"
-+SRC_URI[sha256sum] = "c77311859e0c2d7932095f30d2b1bfdc4b6fe111f534450ba727a52eae330ef2"
++SRC_URI[md5sum] = "a4712f980c008696e13e09504120b2a0"
++SRC_URI[sha256sum] = "8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
 +
-+inherit pypi setuptools3 python3-dir
++PYPI_PACKAGE = "PyJWT"
++inherit pypi setuptools3
 +
-+DEPENDS += "${PYTHON_PN}-pytest-runner-native"
++RDEPENDS_${PN} = "${PYTHON_PN}-cryptography"
 +
-+do_install_append(){
-+    rm ${D}${bindir}/pylint
-+    cat >> ${D}${bindir}/pylint <<EOF
-+#!/usr/bin/env ${PYTHON_PN}
-+from pylint import run_pylint
-+run_pylint()
-+EOF
-+    chmod 755 ${D}${bindir}/pylint
-+    sed -i -e 's:^#!/usr/bin/python:#!/usr/bin/env\ ${PYTHON_PN}:g' ${D}/${PYTHON_SITEPACKAGES_DIR}/pylint/test/data/ascript
-+}
-+
-+PACKAGES =+ "${PN}-tests"
-+FILES_${PN}-tests+= " \
-+    ${PYTHON_SITEPACKAGES_DIR}/pylint/test/ \
-+    ${PYTHON_SITEPACKAGES_DIR}/pylint/testutils.py \
-+"
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-astroid \
-+                   ${PYTHON_PN}-isort \
-+                   ${PYTHON_PN}-numbers \
-+                   ${PYTHON_PN}-shell \
-+                   ${PYTHON_PN}-json \
-+                   ${PYTHON_PN}-pkgutil \
-+                   ${PYTHON_PN}-difflib \
-+                   ${PYTHON_PN}-netserver \
-+                  "
++BBCLASSEXTEND = "native nativesdk"
 -- 
 2.17.1
 
