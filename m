@@ -1,101 +1,138 @@
-Received: from mail-oi1-f178.google.com (mail-oi1-f178.google.com [209.85.167.178])
- by mx.groups.io with SMTP id smtpd.web12.23515.1586111987250000411
+Received: from mail-ot1-f44.google.com (mail-ot1-f44.google.com [209.85.210.44])
+ by mx.groups.io with SMTP id smtpd.web10.23482.1586111988301437081
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2020 11:39:47 -0700
+ Sun, 05 Apr 2020 11:39:48 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.178, mailfrom: straka.derek@gmail.com)
-Received: by mail-oi1-f178.google.com with SMTP id u20so11150500oic.4
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 11:39:47 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.44, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f44.google.com with SMTP id m2so13056300otr.1
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 11:39:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=yYNNBt44yIEHVw7bkRizsNd9PBAd2pj+Xu9MMrJuXW4=;
-        b=UqfBoXISXg54uD9rJyHvT1mpzLblUSHGHro08zewq0WRBoiV66s04G1FhR20uSTeFV
-         lLDska4yjbAy4vHgDlKVD1dIqm6sART1e2M49/40BtP5uO5nCWwLwwX+SUt5aKXZCEXb
-         ptkAQidBGp+m/g7b0aUBs+8OLqS/BYwwlWvIKtMvgDeP3YOxsJoxT9vxxQS7t4L84+xm
-         4qGKIzEHKXYZuxWeBEgJBCU0Y+DcJjHWapOEl/kaFBX6QCiPvm0xyPa0xuh7NWM8clz8
-         1A8uCp1mLfzsv+1OQwVtUfkJi+6L0SgT63jfskOf2qT7ywU+jNDPtqQoUNBQpu4F6X9C
-         9zJg==
-X-Gm-Message-State: AGi0Pua+hZ1lxE61nT4ijDaUQyRtyLnnktXkj0L+t5Mz7x3IYI7ZBBRS
-	Z0oGlbCV/VKE4p7wlNovtOJY6wrBFsg=
-X-Google-Smtp-Source: APiQypKI3R8Qoo9FLBx6TI1fN12PX2qP3S2KzHn9dG8x0QZ28Bxpr7fuqjCkDEWaadnywvhXhfmicg==
-X-Received: by 2002:aca:b5c3:: with SMTP id e186mr9925763oif.114.1586111986189;
-        Sun, 05 Apr 2020 11:39:46 -0700 (PDT)
+        bh=LBnf+Gk2Y1fuJEF+VjGGsLeHGkD5XN5MLXzkgyMRTpc=;
+        b=iH6xIIaHGl6Q3FtcseatlOe78+CX/0QO0kCdB1+EmQCWLOXwISkwcpY987i/LLLg3c
+         5eHGRnTkMynggxA3t/swUtJDyPDh+vCnW0JwpvBW7sc25KgUtQ6L9V/DYR8e6ecdUZH2
+         OFFGMVU4zxIrLC7+1O6VUoxXDx/W/I9za/0lntN/+Bi0ulUG/b+V6WR00lUPzRfhS0zc
+         TQ9CnsraAJFEJIxUq1WxBsu2rvuqC3jFcqSEYU2RMRRF+uMk7q+nbscLPll/VNAF4mFV
+         3IdNlN39VqFXun3RxQ1heDCMM5Z/Fpxr+aWdxeX8ij7dUpHgeubR0AVLunCMewnbyOaD
+         zn4A==
+X-Gm-Message-State: AGi0PuZQF7/q2FW4CuIPYR1Ex1OtIK/YCKRhSGPQr5MeznjTuLu/efI4
+	w2yKc4PAseK6f5dW8zMzIuBVa6Va7LA=
+X-Google-Smtp-Source: APiQypLpc5wvPr6AG1XZkcEDxV3r7T7Yu10v3LdHM7tiTJPats9n0LHK5lVl828bmDvqyMVYrGwKww==
+X-Received: by 2002:a9d:6a12:: with SMTP id g18mr14354279otn.19.1586111987335;
+        Sun, 05 Apr 2020 11:39:47 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id q22sm3833927oic.22.2020.04.05.11.39.45
+        by smtp.gmail.com with ESMTPSA id q22sm3833927oic.22.2020.04.05.11.39.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2020 11:39:45 -0700 (PDT)
+        Sun, 05 Apr 2020 11:39:46 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 04/15] python-pymisp: consolidate inc and bb files into a single bb file
-Date: Sun,  5 Apr 2020 14:39:18 -0400
-Message-Id: <20200405183929.28266-4-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 05/15] python-pylint: consolidate inc and bb files into a single bb file
+Date: Sun,  5 Apr 2020 14:39:19 -0400
+Message-Id: <20200405183929.28266-5-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200405183929.28266-1-derek@asterius.io>
 References: <20200405183929.28266-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pymisp.inc | 19 -----------------
- .../python/python3-pymisp_2.4.122.bb          | 21 ++++++++++++++++++-
- 2 files changed, 20 insertions(+), 20 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pymisp.inc
+ .../recipes-devtools/python/python-pylint.inc | 38 ------------------
+ .../python/python3-pylint_1.8.3.bb            | 40 ++++++++++++++++++-
+ 2 files changed, 38 insertions(+), 40 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pylint.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
+diff --git a/meta-python/recipes-devtools/python/python-pylint.inc b/meta-python/recipes-devtools/python/python-pylint.inc
 deleted file mode 100644
-index d2485ffbde..0000000000
---- a/meta-python/recipes-devtools/python/python-pymisp.inc
+index ba85b98878..0000000000
+--- a/meta-python/recipes-devtools/python/python-pylint.inc
 +++ /dev/null
-@@ -1,19 +0,0 @@
--DESCRIPTION = "Python API for MISP"
--HOMEPAGE = "https://github.com/MISP/PyMISP"
--LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
+@@ -1,38 +0,0 @@
+-SUMMARY="Pylint is a Python source code analyzer"
+-HOMEPAGE= "http://www.pylint.org/"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 -
--SRC_URI[md5sum] = "ef41185d4c2753dc2c1a9ab937e3614a"
--SRC_URI[sha256sum] = "ecdc362b4bb5dd500a5f0b9e795b35ed75037de64f8dcf39c24d029e7657ad7f"
+-SRC_URI[md5sum] = "2eb5f3cb8fe567eaf5420dd415012202"
+-SRC_URI[sha256sum] = "c77311859e0c2d7932095f30d2b1bfdc4b6fe111f534450ba727a52eae330ef2"
 -
--RDEPENDS_${PN} += " \
--    ${PYTHON_PN}-dateutil \
--    ${PYTHON_PN}-json \
--    ${PYTHON_PN}-jsonschema \
--    ${PYTHON_PN}-requests \
--    ${PYTHON_PN}-six \
+-inherit pypi
+-
+-DEPENDS += "${PYTHON_PN}-pytest-runner-native"
+-
+-do_install_append(){
+-    rm ${D}${bindir}/pylint
+-    cat >> ${D}${bindir}/pylint <<EOF
+-#!/usr/bin/env ${PYTHON_PN}
+-from pylint import run_pylint
+-run_pylint()
+-EOF
+-    chmod 755 ${D}${bindir}/pylint
+-    sed -i -e 's:^#!/usr/bin/python:#!/usr/bin/env\ ${PYTHON_PN}:g' ${D}/${PYTHON_SITEPACKAGES_DIR}/pylint/test/data/ascript
+-}
+-
+-PACKAGES =+ "${PN}-tests"
+-FILES_${PN}-tests+= " \
+-    ${PYTHON_SITEPACKAGES_DIR}/pylint/test/ \
+-    ${PYTHON_SITEPACKAGES_DIR}/pylint/testutils.py \
 -"
 -
--# Fixes: python3-pymisp requires /bin/bash, but no
--# providers found in RDEPENDS_python3-pymisp? [file-rdep
--RDEPENDS_${PN} += "bash"
-diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.122.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.122.bb
-index 4523d9e30a..bf2da00662 100644
---- a/meta-python/recipes-devtools/python/python3-pymisp_2.4.122.bb
-+++ b/meta-python/recipes-devtools/python/python3-pymisp_2.4.122.bb
-@@ -1,2 +1,21 @@
-+DESCRIPTION = "Python API for MISP"
-+HOMEPAGE = "https://github.com/MISP/PyMISP"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
+-RDEPENDS_${PN} += "${PYTHON_PN}-astroid \
+-                   ${PYTHON_PN}-isort \
+-                   ${PYTHON_PN}-numbers \
+-                   ${PYTHON_PN}-shell \
+-                   ${PYTHON_PN}-json \
+-                   ${PYTHON_PN}-pkgutil \
+-                   ${PYTHON_PN}-difflib \
+-                   ${PYTHON_PN}-netserver \
+-                  "
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
+index 563e8316cf..7a873a1e12 100644
+--- a/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
++++ b/meta-python/recipes-devtools/python/python3-pylint_1.8.3.bb
+@@ -1,2 +1,38 @@
+-inherit setuptools3 python3-dir
+-require python-pylint.inc
++SUMMARY="Pylint is a Python source code analyzer"
++HOMEPAGE= "http://www.pylint.org/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
 +
-+SRC_URI[md5sum] = "ef41185d4c2753dc2c1a9ab937e3614a"
-+SRC_URI[sha256sum] = "ecdc362b4bb5dd500a5f0b9e795b35ed75037de64f8dcf39c24d029e7657ad7f"
++SRC_URI[md5sum] = "2eb5f3cb8fe567eaf5420dd415012202"
++SRC_URI[sha256sum] = "c77311859e0c2d7932095f30d2b1bfdc4b6fe111f534450ba727a52eae330ef2"
 +
- inherit pypi setuptools3
--require python-pymisp.inc
++inherit pypi setuptools3 python3-dir
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-dateutil \
-+    ${PYTHON_PN}-json \
-+    ${PYTHON_PN}-jsonschema \
-+    ${PYTHON_PN}-requests \
-+    ${PYTHON_PN}-six \
++DEPENDS += "${PYTHON_PN}-pytest-runner-native"
++
++do_install_append(){
++    rm ${D}${bindir}/pylint
++    cat >> ${D}${bindir}/pylint <<EOF
++#!/usr/bin/env ${PYTHON_PN}
++from pylint import run_pylint
++run_pylint()
++EOF
++    chmod 755 ${D}${bindir}/pylint
++    sed -i -e 's:^#!/usr/bin/python:#!/usr/bin/env\ ${PYTHON_PN}:g' ${D}/${PYTHON_SITEPACKAGES_DIR}/pylint/test/data/ascript
++}
++
++PACKAGES =+ "${PN}-tests"
++FILES_${PN}-tests+= " \
++    ${PYTHON_SITEPACKAGES_DIR}/pylint/test/ \
++    ${PYTHON_SITEPACKAGES_DIR}/pylint/testutils.py \
 +"
 +
-+# Fixes: python3-pymisp requires /bin/bash, but no
-+# providers found in RDEPENDS_python3-pymisp? [file-rdep
-+RDEPENDS_${PN} += "bash"
++RDEPENDS_${PN} += "${PYTHON_PN}-astroid \
++                   ${PYTHON_PN}-isort \
++                   ${PYTHON_PN}-numbers \
++                   ${PYTHON_PN}-shell \
++                   ${PYTHON_PN}-json \
++                   ${PYTHON_PN}-pkgutil \
++                   ${PYTHON_PN}-difflib \
++                   ${PYTHON_PN}-netserver \
++                  "
 -- 
 2.17.1
 
