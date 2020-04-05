@@ -1,90 +1,107 @@
-Received: from mail-oi1-f196.google.com (mail-oi1-f196.google.com [209.85.167.196])
- by mx.groups.io with SMTP id smtpd.web10.23494.1586111997510576129
+Received: from mail-oi1-f182.google.com (mail-oi1-f182.google.com [209.85.167.182])
+ by mx.groups.io with SMTP id smtpd.web12.26083.1586119358703362865
  for <openembedded-devel@lists.openembedded.org>;
- Sun, 05 Apr 2020 11:39:57 -0700
+ Sun, 05 Apr 2020 13:42:38 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.196, mailfrom: straka.derek@gmail.com)
-Received: by mail-oi1-f196.google.com with SMTP id t25so11148821oij.2
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 11:39:57 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.167.182, mailfrom: straka.derek@gmail.com)
+Received: by mail-oi1-f182.google.com with SMTP id u20so11335490oic.4
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 13:42:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=GiF0qFNlXy7NLFAgft7xh7VuGw6M3f054ywAhzf8brU=;
-        b=kl8ldLTbstZ0UNUujuhKL1rHpgmJmczfPQqE+qZ69MV03+rTL5LOHRdOqW8xTc+8qK
-         gGg2c69Ug3cVR/4IKMukgTbO9qT1fItFE+Zwp+muuaTfTLp53dMx7mLT/uAHY1ijt2rF
-         R90OsWn/XF5B/vmmZEJ2xZWZMwUEBPSJsYlhWi3r/SP8VnvKoBiUTCjS6bBCH9NEf0rq
-         Zb4y0K6PBuenrMGHRouxJq3wC/msyxTmK62uxJqPGFzCyhVSVRzJVMzhnXdQTCFQAkep
-         /rQ//m3wNp7X5TB7MVH7DYt9gDjUaf492EM7ab+2uplpmIawaopYKP+bU2Lu1tN9ksrO
-         BACg==
-X-Gm-Message-State: AGi0PuYvFPNe6IwE7+1N2CDqmKqJYQSi7gOr/hVsDA9fq0Aq8GaDpl8/
-	1gnLiSGo0HTXjH3RIQYbD9oTgI8rYJw=
-X-Google-Smtp-Source: APiQypK9wF8gPMCuJpfmmaEr8EkJ5T3AaTolE6NQxldPZKVE2wEqmeHjausysNj7XhkoxJ2tGxjKMg==
-X-Received: by 2002:aca:ed4b:: with SMTP id l72mr9801974oih.95.1586111996563;
-        Sun, 05 Apr 2020 11:39:56 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=aDEBc1ecckxdqk5OxDklvA9kltIH8eOkwN22jpmEXTU=;
+        b=IqjtEZCAxI7aq6ehpngZ8xSgtDn5LbVICTn7X92fhuk98Nk6Lx7nTVqgC7NzvY8p6z
+         DBuE0kJSPJNm8AFY+uk9qoCGWq6e7bX6cV5Ks+S3NJme8iiuOCb+vVuhucLPwsygTdc8
+         8OxG+qjJVkQv9T6P2RxDo4l3DhSOfLaJEwSN5qHhLHF7JnC/Rg2tN7K9R4mhSV8Zizje
+         rD5REOMBCOI613rZ/cvYx7h9/fdzli8yRsvFGXPc5sd7op/NdbPw2ZDwcbcvRdanb/Mg
+         xpCCwIU6mTgsGx148lYdx3Ngb7iMFLd/mOL/MBeo4KHJ2xmP76Fijl+kuBuG7hlbuWxx
+         JrBQ==
+X-Gm-Message-State: AGi0PuamxATQhNlu9KXXcvZooJOjb6GZvgotHDstmjyFjKisDnL6V95p
+	Cy2CzZC0n3Rh9sK2SvqYDXihspxYbDc=
+X-Google-Smtp-Source: APiQypL9++ry7w91tMOM9d599lmCLxKST5OobaaYhssTlADMZ4coVQbNiesZtvdiMCMvcR/kW//h9g==
+X-Received: by 2002:aca:b5c3:: with SMTP id e186mr10195152oif.114.1586119357501;
+        Sun, 05 Apr 2020 13:42:37 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id q22sm3833927oic.22.2020.04.05.11.39.55
+        by smtp.gmail.com with ESMTPSA id d6sm3905295oos.10.2020.04.05.13.42.36
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2020 11:39:56 -0700 (PDT)
+        Sun, 05 Apr 2020 13:42:37 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 15/15] python-pydbus: consolidate inc and bb files into a single bb file
-Date: Sun,  5 Apr 2020 14:39:29 -0400
-Message-Id: <20200405183929.28266-15-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 1/4] python-pycurl: consolidate inc and bb files into a single bb file
+Date: Sun,  5 Apr 2020 16:42:12 -0400
+Message-Id: <20200405204215.8292-1-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200405183929.28266-1-derek@asterius.io>
-References: <20200405183929.28266-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pydbus.inc     | 11 -----------
- .../python/python3-pydbus_0.6.0.bb                | 15 +++++++++++++--
- 2 files changed, 13 insertions(+), 13 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pydbus.inc
+ .../recipes-devtools/python/python-pycurl.inc | 25 -------------------
+ .../python/python3-pycurl_7.43.0.5.bb         | 24 ++++++++++++++++--
+ 2 files changed, 22 insertions(+), 27 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pycurl.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pydbus.inc b/meta-python/recipes-devtools/python/python-pydbus.inc
+diff --git a/meta-python/recipes-devtools/python/python-pycurl.inc b/meta-python/recipes-devtools/python/python-pycurl.inc
 deleted file mode 100644
-index 0773b7ff88..0000000000
---- a/meta-python/recipes-devtools/python/python-pydbus.inc
+index 0f661434c0..0000000000
+--- a/meta-python/recipes-devtools/python/python-pycurl.inc
 +++ /dev/null
-@@ -1,11 +0,0 @@
--DESCRIPTION = "Pythonic DBus library"
--HOMEPAGE = "https://pypi.python.org/pypi/pydbus/"
--LICENSE = "LGPLv2.1"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a916467b91076e631dd8edb7424769c7"
+@@ -1,25 +0,0 @@
+-SUMMARY = "A Python Interface To The cURL library"
+-DESCRIPTION = "\
+-PycURL is a Python interface to libcurl, the multiprotocol file \
+-transfer library. Similarly to the urllib Python module, PycURL can \
+-be used to fetch objects identified by a URL from a Python program \
+-"
+-SECTION = "devel/python"
+-HOMEPAGE = "http://pycurl.io/"
 -
--SRC_URI[md5sum] = "c6abd44862322679bd4e907bebc3e0d0"
--SRC_URI[sha256sum] = "4207162eff54223822c185da06c1ba8a34137a9602f3da5a528eedf3f78d0f2c"
+-LICENSE = "LGPLv2 | MIT"
+-LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
+-                    file://COPYING-MIT;md5=60872a112595004233b769b6cbfd65b6 \
+-                    "
 -
--S = "${WORKDIR}/pydbus-${PV}"
+-SRC_URI[md5sum] = "0b387d4609ed20c88baede8579a4d425"
+-SRC_URI[sha256sum] = "ec7dd291545842295b7b56c12c90ffad2976cc7070c98d7b1517b7b6cd5994b3"
 -
--RDEPENDS_${PN} = "${PYTHON_PN}-pygobject"
-diff --git a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
-index adaa86d5a2..931bc6f7cb 100644
---- a/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-pydbus_0.6.0.bb
-@@ -1,6 +1,17 @@
--require python-pydbus.inc
--inherit pypi setuptools3
-+DESCRIPTION = "Pythonic DBus library"
-+HOMEPAGE = "https://pypi.python.org/pypi/pydbus/"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a916467b91076e631dd8edb7424769c7"
+-inherit pypi
+-
+-PYPI_PACKAGE = "pycurl"
+-
+-DEPENDS = "\
+-    curl \
+-    ${PYTHON_PN}\
+-"
+diff --git a/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb b/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb
+index c98b7d6f60..5a1c1797ad 100644
+--- a/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb
++++ b/meta-python/recipes-devtools/python/python3-pycurl_7.43.0.5.bb
+@@ -1,3 +1,23 @@
+-inherit setuptools3
+-require python-pycurl.inc
++SUMMARY = "A Python Interface To The cURL library"
++DESCRIPTION = "\
++PycURL is a Python interface to libcurl, the multiprotocol file \
++transfer library. Similarly to the urllib Python module, PycURL can \
++be used to fetch objects identified by a URL from a Python program \
++"
++SECTION = "devel/python"
++HOMEPAGE = "http://pycurl.io/"
  
- SRC_URI += "file://0001-Support-asynchronous-calls-58.patch \
-             file://0002-Support-transformation-between-D-Bus-errors-and-exce.patch \
- "
++LICENSE = "LGPLv2 | MIT"
++LIC_FILES_CHKSUM = "file://COPYING-LGPL;md5=4fbd65380cdd255951079008b364516c \
++                    file://COPYING-MIT;md5=60872a112595004233b769b6cbfd65b6 \
++                    "
 +
-+SRC_URI[md5sum] = "c6abd44862322679bd4e907bebc3e0d0"
-+SRC_URI[sha256sum] = "4207162eff54223822c185da06c1ba8a34137a9602f3da5a528eedf3f78d0f2c"
++SRC_URI[md5sum] = "0b387d4609ed20c88baede8579a4d425"
++SRC_URI[sha256sum] = "ec7dd291545842295b7b56c12c90ffad2976cc7070c98d7b1517b7b6cd5994b3"
 +
 +inherit pypi setuptools3
 +
-+S = "${WORKDIR}/pydbus-${PV}"
-+
-+RDEPENDS_${PN} = "${PYTHON_PN}-pygobject"
++DEPENDS = "\
++    curl \
++    ${PYTHON_PN}\
++"
 -- 
 2.17.1
 
