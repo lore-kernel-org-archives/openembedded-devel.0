@@ -1,98 +1,58 @@
-Received: from mail-ot1-f49.google.com (mail-ot1-f49.google.com [209.85.210.49])
- by mx.groups.io with SMTP id smtpd.web10.6748.1586035572326721187
+Received: from koncepto.io (koncepto.io [195.154.119.111])
+ by mx.groups.io with SMTP id smtpd.web12.18747.1586098608442974341
  for <openembedded-devel@lists.openembedded.org>;
- Sat, 04 Apr 2020 14:26:12 -0700
+ Sun, 05 Apr 2020 07:56:49 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.49, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f49.google.com with SMTP id v2so11288368oto.2
-        for <openembedded-devel@lists.openembedded.org>; Sat, 04 Apr 2020 14:26:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=unNLDjFJtWlLIvrrNClFvO6xtwuZkGBm78d7o1Tcp/8=;
-        b=HmFAxXRAE3qc5r/nS/WySWgHGoi2GjLeEnZyjPZNWOLU7TBreIwyAn8gaamwEK/1Ew
-         UrFIBVIeh2f8T/eBWKcVGJprIgzkFBODDoDJ8rovC6lODgyPnQS2U1lg35+As2vcKx7G
-         qSXey/cqB7TN0X9r9uIEWsVBBzMW373HxUSMi+8wga5czzbwGmpMEXO4euZ7CQSIpjDw
-         f9GeoEk55dKGnnyIzmeVb7pwyfn58i/eSO/9kUOhW4YJHynd5ozeRF0dZ4kAeTt2v51u
-         /0Y0CIpSqu74u4+runYMetBTDETZ5lQYGlkKXs1craKnIrNDPHK6nJ14M+ifngXObVy4
-         a6mA==
-X-Gm-Message-State: AGi0PuYILAtY6dAFFaS2kX/2BS4Qx9BaxpTVMm8LynT8ykyBqp5g4Acd
-	9abVBMpcB7m1vuuw2dDiiBXwBYljoIE=
-X-Google-Smtp-Source: APiQypK3rsbKcCJ0klU0/YRhg+PuDEnqG50hjruNcQ99qD6L4Dl6rw8g9OR3OnOt6N1RJ1nUpEWuTQ==
-X-Received: by 2002:a4a:8241:: with SMTP id t1mr11809740oog.57.1586035571153;
-        Sat, 04 Apr 2020 14:26:11 -0700 (PDT)
-Return-Path: <straka.derek@gmail.com>
-Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id g72sm3183470otg.79.2020.04.04.14.26.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Apr 2020 14:26:10 -0700 (PDT)
-From: "Derek Straka" <derek@asterius.io>
+ dkim=pass header.i=@koncepto.io header.s=default header.b=xv4RxTOk;
+ spf=pass (domain: koncepto.io, ip: 195.154.119.111, mailfrom: pjtexier@koncepto.io)
+Received: from menoah.home (lfbn-bor-1-1500-88.w193-250.abo.wanadoo.fr [193.250.66.88])
+	by koncepto.io (Postfix) with ESMTPSA id 0565260468;
+	Sun,  5 Apr 2020 16:56:47 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=koncepto.io;
+	s=default; t=1586098607;
+	bh=UMQ7RVtxrdtoZYr8b+uQcoPRUWPrpn//+NCCal5u80I=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+	b=xv4RxTOkcUGkDSgSCui+4UIEtiS02jgBlgQsszssJEy0mIuV9dqorjCFd0Y8bMLjT
+	 l6hrIF2AJpwedNin1BxtzI+ALRuHGbiKVNgefMVsxdAcWn5tJnxBl6tqEkiX3HsCTO
+	 KCoOS6rRLnXI6ezmH+RlCre1aeYD6788itrofd0mHdowEvb254sZ6t/lHiLdG3pTE3
+	 8BekclI/+ciZWETb74JsvG5dudSTNs5YLxMloLqN6MYqTe9TF3+KDbqhvXEDiboPgF
+	 Rs9m31mN4NPg9IgqS7dORX6pw3yxayHku1d0fLIrD8rRL6R2mWn/pqi8tovVLNnK52
+	 mulxuobRuHLVA==
+From: "Pierre-Jean Texier" <pjtexier@koncepto.io>
 To: openembedded-devel@lists.openembedded.org
-Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 5/5] python-pysocks: consolidate inc and bb files into a single bb file
-Date: Sat,  4 Apr 2020 17:26:00 -0400
-Message-Id: <20200404212600.25018-5-derek@asterius.io>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200404212600.25018-1-derek@asterius.io>
-References: <20200404212600.25018-1-derek@asterius.io>
+Cc: Pierre-Jean Texier <pjtexier@koncepto.io>
+Subject: [meta-oe][PATCH 4/6] nano: fix upstream check URL
+Date: Sun,  5 Apr 2020 16:56:38 +0200
+Message-Id: <1586098600-13571-4-git-send-email-pjtexier@koncepto.io>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1586098600-13571-1-git-send-email-pjtexier@koncepto.io>
+References: <1586098600-13571-1-git-send-email-pjtexier@koncepto.io>
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Fixes:
+
+$: devtool check-upgrade-status nano
+<...>
+
+INFO: nano                      4.4             UNKNOWN_BROKEN  None
+
+Signed-off-by: Pierre-Jean Texier <pjtexier@koncepto.io>
 ---
- .../recipes-devtools/python/python-pysocks.inc | 18 ------------------
- .../python/python3-pysocks_1.7.1.bb            | 15 ++++++++++++++-
- 2 files changed, 14 insertions(+), 19 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pysocks.inc
+ meta-oe/recipes-support/nano/nano_4.4.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-pysocks.inc b/meta-python/recipes-devtools/python/python-pysocks.inc
-deleted file mode 100644
-index 1836e52d00..0000000000
---- a/meta-python/recipes-devtools/python/python-pysocks.inc
-+++ /dev/null
-@@ -1,18 +0,0 @@
--DESCRIPTION = "A Python SOCKS client module"
--HOMEPAGE = "http://python-requests.org"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1d457bcffb9661b45f799d4efee72f16"
--
--SRC_URI[md5sum] = "89b1a6865c61bae67a32417517612ee6"
--SRC_URI[sha256sum] = "3f8804571ebe159c380ac6de37643bb4685970655d3bba243530d6558b799aa0"
--
--PYPI_PACKAGE = "PySocks"
--
--RDEPENDS_${PN}_class-target += "\
--    ${PYTHON_PN}-email \
--    ${PYTHON_PN}-io \
--    ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-shell \
--"
--
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pysocks_1.7.1.bb b/meta-python/recipes-devtools/python/python3-pysocks_1.7.1.bb
-index bbda05a518..e311904fcf 100644
---- a/meta-python/recipes-devtools/python/python3-pysocks_1.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python3-pysocks_1.7.1.bb
-@@ -1,6 +1,19 @@
-+DESCRIPTION = "A Python SOCKS client module"
-+HOMEPAGE = "http://python-requests.org"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1d457bcffb9661b45f799d4efee72f16"
-+
-+SRC_URI[md5sum] = "89b1a6865c61bae67a32417517612ee6"
-+SRC_URI[sha256sum] = "3f8804571ebe159c380ac6de37643bb4685970655d3bba243530d6558b799aa0"
-+
-+PYPI_PACKAGE = "PySocks"
- inherit pypi setuptools3
--require python-pysocks.inc
+diff --git a/meta-oe/recipes-support/nano/nano_4.4.bb b/meta-oe/recipes-support/nano/nano_4.4.bb
+index 18121be..c23ee04 100644
+--- a/meta-oe/recipes-support/nano/nano_4.4.bb
++++ b/meta-oe/recipes-support/nano/nano_4.4.bb
+@@ -15,6 +15,8 @@ SRC_URI = "https://nano-editor.org/dist/v${PV_MAJOR}/nano-${PV}.tar.xz"
+ SRC_URI[md5sum] = "9650dd3eb0adbab6aaa748a6f1398ccb"
+ SRC_URI[sha256sum] = "2af222e0354848ffaa3af31b5cd0a77917e9cb7742cd073d762f3c32f0f582c7"
  
- RDEPENDS_${PN}_class-target += "\
-+    ${PYTHON_PN}-email \
-+    ${PYTHON_PN}-io \
-     ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-shell \
- "
++UPSTREAM_CHECK_URI = "https://ftp.gnu.org/gnu/nano"
 +
-+BBCLASSEXTEND = "native nativesdk"
+ inherit autotools gettext pkgconfig
+ 
+ PACKAGECONFIG[tiny] = "--enable-tiny,"
 -- 
-2.17.1
+2.7.4
 
