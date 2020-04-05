@@ -1,149 +1,86 @@
-Received: from mail-ot1-f47.google.com (mail-ot1-f47.google.com [209.85.210.47])
- by mx.groups.io with SMTP id smtpd.web12.20948.1586104948921819940
+Received: from mail-ot1-f51.google.com (mail-ot1-f51.google.com [209.85.210.51])
+ by mx.groups.io with SMTP id smtpd.web11.20829.1586104949561776247
  for <openembedded-devel@lists.openembedded.org>;
  Sun, 05 Apr 2020 09:42:29 -0700
 Authentication-Results: mx.groups.io;
- dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.47, mailfrom: straka.derek@gmail.com)
-Received: by mail-ot1-f47.google.com with SMTP id f52so12768326otf.8
-        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 09:42:28 -0700 (PDT)
+ dkim=missing; spf=pass (domain: gmail.com, ip: 209.85.210.51, mailfrom: straka.derek@gmail.com)
+Received: by mail-ot1-f51.google.com with SMTP id x11so12804916otp.6
+        for <openembedded-devel@lists.openembedded.org>; Sun, 05 Apr 2020 09:42:29 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=cdX2/MIWRq+CB9xzKD6bAWbP0TAhLKasMV/vItkNNQo=;
-        b=fdEym3VREm56eif2Pkw0ngjWquWpUcillwJ8TjgenXkA7UoPBKW7gGDnv326CPr3na
-         mDgIfeGQEwSrDIf9VaNcAb9wlJMMcyTTrPOjpiPOwalemYu8Qh9Gm0ExbpUfw5gsKgim
-         23GmEu0K9pdsJmN79hwC42Mj2z2T1caMg2BVf5eZYT3v2IooWsq2TuUHigT0jiQBsa4h
-         8BFglMR5OXDxi4Ugi8WaWUVzgF8wFCW3WdgHV0dA9zZW5xaXJ6wbi3Q1F3JFIdF7Y7vA
-         3p6u/E4ORP2wgs2HGaTnvOKmaKqe2oKjhmBj7jMTtEbqBjU7P9dze9R0+nGwVZCF8+NC
-         OdfA==
-X-Gm-Message-State: AGi0PuaQTa8czNYyylWW6WOm17Pu3/81+O197S9kxWwb+Zz9Ec8poh1Y
-	zsm2z+EndWAfOvI3KWt5oOE4BhbJiFk=
-X-Google-Smtp-Source: APiQypLyRxqohT+i+oewPajT+gM/bWhIC3si+EY0qkxcObesddahXM68xYsdjK2sCAGHe+NXzY25lg==
-X-Received: by 2002:a9d:3b5:: with SMTP id f50mr13941847otf.31.1586104947768;
-        Sun, 05 Apr 2020 09:42:27 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=zm0XZauBACIQRn/IokxJn9x+yKniXtLnFXoMkavYzqc=;
+        b=HLFnnbdfYTmHYY55cGgTOhVjxWRg72KmkrF9ihZYZe6KjgiKLPo5M8FIqxUIbcy/aP
+         KxQcGTyE2R/HG7IZWIdRYcByL5q8/LSbqa6cTC2hWtep9l/YmiGn9owCwJwgB8dcrTIk
+         UyRlKaBAdtQB7dhAw6CjQ4/V8sWss8jjnQgTxKKXf8i94Lh340dxCnHUg8ZleM2L/Vno
+         Rf0E2UL1hzfaIm9Wpfv8XxUmiK8c7LnbcD3+fkL3eoy5P+WnuhgUeECCjI4CWL/Tcgiu
+         T0BZDa3NKL/6lm1USyj+LiHRaY0SjTnOVMNDC9XyIfJ3eR4us+p0rImDli6RKirWz+Ci
+         PunQ==
+X-Gm-Message-State: AGi0Puaw7InQyvFvMTxagPQLRgIZiFdBsomxsxe1idQu/9cFRbZyfekZ
+	oOjNByJfbNX9kgKQ23weLbp6Yb7b9mQ=
+X-Google-Smtp-Source: APiQypIYMkMz3UtPya+qVpunS8WZ0UUPPXUSw1GfUyHMWxgu1gRpwDUTXjv9zzfmwyoorVrxvVsZBw==
+X-Received: by 2002:a4a:4505:: with SMTP id y5mr14519359ooa.29.1586104948404;
+        Sun, 05 Apr 2020 09:42:28 -0700 (PDT)
 Return-Path: <straka.derek@gmail.com>
 Received: from sparta.internal.asterius.io (cpe-24-28-77-115.austin.res.rr.com. [24.28.77.115])
-        by smtp.gmail.com with ESMTPSA id r15sm3866573oie.18.2020.04.05.09.42.26
+        by smtp.gmail.com with ESMTPSA id r15sm3866573oie.18.2020.04.05.09.42.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Apr 2020 09:42:27 -0700 (PDT)
+        Sun, 05 Apr 2020 09:42:28 -0700 (PDT)
 From: "Derek Straka" <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
 Cc: Derek Straka <derek@asterius.io>
-Subject: [oe][meta-python][PATCH 1/6] python-pyserial: consolidate inc and bb files into a single bb file
-Date: Sun,  5 Apr 2020 12:41:55 -0400
-Message-Id: <20200405164200.31599-1-derek@asterius.io>
+Subject: [oe][meta-python][PATCH 2/6] python-pyrsistent: consolidate inc and bb files into a single bb file
+Date: Sun,  5 Apr 2020 12:41:56 -0400
+Message-Id: <20200405164200.31599-2-derek@asterius.io>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200405164200.31599-1-derek@asterius.io>
+References: <20200405164200.31599-1-derek@asterius.io>
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/python-pyserial.inc                | 44 ------------------
- .../python/python3-pyserial_3.4.bb            | 46 ++++++++++++++++++-
- 2 files changed, 44 insertions(+), 46 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-pyserial.inc
+ .../recipes-devtools/python/python-pyrsistent.inc | 13 -------------
+ .../python/python3-pyrsistent_0.15.7.bb           | 15 ++++++++++++++-
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-pyrsistent.inc
 
-diff --git a/meta-python/recipes-devtools/python/python-pyserial.inc b/meta-python/recipes-devtools/python/python-pyserial.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyrsistent.inc b/meta-python/recipes-devtools/python/python-pyrsistent.inc
 deleted file mode 100644
-index c9580de264..0000000000
---- a/meta-python/recipes-devtools/python/python-pyserial.inc
+index ae4f21af48..0000000000
+--- a/meta-python/recipes-devtools/python/python-pyrsistent.inc
 +++ /dev/null
-@@ -1,44 +0,0 @@
--SUMMARY = "Serial Port Support for Python"
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d476d94926db6e0008a5b3860d1f5c0d"
+@@ -1,13 +0,0 @@
+-SUMMARY = "Persistent/Immutable/Functional data structures for Python"
+-HOMEPAGE = "https://github.com/tobgu/pyrsistent"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENCE.mit;md5=ca574f2891cf528b3e7a2ee570337e7c"
 -
--SRC_URI[md5sum] = "ed6183b15519a0ae96675e9c3330c69b"
--SRC_URI[sha256sum] = "6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627"
+-SRC_URI[md5sum] = "da9486d00ef5b213f40d5cf3c5bca82d"
+-SRC_URI[sha256sum] = "cdc7b5e3ed77bed61270a47d35434a30617b9becdf2478af76ad2c6ade307280"
 -
--inherit pypi
--
--PACKAGES =+ "${PN}-java ${PN}-osx ${PN}-win32 ${PN}-tools"
--
--FILES_${PN}-java = " \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/*java* \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*java* \
--"
--
--FILES_${PN}-osx = " \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/*osx* \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/*osx* \
--"
--
--FILES_${PN}-win32 = " \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/*serialcli* \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*serialcli* \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/*win32* \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*win32* \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/miniterm* \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/miniterm* \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/*windows* \
--    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/*windows* \
--"
--
--RDEPENDS_${PN} = "\
--    ${PYTHON_PN}-fcntl \
--    ${PYTHON_PN}-io \
--    ${PYTHON_PN}-logging \
--    ${PYTHON_PN}-netclient \
--    ${PYTHON_PN}-numbers \
--    ${PYTHON_PN}-shell \
--    ${PYTHON_PN}-stringold \
--    ${PYTHON_PN}-threading \
+-RDEPENDS_${PN} += " \
+-    ${PYTHON_PN}-six \
 -"
 -
 -BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-index 17ed3f8bc4..eee8eb2d16 100644
---- a/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-@@ -1,7 +1,49 @@
--inherit setuptools3
--require python-pyserial.inc
-+SUMMARY = "Serial Port Support for Python"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=d476d94926db6e0008a5b3860d1f5c0d"
+diff --git a/meta-python/recipes-devtools/python/python3-pyrsistent_0.15.7.bb b/meta-python/recipes-devtools/python/python3-pyrsistent_0.15.7.bb
+index 2e567e9f9c..5ef7140283 100644
+--- a/meta-python/recipes-devtools/python/python3-pyrsistent_0.15.7.bb
++++ b/meta-python/recipes-devtools/python/python3-pyrsistent_0.15.7.bb
+@@ -1,2 +1,15 @@
++SUMMARY = "Persistent/Immutable/Functional data structures for Python"
++HOMEPAGE = "https://github.com/tobgu/pyrsistent"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENCE.mit;md5=ca574f2891cf528b3e7a2ee570337e7c"
 +
-+SRC_URI[md5sum] = "ed6183b15519a0ae96675e9c3330c69b"
-+SRC_URI[sha256sum] = "6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627"
++SRC_URI[md5sum] = "da9486d00ef5b213f40d5cf3c5bca82d"
++SRC_URI[sha256sum] = "cdc7b5e3ed77bed61270a47d35434a30617b9becdf2478af76ad2c6ade307280"
 +
-+inherit pypi setuptools3
- 
- do_install_append() {
-     rm -f ${D}${bindir}/miniterm.py
-     rmdir ${D}${bindir}
- }
+ inherit pypi setuptools3
+-require python-pyrsistent.inc
 +
-+PACKAGES =+ "${PN}-java ${PN}-osx ${PN}-win32 ${PN}-tools"
-+
-+FILES_${PN}-java = " \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/*java* \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*java* \
-+"
-+
-+FILES_${PN}-osx = " \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/*osx* \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/*osx* \
-+"
-+
-+FILES_${PN}-win32 = " \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/*serialcli* \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*serialcli* \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/*win32* \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/__pycache__/*win32* \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/miniterm* \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/miniterm* \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/*windows* \
-+    ${PYTHON_SITEPACKAGES_DIR}/serial/tools/__pycache__/*windows* \
-+"
-+
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-fcntl \
-+    ${PYTHON_PN}-io \
-+    ${PYTHON_PN}-logging \
-+    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-numbers \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-stringold \
-+    ${PYTHON_PN}-threading \
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-six \
 +"
 +
 +BBCLASSEXTEND = "native nativesdk"
